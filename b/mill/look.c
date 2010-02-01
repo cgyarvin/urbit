@@ -1,0 +1,94 @@
+/* mill/port.c
+**
+** This file is in the public domain.
+*/
+#include "u4/all.h"
+
+/* _is_grip()::
+*/
+static u4_t
+_is_grip(u4_hook sod, 
+         u4_tick *tik, 
+         u4_term *cox)
+{
+  if ( u4_n_atom(sod) ) {
+    if ( tik ) *tik = u4_noun_0;
+    if ( cox ) *cox = sod;
+    return 1;
+  }
+  else if ( u4_b_pq(sod, u4_atom_lect, tik, cox) ) {
+    return 1;
+  }
+  else return 0;
+}
+
+/* _is_zarb()::
+*/
+static u4_t
+_is_zarb(u4_hook sod,
+         u4_axis *axe)
+{
+  return u4_b_p(sod, u4_atom_zarb, axe);
+}
+
+/* _mill_look(): read on a rope.
+*/
+u4_loaf
+_mill_look(u4_milr m,
+           u4_rope fes,
+           u4_type tip)
+{
+  u4_lane lane = m->lane;
+
+  if ( u4_n_zero(fes) ) {
+    return u4_k_trel(lane, tip, u4_noun_0, u4_noun_1);
+  }
+  else {
+    u4_hook i_fes = u4_ch(fes);
+    u4_rope t_fes = u4_ct(fes);
+    u4_tick tik;
+    u4_term cox;
+    u4_axis axe;
+    u4_loaf fod, gax;
+
+    if ( _is_grip(i_fes, &tik, &cox) ) {
+      fod = _mill_find(m, cox, u4_noun_0, tip);
+
+      if ( u4_n_zero(fod) ) {
+        u4_bug("fes", fes);
+        u4_bug("tip", tip);
+
+        return _mill_fail(m, "look: no grip");
+      }
+      else if ( !u4_n_zero(tik) ) {
+        u4_type lem = u4_ch(fod);
+        u4_form vil = u4_ct(fod);
+        u4_noun p_vil;
+        u4_type ger;
+
+        t_fes = u4_k_cell
+          (lane, u4_k_trel(lane, u4_atom_lect, u4_op_dec(lane, tik), cox),
+                 t_fes);
+
+        if ( u4_b_pq(vil, u4_noun_3, &p_vil, 0) &&
+                  u4_b_p(p_vil, u4_noun_0, &axe) &&
+                  u4_b_pq(lem, u4_atom_gate, &ger, 0) )
+        {
+          fod = u4_k_trel(lane, ger, u4_noun_0, axe);
+        }
+      }
+    }
+    else if ( _is_zarb(i_fes, &axe) ) {
+      fod = u4_k_trel
+        (lane, _mill_peek(m, axe, u4_noun_0, tip), 
+               u4_noun_0, 
+               axe);
+    }
+    else return u4_trip;
+
+    gax = _mill_look(m, t_fes, u4_ch(fod));
+
+    return u4_k_cell
+      (lane, u4_ch(gax), _mill_comp(m, u4_ct(fod), u4_ct(gax)));
+  }
+}

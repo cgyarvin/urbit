@@ -1,0 +1,67 @@
+Urbit namespace  (300K)
+C. Guy Yarvin, 1/21/10
+
+
+6. Structure of Urbit
+
+If we forget these magic Nock powers for a moment, we realize
+that we can write a reasonable, if hardly diamond-perfect, SFN in
+any language that's designed to do a good job at 'eval.'  Eg,
+Scheme or another Lisp.
+
+Therefore, although I will describe Urbit in Reck syntax, because
+that's the syntax I've actually programmed Nock in, this is only
+pseudocode for Watt - or any other, *off-brand* language.
+
+Again, the SFN: [path deck] => file.  Path is a filename; deck is
+a packet log; file is a document.
+
+In addition, we have a constraint: 
+
+  (eq (urbit path deck) (urbit path [card deck]))
+
+Ie, the namespace is static (monotonic).
+
+It should go without saying - but I'll say it anyway - that the
+monotonicity of Urbit must be inherent in Urbit itself.  Even
+when Urbit binds functional paths with user-level code, as of
+course it will, user-level code (which is user-level data, which
+is the deck) cannot break monotonicity.  Or, of course, if it can
+- Urbit is broken.
+
+Second, it's important to observe that this interface is not as
+impractical as it seems!  In practice, when we write Urbit, we
+always write 
+
+  ::::::::  urbit
+  ::
+    =.  [path deck]
+    |=
+      (urbit-render
+        path
+        |-
+          ?-  deck
+            ~       ~
+            [i t]   (urbit-infer i.deck $(deck t.deck))
+          ==
+      )
+
+  ::::::::  urbit-infer
+  ::
+    =.  [deck state]
+    |=
+      :: inference stuff
+
+  ::::::::  urbit-render
+  ::
+    =.  [path state]
+    |=
+      :: rendering stuff
+
+
+In other words, the Urbit function is an iterative process, just
+like a normal program in a normal computing environment.
+
+In theory, Urbit is stateless.  In practice, an Urbit server will
+update its state every time it gets a message - just like any
+other network server on the planet.  Whew.  

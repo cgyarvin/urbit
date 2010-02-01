@@ -1,0 +1,91 @@
+watt GTO: Gran Tabula Operazioni
+
+  gene:
+
+tag   dig  r  skel                            semantics
+----------------------------------------------------------------------------
+pont  =>   E  [han=mark dur=gene leb=gene]    [leb] in [[han=dur] +]
+rulf  =<   E  [han=mark dur=gene leb=gene]    [dur] in [[han=leb] +]
+glem  ->   E  [hig=gene muc=gene]             [muc] in [hig +]
+lisc  -<   E  [hig=gene muc=gene]             [hig] in [muc +]
+slon  ~>   X  [del=gene zim=gene]             [zim] in [del]
+stiv  ~<   E  [del=gene zim=gene]             [del] in [zim]
+
+stol  ?:   X  [tes=gene bif=gene hob=gene]    if [tes], then [bif], else [hob]
+feng  ?>   E  [tes=gene bif=gene]             if [tes], then [bif], else fail
+prex  ?<   E  [tes=gene hob=gene]             if [tes], then fail, else [hob]
+zact  ?-   E  [mox=rope bem=list+pike]        examine [mox], internally
+glax  ?+   E  [feg=gene bem=list+pike]        examine [feg], externally 
+boce  ?&   E  [das=list+gene]                 yes iff all of [das] are yes
+peld  ?|   E  [das=list+gene]                 yes iff any of [das] are yes
+trup  ?!   E  [gix=gene]                      not
+forb  ?=   X  [rid=rope bul=gene]             yes iff [rid] is like [bul]
+
+clep       X  [pir=bush+[mark gene]]          load book
+malk  |+   E  [pir=list+[mark gene]]          book as list
+blin  |*   E  [bov=gene pir=list+[mark gene]] load and apply
+serd  |:   E  [tep=gene von=gene]             lamb construction
+lome  |=   E  [cug=gene]                      cold lamb
+flot  |-   E  [cug=gene]                      hot lamb
+
+perd  ^+   X  [fes=gene rum=gene]             [rum] cast to [fes], geometric
+halc  ^-   X  [fes=gene rum=gene]             [rum] cast to [fes], genetic
+tarn  ^=   X  [fes=gene gav=gene vep=gene]    [vep], since [gav] matches [fes]
+rald  ^*   E  [rum=gene]                      [rum] perd to blur
+crot  ^@   E  [rum=gene]                      [rum] perd to atom
+
+gant  :=   X  [ved=rope suc=list+[rope gene]] use with changes
+lect       E  [tic=nat vix=mark]              read by name
+zarb       E  [haz=nat]                       read by axis
+pung  :~   E  [buz=gene lep=gene]             call lamb, direct
+garc  :+   E  [buz=gene pum=list+gene]        call with list
+flec  :-   E  [buz=gene]                      call with default
+sard  :*   X  [caw=list+[mark gene]]          classic American tuple
+plom  :.   E  [fut=list+gene]                 nameless tuple
+delc  :$   E  [mef=skel]                      skeleton stub
+brip  :^   E  [mef=skel]                      skeleton lamb
+
+dbug  !?   X  [lyq=gene]                      activate internal debug
+poos       X  [cux=lab lyq=gene]              source label
+spot       X  [xed=[[@ @] [@ @] lyq=gene]     source position, [at to] [lin col]
+
+gult       X  [fiz=(3 4 5 6 7) dil=gene]      nock operator
+griv  &&   X  [dil=gene zep=noun]             raw formula
+veck  &*   E  [dil=gene]                      raw eval
+spil  &~   E  [dil=gene]                      cell
+neft  &^   E  [dil=gene]                      inc
+wamp  &=   E  [dil=gene]                      eq
+frez  &~   E  [dil=gene]                      pray
+
+palt       E  [daq=nat]                       constant, atom
+pril       E  [daq=clod]                      constant, blur
+pret       X  [daq=clod]                      constant, cube
+ 
+  rope: list+[mark [%lect tic=nat vix=mark] [%zarb haz=nat]]
+
+  skel:
+
+tag    skel                           semantics
+----------------------------------------------------------------------------
+gorm   [pef=skel niz=skel]            standard container
+drib   [ved=skel piv=skel]            [ved] for mate, [piv] for stub or lamb
+chob   [hep=rope]                     rope to lamb
+dept   [hup=skel]                     lamb from blur to [hup]
+felk   [hin=clod]                     blur constant
+flit   [gen=gene]                     gene for lamb
+galb   [hin=bead]                     bead constant
+grop   [hin=clod]                     exact constant
+peft   [wix=list+[mark skel]]         classic American tuple
+shud   [hup=skel sim=skel]            lamb from [sim] to [hup]
+warx   [bec=list+skel]                options
+
+  pike:
+
+
+tag    skel                           semantics
+----------------------------------------------------------------------------
+lask   [bic=skel luf=gene]            use [luf] if [mox] is like [bic]
+plic   [bic=skel]                     use [mox] if [mox] is like [bic]
+semp   [bic=skel luf=gene]            use [luf] if [mox] is fixed to [bic]
+drol   [bic=skel]                     use [mox] if [mox] is fixed to [bic]
+

@@ -1,0 +1,12 @@
+s/base/gult/g
+s/cast/perd/g
+s/home/poos/g
+s/kick/gant/g
+s/link/slon/g
+s/mold/halc/g
+s/pick/stol/g
+s/post/clep/g
+s/rack/sard/g
+s/rock/pret/g
+s/sure/tarn/g
+s/test/forb/g

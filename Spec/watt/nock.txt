@@ -1,0 +1,14 @@
+|:
+  sub = *
+  fol = *
+==
+  ?-  fol
+    -   [p=[* *] q]       [$(fol p.fol) $(fol q.fol)]
+    -   [0 p=@]           (hack p.fol sub)
+    -   [1 p=*]           p.fol
+    -   [2 p=* q=* r=*]   ?:{$(fol p.fol) $(fol q.fol) $(fol r.fol)}
+    -   [3 p=*]           $(fol $(fol p.fol))
+    -   [4 p=*]           (cell $(fol p.fol))
+    -   [5 p=*]           (inc $(fol p.fol))
+    -   [6 p=*]           (eq $(fol p.fol))
+  ==
