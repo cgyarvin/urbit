@@ -511,14 +511,14 @@ tall
         **
         **    lome: cold trap
         */
-        : tall
+        : gene
 
       tall_norm_flot
         /* |-     [%flot cug=gene]
         **
         **    flot: hot trap
         */
-        : tall
+        : gene
    
 
     /** Casts.
@@ -556,7 +556,7 @@ tall
         **
         **    crot: perd [rum] to atom
         */
-        : tall
+        : gene
 
     /** Funky stuff.
     **/

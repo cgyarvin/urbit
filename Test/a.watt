@@ -1,4 +1,5 @@
 :: a should be an atom
 ::
 =>  b 17
-  b
+  |-
+    b
