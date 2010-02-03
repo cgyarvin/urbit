@@ -15,8 +15,8 @@ _mill_x_stol(u4_milr m,
 {
   u4_lane lane = m->lane;
   u4_loaf ruf  = _mill_test(m, tes, tip);
-  u4_loaf hig  = _mill_make(m, u4_ch(ruf), bif);
-  u4_loaf goz  = _mill_make(m, tip, hob);
+  u4_loaf hig  = _mill_make(m, bif, u4_ch(ruf));
+  u4_loaf goz  = _mill_make(m, hob, tip);
   u4_form fal  = u4_ct(ruf);
 
   if ( u4_n_eq(u4_noun_1, u4_ch(fal)) ) {

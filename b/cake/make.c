@@ -208,6 +208,9 @@ u4_k_cell(u4_lane lane,
   u4_assert(head != u4_bull);
   u4_assert(tail != u4_bull);
 
+  u4_assert(head != 3);
+  u4_assert(tail != 3);
+
   head = u4_k_safe(lane, head);
   tail = u4_k_safe(lane, tail);
   {

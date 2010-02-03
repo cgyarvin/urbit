@@ -30,7 +30,10 @@ _mill_x_clep(u4_milr m,
 {
   u4_lane lane = m->lane;
   u4_type gan  = u4_k_trel(lane, u4_atom_cone, tip, pir);
-  u4_form fal  = _clep_book(m, pir, tip);
 
-  return u4_k_cell(lane, gan, fal);
+  return u4_k_cell
+    (lane, gan,
+           u4_k_cell
+            (lane, u4_k_cell(lane, u4_noun_0, u4_noun_1),
+                   u4_k_cell(lane, u4_noun_1, _clep_book(m, pir, gan))));
 }

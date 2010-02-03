@@ -15,11 +15,11 @@ _mill_q_flot(u4_milr m,
   //  :*
   //    %slon
   //    [%clep [%% cug]]
-  //    [%lect %%]
+  //    [%lect 0 %%]
   //  ==
 
   return u4_k_trel
     (lane, u4_atom_slon,
            u4_k_trel(lane, u4_atom_clep, u4_noun_0, cug),
-           u4_k_cell(lane, u4_atom_lect, u4_noun_0));
+           u4_k_trel(lane, u4_atom_lect, u4_noun_0, u4_noun_0));
 }

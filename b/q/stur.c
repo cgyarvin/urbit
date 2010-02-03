@@ -1,13 +1,13 @@
-/* mill/q/serd.c
+/* mill/q/stur.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_q_serd():
+/* _mill_q_stur():
 */
 u4_noun
-_mill_q_serd(u4_milr m, 
+_mill_q_stur(u4_milr m, 
              u4_skel tep,
              u4_gene von)
 {

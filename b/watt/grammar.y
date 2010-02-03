@@ -62,7 +62,7 @@
  
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 794
+  %expect 793
 
   %pure-parser
   %locations
@@ -90,8 +90,6 @@ gene
 
 wide
   : wide_core
-  | wide_core '(' nail_wide_star ')'
-    { $$ = _ytrel(u4_atom_gant, $1, $3); }
   ;
 
 wide_core
@@ -104,6 +102,8 @@ wide_core
     wide_odd
       : rope  
         { $$ = _ytrel(u4_atom_gant, $1, u4_noun_0); }
+      | rope '(' nail_wide_star ')'
+        { $$ = _ytrel(u4_atom_gant, $1, $3); }
       | '[' g item_wide_some ']'
         { $$ = _ycell(u4_atom_sard, $3); }
       | '(' g wide_some ')'
@@ -151,7 +151,7 @@ wide_core
       | dig_malk wide_norm_malk  ** |+ ** { $$ = _ycell($1, $2); }
       | dig_blin wide_norm_blin  ** |* ** { $$ = _ycell($1, $2); }
 */
-      | dig_serd wide_norm_serd  /* |: */ { $$ = _ycell($1, $2); }
+      | dig_stur wide_norm_stur  /* |: */ { $$ = _ycell($1, $2); }
       | dig_lome wide_norm_lome  /* |= */ { $$ = _ycell($1, $2); }
       | dig_flot wide_norm_flot  /* |- */ { $$ = _ycell($1, $2); }
 
@@ -239,7 +239,7 @@ wide_core
       wide_norm_blin
         : wide w page_star dig_stop { $$ = _ycell($1, $3); }
 */
-      wide_norm_serd
+      wide_norm_stur
         : '{' g skel_w w wide g '}'{ $$ = _ycell($3, $5); }
 
       wide_norm_lome
@@ -343,7 +343,7 @@ tall
     
       | dig_malk w tall_norm_malk  /* |+ */ { $$ = _ycell($1, $3); }
       | dig_blin w tall_norm_blin  /* |* */ { $$ = _ycell($1, $3); }
-      | dig_serd w tall_norm_serd  /* |: */ { $$ = _ycell($1, $3); }
+      | dig_stur w tall_norm_stur  /* |: */ { $$ = _ycell($1, $3); }
       | dig_lome w tall_norm_lome  /* |= */ { $$ = _ycell($1, $3); }
       | dig_flot w tall_norm_flot  /* |- */ { $$ = _ycell($1, $3); }
 
@@ -498,10 +498,10 @@ tall
         */
         : gene w page_star dig_stop { $$ = _ycell($1, $3); }
 
-      tall_norm_serd
-        /* |:     [%serd tep=skel von=gene]
+      tall_norm_stur
+        /* |:     [%stur tep=skel von=gene]
         **
-        **    serd: trap construction
+        **    stur: trap construction
         */
         : skel_t_item_some dig_stop w gene 
           { $$ = _ycell(_ycell(u4_atom_peft, $1), $4); }
@@ -1100,7 +1100,7 @@ tall
 
     dig_malk: '|' '+' { $$ = u4_atom_malk; }
     dig_blin: '|' '*' { $$ = u4_atom_blin; }
-    dig_serd: '|' ':' { $$ = u4_atom_serd; }
+    dig_stur: '|' ':' { $$ = u4_atom_stur; }
     dig_lome: '|' '=' { $$ = u4_atom_lome; }
     dig_flot: '|' '-' { $$ = u4_atom_flot; }
 

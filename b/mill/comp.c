@@ -28,5 +28,10 @@ _mill_comp(u4_milr m,
                u4_k_cell(lane, u4_noun_0, u4_op_peg(lane, p_mal, pq_buz)));
     }
   }
+  else if ( u4_b_p(buz, u4_noun_0, &p_buz) ) {
+    if ( u4_n_eq(u4_noun_1, p_buz) ) {
+      return mal;
+    }
+  }
   return u4_k_qual(lane, u4_noun_3, mal, u4_noun_1, buz);
 }

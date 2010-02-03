@@ -9,17 +9,17 @@
 u4_type
 _gant_weld(u4_milr m,
            u4_tape lub,
-           u4_type tip)
+           u4_type typ)
 {
   if ( u4_n_zero(lub) ) {
-    return tip;
+    return typ;
   }
   else {
     u4_tack i_lub = u4_ch(lub);
     u4_tape t_lub = u4_ct(lub);
 
     return _gant_weld
-      (m, t_lub, _mill_weld(m, u4_ch(i_lub), u4_ct(i_lub), tip));
+      (m, t_lub, _mill_weld(m, u4_ch(i_lub), u4_ct(i_lub), typ));
   }
 }
 
@@ -28,7 +28,7 @@ _gant_weld(u4_milr m,
 static void
 _gant_walk(u4_milr m,
            u4_bolt suc,
-           u4_type tip,
+           u4_type typ,
            u4_type gan,
            u4_tape *lub,
            u4_belt *vix)
@@ -44,7 +44,7 @@ _gant_walk(u4_milr m,
     u4_rope pi_suc = u4_ch(i_suc);
     u4_gene qi_suc = u4_ct(i_suc);
     u4_loaf pas    = _mill_look(m, pi_suc, gan);
-    u4_loaf wid    = _mill_make(m, qi_suc, tip);
+    u4_loaf wid    = _mill_make(m, qi_suc, typ);
     u4_type p_pas  = u4_ch(pas);
     u4_form q_pas  = u4_ct(pas);
     u4_type p_wid  = u4_ch(wid);
@@ -58,7 +58,7 @@ _gant_walk(u4_milr m,
       _mill_fail(m, "gant: bad walk b"); return;
     }
 
-    _gant_walk(m, u4_ct(suc), tip, gan, lub, vix);
+    _gant_walk(m, u4_ct(suc), typ, gan, lub, vix);
 
     *lub = u4_k_cell
       (lane, 
@@ -77,19 +77,21 @@ _gant_walk(u4_milr m,
 static u4_loaf
 _gant_cook(u4_milr m,
            u4_bolt suc,
-           u4_type tip,
+           u4_type typ,
            u4_type gan,
            u4_axis ped)
 {
   u4_belt vix;
   u4_tape lub;
+  u4_type gob;
+  u4_form fol;
 
-  _gant_walk(m, suc, tip, gan, &lub, &vix);
+  _gant_walk(m, suc, typ, gan, &lub, &vix);
 
-  return u4_k_cell
-    (m->lane,
-     _gant_weld(m, lub, gan), 
-     _mill_hike(m, ped, vix));
+  gob = _gant_weld(m, lub, gan);
+  fol = _mill_hike(m, ped, vix);
+
+  return u4_k_cell(m->lane, gob, fol);
 }
 
 /* _mill_gant(): gant port.
@@ -98,12 +100,12 @@ u4_loaf
 _mill_x_gant(u4_milr m,
              u4_rope ved,
              u4_bolt suc,
-             u4_type tip)
+             u4_type typ)
 {
   u4_lane lane = m->lane;
   u4_loaf rec;
 
-  rec = _mill_look(m, ved, tip);
+  rec = _mill_look(m, ved, typ);
 
   if ( u4_n_zero(rec) ) {
     return _mill_fail(m, "gant: broken");
@@ -119,21 +121,22 @@ _mill_x_gant(u4_milr m,
     if ( u4_b_p(nol, u4_noun_0, &p_nol) ) {
       ped = p_nol;
 
-      return _gant_cook(m, suc, tip, gan, ped);
+      return _gant_cook(m, suc, typ, gan, ped);
     }
 
-    else if ( u4_b_pq(nol, u4_noun_3, &p_nol, 0) &&
+    else if ( u4_b_pq(nol, u4_noun_3, &p_nol, &q_nol) &&
               u4_b_p(p_nol, u4_noun_0, &ped) &&
               u4_b_pq(gan, u4_atom_gate, &p_gan, &q_gan) )
     {
-      u4_loaf das = _gant_cook(m, suc, tip, p_gan, ped);
+      u4_loaf das = _gant_cook(m, suc, typ, p_gan, ped);
       u4_type p_das = u4_ch(das);
       u4_form q_das = u4_ct(das);
+      u4_noun vew, mig;
 
-      return u4_k_cell
-        (lane,
-         u4_k_trel(lane, u4_atom_gate, p_das, q_gan),
-         u4_k_trel(lane, u4_noun_3, q_das, q_nol));
+      vew = u4_k_trel(lane, u4_atom_gate, p_das, q_gan);
+      mig = u4_k_trel(lane, u4_noun_3, q_das, q_nol);
+
+      return u4_k_cell(lane, vew, mig);
     }
 
     else {

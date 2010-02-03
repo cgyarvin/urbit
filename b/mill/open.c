@@ -31,39 +31,45 @@ _mill_open(u4_milr m,
 {
   u4_noun p_gen, q_gen, r_gen;
 
-  _open_pq (blin);  // |*
-  _open_pq (boce);  // ?&
-  _open_p  (brip);  // :^
-  _open_p  (crot);  // ^@
-  _open_p  (delc);  // :$
-  _open_pq (feng);  // ?>
-  _open_p  (flec);  // :-
-  _open_p  (flot);  // |-
-  _open_p  (frez);  // &~
-  _open_pq (garc);  // :+
-  _open_pq (glax);  // ?+
-  _open_pq (glem);  // ->
-  _open_pq (lect);
-  _open_pq (lisc);  // -<
-  _open_p  (malk);  // |+
-  _open_p  (neft);  // &^
-  _open_p  (palt);
-  _open_p  (peld);  // ?|
-  _open_pqr(pont);  // =>
-  _open_pq (prex);  // ?<
-  _open_p  (pril);
-  _open_pq (pung);  // :~
-  _open_p  (rald);  // ^*
-  _open_pqr(rulf);  // =<
-  _open_pq (serd);  // |:
-  _open_p  (spal);  // &~
-  _open_pq (stiv);  // ~<
-  _open_p  (trup);  // ?!
-  _open_p  (veck);  // &*
-  _open_p  (wamp);  // &=
-  _open_pq (zact);  // ?-
-  _open_p  (zarb);
+  if ( u4_b_fork(gen, &p_gen, &q_gen) ) {
+    return _mill_open
+      (m, u4_k_qual(m->lane, u4_atom_plom, p_gen, q_gen, u4_noun_0));
+  }
+  else {
+    _open_pq (blin);  // |*
+    _open_pq (boce);  // ?&
+    _open_p  (brip);  // :^
+    _open_p  (crot);  // ^@
+    _open_p  (delc);  // :$
+    _open_pq (feng);  // ?>
+    _open_p  (flec);  // :-
+    _open_p  (flot);  // |-
+    _open_p  (frez);  // &~
+    _open_pq (garc);  // :+
+    _open_pq (glax);  // ?+
+    _open_pq (glem);  // ->
+    _open_pq (lect);
+    _open_pq (lisc);  // -<
+    _open_p  (malk);  // |+
+    _open_p  (neft);  // &^
+    _open_p  (palt);
+    _open_p  (peld);  // ?|
+    _open_p  (plom);
+    _open_pqr(pont);  // =>
+    _open_pq (prex);  // ?<
+    _open_p  (pril);
+    _open_pq (pung);  // :~
+    _open_p  (rald);  // ^*
+    _open_pqr(rulf);  // =<
+    _open_p  (spal);  // &~
+    _open_pq (stur);  // |:
+    _open_pq (stiv);  // ~<
+    _open_p  (trup);  // ?!
+    _open_p  (veck);  // &*
+    _open_p  (wamp);  // &=
+    _open_pq (zact);  // ?-
+    _open_p  (zarb);
 
-  u4_bug("open: stem", u4_ch(gen));
-  return u4_trip;
+    return gen;
+  }
 }

@@ -21,7 +21,7 @@ prex  ?<   E  [tes=gene hob=gene]             if [tes], then fail, else [hob]
 pung  :~   E  [buz=gene lep=gene]             call lamb, direct
 rald  ^*   E  [rum=gene]                      [rum] perd to blur
 rulf  =<   E  [han=mark dur=gene leb=gene]    [dur] in [[han=leb] +]
-serd  |:   E  [tep=skel von=gene]             lamb construction
+stur  |:   E  [tep=skel von=gene]             lamb construction
 spal  &~   E  [dil=gene]                      cell
 stiv  ~<   E  [del=gene zim=gene]             [del] in [zim]
 trup  ?!   E  [gix=gene]                      not

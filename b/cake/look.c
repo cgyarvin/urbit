@@ -924,8 +924,8 @@ u4_b_fork(u4_noun noun,
           u4_noun *q)
 {
   if ( u4_n_cell(noun) && u4_n_cell(u4_ch(noun)) ) {
-    *p = u4_ch(noun);
-    *q = u4_ct(noun);
+    if ( p ) *p = u4_ch(noun);
+    if ( q ) *q = u4_ct(noun);
     return 1;
   }
   return 0;

@@ -413,6 +413,7 @@
     u4_lib_mote(stol, u4_s4('s','t','o','l'))
     u4_lib_mote(stop, u4_s4('s','t','o','p'))
     u4_lib_mote(stub, u4_s4('s','t','u','b'))
+    u4_lib_mote(stur, u4_s4('s','t','u','r'))
     u4_lib_mote(sub,  u4_s3('s','u','b'))
     u4_lib_mote(sure, u4_s4('s','u','r','e'))
     u4_lib_mote(sym,  u4_s3('s','y','m'))

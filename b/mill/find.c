@@ -118,6 +118,7 @@ _find_cone(u4_milr m,
   else {
     u4_axis p_gos = u4_ch(gos);
     u4_gene q_gos = u4_ct(gos);
+    u4_axis gal   = u4_op_peg(lane, u4_noun_3, p_gos);
 
     return u4_k_cell
       (lane,
@@ -126,7 +127,7 @@ _find_cone(u4_milr m,
                        q_gos),
        u4_k_trel(lane, u4_noun_3,
                        u4_k_cell(lane, u4_noun_0, u4_noun_1),
-                       u4_k_cell(lane, u4_noun_0, p_gos)));
+                       u4_k_cell(lane, u4_noun_0, gal)));
   }
 }
 

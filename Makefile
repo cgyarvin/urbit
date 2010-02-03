@@ -130,9 +130,9 @@ U4_MQ_OFILES=\
        b/q/pung.o \
        b/q/rald.o \
        b/q/rulf.o \
-       b/q/serd.o \
        b/q/spal.o \
        b/q/stiv.o \
+       b/q/stur.o \
        b/q/trup.o \
        b/q/veck.o \
        b/q/wamp.o \

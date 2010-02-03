@@ -29,5 +29,13 @@ u4_mill(u4_lane lane,
   // nes = _mill_gene(&milr, nes);
   // zyl = _mill_type(&milr, zyl);
 
-  return _mill_make(&milr, nes, zyl);
+  {
+    u4_loaf lof = _mill_make(&milr, nes, zyl);
+    u4_type typ = u4_ch(lof);
+    u4_form fol = u4_ct(lof);
+
+    // return u4_k_cell(lane, typ, fol);
+    // 
+    return u4_k_cell(lane, _mill_reap(&milr, typ), fol);
+  }
 }

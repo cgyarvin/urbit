@@ -5,7 +5,6 @@ State 14 conflicts: 1 shift/reduce
 State 15 conflicts: 1 shift/reduce
 State 22 conflicts: 10 shift/reduce
 State 23 conflicts: 1 shift/reduce
-State 41 conflicts: 1 shift/reduce
 State 52 conflicts: 10 shift/reduce
 State 99 conflicts: 1 shift/reduce
 State 101 conflicts: 1 shift/reduce
@@ -45,9 +44,9 @@ State 457 conflicts: 2 shift/reduce
 State 489 conflicts: 63 shift/reduce
 State 490 conflicts: 63 shift/reduce
 State 498 conflicts: 1 shift/reduce
-State 640 conflicts: 52 shift/reduce
-State 657 conflicts: 52 shift/reduce
-State 661 conflicts: 1 shift/reduce
+State 600 conflicts: 52 shift/reduce
+State 617 conflicts: 52 shift/reduce
+State 621 conflicts: 1 shift/reduce
 State 695 conflicts: 3 shift/reduce
 State 702 conflicts: 1 shift/reduce
 State 703 conflicts: 1 shift/reduce
@@ -76,12 +75,12 @@ Grammar
     5     | wide
 
     6 wide: wide_core
-    7     | wide_core '(' nail_wide_star ')'
 
-    8 wide_core: wide_odd
-    9          | wide_norm
+    7 wide_core: wide_odd
+    8          | wide_norm
 
-   10 wide_odd: rope
+    9 wide_odd: rope
+   10         | rope '(' nail_wide_star ')'
    11         | '[' g item_wide_some ']'
    12         | '(' g wide_some ')'
    13         | wide_constant
@@ -109,7 +108,7 @@ Grammar
    33          | dig_peld wide_norm_peld
    34          | dig_trup wide_norm_trup
    35          | dig_forb wide_norm_forb
-   36          | dig_serd wide_norm_serd
+   36          | dig_stur wide_norm_stur
    37          | dig_lome wide_norm_lome
    38          | dig_flot wide_norm_flot
    39          | dig_perd wide_norm_perd
@@ -163,7 +162,7 @@ Grammar
 
    73 wide_norm_forb: '{' g rope g wide g '}'
 
-   74 wide_norm_serd: '{' g skel_w w wide g '}'
+   74 wide_norm_stur: '{' g skel_w w wide g '}'
 
    75 wide_norm_lome: wide
 
@@ -228,7 +227,7 @@ Grammar
   112          | dig_forb w tall_norm_forb
   113          | dig_malk w tall_norm_malk
   114          | dig_blin w tall_norm_blin
-  115          | dig_serd w tall_norm_serd
+  115          | dig_stur w tall_norm_stur
   116          | dig_lome w tall_norm_lome
   117          | dig_flot w tall_norm_flot
   118          | dig_perd w tall_norm_perd
@@ -286,11 +285,11 @@ Grammar
 
   154 tall_norm_blin: gene w page_star dig_stop
 
-  155 tall_norm_serd: skel_t_item_some dig_stop w gene
+  155 tall_norm_stur: skel_t_item_some dig_stop w gene
 
-  156 tall_norm_lome: tall
+  156 tall_norm_lome: gene
 
-  157 tall_norm_flot: tall
+  157 tall_norm_flot: gene
 
   158 tall_norm_perd: gene w gene
 
@@ -300,7 +299,7 @@ Grammar
 
   161 tall_norm_rald: gene
 
-  162 tall_norm_crot: tall
+  162 tall_norm_crot: gene
 
   163 tall_norm_gant: gene w nail_tall_star dig_stop
 
@@ -588,7 +587,7 @@ Grammar
 
   353 dig_blin: '|' '*'
 
-  354 dig_serd: '|' ':'
+  354 dig_stur: '|' ':'
 
   355 dig_lome: '|' '='
 
@@ -803,8 +802,8 @@ $end (0) 0
 '%' (37) 17 18 19 240 264 303 304 368 377 378 379 380 381 382 383 475
 '&' (38) 235 348 371 372 373 374 375 376 477
 ''' (39) 334 467 510
-'(' (40) 7 12 233 479
-')' (41) 7 12 233 480
+'(' (40) 10 12 233 479
+')' (41) 10 12 233 480
 '*' (42) 227 263 267 353 360 366 380 478
 '+' (43) 201 202 223 262 266 347 352 357 364 379 497
 ',' (44) 214 274 491
@@ -906,22 +905,22 @@ file (102)
     on left: 1 2 3, on right: 0
 gene (103)
     on left: 4 5, on right: 1 138 139 140 141 142 143 144 145 146 148
-    151 152 154 155 158 159 160 161 163 164 165 166 169 172 178 179
-    181 186 191 192
+    151 152 154 155 156 157 158 159 160 161 162 163 164 165 166 169
+    172 178 179 181 186 191 192
 wide (104)
-    on left: 6 7, on right: 5 59 60 61 62 63 64 65 66 67 69 72 73 74
+    on left: 6, on right: 5 59 60 61 62 63 64 65 66 67 69 72 73 74
     75 76 77 78 79 80 81 82 83 84 85 88 91 92 93 94 95 96 182 183 185
     193 194 212 228 265 266 267 268 297
 wide_core (105)
-    on left: 8 9, on right: 6 7
+    on left: 7 8, on right: 6
 wide_odd (106)
-    on left: 10 11 12 13, on right: 8
+    on left: 9 10 11 12 13, on right: 7
 wide_constant (107)
     on left: 14 15 16 17 18 19 20, on right: 13 291
 wide_norm (108)
     on left: 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38
     39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58,
-    on right: 9
+    on right: 8
 wide_norm_pont (109)
     on left: 59, on right: 21
 wide_norm_rulf (110)
@@ -952,7 +951,7 @@ wide_norm_trup (122)
     on left: 72, on right: 34
 wide_norm_forb (123)
     on left: 73, on right: 35
-wide_norm_serd (124)
+wide_norm_stur (124)
     on left: 74, on right: 36
 wide_norm_lome (125)
     on left: 75, on right: 37
@@ -999,8 +998,7 @@ wide_norm_wamp (145)
 wide_norm_frez (146)
     on left: 96, on right: 58
 tall (147)
-    on left: 97, on right: 4 156 157 162 164 173 174 175 176 177 217
-    249 261 263
+    on left: 97, on right: 4 164 173 174 175 176 177 217 249 261 263
 tall_norm (148)
     on left: 98 99 100 101 102 103 104 105 106 107 108 109 110 111
     112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127
@@ -1039,7 +1037,7 @@ tall_norm_malk (164)
     on left: 153, on right: 113
 tall_norm_blin (165)
     on left: 154, on right: 114
-tall_norm_serd (166)
+tall_norm_stur (166)
     on left: 155, on right: 115
 tall_norm_lome (167)
     on left: 156, on right: 116
@@ -1108,7 +1106,7 @@ item_tall_some (198)
 item_wide_some (199)
     on left: 197 198, on right: 11 86 198
 rope (200)
-    on left: 199 200, on right: 10 68 73 147 152 200 212 217 225
+    on left: 199 200, on right: 9 10 68 73 147 152 200 212 217 225
 rope_hook (201)
     on left: 201 202 203 204, on right: 199 200
 rope_buck (202)
@@ -1122,7 +1120,7 @@ nail_wide (205)
 nail_wide_some (206)
     on left: 213 214, on right: 214 216
 nail_wide_star (207)
-    on left: 215 216, on right: 7 82 88
+    on left: 215 216, on right: 10 82 88
 nail_tall (208)
     on left: 217, on right: 218 219
 nail_tall_some (209)
@@ -1249,7 +1247,7 @@ dig_malk (267)
     on left: 352, on right: 113
 dig_blin (268)
     on left: 353, on right: 114
-dig_serd (269)
+dig_stur (269)
     on left: 354, on right: 36 115
 dig_lome (270)
     on left: 355, on right: 37 116
@@ -1500,7 +1498,7 @@ state 7
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -1973,7 +1971,7 @@ state 25
 
   352 dig_malk: '|' . '+'
   353 dig_blin: '|' . '*'
-  354 dig_serd: '|' . ':'
+  354 dig_stur: '|' . ':'
   355 dig_lome: '|' . '='
   356 dig_flot: '|' . '-'
 
@@ -2236,19 +2234,15 @@ state 40
 state 41
 
     6 wide: wide_core .
-    7     | wide_core . '(' nail_wide_star ')'
 
-    '('  shift, and go to state 272
-
-    '('       [reduce using rule 6 (wide)]
     $default  reduce using rule 6 (wide)
 
 
 state 42
 
-    8 wide_core: wide_odd .
+    7 wide_core: wide_odd .
 
-    $default  reduce using rule 8 (wide_core)
+    $default  reduce using rule 7 (wide_core)
 
 
 state 43
@@ -2260,9 +2254,9 @@ state 43
 
 state 44
 
-    9 wide_core: wide_norm .
+    8 wide_core: wide_norm .
 
-    $default  reduce using rule 9 (wide_core)
+    $default  reduce using rule 8 (wide_core)
 
 
 state 45
@@ -2281,9 +2275,12 @@ state 46
 
 state 47
 
-   10 wide_odd: rope .
+    9 wide_odd: rope .
+   10         | rope . '(' nail_wide_star ')'
 
-    $default  reduce using rule 10 (wide_odd)
+    '('  shift, and go to state 272
+
+    $default  reduce using rule 9 (wide_odd)
 
 
 state 48
@@ -2682,7 +2679,7 @@ state 67
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -2755,15 +2752,15 @@ state 70
 
 state 71
 
-   36 wide_norm: dig_serd . wide_norm_serd
-  115 tall_norm: dig_serd . w tall_norm_serd
+   36 wide_norm: dig_stur . wide_norm_stur
+  115 tall_norm: dig_stur . w tall_norm_stur
 
     '{'   shift, and go to state 366
     ':'   shift, and go to state 3
     '\n'  shift, and go to state 4
     ' '   shift, and go to state 5
 
-    wide_norm_serd  go to state 367
+    wide_norm_stur  go to state 367
     w               go to state 368
     comment         go to state 280
     cw              go to state 281
@@ -2832,7 +2829,7 @@ state 72
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -2924,7 +2921,7 @@ state 73
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -3064,7 +3061,7 @@ state 77
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -3156,7 +3153,7 @@ state 78
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -3296,7 +3293,7 @@ state 82
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -3556,7 +3553,7 @@ state 89
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -3648,7 +3645,7 @@ state 90
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -3740,7 +3737,7 @@ state 91
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -3832,7 +3829,7 @@ state 92
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -3924,7 +3921,7 @@ state 93
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -5144,7 +5141,7 @@ state 208
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -5336,7 +5333,7 @@ state 209
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -5735,9 +5732,9 @@ state 238
 
 state 239
 
-  354 dig_serd: '|' ':' .
+  354 dig_stur: '|' ':' .
 
-    $default  reduce using rule 354 (dig_serd)
+    $default  reduce using rule 354 (dig_stur)
 
 
 state 240
@@ -6070,7 +6067,7 @@ state 271
 
 state 272
 
-    7 wide: wide_core '(' . nail_wide_star ')'
+   10 wide_odd: rope '(' . nail_wide_star ')'
 
     '+'  shift, and go to state 22
     '$'  shift, and go to state 23
@@ -6441,7 +6438,7 @@ state 287
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -6555,7 +6552,7 @@ state 290
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -6669,7 +6666,7 @@ state 293
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -6783,7 +6780,7 @@ state 296
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -6897,7 +6894,7 @@ state 299
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -7011,7 +7008,7 @@ state 302
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -7125,7 +7122,7 @@ state 305
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -7278,7 +7275,7 @@ state 311
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -7394,7 +7391,7 @@ state 314
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -7510,7 +7507,7 @@ state 317
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -7563,7 +7560,7 @@ state 318
 
 state 319
 
-  354 dig_serd: '|' . ':'
+  354 dig_stur: '|' . ':'
   355 dig_lome: '|' . '='
   356 dig_flot: '|' . '-'
 
@@ -7763,7 +7760,7 @@ state 335
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -7800,11 +7797,11 @@ state 336
 
 state 337
 
-   36 wide_norm: dig_serd . wide_norm_serd
+   36 wide_norm: dig_stur . wide_norm_stur
 
     '{'  shift, and go to state 366
 
-    wide_norm_serd  go to state 367
+    wide_norm_stur  go to state 367
 
 
 state 338
@@ -7867,7 +7864,7 @@ state 338
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -7953,7 +7950,7 @@ state 339
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -8066,7 +8063,7 @@ state 343
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -8152,7 +8149,7 @@ state 344
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -8265,7 +8262,7 @@ state 348
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -8477,7 +8474,7 @@ state 355
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -8563,7 +8560,7 @@ state 356
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -8649,7 +8646,7 @@ state 357
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -8735,7 +8732,7 @@ state 358
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -8821,7 +8818,7 @@ state 359
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -8912,7 +8909,7 @@ state 360
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -9056,7 +9053,7 @@ state 365
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -9084,7 +9081,7 @@ state 365
 
 state 366
 
-   74 wide_norm_serd: '{' . g skel_w w wide g '}'
+   74 wide_norm_stur: '{' . g skel_w w wide g '}'
 
     ':'   shift, and go to state 3
     '\n'  shift, and go to state 4
@@ -9099,14 +9096,14 @@ state 366
 
 state 367
 
-   36 wide_norm: dig_serd wide_norm_serd .
+   36 wide_norm: dig_stur wide_norm_stur .
 
     $default  reduce using rule 36 (wide_norm)
 
 
 state 368
 
-  115 tall_norm: dig_serd w . tall_norm_serd
+  115 tall_norm: dig_stur w . tall_norm_stur
 
     '('  shift, and go to state 411
     '['  shift, and go to state 412
@@ -9238,7 +9235,7 @@ state 368
     'Y'  [reduce using rule 210 (rope_tick)]
     'Z'  [reduce using rule 210 (rope_tick)]
 
-    tall_norm_serd    go to state 559
+    tall_norm_stur    go to state 559
     rope              go to state 423
     rope_hook         go to state 48
     rope_buck         go to state 49
@@ -9283,59 +9280,91 @@ state 371
 
   116 tall_norm: dig_lome w . tall_norm_lome
 
-    '~'  shift, and go to state 572
+    '('  shift, and go to state 14
+    '['  shift, and go to state 15
+    '0'  shift, and go to state 16
+    '%'  shift, and go to state 17
+    '~'  shift, and go to state 18
     ':'  shift, and go to state 19
     '-'  shift, and go to state 20
     '='  shift, and go to state 21
-    '`'  shift, and go to state 573
+    '+'  shift, and go to state 22
+    '$'  shift, and go to state 23
+    '`'  shift, and go to state 24
     '|'  shift, and go to state 25
     '^'  shift, and go to state 26
     '&'  shift, and go to state 27
+    '''  shift, and go to state 28
     '?'  shift, and go to state 29
+    '1'  shift, and go to state 30
+    '2'  shift, and go to state 31
+    '3'  shift, and go to state 32
+    '4'  shift, and go to state 33
+    '5'  shift, and go to state 34
+    '6'  shift, and go to state 35
+    '7'  shift, and go to state 36
+    '8'  shift, and go to state 37
+    '9'  shift, and go to state 38
 
-    tall            go to state 574
+    $default  reduce using rule 210 (rope_tick)
+
+    gene            go to state 572
+    wide            go to state 40
+    wide_core       go to state 41
+    wide_odd        go to state 42
+    wide_constant   go to state 43
+    wide_norm       go to state 44
+    tall            go to state 45
     tall_norm       go to state 46
-    tall_norm_lome  go to state 575
-    dig_pont        go to state 576
-    dig_rulf        go to state 577
-    dig_glem        go to state 578
-    dig_lisc        go to state 579
-    dig_slon        go to state 580
-    dig_stiv        go to state 581
-    dig_stol        go to state 582
-    dig_feng        go to state 583
-    dig_prex        go to state 584
-    dig_zact        go to state 585
-    dig_glax        go to state 586
-    dig_boce        go to state 587
-    dig_peld        go to state 588
-    dig_trup        go to state 589
-    dig_forb        go to state 590
+    tall_norm_lome  go to state 573
+    rope            go to state 47
+    rope_hook       go to state 48
+    rope_buck       go to state 49
+    rope_tick       go to state 50
+    tok_delm        go to state 51
+    tok_delm_pre    go to state 52
+    tok_loct        go to state 53
+    dig_pont        go to state 54
+    dig_rulf        go to state 55
+    dig_glem        go to state 56
+    dig_lisc        go to state 57
+    dig_slon        go to state 58
+    dig_stiv        go to state 59
+    dig_stol        go to state 60
+    dig_feng        go to state 61
+    dig_prex        go to state 62
+    dig_zact        go to state 63
+    dig_glax        go to state 64
+    dig_boce        go to state 65
+    dig_peld        go to state 66
+    dig_trup        go to state 67
+    dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 591
-    dig_lome        go to state 592
-    dig_flot        go to state 593
-    dig_perd        go to state 594
-    dig_halc        go to state 595
-    dig_tarn        go to state 596
-    dig_rald        go to state 597
-    dig_crot        go to state 598
-    dig_gant        go to state 599
-    dig_pung        go to state 600
-    dig_garc        go to state 601
-    dig_flec        go to state 602
-    dig_sard        go to state 603
-    dig_plom        go to state 604
-    dig_grun        go to state 605
-    dig_delc        go to state 606
-    dig_brip        go to state 607
-    dig_griv        go to state 608
-    dig_veck        go to state 609
-    dig_spal        go to state 610
-    dig_neft        go to state 611
-    dig_wamp        go to state 612
-    dig_frez        go to state 613
+    dig_stur        go to state 71
+    dig_lome        go to state 72
+    dig_flot        go to state 73
+    dig_perd        go to state 74
+    dig_halc        go to state 75
+    dig_tarn        go to state 76
+    dig_rald        go to state 77
+    dig_crot        go to state 78
+    dig_gant        go to state 79
+    dig_pung        go to state 80
+    dig_garc        go to state 81
+    dig_flec        go to state 82
+    dig_sard        go to state 83
+    dig_plom        go to state 84
+    dig_grun        go to state 85
+    dig_delc        go to state 86
+    dig_brip        go to state 87
+    dig_griv        go to state 88
+    dig_veck        go to state 89
+    dig_spal        go to state 90
+    dig_neft        go to state 91
+    dig_wamp        go to state 92
+    dig_frez        go to state 93
+    cn              go to state 94
 
 
 state 372
@@ -9356,59 +9385,91 @@ state 374
 
   117 tall_norm: dig_flot w . tall_norm_flot
 
-    '~'  shift, and go to state 572
+    '('  shift, and go to state 14
+    '['  shift, and go to state 15
+    '0'  shift, and go to state 16
+    '%'  shift, and go to state 17
+    '~'  shift, and go to state 18
     ':'  shift, and go to state 19
     '-'  shift, and go to state 20
     '='  shift, and go to state 21
-    '`'  shift, and go to state 573
+    '+'  shift, and go to state 22
+    '$'  shift, and go to state 23
+    '`'  shift, and go to state 24
     '|'  shift, and go to state 25
     '^'  shift, and go to state 26
     '&'  shift, and go to state 27
+    '''  shift, and go to state 28
     '?'  shift, and go to state 29
+    '1'  shift, and go to state 30
+    '2'  shift, and go to state 31
+    '3'  shift, and go to state 32
+    '4'  shift, and go to state 33
+    '5'  shift, and go to state 34
+    '6'  shift, and go to state 35
+    '7'  shift, and go to state 36
+    '8'  shift, and go to state 37
+    '9'  shift, and go to state 38
 
-    tall            go to state 614
+    $default  reduce using rule 210 (rope_tick)
+
+    gene            go to state 574
+    wide            go to state 40
+    wide_core       go to state 41
+    wide_odd        go to state 42
+    wide_constant   go to state 43
+    wide_norm       go to state 44
+    tall            go to state 45
     tall_norm       go to state 46
-    tall_norm_flot  go to state 615
-    dig_pont        go to state 576
-    dig_rulf        go to state 577
-    dig_glem        go to state 578
-    dig_lisc        go to state 579
-    dig_slon        go to state 580
-    dig_stiv        go to state 581
-    dig_stol        go to state 582
-    dig_feng        go to state 583
-    dig_prex        go to state 584
-    dig_zact        go to state 585
-    dig_glax        go to state 586
-    dig_boce        go to state 587
-    dig_peld        go to state 588
-    dig_trup        go to state 589
-    dig_forb        go to state 590
+    tall_norm_flot  go to state 575
+    rope            go to state 47
+    rope_hook       go to state 48
+    rope_buck       go to state 49
+    rope_tick       go to state 50
+    tok_delm        go to state 51
+    tok_delm_pre    go to state 52
+    tok_loct        go to state 53
+    dig_pont        go to state 54
+    dig_rulf        go to state 55
+    dig_glem        go to state 56
+    dig_lisc        go to state 57
+    dig_slon        go to state 58
+    dig_stiv        go to state 59
+    dig_stol        go to state 60
+    dig_feng        go to state 61
+    dig_prex        go to state 62
+    dig_zact        go to state 63
+    dig_glax        go to state 64
+    dig_boce        go to state 65
+    dig_peld        go to state 66
+    dig_trup        go to state 67
+    dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 591
-    dig_lome        go to state 592
-    dig_flot        go to state 593
-    dig_perd        go to state 594
-    dig_halc        go to state 595
-    dig_tarn        go to state 596
-    dig_rald        go to state 597
-    dig_crot        go to state 598
-    dig_gant        go to state 599
-    dig_pung        go to state 600
-    dig_garc        go to state 601
-    dig_flec        go to state 602
-    dig_sard        go to state 603
-    dig_plom        go to state 604
-    dig_grun        go to state 605
-    dig_delc        go to state 606
-    dig_brip        go to state 607
-    dig_griv        go to state 608
-    dig_veck        go to state 609
-    dig_spal        go to state 610
-    dig_neft        go to state 611
-    dig_wamp        go to state 612
-    dig_frez        go to state 613
+    dig_stur        go to state 71
+    dig_lome        go to state 72
+    dig_flot        go to state 73
+    dig_perd        go to state 74
+    dig_halc        go to state 75
+    dig_tarn        go to state 76
+    dig_rald        go to state 77
+    dig_crot        go to state 78
+    dig_gant        go to state 79
+    dig_pung        go to state 80
+    dig_garc        go to state 81
+    dig_flec        go to state 82
+    dig_sard        go to state 83
+    dig_plom        go to state 84
+    dig_grun        go to state 85
+    dig_delc        go to state 86
+    dig_brip        go to state 87
+    dig_griv        go to state 88
+    dig_veck        go to state 89
+    dig_spal        go to state 90
+    dig_neft        go to state 91
+    dig_wamp        go to state 92
+    dig_frez        go to state 93
+    cn              go to state 94
 
 
 state 375
@@ -9422,7 +9483,7 @@ state 375
     ':'       [reduce using rule 387 (g)]
     $default  reduce using rule 387 (g)
 
-    g        go to state 616
+    g        go to state 576
     comment  go to state 8
     cw       go to state 9
 
@@ -9466,7 +9527,7 @@ state 377
 
     $default  reduce using rule 210 (rope_tick)
 
-    gene            go to state 617
+    gene            go to state 577
     wide            go to state 40
     wide_core       go to state 41
     wide_odd        go to state 42
@@ -9474,7 +9535,7 @@ state 377
     wide_norm       go to state 44
     tall            go to state 45
     tall_norm       go to state 46
-    tall_norm_perd  go to state 618
+    tall_norm_perd  go to state 578
     rope            go to state 47
     rope_hook       go to state 48
     rope_buck       go to state 49
@@ -9499,7 +9560,7 @@ state 377
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -9536,7 +9597,7 @@ state 378
     ':'       [reduce using rule 387 (g)]
     $default  reduce using rule 387 (g)
 
-    g        go to state 619
+    g        go to state 579
     comment  go to state 8
     cw       go to state 9
 
@@ -9580,7 +9641,7 @@ state 380
 
     $default  reduce using rule 210 (rope_tick)
 
-    gene            go to state 620
+    gene            go to state 580
     wide            go to state 40
     wide_core       go to state 41
     wide_odd        go to state 42
@@ -9588,7 +9649,7 @@ state 380
     wide_norm       go to state 44
     tall            go to state 45
     tall_norm       go to state 46
-    tall_norm_halc  go to state 621
+    tall_norm_halc  go to state 581
     rope            go to state 47
     rope_hook       go to state 48
     rope_buck       go to state 49
@@ -9613,7 +9674,7 @@ state 380
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -9650,7 +9711,7 @@ state 381
     ':'       [reduce using rule 387 (g)]
     $default  reduce using rule 387 (g)
 
-    g        go to state 622
+    g        go to state 582
     comment  go to state 8
     cw       go to state 9
 
@@ -9694,7 +9755,7 @@ state 383
 
     $default  reduce using rule 210 (rope_tick)
 
-    gene            go to state 623
+    gene            go to state 583
     wide            go to state 40
     wide_core       go to state 41
     wide_odd        go to state 42
@@ -9702,7 +9763,7 @@ state 383
     wide_norm       go to state 44
     tall            go to state 45
     tall_norm       go to state 46
-    tall_norm_tarn  go to state 624
+    tall_norm_tarn  go to state 584
     rope            go to state 47
     rope_hook       go to state 48
     rope_buck       go to state 49
@@ -9727,7 +9788,7 @@ state 383
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -9799,7 +9860,7 @@ state 386
 
     $default  reduce using rule 210 (rope_tick)
 
-    gene            go to state 625
+    gene            go to state 585
     wide            go to state 40
     wide_core       go to state 41
     wide_odd        go to state 42
@@ -9807,7 +9868,7 @@ state 386
     wide_norm       go to state 44
     tall            go to state 45
     tall_norm       go to state 46
-    tall_norm_rald  go to state 626
+    tall_norm_rald  go to state 586
     rope            go to state 47
     rope_hook       go to state 48
     rope_buck       go to state 49
@@ -9832,7 +9893,7 @@ state 386
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -9876,59 +9937,91 @@ state 389
 
   122 tall_norm: dig_crot w . tall_norm_crot
 
-    '~'  shift, and go to state 572
+    '('  shift, and go to state 14
+    '['  shift, and go to state 15
+    '0'  shift, and go to state 16
+    '%'  shift, and go to state 17
+    '~'  shift, and go to state 18
     ':'  shift, and go to state 19
     '-'  shift, and go to state 20
     '='  shift, and go to state 21
-    '`'  shift, and go to state 573
+    '+'  shift, and go to state 22
+    '$'  shift, and go to state 23
+    '`'  shift, and go to state 24
     '|'  shift, and go to state 25
     '^'  shift, and go to state 26
     '&'  shift, and go to state 27
+    '''  shift, and go to state 28
     '?'  shift, and go to state 29
+    '1'  shift, and go to state 30
+    '2'  shift, and go to state 31
+    '3'  shift, and go to state 32
+    '4'  shift, and go to state 33
+    '5'  shift, and go to state 34
+    '6'  shift, and go to state 35
+    '7'  shift, and go to state 36
+    '8'  shift, and go to state 37
+    '9'  shift, and go to state 38
 
-    tall            go to state 627
+    $default  reduce using rule 210 (rope_tick)
+
+    gene            go to state 587
+    wide            go to state 40
+    wide_core       go to state 41
+    wide_odd        go to state 42
+    wide_constant   go to state 43
+    wide_norm       go to state 44
+    tall            go to state 45
     tall_norm       go to state 46
-    tall_norm_crot  go to state 628
-    dig_pont        go to state 576
-    dig_rulf        go to state 577
-    dig_glem        go to state 578
-    dig_lisc        go to state 579
-    dig_slon        go to state 580
-    dig_stiv        go to state 581
-    dig_stol        go to state 582
-    dig_feng        go to state 583
-    dig_prex        go to state 584
-    dig_zact        go to state 585
-    dig_glax        go to state 586
-    dig_boce        go to state 587
-    dig_peld        go to state 588
-    dig_trup        go to state 589
-    dig_forb        go to state 590
+    tall_norm_crot  go to state 588
+    rope            go to state 47
+    rope_hook       go to state 48
+    rope_buck       go to state 49
+    rope_tick       go to state 50
+    tok_delm        go to state 51
+    tok_delm_pre    go to state 52
+    tok_loct        go to state 53
+    dig_pont        go to state 54
+    dig_rulf        go to state 55
+    dig_glem        go to state 56
+    dig_lisc        go to state 57
+    dig_slon        go to state 58
+    dig_stiv        go to state 59
+    dig_stol        go to state 60
+    dig_feng        go to state 61
+    dig_prex        go to state 62
+    dig_zact        go to state 63
+    dig_glax        go to state 64
+    dig_boce        go to state 65
+    dig_peld        go to state 66
+    dig_trup        go to state 67
+    dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 591
-    dig_lome        go to state 592
-    dig_flot        go to state 593
-    dig_perd        go to state 594
-    dig_halc        go to state 595
-    dig_tarn        go to state 596
-    dig_rald        go to state 597
-    dig_crot        go to state 598
-    dig_gant        go to state 599
-    dig_pung        go to state 600
-    dig_garc        go to state 601
-    dig_flec        go to state 602
-    dig_sard        go to state 603
-    dig_plom        go to state 604
-    dig_grun        go to state 605
-    dig_delc        go to state 606
-    dig_brip        go to state 607
-    dig_griv        go to state 608
-    dig_veck        go to state 609
-    dig_spal        go to state 610
-    dig_neft        go to state 611
-    dig_wamp        go to state 612
-    dig_frez        go to state 613
+    dig_stur        go to state 71
+    dig_lome        go to state 72
+    dig_flot        go to state 73
+    dig_perd        go to state 74
+    dig_halc        go to state 75
+    dig_tarn        go to state 76
+    dig_rald        go to state 77
+    dig_crot        go to state 78
+    dig_gant        go to state 79
+    dig_pung        go to state 80
+    dig_garc        go to state 81
+    dig_flec        go to state 82
+    dig_sard        go to state 83
+    dig_plom        go to state 84
+    dig_grun        go to state 85
+    dig_delc        go to state 86
+    dig_brip        go to state 87
+    dig_griv        go to state 88
+    dig_veck        go to state 89
+    dig_spal        go to state 90
+    dig_neft        go to state 91
+    dig_wamp        go to state 92
+    dig_frez        go to state 93
+    cn              go to state 94
 
 
 state 390
@@ -9942,7 +10035,7 @@ state 390
     ':'       [reduce using rule 387 (g)]
     $default  reduce using rule 387 (g)
 
-    g        go to state 629
+    g        go to state 589
     comment  go to state 8
     cw       go to state 9
 
@@ -9986,7 +10079,7 @@ state 392
 
     $default  reduce using rule 210 (rope_tick)
 
-    gene            go to state 630
+    gene            go to state 590
     wide            go to state 40
     wide_core       go to state 41
     wide_odd        go to state 42
@@ -9994,7 +10087,7 @@ state 392
     wide_norm       go to state 44
     tall            go to state 45
     tall_norm       go to state 46
-    tall_norm_gant  go to state 631
+    tall_norm_gant  go to state 591
     rope            go to state 47
     rope_hook       go to state 48
     rope_buck       go to state 49
@@ -10019,7 +10112,7 @@ state 392
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -10056,7 +10149,7 @@ state 393
     ':'       [reduce using rule 387 (g)]
     $default  reduce using rule 387 (g)
 
-    g        go to state 632
+    g        go to state 592
     comment  go to state 8
     cw       go to state 9
 
@@ -10100,7 +10193,7 @@ state 395
 
     $default  reduce using rule 210 (rope_tick)
 
-    gene            go to state 633
+    gene            go to state 593
     wide            go to state 40
     wide_core       go to state 41
     wide_odd        go to state 42
@@ -10108,7 +10201,7 @@ state 395
     wide_norm       go to state 44
     tall            go to state 45
     tall_norm       go to state 46
-    tall_norm_pung  go to state 634
+    tall_norm_pung  go to state 594
     rope            go to state 47
     rope_hook       go to state 48
     rope_buck       go to state 49
@@ -10133,7 +10226,7 @@ state 395
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -10170,7 +10263,7 @@ state 396
     ':'       [reduce using rule 387 (g)]
     $default  reduce using rule 387 (g)
 
-    g        go to state 635
+    g        go to state 595
     comment  go to state 8
     cw       go to state 9
 
@@ -10214,7 +10307,7 @@ state 398
 
     $default  reduce using rule 210 (rope_tick)
 
-    gene            go to state 636
+    gene            go to state 596
     wide            go to state 40
     wide_core       go to state 41
     wide_odd        go to state 42
@@ -10222,7 +10315,7 @@ state 398
     wide_norm       go to state 44
     tall            go to state 45
     tall_norm       go to state 46
-    tall_norm_garc  go to state 637
+    tall_norm_garc  go to state 597
     rope            go to state 47
     rope_hook       go to state 48
     rope_buck       go to state 49
@@ -10247,7 +10340,7 @@ state 398
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -10319,7 +10412,7 @@ state 401
 
     $default  reduce using rule 210 (rope_tick)
 
-    gene            go to state 638
+    gene            go to state 598
     wide            go to state 40
     wide_core       go to state 41
     wide_odd        go to state 42
@@ -10327,7 +10420,7 @@ state 401
     wide_norm       go to state 44
     tall            go to state 45
     tall_norm       go to state 46
-    tall_norm_flec  go to state 639
+    tall_norm_flec  go to state 599
     rope            go to state 47
     rope_hook       go to state 48
     rope_buck       go to state 49
@@ -10352,7 +10445,7 @@ state 401
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -10389,7 +10482,7 @@ state 402
     ':'       [reduce using rule 387 (g)]
     $default  reduce using rule 387 (g)
 
-    g        go to state 640
+    g        go to state 600
     comment  go to state 8
     cw       go to state 9
 
@@ -10536,7 +10629,7 @@ state 404
     'Y'  [reduce using rule 210 (rope_tick)]
     'Z'  [reduce using rule 210 (rope_tick)]
 
-    gene            go to state 641
+    gene            go to state 601
     wide            go to state 40
     wide_core       go to state 41
     wide_odd        go to state 42
@@ -10544,14 +10637,14 @@ state 404
     wide_norm       go to state 44
     tall            go to state 45
     tall_norm       go to state 46
-    tall_norm_sard  go to state 642
-    item_tall       go to state 643
-    item_tall_some  go to state 644
+    tall_norm_sard  go to state 602
+    item_tall       go to state 603
+    item_tall_some  go to state 604
     rope            go to state 47
     rope_hook       go to state 48
     rope_buck       go to state 49
     rope_tick       go to state 50
-    tok_mark        go to state 645
+    tok_mark        go to state 605
     tok_mark_pre    go to state 214
     tok_delm        go to state 51
     tok_delm_pre    go to state 52
@@ -10573,7 +10666,7 @@ state 404
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -10611,7 +10704,7 @@ state 405
     ':'       [reduce using rule 387 (g)]
     $default  reduce using rule 387 (g)
 
-    g        go to state 646
+    g        go to state 606
     comment  go to state 8
     cw       go to state 9
 
@@ -10655,7 +10748,7 @@ state 407
 
     $default  reduce using rule 210 (rope_tick)
 
-    gene            go to state 647
+    gene            go to state 607
     wide            go to state 40
     wide_core       go to state 41
     wide_odd        go to state 42
@@ -10663,8 +10756,8 @@ state 407
     wide_norm       go to state 44
     tall            go to state 45
     tall_norm       go to state 46
-    tall_norm_plom  go to state 648
-    tall_some       go to state 649
+    tall_norm_plom  go to state 608
+    tall_some       go to state 609
     rope            go to state 47
     rope_hook       go to state 48
     rope_buck       go to state 49
@@ -10689,7 +10782,7 @@ state 407
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -10726,7 +10819,7 @@ state 408
     ':'       [reduce using rule 387 (g)]
     $default  reduce using rule 387 (g)
 
-    g        go to state 650
+    g        go to state 610
     comment  go to state 8
     cw       go to state 9
 
@@ -10749,14 +10842,14 @@ state 410
     '='       reduce using rule 220 (nail_tall_star)
     $default  reduce using rule 210 (rope_tick)
 
-    tall_norm_grun  go to state 651
-    rope            go to state 652
+    tall_norm_grun  go to state 611
+    rope            go to state 612
     rope_hook       go to state 48
     rope_buck       go to state 49
     rope_tick       go to state 50
-    nail_tall       go to state 653
-    nail_tall_some  go to state 654
-    nail_tall_star  go to state 655
+    nail_tall       go to state 613
+    nail_tall_some  go to state 614
+    nail_tall_star  go to state 615
 
 
 state 411
@@ -10769,7 +10862,7 @@ state 411
 
     $default  reduce using rule 387 (g)
 
-    g        go to state 656
+    g        go to state 616
     comment  go to state 8
     cw       go to state 9
 
@@ -10784,7 +10877,7 @@ state 412
 
     $default  reduce using rule 387 (g)
 
-    g        go to state 657
+    g        go to state 617
     comment  go to state 8
     cw       go to state 9
 
@@ -10794,7 +10887,7 @@ state 413
   238 skel_w_stat: '0' . 'x' tok_chex
   329 tok_delm: '0' .
 
-    'x'  shift, and go to state 658
+    'x'  shift, and go to state 618
 
     $default  reduce using rule 329 (tok_delm)
 
@@ -10856,7 +10949,7 @@ state 414
     'Y'  shift, and go to state 196
     'Z'  shift, and go to state 197
 
-    tok_mark      go to state 659
+    tok_mark      go to state 619
     tok_mark_pre  go to state 214
     ca            go to state 216
 
@@ -10879,7 +10972,7 @@ state 416
     ':'       [reduce using rule 387 (g)]
     $default  reduce using rule 387 (g)
 
-    g        go to state 660
+    g        go to state 620
     comment  go to state 8
     cw       go to state 9
 
@@ -10927,7 +11020,7 @@ state 418
     rope_hook     go to state 48
     rope_buck     go to state 49
     rope_tick     go to state 50
-    skel_w        go to state 661
+    skel_w        go to state 621
     skel_w_core   go to state 425
     skel_w_stat   go to state 426
     tok_delm      go to state 427
@@ -10984,8 +11077,8 @@ state 425
   223       | skel_w_core . '+' skel_w
   224       | skel_w_core . '|' skel_w
 
-    '+'  shift, and go to state 662
-    '|'  shift, and go to state 663
+    '+'  shift, and go to state 622
+    '|'  shift, and go to state 623
 
     '+'       [reduce using rule 222 (skel_w)]
     '|'       [reduce using rule 222 (skel_w)]
@@ -11044,7 +11137,7 @@ state 429
 
     $default  reduce using rule 210 (rope_tick)
 
-    tall_norm_delc  go to state 664
+    tall_norm_delc  go to state 624
     rope            go to state 423
     rope_hook       go to state 48
     rope_buck       go to state 49
@@ -11052,7 +11145,7 @@ state 429
     skel_w          go to state 560
     skel_w_core     go to state 425
     skel_w_stat     go to state 426
-    skel_t          go to state 665
+    skel_t          go to state 625
     tok_delm        go to state 427
     tok_delm_pre    go to state 52
     tok_loct        go to state 428
@@ -11111,7 +11204,7 @@ state 432
 
     $default  reduce using rule 210 (rope_tick)
 
-    tall_norm_brip  go to state 666
+    tall_norm_brip  go to state 626
     rope            go to state 423
     rope_hook       go to state 48
     rope_buck       go to state 49
@@ -11119,7 +11212,7 @@ state 432
     skel_w          go to state 560
     skel_w_core     go to state 425
     skel_w_stat     go to state 426
-    skel_t          go to state 667
+    skel_t          go to state 627
     tok_delm        go to state 427
     tok_delm_pre    go to state 52
     tok_loct        go to state 428
@@ -11144,7 +11237,7 @@ state 433
     ':'       [reduce using rule 387 (g)]
     $default  reduce using rule 387 (g)
 
-    g        go to state 668
+    g        go to state 628
     comment  go to state 8
     cw       go to state 9
 
@@ -11188,7 +11281,7 @@ state 435
 
     $default  reduce using rule 210 (rope_tick)
 
-    gene            go to state 669
+    gene            go to state 629
     wide            go to state 40
     wide_core       go to state 41
     wide_odd        go to state 42
@@ -11196,7 +11289,7 @@ state 435
     wide_norm       go to state 44
     tall            go to state 45
     tall_norm       go to state 46
-    tall_norm_griv  go to state 670
+    tall_norm_griv  go to state 630
     rope            go to state 47
     rope_hook       go to state 48
     rope_buck       go to state 49
@@ -11221,7 +11314,7 @@ state 435
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -11265,59 +11358,59 @@ state 438
 
   133 tall_norm: dig_veck w . tall_norm_veck
 
-    '~'  shift, and go to state 572
+    '~'  shift, and go to state 631
     ':'  shift, and go to state 19
     '-'  shift, and go to state 20
     '='  shift, and go to state 21
-    '`'  shift, and go to state 573
+    '`'  shift, and go to state 632
     '|'  shift, and go to state 25
     '^'  shift, and go to state 26
     '&'  shift, and go to state 27
     '?'  shift, and go to state 29
 
-    tall            go to state 671
+    tall            go to state 633
     tall_norm       go to state 46
-    tall_norm_veck  go to state 672
-    dig_pont        go to state 576
-    dig_rulf        go to state 577
-    dig_glem        go to state 578
-    dig_lisc        go to state 579
-    dig_slon        go to state 580
-    dig_stiv        go to state 581
-    dig_stol        go to state 582
-    dig_feng        go to state 583
-    dig_prex        go to state 584
-    dig_zact        go to state 585
-    dig_glax        go to state 586
-    dig_boce        go to state 587
-    dig_peld        go to state 588
-    dig_trup        go to state 589
-    dig_forb        go to state 590
+    tall_norm_veck  go to state 634
+    dig_pont        go to state 635
+    dig_rulf        go to state 636
+    dig_glem        go to state 637
+    dig_lisc        go to state 638
+    dig_slon        go to state 639
+    dig_stiv        go to state 640
+    dig_stol        go to state 641
+    dig_feng        go to state 642
+    dig_prex        go to state 643
+    dig_zact        go to state 644
+    dig_glax        go to state 645
+    dig_boce        go to state 646
+    dig_peld        go to state 647
+    dig_trup        go to state 648
+    dig_forb        go to state 649
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 591
-    dig_lome        go to state 592
-    dig_flot        go to state 593
-    dig_perd        go to state 594
-    dig_halc        go to state 595
-    dig_tarn        go to state 596
-    dig_rald        go to state 597
-    dig_crot        go to state 598
-    dig_gant        go to state 599
-    dig_pung        go to state 600
-    dig_garc        go to state 601
-    dig_flec        go to state 602
-    dig_sard        go to state 603
-    dig_plom        go to state 604
-    dig_grun        go to state 605
-    dig_delc        go to state 606
-    dig_brip        go to state 607
-    dig_griv        go to state 608
-    dig_veck        go to state 609
-    dig_spal        go to state 610
-    dig_neft        go to state 611
-    dig_wamp        go to state 612
-    dig_frez        go to state 613
+    dig_stur        go to state 650
+    dig_lome        go to state 651
+    dig_flot        go to state 652
+    dig_perd        go to state 653
+    dig_halc        go to state 654
+    dig_tarn        go to state 655
+    dig_rald        go to state 656
+    dig_crot        go to state 657
+    dig_gant        go to state 658
+    dig_pung        go to state 659
+    dig_garc        go to state 660
+    dig_flec        go to state 661
+    dig_sard        go to state 662
+    dig_plom        go to state 663
+    dig_grun        go to state 664
+    dig_delc        go to state 665
+    dig_brip        go to state 666
+    dig_griv        go to state 667
+    dig_veck        go to state 668
+    dig_spal        go to state 669
+    dig_neft        go to state 670
+    dig_wamp        go to state 671
+    dig_frez        go to state 672
 
 
 state 439
@@ -11338,11 +11431,11 @@ state 441
 
   134 tall_norm: dig_spal w . tall_norm_spal
 
-    '~'  shift, and go to state 572
+    '~'  shift, and go to state 631
     ':'  shift, and go to state 19
     '-'  shift, and go to state 20
     '='  shift, and go to state 21
-    '`'  shift, and go to state 573
+    '`'  shift, and go to state 632
     '|'  shift, and go to state 25
     '^'  shift, and go to state 26
     '&'  shift, and go to state 27
@@ -11351,46 +11444,46 @@ state 441
     tall            go to state 673
     tall_norm       go to state 46
     tall_norm_spal  go to state 674
-    dig_pont        go to state 576
-    dig_rulf        go to state 577
-    dig_glem        go to state 578
-    dig_lisc        go to state 579
-    dig_slon        go to state 580
-    dig_stiv        go to state 581
-    dig_stol        go to state 582
-    dig_feng        go to state 583
-    dig_prex        go to state 584
-    dig_zact        go to state 585
-    dig_glax        go to state 586
-    dig_boce        go to state 587
-    dig_peld        go to state 588
-    dig_trup        go to state 589
-    dig_forb        go to state 590
+    dig_pont        go to state 635
+    dig_rulf        go to state 636
+    dig_glem        go to state 637
+    dig_lisc        go to state 638
+    dig_slon        go to state 639
+    dig_stiv        go to state 640
+    dig_stol        go to state 641
+    dig_feng        go to state 642
+    dig_prex        go to state 643
+    dig_zact        go to state 644
+    dig_glax        go to state 645
+    dig_boce        go to state 646
+    dig_peld        go to state 647
+    dig_trup        go to state 648
+    dig_forb        go to state 649
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 591
-    dig_lome        go to state 592
-    dig_flot        go to state 593
-    dig_perd        go to state 594
-    dig_halc        go to state 595
-    dig_tarn        go to state 596
-    dig_rald        go to state 597
-    dig_crot        go to state 598
-    dig_gant        go to state 599
-    dig_pung        go to state 600
-    dig_garc        go to state 601
-    dig_flec        go to state 602
-    dig_sard        go to state 603
-    dig_plom        go to state 604
-    dig_grun        go to state 605
-    dig_delc        go to state 606
-    dig_brip        go to state 607
-    dig_griv        go to state 608
-    dig_veck        go to state 609
-    dig_spal        go to state 610
-    dig_neft        go to state 611
-    dig_wamp        go to state 612
-    dig_frez        go to state 613
+    dig_stur        go to state 650
+    dig_lome        go to state 651
+    dig_flot        go to state 652
+    dig_perd        go to state 653
+    dig_halc        go to state 654
+    dig_tarn        go to state 655
+    dig_rald        go to state 656
+    dig_crot        go to state 657
+    dig_gant        go to state 658
+    dig_pung        go to state 659
+    dig_garc        go to state 660
+    dig_flec        go to state 661
+    dig_sard        go to state 662
+    dig_plom        go to state 663
+    dig_grun        go to state 664
+    dig_delc        go to state 665
+    dig_brip        go to state 666
+    dig_griv        go to state 667
+    dig_veck        go to state 668
+    dig_spal        go to state 669
+    dig_neft        go to state 670
+    dig_wamp        go to state 671
+    dig_frez        go to state 672
 
 
 state 442
@@ -11411,11 +11504,11 @@ state 444
 
   135 tall_norm: dig_neft w . tall_norm_neft
 
-    '~'  shift, and go to state 572
+    '~'  shift, and go to state 631
     ':'  shift, and go to state 19
     '-'  shift, and go to state 20
     '='  shift, and go to state 21
-    '`'  shift, and go to state 573
+    '`'  shift, and go to state 632
     '|'  shift, and go to state 25
     '^'  shift, and go to state 26
     '&'  shift, and go to state 27
@@ -11424,46 +11517,46 @@ state 444
     tall            go to state 675
     tall_norm       go to state 46
     tall_norm_neft  go to state 676
-    dig_pont        go to state 576
-    dig_rulf        go to state 577
-    dig_glem        go to state 578
-    dig_lisc        go to state 579
-    dig_slon        go to state 580
-    dig_stiv        go to state 581
-    dig_stol        go to state 582
-    dig_feng        go to state 583
-    dig_prex        go to state 584
-    dig_zact        go to state 585
-    dig_glax        go to state 586
-    dig_boce        go to state 587
-    dig_peld        go to state 588
-    dig_trup        go to state 589
-    dig_forb        go to state 590
+    dig_pont        go to state 635
+    dig_rulf        go to state 636
+    dig_glem        go to state 637
+    dig_lisc        go to state 638
+    dig_slon        go to state 639
+    dig_stiv        go to state 640
+    dig_stol        go to state 641
+    dig_feng        go to state 642
+    dig_prex        go to state 643
+    dig_zact        go to state 644
+    dig_glax        go to state 645
+    dig_boce        go to state 646
+    dig_peld        go to state 647
+    dig_trup        go to state 648
+    dig_forb        go to state 649
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 591
-    dig_lome        go to state 592
-    dig_flot        go to state 593
-    dig_perd        go to state 594
-    dig_halc        go to state 595
-    dig_tarn        go to state 596
-    dig_rald        go to state 597
-    dig_crot        go to state 598
-    dig_gant        go to state 599
-    dig_pung        go to state 600
-    dig_garc        go to state 601
-    dig_flec        go to state 602
-    dig_sard        go to state 603
-    dig_plom        go to state 604
-    dig_grun        go to state 605
-    dig_delc        go to state 606
-    dig_brip        go to state 607
-    dig_griv        go to state 608
-    dig_veck        go to state 609
-    dig_spal        go to state 610
-    dig_neft        go to state 611
-    dig_wamp        go to state 612
-    dig_frez        go to state 613
+    dig_stur        go to state 650
+    dig_lome        go to state 651
+    dig_flot        go to state 652
+    dig_perd        go to state 653
+    dig_halc        go to state 654
+    dig_tarn        go to state 655
+    dig_rald        go to state 656
+    dig_crot        go to state 657
+    dig_gant        go to state 658
+    dig_pung        go to state 659
+    dig_garc        go to state 660
+    dig_flec        go to state 661
+    dig_sard        go to state 662
+    dig_plom        go to state 663
+    dig_grun        go to state 664
+    dig_delc        go to state 665
+    dig_brip        go to state 666
+    dig_griv        go to state 667
+    dig_veck        go to state 668
+    dig_spal        go to state 669
+    dig_neft        go to state 670
+    dig_wamp        go to state 671
+    dig_frez        go to state 672
 
 
 state 445
@@ -11484,11 +11577,11 @@ state 447
 
   136 tall_norm: dig_wamp w . tall_norm_wamp
 
-    '~'  shift, and go to state 572
+    '~'  shift, and go to state 631
     ':'  shift, and go to state 19
     '-'  shift, and go to state 20
     '='  shift, and go to state 21
-    '`'  shift, and go to state 573
+    '`'  shift, and go to state 632
     '|'  shift, and go to state 25
     '^'  shift, and go to state 26
     '&'  shift, and go to state 27
@@ -11497,46 +11590,46 @@ state 447
     tall            go to state 677
     tall_norm       go to state 46
     tall_norm_wamp  go to state 678
-    dig_pont        go to state 576
-    dig_rulf        go to state 577
-    dig_glem        go to state 578
-    dig_lisc        go to state 579
-    dig_slon        go to state 580
-    dig_stiv        go to state 581
-    dig_stol        go to state 582
-    dig_feng        go to state 583
-    dig_prex        go to state 584
-    dig_zact        go to state 585
-    dig_glax        go to state 586
-    dig_boce        go to state 587
-    dig_peld        go to state 588
-    dig_trup        go to state 589
-    dig_forb        go to state 590
+    dig_pont        go to state 635
+    dig_rulf        go to state 636
+    dig_glem        go to state 637
+    dig_lisc        go to state 638
+    dig_slon        go to state 639
+    dig_stiv        go to state 640
+    dig_stol        go to state 641
+    dig_feng        go to state 642
+    dig_prex        go to state 643
+    dig_zact        go to state 644
+    dig_glax        go to state 645
+    dig_boce        go to state 646
+    dig_peld        go to state 647
+    dig_trup        go to state 648
+    dig_forb        go to state 649
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 591
-    dig_lome        go to state 592
-    dig_flot        go to state 593
-    dig_perd        go to state 594
-    dig_halc        go to state 595
-    dig_tarn        go to state 596
-    dig_rald        go to state 597
-    dig_crot        go to state 598
-    dig_gant        go to state 599
-    dig_pung        go to state 600
-    dig_garc        go to state 601
-    dig_flec        go to state 602
-    dig_sard        go to state 603
-    dig_plom        go to state 604
-    dig_grun        go to state 605
-    dig_delc        go to state 606
-    dig_brip        go to state 607
-    dig_griv        go to state 608
-    dig_veck        go to state 609
-    dig_spal        go to state 610
-    dig_neft        go to state 611
-    dig_wamp        go to state 612
-    dig_frez        go to state 613
+    dig_stur        go to state 650
+    dig_lome        go to state 651
+    dig_flot        go to state 652
+    dig_perd        go to state 653
+    dig_halc        go to state 654
+    dig_tarn        go to state 655
+    dig_rald        go to state 656
+    dig_crot        go to state 657
+    dig_gant        go to state 658
+    dig_pung        go to state 659
+    dig_garc        go to state 660
+    dig_flec        go to state 661
+    dig_sard        go to state 662
+    dig_plom        go to state 663
+    dig_grun        go to state 664
+    dig_delc        go to state 665
+    dig_brip        go to state 666
+    dig_griv        go to state 667
+    dig_veck        go to state 668
+    dig_spal        go to state 669
+    dig_neft        go to state 670
+    dig_wamp        go to state 671
+    dig_frez        go to state 672
 
 
 state 448
@@ -11557,11 +11650,11 @@ state 450
 
   137 tall_norm: dig_frez w . tall_norm_frez
 
-    '~'  shift, and go to state 572
+    '~'  shift, and go to state 631
     ':'  shift, and go to state 19
     '-'  shift, and go to state 20
     '='  shift, and go to state 21
-    '`'  shift, and go to state 573
+    '`'  shift, and go to state 632
     '|'  shift, and go to state 25
     '^'  shift, and go to state 26
     '&'  shift, and go to state 27
@@ -11570,46 +11663,46 @@ state 450
     tall            go to state 679
     tall_norm       go to state 46
     tall_norm_frez  go to state 680
-    dig_pont        go to state 576
-    dig_rulf        go to state 577
-    dig_glem        go to state 578
-    dig_lisc        go to state 579
-    dig_slon        go to state 580
-    dig_stiv        go to state 581
-    dig_stol        go to state 582
-    dig_feng        go to state 583
-    dig_prex        go to state 584
-    dig_zact        go to state 585
-    dig_glax        go to state 586
-    dig_boce        go to state 587
-    dig_peld        go to state 588
-    dig_trup        go to state 589
-    dig_forb        go to state 590
+    dig_pont        go to state 635
+    dig_rulf        go to state 636
+    dig_glem        go to state 637
+    dig_lisc        go to state 638
+    dig_slon        go to state 639
+    dig_stiv        go to state 640
+    dig_stol        go to state 641
+    dig_feng        go to state 642
+    dig_prex        go to state 643
+    dig_zact        go to state 644
+    dig_glax        go to state 645
+    dig_boce        go to state 646
+    dig_peld        go to state 647
+    dig_trup        go to state 648
+    dig_forb        go to state 649
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 591
-    dig_lome        go to state 592
-    dig_flot        go to state 593
-    dig_perd        go to state 594
-    dig_halc        go to state 595
-    dig_tarn        go to state 596
-    dig_rald        go to state 597
-    dig_crot        go to state 598
-    dig_gant        go to state 599
-    dig_pung        go to state 600
-    dig_garc        go to state 601
-    dig_flec        go to state 602
-    dig_sard        go to state 603
-    dig_plom        go to state 604
-    dig_grun        go to state 605
-    dig_delc        go to state 606
-    dig_brip        go to state 607
-    dig_griv        go to state 608
-    dig_veck        go to state 609
-    dig_spal        go to state 610
-    dig_neft        go to state 611
-    dig_wamp        go to state 612
-    dig_frez        go to state 613
+    dig_stur        go to state 650
+    dig_lome        go to state 651
+    dig_flot        go to state 652
+    dig_perd        go to state 653
+    dig_halc        go to state 654
+    dig_tarn        go to state 655
+    dig_rald        go to state 656
+    dig_crot        go to state 657
+    dig_gant        go to state 658
+    dig_pung        go to state 659
+    dig_garc        go to state 660
+    dig_flec        go to state 661
+    dig_sard        go to state 662
+    dig_plom        go to state 663
+    dig_grun        go to state 664
+    dig_delc        go to state 665
+    dig_brip        go to state 666
+    dig_griv        go to state 667
+    dig_veck        go to state 668
+    dig_spal        go to state 669
+    dig_neft        go to state 670
+    dig_wamp        go to state 671
+    dig_frez        go to state 672
 
 
 state 451
@@ -11758,7 +11851,7 @@ state 452
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -12169,7 +12262,7 @@ state 462
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -12897,7 +12990,7 @@ state 499
 
 state 500
 
-    7 wide: wide_core '(' nail_wide_star . ')'
+   10 wide_odd: rope '(' nail_wide_star . ')'
 
     ')'  shift, and go to state 718
 
@@ -13162,7 +13255,7 @@ state 511
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -13267,7 +13360,7 @@ state 514
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -13372,7 +13465,7 @@ state 517
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -13477,7 +13570,7 @@ state 520
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -13582,7 +13675,7 @@ state 523
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -13687,7 +13780,7 @@ state 526
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -13792,7 +13885,7 @@ state 529
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -13933,7 +14026,7 @@ state 535
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -14040,7 +14133,7 @@ state 538
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -14156,7 +14249,7 @@ state 542
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -14320,7 +14413,7 @@ state 556
 
 state 557
 
-   74 wide_norm_serd: '{' g . skel_w w wide g '}'
+   74 wide_norm_stur: '{' g . skel_w w wide g '}'
 
     '('  shift, and go to state 411
     '['  shift, and go to state 412
@@ -14433,14 +14526,14 @@ state 558
     'Y'  shift, and go to state 196
     'Z'  shift, and go to state 197
 
-    tok_mark      go to state 659
+    tok_mark      go to state 619
     tok_mark_pre  go to state 214
     ca            go to state 216
 
 
 state 559
 
-  115 tall_norm: dig_serd w tall_norm_serd .
+  115 tall_norm: dig_stur w tall_norm_stur .
 
     $default  reduce using rule 115 (tall_norm)
 
@@ -14475,7 +14568,7 @@ state 562
 
 state 563
 
-  155 tall_norm_serd: skel_t_item_some . dig_stop w gene
+  155 tall_norm_stur: skel_t_item_some . dig_stop w gene
 
     '='  shift, and go to state 745
 
@@ -14590,543 +14683,33 @@ state 571
 
 state 572
 
-  341 dig_slon: '~' . '>'
-  342 dig_stiv: '~' . '<'
-
-    '<'  shift, and go to state 217
-    '>'  shift, and go to state 218
-
-
-state 573
-
-  338 dig_rulf: '`' . '<'
-
-    '<'  shift, and go to state 236
-
-
-state 574
-
-  156 tall_norm_lome: tall .
+  156 tall_norm_lome: gene .
 
     $default  reduce using rule 156 (tall_norm_lome)
 
 
-state 575
+state 573
 
   116 tall_norm: dig_lome w tall_norm_lome .
 
     $default  reduce using rule 116 (tall_norm)
 
 
-state 576
+state 574
 
-   98 tall_norm: dig_pont . w tall_norm_pont
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 279
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 577
-
-   99 tall_norm: dig_rulf . w tall_norm_rulf
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 284
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 578
-
-  100 tall_norm: dig_glem . w tall_norm_glem
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 287
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 579
-
-  101 tall_norm: dig_lisc . w tall_norm_lisc
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 290
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 580
-
-  102 tall_norm: dig_slon . w tall_norm_slon
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 293
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 581
-
-  103 tall_norm: dig_stiv . w tall_norm_stiv
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 296
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 582
-
-  104 tall_norm: dig_stol . w tall_norm_stol
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 299
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 583
-
-  105 tall_norm: dig_feng . w tall_norm_feng
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 302
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 584
-
-  106 tall_norm: dig_prex . w tall_norm_prex
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 305
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 585
-
-  107 tall_norm: dig_zact . w tall_norm_zact
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 308
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 586
-
-  108 tall_norm: dig_glax . w tall_norm_glax
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 311
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 587
-
-  109 tall_norm: dig_boce . w tall_norm_boce
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 314
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 588
-
-  110 tall_norm: dig_peld . w tall_norm_peld
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 317
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 589
-
-  111 tall_norm: dig_trup . w tall_norm_trup
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 360
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 590
-
-  112 tall_norm: dig_forb . w tall_norm_forb
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 363
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 591
-
-  115 tall_norm: dig_serd . w tall_norm_serd
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 368
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 592
-
-  116 tall_norm: dig_lome . w tall_norm_lome
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 371
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 593
-
-  117 tall_norm: dig_flot . w tall_norm_flot
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 374
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 594
-
-  118 tall_norm: dig_perd . w tall_norm_perd
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 377
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 595
-
-  119 tall_norm: dig_halc . w tall_norm_halc
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 380
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 596
-
-  120 tall_norm: dig_tarn . w tall_norm_tarn
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 383
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 597
-
-  121 tall_norm: dig_rald . w tall_norm_rald
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 386
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 598
-
-  122 tall_norm: dig_crot . w tall_norm_crot
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 389
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 599
-
-  123 tall_norm: dig_gant . w tall_norm_gant
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 392
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 600
-
-  124 tall_norm: dig_pung . w tall_norm_pung
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 395
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 601
-
-  125 tall_norm: dig_garc . w tall_norm_garc
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 398
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 602
-
-  126 tall_norm: dig_flec . w tall_norm_flec
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 401
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 603
-
-  127 tall_norm: dig_sard . w tall_norm_sard
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 404
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 604
-
-  128 tall_norm: dig_plom . w tall_norm_plom
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 407
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 605
-
-  129 tall_norm: dig_grun . w tall_norm_grun
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 410
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 606
-
-  130 tall_norm: dig_delc . w tall_norm_delc
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 429
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 607
-
-  131 tall_norm: dig_brip . w tall_norm_brip
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 432
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 608
-
-  132 tall_norm: dig_griv . w tall_norm_griv
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 435
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 609
-
-  133 tall_norm: dig_veck . w tall_norm_veck
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 438
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 610
-
-  134 tall_norm: dig_spal . w tall_norm_spal
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 441
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 611
-
-  135 tall_norm: dig_neft . w tall_norm_neft
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 444
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 612
-
-  136 tall_norm: dig_wamp . w tall_norm_wamp
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 447
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 613
-
-  137 tall_norm: dig_frez . w tall_norm_frez
-
-    ':'   shift, and go to state 3
-    '\n'  shift, and go to state 4
-    ' '   shift, and go to state 5
-
-    w        go to state 450
-    comment  go to state 280
-    cw       go to state 281
-
-
-state 614
-
-  157 tall_norm_flot: tall .
+  157 tall_norm_flot: gene .
 
     $default  reduce using rule 157 (tall_norm_flot)
 
 
-state 615
+state 575
 
   117 tall_norm: dig_flot w tall_norm_flot .
 
     $default  reduce using rule 117 (tall_norm)
 
 
-state 616
+state 576
 
    77 wide_norm_perd: '{' g . wide w wide g '}'
 
@@ -15185,7 +14768,7 @@ state 616
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -15211,7 +14794,7 @@ state 616
     cn             go to state 94
 
 
-state 617
+state 577
 
   158 tall_norm_perd: gene . w gene
 
@@ -15224,14 +14807,14 @@ state 617
     cw       go to state 281
 
 
-state 618
+state 578
 
   118 tall_norm: dig_perd w tall_norm_perd .
 
     $default  reduce using rule 118 (tall_norm)
 
 
-state 619
+state 579
 
    78 wide_norm_halc: '{' g . wide w wide g '}'
 
@@ -15290,7 +14873,7 @@ state 619
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -15316,7 +14899,7 @@ state 619
     cn             go to state 94
 
 
-state 620
+state 580
 
   159 tall_norm_halc: gene . w gene
 
@@ -15329,14 +14912,14 @@ state 620
     cw       go to state 281
 
 
-state 621
+state 581
 
   119 tall_norm: dig_halc w tall_norm_halc .
 
     $default  reduce using rule 119 (tall_norm)
 
 
-state 622
+state 582
 
    79 wide_norm_tarn: '{' g . wide w wide w wide g '}'
 
@@ -15395,7 +14978,7 @@ state 622
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -15421,7 +15004,7 @@ state 622
     cn             go to state 94
 
 
-state 623
+state 583
 
   160 tall_norm_tarn: gene . w gene w gene
 
@@ -15434,42 +15017,42 @@ state 623
     cw       go to state 281
 
 
-state 624
+state 584
 
   120 tall_norm: dig_tarn w tall_norm_tarn .
 
     $default  reduce using rule 120 (tall_norm)
 
 
-state 625
+state 585
 
   161 tall_norm_rald: gene .
 
     $default  reduce using rule 161 (tall_norm_rald)
 
 
-state 626
+state 586
 
   121 tall_norm: dig_rald w tall_norm_rald .
 
     $default  reduce using rule 121 (tall_norm)
 
 
-state 627
+state 587
 
-  162 tall_norm_crot: tall .
+  162 tall_norm_crot: gene .
 
     $default  reduce using rule 162 (tall_norm_crot)
 
 
-state 628
+state 588
 
   122 tall_norm: dig_crot w tall_norm_crot .
 
     $default  reduce using rule 122 (tall_norm)
 
 
-state 629
+state 589
 
    82 wide_norm_gant: '{' g . wide w nail_wide_star '}'
 
@@ -15528,7 +15111,7 @@ state 629
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -15554,7 +15137,7 @@ state 629
     cn             go to state 94
 
 
-state 630
+state 590
 
   163 tall_norm_gant: gene . w nail_tall_star dig_stop
 
@@ -15567,14 +15150,14 @@ state 630
     cw       go to state 281
 
 
-state 631
+state 591
 
   123 tall_norm: dig_gant w tall_norm_gant .
 
     $default  reduce using rule 123 (tall_norm)
 
 
-state 632
+state 592
 
    83 wide_norm_pung: '{' g . wide w wide g '}'
 
@@ -15633,7 +15216,7 @@ state 632
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -15659,7 +15242,7 @@ state 632
     cn             go to state 94
 
 
-state 633
+state 593
 
   164 tall_norm_pung: gene . w tall
 
@@ -15672,14 +15255,14 @@ state 633
     cw       go to state 281
 
 
-state 634
+state 594
 
   124 tall_norm: dig_pung w tall_norm_pung .
 
     $default  reduce using rule 124 (tall_norm)
 
 
-state 635
+state 595
 
    84 wide_norm_garc: '{' g . wide w wide_some '}'
 
@@ -15738,7 +15321,7 @@ state 635
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -15764,7 +15347,7 @@ state 635
     cn             go to state 94
 
 
-state 636
+state 596
 
   165 tall_norm_garc: gene . w tall_some dig_stop
 
@@ -15777,28 +15360,28 @@ state 636
     cw       go to state 281
 
 
-state 637
+state 597
 
   125 tall_norm: dig_garc w tall_norm_garc .
 
     $default  reduce using rule 125 (tall_norm)
 
 
-state 638
+state 598
 
   166 tall_norm_flec: gene .
 
     $default  reduce using rule 166 (tall_norm_flec)
 
 
-state 639
+state 599
 
   126 tall_norm: dig_flec w tall_norm_flec .
 
     $default  reduce using rule 126 (tall_norm)
 
 
-state 640
+state 600
 
    86 wide_norm_sard: '{' g . item_wide_some '}'
 
@@ -15964,7 +15547,7 @@ state 640
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -15991,21 +15574,21 @@ state 640
     cn              go to state 94
 
 
-state 641
+state 601
 
   192 item_tall: gene .
 
     $default  reduce using rule 192 (item_tall)
 
 
-state 642
+state 602
 
   127 tall_norm: dig_sard w tall_norm_sard .
 
     $default  reduce using rule 127 (tall_norm)
 
 
-state 643
+state 603
 
   195 item_tall_some: item_tall . w
   196               | item_tall . w item_tall_some
@@ -16019,7 +15602,7 @@ state 643
     cw       go to state 281
 
 
-state 644
+state 604
 
   167 tall_norm_sard: item_tall_some . dig_stop
 
@@ -16028,7 +15611,7 @@ state 644
     dig_stop  go to state 787
 
 
-state 645
+state 605
 
   191 item_tall: tok_mark . g '=' g gene
 
@@ -16043,7 +15626,7 @@ state 645
     cw       go to state 9
 
 
-state 646
+state 606
 
    87 wide_norm_plom: '{' g . wide_some '}'
 
@@ -16103,7 +15686,7 @@ state 646
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -16129,7 +15712,7 @@ state 646
     cn             go to state 94
 
 
-state 647
+state 607
 
   178 tall_some: gene . w
   179          | gene . w tall_some
@@ -16143,14 +15726,14 @@ state 647
     cw       go to state 281
 
 
-state 648
+state 608
 
   128 tall_norm: dig_plom w tall_norm_plom .
 
     $default  reduce using rule 128 (tall_norm)
 
 
-state 649
+state 609
 
   168 tall_norm_plom: tall_some . dig_stop
 
@@ -16159,7 +15742,7 @@ state 649
     dig_stop  go to state 791
 
 
-state 650
+state 610
 
    88 wide_norm_grun: '{' g . nail_wide_star ':' w wide '}'
 
@@ -16179,14 +15762,14 @@ state 650
     nail_wide_star  go to state 792
 
 
-state 651
+state 611
 
   129 tall_norm: dig_grun w tall_norm_grun .
 
     $default  reduce using rule 129 (tall_norm)
 
 
-state 652
+state 612
 
   217 nail_tall: rope . w tall
 
@@ -16199,7 +15782,7 @@ state 652
     cw       go to state 281
 
 
-state 653
+state 613
 
   218 nail_tall_some: nail_tall . w
   219               | nail_tall . w nail_tall_some
@@ -16213,14 +15796,14 @@ state 653
     cw       go to state 281
 
 
-state 654
+state 614
 
   221 nail_tall_star: nail_tall_some .
 
     $default  reduce using rule 221 (nail_tall_star)
 
 
-state 655
+state 615
 
   169 tall_norm_grun: nail_tall_star . dig_stop w gene
 
@@ -16229,7 +15812,7 @@ state 655
     dig_stop  go to state 795
 
 
-state 656
+state 616
 
   233 skel_w_core: '(' g . skel_w_some ')'
 
@@ -16274,7 +15857,7 @@ state 656
     cn            go to state 94
 
 
-state 657
+state 617
 
   231 skel_w_core: '[' g . skel_w_item_some ']'
 
@@ -16426,7 +16009,7 @@ state 657
     cn                go to state 94
 
 
-state 658
+state 618
 
   238 skel_w_stat: '0' 'x' . tok_chex
 
@@ -16453,14 +16036,14 @@ state 658
     cn            go to state 486
 
 
-state 659
+state 619
 
   240 skel_w_stat: '%' tok_mark .
 
     $default  reduce using rule 240 (skel_w_stat)
 
 
-state 660
+state 620
 
   228 skel_w_core: '{' g . wide g '}'
 
@@ -16519,7 +16102,7 @@ state 660
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -16545,7 +16128,7 @@ state 660
     cn             go to state 94
 
 
-state 661
+state 621
 
   226 skel_w_core: '^' skel_w .
   232            | '^' skel_w . ':' skel_w
@@ -16556,7 +16139,7 @@ state 661
     $default  reduce using rule 226 (skel_w_core)
 
 
-state 662
+state 622
 
   223 skel_w: skel_w_core '+' . skel_w
 
@@ -16600,7 +16183,7 @@ state 662
     cn            go to state 94
 
 
-state 663
+state 623
 
   224 skel_w: skel_w_core '|' . skel_w
 
@@ -16644,35 +16227,35 @@ state 663
     cn            go to state 94
 
 
-state 664
+state 624
 
   130 tall_norm: dig_delc w tall_norm_delc .
 
     $default  reduce using rule 130 (tall_norm)
 
 
-state 665
+state 625
 
   170 tall_norm_delc: skel_t .
 
     $default  reduce using rule 170 (tall_norm_delc)
 
 
-state 666
+state 626
 
   131 tall_norm: dig_brip w tall_norm_brip .
 
     $default  reduce using rule 131 (tall_norm)
 
 
-state 667
+state 627
 
   171 tall_norm_brip: skel_t .
 
     $default  reduce using rule 171 (tall_norm_brip)
 
 
-state 668
+state 628
 
    91 wide_norm_griv: '{' g . wide w hume '}'
 
@@ -16731,7 +16314,7 @@ state 668
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -16757,7 +16340,7 @@ state 668
     cn             go to state 94
 
 
-state 669
+state 629
 
   172 tall_norm_griv: gene . w hume
 
@@ -16770,25 +16353,535 @@ state 669
     cw       go to state 281
 
 
-state 670
+state 630
 
   132 tall_norm: dig_griv w tall_norm_griv .
 
     $default  reduce using rule 132 (tall_norm)
 
 
-state 671
+state 631
+
+  341 dig_slon: '~' . '>'
+  342 dig_stiv: '~' . '<'
+
+    '<'  shift, and go to state 217
+    '>'  shift, and go to state 218
+
+
+state 632
+
+  338 dig_rulf: '`' . '<'
+
+    '<'  shift, and go to state 236
+
+
+state 633
 
   173 tall_norm_veck: tall .
 
     $default  reduce using rule 173 (tall_norm_veck)
 
 
-state 672
+state 634
 
   133 tall_norm: dig_veck w tall_norm_veck .
 
     $default  reduce using rule 133 (tall_norm)
+
+
+state 635
+
+   98 tall_norm: dig_pont . w tall_norm_pont
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 279
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 636
+
+   99 tall_norm: dig_rulf . w tall_norm_rulf
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 284
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 637
+
+  100 tall_norm: dig_glem . w tall_norm_glem
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 287
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 638
+
+  101 tall_norm: dig_lisc . w tall_norm_lisc
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 290
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 639
+
+  102 tall_norm: dig_slon . w tall_norm_slon
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 293
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 640
+
+  103 tall_norm: dig_stiv . w tall_norm_stiv
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 296
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 641
+
+  104 tall_norm: dig_stol . w tall_norm_stol
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 299
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 642
+
+  105 tall_norm: dig_feng . w tall_norm_feng
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 302
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 643
+
+  106 tall_norm: dig_prex . w tall_norm_prex
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 305
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 644
+
+  107 tall_norm: dig_zact . w tall_norm_zact
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 308
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 645
+
+  108 tall_norm: dig_glax . w tall_norm_glax
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 311
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 646
+
+  109 tall_norm: dig_boce . w tall_norm_boce
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 314
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 647
+
+  110 tall_norm: dig_peld . w tall_norm_peld
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 317
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 648
+
+  111 tall_norm: dig_trup . w tall_norm_trup
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 360
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 649
+
+  112 tall_norm: dig_forb . w tall_norm_forb
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 363
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 650
+
+  115 tall_norm: dig_stur . w tall_norm_stur
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 368
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 651
+
+  116 tall_norm: dig_lome . w tall_norm_lome
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 371
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 652
+
+  117 tall_norm: dig_flot . w tall_norm_flot
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 374
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 653
+
+  118 tall_norm: dig_perd . w tall_norm_perd
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 377
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 654
+
+  119 tall_norm: dig_halc . w tall_norm_halc
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 380
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 655
+
+  120 tall_norm: dig_tarn . w tall_norm_tarn
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 383
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 656
+
+  121 tall_norm: dig_rald . w tall_norm_rald
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 386
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 657
+
+  122 tall_norm: dig_crot . w tall_norm_crot
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 389
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 658
+
+  123 tall_norm: dig_gant . w tall_norm_gant
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 392
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 659
+
+  124 tall_norm: dig_pung . w tall_norm_pung
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 395
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 660
+
+  125 tall_norm: dig_garc . w tall_norm_garc
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 398
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 661
+
+  126 tall_norm: dig_flec . w tall_norm_flec
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 401
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 662
+
+  127 tall_norm: dig_sard . w tall_norm_sard
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 404
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 663
+
+  128 tall_norm: dig_plom . w tall_norm_plom
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 407
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 664
+
+  129 tall_norm: dig_grun . w tall_norm_grun
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 410
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 665
+
+  130 tall_norm: dig_delc . w tall_norm_delc
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 429
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 666
+
+  131 tall_norm: dig_brip . w tall_norm_brip
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 432
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 667
+
+  132 tall_norm: dig_griv . w tall_norm_griv
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 435
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 668
+
+  133 tall_norm: dig_veck . w tall_norm_veck
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 438
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 669
+
+  134 tall_norm: dig_spal . w tall_norm_spal
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 441
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 670
+
+  135 tall_norm: dig_neft . w tall_norm_neft
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 444
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 671
+
+  136 tall_norm: dig_wamp . w tall_norm_wamp
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 447
+    comment  go to state 280
+    cw       go to state 281
+
+
+state 672
+
+  137 tall_norm: dig_frez . w tall_norm_frez
+
+    ':'   shift, and go to state 3
+    '\n'  shift, and go to state 4
+    ' '   shift, and go to state 5
+
+    w        go to state 450
+    comment  go to state 280
+    cw       go to state 281
 
 
 state 673
@@ -17430,7 +17523,7 @@ state 701
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -17680,7 +17773,7 @@ state 706
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -17830,7 +17923,7 @@ state 715
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -17880,9 +17973,9 @@ state 717
 
 state 718
 
-    7 wide: wide_core '(' nail_wide_star ')' .
+   10 wide_odd: rope '(' nail_wide_star ')' .
 
-    $default  reduce using rule 7 (wide)
+    $default  reduce using rule 10 (wide_odd)
 
 
 state 719
@@ -17969,7 +18062,7 @@ state 721
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -18072,7 +18165,7 @@ state 723
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -18175,7 +18268,7 @@ state 725
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -18278,7 +18371,7 @@ state 727
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -18381,7 +18474,7 @@ state 729
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -18484,7 +18577,7 @@ state 731
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -18587,7 +18680,7 @@ state 733
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -18690,7 +18783,7 @@ state 735
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -18793,7 +18886,7 @@ state 737
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -18951,7 +19044,7 @@ state 744
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -19085,7 +19178,7 @@ state 750
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -19208,7 +19301,7 @@ state 754
 
 state 755
 
-   74 wide_norm_serd: '{' g skel_w . w wide g '}'
+   74 wide_norm_stur: '{' g skel_w . w wide g '}'
 
     ':'   shift, and go to state 3
     '\n'  shift, and go to state 4
@@ -19432,7 +19525,7 @@ state 763
 
 state 764
 
-  155 tall_norm_serd: skel_t_item_some dig_stop . w gene
+  155 tall_norm_stur: skel_t_item_some dig_stop . w gene
 
     ':'   shift, and go to state 3
     '\n'  shift, and go to state 4
@@ -19506,11 +19599,11 @@ state 767
 
   249 skel_t: dig_flit w . tall
 
-    '~'  shift, and go to state 572
+    '~'  shift, and go to state 631
     ':'  shift, and go to state 19
     '-'  shift, and go to state 20
     '='  shift, and go to state 21
-    '`'  shift, and go to state 573
+    '`'  shift, and go to state 632
     '|'  shift, and go to state 25
     '^'  shift, and go to state 26
     '&'  shift, and go to state 27
@@ -19518,46 +19611,46 @@ state 767
 
     tall       go to state 875
     tall_norm  go to state 46
-    dig_pont   go to state 576
-    dig_rulf   go to state 577
-    dig_glem   go to state 578
-    dig_lisc   go to state 579
-    dig_slon   go to state 580
-    dig_stiv   go to state 581
-    dig_stol   go to state 582
-    dig_feng   go to state 583
-    dig_prex   go to state 584
-    dig_zact   go to state 585
-    dig_glax   go to state 586
-    dig_boce   go to state 587
-    dig_peld   go to state 588
-    dig_trup   go to state 589
-    dig_forb   go to state 590
+    dig_pont   go to state 635
+    dig_rulf   go to state 636
+    dig_glem   go to state 637
+    dig_lisc   go to state 638
+    dig_slon   go to state 639
+    dig_stiv   go to state 640
+    dig_stol   go to state 641
+    dig_feng   go to state 642
+    dig_prex   go to state 643
+    dig_zact   go to state 644
+    dig_glax   go to state 645
+    dig_boce   go to state 646
+    dig_peld   go to state 647
+    dig_trup   go to state 648
+    dig_forb   go to state 649
     dig_malk   go to state 69
     dig_blin   go to state 70
-    dig_serd   go to state 591
-    dig_lome   go to state 592
-    dig_flot   go to state 593
-    dig_perd   go to state 594
-    dig_halc   go to state 595
-    dig_tarn   go to state 596
-    dig_rald   go to state 597
-    dig_crot   go to state 598
-    dig_gant   go to state 599
-    dig_pung   go to state 600
-    dig_garc   go to state 601
-    dig_flec   go to state 602
-    dig_sard   go to state 603
-    dig_plom   go to state 604
-    dig_grun   go to state 605
-    dig_delc   go to state 606
-    dig_brip   go to state 607
-    dig_griv   go to state 608
-    dig_veck   go to state 609
-    dig_spal   go to state 610
-    dig_neft   go to state 611
-    dig_wamp   go to state 612
-    dig_frez   go to state 613
+    dig_stur   go to state 650
+    dig_lome   go to state 651
+    dig_flot   go to state 652
+    dig_perd   go to state 653
+    dig_halc   go to state 654
+    dig_tarn   go to state 655
+    dig_rald   go to state 656
+    dig_crot   go to state 657
+    dig_gant   go to state 658
+    dig_pung   go to state 659
+    dig_garc   go to state 660
+    dig_flec   go to state 661
+    dig_sard   go to state 662
+    dig_plom   go to state 663
+    dig_grun   go to state 664
+    dig_delc   go to state 665
+    dig_brip   go to state 666
+    dig_griv   go to state 667
+    dig_veck   go to state 668
+    dig_spal   go to state 669
+    dig_neft   go to state 670
+    dig_wamp   go to state 671
+    dig_frez   go to state 672
 
 
 state 768
@@ -20006,7 +20099,7 @@ state 774
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -20109,7 +20202,7 @@ state 776
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -20212,7 +20305,7 @@ state 778
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -20262,12 +20355,12 @@ state 780
     '='       reduce using rule 220 (nail_tall_star)
     $default  reduce using rule 210 (rope_tick)
 
-    rope            go to state 652
+    rope            go to state 612
     rope_hook       go to state 48
     rope_buck       go to state 49
     rope_tick       go to state 50
-    nail_tall       go to state 653
-    nail_tall_some  go to state 654
+    nail_tall       go to state 613
+    nail_tall_some  go to state 614
     nail_tall_star  go to state 889
 
 
@@ -20288,11 +20381,11 @@ state 782
 
   164 tall_norm_pung: gene w . tall
 
-    '~'  shift, and go to state 572
+    '~'  shift, and go to state 631
     ':'  shift, and go to state 19
     '-'  shift, and go to state 20
     '='  shift, and go to state 21
-    '`'  shift, and go to state 573
+    '`'  shift, and go to state 632
     '|'  shift, and go to state 25
     '^'  shift, and go to state 26
     '&'  shift, and go to state 27
@@ -20300,46 +20393,46 @@ state 782
 
     tall       go to state 891
     tall_norm  go to state 46
-    dig_pont   go to state 576
-    dig_rulf   go to state 577
-    dig_glem   go to state 578
-    dig_lisc   go to state 579
-    dig_slon   go to state 580
-    dig_stiv   go to state 581
-    dig_stol   go to state 582
-    dig_feng   go to state 583
-    dig_prex   go to state 584
-    dig_zact   go to state 585
-    dig_glax   go to state 586
-    dig_boce   go to state 587
-    dig_peld   go to state 588
-    dig_trup   go to state 589
-    dig_forb   go to state 590
+    dig_pont   go to state 635
+    dig_rulf   go to state 636
+    dig_glem   go to state 637
+    dig_lisc   go to state 638
+    dig_slon   go to state 639
+    dig_stiv   go to state 640
+    dig_stol   go to state 641
+    dig_feng   go to state 642
+    dig_prex   go to state 643
+    dig_zact   go to state 644
+    dig_glax   go to state 645
+    dig_boce   go to state 646
+    dig_peld   go to state 647
+    dig_trup   go to state 648
+    dig_forb   go to state 649
     dig_malk   go to state 69
     dig_blin   go to state 70
-    dig_serd   go to state 591
-    dig_lome   go to state 592
-    dig_flot   go to state 593
-    dig_perd   go to state 594
-    dig_halc   go to state 595
-    dig_tarn   go to state 596
-    dig_rald   go to state 597
-    dig_crot   go to state 598
-    dig_gant   go to state 599
-    dig_pung   go to state 600
-    dig_garc   go to state 601
-    dig_flec   go to state 602
-    dig_sard   go to state 603
-    dig_plom   go to state 604
-    dig_grun   go to state 605
-    dig_delc   go to state 606
-    dig_brip   go to state 607
-    dig_griv   go to state 608
-    dig_veck   go to state 609
-    dig_spal   go to state 610
-    dig_neft   go to state 611
-    dig_wamp   go to state 612
-    dig_frez   go to state 613
+    dig_stur   go to state 650
+    dig_lome   go to state 651
+    dig_flot   go to state 652
+    dig_perd   go to state 653
+    dig_halc   go to state 654
+    dig_tarn   go to state 655
+    dig_rald   go to state 656
+    dig_crot   go to state 657
+    dig_gant   go to state 658
+    dig_pung   go to state 659
+    dig_garc   go to state 660
+    dig_flec   go to state 661
+    dig_sard   go to state 662
+    dig_plom   go to state 663
+    dig_grun   go to state 664
+    dig_delc   go to state 665
+    dig_brip   go to state 666
+    dig_griv   go to state 667
+    dig_veck   go to state 668
+    dig_spal   go to state 669
+    dig_neft   go to state 670
+    dig_wamp   go to state 671
+    dig_frez   go to state 672
 
 
 state 783
@@ -20387,7 +20480,7 @@ state 784
 
     $default  reduce using rule 210 (rope_tick)
 
-    gene           go to state 647
+    gene           go to state 607
     wide           go to state 40
     wide_core      go to state 41
     wide_odd       go to state 42
@@ -20420,7 +20513,7 @@ state 784
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -20590,7 +20683,7 @@ state 786
     'Y'  [reduce using rule 210 (rope_tick)]
     'Z'  [reduce using rule 210 (rope_tick)]
 
-    gene            go to state 641
+    gene            go to state 601
     wide            go to state 40
     wide_core       go to state 41
     wide_odd        go to state 42
@@ -20598,13 +20691,13 @@ state 786
     wide_norm       go to state 44
     tall            go to state 45
     tall_norm       go to state 46
-    item_tall       go to state 643
+    item_tall       go to state 603
     item_tall_some  go to state 895
     rope            go to state 47
     rope_hook       go to state 48
     rope_buck       go to state 49
     rope_tick       go to state 50
-    tok_mark        go to state 645
+    tok_mark        go to state 605
     tok_mark_pre    go to state 214
     tok_delm        go to state 51
     tok_delm_pre    go to state 52
@@ -20626,7 +20719,7 @@ state 786
     dig_forb        go to state 68
     dig_malk        go to state 69
     dig_blin        go to state 70
-    dig_serd        go to state 71
+    dig_stur        go to state 71
     dig_lome        go to state 72
     dig_flot        go to state 73
     dig_perd        go to state 74
@@ -20708,7 +20801,7 @@ state 790
     '='       [reduce using rule 178 (tall_some)]
     $default  reduce using rule 210 (rope_tick)
 
-    gene           go to state 647
+    gene           go to state 607
     wide           go to state 40
     wide_core      go to state 41
     wide_odd       go to state 42
@@ -20741,7 +20834,7 @@ state 790
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -20785,11 +20878,11 @@ state 793
 
   217 nail_tall: rope w . tall
 
-    '~'  shift, and go to state 572
+    '~'  shift, and go to state 631
     ':'  shift, and go to state 19
     '-'  shift, and go to state 20
     '='  shift, and go to state 21
-    '`'  shift, and go to state 573
+    '`'  shift, and go to state 632
     '|'  shift, and go to state 25
     '^'  shift, and go to state 26
     '&'  shift, and go to state 27
@@ -20797,46 +20890,46 @@ state 793
 
     tall       go to state 900
     tall_norm  go to state 46
-    dig_pont   go to state 576
-    dig_rulf   go to state 577
-    dig_glem   go to state 578
-    dig_lisc   go to state 579
-    dig_slon   go to state 580
-    dig_stiv   go to state 581
-    dig_stol   go to state 582
-    dig_feng   go to state 583
-    dig_prex   go to state 584
-    dig_zact   go to state 585
-    dig_glax   go to state 586
-    dig_boce   go to state 587
-    dig_peld   go to state 588
-    dig_trup   go to state 589
-    dig_forb   go to state 590
+    dig_pont   go to state 635
+    dig_rulf   go to state 636
+    dig_glem   go to state 637
+    dig_lisc   go to state 638
+    dig_slon   go to state 639
+    dig_stiv   go to state 640
+    dig_stol   go to state 641
+    dig_feng   go to state 642
+    dig_prex   go to state 643
+    dig_zact   go to state 644
+    dig_glax   go to state 645
+    dig_boce   go to state 646
+    dig_peld   go to state 647
+    dig_trup   go to state 648
+    dig_forb   go to state 649
     dig_malk   go to state 69
     dig_blin   go to state 70
-    dig_serd   go to state 591
-    dig_lome   go to state 592
-    dig_flot   go to state 593
-    dig_perd   go to state 594
-    dig_halc   go to state 595
-    dig_tarn   go to state 596
-    dig_rald   go to state 597
-    dig_crot   go to state 598
-    dig_gant   go to state 599
-    dig_pung   go to state 600
-    dig_garc   go to state 601
-    dig_flec   go to state 602
-    dig_sard   go to state 603
-    dig_plom   go to state 604
-    dig_grun   go to state 605
-    dig_delc   go to state 606
-    dig_brip   go to state 607
-    dig_griv   go to state 608
-    dig_veck   go to state 609
-    dig_spal   go to state 610
-    dig_neft   go to state 611
-    dig_wamp   go to state 612
-    dig_frez   go to state 613
+    dig_stur   go to state 650
+    dig_lome   go to state 651
+    dig_flot   go to state 652
+    dig_perd   go to state 653
+    dig_halc   go to state 654
+    dig_tarn   go to state 655
+    dig_rald   go to state 656
+    dig_crot   go to state 657
+    dig_gant   go to state 658
+    dig_pung   go to state 659
+    dig_garc   go to state 660
+    dig_flec   go to state 661
+    dig_sard   go to state 662
+    dig_plom   go to state 663
+    dig_grun   go to state 664
+    dig_delc   go to state 665
+    dig_brip   go to state 666
+    dig_griv   go to state 667
+    dig_veck   go to state 668
+    dig_spal   go to state 669
+    dig_neft   go to state 670
+    dig_wamp   go to state 671
+    dig_frez   go to state 672
 
 
 state 794
@@ -20851,11 +20944,11 @@ state 794
     '='       reduce using rule 218 (nail_tall_some)
     $default  reduce using rule 210 (rope_tick)
 
-    rope            go to state 652
+    rope            go to state 612
     rope_hook       go to state 48
     rope_buck       go to state 49
     rope_tick       go to state 50
-    nail_tall       go to state 653
+    nail_tall       go to state 613
     nail_tall_some  go to state 901
 
 
@@ -21329,7 +21422,7 @@ state 820
     dig_peld        go to state 334
     dig_trup        go to state 335
     dig_forb        go to state 336
-    dig_serd        go to state 337
+    dig_stur        go to state 337
     dig_lome        go to state 338
     dig_flot        go to state 339
     dig_perd        go to state 340
@@ -21584,7 +21677,7 @@ state 832
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -21682,7 +21775,7 @@ state 834
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -21780,7 +21873,7 @@ state 836
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -21872,7 +21965,7 @@ state 838
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -21964,7 +22057,7 @@ state 840
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -22056,7 +22149,7 @@ state 842
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -22148,7 +22241,7 @@ state 844
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -22246,7 +22339,7 @@ state 846
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -22338,7 +22431,7 @@ state 848
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -22549,7 +22642,7 @@ state 860
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -22662,7 +22755,7 @@ state 865
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -22726,7 +22819,7 @@ state 869
 
 state 870
 
-   74 wide_norm_serd: '{' g skel_w w . wide g '}'
+   74 wide_norm_stur: '{' g skel_w w . wide g '}'
 
     '('  shift, and go to state 14
     '['  shift, and go to state 15
@@ -22783,7 +22876,7 @@ state 870
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -22818,7 +22911,7 @@ state 871
 
 state 872
 
-  155 tall_norm_serd: skel_t_item_some dig_stop w . gene
+  155 tall_norm_stur: skel_t_item_some dig_stop w . gene
 
     '('  shift, and go to state 14
     '['  shift, and go to state 15
@@ -22880,7 +22973,7 @@ state 872
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -23065,7 +23158,7 @@ state 882
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -23157,7 +23250,7 @@ state 884
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -23249,7 +23342,7 @@ state 886
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -23376,7 +23469,7 @@ state 890
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -23469,7 +23562,7 @@ state 892
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -23639,7 +23732,7 @@ state 902
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -24061,7 +24154,7 @@ state 921
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -24192,7 +24285,7 @@ state 927
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -24295,7 +24388,7 @@ state 929
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -24458,7 +24551,7 @@ state 935
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -24870,7 +24963,7 @@ state 949
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -24905,7 +24998,7 @@ state 950
 
 state 951
 
-   74 wide_norm_serd: '{' g skel_w w wide . g '}'
+   74 wide_norm_stur: '{' g skel_w w wide . g '}'
 
     ':'   shift, and go to state 3
     '\n'  shift, and go to state 4
@@ -24920,9 +25013,9 @@ state 951
 
 state 952
 
-  155 tall_norm_serd: skel_t_item_some dig_stop w gene .
+  155 tall_norm_stur: skel_t_item_some dig_stop w gene .
 
-    $default  reduce using rule 155 (tall_norm_serd)
+    $default  reduce using rule 155 (tall_norm_stur)
 
 
 state 953
@@ -25309,7 +25402,7 @@ state 963
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -25442,7 +25535,7 @@ state 969
     dig_forb       go to state 68
     dig_malk       go to state 69
     dig_blin       go to state 70
-    dig_serd       go to state 71
+    dig_stur       go to state 71
     dig_lome       go to state 72
     dig_flot       go to state 73
     dig_perd       go to state 74
@@ -25527,7 +25620,7 @@ state 970
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -25705,7 +25798,7 @@ state 980
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -25797,7 +25890,7 @@ state 982
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -25917,7 +26010,7 @@ state 988
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -26117,7 +26210,7 @@ state 1006
 
 state 1007
 
-   74 wide_norm_serd: '{' g skel_w w wide g . '}'
+   74 wide_norm_stur: '{' g skel_w w wide g . '}'
 
     '}'  shift, and go to state 1045
 
@@ -26230,7 +26323,7 @@ state 1015
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -26502,7 +26595,7 @@ state 1034
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -26631,7 +26724,7 @@ state 1036
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -26735,11 +26828,11 @@ state 1041
 
   261 pike_tall: '-' w skel_t w . tall
 
-    '~'  shift, and go to state 572
+    '~'  shift, and go to state 631
     ':'  shift, and go to state 19
     '-'  shift, and go to state 20
     '='  shift, and go to state 21
-    '`'  shift, and go to state 573
+    '`'  shift, and go to state 632
     '|'  shift, and go to state 25
     '^'  shift, and go to state 26
     '&'  shift, and go to state 27
@@ -26747,57 +26840,57 @@ state 1041
 
     tall       go to state 1060
     tall_norm  go to state 46
-    dig_pont   go to state 576
-    dig_rulf   go to state 577
-    dig_glem   go to state 578
-    dig_lisc   go to state 579
-    dig_slon   go to state 580
-    dig_stiv   go to state 581
-    dig_stol   go to state 582
-    dig_feng   go to state 583
-    dig_prex   go to state 584
-    dig_zact   go to state 585
-    dig_glax   go to state 586
-    dig_boce   go to state 587
-    dig_peld   go to state 588
-    dig_trup   go to state 589
-    dig_forb   go to state 590
+    dig_pont   go to state 635
+    dig_rulf   go to state 636
+    dig_glem   go to state 637
+    dig_lisc   go to state 638
+    dig_slon   go to state 639
+    dig_stiv   go to state 640
+    dig_stol   go to state 641
+    dig_feng   go to state 642
+    dig_prex   go to state 643
+    dig_zact   go to state 644
+    dig_glax   go to state 645
+    dig_boce   go to state 646
+    dig_peld   go to state 647
+    dig_trup   go to state 648
+    dig_forb   go to state 649
     dig_malk   go to state 69
     dig_blin   go to state 70
-    dig_serd   go to state 591
-    dig_lome   go to state 592
-    dig_flot   go to state 593
-    dig_perd   go to state 594
-    dig_halc   go to state 595
-    dig_tarn   go to state 596
-    dig_rald   go to state 597
-    dig_crot   go to state 598
-    dig_gant   go to state 599
-    dig_pung   go to state 600
-    dig_garc   go to state 601
-    dig_flec   go to state 602
-    dig_sard   go to state 603
-    dig_plom   go to state 604
-    dig_grun   go to state 605
-    dig_delc   go to state 606
-    dig_brip   go to state 607
-    dig_griv   go to state 608
-    dig_veck   go to state 609
-    dig_spal   go to state 610
-    dig_neft   go to state 611
-    dig_wamp   go to state 612
-    dig_frez   go to state 613
+    dig_stur   go to state 650
+    dig_lome   go to state 651
+    dig_flot   go to state 652
+    dig_perd   go to state 653
+    dig_halc   go to state 654
+    dig_tarn   go to state 655
+    dig_rald   go to state 656
+    dig_crot   go to state 657
+    dig_gant   go to state 658
+    dig_pung   go to state 659
+    dig_garc   go to state 660
+    dig_flec   go to state 661
+    dig_sard   go to state 662
+    dig_plom   go to state 663
+    dig_grun   go to state 664
+    dig_delc   go to state 665
+    dig_brip   go to state 666
+    dig_griv   go to state 667
+    dig_veck   go to state 668
+    dig_spal   go to state 669
+    dig_neft   go to state 670
+    dig_wamp   go to state 671
+    dig_frez   go to state 672
 
 
 state 1042
 
   263 pike_tall: '*' w skel_t w . tall
 
-    '~'  shift, and go to state 572
+    '~'  shift, and go to state 631
     ':'  shift, and go to state 19
     '-'  shift, and go to state 20
     '='  shift, and go to state 21
-    '`'  shift, and go to state 573
+    '`'  shift, and go to state 632
     '|'  shift, and go to state 25
     '^'  shift, and go to state 26
     '&'  shift, and go to state 27
@@ -26805,46 +26898,46 @@ state 1042
 
     tall       go to state 1061
     tall_norm  go to state 46
-    dig_pont   go to state 576
-    dig_rulf   go to state 577
-    dig_glem   go to state 578
-    dig_lisc   go to state 579
-    dig_slon   go to state 580
-    dig_stiv   go to state 581
-    dig_stol   go to state 582
-    dig_feng   go to state 583
-    dig_prex   go to state 584
-    dig_zact   go to state 585
-    dig_glax   go to state 586
-    dig_boce   go to state 587
-    dig_peld   go to state 588
-    dig_trup   go to state 589
-    dig_forb   go to state 590
+    dig_pont   go to state 635
+    dig_rulf   go to state 636
+    dig_glem   go to state 637
+    dig_lisc   go to state 638
+    dig_slon   go to state 639
+    dig_stiv   go to state 640
+    dig_stol   go to state 641
+    dig_feng   go to state 642
+    dig_prex   go to state 643
+    dig_zact   go to state 644
+    dig_glax   go to state 645
+    dig_boce   go to state 646
+    dig_peld   go to state 647
+    dig_trup   go to state 648
+    dig_forb   go to state 649
     dig_malk   go to state 69
     dig_blin   go to state 70
-    dig_serd   go to state 591
-    dig_lome   go to state 592
-    dig_flot   go to state 593
-    dig_perd   go to state 594
-    dig_halc   go to state 595
-    dig_tarn   go to state 596
-    dig_rald   go to state 597
-    dig_crot   go to state 598
-    dig_gant   go to state 599
-    dig_pung   go to state 600
-    dig_garc   go to state 601
-    dig_flec   go to state 602
-    dig_sard   go to state 603
-    dig_plom   go to state 604
-    dig_grun   go to state 605
-    dig_delc   go to state 606
-    dig_brip   go to state 607
-    dig_griv   go to state 608
-    dig_veck   go to state 609
-    dig_spal   go to state 610
-    dig_neft   go to state 611
-    dig_wamp   go to state 612
-    dig_frez   go to state 613
+    dig_stur   go to state 650
+    dig_lome   go to state 651
+    dig_flot   go to state 652
+    dig_perd   go to state 653
+    dig_halc   go to state 654
+    dig_tarn   go to state 655
+    dig_rald   go to state 656
+    dig_crot   go to state 657
+    dig_gant   go to state 658
+    dig_pung   go to state 659
+    dig_garc   go to state 660
+    dig_flec   go to state 661
+    dig_sard   go to state 662
+    dig_plom   go to state 663
+    dig_grun   go to state 664
+    dig_delc   go to state 665
+    dig_brip   go to state 666
+    dig_griv   go to state 667
+    dig_veck   go to state 668
+    dig_spal   go to state 669
+    dig_neft   go to state 670
+    dig_wamp   go to state 671
+    dig_frez   go to state 672
 
 
 state 1043
@@ -26863,9 +26956,9 @@ state 1044
 
 state 1045
 
-   74 wide_norm_serd: '{' g skel_w w wide g '}' .
+   74 wide_norm_stur: '{' g skel_w w wide g '}' .
 
-    $default  reduce using rule 74 (wide_norm_serd)
+    $default  reduce using rule 74 (wide_norm_stur)
 
 
 state 1046
@@ -27093,7 +27186,7 @@ state 1066
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340
@@ -27178,7 +27271,7 @@ state 1067
     dig_peld       go to state 334
     dig_trup       go to state 335
     dig_forb       go to state 336
-    dig_serd       go to state 337
+    dig_stur       go to state 337
     dig_lome       go to state 338
     dig_flot       go to state 339
     dig_perd       go to state 340

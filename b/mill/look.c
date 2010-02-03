@@ -55,9 +55,6 @@ _mill_look(u4_milr m,
       fod = _mill_find(m, cox, u4_noun_0, tip);
 
       if ( u4_n_zero(fod) ) {
-        u4_bug("fes", fes);
-        u4_bug("tip", tip);
-
         return _mill_fail(m, "look: no grip");
       }
       else if ( !u4_n_zero(tik) ) {
@@ -71,8 +68,8 @@ _mill_look(u4_milr m,
                  t_fes);
 
         if ( u4_b_pq(vil, u4_noun_3, &p_vil, 0) &&
-                  u4_b_p(p_vil, u4_noun_0, &axe) &&
-                  u4_b_pq(lem, u4_atom_gate, &ger, 0) )
+             u4_b_p(p_vil, u4_noun_0, &axe) &&
+             u4_b_pq(lem, u4_atom_gate, &ger, 0) )
         {
           fod = u4_k_trel(lane, ger, u4_noun_0, axe);
         }
@@ -89,6 +86,6 @@ _mill_look(u4_milr m,
     gax = _mill_look(m, t_fes, u4_ch(fod));
 
     return u4_k_cell
-      (lane, u4_ch(gax), _mill_comp(m, u4_ct(fod), u4_ct(gax)));
+      (lane, u4_ch(gax), _mill_comp(m, u4_ct(gax), u4_ct(fod)));
   }
 }

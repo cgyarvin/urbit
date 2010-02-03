@@ -470,6 +470,7 @@ _uz_g_run_gene(uz_machine mac,
 #else
   uz_f_print(mac, "form", uz_ct(mac, cam));
   uz_f_print(mac, "type", uz_ch(mac, cam));
+  printf("\n");
 
   val = uz_k_nock(mac, nun, uz_ct(mac, cam));
   return uz_k_cell(mac, uz_ch(mac, cam), val);
