@@ -14,7 +14,7 @@ _mill_q_zact(u4_milr m,
   u4_lane lane = m->lane;
 
   if ( u4_n_zero(bem) ) {
-    return u4_k_cell(lane, u4_atom_zarb, u4_noun_0);
+    return u4_k_cell(lane, u4_atom_tram, u4_noun_0);
   }
   else {
     u4_pike i_bem = u4_ch(bem);

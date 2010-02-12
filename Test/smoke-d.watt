@@ -1,0 +1,8 @@
+
+:: a should be an atom
+::
+=>  b 0
+|-
+  ?:  &=[a &^b]
+    b
+  $(b &^b)

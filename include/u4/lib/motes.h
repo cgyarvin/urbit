@@ -438,6 +438,7 @@
     u4_lib_mote(top,  u4_s3('t','o','p'))
     u4_lib_mote(toy,  u4_s3('t','o','y'))
     u4_lib_mote(trac, u4_s4('t','r','a','c'))
+    u4_lib_mote(tram, u4_s4('t','r','a','m'))
     u4_lib_mote(trap, u4_s4('t','r','a','p'))
     u4_lib_mote(trib, u4_s4('t','r','i','b'))
     u4_lib_mote(trel, u4_s4('t','r','e','l'))

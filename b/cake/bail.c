@@ -20,7 +20,14 @@ u4_bail_out(enum u4_bail_code code)
     printf("stub!\n");
     abort();
   }
-  else longjmp(U4_Bail.jmpbuf, code);
-
+  else if ( code == u4_bail_tank ) {
+    printf("tank!\n");
+    abort();
+  }
+  else {
+    printf("huh?\n");
+    abort();
+    longjmp(U4_Bail.jmpbuf, code);
+  }
   return 0;
 }

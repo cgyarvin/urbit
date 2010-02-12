@@ -72,6 +72,8 @@ uz_x_exit(uz_machine mac)
 uz_noun
 uz_x_tank(uz_machine mac)
 {
+  printf("tank!\n");
+  abort();
   longjmp(mac->env, u3_cm_tank);
 }
 
@@ -92,6 +94,8 @@ uz_x_trip(uz_machine mac)
 uz_noun
 uz_x_stub(uz_machine mac)
 {
+  printf("stub!\n");
+  abort();
   longjmp(mac->env, u3_cm_stub);
 }
 
@@ -442,21 +446,21 @@ uz_a_bytes(uz_machine mac,
 
 /* _uz_g_run_gene():
 **
-**   Perform a typed computation - running [tip nun] through
+**   Perform a typed computation - running [typ som] through
 **   [gen], producing a cell [type noun].
 */
 static uz_noun
 _uz_g_run_gene(uz_machine mac,
-               uz_noun    tip,
-               uz_noun    gen,
-               uz_noun    nun)
+               uz_noun    typ,
+               uz_noun    som,
+               uz_noun    gen)
 {
-  uz_noun cam = uz_t_mill(mac, tip, gen);
+  uz_noun cam = uz_t_mill(mac, typ, gen);
   uz_noun val;
 
 #if 0
   uz_noun res;
-  res = u3_z_run(mac->zen, &val, nun, uz_ct(mac, cam), 0);
+  res = u3_z_run(mac->zen, &val, som, uz_ct(mac, cam), 0);
 
   switch ( res ) {
     case 0: return uz_k_cell(mac, uz_ch(mac, cam), val);
@@ -468,11 +472,11 @@ _uz_g_run_gene(uz_machine mac,
     default: return uz_x_trip(mac);
   }
 #else
-  uz_f_print(mac, "form", uz_ct(mac, cam));
-  uz_f_print(mac, "type", uz_ch(mac, cam));
-  printf("\n");
+  // uz_f_print(mac, "form", uz_ct(mac, cam));
+  // uz_f_print(mac, "type", uz_ch(mac, cam));
+  // printf("\n");
 
-  val = uz_k_nock(mac, nun, uz_ct(mac, cam));
+  val = uz_k_nock(mac, som, uz_ct(mac, cam));
   return uz_k_cell(mac, uz_ch(mac, cam), val);
 #endif
 }
@@ -486,17 +490,17 @@ uz_g_lame(uz_machine mac,
           uz_noun    fig,
           uz_noun    gen)
 {
-  uz_noun tip;
+  uz_noun typ;
 
   uz_f_print(mac, "gene", gen);
-  tip = uz_k_cell
+  typ = uz_k_cell
     (mac, uz_s4('c','r','i','b'), 
           uz_k_cell
             (mac, 
              uz_k_cell(mac, 'a', uz_s4('a','t','o','m')),
              0));
 
-  return _uz_g_run_gene(mac, tip, gen, uz_ct(mac, fig));
+  return _uz_g_run_gene(mac, typ, uz_ct(mac, fig), gen);
 }
         
 /* uz_g_compute(), uz_r_compute(), uz_p_compute():
@@ -508,11 +512,41 @@ uz_g_lame(uz_machine mac,
 */
 uz_noun
 uz_g_compute(uz_machine mac, 
-             uz_noun    gen,
-             uz_noun    fig)
+             uz_noun    fig,
+             uz_noun    gen)
 {
-  return uz_x_stub(mac);
-}
+  uz_noun dor = uz_g_express(mac, gen);
+  {
+    // A hacky implementation - do type properly.
+    //
+    uz_noun typ_dor = uz_ch(mac, dor);
+    uz_noun som_dor = uz_ct(mac, dor);
+    // uz_noun typ_fig = uz_ch(mac, fig);
+    uz_noun som_fig = uz_ct(mac, fig); 
+    {
+      uz_noun som_nex, typ_nex;
+      uz_noun cal;
+      
+      // uz_f_print(mac, "typ_dor", typ_dor);
+      // uz_f_print(mac, "som_dor", som_dor); 
+
+      // typ_fig discarded - bad
+      //
+      som_nex = uz_k_cell
+        (mac, 
+         uz_k_cell(mac, som_fig, uz_ctt(mac, som_dor)),
+         uz_ct(mac, som_dor)
+        );
+      typ_nex = typ_dor;
+
+      // cal: invocation gene
+      //
+      cal = uz_k_trel(mac, uz_s4('l','e','c','t'), 0, 0);
+
+      return _uz_g_run_gene(mac, typ_nex, som_nex, cal);
+    }
+  }
+}    
 
 /* uz_g_express(), uz_r_express(), uz_p_express():
 **
@@ -524,7 +558,9 @@ uz_noun
 uz_g_express(uz_machine mac,
              uz_noun    gen)
 {
-  return _uz_g_run_gene(mac, uz_ch(mac, mac->har), gen, uz_ct(mac, mac->har));
+  return _uz_g_run_gene(mac, uz_ch(mac, mac->har), 
+                             uz_ct(mac, mac->har),
+                             gen);
 }
 
 uz_noun
@@ -556,10 +592,10 @@ uz_p_constant(uz_machine mac,
 */
 uz_noun
 uz_t_mill(uz_machine mac,
-          uz_noun    tip,
+          uz_noun    typ,
           uz_noun    gen)
 {
-  u3_rat rat = u3_b_mill(mac->zen, tip, gen);
+  u3_rat rat = u3_b_mill(mac->zen, typ, gen);
 
   if ( u3_none == rat ) {
     return uz_x_exit(mac);
@@ -573,10 +609,10 @@ uz_t_mill(uz_machine mac,
 */
 uz_noun
 uz_t_make(uz_machine mac,
-          uz_noun    tip,
+          uz_noun    typ,
           uz_noun    gen)
 {
-  u3_rat rat = u3_b_mill(mac->zen, tip, gen);
+  u3_rat rat = u3_b_mill(mac->zen, typ, gen);
 
   if ( u3_none == rat ) {
     return uz_x_exit(mac);
@@ -590,7 +626,7 @@ uz_t_make(uz_machine mac,
 */
 uz_noun
 uz_t_make(uz_machine mac,
-          uz_noun    tip,
+          uz_noun    typ,
           uz_noun    gen);
 
 /* uz_t_watt():
@@ -690,6 +726,18 @@ uz_f_print(uz_machine mac,
            uz_noun    non)
 {
   u3_b_print(mac->zen, cap, non);
+}
+
+/* uz_f_print_type():
+**
+**   Print [noun] as a type, using the type printer.
+*/
+void
+uz_f_print_type(uz_machine mac,
+                const char *cap,
+                uz_noun    non)
+{
+  u3_b_print_type(mac->zen, cap, non);
 }
 
 #if 0

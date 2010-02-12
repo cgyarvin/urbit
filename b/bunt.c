@@ -86,6 +86,32 @@ u3_b_print(u3_l       l,
   }
 }
 
+/* u3_b_print_type():
+**
+**   Print [piv] as a type, with [c_tid] if nonzero as a caption.
+*/
+void
+u3_b_print_type(u3_l       l,
+                const u3_c *c_tid,
+                u3_rat     piv)
+{
+  u4_lane lane = u4_hat(_road_woc);
+
+  if ( u3_none == piv ) {
+    if ( c_tid ) {
+      printf("%s: <none>\n", c_tid); 
+    } else {
+      printf("<none>\n");
+    }
+  }
+  else {
+    struct _u4_mill milr;
+
+    u4_mill_init(&milr, lane);
+    u4_burp(lane, c_tid, _mill_dump(&milr, _bi_export(l, lane, piv)));
+  }
+}
+
 /* _bi_path_out_dir(): measure (zep), a path, and/or write it to (buf).
 */
 static u4_sb
@@ -114,7 +140,7 @@ _bi_path_out_dir(u4_cl   *buf,
         buf[sb_t + 2 + sb_i] = u4_a_byte(h_zep, sb_i);
       }
       buf[sb_t + 2 + sb_i] = '/';
-    }
+    }    
     return sb_t + 2 + sb_h + 1;
   }
 }
@@ -240,10 +266,10 @@ u3_b_nock(u3_l   l,
     switch ( bail_code ) {
       default: printf("[weird!]\n"); return u3_none;
 
-      case u4_bail_exit: printf("[exit]\n"); return u3_none;
-      case u4_bail_tank: printf("[tank]\n"); return u3_none;
-      case u4_bail_trip: printf("[trip]\n"); return u3_none;
-      case u4_bail_stub: printf("[stub]\n"); return u3_none;
+      case u4_bail_exit: printf("[nock exit]\n"); return u3_none;
+      case u4_bail_tank: printf("[nock tank]\n"); return u3_none;
+      case u4_bail_trip: printf("[nock trip]\n"); return u3_none;
+      case u4_bail_stub: printf("[nock stub]\n"); return u3_none;
     }
   } 
   else {
@@ -270,10 +296,10 @@ u3_b_watt(u3_l   l,
     switch ( bail_code ) {
       default: printf("[weird!]\n"); return u3_none;
 
-      case u4_bail_exit: printf("[exit]\n"); return u3_none;
-      case u4_bail_tank: printf("[tank]\n"); return u3_none;
-      case u4_bail_trip: printf("[trip]\n"); return u3_none;
-      case u4_bail_stub: printf("[stub]\n"); return u3_none;
+      case u4_bail_exit: printf("[watt exit]\n"); return u3_none;
+      case u4_bail_tank: printf("[watt tank]\n"); return u3_none;
+      case u4_bail_trip: printf("[watt trip]\n"); return u3_none;
+      case u4_bail_stub: printf("[watt stub]\n"); return u3_none;
     }
   } 
   else {
@@ -299,10 +325,10 @@ u3_b_vere(u3_l   l,
     switch ( bail_code ) {
       default: printf("[weird!]\n"); return u3_none;
 
-      case u4_bail_exit: printf("[exit]\n"); return u3_none;
-      case u4_bail_tank: printf("[tank]\n"); return u3_none;
-      case u4_bail_trip: printf("[trip]\n"); return u3_none;
-      case u4_bail_stub: printf("[stub]\n"); return u3_none;
+      case u4_bail_exit: printf("[vere exit]\n"); return u3_none;
+      case u4_bail_tank: printf("[vere tank]\n"); return u3_none;
+      case u4_bail_trip: printf("[vere trip]\n"); return u3_none;
+      case u4_bail_stub: printf("[vere stub]\n"); return u3_none;
     }
   } 
   else {
@@ -328,10 +354,10 @@ u3_b_hume(u3_l   l,
     switch ( bail_code ) {
       default: printf("[weird!]\n"); return u3_none;
 
-      case u4_bail_exit: printf("[exit]\n"); return u3_none;
-      case u4_bail_tank: printf("[tank]\n"); return u3_none;
-      case u4_bail_trip: printf("[trip]\n"); return u3_none;
-      case u4_bail_stub: printf("[stub]\n"); return u3_none;
+      case u4_bail_exit: printf("[hume exit]\n"); return u3_none;
+      case u4_bail_tank: printf("[hume tank]\n"); return u3_none;
+      case u4_bail_trip: printf("[hume trip]\n"); return u3_none;
+      case u4_bail_stub: printf("[hume stub]\n"); return u3_none;
     }
   } 
   else {
@@ -361,10 +387,10 @@ u3_b_mill(u3_l   l,
     switch ( bail_code ) {
       default: printf("[weird!]\n"); return u3_none;
 
-      case u4_bail_exit: printf("[exit]\n"); return u3_none;
-      case u4_bail_tank: printf("[tank]\n"); return u3_none;
-      case u4_bail_trip: printf("[trip]\n"); return u3_none;
-      case u4_bail_stub: printf("[stub]\n"); return u3_none;
+      case u4_bail_exit: printf("[mill exit]\n"); return u3_none;
+      case u4_bail_tank: printf("[mill tank]\n"); return u3_none;
+      case u4_bail_trip: printf("[mill trip]\n"); return u3_none;
+      case u4_bail_stub: printf("[mill stub]\n"); return u3_none;
     }
   } 
   else {

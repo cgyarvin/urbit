@@ -20,5 +20,12 @@ _mill_both(u4_milr m,
   else if ( u4_n_eq(u4_atom_blot, dif) ) {
     return dif;
   }
+  else if ( u4_n_eq(u4_atom_blur, dif) ) {
+    return nem;
+  }
+  else if ( u4_n_eq(u4_atom_blot, nem) ) {
+    return nem;
+  }
+
   else return u4_k_trel(m->lane, u4_atom_fuse, nem, dif);
 }

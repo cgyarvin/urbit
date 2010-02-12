@@ -13,7 +13,7 @@ _stub_peft_in(u4_milr m,
   u4_lane lane = m->lane;
 
   if ( u4_n_zero(wix) ) {
-    return 0;
+    return u4_noun_0;
   } 
   else {
     u4_noun i_wix = u4_ch(wix);

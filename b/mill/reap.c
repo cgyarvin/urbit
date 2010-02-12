@@ -25,7 +25,7 @@ _mill_reap(u4_milr m,
   }
 
   else if ( u4_b_pq(tip, u4_atom_cone, &p_tip, &q_tip) ) {
-    return u4_k_trel(lane, u4_atom_cell, u4_atom_blur, p_tip);
+    return u4_k_trel(lane, u4_atom_cell, p_tip, u4_atom_blur);
   }
 
   else if ( u4_b_p(tip, u4_atom_crib, &p_tip) ) {
@@ -34,7 +34,7 @@ _mill_reap(u4_milr m,
     u4_rail tp_tip  = u4_ct(p_tip);
 
     if ( u4_n_zero(tp_tip) ) {
-      return _mill_reap(m, qip_tip);
+      return qip_tip;
     }
     else {
       return u4_k_qual(lane, u4_atom_cell, qip_tip, u4_atom_crib, tp_tip);
@@ -57,7 +57,7 @@ _mill_reap(u4_milr m,
   }
 
   else if ( u4_b_pq(tip, u4_atom_gate, &p_tip, &q_tip) ) {
-    return _mill_reap(m, _mill_repo(m, p_tip, q_tip));
+    return _mill_repo(m, p_tip, q_tip);
   }
 
   else return u4_trip;

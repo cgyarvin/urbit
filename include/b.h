@@ -32,6 +32,15 @@
                    const u3_c *c_tid,
                    u3_rat     piv);
 
+      /* u3_b_print_type():
+      **
+      **   Print [piv] as a type, with [c_tid] if nonzero as a caption.
+      */
+        void
+        u3_b_print_type(u3_l       l,
+                        const u3_c *c_tid,
+                        u3_rat     piv);
+
     /** Pure.
     **/
       /* u3_b_nock():

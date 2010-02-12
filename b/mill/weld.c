@@ -16,7 +16,7 @@ _is_grip(u4_hook sod,
     if ( cox ) *cox = sod;
     return 1;
   }
-  else if ( u4_b_pq(sod, u4_atom_name, tik, cox) ) {
+  else if ( u4_b_pq(sod, u4_atom_lect, tik, cox) ) {
     return 1;
   }
   else return 0;
@@ -28,18 +28,26 @@ static u4_t
 _is_limb(u4_hook sod,
          u4_axis *axe)
 {
-  return u4_b_p(sod, u4_atom_limb, axe);
+  return u4_b_p(sod, u4_atom_zarb, axe);
 }
 
-/* _mill_weld(): modify type to reflect assignment.
+/* _mill_weld(): modify type to reflect assignment or refinement.
+**
+**   fes: change path
+**   gan: type of change
+**   typ: original type
 */
 u4_type
 _mill_weld(u4_milr m,
            u4_rope fes,
            u4_type gan,
-           u4_type tip)
+           u4_type typ)
 {
   u4_lane lane = m->lane;
+
+  // u4_err(lane, "weld: fes", fes);
+  // u4_burp(lane, "weld: gan", _mill_dump(m, gan));
+  // u4_burp(lane, "weld: typ", _mill_dump(m, typ));
 
   if ( u4_n_zero(fes) ) {
     return gan;
@@ -52,7 +60,7 @@ _mill_weld(u4_milr m,
     u4_axis axe;
 
     if ( _is_grip(i_fes, &tik, &cox) ) {
-      u4_loaf fod = _mill_find(m, cox, u4_noun_0, tip);
+      u4_loaf fod = _mill_find(m, cox, u4_noun_0, typ);
       u4_type voz, pel;
 
       if ( u4_n_zero(fod) ) {
@@ -66,19 +74,19 @@ _mill_weld(u4_milr m,
       if ( !u4_n_zero(tik) ) {
         t_fes = u4_k_cell
           (lane, u4_k_trel
-                  (lane, u4_atom_name, u4_op_dec(lane, tik), cox),
+                  (lane, u4_atom_lect, u4_op_dec(lane, tik), cox),
                  t_fes);
       }
       
       pel = _mill_weld(m, t_fes, gan, voz);
-      return _mill_turn(m, cox, axe, pel, u4_noun_0, tip);
+      return _mill_turn(m, cox, axe, pel, u4_noun_0, typ);
     }
 
     else if ( _is_limb(i_fes, &axe) ) {
-      u4_type voz = _mill_peek(m, axe, u4_noun_0, tip);
+      u4_type voz = _mill_peek(m, axe, u4_noun_0, typ);
       u4_type pel = _mill_weld(m, t_fes, gan, voz);
 
-      return _mill_poke(m, axe, pel, u4_noun_0, tip);
+      return _mill_poke(m, axe, pel, u4_noun_0, typ);
     }
     else return u4_trip;
   }

@@ -14,5 +14,5 @@ _mill_q_prex(u4_milr m,
   u4_lane lane = m->lane;
 
   return u4_k_qual
-    (lane, u4_atom_stol, tes, u4_k_cell(lane, u4_atom_zarb, u4_noun_0), hob);
+    (lane, u4_atom_stol, tes, u4_k_cell(lane, u4_atom_tram, u4_noun_0), hob);
 }

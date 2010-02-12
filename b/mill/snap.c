@@ -9,7 +9,7 @@
       static u4_type
       _snap_main(u4_milr, u4_bag, u4_rail, u4_type, u4_rail, u4_type);
 
-/* _snap_crib_crib(): as _mill_snap(), for crib on crib.  Produces ca
+/* _snap_crib_crib(): as _mill_snap(), for crib on crib.
 */
 static u4_rope
 _snap_crib_crib(u4_milr m,

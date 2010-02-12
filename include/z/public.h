@@ -263,6 +263,11 @@
 #         define uz_ch(mac, a) uz_c_head(mac, a)
 #         define uz_ct(mac, a) uz_c_tail(mac, a)
 
+#         define uz_chh(mac, a) uz_ch(mac, uz_ch(mac, a))
+#         define uz_cht(mac, a) uz_ct(mac, uz_ch(mac, a))
+#         define uz_cth(mac, a) uz_ch(mac, uz_ct(mac, a))
+#         define uz_ctt(mac, a) uz_ct(mac, uz_ct(mac, a))
+
         /* uz_c_cell():
         **
         **   True (1) iff [a] is a cell [*b *c].
@@ -459,17 +464,17 @@
       */
         uz_noun
         uz_g_compute(uz_machine mac, 
-                     uz_noun    gen,
-                     uz_noun    fig);
+                     uz_noun    fig,
+                     uz_noun    gen);
         void
         uz_r_compute(uz_machine mac, 
-                     uz_noun    gen,
-                     uz_noun    fig);
+                     uz_noun    fig,
+                     uz_noun    gen);
         void
         uz_p_compute(uz_machine mac, 
+                     uz_noun    fig,
                      uz_noun    han,
-                     uz_noun    gen,
-                     uz_noun    fig);
+                     uz_noun    gen);
  
       /* uz_g_express(), uz_r_express(), uz_p_express():
       **
@@ -509,7 +514,7 @@
       */
         uz_noun
         uz_t_mill(uz_machine mac,
-                  uz_noun    tip,
+                  uz_noun    typ,
                   uz_noun    gen);
 
       /* uz_t_make(): 
@@ -518,7 +523,7 @@
       */
         uz_noun
         uz_t_make(uz_machine mac,
-                  uz_noun    tip,
+                  uz_noun    typ,
                   uz_noun    gen);
 
       /* uz_t_watt():
@@ -587,3 +592,12 @@
         uz_f_print(uz_machine mac,
                    const char *cap,
                    uz_noun    non);
+
+      /* uz_f_print_type():
+      **
+      **   Print [noun] as a type, using the type printer.
+      */
+        void
+        uz_f_print_type(uz_machine mac,
+                        const char *cap,
+                        uz_noun    non);

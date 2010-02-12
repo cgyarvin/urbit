@@ -62,6 +62,7 @@ U4_MILL_OFILES=\
        b/mill/find.o \
        b/mill/fish.o \
        b/mill/hike.o \
+       b/mill/init.o \
        b/mill/look.o \
        b/mill/make.o \
        b/mill/mate.o \
@@ -101,7 +102,8 @@ U4_MX_OFILES=\
        b/x/slon.o \
        b/x/spot.o \
        b/x/stol.o \
-       b/x/tarn.o
+       b/x/tarn.o \
+       b/x/tram.o 
 
 U4_MQ_OFILES=\
        b/q/blin.o \

@@ -14,7 +14,7 @@ _mill_q_glax(u4_milr m,
   u4_lane lane = m->lane;
 
   //  :*
-  //    %pont
+  //    %glem
   //    feg
   //    :*
   //      %zact
@@ -25,7 +25,7 @@ _mill_q_glax(u4_milr m,
   //
   return u4_k_trel
    (lane, 
-    u4_atom_pont,
+    u4_atom_glem,
     feg,
     u4_k_trel
      (lane,

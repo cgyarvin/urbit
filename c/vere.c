@@ -19,6 +19,7 @@ _vere_print(uz_machine mac,
             const char *cap,
             uz_noun    fig)
 {
+  uz_f_print_type(mac, cap, uz_ch(mac, fig));
   uz_f_print(mac, cap, uz_ct(mac, fig));
 }
 
@@ -138,7 +139,7 @@ _vere_filter_watt_program(uz_machine mac,
   uz_noun src = uz_k_file(mac, fev);
   uz_noun gen = uz_t_watt(mac, src);
 
-  return uz_g_compute(mac, gen, fig);
+  return uz_g_compute(mac, fig, gen);
 }
 
 /* _vere_filter_watt_exp():
@@ -148,7 +149,7 @@ _vere_filter_watt_exp(uz_machine mac,
                       uz_noun    fig,
                       uz_noun    gen)
 {
-  return uz_g_compute(mac, gen, fig);
+  return uz_g_compute(mac, fig, gen);
 }
 
 /* _vere_filter_nock_exp():

@@ -50,6 +50,7 @@ _mill_open(u4_milr m,
     _open_pq (glem);  // ->
     _open_pq (lect);
     _open_pq (lisc);  // -<
+    _open_p  (lome);  // |=
     _open_p  (malk);  // |+
     _open_p  (neft);  // &^
     _open_p  (palt);

@@ -19,13 +19,14 @@
       typedef u4_noun u4_skel;  //  pattern skeleton
       typedef u4_noun u4_bolo;  //  {list pike}
       typedef u4_noun u4_loaf;  //  [type form]
+      typedef u4_noun u4_wire;  //  [type form]
       typedef u4_noun u4_rail;  //  {list type}
       typedef u4_noun u4_hook;  //  |(  (term) 
-                                //      [%limb @] 
-                                //      [%name (tick) (term)]
+                                //      [%zarb @] 
+                                //      [%lect (tick) (term)]
                                 //   )
-      typedef u4_noun u4_bait;  //  |(  (%limb @)
-                                //      [%name @ (tick) (term)]
+      typedef u4_noun u4_bait;  //  |(  (%zarb @)
+                                //      [%lect @ (tick) (term)]
                                 //  )
       typedef u4_noun u4_lure;  //  {list bait}
       typedef u4_noun u4_rope;  //  {list hook}
@@ -93,10 +94,18 @@
       **
       **   Convert (type gene) to (type form).
       */
-        u4_loaf
+        u4_wire
         u4_mill(u4_lane lane,
                 u4_type nes,
                 u4_gene zyl);
+
+      /* u4_mill_init(): 
+      **
+      **   Initialize (m) with (lane).
+      */
+        void
+        u4_mill_init(u4_milr m,
+                     u4_lane lane);
 
 
     /** Private functions.
@@ -157,6 +166,12 @@
                    u4_rail bar,
                    u4_type tip);
 
+      /* _mill_dump(): prepare for printing.
+      */
+        u4_prep
+        _mill_dump(u4_milr m,
+                   u4_type tip);
+
       /* _mill_eith(): fork pair.
       */
         u4_type
@@ -178,7 +193,7 @@
 
       /* _mill_find(): look by name.
       */
-        u4_loaf
+        u4_wire
         _mill_find(u4_milr m,
                    u4_term cox,
                    u4_rail bar,
@@ -207,7 +222,7 @@
 
       /* _mill_kick(): kick rope.
       */
-        u4_loaf
+        u4_wire
         _mill_kick(u4_milr m,
                    u4_rope fes,
                    u4_bolt rov,
@@ -215,14 +230,14 @@
 
       /* _mill_look(): read on a rope.
       */
-        u4_loaf
+        u4_wire
         _mill_look(u4_milr m,
                    u4_rope fes,
                    u4_type tip);
 
       /* _mill_make(): type inference, top level.
       */
-        u4_type 
+        u4_wire
         _mill_make(u4_milr m,
                    u4_gene gen,
                    u4_type tip);

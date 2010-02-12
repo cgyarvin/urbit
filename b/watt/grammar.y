@@ -126,6 +126,8 @@ wide_core
         { $$ = _ycell(u4_atom_pret, u4_noun_0); }
       | '~'
         { $$ = _ycell(u4_atom_pret, u4_noun_0); }
+      | '!''!'
+        { $$ = _ycell(u4_atom_tram, u4_noun_0); }
       ;
   
   /** Regular wide productions.
@@ -485,7 +487,7 @@ tall
     /** Loading.
     **/
       tall_norm_malk
-        /* |+     [%malk pir=list+gene]
+        /* |+     [%malk pir=list+[mark gene]]
         **
         **    malk: pure load
         */
@@ -742,38 +744,42 @@ tall
       ;
 */
 
-  /** Wire: reference path.
+  /** Rope: reference path.
   **/
     rope
-      : rope_hook             { $$ = _ycell($1, u4_noun_0); }
-      | rope_hook '.' g rope  { $$ = _ycell($1, $4); }
+      : dope                  { $$ = u4_log_flip(yylane, $1); }
       ;
 
-      rope_hook
+    dope
+      : dope_hook             { $$ = _ycell($1, u4_noun_0); }
+      | dope_hook '.' g dope  { $$ = _ycell($1, $4); }
+      ;
+
+      dope_hook
         : '+' tok_delm       { $$ = _ycell(u4_atom_zarb, $2); }
-        | '+' rope_hook_larb { $$ = _ycell(u4_atom_zarb, $2); }
-        | rope_tick tok_mark     
+        | '+' dope_hook_larb { $$ = _ycell(u4_atom_zarb, $2); }
+        | dope_tick tok_mark     
           { $$ = u4_n_zero($1) ? $2 : _ytrel(u4_atom_lect, $1, $2); }
-        | rope_buck
+        | dope_buck
           { $$ = u4_n_zero($1) 
              ? u4_noun_0 : _ytrel(u4_atom_lect, $1, u4_noun_0);
           }
         ;
 
-        rope_buck
+        dope_buck
           : '$'           { $$ = u4_noun_0; }
-          | '$' rope_buck { $$ = u4_op_inc(yylane, $2); }
+          | '$' dope_buck { $$ = u4_op_inc(yylane, $2); }
           ;
 
-        rope_hook_larb
+        dope_hook_larb
           :                    { $$ = u4_noun_1; }
-          | '<' rope_hook_larb { $$ = u4_op_peg(yylane, u4_noun_2, $2); }
-          | '>' rope_hook_larb { $$ = u4_op_peg(yylane, u4_noun_3, $2); }
+          | '<' dope_hook_larb { $$ = u4_op_peg(yylane, u4_noun_2, $2); }
+          | '>' dope_hook_larb { $$ = u4_op_peg(yylane, u4_noun_3, $2); }
           ;
 
-        rope_tick
+        dope_tick
           :               { $$ = u4_noun_0; }
-          | '`' rope_tick { $$ = u4_op_inc(yylane, $2); }
+          | '`' dope_tick { $$ = u4_op_inc(yylane, $2); }
           ;
 
 
@@ -858,7 +864,7 @@ tall
         | skel_w w skel_w_some { $$ = _ycell($1, $3); }
         ;
   
-  /* skel_t: skel, wide.  seldom used.
+  /* skel_t: skel, tall.
   */
      skel_t
        : skel_w

@@ -17,6 +17,9 @@ _mill_repo(u4_milr m,
   u4_type pol;
 
   if ( u4_bag_in(fad, m->fan) ) {
+    // printf("inference recursion\n");
+    // abort();
+
     return _mill_fail(m, "repo: inference recursion");
   }
 

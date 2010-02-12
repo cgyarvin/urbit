@@ -1,0 +1,21 @@
+:: decrement, functionally
+::
+
+|*  (dec a)
+
+::  dec: decrement
+::
+  - dec
+    |:  r = @
+    ==
+      =>  b 0
+      |-
+        ?:  &=[r &^b]
+          b
+        $(b &^b)
+
+  - buf
+    |:  z = @
+    ==
+      z
+==

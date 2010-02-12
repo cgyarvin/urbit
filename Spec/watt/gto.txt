@@ -24,7 +24,7 @@ forb  ?=   X  [rid=rope bul=gene]             yes iff [rid] is like [bul]
 clep       X  [pir=bush+[mark gene]]          load book
 malk  |+   E  [pir=list+[mark gene]]          book as list
 blin  |*   E  [bov=gene pir=list+[mark gene]] load and apply
-serd  |:   E  [tep=gene von=gene]             lamb construction
+stur  |:   E  [tep=gene von=gene]             lamb construction
 lome  |=   E  [cug=gene]                      cold lamb
 flot  |-   E  [cug=gene]                      hot lamb
 
@@ -46,6 +46,7 @@ delc  :$   E  [mef=skel]                      skeleton stub
 brip  :^   E  [mef=skel]                      skeleton lamb
 
 dbug  !?   X  [lyq=gene]                      activate internal debug
+tram  !!   X  [0]                             exit
 poos       X  [cux=lab lyq=gene]              source label
 spot       X  [xed=[[@ @] [@ @] lyq=gene]     source position, [at to] [lin col]
 

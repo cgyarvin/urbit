@@ -14,7 +14,7 @@ _mill_q_stur(u4_milr m,
   u4_lane lane = m->lane;
 
   //  :*
-  //    %pont
+  //    %glem
   //    (stub tep)
   //    :*  
   //      %lome
@@ -23,7 +23,7 @@ _mill_q_stur(u4_milr m,
   //  ==
 
   return u4_k_qual
-    (lane, u4_atom_pont,
+    (lane, u4_atom_glem,
            _mill_stub(m, tep),
            u4_atom_lome,
            von);

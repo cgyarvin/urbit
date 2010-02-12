@@ -14,13 +14,14 @@ _mill_q_pung(u4_milr m,
   u4_lane lane = m->lane;
 
   //  :.
-  //    %pont 
+  //    %glem 
   //    buz
   //    :.
   //      %gant
-  //      [%% [%zarb 2] ~]
-  //      :.  :.  [%zarb 4] 
+  //      [[%zarb 2] %% ~]
+  //      :.  :.  [[%zarb 4] ~]
   //              [%slon [%zarb 3] lep]]
+  //          ==
   //          ~
   //      ==
   //    ==
@@ -28,21 +29,22 @@ _mill_q_pung(u4_milr m,
 
   return u4_k_trel
     (lane, 
-     u4_atom_pont,
+     u4_atom_glem,
      buz,
      u4_k_trel
       (lane,
        u4_atom_gant,
        u4_k_trel
         (lane, 
-         u4_noun_0, 
          u4_k_cell(lane, u4_atom_zarb, u4_noun_2),
+         u4_noun_0, 
          u4_noun_0),
        u4_k_cell
         (lane,
          u4_k_cell
           (lane,
-           u4_k_cell(lane, u4_atom_zarb, u4_noun_4),
+           u4_k_cell
+            (lane, u4_k_cell(lane, u4_atom_zarb, u4_noun_4), u4_noun_0),
            u4_k_trel
             (lane, 
              u4_atom_slon, 
