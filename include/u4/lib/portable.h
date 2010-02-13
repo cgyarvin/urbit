@@ -65,6 +65,15 @@
 #        define u4_bswap_64(x)  NXSwapLongLong(x)
 #      endif
 
+    /* Readdir properties.
+    */
+#      if defined(U4_OS_linux)
+#        define u4_c_dirent_namlen(dp) (strlen((dp)->d_name))
+
+#      elif defined(U4_OS_osx)
+#        define u4_c_dirent_namlen(dp) ((dp)->d_namlen)
+#      endif
+
 #if 0
   /** Data structures.
   **/
