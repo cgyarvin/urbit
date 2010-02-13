@@ -32,6 +32,7 @@ CFLAGS=-g -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 CWFLAGS=-Wall
 
 .y.o:
+	 mkdir -p $(GENERATED)
 	 $(YACC) $<
 	 $(CC) -c $(CFLAGS) -o $@ $(GENERATED)/y.tab.c
 	 $(RM) $(GENERATED)/y.tab.c
