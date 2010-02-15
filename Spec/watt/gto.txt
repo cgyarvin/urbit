@@ -24,7 +24,8 @@ forb  ?=   X  [rid=rope bul=gene]             yes iff [rid] is like [bul]
 clep       X  [pir=bush+[mark gene]]          load book
 malk  |+   E  [pir=list+[mark gene]]          book as list
 blin  |*   E  [bov=gene pir=list+[mark gene]] load and apply
-stur  |:   E  [tep=gene von=gene]             lamb construction
+stur  |:   E  [tep=skel von=gene]             lamb construction
+drol  ||   E  [nix=skel tep=skel von=gene]    lamb with cast
 lome  |=   E  [cug=gene]                      cold lamb
 flot  |-   E  [cug=gene]                      hot lamb
 

@@ -443,6 +443,9 @@ _nest_main(u4_milr m,
   u4_lane lane = m->lane;
   u4_noun p_typ, q_typ;
 
+  // u4_burp(lane, "nm: gan", _mill_dump(m, gan));
+  // u4_burp(lane, "nm: typ", _mill_dump(m, typ));
+
   // %atom
   // 
   if ( u4_n_eq(u4_atom_atom, typ) ) {
@@ -538,6 +541,7 @@ _mill_nest(u4_milr m,
     return 1;
   }
   else if ( _mill_null(m, gan) ) {
+    printf("null gan\n");
     return 1;
   }
   else if ( _mill_null(m, typ) ) {

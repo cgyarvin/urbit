@@ -448,19 +448,31 @@ uz_a_bytes(uz_machine mac,
 **
 **   Perform a typed computation - running [typ som] through
 **   [gen], producing a cell [type noun].
+**
+**   If (ben) is 1, print benchmark.
 */
 static uz_noun
 _uz_g_run_gene(uz_machine mac,
                uz_noun    typ,
                uz_noun    som,
-               uz_noun    gen)
+               uz_noun    gen,
+               uint8_t    ben)
 {
   uz_noun cam = uz_t_mill(mac, typ, gen);
   uz_noun val;
 
-#if 0
+#if 1
   uz_noun res;
-  res = u3_z_run(mac->zen, &val, som, uz_ct(mac, cam), 0);
+  struct u3_z_bench naq;
+
+  memset(&naq, 0, sizeof(naq));
+  res = u3_z_run(mac->zen, &val, som, uz_ct(mac, cam), &naq);
+
+  if ( ben ) {
+    printf(" <%lld steps, %d words>\n",
+            naq.d_ruy,
+            (naq.w_maz - naq.w_vil) + (naq.w_buc - naq.w_tew));
+  }
 
   switch ( res ) {
     case 0: return uz_k_cell(mac, uz_ch(mac, cam), val);
@@ -500,9 +512,16 @@ uz_g_lame(uz_machine mac,
              uz_k_cell(mac, 'a', uz_s4('a','t','o','m')),
              0));
 
-  return _uz_g_run_gene(mac, typ, uz_ct(mac, fig), gen);
+  return _uz_g_run_gene(mac, typ, uz_ct(mac, fig), gen, 0);
 }
-        
+
+/* uz_g_combine():
+**
+**   Evaluate a lambda.
+*/
+uz_noun
+uz_g_combine(uz_machine mac);
+             
 /* uz_g_compute(), uz_r_compute(), uz_p_compute():
 **
 **   Compute a function of an external argument.
@@ -516,6 +535,11 @@ uz_g_compute(uz_machine mac,
              uz_noun    gen)
 {
   uz_noun dor = uz_g_express(mac, gen);
+
+  // printf("\n\n");
+  // uz_f_print_type(mac, "dor: typ", uz_ch(mac, dor));
+  // uz_f_print(mac, "dor: nut", uz_ct(mac, dor));
+
   {
     // A hacky implementation - do type properly.
     //
@@ -534,7 +558,7 @@ uz_g_compute(uz_machine mac,
       //
       som_nex = uz_k_cell
         (mac, 
-         uz_k_cell(mac, som_fig, uz_ctt(mac, som_dor)),
+         uz_k_cell(mac, som_fig, uz_cht(mac, som_dor)),
          uz_ct(mac, som_dor)
         );
       typ_nex = typ_dor;
@@ -543,7 +567,7 @@ uz_g_compute(uz_machine mac,
       //
       cal = uz_k_trel(mac, uz_s4('l','e','c','t'), 0, 0);
 
-      return _uz_g_run_gene(mac, typ_nex, som_nex, cal);
+      return _uz_g_run_gene(mac, typ_nex, som_nex, cal, 1);
     }
   }
 }    
@@ -560,12 +584,20 @@ uz_g_express(uz_machine mac,
 {
   return _uz_g_run_gene(mac, uz_ch(mac, mac->har), 
                              uz_ct(mac, mac->har),
-                             gen);
+                             gen, 
+                             0);
 }
 
-uz_noun
+void
 uz_r_express(uz_machine mac,
-             uz_noun    gen);
+             uz_noun    gen)
+{
+  mac->har = _uz_g_run_gene(mac, uz_ch(mac, mac->har), 
+                                 uz_ct(mac, mac->har),
+                                 gen, 
+                                 0);
+}
+
 uz_noun
 uz_p_express(uz_machine mac,
              uz_noun    gen);

@@ -39,7 +39,7 @@ _turn_crib(u4_milr m,
       return u4_k_cell
         (lane, u4_k_cell
                 (lane, u4_noun_0, 
-                       _mill_turn(m, cox, axe, gan, bar, tp_typ)),
+                       _mill_turn(m, cox, axe, gan, bar, qip_typ)),
                u4_noun_0);
     }
     else {
@@ -216,5 +216,9 @@ _mill_turn(u4_milr m,
     return _mill_turn(m, cox, axe, gan, bar, _mill_repo(m, p_typ, q_typ));
   }
 
-  else return u4_trip;
+  else {
+    u4_err(lane, "typ", typ);
+    // u4_burp(lane, "typ", _mill_dump(m, typ));
+    return u4_trip;
+  }
 }

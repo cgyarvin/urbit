@@ -62,7 +62,7 @@
  
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 793
+  %expect 848
 
   %pure-parser
   %locations
@@ -114,6 +114,10 @@ wide_core
     wide_constant
       : tok_delm
         { $$ = _ycell(u4_atom_palt, $1); }
+      | '&'               
+        { $$ = _ycell(u4_atom_palt, u4_noun_0); }
+      | '|' 
+        { $$ = _ycell(u4_atom_palt, u4_noun_1); }
       | '0' 'x' tok_chex
         { $$ = _ycell(u4_atom_palt, $3); }
       | tok_loct
@@ -154,6 +158,7 @@ wide_core
       | dig_blin wide_norm_blin  ** |* ** { $$ = _ycell($1, $2); }
 */
       | dig_stur wide_norm_stur  /* |: */ { $$ = _ycell($1, $2); }
+      | dig_drol wide_norm_drol  /* || */ { $$ = _ycell($1, $2); }
       | dig_lome wide_norm_lome  /* |= */ { $$ = _ycell($1, $2); }
       | dig_flot wide_norm_flot  /* |- */ { $$ = _ycell($1, $2); }
 
@@ -243,6 +248,9 @@ wide_core
 */
       wide_norm_stur
         : '{' g skel_w w wide g '}'{ $$ = _ycell($3, $5); }
+
+      wide_norm_drol
+        : '{' g skel_w w skel_w w wide g '}'{ $$ = _ytrel($3, $5, $7); }
 
       wide_norm_lome
         : wide
@@ -346,6 +354,7 @@ tall
       | dig_malk w tall_norm_malk  /* |+ */ { $$ = _ycell($1, $3); }
       | dig_blin w tall_norm_blin  /* |* */ { $$ = _ycell($1, $3); }
       | dig_stur w tall_norm_stur  /* |: */ { $$ = _ycell($1, $3); }
+      | dig_drol w tall_norm_drol  /* || */ { $$ = _ycell($1, $3); }
       | dig_lome w tall_norm_lome  /* |= */ { $$ = _ycell($1, $3); }
       | dig_flot w tall_norm_flot  /* |- */ { $$ = _ycell($1, $3); }
 
@@ -503,10 +512,18 @@ tall
       tall_norm_stur
         /* |:     [%stur tep=skel von=gene]
         **
-        **    stur: trap construction
+        **    stur: lamb construction
         */
         : skel_t_item_some dig_stop w gene 
           { $$ = _ycell(_ycell(u4_atom_peft, $1), $4); }
+
+      tall_norm_drol
+        /* ||     [%drol nix=skel tep=skel von=gene]
+        **
+        **    drol: lamb with cast
+        */
+        : skel_t w skel_t_item_some dig_stop w gene
+          { $$ = _ytrel($1, _ycell(u4_atom_peft, $3), $6); }
 
       tall_norm_lome
         /* |=     [%lome cug=gene]
@@ -647,7 +664,7 @@ tall
       tall_norm_spal
         /* &|     [%spal dil=gene]
         **
-        **    spal: cell forb
+        **    spal: cell test
         */
         : tall
     
@@ -661,7 +678,7 @@ tall
       tall_norm_wamp
         /* &=     [%wamp dil=gene]
         **
-        **    wamp: equality forb
+        **    wamp: equality test
         */
         : tall
 
@@ -1107,6 +1124,7 @@ tall
     dig_malk: '|' '+' { $$ = u4_atom_malk; }
     dig_blin: '|' '*' { $$ = u4_atom_blin; }
     dig_stur: '|' ':' { $$ = u4_atom_stur; }
+    dig_drol: '|' '|' { $$ = u4_atom_drol; }
     dig_lome: '|' '=' { $$ = u4_atom_lome; }
     dig_flot: '|' '-' { $$ = u4_atom_flot; }
 

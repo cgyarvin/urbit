@@ -1,4 +1,4 @@
-:: decrement, functionally
+:: decrement, kernel-free
 ::
 
 |:  a = 0

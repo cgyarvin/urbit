@@ -25,6 +25,7 @@
     - dec
       |:  a = atom
       ==
+        ^+  (atom)
         =>  b 0
         |-
           ?:  &=[a (inc b)]
@@ -49,12 +50,12 @@
     ::  sub: subtract
     ::
     - sub
-      |:  a = atom
-          b = atom
+      ||  atom
+        a = atom
+        b = atom
       ==
         ?:  (eq 0 a)
           b
         $(a (dec a), b (dec b))
-
   ==
 

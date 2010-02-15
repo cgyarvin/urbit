@@ -486,7 +486,7 @@
         uz_noun
         uz_g_express(uz_machine mac,
                      uz_noun    gen);
-        uz_noun
+        void
         uz_r_express(uz_machine mac,
                      uz_noun    gen);
         uz_noun

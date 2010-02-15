@@ -3,6 +3,7 @@ boce  ?&   E  [das=list+gene]                 yes iff all of [das] are yes
 brip  :^   E  [mef=skel]                      skeleton lamb
 crot  ^@   E  [rum=gene]                      [rum] perd to bead
 delc  :$   E  [mef=skel]                      skeleton stub
+drol  ||   E  [nix=skel gub=skel von=gene]    lamb with cast
 feng  ?>   E  [tes=gene bif=gene]             if [tes], then [bif], else fail
 flec  :-   E  [buz=gene]                      call with default
 flot  |-   E  [cug=gene]                      hot lamb

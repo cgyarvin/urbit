@@ -111,6 +111,7 @@ U4_MQ_OFILES=\
        b/q/brip.o \
        b/q/crot.o \
        b/q/delc.o \
+       b/q/drol.o \
        b/q/feng.o \
        b/q/flec.o \
        b/q/flot.o \

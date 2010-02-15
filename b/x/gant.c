@@ -105,12 +105,12 @@ _mill_x_gant(u4_milr m,
   u4_lane lane = m->lane;
   u4_loaf rec;
 
-  rec = _mill_look(m, ved, typ);
-
   // printf("\n");
   // u4_err(lane, "gant: ved", ved);
   // u4_err(lane, "gant: suc", suc);
   // u4_burp(lane, "gant: typ", _mill_dump(m, typ));
+
+  rec = _mill_look(m, ved, typ);
 
   if ( u4_n_zero(rec) ) {
     return _mill_fail(m, "gant: broken");

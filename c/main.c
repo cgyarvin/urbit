@@ -78,6 +78,7 @@ _console_line(const char *history_name)
   }
 }
 
+extern void vere_boot(uz_machine);
 extern void vere_line(uz_machine, uz_noun);
 
 /* main()::
@@ -93,6 +94,7 @@ main(int  argc,
     fprintf(stderr, "zeno: boot failed\n");
     return 1;
   }
+  vere_boot(mac);
 
   while ( 1 ) {
     char *line = _console_line(history_name);

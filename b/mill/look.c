@@ -48,6 +48,9 @@ _mill_look_hook(u4_milr m,
     fod = _mill_find(m, cox, u4_noun_0, typ);
 
     if ( u4_n_zero(fod) ) {
+      u4_err(lane, "cox", cox);
+      u4_burp(lane, "typ", _mill_dump(m, typ));
+
       return _mill_fail(m, "look: no grip");
     }
     else if ( u4_n_zero(tik) ) {

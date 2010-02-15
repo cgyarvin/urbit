@@ -79,32 +79,40 @@ _mill_test(u4_milr m,
   if ( u4_b_pq(gen, u4_atom_forb, &p_gen, &q_gen) ) {
     u4_wire fod = _mill_look(m, p_gen, typ);
     u4_type hur = _mill_play(m, q_gen, typ);
+    u4_type wid = u4_ch(fod);
+    u4_form pak = u4_ct(fod);
     u4_axis niv;
 
-    if ( !u4_b_p(u4_ct(fod), u4_noun_0, &niv) ) {
+    if ( !u4_b_p(pak, u4_noun_0, &niv) ) {
       return _mill_fail(m, "test: bad like");
     }
     else {
-      if ( _mill_orth(m, u4_ch(fod), hur) ) {
+      if ( _mill_orth(m, wid, hur) ) {
         return u4_k_trel(lane, u4_atom_blot, u4_noun_1, u4_noun_1);
       }
-      else if ( _mill_nest(m, u4_ch(fod), hur) ) {
+      else if ( _mill_nest(m, wid, hur) ) {
+        printf("nested!\n");
         return u4_k_trel(lane, typ, u4_noun_1, u4_noun_0);
       }
       else {
-        u4_type hem = _mill_both(m, hur, u4_ch(fod));
+        u4_type hem = 
+            _mill_nest(m, u4_atom_blur, wid)
+              ?  hur
+              :  _mill_both(m, hur, wid); 
         u4_type vic;
         u4_form zan;
 
         // printf("\n\n");
+        // u4_burp(lane, "wid", _mill_dump(m, wid));
         // u4_burp(lane, "hur", _mill_dump(m, hur));
-        // u4_burp(lane, "fod", _mill_dump(m, u4_ch(fod)));
         // u4_burp(lane, "hem", _mill_dump(m, hem));
         // u4_err(lane, "p_gen", p_gen);
 
         zan = _mill_weld(m, p_gen, hem, typ);
         vic = _mill_fish(m, niv, hur);
 
+        // u4_burp(lane, "zan", _mill_dump(m, zan));
+        // u4_err(lane, "vic", vic);
         return u4_k_cell(lane, zan, vic);
       }
     }

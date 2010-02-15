@@ -12,6 +12,9 @@ enum u3_zj_code
 u3_zj_look(u3_z   z,
            u3_fox axe)
 {
+#if 1
+  return u3_zj_code_none;
+#else
   u3_w w_mug = u3_lm_mug(z, axe);
   u3_w w_i;
 
@@ -21,6 +24,7 @@ u3_zj_look(u3_z   z,
     }
   }
   return u3_zj_code_none;
+#endif
 }
 
 /* u3_zj_axe():

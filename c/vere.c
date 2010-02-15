@@ -139,6 +139,8 @@ _vere_filter_watt_program(uz_machine mac,
   uz_noun src = uz_k_file(mac, fev);
   uz_noun gen = uz_t_watt(mac, src);
 
+  // uz_f_print(mac, "gen", gen);
+
   return uz_g_compute(mac, fig, gen);
 }
 
@@ -286,6 +288,35 @@ vere_line(uz_machine mac,
       uz_noun fex = uz_t_vere(mac, lug);
 
       _vere_command(mac, fex);
+    }
+  }
+}
+
+/* vere_boot(): boot vere.
+*/
+void
+vere_boot(uz_machine mac)
+{
+  jmp_buf env;
+  uz_noun wef;
+
+  if ( (wef = setjmp(env)) ) {
+    uint8_t str[5];
+
+    str[4] = 0;
+    uz_a_bytes(mac, 0, 4, str, wef);
+    printf("[%s]\n", str);
+  }
+  else {
+    uz_l_except(mac, env);
+    {
+      uz_noun src = uz_k_file(mac, uz_k_string(mac, "Cato/k300.watt"));
+      uz_noun ker = uz_t_watt(mac, src);
+
+      uz_r_express(mac, ker);
+
+      // uz_f_print_type(mac, "boot: type", uz_ch(mac, mac->har));
+      // uz_f_print(mac, "boot: noun", uz_ct(mac, mac->har));
     }
   }
 }

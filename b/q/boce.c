@@ -16,7 +16,7 @@ _mill_q_boce(u4_milr m,
   //    -   ~       [%pret %0]
   //    -   [i t]   [%stol i.das $(das t.das) [%pret %1]]
   //  ==
-  
+
   if ( u4_n_zero(das) ) {
     return u4_k_cell(lane, u4_atom_pret, u4_noun_0);
   }

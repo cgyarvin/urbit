@@ -37,10 +37,11 @@ _mill_open(u4_milr m,
   }
   else {
     _open_pq (blin);  // |*
-    _open_pq (boce);  // ?&
+    _open_p  (boce);  // ?&
     _open_p  (brip);  // :^
     _open_p  (crot);  // ^@
     _open_p  (delc);  // :$
+    _open_pqr(drol);  // ||
     _open_pq (feng);  // ?>
     _open_p  (flec);  // :-
     _open_p  (flot);  // |-

@@ -1,0 +1,201 @@
+:: Cato pre-300K.
+::
+
+|+
+::::::::::  Tier 0: base types
+::::::::::
+
+    ::  atom                    atom
+    ::
+    - atom
+      |:  a = noun
+      ==
+        ?>  ?={a 0}
+          a 
+
+    ::  noun                    noun
+    ::
+    - noun
+      =>  a ^+{&:0 0}
+      |=
+        a
+
+    ::  flag                    lunary (0 = yes, 1 = no)
+    ::
+    - flag
+      |:  a = noun
+      ==
+        &=[0 a]
+
+
+::::::::::  Tier 1: simple logic and arithmetic
+::::::::::
+
+  ::::::::  add                 atomic add
+  ::
+    - add
+      ||  atom
+        a = atom
+        b = atom
+      ==
+        ?:  (zil a)
+          b
+        $(a (dec a), b (inc b))
+
+  ::::::::  div                 atomic divide (a / b)
+  ::
+    - div
+      || atom
+        a = atom
+        b = atom
+      ==
+        ?<  (zil b)
+        =>  c 0
+        |-
+          ?:  (lte a b)
+            c 
+          $(a (sub a b), c (inc c))
+
+  ::::::::  dec                 atomic decrement
+  ::
+    - dec
+      ||  atom
+        a = atom
+      ==
+        ?<  &=[0 a]
+        =>  b 0
+        |-
+          ?:  &=[a &^b]
+            b
+          $(b &^b)
+
+  ::::::::  eq                  noun equality
+  ::
+    - eq
+      ||  flag
+        a = noun
+        b = noun
+      ==
+        &=[a b] 
+
+  ::::::::  gt                  atomic greater than (a > b)
+  ::
+    - gt
+      ||  atom
+        a = atom
+        b = atom
+      ==
+        (not (lte a b))
+
+  ::::::::  gte                 atomic greater-or-equal (a >= b)
+  ::
+    - gte
+      ||  atom
+        a = atom
+        b = atom
+      ==
+        (not (lt a b))
+
+  ::::::::  inc                 atomic increment
+  ::
+    - inc
+      ||  atom
+        a = atom
+      ==
+        &^a
+
+  ::::::::  lt                  atomic less-than (a < b)
+  ::
+    - lt
+      ||  atom
+        a = atom
+        b = atom
+      ==
+        ?&
+          (not (eq a b))
+          |-
+            ?:  (zil a)
+              &
+            ?:  (zil b)
+              |
+            $(a (dec a), b (dec b))
+        ==
+
+  ::::::::  lte                 atomic less-or-equal (a <= b)
+  ::
+    - lte
+      ||  atom
+        a = atom
+        b = atom
+      ==
+        ?|
+          (eq a b)
+          (lt a b)
+        ==
+
+  ::::::::  mod                 modulus (a % b)
+  ::
+    - mod
+      ||  atom
+        a = atom
+        b = atom
+      ==
+        ?<  (zil b)
+        (sub a (mul b (div a b)))
+
+  ::::::::  mul                 atomic multiply
+  ::
+    - mul
+      ||  atom
+        a = atom
+        b = atom
+      ==
+        =>  c 0
+        |-
+          ?:  (zil a)
+            c
+          $(a (dec a), c (add b c))
+
+  ::::::::  not                 lunary not
+  ::
+    - not
+      ||  flag
+        a = flag
+      ==
+        (eq 1 a)
+
+  ::::::::  sub                 atomic subtract (a - b)
+  ::
+    - sub
+      ||  atom
+        a = atom
+        b = atom
+      ==
+        ?:  (zil b)
+          a
+        $(a (dec a), b (dec b))
+
+  ::::::::  pat                 noun is atom
+  ::
+    - pat
+      ||  flag
+        a = noun
+      ==
+        (not (tap a))
+
+  ::::::::  tap                 noun is cell
+  ::
+    - tap
+      ||  flag
+        a = noun
+      ==
+        &|a
+
+  ::::::::  zil                 atom is 0
+  ::
+    - zil
+      ||  flag
+        a = atom
+      ==
+        (eq 0 a)
+==
