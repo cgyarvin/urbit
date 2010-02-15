@@ -153,7 +153,7 @@ _disk_read_tree_road(u4_road     road,
           break;
         }
         else if ( dirent_result->d_name[0] != '.' ) {
-          u4_sb  sb_item  = (sb_dir + 1 + dirent_result->d_namlen);
+          u4_sb  sb_item  = (sb_dir + 1 + u4_c_dirent_namlen(dirent_result));
           u4_cl  *cl_item = alloca(sb_item + 1);
           u4_hog hog;
 
@@ -288,7 +288,7 @@ u4_disk_read_dir(u4_lane     lane,
       continue;
     }
     else if ( dirent_result->d_name[0] != '.' ) {
-      u4_sb  sb_item  = (sb_dir + 1 + dirent_result->d_namlen);
+      u4_sb  sb_item  = (sb_dir + 1 + u4_c_dirent_namlen(dirent_result));
       u4_cl  *cl_item = alloca(sb_item + 1);
       u4_noun name, ext;
 

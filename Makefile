@@ -32,6 +32,7 @@ CFLAGS=-g -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 CWFLAGS=-Wall
 
 .y.o:
+	 mkdir -p $(GENERATED)
 	 $(YACC) $<
 	 $(CC) -c $(CFLAGS) -o $@ $(GENERATED)/y.tab.c
 	 $(RM) $(GENERATED)/y.tab.c
@@ -250,6 +251,7 @@ OFILES= \
        $(U4_OFILES)
 
 $(BIN)/vere: $(OFILES)
+	mkdir -p $(BIN)
 	$(CLD) -o $(BIN)/vere $(OFILES) -lgmp -lreadline -ltermcap
 
 tags:
