@@ -915,14 +915,14 @@ tall
       : '-' w skel_t w tall  { $$ = _ytrel(u4_atom_lask, $3, $5); }
       | '+' w skel_t         { $$ = _ycell(u4_atom_plic, $3); }
       | '*' w skel_t w tall  { $$ = _ytrel(u4_atom_semp, $3, $5); }
-      | '%' w skel_t         { $$ = _ycell(u4_atom_drol, $3); }
+      | '%' w skel_t         { $$ = _ycell(u4_atom_fing, $3); }
       ;
 
     pike_wide
       : '-' w skel_w w wide      { $$ = _ytrel(u4_atom_lask, $3, $5); }
       | '+' w wide               { $$ = _ycell(u4_atom_plic, $3); }
       | '*' w skel_w w wide      { $$ = _ytrel(u4_atom_semp, $3, $5); }
-      | ':' w wide               { $$ = _ycell(u4_atom_drol, $3); } 
+      | ':' w wide               { $$ = _ycell(u4_atom_fing, $3); } 
       ;
 
     pike_tall_some

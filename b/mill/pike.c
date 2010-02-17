@@ -44,7 +44,7 @@ _mill_pike(u4_milr m,
          u4_k_cell(lane, u4_k_cell(lane, mox, hem), u4_noun_0),
          luf);
   }
-  else if ( u4_b_p(pik, u4_atom_drol, &bic) ) {
+  else if ( u4_b_p(pik, u4_atom_fing, &bic) ) {
     u4_gene mip = _mill_mate(m, bic);
     u4_gene hem = _mill_fiat(m, bic);
 

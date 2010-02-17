@@ -1,12 +1,58 @@
-s/base/gult/g
-s/cast/perd/g
-s/home/poos/g
-s/kick/gant/g
-s/link/slon/g
-s/mold/halc/g
-s/pick/stol/g
-s/post/clep/g
-s/rack/sard/g
-s/rock/pret/g
-s/sure/tarn/g
-s/test/forb/g
+clat pont  =>   E  [han=mark dur=gene leb=gene]    [leb] in [[han=dur] +]
+clet rulf  =<   E  [han=mark dur=gene leb=gene]    [dur] in [[han=leb] +]
+plat glem  ->   E  [hig=gene muc=gene]             [muc] in [hig +]
+plet lisc  -<   E  [hig=gene muc=gene]             [hig] in [muc +]
+grat slon  ~>   X  [del=gene zim=gene]             [zim] in [del]
+gret stiv  ~<   E  [del=gene zim=gene]             [del] in [zim]
+
+quol stol  ?:   X  [tes=gene bif=gene hob=gene]    if [tes] [bif], else [hob]
+quat feng  ?>   E  [tes=gene bif=gene]             if [tes] [bif], else fail
+quet prex  ?<   E  [tes=gene hob=gene]             if [tes] fail, else [hob]
+quem zact  ?-   E  [mox=rope bem=list+pike]        examine [mox], internally
+quid glax  ?+   E  [feg=gene bem=list+pike]        examine [feg], externally 
+quax boce  ?&   E  [das=list+gene]                 yes iff all of [das] are yes
+quix peld
+quac trup
+quop forb
+
+stig clep
+stid malk
+ston blin
+stol stur
+stix drol
+stop lome
+stem flot
+
+glid perd
+glem halc
+glop tarn
+glon rald
+glaz crot
+
+slop gant
+slat lect
+slet zarb
+sloc pung
+slid garc
+slem flec
+SLON sard
+slux plom
+slos delc
+slip brip
+
+plov dbug
+plac tram
+plol poos
+plaz spot
+
+brov gult
+brax griv
+bron veck
+broc spil
+BRIP neft
+brop wamp
+
+draz palt
+dron pril
+drop pret
+ 

@@ -90,7 +90,7 @@ _fiat_warx_in(u4_milr m,
     return u4_noun_0;
   } else {
     return u4_k_cell
-      (lane, u4_k_cell(lane, u4_atom_drol, i_bec),
+      (lane, u4_k_cell(lane, u4_atom_fing, i_bec),
              _fiat_warx_in(m, t_bec));
   }
 }
