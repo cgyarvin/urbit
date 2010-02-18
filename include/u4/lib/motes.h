@@ -131,6 +131,7 @@
     u4_lib_mote(film, u4_s4('f','i','l','m'))
     u4_lib_mote(find, u4_s4('f','i','n','d'))
     u4_lib_mote(fine, u4_s4('f','i','n','e'))
+    u4_lib_mote(fing, u4_s4('f','i','n','g'))
     u4_lib_mote(fire, u4_s4('f','i','r','e'))
     u4_lib_mote(fish, u4_s4('f','i','s','h'))
     u4_lib_mote(fit,  u4_s3('f','i','t'))

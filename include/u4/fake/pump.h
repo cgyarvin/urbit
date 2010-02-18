@@ -35,10 +35,26 @@
 
     /* u4_prep_heximal():
     **
-    **   Prep a heximal value.
+    **   Prep a heximal value, with 0x.
     */
       u4_prep
       u4_prep_heximal(u4_lane lane,
+                      u4_atom atom);
+
+    /* u4_prep_hexinal():
+    **
+    **   Prep a heximal value, without 0x.
+    */
+      u4_prep
+      u4_prep_hexinal(u4_lane lane,
+                      u4_atom atom);
+
+    /* u4_prep_textual():
+    **
+    **   Prep with a text bias; fall back to hex.
+    */
+      u4_prep
+      u4_prep_textual(u4_lane lane,
                       u4_atom atom);
 
     /* u4_prep_close():

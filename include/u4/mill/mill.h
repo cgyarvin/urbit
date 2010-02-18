@@ -40,7 +40,7 @@
       typedef u4_noun u4_hair;  //  [term type]
       typedef u4_noun u4_cope;  //  {list hair}
       typedef u4_noun u4_form;  //  [formula]
-      typedef u4_noun u4_clip;  //  {bush germ}
+      typedef u4_noun u4_clip;  //  {bush gene}
 
       typedef u4_noun u4_type;
 
@@ -328,6 +328,12 @@
         _mill_repo(u4_milr m,
                    u4_type tip,
                    u4_gene gen);
+
+      /* _mill_seal(): produce set of gates sealing [typ].
+      */
+        u4_bag
+        _mill_seal(u4_milr m,
+                   u4_type typ);
 
       /* _mill_slip(): hack entire bar.
       */

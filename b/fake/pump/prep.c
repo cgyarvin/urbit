@@ -4,16 +4,17 @@
 */
 #include "u4/all.h"
 
-/* Return true iff (atom) is an ASCII string of 3 or more bytes,
+/* Return true iff (atom) is an ASCII string of (xb) or more bytes,
 ** using no characters besides a-z and -.
 */
 static u4_t
 _test_term(u4_lane lane,
-           u4_atom atom)
+           u4_atom atom,
+           u4_xb   xb)
 {
   u4_sb sb = u4_a_bin(atom, 3);
 
-  if ( sb >= 2 ) {
+  if ( sb >= xb) {
     u4_xb *xb = alloca(sb);
     u4_pb i;
 
@@ -27,6 +28,20 @@ _test_term(u4_lane lane,
     return 1;
   }
   else return 0;
+}
+
+/* u4_prep_textual():
+**
+**   Prep with a text bias; fall back to decimal.
+*/
+u4_prep
+u4_prep_textual(u4_lane lane,
+                u4_atom atom)
+{
+  if ( _test_term(lane, atom, 1) ) {
+    return atom;
+  }
+  else return u4_prep_decimal(lane, atom);
 }
 
 /* u4_prep_decimal():
@@ -54,7 +69,7 @@ u4_prep_decimal(u4_lane lane,
 
 /* u4_prep_heximal():
 **
-**   Prep a hexadecimal value.
+**   Prep a hexadecimal value, with 0x.
 */
 u4_prep
 u4_prep_heximal(u4_lane lane,
@@ -79,6 +94,31 @@ u4_prep_heximal(u4_lane lane,
   return text;
 }
 
+/* u4_prep_hexinal():
+**
+**   Prep a heximal value, without 0x.
+*/
+u4_prep
+u4_prep_hexinal(u4_lane lane,
+                u4_atom atom)
+{
+  u4_sy sy_n = u4_a_bin(atom, 2);
+  u4_sb sb_hex = (sy_n ? sy_n : 1);
+  u4_ca *ca = malloc(sb_hex + 1);
+  mpz_t mp;
+  u4_noun text;
+
+  u4_a_gmp(atom, mp);
+
+  mpz_get_str(ca, 16, mp);
+
+  text = u4_k_atom_c(lane, ca);
+  free(ca);
+  mpz_clear(mp);
+
+  return text;
+}
+
 /* Convert (atom) to string text - by guessing.  Use only as last resort.
 */
 static u4_noun
@@ -91,7 +131,7 @@ _prep_atom(u4_lane lane, u4_atom atom)
     case 1: return u4_prep_decimal(lane, atom);
 
     default: {
-      if ( _test_term(lane, atom) ) {
+      if ( _test_term(lane, atom, 2) ) {
         return u4_k_safe(lane, atom);
       }
       else {

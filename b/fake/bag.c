@@ -137,6 +137,50 @@ u4_bag_in(u4_pig pig_in,
   }
 }
 
+/* u4_bag_at():
+**
+**   Return path to node of (pig) in (bag), under (axe); or 0.
+*/
+u4_atom
+u4_bag_at(u4_lane lane, 
+          u4_pig  pig_in,
+          u4_atom axe,
+          u4_bag  bag)
+{
+  u4_nub nub_in = u4_n_nub(pig_in);
+
+  if ( u4_n_zero(bag) ) {
+    return u4_noun_0;
+  }
+  else {
+    u4_pig pig; 
+    u4_bag bag_l, bag_r;
+
+    u4_c_trel(bag, &pig, &bag_l, &bag_r);
+    {
+      u4_nub nub_sub = u4_n_nub(pig);
+      u4_t   t_l;
+
+      if ( nub_in == nub_sub ) {
+        if ( u4_n_eq(pig_in, pig) ) {
+          return axe;
+        }
+        else t_l = _ord_simple(pig_in, pig);
+      }
+      else t_l = (nub_in < nub_sub);
+
+      if ( t_l ) {
+        return u4_bag_at
+          (lane, pig_in, u4_op_peg(lane, axe, u4_noun_2), bag_l);
+      }
+      else {
+        return u4_bag_at
+          (lane, pig_in, u4_op_peg(lane, axe, u4_noun_3), bag_r);
+      }
+    }
+  }
+}
+
 /* _bag_fix_l(): fix a bag whose left side has been rebuilt.
 */
 static u4_bag
@@ -384,6 +428,28 @@ u4_bag_log(u4_lane lane,
   }
 }
 
+/* u4_bag_cat():
+**
+**   Produce a version of (bag_b) which includes all entries
+**   in (bag_a).
+*/
+_(u4_bag, bag_pro)
+u4_bag_cat(u4_lane lane,
+           u4_bag  bag_a,
+           u4_bag  bag_b)
+{
+  u4_log log = u4_bag_log(lane, u4_noun_0, bag_a);
+
+  while ( !u4_n_zero(log) ) {
+    bag_b = u4_bag_add(lane, u4_ch(log), bag_b);
+    log = u4_ct(log);
+  }
+  return bag_b;
+}
+
+#if 0
+  // Something broken in this code - leak instead!
+  //
 /* _bag_cat_hat(): as u4_bag_cat(), on the hat of (road).
 */
 static
@@ -404,6 +470,8 @@ _bag_cat_hat(u4_road road,
   bag_hat = u4_k_safe(road, bag_cap);
 
   u4_road_bar_cap(road) = bar_cap;
+  printf("bch: %x\n", bag_hat);
+  abort(); 
   return bag_hat;
 }
             
@@ -430,6 +498,8 @@ u4_bag_cat(u4_lane lane,
     bag_pro = _bag_cat_hat(road_nest, bag_a, bag_b);
     u4_r_nest_out(road, road_nest);
 
+    printf("bp: %x\n", bag_pro);
     return bag_pro;
   }
 }
+#endif

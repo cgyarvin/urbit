@@ -20,7 +20,7 @@ _vere_print(uz_machine mac,
             uz_noun    fig)
 {
   uz_f_print_type(mac, cap, uz_ch(mac, fig));
-  uz_f_print(mac, cap, uz_ct(mac, fig));
+  // uz_f_print(mac, cap, uz_ct(mac, fig));
 }
 
 /* _vere_source_crib(): load a crib source.

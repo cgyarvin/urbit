@@ -17,6 +17,16 @@
       u4_bag_in(u4_pig pig,
                 u4_bag bag);
 
+    /* u4_bag_at():
+    **
+    **   Return path to node of (pig) in (bag), under (axe); or 0.
+    */
+      u4_atom
+      u4_bag_at(u4_lane lane, 
+                u4_pig  pig_in,
+                u4_atom axe,
+                u4_bag  bag);
+
     /* u4_bag_add():
     **
     **   Produce a version of (bag_sub) which includes (pig).

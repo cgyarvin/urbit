@@ -80,6 +80,7 @@ U4_MILL_OFILES=\
        b/mill/poke.o \
        b/mill/reap.o \
        b/mill/repo.o \
+       b/mill/seal.o \
        b/mill/slip.o \
        b/mill/snap.o \
        b/mill/stub.o \
