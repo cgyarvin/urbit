@@ -1,13 +1,13 @@
-/* mill/x/forb.c
+/* mill/x/quop.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_x_forb()::
+/* _mill_x_quop()::
 */
 u4_loaf
-_mill_x_forb(u4_milr m, 
+_mill_x_quop(u4_milr m, 
              u4_rope rid,
              u4_gene bul, 
              u4_type tip)

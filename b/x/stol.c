@@ -1,13 +1,13 @@
-/* mill/x/stol.c
+/* mill/x/quol.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_x_stol()::
+/* _mill_x_quol()::
 */
 u4_loaf
-_mill_x_stol(u4_milr m, 
+_mill_x_quol(u4_milr m, 
              u4_gene tes,
              u4_gene bif, 
              u4_gene hob, 

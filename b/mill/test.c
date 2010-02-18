@@ -76,7 +76,7 @@ _mill_test(u4_milr m,
   u4_lane lane = m->lane;
   u4_noun p_gen, q_gen;
 
-  if ( u4_b_pq(gen, u4_atom_forb, &p_gen, &q_gen) ) {
+  if ( u4_b_pq(gen, u4_atom_quop, &p_gen, &q_gen) ) {
     u4_wire fod = _mill_look(m, p_gen, typ);
     u4_type hur = _mill_play(m, q_gen, typ);
     u4_type wid = u4_ch(fod);
@@ -118,10 +118,10 @@ _mill_test(u4_milr m,
     }
   }
 
-  else if ( u4_b_p(gen, u4_atom_boce, &p_gen) ) {
+  else if ( u4_b_p(gen, u4_atom_quax, &p_gen) ) {
     return _mill_test_and(m, p_gen, typ);
   }
-  else if ( u4_b_p(gen, u4_atom_peld, &p_gen) ) {
+  else if ( u4_b_p(gen, u4_atom_quix, &p_gen) ) {
     return _mill_test_or(m, p_gen, typ);
   }
 

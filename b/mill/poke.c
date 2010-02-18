@@ -45,7 +45,7 @@ _poke_crib(u4_milr m,
   }
 }
 
-/* _mill_poke(): modify type to reflect poke assignment, if any.
+/* _mill_poke(): modify type to refslat poke assignment, if any.
 */
 u4_type
 _mill_poke(u4_milr m,

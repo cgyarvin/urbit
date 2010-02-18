@@ -20,7 +20,7 @@ _vere_print(uz_machine mac,
             uz_noun    fig)
 {
   uz_f_print_type(mac, cap, uz_ch(mac, fig));
-  // uz_f_print(mac, cap, uz_ct(mac, fig));
+  uz_f_print(mac, cap, uz_ct(mac, fig));
 }
 
 /* _vere_source_crib(): load a crib source.
@@ -74,10 +74,10 @@ _vere_source_atom(uz_machine mac,
 {
   uz_noun p_viq;
 
-  if ( uz_c_p(mac, viq, uz_s4('p','a','l','t'), &p_viq) ) {
+  if ( uz_c_p(mac, viq, uz_s4('d','r','a','z'), &p_viq) ) {
     return uz_k_cell(mac, uz_s4('a','t','o','m'), p_viq);
   }
-  else if ( uz_c_p(mac, viq, uz_s4('p','r','e','t'), &p_viq) ) {
+  else if ( uz_c_p(mac, viq, uz_s4('d','r','o','n'), &p_viq) ) {
     return uz_k_cell
       (mac, uz_k_cell(mac, uz_s4('c','u','b','e'), p_viq), p_viq);
   }

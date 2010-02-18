@@ -1,13 +1,13 @@
-/* mill/x/perd.c
+/* mill/x/glid.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_x_perd()::
+/* _mill_x_glid()::
 */
 u4_wire
-_mill_x_perd(u4_milr m, 
+_mill_x_glid(u4_milr m, 
              u4_gene fes,
              u4_gene rum, 
              u4_type tip)
@@ -20,8 +20,8 @@ _mill_x_perd(u4_milr m,
     return u4_k_cell(lane, maf, u4_ct(kib));
   }
   else {
-    u4_burp(lane, "perd: maf", _mill_dump(m, maf));
-    u4_burp(lane, "perd: kib", _mill_dump(m, u4_ch(kib)));
+    u4_burp(lane, "glid: maf", _mill_dump(m, maf));
+    u4_burp(lane, "glid: kib", _mill_dump(m, u4_ch(kib)));
 
     return _mill_fail(m, "type mismatch");
   }

@@ -1,13 +1,13 @@
-/* mill/x/sard.c
+/* mill/x/slon.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _sard_make(): mill a sard.
+/* _slon_make(): mill a slon.
 */
 static void
-_sard_make(u4_milr m,
+_slon_make(u4_milr m,
            u4_noun caw,
            u4_type tip,
            u4_type *gor,
@@ -29,7 +29,7 @@ _sard_make(u4_milr m,
     *fal = u4_ct(fod);
   } 
   else {
-    _sard_make(m, t_caw, tip, gor, fal);
+    _slon_make(m, t_caw, tip, gor, fal);
 
     *gor = u4_k_trel
       (lane, u4_atom_crib,
@@ -40,10 +40,10 @@ _sard_make(u4_milr m,
   }
 }
 
-/* _mill_x_sard()::
+/* _mill_x_slon()::
 */
 u4_loaf
-_mill_x_sard(u4_milr m, 
+_mill_x_slon(u4_milr m, 
              u4_noun caw,
              u4_type tip)
 {
@@ -51,6 +51,6 @@ _mill_x_sard(u4_milr m,
   u4_type gor;
   u4_form fal;
 
-  _sard_make(m, caw, tip, &gor, &fal);
+  _slon_make(m, caw, tip, &gor, &fal);
   return u4_k_cell(lane, gor, fal);
 }

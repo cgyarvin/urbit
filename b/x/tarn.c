@@ -1,13 +1,13 @@
-/* mill/x/tarn.c
+/* mill/x/glop.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_x_tarn()::
+/* _mill_x_glop()::
 */
 u4_loaf
-_mill_x_tarn(u4_milr m, 
+_mill_x_glop(u4_milr m, 
              u4_gene fes,
              u4_gene gav, 
              u4_gene vep, 

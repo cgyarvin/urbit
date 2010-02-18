@@ -1,13 +1,13 @@
-/* mill/x/gant.c
+/* mill/x/slop.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _gant_weld(): apply a change list to a type.
+/* _slop_weld(): apply a change list to a type.
 */
 u4_type
-_gant_weld(u4_milr m,
+_slop_weld(u4_milr m,
            u4_tape lub,
            u4_type typ)
 {
@@ -18,15 +18,15 @@ _gant_weld(u4_milr m,
     u4_tack i_lub = u4_ch(lub);
     u4_tape t_lub = u4_ct(lub);
 
-    return _gant_weld
+    return _slop_weld
       (m, t_lub, _mill_weld(m, u4_ch(i_lub), u4_ct(i_lub), typ));
   }
 }
 
-/* _gant_walk(): produce type and formula modifications.
+/* _slop_walk(): produce type and formula modifications.
 */
 static void
-_gant_walk(u4_milr m,
+_slop_walk(u4_milr m,
            u4_bolt suc,
            u4_type typ,
            u4_type gan,
@@ -52,13 +52,13 @@ _gant_walk(u4_milr m,
     u4_axis axe;
 
     if ( !u4_b_p(q_pas, u4_noun_0, &axe) ) {
-      _mill_fail(m, "gant: bad walk a"); return;
+      _mill_fail(m, "slop: bad walk a"); return;
     }
     if ( u4_atom_blot == p_pas ) {
-      _mill_fail(m, "gant: bad walk b"); return;
+      _mill_fail(m, "slop: bad walk b"); return;
     }
 
-    _gant_walk(m, u4_ct(suc), typ, gan, lub, vix);
+    _slop_walk(m, u4_ct(suc), typ, gan, lub, vix);
 
     *lub = u4_k_cell
       (lane, 
@@ -72,10 +72,10 @@ _gant_walk(u4_milr m,
   }
 }
 
-/* _gant_cook(): modify the target of a gant.
+/* _slop_cook(): modify the target of a slop.
 */
 static u4_loaf
-_gant_cook(u4_milr m,
+_slop_cook(u4_milr m,
            u4_bolt suc,
            u4_type typ,
            u4_type gan,
@@ -86,18 +86,18 @@ _gant_cook(u4_milr m,
   u4_type gob;
   u4_form fol;
 
-  _gant_walk(m, suc, typ, gan, &lub, &vix);
+  _slop_walk(m, suc, typ, gan, &lub, &vix);
 
-  gob = _gant_weld(m, lub, gan);
+  gob = _slop_weld(m, lub, gan);
   fol = _mill_hike(m, ped, vix);
 
   return u4_k_cell(m->lane, gob, fol);
 }
 
-/* _mill_gant(): gant port.
+/* _mill_slop(): slop port.
 */
 u4_loaf
-_mill_x_gant(u4_milr m,
+_mill_x_slop(u4_milr m,
              u4_rope ved,
              u4_bolt suc,
              u4_type typ)
@@ -106,14 +106,14 @@ _mill_x_gant(u4_milr m,
   u4_loaf rec;
 
   // printf("\n");
-  // u4_err(lane, "gant: ved", ved);
-  // u4_err(lane, "gant: suc", suc);
-  // u4_burp(lane, "gant: typ", _mill_dump(m, typ));
+  // u4_err(lane, "slop: ved", ved);
+  // u4_err(lane, "slop: suc", suc);
+  // u4_burp(lane, "slop: typ", _mill_dump(m, typ));
 
   rec = _mill_look(m, ved, typ);
 
   if ( u4_n_zero(rec) ) {
-    return _mill_fail(m, "gant: broken");
+    return _mill_fail(m, "slop: broken");
   }
   else {
     u4_type gan = u4_ch(rec);
@@ -126,14 +126,14 @@ _mill_x_gant(u4_milr m,
     if ( u4_b_p(nol, u4_noun_0, &p_nol) ) {
       ped = p_nol;
 
-      return _gant_cook(m, suc, typ, gan, ped);
+      return _slop_cook(m, suc, typ, gan, ped);
     }
 
     else if ( u4_b_pq(nol, u4_noun_3, &p_nol, &q_nol) &&
               u4_b_p(p_nol, u4_noun_0, &ped) &&
               u4_b_pq(gan, u4_atom_gate, &p_gan, &q_gan) )
     {
-      u4_loaf das = _gant_cook(m, suc, typ, p_gan, ped);
+      u4_loaf das = _slop_cook(m, suc, typ, p_gan, ped);
       u4_type p_das = u4_ch(das);
       u4_form q_das = u4_ct(das);
       u4_noun vew, mig;
@@ -145,7 +145,7 @@ _mill_x_gant(u4_milr m,
     }
 
     else {
-      return _mill_fail(m, "gant: ugly");
+      return _mill_fail(m, "slop: ugly");
     }
   }
 }

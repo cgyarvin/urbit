@@ -106,7 +106,7 @@ _fish_main(u4_milr m,
   else return _fish_main(m, gil, neb, axe, _mill_reap(m, tip));
 }
 
-/* _mill_fish(): forb form.
+/* _mill_fish(): quop form.
 */
 u4_form
 _mill_fish(u4_milr m,

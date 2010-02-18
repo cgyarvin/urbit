@@ -1,13 +1,13 @@
-/* mill/x/pret.c
+/* mill/x/drop.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_x_pret()::
+/* _mill_x_drop()::
 */
 u4_loaf
-_mill_x_pret(u4_milr m, 
+_mill_x_drop(u4_milr m, 
              u4_noun daq,
              u4_type tip)
 {

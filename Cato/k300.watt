@@ -189,7 +189,7 @@
       ||  flag
         a = noun
       ==
-        &|a
+        &~a
 
   ::::::::  zil                 atom is 0
   ::

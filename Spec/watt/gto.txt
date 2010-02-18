@@ -51,7 +51,7 @@ plac tram  !!   X  [0]                             exit
 plol poos  !:   X  [cux=lab lyq=gene]              source label
 plaz spot  !@   X  [xed=[[@ @] [@ @] lyq=gene]     source pos, [at to] [lin col]
 
-brov gult  &?    X  [fiz=(3 4 5 6 7) dil=gene]      nock operator
+brov gult  &?   X  [fiz=(3 4 5 6 7) dil=gene]      nock operator
 brax griv  &&   X  [dil=gene zep=noun]             raw formula
 bron veck  &*   E  [dil=gene]                      raw eval
 broc spil  &~   E  [dil=gene]                      cell

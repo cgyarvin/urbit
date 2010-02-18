@@ -4,7 +4,7 @@
 */
 #include "u4/all.h"
 
-/* _mill_diff(): forb difference.
+/* _mill_diff(): quop difference.
 */
 u4_form
 _mill_diff(u4_milr m,

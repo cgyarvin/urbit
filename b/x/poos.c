@@ -1,13 +1,13 @@
-/* mill/x/poos.c
+/* mill/x/plol.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_x_poos()::
+/* _mill_x_plol()::
 */
 u4_loaf
-_mill_x_poos(u4_milr m, 
+_mill_x_plol(u4_milr m, 
              u4_noun cux,
              u4_gene lyq, 
              u4_type tip)

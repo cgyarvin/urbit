@@ -33,25 +33,25 @@ _mill_make_main(u4_milr m,
 
   if ( u4_b_fork(gen, &p_gen, &q_gen) ) {
     return _mill_make_main
-      (m, u4_k_qual(m->lane, u4_atom_plom, p_gen, q_gen, u4_noun_0), tip);
+      (m, u4_k_qual(m->lane, u4_atom_slux, p_gen, q_gen, u4_noun_0), tip);
   }
   else {
-    _make_pq (slon);    // ~>
-    _make_pq (gant);    // :=
-    _make_pq (perd);    // ^+
-    _make_pq (halc);    // ^-
-    _make_p  (dbug);
-    _make_p  (pret);
-    _make_p  (clep);
-    _make_pqr(tarn);    // ^=
-    _make_p  (tram);    // !!
-    _make_pq (gult);
-    _make_pq (griv);    // &&
-    _make_pqr(stol);    // ?:
-    _make_p  (sard);    // :*
-    _make_pq (spot);
-    _make_pq (poos);
-    _make_pq (forb);    // ?= 
+    _make_pq (grat);    // ~>
+    _make_pq (slop);    // :=
+    _make_pq (glid);    // ^+
+    _make_pq (glem);    // ^-
+    _make_p  (plov);
+    _make_p  (drop);
+    _make_p  (stig);
+    _make_pqr(glop);    // ^=
+    _make_p  (plac);    // !!
+    _make_pq (brov);
+    _make_pq (brax);    // &&
+    _make_pqr(quol);    // ?:
+    _make_p  (slon);    // :*
+    _make_pq (plaz);
+    _make_pq (plol);
+    _make_pq (quop);    // ?= 
 
     {
       u4_noun rex = _mill_open(m, gen);

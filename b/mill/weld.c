@@ -16,7 +16,7 @@ _is_grip(u4_hook sod,
     if ( cox ) *cox = sod;
     return 1;
   }
-  else if ( u4_b_pq(sod, u4_atom_lect, tik, cox) ) {
+  else if ( u4_b_pq(sod, u4_atom_slat, tik, cox) ) {
     return 1;
   }
   else return 0;
@@ -28,10 +28,10 @@ static u4_t
 _is_limb(u4_hook sod,
          u4_axis *axe)
 {
-  return u4_b_p(sod, u4_atom_zarb, axe);
+  return u4_b_p(sod, u4_atom_slet, axe);
 }
 
-/* _mill_weld(): modify type to reflect assignment or refinement.
+/* _mill_weld(): modify type to refslat assignment or refinement.
 **
 **   fes: change path
 **   gan: type of change
@@ -74,7 +74,7 @@ _mill_weld(u4_milr m,
       if ( !u4_n_zero(tik) ) {
         t_fes = u4_k_cell
           (lane, u4_k_trel
-                  (lane, u4_atom_lect, u4_op_dec(lane, tik), cox),
+                  (lane, u4_atom_slat, u4_op_dec(lane, tik), cox),
                  t_fes);
       }
       

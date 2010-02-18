@@ -1,13 +1,13 @@
-/* mill/x/spot.c
+/* mill/x/plaz.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_x_spot()::
+/* _mill_x_plaz()::
 */
 u4_loaf
-_mill_x_spot(u4_milr m, 
+_mill_x_plaz(u4_milr m, 
              u4_noun xed,
              u4_gene lyq, 
              u4_type tip)

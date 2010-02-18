@@ -1,13 +1,13 @@
-/* mill/x/tram.c
+/* mill/x/plac.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_x_tram()::
+/* _mill_x_plac()::
 */
 u4_loaf
-_mill_x_tram(u4_milr m, 
+_mill_x_plac(u4_milr m, 
              u4_noun guk)
 {
   u4_lane lane  = m->lane;

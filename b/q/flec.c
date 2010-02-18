@@ -1,25 +1,25 @@
-/* mill/q/flec.c
+/* mill/q/slem.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_q_flec():
+/* _mill_q_slem():
 */
 u4_noun
-_mill_q_flec(u4_milr m, 
+_mill_q_slem(u4_milr m, 
              u4_gene buz)
 {
   u4_lane lane = m->lane;
 
   //  :*
-  //    %slon
+  //    %grat
   //    buz
-  //    [%lect 0 %%]
+  //    [%slat 0 %%]
   //  ==
   
   return u4_k_trel
-    (lane, u4_atom_slon, 
+    (lane, u4_atom_grat, 
            buz,
-           u4_k_trel(lane, u4_atom_lect, u4_noun_0, u4_noun_0));
+           u4_k_trel(lane, u4_atom_slat, u4_noun_0, u4_noun_0));
 }

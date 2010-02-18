@@ -16,19 +16,19 @@ _is_grip(u4_hook sod,
     if ( cox ) *cox = sod;
     return 1;
   }
-  else if ( u4_b_pq(sod, u4_atom_lect, tik, cox) ) {
+  else if ( u4_b_pq(sod, u4_atom_slat, tik, cox) ) {
     return 1;
   }
   else return 0;
 }
 
-/* _is_zarb()::
+/* _is_slet()::
 */
 static u4_t
-_is_zarb(u4_hook sod,
+_is_slet(u4_hook sod,
          u4_axis *axe)
 {
-  return u4_b_p(sod, u4_atom_zarb, axe);
+  return u4_b_p(sod, u4_atom_slet, axe);
 }
 
 /* _mill_look_hook(): read a step on a rope.
@@ -62,7 +62,7 @@ _mill_look_hook(u4_milr m,
       u4_noun p_vil;
       u4_type ger;
 
-      vor = u4_k_trel(lane, u4_atom_lect, u4_op_dec(lane, tik), cox);
+      vor = u4_k_trel(lane, u4_atom_slat, u4_op_dec(lane, tik), cox);
 
       if ( u4_b_p(vil, u4_noun_0, &axe) ) {
         ger = lem;
@@ -86,7 +86,7 @@ _mill_look_hook(u4_milr m,
       }
     }
   }
-  else if ( _is_zarb(vor, &axe) ) {
+  else if ( _is_slet(vor, &axe) ) {
     return u4_k_trel
       (lane, _mill_peek(m, axe, u4_noun_0, typ), 
              u4_noun_0, 

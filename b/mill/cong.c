@@ -1,4 +1,4 @@
-/* _cong_flat(): forb atomicity, with background (raf).
+/* _cong_flat(): quop atomicity, with background (raf).
 */
 static u4_t
 _cong_flat(u4_milr m,
@@ -53,7 +53,7 @@ _cong_flat(u4_milr m,
   else return _cong_flat(m, vit, raf, _mill_reap(m, tip));
 } 
 
-/* _cong_deep(): forb non-atomicity, with background (raf).
+/* _cong_deep(): quop non-atomicity, with background (raf).
 */
 static u4_t
 _cong_deep(u4_milr m,
@@ -100,7 +100,7 @@ _cong_deep(u4_milr m,
   else return _cong_deep(m, vit, raf, _mill_reap(m, tip));
 } 
 
-/* _cong_leaf(): constant forb.
+/* _cong_leaf(): constant quop.
 */
 static u4_t
 _cong_leaf(u4_milr m,

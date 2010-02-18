@@ -117,7 +117,6 @@ U4_MQ_OFILES=\
        b/q/feng.o \
        b/q/flec.o \
        b/q/flot.o \
-       b/q/frez.o \
        b/q/garc.o \
        b/q/glax.o \
        b/q/glem.o \
