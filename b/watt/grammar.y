@@ -62,7 +62,7 @@
  
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 855
+  %expect 854
 
   %pure-parser
   %locations
@@ -174,7 +174,7 @@ wide_core
       | dig_slem wide_norm_slem  /* :- */ { $$ = _ycell($1, $2); }
       | dig_slon wide_norm_slon  /* :* */ { $$ = _ycell($1, $2); }
       | dig_slux wide_norm_slux  /* :. */ { $$ = _ycell($1, $2); }
-      | dig_grun wide_norm_grun  /* :% */ { $$ = _ycell($1, $2); }
+      | dig_slex wide_norm_slex  /* :% */ { $$ = _ycell($1, $2); }
       | dig_slos wide_norm_slos  /* :$ */ { $$ = _ycell($1, $2); }
       | dig_slip wide_norm_slip  /* :~ */ { $$ = _ycell($1, $2); }
 
@@ -294,7 +294,7 @@ wide_core
       wide_norm_slux
         : '{' g wide_some '}' { $$ = $3; }
 
-      wide_norm_grun
+      wide_norm_slex
         : '{' g nail_wide_star ':' w wide '}' { $$ = _ycell($3, $6); }
 
       wide_norm_slos
@@ -366,7 +366,7 @@ tall
       | dig_slem w tall_norm_slem  /* :- */ { $$ = _ycell($1, $3); }
       | dig_slon w tall_norm_slon  /* :* */ { $$ = _ycell($1, $3); }
       | dig_slux w tall_norm_slux  /* :. */ { $$ = _ycell($1, $3); }
-      | dig_grun w tall_norm_grun  /* :% */ { $$ = _ycell($1, $3); }
+      | dig_slex w tall_norm_slex  /* :% */ { $$ = _ycell($1, $3); }
       | dig_slos w tall_norm_slos  /* :$ */ { $$ = _ycell($1, $3); }
       | dig_slip w tall_norm_slip  /* :~ */ { $$ = _ycell($1, $3); }
    
@@ -375,6 +375,8 @@ tall
       | dig_brip w tall_norm_brip  /* &^ */ { $$ = _ycell($1, $3); }
       | dig_brop w tall_norm_brop  /* &= */ { $$ = _ycell($1, $3); }
       | dig_broc w tall_norm_broc  /* &~ */ { $$ = _ycell($1, $3); }
+
+      | dig_plov w tall_norm_plov  /* !? */ { $$ = _ycell($1, $3); }
       ;
 
     /** Combinators.
@@ -617,10 +619,10 @@ tall
         : tall_some dig_stop
           { $$ = $1; }
 
-      tall_norm_grun
-        /* :%     [%grun veq=list+[rope gene] har=gene]
+      tall_norm_slex
+        /* :%     [%slex veq=list+[rope gene] har=gene]
         **
-        **    grun: execute with changes
+        **    slex: execute with changes
         */
         : nail_tall_star dig_stop w gene  
           { $$ = _ycell($1, $4); }
@@ -654,28 +656,37 @@ tall
         **
         **    bron: raw goto
         */
-        : tall
+        : gene
 
       tall_norm_brip
         /* &^     [%brip dil=gene]
         **
         **    brip: increment
         */
-        : tall
+        : gene
 
       tall_norm_brop
         /* &=     [%brop dil=gene]
         **
         **    brop: equality test
         */
-        : tall
+        : gene
 
       tall_norm_broc
         /* &~     [%broc dil=gene]
         **
         **    broc: cell test
         */
-        : tall
+        : gene
+
+    /** Special and debugging.
+    **/
+      tall_norm_plov
+        /* !!     [%plov lyq=gene]
+        **
+        **    plov: cell test
+        */
+        : gene
 
 
 /** Parts.
@@ -856,7 +867,7 @@ tall
  
       skel_w_item
         : skel_w                  { $$ = _ycell(u4_noun_0, $1); }
-        | tok_mark g '=' g skel_w { $$ = _ycell($1, $3); }
+        | tok_mark g '=' g skel_w { $$ = _ycell($1, $5); }
         ;
 
       skel_w_item_some
@@ -900,9 +911,9 @@ tall
   /** Pike: pattern reaction.
   **/
     pike_tall
-      : '-' w skel_t w tall  { $$ = _ytrel(u4_atom_lask, $3, $5); }
+      : '-' w skel_t w gene  { $$ = _ytrel(u4_atom_lask, $3, $5); }
       | '+' w skel_t         { $$ = _ycell(u4_atom_plic, $3); }
-      | '*' w skel_t w tall  { $$ = _ytrel(u4_atom_semp, $3, $5); }
+      | '*' w skel_t w gene  { $$ = _ytrel(u4_atom_semp, $3, $5); }
       | '%' w skel_t         { $$ = _ycell(u4_atom_fing, $3); }
       ;
 
@@ -910,7 +921,7 @@ tall
       : '-' w skel_w w wide      { $$ = _ytrel(u4_atom_lask, $3, $5); }
       | '+' w wide               { $$ = _ycell(u4_atom_plic, $3); }
       | '*' w skel_w w wide      { $$ = _ytrel(u4_atom_semp, $3, $5); }
-      | ':' w wide               { $$ = _ycell(u4_atom_fing, $3); } 
+      | '%' w wide               { $$ = _ycell(u4_atom_fing, $3); } 
       ;
 
     pike_tall_some
@@ -1128,9 +1139,11 @@ tall
     dig_slem: ':' '-' { $$ = u4_atom_slem; }
     dig_slon: ':' '*' { $$ = u4_atom_slon; }
     dig_slux: ':' '.' { $$ = u4_atom_slux; }
-    dig_grun: ':' '%' { $$ = u4_atom_grun; }
+    dig_slex: ':' '%' { $$ = u4_atom_slex; }
     dig_slos: ':' '$' { $$ = u4_atom_slos; }
     dig_slip: ':' '^' { $$ = u4_atom_slip; }
+
+    dig_plov: '!' '?' { $$ = u4_atom_plov; }
 /*
     dig_terg: '`' '+' { $$ = u4_atom_terg; }
     dig_hosc: '`' '-' { $$ = u4_atom_hosc; }

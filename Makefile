@@ -78,8 +78,10 @@ U4_MILL_OFILES=\
        b/mill/pike.o \
        b/mill/play.o \
        b/mill/poke.o \
+       b/mill/rake.o \
        b/mill/reap.o \
        b/mill/repo.o \
+       b/mill/salt.o \
        b/mill/seal.o \
        b/mill/slip.o \
        b/mill/snap.o \
@@ -120,6 +122,7 @@ U4_MQ_OFILES=\
        b/q/garc.o \
        b/q/glax.o \
        b/q/glem.o \
+       b/q/grun.o \
        b/q/lect.o \
        b/q/lisc.o \
        b/q/lome.o \

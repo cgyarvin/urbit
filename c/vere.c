@@ -78,6 +78,9 @@ _vere_source_atom(uz_machine mac,
     return uz_k_cell(mac, uz_s4('a','t','o','m'), p_viq);
   }
   else if ( uz_c_p(mac, viq, uz_s4('d','r','o','n'), &p_viq) ) {
+    return uz_k_cell(mac, uz_s4('b','l','u','r'), p_viq);
+  }
+  else if ( uz_c_p(mac, viq, uz_s4('d','r','o','p'), &p_viq) ) {
     return uz_k_cell
       (mac, uz_k_cell(mac, uz_s4('c','u','b','e'), p_viq), p_viq);
   }

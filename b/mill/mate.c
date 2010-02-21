@@ -21,7 +21,7 @@ _mate_peft_in(u4_milr m,
   u4_lane lane = m->lane;
 
   if ( u4_n_zero(wix) ) {
-    return 0;
+    return u4_noun_0;
   } 
   else {
     u4_noun i_wix = u4_ch(wix);
@@ -110,6 +110,11 @@ _mill_mate(u4_milr m,
 
     return _mill_mate(m, ved);
   }
+  else if ( u4_b_p(kel, u4_atom_felk, &p_kel) ) {
+    u4_bead hin = p_kel;
+
+    return u4_k_cell(lane, u4_atom_dron, hin); 
+  } 
   else if ( u4_b_p(kel, u4_atom_flit, &p_kel) ) {
     return _mate_any(m);
   }
@@ -139,5 +144,8 @@ _mill_mate(u4_milr m,
 
     return _mate_warx(m, bec);
   }
-  else return u4_trip;
+  else {
+    u4_err(lane, "kel", kel);
+    return u4_trip;
+  }
 }

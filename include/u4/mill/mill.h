@@ -316,6 +316,12 @@
                    u4_rail bar,
                    u4_type tip);
 
+      /* _mill_rake(): excise all superficial gas.
+      */
+        u4_type
+        _mill_rake(u4_milr m,
+                   u4_type typ);
+
       /* _mill_reap(): expand type.
       */
         u4_type
@@ -328,6 +334,20 @@
         _mill_repo(u4_milr m,
                    u4_type tip,
                    u4_gene gen);
+
+      /* _mill_salt(): modify a change target.
+      **
+      **    suc: changes:  bolt
+      **    pex: subject:  type
+      **    hel: target:   type
+      **    ped: fragment: axis
+      */
+        u4_loaf
+        _mill_salt(u4_milr m,
+                   u4_bolt suc,
+                   u4_type pex,
+                   u4_type hel,
+                   u4_axis ped);
 
       /* _mill_seal(): produce set of gates sealing [typ].
       */

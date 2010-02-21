@@ -4,7 +4,7 @@
 */
 #include "u4/all.h"
 
-/* _turn_crib(): adjust crib to refslat grip assignment, if any.
+/* _turn_crib(): adjust crib to reflect grip assignment, if any.
 */
 static u4_noun
 _turn_crib(u4_milr m,
@@ -74,7 +74,7 @@ _turn_crib(u4_milr m,
   }
 }
 
-/* _turn_fuse(): adjust fuse to refslat grip assignment, if any.
+/* _turn_fuse(): adjust fuse to reflect grip assignment, if any.
 */
 static u4_type
 _turn_fuse(u4_milr m,

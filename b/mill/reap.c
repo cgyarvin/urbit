@@ -60,5 +60,8 @@ _mill_reap(u4_milr m,
     return _mill_repo(m, p_tip, q_tip);
   }
 
-  else return u4_trip;
+  else {
+    u4_err(lane, "strange reap", tip);
+    return u4_trip;
+  }
 }

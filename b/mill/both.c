@@ -27,5 +27,10 @@ _mill_both(u4_milr m,
     return nem;
   }
 
-  else return u4_k_trel(m->lane, u4_atom_fuse, nem, dif);
+  else {
+    // u4_burp(m->lane, "fuse: nem", _mill_dump(m, nem));
+    // u4_burp(m->lane, "fuse: dif", _mill_dump(m, dif));
+
+    return u4_k_trel(m->lane, u4_atom_fuse, nem, dif);
+  }
 }

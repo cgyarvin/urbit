@@ -31,18 +31,21 @@ stem flot  |-   E  [cug=gene]                      hot lamb
 
 glid perd  ^+   X  [fes=gene rum=gene]             [rum] as [fes], geometric
 glem halc  ^-   X  [fes=gene rum=gene]             [rum] as [fes], genetic
-glop tarn  ^=   X  [fes=gene gav=gene vep=gene]    [vep], so [gav] matches [fes]
+glop tarn  ^=   X  [fes=gene gav=gene vep=gene]    [vep], so [gav] is in [fes]
 glon rald  ^*   E  [rum=gene]                      [rum] perd to blur
 glaz crot  ^@   E  [rum=gene]                      [rum] perd to atom
 
 slop gant  :=   X  [ved=rope suc=list+[rope gene]] use with changes
-slat lect  :<   E  [tic=nat vix=mark]              read by name
-slet zarb  :>   E  [haz=nat]                       read by axis
-sloc pung  :~   E  [buz=gene lep=gene]             call lamb, direct
-slid garc  :+   E  [buz=gene pum=list+gene]        call with list
-slem flec  :-   E  [buz=gene]                      call with default
+slat lect  :<   E  [tic=nat vix=mark]              seek by name
+slet zarb  :>   E  [haz=nat]                       seek by axis
+sloc pung  :~   E  [buz=gene lep=gene]             call, direct
+slid garc  :+   E  [buz=gene pum=list+gene]        call with args
+slem flec  :-   E  [buz=gene]                      call without args
+slex grun  :%   E  [vec=list+[rope gene] sud=gene] [sud] with changes
+
 slon sard  :*   X  [caw=list+[mark gene]]          classic American tuple
 slux plom  :.   E  [fut=list+gene]                 nameless tuple
+
 slos delc  :$   E  [mef=skel]                      skeleton stub
 slip brip  :^   E  [mef=skel]                      skeleton lamb
 
@@ -62,7 +65,7 @@ draz palt  %@   E  [daq=nat]                       constant, atom
 dron pril  %*   E  [daq=clod]                      constant, blur
 drop pret  %=   X  [daq=clod]                      constant, cube
  
-  rope: list+[mark [%flat tic=nat vix=mark] [%flet haz=nat]]
+  rope: list+(mark [%flat tic=nat vix=mark] [%flet haz=nat])
 
   skel:
 

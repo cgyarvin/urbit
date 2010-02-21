@@ -161,7 +161,10 @@ _dump_main(u4_milr m,
   }
 
   else if ( u4_b_p(typ, u4_atom_cube, &p_typ) ) {
-    if ( u4_n_atom(p_typ) ) {
+    if ( u4_n_zero(p_typ) ) {
+      return u4_cod_in('~');
+    }
+    else if ( u4_n_atom(p_typ) ) {
       return u4_k_atom_cat
         (lane, u4_cod_in('%'), u4_prep_textual(lane, p_typ));
     }
@@ -196,7 +199,7 @@ _dump_main(u4_milr m,
   else if ( u4_b_pq(typ, u4_atom_gate, &p_typ, &q_typ) ) {
     if ( u4_bag_in(typ, gil) ) {
       u4_noun fez = u4_k_atom_cat
-          (lane, u4_cod_in('%'), 
+          (lane, u4_cod_in('$'), 
                  u4_prep_decimal(lane, u4_bag_at(lane, typ, u4_noun_1, gil)));
 
       if ( u4_bag_in(typ, nip) ) {

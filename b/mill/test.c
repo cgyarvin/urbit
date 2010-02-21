@@ -91,7 +91,9 @@ _mill_test(u4_milr m,
         return u4_k_trel(lane, u4_atom_blot, u4_noun_1, u4_noun_1);
       }
       else if ( _mill_nest(m, wid, hur) ) {
-        printf("nested!\n");
+        // u4_burp(lane, "nest: wid", _mill_dump(m, wid));
+        // u4_burp(lane, "nest: hur", _mill_dump(m, hur));
+
         return u4_k_trel(lane, typ, u4_noun_1, u4_noun_0);
       }
       else {

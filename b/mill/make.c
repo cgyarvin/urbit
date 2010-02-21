@@ -45,6 +45,7 @@ _mill_make_main(u4_milr m,
     _make_p  (stig);
     _make_pqr(glop);    // ^=
     _make_p  (plac);    // !!
+    _make_p  (plov);    // !?
     _make_pq (brov);
     _make_pq (brax);    // &&
     _make_pqr(quol);    // ?:

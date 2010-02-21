@@ -35,7 +35,7 @@ _nest_atom(u4_milr m,
   // <%crib p={list ~[(term) (type)]}>
   //
   if ( u4_b_p(gan, u4_atom_crib, &p_gan) ) {
-    return _nest_atom(m, hax, meg, _mill_reap(m, p_gan));
+    return _nest_atom(m, hax, meg, _mill_reap(m, gan));
   }
 
   // <%cell p=(type) q=(type)>
@@ -116,7 +116,7 @@ _nest_plum(u4_milr m,
   // <%crib p={list ~[(term) (type)]}>
   //
   if ( u4_b_p(gan, u4_atom_crib, &p_gan) ) {
-    return _nest_plum(m, hax, p_typ, meg, _mill_reap(m, p_gan));
+    return _nest_plum(m, hax, p_typ, meg, _mill_reap(m, gan));
   }
 
   // <%cell p=(type) q=(type)>
@@ -199,7 +199,7 @@ _nest_cell(u4_milr m,
   // <%crib p={list ~[(term) (type)]}>
   //
   if ( u4_b_p(gan, u4_atom_crib, &p_gan) ) {
-    return _nest_cell(m, gil, hax, p_typ, q_typ, meg, _mill_reap(m, p_gan));
+    return _nest_cell(m, gil, hax, p_typ, q_typ, meg, _mill_reap(m, gan));
   }
 
   // <%cell p=(type) q=(type)>
@@ -294,7 +294,7 @@ _nest_cone(u4_milr m,
   // <%crib p={list ~[(term) (type)]}>
   //
   if ( u4_b_p(gan, u4_atom_crib, &p_gan) ) {
-    return _nest_cone(m, gil, hax, p_typ, q_typ, meg, _mill_reap(m, p_gan));
+    return _nest_cone(m, gil, hax, p_typ, q_typ, meg, _mill_reap(m, gan));
   }
 
   // <%cell p=(type) q=(type)>
@@ -527,7 +527,7 @@ _nest_main(u4_milr m,
 /* _mill_nest(): test geometric congruence.
 **
 **    [gan] is geometrically congruent with [typ] iff 
-**    every noun in [gan] is also in [typ].
+**    every noun in [gan] is also in [typ].  Ie: [gan] <: type.
 */
 u4_t
 _mill_nest(u4_milr m,
