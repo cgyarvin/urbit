@@ -181,7 +181,7 @@ _dump_main(u4_milr m,
   else if ( u4_b_pq(typ, u4_atom_fork, &p_typ, &q_typ) ) {
     u4_prep hep = 
       u4_prep_close
-        (lane, '(', ')', _dump_forks(m, gil, nip, typ));
+        (lane, '{', '}', _dump_forks(m, gil, nip, typ));
 
     return hep;
   }

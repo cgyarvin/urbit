@@ -2,7 +2,7 @@
 ::
 
 |+
-::::::::::  Tier 0: base types
+::::::::::  Tier 0: basic types
 ::::::::::
 
     ::  atom                    atom
@@ -27,6 +27,18 @@
       ==
         &=[0 a]
 
+    ::  list
+    ::
+    - list
+      |:  a = ^noun
+      ==
+        |:  b = noun
+        ==
+          ?-  b
+            +   ~
+            -   [i=* t=*] 
+                [i=(a i.b) t=$(b t.b)]
+          ==
 
 ::::::::::  Tier 1: simple logic and arithmetic
 ::::::::::

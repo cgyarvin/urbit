@@ -176,7 +176,7 @@ wide_core
       | dig_slux wide_norm_slux  /* :. */ { $$ = _ycell($1, $2); }
       | dig_slex wide_norm_slex  /* :% */ { $$ = _ycell($1, $2); }
       | dig_slos wide_norm_slos  /* :$ */ { $$ = _ycell($1, $2); }
-      | dig_slip wide_norm_slip  /* :~ */ { $$ = _ycell($1, $2); }
+      | dig_slip wide_norm_slip  /* :^ */ { $$ = _ycell($1, $2); }
 
       | dig_brax wide_norm_brax  /* && */ { $$ = _ycell($1, $2); }
       | dig_bron wide_norm_bron  /* &: */ { $$ = _ycell($1, $2); }
@@ -368,7 +368,7 @@ tall
       | dig_slux w tall_norm_slux  /* :. */ { $$ = _ycell($1, $3); }
       | dig_slex w tall_norm_slex  /* :% */ { $$ = _ycell($1, $3); }
       | dig_slos w tall_norm_slos  /* :$ */ { $$ = _ycell($1, $3); }
-      | dig_slip w tall_norm_slip  /* :~ */ { $$ = _ycell($1, $3); }
+      | dig_slip w tall_norm_slip  /* :^ */ { $$ = _ycell($1, $3); }
    
       | dig_brax w tall_norm_brax  /* && */ { $$ = _ycell($1, $3); }
       | dig_bron w tall_norm_bron  /* &: */ { $$ = _ycell($1, $3); }

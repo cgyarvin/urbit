@@ -13,7 +13,7 @@ _fiat_stub(u4_milr m,
   u4_lane lane = m->lane;
 
   return u4_k_qual
-    (lane, u4_atom_grat,
+    (lane, u4_atom_plat,
            u4_k_cell(lane, u4_atom_dron, u4_noun_0),
            u4_atom_stop,
            _mill_stub(m, kel));
@@ -69,7 +69,7 @@ _fiat_peft(u4_milr m,
 
   return u4_k_quil
     (lane,
-     u4_atom_grat,
+     u4_atom_plat,
      u4_k_cell(lane, u4_atom_dron, u4_noun_0),
      u4_atom_stop,
      u4_atom_slon,
@@ -154,8 +154,8 @@ _mill_fiat(u4_milr m,
 
     return u4_k_qual
        (lane, u4_atom_slid, 
-              _mill_stub(m, pef),
-              _mill_stub(m, niz),
+              _mill_fiat(m, pef),
+              _mill_fiat(m, niz),
               u4_noun_0);
   }
   else if ( u4_b_p(kel, u4_atom_grop, &p_kel) ) {
