@@ -57,12 +57,14 @@ U4_MILL_OFILES=\
        b/mill/cons.o \
        b/mill/cull.o \
        b/mill/dump.o \
+       b/mill/edit.o \
        b/mill/eith.o \
        b/mill/fail.o \
        b/mill/fiat.o \
        b/mill/find.o \
        b/mill/fish.o \
        b/mill/hike.o \
+       b/mill/hunt.o \
        b/mill/init.o \
        b/mill/look.o \
        b/mill/make.o \
@@ -81,6 +83,7 @@ U4_MILL_OFILES=\
        b/mill/rake.o \
        b/mill/reap.o \
        b/mill/repo.o \
+       b/mill/sail.o \
        b/mill/salt.o \
        b/mill/seal.o \
        b/mill/slip.o \
@@ -88,8 +91,7 @@ U4_MILL_OFILES=\
        b/mill/stub.o \
        b/mill/test.o \
        b/mill/trap.o \
-       b/mill/turn.o \
-       b/mill/weld.o
+       b/mill/turn.o
 
 U4_MX_OFILES=\
        b/x/clep.o \

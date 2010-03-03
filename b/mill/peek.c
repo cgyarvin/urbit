@@ -14,6 +14,8 @@ _peek_main(u4_milr m,
            u4_type tip)
 {
   u4_lane lane = m->lane;
+  u4_axis sud  = u4_op_tip(axe);
+  u4_axis hec  = u4_op_tap(lane, axe);
   u4_noun p_tip, q_tip;
 
   if ( u4_n_eq(u4_noun_1, axe) ) {
@@ -49,8 +51,6 @@ _peek_main(u4_milr m,
         return _peek_main(m, axe, gil, bar, qip_tip);
       }
       else {
-        u4_axis sud = u4_op_tip(axe);
-        u4_axis hec = u4_op_tap(lane, axe);
         u4_type gan;
 
         if ( u4_n_eq(u4_noun_2, sud) ) {
@@ -65,8 +65,6 @@ _peek_main(u4_milr m,
     // <%cell p=(type) q=(type)>
     //
     else if ( u4_b_pq(tip, u4_atom_cell, &p_tip, &q_tip) ) {
-      u4_axis sud = u4_op_tip(axe);
-      u4_axis hec = u4_op_tap(lane, axe);
       u4_type gan;
 
       if ( u4_n_eq(u4_noun_2, sud) ) {
@@ -80,9 +78,6 @@ _peek_main(u4_milr m,
     // <%cone p=(type) q={bush term type}>
     //
     else if ( u4_b_pq(tip, u4_atom_cone, &p_tip, &q_tip) ) {
-      u4_axis sud = u4_op_tip(axe);
-      u4_axis hec = u4_op_tap(lane, axe);
-
       if ( u4_n_eq(u4_noun_2, sud) ) {
         return _peek_main(m, hec, u4_noun_0, _mill_slip(m, sud, bar), p_tip); 
       }
@@ -128,6 +123,18 @@ _peek_main(u4_milr m,
       }
       else return _peek_main(m, axe, gil, bar, _mill_repo(m, p_tip, q_tip));
     }
+
+    // [%wing p=axis q=type]
+    //
+    else if ( u4_b_pq(tip, u4_atom_wing, &p_tip, &q_tip) ) {
+      if ( u4_n_eq(sud, u4_op_tip(p_tip)) ) {
+        u4_type gan = _mill_sail(m, u4_op_tap(lane, p_tip), q_tip);
+
+        return _peek_main(m, hec, u4_noun_0, _mill_slip(m, sud, bar), gan);
+      }
+      else return u4_atom_blur;
+    }
+
     else return u4_trip;
   }
 }

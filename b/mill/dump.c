@@ -188,9 +188,8 @@ _dump_main(u4_milr m,
 
   else if ( u4_b_pq(typ, u4_atom_fuse, &p_typ, &q_typ) ) {
     return u4_prep_close
-      (lane, '{', '}', 
+      (lane, '(', ')', 
              u4_k_list(lane,
-                       u4_atom_fuse,
                        _dump_main(m, gil, nip, p_typ),
                        _dump_main(m, gil, nip, q_typ),
                        0));
@@ -216,7 +215,6 @@ _dump_main(u4_milr m,
                  fez,
                  u4_cod_in('='),
                  hod,
-                 u4_noun_0,
                  0);
       }
     }
@@ -224,6 +222,19 @@ _dump_main(u4_milr m,
       return _dump_main(m, gil, nip, _mill_repo(m, p_typ, q_typ));
     }
   }
+
+  else if ( u4_b_pq(typ, u4_atom_wing, &p_typ, &q_typ) ) {
+    u4_prep fam = _dump_main(m, gil, nip, q_typ);
+
+    return u4_k_list
+      (lane, u4_atom_nail,
+             u4_cod_in('^'),
+             u4_prep_decimal(lane, p_typ),
+             u4_cod_in(':'),
+             fam,
+             0);
+  }
+
   else {
     return u4_trip;
   }

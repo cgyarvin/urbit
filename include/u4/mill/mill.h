@@ -18,6 +18,9 @@
       typedef u4_noun u4_spec;  //  lambda spec
       typedef u4_noun u4_skel;  //  pattern skeleton
       typedef u4_noun u4_bolo;  //  {list pike}
+      typedef u4_noun u4_plox;  //  {list glep}
+      typedef u4_noun u4_glep;  //  [tape type]
+      typedef u4_noun u4_curb;  //  [axis term]
       typedef u4_noun u4_loaf;  //  [type form]
       typedef u4_noun u4_wire;  //  [type form]
       typedef u4_noun u4_rail;  //  {list type}
@@ -31,7 +34,7 @@
       typedef u4_noun u4_lure;  //  {list bait}
       typedef u4_noun u4_rope;  //  {list hook}
       typedef u4_noun u4_nail;  //  [rope gene] 
-      typedef u4_noun u4_tack;  //  [rope type]
+      typedef u4_noun u4_tack;  //  |([%axis axis] [%term term])
       typedef u4_noun u4_weld;  //  [axis form]
       typedef u4_noun u4_bolt;  //  {list nail}
       typedef u4_noun u4_tape;  //  {list tack}
@@ -172,6 +175,14 @@
         _mill_dump(u4_milr m,
                    u4_type tip);
 
+      /* _mill_edit(): edit a type to reflect a list of writes.
+      */
+        u4_type
+        _mill_edit(u4_milr m,
+                   u4_plox zel,
+                   u4_rail bar,
+                   u4_type gom);
+
       /* _mill_eith(): fork pair.
       */
         u4_type
@@ -206,12 +217,33 @@
                    u4_axis axe,
                    u4_type tip);
 
+      /* _mill_heal(): modify type to reflect refinement.
+      **
+      **   niv: change axis
+      **   hur: refined type
+      **   wac: background type
+      */
+        u4_type
+        _mill_heal(u4_milr m,
+                   u4_axis niv,
+                   u4_type hur,
+                   u4_type wac);
+
       /* _mill_hike(): mutate form.
       */
         u4_form
         _mill_hike(u4_milr m,
                    u4_axis axe,
                    u4_belt vix);
+
+      /* _mill_hunt(): rope to tape.
+      */
+        u4_tape
+        _mill_hunt(u4_milr m,
+                   u4_rope dap,
+                   u4_type fim,
+                   u4_axis *axe,
+                   u4_type *buv);
 
       /* _mill_hunt(): analyze branch test.
       */
@@ -335,18 +367,25 @@
                    u4_type tip,
                    u4_gene gen);
 
+      /* _mill_sail(): patch type.
+      */
+        u4_type
+        _mill_sail(u4_milr m,
+                   u4_axis axe,
+                   u4_type typ);
+
       /* _mill_salt(): modify a change target.
       **
       **    suc: changes:  bolt
       **    pex: subject:  type
-      **    hel: target:   type
+      **    fuz: target:   type
       **    ped: fragment: axis
       */
         u4_loaf
         _mill_salt(u4_milr m,
                    u4_bolt suc,
                    u4_type pex,
-                   u4_type hel,
+                   u4_type fuz,
                    u4_axis ped);
 
       /* _mill_seal(): produce set of gates sealing [typ].
@@ -392,9 +431,13 @@
                    u4_type tip);
 
       /* _mill_weld(): modify type to reflect assignment.
+      **
+      **   axe: change axis
+      **   gan: type of change
+      **   typ: background type
       */
         u4_type
         _mill_weld(u4_milr m,
-                   u4_rope fes,
-                   u4_type gan,
-                   u4_type tip);
+                   u4_axis axe,
+                   u4_type hur,
+                   u4_type wac);

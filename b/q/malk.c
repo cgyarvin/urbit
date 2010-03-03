@@ -12,6 +12,11 @@ _mill_q_stid(u4_milr m,
 {
   u4_lane lane = m->lane;
   
+  if ( u4_n_zero(pir) ) {
+    pir = u4_k_cell
+      (lane, u4_k_trel(lane, u4_noun_0, u4_atom_plac, u4_noun_0),
+             u4_noun_0);
+  } 
   // XX: actually balance tree.
   //
   return u4_k_cell(lane, u4_atom_stig, u4_log_tupl(lane, pir));

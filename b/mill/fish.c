@@ -69,10 +69,10 @@ _fish_main(u4_milr m,
   }
 
   else if ( u4_b_pq(tip, u4_atom_fork, &p_tip, &q_tip) ) {
-    if ( _mill_cull(m, p_tip, neb) ) {
+    if ( _mill_cull(m, neb, p_tip) ) {
       return _fish_main(m, gil, neb, axe, q_tip);
     }
-    else if ( _mill_cull(m, q_tip, neb) ) {
+    else if ( _mill_cull(m, neb, q_tip) ) {
       return _fish_main(m, gil, neb, axe, p_tip);
     }
     else {
@@ -106,7 +106,7 @@ _fish_main(u4_milr m,
   else return _fish_main(m, gil, neb, axe, _mill_reap(m, tip));
 }
 
-/* _mill_fish(): quop form.
+/* _mill_fish(): test form.  Needs considerable improvement.
 */
 u4_form
 _mill_fish(u4_milr m,

@@ -4,6 +4,7 @@
 */
 #include "u4/all.h"
 
+#if 0
 /* _mill_test_and(): analyze branch and.
 */
 u4_wire
@@ -63,6 +64,7 @@ _mill_test_or(u4_milr m,
     }
   }
 }
+#endif
 
 /* _mill_test(): analyze branch test.
 **
@@ -77,55 +79,34 @@ _mill_test(u4_milr m,
   u4_noun p_gen, q_gen;
 
   if ( u4_b_pq(gen, u4_atom_quop, &p_gen, &q_gen) ) {
-    u4_wire fod = _mill_look(m, p_gen, typ);
+    u4_axis axe = u4_noun_1;
+    u4_type buv;
+    u4_tape res = _mill_hunt(m, p_gen, typ, &axe, &buv);
     u4_type hur = _mill_play(m, q_gen, typ);
-    u4_type wid = u4_ch(fod);
-    u4_form pak = u4_ct(fod);
-    u4_axis niv;
+    u4_plox zel = u4_k_cell(lane, u4_k_cell(lane, res, hur), u4_noun_0);
+    u4_type jac = _mill_edit(m, zel, u4_noun_0, u4_atom_blur);
 
-    if ( !u4_b_p(pak, u4_noun_0, &niv) ) {
-      return _mill_fail(m, "test: bad like");
+    if ( _mill_orth(m, buv, hur) ) {
+      return u4_k_trel(lane, u4_atom_blot, u4_noun_1, u4_noun_1);
+    }
+    else if ( _mill_nest(m, buv, hur) ) {
+      return u4_k_trel(lane, typ, u4_noun_1, u4_noun_0);
     }
     else {
-      if ( _mill_orth(m, wid, hur) ) {
-        return u4_k_trel(lane, u4_atom_blot, u4_noun_1, u4_noun_1);
-      }
-      else if ( _mill_nest(m, wid, hur) ) {
-        // u4_burp(lane, "nest: wid", _mill_dump(m, wid));
-        // u4_burp(lane, "nest: hur", _mill_dump(m, hur));
-
-        return u4_k_trel(lane, typ, u4_noun_1, u4_noun_0);
-      }
-      else {
-        u4_type hem = 
-            _mill_nest(m, u4_atom_blur, wid)
-              ?  hur
-              :  _mill_both(m, hur, wid); 
-        u4_type vic;
-        u4_form zan;
-
-        // printf("\n\n");
-        // u4_burp(lane, "wid", _mill_dump(m, wid));
-        // u4_burp(lane, "hur", _mill_dump(m, hur));
-        // u4_burp(lane, "hem", _mill_dump(m, hem));
-        // u4_err(lane, "p_gen", p_gen);
-
-        zan = _mill_weld(m, p_gen, hem, typ);
-        vic = _mill_fish(m, niv, hur);
-
-        // u4_burp(lane, "zan", _mill_dump(m, zan));
-        // u4_err(lane, "vic", vic);
-        return u4_k_cell(lane, zan, vic);
-      }
+      return u4_k_cell
+        (lane, u4_k_trel(lane, u4_atom_fuse, jac, typ),
+               _mill_fish(m, axe, hur));
     }
   }
-
+ 
+#if 0
   else if ( u4_b_p(gen, u4_atom_quax, &p_gen) ) {
     return _mill_test_and(m, p_gen, typ);
   }
   else if ( u4_b_p(gen, u4_atom_quix, &p_gen) ) {
     return _mill_test_or(m, p_gen, typ);
   }
+#endif
 
   else {
     u4_noun vob = _mill_open(m, gen);

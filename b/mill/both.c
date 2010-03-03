@@ -14,6 +14,20 @@ _mill_both(u4_milr m,
   if ( u4_n_eq(nem, dif) ) {
     return dif;
   }
+
+  else if ( _mill_nest(m, u4_atom_blur, nem) ) {
+    return dif;
+  }
+  else if ( _mill_nest(m, u4_atom_blur, dif) ) {
+    return nem;
+  }
+  else if ( _mill_nest(m, nem, u4_atom_blot) ||
+            _mill_nest(m, dif, u4_atom_blot) )
+  {
+    return u4_atom_blot;
+  }
+
+#if 0
   else if ( u4_n_eq(u4_atom_blur, nem) ) {
     return dif;
   }
@@ -26,6 +40,7 @@ _mill_both(u4_milr m,
   else if ( u4_n_eq(u4_atom_blot, nem) ) {
     return nem;
   }
+#endif
 
   else {
     // u4_burp(m->lane, "fuse: nem", _mill_dump(m, nem));

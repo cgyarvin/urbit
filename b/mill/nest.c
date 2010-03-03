@@ -407,13 +407,15 @@ _nest_forks(u4_milr m,
   u4_noun p_gav, q_gav;
 
   if ( u4_n_atom(gav) || 
-       u4_b_pq(gav,  u4_atom_crib, &p_gav, &q_gav) ||
        u4_b_pq(gav,  u4_atom_cell, &p_gav, &q_gav) ||
        u4_b_pq(gav,  u4_atom_cone, &p_gav, &q_gav) ||
        u4_b_p(gav,   u4_atom_cube, &p_gav) ||
        u4_b_pq(gav,  u4_atom_fuse, &p_gav, &q_gav) )
   {
     return u4_k_cell(lane, gav, hoc);
+  }
+  else if ( u4_b_p(gav, u4_atom_crib, &p_gav) ) {
+    return _nest_forks(m, hoc, lut, _mill_reap(m, gav));
   }
   else if ( u4_b_pq(gav, u4_atom_fork, &p_gav, &q_gav) ) {
     return _nest_forks(m, _nest_forks(m, hoc, lut, p_gav), lut, q_gav);
@@ -520,6 +522,12 @@ _nest_main(u4_milr m,
 
       return _nest_main(m, gil, meg, gan, _mill_repo(m, p_typ, q_typ));
     }
+  }
+
+  // [%wing p=axis q=type]
+  //
+  else if ( u4_b_pq(typ, u4_atom_wing, &p_typ, &q_typ) ) {
+    return _nest_main(m, gil, meg, gan, _mill_reap(m, typ));
   }
   else return u4_trip;
 }

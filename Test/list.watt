@@ -4,3 +4,5 @@
 |:  a = *
 ==
   (:^list+[p=atom q=atom] a)
+
+  bush+atom+atom

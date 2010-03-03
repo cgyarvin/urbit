@@ -81,6 +81,13 @@ _seal_main(u4_milr m,
             _mill_repo(m, p_typ, q_typ));
     }
   }
+
+  // [%wing p=axis q=type]
+  //
+  else if ( u4_b_pq(typ, u4_atom_wing, &p_typ, &q_typ) ) {
+    return _seal_main(m, gil, q_typ);
+  }
+
   else {
     u4_bug("strange type", typ);
     return u4_trip;

@@ -227,9 +227,9 @@ _find_fork(u4_milr m,
 */
 static u4_loaf
 _find_fuse(u4_milr m,
-           u4_rail bar,
            u4_mark cox,
            u4_bag  gil,
+           u4_rail bar,
            u4_type p_typ,
            u4_type q_typ)
 {
@@ -275,6 +275,8 @@ _find_fuse(u4_milr m,
               u4_b_p(p_fol, u4_noun_0, &axe) &&
               u4_b_pq(gan, u4_atom_gate, &p_gan, &q_gan) ) 
     {
+      // Fusion polymorphism.  Very powerful and dangerous.
+      //
       buc = u4_k_trel
         (lane, u4_atom_gate, 
                _mill_both(m, _mill_peek(m, axe, bar, p_typ), p_gan),
@@ -358,6 +360,13 @@ _find_main(u4_milr m,
             _mill_repo(m, p_typ, q_typ));
     }
   }
+
+  // [%wing p=axis q=type]
+  //
+  else if ( u4_b_pq(typ, u4_atom_wing, &p_typ, &q_typ) ) {
+    return u4_noun_0;
+  }
+
   else {
     u4_bug("strange type", typ);
     return u4_trip;

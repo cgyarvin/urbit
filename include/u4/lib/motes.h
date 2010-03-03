@@ -11,6 +11,7 @@
     u4_lib_mote(at,   u4_s2('a','t'))
     u4_lib_mote(atom, u4_s4('a','t','o','m'))
     u4_lib_mote(axe,  u4_s3('a','x','e'))
+    u4_lib_mote(axis, u4_s4('a','x','i','s'))
     u4_lib_mote(bach, u4_s4('b','a','c','h'))
     u4_lib_mote(bag,  u4_s3('b','a','g'))
     u4_lib_mote(ball, u4_s4('b','a','l','l'))

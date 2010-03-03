@@ -224,7 +224,10 @@ _snap_main(u4_milr m,
                   meg, 
                   wod, 
                   bar, 
-                  u4_k_trel(lane, p_sug, q_sug, u4_noun_0)));
+                  u4_k_trel
+                    (lane, u4_k_cell(lane, u4_noun_0, p_sug), 
+                           u4_k_cell(lane, u4_noun_0, q_sug), 
+                           u4_noun_0)));
   }
 
   // <%cone p=(type) q={bush term type}>
@@ -289,6 +292,11 @@ _snap_main(u4_milr m,
     }
   }
 
+  // [%wing p=axis q=type]
+  //
+  else if ( u4_b_pq(sug, u4_atom_wing, &p_sug, &q_sug) ) {
+    return _snap_main(m, gil, meg, wod, bar, _mill_reap(m, sug));
+  }
   else return u4_trip;
 }
 

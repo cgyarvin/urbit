@@ -1,4 +1,4 @@
-/* mill/port.c
+/* mill/look.c
 **
 ** This file is in the public domain.
 */
@@ -120,3 +120,5 @@ _mill_look(u4_milr m,
       (lane, u4_ch(gax), _mill_comp(m, u4_ct(fod), u4_ct(gax)));
   }
 }
+
+
