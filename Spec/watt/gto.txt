@@ -24,10 +24,10 @@ quop forb  ?=   X  [rid=rope bul=gene]             yes iff [rid] is like [bul]
 stig clep  |@   X  [pir=bush+[mark gene]]          load book
 stid malk  |+   E  [pir=list+[mark gene]]          book as list
 ston blin  |*   E  [bov=gene pir=list+[mark gene]] load and apply
-stol stur  |:   E  [tep=skel von=gene]             lamb construction
-stix drol  ||   E  [nix=skel tep=skel von=gene]    lamb with cast
-stop lome  |=   E  [cug=gene]                      cold lamb
-stem flot  |-   E  [cug=gene]                      hot lamb
+stol stur  |:   E  [tep=skel von=gene]             gate construction
+stix drol  ||   E  [nix=skel tep=skel von=gene]    gate with cast
+stop lome  |=   E  [cug=gene]                      cold gate
+stem flot  |-   E  [cug=gene]                      hot gate
 
 glid perd  ^+   X  [fes=gene rum=gene]             [rum] as [fes], geometric
 glem halc  ^-   X  [fes=gene rum=gene]             [rum] as [fes], genetic
@@ -43,11 +43,12 @@ slid garc  :+   E  [buz=gene pum=list+gene]        call with args
 slem flec  :-   E  [buz=gene]                      call without args
 slex grun  :%   E  [vec=list+[rope gene] sud=gene] [sud] with changes
 
-slon sard  :*   X  [caw=list+[mark gene]]          classic American tuple
+slon sard  :*   E  [caw=list+[mark gene]]          classic American tuple
 slux plom  :.   E  [fut=list+gene]                 nameless tuple
+sliv drub  :`   X  [tem=mark caf=gene]             name a face
 
 slos delc  :$   E  [mef=skel]                      skeleton stub
-slip brip  :^   E  [mef=skel]                      skeleton lamb
+slip brip  :^   E  [mef=skel]                      skeleton gate
 
 plov dbug  !?   X  [lyq=gene]                      activate internal debug
 plac tram  !!   X  [0]                             exit
@@ -72,15 +73,15 @@ drop pret  %=   X  [daq=clod]                      constant, cube
 tag    skel                           semantics
 ----------------------------------------------------------------------------
 gorm   [pef=skel niz=skel]            standard container
-drib   [ved=skel piv=skel]            [ved] for mate, [piv] for stub or lamb
-chob   [hep=rope]                     rope to lamb
-dept   [hup=skel]                     lamb from blur to [hup]
+drib   [ved=skel piv=skel]            [ved] for mate, [piv] for stub or gate
+chob   [hep=rope]                     rope to gate
+dept   [hup=skel]                     gate from blur to [hup]
 felk   [hin=clod]                     blur constant
-flit   [gen=gene]                     gene for lamb
+flit   [gen=gene]                     gene for gate
 galb   [hin=bead]                     bead constant
 grop   [hin=clod]                     exact constant
 peft   [wix=list+[mark skel]]         classic American tuple
-shud   [hup=skel sim=skel]            lamb from [sim] to [hup]
+shud   [hup=skel sim=skel]            gate from [sim] to [hup]
 warx   [bec=list+skel]                options
 
   pike:

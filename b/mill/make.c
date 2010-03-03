@@ -49,7 +49,8 @@ _mill_make_main(u4_milr m,
     _make_pq (brov);
     _make_pq (brax);    // &&
     _make_pqr(quol);    // ?:
-    _make_p  (slon);    // :*
+    _make_pq (sliv);    // :`
+    _make_p  (slux);    // :.
     _make_pq (plaz);
     _make_pq (plol);
     _make_pq (quop);    // ?= 

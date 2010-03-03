@@ -47,7 +47,7 @@ _mill_x_slop(u4_milr m,
 
     else if ( u4_b_pq(nol, u4_noun_3, &p_nol, &q_nol) &&
               u4_b_p(p_nol, u4_noun_0, &ped) &&
-              u4_b_pq(zum, u4_atom_gate, &p_zum, &q_zum) )
+              u4_b_pq(zum, u4_atom_hold, &p_zum, &q_zum) )
     {
       u4_type hel = p_zum;
       u4_loaf das = _mill_salt(m, suc, pex, hel, ped);
@@ -55,7 +55,7 @@ _mill_x_slop(u4_milr m,
       u4_form q_das = u4_ct(das);
       u4_noun vew, mig;
 
-      vew = u4_k_trel(lane, u4_atom_gate, p_das, q_zum);
+      vew = u4_k_trel(lane, u4_atom_hold, p_das, q_zum);
       mig = u4_k_trel(lane, u4_noun_3, q_das, q_nol);
 
       return u4_k_cell(lane, vew, mig);
@@ -66,3 +66,4 @@ _mill_x_slop(u4_milr m,
     }
   }
 }
+

@@ -32,25 +32,19 @@ _nest_atom(u4_milr m,
     return u4_false;
   }
 
-  // <%crib p={list ~[(term) (type)]}>
-  //
-  if ( u4_b_p(gan, u4_atom_crib, &p_gan) ) {
-    return _nest_atom(m, hax, meg, _mill_reap(m, gan));
-  }
-
-  // <%cell p=(type) q=(type)>
+  // [%cell p=type q=type]
   //
   else if ( u4_b_pq(gan, u4_atom_cell, &p_gan, &q_gan) ) {
     return u4_false;
   }
 
-  // <%cone p=(type) q={bush term type}>
+  // [%cone p=type q=bush+[term type]]
   //
   else if ( u4_b_pq(gan, u4_atom_cone, &p_gan, &q_gan) ) {
     return u4_false;
   }
 
-  // <%cube p=*>
+  // [%cube p=noun]
   // 
   else if ( u4_b_p(gan, u4_atom_cube, &p_gan) ) {
     if ( u4_n_atom(p_gan) ) {
@@ -59,23 +53,29 @@ _nest_atom(u4_milr m,
     else return u4_false;
   }
 
-  // <%fork p=(type) q=(type)>
+  // [%face p=mark q=type]
+  //
+  if ( u4_b_pq(gan, u4_atom_face, &p_gan, &q_gan) ) {
+    return _nest_atom(m, hax, meg, q_gan);
+  }
+
+  // [%fork p=type q=type]
   //
   else if ( u4_b_pq(gan, u4_atom_fork, &p_gan, &q_gan) ) {
     return ( (_mill_cull(m, meg, p_gan) || _nest_atom(m, hax, meg, p_gan)) &&
              (_mill_cull(m, meg, q_gan) || _nest_atom(m, hax, meg, q_gan)) );
   }
 
-  // <%fuse p=(type) q=(type)>
+  // [%fuse p=type q=type]
   //
   else if ( u4_b_pq(gan, u4_atom_fuse, &p_gan, &q_gan) ) {
     return _nest_atom(m, hax, meg, p_gan) ||
            _nest_atom(m, hax, u4_k_cell(lane, p_gan, meg), q_gan);
   }
 
-  // <%gate p=(type) q=(gene)>
+  // [%hold p=type q=gene]
   //
-  else if ( u4_b_pq(gan, u4_atom_gate, &p_gan, &q_gan) ) {
+  else if ( u4_b_pq(gan, u4_atom_hold, &p_gan, &q_gan) ) {
     u4_noun dit = u4_k_cell(lane, meg, gan);
 
     if ( u4_bag_in(dit, hax) ) {
@@ -113,31 +113,31 @@ _nest_plum(u4_milr m,
     return u4_false;
   }
 
-  // <%crib p={list ~[(term) (type)]}>
-  //
-  if ( u4_b_p(gan, u4_atom_crib, &p_gan) ) {
-    return _nest_plum(m, hax, p_typ, meg, _mill_reap(m, gan));
-  }
-
-  // <%cell p=(type) q=(type)>
+  // [%cell p=type q=type]
   //
   else if ( u4_b_pq(gan, u4_atom_cell, &p_gan, &q_gan) ) {
     return u4_false;
   }
 
-  // <%cone p=(type) q={bush term type}>
+  // [%cone p=type q=bush+[term type]]
   //
   else if ( u4_b_pq(gan, u4_atom_cone, &p_gan, &q_gan) ) {
     return u4_false;
   }
 
-  // <%cube p=*>
+  // [%cube p=noun]
   // 
   else if ( u4_b_p(gan, u4_atom_cube, &p_gan) ) {
     return u4_n_eq(p_typ, p_gan);
   }
 
-  // <%fork p=(type) q=(type)>
+  // [%face p=mark q=type]
+  //
+  if ( u4_b_pq(gan, u4_atom_face, &p_gan, &q_gan) ) {
+    return _nest_plum(m, hax, p_typ, meg, q_gan);
+  }
+
+  // [%fork p=type q=type]
   //
   else if ( u4_b_pq(gan, u4_atom_fork, &p_gan, &q_gan) ) {
     return ( ( _mill_cull(m, meg, p_gan) || 
@@ -146,16 +146,16 @@ _nest_plum(u4_milr m,
                _nest_plum(m, hax, p_typ, meg, q_gan) ) );
   }
 
-  // <%fuse p=(type) q=(type)>
+  // [%fuse p=type q=type]
   //
   else if ( u4_b_pq(gan, u4_atom_fuse, &p_gan, &q_gan) ) {
     return _nest_plum(m, hax, p_typ, meg, p_gan) ||
            _nest_plum(m, hax, p_typ, u4_k_cell(lane, p_gan, meg), q_gan);
   }
 
-  // <%gate p=(type) q=(gene)>
+  // [%hold p=type q=gene]
   //
-  else if ( u4_b_pq(gan, u4_atom_gate, &p_gan, &q_gan) ) {
+  else if ( u4_b_pq(gan, u4_atom_hold, &p_gan, &q_gan) ) {
     u4_noun dit = u4_k_cell(lane, meg, gan);
 
     if ( u4_bag_in(dit, hax) ) {
@@ -196,20 +196,14 @@ _nest_cell(u4_milr m,
     return u4_false;
   }
 
-  // <%crib p={list ~[(term) (type)]}>
-  //
-  if ( u4_b_p(gan, u4_atom_crib, &p_gan) ) {
-    return _nest_cell(m, gil, hax, p_typ, q_typ, meg, _mill_reap(m, gan));
-  }
-
-  // <%cell p=(type) q=(type)>
+  // [%cell p=type q=type]
   //
   else if ( u4_b_pq(gan, u4_atom_cell, &p_gan, &q_gan) ) {
     return _nest_main(m, gil, _mill_slip(m, u4_noun_2, meg), p_gan, p_typ) &&
            _nest_main(m, gil, _mill_slip(m, u4_noun_3, meg), q_gan, q_typ);
   }
 
-  // <%cone p=(type) q={bush term type}>
+  // [%cone p=type q=bush+[term type]]
   //
   else if ( u4_b_pq(gan, u4_atom_cone, &p_gan, &q_gan) ) {
     // Daring and unorthodox - but not impossibly useful.
@@ -218,7 +212,7 @@ _nest_cell(u4_milr m,
            _nest_main(m, gil, u4_noun_0, u4_atom_blur, q_typ);
   }
 
-  // <%cube p=*>
+  // [%cube p=noun]
   // 
   else if ( u4_b_p(gan, u4_atom_cube, &p_gan) ) {
     if ( u4_n_atom(p_gan) ) {
@@ -228,7 +222,13 @@ _nest_cell(u4_milr m,
     }
   }
 
-  // <%fork p=(type) q=(type)>
+  // [%face p=mark q=type]
+  //
+  if ( u4_b_pq(gan, u4_atom_face, &p_gan, &q_gan) ) {
+    return _nest_cell(m, gil, hax, p_typ, q_typ, meg, q_gan);
+  }
+
+  // [%fork p=type q=type]
   //
   else if ( u4_b_pq(gan, u4_atom_fork, &p_gan, &q_gan) ) {
     return ( ( _mill_cull(m, meg, p_gan) || 
@@ -237,7 +237,7 @@ _nest_cell(u4_milr m,
                _nest_cell(m, gil, hax, p_typ, q_typ, meg, q_gan) ) );
   }
 
-  // <%fuse p=(type) q=(type)>
+  // [%fuse p=type q=type]
   //
   else if ( u4_b_pq(gan, u4_atom_fuse, &p_gan, &q_gan) ) {
     return _nest_cell(m, gil, hax, p_typ, q_typ, meg, p_gan) ||
@@ -247,9 +247,9 @@ _nest_cell(u4_milr m,
                                    q_gan);
   }
 
-  // <%gate p=(type) q=(gene)>
+  // [%hold p=type q=gene]
   //
-  else if ( u4_b_pq(gan, u4_atom_gate, &p_gan, &q_gan) ) {
+  else if ( u4_b_pq(gan, u4_atom_hold, &p_gan, &q_gan) ) {
     u4_noun dit = u4_k_cell(lane, meg, gan);
 
     if ( u4_bag_in(dit, hax) ) {
@@ -291,32 +291,32 @@ _nest_cone(u4_milr m,
     return u4_false;
   }
 
-  // <%crib p={list ~[(term) (type)]}>
-  //
-  if ( u4_b_p(gan, u4_atom_crib, &p_gan) ) {
-    return _nest_cone(m, gil, hax, p_typ, q_typ, meg, _mill_reap(m, gan));
-  }
-
-  // <%cell p=(type) q=(type)>
+  // [%cell p=type q=type]
   //
   else if ( u4_b_pq(gan, u4_atom_cell, &p_gan, &q_gan) ) {
     return u4_false;
   }
 
-  // <%cone p=(type) q={bush term type}>
+  // [%cone p=type q=bush+[term type]]
   //
   else if ( u4_b_pq(gan, u4_atom_cone, &p_gan, &q_gan) ) {
     return _nest_main(m, gil, _mill_slip(m, u4_noun_2, meg), p_gan, p_typ) &&
            u4_n_eq(q_typ, q_gan);
   }
 
-  // <%cube p=*>
+  // [%cube p=noun]
   // 
   else if ( u4_b_p(gan, u4_atom_cube, &p_gan) ) {
     return u4_false;
   }
 
-  // <%fork p=(type) q=(type)>
+  // [%face p=mark q=type]
+  //
+  if ( u4_b_pq(gan, u4_atom_face, &p_gan, &q_gan) ) {
+    return _nest_cone(m, gil, hax, p_typ, q_typ, meg, q_gan);
+  }
+
+  // [%fork p=type q=type]
   //
   else if ( u4_b_pq(gan, u4_atom_fork, &p_gan, &q_gan) ) {
     return ( ( _mill_cull(m, meg, p_gan) || 
@@ -325,7 +325,7 @@ _nest_cone(u4_milr m,
                _nest_cone(m, gil, hax, p_typ, q_typ, meg, q_gan) ) );
   }
 
-  // <%fuse p=(type) q=(type)>
+  // [%fuse p=type q=type]
   //
   else if ( u4_b_pq(gan, u4_atom_fuse, &p_gan, &q_gan) ) {
     return _nest_cone(m, gil, hax, p_typ, q_typ, meg, p_gan) ||
@@ -335,9 +335,9 @@ _nest_cone(u4_milr m,
                                    q_gan);
   }
 
-  // <%gate p=(type) q=(gene)>
+  // [%hold p=type q=gene]
   //
-  else if ( u4_b_pq(gan, u4_atom_gate, &p_gan, &q_gan) ) {
+  else if ( u4_b_pq(gan, u4_atom_hold, &p_gan, &q_gan) ) {
     u4_noun dit = u4_k_cell(lane, meg, gan);
 
     if ( u4_bag_in(dit, hax) ) {
@@ -414,13 +414,13 @@ _nest_forks(u4_milr m,
   {
     return u4_k_cell(lane, gav, hoc);
   }
-  else if ( u4_b_p(gav, u4_atom_crib, &p_gav) ) {
-    return _nest_forks(m, hoc, lut, _mill_reap(m, gav));
+  else if ( u4_b_pq(gav, u4_atom_face, &p_gav, &q_gav) ) {
+    return _nest_forks(m, hoc, lut, q_gav);
   }
   else if ( u4_b_pq(gav, u4_atom_fork, &p_gav, &q_gav) ) {
     return _nest_forks(m, _nest_forks(m, hoc, lut, p_gav), lut, q_gav);
   }
-  else if ( u4_b_pq(gav, u4_atom_gate, &p_gav, &q_gav) ) {
+  else if ( u4_b_pq(gav, u4_atom_hold, &p_gav, &q_gav) ) {
     if ( u4_bag_in(gav, lut) ) {
       return hoc;
     }
@@ -460,25 +460,19 @@ _nest_main(u4_milr m,
     return 1;
   }
 
-  // <%crib p={list ~[(term) (type)]}>
-  //
-  if ( u4_b_p(typ, u4_atom_crib, &p_typ) ) {
-    return _nest_main(m, gil, meg, gan, _mill_reap(m, typ));
-  }
-
-  // <%cell p=(type) q=(type)>
+  // [%cell p=type q=type]
   //
   else if ( u4_b_pq(typ, u4_atom_cell, &p_typ, &q_typ) ) {
     return _nest_cell(m, gil, u4_noun_0, p_typ, q_typ, meg, gan);
   }
 
-  // <%cone p=(type) q={bush term type}>
+  // [%cone p=type q=bush+[term type]]
   //
   else if ( u4_b_pq(typ, u4_atom_cone, &p_typ, &q_typ) ) {
     return _nest_cone(m, gil, u4_noun_0, p_typ, q_typ, meg, gan);
   }
 
-  // <%cube p=*>
+  // [%cube p=noun]
   // 
   else if ( u4_b_p(typ, u4_atom_cube, &p_typ) ) {
     if ( u4_n_cell(p_typ) ) {
@@ -489,7 +483,13 @@ _nest_main(u4_milr m,
     }
   }
 
-  // <%fork p=(type) q=(type)>
+  // [%face p=mark q=type]
+  //
+  if ( u4_b_pq(typ, u4_atom_face, &p_typ, &q_typ) ) {
+    return _nest_main(m, gil, meg, gan, q_typ);
+  }
+
+  // [%fork p=type q=type]
   //
   else if ( u4_b_pq(typ, u4_atom_fork, 0, 0) ) {
     u4_log vig = _nest_forks(m, u4_noun_0, u4_noun_0, gan);
@@ -500,16 +500,16 @@ _nest_main(u4_milr m,
     return _nest_fork_square(m, gil, meg, vig, lec);
   }
 
-  // <%fuse p=(type) q=(type)>
+  // [%fuse p=type q=type]
   //
   else if ( u4_b_pq(typ, u4_atom_fuse, &p_typ, &q_typ) ) {
     return _nest_main(m, gil, meg, gan, p_typ) &&
            _nest_main(m, gil, meg, gan, q_typ);
   }
 
-  // <%gate p=(type) q=(gene)>
+  // [%hold p=type q=gene]
   //
-  else if ( u4_b_pq(typ, u4_atom_gate, &p_typ, &q_typ) ) {
+  else if ( u4_b_pq(typ, u4_atom_hold, &p_typ, &q_typ) ) {
     u4_noun res = u4_k_cell(lane, gan, typ);
 
     if ( u4_bag_in(res, gil) ) {
@@ -524,11 +524,6 @@ _nest_main(u4_milr m,
     }
   }
 
-  // [%wing p=axis q=type]
-  //
-  else if ( u4_b_pq(typ, u4_atom_wing, &p_typ, &q_typ) ) {
-    return _nest_main(m, gil, meg, gan, _mill_reap(m, typ));
-  }
   else return u4_trip;
 }
 

@@ -31,7 +31,7 @@ _cong_flat(u4_milr m,
     return _cong_flat(m, vit, raf, p_tip) ||
            _cong_flat(m, vit, u4_k_cell(m->lane, p_tip, raf), q_tip);
   }
-  else if ( u4_b_pq(tip, u4_atom_gate, &p_tip, &q_tip) ) {
+  else if ( u4_b_pq(tip, u4_atom_hold, &p_tip, &q_tip) ) {
     u4_type laf = _mill_pull(m, raf, tip);
 
     if ( u4_bag_in(laf, vit) ) {
@@ -86,7 +86,7 @@ _cong_deep(u4_milr m,
     return _cong_deep(m, vit, raf, p_tip) ||
            _cong_deep(m, vit, u4_k_cell(m->lane, p_tip, raf), q_tip);
   }
-  else if ( u4_b_pq(tip, u4_atom_gate, &p_tip, &q_tip) ) {
+  else if ( u4_b_pq(tip, u4_atom_hold, &p_tip, &q_tip) ) {
     u4_type laf = _mill_pull(m, raf, tip);
 
     if ( u4_bag_in(laf, vit) ) {
@@ -138,7 +138,7 @@ _cong_leaf(u4_milr m,
     return _cong_leaf(m, vit, raf, p_gan, p_tip) ||
            _cong_leaf(m, vit, u4_k_cell(m->lane, p_tip, raf), p_gan, q_tip);
   }
-  else if ( u4_b_pq(tip, u4_atom_gate, &p_tip, &q_tip) ) {
+  else if ( u4_b_pq(tip, u4_atom_hold, &p_tip, &q_tip) ) {
     u4_type laf = _mill_pull(m, raf, tip);
 
     if ( u4_bag_in(laf, vit) ) {
@@ -220,7 +220,7 @@ _cong_cone(u4_milr m,
       ( _cong_cone(m, gil, vit, p_gan, q_gan, p_tip, fop) ||
         _cong_cone(m, gil, vit, p_gan, q_gan, q_tip, dov) );
   }
-  else if ( u4_b_pq(tip, u4_atom_gate, &p_tip, &q_tip) ) {
+  else if ( u4_b_pq(tip, u4_atom_hold, &p_tip, &q_tip) ) {
     u4_type laf = _mill_pull(m, fop, tip);
 
     if ( u4_bag_in(laf, vit) ) {
@@ -274,7 +274,7 @@ _cong_skin(u4_milr m,
       ( _cong_skin(m, gil, vit, p_gan, q_gan, p_tip, fop) ||
         _cong_skin(m, gil, vit, p_gan, q_gan, q_tip, dov) );
   }
-  else if ( u4_b_pq(tip, u4_atom_gate, &p_tip, &q_tip) ) {
+  else if ( u4_b_pq(tip, u4_atom_hold, &p_tip, &q_tip) ) {
     u4_type laf = _mill_pull(m, fop, tip);
 
     if ( u4_bag_in(laf, vit) ) {
@@ -323,7 +323,7 @@ _cong_forks(u4_milr m,
 
     return u4_log_cat(lane, juk, ryd);
   }
-  else if ( u4_b_pq(gav, u4_atom_gate, &p_gav, &q_gav) ) {
+  else if ( u4_b_pq(gav, u4_atom_hold, &p_gav, &q_gav) ) {
     if ( u4_bag_in(gav, lut) ) {
       return u4_noun_0;
     }

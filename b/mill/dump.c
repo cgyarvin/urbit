@@ -25,42 +25,28 @@ _dump_count(u4_lane lane, u4_noun q_typ)
   }
 }
 
+/* _dump_cell()::
+*/
 static u4_noun
-_dump_crib(u4_milr m,
+_dump_cell(u4_milr m,
            u4_bag  gil,
            u4_bag  nip,
-           u4_noun p_typ)
+           u4_noun p_typ,
+           u4_noun q_typ)
 {
-  u4_lane lane    = m->lane;
+  u4_lane lane = m->lane;
+  u4_noun pq_typ, qq_typ;
 
-  if ( u4_n_zero(p_typ) ) {
-    return u4_noun_0;
+  if ( u4_b_pq(q_typ, u4_atom_cell, &pq_typ, &qq_typ) ) {
+    return u4_k_cell
+      (lane, _dump_main(m, gil, nip, p_typ),
+             _dump_cell(m, gil, nip, pq_typ, qq_typ));
   }
   else {
-    u4_noun ip_typ  = u4_ch(p_typ);
-    u4_term pip_typ = u4_ch(ip_typ);
-    u4_noun tp_typ  = u4_ct(p_typ);
-    u4_type qip_typ = u4_ct(ip_typ);
-    {
-      u4_prep zem     = _dump_main(m, gil, nip, qip_typ);
-      u4_noun gud     = _dump_crib(m, gil, nip, tp_typ);
-
-      if ( u4_n_zero(pip_typ) ) {
-        return u4_k_cell(lane, zem, gud);
-      }
-      else {
-        u4_prep hep;
-
-        hep = u4_k_list
-          (lane, u4_atom_nail, 
-                 u4_prep_textual(lane, pip_typ),
-                 u4_cod_in(':'),
-                 zem,
-                 0);
-  
-        return u4_k_cell(lane, hep, gud);
-      }
-    }
+    return u4_k_trel
+      (lane, _dump_main(m, gil, nip, p_typ),
+             _dump_main(m, gil, nip, q_typ),
+             u4_noun_0);
   }
 }
 
@@ -89,7 +75,7 @@ _dump_cone(u4_milr m,
                                 (lane, u4_cod_in(u4_n_nub(q_typ) & 0xffff)))));
 
   gum = u4_prep_close
-    (lane, '[', ']', u4_k_list(lane, zib, bor, 0));
+    (lane, '<', '>', u4_k_list(lane, zib, bor, 0));
 
   return gum;
 }
@@ -110,7 +96,7 @@ _dump_forks(u4_milr m,
       (lane, _dump_forks(m, gil, nip, p_typ),
              _dump_forks(m, gil, nip, q_typ));
   }
-  else if ( u4_b_pq(typ, u4_atom_gate, &p_typ, &q_typ) && 
+  else if ( u4_b_pq(typ, u4_atom_hold, &p_typ, &q_typ) && 
             !u4_bag_in(typ, gil) )
   {
     return _dump_forks(m, gil, nip, _mill_repo(m, p_typ, q_typ));
@@ -142,18 +128,9 @@ _dump_main(u4_milr m,
     else return u4_trip;
   }
   else if ( u4_b_pq(typ, u4_atom_cell, &p_typ, &q_typ) ) {
-    u4_type gan = u4_k_qual
-      (lane, u4_atom_crib, 
-             u4_k_cell(lane, u4_noun_0, p_typ), 
-             u4_k_cell(lane, u4_noun_0, q_typ), 
-             u4_noun_0);
-
-    return _dump_main(m, gil, nip, gan);
-  }
-
-  else if ( u4_b_p(typ, u4_atom_crib, &p_typ) ) {
     return u4_prep_close
-      (lane, '[', ']', _dump_crib(m, gil, nip, p_typ));
+      (lane, '[', ']', 
+              _dump_cell(m, gil, nip, p_typ, q_typ));
   }
 
   else if ( u4_b_pq(typ, u4_atom_cone, &p_typ, &q_typ) ) {
@@ -178,12 +155,30 @@ _dump_main(u4_milr m,
     }
   }
 
-  else if ( u4_b_pq(typ, u4_atom_fork, &p_typ, &q_typ) ) {
-    u4_prep hep = 
-      u4_prep_close
-        (lane, '{', '}', _dump_forks(m, gil, nip, typ));
+  else if ( u4_b_pq(typ, u4_atom_face, &p_typ, &q_typ) ) {
+    return u4_k_list
+      (lane, u4_atom_nail, 
+             u4_prep_textual(lane, p_typ),
+             u4_cod_in(':'),
+             _dump_main(m, gil, nip, q_typ),
+             0);
+  }
 
-    return hep;
+  else if ( u4_b_pq(typ, u4_atom_fork, &p_typ, &q_typ) ) {
+    u4_noun pp_typ, pq_typ;
+
+    if ( u4_b_p(p_typ, u4_atom_cube, &pp_typ) &&
+         u4_b_p(q_typ, u4_atom_cube, &pq_typ) &&
+         u4_n_eq(u4_noun_0, pp_typ) &&
+         u4_n_eq(u4_noun_1, pq_typ) )
+    {
+      return u4_cod_in('?');
+    }
+    else {
+      return
+        u4_prep_close
+          (lane, '{', '}', _dump_forks(m, gil, nip, typ));
+    }
   }
 
   else if ( u4_b_pq(typ, u4_atom_fuse, &p_typ, &q_typ) ) {
@@ -195,7 +190,7 @@ _dump_main(u4_milr m,
                        0));
   }
 
-  else if ( u4_b_pq(typ, u4_atom_gate, &p_typ, &q_typ) ) {
+  else if ( u4_b_pq(typ, u4_atom_hold, &p_typ, &q_typ) ) {
     if ( u4_bag_in(typ, gil) ) {
       u4_noun fez = u4_k_atom_cat
           (lane, u4_cod_in('$'), 
@@ -221,18 +216,6 @@ _dump_main(u4_milr m,
     else {
       return _dump_main(m, gil, nip, _mill_repo(m, p_typ, q_typ));
     }
-  }
-
-  else if ( u4_b_pq(typ, u4_atom_wing, &p_typ, &q_typ) ) {
-    u4_prep fam = _dump_main(m, gil, nip, q_typ);
-
-    return u4_k_list
-      (lane, u4_atom_nail,
-             u4_cod_in('^'),
-             u4_prep_decimal(lane, p_typ),
-             u4_cod_in(':'),
-             fam,
-             0);
   }
 
   else {

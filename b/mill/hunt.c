@@ -7,7 +7,7 @@
 /* _is_slat()::
 */
 static u4_t
-_is_slat(u4_hook sod, 
+_is_slat(u4_knot sod, 
          u4_tick *tik, 
          u4_term *cox)
 {
@@ -25,7 +25,7 @@ _is_slat(u4_hook sod,
 /* _is_slet()::
 */
 static u4_t
-_is_slet(u4_hook sod,
+_is_slet(u4_knot sod,
          u4_axis *mar)
 {
   return u4_b_p(sod, u4_atom_slet, mar);
@@ -49,7 +49,7 @@ _mill_hunt(u4_milr m,
     return u4_noun_0;
   }
   else {
-    u4_hook i_dap = u4_ch(dap);
+    u4_knot i_dap = u4_ch(dap);
     u4_rope t_dap = u4_ct(dap);
     u4_axis mar;
     u4_tick tik;
@@ -66,32 +66,41 @@ _mill_hunt(u4_milr m,
     }
     else if ( _is_slat(i_dap, &tik, &cox) ) {
       u4_loaf zib = _mill_find(m, cox, u4_noun_0, fim);
-      u4_type gey = u4_ch(zib);
- 
-      if ( !u4_b_p(u4_ct(zib), u4_noun_0, &mar) ) {
-        return _mill_fail(m, "heavy rope");
+
+      if ( u4_n_zero(zib) ) {
+        u4_burp(lane, "mark", u4_prep_textual(lane, cox));
+        u4_burp(lane, "type", _mill_dump(m, fim));
+
+        return _mill_fail(m, "look: no port");
       }
       else {
-        u4_rope guz;
-
-        guz = u4_n_zero(tik)
-          ? t_dap
-          : u4_k_cell
-            (lane, u4_k_trel(lane, u4_atom_slat, u4_op_dec(lane, tik), cox),
-                   t_dap);
-
-        *axe = u4_op_peg(lane, *axe, mar);
-
-        if ( u4_n_eq(u4_noun_1, mar) ) {
-          return u4_k_cell
-            (lane, u4_k_cell(lane, u4_atom_term, cox),
-                   _mill_hunt(m, guz, gey, axe, buv));
+        u4_type gey = u4_ch(zib);
+   
+        if ( !u4_b_p(u4_ct(zib), u4_noun_0, &mar) ) {
+          return _mill_fail(m, "heavy rope");
         }
         else {
-          return u4_k_trel
-            (lane, u4_k_cell(lane, u4_atom_axis, mar),
-                   u4_k_cell(lane, u4_atom_term, cox),
-                   _mill_hunt(m, guz, gey, axe, buv));
+          u4_rope guz;
+
+          guz = u4_n_zero(tik)
+            ? t_dap
+            : u4_k_cell
+              (lane, u4_k_trel(lane, u4_atom_slat, u4_op_dec(lane, tik), cox),
+                     t_dap);
+
+          *axe = u4_op_peg(lane, *axe, mar);
+
+          if ( u4_n_eq(u4_noun_1, mar) ) {
+            return u4_k_cell
+              (lane, u4_k_cell(lane, u4_atom_term, cox),
+                     _mill_hunt(m, guz, gey, axe, buv));
+          }
+          else {
+            return u4_k_trel
+              (lane, u4_k_cell(lane, u4_atom_axis, mar),
+                     u4_k_cell(lane, u4_atom_term, cox),
+                     _mill_hunt(m, guz, gey, axe, buv));
+          }
         }
       }
     }

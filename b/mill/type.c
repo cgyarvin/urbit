@@ -14,9 +14,6 @@
     static u4_noun
     _type_mark(u4_milr, u4_lump);
 
-    static u4_noun
-    _type_crib(u4_milr m, u4_lump sab);
-
 
 /* _mill_type(): normalize type.
 */
@@ -36,16 +33,6 @@ _mill_type(u4_milr m,
        u4_n_eq(u4_atom_blur, muf) )
   {
     return muf;
-  }
-
-  // [%crib p=list+[mark type]]
-  //
-  if ( u4_b_p(muf, u4_atom_crib, &p_muf) ) {
-    if ( !u4_n_zero(p_muf) ) {
-      return u4_k_cell
-        (lane, u4_atom_crib, _type_crib_p(m, p_muf));
-    }
-    else return _mill_fail(m, "type: crib");
   }
 
   // [%cell p=type q=type]
@@ -68,6 +55,13 @@ _mill_type(u4_milr m,
     return muf;
   }
 
+  // [%face p=mark q=type]
+  //
+  else if ( u4_b_pq(muf, u4_atom_face, &p_muf, &q_muf) ) {
+    return u4_k_trel
+      (lane, u4_atom_face, _type_mark(m, p_muf), _mill_type(m, q_muf));
+  }
+
   // [%fork p=type q=type]
   //
   else if ( u4_b_pq(muf, u4_atom_fork, &p_muf, &q_muf) ) {
@@ -82,11 +76,11 @@ _mill_type(u4_milr m,
       (lane, u4_atom_fuse, _mill_type(m, p_muf), _mill_type(m, q_muf));
   }
 
-  // [%gate p=(type) q=(gene)]
+  // [%hold p=(type) q=(gene)]
   //
-  else if ( u4_b_pq(muf, u4_atom_gate, &p_muf, &q_muf) ) {
+  else if ( u4_b_pq(muf, u4_atom_hold, &p_muf, &q_muf) ) {
     return u4_k_trel
-      (lane, u4_atom_gate, _mill_type(m, p_muf), _mill_gene(m, q_muf));
+      (lane, u4_atom_hold, _mill_type(m, p_muf), _mill_gene(m, q_muf));
   }
 
   else {
@@ -119,52 +113,4 @@ _type_mark(u4_milr m,
     return _mill_fail(m, "type: invalid mark");
   }
   else return vof;
-}
-
-/* _type_crib(): normalize crib. 
-*/
-static u4_noun
-_type_crib(u4_milr m,
-           u4_lump sab)
-{
-  u4_lane lane = m->lane;
-
-  if ( u4_n_zero(sab) ) {
-    return u4_noun_0;
-  }
-  else {
-    u4_lump i_sab = u4_ch(sab);
-    u4_lump t_sab = u4_ct(sab);
-
-    return
-      u4_k_cell
-        (lane, 
-          _mill_type(m, i_sab),
-          _type_crib(m, t_sab));
-  }
-}
-
-/* _type_crib(): normalize crib. 
-*/
-static u4_noun
-_type_crib(u4_milr m,
-           u4_lump sab)
-{
-  u4_lane lane = m->lane;
-
-  if ( u4_n_zero(sab) ) {
-    return u4_noun_0;
-  }
-  else {
-    u4_lump i_sab = u4_ch(sab);
-    u4_lump t_sab = u4_ct(sab);
-
-    return
-      u4_k_cell
-        (lane, 
-          u4_k_cell
-            (lane, _type_mark(m, u4_ch(i_sab)), 
-                   _mill_type(m, u4_ct(i_sab))),
-          _type_crib(m, t_sab));
-  }
 }

@@ -89,7 +89,7 @@ _fish_main(u4_milr m,
             _fish_main(m, gil, u4_k_cell(lane, p_tip, neb), axe, q_tip));
   }
 
-  else if ( u4_b_pq(tip, u4_atom_gate, &p_tip, &q_tip) ) {
+  else if ( u4_b_pq(tip, u4_atom_hold, &p_tip, &q_tip) ) {
     u4_noun cuv = u4_k_cell(lane, neb, tip);
 
     if ( u4_bag_in(cuv, gil) ) {

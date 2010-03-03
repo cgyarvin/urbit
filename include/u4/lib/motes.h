@@ -432,6 +432,7 @@
     u4_lib_mote(slex, u4_s4('s','l','e','x'))
     u4_lib_mote(slid, u4_s4('s','l','i','d'))
     u4_lib_mote(slip, u4_s4('s','l','i','p'))
+    u4_lib_mote(sliv, u4_s4('s','l','i','v'))
     u4_lib_mote(sloc, u4_s4('s','l','o','c'))
     u4_lib_mote(slon, u4_s4('s','l','o','n'))
     u4_lib_mote(slop, u4_s4('s','l','o','p'))

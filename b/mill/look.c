@@ -7,7 +7,7 @@
 /* _is_grip()::
 */
 static u4_t
-_is_grip(u4_hook sod, 
+_is_grip(u4_knot sod, 
          u4_tick *tik, 
          u4_term *cox)
 {
@@ -25,18 +25,18 @@ _is_grip(u4_hook sod,
 /* _is_slet()::
 */
 static u4_t
-_is_slet(u4_hook sod,
+_is_slet(u4_knot sod,
          u4_axis *axe)
 {
   return u4_b_p(sod, u4_atom_slet, axe);
 }
 
-/* _mill_look_hook(): read a step on a rope.
+/* _look_knot(): read a step on a rope.
 */
 u4_loaf
-_mill_look_hook(u4_milr m,
-                u4_hook vor,
-                u4_type typ)
+_look_knot(u4_milr m,
+           u4_knot vor,
+           u4_type typ)
 {
   u4_lane lane = m->lane;
   u4_tick tik;
@@ -48,10 +48,10 @@ _mill_look_hook(u4_milr m,
     fod = _mill_find(m, cox, u4_noun_0, typ);
 
     if ( u4_n_zero(fod) ) {
-      u4_err(lane, "cox", cox);
-      u4_burp(lane, "typ", _mill_dump(m, typ));
+      u4_burp(lane, "mark", u4_prep_textual(lane, cox));
+      u4_burp(lane, "type", _mill_dump(m, typ));
 
-      return _mill_fail(m, "look: no grip");
+      return _mill_fail(m, "look: no port");
     }
     else if ( u4_n_zero(tik) ) {
       return fod;
@@ -69,13 +69,13 @@ _mill_look_hook(u4_milr m,
       }
       else if ( u4_b_pq(vil, u4_noun_3, &p_vil, 0) &&
                 u4_b_p(p_vil, u4_noun_0, &axe) &&
-                u4_b_pq(lem, u4_atom_gate, &ger, 0) )
+                u4_b_pq(lem, u4_atom_hold, &ger, 0) )
       {
         vil = u4_k_cell(lane, u4_noun_0, axe);
       }
       else return u4_trip;
 
-      fod = _mill_look_hook(m, vor, ger);
+      fod = _look_knot(m, vor, ger);
 
       if ( u4_n_zero(fod) ) {
         return _mill_fail(m, "look: no grip");
@@ -111,9 +111,9 @@ _mill_look(u4_milr m,
     return u4_k_trel(lane, typ, u4_noun_0, u4_noun_1);
   }
   else {
-    u4_hook i_fes = u4_ch(fes);
+    u4_knot i_fes = u4_ch(fes);
     u4_rope t_fes = u4_ct(fes);
-    u4_loaf fod   = _mill_look_hook(m, i_fes, typ);
+    u4_loaf fod   = _look_knot(m, i_fes, typ);
     u4_loaf gax   = _mill_look(m, t_fes, u4_ch(fod));
 
     return u4_k_cell

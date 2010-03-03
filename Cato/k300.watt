@@ -8,10 +8,10 @@
   ::::::::  atom                any atom
   ::
     - atom
-      |:  a = noun
+      |:  q = noun
       ==
-        ?>  ?={a 0}
-          a 
+        ?>  ?={q 0}
+          q 
 
   ::::::::  noun                any noun
   ::
@@ -55,6 +55,19 @@
           b
         $(a (dec a), b (inc b))
 
+  ::::::::  dec                 atomic decrement
+  ::
+    - dec
+      ||  atom
+        a = atom
+      ==
+        ?<  &=[0 a]
+        =>  b 0
+        |-
+          ?:  &=[a &^b]
+            b
+          $(b &^b)
+
   ::::::::  div                 atomic divide (a / b)
   ::
     - div
@@ -69,19 +82,6 @@
             c 
           $(a (sub a b), c (inc c))
 
-  ::::::::  dec                 atomic decrement
-  ::
-    - dec
-      ||  atom
-        a = atom
-      ==
-        ?<  &=[0 a]
-        =>  b 0
-        |-
-          ?:  &=[a &^b]
-            b
-          $(b &^b)
-
   ::::::::  eq                  noun equality
   ::
     - eq
@@ -94,7 +94,7 @@
   ::::::::  gt                  atomic greater than (a > b)
   ::
     - gt
-      ||  atom
+      ||  flag
         a = atom
         b = atom
       ==
@@ -103,7 +103,7 @@
   ::::::::  gte                 atomic greater-or-equal (a >= b)
   ::
     - gte
-      ||  atom
+      ||  flag
         a = atom
         b = atom
       ==
@@ -120,7 +120,7 @@
   ::::::::  lt                  atomic less-than (a < b)
   ::
     - lt
-      ||  atom
+      ||  flag
         a = atom
         b = atom
       ==
@@ -137,7 +137,7 @@
   ::::::::  lte                 atomic less-or-equal (a <= b)
   ::
     - lte
-      ||  atom
+      ||  flag
         a = atom
         b = atom
       ==
@@ -177,6 +177,14 @@
       ==
         (eq 1 a)
 
+  ::::::::  pat                 noun is atom
+  ::
+    - pat
+      ||  flag
+        a = noun
+      ==
+        (not (tap a))
+
   ::::::::  sub                 atomic subtract (a - b)
   ::
     - sub
@@ -187,14 +195,6 @@
         ?:  (zil b)
           a
         $(a (dec a), b (dec b))
-
-  ::::::::  pat                 noun is atom
-  ::
-    - pat
-      ||  flag
-        a = noun
-      ==
-        (not (tap a))
 
   ::::::::  tap                 noun is cell
   ::

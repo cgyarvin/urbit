@@ -79,32 +79,29 @@ U4_MILL_OFILES=\
        b/mill/peek.o \
        b/mill/pike.o \
        b/mill/play.o \
-       b/mill/poke.o \
-       b/mill/rake.o \
        b/mill/reap.o \
        b/mill/repo.o \
-       b/mill/sail.o \
        b/mill/salt.o \
        b/mill/seal.o \
        b/mill/slip.o \
        b/mill/snap.o \
        b/mill/stub.o \
        b/mill/test.o \
-       b/mill/trap.o \
-       b/mill/turn.o
+       b/mill/trap.o
 
 U4_MX_OFILES=\
        b/x/clep.o \
        b/x/dbug.o \
+       b/x/drub.o \
        b/x/forb.o \
        b/x/gant.o \
        b/x/gult.o \
        b/x/griv.o \
        b/x/halc.o \
        b/x/perd.o \
+       b/x/plom.o \
        b/x/poos.o \
        b/x/pret.o \
-       b/x/sard.o \
        b/x/slon.o \
        b/x/spot.o \
        b/x/stol.o \
@@ -139,6 +136,7 @@ U4_MQ_OFILES=\
        b/q/pung.o \
        b/q/rald.o \
        b/q/rulf.o \
+       b/q/sard.o \
        b/q/spal.o \
        b/q/stiv.o \
        b/q/stur.o \

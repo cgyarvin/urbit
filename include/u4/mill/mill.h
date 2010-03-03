@@ -24,7 +24,7 @@
       typedef u4_noun u4_loaf;  //  [type form]
       typedef u4_noun u4_wire;  //  [type form]
       typedef u4_noun u4_rail;  //  {list type}
-      typedef u4_noun u4_hook;  //  |(  (term) 
+      typedef u4_noun u4_knot;  //  |(  (term) 
                                 //      [%zarb @] 
                                 //      [%lect (tick) (term)]
                                 //   )
@@ -32,7 +32,7 @@
                                 //      [%lect @ (tick) (term)]
                                 //  )
       typedef u4_noun u4_lure;  //  {list bait}
-      typedef u4_noun u4_rope;  //  {list hook}
+      typedef u4_noun u4_rope;  //  {list knot}
       typedef u4_noun u4_nail;  //  [rope gene] 
       typedef u4_noun u4_tack;  //  |([%axis axis] [%term term])
       typedef u4_noun u4_weld;  //  [axis form]
@@ -252,14 +252,6 @@
                    u4_type tip,
                    u4_gene gen);
 
-      /* _mill_kick(): kick rope.
-      */
-        u4_wire
-        _mill_kick(u4_milr m,
-                   u4_rope fes,
-                   u4_bolt rov,
-                   u4_type tip);
-
       /* _mill_look(): read on a rope.
       */
         u4_wire
@@ -339,21 +331,6 @@
                    u4_type tip,
                    u4_gene gen);
 
-      /* _mill_poke(): modify type to reflect poke assignment, if any.
-      */
-        u4_type
-        _mill_poke(u4_milr m,
-                   u4_axis axe,
-                   u4_type gan,
-                   u4_rail bar,
-                   u4_type tip);
-
-      /* _mill_rake(): excise all superficial gas.
-      */
-        u4_type
-        _mill_rake(u4_milr m,
-                   u4_type typ);
-
       /* _mill_reap(): expand type.
       */
         u4_type
@@ -366,13 +343,6 @@
         _mill_repo(u4_milr m,
                    u4_type tip,
                    u4_gene gen);
-
-      /* _mill_sail(): patch type.
-      */
-        u4_type
-        _mill_sail(u4_milr m,
-                   u4_axis axe,
-                   u4_type typ);
 
       /* _mill_salt(): modify a change target.
       **
@@ -401,12 +371,12 @@
                    u4_axis axe,
                    u4_rail bar);
 
-      /* _mill_snap(): adjust tip for assignment into gan.
+      /* _mill_snap(): adjust [ger] for assignment into [lom].
       */
         u4_type
         _mill_snap(u4_milr m,
-                   u4_type gan,
-                   u4_type tip);
+                   u4_type lom,
+                   u4_type ger);
 
       /* _mill_stub(): generate direct skel.
       */
@@ -419,25 +389,3 @@
         void
         _mill_trap(u4_milr m,
                    const u4_cl *cl_msg);
-
-      /* _mill_turn(): write by name, with axe as guide.
-      */
-        u4_type
-        _mill_turn(u4_milr m,
-                   u4_term cox,
-                   u4_axis axe,
-                   u4_type gan,
-                   u4_rail bar,
-                   u4_type tip);
-
-      /* _mill_weld(): modify type to reflect assignment.
-      **
-      **   axe: change axis
-      **   gan: type of change
-      **   typ: background type
-      */
-        u4_type
-        _mill_weld(u4_milr m,
-                   u4_axis axe,
-                   u4_type hur,
-                   u4_type wac);

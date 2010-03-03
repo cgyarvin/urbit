@@ -61,6 +61,7 @@ _mill_open(u4_milr m,
     _open_pq (slex);  // :%
     _open_p  (dron);
     _open_pq (sloc);  // :~
+    _open_p  (slon);  // :*
     _open_p  (glon);  // ^*
     _open_pqr(clet);  // =<
     _open_p  (broc);  // &~

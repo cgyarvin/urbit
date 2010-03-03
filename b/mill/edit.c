@@ -210,15 +210,35 @@ _edit_fuse(u4_milr m,
   }
 }
 
-/* _edit_cone_fab(): try to fabricate a cone.
+/* _edit_cone_fab_gene(): 
+*/
+static u4_t
+_edit_cone_fab_gene(u4_milr m,
+                    u4_type doz,
+                    u4_type p_gom,
+                    u4_gene gen)
+{
+  u4_form goc = _mill_bake(m, gen, doz);
+  u4_form zid = _mill_bake(m, gen, p_gom);
+
+  return u4_n_eq(goc, zid);
+}
+
+/* _edit_cone_fab(): match a cone by fabrication.
 */
 static u4_t
 _edit_cone_fab(u4_milr m,
                u4_type doz,
                u4_type p_gom,
-               u4_type q_gom)
+               u4_clip q_gom)
 {
-  return u4_stub;
+  if ( u4_n_atom(u4_ch(q_gom)) ) {
+    return _edit_cone_fab_gene(m, doz, p_gom, u4_ct(q_gom));
+  }
+  else {
+    return _edit_cone_fab(m, doz, p_gom, u4_ch(q_gom)) &&
+           _edit_cone_fab(m, doz, p_gom, u4_ct(q_gom));
+  }
 }
 
 /* _edit_cone(): edit a cone.
@@ -246,11 +266,6 @@ _edit_cone(u4_milr m,
     else {
       u4_rail sed = _mill_slip(m, u4_noun_2, bar);
       u4_type doz = _mill_edit(m, tig, sed, p_gom);
-
-      u4_burp(lane, "p_gom", _mill_dump(m, p_gom));
-      u4_err(lane, "doz", doz);
-
-      u4_burp(lane, "doz", _mill_dump(m, doz));
 
       if ( _mill_nest(m, doz, p_gom) ) {
         if ( _mill_nest(m, p_gom, doz) ) {
@@ -303,118 +318,34 @@ _edit_cell(u4_milr m,
   }
 }
 
-/* _edit_crib(): edit a crib.
+/* _edit_face(): edit a face.
 */
-static u4_noun
-_edit_crib(u4_milr m,
+static u4_type
+_edit_face(u4_milr m,
            u4_plox zel,
            u4_rail bar,
-           u4_noun p_gom)
+           u4_mark p_gom,
+           u4_type q_gom)
 {
   u4_lane lane = m->lane;
-  u4_noun ip_gom = u4_ch(p_gom);
-  u4_noun tp_gom = u4_ct(p_gom);
-  u4_term pip_gom = u4_ch(ip_gom);
-  u4_type qip_gom = u4_ct(ip_gom);
-  u4_noun hed, tal;
-  u4_plox hom;
-  u4_mark cox;
   u4_type nuf;
 
-  if ( u4_n_zero(zel) ) {
-    return p_gom;
+  if ( _edit_plox_is_end(m, zel, &nuf) ) {
+    return nuf;
   }
   else {
-    if ( u4_n_zero(tp_gom) ) {
-      if ( u4_n_zero(zel) ) {
-        hed = ip_gom;
-      }
-      else if ( _edit_plox_is_end(m, zel, &nuf) ) {
-        hed = u4_k_cell(lane, pip_gom, nuf);
-      }
-      else if ( _edit_plox_is_tag(m, zel, &cox, &hom) ) {
-        hed = u4_k_cell(lane, cox, _mill_edit(m, hom, bar, qip_gom));
-      }
-      else {
-        hed = u4_k_cell(lane, pip_gom, _mill_edit(m, zel, bar, qip_gom));
-      }
+    u4_mark cox  = u4_noun_0;
+    u4_plox hom  = _edit_plox_take_tag(m, zel, &cox);
 
-      tal = u4_noun_0;
+    if ( u4_n_eq(cox, p_gom) ) {
+      return u4_k_trel
+        (lane, u4_atom_face, p_gom, _mill_edit(m, hom, bar, q_gom));
     }
     else {
-      u4_rail sed = _mill_slip(m, u4_noun_2, bar);
-      u4_rail dus = _mill_slip(m, u4_noun_3, bar);
-      u4_plox tig = _edit_plox_take_hed(m, zel);
-      u4_plox par = _edit_plox_take_tal(m, zel);
-
-      if ( u4_n_zero(tig) ) {
-        hed = ip_gom;
-      }
-      else if ( _edit_plox_is_end(m, tig, &nuf) ) {
-        hed = u4_k_cell(lane, pip_gom, nuf);
-      }
-      else if ( _edit_plox_is_tag(m, tig, &cox, &hom) ) {
-        u4_err(lane, "hom", hom);
-        u4_err(lane, "qip_gom", qip_gom);
-        hed = u4_k_cell(lane, cox, _mill_edit(m, hom, sed, qip_gom));
-      }
-      else {
-        hed = u4_k_cell(lane, pip_gom, _mill_edit(m, tig, sed, qip_gom));
-      }
-
-      tal = _edit_crib(m, par, dus, tp_gom);
+      return u4_k_trel
+        (lane, u4_atom_face, p_gom, _mill_edit(m, zel, bar, q_gom));
     }
-    return u4_k_cell(lane, hed, tal);
   }
-}
-
-/* _edit_mask_crib(): mask crib tail.
-*/
-static u4_noun
-_edit_mask_crib(u4_milr m,
-                u4_plox tig,
-                u4_plox par)
-{
-  u4_lane lane = m->lane;
-  u4_type nuf;
-  u4_plox doq;
-  u4_mark cox;
-  u4_noun hed, tal;
-
-  if ( u4_n_zero(tig) ) {
-    hed = u4_k_cell(lane, u4_noun_0, u4_atom_blur);
-  }
-  else if ( _edit_plox_is_end(m, tig, &nuf) ) {
-    hed = u4_k_cell(lane, u4_noun_0, nuf);
-  }
-  else if ( _edit_plox_is_tag(m, tig, &cox, &doq) ) {
-    hed = u4_k_cell(lane, cox, _edit_mask(m, doq));
-  }
-  else {
-    hed = u4_k_cell(lane, u4_noun_0, _edit_mask(m, tig));
-  }
-
-  if ( u4_n_zero(par) ) {
-    tal = u4_k_cell
-      (lane, u4_k_cell(lane, u4_noun_0, u4_atom_blur), 
-             u4_noun_0);
-  }
-  else if ( _edit_plox_is_end(m, par, &nuf) ) {
-    tal = u4_k_cell
-      (lane, u4_k_cell(lane, u4_noun_0, nuf), 
-             u4_noun_0);
-  }
-  else if ( _edit_plox_is_tag(m, par, &cox, &doq) ) {
-    tal = u4_k_cell
-      (lane, u4_k_cell(lane, cox, _edit_mask(m, doq)),
-             u4_noun_0);
-  }
-  else {
-    tal = _edit_mask_crib
-      (m, _edit_plox_take_hed(m, par), _edit_plox_take_tal(m, par));
-  }
-
-  return u4_k_cell(lane, hed, tal);
 }
 
 /* _edit_mask(): edit into nothing at all.
@@ -428,20 +359,21 @@ _edit_mask(u4_milr m,
   u4_mark cox;
   u4_type nuf;
 
-  if ( _edit_plox_is_end(m, zel, &nuf) ) {
+  if ( u4_n_zero(zel) ) {
+    return u4_atom_blur;
+  }
+  else if ( _edit_plox_is_end(m, zel, &nuf) ) {
     return nuf;
   }
   else if ( _edit_plox_is_tag(m, zel, &cox, &hom) ) {
     return u4_k_trel
-      (lane, u4_atom_crib,
-             u4_k_cell(lane, cox, _edit_mask(m, hom)),
-             u4_noun_0);
+      (lane, u4_atom_face, cox, _edit_mask(m, hom));
   }
   else {
-    return u4_k_cell
-      (lane, u4_atom_crib,
-             _edit_mask_crib(m, _edit_plox_take_hed(m, zel),
-                                _edit_plox_take_tal(m, zel)));
+    return u4_k_trel
+      (lane, u4_atom_cell,
+             _edit_mask(m, _edit_plox_take_hed(m, zel)),
+             _edit_mask(m, _edit_plox_take_tal(m, zel)));
   }
 }
 
@@ -455,7 +387,6 @@ _mill_edit(u4_milr m,
            u4_rail bar,
            u4_type gom)
 {
-  u4_lane lane = m->lane;
   u4_noun p_gom, q_gom;
 
   if ( u4_n_zero(zel) ) {
@@ -473,32 +404,32 @@ _mill_edit(u4_milr m,
     return _edit_mask(m, zel);
   }
 
-  // [%crib p=list+[term type]]
-  //
-  else if ( u4_b_p(gom, u4_atom_crib, &p_gom) ) {
-    return u4_k_cell(lane, u4_atom_crib, _edit_crib(m, zel, bar, p_gom));
-  }
-
-  // <%cell p=(type) q=(type)>
+  // [%cell p=(type) q=(type)]
   //
   else if ( u4_b_pq(gom, u4_atom_cell, &p_gom, &q_gom) ) {
 
     return _edit_cell(m, zel, bar, p_gom, q_gom);
   }
 
-  // <%cone p=(type) q={bush term type}>
+  // [%cone p=(type) q=bush+[term type]]
   //
   else if ( u4_b_pq(gom, u4_atom_cone, &p_gom, &q_gom) ) {
     return _edit_cone(m, zel, bar, p_gom, q_gom);
   }
 
-  // <%cube p=*>
+  // [%cube p=noun]
   // 
   else if ( u4_b_p(gom, u4_atom_cube, &p_gom) ) {
     return _edit_mask(m, zel);
   }
 
-  // <%fork p=(type) q=(type)>
+  // [%face p=mark q=type]
+  //
+  else if ( u4_b_pq(gom, u4_atom_face, &p_gom, &q_gom) ) {
+    return _edit_face(m, zel, bar, p_gom, q_gom);
+  }
+
+  // [%fork p=(type) q=(type)]
   //
   else if ( u4_b_pq(gom, u4_atom_fork, &p_gom, &q_gom) ) {
     if ( _mill_cull(m, bar, p_gom) ) {
@@ -514,15 +445,15 @@ _mill_edit(u4_milr m,
     }
   }
 
-  // <%fuse p=(type) q=(type)>
+  // [%fuse p=(type) q=(type)]
   //
   else if ( u4_b_pq(gom, u4_atom_fuse, &p_gom, &q_gom) ) {
     return _edit_fuse(m, zel, bar, p_gom, q_gom);
   }
 
-  // <%gate p=(type) q=(gene)>
+  // [%hold p=(type) q=(gene)]
   //
-  else if ( u4_b_pq(gom, u4_atom_gate, &p_gom, &q_gom) ) {
+  else if ( u4_b_pq(gom, u4_atom_hold, &p_gom, &q_gom) ) {
     u4_noun sul = _mill_repo(m, p_gom, q_gom);
     u4_noun vaq = _mill_edit(m, zel, bar, sul);
 

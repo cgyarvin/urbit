@@ -52,7 +52,7 @@ _null_orth_plum(u4_milr m,
            _null_orth_plum(m, ham, cal, pp_typ, qq_typ);
   }
 
-  else if ( u4_b_pq(q_typ, u4_atom_gate, &pq_typ, &qq_typ) ) {
+  else if ( u4_b_pq(q_typ, u4_atom_hold, &pq_typ, &qq_typ) ) {
     u4_noun p_typ = u4_k_cell(lane, u4_atom_cube, pp_typ);
     u4_noun fum   = u4_k_cell(lane, p_typ, q_typ);
 
@@ -112,7 +112,7 @@ _null_orth_atom(u4_milr m,
            _null_orth_atom(m, ham, cal, qq_typ);
   }
 
-  else if ( u4_b_pq(q_typ, u4_atom_gate, &pq_typ, &qq_typ) ) {
+  else if ( u4_b_pq(q_typ, u4_atom_hold, &pq_typ, &qq_typ) ) {
     u4_noun fum   = u4_k_cell(lane, u4_atom_atom, q_typ);
 
     if ( u4_bag_in(fum, cal) ) {
@@ -176,7 +176,7 @@ _null_orth_cell(u4_milr m,
            _null_orth_cell(m, ham, cal, pp_typ, qp_typ, qq_typ);
   }
 
-  else if ( u4_b_pq(q_typ, u4_atom_gate, &pq_typ, &qq_typ) ) {
+  else if ( u4_b_pq(q_typ, u4_atom_hold, &pq_typ, &qq_typ) ) {
     u4_noun p_typ = u4_k_trel(lane, u4_atom_cell, pp_typ, qp_typ);
     u4_noun fum   = u4_k_cell(lane, p_typ, q_typ);
 
@@ -242,7 +242,7 @@ _null_orth(u4_milr m,
            _null_orth(m, ham, cal, qp_typ, q_typ);
   }
 
-  else if ( u4_b_pq(p_typ, u4_atom_gate, &pp_typ, &qp_typ) ) {
+  else if ( u4_b_pq(p_typ, u4_atom_hold, &pp_typ, &qp_typ) ) {
     u4_noun fum = u4_k_cell(lane, p_typ, q_typ);
 
     if ( u4_bag_in(fum, cal) ) {
@@ -293,7 +293,7 @@ _null_main(u4_milr m,
            _null_main(m, ham, q_typ) ||
            _null_orth(m, ham, u4_noun_0, p_typ, q_typ);
   }
-  else if ( u4_b_pq(typ, u4_atom_gate, &p_typ, &q_typ) ) {
+  else if ( u4_b_pq(typ, u4_atom_hold, &p_typ, &q_typ) ) {
     if ( u4_bag_in(typ, ham) ) {
       /* We can do this because we're searching conservatively.
       */

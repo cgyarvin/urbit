@@ -30,48 +30,48 @@ _seal_main(u4_milr m,
     return u4_noun_0;
   }
 
-  // <%crib p={list ~[(term) (type)]}>
-  //
-  else if ( u4_b_p(typ, u4_atom_crib, &p_typ) ) {
-    return _seal_main(m, gil, _mill_reap(m, typ));
-  }
-
-  // <%cell p=(type) q=(type)>
+  // [%cell p=type q=type]
   //
   else if ( u4_b_pq(typ, u4_atom_cell, &p_typ, &q_typ) ) {
     return u4_bag_cat(lane, _seal_main(m, gil, p_typ),
                             _seal_main(m, gil, q_typ));
   }
 
-  // <%cone p=(type) q={bush term type}>
+  // [%cone p=type q=bush+[mark type]]
   //
   else if ( u4_b_pq(typ, u4_atom_cone, &p_typ, &q_typ) ) {
     return _seal_main(m, gil, p_typ);
   }
 
-  // <%cube p=*>
+  // [%cube p=noun]
   // 
   else if ( u4_b_p(typ, u4_atom_cube, &p_typ) ) {
     return u4_noun_0;
   }
 
-  // <%fork p=(type) q=(type)>
+  // [%face p=mark q=type]
+  //
+  else if ( u4_b_pq(typ, u4_atom_face, &p_typ, &q_typ) ) {
+    return _seal_main(m, gil, q_typ);
+  }
+
+  // [%fork p=type q=type]
   //
   else if ( u4_b_pq(typ, u4_atom_fork, &p_typ, &q_typ) ) {
     return u4_bag_cat(lane, _seal_main(m, gil, p_typ),
                             _seal_main(m, gil, q_typ));
   }
 
-  // <%fuse p=(type) q=(type)>
+  // [%fuse p=type q=type]
   //
   else if ( u4_b_pq(typ, u4_atom_fuse, &p_typ, &q_typ) ) {
     return u4_bag_cat(lane, _seal_main(m, gil, p_typ),
                             _seal_main(m, gil, q_typ));
   }
 
-  // <%gate p=(type) q=(gene)>
+  // [%hold p=type q=gene]
   //
-  else if ( u4_b_pq(typ, u4_atom_gate, &p_typ, &q_typ) ) {
+  else if ( u4_b_pq(typ, u4_atom_hold, &p_typ, &q_typ) ) {
     if ( u4_bag_in(typ, gil) ) {
       return u4_k_trel(lane, typ, u4_noun_0, u4_noun_0);
     } 
@@ -82,19 +82,13 @@ _seal_main(u4_milr m,
     }
   }
 
-  // [%wing p=axis q=type]
-  //
-  else if ( u4_b_pq(typ, u4_atom_wing, &p_typ, &q_typ) ) {
-    return _seal_main(m, gil, q_typ);
-  }
-
   else {
     u4_bug("strange type", typ);
     return u4_trip;
   }
 }
 
-/* _mill_seal(): produce set of gates sealing [typ].
+/* _mill_seal(): produce set of holds sealing [typ].
 */
 u4_bag
 _mill_seal(u4_milr m,
