@@ -1,13 +1,13 @@
-/* mill/x/sliv.c
+/* mill/x/name.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_sliv(): name a face.
+/* _mill_name(): name a face.
 */
 u4_loaf
-_mill_x_sliv(u4_milr m,
+_mill_x_name(u4_milr m,
              u4_mark tem,
              u4_gene caf,
              u4_type pex)

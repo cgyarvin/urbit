@@ -1,25 +1,25 @@
-/* mill/q/stem.c
+/* mill/q/flot.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_q_stem():
+/* _mill_q_flot():
 */
 u4_noun
-_mill_q_stem(u4_milr m, 
+_mill_q_flot(u4_milr m, 
              u4_gene cug)
 {
   u4_lane lane = m->lane;
 
   //  :*
-  //    %grat
-  //    [%stig [%% cug]]
-  //    [%slat 0 %%]
+  //    %link
+  //    [%load [%% cug]]
+  //    [%lect 0 %%]
   //  ==
 
   return u4_k_trel
-    (lane, u4_atom_grat,
-           u4_k_trel(lane, u4_atom_stig, u4_noun_0, cug),
-           u4_k_trel(lane, u4_atom_slat, u4_noun_0, u4_noun_0));
+    (lane, u4_atom_link,
+           u4_k_trel(lane, u4_atom_load, u4_noun_0, cug),
+           u4_k_trel(lane, u4_atom_lect, u4_noun_0, u4_noun_0));
 }

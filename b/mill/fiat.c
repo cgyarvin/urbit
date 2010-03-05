@@ -13,9 +13,9 @@ _fiat_stub(u4_milr m,
   u4_lane lane = m->lane;
 
   return u4_k_qual
-    (lane, u4_atom_plat,
-           u4_k_cell(lane, u4_atom_dron, u4_noun_0),
-           u4_atom_stop,
+    (lane, u4_atom_trop,
+           u4_k_cell(lane, u4_atom_crad, u4_noun_0),
+           u4_atom_lome,
            _mill_stub(m, kel));
 }
 
@@ -37,9 +37,9 @@ _fiat_peft_in(u4_milr m,
       (lane, u4_k_cell
                (lane, pi_wix, 
                       u4_k_qual
-                        (lane, u4_atom_slid, 
+                        (lane, u4_atom_garc, 
                                _mill_fiat(m, qi_wix), 
-                                u4_k_cell(lane, u4_atom_slet, axe),
+                                u4_k_cell(lane, u4_atom_frag, axe),
                                 u4_noun_0)),
               u4_noun_0);
   }
@@ -51,9 +51,9 @@ _fiat_peft_in(u4_milr m,
       (lane, u4_k_cell
                (lane, pi_wix, 
                       u4_k_qual
-                        (lane, u4_atom_slid, 
+                        (lane, u4_atom_garc, 
                                _mill_fiat(m, qi_wix), 
-                                u4_k_cell(lane, u4_atom_slet, piq),
+                                u4_k_cell(lane, u4_atom_frag, piq),
                                 u4_noun_0)),
               _fiat_peft_in(m, guz, t_wix));
   }
@@ -69,10 +69,10 @@ _fiat_peft(u4_milr m,
 
   return u4_k_quil
     (lane,
-     u4_atom_plat,
-     u4_k_cell(lane, u4_atom_dron, u4_noun_0),
-     u4_atom_stop,
-     u4_atom_slon,
+     u4_atom_trop,
+     u4_k_cell(lane, u4_atom_crad, u4_noun_0),
+     u4_atom_lome,
+     u4_atom_cret,
      _fiat_peft_in(m, u4_noun_4, wix));
 }
 
@@ -105,13 +105,13 @@ _fiat_warx(u4_milr m,
 
   return u4_k_qual
     (lane,
-     u4_atom_grat,
-     u4_k_cell(lane, u4_atom_dron, u4_noun_0),
-     u4_atom_stop,
+     u4_atom_link,
+     u4_k_cell(lane, u4_atom_crad, u4_noun_0),
+     u4_atom_lome,
      u4_k_trel
       (lane,
-       u4_atom_quem,
-       u4_k_cell(lane, u4_atom_slet, u4_noun_4),
+       u4_atom_gril,
+       u4_k_cell(lane, u4_atom_frag, u4_noun_4),
        _fiat_warx_in(m, bec)));
 }
 
@@ -127,7 +127,7 @@ _mill_fiat(u4_milr m,
   if ( u4_b_p(kel, u4_atom_chob, &p_kel) ) {
     u4_rope hep = p_kel;
 
-    return u4_k_trel(lane, u4_atom_slop, hep, u4_noun_0);
+    return u4_k_trel(lane, u4_atom_kick, hep, u4_noun_0);
   }
   else if ( u4_b_p(kel, u4_atom_dept, &p_kel) ) {
     return _fiat_stub(m, kel);
@@ -153,7 +153,7 @@ _mill_fiat(u4_milr m,
     u4_skel niz = q_kel;
 
     return u4_k_qual
-       (lane, u4_atom_slid, 
+       (lane, u4_atom_garc, 
               _mill_fiat(m, pef),
               _mill_fiat(m, niz),
               u4_noun_0);

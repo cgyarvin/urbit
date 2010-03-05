@@ -4,22 +4,22 @@
 */
 #include "u4/all.h"
 
-#define _open_p(stem) \
-  if ( u4_b_p(gen, u4_atom_##stem, &p_gen) ) { \
-    u4_loaf _mill_q_##stem(u4_milr, u4_noun); \
-    return _mill_q_##stem(m, p_gen); \
+#define _open_p(flot) \
+  if ( u4_b_p(gen, u4_atom_##flot, &p_gen) ) { \
+    u4_loaf _mill_q_##flot(u4_milr, u4_noun); \
+    return _mill_q_##flot(m, p_gen); \
   }
 
-#define _open_pq(stem) \
-  if ( u4_b_pq(gen, u4_atom_##stem, &p_gen, &q_gen) ) { \
-    u4_loaf _mill_q_##stem(u4_milr, u4_noun, u4_noun); \
-    return _mill_q_##stem(m, p_gen, q_gen); \
+#define _open_pq(flot) \
+  if ( u4_b_pq(gen, u4_atom_##flot, &p_gen, &q_gen) ) { \
+    u4_loaf _mill_q_##flot(u4_milr, u4_noun, u4_noun); \
+    return _mill_q_##flot(m, p_gen, q_gen); \
   }
 
-#define _open_pqr(stem) \
-  if ( u4_b_pqr(gen, u4_atom_##stem, &p_gen, &q_gen, &r_gen) ) {\
-    u4_loaf _mill_q_##stem(u4_milr, u4_noun, u4_noun, u4_noun); \
-    return _mill_q_##stem(m, p_gen, q_gen, r_gen); \
+#define _open_pqr(flot) \
+  if ( u4_b_pqr(gen, u4_atom_##flot, &p_gen, &q_gen, &r_gen) ) {\
+    u4_loaf _mill_q_##flot(u4_milr, u4_noun, u4_noun, u4_noun); \
+    return _mill_q_##flot(m, p_gen, q_gen, r_gen); \
   }
 
 
@@ -33,45 +33,43 @@ _mill_open(u4_milr m,
 
   if ( u4_b_fork(gen, &p_gen, &q_gen) ) {
     return _mill_open
-      (m, u4_k_qual(m->lane, u4_atom_slux, p_gen, q_gen, u4_noun_0));
+      (m, u4_k_qual(m->lane, u4_atom_cage, p_gen, q_gen, u4_noun_0));
   }
   else {
-    _open_pq (ston);  // |*
-    _open_p  (quax);  // ?&
-    _open_p  (slip);  // :^
-    _open_p  (glaz);  // ^@
-    _open_p  (slos);  // :$
-    _open_pqr(stix);  // ||
-    _open_pq (quat);  // ?>
-    _open_p  (slem);  // :-
-    _open_p  (stem);  // |-
-    _open_pq (slid);  // :+
-    _open_pq (quid);  // ?+
-    _open_pq (plat);  // ->
-    _open_pq (slat);
-    _open_pq (plet);  // -<
-    _open_p  (stop);  // |=
-    _open_p  (stid);  // |+
-    _open_p  (brip);  // &^
-    _open_p  (draz);
-    _open_p  (quix);  // ?|
-    _open_p  (slux);
-    _open_pqr(clat);  // =>
-    _open_pq (quet);  // ?<
-    _open_pq (slex);  // :%
-    _open_p  (dron);
-    _open_pq (sloc);  // :~
-    _open_p  (slon);  // :*
-    _open_p  (glon);  // ^*
+    _open_pq (blin);  // |*
+    _open_p  (boce);  // ?&
+    _open_p  (bink);  // :^
+    _open_p  (crot);  // ^@
+    _open_pqr(drol);  // ||
+    _open_pq (feng);  // ?>
+    _open_p  (flec);  // :-
+    _open_p  (flot);  // |-
+    _open_pq (garc);  // :+
+    _open_pq (stam);  // ?+
+    _open_pq (trop);  // ->
+    _open_pq (lect);
+    _open_pq (prec);  // -<
+    _open_p  (lome);  // |=
+    _open_p  (malk);  // |+
+    _open_p  (neft);  // &^
+    _open_p  (palt);
+    _open_p  (dast);  // ?|
+    _open_pqr(pont);  // =>
+    _open_pq (prex);  // ?<
+    _open_pq (grun);  // :%
+    _open_p  (crad);
+    _open_pq (mang);  // :~
+    _open_p  (cret);  // :*
+    _open_p  (rald);  // ^*
     _open_pqr(clet);  // =<
-    _open_p  (broc);  // &~
-    _open_pq (stol);  // |:
-    _open_pq (gret);  // ~<
-    _open_p  (quac);  // ?!
-    _open_p  (bron);  // &*
-    _open_p  (brop);  // &=
-    _open_pq (quem);  // ?-
-    _open_p  (slet);
+    _open_p  (spil);  // &~
+    _open_pq (flic);  // |:
+    _open_pq (colb);  // ~<
+    _open_p  (blem);  // ?!
+    _open_p  (veck);  // &*
+    _open_p  (wamp);  // &=
+    _open_pq (gril);  // ?-
+    _open_p  (frag);
 
     return gen;
   }

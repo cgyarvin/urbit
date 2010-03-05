@@ -1,26 +1,26 @@
-/* mill/q/sloc.c
+/* mill/q/mang.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_q_sloc():
+/* _mill_q_mang():
 */
 u4_noun
-_mill_q_sloc(u4_milr m, 
+_mill_q_mang(u4_milr m, 
              u4_gene buz,
              u4_gene lep)
 {
   u4_lane lane = m->lane;
 
   //  :.
-  //    %plat 
+  //    %trop 
   //    buz
   //    :.
-  //      %slop
-  //      [[%slet 2] %% ~]
-  //      :.  :.  [[%slet 4] ~]
-  //              [%grat [%slet 3] lep]]
+  //      %kick
+  //      [[%frag 2] %% ~]
+  //      :.  :.  [[%frag 4] ~]
+  //              [%link [%frag 3] lep]]
   //          ==
   //          ~
   //      ==
@@ -29,14 +29,14 @@ _mill_q_sloc(u4_milr m,
 
   return u4_k_trel
     (lane, 
-     u4_atom_plat,
+     u4_atom_trop,
      buz,
      u4_k_trel
       (lane,
-       u4_atom_slop,
+       u4_atom_kick,
        u4_k_trel
         (lane, 
-         u4_k_cell(lane, u4_atom_slet, u4_noun_2),
+         u4_k_cell(lane, u4_atom_frag, u4_noun_2),
          u4_noun_0, 
          u4_noun_0),
        u4_k_cell
@@ -44,11 +44,11 @@ _mill_q_sloc(u4_milr m,
          u4_k_cell
           (lane,
            u4_k_cell
-            (lane, u4_k_cell(lane, u4_atom_slet, u4_noun_4), u4_noun_0),
+            (lane, u4_k_cell(lane, u4_atom_frag, u4_noun_4), u4_noun_0),
            u4_k_trel
             (lane, 
-             u4_atom_grat, 
-             u4_k_cell(lane, u4_atom_slet, u4_noun_3), 
+             u4_atom_link, 
+             u4_k_cell(lane, u4_atom_frag, u4_noun_3), 
              lep)),
          u4_noun_0)));
 }

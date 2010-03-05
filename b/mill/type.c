@@ -84,7 +84,7 @@ _mill_type(u4_milr m,
   }
 
   else {
-    return _mill_fail(m, "type: stem");
+    return _mill_fail(m, "type: flot");
   }
 }
 

@@ -1,4 +1,4 @@
-/* mill/slip.c
+/* mill/bink.c
 **
 ** This file is in the public domain.
 */

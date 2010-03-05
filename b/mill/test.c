@@ -78,7 +78,7 @@ _mill_test(u4_milr m,
   u4_lane lane = m->lane;
   u4_noun p_gen, q_gen;
 
-  if ( u4_b_pq(gen, u4_atom_quop, &p_gen, &q_gen) ) {
+  if ( u4_b_pq(gen, u4_atom_like, &p_gen, &q_gen) ) {
     u4_axis axe = u4_noun_1;
     u4_type buv;
     u4_tape res = _mill_hunt(m, p_gen, typ, &axe, &buv);
@@ -100,10 +100,10 @@ _mill_test(u4_milr m,
   }
  
 #if 0
-  else if ( u4_b_p(gen, u4_atom_quax, &p_gen) ) {
+  else if ( u4_b_p(gen, u4_atom_boce, &p_gen) ) {
     return _mill_test_and(m, p_gen, typ);
   }
-  else if ( u4_b_p(gen, u4_atom_quix, &p_gen) ) {
+  else if ( u4_b_p(gen, u4_atom_dast, &p_gen) ) {
     return _mill_test_or(m, p_gen, typ);
   }
 #endif

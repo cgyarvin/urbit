@@ -1,20 +1,20 @@
-/* mill/q/quem.c
+/* mill/q/gril.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_q_quem():
+/* _mill_q_gril():
 */
 u4_noun
-_mill_q_quem(u4_milr m, 
+_mill_q_gril(u4_milr m, 
              u4_rope mox, 
              u4_noun bem)
 {
   u4_lane lane = m->lane;
 
   if ( u4_n_zero(bem) ) {
-    return u4_k_cell(lane, u4_atom_plac, u4_noun_0);
+    return u4_k_cell(lane, u4_atom_bail, u4_noun_0);
   }
   else {
     u4_pike i_bem = u4_ch(bem);
@@ -26,9 +26,9 @@ _mill_q_quem(u4_milr m,
 
     return u4_k_qual
       (lane,
-       u4_atom_quol, 
+       u4_atom_quiz, 
        tes, 
        bif,
-       _mill_q_quem(m, mox, t_bem));
+       _mill_q_gril(m, mox, t_bem));
   }
 }

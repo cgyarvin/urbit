@@ -1,13 +1,13 @@
-/* mill/q/stix.c
+/* mill/q/drol.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_q_stix():
+/* _mill_q_drol():
 */
 u4_noun
-_mill_q_stix(u4_milr m, 
+_mill_q_drol(u4_milr m, 
              u4_skel nix,
              u4_skel tep,
              u4_gene von)
@@ -15,26 +15,26 @@ _mill_q_stix(u4_milr m,
   u4_lane lane = m->lane;
 
   //  :*
-  //    %plat
+  //    %trop
   //    (stub tep)
   //    :*  
-  //      %stop
+  //      %lome
   //      :*  
-  //        %glid 
+  //        %cast 
   //        (stub nix)
-  //        %stem
+  //        %flot
   //        von 
   //      ==
   //    ==
   //  ==
 
   return u4_k_qual
-    (lane, u4_atom_plat,
+    (lane, u4_atom_trop,
            _mill_stub(m, tep),
-           u4_atom_stop,
+           u4_atom_lome,
            u4_k_qual
-             (lane, u4_atom_glid,
+             (lane, u4_atom_cast,
                     _mill_stub(m, nix),
-                    u4_atom_stem,
+                    u4_atom_flot,
                     von));
 }

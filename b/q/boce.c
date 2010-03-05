@@ -1,31 +1,31 @@
-/* mill/q/quax.c
+/* mill/q/boce.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_q_quax():
+/* _mill_q_boce():
 */
 u4_noun
-_mill_q_quax(u4_milr m, 
+_mill_q_boce(u4_milr m, 
              u4_noun das)
 {
   u4_lane lane = m->lane;
 
   //  ?-  das
-  //    -   ~       [%drop %0]
-  //    -   [i t]   [%quol i.das $(das t.das) [%drop %1]]
+  //    -   ~       [%rock %0]
+  //    -   [i t]   [%quiz i.das $(das t.das) [%rock %1]]
   //  ==
 
   if ( u4_n_zero(das) ) {
-    return u4_k_cell(lane, u4_atom_drop, u4_noun_0);
+    return u4_k_cell(lane, u4_atom_rock, u4_noun_0);
   }
   else {
     return u4_k_qual
       (lane,
-       u4_atom_quol,
+       u4_atom_quiz,
        u4_ch(das),
-       _mill_q_quax(m, u4_ct(das)),
-       u4_k_cell(lane, u4_atom_drop, u4_noun_1));
+       _mill_q_boce(m, u4_ct(das)),
+       u4_k_cell(lane, u4_atom_rock, u4_noun_1));
   }
 }

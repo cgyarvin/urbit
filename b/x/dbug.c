@@ -1,13 +1,13 @@
-/* mill/x/plov.c
+/* mill/x/dbug.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_x_plov()::
+/* _mill_x_dbug()::
 */
 u4_loaf
-_mill_x_plov(u4_milr m, 
+_mill_x_dbug(u4_milr m, 
              u4_gene lyq,
              u4_type tip)
 {

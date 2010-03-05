@@ -1,13 +1,13 @@
-/* mill/x/brov.c
+/* mill/x/nock.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_x_brov()::
+/* _mill_x_nock()::
 */
 u4_loaf
-_mill_x_brov(u4_milr m, 
+_mill_x_nock(u4_milr m, 
              u4_atom fiz,
              u4_gene dil, 
              u4_type tip)

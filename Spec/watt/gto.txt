@@ -2,95 +2,91 @@ watt GTO: Gran Tabula Operazioni
 
   gene:
 
-tag  old  dig  r  skel                            semantics
+tag  old  dig  r  bone                            semantics
 ----------------------------------------------------------------------------
-clat pont  =>   E  [han=mark dur=gene leb=gene]    [leb] in [[han=dur] +]
-clet rulf  =<   E  [han=mark dur=gene leb=gene]    [dur] in [[han=leb] +]
-plat glem  ->   E  [hig=gene muc=gene]             [muc] in [hig +]
-plet lisc  -<   E  [hig=gene muc=gene]             [hig] in [muc +]
-grat slon  ~>   X  [del=gene zim=gene]             [zim] in [del]
-gret stiv  ~<   E  [del=gene zim=gene]             [del] in [zim]
+pont  =>   E  [han=mark dur=gene leb=gene]    [leb] in [[han=dur] +]
+rulf  =<   E  [han=mark dur=gene leb=gene]    [dur] in [[han=leb] +]
+trop  ->   E  [hig=gene muc=gene]             [muc] in [hig +]
+prec  -<   E  [hig=gene muc=gene]             [hig] in [muc +]
+link  ~>   X  [del=gene zim=gene]             [zim] in [del]
+colb  ~<   E  [del=gene zim=gene]             [del] in [zim]
 
-quol stol  ?:   X  [tes=gene bif=gene hob=gene]    if [tes] [bif], else [hob]
-quat feng  ?>   E  [tes=gene bif=gene]             if [tes] [bif], else fail
-quet prex  ?<   E  [tes=gene hob=gene]             if [tes] fail, else [hob]
-quem zact  ?-   E  [mox=rope bem=list+pike]        examine [mox], internally
-quid glax  ?+   E  [feg=gene bem=list+pike]        examine [feg], externally 
-quax boce  ?&   E  [das=list+gene]                 yes iff all of [das] are yes
-quix peld  ?|   E  [das=list+gene]                 yes iff any of [das] are yes
-quac trup  ?!   E  [gix=gene]                      not
-quop forb  ?=   X  [rid=rope bul=gene]             yes iff [rid] is like [bul]
+quiz  ?:   X  [tes=gene bif=gene hob=gene]    if [tes] [bif], else [hob]
+feng  ?>   E  [tes=gene bif=gene]             if [tes] [bif], else fail
+prex  ?<   E  [tes=gene hob=gene]             if [tes] fail, else [hob]
+gril  ?-   E  [mox=rope bem=list+pike]        examine [mox], internally
+stam  ?+   E  [feg=gene bem=list+pike]        examine [feg], externally 
+boce  ?&   E  [das=list+gene]                 yes iff all of [das] are yes
+dast  ?|   E  [das=list+gene]                 yes iff any of [das] are yes
+blem  ?!   E  [gix=gene]                      not
+like  ?=   X  [rid=rope bul=gene]             yes iff [rid] is like [bul]
 
-stig clep  |@   X  [pir=bush+[mark gene]]          load book
-stid malk  |+   E  [pir=list+[mark gene]]          book as list
-ston blin  |*   E  [bov=gene pir=list+[mark gene]] load and apply
-stol stur  |:   E  [tep=skel von=gene]             gate construction
-stix drol  ||   E  [nix=skel tep=skel von=gene]    gate with cast
-stop lome  |=   E  [cug=gene]                      cold gate
-stem flot  |-   E  [cug=gene]                      hot gate
+load  |@   X  [pir=bush+[mark gene]]          load book
+malk  |+   E  [pir=list+[mark gene]]          book as list
+blin  |*   E  [bov=gene pir=list+[mark gene]] load and apply
+flic  |:   E  [tep=bone von=gene]             gate construction
+drol  ||   E  [nix=bone tep=bone von=gene]    gate with cast
+lome  |=   E  [cug=gene]                      cold gate
+flot  |-   E  [cug=gene]                      hot gate
 
-glid perd  ^+   X  [fes=gene rum=gene]             [rum] as [fes], geometric
-glem halc  ^-   X  [fes=gene rum=gene]             [rum] as [fes], genetic
-glop tarn  ^=   X  [fes=gene gav=gene vep=gene]    [vep], so [gav] is in [fes]
-glon rald  ^*   E  [rum=gene]                      [rum] perd to blur
-glaz crot  ^@   E  [rum=gene]                      [rum] perd to atom
+cast  ^-   X  [fes=gene rum=gene]             [rum] as [fes], geometric
+sure  ^=   X  [fes=gene gav=gene vep=gene]    [vep], so [gav] is in [fes]
+rald  ^*   E  [rum=gene]                      [rum] cast to blur
+crot  ^@   E  [rum=gene]                      [rum] cast to atom
 
-slop gant  :=   X  [ved=rope suc=list+[rope gene]] use with changes
-slat lect  :<   E  [tic=nat vix=mark]              seek by name
-slet zarb  :>   E  [haz=nat]                       seek by axis
-sloc pung  :~   E  [buz=gene lep=gene]             call, direct
-slid garc  :+   E  [buz=gene pum=list+gene]        call with args
-slem flec  :-   E  [buz=gene]                      call without args
-slex grun  :%   E  [vec=list+[rope gene] sud=gene] [sud] with changes
+kick  :=   X  [ved=rope suc=list+[rope gene]] use with changes
+lect  :<   E  [tic=nat vix=mark]              seek by name
+frag  :>   E  [haz=nat]                       seek by axis
+mang  :~   E  [buz=gene lep=gene]             call, direct
+garc  :+   E  [buz=gene pum=list+gene]        call with args
+flec  :-   E  [buz=gene]                      call without args
+grun  :%   E  [vec=list+[rope gene] sud=gene] [sud] with changes
 
-slon sard  :*   E  [caw=list+[mark gene]]          classic American tuple
-slux plom  :.   E  [fut=list+gene]                 nameless tuple
-sliv drub  :`   X  [tem=mark caf=gene]             name a face
+cret  ++   E  [caw=list+[mark gene]]          named tuple
+cage  +-   X  [fut=list+gene]                 nameless tuple
+name  +=   X  [tem=mark caf=gene]             name a face
+bink  +:   E  [mef=bone]                      bone to gate
 
-slos delc  :$   E  [mef=skel]                      skeleton stub
-slip brip  :^   E  [mef=skel]                      skeleton gate
+dbug  !?   X  [lyq=gene]                      activate internal debug
+bail  !!   X  [0]                             exit
+home  !:   X  [cux=lab lyq=gene]              source label
+spot  !@   X  [xed=[[@ @] [@ @] lyq=gene]     source pos, [at to] [lin col]
 
-plov dbug  !?   X  [lyq=gene]                      activate internal debug
-plac tram  !!   X  [0]                             exit
-plol poos  !:   X  [cux=lab lyq=gene]              source label
-plaz spot  !@   X  [xed=[[@ @] [@ @] lyq=gene]     source pos, [at to] [lin col]
+gult  &?   X  [fiz=(3 4 5 6 7) dil=gene]      nock operator
+veck  &*   E  [dil=gene]                      raw eval
+spil  &~   E  [dil=gene]                      cell
+neft  &^   E  [dil=gene]                      inc
+wamp  &=   E  [dil=gene]                      eq
 
-brov gult  &?   X  [fiz=(3 4 5 6 7) dil=gene]      nock operator
-brax griv  &&   X  [dil=gene zep=noun]             raw formula
-bron veck  &*   E  [dil=gene]                      raw eval
-broc spil  &~   E  [dil=gene]                      cell
-brip neft  &^   E  [dil=gene]                      inc
-brop wamp  &=   E  [dil=gene]                      eq
-
-draz palt  %@   E  [daq=nat]                       constant, atom
-dron pril  %*   E  [daq=clod]                      constant, blur
-drop pret  %=   X  [daq=clod]                      constant, cube
+palt  %@   E  [daq=atom]                      constant, atom
+crad  %*   E  [daq=noun]                      constant, blur
+rock  %=   X  [daq=noun]                      constant, cube
  
   rope: list+(mark [%flat tic=nat vix=mark] [%flet haz=nat])
 
-  skel:
+  bone:
 
-tag    skel                           semantics
+tag    bone                           semantics
 ----------------------------------------------------------------------------
-gorm   [pef=skel niz=skel]            standard container
-drib   [ved=skel piv=skel]            [ved] for mate, [piv] for stub or gate
+gorm   [pef=bone niz=bone]            standard container
+drib   [ved=bone piv=bone]            [ved] for mate, [piv] for stub or gate
 chob   [hep=rope]                     rope to gate
-dept   [hup=skel]                     gate from blur to [hup]
-felk   [hin=clod]                     blur constant
+dept   [hup=bone]                     gate from blur to [hup]
+felk   [hin=noun]                     blur constant
 flit   [gen=gene]                     gene for gate
 galb   [hin=bead]                     bead constant
-grop   [hin=clod]                     exact constant
-peft   [wix=list+[mark skel]]         classic American tuple
-shud   [hup=skel sim=skel]            gate from [sim] to [hup]
-warx   [bec=list+skel]                options
+grop   [hin=noun]                     exact constant
+peft   [wix=list+[mark bone]]         classic American tuple
+shud   [hup=bone sim=bone]            gate from [sim] to [hup]
+warx   [bec=list+bone]                options
 
   pike:
 
 
-tag    skel                           semantics
+tag    bone                           semantics
 ----------------------------------------------------------------------------
-lask   [bic=skel luf=gene]            use [luf] if [mox] is like [bic]
-plic   [bic=skel]                     use [mox] if [mox] is like [bic]
-semp   [bic=skel luf=gene]            use [luf] if [mox] is fixed to [bic]
-fing   [bic=skel]                     use [mox] if [mox] is fixed to [bic]
+lask   [bic=bone luf=gene]            use [luf] if [mox] is like [bic]
+plic   [bic=bone]                     use [mox] if [mox] is like [bic]
+semp   [bic=bone luf=gene]            use [luf] if [mox] is fixed to [bic]
+fing   [bic=bone]                     use [mox] if [mox] is fixed to [bic]
 

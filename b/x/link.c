@@ -1,13 +1,13 @@
-/* mill/x/grat.c
+/* mill/x/link.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_x_grat()::
+/* _mill_x_link()::
 */
 u4_loaf
-_mill_x_grat(u4_milr m, 
+_mill_x_link(u4_milr m, 
              u4_gene del,
              u4_gene zim, 
              u4_type tip)

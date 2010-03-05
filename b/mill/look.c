@@ -16,19 +16,19 @@ _is_grip(u4_knot sod,
     if ( cox ) *cox = sod;
     return 1;
   }
-  else if ( u4_b_pq(sod, u4_atom_slat, tik, cox) ) {
+  else if ( u4_b_pq(sod, u4_atom_lect, tik, cox) ) {
     return 1;
   }
   else return 0;
 }
 
-/* _is_slet()::
+/* _is_frag()::
 */
 static u4_t
-_is_slet(u4_knot sod,
+_is_frag(u4_knot sod,
          u4_axis *axe)
 {
-  return u4_b_p(sod, u4_atom_slet, axe);
+  return u4_b_p(sod, u4_atom_frag, axe);
 }
 
 /* _look_knot(): read a step on a rope.
@@ -62,7 +62,7 @@ _look_knot(u4_milr m,
       u4_noun p_vil;
       u4_type ger;
 
-      vor = u4_k_trel(lane, u4_atom_slat, u4_op_dec(lane, tik), cox);
+      vor = u4_k_trel(lane, u4_atom_lect, u4_op_dec(lane, tik), cox);
 
       if ( u4_b_p(vil, u4_noun_0, &axe) ) {
         ger = lem;
@@ -86,7 +86,7 @@ _look_knot(u4_milr m,
       }
     }
   }
-  else if ( _is_slet(vor, &axe) ) {
+  else if ( _is_frag(vor, &axe) ) {
     return u4_k_trel
       (lane, _mill_peek(m, axe, u4_noun_0, typ), 
              u4_noun_0, 

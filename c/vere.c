@@ -36,13 +36,16 @@ _vere_source_crib(uz_machine mac,
   uz_noun fig    = _vere_source(mac, qi_lar);
   uz_noun p_fig  = uz_ch(mac, fig);
   uz_noun q_fig  = uz_ct(mac, fig);
+  uz_noun cul;
+
+  if ( uz_n_eq(mac, 0, pi_lar) ) {
+    cul = p_fig;
+  } else {
+    cul = uz_k_trel(mac, uz_s4('f','a','c','e'), pi_lar, p_fig);
+  }
 
   if ( uz_n_eq(mac, 0, uz_ct(mac, lar)) ) {
-    return uz_k_cell
-      (mac, uz_k_trel(mac, uz_s4('c','r','i','b'), 
-                           uz_k_cell(mac, pi_lar, p_fig), 
-                           0),
-            q_fig);
+    return uz_k_cell(mac, cul, q_fig);
   }
   else {
     uz_noun pem   = _vere_source_crib(mac, t_lar);
@@ -50,9 +53,7 @@ _vere_source_crib(uz_machine mac,
     uz_noun q_pem = uz_ct(mac, pem);
 
     return uz_k_cell
-      (mac, uz_k_trel(mac, uz_s4('c','r','i','b'), 
-                           uz_k_cell(mac, pi_lar, p_fig),
-                           uz_ct(mac, p_pem)),
+      (mac, uz_k_trel(mac, uz_s4('c','e','l','l'), cul, p_pem),
             uz_k_cell(mac, q_fig, q_pem));
   }
 }
@@ -74,13 +75,13 @@ _vere_source_atom(uz_machine mac,
 {
   uz_noun p_viq;
 
-  if ( uz_c_p(mac, viq, uz_s4('d','r','a','z'), &p_viq) ) {
+  if ( uz_c_p(mac, viq, uz_s4('p','a','l','t'), &p_viq) ) {
     return uz_k_cell(mac, uz_s4('a','t','o','m'), p_viq);
   }
-  else if ( uz_c_p(mac, viq, uz_s4('d','r','o','n'), &p_viq) ) {
+  else if ( uz_c_p(mac, viq, uz_s4('c','r','a','d'), &p_viq) ) {
     return uz_k_cell(mac, uz_s4('b','l','u','r'), p_viq);
   }
-  else if ( uz_c_p(mac, viq, uz_s4('d','r','o','p'), &p_viq) ) {
+  else if ( uz_c_p(mac, viq, uz_s4('r','o','c','k'), &p_viq) ) {
     return uz_k_cell
       (mac, uz_k_cell(mac, uz_s4('c','u','b','e'), p_viq), p_viq);
   }

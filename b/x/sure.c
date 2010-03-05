@@ -1,13 +1,13 @@
-/* mill/x/glop.c
+/* mill/x/sure.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_x_glop()::
+/* _mill_x_sure()::
 */
 u4_loaf
-_mill_x_glop(u4_milr m, 
+_mill_x_sure(u4_milr m, 
              u4_gene fes,
              u4_gene gav, 
              u4_gene vep, 

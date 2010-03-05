@@ -4,7 +4,7 @@
 */
 #include "u4/all.h"
 
-/* _mill_repo(): replay stig.
+/* _mill_repo(): replay load.
 */
 u4_type
 _mill_repo(u4_milr m,

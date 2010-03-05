@@ -1,17 +1,17 @@
-/* mill/x/slop.c
+/* mill/x/kick.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_slop(): use with changes.
+/* _mill_kick(): use with changes.
 **
 **    ved: target : rope == list+(mark [%flat tic=nat vix=mark] [%flet haz=nat])
 **    suc: changes: bolt == list+[p=rope q=gene]
 **    pex: subject: type
 */
 u4_loaf
-_mill_x_slop(u4_milr m,
+_mill_x_kick(u4_milr m,
              u4_rope ved,
              u4_bolt suc,
              u4_type pex)
@@ -22,16 +22,16 @@ _mill_x_slop(u4_milr m,
 #if 0
   if ( !u4_n_zero(m->rux) && !u4_n_zero(suc) ) {
     printf("\n");
-    u4_err(lane, "slop: ved", ved);
-    u4_err(lane, "slop: suc", suc);
-    u4_burp(lane, "slop: pex", _mill_dump(m, pex));
+    u4_err(lane, "kick: ved", ved);
+    u4_err(lane, "kick: suc", suc);
+    u4_burp(lane, "kick: pex", _mill_dump(m, pex));
   }
 #endif
 
   rec = _mill_look(m, ved, pex);
 
   if ( u4_n_zero(rec) ) {
-    return _mill_fail(m, "slop: broken");
+    return _mill_fail(m, "kick: broken");
   }
   else {
     u4_type zum = u4_ch(rec);
@@ -62,7 +62,7 @@ _mill_x_slop(u4_milr m,
     }
 
     else {
-      return _mill_fail(m, "slop: ugly");
+      return _mill_fail(m, "kick: ugly");
     }
   }
 }

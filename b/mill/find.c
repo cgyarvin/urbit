@@ -30,10 +30,10 @@ _find_hang(u4_milr m,
   }
 }
 
-/* _find_slip(): as _find_main(), but typ is at axis.
+/* _find_bink(): as _find_main(), but typ is at axis.
 */
 static u4_loaf
-_find_slip(u4_milr m,
+_find_bink(u4_milr m,
            u4_mark cox,
            u4_bag  gil,
            u4_axis axe,
@@ -87,8 +87,8 @@ _find_cell(u4_milr m,
            u4_type p_typ,
            u4_type q_typ)
 {
-  u4_loaf gul = _find_slip(m, cox, gil, u4_noun_2, bar, p_typ);
-  u4_loaf das = _find_slip(m, cox, gil, u4_noun_3, bar, q_typ);
+  u4_loaf gul = _find_bink(m, cox, gil, u4_noun_2, bar, p_typ);
+  u4_loaf das = _find_bink(m, cox, gil, u4_noun_3, bar, q_typ);
 
   if ( !u4_n_zero(gul) && !u4_n_zero(das) ) {
     return _mill_fail(m, "find: cell conflict");
@@ -113,7 +113,7 @@ _find_cone(u4_milr m,
   u4_carb gos = _find_seek(m, u4_noun_1, cox, q_typ);
 
   if ( u4_n_zero(gos) ) {
-    return _find_slip(m, cox, gil, u4_noun_2, bar, p_typ);
+    return _find_bink(m, cox, gil, u4_noun_2, bar, p_typ);
   }
   else {
     u4_axis p_gos = u4_ch(gos);

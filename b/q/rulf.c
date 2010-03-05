@@ -15,18 +15,18 @@ _mill_q_clet(u4_milr m,
   u4_lane lane = m->lane;
 
   //  :*
-  //    %grat
-  //    [%slon [han leb] [%% [%slet 1]] ~]
+  //    %link
+  //    [%cret [han leb] [%% [%frag 1]] ~]
   //    dur
   //  ==
   
   return u4_k_trel
-    (lane, u4_atom_grat,
+    (lane, u4_atom_link,
            u4_k_qual
-            (lane, u4_atom_slon,
+            (lane, u4_atom_cret,
                    u4_k_cell(lane, han, leb),
                    u4_k_cell(lane, u4_noun_0, 
-                                   u4_k_cell(lane, u4_atom_slet, u4_noun_1)),
+                                   u4_k_cell(lane, u4_atom_frag, u4_noun_1)),
                    u4_noun_0),
           dur);
 }

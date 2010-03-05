@@ -1,13 +1,13 @@
-/* mill/q/slex.c
+/* mill/q/grun.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_q_slex():
+/* _mill_q_grun():
 */
 u4_noun
-_mill_q_slex(u4_milr m, 
+_mill_q_grun(u4_milr m, 
              u4_noun vec,
              u4_noun sud)
 {
@@ -15,10 +15,10 @@ _mill_q_slex(u4_milr m,
 
   return u4_k_trel
     (lane,
-     u4_atom_grat,
+     u4_atom_link,
      u4_k_cell
-      (lane, u4_atom_slop,
-             u4_k_cell(lane, u4_k_cell(lane, u4_atom_slet, u4_noun_0),
+      (lane, u4_atom_kick,
+             u4_k_cell(lane, u4_k_cell(lane, u4_atom_frag, u4_noun_0),
                              u4_noun_0)),
      sud);
 }

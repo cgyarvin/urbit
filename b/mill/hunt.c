@@ -4,10 +4,10 @@
 */
 #include "u4/all.h"
 
-/* _is_slat()::
+/* _is_lect()::
 */
 static u4_t
-_is_slat(u4_knot sod, 
+_is_lect(u4_knot sod, 
          u4_tick *tik, 
          u4_term *cox)
 {
@@ -16,19 +16,19 @@ _is_slat(u4_knot sod,
     if ( cox ) *cox = sod;
     return 1;
   }
-  else if ( u4_b_pq(sod, u4_atom_slat, tik, cox) ) {
+  else if ( u4_b_pq(sod, u4_atom_lect, tik, cox) ) {
     return 1;
   }
   else return 0;
 }
 
-/* _is_slet()::
+/* _is_frag()::
 */
 static u4_t
-_is_slet(u4_knot sod,
+_is_frag(u4_knot sod,
          u4_axis *mar)
 {
-  return u4_b_p(sod, u4_atom_slet, mar);
+  return u4_b_p(sod, u4_atom_frag, mar);
 }
 
 /* _mill_hunt(): rope to tape.
@@ -55,7 +55,7 @@ _mill_hunt(u4_milr m,
     u4_tick tik;
     u4_term cox;
 
-    if ( _is_slet(i_dap, &mar) ) {
+    if ( _is_frag(i_dap, &mar) ) {
       u4_type gey = _mill_peek(m, mar, u4_noun_0, fim);
 
       *axe = u4_op_peg(lane, *axe, mar);
@@ -64,7 +64,7 @@ _mill_hunt(u4_milr m,
         (lane, u4_k_cell(lane, u4_atom_axis, mar),
                _mill_hunt(m, t_dap, gey, axe, buv));
     }
-    else if ( _is_slat(i_dap, &tik, &cox) ) {
+    else if ( _is_lect(i_dap, &tik, &cox) ) {
       u4_loaf zib = _mill_find(m, cox, u4_noun_0, fim);
 
       if ( u4_n_zero(zib) ) {
@@ -85,7 +85,7 @@ _mill_hunt(u4_milr m,
           guz = u4_n_zero(tik)
             ? t_dap
             : u4_k_cell
-              (lane, u4_k_trel(lane, u4_atom_slat, u4_op_dec(lane, tik), cox),
+              (lane, u4_k_trel(lane, u4_atom_lect, u4_op_dec(lane, tik), cox),
                      t_dap);
 
           *axe = u4_op_peg(lane, *axe, mar);

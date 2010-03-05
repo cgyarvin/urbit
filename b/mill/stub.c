@@ -4,7 +4,7 @@
 */
 #include "u4/all.h"
 
-/* _stub_peft_in(): convert peft items to slon list.
+/* _stub_peft_in(): convert peft items to cret list.
 */
 u4_noun
 _stub_peft_in(u4_milr m,
@@ -39,7 +39,7 @@ _mill_stub(u4_milr m,
   if ( u4_b_p(kel, u4_atom_chob, &p_kel) ) {
     u4_rope hep = p_kel;
 
-    return u4_k_qual(lane, u4_atom_slem, u4_atom_slop, hep, u4_noun_0);
+    return u4_k_qual(lane, u4_atom_flec, u4_atom_kick, hep, u4_noun_0);
   }
   else if ( u4_b_p(kel, u4_atom_dept, &p_kel) ) {
     u4_skel hup = p_kel;
@@ -54,17 +54,17 @@ _mill_stub(u4_milr m,
   else if ( u4_b_p(kel, u4_atom_felk, &p_kel) ) {
     u4_bead hin = p_kel;
 
-    return u4_k_cell(lane, u4_atom_dron, hin); 
+    return u4_k_cell(lane, u4_atom_crad, hin); 
   } 
   else if ( u4_b_p(kel, u4_atom_flit, &p_kel) ) {
     u4_gene gen = p_kel;
 
-    return u4_k_cell(lane, u4_atom_slem, gen);
+    return u4_k_cell(lane, u4_atom_flec, gen);
   }
   else if ( u4_b_p(kel, u4_atom_galb, &p_kel) ) {
     u4_bead hin = p_kel;
 
-    return u4_k_cell(lane, u4_atom_draz, hin);
+    return u4_k_cell(lane, u4_atom_palt, hin);
   } 
   else if ( u4_b_pq(kel, u4_atom_gorm, &p_kel, &q_kel) ) {
     u4_skel pef = p_kel;
@@ -72,9 +72,9 @@ _mill_stub(u4_milr m,
 
     return u4_k_cell
       (lane,
-       u4_atom_slem,
+       u4_atom_flec,
        u4_k_qual
-       (lane, u4_atom_slid, 
+       (lane, u4_atom_garc, 
               _mill_stub(m, pef),
               _mill_stub(m, niz),
               u4_noun_0));
@@ -82,12 +82,12 @@ _mill_stub(u4_milr m,
   else if ( u4_b_p(kel, u4_atom_grop, &p_kel) ) {
     u4_bead hin = p_kel;
 
-    return u4_k_cell(lane, u4_atom_drop, hin);
+    return u4_k_cell(lane, u4_atom_rock, hin);
   }
   else if ( u4_b_p(kel, u4_atom_peft, &p_kel) ) {
     u4_noun wix = p_kel;
 
-    return u4_k_cell(lane, u4_atom_slon, _stub_peft_in(m, wix));
+    return u4_k_cell(lane, u4_atom_cret, _stub_peft_in(m, wix));
   }
   else if ( u4_b_pq(kel, u4_atom_shud, &p_kel, &q_kel) ) {
     u4_skel hup = p_kel;
@@ -95,9 +95,9 @@ _mill_stub(u4_milr m,
 
     return u4_k_qual
       (lane,
-       u4_atom_plat,
+       u4_atom_trop,
        _mill_stub(m, hup),
-       u4_atom_stop,
+       u4_atom_lome,
        _mill_stub(m, sim));
 
   }
@@ -108,9 +108,9 @@ _mill_stub(u4_milr m,
       
     return u4_k_qual
       (lane,
-       u4_atom_slid,
+       u4_atom_garc,
        _mill_fiat(m, kel),
-       u4_k_cell(lane, u4_atom_glon, hez),
+       u4_k_cell(lane, u4_atom_rald, hez),
        u4_noun_0);
   }
   else return u4_trip;

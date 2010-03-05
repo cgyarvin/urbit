@@ -90,61 +90,57 @@ U4_MILL_OFILES=\
        b/mill/trap.o
 
 U4_MX_OFILES=\
-       b/x/clep.o \
+       b/x/load.o \
        b/x/dbug.o \
-       b/x/drub.o \
-       b/x/forb.o \
-       b/x/gant.o \
-       b/x/gult.o \
-       b/x/griv.o \
-       b/x/halc.o \
-       b/x/perd.o \
-       b/x/plom.o \
-       b/x/poos.o \
-       b/x/pret.o \
-       b/x/slon.o \
+       b/x/name.o \
+       b/x/like.o \
+       b/x/kick.o \
+       b/x/nock.o \
+       b/x/cast.o \
+       b/x/cage.o \
+       b/x/home.o \
+       b/x/rock.o \
+       b/x/link.o \
        b/x/spot.o \
-       b/x/stol.o \
-       b/x/tarn.o \
-       b/x/tram.o 
+       b/x/quiz.o \
+       b/x/sure.o \
+       b/x/bail.o 
 
 U4_MQ_OFILES=\
        b/q/blin.o \
        b/q/boce.o \
-       b/q/brip.o \
+       b/q/bink.o \
        b/q/crot.o \
-       b/q/delc.o \
        b/q/drol.o \
        b/q/feng.o \
        b/q/flec.o \
        b/q/flot.o \
        b/q/garc.o \
-       b/q/glax.o \
-       b/q/glem.o \
+       b/q/stam.o \
+       b/q/trop.o \
        b/q/grun.o \
        b/q/lect.o \
-       b/q/lisc.o \
+       b/q/prec.o \
        b/q/lome.o \
        b/q/malk.o \
        b/q/neft.o \
        b/q/palt.o \
-       b/q/peld.o \
-       b/q/plom.o \
+       b/q/dast.o \
        b/q/pont.o \
        b/q/prex.o \
-       b/q/pril.o \
-       b/q/pung.o \
+       b/q/crad.o \
+       b/q/mang.o \
        b/q/rald.o \
        b/q/rulf.o \
-       b/q/sard.o \
-       b/q/spal.o \
-       b/q/stiv.o \
-       b/q/stur.o \
-       b/q/trup.o \
+       b/q/cret.o \
+       b/q/spil.o \
+       b/q/colb.o \
+       b/q/flic.o \
+       b/q/blem.o \
        b/q/veck.o \
        b/q/wamp.o \
-       b/q/zact.o \
-       b/q/zarb.o
+       b/q/gril.o \
+       b/q/frag.o
 
 U4_FAKE_OP_OFILES=\
        b/fake/op/add.o \

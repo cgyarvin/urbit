@@ -101,223 +101,215 @@ wide_core
   **/
     wide_odd
       : rope  
-        { $$ = _ytrel(u4_atom_slop, $1, u4_noun_0); }
+        { $$ = _ytrel(u4_atom_kick, $1, u4_noun_0); }
       | rope '(' nail_wide_star ')'
-        { $$ = _ytrel(u4_atom_slop, $1, $3); }
+        { $$ = _ytrel(u4_atom_kick, $1, $3); }
       | '[' g item_wide_some ']'
-        { $$ = _ycell(u4_atom_slon, $3); }
+        { $$ = _ycell(u4_atom_cret, $3); }
       | '(' g wide_some ')'
-        { $$ = _ytrel(u4_atom_slid, u4_ch($3), u4_ct($3)); }
+        { $$ = _ytrel(u4_atom_garc, u4_ch($3), u4_ct($3)); }
       | wide_constant
       ;
 
     wide_constant
       : tok_delm
-        { $$ = _ycell(u4_atom_draz, $1); }
+        { $$ = _ycell(u4_atom_palt, $1); }
       | '&'               
-        { $$ = _ycell(u4_atom_draz, u4_noun_0); }
+        { $$ = _ycell(u4_atom_palt, u4_noun_0); }
       | '|' 
-        { $$ = _ycell(u4_atom_draz, u4_noun_1); }
+        { $$ = _ycell(u4_atom_palt, u4_noun_1); }
       | '0' 'x' tok_chex
-        { $$ = _ycell(u4_atom_draz, $3); }
+        { $$ = _ycell(u4_atom_palt, $3); }
       | tok_loct
-        { $$ = _ycell(u4_atom_draz, $1); }
+        { $$ = _ycell(u4_atom_palt, $1); }
       | '%' tok_mark
-        { $$ = _ycell(u4_atom_drop, $2); }
+        { $$ = _ycell(u4_atom_rock, $2); }
       | '%' tok_delm
-        { $$ = _ycell(u4_atom_drop, $2); }
+        { $$ = _ycell(u4_atom_rock, $2); }
       | '%' '%'
-        { $$ = _ycell(u4_atom_drop, u4_noun_0); }
+        { $$ = _ycell(u4_atom_rock, u4_noun_0); }
       | '~'
-        { $$ = _ycell(u4_atom_drop, u4_noun_0); }
+        { $$ = _ycell(u4_atom_rock, u4_noun_0); }
       | '!''!'
-        { $$ = _ycell(u4_atom_plac, u4_noun_0); }
+        { $$ = _ycell(u4_atom_bail, u4_noun_0); }
       ;
   
   /** Regular wide productions.
   **/
     wide_norm
-      : dig_clat wide_norm_clat  /* => */ { $$ = _ycell($1, $2); }
+      : dig_pont wide_norm_pont  /* => */ { $$ = _ycell($1, $2); }
       | dig_clet wide_norm_clet  /* =< */ { $$ = _ycell($1, $2); }
-      | dig_plat wide_norm_plat  /* -> */ { $$ = _ycell($1, $2); }
-      | dig_plet wide_norm_plet  /* -< */ { $$ = _ycell($1, $2); }
-      | dig_grat wide_norm_grat  /* ~> */ { $$ = _ycell($1, $2); }
-      | dig_gret wide_norm_gret  /* ~< */ { $$ = _ycell($1, $2); }
+      | dig_trop wide_norm_trop  /* -> */ { $$ = _ycell($1, $2); }
+      | dig_prec wide_norm_prec  /* -< */ { $$ = _ycell($1, $2); }
+      | dig_link wide_norm_link  /* ~> */ { $$ = _ycell($1, $2); }
+      | dig_colb wide_norm_colb  /* ~< */ { $$ = _ycell($1, $2); }
 
-      | dig_quol wide_norm_quol  /* ?: */ { $$ = _ycell($1, $2); }
-      | dig_quat wide_norm_quat  /* ?> */ { $$ = _ycell($1, $2); }
-      | dig_quet wide_norm_quet  /* ?< */ { $$ = _ycell($1, $2); }
-      | dig_quem wide_norm_quem  /* ?- */ { $$ = _ycell($1, $2); }
-      | dig_quid wide_norm_quid  /* ?+ */ { $$ = _ycell($1, $2); }
-      | dig_quax wide_norm_quax  /* ?& */ { $$ = _ycell($1, $2); }
-      | dig_quix wide_norm_quix  /* ?| */ { $$ = _ycell($1, $2); }
-      | dig_quac wide_norm_quac  /* ?! */ { $$ = _ycell($1, $2); }
-      | dig_quop wide_norm_quop  /* ?= */ { $$ = _ycell($1, $2); }
+      | dig_quiz wide_norm_quiz  /* ?: */ { $$ = _ycell($1, $2); }
+      | dig_feng wide_norm_feng  /* ?> */ { $$ = _ycell($1, $2); }
+      | dig_prex wide_norm_prex  /* ?< */ { $$ = _ycell($1, $2); }
+      | dig_gril wide_norm_gril  /* ?- */ { $$ = _ycell($1, $2); }
+      | dig_stam wide_norm_stam  /* ?+ */ { $$ = _ycell($1, $2); }
+      | dig_boce wide_norm_boce  /* ?& */ { $$ = _ycell($1, $2); }
+      | dig_dast wide_norm_dast  /* ?| */ { $$ = _ycell($1, $2); }
+      | dig_blem wide_norm_blem  /* ?! */ { $$ = _ycell($1, $2); }
+      | dig_like wide_norm_like  /* ?= */ { $$ = _ycell($1, $2); }
 /*
-      | dig_stid wide_norm_stid  ** |+ ** { $$ = _ycell($1, $2); }
-      | dig_ston wide_norm_ston  ** |* ** { $$ = _ycell($1, $2); }
+      | dig_malk wide_norm_malk  ** |+ ** { $$ = _ycell($1, $2); }
+      | dig_blin wide_norm_blin  ** |* ** { $$ = _ycell($1, $2); }
 */
-      | dig_stol wide_norm_stol  /* |: */ { $$ = _ycell($1, $2); }
-      | dig_stix wide_norm_stix  /* || */ { $$ = _ycell($1, $2); }
-      | dig_stop wide_norm_stop  /* |= */ { $$ = _ycell($1, $2); }
-      | dig_stem wide_norm_stem  /* |- */ { $$ = _ycell($1, $2); }
+      | dig_flic wide_norm_flic  /* |: */ { $$ = _ycell($1, $2); }
+      | dig_drol wide_norm_drol  /* || */ { $$ = _ycell($1, $2); }
+      | dig_lome wide_norm_lome  /* |= */ { $$ = _ycell($1, $2); }
+      | dig_flot wide_norm_flot  /* |- */ { $$ = _ycell($1, $2); }
 
-      | dig_glid wide_norm_glid  /* ^+ */ { $$ = _ycell($1, $2); }
-      | dig_glem wide_norm_glem  /* ^- */ { $$ = _ycell($1, $2); }
-      | dig_glop wide_norm_glop  /* ^= */ { $$ = _ycell($1, $2); }
-      | dig_glon wide_norm_glon  /* ^* */ { $$ = _ycell($1, $2); }
-      | dig_glaz wide_norm_glaz  /* ^@ */ { $$ = _ycell($1, $2); }
+      | dig_cast wide_norm_cast  /* ^+ */ { $$ = _ycell($1, $2); }
+      | dig_sure wide_norm_sure  /* ^= */ { $$ = _ycell($1, $2); }
+      | dig_rald wide_norm_rald  /* ^* */ { $$ = _ycell($1, $2); }
+      | dig_crot wide_norm_crot  /* ^@ */ { $$ = _ycell($1, $2); }
 
-      | dig_slop wide_norm_slop  /* := */ { $$ = _ycell($1, $2); }
-      | dig_sloc wide_norm_sloc  /* :~ */ { $$ = _ycell($1, $2); }
-      | dig_slid wide_norm_slid  /* :+ */ { $$ = _ycell($1, $2); }
-      | dig_slem wide_norm_slem  /* :- */ { $$ = _ycell($1, $2); }
-      | dig_slon wide_norm_slon  /* :* */ { $$ = _ycell($1, $2); }
-      | dig_slux wide_norm_slux  /* :. */ { $$ = _ycell($1, $2); }
-      | dig_slex wide_norm_slex  /* :% */ { $$ = _ycell($1, $2); }
-      | dig_slos wide_norm_slos  /* :$ */ { $$ = _ycell($1, $2); }
-      | dig_slip wide_norm_slip  /* :^ */ { $$ = _ycell($1, $2); }
+      | dig_kick wide_norm_kick  /* := */ { $$ = _ycell($1, $2); }
+      | dig_mang wide_norm_mang  /* :~ */ { $$ = _ycell($1, $2); }
+      | dig_garc wide_norm_garc  /* :+ */ { $$ = _ycell($1, $2); }
+      | dig_flec wide_norm_flec  /* :- */ { $$ = _ycell($1, $2); }
+      | dig_cret wide_norm_cret  /* :* */ { $$ = _ycell($1, $2); }
+      | dig_cage wide_norm_cage  /* :. */ { $$ = _ycell($1, $2); }
+      | dig_grun wide_norm_grun  /* :% */ { $$ = _ycell($1, $2); }
+      | dig_bink wide_norm_bink  /* :^ */ { $$ = _ycell($1, $2); }
 
-      | dig_brax wide_norm_brax  /* && */ { $$ = _ycell($1, $2); }
-      | dig_bron wide_norm_bron  /* &: */ { $$ = _ycell($1, $2); }
-      | dig_brip wide_norm_brip  /* &^ */ { $$ = _ycell($1, $2); }
-      | dig_brop wide_norm_brop  /* &= */ { $$ = _ycell($1, $2); }
-      | dig_broc wide_norm_broc  /* &~ */ { $$ = _ycell($1, $2); }
+      | dig_griv wide_norm_griv  /* && */ { $$ = _ycell($1, $2); }
+      | dig_veck wide_norm_veck  /* &: */ { $$ = _ycell($1, $2); }
+      | dig_neft wide_norm_neft  /* &^ */ { $$ = _ycell($1, $2); }
+      | dig_wamp wide_norm_wamp  /* &= */ { $$ = _ycell($1, $2); }
+      | dig_spil wide_norm_spil  /* &~ */ { $$ = _ycell($1, $2); }
       ;
 
     /** Combinators.
     **/
-      wide_norm_clat
+      wide_norm_pont
         : '{' g tok_mark w wide w wide g '}' { $$ = _ytrel($3, $5, $7); }
 
       wide_norm_clet
         : '{' g tok_mark w wide w wide g '}' { $$ = _ytrel($1, $3, $5); }
 
-      wide_norm_plat
+      wide_norm_trop
         : '{' g wide w wide g '}' { $$ = _ycell($3, $5); }
 
-      wide_norm_plet
+      wide_norm_prec
         : '{' g wide w wide g '}' { $$ = _ycell($3, $5); }
 
-      wide_norm_grat
+      wide_norm_link
         : '{' g wide w wide g '}' { $$ = _ycell($3, $5); }
 
-      wide_norm_gret 
+      wide_norm_colb 
         : '{' g wide w wide g '}' { $$ = _ycell($3, $5); }
 
 
     /** Branches.
     **/
-      wide_norm_quol
+      wide_norm_quiz
         : '{' g wide w wide w wide g '}' { $$ = _ytrel($1, $3, $5); }
 
-      wide_norm_quat
+      wide_norm_feng
         : '{' g wide w wide g '}' { $$ = _ycell($1, $3); }
 
-      wide_norm_quet
+      wide_norm_prex
         : '{' g wide w wide g '}' { $$ = _ycell($1, $3); }
 
-      wide_norm_quem
+      wide_norm_gril
         : '{' g rope ':' w pike_wide_star '}' { $$ = _ycell($3, $6); }
 
-      wide_norm_quid
+      wide_norm_stam
         : '{' g wide ':' w pike_wide_star '}' { $$ = _ycell($3, $6); }
 
-      wide_norm_quax
+      wide_norm_boce
         : '{' g wide_star '}' { $$ = $3; }
       
-      wide_norm_quix
+      wide_norm_dast
         : '{' g wide_star '}' { $$ = $3; }
    
-      wide_norm_quac
+      wide_norm_blem
         : wide
    
-      wide_norm_quop
+      wide_norm_like
         : '{' g rope g wide g '}' { $$ = _ycell($3, $5); }
    
 
     /** Loading.
     **/
 /*
-      wide_norm_stid
-        : page_star dig_stop { $$ = $1; }
+      wide_norm_malk
+        : page_star dig_lome { $$ = $1; }
    
-      wide_norm_ston
-        : wide w page_star dig_stop { $$ = _ycell($1, $3); }
+      wide_norm_blin
+        : wide w page_star dig_lome { $$ = _ycell($1, $3); }
 */
-      wide_norm_stol
+      wide_norm_flic
         : '{' g skel_w w wide g '}'{ $$ = _ycell($3, $5); }
 
-      wide_norm_stix
+      wide_norm_drol
         : '{' g skel_w w skel_w w wide g '}'{ $$ = _ytrel($3, $5, $7); }
 
-      wide_norm_stop
+      wide_norm_lome
         : wide
 
-      wide_norm_stem
+      wide_norm_flot
         : wide
     
     /** Casts.
     **/
-      wide_norm_glid
+      wide_norm_cast
         : '{' g wide w wide g '}' { $$ = _ycell($3, $5); }
 
-      wide_norm_glem
-        : '{' g wide w wide g '}' { $$ = _ycell($3, $5); }
-
-      wide_norm_glop
+      wide_norm_sure
         : '{' g wide w wide w wide g '}' { $$ = _ycell($3, $3); }
 
-      wide_norm_glon
+      wide_norm_rald
         : wide
 
-      wide_norm_glaz
+      wide_norm_crot
         : wide
 
     /** Funky stuff.
     **/
-      wide_norm_slop
+      wide_norm_kick
         : '{' g wide w nail_wide_star '}' { $$ = _ycell($3, $5); }
 
-      wide_norm_sloc
+      wide_norm_mang
         : '{' g wide w wide g '}' { $$ = _ycell($3, $5); }
 
-      wide_norm_slid
+      wide_norm_garc
         : '{' g wide w wide_some '}' { $$ = _ycell($3, $5); }
 
-      wide_norm_slem
+      wide_norm_flec
         : wide 
 
-      wide_norm_slon
+      wide_norm_cret
         : '{' g item_wide_some '}' { $$ = $3; }
 
-      wide_norm_slux
+      wide_norm_cage
         : '{' g wide_some '}' { $$ = $3; }
 
-      wide_norm_slex
+      wide_norm_grun
         : '{' g nail_wide_star ':' w wide '}' { $$ = _ycell($3, $6); }
 
-      wide_norm_slos
-        : skel_w
-
-      wide_norm_slip
+      wide_norm_bink
         : skel_w
 
     /** Roots.
     **/
-      wide_norm_brax
+      wide_norm_griv
         : '{' g wide w hume '}' { $$ = _ycell($3, $5); }
  
-      wide_norm_bron
+      wide_norm_veck
         : wide
 
-      wide_norm_brip
+      wide_norm_neft
         : wide
 
-      wide_norm_brop
+      wide_norm_wamp
         : wide
 
-      wide_norm_broc
+      wide_norm_spil
         : wide
 
   ;
@@ -330,61 +322,59 @@ tall
   /** Normal tall genes.
   **/
     tall_norm
-      : dig_clat w tall_norm_clat  /* => */ { $$ = _ycell($1, $3); }
+      : dig_pont w tall_norm_pont  /* => */ { $$ = _ycell($1, $3); }
       | dig_clet w tall_norm_clet  /* =< */ { $$ = _ycell($1, $3); }
-      | dig_plat w tall_norm_plat  /* -> */ { $$ = _ycell($1, $3); }
-      | dig_plet w tall_norm_plet  /* -< */ { $$ = _ycell($1, $3); }
-      | dig_grat w tall_norm_grat  /* ~> */ { $$ = _ycell($1, $3); }
-      | dig_gret w tall_norm_gret  /* ~< */ { $$ = _ycell($1, $3); }
+      | dig_trop w tall_norm_trop  /* -> */ { $$ = _ycell($1, $3); }
+      | dig_prec w tall_norm_prec  /* -< */ { $$ = _ycell($1, $3); }
+      | dig_link w tall_norm_link  /* ~> */ { $$ = _ycell($1, $3); }
+      | dig_colb w tall_norm_colb  /* ~< */ { $$ = _ycell($1, $3); }
 
-      | dig_quol w tall_norm_quol  /* ?: */ { $$ = _ycell($1, $3); }
-      | dig_quat w tall_norm_quat  /* ?> */ { $$ = _ycell($1, $3); }
-      | dig_quet w tall_norm_quet  /* ?< */ { $$ = _ycell($1, $3); }
-      | dig_quem w tall_norm_quem  /* ?- */ { $$ = _ycell($1, $3); }
-      | dig_quid w tall_norm_quid  /* ?+ */ { $$ = _ycell($1, $3); }
-      | dig_quax w tall_norm_quax  /* ?& */ { $$ = _ycell($1, $3); }
-      | dig_quix w tall_norm_quix  /* ?| */ { $$ = _ycell($1, $3); }
-      | dig_quac w tall_norm_quac  /* ?! */ { $$ = _ycell($1, $3); }
-      | dig_quop w tall_norm_quop  /* ?= */ { $$ = _ycell($1, $3); }
+      | dig_quiz w tall_norm_quiz  /* ?: */ { $$ = _ycell($1, $3); }
+      | dig_feng w tall_norm_feng  /* ?> */ { $$ = _ycell($1, $3); }
+      | dig_prex w tall_norm_prex  /* ?< */ { $$ = _ycell($1, $3); }
+      | dig_gril w tall_norm_gril  /* ?- */ { $$ = _ycell($1, $3); }
+      | dig_stam w tall_norm_stam  /* ?+ */ { $$ = _ycell($1, $3); }
+      | dig_boce w tall_norm_boce  /* ?& */ { $$ = _ycell($1, $3); }
+      | dig_dast w tall_norm_dast  /* ?| */ { $$ = _ycell($1, $3); }
+      | dig_blem w tall_norm_blem  /* ?! */ { $$ = _ycell($1, $3); }
+      | dig_like w tall_norm_like  /* ?= */ { $$ = _ycell($1, $3); }
     
-      | dig_stid w tall_norm_stid  /* |+ */ { $$ = _ycell($1, $3); }
-      | dig_ston w tall_norm_ston  /* |* */ { $$ = _ycell($1, $3); }
-      | dig_stol w tall_norm_stol  /* |: */ { $$ = _ycell($1, $3); }
-      | dig_stix w tall_norm_stix  /* || */ { $$ = _ycell($1, $3); }
-      | dig_stop w tall_norm_stop  /* |= */ { $$ = _ycell($1, $3); }
-      | dig_stem w tall_norm_stem  /* |- */ { $$ = _ycell($1, $3); }
+      | dig_malk w tall_norm_malk  /* |+ */ { $$ = _ycell($1, $3); }
+      | dig_blin w tall_norm_blin  /* |* */ { $$ = _ycell($1, $3); }
+      | dig_flic w tall_norm_flic  /* |: */ { $$ = _ycell($1, $3); }
+      | dig_drol w tall_norm_drol  /* || */ { $$ = _ycell($1, $3); }
+      | dig_lome w tall_norm_lome  /* |= */ { $$ = _ycell($1, $3); }
+      | dig_flot w tall_norm_flot  /* |- */ { $$ = _ycell($1, $3); }
 
-      | dig_glid w tall_norm_glid  /* ^+ */ { $$ = _ycell($1, $3); }
-      | dig_glem w tall_norm_glem  /* ^- */ { $$ = _ycell($1, $3); }
-      | dig_glop w tall_norm_glop  /* ^= */ { $$ = _ycell($1, $3); }
-      | dig_glon w tall_norm_glon  /* ^- */ { $$ = _ycell($1, $3); }
-      | dig_glaz w tall_norm_glaz  /* ^- */ { $$ = _ycell($1, $3); }
+      | dig_cast w tall_norm_cast  /* ^+ */ { $$ = _ycell($1, $3); }
+      | dig_sure w tall_norm_sure  /* ^= */ { $$ = _ycell($1, $3); }
+      | dig_rald w tall_norm_rald  /* ^- */ { $$ = _ycell($1, $3); }
+      | dig_crot w tall_norm_crot  /* ^- */ { $$ = _ycell($1, $3); }
 
-      | dig_slop w tall_norm_slop  /* := */ { $$ = _ycell($1, $3); }
-      | dig_sloc w tall_norm_sloc  /* :~ */ { $$ = _ycell($1, $3); }
-      | dig_slid w tall_norm_slid  /* :+ */ { $$ = _ycell($1, $3); }
-      | dig_slem w tall_norm_slem  /* :- */ { $$ = _ycell($1, $3); }
-      | dig_slon w tall_norm_slon  /* :* */ { $$ = _ycell($1, $3); }
-      | dig_slux w tall_norm_slux  /* :. */ { $$ = _ycell($1, $3); }
-      | dig_slex w tall_norm_slex  /* :% */ { $$ = _ycell($1, $3); }
-      | dig_slos w tall_norm_slos  /* :$ */ { $$ = _ycell($1, $3); }
-      | dig_slip w tall_norm_slip  /* :^ */ { $$ = _ycell($1, $3); }
+      | dig_kick w tall_norm_kick  /* := */ { $$ = _ycell($1, $3); }
+      | dig_mang w tall_norm_mang  /* :~ */ { $$ = _ycell($1, $3); }
+      | dig_garc w tall_norm_garc  /* :+ */ { $$ = _ycell($1, $3); }
+      | dig_flec w tall_norm_flec  /* :- */ { $$ = _ycell($1, $3); }
+      | dig_cret w tall_norm_cret  /* :* */ { $$ = _ycell($1, $3); }
+      | dig_cage w tall_norm_cage  /* :. */ { $$ = _ycell($1, $3); }
+      | dig_grun w tall_norm_grun  /* :% */ { $$ = _ycell($1, $3); }
+      | dig_bink w tall_norm_bink  /* :^ */ { $$ = _ycell($1, $3); }
    
-      | dig_brax w tall_norm_brax  /* && */ { $$ = _ycell($1, $3); }
-      | dig_bron w tall_norm_bron  /* &: */ { $$ = _ycell($1, $3); }
-      | dig_brip w tall_norm_brip  /* &^ */ { $$ = _ycell($1, $3); }
-      | dig_brop w tall_norm_brop  /* &= */ { $$ = _ycell($1, $3); }
-      | dig_broc w tall_norm_broc  /* &~ */ { $$ = _ycell($1, $3); }
+      | dig_griv w tall_norm_griv  /* && */ { $$ = _ycell($1, $3); }
+      | dig_veck w tall_norm_veck  /* &: */ { $$ = _ycell($1, $3); }
+      | dig_neft w tall_norm_neft  /* &^ */ { $$ = _ycell($1, $3); }
+      | dig_wamp w tall_norm_wamp  /* &= */ { $$ = _ycell($1, $3); }
+      | dig_spil w tall_norm_spil  /* &~ */ { $$ = _ycell($1, $3); }
 
-      | dig_plov w tall_norm_plov  /* !? */ { $$ = _ycell($1, $3); }
+      | dig_dbug w tall_norm_dbug  /* !? */ { $$ = _ycell($1, $3); }
       ;
 
     /** Combinators.
     **/
-      tall_norm_clat
-        /*  =>    [%clat han=mark dur=gene leb=gene]
+      tall_norm_pont
+        /*  =>    [%pont han=mark dur=gene leb=gene]
         **
-        **    clat: use [leb] under [[han=dur] +]
+        **    pont: use [leb] under [[han=dur] +]
         */
         : tok_mark w gene w gene { $$ = _ytrel($1, $3, $5); }
 
@@ -395,296 +385,282 @@ tall
         */
         : tok_mark w gene w gene { $$ = _ytrel($1, $3, $5); }
 
-      tall_norm_plat
-        /*  ->    [%plat hig=gene muc=gene]
+      tall_norm_trop
+        /*  ->    [%trop hig=gene muc=gene]
         **
-        **    plat: use [muc] under [hig +]
+        **    trop: use [muc] under [hig +]
         */
         : gene w gene { $$ = _ycell($1, $3); }
 
-      tall_norm_plet
-        /*  -<    [%plet hig=gene muc=gene]
+      tall_norm_prec
+        /*  -<    [%prec hig=gene muc=gene]
         **
-        **    plet: use [hig] under [muc +]
+        **    prec: use [hig] under [muc +]
         */
         : gene w gene { $$ = _ycell($1, $3); }
 
-      tall_norm_grat
-        /*  ~>    [%grat del=gene zim=gene]
+      tall_norm_link
+        /*  ~>    [%link del=gene zim=gene]
         **
-        **    grat: use [zim] under [del]
+        **    link: use [zim] under [del]
         */
         : gene w gene { $$ = _ycell($1, $3); }
 
-      tall_norm_gret 
-        /*  ~<    [%gret del=gene zim=gene] 
+      tall_norm_colb 
+        /*  ~<    [%colb del=gene zim=gene] 
         **
-        **    gret: use [del] under [zim]
+        **    colb: use [del] under [zim]
         */
         : gene w gene { $$ = _ycell($1, $3); }
 
 
     /** Branches and conditions.
     **/
-      tall_norm_quol
-        /*  ?:    [%quol tes=gene bif=gene hob=gene]
+      tall_norm_quiz
+        /*  ?:    [%quiz tes=gene bif=gene hob=gene]
         **
-        **    quol: if [tes], then [bif], else [hob]
+        **    quiz: if [tes], then [bif], else [hob]
         */
         : gene w gene w gene { $$ = _ytrel($1, $3, $5); }
 
-      tall_norm_quat
-        /*  ?>    [%quat tes=gene bif=gene]
+      tall_norm_feng
+        /*  ?>    [%feng tes=gene bif=gene]
         **
-        **    quat: if [tes], then [bif], else fail
+        **    feng: if [tes], then [bif], else fail
         */
         : gene w gene { $$ = _ycell($1, $3); }
 
-      tall_norm_quet
-        /* ?<     [%quet tes=gene hob=gene]
+      tall_norm_prex
+        /* ?<     [%prex tes=gene hob=gene]
         **
-        **    quet: if [tes], then fail, else [hob]
+        **    prex: if [tes], then fail, else [hob]
         */
         : gene w gene { $$ = _ycell($1, $3); }
 
-      tall_norm_quem
-        /* ?-     [%quem mox=rope bem=list+pike]
+      tall_norm_gril
+        /* ?-     [%gril mox=rope bem=list+pike]
         **
-        **    quem: examine [mox], internally
+        **    gril: examine [mox], internally
         */
-        : rope w pike_tall_star dig_stop { $$ = _ycell($1, $3); }
+        : rope w pike_tall_star dig_lome { $$ = _ycell($1, $3); }
 
-      tall_norm_quid
-        /* ?+     [%quid feg=gene bem=list+pike]
+      tall_norm_stam
+        /* ?+     [%stam feg=gene bem=list+pike]
         **
-        **    quid: examine [feg], externally
+        **    stam: examine [feg], externally
         */
-        : gene w pike_tall_star dig_stop { $$ = _ycell($1, $3); }
+        : gene w pike_tall_star dig_lome { $$ = _ycell($1, $3); }
 
-      tall_norm_quax
-        /* ?&     [%quax das=list+gene]
+      tall_norm_boce
+        /* ?&     [%boce das=list+gene]
         **
-        **    quax: yes iff all of [das] are yes
+        **    boce: yes iff all of [das] are yes
         */
-        : tall_star dig_stop { $$ = $1; }
+        : tall_star dig_lome { $$ = $1; }
       
-      tall_norm_quix
-        /* ?|     [%quix das=list+gene]
+      tall_norm_dast
+        /* ?|     [%dast das=list+gene]
         **
-        **    quix: yes iff all of [das] are yes
+        **    dast: yes iff all of [das] are yes
         */
-        : tall_star dig_stop { $$ = $1; }
+        : tall_star dig_lome { $$ = $1; }
 
-      tall_norm_quac
-        /* ?!     [%quac gix=gene]
+      tall_norm_blem
+        /* ?!     [%blem gix=gene]
         **
-        **    quac: not
+        **    blem: not
         */
         : gene
 
-      tall_norm_quop
-        /* ?=     [%quop rid=rope bul=gene]
+      tall_norm_like
+        /* ?=     [%like rid=rope bul=gene]
         **
-        **    quop: yes iff [rid] is like [bul]
+        **    like: yes iff [rid] is like [bul]
         */
         : rope w gene { $$ = _ycell($1, $3); }
 
 
     /** Loading.
     **/
-      tall_norm_stid
-        /* |+     [%stid pir=list+[mark gene]]
+      tall_norm_malk
+        /* |+     [%malk pir=list+[mark gene]]
         **
-        **    stid: pure load
+        **    malk: pure load
         */
-        : page_star dig_stop { $$ = $1; }
+        : page_star dig_lome { $$ = $1; }
    
-      tall_norm_ston
-        /* |*     [%ston bov=gene pir=list+gene]
+      tall_norm_blin
+        /* |*     [%blin bov=gene pir=list+gene]
         **
-        **    ston: load and apply
+        **    blin: load and apply
         */
-        : gene w page_star dig_stop { $$ = _ycell($1, $3); }
+        : gene w page_star dig_lome { $$ = _ycell($1, $3); }
 
-      tall_norm_stol
-        /* |:     [%stol tep=skel von=gene]
+      tall_norm_flic
+        /* |:     [%flic tep=skel von=gene]
         **
-        **    stol: lamb construction
+        **    flic: lamb construction
         */
-        : skel_t_item_some dig_stop w gene 
+        : skel_t_item_some dig_lome w gene 
           { $$ = _ycell(_ycell(u4_atom_peft, $1), $4); }
 
-      tall_norm_stix
-        /* ||     [%stix nix=skel tep=skel von=gene]
+      tall_norm_drol
+        /* ||     [%drol nix=skel tep=skel von=gene]
         **
-        **    stix: lamb with cast
+        **    drol: lamb with cast
         */
-        : skel_t w skel_t_item_some dig_stop w gene
+        : skel_t w skel_t_item_some dig_lome w gene
           { $$ = _ytrel($1, _ycell(u4_atom_peft, $3), $6); }
 
-      tall_norm_stop
-        /* |=     [%stop cug=gene]
+      tall_norm_lome
+        /* |=     [%lome cug=gene]
         **
-        **    stop: cold trap
+        **    lome: cold trap
         */
         : gene
 
-      tall_norm_stem
-        /* |-     [%stem cug=gene]
+      tall_norm_flot
+        /* |-     [%flot cug=gene]
         **
-        **    stem: hot trap
+        **    flot: hot trap
         */
         : gene
    
 
     /** Casts.
     **/
-      tall_norm_glid
-        /* ^+     [%glid fes=gene rum=gene]
+      tall_norm_cast
+        /* ^+     [%cast fes=gene rum=gene]
         **
-        **    glid: glid [rum] to [fes], geometrically
+        **    cast: cast [rum] to [fes], geometrically
         */
         : gene w gene { $$ = _ycell($1, $3); }
 
-      tall_norm_glem
-        /* ^-     [%glem fes=gene rum=gene]
+      tall_norm_sure
+        /* ^=     [%sure fes=gene gav=gene vep=gene]
         **
-        **    glem: glid [rum] to [fes], genetically
-        */
-        : gene w gene { $$ = _ycell($1, $3); }
-
-      tall_norm_glop
-        /* ^=     [%glop fes=gene gav=gene vep=gene]
-        **
-        **    glop: [vep], since [gav] matches [fes]
+        **    sure: [vep], since [gav] matches [fes]
         */
         : gene w gene w gene { $$ = _ytrel($1, $3, $5); }
 
-      tall_norm_glon
-        /* ^*     [%glon rum=gene]
+      tall_norm_rald
+        /* ^*     [%rald rum=gene]
         **
-        **    glon: glid [rum] to blur
+        **    rald: cast [rum] to blur
         */
         : gene 
       
-      tall_norm_glaz
-        /* ^@     [%glaz rum=gene]
+      tall_norm_crot
+        /* ^@     [%crot rum=gene]
         **
-        **    glaz: glid [rum] to atom
+        **    crot: cast [rum] to atom
         */
         : gene
 
     /** Funky stuff.
     **/
-      tall_norm_slop
-        /* :=     [%slop ved=rope suc=list+[rope gene]]
+      tall_norm_kick
+        /* :=     [%kick ved=rope suc=list+[rope gene]]
         **
-        **    slop: use [ved] with changes from [suc]
+        **    kick: use [ved] with changes from [suc]
         */
-        : gene w nail_tall_star dig_stop 
+        : gene w nail_tall_star dig_lome 
           { $$ = _ycell($1, $3); }
 
-      tall_norm_sloc
-        /* :~     [%sloc buz=gene pum=list+gene]
+      tall_norm_mang
+        /* :~     [%mang buz=gene pum=list+gene]
         **
-        **    sloc: call [buz] with tuple argument [pum]
+        **    mang: call [buz] with tuple argument [pum]
         */
         : gene w tall
           { $$ = _ycell($1, $3); }
 
-      tall_norm_slid
-        /* :+     [%slid buz=gene pum=list+gene]
+      tall_norm_garc
+        /* :+     [%garc buz=gene pum=list+gene]
         **
-        **    slid: call [buz] with tuple argument [pum]
+        **    garc: call [buz] with tuple argument [pum]
         */
-        : gene w tall_some dig_stop 
+        : gene w tall_some dig_lome 
           { $$ = _ycell($1, $3); }
 
-      tall_norm_slem
-        /* :-     [%slem buz=gene]
+      tall_norm_flec
+        /* :-     [%flec buz=gene]
         **
-        **    slem: call [buz] with default argument
+        **    flec: call [buz] with default argument
         */
         : gene 
 
-      tall_norm_slon
-        /* :*     [%slon caw=list+item]
+      tall_norm_cret
+        /* +=     [%cret caw=list+item]
         **
-        **    slon: classic tuple
+        **    cret: classic tuple
         */
-        : item_tall_some dig_stop   
+        : item_tall_some dig_lome   
           { $$ = $1; }
 
-      tall_norm_slux
-        : tall_some dig_stop
+      tall_norm_cage
+        : tall_some dig_lome
           { $$ = $1; }
 
-      tall_norm_slex
-        /* :%     [%slex veq=list+[rope gene] har=gene]
+      tall_norm_grun
+        /* :%     [%grun veq=list+[rope gene] har=gene]
         **
-        **    slex: execute with changes
+        **    grun: execute with changes
         */
-        : nail_tall_star dig_stop w gene  
+        : nail_tall_star dig_lome w gene  
           { $$ = _ycell($1, $4); }
 
-      tall_norm_slos
-        /* :$     [%slos mef=skel]
+      tall_norm_bink
+        /* :^     [%bink mef=skel]
         **
-        **    slos: skeleton stub
-        */
-        : skel_t
-
-      tall_norm_slip
-        /* :^     [%slip mef=skel]
-        **
-        **    slip: skeleton lamb
+        **    bink: skeleton lamb
         */
         : skel_t
         
     /** Roots.
     **/
-      tall_norm_brax
-        /* &&     [%bron dil=gene zep=noun]
+      tall_norm_griv
+        /* &&     [%veck dil=gene zep=noun]
         **
-        **    bron: raw goto
+        **    veck: raw goto
         */
         : gene w hume
           { $$ = _ycell($1, $3); }
 
-      tall_norm_bron
-        /* &:     [%bron dil=gene]
+      tall_norm_veck
+        /* &:     [%veck dil=gene]
         **
-        **    bron: raw goto
+        **    veck: raw goto
         */
         : gene
 
-      tall_norm_brip
-        /* &^     [%brip dil=gene]
+      tall_norm_neft
+        /* &^     [%neft dil=gene]
         **
-        **    brip: increment
+        **    neft: increment
         */
         : gene
 
-      tall_norm_brop
-        /* &=     [%brop dil=gene]
+      tall_norm_wamp
+        /* &=     [%wamp dil=gene]
         **
-        **    brop: equality test
+        **    wamp: equality test
         */
         : gene
 
-      tall_norm_broc
-        /* &~     [%broc dil=gene]
+      tall_norm_spil
+        /* &~     [%spil dil=gene]
         **
-        **    broc: cell test
+        **    spil: cell test
         */
         : gene
 
     /** Special and debugging.
     **/
-      tall_norm_plov
-        /* !!     [%plov lyq=gene]
+      tall_norm_dbug
+        /* !!     [%dbug lyq=gene]
         **
-        **    plov: cell test
+        **    dbug: cell test
         */
         : gene
 
@@ -772,13 +748,13 @@ tall
       ;
 
       dope_hook
-        : '+' tok_delm       { $$ = _ycell(u4_atom_slet, $2); }
-        | '+' dope_hook_larb { $$ = _ycell(u4_atom_slet, $2); }
+        : '+' tok_delm       { $$ = _ycell(u4_atom_frag, $2); }
+        | '+' dope_hook_larb { $$ = _ycell(u4_atom_frag, $2); }
         | dope_tick tok_mark     
-          { $$ = u4_n_zero($1) ? $2 : _ytrel(u4_atom_slat, $1, $2); }
+          { $$ = u4_n_zero($1) ? $2 : _ytrel(u4_atom_lect, $1, $2); }
         | dope_buck
           { $$ = u4_n_zero($1) 
-             ? u4_noun_0 : _ytrel(u4_atom_slat, $1, u4_noun_0);
+             ? u4_noun_0 : _ytrel(u4_atom_lect, $1, u4_noun_0);
           }
         ;
 
@@ -887,10 +863,10 @@ tall
        | dig_dept w skel_t                     { $$ = _ycell($1, $3); }
        | dig_flit w tall                       { $$ = _ycell($1, $3); }
        | dig_gorm w skel_t w skel_t            { $$ = _ytrel($1, $3, $5); }
-       | dig_peft w skel_t_item_some dig_stop  { $$ = _ycell($1, $3); }
+       | dig_peft w skel_t_item_some dig_lome  { $$ = _ycell($1, $3); }
        | dig_drib w skel_t w skel_t            { $$ = _ytrel($1, $3, $5); }
        | dig_shud w skel_t w skel_t            { $$ = _ytrel($1, $3, $5); }
-       | dig_warx w skel_t_some dig_stop       { $$ = _ycell($1, $3); }
+       | dig_warx w skel_t_some dig_lome       { $$ = _ycell($1, $3); }
        ;
 
       skel_t_item
@@ -1051,45 +1027,45 @@ tall
 
     tok_mark
       : tok_mark_pre
-      | tok_mark_pre tok_mark_stig
+      | tok_mark_pre tok_mark_load
         { $$ = u4_k_atom_log(yylane, _ycell($1, $2)); }
       ;
         tok_mark_pre
           : ca
 
-        tok_mark_stig
+        tok_mark_load
           : ca { $$ = _ycell($1, u4_noun_0); }
                  | cd { $$ = _ycell($1, u4_noun_0); }
-                 | ca tok_mark_stig  { $$ = _ycell($1, $2); }
-                 | cd tok_mark_stig  { $$ = _ycell($1, $2); }
-                 | '-' tok_mark_stig { $$ = _ycell($1, $2); }
+                 | ca tok_mark_load  { $$ = _ycell($1, $2); }
+                 | cd tok_mark_load  { $$ = _ycell($1, $2); }
+                 | '-' tok_mark_load { $$ = _ycell($1, $2); }
                  ;
 
     tok_chex 
       : '0' 
         { $$ = u4_noun_0; }
-      | tok_chex_pre tok_chex_stig
+      | tok_chex_pre tok_chex_load
         { $$ = u4_k_atom_heximal(yylane, _ycell($1, $2)); }
       ;
         tok_chex_pre
           : cn | ch
           ;
 
-        tok_chex_stig
+        tok_chex_load
           : { $$ = u4_noun_0; }
-                    | cd gap tok_chex_stig { $$ = _ycell($1, $3); }
-                    | ch gap tok_chex_stig { $$ = _ycell($1, $3); }
+                    | cd gap tok_chex_load { $$ = _ycell($1, $3); }
+                    | ch gap tok_chex_load { $$ = _ycell($1, $3); }
                     ;
 
 
     tok_delm
       : '0' { $$ = u4_noun_0; }
-      | tok_delm_pre tok_delm_stig
+      | tok_delm_pre tok_delm_load
         { $$ = u4_k_atom_decimal(yylane, _ycell($1, $2)); }
       ;
         tok_delm_pre: cn;
-        tok_delm_stig: { $$ = u4_noun_0; }
-                    | cd tok_delm_stig { $$ = _ycell($1, $2); }
+        tok_delm_load: { $$ = u4_noun_0; }
+                    | cd tok_delm_load { $$ = _ycell($1, $2); }
                     ;
 
     tok_loct
@@ -1103,47 +1079,47 @@ tall
 
   /** Digraphs.
   **/
-    dig_clat: '=' '>' { $$ = u4_atom_clat; }
+    dig_pont: '=' '>' { $$ = u4_atom_pont; }
     dig_clet: '`' '<' { $$ = u4_atom_clet; }
-    dig_plat: '-' '>' { $$ = u4_atom_plat; }
-    dig_plet: '-' '<' { $$ = u4_atom_plet; }
-    dig_grat: '~' '>' { $$ = u4_atom_grat; }
-    dig_gret: '~' '<' { $$ = u4_atom_gret; }
+    dig_trop: '-' '>' { $$ = u4_atom_trop; }
+    dig_prec: '-' '<' { $$ = u4_atom_prec; }
+    dig_link: '~' '>' { $$ = u4_atom_link; }
+    dig_colb: '~' '<' { $$ = u4_atom_colb; }
 
-    dig_quol: '?' ':' { $$ = u4_atom_quol; } 
-    dig_quat: '?' '>' { $$ = u4_atom_quat; }
-    dig_quet: '?' '<' { $$ = u4_atom_quet; }
-    dig_quem: '?' '-' { $$ = u4_atom_quem; }
-    dig_quid: '?' '+' { $$ = u4_atom_quid; }
-    dig_quax: '?' '&' { $$ = u4_atom_quax; }
-    dig_quix: '?' '|' { $$ = u4_atom_quix; }
-    dig_quac: '?' '!' { $$ = u4_atom_quac; }
-    dig_quop: '?' '=' { $$ = u4_atom_quop; }
+    dig_quiz: '?' ':' { $$ = u4_atom_quiz; } 
+    dig_feng: '?' '>' { $$ = u4_atom_feng; }
+    dig_prex: '?' '<' { $$ = u4_atom_prex; }
+    dig_gril: '?' '-' { $$ = u4_atom_gril; }
+    dig_stam: '?' '+' { $$ = u4_atom_stam; }
+    dig_boce: '?' '&' { $$ = u4_atom_boce; }
+    dig_dast: '?' '|' { $$ = u4_atom_dast; }
+    dig_blem: '?' '!' { $$ = u4_atom_blem; }
+    dig_like: '?' '=' { $$ = u4_atom_like; }
 
-    dig_stid: '|' '+' { $$ = u4_atom_stid; }
-    dig_ston: '|' '*' { $$ = u4_atom_ston; }
-    dig_stol: '|' ':' { $$ = u4_atom_stol; }
-    dig_stix: '|' '|' { $$ = u4_atom_stix; }
-    dig_stop: '|' '=' { $$ = u4_atom_stop; }
-    dig_stem: '|' '-' { $$ = u4_atom_stem; }
+    dig_malk: '|' '+' { $$ = u4_atom_malk; }
+    dig_blin: '|' '*' { $$ = u4_atom_blin; }
+    dig_flic: '|' ':' { $$ = u4_atom_flic; }
+    dig_drol: '|' '|' { $$ = u4_atom_drol; }
+    dig_lome: '|' '=' { $$ = u4_atom_lome; }
+    dig_flot: '|' '-' { $$ = u4_atom_flot; }
 
-    dig_glid: '^' '+' { $$ = u4_atom_glid; }
-    dig_glem: '^' '-' { $$ = u4_atom_glem; }
-    dig_glop: '^' '=' { $$ = u4_atom_glop; }
-    dig_glon: '^' '*' { $$ = u4_atom_glon; }
-    dig_glaz: '^' '@' { $$ = u4_atom_glaz; }
+    dig_cast: '^' '-' { $$ = u4_atom_cast; }
+    dig_sure: '^' '=' { $$ = u4_atom_sure; }
+    dig_rald: '^' '*' { $$ = u4_atom_rald; }
+    dig_crot: '^' '@' { $$ = u4_atom_crot; }
 
-    dig_slop: ':' '=' { $$ = u4_atom_slop; } 
-    dig_sloc: ':' '~' { $$ = u4_atom_sloc; }
-    dig_slid: ':' '+' { $$ = u4_atom_slid; }
-    dig_slem: ':' '-' { $$ = u4_atom_slem; }
-    dig_slon: ':' '*' { $$ = u4_atom_slon; }
-    dig_slux: ':' '.' { $$ = u4_atom_slux; }
-    dig_slex: ':' '%' { $$ = u4_atom_slex; }
-    dig_slos: ':' '$' { $$ = u4_atom_slos; }
-    dig_slip: ':' '^' { $$ = u4_atom_slip; }
+    dig_kick: ':' '=' { $$ = u4_atom_kick; } 
+    dig_mang: ':' '~' { $$ = u4_atom_mang; }
+    dig_garc: ':' '+' { $$ = u4_atom_garc; }
+    dig_flec: ':' '-' { $$ = u4_atom_flec; }
+    dig_grun: ':' '%' { $$ = u4_atom_grun; }
 
-    dig_plov: '!' '?' { $$ = u4_atom_plov; }
+    dig_cret: '+' '+' { $$ = u4_atom_cret; }
+    dig_cage: '+' '-' { $$ = u4_atom_cage; }
+    /* dig_name: '+' '=' { $$ = u4_atom_name; } */
+    dig_bink: '+' ':' { $$ = u4_atom_bink; }
+
+    dig_dbug: '!' '?' { $$ = u4_atom_dbug; }
 /*
     dig_terg: '`' '+' { $$ = u4_atom_terg; }
     dig_hosc: '`' '-' { $$ = u4_atom_hosc; }
@@ -1151,11 +1127,11 @@ tall
     dig_blig: '`' '|' { $$ = u4_atom_blig; }
     dig_jarm: '`' '`' { $$ = u4_atom_jarm; }
 */
-    dig_brax: '&' '&' { $$ = u4_atom_brax; }
-    dig_bron: '&' ':' { $$ = u4_atom_bron; }
-    dig_brip: '&' '^' { $$ = u4_atom_brip; }
-    dig_brop: '&' '=' { $$ = u4_atom_brop; }
-    dig_broc: '&' '~' { $$ = u4_atom_broc; }
+    dig_griv: '&' '&' { $$ = u4_atom_griv; }
+    dig_veck: '&' ':' { $$ = u4_atom_veck; }
+    dig_neft: '&' '^' { $$ = u4_atom_neft; }
+    dig_wamp: '&' '=' { $$ = u4_atom_wamp; }
+    dig_spil: '&' '~' { $$ = u4_atom_spil; }
 
     dig_dept: '%' '>' { $$ = u4_atom_dept; }
     dig_flit: '%' '=' { $$ = u4_atom_flit; }
@@ -1165,7 +1141,7 @@ tall
     dig_shud: '%' '<' { $$ = u4_atom_shud; }
     dig_warx: '%' '?' { $$ = u4_atom_warx; }
 
-    dig_stop: '=' '=' { $$ = u4_atom_stop; }
+    dig_lome: '=' '=' { $$ = u4_atom_lome; }
 
 
   /** Whitespace.
@@ -1223,7 +1199,7 @@ tall
 
 %%
 
-/* Annotate (gene) with plol.
+/* Annotate (gene) with home.
 */
 static u4_noun
 _watt_locate(u4_lane lane,
@@ -1237,7 +1213,7 @@ _watt_locate(u4_lane lane,
 #else
   return u4_k_trel
     (lane, 
-     u4_atom_plol, 
+     u4_atom_home, 
      u4_k_cell
       (lane, 
        u4_k_cell
@@ -1319,7 +1295,7 @@ u4_watt_parse(u4_lane lane,
     u4_assert(scanner.scan);
 
     return scanner.scan;
-    // return u4_k_trel(lane, u4_atom_plaz, pif, scanner.scan);
+    // return u4_k_trel(lane, u4_atom_spot, pif, scanner.scan);
   }
   else {
     return u4_exit;
