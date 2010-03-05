@@ -1,0 +1,92 @@
+watt GTO: Gran Tabula Operazioni
+
+  gene:
+
+tag  old  dig  r  bone                            semantics
+----------------------------------------------------------------------------
+pont  =>   E  [han=mark dur=gene leb=gene]    [leb] in [[han=dur] +]
+rulf  =<   E  [han=mark dur=gene leb=gene]    [dur] in [[han=leb] +]
+trop  ->   E  [hig=gene muc=gene]             [muc] in [hig +]
+prec  -<   E  [hig=gene muc=gene]             [hig] in [muc +]
+link  ~>   X  [del=gene zim=gene]             [zim] in [del]
+colb  ~<   E  [del=gene zim=gene]             [del] in [zim]
+
+quiz  ?:   X  [tes=gene bif=gene hob=gene]    if [tes] [bif], else [hob]
+feng  ?>   E  [tes=gene bif=gene]             if [tes] [bif], else fail
+prex  ?<   E  [tes=gene hob=gene]             if [tes] fail, else [hob]
+gril  ?-   E  [mox=rope bem=list+pike]        examine [mox], internally
+stam  ?+   E  [feg=gene bem=list+pike]        examine [feg], externally 
+boce  ?&   E  [das=list+gene]                 yes iff all of [das] are yes
+dast  ?|   E  [das=list+gene]                 yes iff any of [das] are yes
+blem  ?!   E  [gix=gene]                      not
+like  ?=   X  [rid=rope bul=gene]             yes iff [rid] is like [bul]
+
+load  |@   X  [pir=bush+[mark gene]]          load book
+malk  |+   E  [pir=list+[mark gene]]          book as list
+blin  |*   E  [bov=gene pir=list+[mark gene]] load and apply
+flic  |:   E  [tep=bone von=gene]             gate construction
+drol  ||   E  [nix=bone tep=bone von=gene]    gate with cast
+lome  |=   E  [cug=gene]                      cold gate
+flot  |-   E  [cug=gene]                      hot gate
+
+cast  ^-   X  [fes=gene rum=gene]             [rum] as [fes], geometric
+sure  ^=   X  [fes=gene gav=gene vep=gene]    [vep], so [gav] is in [fes]
+rald  ^*   E  [rum=gene]                      [rum] cast to blur
+crot  ^@   E  [rum=gene]                      [rum] cast to atom
+
+kick  :=   X  [ved=rope suc=list+[rope gene]] use with changes
+lect  :<   E  [tic=nat vix=mark]              seek by name
+frag  :>   E  [haz=nat]                       seek by axis
+mang  :~   E  [buz=gene lep=gene]             call, direct
+garc  :+   E  [buz=gene pum=list+gene]        call with args
+flec  :-   E  [buz=gene]                      call without args
+grun  :%   E  [vec=list+[rope gene] sud=gene] [sud] with changes
+
+cret  ++   E  [caw=list+[mark gene]]          named tuple
+cage  +-   X  [fut=list+gene]                 nameless tuple
+name  +=   X  [tem=mark caf=gene]             name a face
+bink  +:   E  [mef=bone]                      bone to gate
+
+dbug  !?   X  [lyq=gene]                      activate internal debug
+bail  !!   X  [0]                             exit
+home  !:   X  [cux=lab lyq=gene]              source label
+spot  !@   X  [xed=[[@ @] [@ @] lyq=gene]     source pos, [at to] [lin col]
+
+gult  &?   X  [fiz=(3 4 5 6 7) dil=gene]      nock operator
+veck  &*   E  [dil=gene]                      raw eval
+spil  &~   E  [dil=gene]                      cell
+neft  &^   E  [dil=gene]                      inc
+wamp  &=   E  [dil=gene]                      eq
+
+palt  %@   E  [daq=atom]                      constant, atom
+crad  %*   E  [daq=noun]                      constant, blur
+rock  %=   X  [daq=noun]                      constant, cube
+ 
+  rope: list+(mark [%flat tic=nat vix=mark] [%flet haz=nat])
+
+  bone:
+
+tag    bone                           semantics
+----------------------------------------------------------------------------
+gorm   [pef=bone niz=bone]            standard container
+drib   [ved=bone piv=bone]            [ved] for mate, [piv] for stub or gate
+chob   [hep=rope]                     rope to gate
+dept   [hup=bone]                     gate from blur to [hup]
+felk   [hin=noun]                     blur constant
+flit   [gen=gene]                     gene for gate
+galb   [hin=bead]                     bead constant
+grop   [hin=noun]                     exact constant
+peft   [wix=list+[mark bone]]         classic American tuple
+shud   [hup=bone sim=bone]            gate from [sim] to [hup]
+warx   [bec=list+bone]                options
+
+  pike:
+
+
+tag    bone                           semantics
+----------------------------------------------------------------------------
+lask   [bic=bone luf=gene]            use [luf] if [mox] is like [bic]
+plic   [bic=bone]                     use [mox] if [mox] is like [bic]
+semp   [bic=bone luf=gene]            use [luf] if [mox] is fixed to [bic]
+fing   [bic=bone]                     use [mox] if [mox] is fixed to [bic]
+

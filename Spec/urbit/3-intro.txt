@@ -1,0 +1,256 @@
+Urbit namespace (300K)
+C. Guy Yarvin, 1/20/10
+
+0. Introduction
+
+This is a very rough design sketch of the Urbit namespace.  It is
+nowhere near "zero-K."  More like room temperature.
+
+It is intended strictly for people who already understand Urbit
+and Nock.  For background, see moronlab.blogspot.com.
+
+An Urbit name is a path.  A path is a pair [fort position].  A fort
+is an identity.  A position is a local name within that identity.
+
+
+1. Path syntax
+
+Paths use a custom syntax which is as Unix-like as possible:
+
+  /$fort/$position
+
+In normal Watt/Hume syntax this would be
+
+  [fort position]
+
+- but, then again, 
+
+  [%usr %lib %php %doc]
+
+becomes, in path syntax,
+
+  /usr/lib/php/doc
+
+so you picks your poison.  
+
+Normally in a normal Nock language, to express a symbol as an
+atomic string constant (LSB first), you write
+
+  %foobar
+or
+  %'foo bar'
+
+In a path, the % is implicit; $ indicates a dynamic expression.
+
+
+2. Fort structure
+
+If you are a normal user of Urbit, you are a 'lord.'  The
+identity of a lord is an arbitrary 32-bit atom.  
+
+For memorability, this number is mapped invertibly to a string
+that looks like this (10 randomly generated examples):
+
+  @lazwik-paztid
+  @fimvak-givrif
+  @gowran-sawtol
+  @serzil-fibzan
+  @pimcon-sowces
+  @sawwip-febcif
+  @gavmop-nibcaf
+  @fawcid-fibmof
+  @dozcog-natbef
+  @letted-fected
+
+This generator could probably be improved.  But compare the
+memorability of @gavmop-nibcaf to 164.218.21.33 - let alone 
+a single decimal number, like a Facebook ID.  
+
+Thus, a path in the fort @gavmop-nibcaf might be:
+
+  /@gavmop-nibcaf/usr/lib/php/doc
+
+For casual use, we capitalize the fort: Gavmop-Nibcaf.  It's a 
+strange name, but a name.  We have lots of neurons for
+remembering names.  Not so many for remembering IP addresses.
+
+Why can't you pick your own name?  Because, with 32-bit global
+identities, we can build a decentralized namepace.  It's not
+as memorable as it could be; it's not as decentralized as it
+could be.  But it's *adequate* on both these vertexes of Zooko's
+triangle, and of course rock-solid on the third (security).
+
+
+3. Fort allocation - digital feudalism
+
+Lords are only one class of fort.  A fort is always an atom.
+It is classified by the size of that atom:
+
+>= 2^64, < 2^128 :   wolf (wild fort)
+>= 2^32, < 2^64  :   pawn (civil fort)
+>= 2^16, < 2^32  :   lord (civil fort)
+>= 2^8,  < 2^16  :   earl (civil fort)
+>= 1,    < 256   :   duke (civil fort)
+== 0             :   pope (trivial fort)
+
+Let's deal with the pope and the wolves first.
+
+Fort 0 is reserved for trivial, or self-validating, bindings.
+Example of a self-validating binding: a hashname, eg,
+
+  /0/sha/X == Y
+
+where SHAD-256(Y) == X.  A papally infallible binding.
+
+Wild forts are self-generated.  A wild fort is the SHA of
+your public key, truncated to 128 bits.
+
+All the other forts are *civil*.  The trick to digital feudalism:
+since low-numbered forts are easier to remember, they are more
+desirable.  But since they are desirable, there is contention for
+these identities.  These short identities must be allocated by
+some *civilized* process.
+
+Since there is contention for civil forts, some central party
+must allocate them.  Since the SFN is an SFN, there is only one
+way to do this: there has to be a root public key in the SFN.
+This uber-key is the root of all certificate chains.
+
+The rules for signing forts are simple:
+
+  Pawn P is signed by lord (P & 0xffffffff)
+  Lord L is signed by earl (L & 0xffff)
+  Earl E is signed by duke (E & 0xff)
+  Duke D is signed by duke 1 (the first duke)
+  Duke 1 is hardcoded in the SFN.
+
+The master of this public key is the *prince*.  The problem
+of the prince is the following: he controls the whole namespace.
+However, if he controls the whole namespace, no one wants to
+be his serf.  As Daniel Nagy says: we don't need another
+Verisign.  Monopoly IDs are easy to implement and have many
+advantages over this scheme.
+
+Therefore, the prince must *distribute* the Urbit namespace.
+He must alienate it from his personal control, permanently and
+irrevocably.  He must break it up so totally that it will never
+have any chance of reunifying completely.  Urbit will never be
+a democracy, but it should always remain a republic.  Monarchy
+is not an acceptable solution in this context.
+
+Again as Daniel says, if there are just *two* Verisigns,
+each will face an irresistible market pressure to merge with
+the other and establish a monopoly regime.  Moreover,
+they may collude informally and establish a de-facto monopoly.
+
+However, the more the prince's initial monopoly is shattered,
+the weaker are the centripetal forces that tend to unify it.
+If there are just two Verisigns, merging provides enormous 
+advantage to both.  
+
+In Urbit there are effectively 255 Verisigns - the dukes.  The
+ducal keys are *distributed* by the prince, but not *controlled*
+by the prince.  Key distribution at the ducal level is always
+fire-and-forget.  All secrets time out and must be updated,
+but a duke signs his own key updates.  The prince (and first
+duke), who of course is me, need not be consulted.  
+
+The result is that the prince or first duke (who of course is me)
+is not the monarch of Urbit, but its *princeps* - in the original
+Roman sense, *primus inter pares*.  If he gives away all of his
+duchies, he is left with no power at all.
+
+With 255 Verisigns, merging two of them does not give either much
+market power - if any. Worse, because Verisigns are supposed to
+be independent, amalgamation is creepy.  And thus, the expected
+value of a merger is actually *negative*.  Thus, with sufficient
+distribution, the centripetal force, which is destabilizing, is
+replaced by a stabilizing centrifugal force.
+
+Therefore, the solution to decentralization is to distribute
+rootkeys as broadly as possible, in such a way that it is
+as unlikely as possible that they will coalesce.  Of course, to
+fracture the namespace in any scalable way, there must be no
+contention between rootkeys.  Thus the Martian names.
+
+For this same reason, corporate dukes are highly discouraged.
+These keys should be held by either (a) individuals, or (b)
+nonprofits in the public interest.  Notice that nonprofits don't
+tend to merge, and neither do individuals.  Individuals sell out, 
+nonprofits don't.  For instance, suppose EFF had a browser
+rootkey? Would they have sold it to Verisign, as Thawte did?
+This strikes me as highly improbable.  If EFF had a rootkey,
+I think, no one would have to pay for an SSL certificate today.
+
+Moreover, if the entire City of Urbit *does* collapse and become a
+crypto monopoly, free people can always go back to being wolves,
+ie, minting wild keys and using petnames, abbreviations, etc, to
+remember them.
+
+The $2^64 question is thus: who are the dukes?
+
+My answer is simple.  The dukes are the developers of Urbit.
+They created it - they get to own it.  This is standard Lockean
+libertarian homesteading theory.  Lend a hand - earn a slice.
+Thus Urbit, unlike most open-source projects, offers a rational
+motivation for contribution.
+
+For starters, everyone invited to the urbit-dukes mailing list
+is, if he accepts, a duke.  One may decline this honor, of course.
+But one may not decline it *irreversibly*.  If you change your
+mind, the invitation remains open.
+
+urbit-dukes is and will always be an invitation-only list.
+Ideally, there will always be one or more problems that an
+applicant must solve to join the list.  Obviously decrement is
+neither a useful problem, nor will remain long a difficult one.
+Eventually these problems should be useful tasks.  Therefore,
+to become a duke, you perform a useful task.
+
+It's assumed that if you want to be on this list, you support 
+Urbit and want, in principle, to contribute to it.  There may  
+not be a task for you, and you may not have time for a task.
+You have no obligation to us, we have no obligation to you -
+until the ducal keys are actually issued, the relationship is
+strictly social.  (Once they are issued, again, they cannot be
+revoked.)
+
+In return, it's assumed that when ducal keys *are* issued, one
+will be issued to everyone currently on urbit-dukes.
+Furthermore, ducal keys *not* issued are considered the
+collective property of the issued keys (one per duke).
+
+urbit-dukes is a democratic organization.  Therefore, all
+decisions made by the first duke (me) can be appealed to the
+second and third dukes (Mark and Colin).  After this, they can be
+appealed to the full list, voting one per person (not per duke).
+Basically, the prince has full executive *authority*, but is
+fully *responsible* to his fellow dukes.
+
+More broadly, the prince will distribute duchies as he sees fit 
+to benefit both his fellow dukes, and Urbit as a whole.  His
+first priority is creating and maintaining a stable polycentric
+order; his second priority is loyalty to the ducal order.
+
+For instance, if duchies need to be sold to raise funds for
+Urbit as a whole, the prince controls over 200.  So, if anyone
+will buy, he can do that - and probably will.
+
+These monies will not go into his *personal* wallet, however.
+They will be used for the support of Urbit, and/or the ultimate
+benefit of all the dukes, on a per-duke basis.
+
+Other duchies may be distributed on a beneficial basis to support
+and stabilize Urbit.  These will be dukes by merit, not dukes by
+effort - they are rewards for other contributions to humanity.
+
+On the other hand, the prince (because he spent 8 years working
+on this project, without being paid), has reserved 32 duchies for
+his *exclusive* personal benefit.  
+
+If you don't like this, found your own kingdom in the cloud!
+Nothing could possibly prevent you.  Heck, you can even take
+the Urbit function, copy it, replace the prince's root key with
+your own, and call it "Bubba."  Bubba and Urbit will compete on a
+perfectly level playing field.  I won't even be offended.
+
