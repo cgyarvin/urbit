@@ -146,16 +146,19 @@
           (lt a b)
         ==
 
-  ::::::::  mod                 modulus (a % b)
+  ::::::::  mod                modulus (a % b)
   ::
-    - mod
+    - moe
       ||  atom
         a = atom
         b = atom
       ==
         ?<  (zil b)
-        (sub a (mul b (div a b)))
-
+        |-
+          ?:  (lt a b)
+            a
+          $(a (sub a b))
+    
   ::::::::  mul                 atomic multiply
   ::
     - mul
