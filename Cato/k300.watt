@@ -148,7 +148,7 @@
 
   ::::::::  mod                modulus (a % b)
   ::
-    - moe
+    - mod
       ||  atom
         a = atom
         b = atom
