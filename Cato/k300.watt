@@ -151,6 +151,42 @@
             c
           $(a (dec a), c (add b c))
 
+  ::::::::  exp                 atomic exponent (a ** b)
+  ::
+    - exp
+      ||  @
+        a = @
+        b = @
+      ==
+        =>  c a
+        |-
+          ?:  (zil b)
+            1
+          ?:  (eq b 1)
+            a
+          $(a (mul a c), b (dec b))
+
+  ::::::::  sqt            atomic squareroot (sqrt(a))
+  ::::::::                 uses Newton's method.
+  ::
+    - sqt
+      ||  @
+        a = @
+      ==
+        => g 1
+        |-
+          => b (mul g g)
+          ?:  (gt b a)
+            ?:  (zil g)
+              0
+            $(g (dec g))
+          => d (div (sub a b) (mul 2 g))
+          ?:  (zil d)
+            g
+          ?:  (gt d g)
+            $(g (add g g))
+          $(g (add g d))
+
   ::::::::  pat                 noun is @
   ::
     - pat
