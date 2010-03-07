@@ -14,15 +14,15 @@ _mill_pike(u4_milr m,
            u4_gene *bif)
 {
   u4_lane lane = m->lane;
-  u4_skel bic;
+  u4_bone bic;
   u4_gene luf;
 
   // u4_err(lane, "pik", pik);
   // u4_err(lane, "mox", mox);
 
   if ( u4_b_pq(pik, u4_atom_lask, &bic, &luf) ) {
-    u4_gene mip = _mill_mate(m, bic);
-    u4_gene bul = _mill_stub(m, bic);
+    u4_gene mip = _mill_grip(m, bic);
+    u4_gene bul = _mill_lump(m, bic);
     u4_gene nek = u4_k_trel(lane, u4_atom_kick, mox, u4_noun_0);
 
     *tes = u4_k_trel(lane, u4_atom_like, mox, mip);
@@ -30,15 +30,15 @@ _mill_pike(u4_milr m,
   }
   else if ( u4_b_p(pik, u4_atom_plic, &bic) ) {
     u4_gene luf = u4_k_trel(lane, u4_atom_kick, mox, u4_noun_0);
-    u4_gene mip = _mill_mate(m, bic);
-    u4_gene bul = _mill_stub(m, bic);
+    u4_gene mip = _mill_grip(m, bic);
+    u4_gene bul = _mill_lump(m, bic);
 
     *tes = u4_k_trel(lane, u4_atom_like, mox, mip);
     *bif = u4_k_qual(lane, u4_atom_sure, bul, luf, luf);
   }
   else if ( u4_b_pq(pik, u4_atom_semp, &bic, &luf) ) {
-    u4_gene mip = _mill_mate(m, bic);
-    u4_gene hem = _mill_fiat(m, bic);
+    u4_gene mip = _mill_grip(m, bic);
+    u4_gene hem = _mill_gate(m, bic);
 
     *tes = u4_k_trel(lane, u4_atom_like, mox, mip);
     *bif = u4_k_trel
@@ -48,8 +48,8 @@ _mill_pike(u4_milr m,
          luf);
   }
   else if ( u4_b_p(pik, u4_atom_fing, &bic) ) {
-    u4_gene mip = _mill_mate(m, bic);
-    u4_gene hem = _mill_fiat(m, bic);
+    u4_gene mip = _mill_grip(m, bic);
+    u4_gene hem = _mill_gate(m, bic);
 
     *tes = u4_k_trel(lane, u4_atom_like, mox, mip);
     *bif = hem;

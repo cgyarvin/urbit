@@ -103,7 +103,7 @@ _mill_test(u4_milr m,
   else if ( u4_b_p(gen, u4_atom_boce, &p_gen) ) {
     return _mill_test_and(m, p_gen, typ);
   }
-  else if ( u4_b_p(gen, u4_atom_dast, &p_gen) ) {
+  else if ( u4_b_p(gen, u4_atom_dant, &p_gen) ) {
     return _mill_test_or(m, p_gen, typ);
   }
 #endif

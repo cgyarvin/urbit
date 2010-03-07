@@ -8,9 +8,9 @@
 */
 u4_noun
 _mill_q_bink(u4_milr m, 
-             u4_skel mef)
+             u4_bone mef)
 {
-  u4_gene gen = _mill_fiat(m, mef);
+  u4_gene gen = _mill_gate(m, mef);
 
   return gen;
 }

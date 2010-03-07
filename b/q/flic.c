@@ -8,14 +8,14 @@
 */
 u4_noun
 _mill_q_flic(u4_milr m, 
-             u4_skel tep,
+             u4_bone tep,
              u4_gene von)
 {
   u4_lane lane = m->lane;
 
   //  :*
   //    %trop
-  //    (stub tep)
+  //    (lump tep)
   //    :*  
   //      %lome
   //      von
@@ -24,7 +24,7 @@ _mill_q_flic(u4_milr m,
 
   return u4_k_qual
     (lane, u4_atom_trop,
-           _mill_stub(m, tep),
+           _mill_lump(m, tep),
            u4_atom_lome,
            von);
 }
