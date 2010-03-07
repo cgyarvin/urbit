@@ -60,15 +60,16 @@ U4_MILL_OFILES=\
        b/mill/edit.o \
        b/mill/eith.o \
        b/mill/fail.o \
-       b/mill/fiat.o \
        b/mill/find.o \
        b/mill/fish.o \
+       b/mill/gate.o \
+       b/mill/grip.o \
        b/mill/hike.o \
        b/mill/hunt.o \
        b/mill/init.o \
        b/mill/look.o \
+       b/mill/lump.o \
        b/mill/make.o \
-       b/mill/mate.o \
        b/mill/mill.o \
        b/mill/nest.o \
        b/mill/not.o  \
@@ -85,7 +86,6 @@ U4_MILL_OFILES=\
        b/mill/seal.o \
        b/mill/slip.o \
        b/mill/snap.o \
-       b/mill/stub.o \
        b/mill/test.o \
        b/mill/trap.o
 
@@ -123,9 +123,8 @@ U4_MQ_OFILES=\
        b/q/prec.o \
        b/q/lome.o \
        b/q/malk.o \
-       b/q/neft.o \
        b/q/palt.o \
-       b/q/dast.o \
+       b/q/dant.o \
        b/q/pont.o \
        b/q/prex.o \
        b/q/crad.o \
@@ -133,12 +132,9 @@ U4_MQ_OFILES=\
        b/q/rald.o \
        b/q/rulf.o \
        b/q/cret.o \
-       b/q/spil.o \
        b/q/colb.o \
        b/q/flic.o \
        b/q/blem.o \
-       b/q/veck.o \
-       b/q/wamp.o \
        b/q/gril.o \
        b/q/frag.o
 

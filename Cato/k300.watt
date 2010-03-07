@@ -5,18 +5,10 @@
 ::::::::::  Tier 0: basic types
 ::::::::::
 
-  ::::::::  atom                any atom
-  ::
-    - atom
-      |:  q = noun
-      ==
-        ?>  ?={q 0}
-          q 
-
   ::::::::  noun                any noun
   ::
     - noun
-      =>  a ^-{&:0 0}
+      =>  a ^-{:3.0 0}
       |=
         a
    
@@ -25,20 +17,7 @@
     - flag
       |:  a = noun
       ==
-        &=[0 a]
-
-  ::::::::  list                linked list
-  ::
-    - list
-      |:  a = ^noun
-      ==
-        |:  b = noun
-        ==
-          ?-  b
-            +   ~
-            -   [i=noun t=noun] 
-                [i=(a i.b) t=$(b t.b)]
-          ==
+        :6.[0 a]
 
 
 ::::::::::  Tier 1: simple logic and arithmetic
@@ -47,9 +26,9 @@
   ::::::::  add                 atomic add
   ::
     - add
-      ||  atom
-        a = atom
-        b = atom
+      ||  @
+        a = @
+        b = @
       ==
         ?:  (zil a)
           b
@@ -58,22 +37,22 @@
   ::::::::  dec                 atomic decrement
   ::
     - dec
-      ||  atom
-        a = atom
+      ||  @
+        a = @
       ==
-        ?<  &=[0 a]
+        ?<  (zil a)
         =>  b 0
         |-
-          ?:  &=[a &^b]
+          ?:  (eq a (inc b))
             b
-          $(b &^b)
+          $(b (inc b))
 
   ::::::::  div                 atomic divide (a / b)
   ::
     - div
-      ||  atom
-        a = atom
-        b = atom
+      ||  @
+        a = @
+        b = @
       ==
         ?<  (zil b)
         =>  c 0
@@ -89,43 +68,43 @@
         a = noun
         b = noun
       ==
-        &=[a b] 
+        :6.[a b] 
 
   ::::::::  gt                  atomic greater than (a > b)
   ::
     - gt
       ||  flag
-        a = atom
-        b = atom
+        a = @
+        b = @
       ==
-        (not (lte a b))
+        !(lte a b)
 
   ::::::::  gte                 atomic greater-or-equal (a >= b)
   ::
     - gte
       ||  flag
-        a = atom
-        b = atom
+        a = @
+        b = @
       ==
-        (not (lt a b))
+        !(lt a b)
 
   ::::::::  inc                 atomic increment
   ::
     - inc
-      ||  atom
-        a = atom
+      ||  @
+        a = @
       ==
-        &^a
+        :5.a
 
   ::::::::  lt                  atomic less-than (a < b)
   ::
     - lt
       ||  flag
-        a = atom
-        b = atom
+        a = @
+        b = @
       ==
         ?&
-          (not (eq a b))
+          !(eq a b)
           |-
             ?:  (zil a)
               &
@@ -138,8 +117,8 @@
   ::
     - lte
       ||  flag
-        a = atom
-        b = atom
+        a = @
+        b = @
       ==
         ?|
           (eq a b)
@@ -149,9 +128,9 @@
   ::::::::  mod                 modulus (a % b)
   ::
     - mod
-      ||  atom
-        a = atom
-        b = atom
+      ||  @
+        a = @
+        b = @
       ==
         ?<  (zil b)
         (sub a (mul b (div a b)))
@@ -159,9 +138,9 @@
   ::::::::  mul                 atomic multiply
   ::
     - mul
-      ||  atom
-        a = atom
-        b = atom
+      ||  @
+        a = @
+        b = @
       ==
         =>  c 0
         |-
@@ -169,28 +148,20 @@
             c
           $(a (dec a), c (add b c))
 
-  ::::::::  not                 lunary not
-  ::
-    - not
-      ||  flag
-        a = flag
-      ==
-        (eq 1 a)
-
-  ::::::::  pat                 noun is atom
+  ::::::::  pat                 noun is @
   ::
     - pat
       ||  flag
         a = noun
       ==
-        (not (tap a))
+        !(tap a)
 
   ::::::::  sub                 atomic subtract (a - b)
   ::
     - sub
-      ||  atom
-        a = atom
-        b = atom
+      ||  @
+        a = @
+        b = @
       ==
         ?:  (zil b)
           a
@@ -202,13 +173,13 @@
       ||  flag
         a = noun
       ==
-        &~a
+        :4.a
 
-  ::::::::  zil                 atom is 0
+  ::::::::  zil                 @ is 0
   ::
     - zil
       ||  flag
-        a = atom
+        a = @
       ==
         (eq 0 a)
 ==

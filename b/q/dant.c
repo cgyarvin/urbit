@@ -1,13 +1,13 @@
-/* mill/q/dast.c
+/* mill/q/dant.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_q_dast():
+/* _mill_q_dant():
 */
 u4_noun
-_mill_q_dast(u4_milr m, 
+_mill_q_dant(u4_milr m, 
              u4_noun das)
 {
   u4_lane lane = m->lane;
@@ -26,6 +26,6 @@ _mill_q_dast(u4_milr m,
        u4_atom_quiz,
        u4_ch(das),
        u4_k_cell(lane, u4_atom_rock, u4_noun_0),
-       _mill_q_dast(m, u4_ct(das)));
+       _mill_q_dant(m, u4_ct(das)));
   }
 }

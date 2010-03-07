@@ -71,7 +71,7 @@ _mill_hunt(u4_milr m,
         u4_burp(lane, "mark", u4_prep_textual(lane, cox));
         u4_burp(lane, "type", _mill_dump(m, fim));
 
-        return _mill_fail(m, "look: no port");
+        return _mill_fail(m, "look: not found");
       }
       else {
         u4_type gey = u4_ch(zib);

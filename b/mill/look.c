@@ -4,10 +4,10 @@
 */
 #include "u4/all.h"
 
-/* _is_grip()::
+/* _is_lect()::
 */
 static u4_t
-_is_grip(u4_knot sod, 
+_is_lect(u4_knot sod, 
          u4_tick *tik, 
          u4_term *cox)
 {
@@ -44,14 +44,14 @@ _look_knot(u4_milr m,
   u4_axis axe;
   u4_loaf fod;
 
-  if ( _is_grip(vor, &tik, &cox) ) {
+  if ( _is_lect(vor, &tik, &cox) ) {
     fod = _mill_find(m, cox, u4_noun_0, typ);
 
     if ( u4_n_zero(fod) ) {
       u4_burp(lane, "mark", u4_prep_textual(lane, cox));
       u4_burp(lane, "type", _mill_dump(m, typ));
 
-      return _mill_fail(m, "look: no port");
+      return _mill_fail(m, "look: not found");
     }
     else if ( u4_n_zero(tik) ) {
       return fod;

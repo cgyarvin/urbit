@@ -51,9 +51,8 @@ _mill_open(u4_milr m,
     _open_pq (prec);  // -<
     _open_p  (lome);  // |=
     _open_p  (malk);  // |+
-    _open_p  (neft);  // &^
     _open_p  (palt);
-    _open_p  (dast);  // ?|
+    _open_p  (dant);  // ?|
     _open_pqr(pont);  // =>
     _open_pq (prex);  // ?<
     _open_pq (grun);  // :%
@@ -62,12 +61,9 @@ _mill_open(u4_milr m,
     _open_p  (cret);  // :*
     _open_p  (rald);  // ^*
     _open_pqr(clet);  // =<
-    _open_p  (spil);  // &~
     _open_pq (flic);  // |:
     _open_pq (colb);  // ~<
     _open_p  (blem);  // ?!
-    _open_p  (veck);  // &*
-    _open_p  (wamp);  // &=
     _open_pq (gril);  // ?-
     _open_p  (frag);
 

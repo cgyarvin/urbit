@@ -16,7 +16,7 @@
       typedef u4_noun u4_herb;  //  [type gene]
       typedef u4_noun u4_pike;  //  see _mill_gene_pike()
       typedef u4_noun u4_spec;  //  lambda spec
-      typedef u4_noun u4_skel;  //  pattern skeleton
+      typedef u4_noun u4_bone;  //  pattern boneeton
       typedef u4_noun u4_bolo;  //  {list pike}
       typedef u4_noun u4_plox;  //  {list glep}
       typedef u4_noun u4_glep;  //  [tape type]
@@ -196,12 +196,6 @@
         _mill_fail(u4_milr m,
                    const u4_cl *cl_msg);
 
-      /* _mill_fiat(): generate lamb gene. 
-      */
-        u4_gene
-        _mill_fiat(u4_milr m,
-                   u4_skel kel);
-
       /* _mill_find(): look by name.
       */
         u4_wire
@@ -217,19 +211,19 @@
                    u4_axis axe,
                    u4_type tip);
 
-      /* _mill_heal(): modify type to reflect refinement.
-      **
-      **   niv: change axis
-      **   hur: refined type
-      **   wac: background type
+      /* _mill_gate(): gate from bone.
       */
-        u4_type
-        _mill_heal(u4_milr m,
-                   u4_axis niv,
-                   u4_type hur,
-                   u4_type wac);
+        u4_gene
+        _mill_gate(u4_milr m,
+                   u4_bone kel);
 
-      /* _mill_hike(): mutate form.
+      /* _mill_grip(): generate match gene. 
+      */
+        u4_gene
+        _mill_grip(u4_milr m,
+                   u4_bone kel);
+
+      /* _mill_hike(): mutate formula.
       */
         u4_form
         _mill_hike(u4_milr m,
@@ -259,18 +253,18 @@
                    u4_rope fes,
                    u4_type tip);
 
+      /* _mill_lump(): generate direct bone.
+      */
+        u4_gene
+        _mill_lump(u4_milr m,
+                   u4_bone kel);
+
       /* _mill_make(): type inference, top level.
       */
         u4_wire
         _mill_make(u4_milr m,
                    u4_gene gen,
                    u4_type tip);
-
-      /* _mill_mate(): generate match gene. 
-      */
-        u4_gene
-        _mill_mate(u4_milr m,
-                   u4_skel kel);
 
       /* _mill_nest(): test geometric congruence.
       **
@@ -358,7 +352,7 @@
                    u4_type fuz,
                    u4_axis ped);
 
-      /* _mill_seal(): produce set of gates sealing [typ].
+      /* _mill_seal(): produce set of holds sealing [typ].
       */
         u4_bag
         _mill_seal(u4_milr m,
@@ -377,12 +371,6 @@
         _mill_snap(u4_milr m,
                    u4_type lom,
                    u4_type ger);
-
-      /* _mill_stub(): generate direct skel.
-      */
-        u4_gene
-        _mill_stub(u4_milr m,
-                   u4_skel kel);
 
       /* _mill_trap(): save trap.
       */
