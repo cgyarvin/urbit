@@ -16,6 +16,9 @@ _mill_comp(u4_milr m,
 
   if ( u4_b_p(mal, u4_noun_0, &p_mal) ) {
     if ( u4_b_p(buz, u4_noun_0, &p_buz) ) {
+      if ( u4_n_zero(p_buz) ) {
+        return buz;
+      }
       return u4_k_cell(lane, u4_noun_0, u4_op_peg(lane, p_mal, p_buz));
     }
     else if ( u4_b_pq(buz, u4_noun_3, &p_buz, &q_buz) &&

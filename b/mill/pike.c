@@ -52,7 +52,8 @@ _mill_pike(u4_milr m,
     u4_gene hem = _mill_gate(m, bic);
 
     *tes = u4_k_trel(lane, u4_atom_like, mox, mip);
-    *bif = hem;
+    *bif = u4_k_trel
+      (lane, u4_atom_mang, hem, u4_k_trel(lane, u4_atom_kick, mox, u4_noun_0));
   }
   else u4_trip;
 }

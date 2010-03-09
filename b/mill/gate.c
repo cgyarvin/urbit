@@ -15,7 +15,7 @@ _gate_arg(u4_milr m,
   return u4_k_trel
     (lane, u4_atom_cast,
            u4_k_cell(lane, u4_atom_crad, u4_noun_0),
-           _mill_lump(m, kel));
+           _mill_grip(m, kel));
 }
 
 /* _gate_crib_in()::

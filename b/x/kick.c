@@ -6,7 +6,7 @@
 
 /* _mill_kick(): use with changes.
 **
-**    ved: target : rope == list+(mark [%flat tic=nat vix=mark] [%flet haz=nat])
+**    ved: target : rope == list+(mark [%lect tic=nat vix=mark] [%frag haz=nat])
 **    suc: changes: bolt == list+[p=rope q=gene]
 **    pex: subject: type
 */
@@ -67,3 +67,39 @@ _mill_x_kick(u4_milr m,
   }
 }
 
+/* _mill_p_kick()::
+*/
+u4_type
+_mill_p_kick(u4_milr m,
+             u4_rope ved,
+             u4_bolt suc,
+             u4_type pex)
+{
+  u4_loaf fod = _mill_x_kick(m, ved, suc, pex);
+
+  return u4_ch(fod);
+}
+
+/* _mill_b_kick()::
+*/
+u4_form
+_mill_b_kick(u4_milr m,
+             u4_rope ved,
+             u4_bolt suc,
+             u4_type pex)
+{
+  u4_loaf fod = _mill_x_kick(m, ved, suc, pex);
+
+  return u4_ct(fod);
+}
+
+/* _mill_m_kick()::
+*/
+u4_loaf
+_mill_m_kick(u4_milr m,
+             u4_rope ved,
+             u4_bolt suc,
+             u4_type pex)
+{
+  return _mill_x_kick(m, ved, suc, pex);
+}

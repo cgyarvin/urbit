@@ -61,6 +61,7 @@ U4_MILL_OFILES=\
        b/mill/eith.o \
        b/mill/fail.o \
        b/mill/find.o \
+       b/mill/fire.o \
        b/mill/fish.o \
        b/mill/gate.o \
        b/mill/grip.o \
@@ -101,6 +102,7 @@ U4_MX_OFILES=\
        b/x/home.o \
        b/x/rock.o \
        b/x/link.o \
+       b/x/mang.o \
        b/x/spot.o \
        b/x/quiz.o \
        b/x/sure.o \
@@ -128,7 +130,6 @@ U4_MQ_OFILES=\
        b/q/pont.o \
        b/q/prex.o \
        b/q/crad.o \
-       b/q/mang.o \
        b/q/rald.o \
        b/q/rulf.o \
        b/q/cret.o \

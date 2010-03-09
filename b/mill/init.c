@@ -21,5 +21,9 @@ u4_mill_init(u4_milr m,
   m->meb = u4_noun_0;
   m->dam = u4_noun_0;
   m->niq = u4_noun_0;
+  m->zor = u4_noun_0;
   m->vus = u4_noun_0;
+
+  m->ply = u4_noun_0;
+  m->bak = u4_noun_0;
 }
