@@ -70,13 +70,25 @@
         */
         u4_noun nix;
 
+        /* 0 iff we are producing type.
+        */
+        u4_atom ply;
+
+        /* 0 iff we are producing formula.
+        */
+        u4_atom bak;
+
         /* Trap - ((list {[p=(text) q=(site) r=(spot)]}))
         */
         u4_noun meb;
 
-        /* Tab ((type gene) type) to memoize _mill_make().
+        /* Tab to memoize _mill_bake().
         */
         u4_tab niq;
+
+        /* Tab to memoize _mill_play().
+        */
+        u4_tab zor;
 
         /* Tab (type flag) to memoize _mill_null().
         */
@@ -162,6 +174,13 @@
                    u4_form vor,
                    u4_form sed);
 
+      /* _mill_cook(): cook a gene, producing formula and type.
+      */
+        u4_type
+        _mill_cook(u4_milr m, 
+                   u4_gene gen,
+                   u4_type tip);
+
       /* _mill_cull(): prune for computation.
       */
         u4_t
@@ -203,6 +222,13 @@
                    u4_term cox,
                    u4_rail bar,
                    u4_type tip);
+
+      /* _mill_fire(): fire [tel hum] as (gate arg).
+      */
+        u4_form
+        _mill_fire(u4_milr m,
+                   u4_form tel,
+                   u4_form hum);
 
       /* _mill_fish(): test form.
       */

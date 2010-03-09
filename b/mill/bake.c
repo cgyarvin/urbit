@@ -4,14 +4,83 @@
 */
 #include "u4/all.h"
 
-/* _mill_bake(): bake a gene, milling and discarding type.
+#define _bake_p(flot) \
+  if ( u4_b_p(gen, u4_atom_##flot, &p_gen) ) { \
+    u4_form _mill_b_##flot(u4_milr, u4_noun, u4_type); \
+    return _mill_b_##flot(m, p_gen, tip); \
+  }
+
+#define _bake_pq(flot) \
+  if ( u4_b_pq(gen, u4_atom_##flot, &p_gen, &q_gen) ) { \
+    u4_form _mill_b_##flot(u4_milr, u4_noun, u4_noun, u4_type); \
+    return _mill_b_##flot(m, p_gen, q_gen, tip); \
+  }
+
+#define _bake_pqr(flot) \
+  if ( u4_b_pqr(gen, u4_atom_##flot, &p_gen, &q_gen, &r_gen) ) {\
+    u4_form _mill_b_##flot(u4_milr, u4_noun, u4_noun, u4_noun, u4_type); \
+    return _mill_b_##flot(m, p_gen, q_gen, r_gen, tip); \
+  }
+
+/* _bake_main(): internal of _mill_bake().
 */
 u4_form
-_mill_bake(u4_milr m, 
+_bake_main(u4_milr m,
            u4_gene gen,
            u4_type tip)
 {
-  u4_loaf fod = _mill_make(m, gen, tip);
+  u4_noun p_gen, q_gen, r_gen;
 
-  return u4_ct(fod);
+  if ( u4_b_fork(gen, &p_gen, &q_gen) ) {
+    return _bake_main
+      (m, u4_k_qual(m->lane, u4_atom_cage, p_gen, q_gen, u4_noun_0), tip);
+  }
+  else {
+    _bake_p  (bail);    // !!
+    _bake_pq (cast);    // ^+
+    _bake_p  (cage);    // :.
+    _bake_p  (dbug);
+    _bake_pq (home);
+    _bake_pq (kick);    // :=
+    _bake_pq (like);    // ?= 
+    _bake_pq (link);    // ~>
+    _bake_p  (load);
+    _bake_pq (mang);    // :~
+    _bake_pq (name);    // :`
+    _bake_pq (nock);
+    _bake_pqr(quiz);    // ?:
+    _bake_p  (rock);
+    _bake_pq (spot);
+    _bake_pqr(sure);    // ^=
+
+    {
+      u4_noun rex = _mill_open(m, gen);
+
+      if ( u4_n_eq(rex, gen) ) {
+        u4_err(m->lane, "rex", rex);
+        return u4_trip;
+      }
+      else {
+        return _mill_bake(m, rex, tip);
+      }
+    }
+  }
+}
+
+/* _mill_bake(): type inference, top level.
+*/
+u4_form
+_mill_bake(u4_milr m,
+           u4_gene gen,
+           u4_type tip)
+{
+  u4_lane lane = m->lane;
+  u4_noun fid  = u4_k_cell(lane, gen, tip);
+  u4_nopt dum  = u4_tab_get(fid, m->niq);
+
+  if ( u4_bull == dum ) {
+    dum = _bake_main(m, gen, tip);
+    m->niq = u4_tab_add(lane, fid, dum, m->niq);
+  }
+  return dum;
 }

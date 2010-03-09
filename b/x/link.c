@@ -4,10 +4,38 @@
 */
 #include "u4/all.h"
 
-/* _mill_x_link()::
+/* _mill_p_link()::
+*/
+u4_type
+_mill_p_link(u4_milr m, 
+             u4_gene del,
+             u4_gene zim, 
+             u4_type tip)
+{
+  u4_type jes  = _mill_play(m, del, tip);
+  u4_type dux  = _mill_play(m, zim, jes);
+
+  return dux;
+}
+
+/* _mill_b_link()::
+*/
+u4_form
+_mill_b_link(u4_milr m, 
+             u4_gene del,
+             u4_gene zim, 
+             u4_type tip)
+{
+  u4_loaf fod = _mill_make(m, del, tip);
+  u4_form pum = _mill_bake(m, zim, u4_ch(fod));
+
+  return _mill_comp(m, u4_ct(fod), pum);
+}
+
+/* _mill_m_link()::
 */
 u4_loaf
-_mill_x_link(u4_milr m, 
+_mill_m_link(u4_milr m, 
              u4_gene del,
              u4_gene zim, 
              u4_type tip)

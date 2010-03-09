@@ -57,7 +57,6 @@ _mill_open(u4_milr m,
     _open_pq (prex);  // ?<
     _open_pq (grun);  // :%
     _open_p  (crad);
-    _open_pq (mang);  // :~
     _open_p  (cret);  // :*
     _open_p  (rald);  // ^*
     _open_pqr(clet);  // =<

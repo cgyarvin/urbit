@@ -20,11 +20,38 @@ _load_book(u4_milr m, u4_noun pir, u4_type tip)
   }
 }
 
+/* _mill_p_load()::
+*/
+u4_type
+_mill_p_load(u4_milr m, 
+             u4_noun pir,
+             u4_type tip)
+{
+  u4_lane lane = m->lane;
 
-/* _mill_x_load()::
+  return u4_k_trel(lane, u4_atom_cone, tip, pir);
+}
+
+/* _mill_b_load()::
+*/
+u4_form
+_mill_b_load(u4_milr m, 
+             u4_noun pir,
+             u4_type tip)
+{
+  u4_lane lane = m->lane;
+  u4_type gan  = u4_k_trel(lane, u4_atom_cone, tip, pir);
+  u4_noun fez  = _load_book(m, pir, gan);
+
+  return u4_k_cell
+          (lane, u4_k_cell(lane, u4_noun_0, u4_noun_1),
+                 u4_k_cell(lane, u4_noun_1, fez));
+}
+
+/* _mill_m_load()::
 */
 u4_loaf
-_mill_x_load(u4_milr m, 
+_mill_m_load(u4_milr m, 
              u4_noun pir,
              u4_type tip)
 {
@@ -38,3 +65,4 @@ _mill_x_load(u4_milr m,
             (lane, u4_k_cell(lane, u4_noun_0, u4_noun_1),
                    u4_k_cell(lane, u4_noun_1, fez)));
 }
+

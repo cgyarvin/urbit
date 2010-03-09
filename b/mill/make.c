@@ -6,52 +6,52 @@
 
 #define _make_p(flot) \
   if ( u4_b_p(gen, u4_atom_##flot, &p_gen) ) { \
-    u4_wire _mill_x_##flot(u4_milr, u4_noun, u4_type); \
-    return _mill_x_##flot(m, p_gen, tip); \
+    u4_loaf _mill_m_##flot(u4_milr, u4_noun, u4_type); \
+    return _mill_m_##flot(m, p_gen, tip); \
   }
 
 #define _make_pq(flot) \
   if ( u4_b_pq(gen, u4_atom_##flot, &p_gen, &q_gen) ) { \
-    u4_wire _mill_x_##flot(u4_milr, u4_noun, u4_noun, u4_type); \
-    return _mill_x_##flot(m, p_gen, q_gen, tip); \
+    u4_loaf _mill_m_##flot(u4_milr, u4_noun, u4_noun, u4_type); \
+    return _mill_m_##flot(m, p_gen, q_gen, tip); \
   }
 
 #define _make_pqr(flot) \
   if ( u4_b_pqr(gen, u4_atom_##flot, &p_gen, &q_gen, &r_gen) ) {\
-    u4_wire _mill_x_##flot(u4_milr, u4_noun, u4_noun, u4_noun, u4_type); \
-    return _mill_x_##flot(m, p_gen, q_gen, r_gen, tip); \
+    u4_loaf _mill_m_##flot(u4_milr, u4_noun, u4_noun, u4_noun, u4_type); \
+    return _mill_m_##flot(m, p_gen, q_gen, r_gen, tip); \
   }
 
-/* _mill_make_main(): internal of _mill_make().
+/* _make_main(): internal of _mill_make().
 */
-u4_wire
-_mill_make_main(u4_milr m,
-                u4_gene gen,
-                u4_type tip)
+u4_loaf
+_make_main(u4_milr m,
+           u4_gene gen,
+           u4_type tip)
 {
   u4_noun p_gen, q_gen, r_gen;
 
   if ( u4_b_fork(gen, &p_gen, &q_gen) ) {
-    return _mill_make_main
+    return _make_main
       (m, u4_k_qual(m->lane, u4_atom_cage, p_gen, q_gen, u4_noun_0), tip);
   }
   else {
-    _make_pq (link);    // ~>
-    _make_pq (kick);    // :=
-    _make_pq (cast);    // ^+
-    _make_p  (dbug);
-    _make_p  (rock);
-    _make_p  (load);
-    _make_pqr(sure);    // ^=
     _make_p  (bail);    // !!
-    _make_p  (dbug);    // !?
+    _make_pq (cast);    // ^+
+    _make_p  (cage);    // :.
+    _make_p  (dbug);
+    _make_pq (home);
+    _make_pq (kick);    // :=
+    _make_pq (like);    // ?= 
+    _make_pq (link);    // ~>
+    _make_p  (load);
+    _make_pq (mang);    // :~
+    _make_pq (name);    // :`
     _make_pq (nock);
     _make_pqr(quiz);    // ?:
-    _make_pq (name);    // :`
-    _make_p  (cage);    // :.
+    _make_p  (rock);
     _make_pq (spot);
-    _make_pq (home);
-    _make_pq (like);    // ?= 
+    _make_pqr(sure);    // ^=
 
     {
       u4_noun rex = _mill_open(m, gen);
@@ -69,24 +69,32 @@ _mill_make_main(u4_milr m,
 
 /* _mill_make(): type inference, top level.
 */
-u4_wire
+u4_loaf
 _mill_make(u4_milr m,
            u4_gene gen,
            u4_type tip)
 {
   u4_lane lane = m->lane;
   u4_noun fid  = u4_k_cell(lane, gen, tip);
-  u4_nopt raz  = u4_tab_get(fid, m->niq);
+  u4_nopt mig  = u4_tab_get(fid, m->zor);
+  u4_nopt dum  = u4_tab_get(fid, m->niq);
 
-  if ( raz ) {
-    return raz;
+  if ( (u4_bull == mig) && (u4_bull != dum) ) {
+    mig = _mill_play(m, gen, tip);
+
+    return u4_k_cell(lane, mig, dum);
+  }
+  else if ( (u4_bull != mig) && (u4_bull == dum) ) {
+    dum = _mill_bake(m, gen, tip);
+
+    return u4_k_cell(lane, mig, dum);
   }
   else {
-    /* Memoize.
-    */
-    raz = _mill_make_main(m, gen, tip);
+    u4_loaf gel = _make_main(m, gen, tip);
 
-    m->niq = u4_tab_add(lane, fid, raz, m->niq);
-    return raz;
+    m->zor = u4_tab_add(lane, fid, u4_ch(gel), m->zor);
+    m->niq = u4_tab_add(lane, fid, u4_ct(gel), m->niq);
+
+    return gel;
   }
 }
