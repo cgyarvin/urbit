@@ -16,7 +16,7 @@
       typedef u4_noun u4_herb;  //  [type gene]
       typedef u4_noun u4_pike;  //  see _mill_gene_pike()
       typedef u4_noun u4_spec;  //  lambda spec
-      typedef u4_noun u4_bone;  //  pattern boneeton
+      typedef u4_noun u4_bone;  //  pattern skeleton
       typedef u4_noun u4_bolo;  //  {list pike}
       typedef u4_noun u4_plox;  //  {list glep}
       typedef u4_noun u4_glep;  //  [tape type]
@@ -57,6 +57,10 @@
         /* Set (type gene) currently in replay (aka repo).
         */
         u4_bag fan;
+
+        /* Set (type type gene) currently in fab (_edit_cone_fab_gene).
+        */
+        u4_bag pox;
 
         /* Debug depth.
         */

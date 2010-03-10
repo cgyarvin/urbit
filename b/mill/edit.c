@@ -218,10 +218,26 @@ _edit_cone_fab_gene(u4_milr m,
                     u4_type p_gom,
                     u4_gene gen)
 {
-  u4_form goc = _mill_bake(m, gen, doz);
-  u4_form zid = _mill_bake(m, gen, p_gom);
+  u4_lane lane = m->lane;
+  u4_noun sez  = u4_k_trel(lane, doz, p_gom, gen);
 
-  return u4_n_eq(goc, zid);
+  if ( u4_bag_in(sez, m->pox) ) {
+    return 1;
+  }
+  else {
+    u4_bag pox = m->pox;
+    u4_t   fab;
+    
+    m->pox = u4_bag_add(lane, sez, m->pox);
+    {
+      u4_form goc  = _mill_bake(m, gen, doz);
+      u4_form zid  = _mill_bake(m, gen, p_gom);
+
+      fab = u4_n_eq(goc, zid);
+    }
+    m->pox = pox;
+    return fab;
+  }
 }
 
 /* _edit_cone_fab(): match a cone by fabrication.

@@ -14,6 +14,7 @@ u4_mill_init(u4_milr m,
 {
   m->lane = lane;
   m->fan = u4_noun_0;
+  m->pox = u4_noun_0;
   m->rux = u4_noun_0;
   m->zud = u4_noun_0;
   m->nix = u4_noun_0;

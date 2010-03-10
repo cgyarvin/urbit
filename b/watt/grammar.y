@@ -62,7 +62,7 @@
  
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 858
+  %expect 859
 
   %pure-parser
   %locations
@@ -104,7 +104,7 @@ bone_w
     bone_w_base
       : '@'   { $$ = u4_atom_atom; }
       | '*'   { $$ = u4_atom_blur; }
-      | '#'   { $$ = u4_atom_flag; }
+      | '?'   { $$ = u4_atom_flag; }
       ;
 
     bone_w_crib
