@@ -61,6 +61,7 @@ _mill_open(u4_milr m,
     _open_p  (rald);  // ^*
     _open_pqr(clet);  // =<
     _open_pq (flic);  // |:
+    _open_pq (lorb);  // ^:
     _open_pq (colb);  // ~<
     _open_p  (blem);  // ?!
     _open_pq (gril);  // ?-

@@ -124,6 +124,7 @@ U4_MQ_OFILES=\
        b/q/lect.o \
        b/q/prec.o \
        b/q/lome.o \
+       b/q/lorb.o \
        b/q/malk.o \
        b/q/palt.o \
        b/q/dant.o \

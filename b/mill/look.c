@@ -78,6 +78,10 @@ _look_knot(u4_milr m,
       fod = _look_knot(m, vor, ger);
 
       if ( u4_n_zero(fod) ) {
+        u4_burp(lane, "mark", u4_prep_textual(lane, cox));
+        u4_burp(lane, "type", _mill_dump(m, typ));
+
+        return _mill_fail(m, "look: not found");
         return _mill_fail(m, "look: no grip");
       }
       else {

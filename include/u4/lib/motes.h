@@ -280,6 +280,7 @@
     u4_lib_mote(lond, u4_s4('l','o','n','d'))
     u4_lib_mote(look, u4_s4('l','o','o','k'))
     u4_lib_mote(loop, u4_s4('l','o','o','p'))
+    u4_lib_mote(lorb, u4_s4('l','o','r','b'))
     u4_lib_mote(lose, u4_s4('l','o','s','e'))
     u4_lib_mote(lost, u4_s4('l','o','s','t'))
     u4_lib_mote(low,  u4_s3('l','o','w'))

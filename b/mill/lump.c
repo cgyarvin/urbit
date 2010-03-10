@@ -34,12 +34,14 @@ _lump_pick_in(u4_milr m,
               u4_noun bec)
 {
   u4_lane lane  = m->lane;
-  u4_bone i_bec = u4_ch(bec);
-  u4_noun t_bec = u4_ct(bec);
 
-  if ( u4_n_zero(t_bec) ) {
+  if ( u4_n_zero(bec) ) {
     return u4_noun_0;
-  } else {
+  } 
+  else {
+    u4_bone i_bec = u4_ch(bec);
+    u4_noun t_bec = u4_ct(bec);
+
     return u4_k_cell
       (lane, u4_k_cell(lane, u4_atom_fing, i_bec),
              _lump_pick_in(m, t_bec));
@@ -71,7 +73,7 @@ _lump_pick(u4_milr m,
        u4_k_trel
         (lane,
          u4_atom_gril,
-         u4_k_cell(lane, u4_atom_frag, u4_noun_2),
+         u4_k_cell(lane, u4_k_cell(lane, u4_atom_frag, u4_noun_2), u4_noun_0),
          _lump_pick_in(m, bec)));
   }
 }

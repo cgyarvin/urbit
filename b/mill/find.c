@@ -182,7 +182,14 @@ _find_fork(u4_milr m,
     else if ( u4_n_zero(dor) && u4_n_zero(hum) ) {
       return u4_noun_0;
     }
-    else return _mill_fail(m, "find: fork conflict");
+    else {
+      u4_burp(lane, "cox", u4_prep_textual(lane, cox));
+      u4_burp(lane, "p_typ", _mill_dump(m, p_typ));
+      u4_burp(lane, "q_typ", _mill_dump(m, q_typ));
+      u4_burp(lane, "bar", _mill_durb(m, bar));
+
+      return _mill_fail(m, "find: fork conflict");
+    }
   }
 }
 

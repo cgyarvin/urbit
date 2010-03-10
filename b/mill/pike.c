@@ -39,21 +39,28 @@ _mill_pike(u4_milr m,
   else if ( u4_b_pq(pik, u4_atom_semp, &bic, &luf) ) {
     u4_gene mip = _mill_grip(m, bic);
     u4_gene hem = _mill_gate(m, bic);
+    u4_gene dup = u4_k_trel(lane, u4_atom_kick, mox, u4_noun_0);
+    u4_gene pof = u4_k_trel
+      (lane, u4_atom_cast, u4_k_cell(lane, u4_atom_crad, u4_noun_0), dup);
+    u4_gene vir = u4_k_trel(lane, u4_atom_mang, hem, pof);
 
     *tes = u4_k_trel(lane, u4_atom_like, mox, mip);
     *bif = u4_k_trel
         (lane,
          u4_atom_grun,
-         u4_k_cell(lane, u4_k_cell(lane, mox, hem), u4_noun_0),
+         u4_k_cell(lane, u4_k_cell(lane, mox, vir), u4_noun_0),
          luf);
   }
   else if ( u4_b_p(pik, u4_atom_fing, &bic) ) {
     u4_gene mip = _mill_grip(m, bic);
     u4_gene hem = _mill_gate(m, bic);
+    u4_gene dup = u4_k_trel(lane, u4_atom_kick, mox, u4_noun_0);
+    u4_gene pof = u4_k_trel
+      (lane, u4_atom_cast, u4_k_cell(lane, u4_atom_crad, u4_noun_0), dup);
+    u4_gene vir = u4_k_trel(lane, u4_atom_mang, hem, pof);
 
     *tes = u4_k_trel(lane, u4_atom_like, mox, mip);
-    *bif = u4_k_trel
-      (lane, u4_atom_mang, hem, u4_k_trel(lane, u4_atom_kick, mox, u4_noun_0));
+    *bif = vir;
   }
   else u4_trip;
 }
