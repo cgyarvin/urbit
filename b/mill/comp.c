@@ -6,10 +6,10 @@
 
 /* _mill_comp(): compose a pipe.
 */
-u4_form
+u4_nock
 _mill_comp(u4_milr m,
-           u4_form mal,
-           u4_form buz)
+           u4_nock mal,
+           u4_nock buz)
 {
   u4_lane lane = m->lane;
   u4_noun p_mal, p_buz, q_buz, pp_buz, pq_buz;

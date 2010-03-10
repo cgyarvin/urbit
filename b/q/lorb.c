@@ -8,7 +8,7 @@
 */
 u4_noun
 _mill_q_lorb(u4_milr m, 
-             u4_bone tul,
+             u4_form tul,
              u4_gene rum)
 {
   u4_lane lane = m->lane;

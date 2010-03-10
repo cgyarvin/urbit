@@ -6,14 +6,14 @@
 
 /* _mill_p_spot()::
 */
-u4_type
+u4_mold
 _mill_p_spot(u4_milr m, 
              u4_noun xed,
              u4_gene lyq, 
-             u4_type tip)
+             u4_mold tip)
 {
   u4_noun muw = m->zud;
-  u4_type soq;
+  u4_mold soq;
 
   m->zud = xed;
   soq = _mill_play(m, lyq, tip);
@@ -24,14 +24,14 @@ _mill_p_spot(u4_milr m,
 
 /* _mill_b_spot()::
 */
-u4_form
+u4_nock
 _mill_b_spot(u4_milr m, 
              u4_noun xed,
              u4_gene lyq, 
-             u4_type tip)
+             u4_mold tip)
 {
   u4_noun muw = m->zud;
-  u4_form qip;
+  u4_nock qip;
 
   m->zud = xed;
   qip = _mill_bake(m, lyq, tip);
@@ -46,7 +46,7 @@ u4_loaf
 _mill_m_spot(u4_milr m, 
              u4_noun xed,
              u4_gene lyq, 
-             u4_type tip)
+             u4_mold tip)
 {
   u4_noun muw = m->zud;
   u4_loaf fod;

@@ -6,10 +6,10 @@
 
 /* _mill_cons(): compose a pair.
 */
-u4_form
+u4_nock
 _mill_cons(u4_milr m,
-           u4_form vor,
-           u4_form sed)
+           u4_nock vor,
+           u4_nock sed)
 {
   u4_lane lane = m->lane;
   u4_noun p_vor, p_sed;

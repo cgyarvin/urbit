@@ -6,11 +6,11 @@
 
 /* _mill_p_nock()::
 */
-u4_type
+u4_mold
 _mill_p_nock(u4_milr m, 
              u4_atom fiz,
              u4_gene dil, 
-             u4_type tip)
+             u4_mold tip)
 {
   u4_lane lane  = m->lane;
 
@@ -31,11 +31,11 @@ _mill_p_nock(u4_milr m,
 
 /* _mill_b_nock()::
 */
-u4_form
+u4_nock
 _mill_b_nock(u4_milr m, 
              u4_atom fiz,
              u4_gene dil, 
-             u4_type tip)
+             u4_mold tip)
 {
   u4_lane lane = m->lane;
 
@@ -50,7 +50,7 @@ u4_loaf
 _mill_m_nock(u4_milr m, 
              u4_atom fiz,
              u4_gene dil, 
-             u4_type tip)
+             u4_mold tip)
 {
   u4_lane lane = m->lane;
 

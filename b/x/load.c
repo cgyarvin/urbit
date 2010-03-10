@@ -7,7 +7,7 @@
 /* _load_book(): bake a book.
 */
 static u4_noun
-_load_book(u4_milr m, u4_noun pir, u4_type tip)
+_load_book(u4_milr m, u4_noun pir, u4_mold tip)
 {
   u4_lane lane = m->lane;
 
@@ -22,10 +22,10 @@ _load_book(u4_milr m, u4_noun pir, u4_type tip)
 
 /* _mill_p_load()::
 */
-u4_type
+u4_mold
 _mill_p_load(u4_milr m, 
              u4_noun pir,
-             u4_type tip)
+             u4_mold tip)
 {
   u4_lane lane = m->lane;
 
@@ -34,13 +34,13 @@ _mill_p_load(u4_milr m,
 
 /* _mill_b_load()::
 */
-u4_form
+u4_nock
 _mill_b_load(u4_milr m, 
              u4_noun pir,
-             u4_type tip)
+             u4_mold tip)
 {
   u4_lane lane = m->lane;
-  u4_type gan  = u4_k_trel(lane, u4_atom_cone, tip, pir);
+  u4_mold gan  = u4_k_trel(lane, u4_atom_cone, tip, pir);
   u4_noun fez  = _load_book(m, pir, gan);
 
   return u4_k_cell
@@ -53,10 +53,10 @@ _mill_b_load(u4_milr m,
 u4_loaf
 _mill_m_load(u4_milr m, 
              u4_noun pir,
-             u4_type tip)
+             u4_mold tip)
 {
   u4_lane lane = m->lane;
-  u4_type gan  = u4_k_trel(lane, u4_atom_cone, tip, pir);
+  u4_mold gan  = u4_k_trel(lane, u4_atom_cone, tip, pir);
   u4_noun fez  = _load_book(m, pir, gan);
 
   return u4_k_cell

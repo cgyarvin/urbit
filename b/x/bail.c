@@ -6,7 +6,7 @@
 
 /* _mill_p_bail()::
 */
-u4_type
+u4_mold
 _mill_p_bail(u4_milr m, 
              u4_noun guk)
 {
@@ -15,7 +15,7 @@ _mill_p_bail(u4_milr m,
 
 /* _mill_b_bail()::
 */
-u4_form
+u4_nock
 _mill_b_bail(u4_milr m, 
              u4_noun guk)
 {

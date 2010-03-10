@@ -6,28 +6,28 @@
 
 /* _mill_p_link()::
 */
-u4_type
+u4_mold
 _mill_p_link(u4_milr m, 
              u4_gene del,
              u4_gene zim, 
-             u4_type tip)
+             u4_mold tip)
 {
-  u4_type jes  = _mill_play(m, del, tip);
-  u4_type dux  = _mill_play(m, zim, jes);
+  u4_mold jes  = _mill_play(m, del, tip);
+  u4_mold dux  = _mill_play(m, zim, jes);
 
   return dux;
 }
 
 /* _mill_b_link()::
 */
-u4_form
+u4_nock
 _mill_b_link(u4_milr m, 
              u4_gene del,
              u4_gene zim, 
-             u4_type tip)
+             u4_mold tip)
 {
   u4_loaf fod = _mill_make(m, del, tip);
-  u4_form pum = _mill_bake(m, zim, u4_ch(fod));
+  u4_nock pum = _mill_bake(m, zim, u4_ch(fod));
 
   return _mill_comp(m, u4_ct(fod), pum);
 }
@@ -38,7 +38,7 @@ u4_loaf
 _mill_m_link(u4_milr m, 
              u4_gene del,
              u4_gene zim, 
-             u4_type tip)
+             u4_mold tip)
 {
   u4_lane lane  = m->lane;
   u4_loaf fod = _mill_make(m, del, tip);

@@ -6,10 +6,10 @@
 
 /* _mill_both(): fuse pair.
 */
-u4_form
+u4_nock
 _mill_both(u4_milr m,
-           u4_type nem,
-           u4_type dif)
+           u4_mold nem,
+           u4_mold dif)
 {
   if ( u4_n_eq(nem, dif) ) {
     return dif;

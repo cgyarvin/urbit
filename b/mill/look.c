@@ -36,7 +36,7 @@ _is_frag(u4_knot sod,
 u4_loaf
 _look_knot(u4_milr m,
            u4_knot vor,
-           u4_type typ)
+           u4_mold typ)
 {
   u4_lane lane = m->lane;
   u4_tick tik;
@@ -49,7 +49,7 @@ _look_knot(u4_milr m,
 
     if ( u4_n_zero(fod) ) {
       u4_burp(lane, "mark", u4_prep_textual(lane, cox));
-      u4_burp(lane, "type", _mill_dump(m, typ));
+      u4_burp(lane, "mold", _mill_dump(m, typ));
 
       return _mill_fail(m, "look: not found");
     }
@@ -57,10 +57,10 @@ _look_knot(u4_milr m,
       return fod;
     }
     else {
-      u4_type lem = u4_ch(fod);
-      u4_form vil = u4_ct(fod);
+      u4_mold lem = u4_ch(fod);
+      u4_nock vil = u4_ct(fod);
       u4_noun p_vil;
-      u4_type ger;
+      u4_mold ger;
 
       vor = u4_k_trel(lane, u4_atom_lect, u4_op_dec(lane, tik), cox);
 
@@ -79,7 +79,7 @@ _look_knot(u4_milr m,
 
       if ( u4_n_zero(fod) ) {
         u4_burp(lane, "mark", u4_prep_textual(lane, cox));
-        u4_burp(lane, "type", _mill_dump(m, typ));
+        u4_burp(lane, "mold", _mill_dump(m, typ));
 
         return _mill_fail(m, "look: not found");
         return _mill_fail(m, "look: no grip");
@@ -104,7 +104,7 @@ _look_knot(u4_milr m,
 u4_loaf
 _mill_look(u4_milr m,
            u4_rope fes,
-           u4_type typ)
+           u4_mold typ)
 {
   u4_lane lane = m->lane;
 

@@ -14,7 +14,7 @@ _mill_pike(u4_milr m,
            u4_gene *bif)
 {
   u4_lane lane = m->lane;
-  u4_bone bic;
+  u4_form bic;
   u4_gene luf;
 
   // u4_err(lane, "pik", pik);

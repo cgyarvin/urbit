@@ -23,9 +23,9 @@
   }
 
 
-/* _mill_open(): type inference, top level.
+/* _mill_open(): mold inference, top level.
 */
-u4_type 
+u4_mold 
 _mill_open(u4_milr m,
            u4_gene gen)
 {

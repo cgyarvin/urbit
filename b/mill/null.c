@@ -6,8 +6,8 @@
 
   /** Forward declarations.
   **/
-    static u4_t _null_orth(u4_milr, u4_bag, u4_bag, u4_type, u4_type);
-    static u4_t _null_main(u4_milr, u4_bag, u4_type);
+    static u4_t _null_orth(u4_milr, u4_bag, u4_bag, u4_mold, u4_mold);
+    static u4_t _null_main(u4_milr, u4_bag, u4_mold);
 
 /* _null_orth_cube(): as _null_orth(), for atomic cube.
 */
@@ -16,7 +16,7 @@ _null_orth_cube(u4_milr m,
                 u4_bag  ham, 
                 u4_bag  cal,
                 u4_atom pp_typ,
-                u4_type q_typ)
+                u4_mold q_typ)
 {
   u4_lane lane = m->lane;
   u4_noun pq_typ, qq_typ;
@@ -76,7 +76,7 @@ static u4_t
 _null_orth_atom(u4_milr m,
                 u4_bag  ham,
                 u4_bag  cal,
-                u4_type q_typ)
+                u4_mold q_typ)
 {
   u4_lane lane = m->lane;
   u4_noun pq_typ, qq_typ;
@@ -134,9 +134,9 @@ static u4_t
 _null_orth_cell(u4_milr m,
                 u4_bag  ham,
                 u4_bag  cal,
-                u4_type pp_typ,
-                u4_type qp_typ,
-                u4_type q_typ)
+                u4_mold pp_typ,
+                u4_mold qp_typ,
+                u4_mold q_typ)
 {
   u4_lane lane = m->lane;
   u4_noun pq_typ, qq_typ;
@@ -202,8 +202,8 @@ static u4_t
 _null_orth(u4_milr m,
            u4_bag  ham,
            u4_bag  cal,
-           u4_type p_typ,
-           u4_type q_typ)
+           u4_mold p_typ,
+           u4_mold q_typ)
 {
   u4_lane lane = m->lane;
   u4_noun pp_typ, qp_typ;
@@ -265,7 +265,7 @@ _null_orth(u4_milr m,
 static u4_t
 _null_main(u4_milr m,
            u4_bag  ham,
-           u4_type typ)
+           u4_mold typ)
 {
   u4_lane lane = m->lane;
   u4_noun p_typ, q_typ;
@@ -308,11 +308,11 @@ _null_main(u4_milr m,
 }
 
 
-/* _mill_null(): true if type is empty.
+/* _mill_null(): true if mold is empty.
 */
 u4_t
 _mill_null(u4_milr m,
-           u4_type typ)
+           u4_mold typ)
 {
   u4_nopt reb = u4_tab_get(typ, m->dam);
 

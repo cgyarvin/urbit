@@ -6,16 +6,16 @@
 
 /* _snap_cell(): adjust [ger] for assignment into [%cell p_lom q_lom].
 */
-static u4_type
+static u4_mold
 _snap_cell(u4_milr m,
-           u4_type p_lom,
-           u4_type q_lom,
-           u4_type ger)
+           u4_mold p_lom,
+           u4_mold q_lom,
+           u4_mold ger)
 {
   u4_lane lane = m->lane;
   u4_noun p_ger, q_ger;
 
-  // [%cell p=type q=type]
+  // [%cell p=mold q=mold]
   //
   if ( u4_b_pq(ger, u4_atom_cell, &p_ger, &q_ger) ) {
     return u4_k_trel
@@ -31,7 +31,7 @@ _snap_cell(u4_milr m,
              _snap_cell(m, p_lom, q_lom, p_ger),
              _snap_cell(m, p_lom, q_lom, q_ger));
   }
-  // [%fuse p=type q=type]
+  // [%fuse p=mold q=mold]
   //
   else if ( u4_b_pq(ger, u4_atom_fuse, &p_ger, &q_ger) ) {
     // Not at all clear that this is necessary.  But it can't hurt.
@@ -46,16 +46,16 @@ _snap_cell(u4_milr m,
 
 /* _snap_face(): adjust [ger] for assignment into [%face p_lom q_lom].
 */
-static u4_type
+static u4_mold
 _snap_face(u4_milr m,
            u4_mark p_lom,
-           u4_type q_lom,
-           u4_type ger)
+           u4_mold q_lom,
+           u4_mold ger)
 {
   u4_lane lane = m->lane;
   u4_noun p_ger, q_ger;
 
-  // [%face p=mark q=type]
+  // [%face p=mark q=mold]
   //
   if ( u4_b_pq(ger, u4_atom_face, &p_ger, &q_ger) ) {
     if ( u4_n_eq(p_lom, p_ger) ) {
@@ -66,7 +66,7 @@ _snap_face(u4_milr m,
     }
   }
 
-  // [%fork p=type q=type]
+  // [%fork p=mold q=mold]
   //
   else if ( u4_b_pq(ger, u4_atom_fork, &p_ger, &q_ger) ) {
     // Not at all clear that this is necessary.  But it can't hurt.
@@ -77,7 +77,7 @@ _snap_face(u4_milr m,
              _snap_cell(m, p_lom, q_lom, q_ger));
   }
 
-  // [%fuse p=type q=type]
+  // [%fuse p=mold q=mold]
   //
   else if ( u4_b_pq(ger, u4_atom_fuse, &p_ger, &q_ger) ) {
     // Not at all clear that this is necessary.  But it can't hurt.
@@ -95,26 +95,26 @@ _snap_face(u4_milr m,
 
 /* _mill_snap(): adjust [ger] for assignment into [lom].
 */
-u4_type
+u4_mold
 _mill_snap(u4_milr m,
-           u4_type lom,
-           u4_type ger)
+           u4_mold lom,
+           u4_mold ger)
 {
   u4_noun p_lom, q_lom;
 
-  // [%cell p=type q=type]
+  // [%cell p=mold q=mold]
   //
   if ( u4_b_pq(lom, u4_atom_cell, &p_lom, &q_lom) ) {
     return _snap_cell(m, p_lom, q_lom, ger);
   }
 
-  // [%face p=mark q=type]
+  // [%face p=mark q=mold]
   //
   else if ( u4_b_pq(lom, u4_atom_face, &p_lom, &q_lom) ) {
     return _snap_face(m, p_lom, q_lom, ger);
   }
 
-  // [%fuse p=type q=type]
+  // [%fuse p=mold q=mold]
   //
   else if ( u4_b_pq(lom, u4_atom_fuse, &p_lom, &q_lom) ) {
     return _mill_snap(m, q_lom, ger);

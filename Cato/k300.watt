@@ -167,19 +167,28 @@
         (eq 0 a)
 
 
-::::::::::  Tier 1: simple logic and arithmetic
+::::::::::  Tier 1: recursive data structures
 ::::::::::
 
   ::::::::  list                linked list
   ::
     - list
-      =>  a *
+      ->  [a=*]
       |=
-        |:  b = *
-        ==
-          ?-  b
-            =   ~
-            =   [i=a b=(list a)]
+        |~
+          **
+            ~
+            [i=a b=(list a)]
           ==
 
+  ::::::::  bush    
+  ::
+    - bush
+      ->  [a=@ b=*]
+      |=
+        |~
+          ** 
+            [p=@:a q=b]
+            [p=[* *]:(bush a b) q=(bush a b)]
+          ==
 ==

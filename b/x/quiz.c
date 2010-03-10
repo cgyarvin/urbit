@@ -6,15 +6,15 @@
 
 /* _mill_p_quiz()::
 */
-u4_type
+u4_mold
 _mill_p_quiz(u4_milr m, 
              u4_gene tes,
              u4_gene bif, 
              u4_gene hob, 
-             u4_type tip)
+             u4_mold tip)
 {
   u4_loaf ruf  = _mill_test(m, tes, tip);
-  u4_form fal  = u4_ct(ruf);
+  u4_nock fal  = u4_ct(ruf);
 
   if ( u4_n_eq(u4_noun_1, u4_ch(fal)) ) {
     if ( u4_n_eq(u4_noun_0, u4_ct(fal)) ) {
@@ -24,8 +24,8 @@ _mill_p_quiz(u4_milr m,
     }
   }
   else {
-    u4_type tuv = _mill_play(m, bif, u4_ch(ruf));
-    u4_type miz = _mill_play(m, hob, tip);
+    u4_mold tuv = _mill_play(m, bif, u4_ch(ruf));
+    u4_mold miz = _mill_play(m, hob, tip);
 
     return _mill_eith(m, tuv, miz);
   }
@@ -33,15 +33,15 @@ _mill_p_quiz(u4_milr m,
 
 /* _mill_b_quiz()::
 */
-u4_form
+u4_nock
 _mill_b_quiz(u4_milr m, 
              u4_gene tes,
              u4_gene bif, 
              u4_gene hob, 
-             u4_type tip)
+             u4_mold tip)
 {
   u4_loaf ruf  = _mill_test(m, tes, tip);
-  u4_form fal  = u4_ct(ruf);
+  u4_nock fal  = u4_ct(ruf);
 
   if ( u4_n_eq(u4_noun_1, u4_ch(fal)) ) {
     if ( u4_n_eq(u4_noun_0, u4_ct(fal)) ) {
@@ -51,8 +51,8 @@ _mill_b_quiz(u4_milr m,
     }
   }
   else {
-    u4_form piz = _mill_bake(m, bif, u4_ch(ruf));
-    u4_form duf = _mill_bake(m, hob, tip);
+    u4_nock piz = _mill_bake(m, bif, u4_ch(ruf));
+    u4_nock duf = _mill_bake(m, hob, tip);
 
     return u4_k_qual(m->lane, u4_noun_2, fal, piz, duf);
   }
@@ -65,11 +65,11 @@ _mill_m_quiz(u4_milr m,
              u4_gene tes,
              u4_gene bif, 
              u4_gene hob, 
-             u4_type tip)
+             u4_mold tip)
 {
   u4_lane lane = m->lane;
   u4_loaf ruf  = _mill_test(m, tes, tip);
-  u4_form fal  = u4_ct(ruf);
+  u4_nock fal  = u4_ct(ruf);
 
   if ( u4_n_eq(u4_noun_1, u4_ch(fal)) ) {
     if ( u4_n_eq(u4_noun_0, u4_ct(fal)) ) {

@@ -1,4 +1,4 @@
-/* mill/type.c
+/* mill/mold.c
 **
 ** This file is in the public domain.
 */
@@ -9,16 +9,16 @@
   /** Forward declarations.
   **/
     static u4_noun
-    _type_clip(u4_milr, u4_lump);
+    _mold_book(u4_milr, u4_lump);
 
     static u4_noun
-    _type_mark(u4_milr, u4_lump);
+    _mold_mark(u4_milr, u4_lump);
 
 
-/* _mill_type(): normalize type.
+/* _mill_mold(): normalize mold.
 */
-u4_type
-_mill_type(u4_milr m,
+u4_mold
+_mill_mold(u4_milr m,
            u4_lump muf)
 {
   u4_lane lane = m->lane;
@@ -35,18 +35,18 @@ _mill_type(u4_milr m,
     return muf;
   }
 
-  // [%cell p=type q=type]
+  // [%cell p=mold q=mold]
   //
   else if ( u4_b_pq(muf, u4_atom_cell, &p_muf, &q_muf) ) {
     return u4_k_trel
-      (lane, u4_atom_cell, _mill_type(m, p_muf), _mill_type(m, q_muf));
+      (lane, u4_atom_cell, _mill_mold(m, p_muf), _mill_mold(m, q_muf));
   }
 
-  // [%cone p=type q=bush+[mark gene]]
+  // [%cone p=mold q=bush+[mark gene]]
   //
   else if ( u4_b_pq(muf, u4_atom_cone, &p_muf, &q_muf) ) {
     return u4_k_trel
-      (lane, u4_atom_cone, _mill_type(m, p_muf), _type_clip(m, q_muf));
+      (lane, u4_atom_cone, _mill_mold(m, p_muf), _mold_book(m, q_muf));
   }
 
   // [%cube p=clod]
@@ -55,62 +55,62 @@ _mill_type(u4_milr m,
     return muf;
   }
 
-  // [%face p=mark q=type]
+  // [%face p=mark q=mold]
   //
   else if ( u4_b_pq(muf, u4_atom_face, &p_muf, &q_muf) ) {
     return u4_k_trel
-      (lane, u4_atom_face, _type_mark(m, p_muf), _mill_type(m, q_muf));
+      (lane, u4_atom_face, _mold_mark(m, p_muf), _mill_mold(m, q_muf));
   }
 
-  // [%fork p=type q=type]
+  // [%fork p=mold q=mold]
   //
   else if ( u4_b_pq(muf, u4_atom_fork, &p_muf, &q_muf) ) {
     return u4_k_trel
-      (lane, u4_atom_fork, _mill_type(m, p_muf), _mill_type(m, q_muf));
+      (lane, u4_atom_fork, _mill_mold(m, p_muf), _mill_mold(m, q_muf));
   }
 
-  // [%fuse p=type q=type]
+  // [%fuse p=mold q=mold]
   //
   else if ( u4_b_pq(muf, u4_atom_fuse, &p_muf, &q_muf) ) {
     return u4_k_trel
-      (lane, u4_atom_fuse, _mill_type(m, p_muf), _mill_type(m, q_muf));
+      (lane, u4_atom_fuse, _mill_mold(m, p_muf), _mill_mold(m, q_muf));
   }
 
-  // [%hold p=(type) q=(gene)]
+  // [%hold p=(mold) q=(gene)]
   //
   else if ( u4_b_pq(muf, u4_atom_hold, &p_muf, &q_muf) ) {
     return u4_k_trel
-      (lane, u4_atom_hold, _mill_type(m, p_muf), _mill_gene(m, q_muf));
+      (lane, u4_atom_hold, _mill_mold(m, p_muf), _mill_gene(m, q_muf));
   }
 
   else {
-    return _mill_fail(m, "type: flot");
+    return _mill_fail(m, "mold: flot");
   }
 }
 
-/* _type_clip(): normalize clip.
+/* _mold_book(): normalize book.
 */
 static u4_noun
-_type_clip(u4_milr m,
+_mold_book(u4_milr m,
            u4_lump beq)
 {
   if ( u4_n_cell(u4_ch(beq)) ) {
     return u4_k_cell
-      (m->lane, _type_clip(m, u4_ch(beq)), _type_clip(m, u4_ct(beq)));
+      (m->lane, _mold_book(m, u4_ch(beq)), _mold_book(m, u4_ct(beq)));
   }
   else {
     return u4_k_cell(m->lane, u4_ch(beq), _mill_gene(m, u4_ct(beq)));
   }
 }
 
-/* _type_mark(): normalize mark.
+/* _mold_mark(): normalize mark.
 */
 static u4_noun
-_type_mark(u4_milr m,
+_mold_mark(u4_milr m,
            u4_lump vof)
 {
   if ( !u4_n_atom(vof) ) {
-    return _mill_fail(m, "type: invalid mark");
+    return _mill_fail(m, "mold: invalid mark");
   }
   else return vof;
 }

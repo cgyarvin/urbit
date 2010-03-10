@@ -4,13 +4,13 @@
 */
 #include "u4/all.h"
 
-/* _salt_walk(): produce type and formula modifications.
+/* _salt_walk(): produce mold and nockula modifications.
 */
 static void
 _salt_walk(u4_milr m,
            u4_bolt suc,
-           u4_type zor,
-           u4_type fuz,
+           u4_mold zor,
+           u4_mold fuz,
            u4_plox *zel,
            u4_belt *vix)
 {
@@ -25,12 +25,12 @@ _salt_walk(u4_milr m,
     u4_rope pi_suc = u4_ch(i_suc);
     u4_gene qi_suc = u4_ct(i_suc);
     u4_axis axe    = u4_noun_1;
-    u4_type buv;
+    u4_mold buv;
     u4_tape gut    = _mill_hunt(m, pi_suc, fuz, &axe, &buv);
     u4_loaf wid    = _mill_make(m, qi_suc, zor);
-    u4_type p_wid  = u4_ch(wid);
-    u4_form q_wid  = u4_ct(wid);
-    u4_type nar    = _mill_snap(m, buv, p_wid);
+    u4_mold p_wid  = u4_ch(wid);
+    u4_nock q_wid  = u4_ct(wid);
+    u4_mold nar    = _mill_snap(m, buv, p_wid);
 
     _salt_walk(m, u4_ct(suc), zor, fuz, zel, vix);
 
@@ -49,21 +49,21 @@ _salt_walk(u4_milr m,
 /* _mill_salt(): modify a change target.
 **
 **    suc: changes:  bolt
-**    pex: subject:  type
-**    fuz: target:   type
+**    pex: subject:  mold
+**    fuz: target:   mold
 **    ped: fragment: axis
 */
 u4_loaf
 _mill_salt(u4_milr m,
            u4_bolt suc,
-           u4_type pex,
-           u4_type fuz,
+           u4_mold pex,
+           u4_mold fuz,
            u4_axis ped)
 {
   u4_belt vix = u4_noun_0;
   u4_plox zel = u4_noun_0;
-  u4_type gob;
-  u4_form fol;
+  u4_mold gob;
+  u4_nock fol;
 
   _salt_walk(m, suc, pex, fuz, &zel, &vix);
 

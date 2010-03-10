@@ -7,7 +7,7 @@
     /** Forward declarations.
     **/
       static u4_prep
-      _dump_main(u4_milr, u4_bag, u4_bag, u4_type);
+      _dump_main(u4_milr, u4_bag, u4_bag, u4_mold);
 
 
 /* _dump_count()::
@@ -56,8 +56,8 @@ static u4_prep
 _dump_cone(u4_milr m,
            u4_bag  gil,
            u4_bag  nip,
-           u4_type p_typ,
-           u4_clip q_typ)
+           u4_mold p_typ,
+           u4_book q_typ)
 {
   u4_lane lane = m->lane;
   u4_prep gum;
@@ -86,7 +86,7 @@ static u4_noun
 _dump_forks(u4_milr m,
             u4_bag  gil,
             u4_bag  nip,
-            u4_type typ)
+            u4_mold typ)
 {
   u4_lane lane = m->lane;
   u4_noun p_typ, q_typ;
@@ -110,7 +110,7 @@ static u4_prep
 _dump_main(u4_milr m,
            u4_bag  gil,
            u4_bag  nip,
-           u4_type typ)
+           u4_mold typ)
 {
   u4_lane lane = m->lane;
   u4_noun p_typ, q_typ;
@@ -247,11 +247,11 @@ _mill_durb(u4_milr m,
     (m->lane, '(', ')', _durb_in(m, bar));
 }
 
-/* _mill_dump(): prepare type for printing.
+/* _mill_dump(): prepare mold for printing.
 */
 u4_prep
 _mill_dump(u4_milr m,
-           u4_type typ)
+           u4_mold typ)
 {
   u4_bag gil = _mill_seal(m, typ);
 

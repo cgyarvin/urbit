@@ -6,13 +6,13 @@
 
 /* _mill_p_dbug()::
 */
-u4_type
+u4_mold
 _mill_p_dbug(u4_milr m, 
              u4_gene lyq,
-             u4_type tip)
+             u4_mold tip)
 {
   u4_lane lane = m->lane;
-  u4_type zat;
+  u4_mold zat;
 
   m->rux = u4_op_inc(lane, m->rux);
   zat = _mill_play(m, lyq, tip);
@@ -23,13 +23,13 @@ _mill_p_dbug(u4_milr m,
 
 /* _mill_b_dbug()::
 */
-u4_form
+u4_nock
 _mill_b_dbug(u4_milr m, 
              u4_gene lyq,
-             u4_type tip)
+             u4_mold tip)
 {
   u4_lane lane = m->lane;
-  u4_form gof;
+  u4_nock gof;
 
   m->rux = u4_op_inc(lane, m->rux);
   gof = _mill_bake(m, lyq, tip);
@@ -43,7 +43,7 @@ _mill_b_dbug(u4_milr m,
 u4_loaf
 _mill_m_dbug(u4_milr m, 
              u4_gene lyq,
-             u4_type tip)
+             u4_mold tip)
 {
   u4_lane lane = m->lane;
   u4_loaf fod;

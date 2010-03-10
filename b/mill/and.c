@@ -6,10 +6,10 @@
 
 /* _mill_and(): make and.
 */
-u4_form
+u4_nock
 _mill_and(u4_milr m,
-          u4_form zeg,
-          u4_form dac)
+          u4_nock zeg,
+          u4_nock dac)
 {
   u4_lane lane = m->lane;
 
