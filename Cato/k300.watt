@@ -2,25 +2,8 @@
 ::
 
 |+
-::::::::::  Tier 0: basic types
-::::::::::
 
-  ::::::::  noun                any noun
-  ::
-    - noun
-      =>  a ^-{:3.0 0}
-      |=
-        a
-   
-  ::::::::  flag                lunary (0 = yes, 1 = no)
-  ::
-    - flag
-      |:  a = noun
-      ==
-        :6.[0 a]
-
-
-::::::::::  Tier 1: simple logic and arithmetic
+::::::::::  Tier 0: simple logic and arithmetic
 ::::::::::
 
   ::::::::  add                 atomic add
@@ -65,8 +48,8 @@
   ::
     - eq
       ||  flag
-        a = noun
-        b = noun
+        a = *
+        b = *
       ==
         :6.[a b] 
 
@@ -191,7 +174,7 @@
   ::
     - pat
       ||  flag
-        a = noun
+        a = *
       ==
         !(tap a)
 
@@ -210,7 +193,7 @@
   ::
     - tap
       ||  flag
-        a = noun
+        a = *
       ==
         :4.a
 

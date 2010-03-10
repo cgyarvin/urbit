@@ -188,11 +188,17 @@
                    u4_rail bar,
                    u4_type tip);
 
-      /* _mill_dump(): prepare for printing.
+      /* _mill_dump(): prepare type for printing.
       */
         u4_prep
         _mill_dump(u4_milr m,
                    u4_type tip);
+
+      /* _mill_durb(): prepare rail for printing.
+      */
+        u4_prep
+        _mill_durb(u4_milr m,
+                   u4_rail bar);
 
       /* _mill_edit(): edit a type to reflect a list of writes.
       */

@@ -9,10 +9,10 @@
     static u4_t _null_orth(u4_milr, u4_bag, u4_bag, u4_type, u4_type);
     static u4_t _null_main(u4_milr, u4_bag, u4_type);
 
-/* _null_orth_plum(): as _null_orth(), for atomic cube.
+/* _null_orth_cube(): as _null_orth(), for atomic cube.
 */
 static u4_t
-_null_orth_plum(u4_milr m,
+_null_orth_cube(u4_milr m,
                 u4_bag  ham, 
                 u4_bag  cal,
                 u4_atom pp_typ,
@@ -34,7 +34,7 @@ _null_orth_plum(u4_milr m,
   }
 
   else if ( u4_b_p(q_typ, u4_atom_cube, &pq_typ) ) {
-    if ( u4_n_atom(pq_typ) ) {
+    if ( u4_n_eq(pp_typ, pq_typ) ) {
       return u4_false;
     } 
     else return u4_true;
@@ -42,14 +42,14 @@ _null_orth_plum(u4_milr m,
 
   else if ( u4_b_pq(q_typ, u4_atom_fork, &pq_typ, &qq_typ) ) {
     return ( _null_main(m, ham, pq_typ) ||
-             _null_orth_plum(m, ham, cal, pp_typ, pq_typ) ) &&
+             _null_orth_cube(m, ham, cal, pp_typ, pq_typ) ) &&
            ( _null_main(m, ham, qq_typ) ||
-             _null_orth_plum(m, ham, cal, pp_typ, qq_typ) );
+             _null_orth_cube(m, ham, cal, pp_typ, qq_typ) );
   }
 
   else if ( u4_b_pq(q_typ, u4_atom_fuse, &pq_typ, &qq_typ) ) {
-    return _null_orth_plum(m, ham, cal, pp_typ, pq_typ) ||
-           _null_orth_plum(m, ham, cal, pp_typ, qq_typ);
+    return _null_orth_cube(m, ham, cal, pp_typ, pq_typ) ||
+           _null_orth_cube(m, ham, cal, pp_typ, qq_typ);
   }
 
   else if ( u4_b_pq(q_typ, u4_atom_hold, &pq_typ, &qq_typ) ) {
@@ -60,14 +60,14 @@ _null_orth_plum(u4_milr m,
       return 1;
     }
     else {
-      return _null_orth_plum
+      return _null_orth_cube
         (m, ham, 
             u4_bag_add(lane, fum, cal), 
             pp_typ,
             _mill_repo(m, pq_typ, qq_typ));
     }
   }
-  else return _null_orth_plum(m, ham, cal, pp_typ, _mill_reap(m, q_typ));
+  else return _null_orth_cube(m, ham, cal, pp_typ, _mill_reap(m, q_typ));
 }
 
 /* _null_orth_atom(): as _null_orth(), for bead.
@@ -151,7 +151,7 @@ _null_orth_cell(u4_milr m,
 
   else if ( u4_b_pq(q_typ, u4_atom_cell, &pq_typ, &qq_typ) ) {
     return _null_orth(m, ham, cal, pp_typ, pq_typ) ||
-           _null_orth(m, ham, cal, pq_typ, qq_typ);
+           _null_orth(m, ham, cal, qp_typ, qq_typ);
   }
 
   else if ( u4_b_p(q_typ, u4_atom_cube, &pq_typ) ) {
@@ -225,7 +225,7 @@ _null_orth(u4_milr m,
 
   else if ( u4_b_p(p_typ, u4_atom_cube, &pp_typ) ) {
     if ( u4_n_atom(pp_typ) ) {
-      return _null_orth_plum(m, ham, cal, pp_typ, q_typ);
+      return _null_orth_cube(m, ham, cal, pp_typ, q_typ);
     }
     else return _null_orth(m, ham, cal, _mill_reap(m, p_typ), q_typ);
   }

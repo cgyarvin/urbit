@@ -87,6 +87,10 @@ _mill_test(u4_milr m,
     u4_type jac = _mill_edit(m, zel, u4_noun_0, u4_atom_blur);
 
     if ( _mill_orth(m, buv, hur) ) {
+      if ( !u4_n_zero(m->rux) ) {
+        u4_burp(lane, "orth: buv", _mill_dump(m, buv));
+        u4_burp(lane, "orth: hur", _mill_dump(m, hur));
+      }
       return u4_k_trel(lane, u4_atom_blot, u4_noun_1, u4_noun_1);
     }
     else if ( _mill_nest(m, buv, hur) ) {

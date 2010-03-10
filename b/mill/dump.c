@@ -223,6 +223,32 @@ _dump_main(u4_milr m,
   }
 }
 
+/* _durb_in()::
+*/
+static u4_noun
+_durb_in(u4_milr m,
+         u4_rail bar)
+{
+  if ( u4_n_zero(bar) ) {
+    return u4_noun_0;
+  } else {
+    return u4_k_cell(m->lane, _mill_dump(m, u4_ch(bar)), 
+                              _durb_in(m, u4_ct(bar)));
+  }
+}
+
+/* _mill_durb(): prepare rail for printing.
+*/
+u4_prep
+_mill_durb(u4_milr m,
+           u4_rail bar)
+{
+  return u4_prep_close
+    (m->lane, '(', ')', _durb_in(m, bar));
+}
+
+/* _mill_dump(): prepare type for printing.
+*/
 u4_prep
 _mill_dump(u4_milr m,
            u4_type typ)
