@@ -10,7 +10,7 @@
 u4_wire
 _mill_test_and(u4_milr m,
                u4_noun p_gen,
-               u4_type typ)
+               u4_mold typ)
 {
   u4_lane lane = m->lane;
 
@@ -40,7 +40,7 @@ _mill_test_and(u4_milr m,
 u4_wire
 _mill_test_or(u4_milr m,
               u4_noun p_gen,
-              u4_type typ)
+              u4_mold typ)
 {
   u4_lane lane = m->lane;
 
@@ -68,23 +68,23 @@ _mill_test_or(u4_milr m,
 
 /* _mill_test(): analyze branch test.
 **
-** Produce (p.type q.form).  p is the yes type.  q is the test.
+** Produce (p.mold q.nock).  p is the yes mold.  q is the test.
 */
 u4_wire
 _mill_test(u4_milr m,
            u4_gene gen,
-           u4_type typ)
+           u4_mold typ)
 {
   u4_lane lane = m->lane;
   u4_noun p_gen, q_gen;
 
   if ( u4_b_pq(gen, u4_atom_like, &p_gen, &q_gen) ) {
     u4_axis axe = u4_noun_1;
-    u4_type buv;
+    u4_mold buv;
     u4_tape res = _mill_hunt(m, p_gen, typ, &axe, &buv);
-    u4_type hur = _mill_play(m, q_gen, typ);
+    u4_mold hur = _mill_play(m, q_gen, typ);
     u4_plox zel = u4_k_cell(lane, u4_k_cell(lane, res, hur), u4_noun_0);
-    u4_type jac = _mill_edit(m, zel, u4_noun_0, u4_atom_blur);
+    u4_mold jac = _mill_edit(m, zel, u4_noun_0, u4_atom_blur);
 
     if ( _mill_orth(m, buv, hur) ) {
       if ( !u4_n_zero(m->rux) ) {

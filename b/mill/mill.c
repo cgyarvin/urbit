@@ -6,7 +6,7 @@
 
 /* u4_mill(): 
 **
-**   Convert [gene type] to [type form].
+**   Convert [gene mold] to [mold nock].
 */
 u4_loaf
 u4_mill(u4_lane lane,

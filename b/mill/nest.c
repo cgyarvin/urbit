@@ -6,7 +6,7 @@
 
   /** Forward declarations.
   **/
-    static u4_t _nest_main(u4_milr, u4_bag, u4_rail, u4_type, u4_type);
+    static u4_t _nest_main(u4_milr, u4_bag, u4_rail, u4_mold, u4_mold);
 
 
 /* _nest_atom(): congruence iff bead.
@@ -15,7 +15,7 @@ static u4_t
 _nest_atom(u4_milr m,
            u4_bag  hax,
            u4_rail meg,
-           u4_type gan)
+           u4_mold gan)
 {
   u4_lane lane = m->lane;
   u4_noun p_gan, q_gan;
@@ -32,13 +32,13 @@ _nest_atom(u4_milr m,
     return u4_false;
   }
 
-  // [%cell p=type q=type]
+  // [%cell p=mold q=mold]
   //
   else if ( u4_b_pq(gan, u4_atom_cell, &p_gan, &q_gan) ) {
     return u4_false;
   }
 
-  // [%cone p=type q=bush+[term type]]
+  // [%cone p=mold q=bush+[term mold]]
   //
   else if ( u4_b_pq(gan, u4_atom_cone, &p_gan, &q_gan) ) {
     return u4_false;
@@ -53,27 +53,27 @@ _nest_atom(u4_milr m,
     else return u4_false;
   }
 
-  // [%face p=mark q=type]
+  // [%face p=mark q=mold]
   //
   if ( u4_b_pq(gan, u4_atom_face, &p_gan, &q_gan) ) {
     return _nest_atom(m, hax, meg, q_gan);
   }
 
-  // [%fork p=type q=type]
+  // [%fork p=mold q=mold]
   //
   else if ( u4_b_pq(gan, u4_atom_fork, &p_gan, &q_gan) ) {
     return ( (_mill_cull(m, meg, p_gan) || _nest_atom(m, hax, meg, p_gan)) &&
              (_mill_cull(m, meg, q_gan) || _nest_atom(m, hax, meg, q_gan)) );
   }
 
-  // [%fuse p=type q=type]
+  // [%fuse p=mold q=mold]
   //
   else if ( u4_b_pq(gan, u4_atom_fuse, &p_gan, &q_gan) ) {
     return _nest_atom(m, hax, meg, p_gan) ||
            _nest_atom(m, hax, u4_k_cell(lane, p_gan, meg), q_gan);
   }
 
-  // [%hold p=type q=gene]
+  // [%hold p=mold q=gene]
   //
   else if ( u4_b_pq(gan, u4_atom_hold, &p_gan, &q_gan) ) {
     u4_noun dit = u4_k_cell(lane, meg, gan);
@@ -96,7 +96,7 @@ _nest_plum(u4_milr m,
            u4_bag  hax,
            u4_noun p_typ,
            u4_rail meg,
-           u4_type gan)
+           u4_mold gan)
 {
   u4_lane lane = m->lane;
   u4_noun p_gan, q_gan;
@@ -113,13 +113,13 @@ _nest_plum(u4_milr m,
     return u4_false;
   }
 
-  // [%cell p=type q=type]
+  // [%cell p=mold q=mold]
   //
   else if ( u4_b_pq(gan, u4_atom_cell, &p_gan, &q_gan) ) {
     return u4_false;
   }
 
-  // [%cone p=type q=bush+[term type]]
+  // [%cone p=mold q=bush+[term mold]]
   //
   else if ( u4_b_pq(gan, u4_atom_cone, &p_gan, &q_gan) ) {
     return u4_false;
@@ -131,13 +131,13 @@ _nest_plum(u4_milr m,
     return u4_n_eq(p_typ, p_gan);
   }
 
-  // [%face p=mark q=type]
+  // [%face p=mark q=mold]
   //
   if ( u4_b_pq(gan, u4_atom_face, &p_gan, &q_gan) ) {
     return _nest_plum(m, hax, p_typ, meg, q_gan);
   }
 
-  // [%fork p=type q=type]
+  // [%fork p=mold q=mold]
   //
   else if ( u4_b_pq(gan, u4_atom_fork, &p_gan, &q_gan) ) {
     return ( ( _mill_cull(m, meg, p_gan) || 
@@ -146,14 +146,14 @@ _nest_plum(u4_milr m,
                _nest_plum(m, hax, p_typ, meg, q_gan) ) );
   }
 
-  // [%fuse p=type q=type]
+  // [%fuse p=mold q=mold]
   //
   else if ( u4_b_pq(gan, u4_atom_fuse, &p_gan, &q_gan) ) {
     return _nest_plum(m, hax, p_typ, meg, p_gan) ||
            _nest_plum(m, hax, p_typ, u4_k_cell(lane, p_gan, meg), q_gan);
   }
 
-  // [%hold p=type q=gene]
+  // [%hold p=mold q=gene]
   //
   else if ( u4_b_pq(gan, u4_atom_hold, &p_gan, &q_gan) ) {
     u4_noun dit = u4_k_cell(lane, meg, gan);
@@ -176,10 +176,10 @@ static u4_t
 _nest_cell(u4_milr m,
            u4_bag  gil,
            u4_bag  hax,
-           u4_type p_typ,
-           u4_type q_typ,
+           u4_mold p_typ,
+           u4_mold q_typ,
            u4_rail meg,
-           u4_type gan)
+           u4_mold gan)
 {
   u4_lane lane = m->lane;
   u4_noun p_gan, q_gan;
@@ -196,14 +196,14 @@ _nest_cell(u4_milr m,
     return u4_false;
   }
 
-  // [%cell p=type q=type]
+  // [%cell p=mold q=mold]
   //
   else if ( u4_b_pq(gan, u4_atom_cell, &p_gan, &q_gan) ) {
     return _nest_main(m, gil, _mill_slip(m, u4_noun_2, meg), p_gan, p_typ) &&
            _nest_main(m, gil, _mill_slip(m, u4_noun_3, meg), q_gan, q_typ);
   }
 
-  // [%cone p=type q=bush+[term type]]
+  // [%cone p=mold q=bush+[term mold]]
   //
   else if ( u4_b_pq(gan, u4_atom_cone, &p_gan, &q_gan) ) {
     // Daring and unorthodox - but not impossibly useful.
@@ -222,13 +222,13 @@ _nest_cell(u4_milr m,
     }
   }
 
-  // [%face p=mark q=type]
+  // [%face p=mark q=mold]
   //
   if ( u4_b_pq(gan, u4_atom_face, &p_gan, &q_gan) ) {
     return _nest_cell(m, gil, hax, p_typ, q_typ, meg, q_gan);
   }
 
-  // [%fork p=type q=type]
+  // [%fork p=mold q=mold]
   //
   else if ( u4_b_pq(gan, u4_atom_fork, &p_gan, &q_gan) ) {
     return ( ( _mill_cull(m, meg, p_gan) || 
@@ -237,7 +237,7 @@ _nest_cell(u4_milr m,
                _nest_cell(m, gil, hax, p_typ, q_typ, meg, q_gan) ) );
   }
 
-  // [%fuse p=type q=type]
+  // [%fuse p=mold q=mold]
   //
   else if ( u4_b_pq(gan, u4_atom_fuse, &p_gan, &q_gan) ) {
     return _nest_cell(m, gil, hax, p_typ, q_typ, meg, p_gan) ||
@@ -247,7 +247,7 @@ _nest_cell(u4_milr m,
                                    q_gan);
   }
 
-  // [%hold p=type q=gene]
+  // [%hold p=mold q=gene]
   //
   else if ( u4_b_pq(gan, u4_atom_hold, &p_gan, &q_gan) ) {
     u4_noun dit = u4_k_cell(lane, meg, gan);
@@ -271,10 +271,10 @@ static u4_t
 _nest_cone(u4_milr m,
            u4_bag  gil,
            u4_bag  hax,
-           u4_type p_typ,
+           u4_mold p_typ,
            u4_noun q_typ,
            u4_rail meg,
-           u4_type gan)
+           u4_mold gan)
 {
   u4_lane lane = m->lane;
   u4_noun p_gan, q_gan;
@@ -291,13 +291,13 @@ _nest_cone(u4_milr m,
     return u4_false;
   }
 
-  // [%cell p=type q=type]
+  // [%cell p=mold q=mold]
   //
   else if ( u4_b_pq(gan, u4_atom_cell, &p_gan, &q_gan) ) {
     return u4_false;
   }
 
-  // [%cone p=type q=bush+[term type]]
+  // [%cone p=mold q=bush+[term mold]]
   //
   else if ( u4_b_pq(gan, u4_atom_cone, &p_gan, &q_gan) ) {
     return _nest_main(m, gil, _mill_slip(m, u4_noun_2, meg), p_gan, p_typ) &&
@@ -310,13 +310,13 @@ _nest_cone(u4_milr m,
     return u4_false;
   }
 
-  // [%face p=mark q=type]
+  // [%face p=mark q=mold]
   //
   if ( u4_b_pq(gan, u4_atom_face, &p_gan, &q_gan) ) {
     return _nest_cone(m, gil, hax, p_typ, q_typ, meg, q_gan);
   }
 
-  // [%fork p=type q=type]
+  // [%fork p=mold q=mold]
   //
   else if ( u4_b_pq(gan, u4_atom_fork, &p_gan, &q_gan) ) {
     return ( ( _mill_cull(m, meg, p_gan) || 
@@ -325,7 +325,7 @@ _nest_cone(u4_milr m,
                _nest_cone(m, gil, hax, p_typ, q_typ, meg, q_gan) ) );
   }
 
-  // [%fuse p=type q=type]
+  // [%fuse p=mold q=mold]
   //
   else if ( u4_b_pq(gan, u4_atom_fuse, &p_gan, &q_gan) ) {
     return _nest_cone(m, gil, hax, p_typ, q_typ, meg, p_gan) ||
@@ -335,7 +335,7 @@ _nest_cone(u4_milr m,
                                    q_gan);
   }
 
-  // [%hold p=type q=gene]
+  // [%hold p=mold q=gene]
   //
   else if ( u4_b_pq(gan, u4_atom_hold, &p_gan, &q_gan) ) {
     u4_noun dit = u4_k_cell(lane, meg, gan);
@@ -359,11 +359,11 @@ static u4_t
 _nest_fork_row(u4_milr m,
                u4_bag  gil,
                u4_rail meg,
-               u4_type i_vig,
+               u4_mold i_vig,
                u4_log  lec)
 {
   while ( !u4_n_zero(lec) ) {
-    u4_type i_lec = u4_ch(lec);
+    u4_mold i_lec = u4_ch(lec);
     {
       if ( _nest_main(m, gil, meg, i_vig, i_lec) ) {
         return 1;
@@ -384,7 +384,7 @@ _nest_fork_square(u4_milr m,
                   u4_log  lec)
 {
   while ( !u4_n_zero(vig) ) {
-    u4_type i_vig = u4_ch(vig);
+    u4_mold i_vig = u4_ch(vig);
     {
       if ( !_nest_fork_row(m, gil, meg, i_vig, lec) ) {
         return 0;
@@ -401,7 +401,7 @@ static u4_log
 _nest_forks(u4_milr m,
             u4_log  hoc,
             u4_bag  lut,
-            u4_type gav)
+            u4_mold gav)
 {
   u4_lane lane = m->lane;
   u4_noun p_gav, q_gav;
@@ -439,8 +439,8 @@ static u4_t
 _nest_main(u4_milr m,
            u4_bag  gil,
            u4_rail meg,
-           u4_type gan,
-           u4_type typ)
+           u4_mold gan,
+           u4_mold typ)
 {
   u4_lane lane = m->lane;
   u4_noun p_typ, q_typ;
@@ -460,13 +460,13 @@ _nest_main(u4_milr m,
     return 1;
   }
 
-  // [%cell p=type q=type]
+  // [%cell p=mold q=mold]
   //
   else if ( u4_b_pq(typ, u4_atom_cell, &p_typ, &q_typ) ) {
     return _nest_cell(m, gil, u4_noun_0, p_typ, q_typ, meg, gan);
   }
 
-  // [%cone p=type q=bush+[term type]]
+  // [%cone p=mold q=bush+[term mold]]
   //
   else if ( u4_b_pq(typ, u4_atom_cone, &p_typ, &q_typ) ) {
     return _nest_cone(m, gil, u4_noun_0, p_typ, q_typ, meg, gan);
@@ -483,13 +483,13 @@ _nest_main(u4_milr m,
     }
   }
 
-  // [%face p=mark q=type]
+  // [%face p=mark q=mold]
   //
   if ( u4_b_pq(typ, u4_atom_face, &p_typ, &q_typ) ) {
     return _nest_main(m, gil, meg, gan, q_typ);
   }
 
-  // [%fork p=type q=type]
+  // [%fork p=mold q=mold]
   //
   else if ( u4_b_pq(typ, u4_atom_fork, 0, 0) ) {
     u4_log vig = _nest_forks(m, u4_noun_0, u4_noun_0, gan);
@@ -500,14 +500,14 @@ _nest_main(u4_milr m,
     return _nest_fork_square(m, gil, meg, vig, lec);
   }
 
-  // [%fuse p=type q=type]
+  // [%fuse p=mold q=mold]
   //
   else if ( u4_b_pq(typ, u4_atom_fuse, &p_typ, &q_typ) ) {
     return _nest_main(m, gil, meg, gan, p_typ) &&
            _nest_main(m, gil, meg, gan, q_typ);
   }
 
-  // [%hold p=type q=gene]
+  // [%hold p=mold q=gene]
   //
   else if ( u4_b_pq(typ, u4_atom_hold, &p_typ, &q_typ) ) {
     u4_noun res = u4_k_cell(lane, gan, typ);
@@ -530,12 +530,12 @@ _nest_main(u4_milr m,
 /* _mill_nest(): test geometric congruence.
 **
 **    [gan] is geometrically congruent with [typ] iff 
-**    every noun in [gan] is also in [typ].  Ie: [gan] <: type.
+**    every noun in [gan] is also in [typ].  Ie: [gan] <: mold.
 */
 u4_t
 _mill_nest(u4_milr m,
-           u4_type gan,
-           u4_type typ)
+           u4_mold gan,
+           u4_mold typ)
 {
   if ( u4_n_eq(gan, typ) ) {
     // XX: a property of the algorithm that should be 

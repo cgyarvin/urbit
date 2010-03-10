@@ -6,19 +6,19 @@
 
   /** Forward declarations.
   **/
-    static u4_form
-    _fish_main(u4_milr, u4_bag, u4_log, u4_axis, u4_type);
+    static u4_nock
+    _fish_main(u4_milr, u4_bag, u4_log, u4_axis, u4_mold);
 
 
 /* _fish_cell(): fish for pair.  Should not be needed, but...
 */
-static u4_form
+static u4_nock
 _fish_cell(u4_milr m,
            u4_bag  gil,
            u4_log  neb,
            u4_axis axe,
-           u4_type p_tip,
-           u4_type q_tip)
+           u4_mold p_tip,
+           u4_mold q_tip)
 {
   u4_lane lane = m->lane;
   u4_axis lec  = u4_op_add(lane, axe, axe);
@@ -33,12 +33,12 @@ _fish_cell(u4_milr m,
 
 /* _fish_main(): fish with cull and bag.
 */
-static u4_form
+static u4_nock
 _fish_main(u4_milr m,
            u4_bag  gil,
            u4_log  neb,
            u4_axis axe,
-           u4_type tip)
+           u4_mold tip)
 {
   u4_lane lane = m->lane;
   u4_noun p_tip, q_tip;
@@ -106,12 +106,12 @@ _fish_main(u4_milr m,
   else return _fish_main(m, gil, neb, axe, _mill_reap(m, tip));
 }
 
-/* _mill_fish(): test form.  Needs considerable improvement.
+/* _mill_fish(): test nock.  Needs considerable improvement.
 */
-u4_form
+u4_nock
 _mill_fish(u4_milr m,
            u4_axis axe,
-           u4_type tip)
+           u4_mold tip)
 {
   if ( _mill_null(m, tip) ) {
     return u4_k_cell(m->lane, u4_noun_1, u4_noun_1);

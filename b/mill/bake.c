@@ -6,28 +6,28 @@
 
 #define _bake_p(flot) \
   if ( u4_b_p(gen, u4_atom_##flot, &p_gen) ) { \
-    u4_form _mill_b_##flot(u4_milr, u4_noun, u4_type); \
+    u4_nock _mill_b_##flot(u4_milr, u4_noun, u4_mold); \
     return _mill_b_##flot(m, p_gen, tip); \
   }
 
 #define _bake_pq(flot) \
   if ( u4_b_pq(gen, u4_atom_##flot, &p_gen, &q_gen) ) { \
-    u4_form _mill_b_##flot(u4_milr, u4_noun, u4_noun, u4_type); \
+    u4_nock _mill_b_##flot(u4_milr, u4_noun, u4_noun, u4_mold); \
     return _mill_b_##flot(m, p_gen, q_gen, tip); \
   }
 
 #define _bake_pqr(flot) \
   if ( u4_b_pqr(gen, u4_atom_##flot, &p_gen, &q_gen, &r_gen) ) {\
-    u4_form _mill_b_##flot(u4_milr, u4_noun, u4_noun, u4_noun, u4_type); \
+    u4_nock _mill_b_##flot(u4_milr, u4_noun, u4_noun, u4_noun, u4_mold); \
     return _mill_b_##flot(m, p_gen, q_gen, r_gen, tip); \
   }
 
 /* _bake_main(): internal of _mill_bake().
 */
-u4_form
+u4_nock
 _bake_main(u4_milr m,
            u4_gene gen,
-           u4_type tip)
+           u4_mold tip)
 {
   u4_noun p_gen, q_gen, r_gen;
 
@@ -67,12 +67,12 @@ _bake_main(u4_milr m,
   }
 }
 
-/* _mill_bake(): type inference, top level.
+/* _mill_bake(): mold inference, top level.
 */
-u4_form
+u4_nock
 _mill_bake(u4_milr m,
            u4_gene gen,
-           u4_type tip)
+           u4_mold tip)
 {
   u4_lane lane = m->lane;
   u4_noun fid  = u4_k_cell(lane, gen, tip);

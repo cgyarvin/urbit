@@ -6,9 +6,9 @@
 
 /* _mill_not(): invert boolean.
 */
-u4_type
+u4_mold
 _mill_not(u4_milr m,
-          u4_form zet)
+          u4_nock zet)
 {
   u4_lane lane = m->lane;
 

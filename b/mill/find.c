@@ -7,7 +7,7 @@
     /** Forward declarations.
     **/
       static u4_loaf
-      _find_main(u4_milr, u4_mark, u4_bag, u4_rail, u4_type);
+      _find_main(u4_milr, u4_mark, u4_bag, u4_rail, u4_mold);
 
 
 /* _find_hang(): attach a loaf by an axis.
@@ -38,20 +38,20 @@ _find_bink(u4_milr m,
            u4_bag  gil,
            u4_axis axe,
            u4_rail bar,
-           u4_type typ)
+           u4_mold typ)
 {
   return 
     _find_hang(m, axe, 
                   _find_main(m, cox, gil, _mill_slip(m, axe, bar), typ));
 }
 
-/* _find_seek(): search in clip with axis.  Produces |(~, [axis gene]).
+/* _find_seek(): search in book with axis.  Produces |(~, [axis gene]).
 */
 static u4_carb
 _find_seek(u4_milr m,
            u4_axis axe,
            u4_mark cox,
-           u4_clip hig)
+           u4_book hig)
 {
   u4_lane lane  = m->lane;
   u4_noun p_hig = u4_ch(hig);
@@ -63,7 +63,7 @@ _find_seek(u4_milr m,
 
     if ( !u4_n_zero(bek) ) {
       if ( !u4_n_zero(lod) ) {
-        return _mill_fail(m, "find: clip conflict");
+        return _mill_fail(m, "find: book conflict");
       }
       else return bek;
     }
@@ -84,8 +84,8 @@ _find_cell(u4_milr m,
            u4_mark cox,
            u4_bag  gil,
            u4_rail bar,
-           u4_type p_typ,
-           u4_type q_typ)
+           u4_mold p_typ,
+           u4_mold q_typ)
 {
   u4_loaf gul = _find_bink(m, cox, gil, u4_noun_2, bar, p_typ);
   u4_loaf das = _find_bink(m, cox, gil, u4_noun_3, bar, q_typ);
@@ -106,8 +106,8 @@ _find_cone(u4_milr m,
            u4_mark cox,
            u4_bag  gil,
            u4_rail bar,
-           u4_type p_typ,
-           u4_clip q_typ)
+           u4_mold p_typ,
+           u4_book q_typ)
 {
   u4_lane lane = m->lane;
   u4_carb gos = _find_seek(m, u4_noun_1, cox, q_typ);
@@ -139,7 +139,7 @@ _find_face(u4_milr m,
            u4_bag  gil,
            u4_rail bar,
            u4_mark p_typ,
-           u4_type q_typ)
+           u4_mold q_typ)
 {
   u4_lane lane = m->lane;
 
@@ -156,8 +156,8 @@ _find_fork(u4_milr m,
            u4_mark cox,
            u4_bag  gil,
            u4_rail bar,
-           u4_type p_typ,
-           u4_type q_typ)
+           u4_mold p_typ,
+           u4_mold q_typ)
 {
   u4_lane lane = m->lane;
 
@@ -200,8 +200,8 @@ _find_fuse(u4_milr m,
            u4_mark cox,
            u4_bag  gil,
            u4_rail bar,
-           u4_type p_typ,
-           u4_type q_typ)
+           u4_mold p_typ,
+           u4_mold q_typ)
 {
   u4_lane lane = m->lane;
   u4_rail dax  = u4_k_cell(lane, p_typ, bar);
@@ -224,11 +224,11 @@ _find_fuse(u4_milr m,
     }
   }
   else {
-    u4_type gan = u4_ch(pir);
-    u4_form fol = u4_ct(pir);
+    u4_mold gan = u4_ch(pir);
+    u4_nock fol = u4_ct(pir);
     u4_noun p_fol, p_gan, q_gan;
     u4_axis axe;
-    u4_type buc;
+    u4_mold buc;
 
     if ( u4_b_p(fol, u4_noun_0, &axe) ) {
       u4_loaf rex = _find_main(m, cox, gil, bar, p_typ);
@@ -265,7 +265,7 @@ _find_main(u4_milr m,
            u4_mark cox,
            u4_bag  gil,
            u4_rail bar,
-           u4_type typ)
+           u4_mold typ)
 {
   u4_lane lane = m->lane;
   u4_noun p_typ, q_typ;
@@ -280,13 +280,13 @@ _find_main(u4_milr m,
     return u4_noun_0;
   }
 
-  // [%cell p=type q=type]
+  // [%cell p=mold q=mold]
   //
   else if ( u4_b_pq(typ, u4_atom_cell, &p_typ, &q_typ) ) {
     return _find_cell(m, cox, gil, bar, p_typ, q_typ);
   }
 
-  // [%cone p=type q=bush+[mark type]]
+  // [%cone p=mold q=bush+[mark mold]]
   //
   else if ( u4_b_pq(typ, u4_atom_cone, &p_typ, &q_typ) ) {
     return _find_cone(m, cox, gil, bar, p_typ, q_typ);
@@ -298,25 +298,25 @@ _find_main(u4_milr m,
     return u4_noun_0;
   }
 
-  // [%face p=mark q=type]
+  // [%face p=mark q=mold]
   //
   else if ( u4_b_pq(typ, u4_atom_face, &p_typ, &q_typ) ) {
     return _find_face(m, cox, gil, bar, p_typ, q_typ);
   }
 
-  // [%fork p=type q=type]
+  // [%fork p=mold q=mold]
   //
   else if ( u4_b_pq(typ, u4_atom_fork, &p_typ, &q_typ) ) {
     return _find_fork(m, cox, gil, bar, p_typ, q_typ);
   }
 
-  // [%fuse p=type q=type]
+  // [%fuse p=mold q=mold]
   //
   else if ( u4_b_pq(typ, u4_atom_fuse, &p_typ, &q_typ) ) {
     return _find_fuse(m, cox, gil, bar, p_typ, q_typ);
   }
 
-  // [%hold p=type q=gene]
+  // [%hold p=mold q=gene]
   //
   else if ( u4_b_pq(typ, u4_atom_hold, &p_typ, &q_typ) ) {
     u4_noun dit = u4_k_cell(lane, bar, typ);
@@ -333,7 +333,7 @@ _find_main(u4_milr m,
   }
 
   else {
-    u4_bug("strange type", typ);
+    u4_bug("strange mold", typ);
     return u4_trip;
   }
 }
@@ -344,7 +344,7 @@ u4_loaf
 _mill_find(u4_milr m,
            u4_mark cox,
            u4_rail bar,
-           u4_type typ)
+           u4_mold typ)
 {
   return _find_main(m, cox, u4_noun_0, bar, typ);
 }

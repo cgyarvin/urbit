@@ -8,7 +8,7 @@
 */
 u4_noun
 _mill_q_flic(u4_milr m, 
-             u4_bone tep,
+             u4_form tep,
              u4_gene von)
 {
   u4_lane lane = m->lane;

@@ -19,7 +19,7 @@ _grip_crib_in(u4_milr m,
     u4_noun i_wix = u4_ch(wix);
     u4_noun t_wix = u4_ct(wix);
     u4_mark pi_wix = u4_ch(i_wix);
-    u4_bone qi_wix = u4_ct(i_wix);
+    u4_form qi_wix = u4_ct(i_wix);
 
     return u4_k_cell
       (lane, u4_k_cell(lane, pi_wix, _mill_grip(m, qi_wix)),
@@ -39,7 +39,7 @@ _grip_pick_in(u4_milr m,
     return u4_noun_0;
   } 
   else {
-    u4_bone i_bec = u4_ch(bec);
+    u4_form i_bec = u4_ch(bec);
     u4_noun t_bec = u4_ct(bec);
 
     return u4_k_cell
@@ -60,7 +60,7 @@ _grip_pick(u4_milr m,
     return _mill_fail(m, "pick: empty");
   }
   else {
-    u4_bone hem = u4_ch(bec);
+    u4_form hem = u4_ch(bec);
 
     return u4_k_trel
       (lane,
@@ -78,11 +78,11 @@ _grip_pick(u4_milr m,
   }
 }
 
-/* _mill_grip(): generate direct bone.
+/* _mill_grip(): generate direct form.
 */
 u4_gene
 _mill_grip(u4_milr m,
-           u4_bone kel)
+           u4_form kel)
 {
   u4_lane lane = m->lane;
   u4_noun p_kel, q_kel;

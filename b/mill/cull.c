@@ -9,14 +9,14 @@
 u4_t
 _mill_cull(u4_milr m,
            u4_rail bar,
-           u4_type tip)
+           u4_mold tip)
 {
   if ( _mill_null(m, tip) ) {
     return 1;
   }
   else {
     while ( !u4_n_zero(bar) ) {
-      u4_type i_bar = u4_ch(bar);
+      u4_mold i_bar = u4_ch(bar);
 
       if ( _mill_orth(m, i_bar, tip) ) {
         return 1;

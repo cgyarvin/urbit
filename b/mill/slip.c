@@ -6,7 +6,7 @@
 
 /* _mill_slip(): peek bar.
 */
-u4_type
+u4_mold
 _mill_slip(u4_milr m,
            u4_axis axe,
            u4_rail bar)
@@ -15,7 +15,7 @@ _mill_slip(u4_milr m,
     return u4_noun_0;
   }
   else {
-    u4_type caf = _mill_peek(m, axe, u4_noun_0, u4_ch(bar));
+    u4_mold caf = _mill_peek(m, axe, u4_noun_0, u4_ch(bar));
 
     if ( u4_n_eq(u4_atom_blur, caf) ) {
       return _mill_slip(m, axe, u4_ct(bar));

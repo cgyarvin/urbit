@@ -47,7 +47,7 @@
   ::::::::  eq                  noun equality
   ::
     - eq
-      ||  flag
+      ||  ?
         a = *
         b = *
       ==
@@ -56,7 +56,7 @@
   ::::::::  gt                  atomic greater than (a > b)
   ::
     - gt
-      ||  flag
+      ||  ?
         a = @
         b = @
       ==
@@ -65,7 +65,7 @@
   ::::::::  gte                 atomic greater-or-equal (a >= b)
   ::
     - gte
-      ||  flag
+      ||  ?
         a = @
         b = @
       ==
@@ -82,7 +82,7 @@
   ::::::::  lt                  atomic less-than (a < b)
   ::
     - lt
-      ||  flag
+      ||  ?
         a = @
         b = @
       ==
@@ -99,7 +99,7 @@
   ::::::::  lte                 atomic less-or-equal (a <= b)
   ::
     - lte
-      ||  flag
+      ||  ?
         a = @
         b = @
       ==
@@ -173,7 +173,7 @@
   ::::::::  pat                 noun is @
   ::
     - pat
-      ||  flag
+      ||  ?
         a = *
       ==
         !(tap a)
@@ -192,7 +192,7 @@
   ::::::::  tap                 noun is cell
   ::
     - tap
-      ||  flag
+      ||  ?
         a = *
       ==
         :4.a
@@ -200,8 +200,34 @@
   ::::::::  zil                 @ is 0
   ::
     - zil
-      ||  flag
+      ||  ?
         a = @
       ==
         (eq 0 a)
+
+
+::::::::::  Tier 1: recursive data structures
+::::::::::
+
+  ::::::::  list                linked list
+  ::
+    - list
+      ->  [a=*]
+      |=
+        |~
+          **
+            ~
+            [i=a b=(list a)]
+          ==
+
+  ::::::::  bush    
+  ::
+    - bush
+      ->  [a=@ b=*]
+      |=
+        |~
+          ** 
+            [p=@:a q=b]
+            [p=[* *]:(bush a b) q=(bush a b)]
+          ==
 ==

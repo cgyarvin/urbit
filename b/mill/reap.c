@@ -4,11 +4,11 @@
 */
 #include "u4/all.h"
 
-/* _mill_reap(): expand type.
+/* _mill_reap(): expand mold.
 */
-u4_type
+u4_mold
 _mill_reap(u4_milr m,
-           u4_type typ)
+           u4_mold typ)
 {
   u4_lane lane = m->lane;
   u4_noun p_typ, q_typ;
@@ -29,8 +29,8 @@ _mill_reap(u4_milr m,
   }
 
   else if ( u4_b_p(typ, u4_atom_cube, &p_typ) && !u4_n_atom(p_typ) ) {
-    u4_type foo = u4_k_cell(lane, u4_atom_cube, u4_ch(p_typ));
-    u4_type bar = u4_k_cell(lane, u4_atom_cube, u4_ct(p_typ));
+    u4_mold foo = u4_k_cell(lane, u4_atom_cube, u4_ch(p_typ));
+    u4_mold bar = u4_k_cell(lane, u4_atom_cube, u4_ct(p_typ));
 
     return u4_k_trel(lane, u4_atom_cell, foo, bar);
   }

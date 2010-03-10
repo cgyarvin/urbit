@@ -6,10 +6,10 @@
 
 /* _mill_eith(): fork pair.
 */
-u4_type
+u4_mold
 _mill_eith(u4_milr m,
-           u4_type lef,
-           u4_type gap)
+           u4_mold lef,
+           u4_mold gap)
 {
   if ( u4_n_eq(lef, gap) ) {
     return lef;

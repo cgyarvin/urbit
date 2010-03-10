@@ -6,12 +6,12 @@
 
 /* _peek_main(): peek, with gil.
 */
-u4_type
+u4_mold
 _peek_main(u4_milr m,
            u4_axis axe,
            u4_bag  gil,
            u4_rail bar,
-           u4_type tip)
+           u4_mold tip)
 {
   u4_lane lane = m->lane;
   u4_axis sud  = u4_op_tip(axe);
@@ -40,10 +40,10 @@ _peek_main(u4_milr m,
       return u4_atom_blur;
     }
 
-    // [%cell p=type q=type]
+    // [%cell p=mold q=mold]
     //
     else if ( u4_b_pq(tip, u4_atom_cell, &p_tip, &q_tip) ) {
-      u4_type gan;
+      u4_mold gan;
 
       if ( u4_n_eq(u4_noun_2, sud) ) {
         gan = p_tip;
@@ -53,7 +53,7 @@ _peek_main(u4_milr m,
       return _peek_main(m, hec, u4_noun_0, _mill_slip(m, sud, bar), gan);
     }
 
-    // [%cone p=type q={bush term type}]
+    // [%cone p=mold q={bush term mold}]
     //
     else if ( u4_b_pq(tip, u4_atom_cone, &p_tip, &q_tip) ) {
       if ( u4_n_eq(u4_noun_2, sud) ) {
@@ -71,13 +71,13 @@ _peek_main(u4_milr m,
       else return _peek_main(m, axe, gil, bar, _mill_reap(m, tip));
     }
 
-    // [%face p=mark q=type]
+    // [%face p=mark q=mold]
     //
     else if ( u4_b_pq(tip, u4_atom_face, &p_tip, &q_tip) ) {
       return _peek_main(m, axe, gil, bar, q_tip);
     }
 
-    // [%fork p=type q=type]
+    // [%fork p=mold q=mold]
     //
     else if ( u4_b_pq(tip, u4_atom_fork, &p_tip, &q_tip) ) {
       if ( _mill_cull(m, bar, p_tip) ) {
@@ -91,7 +91,7 @@ _peek_main(u4_milr m,
             _peek_main(m, axe, gil, bar, q_tip));
     }
 
-    // [%fuse p=type q=type]
+    // [%fuse p=mold q=mold]
     //
     else if ( u4_b_pq(tip, u4_atom_fuse, &p_tip, &q_tip) ) {
       return _mill_both
@@ -99,7 +99,7 @@ _peek_main(u4_milr m,
             _peek_main(m, axe, gil, u4_k_cell(lane, p_tip, bar), q_tip));
     }
 
-    // [%hold p=type q=gene]
+    // [%hold p=mold q=gene]
     //
     else if ( u4_b_pq(tip, u4_atom_hold, &p_tip, &q_tip) ) {
       if ( u4_bag_in(tip, gil) ) {
@@ -112,13 +112,13 @@ _peek_main(u4_milr m,
   }
 }
 
-/* _mill_peek(): cut a railed type.
+/* _mill_peek(): cut a railed mold.
 */
-u4_type
+u4_mold
 _mill_peek(u4_milr m,
            u4_axis axe,
            u4_rail bar,
-           u4_type tip)
+           u4_mold tip)
 {
   return _peek_main(m, axe, u4_noun_0, bar, tip);
 }

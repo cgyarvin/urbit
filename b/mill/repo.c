@@ -6,15 +6,15 @@
 
 /* _mill_repo(): replay load.
 */
-u4_type
+u4_mold
 _mill_repo(u4_milr m,
-           u4_type tip,
+           u4_mold tip,
            u4_gene gen)
 {
   u4_lane lane = m->lane;
   u4_noun fad = u4_k_cell(lane, tip, gen);
   u4_noun fan;
-  u4_type pol;
+  u4_mold pol;
 
   if ( u4_bag_in(fad, m->fan) ) {
     // printf("inference recursion\n");

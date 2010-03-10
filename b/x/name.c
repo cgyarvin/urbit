@@ -6,11 +6,11 @@
 
 /* _mill_p_name()::
 */
-u4_type
+u4_mold
 _mill_p_name(u4_milr m,
              u4_mark tem,
              u4_gene caf,
-             u4_type pex)
+             u4_mold pex)
 {
   u4_lane lane = m->lane;
 
@@ -19,11 +19,11 @@ _mill_p_name(u4_milr m,
 
 /* _mill_b_name()::
 */
-u4_form
+u4_nock
 _mill_b_name(u4_milr m,
              u4_mark tem,
              u4_gene caf,
-             u4_type pex)
+             u4_mold pex)
 {
   return _mill_bake(m, caf, pex);
 }
@@ -34,7 +34,7 @@ u4_loaf
 _mill_m_name(u4_milr m,
              u4_mark tem,
              u4_gene caf,
-             u4_type pex)
+             u4_mold pex)
 {
   u4_lane lane = m->lane;
   u4_loaf rec = _mill_make(m, caf, pex);

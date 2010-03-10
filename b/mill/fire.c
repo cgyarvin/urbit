@@ -6,15 +6,15 @@
 
 /* _mill_fire(): fire [tel hum] as (gate arg).
 */
-u4_form
+u4_nock
 _mill_fire(u4_milr m,
-           u4_form tel,
-           u4_form hum)
+           u4_nock tel,
+           u4_nock hum)
 {
   u4_lane lane = m->lane;
-  u4_form arg  = u4_k_cell(lane, u4_noun_0, u4_noun_3);
-  u4_form env  = u4_k_cell(lane, u4_noun_0, u4_noun_9);
-  u4_form noc  = u4_k_cell(lane, u4_noun_0, u4_noun_5);
+  u4_nock arg  = u4_k_cell(lane, u4_noun_0, u4_noun_3);
+  u4_nock env  = u4_k_cell(lane, u4_noun_0, u4_noun_9);
+  u4_nock noc  = u4_k_cell(lane, u4_noun_0, u4_noun_5);
 
   return _mill_comp
     (m,

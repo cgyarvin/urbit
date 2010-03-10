@@ -8,13 +8,13 @@
 **
 **    ved: target : rope == list+(mark [%lect tic=nat vix=mark] [%frag haz=nat])
 **    suc: changes: bolt == list+[p=rope q=gene]
-**    pex: subject: type
+**    pex: subject: mold
 */
 u4_loaf
 _mill_x_kick(u4_milr m,
              u4_rope ved,
              u4_bolt suc,
-             u4_type pex)
+             u4_mold pex)
 {
   u4_lane lane = m->lane;
   u4_loaf rec;
@@ -34,10 +34,10 @@ _mill_x_kick(u4_milr m,
     return _mill_fail(m, "kick: broken");
   }
   else {
-    u4_type zum = u4_ch(rec);
-    u4_form nol = u4_ct(rec);
+    u4_mold zum = u4_ch(rec);
+    u4_nock nol = u4_ct(rec);
     u4_noun p_nol, q_nol;
-    u4_type p_zum;
+    u4_mold p_zum;
     u4_gene q_zum;
     u4_axis ped;
 
@@ -49,10 +49,10 @@ _mill_x_kick(u4_milr m,
               u4_b_p(p_nol, u4_noun_0, &ped) &&
               u4_b_pq(zum, u4_atom_hold, &p_zum, &q_zum) )
     {
-      u4_type hel = p_zum;
+      u4_mold hel = p_zum;
       u4_loaf das = _mill_salt(m, suc, pex, hel, ped);
-      u4_type p_das = u4_ch(das);
-      u4_form q_das = u4_ct(das);
+      u4_mold p_das = u4_ch(das);
+      u4_nock q_das = u4_ct(das);
       u4_noun vew, mig;
 
       vew = u4_k_trel(lane, u4_atom_hold, p_das, q_zum);
@@ -69,11 +69,11 @@ _mill_x_kick(u4_milr m,
 
 /* _mill_p_kick()::
 */
-u4_type
+u4_mold
 _mill_p_kick(u4_milr m,
              u4_rope ved,
              u4_bolt suc,
-             u4_type pex)
+             u4_mold pex)
 {
   u4_loaf fod = _mill_x_kick(m, ved, suc, pex);
 
@@ -82,11 +82,11 @@ _mill_p_kick(u4_milr m,
 
 /* _mill_b_kick()::
 */
-u4_form
+u4_nock
 _mill_b_kick(u4_milr m,
              u4_rope ved,
              u4_bolt suc,
-             u4_type pex)
+             u4_mold pex)
 {
   u4_loaf fod = _mill_x_kick(m, ved, suc, pex);
 
@@ -99,7 +99,7 @@ u4_loaf
 _mill_m_kick(u4_milr m,
              u4_rope ved,
              u4_bolt suc,
-             u4_type pex)
+             u4_mold pex)
 {
   return _mill_x_kick(m, ved, suc, pex);
 }

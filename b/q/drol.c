@@ -8,8 +8,8 @@
 */
 u4_noun
 _mill_q_drol(u4_milr m, 
-             u4_bone nix,
-             u4_bone tep,
+             u4_form nix,
+             u4_form tep,
              u4_gene von)
 {
   u4_lane lane = m->lane;

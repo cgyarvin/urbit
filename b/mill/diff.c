@@ -6,13 +6,13 @@
 
 /* _mill_diff(): like difference.
 */
-u4_form
+u4_nock
 _mill_diff(u4_milr m,
            u4_axis axe,
-           u4_type gan,
-           u4_type tip)
+           u4_mold gan,
+           u4_mold tip)
 {
-  u4_type zug = _mill_flap(m, axe, gan);
+  u4_mold zug = _mill_flap(m, axe, gan);
 
   if ( _mill_orth(m, tip, zug) ) {
     return u4_k_cell(m->lane, u4_noun_1, u4_noun_1);

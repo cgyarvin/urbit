@@ -6,10 +6,10 @@
 
 /* _mill_or(): make or.
 */
-u4_form
+u4_nock
 _mill_or(u4_milr m,
-         u4_form bos,
-         u4_form nif)
+         u4_nock bos,
+         u4_nock nif)
 {
   u4_lane lane = m->lane;
 

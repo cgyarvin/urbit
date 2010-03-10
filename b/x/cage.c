@@ -6,10 +6,10 @@
 
 /* _mill_p_cage()::
 */
-u4_type
+u4_mold
 _mill_p_cage(u4_milr m,
              u4_noun fut,
-             u4_type pex)
+             u4_mold pex)
 {
   u4_lane lane = m->lane;
 
@@ -20,8 +20,8 @@ _mill_p_cage(u4_milr m,
     return _mill_play(m, u4_ch(fut), pex);
   }
   else {
-    u4_type gon = _mill_play(m, u4_ch(fut), pex);
-    u4_type zuf = _mill_p_cage(m, u4_ct(fut), pex);
+    u4_mold gon = _mill_play(m, u4_ch(fut), pex);
+    u4_mold zuf = _mill_p_cage(m, u4_ct(fut), pex);
 
     return u4_k_trel(lane, u4_atom_cell, gon, zuf);
   }
@@ -29,10 +29,10 @@ _mill_p_cage(u4_milr m,
 
 /* _mill_b_cage()::
 */
-u4_form
+u4_nock
 _mill_b_cage(u4_milr m,
              u4_noun fut,
-             u4_type pex)
+             u4_mold pex)
 {
   if ( u4_n_zero(fut) ) {
     return _mill_fail(m, "empty cage");
@@ -41,8 +41,8 @@ _mill_b_cage(u4_milr m,
     return _mill_bake(m, u4_ch(fut), pex);
   }
   else {
-    u4_form fiq = _mill_bake(m, u4_ch(fut), pex);
-    u4_form nux = _mill_b_cage(m, u4_ct(fut), pex);
+    u4_nock fiq = _mill_bake(m, u4_ch(fut), pex);
+    u4_nock nux = _mill_b_cage(m, u4_ct(fut), pex);
 
     return _mill_cons(m, fiq, nux);
   }
@@ -53,7 +53,7 @@ _mill_b_cage(u4_milr m,
 u4_loaf
 _mill_m_cage(u4_milr m,
              u4_noun fut,
-             u4_type pex)
+             u4_mold pex)
 {
   u4_lane lane = m->lane;
 

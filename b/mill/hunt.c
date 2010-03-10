@@ -36,9 +36,9 @@ _is_frag(u4_knot sod,
 u4_tape
 _mill_hunt(u4_milr m,
            u4_rope dap,
-           u4_type fim,
+           u4_mold fim,
            u4_axis *axe,
-           u4_type *buv)
+           u4_mold *buv)
 {
   u4_lane lane = m->lane;
 
@@ -56,7 +56,7 @@ _mill_hunt(u4_milr m,
     u4_term cox;
 
     if ( _is_frag(i_dap, &mar) ) {
-      u4_type gey = _mill_peek(m, mar, u4_noun_0, fim);
+      u4_mold gey = _mill_peek(m, mar, u4_noun_0, fim);
 
       *axe = u4_op_peg(lane, *axe, mar);
 
@@ -69,12 +69,12 @@ _mill_hunt(u4_milr m,
 
       if ( u4_n_zero(zib) ) {
         u4_burp(lane, "mark", u4_prep_textual(lane, cox));
-        u4_burp(lane, "type", _mill_dump(m, fim));
+        u4_burp(lane, "mold", _mill_dump(m, fim));
 
         return _mill_fail(m, "look: not found");
       }
       else {
-        u4_type gey = u4_ch(zib);
+        u4_mold gey = u4_ch(zib);
    
         if ( !u4_b_p(u4_ct(zib), u4_noun_0, &mar) ) {
           return _mill_fail(m, "heavy rope");
