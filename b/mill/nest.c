@@ -460,6 +460,12 @@ _nest_main(u4_milr m,
     return 1;
   }
 
+  // %blot
+  //
+  else if ( u4_n_eq(u4_atom_blot, typ) ) {
+    return 0;
+  }
+
   // [%cell p=mold q=mold]
   //
   else if ( u4_b_pq(typ, u4_atom_cell, &p_typ, &q_typ) ) {
@@ -524,7 +530,10 @@ _nest_main(u4_milr m,
     }
   }
 
-  else return u4_trip;
+  else {
+    u4_burp(lane, "typ", _mill_dump(m, typ));
+    return u4_trip;
+  }
 }
 
 /* _mill_nest(): test geometric congruence.
@@ -538,18 +547,12 @@ _mill_nest(u4_milr m,
            u4_mold typ)
 {
   if ( u4_n_eq(gan, typ) ) {
-    // XX: a property of the algorithm that should be 
+    // XX: a presumed property of the algorithm that should be 
     // checked, not assumed.
     //
     return 1;
   }
-  else if ( _mill_null(m, gan) ) {
-    printf("null gan\n");
-    return 1;
-  }
-  else if ( _mill_null(m, typ) ) {
-    return 0;
-  }
+
   else {
     u4_noun qof = u4_k_cell(m->lane, gan, typ);
     u4_nopt zod = u4_tab_get(qof, m->vus);
