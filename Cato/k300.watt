@@ -217,7 +217,7 @@
         |~
           **
             ~
-            [i=a b=(list a)]
+            [i=a t=(list a)]
           ==
 
   ::::::::  bush    

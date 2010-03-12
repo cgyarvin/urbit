@@ -1,0 +1,134 @@
+:: moldy types
+::
+
+|:  z = *
+==
+  |*  (mold z)
+  ::
+    - mold
+      |~
+      ** 
+        %atom
+        %blot
+        %blur
+        [%cell p=mold q=mold]
+        [%cone p=mold q=book]
+        [%cube p=*]
+        [%face p=mark q=mold]
+        [%fork p=mold q=mold]
+        [%fuse p=mold q=mold]
+        [%hold p=mold q=gene]
+      ==
+
+    - gene
+      |~
+      **
+        [%bail ~]                                       ::  !!
+
+        [%pont han=mark dur=gene leb=gene]              ::  =>
+        [%rulf han=mark dur=gene leb=gene]              ::  =<
+        [%trop hig=gene muc=gene]                       ::  ->
+        [%prec hig=gene muc=gene]                       ::  -<
+        [%link del=gene zim=gene]                       ::  ~>
+        [%colb del=gene zim=gene]                       ::  ~<
+
+        [%quiz tes=gene bif=gene hob=gene]              ::  ?:
+        [%feng tes=gene bif=gene]                       ::  ?>
+        [%prex tes=gene hob=gene]                       ::  ?<
+        [%gril mox=wire bem=(list pike)]                ::  ?-
+        [%stam feg=gene bem=(list pike)]                ::  ?+
+        [%boce das=(list gene)]                         ::  ?&
+        [%dant das=(list gene)]                         ::  ?|
+        [%blem gix=gene]                                ::  ?!
+        [%like rid=wire bul=gene]                       ::  ?=
+
+        [%load pir=book]                                ::  |@
+        [%malk pir=grid]                                ::  |+
+        [%blin bov=gene pir=grid]                       ::  |*
+        [%flic tep=form von=gene]                       ::  |:
+        [%drol nix=form tep=form von=gene]              ::  ||
+        [%lome cug=gene]                                ::  |=
+        [%flot cug=gene]                                ::  |-
+
+        [%kick ved=wire suc=bolt]                       ::  :=
+        [%lect tic=step vix=mark]                       ::  :<
+        [%frag haz=axis]                                ::  :>
+        [%mang buz=gene lep=gene]                       ::  :~
+        [%garc buz=gene pum=(list gene)]                ::  :+
+        [%flec buz=gene]                                ::  :-
+        [%grun vec=bolt sud=gene]                       ::  :%
+        [%nock fiz={3 4 5 6} dil=gene]                  ::  :N
+
+        [%cret caw=grid]                                ::  ++
+        [%cage fut=(list gene)]                         ::  +-
+        [%name tem=mark caf=gene]                       ::  +=
+        [%bink mef=form]                                ::  +:
+
+        [%dbug lyq=gene]                                ::  !#
+        [%home cux=home lyq=gene]                       ::  !:
+        [%spot xed=spot lyq=gene]                       ::  !@
+
+        [%palt daq=@]                                   ::  %@
+        [%crad gos=*]                                   ::  %*
+        [%rock gos=*]                                   ::  %=
+      ==
+
+    - pike
+      |~
+      **
+        [%lask bic=form luf=gene]                       ::  -
+        [%plic bic=form]                                ::  +
+        [%semp bic=form luf=gene]                       ::  :
+        [%fing bic=form]                                ::  =
+        [%homp luf=gene]                                ::  *
+      ==
+        
+    - form
+      |~
+      **
+        %atom                                           ::  @
+        %flag                                           ::  ?
+        %blur                                           ::  *
+        [%crib wix=(list :[p=mark q=form])]             ::  *+
+        [%gate puz=gene]                                ::  *:
+        [%grip ved=form piv=form]                       ::  *|
+        [%pick bec=(list form)]                         ::  **
+        [%rock hin=*]                                   ::  %
+      ==
+
+    - plug
+      |~
+      **
+        @:mark
+        [%lect tic=step vix=mark]
+        [%frag haz=axis]
+      ==
+
+    - book 
+      (bush mark gene)
+
+    - grid
+      (list :[p=mark q=gene])
+
+    - bolt
+      (list :[p=wire q=gene])
+
+    - wire
+      (list plug)
+
+    - home
+      (list mark)
+
+    - spot
+      :[at=[lin=@ col=@] to=[lin=@ col=@]]
+
+    - axis
+      @
+
+    - mark
+      @
+
+    - step
+      @
+  ::
+  ==

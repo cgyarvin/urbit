@@ -2,7 +2,7 @@ watt GTO: Gran Tabula Operazioni
 
   gene:
 
-tag  old  dig  r  bone                            semantics
+tag  dig   r  form                            semantics
 ----------------------------------------------------------------------------
 pont  =>   E  [han=mark dur=gene leb=gene]    [leb] in [[han=dur] +1]
 rulf  =<   E  [han=mark dur=gene leb=gene]    [dur] in [[han=leb] +1]
@@ -14,38 +14,38 @@ colb  ~<   E  [del=gene zim=gene]             [del] in [zim]
 quiz  ?:   X  [tes=gene bif=gene hob=gene]    if [tes] [bif], else [hob]
 feng  ?>   E  [tes=gene bif=gene]             if [tes] [bif], else fail
 prex  ?<   E  [tes=gene hob=gene]             if [tes] fail, else [hob]
-gril  ?-   E  [mox=rope bem=list+pike]        examine [mox], internally
-stam  ?+   E  [feg=gene bem=list+pike]        examine [feg], externally 
-boce  ?&   E  [das=list+gene]                 yes iff all of [das] are yes
-dant  ?|   E  [das=list+gene]                 yes iff any of [das] are yes
+gril  ?-   E  [mox=wire bem=(list pike)]      examine [mox], internally
+stam  ?+   E  [feg=gene bem=(list pike)]      examine [feg], externally 
+boce  ?&   E  [das=(list gene)]               yes iff all of [das]
+dant  ?|   E  [das=(list gene)]               yes iff any of [das]
 blem  ?!   E  [gix=gene]                      not
-like  ?=   X  [rid=rope bul=gene]             yes iff [rid] is like [bul]
+like  ?=   X  [rid=wire bul=gene]             yes iff [rid] is like [bul]
 
-load  |@   X  [pir=bush+[mark gene]]          load book
-malk  |+   E  [pir=list+[mark gene]]          book as list
-blin  |*   E  [bov=gene pir=list+[mark gene]] load and apply
-flic  |:   E  [tep=bone von=gene]             gate construction
-drol  ||   E  [nix=bone tep=bone von=gene]    gate with cast
+load  |@   X  [pir=(bush mark gene)]          load book
+malk  |+   E  [pir=(list mark gene)]          book as list
+blin  |*   E  [bov=gene pir=(list :[p=mark q=gene]] load and apply
+flic  |:   E  [tep=form von=gene]             gate construction
+drol  ||   E  [nix=form tep=form von=gene]    gate with cast
 lome  |=   E  [cug=gene]                      cold gate
 flot  |-   E  [cug=gene]                      hot gate
 
 cast  ^-   X  [fes=gene rum=gene]             [rum] as [fes]
-lorb  ^:   E  [tul=bone rum=gene]             cast with bone
+lorb  ^:   E  [tul=form rum=gene]             cast with form
 sure  ^=   X  [fes=gene gav=gene vep=gene]    [vep], so [gav] is in [fes]
 
-kick  :=   X  [ved=rope suc=list+[rope gene]] use with changes
+kick  :=   X  [ved=wire suc=(list wire gene] use with changes
 lect  :<   E  [tic=nat vix=mark]              seek by name
 frag  :>   E  [haz=nat]                       seek by axis
 mang  :~   E  [buz=gene lep=gene]             call, direct
-garc  :+   E  [buz=gene pum=list+gene]        call with args
+garc  :+   E  [buz=gene pum=(list gene)]        call with args
 flec  :-   E  [buz=gene]                      call without args
-grun  :%   E  [vec=list+[rope gene] sud=gene] [sud] with changes
+grun  :%   E  [vec=list+[wire gene] sud=gene] [sud] with changes
 nock  :N   X  [fiz=(3 4 5 6) dil=gene]        nock operator
 
-cret  ++   E  [caw=list+[mark gene]]          named tuple
-cage  +-   X  [fut=list+gene]                 nameless tuple
+cret  ++   E  [caw=(list :[p=mark q=gene])]   named tuple
+cage  +-   X  [fut=(list gene)]               nameless tuple
 name  +=   X  [tem=mark caf=gene]             name a face
-bink  +:   E  [mef=bone]                      bone to gate
+bink  +:   E  [mef=form]                      form to gate
 
 dbug  !#   X  [lyq=gene]                      activate internal debug
 bail  !!   X  [0]                             exit
@@ -55,31 +55,33 @@ spot  !@   X  [xed=[[@ @] [@ @] lyq=gene]     source pos, [at to] [lin col]
 palt  %@   E  [daq=atom]                      constant, atom
 crad  %*   E  [daq=noun]                      constant, blur
 rock  %=   X  [daq=noun]                      constant, cube
- 
-  rope: list+(mark [%lect tic=atom vix=mark] [%frag haz=atom])
+
+  plug: {[%lect tic=atom vix=mark
+  wire: list+(mark [%lect tic=atom vix=mark] [%frag haz=atom])
+  grid:
 
         (list |~{mark [%lect tic=atom vix=mark] [%frag haz=atom]})
 
-  new bone:
+  new form:
 
-tag    bone                           semantics
+tag    form                           semantics
 ----------------------------------------------------------------------------
 atom                                  atom
 flag                                  flag
 blur                                  blur
-crib   [wix=list+[mark bone]]         named tuple
-gate   [gen=gene]                     gene for gate
-grip   [ved=bone piv=bone]            light and heavy bone
-pick   [bec=list+bone]                choice of
+crib   [wix=list+[mark form]]         named tuple
+gate   [puz=gene]                     gene for gate
+grip   [ved=form piv=form]            light and heavy form
+pick   [bec=list+form]                choice of
 rock   [hin=noun]                     exact constant
 
 
   pike:
 
-tag   mk bone                           semantics
+tag   mk form                           semantics
 ----------------------------------------------------------------------------
-lask  -  [bic=bone luf=gene]            use [luf] if [mox] is like [bic]
-plic  +  [bic=bone]                     use [mox] if [mox] is like [bic]
-semp  :  [bic=bone luf=gene]            use [luf] if [mox] is fixed to [bic]
-fing  =  [bic=bone]                     use [mox] if [mox] is fixed to [bic]
+lask  -  [bic=form luf=gene]            use [luf] if [mox] is like [bic]
+plic  +  [bic=form]                     use [mox] if [mox] is like [bic]
+semp  :  [bic=form luf=gene]            use [luf] if [mox] is fixed to [bic]
+fing  =  [bic=form]                     use [mox] if [mox] is fixed to [bic]
 homp  *  [luf=gene]                     use [luf]

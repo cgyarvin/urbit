@@ -227,7 +227,7 @@ _edit_cone_fab_gene(u4_milr m,
   else {
     u4_bag pox = m->pox;
     u4_t   fab;
-    
+
     m->pox = u4_bag_add(lane, sez, m->pox);
     {
       u4_nock goc  = _mill_bake(m, gen, doz);

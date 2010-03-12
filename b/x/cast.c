@@ -34,7 +34,7 @@ _mill_b_cast(u4_milr m,
     u4_burp(lane, "cast: maf", _mill_dump(m, maf));
     u4_burp(lane, "cast: kib", _mill_dump(m, u4_ch(kib)));
 
-    return _mill_fail(m, "mold mismatch");
+    return _mill_fail(m, "cast failure - not every kib is a maf");
   }
 }
 
@@ -57,6 +57,6 @@ _mill_m_cast(u4_milr m,
     u4_burp(lane, "cast: maf", _mill_dump(m, maf));
     u4_burp(lane, "cast: kib", _mill_dump(m, u4_ch(kib)));
 
-    return _mill_fail(m, "mold mismatch");
+    return _mill_fail(m, "cast failure - not every kib is a maf");
   }
 }
