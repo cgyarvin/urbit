@@ -37,7 +37,7 @@ kick  :=   X  [ved=wire suc=(list wire gene] use with changes
 lect  :<   E  [tic=nat vix=mark]              seek by name
 frag  :>   E  [haz=nat]                       seek by axis
 mang  :~   E  [buz=gene lep=gene]             call, direct
-garc  :+   E  [buz=gene pum=(list gene)]        call with args
+garc  :+   E  [buz=gene pum=(list gene)]      call with args
 flec  :-   E  [buz=gene]                      call without args
 grun  :%   E  [vec=list+[wire gene] sud=gene] [sud] with changes
 nock  :N   X  [fiz=(3 4 5 6) dil=gene]        nock operator
