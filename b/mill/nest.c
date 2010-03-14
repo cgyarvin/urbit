@@ -89,10 +89,10 @@ _nest_atom(u4_milr m,
   else return u4_trip;
 }
 
-/* _nest_plum(): congruence for atomic constant.
+/* _nest_rock(): congruence for atomic constant.
 */
 static u4_t
-_nest_plum(u4_milr m,
+_nest_rock(u4_milr m,
            u4_bag  hax,
            u4_noun p_typ,
            u4_rail meg,
@@ -134,23 +134,23 @@ _nest_plum(u4_milr m,
   // [%face p=mark q=mold]
   //
   if ( u4_b_pq(gan, u4_atom_face, &p_gan, &q_gan) ) {
-    return _nest_plum(m, hax, p_typ, meg, q_gan);
+    return _nest_rock(m, hax, p_typ, meg, q_gan);
   }
 
   // [%fork p=mold q=mold]
   //
   else if ( u4_b_pq(gan, u4_atom_fork, &p_gan, &q_gan) ) {
     return ( ( _mill_cull(m, meg, p_gan) || 
-               _nest_plum(m, hax, p_typ, meg, p_gan) ) &&
+               _nest_rock(m, hax, p_typ, meg, p_gan) ) &&
              ( _mill_cull(m, meg, q_gan) || 
-               _nest_plum(m, hax, p_typ, meg, q_gan) ) );
+               _nest_rock(m, hax, p_typ, meg, q_gan) ) );
   }
 
   // [%fuse p=mold q=mold]
   //
   else if ( u4_b_pq(gan, u4_atom_fuse, &p_gan, &q_gan) ) {
-    return _nest_plum(m, hax, p_typ, meg, p_gan) ||
-           _nest_plum(m, hax, p_typ, u4_k_cell(lane, p_gan, meg), q_gan);
+    return _nest_rock(m, hax, p_typ, meg, p_gan) ||
+           _nest_rock(m, hax, p_typ, u4_k_cell(lane, p_gan, meg), q_gan);
   }
 
   // [%hold p=mold q=gene]
@@ -161,7 +161,7 @@ _nest_plum(u4_milr m,
     if ( u4_bag_in(dit, hax) ) {
       return 1;
     } else {
-      return _nest_plum(m, u4_bag_add(lane, dit, hax), 
+      return _nest_rock(m, u4_bag_add(lane, dit, hax), 
                            p_typ,
                            meg, 
                            _mill_repo(m, p_gan, q_gan));
@@ -374,14 +374,14 @@ _nest_fork_row(u4_milr m,
   return 0;
 }
 
-/* _nest_fork_square(): congruence across.
+/* _nest_fork_end(): congruence across.
 */
 static u4_t
-_nest_fork_square(u4_milr m,
-                  u4_bag  gil,
-                  u4_rail meg,
-                  u4_log  vig,
-                  u4_log  lec)
+_nest_fork_end(u4_milr m,
+               u4_bag  gil,
+               u4_rail meg,
+               u4_log  vig,
+               u4_log  lec)
 {
   while ( !u4_n_zero(vig) ) {
     u4_mold i_vig = u4_ch(vig);
@@ -395,13 +395,14 @@ _nest_fork_square(u4_milr m,
   return 1;
 }
 
-/* _nest_forks(): accumulate fork-tree leaves.
+/* _nest_fork_list(): accumulate fork-tree leaves.
 */
 static u4_log
-_nest_forks(u4_milr m,
-            u4_log  hoc,
-            u4_bag  lut,
-            u4_mold gav)
+_nest_fork_list(u4_milr m,
+                u4_log  hoc,
+                u4_bag  lut,
+                u4_rail zab,
+                u4_mold gav)
 {
   u4_lane lane = m->lane;
   u4_noun p_gav, q_gav;
@@ -415,10 +416,19 @@ _nest_forks(u4_milr m,
     return u4_k_cell(lane, gav, hoc);
   }
   else if ( u4_b_pq(gav, u4_atom_face, &p_gav, &q_gav) ) {
-    return _nest_forks(m, hoc, lut, q_gav);
+    return _nest_fork_list(m, hoc, lut, zab, q_gav);
   }
   else if ( u4_b_pq(gav, u4_atom_fork, &p_gav, &q_gav) ) {
-    return _nest_forks(m, _nest_forks(m, hoc, lut, p_gav), lut, q_gav);
+    if ( _mill_cull(m, zab, p_gav) ) {
+      return _nest_fork_list(m, hoc, lut, zab, q_gav);
+    }
+    else if ( _mill_cull(m, zab, q_gav) ) {
+      return _nest_fork_list(m, hoc, lut, zab, p_gav);
+    }
+    else {
+      return _nest_fork_list
+        (m, _nest_fork_list(m, hoc, lut, zab, p_gav), lut, zab, q_gav);
+    }
   }
   else if ( u4_b_pq(gav, u4_atom_hold, &p_gav, &q_gav) ) {
     if ( u4_bag_in(gav, lut) ) {
@@ -427,7 +437,71 @@ _nest_forks(u4_milr m,
     else {
       lut = u4_bag_add(lane, gav, lut);
 
-      return _nest_forks(m, hoc, lut, _mill_repo(m, p_gav, q_gav));
+      return _nest_fork_list(m, hoc, lut, zab, _mill_repo(m, p_gav, q_gav));
+    }
+  }
+  else return u4_trip;
+}
+
+/* _nest_fork(): nest a fork tree.
+*/
+static u4_t
+_nest_fork(u4_milr m,
+           u4_bag  gil,
+           u4_bag  hax,
+           u4_rail meg,
+           u4_mold gan,
+           u4_log  lec)
+{
+  u4_lane lane = m->lane;
+  u4_noun p_gan, q_gan;
+
+  if ( u4_n_eq(u4_atom_atom, gan) ||
+       u4_n_eq(u4_atom_blur, gan) ||
+       u4_b_pq(gan, u4_atom_cell, 0, 0) ||
+       u4_b_pq(gan, u4_atom_cone, 0, 0) ||
+       u4_b_p(gan, u4_atom_cube, 0) )
+  {
+    return _nest_fork_end
+      (m, gil, meg, u4_k_cell(lane, gan, u4_noun_0), lec);
+  }
+
+  else if ( u4_b_pq(gan, u4_atom_face, &p_gan, &q_gan) ) {
+    return _nest_fork(m, gil, hax, meg, q_gan, lec);
+  }
+
+  else if ( u4_b_pq(gan, u4_atom_fuse, &p_gan, &q_gan) ) {
+    return _nest_fork(m, gil, hax, meg, p_gan, lec) ||
+           _nest_fork(m, gil, hax, u4_k_cell(lane, p_gan, meg), q_gan, lec);
+  }
+
+  // [%fork p=mold q=mold]
+  //
+  else if ( u4_b_pq(gan, u4_atom_fork, 0, 0) ) {
+    return _nest_fork_end
+      (m, gil, meg, _nest_fork_list(m, u4_noun_0, u4_noun_0, meg, gan), lec);
+  }
+
+  // [%fuse p=mold q=mold]
+  //
+  else if ( u4_b_pq(gan, u4_atom_fuse, &p_gan, &q_gan) ) {
+    return _nest_fork(m, gil, hax, meg, p_gan, lec) ||
+           _nest_fork(m, gil, hax, u4_k_cell(lane, p_gan, meg), q_gan, lec);
+  }
+
+  // [%hold p=mold q=gene]
+  //
+  else if ( u4_b_pq(gan, u4_atom_hold, &p_gan, &q_gan) ) {
+    u4_noun dit = u4_k_cell(lane, meg, gan);
+
+    if ( u4_bag_in(dit, hax) ) {
+      return 1;
+    } 
+    else {
+      gan = _mill_repo(m, p_gan, q_gan);
+      hax = u4_bag_add(lane, dit, hax);
+
+      return _nest_fork(m, gil, hax, meg, gan, lec);
     }
   }
   else return u4_trip;
@@ -485,7 +559,7 @@ _nest_main(u4_milr m,
       return _nest_main(m, gil, meg, gan, _mill_reap(m, typ));
     }
     else {
-      return _nest_plum(m, u4_noun_0, p_typ, meg, gan);
+      return _nest_rock(m, u4_noun_0, p_typ, meg, gan);
     }
   }
 
@@ -498,12 +572,9 @@ _nest_main(u4_milr m,
   // [%fork p=mold q=mold]
   //
   else if ( u4_b_pq(typ, u4_atom_fork, 0, 0) ) {
-    u4_log vig = _nest_forks(m, u4_noun_0, u4_noun_0, gan);
-    u4_log lec = _nest_forks(m, u4_noun_0, u4_noun_0, typ);
+    u4_log lec = _nest_fork_list(m, u4_noun_0, u4_noun_0, u4_noun_0, typ);
 
-    /* Frankly and unabashedly conservative.  O(n^2), too.
-    */
-    return _nest_fork_square(m, gil, meg, vig, lec);
+    return _nest_fork(m, gil, u4_noun_0, meg, gan, lec);
   }
 
   // [%fuse p=mold q=mold]

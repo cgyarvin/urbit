@@ -62,7 +62,7 @@
  
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 859
+  %expect 966
 
   %pure-parser
   %locations
@@ -108,7 +108,7 @@ bone_w
       ;
 
     bone_w_crib
-      : '[' g bone_w_crib_items ']' { $$ = $3; }
+      : '[' g bone_w_crib_items g ']' { $$ = $3; }
       ;
 
       bone_w_crib_item
@@ -117,7 +117,7 @@ bone_w
         ;
 
       bone_w_crib_items
-        : bone_w_crib_item g                 { $$ = _ycell($1, u4_noun_0); }
+        : bone_w_crib_item                 { $$ = _ycell($1, u4_noun_0); }
         | bone_w_crib_item w bone_w_crib_items { $$ = _ycell($1, $3); }
         ;
 
@@ -348,10 +348,12 @@ wide
         : wide w page_star dig_stop { $$ = _ycell($1, $3); }
 
       wide_norm_flic
-        : '{' g bone_w w wide g '}'        { $$ = _ycell($3, $5); }
+        : '{' g bone_w_crib_items w wide g '}'        
+            { $$ = _ycell(_ycell(u4_atom_crib, $3), $5); }
 
       wide_norm_drol
-        : '{' g bone_w w bone_w w wide g '}' { $$ = _ytrel($3, $5, $7); }
+        : '{' g bone_w w bone_w_crib_items w wide g '}' 
+          { $$ = _ytrel($3, _ycell(u4_atom_crib, $5), $7); }
 
       wide_norm_lome
         : wide
