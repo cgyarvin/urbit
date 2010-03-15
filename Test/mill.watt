@@ -20,16 +20,30 @@
         [%hold p=mold q=gene]
       ==
 
+
     - gene
       |~
       **
         [%bail ~]                                       ::  !!
+        [%cast fes=gene rum=gene]                       ::  ^-
+        [%cage fut=(list gene)]                         ::  +-
+        [%dbug lyq=gene]                                ::  !#
+        [%home cux=home lyq=gene]                       ::  !:
+        [%kick ved=wire suc=bolt]                       ::  :=
+        [%like rid=wire bul=gene]                       ::  ?=
+        [%link del=gene zim=gene]                       ::  ~>
+        [%load pir=book]                                ::  |@
+        [%name tem=mark caf=gene]                       ::  +=
+        [%nock fiz={3 4 5 6} dil=gene]                  ::  :N
+        [%quiz tes=gene bif=gene hob=gene]              ::  ?:
+        [%rock gos=*]                                   ::  %=
+        [%sure fes=gene gav=gene vep=gene]              ::  ^=
+        [%spot xed=spot lyq=gene]                       ::  !@
 
         [%pont han=mark dur=gene leb=gene]              ::  =>
         [%rulf han=mark dur=gene leb=gene]              ::  =<
         [%trop hig=gene muc=gene]                       ::  ->
         [%prec hig=gene muc=gene]                       ::  -<
-        [%link del=gene zim=gene]                       ::  ~>
         [%colb del=gene zim=gene]                       ::  ~<
 
         [%quiz tes=gene bif=gene hob=gene]              ::  ?:
@@ -40,9 +54,7 @@
         [%boce das=(list gene)]                         ::  ?&
         [%dant das=(list gene)]                         ::  ?|
         [%blem gix=gene]                                ::  ?!
-        [%like rid=wire bul=gene]                       ::  ?=
 
-        [%load pir=book]                                ::  |@
         [%malk pir=grid]                                ::  |+
         [%blin bov=gene pir=grid]                       ::  |*
         [%flic tep=form von=gene]                       ::  |:
@@ -50,7 +62,8 @@
         [%lome cug=gene]                                ::  |=
         [%flot cug=gene]                                ::  |-
 
-        [%kick ved=wire suc=bolt]                       ::  :=
+        [%lorb tul=form rum=gene]                       ::  ^:
+
         [%lect tic=step vix=mark]                       ::  :<
         [%frag haz=axis]                                ::  :>
         [%mang buz=gene lep=gene]                       ::  :~
@@ -60,17 +73,10 @@
         [%nock fiz={3 4 5 6} dil=gene]                  ::  :N
 
         [%cret caw=grid]                                ::  ++
-        [%cage fut=(list gene)]                         ::  +-
-        [%name tem=mark caf=gene]                       ::  +=
         [%bink mef=form]                                ::  +:
-
-        [%dbug lyq=gene]                                ::  !#
-        [%home cux=home lyq=gene]                       ::  !:
-        [%spot xed=spot lyq=gene]                       ::  !@
 
         [%palt daq=@]                                   ::  %@
         [%crad gos=*]                                   ::  %*
-        [%rock gos=*]                                   ::  %=
       ==
 
     - pike
@@ -93,14 +99,15 @@
         [%gate puz=gene]                                ::  *:
         [%grip ved=form piv=form]                       ::  *|
         [%pick bec=(list form)]                         ::  **
+        [%dish heb=gene]                                ::  *~
         [%rock hin=*]                                   ::  %
       ==
 
-    - plug
+    - port
       |~
       **
         @:mark
-        [%lect tic=step vix=mark]
+        [%find tic=step vix=mark]
         [%frag haz=axis]
       ==
 
@@ -114,7 +121,7 @@
       (list :[p=wire q=gene])
 
     - wire
-      (list plug)
+      (list port)
 
     - home
       (list mark)

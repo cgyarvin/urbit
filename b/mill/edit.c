@@ -228,6 +228,12 @@ _edit_cone_fab_gene(u4_milr m,
     u4_bag pox = m->pox;
     u4_t   fab;
 
+    if ( !u4_n_zero(m->rux) ) {
+      printf("\n");
+      u4_burp(lane, "doz", _mill_dump(m, doz));
+      u4_burp(lane, "p_gom", _mill_dump(m, p_gom));
+    }
+
     m->pox = u4_bag_add(lane, sez, m->pox);
     {
       u4_nock goc  = _mill_bake(m, gen, doz);
@@ -236,6 +242,13 @@ _edit_cone_fab_gene(u4_milr m,
       fab = u4_n_eq(goc, zid);
     }
     m->pox = pox;
+
+    if ( !fab ) {
+      printf("\n");
+      u4_burp(lane, "edit: doz", _mill_dump(m, doz));
+      u4_burp(lane, "edit: pib", _mill_dump(m, p_gom));
+      u4_err(lane, "edit: gen", gen);
+    }
     return fab;
   }
 }
@@ -295,11 +308,14 @@ _edit_cone(u4_milr m,
         }
       }
       else {
-        if ( _edit_cone_fab(m, doz, p_gom, q_gom) ) {
-          return u4_k_trel(lane, u4_atom_cone, doz, q_gom);
+        u4_mold sut = u4_k_trel(lane, u4_atom_cone, doz, q_gom);
+        u4_mold gom = u4_k_trel(lane, u4_atom_cone, p_gom, q_gom);
+
+        if ( _edit_cone_fab(m, sut, gom, q_gom) ) {
+          return sut;
         }
         else {
-          return _mill_fail(m, "edit: cone violation");
+          return _mill_fail(m, "edit: cone violation: doz is not a good pib");
         }
       }
     }

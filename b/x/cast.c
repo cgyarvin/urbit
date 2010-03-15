@@ -12,7 +12,9 @@ _mill_p_cast(u4_milr m,
              u4_gene rum, 
              u4_mold tip)
 {
-  return _mill_play(m, fes, tip);
+  u4_mold maf  = _mill_play(m, fes, tip);
+
+  return maf;
 }
 
 /* _mill_b_cast()::

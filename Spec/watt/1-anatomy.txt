@@ -1,4 +1,4 @@
-Anatomy of Watt
+Anatomy of Watt: 1, Molds
 
 One of the errors most people make when they write their first
 few programming languages is to specify the language before they
@@ -37,7 +37,7 @@ and the Mill composer.
   ::
     - mill
       ||  [mol=mold noc=nock]
-        mol = mold
+        sub = mold
         gen = gene
       ==
         ::  Generate Nock code and infer type.
@@ -111,8 +111,6 @@ meaning "any noun."
          
       -   [[a=* b=*] c=*]
         [$(z [a.z b.z]) $(z c.z)]
-
-      *   !!
     ==
 
 We could also, of course, write:
@@ -145,7 +143,7 @@ To understand Watt in a concrete way, let's see those gates again:
   ::
     - mill
       ||  [mol=mold noc=nock]
-        mol = mold
+        sub = mold
         gen = gene
       ==
         ::  Generate code and infer type.
@@ -170,7 +168,7 @@ instantiating this meme should be vigorously chastised!  As for
 the superiority of "gene" over "AST", I will admit no argument.)
 
 Mill is a function that transforms an ordered pair of
-two nouns, [mol gen], to another ordered pair, [mol noc].
+two nouns, [sub gen], to another ordered pair, [mol noc].
 
 Let's look at these mysterious nouns, the molds.  Here is the
 definition of a mold:
@@ -178,20 +176,19 @@ definition of a mold:
   ::::::::  mold
   ::
     - mold
-      |:
-        z = *
-      ==
-        ?-  z
-          =   %atom
-          =   %blot
-          =   %blur
-          =   [%cell p=mold q=mold]
-          =   [%cone p=mold q=(bush mark gene)]
-          =   [%cube p=*]
-          =   [%face p=mark q=mold]
-          =   [%fuse p=mold q=mold]
-          =   [%hold p=mold q=gene]
-        ==
+      |~
+      **
+        %atom
+        %blot
+        %blur
+        [%cell p=mold q=mold]
+        [%cone p=mold q=(bush mark gene)]
+        [%cube p=*]
+        [%face p=mark q=mold]
+        [%fork p=mold q=mold]
+        [%fuse p=mold q=mold]
+        [%hold p=mold q=gene]
+     ==
 
 Peculiarly enough, this gate is both the definition of a mold and
 its implementation.  For instance, if you have a random noun, n,
@@ -293,7 +290,7 @@ Symmetric; [%fork q p] has the same semantics as [%fork p q].
 
 [%fuse p=mold q=mold]: set intersection of the molds [p] and [q].
 Asymmetric; [q] has higher priority, ie, [p] cannot change or
-hide the semantics of [q].
+conceal the semantics of [q].
 
 [%face p=mark q=mold]: name a part.  Exports the name [p].  For
 ports in [q], read through [p] - eg, in the Nock example above,

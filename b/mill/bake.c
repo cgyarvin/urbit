@@ -37,7 +37,7 @@ _bake_main(u4_milr m,
   }
   else {
     _bake_p  (bail);    // !!
-    _bake_pq (cast);    // ^+
+    _bake_pq (cast);    // ^-
     _bake_p  (cage);    // :.
     _bake_p  (dbug);
     _bake_pq (home);
