@@ -37,7 +37,7 @@ _make_main(u4_milr m,
   }
   else {
     _make_p  (bail);    // !!
-    _make_pq (cast);    // ^+
+    _make_pq (cast);    // ^-
     _make_p  (cage);    // :.
     _make_p  (dbug);
     _make_pq (home);

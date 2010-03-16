@@ -37,7 +37,7 @@ _play_main(u4_milr m,
   }
   else {
     _play_p  (bail);    // !!
-    _play_pq (cast);    // ^+
+    _play_pq (cast);    // ^-
     _play_p  (cage);    // :.
     _play_p  (dbug);
     _play_pq (home);

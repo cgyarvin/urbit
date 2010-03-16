@@ -215,19 +215,48 @@
       ->  [a=*]
       |=
         |~
-          **
-            ~
-            [i=a t=(list a)]
-          ==
+        **
+          ~
+          [i=a t=(list a)]
+        ==
 
-  ::::::::  bush    
+  ::::::::  skim                select list items
+  ::
+    - skim
+      ->  [w=((list)) x=?]
+      |=
+        ?-  w
+          +   ~
+          -   [i=* t=*]
+            ?:  (x i.w)
+              [i=i.w t=$(w t.w)]
+            $(w t.w)
+        ==
+
+  ::::::::  weld                concatenate lists
+  ::
+    - weld
+      |:
+        w = (list)
+        x = (list)
+      ==
+        ?-  w
+          -   ~
+            x
+          -   [i=* t=*]
+            [i.w $(w t.w)]
+        ==
+
+  ::::::::  bush                marked tree
   ::
     - bush
       ->  [a=@ b=*]
       |=
         |~
-          ** 
-            [p=@:a q=b]
-            [p=[* *]:(bush a b) q=(bush a b)]
-          ==
+        ** 
+          [p=@:a q=b]
+          [p=[* *]:(bush a b) q=(bush a b)]
+        ==
+
+
 ==

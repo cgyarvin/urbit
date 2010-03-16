@@ -15,6 +15,14 @@ _mill_both(u4_milr m,
     return dif;
   }
 
+  else if ( _mill_nest(m, dif, nem) ) {
+    return dif;
+  }
+  else if ( _mill_nest(m, nem, dif) ) {
+    return nem;
+  }
+
+#if 0
   else if ( _mill_nest(m, u4_atom_blur, nem) ) {
     return dif;
   }
@@ -26,8 +34,13 @@ _mill_both(u4_milr m,
   {
     return u4_atom_blot;
   }
+  else if ( u4_b_p(nem, u4_atom_cube, 0) ) {
+    return nem;
+  }
+  else if ( u4_b_p(dif, u4_atom_cube, 0) ) {
+    return dif;
+  }
 
-#if 0
   else if ( u4_n_eq(u4_atom_blur, nem) ) {
     return dif;
   }
