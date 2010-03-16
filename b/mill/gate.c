@@ -211,6 +211,7 @@ u4_gene
 _mill_gate(u4_milr m,
            u4_form kel)
 {
+  u4_lane lane = m->lane;
   u4_noun p_kel, q_kel;
 
   if ( u4_n_eq(kel, u4_atom_blur) ) {
@@ -221,6 +222,14 @@ _mill_gate(u4_milr m,
   }
   else if ( u4_n_eq(kel, u4_atom_flag) ) {
     return _gate_flag(m);
+  }
+  else if ( u4_n_eq(kel, u4_atom_twin) ) {
+    return _mill_gate
+      (m, u4_k_qual
+        (lane, u4_atom_crib,
+               u4_k_cell(lane, u4_noun_0, u4_atom_blur), 
+               u4_k_cell(lane, u4_noun_0, u4_atom_blur), 
+               u4_noun_0));
   }
   else if ( u4_b_p(kel, u4_atom_rock, &p_kel) ) {
     return _gate_rock(m, p_kel);

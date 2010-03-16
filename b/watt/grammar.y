@@ -62,7 +62,7 @@
  
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 969
+  %expect 970
 
   %pure-parser
   %locations
@@ -106,6 +106,7 @@ form_w
       : '@'   { $$ = u4_atom_atom; }
       | '*'   { $$ = u4_atom_blur; }
       | '?'   { $$ = u4_atom_flag; }
+      | '^'   { $$ = u4_atom_twin; }
       ;
 
     form_w_crib
@@ -128,7 +129,7 @@ form_w
       ;
 
     form_w_dish
-      : '~' wide
+      : '~' wide  { $$ = $2; }
       ;
 
     form_w_pick
