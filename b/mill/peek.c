@@ -54,8 +54,10 @@ _peek_main(u4_milr m,
     }
 
     // [%cone p=mold q={bush term mold}]
+    // [%dome p=mold q={bush term mold}]
     //
-    else if ( u4_b_pq(tip, u4_atom_cone, &p_tip, &q_tip) ) {
+    else if ( u4_b_pq(tip, u4_atom_cone, &p_tip, &q_tip) ||
+              u4_b_pq(tip, u4_atom_dome, &p_tip, &q_tip) ) {
       if ( u4_n_eq(u4_noun_2, sud) ) {
         return _peek_main(m, hec, u4_noun_0, _mill_slip(m, sud, bar), p_tip); 
       }

@@ -39,8 +39,10 @@ _nest_atom(u4_milr m,
   }
 
   // [%cone p=mold q=bush+[term mold]]
+  // [%dome p=mold q=bush+[term mold]]
   //
-  else if ( u4_b_pq(gan, u4_atom_cone, &p_gan, &q_gan) ) {
+  else if ( u4_b_pq(gan, u4_atom_cone, &p_gan, &q_gan) ||
+            u4_b_pq(gan, u4_atom_dome, &p_gan, &q_gan) ) {
     return u4_false;
   }
 
@@ -120,8 +122,10 @@ _nest_rock(u4_milr m,
   }
 
   // [%cone p=mold q=bush+[term mold]]
+  // [%dome p=mold q=bush+[term mold]]
   //
-  else if ( u4_b_pq(gan, u4_atom_cone, &p_gan, &q_gan) ) {
+  else if ( u4_b_pq(gan, u4_atom_cone, &p_gan, &q_gan) ||
+            u4_b_pq(gan, u4_atom_dome, &p_gan, &q_gan) ) {
     return u4_false;
   }
 
@@ -204,8 +208,10 @@ _nest_cell(u4_milr m,
   }
 
   // [%cone p=mold q=bush+[term mold]]
+  // [%dome p=mold q=bush+[term mold]]
   //
-  else if ( u4_b_pq(gan, u4_atom_cone, &p_gan, &q_gan) ) {
+  else if ( u4_b_pq(gan, u4_atom_cone, &p_gan, &q_gan) ||
+            u4_b_pq(gan, u4_atom_dome, &p_gan, &q_gan) ) {
     // Daring and unorthodox - but not impossibly useful.
     //
     return _nest_main(m, gil, _mill_slip(m, u4_noun_2, meg), p_gan, p_typ) &&
@@ -265,7 +271,7 @@ _nest_cell(u4_milr m,
   else return u4_trip;
 }
 
-/* _nest_cone(): congruence for cone.
+/* _nest_cone(): congruence for cone or dome.
 */
 static u4_t
 _nest_cone(u4_milr m,
@@ -298,8 +304,10 @@ _nest_cone(u4_milr m,
   }
 
   // [%cone p=mold q=bush+[term mold]]
+  // [%dome p=mold q=bush+[term mold]]
   //
-  else if ( u4_b_pq(gan, u4_atom_cone, &p_gan, &q_gan) ) {
+  else if ( u4_b_pq(gan, u4_atom_cone, &p_gan, &q_gan)  ||
+            u4_b_pq(gan, u4_atom_dome, &p_gan, &q_gan) ) {
     return _nest_main(m, gil, _mill_slip(m, u4_noun_2, meg), p_gan, p_typ) &&
            u4_n_eq(q_typ, q_gan);
   }
@@ -410,6 +418,7 @@ _nest_fork_list(u4_milr m,
   if ( u4_n_atom(gav) || 
        u4_b_pq(gav,  u4_atom_cell, &p_gav, &q_gav) ||
        u4_b_pq(gav,  u4_atom_cone, &p_gav, &q_gav) ||
+       u4_b_pq(gav,  u4_atom_dome, &p_gav, &q_gav) ||
        u4_b_p(gav,   u4_atom_cube, &p_gav) ||
        u4_b_pq(gav,  u4_atom_fuse, &p_gav, &q_gav) )
   {
@@ -460,6 +469,7 @@ _nest_fork(u4_milr m,
        u4_n_eq(u4_atom_blur, gan) ||
        u4_b_pq(gan, u4_atom_cell, 0, 0) ||
        u4_b_pq(gan, u4_atom_cone, 0, 0) ||
+       u4_b_pq(gan, u4_atom_dome, 0, 0) ||
        u4_b_p(gan, u4_atom_cube, 0) )
   {
     return _nest_fork_end
@@ -547,8 +557,10 @@ _nest_main(u4_milr m,
   }
 
   // [%cone p=mold q=bush+[term mold]]
+  // [%dome p=mold q=bush+[term mold]]
   //
-  else if ( u4_b_pq(typ, u4_atom_cone, &p_typ, &q_typ) ) {
+  else if ( u4_b_pq(typ, u4_atom_cone, &p_typ, &q_typ) || 
+            u4_b_pq(typ, u4_atom_dome, &p_typ, &q_typ) ) {
     return _nest_cone(m, gil, u4_noun_0, p_typ, q_typ, meg, gan);
   }
 

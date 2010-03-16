@@ -42,9 +42,10 @@ _play_main(u4_milr m,
     _play_p  (dbug);
     _play_pq (home);
     _play_pq (kick);    // :=
+    _play_p  (lift);    // |@
     _play_pq (like);    // ?= 
     _play_pq (link);    // ~>
-    _play_p  (load);
+    _play_p  (load);    // |@
     _play_pq (mang);    // :~
     _play_pq (name);    // :`
     _play_pq (nock);

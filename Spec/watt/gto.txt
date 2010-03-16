@@ -21,11 +21,12 @@ dant  ?|   E  [das=(list gene)]               yes iff any of [das]
 blem  ?!   E  [gix=gene]                      not
 like  ?=   X  [rid=wire bul=gene]             yes iff [rid] is like [bul]
 
-load  |@   X  [pir=(bush mark gene)]          load book
+load  |@   X  [pir=(bush mark gene)]          load book, monomorphic (cone)
+lift  |$   X  [pir=(bush mark gene)]          load book, polymorphic (dome)
 malk  |+   E  [pir=(list mark gene)]          book as list
 blin  |*   E  [bov=gene pir=(list :[p=mark q=gene]] load and apply
-flic  |:   E  [tep=form von=gene]             gate construction
-drol  ||   E  [nix=form tep=form von=gene]    gate with cast
+flic  |:   E  [tep=form von=gene]             polymorphic gate
+drol  ||   E  [nix=form tep=form von=gene]    monomorphic cast gate
 lome  |=   E  [cug=gene]                      cold gate
 flot  |-   E  [cug=gene]                      hot gate
 
@@ -71,6 +72,7 @@ flag                                  flag
 blur                                  blur
 crib   [wix=list+[mark form]]         named tuple
 gate   [puz=gene]                     gene for gate
+dish   [hox=gene]                     gene for lump
 grip   [ved=form piv=form]            light and heavy form
 pick   [bec=list+form]                choice of
 rock   [hin=noun]                     exact constant

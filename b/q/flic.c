@@ -17,14 +17,13 @@ _mill_q_flic(u4_milr m,
   //    %trop
   //    (lump tep)
   //    :*  
-  //      %lome
-  //      von
+  //      [%lift 0 von]
   //    ==
   //  ==
 
-  return u4_k_qual
+  return u4_k_trel
     (lane, u4_atom_trop,
            _mill_lump(m, tep),
-           u4_atom_lome,
-           von);
+           // u4_k_trel(lane, u4_atom_load, u4_noun_0, von));
+           u4_k_trel(lane, u4_atom_lift, u4_noun_0, von));
 }

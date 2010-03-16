@@ -116,10 +116,12 @@ _mill_lump(u4_milr m,
   else if ( u4_b_p(kel, u4_atom_rock, &p_kel) ) {
     return u4_k_cell(lane, u4_atom_rock, p_kel);
   }
-  
   else if ( u4_b_p(kel, u4_atom_crib, &p_kel) ) {
     return u4_k_cell
       (lane, u4_atom_cret, _lump_crib_in(m, p_kel));
+  }
+  else if ( u4_b_p(kel, u4_atom_dish, &p_kel) ) {
+    return p_kel;
   }
   else if ( u4_b_p(kel, u4_atom_pick, &p_kel) ) {
     return _lump_pick(m, p_kel);

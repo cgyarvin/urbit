@@ -173,12 +173,12 @@
   ::::::::  list                linked list
   ::
     - list
-      ->  [a=*]
-      |=
+      |:  z = ~*
+      ==
         |~
         **
           ~
-          [i=a t=(list a)]
+          [i=z t=(list z)]
         ==
 
   ::::::::  flip                invert list

@@ -57,7 +57,8 @@ _fish_main(u4_milr m,
     return _fish_cell(m, gil, neb, axe, p_tip, q_tip);
   }
 
-  else if ( u4_b_pq(tip, u4_atom_cone, &p_tip, &q_tip) ) {
+  else if ( u4_b_pq(tip, u4_atom_cone, &p_tip, &q_tip) ||
+            u4_b_pq(tip, u4_atom_dome, &p_tip, &q_tip) ) {
     return u4_k_cell(lane, u4_noun_0, u4_noun_0);
   }
 

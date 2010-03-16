@@ -131,6 +131,38 @@ _find_cone(u4_milr m,
   }
 }
 
+/* _find_dome(): as _find_main(), for [%dome p_typ q_typ].
+*/
+static u4_loaf
+_find_dome(u4_milr m,
+           u4_mark cox,
+           u4_bag  gil,
+           u4_rail bar,
+           u4_mold p_typ,
+           u4_book q_typ)
+{
+  u4_lane lane = m->lane;
+  u4_carb gos = _find_seek(m, u4_noun_1, cox, q_typ);
+
+  if ( u4_n_zero(gos) ) {
+    return _find_bink(m, cox, gil, u4_noun_2, bar, p_typ);
+  }
+  else {
+    u4_axis p_gos = u4_ch(gos);
+    u4_gene q_gos = u4_ct(gos);
+    u4_axis gal   = u4_op_peg(lane, u4_noun_3, p_gos);
+
+    return u4_k_cell
+      (lane,
+       u4_k_trel(lane, u4_atom_hold, 
+                       u4_k_trel(lane, u4_atom_dome, p_typ, q_typ),
+                       q_gos),
+       u4_k_trel(lane, u4_noun_3,
+                       u4_k_cell(lane, u4_noun_0, u4_noun_1),
+                       u4_k_cell(lane, u4_noun_0, gal)));
+  }
+}
+
 /* _find_face(): as _find_main(), for [%face p_typ q_typ]
 */
 static u4_loaf
@@ -241,6 +273,9 @@ _find_fuse(u4_milr m,
       } 
       else return _mill_fail(m, "find: fuse conflict");
     }
+    else buc = gan;
+
+#if 0
     else if ( u4_b_pq(fol, u4_noun_3, &p_fol, 0) &&
               u4_b_p(p_fol, u4_noun_0, &axe) &&
               u4_b_pq(gan, u4_atom_hold, &p_gan, &q_gan) ) 
@@ -253,6 +288,7 @@ _find_fuse(u4_milr m,
                q_gan);
     }
     else return u4_trip;
+#endif
 
     return u4_k_cell(lane, buc, fol);
   }
@@ -296,6 +332,12 @@ _find_main(u4_milr m,
   // 
   else if ( u4_b_p(typ, u4_atom_cube, &p_typ) ) {
     return u4_noun_0;
+  }
+
+  // [%dome p=mold q=bush+[mark mold]]
+  //
+  else if ( u4_b_pq(typ, u4_atom_dome, &p_typ, &q_typ) ) {
+    return _find_dome(m, cox, gil, bar, p_typ, q_typ);
   }
 
   // [%face p=mark q=mold]

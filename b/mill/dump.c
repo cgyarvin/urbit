@@ -80,6 +80,36 @@ _dump_cone(u4_milr m,
   return gum;
 }
 
+/* _dump_dome(): dump a dome.
+*/
+static u4_prep
+_dump_dome(u4_milr m,
+           u4_bag  gil,
+           u4_bag  nip,
+           u4_mold p_typ,
+           u4_book q_typ)
+{
+  u4_lane lane = m->lane;
+  u4_prep gum;
+  u4_prep zib;
+  u4_prep bor;
+
+  zib = _dump_main(m, gil, nip, p_typ);
+  bor = u4_k_atom_cat
+    (lane, u4_cod_in('-'),
+           u4_k_atom_cat
+             (lane, u4_prep_decimal(lane, _dump_count(lane, q_typ)),
+                    u4_k_atom_cat
+                      (lane, u4_cod_in('.'),
+                             u4_prep_hexinal
+                                (lane, u4_cod_in(u4_n_nub(q_typ) & 0xffff)))));
+
+  gum = u4_prep_close
+    (lane, '<', '>', u4_k_list(lane, zib, bor, 0));
+
+  return gum;
+}
+
 /* _dump_forks(): produce a dump list of forks.
 */
 static u4_noun
@@ -135,6 +165,10 @@ _dump_main(u4_milr m,
 
   else if ( u4_b_pq(typ, u4_atom_cone, &p_typ, &q_typ) ) {
     return _dump_cone(m, gil, nip, p_typ, q_typ);
+  }
+
+  else if ( u4_b_pq(typ, u4_atom_dome, &p_typ, &q_typ) ) {
+    return _dump_dome(m, gil, nip, p_typ, q_typ);
   }
 
   else if ( u4_b_p(typ, u4_atom_cube, &p_typ) ) {
