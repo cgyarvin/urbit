@@ -193,10 +193,16 @@ _find_fork(u4_milr m,
 {
   u4_lane lane = m->lane;
 
-  if ( _mill_cull(m, bar, p_typ) ) {
+  // XX: this fork handling is not quite right.  Revisit.
+  //
+  if ( _mill_cull(m, bar, p_typ) ||
+       u4_bag_in(u4_k_cell(lane, bar, p_typ), gil) ) 
+  {
     return _find_main(m, cox, gil, bar, q_typ);
   } 
-  else if ( _mill_cull(m, bar, q_typ) ) {
+  else if ( _mill_cull(m, bar, q_typ) ||
+            u4_bag_in(u4_k_cell(lane, bar, q_typ), gil) )
+  {
     return _find_main(m, cox, gil, bar, p_typ);
   }
   else {
@@ -215,21 +221,6 @@ _find_fork(u4_milr m,
       return u4_noun_0;
     }
     else {
-      u4_burp(lane, "cox", u4_prep_textual(lane, cox));
-      u4_burp(lane, "p_typ", _mill_dump(m, p_typ));
-      u4_burp(lane, "q_typ", _mill_dump(m, q_typ));
-      u4_burp(lane, "bar", _mill_durb(m, bar));
-
-      if ( u4_n_zero(hum) ) {
-        u4_burp(lane, "mol.dor", _mill_dump(m, u4_ch(dor)));
-        u4_err(lane, "noc.dor", u4_ct(dor));
-      }
-
-      if ( u4_bag_in(u4_k_cell(lane, bar, q_typ), gil) ) {
-        printf("q gil\n");
-        return dor;
-      }
-
       return _mill_fail(m, "find: fork conflict");
     }
   }

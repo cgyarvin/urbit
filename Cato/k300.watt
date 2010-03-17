@@ -195,7 +195,6 @@
               $(z t.z, a [i=i.z t=a])
           ==
 
-
   ::::::::  skim                select list items
   ::
     - skim
@@ -214,9 +213,8 @@
   ::::::::  weld                concatenate lists
   ::
     - weld
-      |:
-        x = (list)
-        y = (list)
+      |:  x = (list)
+          y = (list)
       ==
         ?-  x
           -   ~
@@ -228,11 +226,12 @@
   ::::::::  bush                marked tree
   ::
     - bush
-      ->  [a=@ b=*]
-      |=
+      |:  x = ~@
+          y = ~*
+      ==
         |~
         ** 
-          [p=@:a q=b]
-          [p=[* *]:(bush a b) q=(bush a b)]
+          [p=@:x q=y]
+          [p=[* *]:(bush x y) q=(bush x y)]
         ==
 ==
