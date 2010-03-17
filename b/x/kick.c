@@ -6,7 +6,7 @@
 
 /* _mill_kick(): use with changes.
 **
-**    ved: target : rope == list+(mark [%lect tic=nat vix=mark] [%frag haz=nat])
+**    ved: target : rope == list+(mark [%port tic=nat vix=mark] [%frag haz=nat])
 **    suc: changes: bolt == list+[p=rope q=gene]
 **    pex: subject: mold
 */

@@ -403,7 +403,7 @@ _edit_mask(u4_milr m,
   }
 }
 
-/* _mill_edit(): edit a mold to reflect a list of writes.
+/* _mill_edit(): edit a mold to refport a list of writes.
 **
 **  zel: changes: list+[list+[([%axis axis] [%term term]) mold]]
 */

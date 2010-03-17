@@ -62,7 +62,7 @@
  
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 970
+  %expect 1042
 
   %pure-parser
   %locations
@@ -466,7 +466,7 @@ tall
       | dig_cage w tall_norm_cage  /* +- */ { $$ = _ycell($1, $3); }
       | dig_name w tall_norm_name  /* += */ { $$ = _ycell($1, $3); }
    
-      | dig_dbug w tall_norm_dbug  /* !? */ { $$ = _ycell($1, $3); }
+      | dig_dbug w tall_norm_dbug  /* !# */ { $$ = _ycell($1, $3); }
       ;
 
     /** Combinators.
@@ -667,42 +667,72 @@ tall
       ;
 */
 
-  /** Rope: reference path.
+  /** Wire: reference path.
   **/
     wire
-      : dope                  { $$ = u4_log_flip(yylane, $1); }
+      : weir                  { $$ = u4_log_flip(yylane, $1); }
       ;
 
-    dope
-      : dope_hook             { $$ = _ycell($1, u4_noun_0); }
-      | dope_hook '.' g dope  { $$ = _ycell($1, $4); }
+    weir
+      : weir_plug             { $$ = _ycell($1, u4_noun_0); }
+      | weir_plug '.' g weir  { $$ = _ycell($1, $4); }
+      | weir_hack             
+        { 
+          u4_noun tik = u4_ch($1); 
+          u4_noun mar = u4_ct($1);
+
+          $$ = _ytrel
+            (_ytrel(u4_atom_port, u4_noun_0, mar),
+             _ytrel(u4_atom_pith, tik, u4_noun_0), 
+             u4_noun_0);
+        }
       ;
 
-      dope_hook
-        : '+' tok_delm       { $$ = _ycell(u4_atom_frag, $2); }
-        | '+' dope_hook_larb { $$ = _ycell(u4_atom_frag, $2); }
-        | dope_tick tok_mark     
-          { $$ = u4_n_zero($1) ? $2 : _ytrel(u4_atom_lect, $1, $2); }
-        | dope_buck
+      weir_plug
+        : weir_plug_frag
+        | weir_plug_port
+        | weir_plug_pith
+        ;
+
+      weir_plug_frag
+        : '+' weir_axis { $$ = _ycell(u4_atom_frag, $2); }
+        ;
+
+      weir_plug_port
+        : weir_tick tok_mark     
+          { $$ = u4_n_zero($1) ? $2 : _ytrel(u4_atom_port, $1, $2); }
+        | weir_buck
           { $$ = u4_n_zero($1) 
-             ? u4_noun_0 : _ytrel(u4_atom_lect, $1, u4_noun_0);
+             ? u4_noun_0 : _ytrel(u4_atom_port, $1, u4_noun_0);
           }
         ;
 
-        dope_buck
+      weir_hack
+        : weir_buck tok_mark
+          { $$ = _ycell($1, $2); }
+        ;
+
+      weir_plug_pith
+        : '^' weir_tick tok_mark
+          { $$ = _ytrel(u4_atom_pith, $2, $3); }
+        ;
+
+        weir_axis
+          :               { $$ = u4_noun_1; }
+          |  tok_delm     { $$ = 1; }
+          | '<' weir_axis { $$ = u4_op_peg(yylane, u4_noun_2, $2); }
+          | '>' weir_axis { $$ = u4_op_peg(yylane, u4_noun_3, $2); }
+          ;
+
+        weir_buck
           : '$'           { $$ = u4_noun_0; }
-          | '$' dope_buck { $$ = u4_op_inc(yylane, $2); }
+          | '$' weir_buck { $$ = u4_op_inc(yylane, $2); }
           ;
 
-        dope_hook_larb
-          :                    { $$ = u4_noun_1; }
-          | '<' dope_hook_larb { $$ = u4_op_peg(yylane, u4_noun_2, $2); }
-          | '>' dope_hook_larb { $$ = u4_op_peg(yylane, u4_noun_3, $2); }
-          ;
 
-        dope_tick
+        weir_tick
           :               { $$ = u4_noun_0; }
-          | '`' dope_tick { $$ = u4_op_inc(yylane, $2); }
+          | '`' weir_tick { $$ = u4_op_inc(yylane, $2); }
           ;
 
   /** Nail: wire-gene pair.

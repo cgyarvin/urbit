@@ -130,7 +130,7 @@ _mill_lump(u4_milr m,
     return u4_k_trel
       (lane, u4_atom_link,
              p_kel,
-             u4_k_trel(lane, u4_atom_lect, u4_noun_0, u4_noun_0));
+             u4_k_trel(lane, u4_atom_port, u4_noun_0, u4_noun_0));
   }
   else if ( u4_b_pq(kel, u4_atom_grip, &p_kel, &q_kel) ) {
     return _mill_lump(m, q_kel);
