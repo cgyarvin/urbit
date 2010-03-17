@@ -186,7 +186,7 @@
     - flip
       |:  z = (list)
       ==
-        =>  a   ^-{z ~}
+        =>  a   =z.~
         |-
           ?-  z
             -   ~   
@@ -199,8 +199,10 @@
   ::::::::  skim                select list items
   ::
     - skim
-      ->  [x=((list)) y=?]
-      |=
+      |:  x = (list)
+          y = ~?
+      ==
+        ^-  x
         ?-  x
           +   ~
           -   [i=* t=*]
@@ -233,6 +235,4 @@
           [p=@:a q=b]
           [p=[* *]:(bush a b) q=(bush a b)]
         ==
-
-
 ==

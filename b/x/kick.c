@@ -19,16 +19,18 @@ _mill_x_kick(u4_milr m,
   u4_lane lane = m->lane;
   u4_loaf rec;
 
+#if 0
   if ( !u4_n_zero(m->rux) && !u4_n_zero(suc) ) {
     printf("\n");
     u4_err(lane, "kick: ved", ved);
     u4_err(lane, "kick: suc", suc);
     u4_burp(lane, "kick: pex", _mill_dump(m, pex));
   }
+#endif
 
   rec = _mill_look(m, ved, pex);
  
-#if 1
+#if 0
   if ( !u4_n_zero(m->rux) && !u4_n_zero(suc) ) {
     // u4_burp(lane, "kick: rec: mol", _mill_dump(m, u4_ch(rec)));
     u4_err(lane, "kick: rec: noc", u4_ct(rec));

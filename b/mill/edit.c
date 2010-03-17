@@ -309,7 +309,7 @@ _edit_dome(u4_milr m,
           return sut;
         }
         else {
-          return _mill_fail(m, "edit: cone violation: doz is not a good pib");
+          return _mill_fail(m, "dome violation");
         }
       }
     }
@@ -460,6 +460,9 @@ _mill_edit(u4_milr m,
           return gom;
         }
         else {
+          u4_burp(m->lane, "doz", _mill_dump(m, doz));
+          u4_burp(m->lane, "p_gom", _mill_dump(m, p_gom));
+
           return _mill_fail(m, "cone violation");
         }
       }
@@ -487,17 +490,7 @@ _mill_edit(u4_milr m,
   // [%fork p=(mold) q=(mold)]
   //
   else if ( u4_b_pq(gom, u4_atom_fork, &p_gom, &q_gom) ) {
-    if ( _mill_cull(m, bar, p_gom) ) {
-      return _mill_edit(m, zel, bar, q_gom);
-    }
-    else if ( _mill_cull(m, bar, q_gom) ) {
-      return _mill_edit(m, zel, bar, p_gom);
-    }
-    else {
-      return _mill_eith
-        (m, _mill_edit(m, zel, bar, p_gom),
-            _mill_edit(m, zel, bar, q_gom));
-    }
+    return _edit_mask(m, zel);
   }
 
   // [%fuse p=(mold) q=(mold)]

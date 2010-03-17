@@ -204,9 +204,9 @@ wide
   ;
 
     wide_deep
-      : rope  
+      : wire  
         { $$ = _ytrel(u4_atom_kick, $1, u4_noun_0); }
-      | rope '(' nail_wide_star ')'
+      | wire '(' nail_wide_star ')'
         { $$ = _ytrel(u4_atom_kick, $1, $3); }
       | '(' g wide_some ')'
         { $$ = _ytrel(u4_atom_garc, u4_ch($3), u4_ct($3)); }
@@ -225,6 +225,8 @@ wide
         { $$ = _ytrel(u4_atom_bink, u4_atom_crib, $2); }
       | '~' form_w '.' wide
         { $$ = _ytrel(u4_atom_lorb, $2, $4); }
+      | '=' wide '.' wide
+        { $$ = _ytrel(u4_atom_cast, $2, $4); }
       ;
 
     wide_cage
@@ -334,7 +336,7 @@ wide
         : '{' g wide w wide g '}' { $$ = _ycell($1, $3); }
 
       wide_norm_gril
-        : '{' g rope ':' w pike_wide_star '}' { $$ = _ycell($3, $6); }
+        : '{' g wire ':' w pike_wide_star '}' { $$ = _ycell($3, $6); }
 
       wide_norm_stam
         : '{' g wide ':' w pike_wide_star '}' { $$ = _ycell($3, $6); }
@@ -349,7 +351,7 @@ wide
         : wide
    
       wide_norm_like
-        : '{' g rope g wide g '}' { $$ = _ycell($3, $5); }
+        : '{' g wire g wide g '}' { $$ = _ycell($3, $5); }
    
 
     /** Loading.
@@ -500,7 +502,7 @@ tall
         : gene w gene { $$ = _ycell($1, $3); }
 
       tall_norm_gril
-        : rope w pike_tall_star dig_stop { $$ = _ycell($1, $3); }
+        : wire w pike_tall_star dig_stop { $$ = _ycell($1, $3); }
 
       tall_norm_stam
         : gene w pike_tall_star dig_stop { $$ = _ycell($1, $3); }
@@ -515,7 +517,7 @@ tall
         : gene
 
       tall_norm_like
-        : rope w gene { $$ = _ycell($1, $3); }
+        : wire w gene { $$ = _ycell($1, $3); }
 
 
     /** Loading.
@@ -667,7 +669,7 @@ tall
 
   /** Rope: reference path.
   **/
-    rope
+    wire
       : dope                  { $$ = u4_log_flip(yylane, $1); }
       ;
 
@@ -703,11 +705,10 @@ tall
           | '`' dope_tick { $$ = u4_op_inc(yylane, $2); }
           ;
 
-
-  /** Nail: rope-gene pair.
+  /** Nail: wire-gene pair.
   **/
     nail_wide
-      : rope w wide { $$ = _ycell($1, $3); }
+      : wire w wide { $$ = _ycell($1, $3); }
       ;
 
     nail_wide_some
@@ -721,7 +722,7 @@ tall
       ;
 
     nail_tall
-      : rope w gene { $$ = _ycell($1, $3); }
+      : wire w gene { $$ = _ycell($1, $3); }
       ;
 
     nail_tall_some

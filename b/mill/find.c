@@ -220,6 +220,16 @@ _find_fork(u4_milr m,
       u4_burp(lane, "q_typ", _mill_dump(m, q_typ));
       u4_burp(lane, "bar", _mill_durb(m, bar));
 
+      if ( u4_n_zero(hum) ) {
+        u4_burp(lane, "mol.dor", _mill_dump(m, u4_ch(dor)));
+        u4_err(lane, "noc.dor", u4_ct(dor));
+      }
+
+      if ( u4_bag_in(u4_k_cell(lane, bar, q_typ), gil) ) {
+        printf("q gil\n");
+        return dor;
+      }
+
       return _mill_fail(m, "find: fork conflict");
     }
   }
@@ -258,7 +268,6 @@ _find_fuse(u4_milr m,
   else {
     u4_mold gan = u4_ch(pir);
     u4_nock fol = u4_ct(pir);
-    u4_noun p_fol, p_gan, q_gan;
     u4_axis axe;
     u4_mold buc;
 
