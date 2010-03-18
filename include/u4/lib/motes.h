@@ -220,6 +220,7 @@
     u4_lib_mote(grop, u4_s4('g','r','o','p'))
     u4_lib_mote(grun, u4_s4('g','r','u','n'))
     u4_lib_mote(gt,   u4_s2('g','t'))
+    u4_lib_mote(gulf, u4_s4('g','u','l','f'))
     u4_lib_mote(gull, u4_s4('g','u','l','l'))
     u4_lib_mote(gult, u4_s4('g','u','l','t'))
     u4_lib_mote(gund, u4_s4('g','u','n','d'))

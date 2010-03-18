@@ -265,6 +265,16 @@ _vere_command(uz_machine mac,
     uz_m_retreat(mac, sho);
     uz_m_zap(mac);
   }
+  else if ( uz_c_p(mac, fex, uz_s4('g','u','l','f'), &p_fex) ) {
+    uz_shoe sho = uz_m_depart(mac);
+    {
+      uz_noun lon = uz_g_express(mac, p_fex);
+
+      _vere_print(mac, 0, lon);
+    }
+    uz_m_retreat(mac, sho);
+    uz_m_zap(mac);
+  }
   else {
     printf("vere: strange command\n");
   }

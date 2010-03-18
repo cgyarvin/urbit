@@ -42,6 +42,25 @@
     static u4_noun _watt_parse_part(struct _u4_scanner *, u4_noun);
     static u4_noun _watt_locate(u4_lane, const void *, u4_noun);
 
+    /* Unix FS loading.  Highly dangerous and improper.
+    */
+      /* u4_unix_path_file():
+      **
+      **  Load abstract Watt gene path as a file.
+      **  XX: should use environment variable.
+      */
+        u4_noun
+        u4_unix_path_file(u4_lane lane,
+                          u4_noun fud);
+
+      /* u4_unix_path_watt():
+      **
+      **  Load abstract Watt path as a Watt gene.
+      */
+        u4_noun
+        u4_unix_path_watt(u4_lane lane,
+                          u4_noun fud);
+
   /* Construction macros.
   */
 #   define _ycell(a, b)         u4_k_cell(yylane, a, b)
@@ -62,7 +81,7 @@
  
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 1042
+  %expect 1032
 
   %pure-parser
   %locations
@@ -227,7 +246,14 @@ wide
         { $$ = _ytrel(u4_atom_lorb, $2, $4); }
       | '=' wide '.' wide
         { $$ = _ytrel(u4_atom_cast, $2, $4); }
+      | '#' unix_path
+        { $$ = u4_unix_path_watt(yylane, $2); }
       ;
+ 
+      unix_path
+        : tok_mark               { $$ = $1; }
+        | tok_mark '/' unix_path { $$ = _ycell($1, $3); }
+        ;
 
     wide_cage
       : '[' g item_wide_some ']'
@@ -807,6 +833,11 @@ tall
 
 /** Command-line language.
 **/
+  vere
+    : gene
+      { $$ = _ycell(u4_atom_gulf, $1); }
+    ;
+/**
   vere 
     : '>' g tok_unix w vere_construct
       { $$ = _ytrel(u4_atom_grik, $3, $5); }
@@ -836,8 +867,6 @@ tall
           { $$ = _ycell(u4_atom_gamp, $2); }
         | '_' tok_unix
           { $$ = _ycell(u4_atom_lame, $2); }
-        | '#' tok_unix
-          { $$ = _ycell(u4_atom_zork, $2); }
         | '$' hume
           { $$ = _ycell(u4_atom_blan, $2); }
         | vere_exp
@@ -869,7 +898,7 @@ tall
     vere_exp
       : wide
       ;
-
+**/
 
 /** Constant language.
 **/
@@ -897,6 +926,7 @@ tall
 **/
   /** Miscellaneous tokens.
   **/
+/**
     tok_unix
       : tok_unix_in { $$ = u4_k_atom_log(yylane, $1); }
       ;
@@ -909,7 +939,7 @@ tall
       tok_unix_c
         : ca | cd | cm 
         ;
-
+**/
     tok_mark
       : tok_mark_pre
       | tok_mark_pre tok_mark_load
@@ -1177,6 +1207,99 @@ u4_watt_parse(u4_lane lane,
   else {
     return u4_exit;
   }
+}
+
+/* u4_unix_path_len():
+**
+**  Measure abstract Watt gene path.
+*/
+uint32_t
+u4_unix_path_len(u4_noun fud)
+{
+  if ( u4_n_atom(fud) ) {
+    return u4_a_bin(fud, 3);
+  }
+  else {
+    u4_assert(u4_n_atom(u4_ch(fud)));
+
+    return u4_a_bin(u4_ch(fud), 3) + 1 + u4_unix_path_len(u4_ct(fud));
+  }
+}
+
+/* u4_unix_path_copy():
+**
+**  Copy abstract Watt gene path.  Produces u4_unix_path_len().
+*/
+uint32_t
+u4_unix_path_copy(u4_noun fud,
+                  char *cl_path)
+{
+  if ( u4_n_atom(fud) ) {
+    uint32_t bin = u4_a_bin(fud, 3);
+
+    u4_a_bytes(fud, (uint8_t *)cl_path, 0, bin);
+    return bin;
+  }
+  else {
+    u4_noun hed = u4_ch(fud);
+    uint32_t bin = u4_a_bin(hed, 3);
+
+    u4_a_bytes(hed, (uint8_t *)cl_path, 0, bin);
+    cl_path[bin] = '/';
+    
+    return bin + 1 + u4_unix_path_copy(fud, cl_path + bin + 1);
+  }
+}
+ 
+/* u4_unix_path_get():
+**
+**  Return Watt gene path as a malloced string.
+*/
+u4_cl *
+u4_unix_path_get(u4_noun fud)
+{
+  uint32_t len = u4_unix_path_len(fud);
+  char *cl_path = malloc(len + 1);
+
+  cl_path[len] = 0;
+  u4_unix_path_copy(fud, cl_path);
+  cl_path[len] = 0;
+
+  return cl_path;
+}
+
+/* u4_unix_path_file():
+**
+**  Load abstract Watt gene path as a file.
+**  XX: should use environment variable.
+*/
+u4_noun
+u4_unix_path_file(u4_lane lane,
+                  u4_noun fud)
+{
+  u4_cl buf[1024];
+  u4_cl *cl_path = u4_unix_path_get(fud);
+  u4_noun text;
+
+  sprintf(buf, "pro/%s.watt", cl_path);
+  text = u4_disk_read_file(lane, buf);
+
+  free(cl_path);
+  return text;
+}
+
+/* u4_unix_path_watt():
+**
+**  Load abstract Watt path as a Watt gene.
+*/
+u4_noun
+u4_unix_path_watt(u4_lane lane,
+                  u4_noun fud)
+{
+  u4_noun text = u4_unix_path_file(lane, fud);
+  u4_noun gene = u4_watt_parse(lane, fud, text);
+
+  return gene;
 }
 
 /* u4_vere_parse(): 
