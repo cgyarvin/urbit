@@ -49,6 +49,13 @@ _mill_mold(u4_milr m,
       (lane, u4_atom_cone, _mill_mold(m, p_muf), _mold_book(m, q_muf));
   }
 
+  // [%dome p=mold q=bush+[mark gene]]
+  //
+  else if ( u4_b_pq(muf, u4_atom_cone, &p_muf, &q_muf) ) {
+    return u4_k_trel
+      (lane, u4_atom_dome, _mill_mold(m, p_muf), _mold_book(m, q_muf));
+  }
+
   // [%cube p=clod]
   // 
   else if ( u4_b_p(muf, u4_atom_cube, &p_muf) ) {

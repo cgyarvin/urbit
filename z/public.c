@@ -565,7 +565,7 @@ uz_g_compute(uz_machine mac,
 
       // cal: invocation gene
       //
-      cal = uz_k_trel(mac, uz_s4('l','e','c','t'), 0, 0);
+      cal = uz_k_trel(mac, uz_s4('p','o','r','t'), 0, 0);
 
       return _uz_g_run_gene(mac, typ_nex, som_nex, cal, 1);
     }

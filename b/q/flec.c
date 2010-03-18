@@ -15,11 +15,11 @@ _mill_q_flec(u4_milr m,
   //  :*
   //    %link
   //    buz
-  //    [%lect 0 %%]
+  //    [%port 0 %%]
   //  ==
   
   return u4_k_trel
     (lane, u4_atom_link, 
            buz,
-           u4_k_trel(lane, u4_atom_lect, u4_noun_0, u4_noun_0));
+           u4_k_trel(lane, u4_atom_port, u4_noun_0, u4_noun_0));
 }

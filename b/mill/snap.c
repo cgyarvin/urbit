@@ -120,5 +120,31 @@ _mill_snap(u4_milr m,
     return _mill_snap(m, q_lom, ger);
   }
 
+  // [%fork p=mold q=mold]
+  //
+  else if ( u4_b_pq(lom, u4_atom_fork, &p_lom, &q_lom) ) {
+    u4_t yut = _mill_orth(m, p_lom, ger);
+    u4_t riq = _mill_orth(m, q_lom, ger);
+
+    if ( yut ) {
+      if ( riq ) {
+        // User is doomed, anyway.
+        //
+        return ger;
+      }
+      else return _mill_snap(m, q_lom, ger);
+    }
+    else if ( riq ) {
+      return _mill_snap(m, p_lom, ger);
+    }
+    else return ger;
+  }
+
+  // [%hold p=mold q=mold]
+  //
+  else if ( u4_b_pq(lom, u4_atom_hold, &p_lom, &q_lom) ) {
+    return _mill_snap(m, _mill_repo(m, p_lom, q_lom), ger);
+  }
+
   else return ger;
 }

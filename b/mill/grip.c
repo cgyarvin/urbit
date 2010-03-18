@@ -105,6 +105,14 @@ _mill_grip(u4_milr m,
          u4_k_cell(lane, u4_atom_rock, u4_noun_0),
          u4_noun_0));
   }
+  else if ( u4_n_eq(kel, u4_atom_twin) ) {
+    return _mill_grip
+      (m, u4_k_qual
+        (lane, u4_atom_crib,
+               u4_k_cell(lane, u4_noun_0, u4_atom_blur), 
+               u4_k_cell(lane, u4_noun_0, u4_atom_blur), 
+               u4_noun_0));
+  }
   else if ( u4_b_p(kel, u4_atom_rock, &p_kel) ) {
     return u4_k_cell(lane, u4_atom_rock, p_kel);
   }
@@ -112,6 +120,9 @@ _mill_grip(u4_milr m,
   else if ( u4_b_p(kel, u4_atom_crib, &p_kel) ) {
     return u4_k_cell
       (lane, u4_atom_cret, _grip_crib_in(m, p_kel));
+  }
+  else if ( u4_b_p(kel, u4_atom_dish, &p_kel) ) {
+    return p_kel;
   }
   else if ( u4_b_p(kel, u4_atom_pick, &p_kel) ) {
     return _grip_pick(m, p_kel);

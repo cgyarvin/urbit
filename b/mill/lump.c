@@ -105,13 +105,23 @@ _mill_lump(u4_milr m,
          u4_k_cell(lane, u4_atom_rock, u4_noun_0),
          u4_noun_0));
   }
+  else if ( u4_n_eq(kel, u4_atom_twin) ) {
+    return _mill_lump
+      (m, u4_k_qual
+        (lane, u4_atom_crib,
+               u4_k_cell(lane, u4_noun_0, u4_atom_blur), 
+               u4_k_cell(lane, u4_noun_0, u4_atom_blur), 
+               u4_noun_0));
+  }
   else if ( u4_b_p(kel, u4_atom_rock, &p_kel) ) {
     return u4_k_cell(lane, u4_atom_rock, p_kel);
   }
-  
   else if ( u4_b_p(kel, u4_atom_crib, &p_kel) ) {
     return u4_k_cell
       (lane, u4_atom_cret, _lump_crib_in(m, p_kel));
+  }
+  else if ( u4_b_p(kel, u4_atom_dish, &p_kel) ) {
+    return p_kel;
   }
   else if ( u4_b_p(kel, u4_atom_pick, &p_kel) ) {
     return _lump_pick(m, p_kel);
@@ -120,7 +130,7 @@ _mill_lump(u4_milr m,
     return u4_k_trel
       (lane, u4_atom_link,
              p_kel,
-             u4_k_trel(lane, u4_atom_lect, u4_noun_0, u4_noun_0));
+             u4_k_trel(lane, u4_atom_port, u4_noun_0, u4_noun_0));
   }
   else if ( u4_b_pq(kel, u4_atom_grip, &p_kel, &q_kel) ) {
     return _mill_lump(m, q_kel);

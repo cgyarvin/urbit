@@ -73,6 +73,28 @@ _gate_crib(u4_milr m,
      _gate_crib_in(m, u4_noun_4, wix));
 }
 
+/* _gate_dish()::
+*/
+static u4_gene
+_gate_dish(u4_milr m,
+           u4_gene puz)
+{
+  u4_lane lane = m->lane;
+  u4_noun far  = u4_k_cell(lane, u4_atom_frag, u4_noun_4);
+  u4_wire rid  = u4_k_cell(lane, far, u4_noun_0);
+
+  return u4_k_qual
+    (lane, 
+     u4_atom_trop,
+     _gate_arg(m, u4_k_cell(lane, u4_atom_dish, puz)),
+     u4_atom_lome,
+     u4_k_trel
+      (lane,
+       u4_atom_feng,
+       u4_k_trel(lane, u4_atom_like, rid, puz),
+       far));
+}
+
 /* _gate_pick_in()::
 */
 static u4_noun
@@ -211,6 +233,7 @@ u4_gene
 _mill_gate(u4_milr m,
            u4_form kel)
 {
+  u4_lane lane = m->lane;
   u4_noun p_kel, q_kel;
 
   if ( u4_n_eq(kel, u4_atom_blur) ) {
@@ -222,12 +245,23 @@ _mill_gate(u4_milr m,
   else if ( u4_n_eq(kel, u4_atom_flag) ) {
     return _gate_flag(m);
   }
+  else if ( u4_n_eq(kel, u4_atom_twin) ) {
+    return _mill_gate
+      (m, u4_k_qual
+        (lane, u4_atom_crib,
+               u4_k_cell(lane, u4_noun_0, u4_atom_blur), 
+               u4_k_cell(lane, u4_noun_0, u4_atom_blur), 
+               u4_noun_0));
+  }
   else if ( u4_b_p(kel, u4_atom_rock, &p_kel) ) {
     return _gate_rock(m, p_kel);
   }
   
   else if ( u4_b_p(kel, u4_atom_crib, &p_kel) ) {
     return _gate_crib(m, p_kel);
+  }
+  else if ( u4_b_p(kel, u4_atom_dish, &p_kel) ) {
+    return _gate_dish(m, p_kel);
   }
   else if ( u4_b_p(kel, u4_atom_pick, &p_kel) ) {
     return _gate_pick(m, p_kel);

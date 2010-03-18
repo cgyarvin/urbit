@@ -42,9 +42,10 @@ _bake_main(u4_milr m,
     _bake_p  (dbug);
     _bake_pq (home);
     _bake_pq (kick);    // :=
+    _bake_p  (lift);    // |$
     _bake_pq (like);    // ?= 
     _bake_pq (link);    // ~>
-    _bake_p  (load);
+    _bake_p  (load);    // |@
     _bake_pq (mang);    // :~
     _bake_pq (name);    // :`
     _bake_pq (nock);

@@ -47,7 +47,7 @@ _mill_open(u4_milr m,
     _open_pq (garc);  // :+
     _open_pq (stam);  // ?+
     _open_pq (trop);  // ->
-    _open_pq (lect);
+    _open_pq (port);
     _open_pq (prec);  // -<
     _open_p  (lome);  // |=
     _open_p  (malk);  // |+

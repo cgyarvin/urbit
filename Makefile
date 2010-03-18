@@ -92,6 +92,7 @@ U4_MILL_OFILES=\
 
 U4_MX_OFILES=\
        b/x/load.o \
+       b/x/lift.o \
        b/x/dbug.o \
        b/x/name.o \
        b/x/like.o \

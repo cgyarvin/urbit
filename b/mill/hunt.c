@@ -4,10 +4,10 @@
 */
 #include "u4/all.h"
 
-/* _is_lect()::
+/* _is_port()::
 */
 static u4_t
-_is_lect(u4_knot sod, 
+_is_port(u4_knot sod, 
          u4_tick *tik, 
          u4_term *cox)
 {
@@ -16,7 +16,7 @@ _is_lect(u4_knot sod,
     if ( cox ) *cox = sod;
     return 1;
   }
-  else if ( u4_b_pq(sod, u4_atom_lect, tik, cox) ) {
+  else if ( u4_b_pq(sod, u4_atom_port, tik, cox) ) {
     return 1;
   }
   else return 0;
@@ -64,7 +64,7 @@ _mill_hunt(u4_milr m,
         (lane, u4_k_cell(lane, u4_atom_axis, mar),
                _mill_hunt(m, t_dap, gey, axe, buv));
     }
-    else if ( _is_lect(i_dap, &tik, &cox) ) {
+    else if ( _is_port(i_dap, &tik, &cox) ) {
       u4_loaf zib = _mill_find(m, cox, u4_noun_0, fim);
 
       if ( u4_n_zero(zib) ) {
@@ -85,7 +85,7 @@ _mill_hunt(u4_milr m,
           guz = u4_n_zero(tik)
             ? t_dap
             : u4_k_cell
-              (lane, u4_k_trel(lane, u4_atom_lect, u4_op_dec(lane, tik), cox),
+              (lane, u4_k_trel(lane, u4_atom_port, u4_op_dec(lane, tik), cox),
                      t_dap);
 
           *axe = u4_op_peg(lane, *axe, mar);

@@ -212,51 +212,65 @@
   ::::::::  list                linked list
   ::
     - list
-      ->  [a=*]
-      |=
+      |:  z = ~*
+      ==
         |~
         **
           ~
-          [i=a t=(list a)]
+          [i=z t=(list z)]
         ==
+
+  ::::::::  flip                invert list
+  ::
+    - flip
+      |:  z = (list)
+      ==
+        =>  a   =z.~
+        |-
+          ?-  z
+            -   ~   
+              a
+            -   ^   
+              $(z t.z, a [i=i.z t=a])
+          ==
 
   ::::::::  skim                select list items
   ::
     - skim
-      ->  [w=((list)) x=?]
-      |=
-        ?-  w
+      |:  x = (list)
+          y = ~?
+      ==
+        ^-  x
+        ?-  x
           +   ~
           -   [i=* t=*]
-            ?:  (x i.w)
-              [i=i.w t=$(w t.w)]
-            $(w t.w)
+            ?:  (y i.x)
+              [i=i.x t=$(x t.x)]
+            $(x t.x)
         ==
 
   ::::::::  weld                concatenate lists
   ::
     - weld
-      |:
-        w = (list)
-        x = (list)
+      |:  x = (list)
+          y = (list)
       ==
-        ?-  w
+        ?-  x
           -   ~
-            x
+            y
           -   [i=* t=*]
-            [i.w $(w t.w)]
+            [i.x $(x t.x)]
         ==
 
   ::::::::  bush                marked tree
   ::
     - bush
-      ->  [a=@ b=*]
-      |=
+      |:  x = ~@
+          y = ~*
+      ==
         |~
         ** 
-          [p=@:a q=b]
-          [p=[* *]:(bush a b) q=(bush a b)]
+          [p=@:x q=y]
+          [p=[* *]:(bush x y) q=(bush x y)]
         ==
-
-
 ==

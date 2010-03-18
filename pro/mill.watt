@@ -64,7 +64,7 @@
 
         [%lorb tul=form rum=gene]                       ::  ^:
 
-        [%lect tic=step vix=mark]                       ::  :<
+        [%port tic=step vix=mark]                       ::  :<
         [%frag haz=axis]                                ::  :>
         [%mang buz=gene lep=gene]                       ::  :~
         [%garc buz=gene pum=(list gene)]                ::  :+
@@ -103,11 +103,12 @@
         [%rock hin=*]                                   ::  %
       ==
 
-    - port
+    - plug
       |~
       **
         @:mark
-        [%find tic=step vix=mark]
+        [%pith tic=step vix=mark]
+        [%port tic=step vix=mark]
         [%frag haz=axis]
       ==
 
@@ -121,7 +122,7 @@
       (list :[p=wire q=gene])
 
     - wire
-      (list port)
+      (list plug)
 
     - home
       (list mark)

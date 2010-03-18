@@ -15,19 +15,18 @@
         (sort y lt)
 
     - sort
-      ->  [w=((list)) x=?]
-      |=
+      |:
+        w = (list)
+        x = ~?
+      ==
         ^-  w
         ?-  w
           +   ~
           -   [i=* t=*]
             :+  weld
               $(w (skim t.w |:{b=* (x b i.w)}))
-              [i=i.w t=$(w (skim t.w |:{b=* !(x b i.w)}))]
+              [i.w $(w (skim t.w |:{b=* !(x b i.w)}))]
             ==
         ==
   ==
-
-
-
 

@@ -210,10 +210,10 @@ _edit_fuse(u4_milr m,
   }
 }
 
-/* _edit_cone_fab_gene(): 
+/* _edit_dome_fab_gene(): 
 */
 static u4_t
-_edit_cone_fab_gene(u4_milr m,
+_edit_dome_fab_gene(u4_milr m,
                     u4_mold doz,
                     u4_mold p_gom,
                     u4_gene gen)
@@ -227,12 +227,6 @@ _edit_cone_fab_gene(u4_milr m,
   else {
     u4_bag pox = m->pox;
     u4_t   fab;
-
-    if ( !u4_n_zero(m->rux) ) {
-      printf("\n");
-      u4_burp(lane, "doz", _mill_dump(m, doz));
-      u4_burp(lane, "p_gom", _mill_dump(m, p_gom));
-    }
 
     m->pox = u4_bag_add(lane, sez, m->pox);
     {
@@ -253,27 +247,27 @@ _edit_cone_fab_gene(u4_milr m,
   }
 }
 
-/* _edit_cone_fab(): match a cone by fabrication.
+/* _edit_dome_fab(): match a dome by fabrication.
 */
 static u4_t
-_edit_cone_fab(u4_milr m,
+_edit_dome_fab(u4_milr m,
                u4_mold doz,
                u4_mold p_gom,
                u4_book q_gom)
 {
   if ( u4_n_atom(u4_ch(q_gom)) ) {
-    return _edit_cone_fab_gene(m, doz, p_gom, u4_ct(q_gom));
+    return _edit_dome_fab_gene(m, doz, p_gom, u4_ct(q_gom));
   }
   else {
-    return _edit_cone_fab(m, doz, p_gom, u4_ch(q_gom)) &&
-           _edit_cone_fab(m, doz, p_gom, u4_ct(q_gom));
+    return _edit_dome_fab(m, doz, p_gom, u4_ch(q_gom)) &&
+           _edit_dome_fab(m, doz, p_gom, u4_ct(q_gom));
   }
 }
 
-/* _edit_cone(): edit a cone.
+/* _edit_dome(): edit a dome.
 */
 static u4_mold
-_edit_cone(u4_milr m,
+_edit_dome(u4_milr m,
            u4_plox zel,
            u4_rail bar,
            u4_mold p_gom,
@@ -290,7 +284,7 @@ _edit_cone(u4_milr m,
     u4_plox par  = _edit_plox_take_tal(m, zel);
 
     if ( !u4_n_zero(par) ) {
-      return _mill_fail(m, "cone write");
+      return _mill_fail(m, "dome write");
     }
     else {
       u4_rail sed = _mill_slip(m, u4_noun_2, bar);
@@ -302,20 +296,20 @@ _edit_cone(u4_milr m,
         }
         else {
           return u4_k_trel
-            (lane, u4_atom_fuse,
-                   _mill_edit(m, zel, bar, u4_atom_blur),
-                   u4_k_trel(lane, u4_atom_cone, p_gom, q_gom));
+            (lane, u4_atom_cone, 
+                   u4_k_trel(lane, u4_atom_fuse, doz, p_gom),
+                   q_gom);
         }
       }
       else {
         u4_mold sut = u4_k_trel(lane, u4_atom_cone, doz, q_gom);
         u4_mold gom = u4_k_trel(lane, u4_atom_cone, p_gom, q_gom);
 
-        if ( _edit_cone_fab(m, sut, gom, q_gom) ) {
+        if ( _edit_dome_fab(m, sut, gom, q_gom) ) {
           return sut;
         }
         else {
-          return _mill_fail(m, "edit: cone violation: doz is not a good pib");
+          return _mill_fail(m, "dome violation");
         }
       }
     }
@@ -409,7 +403,7 @@ _edit_mask(u4_milr m,
   }
 }
 
-/* _mill_edit(): edit a mold to reflect a list of writes.
+/* _mill_edit(): edit a mold to refport a list of writes.
 **
 **  zel: changes: list+[list+[([%axis axis] [%term term]) mold]]
 */
@@ -446,7 +440,39 @@ _mill_edit(u4_milr m,
   // [%cone p=(mold) q=bush+[term mold]]
   //
   else if ( u4_b_pq(gom, u4_atom_cone, &p_gom, &q_gom) ) {
-    return _edit_cone(m, zel, bar, p_gom, q_gom);
+    u4_mold nuf;
+
+    if ( _edit_plox_is_end(m, zel, &nuf) ) {
+      return nuf;
+    }
+    else {
+      u4_plox tig  = _edit_plox_take_hed(m, zel);
+      u4_plox par  = _edit_plox_take_tal(m, zel);
+
+      if ( !u4_n_zero(par) ) {
+        return _mill_fail(m, "cone abuse");
+      }
+      else {
+        u4_rail sed = _mill_slip(m, u4_noun_2, bar);
+        u4_mold doz = _mill_edit(m, tig, sed, p_gom);
+
+        if ( _mill_nest(m, doz, p_gom) ) {
+          return gom;
+        }
+        else {
+          u4_burp(m->lane, "doz", _mill_dump(m, doz));
+          u4_burp(m->lane, "p_gom", _mill_dump(m, p_gom));
+
+          return _mill_fail(m, "cone violation");
+        }
+      }
+    }
+  }
+
+  // [%dome p=(mold) q=bush+[term mold]]
+  //
+  else if ( u4_b_pq(gom, u4_atom_dome, &p_gom, &q_gom) ) {
+    return _edit_dome(m, zel, bar, p_gom, q_gom);
   }
 
   // [%cube p=noun]
@@ -464,17 +490,7 @@ _mill_edit(u4_milr m,
   // [%fork p=(mold) q=(mold)]
   //
   else if ( u4_b_pq(gom, u4_atom_fork, &p_gom, &q_gom) ) {
-    if ( _mill_cull(m, bar, p_gom) ) {
-      return _mill_edit(m, zel, bar, q_gom);
-    }
-    else if ( _mill_cull(m, bar, q_gom) ) {
-      return _mill_edit(m, zel, bar, p_gom);
-    }
-    else {
-      return _mill_eith
-        (m, _mill_edit(m, zel, bar, p_gom),
-            _mill_edit(m, zel, bar, q_gom));
-    }
+    return _edit_mask(m, zel);
   }
 
   // [%fuse p=(mold) q=(mold)]
