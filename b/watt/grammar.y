@@ -1247,7 +1247,7 @@ u4_unix_path_copy(u4_noun fud,
     u4_a_bytes(hed, (uint8_t *)cl_path, 0, bin);
     cl_path[bin] = '/';
     
-    return bin + 1 + u4_unix_path_copy(fud, cl_path + bin + 1);
+    return bin + 1 + u4_unix_path_copy(u4_ct(fud), cl_path + bin + 1);
   }
 }
  
