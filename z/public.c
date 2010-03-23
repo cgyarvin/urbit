@@ -585,7 +585,7 @@ uz_g_express(uz_machine mac,
   return _uz_g_run_gene(mac, uz_ch(mac, mac->har), 
                              uz_ct(mac, mac->har),
                              gen, 
-                             0);
+                             1);
 }
 
 void

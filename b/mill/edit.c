@@ -238,10 +238,10 @@ _edit_dome_fab_gene(u4_milr m,
     m->pox = pox;
 
     if ( !fab ) {
-      printf("\n");
-      u4_burp(lane, "edit: doz", _mill_dump(m, doz));
-      u4_burp(lane, "edit: pib", _mill_dump(m, p_gom));
-      u4_err(lane, "edit: gen", gen);
+      // printf("\n");
+      // u4_burp(lane, "edit: doz", _mill_dump(m, doz));
+      // u4_burp(lane, "edit: pib", _mill_dump(m, p_gom));
+      // u4_err(lane, "edit: gen", gen);
     }
     return fab;
   }
@@ -460,8 +460,8 @@ _mill_edit(u4_milr m,
           return gom;
         }
         else {
-          u4_burp(m->lane, "doz", _mill_dump(m, doz));
-          u4_burp(m->lane, "p_gom", _mill_dump(m, p_gom));
+          // u4_burp(m->lane, "doz", _mill_dump(m, doz));
+          // u4_burp(m->lane, "p_gom", _mill_dump(m, p_gom));
 
           return _mill_fail(m, "cone violation");
         }
