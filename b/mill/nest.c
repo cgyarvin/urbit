@@ -26,6 +26,12 @@ _nest_flat(u4_milr m,
     return u4_true;
   }
 
+  // %blot
+  //
+  else if ( u4_n_eq(u4_atom_blot, gan) ) {
+    return u4_true;
+  }
+
   // %blur
   //
   else if ( u4_n_eq(u4_atom_blur, gan) ) {
@@ -106,6 +112,12 @@ _nest_deep(u4_milr m,
   //
   if ( u4_n_eq(u4_atom_atom, gan) ) {
     return u4_false;
+  }
+
+  // %blot
+  //
+  else if ( u4_n_eq(u4_atom_blot, gan) ) {
+    return u4_true;
   }
 
   // %blur
@@ -191,6 +203,12 @@ _nest_rock(u4_milr m,
     return u4_false;
   }
 
+  // %blot
+  //
+  else if ( u4_n_eq(u4_atom_blot, gan) ) {
+    return u4_true;
+  }
+
   // %blur
   //
   else if ( u4_n_eq(u4_atom_blur, gan) ) {
@@ -273,7 +291,7 @@ _nest_cell(u4_milr m,
     u4_noun p_gan = _mill_peek(m, u4_noun_2, meg, gan);
     u4_noun q_gan = _mill_peek(m, u4_noun_3, meg, gan);
     u4_rail p_meg = _mill_slip(m, u4_noun_2, meg);
-    u4_rail q_meg = _mill_slip(m, u4_noun_2, meg);
+    u4_rail q_meg = _mill_slip(m, u4_noun_3, meg);
 
     return _nest_main(m, gil, p_meg, p_gan, p_typ) &&
            _nest_main(m, gil, q_meg, q_gan, q_typ);
@@ -298,6 +316,12 @@ _nest_cone(u4_milr m,
   //
   if ( u4_n_eq(u4_atom_atom, gan) ) {
     return u4_false;
+  }
+
+  // %blot
+  //
+  else if ( u4_n_eq(u4_atom_blot, gan) ) {
+    return u4_true;
   }
 
   // %blur
@@ -475,6 +499,7 @@ _nest_fork(u4_milr m,
   u4_noun p_gan, q_gan;
 
   if ( u4_n_eq(u4_atom_atom, gan) ||
+       u4_n_eq(u4_atom_blot, gan) ||
        u4_n_eq(u4_atom_blur, gan) ||
        u4_b_pq(gan, u4_atom_cell, 0, 0) ||
        u4_b_pq(gan, u4_atom_cone, 0, 0) ||
@@ -489,6 +514,8 @@ _nest_fork(u4_milr m,
     return _nest_fork(m, gil, hax, meg, q_gan, lec);
   }
 
+  // [%fuse p=mold q=mold]
+  //
   else if ( u4_b_pq(gan, u4_atom_fuse, &p_gan, &q_gan) ) {
     return _nest_fork(m, gil, hax, meg, p_gan, lec) ||
            _nest_fork(m, gil, hax, u4_k_cell(lane, p_gan, meg), q_gan, lec);
@@ -499,13 +526,6 @@ _nest_fork(u4_milr m,
   else if ( u4_b_pq(gan, u4_atom_fork, 0, 0) ) {
     return _nest_fork_end
       (m, gil, meg, _nest_fork_list(m, u4_noun_0, u4_noun_0, meg, gan), lec);
-  }
-
-  // [%fuse p=mold q=mold]
-  //
-  else if ( u4_b_pq(gan, u4_atom_fuse, &p_gan, &q_gan) ) {
-    return _nest_fork(m, gil, hax, meg, p_gan, lec) ||
-           _nest_fork(m, gil, hax, u4_k_cell(lane, p_gan, meg), q_gan, lec);
   }
 
   // [%hold p=mold q=gene]
@@ -526,10 +546,10 @@ _nest_fork(u4_milr m,
   else return u4_trip;
 }
 
-/* _nest_main(): geometric congruence, with loop control (gil).
+/* _nest_loop(): innards of _nest_main().
 */
 static u4_t
-_nest_main(u4_milr m,
+_nest_loop(u4_milr m,
            u4_bag  gil,
            u4_rail meg,
            u4_mold gan,
@@ -538,25 +558,22 @@ _nest_main(u4_milr m,
   u4_lane lane = m->lane;
   u4_noun p_typ, q_typ;
 
-  // u4_burp(lane, "nm: gan", _mill_dump(m, gan));
-  // u4_burp(lane, "nm: typ", _mill_dump(m, typ));
-
   // %atom
   // 
   if ( u4_n_eq(u4_atom_atom, typ) ) {
     return _nest_flat(m, u4_noun_0, meg, gan);
   }
 
-  // %blur
-  //
-  else if ( u4_n_eq(u4_atom_blur, typ) ) {
-    return 1;
-  }
-
   // %blot
   //
   else if ( u4_n_eq(u4_atom_blot, typ) ) {
     return 0;
+  }
+
+  // %blur
+  //
+  else if ( u4_n_eq(u4_atom_blur, typ) ) {
+    return 1;
   }
 
   // [%cell p=mold q=mold]
@@ -608,23 +625,53 @@ _nest_main(u4_milr m,
   // [%hold p=mold q=gene]
   //
   else if ( u4_b_pq(typ, u4_atom_hold, &p_typ, &q_typ) ) {
-    u4_noun res = u4_k_cell(lane, gan, typ);
-
-    if ( u4_bag_in(res, gil) ) {
-      /* Conservative search.
-      */
-      return 1;
-    }
-    else {
-      gil = u4_bag_add(lane, res, gil);
-
-      return _nest_main(m, gil, meg, gan, _mill_repo(m, p_typ, q_typ));
-    }
+    return _nest_main(m, gil, meg, gan, _mill_repo(m, p_typ, q_typ));
   }
 
   else {
     u4_burp(lane, "typ", _mill_dump(m, typ));
     return u4_trip;
+  }
+}
+
+/* _nest_main(): geometric congruence, with loop control (gil).
+*/
+static u4_t
+_nest_main(u4_milr m,
+           u4_bag  gil,
+           u4_rail meg,
+           u4_mold gan,
+           u4_mold typ)
+{
+  u4_lane lane = m->lane;
+
+  if ( u4_n_eq(gan, typ) ) {
+    return 1;
+  }
+  else {
+    u4_noun res = u4_k_trel(lane, meg, gan, typ);
+
+    if ( u4_bag_in(res, gil) ) {
+      return 1;
+    }
+    else if ( u4_n_zero(gil) ) {
+      u4_nopt zod = u4_tab_get(res, m->vus);
+
+      if ( zod != u4_bull ) {
+        return u4_n_zero(zod);
+      }
+      else {
+        u4_t t_zod = _nest_loop(m, u4_bag_add(lane, res, gil), meg, gan, typ);
+
+        zod = (t_zod ? u4_noun_0 : u4_noun_1);
+
+        m->vus = u4_tab_add(m->lane, res, zod, m->vus);
+        return t_zod;
+      }
+    }
+    else {
+      return _nest_loop(m, u4_bag_add(lane, res, gil), meg, gan, typ);
+    }
   }
 }
 
@@ -638,27 +685,5 @@ _mill_nest(u4_milr m,
            u4_mold gan,
            u4_mold typ)
 {
-  if ( u4_n_eq(gan, typ) ) {
-    // XX: a presumed property of the algorithm that should be 
-    // checked, not assumed.
-    //
-    return 1;
-  }
-
-  else {
-    u4_noun qof = u4_k_cell(m->lane, gan, typ);
-    u4_nopt zod = u4_tab_get(qof, m->vus);
-
-    if ( zod != u4_bull ) {
-      return u4_n_zero(zod);
-    }
-    else {
-      u4_t t_zod = _nest_main(m, u4_noun_0, u4_noun_0, gan, typ);
-
-      zod = (t_zod ? u4_noun_0 : u4_noun_1);
-
-      m->vus = u4_tab_add(m->lane, qof, zod, m->vus);
-      return t_zod;
-    }
-  }
+  return _mill_null(m, gan) || _nest_main(m, u4_noun_0, u4_noun_0, gan, typ);
 }

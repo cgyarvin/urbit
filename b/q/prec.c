@@ -13,12 +13,6 @@ _mill_q_prec(u4_milr m,
 {
   u4_lane lane = m->lane;
 
-  //  :.
-  //    %link
-  //    [%cage muc [%frag 1] ~]
-  //    hig
-  //  ==
-
   return u4_k_trel
     (lane, u4_atom_link,
            u4_k_qual

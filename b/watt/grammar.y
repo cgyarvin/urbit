@@ -290,7 +290,7 @@ wide
       : ':' tok_nock '.' wide { $$ = _ytrel(u4_atom_nock, $2, $4); }
 
       | dig_pont wide_norm_pont  /* => */ { $$ = _ycell($1, $2); }
-      | dig_clet wide_norm_clet  /* =< */ { $$ = _ycell($1, $2); }
+      | dig_rulf wide_norm_rulf  /* =< */ { $$ = _ycell($1, $2); }
       | dig_trop wide_norm_trop  /* -> */ { $$ = _ycell($1, $2); }
       | dig_prec wide_norm_prec  /* -< */ { $$ = _ycell($1, $2); }
       | dig_link wide_norm_link  /* ~> */ { $$ = _ycell($1, $2); }
@@ -334,7 +334,7 @@ wide
       wide_norm_pont
         : '{' g tok_mark w wide w wide g '}' { $$ = _ytrel($3, $5, $7); }
 
-      wide_norm_clet
+      wide_norm_rulf
         : '{' g tok_mark w wide w wide g '}' { $$ = _ytrel($1, $3, $5); }
 
       wide_norm_trop
@@ -454,7 +454,7 @@ tall
       : ':' tok_nock w gene { $$ = _ytrel(u4_atom_nock, $2, $4); }
 
       | dig_pont w tall_norm_pont  /* => */ { $$ = _ycell($1, $3); }
-      | dig_clet w tall_norm_clet  /* =< */ { $$ = _ycell($1, $3); }
+      | dig_rulf w tall_norm_rulf  /* =< */ { $$ = _ycell($1, $3); }
       | dig_trop w tall_norm_trop  /* -> */ { $$ = _ycell($1, $3); }
       | dig_prec w tall_norm_prec  /* -< */ { $$ = _ycell($1, $3); }
       | dig_link w tall_norm_link  /* ~> */ { $$ = _ycell($1, $3); }
@@ -500,7 +500,7 @@ tall
       tall_norm_pont
         : tok_mark w gene w gene { $$ = _ytrel($1, $3, $5); }
 
-      tall_norm_clet
+      tall_norm_rulf
         : tok_mark w gene w gene { $$ = _ytrel($1, $3, $5); }
 
       tall_norm_trop
@@ -1002,7 +1002,7 @@ tall
   /** Digraphs.
   **/
     dig_pont: '=' '>' { $$ = u4_atom_pont; }
-    dig_clet: '`' '<' { $$ = u4_atom_clet; }
+    dig_rulf: '=' '<' { $$ = u4_atom_rulf; }
     dig_trop: '-' '>' { $$ = u4_atom_trop; }
     dig_prec: '-' '<' { $$ = u4_atom_prec; }
     dig_link: '~' '>' { $$ = u4_atom_link; }

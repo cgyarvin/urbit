@@ -28,8 +28,12 @@ _mill_b_sure(u4_milr m,
   u4_mold nud = _mill_play(m, fes, tip);
   u4_mold gor = _mill_play(m, gav, tip);
 
-  // u4_burp(m->lane, "nud", _mill_dump(m, nud));
-  // u4_burp(m->lane, "gor", _mill_dump(m, gor));
+#if 1
+  if ( !u4_n_zero(m->rux) ) {
+    u4_burp(m->lane, "sure: b: gor", _mill_dump(m, gor));
+    u4_burp(m->lane, "sure: b: nud", _mill_dump(m, nud));
+  }
+#endif
 
   if ( !_mill_nest(m, gor, nud) ) {
     return _mill_fail(m, "mold mismatch");
@@ -51,8 +55,12 @@ _mill_m_sure(u4_milr m,
   u4_mold nud = _mill_play(m, fes, tip);
   u4_mold gor = _mill_play(m, gav, tip);
 
-  // u4_burp(m->lane, "nud", _mill_dump(m, nud));
-  // u4_burp(m->lane, "gor", _mill_dump(m, gor));
+#if 1
+  if ( !u4_n_zero(m->rux) ) {
+    u4_burp(m->lane, "sure: m: gor", _mill_dump(m, gor));
+    u4_burp(m->lane, "sure: m: nud", _mill_dump(m, nud));
+  }
+#endif
 
   if ( !_mill_nest(m, gor, nud) ) {
     return _mill_fail(m, "mold mismatch");

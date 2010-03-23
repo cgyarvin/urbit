@@ -17,10 +17,13 @@ u4_mill(u4_lane lane,
 
   u4_mill_init(&milr, lane);
 
+  printf(":");
+  fflush(stdout);
   {
     u4_milr m   = &milr;
     u4_loaf lof = _mill_make(m, nes, zyl);
 
+    printf(":\n");
     return lof;
   }
 }

@@ -14,12 +14,6 @@ _mill_q_pont(u4_milr m,
 {
   u4_lane lane = m->lane;
 
-  //  :*
-  //    %link
-  //    [%cret [han dur] [%% [%frag 1]] ~]
-  //    leb
-  //  ==
-  //
   return u4_k_trel
     (lane, 
      u4_atom_link,

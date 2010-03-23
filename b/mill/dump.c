@@ -4,6 +4,10 @@
 */
 #include "u4/all.h"
 
+    /** Global variables.
+    **/
+      u4_bag how;
+
     /** Forward declarations.
     **/
       static u4_prep
@@ -230,21 +234,25 @@ _dump_main(u4_milr m,
           (lane, u4_cod_in('$'), 
                  u4_prep_decimal(lane, u4_bag_at(lane, typ, u4_noun_1, gil)));
 
-      if ( u4_bag_in(typ, nip) ) {
+      if ( u4_bag_in(typ, nip) || u4_bag_in(typ, how) ) {
         return fez;
       }
       else {
-        u4_prep hod = 
-          _dump_main(m, gil, 
-                        u4_bag_add(lane, typ, nip),
-                        _mill_repo(m, p_typ, q_typ));
+        how = u4_bag_add(lane, typ, how);
+        { 
+          u4_prep hod = 
+            _dump_main(m, gil, 
+                          u4_bag_add(lane, typ, nip),
+                          _mill_repo(m, p_typ, q_typ));
 
-        return u4_k_list
-          (lane, u4_atom_nail, 
-                 fez,
-                 u4_cod_in('='),
-                 hod,
-                 0);
+          
+          return u4_k_list
+            (lane, u4_atom_nail, 
+                   fez,
+                   u4_cod_in('='),
+                   hod,
+                   0);
+        }
       }
     }
     else {
@@ -288,7 +296,13 @@ _mill_dump(u4_milr m,
            u4_mold typ)
 {
   u4_bag gil = _mill_seal(m, typ);
+  u4_prep par;
 
-  u4_assert(u4_bag_ok(gil));
-  return _dump_main(m, gil, u4_noun_0, typ);
+  // Lamentable.
+  //
+  how = u4_noun_0;
+  par = _dump_main(m, gil, u4_noun_0, typ);
+  how = u4_noun_0;
+
+  return par;
 }

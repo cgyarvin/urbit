@@ -1,25 +1,19 @@
-/* mill/q/clet.c
+/* mill/q/rulf.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_q_clet():
+/* _mill_q_rulf():
 */
 u4_noun
-_mill_q_clet(u4_milr m, 
+_mill_q_rulf(u4_milr m, 
              u4_mark han,
              u4_gene dur,
              u4_gene leb)
 {
   u4_lane lane = m->lane;
 
-  //  :*
-  //    %link
-  //    [%cret [han leb] [%% [%frag 1]] ~]
-  //    dur
-  //  ==
-  
   return u4_k_trel
     (lane, u4_atom_link,
            u4_k_qual

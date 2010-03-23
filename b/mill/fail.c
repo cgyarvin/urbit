@@ -27,7 +27,7 @@ _mill_fail(u4_milr m,
           printf("fail: %s\n", cl_hal);
 
           if ( !u4_n_zero(nof) ) {
-            u4_err(m->lane, "site", nof);
+            u4_burp(m->lane, "home", u4_prep_textual(m->lane, nof));
           }
           if ( !u4_n_zero(jup) ) {
             u4_atom pp_jup = u4_ch(u4_ch(jup));
@@ -40,7 +40,7 @@ _mill_fail(u4_milr m,
               u4_xw xw_llin = u4_a_wtrip(pq_jup);
               u4_xw xw_lcol = u4_a_wtrip(qq_jup);
 
-              printf("  at: %d:%d - %d:%d\n\n", 
+              printf("spot: %d:%d - %d:%d\n\n", 
                      xw_flin, xw_fcol, xw_llin, xw_lcol);
             }
           }
