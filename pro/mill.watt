@@ -106,18 +106,12 @@
                         +   ~
                         -   ^
                           +-
-                            [p.i.wix.kel $$(kel q.i.wix.kel)]
-                            $(wix.kel q.wix.kel)
+                            !#
+                              [p.i.wix.kel $$(kel q.i.wix.kel)]
+                            $(wix.kel t.wix.kel)
                           ==
                       ==
                   ==
-
-        [%gate puz=gene]                                ::  *:
-        [%grip ved=form piv=form]                       ::  *|
-        [%pick bec=(list form)]                         ::  **
-        [%dish heb=gene]                                ::  *~
-        [%rock hin=*]                                   ::  %
-                -   [%
               ==
 
           - open-form-lump

@@ -71,7 +71,9 @@ _look_knot(u4_milr m,
                 u4_b_p(p_vil, u4_noun_0, &axe) &&
                 u4_b_pq(lem, u4_atom_hold, &ger, 0) )
       {
+        axe = u4_op_peg(lane, axe, u4_noun_2);
         vil = u4_k_cell(lane, u4_noun_0, axe);
+        ger = _mill_peek(m, u4_noun_2, u4_noun_0, ger);
       }
       else return u4_trip;
 
