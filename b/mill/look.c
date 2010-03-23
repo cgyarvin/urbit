@@ -83,12 +83,11 @@ _look_knot(u4_milr m,
         u4_burp(lane, "mold", _mill_dump(m, typ));
         u4_burp(lane, "mark", u4_prep_textual(lane, cox));
 
-        return _mill_fail(m, "look: not found");
         return _mill_fail(m, "look: no grip");
       }
       else {
         return u4_k_cell
-          (lane, u4_ch(fod), _mill_comp(m, u4_ct(fod), vil));
+          (lane, u4_ch(fod), _mill_comp(m, vil, u4_ct(fod)));
       }
     }
   }
