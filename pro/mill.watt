@@ -98,6 +98,26 @@
                 -   %flag   [%nock %6 [%cage [%rock 0] [%rock 0] ~]]
                 -   %twin   [%crib [%% %crad 0] [%% %crad 0] ~]
 
+                -   [%crib wix=(list :[p=mark q=form])]
+                  +-
+                    %cret
+                    |-
+                      ?-  wix.kel
+                        +   ~
+                        -   ^
+                          +-
+                            [p.i.wix.kel $$(kel q.i.wix.kel)]
+                            $(wix.kel q.wix.kel)
+                          ==
+                      ==
+                  ==
+
+        [%gate puz=gene]                                ::  *:
+        [%grip ved=form piv=form]                       ::  *|
+        [%pick bec=(list form)]                         ::  **
+        [%dish heb=gene]                                ::  *~
+        [%rock hin=*]                                   ::  %
+                -   [%
               ==
 
           - open-form-lump
