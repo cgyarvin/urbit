@@ -249,6 +249,23 @@
             $(x t.x)
         ==
 
+  ::::::::  sort                sort a list (quicksort)
+  ::
+    - sort
+      |:
+        w = (list)
+        x = ~?
+      ==
+        ^-  w
+        ?-  w
+          +   ~
+          -   [i=* t=*]
+            :+  weld
+              $(w (skim t.w |:{b=* (x b i.w)}))
+              [i.w $(w (skim t.w |:{b=* !(x b i.w)}))]
+            ==
+        ==
+
   ::::::::  weld                concatenate lists
   ::
     - weld

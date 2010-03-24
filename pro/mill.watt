@@ -3,8 +3,130 @@
 
 |:  z = *
 ==
-  |*  (mold z)
+  |*  (open (gene z))
   ::
+    - open
+      ||  gene
+        y = gene
+      ==
+        |*
+        ::
+          ?-  y
+            -   [%pont han=mark dur=gene leb=gene]      ::  =>
+              +-
+                %link
+                [%cret [han.y dur.y] [%% [%frag 1]] ~]
+                leb.y
+              ==
+
+            -   [%rulf han=mark dur=gene leb=gene]      ::  <=
+              +-
+                %link
+                [%cret [han.y leb.y] [%% [%frag 1]] ~]
+                dur.y
+              ==
+
+            -   [%trop hig=gene muc=gene]               ::  ->
+              +-
+                %link
+                [%cage hig.y [%frag 1] ~]
+                muc.y
+              ==
+
+            -   [%prec hig=gene muc=gene]               ::  -<
+              +-
+                %link
+                [%cage muc.y [%frag 1] ~]
+                hig.y
+              ==
+
+            -   [%colb del=gene zim=gene]               ::  ~<
+              [%link zim.y del.y]
+
+            -   [%feng tes=gene bif=gene]               ::  ?>
+              [%quiz tes.y bif.y [%bail ~]]
+
+            -   [%prex tes=gene hob=gene]               ::  ?<
+              [%quiz tes.y [%bail ~] hob.y]
+
+            -   [%gril mox=wire bem=(list pike)]        ::  ?-
+              |-
+                ?-  bem.y
+                  -   ~
+                    [%bail ~]
+                  -   ^
+                    =>  a   
+                      (open-pike mox.y i.bem.y)
+                    [%quiz tes.a bif.a $(bem.y t.bem.y)]
+                ==
+
+            -   [%stam feg=gene bem=(list pike)]        ::  ?+
+              !!
+            -   [%boce das=(list gene)]                 ::  ?&
+              !!
+            -   [%dant das=(list gene)]                 ::  ?|
+              !!
+            -   [%blem gix=gene]                        ::  ?!
+              !!
+          ==
+
+          - open-pike
+            ||  [tes=gene bif=gene]
+              mox = wire
+              pik = pike
+            ==
+              ?-  pik
+                -   [%lask bic=form luf=gene]           ::  -
+                  !!
+                -   [%plic bic=form]                    ::  +
+                  !!
+                -   [%semp bic=form luf=gene]           ::  :
+                  !!
+                -   [%fing bic=form]                    ::  =
+                  !!
+                -   [%homp luf=gene]                    ::  *
+                  !!
+              ==
+
+          - open-form-grip
+            ||  gene
+              kel = form
+            ==
+              ?-  kel
+                -   %blur   [%crad 0]
+                -   %atom   [%palt 0]
+                -   %flag   [%nock %6 [%cage [%rock 0] [%rock 0] ~]]
+                -   %twin   [%cret [%% %crad 0] [%% %crad 0] ~]
+
+                -   [%crib wix=(list :[p=mark q=form])]
+                  +-
+                    %cret
+                    |-
+                      ?-  wix.kel
+                        +   ~
+                        -   ^
+                          +-
+                            [p.i.wix.kel $$(kel q.i.wix.kel)]
+                            $(wix.kel t.wix.kel)
+                          ==
+                      ==
+                  ==
+              ==
+
+          - open-form-lump
+            ||  gene
+              kel = form
+            ==
+              !!
+
+          - open-form-gate
+            ||  gene
+              kel = form
+            ==
+              !!
+        ==
+
+
     - mold
       |~
       ** 
@@ -46,7 +168,6 @@
         [%prec hig=gene muc=gene]                       ::  -<
         [%colb del=gene zim=gene]                       ::  ~<
 
-        [%quiz tes=gene bif=gene hob=gene]              ::  ?:
         [%feng tes=gene bif=gene]                       ::  ?>
         [%prex tes=gene hob=gene]                       ::  ?<
         [%gril mox=wire bem=(list pike)]                ::  ?-
@@ -95,6 +216,7 @@
         %atom                                           ::  @
         %flag                                           ::  ?
         %blur                                           ::  *
+        %twin                                           ::  ^
         [%crib wix=(list :[p=mark q=form])]             ::  *+
         [%gate puz=gene]                                ::  *:
         [%grip ved=form piv=form]                       ::  *|
@@ -138,5 +260,4 @@
 
     - step
       @
-  ::
   ==

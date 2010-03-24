@@ -54,6 +54,10 @@
         */
         u4_lane lane;
 
+        /* Internal counter for perf testing.
+        */
+        uint32_t prf;
+
         /* Set (mold gene) currently in replay (aka repo).
         */
         u4_bag fan;

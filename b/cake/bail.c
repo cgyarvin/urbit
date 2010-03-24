@@ -13,19 +13,23 @@ u4_int
 u4_bail_out(enum u4_bail_code code)
 {
   if ( code == u4_bail_trip ) {
+    // longjmp(U4_Bail.jmpbuf, code);
     printf("trip!\n");
     abort();
   }
   else if ( code == u4_bail_stub ) {
+    // longjmp(U4_Bail.jmpbuf, code);
     printf("stub!\n");
     abort();
   }
   else if ( code == u4_bail_tank ) {
-    printf("tank!\n");
-    abort();
+    longjmp(U4_Bail.jmpbuf, code);
+  }
+  else if ( code == u4_bail_exit ) {
+    longjmp(U4_Bail.jmpbuf, code);
   }
   else {
-    printf("huh?\n");
+    printf("huh %x?\n", code);
     abort();
     longjmp(U4_Bail.jmpbuf, code);
   }

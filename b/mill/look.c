@@ -48,8 +48,8 @@ _look_knot(u4_milr m,
     fod = _mill_find(m, cox, u4_noun_0, typ);
 
     if ( u4_n_zero(fod) ) {
-      u4_burp(lane, "mark", u4_prep_textual(lane, cox));
       u4_burp(lane, "mold", _mill_dump(m, typ));
+      u4_burp(lane, "mark", u4_prep_textual(lane, cox));
 
       return _mill_fail(m, "look: not found");
     }
@@ -71,22 +71,23 @@ _look_knot(u4_milr m,
                 u4_b_p(p_vil, u4_noun_0, &axe) &&
                 u4_b_pq(lem, u4_atom_hold, &ger, 0) )
       {
+        axe = u4_op_peg(lane, axe, u4_noun_2);
         vil = u4_k_cell(lane, u4_noun_0, axe);
+        ger = _mill_peek(m, u4_noun_2, u4_noun_0, ger);
       }
       else return u4_trip;
 
       fod = _look_knot(m, vor, ger);
 
       if ( u4_n_zero(fod) ) {
-        u4_burp(lane, "mark", u4_prep_textual(lane, cox));
         u4_burp(lane, "mold", _mill_dump(m, typ));
+        u4_burp(lane, "mark", u4_prep_textual(lane, cox));
 
-        return _mill_fail(m, "look: not found");
         return _mill_fail(m, "look: no grip");
       }
       else {
         return u4_k_cell
-          (lane, u4_ch(fod), _mill_comp(m, u4_ct(fod), vil));
+          (lane, u4_ch(fod), _mill_comp(m, vil, u4_ct(fod)));
       }
     }
   }

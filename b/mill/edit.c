@@ -238,10 +238,10 @@ _edit_dome_fab_gene(u4_milr m,
     m->pox = pox;
 
     if ( !fab ) {
-      printf("\n");
-      u4_burp(lane, "edit: doz", _mill_dump(m, doz));
-      u4_burp(lane, "edit: pib", _mill_dump(m, p_gom));
-      u4_err(lane, "edit: gen", gen);
+      // printf("\n");
+      // u4_burp(lane, "edit: doz", _mill_dump(m, doz));
+      // u4_burp(lane, "edit: pib", _mill_dump(m, p_gom));
+      // u4_err(lane, "edit: gen", gen);
     }
     return fab;
   }
@@ -403,7 +403,7 @@ _edit_mask(u4_milr m,
   }
 }
 
-/* _mill_edit(): edit a mold to refport a list of writes.
+/* _mill_edit(): edit a mold to accept a list of writes.
 **
 **  zel: changes: list+[list+[([%axis axis] [%term term]) mold]]
 */
@@ -460,8 +460,8 @@ _mill_edit(u4_milr m,
           return gom;
         }
         else {
-          u4_burp(m->lane, "doz", _mill_dump(m, doz));
-          u4_burp(m->lane, "p_gom", _mill_dump(m, p_gom));
+          // u4_burp(m->lane, "doz", _mill_dump(m, doz));
+          // u4_burp(m->lane, "p_gom", _mill_dump(m, p_gom));
 
           return _mill_fail(m, "cone violation");
         }
@@ -490,7 +490,22 @@ _mill_edit(u4_milr m,
   // [%fork p=(mold) q=(mold)]
   //
   else if ( u4_b_pq(gom, u4_atom_fork, &p_gom, &q_gom) ) {
-    return _edit_mask(m, zel);
+    u4_t t_sin = _mill_cull(m, bar, p_gom);
+    u4_t t_dex = _mill_cull(m, bar, q_gom);
+
+    if ( (t_sin && t_dex) ) {
+      return _edit_mask(m, zel);
+    }
+    else if ( t_sin ) {
+      return _mill_edit(m, zel, bar, q_gom);
+    }
+    else if ( t_dex ) {
+      return _mill_edit(m, zel, bar, p_gom);
+    }
+    else {
+      return _mill_eith(m, _mill_edit(m, zel, bar, p_gom),
+                           _mill_edit(m, zel, bar, q_gom));
+    }
   }
 
   // [%fuse p=(mold) q=(mold)]
