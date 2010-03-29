@@ -12,11 +12,6 @@ _mill_q_boce(u4_milr m,
 {
   u4_lane lane = m->lane;
 
-  //  ?-  das
-  //    -   ~       [%rock %0]
-  //    -   [i t]   [%quiz i.das $(das t.das) [%rock %1]]
-  //  ==
-
   if ( u4_n_zero(das) ) {
     return u4_k_cell(lane, u4_atom_rock, u4_noun_0);
   }

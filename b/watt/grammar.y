@@ -168,6 +168,7 @@ form_w
       | '0' 'x' tok_chex  { $$ = $3; }
       | tok_loct          { $$ = $1; }
       | '%' tok_mark      { $$ = $2; }
+      | '%' '%'           { $$ = u4_noun_0; }
       ;
 
 
@@ -298,7 +299,7 @@ wide
 
       | dig_quiz wide_norm_quiz  /* ?: */ { $$ = _ycell($1, $2); }
       | dig_feng wide_norm_feng  /* ?> */ { $$ = _ycell($1, $2); }
-      | dig_prex wide_norm_prex  /* ?< */ { $$ = _ycell($1, $2); }
+      | dig_prox wide_norm_prox  /* ?< */ { $$ = _ycell($1, $2); }
       | dig_gril wide_norm_gril  /* ?- */ { $$ = _ycell($1, $2); }
       | dig_stam wide_norm_stam  /* ?+ */ { $$ = _ycell($1, $2); }
       | dig_boce wide_norm_boce  /* ?& */ { $$ = _ycell($1, $2); }
@@ -358,7 +359,7 @@ wide
       wide_norm_feng
         : '{' g wide w wide g '}' { $$ = _ycell($1, $3); }
 
-      wide_norm_prex
+      wide_norm_prox
         : '{' g wide w wide g '}' { $$ = _ycell($1, $3); }
 
       wide_norm_gril
@@ -462,7 +463,7 @@ tall
 
       | dig_quiz w tall_norm_quiz  /* ?: */ { $$ = _ycell($1, $3); }
       | dig_feng w tall_norm_feng  /* ?> */ { $$ = _ycell($1, $3); }
-      | dig_prex w tall_norm_prex  /* ?< */ { $$ = _ycell($1, $3); }
+      | dig_prox w tall_norm_prox  /* ?< */ { $$ = _ycell($1, $3); }
       | dig_gril w tall_norm_gril  /* ?- */ { $$ = _ycell($1, $3); }
       | dig_stam w tall_norm_stam  /* ?+ */ { $$ = _ycell($1, $3); }
       | dig_boce w tall_norm_boce  /* ?& */ { $$ = _ycell($1, $3); }
@@ -524,7 +525,7 @@ tall
       tall_norm_feng
         : gene w gene { $$ = _ycell($1, $3); }
 
-      tall_norm_prex
+      tall_norm_prox
         : gene w gene { $$ = _ycell($1, $3); }
 
       tall_norm_gril
@@ -1010,7 +1011,7 @@ tall
 
     dig_quiz: '?' ':' { $$ = u4_atom_quiz; } 
     dig_feng: '?' '>' { $$ = u4_atom_feng; }
-    dig_prex: '?' '<' { $$ = u4_atom_prex; }
+    dig_prox: '?' '<' { $$ = u4_atom_prox; }
     dig_gril: '?' '-' { $$ = u4_atom_gril; }
     dig_stam: '?' '+' { $$ = u4_atom_stam; }
     dig_boce: '?' '&' { $$ = u4_atom_boce; }

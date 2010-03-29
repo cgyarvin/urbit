@@ -23,11 +23,11 @@
   }
 
 
-/* _mill_open(): mold inference, top level.
+/* _open_in(): mold expansion, static.
 */
-u4_mold 
-_mill_open(u4_milr m,
-           u4_gene gen)
+static u4_mold
+_open_in(u4_milr m,
+         u4_gene gen)
 {
   u4_noun p_gen, q_gen, r_gen;
 
@@ -54,7 +54,7 @@ _mill_open(u4_milr m,
     _open_p  (palt);
     _open_p  (dant);  // ?|
     _open_pqr(pont);  // =>
-    _open_pq (prex);  // ?<
+    _open_pq (prox);  // ?<
     _open_pq (grun);  // :%
     _open_p  (crad);
     _open_p  (cret);  // :*
@@ -68,5 +68,24 @@ _mill_open(u4_milr m,
     _open_p  (frag);
 
     return gen;
+  }
+}
+
+/* _mill_open(): mold expansion.
+*/
+u4_mold 
+_mill_open(u4_milr m,
+           u4_gene gen)
+{
+  u4_nopt zax = u4_tab_get(gen, m->pon);
+
+  if ( u4_bull != zax ) {
+    return zax;
+  }
+  else {
+    zax = _open_in(m, gen);
+
+    m->pon = u4_tab_add(m->lane, gen, zax, m->pon);
+    return zax;
   }
 }

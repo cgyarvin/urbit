@@ -12,12 +12,6 @@ _mill_q_flot(u4_milr m,
 {
   u4_lane lane = m->lane;
 
-  //  :*
-  //    %link
-  //    [%load [%% cug]]
-  //    [%port 0 %%]
-  //  ==
-
   return u4_k_trel
     (lane, u4_atom_link,
            u4_k_trel(lane, u4_atom_load, u4_noun_0, cug),

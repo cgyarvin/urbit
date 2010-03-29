@@ -14,27 +14,12 @@ _mill_q_drol(u4_milr m,
 {
   u4_lane lane = m->lane;
 
-  //  :*
-  //    %trop
-  //    (lump tep)
-  //    :*  
-  //      %lome
-  //      :*  
-  //        %cast 
-  //        (lump nix)
-  //        %flot
-  //        von 
-  //      ==
-  //    ==
-  //  ==
-
   return u4_k_qual
     (lane, u4_atom_trop,
            _mill_lump(m, tep),
            u4_atom_lome,
-           u4_k_qual
+           u4_k_trel
              (lane, u4_atom_cast,
                     _mill_lump(m, nix),
-                    u4_atom_flot,
                     von));
 }

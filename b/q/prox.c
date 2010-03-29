@@ -1,13 +1,13 @@
-/* mill/q/prex.c
+/* mill/q/prox.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* _mill_q_prex():
+/* _mill_q_prox():
 */
 u4_noun
-_mill_q_prex(u4_milr m, 
+_mill_q_prox(u4_milr m, 
              u4_gene tes,
              u4_gene hob)
 {

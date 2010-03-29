@@ -195,6 +195,18 @@
               $(z t.z, a [i=i.z t=a])
           ==
 
+  ::::::::  lent                length of list
+  ::
+    - lent
+      ||  @
+        z = (list)
+      ==
+        ?-  z
+          -   ~   0
+          -   ^   (inc $(z t.z))
+        ==
+
+
   ::::::::  skim                select list items
   ::
     - skim
@@ -214,17 +226,30 @@
   ::
     - sort
       |:
-        w = (list)
-        x = ~?
+        x = (list)
+        y = ~?
       ==
-        ^-  w
-        ?-  w
+        ^-  x
+        ?-  x
           +   ~
           -   [i=* t=*]
             :+  weld
-              $(w (skim t.w |:{b=* (x b i.w)}))
-              [i.w $(w (skim t.w |:{b=* !(x b i.w)}))]
+              $(x (skim t.x |:{b=* (y b i.x)}))
+              [i.x $(x (skim t.x |:{b=* !(y b i.x)}))]
             ==
+        ==
+
+  ::::::::  turn                transform a list
+  ::
+    - turn
+      |:
+        x = (list) 
+        y = ~*
+      ==
+        ?-  x
+          +   ~
+          -   ^
+            [i=(y i.x) t=$(x t.x)]
         ==
 
   ::::::::  weld                concatenate lists

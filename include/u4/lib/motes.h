@@ -391,6 +391,7 @@
     u4_lib_mote(pret, u4_s4('p','r','e','t'))
     u4_lib_mote(prex, u4_s4('p','r','e','x'))
     u4_lib_mote(pril, u4_s4('p','r','i','l'))
+    u4_lib_mote(prox, u4_s4('p','r','o','x'))
     u4_lib_mote(puck, u4_s4('p','u','c','k'))
     u4_lib_mote(pull, u4_s4('p','u','l','l'))
     u4_lib_mote(pult, u4_s4('p','u','l','t'))

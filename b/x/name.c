@@ -14,7 +14,11 @@ _mill_p_name(u4_milr m,
 {
   u4_lane lane = m->lane;
 
-  return u4_k_trel(lane, u4_atom_face, tem, _mill_play(m, caf, pex));
+  if ( u4_n_zero(tem) ) {
+    return _mill_play(m, caf, pex);
+  } else {
+    return u4_k_trel(lane, u4_atom_face, tem, _mill_play(m, caf, pex));
+  }
 }
 
 /* _mill_b_name()::
@@ -39,7 +43,11 @@ _mill_m_name(u4_milr m,
   u4_lane lane = m->lane;
   u4_loaf rec = _mill_make(m, caf, pex);
 
-  return u4_k_cell
-    (lane, u4_k_trel(lane, u4_atom_face, tem, u4_ch(rec)),
-           u4_ct(rec));
+  if ( u4_n_zero(tem) ) {
+    return rec;
+  } else {
+    return u4_k_cell
+      (lane, u4_k_trel(lane, u4_atom_face, tem, u4_ch(rec)),
+             u4_ct(rec));
+  }
 }

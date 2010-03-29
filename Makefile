@@ -130,7 +130,7 @@ U4_MQ_OFILES=\
        b/q/palt.o \
        b/q/dant.o \
        b/q/pont.o \
-       b/q/prex.o \
+       b/q/prox.o \
        b/q/crad.o \
        b/q/rald.o \
        b/q/rulf.o \

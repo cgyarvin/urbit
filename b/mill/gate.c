@@ -77,7 +77,7 @@ _gate_crib(u4_milr m,
 */
 static u4_gene
 _gate_dish(u4_milr m,
-           u4_gene puz)
+           u4_gene heb)
 {
   u4_lane lane = m->lane;
   u4_noun far  = u4_k_cell(lane, u4_atom_frag, u4_noun_4);
@@ -86,12 +86,12 @@ _gate_dish(u4_milr m,
   return u4_k_qual
     (lane, 
      u4_atom_trop,
-     _gate_arg(m, u4_k_cell(lane, u4_atom_dish, puz)),
+     _gate_arg(m, u4_k_cell(lane, u4_atom_dish, heb)),
      u4_atom_lome,
      u4_k_trel
       (lane,
        u4_atom_feng,
-       u4_k_trel(lane, u4_atom_like, rid, puz),
+       u4_k_trel(lane, u4_atom_like, rid, heb),
        far));
 }
 

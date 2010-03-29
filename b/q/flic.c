@@ -13,14 +13,6 @@ _mill_q_flic(u4_milr m,
 {
   u4_lane lane = m->lane;
 
-  //  :*
-  //    %trop
-  //    (lump tep)
-  //    :*  
-  //      [%lift 0 von]
-  //    ==
-  //  ==
-
   return u4_k_trel
     (lane, u4_atom_trop,
            _mill_lump(m, tep),
