@@ -113,7 +113,6 @@ U4_MQ_OFILES=\
        b/q/blin.o \
        b/q/boce.o \
        b/q/bink.o \
-       b/q/crot.o \
        b/q/drol.o \
        b/q/feng.o \
        b/q/flec.o \
@@ -134,7 +133,10 @@ U4_MQ_OFILES=\
        b/q/crad.o \
        b/q/rald.o \
        b/q/rulf.o \
-       b/q/cret.o \
+       b/q/cell.o \
+       b/q/trel.o \
+       b/q/qual.o \
+       b/q/rack.o \
        b/q/colb.o \
        b/q/flic.o \
        b/q/blem.o \

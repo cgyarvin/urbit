@@ -30,33 +30,19 @@
             -   [%cage fut=(list gene)]
               gen
 
+            -   [%cell yeg=gene nal=gene]
+              [%cage yeg.gen nal.gen ~]
+
             -   [%cast fes=gene rum=gene]
               gen
 
             -   [%colb del=gene zim=gene]
               [%link zim.gen del.gen]
 
-            -   [%cret caw=grid]
-              +-  %cage
-                |-
-                  ?-  caw.gen
-                    +   ~
-                    -   ^
-                      +-
-                        ?-  p.i.caw.gen
-                          -   %%  q.i.caw.gen
-                          -   *   [%name p.i.caw.gen q.i.caw.gen]
-                        ==
-                        $(caw.gen t.caw.gen)
-                      ==
-                  ==
-              ==
-
             -   [%drol nix=form tep=form von=gene]
-              +-  %trop
+              +:  %trop
                 (form-lump tep.gen) 
                 [%lome [%cast (form-lump nix.gen) von.gen]]
-              ==
 
             -   [%feng tes=gene bif=gene]
               [%quiz tes.gen bif.gen [%bail ~]]
@@ -72,10 +58,9 @@
                 ==
 
             -   [%flot cug=gene]
-              +-  %link
+              +:  %link
                 [%load %% cug.gen]
                 [%port 0 %%]
-              ==
 
             -   [%frag haz=axis]
               [%kick [gen ~] ~]
@@ -98,10 +83,9 @@
                 ==
 
             -   [%grun vec=bolt sud=gene]
-              +-  %link
+              +:  %link
                 [%kick [[%frag 1] ~] vec.gen]
                 sud.gen
-              ==
 
             -   [%kick ved=wire suc=bolt]
               gen
@@ -116,16 +100,14 @@
               gen
 
             -   [%mang buz=gene lep=gene]
-              +-  %trop
+              +:  %trop
                 buz.gen
-                %kick
-                [[%frag 2] %% ~]
-                [ [ [[%frag 4] ~]
-                    [%link [%frag 3] lep.gen]
-                  ]
-                  ~
-                ]
-              ==
+                +:  %kick
+                  [[%frag 2] %% ~]
+                  +~
+                    +-  [[%frag 4] ~]
+                      [%link [%frag 3] lep.gen]
+                  ==
 
             -   [%lome cug=gene]
               [%load %% cug.gen]
@@ -137,19 +119,17 @@
               !!  :: needs bush tools
 
             -   [%pont han=mark dur=gene leb=gene]
-              +-  %link
-                [%cret [han.gen dur.gen] [%% [%frag 1]] ~]
+              +:  %link
+                [%cage [%name han.gen dur.gen] [%frag 1] ~]
                 leb.gen
-              ==
-
-            -   [%prec hig=gene muc=gene]
-              +-   %link
-                [%cage muc.gen [%frag 1] ~]
-                hig.gen
-              ==
 
             -   [%port tic=@ vix=mark]
               [%kick [gen ~] ~]
+
+            -   [%prec hig=gene muc=gene]
+              +:   %link
+                [%cage muc.gen [%frag 1] ~]
+                hig.gen
 
             -   [%prox tes=gene hob=gene]
               [%quiz tes.gen [%bail ~] hob.gen]
@@ -157,23 +137,35 @@
             -   [%quiz tes=gene bif=gene hob=gene]
               gen
 
+            -   [%qual dor=gene vit=gene lum=gene sag=gene]
+              [%cage dor.gen vit.gen lum.gen sag.gen ~]
+
+            -   [%rack der=(list gene)]
+              +-  %cage
+                |-
+                  ?-  der
+                    -   ~   [[%rock 0] ~]
+                    -   ^   [i.der $(der t.der)]
+                  ==
+
             -   [%rulf han=mark dur=gene leb=gene]
-              +-  %link
-                [%cret [han.gen leb.gen] [%% [%frag 1]] ~]
+              +:  %link
+                [%cage [%name han.gen leb.gen] [%frag 1] ~]
                 dur.gen
-              ==
 
             -   [%stam feg=gene bem=(list pike)]
               [%trop feg.gen [%gril [[%frag 2] ~] bem.gen]]
+
+            -   [%trel ruv=gene sel=gene gar=gene]
+              [%cage ruv.gen sel.gen gar.gen ~]
 
             -   [%sure fes=gene gav=gene vep=gene]
               gen
 
             -   [%trop hig=gene muc=gene] 
-              +-  %link
+              +:  %link
                 [%cage hig.gen [%frag 1] ~]
                 muc.gen
-              ==
           ==
 
           - open-pike
@@ -186,7 +178,6 @@
                   +-
                     [%like mox (form-grip kel.pik)]
                     [%sure (form-lump kel.pik) [%kick mox ~] luf.pik]
-                  ==
 
                 -   [%plic kel=form]                    ::  +
                   $(pik [%lask kel.pik [%kick mox ~]])
@@ -194,33 +185,26 @@
                 -   [%semp kel=form luf=gene]           ::  :
                   +-
                     [%like mox (form-grip kel.pik)]
-                    [ %grun
-                      [ [ mox
-                          [ %mang
+                    +:  %grun
+                      +~
+                        +-  mox
+                          +:  %mang
                             (form-gate kel.pik)
                             [%cast [%crad 0] [%kick mox ~]]
-                          ]
-                        ]
-                        ~
-                      ]
+                      ==
                       luf.pik
-                    ]
-                  ==
 
                 -   [%fing kel=form]                    ::  =
                   +-
                     [%like mox (form-grip kel.pik)]
-                    [ %mang
+                    +:  %mang
                       (form-gate kel.pik)
                       [%cast [%crad 0] [%kick mox ~]]
-                    ]
-                  ==
 
                 -   [%homp luf=gene]                    ::  *
                   +-
                     [%rock 0]
                     luf.pik
-                  ==
               ==
 
           - form-grip
@@ -234,23 +218,20 @@
                 -   %twin   $(kel [%crib [%% %blur] [%% %blur] ~])
 
                 -   [%crib wix=(list :[p=mark q=form])]
-                  +-  %cret
-                    (turn wix.kel |:{[p=mark q=form] [p (form-grip q)]})
-                  ==
+                  +-  %cage
+                    (turn wix.kel |:{[p=mark q=form] [%name p (form-grip q)]})
 
                 -   [%pick bec=(list form)]
-                  +-
-                    %trop
+                  +:  %trop
                     [%cast [%crad 0] $(kel ?-{bec.kel: - ^ i.bec.kel})]
-                    %gril
-                    [[%frag 2] ~]
-                    |-
-                      ?-  bec.kel
-                        +   ~ 
-                        -   ^   [[%fing i.bec.kel] $(bec.kel t.bec.kel)]
-                      ==
-                  ==
-                  
+                    +:  %gril
+                      [[%frag 2] ~]
+                      |-
+                        ?-  bec.kel
+                          +   ~ 
+                          -   ^   [[%fing i.bec.kel] $(bec.kel t.bec.kel)]
+                        ==
+       
                 -   [%rock hin=*]               [%rock hin.kel]
                 -   [%gate puz=gene]            [%crad 0]
                 -   [%grip ved=form piv=form]   $(kel ved.kel)
@@ -268,23 +249,20 @@
                 -   %twin   $(kel [%crib [%% %blur] [%% %blur] ~])
 
                 -   [%crib wix=(list :[p=mark q=form])]
-                  +-  %cret
-                    (turn wix.kel |:{[p=mark q=form] [p (form-lump q)]})
-                  ==
+                  +-  %cage
+                    (turn wix.kel |:{[p=mark q=form] [%name p (form-lump q)]})
 
                 -   [%pick bec=(list form)]
-                  +-
-                    %trop
+                  +:  %trop
                     [%cast [%crad 0] $(kel ?-{bec.kel: - ^ i.bec.kel})]
-                    %gril
-                    [[%frag 2] ~]
-                    |-
-                      ?-  bec.kel
-                        +   ~ 
-                        -   ^   [[%fing i.bec.kel] $(bec.kel t.bec.kel)]
-                      ==
-                  ==
-                  
+                    +:  %gril
+                      [[%frag 2] ~]
+                      |-
+                        ?-  bec.kel
+                          +   ~ 
+                          -   ^   [[%fing i.bec.kel] $(bec.kel t.bec.kel)]
+                        ==
+     
                 -   [%rock hin=*]               [%rock hin.kel]
                 -   [%gate puz=gene]            [%link puz.kel [%port 0 %%]]
                 -   [%grip ved=form piv=form]   $(kel piv.kel)
@@ -301,69 +279,62 @@
                   [%trop [%crad 0] %lome [%frag 4]]
 
                 -   %atom 
-                  +-  %trop
+                  +:  %trop
                     [%crad 0]
-                    %lome
-                    [%feng [%like [[%frag 4] ~] [%palt 0]] [%frag 4]]
-                  ==
+                    +-  %lome
+                      [%feng [%like [[%frag 4] ~] [%palt 0]] [%frag 4]]
 
                 -   %flag
-                  +-  %trop
+                  +:  %trop
                     [%crad 0]
-                    %lome
-                    [%nock %6 [%cage [%rock 0] [%frag 4] ~]]
-                  ==
+                    +-  %lome
+                      [%nock %6 [%cage [%rock 0] [%frag 4] ~]]
 
                 -   %twin
                   $(kel [%crib [%% %blur] [%% %blur] ~])
 
                 -   [%crib wix=(list :[p=mark q=form])]
-                  +-  %trop
+                  +:  %trop
                     [%cast [%crad 0] (form-lump kel)]
-                    %lome
-                    %cret
-                    =>  axe   4
-                    |-
-                      ?-  wix.kel
-                        -   [* ~]
-                          +-
-                            +-
-                              p.i.wix.kel 
-                              [%mang $$(kel q.i.wix.kel) [%frag axe]]
-                            ==
-                            ~
-                          ==
+                    +-  %lome
+                      +-  %cage
+                        =>  axe   4
+                        |-
+                          ?-  wix.kel
+                            -   [* ~]
+                              +~
+                                +:  %name
+                                  p.i.wix.kel 
+                                  [%mang $$(kel q.i.wix.kel) [%frag axe]]
+                              ==
 
-                        -   ^
-                          +-
-                            +-
-                              p.i.wix.kel 
-                              [%mang $$(kel q.i.wix.kel) [%frag (mul 2 axe)]]
-                            ==
-                            $(wix.kel t.wix.kel, axe (inc (mul 2 axe)))
+                            -   ^
+                              +-
+                                +:  %name
+                                  p.i.wix.kel 
+                                  +:  %mang
+                                    $$(kel q.i.wix.kel) 
+                                    [%frag (mul 2 axe)]
+                                $(wix.kel t.wix.kel, axe (inc (mul 2 axe)))
                           ==
-                      ==
-                  ==
 
                 -   [%pick bec=(list form)]
-                  +-  %trop
+                  +:  %trop
                     [%cast [%crad 0] (form-lump ?-{bec.kel: - ^ i.bec.kel})]
-                    %lome
-                    %gril
-                    [[%frag 4] ~]
-                    |-
-                      ?-  bec.kel
-                        +   ~
-                        -   ^   [[%fing i.bec.kel] $(bec.kel t.bec.kel)] 
-                      == 
-                  ==
+                    +-  %lome
+                      +:  %gril
+                        [[%frag 4] ~]
+                        |-
+                          ?-  bec.kel
+                            +   ~
+                            -   ^   [[%fing i.bec.kel] $(bec.kel t.bec.kel)] 
+                          == 
   
                 -   [%rock hin=*]
-                  +-  %trop
+                  +:  %trop
                     [%crad hin.kel]
-                    %lome
-                    [%feng [%like [[%frag 4] ~] [%rock hin.kel]] [%frag 4]]
-                  ==
+                    +-  %lome
+                      [%feng [%like [[%frag 4] ~] [%rock hin.kel]] [%frag 4]]
 
                 -   [%gate puz=gene]
                   puz.kel
@@ -372,10 +343,9 @@
                   $(kel piv.kel)
 
                 -   [%dish heb=gene]
-                  +-  %trop
+                  +:  %trop
                     [%cast [%crad 0] heb.kel]
                     [%lome [%feng [%like [[%frag 4] ~] heb.kel] [%frag 4]]]
-                  ==
               ==
         ==
 
@@ -402,7 +372,7 @@
       **
         [%bail ~]                                       ::  !!
         [%cast fes=gene rum=gene]                       ::  ^-
-        [%cage fut=(list gene)]                         ::  +-
+        [%cage fut=(list gene)]                         ::  ++
         [%dbug lyq=gene]                                ::  !#
         [%home cux=home lyq=gene]                       ::  !:
         [%kick ved=wire suc=bolt]                       ::  :=
@@ -447,10 +417,7 @@
         [%flec buz=gene]                                ::  :-
         [%grun vec=bolt sud=gene]                       ::  :%
         [%nock fiz={3 4 5 6} dil=gene]                  ::  :N
-
-        [%cret caw=grid]                                ::  ++
-        [%bink mef=form]                                ::  +:
-
+      
         [%palt daq=@]                                   ::  %@
         [%crad gos=*]                                   ::  %*
       ==

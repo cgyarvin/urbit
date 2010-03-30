@@ -66,6 +66,7 @@
 #   define _ycell(a, b)         u4_k_cell(yylane, a, b)
 #   define _ytrel(a, b, c)      u4_k_trel(yylane, a, b, c)
 #   define _yqual(a, b, c, d)   u4_k_qual(yylane, a, b, c, d)
+
 %}
 
 /* Bison directives.
@@ -81,7 +82,7 @@
  
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 1032
+  %expect 7843
 
   %pure-parser
   %locations
@@ -249,6 +250,8 @@ wide
         { $$ = _ytrel(u4_atom_cast, $2, $4); }
       | '#' unix_path
         { $$ = u4_unix_path_watt(yylane, $2); }
+      | tok_mark g '=' g wide
+        { $$ = _ytrel(u4_atom_name, $1, $5); }
       ;
  
       unix_path
@@ -257,8 +260,8 @@ wide
         ;
 
     wide_cage
-      : '[' g item_wide_some ']'
-        { $$ = _ycell(u4_atom_cret, $3); }
+      : '[' g wide_some ']'
+        { $$ = _ycell(u4_atom_cage, $3); }
       ;
 
     wide_hard
@@ -317,6 +320,7 @@ wide
 
       | dig_cast wide_norm_cast  /* ^- */ { $$ = _ycell($1, $2); }
       | dig_lorb wide_norm_lorb  /* ^: */ { $$ = _ycell($1, $2); }
+      | dig_rald wide_norm_rald  /* ^* */ { $$ = _ycell($1, $2); }
       | dig_sure wide_norm_sure  /* ^= */ { $$ = _ycell($1, $2); }
 
       | dig_kick wide_norm_kick  /* := */ { $$ = _ycell($1, $2); }
@@ -324,10 +328,6 @@ wide
       | dig_garc wide_norm_garc  /* :+ */ { $$ = _ycell($1, $2); }
       | dig_flec wide_norm_flec  /* :- */ { $$ = _ycell($1, $2); }
       | dig_grun wide_norm_grun  /* :% */ { $$ = _ycell($1, $2); }
-
-      | dig_cret wide_norm_cret  /* ++ */ { $$ = _ycell($1, $2); }
-      | dig_cage wide_norm_cage  /* +- */ { $$ = _ycell($1, $2); }
-      | dig_name wide_norm_name  /* += */ { $$ = _ycell($1, $2); }
       ;
 
     /** Combinators.
@@ -411,6 +411,9 @@ wide
       wide_norm_lorb
         : '{' g form_w w wide g '}' { $$ = _ycell($3, $5); }
 
+      wide_norm_rald
+        : wide
+
       wide_norm_sure
         : '{' g wide w wide w wide g '}' { $$ = _ycell($3, $3); }
 
@@ -428,15 +431,6 @@ wide
       wide_norm_flec
         : wide 
 
-      wide_norm_cret
-        : '{' g item_wide_some '}' { $$ = $3; }
-
-      wide_norm_cage
-        : '{' g wide_some '}' { $$ = $3; }
-
-      wide_norm_name
-        : '{' g tok_mark w wide g '}' { $$ = _ycell($3, $5); }
-      
       wide_norm_grun
         : '{' g nail_wide_star ':' w wide '}' { $$ = _ycell($3, $6); }
 
@@ -447,6 +441,8 @@ wide
 
 tall
   : tall_norm { $$ = _watt_locate(yylane, &@1, $1); }
+  | tok_mark g '=' g tall_norm
+    { $$ = _ytrel(u4_atom_name, $1, $5); }
   ;
 
   /** Normal tall genes.
@@ -481,6 +477,7 @@ tall
 
       | dig_cast w tall_norm_cast  /* ^- */ { $$ = _ycell($1, $3); }
       | dig_lorb w tall_norm_lorb  /* ^: */ { $$ = _ycell($1, $3); }
+      | dig_rald w tall_norm_rald  /* ^* */ { $$ = _ycell($1, $3); }
       | dig_sure w tall_norm_sure  /* ^= */ { $$ = _ycell($1, $3); }
 
       | dig_kick w tall_norm_kick  /* := */ { $$ = _ycell($1, $3); }
@@ -489,9 +486,12 @@ tall
       | dig_flec w tall_norm_flec  /* :- */ { $$ = _ycell($1, $3); }
       | dig_grun w tall_norm_grun  /* :% */ { $$ = _ycell($1, $3); }
 
-      | dig_cret w tall_norm_cret  /* ++ */ { $$ = _ycell($1, $3); }
-      | dig_cage w tall_norm_cage  /* +- */ { $$ = _ycell($1, $3); }
+      | dig_cage w tall_norm_cage  /* ++ */ { $$ = _ycell($1, $3); }
       | dig_name w tall_norm_name  /* += */ { $$ = _ycell($1, $3); }
+      | dig_rack w tall_norm_rack  /* +~ */ { $$ = _ycell($1, $3); }
+      | dig_cell w tall_norm_cell  /* +- */ { $$ = _ycell($1, $3); }
+      | dig_trel w tall_norm_trel  /* +: */ { $$ = _ycell($1, $3); }
+      | dig_qual w tall_norm_qual  /* +% */ { $$ = _ycell($1, $3); }
    
       | dig_dbug w tall_norm_dbug  /* !# */ { $$ = _ycell($1, $3); }
       ;
@@ -581,6 +581,9 @@ tall
       tall_norm_lorb
         : form_t w gene { $$ = _ycell($1, $3); }
 
+      tall_norm_rald
+        : gene
+
       tall_norm_sure
         : gene w gene w gene { $$ = _ytrel($1, $3, $5); }
 
@@ -601,10 +604,6 @@ tall
       tall_norm_grun
         : nail_tall_star dig_stop w gene  { $$ = _ycell($1, $4); }
 
-      tall_norm_cret
-        : item_tall_some dig_stop   
-          { $$ = $1; }
-
       tall_norm_cage
         : tall_some dig_stop
           { $$ = $1; }
@@ -612,7 +611,25 @@ tall
       tall_norm_name
         : tok_mark w gene 
           { $$ = _ycell($1, $3); }
-      
+     
+      tall_norm_cell
+        : gene w gene 
+          { $$ = _ycell($1, $3); }
+        ;
+
+      tall_norm_trel
+        : gene w gene w gene 
+          { $$ = _ytrel($1, $3, $5); }
+
+      tall_norm_qual
+        : gene w gene w gene w gene
+          { $$ = _yqual($1, $3, $5, $7) }
+
+      tall_norm_rack
+        : tall_some dig_stop
+          { $$ = $1; }
+        ;
+
     /** Special and debugging.
     **/
       tall_norm_dbug
@@ -662,37 +679,6 @@ tall
       : { $$ = u4_noun_0; }
       | page_some
       ;
-
-  /** Item: mark-gene pair.
-  **/
-    item_tall
-      : tok_mark g '=' g gene  { $$ = _ycell($1, $5); }
-      | gene                   { $$ = _ycell(u4_noun_0, $1); }
-      ;
-    item_wide
-      : tok_mark g '=' g wide { $$ = _ycell($1, $5); }
-      | wide                  { $$ = _ycell(u4_noun_0, $1); }
-      ;
-    item_tall_some
-      : item_tall w                { $$ = _ycell($1, u4_noun_0); }
-      | item_tall w item_tall_some { $$ = _ycell($1, $3); }
-      ;
-/*
-    item_tall_star
-      :                            { $$ = u4_noun_0; }
-      | item_tall w item_tall_star { $$ = _ycell($1, $3); }
-      ;
-*/
-    item_wide_some
-      : item_wide g                { $$ = _ycell($1, u4_noun_0); }
-      | item_wide w item_wide_some { $$ = _ycell($1, $3); }
-      ;
-/*
-    item_wide_star
-      :                            { $$ = u4_noun_0; }
-      | item_wide w item_wide_star { $$ = _ycell($1, $2); }
-      ;
-*/
 
   /** Wire: reference path.
   **/
@@ -1029,6 +1015,7 @@ tall
 
     dig_cast: '^' '-' { $$ = u4_atom_cast; }
     dig_lorb: '^' ':' { $$ = u4_atom_lorb; }
+    dig_rald: '^' '*' { $$ = u4_atom_rald; }
     dig_sure: '^' '=' { $$ = u4_atom_sure; }
 
     dig_kick: ':' '=' { $$ = u4_atom_kick; } 
@@ -1037,8 +1024,11 @@ tall
     dig_flec: ':' '-' { $$ = u4_atom_flec; }
     dig_grun: ':' '%' { $$ = u4_atom_grun; }
 
-    dig_cret: '+' '+' { $$ = u4_atom_cret; }
-    dig_cage: '+' '-' { $$ = u4_atom_cage; }
+    dig_cage: '+' '+' { $$ = u4_atom_cage; }
+    dig_cell: '+' '-' { $$ = u4_atom_cell; }
+    dig_trel: '+' ':' { $$ = u4_atom_trel; }
+    dig_qual: '+' '%' { $$ = u4_atom_qual; }
+    dig_rack: '+' '~' { $$ = u4_atom_rack; }
     dig_name: '+' '=' { $$ = u4_atom_name; }
 
     dig_dbug: '!' '#' { $$ = u4_atom_dbug; }

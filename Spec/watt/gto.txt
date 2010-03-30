@@ -2,60 +2,63 @@ watt GTO: Gran Tabula Operazioni
 
   gene:
 
-tag  syn   r  bulb                            semantics
+tag  syn   r  bulb                                    semantics
 ----------------------------------------------------------------------------
-pont  =>   E  [han=mark dur=gene leb=gene]    [leb] in [[han=dur] +1]
-rulf  =<   E  [han=mark dur=gene leb=gene]    [dur] in [[han=leb] +1]
-trop  ->   E  [hig=gene muc=gene]             [muc] in [hig +1]
-prec  -<   E  [hig=gene muc=gene]             [hig] in [muc +1]
-link  ~>   X  [del=gene zim=gene]             [zim] in [del]
-colb  ~<   E  [del=gene zim=gene]             [del] in [zim]
+pont  =>   E  [han=mark dur=gene leb=gene]            [leb] in [[han=dur] +1]
+rulf  =<   E  [han=mark dur=gene leb=gene]            [dur] in [[han=leb] +1]
+trop  ->   E  [hig=gene muc=gene]                     [muc] in [hig +1]
+prec  -<   E  [hig=gene muc=gene]                     [hig] in [muc +1]
+link  ~>   X  [del=gene zim=gene]                     [zim] in [del]
+colb  ~<   E  [del=gene zim=gene]                     [del] in [zim]
 
-quiz  ?:   X  [tes=gene bif=gene hob=gene]    if [tes] [bif], else [hob]
-feng  ?>   E  [tes=gene bif=gene]             if [tes] [bif], else fail
-prox  ?<   E  [tes=gene hob=gene]             if [tes] fail, else [hob]
-gril  ?-   E  [mox=wire bem=(list pike)]      examine [mox], internally
-stam  ?+   E  [feg=gene bem=(list pike)]      examine [feg], externally 
-boce  ?&   E  [das=(list gene)]               yes iff all of [das]
-dant  ?|   E  [das=(list gene)]               yes iff any of [das]
-blem  ?!   E  [gix=gene]                      not
-like  ?=   X  [rid=wire bul=gene]             yes iff [rid] is like [bul]
+quiz  ?:   X  [tes=gene bif=gene hob=gene]            if [tes] [bif], else [hob]
+feng  ?>   E  [tes=gene bif=gene]                     if [tes] [bif], else fail
+prox  ?<   E  [tes=gene hob=gene]                     if [tes] fail, else [hob]
+gril  ?-   E  [mox=wire bem=(list pike)]              examine [mox], internally
+stam  ?+   E  [feg=gene bem=(list pike)]              examine [feg], externally 
+boce  ?&   E  [das=(list gene)]                       yes iff all of [das]
+dant  ?|   E  [das=(list gene)]                       yes iff any of [das]
+blem  ?!   E  [gix=gene]                              not
+like  ?=   X  [rid=wire bul=gene]                     yes iff [rid] like [bul]
 
-load  |@   X  [pir=book]                      load book, monomorphic (cone)
-lift  |$   X  [pir=book]                      load book, polymorphic (dome)
-malk  |+   E  [vab=grid]                      book as list
-blin  |*   E  [bov=gene vab=grid]             load and apply
-flic  |:   E  [tep=form von=gene]             polymorphic gate
-drol  ||   E  [nix=form tep=form von=gene]    monomorphic cast gate
-lome  |=   E  [cug=gene]                      cold gate
-flot  |-   E  [cug=gene]                      hot gate
+load  |@   X  [pir=book]                              book, monomorphic (cone)
+lift  |$   X  [pir=book]                              book, polymorphic (dome)
+malk  |+   E  [vab=grid]                              book as list
+blin  |*   E  [bov=gene vab=grid]                     load and apply
+flic  |:   E  [tep=form von=gene]                     polymorphic gate
+drol  ||   E  [nix=form tep=form von=gene]            monomorphic cast gate
+lome  |=   E  [cug=gene]                              cold gate
+flot  |-   E  [cug=gene]                              hot gate
 
-cast  ^-   X  [fes=gene rum=gene]             [rum] as [fes]
-lorb  ^:   E  [tul=form rum=gene]             cast with form
-sure  ^=   X  [fes=gene gav=gene vep=gene]    [vep], so [gav] is in [fes]
+cast  ^-   X  [fes=gene rum=gene]                     [rum] as [fes]
+lorb  ^:   E  [tul=form rum=gene]                     cast with form
+rald  ^*   E  [rum=gene]                              cast to blur
+sure  ^=   X  [fes=gene gav=gene vep=gene]            [vep], so [gav] in [fes]
 
-kick  :=   X  [ved=wire suc=bolt]             use with changes
-port  :<   E  [tic=@ vix=mark]                seek by name
-frag  :>   E  [haz=axis]                      seek by axis
-mang  :~   E  [buz=gene lep=gene]             call, direct
-garc  :+   E  [buz=gene pum=(list gene)]      call with args
-flec  :-   E  [buz=gene]                      call without args
-grun  :%   E  [vec=bolt sud=gene]             [sud] with changes
-nock  :N   X  [fiz=(3 4 5 6) dil=gene]        nock operator
+kick  :=   X  [ved=wire suc=bolt]                     use with changes
+port  :<   E  [tic=@ vix=mark]                        seek by name
+frag  :>   E  [haz=axis]                              seek by axis
+mang  :~   E  [buz=gene lep=gene]                     call, direct
+garc  :+   E  [buz=gene pum=(list gene)]              call with args
+flec  :-   E  [buz=gene]                              call without args
+grun  :%   E  [vec=bolt sud=gene]                     [sud] with changes
+nock  :N   X  [fiz=(3 4 5 6) dil=gene]                nock operator
 
-cret  ++   E  [caw=grid]                      named tuple
-cage  +-   X  [fut=(list gene)]               nameless tuple
-name  +=   X  [tem=mark caf=gene]             name a face
-bink  +:   E  [mef=form]                      form to gate
+cage  ++   X  [fut=(list gene)]                       nameless tuple
+name  +=   X  [tem=mark caf=gene]                     name a face
+rack  +~   E  [der=(list gene)]                       list
+cell  +-   E  [yeg=gene nal=gene]                     cell
+trel  +:   E  [ruv=gene sel=gene gar=gene]            triple
+qual  +%   E  [dor=gene vit=gene lum=gene sag=gene]   quadruple
 
-dbug  !#   X  [lyq=gene]                      activate internal debug
-bail  !!   X  [0]                             exit
-home  !:   X  [cux=lab lyq=gene]              source label
-spot  !@   X  [xed=[[@ @] [@ @] lyq=gene]     source pos, [at to] [lin col]
+dbug  !#   X  [lyq=gene]                              activate internal debug
+bail  !!   X  [0]                                     exit
+home  !:   X  [cux=lab lyq=gene]                      src label
+spot  !@   X  [xed=[[@ @] [@ @] lyq=gene]             src pos, [at to] [lin col]
 
-palt  %@   E  [daq=atom]                      constant, atom
-crad  %*   E  [daq=noun]                      constant, blur
-rock  %=   X  [daq=noun]                      constant, cube
+palt  %@   E  [daq=atom]                              constant, atom
+crad  %*   E  [daq=noun]                              constant, blur
+rock  %=   X  [daq=noun]                              constant, cube
 
 
   form:
