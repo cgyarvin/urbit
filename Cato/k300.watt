@@ -272,8 +272,22 @@
           y = ~*
       ==
         |~
-        ** 
+        **
+          ~
           [p=@:x q=y]
           [p=[* *]:(bush x y) q=(bush x y)]
+        ==
+
+  ::::::::  bush-add
+  ::
+    - bush-add
+      |:  u = (bush)
+          v = @
+          w = *
+      ==
+        ^-  u
+        ?-  u
+          -   ~   [v w]
+          -   ^   [[v w] u]
         ==
 ==

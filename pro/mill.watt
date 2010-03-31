@@ -18,7 +18,9 @@
               [%quiz gix.gen [%rock 1] [%rock 0]]
 
             -   [%blin bov=gene vab=grid]
-              !!  :: needs bush tools
+              +:  %link
+                [%malk vab.gen]
+                bov.gen
 
             -   [%boce das=(list gene)]
               |-
@@ -116,8 +118,16 @@
               [%cast (form-lump tul.gen) rum.gen]
 
             -   [%malk vab=grid]
-              !!  :: needs bush tools
-
+              +-  %load
+                =>  pir   ~book.~
+                |-
+                  ?-  vab.gen
+                    -   ~   pir
+                    -   ^   
+                      $(vab.gen t.vab.gen, 
+                        pir (bush-add pir p.i.vab.gen q.i.vab.gen))
+                  ==
+                  
             -   [%pont han=mark dur=gene leb=gene]
               +:  %link
                 [%cage [%name han.gen dur.gen] [%frag 1] ~]
@@ -147,6 +157,9 @@
                     -   ~   [[%rock 0] ~]
                     -   ^   [i.der $(der t.der)]
                   ==
+
+            -   [%rald rum=gene]
+              [%cast [%nock %3 [%rock 0]] rum.gen]
 
             -   [%rulf han=mark dur=gene leb=gene]
               +:  %link
@@ -401,14 +414,15 @@
         [%dant das=(list gene)]                         ::  ?|
         [%blem gix=gene]                                ::  ?!
 
-        [%malk vab=(list :[mark gene])]                 ::  |+
-        [%blin bov=gene vab=(list :[mark gene])]        ::  |*
+        [%malk vab=grid]                                ::  |+
+        [%blin bov=gene vab=grid]                       ::  |*
         [%flic tep=form von=gene]                       ::  |:
         [%drol nix=form tep=form von=gene]              ::  ||
         [%lome cug=gene]                                ::  |=
         [%flot cug=gene]                                ::  |-
 
         [%lorb tul=form rum=gene]                       ::  ^:
+        [%rald rum=gene]                                ::  ^*
 
         [%port tic=step vix=mark]                       ::  :<
         [%frag haz=axis]                                ::  :>

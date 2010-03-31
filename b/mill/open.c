@@ -41,38 +41,37 @@ _open_in(u4_milr m,
     return u4_stub;
   }
   else {
+    _open_p   (bink);  // :^
+    _open_p   (blem);  // ?!
     _open_pq  (blin);  // |*
     _open_p   (boce);  // ?&
-    _open_p   (bink);  // :^
-    _open_p   (crad);
     _open_pq  (cell);  // +-
+    _open_pq  (colb);  // ~<
+    _open_p   (crad);
+    _open_p   (dant);  // ?|
     _open_pqr (drol);  // ||
     _open_pq  (feng);  // ?>
     _open_pq  (flic);  // |:
-    _open_p   (flec);  // :-
     _open_p   (flot);  // |-
+    _open_p   (frag);
     _open_pq  (garc);  // :+
-    _open_pq  (trop);  // ->
-    _open_pq  (port);
-    _open_pq  (prec);  // -<
+    _open_pq  (gril);  // ?-
+    _open_pq  (grun);  // :%
     _open_p   (lome);  // |=
+    _open_pq  (lorb);  // ^:
     _open_p   (malk);  // |+
     _open_p   (palt);
-    _open_p   (dant);  // ?|
+    _open_pq  (port);
     _open_pqr (pont);  // =>
+    _open_pq  (prec);  // -<
     _open_pq  (prox);  // ?<
-    _open_p   (rack);  // +~
-    _open_pq  (grun);  // :%
-    _open_pqr (trel);  // +:
     _open_pqrs(qual);  // +%
+    _open_p   (rack);  // +~
     _open_p   (rald);  // ^*
     _open_pqr (rulf);  // =<
     _open_pq  (stam);  // ?+
-    _open_pq  (lorb);  // ^:
-    _open_pq  (colb);  // ~<
-    _open_p   (blem);  // ?!
-    _open_pq  (gril);  // ?-
-    _open_p   (frag);
+    _open_pqr (trel);  // +:
+    _open_pq  (trop);  // ->
 
     return gen;
   }

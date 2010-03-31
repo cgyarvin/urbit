@@ -82,7 +82,7 @@
  
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 7843
+  %expect 7687
 
   %pure-parser
   %locations
@@ -326,7 +326,6 @@ wide
       | dig_kick wide_norm_kick  /* := */ { $$ = _ycell($1, $2); }
       | dig_mang wide_norm_mang  /* :~ */ { $$ = _ycell($1, $2); }
       | dig_garc wide_norm_garc  /* :+ */ { $$ = _ycell($1, $2); }
-      | dig_flec wide_norm_flec  /* :- */ { $$ = _ycell($1, $2); }
       | dig_grun wide_norm_grun  /* :% */ { $$ = _ycell($1, $2); }
       ;
 
@@ -428,9 +427,6 @@ wide
       wide_norm_garc
         : '{' g wide w wide_some '}' { $$ = _ycell($3, $5); }
 
-      wide_norm_flec
-        : wide 
-
       wide_norm_grun
         : '{' g nail_wide_star ':' w wide '}' { $$ = _ycell($3, $6); }
 
@@ -483,7 +479,6 @@ tall
       | dig_kick w tall_norm_kick  /* := */ { $$ = _ycell($1, $3); }
       | dig_mang w tall_norm_mang  /* :~ */ { $$ = _ycell($1, $3); }
       | dig_garc w tall_norm_garc  /* :+ */ { $$ = _ycell($1, $3); }
-      | dig_flec w tall_norm_flec  /* :- */ { $$ = _ycell($1, $3); }
       | dig_grun w tall_norm_grun  /* :% */ { $$ = _ycell($1, $3); }
 
       | dig_cage w tall_norm_cage  /* ++ */ { $$ = _ycell($1, $3); }
@@ -597,9 +592,6 @@ tall
 
       tall_norm_garc
         : gene w tall_some dig_stop { $$ = _ycell($1, $3); }
-
-      tall_norm_flec
-        : gene 
 
       tall_norm_grun
         : nail_tall_star dig_stop w gene  { $$ = _ycell($1, $4); }
@@ -1021,7 +1013,6 @@ tall
     dig_kick: ':' '=' { $$ = u4_atom_kick; } 
     dig_mang: ':' '~' { $$ = u4_atom_mang; }
     dig_garc: ':' '+' { $$ = u4_atom_garc; }
-    dig_flec: ':' '-' { $$ = u4_atom_flec; }
     dig_grun: ':' '%' { $$ = u4_atom_grun; }
 
     dig_cage: '+' '+' { $$ = u4_atom_cage; }
