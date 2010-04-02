@@ -45,7 +45,7 @@ _make_main(u4_milr m,
     _make_p  (lift);    // |$
     _make_pq (like);    // ?= 
     _make_pq (link);    // ~>
-    _make_p  (load);    // |@
+    _make_p  (load);    // |+
     _make_pq (mang);    // :~
     _make_pq (name);    // :`
     _make_pq (nock);

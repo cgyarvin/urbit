@@ -22,6 +22,6 @@ _mill_q_blin(u4_milr m,
   return u4_k_trel
     (lane,
      u4_atom_link,
-     u4_k_cell(lane, u4_atom_malk, vab),
+     u4_k_cell(lane, u4_atom_load, vab),
      bov);
 }

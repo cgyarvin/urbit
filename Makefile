@@ -124,12 +124,17 @@ U4_MQ_OFILES=\
        b/q/flot.o \
        b/q/frag.o \
        b/q/garc.o \
+       b/q/gleb.o \
+       b/q/grad.o \
        b/q/gril.o \
        b/q/grun.o \
        b/q/lome.o \
        b/q/lorb.o \
        b/q/malk.o \
+       b/q/mang.o \
+       b/q/marn.o \
        b/q/palt.o \
+       b/q/parq.o \
        b/q/port.o \
        b/q/pont.o \
        b/q/prec.o \
@@ -137,6 +142,7 @@ U4_MQ_OFILES=\
        b/q/qual.o \
        b/q/rack.o \
        b/q/rald.o \
+       b/q/read.o \
        b/q/rulf.o \
        b/q/stam.o \
        b/q/trel.o \

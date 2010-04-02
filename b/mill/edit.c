@@ -460,8 +460,8 @@ _mill_edit(u4_milr m,
           return gom;
         }
         else {
-          // u4_burp(m->lane, "doz", _mill_dump(m, doz));
-          // u4_burp(m->lane, "p_gom", _mill_dump(m, p_gom));
+          u4_burp(m->lane, "doz", _mill_dump(m, doz));
+          u4_burp(m->lane, "p_gom", _mill_dump(m, p_gom));
 
           return _mill_fail(m, "cone violation");
         }

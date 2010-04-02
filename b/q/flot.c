@@ -14,6 +14,9 @@ _mill_q_flot(u4_milr m,
 
   return u4_k_trel
     (lane, u4_atom_link,
-           u4_k_trel(lane, u4_atom_load, u4_noun_0, cug),
+           u4_k_cell
+            (lane, 
+             u4_atom_load, 
+             u4_k_cell(lane, u4_k_cell(lane, u4_noun_0, cug), u4_noun_0)),
            u4_k_trel(lane, u4_atom_port, u4_noun_0, u4_noun_0));
 }

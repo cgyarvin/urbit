@@ -82,7 +82,7 @@
  
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 7687
+  %expect 8542
 
   %pure-parser
   %locations
@@ -217,6 +217,18 @@ form_t
       : form_t w form_t { $$ = _ycell($1, $3); }
 
 wide
+  : wide_top
+  | wide_top ':' wide
+    { $$ = _ytrel(u4_atom_colb, $1, $3); }
+  ;
+
+wide_top
+  : wide_bot
+  | wide_bot '+' wide 
+    { $$ = _ytrel(u4_atom_parq, $1, $3); }
+  ;
+
+wide_bot
   : wide_deep
   | wide_cage
   | wide_hard
@@ -252,6 +264,8 @@ wide
         { $$ = u4_unix_path_watt(yylane, $2); }
       | tok_mark g '=' g wide
         { $$ = _ytrel(u4_atom_name, $1, $5); }
+      | '<' g wide w wide g '>'
+        { $$ = _ytrel(u4_atom_parq, $3, $5); }
       ;
  
       unix_path
@@ -310,10 +324,13 @@ wide
       | dig_blem wide_norm_blem  /* ?! */ { $$ = _ycell($1, $2); }
       | dig_like wide_norm_like  /* ?= */ { $$ = _ycell($1, $2); }
 
-      | dig_malk wide_norm_malk  /* |+ */ { $$ = _ycell($1, $2); }
+      | dig_load wide_norm_load  /* |+ */ { $$ = _ycell($1, $2); }
+      | dig_lift wide_norm_lift  /* |$ */ { $$ = _ycell($1, $2); }
       | dig_blin wide_norm_blin  /* |* */ { $$ = _ycell($1, $2); }
       | dig_flic wide_norm_flic  /* |: */ { $$ = _ycell($1, $2); }
+      | dig_gleb wide_norm_gleb  /* |` */ { $$ = _ycell($1, $2); }
       | dig_drol wide_norm_drol  /* || */ { $$ = _ycell($1, $2); }
+      | dig_marn wide_norm_marn  /* |. */ { $$ = _ycell($1, $2); }
       | dig_lome wide_norm_lome  /* |= */ { $$ = _ycell($1, $2); }
       | dig_flot wide_norm_flot  /* |- */ { $$ = _ycell($1, $2); }
       | dig_bink wide_norm_bink  /* |~ */ { $$ = _ycell($1, $2); }
@@ -382,7 +399,10 @@ wide
 
     /** Loading.
     **/
-      wide_norm_malk
+      wide_norm_load
+        : page_star dig_stop { $$ = $1; }
+   
+      wide_norm_lift
         : page_star dig_stop { $$ = $1; }
    
       wide_norm_blin
@@ -392,8 +412,16 @@ wide
         : '{' g form_w_crib_items w wide g '}'        
             { $$ = _ycell(_ycell(u4_atom_crib, $3), $5); }
 
+      wide_norm_gleb
+        : '{' g form_w_crib_items w wide g '}'        
+            { $$ = _ycell(_ycell(u4_atom_crib, $3), $5); }
+
       wide_norm_drol
         : '{' g form_w w form_w_crib_items w wide g '}' 
+          { $$ = _ytrel($3, _ycell(u4_atom_crib, $5), $7); }
+
+      wide_norm_marn
+        : '{' g wide w form_w_crib_items w wide g '}' 
           { $$ = _ytrel($3, _ycell(u4_atom_crib, $5), $7); }
 
       wide_norm_lome
@@ -463,10 +491,13 @@ tall
       | dig_blem w tall_norm_blem  /* ?! */ { $$ = _ycell($1, $3); }
       | dig_like w tall_norm_like  /* ?= */ { $$ = _ycell($1, $3); }
     
-      | dig_malk w tall_norm_malk  /* |+ */ { $$ = _ycell($1, $3); }
+      | dig_load w tall_norm_load  /* |+ */ { $$ = _ycell($1, $3); }
+      | dig_lift w tall_norm_lift  /* |$ */ { $$ = _ycell($1, $3); }
       | dig_blin w tall_norm_blin  /* |* */ { $$ = _ycell($1, $3); }
       | dig_flic w tall_norm_flic  /* |: */ { $$ = _ycell($1, $3); }
+      | dig_gleb w tall_norm_gleb  /* |` */ { $$ = _ycell($1, $3); }
       | dig_drol w tall_norm_drol  /* || */ { $$ = _ycell($1, $3); }
+      | dig_marn w tall_norm_marn  /* |. */ { $$ = _ycell($1, $3); }
       | dig_lome w tall_norm_lome  /* |= */ { $$ = _ycell($1, $3); }
       | dig_flot w tall_norm_flot  /* |- */ { $$ = _ycell($1, $3); }
       | dig_bink w tall_norm_bink  /* |~ */ { $$ = _ycell($1, $3); }
@@ -478,6 +509,7 @@ tall
 
       | dig_kick w tall_norm_kick  /* := */ { $$ = _ycell($1, $3); }
       | dig_mang w tall_norm_mang  /* :~ */ { $$ = _ycell($1, $3); }
+      | dig_parq w tall_norm_parq  /* :| */ { $$ = _ycell($1, $3); }
       | dig_garc w tall_norm_garc  /* :+ */ { $$ = _ycell($1, $3); }
       | dig_grun w tall_norm_grun  /* :% */ { $$ = _ycell($1, $3); }
 
@@ -544,7 +576,10 @@ tall
 
     /** Loading.
     **/
-      tall_norm_malk
+       tall_norm_load
+        : page_star dig_stop { $$ = $1; }
+   
+       tall_norm_lift
         : page_star dig_stop { $$ = $1; }
    
       tall_norm_blin
@@ -554,8 +589,16 @@ tall
         : form_t_crib_items dig_stop w gene 
           { $$ = _ycell(_ycell(u4_atom_crib, $1), $4); }
 
+      tall_norm_gleb
+        : form_t_crib_items dig_stop w gene 
+          { $$ = _ycell(_ycell(u4_atom_crib, $1), $4); }
+
       tall_norm_drol
         : form_t w form_t_crib_items dig_stop w gene
+          { $$ = _ytrel($1, _ycell(u4_atom_crib, $3), $6); }
+
+      tall_norm_marn
+        : gene w form_t_crib_items dig_stop w gene
           { $$ = _ytrel($1, _ycell(u4_atom_crib, $3), $6); }
 
       tall_norm_lome
@@ -585,10 +628,13 @@ tall
     /** Call and use.
     **/
       tall_norm_kick
-        : gene w nail_tall_star dig_stop { $$ = _ycell($1, $3); }
+        : wire w nail_tall_star dig_stop { $$ = _ycell($1, $3); }
 
       tall_norm_mang
-        : gene w tall { $$ = _ycell($1, $3); }
+        : gene w gene { $$ = _ycell($1, $3); }
+
+      tall_norm_parq
+        : gene w gene { $$ = _ycell($1, $3); }
 
       tall_norm_garc
         : gene w tall_some dig_stop { $$ = _ycell($1, $3); }
@@ -980,8 +1026,8 @@ tall
 
   /** Digraphs.
   **/
-    dig_pont: '=' '>' { $$ = u4_atom_pont; }
-    dig_rulf: '=' '<' { $$ = u4_atom_rulf; }
+    dig_pont: ':' '>' { $$ = u4_atom_pont; }
+    dig_rulf: ':' '<' { $$ = u4_atom_rulf; }
     dig_trop: '-' '>' { $$ = u4_atom_trop; }
     dig_prec: '-' '<' { $$ = u4_atom_prec; }
     dig_link: '~' '>' { $$ = u4_atom_link; }
@@ -997,10 +1043,13 @@ tall
     dig_blem: '?' '!' { $$ = u4_atom_blem; }
     dig_like: '?' '=' { $$ = u4_atom_like; }
 
-    dig_malk: '|' '+' { $$ = u4_atom_malk; }
+    dig_load: '|' '+' { $$ = u4_atom_load; }
+    dig_lift: '|' '$' { $$ = u4_atom_lift; }
     dig_blin: '|' '*' { $$ = u4_atom_blin; }
     dig_flic: '|' ':' { $$ = u4_atom_flic; }
+    dig_gleb: '|' '`' { $$ = u4_atom_gleb; }
     dig_drol: '|' '|' { $$ = u4_atom_drol; }
+    dig_marn: '|' '.' { $$ = u4_atom_marn; }
     dig_lome: '|' '=' { $$ = u4_atom_lome; }
     dig_flot: '|' '-' { $$ = u4_atom_flot; }
     dig_bink: '|' '~' { $$ = u4_atom_bink; }
@@ -1012,6 +1061,7 @@ tall
 
     dig_kick: ':' '=' { $$ = u4_atom_kick; } 
     dig_mang: ':' '~' { $$ = u4_atom_mang; }
+    dig_parq: ':' '|' { $$ = u4_atom_parq; }
     dig_garc: ':' '+' { $$ = u4_atom_garc; }
     dig_grun: ':' '%' { $$ = u4_atom_grun; }
 

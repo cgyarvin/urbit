@@ -55,12 +55,16 @@ _open_in(u4_milr m,
     _open_p   (flot);  // |-
     _open_p   (frag);
     _open_pq  (garc);  // :+
+    _open_pq  (gleb);  // |~
+    _open_pqr (grad);  // :^
     _open_pq  (gril);  // ?-
     _open_pq  (grun);  // :%
     _open_p   (lome);  // |=
     _open_pq  (lorb);  // ^:
-    _open_p   (malk);  // |+
+    // _open_pq  (mang);  // :~ 
+    _open_pqr (marn);  // |.
     _open_p   (palt);
+    _open_pq  (parq);  // :|
     _open_pq  (port);
     _open_pqr (pont);  // =>
     _open_pq  (prec);  // -<
@@ -68,6 +72,7 @@ _open_in(u4_milr m,
     _open_pqrs(qual);  // +%
     _open_p   (rack);  // +~
     _open_p   (rald);  // ^*
+    _open_p   (read);  // :.
     _open_pqr (rulf);  // =<
     _open_pq  (stam);  // ?+
     _open_pqr (trel);  // +:
