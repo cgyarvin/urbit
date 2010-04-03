@@ -22,8 +22,8 @@ blem  ?!   E  [gix=gene]                              not
 like  ?=   X  [rid=wire bul=gene]                     yes iff [rid] like [bul]
 
 load  |+   X  [vab=grid]                              book, monomorphic (cone)
-lift  |$   X  [vab=grid]                              book, polymorphic (dome)
-kite  |^   X  [suc=bolt vab=grid]                     upgrade a dome
+lift  |$   X  [vab=grid]                    drag      book, polymorphic (dome)
+jack  |^   X  [ved=wire suc=bolt vab=grid]            upgrade a dome
 blin  |*   E  [bov=gene vab=grid]                     load and apply
 gleb  |`   E  [tep=form von=gene]                     open monomorphic gate
 flic  |:   E  [tep=form von=gene]                     open polymorphic gate

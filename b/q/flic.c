@@ -16,7 +16,7 @@ _mill_q_flic(u4_milr m,
   return u4_k_qual
     (lane, u4_atom_trop,
            _mill_lump(m, tep),
-           u4_atom_lift,
+           u4_atom_drag,
            u4_k_cell
             (lane, 
              u4_k_cell(lane, u4_noun_0, von),

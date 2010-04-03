@@ -196,6 +196,7 @@
               $(z t.z, a [i=i.z t=a])
           ==
 
+  ::
   ::::::::  lent                length of list
   ::
     - lent
@@ -206,10 +207,9 @@
           -   ~   0
           -   ^   (inc $(z t.z))
         ==
-
-
-  ::::::::  skim                select list items
-  ::
+   ::
+   ::::::::  skim                select list items
+   ::
     - skim
       |.  x
         x = (list)

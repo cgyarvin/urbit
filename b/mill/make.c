@@ -39,10 +39,10 @@ _make_main(u4_milr m,
     _make_p  (bail);    // !!
     _make_pq (cast);    // ^-
     _make_p  (cage);    // :.
+    _make_p  (drag);    // |$
     _make_p  (dbug);
     _make_pq (home);
     _make_pq (kick);    // :=
-    _make_p  (lift);    // |$
     _make_pq (like);    // ?= 
     _make_pq (link);    // ~>
     _make_p  (load);    // |+

@@ -92,8 +92,8 @@ U4_MILL_OFILES=\
 
 U4_MX_OFILES=\
        b/x/load.o \
-       b/x/lift.o \
        b/x/dbug.o \
+       b/x/drag.o \
        b/x/name.o \
        b/x/like.o \
        b/x/kick.o \
@@ -130,7 +130,6 @@ U4_MQ_OFILES=\
        b/q/grun.o \
        b/q/lome.o \
        b/q/lorb.o \
-       b/q/malk.o \
        b/q/mang.o \
        b/q/marn.o \
        b/q/palt.o \

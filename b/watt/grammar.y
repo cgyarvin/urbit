@@ -325,7 +325,7 @@ wide_bot
       | dig_like wide_norm_like  /* ?= */ { $$ = _ycell($1, $2); }
 
       | dig_load wide_norm_load  /* |+ */ { $$ = _ycell($1, $2); }
-      | dig_lift wide_norm_lift  /* |$ */ { $$ = _ycell($1, $2); }
+      | dig_drag wide_norm_drag  /* |$ */ { $$ = _ycell($1, $2); }
       | dig_blin wide_norm_blin  /* |* */ { $$ = _ycell($1, $2); }
       | dig_flic wide_norm_flic  /* |: */ { $$ = _ycell($1, $2); }
       | dig_gleb wide_norm_gleb  /* |` */ { $$ = _ycell($1, $2); }
@@ -402,7 +402,7 @@ wide_bot
       wide_norm_load
         : page_star dig_stop { $$ = $1; }
    
-      wide_norm_lift
+      wide_norm_drag
         : page_star dig_stop { $$ = $1; }
    
       wide_norm_blin
@@ -492,7 +492,7 @@ tall
       | dig_like w tall_norm_like  /* ?= */ { $$ = _ycell($1, $3); }
     
       | dig_load w tall_norm_load  /* |+ */ { $$ = _ycell($1, $3); }
-      | dig_lift w tall_norm_lift  /* |$ */ { $$ = _ycell($1, $3); }
+      | dig_drag w tall_norm_drag  /* |$ */ { $$ = _ycell($1, $3); }
       | dig_blin w tall_norm_blin  /* |* */ { $$ = _ycell($1, $3); }
       | dig_flic w tall_norm_flic  /* |: */ { $$ = _ycell($1, $3); }
       | dig_gleb w tall_norm_gleb  /* |` */ { $$ = _ycell($1, $3); }
@@ -579,7 +579,7 @@ tall
        tall_norm_load
         : page_star dig_stop { $$ = $1; }
    
-       tall_norm_lift
+       tall_norm_drag
         : page_star dig_stop { $$ = $1; }
    
       tall_norm_blin
@@ -1044,7 +1044,7 @@ tall
     dig_like: '?' '=' { $$ = u4_atom_like; }
 
     dig_load: '|' '+' { $$ = u4_atom_load; }
-    dig_lift: '|' '$' { $$ = u4_atom_lift; }
+    dig_drag: '|' '$' { $$ = u4_atom_drag; }
     dig_blin: '|' '*' { $$ = u4_atom_blin; }
     dig_flic: '|' ':' { $$ = u4_atom_flic; }
     dig_gleb: '|' '`' { $$ = u4_atom_gleb; }

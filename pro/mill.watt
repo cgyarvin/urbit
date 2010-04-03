@@ -53,7 +53,7 @@
               [%quiz tes.gen bif.gen [%bail ~]]
 
             -   [%flic tep=form von=gene]
-              [%trop (form-lump tep.gen) [%lift %% von.gen]]
+              [%trop (form-lump tep.gen) [%drag %% von.gen]]
 
             -   [%dant das=(list gene)]
               |-
@@ -108,13 +108,13 @@
             -   [%kite suc=bolt vab=grid]
               gen
 
-            -   [%lift pir=book]
+            -   [%drag pir=tome]
               gen
 
             -   [%link del=gene zim=gene]
               gen
 
-            -   [%load pir=book]
+            -   [%load pir=tome]
               gen
 
             -   [%lome cug=gene]
@@ -125,7 +125,7 @@
 
             -   [%malk vab=grid]
               +-  %load
-                :>  pir   ~book.~
+                :>  pir   ~tome.~
                 |-
                 ?-  vab.gen
                   -   ~   pir
@@ -382,9 +382,9 @@
         %blot
         %blur
         [%cell p=mold q=mold]
-        [%cone p=mold q=book]
+        [%cone p=mold q=tome]
         [%cube p=*]
-        [%dome p=mold q=book]
+        [%dome p=mold q=tome]
         [%face p=mark q=mold]
         [%fork p=mold q=mold]
         [%fuse p=mold q=mold]
@@ -414,8 +414,8 @@
         [%blem gix=gene]                               ::  ?!
         [%like rid=wire bul=gene]                      ::  ?=
 
-        [%load pir=book]                               ::  |@
-        [%lift pir=book]                               ::  |$
+        [%load pir=tome]                               ::  |@
+        [%drag pir=tome]                               ::  |$
         [%kite suc=bolt vab=grid]                      ::  |^
         [%malk vab=grod]                               ::  |+
         [%blin bov=gene vab=grod]                      ::  |*
@@ -491,16 +491,33 @@
         [%frag haz=axis]
       ==
 
-    - tome
+    - spec
       |~
       **
         [%plug ~]
         [%hook sid=mark pel=gene]
-        [%limb pef=mark hud=tome]
-        [had=tome tel=tome]
+        [%limb pef=mark hud=spec]
+        [had=spec tel=spec]
       ==
 
-    - book 
+    - sp
+      :>  pec   (spec)
+      |$
+       ::
+        - add
+          |.  pec
+            we
+          ==
+       ::
+        - foo !!        
+      ==
+
+    - book
+      |~
+      **
+      ==
+
+    - tome 
       (bush mark gene)
 
     - grod

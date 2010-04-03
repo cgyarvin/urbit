@@ -121,6 +121,7 @@
     u4_lib_mote(done, u4_s4('d','o','n','e'))
     u4_lib_mote(door, u4_s4('d','o','o','r'))
     u4_lib_mote(dost, u4_s4('d','o','s','t'))
+    u4_lib_mote(drag, u4_s4('d','r','a','g'))
     u4_lib_mote(draz, u4_s4('d','r','a','z'))
     u4_lib_mote(drib, u4_s4('d','r','i','b'))
     u4_lib_mote(drol, u4_s4('d','r','o','l'))
