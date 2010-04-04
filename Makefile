@@ -92,8 +92,8 @@ U4_MILL_OFILES=\
 
 U4_MX_OFILES=\
        b/x/load.o \
-       b/x/lift.o \
        b/x/dbug.o \
+       b/x/drag.o \
        b/x/name.o \
        b/x/like.o \
        b/x/kick.o \
@@ -110,36 +110,42 @@ U4_MX_OFILES=\
        b/x/bail.o 
 
 U4_MQ_OFILES=\
+       b/q/bink.o \
+       b/q/blem.o \
        b/q/blin.o \
        b/q/boce.o \
-       b/q/bink.o \
-       b/q/crot.o \
+       b/q/cell.o \
+       b/q/colb.o \
+       b/q/crad.o \
+       b/q/dant.o \
        b/q/drol.o \
        b/q/feng.o \
-       b/q/flec.o \
+       b/q/flic.o \
        b/q/flot.o \
+       b/q/frag.o \
        b/q/garc.o \
-       b/q/stam.o \
-       b/q/trop.o \
+       b/q/gleb.o \
+       b/q/grad.o \
+       b/q/gril.o \
        b/q/grun.o \
-       b/q/lect.o \
-       b/q/prec.o \
        b/q/lome.o \
        b/q/lorb.o \
-       b/q/malk.o \
+       b/q/mang.o \
+       b/q/marn.o \
        b/q/palt.o \
-       b/q/dant.o \
+       b/q/parq.o \
+       b/q/port.o \
        b/q/pont.o \
-       b/q/prex.o \
-       b/q/crad.o \
+       b/q/prec.o \
+       b/q/prox.o \
+       b/q/qual.o \
+       b/q/rack.o \
        b/q/rald.o \
+       b/q/read.o \
        b/q/rulf.o \
-       b/q/cret.o \
-       b/q/colb.o \
-       b/q/flic.o \
-       b/q/blem.o \
-       b/q/gril.o \
-       b/q/frag.o
+       b/q/stam.o \
+       b/q/trel.o \
+       b/q/trop.o
 
 U4_FAKE_OP_OFILES=\
        b/fake/op/add.o \

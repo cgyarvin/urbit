@@ -4,7 +4,7 @@
 */
 #include "u4/all.h"
 
-/* _lump_crib_in(): convert crib items to cret list.
+/* _lump_crib_in(): convert crib items to cage list.
 */
 u4_noun
 _lump_crib_in(u4_milr m,
@@ -22,7 +22,7 @@ _lump_crib_in(u4_milr m,
     u4_form qi_wix = u4_ct(i_wix);
 
     return u4_k_cell
-      (lane, u4_k_cell(lane, pi_wix, _mill_lump(m, qi_wix)),
+      (lane, u4_k_trel(lane, u4_atom_name, pi_wix, _mill_lump(m, qi_wix)),
              _lump_crib_in(m, t_wix));
   }
 }
@@ -118,7 +118,7 @@ _mill_lump(u4_milr m,
   }
   else if ( u4_b_p(kel, u4_atom_crib, &p_kel) ) {
     return u4_k_cell
-      (lane, u4_atom_cret, _lump_crib_in(m, p_kel));
+      (lane, u4_atom_cage, _lump_crib_in(m, p_kel));
   }
   else if ( u4_b_p(kel, u4_atom_dish, &p_kel) ) {
     return p_kel;

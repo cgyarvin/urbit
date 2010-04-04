@@ -388,5 +388,18 @@ _mill_find(u4_milr m,
            u4_rail bar,
            u4_mold typ)
 {
-  return _find_main(m, cox, u4_noun_0, bar, typ);
+  u4_noun tog = u4_k_trel(m->lane, cox, bar, typ);
+  u4_nopt zax;
+
+  zax = u4_tab_get(tog, m->fin); 
+
+  if ( u4_bull != zax ) {
+    return zax;
+  } 
+  else {
+    zax = _find_main(m, cox, u4_noun_0, bar, typ);
+
+    m->fin = u4_tab_add(m->lane, tog, zax, m->fin);
+    return zax;
+  }
 }

@@ -19,9 +19,9 @@ _mill_q_pont(u4_milr m,
      u4_atom_link,
      u4_k_qual
        (lane,
-        u4_atom_cret, 
-        u4_k_cell(lane, han, dur),
-        u4_k_cell(lane, u4_noun_0, u4_k_cell(lane, u4_atom_frag, u4_noun_1)),
+        u4_atom_cage, 
+        u4_k_trel(lane, u4_atom_name, han, dur),
+        u4_k_cell(lane, u4_atom_frag, u4_noun_1),
         u4_noun_0),
      leb);
 }

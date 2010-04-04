@@ -287,6 +287,7 @@ _edit_dome(u4_milr m,
       return _mill_fail(m, "dome write");
     }
     else {
+      u4_mold gom = u4_k_trel(lane, u4_atom_cone, p_gom, q_gom);
       u4_rail sed = _mill_slip(m, u4_noun_2, bar);
       u4_mold doz = _mill_edit(m, tig, sed, p_gom);
 
@@ -295,21 +296,27 @@ _edit_dome(u4_milr m,
           return u4_k_trel(lane, u4_atom_cone, p_gom, q_gom);
         }
         else {
-          return u4_k_trel
+          u4_mold sut = u4_k_trel
             (lane, u4_atom_cone, 
                    u4_k_trel(lane, u4_atom_fuse, doz, p_gom),
                    q_gom);
+
+          if ( _edit_dome_fab(m, sut, gom, q_gom) ) {
+            return sut;
+          }
+          else {
+            return _mill_fail(m, "dome violation a");
+          }
         }
       }
       else {
         u4_mold sut = u4_k_trel(lane, u4_atom_cone, doz, q_gom);
-        u4_mold gom = u4_k_trel(lane, u4_atom_cone, p_gom, q_gom);
 
         if ( _edit_dome_fab(m, sut, gom, q_gom) ) {
           return sut;
         }
         else {
-          return _mill_fail(m, "dome violation");
+          return _mill_fail(m, "dome violation b");
         }
       }
     }
@@ -460,8 +467,8 @@ _mill_edit(u4_milr m,
           return gom;
         }
         else {
-          // u4_burp(m->lane, "doz", _mill_dump(m, doz));
-          // u4_burp(m->lane, "p_gom", _mill_dump(m, p_gom));
+          u4_burp(m->lane, "doz", _mill_dump(m, doz));
+          u4_burp(m->lane, "p_gom", _mill_dump(m, p_gom));
 
           return _mill_fail(m, "cone violation");
         }

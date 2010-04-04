@@ -12,13 +12,6 @@ _mill_q_blem(u4_milr m,
 {
   u4_lane lane = m->lane;
 
-  //  :*
-  //    %quiz
-  //    gix
-  //    [%rock 1]
-  //    [%rock 0]
-  //  ==
-
   return u4_k_qual
     (lane, u4_atom_quiz, 
            gix,

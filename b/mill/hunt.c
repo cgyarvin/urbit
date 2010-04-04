@@ -68,8 +68,8 @@ _mill_hunt(u4_milr m,
       u4_loaf zib = _mill_find(m, cox, u4_noun_0, fim);
 
       if ( u4_n_zero(zib) ) {
-        u4_burp(lane, "mark", u4_prep_textual(lane, cox));
         u4_burp(lane, "mold", _mill_dump(m, fim));
+        u4_burp(lane, "mark", u4_prep_textual(lane, cox));
 
         return _mill_fail(m, "look: not found");
       }

@@ -98,13 +98,25 @@
         */
         u4_tab zor;
 
-        /* Tab (mold flag) to memoize _mill_null().
+        /* Tab [mold flag] to memoize _mill_null().
         */
         u4_tab dam;
 
-        /* Tab ((mold mold) flag) to memoize _mill_cong().
+        /* Tab [[rail mold mold] flag] to memoize _mill_nest().
         */
         u4_tab vus;
+
+        /* Tab [[mold gene] mold] to memoize _mill_repo().
+        */
+        u4_tab rep;
+
+        /* Tab [gene gene] to memoize _mill_open().
+        */
+        u4_tab pon;
+
+        /* Tab [[mark rail typ] loaf] to memoize _mill_find().
+        */
+        u4_tab fin;
       } 
         *u4_milr;
 

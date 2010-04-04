@@ -3,11 +3,11 @@
 
 |+
 
-::::::::::  Tier 0: simple logic and arithmetic
-::::::::::
+ ::::::::::  Tier 0: simple logic and arithmetic
+ ::::::::::
 
-  ::::::::  add                 atomic add
-  ::
+   ::::::::  add                 atomic add
+   ::
     - add
       ||  @
         a = @
@@ -17,35 +17,35 @@
           b
         $(a (dec a), b (inc b))
 
-  ::::::::  dec                 atomic decrement
-  ::
+   ::::::::  dec                 atomic decrement
+   ::
     - dec
       ||  @
         a = @
       ==
         ?<  (zil a)
-        =>  b 0
+        :>  b 0
         |-
           ?:  (eq a (inc b))
             b
           $(b (inc b))
 
-  ::::::::  div                 atomic divide (a / b)
-  ::
+   ::::::::  div                 atomic divide (a / b)
+   ::
     - div
       ||  @
         a = @
         b = @
       ==
         ?<  (zil b)
-        =>  c 0
+        :>  c 0
         |-
           ?:  (lte a b)
             c 
           $(a (sub a b), c (inc c))
 
-  ::::::::  eq                  noun equality
-  ::
+   ::::::::  eq                  noun equality
+   ::
     - eq
       ||  ?
         a = *
@@ -53,8 +53,8 @@
       ==
         :6.[a b] 
 
-  ::::::::  gt                  atomic greater than (a > b)
-  ::
+   ::::::::  gt                  atomic greater than (a > b)
+   ::
     - gt
       ||  ?
         a = @
@@ -62,8 +62,8 @@
       ==
         !(lte a b)
 
-  ::::::::  gte                 atomic greater-or-equal (a >= b)
-  ::
+   ::::::::  gte                 atomic greater-or-equal (a >= b)
+   ::
     - gte
       ||  ?
         a = @
@@ -71,16 +71,16 @@
       ==
         !(lt a b)
 
-  ::::::::  inc                 atomic increment
-  ::
+   ::::::::  inc                 atomic increment
+   ::
     - inc
       ||  @
         a = @
       ==
         :5.a
 
-  ::::::::  lt                  atomic less-than (a < b)
-  ::
+   ::::::::  lt                  atomic less-than (a < b)
+   ::
     - lt
       ||  ?
         a = @
@@ -96,8 +96,8 @@
             $(a (dec a), b (dec b))
         ==
 
-  ::::::::  lte                 atomic less-or-equal (a <= b)
-  ::
+   ::::::::  lte                 atomic less-or-equal (a <= b)
+   ::
     - lte
       ||  ?
         a = @
@@ -110,12 +110,6 @@
 
   ::::::::  mod                modulus (a % b)
   ::
-    - mod
-      ||  @
-        a = @
-        b = @
-      ==
-        ?<  (zil b)
         |-
           ?:  (lt a b)
             a
@@ -128,7 +122,7 @@
         a = @
         b = @
       ==
-        =>  c 0
+        :>  c 0
         |-
           ?:  (zil a)
             c
@@ -170,16 +164,16 @@
             $(g (add g g))
           $(g (add g d))
 
-  ::::::::  pat                 noun is @
-  ::
+   ::::::::  pat                 noun is @
+   ::
     - pat
       ||  ?
         a = *
       ==
         !(tap a)
 
-  ::::::::  sub                 atomic subtract (a - b)
-  ::
+   ::::::::  sub                 atomic subtract (a - b)
+   ::
     - sub
       ||  @
         a = @
@@ -189,16 +183,16 @@
           a
         $(a (dec a), b (dec b))
 
-  ::::::::  tap                 noun is cell
-  ::
+   ::::::::  tap                 noun is cell
+   ::
     - tap
       ||  ?
         a = *
       ==
         :4.a
 
-  ::::::::  zil                 @ is 0
-  ::
+   ::::::::  zil                 @ is 0
+   ::
     - zil
       ||  ?
         a = @
@@ -206,7 +200,7 @@
         (eq 0 a)
 
 
-::::::::::  Tier 1: recursive data structures
+::::::::::  Tier 1: lists
 ::::::::::
 
   ::::::::  list                linked list
@@ -223,9 +217,10 @@
   ::::::::  flip                invert list
   ::
     - flip
-      |:  z = (list)
+      |.  z
+        z = (list)
       ==
-        =>  a   =z.~
+        :>  a   =z.~
         |-
           ?-  z
             -   ~   
@@ -234,13 +229,25 @@
               $(z t.z, a [i=i.z t=a])
           ==
 
-  ::::::::  skim                select list items
   ::
-    - skim
-      |:  x = (list)
-          y = ~?
+  ::::::::  lent                length of list
+  ::
+    - lent
+      ||  @
+        z = (list)
       ==
-        ^-  x
+        ?-  z
+          -   ~   0
+          -   ^   (inc $(z t.z))
+        ==
+   ::
+   ::::::::  skim                select list items
+   ::
+    - skim
+      |.  x
+        x = (list)
+        y = ~?
+      ==
         ?-  x
           +   ~
           -   [i=* t=*]
@@ -252,18 +259,29 @@
   ::::::::  sort                sort a list (quicksort)
   ::
     - sort
-      |:
-        w = (list)
-        x = ~?
+      |.  x
+        x = (list)
+        y = ~?
       ==
-        ^-  w
-        ?-  w
+        ?-  x
           +   ~
           -   [i=* t=*]
             :+  weld
-              $(w (skim t.w |:{b=* (x b i.w)}))
-              [i.w $(w (skim t.w |:{b=* !(x b i.w)}))]
+              $(x (skim t.x |:{b=* (y b i.x)}))
+              [i.x $(x (skim t.x |:{b=* !(y b i.x)}))]
             ==
+        ==
+
+  ::::::::  turn                transform a list
+  ::
+    - turn
+      |:  x = (list) 
+          y = ~*
+      ==
+        ?-  x
+          +   ~
+          -   ^
+            [i=(y i.x) t=$(x t.x)]
         ==
 
   ::::::::  weld                concatenate lists
@@ -279,15 +297,4 @@
             [i.x $(x t.x)]
         ==
 
-  ::::::::  bush                marked tree
-  ::
-    - bush
-      |:  x = ~@
-          y = ~*
-      ==
-        |~
-        ** 
-          [p=@:x q=y]
-          [p=[* *]:(bush x y) q=(bush x y)]
-        ==
 ==

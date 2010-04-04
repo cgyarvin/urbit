@@ -39,10 +39,10 @@ _bake_main(u4_milr m,
     _bake_p  (bail);    // !!
     _bake_pq (cast);    // ^-
     _bake_p  (cage);    // :.
+    _bake_p  (drag);    // |$
     _bake_p  (dbug);
     _bake_pq (home);
     _bake_pq (kick);    // :=
-    _bake_p  (lift);    // |$
     _bake_pq (like);    // ?= 
     _bake_pq (link);    // ~>
     _bake_p  (load);    // |@
