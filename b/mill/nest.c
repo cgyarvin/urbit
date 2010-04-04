@@ -340,7 +340,8 @@ _nest_cone(u4_milr m,
   // [%dome p=mold q=bush+[term mold]]
   //
   else if ( u4_b_pq(gan, u4_atom_cone, &p_gan, &q_gan)  ||
-            u4_b_pq(gan, u4_atom_dome, &p_gan, &q_gan) ) {
+            u4_b_pq(gan, u4_atom_dome, &p_gan, &q_gan) )
+  {
     return _nest_main(m, gil, _mill_slip(m, u4_noun_2, meg), p_gan, p_typ) &&
            u4_n_eq(q_typ, q_gan);
   }
@@ -424,6 +425,8 @@ _nest_fork_end(u4_milr m,
                u4_log  vig,
                u4_log  lec)
 {
+  if ( u4_n_eq(vig, lec) ) { return 1; }
+
   while ( !u4_n_zero(vig) ) {
     u4_mold i_vig = u4_ch(vig);
     {
@@ -558,6 +561,8 @@ _nest_loop(u4_milr m,
   u4_lane lane = m->lane;
   u4_noun p_typ, q_typ;
 
+  m->prf++;
+
   // %atom
   // 
   if ( u4_n_eq(u4_atom_atom, typ) ) {
@@ -685,5 +690,16 @@ _mill_nest(u4_milr m,
            u4_mold gan,
            u4_mold typ)
 {
-  return _mill_null(m, gan) || _nest_main(m, u4_noun_0, u4_noun_0, gan, typ);
+  u4_t nes;
+  int  pr0=m->prf;
+
+  nes = _mill_null(m, gan) || _nest_main(m, u4_noun_0, u4_noun_0, gan, typ);
+
+  if ( !u4_n_zero(m->rux) && ((m->prf - pr0) >= 10000) ) {
+    printf("\nhuge %d\n", m->prf - pr0);
+    u4_burp(m->lane, "gan", _mill_dump(m, gan));
+    u4_burp(m->lane, "typ", _mill_dump(m, typ));
+    abort();
+  }
+  return nes;
 }

@@ -218,6 +218,22 @@ _dump_main(u4_milr m,
           (lane, '{', '}', _dump_forks(m, gil, nip, typ));
     }
   }
+  else if ( u4_b_pq(typ, u4_atom_fork, &p_typ, &q_typ) ) {
+    u4_noun pp_typ, pq_typ;
+
+    if ( u4_b_p(p_typ, u4_atom_cube, &pp_typ) &&
+         u4_b_p(q_typ, u4_atom_cube, &pq_typ) &&
+         u4_n_eq(u4_noun_0, pp_typ) &&
+         u4_n_eq(u4_noun_1, pq_typ) )
+    {
+      return u4_cod_in('?');
+    }
+    else {
+      return
+        u4_prep_close
+          (lane, '{', '}', _dump_forks(m, gil, nip, typ));
+    }
+  }
 
   else if ( u4_b_pq(typ, u4_atom_fuse, &p_typ, &q_typ) ) {
     return u4_prep_close

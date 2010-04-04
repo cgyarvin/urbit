@@ -386,7 +386,7 @@
         [%cube p=*]
         [%dome p=mold q=tome]
         [%face p=mark q=mold]
-        [%fork p=mold q=mold]
+        [%fork p=(list mold)]
         [%fuse p=mold q=mold]
         [%hold p=mold q=gene]
       ==
@@ -496,25 +496,23 @@
       **
         [%plug ~]
         [%hook sid=mark pel=gene]
-        [%limb pef=mark hud=spec]
+        [%limb sid=mark hud=spec]
         [had=spec tel=spec]
+      ==
+
+    - foot
+      |~
+      **
+        [%hook fom=mark zic=gene]
+        [%limb fom=mark wex=(list foot)]
       ==
 
     - sp
       :>  pec   (spec)
       |$
        ::
-        - add
-          |.  pec
-            we
-          ==
-       ::
-        - foo !!        
-      ==
-
-    - book
-      |~
-      **
+        - foo
+         !!
       ==
 
     - tome 

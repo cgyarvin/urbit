@@ -32,8 +32,7 @@ _bake_main(u4_milr m,
   u4_noun p_gen, q_gen, r_gen;
 
   if ( u4_b_fork(gen, &p_gen, &q_gen) ) {
-    return _bake_main
-      (m, u4_k_qual(m->lane, u4_atom_cage, p_gen, q_gen, u4_noun_0), tip);
+    return u4_trip;
   }
   else {
     _bake_p  (bail);    // !!

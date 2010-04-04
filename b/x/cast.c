@@ -29,7 +29,7 @@ _mill_b_cast(u4_milr m,
   u4_mold maf  = _mill_play(m, fes, tip);
   u4_loaf kib  = _mill_make(m, rum, tip);
 
-#if 1
+#if 0
   if ( !u4_n_zero(m->rux) ) {
     u4_burp(m->lane, "cast: b: kib", _mill_dump(m, u4_ch(kib)));
     u4_burp(m->lane, "cast: b: maf", _mill_dump(m, maf));

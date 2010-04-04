@@ -31,39 +31,33 @@ _play_main(u4_milr m,
 {
   u4_noun p_gen, q_gen, r_gen;
 
-  if ( u4_b_fork(gen, &p_gen, &q_gen) ) {
-    return _play_main
-      (m, u4_k_qual(m->lane, u4_atom_cage, p_gen, q_gen, u4_noun_0), tip);
-  }
-  else {
-    _play_p  (bail);    // !!
-    _play_pq (cast);    // ^-
-    _play_p  (cage);    // :.
-    _play_p  (dbug);
-    _play_p  (drag);    // |$
-    _play_pq (home);
-    _play_pq (kick);    // :=
-    _play_pq (like);    // ?= 
-    _play_pq (link);    // ~>
-    _play_p  (load);    // |+
-    _play_pq (mang);    // :~
-    _play_pq (name);    // :`
-    _play_pq (nock);
-    _play_pqr(quiz);    // ?:
-    _play_p  (rock);
-    _play_pq (spot);
-    _play_pqr(sure);    // ^=
+  _play_p  (bail);    // !!
+  _play_pq (cast);    // ^-
+  _play_p  (cage);    // :.
+  _play_p  (dbug);
+  _play_p  (drag);    // |$
+  _play_pq (home);
+  _play_pq (kick);    // :=
+  _play_pq (like);    // ?= 
+  _play_pq (link);    // ~>
+  _play_p  (load);    // |+
+  _play_pq (mang);    // :~
+  _play_pq (name);    // :`
+  _play_pq (nock);
+  _play_pqr(quiz);    // ?:
+  _play_p  (rock);
+  _play_pq (spot);
+  _play_pqr(sure);    // ^=
 
-    {
-      u4_noun rex = _mill_open(m, gen);
+  {
+    u4_noun rex = _mill_open(m, gen);
 
-      if ( u4_n_eq(rex, gen) ) {
-        u4_err(m->lane, "rex", rex);
-        return u4_trip;
-      }
-      else {
-        return _mill_play(m, rex, tip);
-      }
+    if ( u4_n_eq(rex, gen) ) {
+      u4_err(m->lane, "rex", rex);
+      return u4_trip;
+    }
+    else {
+      return _mill_play(m, rex, tip);
     }
   }
 }

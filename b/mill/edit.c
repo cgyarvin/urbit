@@ -296,28 +296,37 @@ _edit_dome(u4_milr m,
           return u4_k_trel(lane, u4_atom_cone, p_gom, q_gom);
         }
         else {
+          // u4_mold jac = _mill_edit(m, zel, u4_noun_0, u4_atom_blur);
           u4_mold sut = u4_k_trel
             (lane, u4_atom_cone, 
                    u4_k_trel(lane, u4_atom_fuse, doz, p_gom),
                    q_gom);
 
+#if 1
           if ( _edit_dome_fab(m, sut, gom, q_gom) ) {
             return sut;
           }
           else {
             return _mill_fail(m, "dome violation a");
           }
+#else
+          return sut;
+#endif
         }
       }
       else {
         u4_mold sut = u4_k_trel(lane, u4_atom_cone, doz, q_gom);
 
+#if 1
         if ( _edit_dome_fab(m, sut, gom, q_gom) ) {
           return sut;
         }
         else {
           return _mill_fail(m, "dome violation b");
         }
+#else
+          return sut;
+#endif
       }
     }
   }

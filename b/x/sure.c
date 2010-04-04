@@ -28,7 +28,7 @@ _mill_b_sure(u4_milr m,
   u4_mold nud = _mill_play(m, fes, tip);
   u4_mold gor = _mill_play(m, gav, tip);
 
-#if 1
+#if 0
   if ( !u4_n_zero(m->rux) ) {
     u4_burp(m->lane, "sure: b: gor", _mill_dump(m, gor));
     u4_burp(m->lane, "sure: b: nud", _mill_dump(m, nud));
@@ -55,7 +55,7 @@ _mill_m_sure(u4_milr m,
   u4_mold nud = _mill_play(m, fes, tip);
   u4_mold gor = _mill_play(m, gav, tip);
 
-#if 1
+#if 0
   if ( !u4_n_zero(m->rux) ) {
     u4_burp(m->lane, "sure: m: gor", _mill_dump(m, gor));
     u4_burp(m->lane, "sure: m: nud", _mill_dump(m, nud));
