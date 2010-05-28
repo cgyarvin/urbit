@@ -24,8 +24,8 @@ _mill_reap(u4_milr m,
     return typ;
   }
 
-  else if ( u4_b_pq(typ, u4_atom_cone, &p_typ, &q_typ) ||
-            u4_b_pq(typ, u4_atom_dome, &p_typ, &q_typ) ) {
+  else if ( u4_b_pq(typ, u4_atom_mono, &p_typ, &q_typ) ||
+            u4_b_pq(typ, u4_atom_poly, &p_typ, &q_typ) ) {
     return u4_k_trel(lane, u4_atom_cell, p_typ, u4_atom_blur);
   }
 

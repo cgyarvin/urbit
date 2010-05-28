@@ -7,3 +7,4 @@
   |=
     ?,  (lt a 16)
     (mul (bex (mul (bex a) b)) c)
+

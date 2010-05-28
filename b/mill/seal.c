@@ -37,10 +37,10 @@ _seal_main(u4_milr m,
                             _seal_main(m, gil, q_typ));
   }
 
-  // [%cone p=mold q=bush+[mark mold]]
+  // [%mono p=mold q=bush+[mark mold]]
   //
-  else if ( u4_b_pq(typ, u4_atom_cone, &p_typ, &q_typ) ||
-            u4_b_pq(typ, u4_atom_dome, &p_typ, &q_typ) ) {
+  else if ( u4_b_pq(typ, u4_atom_mono, &p_typ, &q_typ) ||
+            u4_b_pq(typ, u4_atom_poly, &p_typ, &q_typ) ) {
     return _seal_main(m, gil, p_typ);
   }
 

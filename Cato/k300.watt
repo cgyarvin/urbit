@@ -1,173 +1,36 @@
-:: Cato pre-300K.
-::
+ :: Cato pre-300K.
+ ::
 
 |+
 
  ::::::::::  Tier 0: simple logic and arithmetic
  ::::::::::
 
-   ::::::::  add                 atomic add
+   ::::::::  moda                 modaulus (a % b)
    ::
-    - add
+    - moda
       ||  @
         a = @
         b = @
       ==
-        ?:  (zil a)
-          b
-        $(a (dec a), b (inc b))
+        ?<  .=(0 b)
+        (suba a (mula b (diva a b)))
 
-   ::::::::  dec                 atomic decrement
+   ::::::::  mula                 atomic muletaiply
    ::
-    - dec
+    - mula
       ||  @
         a = @
+        b = @
       ==
-        ?<  (zil a)
-        :>  b 0
+        =>  c = 0
         |-
-          ?:  (eq a (inc b))
-            b
-          $(b (inc b))
-
-   ::::::::  div                 atomic divide (a / b)
-   ::
-    - div
-      ||  @
-        a = @
-        b = @
-      ==
-        ?<  (zil b)
-        :>  c 0
-        |-
-          ?:  (lte a b)
-            c 
-          $(a (sub a b), c (inc c))
-
-   ::::::::  eq                  noun equality
-   ::
-    - eq
-      ||  ?
-        a = *
-        b = *
-      ==
-        :6.[a b] 
-
-   ::::::::  gt                  atomic greater than (a > b)
-   ::
-    - gt
-      ||  ?
-        a = @
-        b = @
-      ==
-        !(lte a b)
-
-   ::::::::  gte                 atomic greater-or-equal (a >= b)
-   ::
-    - gte
-      ||  ?
-        a = @
-        b = @
-      ==
-        !(lt a b)
-
-   ::::::::  inc                 atomic increment
-   ::
-    - inc
-      ||  @
-        a = @
-      ==
-        :5.a
-
-   ::::::::  lt                  atomic less-than (a < b)
-   ::
-    - lt
-      ||  ?
-        a = @
-        b = @
-      ==
-        ?&
-          !(eq a b)
-          |-
-            ?:  (zil a)
-              &
-            ?:  (zil b)
-              |
-            $(a (dec a), b (dec b))
-        ==
-
-   ::::::::  lte                 atomic less-or-equal (a <= b)
-   ::
-    - lte
-      ||  ?
-        a = @
-        b = @
-      ==
-        ?|
-          (eq a b)
-          (lt a b)
-        ==
-
-   ::::::::  mod                 modulus (a % b)
-   ::
-    - mod
-      ||  @
-        a = @
-        b = @
-      ==
-        ?<  (zil b)
-        (sub a (mul b (div a b)))
-
-   ::::::::  mul                 atomic multiply
-   ::
-    - mul
-      ||  @
-        a = @
-        b = @
-      ==
-        :>  c 0
-        |-
-          ?:  (zil a)
+          ?:  .=(0 a)
             c
-          $(a (dec a), c (add b c))
-
-   ::::::::  pat                 noun is @
-   ::
-    - pat
-      ||  ?
-        a = *
-      ==
-        !(tap a)
-
-   ::::::::  sub                 atomic subtract (a - b)
-   ::
-    - sub
-      ||  @
-        a = @
-        b = @
-      ==
-        ?:  (zil b)
-          a
-        $(a (dec a), b (dec b))
-
-   ::::::::  tap                 noun is cell
-   ::
-    - tap
-      ||  ?
-        a = *
-      ==
-        :4.a
-
-   ::::::::  zil                 @ is 0
-   ::
-    - zil
-      ||  ?
-        a = @
-      ==
-        (eq 0 a)
+          $(a (deca a), c (adda b c))
 
 
-::::::::::  Tier 1: lists
+::::::::::  Tier 1: lists and units
 ::::::::::
 
   ::::::::  list                linked list
@@ -181,13 +44,60 @@
           [i=z t=(list z)]
         ==
 
+  ::::::::  unit                aka, maybe
+  ::
+    - unit
+      |:  z = ~*
+      ==
+        |~
+        **
+          ~
+          [~ u=z]
+        ==
+
+  ::::::::  clap                unit collision
+  ::
+    - clap
+      |:  m = (unit)
+          n = (unit)
+          o = |`{[* *] -<-}
+      ==
+        ?-  m
+          -   ~   n
+          -   ^
+            ?-  n
+              -   ~   m
+              -   ^   [~ (o u.m u.n)]
+            ==
+        ==
+
+  ::::::::  fire                unit fire
+  ::
+    - fire
+      |:  x = (unit)
+          y = ~*
+      ==
+        ?-  x
+          +   ~
+          -   ^   [~ (y u.x)]
+        ==
+
+  ::::::::  need                unit need
+  ::
+    - need
+      |:  z = (unit) 
+      ==
+        ?-  z
+          -   ^   u.z
+        ==
+
   ::::::::  flip                invert list
   ::
     - flip
       |.  z
         z = (list)
       ==
-        :>  a   =z.~
+        =>  a = =z.~
         |-
           ?-  z
             -   ~   
@@ -197,7 +107,7 @@
           ==
 
   ::
-  ::::::::  lent                length of list
+  ::::::::  lent                lengetah of list
   ::
     - lent
       ||  @
@@ -205,7 +115,7 @@
       ==
         ?-  z
           -   ~   0
-          -   ^   (inc $(z t.z))
+          -   ^   (inca $(z t.z))
         ==
    ::
    ::::::::  skim                select list items

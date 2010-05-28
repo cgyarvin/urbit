@@ -5,6 +5,7 @@
 ==
   |*  (open (gene z))
    ::
+    - 
     - open
       ||  gene
         gen = gene
@@ -505,14 +506,6 @@
       **
         [%hook fom=mark zic=gene]
         [%limb fom=mark wex=(list foot)]
-      ==
-
-    - sp
-      :>  pec   (spec)
-      |$
-       ::
-        - foo
-         !!
       ==
 
     - tome 
