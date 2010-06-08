@@ -18,10 +18,11 @@ _mill_p_nock(u4_milr m,
     return u4_atom_blur;
   }
   else if ( u4_n_eq(u4_noun_4, fiz) || u4_n_eq(u4_noun_6, fiz) ) {
-    return u4_k_trel
-      (lane, u4_atom_fork, 
+    return u4_k_qual
+      (lane, u4_atom_forq,
              u4_k_cell(lane, u4_atom_cube, u4_noun_0),
-             u4_k_cell(lane, u4_atom_cube, u4_noun_1));
+             u4_k_cell(lane, u4_atom_cube, u4_noun_1),
+             u4_noun_0);
   }
   else if ( u4_n_eq(u4_noun_5, fiz) ) {
     return u4_atom_atom;

@@ -1,111 +1,58 @@
-:: Cato pre-300K.
-::
+ :: Cato pre-300K.
+ ::
 
 |+
 
  ::::::::::  Tier 0: simple logic and arithmetic
  ::::::::::
 
-   ::::::::  add                 atomic add
+   ::::::::  moda                 modaulus (a % b)
    ::
-    - add
+    - moda
       ||  @
         a = @
         b = @
       ==
-        ?:  (zil a)
-          b
-        $(a (dec a), b (inc b))
+        ?<  .=(0 b)
+        (suba a (mula b (diva a b)))
 
-   ::::::::  dec                 atomic decrement
+   ::::::::  mula                 atomic muletaiply
    ::
-    - dec
+    - mula
       ||  @
         a = @
+        b = @
       ==
-        ?<  (zil a)
-        :>  b 0
+        =>  c = 0
         |-
-          ?:  (eq a (inc b))
-            b
-          $(b (inc b))
+          ?:  .=(0 a)
+            c
+          $(a (deca a), c (adda b c))
 
-   ::::::::  div                 atomic divide (a / b)
-   ::
-    - div
-      ||  @
-        a = @
-        b = @
-      ==
-        ?<  (zil b)
-        :>  c 0
-        |-
-          ?:  (lte a b)
-            c 
-          $(a (sub a b), c (inc c))
 
-   ::::::::  eq                  noun equality
-   ::
-    - eq
-      ||  ?
-        a = *
-        b = *
-      ==
-        :6.[a b] 
+::::::::::  Tier 1: lists and units
+::::::::::
 
-   ::::::::  gt                  atomic greater than (a > b)
-   ::
-    - gt
-      ||  ?
-        a = @
-        b = @
+  ::::::::  list                linked list
+  ::
+    - list
+      |:  z = ~*
       ==
-        !(lte a b)
-
-   ::::::::  gte                 atomic greater-or-equal (a >= b)
-   ::
-    - gte
-      ||  ?
-        a = @
-        b = @
-      ==
-        !(lt a b)
-
-   ::::::::  inc                 atomic increment
-   ::
-    - inc
-      ||  @
-        a = @
-      ==
-        :5.a
-
-   ::::::::  lt                  atomic less-than (a < b)
-   ::
-    - lt
-      ||  ?
-        a = @
-        b = @
-      ==
-        ?&
-          !(eq a b)
-          |-
-            ?:  (zil a)
-              &
-            ?:  (zil b)
-              |
-            $(a (dec a), b (dec b))
+        |~
+        **
+          ~
+          [i=z t=(list z)]
         ==
 
-   ::::::::  lte                 atomic less-or-equal (a <= b)
-   ::
-    - lte
-      ||  ?
-        a = @
-        b = @
+  ::::::::  unit                aka, maybe
+  ::
+    - unit
+      |:  z = ~*
       ==
-        ?|
-          (eq a b)
-          (lt a b)
+        |~
+        **
+          ~
+          [~ u=z]
         ==
 
   ::::::::  mod                modulus (a % b)
@@ -194,29 +141,33 @@
       ||  ?
         a = *
       ==
-        :4.a
+        ?-  m
+          -   ~   n
+          -   ^
+            ?-  n
+              -   ~   m
+              -   ^   [~ (o u.m u.n)]
+            ==
+        ==
 
-   ::::::::  zil                 @ is 0
-   ::
-    - zil
-      ||  ?
-        a = @
-      ==
-        (eq 0 a)
-
-
-::::::::::  Tier 1: lists
-::::::::::
-
-  ::::::::  list                linked list
+  ::::::::  fire                unit fire
   ::
-    - list
-      |:  z = ~*
+    - fire
+      |:  x = (unit)
+          y = ~*
       ==
-        |~
-        **
-          ~
-          [i=z t=(list z)]
+        ?-  x
+          +   ~
+          -   ^   [~ (y u.x)]
+        ==
+
+  ::::::::  need                unit need
+  ::
+    - need
+      |:  z = (unit) 
+      ==
+        ?-  z
+          -   ^   u.z
         ==
 
   ::::::::  flip                invert list
@@ -225,7 +176,7 @@
       |.  z
         z = (list)
       ==
-        :>  a   =z.~
+        =>  a = =z.~
         |-
           ?-  z
             -   ~   
@@ -235,7 +186,7 @@
           ==
 
   ::
-  ::::::::  lent                length of list
+  ::::::::  lent                lengetah of list
   ::
     - lent
       ||  @
@@ -243,7 +194,7 @@
       ==
         ?-  z
           -   ~   0
-          -   ^   (inc $(z t.z))
+          -   ^   (inca $(z t.z))
         ==
    ::
    ::::::::  skim                select list items

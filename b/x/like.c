@@ -14,11 +14,12 @@ _mill_p_like(u4_milr m,
 {
   u4_lane lane = m->lane;
 
-  return u4_k_trel
+  return u4_k_qual
           (lane, 
-           u4_atom_fork, 
+           u4_atom_forq, 
            u4_k_cell(lane, u4_atom_cube, u4_noun_0),
-           u4_k_cell(lane, u4_atom_cube, u4_noun_1));
+           u4_k_cell(lane, u4_atom_cube, u4_noun_1),
+           u4_noun_0);
 }
 
 /* _mill_b_like()::

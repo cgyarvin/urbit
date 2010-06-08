@@ -54,10 +54,10 @@ _dump_cell(u4_milr m,
   }
 }
 
-/* _dump_cone(): dump a cone.
+/* _dump_mono(): dump a mono.
 */
 static u4_prep
-_dump_cone(u4_milr m,
+_dump_mono(u4_milr m,
            u4_bag  gil,
            u4_bag  nip,
            u4_mold p_typ,
@@ -84,10 +84,10 @@ _dump_cone(u4_milr m,
   return gum;
 }
 
-/* _dump_dome(): dump a dome.
+/* _dump_poly(): dump a poly.
 */
 static u4_prep
-_dump_dome(u4_milr m,
+_dump_poly(u4_milr m,
            u4_bag  gil,
            u4_bag  nip,
            u4_mold p_typ,
@@ -114,28 +114,20 @@ _dump_dome(u4_milr m,
   return gum;
 }
 
-/* _dump_forks(): produce a dump list of forks.
+/* _dump_forq(): produce a dump list of forqs.
 */
 static u4_noun
-_dump_forks(u4_milr m,
-            u4_bag  gil,
-            u4_bag  nip,
-            u4_mold typ)
+_dump_forq(u4_milr m,
+           u4_bag  gil,
+           u4_bag  nip,
+           u4_log  p_typ)
 {
-  u4_lane lane = m->lane;
-  u4_noun p_typ, q_typ;
-
-  if ( u4_b_pq(typ, u4_atom_fork, &p_typ, &q_typ) ) {
-    return u4_log_cat
-      (lane, _dump_forks(m, gil, nip, p_typ),
-             _dump_forks(m, gil, nip, q_typ));
+  if ( u4_n_zero(p_typ) ) {
+    return u4_noun_0;
   }
-  else if ( u4_b_pq(typ, u4_atom_hold, &p_typ, &q_typ) && 
-            !u4_bag_in(typ, gil) )
-  {
-    return _dump_forks(m, gil, nip, _mill_repo(m, p_typ, q_typ));
-  }
-  else return u4_k_cell(lane, _dump_main(m, gil, nip, typ), u4_noun_0);
+  else return 
+    u4_k_cell(m->lane, _dump_main(m, gil, nip, u4_ch(p_typ)),
+                       _dump_forq(m, gil, nip, u4_ct(p_typ)));
 }
 
 /* _dump_main(): dump with gil and nip.
@@ -167,12 +159,12 @@ _dump_main(u4_milr m,
               _dump_cell(m, gil, nip, p_typ, q_typ));
   }
 
-  else if ( u4_b_pq(typ, u4_atom_cone, &p_typ, &q_typ) ) {
-    return _dump_cone(m, gil, nip, p_typ, q_typ);
+  else if ( u4_b_pq(typ, u4_atom_mono, &p_typ, &q_typ) ) {
+    return _dump_mono(m, gil, nip, p_typ, q_typ);
   }
 
-  else if ( u4_b_pq(typ, u4_atom_dome, &p_typ, &q_typ) ) {
-    return _dump_dome(m, gil, nip, p_typ, q_typ);
+  else if ( u4_b_pq(typ, u4_atom_poly, &p_typ, &q_typ) ) {
+    return _dump_poly(m, gil, nip, p_typ, q_typ);
   }
 
   else if ( u4_b_p(typ, u4_atom_cube, &p_typ) ) {
@@ -202,20 +194,21 @@ _dump_main(u4_milr m,
              0);
   }
 
-  else if ( u4_b_pq(typ, u4_atom_fork, &p_typ, &q_typ) ) {
-    u4_noun pp_typ, pq_typ;
+  else if ( u4_b_p(typ, u4_atom_forq, &p_typ) ) {
+    u4_noun pip_typ, pitp_typ;
 
-    if ( u4_b_p(p_typ, u4_atom_cube, &pp_typ) &&
-         u4_b_p(q_typ, u4_atom_cube, &pq_typ) &&
-         u4_n_eq(u4_noun_0, pp_typ) &&
-         u4_n_eq(u4_noun_1, pq_typ) )
+    if ( (u4_log_len(p_typ) == 2) &&
+         u4_b_p(u4_ch(p_typ), u4_atom_cube, &pip_typ) &&
+         u4_b_p(u4_ch(u4_ct(p_typ)), u4_atom_cube, &pitp_typ) &&
+         u4_n_eq(u4_noun_0, pip_typ) &&
+         u4_n_eq(u4_noun_1, pitp_typ) )
     {
       return u4_cod_in('?');
     }
     else {
       return
         u4_prep_close
-          (lane, '{', '}', _dump_forks(m, gil, nip, typ));
+          (lane, '{', '}', _dump_forq(m, gil, nip, p_typ));
     }
   }
 

@@ -210,10 +210,10 @@ _edit_fuse(u4_milr m,
   }
 }
 
-/* _edit_dome_fab_gene(): 
+/* _edit_poly_fab_gene(): 
 */
 static u4_t
-_edit_dome_fab_gene(u4_milr m,
+_edit_poly_fab_gene(u4_milr m,
                     u4_mold doz,
                     u4_mold p_gom,
                     u4_gene gen)
@@ -247,27 +247,27 @@ _edit_dome_fab_gene(u4_milr m,
   }
 }
 
-/* _edit_dome_fab(): match a dome by fabrication.
+/* _edit_poly_fab(): match a poly by fabrication.
 */
 static u4_t
-_edit_dome_fab(u4_milr m,
+_edit_poly_fab(u4_milr m,
                u4_mold doz,
                u4_mold p_gom,
                u4_book q_gom)
 {
   if ( u4_n_atom(u4_ch(q_gom)) ) {
-    return _edit_dome_fab_gene(m, doz, p_gom, u4_ct(q_gom));
+    return _edit_poly_fab_gene(m, doz, p_gom, u4_ct(q_gom));
   }
   else {
-    return _edit_dome_fab(m, doz, p_gom, u4_ch(q_gom)) &&
-           _edit_dome_fab(m, doz, p_gom, u4_ct(q_gom));
+    return _edit_poly_fab(m, doz, p_gom, u4_ch(q_gom)) &&
+           _edit_poly_fab(m, doz, p_gom, u4_ct(q_gom));
   }
 }
 
-/* _edit_dome(): edit a dome.
+/* _edit_poly(): edit a poly.
 */
 static u4_mold
-_edit_dome(u4_milr m,
+_edit_poly(u4_milr m,
            u4_plox zel,
            u4_rail bar,
            u4_mold p_gom,
@@ -284,40 +284,49 @@ _edit_dome(u4_milr m,
     u4_plox par  = _edit_plox_take_tal(m, zel);
 
     if ( !u4_n_zero(par) ) {
-      return _mill_fail(m, "dome write");
+      return _mill_fail(m, "poly write");
     }
     else {
-      u4_mold gom = u4_k_trel(lane, u4_atom_cone, p_gom, q_gom);
+      u4_mold gom = u4_k_trel(lane, u4_atom_mono, p_gom, q_gom);
       u4_rail sed = _mill_slip(m, u4_noun_2, bar);
       u4_mold doz = _mill_edit(m, tig, sed, p_gom);
 
       if ( _mill_nest(m, doz, p_gom) ) {
         if ( _mill_nest(m, p_gom, doz) ) {
-          return u4_k_trel(lane, u4_atom_cone, p_gom, q_gom);
+          return u4_k_trel(lane, u4_atom_mono, p_gom, q_gom);
         }
         else {
+          // u4_mold jac = _mill_edit(m, zel, u4_noun_0, u4_atom_blur);
           u4_mold sut = u4_k_trel
-            (lane, u4_atom_cone, 
+            (lane, u4_atom_mono, 
                    u4_k_trel(lane, u4_atom_fuse, doz, p_gom),
                    q_gom);
 
-          if ( _edit_dome_fab(m, sut, gom, q_gom) ) {
+#if 1
+          if ( _edit_poly_fab(m, sut, gom, q_gom) ) {
             return sut;
           }
           else {
-            return _mill_fail(m, "dome violation a");
+            return _mill_fail(m, "poly violation a");
           }
+#else
+          return sut;
+#endif
         }
       }
       else {
-        u4_mold sut = u4_k_trel(lane, u4_atom_cone, doz, q_gom);
+        u4_mold sut = u4_k_trel(lane, u4_atom_mono, doz, q_gom);
 
-        if ( _edit_dome_fab(m, sut, gom, q_gom) ) {
+#if 1
+        if ( _edit_poly_fab(m, sut, gom, q_gom) ) {
           return sut;
         }
         else {
-          return _mill_fail(m, "dome violation b");
+          return _mill_fail(m, "poly violation b");
         }
+#else
+          return sut;
+#endif
       }
     }
   }
@@ -379,6 +388,51 @@ _edit_face(u4_milr m,
         (lane, u4_atom_face, p_gom, _mill_edit(m, zel, bar, q_gom));
     }
   }
+}
+
+/* _edit_forq_in()::
+*/
+static u4_log
+_edit_forq_in(u4_milr m,
+              u4_plox zel,
+              u4_rail bar,
+              u4_log  p_gom)
+{
+  u4_lane lane = m->lane;
+
+  if ( u4_n_zero(p_gom) ) {
+    return u4_noun_0; 
+  }
+  else {
+    u4_mold ip_gom = u4_ch(p_gom);
+    u4_mold tp_gom = u4_ct(p_gom);
+
+    if ( _mill_cull(m, bar, ip_gom) ) {
+      return _edit_forq_in(m, zel, bar, tp_gom);
+    }
+    else {
+      return u4_k_cell
+        (lane, _mill_edit(m, zel, bar, ip_gom),
+               _edit_forq_in(m, zel, bar, tp_gom));
+    }
+  }
+}
+
+/* _edit_forq(): edit a forq.
+*/
+static u4_mold
+_edit_forq(u4_milr m, 
+           u4_plox zel,
+           u4_rail bar,
+           u4_log  p_gom)
+{
+  u4_lane lane = m->lane;
+  u4_log foq = _edit_forq_in(m, zel, bar, p_gom);
+
+  if ( u4_n_zero(foq) ) {
+    return u4_atom_blot;
+  }
+  else return u4_k_cell(lane, u4_atom_forq, _edit_forq_in(m, zel, bar, p_gom));
 }
 
 /* _edit_mask(): edit into nothing at all.
@@ -444,9 +498,9 @@ _mill_edit(u4_milr m,
     return _edit_cell(m, zel, bar, p_gom, q_gom);
   }
 
-  // [%cone p=(mold) q=bush+[term mold]]
+  // [%mono p=(mold) q=bush+[term mold]]
   //
-  else if ( u4_b_pq(gom, u4_atom_cone, &p_gom, &q_gom) ) {
+  else if ( u4_b_pq(gom, u4_atom_mono, &p_gom, &q_gom) ) {
     u4_mold nuf;
 
     if ( _edit_plox_is_end(m, zel, &nuf) ) {
@@ -457,7 +511,7 @@ _mill_edit(u4_milr m,
       u4_plox par  = _edit_plox_take_tal(m, zel);
 
       if ( !u4_n_zero(par) ) {
-        return _mill_fail(m, "cone abuse");
+        return _mill_fail(m, "mono abuse");
       }
       else {
         u4_rail sed = _mill_slip(m, u4_noun_2, bar);
@@ -470,16 +524,16 @@ _mill_edit(u4_milr m,
           u4_burp(m->lane, "doz", _mill_dump(m, doz));
           u4_burp(m->lane, "p_gom", _mill_dump(m, p_gom));
 
-          return _mill_fail(m, "cone violation");
+          return _mill_fail(m, "mono violation");
         }
       }
     }
   }
 
-  // [%dome p=(mold) q=bush+[term mold]]
+  // [%poly p=(mold) q=bush+[term mold]]
   //
-  else if ( u4_b_pq(gom, u4_atom_dome, &p_gom, &q_gom) ) {
-    return _edit_dome(m, zel, bar, p_gom, q_gom);
+  else if ( u4_b_pq(gom, u4_atom_poly, &p_gom, &q_gom) ) {
+    return _edit_poly(m, zel, bar, p_gom, q_gom);
   }
 
   // [%cube p=noun]
@@ -494,25 +548,10 @@ _mill_edit(u4_milr m,
     return _edit_face(m, zel, bar, p_gom, q_gom);
   }
 
-  // [%fork p=(mold) q=(mold)]
+  // [%forq p=(list mold)]
   //
-  else if ( u4_b_pq(gom, u4_atom_fork, &p_gom, &q_gom) ) {
-    u4_t t_sin = _mill_cull(m, bar, p_gom);
-    u4_t t_dex = _mill_cull(m, bar, q_gom);
-
-    if ( (t_sin && t_dex) ) {
-      return _edit_mask(m, zel);
-    }
-    else if ( t_sin ) {
-      return _mill_edit(m, zel, bar, q_gom);
-    }
-    else if ( t_dex ) {
-      return _mill_edit(m, zel, bar, p_gom);
-    }
-    else {
-      return _mill_eith(m, _mill_edit(m, zel, bar, p_gom),
-                           _mill_edit(m, zel, bar, q_gom));
-    }
+  else if ( u4_b_p(gom, u4_atom_forq, &p_gom) ) {
+    return _edit_forq(m, zel, bar, p_gom);
   }
 
   // [%fuse p=(mold) q=(mold)]

@@ -1,92 +1,157 @@
-watt GTO: Gran Tabula Operazioni
+Watt GTO: Gran Tabula Operazioni 
 
-  gene:
+(All code copied from watt/6.watt - any discrepancies favor it.)
 
-tag  syn   r  bulb                                    semantics
-----------------------------------------------------------------------------
-pont  =>   E  [han=line dur=gene leb=gene]            [leb] in [[han=dur] +1]
-rulf  =<   E  [han=line dur=gene leb=gene]            [dur] in [[han=leb] +1]
-trop  ->   E  [hig=gene muc=gene]                     [muc] in [hig +1]
-prec  -<   E  [hig=gene muc=gene]                     [hig] in [muc +1]
-link  ~>   X  [del=gene zim=gene]                     [zim] in [del]
-colb  ~<   E  [del=gene zim=gene]                     [del] in [zim]
+Gene - AST
+      gene
+    |?
+      [%bail ~]                                   ::  !!  hopven
+      [%dbug p=*gene q=*gene]                     ::  !#  hopdax
+      [%spot p=*spot q=*gene]
+      [%home p=*term q=*gene]
+    ::
+      [%else p=*gene q=*gene]                     ::  ?<  askder
+      [%flip p=*gene]                             ::  ?!  askhop
+      [%lest p=*gene q=*gene r=*gene]             ::  ?.  askdot
+      [%like p=*gene q=*gene]                     ::  ?=  askben
+      [%mesh p=*gene q=*bank]                     ::  ?*  askras
+      [%reef q=*gene *rack]                       ::  ?+  askpod
+      [%sand p=*bank]                             ::  ?&  askamp
+      [%sift p=*gene q=*rack]                     ::  ?-  asknub
+      [%some p=*bank]                             ::  ?|  askbar
+      [%step p=*gene q=*gene r=*gene]             ::  ?~  asksig
+      [%test p=*gene q=*gene r=*gene]             ::  ?:  askdig
+      [%then p=*gene q=*gene]                     ::  ?>  askred
+    ::
+      [%bond p=*gene q=*bank]                     ::  |~  barsig
+      [%gate p=*gene]                             ::  |=  barben
+      [%lift p=*menu]                             ::  |%  barmit
+      [%load p=*menu]                             ::  |*  barras
+      [%loop p=*gene]                             ::  |-  barnub
+      [%pick p=*bank]                             ::  |?  barask
+      [%slam p=*gene]                             ::  |:  bardig
+    ::
+      [%knit p=*gene q=*gene]                     ::  =<  bender
+      [%link p=*gene q=*gene]                     ::  =>  benred
+      [%pull p=*gene q=*gene]                     ::  =-  bennub
+      [%push p=*gene q=*gene]                     ::  =+  benpod
+    ::
+      [%cage p=*bank]                             ::  :*  digras
+      [%cell p=*gene q=*gene]                     ::  :-  dignub
+      [%qual p=*gene q=*gene r=*gene s=*gene]     ::  :^  digmit
+      [%trel p=*gene q=*gene r=*gene]             ::  :+  digpod
+    ::
+      [%bump p=*gene]                             ::  .^  dothat
+      [%deep p=*gene]                             ::  .?  dotask
+      [%nock p=*gene]                             ::  .*  dotras
+      [%twin p=*gene]                             ::  .=  dotben
+    ::
+      [%cast p=*gene q=*gene]                     ::  ^-  hatnub
+      [%clip p=*gene q=*gene]                     ::  ^%  hatmit
+      [%cool p=*gene]                             ::  ^~  hatsig
+      [%name p=*term q=*gene]                     ::  ^=  hatben
+      [%sure p=*gene q=*gene]                     ::  ^+  hatpod
+      [%wash p=*gene]                             ::  ^*  hatras
+    ::
+      [%coin p=*gene]                             ::  ;-  lomnub
+      [%grip p=*gene]                             ::  ;+  lompod
+    ::
+      [%call p=*gene q=*gene]                     ::  %-  mitnub  
+      [%poke p=*gene q=*gene]                     ::  %_  mitcab
+      [%punt p=*gene]                             ::  %*  mitras
+      [%talk p=*gene q=*gene]                     ::  %.  mitdot
+      [%take p=*gene q=*rack]                     ::  %=  mitben
+      [%howl p=*gene q=*gene r=*gene]             ::  %+  mitpod
+      [%wail p=*gene q=*gene r=*gene s=*gene]     ::  %^  mithat
+      [%yell p=*gene q=*bank]                     ::  %~  mitsig
+    ::
+      [%base p=*<%atom %blur %cell %flag %null>]  ::  @vat *ras ^hat ?ask ~sig
+      [%frag p=*axis]
+      [%port p=*term]
+      [%rock p=*]
+    ==
+Misc
+  ::
+    axis  &@
+    bank  (list gene)
+    cord  *<^+(@ *term) [%frag p=*axis] [%pith p=*term] [%port p=*term]>
+    door  &[p=*axis q=*type r=*gene]
+    home  (list term)
+    menu  (list &[p=*term q=*gene])
+    plan  &[p=*axis q=*(unit door) r=*type]
+    rack  (list &[p=*gene p=*gene])
+    rope  (list cord)
+    spec  *<[%none ~] [%leaf p=*term q=*gene] [p=^+(^ *spec) q=*spec]>
+    spot  &[p=[p=@ q=@] [[p=@ q=@]]
+  ::
 
-quiz  ?:   X  [tes=gene bif=gene hob=gene]            if [tes] [bif], else [hob]
-feng  ?>   E  [tes=gene bif=gene]                     if [tes] [bif], else fail
-prox  ?<   E  [tes=gene hob=gene]                     if [tes] fail, else [hob]
-gril  ?-   E  [mox=wire bem=(list pike)]              examine [mox], internally
-stam  ?+   E  [feg=gene bem=(list pike)]              examine [feg], externally 
-boce  ?&   E  [das=(list gene)]                       yes iff all of [das]
-dant  ?|   E  [das=(list gene)]                       yes iff any of [das]
-blem  ?!   E  [gix=gene]                              not
-like  ?=   X  [rid=wire bul=gene]                     yes iff [rid] like [bul]
+Nock formula
+  ::
+  ::::::::
+  ::
+      tool
+    |?
+      [%0 p=@]
+      [%1 p=*]
+      [%2 p=*tool q=*tool r=*tool]
+      [%3 p=*tool q=*tool]
+      [%4 p=*tool]
+      [%5 p=*tool]
+      [%6 p=*tool q=*tool]
+      [p=^%(^ *tool) q=*tool]
+    ==
 
-load  |+   X  [vab=grid]                              book, monomorphic (cone)
-lift  |$   X  [vab=grid]                    drag      book, polymorphic (dome)
-jack  |^   X  [ved=wire suc=bolt vab=grid]            upgrade a dome
-blin  |*   E  [bov=gene vab=grid]                     load and apply
-gleb  |`   E  [tep=form von=gene]                     open monomorphic gate
-flic  |:   E  [tep=form von=gene]                     open polymorphic gate
-drol  ||   E  [nix=form tep=form von=gene]            cast monomorphic gate
-marn  |.   E  [mut=gene tep=form von=gene]            cast polymorphic gate
-lome  |=   E  [cug=gene]                              cold gate
-flot  |-   E  [cug=gene]                              hot gate
+Tack: change to data
+  ::
+  ::::::::
+  ::
+      tack
+    |?
+      ~ 
+      [%leaf p=*type] 
+      [%name p=*term q=*tack] 
+      [%pair p=*tack q=*tack]
+    ==
 
-cast  ^-   X  [fes=gene rum=gene]                     [rum] as [fes]
-lorb  ^:   E  [tul=form rum=gene]                     cast with form
-rald  ^*   E  [rum=gene]                              cast to blur
-sure  ^=   X  [fes=gene gav=gene vep=gene]            [vep], so [gav] in [fes]
+Type
+  ::
+  ::::::::
+  ::
+      type
+    |?
+      %blur
+      %blot
+      %atom
+      [%cell p=*type q=*type]
+      [%core p=*type q=*<[%mono p=*spec] [%poly p=*type q=*spec]>]
+      [%cube p=*]
+      [%face p=*term q=*type]
+      [%fork p=*type q=*type]
+      [%fuse p=*type q=*type]
+      [%hold p=*type q=*gene]
+    ==
+  ::
 
-read  :.   E  [ved=wire]                              simple use
-kick  :=   X  [ved=wire suc=bolt]                     use with changes
-port  :@   E  [tic=@ vix=line]                        seek by name
-frag  :$   E  [haz=axis]                              seek by axis
-mang  :~   E  [buz=gene lep=gene]                     call, direct
-parq  :|   E  [buz=gene lep=gene]                     suspended call
-grad  :^   E  [luq=wire buz=gene lep=gene]            full call
-garc  :+   E  [buz=gene pum=(list gene)]              call with args
-grun  :%   E  [vec=bolt sud=gene]                     [sud] with changes
-nock  :N   X  [fiz=(3 4 5 6) dil=gene]                nock operator
+Axes
+--
+  be - 2  to + 3  ga < 2  lu > 3 
 
-cage  ++   X  [fut=(list gene)]                       nameless tuple
-name  +=   X  [tem=line caf=gene]                     name a face
-rack  +~   E  [der=(list gene)]                       list
-cell  +-   E  [yeg=gene nal=gene]                     cell
-trel  +:   E  [ruv=gene sel=gene gar=gene]            triple
-qual  +%   E  [dor=gene vit=gene lum=gene sag=gene]   quadruple
+  -+<>  "betogalu"  .21
 
-palt  %@   E  [daq=atom]                              constant, atom
-crad  %*   E  [daq=noun]                              constant, blur
-rock  %=   X  [daq=noun]                              constant, cube
+Signs (ven = repeat)
+--
+  amp   &       der   <       nub   -     tep   "
+  ask   ?       dot   .       pel   )     vat   @
+  bar   |       dus   }       pod   +
+  ben   =       hat   ^       ras   *
+  buc   $       hop   !       red   >
+  bup   '       lom   ;       sac   \
+  cab   _       lep   (       sol   /
+  com   ,       mit   %       sud   {
+  dax   #       mon   ]       sig   ~
+  dig   :       nom   [       tic   `
 
-dbug  !#   X  [lyq=gene]                              activate internal debug
-bail  !!   X  [0]                                     exit
-home  !:   X  [cux=lab lyq=gene]                      src label
-spot  !@   X  [xed=[[@ @] [@ @] lyq=gene]             src pos, [at to] [lin col]
+  ace  == " "
+  lit  == "\n"
+  bosh == "::"
 
-
-  form:
-
-tag  syn  bulb                            semantics
-----------------------------------------------------------------------------
-atom  @                                   any atom
-blur  *                                   any noun
-flag  ?                                   0 = yes, 1 = no
-twin  ^                                   any cell
-crib  *+  [wix=(list :[p=line q=form])]   named tuple
-dish  *~  [heb=gene]                      gate for type
-gate  *:  [puz=gene]                      lump of type
-grip  *|  [ved=form piv=form]             [ved] for grip, [piv] for lump/gate
-pick  **  [bec=(list form)]               choice of 
-rock  %   [hin=*]                         constant
-
-
-  pike:
-
-tag   mk form                           semantics
-----------------------------------------------------------------------------
-lask  -  [kel=form luf=gene]            use [luf] if [mox] is like [kel]
-plic  +  [kel=form]                     use [mox] if [mox] is like [kel]
-semp  :  [kel=form luf=gene]            use [luf] if [mox] is fixed to [kel]
-fing  =  [kel=form]                     use [mox] if [mox] is fixed to [kel]
-homp  *  [luf=gene]                     use [luf]

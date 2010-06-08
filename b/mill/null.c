@@ -13,7 +13,7 @@
 */
 static u4_t
 _null_orth_cube(u4_milr m,
-                u4_bag  ham, 
+                u4_bag  hem, 
                 u4_bag  cal,
                 u4_atom pp_typ,
                 u4_mold q_typ)
@@ -41,15 +41,15 @@ _null_orth_cube(u4_milr m,
   }
 
   else if ( u4_b_pq(q_typ, u4_atom_fork, &pq_typ, &qq_typ) ) {
-    return ( _null_main(m, ham, pq_typ) ||
-             _null_orth_cube(m, ham, cal, pp_typ, pq_typ) ) &&
-           ( _null_main(m, ham, qq_typ) ||
-             _null_orth_cube(m, ham, cal, pp_typ, qq_typ) );
+    return ( _null_main(m, hem, pq_typ) ||
+             _null_orth_cube(m, hem, cal, pp_typ, pq_typ) ) &&
+           ( _null_main(m, hem, qq_typ) ||
+             _null_orth_cube(m, hem, cal, pp_typ, qq_typ) );
   }
 
   else if ( u4_b_pq(q_typ, u4_atom_fuse, &pq_typ, &qq_typ) ) {
-    return _null_orth_cube(m, ham, cal, pp_typ, pq_typ) ||
-           _null_orth_cube(m, ham, cal, pp_typ, qq_typ);
+    return _null_orth_cube(m, hem, cal, pp_typ, pq_typ) ||
+           _null_orth_cube(m, hem, cal, pp_typ, qq_typ);
   }
 
   else if ( u4_b_pq(q_typ, u4_atom_hold, &pq_typ, &qq_typ) ) {
@@ -61,20 +61,20 @@ _null_orth_cube(u4_milr m,
     }
     else {
       return _null_orth_cube
-        (m, ham, 
+        (m, hem, 
             u4_bag_add(lane, fum, cal), 
             pp_typ,
             _mill_repo(m, pq_typ, qq_typ));
     }
   }
-  else return _null_orth_cube(m, ham, cal, pp_typ, _mill_reap(m, q_typ));
+  else return _null_orth_cube(m, hem, cal, pp_typ, _mill_reap(m, q_typ));
 }
 
 /* _null_orth_atom(): as _null_orth(), for bead.
 */
 static u4_t
 _null_orth_atom(u4_milr m,
-                u4_bag  ham,
+                u4_bag  hem,
                 u4_bag  cal,
                 u4_mold q_typ)
 {
@@ -101,15 +101,15 @@ _null_orth_atom(u4_milr m,
   }
 
   else if ( u4_b_pq(q_typ, u4_atom_fork, &pq_typ, &qq_typ) ) {
-    return ( _null_main(m, ham, pq_typ) ||
-             _null_orth_atom(m, ham, cal, pq_typ) ) &&
-           ( _null_main(m, ham, qq_typ) ||
-             _null_orth_atom(m, ham, cal, qq_typ) );
+    return ( _null_main(m, hem, pq_typ) ||
+             _null_orth_atom(m, hem, cal, pq_typ) ) &&
+           ( _null_main(m, hem, qq_typ) ||
+             _null_orth_atom(m, hem, cal, qq_typ) );
   }
 
   else if ( u4_b_pq(q_typ, u4_atom_fuse, &pq_typ, &qq_typ) ) {
-    return _null_orth_atom(m, ham, cal, pq_typ) ||
-           _null_orth_atom(m, ham, cal, qq_typ);
+    return _null_orth_atom(m, hem, cal, pq_typ) ||
+           _null_orth_atom(m, hem, cal, qq_typ);
   }
 
   else if ( u4_b_pq(q_typ, u4_atom_hold, &pq_typ, &qq_typ) ) {
@@ -120,19 +120,19 @@ _null_orth_atom(u4_milr m,
     }
     else {
       return _null_orth_atom
-        (m, ham, 
+        (m, hem, 
             u4_bag_add(lane, fum, cal), 
             _mill_repo(m, pq_typ, qq_typ));
     }
   }
-  else return _null_orth_atom(m, ham, cal, _mill_reap(m, q_typ));
+  else return _null_orth_atom(m, hem, cal, _mill_reap(m, q_typ));
 }
 
 /* _null_orth_cell(): as _null_orth(), for cell.
 */
 static u4_t
 _null_orth_cell(u4_milr m,
-                u4_bag  ham,
+                u4_bag  hem,
                 u4_bag  cal,
                 u4_mold pp_typ,
                 u4_mold qp_typ,
@@ -150,8 +150,8 @@ _null_orth_cell(u4_milr m,
   }
 
   else if ( u4_b_pq(q_typ, u4_atom_cell, &pq_typ, &qq_typ) ) {
-    return _null_orth(m, ham, cal, pp_typ, pq_typ) ||
-           _null_orth(m, ham, cal, qp_typ, qq_typ);
+    return _null_orth(m, hem, cal, pp_typ, pq_typ) ||
+           _null_orth(m, hem, cal, qp_typ, qq_typ);
   }
 
   else if ( u4_b_p(q_typ, u4_atom_cube, &pq_typ) ) {
@@ -160,20 +160,20 @@ _null_orth_cell(u4_milr m,
     } 
     else {
       return _null_orth_cell
-        (m, ham, cal, pp_typ, qp_typ, _mill_reap(m, q_typ));
+        (m, hem, cal, pp_typ, qp_typ, _mill_reap(m, q_typ));
     }
   }
 
   else if ( u4_b_pq(q_typ, u4_atom_fork, &pq_typ, &qq_typ) ) {
-    return ( _null_main(m, ham, pq_typ) ||
-             _null_orth_cell(m, ham, cal, pp_typ, qp_typ, pq_typ) ) &&
-           ( _null_main(m, ham, qq_typ) ||
-             _null_orth_cell(m, ham, cal, pp_typ, qp_typ, qq_typ) );
+    return ( _null_main(m, hem, pq_typ) ||
+             _null_orth_cell(m, hem, cal, pp_typ, qp_typ, pq_typ) ) &&
+           ( _null_main(m, hem, qq_typ) ||
+             _null_orth_cell(m, hem, cal, pp_typ, qp_typ, qq_typ) );
   }
 
   else if ( u4_b_pq(q_typ, u4_atom_fuse, &pq_typ, &qq_typ) ) {
-    return _null_orth_cell(m, ham, cal, pp_typ, qp_typ, pq_typ) ||
-           _null_orth_cell(m, ham, cal, pp_typ, qp_typ, qq_typ);
+    return _null_orth_cell(m, hem, cal, pp_typ, qp_typ, pq_typ) ||
+           _null_orth_cell(m, hem, cal, pp_typ, qp_typ, qq_typ);
   }
 
   else if ( u4_b_pq(q_typ, u4_atom_hold, &pq_typ, &qq_typ) ) {
@@ -185,7 +185,7 @@ _null_orth_cell(u4_milr m,
     }
     else {
       return _null_orth_cell
-        (m, ham, 
+        (m, hem, 
             u4_bag_add(lane, fum, cal), 
             pp_typ,
             qp_typ,
@@ -193,14 +193,14 @@ _null_orth_cell(u4_milr m,
     }
   }
   else return _null_orth_cell
-    (m, ham, cal, pp_typ, qp_typ, _mill_reap(m, q_typ));
+    (m, hem, cal, pp_typ, qp_typ, _mill_reap(m, q_typ));
 }
 
 /* _null_orth(): null, with double recursion control.
 */
 static u4_t
 _null_orth(u4_milr m,
-           u4_bag  ham,
+           u4_bag  hem,
            u4_bag  cal,
            u4_mold p_typ,
            u4_mold q_typ)
@@ -212,7 +212,7 @@ _null_orth(u4_milr m,
   // u4_burp(lane, "no: q", _mill_dump(m, q_typ));
 
   if ( u4_n_eq(u4_atom_atom, p_typ) ) {
-    return _null_orth_atom(m, ham, cal, q_typ);
+    return _null_orth_atom(m, hem, cal, q_typ);
   }
 
   else if ( u4_n_eq(u4_atom_blur, p_typ) ) {
@@ -220,26 +220,26 @@ _null_orth(u4_milr m,
   }
 
   else if ( u4_b_pq(p_typ, u4_atom_cell, &pp_typ, &qp_typ) ) {
-    return _null_orth_cell(m, ham, cal, pp_typ, qp_typ, q_typ);
+    return _null_orth_cell(m, hem, cal, pp_typ, qp_typ, q_typ);
   }
 
   else if ( u4_b_p(p_typ, u4_atom_cube, &pp_typ) ) {
     if ( u4_n_atom(pp_typ) ) {
-      return _null_orth_cube(m, ham, cal, pp_typ, q_typ);
+      return _null_orth_cube(m, hem, cal, pp_typ, q_typ);
     }
-    else return _null_orth(m, ham, cal, _mill_reap(m, p_typ), q_typ);
+    else return _null_orth(m, hem, cal, _mill_reap(m, p_typ), q_typ);
   }
 
   else if ( u4_b_pq(p_typ, u4_atom_fork, &pp_typ, &qp_typ) ) {
-    return ( ( _null_main(m, ham, pp_typ) ||
-               _null_orth(m, ham, cal, pp_typ, q_typ) ) &&
-             ( _null_main(m, ham, qp_typ) ||
-               _null_orth(m, ham, cal, qp_typ, q_typ) ) );
+    return ( ( _null_main(m, hem, pp_typ) ||
+               _null_orth(m, hem, cal, pp_typ, q_typ) ) &&
+             ( _null_main(m, hem, qp_typ) ||
+               _null_orth(m, hem, cal, qp_typ, q_typ) ) );
   }
 
   else if ( u4_b_pq(p_typ, u4_atom_fuse, &pp_typ, &qp_typ) ) {
-    return _null_orth(m, ham, cal, pp_typ, q_typ) ||
-           _null_orth(m, ham, cal, qp_typ, q_typ);
+    return _null_orth(m, hem, cal, pp_typ, q_typ) ||
+           _null_orth(m, hem, cal, qp_typ, q_typ);
   }
 
   else if ( u4_b_pq(p_typ, u4_atom_hold, &pp_typ, &qp_typ) ) {
@@ -250,21 +250,21 @@ _null_orth(u4_milr m,
     }
     else {
       return _null_orth
-        (m, ham, 
+        (m, hem, 
             u4_bag_add(lane, fum, cal), 
             _mill_repo(m, pp_typ, qp_typ),
             q_typ);
     }
   }
 
-  else return _null_orth(m, ham, cal, _mill_reap(m, p_typ), q_typ);
+  else return _null_orth(m, hem, cal, _mill_reap(m, p_typ), q_typ);
 }
 
 /* _null_main(): null, with recursion control.
 */
 static u4_t
 _null_main(u4_milr m,
-           u4_bag  ham,
+           u4_bag  hem,
            u4_mold typ)
 {
   u4_lane lane = m->lane;
@@ -280,31 +280,31 @@ _null_main(u4_milr m,
     return u4_false;
   }
   else if ( u4_b_pq(typ, u4_atom_cell, &p_typ, &q_typ) ) {
-    return _null_main(m, ham, p_typ) || _null_main(m, ham, q_typ);
+    return _null_main(m, hem, p_typ) || _null_main(m, hem, q_typ);
   }
   else if ( u4_b_p(typ, u4_atom_cube, &p_typ) ) {
     return u4_false;
   }
   else if ( u4_b_pq(typ, u4_atom_fork, &p_typ, &q_typ) ) {
-    return _null_main(m, ham, p_typ) && _null_main(m, ham, q_typ);
+    return _null_main(m, hem, p_typ) && _null_main(m, hem, q_typ);
   }
   else if ( u4_b_pq(typ, u4_atom_fuse, &p_typ, &q_typ) ) {
-    return _null_main(m, ham, p_typ) ||
-           _null_main(m, ham, q_typ) ||
-           _null_orth(m, ham, u4_noun_0, p_typ, q_typ);
+    return _null_main(m, hem, p_typ) ||
+           _null_main(m, hem, q_typ) ||
+           _null_orth(m, hem, u4_noun_0, p_typ, q_typ);
   }
   else if ( u4_b_pq(typ, u4_atom_hold, &p_typ, &q_typ) ) {
-    if ( u4_bag_in(typ, ham) ) {
+    if ( u4_bag_in(typ, hem) ) {
       /* We can do this because we're searching conservatively.
       */
       return u4_true;
     }
     else {
       return _null_main
-        (m, u4_bag_add(lane, typ, ham), _mill_repo(m, p_typ, q_typ));
+        (m, u4_bag_add(lane, typ, hem), _mill_repo(m, p_typ, q_typ));
     }
   }
-  else return _null_main(m, ham, _mill_reap(m, typ));
+  else return _null_main(m, hem, _mill_reap(m, typ));
 }
 
 

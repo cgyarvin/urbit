@@ -99,10 +99,10 @@ _find_cell(u4_milr m,
   else return das;
 }
 
-/* _find_cone(): as _find_main(), for [%cone p_typ q_typ].
+/* _find_mono(): as _find_main(), for [%mono p_typ q_typ].
 */
 static u4_loaf
-_find_cone(u4_milr m,
+_find_mono(u4_milr m,
            u4_mark cox,
            u4_bag  gil,
            u4_rail bar,
@@ -123,7 +123,7 @@ _find_cone(u4_milr m,
     return u4_k_cell
       (lane,
        u4_k_trel(lane, u4_atom_hold, 
-                       u4_k_trel(lane, u4_atom_cone, p_typ, q_typ),
+                       u4_k_trel(lane, u4_atom_mono, p_typ, q_typ),
                        q_gos),
        u4_k_trel(lane, u4_noun_3,
                        u4_k_cell(lane, u4_noun_0, u4_noun_1),
@@ -131,10 +131,10 @@ _find_cone(u4_milr m,
   }
 }
 
-/* _find_dome(): as _find_main(), for [%dome p_typ q_typ].
+/* _find_poly(): as _find_main(), for [%poly p_typ q_typ].
 */
 static u4_loaf
-_find_dome(u4_milr m,
+_find_poly(u4_milr m,
            u4_mark cox,
            u4_bag  gil,
            u4_rail bar,
@@ -155,7 +155,7 @@ _find_dome(u4_milr m,
     return u4_k_cell
       (lane,
        u4_k_trel(lane, u4_atom_hold, 
-                       u4_k_trel(lane, u4_atom_dome, p_typ, q_typ),
+                       u4_k_trel(lane, u4_atom_poly, p_typ, q_typ),
                        q_gos),
        u4_k_trel(lane, u4_noun_3,
                        u4_k_cell(lane, u4_noun_0, u4_noun_1),
@@ -181,50 +181,55 @@ _find_face(u4_milr m,
   else return u4_noun_0;
 }
 
-/* _find_fork(): as _find_main(), for [%fork p_typ q_typ].
+/* _find_forq(): as _find_main(), for [%forq p_typ].
 */
 static u4_loaf
-_find_fork(u4_milr m,
+_find_forq(u4_milr m,
            u4_mark cox,
            u4_bag  gil,
            u4_rail bar,
-           u4_mold p_typ,
-           u4_mold q_typ)
+           u4_log  p_typ)
 {
   u4_lane lane = m->lane;
 
-  // XX: this fork handling is not quite right.  Revisit.
-  //
-  if ( _mill_cull(m, bar, p_typ) ||
-       u4_bag_in(u4_k_cell(lane, bar, p_typ), gil) ) 
-  {
-    return _find_main(m, cox, gil, bar, q_typ);
-  } 
-  else if ( _mill_cull(m, bar, q_typ) ||
-            u4_bag_in(u4_k_cell(lane, bar, q_typ), gil) )
-  {
-    return _find_main(m, cox, gil, bar, p_typ);
+  if ( u4_n_zero(p_typ) ) {
+    return u4_noun_1;
   }
   else {
-    u4_loaf dor = _find_main(m, cox, gil, bar, p_typ);
-    u4_loaf hum = _find_main(m, cox, gil, bar, q_typ);
+    u4_mold ip_typ = u4_ch(p_typ);
+    u4_log  tp_typ = u4_ct(p_typ);
 
-    if ( !u4_n_zero(dor) && 
-         !u4_n_zero(hum) &&
-         u4_n_eq(u4_ct(dor), u4_ct(hum)) )
+    if ( _mill_cull(m, bar, ip_typ) ||
+          u4_bag_in(u4_k_cell(lane, bar, p_typ), gil) )
     {
-      return u4_k_cell
-        (lane, _mill_eith(m, u4_ch(dor), u4_ch(hum)),
-               u4_ct(dor));
-    }
-    else if ( u4_n_zero(dor) && u4_n_zero(hum) ) {
-      return u4_noun_0;
+      return _find_forq(m, cox, gil, bar, tp_typ);
     }
     else {
-      return _mill_fail(m, "find: fork conflict");
+      u4_loaf dor = _find_main(m, cox, gil, bar, ip_typ);
+      u4_loaf hum = _find_forq(m, cox, gil, bar, tp_typ);
+
+      if ( u4_n_eq(u4_noun_1, hum) ) {
+        return dor;
+      }
+      else {
+        if ( u4_n_zero(dor) && u4_n_zero(hum) ) {
+          return u4_noun_0;
+        }
+        else if ( !u4_n_zero(dor) && 
+                  !u4_n_zero(hum) &&
+                  u4_n_eq(u4_ct(dor), u4_ct(hum)) )
+        {
+          return u4_k_cell
+            (lane, _mill_eith(m, u4_ch(dor), u4_ch(hum)),
+                   u4_ct(dor));
+        }
+        else {
+          return _mill_fail(m, "find: forq conflict");
+        }
+      }
     }
   }
-}
+} 
 
 /* _find_fuse(): as _find_main(), for [%fuse p_typ q_typ].
 */
@@ -322,10 +327,10 @@ _find_main(u4_milr m,
     return _find_cell(m, cox, gil, bar, p_typ, q_typ);
   }
 
-  // [%cone p=mold q=bush+[mark mold]]
+  // [%mono p=mold q=bush+[mark mold]]
   //
-  else if ( u4_b_pq(typ, u4_atom_cone, &p_typ, &q_typ) ) {
-    return _find_cone(m, cox, gil, bar, p_typ, q_typ);
+  else if ( u4_b_pq(typ, u4_atom_mono, &p_typ, &q_typ) ) {
+    return _find_mono(m, cox, gil, bar, p_typ, q_typ);
   }
 
   // [%cube p=noun]
@@ -334,10 +339,10 @@ _find_main(u4_milr m,
     return u4_noun_0;
   }
 
-  // [%dome p=mold q=bush+[mark mold]]
+  // [%poly p=mold q=bush+[mark mold]]
   //
-  else if ( u4_b_pq(typ, u4_atom_dome, &p_typ, &q_typ) ) {
-    return _find_dome(m, cox, gil, bar, p_typ, q_typ);
+  else if ( u4_b_pq(typ, u4_atom_poly, &p_typ, &q_typ) ) {
+    return _find_poly(m, cox, gil, bar, p_typ, q_typ);
   }
 
   // [%face p=mark q=mold]
@@ -346,10 +351,14 @@ _find_main(u4_milr m,
     return _find_face(m, cox, gil, bar, p_typ, q_typ);
   }
 
-  // [%fork p=mold q=mold]
+  // [%forq p=(list mold)]
   //
-  else if ( u4_b_pq(typ, u4_atom_fork, &p_typ, &q_typ) ) {
-    return _find_fork(m, cox, gil, bar, p_typ, q_typ);
+  else if ( u4_b_p(typ, u4_atom_forq, &p_typ) ) {
+    u4_loaf dox = _find_forq(m, cox, gil, bar, p_typ);
+
+    if ( u4_n_eq(dox, u4_noun_1) ) {
+      return u4_noun_0;
+    } else return dox;
   }
 
   // [%fuse p=mold q=mold]

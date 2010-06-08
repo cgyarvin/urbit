@@ -24,7 +24,7 @@ u4_mill(u4_lane lane,
     u4_loaf lof = _mill_make(m, nes, zyl);
 
     printf(":\n");
-    // printf("prf: %d\n", m->prf);
+    printf("prf: %d\n", m->prf);
     return lof;
   }
 }

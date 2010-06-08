@@ -47,7 +47,7 @@ _mill_p_load(u4_milr m,
   u4_lane lane = m->lane;
   u4_noun pir  = _make_book(m, vab);
 
-  return u4_k_trel(lane, u4_atom_cone, tip, pir);
+  return u4_k_trel(lane, u4_atom_mono, tip, pir);
 }
 
 /* _mill_b_load()::
@@ -59,7 +59,7 @@ _mill_b_load(u4_milr m,
 {
   u4_lane lane = m->lane;
   u4_noun pir  = _make_book(m, vab);
-  u4_mold gan  = u4_k_trel(lane, u4_atom_cone, tip, pir);
+  u4_mold gan  = u4_k_trel(lane, u4_atom_mono, tip, pir);
   u4_noun fez  = _load_book(m, pir, gan);
 
   return u4_k_cell
@@ -76,7 +76,7 @@ _mill_m_load(u4_milr m,
 {
   u4_lane lane = m->lane;
   u4_noun pir  = _make_book(m, vab);
-  u4_mold gan  = u4_k_trel(lane, u4_atom_cone, tip, pir);
+  u4_mold gan  = u4_k_trel(lane, u4_atom_mono, tip, pir);
   u4_noun fez  = _load_book(m, pir, gan);
 
   return u4_k_cell
