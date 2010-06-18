@@ -1,6 +1,6 @@
 Watt GTO: Gran Tabula Operazioni 
 
-(All code copied from watt/6.watt - any discrepancies favor it.)
+(Copied from watt.watt - any discrepancies favor it.)
 
 Gene - AST
       gene
