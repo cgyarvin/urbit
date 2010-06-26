@@ -15,7 +15,6 @@ Gene - AST
       [%lest p=*gene q=*gene r=*gene]             ::  ?.  askdot
       [%like p=*gene q=*gene]                     ::  ?=  askben
       [%mesh p=*gene q=*bank]                     ::  ?*  askras
-      [%reef q=*gene *rack]                       ::  ?+  askpod
       [%sand p=*bank]                             ::  ?&  askamp
       [%sift p=*gene q=*rack]                     ::  ?-  asknub
       [%some p=*bank]                             ::  ?|  askbar
@@ -38,6 +37,7 @@ Gene - AST
     ::
       [%cage p=*bank]                             ::  :*  digras
       [%cell p=*gene q=*gene]                     ::  :-  dignub
+      [%flow p=%bank]                             ::  :~  digsig
       [%qual p=*gene q=*gene r=*gene s=*gene]     ::  :^  digmit
       [%trel p=*gene q=*gene r=*gene]             ::  :+  digpod
     ::

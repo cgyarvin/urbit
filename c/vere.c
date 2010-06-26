@@ -324,13 +324,13 @@ vere_boot(uz_machine mac)
   else {
     uz_l_except(mac, env);
     {
-      uz_noun src = uz_k_file(mac, uz_k_string(mac, "Cato/k300.watt"));
+      uz_noun src = uz_k_file(mac, uz_k_string(mac, "watt/watt.watt"));
       uz_noun ker = uz_t_watt(mac, src);
 
       uz_r_express(mac, ker);
 
-      // uz_f_print_type(mac, "boot: type", uz_ch(mac, mac->har));
-      // uz_f_print(mac, "boot: noun", uz_ct(mac, mac->har));
+      uz_f_print_type(mac, "boot: type", uz_ch(mac, mac->har));
+      uz_f_print(mac, "boot: noun", uz_ct(mac, mac->har));
     }
   }
 }

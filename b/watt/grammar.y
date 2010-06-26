@@ -265,7 +265,7 @@ wide_bot
 
     wide_norm: di_hopdax body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hopven                { $$ = _ycell($1, u4_noun_0); }
-    wide_norm: di_hopbar                { $$ = _ycell($1, u4_noun_0); }
+    wide_norm: di_hopmit                { $$ = _ycell($1, u4_noun_0); }
 
     wide_norm: di_lomnub body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_lompod body_a_wide    { $$ = _ycell($1, $2); }
@@ -516,8 +516,7 @@ tall
     di_hatask: si_hat si_ask  { $$ = u4_atom_quid; }
 
     di_hopdax: si_hop si_dax  { $$ = u4_atom_dbug; }
-    di_hopdig: si_hop si_dig  { $$ = u4_atom_watt; }
-    di_hopbar: si_hop si_hop  { $$ = u4_atom_boot; }
+    di_hopmit: si_hop si_mit  { $$ = u4_atom_boot; }
     di_hopven: si_hop si_hop  { $$ = u4_atom_bail; }
     
     di_lomnub: si_lom si_nub  { $$ = u4_atom_hang; }
@@ -768,8 +767,8 @@ _watt_parse_part(struct _u4_scanner *scanner,
 */
 u4_noun
 u4_watt_parse(u4_lane lane,
-              u4_site pif,
-              u4_sack zar)
+              u4_noun pif,
+              u4_noun zar)
 {
   struct _u4_scanner scanner;
 
@@ -794,12 +793,12 @@ uint32_t
 u4_unix_path_len(u4_noun fud)
 {
   if ( u4_n_atom(fud) ) {
-    return u4_a_ben(fud, 3);
+    return u4_a_bin(fud, 3);
   }
   else {
     u4_assert(u4_n_atom(u4_ch(fud)));
 
-    return u4_a_ben(u4_ch(fud), 3) + 1 + u4_unix_path_len(u4_ct(fud));
+    return u4_a_bin(u4_ch(fud), 3) + 1 + u4_unix_path_len(u4_ct(fud));
   }
 }
 
@@ -812,14 +811,14 @@ u4_unix_path_copy(u4_noun fud,
                   char *cl_path)
 {
   if ( u4_n_atom(fud) ) {
-    uint32_t ben = u4_a_ben(fud, 3);
+    uint32_t ben = u4_a_bin(fud, 3);
 
     u4_a_bytes(fud, (uint8_t *)cl_path, 0, ben);
     return ben;
   }
   else {
     u4_noun hed = u4_ch(fud);
-    uint32_t ben = u4_a_ben(hed, 3);
+    uint32_t ben = u4_a_bin(hed, 3);
 
     u4_a_bytes(hed, (uint8_t *)cl_path, 0, ben);
     cl_path[ben] = '/';

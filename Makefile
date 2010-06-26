@@ -195,7 +195,15 @@ U4_NOCK_OFILES=\
        b/nock/pure.o
 
 U4_WATT_OFILES=\
+       b/watt/crow.o \
+       b/watt/dump.o \
        b/watt/grammar.o \
+       b/watt/gull.o \
+       b/watt/iris.o \
+       b/watt/lark.o \
+       b/watt/lily.o \
+       b/watt/open.o \
+       b/watt/rose.o
 
 U4_OFILES= \
        $(U4_CAKE_OFILES) \
@@ -203,9 +211,6 @@ U4_OFILES= \
        $(U4_FAKE_OFILES) \
        $(U4_LIB_OFILES) \
        $(U4_NOCK_OFILES) \
-       $(U4_MILL_OFILES) \
-       $(U4_MX_OFILES) \
-       $(U4_MQ_OFILES) \
        $(U4_WATT_OFILES)
 
 C_OFILES=\

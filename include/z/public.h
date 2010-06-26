@@ -508,12 +508,12 @@
 
     /** Built-in functions, typically kernel implemented.
     **/
-      /* uz_t_mill(): 
+      /* uz_t_full(): 
       **
       **   Compile [type gene] to [type form].
       */
         uz_noun
-        uz_t_mill(uz_machine mac,
+        uz_t_full(uz_machine mac,
                   uz_noun    typ,
                   uz_noun    gen);
 
