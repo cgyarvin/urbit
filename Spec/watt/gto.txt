@@ -38,7 +38,7 @@ Gene - AST
       [%cage p=*bank]                             ::  :*  digras
       [%cell p=*gene q=*gene]                     ::  :-  dignub
       [%flow p=%bank]                             ::  :~  digsig
-      [%qual p=*gene q=*gene r=*gene s=*gene]     ::  :^  digmit
+      [%qual p=*gene q=*gene r=*gene s=*gene]     ::  :^  dighat
       [%trel p=*gene q=*gene r=*gene]             ::  :+  digpod
     ::
       [%bump p=*gene]                             ::  .^  dothat

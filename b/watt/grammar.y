@@ -82,7 +82,7 @@
  
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 92
+  %expect 69
 
   %pure-parser
   %locations
@@ -98,7 +98,7 @@
 %%
 
 file 
-  : g tall g        { scanner->scan = $2; }
+  : g gene g        { scanner->scan = $2; }
   ;
 
 gene
@@ -107,22 +107,28 @@ gene
   ;
 
 wide
-  : wide_top
-  | wide_top si_dig wide
+  : wide_a
+  | wide_rope si_dig wide
     { $$ = _ytrel(u4_atom_link, $1, $3); }
   ;
 
-wide_top
-  : wide_bot
-  | wide_bot si_cab wide 
+wide_a
+  : wide_b
+  | tok_term si_ben wide_b
+  ;
+
+wide_b
+  : wide_c
+  | wide_c si_cab wide 
     { $$ = _ytrel(u4_atom_poke, $1, $3); }
   ;
 
-wide_bot
+wide_c
   : wide_hard
+  | wide_rope
   | wide_funk
   | wide_cage
-  | wide_flow
+  | wide_pick
   | wide_call
   | wide_norm
   ;
@@ -154,45 +160,45 @@ wide_bot
         { $$ = _ycell(u4_atom_rock, $1); }
       | si_mit tok_term
         { $$ = _ycell(u4_atom_rock, $2); }
+      | si_mit si_mit
+        { $$ = _ycell(u4_atom_rock, u4_noun_0); }
       | si_sig
         { $$ = _ycell(u4_atom_rock, u4_noun_0); }
       | si_vat term
-        { $$ = u4_stub; /* placegateer for fort */ }
+        { $$ = u4_stub; /* placeholder for fort */ }
       ;
-    
+   
+    wide_rope
+      : rope            
+        { $$ = _ytrel(u4_atom_take, $1, u4_noun_0); }
+      ;
     wide_cage
       : si_nom g bank_wide g si_mon 
         { $$ = _ycell(u4_atom_cage, $3); }
       ; 
-    
-    wide_flow
-      : si_der g bank_wide g si_red
+
+    wide_pick
+      : si_der g flow_wide g si_red
         { $$ = _ycell(u4_atom_pick, $3); } 
       ;
 
     wide_call
-      : si_lep g flow_wide si_pel
+      : si_lep g flow_wide g si_pel
         { $$ = _ycell(u4_atom_call, $3); }
-      | si_lep g wide g si_pel
-        { $$ = _ycell(u4_atom_punt, $3); }
       ;
-      
+ 
   /** Wide: funky stuff.
   **/
     wide_funk
-      : rope            
-        { $$ = _ytrel(u4_atom_take, $1, u4_noun_0); }
-      | term si_ben wide
-        { $$ = _ytrel(u4_atom_name, $1, $3); }
-      | si_sud g bank_wide g si_dus
+      : si_sud g bank_wide g si_dus
         { $$ = _ycell(u4_atom_flow, $3); }
-      | wide si_lep rack_wide si_pel
+      | wide_rope si_lep rack_wide si_pel
         { $$ = _ytrel(u4_atom_take, $1, $3); }
       | si_hop wide
         { $$ = _ycell(u4_atom_flip, $2); }
       | si_amp wide
         { $$ = _ycell(u4_atom_coin, $2); }
-      | si_ras wide 
+      | si_ras wide
         { $$ = _ycell(u4_atom_punt, $2); }
       | si_cab wide
         { $$ = _ycell(u4_atom_grip, $2); }
@@ -213,7 +219,7 @@ wide_bot
       : term        { $$ = _ycell(u4_atom_rock, $1); }
       | wide_hard
       | wide_cage
-      | wide_flow
+      | wide_pick
       | wide_call
       ;
 
@@ -221,8 +227,8 @@ wide_bot
   **/
     wide_norm: di_askdig body_c_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_askdot body_c_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_asktic body_b_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_askcom body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_askder body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_askred body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_askamp body_d_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_askbar body_d_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_asksig body_c_wide    { $$ = _ycell($1, $2); }
@@ -241,8 +247,9 @@ wide_bot
     wide_norm: di_barben body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_barras body_e_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_barmit body_e_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_bardig body_e_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_bardig body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_barask body_d_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_barsig body_i_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_digras body_d_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_digsig body_d_wide    { $$ = _ycell($1, $2); }
@@ -266,6 +273,7 @@ wide_bot
     wide_norm: di_hopdax body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hopven                { $$ = _ycell($1, u4_noun_0); }
     wide_norm: di_hopmit                { $$ = _ycell($1, u4_noun_0); }
+    wide_norm: di_hopdig body_a_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_lomnub body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_lompod body_a_wide    { $$ = _ycell($1, $2); }
@@ -273,6 +281,7 @@ wide_bot
     wide_norm: di_mitben body_h_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_mitsig body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_mitnub body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_mitdot body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_mitpod body_c_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_mithat body_f_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_mitras body_i_wide    { $$ = _ycell($1, $2); }
@@ -302,12 +311,12 @@ wide_bot
   /** Wide - body parts.
   **/
     flow_wide
-      : wide g           { $$ = _ycell($1, u4_noun_0); }
+      : wide             { $$ = _ycell($1, u4_noun_0); }
       | wide w flow_wide { $$ = _ycell($1, $3); }
       ;
 
     bank_wide
-      :                  { $$ = u4_noun_0; }
+      : wide             { $$ = $1; }
       | wide w bank_wide { $$ = _ycell($1, $2); }
       ;
 
@@ -337,8 +346,8 @@ tall
   **/
     tall_norm: di_askdig w body_c_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_askdot w body_c_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_asktic w body_b_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_askcom w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_askder w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_askred w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_askamp w body_d_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_askbar w body_d_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_asksig w body_c_tall    { $$ = _ycell($1, $3); }
@@ -356,9 +365,11 @@ tall
 
     tall_norm: di_barnub w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_barben w body_a_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_bardig w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_barras w body_e_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_barmit w body_e_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_barask w body_d_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_barsig w body_i_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_digras w body_d_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_digsig w body_d_tall    { $$ = _ycell($1, $3); }
@@ -380,6 +391,7 @@ tall
     tall_norm: di_hatask w body_a_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_hopdax w body_a_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_hopdig w body_a_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_lomnub w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_lompod w body_a_tall    { $$ = _ycell($1, $3); }
@@ -387,6 +399,7 @@ tall
     tall_norm: di_mitben w body_h_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_mitsig w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_mitnub w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_mitdot w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_mitpod w body_c_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_mithat w body_f_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_mitras w body_i_tall    { $$ = _ycell($1, $3); }
@@ -472,8 +485,8 @@ tall
   **/
     di_askdig: si_ask si_dig  { $$ = u4_atom_test; }
     di_askdot: si_ask si_dot  { $$ = u4_atom_lest; }
-    di_asktic: si_ask si_tic  { $$ = u4_atom_then; }
-    di_askcom: si_ask si_com  { $$ = u4_atom_else; }
+    di_askred: si_ask si_red  { $$ = u4_atom_then; }
+    di_askder: si_ask si_der  { $$ = u4_atom_else; }
     di_askamp: si_ask si_amp  { $$ = u4_atom_sand; }
     di_askbar: si_ask si_bar  { $$ = u4_atom_some; }
     di_asksig: si_ask si_sig  { $$ = u4_atom_step; }
@@ -489,6 +502,7 @@ tall
     di_barmit: si_bar si_mit  { $$ = u4_atom_lift; }
     di_bardig: si_bar si_dig  { $$ = u4_atom_slam; }
     di_barask: si_bar si_ask  { $$ = u4_atom_pick; }
+    di_barsig: si_bar si_sig  { $$ = u4_atom_bond; }
 
     di_bender: si_ben si_der  { $$ = u4_atom_knit; }
     di_benred: si_ben si_red  { $$ = u4_atom_link; }
@@ -518,6 +532,7 @@ tall
     di_hopdax: si_hop si_dax  { $$ = u4_atom_dbug; }
     di_hopmit: si_hop si_mit  { $$ = u4_atom_boot; }
     di_hopven: si_hop si_hop  { $$ = u4_atom_bail; }
+    di_hopdig: si_hop si_dig  { $$ = u4_atom_meta; }
     
     di_lomnub: si_lom si_nub  { $$ = u4_atom_hang; }
     di_lompod: si_lom si_pod  { $$ = u4_atom_grip; }
@@ -525,6 +540,7 @@ tall
     di_mitben: si_mit si_ben  { $$ = u4_atom_take; }
     di_mitsig: si_mit si_sig  { $$ = u4_atom_punt; }
     di_mitnub: si_mit si_nub  { $$ = u4_atom_call; }
+    di_mitdot: si_mit si_dot  { $$ = u4_atom_talk; }
     di_mitpod: si_mit si_pod  { $$ = u4_atom_howl; }
     di_mithat: si_mit si_hat  { $$ = u4_atom_wail; }
     di_mitras: si_mit si_ras  { $$ = u4_atom_yell; }
@@ -539,7 +555,7 @@ tall
     si_buc: '$'
     si_bup: '\''
     si_cab: '_'
-    si_com: ','
+    /* si_com: ',' */
     si_dax: '#'
     si_dig: ':'
     si_der: '<'

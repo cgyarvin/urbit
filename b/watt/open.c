@@ -321,26 +321,35 @@ _open_do_p(cage)
   }
 }
 
-_open_do_pq(call)
+_open_do_p(call)
 {
   u4_lane lan = p->lan;
+  u4_noun ip_gen = u4_ch(p_gen);
+  u4_noun tp_gen = u4_ct(p_gen);
 
-  return u4_kt
-    (lan, u4_atom_push,
-          p_gen,
-          u4_kt
-            (lan,
-             u4_atom_take,
-             u4_kt(lan, 
-                   u4_kc(lan, u4_atom_port, u4_noun_0),
-                   u4_kc(lan, u4_atom_frag, u4_noun_2),
-                   u4_nul),
-             u4_kl(lan,
-                   u4_kc(lan,
-                         u4_kc(lan, u4_atom_frag, u4_noun_4),
-                         u4_kt(lan, u4_atom_link, 
-                                    u4_kc(lan, u4_atom_frag, u4_noun_3),
-                                    q_gen)))));
+  if ( u4_n_zero(tp_gen) ) {
+    return u4_kt
+      (lan, u4_atom_link, 
+            ip_gen,
+            u4_kc(lan, u4_atom_port, u4_blip));
+  } else {
+    return u4_kt
+      (lan, u4_atom_push,
+            ip_gen,
+            u4_kt
+              (lan,
+               u4_atom_take,
+               u4_kt(lan, 
+                     u4_kc(lan, u4_atom_port, u4_noun_0),
+                     u4_kc(lan, u4_atom_frag, u4_noun_2),
+                     u4_nul),
+               u4_kl(lan,
+                     u4_kc(lan,
+                           u4_kc(lan, u4_atom_frag, u4_noun_4),
+                           u4_kt(lan, u4_atom_link, 
+                                      u4_kc(lan, u4_atom_frag, u4_noun_3),
+                                      tp_gen)))));
+  }
 }
 
 _open_do_pq(clip)
@@ -703,6 +712,14 @@ _open_do_pqr(step)
        u4_nul));
 }
 
+_open_do_pq(talk)
+{
+  u4_lane lan = p->lan;
+
+  return u4_kt
+    (lan, u4_atom_call, q_gen, u4_kc(lan, p_gen, u4_noun_0));
+}
+
 _open_do_pq(then)
 {
   u4_lane lan = p->lan;
@@ -793,7 +810,7 @@ _crow_open(u4_crow p,
     _open_p   (base);
     _open_pq  (bond);
     _open_p   (cage);
-    _open_pq  (call);
+    _open_p   (call);
     _open_pq  (clip);
     _open_p   (flow);
     _open_pq  (mesh);
@@ -803,6 +820,7 @@ _crow_open(u4_crow p,
     _open_pq  (sift);
     _open_p   (some);
     _open_pqr (step);
+    _open_pq  (talk);
     _open_pq  (yell);
 
     return gen;

@@ -524,6 +524,7 @@
     u4_lib_mote(tag,  u4_s3('t','a','g'))
     u4_lib_mote(tail, u4_s4('t','a','i','l'))
     u4_lib_mote(take, u4_s4('t','a','k','e'))
+    u4_lib_mote(talk, u4_s4('t','a','l','k'))
     u4_lib_mote(tame, u4_s4('t','a','m','e'))
     u4_lib_mote(tap,  u4_s3('t','a','p'))
     u4_lib_mote(tarn, u4_s4('t','a','r','n'))
