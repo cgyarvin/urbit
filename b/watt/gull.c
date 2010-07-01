@@ -54,8 +54,8 @@ _gull_fill(u4_crow p,
       else return u4_noun_0;
     }
     else if ( u4_b_fork(dab, &p_dab, &q_dab) ) {
-      u4_unit hut = _gull_look_a(p, dab, cog, u4_op_peg(lan, axe, u4_noun_2));
-      u4_unit zig = _gull_look_a(p, dab, cog, u4_op_peg(lan, axe, u4_noun_3));
+      u4_unit hut = _gull_look_a(p, p_dab, cog, u4_op_peg(lan, axe, u4_noun_2));
+      u4_unit zig = _gull_look_a(p, q_dab, cog, u4_op_peg(lan, axe, u4_noun_3));
 
       if ( u4_n_zero(hut) ) return zig;
       if ( u4_n_zero(zig) ) return hut;

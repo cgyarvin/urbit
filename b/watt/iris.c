@@ -357,7 +357,7 @@ _iris_cull(u4_crow p,
              u4_kq
               (lan, 
                u4_noun_0, 
-               u4_ch(u4_ct(zem)),
+               u4_op_peg(lan, u4_noun_3, u4_ch(u4_ct(zem))),
                sub,
                u4_ct(u4_ct(zem))),
              sub));
@@ -463,7 +463,9 @@ _iris_cull(u4_crow p,
            cog);
       }
     }
-    else return u4_trip;
+    else {
+      return u4_trip;
+    }
   }
 u4_plan
 _iris_find(u4_crow p,

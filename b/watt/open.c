@@ -215,13 +215,13 @@ _open_do_p(base)
 
   if ( u4_n_eq(u4_atom_atom, p_gen) ) {
     return u4_kt
-      (lan, u4_atom_atom, 
+      (lan, u4_atom_cast, 
             u4_kt(lan, u4_atom_bump, u4_atom_rock, u4_noun_0),
             u4_kc(lan, u4_atom_rock, u4_noun_0));
   }
   else if ( u4_n_eq(u4_atom_blur, p_gen) ) {
     return u4_kt
-      (lan, u4_atom_atom, 
+      (lan, u4_atom_cast, 
             u4_kt(lan, u4_atom_nock, u4_atom_rock, u4_noun_0),
             u4_kc(lan, u4_atom_rock, u4_noun_0));
   }
@@ -275,7 +275,7 @@ _open_do_pq(bond)
             (lan, 
              u4_atom_push,
              u4_kt(lan, u4_atom_take,
-                            u4_kt(lan, u4_atom_fon, beg, u4_noun_0),
+                            u4_kt(lan, beg, u4_atom_fon, u4_noun_0),
                             u4_noun_0),
              u4_kc
               (lan,
@@ -340,15 +340,15 @@ _open_do_p(call)
               (lan,
                u4_atom_take,
                u4_kt(lan, 
-                     u4_kc(lan, u4_atom_port, u4_noun_0),
                      u4_kc(lan, u4_atom_frag, u4_noun_2),
+                     u4_kc(lan, u4_atom_port, u4_noun_0),
                      u4_nul),
                u4_kl(lan,
                      u4_kc(lan,
                            u4_kc(lan, u4_atom_frag, u4_noun_4),
                            u4_kt(lan, u4_atom_link, 
                                       u4_kc(lan, u4_atom_frag, u4_noun_3),
-                                      tp_gen)))));
+                                      u4_kc(lan, u4_atom_cage, tp_gen))))));
   }
 }
 
@@ -427,7 +427,9 @@ _open_do_p(frag)
   u4_lane lan = p->lan;
 
   return u4_kt
-    (lan, u4_atom_take, u4_kt(lan, u4_atom_frag, p_gen, u4_nul), u4_nul);
+    (lan, u4_atom_take, 
+          u4_kc(lan, u4_kc(lan, u4_atom_frag, p_gen), u4_nul),
+          u4_nul);
 }
 
 _open_do_p(grip)
@@ -441,7 +443,7 @@ _open_do_p(gate)
 
   return u4_kc
     (lan, u4_atom_load,
-          u4_kl(lan, u4_kt(lan, u4_atom_leaf, u4_blip, p_gen)));
+          u4_kl(lan, u4_kc(lan, u4_blip, p_gen)));
 }
 
 _open_do_pq(home)
@@ -555,7 +557,9 @@ _open_do_p(port)
   u4_lane lan = p->lan;
 
   return u4_kt
-    (lan, u4_atom_take, u4_kt(lan, u4_atom_port, p_gen, u4_nul), u4_nul);
+    (lan, u4_atom_take, 
+          u4_kc(lan, u4_kc(lan, u4_atom_port, p_gen), u4_nul),
+          u4_nul);
 }
 
 _open_do_pq(pull)
@@ -777,6 +781,7 @@ _crow_open(u4_crow p,
   u4_noun p_gen, q_gen, r_gen, s_gen;
 
   if ( u4_b_fork(gen, &p_gen, &q_gen) ) {
+    u4_err(p->lan, "gen", gen);
     return u4_stub;
   }
   else {
@@ -823,7 +828,8 @@ _crow_open(u4_crow p,
     _open_pq  (talk);
     _open_pq  (yell);
 
-    return gen;
+    u4_err(p->lan, "open: gen", gen);
+    return u4_trip;
   }
 }
 

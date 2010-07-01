@@ -1,4 +1,4 @@
-/* The boot parser for watt.
+/* The boot parser for watt.);
 **
 ** This file is in the public domain.
 */
@@ -82,7 +82,7 @@
  
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 69
+  %expect 65
 
   %pure-parser
   %locations
@@ -115,6 +115,7 @@ wide
 wide_a
   : wide_b
   | tok_term si_ben wide_b
+    { $$ = _ytrel(u4_atom_name, $1, $3); }
   ;
 
 wide_b
@@ -143,17 +144,13 @@ wide_c
       | si_bar
         { $$ = _ycell(u4_atom_rock, u4_noun_1); }
       | si_ask
-        { $$ = _ytrel(u4_atom_quid, u4_atom_rock, u4_noun_0); }
+        { $$ = _ycell(u4_atom_base, u4_atom_flag); }
       | si_ras
-        { $$ = _ytrel(u4_atom_wash, u4_atom_rock, u4_noun_0); }
+        { $$ = _ycell(u4_atom_base, u4_atom_blur); }
       | si_hat
-        { 
-          $$ = _ytrel(u4_atom_cell, 
-                      _ytrel(u4_atom_wash, u4_atom_rock, u4_noun_0),
-                      _ytrel(u4_atom_wash, u4_atom_rock, u4_noun_0));
-        }
+        { $$ = _ycell(u4_atom_base, u4_atom_cell); }
       | si_vat
-        { $$ = _ytrel(u4_atom_slap, u4_atom_rock, u4_noun_0); }
+        { $$ = _ycell(u4_atom_base, u4_atom_atom); }
       | '0' 'x' tok_chex
         { $$ = _ycell(u4_atom_rock, $3); }
       | tok_loct
@@ -163,7 +160,7 @@ wide_c
       | si_mit si_mit
         { $$ = _ycell(u4_atom_rock, u4_noun_0); }
       | si_sig
-        { $$ = _ycell(u4_atom_rock, u4_noun_0); }
+        { $$ = _ycell(u4_atom_base, u4_atom_null); }
       | si_vat term
         { $$ = u4_stub; /* placeholder for fort */ }
       ;
@@ -178,12 +175,12 @@ wide_c
       ; 
 
     wide_pick
-      : si_der g flow_wide g si_red
+      : si_der g bank_wide g si_red
         { $$ = _ycell(u4_atom_pick, $3); } 
       ;
 
     wide_call
-      : si_lep g flow_wide g si_pel
+      : si_lep g bank_wide g si_pel
         { $$ = _ycell(u4_atom_call, $3); }
       ;
  
@@ -310,14 +307,9 @@ wide_c
 
   /** Wide - body parts.
   **/
-    flow_wide
-      : wide             { $$ = _ycell($1, u4_noun_0); }
-      | wide w flow_wide { $$ = _ycell($1, $3); }
-      ;
-
     bank_wide
-      : wide             { $$ = $1; }
-      | wide w bank_wide { $$ = _ycell($1, $2); }
+      : wide             { $$ = _ycell($1, u4_noun_0); }
+      | wide w bank_wide { $$ = _ycell($1, $3); }
       ;
 
     pair_wide
@@ -337,7 +329,7 @@ wide_c
     menu_wide
       : g                             { $$ = u4_noun_0; }
       | dish_wide g                   { $$ = _ycell($1, u4_noun_0); }
-      | dish_wide ',' g rack_wide     { $$ = _ycell($1, $4); }
+      | dish_wide ',' g menu_wide     { $$ = _ycell($1, $4); }
       ;
 tall
   : tall_norm
@@ -442,7 +434,7 @@ tall
       ;
       term_tall_star
         :                               { $$ = u4_noun_0; }
-        | term w gene w tall_star       { $$ = _ycell(_ycell($1, $3), $5); }
+        | term w gene w term_tall_star  { $$ = _ycell(_ycell($1, $3), $5); }
         ;
   
 

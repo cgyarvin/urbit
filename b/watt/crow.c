@@ -10,8 +10,9 @@ u4_noun
 _crow_fail(u4_crow p,
            const char *msg)
 {
-  printf("%s\n", msg);
-  return u4_exit;
+  printf("crow: fail: %s\n", msg);
+  // return u4_exit;
+  return u4_trip;
 }
 
 /* rake:crow 
@@ -35,7 +36,10 @@ _crow_rake(u4_crow p,
   else if ( u4_b_p(gen, u4_atom_port, &p_gen) ) {
     return u4_kl(lan, gen);
   }
-  else return _crow_fail(p, "rope");
+  else {
+    u4_err(lan, "rake", gen);
+    return _crow_fail(p, "rope");
+  }
 }
 
 /* init:crow (fake)
@@ -66,10 +70,7 @@ u4_crow_full(u4_lane lan,
 
   u4_crow_init(&crow, lan);
 
-  printf(":");
-  fflush(stdout);
-  printf("ready\n");
-  return u4_exit;
+  // printf(":"); fflush(stdout);
   {
     u4_flag boz;
     u4_type typ;
@@ -81,13 +82,14 @@ u4_crow_full(u4_lane lan,
       return u4_exit;
     }
     else {
-      printf(":");
+      // printf(":");
 
       typ = _rose_play(&crow, sub, gen);
-      printf(":");
+      // printf(":");
       tol = _rose_make(&crow, sub, gen);
+      u4_err(lan, "tol", tol);
 
-      printf(":\n");
+      // printf(":\n");
       // printf("prf: %d\n", p->prf);
       //
       return u4_kc(lan, typ, tol);

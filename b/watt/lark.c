@@ -210,9 +210,13 @@ _lark_feed(u4_crow p,
     u4_type qi_mut = u4_ct(i_mut);
     u4_rope rop    = _crow_rake(p, pi_mut);
     u4_tack bur    = _lark_nuke(p, sub, tac, rop, qi_mut);
+    u4_tack tey    = _lark_cram(p, sub, tac, bur);
 
-    return _lark_feed
-      (p, sub, _lark_cram(p, sub, tac, bur), t_mut);
+    // u4_err(p->lan, "tac", tac);
+    // u4_err(p->lan, "bur", bur);
+    // u4_err(p->lan, "tey", tey);
+    // printf("\n");
+
+    return _lark_feed(p, sub, tey, t_mut);
   }
 }
-
