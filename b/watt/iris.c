@@ -474,7 +474,14 @@ _iris_find(u4_crow p,
            u4_axis axe,
            u4_term cog)
 {
-  return u4_ct(_iris_find_main(p, sub, bar, axe, u4_noun_0, cog));
+  u4_unit fyg = _iris_find_main(p, sub, bar, axe, u4_noun_0, cog);
+
+  if ( u4_n_zero(fyg) ) {
+    u4_err(p->lan, "cog", cog);
+    u4_burp(p->lan, "sub", _dump_type(p, sub));
+    return _crow_fail(p, "not found");
+  }
+  return u4_ct(fyg);
 }
 
 /* fish:iris:rose:crow

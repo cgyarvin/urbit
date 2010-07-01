@@ -1712,7 +1712,7 @@
           gild
         =+  [mut=*plot]
         |=
-        [%fuse (burn:iris(sub %blur) | (feed:lark mut)) sub]
+        (glom (burn:iris(sub %blur) | (feed:lark mut)))
       ::::
       ::
           hunt
@@ -1735,6 +1735,14 @@
       ::
       ::::
       ==
+    ::::
+    ::
+        glom
+      =+  [hoc=*type]
+      |=
+      ?:  (nest:iris(sub hoc) sub)
+        sub
+      [%fuse hoc sub]
     ::::
     ::
         make

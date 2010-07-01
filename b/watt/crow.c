@@ -82,14 +82,14 @@ u4_crow_full(u4_lane lan,
       return u4_exit;
     }
     else {
-      // printf(":");
+      printf(":");
 
       typ = _rose_play(&crow, sub, gen);
-      // printf(":");
+      printf(":");
       tol = _rose_make(&crow, sub, gen);
-      u4_err(lan, "tol", tol);
+      // u4_err(lan, "tol", tol);
 
-      // printf(":\n");
+      printf(":\n");
       // printf("prf: %d\n", p->prf);
       //
       return u4_kc(lan, typ, tol);

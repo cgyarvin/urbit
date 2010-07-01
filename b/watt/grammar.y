@@ -189,7 +189,7 @@ wide_c
     wide_funk
       : si_sud g bank_wide g si_dus
         { $$ = _ycell(u4_atom_flow, $3); }
-      | wide_rope si_lep rack_wide si_pel
+      | rope si_lep rack_wide si_pel
         { $$ = _ytrel(u4_atom_take, $1, $3); }
       | si_hop wide
         { $$ = _ycell(u4_atom_flip, $2); }

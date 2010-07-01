@@ -242,6 +242,10 @@
     _rose_gain(u4_crow p,
                u4_type sub,
                u4_gene gen);
+    u4_type
+    _rose_glom(u4_crow p,
+               u4_type sub,
+               u4_type hoc);
     u4_tool
     _rose_make(u4_crow p,
                u4_type sub,
