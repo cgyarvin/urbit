@@ -201,7 +201,7 @@ _lark_feed(u4_crow p,
            u4_list mut)
 {
   if ( u4_n_zero(mut) ) {
-    return u4_noun_0;
+    return tac;
   }
   else {
     u4_noun i_mut  = u4_ch(mut);
@@ -212,11 +212,14 @@ _lark_feed(u4_crow p,
     u4_tack bur    = _lark_nuke(p, sub, tac, rop, qi_mut);
     u4_tack tey    = _lark_cram(p, sub, tac, bur);
 
-    // u4_err(p->lan, "tac", tac);
-    // u4_err(p->lan, "bur", bur);
-    // u4_err(p->lan, "tey", tey);
-    // printf("\n");
-
+#if 0
+    { 
+      u4_err(p->lan, "tac", tac);
+      u4_err(p->lan, "bur", bur);
+      u4_err(p->lan, "tey", tey);
+      printf("\n");
+    }
+#endif
     return _lark_feed(p, sub, tey, t_mut);
   }
 }

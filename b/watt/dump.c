@@ -82,9 +82,9 @@
               _rose_repo(p, p_typ, q_typ));
       }
     }
-
     else {
-      u4_bug("strange type", typ);
+      u4_err(lan, "odd type", typ);
+
       return u4_trip;
     }
   }

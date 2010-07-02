@@ -38,10 +38,13 @@
     #define u4_nul        u4_noun_0
     #define u4_blip       u4_noun_0
 
+    #define u4_brut(p, cat, typ) \
+      u4_burp(p->lan, cat, _dump_type(p, typ))
+
     #define u4_so(x)      u4_n_zero(x)
     #define u4_say(x)     ( (x) ? u4_noun_0 : u4_noun_1 )
     #define u4_and(x, y)  ( (u4_so(x) && u4_so(y)) ? u4_yes : u4_no )
-    #define u4_or(x, y)   ( (u4_so(x) || u4_so(y)) ? u4_no : u4_yes )
+    #define u4_or(x, y)   ( (u4_so(x) || u4_so(y)) ? u4_yes : u4_no )
 
     #define u4_kc(l, p, q)        u4_k_cell(l, p, q)
     #define u4_kt(l, p, q, r)     u4_k_trel(l, p, q, r)
@@ -243,7 +246,11 @@
                u4_type sub,
                u4_gene gen);
     u4_type
-    _rose_glom(u4_crow p,
+    _rose_both(u4_crow p,
+               u4_type sub,
+               u4_type hoc);
+    u4_type
+    _rose_eith(u4_crow p,
                u4_type sub,
                u4_type hoc);
     u4_tool

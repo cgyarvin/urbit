@@ -55,12 +55,14 @@
     gte
   =+  [a=@ b=@]
   |=
+  ^-  ?
   !(lth a b)
 ::::
 ::
     gth
   =+  [a=@ b=@]
   |=
+  ^-  ?
   !(lte a b)
 ::::
 ::
@@ -73,6 +75,7 @@
     lth
   =+  [a=@ b=@]
   |=
+  ^-  ?
   ?&
     !.=(a b)
   ::
@@ -914,7 +917,7 @@
   ::::
   ::::
   ::
-      glom
+      both
     =+  [rum=@ tyd=rule]
     |:
     (cook =+(*(list &@) (cog rum -<)) tyd)
@@ -993,14 +996,14 @@
       ask   (just '?')
       bar   (just '|')
       ben   (just '=')
-      bin   (glom 2 (palm qar bit))
+      bin   (both 2 (palm qar bit))
       bit   (cook =+(@ |=((sub -< '0'))) (shim '0' '1'))
       bot   (just '\'')
       buc   (just '$')
       cab   (just '_')
       com   (just ',')
       dax   (just '#')
-      del   (glom 10 (palm qar dit))
+      del   (both 10 (palm qar dit))
       der   (just '<')
       dig   (just ':')
       dit   (cook =+(@ |=((sub -< '0'))) (shim '0' '9'))
@@ -1008,7 +1011,7 @@
       dus   (just '}')
       gap   (cold ~ (star |~(pose vul (mask {10 32 ~}))))
       hat   (just '^')
-      hex   (glom 16 (palm qar hit))
+      hex   (both 16 (palm qar hit))
       hig   (shim 'A' 'Z')
       hit   |~(pose cdel =+(*byte |=((sub -< 87))) (shim 'a' 'f'))
       hop   (just '!')
@@ -1026,14 +1029,14 @@
       poy   |~(pfix sac |~(pose sac bot mes))
       qar   (cold ~ |~(plug sac tar sol))
       qit   |~(pose (shim 32 38) (shim 40 91) (shim 92 126) poy)
-      quo   (glom 256 (palm qar qit))
+      quo   (both 256 (palm qar qit))
       ras   (just '*')
       red   (just '>')
       sac   (just '\\')
       sig   (just '~')
       sol   (just '/')
       sud   (just '{')
-      sym   (glom 256 (many ~ low |~(pose num low nub)))
+      sym   (both 256 (many ~ low |~(pose num low nub)))
       tar   (cold ~ (plus (mask {10 32 ~})))
       tic   (just '`')
       toq   (just '"')
@@ -1298,7 +1301,7 @@
         [%punt *]   [%cool [%link p.gen [%take {[%port %%]} ~]]]
         [%push *]   [%link [%cell p.gen [%frag 1]] q.gen]
         [%qual *]   [%cell p.gen [%cell q.gen [%cell r.gen s.gen]]]
-        [%slam *]   [%lift [[%leaf %% p.gen] ~]]
+        [%slam *]   [%lift [[%% p.gen] ~]]
         [%slur *]   [%cast [%base %blur] p.gen]
         [%spot *]   q.gen
         [%talk *]   [%call q.gen {p.gen}]
@@ -1667,10 +1670,30 @@
     |*
     ::::
     ::
+        both
+      =+  [hoc=*type]
+      |=
+      ^-  *type
+      ?:  (nest:iris(sub hoc) sub)
+        sub
+      [%fuse hoc sub]
+    ::::
+    ::
         edit
       =+  mut=*plot
       |=
       (burn:iris | (feed:lark mut))
+    ::::
+    ::
+        eith
+      =+  [hoc=*type]
+      |=
+      ^-  *type
+      ?:  .=(%blot hoc)
+        sub
+      ?:  .=(%blot sub)
+        hoc
+      [%fork sub hoc]
     ::::
     ::
         fine
@@ -1712,16 +1735,16 @@
           gild
         =+  [mut=*plot]
         |=
-        (glom (burn:iris(sub %blur) | (feed:lark mut)))
+        (both (burn:iris(sub %blur) | (feed:lark mut)))
       ::::
       ::
           hunt
         |-
-        ^-  *rack
+        ^-  *plot
         ?-  gen
         ::
             [%like *]
-          {[p.gen (play q.gen)]}
+          {[q.gen (play p.gen)]}
         ::
             [%sand *] 
           %^    roll
@@ -1735,14 +1758,6 @@
       ::
       ::::
       ==
-    ::::
-    ::
-        glom
-      =+  [hoc=*type]
-      |=
-      ?:  (nest:iris(sub hoc) sub)
-        sub
-      [%fuse hoc sub]
     ::::
     ::
         make
@@ -2004,7 +2019,7 @@
         [%hold (edit(sub q.u.q.lar) mut) r.u.q.lar]
       :: 
           [%test p=*gene q=*gene r=*gene]
-        [%fork $(gen q.gen, sub (gain p.gen)) $(gen r.gen)]
+        (eith(sub $(gen q.gen, sub (gain p.gen))) $(gen r.gen))
       :: 
           [%twin p=*gene q=*gene]
         [%fork [%rock 0] [%rock 1]]
@@ -2342,7 +2357,7 @@
         ::
             [%face *]
           ?: .=(cog p.sub)
-            [~ [axe ~ sub]]
+            [~ [axe ~ q.sub]]
           ~
         ::
             [%fork *]

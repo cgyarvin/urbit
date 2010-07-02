@@ -663,7 +663,7 @@ _open_do_p(slam)
 
   return u4_kt
     (lan, u4_atom_lift, 
-          u4_kt(lan, u4_atom_leaf, u4_noun_0, p_gen),
+          u4_kc(lan, u4_blip, p_gen),
           u4_noun_0);
 }
 
@@ -729,7 +729,7 @@ _open_do_pq(then)
   u4_lane lan = p->lan;
   
   return u4_kq
-    (lan, u4_atom_test, p_gen, q_gen, u4_kc(lan, u4_atom_rock, u4_noun_1));
+    (lan, u4_atom_test, p_gen, q_gen, u4_kc(lan, u4_atom_bail, u4_noun_0));
 }
 
 _open_do_pqr(trel)

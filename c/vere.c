@@ -309,7 +309,7 @@ vere_boot(uz_machine mac)
       uz_r_express(mac, ker);
 
       uz_f_print_type(mac, "boot: type", uz_ch(mac, mac->har));
-      uz_f_print(mac, "boot: noun", uz_ct(mac, mac->har));
+      // uz_f_print(mac, "boot: noun", uz_ct(mac, mac->har));
     }
   }
 }
