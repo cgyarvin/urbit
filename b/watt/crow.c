@@ -4,13 +4,66 @@
 */
 #include "u4/all.h"
 
+/* trap:crow
+*/
+void
+_crow_trap(u4_crow p,
+           const char *msg)
+{
+  u4_lane lan = p->lan;
+
+  u4_atom hal  = u4_k_atom_c(lan, msg);
+  u4_atom nof  = p->nix;
+  u4_atom jup  = p->zud;
+
+  p->meb = u4_k_cell(lan, u4_k_trel(lan, hal, nof, jup), p->meb);
+}
+
 /* fail:crow
 */
 u4_noun
 _crow_fail(u4_crow p,
            const char *msg)
 {
-  printf("crow: fail: %s\n", msg);
+  _crow_trap(p, msg);
+  {
+    while ( !u4_n_zero(p->meb) ) {
+      u4_noun i_meb = u4_ch(p->meb);
+      {
+        u4_noun hal = u4_ch(i_meb);
+        u4_noun nof = u4_cth(i_meb);
+        u4_noun jup = u4_ctt(i_meb);
+
+        if ( u4_n_zero(u4_ct(p->meb)) ) {
+          u4_sb sb_hal = u4_a_bin(hal, 3);
+          u4_cl *cl_hal = alloca(sb_hal + 1);
+
+          u4_a_bytes(hal, (u4_xb *)cl_hal, 0, sb_hal + 1);
+          printf("fail: %s\n", cl_hal);
+
+          if ( !u4_n_zero(nof) ) {
+            u4_burp(p->lan, "home", u4_prep_textual(p->lan, nof));
+          }
+          if ( !u4_n_zero(jup) ) {
+            u4_atom pp_jup = u4_ch(u4_ch(jup));
+            u4_atom qp_jup = u4_ct(u4_ch(jup));
+            u4_atom pq_jup = u4_ch(u4_ct(jup));
+            u4_atom qq_jup = u4_ct(u4_ct(jup));
+            {
+              u4_xw xw_flin = u4_a_wtrip(pp_jup);
+              u4_xw xw_fcol = u4_a_wtrip(qp_jup);
+              u4_xw xw_llin = u4_a_wtrip(pq_jup);
+              u4_xw xw_lcol = u4_a_wtrip(qq_jup);
+
+              printf("spot: %d:%d - %d:%d\n\n", 
+                     xw_flin, xw_fcol, xw_llin, xw_lcol);
+            }
+          }
+        }
+      }
+      p->meb = u4_ct(p->meb);
+    }
+  }
   // return u4_exit;
   return u4_trip;
 }
@@ -70,7 +123,7 @@ u4_crow_full(u4_lane lan,
 
   u4_crow_init(&crow, lan);
 
-  // printf(":"); fflush(stdout);
+  printf(":"); fflush(stdout);
   {
     u4_flag boz;
     u4_type typ;

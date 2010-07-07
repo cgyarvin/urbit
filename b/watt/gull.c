@@ -4,6 +4,31 @@
 */
 #include "u4/all.h"
 
+/* size:gull:crow
+*/
+u4_atom
+_gull_size(u4_crow p,
+           u4_spec dab)
+{
+  u4_lane lan = p->lan;
+  u4_noun p_dab, q_dab;
+
+  if ( u4_b_p(dab, u4_atom_none, &p_dab) ) {
+    return u4_noun_0;
+  }
+  else if ( u4_b_pq(dab, u4_atom_leaf, &p_dab, &q_dab) ) {
+    return u4_noun_1;
+  }
+  else if ( u4_b_fork(dab, &p_dab, &q_dab) ) {
+    return u4_op_add(lan, _gull_size(p, p_dab), _gull_size(p, q_dab));
+  }
+  else {
+    u4_err(lan, "dab", dab);
+
+    return u4_trip;
+  }
+}
+
 /* fill:gull:crow
 */
 u4_spec

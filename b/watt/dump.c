@@ -83,7 +83,11 @@
       }
     }
     else {
-      u4_err(lan, "odd type", typ);
+      if ( !u4_n_atom(typ) && !u4_n_atom(u4_ch(typ)) ) {
+        printf("hm!\n");
+      }
+      else u4_err(lan, "odd type", typ);
+
 
       return u4_trip;
     }
@@ -96,21 +100,6 @@ _dump_seal(u4_crow p,
            u4_type typ)
 {
   return _dump_seal_main(p, u4_noun_0, typ);
-}
-
-/* _dump_count()::
-*/
-static u4_atom
-_dump_count(u4_lane lan, u4_noun q_typ)
-{
-  if ( u4_n_atom(u4_ch(q_typ)) ) {
-    return u4_noun_1;
-  }
-  else {
-    return u4_op_add
-      (lan, _dump_count(lan, u4_ch(q_typ)), 
-             _dump_count(lan, u4_ct(q_typ)));
-  }
 }
 
 /* _dump_cell()::
@@ -144,23 +133,23 @@ static u4_prep
 _dump_mono(u4_crow p,
            u4_pool gil,
            u4_pool nip,
-           u4_type p_typ,
-           u4_spec q_typ)
+           u4_type myt,
+           u4_spec dab)
 {
   u4_lane lan = p->lan;
   u4_prep gum;
   u4_prep zib;
   u4_prep bor;
 
-  zib = _dump_main(p, gil, nip, p_typ);
+  zib = _dump_main(p, gil, nip, myt);
   bor = u4_k_atom_cat
     (lan, u4_cod_in('+'),
            u4_k_atom_cat
-             (lan, u4_prep_decimal(lan, _dump_count(lan, q_typ)),
+             (lan, u4_prep_decimal(lan, _gull_size(p, dab)),
                     u4_k_atom_cat
                       (lan, u4_cod_in('.'),
                              u4_prep_hexinal
-                                (lan, u4_cod_in(u4_n_nub(q_typ) & 0xffff)))));
+                                (lan, u4_cod_in(u4_n_nub(dab) & 0xffff)))));
 
   gum = u4_prep_close
     (lan, '<', '>', u4_k_list(lan, zib, bor, 0));
@@ -174,23 +163,23 @@ static u4_prep
 _dump_poly(u4_crow p,
            u4_pool gil,
            u4_pool nip,
-           u4_type p_typ,
-           u4_spec q_typ)
+           u4_type myt,
+           u4_spec dab)
 {
   u4_lane lan = p->lan;
   u4_prep gum;
   u4_prep zib;
   u4_prep bor;
 
-  zib = _dump_main(p, gil, nip, p_typ);
+  zib = _dump_main(p, gil, nip, myt);
   bor = u4_k_atom_cat
     (lan, u4_cod_in('-'),
            u4_k_atom_cat
-             (lan, u4_prep_decimal(lan, _dump_count(lan, q_typ)),
+             (lan, u4_prep_decimal(lan, _gull_size(p, dab)),
                     u4_k_atom_cat
                       (lan, u4_cod_in('.'),
                              u4_prep_hexinal
-                                (lan, u4_cod_in(u4_n_nub(q_typ) & 0xffff)))));
+                                (lan, u4_cod_in(u4_n_nub(dab) & 0xffff)))));
 
   gum = u4_prep_close
     (lan, '<', '>', u4_k_list(lan, zib, bor, 0));
@@ -357,7 +346,7 @@ _durb_in(u4_crow p,
     return u4_noun_0;
   } else {
     return u4_k_cell(p->lan, _dump_type(p, u4_ch(bar)), 
-                              _durb_in(p, u4_ct(bar)));
+                             _durb_in(p, u4_ct(bar)));
   }
 }
 
@@ -367,8 +356,13 @@ u4_prep
 _dump_durb(u4_crow p,
            u4_rail bar)
 {
-  return u4_prep_close
-    (p->lan, '(', ')', _durb_in(p, bar));
+  if ( u4_n_zero(bar) ) {
+    return u4_cod_in('~');
+  }
+  else {
+    return u4_prep_close
+      (p->lan, '(', ')', _durb_in(p, bar));
+  }
 }
 
 /* _dump_type(): prepare type for printing.
@@ -387,4 +381,19 @@ _dump_type(u4_crow p,
   how = u4_noun_0;
 
   return par;
+}
+
+/* _dump_size()::
+*/
+u4_atom
+_dump_size(u4_lane lan, u4_noun box)
+{
+  if ( u4_n_atom(box) ) {
+    return u4_noun_1;
+  }
+  else {
+    return u4_op_add
+      (lan, _dump_size(lan, u4_ch(box)), 
+            _dump_size(lan, u4_ct(box)));
+  }
 }

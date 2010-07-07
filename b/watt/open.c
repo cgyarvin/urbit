@@ -80,17 +80,28 @@
                    u4_kt(lan, u4_atom_call, _open_coin(p, q_gen), ryx)))),
          _open_coin_fix(p, p_gen, axe));
     }
-    if ( u4_b_pq(gen, u4_atom_sure, &p_gen, &q_gen) ) {
+    else if ( u4_b_pq(gen, u4_atom_name, &p_gen, &q_gen) ) {
+      return u4_kt
+        (lan, u4_atom_name, p_gen, _open_coin_fix(p, q_gen, axe));
+    }
+    if ( u4_b_pq(gen, u4_atom_sock, &p_gen, &q_gen) ) {
       return _open_coin_fix(p, q_gen, axe);
     } 
     else {
-      u4_tool ryx = u4_kc(lan, u4_atom_frag, axe);
+      u4_gene bog = _crow_open(p, gen);
 
-      return u4_kt
-        (lan,
-         u4_atom_then, 
-         u4_kt(lan, u4_atom_like, gen, ryx), 
-         ryx);
+      if ( !u4_n_eq(gen, bog) ) {
+        return _open_coin_fix(p, bog, axe);
+      }
+      else {
+        u4_tool ryx = u4_kc(lan, u4_atom_frag, axe);
+
+        return u4_kt
+          (lan,
+           u4_atom_then, 
+           u4_kt(lan, u4_atom_like, gen, ryx), 
+           ryx);
+      }
     }
   }
 static u4_gene
@@ -107,7 +118,7 @@ _open_coin(u4_crow p,
        u4_kt(lan, u4_atom_cool, u4_atom_wash, q_gen),
        u4_kc(lan, u4_atom_gate, _open_coin_fix(p, p_gen, u4_noun_4)));
   }
-  else if ( u4_b_pq(gen, u4_atom_sure, &p_gen, &q_gen) ) {
+  else if ( u4_b_pq(gen, u4_atom_sock, &p_gen, &q_gen) ) {
     return _open_coin(p, q_gen);
   }
   else if ( u4_b_p(gen, u4_atom_punt, &p_gen) ) {
@@ -139,11 +150,18 @@ _open_coin(u4_crow p,
            _open_coin_fix(p, p_gen, u4_noun_4))));
   }
   else {
-    return u4_kt
-      (lan,
-       u4_atom_push,
-       u4_kt(lan, u4_atom_cool, u4_atom_wash, gen),
-       u4_kc(lan, u4_atom_gate, _open_coin_fix(p, gen, u4_noun_4)));
+    u4_gene bog = _crow_open(p, gen);
+
+    if ( !u4_n_eq(gen, bog) ) {
+      return _open_coin(p, bog);
+    }
+    else {
+      return u4_kt
+        (lan,
+         u4_atom_push,
+         u4_kt(lan, u4_atom_cool, u4_atom_wash, gen),
+         u4_kc(lan, u4_atom_gate, _open_coin_fix(p, gen, u4_noun_4)));
+    }
   }
 }
 
@@ -188,6 +206,13 @@ _open_grip(u4_crow p,
     return u4_kt
       (lan, u4_atom_clip, _open_grip(p, p_gen), _open_grip(p, q_gen));
   }
+  else if ( u4_b_p(gen, u4_atom_grip, &p_gen) ) {
+    return _open_grip(p, p_gen);
+  }
+  else if ( u4_b_pq(gen, u4_atom_name, &p_gen, &q_gen) ) {
+    return u4_kt
+      (lan, u4_atom_name, p_gen, _open_grip(p, q_gen));
+  }
   else if ( u4_b_p(gen, u4_atom_punt, &p_gen) ) {
     u4_noun pp_gen;
 
@@ -198,14 +223,21 @@ _open_grip(u4_crow p,
       return u4_kc(lan, u4_atom_base, u4_atom_blur);
     }
   }
-  else if ( u4_b_pq(gen, u4_atom_sure, &p_gen, &q_gen) ) {
+  else if ( u4_b_pq(gen, u4_atom_sock, &p_gen, &q_gen) ) {
     return _open_grip(p, p_gen);
   }
   else if ( u4_b_p(gen, u4_atom_rock, &p_gen) ) {
     return gen;
   }
   else {
-    return u4_kc(lan, u4_atom_base, u4_atom_blur);
+    u4_gene bog = _crow_open(p, gen);
+
+    if ( !u4_n_eq(gen, bog) ) {
+      return _open_grip(p, bog);
+    }
+    else {
+      return u4_kc(lan, u4_atom_base, u4_atom_blur);
+    }
   }
 }
 
@@ -455,10 +487,9 @@ _open_do_pqr(howl)
 {
   u4_lane lan = p->lan;
 
-  return u4_kt
+  return u4_kc
     (lan, u4_atom_call, 
-          p_gen,
-          u4_kt(lan, u4_atom_cell, q_gen, r_gen));
+          u4_kq(lan, p_gen, q_gen, r_gen, u4_nul));
 }
 
 _open_do_pq(knit)
@@ -648,10 +679,8 @@ _open_do_pq(sift)
         (lan, u4_atom_link,
               u4_kt(lan,
                     u4_atom_sure,
-                    u4_kt(lan, u4_atom_take,
-                               u4_nul,
-                               u4_kl(lan, u4_kc(lan, p_gen, piq_gen))),
-                    u4_kc(lan, u4_atom_frag, u4_noun_1)),
+                    piq_gen,
+                    p_gen),
               qiq_gen),
        _open_in_sift(p, p_gen, tq_gen));
   }
@@ -675,6 +704,28 @@ _open_do_p(slur)
     (lan, u4_atom_cast,
           u4_kc(lan, u4_atom_base, u4_atom_blur),
           p_gen);
+}
+
+_open_do_pq(sock)
+{
+  u4_lane lan = p->lan;
+  u4_noun rax = u4_kc(lan, u4_atom_frag, u4_noun_2);
+
+  return u4_kt
+    (lan,
+     u4_atom_push,
+     q_gen, 
+     u4_kt
+      (lan,
+       u4_atom_knit,
+       rax,
+       u4_kt(lan,
+             u4_atom_sure,
+             u4_kt(lan, 
+                   u4_atom_knit, 
+                   u4_kc(lan, u4_atom_frag, u4_noun_2), 
+                   p_gen),
+             rax)));
 }
 
 _open_do_p(some)
@@ -746,8 +797,11 @@ _open_do_pqrs(wail)
 {
   u4_lane lan = p->lan;
 
-  return u4_kt
-    (lan, u4_atom_call, p_gen, u4_kq(lan, u4_atom_trel, q_gen, r_gen, s_gen));
+  return u4_kq
+    (lan, u4_atom_call, 
+          p_gen, 
+          q_gen,
+          u4_kt(lan, r_gen, s_gen, u4_nul));
 }
 
 _open_do_p(wash)
@@ -764,12 +818,7 @@ _open_do_pq(yell)
 {
   u4_lane lan = p->lan;
 
-  if ( u4_n_zero(q_gen) ) {
-    return u4_kt(lan, u4_atom_link, p_gen, u4_kc(lan, u4_atom_port, u4_blip));
-  }
-  else {
-    return u4_kt(lan, u4_atom_call, p_gen, u4_kc(lan, u4_atom_cage, q_gen));
-  }
+  return u4_kt(lan, u4_atom_call, p_gen, q_gen);
 }
 
 /* open:crow
@@ -823,13 +872,13 @@ _crow_open(u4_crow p,
     _open_pq  (poke);
     _open_p   (sand);
     _open_pq  (sift);
+    _open_pq  (sock);
     _open_p   (some);
     _open_pqr (step);
     _open_pq  (talk);
     _open_pq  (yell);
 
-    u4_err(p->lan, "open: gen", gen);
-    return u4_trip;
+    return gen;
   }
 }
 

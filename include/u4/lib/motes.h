@@ -493,6 +493,7 @@
     u4_lib_mote(slux, u4_s4('s','l','u','x'))
     u4_lib_mote(snap, u4_s4('s','n','a','p'))
     u4_lib_mote(so,   u4_s2('s','o'))
+    u4_lib_mote(sock, u4_s4('s','o','c','k'))
     u4_lib_mote(soft, u4_s4('s','o','f','t'))
     u4_lib_mote(sole, u4_s4('s','o','l','e'))
     u4_lib_mote(some, u4_s4('s','o','m','e'))

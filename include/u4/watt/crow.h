@@ -75,11 +75,11 @@
         */
         u4_atom bug;
 
-        /* Home (source file).
+        /* Spot (position in source).
         */
         u4_noun zud;
 
-        /* Spot (position in source).
+        /* Home (source file).
         */
         u4_noun nix;
 
@@ -91,6 +91,10 @@
 
   /** *:crow
   **/
+    void
+    _crow_trap(u4_crow p,
+               const char *msg);
+
     u4_noun
     _crow_fail(u4_crow p,
                const char *msg);
@@ -113,8 +117,15 @@
     u4_prep
     _dump_type(u4_crow p,
                u4_type typ);
+    u4_atom
+    _dump_size(u4_lane lan, 
+               u4_noun box);
+
   /** *:gull
   **/
+    u4_atom
+    _gull_size(u4_crow p,
+               u4_spec dab);
     u4_unit
     _gull_look(u4_crow p,
                u4_spec dab,

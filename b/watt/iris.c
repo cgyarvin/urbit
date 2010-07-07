@@ -77,32 +77,35 @@
       }
       else if ( u4_b_pq(sub, u4_atom_core, &p_sub, &q_sub) ) {
         u4_noun l_sub, l_bar, l_axe;
-        u4_type ham;
+        u4_noun pq_sub, qq_sub;
 
         l_sub = sub; l_bar = bar; l_axe = axe;
         _iris_slip(p, &l_sub, &l_bar, &l_axe, u4_noun_2);
 
-        ham = _iris_burn_dext(p, l_sub, l_bar, l_axe, vef, p_tac);
+        if ( u4_b_p(q_sub, u4_atom_hard, &pq_sub) ) {
+          u4_type ham = _iris_burn_dext(p, l_sub, l_bar, l_axe, u4_no, p_tac);
 
-        if ( u4_b_p(q_sub, u4_atom_hard, 0) ) {
           if (  u4_so(vef) &&
                 !u4_so(_iris_nest(p, l_sub, l_bar, l_axe, ham)) )
           {
             u4_burp(lan, "l_sub", _dump_type(p, l_sub));
+            u4_burp(lan, "l_bar", _dump_durb(p, l_bar));
             u4_burp(lan, "ham", _dump_type(p, ham));
 
             return _crow_fail(p, "burn hard");
           }
           return sub;
         }
-        else {
-          sub = u4_kt(lan, u4_atom_core, ham, q_sub);
+        else if ( u4_b_pq(q_sub, u4_atom_soft, &pq_sub, &qq_sub) ) {
+          u4_type ham = _iris_burn_dext(p, l_sub, l_bar, l_axe, vef, p_tac);
 
-          if ( !u4_so(_rose_fine(p, sub)) ) {
+          sub = u4_kt(lan, u4_atom_core, ham, q_sub);
+          if ( u4_so(vef) && !u4_so(_rose_fine(p, sub)) ) {
             return _crow_fail(p, "burn soft");
           }
           return sub;
         }
+        else return u4_trip;
       }
       else if ( u4_b_pq(sub, u4_atom_face, &p_sub, &q_sub) ||
                 u4_b_pq(sub, u4_atom_fork, &p_sub, &q_sub) ||
@@ -153,7 +156,7 @@
       }
     }
     else {
-      if ( _iris_cull(p, sub, bar, axe) ) {
+      if ( u4_so(_iris_cull(p, sub, bar, axe)) ) {
         return u4_noun_0;
       }
       else {
@@ -184,11 +187,10 @@
       return u4_ct(_iris_burn_swim(p, sub, bar, axe, vef, tac));
     }
     else if ( u4_b_pq(sub, u4_atom_fuse, &p_sub, &q_sub) ) {
-      return u4_kt
-        (lan, 
-         u4_atom_fuse,
-         _iris_burn_dext(p, p_sub, bar, axe, vef, _lark_dull(p, sub, tac)),
-         _iris_burn_dext(p, q_sub, u4_kc(lan, p_sub, bar), axe, vef, tac));
+      return _rose_both
+        (p, 
+         _iris_burn_dext(p, q_sub, u4_kc(lan, p_sub, bar), axe, vef, tac),
+         _iris_burn_dext(p, p_sub, bar, axe, vef, _lark_dull(p, sub, tac)));
     }
     else if ( u4_b_pq(sub, u4_atom_hold, &p_sub, &q_sub) ) {
       return _iris_burn_dext
@@ -218,7 +220,7 @@ _iris_burn(u4_crow p,
     if ( u4_n_zero(bar) ) {
       return u4_no;
     }
-    else if ( _rose_orth(p, sub, u4_ch(bar)) ) {
+    else if ( u4_so(_rose_orth(p, sub, u4_ch(bar))) ) {
       return u4_yes;
     }
     else return _iris_cull_a(p, sub, u4_ct(bar), axe);
@@ -284,10 +286,10 @@ _iris_cull(u4_crow p,
           if ( u4_n_zero(gam) ) {
             return u4_noun_0;
           }
-          else return _crow_fail(p, "fork conflict");
+          else return _crow_fail(p, "fork conflict a");
         }
         else if ( u4_n_zero(gam) ) {
-          return _crow_fail(p, "fork conflict");
+          return _crow_fail(p, "fork conflict b");
         }
         else {
           u4_plan u_lep = u4_ct(lep);
@@ -309,12 +311,12 @@ _iris_cull(u4_crow p,
                    u4_ct(u4_ct(u_lep)),
                    u4_ct(u4_ct(u_gam)))));
           }
-          else return _crow_fail(p, "fork conflict");
+          else return _crow_fail(p, "fork conflict c");
         }
       }
     }
     else {
-      if ( _iris_cull(p, sub, bar, axe) ) {
+      if ( u4_so(_iris_cull(p, sub, bar, axe)) ) {
         return u4_noun_0;
       }
       else {
@@ -419,9 +421,9 @@ _iris_cull(u4_crow p,
                qu_hax,
                _rose_both
                 (p,
-                 ru_hax,
                  _iris_peek
-                  (p, q_sub, u4_kc(lan, p_sub, bar), axe, pu_hax))));
+                  (p, q_sub, u4_kc(lan, p_sub, bar), axe, pu_hax),
+                 ru_hax)));
         }
       }
       else {
@@ -440,8 +442,8 @@ _iris_cull(u4_crow p,
                qu_yor,
                _rose_both
                 (p,
-                 _iris_peek(p, p_sub, bar, axe, pu_yor),
-                 ru_yor)));
+                 ru_yor,
+                 _iris_peek(p, p_sub, bar, axe, pu_yor))));
         }
         else {
           u4_noun u_hax = u4_ct(hax);
@@ -459,7 +461,7 @@ _iris_cull(u4_crow p,
               (lan,
                pu_yor,
                qu_yor,
-               _rose_both(p, ru_hax, ru_yor)));
+               _rose_both(p, ru_yor, ru_hax)));
         }
       }
     }
@@ -531,7 +533,7 @@ _iris_find(u4_crow p,
               _lily_flor(p, u4_ct(doz), u4_ct(ryg)));
     }
     else {
-      if ( _iris_cull(p, sub, bar, axe) ) {
+      if ( u4_so(_iris_cull(p, sub, bar, axe)) ) {
         return u4_noun_0;
       }
       else {
@@ -620,7 +622,7 @@ _iris_fish(u4_crow p,
         (lan, u4_noun_0, u4_kt(lan, u4_atom_fork, u4_ct(doz), u4_ct(ryg)));
     }
     else {
-      if ( _iris_cull(p, sub, bar, axe) ) {
+      if ( u4_so(_iris_cull(p, sub, bar, axe)) ) {
         return u4_noun_0;
       }
       else {
@@ -673,10 +675,10 @@ _iris_half(u4_crow p,
     return u4_ct(_iris_half_swim(p, sub, bar, axe, had));
   }
   else if ( u4_b_pq(sub, u4_atom_fuse, &p_sub, &q_sub) ) {
-    return u4_kt
-      (lan, u4_atom_fuse,
-            _iris_half(p, p_sub, bar, axe, had),
-            _iris_half(p, q_sub, u4_kc(lan, p_sub, bar), axe, had));
+    return _rose_both
+      (p, 
+       _iris_half(p, q_sub, u4_kc(lan, p_sub, bar), axe, had),
+       _iris_half(p, p_sub, bar, axe, had));
   }
   else return u4_trip;
 }
@@ -724,13 +726,14 @@ _iris_half(u4_crow p,
          _iris_nest_dext_swim(p, q_sub, bar, axe, gil, bon, nef, ful));
     }
     else {
-      if ( _iris_cull(p, sub, bar, axe) ) {
+      if ( u4_so(_iris_cull(p, sub, bar, axe)) ) {
         return u4_no;
       }
       else return _iris_nest_dext
         (p, sub, bar, axe, gil, bon, nef, ful);
     }
   }
+
   static u4_flag
   _iris_nest_dext(u4_crow p,
                   u4_type sub,
@@ -744,6 +747,23 @@ _iris_half(u4_crow p,
     u4_lane lan = p->lan;
     u4_noun p_sub, q_sub;
     u4_noun p_bon, q_bon;
+
+    if ( u4_n_eq(sub, bon) ) {
+      return u4_yes;
+    }
+#if 0
+    if ( !u4_n_zero(p->bug) ) {
+      if ( !u4_n_zero(bar) ) u4_burp(lan, "ind: bar", _dump_durb(p, bar));
+      u4_brut(p, "ind: sub", sub);
+      if ( !u4_n_zero(nef) ) u4_burp(lan, "ind: nef", _dump_durb(p, nef));
+      u4_brut(p, "ind: bon", bon);
+      printf("sub, bon, mug sub, mug bon: %x %x %x %x\n", 
+          sub, bon, u4_n_nub(sub), u4_n_nub(bon));
+      u4_err(lan, "dc sub", _dump_size(lan, sub));
+      u4_err(lan, "dc bon", _dump_size(lan, bon));
+      printf("\n");
+    }
+#endif
 
     if ( u4_n_eq(sub, u4_atom_atom) ) {
       if ( u4_n_eq(bon, u4_atom_atom) ) {
@@ -759,7 +779,10 @@ _iris_half(u4_crow p,
     }
     else if ( u4_b_pq(sub, u4_atom_core, &p_sub, &q_sub) ) {
       if ( u4_b_pq(bon, u4_atom_core, &p_bon, &q_bon) ) {
-        return u4_say(u4_n_eq(sub, bon));
+        return u4_and
+          (u4_say(u4_n_eq(q_sub, q_bon)),
+           _iris_nest_dext_slip
+              (p, sub, bar, axe, gil, bon, nef, ful, u4_noun_2));
       }
       else return _iris_nest_sint(p, sub, bar, axe, gil, bon, nef, ful);
     }
@@ -774,6 +797,12 @@ _iris_half(u4_crow p,
       else {
         return _iris_nest_sint(p, sub, bar, axe, gil, bon, nef, ful);
       }
+    }
+    else if ( u4_b_p(sub, u4_atom_cube, &p_sub) ) {
+      if ( u4_b_p(bon, u4_atom_cube, &p_bon) ) {
+        return u4_n_eq(p_sub, p_bon) ? u4_yes : u4_no;
+      }
+      else return _iris_nest_sint(p, sub, bar, axe, gil, bon, nef, ful);
     }
     else if ( u4_b_pq(sub, u4_atom_face, &p_sub, &q_sub) ) {
       return _iris_nest_dext(p, q_sub, bar, axe, gil, bon, nef, ful);
@@ -836,7 +865,7 @@ _iris_half(u4_crow p,
          _iris_nest_sint_swim(p, sub, bar, axe, gil, q_bon, nef, ful));
     }
     else {
-      if ( _iris_cull(p, bon, nef, ful) ) {
+      if ( u4_so(_iris_cull(p, bon, nef, ful)) ) {
         return u4_yes;
       }
       else return _iris_nest_dext
@@ -922,7 +951,6 @@ _iris_nest(u4_crow p,
     return u4_yes;
   }
   else if ( u4_so(_rose_null(p, sub)) ) {
-    u4_brut(p, "iris-nest: null: sub", sub);
     return u4_no;
   }
   else {
@@ -1000,38 +1028,16 @@ _iris_slip(u4_crow p,
     _iris_slip(p, &sub, &bar, &axe, had);
     return _iris_snap(p, sub, bar, axe, bon);
   }
-  static u4_unit
-  _iris_snap_swim(u4_crow p,
+  static u4_flag
+  _iris_snap_cull(u4_crow p,
                   u4_type sub,
                   u4_rail bar,
                   u4_axis axe,
                   u4_type bon)
   {
-    u4_lane lan = p->lan;
-    u4_noun p_sub, q_sub;
-
-    if ( u4_b_pq(sub, u4_atom_fork, &p_sub, &q_sub) ) {
-      u4_unit qoz = _iris_snap_swim(p, p_sub, bar, axe, bon);
-      u4_unit fyl = _iris_snap_swim(p, q_sub, bar, axe, bon);
-
-      if ( u4_n_zero(qoz) ) return fyl;
-      if ( u4_n_zero(fyl) ) return qoz;
-
-      return u4_kt
-        (lan, u4_atom_fork, u4_ct(qoz), u4_ct(fyl));
-    }
-    else {
-      if ( _iris_cull(p, sub, bar, axe) ) {
-        return u4_noun_0;
-      }
-      else if ( _rose_orth(p, sub, bon) ) {
-        return u4_noun_0;
-      }
-      else {
-        return u4_kc
-          (lan, u4_noun_0, _iris_snap_dext(p, sub, bar, axe, bon));
-      }
-    }
+    return u4_or
+      (_iris_cull(p, sub, bar, axe),
+       _rose_orth(p, sub, bon));
   }
   static u4_type
   _iris_snap_dext(u4_crow p,
@@ -1079,7 +1085,18 @@ _iris_slip(u4_crow p,
       }
     }
     else if ( u4_b_pq(sub, u4_atom_fork, &p_sub, &q_sub) ) {
-      return u4_ct(_iris_snap_swim(p, sub, bar, axe, bon));
+      if ( u4_so(_iris_snap_cull(p, p_sub, bar, axe, bon)) ) {
+        if ( u4_so(_iris_snap_cull(p, q_sub, bar, axe, bon)) ) {
+          return bon;
+        }
+        else return _iris_snap_dext(p, q_sub, bar, axe, bon);
+      }
+      else {
+        if ( u4_so(_iris_snap_cull(p, q_sub, bar, axe, bon)) ) {
+          return _iris_snap_dext(p, p_sub, bar, axe, bon);
+        }
+        else return bon;
+      }
     }
     else if ( u4_b_pq(sub, u4_atom_fuse, &p_sub, &q_sub) ) {
       return _iris_snap_dext
@@ -1109,11 +1126,10 @@ _iris_slip(u4_crow p,
          _iris_snap_dext(p, sub, bar, axe, q_bon));
     }
     else if ( u4_b_pq(bon, u4_atom_fuse, &p_bon, &q_bon) ) {
-      return u4_kt
-        (lan, 
-         u4_atom_fuse, 
-         _iris_snap_dext(p, sub, bar, axe, p_bon), 
-         _iris_snap_dext(p, sub, bar, axe, q_bon));
+      return _rose_both
+        (p,
+         _iris_snap_dext(p, sub, bar, axe, q_bon),
+         _iris_snap_dext(p, sub, bar, axe, p_bon));
     }
     else return bon;
   }
