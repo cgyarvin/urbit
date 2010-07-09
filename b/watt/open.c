@@ -61,7 +61,7 @@
         (lan, 
          u4_atom_cell,
          _open_coin_fix(p, p_gen, u4_op_peg(lan, axe, u4_noun_2)),
-         _open_coin_fix(p, q_gen, u4_op_peg(lan, axe, u4_noun_2)));
+         _open_coin_fix(p, q_gen, u4_op_peg(lan, axe, u4_noun_3)));
     }
     else if ( u4_b_pq(gen, u4_atom_clip, &p_gen, &q_gen) ) {
       u4_tool ryx = u4_kc(lan, u4_atom_frag, axe);
@@ -84,6 +84,13 @@
     else if ( u4_b_pq(gen, u4_atom_name, &p_gen, &q_gen) ) {
       return u4_kt
         (lan, u4_atom_name, p_gen, _open_coin_fix(p, q_gen, axe));
+    }
+    else if ( u4_b_p(gen, u4_atom_punt, &p_gen) ) {
+      return u4_kq
+        (lan, u4_atom_call,
+              p_gen,
+              u4_kc(lan, u4_atom_frag, axe),
+              u4_nul);
     }
     if ( u4_b_pq(gen, u4_atom_sock, &p_gen, &q_gen) ) {
       return _open_coin_fix(p, q_gen, axe);
@@ -545,7 +552,6 @@ _open_do_pq(mesh)
       u4_err(lan, "mesh: iq_gen", iq_gen);
       u4_err(lan, "mesh: grip", _open_grip(p, iq_gen));
       u4_err(lan, "mesh: coin", _open_coin(p, iq_gen));
-      u4_err(lan, "mesh: metacoin", _open_coin(p, _open_coin(p, iq_gen)));
       printf("\n");
     }
 #endif
@@ -737,8 +743,8 @@ _open_do_pq(sock)
        u4_kt(lan,
              u4_atom_sure,
              u4_kt(lan, 
-                   u4_atom_knit, 
-                   u4_kc(lan, u4_atom_frag, u4_noun_2), 
+                   u4_atom_link, 
+                   u4_kc(lan, u4_atom_frag, u4_noun_3), 
                    p_gen),
              rax)));
 }
@@ -838,87 +844,82 @@ _open_do_pq(yell)
 
 /* open:crow
 */
-u4_gene
-_crow_open(u4_crow p,
-           u4_gene gen)
-{
-  u4_noun p_gen, q_gen, r_gen, s_gen;
+  static u4_gene
+  _crow_open_main(u4_crow p,
+                  u4_gene gen)
+  {
+    u4_noun p_gen, q_gen, r_gen, s_gen;
 
-#if 1
+#if 0
     if ( !u4_n_zero(p->bug) ) {
       u4_err(p->lan, "open: gen", gen);
     }
 #endif
-  if ( u4_b_fork(gen, &p_gen, &q_gen) ) {
-    u4_err(p->lan, "gen", gen);
-    return _crow_fail(p, "bad code");
+    if ( u4_b_fork(gen, &p_gen, &q_gen) ) {
+      u4_err(p->lan, "gen", gen);
+      return _crow_fail(p, "bad code");
+    }
+    else {
+      _open_p   (coin);
+      _open_p   (cool);
+      _open_p   (dbug);
+      _open_pq  (else);
+      _open_p   (flip);
+      _open_p   (frag);
+      _open_p   (grip);
+      _open_p   (gate);
+      _open_pq  (home);
+      _open_pqr (howl);
+      _open_pq  (knit);
+      _open_pqr (lest);
+      _open_p   (loop);
+      _open_p   (mega);
+      _open_p   (port);
+      _open_pq  (pull);
+      _open_p   (punt);
+      _open_pq  (push);
+      _open_pqrs(qual);
+      _open_p   (slam);
+      _open_p   (slur);
+      _open_pq  (spot);
+      _open_pq  (then);
+      _open_pqr (trel);
+      _open_pqrs(wail);
+      _open_p   (wash);
+
+      _open_p   (base);
+      _open_pq  (bond);
+      _open_p   (cage);
+      _open_p   (call);
+      _open_pq  (clip);
+      _open_p   (flow);
+      _open_pq  (mesh);
+      _open_p   (pick);
+      _open_pq  (poke);
+      _open_p   (sand);
+      _open_pq  (sift);
+      _open_pq  (sock);
+      _open_p   (some);
+      _open_pqr (step);
+      _open_pq  (talk);
+      _open_pq  (yell);
+
+      return gen;
+    }
   }
-  else {
-    _open_p   (coin);
-    _open_p   (cool);
-    _open_p   (dbug);
-    _open_pq  (else);
-    _open_p   (flip);
-    _open_p   (frag);
-    _open_p   (grip);
-    _open_p   (gate);
-    _open_pq  (home);
-    _open_pqr (howl);
-    _open_pq  (knit);
-    _open_pqr (lest);
-    _open_p   (loop);
-    _open_p   (mega);
-    _open_p   (port);
-    _open_pq  (pull);
-    _open_p   (punt);
-    _open_pq  (push);
-    _open_pqrs(qual);
-    _open_p   (slam);
-    _open_p   (slur);
-    _open_pq  (spot);
-    _open_pq  (then);
-    _open_pqr (trel);
-    _open_pqrs(wail);
-    _open_p   (wash);
-
-    _open_p   (base);
-    _open_pq  (bond);
-    _open_p   (cage);
-    _open_p   (call);
-    _open_pq  (clip);
-    _open_p   (flow);
-    _open_pq  (mesh);
-    _open_p   (pick);
-    _open_pq  (poke);
-    _open_p   (sand);
-    _open_pq  (sift);
-    _open_pq  (sock);
-    _open_p   (some);
-    _open_pqr (step);
-    _open_pq  (talk);
-    _open_pq  (yell);
-
-    return gen;
-  }
-}
-
-#if 0
-/* _mill_open(): gene expansion.
-*/
-u4_gene 
-_mill_open(u4_crow p,
+u4_gene
+_crow_open(u4_crow p,
            u4_gene gen)
 {
-  u4_nopt zax = u4_tab_get(gen, m->pon);
+  u4_nopt zax = u4_tab_get(gen, p->pon);
 
   if ( u4_bull != zax ) {
     return zax;
   }
   else {
-    zax = _open_in(m, gen);
+    zax = _crow_open_main(p, gen);
 
-    m->pon = u4_tab_add(m->lane, gen, zax, m->pon);
+    p->pon = u4_tab_add(p->lan, gen, zax, p->pon);
     return zax;
   }
 }
-#endif

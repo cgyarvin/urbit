@@ -110,6 +110,11 @@ u4_crow_init(u4_crow p,
   p->zud = u4_noun_0;
   p->nix = u4_noun_0;
   p->meb = u4_noun_0;
+  p->vus = u4_noun_0;
+  p->gam = u4_noun_0;
+  p->zor = u4_noun_0;
+  p->niq = u4_noun_0;
+  p->pon = u4_noun_0;
 }
 
 /* full:crow (fake)
@@ -143,7 +148,7 @@ u4_crow_full(u4_lane lan,
       // u4_err(lan, "tol", tol);
 
       printf(":\n");
-      // printf("prf: %d\n", p->prf);
+      // printf("prf: %d\n", crow.prf);
       //
       return u4_kc(lan, typ, tol);
     }

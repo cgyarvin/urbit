@@ -1004,19 +1004,18 @@
   ::::
   ::
       bank  (list gene)
-      cord  *<^+(@ *term) [%frag p=*axis] [%pith p=*term] [%port p=*term]>
+      cord  <^+(@ *term) [%frag p=*axis] [%pith p=*term] [%port p=*term]>
       door  &[p=*axis q=*type r=*gene]
       home  (list term)
-      init  =+(*text:rasp |=((fire:rose (read (rip 3 -<)))))
       menu  (list &[p=*term q=*gene])
       plot  (list &[p=*gene q=*type])
       plan  &[p=*axis q=*(unit door) r=*type]
       rack  (list &[p=*gene p=*gene])
       rail  (list type)
       rope  (list cord)
-      seed  !:(^crow)
-      spec  *<[%none ~] [%leaf p=*term q=*gene] [p=^+(^ *spec) q=*spec]>
-      spot  &[p=[p=@ q=@] [[p=@ q=@]]]
+      spec  <[%none ~] [%leaf p=*term q=*gene] [p=^+(^ *spec) q=*spec]>
+      spot  &[at=[p=@ q=@] to=[p=@ q=@]]
+      term  &@
   ::
   ::::
   ::
@@ -1175,6 +1174,7 @@
       ^-  *gene
       ?-  gen
           [%cast *]   $(gen p.gen)
+          [%punt *]   [%call p.gen [%frag axe] ~]
           [%sure *]   $(gen q.gen)
           [%name *]   [%name p.gen $(gen q.gen)]
       ::
@@ -1356,7 +1356,7 @@
         [%sock *]
       :+  %push
         q.gen
-      [%knit [%frag 2] [%sure [%knit [%frag 3] p.gen] [%frag 2]]]
+      [%knit [%frag 2] [%sure [%link [%frag 3] p.gen] [%frag 2]]]
     ::
       [%push q.gen
         [%step *]

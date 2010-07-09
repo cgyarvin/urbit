@@ -65,11 +65,11 @@
 
         /* Set [*type *gene] in repo.
         */
-        u4_bag fan;
+        u4_pool fan;
 
         /* Set [*type] in verify.
         */
-        u4_bag ver;
+        u4_pool ver;
 
         /* Debug depth.
         */
@@ -86,6 +86,26 @@
         /* Trap - ((list {[p=*text q=*site r=*spot]}))
         */
         u4_noun meb;
+
+        /* Book to memoize nest.
+        */
+        u4_book vus;
+
+        /* Book to memoize orth.
+        */
+        u4_book gam;
+
+        /* Book to memoize play.
+        */
+        u4_book zor;
+
+        /* Book to memoize make.
+        */
+        u4_book niq;
+
+        /* Book to memoize open.
+        */
+        u4_book pon;
       } 
         *u4_crow;
 
