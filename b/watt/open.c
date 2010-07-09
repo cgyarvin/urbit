@@ -323,7 +323,7 @@ _open_do_pq(bond)
                u4_atom_slam,
                u4_kq
                 (lan,
-                 u4_atom_wail,
+                 u4_atom_howl,
                  p_gen,
                  u4_kq
                   (lan,
@@ -489,6 +489,14 @@ _open_do_p(gate)
   return u4_kc
     (lan, u4_atom_load,
           u4_kl(lan, u4_kc(lan, u4_blip, p_gen)));
+}
+
+_open_do_pq(hear)
+{
+  u4_lane lan = p->lan;
+
+  return u4_kt
+    (lan, u4_atom_call, q_gen, u4_kc(lan, p_gen, u4_noun_0));
 }
 
 _open_do_pq(home)
@@ -717,16 +725,6 @@ _open_do_p(slam)
           u4_noun_0);
 }
 
-_open_do_p(slur)
-{
-  u4_lane lan = p->lan;
-
-  return u4_kt
-    (lan, u4_atom_cast,
-          u4_kc(lan, u4_atom_base, u4_atom_blur),
-          p_gen);
-}
-
 _open_do_pq(sock)
 {
   u4_lane lan = p->lan;
@@ -786,14 +784,6 @@ _open_do_pqr(step)
        u4_kc(lan, u4_kc(lan, u4_atom_rock, u4_noun_0), q_gen),
        u4_kc(lan, u4_kc(lan, u4_atom_base, u4_atom_cell), r_gen),
        u4_nul));
-}
-
-_open_do_pq(talk)
-{
-  u4_lane lan = p->lan;
-
-  return u4_kt
-    (lan, u4_atom_call, q_gen, u4_kc(lan, p_gen, u4_noun_0));
 }
 
 _open_do_pq(then)
@@ -868,6 +858,7 @@ _open_do_pq(yell)
       _open_p   (frag);
       _open_p   (grip);
       _open_p   (gate);
+      _open_pq  (hear);
       _open_pq  (home);
       _open_pqr (howl);
       _open_pq  (knit);
@@ -901,7 +892,6 @@ _open_do_pq(yell)
       _open_pq  (sock);
       _open_p   (some);
       _open_pqr (step);
-      _open_pq  (talk);
       _open_pq  (yell);
 
       return gen;

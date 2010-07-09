@@ -532,10 +532,9 @@ tall
     di_mitben: si_mit si_ben  { $$ = u4_atom_take; }
     di_mitsig: si_mit si_sig  { $$ = u4_atom_punt; }
     di_mitnub: si_mit si_nub  { $$ = u4_atom_call; }
-    di_mitdot: si_mit si_dot  { $$ = u4_atom_talk; }
+    di_mitdot: si_mit si_dot  { $$ = u4_atom_hear; }
     di_mitpod: si_mit si_pod  { $$ = u4_atom_howl; }
     di_mithat: si_mit si_hat  { $$ = u4_atom_wail; }
-    di_mitras: si_mit si_ras  { $$ = u4_atom_yell; }
     di_mitbar: si_mit si_bar  { $$ = u4_atom_poke; }
 
   /* Signs.

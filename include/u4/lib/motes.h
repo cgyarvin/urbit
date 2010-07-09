@@ -243,6 +243,7 @@
     u4_lib_mote(hard, u4_s4('h','a','r','d'))
     u4_lib_mote(harp, u4_s4('h','a','r','p'))
     u4_lib_mote(head, u4_s4('h','e','a','d'))
+    u4_lib_mote(hear, u4_s4('h','e','a','r'))
     u4_lib_mote(hept, u4_s4('h','e','p','t'))
     u4_lib_mote(hez,  u4_s3('h','e','z'))
     u4_lib_mote(hide, u4_s4('h','i','d','e'))

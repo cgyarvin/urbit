@@ -1010,7 +1010,7 @@
       menu  (list &[p=*term q=*gene])
       plot  (list &[p=*gene q=*type])
       plan  &[p=*axis q=*(unit door) r=*type]
-      rack  (list &[p=*gene p=*gene])
+      rack  (list &[p=*gene q=*gene])
       rail  (list type)
       rope  (list cord)
       spec  <[%none ~] [%leaf p=*term q=*gene] [p=^+(^ *spec) q=*spec]>
@@ -1080,11 +1080,10 @@
       [%call p=*gene q=*gene]                     ::  %-  mitnub  
       [%poke p=*gene q=*gene]                     ::  %_  mitcab
       [%punt p=*gene]                             ::  %*  mitras
-      [%talk p=*gene q=*gene]                     ::  %.  mitdot
+      [%hear p=*gene q=*gene]                     ::  %.  mitdot
       [%take p=*rope q=*rack]                     ::  %=  mitben
       [%howl p=*gene q=*gene r=*gene]             ::  %+  mitpod
       [%wail p=*gene q=*gene r=*gene s=*gene]     ::  %^  mithat
-      [%yell p=*gene q=*bank]                     ::  %~  mitsig
     ::
       [%base p=*<%atom %blur %cell %flag %null>]  ::  @vat *ras ^hat ?ask ~sig
       [%frag p=*axis]
@@ -1180,12 +1179,12 @@
       ::
           [%cell *]
         :+  %cell
-          $(gen p.gen, axe (mul 2 axe)) 
-        $(gen q.gen, axe (inc (mul 2 axe)))
+          $(gen p.gen, axe (peg axe 2))
+        $(gen q.gen, axe (peg axe 3))
       ::
           [%clip *]
         :+  %link
-          [%take ~ {[%frag axe] [%call $.$(gen q.gen) [%frag axe] ~]}]
+          [%take ~ {[[%frag axe] [%call $.$(gen q.gen) [%frag axe] ~]]}]
         $(gen p.gen)
       ::
           *
@@ -1215,7 +1214,7 @@
         [%punt *]   
       ?.  ?=([%pick *] p.gen)
         [%base %blur]
-      gen(p.p.gen (turn p.p.gen =+(*gene |=($.$(gen -<)))))
+      gen(p.p (turn p.p.gen =+(*gene |=($.$(gen -<)))))
     ::
         *           
       =+  bog=(open gen)
@@ -1252,9 +1251,8 @@
         [%push *]   [%link [%cell p.gen [%frag 1]] q.gen]
         [%qual *]   [%cell p.gen [%cell q.gen [%cell r.gen s.gen]]]
         [%slam *]   [%lift [[%% p.gen] ~]]
-        [%slur *]   [%cast [%base %blur] p.gen]
         [%spot *]   q.gen
-        [%talk *]   [%call q.gen {p.gen}]
+        [%hear *]   [%call q.gen {p.gen}]
         [%then *]   [%test p.gen q.gen [%bail ~]]
         [%trel *]   [%cell p.gen [%cell q.gen r.gen]]
         [%wail *]   [%call p.gen q.gen r.gen s.gen ~]
@@ -1358,12 +1356,8 @@
         q.gen
       [%knit [%frag 2] [%sure [%link [%frag 3] p.gen] [%frag 2]]]
     ::
-      [%push q.gen
         [%step *]
       [%sift p.gen {[[%rock 0] q.gen] [[%base %cell] r.gen]}]
-    ::
-        [%yell *]
-      [%call p.gen q.gen]
     ::
         *   
       gen
@@ -1594,11 +1588,10 @@
         (cape nub %call norb)
         (cape cab %poke norb)
         (cape ras %punt nora)
-        (cape dot %talk norb)
+        (cape dot %hear norb)
         (cape ben %take norj) 
         (cape pod %howl norc)
         (cape hat %wail nord)
-        (cape hat %yell nori)
       ==
     ::
     ::::
