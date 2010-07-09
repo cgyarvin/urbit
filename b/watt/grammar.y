@@ -109,7 +109,7 @@ gene
 wide
   : wide_a
   | wide_rope si_dig wide
-    { $$ = _ytrel(u4_atom_link, $1, $3); }
+    { $$ = _ytrel(u4_atom_knit, $1, $3); }
   ;
 
 wide_a

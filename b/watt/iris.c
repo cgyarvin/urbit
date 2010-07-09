@@ -110,7 +110,7 @@
       else if ( u4_b_pq(sub, u4_atom_face, &p_sub, &q_sub) ||
                 u4_b_pq(sub, u4_atom_fork, &p_sub, &q_sub) ||
                 u4_b_pq(sub, u4_atom_fuse, &p_sub, &q_sub) ||
-                u4_b_pq(sub, u4_atom_fuse, &p_sub, &q_sub) )
+                u4_b_pq(sub, u4_atom_hold, &p_sub, &q_sub) )
       {
         return _iris_burn_sint(p, sub, bar, axe, vef, tac);
       }
@@ -680,6 +680,9 @@ _iris_half(u4_crow p,
        _iris_half(p, q_sub, u4_kc(lan, p_sub, bar), axe, had),
        _iris_half(p, p_sub, bar, axe, had));
   }
+  else if ( u4_b_pq(sub, u4_atom_hold, &p_sub, &q_sub) ) {
+    return _iris_half(p, _rose_repo(p, p_sub, q_sub), bar, axe, had);
+  }
   else return u4_trip;
 }
 
@@ -1140,5 +1143,17 @@ _iris_snap(u4_crow p,
            u4_axis axe,
            u4_type bon)
 {
-  return _iris_snap_dext(p, sub, bar, axe, bon);
+  u4_type sap;
+
+  sap = _iris_snap_dext(p, sub, bar, axe, bon);
+
+#if 0
+  if ( !u4_n_zero(p->bug) ) {
+    u4_brut(p, "sub", sub);
+    u4_brut(p, "bon", bon);
+    u4_brut(p, "sap", sap);
+    printf("\n");
+  }
+#endif
+  return sap;
 }

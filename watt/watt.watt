@@ -1,7 +1,3 @@
-?>  ?=(@ .)
-=>  src=.
-=-  (init:crow src)
-=>  ~
 |*
 ::
 ::::
@@ -47,7 +43,7 @@
   ?<  .=(0 b)
   =+  c=@
   |-
-  ?:  (lte a b)
+  ?:  (lth a b)
     c
   $(a (sub a b), c .^(c))
 ::::
@@ -126,7 +122,7 @@
   |:
   ?~  a
     ~
-  [~ (b u.a)]
+  [~ u=(b u.a)]
 ::::
 ::
     clap
@@ -136,7 +132,7 @@
     b
   ?~  b
     a
-  [~ (c u.a u.b)]
+  [~ u=(c u.a u.b)]
 ::::
 ::
     drop
@@ -144,7 +140,7 @@
   |:
   ?~  a
     ~
-  [u.a ~]
+  [i=u.a t=~]
 ::::
 ::
     flip
@@ -169,7 +165,8 @@
 ::
     levy
   =+  [a=*(list) b==+(* |=(.?(-<)))]
-  |:
+  |:  |-
+  ^-  ?
   ?~  a
     &
   ?:  (b i.a)
@@ -179,7 +176,8 @@
 ::
     lien
   =+  [a=*(list) b==+(* |=(.?(-<)))]
-  |:
+  |:  |-
+  ^-  ?
   ?~  a
     |
   ?:  (b i.a)
@@ -191,7 +189,7 @@
   =+  a=&*
   |:
   =+  b=*
-  |:
+  |=
   ?-  b
     ~           ~
     [i=* t=*]   [i=(a i.b) t=$(b t.b)]
@@ -207,24 +205,26 @@
 ::::
 ::
     reel
-  =+  [a=*(list) b==+([p=* q=*] |=(-<+))]
-  |:
+  =+  [a=*(list) b==+([* *] |=(-<+))]
+  |:  |-
+  ^-  -<+.b
   ?~  a
-    q.b
-  $:b(p i.a, q $(a t.a))
+    -<+.b
+  $:b(-<- i.a, -<+ $(a t.a))
 ::::
 ::
     roll
-  =+  [a=*(list) b==+([p=* q=*] |=(-<+))]
-  |:
+  =+  [a=*(list) b==+([* *] |=(-<+))]
+  |:  |-
+  ^-  -<+.b
   ?~  a
-    q.b
-  $(a t.a, b b(q $:b(p i.a)))
+    -<+.b
+  $(a t.a, b b(-<+ $:b(-<- i.a)))
 ::::
 ::
     skim
   =+  [a=*(list) b==+([p=*] |=(.?(p)))]
-  |:
+  |:  |-
   ^-  a
   ?~  a
     ~
@@ -233,7 +233,7 @@
 ::
     skip
   =+  [a=*(list) b==+([p=*] |=(.?(p)))]
-  |:
+  |:  |-
   ^-  a
   ?~  a
     ~
@@ -242,9 +242,10 @@
 ::
     snag
   =+  [a=@ b=*(list)]
-  |:
+  |:  |-
   ?~  b
     !!
+  ^-  i.b
   ?:  .=(0 a)
     i.b
   $(b t.b, a (dec a))
@@ -252,21 +253,20 @@
 ::
     sort
   =+  [a=*(list) b==+([p=* q=*] |=(.=(p q)))]
-  |:
-  |-
+  |:  |-
   ^-  a
   ?~  a
     ~
   %+  weld
-    $(a `^@(a)`(skim ^@(a) =+(* |:((b -< i.a)))))
-  [i.a $(a `^@(a)`(skim ^@(a) =+(* |:(!(b -< i.a)))))]
+    $(a (skim ^@(a) =+(* |:((b -< i.a)))))
+  [i.a $(a (skim ^@(a) =+(* |:((b i.a -<)))))]
 ::::
 ::
     tree
   =+  a=&*
   |:
   =+  b=*
-  |:
+  |=
   ?-  b
     ~               ~
     [n=* l=* r=*]   [n=(a n.b) l=$(b l.b) r=$(b r.b)]
@@ -275,7 +275,7 @@
 ::
     turn
   =+  [a=*(list) b=&*]
-  |:
+  |:  |-
   ?~  a
     ~
   [(b i.a) $(a t.a)]
@@ -288,13 +288,14 @@
   |=
   ?-  b
     ~         ~
-    [~ u=*]   [~ (a u.b)]
+    [~ u=*]   [~ u=(a u.b)]
   ==
 ::::
 ::
     weld
   =+  [a=*(list) b=*(list)]
-  |:
+  |:  |-
+  ^-  b
   ?~  a
     b
   [i.a $(a t.a)]
@@ -315,10 +316,10 @@
   |=
   ^-  *<2 3>
   ?-  a
-    1   !!
-    2   2
-    3   3
-    *   $(a (div a 2))
+    2       2
+    3       3
+    *<0 1>  !!
+    *       $(a (div a 2))
   ==
 ::::
 ::  
@@ -459,11 +460,11 @@
       e
     =+  b=`@`0x18d0a625
     |-
-    =+  c=(bin 5 a)
-    =+  d=0
+    =+  c=(met 5 a)
+    =+  d=`@`0
     =+  e=b
     |-
-    ?:  (eq d c)
+    ?:  .=(d c)
       =+  f=(dis 0x7fffffff e)
       ?:  .=(0 f)
         $.$(b .^(b))
@@ -587,7 +588,6 @@
   ::::
 ::::
 ::
-    book  =+([a=&* b=&*] |:((tree &[p=*a q=*b])))
     pool  =+(a=&* |:((tree a)))
 ::::
 ::
@@ -597,8 +597,8 @@
   ::::
   ::
       gas
-    =+  b=*(list *)
-    |:
+    =+  b=*(list)
+    |:  |-
     ^-  a
     ?~  b
       a
@@ -607,26 +607,20 @@
   ::
       has
     =+  b=*
-    |:
+    |:  |-
     ^-  ?
     ?~  a
       |
     ?:  .=(b n.a)
       &
     ?:  (gor b n.a)
-      $(n l.n)
-    $(n r.n)
-  ::::
-  ::
-      jam
-    =+  b=*(pool)
-    |:
-    $(a r.a, b (put(a $(a l.a)) n.a))
+      $(a l.a)
+    $(a r.a)
   ::::
   ::
       put
     =+  b=*
-    |:
+    |:  |-
     ^-  a
     ?~  a
       [b ~ ~]
@@ -634,10 +628,12 @@
       a
     ?:  (gor b n.a)
       =+  c=$(a l.a)
+      ?>  ?=(^ c)
       ?:  (vor n.a n.c)
         [n.a c r.a]
       [n.c l.c [n.a r.c r.a]]
     =+  c=$(a r.a)
+    ?>  ?=(^ c)
     ?:  (vor n.a n.c)
       [n.a l.a c] 
     [n.c [n.a l.a l.c] r.c]
@@ -645,71 +641,7 @@
   ::
       tap
     =+  b=*(list)
-    |:
-    ?~  a
-      b
-    $(a r.a, b [n.a $(a l.a)])
-  ::
-  ::::
-  ==
-::::
-::
-    by
-  =+  a=*(book)
-  |%
-  ::::
-  ::
-      gas
-    =+  b=*(list &[p=* q=*])
-    |:
-    ^-  a
-    ?~  b
-      a
-    $(b t.b, a (put p.i.b q.i.b))
-  ::::
-  ::
-      has
-    =+  b=*
-    |:
-    ^-  *(unit &q.n.a)
-    ?~  a
-      ~
-    ?:  .=(b p.n.a)
-      [~ q.n.a]
-    ?:  (gor b p.n.a)
-      $(n l.n)
-    $(n r.n)
-  ::::
-  ::
-      jam
-    =+  b=*(book)
-    |:
-    $(a r.a, b (put(a $(a l.a)) p.n.a q.n.a))
-  ::::
-  ::
-      put
-    =+  [b=* c=*]
-    |:
-    ^-  a
-    ?~  a
-      [[b c] ~ ~]
-    ?:  .=(b p.n.a)
-      ?>  .=(c q.n.a)
-      a
-    ?:  (gor b p.n.a)
-      =+  c=$(a l.a)
-      ?:  (vor p.n.a p.n.c)
-        [n.a c r.a]
-      [n.c l.c [n.a r.c r.a]]
-    =+  c=$(a r.a)
-    ?:  (vor p.n.a p.n.c)
-      [n.a l.a c] 
-    [n.c [n.a l.a l.c] r.c]
-  ::::
-  ::
-      tap
-    =+  b=*(list &[p=* q=*])
-    |:
+    |:  |-
     ?~  a
       b
     $(a r.a, b [n.a $(a l.a)])
@@ -1225,7 +1157,7 @@
           [%cool [%wash q.gen]]
         :-  %gate
         :+  %link
-          [%take ~ {[[%frag 4] [%call $(gen q.gen) [%frag 4]]]}]
+          [%take ~ {[[%frag 4] [%call $(gen q.gen) [%frag 4] ~]]}]
         (fix(gen p.gen) 4)
       ::
       ::
@@ -1253,7 +1185,7 @@
       ::
           [%clip *]
         :+  %link
-          [%take ~ {[%frag axe] [%call $.$(gen q.gen) [%frag axe]]}]
+          [%take ~ {[%frag axe] [%call $.$(gen q.gen) [%frag axe] ~]}]
         $(gen p.gen)
       ::
           *
@@ -1310,7 +1242,7 @@
         [%gate *]   [%load [[%% p.gen] ~]]
         [%home *]   q.gen
         [%howl *]   [%call p.gen q.gen r.gen ~]
-        [%knit *]   [%link p.gen q.gen]
+        [%knit *]   [%link q.gen p.gen]
         [%lest *]   [%test p.gen r.gen q.gen]
         [%loop *]   [%link [%gate p.gen] [%port %%]]
         [%mega *]   [%rock p.gen]
@@ -1352,7 +1284,7 @@
         :-  %slam
         :^    %wail
             p.gen
-          [%call [%frag 10] [%frag 4]]
+          [%call [%frag 10] [%frag 4] ~]
         [%take {%hez} {[[%frag 4] [%frag 4]]}]
       ==
     ::
@@ -1391,13 +1323,13 @@
         [%bail ~]
       :^    %test
           [%like (grip i.q.gen) p.gen]
-        [%call (coin i.q.gen) p.gen]
+        [%call (coin i.q.gen) p.gen ~]
       $(q.gen t.q.gen)
     ::
         [%pick *]
       ?~  p.gen
         [%bail ~]
-      [%push i.p.gen [%gate [%mesh [%frag 4] p.gen]]]
+      [%push [%wash i.p.gen] [%gate [%mesh [%frag 4] p.gen]]]
     ::
         [%poke *]
       [%push p.gen [%take {[%frag 2]} {[[%frag 4] [%link [%frag 3] q.gen]]}]]

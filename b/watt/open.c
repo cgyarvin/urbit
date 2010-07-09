@@ -77,7 +77,8 @@
                  u4_kc
                   (lan, 
                    ryx,
-                   u4_kt(lan, u4_atom_call, _open_coin(p, q_gen), ryx)))),
+                   u4_kq
+                    (lan, u4_atom_call, _open_coin(p, q_gen), ryx, u4_nul)))),
          _open_coin_fix(p, p_gen, axe));
     }
     else if ( u4_b_pq(gen, u4_atom_name, &p_gen, &q_gen) ) {
@@ -146,7 +147,8 @@ _open_coin(u4_crow p,
                  u4_kc
                   (lan, 
                    ryx,
-                   u4_kt(lan, u4_atom_call, _open_coin(p, q_gen), ryx)))),
+                   u4_kq
+                    (lan, u4_atom_call, _open_coin(p, q_gen), ryx, u4_nul)))),
            _open_coin_fix(p, p_gen, u4_noun_4))));
   }
   else {
@@ -316,11 +318,12 @@ _open_do_pq(bond)
                 (lan,
                  u4_atom_wail,
                  p_gen,
-                 u4_kt
+                 u4_kq
                   (lan,
                    u4_atom_call,
                    u4_kc(lan, u4_atom_frag, u4_noun_10),
-                   beg),
+                   beg,
+                   u4_nul),
                 u4_kt
                   (lan,
                    u4_atom_take,
@@ -365,6 +368,9 @@ _open_do_p(call)
             ip_gen,
             u4_kc(lan, u4_atom_port, u4_blip));
   } else {
+    if ( u4_n_eq(tp_gen, u4_kc(lan, u4_atom_frag, u4_noun_4)) ) {
+      return u4_trip;
+    }
     return u4_kt
       (lan, u4_atom_push,
             ip_gen,
@@ -496,7 +502,7 @@ _open_do_pq(knit)
 {
   u4_lane lan = p->lan;
 
-  return u4_kt(lan, u4_atom_link, p_gen, q_gen);
+  return u4_kt(lan, u4_atom_link, q_gen, p_gen);
 }
 
 _open_do_pqr(lest)
@@ -534,11 +540,20 @@ _open_do_pq(mesh)
     u4_noun iq_gen = u4_ch(q_gen);
     u4_noun tq_gen = u4_ct(q_gen);
 
+#if 0
+    if ( !u4_n_zero(p->bug) ) {
+      u4_err(lan, "mesh: iq_gen", iq_gen);
+      u4_err(lan, "mesh: grip", _open_grip(p, iq_gen));
+      u4_err(lan, "mesh: coin", _open_coin(p, iq_gen));
+      u4_err(lan, "mesh: metacoin", _open_coin(p, _open_coin(p, iq_gen)));
+      printf("\n");
+    }
+#endif
     return u4_kq
       (lan,
        u4_atom_test,
        u4_kt(lan, u4_atom_like, _open_grip(p, iq_gen), p_gen),
-       u4_kt(lan, u4_atom_coin, _open_coin(p, iq_gen), p_gen),
+       u4_kq(lan, u4_atom_call, _open_coin(p, iq_gen), p_gen, u4_nul),
        _open_in_mesh(p, p_gen, tq_gen));
   }
 }
@@ -556,7 +571,7 @@ _open_do_p(pick)
     return u4_kt
       (lan,
        u4_atom_push,
-       ip_gen,
+       u4_kc(lan, u4_atom_wash, ip_gen),
        u4_kc(lan, u4_atom_gate,
                   u4_kt(lan, u4_atom_mesh, 
                              u4_kc(lan, u4_atom_frag, u4_noun_4),
@@ -829,9 +844,14 @@ _crow_open(u4_crow p,
 {
   u4_noun p_gen, q_gen, r_gen, s_gen;
 
+#if 1
+    if ( !u4_n_zero(p->bug) ) {
+      u4_err(p->lan, "open: gen", gen);
+    }
+#endif
   if ( u4_b_fork(gen, &p_gen, &q_gen) ) {
     u4_err(p->lan, "gen", gen);
-    return u4_stub;
+    return _crow_fail(p, "bad code");
   }
   else {
     _open_p   (coin);
