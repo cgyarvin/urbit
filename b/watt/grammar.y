@@ -63,9 +63,10 @@
 
   /* Construction macros.
   */
-#   define _ycell(a, b)         u4_k_cell(yylane, a, b)
-#   define _ytrel(a, b, c)      u4_k_trel(yylane, a, b, c)
-#   define _yqual(a, b, c, d)   u4_k_qual(yylane, a, b, c, d)
+#   define _ycell(a, b)            u4_k_cell(yylane, a, b)
+#   define _ytrel(a, b, c)         u4_k_trel(yylane, a, b, c)
+#   define _yqual(a, b, c, d)      u4_k_qual(yylane, a, b, c, d)
+#   define _yquil(a, b, c, d, e)   u4_k_quil(yylane, a, b, c, d, e)
 
 %}
 
@@ -82,7 +83,7 @@
  
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 66
+  %expect 67
 
   %pure-parser
   %locations
@@ -257,7 +258,7 @@ wide_c
     wide_norm: di_dotben body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_dothat body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_dotask body_a_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_dotras body_a_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_dotras body_b_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_hatnub body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatpod body_b_wide    { $$ = _ycell($1, $2); }
@@ -276,12 +277,11 @@ wide_c
     wide_norm: di_lompod body_a_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_mitben body_j_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_mitsig body_a_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_mitnub body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_mitras body_a_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_mitnub body_k_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_mitdot body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_mitpod body_c_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_mithat body_f_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_mitras body_i_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_mitbar body_b_wide    { $$ = _ycell($1, $2); }
 
   /** Wide - bodies.
@@ -306,6 +306,8 @@ wide_c
       { $$ = _ycell($3, $5); }
     body_j_wide: si_lep g rope w rack_wide si_pel
       { $$ = _ycell($3, $5); }
+    body_k_wide: si_lep g wide w wide g si_pel
+      { $$ = _ytrel($3, $5, u4_nul); }
 
   /** Wide - body parts.
   **/
@@ -373,7 +375,7 @@ tall
     tall_norm: di_dotben w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_dothat w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_dotask w body_a_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_dotras w body_a_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_dotras w body_b_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_hatnub w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatpod w body_b_tall    { $$ = _ycell($1, $3); }
@@ -390,12 +392,11 @@ tall
     tall_norm: di_lompod w body_a_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_mitben w body_j_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_mitsig w body_a_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_mitnub w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_mitras w body_a_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_mitnub w body_k_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_mitdot w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_mitpod w body_c_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_mithat w body_f_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_mitras w body_i_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_mitbar w body_b_tall    { $$ = _ycell($1, $3); }
 
   /** Tall - bodies.
@@ -410,7 +411,7 @@ tall
     body_h_tall: gene w rack_tall           { $$ = _ycell($1, $3); }
     body_i_tall: gene w bank_tall           { $$ = _ycell($1, $3); }
     body_j_tall: rope w rack_tall           { $$ = _ycell($1, $3); }
-
+    body_k_tall: gene w gene                { $$ = _ytrel($1, $3, u4_nul); }
 
   /** Tall - body parts.
   **/
@@ -530,7 +531,7 @@ tall
     di_lompod: si_lom si_pod  { $$ = u4_atom_grip; }
     
     di_mitben: si_mit si_ben  { $$ = u4_atom_take; }
-    di_mitsig: si_mit si_sig  { $$ = u4_atom_punt; }
+    di_mitras: si_mit si_ras  { $$ = u4_atom_punt; }
     di_mitnub: si_mit si_nub  { $$ = u4_atom_call; }
     di_mitdot: si_mit si_dot  { $$ = u4_atom_hear; }
     di_mitpod: si_mit si_pod  { $$ = u4_atom_howl; }

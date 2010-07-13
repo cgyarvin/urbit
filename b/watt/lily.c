@@ -8,29 +8,29 @@
 */
 u4_tool
 _lily_cons(u4_crow p,
-           u4_tool vor,
+           u4_tool vur,
            u4_tool sed)
 {
   u4_lane lan = p->lan;
-  u4_noun p_vor, p_sed;
+  u4_noun p_vur, p_sed;
 
-  if ( u4_b_p(vor, u4_noun_1, &p_vor) && u4_b_p(sed, u4_noun_1, &p_sed) ) {
-    return u4_kt(lan, u4_noun_1, p_vor, p_sed);
+  if ( u4_b_p(vur, u4_noun_1, &p_vur) && u4_b_p(sed, u4_noun_1, &p_sed) ) {
+    return u4_kt(lan, u4_noun_1, p_vur, p_sed);
   }
-  else if ( u4_b_p(vor, u4_noun_0, &p_vor) && 
+  else if ( u4_b_p(vur, u4_noun_0, &p_vur) && 
             u4_b_p(sed, u4_noun_0, &p_sed) &&
-            !u4_n_eq(u4_noun_1, p_vor) &&
-            !u4_n_eq(p_vor, p_sed) &&
-            u4_n_zero(u4_op_ord(p_vor, p_sed)) )
+            !u4_n_eq(u4_noun_1, p_vur) &&
+            !u4_n_eq(p_vur, p_sed) &&
+            u4_n_zero(u4_op_ord(p_vur, p_sed)) )
   {
-    u4_atom fub = u4_op_div(lan, u4_noun_2, p_vor);
+    u4_atom fub = u4_op_div(lan, u4_noun_2, p_vur);
     u4_atom nof = u4_op_div(lan, u4_noun_2, p_sed);
 
     if ( u4_n_eq(fub, nof) ) {
       return u4_kc(lan, u4_noun_0, fub);
     }
   }
-  return u4_kc(lan, vor, sed);
+  return u4_kc(lan, vur, sed);
 }
 
 /* comb:lily

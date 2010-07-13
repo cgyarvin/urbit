@@ -149,7 +149,7 @@ u4_crow_full(u4_lane lan,
 
       printf(":\n");
       // printf("prf: %d\n", crow.prf);
-      //
+      
       return u4_kc(lan, typ, tol);
     }
   }

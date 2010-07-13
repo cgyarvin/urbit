@@ -6,7 +6,10 @@ Gene - AST
       gene
     |?
       [%bail ~]                                   ::  !!  hopven
-      [%dbug p=*gene q=*gene]                     ::  !#  hopdax
+      [%boot ~]                                   ::  !%  hopmit
+      [%mega p=*gene]                             ::  !`  hoptic
+      [%meta p=*gene]                             ::  !:  hopdig
+      [%dbug p=*gene]                             ::  !#  hopdax
       [%spot p=*spot q=*gene]
       [%home p=*term q=*gene]
     ::
@@ -37,8 +40,8 @@ Gene - AST
     ::
       [%cage p=*bank]                             ::  :*  digras
       [%cell p=*gene q=*gene]                     ::  :-  dignub
-      [%flow p=%bank]                             ::  :~  digsig
-      [%qual p=*gene q=*gene r=*gene s=*gene]     ::  :^  dighat
+      [%flow p=*bank]                             ::  :~  digsig
+      [%qual p=*gene q=*gene r=*gene s=*gene]     ::  :^  digmit
       [%trel p=*gene q=*gene r=*gene]             ::  :+  digpod
     ::
       [%bump p=*gene]                             ::  .^  dothat
@@ -50,20 +53,21 @@ Gene - AST
       [%clip p=*gene q=*gene]                     ::  ^%  hatmit
       [%cool p=*gene]                             ::  ^~  hatsig
       [%name p=*term q=*gene]                     ::  ^=  hatben
-      [%sure p=*gene q=*gene]                     ::  ^+  hatpod
+      [%sure p=*gene q=*gene]                     ::  ^:  hatpod
+      [%sock p=*gene q=*gene]                     ::  ^+  hatdig
       [%wash p=*gene]                             ::  ^*  hatras
+      [%etch p=*gene]                             ::  ^@  hatvat
     ::
       [%coin p=*gene]                             ::  ;-  lomnub
       [%grip p=*gene]                             ::  ;+  lompod
     ::
-      [%call p=*gene q=*gene]                     ::  %-  mitnub  
+      [%call p=*bank]                             ::  %-  mitnub  
       [%poke p=*gene q=*gene]                     ::  %_  mitcab
       [%punt p=*gene]                             ::  %*  mitras
-      [%talk p=*gene q=*gene]                     ::  %.  mitdot
-      [%take p=*gene q=*rack]                     ::  %=  mitben
+      [%hear p=*gene q=*gene]                     ::  %.  mitdot
+      [%take p=*rope q=*rack]                     ::  %=  mitben
       [%howl p=*gene q=*gene r=*gene]             ::  %+  mitpod
       [%wail p=*gene q=*gene r=*gene s=*gene]     ::  %^  mithat
-      [%yell p=*gene q=*bank]                     ::  %~  mitsig
     ::
       [%base p=*<%atom %blur %cell %flag %null>]  ::  @vat *ras ^hat ?ask ~sig
       [%frag p=*axis]

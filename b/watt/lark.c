@@ -8,7 +8,7 @@
 */
   static u4_tack
   _lark_nuke_port(u4_crow p,
-                  u4_type sub,
+                  u4_type sut,
                   u4_tack tac,
                   u4_rope rop,
                   u4_type feg,
@@ -32,7 +32,7 @@
         return u4_k_trel
           (lan, 
            u4_atom_pair,
-           _lark_nuke_port(p, sub, tac, rop, feg, gos, tap, gur),
+           _lark_nuke_port(p, sut, tac, rop, feg, gos, tap, gur),
            u4_noun_0);
       }
       else {
@@ -40,14 +40,14 @@
           (lan, 
            u4_atom_pair,
            u4_noun_0,
-           _lark_nuke_port(p, sub, tac, rop, feg, gos, tap, gur));
+           _lark_nuke_port(p, sut, tac, rop, feg, gos, tap, gur));
       }
     }
   }
 
   static u4_tack
   _lark_nuke_frag(u4_crow p,
-                  u4_type sub,
+                  u4_type sut,
                   u4_tack tac,
                   u4_rope rop,
                   u4_type feg,
@@ -67,7 +67,7 @@
         return u4_k_trel
           (lan, 
            u4_atom_pair,
-           _lark_nuke_frag(p, sub, tac, rop, feg, tap, gur),
+           _lark_nuke_frag(p, sut, tac, rop, feg, tap, gur),
            u4_noun_0);
       }
       else {
@@ -75,13 +75,13 @@
           (lan, 
            u4_atom_pair,
            u4_noun_0,
-           _lark_nuke_frag(p, sub, tac, rop, feg, tap, gur));
+           _lark_nuke_frag(p, sut, tac, rop, feg, tap, gur));
       }
     }
   }
 u4_tack
 _lark_nuke(u4_crow p,
-           u4_type sub,
+           u4_type sut,
            u4_tack tac,
            u4_rope rop,
            u4_type feg)
@@ -98,29 +98,29 @@ _lark_nuke(u4_crow p,
 
     if ( u4_n_atom(i_rop) ) {
       return _lark_nuke
-        (p, sub, 
+        (p, sut, 
             tac, 
             u4_k_cell(lan, u4_k_cell(lan, u4_atom_port, rop), t_rop),
             feg);
     }
     else if ( u4_b_p(i_rop, u4_atom_pith, &pi_rop) ) {
       return _lark_nuke
-        (p, sub, 
+        (p, sut, 
             tac, 
             u4_k_cell(lan, u4_k_cell(lan, u4_atom_port, pi_rop), t_rop),
             feg);
     }
     else if ( u4_b_p(i_rop, u4_atom_port, &pi_rop) ) {
-      u4_plan lar = _iris_find(p, sub, u4_noun_0, u4_noun_1, pi_rop);
+      u4_plan lar = _iris_find(p, sut, u4_noun_0, u4_noun_1, pi_rop);
       u4_axis p_lar = u4_ch(lar);
       u4_type r_lar = u4_ct(u4_ct(lar));
 
-      return _lark_nuke_port(p, sub, tac, t_rop, feg, pi_rop, p_lar, r_lar);
+      return _lark_nuke_port(p, sut, tac, t_rop, feg, pi_rop, p_lar, r_lar);
     }
     else if ( u4_b_p(i_rop, u4_atom_frag, &pi_rop) ) {
-      u4_type gur = _iris_peek(p, sub, u4_noun_0, u4_noun_1, pi_rop);
+      u4_type gur = _iris_peek(p, sut, u4_noun_0, u4_noun_1, pi_rop);
 
-      return _lark_nuke_frag(p, sub, tac, t_rop, feg, pi_rop, gur); 
+      return _lark_nuke_frag(p, sut, tac, t_rop, feg, pi_rop, gur); 
     }
     else return u4_trip;
   }
@@ -130,7 +130,7 @@ _lark_nuke(u4_crow p,
 */
 u4_tack
 _lark_cram(u4_crow p,
-           u4_type sub,
+           u4_type sut,
            u4_tack tac,
            u4_tack les)
 {
@@ -152,7 +152,7 @@ _lark_cram(u4_crow p,
     else return u4_k_trel
       (lan, u4_atom_name,
             p_tac,
-            _lark_cram(p, sub, q_tac, q_les));
+            _lark_cram(p, sut, q_tac, q_les));
   }
   else if ( u4_b_pq(tac, u4_atom_pair, &p_tac, &q_tac) ) {
     if ( !u4_b_pq(les, u4_atom_pair, &p_les, &q_les) ) {
@@ -160,8 +160,8 @@ _lark_cram(u4_crow p,
     }
     else return u4_k_trel
       (lan, u4_atom_pair,
-            _lark_cram(p, sub, p_tac, p_les),
-            _lark_cram(p, sub, q_tac, q_les));
+            _lark_cram(p, sut, p_tac, p_les),
+            _lark_cram(p, sut, q_tac, q_les));
   }
   else return _crow_fail(p, "cram crash");
 }
@@ -170,7 +170,7 @@ _lark_cram(u4_crow p,
 */
 u4_tack
 _lark_dull(u4_crow p,
-           u4_type sub,
+           u4_type sut,
            u4_tack tac)
 {
   u4_lane lan = p->lan;
@@ -181,13 +181,13 @@ _lark_dull(u4_crow p,
   } else if ( u4_b_p(tac, u4_atom_leaf, &p_tac) ) {
     return u4_k_cell(lan, u4_atom_leaf, u4_atom_blur);
   } else if ( u4_b_pq(tac, u4_atom_name, &p_tac, &q_tac) ) {
-    return u4_k_trel(lan, u4_atom_name, p_tac, _lark_dull(p, sub, q_tac));
+    return u4_k_trel(lan, u4_atom_name, p_tac, _lark_dull(p, sut, q_tac));
   } else if ( u4_b_pq(tac, u4_atom_pair, &p_tac, &q_tac) ) {
     return u4_k_trel
       (lan, 
        u4_atom_pair,
-       _lark_dull(p, sub, p_tac),
-       _lark_dull(p, sub, q_tac));
+       _lark_dull(p, sut, p_tac),
+       _lark_dull(p, sut, q_tac));
   }
   else return u4_trip;
 }
@@ -196,7 +196,7 @@ _lark_dull(u4_crow p,
 */
 u4_tack
 _lark_feed(u4_crow p,
-           u4_type sub,
+           u4_type sut,
            u4_tack tac,
            u4_list mut)
 {
@@ -209,8 +209,8 @@ _lark_feed(u4_crow p,
     u4_gene pi_mut = u4_ch(i_mut);
     u4_type qi_mut = u4_ct(i_mut);
     u4_rope rop    = _crow_rake(p, pi_mut);
-    u4_tack bur    = _lark_nuke(p, sub, tac, rop, qi_mut);
-    u4_tack tey    = _lark_cram(p, sub, tac, bur);
+    u4_tack bur    = _lark_nuke(p, sut, tac, rop, qi_mut);
+    u4_tack tey    = _lark_cram(p, sut, tac, bur);
 
 #if 0
     { 
@@ -220,6 +220,6 @@ _lark_feed(u4_crow p,
       printf("\n");
     }
 #endif
-    return _lark_feed(p, sub, tey, t_mut);
+    return _lark_feed(p, sut, tey, t_mut);
   }
 }

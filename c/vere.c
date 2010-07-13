@@ -303,7 +303,7 @@ vere_boot(uz_machine mac)
   else {
     uz_l_except(mac, env);
     {
-      uz_noun src = uz_k_file(mac, uz_k_string(mac, "watt/dbug.watt"));
+      uz_noun src = uz_k_file(mac, uz_k_string(mac, "watt/next.watt"));
       uz_noun ker = uz_t_watt(mac, src);
 
       uz_r_express(mac, ker);

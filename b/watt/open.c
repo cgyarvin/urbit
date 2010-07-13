@@ -840,11 +840,6 @@ _open_do_pq(yell)
   {
     u4_noun p_gen, q_gen, r_gen, s_gen;
 
-#if 0
-    if ( !u4_n_zero(p->bug) ) {
-      u4_err(p->lan, "open: gen", gen);
-    }
-#endif
     if ( u4_b_fork(gen, &p_gen, &q_gen) ) {
       u4_err(p->lan, "gen", gen);
       return _crow_fail(p, "bad code");
@@ -871,7 +866,6 @@ _open_do_pq(yell)
       _open_pq  (push);
       _open_pqrs(qual);
       _open_p   (slam);
-      _open_p   (slur);
       _open_pq  (spot);
       _open_pq  (then);
       _open_pqr (trel);
@@ -909,6 +903,13 @@ _crow_open(u4_crow p,
   else {
     zax = _crow_open_main(p, gen);
 
+#if 0
+    if ( !u4_n_zero(p->bug) && u4_b_p(gen, u4_atom_punt, 0) ) {
+      u4_err(p->lan, "open: gen", gen);
+      u4_err(p->lan, "open: zax", zax);
+      printf("\n");
+    }
+#endif
     p->pon = u4_tab_add(p->lan, gen, zax, p->pon);
     return zax;
   }

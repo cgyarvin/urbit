@@ -85,7 +85,8 @@ _gull_fill(u4_crow p,
       if ( u4_n_zero(hut) ) return zig;
       if ( u4_n_zero(zig) ) return hut;
 
-      return _crow_fail(p, "gull");
+      u4_err(lan, "cog", cog);
+      return _crow_fail(p, "gull conflict");
     }
     else return u4_trip;
   }
