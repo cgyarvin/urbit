@@ -285,7 +285,7 @@ _iris_cull(u4_crow p,
             return u4_noun_0;
           }
           else {
-            u4_err(lan, "cog", cog);
+            u4_burp(lan, "cog", u4_prep_textual(lan, cog));
             u4_burp(lan, "bar", _dump_durb(p, bar));
             u4_brut(p, "p_sut", p_sut);
             u4_brut(p, "q_sut", q_sut);
@@ -313,7 +313,7 @@ _iris_cull(u4_crow p,
                  _rose_eith(p, u4_ct(u4_ct(u_lep)), u4_ct(u4_ct(u_gam)))));
           }
           else {
-            u4_err(lan, "cog", cog);
+            u4_burp(lan, "cog", u4_prep_textual(lan, cog));
             u4_err(lan, "pu_lep", u4_ch(u_lep));
             u4_err(lan, "pu_gam", u4_ch(u_gam));
 
@@ -341,12 +341,12 @@ _iris_cull(u4_crow p,
     }
   }
   static u4_unit
-  _iris_find_main(u4_crow p,
-                  u4_type sut,
-                  u4_rail bar,
-                  u4_axis axe,
-                  u4_pool gil,
-                  u4_term cog)
+  _iris_find_main_a(u4_crow p,
+                    u4_type sut,
+                    u4_rail bar,
+                    u4_axis axe,
+                    u4_pool gil,
+                    u4_term cog)
   {
     u4_lane lan = p->lan;
     u4_noun p_sut, q_sut;
@@ -369,8 +369,14 @@ _iris_cull(u4_crow p,
         return taf;
       }
       else {
-        u4_err(lan, "cog", cog);
+#if 0
+        u4_burp(lan, "cog", u4_prep_textual(lan, cog));
+        u4_brut(p, "p_sut", p_sut);
+        u4_brut(p, "q_sut", q_sut);
         return _crow_fail(p, "cell conflict");
+#else
+        return taf;
+#endif
       }
     }
     else if ( u4_b_pq(sut, u4_atom_core, &p_sut, &q_sut) ) {
@@ -503,6 +509,29 @@ _iris_cull(u4_crow p,
       return u4_trip;
     }
   }
+  static u4_unit
+  _iris_find_main(u4_crow p,
+                  u4_type sut,
+                  u4_rail bar,
+                  u4_axis axe,
+                  u4_pool gil,
+                  u4_term cog)
+  {
+    u4_lane lan = p->lan;
+    u4_noun mum  = u4_k_quil(lan, sut, bar, axe, gil, cog);
+    u4_nopt zod  = u4_tab_get(mum, p->fin);
+
+    if ( zod != u4_bull ) {
+      return zod;
+    }
+    else {
+      u4_unit gur = _iris_find_main_a
+        (p, sut, bar, axe, gil, cog);
+
+      p->fin = u4_tab_add(lan, mum, gur, p->fin);
+      return gur;
+    }
+  }
 u4_plan
 _iris_find(u4_crow p,
            u4_type sut,
@@ -513,7 +542,7 @@ _iris_find(u4_crow p,
   u4_unit fyg = _iris_find_main(p, sut, bar, axe, u4_noun_0, cog);
 
   if ( u4_n_zero(fyg) ) {
-    u4_err(p->lan, "cog", cog);
+    u4_burp(p->lan, "cog", u4_prep_textual(p->lan, cog));
     u4_burp(p->lan, "sut", _dump_type(p, sut));
     return _crow_fail(p, "not found");
   }

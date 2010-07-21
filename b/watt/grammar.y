@@ -83,7 +83,7 @@
  
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 67
+  %expect 69
 
   %pure-parser
   %locations
@@ -127,6 +127,7 @@ wide_b
 
 wide_c
   : wide_hard
+  | wide_base
   | wide_rope
   | wide_funk
   | wide_cage
@@ -135,35 +136,34 @@ wide_c
   | wide_norm
   ;
 
-  /** Wide: constants.
-  **/
     wide_hard
-      : tok_delm
+      : '0' 'x' tok_chex
+        { $$ = _ycell(u4_atom_rock, $3); }
+      | tok_delm
         { $$ = _ycell(u4_atom_rock, $1); }
       | si_amp
         { $$ = _ycell(u4_atom_rock, u4_noun_0); }
       | si_bar
         { $$ = _ycell(u4_atom_rock, u4_noun_1); }
-      | si_ask
-        { $$ = _ycell(u4_atom_base, u4_atom_flag); }
-      | si_ras
-        { $$ = _ycell(u4_atom_base, u4_atom_blur); }
-      | si_hat
-        { $$ = _ycell(u4_atom_base, u4_atom_cell); }
-      | si_vat
-        { $$ = _ycell(u4_atom_base, u4_atom_atom); }
-      | '0' 'x' tok_chex
-        { $$ = _ycell(u4_atom_rock, $3); }
       | tok_loct
         { $$ = _ycell(u4_atom_rock, $1); }
       | si_mit tok_term
         { $$ = _ycell(u4_atom_rock, $2); }
       | si_mit si_mit
         { $$ = _ycell(u4_atom_rock, u4_noun_0); }
+      ;
+   
+    wide_base
+      : si_ask
+        { $$ = _ycell(u4_atom_base, u4_atom_flag); }
+      | si_ras
+        { $$ = _ycell(u4_atom_base, u4_atom_blur); }
+      | si_hat
+        { $$ = _ycell(u4_atom_base, u4_atom_cell); }
+      | si_pat
+        { $$ = _ycell(u4_atom_base, u4_atom_atom); }
       | si_sig
         { $$ = _ycell(u4_atom_base, u4_atom_null); }
-      | si_vat term
-        { $$ = u4_stub; /* placeholder for fort */ }
       ;
    
     wide_rope
@@ -190,6 +190,8 @@ wide_c
     wide_funk
       : si_sud g bank_wide g si_dus
         { $$ = _ycell(u4_atom_flow, $3); }
+      | si_sud g si_dus
+        { $$ = _ycell(u4_atom_flow, u4_noun_0); }
       | rope si_lep rack_wide si_pel
         { $$ = _ytrel(u4_atom_take, $1, $3); }
       | si_hop wide
@@ -204,10 +206,13 @@ wide_c
         { $$ = _ycell(u4_atom_cool, $2); }
       | si_tic wide si_tic wide
         { $$ = _ytrel(u4_atom_cast, $2, $4); }
+/*
       | si_sol path
         { $$ = $2; }
+*/
       ;
 
+/*
     path 
       : thin
       | thin si_sol path    { $$ = _ytrel(u4_atom_cell, $1, $3); }
@@ -220,6 +225,7 @@ wide_c
       | wide_pick
       | wide_call
       ;
+*/
 
   /** Wide: normals.
   **/
@@ -248,6 +254,7 @@ wide_c
     wide_norm: di_bardig body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_barask body_d_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_barsig body_i_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_barpat body_l_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_digras body_d_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_digsig body_d_wide    { $$ = _ycell($1, $2); }
@@ -266,7 +273,7 @@ wide_c
     wide_norm: di_hatben body_g_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatmit body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatras body_a_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_hatvat body_a_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_hatpat body_a_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_hopdax body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hopven                { $$ = _ycell($1, u4_noun_0); }
@@ -308,9 +315,9 @@ wide_c
       { $$ = _ycell($3, $5); }
     body_k_wide: si_lep g wide w wide g si_pel
       { $$ = _ytrel($3, $5, u4_nul); }
+    body_l_wide: si_lep g wide w wide w bank_wide g si_pel
+      { $$ = _ytrel($3, $5, $7); }
 
-  /** Wide - body parts.
-  **/
     bank_wide
       : wide             { $$ = _ycell($1, u4_noun_0); }
       | wide w bank_wide { $$ = _ycell($1, $3); }
@@ -365,6 +372,7 @@ tall
     tall_norm: di_barmit w body_e_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_barask w body_d_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_barsig w body_i_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_barpat w body_l_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_digras w body_d_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_digsig w body_d_tall    { $$ = _ycell($1, $3); }
@@ -383,7 +391,7 @@ tall
     tall_norm: di_hatben w body_g_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatmit w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatras w body_a_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_hatvat w body_a_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_hatpat w body_a_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_hopdax w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hopdig w body_a_tall    { $$ = _ycell($1, $3); }
@@ -412,6 +420,7 @@ tall
     body_i_tall: gene w bank_tall           { $$ = _ycell($1, $3); }
     body_j_tall: rope w rack_tall           { $$ = _ycell($1, $3); }
     body_k_tall: gene w gene                { $$ = _ytrel($1, $3, u4_nul); }
+    body_l_tall: gene w gene w bank_tall    { $$ = _ytrel($1, $3, $5); }
 
   /** Tall - body parts.
   **/
@@ -454,7 +463,6 @@ tall
       cord
         : axis                  { $$ = _ycell(u4_atom_frag, $1); }
         | term                  { $$ = _ycell(u4_atom_port, $1); }
-        | si_hat term           { $$ = _ycell(u4_atom_pith, $2); }
         ;
 
       axis
@@ -494,9 +502,10 @@ tall
     di_barben: si_bar si_ben  { $$ = u4_atom_gate; }
     di_barras: si_bar si_ras  { $$ = u4_atom_load; }
     di_barmit: si_bar si_mit  { $$ = u4_atom_lift; }
-    di_bardig: si_bar si_dig  { $$ = u4_atom_slam; }
+    di_bardig: si_bar si_dig  { $$ = u4_atom_ramp; }
     di_barask: si_bar si_ask  { $$ = u4_atom_pick; }
     di_barsig: si_bar si_sig  { $$ = u4_atom_bond; }
+    di_barpat: si_bar si_pat  { $$ = u4_atom_bund; }
 
     di_bender: si_ben si_der  { $$ = u4_atom_knit; }
     di_benred: si_ben si_red  { $$ = u4_atom_link; }
@@ -520,7 +529,7 @@ tall
     di_hatben: si_hat si_ben  { $$ = u4_atom_name; }
     di_hatmit: si_hat si_mit  { $$ = u4_atom_clip; }
     di_hatras: si_hat si_ras  { $$ = u4_atom_wash; }
-    di_hatvat: si_hat si_vat  { $$ = u4_atom_etch; }
+    di_hatpat: si_hat si_pat  { $$ = u4_atom_etch; }
 
     di_hopdax: si_hop si_dax  { $$ = u4_atom_dbug; }
     di_hopmit: si_hop si_mit  { $$ = u4_atom_boot; }
@@ -545,7 +554,7 @@ tall
     si_bar: '|'
     si_ben: '='
     si_buc: '$'
-    si_bup: '\''
+    si_bot: '\''
     si_cab: '_'
     /* si_com: ',' */
     si_dax: '#'
@@ -561,6 +570,7 @@ tall
     si_mon: ']'
     si_nom: '['
     si_nub: '-'
+    si_pat: '@'
     si_pel: ')'
     si_pod: '+'
     si_ras: '*'
@@ -571,7 +581,6 @@ tall
     si_sig: '~'
     si_tic: '`'
     /* si_tep: '"' */
-    si_vat: '@'
 
   /** Basic tokens.
   **/
@@ -624,7 +633,7 @@ tall
                     ;
 
     tok_loct
-      : si_bup loct_mid si_bup
+      : si_bot loct_mid si_bot
         { $$ = u4_k_atom_log(yylane, $2); }
       ;
         loct_mid: { $$ = u4_noun_0; }
@@ -785,8 +794,8 @@ u4_watt_parse(u4_lane lane,
   if ( !yyparse(&scanner) ) {
     u4_assert(scanner.scan);
 
-    // return scanner.scan;
-    return u4_k_trel(lane, u4_atom_home, pif, scanner.scan);
+    return scanner.scan;
+    // return u4_k_trel(lane, u4_atom_home, pif, scanner.scan);
   }
   else {
     return u4_exit;

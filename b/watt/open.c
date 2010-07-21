@@ -261,10 +261,12 @@ _open_do_p(base)
             u4_kc(lan, u4_atom_rock, u4_noun_0));
   }
   else if ( u4_n_eq(u4_atom_blur, p_gen) ) {
+    u4_noun dud = u4_kc(lan, u4_atom_rock, u4_noun_0);
+
     return u4_kt
       (lan, u4_atom_cast, 
-            u4_kt(lan, u4_atom_nock, u4_atom_rock, u4_noun_0),
-            u4_kc(lan, u4_atom_rock, u4_noun_0));
+            u4_kt(lan, u4_atom_nock, dud, dud),
+            dud);
   }
   else if ( u4_n_eq(u4_atom_cell, p_gen) ) {
     return u4_kt
@@ -303,28 +305,27 @@ _open_do_pq(bond)
       return u4_kt
         (lan,
          u4_atom_push,
-         u4_kt(lan, u4_atom_name, 
-                        u4_atom_hez, 
-                        _open_in_bond(p, p_gen, tq_gen)),
+         _open_in_bond(p, p_gen, tq_gen),
          u4_kt
           (lan,
            u4_atom_push,
-           u4_kt(lan, u4_atom_name,
-                          u4_atom_fon,
-                          iq_gen),
+           u4_kt(lan, u4_atom_link,
+                      u4_kc(lan, u4_atom_frag, u4_noun_3),
+                      iq_gen),
            u4_kt
             (lan, 
              u4_atom_push,
-             u4_kt(lan, u4_atom_take,
-                            u4_kt(lan, beg, u4_atom_fon, u4_noun_0),
-                            u4_noun_0),
+             u4_kc(lan, u4_atom_frag, u4_noun_8), 
              u4_kc
               (lan,
-               u4_atom_slam,
+               u4_atom_ramp,
                u4_kq
                 (lan,
                  u4_atom_howl,
-                 p_gen,
+                 u4_kt(lan,
+                       u4_atom_link,
+                       u4_kc(lan, u4_atom_frag, u4_cod_in(23)),
+                       p_gen),
                  u4_kq
                   (lan,
                    u4_atom_call,
@@ -334,11 +335,111 @@ _open_do_pq(bond)
                 u4_kt
                   (lan,
                    u4_atom_take,
-                   u4_kc(lan, u4_atom_hez, u4_noun_0),
+                   u4_kc(lan, 
+                         u4_kc(lan, u4_atom_frag, u4_cod_in(22)), 
+                         u4_noun_0),
                    u4_kc
                     (lan,
                      u4_kc(lan, beg, beg),
                      u4_noun_0)))))));
+    }
+  }
+}
+
+_open_do_pqr(bund)
+{
+  u4_lane lan = p->lan;
+  u4_noun beg = u4_kc(lan, u4_atom_frag, u4_noun_4);
+
+  if ( u4_n_zero(q_gen) ) {
+    return _crow_fail(p, "bund");
+  }
+  else {
+    u4_noun ir_gen = u4_ch(r_gen);
+    u4_noun tr_gen = u4_ct(r_gen);
+
+    if ( u4_n_zero(tr_gen) ) {
+      return u4_kt
+        (lan,
+         u4_atom_push,
+         ir_gen,
+         u4_kt
+          (lan,
+           u4_atom_push,
+           u4_kc(lan, u4_atom_frag, u4_noun_8), 
+           u4_kc
+            (lan,
+             u4_atom_ramp,
+             u4_kt
+              (lan,
+               u4_atom_cast,
+               u4_kq(lan,
+                     u4_atom_call,
+                     u4_kt(lan, 
+                           u4_atom_link,
+                           u4_kc(lan, u4_atom_frag, u4_cod_in(11)),
+                           q_gen),
+                     beg,
+                     u4_nul),
+               u4_kq
+                (lan,
+                 u4_atom_call,
+                 u4_kc(lan, u4_atom_frag, u4_noun_10),
+                 beg,
+                 u4_nul)))));
+    }
+    else {
+      return u4_kt
+        (lan,
+         u4_atom_push,
+         _open_in_bond(p, p_gen, tr_gen),
+         u4_kt
+          (lan,
+           u4_atom_push,
+           u4_kt(lan, u4_atom_link,
+                      u4_kc(lan, u4_atom_frag, u4_noun_3),
+                      ir_gen),
+           u4_kt
+            (lan, 
+             u4_atom_push,
+             u4_kc(lan, u4_atom_frag, u4_noun_8), 
+             u4_kc
+              (lan,
+               u4_atom_ramp,
+               u4_kt
+                (lan,
+                 u4_atom_cast,
+                 u4_kq(lan,
+                       u4_atom_call,
+                       u4_kt(lan, 
+                             u4_atom_link,
+                             u4_kc(lan, u4_atom_frag, u4_cod_in(23)),
+                             q_gen),
+                       beg,
+                       u4_nul),
+                 u4_kq
+                  (lan,
+                   u4_atom_howl,
+                   u4_kt(lan,
+                         u4_atom_link,
+                         u4_kc(lan, u4_atom_frag, u4_cod_in(23)),
+                         p_gen),
+                   u4_kq
+                    (lan,
+                     u4_atom_call,
+                     u4_kc(lan, u4_atom_frag, u4_noun_10),
+                     beg,
+                     u4_nul),
+                  u4_kt
+                    (lan,
+                     u4_atom_take,
+                     u4_kc(lan, 
+                           u4_kc(lan, u4_atom_frag, u4_cod_in(22)), 
+                           u4_noun_0),
+                     u4_kc
+                      (lan,
+                       u4_kc(lan, beg, beg),
+                       u4_noun_0))))))));
     }
   }
 }
@@ -497,11 +598,6 @@ _open_do_pq(hear)
 
   return u4_kt
     (lan, u4_atom_call, q_gen, u4_kc(lan, p_gen, u4_noun_0));
-}
-
-_open_do_pq(home)
-{
-  return q_gen;
 }
 
 _open_do_pqr(howl)
@@ -715,7 +811,7 @@ _open_do_pq(sift)
   }
 }
 
-_open_do_p(slam)
+_open_do_p(ramp)
 {
   u4_lane lan = p->lan;
 
@@ -854,7 +950,6 @@ _open_do_pq(yell)
       _open_p   (grip);
       _open_p   (gate);
       _open_pq  (hear);
-      _open_pq  (home);
       _open_pqr (howl);
       _open_pq  (knit);
       _open_pqr (lest);
@@ -865,7 +960,7 @@ _open_do_pq(yell)
       _open_p   (punt);
       _open_pq  (push);
       _open_pqrs(qual);
-      _open_p   (slam);
+      _open_p   (ramp);
       _open_pq  (spot);
       _open_pq  (then);
       _open_pqr (trel);
@@ -874,6 +969,7 @@ _open_do_pq(yell)
 
       _open_p   (base);
       _open_pq  (bond);
+      _open_pqr (bund);
       _open_p   (cage);
       _open_p   (call);
       _open_pq  (clip);

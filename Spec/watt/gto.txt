@@ -56,7 +56,7 @@ Gene - AST
       [%sure p=*gene q=*gene]                     ::  ^:  hatpod
       [%sock p=*gene q=*gene]                     ::  ^+  hatdig
       [%wash p=*gene]                             ::  ^*  hatras
-      [%etch p=*gene]                             ::  ^@  hatvat
+      [%etch p=*gene]                             ::  ^@  hatpat
     ::
       [%coin p=*gene]                             ::  ;-  lomnub
       [%grip p=*gene]                             ::  ;+  lompod
@@ -69,7 +69,7 @@ Gene - AST
       [%howl p=*gene q=*gene r=*gene]             ::  %+  mitpod
       [%wail p=*gene q=*gene r=*gene s=*gene]     ::  %^  mithat
     ::
-      [%base p=*<%atom %blur %cell %flag %null>]  ::  @vat *ras ^hat ?ask ~sig
+      [%base p=*<%atom %blur %cell %flag %null>]  ::  @pat *ras ^hat ?ask ~sig
       [%frag p=*axis]
       [%port p=*term]
       [%rock p=*]
@@ -144,16 +144,16 @@ Axes
 
 Signs (ven = repeat)
 --
-  amp   &       der   <       nub   -     tep   "
-  ask   ?       dot   .       pel   )     vat   @
-  bar   |       dus   }       pod   +
-  ben   =       hat   ^       ras   *
-  buc   $       hop   !       red   >
-  bup   '       lom   ;       sac   \
-  cab   _       lep   (       sol   /
-  com   ,       mit   %       sud   {
-  dax   #       mon   ]       sig   ~
-  dig   :       nom   [       tic   `
+  amp   &       der   <       nub   -     tic   `
+  ask   ?       dot   .       pat   @     tep   "
+  bar   |       dus   }       pel   )
+  ben   =       hat   ^       pod   +
+  buc   $       hop   !       ras   *
+  bup   '       lom   ;       red   >
+  cab   _       lep   (       sac   \
+  com   ,       mit   %       sol   /
+  dax   #       mon   ]       sud   {
+  dig   :       nom   [       sig   ~
 
   ace  == " "
   lit  == "\n"

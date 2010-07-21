@@ -79,10 +79,6 @@
         */
         u4_noun zud;
 
-        /* Home (source file).
-        */
-        u4_noun nix;
-
         /* Trap - ((list {[p=*text q=*site r=*spot]}))
         */
         u4_noun meb;
@@ -106,6 +102,10 @@
         /* Book to memoize open.
         */
         u4_book pon;
+
+        /* Book to memoize find.
+        */
+        u4_book fin;
       } 
         *u4_crow;
 

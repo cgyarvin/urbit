@@ -123,6 +123,7 @@ u3_ln_cell(u3_lv    lv,
     return u3_none;
   }
   else if ( u3_no == u3_lm_open(l, u3_wiseof(struct u3_li_cell)) ) {
+    printf("not open\n");
     return u3_none;
   }
   else {

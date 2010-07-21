@@ -14,15 +14,20 @@
                   u4_type feg,
                   u4_term gos,
                   u4_axis wam,
+                  u4_unit yus,
                   u4_type gur)
   {
     u4_lane lan = p->lan;
 
     if ( u4_n_eq(u4_noun_1, wam) ) {
-      return u4_k_trel
-        (lan, u4_atom_name,
-              gos,
-              _lark_nuke(p, gur, tac, rop, feg));
+      if ( u4_n_zero(yus) ) {
+        return u4_k_trel
+          (lan, u4_atom_name,
+                gos,
+                _lark_nuke(p, gur, tac, rop, feg));
+      } else {
+        return _lark_nuke(p, gur, tac, rop, feg);
+      }
     }
     else {
       u4_axis tip = u4_op_tip(wam);
@@ -32,7 +37,7 @@
         return u4_k_trel
           (lan, 
            u4_atom_pair,
-           _lark_nuke_port(p, sut, tac, rop, feg, gos, tap, gur),
+           _lark_nuke_port(p, sut, tac, rop, feg, gos, tap, yus, gur),
            u4_noun_0);
       }
       else {
@@ -40,7 +45,7 @@
           (lan, 
            u4_atom_pair,
            u4_noun_0,
-           _lark_nuke_port(p, sut, tac, rop, feg, gos, tap, gur));
+           _lark_nuke_port(p, sut, tac, rop, feg, gos, tap, yus, gur));
       }
     }
   }
@@ -103,19 +108,14 @@ _lark_nuke(u4_crow p,
             u4_k_cell(lan, u4_k_cell(lan, u4_atom_port, rop), t_rop),
             feg);
     }
-    else if ( u4_b_p(i_rop, u4_atom_pith, &pi_rop) ) {
-      return _lark_nuke
-        (p, sut, 
-            tac, 
-            u4_k_cell(lan, u4_k_cell(lan, u4_atom_port, pi_rop), t_rop),
-            feg);
-    }
     else if ( u4_b_p(i_rop, u4_atom_port, &pi_rop) ) {
       u4_plan lar = _iris_find(p, sut, u4_noun_0, u4_noun_1, pi_rop);
       u4_axis p_lar = u4_ch(lar);
+      u4_unit q_lar = u4_ch(u4_ct(lar));
       u4_type r_lar = u4_ct(u4_ct(lar));
 
-      return _lark_nuke_port(p, sut, tac, t_rop, feg, pi_rop, p_lar, r_lar);
+      return _lark_nuke_port
+        (p, sut, tac, t_rop, feg, pi_rop, p_lar, q_lar, r_lar);
     }
     else if ( u4_b_p(i_rop, u4_atom_frag, &pi_rop) ) {
       u4_type gur = _iris_peek(p, sut, u4_noun_0, u4_noun_1, pi_rop);

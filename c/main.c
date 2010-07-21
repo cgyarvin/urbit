@@ -90,7 +90,7 @@ main(int  argc,
   char *history_name = _console_init();
   uz_machine mac;
 
-  if ( !(mac = uz_l_boot(20)) ) {
+  if ( !(mac = uz_l_boot(24)) ) {
     fprintf(stderr, "zeno: boot failed\n");
     return 1;
   }

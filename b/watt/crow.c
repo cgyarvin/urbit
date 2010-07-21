@@ -13,10 +13,9 @@ _crow_trap(u4_crow p,
   u4_lane lan = p->lan;
 
   u4_atom hal  = u4_k_atom_c(lan, msg);
-  u4_atom nof  = p->nix;
   u4_atom jup  = p->zud;
 
-  p->meb = u4_k_cell(lan, u4_k_trel(lan, hal, nof, jup), p->meb);
+  p->meb = u4_k_cell(lan, u4_k_cell(lan, hal, jup), p->meb);
 }
 
 /* fail:crow
@@ -31,8 +30,7 @@ _crow_fail(u4_crow p,
       u4_noun i_meb = u4_ch(p->meb);
       {
         u4_noun hal = u4_ch(i_meb);
-        u4_noun nof = u4_cth(i_meb);
-        u4_noun jup = u4_ctt(i_meb);
+        u4_noun jup = u4_ct(i_meb);
 
         if ( u4_n_zero(u4_ct(p->meb)) ) {
           u4_sb sb_hal = u4_a_bin(hal, 3);
@@ -41,9 +39,6 @@ _crow_fail(u4_crow p,
           u4_a_bytes(hal, (u4_xb *)cl_hal, 0, sb_hal + 1);
           printf("fail: %s\n", cl_hal);
 
-          if ( !u4_n_zero(nof) ) {
-            u4_burp(p->lan, "home", u4_prep_textual(p->lan, nof));
-          }
           if ( !u4_n_zero(jup) ) {
             u4_atom pp_jup = u4_ch(u4_ch(jup));
             u4_atom qp_jup = u4_ct(u4_ch(jup));
@@ -108,13 +103,13 @@ u4_crow_init(u4_crow p,
   p->ver = u4_noun_0;
   p->bug = u4_noun_0;
   p->zud = u4_noun_0;
-  p->nix = u4_noun_0;
   p->meb = u4_noun_0;
   p->vus = u4_noun_0;
   p->gam = u4_noun_0;
   p->zor = u4_noun_0;
   p->niq = u4_noun_0;
   p->pon = u4_noun_0;
+  p->fin = u4_noun_0;
 }
 
 /* full:crow (fake)
@@ -134,23 +129,19 @@ u4_crow_full(u4_lane lan,
     u4_type typ;
     u4_tool tol;
 
+    tol = _rose_make(&crow, sub, gen);
+    printf(":");
+
     boz = _rose_show(&crow, sub, gen);
     if ( !u4_so(boz) ) {
       printf("type error\n");
       return u4_exit;
     }
-    else {
-      printf(":");
+    printf(":");
 
-      typ = _rose_play(&crow, sub, gen);
-      printf(":");
-      tol = _rose_make(&crow, sub, gen);
-      // u4_err(lan, "tol", tol);
+    typ = _rose_play(&crow, sub, gen);
+    printf(":\n");
 
-      printf(":\n");
-      // printf("prf: %d\n", crow.prf);
-      
-      return u4_kc(lan, typ, tol);
-    }
+    return u4_kc(lan, typ, tol);
   }
 }

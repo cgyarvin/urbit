@@ -127,7 +127,7 @@ _c_dump_nail(u4_sh lane,
       u4_noun n_dump = n_dumps[i_dump];
       u4_noun n_first = u4_ch(n_dump);
       u4_noun n_rest = u4_ct(n_dump);
-      u4_xw xw_tab;
+      u4_xw xw_tab = 0;
 
       /* Append the first line of this dump to the current line.
       */
