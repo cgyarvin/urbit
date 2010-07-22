@@ -412,12 +412,11 @@ _rose_gain(u4_crow p,
       return u4_k_cell(lan, u4_noun_1, p_gen);
     }
     else if ( u4_b_pq(gen, u4_atom_spot, &p_gen, &q_gen) ) {
-      u4_noun muw = p->zud;
       u4_noun qip;
 
-      p->zud = p_gen;
+      p->meb = u4_kc(lan, u4_kc(lan, u4_noun_0, p_gen), p->meb);
       qip = _rose_make(p, sut, q_gen);
-      p->zud = muw;
+      p->meb = u4_ct(p->meb);
 
       return qip;
     }
@@ -782,12 +781,11 @@ _rose_orth(u4_crow p,
       return u4_k_cell(lan, u4_atom_cube, p_gen); 
     }
     else if ( u4_b_pq(gen, u4_atom_spot, &p_gen, &q_gen) ) {
-      u4_noun muw = p->zud;
       u4_noun qip;
 
-      p->zud = p_gen;
+      p->meb = u4_kc(lan, u4_kc(lan, u4_noun_0, p_gen), p->meb);
       qip = _rose_play(p, sut, q_gen);
-      p->zud = muw;
+      p->meb = u4_ct(p->meb);
 
       return qip;
     }
@@ -1076,12 +1074,11 @@ _rose_show(u4_crow p,
     return u4_yes;
   }
   else if ( u4_b_pq(gen, u4_atom_spot, &p_gen, &q_gen) ) {
-    u4_noun muw = p->zud;
     u4_noun qip;
 
-    p->zud = p_gen;
+    p->meb = u4_kc(lan, u4_kc(lan, u4_noun_0, p_gen), p->meb);
     qip = _rose_show(p, sut, q_gen);
-    p->zud = muw;
+    p->meb = u4_ct(p->meb);
 
     return qip;
   }

@@ -745,7 +745,12 @@ _iris_half(u4_crow p,
     return _iris_half(p, q_sut, bar, axe, had);
   }
   else if ( u4_b_pq(sut, u4_atom_fork, &p_sut, &q_sut) ) {
-    return u4_ct(_iris_half_swim(p, sut, bar, axe, had));
+    u4_unit pez = _iris_half_swim(p, sut, bar, axe, had);
+
+    if ( u4_n_zero(pez) ) {
+      return u4_atom_blot;
+    }
+    return u4_ct(pez);
   }
   else if ( u4_b_pq(sut, u4_atom_fuse, &p_sut, &q_sut) ) {
     return _rose_both
@@ -1079,7 +1084,8 @@ _iris_peek(u4_crow p,
 
   if ( u4_n_eq(u4_noun_1, bow) ) {
     return sut;
-  } else {
+  } 
+  else {
     _iris_slip(p, &sut, &bar, &axe, u4_op_tip(bow));
 
     return _iris_peek(p, sut, bar, axe, u4_op_tap(lan, bow));

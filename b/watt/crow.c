@@ -13,10 +13,12 @@ _crow_trap(u4_crow p,
   u4_lane lan = p->lan;
 
   u4_atom hal  = u4_k_atom_c(lan, msg);
-  u4_atom jup  = p->zud;
 
-  p->meb = u4_k_cell(lan, u4_k_cell(lan, hal, jup), p->meb);
+  p->meb = u4_k_cell(lan, u4_k_cell(lan, hal, u4_noun_0), p->meb);
 }
+
+/* trac:crow
+*/
 
 /* fail:crow
 */
@@ -28,32 +30,30 @@ _crow_fail(u4_crow p,
   {
     while ( !u4_n_zero(p->meb) ) {
       u4_noun i_meb = u4_ch(p->meb);
-      {
-        u4_noun hal = u4_ch(i_meb);
-        u4_noun jup = u4_ct(i_meb);
+      u4_noun hal = u4_ch(i_meb);
+      u4_noun jup = u4_ct(i_meb);
 
-        if ( u4_n_zero(u4_ct(p->meb)) ) {
-          u4_sb sb_hal = u4_a_bin(hal, 3);
-          u4_cl *cl_hal = alloca(sb_hal + 1);
+      if ( !u4_n_zero(hal) ) {
+        u4_sb sb_hal = u4_a_bin(hal, 3);
+        u4_cl *cl_hal = alloca(sb_hal + 1);
 
-          u4_a_bytes(hal, (u4_xb *)cl_hal, 0, sb_hal + 1);
-          printf("fail: %s\n", cl_hal);
+        u4_a_bytes(hal, (u4_xb *)cl_hal, 0, sb_hal + 1);
+        printf("msg: %s\n", cl_hal);
+      }
 
-          if ( !u4_n_zero(jup) ) {
-            u4_atom pp_jup = u4_ch(u4_ch(jup));
-            u4_atom qp_jup = u4_ct(u4_ch(jup));
-            u4_atom pq_jup = u4_ch(u4_ct(jup));
-            u4_atom qq_jup = u4_ct(u4_ct(jup));
-            {
-              u4_xw xw_flin = u4_a_wtrip(pp_jup);
-              u4_xw xw_fcol = u4_a_wtrip(qp_jup);
-              u4_xw xw_llin = u4_a_wtrip(pq_jup);
-              u4_xw xw_lcol = u4_a_wtrip(qq_jup);
+      if ( !u4_n_zero(jup) ) {
+        u4_atom pp_jup = u4_ch(u4_ch(jup));
+        u4_atom qp_jup = u4_ct(u4_ch(jup));
+        u4_atom pq_jup = u4_ch(u4_ct(jup));
+        u4_atom qq_jup = u4_ct(u4_ct(jup));
+        {
+          u4_xw xw_flin = u4_a_wtrip(pp_jup);
+          u4_xw xw_fcol = u4_a_wtrip(qp_jup);
+          u4_xw xw_llin = u4_a_wtrip(pq_jup);
+          u4_xw xw_lcol = u4_a_wtrip(qq_jup);
 
-              printf("spot: %d:%d - %d:%d\n\n", 
-                     xw_flin, xw_fcol, xw_llin, xw_lcol);
-            }
-          }
+          printf("spot: %d:%d - %d:%d\n", 
+                 xw_flin, xw_fcol, xw_llin, xw_lcol);
         }
       }
       p->meb = u4_ct(p->meb);
@@ -102,7 +102,6 @@ u4_crow_init(u4_crow p,
   p->fan = u4_noun_0;
   p->ver = u4_noun_0;
   p->bug = u4_noun_0;
-  p->zud = u4_noun_0;
   p->meb = u4_noun_0;
   p->vus = u4_noun_0;
   p->gam = u4_noun_0;
@@ -142,6 +141,7 @@ u4_crow_full(u4_lane lan,
     typ = _rose_play(&crow, sub, gen);
     printf(":\n");
 
+    // printf("prf: %d\n", crow.prf);
     return u4_kc(lan, typ, tol);
   }
 }

@@ -82,6 +82,7 @@ _gull_fill(u4_crow p,
       u4_unit hut = _gull_look_a(p, p_dab, cog, u4_op_peg(lan, axe, u4_noun_2));
       u4_unit zig = _gull_look_a(p, q_dab, cog, u4_op_peg(lan, axe, u4_noun_3));
 
+      // p->prf++;
       if ( u4_n_zero(hut) ) return zig;
       if ( u4_n_zero(zig) ) return hut;
 

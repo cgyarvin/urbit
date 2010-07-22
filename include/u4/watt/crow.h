@@ -75,11 +75,7 @@
         */
         u4_atom bug;
 
-        /* Spot (position in source).
-        */
-        u4_noun zud;
-
-        /* Trap - ((list {[p=*text q=*site r=*spot]}))
+        /* Trap - *(list &[p=*text q=*spot])
         */
         u4_noun meb;
 

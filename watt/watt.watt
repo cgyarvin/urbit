@@ -143,7 +143,7 @@
   [i=u.a t=~]
 ::::
 ::
-    flip
+    flop
   =+  a=*(list)
   |:
   ^-  a
@@ -666,343 +666,7 @@
   ::::
 ::::
 ::
-    rasp
-  |*
-  ::::
-  ::
-      byte  &@
-      tape  (list byte)
-      text  &@
-      spot  &[c=@ l=@]
-      edge  <[| p=*spot] [& p=* q=tube]>
-      rule  =+(tube |:(^-(*edge [& ~ -<])))
-  ::::
-  ::
-      tube
-    =+  der=*spot 
-    =+  tep=*tape
-    |:
-    ^-  [p=*(unit byte) q=^$]
-    ?-  tep
-      ~       [~ ^$]
-      [10 *]  [[~ 10] ^$(tep t.tep, c.der 1, l.der .^(l.der))]
-      ^       [[~ i.q] ^$(tep t.tep, c.der .^(c.der))]
-    ==
-  ::
-  ::::
-  ::::
-  ::
-      bend
-    =+  raq==+([* *] |:(-<))
-    |:
-    =+  [vex=edge sab=rule]
-    |:
-    ?-  -.vex
-        |   vex
-        &
-      =+  yit=(sab q.vex)
-      ?-  -.yit
-        |   vex
-        &   [& p=(raq p.vex p.yit) q=q.yit]
-      ==
-    ==
-  ::::
-  ::
-      comp
-    =+  raq==+([* *] |:(-<))
-    |:
-    =+  [vex=*edge sab=rule]
-    |:
-    ?-  -.vex
-        |   vex
-        &
-      =+  yit=(sab q.vex)
-      ?-  -.yit
-        |   yit
-        &   [& p=(raq p.vex p.yit) q=q.yit]
-      ==
-    ==
-  ::::
-  ::
-      glue
-    =+  bus=rule
-    |:
-    =+  [vex=*edge sab=rule]
-    |:
-    (plug vex |~(pfix bus sab))
-  ::::
-  ::
-      pfix
-    =+  [vex=edge sab=rule]
-    |:
-    ?-  -.vex
-      |   vex
-      &   (sab q.vex)
-    ==
-  ::::
-  ::
-      plug
-    *comp
-  ::::
-  ::
-      pose
-    =+  [vex=edge sab=rule]
-    |:
-    ?-  -.vex
-      |   *sab
-      &   vex
-    ==
-  ::::
-  ::
-      sfix
-    =+  [vex=edge sab=rule]
-    |:
-    ?-  -.vex
-        |   vex
-        &
-      =+  yit=(sab q.vex)
-      ?-  -.yit
-        |   yit
-        &   [& p=p.vex q=q.yit]
-      ==
-    ==
-  ::
-  ::::
-  ::::
-  ::
-      cold
-    =+  [cus=* sef=rule]
-    |:
-    =+  doc=tube
-    |=
-    =+  vex=(sef doc)
-    ?-  -.vex
-      |   vex
-      &   [& cus q.vex]
-    ==
-  ::::
-  ::
-      cook
-    =+  [poq=&* sef=rule]
-    |:
-    =+  doc=tube
-    |=
-    =+  vex=(sef doc)
-    ?-  -.vex
-      |   vex
-      &   [& (poq p.vex) q.vex]
-    ==
-  ::::
-  ::
-      fail
-    =+  doc=tube
-    |=
-    [| der.doc]
-  ::::
-  ::
-      free
-    =+  huf=*
-    |:
-    =+  doc=tube
-    |=
-    [& p=huf q=doc]
-  ::::
-  ::
-      just
-    =+  daf=byte
-    |=
-    =+  doc=tube
-    |:
-    =+  gon=*doc
-    ?~  p.gon
-      (fail doc)
-    ?:  .=(daf u.p.gon)
-      [& daf q.gon]
-    (fail doc)
-  ::::
-  ::
-      mask
-    =+  bud=*(list byte)
-    |:
-    =+  doc=tube
-    |:
-    =+  gon=*doc
-    ?~  p.gon
-      (fail doc)
-    ?:  (lien bud =+(byte |=(.=(p.gon -<))))
-      [& u.p.gon q.gon]
-    (fail doc)
-  ::::
-  ::
-      shim
-    =+  zep=[p=byte q=byte]
-    |=
-    =+  doc=tube
-    |=
-    =+  gon=*doc
-    ?~  p.gon
-      (fail doc)
-    ?:  ?&((gte u.p.gon p.zep) (lte u.p.gon q.zep))
-      [& u.p.gon q.gon]
-    (fail doc)
-  ::::
-  ::
-      stag
-    =+  [gob=* sef=rule]
-    |:
-    =+  doc=tube
-    |:
-    =+  vex=(sef doc)
-    ?-  -.vex
-      |   vex
-      &   [& [gob p.vex] q.vex]
-    ==
-  ::
-  ::::
-  ::::
-  ::
-      bass
-    =+  [rum=@ tyd=rule]
-    |:
-    (cook =+(*(list &@) |=(reel -< =+([a=@ b=@] |=(add a (mul rum b))))) tyd)
-  ::::
-  ::
-      ifix
-    =+  [fel=[p=rule q=rule] hof=rule]
-    |:
-    |~(pfix p.fel |~(sfix q.fel hof))
-  ::::
-  ::
-      many
-    =+  [duq=* mud=plug]
-    |:
-    =+  [sup=rule nib=rule]
-    |:
-    |~(mud sup ((some duq mud) nib))
-  ::::
-  ::
-      more
-    =+  raq==+([* *] |:(-<))
-    |:
-    =+  [byr=rule fam=rule] 
-    |:
-    |~((bend raq) byr ^$(byr fam))
-  ::::
-  ::
-      most
-    =+  raq==+([* *] |:(-<)) 
-    |:
-    =+  [zor=rule bam=rule]
-    |:
-    ((more raq) bam |~(pfix zor bam))
-  ::::
-  ::
-      plus
-    =+  nib=rule
-    |:
-    ((many ~ plug) nib)
-  ::::
-  ::
-      sing
-    =+  vor=rule
-    |:
-    |~(pose (cook =+(* |:([~ -<])) vor) (free ~))
-  ::::
-  ::
-      some
-    =+  [duq=* mud=plug]
-    |:
-    =+  nib=rule
-    |:
-    |~(pose |~(mud nib ..$) (free duq))
-  ::::
-  ::
-      star
-    (some ~ plug)
-  ::::
-  ::
-      tarp
-    (verb (rip 3 tex))
-  ::::
-  ::
-      verb
-    =+  hum=*(list byte)
-    |-
-    ?~  hum
-      (free ~)
-    |~(plug (just i.hum) $(hum t.hum))
-  ::
-  ::::
-  ::::
-  ::
-      alf   |~(pose low hig)
-      amp   (just '&')
-      ask   (just '?')
-      bar   (just '|')
-      ben   (just '=')
-      bin   (bass 2 (palm qar bit))
-      bit   (cook =+(@ |=((sub -< '0'))) (shim '0' '1'))
-      bot   (just '\'')
-      buc   (just '$')
-      cab   (just '_')
-      com   (just ',')
-      dax   (just '#')
-      del   (bass 10 (palm qar dit))
-      der   (just '<')
-      dig   (just ':')
-      dit   (cook =+(@ |=((sub -< '0'))) (shim '0' '9'))
-      dot   (just '.')
-      dus   (just '}')
-      gap   (cold ~ (star |~(pose vul (mask {10 32 ~}))))
-      hat   (just '^')
-      hex   (bass 16 (palm qar hit))
-      hig   (shim 'A' 'Z')
-      hit   |~(pose cdel =+(*byte |=((sub -< 87))) (shim 'a' 'f'))
-      hop   (just '!')
-      lep   (just '(')
-      lom   (just ';')
-      low   (shim 'a' 'z')
-      mes   (cook =+([@ @] |=((add (mul 16 -<-) ->+))) |~(plug hit hit))
-      mit   (just '%')
-      mon   (just ']')
-      nom   (just '[')
-      nub   (just '-')
-      num   (shim '0' '9')
-      pel   (just ')')
-      pod   (just '+')
-      poy   |~(pfix sac |~(pose sac bot mes))
-      qar   (cold ~ |~(plug sac tar sol))
-      qit   |~(pose (shim 32 38) (shim 40 91) (shim 92 126) poy)
-      quo   (bass 256 (palm qar qit))
-      ras   (just '*')
-      red   (just '>')
-      sac   (just '\\')
-      sig   (just '~')
-      sol   (just '/')
-      sud   (just '{')
-      sym   (bass 256 (many ~ low |~(pose num low nub)))
-      tar   (cold ~ (plus (mask {10 32 ~})))
-      tic   (just '`')
-      toq   (just '"')
-      vat   (just '@')
-      vul   (cold ~ |~(plug dig dig (star (shim 32 126)) (just 10)))
-  ::::
-  ::
-      beg
-    |~  (bend =+([@ @] (peg -<- ->+)))
-      |~(pose (cold 2 nub) (cold 3 pod))
-      tol
-    ==
-  ::::
-  ::
-      tol
-    |~  (bend =+([@ @] (peg -<- ->+)))
-      |~(pose (cold 2 der) (cold 3 red))
-      beg
-    ==
-  ::
-  ::::
-  ==
+
 ::
 ::::
   ::::
@@ -1406,241 +1070,6 @@
   ::
   ::::
   ::
-      read
-  ::
-    =+  tep=*tape
-    |=
-    ^-  *gene
-    =+  rasp
-    =+  mot=`?`&
-    %.  tube_tep
-    =<  main
-    |*
-    ::::
-    ::
-        gunk  (glue muck)
-        glop  (glue mash)
-        main  ?:(mot |~(pose wide norm) wide)
-        mash  ?:(mot gap (cold ~ |~(plug com ace)))
-        muck  ?:(mot gap ace)
-    ::
-    ::::
-    ::::
-    ::
-        wide
-      %+  (most =+([* *] [%link -<]))
-        dig 
-      %+  (most =+([* *] [%poke -<]))
-        cab
-      |~  pose
-        (cold [%rock 0] amp)
-        (cold [%rock 1] bar)
-        (cold [%base %flag] ask)
-        (cold [%base %blur] ras)
-        (cold [%base %cell] hat)
-        (cold [%base %atom] vat)
-      ::
-        %+  stag
-          %rock
-        |~  pose
-          del
-          quo
-          |~(pfix (just '0') (just 'x') hex)
-          |~(pfix mit sym)
-          (cold 0 sig)
-        ==
-      ::
-        (stag %call (ifix [lep pel] *nork))
-        (stag %cage (ifix [nom mon] *nork))
-        (stag %flow (ifix [sud dus] *nork))
-        (stag %pick (ifix [der red] *nork))
-      ::
-        (stag %name |~(plug sym |~(pfix ben main)))
-        (stag %flip |~(pfix hop main))
-        (stag %coin |~(pfix amp main))
-        (stag %punt |~(pfix ras main))
-        (stag %grip |~(pfix cab main))
-        (stag %cool |~(pfix sig main))
-        (stag %cast |~(plug |~(pfix tic main) |~(pfix tic main)))
-      ::
-        %+  stag
-          %take
-        |~  plug
-          %+  cook
-            =+(*(list cord) |=((flip -<)))
-          %+  *more
-            |~  pose
-              sym
-              (stag %frag beg)
-              (stag %frag |~(pfix dot del))
-              (stag %pith |~(pfix hat sym))
-            ==
-          |~  pfix
-            dot
-            |~  pose
-              sym
-              (stag %frag beg)
-              (stag %frag del)
-              (stag %pith |~(pfix hat sym))
-            ==
-          ==
-        ::
-          |~(pose (ifix [lep pel] ((some ~ glop) *norb)) (free ~))
-        ==
-      ==
-    ::
-    ::::
-    ::::
-    ::
-        cape
-      =+  [dif=rule tuq=*text har=nora]
-      |:
-      |~(pfix dif (stag tuq (knot har)))
-    ::::
-    ::
-        jack
-      =+  [daz=rule]
-      |:
-      ?:(mot |~(sfix |~(plug gap ben ben) daz) daz)
-    ::::
-    ::
-        knot
-      =+  dux=nora
-      |:
-      ?:  mot
-        |~(pose |~(pfix gap *dux) (ifix [lep pel] *dux(mot |)))
-      (ifix [lep pel] *dux)
-    ::::
-    ::
-        nora  |=(main)
-        norb  |=(|~(gunk main main))
-        norc  |=(|~(gunk main main main))
-        nord  |=(|~(gunk main main main main))
-        nore  |=(|~(gunk sym main))
-        norf  |=((jack ((some ~ gunk) main)))
-        norg  |=((jack ((some ~ glop) norb)))
-        norh  |=((jack ((some ~ glop) nore)))
-        nori  |=(|~(gunk main norf))
-        norj  |=(|~(gunk main norg))
-        nork  |=(|~(gunk main ((some ~ gunk) main)))
-        norl  |=((free ~))
-    ::::
-    ::
-        norm
-      |~  pose 
-        |~(pfix ask nask)
-        |~(pfix bar nbar)
-        |~(pfix ben nben)
-        |~(pfix dig ndig)
-        |~(pfix hat nhat)
-        |~(pfix hop nhop)
-        |~(pfix lom nlom)
-        |~(pfix mit nmit)
-      ==
-    ::
-    ::::
-    ::::
-    ::
-        nask
-      |~  pose
-        (cape der %else norb)
-        (cape hop %flip nora)
-        (cape dot %lest norc)
-        (cape ben %like norb)
-        (cape ras %mesh nori)
-        (cape amp %sand norf)
-        (cape nub %sift norj)
-        (cape sig %step norc)
-        (cape dig %test norc)
-        (cape red %then norb)
-      ==
-    ::::
-    ::
-        nbar
-      |~  pose
-        (cape sig %bond nori)
-        (cape ben %gate nora)
-        (cape mit %lift norh)
-        (cape ras %load norh)
-        (cape nub %loop nora)
-        (cape ask %pick norf)
-        (cape dig %ramp nora)
-      ==
-    ::::
-    ::
-        nben
-      |~  pose
-        (cape der %knit norb)
-        (cape red %link norb)
-        (cape nub %pull norb)
-        (cape pod %push norb)
-      ==
-    ::::
-    ::
-        ndig
-      |~  pose
-        (cape ras %cage norf)
-        (cape nub %cell norb)
-        (cape hat %qual nord)
-        (cape pod %trel norc)
-      ==
-    ::::
-    ::
-        ndot
-      |~  pose
-        (cape hat %bump nora)
-        (cape ask %deep nora)
-        (cape ras %nock nora)
-        (cape ben %twin nora)
-      ==
-    ::::
-    ::
-        nhat
-      |~  pose
-        (cape nub %cast norb)
-        (cape mit %clip norb)
-        (cape sig %cool nora)
-        (cape ben %name nore)
-        (cape dig %sure norb)
-        (cape pod %sock norb)
-        (cape ras %wash nora)
-      ==
-    ::::
-    ::
-        nhop
-      |~  pose
-        (cape hop %bail norl)
-        (cape mit %boot norl)
-        (cape dax %dbug nora)
-        (cape tic %mega nora)
-        (cape dig %meta nora)
-      ==
-    ::::
-    ::
-        nlom
-      |~  pose
-        (cape nub %coin nora)
-        (cape pod %grip nora)
-      ==
-    ::::
-    ::
-        nmit
-      |~  pose
-        (cape nub %call norb)
-        (cape cab %poke norb)
-        (cape ras %punt nora)
-        (cape dot %hear norb)
-        (cape ben %take norj) 
-        (cape pod %howl norc)
-        (cape hat %wail nord)
-      ==
-    ::
-    ::::
-    ==
-
-  ::
-  ::::
-  ::
       rake
   ::
     =+  gen=*gene
@@ -1830,7 +1259,7 @@
         ::
             [%take p=*rope q=*rack]
           =+  lar=(seek p.gen)
-          =+  rem=(turn q.gen =+([p=*gene q=*gene] |=([p $(gen q)])))
+          =+  rem=(turn q.gen =+([p=*gene q=*gene] |=([p $.-.$(gen q)])))
           ?-  q.lar 
               ~   (boil(sut r.lar) p.lar rem)
               ^   [3 (boil(sut q.u.q.lar) p.lar rem) [0 (peg p.lar p.u.q.lar)]]
@@ -2018,7 +1447,7 @@
       :: 
           [%take p=*rope q=*rack]
         =+  lar=(seek p.gen)
-        =+  mut=(turn q.gen =+([p=*gene q=*gene] |=([p $(gen q)])))
+        =+  mut=(turn q.gen =+([p=*gene q=*gene] |=([p $.-.$(gen q)])))
         ?~  q.lar
           (edit(sut r.lar) mut)
         [%hold (edit(sut q.u.q.lar) mut) r.u.q.lar]
@@ -2035,7 +1464,7 @@
       =+  gen=*gene
       |=
       ?<  (has:in_fan [sut gen])
-      =>  %=(. fan (put:in_fan sut))
+      =>  %=(. fan (put:in_fan [sut gen]))
       (play gen)
     ::::
     ::
@@ -2321,8 +1750,8 @@
           ::
               [%fork *]
             %+  swim
-              =+(*type |=([~ u=dext(sut -<)]))
-            =+([*type *type] |=([%fork -<- ->+]))
+              =+(*type |=(`*(unit type)`[~ u=dext(sut -<)]))
+            =+([*type *type] |=([%fork -<- -<+]))
           ::
               [%fuse *]
             :+  %fuse
@@ -2362,7 +1791,7 @@
           (clap $(..slip (slip 2)) $(..slip (slip 3)) =+([*plan *plan] |=(-<-)))
         ::
             [%core *]
-          =+  dab=?-(q.sut [%hard *] p.q.sut, [%soft sut] q.q.sut)
+          =+  dab=?-(q.sut [%hard *] p.q.sut, [%soft *] q.q.sut)
           =+  zem=(look:gull_dab cog)
           ?~  zem
             $(..slip (slip 2))
@@ -2375,7 +1804,7 @@
         ::
             [%fork *]
           %+  swim
-            =+(*type |=([~ $(sut -<)]))
+            =+(*type |=(`*(unit (unit plan))`[~ $.-.$(sut -<)]))
           =+  [lep=*(unit plan) gam=*(unit plan)]
           |=
           ?~  lep
@@ -2432,8 +1861,8 @@
         ::
             [%fork *]
           %+  swim
-            =+(*type |=([~ u=$(sut -<)]))
-          =+([*type *type] |=((flor:lily -<- -<+)))
+            =+(*type |=(`*(unit tool)`[~ u=$.-.$(sut -<)]))
+          =+([*tool *tool] |=((flor:lily -<- -<+)))
         ::
             [%hold *]
           ?<  (has:in_vit [bar sut])
@@ -2459,7 +1888,7 @@
         ::
             [%fork *]   
           %+  swim
-            =+(*type |=([~ u=$.-.$(sut -<)]))
+            =+(*type |=(`*(unit type)`[~ u=$.-.$(sut -<)]))
           =+([*type *type] |=([%fork -<]))
         ==
       ::::
@@ -2472,7 +1901,7 @@
           &
         ?:  null
           |
-        =+  gil=*(pool &[[*(list type) *type] [*(list type) *type]])
+        =+  gil=*(pool &[..slip ..slip])
         =+  ref=..slip(sut bon, bar ~)
         =<  dext
         |*
@@ -2500,7 +1929,7 @@
             ?.  ?=(*<%atom %blur [%cell *] [%cube *] [%core *]> sut.ref)
               sint
             %+  swim
-              =+(*type |=([~ u=dext(sut -<)]))
+              =+(*type |=(`*(unit &?)`[~ u=dext(sut -<)]))
             =+([? ?] |=(?|(-<- ->+)))
           ::
               [%hold *]
@@ -2534,8 +1963,8 @@
             ==
           ::
               [%fork *]
-            %+  swim(..slip ref)
-              =+(*type |=([~ u=dext(sut.ref -<)]))
+            %+  swim(..slip ^@(ref))
+              =+(*type |=(`*(unit &?)`[~ u=dext(sut.ref -<)]))
             =+([? ?] |=(?&(-<- ->+)))
           ::
               [%hold *]
@@ -2633,8 +2062,9 @@
       ::
           swim
         =+ [hef==+(*type |=(*(unit))) zan==+([* *] |=(-<-))]
-        |:
-        %-  need
+        |:  |-
+        =-  ?~(voc $(sut %blot) u.voc)
+        ^=  voc
         |-
         ^-  (hef sut)
         ?:  ?=([%fork *] sut)

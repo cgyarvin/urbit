@@ -115,7 +115,7 @@ wide
 
 wide_a
   : wide_b
-  | tok_term si_ben wide_b
+  | tok_term si_ben wide
     { $$ = _ytrel(u4_atom_name, $1, $3); }
   ;
 
@@ -600,6 +600,7 @@ tall
         tok_term_load
           : ca { $$ = _ycell($1, u4_noun_0); }
                  | cd { $$ = _ycell($1, u4_noun_0); }
+                 | '-' { $$ = _ycell($1, u4_noun_0); }
                  | ca tok_term_load  { $$ = _ycell($1, $2); }
                  | cd tok_term_load  { $$ = _ycell($1, $2); }
                  | '-' tok_term_load { $$ = _ycell($1, $2); }

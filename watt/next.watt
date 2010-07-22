@@ -755,94 +755,136 @@
   ::::
   ::::
   ::
-      wide
-    =+  doc=tube
-    |:
-    ^-  ((give *gene) doc)
-    %.  doc
-    |~  pose
-      wide-rock 
-      wide-base
-      wide-cage
-      wide-rope
-    ==
-  ::::
-  ::
-      wide-rock
-    %+  cook
-      =+(* |:([%rock -<]))
-    |~  pose
-      |~(pfix (just '0') (just 'x') hex)
-      del
-      (cold & amp)
-      (cold | bar)
-      |~(pfix mit sym)
-      (cold %% |~(plug mit mit))
-    ==
-  ::::
-  ::
-      wide-base
-    %+  cook
-      =+(* |:([%base -<]))
-    |~  pose
-      (cold %flag ask)
-      (cold %blur ras)
-      (cold %cell hat)
-      (cold %atom pat)
-    ==
-  ::::
-  ::
-      wide-cage
-    (cook =+(* |:([%cage -<])) (ifix [nom mon] bank-wide))
-  ::::
-  ::
-      wide-rope
-    (cook =+(* |:([%take -< ~])) wire)
-  ::::
-  ::
-      bank-wide
-    (most ace wide)
-  ::::
-  ::
-      wire
-    %+  cook
-      =+(* |:((flip `*rope`-<)))
-    %+  most
-      dot
-    |~  pose
-      %+  cook
-        =+(* |:([%port -<]))
-      sym
+      read
+    =+  zot=*(list byte)
+    |=  
+    =+  mot=`?`&
+    ^-  *gene
+    =<  (good (main tube_zot))
+    |*
+    ::::
     ::
-      %+  cook
-        =+(* |:([%frag -<]))
+        mash  =+(doc=tube |:(?:(mot (gap doc) (|~(plug com ace) doc))))
+        muck  =+(doc=tube |:(?:(mot (gap doc) (ace doc))))
+        gunk  (glue muck) 
+        glop  (glue mash)
+    ::::
+    ::
+        main
+      =+  doc=tube
+      |:
+      %.  doc
+      wide
+      :: ?:  mot
+      ::  |~(pose gene-tall =>(.(mot |) wide))
+    ::::
+    ::
+        wide
+      =+  doc=tube
+      |:
+      ^-  ((give *gene) doc)
+      %.  doc
       |~  pose
-        |~(pfix dot del)
-        (cold 1 dot)
-        beto
+        %+  cook
+          =+([* *] |:([%knit [%take -<- ~] -<+]))
+        |~((glue dig) rope- wide)
+      ::
+        %+  stag
+          %name
+        |~((glue ben) sym wide)
+      ::
+        |~  (bend =+([* *] |:([%poke -<- -<+])))
+          |~  pose
+            (stag %cage (ifix [nom mon] (most ace wide)))
+            (stag %flow (ifix [sud dus] (more ace wide)))
+            (stag %pick (ifix [der red] (most ace wide)))
+            (stag %flip |~(pfix hop wide))
+            (stag %coin |~(pfix amp wide))
+            (stag %grip |~(pfix cab wide))
+            (stag %cool |~(pfix sig wide))
+            (stag %cast |~(plug |~(pfix tic wide) |~(pfix tic wide)))
+            (stag %call (ifix [lep pel] (most ace wide)))
+          ::
+            |~  (comp =+([* *] |:([%take -<- -<+])))
+              rope-
+              |~  pose
+                %+  ifix
+                  [lep pel] 
+                (more |~(plug com ace) |~((glue ace) wide wide))
+              ::
+                (free ~)
+              ==
+            ==
+          ::
+            %+  stag
+              %rock
+            |~  pose
+              |~(pfix (just '0') (just 'x') hex)
+              del
+              (cold & amp)
+              (cold | bar)
+              |~(pfix mit sym)
+              (cold %% |~(plug mit mit))
+            ==
+          ::
+            %+  stag
+              %base
+            |~  pose
+              (cold %flag ask)
+              (cold %blur ras)
+              (cold %cell hat)
+              (cold %atom pat)
+            ==
+          ==
+        ::
+          |~(pfix cab wide)
+        ==
       ==
-    ==
-  ::::
-  ::
-      beto
-    =+  doc=tube 
-    |:
-    ^-  ((give @) doc)
-    %.  doc
-    |~  (bend =+([@ @] |=((peg -<- -<+))))
-      |~(pose (cold 2 nub) (cold 3 pod))
-      galu
-    ==
-  ::::
-  ::
-      galu
-    =+  doc=tube 
-    |:
-    ^-  ((give @) doc)
-    %.  doc
-    |~  (bend =+([@ @] |=((peg -<- -<+))))
-      |~(pose (cold 2 der) (cold 3 red))
-      beto
+    ::::
+    ::
+      
+    ::::
+    ::
+        rope-
+      %+  cook
+        =+(* |:((flip `*rope`-<)))
+      %+  most
+        dot
+      |~  pose
+        %+  cook
+          =+(* |:([%port -<]))
+        sym
+      ::
+        %+  cook
+          =+(* |:([%frag -<]))
+        |~  pose
+          |~(pfix dot del)
+          (cold 1 dot)
+          axis-nub
+        ==
+      ==
+    ::::
+    ::
+        axis-nub
+      =+  doc=tube 
+      |:
+      ^-  ((give @) doc)
+      %.  doc
+      |~  (bend =+([@ @] |=((peg -<- -<+))))
+        |~(pose (cold 2 nub) (cold 3 pod))
+        axis-der
+      ==
+    ::::
+    ::
+        axis-der
+      =+  doc=tube 
+      |:
+      ^-  ((give @) doc)
+      %.  doc
+      |~  (bend =+([@ @] |=((peg -<- -<+))))
+        |~(pose (cold 2 der) (cold 3 red))
+        axis-nub
+      ==
     ==
   ::::
   ::
@@ -851,13 +893,14 @@
       test
     =+  zot=*tape
     |=
-    (good (wide tube_zot))
+    (read zot)
+    :: (good (wide tube_zot))
   ::::
   ::
       stip
     =+  zot=*tape
     |=
-    (good (beto tube_zot))
+    (good (|~(pose (free ~) (free ~)) tube_zot))
   ::::
   ::
       stig
@@ -1127,7 +1170,7 @@
     =+  zep=[p=*byte q=*byte]
     |=
     =+  doc=tube
-    |=
+    |:
     =+  gon=*doc
     ?~  p.gon
       (fail doc)
@@ -1139,7 +1182,7 @@
       stag
     =+  [gob=* sef=rule]
     |:
-    =+  doc=tube
+    =+  doc=doc.sef
     |=
     =+  vex=(sef doc)
     ?-  -.vex
