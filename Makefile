@@ -20,7 +20,7 @@ BIN=run
 
 RM=rm -f
 CC=gcc
-CLD=gcc -O2 -bind_at_load -L/sw/lib
+CLD=gcc -O2 -L/sw/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
@@ -29,6 +29,10 @@ GENERATED=generated
 DEFINES=-DU3_OS_$(OS) -DU3_OS_ENDIAN_$(ENDIAN)\
 	-DU4_ENDIAN_$(ENDIAN) -DU4_OS_$(OS)
 CFLAGS=-O2 -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
+
+ifeq ($(OS),osx)
+  CLDOSFLAGS=-bind_at_load
+endif
 CWFLAGS=-Wall
 
 .y.o:
@@ -261,7 +265,7 @@ OFILES= \
 
 $(BIN)/vere: $(OFILES)
 	mkdir -p $(BIN)
-	$(CLD) -o $(BIN)/vere $(OFILES) -lgmp -lreadline -ltermcap
+	$(CLD) $(CLDOSFLAGS) -o $(BIN)/vere $(OFILES) -lgmp -lreadline -ltermcap
 
 tags:
 	ctags -R -f .tags --exclude=root
