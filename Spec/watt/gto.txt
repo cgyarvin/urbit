@@ -1,6 +1,6 @@
 Watt GTO: Gran Tabula Operazioni 
 
-(Copied from watt.watt - any discrepancies favor it.)
+(Copied from watt.watt - any discrepancies favor watt.watt.)
 
 Gene - AST
       gene
@@ -11,7 +11,6 @@ Gene - AST
       [%meta p=*gene]                             ::  !:  hopdig
       [%dbug p=*gene]                             ::  !#  hopdax
       [%spot p=*spot q=*gene]
-      [%home p=*term q=*gene]
     ::
       [%else p=*gene q=*gene]                     ::  ?<  askder
       [%flip p=*gene]                             ::  ?!  askhop
@@ -26,12 +25,13 @@ Gene - AST
       [%then p=*gene q=*gene]                     ::  ?>  askred
     ::
       [%bond p=*gene q=*bank]                     ::  |~  barsig
+      [%bund p=*gene q=*gene r=*bank]             ::  |@  barpat
       [%gate p=*gene]                             ::  |=  barben
       [%lift p=*menu]                             ::  |%  barmit
       [%load p=*menu]                             ::  |*  barras
       [%loop p=*gene]                             ::  |-  barnub
       [%pick p=*bank]                             ::  |?  barask
-      [%slam p=*gene]                             ::  |:  bardig
+      [%ramp p=*gene]                             ::  |:  bardig
     ::
       [%knit p=*gene q=*gene]                     ::  =<  bender
       [%link p=*gene q=*gene]                     ::  =>  benred
@@ -41,13 +41,13 @@ Gene - AST
       [%cage p=*bank]                             ::  :*  digras
       [%cell p=*gene q=*gene]                     ::  :-  dignub
       [%flow p=*bank]                             ::  :~  digsig
-      [%qual p=*gene q=*gene r=*gene s=*gene]     ::  :^  digmit
+      [%qual p=*gene q=*gene r=*gene s=*gene]     ::  :^  dighat
       [%trel p=*gene q=*gene r=*gene]             ::  :+  digpod
     ::
       [%bump p=*gene]                             ::  .^  dothat
       [%deep p=*gene]                             ::  .?  dotask
-      [%nock p=*gene]                             ::  .*  dotras
-      [%twin p=*gene]                             ::  .=  dotben
+      [%nock p=*gene q=*gene]                     ::  .*  dotras
+      [%twin p=*gene q=*gene]                     ::  .=  dotben
     ::
       [%cast p=*gene q=*gene]                     ::  ^-  hatnub
       [%clip p=*gene q=*gene]                     ::  ^%  hatmit

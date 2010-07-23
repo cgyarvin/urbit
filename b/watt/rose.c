@@ -114,11 +114,6 @@ _rose_etch(u4_crow p,
         u4_tool vac = _rose_make(p, sut, q_dab);
         u4_tool foh = _rose_make(p, gar, q_dab);
 
-        if ( !u4_n_eq(vac, foh) ) {
-          printf("soft foh!\n");
-          u4_brut(p, "sut", sut);
-          u4_brut(p, "gar", gar);
-        }
         return u4_say(u4_n_eq(vac, foh));
       }
     }
@@ -220,12 +215,6 @@ _rose_edit(u4_crow p,
     u4_tack tac = _lark_feed(p, sut, u4_noun_0, mut);
     u4_type hoc = _iris_burn(p, u4_atom_blur, u4_noun_0, u4_noun_1, u4_no, tac);
 
-#if 0
-    u4_err(p->lan, "gain: tac", tac);
-    u4_brut(p, "gain: hoc", hoc);
-    u4_brut(p, "gain: sut", sut);
-    printf("\n");
-#endif
     return _rose_both(p, sut, hoc);
   }
 u4_type
@@ -234,9 +223,7 @@ _rose_gain(u4_crow p,
            u4_gene gen)
 {
   u4_plot zet = _rose_gain_hunt(p, sut, gen);
-#if 0
-  u4_err(p->lan, "gain: zet", zet);
-#endif
+
   return _rose_gain_gild(p, sut, zet);
 }
 
@@ -1013,8 +1000,6 @@ _rose_seek(u4_crow p,
                   u4_type bon)
   {
     if ( !u4_so(_iris_nest(p, sut, u4_noun_0, u4_noun_1, bon)) ) {
-      u4_brut(p, "nest: sut", sut);
-      u4_brut(p, "nest: bon", bon);
       return _crow_fail(p, "nest: show");
     }
     else {
@@ -1158,18 +1143,7 @@ _rose_seek(u4_crow p,
       u4_noun q_lar = u4_ch(u4_ct(lar));
       u4_type r_lar = u4_ct(u4_ct(lar));
 
-#if 0
-      if ( !u4_n_zero(p->bug) ) {
-        u4_err(lan, "p_lar", u4_ch(lar));
-        u4_brut(p, "r_lar", r_lar);
-      }
-#endif
       if ( u4_n_zero(q_lar) ) {
-#if 0
-        if ( !u4_n_zero(p->bug) ) {
-          printf("\n");
-        }
-#endif
         return _rose_safe(p, r_lar, huz);
       }
       else {

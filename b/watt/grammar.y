@@ -83,7 +83,7 @@
  
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 69
+  %expect 70
 
   %pure-parser
   %locations
@@ -288,7 +288,7 @@ wide_c
     wide_norm: di_mitdot body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_mitpod body_c_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_mithat body_f_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_mitbar body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_mitcab body_b_wide    { $$ = _ycell($1, $2); }
 
   /** Wide - bodies.
   **/
@@ -403,7 +403,7 @@ tall
     tall_norm: di_mitdot w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_mitpod w body_c_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_mithat w body_f_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_mitbar w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_mitcab w body_b_tall    { $$ = _ycell($1, $3); }
 
   /** Tall - bodies.
   **/
@@ -542,7 +542,7 @@ tall
     di_mitdot: si_mit si_dot  { $$ = u4_atom_hear; }
     di_mitpod: si_mit si_pod  { $$ = u4_atom_howl; }
     di_mithat: si_mit si_hat  { $$ = u4_atom_wail; }
-    di_mitbar: si_mit si_bar  { $$ = u4_atom_poke; }
+    di_mitcab: si_mit si_cab  { $$ = u4_atom_poke; }
 
   /* Signs.
   */

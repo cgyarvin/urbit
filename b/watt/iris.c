@@ -289,9 +289,6 @@ _iris_cull(u4_crow p,
           }
           else {
             u4_burp(lan, "cog", u4_prep_textual(lan, cog));
-            u4_burp(lan, "bar", _dump_durb(p, bar));
-            u4_brut(p, "p_sut", p_sut);
-            u4_brut(p, "q_sut", q_sut);
             return _crow_fail(p, "fork conflict a");
           }
         }
@@ -317,12 +314,6 @@ _iris_cull(u4_crow p,
           }
           else {
             u4_burp(lan, "cog", u4_prep_textual(lan, cog));
-            u4_err(lan, "pu_lep", u4_ch(u_lep));
-            u4_err(lan, "pu_gam", u4_ch(u_gam));
-
-            u4_brut(p, "p_sut", p_sut);
-            u4_brut(p, "q_sut", q_sut);
-
             return _crow_fail(p, "fork conflict c");
           }
         }
@@ -374,8 +365,6 @@ _iris_cull(u4_crow p,
       else {
 #if 0
         u4_burp(lan, "cog", u4_prep_textual(lan, cog));
-        u4_brut(p, "p_sut", p_sut);
-        u4_brut(p, "q_sut", q_sut);
         return _crow_fail(p, "cell conflict");
 #else
         return taf;
@@ -651,8 +640,6 @@ _iris_find(u4_crow p,
       u4_noun duq = u4_kc(lan, sut, bar);
 
       if ( u4_bag_in(duq, vit) ) {
-        u4_brut(p, "fish rec: sut", sut);
-
         return _crow_fail(p, "fish recursion");
       } 
       else {
@@ -853,20 +840,6 @@ _iris_half(u4_crow p,
     u4_lane lan = p->lan;
     u4_noun p_sut, q_sut;
     u4_noun p_bon, q_bon;
-
-#if 0
-    if ( !u4_n_zero(p->bug) ) {
-      if ( !u4_n_zero(bar) ) u4_burp(lan, "ind: bar", _dump_durb(p, bar));
-      u4_brut(p, "ind: sut", sut);
-      if ( !u4_n_zero(nef) ) u4_burp(lan, "ind: nef", _dump_durb(p, nef));
-      u4_brut(p, "ind: bon", bon);
-      printf("sut, bon, mug sut, mug bon: %x %x %x %x\n", 
-          sut, bon, u4_n_nub(sut), u4_n_nub(bon));
-      u4_err(lan, "dc sut", _dump_size(lan, sut));
-      u4_err(lan, "dc bon", _dump_size(lan, bon));
-      printf("\n");
-    }
-#endif
 
     if ( u4_n_eq(sut, u4_atom_atom) ) {
       if ( u4_n_eq(bon, u4_atom_atom) ) {
@@ -1277,13 +1250,5 @@ _iris_snap(u4_crow p,
 
   sap = _iris_snap_dext(p, sut, bar, axe, bon);
 
-#if 0
-  if ( !u4_n_zero(p->bug) ) {
-    u4_brut(p, "sut", sut);
-    u4_brut(p, "bon", bon);
-    u4_brut(p, "sap", sap);
-    printf("\n");
-  }
-#endif
   return sap;
 }
