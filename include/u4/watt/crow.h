@@ -59,9 +59,12 @@
         */
         u4_lane lan;
 
-        /* Internal counter for perf testing.
+        /* Internal counters for perf testing.
         */
         uint32_t prf;
+        uint32_t prg;
+        uint32_t prh;
+        uint32_t pri;
 
         /* Set [*type *gene] in repo.
         */
@@ -83,9 +86,17 @@
         */
         u4_book vus;
 
+        /* Book to memoize null.
+        */
+        u4_book tyc;
+
         /* Book to memoize orth.
         */
         u4_book gam;
+
+        /* Book to memoize show.
+        */
+        u4_book hos;
 
         /* Book to memoize play.
         */
@@ -95,6 +106,10 @@
         */
         u4_book niq;
 
+        /* Book to memoize safe.
+        */
+        u4_book fac;
+
         /* Book to memoize open.
         */
         u4_book pon;
@@ -102,6 +117,10 @@
         /* Book to memoize find.
         */
         u4_book fin;
+
+        /* Book to memoize half.
+        */
+        u4_book huf;
       } 
         *u4_crow;
 

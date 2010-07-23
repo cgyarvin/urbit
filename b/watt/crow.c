@@ -98,17 +98,24 @@ u4_crow_init(u4_crow p,
 {
   p->lan = lan;
   p->prf = 0;
+  p->prg = 0;
+  p->prh = 0;
+  p->pri = 0;
 
   p->fan = u4_noun_0;
   p->ver = u4_noun_0;
   p->bug = u4_noun_0;
   p->meb = u4_noun_0;
   p->vus = u4_noun_0;
+  p->tyc = u4_noun_0;
   p->gam = u4_noun_0;
+  p->hos = u4_noun_0;
   p->zor = u4_noun_0;
   p->niq = u4_noun_0;
+  p->fac = u4_noun_0;
   p->pon = u4_noun_0;
   p->fin = u4_noun_0;
+  p->huf = u4_noun_0;
 }
 
 /* full:crow (fake)
@@ -129,19 +136,25 @@ u4_crow_full(u4_lane lan,
     u4_tool tol;
 
     tol = _rose_make(&crow, sub, gen);
-    printf(":");
+    printf(":"); fflush(stdout);
 
+#if 1
     boz = _rose_show(&crow, sub, gen);
     if ( !u4_so(boz) ) {
       printf("type error\n");
       return u4_exit;
     }
-    printf(":");
+    printf(":"); fflush(stdout);
+#endif
 
     typ = _rose_play(&crow, sub, gen);
     printf(":\n");
 
     // printf("prf: %d\n", crow.prf);
+    // printf("prg: %d\n", crow.prg);
+    // printf("prh: %d\n", crow.prh);
+    // printf("pri: %d\n", crow.pri);
+
     return u4_kc(lan, typ, tol);
   }
 }

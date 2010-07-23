@@ -239,7 +239,6 @@ wide_c
     wide_norm: di_askhop body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_askben body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_asknub body_h_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_askpod body_h_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_askras body_i_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_benpod body_b_wide    { $$ = _ycell($1, $2); }
@@ -357,7 +356,6 @@ tall
     tall_norm: di_askhop w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_askben w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_asknub w body_h_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_askpod w body_h_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_askras w body_i_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_benpod w body_b_tall    { $$ = _ycell($1, $3); }
@@ -495,7 +493,6 @@ tall
     di_askhop: si_ask si_hop  { $$ = u4_atom_flip; }
     di_askben: si_ask si_ben  { $$ = u4_atom_like; }
     di_asknub: si_ask si_nub  { $$ = u4_atom_sift; }
-    di_askpod: si_ask si_pod  { $$ = u4_atom_reef; }
     di_askras: si_ask si_ras  { $$ = u4_atom_mesh; }
 
     di_barnub: si_bar si_nub  { $$ = u4_atom_loop; }
