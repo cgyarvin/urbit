@@ -231,6 +231,7 @@ _vere_transform(uz_machine mac,
   }
 }
 
+#if 0
 /* _vere_construct(): process construction.  Produces [tip nun].
 */
 static uz_noun
@@ -240,6 +241,7 @@ _vere_construct(uz_machine mac,
   return _vere_transform
     (mac, _vere_source(mac, uz_ch(mac, pel)), uz_ct(mac, pel));
 }
+#endif
 
 /* _vere_command(): process command.
 */
@@ -247,37 +249,14 @@ static void
 _vere_command(uz_machine mac,
               uz_noun    fex)
 {
-  uz_noun p_fex, q_fex;
+  uz_shoe sho = uz_m_depart(mac);
+  {
+    uz_noun lon = uz_g_express(mac, fex);
 
-  if ( uz_c_pq(mac, fex, uz_s4('g','r','i','k'), &p_fex, &q_fex) ) {
-    printf(">: not supported\n");
+    _vere_print(mac, 0, lon);
   }
-  else if ( uz_c_pq(mac, fex, uz_s4('c','o','r','m'), &p_fex, &q_fex) ) {
-    printf("=: not supported\n");
-  }
-  else if ( uz_c_p(mac, fex, uz_s4('p','a','l','q'), &p_fex) ) {
-    uz_shoe sho = uz_m_depart(mac);
-    {
-      uz_noun lon = _vere_construct(mac, p_fex);
-
-      _vere_print(mac, 0, lon);
-    }
-    uz_m_retreat(mac, sho);
-    uz_m_zap(mac);
-  }
-  else if ( uz_c_p(mac, fex, uz_s4('g','u','l','f'), &p_fex) ) {
-    uz_shoe sho = uz_m_depart(mac);
-    {
-      uz_noun lon = uz_g_express(mac, p_fex);
-
-      _vere_print(mac, 0, lon);
-    }
-    uz_m_retreat(mac, sho);
-    uz_m_zap(mac);
-  }
-  else {
-    printf("vere: strange command\n");
-  }
+  uz_m_retreat(mac, sho);
+  uz_m_zap(mac);
 }
 
 /* vere_line(): process command line.
@@ -299,7 +278,7 @@ vere_line(uz_machine mac,
   else {
     uz_l_except(mac, env);
     {
-      uz_noun fex = uz_t_vere(mac, lug);
+      uz_noun fex = uz_t_watt(mac, lug);
 
       _vere_command(mac, fex);
     }
@@ -324,12 +303,12 @@ vere_boot(uz_machine mac)
   else {
     uz_l_except(mac, env);
     {
-      uz_noun src = uz_k_file(mac, uz_k_string(mac, "Cato/k300.watt"));
+      uz_noun src = uz_k_file(mac, uz_k_string(mac, "watt/watt.watt"));
       uz_noun ker = uz_t_watt(mac, src);
 
       uz_r_express(mac, ker);
 
-      // uz_f_print_type(mac, "boot: type", uz_ch(mac, mac->har));
+      uz_f_print_type(mac, "boot: type", uz_ch(mac, mac->har));
       // uz_f_print(mac, "boot: noun", uz_ct(mac, mac->har));
     }
   }

@@ -20,7 +20,7 @@ BIN=run
 
 RM=rm -f
 CC=gcc
-CLD=gcc -bind_at_load -L/sw/lib
+CLD=gcc -O2 -bind_at_load -L/sw/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
@@ -28,7 +28,7 @@ INCLUDE=include
 GENERATED=generated
 DEFINES=-DU3_OS_$(OS) -DU3_OS_ENDIAN_$(ENDIAN)\
 	-DU4_ENDIAN_$(ENDIAN) -DU4_OS_$(OS)
-CFLAGS=-g -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
+CFLAGS=-O2 -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 CWFLAGS=-Wall
 
 .y.o:
@@ -195,7 +195,15 @@ U4_NOCK_OFILES=\
        b/nock/pure.o
 
 U4_WATT_OFILES=\
+       b/watt/crow.o \
+       b/watt/dump.o \
        b/watt/grammar.o \
+       b/watt/gull.o \
+       b/watt/iris.o \
+       b/watt/lark.o \
+       b/watt/lily.o \
+       b/watt/open.o \
+       b/watt/rose.o
 
 U4_OFILES= \
        $(U4_CAKE_OFILES) \
@@ -203,9 +211,6 @@ U4_OFILES= \
        $(U4_FAKE_OFILES) \
        $(U4_LIB_OFILES) \
        $(U4_NOCK_OFILES) \
-       $(U4_MILL_OFILES) \
-       $(U4_MX_OFILES) \
-       $(U4_MQ_OFILES) \
        $(U4_WATT_OFILES)
 
 C_OFILES=\

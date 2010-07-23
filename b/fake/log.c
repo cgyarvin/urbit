@@ -4,6 +4,17 @@
 */
 #include "u4/all.h"
 
+/* u4_unit_need():
+*/
+u4_noun
+u4_unit_need(u4_noun n)
+{
+  if ( u4_n_zero(n) ) {
+    return u4_exit;
+  }
+  else return u4_ct(n);
+}
+
 /* u4_log_at():
 **
 **   Produce the nth cow in (log), or bull.

@@ -74,6 +74,9 @@
     */
       typedef u4_noun u4_mote;
 
+    /* Units.
+    */
+      typedef u4_noun u4_unit;
 
   /** Dependent includes.
   **/

@@ -15,6 +15,8 @@
   **/
     static u4_noun _bi_read_sack(u4_lane lane, u4_noun bal);
 
+    typedef u4_noun u4_path;
+    typedef u4_noun u4_sack;
 
 /* _bi_import(): import a noun from u4 to u3.
 */
@@ -105,10 +107,10 @@ u3_b_print_type(u3_l       l,
     }
   }
   else {
-    struct _u4_mill milr;
+    struct _u4_crow crow;
 
-    u4_mill_init(&milr, lane);
-    u4_burp(lane, c_tid, _mill_dump(&milr, _bi_export(l, lane, piv)));
+    u4_crow_init(&crow, lane);
+    u4_burp(lane, c_tid, _dump_type(&crow, _bi_export(l, lane, piv)));
   }
 }
 
@@ -368,7 +370,7 @@ u3_b_hume(u3_l   l,
   }
 }
 
-/* u3_b_mill():
+/* u3_b_full():
 **
 **   Use bunt routines to map (type gene) to (type form).
 **
@@ -376,7 +378,7 @@ u3_b_hume(u3_l   l,
 **   vub: gene
 */
 u3_rat
-u3_b_mill(u3_l   l,
+u3_b_full(u3_l   l,
           u3_fox gal,
           u3_fox vub)
 {
@@ -387,10 +389,10 @@ u3_b_mill(u3_l   l,
     switch ( bail_code ) {
       default: printf("[weird!]\n"); return u3_none;
 
-      case u4_bail_exit: printf("[mill exit]\n"); return u3_none;
-      case u4_bail_tank: printf("[mill tank]\n"); return u3_none;
-      case u4_bail_trip: printf("[mill trip]\n"); return u3_none;
-      case u4_bail_stub: printf("[mill stub]\n"); return u3_none;
+      case u4_bail_exit: printf("[full exit]\n"); return u3_none;
+      case u4_bail_tank: printf("[full tank]\n"); return u3_none;
+      case u4_bail_trip: printf("[full trip]\n"); return u3_none;
+      case u4_bail_stub: printf("[full stub]\n"); return u3_none;
     }
   } 
   else {
@@ -398,7 +400,7 @@ u3_b_mill(u3_l   l,
     //
     u4_noun n_zyl = _bi_export(l, lane, gal);
     u4_noun n_nes = _bi_export(l, lane, vub);
-    u4_noun n_fut = u4_mill(lane, n_nes, n_zyl);
+    u4_noun n_fut = u4_crow_full(lane, n_zyl, n_nes);
 
     return _bi_import(l, n_fut);
   }
@@ -429,7 +431,7 @@ u3_b_bake(u3_l   l,
   else {
     u4_noun n_zyl = _bi_export(l, lane, gal);
     u4_noun n_nes = _bi_export(l, lane, vub);
-    u4_noun n_fut = u4_mill(lane, n_nes, n_zyl);
+    u4_noun n_fut = u4_crow_full(lane, n_zyl, n_nes);
 
     return _bi_import(l, u4_ct(n_fut));
   }

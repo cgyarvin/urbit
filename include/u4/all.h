@@ -58,11 +58,16 @@
 
     /* Mill - more fake.
     */
+#if 0
 #     include "u4/mill/mill.h"
-
-    /* Wattt - the fake parser.
+#endif
+    /* Bootstrap compiler.
     */
-#     include "u4/watt/watt.h"
+#     include "u4/watt/crow.h"
+
+    /* Fake parser.
+    */
+#     include "u4/watt/parse.h"
 
     /* Filesystem I/O.
     */

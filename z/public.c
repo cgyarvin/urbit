@@ -458,7 +458,7 @@ _uz_g_run_gene(uz_machine mac,
                uz_noun    gen,
                uint8_t    ben)
 {
-  uz_noun cam = uz_t_mill(mac, typ, gen);
+  uz_noun cam = uz_t_full(mac, typ, gen);
   uz_noun val;
 
 #if 1
@@ -618,16 +618,16 @@ uz_p_constant(uz_machine mac,
 /** Built-in functions, typically kernel implemented.
 **/
 
-/* uz_t_mill(): 
+/* uz_t_full(): 
 **
 **   Compile [type gene] to [type form].
 */
 uz_noun
-uz_t_mill(uz_machine mac,
+uz_t_full(uz_machine mac,
           uz_noun    typ,
           uz_noun    gen)
 {
-  u3_rat rat = u3_b_mill(mac->zen, typ, gen);
+  u3_rat rat = u3_b_full(mac->zen, typ, gen);
 
   if ( u3_none == rat ) {
     return uz_x_exit(mac);
@@ -644,7 +644,7 @@ uz_t_make(uz_machine mac,
           uz_noun    typ,
           uz_noun    gen)
 {
-  u3_rat rat = u3_b_mill(mac->zen, typ, gen);
+  u3_rat rat = u3_b_full(mac->zen, typ, gen);
 
   if ( u3_none == rat ) {
     return uz_x_exit(mac);
@@ -852,7 +852,7 @@ uz_line(uz_machine      machine,
   else {
 #if 0
     u3_fox vad = u3_ln_cell(z, u3_cm_cube, 0);
-    u3_rat neb = u3_b_mill(&z->l, jop, vad);
+    u3_rat neb = u3_b_full(&z->l, jop, vad);
 
     if ( u3_none == neb ) {
       return u3_none;
@@ -880,7 +880,7 @@ uz_line(uz_machine      machine,
     */
     u3_fox zul = u3_h(z, z->q.tef);
     u3_fox heg = u3_t(z, z->q.tef);
-    u3_rat bir = u3_b_mill(&z->l, jop, zul);
+    u3_rat bir = u3_b_full(&z->l, jop, zul);
 
     if ( u3_none == bir ) {
       return u3_none;

@@ -84,12 +84,12 @@
         u3_b_hume(u3_l   l,
                   u3_fox wek);
 
-      /* u3_b_mill():
+      /* u3_b_full():
       **
       **   Use bunt routines to map (type gene) to (type form).
       */
         u3_rat
-        u3_b_mill(u3_l   l,
+        u3_b_full(u3_l   l,
                   u3_fox gal,
                   u3_fox vub);
 
