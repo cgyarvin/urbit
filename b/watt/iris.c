@@ -21,8 +21,6 @@
     u4_noun p_tac, q_tac;
     u4_noun p_sut, q_sut;
 
-    p->prg++;
-
     if ( u4_n_zero(tac) ) {
       return sut;
     }
@@ -206,7 +204,6 @@ _iris_burn(u4_crow p,
            u4_flag vef,
            u4_tack tac)
 {
-  p->pri++;
   return _iris_burn_dext(p, sut, bar, axe, vef, tac);
 }
 

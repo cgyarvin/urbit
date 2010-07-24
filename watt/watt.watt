@@ -671,10 +671,11 @@
   ::::
   ::
       byte  &@
+      edge  <[| p=mark] [& p=* q=tube]>
+      mark  &[l=@ c=@]
       tape  (list byte)
       text  &@
-      rule  =+(doc=tube |=(^-(*(edge) [& ~ doc])))
-      mark  &[c=@ l=@]
+      rule  =+(doc=tube |=(^-(*edge [& ~ doc])))
   ::::
   ::
       bass
@@ -688,7 +689,7 @@
       bend
     =+  raq==+([* *] |:(-<))
     |:
-    =+  [vex=*(edge) sab=rule]
+    =+  [vex=*edge sab=rule]
     |:
     ?-  -.vex
         |   vex
@@ -696,7 +697,7 @@
       =+  yit=(sab q.vex)
       ?-  -.yit
         |   vex
-        &   [& p=(raq p.vex p.yit) q=q.yit]
+        &   [& p=(raq p.vex p.yit) q=`q.vex`q.yit]
       ==
     ==
   ::::
@@ -704,8 +705,8 @@
       cold
     =+  [cus=* sef=rule]
     |:
-    =+  doc=tube
-    |:
+    =+  doc=doc.sef
+    |=
     =+  vex=(sef doc)
     ?-  -.vex
       |   vex
@@ -716,8 +717,8 @@
       cook
     =+  [poq=&* sef=rule]
     |:
-    =+  doc=tube
-    |:
+    =+  doc=doc.sef
+    |=
     =+  vex=(sef doc)
     ?-  -.vex
       |   vex
@@ -728,7 +729,7 @@
       comp
     =+  raq==+([* *] |:(-<))
     |:
-    =+  [vex=*(edge) sab=rule]
+    =+  [vex=*edge sab=rule]
     |:
     ?-  -.vex
         |   vex
@@ -742,7 +743,7 @@
   ::::
   ::
       done
-    =+  gaz=*(edge)
+    =+  gaz=*edge
     |:
     ?-  gaz
         [& *]
@@ -753,27 +754,16 @@
     ==
   ::::
   ::
-      edge
-    =+  [a=&* b=tube]
-    |:
-    =+  c=`*`[| *mark]
-    |=
-    ?-  c
-      [| p=*]       [| p=(mark p.c)]
-      [& p=* q=*]   [& p=(a p.c) q=b]
-    ==
-  ::::
-  ::
       fail
     =+  doc=tube
-    |=
+    |:
     [| p=der.doc]
   ::::
   ::
       glue
     =+  bus=rule
     |:
-    =+  [vex=edge sab=rule]
+    =+  [vex=*edge sab=rule]
     |:
     (plug vex |~(pfix bus sab))
   ::::
@@ -844,7 +834,7 @@
   ::::
   ::
       pfix
-    =+  [vex=*(edge) sab=rule]
+    =+  [vex=*edge sab=rule]
     |:
     ?-  -.vex
       |   vex
@@ -863,16 +853,31 @@
   ::::
   ::
       pose
-    =+  [vex=*(edge) sab=rule]
+    =+  [vex=*edge sab=rule]
     |:
     ?-  -.vex
-      |   *sab
-      &   vex
+        &   [& p=p.vex q=`doc.sab`q.vex]
+    ::
+        |   
+      =+  roq=*sab
+      ?-  -.roq
+        |   roq
+        &   [& p=p.roq q=`doc.sab`q.roq]
+      ==
     ==
   ::::
   ::
+      reco
+    =+  [zyc=*mark naz=*mark]
+    |=
+    ^-  *mark
+    ?:  .=(l.zyc l.naz)
+      ?:((gth c.zyc c.naz) zyc naz)
+    ?:((gth l.zyc l.naz) zyc naz)
+  ::::
+  ::
       sfix
-    =+  [vex=*(edge) sab=rule]
+    =+  [vex=*edge sab=rule]
     |:
     ?-  -.vex
         |   vex
@@ -927,7 +932,7 @@
     =+  der=*mark 
     =+  tep=*tape
     |=
-    ^-  [p=*(unit byte) q=..$]
+    ^-  [p=*(unit byte) q=tube]
     ?-  tep
       ~       [~ ..$]
       [10 *]  [[~ 10] ..$(tep t.tep, c.der 1, l.der .^(l.der))]
@@ -1010,7 +1015,7 @@
       rail  (list type)
       rope  (list cord)
       spec  <[%none ~] [%leaf p=*term q=*gene] [p=^+(^ *spec) q=*spec]>
-      spot  &[at=[p=@ q=@] to=[p=@ q=@]]
+      spot  &[at=[l=@ c=@] to=[l=@ c=@]]
       term  &@
   ::
   ::::
@@ -1137,7 +1142,7 @@
     |=
     ^-  *gene
     %-  done
-    =<  (main tube_src)
+    =<  (main `tube`[tube_src])
     =+  tal=`?`&
     =+  wer=`?`|
     |*
@@ -1177,25 +1182,12 @@
       ^-  ((give *gene) doc)
       %.  doc
       |~  pose
-        %+  cook
-          =+([* *] |:([%knit [%take -<- ~] -<+]))
-        |~((glue dig) erop wide)
-      ::
-        %+  stag
-          %name
-        |~((glue ben) sym wide)
+        wida
+        widb
       ::
         |~  (bend =+([* *] |:([%poke -<- -<+])))
           |~  pose
-            (stag %cage (ifix [nom mon] kban))
-            (stag %flow (ifix [sud dus] (more ace wide)))
-            (stag %pick (ifix [der red] kban))
-            (stag %flip |~(pfix hop wide))
-            (stag %coin |~(pfix amp wide))
-            (stag %grip |~(pfix cab wide))
-            (stag %cool |~(pfix sig wide))
-            (stag %cast |~(plug |~(pfix tic wide) |~(pfix tic wide)))
-            (stag %call (ifix [lep pel] kban))
+            widc
           ::
             |~  (comp =+([* *] |:([%take -<- -<+])))
               erop
@@ -1231,6 +1223,46 @@
         ==
       ==
     ::::
+    ::
+        wida
+      =+  doc=tube
+      |:
+      ^-  ((give *gene) doc)
+      %.  doc
+      %+  cook
+        =+([* *] |:([%knit [%take -<- ~] -<+]))
+      |~((glue dig) erop wide)
+    ::::
+    ::
+        widb
+      =+  doc=tube
+      |:
+      ^-  ((give *gene) doc)
+      %.  doc 
+      %+  stag
+        %name
+      |~((glue ben) sym wide)
+    ::::
+    ::
+        widc
+      =+  doc=tube
+      |:
+      ^-  ((give *gene) doc)
+      %.  doc 
+      |~  pose
+        (stag %cage (ifix [nom mon] kban))
+        (stag %flow (ifix [sud dus] (more ace wide)))
+        (stag %pick (ifix [der red] kban))
+        (stag %flip |~(pfix hop wide))
+        (stag %coin |~(pfix amp wide))
+        (stag %grip |~(pfix cab wide))
+        (stag %cool |~(pfix sig wide))
+        (stag %cast |~(plug |~(pfix tic wide) |~(pfix tic wide)))
+        (stag %call (ifix [lep pel] kban))
+      ==
+    ::::
+
+    ::::
     ::  
         kban
       =+  doc=tube
@@ -1256,14 +1288,15 @@
         cape
       =+  [dif=rule tuq=*text har=nora]
       |:
+      =>  .
       |~(pfix dif (stag tuq (knot har)))
     ::::
     ::
         jack
       =+  daz=rule
       |:
-      =+  doc=tube
-      |:
+      =+  doc=doc.daz
+      |=
       ?:  tal
         %.(doc |~(sfix daz |~(plug gap ben ben)))
       %.(doc daz)
@@ -1328,6 +1361,7 @@
     ::::
     ::
         nbar
+      =>  .
       |~  pose
         (cape nub %loop nora)
         (cape ben %gate nora)
@@ -1341,6 +1375,7 @@
     ::::
     ::
         nben
+      =>  .
       |~  pose
         (cape pod %push norb)
         (cape nub %pull norb)
@@ -1350,6 +1385,7 @@
     ::::
     ::
         ndig
+      =>  .
       |~  pose
         (cape ras %cage nord)
         (cape sig %flow nord)
@@ -1360,6 +1396,7 @@
     ::::
     ::
         nhat
+      =>  .
       |~  pose
         (cape nub %cast norb)
         (cape pod %sure norb)
@@ -1372,6 +1409,7 @@
     ::::
     ::
         nhop
+      =>  .
       |~  pose
         (cape dax %dbug noro)
         (cape hop %bail norn)
@@ -1381,6 +1419,7 @@
     ::::
     ::
         nlom
+      =>  .
       |~  pose
         (cape nub %coin nora)
         (cape pod %grip nora)
@@ -1388,6 +1427,7 @@
     ::::
     ::
         nmit
+      =>  .
       |~  pose
         (cape ben %take norj)
         (cape ras %punt nora)

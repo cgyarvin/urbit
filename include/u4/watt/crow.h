@@ -110,6 +110,10 @@
         */
         u4_book fac;
 
+        /* Book to memoize fine.
+        */
+        u4_book vom;
+
         /* Book to memoize open.
         */
         u4_book pon;

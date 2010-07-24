@@ -113,6 +113,7 @@ u4_crow_init(u4_crow p,
   p->zor = u4_noun_0;
   p->niq = u4_noun_0;
   p->fac = u4_noun_0;
+  p->vom = u4_noun_0;
   p->pon = u4_noun_0;
   p->fin = u4_noun_0;
   p->huf = u4_noun_0;
@@ -150,10 +151,10 @@ u4_crow_full(u4_lane lan,
     typ = _rose_play(&crow, sub, gen);
     printf(":\n");
 
-    // printf("prf: %d\n", crow.prf);
-    // printf("prg: %d\n", crow.prg);
-    // printf("prh: %d\n", crow.prh);
-    // printf("pri: %d\n", crow.pri);
+    printf("prf: %d\n", crow.prf);
+    printf("prg: %d\n", crow.prg);
+    printf("prh: %d\n", crow.prh);
+    printf("pri: %d\n", crow.pri);
 
     return u4_kc(lan, typ, tol);
   }
