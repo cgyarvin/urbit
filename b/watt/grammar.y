@@ -159,7 +159,7 @@ wide_c
       | si_ras
         { $$ = _ycell(u4_atom_bean, u4_atom_blur); }
       | si_hat
-        { $$ = _ycell(u4_atom_bean, u4_atom_twix); }
+        { $$ = _ycell(u4_atom_bean, u4_atom_cell); }
       | si_pat
         { $$ = _ycell(u4_atom_bean, u4_atom_atom); }
       | si_sig

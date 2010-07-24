@@ -539,7 +539,7 @@ _rose_make(u4_crow p,
     else if ( u4_n_eq(sut, u4_atom_blot) ) {
       return u4_yes;
     }
-    else if ( u4_b_pq(sut, u4_atom_twix, &p_sut, &q_sut) ) {
+    else if ( u4_b_pq(sut, u4_atom_cell, &p_sut, &q_sut) ) {
       return u4_or(_rose_null_a(p, p_sut, hem), _rose_null_a(p, q_sut, hem));
     }
     else if ( u4_b_pq(sut, u4_atom_core, &p_sut, &q_sut) ) {
@@ -612,7 +612,7 @@ _rose_null(u4_crow p,
       if ( u4_n_eq(ref, u4_atom_atom) ) {
         return u4_no;
       }
-      else if ( u4_b_pq(ref, u4_atom_twix, &p_sut, &q_sut) ) {
+      else if ( u4_b_pq(ref, u4_atom_cell, &p_sut, &q_sut) ) {
         return u4_yes;
       }
       else return _rose_orth_a(p, ref, sut, bol);
@@ -623,8 +623,8 @@ _rose_null(u4_crow p,
     else if ( u4_n_eq(sut, u4_atom_blur) ) {
       return u4_no;
     }
-    else if ( u4_b_pq(sut, u4_atom_twix, &p_sut, &q_sut) ) {
-      if ( u4_b_pq(ref, u4_atom_twix, &p_ref, &q_ref) ) {
+    else if ( u4_b_pq(sut, u4_atom_cell, &p_sut, &q_sut) ) {
+      if ( u4_b_pq(ref, u4_atom_cell, &p_ref, &q_ref) ) {
         return u4_or(_rose_orth_a(p, p_sut, p_ref, bol),
                      _rose_orth_a(p, q_sut, q_ref, bol));
       }
@@ -634,7 +634,7 @@ _rose_null(u4_crow p,
     }
     else if ( u4_b_pq(sut, u4_atom_core, &p_sut, &q_sut) ) {
       return _rose_orth_a
-        (p, u4_k_trel(lan, u4_atom_twix, p_sut, u4_atom_blur), ref, bol);
+        (p, u4_k_trel(lan, u4_atom_cell, p_sut, u4_atom_blur), ref, bol);
     }
     else if ( u4_b_p(sut, u4_atom_cube, &p_sut) ) {
       if ( u4_n_eq(u4_atom_atom, ref) ) {
@@ -643,7 +643,7 @@ _rose_null(u4_crow p,
       else if ( u4_b_p(ref, u4_atom_cube, &p_ref) ) {
         return u4_say(!u4_n_eq(p_sut, p_ref));
       }
-      else if ( u4_b_pq(ref, u4_atom_twix, &p_ref, &q_ref) ) {
+      else if ( u4_b_pq(ref, u4_atom_cell, &p_ref, &q_ref) ) {
         if ( u4_n_atom(p_sut) ) {
           return u4_yes;
         } else {
@@ -760,7 +760,7 @@ _rose_orth(u4_crow p,
     }
     else if ( u4_b_pq(gen, u4_atom_twix, &p_gen, &q_gen) ) {
       return u4_k_trel
-        (lan, u4_atom_twix,
+        (lan, u4_atom_cell,
               _rose_play(p, sut, p_gen),
               _rose_play(p, sut, q_gen));
     }
