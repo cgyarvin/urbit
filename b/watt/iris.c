@@ -27,7 +27,7 @@
     else if ( u4_b_p(tac, u4_atom_leaf, &p_tac) ) {
       return _iris_snap(p, sut, bar, axe, p_tac);
     }
-    else if ( u4_b_pq(tac, u4_atom_name, &p_tac, &q_tac) ) {
+    else if ( u4_b_pq(tac, u4_atom_bran, &p_tac, &q_tac) ) {
       if ( u4_b_pq(sut, u4_atom_face, &p_sut, &q_sut) ) {
         if ( u4_n_eq(p_sut, p_tac) ) {
           return u4_kt
@@ -59,7 +59,7 @@
       }
     }
     else if ( u4_b_pq(tac, u4_atom_pair, &p_tac, &q_tac) ) {
-      if ( u4_b_pq(sut, u4_atom_cell, &p_sut, &q_sut) ) {
+      if ( u4_b_pq(sut, u4_atom_twix, &p_sut, &q_sut) ) {
         u4_noun l_sut, l_bar, l_axe;
         u4_noun r_sut, r_bar, r_axe;
 
@@ -71,7 +71,7 @@
 
         return u4_kt
           (lan,
-           u4_atom_cell,
+           u4_atom_twix,
            _iris_burn_dext(p, l_sut, l_bar, l_axe, vef, p_tac),
            _iris_burn_dext(p, r_sut, r_bar, r_axe, vef, q_tac));
       }
@@ -117,7 +117,7 @@
       else {
         u4_noun poq = u4_kt
           (lan,
-           u4_atom_cell,
+           u4_atom_twix,
            _iris_half(p, sut, bar, axe, u4_noun_2),
            _iris_half(p, sut, bar, axe, u4_noun_3));
 
@@ -349,7 +349,7 @@ _iris_cull(u4_crow p,
     {
       return u4_noun_0;
     }
-    else if ( u4_b_pq(sut, u4_atom_cell, &p_sut, &q_sut) ) {
+    else if ( u4_b_pq(sut, u4_atom_twix, &p_sut, &q_sut) ) {
       u4_unit taf = _iris_find_half(p, sut, bar, axe, gil, cog, u4_noun_2);
       u4_unit bov = _iris_find_half(p, sut, bar, axe, gil, cog, u4_noun_3);
 
@@ -613,7 +613,7 @@ _iris_find(u4_crow p,
               u4_kc(lan, u4_noun_1, p_sut),
               u4_kc(lan, u4_noun_0, axe));
     }
-    else if ( u4_b_pq(sut, u4_atom_cell, &p_sut, &q_sut) ) {
+    else if ( u4_b_pq(sut, u4_atom_twix, &p_sut, &q_sut) ) {
       return _lily_flan
         (p,
          u4_kt(lan, u4_noun_4, u4_noun_0, axe),
@@ -710,7 +710,7 @@ _iris_fish(u4_crow p,
     else if ( u4_n_eq(u4_atom_blur, sut) ) {
       return u4_atom_blur;
     }
-    else if ( u4_b_pq(sut, u4_atom_cell, &p_sut, &q_sut) ) {
+    else if ( u4_b_pq(sut, u4_atom_twix, &p_sut, &q_sut) ) {
       if ( u4_n_eq(u4_noun_2, had) ) {
         return p_sut;
       } else return q_sut;
@@ -859,8 +859,8 @@ _iris_half(u4_crow p,
       }
       else return _iris_nest_sint(p, sut, bar, axe, gil, bon, nef, ful);
     }
-    else if ( u4_b_pq(sut, u4_atom_cell, &p_sut, &q_sut) ) {
-      if ( u4_b_pq(bon, u4_atom_cell, &p_bon, &q_bon) ) {
+    else if ( u4_b_pq(sut, u4_atom_twix, &p_sut, &q_sut) ) {
+      if ( u4_b_pq(bon, u4_atom_twix, &p_bon, &q_bon) ) {
         return u4_and
           (_iris_nest_dext_slip
               (p, sut, bar, axe, gil, bon, nef, ful, u4_noun_2),
@@ -882,7 +882,7 @@ _iris_half(u4_crow p,
     }
     else if ( u4_b_pq(sut, u4_atom_fork, &p_sut, &q_sut) ) {
       if ( u4_n_atom(bon) ||
-           u4_b_pq(bon, u4_atom_cell, &p_bon, &q_bon) ||
+           u4_b_pq(bon, u4_atom_twix, &p_bon, &q_bon) ||
            u4_b_pq(bon, u4_atom_core, &p_bon, &q_bon) ||
            u4_b_p(bon, u4_atom_cube, &p_bon) ) 
       {
@@ -992,11 +992,11 @@ _iris_half(u4_crow p,
     if ( u4_n_eq(bon, u4_atom_atom) || u4_n_eq(bon, u4_atom_blur) ) {
       return u4_no;
     }
-    else if ( u4_b_pq(bon, u4_atom_cell, &p_bon, &q_bon) ) {
+    else if ( u4_b_pq(bon, u4_atom_twix, &p_bon, &q_bon) ) {
       return u4_no;
     }
     else if ( u4_b_pq(bon, u4_atom_core, &p_bon, &q_bon) ) {
-      bon = u4_kt(lan, u4_atom_cell, p_bon, u4_atom_blur);
+      bon = u4_kt(lan, u4_atom_twix, p_bon, u4_atom_blur);
 
       return _iris_nest_dext(p, sut, bar, axe, gil, bon, nef, ful);
     }
@@ -1006,7 +1006,7 @@ _iris_half(u4_crow p,
       }
       else {
         bon = u4_kt
-          (lan, u4_atom_cell,
+          (lan, u4_atom_twix,
                 u4_kc(lan, u4_atom_cube, u4_ch(p_bon)),
                 u4_kc(lan, u4_atom_cube, u4_ct(p_bon)));
 
@@ -1163,11 +1163,11 @@ _iris_slip(u4_crow p,
     {
       return bon;
     }
-    else if ( u4_b_pq(sut, u4_atom_cell, &p_sut, &q_sut) ) {
-      if ( u4_b_pq(bon, u4_atom_cell, &p_bon, &q_bon) ) {
+    else if ( u4_b_pq(sut, u4_atom_twix, &p_sut, &q_sut) ) {
+      if ( u4_b_pq(bon, u4_atom_twix, &p_bon, &q_bon) ) {
         return u4_kt
           (lan,
-           u4_atom_cell,
+           u4_atom_twix,
            _iris_snap_slip(p, sut, bar, axe, p_bon, u4_noun_2),
            _iris_snap_slip(p, sut, bar, axe, q_bon, u4_noun_3));
       }

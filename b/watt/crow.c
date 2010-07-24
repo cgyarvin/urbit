@@ -72,7 +72,7 @@ _crow_rake(u4_crow p,
   u4_lane lan = p->lan;
   u4_gene p_gen, q_gen;
 
-  if ( u4_b_pq(gen, u4_atom_take, &p_gen, &q_gen) ) {
+  if ( u4_b_pq(gen, u4_atom_mack, &p_gen, &q_gen) ) {
     if ( !u4_n_zero(q_gen) ) {
       return _crow_fail(p, "rope");
     }
@@ -81,7 +81,7 @@ _crow_rake(u4_crow p,
   else if ( u4_b_p(gen, u4_atom_frag, &p_gen) ) {
     return u4_kl(lan, gen);
   }
-  else if ( u4_b_p(gen, u4_atom_port, &p_gen) ) {
+  else if ( u4_b_p(gen, u4_atom_pane, &p_gen) ) {
     return u4_kl(lan, gen);
   }
   else {
@@ -151,10 +151,10 @@ u4_crow_full(u4_lane lan,
     typ = _rose_play(&crow, sub, gen);
     printf(":\n");
 
-    printf("prf: %d\n", crow.prf);
-    printf("prg: %d\n", crow.prg);
-    printf("prh: %d\n", crow.prh);
-    printf("pri: %d\n", crow.pri);
+    // printf("prf: %d\n", crow.prf);
+    // printf("prg: %d\n", crow.prg);
+    // printf("prh: %d\n", crow.prh);
+    // printf("pri: %d\n", crow.pri);
 
     return u4_kc(lan, typ, tol);
   }

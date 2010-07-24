@@ -33,7 +33,7 @@
 
     // [%cell p=type q=type]
     //
-    else if ( u4_b_pq(typ, u4_atom_cell, &p_typ, &q_typ) ) {
+    else if ( u4_b_pq(typ, u4_atom_twix, &p_typ, &q_typ) ) {
       return u4_bag_cat(lan, _dump_seal_main(p, gil, p_typ),
                               _dump_seal_main(p, gil, q_typ));
     }
@@ -114,7 +114,7 @@ _dump_cell(u4_crow p,
   u4_lane lan = p->lan;
   u4_noun pq_typ, qq_typ;
 
-  if ( u4_b_pq(q_typ, u4_atom_cell, &pq_typ, &qq_typ) ) {
+  if ( u4_b_pq(q_typ, u4_atom_twix, &pq_typ, &qq_typ) ) {
     return u4_k_cell
       (lan, _dump_main(p, gil, nip, p_typ),
             _dump_cell(p, gil, nip, pq_typ, qq_typ));
@@ -235,7 +235,7 @@ _dump_main(u4_crow p,
     }
     else return u4_trip;
   }
-  else if ( u4_b_pq(typ, u4_atom_cell, &p_typ, &q_typ) ) {
+  else if ( u4_b_pq(typ, u4_atom_twix, &p_typ, &q_typ) ) {
     return u4_prep_close
       (lan, '[', ']', 
               _dump_cell(p, gil, nip, p_typ, q_typ));
