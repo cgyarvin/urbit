@@ -1109,11 +1109,13 @@
     |?
       [0 p=@]
       [1 p=*]
-      [2 p=*tool q=*tool r=*tool]
-      [3 p=*tool q=*tool]
+      [2 p=*tool q=*tool]
+      [3 p=*tool]
       [4 p=*tool]
-      [5 p=*tool]
-      [6 p=*tool q=*tool]
+      [5 p=*tool q=*tool]
+      [6 p=*tool q=*tool r=*tool]
+      [7 p=*tool q=*tool]
+      [8 p=*tool q=*tool]
       [p=^+(^ *tool) q=*tool]
     ==
   ::
@@ -1905,7 +1907,7 @@
           [1 ..crow] 
         ::
             [%vint p=*gene]
-          [5 $(gen p.gen)]
+          [4 $(gen p.gen)]
         ::
             [%cast p=*gene q=*gene]
           $(gen q.gen)
@@ -1920,7 +1922,7 @@
           $(bug .^(bug), gen p.gen)
         ::
             [%dust p=*gene]
-          [4 $(gen p.gen)]
+          [3 $(gen p.gen)]
         ::
             [%grit p=*gene]
           $(gen p.gen)
@@ -1946,7 +1948,7 @@
           [1 (play p.gen)]
         ::
             [%sail p=*gene q=*gene]
-          [3 $(gen p.gen) $(gen q.gen)]
+          [2 $(gen p.gen) $(gen q.gen)]
         ::
             [%bone p=*]
           [1 p.gen]
@@ -1962,14 +1964,14 @@
           =+  rem=(turn q.gen =+([p=*gene q=*gene] |=([p $.-.$(gen q)])))
           ?-  q.lar 
               ~   (boil(sut r.lar) p.lar rem)
-              ^   [3 (boil(sut q.u.q.lar) p.lar rem) [0 (peg p.lar p.u.q.lar)]]
+              ^   [2 (boil(sut q.u.q.lar) p.lar rem) [0 (peg p.lar p.u.q.lar)]]
           ==
         ::
             [%trol p=*gene q=*gene r=*gene]
-          [2 $(gen p.gen) $(gen q.gen, sut (gain p.gen)) $(gen r.gen)]
+          [6 $(gen p.gen) $(gen q.gen, sut (gain p.gen)) $(gen r.gen)]
         ::
             [%sing p=*gene q=*gene]
-          [6 $(gen p.gen) $(gen q.gen)]
+          [5 $(gen p.gen) $(gen q.gen)]
         ==
       ::::
       ::
@@ -2546,17 +2548,17 @@
         |-
         ^-  *tool
         ?-  sut
-            %atom       (vern:lily [4 0 axe])
+            %atom       (vern:lily [3 0 axe])
             %blur       [1 0]
             %blot       [1 1]
             [%core *]   [0 0]
-            [%cube *]   [6 [1 p.sut] [0 axe]]
+            [%cube *]   [5 [1 p.sut] [0 axe]]
             [%face *]   $(sut q.sut)
             [%fuse *]   (flan:lily $(sut p.sut) $(sut q.sut, bar [p.sut bar]))
         ::
             [%cell *]
           %+  flan:lily
-            [4 0 axe]
+            [3 0 axe]
           (flan:lily $(..slip (slip 2)) $(..slip (slip 3)))
         ::
             [%fork *]
@@ -2794,10 +2796,10 @@
       ?:  ?=([0 *] mal)
         ?:  ?=([0 *] buz)
           [0 (peg p.mal p.buz)]
-        ?:  ?=([3 [0 *] [0 *]] buz)
-          [3 [0 (peg p.mal p.p.buz)] [0 (peg p.mal p.q.buz)]]
-        [3 mal 1 buz]
-      [3 mal 1 buz]
+        ?:  ?=([2 [0 *] [0 *]] buz)
+          [2 [0 (peg p.mal p.p.buz)] [0 (peg p.mal p.q.buz)]]
+        [2 mal 1 buz]
+      [2 mal 1 buz]
     ::::
     ::
         cons
@@ -2824,7 +2826,7 @@
         ?-  nif
           [1 1]   nif
           [1 0]   bos
-          *       [2 bos nif [1 1]]
+          *       [6 bos nif [1 1]]
         ==
       ==
     ::::
@@ -2840,7 +2842,7 @@
         ?-  nif
             [1 1]   bos
             [1 0]   nif
-            *       [2 bos [1 0] nif]
+            *       [6 bos [1 0] nif]
         ==
       ==
     ::::
@@ -2848,7 +2850,7 @@
         vern
       =+  [hel=*tool]
       |=
-      [2 hel [1 1] [1 0]]
+      [6 hel [1 1] [1 0]]
     ::::
     ::
         hike 
