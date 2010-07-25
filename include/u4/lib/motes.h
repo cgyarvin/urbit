@@ -221,7 +221,7 @@
     u4_lib_mote(glop, u4_s4('g','l','o','p'))
     u4_lib_mote(gluc, u4_s4('g','l','u','c'))
     u4_lib_mote(glue, u4_s4('g','l','u','e'))
-    u4_lib_mote(gnam, u4_s4('g','n','a','m'))
+    u4_lib_mote(gnom, u4_s4('g','n','o','m'))
     u4_lib_mote(go,   u4_s2('g','o'))
     u4_lib_mote(goat, u4_s4('g','o','a','t'))
     u4_lib_mote(good, u4_s4('g','o','o','d'))

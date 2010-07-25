@@ -60,6 +60,13 @@
                 break;
               }
 
+              case 2: _zn_start_goto(z, ray_lid, lan, fus); break;
+
+
+              case 3: _zn_start_root(z, u3_cm_tap, ray_lid, lan, fus); break;
+              case 4: _zn_start_root(z, u3_cm_inc, ray_lid, lan, fus); break;
+              case 5: _zn_start_root(z, u3_cm_eq,  ray_lid, lan, fus); break;
+
               case 6: {
                 if ( u3_no == u3_lr_tap(z, fus) ) {
                   return u3_cm_exit;
@@ -81,11 +88,24 @@
                 break;
               }
 
-              case 2: _zn_start_goto(z, ray_lid, lan, fus); break;
-
-              case 3: _zn_start_root(z, u3_cm_tap, ray_lid, lan, fus); break;
-              case 4: _zn_start_root(z, u3_cm_inc, ray_lid, lan, fus); break;
-              case 5: _zn_start_root(z, u3_cm_eq,  ray_lid, lan, fus); break;
+              case 7: {
+                if ( u3_no == u3_lr_tap(z, fus) ) {
+                  return u3_cm_exit;
+                }
+                else {
+                  _zn_start_link(z, ray_lid, lan, u3_h(z, fus), u3_t(z, fus));
+                  break;
+                }
+              }
+              case 8: {
+                if ( u3_no == u3_lr_tap(z, fus) ) {
+                  return u3_cm_exit;
+                }
+                else {
+                  _zn_start_push(z, ray_lid, lan, u3_h(z, fus), u3_t(z, fus));
+                  break;
+                }
+              }
             }
           }
         }

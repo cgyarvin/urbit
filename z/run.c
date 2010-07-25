@@ -153,7 +153,38 @@ _zn_forge_link(u3_z   z,
   z->n.ray_lab = ray_zos;
 }
 
-/* _zn_forge_link(): install a link agent.
+/* _zn_forge_push(): install a push agent.
+**
+**   lid: cap at termination
+**   mat: saved mat for departure
+**   lip: cap at departure
+**   dep: push formula.
+*/
+static inline void
+_zn_forge_push(u3_z   z,
+               u3_ray ray_lid,
+               u3_ray ray_mat,
+               u3_ray ray_lip,
+               u3_fox lan,
+               u3_fox dep)
+{
+  u3_ray ray_zos;
+
+  ray_zos = _zn_push_forge(z, push);
+  *_zn_forge(z, ray_zos, push, c.oper_ger) = u3_cm_push;
+  *_zn_forge(z, ray_zos, push, c.ray_poq) = z->n.ray_lab;
+  *_zn_forge(z, ray_zos, push, c.ray_lid) = ray_lid;
+
+  *_zn_forge(z, ray_zos, push, r.ray_mat) = ray_mat;
+  *_zn_forge(z, ray_zos, push, r.ray_lip) = ray_lip;
+
+  *_zn_forge(z, ray_zos, push, s.lan) = lan;
+  *_zn_forge(z, ray_zos, push, s.dep) = dep;
+
+  z->n.ray_lab = ray_zos;
+}
+
+/* _zn_forge_jet(): install a jet agent.
 **
 **   lid: cap at termination
 **   mat: saved mat for departure
@@ -320,6 +351,29 @@ _zn_start_link(u3_z   z,
   ray_mat = _zn_depart(z);
 
   _zn_forge_link(z, ray_lid, ray_mat, ray_lip, dep);
+  _zn_forge_cook(z, z->l.ray_cap, lan, sef);
+}
+
+/* _zn_start_push(): install a push sequence.
+**
+**   lid: cap at termination
+**   lan: operand subject
+**   sef: operand formula
+**   dep: push formula
+*/
+static inline void
+_zn_start_push(u3_z   z,
+               u3_ray ray_lid,
+               u3_fox lan,
+               u3_fox sef,
+               u3_fox dep)
+{
+  u3_ray ray_lip, ray_mat;
+
+  ray_lip = z->l.ray_cap;
+  ray_mat = _zn_depart(z);
+
+  _zn_forge_push(z, ray_lid, ray_mat, ray_lip, lan, dep);
   _zn_forge_cook(z, z->l.ray_cap, lan, sef);
 }
 
@@ -562,6 +616,7 @@ u3_z_run(u3_z z,
 #           include "op/fine.c"
 #           include "op/jet.c"
 #           include "op/link.c"
+#           include "op/push.c"
 #           include "op/mate.c"
 
 #           include "op/pick.c"

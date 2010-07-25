@@ -662,7 +662,7 @@
 ::
 ::::
   ::::
-  ::::  Tier 5, urban parsing
+  ::::  Tier 5, parsing and printing
   ::::
 ::::
 ::
@@ -1079,7 +1079,7 @@
     ::
       [%bong p=*gene q=*gene r=*gene]             ::  %+  mitpod
       [%frit p=*gene q=*gene]                     ::  %_  mitcab
-      [%gnam p=*gene q=*gene]                     ::  %.  mitdot
+      [%gnom p=*gene q=*gene]                     ::  %.  mitdot
       [%mack p=*rope q=*rack]                     ::  %=  mitben
       [%mong p=*bank]                             ::  %-  mitnub  
       [%teck p=*gene]                             ::  %*  mitras
@@ -1456,7 +1456,7 @@
         (cape ben %mack norj)
         (cape ras %teck nora)
         (cape nub %mong nork)
-        (cape dot %gnam norb)
+        (cape dot %gnom norb)
         (cape pod %bong norc)
         (cape hat %tong norf)
         (cape cab %frit norb)
@@ -1613,7 +1613,7 @@
         [%frag *]   [%mack {gen} ~]
         [%fist *]   (fist p.gen)
         [%lome *]   [%pank [[%% p.gen] ~]]
-        [%gnam *]   [%mong q.gen {p.gen}]
+        [%gnom *]   [%mong q.gen {p.gen}]
         [%bong *]   [%mong p.gen q.gen r.gen ~]
         [%claf *]   [%flac q.gen p.gen]
         [%lort *]   [%trol p.gen r.gen q.gen]

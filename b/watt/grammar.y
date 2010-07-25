@@ -539,7 +539,7 @@ tall
     di_mitben: si_mit si_ben  { $$ = u4_atom_mack; }
     di_mitras: si_mit si_ras  { $$ = u4_atom_teck; }
     di_mitnub: si_mit si_nub  { $$ = u4_atom_mong; }
-    di_mitdot: si_mit si_dot  { $$ = u4_atom_gnam; }
+    di_mitdot: si_mit si_dot  { $$ = u4_atom_gnom; }
     di_mitpod: si_mit si_pod  { $$ = u4_atom_bong; }
     di_mithat: si_mit si_hat  { $$ = u4_atom_tong; }
     di_mitcab: si_mit si_cab  { $$ = u4_atom_frit; }

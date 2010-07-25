@@ -253,8 +253,8 @@ u3_ln_mp(u3_lv lv,
 */
 u3_l_rat
 u3_ln_nock(u3_lv    lv,
-            u3_l_fox lan,
-            u3_l_fox sef)
+           u3_l_fox lan,
+           u3_l_fox sef)
 {
   u3_l   l = lv;
   u3_fox hib, fus;
@@ -348,6 +348,32 @@ u3_ln_nock(u3_lv    lv,
               case 0 : return u3_ln_nock(l, lan, fli);
               case 1 : return u3_ln_nock(l, lan, paw);
               default: return u3_none;
+            }
+          }
+        }
+        case 7: {
+          if ( u3_no == u3_lr_tap(l, fus) ) {
+            return u3_none;
+          } else {
+            u3_rat bud = u3_ln_nock(l, lan, u3_lr_h(l, fus));
+     
+            if ( u3_none == bud ) {
+              return u3_none;
+            } else {
+              return u3_ln_nock(l, bud, u3_lr_t(l, fus));
+            }
+          }
+        }
+        case 8: {
+          if ( u3_no == u3_lr_tap(l, fus) ) {
+            return u3_none;
+          } else {
+            u3_rat bud = u3_ln_nock(l, lan, u3_lr_h(l, fus));
+     
+            if ( u3_none == bud ) {
+              return u3_none;
+            } else {
+              return u3_ln_nock(l, u3_ln_cell(l, bud, lan), u3_lr_t(l, fus));
             }
           }
         }

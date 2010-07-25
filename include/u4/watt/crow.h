@@ -38,15 +38,6 @@
     #define u4_nul        u4_noun_0
     #define u4_blip       u4_noun_0
 
-#if 0
-    #define u4_nock_frag  u4_noun_0
-    #define u4_nock_bone  u4_noun_1
-    #define u4_nock_trol  u4_noun_2
-    #define u4_nock_sail  u4_noun_3
-    #define u4_nock_dust  u4_noun_4
-    #define u4_nock_vint  u4_noun_5
-    #define u4_nock_sing  u4_noun_6
-#else
     #define u4_nock_frag  u4_noun_0
     #define u4_nock_bone  u4_noun_1
     #define u4_nock_sail  u4_noun_2
@@ -54,7 +45,12 @@
     #define u4_nock_vint  u4_noun_4
     #define u4_nock_sing  u4_noun_5
     #define u4_nock_trol  u4_noun_6
-#endif
+    #define u4_nock_flac  u4_noun_7
+    #define u4_nock_gant  u4_noun_8
+    #define u4_nock_mong  u4_noun_9
+    #define u4_nock_germ  u4_noun_10
+    #define u4_nock_hint  u4_noun_11
+    #define u4_nock_code  u4_noun_12
 
     #define u4_axis_0     u4_noun_0
     #define u4_axis_1     u4_noun_1

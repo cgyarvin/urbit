@@ -592,7 +592,7 @@ _open_do_p(bean)
             u4_kl(lan, u4_kc(lan, u4_blip, p_gen)));
   }
 
-  _open_do_pq(gnam)
+  _open_do_pq(gnom)
   {
     u4_lane lan = p->lan;
 
@@ -949,7 +949,7 @@ _open_do_pq(yell)
       _open_p   (frag);
       _open_p   (fist);
       _open_p   (lome);
-      _open_pq  (gnam);
+      _open_pq  (gnom);
       _open_pqr (bong);
       _open_pq  (claf);
       _open_pqr (lort);

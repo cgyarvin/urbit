@@ -116,6 +116,7 @@
     ***   drop
     ***   goto
     ***   link
+    ***   push
     ***   pick
     ***   root  [inc, tap, eq]
     ***   tail
@@ -237,6 +238,29 @@
         };
         struct u3_zn_anvil_link {
           struct u3_zn_forge_link f;
+          struct {
+            /* gus: subject.
+            */
+            u3_fox gus;
+          } d;
+        };
+
+      /* push:
+      **
+      **   Compute a static formula on a dynamic noun.
+      */
+        struct u3_zn_forge_push {
+          struct u3_zn_control c;
+          struct u3_zn_retreat r;
+          struct {
+            /* dep: static formula.
+            */
+            u3_fox lan;
+            u3_fox dep;
+          } s;
+        };
+        struct u3_zn_anvil_push {
+          struct u3_zn_forge_push f;
           struct {
             /* gus: subject.
             */

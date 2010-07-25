@@ -37,16 +37,16 @@
     **   Live jet structure.
     */
       struct u3_zj_jet {
-        /* rid  : mung / short hash of axe
-        ** van  : static argument
-        ** axe  : formula
+        /* rid  : mung / short hash of bat
+        ** con  : static argument
+        ** bat  : formula
         ** mug  : short hash of formula
-        ** pas  : C function to call - argument, cob (dynamic argument)
+        ** pas  : C function to call - argument, sam (dynamic argument)
         ** w_pri: priority
         ** nex  : next in hash-search sequence
         */
-        u3_fox           van;
-        u3_fox           axe;
+        u3_fox           con;
+        u3_fox           bat;
         u3_w             w_mug;
         u3_fox           (*fn_pas)(struct u3_z_core *, u3_fox);
         u3_w             w_pry;

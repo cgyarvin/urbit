@@ -42,7 +42,7 @@ _lily_comb(u4_crow p,
            u4_tool buz)
 {
   u4_lane lan = p->lan;
-  u4_noun p_mal, p_buz, q_buz, pp_buz, pq_buz;
+  u4_noun p_mal, q_mal, p_buz, q_buz, pp_buz, pq_buz;
 
   if ( u4_b_p(mal, u4_nock_frag, &p_mal) ) {
     if ( u4_b_p(buz, u4_nock_frag, &p_buz) ) {
@@ -61,12 +61,23 @@ _lily_comb(u4_crow p,
                u4_kc(lan, u4_nock_frag, u4_op_peg(lan, p_mal, pq_buz)));
     }
   }
+#if 1
+  else if ( u4_b_fork(mal, &p_mal, &q_mal) ) {
+    if ( !u4_n_atom(q_mal) && 
+         u4_n_eq(u4_noun_0, u4_ch(q_mal)) &&
+         u4_n_eq(u4_noun_1, u4_ct(q_mal)) )
+    {
+      return u4_kt(lan, u4_nock_gant, p_mal, buz);
+    }
+  }
+#endif
   else if ( u4_b_p(buz, u4_nock_frag, &p_buz) ) {
     if ( u4_n_eq(u4_axis_1, p_buz) ) {
       return mal;
     }
   }
-  return u4_kq(lan, u4_nock_sail, mal, u4_nock_bone, buz);
+  // return u4_kq(lan, u4_nock_sail, mal, u4_nock_bone, buz);
+  return u4_kt(lan, u4_nock_flac, mal, buz);
 }
 
 /* flan:lily
