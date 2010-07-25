@@ -377,6 +377,20 @@ u3_ln_nock(u3_lv    lv,
             }
           }
         }
+        case 11: {
+          if ( u3_no == u3_lr_tap(l, fus) ) {
+            return u3_none;
+          } else {
+            return u3_ln_nock(l, lan, u3_lr_t(l, fus));
+          }
+        }
+        case 12: {
+          if ( u3_no == u3_lr_tap(l, fus) ) {
+            return u3_none;
+          } else {
+            return u3_ln_cell(l, lan, u3_lr_t(l, fus));
+          }
+        }
       }
     }
   }

@@ -35,15 +35,15 @@
               return zec;
  
             case u3_cm_punt: {
-              u3_fox axe = u3_zj_axe(z, sax);
+              u3_fox bat = u3_zj_bat(z, sax);
 
-              _zn_forge_cook(z, ray_lid, gus, axe);
+              _zn_forge_cook(z, ray_lid, gus, bat);
               break;
             }
             case u3_cm_test: {
-              u3_fox axe = u3_zj_axe(z, sax);
+              u3_fox bat = u3_zj_bat(z, sax);
 
-              _zn_start_mate(z, ray_lid, pod, gus, axe);
+              _zn_start_mate(z, ray_lid, pod, gus, bat);
               break;
             }
             default: u3_assert(!"unknown error");

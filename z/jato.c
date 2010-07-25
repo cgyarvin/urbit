@@ -4,18 +4,22 @@
 */
 #include "all.h"
 
+  /** Global data structures.
+  **/
+    // #define 
+
 /* u3_zj_look():
 **
-**   Look for a jet match - gate, [[cob van] axe].
+**   Look for a jet match - gate, [[sam con] bat].
 */
 enum u3_zj_code 
 u3_zj_look(u3_z   z,
-           u3_fox axe)
+           u3_fox bat)
 {
 #if 1
   return u3_zj_code_none;
 #else
-  u3_w w_mug = u3_lm_mug(z, axe);
+  u3_w w_mug = u3_lm_mug(z, bat);
   u3_w w_i;
 
   for ( w_i = 0; w_i < u3_zj_code_none; w_i++ ) {
@@ -27,15 +31,15 @@ u3_zj_look(u3_z   z,
 #endif
 }
 
-/* u3_zj_axe():
+/* u3_zj_bat():
 **
-**   Return the axe formula for a jet.
+**   Return the bat formula for a jet.
 */
 u3_fox
-u3_zj_axe(u3_z            z,
+u3_zj_bat(u3_z            z,
           enum u3_zj_code code_sax)
 {
-  return z->j.jet_rod[code_sax].axe;
+  return z->j.jet_rod[code_sax].bat;
 }
 
 /* u3_zc_tank():
@@ -57,7 +61,7 @@ u3_zc_tank(u3_z    z,
 
 /* u3_zj_fire():
 **
-**   Fire a jet - fig, [[cob van].hub axe].
+**   Fire a jet - fig, [[sam con].hub bat].
 **
 **   Set *pod and/or return error condition:
 **
@@ -74,18 +78,18 @@ u3_zj_fire(u3_z            z,
 {
   struct u3_zj_jet *jet_gof = &z->j.jet_rod[code_sax];
   u3_mote          zec;
-  u3_fox           hub, cob, van, axe;
+  u3_fox           hub, sam, con, bat;
 
-  if ( u3_no == u3_lr_cell(z, fig, &hub, &axe) ) {
+  if ( u3_no == u3_lr_cell(z, fig, &hub, &bat) ) {
     return u3_cm_punt;
   }
-  else if ( u3_no == u3_lr_eq(z, axe, jet_gof->axe) ) {
+  else if ( u3_no == u3_lr_eq(z, bat, jet_gof->bat) ) {
     return u3_cm_punt;
   }
-  else if ( u3_no == u3_lr_cell(z, hub, &cob, &van) ) {
+  else if ( u3_no == u3_lr_cell(z, hub, &sam, &con) ) {
     return u3_cm_punt;
   }
-  else if ( u3_no == u3_lr_eq(z, van, jet_gof->van) ) {
+  else if ( u3_no == u3_lr_eq(z, con, jet_gof->con) ) {
     return u3_cm_punt;
   }
   else {
@@ -94,7 +98,7 @@ u3_zj_fire(u3_z            z,
       return zec;
     }
     else {
-      *pod = jet_gof->fn_pas(z, cob);
+      *pod = jet_gof->fn_pas(z, sam);
 
       return ( (z->j.w_opt < jet_gof->w_pry) ? u3_cm_test : 0 );
     }
@@ -139,7 +143,7 @@ u3_zj_boot(u3_z z,
     /* src: source string
     ** dim: gene
     ** gar: formula
-    ** wup: gate [[cob van] axe]
+    ** wup: gate [[sam con] bat]
     */
     u3_fox src = u3_ln_string(z, spec[w_i].c_src);
 
@@ -163,12 +167,12 @@ u3_zj_boot(u3_z z,
           if ( u3_none == wup ) {
             return u3_no;
           } else {
-            u3_fox van = u3_t(z, u3_h(z, wup));
-            u3_fox axe = u3_t(z, wup);
+            u3_fox con = u3_t(z, u3_h(z, wup));
+            u3_fox bat = u3_t(z, wup);
 
-            jet_rod[w_i].van    = van;
-            jet_rod[w_i].axe    = axe;
-            jet_rod[w_i].w_mug  = u3_lm_mug(z, axe);
+            jet_rod[w_i].con    = con;
+            jet_rod[w_i].bat    = bat;
+            jet_rod[w_i].w_mug  = u3_lm_mug(z, bat);
             jet_rod[w_i].w_pry  = spec[w_i].y_pry;
             jet_rod[w_i].fn_pas = spec[w_i].fn_pas;
           }

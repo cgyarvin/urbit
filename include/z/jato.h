@@ -17,7 +17,40 @@
         u3_c_y       y_pry;
         u3_fox       (*fn_pas)(u3_z, u3_fox);
       };
+ 
+    /* zj_def:
+    **
+    **   A jet definition.  Populated by installation.
+    */
+      struct u3_zj_def {
+        /* Name of the jet.
+        */
+        const u3_c_c *nam;
 
+        /* Version: major, minor, kelvin.
+        */
+        uint32_t maj, min, kel;
+
+        /* Battery mug.
+        */
+        u3_fox mug;
+
+        /* Optimization priority.
+        */
+        uint32_t pri;
+
+        /* Fun, or null.
+        */
+        u3_fox (*pas)(u3_z, u3_fox);
+
+        /* Parent, or null.
+        */
+        struct u3_zj_def *par;
+
+        /* Next in search list.  (XX - tree-ify.)
+        */
+        struct u3_zj_def *nex;
+      };
 
   /** Functions.
   **/
@@ -35,23 +68,23 @@
 
       /* u3_zj_look():
       **
-      **   Look for a jet match - gate, [[cob van] axe].
+      **   Look for a jet match - gate, [[sam con] bat].
       */
         enum u3_zj_code 
         u3_zj_look(u3_z   z,
-                   u3_fox axe);
+                   u3_fox bat);
 
-      /* u3_zj_axe():
+      /* u3_zj_bat():
       **
-      **   Return the axe formula for a jet.
+      **   Return the bat formula for a jet.
       */
         u3_fox
-        u3_zj_axe(u3_z            z,
+        u3_zj_bat(u3_z            z,
                   enum u3_zj_code code_sax);
 
       /* u3_zj_fire():
       **
-      **   Fire a jet - fig, [[cob van].hub axe].
+      **   Fire a jet - subject, [[sam con] bat].
       **
       **   Set *pod and/or return error condition:
       **
@@ -63,14 +96,21 @@
         u3_mote
         u3_zj_fire(u3_z            z,
                    u3_fox          *pod,
-                   enum u3_zj_code code_sax,
-                   u3_fox          fig);
+                   enum u3_zj_code sax,
+                   u3_fox          sub);
 
 
     /** C environment for jet programmers.  Ideally pleasurable.
     ***
     *** Jet programmers may use lr functions, but not lm or ln.
+    *** Replace with appropriate zc.
     **/
+      /** Macros.
+      **/
+#       define u3_zh(z, n)      u3_zc_use(z, u3_lr_h(z, n))
+#       define u3_zt(z, n)      u3_zc_use(z, u3_lr_t(z, n))
+#       define u3_zf(z, a, n)   u3_zc_use(z, u3_lr_twig(z, a, n))
+
       /** Administrative and miscellaneous.
       **/
         /* u3_zc_malloc():
@@ -124,6 +164,13 @@
           u3_zc_tank(u3_z    z,
                      u3_mote gaz);
 
+        /* u3_zc_use():
+        **
+        **   Exit iff (rat) is none.
+        */
+          u3_fox
+          u3_zc_use(u3_z   z,
+                    u3_rat rat);
 
       /** Jet and interpreter activation.
       **/
@@ -134,7 +181,7 @@
           u3_fox
           u3_zc_fire(u3_z            z,
                      enum u3_zj_code code_sax,
-                     u3_fox          cob);
+                     u3_fox          sam);
 
         /* u3_zc_nock():
         **

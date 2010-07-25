@@ -61,7 +61,6 @@ _lily_comb(u4_crow p,
                u4_kc(lan, u4_nock_frag, u4_op_peg(lan, p_mal, pq_buz)));
     }
   }
-#if 1
   else if ( u4_b_fork(mal, &p_mal, &q_mal) ) {
     if ( !u4_n_atom(q_mal) && 
          u4_n_eq(u4_noun_0, u4_ch(q_mal)) &&
@@ -70,7 +69,6 @@ _lily_comb(u4_crow p,
       return u4_kt(lan, u4_nock_gant, p_mal, buz);
     }
   }
-#endif
   else if ( u4_b_p(buz, u4_nock_frag, &p_buz) ) {
     if ( u4_n_eq(u4_axis_1, p_buz) ) {
       return mal;
