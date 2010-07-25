@@ -110,19 +110,19 @@ gene
 wide
   : wide_a
   | wide_rope si_dig wide
-    { $$ = _ytrel(u4_atom_knit, $1, $3); }
+    { $$ = _ytrel(u4_atom_claf, $1, $3); }
   ;
 
 wide_a
   : wide_b
   | tok_term si_ben wide
-    { $$ = _ytrel(u4_atom_name, $1, $3); }
+    { $$ = _ytrel(u4_atom_bran, $1, $3); }
   ;
 
 wide_b
   : wide_c
   | wide_c si_cab wide 
-    { $$ = _ytrel(u4_atom_poke, $1, $3); }
+    { $$ = _ytrel(u4_atom_frit, $1, $3); }
   ;
 
 wide_c
@@ -138,72 +138,72 @@ wide_c
 
     wide_hard
       : '0' 'x' tok_chex
-        { $$ = _ycell(u4_atom_rock, $3); }
+        { $$ = _ycell(u4_atom_bone, $3); }
       | tok_delm
-        { $$ = _ycell(u4_atom_rock, $1); }
+        { $$ = _ycell(u4_atom_bone, $1); }
       | si_amp
-        { $$ = _ycell(u4_atom_rock, u4_noun_0); }
+        { $$ = _ycell(u4_atom_bone, u4_noun_0); }
       | si_bar
-        { $$ = _ycell(u4_atom_rock, u4_noun_1); }
+        { $$ = _ycell(u4_atom_bone, u4_noun_1); }
       | tok_loct
-        { $$ = _ycell(u4_atom_rock, $1); }
+        { $$ = _ycell(u4_atom_bone, $1); }
       | si_mit tok_term
-        { $$ = _ycell(u4_atom_rock, $2); }
+        { $$ = _ycell(u4_atom_bone, $2); }
       | si_mit si_mit
-        { $$ = _ycell(u4_atom_rock, u4_noun_0); }
+        { $$ = _ycell(u4_atom_bone, u4_noun_0); }
       ;
    
     wide_base
       : si_ask
-        { $$ = _ycell(u4_atom_base, u4_atom_flag); }
+        { $$ = _ycell(u4_atom_bean, u4_atom_flag); }
       | si_ras
-        { $$ = _ycell(u4_atom_base, u4_atom_blur); }
+        { $$ = _ycell(u4_atom_bean, u4_atom_blur); }
       | si_hat
-        { $$ = _ycell(u4_atom_base, u4_atom_cell); }
+        { $$ = _ycell(u4_atom_bean, u4_atom_cell); }
       | si_pat
-        { $$ = _ycell(u4_atom_base, u4_atom_atom); }
+        { $$ = _ycell(u4_atom_bean, u4_atom_atom); }
       | si_sig
-        { $$ = _ycell(u4_atom_base, u4_atom_null); }
+        { $$ = _ycell(u4_atom_bean, u4_atom_null); }
       ;
    
     wide_rope
       : rope            
-        { $$ = _ytrel(u4_atom_take, $1, u4_noun_0); }
+        { $$ = _ytrel(u4_atom_mack, $1, u4_noun_0); }
       ;
     wide_cage
       : si_nom g bank_wide g si_mon 
-        { $$ = _ycell(u4_atom_cage, $3); }
+        { $$ = _ycell(u4_atom_prex, $3); }
       ; 
 
     wide_pick
       : si_der g bank_wide g si_red
-        { $$ = _ycell(u4_atom_pick, $3); } 
+        { $$ = _ycell(u4_atom_rond, $3); } 
       ;
 
     wide_call
       : si_lep g bank_wide g si_pel
-        { $$ = _ycell(u4_atom_call, $3); }
+        { $$ = _ycell(u4_atom_mong, $3); }
       ;
  
   /** Wide: funky stuff.
   **/
     wide_funk
       : si_sud g bank_wide g si_dus
-        { $$ = _ycell(u4_atom_flow, $3); }
+        { $$ = _ycell(u4_atom_slax, $3); }
       | si_sud g si_dus
-        { $$ = _ycell(u4_atom_flow, u4_noun_0); }
+        { $$ = _ycell(u4_atom_slax, u4_noun_0); }
       | rope si_lep rack_wide si_pel
-        { $$ = _ytrel(u4_atom_take, $1, $3); }
+        { $$ = _ytrel(u4_atom_mack, $1, $3); }
       | si_hop wide
-        { $$ = _ycell(u4_atom_flip, $2); }
+        { $$ = _ycell(u4_atom_vern, $2); }
       | si_amp wide
-        { $$ = _ycell(u4_atom_coin, $2); }
+        { $$ = _ycell(u4_atom_mast, $2); }
       | si_ras wide
-        { $$ = _ycell(u4_atom_punt, $2); }
+        { $$ = _ycell(u4_atom_teck, $2); }
       | si_cab wide
-        { $$ = _ycell(u4_atom_grip, $2); }
+        { $$ = _ycell(u4_atom_fist, $2); }
       | si_sig wide 
-        { $$ = _ycell(u4_atom_cool, $2); }
+        { $$ = _ycell(u4_atom_wost, $2); }
       | si_tic wide si_tic wide
         { $$ = _ytrel(u4_atom_cast, $2, $4); }
 /*
@@ -215,11 +215,11 @@ wide_c
 /*
     path 
       : thin
-      | thin si_sol path    { $$ = _ytrel(u4_atom_cell, $1, $3); }
+      | thin si_sol path    { $$ = _ytrel(u4_atom_twix, $1, $3); }
       ;
 
     thin
-      : term        { $$ = _ycell(u4_atom_rock, $1); }
+      : term        { $$ = _ycell(u4_atom_bone, $1); }
       | wide_hard
       | wide_cage
       | wide_pick
@@ -460,7 +460,7 @@ tall
 
       cord
         : axis                  { $$ = _ycell(u4_atom_frag, $1); }
-        | term                  { $$ = _ycell(u4_atom_port, $1); }
+        | term                  { $$ = _ycell(u4_atom_pane, $1); }
         ;
 
       axis
@@ -483,66 +483,66 @@ tall
 
   /** Digraphs (with stem)
   **/
-    di_askdig: si_ask si_dig  { $$ = u4_atom_test; }
-    di_askdot: si_ask si_dot  { $$ = u4_atom_lest; }
-    di_askred: si_ask si_red  { $$ = u4_atom_then; }
-    di_askder: si_ask si_der  { $$ = u4_atom_else; }
-    di_askamp: si_ask si_amp  { $$ = u4_atom_sand; }
-    di_askbar: si_ask si_bar  { $$ = u4_atom_some; }
-    di_asksig: si_ask si_sig  { $$ = u4_atom_step; }
-    di_askhop: si_ask si_hop  { $$ = u4_atom_flip; }
-    di_askben: si_ask si_ben  { $$ = u4_atom_like; }
-    di_asknub: si_ask si_nub  { $$ = u4_atom_sift; }
-    di_askras: si_ask si_ras  { $$ = u4_atom_mesh; }
+    di_askdig: si_ask si_dig  { $$ = u4_atom_trol; }
+    di_askdot: si_ask si_dot  { $$ = u4_atom_lort; }
+    di_askred: si_ask si_red  { $$ = u4_atom_gram; }
+    di_askder: si_ask si_der  { $$ = u4_atom_marg; }
+    di_askamp: si_ask si_amp  { $$ = u4_atom_chan; }
+    di_askbar: si_ask si_bar  { $$ = u4_atom_dorn; }
+    di_asksig: si_ask si_sig  { $$ = u4_atom_feng; }
+    di_askhop: si_ask si_hop  { $$ = u4_atom_vern; }
+    di_askben: si_ask si_ben  { $$ = u4_atom_plin; }
+    di_asknub: si_ask si_nub  { $$ = u4_atom_grel; }
+    di_askras: si_ask si_ras  { $$ = u4_atom_moze; }
 
-    di_barnub: si_bar si_nub  { $$ = u4_atom_loop; }
-    di_barben: si_bar si_ben  { $$ = u4_atom_gate; }
-    di_barras: si_bar si_ras  { $$ = u4_atom_load; }
-    di_barmit: si_bar si_mit  { $$ = u4_atom_lift; }
-    di_bardig: si_bar si_dig  { $$ = u4_atom_ramp; }
-    di_barask: si_bar si_ask  { $$ = u4_atom_pick; }
-    di_barsig: si_bar si_sig  { $$ = u4_atom_bond; }
-    di_barpat: si_bar si_pat  { $$ = u4_atom_bund; }
+    di_barnub: si_bar si_nub  { $$ = u4_atom_vamp; }
+    di_barben: si_bar si_ben  { $$ = u4_atom_lome; }
+    di_barras: si_bar si_ras  { $$ = u4_atom_pank; }
+    di_barmit: si_bar si_mit  { $$ = u4_atom_tash; }
+    di_bardig: si_bar si_dig  { $$ = u4_atom_sunt; }
+    di_barask: si_bar si_ask  { $$ = u4_atom_rond; }
+    di_barsig: si_bar si_sig  { $$ = u4_atom_lonk; }
+    di_barpat: si_bar si_pat  { $$ = u4_atom_fron; }
 
-    di_bender: si_ben si_der  { $$ = u4_atom_knit; }
-    di_benred: si_ben si_red  { $$ = u4_atom_link; }
-    di_benpod: si_ben si_pod  { $$ = u4_atom_push; }
-    di_bennub: si_ben si_nub  { $$ = u4_atom_pull; }
+    di_bender: si_ben si_der  { $$ = u4_atom_claf; }
+    di_benred: si_ben si_red  { $$ = u4_atom_flac; }
+    di_benpod: si_ben si_pod  { $$ = u4_atom_gant; }
+    di_bennub: si_ben si_nub  { $$ = u4_atom_tang; }
  
-    di_digras: si_dig si_ras  { $$ = u4_atom_cage; }
-    di_digsig: si_dig si_sig  { $$ = u4_atom_flow; }
-    di_dignub: si_dig si_nub  { $$ = u4_atom_cell; }
-    di_digpod: si_dig si_pod  { $$ = u4_atom_trel; }
-    di_dighat: si_dig si_hat  { $$ = u4_atom_qual; }
+    di_digras: si_dig si_ras  { $$ = u4_atom_prex; }
+    di_digsig: si_dig si_sig  { $$ = u4_atom_slax; }
+    di_dignub: si_dig si_nub  { $$ = u4_atom_twix; }
+    di_digpod: si_dig si_pod  { $$ = u4_atom_trex; }
+    di_dighat: si_dig si_hat  { $$ = u4_atom_quax; }
 
-    di_dotben: si_dot si_ben  { $$ = u4_atom_twin; }
-    di_dothat: si_dot si_hat  { $$ = u4_atom_bump; }
-    di_dotask: si_dot si_ask  { $$ = u4_atom_deep; }
-    di_dotras: si_dot si_ras  { $$ = u4_atom_nock; }
+    di_dotben: si_dot si_ben  { $$ = u4_atom_sing; }
+    di_dothat: si_dot si_hat  { $$ = u4_atom_vint; }
+    di_dotask: si_dot si_ask  { $$ = u4_atom_dust; }
+    di_dotras: si_dot si_ras  { $$ = u4_atom_sail; }
     
     di_hatnub: si_hat si_nub  { $$ = u4_atom_cast; }
-    di_hatdig: si_hat si_dig  { $$ = u4_atom_sure; }
-    di_hatpod: si_hat si_pod  { $$ = u4_atom_sock; }
-    di_hatben: si_hat si_ben  { $$ = u4_atom_name; }
-    di_hatmit: si_hat si_mit  { $$ = u4_atom_clip; }
-    di_hatras: si_hat si_ras  { $$ = u4_atom_wash; }
-    di_hatpat: si_hat si_pat  { $$ = u4_atom_etch; }
+    di_hatdig: si_hat si_dig  { $$ = u4_atom_stil; }
+    di_hatpod: si_hat si_pod  { $$ = u4_atom_pock; }
+    di_hatben: si_hat si_ben  { $$ = u4_atom_bran; }
+    di_hatmit: si_hat si_mit  { $$ = u4_atom_velt; }
+    di_hatras: si_hat si_ras  { $$ = u4_atom_mave; }
+    di_hatpat: si_hat si_pat  { $$ = u4_atom_grit; }
 
-    di_hopdax: si_hop si_dax  { $$ = u4_atom_dbug; }
-    di_hopmit: si_hop si_mit  { $$ = u4_atom_boot; }
-    di_hopven: si_hop si_hop  { $$ = u4_atom_bail; }
-    di_hopdig: si_hop si_dig  { $$ = u4_atom_meta; }
+    di_hopdax: si_hop si_dax  { $$ = u4_atom_zush; }
+    di_hopmit: si_hop si_mit  { $$ = u4_atom_zoot; }
+    di_hopven: si_hop si_hop  { $$ = u4_atom_zike; }
+    di_hopdig: si_hop si_dig  { $$ = u4_atom_zalt; }
     
     di_lomnub: si_lom si_nub  { $$ = u4_atom_hang; }
-    di_lompod: si_lom si_pod  { $$ = u4_atom_grip; }
+    di_lompod: si_lom si_pod  { $$ = u4_atom_fist; }
     
-    di_mitben: si_mit si_ben  { $$ = u4_atom_take; }
-    di_mitras: si_mit si_ras  { $$ = u4_atom_punt; }
-    di_mitnub: si_mit si_nub  { $$ = u4_atom_call; }
-    di_mitdot: si_mit si_dot  { $$ = u4_atom_hear; }
-    di_mitpod: si_mit si_pod  { $$ = u4_atom_howl; }
-    di_mithat: si_mit si_hat  { $$ = u4_atom_wail; }
-    di_mitcab: si_mit si_cab  { $$ = u4_atom_poke; }
+    di_mitben: si_mit si_ben  { $$ = u4_atom_mack; }
+    di_mitras: si_mit si_ras  { $$ = u4_atom_teck; }
+    di_mitnub: si_mit si_nub  { $$ = u4_atom_mong; }
+    di_mitdot: si_mit si_dot  { $$ = u4_atom_gnam; }
+    di_mitpod: si_mit si_pod  { $$ = u4_atom_bong; }
+    di_mithat: si_mit si_hat  { $$ = u4_atom_tong; }
+    di_mitcab: si_mit si_cab  { $$ = u4_atom_frit; }
 
   /* Signs.
   */
@@ -711,7 +711,7 @@ _watt_locate(u4_lane lane,
 #else
   return u4_k_trel
     (lane, 
-     u4_atom_spot, 
+     u4_atom_zemp, 
      u4_k_cell
       (lane, 
        u4_k_cell

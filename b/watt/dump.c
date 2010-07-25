@@ -28,7 +28,7 @@
          u4_n_eq(u4_atom_blur, typ) ||
          u4_n_eq(u4_atom_blot, typ) ) 
     {
-      return u4_noun_0;
+      return u4_nul;
     }
 
     // [%cell p=type q=type]
@@ -47,7 +47,7 @@
     // [%cube p=noun]
     // 
     else if ( u4_b_p(typ, u4_atom_cube, &p_typ) ) {
-      return u4_noun_0;
+      return u4_nul;
     }
 
     // [%face p=mark q=type]
@@ -74,7 +74,7 @@
     //
     else if ( u4_b_pq(typ, u4_atom_hold, &p_typ, &q_typ) ) {
       if ( u4_bag_in(typ, gil) ) {
-        return u4_k_trel(lan, typ, u4_noun_0, u4_noun_0);
+        return u4_k_trel(lan, typ, u4_nul, u4_nul);
       } 
       else {
         return _dump_seal_main
@@ -99,7 +99,7 @@ u4_pool
 _dump_seal(u4_crow p,
            u4_type typ)
 {
-  return _dump_seal_main(p, u4_noun_0, typ);
+  return _dump_seal_main(p, u4_nul, typ);
 }
 
 /* _dump_cell()::
@@ -123,7 +123,7 @@ _dump_cell(u4_crow p,
     return u4_k_trel
       (lan, _dump_main(p, gil, nip, p_typ),
              _dump_main(p, gil, nip, q_typ),
-             u4_noun_0);
+             u4_nul);
   }
 }
 
@@ -208,7 +208,7 @@ _dump_fork(u4_crow p,
     return u4_kt
       (lan, _dump_main(p, gil, nip, p_typ),
             _dump_main(p, gil, nip, q_typ),
-            u4_noun_0);
+            u4_nul);
   }
 }
  
@@ -281,8 +281,8 @@ _dump_main(u4_crow p,
 
     if ( u4_b_p(p_typ, u4_atom_cube, &pip_typ) &&
          u4_b_p(q_typ, u4_atom_cube, &piq_typ) &&
-         u4_n_eq(u4_noun_0, pip_typ) &&
-         u4_n_eq(u4_noun_1, piq_typ) )
+         u4_n_eq(u4_yes, pip_typ) &&
+         u4_n_eq(u4_no, piq_typ) )
     {
       return u4_cod_in('?');
     }
@@ -304,7 +304,7 @@ _dump_main(u4_crow p,
     if ( u4_bag_in(typ, gil) ) {
       u4_noun fez = u4_k_atom_cat
           (lan, u4_cod_in('$'), 
-                 u4_prep_decimal(lan, u4_bag_at(lan, typ, u4_noun_1, gil)));
+                 u4_prep_decimal(lan, u4_bag_at(lan, typ, u4_axis_1, gil)));
 
       if ( u4_bag_in(typ, nip) || u4_bag_in(typ, how) ) {
         return fez;
@@ -343,7 +343,7 @@ _durb_in(u4_crow p,
          u4_rail bar)
 {
   if ( u4_n_zero(bar) ) {
-    return u4_noun_0;
+    return u4_nul;
   } else {
     return u4_k_cell(p->lan, _dump_type(p, u4_ch(bar)), 
                              _durb_in(p, u4_ct(bar)));
@@ -376,9 +376,9 @@ _dump_type(u4_crow p,
 
   // Lamentable.
   //
-  how = u4_noun_0;
-  par = _dump_main(p, gil, u4_noun_0, typ);
-  how = u4_noun_0;
+  how = u4_nul;
+  par = _dump_main(p, gil, u4_nul, typ);
+  how = u4_nul;
 
   return par;
 }
@@ -389,7 +389,7 @@ u4_atom
 _dump_size(u4_lane lan, u4_noun box)
 {
   if ( u4_n_atom(box) ) {
-    return u4_noun_1;
+    return u4_math_1;
   }
   else {
     return u4_op_add

@@ -14,10 +14,10 @@ _gull_size(u4_crow p,
   u4_noun p_dab, q_dab;
 
   if ( u4_b_p(dab, u4_atom_none, &p_dab) ) {
-    return u4_noun_0;
+    return u4_math_0;
   }
   else if ( u4_b_pq(dab, u4_atom_leaf, &p_dab, &q_dab) ) {
-    return u4_noun_1;
+    return u4_math_1;
   }
   else if ( u4_b_fork(dab, &p_dab, &q_dab) ) {
     return u4_op_add(lan, _gull_size(p, p_dab), _gull_size(p, q_dab));
@@ -70,17 +70,17 @@ _gull_fill(u4_crow p,
     u4_noun p_dab, q_dab;
 
     if ( u4_b_p(dab, u4_atom_none, &p_dab) ) {
-      return u4_noun_0;
+      return u4_nul;
     }
     else if ( u4_b_pq(dab, u4_atom_leaf, &p_dab, &q_dab) ) {
       if ( u4_n_eq(p_dab, cog) ) {
-        return u4_kt(lan, u4_noun_0, axe, q_dab);
+        return u4_kt(lan, u4_nul, axe, q_dab);
       }
-      else return u4_noun_0;
+      else return u4_nul;
     }
     else if ( u4_b_fork(dab, &p_dab, &q_dab) ) {
-      u4_unit hut = _gull_look_a(p, p_dab, cog, u4_op_peg(lan, axe, u4_noun_2));
-      u4_unit zig = _gull_look_a(p, q_dab, cog, u4_op_peg(lan, axe, u4_noun_3));
+      u4_unit hut = _gull_look_a(p, p_dab, cog, u4_op_peg(lan, axe, u4_axis_2));
+      u4_unit zig = _gull_look_a(p, q_dab, cog, u4_op_peg(lan, axe, u4_axis_3));
 
       // p->prf++;
       if ( u4_n_zero(hut) ) return zig;
@@ -96,5 +96,5 @@ _gull_look(u4_crow p,
            u4_spec dab,
            u4_term cog)
 {
-  return _gull_look_a(p, dab, cog, u4_noun_1);
+  return _gull_look_a(p, dab, cog, u4_axis_1);
 }
