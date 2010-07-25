@@ -24,7 +24,7 @@ Gene - AST
       [%vern p=*gene]                             ::  ?!  askhop
     ::
       [%fron p=*gene q=*gene r=*bank]             ::  |@  barpat
-      [%lank p=*gene q=*bank]                     ::  |~  barsig
+      [%lonk p=*gene q=*bank]                     ::  |~  barsig
       [%lome p=*gene]                             ::  |=  barben
       [%pank p=*menu]                             ::  |*  barras
       [%rond p=*bank]                             ::  |?  barask

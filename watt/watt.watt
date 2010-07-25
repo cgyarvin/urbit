@@ -1041,7 +1041,7 @@
       [%vern p=*gene]                             ::  ?!  askhop
     ::
       [%fron p=*gene q=*gene r=*bank]             ::  |@  barpat
-      [%lank p=*gene q=*bank]                     ::  |~  barsig
+      [%lonk p=*gene q=*bank]                     ::  |~  barsig
       [%lome p=*gene]                             ::  |=  barben
       [%pank p=*menu]                             ::  |*  barras
       [%rond p=*bank]                             ::  |?  barask
@@ -1393,7 +1393,7 @@
         (cape ras %pank nore)
         (cape mit %tash nore)
         (cape ask %rond nord)
-        (cape sig %lank nori)
+        (cape sig %lonk nori)
         (cape pat %fron norl)
       ==
     ::::
@@ -1640,7 +1640,7 @@
         %null   [%bone 0]
       ==
     ::
-        [%lank *]
+        [%lonk *]
       |-
       ?-  q.gen
           ~       !!

@@ -501,7 +501,7 @@ tall
     di_barmit: si_bar si_mit  { $$ = u4_atom_tash; }
     di_bardig: si_bar si_dig  { $$ = u4_atom_sunt; }
     di_barask: si_bar si_ask  { $$ = u4_atom_rond; }
-    di_barsig: si_bar si_sig  { $$ = u4_atom_lank; }
+    di_barsig: si_bar si_sig  { $$ = u4_atom_lonk; }
     di_barpat: si_bar si_pat  { $$ = u4_atom_fron; }
 
     di_bender: si_ben si_der  { $$ = u4_atom_claf; }

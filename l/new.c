@@ -253,8 +253,8 @@ u3_ln_mp(u3_lv lv,
 */
 u3_l_rat
 u3_ln_nock(u3_lv    lv,
-           u3_l_fox lan,
-           u3_l_fox sef)
+            u3_l_fox lan,
+            u3_l_fox sef)
 {
   u3_l   l = lv;
   u3_fox hib, fus;
@@ -293,22 +293,6 @@ u3_ln_nock(u3_lv    lv,
           return u3_ln_ice(l, fus);
         }
         case 2: {
-          u3_rat yor, fli, paw;
-
-          if ( u3_no == u3_lr_trel(l, fus, &yor, &fli, &paw) ) {
-            return u3_none;
-          } 
-          else {
-            u3_rat gyl = u3_ln_nock(l, lan, yor);
-
-            switch ( gyl ) {
-              case 0 : return u3_ln_nock(l, lan, fli);
-              case 1 : return u3_ln_nock(l, lan, paw);
-              default: return u3_none;
-            }
-          }
-        }
-        case 3: {
           u3_rat gof = u3_ln_nock(l, lan, fus);
 
           if ( (u3_none == gof) || (u3_no == u3_lr_tap(l, gof)) ) {
@@ -318,7 +302,7 @@ u3_ln_nock(u3_lv    lv,
             return u3_ln_nock(l, u3_h(l, gof), u3_t(l, gof));
           }
         }
-        case 4: {
+        case 3: {
           u3_rat gof = u3_ln_nock(l, lan, fus);
 
           if ( u3_none == gof ) {
@@ -326,7 +310,7 @@ u3_ln_nock(u3_lv    lv,
           }
           else return u3_lr_tap(l, gof);
         }
-        case 5: {
+        case 4: {
           u3_rat gof = u3_ln_nock(l, lan, fus);
 
           if ( (u3_none == gof) || (u3_no == u3_lr_pat(l, gof)) ) {
@@ -341,7 +325,7 @@ u3_ln_nock(u3_lv    lv,
             return u3_ln_mp(l, mp_gof);
           }
         } 
-        case 6: {
+        case 5: {
           u3_rat gof = u3_ln_nock(l, lan, fus);
 
           if ( (u3_none == gof) || (u3_no == u3_lr_tap(l, gof)) ) {
@@ -349,6 +333,22 @@ u3_ln_nock(u3_lv    lv,
           }
           else {
             return u3_lr_eq(l, u3_h(l, gof), u3_t(l, gof));
+          }
+        }
+        case 6: {
+          u3_rat yor, fli, paw;
+
+          if ( u3_no == u3_lr_trel(l, fus, &yor, &fli, &paw) ) {
+            return u3_none;
+          } 
+          else {
+            u3_rat gyl = u3_ln_nock(l, lan, yor);
+
+            switch ( gyl ) {
+              case 0 : return u3_ln_nock(l, lan, fli);
+              case 1 : return u3_ln_nock(l, lan, paw);
+              default: return u3_none;
+            }
           }
         }
       }

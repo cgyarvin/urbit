@@ -14,7 +14,7 @@ _crow_trap(u4_crow p,
 
   u4_atom hal  = u4_k_atom_c(lan, msg);
 
-  p->meb = u4_k_cell(lan, u4_k_cell(lan, hal, u4_noun_0), p->meb);
+  p->meb = u4_k_cell(lan, u4_k_cell(lan, hal, u4_nul), p->meb);
 }
 
 /* trac:crow
@@ -102,21 +102,21 @@ u4_crow_init(u4_crow p,
   p->prh = 0;
   p->pri = 0;
 
-  p->fan = u4_noun_0;
-  p->ver = u4_noun_0;
-  p->bug = u4_noun_0;
-  p->meb = u4_noun_0;
-  p->vus = u4_noun_0;
-  p->tyc = u4_noun_0;
-  p->gam = u4_noun_0;
-  p->hos = u4_noun_0;
-  p->zor = u4_noun_0;
-  p->niq = u4_noun_0;
-  p->fac = u4_noun_0;
-  p->vom = u4_noun_0;
-  p->pon = u4_noun_0;
-  p->fin = u4_noun_0;
-  p->huf = u4_noun_0;
+  p->fan = u4_nul;
+  p->ver = u4_nul;
+  p->bug = u4_nul;
+  p->meb = u4_nul;
+  p->vus = u4_nul;
+  p->tyc = u4_nul;
+  p->gam = u4_nul;
+  p->hos = u4_nul;
+  p->zor = u4_nul;
+  p->niq = u4_nul;
+  p->fac = u4_nul;
+  p->vom = u4_nul;
+  p->pon = u4_nul;
+  p->fin = u4_nul;
+  p->huf = u4_nul;
 }
 
 /* full:crow (fake)
@@ -139,7 +139,7 @@ u4_crow_full(u4_lane lan,
     tol = _rose_make(&crow, sub, gen);
     printf(":"); fflush(stdout);
 
-#if 1
+#if 0
     boz = _rose_show(&crow, sub, gen);
     if ( !u4_so(boz) ) {
       printf("type error\n");
@@ -150,6 +150,8 @@ u4_crow_full(u4_lane lan,
 
     typ = _rose_play(&crow, sub, gen);
     printf(":\n");
+
+    u4_err(lan, "size", _dump_size(lan, tol));
 
     // printf("prf: %d\n", crow.prf);
     // printf("prg: %d\n", crow.prg);

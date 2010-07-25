@@ -19,7 +19,7 @@
   {
     u4_lane lan = p->lan;
 
-    if ( u4_n_eq(u4_noun_1, wam) ) {
+    if ( u4_n_eq(u4_axis_1, wam) ) {
       if ( u4_n_zero(yus) ) {
         return u4_k_trel
           (lan, u4_atom_bran,
@@ -33,18 +33,18 @@
       u4_axis tip = u4_op_tip(wam);
       u4_axis tap = u4_op_tap(lan, wam);
 
-      if ( u4_n_eq(u4_noun_2, tip) ) {
+      if ( u4_n_eq(u4_axis_2, tip) ) {
         return u4_k_trel
           (lan, 
            u4_atom_pair,
            _lark_nuke_port(p, sut, tac, rop, feg, gos, tap, yus, gur),
-           u4_noun_0);
+           u4_nul);
       }
       else {
         return u4_k_trel
           (lan, 
            u4_atom_pair,
-           u4_noun_0,
+           u4_nul,
            _lark_nuke_port(p, sut, tac, rop, feg, gos, tap, yus, gur));
       }
     }
@@ -61,25 +61,25 @@
   {
     u4_lane lan = p->lan;
 
-    if ( u4_n_eq(u4_noun_1, wam) ) {
+    if ( u4_n_eq(u4_axis_1, wam) ) {
       return _lark_nuke(p, gur, tac, rop, feg);
     }
     else {
       u4_axis tip = u4_op_tip(wam);
       u4_axis tap = u4_op_tap(lan, wam);
 
-      if ( u4_n_eq(u4_noun_2, tip) ) {
+      if ( u4_n_eq(u4_axis_2, tip) ) {
         return u4_k_trel
           (lan, 
            u4_atom_pair,
            _lark_nuke_frag(p, sut, tac, rop, feg, tap, gur),
-           u4_noun_0);
+           u4_nul);
       }
       else {
         return u4_k_trel
           (lan, 
            u4_atom_pair,
-           u4_noun_0,
+           u4_nul,
            _lark_nuke_frag(p, sut, tac, rop, feg, tap, gur));
       }
     }
@@ -109,7 +109,7 @@ _lark_nuke(u4_crow p,
             feg);
     }
     else if ( u4_b_p(i_rop, u4_atom_pane, &pi_rop) ) {
-      u4_plan lar = _iris_find(p, sut, u4_noun_0, u4_noun_1, pi_rop);
+      u4_plan lar = _iris_find(p, sut, u4_nul, u4_axis_1, pi_rop);
       u4_axis p_lar = u4_ch(lar);
       u4_unit q_lar = u4_ch(u4_ct(lar));
       u4_type r_lar = u4_ct(u4_ct(lar));
@@ -118,7 +118,7 @@ _lark_nuke(u4_crow p,
         (p, sut, tac, t_rop, feg, pi_rop, p_lar, q_lar, r_lar);
     }
     else if ( u4_b_p(i_rop, u4_atom_frag, &pi_rop) ) {
-      u4_type gur = _iris_peek(p, sut, u4_noun_0, u4_noun_1, pi_rop);
+      u4_type gur = _iris_peek(p, sut, u4_nul, u4_axis_1, pi_rop);
 
       return _lark_nuke_frag(p, sut, tac, t_rop, feg, pi_rop, gur); 
     }

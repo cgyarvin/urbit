@@ -38,6 +38,40 @@
     #define u4_nul        u4_noun_0
     #define u4_blip       u4_noun_0
 
+#if 0
+    #define u4_nock_frag  u4_noun_0
+    #define u4_nock_bone  u4_noun_1
+    #define u4_nock_trol  u4_noun_2
+    #define u4_nock_sail  u4_noun_3
+    #define u4_nock_dust  u4_noun_4
+    #define u4_nock_vint  u4_noun_5
+    #define u4_nock_sing  u4_noun_6
+#else
+    #define u4_nock_frag  u4_noun_0
+    #define u4_nock_bone  u4_noun_1
+    #define u4_nock_sail  u4_noun_2
+    #define u4_nock_dust  u4_noun_3
+    #define u4_nock_vint  u4_noun_4
+    #define u4_nock_sing  u4_noun_5
+    #define u4_nock_trol  u4_noun_6
+#endif
+
+    #define u4_axis_0     u4_noun_0
+    #define u4_axis_1     u4_noun_1
+    #define u4_axis_2     u4_noun_2
+    #define u4_axis_3     u4_noun_3
+    #define u4_axis_4     u4_noun_4
+    #define u4_axis_5     u4_noun_5
+    #define u4_axis_6     u4_noun_6
+    #define u4_axis_7     u4_noun_7
+    #define u4_axis_8     u4_noun_8
+    #define u4_axis_9     u4_noun_9
+    #define u4_axis_10    u4_noun_10
+
+    #define u4_math_0     u4_noun_0
+    #define u4_math_1     u4_noun_1
+    #define u4_math_2     u4_noun_2
+
     #define u4_brut(p, cat, typ) \
       u4_burp(p->lan, cat, _dump_type(p, typ))
 
