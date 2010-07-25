@@ -20,6 +20,7 @@
     typedef u4_noun u4_menu;
     typedef u4_noun u4_plan;
     typedef u4_noun u4_plot;
+    typedef u4_noun u4_prop; 
     typedef u4_noun u4_rack;
     typedef u4_noun u4_rail;
     typedef u4_noun u4_rope;
@@ -49,8 +50,8 @@
     #define u4_nock_gant  u4_noun_8
     #define u4_nock_mong  u4_noun_9
     #define u4_nock_germ  u4_noun_10
-    #define u4_nock_hint  u4_noun_11
-    #define u4_nock_code  u4_noun_12
+    #define u4_nock_hint  u4_cod_in(11)
+    #define u4_nock_code  u4_cod_in(12)
 
     #define u4_axis_0     u4_noun_0
     #define u4_axis_1     u4_noun_1
