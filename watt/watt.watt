@@ -747,10 +747,10 @@
     |:
     ?-  gaz
         [& *]
-      p.gaz
-      :: =+  dym=$.q.gaz
-      :: ?~  -.dym
-      :: !!
+      =+  dym=$.q.gaz
+      ?~  -.dym
+        p.gaz
+      !!
     ==
   ::::
   ::
@@ -1011,6 +1011,7 @@
       menu  (list &[p=*term q=*gene])
       plot  (list &[p=*gene q=*type])
       plan  &[p=*axis q=*(unit door) r=*type]
+      prop  <~ [par=*rope nam=*term maj=@ min=@ kel=@]>
       rack  (list &[p=*gene q=*gene])
       rail  (list type)
       rope  (list cord)
@@ -1042,12 +1043,12 @@
     ::
       [%fron p=*gene q=*gene r=*bank]             ::  |@  barpat
       [%lonk p=*gene q=*bank]                     ::  |~  barsig
-      [%lome p=*gene]                             ::  |=  barben
-      [%pank p=*menu]                             ::  |*  barras
+      [%lome p=*prop q=*gene]                     ::  |=  barben
+      [%pank p=*prop p=*menu]                     ::  |*  barras
       [%rond p=*bank]                             ::  |?  barask
-      [%sunt p=*gene]                             ::  |:  bardig
-      [%tash p=*menu]                             ::  |%  barmit
-      [%vamp p=*gene]                             ::  |-  barnub
+      [%sunt p=*prop q=*gene]                     ::  |:  bardig
+      [%tash p=*prop q=*menu]                     ::  |%  barmit
+      [%vamp p=*prop q=*gene]                     ::  |-  barnub
     ::
       [%claf p=*gene q=*gene]                     ::  =<  bender
       [%flac p=*gene q=*gene]                     ::  =>  benred
@@ -1116,6 +1117,10 @@
       [6 p=*tool q=*tool r=*tool]
       [7 p=*tool q=*tool]
       [8 p=*tool q=*tool]
+      [9 p=*tool q=*tool]
+      [10 p=*tool q=*tool]
+      [11 p=* q=*tool]
+      [12 p=* q=*]
       [p=^+(^ *tool) q=*tool]
     ==
   ::
@@ -1342,7 +1347,7 @@
         norb  |=(|~(gunk main main))
         norc  |=(|~(gunk main main main))
         nord  |=((jack kban))
-        nore  |=((jack umen))
+        nore  |=((jack |~(plug |~(pose |~(sfix ppro muck) (free ~)) umen)))
         norf  |=(|~(gunk main main main main))
         norg  |=(|~(gunk sym main))
         norh  |=((jack |~(gunk main krac)))
@@ -1352,6 +1357,7 @@
         norl  |=((jack |~(gunk main main kban)))
         norn  |=((free ~))
         noro  |=(=>(.(wer &) main))
+        norp  |=(|~(plug |~(pose |~(sfix ppro muck) (free ~)) main))
     ::::
     ::
         norm
@@ -1387,11 +1393,10 @@
     ::::
     ::
         nbar
-      =>  .
       |~  pose
-        (cape nub %vamp nora)
-        (cape ben %lome nora)
-        (cape dig %sunt nora)
+        (cape nub %vamp norp)
+        (cape ben %lome norp)
+        (cape dig %sunt norp)
         (cape ras %pank nore)
         (cape mit %tash nore)
         (cape ask %rond nord)
@@ -1401,7 +1406,6 @@
     ::::
     ::
         nben
-      =>  .
       |~  pose
         (cape pod %gant norb)
         (cape nub %tang norb)
@@ -1411,7 +1415,6 @@
     ::::
     ::
         ndig
-      =>  .
       |~  pose
         (cape ras %prex nord)
         (cape sig %slax nord)
@@ -1422,7 +1425,6 @@
     ::::
     ::
         nhat
-      =>  .
       |~  pose
         (cape nub %cast norb)
         (cape pod %stil norb)
@@ -1435,7 +1437,6 @@
     ::::
     ::
         nhop
-      =>  .
       |~  pose
         (cape dax %zush noro)
         (cape hop %zike norn)
@@ -1445,7 +1446,6 @@
     ::::
     ::
         nlom
-      =>  .
       |~  pose
         (cape nub %mast nora)
         (cape pod %fist nora)
@@ -1453,7 +1453,6 @@
     ::::
     ::
         nmit
-      =>  .
       |~  pose
         (cape ben %mack norj)
         (cape ras %teck nora)
@@ -1483,6 +1482,14 @@
           xnub
         ==
       ==
+    ::::
+    ::
+        ppro
+      =+  doc=tube
+      |:
+      ^-  ((give *prop) doc)
+      %.  doc
+      |~((glue ace) erop sym del del del)
     ::::
     ::
         xnub
@@ -1522,14 +1529,15 @@
         $
       ^-  *gene
       ?-  gen
-          [%cast *]   [%gant [%wost [%mave q.gen]] [%lome (fix(gen p.gen) 4)]]
+          [%cast *]   [%gant [%wost [%mave q.gen]] [%lome ~ (fix(gen p.gen) 4)]]
           [%teck *]   p.gen
           [%stil *]   $(gen q.gen)
       ::
           [%velt *]
         :+  %gant
           [%wost [%mave q.gen]]
-        :-  %lome
+        :+  %lome
+          ~
         :+  %flac
           [%mack ~ {[[%frag 4] [%mong $(gen q.gen) [%frag 4] ~]]}]
         (fix(gen p.gen) 4)
@@ -1539,7 +1547,7 @@
         =+  bog=(open gen)
         ?.  .=(bog gen)
           $(gen bog)
-        [%gant [%wost [%mave gen]] [%lome (fix 4)]]
+        [%gant [%wost [%mave gen]] [%lome ~ (fix 4)]]
       ==
     ::::
     ::
@@ -1614,19 +1622,19 @@
         [%vern *]   [%trol p.gen [%bone 1] [%bone 0]]
         [%frag *]   [%mack {gen} ~]
         [%fist *]   (fist p.gen)
-        [%lome *]   [%pank [[%% p.gen] ~]]
+        [%lome *]   [%pank p.gen [[%% q.gen] ~]]
         [%gnom *]   [%mong q.gen {p.gen}]
         [%bong *]   [%mong p.gen q.gen r.gen ~]
         [%claf *]   [%flac q.gen p.gen]
         [%lort *]   [%trol p.gen r.gen q.gen]
-        [%vamp *]   [%flac [%lome p.gen] [%pane %%]]
+        [%vamp *]   [%flac [%lome p.gen q.gen] [%pane %%]]
         [%zole *]   [%bone p.gen]
         [%pane *]   [%mack {gen} ~]
         [%tang *]   [%gant q.gen p.gen]
         [%teck *]   [%wost [%flac p.gen [%mack {[%pane %%]} ~]]]
         [%gant *]   [%flac [%twix p.gen [%frag 1]] q.gen]
         [%quax *]   [%twix p.gen [%twix q.gen [%twix r.gen s.gen]]]
-        [%sunt *]   [%tash [[%% p.gen] ~]]
+        [%sunt *]   [%tash p.gen [[%% q.gen] ~]]
         [%zemp *]   q.gen
         [%gram *]   [%trol p.gen q.gen [%zike ~]]
         [%trex *]   [%twix p.gen [%twix q.gen r.gen]]
@@ -1655,7 +1663,8 @@
           [%flac [%frag 3] i.q.gen]
         :+  %gant
           [%frag 8]
-        :-  %sunt
+        :+  %sunt
+          ~
         :^    %bong
             [%flac [%frag 23] p.gen]
           [%mong [%frag 10] [%frag 4] ~]
@@ -1672,7 +1681,8 @@
           i.r.gen
         :+  %gant 
           [%frag 8]
-        :-  %sunt
+        :+  %sunt
+          ~
         :+  %cast
           [%mong [%flac [%frag 11] q.gen] [%frag 4] ~]
         [%mong [%frag 10] [%frag 4] ~]
@@ -1684,7 +1694,8 @@
           [%flac [%frag 3] i.r.gen]
         :+  %gant
           [%frag 8]
-        :-  %sunt
+        :+  %sunt
+          ~
         :+  %cast
           [%mong [%flac [%frag 23] q.gen] [%frag 4] ~]
         :^    %bong
@@ -1734,7 +1745,7 @@
         [%rond *]
       ?~  p.gen
         [%zike ~]
-      [%gant [%mave i.p.gen] [%lome [%moze [%frag 4] p.gen]]]
+      [%gant [%mave i.p.gen] [%lome ~ [%moze [%frag 4] p.gen]]]
     ::
         [%frit *]
       [%gant p.gen [%mack {[%frag 2]} {[[%frag 4] [%flac [%frag 3] q.gen]]}]]
@@ -1927,9 +1938,10 @@
             [%grit p=*gene]
           $(gen p.gen)
         ::
-            [%tash p=*menu]
+            [%tash p=*prop q=*menu]
+          =+  wox=?~(p.gen ~ [p:(seek par.p.gen) +.p.gen])
           =>  %=(. sut (play gen))
-          [[0 1] [1 (bake (fill:gull p.gen))]]
+          [12 wox (bake (fill:gull q.gen))]
         ::
             [%plin p=*gene q=*gene]
           =+  lar=(seek (rake q.gen))
@@ -1940,9 +1952,10 @@
             [%flac p=*gene q=*gene]
           (comb:lily $(gen p.gen) $(sut (play p.gen), gen q.gen))
         ::
-            [%pank p=*menu]
+            [%pank p=*prop q=*menu]
+          =+  wox=?~(p.gen ~ [p:(seek par.p.gen) +.p.gen])
           =>  %=(. sut (play gen))
-          [[0 1] [1 (bake (fill:gull p.gen))]]
+          [12 wox (bake (fill:gull q.gen))]
         ::
             [%zalt p=*gene]
           [1 (play p.gen)]
@@ -2117,8 +2130,8 @@
           [%grit p=*gene]
         grit(sut $(gen p.gen))
       :: 
-          [%tash p=*menu]
-        [%core sut [%soft sut (fill:gull p.gen)]]
+          [%tash p=*prop q=*menu]
+        [%core sut [%soft sut (fill:gull q.gen)]]
       :: 
           [%plin p=*gene q=*gene]
         [%fork [%cube 0] [%cube 1]]
@@ -2126,8 +2139,8 @@
           [%flac p=*gene q=*gene]
         $(sut $(gen p.gen), gen q.gen)
       :: 
-          [%pank p=*menu]
-        [%core sut [%hard (fill:gull p.gen)]]
+          [%pank p=*prop q=*menu]
+        [%core sut [%hard (fill:gull q.gen)]]
       ::
           [%zalt p=*gene]
         [%cube $(gen p.gen)]
@@ -2241,7 +2254,7 @@
           [%grit p=*gene]
         $(gen p.gen)
       :: 
-          [%tash p=*menu]
+          [%tash p=*prop q=*menu]
         &
       :: 
           [%plin p=*gene q=*gene]
@@ -2250,7 +2263,7 @@
           [%flac p=*gene q=*gene]
         ?&($(gen p.gen) $(sut (play p.gen), gen q.gen))
       :: 
-          [%pank p=*menu]
+          [%pank p=*prop q=*menu]
         fine(sut (play gen))
       ::
           [%zalt p=*gene]

@@ -151,7 +151,7 @@ u4_crow_full(u4_lane lan,
     typ = _rose_play(&crow, sub, gen);
     printf(":\n");
 
-    u4_err(lan, "size", _dump_size(lan, tol));
+    // u4_err(lan, "size", _dump_size(lan, tol));
 
     // printf("prf: %d\n", crow.prf);
     // printf("prg: %d\n", crow.prg);
