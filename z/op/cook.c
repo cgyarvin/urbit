@@ -124,6 +124,12 @@
                     return u3_cm_fail;
                   }
                   else {
+                    u3_fox cor = u3_ln_cell(z, lan, vik);
+                    u3_fox pup = u3_h(z, fus);
+
+                    if ( 0 != pup ) {
+                      u3_zj_load(z, pup, cor);
+                    }
                     _zn_complete(z, ray_lid, u3_ln_cell(z, lan, vik));
                   }
                   break;

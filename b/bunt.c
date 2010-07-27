@@ -70,7 +70,7 @@ u3_b_init(void)
 **   Print (piv), with (c_tid) if nonzero as a caption.
 */
 void
-u3_b_print(u3_l       l,
+u3_b_print(u3_lv      lv,
            const u3_c *c_tid,
            u3_rat     piv)
 {
@@ -84,7 +84,7 @@ u3_b_print(u3_l       l,
     }
   }
   else {
-    u4_err(lane, c_tid, _bi_export(l, lane, piv));
+    u4_err(lane, c_tid, _bi_export(lv, lane, piv));
   }
 }
 
@@ -93,7 +93,7 @@ u3_b_print(u3_l       l,
 **   Print [piv] as a type, with [c_tid] if nonzero as a caption.
 */
 void
-u3_b_print_type(u3_l       l,
+u3_b_print_type(u3_lv      lv,
                 const u3_c *c_tid,
                 u3_rat     piv)
 {
@@ -110,7 +110,7 @@ u3_b_print_type(u3_l       l,
     struct _u4_crow crow;
 
     u4_crow_init(&crow, lane);
-    u4_burp(lane, c_tid, _dump_type(&crow, _bi_export(l, lane, piv)));
+    u4_burp(lane, c_tid, _dump_type(&crow, _bi_export(lv, lane, piv)));
   }
 }
 

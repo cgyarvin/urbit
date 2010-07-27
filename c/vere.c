@@ -285,6 +285,8 @@ vere_line(uz_machine mac,
   }
 }
 
+/* vere_dump(): dump noun to file.
+*/
 /* vere_boot(): boot vere.
 */
 void

@@ -594,6 +594,30 @@ u3_lr_quil(u3_lv    lv,
   else return u3_no;
 }
 
+/* u3_lr_hext():
+**
+**   Factor (a) as a hext (b c d e f g).
+*/
+u3_l_flag
+u3_lr_hext(u3_lv    lv,
+           u3_l_fox a,
+           u3_l_rat *b,
+           u3_l_rat *c,
+           u3_l_rat *d,
+           u3_l_rat *e,
+           u3_l_rat *f,
+           u3_l_rat *g)
+{
+  u3_l     l = lv;
+  u3_l_rat guf;
+
+  if ( (u3_yes == u3_lr_cell(l, a, b, &guf)) &&
+       (u3_yes == u3_lr_quil(l, guf, c, d, e, f, g)) ) {
+    return u3_yes;
+  }
+  else return u3_no;
+}
+
 /* u3_lr_t():
 **
 **   Return the tail of (a).

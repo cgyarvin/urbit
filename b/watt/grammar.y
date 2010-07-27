@@ -490,9 +490,9 @@ tall
   **/
     prop
       : si_dax si_lep 
-        rope ' ' tok_term ' ' tok_delm ' ' tok_delm ' ' tok_delm 
+        rope ' ' tok_term ' ' tok_delm ' ' tok_delm ' ' tok_delm ' ' tok_delm
         si_pel w
-        { $$ = u4_k_quil(yylane, $3, $5, $7, $9, $11); }
+        { $$ = _ytrel($3, $5, _yqual($7, $9, $11, $13)); }
       | { $$ = u4_nul; }
       ;
 

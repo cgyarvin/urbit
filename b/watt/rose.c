@@ -81,54 +81,56 @@ _rose_etch(u4_crow p,
   static u4_flag
   _rose_fine_hard(u4_crow p,
                   u4_type sut,
-                  u4_spec dab)
+                  u4_book dab)
   {
-    u4_noun p_dab, q_dab;
-
-    if ( u4_b_p(dab, u4_atom_none, &p_dab) ) {
+    if ( u4_n_zero(dab) ) {
       return u4_yes;
     }
-    else if ( u4_b_pq(dab, u4_atom_leaf, &p_dab, &q_dab) ) {
-      return _rose_show(p, sut, q_dab);
+    else {
+      u4_noun n_dab, l_dab, r_dab, qn_dab;
+
+      u4_c_trel(dab, &n_dab, &l_dab, &r_dab);
+      qn_dab = u4_ct(n_dab);
+
+      return u4_and
+        (_rose_show(p, sut, qn_dab),
+         u4_and(_rose_fine_hard(p, sut, l_dab),
+                _rose_fine_hard(p, sut, r_dab)));
     }
-    else if ( u4_b_fork(dab, &p_dab, &q_dab) ) {
-      return 
-        u4_and(_rose_fine_hard(p, sut, p_dab), 
-               _rose_fine_hard(p, sut, q_dab));
-    }
-    else return u4_trip;
   } 
   static u4_flag
   _rose_fine_soft(u4_crow p,
                   u4_type sut,
                   u4_type gar,
-                  u4_spec dab)
+                  u4_book dab)
   {
-    u4_noun p_dab, q_dab;
-
-    if ( u4_b_p(dab, u4_atom_none, &p_dab) ) {
+    if ( u4_n_zero(dab) ) {
       return u4_yes;
     }
-    else if ( u4_b_pq(dab, u4_atom_leaf, &p_dab, &q_dab) ) {
-      p->prh++;
+    else {
+      u4_noun n_dab, l_dab, r_dab, qn_dab;
 
-      if ( !_rose_show(p, sut, q_dab) ) {
+      u4_c_trel(dab, &n_dab, &l_dab, &r_dab);
+      qn_dab = u4_ct(n_dab);
+
+      p->prh++;
+      if ( u4_no == _rose_show(p, sut, qn_dab) ) {
         return u4_no;
       }
-      {
-        u4_tool vac = _rose_make(p, sut, q_dab);
-        u4_tool foh = _rose_make(p, gar, q_dab);
+      else {
+        u4_tool vac = _rose_make(p, sut, qn_dab);
+        u4_tool foh = _rose_make(p, gar, qn_dab);
 
-        return u4_say(u4_n_eq(vac, foh));
+        if ( !u4_n_eq(vac, foh) ) {
+          return u4_no;
+        }
+        return
+           u4_and(_rose_fine_soft(p, sut, gar, l_dab),
+                  _rose_fine_soft(p, sut, gar, r_dab));
       }
     }
-    else if ( u4_b_fork(dab, &p_dab, &q_dab) ) {
-      return 
-        u4_and(_rose_fine_soft(p, sut, gar, p_dab), 
-               _rose_fine_soft(p, sut, gar, q_dab));
-    }
-    else return u4_trip;
   }
+
   static u4_flag
   _rose_fine_a(u4_crow p,
                u4_type sut)
@@ -289,26 +291,41 @@ _rose_gain(u4_crow p,
   {
     return _lily_hike(p, axe, _rose_make_boil_a(p, sut, rem));
   }
-  u4_tool 
+  u4_noun
   _rose_make_bake(u4_crow p,
                   u4_type sut,
-                  u4_spec sep)
+                  u4_book dab)
   {
     u4_lane lan = p->lan;
-    u4_noun p_sep, q_sep;
 
-    if ( u4_b_fork(sep, &p_sep, &q_sep) ) {
-      return u4_k_cell(lan, _rose_make_bake(p, sut, p_sep),
-                            _rose_make_bake(p, sut, q_sep));
-    }
-    else if ( u4_b_p(sep, u4_atom_none, &p_sep) ) {
-      return u4_k_cell(lan, u4_nock_frag, u4_axis_0);
-    }
-    else if ( u4_b_pq(sep, u4_atom_leaf, &p_sep, &q_sep) ) {
-      return _rose_make(p, sut, q_sep);
+    if ( u4_n_zero(dab) ) {
+      return u4_noun_0;
     }
     else {
-      return u4_trip;
+      u4_noun n_dab, l_dab, r_dab, qn_dab;
+
+      u4_c_trel(dab, &n_dab, &l_dab, &r_dab);
+      qn_dab = u4_ct(n_dab);
+      
+      if ( u4_n_zero(l_dab) && u4_n_zero(r_dab) ) {
+        return _rose_make(p, sut, qn_dab);
+      }
+      else if ( u4_n_zero(l_dab) ) {
+        return u4_kc
+          (lan, _rose_make(p, sut, qn_dab),
+                _rose_make_bake(p, sut, r_dab));
+      }
+      else if ( u4_n_zero(r_dab) ) {
+        return u4_kc
+          (lan, _rose_make(p, sut, qn_dab),
+                _rose_make_bake(p, sut, l_dab));
+      }
+      else {
+        return u4_kt
+          (lan, _rose_make(p, sut, qn_dab),
+                _rose_make_bake(p, sut, l_dab),
+                _rose_make_bake(p, sut, r_dab));
+      }
     }
   }
   u4_noun
@@ -396,7 +413,7 @@ _rose_gain(u4_crow p,
       return _rose_make(p, sut, p_gen);
     }
     else if ( u4_b_pq(gen, u4_atom_tash, &p_gen, &q_gen) ) {
-      u4_spec sec = _gull_fill(p, u4_kc(lan, u4_atom_none, u4_nul), q_gen);
+      u4_book sec = _gull_fill(p, u4_nul, q_gen);
       u4_noun heq = _rose_make_prop(p, sut, p_gen);
       u4_noun baf = _rose_make_bake(p, _rose_play(p, sut, gen), sec);
 
@@ -428,7 +445,7 @@ _rose_gain(u4_crow p,
          _rose_make(p, _rose_play(p, sut, p_gen), q_gen));
     }
     else if ( u4_b_pq(gen, u4_atom_pank, &p_gen, &q_gen) ) {
-      u4_spec sec = _gull_fill(p, u4_kc(lan, u4_atom_none, u4_nul), q_gen);
+      u4_book sec = _gull_fill(p, u4_nul, q_gen);
       u4_noun heq = _rose_make_prop(p, sut, p_gen);
       u4_noun baf = _rose_make_bake(p, _rose_play(p, sut, gen), sec);
 
@@ -443,7 +460,9 @@ _rose_gain(u4_crow p,
 #endif
     }
     else if ( u4_b_p(gen, u4_atom_zalt, &p_gen) ) {
-      return u4_trip;
+      u4_type yoz = _rose_play(p, sut, p_gen);
+
+      return u4_kc(lan, u4_nock_bone, yoz);
     }
     else if ( u4_b_pq(gen, u4_atom_bran, &p_gen, &q_gen) ) {
       return _rose_make(p, sut, q_gen);
@@ -825,7 +844,7 @@ _rose_orth(u4_crow p,
                 (lan,
                  u4_atom_soft,
                  sut,
-                 _gull_fill(p, u4_kc(lan, u4_atom_none, u4_nul), q_gen)));
+                 _gull_fill(p, u4_nul, q_gen)));
     }
     else if ( u4_b_pq(gen, u4_atom_plin, &p_gen, &q_gen) ) {
       return u4_k_trel
@@ -844,10 +863,10 @@ _rose_orth(u4_crow p,
               u4_k_cell
                 (lan, 
                  u4_atom_hard,
-                 _gull_fill(p, u4_kc(lan, u4_atom_none, u4_nul), q_gen)));
+                 _gull_fill(p, u4_nul, q_gen)));
     }
     else if ( u4_b_p(gen, u4_atom_zalt, &p_gen) ) {
-      return u4_trip;
+      return u4_k_cell(lan, u4_atom_cube, _rose_play(p, sut, p_gen));
     }
     else if ( u4_b_pq(gen, u4_atom_bran, &p_gen, &q_gen) ) {
       return u4_k_trel(lan, u4_atom_face, p_gen, _rose_play(p, sut, q_gen));
@@ -1161,7 +1180,7 @@ _rose_seek(u4_crow p,
       return _rose_fine(p, _rose_play(p, sut, gen)); 
     }
     else if ( u4_b_p(gen, u4_atom_zalt, &p_gen) ) {
-      return u4_trip;
+      return u4_yes;
     }
     else if ( u4_b_pq(gen, u4_atom_bran, &p_gen, &q_gen) ) {
       return _rose_show(p, sut, q_gen);

@@ -1,4 +1,4 @@
-|*
+|*  #(. watt 0 0 298 0)
 ::
 ::::
   ::::
@@ -26,7 +26,7 @@
 ::
     dec
   =+  [a=@]
-  |=
+  |=  #(..dec dec 0 0 0 1)
   ^-  @
   ?<  .=(0 a)
   =+  b=`@`0
@@ -600,11 +600,30 @@
 ::::
 ::
     pool  =+(a=&* |:((tree a)))
+    book  =+([a=&* b=&*] |:((tree &[p=*a q=*b])))
 ::::
 ::
     in
   =+  a=*(pool)
   |%
+  ::::
+  ::
+      all
+    =+  b==+(* |=(?))
+    |:  |-
+    ^-  ?
+    ?~  a
+      &
+    ?&((b n.a) $(a l.a) $(a r.a))
+  ::::
+  ::
+      any
+    =+  b==+(* |=(?))
+    |:  |-
+    ^-  ?
+    ?~  a
+      |
+    ?|((b n.a) $(a l.a) $(a r.a))
   ::::
   ::
       gas
@@ -653,6 +672,83 @@
       tap
     =+  b=*(list)
     |:  |-
+    ?~  a
+      b
+    $(a r.a, b [n.a $(a l.a)])
+  ::
+  ::::
+  ==
+::::
+::
+    by
+  =+  a=*(book)
+  |%
+  ::::
+  ::
+      all
+    =+  b==+(* |=(?))
+    |:  |-
+    ^-  ?
+    ?~  a
+      &
+    ?&((b q.n.a) $(a l.a) $(a r.a))
+  ::::
+  ::
+      any
+    =+  b==+(* |=(?))
+    |:  |-
+    ^-  ?
+    ?~  a
+      |
+    ?|((b q.n.a) $(a l.a) $(a r.a))
+  ::::
+  ::
+      gas
+    =+  b=*(list &[p=* q=*])
+    |:  |-
+    ^-  a
+    ?~  b
+      a
+    $(b t.b, a (put p.i.b q.i.b))
+  ::::
+  ::
+      get
+    =+  b=*
+    |:  |-
+    ?~  a
+      ~
+    ?:  .=(b p.n.a)
+      [~ u=q.n.a]
+    ?:  (gor b p.n.a)
+      $(a l.a)
+    $(a r.a)
+  ::::
+  ::
+      put
+    =+  [b=* c=*]
+    |:
+    ^-  a
+    ?~  a
+      [[b c] ~ ~]
+    ?:  .=(b p.n.a)
+      ?>  .=(c q.n.a)
+      a
+    ?:  (gor b p.n.a)
+      =+  c=$(a l.a)
+      ?>  ?=(^ c)
+      ?:  (vor p.n.a p.n.c)
+        [n.a c r.a]
+      [n.c l.c [n.a r.c r.a]]
+    =+  c=$(a r.a)
+    ?>  ?=(^ c)
+    ?:  (vor p.n.a p.n.c)
+      [n.a l.a c] 
+    [n.c [n.a l.a l.c] r.c]
+  ::::
+  ::
+      tap
+    =+  b=*(list &[p=* q=*])
+    |:
     ?~  a
       b
     $(a r.a, b [n.a $(a l.a)])
@@ -1011,11 +1107,14 @@
       menu  (list &[p=*term q=*gene])
       plot  (list &[p=*gene q=*type])
       plan  &[p=*axis q=*(unit door) r=*type]
-      prop  <~ [par=*rope nam=*term maj=@ min=@ kel=@]>
+      prop  <~ [par=*rope nam=*term maj=@ min=@ kel=@ pri=@]>
       rack  (list &[p=*gene q=*gene])
       rail  (list type)
       rope  (list cord)
-      spec  <[%none ~] [%leaf p=*term q=*gene] [p=^+(^ *spec) q=*spec]>
+      :: seed  ^-(*type !:(..crow))
+      seed  ^-(*type %blur)
+      spec  (book term gene) 
+      :: spec  <[%none ~] [%leaf p=*term q=*gene] [p=^+(^ *spec) q=*spec]>
       spot  &[at=[l=@ c=@] to=[l=@ c=@]]
       term  &@
   ::
@@ -1489,7 +1588,7 @@
       |:
       ^-  ((give *prop) doc)
       %.  doc
-      |~((glue ace) erop sym del del del)
+      |~((glue ace) erop sym del del del del)
     ::::
     ::
         xnub
@@ -1843,13 +1942,13 @@
       ?-  q.sut
       ::
           [%hard p=*spec]
-        (ride:gull_p.q.sut =+(*gene |=((show -<))))
+        (all:by_p.q.sut =+(*gene |=((show -<))))
       ::
           [%soft p=*type q=*spec]
         ?:  (has:in_ver sut)
           &
         =>  %=(. ver (put:in_ver sut))
-        %-  ride:gull_q.q.sut
+        %-  all:by_q.q.sut
         =+  tux=*gene
         |=  
         ?&
@@ -1989,13 +2088,15 @@
       ::::
       ::
           bake
-        =+  sep=*spec
+        =+  dab=*spec
         |=
         ^-  *
-        ?-  sep
-          [%none ~]   [0 0]
-          [%leaf *]   (make q.sep)
-          [^ *]       [$(sep p.sep) $(sep q.sep)]
+        ?-  dab
+          ~         0
+          [* ~ ~]   (make q.n.dab)
+          [* ~ *]   [make q.n.dab $(dab r.dab)]
+          [* * ~]   [make q.n.dab $(dab l.dab)]
+          [* * *]   [make q.n.dab $(dab l.dab) $(dab r.dab)] 
         ==
       ::::
       ::
@@ -2107,7 +2208,7 @@
         %blot
       ::
           [%zoot ~]
-        !!
+        seed
       :: 
           [%vint p=*gene]
         %atom
@@ -2897,40 +2998,46 @@
       gull
     =+  dab=*spec
     |*
-    :::: XX: needs treap order.
+    ::::
     ::
         fill
       =+  sem=*menu
       |=
-      ^-  *spec
-      ?~  sem
-        dab
-      ?-  dab
-        [%none ~]   $(dab [%leaf p.i.sem q.i.sem], sem t.sem)
-        *           $(dab [[%leaf p.i.sem q.i.sem] dab], sem t.sem)
-      ==
+      (gas:by_dab sem) 
     ::::
     ::
         look
       =+  cog=*term
       |= 
-      =+  axe=1
+      =+  axe=`@`1
       |-
       ^-  *(unit &[p=*axis q=*gene])
       ?-  dab
-        [%none ~]                 ~
-        [%leaf p=*term q=*gene]   ?.(.=(p.dab cog) ~ [~ [axe q.dab]])
-        [p=^+(^ *spec) q=*spec]   (clap $(dab p.dab) $(dab q.dab) =+(^ |=(!!)))
-      ==
-    ::::
-    ::
-        ride
-      =+  fut==+(*gene |=(?))
-      |:
-      ?-  dab
-        [%none ~]                 &
-        [%leaf p=*term q=*gene]   (fut q.dab)
-        [p=^+(^ *spec) q=*spec]   ?&($(dab p.dab) $(dab q.dab))
+          ~         ~
+      ::
+          [* ~ ~]   
+        ?:(.=(cog p.n.dab) [~ axe q.n.dab] ~)
+      ::
+          [* ~ *]
+        ?:  .=(cog p.n.dab)
+          [~ (peg axe 2) q.n.dab]
+        ?:  (gor cog p.n.dab)
+          ~
+        $(axe (peg axe 3), dab r.dab)
+      ::
+          [* * ~]
+        ?:  .=(cog p.n.dab)
+          [~ (peg axe 2) q.n.dab]
+        ?:  (gor cog p.n.dab)
+          $(axe (peg axe 3), dab l.dab)
+        ~
+      ::
+          [* * *]
+        ?:  .=(cog p.n.dab)
+          [~ (peg axe 2) q.n.dab]
+        ?:  (gor cog p.n.dab)
+          $(axe (peg axe 6), dab l.dab)
+        $(axe (peg axe 7), dab l.dab)
       ==
     ::
     ::::

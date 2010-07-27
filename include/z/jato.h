@@ -4,20 +4,19 @@
 */
   /** Data structures.
   **/
-    /* zj_spec: 
+    /* u3_zj_code:
     **
-    **   A spec specification.  Used at load time and not again.
+    **   Jet codes.
     */
-      struct u3_zj_spec {
-        /* src: watt source for gate (eg, "add").
-        ** pry: priority group, 0-16.
-        ** pas: jet function, or 0.
-        */
-        const u3_c_c *c_src;
-        u3_c_y       y_pry;
-        u3_fox       (*fn_pas)(u3_z, u3_fox);
+      enum u3_zj_code {
+#       define _zj_wet(nam, mug, maj, min, kel) u3_zj_code_##name,
+#       define _zj_dry(nam, mug, maj, min, kel) u3_zj_code_##name,
+#         include "z/jets.h"
+#       undef _zj_wet 
+#       undef _zj_dry
+        u3_zj_code_none
       };
- 
+
     /* zj_def:
     **
     **   A jet definition.  Populated by installation.
@@ -27,44 +26,47 @@
         */
         const u3_c_c *nam;
 
-        /* Version: major, minor, kelvin.
-        */
-        uint32_t maj, min, kel;
-
-        /* Battery mug.
+        /* Battery mug - if 0, not known.
         */
         u3_fox mug;
 
-        /* Optimization priority.
+        /* Version: major, minor, kelvin.
         */
-        uint32_t pri;
+        uint32_t maj, min, kel;
 
         /* Fun, or null.
         */
         u3_fox (*pas)(u3_z, u3_fox);
 
-        /* Parent, or null.
+        /* Priority, as derived.
         */
-        struct u3_zj_def *par;
+        uint32_t pri;
 
-        /* Next in search list.  (XX - tree-ify.)
+        /* Battery, as installed.
+        */
+        u3_fox bat;
+
+        /* Context, as installed.
+        */
+        u3_fox con;
+
+        /* Next, in linear (XX) search list.
         */
         struct u3_zj_def *nex;
       };
 
   /** Functions.
   **/
-    /** Upcalls from zeno.
+    /** Called from main engine.
     **/
-      /* u3_zj_boot(): 
+      /* u3_zj_load():
       **
-      **   Initialize the jet system.
-      **
-      **   opt: optimization level (0-15)
+      **   Load jet by prop and battery.
       */
-        u3_flag
-        u3_zj_boot(u3_z z,
-                   u3_y y_opt);
+        void
+        u3_zj_load(u3_z   z,
+                   u3_fox pup,
+                   u3_fox bat);
 
       /* u3_zj_look():
       **

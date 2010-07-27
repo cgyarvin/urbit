@@ -195,7 +195,7 @@
   **/
     u4_atom
     _gull_size(u4_crow p,
-               u4_spec dab);
+               u4_book dab);
     u4_unit
     _gull_look(u4_crow p,
                u4_spec dab,

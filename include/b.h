@@ -28,7 +28,7 @@
       **   Print [piv], with [c_tid] if nonzero as a caption.
       */
         void
-        u3_b_print(u3_l       l,
+        u3_b_print(u3_lv      lv,
                    const u3_c *c_tid,
                    u3_rat     piv);
 
@@ -37,7 +37,7 @@
       **   Print [piv] as a type, with [c_tid] if nonzero as a caption.
       */
         void
-        u3_b_print_type(u3_l       l,
+        u3_b_print_type(u3_lv      lv,
                         const u3_c *c_tid,
                         u3_rat     piv);
 

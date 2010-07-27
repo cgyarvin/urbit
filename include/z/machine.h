@@ -19,58 +19,6 @@
   **/
     struct u3_z_core;
 
-    /* u3_zj_code:
-    **
-    **   Jet codes.
-    */
-      enum u3_zj_code {
-#       define _zj_wet(name, source, priority) u3_zj_code_##name,
-#       define _zj_dry(name, source, priority) u3_zj_code_##name,
-#         include "z/jets.h"
-#       undef _zj_wet 
-#       undef _zj_dry
-        u3_zj_code_none
-      };
-
-    /* u3_zj_jet: 
-    **
-    **   Live jet structure.
-    */
-      struct u3_zj_jet {
-        /* rid  : mung / short hash of bat
-        ** con  : static argument
-        ** bat  : formula
-        ** mug  : short hash of formula
-        ** pas  : C function to call - argument, sam (dynamic argument)
-        ** w_pri: priority
-        ** nex  : next in hash-search sequence
-        */
-        u3_fox           con;
-        u3_fox           bat;
-        u3_w             w_mug;
-        u3_fox           (*fn_pas)(struct u3_z_core *, u3_fox);
-        u3_w             w_pry;
-        struct u3_zj_jet *jet_nex;
-      };
-
-    /* u3_zj_map:
-    **
-    **   Live map structure.
-    */
-      struct u3_zj_map {
-        /* rid: hash of key
-        ** key: ie, name
-        ** toy: ie, value
-        ** hin: lower-hashed keys
-        ** yon: higher-hashed keys
-        */
-        u3_fox           rid;
-        u3_fox           key; 
-        u3_fox           toy;
-        struct u3_zj_map *map_hin;
-        struct u3_zj_map *map_yon;
-      };
-
     /* u3_z_core, z: 
     **
     **   The zeno core.

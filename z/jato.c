@@ -6,7 +6,37 @@
 
   /** Global data structures.
   **/
-    // #define 
+    static struct u3_zj_def _zj_defs[] = {
+#     define _zj_wet(nam, mug, maj, min, kel) \
+        { #nam, mug, maj, min, kel, 0, u3_zx_
+    };
+    static struct u3_zj_def *_zj_list;
+ 
+/* u3_zj_load():
+**
+**   Load jet by prop and battery.
+*/
+void
+u3_zj_load(u3_z   z,
+           u3_fox pup,
+           u3_fox bat)
+{
+  enum u3_zj_code sax = u3_zj_look(z, bat);
+  u3_fox par, nam, maj, min, kel, pri;
+
+  if ( (sax == u3_zj_code_none) && 
+       (u3_yes == u3_lr_hext(z, pup, &par, &nam, &maj, &min, &kel, &pri) ) )
+  {
+#if 0
+    u3_b_print(z, "par", par);
+    u3_b_print(z, "nam", nam);
+    u3_b_print(z, "maj", maj);
+    u3_b_print(z, "min", min);
+    u3_b_print(z, "kel", kel);
+    u3_b_print(z, "pri", pri);
+#endif
+  }
+}
 
 /* u3_zj_look():
 **
@@ -39,7 +69,7 @@ u3_fox
 u3_zj_bat(u3_z            z,
           enum u3_zj_code code_sax)
 {
-  return z->j.jet_rod[code_sax].bat;
+  return _zj_defs[code_sax].bat;
 }
 
 /* u3_zc_tank():
@@ -61,7 +91,7 @@ u3_zc_tank(u3_z    z,
 
 /* u3_zj_fire():
 **
-**   Fire a jet - fig, [[sam con].hub bat].
+**   Fire a jet - core, [[sam con] bat].
 **
 **   Set *pod and/or return error condition:
 **
@@ -74,22 +104,22 @@ u3_mote
 u3_zj_fire(u3_z            z,
            u3_fox          *pod,
            enum u3_zj_code code_sax,
-           u3_fox          fig)
+           u3_fox          cor)
 {
-  struct u3_zj_jet *jet_gof = &z->j.jet_rod[code_sax];
+  struct u3_zj_def *gof = &_zj_defs[code_sax];
   u3_mote          zec;
-  u3_fox           hub, sam, con, bat;
+  u3_fox           ham, sam, con, bat;
 
-  if ( u3_no == u3_lr_cell(z, fig, &hub, &bat) ) {
+  if ( u3_no == u3_lr_cell(z, cor, &ham, &bat) ) {
     return u3_cm_punt;
   }
-  else if ( u3_no == u3_lr_eq(z, bat, jet_gof->bat) ) {
+  else if ( u3_no == u3_lr_eq(z, bat, gof->bat) ) {
     return u3_cm_punt;
   }
-  else if ( u3_no == u3_lr_cell(z, hub, &sam, &con) ) {
+  else if ( u3_no == u3_lr_cell(z, ham, &sam, &con) ) {
     return u3_cm_punt;
   }
-  else if ( u3_no == u3_lr_eq(z, con, jet_gof->con) ) {
+  else if ( u3_no == u3_lr_eq(z, con, gof->con) ) {
     return u3_cm_punt;
   }
   else {
@@ -98,91 +128,12 @@ u3_zj_fire(u3_z            z,
       return zec;
     }
     else {
-      *pod = jet_gof->fn_pas(z, sam);
+      *pod = gof->pas(z, cor);
 
-      return ( (z->j.w_opt < jet_gof->w_pry) ? u3_cm_test : 0 );
+      // return ( (z->j.w_opt < jet_gof->w_pry) ? u3_cm_test : 0 );
+      return 0;
     }
   }
-}
-
-/* u3_zj_boot(): 
-**
-**   Initialize the jet system.
-**  
-**   opt: optimization level (0-15)
-*/
-u3_flag
-u3_zj_boot(u3_z z,
-           u3_y y_opt)
-{
-  static struct u3_zj_spec spec[] = {
-#   define _zj_wet(name, source, priority) \
-      { source, priority, u3_zx_##name },
-#   define _zj_dry(name, source, priority) \
-      { source, priority, 0 },
-#     include "z/jets.h"
-      { 0, 0, 0 }
-
-#   undef _zj_wet
-#   undef _zj_dry
-  };
-
-  /* num: number of jets
-  ** rod: jet array
-  */
-  u3_w             w_i;
-  struct u3_zj_jet *jet_rod;
-
-  jet_rod = u3_lm_alloc(z, u3_zj_code_none * u3_wiseof(struct u3_zj_jet));
-  if ( !jet_rod ) {
-    return u3_no;
-  }
-  z->j.jet_rod = jet_rod;
-
-  for ( w_i=0; w_i < u3_zj_code_none; w_i++ ) {
-    /* src: source string
-    ** dim: gene
-    ** gar: formula
-    ** wup: gate [[sam con] bat]
-    */
-    u3_fox src = u3_ln_string(z, spec[w_i].c_src);
-
-    if ( u3_none == src ) {
-      return u3_no;
-    } else {
-      u3_rat dim = u3_b_watt(&z->l, src);
-
-      if ( u3_none == dim ) {
-        return u3_no;
-      }
-      else {
-        u3_rat gar = u3_b_bake(&z->l, u3_h(z, z->q.tef), dim);
-
-        if ( u3_none == gar ) {
-          return u3_no;
-        }
-        else {
-          u3_rat wup = u3_ln_nock(z, u3_t(z, z->q.tef), gar);
-
-          if ( u3_none == wup ) {
-            return u3_no;
-          } else {
-            u3_fox con = u3_t(z, u3_h(z, wup));
-            u3_fox bat = u3_t(z, wup);
-
-            jet_rod[w_i].con    = con;
-            jet_rod[w_i].bat    = bat;
-            jet_rod[w_i].w_mug  = u3_lm_mug(z, bat);
-            jet_rod[w_i].w_pry  = spec[w_i].y_pry;
-            jet_rod[w_i].fn_pas = spec[w_i].fn_pas;
-          }
-        }
-      }
-    }
-  }
-  z->j.w_opt = y_opt;
-
-  return u3_yes;
 }
 
 /* u3_zc_bytes():
