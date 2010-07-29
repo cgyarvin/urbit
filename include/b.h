@@ -93,11 +93,11 @@
                   u3_fox gal,
                   u3_fox vub);
 
-      /* u3_b_bake():
+      /* u3_b_make():
       **
       **   Use bunt routines to map (type gene) to (form).
       */
         u3_rat
-        u3_b_bake(u3_l   l,
+        u3_b_make(u3_l   l,
                   u3_fox gal,
                   u3_fox vub);

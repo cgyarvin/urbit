@@ -78,7 +78,7 @@ _console_line(const char *history_name)
   }
 }
 
-#if 1
+#if 0
 extern void vere_boot(uz_machine);
 extern void vere_line(uz_machine, uz_noun);
 
@@ -124,7 +124,7 @@ main(int  argc,
   void *ver;
 
   if ( !(ver = ford_boot(24)) ) {
-    fprintf(stderr, "zeno: boot failed\n");
+    fprintf(stderr, "ford: boot failed\n");
     return 1;
   }
   while ( 1 ) {
@@ -134,7 +134,7 @@ main(int  argc,
       break;
     }
     else {
-      ford_line(mac, line);
+      ford_line(ver, line);
     }
   }
   return 0;
