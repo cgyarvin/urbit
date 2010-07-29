@@ -4,13 +4,13 @@
 */
 #include "u4/all.h"
 
-/* burn:iris:rose:crow
+/* burn:iris:rose:plow
 */
   static u4_type
-  _iris_burn_sint(u4_crow, u4_type, u4_rail, u4_axis, u4_flag, u4_tack);
+  _iris_burn_sint(u4_plow, u4_type, u4_rail, u4_axis, u4_flag, u4_tack);
 
   static u4_type
-  _iris_burn_dext(u4_crow p,
+  _iris_burn_dext(u4_plow p,
                   u4_type sut,
                   u4_rail bar,
                   u4_axis axe,
@@ -92,7 +92,7 @@
             u4_burp(lan, "l_bar", _dump_durb(p, l_bar));
             u4_burp(lan, "ham", _dump_type(p, ham));
 
-            return _crow_fail(p, "burn hard");
+            return _plow_fail(p, "burn hard");
           }
           return sut;
         }
@@ -101,7 +101,7 @@
 
           sut = u4_kt(lan, u4_atom_core, ham, q_sut);
           if ( u4_so(vef) && !u4_so(_rose_fine(p, sut)) ) {
-            return _crow_fail(p, "burn soft");
+            return _plow_fail(p, "burn soft");
           }
           return sut;
         }
@@ -127,7 +127,7 @@
     else return u4_trip;
   }
   static u4_unit
-  _iris_burn_swim(u4_crow p,
+  _iris_burn_swim(u4_plow p,
                   u4_type sut,
                   u4_rail bar,
                   u4_axis axe,
@@ -164,7 +164,7 @@
     }
   }
   static u4_type
-  _iris_burn_sint(u4_crow p,
+  _iris_burn_sint(u4_plow p,
                   u4_type sut,
                   u4_rail bar,
                   u4_axis axe,
@@ -197,7 +197,7 @@
     else return u4_trip;
   }
 u4_type
-_iris_burn(u4_crow p,
+_iris_burn(u4_plow p,
            u4_type sut,
            u4_rail bar,
            u4_axis axe,
@@ -207,10 +207,10 @@ _iris_burn(u4_crow p,
   return _iris_burn_dext(p, sut, bar, axe, vef, tac);
 }
 
-/* cull:iris:rose:crow
+/* cull:iris:rose:plow
 */
   static u4_flag
-  _iris_cull_a(u4_crow p,
+  _iris_cull_a(u4_plow p,
                u4_type sut,
                u4_rail bar,
                u4_axis axe)
@@ -224,7 +224,7 @@ _iris_burn(u4_crow p,
     else return _iris_cull_a(p, sut, u4_ct(bar), axe);
   }
 u4_flag
-_iris_cull(u4_crow p,
+_iris_cull(u4_plow p,
            u4_type sut,
            u4_rail bar,
            u4_axis axe)
@@ -237,13 +237,13 @@ _iris_cull(u4_crow p,
   }
 }
 
-/* find:iris:rose:crow
+/* find:iris:rose:plow
 */
   static u4_unit _iris_find_main
-    (u4_crow, u4_type, u4_rail, u4_axis, u4_pool, u4_term);
+    (u4_plow, u4_type, u4_rail, u4_axis, u4_pool, u4_term);
 
   static u4_unit
-  _iris_find_half(u4_crow p,
+  _iris_find_half(u4_plow p,
                   u4_type sut,
                   u4_rail bar,
                   u4_axis axe,
@@ -256,7 +256,7 @@ _iris_cull(u4_crow p,
     return _iris_find_main(p, sut, bar, axe, gil, cog);
   }
   static u4_unit
-  _iris_find_swim(u4_crow p,
+  _iris_find_swim(u4_plow p,
                   u4_type sut,
                   u4_rail bar,
                   u4_axis axe,
@@ -286,11 +286,11 @@ _iris_cull(u4_crow p,
           }
           else {
             u4_burp(lan, "cog", u4_prep_textual(lan, cog));
-            return _crow_fail(p, "fork conflict a");
+            return _plow_fail(p, "fork conflict a");
           }
         }
         else if ( u4_n_zero(gam) ) {
-          return _crow_fail(p, "fork conflict b");
+          return _plow_fail(p, "fork conflict b");
         }
         else {
           u4_plan u_lep = u4_ct(lep);
@@ -311,7 +311,7 @@ _iris_cull(u4_crow p,
           }
           else {
             u4_burp(lan, "cog", u4_prep_textual(lan, cog));
-            return _crow_fail(p, "fork conflict c");
+            return _plow_fail(p, "fork conflict c");
           }
         }
       }
@@ -332,7 +332,7 @@ _iris_cull(u4_crow p,
     }
   }
   static u4_unit
-  _iris_find_main_a(u4_crow p,
+  _iris_find_main_a(u4_plow p,
                     u4_type sut,
                     u4_rail bar,
                     u4_axis axe,
@@ -362,7 +362,7 @@ _iris_cull(u4_crow p,
       else {
 #if 0
         u4_burp(lan, "cog", u4_prep_textual(lan, cog));
-        return _crow_fail(p, "cell conflict");
+        return _plow_fail(p, "cell conflict");
 #else
         return taf;
 #endif
@@ -499,7 +499,7 @@ _iris_cull(u4_crow p,
     }
   }
   static u4_unit
-  _iris_find_main(u4_crow p,
+  _iris_find_main(u4_plow p,
                   u4_type sut,
                   u4_rail bar,
                   u4_axis axe,
@@ -522,7 +522,7 @@ _iris_cull(u4_crow p,
     }
   }
 u4_plan
-_iris_find(u4_crow p,
+_iris_find(u4_plow p,
            u4_type sut,
            u4_rail bar,
            u4_axis axe,
@@ -533,18 +533,18 @@ _iris_find(u4_crow p,
   if ( u4_n_zero(fyg) ) {
     u4_burp(p->lan, "cog", u4_prep_textual(p->lan, cog));
     u4_burp(p->lan, "sut", _dump_type(p, sut));
-    return _crow_fail(p, "not found");
+    return _plow_fail(p, "not found");
   }
   return u4_ct(fyg);
 }
 
-/* fish:iris:rose:crow
+/* fish:iris:rose:plow
 */
   static u4_tool
-  _iris_fish_main(u4_crow, u4_type, u4_rail, u4_axis, u4_pool);
+  _iris_fish_main(u4_plow, u4_type, u4_rail, u4_axis, u4_pool);
 
   static u4_tool
-  _iris_fish_slip(u4_crow p,
+  _iris_fish_slip(u4_plow p,
                   u4_type sut,
                   u4_rail bar,
                   u4_axis axe,
@@ -555,7 +555,7 @@ _iris_find(u4_crow p,
     return _iris_fish_main(p, sut, bar, axe, vit);
   }
   static u4_unit
-  _iris_fish_swim(u4_crow p,
+  _iris_fish_swim(u4_plow p,
                   u4_type sut,
                   u4_rail bar,
                   u4_axis axe,
@@ -585,7 +585,7 @@ _iris_find(u4_crow p,
     }
   }
   static u4_tool
-  _iris_fish_main(u4_crow p,
+  _iris_fish_main(u4_plow p,
                   u4_type sut,
                   u4_rail bar,
                   u4_axis axe,
@@ -637,7 +637,7 @@ _iris_find(u4_crow p,
       u4_noun duq = u4_kc(lan, sut, bar);
 
       if ( u4_bag_in(duq, vit) ) {
-        return _crow_fail(p, "fish recursion");
+        return _plow_fail(p, "fish recursion");
       } 
       else {
         return _iris_fish_main
@@ -652,7 +652,7 @@ _iris_find(u4_crow p,
     }
   }
 u4_tool
-_iris_fish(u4_crow p,
+_iris_fish(u4_plow p,
            u4_type sut,
            u4_rail bar,
            u4_axis axe)
@@ -660,10 +660,10 @@ _iris_fish(u4_crow p,
   return _iris_fish_main(p, sut, bar, axe, u4_nul);
 }
 
-/* half:iris:rose:crow
+/* half:iris:rose:plow
 */
   static u4_unit
-  _iris_half_swim(u4_crow p,
+  _iris_half_swim(u4_plow p,
                   u4_type sut,
                   u4_rail bar,
                   u4_axis axe,
@@ -692,7 +692,7 @@ _iris_fish(u4_crow p,
     }
   }
   u4_type
-  _iris_half_main(u4_crow p,
+  _iris_half_main(u4_plow p,
                   u4_type sut,
                   u4_rail bar,
                   u4_axis axe,
@@ -752,7 +752,7 @@ _iris_fish(u4_crow p,
   }
 
 u4_type
-_iris_half(u4_crow p,
+_iris_half(u4_plow p,
            u4_type sut,
            u4_rail bar,
            u4_axis axe,
@@ -773,17 +773,17 @@ _iris_half(u4_crow p,
   }
 }
 
-/* nest:iris:rose:crow
+/* nest:iris:rose:plow
 */
   static u4_flag
   _iris_nest_sint
-    (u4_crow, u4_type, u4_rail, u4_axis, u4_pool, u4_type, u4_rail, u4_axis); 
+    (u4_plow, u4_type, u4_rail, u4_axis, u4_pool, u4_type, u4_rail, u4_axis); 
   static u4_flag
   _iris_nest_dext
-    (u4_crow, u4_type, u4_rail, u4_axis, u4_pool, u4_type, u4_rail, u4_axis); 
+    (u4_plow, u4_type, u4_rail, u4_axis, u4_pool, u4_type, u4_rail, u4_axis); 
 
   static u4_flag
-  _iris_nest_dext_slip(u4_crow p,
+  _iris_nest_dext_slip(u4_plow p,
                        u4_type sut,
                        u4_rail bar,
                        u4_axis axe,
@@ -799,7 +799,7 @@ _iris_half(u4_crow p,
     return _iris_nest_dext(p, sut, bar, axe, gil, bon, nef, ful);
   }
   static u4_flag
-  _iris_nest_dext_swim(u4_crow p,
+  _iris_nest_dext_swim(u4_plow p,
                        u4_type sut,
                        u4_rail bar,
                        u4_axis axe,
@@ -825,7 +825,7 @@ _iris_half(u4_crow p,
   }
 
   static u4_flag
-  _iris_nest_dext_main(u4_crow p,
+  _iris_nest_dext_main(u4_plow p,
                        u4_type sut,
                        u4_rail bar,
                        u4_axis axe,
@@ -921,7 +921,7 @@ _iris_half(u4_crow p,
     }
   }
   static u4_flag
-  _iris_nest_dext(u4_crow p,
+  _iris_nest_dext(u4_plow p,
                   u4_type sut,
                   u4_rail bar,
                   u4_axis axe,
@@ -952,7 +952,7 @@ _iris_half(u4_crow p,
     }
   }
   static u4_flag
-  _iris_nest_sint_swim(u4_crow p,
+  _iris_nest_sint_swim(u4_plow p,
                        u4_type sut,
                        u4_rail bar,
                        u4_axis axe,
@@ -977,7 +977,7 @@ _iris_half(u4_crow p,
     }
   }
   static u4_flag
-  _iris_nest_sint(u4_crow p,
+  _iris_nest_sint(u4_plow p,
                   u4_type sut,
                   u4_rail bar,
                   u4_axis axe,
@@ -1045,7 +1045,7 @@ _iris_half(u4_crow p,
     else return u4_trip;
   }
 u4_flag
-_iris_nest(u4_crow p,
+_iris_nest(u4_plow p,
            u4_type sut,
            u4_rail bar,
            u4_axis axe,
@@ -1066,10 +1066,10 @@ _iris_nest(u4_crow p,
   }
 }
 
-/* peek:iris:rose:crow
+/* peek:iris:rose:plow
 */
 u4_type
-_iris_peek(u4_crow p,
+_iris_peek(u4_plow p,
            u4_type sut,
            u4_rail bar,
            u4_axis axe,
@@ -1087,10 +1087,10 @@ _iris_peek(u4_crow p,
   }
 }
 
-/* slip:iris:rose:crow
+/* slip:iris:rose:plow
 */
   static u4_rail
-  _iris_slip_a(u4_crow p,
+  _iris_slip_a(u4_plow p,
                u4_rail bar,
                u4_axis had)
   {
@@ -1104,7 +1104,7 @@ _iris_peek(u4_crow p,
     } 
   }
 void
-_iris_slip(u4_crow p,
+_iris_slip(u4_plow p,
            u4_type *sut,
            u4_rail *bar,
            u4_axis *axe,
@@ -1115,15 +1115,15 @@ _iris_slip(u4_crow p,
   *axe = u4_op_peg(p->lan, *axe, had);
 }
 
-/* snap:iris:rose:crow
+/* snap:iris:rose:plow
 */
   static u4_type
-  _iris_snap_dext(u4_crow, u4_type, u4_rail, u4_axis, u4_type);
+  _iris_snap_dext(u4_plow, u4_type, u4_rail, u4_axis, u4_type);
   static u4_type
-  _iris_snap_sint(u4_crow, u4_type, u4_rail, u4_axis, u4_type);
+  _iris_snap_sint(u4_plow, u4_type, u4_rail, u4_axis, u4_type);
 
   static u4_type
-  _iris_snap_slip(u4_crow p,
+  _iris_snap_slip(u4_plow p,
                   u4_type sut,
                   u4_rail bar,
                   u4_axis axe,
@@ -1134,7 +1134,7 @@ _iris_slip(u4_crow p,
     return _iris_snap(p, sut, bar, axe, bon);
   }
   static u4_flag
-  _iris_snap_cull(u4_crow p,
+  _iris_snap_cull(u4_plow p,
                   u4_type sut,
                   u4_rail bar,
                   u4_axis axe,
@@ -1145,7 +1145,7 @@ _iris_slip(u4_crow p,
        _rose_orth(p, sut, bon));
   }
   static u4_type
-  _iris_snap_dext(u4_crow p,
+  _iris_snap_dext(u4_plow p,
                   u4_type sut,
                   u4_rail bar,
                   u4_axis axe,
@@ -1214,7 +1214,7 @@ _iris_slip(u4_crow p,
     else return u4_trip;
   }
   static u4_type
-  _iris_snap_sint(u4_crow p,
+  _iris_snap_sint(u4_plow p,
                   u4_type sut,
                   u4_rail bar,
                   u4_axis axe,
@@ -1237,7 +1237,7 @@ _iris_slip(u4_crow p,
     else return bon;
   }
 u4_type
-_iris_snap(u4_crow p,
+_iris_snap(u4_plow p,
            u4_type sut,
            u4_rail bar,
            u4_axis axe,

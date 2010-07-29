@@ -50,6 +50,7 @@ Gene - AST
     ::
       [%bran p=*term q=*gene]                     ::  ^=  hatben
       [%cast p=*gene q=*gene]                     ::  ^-  hatnub
+      [%germ p=*gene q=*gene]                     ::  ^$  hatbuc
       [%grit p=*gene]                             ::  ^@  hatpat
       [%mave p=*gene]                             ::  ^*  hatras
       [%pock p=*gene q=*gene]                     ::  ^+  hatdig
@@ -62,10 +63,12 @@ Gene - AST
     ::
       [%bong p=*gene q=*gene r=*gene]             ::  %+  mitpod
       [%frit p=*gene q=*gene]                     ::  %_  mitcab
+      [%gath p=*gene q=*gene]                     ::  %>  mitred
       [%gnom p=*gene q=*gene]                     ::  %.  mitdot
       [%mack p=*rope q=*rack]                     ::  %=  mitben
       [%mong p=*bank]                             ::  %-  mitnub  
       [%teck p=*gene]                             ::  %*  mitras
+      [%thag p=*gene q=*gene]                     ::  %<  mitder
       [%tong p=*gene q=*gene r=*gene s=*gene]     ::  %^  mithat
     ::
       [%zalt p=*gene]                             ::  !:  hopdig

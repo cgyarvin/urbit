@@ -4,7 +4,10 @@
 */
 #include <setjmp.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <stdio.h>
+#include <gmp.h>
+#include <assert.h>
 #include "z/public.h"
 
   /** Forward declarations.
@@ -284,9 +287,195 @@ vere_line(uz_machine mac,
     }
   }
 }
+  
+  /** Dumb scanning and dumping.
+  **/
+    static void
+    _vere_dump_in(uz_machine mac, FILE *fil, uz_noun non);
+    static void
+    _vere_dump(uz_machine mac, FILE *fil, uz_noun non);
+    static uz_noun
+    _vere_scan_cell(uz_machine mac, FILE *fil);
+    static uz_noun
+    _vere_scan(uz_machine mac, FILE *fil);
+
+/* Return true iff (atom) is an ASCII string of (3) or more bytes,
+** using no characters besides a-z and -.
+*/
+static uint8_t
+_vere_term(uz_machine mac,
+           uz_noun    tat,
+           uint32_t   qb)
+{
+  uint32_t sb = uz_a_bin(mac, 3, tat);
+
+  if ( sb >= qb) {
+    uint8_t *xb = alloca(sb);
+    uint32_t i;
+
+    uz_a_bytes(mac, 0, sb, xb, tat);
+
+    for ( i=0; i < sb; i++ ) {
+      if ( ((xb[i] < 'a') || (xb[i] > 'z')) && (xb[i] != '-') ) {
+        return 0;
+      }
+    }
+    return 1;
+  }
+  else return 0;
+}
+
+/* _vere_dump_in(): dump in cell.
+*/
+static void
+_vere_dump_in(uz_machine mac,
+              FILE       *fil,
+              uz_noun    non)
+{
+  if ( !uz_n_tap(mac, non) ) {
+    _vere_dump(mac, fil, non);
+  }
+  else {
+    _vere_dump(mac, fil, uz_ch(mac, non));
+    fprintf(fil, " ");
+    _vere_dump_in(mac, fil, uz_ct(mac, non));
+  }
+}
 
 /* vere_dump(): dump noun to file.
 */
+void
+_vere_dump(uz_machine mac,
+           FILE       *fil,
+           uz_noun    non)
+{
+  if ( !uz_n_tap(mac, non) ) {
+    mpz_t amp;
+
+    if ( _vere_term(mac, non, 2) ) {
+      uint32_t sb = uz_a_bin(mac, 3, non);
+      uint8_t *xb = alloca(sb + 1);
+
+      uz_a_bytes(mac, 0, sb, xb, non);
+      xb[sb] = 0;
+      fprintf(fil, "%%%s", xb);
+    }
+    else {
+      uz_a_mp(mac, amp, non);
+      gmp_fprintf(fil, "%Zd", amp);
+      mpz_clear(amp);
+    }
+  }
+  else {
+    fputc('[', fil);
+    _vere_dump(mac, fil, uz_ch(mac, non));
+    fprintf(fil, " ");
+    _vere_dump_in(mac, fil, uz_ct(mac, non));
+    fputc(']', fil);
+  }
+}
+
+/* _vere_scan_cell(): scan cell or tuple.
+*/
+static uz_noun
+_vere_scan_cell(uz_machine mac, 
+                FILE       *fil)
+{
+  uz_noun hed = _vere_scan(mac, fil);
+  int     c   = fgetc(fil);
+
+  if ( c == ' ' ) {
+    uz_noun tal = _vere_scan_cell(mac, fil);
+
+    return uz_k_cell(mac, hed, tal);
+  }
+  else { 
+    assert(c == ']');
+    return hed;
+  }
+}
+
+/* _vere_scan(): scan noun from file.
+*/
+static uz_noun
+_vere_scan(uz_machine mac,
+           FILE       *fil)
+{
+  int c = fgetc(fil);
+
+  if ( c == '[' ) {
+    return _vere_scan_cell(mac, fil);
+  } 
+  else if ( c == '%' )  {
+    char buf[1025];
+
+    fscanf(fil, "%1024[a-z-]", buf);
+    return uz_k_string(mac, buf);
+  }
+#if 0
+    mpz_t amp;
+
+    mpz_init(amp);
+    while ( 1 ) {
+      c=fgetc(fil);
+
+      if ( (c == '-') || ((c >= 'a') && (c <= 'z')) ) {
+        mpz_mul_ui(amp, amp, 256);
+        mpz_add_ui(amp, amp, c);
+      }
+      else {
+        ungetc(c, fil);
+
+        return uz_k_mp(mac, amp);
+      }
+    }
+#endif
+  else {
+    mpz_t amp;
+
+    ungetc(c, fil);
+    mpz_init(amp);
+    gmp_fscanf(fil, "%Zd", amp);
+    return uz_k_mp(mac, amp);
+  }
+}
+
+uz_noun
+_vere_kernel(uz_machine mac,
+             const char *src,
+             const char *cax)
+{
+  FILE *fil;
+  uz_noun ker;
+
+  if ( 1 ) {
+ //  if ( !(fil = fopen(cax, "r")) ) {
+    uz_noun tex = uz_k_file(mac, uz_k_string(mac, src));
+
+    printf("[rebuilding kernel]\n");
+    ker = uz_t_watt(mac, tex);
+
+#if 0
+    if ( !(fil = fopen(cax, "w")) ) {
+      perror(cax);
+      exit(1);
+    }
+    _vere_dump(mac, fil, ker);
+     printf("[saved: %s]\n", cax);
+    fclose(fil);
+#endif
+
+    return ker;
+  }
+  else {
+    printf("[loading: %s]\n", cax);
+
+    ker = _vere_scan(mac, fil);
+    fclose(fil);
+    return ker;
+  }
+}
+
 /* vere_boot(): boot vere.
 */
 void
@@ -305,8 +494,7 @@ vere_boot(uz_machine mac)
   else {
     uz_l_except(mac, env);
     {
-      uz_noun src = uz_k_file(mac, uz_k_string(mac, "watt/watt.watt"));
-      uz_noun ker = uz_t_watt(mac, src);
+      uz_noun ker = _vere_kernel(mac, "watt/watt.watt", "watt/298.nock");
 
       uz_r_express(mac, ker);
 

@@ -9,7 +9,7 @@
 #include <setjmp.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-
+#include <gmp.h>
 #include <stdint.h>
 #include "z/public.h"
 
@@ -78,6 +78,7 @@ _console_line(const char *history_name)
   }
 }
 
+#if 1
 extern void vere_boot(uz_machine);
 extern void vere_line(uz_machine, uz_noun);
 
@@ -110,3 +111,32 @@ main(int  argc,
   }
   return 0;
 }
+#else
+
+extern void *ford_boot(int size);
+extern void  ford_line(void *ford, char *line);
+
+int
+main(int  argc,
+     char **argv)
+{
+  char *history_name = _console_init();
+  void *ver;
+
+  if ( !(ver = ford_boot(24)) ) {
+    fprintf(stderr, "zeno: boot failed\n");
+    return 1;
+  }
+  while ( 1 ) {
+    char *line = _console_line(history_name);
+
+    if ( !line ) {
+      break;
+    }
+    else {
+      ford_line(mac, line);
+    }
+  }
+  return 0;
+}
+#endif

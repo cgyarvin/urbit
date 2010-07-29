@@ -7,11 +7,53 @@
   /** Global data structures.
   **/
     static struct u3_zj_def _zj_defs[] = {
-#     define _zj_wet(nam, mug, maj, min, kel) \
-        { #nam, mug, maj, min, kel, 0, u3_zx_
+#     define _zj_wet(nam, mug) \
+        { #nam, mug, u3_zx_##nam },
+#     define _zj_dry(nam, mug) \
+        { #nam, mug,  0 },
+#include "z/jets.h"
+        {}
     };
-    static struct u3_zj_def *_zj_list;
- 
+    static struct u3_zj_def *_zj_list = 0;
+
+/* _zj_add():
+**
+**   Add (def, cor, pri) to the jet search space.
+*/
+static void
+_zj_add(u3_z     z,
+        struct   u3_zj_def *def,
+        u3_fox   cor,
+        u3_fox   par,
+        uint32_t pri)
+{
+  u3_fox ham = u3_zh(z, cor);
+  u3_fox bat = u3_zt(z, cor);
+
+  if ( u3_no == u3_lr_tap(z, ham) ) {
+    def->con = 0;
+  } else {
+    def->con = u3_zt(z, ham);
+  }
+  if ( 0 == def->mug ) {
+    def->mug = u3_lm_mug(z, bat);
+    fprintf(stderr, "mug: %s: %x\n", def->nam, def->mug);
+  } else {
+    if ( def->mug != u3_lm_mug(z, bat) ) {
+      fprintf(stderr, "mug: mismatch: %s, %x, %x\n", 
+          def->nam, def->mug, u3_lm_mug(z, bat));
+
+      u3_zc_tank(z, u3_cm_fail);
+    }
+  }
+
+  def->bat = bat;
+  def->pri = pri; 
+
+  def->nex = _zj_list;
+  _zj_list = def;
+}
+
 /* u3_zj_load():
 **
 **   Load jet by prop and battery.
@@ -19,42 +61,51 @@
 void
 u3_zj_load(u3_z   z,
            u3_fox pup,
-           u3_fox bat)
+           u3_fox cor)
 {
-  enum u3_zj_code sax = u3_zj_look(z, bat);
-  u3_fox par, nam, maj, min, kel, pri;
+  u3_fox            bat = u3_zt(z, cor);
+  u3_w              mug = u3_lm_mug(z, bat);
+  enum u3_zj_code   sax = u3_zj_look(z, bat);
+  struct u3_zj_def  *def;
+  u3_fox            par, nam, pri;
+
+  for ( def = _zj_list; def; def = def->nex ) {
+    if ( mug == def->mug ) {
+      return;
+    }
+  }
 
   if ( (sax == u3_zj_code_none) && 
-       (u3_yes == u3_lr_hext(z, pup, &par, &nam, &maj, &min, &kel, &pri) ) )
+       (u3_yes == u3_lr_trel(z, pup, &par, &nam, &pri) ) )
   {
-#if 0
-    u3_b_print(z, "par", par);
-    u3_b_print(z, "nam", nam);
-    u3_b_print(z, "maj", maj);
-    u3_b_print(z, "min", min);
-    u3_b_print(z, "kel", kel);
-    u3_b_print(z, "pri", pri);
-#endif
+    uint32_t         i;
+    struct u3_zj_def *def;
+
+    for ( i=0; (def = &_zj_defs[i])->nam; i++ ) {
+      if ( u3_yes == u3_lr_eq_c(z, (u3_c *)def->nam, nam) ) {
+        _zj_add(z, def, cor, par, u3_lr_word(z, 0, pri));
+      }
+    }
   }
 }
 
 /* u3_zj_look():
 **
-**   Look for a jet match - gate, [[sam con] bat].
+**   Look for a jet match - gate, [[sample context] battery].
 */
 enum u3_zj_code 
 u3_zj_look(u3_z   z,
            u3_fox bat)
 {
-#if 1
+#if 0
   return u3_zj_code_none;
 #else
-  u3_w w_mug = u3_lm_mug(z, bat);
-  u3_w w_i;
+  u3_w             mug = u3_lm_mug(z, bat);
+  struct u3_zj_def *def;
 
-  for ( w_i = 0; w_i < u3_zj_code_none; w_i++ ) {
-    if ( w_mug == z->j.jet_rod[w_i].w_mug ) {
-      return w_i;
+  for ( def = _zj_list; def; def = def->nex ) {
+    if ( mug == def->mug ) {
+      return (def->pas ? (def - _zj_defs) : u3_zj_code_none);
     }
   }
   return u3_zj_code_none;
@@ -89,6 +140,20 @@ u3_zc_tank(u3_z    z,
   return 0;
 }
 
+/* u3_zc_use():
+**
+**   Exit iff (rat) is none.
+*/
+u3_fox
+u3_zc_use(u3_z   z,
+          u3_rat rat)
+{
+  if ( rat == u3_none ) {
+    return u3_zc_tank(z, u3_cm_exit);
+  }
+  else return rat;
+}
+
 /* u3_zj_fire():
 **
 **   Fire a jet - core, [[sam con] bat].
@@ -111,15 +176,19 @@ u3_zj_fire(u3_z            z,
   u3_fox           ham, sam, con, bat;
 
   if ( u3_no == u3_lr_cell(z, cor, &ham, &bat) ) {
+    printf("punt 1\n");
     return u3_cm_punt;
   }
   else if ( u3_no == u3_lr_eq(z, bat, gof->bat) ) {
+    printf("punt 2\n");
     return u3_cm_punt;
   }
   else if ( u3_no == u3_lr_cell(z, ham, &sam, &con) ) {
+    printf("punt 3\n");
     return u3_cm_punt;
   }
   else if ( u3_no == u3_lr_eq(z, con, gof->con) ) {
+    printf("punt 4\n");
     return u3_cm_punt;
   }
   else {

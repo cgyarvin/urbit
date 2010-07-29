@@ -9,8 +9,8 @@
     **   Jet codes.
     */
       enum u3_zj_code {
-#       define _zj_wet(nam, mug, maj, min, kel) u3_zj_code_##name,
-#       define _zj_dry(nam, mug, maj, min, kel) u3_zj_code_##name,
+#       define _zj_wet(nam, mug) u3_zj_code_##nam,
+#       define _zj_dry(nam, mug) u3_zj_code_##nam,
 #         include "z/jets.h"
 #       undef _zj_wet 
 #       undef _zj_dry
@@ -28,11 +28,7 @@
 
         /* Battery mug - if 0, not known.
         */
-        u3_fox mug;
-
-        /* Version: major, minor, kelvin.
-        */
-        uint32_t maj, min, kel;
+        u3_w mug;
 
         /* Fun, or null.
         */

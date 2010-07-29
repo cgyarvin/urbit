@@ -7,7 +7,7 @@
 /* cons:lily
 */
 u4_tool
-_lily_cons(u4_crow p,
+_lily_cons(u4_plow p,
            u4_tool vur,
            u4_tool sed)
 {
@@ -37,7 +37,7 @@ _lily_cons(u4_crow p,
 /* comb:lily
 */
 u4_tool
-_lily_comb(u4_crow p,
+_lily_comb(u4_plow p,
            u4_tool mal,
            u4_tool buz)
 {
@@ -81,7 +81,7 @@ _lily_comb(u4_crow p,
 /* flan:lily
 */
 u4_tool
-_lily_flan(u4_crow p,
+_lily_flan(u4_plow p,
            u4_tool zeg,
            u4_tool dac)
 {
@@ -110,7 +110,7 @@ _lily_flan(u4_crow p,
 /* flor:lily
 */
 u4_tool
-_lily_flor(u4_crow p,
+_lily_flor(u4_plow p,
            u4_tool bos,
            u4_tool nif)
 {
@@ -139,7 +139,7 @@ _lily_flor(u4_crow p,
 /* _lily_flop(): invert boolean.
 */
 u4_tool
-_lily_flop(u4_crow p,
+_lily_flop(u4_plow p,
            u4_tool zet)
 {
   u4_lane lan = p->lan;
@@ -163,7 +163,7 @@ _lily_flop(u4_crow p,
   }
 }
 
-/* hike:lily:crow
+/* hike:lily:plow
 */
   static u4_axis 
   _lily_hike_axis_l(u4_lane lan, 
@@ -247,7 +247,7 @@ _lily_flop(u4_crow p,
     }
   }
 u4_tool
-_lily_hike(u4_crow p,
+_lily_hike(u4_plow p,
            u4_axis axe,
            u4_list vix)  /* (axis tool) */
 {

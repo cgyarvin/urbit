@@ -1,13 +1,13 @@
-/* watt/crow.c
+/* watt/plow.c
 **
 ** This file is in the public domain.
 */
 #include "u4/all.h"
 
-/* trap:crow
+/* trap:plow
 */
 void
-_crow_trap(u4_crow p,
+_plow_trap(u4_plow p,
            const char *msg)
 {
   u4_lane lan = p->lan;
@@ -17,16 +17,16 @@ _crow_trap(u4_crow p,
   p->meb = u4_k_cell(lan, u4_k_cell(lan, hal, u4_nul), p->meb);
 }
 
-/* trac:crow
+/* trac:plow
 */
 
-/* fail:crow
+/* fail:plow
 */
 u4_noun
-_crow_fail(u4_crow p,
+_plow_fail(u4_plow p,
            const char *msg)
 {
-  _crow_trap(p, msg);
+  _plow_trap(p, msg);
   {
     while ( !u4_n_zero(p->meb) ) {
       u4_noun i_meb = u4_ch(p->meb);
@@ -63,10 +63,10 @@ _crow_fail(u4_crow p,
   return u4_trip;
 }
 
-/* rake:crow 
+/* rake:plow 
 */
 u4_rope
-_crow_rake(u4_crow p,
+_plow_rake(u4_plow p,
            u4_gene gen)
 {
   u4_lane lan = p->lan;
@@ -74,7 +74,7 @@ _crow_rake(u4_crow p,
 
   if ( u4_b_pq(gen, u4_atom_mack, &p_gen, &q_gen) ) {
     if ( !u4_n_zero(q_gen) ) {
-      return _crow_fail(p, "rope");
+      return _plow_fail(p, "rope");
     }
     else return p_gen;
   }
@@ -86,14 +86,14 @@ _crow_rake(u4_crow p,
   }
   else {
     u4_err(lan, "rake", gen);
-    return _crow_fail(p, "rope");
+    return _plow_fail(p, "rope");
   }
 }
 
-/* init:crow (fake)
+/* init:plow (fake)
 */
 void
-u4_crow_init(u4_crow p,
+u4_plow_init(u4_plow p,
              u4_lane lan)
 {
   p->lan = lan;
@@ -119,16 +119,16 @@ u4_crow_init(u4_crow p,
   p->huf = u4_nul;
 }
 
-/* full:crow (fake)
+/* full:plow (fake)
 */
 u4_loaf
-u4_crow_full(u4_lane lan,
+u4_plow_full(u4_lane lan,
              u4_type sub,
              u4_gene gen)
 {
-  struct _u4_crow crow;
+  struct _u4_plow plow;
 
-  u4_crow_init(&crow, lan);
+  u4_plow_init(&plow, lan);
 
   printf(":"); fflush(stdout);
   {
@@ -136,11 +136,11 @@ u4_crow_full(u4_lane lan,
     u4_type typ;
     u4_tool tol;
 
-    tol = _rose_make(&crow, sub, gen);
+    tol = _rose_make(&plow, sub, gen);
     printf(":"); fflush(stdout);
 
 #if 1
-    boz = _rose_show(&crow, sub, gen);
+    boz = _rose_show(&plow, sub, gen);
     if ( !u4_so(boz) ) {
       printf("type error\n");
       return u4_exit;
@@ -148,15 +148,15 @@ u4_crow_full(u4_lane lan,
     printf(":"); fflush(stdout);
 #endif
 
-    typ = _rose_play(&crow, sub, gen);
+    typ = _rose_play(&plow, sub, gen);
     printf(":\n");
 
-    u4_err(lan, "size", _dump_size(lan, tol));
+    // u4_err(lan, "size", _dump_size(lan, tol));
 
-    // printf("prf: %d\n", crow.prf);
-    // printf("prg: %d\n", crow.prg);
-    // printf("prh: %d\n", crow.prh);
-    // printf("pri: %d\n", crow.pri);
+    // printf("prf: %d\n", plow.prf);
+    // printf("prg: %d\n", plow.prg);
+    // printf("prh: %d\n", plow.prh);
+    // printf("pri: %d\n", plow.pri);
 
     return u4_kc(lan, typ, tol);
   }

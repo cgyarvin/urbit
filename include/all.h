@@ -75,8 +75,8 @@
 #     include "z/agent.h"
 #     include "z/jato.h"
 
-#     define _zj_dry(nam, mug, maj, min, kel) 
-#     define _zj_wet(nam, mug, maj, min, kel) \
+#     define _zj_dry(nam, mug) 
+#     define _zj_wet(nam, mug) \
         u3_fox u3_zx_##nam(u3_z, u3_fox);
 #     include "z/jets.h"
 #     undef _zj_dry

@@ -4,6 +4,7 @@
 */
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <gmp.h>
 #include "all.h"
 #include "z/public.h"
 
@@ -194,6 +195,17 @@ uz_k_bytes(uz_machine mac,
            uint8_t    *mem)
 {
   return u3_ln_bytes(mac->zen, len, mem);
+}
+
+/* uz_k_mp():
+**
+**   Create an atom from a GMP integer.  Free the GMP.
+*/
+uz_noun
+uz_k_mp(uz_machine mac,
+        mpz_t      amp)
+{
+  return u3_ln_mp(mac->zen, amp);
 }
 
 /* uz_k_file():
@@ -391,6 +403,33 @@ uz_c_pqr(uz_machine mac,
          uz_noun    *e)
 {
   return !u3_lr_pqr(mac->zen, a, b, c, d, e);
+}
+
+/* uz_a_mp():
+**
+**   Copy [b] into (a).
+*/
+void
+uz_a_mp(uz_machine mac,
+        mpz_t      a,
+        uz_noun    b)
+{
+  u3_lr_mp(mac->zen, a, b);
+}
+
+/* uz_a_bin(): 
+**
+**   Return the size of [b] in bits, rounded up to
+**   (1 << a). 
+**
+**   For example, (a == 3) returns the size in bytes.
+*/
+uint32_t
+uz_a_bin(uz_machine mac,
+         uint8_t    a,
+         uz_noun    b)
+{
+  return u3_lr_bin(mac->zen, a, b);
 }
 
 /* uz_a_word():

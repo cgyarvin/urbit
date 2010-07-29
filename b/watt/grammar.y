@@ -267,6 +267,7 @@ wide_c
     wide_norm: di_dotras body_b_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_hatnub body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_hatbuc body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatpod body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatdig body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatben body_g_wide    { $$ = _ycell($1, $2); }
@@ -388,6 +389,7 @@ tall
     tall_norm: di_dotras w body_b_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_hatnub w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_hatbuc w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatpod w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatdig w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatben w body_g_tall    { $$ = _ycell($1, $3); }
@@ -489,10 +491,8 @@ tall
   /** Prop: jet reference.
   **/
     prop
-      : si_dax si_lep 
-        rope ' ' tok_term ' ' tok_delm ' ' tok_delm ' ' tok_delm ' ' tok_delm
-        si_pel w
-        { $$ = _ytrel($3, $5, _yqual($7, $9, $11, $13)); }
+      : si_dax si_lep rope ' ' '%' tok_term ' ' tok_delm si_pel w
+        { $$ = _ytrel($3, $6, $8); }
       | { $$ = u4_nul; }
       ;
 
@@ -536,6 +536,7 @@ tall
     di_dotras: si_dot si_ras  { $$ = u4_atom_sail; }
     
     di_hatnub: si_hat si_nub  { $$ = u4_atom_cast; }
+    di_hatbuc: si_hat si_buc  { $$ = u4_atom_germ; }
     di_hatdig: si_hat si_dig  { $$ = u4_atom_stil; }
     di_hatpod: si_hat si_pod  { $$ = u4_atom_pock; }
     di_hatben: si_hat si_ben  { $$ = u4_atom_bran; }

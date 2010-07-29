@@ -9,12 +9,12 @@
       u4_pool how;
 
       static u4_prep
-      _dump_main(u4_crow p, u4_pool gil, u4_pool nip, u4_type typ);
+      _dump_main(u4_plow p, u4_pool gil, u4_pool nip, u4_type typ);
 
 /* seal:dump (fake)
 */
   static u4_pool
-  _dump_seal_main(u4_crow p,
+  _dump_seal_main(u4_plow p,
                   u4_pool gil,
                   u4_type typ)
   {
@@ -96,7 +96,7 @@
 /* _dump_seal(): produce set of holds sealing [typ].
 */
 u4_pool
-_dump_seal(u4_crow p,
+_dump_seal(u4_plow p,
            u4_type typ)
 {
   return _dump_seal_main(p, u4_nul, typ);
@@ -105,7 +105,7 @@ _dump_seal(u4_crow p,
 /* _dump_cell()::
 */
 static u4_noun
-_dump_cell(u4_crow p,
+_dump_cell(u4_plow p,
            u4_pool gil,
            u4_pool nip,
            u4_noun p_typ,
@@ -130,7 +130,7 @@ _dump_cell(u4_crow p,
 /* _dump_mono(): dump a mono.
 */
 static u4_prep
-_dump_mono(u4_crow p,
+_dump_mono(u4_plow p,
            u4_pool gil,
            u4_pool nip,
            u4_type myt,
@@ -160,7 +160,7 @@ _dump_mono(u4_crow p,
 /* _dump_poly(): dump a poly.
 */
 static u4_prep
-_dump_poly(u4_crow p,
+_dump_poly(u4_plow p,
            u4_pool gil,
            u4_pool nip,
            u4_type myt,
@@ -190,7 +190,7 @@ _dump_poly(u4_crow p,
 /* _dump_fork(): dump fork as list.
 */
 static u4_noun
-_dump_fork(u4_crow p,
+_dump_fork(u4_plow p,
            u4_pool gil,
            u4_pool nip,
            u4_type p_typ,
@@ -215,7 +215,7 @@ _dump_fork(u4_crow p,
 /* _dump_main(): dump with gil and nip.
 */
 static u4_prep
-_dump_main(u4_crow p,
+_dump_main(u4_plow p,
            u4_pool gil,
            u4_pool nip,
            u4_type typ)
@@ -339,7 +339,7 @@ _dump_main(u4_crow p,
 /* _durb_in()::
 */
 static u4_noun
-_durb_in(u4_crow p,
+_durb_in(u4_plow p,
          u4_rail bar)
 {
   if ( u4_n_zero(bar) ) {
@@ -353,7 +353,7 @@ _durb_in(u4_crow p,
 /* _dump_durb(): prepare rail for printing.
 */
 u4_prep
-_dump_durb(u4_crow p,
+_dump_durb(u4_plow p,
            u4_rail bar)
 {
   if ( u4_n_zero(bar) ) {
@@ -368,7 +368,7 @@ _dump_durb(u4_crow p,
 /* _dump_type(): prepare type for printing.
 */
 u4_prep
-_dump_type(u4_crow p,
+_dump_type(u4_plow p,
            u4_type typ)
 {
   u4_pool gil = _dump_seal(p, typ);

@@ -107,10 +107,10 @@ u3_b_print_type(u3_lv      lv,
     }
   }
   else {
-    struct _u4_crow crow;
+    struct _u4_plow plow;
 
-    u4_crow_init(&crow, lane);
-    u4_burp(lane, c_tid, _dump_type(&crow, _bi_export(lv, lane, piv)));
+    u4_plow_init(&plow, lane);
+    u4_burp(lane, c_tid, _dump_type(&plow, _bi_export(lv, lane, piv)));
   }
 }
 
@@ -400,7 +400,7 @@ u3_b_full(u3_l   l,
     //
     u4_noun n_zyl = _bi_export(l, lane, gal);
     u4_noun n_nes = _bi_export(l, lane, vub);
-    u4_noun n_fut = u4_crow_full(lane, n_zyl, n_nes);
+    u4_noun n_fut = u4_plow_full(lane, n_zyl, n_nes);
 
     return _bi_import(l, n_fut);
   }
@@ -431,7 +431,7 @@ u3_b_bake(u3_l   l,
   else {
     u4_noun n_zyl = _bi_export(l, lane, gal);
     u4_noun n_nes = _bi_export(l, lane, vub);
-    u4_noun n_fut = u4_crow_full(lane, n_zyl, n_nes);
+    u4_noun n_fut = u4_plow_full(lane, n_zyl, n_nes);
 
     return _bi_import(l, u4_ct(n_fut));
   }

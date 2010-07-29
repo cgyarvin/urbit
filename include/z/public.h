@@ -206,6 +206,14 @@
                    uint32_t   len,
                    uint8_t    *mem);
 
+      /* uz_k_mp():
+      **
+      **   Create an atom from a GMP integer.  Free the GMP.
+      */
+        uz_noun
+        uz_k_mp(uz_machine mac,
+                mpz_t      amp);
+
       /* uz_k_file():
       **
       **  Load the Unix file [unx] as an atom.
@@ -213,7 +221,6 @@
         uz_noun
         uz_k_file(uz_machine mac,
                   uz_noun    unx);
-
 
     /** Reading nouns.
     ***
@@ -399,7 +406,7 @@
           uz_a_eq_c(uz_machine  mac,
                     uint8_t     *a,
                     uz_noun     b);
-#if 0
+
         /* uz_a_mp():
         **
         **   Copy [b] into (a).
@@ -408,7 +415,7 @@
           uz_a_mp(uz_machine mac,
                   mpz_t      a,
                   uz_noun    b);
-#endif
+
         /* uz_a_word():
         **
         **   Return word (w_a) of [b].

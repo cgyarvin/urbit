@@ -18,7 +18,7 @@ _zn_depart(u3_z z)
 */
 static inline void
 _zn_retreat(u3_z   z,
-           u3_ray ray_mat)
+            u3_ray ray_mat)
 {
   u3_lm_flop(z, ray_mat);
 }

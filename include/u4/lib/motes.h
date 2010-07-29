@@ -210,6 +210,7 @@
     u4_lib_mote(gear, u4_s4('g','e','a','r'))
     u4_lib_mote(gen,  u4_s3('g','e','n'))
     u4_lib_mote(gene, u4_s4('g','e','n','e'))
+    u4_lib_mote(germ, u4_s4('g','e','r','m'))
     u4_lib_mote(get,  u4_s3('g','e','t'))
     u4_lib_mote(give, u4_s4('g','i','v','e'))
     u4_lib_mote(glax, u4_s4('g','l','a','x'))

@@ -63,7 +63,7 @@
 #endif
     /* Bootstrap compiler.
     */
-#     include "u4/watt/crow.h"
+#     include "u4/watt/plow.h"
 
     /* Fake parser.
     */

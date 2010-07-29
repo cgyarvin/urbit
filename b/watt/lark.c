@@ -4,10 +4,10 @@
 */
 #include "u4/all.h"
 
-/* nuke:lark:rose:crow
+/* nuke:lark:rose:plow
 */
   static u4_tack
-  _lark_nuke_port(u4_crow p,
+  _lark_nuke_port(u4_plow p,
                   u4_type sut,
                   u4_tack tac,
                   u4_rope rop,
@@ -51,7 +51,7 @@
   }
 
   static u4_tack
-  _lark_nuke_frag(u4_crow p,
+  _lark_nuke_frag(u4_plow p,
                   u4_type sut,
                   u4_tack tac,
                   u4_rope rop,
@@ -85,7 +85,7 @@
     }
   }
 u4_tack
-_lark_nuke(u4_crow p,
+_lark_nuke(u4_plow p,
            u4_type sut,
            u4_tack tac,
            u4_rope rop,
@@ -126,10 +126,10 @@ _lark_nuke(u4_crow p,
   }
 }
 
-/* cram:lark:rose:crow
+/* cram:lark:rose:plow
 */
 u4_tack
-_lark_cram(u4_crow p,
+_lark_cram(u4_plow p,
            u4_type sut,
            u4_tack tac,
            u4_tack les)
@@ -147,7 +147,7 @@ _lark_cram(u4_crow p,
     if ( !u4_b_pq(les, u4_atom_bran, &p_les, &q_les) ||
          !u4_n_eq(p_tac, p_les) )
     {
-      return _crow_fail(p, "cram crash");
+      return _plow_fail(p, "cram crash");
     }
     else return u4_k_trel
       (lan, u4_atom_bran,
@@ -156,20 +156,20 @@ _lark_cram(u4_crow p,
   }
   else if ( u4_b_pq(tac, u4_atom_pair, &p_tac, &q_tac) ) {
     if ( !u4_b_pq(les, u4_atom_pair, &p_les, &q_les) ) {
-      return _crow_fail(p, "cram crash");
+      return _plow_fail(p, "cram crash");
     }
     else return u4_k_trel
       (lan, u4_atom_pair,
             _lark_cram(p, sut, p_tac, p_les),
             _lark_cram(p, sut, q_tac, q_les));
   }
-  else return _crow_fail(p, "cram crash");
+  else return _plow_fail(p, "cram crash");
 }
 
-/* dull:lark:rose:crow
+/* dull:lark:rose:plow
 */
 u4_tack
-_lark_dull(u4_crow p,
+_lark_dull(u4_plow p,
            u4_type sut,
            u4_tack tac)
 {
@@ -192,10 +192,10 @@ _lark_dull(u4_crow p,
   else return u4_trip;
 }
 
-/* feed:lark:rose:crow
+/* feed:lark:rose:plow
 */
 u4_tack
-_lark_feed(u4_crow p,
+_lark_feed(u4_plow p,
            u4_type sut,
            u4_tack tac,
            u4_list mut)
@@ -208,7 +208,7 @@ _lark_feed(u4_crow p,
     u4_list t_mut  = u4_ct(mut);
     u4_gene pi_mut = u4_ch(i_mut);
     u4_type qi_mut = u4_ct(i_mut);
-    u4_rope rop    = _crow_rake(p, pi_mut);
+    u4_rope rop    = _plow_rake(p, pi_mut);
     u4_tack bur    = _lark_nuke(p, sut, tac, rop, qi_mut);
     u4_tack tey    = _lark_cram(p, sut, tac, bur);
 

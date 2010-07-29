@@ -26,27 +26,27 @@
 
 #define _open_do_p(stem)  \
   static u4_gene _open_in_##stem \
-    (u4_crow p, u4_noun p_gen)
+    (u4_plow p, u4_noun p_gen)
 
 #define _open_do_pq(stem)  \
   static u4_gene _open_in_##stem \
-    (u4_crow p, u4_noun p_gen, u4_noun q_gen)
+    (u4_plow p, u4_noun p_gen, u4_noun q_gen)
 
 #define _open_do_pqr(stem)  \
   static u4_gene _open_in_##stem \
-    (u4_crow p, u4_noun p_gen, u4_noun q_gen, u4_noun r_gen)
+    (u4_plow p, u4_noun p_gen, u4_noun q_gen, u4_noun r_gen)
 
 #define _open_do_pqrs(stem)  \
   static u4_gene _open_in_##stem \
-    (u4_crow p, u4_noun p_gen, u4_noun q_gen, u4_noun r_gen, u4_noun s_gen)
+    (u4_plow p, u4_noun p_gen, u4_noun q_gen, u4_noun r_gen, u4_noun s_gen)
 
-/* mast:open:crow
+/* mast:open:plow
 */
   static u4_gene
-  _open_mast(u4_crow, u4_gene);
+  _open_mast(u4_plow, u4_gene);
 
   static u4_gene 
-  _open_mast_fix(u4_crow p,
+  _open_mast_fix(u4_plow p,
                  u4_gene gen,
                  u4_axis axe)
   {
@@ -96,7 +96,7 @@
       return _open_mast_fix(p, q_gen, axe);
     } 
     else {
-      u4_gene bog = _crow_open(p, gen);
+      u4_gene bog = _plow_open(p, gen);
 
       if ( !u4_n_eq(gen, bog) ) {
         return _open_mast_fix(p, bog, axe);
@@ -113,7 +113,7 @@
     }
   }
 static u4_gene
-_open_mast(u4_crow p,
+_open_mast(u4_plow p,
            u4_gene gen)
 {
   u4_lane lan = p->lan;
@@ -160,7 +160,7 @@ _open_mast(u4_crow p,
            _open_mast_fix(p, p_gen, u4_axis_4))));
   }
   else {
-    u4_gene bog = _crow_open(p, gen);
+    u4_gene bog = _plow_open(p, gen);
 
     if ( !u4_n_eq(gen, bog) ) {
       return _open_mast(p, bog);
@@ -175,13 +175,13 @@ _open_mast(u4_crow p,
   }
 }
 
-/* fist:open:crow
+/* fist:open:plow
 */
   static u4_gene
-  _open_fist(u4_crow, u4_gene);
+  _open_fist(u4_plow, u4_gene);
 
   static u4_list
-  _open_fist_a(u4_crow p,
+  _open_fist_a(u4_plow p,
                u4_bank ban)
   {
     u4_lane lan = p->lan;
@@ -195,7 +195,7 @@ _open_mast(u4_crow p,
     }
   }
 static u4_gene
-_open_fist(u4_crow p,
+_open_fist(u4_plow p,
            u4_gene gen)
 {
   u4_lane lan = p->lan;
@@ -240,7 +240,7 @@ _open_fist(u4_crow p,
     return gen;
   }
   else {
-    u4_gene bog = _crow_open(p, gen);
+    u4_gene bog = _plow_open(p, gen);
 
     if ( !u4_n_eq(gen, bog) ) {
       return _open_fist(p, bog);
@@ -293,7 +293,7 @@ _open_do_p(bean)
     u4_noun beg = u4_kc(lan, u4_atom_frag, u4_axis_4);
 
     if ( u4_n_zero(q_gen) ) {
-      return _crow_fail(p, "lonk");
+      return _plow_fail(p, "lonk");
     }
     else {
       u4_noun iq_gen = u4_ch(q_gen);
@@ -354,7 +354,7 @@ _open_do_p(bean)
     u4_noun beg = u4_kc(lan, u4_atom_frag, u4_axis_4);
 
     if ( u4_n_zero(q_gen) ) {
-      return _crow_fail(p, "fron");
+      return _plow_fail(p, "fron");
     }
     else {
       u4_noun ir_gen = u4_ch(r_gen);
@@ -935,17 +935,17 @@ _open_do_pq(yell)
   return u4_kt(lan, u4_atom_mong, p_gen, q_gen);
 }
 
-/* open:crow
+/* open:plow
 */
   static u4_gene
-  _crow_open_main(u4_crow p,
+  _plow_open_main(u4_plow p,
                   u4_gene gen)
   {
     u4_noun p_gen, q_gen, r_gen, s_gen;
 
     if ( u4_b_fork(gen, &p_gen, &q_gen) ) {
       u4_err(p->lan, "gen", gen);
-      return _crow_fail(p, "bad code");
+      return _plow_fail(p, "bad code");
     }
     else {
       _open_p   (mast);
@@ -995,7 +995,7 @@ _open_do_pq(yell)
     }
   }
 u4_gene
-_crow_open(u4_crow p,
+_plow_open(u4_plow p,
            u4_gene gen)
 {
   u4_nopt zax = u4_tab_get(gen, p->pon);
@@ -1004,7 +1004,7 @@ _crow_open(u4_crow p,
     return zax;
   }
   else {
-    zax = _crow_open_main(p, gen);
+    zax = _plow_open_main(p, gen);
 
 #if 0
     if ( !u4_n_zero(p->bug) && u4_b_p(gen, u4_atom_teck, 0) ) {

@@ -4,10 +4,10 @@
 */
 #include "u4/all.h"
 
-/* size:gull:crow
+/* size:gull:plow
 */
 u4_atom
-_gull_size(u4_crow p,
+_gull_size(u4_plow p,
            u4_book dab)
 {
   u4_lane lan = p->lan;
@@ -24,10 +24,10 @@ _gull_size(u4_crow p,
   }
 }
 
-/* fill:gull:crow
+/* fill:gull:plow
 */
 u4_spec
-_gull_fill(u4_crow p,
+_gull_fill(u4_plow p,
            u4_book dab,
            u4_menu sem)
 {
@@ -71,10 +71,10 @@ _ord_tag_tree(u4_tag tag_l, u4_tag tag_r)
   else return (nub_l < nub_r);
 }
 
-/* look:gull:crow
+/* look:gull:plow
 */
   static u4_unit
-  _gull_look_a(u4_crow p,
+  _gull_look_a(u4_plow p,
                u4_spec dab,
                u4_term cog,
                u4_axis axe)
@@ -133,7 +133,7 @@ _ord_tag_tree(u4_tag tag_l, u4_tag tag_r)
     }
   }
 u4_unit
-_gull_look(u4_crow p,
+_gull_look(u4_plow p,
            u4_spec dab,
            u4_term cog)
 {
