@@ -78,7 +78,7 @@
                   (lan, 
                    ryx,
                    u4_kq
-                    (lan, u4_atom_mong, _open_mast(p, q_gen), ryx, u4_nul)))),
+                    (lan, u4_atom_fung, _open_mast(p, q_gen), ryx, u4_nul)))),
          _open_mast_fix(p, p_gen, axe));
     }
     else if ( u4_b_pq(gen, u4_atom_bran, &p_gen, &q_gen) ) {
@@ -87,7 +87,7 @@
     }
     else if ( u4_b_p(gen, u4_atom_teck, &p_gen) ) {
       return u4_kq
-        (lan, u4_atom_mong,
+        (lan, u4_atom_fung,
               p_gen,
               u4_kc(lan, u4_atom_frag, axe),
               u4_nul);
@@ -156,7 +156,7 @@ _open_mast(u4_plow p,
                   (lan, 
                    ryx,
                    u4_kq
-                    (lan, u4_atom_mong, _open_mast(p, q_gen), ryx, u4_nul)))),
+                    (lan, u4_atom_fung, _open_mast(p, q_gen), ryx, u4_nul)))),
            _open_mast_fix(p, p_gen, u4_axis_4))));
   }
   else {
@@ -323,14 +323,14 @@ _open_do_p(bean)
                  u4_nul,
                  u4_kq
                   (lan,
-                   u4_atom_bong,
+                   u4_atom_bung,
                    u4_kt(lan,
                          u4_atom_flac,
                          u4_kc(lan, u4_atom_frag, u4_cod_in(23)),
                          p_gen),
                    u4_kq
                     (lan,
-                     u4_atom_mong,
+                     u4_atom_fung,
                      u4_kc(lan, u4_atom_frag, u4_axis_10),
                      beg,
                      u4_nul),
@@ -377,7 +377,7 @@ _open_do_p(bean)
                 (lan,
                  u4_atom_cast,
                  u4_kq(lan,
-                       u4_atom_mong,
+                       u4_atom_fung,
                        u4_kt(lan, 
                              u4_atom_flac,
                              u4_kc(lan, u4_atom_frag, u4_cod_in(11)),
@@ -386,7 +386,7 @@ _open_do_p(bean)
                        u4_nul),
                  u4_kq
                   (lan,
-                   u4_atom_mong,
+                   u4_atom_fung,
                    u4_kc(lan, u4_atom_frag, u4_axis_10),
                    beg,
                    u4_nul)))));
@@ -414,7 +414,7 @@ _open_do_p(bean)
                   (lan,
                    u4_atom_cast,
                    u4_kq(lan,
-                         u4_atom_mong,
+                         u4_atom_fung,
                          u4_kt(lan, 
                                u4_atom_flac,
                                u4_kc(lan, u4_atom_frag, u4_cod_in(23)),
@@ -423,14 +423,14 @@ _open_do_p(bean)
                          u4_nul),
                    u4_kq
                     (lan,
-                     u4_atom_bong,
+                     u4_atom_bung,
                      u4_kt(lan,
                            u4_atom_flac,
                            u4_kc(lan, u4_atom_frag, u4_cod_in(23)),
                            p_gen),
                      u4_kq
                       (lan,
-                       u4_atom_mong,
+                       u4_atom_fung,
                        u4_kc(lan, u4_atom_frag, u4_axis_10),
                        beg,
                        u4_nul),
@@ -448,6 +448,40 @@ _open_do_p(bean)
     }
   }
 
+    static u4_noun
+    _gath_a(u4_lane lan,
+            u4_noun r_gen)
+    {
+      if ( u4_n_zero(r_gen) ) {
+        return u4_nul;
+      } 
+      else {
+        u4_noun ir_gen = u4_ch(r_gen);
+        u4_noun tr_gen = u4_ct(r_gen);
+        u4_noun pir_gen = u4_ch(ir_gen);
+        u4_noun qir_gen = u4_ct(ir_gen);
+
+        return u4_kc
+          (lan, u4_kc(lan, pir_gen, 
+                           u4_kt(lan, u4_atom_flac, 
+                                      u4_kc(lan, u4_atom_frag, u4_axis_3),
+                                      qir_gen)),
+               _gath_a(lan, tr_gen));
+      }
+    }
+  _open_do_pqr(gath)
+  {
+    u4_lane lan = p->lan;
+
+    return u4_kt
+      (lan, u4_atom_gant,
+            q_gen,
+            u4_kt
+              (lan,
+               u4_atom_mack,
+               u4_kc(lan, u4_kc(lan, u4_atom_frag, u4_axis_2), p_gen),
+               _gath_a(lan, r_gen)));
+  }
   _open_do_p(prex)
   {
     u4_lane lan = p->lan;
@@ -467,39 +501,33 @@ _open_do_p(bean)
       }
     }
   }
-
-  _open_do_p(mong)
+ 
+  _open_do_pq(fung)
   {
     u4_lane lan = p->lan;
-    u4_noun ip_gen = u4_ch(p_gen);
-    u4_noun tp_gen = u4_ct(p_gen);
 
-    if ( u4_n_zero(tp_gen) ) {
+    if ( u4_n_zero(q_gen) ) {
       return u4_kt
         (lan, u4_atom_flac, 
-              ip_gen,
+              p_gen,
               u4_kc(lan, u4_atom_pane, u4_blip));
     } else {
-      if ( u4_n_eq(tp_gen, u4_kc(lan, u4_atom_frag, u4_axis_4)) ) {
-        return u4_trip;
-      }
-      return u4_kt
-        (lan, u4_atom_gant,
-              ip_gen,
-              u4_kt
-                (lan,
-                 u4_atom_mack,
-                 u4_kt(lan, 
-                       u4_kc(lan, u4_atom_frag, u4_axis_2),
-                       u4_kc(lan, u4_atom_pane, u4_blip),
-                       u4_nul),
-                 u4_kl(lan,
-                       u4_kc(lan,
-                             u4_kc(lan, u4_atom_frag, u4_axis_4),
-                             u4_kt(lan, u4_atom_flac, 
-                                        u4_kc(lan, u4_atom_frag, u4_axis_3),
-                                        u4_kc(lan, u4_atom_prex, tp_gen))))));
+      return u4_kq(lan, u4_atom_mung, p_gen, u4_atom_prex, q_gen);
     }
+  }
+
+  _open_do_pq(mung)
+  {
+    u4_lane lan = p->lan;
+
+    return u4_kq
+      (lan, u4_atom_gath,
+            u4_kc(lan, u4_blip, u4_nul),
+            p_gen,
+            u4_kl(lan,
+                  u4_kc(lan,
+                        u4_kc(lan, u4_atom_frag, u4_axis_4),
+                        q_gen)));
   }
 
   _open_do_pq(velt)
@@ -597,20 +625,20 @@ _open_do_p(bean)
             u4_kl(lan, u4_kc(lan, u4_blip, q_gen)));
   }
 
-  _open_do_pq(gnom)
+  _open_do_pq(gnum)
   {
     u4_lane lan = p->lan;
 
     return u4_kt
-      (lan, u4_atom_mong, q_gen, u4_kc(lan, p_gen, u4_nul));
+      (lan, u4_atom_fung, q_gen, u4_kc(lan, p_gen, u4_nul));
   }
 
-  _open_do_pqr(bong)
+  _open_do_pqr(bung)
   {
     u4_lane lan = p->lan;
 
     return u4_kc
-      (lan, u4_atom_mong, 
+      (lan, u4_atom_fung, 
             u4_kq(lan, p_gen, q_gen, r_gen, u4_nul));
   }
 
@@ -668,7 +696,7 @@ _open_do_p(bean)
         (lan,
          u4_atom_trol,
          u4_kt(lan, u4_atom_plin, _open_fist(p, iq_gen), p_gen),
-         u4_kq(lan, u4_atom_mong, _open_mast(p, iq_gen), p_gen, u4_nul),
+         u4_kq(lan, u4_atom_fung, _open_mast(p, iq_gen), p_gen, u4_nul),
          _open_in_moze(p, p_gen, tq_gen));
     }
   }
@@ -874,7 +902,7 @@ _open_do_pq(zemp)
   return q_gen;
 }
 
-_open_do_pqr(feng)
+_open_do_pqr(fent)
 {
   u4_lane lan = p->lan;
 
@@ -907,12 +935,12 @@ _open_do_pqr(trex)
           u4_kt(lan, u4_atom_twix, q_gen, r_gen));
 }
 
-_open_do_pqrs(tong)
+_open_do_pqrs(tung)
 {
   u4_lane lan = p->lan;
 
   return u4_kq
-    (lan, u4_atom_mong, 
+    (lan, u4_atom_fung, 
           p_gen, 
           q_gen,
           u4_kt(lan, r_gen, s_gen, u4_nul));
@@ -932,7 +960,7 @@ _open_do_pq(yell)
 {
   u4_lane lan = p->lan;
 
-  return u4_kt(lan, u4_atom_mong, p_gen, q_gen);
+  return u4_kt(lan, u4_atom_fung, p_gen, q_gen);
 }
 
 /* open:plow
@@ -956,8 +984,8 @@ _open_do_pq(yell)
       _open_p   (frag);
       _open_p   (fist);
       _open_pq  (lome);
-      _open_pq  (gnom);
-      _open_pqr (bong);
+      _open_pq  (gnum);
+      _open_pqr (bung);
       _open_pq  (claf);
       _open_pqr (lort);
       _open_pq  (vamp);
@@ -971,14 +999,16 @@ _open_do_pq(yell)
       _open_pq  (zemp);
       _open_pq  (gram);
       _open_pqr (trex);
-      _open_pqrs(tong);
+      _open_pqrs(tung);
       _open_p   (mave);
 
       _open_p   (bean);
       _open_pq  (lonk);
       _open_pqr (fron);
+      _open_pqr (gath);
       _open_p   (prex);
-      _open_p   (mong);
+      _open_pq  (fung);
+      _open_pq  (mung);
       _open_pq  (velt);
       _open_p   (slax);
       _open_pq  (moze);
@@ -988,7 +1018,7 @@ _open_do_pq(yell)
       _open_pq  (grel);
       _open_pq  (pock);
       _open_p   (dorn);
-      _open_pqr (feng);
+      _open_pqr (fent);
       _open_pq  (yell);
 
       return gen;

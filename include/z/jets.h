@@ -11,7 +11,7 @@
   **/
     /** Tier 1.
     **/
-      _zj_dry(watt, 0x5648a8ba)
+      _zj_dry(watt, 0)
 
       _zj_dry(add, 0x509e9959)
       _zj_dry(bex, 0)
@@ -44,13 +44,13 @@
       _zj_dry(rsh, 0)
       _zj_dry(vor, 0)
 
-      _zj_dry(make, 0x70cb53fa)
+      _zj_dry(make, 0)
       _zj_dry(mill, 0)
       _zj_dry(pass, 0)
       _zj_dry(play, 0)
-      _zj_dry(plow, 0x4f9301b9)
-      _zj_dry(read, 0x69ccefbf)
-      _zj_dry(rose, 0x7e970086)
+      _zj_dry(plow, 0)
+      _zj_dry(read, 0)
+      _zj_dry(rose, 0)
       _zj_dry(shop, 0)
       _zj_dry(show, 0)
       _zj_dry(wish, 0)

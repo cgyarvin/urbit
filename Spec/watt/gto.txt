@@ -63,12 +63,10 @@ Gene - AST
     ::
       [%bong p=*gene q=*gene r=*gene]             ::  %+  mitpod
       [%frit p=*gene q=*gene]                     ::  %_  mitcab
-      [%gath p=*gene q=*gene]                     ::  %>  mitred
       [%gnom p=*gene q=*gene]                     ::  %.  mitdot
       [%mack p=*rope q=*rack]                     ::  %=  mitben
       [%mong p=*bank]                             ::  %-  mitnub  
       [%teck p=*gene]                             ::  %*  mitras
-      [%thag p=*gene q=*gene]                     ::  %<  mitder
       [%tong p=*gene q=*gene r=*gene s=*gene]     ::  %^  mithat
     ::
       [%zalt p=*gene]                             ::  !:  hopdig

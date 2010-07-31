@@ -135,7 +135,6 @@ u3_fox
 u3_zc_tank(u3_z    z,
            u3_mote gaz)
 {
-  u3_assert(gaz != u3_cm_fail);
   longjmp(z->j.jmp_lum, gaz);
   return 0;
 }
