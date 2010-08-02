@@ -6,11 +6,66 @@
 #include <fcntl.h>
 #include "all.h"
 
+  struct ford_gate {
+    /*  cor: core
+    */
+    u3_fox cor;
+
+    /*  typ: type
+    */
+    u3_fox typ;
+  };
+
   struct ford_state {
+    /*  Z - the Nock engine.
+    */
     u3_z  z;
 
-    u3_fox wat;
+    /*  Watt.  Initialized at boot.
+    */
+    struct {
+      /*  wot:  kernel formula ("file C").
+      */
+      u3_fox  wot;
+
+      /*  wur:  kernel core.
+      */
+      u3_fox  wur;
+
+      /*  wyx:  kernel type.
+      */
+      u3_fox  wyx;
+    } w;
+
+    /*  Gates.  Subject for all gates is kernel.
+    */
+    struct {
+      /*  Watt miller.
+      */
+      struct ford_gate myl;
+
+      /* Command-line decoder.
+      */
+      struct ford_gate lun;
+    } g;
+
+    /*  Structures.
+    */
+    struct {
+      /*  Rolling state.
+      */
+      u3_fox gut;
+
+      /*  Type of rolling state.
+      */
+      u3_fox lec;
+    } s;
+
   };
+  struct ford_state ver;
+
+  /* Watt code.
+  */
 
   /** Dumb scanning and dumping.
   **/
@@ -296,7 +351,7 @@ ford_boot(int siz)
   u3_b_init();
 
   state->z = u3_z_new(siz);
-  state->wat = _ford_kernel(state->z, "watt/watt.watt", "watt/298.nock");
+  state->w.wot = _ford_kernel(state->z, "watt/watt.watt", "watt/298.nock");
 
   exit(0);
 }

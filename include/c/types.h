@@ -6,18 +6,18 @@
   **/
     /* Canonical integers.
     */
-      typedef uint64_t u3_c_d;
-      typedef int64_t u3_c_ds;
-      typedef uint32_t u3_c_w;
-      typedef int32_t u3_c_ws;
-      typedef uint16_t u3_c_s;
-      typedef int16_t u3_c_ss;
-      typedef uint8_t u3_c_y;
-      typedef int8_t u3_c_ys;
-      typedef uint8_t u3_c_b;   // bit
+      typedef uint64_t c3_d;
+      typedef int64_t c3_ds;
+      typedef uint32_t c3_w;
+      typedef int32_t c3_ws;
+      typedef uint16_t c3_s;
+      typedef int16_t c3_ss;
+      typedef uint8_t c3_y;
+      typedef int8_t c3_ys;
+      typedef uint8_t c3_b;   // bit
 
     /* Deprecated integers.  Uncomment if used.
     */
-      typedef char u3_c_c;      // does not match int8_t or uint8_t
-      typedef int  u3_c_i;      // int - really bad 
-      // typedef u3_w u3_c_p;   // pointer-length int - uncomment if needed 
+      typedef char c3_c;      // does not match int8_t or uint8_t
+      typedef int  c3_i;      // int - really bad 
+      // typedef u3_w c3_p;   // pointer-length int - uncomment if needed 

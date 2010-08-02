@@ -44,10 +44,10 @@
 
   /** Global variable control.
   ***
-  *** To instantiate globals, #define u3_c_global as extern.
+  *** To instantiate globals, #define c3_global as extern.
   **/
-#   ifndef u3_c_global
-#     define u3_c_global
+#   ifndef c3_global
+#     define c3_global
 #   endif
 
 
@@ -67,13 +67,13 @@
   **/
     /* Endianness.
     */
-#     define u3_c_endian_little     0
-#     define u3_c_endian_big        1
+#     define c3_endian_little     0
+#     define c3_endian_big        1
 
 #     ifdef U3_OS_ENDIAN_little
-#       define u3_c_endian u3_c_endian_little
+#       define c3_endian c3_endian_little
 #     elif defined(U3_OS_ENDIAN_big)
-#       define u3_c_endian u3_c_endian_big
+#       define c3_endian c3_endian_big
 #     else
 #       error "port: U3_OS_ENDIAN"
 #     endif
@@ -81,12 +81,12 @@
     /* Byte swapping.
     */
 #      if defined(U3_OS_linux)
-#        define u3_c_bswap_16(x)  bswap_16(x)
-#        define u3_c_bswap_32(x)  bswap_32(x)
-#        define u3_c_bswap_64(x)  bswap_64(x)
+#        define c3_bswap_16(x)  bswap_16(x)
+#        define c3_bswap_32(x)  bswap_32(x)
+#        define c3_bswap_64(x)  bswap_64(x)
 
 #      elif defined(U3_OS_osx)
-#        define u3_c_bswap_16(x)  NXSwapShort(x)
-#        define u3_c_bswap_32(x)  NXSwapInt(x)
-#        define u3_c_bswap_64(x)  NXSwapLongLong(x)
+#        define c3_bswap_16(x)  NXSwapShort(x)
+#        define c3_bswap_32(x)  NXSwapInt(x)
+#        define c3_bswap_64(x)  NXSwapLongLong(x)
 #      endif

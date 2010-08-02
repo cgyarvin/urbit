@@ -452,7 +452,7 @@ _vere_kernel(uz_machine mac,
  //  if ( !(fil = fopen(cax, "r")) ) {
     uz_noun tex = uz_k_file(mac, uz_k_string(mac, src));
 
-    printf("[rebuilding kernel]\n");
+    printf("[vere: building kernel]\n");
     ker = uz_t_watt(mac, tex);
 
 #if 0

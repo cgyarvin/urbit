@@ -34,10 +34,10 @@ _zn_complete(u3_z   z,
              u3_fox lam)
 {
   {
-    u3_assert(u3_li_ray_beam(ray_lid) == u3_li_ray_beam(z->l.ray_cap));
-    u3_assert(u3_li_ray_beam(ray_lid) == u3_li_ray_beam(z->l.ray_mat));
-    u3_assert(ray_lid <= z->l.ray_cap);
-    u3_assert(ray_lid >= z->l.ray_mat);
+    c3_assert(u3_li_ray_beam(ray_lid) == u3_li_ray_beam(z->l.ray_cap));
+    c3_assert(u3_li_ray_beam(ray_lid) == u3_li_ray_beam(z->l.ray_mat));
+    c3_assert(ray_lid <= z->l.ray_cap);
+    c3_assert(ray_lid >= z->l.ray_mat);
   }
 
   z->l.ray_cap = ray_lid;
@@ -563,7 +563,7 @@ u3_z_run(u3_z z,
       ** For faster performance, this should be per-operation.
       */
       if ( u3_no == u3_lm_open(z, 64) ) {
-        u3_w w_maz, w_buc;
+        c3_w w_maz, w_buc;
 
         u3_lm_water(z, &w_maz, &w_buc);
         printf("not open: maz %d, buc %d\n", w_maz, w_buc);
@@ -573,11 +573,11 @@ u3_z_run(u3_z z,
       /* Update benchmark statistics.
       */
       if ( d ) {
-        u3_w w_nox, w_zur;
+        c3_w w_nox, w_zur;
 
         u3_lm_water(z, &w_nox, &w_zur);
-        d->w_maz = u3_c_max(d->w_maz, w_nox);
-        d->w_buc = u3_c_max(d->w_buc, w_zur);
+        d->w_maz = c3_max(d->w_maz, w_nox);
+        d->w_buc = c3_max(d->w_buc, w_zur);
 
         d->d_ruy++;
       }
@@ -607,7 +607,7 @@ u3_z_run(u3_z z,
       /* Load and execute the operation.
       */
         switch ( oper_ger ) {
-          default: u3_assert(0);
+          default: c3_assert(0);
 
 #           include "op/cons.c"
 #           include "op/cook.c"

@@ -198,12 +198,12 @@
     ***         a: ray to struct u3_li_atom
     ***         b: reserved for extension bit
     **/
-      typedef u3_w u3_l_dot;
-      typedef u3_w u3_l_ray;
-      typedef u3_w u3_l_rat;
-      typedef u3_w u3_l_hog;
-      typedef u3_w u3_l_cat;
-      typedef u3_w u3_l_pig;
+      typedef c3_w u3_l_dot;
+      typedef c3_w u3_l_ray;
+      typedef c3_w u3_l_rat;
+      typedef c3_w u3_l_hog;
+      typedef c3_w u3_l_cat;
+      typedef c3_w u3_l_pig;
 
 
     /** Structures.
@@ -227,7 +227,7 @@
           
           /* cop: count of words copied.
           */
-          u3_w     w_cop;
+          c3_w     w_cop;
         };
         typedef struct u3_l_core *u3_l;
         typedef void *u3_lv;
@@ -235,13 +235,13 @@
       /* li_atom, li_cell: imaginary structures (in beam space).
       */
         struct u3_li_atom {
-          u3_w w_mug;
-          u3_w w_len;
-          u3_w w_buf[0];
+          c3_w w_mug;
+          c3_w w_len;
+          c3_w w_buf[0];
         };
 
         struct u3_li_cell {
-          u3_w     w_mug;
+          c3_w     w_mug;
           u3_l_ray ray_hed;
           u3_l_ray ray_tel;
         };
@@ -291,7 +291,7 @@
 #     define u3_li_ray_dot(l, ray) \
         ( u3_li_ray_a(ray) ? ((l)->dot_bat - u3_li_ray_b(ray)) : (ray) )
 
-#     define u3_li_at_dot(l, dot)   ( ((u3_w *) (l)) + (dot) )
+#     define u3_li_at_dot(l, dot)   ( ((c3_w *) (l)) + (dot) )
 #     define u3_l_at_ray(l, ray)    u3_li_at_dot(l, u3_li_ray_dot(l, ray))
 
 #     define u3_li_ray_beam(ray)   u3_li_ray_a(ray)
@@ -394,7 +394,7 @@
       **   A loom can be freed with free() - there is no destructor.
       */
         u3_l
-        u3_lm_new(u3_y y_a);
+        u3_lm_new(c3_y y_a);
 
       /* u3_lm_alloc():
       **
@@ -402,7 +402,7 @@
       */
         void *
         u3_lm_alloc(u3_lv lv,
-                    u3_w  w_a);
+                    c3_w  w_a);
 
       /* u3_lm_flap():
       **
@@ -430,7 +430,7 @@
       **
       **   Compute and/or recall the mug (short hash) of (a).
       */
-        u3_w
+        c3_w
         u3_lm_mug(u3_lv    lv,
                   u3_l_fox a);
 
@@ -458,8 +458,8 @@
       */
         void
         u3_lm_water(u3_lv lv,
-                    u3_w  *w_maz,
-                    u3_w  *w_buc);
+                    c3_w  *w_maz,
+                    c3_w  *w_buc);
 
       /* u3_lm_open():
       **
@@ -468,7 +468,7 @@
 #if 0
         u3_flag
         u3_lm_open(u3_lv lv,
-                   u3_w  w_a);
+                   c3_w  w_a);
 #else
 #       define u3_lm_open(lv, w_a) \
           (u3_li_overflow((u3_l)(void *)(lv), w_a) ? u3_l_no : u3_l_yes)
@@ -504,8 +504,8 @@
       */
         void
         u3_lm_water(u3_lv lv,
-                    u3_w  *w_maz,
-                    u3_w  *w_buc);
+                    c3_w  *w_maz,
+                    c3_w  *w_buc);
 
     /** Generation.
     ***
@@ -517,16 +517,16 @@
       */
         u3_l_rat
         u3_ln_bytes(u3_lv      lv,
-                    u3_w       w_a,
-                    const u3_y *y_b);
+                    c3_w       w_a,
+                    const c3_y *y_b);
 
       /* u3_ln_string():
       **
-      **   u3_ln_bytes(l, strlen(c_a), (u3_y *)c_a);
+      **   u3_ln_bytes(l, strlen(c_a), (c3_y *)c_a);
       */
         u3_l_rat
         u3_ln_string(u3_lv      lv,
-                     const u3_c *c_a);
+                     const c3_c *c_a);
 
       /* u3_ln_cell(): 
       **
@@ -582,7 +582,7 @@
       */
         u3_l_rat
         u3_ln_weld(u3_lv    lv,
-                   u3_y     y_a,
+                   c3_y     y_a,
                    u3_l_fox b);
         
       /* u3_ln_words():
@@ -591,8 +591,8 @@
       */
         u3_l_rat
         u3_ln_words(u3_lv      lv,
-                    u3_w       w_a,
-                    const u3_w *w_b);
+                    c3_w       w_a,
+                    const c3_w *w_b);
       
 
     /** Reading.
@@ -604,27 +604,27 @@
       **
       **   For example, (y_a == 3) returns the size in bytes.
       */
-        u3_w
+        c3_w
         u3_lr_bin(u3_lv     lv,
-                  u3_y      y_a,
+                  c3_y      y_a,
                   u3_l_atom b);
 
       /* u3_lr_bit():
       **
       **   Return bit (w_a) of (b).
       */
-        u3_b
+        c3_b
         u3_lr_bit(u3_lv     lv,
-                  u3_w      w_a,
+                  c3_w      w_a,
                   u3_l_atom b);
        
       /* u3_lr_byte():
       **
       **   Return byte (w_a) of (b).
       */
-        u3_y
+        c3_y
         u3_lr_byte(u3_lv     lv,
-                   u3_w      w_a,
+                   c3_w      w_a,
                    u3_l_atom b);
                   
       /* u3_lr_bytes():
@@ -633,9 +633,9 @@
       */
         void
         u3_lr_bytes(u3_lv     lv,
-                    u3_w      w_a,
-                    u3_w      w_b,
-                    u3_y      *y_c,
+                    c3_w      w_a,
+                    c3_w      w_b,
+                    c3_y      *y_c,
                     u3_l_atom d);
 
       /* u3_lr_cell():
@@ -663,7 +663,7 @@
       */
         u3_l_flag
         u3_lr_eq_c(u3_lv    lv,
-                   u3_c     *c_a,
+                   c3_c     *c_a,
                    u3_l_fox b);
 
       /* u3_lr_fork():
@@ -833,9 +833,9 @@
       **
       **   Return word (w_a) of (b).
       */
-        u3_w
+        c3_w
         u3_lr_word(u3_lv     lv,
-                   u3_w      w_a,
+                   c3_w      w_a,
                    u3_l_atom b);
 
       /* u3_lr_words():
@@ -844,7 +844,7 @@
       */
         void
         u3_lr_words(u3_lv     lv,
-                    u3_w      w_a,
-                    u3_w      w_b,
-                    u3_w      *w_c,
+                    c3_w      w_a,
+                    c3_w      w_b,
+                    c3_w      *w_c,
                     u3_l_atom d);

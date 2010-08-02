@@ -71,7 +71,7 @@ u3_b_init(void)
 */
 void
 u3_b_print(u3_lv      lv,
-           const u3_c *c_tid,
+           const c3_c *c_tid,
            u3_rat     piv)
 {
   u4_lane lane = u4_hat(_road_woc);
@@ -94,7 +94,7 @@ u3_b_print(u3_lv      lv,
 */
 void
 u3_b_print_type(u3_lv      lv,
-                const u3_c *c_tid,
+                const c3_c *c_tid,
                 u3_rat     piv)
 {
   u4_lane lane = u4_hat(_road_woc);

@@ -1,7 +1,5 @@
-?>  ?=(@ .)
-=>  src=.
-=-  (make:rose:plow (read:plow src))
-=>  ~
+:: ?>  ?=(@ .) =>  src=.  =-  (make:rose:plow (read:plow src)) =>  ~
+
 |*  #(. %watt 0)
   watt  . 
 ::
@@ -1119,8 +1117,8 @@
       rack  (list &[p=*gene q=*gene])
       rail  (list type)
       rope  (list cord)
-      seed  ^-(*type !:(..watt.plow))
-      :: seed  ^-(*type %blur)
+      :: seed  ^-(*type !:(..watt.plow))
+      seed  ^-(*type %blur)
       spec  (book term gene) 
       spot  &[at=[l=@ c=@] to=[l=@ c=@]]
       term  &@

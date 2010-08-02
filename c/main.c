@@ -78,7 +78,7 @@ _console_line(const char *history_name)
   }
 }
 
-#if 0
+#if 1
 extern void vere_boot(uz_machine);
 extern void vere_line(uz_machine, uz_noun);
 
