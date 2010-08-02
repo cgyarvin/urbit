@@ -26,11 +26,12 @@ u3_zx_mul_c(u3_z   z,
 */
 u3_fox
 u3_zx_mul(u3_z   z,
-          u3_fox cob)
+          u3_fox cor)
 {
+  u3_fox sam = u3_zh(z, u3_zh(z, cor));
   u3_fox a, b;
 
-  if ( (u3_no == u3_lr_cell(z, cob, &a, &b)) ||
+  if ( (u3_no == u3_lr_cell(z, sam, &a, &b)) ||
        (u3_no == u3_lr_pat(z, a)) ||
        (u3_no == u3_lr_pat(z, b)) )
   {

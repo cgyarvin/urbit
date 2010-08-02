@@ -17,12 +17,12 @@
           u3_fox gus     = _zn_bip_pick(d.gus);
 
           if ( 0 == gus ) {
-            u3_assert(ray_lip == z->l.ray_cap);
+            c3_assert(ray_lip == z->l.ray_cap);
 
             _zn_forge_cook(z, ray_lid, lan, feg); 
           }
           else if ( 1 == gus ) {
-            u3_assert(ray_lip == z->l.ray_cap);
+            c3_assert(ray_lip == z->l.ray_cap);
 
             _zn_forge_cook(z, ray_lid, lan, paf); 
           }

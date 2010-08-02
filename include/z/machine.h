@@ -69,7 +69,7 @@
             */
             jmp_buf          jmp_lum;
             struct u3_zj_jet *jet_rod;
-            u3_w             w_opt;
+            c3_w             w_opt;
           } j;
     
         /** Layer: sith.  Tracing and debugging.
@@ -88,9 +88,9 @@
         ** maz: west watermark (max)
         ** buc: east watermark (max)
         */
-        u3_d d_ruy;
-        u3_w w_cop;
-        u3_w w_vil, w_tew, w_maz, w_buc;
+        c3_d d_ruy;
+        c3_w w_cop;
+        c3_w w_vil, w_tew, w_maz, w_buc;
       };
 
 
@@ -102,7 +102,7 @@
     **   Return 0 if malloc fails.  Free with free().
     */
       u3_z
-      u3_z_new(u3_y y_a);
+      u3_z_new(c3_y y_a);
 
     /* u3_z_do():
     **

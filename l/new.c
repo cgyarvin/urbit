@@ -12,8 +12,8 @@
 */
 u3_l_rat
 u3_ln_bytes(u3_lv       lv,
-            u3_w        w_a,
-            const u3_y  *y_b)
+            c3_w        w_a,
+            const c3_y  *y_b)
 {
   u3_l l = lv;
 
@@ -46,9 +46,9 @@ u3_ln_bytes(u3_lv       lv,
   /* Allocate, fill, return.
   */
   {
-    u3_w w_len = (w_a + 3) >> 2;
+    c3_w w_len = (w_a + 3) >> 2;
 
-    if ( u3_no == u3_lm_open(l, (w_len + u3_wiseof(struct u3_li_atom))) ) {
+    if ( u3_no == u3_lm_open(l, (w_len + c3_wiseof(struct u3_li_atom))) ) {
       return u3_none;
     }
     else { 
@@ -56,7 +56,7 @@ u3_ln_bytes(u3_lv       lv,
       u3_fox nov;
 
       ray_nov = l->ray_hat;
-      l->ray_hat += (w_len + u3_wiseof(struct u3_li_atom));
+      l->ray_hat += (w_len + c3_wiseof(struct u3_li_atom));
       nov = u3_li_pig_of(ray_nov, 0);
 
       *u3_li_at_hog_mug(l, nov) = 0;
@@ -65,7 +65,7 @@ u3_ln_bytes(u3_lv       lv,
       /* Clear the words.
       */
       {
-        u3_w w_i;
+        c3_w w_i;
 
         for ( w_i=0; w_i < w_len; w_i++ ) {
           *u3_li_at_pig_buf(l, nov, w_i) = 0;
@@ -75,7 +75,7 @@ u3_ln_bytes(u3_lv       lv,
       /* Fill the bytes.
       */
       {
-        u3_w w_i;
+        c3_w w_i;
 
         for ( w_i=0; w_i < w_a; w_i++ ) {
           *u3_li_at_pig_buf(l, nov, (w_i >> 2))
@@ -94,11 +94,11 @@ u3_ln_bytes(u3_lv       lv,
 */
 u3_l_rat
 u3_ln_string(u3_lv      lv,
-             const u3_c *c_a)
+             const c3_c *c_a)
 {
   u3_l l = lv;
 
-  return u3_ln_bytes(l, strlen(c_a), (u3_y *)c_a);
+  return u3_ln_bytes(l, strlen(c_a), (c3_y *)c_a);
 }
 
 /* u3_ln_cell(): 
@@ -113,8 +113,8 @@ u3_ln_cell(u3_lv    lv,
 {
   u3_l l = lv;
 
-  u3_assert(u3_none != a);
-  u3_assert(u3_none != b);
+  c3_assert(u3_none != a);
+  c3_assert(u3_none != b);
 
   if ( u3_none == (a = u3_ln_ice(l, a)) ) {
     return u3_none;
@@ -122,7 +122,7 @@ u3_ln_cell(u3_lv    lv,
   else if ( u3_none == (b = u3_ln_ice(l, b)) ) {
     return u3_none;
   }
-  else if ( u3_no == u3_lm_open(l, u3_wiseof(struct u3_li_cell)) ) {
+  else if ( u3_no == u3_lm_open(l, c3_wiseof(struct u3_li_cell)) ) {
     printf("not open\n");
     return u3_none;
   }
@@ -131,7 +131,7 @@ u3_ln_cell(u3_lv    lv,
     u3_fox nov;
 
     ray_nov = l->ray_hat;
-    l->ray_hat += u3_wiseof(struct u3_li_cell);
+    l->ray_hat += c3_wiseof(struct u3_li_cell);
     nov = u3_li_dog_of(ray_nov, 0);
 
     *u3_li_at_hog_mug(l, nov) = 0;
@@ -166,7 +166,7 @@ u3_ln_ice(u3_lv    lv,
     }
     else {
       if ( u3_li_hog_is_dog(a) ) {
-        if ( u3_no == u3_lm_open(l, u3_wiseof(struct u3_li_cell)) ) {
+        if ( u3_no == u3_lm_open(l, c3_wiseof(struct u3_li_cell)) ) {
           return u3_none;
         }
         else {
@@ -176,7 +176,7 @@ u3_ln_ice(u3_lv    lv,
           u3_fox nov;
 
           ray_nov = l->ray_hat;
-          l->ray_hat += u3_wiseof(struct u3_li_cell);
+          l->ray_hat += c3_wiseof(struct u3_li_cell);
           nov = u3_li_dog_of(ray_nov, 0);
 
           *u3_li_at_hog_mug(l, nov) = *u3_li_at_hog_mug(l, a);
@@ -188,9 +188,9 @@ u3_ln_ice(u3_lv    lv,
         }
       }
       else {
-        u3_w w_len = *u3_li_at_pig_len(l, a);
+        c3_w w_len = *u3_li_at_pig_len(l, a);
 
-        if ( u3_no == u3_lm_open(l, (w_len + u3_wiseof(struct u3_li_atom))) ) {
+        if ( u3_no == u3_lm_open(l, (w_len + c3_wiseof(struct u3_li_atom))) ) {
           return u3_none;
         }
         else {
@@ -198,7 +198,7 @@ u3_ln_ice(u3_lv    lv,
           u3_fox nov;
 
           ray_nov = l->ray_hat;
-          l->ray_hat += (w_len + u3_wiseof(struct u3_li_atom));
+          l->ray_hat += (w_len + c3_wiseof(struct u3_li_atom));
           nov = u3_li_pig_of(ray_nov, 0);
 
           *u3_li_at_hog_mug(l, nov) = 0;
@@ -207,7 +207,7 @@ u3_ln_ice(u3_lv    lv,
           /* Fill the pig.
           */
           {
-            u3_w w_i;
+            c3_w w_i;
 
             for ( w_i=0; w_i < w_len; w_i++ ) {
               *u3_li_at_pig_buf(l, nov, w_i) = *u3_li_at_pig_buf(l, a, w_i);
@@ -232,13 +232,13 @@ u3_ln_mp(u3_lv lv,
 {
   u3_l l = lv;
 
-  u3_assert(sizeof(mp_limb_t) == 4);
+  c3_assert(sizeof(mp_limb_t) == 4);
 
   /* Efficiency: unnecessary copy.
   */
   {
-    u3_w w_pug  = mpz_size(mp_a);
-    u3_w *w_bav = alloca(w_pug * 4);
+    c3_w w_pug  = mpz_size(mp_a);
+    c3_w *w_bav = alloca(w_pug * 4);
 
     mpz_export(w_bav, 0, -1, 4, 0, 0, mp_a);
     mpz_clear(mp_a);
@@ -418,8 +418,8 @@ u3_ln_trel(u3_lv    lv,
 */
 u3_l_rat
 u3_ln_words(u3_lv      lv,
-            u3_w       w_a,
-            const u3_w *w_b)
+            c3_w       w_a,
+            const c3_w *w_b)
 {
   u3_l l = lv;
 
@@ -441,7 +441,7 @@ u3_ln_words(u3_lv      lv,
   /* Allocate, fill, return.
   */
   {
-    if ( u3_no == u3_lm_open(l, (w_a + u3_wiseof(struct u3_li_atom))) ) {
+    if ( u3_no == u3_lm_open(l, (w_a + c3_wiseof(struct u3_li_atom))) ) {
       return u3_none;
     }
     else { 
@@ -449,7 +449,7 @@ u3_ln_words(u3_lv      lv,
       u3_fox nov;
 
       ray_nov = l->ray_hat;
-      l->ray_hat += (w_a + u3_wiseof(struct u3_li_atom));
+      l->ray_hat += (w_a + c3_wiseof(struct u3_li_atom));
       nov = u3_li_pig_of(ray_nov, 0);
 
       *u3_li_at_hog_mug(l, nov) = 0;
@@ -458,7 +458,7 @@ u3_ln_words(u3_lv      lv,
       /* Fill the words.
       */
       {
-        u3_w w_i;
+        c3_w w_i;
 
         for ( w_i=0; w_i < w_a; w_i++ ) {
           *u3_li_at_pig_buf(l, nov, w_i) = w_b[w_i];

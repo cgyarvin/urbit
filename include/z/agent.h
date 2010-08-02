@@ -37,8 +37,8 @@
 #     define _zn_forge(z, agent, type, field) \
         u3_l_at_ray(&z->l, \
                     ((agent) + \
-                     ( ((u3_w *)&((struct u3_zn_forge_##type *)0)->field) - \
-                       ((u3_w *)0) ) \
+                     ( ((c3_w *)&((struct u3_zn_forge_##type *)0)->field) - \
+                       ((c3_w *)0) ) \
                     ) \
                    )
 
@@ -49,8 +49,8 @@
 #     define _zn_anvil(z, agent, type, field) \
         u3_l_at_ray(&z->l, \
                     ((agent) + \
-                     ( ((u3_w *)&((struct u3_zn_anvil_##type *)0)->field) - \
-                       ((u3_w *)0) ) \
+                     ( ((c3_w *)&((struct u3_zn_anvil_##type *)0)->field) - \
+                       ((c3_w *)0) ) \
                     ) \
                    )
 
@@ -59,8 +59,8 @@
     **   Push a forged agent on (cap).
     */
 #     define _zn_push_forge(z, type) \
-        ( (z->l.ray_cap += u3_wiseof(struct u3_zn_forge_##type)) - \
-          u3_wiseof(struct u3_zn_forge_##type) )
+        ( (z->l.ray_cap += c3_wiseof(struct u3_zn_forge_##type)) - \
+          c3_wiseof(struct u3_zn_forge_##type) )
 
     /* _zn_push_word()
     **
@@ -211,7 +211,7 @@
           struct {
             /* sax: jet code.
             */
-            u3_w w_sax;
+            c3_w w_sax;
           } s;
         };
         struct u3_zn_anvil_jet {

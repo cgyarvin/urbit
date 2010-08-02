@@ -139,7 +139,7 @@ u4_plow_full(u4_lane lan,
     tol = _rose_make(&plow, sub, gen);
     printf(":"); fflush(stdout);
 
-#if 1
+#if 0
     boz = _rose_show(&plow, sub, gen);
     if ( !u4_so(boz) ) {
       printf("type error\n");

@@ -46,7 +46,7 @@
               _zn_start_mate(z, ray_lid, pod, gus, bat);
               break;
             }
-            default: u3_assert(!"unknown error");
+            default: c3_assert(!"unknown error");
           }
         }
         break;

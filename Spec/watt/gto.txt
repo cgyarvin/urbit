@@ -13,7 +13,7 @@ Gene - AST
     ::
       [%chan p=*bank]                             ::  ?&  askamp
       [%dorn p=*bank]                             ::  ?|  askbar
-      [%feng p=*gene q=*gene r=*gene]             ::  ?~  asksig
+      [%fent p=*gene q=*gene r=*gene]             ::  ?~  asksig
       [%grel p=*gene q=*rack]                     ::  ?-  asknub
       [%gram p=*gene q=*gene]                     ::  ?>  askred
       [%lort p=*gene q=*gene r=*gene]             ::  ?.  askdot
@@ -25,12 +25,12 @@ Gene - AST
     ::
       [%fron p=*gene q=*gene r=*bank]             ::  |@  barpat
       [%lonk p=*gene q=*bank]                     ::  |~  barsig
-      [%lome p=*gene]                             ::  |=  barben
-      [%pank p=*menu]                             ::  |*  barras
+      [%lome p=*prop q=*gene]                     ::  |=  barben
+      [%pank p=*prop q=*menu]                     ::  |*  barras
       [%rond p=*bank]                             ::  |?  barask
-      [%sunt p=*gene]                             ::  |:  bardig
-      [%tash p=*menu]                             ::  |%  barmit
-      [%vamp p=*gene]                             ::  |-  barnub
+      [%sunt p=*prop q=*gene]                     ::  |:  bardig
+      [%tash p=*prop q=*menu]                     ::  |%  barmit
+      [%vamp p=*prop q=*gene]                     ::  |-  barnub
     ::
       [%claf p=*gene q=*gene]                     ::  =<  bender
       [%flac p=*gene q=*gene]                     ::  =>  benred
@@ -51,6 +51,7 @@ Gene - AST
       [%bran p=*term q=*gene]                     ::  ^=  hatben
       [%cast p=*gene q=*gene]                     ::  ^-  hatnub
       [%germ p=*gene q=*gene]                     ::  ^$  hatbuc
+      [%hint p=*gene q=*gene]                     ::  ^?  hatask
       [%grit p=*gene]                             ::  ^@  hatpat
       [%mave p=*gene]                             ::  ^*  hatras
       [%pock p=*gene q=*gene]                     ::  ^+  hatdig
@@ -61,13 +62,15 @@ Gene - AST
       [%fist p=*gene]                             ::  ;+  lompod
       [%mast p=*gene]                             ::  ;-  lomnub
     ::
-      [%bong p=*gene q=*gene r=*gene]             ::  %+  mitpod
+      [%bung p=*gene q=*gene r=*gene]             ::  %+  mitpod
       [%frit p=*gene q=*gene]                     ::  %_  mitcab
-      [%gnom p=*gene q=*gene]                     ::  %.  mitdot
+      [%fung p=*gene q=*bank]                     ::  %-  mitnub  
+      [%gath p=*rope q=*gene r=*rack]             ::  %~  mitsig
+      [%gnum p=*gene q=*gene]                     ::  %.  mitdot
       [%mack p=*rope q=*rack]                     ::  %=  mitben
-      [%mong p=*bank]                             ::  %-  mitnub  
+      [%mung p=*gene q=*gene]                     ::  %:  mitdig
       [%teck p=*gene]                             ::  %*  mitras
-      [%tong p=*gene q=*gene r=*gene s=*gene]     ::  %^  mithat
+      [%tung p=*gene q=*gene r=*gene s=*gene]     ::  %^  mithat
     ::
       [%zalt p=*gene]                             ::  !:  hopdig
       [%zemp p=*spot q=*gene]

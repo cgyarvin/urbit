@@ -24,11 +24,11 @@
       struct u3_zj_def {
         /* Name of the jet.
         */
-        const u3_c_c *nam;
+        const c3_c *nam;
 
         /* Battery mug - if 0, not known.
         */
-        u3_w mug;
+        c3_w mug;
 
         /* Fun, or null.
         */
@@ -118,7 +118,7 @@
         */
           void *
           u3_zc_malloc(u3_z z,
-                       u3_w w_led);
+                       c3_w w_led);
 
         /* u3_zc_depart():
         **
@@ -220,8 +220,8 @@
         */
           u3_fox
           u3_zc_bytes(u3_z       z,
-                      u3_w       w_a,
-                      const u3_y *y_b);
+                      c3_w       w_a,
+                      const c3_y *y_b);
 
         /* u3_zc_string():
         **
@@ -229,7 +229,7 @@
         */
           u3_fox
           u3_zc_string(u3_z       z,
-                       const u3_c *c_a);
+                       const c3_c *c_a);
 
         /* u3_zc_cell(): 
         **
@@ -264,5 +264,5 @@
         */
           u3_fox
           u3_zc_words(u3_z       z,
-                      u3_w       w_a,
-                      const u3_w *w_b);
+                      c3_w       w_a,
+                      const c3_w *w_b);

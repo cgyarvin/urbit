@@ -11,15 +11,15 @@
 **
 **   For example, (y_a == 3) returns the size in bytes.
 */
-u3_w
+c3_w
 u3_lr_bin(u3_lv     lv,
-          u3_y      y_a,
+          c3_y      y_a,
           u3_l_atom b)
 {
   u3_l l = lv;
 
-  u3_assert(u3_none != b);
-  u3_assert(u3_li_rat_is_atom(b));
+  c3_assert(u3_none != b);
+  c3_assert(u3_li_rat_is_atom(b));
 
   if ( b == 0 ) {
     return 0;
@@ -28,8 +28,8 @@ u3_lr_bin(u3_lv     lv,
     /* w_gal: number of words besides (w_daz) in (b).
     ** w_daz: top word in (b).
     */
-    u3_w w_gal;
-    u3_w w_daz;
+    c3_w w_gal;
+    c3_w w_daz;
 
     if ( u3_li_rat_is_cat(b) ) {
       w_gal = 0;
@@ -48,8 +48,8 @@ u3_lr_bin(u3_lv     lv,
         ** w_col: number of bits in (w_daz)
         ** w_bif: number of bits in (b)
         */
-        u3_w w_col, w_bif;
-        static u3_y y_woq[] = {
+        c3_w w_col, w_bif;
+        static c3_y y_woq[] = {
           0, 1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4,
           5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
           6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
@@ -89,7 +89,7 @@ u3_lr_bin(u3_lv     lv,
               + ((w_daz >> 16) ? 2 : 1);
       }
       default: {
-        u3_y y_gow = (y_a - 5);
+        c3_y y_gow = (y_a - 5);
 
         return ((w_gal + 1) + ((1 << y_gow) - 1)) >> y_gow;
       }
@@ -101,15 +101,15 @@ u3_lr_bin(u3_lv     lv,
 **
 **   Return bit (w_a) of (b).
 */
-u3_b
+c3_b
 u3_lr_bit(u3_lv     lv,
-          u3_w      w_a,
+          c3_w      w_a,
           u3_l_atom b)
 {
   u3_l l = lv;
 
-  u3_assert(u3_none != b);
-  u3_assert(u3_li_rat_is_atom(b));
+  c3_assert(u3_none != b);
+  c3_assert(u3_li_rat_is_atom(b));
 
   if ( u3_li_rat_is_cat(b) ) {
     if ( w_a >= 31 ) {
@@ -118,14 +118,14 @@ u3_lr_bit(u3_lv     lv,
     else return (1 & (b >> w_a));
   }
   else {
-    u3_y y_vut = (w_a & 31);
-    u3_w w_pix = (w_a >> 5);
+    c3_y y_vut = (w_a & 31);
+    c3_w w_pix = (w_a >> 5);
 
     if ( w_pix >= *u3_li_at_pig_len(l, b) ) {
       return 0;
     }
     else {
-      u3_w w_nys = *u3_li_at_pig_buf(l, b, w_pix);
+      c3_w w_nys = *u3_li_at_pig_buf(l, b, w_pix);
 
       return (1 & (w_nys >> y_vut));
     }
@@ -136,15 +136,15 @@ u3_lr_bit(u3_lv     lv,
 **
 **   Return byte (w_a) of (b).
 */
-u3_y
+c3_y
 u3_lr_byte(u3_lv     lv,
-           u3_w      w_a,
+           c3_w      w_a,
            u3_l_atom b)
 {
   u3_l l = lv;
 
-  u3_assert(u3_none != b);
-  u3_assert(u3_li_rat_is_atom(b));
+  c3_assert(u3_none != b);
+  c3_assert(u3_li_rat_is_atom(b));
 
   if ( u3_li_rat_is_cat(b) ) {
     if ( w_a > 3 ) {
@@ -153,14 +153,14 @@ u3_lr_byte(u3_lv     lv,
     else return (255 & (b >> (w_a << 3)));
   }
   else {
-    u3_y y_vut = (w_a & 3);
-    u3_w w_pix = (w_a >> 2);
+    c3_y y_vut = (w_a & 3);
+    c3_w w_pix = (w_a >> 2);
 
     if ( w_pix >= *u3_li_at_pig_len(l, b) ) {
       return 0;
     }
     else {
-      u3_w w_nys = *u3_li_at_pig_buf(l, b, w_pix);
+      c3_w w_nys = *u3_li_at_pig_buf(l, b, w_pix);
 
       return (255 & (w_nys >> (y_vut << 3)));
     }
@@ -173,13 +173,13 @@ u3_lr_byte(u3_lv     lv,
 */
 void
 u3_lr_bytes(u3_lv     lv,
-            u3_w      w_a,
-            u3_w      w_b,
-            u3_y      *y_c,
+            c3_w      w_a,
+            c3_w      w_b,
+            c3_y      *y_c,
             u3_l_atom d)
 {
   u3_l l = lv;
-  u3_w w_i;
+  c3_w w_i;
 
   /* Efficiency: don't call u3_lr_word().
   */
@@ -200,7 +200,7 @@ u3_lr_cell(u3_lv    lv,
 {
   u3_l l = lv;
 
-  u3_assert(u3_none != a);
+  c3_assert(u3_none != a);
 
   if ( u3_li_rat_is_atom(a) ) {
     return u3_no;
@@ -224,7 +224,7 @@ u3_lr_fork(u3_lv    lv,
 {
   u3_l l = lv;
 
-  u3_assert(u3_none != a);
+  c3_assert(u3_none != a);
 
   if ( u3_li_rat_is_atom(a) ) {
     return u3_no;
@@ -321,8 +321,8 @@ u3_lr_eq(u3_lv    lv,
 #if 1
   return (u3_lr_ord(l, a, b) == 1) ? u3_yes : u3_no;
 #else
-  u3_assert(u3_none != a);
-  u3_assert(u3_none != b);
+  c3_assert(u3_none != a);
+  c3_assert(u3_none != b);
 
   if ( a == b ) {
     return u3_yes;
@@ -343,14 +343,14 @@ u3_lr_eq(u3_lv    lv,
           return u3_no;
         }
         else {
-          u3_w w_rez = *u3_li_at_pig_len(l, a);
-          u3_w w_mox = *u3_li_at_pig_len(l, b);
+          c3_w w_rez = *u3_li_at_pig_len(l, a);
+          c3_w w_mox = *u3_li_at_pig_len(l, b);
 
           if ( w_rez != w_mox ) {
             return u3_no;
           }
           else {
-            u3_w w_i;
+            c3_w w_i;
 
             for ( w_i = 0; w_i < w_rez; w_i++ ) {
               if ( (*u3_li_at_pig_buf(l, a, w_i)) != 
@@ -398,8 +398,8 @@ u3_lr_ord(u3_lv    lv,
 {
   u3_l l = lv;
 
-  u3_assert(u3_none != a);
-  u3_assert(u3_none != b);
+  c3_assert(u3_none != a);
+  c3_assert(u3_none != b);
 
   if ( a == b ) {
     return 1;
@@ -420,8 +420,8 @@ u3_lr_ord(u3_lv    lv,
           return 2;
         }
         else {
-          u3_w w_rez = *u3_li_at_pig_len(l, a);
-          u3_w w_mox = *u3_li_at_pig_len(l, b);
+          c3_w w_rez = *u3_li_at_pig_len(l, a);
+          c3_w w_mox = *u3_li_at_pig_len(l, b);
 
           if ( w_rez < w_mox ) {
             return 0;
@@ -430,11 +430,11 @@ u3_lr_ord(u3_lv    lv,
             return 2;
           }
           else {
-            u3_w w_i;
+            c3_w w_i;
 
             for ( w_i = 0; w_i < w_rez; w_i++ ) {
-              u3_w w_yef = *u3_li_at_pig_buf(l, a, (w_rez - (w_i + 1)));
-              u3_w w_doz = *u3_li_at_pig_buf(l, b, (w_rez - (w_i + 1)));
+              c3_w w_yef = *u3_li_at_pig_buf(l, a, (w_rez - (w_i + 1)));
+              c3_w w_doz = *u3_li_at_pig_buf(l, b, (w_rez - (w_i + 1)));
 
               if ( w_yef < w_doz ) {
                 return 0;
@@ -454,7 +454,7 @@ u3_lr_ord(u3_lv    lv,
       }
       else {
         switch ( u3_lr_ord(l, u3_h(l, a), u3_h(l, b) ) ) {
-          default: u3_assert(0); return 0;
+          default: c3_assert(0); return 0;
 
           case 0: return 0;
           case 1: return u3_lr_ord(l, u3_t(l, a), u3_t(l, b));
@@ -471,19 +471,19 @@ u3_lr_ord(u3_lv    lv,
 */
 u3_l_flag
 u3_lr_eq_c(u3_lv    lv,
-           u3_c     *c_a,
+           c3_c     *c_a,
            u3_l_fox b)
 {
   u3_l l = lv;
 
-  u3_assert(u3_none != b);
+  c3_assert(u3_none != b);
 
   if ( !u3_li_rat_is_atom(b) ) {
     return u3_no;
   }
   else {
-    u3_w w_sof = strlen(c_a);
-    u3_w w_i;
+    c3_w w_sof = strlen(c_a);
+    c3_w w_i;
 
     for ( w_i = 0; w_i < w_sof; w_i++ ) {
       if ( u3_lr_byte(l, w_i, b) != c_a[w_i] ) {
@@ -504,8 +504,8 @@ u3_lr_h(u3_lv    lv,
 {
   u3_l l = lv;
 
-  u3_assert(u3_none != a);
-  u3_assert(!u3_li_rat_is_atom(a));
+  c3_assert(u3_none != a);
+  c3_assert(!u3_li_rat_is_atom(a));
 
   return *u3_li_at_dog_hed(l, a);
 }
@@ -521,25 +521,25 @@ u3_lr_mp(u3_lv     lv,
 {
   u3_l l = lv;
 
-  u3_assert(u3_none != b);
-  u3_assert(u3_li_rat_is_atom(b));
+  c3_assert(u3_none != b);
+  c3_assert(u3_li_rat_is_atom(b));
 
   if ( u3_li_rat_is_cat(b) ) {
     mpz_init_set_ui(mp_a, b);
   }
   else {
-    u3_w w_len = *u3_li_at_pig_len(l, b);
+    c3_w w_len = *u3_li_at_pig_len(l, b);
 
     /* Slight deficiency in the GMP API.
     */
-    u3_assert(!(w_len >> 27));
+    c3_assert(!(w_len >> 27));
     mpz_init2(mp_a, w_len << 5);
 
     /* Efficiency: horrible.
     */
     {
-      u3_w *w_buf = alloca(w_len << 2);
-      u3_w w_i;
+      c3_w *w_buf = alloca(w_len << 2);
+      c3_w w_i;
 
       for ( w_i=0; w_i < w_len; w_i++ ) {
         w_buf[w_i] = *u3_li_at_pig_buf(l, b, w_i);
@@ -628,8 +628,8 @@ u3_lr_t(u3_lv    lv,
 {
   u3_l l = lv;
 
-  u3_assert(u3_none != a);
-  u3_assert(!u3_li_rat_is_atom(a));
+  c3_assert(u3_none != a);
+  c3_assert(!u3_li_rat_is_atom(a));
 
   return *u3_li_at_dog_tel(l, a);
 }
@@ -667,15 +667,15 @@ u3_lr_twig(u3_lv     lv,
            u3_l_fox  b)
 {
   u3_l  l     = lv;
-  u3_w  w_fol = (u3_lr_bin(l, 0, a) - 1);
-  u3_w  w_i;
+  c3_w  w_fol = (u3_lr_bin(l, 0, a) - 1);
+  c3_w  w_i;
   mpz_t mp_a;
 
-  u3_assert(u3_none != b);
+  c3_assert(u3_none != b);
   u3_lr_mp(l, mp_a, a);
  
   for ( w_i=0; w_i < w_fol; w_i++ ) {
-    u3_w w_lum = (w_fol - (w_i + 1));
+    c3_w w_lum = (w_fol - (w_i + 1));
 
     if ( u3_no == u3_lr_tap(l, b) ) {
       mpz_clear(mp_a);
@@ -698,15 +698,15 @@ u3_lr_twig(u3_lv     lv,
 **
 **   Return word (w_a) of (b).
 */
-u3_w
+c3_w
 u3_lr_word(u3_lv     lv,
-           u3_w      w_a,
+           c3_w      w_a,
            u3_l_atom b)
 {
   u3_l l = lv;
 
-  u3_assert(u3_none != b);
-  u3_assert(u3_li_rat_is_atom(b));
+  c3_assert(u3_none != b);
+  c3_assert(u3_li_rat_is_atom(b));
 
   if ( u3_li_rat_is_cat(b) ) {
     if ( w_a > 0 ) {
@@ -728,13 +728,13 @@ u3_lr_word(u3_lv     lv,
 */
 void
 u3_lr_words(u3_lv     lv,
-            u3_w      w_a,
-            u3_w      w_b,
-            u3_w      *w_c,
+            c3_w      w_a,
+            c3_w      w_b,
+            c3_w      *w_c,
             u3_l_atom d)
 {
   u3_l l = lv;
-  u3_w w_i;
+  c3_w w_i;
 
   /* Efficiency: don't call u3_lr_word().
   */

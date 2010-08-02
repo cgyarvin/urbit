@@ -12,19 +12,6 @@
 #     include "c/defs.h"
 #     include "c/motes.h"
 
-      /* Shorthands from u3_c.
-      */
-        typedef u3_c_d    u3_d;
-        typedef u3_c_ds   u3_ds;
-        typedef u3_c_w    u3_w;
-        typedef u3_c_ws   u3_ws;
-        typedef u3_c_s    u3_s;
-        typedef u3_c_ss   u3_ss;
-        typedef u3_c_y    u3_y;
-        typedef u3_c_ys   u3_ys;
-        typedef u3_c_c    u3_c;
-        typedef u3_c_b    u3_b; 
-
 #       define u3_assert(x) u3_c_assert(x)
 #       define u3_wiseof(x) u3_c_wiseof(x)
 #       define u3_stub      u3_c_stub

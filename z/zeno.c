@@ -9,8 +9,8 @@
 static void
 _zi_boot_l(u3_z z)
 {
-  z->l.ray_cap += (u3_wiseof(struct u3_z_core) - 
-                   u3_wiseof(struct u3_l_core));
+  z->l.ray_cap += (c3_wiseof(struct u3_z_core) - 
+                   c3_wiseof(struct u3_l_core));
 }
 
 /* _zi_boot_n(): boot the n (nock) layer.
@@ -124,7 +124,7 @@ u3_z_do(u3_z   z,
     return fev;
   }
   else {
-    u3_assert(0); return 0;
+    c3_assert(0); return 0;
   }
 }
 
@@ -134,7 +134,7 @@ u3_z_do(u3_z   z,
 **   Return 0 if malloc fails.  Free with free().
 */
 u3_z
-u3_z_new(u3_y y_a)
+u3_z_new(c3_y y_a)
 {
   u3_l l;
 

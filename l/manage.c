@@ -12,10 +12,10 @@
 **   A clam can be freed with free() - there is no destructor.
 */
 u3_l
-u3_lm_new(u3_y y_a)
+u3_lm_new(c3_y y_a)
 {
-  u3_assert(y_a >= 8);
-  u3_assert(y_a <= 28);
+  c3_assert(y_a >= 8);
+  c3_assert(y_a <= 28);
   {
     u3_l l = malloc(4 << y_a);
 
@@ -26,7 +26,7 @@ u3_lm_new(u3_y y_a)
       l->dot_bat = ((1 << y_a) - 1);
 
       l->ray_hat = u3_li_ray_of(1, 0);
-      l->ray_cap = u3_li_ray_of(0, u3_wiseof(struct u3_l_core));
+      l->ray_cap = u3_li_ray_of(0, c3_wiseof(struct u3_l_core));
 
       l->ray_mat = l->ray_cap;
       l->w_cop = 0;
@@ -41,7 +41,7 @@ u3_lm_new(u3_y y_a)
 */
 void *
 u3_lm_alloc(u3_lv lv,
-            u3_w  w_a)
+            c3_w  w_a)
 {
   u3_l l = lv;
 
@@ -63,10 +63,10 @@ u3_lm_alloc(u3_lv lv,
 
 /* _li_mash(): map (w_nud) to another 32-bit word.
 */
-static u3_w
-_li_mash(u3_w w_nud) 
+static c3_w
+_li_mash(c3_w w_nud) 
 {
-  static u3_w w_cog[256] = {
+  static c3_w w_cog[256] = {
     0x352598d8, 0xba9cd382, 0xa9afcd63, 0xfe8c511a, 0xf40f7a8d, 0x6220ecc5,
     0xf8820121, 0x99267e88, 0xdee5b579, 0x7824fff6, 0x7c8f831a, 0x766ff6ec,
     0xb0cd88c6, 0x1994625d, 0xccffce0a,  0xc100eda, 0xda4952df, 0x62bcfdef,
@@ -122,20 +122,20 @@ _li_mash(u3_w w_nud)
 **
 **   Compute and/or recall the mug (short hash) of (veb).
 */
-u3_w
+c3_w
 u3_lm_mug(u3_lv    lv,
           u3_l_fox veb)
 {
   u3_l l = lv;
 
   if ( u3_li_rat_is_cat(veb) ) {
-    u3_w w_zon = 0x18d0a625;
+    c3_w w_zon = 0x18d0a625;
 
     if ( !veb ) {
       return w_zon;
     } 
     else while ( 1 ) {
-      u3_w w_dav = 0x7fffffff & _li_mash(w_zon ^ veb);
+      c3_w w_dav = 0x7fffffff & _li_mash(w_zon ^ veb);
 
       if ( w_dav ) {
         return w_dav;
@@ -151,12 +151,12 @@ u3_lm_mug(u3_lv    lv,
       if ( u3_li_hog_is_dog(veb) ) {
         u3_fox hed   = *u3_li_at_dog_hed(l, veb);
         u3_fox tel   = *u3_li_at_dog_tel(l, veb);
-        u3_w   w_lus = u3_lm_mug(l, hed);
-        u3_w   w_biq = u3_lm_mug(l, tel);
-        u3_w   w_hur = (w_lus ^ (w_biq >> 24) ^ (w_biq << 8));
+        c3_w   w_lus = u3_lm_mug(l, hed);
+        c3_w   w_biq = u3_lm_mug(l, tel);
+        c3_w   w_hur = (w_lus ^ (w_biq >> 24) ^ (w_biq << 8));
 
         while ( 1 ) {
-          u3_w w_dav = 0x7fffffff & _li_mash(w_hur);
+          c3_w w_dav = 0x7fffffff & _li_mash(w_hur);
 
           if ( w_dav ) {
             *u3_li_at_hog_mug(l, veb) = w_dav;
@@ -166,13 +166,13 @@ u3_lm_mug(u3_lv    lv,
         }
       }
       else {
-        u3_w w_len = *u3_li_at_pig_len(l, veb);
-        u3_w w_zon = 0x18d0a625;
-        u3_w w_i;
+        c3_w w_len = *u3_li_at_pig_len(l, veb);
+        c3_w w_zon = 0x18d0a625;
+        c3_w w_i;
 
         while ( 1 ) {
-          u3_w w_gid = w_zon;
-          u3_w w_dav;
+          c3_w w_gid = w_zon;
+          c3_w w_dav;
 
           for ( w_i=0; w_i < w_len; w_i++ ) {
             w_gid ^= *u3_li_at_pig_buf(l, veb, w_i);
@@ -224,9 +224,9 @@ u3_lm_flap(u3_lv lv)
   u3_l   l       = lv;
   u3_ray ray_mat = l->ray_mat;
 
-  // u3_assert(u3_li_ray_a(l->ray_cap) == u3_li_ray_a(l->ray_mat));
-  // u3_assert(u3_li_ray_a(l->ray_hat) != u3_li_ray_a(l->ray_cap));
-  // u3_assert(u3_li_ray_b(l->ray_cap) >= u3_li_ray_b(l->ray_mat));
+  // c3_assert(u3_li_ray_a(l->ray_cap) == u3_li_ray_a(l->ray_mat));
+  // c3_assert(u3_li_ray_a(l->ray_hat) != u3_li_ray_a(l->ray_cap));
+  // c3_assert(u3_li_ray_b(l->ray_cap) >= u3_li_ray_b(l->ray_mat));
 
   l->ray_mat = l->ray_hat;
   l->ray_hat = l->ray_cap;
@@ -245,9 +245,9 @@ u3_lm_flop(u3_lv    lv,
 {
   u3_l l = lv;
 
-  // u3_assert(u3_li_ray_a(l->ray_cap) == u3_li_ray_a(l->ray_mat));
-  // u3_assert(u3_li_ray_a(l->ray_hat) != u3_li_ray_a(l->ray_cap));
-  // u3_assert(u3_li_ray_b(l->ray_cap) >= u3_li_ray_b(l->ray_mat));
+  // c3_assert(u3_li_ray_a(l->ray_cap) == u3_li_ray_a(l->ray_mat));
+  // c3_assert(u3_li_ray_a(l->ray_hat) != u3_li_ray_a(l->ray_cap));
+  // c3_assert(u3_li_ray_b(l->ray_cap) >= u3_li_ray_b(l->ray_mat));
 
   l->ray_cap = l->ray_hat;
   l->ray_hat = l->ray_mat;
@@ -279,7 +279,7 @@ u3_lm_clear(u3_lv  lv,
 {
   u3_l l = lv;
 
-  u3_assert(u3_li_ray_a(ray_lid) == u3_li_ray_a(ray_nut));
+  c3_assert(u3_li_ray_a(ray_lid) == u3_li_ray_a(ray_nut));
 
   if ( u3_li_rat_is_cat(lef) ) {
     return u3_yes;
@@ -316,15 +316,15 @@ u3_lm_clear(u3_lv  lv,
 static void
 _li_tamp_swizzle(u3_l   l,
                  u3_fox lef,
-                 u3_w   w_pif,
+                 c3_w   w_pif,
                  u3_ray ray_nut,
-                 u3_b   b_nax[])
+                 c3_b   b_nax[])
 {
   /* Totally unnecessary assertions.
   */
   {
-    u3_assert(u3_li_rat_is_hog(lef));
-    u3_assert(u3_li_hog_a(lef) >= ray_nut);
+    c3_assert(u3_li_rat_is_hog(lef));
+    c3_assert(u3_li_hog_a(lef) >= ray_nut);
   }
 
   /* Only dogs are fixed.
@@ -392,20 +392,20 @@ u3_lm_tamp(u3_lv  lv,
   ** lam: length of the segment to shift down over it.
   */
   u3_l l     = lv;
-  u3_w w_pif = (ray_nut - ray_lid);
-  u3_w w_lam = (l->ray_cap - ray_nut);
-  u3_w w_i;
+  c3_w w_pif = (ray_nut - ray_lid);
+  c3_w w_lam = (l->ray_cap - ray_nut);
+  c3_w w_i;
 
   /* Stupid, unnecessary assertions.
   */
   {
     /* Layer should at least handle this case, actually.
     */
-    u3_assert(u3_li_rat_is_hog(lef));
+    c3_assert(u3_li_rat_is_hog(lef));
 
-    u3_assert(u3_li_ray_a(ray_nut) == u3_li_ray_a(ray_lid));
-    u3_assert(u3_li_ray_a(u3_li_hog_a(lef)) == u3_li_ray_a(ray_lid));
-    u3_assert(u3_li_hog_a(lef) >= ray_nut);
+    c3_assert(u3_li_ray_a(ray_nut) == u3_li_ray_a(ray_lid));
+    c3_assert(u3_li_ray_a(u3_li_hog_a(lef)) == u3_li_ray_a(ray_lid));
+    c3_assert(u3_li_hog_a(lef) >= ray_nut);
   }
 
   /* Swizzle the good segment down to its new location.
@@ -413,8 +413,8 @@ u3_lm_tamp(u3_lv  lv,
   **   nax[w_i]: 1 iff a dog at nut[w_i] has been fixed.
   */
   {
-    u3_b b_nax[w_lam];
-    u3_w w_i;
+    c3_b b_nax[w_lam];
+    c3_w w_i;
 
     for ( w_i = 0; w_i < w_lam; w_i++ ) {
       b_nax[w_i] = 0;
@@ -440,8 +440,8 @@ u3_lm_tamp(u3_lv  lv,
 */
 void
 u3_lm_water(u3_lv lv,
-            u3_w  *w_maz,
-            u3_w  *w_buc)
+            c3_w  *w_maz,
+            c3_w  *w_buc)
 {
   u3_l l = lv;
 

@@ -64,7 +64,7 @@ u3_zj_load(u3_z   z,
            u3_fox cor)
 {
   u3_fox            bat = u3_zt(z, cor);
-  u3_w              mug = u3_lm_mug(z, bat);
+  c3_w              mug = u3_lm_mug(z, bat);
   enum u3_zj_code   sax = u3_zj_look(z, bat);
   struct u3_zj_def  *def;
   u3_fox            par, nam, pri;
@@ -82,7 +82,7 @@ u3_zj_load(u3_z   z,
     struct u3_zj_def *def;
 
     for ( i=0; (def = &_zj_defs[i])->nam; i++ ) {
-      if ( u3_yes == u3_lr_eq_c(z, (u3_c *)def->nam, nam) ) {
+      if ( u3_yes == u3_lr_eq_c(z, (c3_c *)def->nam, nam) ) {
         _zj_add(z, def, cor, par, u3_lr_word(z, 0, pri));
       }
     }
@@ -100,7 +100,7 @@ u3_zj_look(u3_z   z,
 #if 0
   return u3_zj_code_none;
 #else
-  u3_w             mug = u3_lm_mug(z, bat);
+  c3_w             mug = u3_lm_mug(z, bat);
   struct u3_zj_def *def;
 
   for ( def = _zj_list; def; def = def->nex ) {
@@ -210,8 +210,8 @@ u3_zj_fire(u3_z            z,
 */
 u3_fox
 u3_zc_bytes(u3_z       z,
-            u3_w       w_a,
-            const u3_y *y_b)
+            c3_w       w_a,
+            const c3_y *y_b)
 {
   u3_rat vog = u3_ln_bytes(z, w_a, y_b);
 
@@ -224,7 +224,7 @@ u3_zc_bytes(u3_z       z,
 */
 u3_fox
 u3_zc_string(u3_z       z,
-             const u3_c *c_a)
+             const c3_c *c_a)
 {
   u3_rat vog = u3_ln_string(z, c_a);
 
@@ -280,8 +280,8 @@ u3_zc_trel(u3_z   z,
 */
 u3_fox
 u3_zc_words(u3_z       z,
-            u3_w       w_a,
-            const u3_w *w_b)
+            c3_w       w_a,
+            const c3_w *w_b)
 {
   u3_rat vog = u3_ln_words(z, w_a, w_b);
 
