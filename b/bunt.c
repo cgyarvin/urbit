@@ -43,7 +43,7 @@ _bi_export(u3_l    l,
            u4_lane lane,
            u3_fox  tam)
 {
-  if ( u3_yes == u3_lr_pat(l, tam) ) {
+  if ( u3_yes == u3_lr_stud(l, tam) ) {
     mpz_t mp_tam;
 
     u3_lr_mp(l, mp_tam, tam);

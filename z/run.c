@@ -443,7 +443,7 @@ _zn_start_goto(u3_z   z,
     ** nar: formula formula
     */
     if ( (u3_yes == u3_lr_p(z, nar, 0, &wid)) &&
-         (u3_yes == u3_lr_pat(z, wid)) )
+         (u3_yes == u3_lr_stud(z, wid)) )
     {
       /* wid: formula axis
       ** dep: static formula

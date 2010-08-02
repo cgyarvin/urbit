@@ -12,10 +12,10 @@
           u3_ray ray_lid = _zn_bip_root(f.c.ray_lid);
           u3_fox gus     = _zn_bip_root(d.gus);
 
-          if ( u3_no == u3_lr_tap(z, gus) ) {
+          if ( u3_no == u3_lr_dust(z, gus) ) {
             return u3_cm_exit;
           } else {
-            u3_fox fal = u3_lr_eq(z, u3_h(z, gus), u3_t(z, gus));
+            u3_fox fal = u3_lr_sing(z, u3_h(z, gus), u3_t(z, gus));
 
             _zn_complete(z, ray_lid, fal);
           }
@@ -31,7 +31,7 @@
           u3_ray ray_lid = _zn_bip_root(f.c.ray_lid);
           u3_fox gus     = _zn_bip_root(d.gus);
 
-          if ( u3_no == u3_lr_tap(z, gus) ) {
+          if ( u3_no == u3_lr_dust(z, gus) ) {
             return u3_cm_exit;
           } else {
             /* lan: subject
@@ -54,7 +54,7 @@
           u3_ray ray_lid = _zn_bip_root(f.c.ray_lid);
           u3_fox gus     = _zn_bip_root(d.gus);
 
-          if ( u3_no == u3_lr_pat(l, gus) ) {
+          if ( u3_no == u3_lr_stud(z, gus) ) {
             return u3_cm_exit;
           } else {
             mpz_t  mp_gus;
@@ -77,7 +77,7 @@
         {
           u3_ray ray_lid = _zn_bip_root(f.c.ray_lid);
           u3_fox gus     = _zn_bip_root(d.gus);
-          u3_fox fal     = u3_lr_tap(z, gus);
+          u3_fox fal     = u3_lr_dust(z, gus);
 
           _zn_complete(z, ray_lid, fal);
         }

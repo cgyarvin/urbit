@@ -20,7 +20,7 @@
           u3_mote zec;
           u3_fox  pod;
 
-          if ( u3_yes == u3_lr_tap(z, gus) ) {
+          if ( u3_yes == u3_lr_dust(z, gus) ) {
             zec = u3_zj_fire(z, &pod, sax, gus);
           } 
           else zec = u3_cm_punt;

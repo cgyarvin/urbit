@@ -4,12 +4,12 @@
 */
 #include "all.h"
 
-/* u3_zx_gt_c():
+/* u3_zx_gth_c():
 */
 u3_fox
-u3_zx_gt_c(u3_z   z,
-           u3_fox a,
-           u3_fox b)
+u3_zx_gth_c(u3_z   z,
+            u3_fox a,
+            u3_fox b)
 {
   mpz_t   mp_a, mp_b;
   u3_flag c;
@@ -25,21 +25,22 @@ u3_zx_gt_c(u3_z   z,
   return c;
 }
 
-/* u3_zx_gt():
+/* u3_zx_gth():
 */
 u3_fox
-u3_zx_gt(u3_z   z,
-         u3_fox cob)
+u3_zx_gth(u3_z   z,
+          u3_fox cor)
 {
+  u3_fox sam = u3_zh(z, u3_zh(z, cor));
   u3_fox a, b;
 
-  if ( (u3_no == u3_lr_cell(z, cob, &a, &b)) ||
-       (u3_no == u3_lr_pat(z, a)) ||
-       (u3_no == u3_lr_pat(z, b)) )
+  if ( (u3_no == u3_lr_cell(z, sam, &a, &b)) ||
+       (u3_no == u3_lr_stud(z, a)) ||
+       (u3_no == u3_lr_stud(z, b)) )
   {
     return u3_zc_tank(z, u3_cm_punt);
   }
   else {
-    return u3_zx_gt_c(z, a, b);
+    return u3_zx_gth_c(z, a, b);
   }
 }

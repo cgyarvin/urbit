@@ -263,7 +263,7 @@ u3_ln_nock(u3_lv    lv,
     return u3_none;
   }
   else {
-    if ( u3_yes == u3_lr_tap(l, hib) ) {
+    if ( u3_yes == u3_lr_dust(l, hib) ) {
       u3_rat poz = u3_ln_nock(l, lan, hib);
       u3_rat riv = u3_ln_nock(l, lan, fus);
 
@@ -277,7 +277,7 @@ u3_ln_nock(u3_lv    lv,
         default: return u3_none;
 
         case 0: {
-          if ( u3_no == u3_lr_pat(l, fus) ) {
+          if ( u3_no == u3_lr_stud(l, fus) ) {
             return u3_none;
           }
           else {
@@ -295,7 +295,7 @@ u3_ln_nock(u3_lv    lv,
         case 2: {
           u3_rat gof = u3_ln_nock(l, lan, fus);
 
-          if ( (u3_none == gof) || (u3_no == u3_lr_tap(l, gof)) ) {
+          if ( (u3_none == gof) || (u3_no == u3_lr_dust(l, gof)) ) {
             return u3_none;
           }
           else {
@@ -308,12 +308,12 @@ u3_ln_nock(u3_lv    lv,
           if ( u3_none == gof ) {
             return u3_none;
           }
-          else return u3_lr_tap(l, gof);
+          else return u3_lr_dust(l, gof);
         }
         case 4: {
           u3_rat gof = u3_ln_nock(l, lan, fus);
 
-          if ( (u3_none == gof) || (u3_no == u3_lr_pat(l, gof)) ) {
+          if ( (u3_none == gof) || (u3_no == u3_lr_stud(l, gof)) ) {
             return u3_none;
           }
           else {
@@ -328,11 +328,11 @@ u3_ln_nock(u3_lv    lv,
         case 5: {
           u3_rat gof = u3_ln_nock(l, lan, fus);
 
-          if ( (u3_none == gof) || (u3_no == u3_lr_tap(l, gof)) ) {
+          if ( (u3_none == gof) || (u3_no == u3_lr_dust(l, gof)) ) {
             return u3_none;
           }
           else {
-            return u3_lr_eq(l, u3_h(l, gof), u3_t(l, gof));
+            return u3_lr_sing(l, u3_h(l, gof), u3_t(l, gof));
           }
         }
         case 6: {
@@ -352,7 +352,7 @@ u3_ln_nock(u3_lv    lv,
           }
         }
         case 7: {
-          if ( u3_no == u3_lr_tap(l, fus) ) {
+          if ( u3_no == u3_lr_dust(l, fus) ) {
             return u3_none;
           } else {
             u3_rat bud = u3_ln_nock(l, lan, u3_lr_h(l, fus));
@@ -365,7 +365,7 @@ u3_ln_nock(u3_lv    lv,
           }
         }
         case 8: {
-          if ( u3_no == u3_lr_tap(l, fus) ) {
+          if ( u3_no == u3_lr_dust(l, fus) ) {
             return u3_none;
           } else {
             u3_rat bud = u3_ln_nock(l, lan, u3_lr_h(l, fus));
@@ -378,14 +378,14 @@ u3_ln_nock(u3_lv    lv,
           }
         }
         case 11: {
-          if ( u3_no == u3_lr_tap(l, fus) ) {
+          if ( u3_no == u3_lr_dust(l, fus) ) {
             return u3_none;
           } else {
             return u3_ln_nock(l, lan, u3_lr_t(l, fus));
           }
         }
         case 12: {
-          if ( u3_no == u3_lr_tap(l, fus) ) {
+          if ( u3_no == u3_lr_dust(l, fus) ) {
             return u3_none;
           } else {
             return u3_ln_cell(l, lan, u3_lr_t(l, fus));

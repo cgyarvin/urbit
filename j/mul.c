@@ -32,8 +32,8 @@ u3_zx_mul(u3_z   z,
   u3_fox a, b;
 
   if ( (u3_no == u3_lr_cell(z, sam, &a, &b)) ||
-       (u3_no == u3_lr_pat(z, a)) ||
-       (u3_no == u3_lr_pat(z, b)) )
+       (u3_no == u3_lr_stud(z, a)) ||
+       (u3_no == u3_lr_stud(z, b)) )
   {
     return u3_zc_tank(z, u3_cm_punt);
   }

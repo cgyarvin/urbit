@@ -1,4 +1,4 @@
-:: ?>  ?=(@ .) =>  src=.  =-  (make:rose:plow (read:plow src)) =>  ~
+?>  ?=(@ .) =>  src=.  =-  (make:rose:plow (read:plow src)) =>  ~
 
 |*  #(. %watt 0)
   watt  . 
