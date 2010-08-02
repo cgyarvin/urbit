@@ -32,7 +32,7 @@ u3_zx_dec(u3_z   z,
   u3_fox sam = u3_zh(z, u3_zh(z, cor));
   u3_fox a   = sam;
 
-  if ( u3_no == u3_lr_pat(z, a) ) {
+  if ( u3_no == u3_lr_stud(z, a) ) {
     return u3_zc_tank(z, u3_cm_punt);
   }
   else return u3_zx_dec_c(z, a);

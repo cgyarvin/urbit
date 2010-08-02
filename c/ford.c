@@ -145,7 +145,7 @@ _ford_dump_in(u3_z z,
               FILE       *fil,
               u3_fox    nun)
 {
-  if ( u3_no == u3_lr_tap(z, nun) ) {
+  if ( u3_no == u3_lr_dust(z, nun) ) {
     _ford_dump(z, fil, nun);
   }
   else {
@@ -162,7 +162,7 @@ _ford_dump(u3_z z,
            FILE       *fil,
            u3_fox    nun)
 {
-  if ( u3_no == u3_lr_tap(z, nun) ) {
+  if ( u3_no == u3_lr_dust(z, nun) ) {
     mpz_t amp;
 
     if ( _ford_term(z, nun, 2) ) {

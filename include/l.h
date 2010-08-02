@@ -299,7 +299,7 @@
 
 #     define u3_li_hog_ray(hog)    u3_li_hog_a(hog)
 #     define u3_li_hog_fort(hog)   u3_li_hog_b(hog)
-#     define u3_li_hog_tap(hog)    u3_li_hog_c(hog)
+#     define u3_li_hog_dust(hog)    u3_li_hog_c(hog)
 
 #     define u3_li_hog_beam(hog)   u3_li_ray_beam(u3_li_hog_ray(hog))
 
@@ -438,7 +438,7 @@
       **
       **   Produce u3_yes iff (a) is below (b) in mug order.
       **
-      **   Assumes (!u3_lm_eq(l, a, b)).
+      **   Assumes a and b are not equal.
       */
         u3_l_flag
         u3_lm_order(u3_lv   lv,
@@ -648,23 +648,23 @@
                    u3_l_rat *b,
                    u3_l_rat *c);
 
-      /* u3_lr_eq():
+      /* u3_lr_sing():
       **
-      **   Yes iff (a) is the same noun as (b).
+      **   Yes iff (a) and (b) are the same noun.
       */
         u3_l_flag
-        u3_lr_eq(u3_lv    lv,
-                 u3_l_fox a,
-                 u3_l_fox b);
+        u3_lr_sing(u3_lv    lv,
+                   u3_l_fox a,
+                   u3_l_fox b);
 
-      /* u3_lr_eq_c():
+      /* u3_lr_sing_c():
       **
       **   Yes iff (b) is the same noun as the C string c_a.
       */
         u3_l_flag
-        u3_lr_eq_c(u3_lv    lv,
-                   c3_c     *c_a,
-                   u3_l_fox b);
+        u3_lr_sing_c(u3_lv    lv,
+                     c3_c     *c_a,
+                     u3_l_fox b);
 
       /* u3_lr_fork():
       **
@@ -718,16 +718,16 @@
                   u3_l_fox *d,
                   u3_l_fox *e);
 
-      /* u3_lr_pat():
+      /* u3_lr_stud():
       **
       **   Yes iff (a) is an atom.
       */
 #if 0
         u3_l_flag
-        u3_lr_pat(u3_lv    lv,
-                  u3_l_fox a)
+        u3_lr_stud(u3_lv    lv,
+                   u3_l_fox a)
 #else 
-#       define u3_lr_pat(lv, a) \
+#       define u3_lr_stud(lv, a) \
           (u3_li_rat_is_atom(a) ? u3_yes : u3_no)
 #endif
 
@@ -796,16 +796,16 @@
         u3_lr_t(u3_lv    lv, 
                 u3_l_fox a);
 
-      /* u3_lr_tap():
+      /* u3_lr_dust():
       **
       **   Yes iff (a) is a cell.
       */
 #if 0
         u3_flag
-        u3_lr_tap(u3_lv    lv,
-                  u3_l_fox a)
+        u3_lr_dust(u3_lv    lv,
+                   u3_l_fox a)
 #else 
-#       define u3_lr_tap(lv, a) \
+#       define u3_lr_dust(lv, a) \
           (u3_li_rat_is_atom(a) ? u3_l_no : u3_l_yes)
 #endif
 

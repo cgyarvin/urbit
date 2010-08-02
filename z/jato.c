@@ -30,7 +30,7 @@ _zj_add(u3_z     z,
   u3_fox ham = u3_zh(z, cor);
   u3_fox bat = u3_zt(z, cor);
 
-  if ( u3_no == u3_lr_tap(z, ham) ) {
+  if ( u3_no == u3_lr_dust(z, ham) ) {
     def->con = 0;
   } else {
     def->con = u3_zt(z, ham);
@@ -42,11 +42,9 @@ _zj_add(u3_z     z,
     if ( def->mug != u3_lm_mug(z, bat) ) {
       fprintf(stderr, "mug: mismatch: %s, %x, %x\n", 
           def->nam, def->mug, u3_lm_mug(z, bat));
-
-      u3_zc_tank(z, u3_cm_fail);
+      return;
     }
   }
-
   def->bat = bat;
   def->pri = pri; 
 
@@ -82,7 +80,7 @@ u3_zj_load(u3_z   z,
     struct u3_zj_def *def;
 
     for ( i=0; (def = &_zj_defs[i])->nam; i++ ) {
-      if ( u3_yes == u3_lr_eq_c(z, (c3_c *)def->nam, nam) ) {
+      if ( u3_yes == u3_lr_sing_c(z, (c3_c *)def->nam, nam) ) {
         _zj_add(z, def, cor, par, u3_lr_word(z, 0, pri));
       }
     }
@@ -178,7 +176,7 @@ u3_zj_fire(u3_z            z,
     printf("punt 1\n");
     return u3_cm_punt;
   }
-  else if ( u3_no == u3_lr_eq(z, bat, gof->bat) ) {
+  else if ( u3_no == u3_lr_sing(z, bat, gof->bat) ) {
     printf("punt 2\n");
     return u3_cm_punt;
   }
@@ -186,7 +184,7 @@ u3_zj_fire(u3_z            z,
     printf("punt 3\n");
     return u3_cm_punt;
   }
-  else if ( u3_no == u3_lr_eq(z, con, gof->con) ) {
+  else if ( u3_no == u3_lr_sing(z, con, gof->con) ) {
     printf("punt 4\n");
     return u3_cm_punt;
   }

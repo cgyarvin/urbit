@@ -254,7 +254,7 @@ u3_lr_p(u3_lv    l,
   u3_fox feg, nux;
 
   if ( (u3_yes == u3_lr_cell(l, a, &feg, &nux)) &&
-       (u3_yes == u3_lr_eq(l, feg, b)) )
+       (u3_yes == u3_lr_sing(l, feg, b)) )
   {
     *c = nux;
     return u3_yes;
@@ -307,12 +307,12 @@ u3_lr_pqr(u3_lv lv,
   else return u3_no;
 }
 
-/* u3_lr_eq():
+/* u3_lr_sing():
 **
 **   Yes iff (a) is the same noun as (b).
 */
 u3_l_flag
-u3_lr_eq(u3_lv    lv,
+u3_lr_sing(u3_lv    lv,
          u3_l_fox a,
          u3_l_fox b)
 {
@@ -376,10 +376,10 @@ u3_lr_eq(u3_lv    lv,
           return u3_no;
         }
         else {
-          if ( u3_no == u3_lr_eq(l, u3_h(l, a), u3_h(l, b)) ) {
+          if ( u3_no == u3_lr_sing(l, u3_h(l, a), u3_h(l, b)) ) {
             return u3_no;
           }
-          else return u3_lr_eq(l, u3_t(l, a), u3_t(l, b));
+          else return u3_lr_sing(l, u3_t(l, a), u3_t(l, b));
         }
       }
     }
@@ -465,14 +465,14 @@ u3_lr_ord(u3_lv    lv,
   }
 }
 
-/* u3_lr_eq_c():
+/* u3_lr_sing_c():
 **
 **   Yes iff (b) is the same noun as the C string c_a.
 */
 u3_l_flag
-u3_lr_eq_c(u3_lv    lv,
-           c3_c     *c_a,
-           u3_l_fox b)
+u3_lr_sing_c(u3_lv    lv,
+             c3_c     *c_a,
+             u3_l_fox b)
 {
   u3_l l = lv;
 
@@ -677,7 +677,7 @@ u3_lr_twig(u3_lv     lv,
   for ( w_i=0; w_i < w_fol; w_i++ ) {
     c3_w w_lum = (w_fol - (w_i + 1));
 
-    if ( u3_no == u3_lr_tap(l, b) ) {
+    if ( u3_no == u3_lr_dust(l, b) ) {
       mpz_clear(mp_a);
 
       return u3_none;

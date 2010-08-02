@@ -16,17 +16,17 @@ u3_zx_sub_c(u3_z   z,
   u3_lr_mp(z, mp_a, a);
   u3_lr_mp(z, mp_b, b);
 
-  if ( mpz_cmp(mp_b, mp_a) < 0 ) {
+  if ( mpz_cmp(mp_a, mp_b) < 0 ) {
     mpz_clear(mp_a);
     mpz_clear(mp_b);
 
     return u3_zc_tank(z, u3_cm_exit);
   }
   else {
-    mpz_sub(mp_b, mp_b, mp_a); 
-    mpz_clear(mp_a);
+    mpz_sub(mp_a, mp_a, mp_b); 
+    mpz_clear(mp_b);
 
-    return u3_zc_mp(z, mp_b);
+    return u3_zc_mp(z, mp_a);
   }
 }
 
@@ -34,13 +34,14 @@ u3_zx_sub_c(u3_z   z,
 */
 u3_fox
 u3_zx_sub(u3_z   z,
-          u3_fox cob)
+          u3_fox cor)
 {
+  u3_fox sam = u3_zh(z, u3_zh(z, cor));
   u3_fox a, b;
 
-  if ( (u3_no == u3_lr_cell(z, cob, &a, &b)) ||
-       (u3_no == u3_lr_pat(z, a)) ||
-       (u3_no == u3_lr_pat(z, b)) )
+  if ( (u3_no == u3_lr_cell(z, sam, &a, &b)) ||
+       (u3_no == u3_lr_stud(z, a)) ||
+       (u3_no == u3_lr_stud(z, b)) )
   {
     return u3_zc_tank(z, u3_cm_punt);
   }

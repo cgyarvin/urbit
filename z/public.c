@@ -257,7 +257,7 @@ uint8_t
 uz_n_tap(uz_machine mac,
          uz_noun    a)
 {
-  return !u3_lr_tap(mac->zen, a);
+  return !u3_lr_dust(mac->zen, a);
 }
 
 /* uz_n_eq():
@@ -269,7 +269,7 @@ uz_n_eq(uz_machine mac,
         uz_noun    a,
         uz_noun    b)
 {
-  return !u3_lr_eq(mac->zen, a, b);
+  return !u3_lr_sing(mac->zen, a, b);
 }
 
 /* uz_n_mug():
@@ -944,7 +944,7 @@ uz_line(uz_machine      machine,
             vug = u3_ln_nock(z, heg, muc);
             u3_b_print(&z->l, "pure", vug);
             printf("zeno:\n");
-          if ( u3_yes == u3_lr_eq(z, vug, *product) ) {
+          if ( u3_yes == u3_lr_sing(z, vug, *product) ) {
             printf("<good>\n");
           } else printf("<bad>\n");
 #endif

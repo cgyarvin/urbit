@@ -230,18 +230,13 @@ Z_OFILES=\
        z/zeno.o 
 
 J_OFILES=\
-       j/dec.o \
-       j/eq.o  \
-       j/inc.o \
-       j/pat.o \
-       j/tap.o \
-       j/zip.o \
-       \
        j/add.o \
+       j/bex.o \
+       j/dec.o \
        j/div.o \
-       j/gt.o  \
+       j/gth.o \
        j/gte.o \
-       j/lt.o  \
+       j/lth.o \
        j/lte.o \
        j/mod.o \
        j/mul.o \

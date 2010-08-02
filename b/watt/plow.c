@@ -146,6 +146,8 @@ u4_plow_full(u4_lane lan,
       return u4_exit;
     }
     printf(":"); fflush(stdout);
+#else
+    printf("!"); fflush(stdout);
 #endif
 
     typ = _rose_play(&plow, sub, gen);

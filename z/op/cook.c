@@ -13,14 +13,14 @@
         u3_fox lan     = _zn_bip_cook(f.s.lan);
         u3_fox sef     = _zn_bip_cook(f.s.sef);
 
-        if ( u3_no == u3_lr_tap(z, sef) ) {
+        if ( u3_no == u3_lr_dust(z, sef) ) {
           return u3_cm_exit;
         }
         else {
           u3_fox hib = u3_h(z, sef);
           u3_fox fus = u3_t(z, sef);
 
-          if ( u3_yes == u3_lr_tap(g, hib) ) {
+          if ( u3_yes == u3_lr_dust(z, hib) ) {
             _zn_forge_cons(z, ray_lid);
             _zn_forge_tail(z, z->l.ray_cap, lan, fus);
             _zn_forge_cook(z, z->l.ray_cap, lan, hib);
@@ -67,14 +67,14 @@
               case 5: _zn_start_root(z, u3_cm_eq,  ray_lid, lan, fus); break;
 
               case 6: {
-                if ( u3_no == u3_lr_tap(z, fus) ) {
+                if ( u3_no == u3_lr_dust(z, fus) ) {
                   return u3_cm_exit;
                 } 
                 else {
                   u3_fox p_fus = u3_h(z, fus);
                   u3_fox qr_fus = u3_t(z, fus);
 
-                  if ( u3_no == u3_lr_tap(z, qr_fus) ) {
+                  if ( u3_no == u3_lr_dust(z, qr_fus) ) {
                     return u3_cm_exit;
                   }
                   else {
@@ -88,7 +88,7 @@
               }
 
               case 7: {
-                if ( u3_no == u3_lr_tap(z, fus) ) {
+                if ( u3_no == u3_lr_dust(z, fus) ) {
                   return u3_cm_exit;
                 }
                 else {
@@ -97,7 +97,7 @@
                 }
               }
               case 8: {
-                if ( u3_no == u3_lr_tap(z, fus) ) {
+                if ( u3_no == u3_lr_dust(z, fus) ) {
                   return u3_cm_exit;
                 }
                 else {
@@ -106,7 +106,7 @@
                 }
               }
               case 11: {
-                if ( u3_no == u3_lr_tap(z, fus) ) {
+                if ( u3_no == u3_lr_dust(z, fus) ) {
                   return u3_cm_exit;
                 }
                 else {
@@ -114,7 +114,7 @@
                 }
               }
               case 12: {
-                if ( u3_no == u3_lr_tap(z, fus) ) {
+                if ( u3_no == u3_lr_dust(z, fus) ) {
                   return u3_cm_exit;
                 }
                 else {
