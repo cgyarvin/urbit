@@ -125,9 +125,9 @@ u3_zj_bat(u3_z            z,
 **
 **   Raise an unrecoverable exception.  Call with
 **
-**     u3_cm_exit: true exit detected
-**     u3_cm_fail: failure to compute
-**     u3_cm_punt: confused, return to soft code
+**     c3__exit: true exit detected
+**     c3__fail: failure to compute
+**     c3__punt: confused, return to soft code
 */
 u3_fox 
 u3_zc_tank(u3_z    z,
@@ -146,7 +146,7 @@ u3_zc_use(u3_z   z,
           u3_rat rat)
 {
   if ( rat == u3_none ) {
-    return u3_zc_tank(z, u3_cm_exit);
+    return u3_zc_tank(z, c3__exit);
   }
   else return rat;
 }
@@ -158,9 +158,9 @@ u3_zc_use(u3_z   z,
 **   Set *pod and/or return error condition:
 **
 **     0         : jet executed correctly
-**     u3_cm_exit: true exit detected
-**     u3_cm_fail: failure to compute
-**     u3_cm_punt: return to soft code
+**     c3__exit: true exit detected
+**     c3__fail: failure to compute
+**     c3__punt: return to soft code
 */
 u3_mote
 u3_zj_fire(u3_z            z,
@@ -174,19 +174,19 @@ u3_zj_fire(u3_z            z,
 
   if ( u3_no == u3_lr_cell(z, cor, &ham, &bat) ) {
     printf("punt 1\n");
-    return u3_cm_punt;
+    return c3__punt;
   }
   else if ( u3_no == u3_lr_sing(z, bat, gof->bat) ) {
     printf("punt 2\n");
-    return u3_cm_punt;
+    return c3__punt;
   }
   else if ( u3_no == u3_lr_cell(z, ham, &sam, &con) ) {
     printf("punt 3\n");
-    return u3_cm_punt;
+    return c3__punt;
   }
   else if ( u3_no == u3_lr_sing(z, con, gof->con) ) {
     printf("punt 4\n");
-    return u3_cm_punt;
+    return c3__punt;
   }
   else {
     if ( (zec = setjmp(z->j.jmp_lum)) ) {
@@ -196,7 +196,7 @@ u3_zj_fire(u3_z            z,
     else {
       *pod = gof->pas(z, cor);
 
-      // return ( (z->j.w_opt < jet_gof->w_pry) ? u3_cm_test : 0 );
+      // return ( (z->j.w_opt < jet_gof->w_pry) ? c3__test : 0 );
       return 0;
     }
   }
@@ -213,7 +213,7 @@ u3_zc_bytes(u3_z       z,
 {
   u3_rat vog = u3_ln_bytes(z, w_a, y_b);
 
-  return (vog == u3_none) ? u3_zc_tank(z, u3_cm_fail) : vog;
+  return (vog == u3_none) ? u3_zc_tank(z, c3__fail) : vog;
 }
 
 /* u3_zc_string():
@@ -226,7 +226,7 @@ u3_zc_string(u3_z       z,
 {
   u3_rat vog = u3_ln_string(z, c_a);
 
-  return (vog == u3_none) ? u3_zc_tank(z, u3_cm_fail) : vog;
+  return (vog == u3_none) ? u3_zc_tank(z, c3__fail) : vog;
 }
 
 /* u3_zc_cell(): 
@@ -240,7 +240,7 @@ u3_zc_cell(u3_z   z,
 {
   u3_rat vog = u3_ln_cell(z, a, b);
 
-  return (vog == u3_none) ? u3_zc_tank(z, u3_cm_fail) : vog;
+  return (vog == u3_none) ? u3_zc_tank(z, c3__fail) : vog;
 }
 
 /* u3_zc_mp():
@@ -254,7 +254,7 @@ u3_zc_mp(u3_z  z,
 {
   u3_rat vog = u3_ln_mp(z, mp_a);
 
-  return (vog == u3_none) ? u3_zc_tank(z, u3_cm_fail) : vog;
+  return (vog == u3_none) ? u3_zc_tank(z, c3__fail) : vog;
 }
 
 /* u3_zc_trel(): 
@@ -269,7 +269,7 @@ u3_zc_trel(u3_z   z,
 {
   u3_rat vog = u3_ln_cell(z, a, b);
 
-  return (vog == u3_none) ? u3_zc_tank(z, u3_cm_fail) : vog;
+  return (vog == u3_none) ? u3_zc_tank(z, c3__fail) : vog;
 }
 
 /* u3_zc_words():
@@ -283,5 +283,5 @@ u3_zc_words(u3_z       z,
 {
   u3_rat vog = u3_ln_words(z, w_a, w_b);
 
-  return (vog == u3_none) ? u3_zc_tank(z, u3_cm_fail) : vog;
+  return (vog == u3_none) ? u3_zc_tank(z, c3__fail) : vog;
 }

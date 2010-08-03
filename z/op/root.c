@@ -4,16 +4,16 @@
 */
 #   define _zn_bip_root(field) *_zn_anvil(z, ray_bip, root, field)
 
-    /* u3_cm_eq: equal
+    /* c3__eq: equal
     */
-      case u3_cm_eq: {
+      case c3__eq: {
         _zn_retreat(z, _zn_bip_root(f.r.ray_mat));
         {
           u3_ray ray_lid = _zn_bip_root(f.c.ray_lid);
           u3_fox gus     = _zn_bip_root(d.gus);
 
           if ( u3_no == u3_lr_dust(z, gus) ) {
-            return u3_cm_exit;
+            return c3__exit;
           } else {
             u3_fox fal = u3_lr_sing(z, u3_h(z, gus), u3_t(z, gus));
 
@@ -23,16 +23,16 @@
         break;
       }
 
-    /* u3_cm_goto: goto.
+    /* c3__goto: goto.
     */
-      case u3_cm_goto: {
+      case c3__goto: {
         _zn_retreat(z, _zn_bip_root(f.r.ray_mat));
         {
           u3_ray ray_lid = _zn_bip_root(f.c.ray_lid);
           u3_fox gus     = _zn_bip_root(d.gus);
 
           if ( u3_no == u3_lr_dust(z, gus) ) {
-            return u3_cm_exit;
+            return c3__exit;
           } else {
             /* lan: subject
             ** sef: formula
@@ -46,16 +46,16 @@
         break;
       }
 
-    /* u3_cm_inc: increment
+    /* c3__inc: increment
     */
-      case u3_cm_inc: {
+      case c3__inc: {
         _zn_retreat(z, _zn_bip_root(f.r.ray_mat));
         {
           u3_ray ray_lid = _zn_bip_root(f.c.ray_lid);
           u3_fox gus     = _zn_bip_root(d.gus);
 
           if ( u3_no == u3_lr_stud(z, gus) ) {
-            return u3_cm_exit;
+            return c3__exit;
           } else {
             mpz_t  mp_gus;
             u3_fox fal;
@@ -70,9 +70,9 @@
         break;
       }
 
-    /* u3_cm_tap: probe
+    /* c3__tap: probe
     */
-      case u3_cm_tap: {
+      case c3__tap: {
         _zn_retreat(z, _zn_bip_root(f.r.ray_mat));
         {
           u3_ray ray_lid = _zn_bip_root(f.c.ray_lid);

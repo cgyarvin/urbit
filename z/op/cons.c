@@ -4,9 +4,9 @@
 */
 #   define _zn_bip_cons(field) *_zn_anvil(z, ray_bip, cons, field)
 
-    /* u3_cm_cons: construct a pair.
+    /* c3__cons: construct a pair.
     */
-      case u3_cm_cons: {
+      case c3__cons: {
         u3_fox pux = _zn_bip_cons(d.pux);
         u3_fox nol = _zn_bip_cons(d.nol);
         u3_fox mal;

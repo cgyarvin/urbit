@@ -56,7 +56,7 @@ _zn_forge_cons(u3_z   z,
   u3_ray ray_zos;
 
   ray_zos = _zn_push_forge(z, cons);
-  *_zn_forge(z, ray_zos, cons, c.oper_ger) = u3_cm_cons;
+  *_zn_forge(z, ray_zos, cons, c.oper_ger) = c3__cons;
   *_zn_forge(z, ray_zos, cons, c.ray_poq) = z->n.ray_lab;
   *_zn_forge(z, ray_zos, cons, c.ray_lid) = ray_lid;
 
@@ -78,7 +78,7 @@ _zn_forge_cook(u3_z z,
   u3_ray ray_zos;
 
   ray_zos = _zn_push_forge(z, cook);
-  *_zn_forge(z, ray_zos, cook, c.oper_ger) = u3_cm_cook;
+  *_zn_forge(z, ray_zos, cook, c.oper_ger) = c3__cook;
   *_zn_forge(z, ray_zos, cook, c.ray_poq) = z->n.ray_lab;
   *_zn_forge(z, ray_zos, cook, c.ray_lid) = ray_lid;
 
@@ -99,7 +99,7 @@ _zn_forge_drop(u3_z   z,
   u3_ray ray_zos;
 
   ray_zos = _zn_push_forge(z, drop);
-  *_zn_forge(z, ray_zos, drop, c.oper_ger) = u3_cm_drop;
+  *_zn_forge(z, ray_zos, drop, c.oper_ger) = c3__drop;
   *_zn_forge(z, ray_zos, drop, c.ray_poq) = z->n.ray_lab;
   *_zn_forge(z, ray_zos, drop, c.ray_lid) = ray_lid;
 
@@ -117,7 +117,7 @@ _zn_forge_fine(u3_z   z,
   u3_ray ray_zos;
 
   ray_zos = _zn_push_forge(z, fine);
-  *_zn_forge(z, ray_zos, fine, c.oper_ger) = u3_cm_fine;
+  *_zn_forge(z, ray_zos, fine, c.oper_ger) = c3__fine;
   *_zn_forge(z, ray_zos, fine, c.ray_poq) = z->n.ray_lab;
   *_zn_forge(z, ray_zos, fine, c.ray_lid) = ray_lid;
 
@@ -141,7 +141,7 @@ _zn_forge_link(u3_z   z,
   u3_ray ray_zos;
 
   ray_zos = _zn_push_forge(z, link);
-  *_zn_forge(z, ray_zos, link, c.oper_ger) = u3_cm_link;
+  *_zn_forge(z, ray_zos, link, c.oper_ger) = c3__link;
   *_zn_forge(z, ray_zos, link, c.ray_poq) = z->n.ray_lab;
   *_zn_forge(z, ray_zos, link, c.ray_lid) = ray_lid;
 
@@ -171,7 +171,7 @@ _zn_forge_push(u3_z   z,
   u3_ray ray_zos;
 
   ray_zos = _zn_push_forge(z, push);
-  *_zn_forge(z, ray_zos, push, c.oper_ger) = u3_cm_push;
+  *_zn_forge(z, ray_zos, push, c.oper_ger) = c3__push;
   *_zn_forge(z, ray_zos, push, c.ray_poq) = z->n.ray_lab;
   *_zn_forge(z, ray_zos, push, c.ray_lid) = ray_lid;
 
@@ -201,7 +201,7 @@ _zn_forge_jet(u3_z            z,
   u3_ray ray_zos;
 
   ray_zos = _zn_push_forge(z, jet);
-  *_zn_forge(z, ray_zos, jet, c.oper_ger) = u3_cm_jet;
+  *_zn_forge(z, ray_zos, jet, c.oper_ger) = c3__jet;
   *_zn_forge(z, ray_zos, jet, c.ray_poq) = z->n.ray_lab;
   *_zn_forge(z, ray_zos, jet, c.ray_lid) = ray_lid;
 
@@ -232,7 +232,7 @@ _zn_forge_mate(u3_z z,
   u3_ray ray_zos;
 
   ray_zos = _zn_push_forge(z, mate);
-  *_zn_forge(z, ray_zos, mate, c.oper_ger) = u3_cm_mate;
+  *_zn_forge(z, ray_zos, mate, c.oper_ger) = c3__mate;
   *_zn_forge(z, ray_zos, mate, c.ray_poq) = z->n.ray_lab;
   *_zn_forge(z, ray_zos, mate, c.ray_lid) = ray_lid;
 
@@ -265,7 +265,7 @@ _zn_forge_pick(u3_z z,
   u3_ray ray_zos;
 
   ray_zos = _zn_push_forge(z, pick);
-  *_zn_forge(z, ray_zos, pick, c.oper_ger) = u3_cm_pick;
+  *_zn_forge(z, ray_zos, pick, c.oper_ger) = c3__pick;
   *_zn_forge(z, ray_zos, pick, c.ray_poq) = z->n.ray_lab;
   *_zn_forge(z, ray_zos, pick, c.ray_lid) = ray_lid;
 
@@ -321,7 +321,7 @@ _zn_forge_tail(u3_z z,
   u3_ray ray_zos;
 
   ray_zos = _zn_push_forge(z, tail);
-  *_zn_forge(z, ray_zos, tail, c.oper_ger) = u3_cm_tail;
+  *_zn_forge(z, ray_zos, tail, c.oper_ger) = c3__tail;
   *_zn_forge(z, ray_zos, tail, c.ray_poq) = z->n.ray_lab;
   *_zn_forge(z, ray_zos, tail, c.ray_lid) = ray_lid;
 
@@ -473,7 +473,7 @@ _zn_start_goto(u3_z   z,
 
   /* Default handling.
   */
-  _zn_start_root(z, u3_cm_goto, ray_lid, lan, fus);
+  _zn_start_root(z, c3__goto, ray_lid, lan, fus);
 }
 
 /* _zn_start_mate(): install a mate sequence.
@@ -524,10 +524,24 @@ _zn_start_pick(u3_z   z,
   _zn_forge_cook(z, z->l.ray_cap, lan, cor);
 }
 
+/* uz_z_mung():
+**
+**   As uz_z_run(), but [b] is gate and [c] is sample.
+*/
+u3_fox
+u3_z_mung(u3_z              z,
+          u3_fox            *a,
+          u3_fox            b,
+          u3_fox            c,
+          struct u3_z_bench *d)
+{
+  c3_assert(0);  return 0;
+}
+
 /* u3_z_run():
 **
 **   Execute (nock b c) and set *a to the result.  If this succeeds,
-**   return 0.  Otherwise, return u3_cm_exit or u3_cm_fail.
+**   return 0.  Otherwise, return c3__exit or c3__fail.
 **
 **   If (d) is nonzero, set profiling data.
 */
@@ -567,7 +581,7 @@ u3_z_run(u3_z z,
 
         u3_lm_water(z, &w_maz, &w_buc);
         printf("not open: maz %d, buc %d\n", w_maz, w_buc);
-        return u3_cm_fail;
+        return c3__fail;
       }
 
       /* Update benchmark statistics.

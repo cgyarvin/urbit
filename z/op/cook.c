@@ -4,9 +4,9 @@
 */
 #   define _zn_bip_cook(field) *_zn_anvil(z, ray_bip, cook, field)
 
-    /* u3_cm_cook: compute nock.
+    /* c3__cook: compute nock.
     */
-      case u3_cm_cook: {
+      case c3__cook: {
         /* lid: destination cap.
         */
         u3_ray ray_lid = _zn_bip_cook(f.c.ray_lid);
@@ -14,7 +14,7 @@
         u3_fox sef     = _zn_bip_cook(f.s.sef);
 
         if ( u3_no == u3_lr_dust(z, sef) ) {
-          return u3_cm_exit;
+          return c3__exit;
         }
         else {
           u3_fox hib = u3_h(z, sef);
@@ -27,19 +27,19 @@
           }
           else {
             switch ( hib ) {
-              default: return u3_cm_exit;
+              default: return c3__exit;
 
               case 0: {
                 u3_fox pob = u3_lr_twig(z, fus, lan);
 
                 if ( u3_none == pob ) {
-                  return u3_cm_exit;
+                  return c3__exit;
                 }
                 else {
                   u3_fox vik = u3_ln_ice(z, pob);
 
                   if ( u3_none == vik ) {
-                    return u3_cm_fail;
+                    return c3__fail;
                   }
                   else {
                     _zn_complete(z, ray_lid, vik);
@@ -52,7 +52,7 @@
                 u3_fox vik = u3_ln_ice(z, fus);
 
                 if ( u3_none == vik ) {
-                  return u3_cm_fail;
+                  return c3__fail;
                 }
                 else {
                   _zn_complete(z, ray_lid, vik);
@@ -62,20 +62,20 @@
 
               case 2: _zn_start_goto(z, ray_lid, lan, fus); break;
 
-              case 3: _zn_start_root(z, u3_cm_tap, ray_lid, lan, fus); break;
-              case 4: _zn_start_root(z, u3_cm_inc, ray_lid, lan, fus); break;
-              case 5: _zn_start_root(z, u3_cm_eq,  ray_lid, lan, fus); break;
+              case 3: _zn_start_root(z, c3__tap, ray_lid, lan, fus); break;
+              case 4: _zn_start_root(z, c3__inc, ray_lid, lan, fus); break;
+              case 5: _zn_start_root(z, c3__eq,  ray_lid, lan, fus); break;
 
               case 6: {
                 if ( u3_no == u3_lr_dust(z, fus) ) {
-                  return u3_cm_exit;
+                  return c3__exit;
                 } 
                 else {
                   u3_fox p_fus = u3_h(z, fus);
                   u3_fox qr_fus = u3_t(z, fus);
 
                   if ( u3_no == u3_lr_dust(z, qr_fus) ) {
-                    return u3_cm_exit;
+                    return c3__exit;
                   }
                   else {
                     u3_fox q_fus = u3_h(z, qr_fus);
@@ -89,7 +89,7 @@
 
               case 7: {
                 if ( u3_no == u3_lr_dust(z, fus) ) {
-                  return u3_cm_exit;
+                  return c3__exit;
                 }
                 else {
                   _zn_start_link(z, ray_lid, lan, u3_h(z, fus), u3_t(z, fus));
@@ -98,7 +98,7 @@
               }
               case 8: {
                 if ( u3_no == u3_lr_dust(z, fus) ) {
-                  return u3_cm_exit;
+                  return c3__exit;
                 }
                 else {
                   _zn_start_push(z, ray_lid, lan, u3_h(z, fus), u3_t(z, fus));
@@ -107,7 +107,7 @@
               }
               case 11: {
                 if ( u3_no == u3_lr_dust(z, fus) ) {
-                  return u3_cm_exit;
+                  return c3__exit;
                 }
                 else {
                   _zn_forge_cook(z, z->l.ray_cap, lan, u3_t(z, fus));
@@ -115,13 +115,13 @@
               }
               case 12: {
                 if ( u3_no == u3_lr_dust(z, fus) ) {
-                  return u3_cm_exit;
+                  return c3__exit;
                 }
                 else {
                   u3_fox vik = u3_ln_ice(z, u3_t(z, fus));
 
                   if ( u3_none == vik ) {
-                    return u3_cm_fail;
+                    return c3__fail;
                   }
                   else {
                     u3_fox cor = u3_ln_cell(z, lan, vik);

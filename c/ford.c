@@ -28,18 +28,22 @@
       */
       u3_fox  wot;
 
-      /*  wur:  kernel core.
+      /*  wad:  kernel core.
       */
-      u3_fox  wur;
+      u3_fox  wad;
 
-      /*  wyx:  kernel type.
+      /*  wyp:  kernel type.
       */
-      u3_fox  wyx;
+      u3_fox  wyp;
     } w;
 
     /*  Gates.  Subject for all gates is kernel.
     */
     struct {
+      /*  Toy: decrement.
+      */
+      struct ford_gate duc;
+
       /*  Watt miller.
       */
       struct ford_gate myl;
@@ -282,7 +286,7 @@ u3_fox
 _ford_init(u3_z    z,
            u3_fox  gen)
 {
-  u3_rat rat = u3_b_make(&z->l, u3_cm_blur, gen);
+  u3_rat rat = u3_b_make(&z->l, c3__blur, gen);
 
   if ( u3_l_none == rat ) {
     fprintf(stderr, "boot make failed\n");
@@ -343,6 +347,33 @@ _ford_kernel(u3_z z,
     return ker;
   }
 }
+
+/*  _ford_watt_boot():  boot make, typeless
+*/
+static u3_fox
+_ford_watt_boot(struct ford_state *ver,
+                const c3_c        *src)
+{
+}
+
+/*  _ford_watt_pass():  pass (make and show)
+*/
+static u3_fox
+_ford_watt_pass(struct ford_state *ver,
+                u3_fox            sut,
+                const c3_c        *src)
+{
+}
+
+/*  _ford_watt_make():  mill (play, make, show)
+*/
+static u3_fox
+_ford_watt_mill(struct ford_state *ver,
+                u3_fox            sut,
+                const c3_c        *src)
+{
+}
+
 void *
 ford_boot(int siz)
 {
@@ -350,8 +381,15 @@ ford_boot(int siz)
 
   u3_b_init();
 
-  state->z = u3_z_new(siz);
-  state->w.wot = _ford_kernel(state->z, "watt/watt.watt", "watt/298.nock");
+  /*  Load the kernel itself.  XX: add jets.
+  */
+  {
+    state->z = u3_z_new(siz);
+    state->w.wot = _ford_kernel(state->z, "watt/watt.watt", "watt/298.nock");
+  }
+
+  /*  Load the kernel core, which we'll actually use.
+  */
 
   exit(0);
 }

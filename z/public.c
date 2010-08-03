@@ -63,7 +63,7 @@ uz_l_except(uz_machine mac,
 uz_noun
 uz_x_exit(uz_machine mac)
 {
-  longjmp(mac->env, u3_cm_exit);
+  longjmp(mac->env, c3__exit);
 }
 
 /* uz_x_tank():
@@ -75,7 +75,7 @@ uz_x_tank(uz_machine mac)
 {
   printf("tank!\n");
   abort();
-  longjmp(mac->env, u3_cm_tank);
+  longjmp(mac->env, c3__tank);
 }
 
 /* uz_x_trip():
@@ -85,7 +85,7 @@ uz_x_tank(uz_machine mac)
 uz_noun
 uz_x_trip(uz_machine mac)
 {
-  longjmp(mac->env, u3_cm_trip);
+  longjmp(mac->env, c3__trip);
 }
 
 /* uz_x_stub():
@@ -97,7 +97,7 @@ uz_x_stub(uz_machine mac)
 {
   printf("stub!\n");
   abort();
-  longjmp(mac->env, u3_cm_stub);
+  longjmp(mac->env, c3__stub);
 }
 
 /* uz_k_nock():
@@ -516,9 +516,9 @@ _uz_g_run_gene(uz_machine mac,
   switch ( res ) {
     case 0: return uz_k_cell(mac, uz_ch(mac, cam), val);
 
-    case u3_cm_exit: return uz_x_exit(mac);
-    case u3_cm_trip: return uz_x_trip(mac);
-    case u3_cm_tank: return uz_x_tank(mac);
+    case c3__exit: return uz_x_exit(mac);
+    case c3__trip: return uz_x_trip(mac);
+    case c3__tank: return uz_x_tank(mac);
 
     default: return uz_x_trip(mac);
   }
@@ -890,7 +890,7 @@ uz_line(uz_machine      machine,
   }
   else {
 #if 0
-    u3_fox vad = u3_ln_cell(z, u3_cm_cube, 0);
+    u3_fox vad = u3_ln_cell(z, c3__cube, 0);
     u3_rat neb = u3_b_full(&z->l, jop, vad);
 
     if ( u3_none == neb ) {
@@ -908,8 +908,8 @@ uz_line(uz_machine      machine,
         default: u3_assert(0); return uz_fail;
 
         case 0:          return uz_good;
-        case u3_cm_exit: return uz_exit;
-        case u3_cm_fail: return uz_fail;
+        case c3__exit: return uz_exit;
+        case c3__fail: return uz_fail;
       }
       return 0;
     }
@@ -936,8 +936,8 @@ uz_line(uz_machine      machine,
       switch ( gix ) {
         default: u3_assert(0); return uz_fail;
 
-        case u3_cm_exit: return uz_exit;
-        case u3_cm_fail: return uz_fail;
+        case c3__exit: return uz_exit;
+        case c3__fail: return uz_fail;
         case 0: {
 #if 0
             u3_fox            vug;

@@ -4,9 +4,9 @@
 */
 #   define _zn_bip_tail(field) *_zn_anvil(z, ray_bip, tail, field)
 
-    /* u3_cm_tail: tail of a cons.
+    /* c3__tail: tail of a cons.
     */
-      case u3_cm_tail: {
+      case c3__tail: {
         u3_fox gus = _zn_bip_tail(d.gus);
         u3_fox lan = _zn_bip_tail(f.s.lan);
         u3_fox fus = _zn_bip_tail(f.s.fus);

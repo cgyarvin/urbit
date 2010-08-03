@@ -13,7 +13,7 @@ u3_zx_dec_c(u3_z   z,
   mpz_t mp_a;
 
   if ( 0 == a ) {
-    return u3_zc_tank(z, u3_cm_exit);
+    return u3_zc_tank(z, c3__exit);
   }
   else {
     u3_lr_mp(z, mp_a, a);
@@ -33,7 +33,7 @@ u3_zx_dec(u3_z   z,
   u3_fox a   = sam;
 
   if ( u3_no == u3_lr_stud(z, a) ) {
-    return u3_zc_tank(z, u3_cm_punt);
+    return u3_zc_tank(z, c3__punt);
   }
   else return u3_zx_dec_c(z, a);
 }

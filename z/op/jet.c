@@ -4,9 +4,9 @@
 */
 #   define _zn_bip_jet(field) *_zn_anvil(z, ray_bip, jet, field)
 
-    /* u3_cm_jet: jet to a static formula.
+    /* c3__jet: jet to a static formula.
     */
-      case u3_cm_jet: {
+      case c3__jet: {
         _zn_retreat(z, _zn_bip_jet(f.r.ray_mat));
         {
           /* sax: jet code
@@ -23,24 +23,24 @@
           if ( u3_yes == u3_lr_dust(z, gus) ) {
             zec = u3_zj_fire(z, &pod, sax, gus);
           } 
-          else zec = u3_cm_punt;
+          else zec = c3__punt;
 
           switch ( zec ) {
             case 0: 
               _zn_complete(z, ray_lid, pod);
               break;
 
-            case u3_cm_fail:
-            case u3_cm_exit:
+            case c3__fail:
+            case c3__exit:
               return zec;
  
-            case u3_cm_punt: {
+            case c3__punt: {
               u3_fox bat = u3_zj_bat(z, sax);
 
               _zn_forge_cook(z, ray_lid, gus, bat);
               break;
             }
-            case u3_cm_test: {
+            case c3__test: {
               u3_fox bat = u3_zj_bat(z, sax);
 
               _zn_start_mate(z, ray_lid, pod, gus, bat);
