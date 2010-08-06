@@ -666,7 +666,8 @@ uz_t_full(uz_machine mac,
           uz_noun    typ,
           uz_noun    gen)
 {
-  u3_rat rat = u3_b_full(mac->zen, typ, gen);
+  u3_mote how;
+  u3_rat  rat = u3_b_mill(mac->zen, typ, gen, &how);
 
   if ( u3_none == rat ) {
     return uz_x_exit(mac);
@@ -683,7 +684,8 @@ uz_t_make(uz_machine mac,
           uz_noun    typ,
           uz_noun    gen)
 {
-  u3_rat rat = u3_b_full(mac->zen, typ, gen);
+  u3_mote how;
+  u3_rat  rat = u3_b_mill(mac->zen, typ, gen, &how);
 
   if ( u3_none == rat ) {
     return uz_x_exit(mac);
@@ -710,7 +712,7 @@ uz_noun
 uz_t_watt(uz_machine mac,
           uz_noun    src)
 {
-  u3_rat rat = u3_b_watt(mac->zen, src);
+  u3_rat rat = u3_b_read(mac->zen, src);
 
   if ( u3_l_none == rat ) {
     return uz_x_exit(mac);
@@ -883,7 +885,7 @@ uz_line(uz_machine      machine,
   if ( u3_none == wug ) {
     return uz_fail;
   }
-  jop = u3_b_watt(&z->l, wug);
+  jop = u3_b_read(&z->l, wug);
 
   if ( u3_none == jop ) {
     return uz_exit;
@@ -891,7 +893,7 @@ uz_line(uz_machine      machine,
   else {
 #if 0
     u3_fox vad = u3_ln_cell(z, c3__cube, 0);
-    u3_rat neb = u3_b_full(&z->l, jop, vad);
+    u3_rat neb = u3_b_mill(&z->l, jop, vad);
 
     if ( u3_none == neb ) {
       return u3_none;
@@ -919,7 +921,7 @@ uz_line(uz_machine      machine,
     */
     u3_fox zul = u3_h(z, z->q.tef);
     u3_fox heg = u3_t(z, z->q.tef);
-    u3_rat bir = u3_b_full(&z->l, jop, zul);
+    u3_rat bir = u3_b_mill(&z->l, jop, zul);
 
     if ( u3_none == bir ) {
       return u3_none;

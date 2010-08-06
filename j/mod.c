@@ -11,7 +11,7 @@ u3_zx_mod_c(u3_z   z,
             u3_fox a,
             u3_fox b)
 {
-  if ( 0 == a ) {
+  if ( 0 == b ) {
     return u3_zc_tank(z, c3__exit);
   }
   else {

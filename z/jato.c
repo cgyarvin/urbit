@@ -170,8 +170,9 @@ u3_zj_fire(u3_z            z,
 {
   struct u3_zj_def *gof = &_zj_defs[code_sax];
   u3_mote          zec;
-  u3_fox           ham, sam, con, bat;
 
+#if 0
+  u3_fox           ham, sam, con, bat;
   if ( u3_no == u3_lr_cell(z, cor, &ham, &bat) ) {
     printf("punt 1\n");
     return c3__punt;
@@ -188,7 +189,9 @@ u3_zj_fire(u3_z            z,
     printf("punt 4\n");
     return c3__punt;
   }
-  else {
+#endif
+
+  {
     if ( (zec = setjmp(z->j.jmp_lum)) ) {
       *pod = u3_none;
       return zec;

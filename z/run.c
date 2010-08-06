@@ -535,7 +535,27 @@ u3_z_mung(u3_z              z,
           u3_fox            c,
           struct u3_z_bench *d)
 {
-  c3_assert(0);  return 0;
+  u3_fox gat = b;
+  u3_fox sam = c;
+
+  if ( u3_no == u3_lr_dust(z, gat) ) {
+    return c3__exit;
+  } else {
+    u3_fox ham = u3_h(z, gat);
+    u3_fox bat = u3_t(z, gat);
+
+    if ( u3_no == u3_lr_dust(z, ham) ) {
+      return c3__exit;
+    } else {
+      // XX: memory behavior not quite perfect.
+      //
+      u3_fox con = u3_t(z, ham);
+      u3_fox sub = u3_ln_cell(z, u3_ln_cell(z, sam, con), bat);
+      u3_fox fol = bat;
+      
+      return u3_z_run(z, a, sub, fol, d);
+    }
+  }
 }
 
 /* u3_z_run():
@@ -561,8 +581,19 @@ u3_z_run(u3_z z,
     d->w_buc = d->w_tew;
   }
 
-  /* Install initial instruction.
+  /* Install initial instruction - or fire direct jet.
   */
+  {
+    enum u3_zj_code code_sax;
+
+    if ( u3_zj_code_none != (code_sax = u3_zj_look(z, c)) ) {
+      u3_mote bem = u3_zj_fire(z, a, code_sax, b);
+      
+      if ( bem != c3__punt ) {
+        return bem;
+      }
+    } 
+  }
   *a = u3_none;
   _zn_forge_fine(z, z->l.ray_cap);
   _zn_forge_cook(z, z->l.ray_cap, b, c);

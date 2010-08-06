@@ -20,7 +20,7 @@ BIN=run
 
 RM=rm -f
 CC=gcc
-CLD=gcc -O2 -bind_at_load -L/sw/lib
+CLD=gcc -g -bind_at_load -L/sw/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
@@ -28,7 +28,7 @@ INCLUDE=include
 GENERATED=generated
 DEFINES=-DU3_OS_$(OS) -DU3_OS_ENDIAN_$(ENDIAN)\
 	-DU4_ENDIAN_$(ENDIAN) -DU4_OS_$(OS)
-CFLAGS=-O2 -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
+CFLAGS=-g -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 CWFLAGS=-Wall
 
 .y.o:
@@ -216,7 +216,7 @@ U4_OFILES= \
 C_OFILES=\
        c/main.o \
        c/ford.o \
-       c/vere.o
+       c/mord.o
 
 L_OFILES=\
        l/manage.o \
@@ -242,7 +242,16 @@ J_OFILES=\
        j/mul.o \
        j/sub.o \
        \
-       j/mug.o
+       j/mug.o \
+       \
+       j/make.o	\
+       j/mill.o \
+       j/pass.o	\
+       j/play.o	\
+       j/read.o \
+       j/shop.o	\
+       j/show.o	\
+       j/wish.o
 
 B_OFILES=\
        b/bunt.o

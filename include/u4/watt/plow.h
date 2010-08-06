@@ -171,10 +171,15 @@
     void
     u4_plow_init(u4_plow p,
                  u4_lane lan);
-    u4_loaf
-    u4_plow_full(u4_lane lan,
-                 u4_type sub,
-                 u4_gene gen);
+
+    u4_noun u4_plow_make(u4_lane lan, u4_type sub, u4_gene gen);
+    u4_noun u4_plow_play(u4_lane lan, u4_type sub, u4_gene gen);
+    u4_noun u4_plow_show(u4_lane lan, u4_type sub, u4_gene gen);
+    u4_noun u4_plow_pass(u4_lane lan, u4_type sub, u4_gene gen);
+    u4_noun u4_plow_shop(u4_lane lan, u4_type sub, u4_gene gen);
+    u4_noun u4_plow_wish(u4_lane lan, u4_type sub, u4_gene gen);
+    u4_noun u4_plow_mill(u4_lane lan, u4_type sub, u4_gene gen);
+
     u4_rope
     _plow_rake(u4_plow p,
                u4_gene gen);

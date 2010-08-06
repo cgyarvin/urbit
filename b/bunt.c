@@ -283,12 +283,12 @@ u3_b_nock(u3_l   l,
   }
 }
 
-/* u3_b_watt():
+/* u3_b_read():
 **
 **   Use bunt routines to parse (wek).
 */
 u3_rat
-u3_b_watt(u3_l   l,
+u3_b_read(u3_l   l,
           u3_fox wek)
 {
   u4_lane           lane = u4_hat(_road_woc);
@@ -370,7 +370,8 @@ u3_b_hume(u3_l   l,
   }
 }
 
-/* u3_b_full():
+#if 0
+/* u3_b_mill():
 **
 **   Use bunt routines to map (type gene) to (type form).
 **
@@ -378,7 +379,7 @@ u3_b_hume(u3_l   l,
 **   vub: gene
 */
 u3_rat
-u3_b_full(u3_l   l,
+u3_b_mill(u3_l   l,
           u3_fox gal,
           u3_fox vub)
 {
@@ -386,53 +387,187 @@ u3_b_full(u3_l   l,
   enum u4_bail_code bail_code;
 
   if ( (bail_code = u4_bail_in) ) {
+    return u3_none;
     switch ( bail_code ) {
       default: printf("[weird!]\n"); return u3_none;
 
-      case u4_bail_exit: printf("[full exit]\n"); return u3_none;
-      case u4_bail_tank: printf("[full tank]\n"); return u3_none;
-      case u4_bail_trip: printf("[full trip]\n"); return u3_none;
-      case u4_bail_stub: printf("[full stub]\n"); return u3_none;
+      case u4_bail_exit: printf("[mill exit]\n"); return u3_none;
+      case u4_bail_tank: printf("[mill tank]\n"); return u3_none;
+      case u4_bail_trip: printf("[mill trip]\n"); return u3_none;
+      case u4_bail_stub: printf("[mill stub]\n"); return u3_none;
     }
   } 
   else {
-    // Note: arguments reversed...
-    //
     u4_noun n_zyl = _bi_export(l, lane, gal);
     u4_noun n_nes = _bi_export(l, lane, vub);
-    u4_noun n_fut = u4_plow_full(lane, n_zyl, n_nes);
+    u4_noun n_fut = u4_plow_mill(lane, n_zyl, n_nes);
 
     return _bi_import(l, n_fut);
   }
 }
+#endif
 
-/* u3_b_make():
-**
-**   Use bunt routines to map (mold gene) to (form).
+/* u3_b_make()::
 */
 u3_rat
 u3_b_make(u3_l   l,
-          u3_fox gal,
-          u3_fox vub)
+          u3_fox    sut,
+          u3_fox    gen,
+          u3_mote*  how)
 {
-  u4_lane           lane = u4_hat(_road_woc);
+  u4_lane           lan = u4_hat(_road_woc);
   enum u4_bail_code bail_code;
 
   if ( (bail_code = u4_bail_in) ) {
-    switch ( bail_code ) {
-      default: printf("[weird!]\n"); return u3_none;
-
-      case u4_bail_exit: printf("[exit]\n"); return u3_none;
-      case u4_bail_tank: printf("[tank]\n"); return u3_none;
-      case u4_bail_trip: printf("[trip]\n"); return u3_none;
-      case u4_bail_stub: printf("[stub]\n"); return u3_none;
-    }
+    *how = (bail_code == u4_bail_exit) ? c3__exit : c3__punt;
+    return u3_none;
   } 
   else {
-    u4_noun n_zyl = _bi_export(l, lane, gal);
-    u4_noun n_nes = _bi_export(l, lane, vub);
-    u4_noun n_fut = u4_plow_full(lane, n_zyl, n_nes);
+    return _bi_import
+      (l, u4_plow_make(lan, _bi_export(l, lan, sut),
+                            _bi_export(l, lan, gen)));
+  }
+}
 
-    return _bi_import(l, u4_ct(n_fut));
+/* u3_b_mug()::
+*/
+u3_fox
+u3_b_mug(u3_l l,
+         u3_fox vup)
+{
+  u4_lane           lan = u4_hat(_road_woc);
+
+  return u4_n_nub(_bi_export(l, lan, vup));
+}
+
+/* u3_b_play()::
+*/
+u3_rat
+u3_b_play(u3_l   l,
+          u3_fox    sut,
+          u3_fox    gen,
+          u3_mote*  how)
+{
+  u4_lane           lan = u4_hat(_road_woc);
+  enum u4_bail_code bail_code;
+
+  if ( (bail_code = u4_bail_in) ) {
+    *how = (bail_code == u4_bail_exit) ? c3__exit : c3__punt;
+    return u3_none;
+  } 
+  else {
+    return _bi_import
+      (l, u4_plow_play(lan, _bi_export(l, lan, sut),
+                            _bi_export(l, lan, gen)));
+  }
+}
+
+/* u3_b_show()::
+*/
+u3_rat
+u3_b_show(u3_l   l,
+          u3_fox    sut,
+          u3_fox    gen,
+          u3_mote*  how)
+{
+  u4_lane           lan = u4_hat(_road_woc);
+  enum u4_bail_code bail_code;
+
+  if ( (bail_code = u4_bail_in) ) {
+    *how = (bail_code == u4_bail_exit) ? c3__exit : c3__punt;
+    return u3_none;
+  } 
+  else {
+    return _bi_import
+      (l, u4_plow_show(lan, _bi_export(l, lan, sut),
+                            _bi_export(l, lan, gen)));
+  }
+}
+
+/* u3_b_pass()::
+*/
+u3_rat
+u3_b_pass(u3_l   l,
+          u3_fox    sut,
+          u3_fox    gen,
+          u3_mote*  how)
+{
+  u4_lane           lan = u4_hat(_road_woc);
+  enum u4_bail_code bail_code;
+
+  if ( (bail_code = u4_bail_in) ) {
+    *how = (bail_code == u4_bail_exit) ? c3__exit : c3__punt;
+    return u3_none;
+  } 
+  else {
+    return _bi_import
+      (l, u4_plow_pass(lan, _bi_export(l, lan, sut),
+                            _bi_export(l, lan, gen)));
+  }
+}
+
+/* u3_b_shop()::
+*/
+u3_rat
+u3_b_shop(u3_l   l,
+          u3_fox    sut,
+          u3_fox    gen,
+          u3_mote*  how)
+{
+  u4_lane           lan = u4_hat(_road_woc);
+  enum u4_bail_code bail_code;
+
+  if ( (bail_code = u4_bail_in) ) {
+    *how = (bail_code == u4_bail_exit) ? c3__exit : c3__punt;
+    return u3_none;
+  } 
+  else {
+    return _bi_import
+      (l, u4_plow_shop(lan, _bi_export(l, lan, sut),
+                            _bi_export(l, lan, gen)));
+  }
+}
+
+/* u3_b_wish()::
+*/
+u3_rat
+u3_b_wish(u3_l   l,
+          u3_fox    sut,
+          u3_fox    gen,
+          u3_mote*  how)
+{
+  u4_lane           lan = u4_hat(_road_woc);
+  enum u4_bail_code bail_code;
+
+  if ( (bail_code = u4_bail_in) ) {
+    *how = (bail_code == u4_bail_exit) ? c3__exit : c3__punt;
+    return u3_none;
+  } 
+  else {
+    return _bi_import
+      (l, u4_plow_wish(lan, _bi_export(l, lan, sut),
+                            _bi_export(l, lan, gen)));
+  }
+}
+
+/* u3_b_mill()::
+*/
+u3_rat
+u3_b_mill(u3_l      l,
+          u3_fox    sut,
+          u3_fox    gen,
+          u3_mote*  how)
+{
+  u4_lane           lan = u4_hat(_road_woc);
+  enum u4_bail_code bail_code;
+
+  if ( (bail_code = u4_bail_in) ) {
+    *how = (bail_code == u4_bail_exit) ? c3__exit : c3__punt;
+    return u3_none;
+  } 
+  else {
+    return _bi_import
+      (l, u4_plow_mill(lan, _bi_export(l, lan, sut),
+                            _bi_export(l, lan, gen)));
   }
 }
