@@ -20,7 +20,7 @@ u3_zx_sub_c(u3_z   z,
     mpz_clear(mp_a);
     mpz_clear(mp_b);
 
-    return u3_zc_tank(z, u3_cm_exit);
+    return u3_zc_tank(z, c3__exit);
   }
   else {
     mpz_sub(mp_a, mp_a, mp_b); 
@@ -43,7 +43,7 @@ u3_zx_sub(u3_z   z,
        (u3_no == u3_lr_stud(z, a)) ||
        (u3_no == u3_lr_stud(z, b)) )
   {
-    return u3_zc_tank(z, u3_cm_punt);
+    return u3_zc_tank(z, c3__punt);
   }
   else {
     return u3_zx_sub_c(z, a, b);

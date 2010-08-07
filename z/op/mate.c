@@ -4,9 +4,9 @@
 */
 #   define _zn_bip_mate(field) *_zn_anvil(z, ray_bip, mate, field)
 
-    /* u3_cm_mate: mate to a static formula.
+    /* c3__mate: mate to a static formula.
     */
-      case u3_cm_mate: {
+      case c3__mate: {
         _zn_retreat(z, _zn_bip_mate(f.r.ray_mat));
         {
           u3_ray ray_lid = _zn_bip_mate(f.c.ray_lid);
@@ -22,7 +22,7 @@
             u3_b_print(&z->l, "hard", pod);
             u3_b_print(&z->l, "soft", gus);
 
-            return u3_cm_fail;
+            return c3__fail;
           }
         }
         break;

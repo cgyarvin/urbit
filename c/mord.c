@@ -1,4 +1,4 @@
-/* c/vere.c
+/* c/mord.c
 **
 ** This file is in the public domain.
 */
@@ -13,12 +13,12 @@
   /** Forward declarations.
   **/
     static uz_noun
-    _vere_source(uz_machine, uz_noun);
+    _mord_source(uz_machine, uz_noun);
 
-/* _vere_print(): print a clam [type noun]
+/* _mord_print(): print a clam [type noun]
 */
 static void
-_vere_print(uz_machine mac,
+_mord_print(uz_machine mac,
             const char *cap,
             uz_noun    fig)
 {
@@ -26,17 +26,17 @@ _vere_print(uz_machine mac,
   uz_f_print(mac, cap, uz_ct(mac, fig));
 }
 
-/* _vere_source_crib(): load a crib source.
+/* _mord_source_crib(): load a crib source.
 */
 static uz_noun
-_vere_source_crib(uz_machine mac,
+_mord_source_crib(uz_machine mac,
                   uz_noun    lar)
 {
   uz_noun i_lar  = uz_ch(mac, lar);
   uz_noun t_lar  = uz_ct(mac, lar);
   uz_noun pi_lar = uz_ch(mac, i_lar);
   uz_noun qi_lar = uz_ct(mac, i_lar);
-  uz_noun fig    = _vere_source(mac, qi_lar);
+  uz_noun fig    = _mord_source(mac, qi_lar);
   uz_noun p_fig  = uz_ch(mac, fig);
   uz_noun q_fig  = uz_ct(mac, fig);
   uz_noun cul;
@@ -51,7 +51,7 @@ _vere_source_crib(uz_machine mac,
     return uz_k_cell(mac, cul, q_fig);
   }
   else {
-    uz_noun pem   = _vere_source_crib(mac, t_lar);
+    uz_noun pem   = _mord_source_crib(mac, t_lar);
     uz_noun p_pem = uz_ch(mac, pem);
     uz_noun q_pem = uz_ct(mac, pem);
 
@@ -61,19 +61,19 @@ _vere_source_crib(uz_machine mac,
   }
 }
 
-/* _vere_source_file(): load a file source.
+/* _mord_source_file(): load a file source.
 */
 static uz_noun
-_vere_source_file(uz_machine mac,
+_mord_source_file(uz_machine mac,
                   uz_noun    unx)
 {
   return uz_k_file(mac, unx);
 }
 
-/* _vere_source_atom(): load an atom source.
+/* _mord_source_atom(): load an atom source.
 */
 static uz_noun
-_vere_source_atom(uz_machine mac,
+_mord_source_atom(uz_machine mac,
                   uz_noun    viq)
 {
   uz_noun p_viq;
@@ -91,42 +91,42 @@ _vere_source_atom(uz_machine mac,
   else return uz_x_tank(mac);
 }
 
-/* _vere_source_exp(): load an expression source.
+/* _mord_source_exp(): load an expression source.
 */
 static uz_noun
-_vere_source_exp(uz_machine mac,
+_mord_source_exp(uz_machine mac,
                  uz_noun    gen)
 {
   return uz_g_express(mac, gen);
 }
 
-/* _vere_source(): load a source.
+/* _mord_source(): load a source.
 */
 static uz_noun
-_vere_source(uz_machine mac,
+_mord_source(uz_machine mac,
              uz_noun    dim)
 {
   uz_noun p_dim;
 
   if ( uz_c_p(mac, dim, uz_s4('m','a','l','g'), &p_dim) ) {
-    return _vere_source_crib(mac, p_dim);
+    return _mord_source_crib(mac, p_dim);
   }
   else if ( uz_c_p(mac, dim, uz_s4('d','r','u','n'), &p_dim) ) {
-    return _vere_source_file(mac, p_dim);
+    return _mord_source_file(mac, p_dim);
   }
   else if ( uz_c_p(mac, dim, uz_s4('n','a','r','v'), &p_dim) ) {
-    return _vere_source_atom(mac, p_dim);
+    return _mord_source_atom(mac, p_dim);
   }
   else if ( uz_c_p(mac, dim, uz_s4('t','r','i','b'), &p_dim) ) {
-    return _vere_source_exp(mac, p_dim);
+    return _mord_source_exp(mac, p_dim);
   }
   else return uz_x_tank(mac);
 }
 
-/* _vere_filter_watt_lame(): apply a lame filter.
+/* _mord_filter_watt_lame(): apply a lame filter.
 */
 static uz_noun
-_vere_filter_watt_lame(uz_machine mac,
+_mord_filter_watt_lame(uz_machine mac,
                        uz_noun    fig,
                        uz_noun    gar)
 {
@@ -136,10 +136,10 @@ _vere_filter_watt_lame(uz_machine mac,
   return uz_g_lame(mac, fig, gen);
 }
 
-/* _vere_filter_watt_program(): apply a program filter.
+/* _mord_filter_watt_program(): apply a program filter.
 */
 static uz_noun
-_vere_filter_watt_program(uz_machine mac,
+_mord_filter_watt_program(uz_machine mac,
                           uz_noun    fig,
                           uz_noun    fev)
 {
@@ -151,20 +151,20 @@ _vere_filter_watt_program(uz_machine mac,
   return uz_g_compute(mac, fig, gen);
 }
 
-/* _vere_filter_watt_exp():
+/* _mord_filter_watt_exp():
 */
 static uz_noun
-_vere_filter_watt_exp(uz_machine mac,
+_mord_filter_watt_exp(uz_machine mac,
                       uz_noun    fig,
                       uz_noun    gen)
 {
   return uz_g_compute(mac, fig, gen);
 }
 
-/* _vere_filter_nock_exp():
+/* _mord_filter_nock_exp():
 */
 static uz_noun
-_vere_filter_nock_exp(uz_machine mac,
+_mord_filter_nock_exp(uz_machine mac,
                       uz_noun    fig,
                       uz_noun    fol)
 {
@@ -172,56 +172,56 @@ _vere_filter_nock_exp(uz_machine mac,
     (mac, uz_s4('b','l','u','r'), uz_k_nock(mac, uz_ct(mac, fig), fol));
 }
 
-/* _vere_filter_nock_program(): apply a program filter.
+/* _mord_filter_nock_program(): apply a program filter.
 */
 static uz_noun
-_vere_filter_nock_program(uz_machine mac,
+_mord_filter_nock_program(uz_machine mac,
                           uz_noun    fig,
                           uz_noun    nar)
 {
   uz_noun src = uz_k_file(mac, nar);
   uz_noun fol = uz_t_hume(mac, src);
 
-  return _vere_filter_nock_exp(mac, fig, fol);
+  return _mord_filter_nock_exp(mac, fig, fol);
 }
 
-/* _vere_filter(): apply a transformation filter.
+/* _mord_filter(): apply a transformation filter.
 **
 **    fig: [tip nun] - source
 **    kal: filter    - transformation filter
 */
 static uz_noun
-_vere_filter(uz_machine mac,
+_mord_filter(uz_machine mac,
              uz_noun    fig,
              uz_noun    kal)
 {
   uz_noun p_kal;
 
   if ( uz_c_p(mac, kal, uz_s4('z','e','c','t'), &p_kal) ) {
-    return _vere_filter_watt_exp(mac, fig, p_kal);
+    return _mord_filter_watt_exp(mac, fig, p_kal);
   }
   else if ( uz_c_p(mac, kal, uz_s4('g','a','m','p'), &p_kal) ) {
-    return _vere_filter_watt_program(mac, fig, p_kal);
+    return _mord_filter_watt_program(mac, fig, p_kal);
   }
   else if ( uz_c_p(mac, kal, uz_s4('l','a','m','e'), &p_kal) ) {
-    return _vere_filter_watt_lame(mac, fig, p_kal);
+    return _mord_filter_watt_lame(mac, fig, p_kal);
   }
   else if ( uz_c_p(mac, kal, uz_s4('b','l','a','n'), &p_kal) ) {
-    return _vere_filter_nock_exp(mac, fig, p_kal);
+    return _mord_filter_nock_exp(mac, fig, p_kal);
   }
   else if ( uz_c_p(mac, kal, uz_s4('z','o','r','k'), &p_kal) ) {
-    return _vere_filter_nock_program(mac, fig, p_kal);
+    return _mord_filter_nock_program(mac, fig, p_kal);
   }
   else return uz_x_tank(mac);
 }
 
-/* _vere_transform(): transform a source.
+/* _mord_transform(): transform a source.
 **
 **    fig: [tip nun] - source
 **    gar: *filter   - transformation pipeline, first to last
 */
 static uz_noun
-_vere_transform(uz_machine mac,
+_mord_transform(uz_machine mac,
                 uz_noun    fig,
                 uz_noun    gar)
 {
@@ -229,43 +229,43 @@ _vere_transform(uz_machine mac,
     return fig;
   }
   else {
-    return _vere_transform
-      (mac, _vere_filter(mac, fig, uz_ch(mac, gar)), uz_ct(mac, gar));
+    return _mord_transform
+      (mac, _mord_filter(mac, fig, uz_ch(mac, gar)), uz_ct(mac, gar));
   }
 }
 
 #if 0
-/* _vere_construct(): process construction.  Produces [tip nun].
+/* _mord_construct(): process construction.  Produces [tip nun].
 */
 static uz_noun
-_vere_construct(uz_machine mac,
+_mord_construct(uz_machine mac,
                 uz_noun    pel)
 {
-  return _vere_transform
-    (mac, _vere_source(mac, uz_ch(mac, pel)), uz_ct(mac, pel));
+  return _mord_transform
+    (mac, _mord_source(mac, uz_ch(mac, pel)), uz_ct(mac, pel));
 }
 #endif
 
-/* _vere_command(): process command.
+/* _mord_command(): process command.
 */
 static void
-_vere_command(uz_machine mac,
+_mord_command(uz_machine mac,
               uz_noun    fex)
 {
   uz_shoe sho = uz_m_depart(mac);
   {
     uz_noun lon = uz_g_express(mac, fex);
 
-    _vere_print(mac, 0, lon);
+    _mord_print(mac, 0, lon);
   }
   uz_m_retreat(mac, sho);
   uz_m_zap(mac);
 }
 
-/* vere_line(): process command line.
+/* mord_line(): process command line.
 */
 void 
-vere_line(uz_machine mac, 
+mord_line(uz_machine mac, 
           uz_noun lug)
 {
   jmp_buf env;
@@ -283,7 +283,7 @@ vere_line(uz_machine mac,
     {
       uz_noun fex = uz_t_watt(mac, lug);
 
-      _vere_command(mac, fex);
+      _mord_command(mac, fex);
     }
   }
 }
@@ -291,19 +291,19 @@ vere_line(uz_machine mac,
   /** Dumb scanning and dumping.
   **/
     static void
-    _vere_dump_in(uz_machine mac, FILE *fil, uz_noun non);
+    _mord_dump_in(uz_machine mac, FILE *fil, uz_noun non);
     static void
-    _vere_dump(uz_machine mac, FILE *fil, uz_noun non);
+    _mord_dump(uz_machine mac, FILE *fil, uz_noun non);
     static uz_noun
-    _vere_scan_cell(uz_machine mac, FILE *fil);
+    _mord_scan_cell(uz_machine mac, FILE *fil);
     static uz_noun
-    _vere_scan(uz_machine mac, FILE *fil);
+    _mord_scan(uz_machine mac, FILE *fil);
 
 /* Return true iff (atom) is an ASCII string of (3) or more bytes,
 ** using no characters besides a-z and -.
 */
 static uint8_t
-_vere_term(uz_machine mac,
+_mord_term(uz_machine mac,
            uz_noun    tat,
            uint32_t   qb)
 {
@@ -325,34 +325,34 @@ _vere_term(uz_machine mac,
   else return 0;
 }
 
-/* _vere_dump_in(): dump in cell.
+/* _mord_dump_in(): dump in cell.
 */
 static void
-_vere_dump_in(uz_machine mac,
+_mord_dump_in(uz_machine mac,
               FILE       *fil,
               uz_noun    non)
 {
   if ( !uz_n_tap(mac, non) ) {
-    _vere_dump(mac, fil, non);
+    _mord_dump(mac, fil, non);
   }
   else {
-    _vere_dump(mac, fil, uz_ch(mac, non));
+    _mord_dump(mac, fil, uz_ch(mac, non));
     fprintf(fil, " ");
-    _vere_dump_in(mac, fil, uz_ct(mac, non));
+    _mord_dump_in(mac, fil, uz_ct(mac, non));
   }
 }
 
-/* vere_dump(): dump noun to file.
+/* mord_dump(): dump noun to file.
 */
 void
-_vere_dump(uz_machine mac,
+_mord_dump(uz_machine mac,
            FILE       *fil,
            uz_noun    non)
 {
   if ( !uz_n_tap(mac, non) ) {
     mpz_t amp;
 
-    if ( _vere_term(mac, non, 2) ) {
+    if ( _mord_term(mac, non, 2) ) {
       uint32_t sb = uz_a_bin(mac, 3, non);
       uint8_t *xb = alloca(sb + 1);
 
@@ -368,24 +368,24 @@ _vere_dump(uz_machine mac,
   }
   else {
     fputc('[', fil);
-    _vere_dump(mac, fil, uz_ch(mac, non));
+    _mord_dump(mac, fil, uz_ch(mac, non));
     fprintf(fil, " ");
-    _vere_dump_in(mac, fil, uz_ct(mac, non));
+    _mord_dump_in(mac, fil, uz_ct(mac, non));
     fputc(']', fil);
   }
 }
 
-/* _vere_scan_cell(): scan cell or tuple.
+/* _mord_scan_cell(): scan cell or tuple.
 */
 static uz_noun
-_vere_scan_cell(uz_machine mac, 
+_mord_scan_cell(uz_machine mac, 
                 FILE       *fil)
 {
-  uz_noun hed = _vere_scan(mac, fil);
+  uz_noun hed = _mord_scan(mac, fil);
   int     c   = fgetc(fil);
 
   if ( c == ' ' ) {
-    uz_noun tal = _vere_scan_cell(mac, fil);
+    uz_noun tal = _mord_scan_cell(mac, fil);
 
     return uz_k_cell(mac, hed, tal);
   }
@@ -395,16 +395,16 @@ _vere_scan_cell(uz_machine mac,
   }
 }
 
-/* _vere_scan(): scan noun from file.
+/* _mord_scan(): scan noun from file.
 */
 static uz_noun
-_vere_scan(uz_machine mac,
+_mord_scan(uz_machine mac,
            FILE       *fil)
 {
   int c = fgetc(fil);
 
   if ( c == '[' ) {
-    return _vere_scan_cell(mac, fil);
+    return _mord_scan_cell(mac, fil);
   } 
   else if ( c == '%' )  {
     char buf[1025];
@@ -441,7 +441,7 @@ _vere_scan(uz_machine mac,
 }
 
 uz_noun
-_vere_kernel(uz_machine mac,
+_mord_kernel(uz_machine mac,
              const char *src,
              const char *cax)
 {
@@ -452,7 +452,7 @@ _vere_kernel(uz_machine mac,
  //  if ( !(fil = fopen(cax, "r")) ) {
     uz_noun tex = uz_k_file(mac, uz_k_string(mac, src));
 
-    printf("[vere: building kernel]\n");
+    printf("[mord: building kernel]\n");
     ker = uz_t_watt(mac, tex);
 
 #if 0
@@ -460,7 +460,7 @@ _vere_kernel(uz_machine mac,
       perror(cax);
       exit(1);
     }
-    _vere_dump(mac, fil, ker);
+    _mord_dump(mac, fil, ker);
      printf("[saved: %s]\n", cax);
     fclose(fil);
 #endif
@@ -470,16 +470,16 @@ _vere_kernel(uz_machine mac,
   else {
     printf("[loading: %s]\n", cax);
 
-    ker = _vere_scan(mac, fil);
+    ker = _mord_scan(mac, fil);
     fclose(fil);
     return ker;
   }
 }
 
-/* vere_boot(): boot vere.
+/* mord_boot(): boot mord.
 */
 void
-vere_boot(uz_machine mac)
+mord_boot(uz_machine mac)
 {
   jmp_buf env;
   uz_noun wef;
@@ -494,7 +494,7 @@ vere_boot(uz_machine mac)
   else {
     uz_l_except(mac, env);
     {
-      uz_noun ker = _vere_kernel(mac, "watt/watt.watt", "watt/298.nock");
+      uz_noun ker = _mord_kernel(mac, "watt/watt.watt", "watt/298.nock");
 
       uz_r_express(mac, ker);
 

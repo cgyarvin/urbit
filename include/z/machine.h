@@ -126,3 +126,14 @@
                u3_fox            b,
                u3_fox            c,
                struct u3_z_bench *d);
+
+    /* uz_z_mung():
+    **
+    **   As uz_z_run(), but [b] is gate and [c] is sample.
+    */
+      u3_fox
+      u3_z_mung(u3_z              z,
+                u3_fox            *a,
+                u3_fox            b,
+                u3_fox            c,
+                struct u3_z_bench *d);

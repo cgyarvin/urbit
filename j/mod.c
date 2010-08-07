@@ -11,8 +11,8 @@ u3_zx_mod_c(u3_z   z,
             u3_fox a,
             u3_fox b)
 {
-  if ( 0 == a ) {
-    return u3_zc_tank(z, u3_cm_exit);
+  if ( 0 == b ) {
+    return u3_zc_tank(z, c3__exit);
   }
   else {
     mpz_t mp_a, mp_b;
@@ -40,7 +40,7 @@ u3_zx_mod(u3_z   z,
        (u3_no == u3_lr_stud(z, a)) ||
        (u3_no == u3_lr_stud(z, b)) )
   {
-    return u3_zc_tank(z, u3_cm_punt);
+    return u3_zc_tank(z, c3__punt);
   }
   else {
     return u3_zx_mod_c(z, a, b);

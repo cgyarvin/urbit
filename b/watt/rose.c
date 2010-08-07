@@ -379,7 +379,7 @@ _rose_gain(u4_plow p,
       return u4_k_cell(lan, u4_nock_frag, u4_axis_0);
     }
     else if ( u4_b_p(gen, u4_atom_zoot, &p_gen) ) {
-      return u4_trip;
+      return u4_tank;
     }
     else if ( u4_b_p(gen, u4_atom_vint, &p_gen) ) {
       return u4_k_cell(lan, u4_nock_vint, _rose_make(p, sut, p_gen));
@@ -813,7 +813,7 @@ _rose_orth(u4_plow p,
       return u4_atom_blot;
     }
     else if ( u4_b_p(gen, u4_atom_zoot, &p_gen) ) {
-      return u4_trip;
+      return u4_tank;
     }
     else if ( u4_b_p(gen, u4_atom_vint, &p_gen) ) {
       return u4_atom_atom;

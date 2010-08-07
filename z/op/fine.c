@@ -2,11 +2,11 @@
 **
 ** This file is in the public domain.
 */
-    /* u3_cm_fine: finish computation.
+    /* c3__fine: finish computation.
     */
 #     define _zn_bip_fine(field) *_zn_anvil(z, ray_bip, fine, field)
 
-      case u3_cm_fine: {
+      case c3__fine: {
         u3_fox gus = _zn_bip_fine(d.gus);
 
         *a = gus;

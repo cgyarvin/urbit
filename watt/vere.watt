@@ -1,0 +1,135 @@
+=>  !%
+=<  
+  =+  sul=`*soul`[seed:plow ..plow]
+  =<
+    ::  nuke
+    :: |=(`*type`|:(.))
+    |=(|:(.))
+  |*
+    reck  .
+  ::::        spar: parse a command line
+  ::
+      spar  
+    =+  com=*text
+    |=
+    ^-  *goal
+    !!
+  ::::        dril: compute a well
+  ::          
+      dril
+    =+  wol=*well
+    |=
+    ^-  *soul
+    !!
+  ::::        flue: compute a sink
+  ::
+      flue
+    =+  [bog=*soul syn=*sink]
+    |=
+    ^-  [nux=*soul pud=*merd]
+    !!
+  ::::
+  ::
+      nuke
+    =+  pin=*(list text)
+    |=
+    =+  out=`*(list merd)`~
+    |-  ^-  *out
+    ?~  pin
+      out
+    =+  wol=(spar i.pin)
+    =+  bog=(dril r.wol) 
+    =+  zuv=(flue bog q.wol)
+    $(sul nux.zuv, out [pud.zuv out])
+  ::
+  ::::
+  ==
+::::
+|*  
+    vere  .
+::::
+::
+    unix  (list term:plow)
+    term  term:plow
+    text  text:rasp
+    gene  gene:plow
+    soul  &[p=*type q=*]
+    type  type:plow
+    goal  &[p=*knob q=*sink r=*well]
+    knob  &~
+::::
+::
+    sink
+  |?
+    %crud
+    %type
+    %good
+    [%post p=*term]
+    [%dump p=*term q=*unix]
+  ==
+::::
+::
+    well
+  |?
+    [%blob p=*unix q=@ r=*term s=*text]
+    [%code p=*unix q=*text]
+    [%text p=*text]
+    [%gene p=*gene]
+    [%noun p=*]
+  ==
+::::
+::
+    merd
+  |?
+    [%turd p=*]
+    [%dung p=*unix]
+  == 
+::::                    from: scan merd by stem
+::
+    from
+  =+  zis=-:*sink
+  |=
+  =+  rasp
+  =+  doc=tube
+  |=
+  ^-  ((give *sink) doc)
+  ?-  zis
+    %.(doc ...)
+  ==
+::
+::::
+==
+
+=+  syt=`[p=*type q=*]`[seed:plow ..watt]
+|*
+::::
+::
+    vere  .
+::::
+::
+    unto
+  =+  zis=-:*well
+  |=
+  =+  rasp
+  =+  doc=tube
+  |=
+  ^-  ((give *well) doc)
+  ?-  zis
+    %.(doc ...)
+  ==
+::::
+::
+    chew
+  =+  rasp
+  =+  fid=*text
+  |=
+  %.  `tube`
+::::
+::
+    line
+  =+  fid=*text
+  |=
+::
+::::
+==
+

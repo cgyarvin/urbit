@@ -4,9 +4,9 @@
 */
 #   define _zn_bip_link(field) *_zn_anvil(z, ray_bip, link, field)
 
-    /* u3_cm_link: link to a static formula.
+    /* c3__link: link to a static formula.
     */
-      case u3_cm_link: {
+      case c3__link: {
         _zn_retreat(z, _zn_bip_link(f.r.ray_mat));
         {
           u3_ray ray_lid = _zn_bip_link(f.c.ray_lid);

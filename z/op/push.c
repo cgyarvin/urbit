@@ -4,9 +4,9 @@
 */
 #   define _zn_bip_push(field) *_zn_anvil(z, ray_bip, push, field)
 
-    /* u3_cm_push: push to a static formula.
+    /* c3__push: push to a static formula.
     */
-      case u3_cm_push: {
+      case c3__push: {
         u3_ray ray_mat = _zn_bip_push(f.r.ray_mat);
         u3_ray ray_lid = _zn_bip_push(f.c.ray_lid);
         u3_fox dep     = _zn_bip_push(f.s.dep);

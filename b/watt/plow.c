@@ -119,11 +119,117 @@ u4_plow_init(u4_plow p,
   p->huf = u4_nul;
 }
 
-/* full:plow (fake)
+/* make:plow (fake)
 */
-u4_loaf
-u4_plow_full(u4_lane lan,
-             u4_type sub,
+u4_noun
+u4_plow_make(u4_lane lan,
+             u4_type sut,
+             u4_gene gen)
+{
+  struct _u4_plow plow;
+
+  u4_plow_init(&plow, lan);
+  return _rose_make(&plow, sut, gen);
+}
+
+/* play:plow (fake)
+*/
+u4_noun
+u4_plow_play(u4_lane lan,
+             u4_type sut,
+             u4_gene gen)
+{
+  struct _u4_plow plow;
+
+  u4_plow_init(&plow, lan);
+  return _rose_play(&plow, sut, gen);
+}
+
+/* show:plow (fake)
+*/
+u4_noun
+u4_plow_show(u4_lane lan,
+             u4_type sut,
+             u4_gene gen)
+{
+  struct _u4_plow plow;
+
+  u4_plow_init(&plow, lan);
+  return _rose_show(&plow, sut, gen);
+}
+
+/* pass:plow (fake)
+*/
+u4_noun
+u4_plow_pass(u4_lane lan,
+             u4_type sut,
+             u4_gene gen)
+{
+  struct _u4_plow plow;
+
+  u4_plow_init(&plow, lan);
+  if ( !u4_so(_rose_show(&plow, sut, gen)) ) {
+    return u4_exit;
+  }
+  else return _rose_make(&plow, sut, gen);
+}
+
+/* shop:plow (fake)
+*/
+u4_noun
+u4_plow_shop(u4_lane lan,
+             u4_type sut,
+             u4_gene gen)
+{
+  struct _u4_plow plow;
+
+  u4_plow_init(&plow, lan);
+  if ( !u4_so(_rose_show(&plow, sut, gen)) ) {
+    return u4_exit;
+  }
+  else return _rose_play(&plow, sut, gen);
+}
+
+/* wish:plow (fake)
+*/
+u4_noun
+u4_plow_wish(u4_lane lan,
+             u4_type sut,
+             u4_gene gen)
+{
+  struct _u4_plow plow;
+
+  u4_plow_init(&plow, lan);
+
+  return 
+    u4_kc(lan, _rose_play(&plow, sut, gen),
+               _rose_make(&plow, sut, gen));
+}
+
+/* shop:plow (fake)
+*/
+u4_noun
+u4_plow_mill(u4_lane lan,
+             u4_type sut,
+             u4_gene gen)
+{
+  struct _u4_plow plow;
+
+  u4_plow_init(&plow, lan);
+  if ( !u4_so(_rose_show(&plow, sut, gen)) ) {
+    return u4_exit;
+  }
+  else return 
+    u4_kc(lan, _rose_play(&plow, sut, gen),
+               _rose_make(&plow, sut, gen));
+}
+
+#if 0
+/* mill:plow (fake)
+*/
+u4_noun
+u4_plow_mill(u4_lane lan,
+             u4_type sut,
              u4_gene gen)
 {
   struct _u4_plow plow;
@@ -136,11 +242,11 @@ u4_plow_full(u4_lane lan,
     u4_type typ;
     u4_tool tol;
 
-    tol = _rose_make(&plow, sub, gen);
+    tol = _rose_make(&plow, sut, gen);
     printf(":"); fflush(stdout);
 
 #if 0
-    boz = _rose_show(&plow, sub, gen);
+    boz = _rose_show(&plow, sut, gen);
     if ( !u4_so(boz) ) {
       printf("type error\n");
       return u4_exit;
@@ -150,7 +256,7 @@ u4_plow_full(u4_lane lan,
     printf("!"); fflush(stdout);
 #endif
 
-    typ = _rose_play(&plow, sub, gen);
+    typ = _rose_play(&plow, sut, gen);
     printf(":\n");
 
     // u4_err(lan, "size", _dump_size(lan, tol));
@@ -163,3 +269,4 @@ u4_plow_full(u4_lane lan,
     return u4_kc(lan, typ, tol);
   }
 }
+#endif

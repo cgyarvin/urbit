@@ -4,9 +4,9 @@
 */
 #   define _zn_bip_pick(field) *_zn_anvil(z, ray_bip, pick, field)
 
-    /* u3_cm_pick: pick to a static formula.
+    /* c3__pick: pick to a static formula.
     */
-      case u3_cm_pick: {
+      case c3__pick: {
         _zn_retreat(z, _zn_bip_pick(f.r.ray_mat));
         {
           u3_ray ray_lid = _zn_bip_pick(f.c.ray_lid);
@@ -27,7 +27,7 @@
             _zn_forge_cook(z, ray_lid, lan, paf); 
           }
           else {
-            return u3_cm_exit;
+            return c3__exit;
           }
         }
         break;

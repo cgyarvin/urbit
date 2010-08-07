@@ -78,9 +78,9 @@ _console_line(const char *history_name)
   }
 }
 
-#if 1
-extern void vere_boot(uz_machine);
-extern void vere_line(uz_machine, uz_noun);
+#if 0
+extern void mord_boot(uz_machine);
+extern void mord_line(uz_machine, uz_noun);
 
 /* main()::
 */
@@ -95,7 +95,7 @@ main(int  argc,
     fprintf(stderr, "zeno: boot failed\n");
     return 1;
   }
-  vere_boot(mac);
+  mord_boot(mac);
 
   while ( 1 ) {
     char *line = _console_line(history_name);
@@ -106,15 +106,15 @@ main(int  argc,
     else {
       uz_noun lug = uz_k_string(mac, line);
 
-      vere_line(mac, lug);
+      mord_line(mac, lug);
     }
   }
   return 0;
 }
 #else
 
-extern void *ford_boot(int size);
-extern void  ford_line(void *ford, char *line);
+extern void *vere_boot(int size);
+extern void  vere_line(void *vere, char *line);
 
 int
 main(int  argc,
@@ -123,8 +123,8 @@ main(int  argc,
   char *history_name = _console_init();
   void *ver;
 
-  if ( !(ver = ford_boot(24)) ) {
-    fprintf(stderr, "ford: boot failed\n");
+  if ( !(ver = vere_boot(24)) ) {
+    fprintf(stderr, "vere: boot failed\n");
     return 1;
   }
   while ( 1 ) {
@@ -134,7 +134,7 @@ main(int  argc,
       break;
     }
     else {
-      ford_line(ver, line);
+      vere_line(ver, line);
     }
   }
   return 0;
