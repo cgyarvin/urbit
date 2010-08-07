@@ -791,6 +791,14 @@
     tyd
   ::::
   ::
+      boss
+    =+  [rum=@ tyd=rule]
+    |:
+    %+  cook
+      =+(*(list &@) |=((reel -< =+([a=@ b=@] |=((add a (mul rum b)))))))
+    tyd
+  ::::
+  ::
       bend
     =+  raq==+([* *] |:(-<))
     |:
@@ -1093,7 +1101,7 @@
       sig   (just '~')
       sol   (just '/')
       sud   (just '{')
-      sym   (bass 256 |~(plug low (star |~(pose num low nub))))
+      sym   (boss 256 |~(plug low (star |~(pose num low nub))))
       tar   (cold ~ (plus (mask {10 32 ~})))
       tic   (just '`')
       toq   (just '"')
@@ -1365,6 +1373,7 @@
         (stag %rond (ifix [der red] kban))
         (stag %vern |~(pfix hop wide))
         (stag %mast |~(pfix amp wide))
+        (stag %teck |~(pfix ras wide))
         (stag %fist |~(pfix cab wide))
         (stag %wost |~(pfix sig wide))
         (stag %cast |~(plug |~(pfix tic wide) |~(pfix tic wide)))
@@ -1398,6 +1407,7 @@
         |~(pfix (just '0') (just 'x') hex)
         del
         (cold & amp)
+        (cold ~ sig)
         (cold | bar)
         |~(pfix mit sym)
         (cold %% |~(plug mit mit))

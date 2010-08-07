@@ -59,8 +59,8 @@ _plow_fail(u4_plow p,
       p->meb = u4_ct(p->meb);
     }
   }
-  // return u4_exit;
-  return u4_trip;
+  return u4_exit;
+  // return u4_trip;
 }
 
 /* rake:plow 

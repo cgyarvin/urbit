@@ -78,41 +78,6 @@ _console_line(const char *history_name)
   }
 }
 
-#if 0
-extern void mord_boot(uz_machine);
-extern void mord_line(uz_machine, uz_noun);
-
-/* main()::
-*/
-int
-main(int  argc,
-     char **argv)
-{
-  char *history_name = _console_init();
-  uz_machine mac;
-
-  if ( !(mac = uz_l_boot(24)) ) {
-    fprintf(stderr, "zeno: boot failed\n");
-    return 1;
-  }
-  mord_boot(mac);
-
-  while ( 1 ) {
-    char *line = _console_line(history_name);
-
-    if ( !line || !strcmp("q", line) || !strcmp("quit", line) ) {
-      break;
-    }
-    else {
-      uz_noun lug = uz_k_string(mac, line);
-
-      mord_line(mac, lug);
-    }
-  }
-  return 0;
-}
-#else
-
 extern void *vere_boot(int size);
 extern void  vere_line(void *vere, char *line);
 
@@ -139,4 +104,3 @@ main(int  argc,
   }
   return 0;
 }
-#endif
