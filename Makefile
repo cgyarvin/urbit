@@ -215,8 +215,7 @@ U4_OFILES= \
 
 C_OFILES=\
        c/main.o \
-       c/ford.o \
-       c/mord.o
+       c/vere.o
 
 L_OFILES=\
        l/manage.o \

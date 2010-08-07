@@ -31,12 +31,12 @@
         */
         u3_fox  wot;
 
-        /*  Formal soul - [p=*type q=*].
+        /*  Kernel soul - [p=*type q=*].
         */
         struct {
           u3_fox  p;
           u3_fox  q;
-        } sul;
+        } kul;
 
         /*  Gates and other cores.
         */
@@ -52,6 +52,26 @@
           */
           u3_fox  mel;
         } g;
+
+        /*  Application soul and gates.
+        */
+        struct {
+          /*  User soul.
+          */
+          u3_fox  sod;
+
+          /*  Gates.
+          */
+          struct {
+            /*  par: parse line to gene
+            */
+            u3_fox  par;
+
+            /*  tog: compute gene to soul
+            */
+            u3_fox  tog;
+          } g;
+        } a;
 
         /*  Exception control.
         */
@@ -431,19 +451,19 @@ static u3_fox
 _vere_nock(struct vere_state*   v,
            u3_fox               bus,
            u3_fox               fol,
-           c3_b                 b_mar)
+           c3_b                 mar_b)
 {
   /*  bus:  subject
   **  fol:  formula
-  **  res:  result
+  **  res:  rekult
   **  pro:  product
   */
   u3_fox res, pro;
   struct u3_z_bench naq;
 
-  res = u3_z_run(v->z, &pro, bus, fol, b_mar ? &naq : 0);
+  res = u3_z_run(v->z, &pro, bus, fol, mar_b ? &naq : 0);
   if ( 0 == res ) {
-    if ( b_mar ) {
+    if ( mar_b ) {
       fprintf(stderr, " <%lld steps, %d words>\n",
               naq.d_ruy,
               (naq.w_maz - naq.w_vil) + (naq.w_buc - naq.w_tew));
@@ -466,14 +486,14 @@ static u3_fox
 _vere_mung(struct vere_state*   v,
            u3_fox               gat,
            u3_fox               sam,
-           c3_b                 b_mar)
+           c3_b                 mar_b)
 {
   u3_fox res, pro;
   struct u3_z_bench naq;
 
-  res = u3_z_mung(v->z, &pro, gat, sam, b_mar ? &naq : 0);
+  res = u3_z_mung(v->z, &pro, gat, sam, mar_b ? &naq : 0);
   if ( 0 == res ) {
-    if ( b_mar ) {
+    if ( mar_b ) {
       fprintf(stderr, " <%lld steps, %d words>\n",
               naq.d_ruy,
               (naq.w_maz - naq.w_vil) + (naq.w_buc - naq.w_tew));
@@ -508,13 +528,51 @@ _vere_load(struct vere_state*  v,
   return _vere_nock(v, 0, _vere_kick(v, des), 0);
 }
 
-/* _vere_load_c():  load immediate string.
+/*  _vere_load_c():  load immediate string.
 */
 static u3_fox
 _vere_load_c(struct vere_state*   v,
              const c3_c*          c_des)
 {
   return _vere_load(v, _vere_ns(v, c_des));
+}
+
+/*  _vere_mill():  load and mill text, with the kernel miller.
+*/
+static u3_fox
+_vere_mill(struct vere_state*   v,
+           u3_fox               sut,
+           u3_fox               des)
+{
+  u3_fox gen = _vere_mung(v, v->g.rad, des, 0);
+  u3_fox lof = _vere_mung(v, v->g.mel, _vere_nc(v, sut, gen), 0);
+
+  return lof;
+}
+
+/*  _vere_fire(): fire text to soul, against the kernel soul (kul).
+*/
+static u3_fox
+_vere_fire(struct vere_state*   v,
+           u3_fox               des)
+{
+  u3_fox lof = _vere_mill(v, v->kul.p, des);
+
+  return _vere_nc
+    (v, _vere_h(v, lof), 
+        _vere_nock(v, v->kul.q, _vere_t(v, lof), 0));
+}
+
+/*  _vere_gear_c(): gate from soul
+*/
+static u3_fox
+_vere_gear_c(struct vere_state*   v,
+             u3_fox               sul,
+             c3_c*                des_c)
+{
+  u3_fox lof = _vere_mill(v, _vere_h(v, sul), _vere_ns(v, des_c));
+
+  return _vere_nock(v, _vere_t(v, sul), _vere_t(v, lof), 0);
 }
 
 #if 0
@@ -562,28 +620,44 @@ vere_boot(int siz)
   }
 
   /*  Load the kernel itself.  XX: jets from the outside.
+  **
+  **  XX: this whole sequence is wrong.  It is made complicated
+  **  by the fact that the fake compiler can't jet !%, and punts 
+  **  in a way that is exponentially slow!
   */
   {
     v->z = u3_z_new(siz);
     v->wot = _vere_kernel(v->z, "watt/watt.watt", "watt/297.nock");
   }
 
-  /*  Create the soul.
+  /*  Create the kernel soul.
   */
   {
-    v->sul.p = _vere_load_c(v, "seed:plow:!%");
-    v->sul.q = _vere_load_c(v, "!%");
+    v->kul.p = _vere_load_c(v, "seed:plow:!%");
+    v->kul.q = _vere_load_c(v, "!%");
   }
 
-  /*  Load gates: read, mill, etc.
+  /*  Basic metacircular gates: read and mill.
+  **
+  **  XX: note that the mel load is perceptibly slow due to the
+  **  aforementioned problems with |%.
   */
   {
     v->g.rad = _vere_load_c(v, "read:plow:!%");
+
     v->g.mel = _vere_load_c(v, 
       "=>(!% =+([p=*type:plow q=*gene:plow] |=((%~(mill rose:plow sut p) q))))"
     );
   }
 
+  /*  Load the default shell.
+  */
+  {
+    v->a.sod = _vere_fire(v, _vere_file(v->z, "watt/shak.watt"));
+
+    v->a.g.par = _vere_gear_c(v, v->a.sod, "spar");
+    v->a.g.tog = _vere_gear_c(v, v->a.sod, "dril");
+  }
   return v;
 }
 
@@ -597,14 +671,21 @@ vere_line(void *vere, const c3_c *line)
     fprintf(stderr, "line: fail\n");
   }
   else {
-    u3_fox pog = _vere_ns(v, lin_c);
-    u3_fox gen = _vere_mung(v, v->g.rad, pog, 0);
-    u3_fox lof = _vere_mung(v, v->g.mel, _vere_nc(v, v->sul.p, gen), 0);
-    u3_fox typ = _vere_h(v, lof);
-    u3_fox fol = _vere_t(v, lof);
-    u3_fox pro = _vere_nock(v, v->sul.q, fol, 1);
+    /*  lin:  line, input
+    **  fex:  gene, parsed line
+    **  rol:  soul, generated line
+    */
+    u3_fox lin = _vere_ns(v, lin_c);
+    u3_fox fex = _vere_mung(v, v->a.g.par, lin, 0);
+    {
+      // u3_b_print(v->z, "fex", fex);
 
-    u3_b_print_type(v->z, 0, typ);
-    u3_b_print(v->z, 0, pro);
+      u3_fox rol = _vere_mung(v, v->a.g.tog, fex, 0);
+      u3_fox typ = _vere_h(v, rol);
+      u3_fox pro = _vere_t(v, rol);
+
+      u3_b_print_type(v->z, 0, typ);
+      u3_b_print(v->z, 0, pro);
+    }
   }
 }

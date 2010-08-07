@@ -1284,6 +1284,9 @@ _rose_show(u4_plow p,
            u4_type sut,
            u4_gene gen)
 {
+#if 1
+  return u4_yes;
+#else
   u4_lane lan = p->lan;
   u4_noun mum = u4_kc(lan, sut, gen);
   u4_nopt zod = u4_tab_get(mum, p->hos);
@@ -1297,4 +1300,5 @@ _rose_show(u4_plow p,
     p->hos = u4_tab_add(lan, mum, gur, p->hos);
     return gur;
   }
+#endif
 }
