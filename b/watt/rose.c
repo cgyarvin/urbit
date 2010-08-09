@@ -1284,7 +1284,7 @@ _rose_show(u4_plow p,
            u4_type sut,
            u4_gene gen)
 {
-#if 1
+#if 0
   return u4_yes;
 #else
   u4_lane lan = p->lan;
