@@ -3,6 +3,7 @@
 =+  rasp
 =+  sul=`[p=*type q=*]`[seed ..watt]
 |*  
+    vere  .
 ::
 ::::  Molds and cases
 ::::
@@ -11,6 +12,7 @@
     goal  &[p=*knob q=*sink r=*well]
     soul  &[p=*type q=*]
     unix  (list term:plow)
+    merd  <[%turd p=*soul]>
 ::::
 ::
     sink
@@ -39,7 +41,7 @@
   =+  doc=tube
   |=
   ^-  ((give *goal) doc)
-  (harc (remp doc))
+  (harc %.(doc remp))
 ::::
 ::          harc: scan suffix
     harc
@@ -48,159 +50,73 @@
   ?-  -.vex
       |   !!
       &
-    [p.p.vex %.(q.vex |~((glue gap) (slun q.p.vex) (pran r.p.vex)))]
-  ==
-::::
-::          slun: scan sink
-    slun
-  =+  byx=-.*sink
-  |=
-  =+  doc=tube
-  |=
-  ^-  ((give *sink) doc)
-  ?-  byx
-    |
-    %gene   %.(doc (stag %gene scry))
+    [p.p.vex %.(q.vex (slun q.p.vex (pran r.p.vex)))]
   ==
 ::::
 ::          pran: scan well
     pran
-  =+  byx=-.*well
+  =+  byx=-:*well
   |=
   =+  doc=tube
   |=
-  ^-  ((give *sink) doc)
+  ^-  ((give *well) doc)
   ?-  byx
-    |
     %gene   %.(doc (stag %gene scry))
   ==
 ::::
-::          slun: scan sink
+::          slun: scan sink and well
     slun
-  =+  byx=-.*sink
-  |=
+  =+  [wub=-:*sink nad=rule]
+  |:
   =+  doc=tube
   |=
-  ^-  ((give *sink) doc)
-  ?-  byx
-    |
-    %gene   %.(doc (stag %gene scry))
+  ^-  ((give [p=*sink q=*well]) doc)
+  ?-  wub
+    %crud   %.(doc |~(plug (free %crud) nad))
   ==
 ::::
 ::          remp: scan prefix
     remp
   =+  doc=tube
   |=
-  ^-  [p=*knob q=-.*sink r=-.*well]
+  ^-  ((give [p=*knob q=*sink r=-:*well]) doc)
+  %.  doc
+  |~  plug
+    (free ~)
+    (cold %crud (just 'r'))
+    (cold %gene (just 'g'))
+  ==
 ::
-::::  Combiners
+::::  System interface
 ::::
-::
-
-
-::::        spar: parse a command line
-::
-    spar  
-  =+  com=*text
+::          spar: parse
+    spar
+  =+  cox=*text
   |=
   ^-  *goal
-  (done (virc (rip 3 com)
-::::        dril: compute a well
-::          
-    dril
+  [~ %crud %gene (scan (rip 3 cox))]
+  ::  [~ %crud %gene (done (scry (rip 3 cox)))]
+  ::  (done (virc `tube`[tube_(rip 3 cox)]))
+::::
+::          glem: apply well, producing soul
+    glem
   =+  wol=*well
   |=
   ^-  *soul
-  !!
-::::        flue: compute a sink
-::
-    flue
-  =+  [bog=*soul syn=*sink]
+  ?-  -.wol
+      %gene
+    =+  vid=(%~(mill rose sut p.sul) p.wol)
+    [p.vid .*(q.sul q.vid)]
+  ==
+::::
+::          blor: apply sink and soul, producing core and merds
+    blor
+  =+  [syn=*sink mal=*soul]
   |=
-  ^-  [nux=*soul pud=*merd]
-  !!
-::::
-::
-    nuke
-  =+  pin=*(list text)
-  |=
-  =+  out=`*(list merd)`~
-  |-  ^-  *out
-  ?~  pin
-    out
-  =+  wol=(spar i.pin)
-  =+  bog=(dril r.wol) 
-  =+  zuv=(flue bog q.wol)
-  $(sul nux.zuv, out [pud.zuv out])
-::
-::::
-==
-::::
-|*  
-    vere  .
-::::
-::
-    unix  (list term:plow)
-    term  term:plow
-    text  text:rasp
-    gene  gene:plow
-    soul  &[p=*type q=*]
-    type  type:plow
-    goal  &[p=*knob q=*sink r=*well]
-    knob  &~
-::::
-::
-    merd
-  |?
-    [%turd p=*]
-    [%dung p=*unix]
-  == 
-::::                    from: scan merd by stem
-::
-    from
-  =+  zis=-:*sink
-  |=
-  =+  rasp
-  =+  doc=tube
-  |=
-  ^-  ((give *sink) doc)
-  ?-  zis
-    %.(doc ...)
+  ^-  [..vere *(list merd)]
+  ?-  syn
+    %crud   [..vere {[%turd mal]}]
   ==
 ::
 ::::
 ==
-
-=+  syt=`[p=*type q=*]`[seed:plow ..watt]
-|*
-::::
-::
-    vere  .
-::::
-::
-    unto
-  =+  zis=-:*well
-  |=
-  =+  rasp
-  =+  doc=tube
-  |=
-  ^-  ((give *well) doc)
-  ?-  zis
-    %.(doc ...)
-  ==
-::::
-::
-    chew
-  =+  rasp
-  =+  fid=*text
-  |=
-  %.  `tube`
-::::
-::
-    line
-  =+  fid=*text
-  |=
-::
-::::
-==
-

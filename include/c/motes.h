@@ -600,6 +600,7 @@
 #   define c3__tune   c3_s4('t','u','n','e')
 #   define c3__tung   c3_s4('t','u','n','g')
 #   define c3__tupl   c3_s4('t','u','p','l')
+#   define c3__turd   c3_s4('t','u','r','d')
 #   define c3__turn   c3_s4('t','u','r','n')
 #   define c3__twin   c3_s4('t','w','i','n')
 #   define c3__twix   c3_s4('t','w','i','x')

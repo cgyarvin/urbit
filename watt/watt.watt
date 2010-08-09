@@ -1420,16 +1420,12 @@
       ^-  ((give *gene) doc)
       %.  doc 
       %+  stag
-        %bone
+        %bean
       |~  pose
-        %+  stag
-          %bean
-        |~  pose
-          (cold %flag ask)
-          (cold %blur ras)
-          (cold %cell hat)
-          (cold %atom pat)
-        ==
+        (cold %flag ask)
+        (cold %blur ras)
+        (cold %cell hat)
+        (cold %atom pat)
       ==
     ::::
     ::  

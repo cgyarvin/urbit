@@ -53,7 +53,7 @@
           u3_fox  mel;
         } g;
 
-        /*  Application soul and gates.
+        /*  Old main app - shak.
         */
         struct {
           /*  User soul.
@@ -72,6 +72,30 @@
             u3_fox  tog;
           } g;
         } a;
+
+        /*  New main app - vere.
+        */
+        struct {
+          /*  App core as soul.
+          */
+          u3_fox  sod;
+
+          /*  Gate formulas (on sod).
+          */
+          struct {
+            /*  par: parse line to [knob sink well]
+            */
+            u3_fox  par;
+
+            /*  fab: compute well to soul
+            */
+            u3_fox  fab;
+
+            /*  hom: sink and soul to core and merds
+            */
+            u3_fox  hom;
+          } g;
+        } m;
 
         /*  Exception control.
         */
@@ -550,6 +574,19 @@ _vere_mill(struct vere_state*   v,
   return lof;
 }
 
+/*  _vere_make():  make text, with the kernel miller.
+*/
+static u3_fox
+_vere_make(struct vere_state*   v,
+           u3_fox               sut,
+           u3_fox               des)
+{
+  u3_fox gen = _vere_mung(v, v->g.rad, des, 0);
+  u3_fox lof = _vere_mung(v, v->g.mel, _vere_nc(v, sut, gen), 0);
+
+  return _vere_t(v, lof);
+}
+
 /*  _vere_fire(): fire text to soul, against the kernel soul (kul).
 */
 static u3_fox
@@ -650,7 +687,7 @@ vere_boot(int siz)
     );
   }
 
-  /*  Load the default shell.
+  /*  Load shak, the old shel.
   */
   {
     v->a.sod = _vere_fire(v, _vere_file(v->z, "watt/shak.watt"));
@@ -658,7 +695,44 @@ vere_boot(int siz)
     v->a.g.par = _vere_gear_c(v, v->a.sod, "spar");
     v->a.g.tog = _vere_gear_c(v, v->a.sod, "dril");
   }
+
+#if 0
+  /*  Load vere, the new shel.
+  */
+  {
+    v->m.sod = _vere_fire(v, _vere_file(v->z, "watt/vere.watt"));
+
+    v->m.g.par = _vere_make(v, _vere_h(v, v->m.sod), _vere_ns(v, "spar"));
+    v->m.g.fab = _vere_make(v, _vere_h(v, v->m.sod), _vere_ns(v, "glem"));
+    v->m.g.hom = _vere_make(v, _vere_h(v, v->m.sod), _vere_ns(v, "blor"));
+  }
   return v;
+#endif
+}
+
+void
+_vere_spit(struct vere_state*   v,
+           u3_fox               poz)
+{
+  if ( 0 != poz ) {
+    u3_fox i_poz = _vere_h(v, poz);
+    u3_fox t_poz = _vere_t(v, poz);
+
+    switch ( _vere_h(v, i_poz) ) {
+      case c3__turd: {
+        u3_fox rol = _vere_t(v, i_poz);
+        u3_fox typ = _vere_h(v, rol);
+        u3_fox pro = _vere_t(v, rol);
+
+        u3_b_print_type(v->z, 0, typ);
+        u3_b_print(v->z, 0, pro);
+
+        break;
+      }
+      default: _vere_x_fail(v);
+    }
+    _vere_spit(v, t_poz);
+  }
 }
 
 void 
@@ -671,6 +745,7 @@ vere_line(void *vere, const c3_c *line)
     fprintf(stderr, "line: fail\n");
   }
   else {
+#if 0
     /*  lin:  line, input
     **  fex:  gene, parsed line
     **  rol:  soul, generated line
@@ -687,5 +762,22 @@ vere_line(void *vere, const c3_c *line)
       u3_b_print_type(v->z, 0, typ);
       u3_b_print(v->z, 0, pro);
     }
+#else
+    {
+      u3_fox lin = _vere_ns(v, lin_c);
+      u3_fox par = _vere_nock(v, _vere_t(v, v->m.sod), v->m.g.par);
+      u3_fox fab = _vere_nock(v, _vere_t(v, v->m.sod), v->m.g.fab);
+      u3_fox hom = _vere_nock(v, _vere_t(v, v->m.sod), v->m.g.hom);
+      u3_fox piq = _vere_mung(v, par, lin, 0);
+      u3_fox nob = _vere_h(v, piq);
+      u3_fox syn = _vere_h(_vere_t(v, piq));
+      u3_fox wol = _vere_t(_vere_t(v, piq));
+      u3_fox mal = _vere_mung(v, fab, wol, 0);
+      u3_fox tif = _vere_mung(v, hom, _vere_nc(v, syn, mal), 0);
+
+      v->m.sod = _vere_h(v, tif);
+      _vere_spit(v, _vere_t(v, tif));
+    }
+#endif
   }
 }

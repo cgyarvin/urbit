@@ -19,23 +19,3 @@
   =+  vid=(%~(mill rose sut p.sul) gen)
   [p.vid .*(q.sul q.vid)]
 ==
-::::
-::
-    pert
-::::
-::
-    plig
-  =+  cox=*text:rasp
-  |=
-  =+  src=(rip 3 cox)
-  =+  doc=`tube`[tube_src]
-  =+
-::::
-::
-    dril 
-  =+  gen=*gene
-  |=
-  ^-  [p=*type q=*]
-  =+  vid=(%~(mill rose sut p.sul) gen)
-  [p.vid .*(q.sul q.vid)]
-==
