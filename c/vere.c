@@ -706,8 +706,8 @@ vere_boot(int siz)
     v->m.g.fab = _vere_make(v, _vere_h(v, v->m.sod), _vere_ns(v, "glem"));
     v->m.g.hom = _vere_make(v, _vere_h(v, v->m.sod), _vere_ns(v, "blor"));
   }
-  return v;
 #endif
+  return v;
 }
 
 void
@@ -745,7 +745,7 @@ vere_line(void *vere, const c3_c *line)
     fprintf(stderr, "line: fail\n");
   }
   else {
-#if 0
+#if 1
     /*  lin:  line, input
     **  fex:  gene, parsed line
     **  rol:  soul, generated line
