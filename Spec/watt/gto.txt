@@ -23,7 +23,6 @@ Gene - AST
       [%trol p=*gene q=*gene r=*gene]             ::  ?:  askdig
       [%vern p=*gene]                             ::  ?!  askhop
     ::
-      [%fron p=*gene q=*gene r=*bank]             ::  |@  barpat
       [%lonk p=*gene q=*bank]                     ::  |~  barsig
       [%lome p=*prop q=*gene]                     ::  |=  barben
       [%pank p=*prop q=*menu]                     ::  |*  barras
