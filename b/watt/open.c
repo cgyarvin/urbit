@@ -348,106 +348,6 @@ _open_do_p(bean)
     }
   }
 
-  _open_do_pqr(fron)
-  {
-    u4_lane lan = p->lan;
-    u4_noun beg = u4_kc(lan, u4_atom_frag, u4_axis_4);
-
-    if ( u4_n_zero(q_gen) ) {
-      return _plow_fail(p, "fron");
-    }
-    else {
-      u4_noun ir_gen = u4_ch(r_gen);
-      u4_noun tr_gen = u4_ct(r_gen);
-
-      if ( u4_n_zero(tr_gen) ) {
-        return u4_kt
-          (lan,
-           u4_atom_gant,
-           ir_gen,
-           u4_kt
-            (lan,
-             u4_atom_gant,
-             u4_kc(lan, u4_atom_frag, u4_axis_8), 
-             u4_kt
-              (lan,
-               u4_atom_sunt,
-               u4_nul,
-               u4_kt
-                (lan,
-                 u4_atom_cast,
-                 u4_kq(lan,
-                       u4_atom_fung,
-                       u4_kt(lan, 
-                             u4_atom_flac,
-                             u4_kc(lan, u4_atom_frag, u4_cod_in(11)),
-                             q_gen),
-                       beg,
-                       u4_nul),
-                 u4_kq
-                  (lan,
-                   u4_atom_fung,
-                   u4_kc(lan, u4_atom_frag, u4_axis_10),
-                   beg,
-                   u4_nul)))));
-      }
-      else {
-        return u4_kt
-          (lan,
-           u4_atom_gant,
-           _open_in_lonk(p, p_gen, tr_gen),
-           u4_kt
-            (lan,
-             u4_atom_gant,
-             u4_kt(lan, u4_atom_flac,
-                        u4_kc(lan, u4_atom_frag, u4_axis_3),
-                        ir_gen),
-             u4_kt
-              (lan, 
-               u4_atom_gant,
-               u4_kc(lan, u4_atom_frag, u4_axis_8), 
-               u4_kt
-                (lan,
-                 u4_atom_sunt,
-                 u4_nul,
-                 u4_kt
-                  (lan,
-                   u4_atom_cast,
-                   u4_kq(lan,
-                         u4_atom_fung,
-                         u4_kt(lan, 
-                               u4_atom_flac,
-                               u4_kc(lan, u4_atom_frag, u4_cod_in(23)),
-                               q_gen),
-                         beg,
-                         u4_nul),
-                   u4_kq
-                    (lan,
-                     u4_atom_bung,
-                     u4_kt(lan,
-                           u4_atom_flac,
-                           u4_kc(lan, u4_atom_frag, u4_cod_in(23)),
-                           p_gen),
-                     u4_kq
-                      (lan,
-                       u4_atom_fung,
-                       u4_kc(lan, u4_atom_frag, u4_axis_10),
-                       beg,
-                       u4_nul),
-                    u4_kt
-                      (lan,
-                       u4_atom_mack,
-                       u4_kc(lan, 
-                             u4_kc(lan, u4_atom_frag, u4_cod_in(22)), 
-                             u4_nul),
-                       u4_kc
-                        (lan,
-                         u4_kc(lan, beg, beg),
-                         u4_nul))))))));
-      }
-    }
-  }
-
     static u4_noun
     _gath_a(u4_lane lan,
             u4_noun r_gen)
@@ -1004,7 +904,6 @@ _open_do_pq(yell)
 
       _open_p   (bean);
       _open_pq  (lonk);
-      _open_pqr (fron);
       _open_pqr (gath);
       _open_p   (prex);
       _open_pq  (fung);

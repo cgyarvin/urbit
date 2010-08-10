@@ -1025,11 +1025,15 @@
       |:
       =+  doc=doc.fel
       |=
-      %.  doc 
-      |@    pose
-          (give *(newt &(done *fel)))
-        |~(plug fel ..$) 
-        (free ~)
+      ^-  ((give *(newt &(done *fel))) doc)
+      =+  vex=(fel doc) 
+      ?-  -.vex
+          |   [& p=~ q=doc]
+          &   
+        =+  wag=$(doc q.vex)
+        ?-  -.wag
+          &   [& p=[p.vex p.wag] q=q.wag]
+        ==
       ==
     ::::
     ::
@@ -1187,7 +1191,6 @@
       [%trol p=*gene q=*gene r=*gene]             ::  ?:  askdig
       [%vern p=*gene]                             ::  ?!  askhop
     ::
-      [%fron p=*gene q=*gene r=*bank]             ::  |@  barpat
       [%lonk p=*gene q=*bank]                     ::  |~  barsig
       [%lome p=*prop q=*gene]                     ::  |=  barben
       [%pank p=*prop q=*menu]                     ::  |*  barras
@@ -1515,11 +1518,10 @@
         nori  |=((jack |~(gunk main kban)))
         norj  |=((jack |~(gunk erop krac)))
         nork  |=(|~(gunk main |~(plug main (free ~))))
-        norl  |=((jack |~(gunk main main kban)))
-        norn  |=((free ~))
-        noro  |=(=>(.(wer &) main))
-        norp  |=(|~(plug |~(pose |~(sfix ppro muck) (free ~)) main))
-        norq  |=((jack |~(gunk erop main krac)))
+        norl  |=((free ~))
+        norn  |=(=>(.(wer &) main))
+        noro  |=(|~(plug |~(pose |~(sfix ppro muck) (free ~)) main))
+        norp  |=((jack |~(gunk erop main krac)))
     ::::
     ::
         norm
@@ -1556,14 +1558,13 @@
     ::
         nbar
       |~  pose
-        (cape nub %vamp norp)
-        (cape ben %lome norp)
-        (cape dig %sunt norp)
+        (cape nub %vamp noro)
+        (cape ben %lome noro)
+        (cape dig %sunt noro)
         (cape ras %pank nore)
         (cape mit %tash nore)
         (cape ask %rond nord)
         (cape sig %lonk nori)
-        (cape pat %fron norl)
       ==
     ::::
     ::
@@ -1602,9 +1603,9 @@
     ::
         nhop
       |~  pose
-        (cape dax %zush noro)
-        (cape hop %zike norn)
-        (cape mit %zoot norn)
+        (cape dax %zush norn)
+        (cape hop %zike norl)
+        (cape mit %zoot norl)
         (cape dig %zalt nora)
       ==
     ::::
@@ -1621,7 +1622,7 @@
         (cape ben %mack norj)
         (cape ras %teck nora)
         (cape nub %fung nork)
-        (cape sig %gath norq)
+        (cape sig %gath norp)
         (cape dot %gnum norb)
         (cape dig %mung norb)
         (cape pod %bung norc)
@@ -1831,39 +1832,6 @@
           [%frag 8]
         :+  %sunt
           ~
-        :^    %bung
-            [%flac [%frag 23] p.gen]
-          [%fung [%frag 10] [%frag 4] ~]
-        [%mack {[%frag 22]} {[[%frag 4] [%frag 4]]}]
-      ==
-    ::
-        [%fron *]
-      |-
-      ?-  r.gen
-          ~       !!
-      ::
-          [* ~]
-        :+  %gant 
-          i.r.gen
-        :+  %gant 
-          [%frag 8]
-        :+  %sunt
-          ~
-        :+  %cast
-          [%fung [%flac [%frag 11] q.gen] [%frag 4] ~]
-        [%fung [%frag 10] [%frag 4] ~]
-      ::
-          ^
-        :+  %gant
-          $(r.gen t.r.gen)
-        :+  %gant
-          [%flac [%frag 3] i.r.gen]
-        :+  %gant
-          [%frag 8]
-        :+  %sunt
-          ~
-        :+  %cast
-          [%fung [%flac [%frag 23] q.gen] [%frag 4] ~]
         :^    %bung
             [%flac [%frag 23] p.gen]
           [%fung [%frag 10] [%frag 4] ~]
