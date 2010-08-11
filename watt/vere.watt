@@ -38,53 +38,65 @@
 ::::
 ::          virc: scan to goal
     virc
-  =+  doc=tube
-  |=
-  ^-  ((give *goal) doc)
-  (harc %.(doc remp))
+  |~  pose
+    harc
+    (cook =+(* |:([~ %crud -<])) (stag %gene scry))
+  ==
 ::::
 ::          harc: scan suffix
     harc
-  =+  vex=*edge
-  |:
+  =+  doc=tube
+  |=
+  =+  vex=(remp doc)
   ?-  -.vex
-      |   !!
+      |   vex
+  ::
       &
-    [p.p.vex %.(q.vex (slun q.p.vex (pran r.p.vex)))]
+    %.(q.vex (noft p.p.vex (slun q.p.vex (pran r.p.vex))))
   ==
 ::::
 ::          pran: scan well
     pran
-  =+  byx=-:*well
+  =+  byx=*well
   |=
   =+  doc=tube
   |=
-  ^-  ((give *well) doc)
+  ^-  *(edge well)
   ?-  byx
-    %gene   %.(doc (stag %gene scry))
+    [%gene *]   %.(doc |~(pfix gap (stag %gene scry)))
   ==
 ::::
 ::          slun: scan sink and well
     slun
-  =+  [wub=-:*sink nad=rule]
+  =+  [wub=*sink nad=rule]
   |:
   =+  doc=tube
   |=
-  ^-  ((give [p=*sink q=*well]) doc)
+  ^-  *(edge &[p=*sink q=*well])
   ?-  wub
-    %crud   %.(doc |~(plug (free %crud) nad))
+    %crud  %.(doc |~(plug (free %crud) nad))
+  ==
+::::
+::          noft: scan knob, sink and well
+    noft
+  =+  [hoc=*knob beq=rule]
+  |:
+  =+  doc=tube
+  |=  
+  ?-  hoc
+    ~   %.(doc |~(plug (free ~) beq))
   ==
 ::::
 ::          remp: scan prefix
     remp
   =+  doc=tube
   |=
-  ^-  ((give [p=*knob q=*sink r=-:*well]) doc)
+  ^-  ((give [p=*knob q=*sink r=*well]) doc)
   %.  doc
   |~  plug
     (free ~)
     (cold %crud (just 'r'))
-    (cold %gene (just 'g'))
+    (cold [%gene %bone ~] (just 'g'))
   ==
 ::
 ::::  System interface
@@ -94,17 +106,16 @@
   =+  cox=*text
   |=
   ^-  *goal
-  [~ %crud %gene (scan (rip 3 cox))]
-  ::  [~ %crud %gene (done (scry (rip 3 cox)))]
-  ::  (done (virc `tube`[tube_(rip 3 cox)]))
+  :: (done (remp `tube`[tube_(rip 3 cox)]))
+  (done (virc `tube`[tube_(rip 3 cox)]))
 ::::
 ::          glem: apply well, producing soul
     glem
   =+  wol=*well
   |=
   ^-  *soul
-  ?-  -.wol
-      %gene
+  ?-  wol
+      [%gene *]
     =+  vid=(%~(mill rose sut p.sul) p.wol)
     [p.vid .*(q.sul q.vid)]
   ==

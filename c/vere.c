@@ -53,26 +53,6 @@
           u3_fox  mel;
         } g;
 
-        /*  Old main app - shak.
-        */
-        struct {
-          /*  User soul.
-          */
-          u3_fox  sod;
-
-          /*  Gates.
-          */
-          struct {
-            /*  par: parse line to gene
-            */
-            u3_fox  par;
-
-            /*  tog: compute gene to soul
-            */
-            u3_fox  tog;
-          } g;
-        } a;
-
         /*  New main app - vere.
         */
         struct {
@@ -427,7 +407,7 @@ _vere_kernel(u3_z         z,
   if ( !(fil = fopen(c_pax, "r")) ) {
     u3_fox src, gen, ker;
 
-    printf("[rebuilding kernel]\n");
+    printf("[vere: building kernel: %s]\n", c_pod);
 
     src = _vere_file(z, c_pod);
     gen = _vere_init_read(z, src);
@@ -438,7 +418,7 @@ _vere_kernel(u3_z         z,
       exit(1);
     }
     _vere_dump(z, fil, ker);
-     printf("[saved: %s]\n", c_pax);
+     printf("[saved kernel: %s]\n", c_pax);
     fclose(fil);
 
 #if 0
@@ -461,9 +441,9 @@ _vere_kernel(u3_z         z,
     return ker;
   }
   else {
-    printf("[loading: %s]\n", c_pax);
-
     ker = _vere_scan(z, fil);
+    printf("[vere: loaded kernel: %s]\n", c_pax);
+
     fclose(fil);
     return ker;
   }
@@ -600,6 +580,7 @@ _vere_fire(struct vere_state*   v,
         _vere_nock(v, v->kul.q, _vere_t(v, lof), 0));
 }
 
+#if 0
 /*  _vere_gear_c(): gate from soul
 */
 static u3_fox
@@ -611,6 +592,7 @@ _vere_gear_c(struct vere_state*   v,
 
   return _vere_nock(v, _vere_t(v, sul), _vere_t(v, lof), 0);
 }
+#endif
 
 #if 0
 /* _vere_load_path():   load C path.
@@ -643,6 +625,16 @@ _vere_watt_mill(struct vere_state *v,
 }
 
 #endif
+
+/*  _vere_shell():  load the shell.
+*/
+u3_fox
+_vere_shell(struct vere_state*  v,
+            const c3_c*         c_pod,
+            const c3_c*         c_pax)
+{
+  return _vere_fire(v, _vere_file(v->z, c_pod));
+}
 
 void *
 vere_boot(int siz)
@@ -687,25 +679,18 @@ vere_boot(int siz)
     );
   }
 
-  /*  Load shak, the old shel.
+#if 1
+  /*  Load vere, the new shell.
   */
+  printf("[vere: building shell: watt/vere.watt]\n");
   {
-    v->a.sod = _vere_fire(v, _vere_file(v->z, "watt/shak.watt"));
-
-    v->a.g.par = _vere_gear_c(v, v->a.sod, "spar");
-    v->a.g.tog = _vere_gear_c(v, v->a.sod, "dril");
-  }
-
-#if 0
-  /*  Load vere, the new shel.
-  */
-  {
-    v->m.sod = _vere_fire(v, _vere_file(v->z, "watt/vere.watt"));
+    v->m.sod = _vere_shell(v, "watt/vere.watt", "watt/vere.nock");
 
     v->m.g.par = _vere_make(v, _vere_h(v, v->m.sod), _vere_ns(v, "spar"));
     v->m.g.fab = _vere_make(v, _vere_h(v, v->m.sod), _vere_ns(v, "glem"));
     v->m.g.hom = _vere_make(v, _vere_h(v, v->m.sod), _vere_ns(v, "blor"));
   }
+  printf("[vere: loaded shell: watt/vere.watt]\n");
 #endif
   return v;
 }
@@ -745,7 +730,7 @@ vere_line(void *vere, const c3_c *line)
     fprintf(stderr, "line: fail\n");
   }
   else {
-#if 1
+#if 0
     /*  lin:  line, input
     **  fex:  gene, parsed line
     **  rol:  soul, generated line
@@ -764,18 +749,29 @@ vere_line(void *vere, const c3_c *line)
     }
 #else
     {
+      /*  lin:  raw line
+      **  par:  gate, parse
+      **  fab:  gate, apply well
+      **  hom:  gate, apply sink
+      **  piq:  parsed line
+      **  nob:  knob
+      **  syn:  sink
+      **  wol:  well
+      **  mal:  soul from well
+      **  tif:  output and new state 
+      */
       u3_fox lin = _vere_ns(v, lin_c);
-      u3_fox par = _vere_nock(v, _vere_t(v, v->m.sod), v->m.g.par);
-      u3_fox fab = _vere_nock(v, _vere_t(v, v->m.sod), v->m.g.fab);
-      u3_fox hom = _vere_nock(v, _vere_t(v, v->m.sod), v->m.g.hom);
+      u3_fox par = _vere_nock(v, _vere_t(v, v->m.sod), v->m.g.par, 0);
+      u3_fox fab = _vere_nock(v, _vere_t(v, v->m.sod), v->m.g.fab, 0);
+      u3_fox hom = _vere_nock(v, _vere_t(v, v->m.sod), v->m.g.hom, 0);
       u3_fox piq = _vere_mung(v, par, lin, 0);
-      u3_fox nob = _vere_h(v, piq);
-      u3_fox syn = _vere_h(_vere_t(v, piq));
-      u3_fox wol = _vere_t(_vere_t(v, piq));
+      // u3_fox nob = _vere_h(v, piq);
+      u3_fox syn = _vere_h(v, _vere_t(v, piq));
+      u3_fox wol = _vere_t(v, _vere_t(v, piq));
       u3_fox mal = _vere_mung(v, fab, wol, 0);
       u3_fox tif = _vere_mung(v, hom, _vere_nc(v, syn, mal), 0);
 
-      v->m.sod = _vere_h(v, tif);
+      v->m.sod = _vere_nc(v, _vere_h(v, v->m.sod), _vere_h(v, tif));
       _vere_spit(v, _vere_t(v, tif));
     }
 #endif

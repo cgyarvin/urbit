@@ -11,7 +11,7 @@
   **/
     /** Tier 1.
     **/
-      _zj_dry(watt, 0x923c66b)
+      _zj_dry(watt, 0)
 
       _zj_wet(add, 0x7add81a3)
       _zj_wet(bex, 0x798b3541)
@@ -49,7 +49,7 @@
       _zj_wet(mill, 0x3aba2a10)
       _zj_wet(pass, 0)
       _zj_wet(play, 0x705ff933)
-      _zj_dry(plow, 0x1145ad67)
+      _zj_dry(plow, 0)
       _zj_wet(read, 0x6e241b45)
       _zj_dry(rose, 0x4577b35)
       _zj_wet(shop, 0)

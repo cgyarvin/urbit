@@ -88,9 +88,9 @@
           if (  u4_so(vef) &&
                 !u4_so(_iris_nest(p, l_sut, l_bar, l_axe, ham)) )
           {
-            u4_burp(lan, "l_sut", _dump_type(p, l_sut));
-            u4_burp(lan, "l_bar", _dump_durb(p, l_bar));
-            u4_burp(lan, "ham", _dump_type(p, ham));
+            // u4_burp(lan, "l_sut", _dump_type(p, l_sut));
+            // u4_burp(lan, "l_bar", _dump_durb(p, l_bar));
+            // u4_burp(lan, "ham", _dump_type(p, ham));
 
             return _plow_fail(p, "burn hard");
           }
@@ -531,8 +531,8 @@ _iris_find(u4_plow p,
   u4_unit fyg = _iris_find_main(p, sut, bar, axe, u4_nul, cog);
 
   if ( u4_n_zero(fyg) ) {
-    u4_burp(p->lan, "cog", u4_prep_textual(p->lan, cog));
-    u4_burp(p->lan, "sut", _dump_type(p, sut));
+    u4_burp(p->lan, "name", u4_prep_textual(p->lan, cog));
+    // u4_burp(p->lan, "sut", _dump_type(p, sut));
     return _plow_fail(p, "not found");
   }
   return u4_ct(fyg);

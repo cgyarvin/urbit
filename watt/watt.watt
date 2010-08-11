@@ -1078,6 +1078,7 @@
     ::
         ace   (just 32)
         alf   |~(pose low hig)
+        aln   |~(pose low hig num)
         amp   (just '&')
         ask   (just '?')
         bar   (just '|')
@@ -1107,6 +1108,7 @@
         mes   (cook =+([@ @] |=((add (mul 16 -<-) -<+))) |~(plug hit hit))
         mit   (just '%')
         mon   (just ']')
+        nix   (boss 256 (star |~(pose aln cab)))
         nom   (just '[')
         nub   (just '-')
         num   (shim '0' '9')
@@ -1115,7 +1117,7 @@
         pod   (just '+')
         poy   |~(pfix sac |~(pose sac bot mes))
         qit   |~(pose (shim 32 38) (shim 40 91) (shim 92 126) poy)
-        quo   (bass 256 (plus qit))
+        quo   (ifix [bot bot] (bass 256 (plus qit)))
         ras   (just '*')
         red   (just '>')
         sac   (just '\\')
@@ -1436,6 +1438,7 @@
       |~  pose
         |~(pfix (just '0') (just 'x') hex)
         del
+        quo
         (cold & amp)
         (cold ~ sig)
         (cold | bar)
