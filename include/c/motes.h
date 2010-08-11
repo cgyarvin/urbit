@@ -106,6 +106,7 @@
 #   define c3__crib   c3_s4('c','r','i','b')
 #   define c3__crof   c3_s4('c','r','o','f')
 #   define c3__crot   c3_s4('c','r','o','t')
+#   define c3__crud   c3_s4('c','r','u','d')
 #   define c3__cube   c3_s4('c','u','b','e')
 #   define c3__cut    c3_s3('c','u','t')
 #   define c3__cyl    c3_s3('c','y','l')

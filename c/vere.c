@@ -31,6 +31,10 @@
         */
         u3_fox  wot;
 
+        /*  True iff the kernel is new.  Forces shell reload.
+        */
+        c3_b    new_b;
+
         /*  Kernel soul - [p=*type q=*].
         */
         struct {
@@ -396,56 +400,58 @@ _vere_init_make(u3_z    z,
 
 /*  _vere_kernel(): load the kernel.
 */
-u3_fox
-_vere_kernel(u3_z         z,
-             const c3_c*  c_pod,
-             const c3_c*  c_pax)
+void
+_vere_kernel(struct vere_state*   v,
+             const c3_c*          pod_c,
+             const c3_c*          pax_c)
 {
-  FILE *fil;
-  u3_fox ker;
+  struct stat pod_stat, pax_stat;
 
-  if ( !(fil = fopen(c_pax, "r")) ) {
-    u3_fox src, gen, ker;
-
-    printf("[vere: building kernel: %s]\n", c_pod);
-
-    src = _vere_file(z, c_pod);
-    gen = _vere_init_read(z, src);
-    ker = _vere_init_make(z, gen);
-
-    if ( !(fil = fopen(c_pax, "w")) ) {
-      perror(c_pax);
-      exit(1);
-    }
-    _vere_dump(z, fil, ker);
-     printf("[saved kernel: %s]\n", c_pax);
-    fclose(fil);
-
-#if 0
-    {
-      u3_fox hec;
-
-      printf("[loading: %s]\n", c_pax);
-      if ( !(fil = fopen(c_pax, "r")) ) {
-        perror(pax);
-        exit(1);
-      }
-      hec = _vere_scan(z, fil);
-      fclose(fil);
-
-      if ( u3_yes == u3_lr_eq(z, hec, ker) ) {
-        printf("[match]\n");
-      } else printf("no match!\n");
-    }
-#endif
-    return ker;
+  if ( stat(pod_c, &pod_stat) < 0 ) {
+    perror(pod_c);
+    exit(1);
   }
   else {
-    ker = _vere_scan(z, fil);
-    printf("[vere: loaded kernel: %s]\n", c_pax);
+    if ( (stat(pax_c, &pax_stat) < 0) ||
+         (pod_stat.st_mtimespec.tv_sec > pax_stat.st_mtimespec.tv_sec) ||
+         ((pod_stat.st_mtimespec.tv_sec == (pod_stat.st_mtimespec.tv_sec)) &&
+          (pod_stat.st_mtimespec.tv_nsec > pax_stat.st_mtimespec.tv_nsec)) )
+    {
+      FILE *fil;
+      u3_fox src, gen, ker;
 
-    fclose(fil);
-    return ker;
+      printf("[vere: building kernel: %s]\n", pod_c);
+
+      src = _vere_file(v->z, pod_c);
+      gen = _vere_init_read(v->z, src);
+      ker = _vere_init_make(v->z, gen);
+
+      if ( !(fil = fopen(pax_c, "w")) ) {
+        perror(pax_c);
+        exit(1);
+      }
+      _vere_dump(v->z, fil, ker);
+       printf("[saved kernel: %s]\n", pax_c);
+      fclose(fil);
+
+      v->wot = ker;
+      v->new_b = 1;
+    }
+    else {
+      FILE *fil;
+      u3_fox ker;
+
+      if ( !(fil = fopen(pax_c, "r")) ) {
+        perror(pax_c);
+        exit(1);
+      }
+      ker = _vere_scan(v->z, fil);
+      printf("[vere: loaded kernel: %s]\n", pax_c);
+
+      fclose(fil);
+      v->wot = ker;
+      v->new_b = 0;
+    }
   }
 }
 
@@ -630,10 +636,47 @@ _vere_watt_mill(struct vere_state *v,
 */
 u3_fox
 _vere_shell(struct vere_state*  v,
-            const c3_c*         c_pod,
-            const c3_c*         c_pax)
+            const c3_c*         pod_c,
+            const c3_c*         pax_c)
 {
-  return _vere_fire(v, _vere_file(v->z, c_pod));
+  struct stat pod_stat, pax_stat;
+
+  if ( stat(pod_c, &pod_stat) < 0 ) {
+    perror(pod_c);
+    exit(1);
+  }
+  else {
+    u3_fox ver;
+    FILE *fil;
+
+    if ( v->new_b ||
+         (stat(pax_c, &pax_stat) < 0) ||
+         (pod_stat.st_mtimespec.tv_sec > pax_stat.st_mtimespec.tv_sec) ||
+         ((pod_stat.st_mtimespec.tv_sec == (pod_stat.st_mtimespec.tv_sec)) &&
+          (pod_stat.st_mtimespec.tv_nsec > pax_stat.st_mtimespec.tv_nsec)) )
+    {
+      printf("[vere: building shell: %s]\n", pod_c);
+      ver = _vere_fire(v, _vere_file(v->z, pod_c));
+
+      if ( !(fil = fopen(pax_c, "w")) ) {
+        perror(pax_c);
+      }
+      else {
+        _vere_dump(v->z, fil, ver);
+         printf("[saved shell: %s]\n", pax_c);
+        fclose(fil);
+      }
+      return ver;
+    }
+    else {
+      fil = fopen(pax_c, "r");
+      ver = _vere_scan(v->z, fil);
+
+      printf("[vere: loaded shell: %s]\n", pax_c);
+
+      return ver;
+    }
+  }
 }
 
 void *
@@ -656,7 +699,7 @@ vere_boot(int siz)
   */
   {
     v->z = u3_z_new(siz);
-    v->wot = _vere_kernel(v->z, "watt/watt.watt", "watt/297.nock");
+    _vere_kernel(v, "watt/297.watt", "watt/297.nock");
   }
 
   /*  Create the kernel soul.
@@ -682,7 +725,6 @@ vere_boot(int siz)
 #if 1
   /*  Load vere, the new shell.
   */
-  printf("[vere: building shell: watt/vere.watt]\n");
   {
     v->m.sod = _vere_shell(v, "watt/vere.watt", "watt/vere.nock");
 
@@ -690,7 +732,6 @@ vere_boot(int siz)
     v->m.g.fab = _vere_make(v, _vere_h(v, v->m.sod), _vere_ns(v, "glem"));
     v->m.g.hom = _vere_make(v, _vere_h(v, v->m.sod), _vere_ns(v, "blor"));
   }
-  printf("[vere: loaded shell: watt/vere.watt]\n");
 #endif
   return v;
 }
@@ -704,7 +745,7 @@ _vere_spit(struct vere_state*   v,
     u3_fox t_poz = _vere_t(v, poz);
 
     switch ( _vere_h(v, i_poz) ) {
-      case c3__turd: {
+      case c3__crud: {
         u3_fox rol = _vere_t(v, i_poz);
         u3_fox typ = _vere_h(v, rol);
         u3_fox pro = _vere_t(v, rol);
