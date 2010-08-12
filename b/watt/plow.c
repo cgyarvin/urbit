@@ -4,6 +4,30 @@
 */
 #include "u4/all.h"
 
+  /**   XX:   This entire file is a hack and will be deleted.
+  **/
+#if 1
+  /**   Global variables.
+  **/
+    static struct _u4_plow PlowStructure;
+    static struct _u4_plow *PlowPointer;
+
+    /* PlowInit(): initialize global plow.
+    **
+    ** This saves memoization results, most notably the type check
+    ** of scry, which is very slow ri
+    */
+    static struct _u4_plow *
+    PlowInit(u4_lane lan)
+    {
+      if ( !PlowPointer ) {
+        u4_plow_init(&PlowStructure, lan);
+        PlowPointer = &PlowStructure;
+      }
+      return PlowPointer;
+    }
+#endif
+
 /* trap:plow
 */
 void
@@ -126,10 +150,9 @@ u4_plow_make(u4_lane lan,
              u4_type sut,
              u4_gene gen)
 {
-  struct _u4_plow plow;
+  u4_plow p = PlowInit(lan);
 
-  u4_plow_init(&plow, lan);
-  return _rose_make(&plow, sut, gen);
+  return _rose_make(p, sut, gen);
 }
 
 /* play:plow (fake)
@@ -139,10 +162,9 @@ u4_plow_play(u4_lane lan,
              u4_type sut,
              u4_gene gen)
 {
-  struct _u4_plow plow;
+  u4_plow p = PlowInit(lan);
 
-  u4_plow_init(&plow, lan);
-  return _rose_play(&plow, sut, gen);
+  return _rose_play(p, sut, gen);
 }
 
 /* show:plow (fake)
@@ -152,10 +174,9 @@ u4_plow_show(u4_lane lan,
              u4_type sut,
              u4_gene gen)
 {
-  struct _u4_plow plow;
+  u4_plow p = PlowInit(lan);
 
-  u4_plow_init(&plow, lan);
-  return _rose_show(&plow, sut, gen);
+  return _rose_show(p, sut, gen);
 }
 
 /* pass:plow (fake)
@@ -165,13 +186,12 @@ u4_plow_pass(u4_lane lan,
              u4_type sut,
              u4_gene gen)
 {
-  struct _u4_plow plow;
+  u4_plow p = PlowInit(lan);
 
-  u4_plow_init(&plow, lan);
-  if ( !u4_so(_rose_show(&plow, sut, gen)) ) {
+  if ( !u4_so(_rose_show(p, sut, gen)) ) {
     return u4_exit;
   }
-  else return _rose_make(&plow, sut, gen);
+  else return _rose_make(p, sut, gen);
 }
 
 /* shop:plow (fake)
@@ -181,13 +201,12 @@ u4_plow_shop(u4_lane lan,
              u4_type sut,
              u4_gene gen)
 {
-  struct _u4_plow plow;
+  u4_plow p = PlowInit(lan);
 
-  u4_plow_init(&plow, lan);
-  if ( !u4_so(_rose_show(&plow, sut, gen)) ) {
+  if ( !u4_so(_rose_show(p, sut, gen)) ) {
     return u4_exit;
   }
-  else return _rose_play(&plow, sut, gen);
+  else return _rose_play(p, sut, gen);
 }
 
 /* wish:plow (fake)
@@ -197,13 +216,11 @@ u4_plow_wish(u4_lane lan,
              u4_type sut,
              u4_gene gen)
 {
-  struct _u4_plow plow;
-
-  u4_plow_init(&plow, lan);
+  u4_plow p = PlowInit(lan);
 
   return 
-    u4_kc(lan, _rose_play(&plow, sut, gen),
-               _rose_make(&plow, sut, gen));
+    u4_kc(lan, _rose_play(p, sut, gen),
+               _rose_make(p, sut, gen));
 }
 
 /* shop:plow (fake)
@@ -213,15 +230,14 @@ u4_plow_mill(u4_lane lan,
              u4_type sut,
              u4_gene gen)
 {
-  struct _u4_plow plow;
+  u4_plow p = PlowInit(lan);
 
-  u4_plow_init(&plow, lan);
-  if ( !u4_so(_rose_show(&plow, sut, gen)) ) {
+  if ( !u4_so(_rose_show(p, sut, gen)) ) {
     return u4_exit;
   }
   else return 
-    u4_kc(lan, _rose_play(&plow, sut, gen),
-               _rose_make(&plow, sut, gen));
+    u4_kc(lan, _rose_play(p, sut, gen),
+               _rose_make(p, sut, gen));
 }
 
 #if 0

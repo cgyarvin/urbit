@@ -8,84 +8,126 @@
 ::::  Molds and cases
 ::::
 ::
-    knob  &~
     goal  &[p=*knob q=*sink r=*well]
     soul  &[p=*type q=*]
-    unix  (list term:plow)
-    merd  <[%turd p=*soul]>
+    unix  &[p=*<%root %curd> q=*(list term:plow)]
+    form  term
+::::
+::
+    knob
+  |?
+    ~
+    %dbug                         ::  debug
+    [%slow p=@]                   ::  set optimization threshold
+  ==
 ::::
 ::
     sink
   |?
-    %crud
-    :: %type
-    :: %good
-    :: [%post p=*term]
-    :: [%dump p=*term q=*unix]
+    %crud                         ::  print, raw noun and type
+    %nice                         ::  print, type-sensitive
+    %kind                         ::  print, type only
+    %load                         ::  load as environment
+    [%pose p=*term]               ::  add as variable
+    [%rite p=*term]               ::  modify variable
+    [%dump p=*form q=*unix]       ::  output to file by format
   ==
 ::::
 ::
     well
   |?
-    :: [%blob p=*unix q=@ r=*term s=*text]
-    :: [%code p=*unix q=*text]
-    :: [%text p=*text]
-    [%gene p=*gene]
-    :: [%noun p=*]
+    [%code p=*unix]               ::  unix code
+    [%data p=*form q=*unix]       ::  unix data with extension
+    [%foam p=*gene]               ::  gene to be run in environment
+    [%rock p=*gene]               ::  gene to be run as standard
+    [%butt p=*well q=*well]       ::  flac
+    [%kick p=*well q=*well]       ::  mung
+    [%sell p=*well q=*well]       ::  cast
+  ==
+::::
+::
+    merd
+  |?
+    [%crud p=*soul]               ::  print soul, crude
+    [%nice p=*soul]               ::  print soul, fancy
+    [%kind p=*soul]               ::  print soul, type only
+    [%save p=*form q=*unix r=*]   ::  write to file by format
+    [%puke p=*form q=*]           ::  write to screen by format
   ==
 ::
 ::::  Scanners
 ::::
-::          virc: scan to goal
-    virc
+::          nuxi: scan unix path
+    nuxi
   =+  doc=tube
   |=
-  ^-  ((give *goal) doc)
-  (harc %.(doc remp))
-::::
-::          harc: scan suffix
-    harc
-  =+  vex=*edge
-  |:
-  ?-  -.vex
-      |   !!
-      &
-    [p.p.vex %.(q.vex (slun q.p.vex (pran r.p.vex)))]
-  ==
-::::
-::          pran: scan well
-    pran
-  =+  byx=-:*well
-  |=
-  =+  doc=tube
-  |=
-  ^-  ((give *well) doc)
-  ?-  byx
-    %gene   %.(doc (stag %gene scry))
-  ==
-::::
-::          slun: scan sink and well
-    slun
-  =+  [wub=-:*sink nad=rule]
-  |:
-  =+  doc=tube
-  |=
-  ^-  ((give [p=*sink q=*well]) doc)
-  ?-  wub
-    %crud   %.(doc |~(plug (free %crud) nad))
-  ==
-::::
-::          remp: scan prefix
-    remp
-  =+  doc=tube
-  |=
-  ^-  ((give [p=*knob q=*sink r=-:*well]) doc)
+  ^-  *(edge unix)
   %.  doc
-  |~  plug
-    (free ~)
-    (cold %crud (just 'r'))
-    (cold %gene (just 'g'))
+  |~  plug 
+    |~(pose (cold %root sol) (free %curd))
+    (most sol |~(pose nix quo))
   ==
+::::
+::          loge: scan goal
+    loge
+  =+  doc=tube
+  |=
+  ^-  *(edge goal)
+  %.(doc |~(plug bonk skin lewl))
+::::
+::          bonk: scan knob
+    bonk
+  =+  doc=tube
+  |=
+  ^-  *(edge knob)
+  %.  doc
+  |~  pose
+    %+  ifix
+      [dax gap] 
+    |~  pose
+      (stag %slow del)
+      (cold %dbug ask)
+    ==
+  ::
+    (free ~)
+  ==
+::::
+::          skin: scan sink
+    skin
+  =+  doc=tube
+  |=
+  ^-  *(edge sink)
+  %.  doc
+  |~  pose
+    %+  ifix
+      [red gap] 
+    |~  pose
+      (cold %crud cab)
+      (cold %nice dig)
+      (cold %kind ask)
+      (stag %pose |~(pfix pod sym))
+      (stag %rite |~(pfix ben sym))
+      (stag %dump |~(pfix pat |~((glue dig) sym nuxi)))
+    ==
+  ::
+    (free %crud)
+  ==
+::::
+::          lewl: scan well
+    lewl
+  =+  doc=tube
+  |=  
+  ^-  *(edge well)
+  %.  doc
+  |~  pose
+    (stag %code |~(pfix sig nuxi))
+    (stag %data |~(pfix der |~((glue dig) sym nuxi)))
+    (stag %foam scry)
+  ==
+::::
+::          llew: subwell
+    llew
+  |~(pose lewl (ifix [nom mon] lewl))
 ::
 ::::  System interface
 ::::
@@ -94,17 +136,15 @@
   =+  cox=*text
   |=
   ^-  *goal
-  [~ %crud %gene (scan (rip 3 cox))]
-  ::  [~ %crud %gene (done (scry (rip 3 cox)))]
-  ::  (done (virc `tube`[tube_(rip 3 cox)]))
+  (done (loge `tube`[tube_(rip 3 cox)]))
 ::::
 ::          glem: apply well, producing soul
     glem
   =+  wol=*well
   |=
   ^-  *soul
-  ?-  -.wol
-      %gene
+  ?-  wol
+      [%foam *]
     =+  vid=(%~(mill rose sut p.sul) p.wol)
     [p.vid .*(q.sul q.vid)]
   ==
@@ -115,7 +155,7 @@
   |=
   ^-  [..vere *(list merd)]
   ?-  syn
-    %crud   [..vere {[%turd mal]}]
+    %crud   [..vere {[%crud mal]}]
   ==
 ::
 ::::

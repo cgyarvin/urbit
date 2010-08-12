@@ -31,6 +31,10 @@
         */
         u3_fox  wot;
 
+        /*  True iff the kernel is new.  Forces shell reload.
+        */
+        c3_b    new_b;
+
         /*  Kernel soul - [p=*type q=*].
         */
         struct {
@@ -52,26 +56,6 @@
           */
           u3_fox  mel;
         } g;
-
-        /*  Old main app - shak.
-        */
-        struct {
-          /*  User soul.
-          */
-          u3_fox  sod;
-
-          /*  Gates.
-          */
-          struct {
-            /*  par: parse line to gene
-            */
-            u3_fox  par;
-
-            /*  tog: compute gene to soul
-            */
-            u3_fox  tog;
-          } g;
-        } a;
 
         /*  New main app - vere.
         */
@@ -416,56 +400,58 @@ _vere_init_make(u3_z    z,
 
 /*  _vere_kernel(): load the kernel.
 */
-u3_fox
-_vere_kernel(u3_z         z,
-             const c3_c*  c_pod,
-             const c3_c*  c_pax)
+void
+_vere_kernel(struct vere_state*   v,
+             const c3_c*          pod_c,
+             const c3_c*          pax_c)
 {
-  FILE *fil;
-  u3_fox ker;
+  struct stat pod_stat, pax_stat;
 
-  if ( !(fil = fopen(c_pax, "r")) ) {
-    u3_fox src, gen, ker;
-
-    printf("[rebuilding kernel]\n");
-
-    src = _vere_file(z, c_pod);
-    gen = _vere_init_read(z, src);
-    ker = _vere_init_make(z, gen);
-
-    if ( !(fil = fopen(c_pax, "w")) ) {
-      perror(c_pax);
-      exit(1);
-    }
-    _vere_dump(z, fil, ker);
-     printf("[saved: %s]\n", c_pax);
-    fclose(fil);
-
-#if 0
-    {
-      u3_fox hec;
-
-      printf("[loading: %s]\n", c_pax);
-      if ( !(fil = fopen(c_pax, "r")) ) {
-        perror(pax);
-        exit(1);
-      }
-      hec = _vere_scan(z, fil);
-      fclose(fil);
-
-      if ( u3_yes == u3_lr_eq(z, hec, ker) ) {
-        printf("[match]\n");
-      } else printf("no match!\n");
-    }
-#endif
-    return ker;
+  if ( stat(pod_c, &pod_stat) < 0 ) {
+    perror(pod_c);
+    exit(1);
   }
   else {
-    printf("[loading: %s]\n", c_pax);
+    if ( (stat(pax_c, &pax_stat) < 0) ||
+         (pod_stat.st_mtimespec.tv_sec > pax_stat.st_mtimespec.tv_sec) ||
+         ((pod_stat.st_mtimespec.tv_sec == (pod_stat.st_mtimespec.tv_sec)) &&
+          (pod_stat.st_mtimespec.tv_nsec > pax_stat.st_mtimespec.tv_nsec)) )
+    {
+      FILE *fil;
+      u3_fox src, gen, ker;
 
-    ker = _vere_scan(z, fil);
-    fclose(fil);
-    return ker;
+      printf("[vere: building kernel: %s]\n", pod_c);
+
+      src = _vere_file(v->z, pod_c);
+      gen = _vere_init_read(v->z, src);
+      ker = _vere_init_make(v->z, gen);
+
+      if ( !(fil = fopen(pax_c, "w")) ) {
+        perror(pax_c);
+        exit(1);
+      }
+      _vere_dump(v->z, fil, ker);
+       printf("[saved kernel: %s]\n", pax_c);
+      fclose(fil);
+
+      v->wot = ker;
+      v->new_b = 1;
+    }
+    else {
+      FILE *fil;
+      u3_fox ker;
+
+      if ( !(fil = fopen(pax_c, "r")) ) {
+        perror(pax_c);
+        exit(1);
+      }
+      ker = _vere_scan(v->z, fil);
+      printf("[vere: loaded kernel: %s]\n", pax_c);
+
+      fclose(fil);
+      v->wot = ker;
+      v->new_b = 0;
+    }
   }
 }
 
@@ -600,6 +586,7 @@ _vere_fire(struct vere_state*   v,
         _vere_nock(v, v->kul.q, _vere_t(v, lof), 0));
 }
 
+#if 0
 /*  _vere_gear_c(): gate from soul
 */
 static u3_fox
@@ -611,6 +598,7 @@ _vere_gear_c(struct vere_state*   v,
 
   return _vere_nock(v, _vere_t(v, sul), _vere_t(v, lof), 0);
 }
+#endif
 
 #if 0
 /* _vere_load_path():   load C path.
@@ -644,6 +632,53 @@ _vere_watt_mill(struct vere_state *v,
 
 #endif
 
+/*  _vere_shell():  load the shell.
+*/
+u3_fox
+_vere_shell(struct vere_state*  v,
+            const c3_c*         pod_c,
+            const c3_c*         pax_c)
+{
+  struct stat pod_stat, pax_stat;
+
+  if ( stat(pod_c, &pod_stat) < 0 ) {
+    perror(pod_c);
+    exit(1);
+  }
+  else {
+    u3_fox ver;
+    FILE *fil;
+
+    if ( v->new_b ||
+         (stat(pax_c, &pax_stat) < 0) ||
+         (pod_stat.st_mtimespec.tv_sec > pax_stat.st_mtimespec.tv_sec) ||
+         ((pod_stat.st_mtimespec.tv_sec == (pod_stat.st_mtimespec.tv_sec)) &&
+          (pod_stat.st_mtimespec.tv_nsec > pax_stat.st_mtimespec.tv_nsec)) )
+    {
+      printf("[vere: building shell: %s]\n", pod_c);
+      ver = _vere_fire(v, _vere_file(v->z, pod_c));
+
+      if ( !(fil = fopen(pax_c, "w")) ) {
+        perror(pax_c);
+      }
+      else {
+        _vere_dump(v->z, fil, ver);
+         printf("[saved shell: %s]\n", pax_c);
+        fclose(fil);
+      }
+      return ver;
+    }
+    else {
+      fil = fopen(pax_c, "r");
+      ver = _vere_scan(v->z, fil);
+
+      printf("[vere: loaded shell: %s]\n", pax_c);
+
+      return ver;
+    }
+  }
+}
+
 void *
 vere_boot(int siz)
 {
@@ -664,7 +699,7 @@ vere_boot(int siz)
   */
   {
     v->z = u3_z_new(siz);
-    v->wot = _vere_kernel(v->z, "watt/watt.watt", "watt/297.nock");
+    _vere_kernel(v, "watt/297.watt", "watt/297.nock");
   }
 
   /*  Create the kernel soul.
@@ -687,20 +722,11 @@ vere_boot(int siz)
     );
   }
 
-  /*  Load shak, the old shel.
+#if 1
+  /*  Load vere, the new shell.
   */
   {
-    v->a.sod = _vere_fire(v, _vere_file(v->z, "watt/shak.watt"));
-
-    v->a.g.par = _vere_gear_c(v, v->a.sod, "spar");
-    v->a.g.tog = _vere_gear_c(v, v->a.sod, "dril");
-  }
-
-#if 0
-  /*  Load vere, the new shel.
-  */
-  {
-    v->m.sod = _vere_fire(v, _vere_file(v->z, "watt/vere.watt"));
+    v->m.sod = _vere_shell(v, "watt/vere.watt", "watt/vere.nock");
 
     v->m.g.par = _vere_make(v, _vere_h(v, v->m.sod), _vere_ns(v, "spar"));
     v->m.g.fab = _vere_make(v, _vere_h(v, v->m.sod), _vere_ns(v, "glem"));
@@ -719,7 +745,7 @@ _vere_spit(struct vere_state*   v,
     u3_fox t_poz = _vere_t(v, poz);
 
     switch ( _vere_h(v, i_poz) ) {
-      case c3__turd: {
+      case c3__crud: {
         u3_fox rol = _vere_t(v, i_poz);
         u3_fox typ = _vere_h(v, rol);
         u3_fox pro = _vere_t(v, rol);
@@ -745,7 +771,7 @@ vere_line(void *vere, const c3_c *line)
     fprintf(stderr, "line: fail\n");
   }
   else {
-#if 1
+#if 0
     /*  lin:  line, input
     **  fex:  gene, parsed line
     **  rol:  soul, generated line
@@ -764,18 +790,29 @@ vere_line(void *vere, const c3_c *line)
     }
 #else
     {
+      /*  lin:  raw line
+      **  par:  gate, parse
+      **  fab:  gate, apply well
+      **  hom:  gate, apply sink
+      **  piq:  parsed line
+      **  nob:  knob
+      **  syn:  sink
+      **  wol:  well
+      **  mal:  soul from well
+      **  tif:  output and new state 
+      */
       u3_fox lin = _vere_ns(v, lin_c);
-      u3_fox par = _vere_nock(v, _vere_t(v, v->m.sod), v->m.g.par);
-      u3_fox fab = _vere_nock(v, _vere_t(v, v->m.sod), v->m.g.fab);
-      u3_fox hom = _vere_nock(v, _vere_t(v, v->m.sod), v->m.g.hom);
+      u3_fox par = _vere_nock(v, _vere_t(v, v->m.sod), v->m.g.par, 0);
+      u3_fox fab = _vere_nock(v, _vere_t(v, v->m.sod), v->m.g.fab, 0);
+      u3_fox hom = _vere_nock(v, _vere_t(v, v->m.sod), v->m.g.hom, 0);
       u3_fox piq = _vere_mung(v, par, lin, 0);
-      u3_fox nob = _vere_h(v, piq);
-      u3_fox syn = _vere_h(_vere_t(v, piq));
-      u3_fox wol = _vere_t(_vere_t(v, piq));
+      // u3_fox nob = _vere_h(v, piq);
+      u3_fox syn = _vere_h(v, _vere_t(v, piq));
+      u3_fox wol = _vere_t(v, _vere_t(v, piq));
       u3_fox mal = _vere_mung(v, fab, wol, 0);
       u3_fox tif = _vere_mung(v, hom, _vere_nc(v, syn, mal), 0);
 
-      v->m.sod = _vere_h(v, tif);
+      v->m.sod = _vere_nc(v, _vere_h(v, v->m.sod), _vere_h(v, tif));
       _vere_spit(v, _vere_t(v, tif));
     }
 #endif
