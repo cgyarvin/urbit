@@ -1,48 +1,77 @@
 :: =>  !%
+::
+::  XX: should be invoked with !%/zoot, but u4 plow jet cannot handle
+::
 =>  plow
 =+  rasp
-=+  sul=`[p=*type q=*]`[seed ..watt]
-|*  
-    vere  .
+=<
+  =+  sul=seed
+  |*
+      vere  .
+  ::
+  ::::  System interface
+  ::::
+  ::          spar: parse
+      spar
+    luge
+  ::::
+  ::          glem: apply well, producing soul
+      glem
+    =+  wol=*well
+    |=
+    ^-  *soul
+    ?-  wol
+      [%foam *]   (flog p.wol sul)
+      [%wood *]   (flog p.wol seed)
+    ==
+  ::::
+  ::          blor: apply sink and soul, producing core and merds
+      blor
+    =+  [syn=*sink mal=*soul]
+    |=
+    ^-  [..vere *(list merd)]
+    ?-  syn
+      %crud   [..vere {[%crud mal]}]
+    ==
+  ::
+  ::::
+  ==
+|*
+::
+::::  Tools
+::::
+::      flog: execute gene in soul
+    flog
+  =+  [gen=*gene cob=*soul]
+  |=
+  ^-  *soul
+  =+  vid=(%~(mill rose sut p.cob) gen)
+  [p.vid .*(q.cob q.vid)]
+:::: 
+::      luge: parse command line
+    luge 
+  =+  cox=*rock
+  |=
+  ^-  *goal
+  (done %.(`tube`[tube_(rip 3 cox)] |~(plug bonk skin lewl)))
+::::
+::      flog: 
+
 ::
 ::::  Molds and cases
 ::::
 ::
+    form  term
     goal  &[p=*knob q=*sink r=*well]
     soul  &[p=*type q=*]
-    unix  &[p=*<%root %curd> q=*(list term:plow)]
-    form  term
+    unix  &[p=*<%root %curd> q=*(list rock)]
 ::::
-::
+::        knob: execution option
     knob
   |?
     ~
     %dbug                         ::  debug
     [%slow p=@]                   ::  set optimization threshold
-  ==
-::::
-::
-    sink
-  |?
-    %crud                         ::  print, raw noun and type
-    %nice                         ::  print, type-sensitive
-    %kind                         ::  print, type only
-    %load                         ::  load as environment
-    [%pose p=*term]               ::  add as variable
-    [%rite p=*term]               ::  modify variable
-    [%dump p=*form q=*unix]       ::  output to file by format
-  ==
-::::
-::
-    well
-  |?
-    [%code p=*unix]               ::  unix code
-    [%data p=*form q=*unix]       ::  unix data with extension
-    [%foam p=*gene]               ::  gene to be run in environment
-    [%rock p=*gene]               ::  gene to be run as standard
-    [%butt p=*well q=*well]       ::  flac
-    [%kick p=*well q=*well]       ::  mung
-    [%sell p=*well q=*well]       ::  cast
   ==
 ::::
 ::
@@ -54,26 +83,33 @@
     [%save p=*form q=*unix r=*]   ::  write to file by format
     [%puke p=*form q=*]           ::  write to screen by format
   ==
-::
-::::  Scanners
 ::::
-::          nuxi: scan unix path
-    nuxi
-  =+  doc=tube
-  |=
-  ^-  *(edge unix)
-  %.  doc
-  |~  plug 
-    |~(pose (cold %root sol) (free %curd))
-    (most sol |~(pose nix quo))
+::        sink: output definition
+    sink
+  |?
+    %crud                         ::  print, raw noun and type
+    %nice                         ::  print, type-sensitive
+    %kind                         ::  print, type only
+    %load                         ::  load as environment
+    [%pose p=*term]               ::  add as variable
+    [%rite p=*term]               ::  modify variable
+    [%dump p=*form q=*unix]       ::  output to file by format
   ==
 ::::
-::          loge: scan goal
-    loge
-  =+  doc=tube
-  |=
-  ^-  *(edge goal)
-  %.(doc |~(plug bonk skin lewl))
+::        well: computation spec
+    well
+  |?
+    [%code p=*unix]               ::  unix code
+    [%butt p=*well q=*well]       ::  flac
+    [%data p=*form q=*unix]       ::  unix data with extension
+    [%foam p=*gene]               ::  gene to be run in environment
+    [%kick p=*well q=*well]       ::  mung
+    [%sell p=*well q=*well]       ::  cast
+    [%tule p=*(list well)]        ::  cage
+    [%wood p=*gene]               ::  gene to be run in std ctx
+  ==
+::
+::::  Scanners
 ::::
 ::          bonk: scan knob
     bonk
@@ -90,6 +126,17 @@
     ==
   ::
     (free ~)
+  ==
+::::
+::          nuxi: scan unix path
+    nuxi
+  =+  doc=tube
+  |=
+  ^-  *(edge unix)
+  %.  doc
+  |~  plug 
+    |~(pose (cold %root sol) (free %curd))
+    (most sol |~(pose nix quo))
   ==
 ::::
 ::          skin: scan sink
@@ -123,39 +170,22 @@
     (stag %code |~(pfix sig nuxi))
     (stag %data |~(pfix der |~((glue dig) sym nuxi)))
     (stag %foam scry)
-  ==
-::::
-::          llew: subwell
-    llew
-  |~(pose lewl (ifix [nom mon] lewl))
-::
-::::  System interface
-::::
-::          spar: parse
-    spar
-  =+  cox=*text
-  |=
-  ^-  *goal
-  (done (loge `tube`[tube_(rip 3 cox)]))
-::::
-::          glem: apply well, producing soul
-    glem
-  =+  wol=*well
-  |=
-  ^-  *soul
-  ?-  wol
-      [%foam *]
-    =+  vid=(%~(mill rose sut p.sul) p.wol)
-    [p.vid .*(q.sul q.vid)]
-  ==
-::::
-::          blor: apply sink and soul, producing core and merds
-    blor
-  =+  [syn=*sink mal=*soul]
-  |=
-  ^-  [..vere *(list merd)]
-  ?-  syn
-    %crud   [..vere {[%crud mal]}]
+    (stag %tule (ifix [nom mon] (most gap lewl)))
+  ::
+    |~  %-  comp 
+        =+  [* * *] 
+        |:
+        ?-  -<+<
+          %butt   [%butt -<- -<+>]
+          %kick   [%kick -<- -<+>]
+          %sell   [%sell -<- -<+>]
+        ==
+      lewl
+      |~  plug
+        |~(pose (cold %butt buc) (cold %sell ask))
+        lewl
+      ==
+    ==
   ==
 ::
 ::::

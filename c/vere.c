@@ -27,7 +27,7 @@
         */
         u3_z    z;
 
-        /*  Watt - the raw kernel.  Initialized at boot.
+        /*  Watt - the kernel noun.  Initialized at boot.
         */
         u3_fox  wot;
 
@@ -465,7 +465,7 @@ _vere_nock(struct vere_state*   v,
 {
   /*  bus:  subject
   **  fol:  formula
-  **  res:  rekult
+  **  res:  result
   **  pro:  product
   */
   u3_fox res, pro;
@@ -705,8 +705,10 @@ vere_boot(int siz)
   /*  Create the kernel soul.
   */
   {
-    v->kul.p = _vere_load_c(v, "seed:plow:!%");
-    v->kul.q = _vere_load_c(v, "!%");
+    u3_fox kul = _vere_load_c(v, "seed:plow:!%");
+
+    v->kul.p = _vere_h(v, kul);
+    v->kul.q = _vere_t(v, kul);
   }
 
   /*  Basic metacircular gates: read and mill.
