@@ -153,6 +153,17 @@ _vere_nc(struct vere_state*   v,
   return _vere_x_use(v, u3_ln_cell(v->z, hed, tal));
 }
 
+/*  _vere_nt()::
+*/
+static u3_fox
+_vere_nt(struct vere_state*   v,
+         u3_fox               one,
+         u3_fox               two,
+         u3_fox               tri)
+{
+  return _vere_nc(v, one, _vere_nc(v, two, tri));
+}
+
 /*  _vere_ns()::
 */
 static u3_fox
@@ -190,16 +201,16 @@ _vere_t(struct vere_state*  v,
 */
 u3_fox
 _vere_file(u3_z         z,
-           const c3_c*  c_pah)
+           const c3_c*  pah_c)
 {
-  c3_i        i_fid = open(c_pah, O_RDONLY, 0666);
+  c3_i        i_fid = open(pah_c, O_RDONLY, 0666);
   struct stat sta;
   uint32_t    siz;
   uint8_t     *buf;
   u3_fox     dat; 
 
   if ( (i_fid < 0) || (fstat(i_fid, &sta) < 0) ) {
-    perror(c_pah);
+    perror(pah_c);
     exit(1);
   }
 
@@ -207,7 +218,7 @@ _vere_file(u3_z         z,
   buf = malloc(sta.st_size);
 
   if ( siz != read(i_fid, buf, siz) ) {
-    perror(c_pah);
+    perror(pah_c);
     exit(1);
   }
   close(i_fid);
@@ -586,52 +597,6 @@ _vere_fire(struct vere_state*   v,
         _vere_nock(v, v->kul.q, _vere_t(v, lof), 0));
 }
 
-#if 0
-/*  _vere_gear_c(): gate from soul
-*/
-static u3_fox
-_vere_gear_c(struct vere_state*   v,
-             u3_fox               sul,
-             c3_c*                des_c)
-{
-  u3_fox lof = _vere_mill(v, _vere_h(v, sul), _vere_ns(v, des_c));
-
-  return _vere_nock(v, _vere_t(v, sul), _vere_t(v, lof), 0);
-}
-#endif
-
-#if 0
-/* _vere_load_path():   load C path.
-*/
-static u3_fox
-_vere_load_path(struct vere_state*  v,
-                const c3_c*         c_pah)
-{
-  return _vere_load(v, _vere_file(v->z, c_pah));
-}
-#endif
-
-#if 0
-/*  _vere_watt_pass():  pass (make and show)
-*/
-static u3_fox
-_vere_watt_pass(struct vere_state *v,
-                u3_fox            sut,
-                const c3_c        *src)
-{
-}
-
-/*  _vere_watt_make():  mill (play, make, show)
-*/
-static u3_fox
-_vere_watt_mill(struct vere_state *v,
-                u3_fox            sut,
-                const c3_c        *src)
-{
-}
-
-#endif
-
 /*  _vere_shell():  load the shell.
 */
 u3_fox
@@ -763,6 +728,141 @@ _vere_spit(struct vere_state*   v,
   }
 }
 
+/*  _vere_path_out_a(): measure and/or cat a path with form.
+*/
+static c3_w
+_vere_path_out_a(struct vere_state*   v,
+                 c3_c*                pah_c,
+                 u3_fox               fom,
+                 u3_fox               pih)
+{
+  u3_fox  bis = _vere_h(v, pih);
+  c3_w    len = u3_lr_bin(v->z, 3, bis);
+
+  if ( pah_c ) {
+    u3_lr_bytes(v->z, 0, len, (c3_y *)pah_c, bis);
+    pah_c += len;
+  }
+  if ( 0 == _vere_t(v, pih) ) {
+    c3_w  fen = u3_lr_bin(v->z, 3, fom);
+    
+    if ( pah_c ) {
+      *pah_c++ = '.';
+      u3_lr_bytes(v->z, 0, fen + 1, (c3_y *)pah_c, fom);
+    }
+    return (1 + fen + len);
+  }
+  else {
+    if ( pah_c ) {
+      *pah_c++ = '/';
+    }
+    return (1 + len + _vere_path_out_a(v, pah_c, fom, _vere_t(v, pih)));
+  }
+}
+
+/*  _vere_path_out(): measure and/or cat a path with form.
+*/
+static c3_w
+_vere_path_out(struct vere_state*   v,
+               c3_c*                pah_c,
+               u3_fox               fom,
+               u3_fox               pah)
+{
+  if ( c3__root == _vere_h(v, pah) ) {
+    if ( pah_c ) {
+      *pah_c++ = '/';
+    }
+    return 1 + _vere_path_out_a(v, pah_c, fom, _vere_t(v, pah));
+  }
+  else if ( c3__curd == _vere_h(v, pah) ) {
+    return _vere_path_out_a(v, pah_c, fom, _vere_t(v, pah));
+  }
+  else return _vere_x_fail(v);
+}
+
+/*  _vere_path(): load by unix path with format.
+*/
+static u3_fox
+_vere_path_load(struct vere_state*  v,
+                u3_fox              fom,
+                u3_fox              pah)
+{
+  c3_w    pol_w = _vere_path_out(v, 0, fom, pah);
+  c3_c*   pah_c = alloca(pol_w + 1);
+
+  _vere_path_out(v, pah_c, fom, pah);
+  {
+    switch ( fom ) {
+      case c3__watt: {
+        u3_fox des = _vere_file(v->z, pah_c);
+        return _vere_mung(v, v->g.rad, des, 0);
+      }
+      case c3__nock: 
+      case c3__noun: {
+        FILE *fil = fopen(pah_c, "r");
+
+        return _vere_scan(v->z, fil);
+      }
+      default:
+      case c3__atom: {
+        return _vere_file(v->z, pah_c);
+      }
+    }
+  }
+}  
+
+/*  _vere_well_a(): well tule.
+*/
+  static u3_fox 
+  _vere_well(struct vere_state*, u3_fox);
+
+static u3_fox
+_vere_well_a(struct vere_state*   v,
+             u3_fox               p_wol)
+{
+  if ( 0 == p_wol ) {
+    return p_wol;
+  } else {
+    return _vere_nc(v, _vere_well(v, _vere_h(v, p_wol)),
+                       _vere_well_a(v, _vere_t(v, p_wol)));
+  }
+}
+             
+/*  _vere_well(): adjust well with input.
+*/
+static u3_fox
+_vere_well(struct vere_state*   v,
+           u3_fox               wol)
+{
+  u3_fox p_wol, q_wol;
+
+  if ( u3_yes == u3_lr_p(v->z, wol, c3__code, &p_wol) ) {
+    return _vere_nc(v, c3__wood, _vere_path_load(v, c3__watt, p_wol));
+  }
+  else if ( u3_yes == u3_lr_pq(v->z, wol, c3__data, &p_wol, &q_wol) ) {
+    u3_fox dat = _vere_path_load(v, p_wol, q_wol);
+
+    return _vere_nc(v, c3__bone, dat);
+  }
+  else if ( u3_yes == u3_lr_pq(v->z, wol, c3__butt, &p_wol, &q_wol) ) {
+    return _vere_nt
+      (v, c3__butt, _vere_well(v, p_wol), _vere_well(v, q_wol));
+  }
+  else if ( u3_yes == u3_lr_pq(v->z, wol, c3__kick, &p_wol, &q_wol) ) {
+    return _vere_nt
+      (v, c3__kick, _vere_well(v, p_wol), _vere_well(v, q_wol));
+  }
+  else if ( u3_yes == u3_lr_pq(v->z, wol, c3__sell, &p_wol, &q_wol) ) {
+    return _vere_nt
+      (v, c3__sell, _vere_well(v, p_wol), _vere_well(v, q_wol));
+  }
+  else if ( u3_yes == u3_lr_p(v->z, wol, c3__tule, &p_wol) ) {
+    return _vere_nc
+      (v, c3__tule, _vere_well_a(v, p_wol));
+  }
+  else return wol;
+}
+
 void 
 vere_line(void *vere, const c3_c *line)
 {
@@ -811,11 +911,18 @@ vere_line(void *vere, const c3_c *line)
       // u3_fox nob = _vere_h(v, piq);
       u3_fox syn = _vere_h(v, _vere_t(v, piq));
       u3_fox wol = _vere_t(v, _vere_t(v, piq));
-      u3_fox mal = _vere_mung(v, fab, wol, 0);
-      u3_fox tif = _vere_mung(v, hom, _vere_nc(v, syn, mal), 0);
 
-      v->m.sod = _vere_nc(v, _vere_h(v, v->m.sod), _vere_h(v, tif));
-      _vere_spit(v, _vere_t(v, tif));
+      // u3_b_print(v->z, "syn", syn);
+      // u3_b_print(v->z, "wol", wol);
+      // 
+      wol = _vere_well(v, wol);
+      {
+        u3_fox mal = _vere_mung(v, fab, wol, 0);
+        u3_fox tif = _vere_mung(v, hom, _vere_nc(v, syn, mal), 0);
+
+        v->m.sod = _vere_nc(v, _vere_h(v, v->m.sod), _vere_h(v, tif));
+        _vere_spit(v, _vere_t(v, tif));
+      }
     }
 #endif
   }

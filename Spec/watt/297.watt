@@ -224,7 +224,7 @@
     =+  b=*
     |=
     ?-  b
-      ~           ~
+      ~       ~
       [* *]   [(a -.b) $(b +.b)]
     ==
   ::::
@@ -783,20 +783,23 @@
 =>
   |*  #(..ship %lead 0)
   ::
-  ::::  Tier 5, parsing and printing
+  ::::  Tier 5, %lead, parsing and printing
     ::
       lead  .
+  ::::
+  ::
+      byte  &@
+      tape  (list byte)
+      rock  &@
+      wall  (list tape)
   ::::
   ::
       rasp
     |*
     ::::
     ::
-        byte  &@
         edge  =+(a=&* |:(<[| p=*mark] [& p=*a q=tube]>))
         mark  &[l=@ c=@]
-        tape  (list byte)
-        text  &@
         rule  =+(doc=tube |=(^-(*(edge) [& ~ doc])))
     ::::
     ::
@@ -1078,6 +1081,7 @@
     ::
         ace   (just 32)
         alf   |~(pose low hig)
+        aln   |~(pose low hig num)
         amp   (just '&')
         ask   (just '?')
         bar   (just '|')
@@ -1107,6 +1111,7 @@
         mes   (cook =+([@ @] |=((add (mul 16 -<-) -<+))) |~(plug hit hit))
         mit   (just '%')
         mon   (just ']')
+        nix   (boss 256 (star |~(pose aln cab)))
         nom   (just '[')
         nub   (just '-')
         num   (shim '0' '9')
@@ -1115,7 +1120,7 @@
         pod   (just '+')
         poy   |~(pfix sac |~(pose sac bot mes))
         qit   |~(pose (shim 32 38) (shim 40 91) (shim 92 126) poy)
-        quo   (bass 256 (plus qit))
+        quo   (ifix [bot bot] (bass 256 (plus qit)))
         ras   (just '*')
         red   (just '>')
         sac   (just '\\')
@@ -1142,6 +1147,131 @@
     watt  .
 ::::
 ::
+    bank  (list gene)
+    cord  <^+(@ *term) [%frag p=*axis] [%pane p=*term]>
+    menu  (list &[p=*term q=*gene])
+    prop  <~ [p=*rope q=*term r=@]>
+    rope  (list cord)
+    rack  (list &[p=*gene q=*gene])
+    spec  (book term gene) 
+    spot  &[at=[l=@ c=@] to=[l=@ c=@]]
+    term  &@
+::::
+::
+    gene
+  |?
+  ::
+    [%bean p=*<%atom %blur %cell %flag %null>]
+    [%bone p=*]
+    [%frag p=*axis]
+    [%pane p=*term]
+  ::
+    [%chan p=*bank]                             ::  ?&  askamp
+    [%dorn p=*bank]                             ::  ?|  askbar
+    [%fent p=*gene q=*gene r=*gene]             ::  ?~  asksig
+    [%grel p=*gene q=*rack]                     ::  ?-  asknub
+    [%gram p=*gene q=*gene]                     ::  ?>  askred
+    [%lort p=*gene q=*gene r=*gene]             ::  ?.  askdot
+    [%marg p=*gene q=*gene]                     ::  ?<  askder
+    [%plin p=*gene q=*gene]                     ::  ?=  askben
+    [%moze p=*gene q=*bank]                     ::  ?*  askras
+    [%trol p=*gene q=*gene r=*gene]             ::  ?:  askdig
+    [%vern p=*gene]                             ::  ?!  askhop
+  ::
+    [%lonk p=*gene q=*bank]                     ::  |~  barsig
+    [%lome p=*prop q=*gene]                     ::  |=  barben
+    [%pank p=*prop q=*menu]                     ::  |*  barras
+    [%rond p=*bank]                             ::  |?  barask
+    [%sunt p=*prop q=*gene]                     ::  |:  bardig
+    [%tash p=*prop q=*menu]                     ::  |%  barmit
+    [%vamp p=*prop q=*gene]                     ::  |-  barnub
+  ::
+    [%claf p=*gene q=*gene]                     ::  =<  bender
+    [%flac p=*gene q=*gene]                     ::  =>  benred
+    [%gant p=*gene q=*gene]                     ::  =+  benpod
+    [%tang p=*gene q=*gene]                     ::  =-  bennub
+  ::
+    [%prex p=*bank]                             ::  :*  digras
+    [%slax p=*bank]                             ::  :~  digsig
+    [%quax p=*gene q=*gene r=*gene s=*gene]     ::  :^  dighat
+    [%trex p=*gene q=*gene r=*gene]             ::  :+  digpod
+    [%twix p=*gene q=*gene]                     ::  :-  dignub
+  ::
+    [%dust p=*gene]                             ::  .?  dotask
+    [%sail p=*gene q=*gene]                     ::  .*  dotras
+    [%sing p=*gene q=*gene]                     ::  .=  dotben
+    [%vint p=*gene]                             ::  .^  dothat
+  ::
+    [%bran p=*term q=*gene]                     ::  ^=  hatben
+    [%cast p=*gene q=*gene]                     ::  ^-  hatnub
+    [%germ p=*gene q=*gene]                     ::  ^$  hatbuc
+    [%hint p=*gene q=*gene]                     ::  ^?  hatask
+    [%grit p=*gene]                             ::  ^@  hatpat
+    [%mave p=*gene]                             ::  ^*  hatras
+    [%pock p=*gene q=*gene]                     ::  ^+  hatdig
+    [%stil p=*gene q=*gene]                     ::  ^:  hatpod
+    [%velt p=*gene q=*gene]                     ::  ^%  hatmit
+    [%wost p=*gene]                             ::  ^~  hatsig
+  ::
+    [%fist p=*gene]                             ::  ;+  lompod
+    [%mast p=*gene]                             ::  ;-  lomnub
+  ::
+    [%bung p=*gene q=*gene r=*gene]             ::  %+  mitpod
+    [%frit p=*gene q=*gene]                     ::  %_  mitcab
+    [%fung p=*gene q=*bank]                     ::  %-  mitnub  
+    [%gath p=*rope q=*gene r=*rack]             ::  %~  mitsig
+    [%gnum p=*gene q=*gene]                     ::  %.  mitdot
+    [%mack p=*rope q=*rack]                     ::  %=  mitben
+    [%mung p=*gene q=*gene]                     ::  %:  mitdig
+    [%teck p=*gene]                             ::  %*  mitras
+    [%tung p=*gene q=*gene r=*gene s=*gene]     ::  %^  mithat
+  ::
+    [%zalt p=*gene]                             ::  !:  hopdig
+    [%zemp p=*spot q=*gene]
+    [%zike ~]                                   ::  !!  hopven
+    [%zoot ~]                                   ::  !%  hopmit
+    [%zole p=*gene]                             ::  !`  hoptic
+    [%zush p=*gene]                             ::  !#  hopdax
+  ==
+::::
+::
+    tool
+  |?
+    [0 p=@]
+    [1 p=*]
+    [2 p=*tool q=*tool]
+    [3 p=*tool]
+    [4 p=*tool]
+    [5 p=*tool q=*tool]
+    [6 p=*tool q=*tool r=*tool]
+    [7 p=*tool q=*tool]
+    [8 p=*tool q=*tool]
+    [9 p=*tool q=*tool]
+    [10 p=*tool q=*tool]
+    [11 p=* q=*tool]
+    [12 p=* q=*]
+    [p=^+(^ *tool) q=*tool]
+  ==
+::
+::::
+::
+    type
+  |?
+    %blur
+    %blot
+    %atom
+    [%cell p=*type q=*type]
+    [%core p=*type q=*<[%hard p=*spec] [%soft p=*type q=*spec]>]
+    [%cube p=*]
+    [%face p=*term q=*type]
+    [%fork p=*type q=*type]
+    [%fuse p=*type q=*type]
+    [%hold p=*type q=*gene]
+  ==
+::
+::::
+::::
+::
     plow
   |*  #(..watt %plow 6)
   ::
@@ -1152,100 +1282,14 @@
   ::::  Tier 6, group A:  initiation.
   ::::
   ::
-      bank  (list gene)
-      cord  <^+(@ *term) [%frag p=*axis] [%pane p=*term]>
       door  &[p=*axis q=*type r=*gene]
       init  =+([a=*type b=*gene] |=((%~(mill rose sut a) b)))
       menu  (list &[p=*term q=*gene])
       plot  (list &[p=*gene q=*type])
       plan  &[p=*axis q=*(unit door) r=*type]
-      prop  <~ [p=*rope q=*term r=@]>
-      rack  (list &[p=*gene q=*gene])
       rail  (list type)
-      rope  (list cord)
-      seed  ^-(*type !:(..watt))
-      :: seed  ^-(*type %blur)
-      spec  (book term gene) 
-      spot  &[at=[l=@ c=@] to=[l=@ c=@]]
-      term  &@
-  ::
-  ::::
-  ::
-      gene
-    |?
-    ::
-      [%bean p=*<%atom %blur %cell %flag %null>]
-      [%bone p=*]
-      [%frag p=*axis]
-      [%pane p=*term]
-    ::
-      [%chan p=*bank]                             ::  ?&  askamp
-      [%dorn p=*bank]                             ::  ?|  askbar
-      [%fent p=*gene q=*gene r=*gene]             ::  ?~  asksig
-      [%grel p=*gene q=*rack]                     ::  ?-  asknub
-      [%gram p=*gene q=*gene]                     ::  ?>  askred
-      [%lort p=*gene q=*gene r=*gene]             ::  ?.  askdot
-      [%marg p=*gene q=*gene]                     ::  ?<  askder
-      [%plin p=*gene q=*gene]                     ::  ?=  askben
-      [%moze p=*gene q=*bank]                     ::  ?*  askras
-      [%trol p=*gene q=*gene r=*gene]             ::  ?:  askdig
-      [%vern p=*gene]                             ::  ?!  askhop
-    ::
-      [%lonk p=*gene q=*bank]                     ::  |~  barsig
-      [%lome p=*prop q=*gene]                     ::  |=  barben
-      [%pank p=*prop q=*menu]                     ::  |*  barras
-      [%rond p=*bank]                             ::  |?  barask
-      [%sunt p=*prop q=*gene]                     ::  |:  bardig
-      [%tash p=*prop q=*menu]                     ::  |%  barmit
-      [%vamp p=*prop q=*gene]                     ::  |-  barnub
-    ::
-      [%claf p=*gene q=*gene]                     ::  =<  bender
-      [%flac p=*gene q=*gene]                     ::  =>  benred
-      [%gant p=*gene q=*gene]                     ::  =+  benpod
-      [%tang p=*gene q=*gene]                     ::  =-  bennub
-    ::
-      [%prex p=*bank]                             ::  :*  digras
-      [%slax p=*bank]                             ::  :~  digsig
-      [%quax p=*gene q=*gene r=*gene s=*gene]     ::  :^  dighat
-      [%trex p=*gene q=*gene r=*gene]             ::  :+  digpod
-      [%twix p=*gene q=*gene]                     ::  :-  dignub
-    ::
-      [%dust p=*gene]                             ::  .?  dotask
-      [%sail p=*gene q=*gene]                     ::  .*  dotras
-      [%sing p=*gene q=*gene]                     ::  .=  dotben
-      [%vint p=*gene]                             ::  .^  dothat
-    ::
-      [%bran p=*term q=*gene]                     ::  ^=  hatben
-      [%cast p=*gene q=*gene]                     ::  ^-  hatnub
-      [%germ p=*gene q=*gene]                     ::  ^$  hatbuc
-      [%hint p=*gene q=*gene]                     ::  ^?  hatask
-      [%grit p=*gene]                             ::  ^@  hatpat
-      [%mave p=*gene]                             ::  ^*  hatras
-      [%pock p=*gene q=*gene]                     ::  ^+  hatdig
-      [%stil p=*gene q=*gene]                     ::  ^:  hatpod
-      [%velt p=*gene q=*gene]                     ::  ^%  hatmit
-      [%wost p=*gene]                             ::  ^~  hatsig
-    ::
-      [%fist p=*gene]                             ::  ;+  lompod
-      [%mast p=*gene]                             ::  ;-  lomnub
-    ::
-      [%bung p=*gene q=*gene r=*gene]             ::  %+  mitpod
-      [%frit p=*gene q=*gene]                     ::  %_  mitcab
-      [%fung p=*gene q=*bank]                     ::  %-  mitnub  
-      [%gath p=*rope q=*gene r=*rack]             ::  %~  mitsig
-      [%gnum p=*gene q=*gene]                     ::  %.  mitdot
-      [%mack p=*rope q=*rack]                     ::  %=  mitben
-      [%mung p=*gene q=*gene]                     ::  %:  mitdig
-      [%teck p=*gene]                             ::  %*  mitras
-      [%tung p=*gene q=*gene r=*gene s=*gene]     ::  %^  mithat
-    ::
-      [%zalt p=*gene]                             ::  !:  hopdig
-      [%zemp p=*spot q=*gene]
-      [%zike ~]                                   ::  !!  hopven
-      [%zoot ~]                                   ::  !%  hopmit
-      [%zole p=*gene]                             ::  !`  hoptic
-      [%zush p=*gene]                             ::  !#  hopdax
-    ==
+      seed  [p=^-(*type !:(..watt)) q=^-(* ..watt)]
+      :: seed  [p=!:(..watt) q=^-(* ..watt)]
   ::
   ::::
   ::
@@ -1255,42 +1299,6 @@
       [%leaf p=*type] 
       [%bran p=*term q=*tack] 
       [%pair p=*tack q=*tack]
-    ==
-  ::
-  ::::
-  ::
-      tool
-    |?
-      [0 p=@]
-      [1 p=*]
-      [2 p=*tool q=*tool]
-      [3 p=*tool]
-      [4 p=*tool]
-      [5 p=*tool q=*tool]
-      [6 p=*tool q=*tool r=*tool]
-      [7 p=*tool q=*tool]
-      [8 p=*tool q=*tool]
-      [9 p=*tool q=*tool]
-      [10 p=*tool q=*tool]
-      [11 p=* q=*tool]
-      [12 p=* q=*]
-      [p=^+(^ *tool) q=*tool]
-    ==
-  ::
-  ::::
-  ::
-      type
-    |?
-      %blur
-      %blot
-      %atom
-      [%cell p=*type q=*type]
-      [%core p=*type q=*<[%hard p=*spec] [%soft p=*type q=*spec]>]
-      [%cube p=*]
-      [%face p=*term q=*type]
-      [%fork p=*type q=*type]
-      [%fuse p=*type q=*type]
-      [%hold p=*type q=*gene]
     ==
   ::
   ::::  Tier 6, group B:  translation.
@@ -1436,6 +1444,7 @@
       |~  pose
         |~(pfix (just '0') (just 'x') hex)
         del
+        quo
         (cold & amp)
         (cold ~ sig)
         (cold | bar)
@@ -1481,7 +1490,7 @@
     ::::
     ::
         cape
-      =+  [dif=rule tuq=*text har=nora]
+      =+  [dif=rule tuq=*rock har=nora]
       |:
       =>  .
       |~(pfix dif (stag tuq (knot har)))
@@ -2244,7 +2253,7 @@
           %zalt   [%cube $(gen p.gen)]
           %zemp   $(gen q.gen)
           %zike   %blot
-          %zoot   seed
+          %zoot   p:seed
           %zush   $(bug .^(bug), gen p.gen)
           *       $(gen (open gen))
       ==

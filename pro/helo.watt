@@ -1,0 +1,4 @@
+=+  foo=*term
+|=
+^-  [*term *term]
+[%hello foo]
