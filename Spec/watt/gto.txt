@@ -148,16 +148,16 @@ Axes
 
 Signs (ven = repeat)
 --
-  amp   &       der   <       nub   -     tic   `
-  ask   ?       dot   .       pat   @     tep   "
+  amp   &       dig   :       nub   -     tic   `
+  ask   ?       dot   .       pat   @     toq   "
   bar   |       dus   }       pel   )
   ben   =       hat   ^       pod   +
-  buc   $       hop   !       ras   *
-  bup   '       lom   ;       red   >
-  cab   _       lep   (       sac   \
-  com   ,       mit   %       sol   /
-  dax   #       mon   ]       sud   {
-  dig   :       nom   [       sig   ~
+  bot   '       hop   !       ras   *
+  buc   $       lep   (       red   >
+  cab   _       lom   ;       sac   \
+  com   ,       mit   %       sig   ~
+  dax   #       mon   ]       sol   /
+  der   <       nom   [       sud   {
 
   ace  == " "
   lit  == "\n"
