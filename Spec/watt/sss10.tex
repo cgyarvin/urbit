@@ -66,6 +66,13 @@ increment.  Watt has a higher-order type inference engine, like
 Tarver's Qi \citep{tarverqi}, built on Common Lisp; Common Lisp is two orders
 of magnitude bigger than Nock.
 
+There are many small Turing-complete automata (eg, SK combinators
+\citep{skcombinator}) and self-interpreting interpreters (eg, Tromp's binary 
+lambda calculus) \citep{tromp}.  Most such systems are "esoteric," ie, not
+designed for practical programming; in practice they exhibit 
+unsolvable performance problems, unusable user interfaces, or
+both.  Watt is an unusual language, but not an esoteric one.
+
 Nock and Watt are defined by three files: \verb|A|, \verb|B|, and \verb|C|.  \verb|A|
 is the Nock spec, in English and pseudocode.  \verb|B| is the Watt
 kernel, in Watt.  \verb|C| is the Watt kernel, as a Nock noun.
@@ -98,8 +105,8 @@ is the machine instruction set, \verb|B| is the C source for \verb|cc|, and
 These files (all available from \verb|github:cgyarvin/urbit|) are
 quite small, both physically and semantically.  \verb|A| (\verb|nock8.txt|)
 is 44 lines, 228 words, 1154 bytes; \verb|B|
-(\verb|watt298.watt|) is 2988 
-lines, 7929 words, 64K; \verb|C| (\verb|watt298.nock|) is 360K.  Compressed
+(\verb|watt297.watt|) is 3004
+lines, 7921 words, 67K; \verb|C| (\verb|watt297.nock|) is 360K.  Compressed
 size is a good proxy for Kolmogorov complexity, which is a proxy
 for semantic size; A gzips to 424 bytes, B 16K, C 42K.  
 
@@ -126,57 +133,48 @@ PHP can do, etc, etc.
 
 But what can Watt do that Javascript can't?  The conventional
 wisdom is that every new language needs a real use case that no
-existing language can satisfy.  Otherwise, it will never emerge,
-regardless of any abstract superiority, as its inescapable
-immaturity condemns it to obscurity and vice versa.  Conventional
-wisdoms are often right.
+existing language can satisfy.  Conventional wisdoms are often right.
 
 Watt is a functional specification language.  Its niche is the
 precise definition of arbitrary functions, especially in network
-protocol and file-format standards.  The vacancy of the niche is
-demonstrated by the universal use of English and pseudocode for
-the purpose.
+protocol and file-format standards.  Today, these standards (such
+as RFCs) are normally written in English and pseudocode.
 
-Why are standards still written in English and pseudocode?
-Because in most cases, difference between a good standard and a
-bad one is precision.  The precision of a spec is generally
-proportional to its size.  And for the purpose of precision, the
-spec includes all its dependencies.
+Why are Internet standards, for which precision is essential,
+expressed informally?  Because the precision of a spec is 
+is generally proportional to its size, and its size includes 
+all its dependencies.
 
 If the layout function in HTML 5 is defined in Java, its
 semantics depend on the entire Java environment (not just the
 JVM) against which the code runs.  Java was originally designed
-as a write-once, run-anywhere language.  Mostly, it is.  But
-almost only counts in horseshoes and hand grenades.
-Specifying standards as Java classes has not become popular.
-
-Why is Java not a good specification language?  Why is it not
-write-once, run-anywhere?  Version and environment mismatches,
-mostly - in Windows terms, "DLL hell."  Even the JVM, which is
-anything but trivial, is versioned and extensible.  Java is far
-more portable than C, the original portable language.  But
-extremism in the pursuit of exactness is no vice.
+as a write-once, run-anywhere language.  Mostly, it is.  But it
+retains many installation dependencies.  Even the JVM, which is
+anything but trivial, is versioned and extensible.  While quite
+stable, therefore, it is not as stable as possible.
  
-Even extensibility, normally a virtue, is a vice in a
-specification language.  Both Nock and Watt are versioned with a
-scheme that recognizes this: "Kelvin versioning."  In Kelvin
-versioning, versions count not up by major and minor release, but
-down by integer degrees Kelvin.  At absolute zero, all change ends.
+Even extensibility is a vice in a specification language.  Both
+Nock and Watt are versioned with an absolute convergence scheme:
+"Kelvin versioning."  In Kelvin versioning, versions count not up
+by major and minor release, but down by integer degrees Kelvin.
+At absolute zero, all change ends.
 
 Since the Nock spec is extremely small and cold (8 Kelvin), it
 should be extremely precise.  A naive Nock interpreter is the
 proverbial page of code.  An incorrect one demands unusual energy
 in incompetence.  An efficient Nock interpreter can be quite
-internally complex, but its semantics are no different.  If two
-Nock interpreters disagree, one is buggy, and it is trivial to
-figure out which - no "standards lawyering" involved.  And since
-since all Watt programs (Watt itself included) execute
+internally complex, but its semantics are no different.  
+
+If two Nock interpreters disagree, one is buggy, and it is
+trivial to figure out which - no "standards lawyering" involved.
+And since since all Watt programs (Watt itself included) execute
 exclusively in Nock, a metacircular operating environment built
 on Nock should retain Nock's precision at all layers.
 
 "Standards" is a broad category.  The specific use case for Watt
 is the relatively new problem of dissemination or
-"content-centric" networking protocols \citep{namedcontent}.  A DN protocol is one
+"content-centric" networking protocols \citep{namedcontent}.  
+A DN protocol is one
 whose semantics discard routing information, such as source IP.
 Hence, data must identify and authenticate itself.
 
@@ -248,50 +246,31 @@ alternate timeline.
 Beyond these cosmetics, however, Urth code is nothing like Earth
 code.  Watt is \emph{not in any known language family}.  Its syntax is
 just as alien as its semantics.  Even the indentation is insane.
+0 is true, and 1 is false.  Anything you recognize is likely to
+be a fundamental feature of the universe.
 
-Here is the aliens' tale: Nock, Watt and Urbit are the global
-computing infrastructure of Urth, and have been for over 10
-million years.  Urth once had a heterogeneous, ad-hoc computing
-infrastructure, like ours.  It sucked.  They threw it out.  Then
-they adopted Nock and Watt, and conquered seventeen galaxies.
-And ate them.  Now they're here for ours.
+Does Earth need alien programming?  Does it need to throw away
+all its code, and replace it with Urth's?  Possibly.  But not
+right away.  Certainly, there is no "flag day" - Earth
+programmers are used to gluing together multiple paradigms.
+Consider the number of visions of programming in the components
+that comprise an ordinary LAMP Web server.
 
-But unfortunately, the files found microprinted on the author's
-surgically-shaved chest contain not Urth's final, absolute-zero,
-galaxy-conquering Nock and Watt, but ancient development
-releases.  Which may not even work at all.  Nor is Urbit
-mentioned.  Perhaps the Urthlings want us to finish the project
-ourselves.  They may even have introduced subtle, devilish bugs.
-After all, they're here to eat us.
+One benefit of the Maxwellian paradigm is that it enforces a
+strict hierarchical relationship between Earth code and Urth
+code: Earth always calls Urth, Urth never calls Earth.  Because
+Urth semantics are rigorously defined, there is no place for
+ad-hoc extensions.  Watt cannot call out to native libraries.
+Rather, native applications which want to execute rigorously
+defined functions must call Watt, which therefore functions as a
+scripting, extension or query language - a common niche.
 
-So again, why?  Why should Earthlings turn to Urth software?
-Being alien, it is compatible with nothing.  On Urth, 0 is true
-and 1 is false.  For such a small system, Watt's learning curve
-is appalling.  And is there a flag day, when we all move to Urth?
-
-There is not.  If Earth software shines in one department, that
-department is glue.  From the perspective of Urth software, all
-Earth software is either (a) external legacy code or (b) hidden
-implementation details.  From the perspective of Earth software,
-Urth software is just another incompatible module to glue in.
-
-When the two are mixed, Earth code always delegates to Urth code;
-the reverse is not possible.  Extended Nock is buggy Nock.  This 
-strict "call me, I can't call you" policy should make Watt and
-Nock an excellent scripting, extension or specification language
-for classical imperative applications - a model which might well
-be the only realistic application of functional programming.
-(Certainly, no functional language can be a better C than C.)
-
-And if nothing else, Nock and Watt are fun toys and learning
-tools.  Church-Turing equivalence tells us that there are
-infinitely many axiomatic models of computing.  Many such
-esoteric automata have been designed - some (such as SK
-combinators) much smaller than Nock.  But practical ones are
-fewer.  Even if Watt is not the alien technology it purports to
-be (a fratboy prank cannot be ruled out), it may be a step toward
-the "hundred-year language" suggested by Graham
-\citep{graham100yr}.
+The concept of a functional application is not meaningful.  Unlike Haskell,
+with its logically external but closely-coupled I/O interpreter, Watt does not
+fight this point.  We could imagine an Earth application that specified
+most of its functionality in Watt - for instance, a browser might so specify
+its HTML renderer.  It would still be a C++ program, however.  So Urth
+infiltrates, but never attacks.
 
 \section{Nock}
 
@@ -398,7 +377,7 @@ furiously with the problem of generic data.
 
 \subsection{Operators}
 
-Nock is specified as a set of reduction rules.  Matches try to
+Nock is specified as a set of noun reduction rules.  Matches try to
 fit a dynamic noun to a static template.  Non-matches fall
 through to the bottom and resolve to themselves - meaning that
 the interpreter does not terminate.  Nock is "crash-only"
@@ -408,9 +387,9 @@ its only failure mode is termination.
 In this pseudocode (which must not be mistaken for Watt), we see five built-in operations, with prefix syntax, in the
 Nock spec.  These are \verb|?|, \verb|^|, \verb|=|, \verb|/|,
 and \verb|*|.  They correspond to
-partial pure functions on nouns.  With typical arrogant brevity,
-the Urthlings have defined these operators by reduction, but
-neglected to name or describe them otherwise.
+partial pure functions on nouns.  The Urthlings have defined
+these operators by reduction, but neglected to name or describe
+them otherwise.
 
 However, borrowing some names from Watt, we can say either
 "ask," "hat", "ben", "sol" and "ras" (to name by Watt syntax),
@@ -468,8 +447,8 @@ In Lisp terms, Nock has "eval" but not "apply."
 
 The expanded set, \verb|6| to \verb|12|, is more recondite but less
 interesting.  Observe that expanded instructions are basically
-built-in macros.  Unlike most macro systems, though, these are
-meant only for mechanical performance, not human usability.  They
+built-in macros.  At the Nock level, though, macros are
+useful only for mechanical performance, not human usability.  They
 could be elided, but Nock is simple enough to afford some slack.
 
 Briefly, \verb|6| is if-then-else; \verb|7| is function
@@ -497,7 +476,7 @@ which is conventionally a triple of the form
 \end{verbatim}
 sometimes shortened to
 \begin{verbatim}
-    [[sam con] [bat]]
+    [[sam con] bat]
 \end{verbatim}
 The battery is a bush of formulas, addressed by fragment.  The
 sample and context are the argument and the environment.  If this
@@ -596,9 +575,7 @@ been done in this area.
 Finally, since Nock is referentially transparent, memoization
 (result caching) hints are also straightforward.  Indeed, Watt's
 type-inference algorithm would be quite intractable without
-memoization.  (And is questionable even \emph{with} it - and
-that's in pure C code.  Indeed, Nock remains so slow that most of
-the Watt kernel has not been jet-matched at all.)
+memoization.  
 
 \section{Watt}
 
@@ -629,7 +606,7 @@ compiles an ordinary end-user program, this program must be able
 to reuse the kernel's standard library, type and all.  If this
 sounds tricky, it is.)
 
-Watt 298K, 2988 lines of code, is divided into tiers, 1 through
+Watt 297K, 3004 lines of code, is divided into tiers, 1 through
 6.  Tier 1, basic arithmetic, about 100 loc.  Tier 2, basic
 containers, 200 loc.  Tier 3, miscellaneous noun surgery, 300
 loc.  Tier 4, associative containers, 150 loc.  Tier 5, monadic 
@@ -638,7 +615,7 @@ parsing, 300 loc.  Tier 6, Watt in Watt, 2000 loc.
 (Bear in mind: the whole kernel gzips to under 16K.  This
 suggests that Watt source is a heavy newline consumer, which it
 is.  It also suggests that the kernel is entirely uncommented.
-Which it is.  (Specifying code should never contain comments.))
+Which it is.  (Reference code should never contain comments.))
 
 Because Tier 6 contains a code generator, a type inference
 engine, and a top-down combinator grammar, it is and must be
@@ -889,7 +866,7 @@ Without soft cores, Watt could not infer naturally polymorphic
 types, such as typed lists.  Without hard cores, it would
 constantly crash and burn due to infinite garbage type.
 
-Watt 298 does not have a gene for inheritance, but soft
+Watt 297 does not have a gene for inheritance, but soft
 polymorphism should make this future upgrade straightforward.  In
 inheritance with method replacement, subclasses are not subtypes,
 because changing the formula changes the set of nouns.  Thus, all
@@ -934,22 +911,25 @@ one-syllable Urth name, matching a Watt gene stem.
 \begin{center}
 \makebox[\textwidth]{\hrulefill}
 \begin{verbatim}
-bung  %+  mitpod      lome  |=  barben      sunt  |:  bardig
-chan  ?&  askamp      lonk  |~  barsig      tang  =-  bennub
-claf  =<  bender      lort  ?.  askdot      tash  |%  barmit
-dorn  ?|  askbar      mack  %=  mitben      teck  %*  mitras
-dust  .?  dotask      marg  ?<  askder      tung  %^  mithat
-feng  ?~  asksig      mast  ;-  lomnub      trex  :+  digpod
-fist  ;+  lompod      moze  ?*  askras      trol  ?:  askdig
-flac  =>  benred      mung  %:  mitdig      twix  :-  dignub
-frit  %_  mitcab      pank  |*  barras      vamp  |-  barnub
-fron  |@  barpat      plin  ?=  askben      vern  ?!  askhop
-fung  %-  mitnub      prex  :*  digras      vint  .^  dothat
-gant  =+  benpod      quax  :^  dighat      zalt  |:  hopdig
-gath  %~  mitsig      rond  |?  barask      zike  !!  hopven
-gnum  %.  mitdot      sail  .*  dotras      zole  !`  hoptic
-gram  ?>  askred      sing  .=  dotben      zush  !#  hopdax
-grel  ?-  asknub      slax  :~  digsig    
+!!  "hopven"  %zike      :+  "digpod"  %trex      ?|  "askbar"  %dorn
+!#  "hopdax"  %zush      :-  "dignub"  %twix      ?~  "asksig"  %fent
+!%  "hopmit"  %zoot      :^  "dighat"  %quax      ^$  "hatbuc"  %germ
+!:  "hopdig"  %zalt      :~  "digsig"  %slax      ^%  "hatmit"  %velt
+!`  "hoptic"  %zole      ;+  "lompod"  %fist      ^*  "hatras"  %mave
+%*  "mitras"  %teck      ;-  "lomnub"  %mast      ^+  "hatdig"  %pock
+%+  "mitpod"  %bung      =+  "benpod"  %gant      ^-  "hatnub"  %cast
+%-  "mitnub"  %fung      =-  "bennub"  %tang      ^:  "hatpod"  %stil
+%.  "mitdot"  %gnum      =<  "bender"  %claf      ^=  "hatben"  %bran
+%:  "mitdig"  %mung      =>  "benred"  %flac      ^?  "hatask"  %hint
+%=  "mitben"  %mack      ?!  "askhop"  %vern      ^@  "hatpat"  %grit
+%^  "mithat"  %tung      ?&  "askamp"  %chan      ^~  "hatsig"  %wost
+%_  "mitcab"  %frit      ?*  "askras"  %moze      |%  "barmit"  %tash
+%~  "mitsig"  %gath      ?-  "asknub"  %grel      |*  "barras"  %pank
+.*  "dotras"  %sail      ?.  "askdot"  %lort      |-  "barnub"  %vamp
+.=  "dotben"  %sing      ?:  "askdig"  %trol      |:  "bardig"  %sunt
+.?  "dotask"  %dust      ?<  "askder"  %marg      |=  "barben"  %lome
+.^  "dothat"  %vint      ?=  "askben"  %plin      |?  "barask"  %rond
+:*  "digras"  %prex      ?>  "askred"  %gram      |~  "barsig"  %lonk
 \end{verbatim}
 \end{center}
 \caption{Urth digraphs}
@@ -1005,10 +985,19 @@ large decoration marks.
 
 \section{Status}
 
-Watt is nowhere near ready for any kind of production use.  It
-has all the flaws of an early-release language: slowness, poor
+An alpha release of Watt, continually updated, is available at 
+\verb|github:cgyarvin/urbit|.  It has 
+has all the flaws of an alpha-release language: slowness, poor
 debugging support, no test coverage, slowness, unstable syntax,
-unstable semantics, no UI, missing features, and slowness.
+unstable semantics, poor UI, missing features, and slowness.
+(Alpha performance, optimized strictly by need, is not even a 
+relative guide to product performance.)
+
+In particular, the core of the type system is largely unverified -
+the C jets compile the Watt code, but does that code compile itself? 
+Pending more thorough testing, the answer must be: "probably not."
+Thus kernel 297 is unlikely to be correct - the Watt definition is
+no more than a spec.
 
 Watt, which was developed without official or commercial support,
 is unpatented and in the public domain.  In fact, a good case can
