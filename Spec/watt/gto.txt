@@ -62,9 +62,9 @@ Gene - AST
     [%mast p=*gene]                             ::  ;-  lomnub
   ::
     [%bung p=*gene q=*gene r=*gene]             ::  %+  mitpod
-    [%frit p=*gene q=*gene]                     ::  %_  mitcab
     [%fung p=*gene q=*bank]                     ::  %-  mitnub  
-    [%gath p=*rope q=*gene r=*rack]             ::  %~  mitsig
+    [%hang p=*rope q=*gene r=*gene]             ::  %~  mitsig
+    [%gath p=*rope q=*gene r=*rack]             ::  %|  mitbar
     [%gnum p=*gene q=*gene]                     ::  %.  mitdot
     [%mack p=*rope q=*rack]                     ::  %=  mitben
     [%mung p=*gene q=*gene]                     ::  %:  mitdig

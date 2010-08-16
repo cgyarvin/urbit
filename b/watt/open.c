@@ -416,6 +416,20 @@ _open_do_p(bean)
     }
   }
 
+  _open_do_pqr(hang)
+  {
+    u4_lane lan = p->lan;
+
+    return u4_kq
+      (lan, u4_atom_gath,
+            p_gen,
+            q_gen,
+            u4_kl(lan,
+                  u4_kc(lan,
+                        u4_kc(lan, u4_atom_frag, u4_axis_4),
+                        r_gen)));
+  }
+
   _open_do_pq(mung)
   {
     u4_lane lan = p->lan;
@@ -882,6 +896,7 @@ _open_do_pq(yell)
       _open_pq  (marg);
       _open_p   (vern);
       _open_p   (frag);
+      _open_pqr (hang);
       _open_p   (fist);
       _open_pq  (lome);
       _open_pq  (gnum);

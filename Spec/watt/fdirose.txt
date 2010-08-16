@@ -10,8 +10,8 @@
 %:  "mitdig"  %mung
 %=  "mitben"  %mack
 %^  "mithat"  %tung
-%_  "mitcab"  %frit
-%~  "mitsig"  %gath
+%~  "mitsig"  %hang
+%|  "mitbar"  %gath
 .*  "dotras"  %sail
 .=  "dotben"  %sing
 .?  "dotask"  %dust
@@ -55,3 +55,4 @@
 |=  "barben"  %lome
 |?  "barask"  %rond
 |~  "barsig"  %lonk
+

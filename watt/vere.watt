@@ -16,7 +16,7 @@
     =+  cox=*rock
     |=
     ^-  *goal
-    (done %.(`tube`[tube_(rip 3 cox)] |~(plug bonk skin lewl)))
+    (done %.(`tube`~(. tube (rip 3 cox)) |~(plug bonk skin lewl)))
   ::::
   ::          glem: apply well, producing soul
       glem
@@ -29,19 +29,19 @@
       $(wol q.wol, sul $(wol p.wol))
     ::
         [%foam *]
-      =+  vid=(%~(mill rose sut p.sul) p.wol)
+      =+  vid=(~(mill rose p.sul) p.wol)
       [p.vid .*(q.sul q.vid)]
     ::
         [%kick *]
       =+  pug=$(wol p.wol)
       =+  hor=$(wol q.wol)
-      :-  (%~(shop rose sut [%cell p.pug p.hor]) [%mung [%frag 2] [%frag 3]])
+      :-  (~(shop rose [%cell p.pug p.hor]) [%mung [%frag 2] [%frag 3]])
       .*([[q.hor ->.q.pug] +.q.pug] +.q.pug)
     ::
         [%sell *]
       =+  pug=$(wol p.wol)
       =+  hor=$(wol q.wol)
-      ?>  (%~(show rose sut [%cell p.pug p.hor]) [%cast [%frag 2] [%frag 3]])
+      ?>  (~(show rose [%cell p.pug p.hor]) [%cast [%frag 2] [%frag 3]])
       [p.pug q.hor]
     ::
         [%tule *]
@@ -79,7 +79,7 @@
     form  term
     goal  &[p=*knob q=*sink r=*well]
     soul  &[p=*type q=*]
-    unix  &[p=*<%root %curd> q=*(list rock)]
+    unox  &[p=*<%root %curd> q=*(list rock)]
 ::::
 ::        knob: execution option
     knob
@@ -95,7 +95,7 @@
     [%crud p=*soul]               ::  print soul, crude
     [%nice p=*soul]               ::  print soul, fancy
     [%kind p=*soul]               ::  print soul, type only
-    [%save p=*form q=*unix r=*]   ::  write to file by format
+    [%save p=*form q=*unox r=*]   ::  write to file by format
     [%puke p=*form q=*]           ::  write to screen by format
   ==
 ::::
@@ -108,15 +108,15 @@
     %load                         ::  load as environment
     [%pose p=*term]               ::  add as variable
     [%rite p=*term]               ::  modify variable
-    [%dump p=*form q=*unix]       ::  output to file by format
+    [%dump p=*form q=*unox]       ::  output to file by format
   ==
 ::::
 ::        well: computation spec
     well
   |?
-    [%code p=*unix]               ::  unix code
+    [%code p=*unox]               ::  unox code
     [%butt p=*well q=*well]       ::  flac
-    [%data p=*form q=*unix]       ::  unix data with extension
+    [%data p=*form q=*unox]       ::  unox data with extension
     [%foam p=*gene]               ::  gene to be run in environment
     [%kick p=*well q=*well]       ::  mung
     [%sell p=*well q=*well]       ::  cast
@@ -143,11 +143,11 @@
     (free ~)
   ==
 ::::
-::          nuxi: scan unix path
-    nuxi
+::          nuxo: scan unox path
+    nuxo
   =+  doc=tube
   |=
-  ^-  *(edge unix)
+  ^-  *(edge unox)
   %.  doc
   |~  plug 
     |~(pose (cold %root sol) (free %curd))
@@ -169,7 +169,7 @@
       (cold %kind ask)
       (stag %pose |~(pfix pod sym))
       (stag %rite |~(pfix ben sym))
-      (stag %dump |~(pfix pat |~((glue dig) sym nuxi)))
+      (stag %dump |~(pfix pat |~((glue dig) sym nuxo)))
     ==
   ::
     (free %crud)
@@ -182,11 +182,31 @@
   ^-  *(edge well)
   %.  doc
   |~  pose
-    (stag %code |~(pfix sig nuxi))
-    (stag %data |~(pfix der |~((glue dig) sym nuxi)))
+    |~(pfix dig thap)
+    (stag %code |~(pfix sig nuxo))
+    (stag %data |~(pfix der |~((glue dig) sym nuxo)))
     (stag %tule (ifix [nom mon] (most gap lewl)))
     (stag %foam scry)
   ==
+::::
+::          thap: scan construct
+    thap
+  =+  doc=tube
+  |=
+  ^-  *(edge well)
+  %.  doc
+  %+  cook
+    =+  fos=*(list unox)
+    |=  
+    =>  |*
+          pox   =+([a=*term b=*unox] |=(?-(p.b %root b, %curd [p.b a q.b])))
+        ==
+    |-  ^-  *well
+    ?-  fos
+      [* ~]   [%code (pox %bin i.fos)]
+      ^       [%butt [%code (pox %lib i.fos)] $(fos t.fos)]
+    == 
+  (most dig nuxo)
 ::::
 ::          lewl: scan well
     lewl

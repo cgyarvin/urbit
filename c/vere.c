@@ -664,7 +664,7 @@ vere_boot(int siz)
   */
   {
     v->z = u3_z_new(siz);
-    _vere_kernel(v, "watt/297.watt", "watt/297.nock");
+    _vere_kernel(v, "watt/296.watt", "watt/296.nock");
   }
 
   /*  Create the kernel soul.
@@ -685,7 +685,7 @@ vere_boot(int siz)
     v->g.rad = _vere_load_c(v, "read:plow:!%");
 
     v->g.mel = _vere_load_c(v, 
-      "=>(!% =+([p=*type:plow q=*gene:plow] |=((%~(mill rose:plow sut p) q))))"
+      "=>(!% =+([p=*type:plow q=*gene:plow] |=((~(mill rose:plow p) q))))"
     );
   }
 

@@ -1,22 +1,22 @@
-!! "hopven" %zike    :+ "digpod" %trex    ?| "askbar" %dorn
-!# "hopdax" %zush    :- "dignub" %twix    ?~ "asksig" %fent
-!% "hopmit" %zoot    :^ "dighat" %quax    ^$ "hatbuc" %germ
-!: "hopdig" %zalt    :~ "digsig" %slax    ^% "hatmit" %velt
-!` "hoptic" %zole    ;+ "lompod" %fist    ^* "hatras" %mave
-%* "mitras" %teck    ;- "lomnub" %mast    ^+ "hatdig" %pock
-%+ "mitpod" %bung    =+ "benpod" %gant    ^- "hatnub" %cast
-%- "mitnub" %fung    =- "bennub" %tang    ^: "hatpod" %stil
-%. "mitdot" %gnum    =< "bender" %claf    ^= "hatben" %bran
-%: "mitdig" %mung    => "benred" %flac    ^? "hatask" %hint
-%= "mitben" %mack    ?! "askhop" %vern    ^@ "hatpat" %grit
-%^ "mithat" %tung    ?& "askamp" %chan    ^~ "hatsig" %wost
-%_ "mitcab" %frit    ?* "askras" %moze    |% "barmit" %tash
-%~ "mitsig" %gath    ?- "asknub" %grel    |* "barras" %pank
-.* "dotras" %sail    ?. "askdot" %lort    |- "barnub" %vamp
-.= "dotben" %sing    ?: "askdig" %trol    |: "bardig" %sunt
-.? "dotask" %dust    ?< "askder" %marg    |= "barben" %lome
-.^ "dothat" %vint    ?= "askben" %plin    |? "barask" %rond
-:* "digras" %prex    ?> "askred" %gram    |~ "barsig" %lonk
+!!  "hopven"  %zike      :+  "digpod"  %trex      ?|  "askbar"  %dorn
+!#  "hopdax"  %zush      :-  "dignub"  %twix      ?~  "asksig"  %fent
+!%  "hopmit"  %zoot      :^  "dighat"  %quax      ^$  "hatbuc"  %germ
+!:  "hopdig"  %zalt      :~  "digsig"  %slax      ^%  "hatmit"  %velt
+!`  "hoptic"  %zole      ;+  "lompod"  %fist      ^*  "hatras"  %mave
+%*  "mitras"  %teck      ;-  "lomnub"  %mast      ^+  "hatdig"  %pock
+%+  "mitpod"  %bung      =+  "benpod"  %gant      ^-  "hatnub"  %cast
+%-  "mitnub"  %fung      =-  "bennub"  %tang      ^:  "hatpod"  %stil
+%.  "mitdot"  %gnum      =<  "bender"  %claf      ^=  "hatben"  %bran
+%:  "mitdig"  %mung      =>  "benred"  %flac      ^?  "hatask"  %hint
+%=  "mitben"  %mack      ?!  "askhop"  %vern      ^@  "hatpat"  %grit
+%^  "mithat"  %tung      ?&  "askamp"  %chan      ^~  "hatsig"  %wost
+%|  "mitbar"  %gath      ?*  "askras"  %moze      |%  "barmit"  %tash
+%~  "mitsig"  %hang      ?-  "asknub"  %grel      |*  "barras"  %pank
+.*  "dotras"  %sail      ?.  "askdot"  %lort      |-  "barnub"  %vamp
+.=  "dotben"  %sing      ?:  "askdig"  %trol      |:  "bardig"  %sunt
+.?  "dotask"  %dust      ?<  "askder"  %marg      |=  "barben"  %lome
+.^  "dothat"  %vint      ?=  "askben"  %plin      |?  "barask"  %rond
+:*  "digras"  %prex      ?>  "askred"  %gram      |~  "barsig"  %lonk
     
 amp   &       der   <       nub   -     tic   `
 ask   ?       dot   .       pat   @     tep   "
