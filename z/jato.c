@@ -37,10 +37,10 @@ _zj_add(u3_z     z,
   }
   if ( 0 == def->mug ) {
     def->mug = u3_lm_mug(z, bat);
-    fprintf(stderr, "mug: %s: %x\n", def->nam, def->mug);
+    fprintf(stderr, "jet: %s: %x\n", def->nam, def->mug);
   } else {
     if ( def->mug != u3_lm_mug(z, bat) ) {
-      fprintf(stderr, "mug: mismatch: %s, %x, %x\n", 
+      fprintf(stderr, "jet: mismatch: %s, %x, %x\n", 
           def->nam, def->mug, u3_lm_mug(z, bat));
       return;
     }

@@ -17,6 +17,7 @@
     |=
     ^-  *goal
     (done %.(`tube`~(. tube (rip 3 cox)) |~(plug bonk skin lewl)))
+
   ::::
   ::          glem: apply well, producing soul
       glem
@@ -24,9 +25,6 @@
     |=
     ^-  *soul
     ?-  wol
-    ::
-        [%butt *]
-      $(wol q.wol, sul $(wol p.wol))
     ::
         [%foam *]
       =+  vid=(~(mill rose p.sul) p.wol)
@@ -57,7 +55,13 @@
       ==
     ::
         [%wood *]
-      $(wol [%foam p.wol], sul seed)
+      =+  von=seed
+      |-
+      ?~  p.wol
+        von
+      ?>  ?=(%gen -.i.p.wol)
+      =+  vid=(~(mill rose p.von) +.i.p.wol)
+      $(von [p.vid .*(q.von q.vid)], p.wol t.p.wol)
     ==
   ::::
   ::          blor: apply sink and soul, producing core and merds
@@ -79,7 +83,7 @@
     form  term
     goal  &[p=*knob q=*sink r=*well]
     soul  &[p=*type q=*]
-    unox  &[p=*<%root %curd> q=*(list rock)]
+    unox  &[p=*<%root %curd %ulib %ubin> q=*(list rock)]
 ::::
 ::        knob: execution option
     knob
@@ -88,6 +92,10 @@
     %dbug                         ::  debug
     [%slow p=@]                   ::  set optimization threshold
   ==
+::::
+::        gulp: code source
+    gulp
+  <[%gen *gene] [%sys *unox]>
 ::::
 ::
     merd
@@ -108,20 +116,19 @@
     %load                         ::  load as environment
     [%pose p=*term]               ::  add as variable
     [%rite p=*term]               ::  modify variable
-    [%dump p=*form q=*unox]       ::  output to file by format
+    [%dump p=*form q=*unox]       ::  write to file by format
   ==
 ::::
 ::        well: computation spec
     well
   |?
-    [%code p=*unox]               ::  unox code
-    [%butt p=*well q=*well]       ::  flac
-    [%data p=*form q=*unox]       ::  unox data with extension
-    [%foam p=*gene]               ::  gene to be run in environment
-    [%kick p=*well q=*well]       ::  mung
-    [%sell p=*well q=*well]       ::  cast
-    [%tule p=*(list well)]        ::  cage
-    [%wood p=*gene]               ::  gene to be run in std ctx
+    [%data p=*form q=*unox]           ::  extrinsic file, with format
+    [%foam p=*gene]                   ::  gear against environment
+    [%honk p=*gene q=*well]           ::  %flac
+    [%kick p=*well q=*well]           ::  %mung
+    [%sell p=*well q=*well]           ::  %cast
+    [%tule p=*(list well)]            ::  %prex
+    [%wood p=*(list gulp)]            ::  gear against kernel
   ==
 ::
 ::::  Scanners
@@ -182,31 +189,47 @@
   ^-  *(edge well)
   %.  doc
   |~  pose
-    |~(pfix dig thap)
-    (stag %code |~(pfix sig nuxo))
+    |~(pfix dig grap)
     (stag %data |~(pfix der |~((glue dig) sym nuxo)))
     (stag %tule (ifix [nom mon] (most gap lewl)))
     (stag %foam scry)
+    (stag %sell |~(plug (ifix [tic tic] clew) lewl))
   ==
 ::::
-::          thap: scan construct
-    thap
+::          grap: scan wood
+    grap
+  %+  cook
+    =+(*(list gulp) |=([%wood -<]))
   =+  doc=tube
   |=
-  ^-  *(edge well)
-  %.  doc
-  %+  cook
-    =+  fos=*(list unox)
-    |=  
-    =>  |*
-          pox   =+([a=*term b=*unox] |=(?-(p.b %root b, %curd [p.b a q.b])))
+  ^-  *(edge (list gulp))
+  =+  vad=%.(doc (most sol |~(pose nix quo)))
+  ?-  -.vad
+      |   vad
+      &
+    =+  goz=%.(q.vad dig)
+    ?-  -.goz
+        |   [& [[%sys %ubin p.vad] ~] q.vad]
+        &
+      =+  lem=%.(q.goz dig)
+      ?-  -.lem
+      ::
+          |
+        =+  paq=$(doc q.goz)
+        ?-  -.paq
+          |   [& [[%sys %ulib p.vad] ~] q.goz]
+          &   [& [[%sys %ulib p.vad] p.paq] q.paq]
         ==
-    |-  ^-  *well
-    ?-  fos
-      [* ~]   [%code (pox %bin i.fos)]
-      ^       [%butt [%code (pox %lib i.fos)] $(fos t.fos)]
-    == 
-  (most dig nuxo)
+      ::
+          &
+        =+  vin=%.(q.lem scry)
+        ?-  -.vin
+          |   vin
+          &   [& [[%sys %ulib p.vad] [%gen p.vin] ~] q.vin]
+        ==
+      ==
+    ==
+  ==
 ::::
 ::          lewl: scan well
     lewl
@@ -220,14 +243,13 @@
       ?~  b
         a
       ?-  -.b
-        %butt   [%butt a +.b]
         %kick   [%kick a +.b]
         %sell   [%sell a +.b]
       ==
     clew
     |~  pose
       |~  plug
-        |~(pose (cold %butt buc) (cold %sell ask) (cold %kick hat))
+        |~(pose (cold %sell ask) (cold %kick gap))
         lewl
       ==
       (free ~)

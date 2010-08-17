@@ -1,0 +1,96 @@
+|*
+::::
+::
+    bolt
+  |?
+    ^+(@ *rock)
+    [%bunk p=~]
+    [%cask p=*rock]
+    [%meld p=*(list bolt)]
+    [%nest p=[p=*tape q=*tape] q=*(list bolt)]
+    [%tape p=*tape]
+  ==
+::::
+::
+    club
+  =+  pup=*bolt
+  |*
+  ::::
+  ::      wit: width of
+      wit
+    ^-  @
+    ?-  pup
+        @           (met 3 pup)
+        [%bunk *]   0
+        [%cask *]   (met 3 p.pup)
+        [%meld *]   (roll p.pup =+([*bolt @] |=((add -<+ $.-.$(pup -<-)))))
+        [%tape *]   (lent p.pup)
+    ::
+        [%nest *]
+      %+  add
+        (add (lent p.p.pup) (lent q.p.pup))
+      |-  ^-  @
+      ?-  
+      %+  roll
+        q.pup
+      =+  [*bolt @]
+      |=((add ?~(-<+ 0 1) (add -<+ $.-.$(pup -<-))))
+    == 
+  ::::
+  ::        ram: print wide
+      ram
+    ^-  *tape
+    ?-  pup 
+    ::
+        @           (rip 3 pup)
+        [%bunk *]   ~
+        [%cask *]   (rip 3 p.pup)
+        [%meld *]   (reel p.pup =+([*bolt *tape] |=((weld $.-.$(pup -<-) -<+))))
+        [%tape *]   p.pup 
+    ::
+        [%nest *]
+      %+  weld
+        p.p.pup
+      %+  reel
+        q.pup
+      =+  [*bolt [& q.p.pup]]
+      |=
+      =+  hoq=$.-.$(pup -<-)
+      [| (weld hoq ?:(-<+< -<+ (weld {' '} -<+)))]
+    ==
+::::
+::        ind: indent tape
+    ind
+  =+  [col=@ tep=*tape]
+  |=
+  ^-  *tape
+  ?~  col
+    tep
+  $(col (dec col), tep [' ' tep])
+::::
+::        fly: full print
+    fly
+  =+  col=`@`1
+  =+  [bor=@ pup=*bolt]
+  |=
+  ^-  *wall
+  ?:  (lte (add col (wit pup)) bor)
+    {(ram pup)}
+  ?-  -.pup
+  ::
+      %bunk   ~
+      %cask   {(ram pup)}
+      %meld   {(ram pup)}
+      %tape   {(ram pup)}
+  ::
+      %nest
+    :-  {(ind col p.p.pup)}
+    %+  roll
+      q.pup
+    =+  [*bolt {(ind col q.p.pup)}]
+    |=
+    (weld $.-.$(col (add 2 col), pup -<-) -<+)
+  ==
+::
+::::
+==

@@ -763,21 +763,29 @@ _vere_path_out_a(struct vere_state*   v,
 /*  _vere_path_out(): measure and/or cat a path with form.
 */
 static c3_w
-_vere_path_out(struct vere_state*   v,
-               c3_c*                pah_c,
-               u3_fox               fom,
-               u3_fox               pah)
+_vere_path_out(struct vere_state* v,
+               c3_c*              pah_c,
+               u3_fox             fom,
+               u3_fox             pah)
 {
-  if ( c3__root == _vere_h(v, pah) ) {
-    if ( pah_c ) {
-      *pah_c++ = '/';
-    }
-    return 1 + _vere_path_out_a(v, pah_c, fom, _vere_t(v, pah));
+  const c3_c* rut;
+  c3_w        len_w = 0;
+
+  switch ( _vere_h(v, pah) ) {
+    case c3__root:  rut = "/"; break;
+    case c3__curd:  rut = ""; break;
+    case c3__kern:  rut = "watt/"; break;
+    case c3__ulib:  rut = "watt/lib/"; break;
+    case c3__ubin:  rut = "watt/bin/"; break;
+    default:        return _vere_x_fail(v);
   }
-  else if ( c3__curd == _vere_h(v, pah) ) {
-    return _vere_path_out_a(v, pah_c, fom, _vere_t(v, pah));
+  len_w = strlen(rut);
+
+  if ( pah_c ) {
+    strcpy(pah_c, rut);
+    pah_c += len_w;
   }
-  else return _vere_x_fail(v);
+  return len_w + _vere_path_out_a(v, pah_c, fom, _vere_t(v, pah));
 }
 
 /*  _vere_path(): load by unix path with format.
@@ -827,7 +835,38 @@ _vere_well_a(struct vere_state*   v,
                        _vere_well_a(v, _vere_t(v, p_wol)));
   }
 }
-             
+
+/*  _vere_well_wood(): convert %wood.
+*/
+static u3_fox
+_vere_well_wood(struct vere_state* v,
+                u3_fox             p_wol)
+{
+  if ( 0 == p_wol ) {
+    return 0;
+  } else {
+    u3_fox ip_wol = _vere_h(v, p_wol);
+    u3_fox tp_wol = _vere_t(v, p_wol);
+    u3_fox pip_wol = _vere_h(v, ip_wol);
+    u3_fox qip_wol = _vere_t(v, ip_wol);
+
+    switch ( pip_wol ) {
+      case c3__sys: {
+        return _vere_nc
+          (v, _vere_nc(v, c3__gen, _vere_path_load(v, c3__watt, qip_wol)),
+              _vere_well_wood(v, tp_wol));
+      }
+      case c3__gen: {
+        return _vere_nc
+          (v, ip_wol, _vere_well_wood(v, tp_wol));
+      }
+      default: {
+        return _vere_x_fail(v);
+      }
+    }
+  }
+}
+
 /*  _vere_well(): adjust well with input.
 */
 static u3_fox
@@ -836,17 +875,10 @@ _vere_well(struct vere_state*   v,
 {
   u3_fox p_wol, q_wol;
 
-  if ( u3_yes == u3_lr_p(v->z, wol, c3__code, &p_wol) ) {
-    return _vere_nc(v, c3__wood, _vere_path_load(v, c3__watt, p_wol));
-  }
-  else if ( u3_yes == u3_lr_pq(v->z, wol, c3__data, &p_wol, &q_wol) ) {
+  if ( u3_yes == u3_lr_pq(v->z, wol, c3__data, &p_wol, &q_wol) ) {
     u3_fox dat = _vere_path_load(v, p_wol, q_wol);
 
     return _vere_nc(v, c3__bone, dat);
-  }
-  else if ( u3_yes == u3_lr_pq(v->z, wol, c3__butt, &p_wol, &q_wol) ) {
-    return _vere_nt
-      (v, c3__butt, _vere_well(v, p_wol), _vere_well(v, q_wol));
   }
   else if ( u3_yes == u3_lr_pq(v->z, wol, c3__kick, &p_wol, &q_wol) ) {
     return _vere_nt
@@ -859,6 +891,9 @@ _vere_well(struct vere_state*   v,
   else if ( u3_yes == u3_lr_p(v->z, wol, c3__tule, &p_wol) ) {
     return _vere_nc
       (v, c3__tule, _vere_well_a(v, p_wol));
+  }
+  else if ( u3_yes == u3_lr_p(v->z, wol, c3__wood, &p_wol) ) {
+    return _vere_nc(v, c3__wood, _vere_well_wood(v, p_wol));
   }
   else return wol;
 }
@@ -913,9 +948,10 @@ vere_line(void *vere, const c3_c *line)
       u3_fox wol = _vere_t(v, _vere_t(v, piq));
 
       // u3_b_print(v->z, "syn", syn);
-      // u3_b_print(v->z, "wol", wol);
+      // u3_b_print(v->z, "wola", wol);
       // 
       wol = _vere_well(v, wol);
+      // u3_b_print(v->z, "wolb", wol);
       {
         u3_fox mal = _vere_mung(v, fab, wol, 0);
         u3_fox tif = _vere_mung(v, hom, _vere_nc(v, syn, mal), 0);
