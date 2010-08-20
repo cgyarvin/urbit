@@ -11,13 +11,12 @@
   ::
   ::::  System interface
   ::::
-  ::          spar: parse
+  ::          spar: parse vent
       spar
     =+  cox=*rock
     |=
-    ^-  *goal
+    ^-  *vent
     (done %.(`tube`~(. tube (rip 3 cox)) |~(plug bonk skin lewl)))
-
   ::::
   ::          glem: apply well, producing soul
       glem
@@ -81,7 +80,7 @@
 ::::
 ::
     form  term
-    goal  &[p=*knob q=*sink r=*well]
+    vent  &[p=*knob q=*sink r=*well]
     soul  &[p=*type q=*]
     unox  &[p=*<%root %curd %ulib %ubin> q=*(list rock)]
 ::::
@@ -191,7 +190,7 @@
   |~  pose
     |~(pfix dig grap)
     (stag %data |~(pfix der |~((glue dig) sym nuxo)))
-    (stag %tule (ifix [nom mon] (most gap lewl)))
+    (stag %tule (ifix [nom mon] (most gap clew)))
     (stag %foam scry)
     (stag %sell |~(plug (ifix [tic tic] clew) lewl))
   ==

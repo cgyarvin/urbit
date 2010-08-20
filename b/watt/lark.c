@@ -166,32 +166,6 @@ _lark_cram(u4_plow p,
   else return _plow_fail(p, "cram crash");
 }
 
-/* dull:lark:rose:plow
-*/
-u4_tack
-_lark_dull(u4_plow p,
-           u4_type sut,
-           u4_tack tac)
-{
-  u4_lane lan = p->lan;
-  u4_noun p_tac, q_tac;
-
-  if ( u4_n_zero(tac) ) {
-    return tac;
-  } else if ( u4_b_p(tac, u4_atom_leaf, &p_tac) ) {
-    return u4_k_cell(lan, u4_atom_leaf, u4_atom_blur);
-  } else if ( u4_b_pq(tac, u4_atom_bran, &p_tac, &q_tac) ) {
-    return u4_k_trel(lan, u4_atom_bran, p_tac, _lark_dull(p, sut, q_tac));
-  } else if ( u4_b_pq(tac, u4_atom_pair, &p_tac, &q_tac) ) {
-    return u4_k_trel
-      (lan, 
-       u4_atom_pair,
-       _lark_dull(p, sut, p_tac),
-       _lark_dull(p, sut, q_tac));
-  }
-  else return u4_trip;
-}
-
 /* feed:lark:rose:plow
 */
 u4_tack

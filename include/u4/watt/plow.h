@@ -272,10 +272,6 @@
                u4_tack tac,
                u4_tack les);
     u4_tack
-    _lark_dull(u4_plow p,
-               u4_type sub,
-               u4_tack tac);
-    u4_tack
     _lark_feed(u4_plow p,
                u4_type sub,
                u4_tack tac,

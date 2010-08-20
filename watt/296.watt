@@ -496,7 +496,7 @@
       ?:  .=(d c)
         =+  f=(dis 0x7fffffff e)
         ?:  .=(0 f)
-          $.-.$(b .^(b))
+          $$(b .^(b))
         f
       $(d .^(d), e (chum (mix e (cut 5 [1 d] a))))
     ::::
@@ -1645,6 +1645,7 @@
       %+  most
         dot
       |~  pose
+        (stag %pane sym)
         %+  cook
           =+(* |:([%pane -<]))
         sym
@@ -1743,7 +1744,7 @@
       ::
           [%velt *]
         :+  %flac
-          [%mack ~ {[[%frag axe] [%fung $.-.$(gen q.gen) [%frag axe] ~]]}]
+          [%mack ~ {[[%frag axe] [%fung $$(gen q.gen) [%frag axe] ~]]}]
         $(gen p.gen)
       ::
           *
@@ -1773,7 +1774,7 @@
         [%teck *]   
       ?.  ?=([%rond *] p.gen)
         [%bean %blur]
-      gen(p.p (turn p.p.gen =+(*gene |=($.-.$(gen -<)))))
+      gen(p.p (turn p.p.gen =+(*gene |=($$(gen -<)))))
     ::
         *           
       =+  bog=(open gen)
@@ -2040,7 +2041,7 @@
             [%chan *] 
           %+  roll
             p.gen
-          =+([a=*gene b=*plot] |=((weld $.-.$(gen a) b)))
+          =+([a=*gene b=*plot] |=((weld $$(gen a) b)))
         ::
             *
           ~
@@ -2092,7 +2093,7 @@
       ::
           %mack
         =+  lar=(seek p.gen)
-        =+  rem=(turn q.gen =+([p=*gene q=*gene] |=([p $.-.$(gen q)])))
+        =+  rem=(turn q.gen =+([p=*gene q=*gene] |=([p $$(gen q)])))
         ?-  q.lar 
             ~   (boil(sut r.lar) p.lar rem)
             ^   [2 (boil(sut q.u.q.lar) p.lar rem) [0 (peg p.lar p.u.q.lar)]]
@@ -2225,7 +2226,7 @@
       :: 
           %mack 
         =+  lar=(seek p.gen)
-        =+  mut=(turn q.gen =+([p=*gene q=*gene] |=([p $.-.$(gen q)])))
+        =+  mut=(turn q.gen =+([p=*gene q=*gene] |=([p $$(gen q)])))
         ?~  q.lar
           (edit(sut r.lar) mut)
         [%hold (edit(sut q.u.q.lar) mut) r.u.q.lar]
@@ -2374,17 +2375,6 @@
         ==
       ::::
       ::
-          dull
-        |-
-        ^-  *tack
-        ?-  tac
-          ~   ~
-          [%leaf *] [%leaf %blur]
-          [%bran *] [%bran p.tac $(tac q.tac)]
-          [%pair *] [%pair $(tac p.tac) $(tac q.tac)]
-        ==
-      ::::
-      ::
           feed
         =+  mut=*plot
         |=
@@ -2406,7 +2396,7 @@
           =+  gur=(peek:iris p.i.rop)
           |-
           ?:  .=(1 p.i.rop)
-            $.-.$(sut %blur, rop ~)
+            $$(sut %blur, rop ~)
           ?:  .=(2 (cap p.i.rop))
             [%pair $(p.i.rop (mas p.i.rop)) ~]
           [%pair ~ $(p.i.rop (mas p.i.rop))]
@@ -2416,8 +2406,8 @@
           |-
           ?:  .=(1 p.lar)
             ?~  q.lar
-              [%bran p.i.rop $.-.$(sut r.lar, rop t.rop)]
-            $.-.$(sut r.lar, rop t.rop)
+              [%bran p.i.rop $$(sut r.lar, rop t.rop)]
+            $$(sut r.lar, rop t.rop)
           ?:  .=(2 (cap p.lar))
             [%pair $(p.lar (mas p.lar)) ~]
           [%pair ~ $(p.lar (mas p.lar))]
@@ -2508,7 +2498,7 @@
           ::
               [%fuse *]
             :+  %fuse
-              dext(sut p.sut, tac ~(dull lark tac))
+              dext(sut p.sut)
             dext(sut q.sut, bar [p.sut bar])
           ::
               [%hold *]
@@ -2557,7 +2547,7 @@
         ::
             [%fork *]
           %+  swim
-            =+(*type |=(`*(unit (unit plan))`[~ $.-.$(sut -<)]))
+            =+(*type |=(`*(unit (unit plan))`[~ $$(sut -<)]))
           =+  [lep=*(unit plan) gam=*(unit plan)]
           |=
           ?~  lep
@@ -2614,7 +2604,7 @@
         ::
             [%fork *]
           %+  swim
-            =+(*type |=(`*(unit tool)`[~ u=$.-.$(sut -<)]))
+            =+(*type |=(`*(unit tool)`[~ u=$$(sut -<)]))
           =+([*tool *tool] |=((flor:lily -<- -<+)))
         ::
             [%hold *]
@@ -2641,7 +2631,7 @@
         ::
             [%fork *]   
           %+  swim
-            =+(*type |=(`*(unit type)`[~ u=$.-.$(sut -<)]))
+            =+(*type |=(`*(unit type)`[~ u=$$(sut -<)]))
           =+([*type *type] |=([%fork -<]))
         ==
       ::::

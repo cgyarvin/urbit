@@ -188,7 +188,7 @@
       return _rose_both
         (p, 
          _iris_burn_dext(p, q_sut, u4_kc(lan, p_sut, bar), axe, vef, tac),
-         _iris_burn_dext(p, p_sut, bar, axe, vef, _lark_dull(p, sut, tac)));
+         _iris_burn_dext(p, p_sut, bar, axe, vef, tac));
     }
     else if ( u4_b_pq(sut, u4_atom_hold, &p_sut, &q_sut) ) {
       return _iris_burn_dext

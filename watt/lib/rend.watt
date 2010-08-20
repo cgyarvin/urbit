@@ -1,40 +1,36 @@
 |*
 ::::
 ::
-    bolt
+    ball
   |?
     ^+(@ *rock)
-    [%bunk p=~]
     [%cask p=*rock]
-    [%meld p=*(list bolt)]
-    [%nest p=[p=*tape q=*tape] q=*(list bolt)]
-    [%tape p=*tape]
+    [%duct p=*tape]
+    [%meld p=*(list ball)]
+    [%nest p=[p=*tape q=*tape] q=*(list ball)]
   ==
 ::::
 ::
     club
-  =+  pup=*bolt
+  =+  pup=*ball
   |*
   ::::
-  ::      wit: width of
+  ::      wit: width rammed
       wit
     ^-  @
     ?-  pup
         @           (met 3 pup)
-        [%bunk *]   0
         [%cask *]   (met 3 p.pup)
-        [%meld *]   (roll p.pup =+([*bolt @] |=((add -<+ $.-.$(pup -<-)))))
-        [%tape *]   (lent p.pup)
+        [%meld *]   (roll p.pup =+([*ball @] |=((add -<+ wit(pup -<-)))))
+        [%duct *]   (lent p.pup)
     ::
         [%nest *]
       %+  add
         (add (lent p.p.pup) (lent q.p.pup))
-      |-  ^-  @
-      ?-  
       %+  roll
         q.pup
-      =+  [*bolt @]
-      |=((add ?~(-<+ 0 1) (add -<+ $.-.$(pup -<-))))
+      =+  [*ball @]
+      |=((add ?~(-<+ 0 1) (add -<+ wit(pup -<-))))
     == 
   ::::
   ::        ram: print wide
@@ -43,53 +39,133 @@
     ?-  pup 
     ::
         @           (rip 3 pup)
-        [%bunk *]   ~
         [%cask *]   (rip 3 p.pup)
-        [%meld *]   (reel p.pup =+([*bolt *tape] |=((weld $.-.$(pup -<-) -<+))))
-        [%tape *]   p.pup 
+        [%meld *]   (reel p.pup =+([*ball *tape] |=((weld ram(pup -<-) -<+))))
+        [%duct *]   p.pup 
     ::
         [%nest *]
       %+  weld
         p.p.pup
-      %+  reel
-        q.pup
-      =+  [*bolt [& q.p.pup]]
-      |=
-      =+  hoq=$.-.$(pup -<-)
-      [| (weld hoq ?:(-<+< -<+ (weld {' '} -<+)))]
+      |-  ^-  *tape
+      ?-  q.pup
+        ~       q.p.pup
+        [* ~]   (weld ram(pup i.q.pup) q.p.pup)
+        ^       (weld ram(pup i.q.pup) `*tape`[' ' $(q.pup t.q.pup)])
+      ==
     ==
-::::
-::        ind: indent tape
-    ind
-  =+  [col=@ tep=*tape]
-  |=
-  ^-  *tape
-  ?~  col
-    tep
-  $(col (dec col), tep [' ' tep])
-::::
-::        fly: full print
-    fly
-  =+  col=`@`1
-  =+  [bor=@ pup=*bolt]
-  |=
-  ^-  *wall
-  ?:  (lte (add col (wit pup)) bor)
-    {(ram pup)}
-  ?-  -.pup
-  ::
-      %bunk   ~
-      %cask   {(ram pup)}
-      %meld   {(ram pup)}
-      %tape   {(ram pup)}
-  ::
-      %nest
-    :-  {(ind col p.p.pup)}
-    %+  roll
-      q.pup
-    =+  [*bolt {(ind col q.p.pup)}]
+  ::::
+  ::        fly: print tall
+      fly
+    =+  bor=@
     |=
-    (weld $.-.$(col (add 2 col), pup -<-) -<+)
+    ^-  *wall
+    =+  col=@
+    =>  |*
+        ::::
+        ::        ind: indent tape
+            ind
+          =+  tep=*tape
+          |=
+          ^-  *tape
+          ?~  col
+            tep
+          $(col (dec col), tep [' ' tep])
+        ==
+    ::::
+    =+  lux=*wall
+    |-  ^-  *wall
+    ?.  ?&(?=([%nest *] pup) (gte (add col wit) bor))
+      [(ind ram) lux]
+    :-  (ind p.p.pup)
+    |-  ^-  *wall
+    ?~  q.pup
+      [(ind q.p.pup) lux]
+    %=  $.-.$
+      pup   i.q.pup
+      lux   $(q.pup t.q.pup)
+      col   ?:((gte col (mul 2 (div bor 3))) 0 (add 2 col))
+    ==
+  ::
+  ::::
+  ==
+::::
+::
+    golf
+  =+  nut=*
+  ::          XX - this should be |% - safe.iris should be lazier
+  |*
+  ::::
+  ::
+      dem
+    (num 10 =+(@ |=((add '0' -<))))
+  ::::
+  ::
+      gut
+    |-  ^-  *ball
+    ?-  nut
+        @   unt
+        ^
+      :+  %nest
+        [['[' ~] [']' ~]]
+      |-  ^-  *(list ball)
+      ?-  nut
+        [* @]   [$$(nut -.nut) $$(nut +.nut) ~]
+        [* ^]   [$$(nut -.nut) $(nut +.nut)]
+      ==
+    ==
+  ::::
+  ::
+      ham
+    (num 16 =+(@ |=(?:((lth 10 -<) (add '0' -<) (add 'a' -<)))))
+  ::::
+  ::
+      num
+    ?>  ?=(@ nut)
+    =+  [zel=@ hoz==+(@ |=(@))]
+    |:
+    ^-  *ball
+    :-  %duct
+    ?:  .=(0 nut)
+      [(hoz 0) ~]
+    =+  biq=`*tape`~
+    |-  ^-  *tape
+    ?:  .=(0 nut)
+      biq
+    $(nut (div nut zel), biq [(hoz (mod nut 10)) biq])
+  ::::
+  ::
+      tis
+    ^-  *ball
+    [%duct (tape nut)]
+  ::::
+  ::
+      unt
+    ?>  ?=(@ nut)
+    ^-  *ball 
+    ?:  ?&  (gte (met 3 nut) 2)
+            |-
+            ?:  .=(0 nut)
+              &
+            =+  vis=(end 3 1 nut)
+            =+  gor=(rsh 3 1 nut)
+            ?&(?|(.=('-' vis) ?&((gte vis 'a') (lte vis 'z'))) $(nut gor))
+        ==
+      vam
+    ?:  (lte (met 3 nut) 2)
+      dem
+    ham
+  ::::
+  ::
+      vam
+    ?>  ?=(@ nut)
+    ^-  *ball
+    :-  %duct
+    |-  ^-  *tape
+    ?:  .=(0 nut)
+      ~
+    [(end 3 1 nut) $(nut (rsh 3 1 nut))]
+  ::
+  ::::
   ==
 ::
 ::::

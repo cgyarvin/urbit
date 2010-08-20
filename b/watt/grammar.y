@@ -465,11 +465,20 @@ tall
     weir
       : cord                    { $$ = _ycell($1, u4_noun_0); }
       | cord si_dot g weir      { $$ = _ycell($1, $4); }
+      | bucs                    { $$ = $1; }
+      | bucs si_dot g weir      { $$ = u4_log_cat(yylane, $1, $4); }
       ;
 
+      bucs
+        : si_buc                { $$ = _ycell(u4_noun_0, u4_noun_0); }
+        | si_buc bucs           
+          { $$ = _ytrel(u4_noun_0, 
+                        _ycell(u4_atom_frag, u4_noun_2),
+                        $2); }
+        ;
       cord
         : axis                  { $$ = _ycell(u4_atom_frag, $1); }
-        | term                  { $$ = _ycell(u4_atom_pane, $1); }
+        | tok_term              { $$ = _ycell(u4_atom_pane, $1); }
         ;
 
       axis
