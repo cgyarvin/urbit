@@ -35,7 +35,7 @@
     //
     else if ( u4_b_pq(typ, u4_atom_cell, &p_typ, &q_typ) ) {
       return u4_bag_cat(lan, _dump_seal_main(p, gil, p_typ),
-                              _dump_seal_main(p, gil, q_typ));
+                             _dump_seal_main(p, gil, q_typ));
     }
 
     // [%core p=type q=*]
@@ -127,13 +127,14 @@ _dump_cell(u4_plow p,
   }
 }
 
-/* _dump_mono(): dump a mono.
+/* _dump_core(): dump a core.
 */
 static u4_prep
-_dump_mono(u4_plow p,
+_dump_core(u4_plow p,
            u4_pool gil,
            u4_pool nip,
            u4_type myt,
+           u4_atom kic,
            u4_spec dab)
 {
   u4_lane lan = p->lan;
@@ -143,37 +144,7 @@ _dump_mono(u4_plow p,
 
   zib = _dump_main(p, gil, nip, myt);
   bor = u4_k_atom_cat
-    (lan, u4_cod_in('+'),
-           u4_k_atom_cat
-             (lan, u4_prep_decimal(lan, _gull_size(p, dab)),
-                    u4_k_atom_cat
-                      (lan, u4_cod_in('.'),
-                             u4_prep_hexinal
-                                (lan, u4_cod_in(u4_n_nub(dab) & 0xffff)))));
-
-  gum = u4_prep_close
-    (lan, '<', '>', u4_k_list(lan, zib, bor, 0));
-
-  return gum;
-}
-
-/* _dump_poly(): dump a poly.
-*/
-static u4_prep
-_dump_poly(u4_plow p,
-           u4_pool gil,
-           u4_pool nip,
-           u4_type myt,
-           u4_spec dab)
-{
-  u4_lane lan = p->lan;
-  u4_prep gum;
-  u4_prep zib;
-  u4_prep bor;
-
-  zib = _dump_main(p, gil, nip, myt);
-  bor = u4_k_atom_cat
-    (lan, u4_cod_in('-'),
+    (lan, (u4_n_eq(u4_atom_soft, kic) ? u4_cod_in('-') : u4_cod_in('+')),
            u4_k_atom_cat
              (lan, u4_prep_decimal(lan, _gull_size(p, dab)),
                     u4_k_atom_cat
@@ -221,7 +192,7 @@ _dump_main(u4_plow p,
            u4_type typ)
 {
   u4_lane lan = p->lan;
-  u4_noun p_typ, q_typ;
+  u4_noun p_typ, q_typ, r_typ, s_typ;
 
   if ( u4_n_atom(typ) ) {
     if ( u4_n_eq(u4_atom_atom, typ) ) {
@@ -240,16 +211,8 @@ _dump_main(u4_plow p,
       (lan, '[', ']', 
               _dump_cell(p, gil, nip, p_typ, q_typ));
   }
-  else if ( u4_b_pq(typ, u4_atom_core, &p_typ, &q_typ) ) {
-    u4_noun pq_typ, qq_typ;
-
-    if ( u4_b_p(q_typ, u4_atom_hard, &pq_typ) ) {
-      return _dump_mono(p, gil, nip, p_typ, pq_typ);
-    }
-    else if ( u4_b_pq(q_typ, u4_atom_soft, &pq_typ, &qq_typ) ) {
-      return _dump_poly(p, gil, nip, p_typ, qq_typ);
-    }
-    else return u4_trip;
+  else if ( u4_b_pqrs(typ, u4_atom_core, &p_typ, &q_typ, &r_typ, &s_typ) ) {
+    return _dump_core(p, gil, nip, p_typ, q_typ, s_typ);
   }
   else if ( u4_b_p(typ, u4_atom_cube, &p_typ) ) {
     if ( u4_n_zero(p_typ) ) {

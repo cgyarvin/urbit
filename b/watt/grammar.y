@@ -104,7 +104,7 @@ file
 
 gene
   : tall  { $$ = _watt_locate(yylane, &@1, $1); }
-  | wide
+  | wide  /* { $$ = _watt_locate(yylane, &@1, $1); } */
   ;
 
 wide

@@ -76,120 +76,6 @@ _rose_etch(u4_plow p,
   }
   else return _plow_fail(p, "bad etch");
 }
-/* fine:rose:plow
-*/
-  static u4_flag
-  _rose_fine_hard(u4_plow p,
-                  u4_type sut,
-                  u4_book dab)
-  {
-    if ( u4_n_zero(dab) ) {
-      return u4_yes;
-    }
-    else {
-      u4_noun n_dab, l_dab, r_dab, qn_dab;
-
-      u4_c_trel(dab, &n_dab, &l_dab, &r_dab);
-      qn_dab = u4_ct(n_dab);
-
-      return u4_and
-        (_rose_show(p, sut, qn_dab),
-         u4_and(_rose_fine_hard(p, sut, l_dab),
-                _rose_fine_hard(p, sut, r_dab)));
-    }
-  } 
-  static u4_flag
-  _rose_fine_soft(u4_plow p,
-                  u4_type sut,
-                  u4_type gar,
-                  u4_book dab)
-  {
-    if ( u4_n_zero(dab) ) {
-      return u4_yes;
-    }
-    else {
-      u4_noun n_dab, l_dab, r_dab, qn_dab;
-
-      u4_c_trel(dab, &n_dab, &l_dab, &r_dab);
-      qn_dab = u4_ct(n_dab);
-
-      p->prh++;
-      if ( u4_no == _rose_show(p, sut, qn_dab) ) {
-        return u4_no;
-      }
-      else {
-        u4_tool vac = _rose_make(p, sut, qn_dab);
-        u4_tool foh = _rose_make(p, gar, qn_dab);
-
-        if ( !u4_n_eq(vac, foh) ) {
-          return u4_no;
-        }
-        return
-           u4_and(_rose_fine_soft(p, sut, gar, l_dab),
-                  _rose_fine_soft(p, sut, gar, r_dab));
-      }
-    }
-  }
-
-  static u4_flag
-  _rose_fine_a(u4_plow p,
-               u4_type sut)
-  {
-    u4_lane lan = p->lan;
-    u4_noun p_sut, q_sut, pq_sut, qq_sut;
-
-    if ( !u4_b_pq(sut, u4_atom_core, &p_sut, &q_sut) ) {
-      return u4_trip;
-    }
-    else {
-      if ( u4_b_p(q_sut, u4_atom_hard, &pq_sut) ) {
-        return _rose_fine_hard(p, sut, pq_sut);
-      }
-      else if ( u4_b_pq(q_sut, u4_atom_soft, &pq_sut, &qq_sut) ) {
-        if ( u4_bag_in(sut, p->ver) ) {
-          return u4_yes;
-        }
-        else {
-          u4_noun gar = u4_kt(lan, u4_atom_core, pq_sut, q_sut);
-          u4_pool ver;
-          u4_flag dem;
-
-          ver = p->ver;
-          p->ver = u4_bag_add(lan, sut, p->ver);
-          dem = _rose_fine_soft(p, sut, gar, qq_sut);
-
-          p->ver = ver;
-          return dem;
-        }
-      }
-      else return u4_trip;
-    }
-  }
-u4_flag
-_rose_fine(u4_plow p,
-           u4_type sut)
-{
-#if 0
-  return u4_yes;
-#else
-  u4_lane lan = p->lan;
-  u4_noun mum = sut;
-  u4_nopt zod = u4_tab_get(mum, p->vom);
-
-  p->prf++;
-  if ( zod != u4_bull ) {
-    return zod;
-  }
-  else {
-    u4_tool gur = _rose_fine_a(p, sut);
-
-    p->prg++;
-    p->vom = u4_tab_add(lan, mum, gur, p->vom);
-    return gur;
-  }
-#endif
-}
-
 
 /* edit:rose:plow
 */
@@ -199,7 +85,7 @@ _rose_edit(u4_plow p,
            u4_list mut)
 {
   u4_tack tac = _lark_feed(p, sut, u4_nul, mut);
-  u4_type fuz = _iris_burn(p, sut, u4_nul, u4_axis_1, u4_no, tac);
+  u4_type fuz = _iris_burn(p, sut, u4_nul, u4_axis_1, tac);
 
   return fuz;
 }
@@ -234,6 +120,12 @@ _rose_edit(u4_plow p,
          u4_k_cell(lan, q_gen, _rose_play(p, sut, p_gen)),
          u4_nul);
     }
+    else if ( u4_b_pq(gen, u4_atom_zemp, &p_gen, &q_gen) ) {
+      return _rose_gain_hunt(p, sut, q_gen);
+    }
+    else if ( u4_b_pq(gen, u4_atom_zush, &p_gen, &q_gen) ) {
+      return _rose_gain_hunt(p, sut, q_gen);
+    }
     else if ( u4_b_p(gen, u4_atom_chan, &p_gen) ) {
       return _rose_gain_hunt_a(p, sut, p_gen);
     }
@@ -245,7 +137,7 @@ _rose_edit(u4_plow p,
                   u4_plot mut)
   {
     u4_tack tac = _lark_feed(p, sut, u4_nul, mut);
-    u4_type hoc = _iris_burn(p, u4_atom_blur, u4_nul, u4_axis_1, u4_no, tac);
+    u4_type hoc = _iris_burn(p, u4_atom_blur, u4_nul, u4_axis_1, tac);
 
     return _rose_both(p, sut, hoc);
   }
@@ -838,7 +730,9 @@ _rose_orth(u4_plow p,
       p->bug = u4_op_inc(lan, p->bug);
 
       soq = _rose_play(p, sut, p_gen);
-      
+     
+      u4_brut(p, "soq", soq);
+
       p->bug = bug;
       return soq;
     }
@@ -859,14 +753,12 @@ _rose_orth(u4_plow p,
       return _rose_etch(p, _rose_play(p, sut, p_gen));
     }
     else if ( u4_b_pq(gen, u4_atom_tash, &p_gen, &q_gen) ) {
-      return u4_k_trel
+      return u4_k_quil
         (lan, u4_atom_core, 
               sut, 
-              u4_k_trel
-                (lan,
-                 u4_atom_soft,
-                 sut,
-                 _gull_fill(p, u4_nul, q_gen)));
+              u4_atom_soft,
+              sut,
+              _gull_fill(p, u4_nul, q_gen));
     }
     else if ( u4_b_pq(gen, u4_atom_plin, &p_gen, &q_gen) ) {
       return u4_k_trel
@@ -879,13 +771,12 @@ _rose_orth(u4_plow p,
       return _rose_play(p, _rose_play(p, sut, p_gen), q_gen);
     }
     else if ( u4_b_pq(gen, u4_atom_pank, &p_gen, &q_gen) ) {
-      return u4_kt
-        (lan, u4_atom_core,
+      return u4_k_quil
+        (lan, u4_atom_core, 
+              sut, 
+              u4_atom_hard,
               sut,
-              u4_k_cell
-                (lan, 
-                 u4_atom_hard,
-                 _gull_fill(p, u4_nul, q_gen)));
+              _gull_fill(p, u4_nul, q_gen));
     }
     else if ( u4_b_p(gen, u4_atom_zalt, &p_gen) ) {
       return u4_k_cell(lan, u4_atom_cube, _rose_play(p, sut, p_gen));
@@ -923,13 +814,37 @@ _rose_orth(u4_plow p,
       else {
         u4_door uq_lar  = u4_ct(q_lar);
         u4_type quq_lar = u4_ch(u4_ct(uq_lar));
-        u4_type ruq_lar = u4_ct(u4_ct(uq_lar));
+        u4_gene ruq_lar = u4_ct(u4_ct(uq_lar));
+        u4_gene old     = gen;
+        u4_noun p_sut, q_sut, r_sut, s_sut;
 
-        return u4_k_trel
-          (lan,
-           u4_atom_hold,
-           _rose_edit(p, quq_lar, huz),
-           ruq_lar);
+        sut = _rose_edit(p, quq_lar, huz);
+        gen = ruq_lar;
+
+        if ( u4_b_pqrs(sut, u4_atom_core, &p_sut, &q_sut, &r_sut, &s_sut) ) {
+          if ( u4_n_eq(u4_atom_hard, q_sut) ) {
+            sut = u4_k_quil(lan, u4_atom_core, r_sut, q_sut, r_sut, s_sut);
+            if ( !u4_n_zero(p->bug) ) {
+              u4_err(lan, "hard: gen", old);
+              u4_brut(p, "hard: sut", sut);
+              u4_brut(p, "hard: mack", u4_kt(lan, u4_atom_hold, sut, gen));
+              printf("\n");
+            }
+          } 
+          else if ( u4_n_eq(u4_atom_soft, q_sut) ) {
+            sut = sut;
+            if ( !u4_n_zero(p->bug) ) {
+              u4_err(lan, "soft: gen", old);
+              u4_brut(p, "soft: sut", sut);
+              u4_brut(p, "soft: mack", u4_kt(lan, u4_atom_hold, sut, gen));
+              printf("\n");
+            }
+          }
+          else return u4_trip;
+        }
+        else return u4_trip;
+
+        return u4_k_trel(lan, u4_atom_hold, sut, gen);
       }
     }
     else if ( u4_b_pqr(gen, u4_atom_trol, &p_gen, &q_gen, &r_gen) ) {
@@ -993,43 +908,6 @@ _rose_repo(u4_plow p,
     p->fan = fan;
     return gex;
   }
-}
-
-/* safe:rose:plow
-*/
-  static u4_flag
-  _rose_safe_b(u4_plow p,
-               u4_type sut,
-               u4_tack tac)
-  {
-    _iris_burn(p, sut, u4_nul, u4_axis_1, u4_yes, tac);
-    return u4_yes;
-  }
-  static u4_flag
-  _rose_safe_a(u4_plow p,
-               u4_type sut,
-               u4_tack tac)
-  {
-    u4_lane lan = p->lan;
-    u4_noun mum = u4_kc(lan, sut, tac);
-    u4_nopt zod = u4_tab_get(mum, p->fac);
-
-    if ( zod != u4_bull ) {
-      return zod;
-    }
-    else {
-      u4_flag gur = _rose_safe_b(p, sut, tac);
-
-      p->fac = u4_tab_add(lan, mum, gur, p->fac);
-      return gur;
-    }
-  }
-u4_flag
-_rose_safe(u4_plow p,
-           u4_type sut,
-           u4_plot mut)
-{
-  return _rose_safe_a(p, sut, _lark_feed(p, sut, u4_nul, mut));
 }
 
 /* seek:rose:plow
@@ -1099,8 +977,8 @@ _rose_seek(u4_plow p,
                   u4_type bon)
   {
     if ( !u4_so(_iris_nest(p, sut, u4_nul, u4_axis_1, bon)) ) {
-      // u4_brut(p, "sut", sut);
-      // u4_brut(p, "bon", bon);
+      u4_brut(p, "sut", sut);
+      u4_brut(p, "bon", bon);
       return _plow_fail(p, "nest: show");
     }
     else {
@@ -1207,7 +1085,19 @@ _rose_seek(u4_plow p,
                     _rose_show(p, _rose_play(p, sut, p_gen), q_gen));
     }
     else if ( u4_b_pq(gen, u4_atom_pank, &p_gen, &q_gen) ) {
-      return _rose_fine(p, _rose_play(p, sut, gen)); 
+      sut = _rose_play(p, sut, gen);
+
+      while ( !u4_n_zero(q_gen) ) {
+        u4_noun iq_gen = u4_ch(q_gen);
+        u4_noun tq_gen = u4_ct(q_gen);
+        u4_noun qiq_gen = u4_ct(iq_gen);
+
+        if ( !u4_so(_rose_show(p, sut, qiq_gen)) ) {
+          return _plow_fail(p, "menu fail");
+        }
+        q_gen = tq_gen;
+      }
+      return u4_yes;
     }
     else if ( u4_b_p(gen, u4_atom_zalt, &p_gen) ) {
       return u4_yes;
@@ -1243,16 +1133,53 @@ _rose_seek(u4_plow p,
       u4_plan lar = _rose_seek(p, sut, p_gen);
       u4_noun huz = _rose_show_a(p, sut, q_gen);
       u4_noun q_lar = u4_ch(u4_ct(lar));
-      u4_type r_lar = u4_ct(u4_ct(lar));
 
       if ( u4_n_zero(q_lar) ) {
-        return _rose_safe(p, r_lar, huz);
+        return u4_yes;
       }
       else {
         u4_door uq_lar  = u4_ct(q_lar);
         u4_type quq_lar = u4_ch(u4_ct(uq_lar));
+        u4_gene ruq_lar = u4_ct(u4_ct(uq_lar));
+        u4_noun p_sut, q_sut, r_sut, s_sut;
 
-        return _rose_safe(p, quq_lar, huz);
+        sut = _rose_edit(p, quq_lar, huz);
+        gen = ruq_lar;
+
+        if ( u4_b_pqrs(sut, u4_atom_core, &p_sut, &q_sut, &r_sut, &s_sut) ) {
+          if ( u4_n_eq(u4_atom_hard, q_sut) ) {
+            return _rose_show_nest(p, r_sut, p_sut);
+          }
+          else if ( u4_n_eq(u4_atom_soft, q_sut) ) {
+            u4_noun fuy = u4_k_cell(lan, sut, gen);
+
+            if ( u4_bag_in(fuy, p->ver) ) {
+              return u4_yes;
+            } else {
+              u4_type  gim = u4_k_quil
+                  (lan, u4_atom_core, r_sut, q_sut, r_sut, s_sut);
+              u4_bag   rev = p->ver;
+              u4_flag  goh;
+
+              p->ver = u4_bag_add(lan, fuy, p->ver);
+              goh = u4_and
+                (_rose_show(p, sut, gen),
+                 u4_say(u4_n_eq(_rose_make(p, sut, gen), 
+                                _rose_make(p, gim, gen))));
+
+              p->ver = rev;
+              if ( !u4_so(goh) ) {
+                u4_err(lan, "gen", gen);
+                u4_err(lan, "mka", _rose_make(p, sut, gen));
+                u4_err(lan, "mkb", _rose_make(p, gim, gen));
+                return _plow_fail(p, "soft mack");
+              }
+              return goh;
+            }
+          } 
+          else return u4_trip;
+        }
+        else return u4_trip;
       }
     }
     else if ( u4_b_pqr(gen, u4_atom_trol, &p_gen, &q_gen, &r_gen) ) {

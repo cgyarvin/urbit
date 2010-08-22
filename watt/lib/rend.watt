@@ -80,7 +80,7 @@
     |-  ^-  *wall
     ?~  q.pup
       [(ind q.p.pup) lux]
-    %=  $.-.$
+    %=  $$
       pup   i.q.pup
       lux   $(q.pup t.q.pup)
       col   ?:((gte col (mul 2 (div bor 3))) 0 (add 2 col))

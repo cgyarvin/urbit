@@ -108,6 +108,12 @@ _plow_rake(u4_plow p,
   else if ( u4_b_p(gen, u4_atom_pane, &p_gen) ) {
     return u4_kl(lan, gen);
   }
+  else if ( u4_b_pq(gen, u4_atom_zemp, &p_gen, &q_gen) ) {
+    return _plow_rake(p, q_gen);
+  }
+  else if ( u4_b_p(gen, u4_atom_zush, &p_gen) ) {
+    return _plow_rake(p, p_gen);
+  }
   else {
     u4_err(lan, "rake", gen);
     return _plow_fail(p, "rope");

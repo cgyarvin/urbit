@@ -216,7 +216,6 @@
                u4_type sub,
                u4_rail bar,
                u4_axis axe,
-               u4_flag vef,
                u4_tack tac);
     u4_flag
     _iris_cull(u4_plow p,

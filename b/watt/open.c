@@ -92,9 +92,15 @@
               u4_kc(lan, u4_atom_frag, axe),
               u4_nul);
     }
-    if ( u4_b_pq(gen, u4_atom_pock, &p_gen, &q_gen) ) {
+    else if ( u4_b_pq(gen, u4_atom_pock, &p_gen, &q_gen) ) {
       return _open_mast_fix(p, q_gen, axe);
     } 
+    else if ( u4_b_pq(gen, u4_atom_zemp, &p_gen, &q_gen) ) {
+      return u4_kt(lan, u4_atom_zemp, p_gen, _open_mast_fix(p, q_gen, axe));
+    }
+    else if ( u4_b_p(gen, u4_atom_zush, &p_gen) ) {
+      return u4_kc(lan, u4_atom_zush, _open_mast_fix(p, p_gen, axe));
+    }
     else {
       u4_gene bog = _plow_open(p, gen);
 
@@ -131,6 +137,12 @@ _open_mast(u4_plow p,
   }
   else if ( u4_b_p(gen, u4_atom_teck, &p_gen) ) {
     return p_gen;
+  }
+  else if ( u4_b_pq(gen, u4_atom_zemp, &p_gen, &q_gen) ) {
+    return u4_kt(lan, u4_atom_zemp, p_gen, _open_mast(p, q_gen));
+  }
+  else if ( u4_b_p(gen, u4_atom_zush, &p_gen) ) {
+    return u4_kc(lan, u4_atom_zush, _open_mast(p, p_gen));
   }
   else if ( u4_b_pq(gen, u4_atom_velt, &p_gen, &q_gen) ) {
     u4_tool ryx = u4_kc(lan, u4_atom_frag, u4_axis_4);
@@ -215,6 +227,14 @@ _open_fist(u4_plow p,
   else if ( u4_b_pq(gen, u4_atom_velt, &p_gen, &q_gen) ) {
     return u4_kt
       (lan, u4_atom_velt, _open_fist(p, p_gen), _open_fist(p, q_gen));
+  }
+  else if ( u4_b_pq(gen, u4_atom_zemp, &p_gen, &q_gen) ) {
+    return u4_kt
+      (lan, u4_atom_zemp, p_gen, _open_fist(p, q_gen));
+  }
+  else if ( u4_b_p(gen, u4_atom_zush, &p_gen) ) {
+    return u4_kc
+      (lan, u4_atom_zush, _open_fist(p, p_gen));
   }
   else if ( u4_b_p(gen, u4_atom_fist, &p_gen) ) {
     return _open_fist(p, p_gen);

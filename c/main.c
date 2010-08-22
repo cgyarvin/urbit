@@ -88,7 +88,7 @@ main(int  argc,
   char *history_name = _console_init();
   void *ver;
 
-  if ( !(ver = vere_boot(24)) ) {
+  if ( !(ver = vere_boot(28)) ) {
     fprintf(stderr, "vere: boot failed\n");
     return 1;
   }
