@@ -4,16 +4,16 @@
 **
 ** Prefixes:
 **
-**   u3_zn  (zeno internal - nolo; the nolo interpreter)
+**   u3_zn  (zeno internal - zeno; the zeno interpreter)
 **
 ** Description:
 **
-**   Agent structures for nolo.
+**   Agent structures for zeno.
 **
-**   nolo is a double-stack machine inside the loom.  It has one
+**   zeno is a double-stack machine inside the loom.  It has one
 **   register, (lab), which is a stack of agents to execute.
 **
-**   In general, a nolo agent pops itself off (cap), allocates its 
+**   In general, a zeno agent pops itself off (cap), allocates its 
 **   result on (hat), and pushes a pointer to it on (cap).
 **
 **   More precisely, the final effect of every agent, unless it errs
