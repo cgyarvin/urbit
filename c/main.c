@@ -58,27 +58,27 @@ static char *
 _console_line(const char *history_name)
 {
   while ( 1 ) {
-    char *c_vid;
+    char *vid_c;
 
-    if ( !(c_vid = readline(": ")) ) {
+    if ( !(vid_c = readline(": ")) ) {
       printf("\n");
       return 0;
     }
-    if ( !*c_vid ) {
-      free(c_vid);
+    if ( !*vid_c ) {
+      free(vid_c);
       continue;
     }
 
-    add_history(c_vid);
+    add_history(vid_c);
     if ( append_history(1, history_name) ) {
       perror("console");
       exit(1);
     }
-    return c_vid;
+    return vid_c;
   }
 }
 
-extern void *vere_boot(int size);
+extern void *vere_boot(uint32_t size);
 extern void  vere_line(void *vere, char *line);
 
 int

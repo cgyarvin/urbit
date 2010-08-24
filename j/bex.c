@@ -12,7 +12,7 @@ u3_zx_bex_c(u3_z   z,
 {
   mpz_t mp_a;
 
-  if ( !u3_li_rat_is_cat(a) ) {
+  if ( !u3_rat_is_cat(a) ) {
     return u3_zc_tank(z, c3__punt);
   }
   else {

@@ -2,7 +2,7 @@
 **
 ** This file is in the public domain.
 */
-#   define _zn_bip_cons(field) *_zn_anvil(z, ray_bip, cons, field)
+#   define _zn_bip_cons(field) *_zn_anvil(z, bip_ray, cons, field)
 
     /* c3__cons: construct a pair.
     */
@@ -16,6 +16,6 @@
         */
         mal = u3_ln_cell(z, pux, nol);
 
-        _zn_complete(z, _zn_bip_cons(f.c.ray_lid), mal);
+        _zn_complete(z, _zn_bip_cons(f.c.lid_ray), mal);
         break;
       }

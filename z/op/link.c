@@ -2,30 +2,30 @@
 **
 ** This file is in the public domain.
 */
-#   define _zn_bip_link(field) *_zn_anvil(z, ray_bip, link, field)
+#   define _zn_bip_link(field) *_zn_anvil(z, bip_ray, link, field)
 
     /* c3__link: link to a static formula.
     */
       case c3__link: {
-        _zn_retreat(z, _zn_bip_link(f.r.ray_mat));
+        _zn_retreat(z, _zn_bip_link(f.r.mat_ray));
         {
-          u3_ray ray_lid = _zn_bip_link(f.c.ray_lid);
-          u3_ray ray_lip = _zn_bip_link(f.r.ray_lip);
+          u3_ray lid_ray = _zn_bip_link(f.c.lid_ray);
+          u3_ray lip_ray = _zn_bip_link(f.r.lip_ray);
           u3_fox dep     = _zn_bip_link(f.s.dep);
           u3_fox gus     = _zn_bip_link(d.gus);
 #if 1
-          if ( (ray_lid != ray_lip) && (ray_lip != z->l.ray_cap) ) {
+          if ( (lid_ray != lip_ray) && (lip_ray != z->l.cap_ray) ) {
             /* Tail optimization.
             **
-            ** We seek to elide the segment whose bottom is [ray_lid],
-            ** and whose top is [ray_lip].
+            ** We seek to elide the segment whose bottom is [lid_ray],
+            ** and whose top is [lip_ray].
             **
-            ** [ray_lid] is the cap pointer at the end of the calculation.
-            ** [ray_lip] is the base of the subject area.  Call the region
-            ** from [ray_lid] to [ray_lip] region B, and the region from
-            ** [ray_lip] to [l->ray_cap] region A.
+            ** [lid_ray] is the cap pointer at the end of the calculation.
+            ** [lip_ray] is the base of the subject area.  Call the region
+            ** from [lid_ray] to [lip_ray] region B, and the region from
+            ** [lip_ray] to [l->cap_ray] region A.
             **
-            ** Because it is above [ray_lid], we know that region B will be
+            ** Because it is above [lid_ray], we know that region B will be
             ** discarded after (nock gus dep) completes.  The question is
             ** whether it can be discarded *before* this link completion.
             **
@@ -45,10 +45,10 @@
             ** fail to apply the optimization, we consume this same order of
             ** memory.  Consistency minimizes performance surprises.
             */
-            if ( u3_yes == u3_lm_clear(z, gus, ray_lid, ray_lip) ) {
+            if ( u3_yes == u3_lm_clear(z, gus, lid_ray, lip_ray) ) {
               /* Clear to tamp.
               */
-              gus = u3_lm_tamp(z, gus, ray_lid, ray_lip);
+              gus = u3_lm_tamp(z, gus, lid_ray, lip_ray);
             } 
             else {
               /* Not clear to tamp.
@@ -63,12 +63,12 @@
               ** It will thus fail to tamp, and leak, when it should be
               ** tamping on every call but the first.
               */
-              _zn_forge_drop(z, ray_lid);
-              ray_lid = z->l.ray_cap;
+              _zn_forge_drop(z, lid_ray);
+              lid_ray = z->l.cap_ray;
             }
           }
 #endif
-          _zn_forge_cook(z, ray_lid, gus, dep);
+          _zn_forge_cook(z, lid_ray, gus, dep);
         }
         break;
       }

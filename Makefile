@@ -224,7 +224,6 @@ L_OFILES=\
 
 Z_OFILES=\
        z/jato.o \
-       z/public.o \
        z/run.o \
        z/zeno.o 
 

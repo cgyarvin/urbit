@@ -20,20 +20,6 @@
     **/
 #     include "l.h"
 
-      /* Shorthands from u3_g.
-      */
-        typedef u3_l_ray  u3_ray;
-        typedef u3_l_rat  u3_rat;
-        typedef u3_l_fox  u3_fox;
-        typedef u3_l_atom u3_atom;
-        typedef u3_l_flag u3_flag;
-        typedef u3_l_mote u3_mote;
-        typedef u3_l_list u3_list;
-
-#       define u3_none u3_l_none
-#       define u3_yes  u3_l_yes
-#       define u3_no   u3_l_no
-
 #       define u3_h(l, a) u3_lr_h(l, a)
 #       define u3_t(l, a) u3_lr_t(l, a)
 

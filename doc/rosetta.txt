@@ -1,0 +1,30 @@
+!!  zike      :+  trex      ?|  dorn
+!#  zush      :-  twix      ?~  fent
+!%  zoot      :^  quax      ^$  germ
+!:  zalt      :~  slax      ^%  velt
+!`  zole      ;+  fist      ^*  mave
+%*  teck      ;-  mast      ^+  pock
+%+  bung      =+  gant      ^-  cast
+%-  fung      =-  tang      ^:  stil
+%.  gnum      =<  claf      ^=  bran
+%:  mung      =>  flac      ^?  hint
+%=  mack      ?!  vern      ^@  grit
+%^  tung      ?&  chan      ^~  wost
+%|  gath      ?*  moze      |%  tash
+%~  hang      ?-  grel      |*  pank
+.*  sail      ?.  lort      |-  vamp
+.=  sing      ?:  trol      |:  sunt
+.?  dust      ?<  marg      |=  lome
+.^  vint      ?=  plin      |?  rond
+:*  prex      ?>  gram      |~  lonk
+
+amp   &       der   <       nub   -     tic   `
+ask   ?       dot   .       pat   @     tep   "
+bar   |       dus   }       pel   )
+ben   =       hat   ^       pod   +
+buc   $       hop   !       ras   *
+bup   '       lom   ;       red   >
+cab   _       lep   (       sac   \
+com   ,       mit   %       sol   /
+dax   #       mon   ]       sud   {
+dig   :       nom   [       sig   ~

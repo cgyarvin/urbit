@@ -10,7 +10,7 @@
 **
 **   Agent structures for nolo.
 **
-**   nolo is a double-stack machine inside the clam.  It has one
+**   nolo is a double-stack machine inside the loom.  It has one
 **   register, (lab), which is a stack of agents to execute.
 **
 **   In general, a nolo agent pops itself off (cap), allocates its 
@@ -21,7 +21,7 @@
 **
 **     - set (lab) to (poq) - the next agent
 **     - set (cap) to (lid)
-**     - push a result noun, [gus], on z->l.ray_cap
+**     - push a result noun, [gus], on z->l.cap_ray
 **
 **   Some agents do this in one step; others apply a sequence.
 **
@@ -35,7 +35,7 @@
     **   Reference a forge field.
     */
 #     define _zn_forge(z, agent, type, field) \
-        u3_l_at_ray(&z->l, \
+        u3_at_ray(&z->l, \
                     ((agent) + \
                      ( ((c3_w *)&((struct u3_zn_forge_##type *)0)->field) - \
                        ((c3_w *)0) ) \
@@ -47,7 +47,7 @@
     **   Reference an anvil field.
     */
 #     define _zn_anvil(z, agent, type, field) \
-        u3_l_at_ray(&z->l, \
+        u3_at_ray(&z->l, \
                     ((agent) + \
                      ( ((c3_w *)&((struct u3_zn_anvil_##type *)0)->field) - \
                        ((c3_w *)0) ) \
@@ -59,7 +59,7 @@
     **   Push a forged agent on (cap).
     */
 #     define _zn_push_forge(z, type) \
-        ( (z->l.ray_cap += c3_wiseof(struct u3_zn_forge_##type)) - \
+        ( (z->l.cap_ray += c3_wiseof(struct u3_zn_forge_##type)) - \
           c3_wiseof(struct u3_zn_forge_##type) )
 
     /* _zn_push_word()
@@ -67,7 +67,7 @@
     **   Push a word on (cap).
     */
 #     define _zn_push_word(z, word) \
-        ( (*u3_l_at_ray(&z->l, z->l.ray_cap) = (word)), z->l.ray_cap++ )
+        ( (*u3_at_ray(&z->l, z->l.cap_ray) = (word)), z->l.cap_ray++ )
 
 
   /** Data types.
@@ -76,7 +76,7 @@
     **/
       /* u3_zn_operator:
       **
-      **  Operators.  Motes, will be enums.
+      **  Operators.  Motes now, will be enums.
       */
         typedef u3_mote u3_zn_oper;
 
@@ -89,9 +89,9 @@
           ** poq: next agent
           ** lid: cap at termination.
           */
-          u3_zn_oper oper_ger;
-          u3_ray     ray_poq;
-          u3_ray     ray_lid;
+          u3_zn_oper ger_op;
+          u3_ray     poq_ray;
+          u3_ray     lid_ray;
         };
       
       /* u3_zn_retreat:
@@ -103,8 +103,8 @@
           /* mat: saved mat.
           ** lip: base of buffer.
           */
-          u3_ray ray_mat;
-          u3_ray ray_lip;
+          u3_ray mat_ray;
+          u3_ray lip_ray;
         };
 
 
@@ -211,7 +211,7 @@
           struct {
             /* sax: jet code.
             */
-            c3_w w_sax;
+            c3_w sax_w;
           } s;
         };
         struct u3_zn_anvil_jet {

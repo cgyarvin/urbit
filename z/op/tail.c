@@ -2,7 +2,7 @@
 **
 ** This file is in the public domain.
 */
-#   define _zn_bip_tail(field) *_zn_anvil(z, ray_bip, tail, field)
+#   define _zn_bip_tail(field) *_zn_anvil(z, bip_ray, tail, field)
 
     /* c3__tail: tail of a cons.
     */
@@ -14,8 +14,8 @@
         /* Tricky: we push [gus] above the agent below,
         ** presumably a cons.
         */
-        _zn_complete(z, _zn_bip_tail(f.c.ray_lid), gus);
-        _zn_forge_cook(z, z->l.ray_cap, lan, fus);
+        _zn_complete(z, _zn_bip_tail(f.c.lid_ray), gus);
+        _zn_forge_cook(z, z->l.cap_ray, lan, fus);
 
         break;
       }

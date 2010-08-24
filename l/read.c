@@ -14,12 +14,12 @@
 c3_w
 u3_lr_bin(u3_lv     lv,
           c3_y      y_a,
-          u3_l_atom b)
+          u3_atom b)
 {
   u3_l l = lv;
 
   c3_assert(u3_none != b);
-  c3_assert(u3_li_rat_is_atom(b));
+  c3_assert(u3_rat_is_atom(b));
 
   if ( b == 0 ) {
     return 0;
@@ -31,13 +31,13 @@ u3_lr_bin(u3_lv     lv,
     c3_w w_gal;
     c3_w w_daz;
 
-    if ( u3_li_rat_is_cat(b) ) {
+    if ( u3_rat_is_cat(b) ) {
       w_gal = 0;
       w_daz = b;
     }
     else {
-      w_gal = (*u3_li_at_pig_len(l, b)) - 1;
-      w_daz = (*u3_li_at_pig_buf(l, b, w_gal));
+      w_gal = (*u3_at_pig_len(l, b)) - 1;
+      w_daz = (*u3_at_pig_buf(l, b, w_gal));
     } 
 
     switch ( y_a ) {
@@ -104,14 +104,14 @@ u3_lr_bin(u3_lv     lv,
 c3_b
 u3_lr_bit(u3_lv     lv,
           c3_w      w_a,
-          u3_l_atom b)
+          u3_atom b)
 {
   u3_l l = lv;
 
   c3_assert(u3_none != b);
-  c3_assert(u3_li_rat_is_atom(b));
+  c3_assert(u3_rat_is_atom(b));
 
-  if ( u3_li_rat_is_cat(b) ) {
+  if ( u3_rat_is_cat(b) ) {
     if ( w_a >= 31 ) {
       return 0;
     }
@@ -121,11 +121,11 @@ u3_lr_bit(u3_lv     lv,
     c3_y y_vut = (w_a & 31);
     c3_w w_pix = (w_a >> 5);
 
-    if ( w_pix >= *u3_li_at_pig_len(l, b) ) {
+    if ( w_pix >= *u3_at_pig_len(l, b) ) {
       return 0;
     }
     else {
-      c3_w w_nys = *u3_li_at_pig_buf(l, b, w_pix);
+      c3_w w_nys = *u3_at_pig_buf(l, b, w_pix);
 
       return (1 & (w_nys >> y_vut));
     }
@@ -139,14 +139,14 @@ u3_lr_bit(u3_lv     lv,
 c3_y
 u3_lr_byte(u3_lv     lv,
            c3_w      w_a,
-           u3_l_atom b)
+           u3_atom b)
 {
   u3_l l = lv;
 
   c3_assert(u3_none != b);
-  c3_assert(u3_li_rat_is_atom(b));
+  c3_assert(u3_rat_is_atom(b));
 
-  if ( u3_li_rat_is_cat(b) ) {
+  if ( u3_rat_is_cat(b) ) {
     if ( w_a > 3 ) {
       return 0;
     }
@@ -156,11 +156,11 @@ u3_lr_byte(u3_lv     lv,
     c3_y y_vut = (w_a & 3);
     c3_w w_pix = (w_a >> 2);
 
-    if ( w_pix >= *u3_li_at_pig_len(l, b) ) {
+    if ( w_pix >= *u3_at_pig_len(l, b) ) {
       return 0;
     }
     else {
-      c3_w w_nys = *u3_li_at_pig_buf(l, b, w_pix);
+      c3_w w_nys = *u3_at_pig_buf(l, b, w_pix);
 
       return (255 & (w_nys >> (y_vut << 3)));
     }
@@ -176,7 +176,7 @@ u3_lr_bytes(u3_lv     lv,
             c3_w      w_a,
             c3_w      w_b,
             c3_y      *y_c,
-            u3_l_atom d)
+            u3_atom d)
 {
   u3_l l = lv;
   c3_w w_i;
@@ -192,17 +192,17 @@ u3_lr_bytes(u3_lv     lv,
 **
 **   Factor (a) as a cell (b c).
 */
-u3_l_flag
+u3_flag
 u3_lr_cell(u3_lv    lv,
-           u3_l_fox a,
-           u3_l_rat *b,
-           u3_l_rat *c)
+           u3_fox a,
+           u3_rat *b,
+           u3_rat *c)
 {
   u3_l l = lv;
 
   c3_assert(u3_none != a);
 
-  if ( u3_li_rat_is_atom(a) ) {
+  if ( u3_rat_is_atom(a) ) {
     return u3_no;
   }
   else {
@@ -216,23 +216,23 @@ u3_lr_cell(u3_lv    lv,
 **
 **   Factor (a) as a fork [b.[p q] c].
 */
-u3_l_flag
+u3_flag
 u3_lr_fork(u3_lv    lv,
-           u3_l_fox a,
-           u3_l_rat *b,
-           u3_l_rat *c)
+           u3_fox a,
+           u3_rat *b,
+           u3_rat *c)
 {
   u3_l l = lv;
 
   c3_assert(u3_none != a);
 
-  if ( u3_li_rat_is_atom(a) ) {
+  if ( u3_rat_is_atom(a) ) {
     return u3_no;
   }
   else {
     *b = u3_lr_h(l, a);
 
-    if ( u3_li_rat_is_atom(*b) ) {
+    if ( u3_rat_is_atom(*b) ) {
       return u3_no;
     } else {
       *c = u3_lr_t(l, a);
@@ -245,11 +245,11 @@ u3_lr_fork(u3_lv    lv,
 **
 **   & [0] if [a] is of the form [b *c].
 */
-u3_l_flag
+u3_flag
 u3_lr_p(u3_lv    l,
-        u3_l_fox a,
-        u3_l_fox b,
-        u3_l_fox *c)
+        u3_fox a,
+        u3_fox b,
+        u3_fox *c)
 {
   u3_fox feg, nux;
 
@@ -266,12 +266,12 @@ u3_lr_p(u3_lv    l,
 **
 **   & [0] if [a] is of the form [b *c d].
 */
-u3_l_flag
+u3_flag
 u3_lr_pq(u3_lv lv,
-         u3_l_fox a,
-         u3_l_fox b,
-         u3_l_fox *c,
-         u3_l_fox *d)
+         u3_fox a,
+         u3_fox b,
+         u3_fox *c,
+         u3_fox *d)
 {
   u3_l   l = lv;
   u3_fox nux;
@@ -288,13 +288,13 @@ u3_lr_pq(u3_lv lv,
 **
 **   & [0] if [a] is of the form [b *c *d *e].
 */
-u3_l_flag
+u3_flag
 u3_lr_pqr(u3_lv lv,
-          u3_l_fox a,
-          u3_l_fox b,
-          u3_l_fox *c,
-          u3_l_fox *d,
-          u3_l_fox *e)
+          u3_fox a,
+          u3_fox b,
+          u3_fox *c,
+          u3_fox *d,
+          u3_fox *e)
 {
   u3_l   l = lv;
   u3_fox nux;
@@ -311,10 +311,10 @@ u3_lr_pqr(u3_lv lv,
 **
 **   Yes iff (a) is the same noun as (b).
 */
-u3_l_flag
+u3_flag
 u3_lr_sing(u3_lv    lv,
-         u3_l_fox a,
-         u3_l_fox b)
+         u3_fox a,
+         u3_fox b)
 {
   u3_l l = lv;
 
@@ -328,23 +328,23 @@ u3_lr_sing(u3_lv    lv,
     return u3_yes;
   }
   else {
-    if ( u3_li_rat_is_atom(a) ) {
-      if ( !u3_li_rat_is_atom(b) || 
-           u3_li_rat_is_cat(a) || 
-           u3_li_rat_is_cat(b) )
+    if ( u3_rat_is_atom(a) ) {
+      if ( !u3_rat_is_atom(b) || 
+           u3_rat_is_cat(a) || 
+           u3_rat_is_cat(b) )
       {
         return u3_no;
       }
       else {
-        if ( *u3_li_at_hog_mug(l, a) &&
-             *u3_li_at_hog_mug(l, b) &&
-             (*u3_li_at_hog_mug(l, a) != *u3_li_at_hog_mug(l, b)) )
+        if ( *u3_at_hog_mug(l, a) &&
+             *u3_at_hog_mug(l, b) &&
+             (*u3_at_hog_mug(l, a) != *u3_at_hog_mug(l, b)) )
         {
           return u3_no;
         }
         else {
-          c3_w w_rez = *u3_li_at_pig_len(l, a);
-          c3_w w_mox = *u3_li_at_pig_len(l, b);
+          c3_w w_rez = *u3_at_pig_len(l, a);
+          c3_w w_mox = *u3_at_pig_len(l, b);
 
           if ( w_rez != w_mox ) {
             return u3_no;
@@ -353,8 +353,8 @@ u3_lr_sing(u3_lv    lv,
             c3_w w_i;
 
             for ( w_i = 0; w_i < w_rez; w_i++ ) {
-              if ( (*u3_li_at_pig_buf(l, a, w_i)) != 
-                   (*u3_li_at_pig_buf(l, b, w_i)) )
+              if ( (*u3_at_pig_buf(l, a, w_i)) != 
+                   (*u3_at_pig_buf(l, b, w_i)) )
               {
                 return u3_no;
               }
@@ -365,13 +365,13 @@ u3_lr_sing(u3_lv    lv,
       }
     }
     else {
-      if ( u3_li_rat_is_atom(b) ) {
+      if ( u3_rat_is_atom(b) ) {
         return u3_no;
       }
       else {
-        if ( *u3_li_at_hog_mug(l, a) &&
-             *u3_li_at_hog_mug(l, b) &&
-             (*u3_li_at_hog_mug(l, a) != *u3_li_at_hog_mug(l, b)) )
+        if ( *u3_at_hog_mug(l, a) &&
+             *u3_at_hog_mug(l, b) &&
+             (*u3_at_hog_mug(l, a) != *u3_at_hog_mug(l, b)) )
         {
           return u3_no;
         }
@@ -391,10 +391,10 @@ u3_lr_sing(u3_lv    lv,
 **
 **   0 if a < b, 1 if a == b, 2 if a > b
 */
-u3_l_atom
+u3_atom
 u3_lr_ord(u3_lv    lv,
-          u3_l_fox a,
-          u3_l_fox b)
+          u3_fox a,
+          u3_fox b)
 {
   u3_l l = lv;
 
@@ -405,23 +405,23 @@ u3_lr_ord(u3_lv    lv,
     return 1;
   }
   else {
-    if ( u3_li_rat_is_atom(a) ) {
-      if ( !u3_li_rat_is_atom(b) ) {
+    if ( u3_rat_is_atom(a) ) {
+      if ( !u3_rat_is_atom(b) ) {
         return 0;
       }
-      if ( u3_li_rat_is_cat(a) ) {
-        if ( u3_li_rat_is_cat(b) ) {
+      if ( u3_rat_is_cat(a) ) {
+        if ( u3_rat_is_cat(b) ) {
           return (a < b) ? 0 : 2;
         }
         else return 0;
       }
       else {
-        if ( u3_li_rat_is_cat(b) ) {
+        if ( u3_rat_is_cat(b) ) {
           return 2;
         }
         else {
-          c3_w w_rez = *u3_li_at_pig_len(l, a);
-          c3_w w_mox = *u3_li_at_pig_len(l, b);
+          c3_w w_rez = *u3_at_pig_len(l, a);
+          c3_w w_mox = *u3_at_pig_len(l, b);
 
           if ( w_rez < w_mox ) {
             return 0;
@@ -433,8 +433,8 @@ u3_lr_ord(u3_lv    lv,
             c3_w w_i;
 
             for ( w_i = 0; w_i < w_rez; w_i++ ) {
-              c3_w w_yef = *u3_li_at_pig_buf(l, a, (w_rez - (w_i + 1)));
-              c3_w w_doz = *u3_li_at_pig_buf(l, b, (w_rez - (w_i + 1)));
+              c3_w w_yef = *u3_at_pig_buf(l, a, (w_rez - (w_i + 1)));
+              c3_w w_doz = *u3_at_pig_buf(l, b, (w_rez - (w_i + 1)));
 
               if ( w_yef < w_doz ) {
                 return 0;
@@ -449,7 +449,7 @@ u3_lr_ord(u3_lv    lv,
       }
     }
     else {
-      if ( u3_li_rat_is_atom(b) ) {
+      if ( u3_rat_is_atom(b) ) {
         return 2;
       }
       else {
@@ -469,16 +469,16 @@ u3_lr_ord(u3_lv    lv,
 **
 **   Yes iff (b) is the same noun as the C string c_a.
 */
-u3_l_flag
+u3_flag
 u3_lr_sing_c(u3_lv    lv,
              c3_c     *c_a,
-             u3_l_fox b)
+             u3_fox b)
 {
   u3_l l = lv;
 
   c3_assert(u3_none != b);
 
-  if ( !u3_li_rat_is_atom(b) ) {
+  if ( !u3_rat_is_atom(b) ) {
     return u3_no;
   }
   else {
@@ -498,16 +498,16 @@ u3_lr_sing_c(u3_lv    lv,
 **
 **   Return the head of (a).
 */
-u3_l_rat
+u3_rat
 u3_lr_h(u3_lv    lv, 
-        u3_l_fox a)
+        u3_fox a)
 {
   u3_l l = lv;
 
   c3_assert(u3_none != a);
-  c3_assert(!u3_li_rat_is_atom(a));
+  c3_assert(!u3_rat_is_atom(a));
 
-  return *u3_li_at_dog_hed(l, a);
+  return *u3_at_hog_hed(l, a);
 }
 
 /* u3_lr_mp():
@@ -517,18 +517,18 @@ u3_lr_h(u3_lv    lv,
 void
 u3_lr_mp(u3_lv     lv,
          mpz_t     mp_a,
-         u3_l_atom b)
+         u3_atom b)
 {
   u3_l l = lv;
 
   c3_assert(u3_none != b);
-  c3_assert(u3_li_rat_is_atom(b));
+  c3_assert(u3_rat_is_atom(b));
 
-  if ( u3_li_rat_is_cat(b) ) {
+  if ( u3_rat_is_cat(b) ) {
     mpz_init_set_ui(mp_a, b);
   }
   else {
-    c3_w w_len = *u3_li_at_pig_len(l, b);
+    c3_w w_len = *u3_at_pig_len(l, b);
 
     /* Slight deficiency in the GMP API.
     */
@@ -542,7 +542,7 @@ u3_lr_mp(u3_lv     lv,
       c3_w w_i;
 
       for ( w_i=0; w_i < w_len; w_i++ ) {
-        w_buf[w_i] = *u3_li_at_pig_buf(l, b, w_i);
+        w_buf[w_i] = *u3_at_pig_buf(l, b, w_i);
       }
       mpz_import(mp_a, w_len, -1, 4, 0, 0, w_buf);
     }
@@ -553,16 +553,16 @@ u3_lr_mp(u3_lv     lv,
 **
 **   Factor (a) as a qual (b c d e).
 */
-u3_l_flag
+u3_flag
 u3_lr_qual(u3_lv    lv,
-           u3_l_fox a,
-           u3_l_rat *b,
-           u3_l_rat *c,
-           u3_l_rat *d,
-           u3_l_rat *e)
+           u3_fox a,
+           u3_rat *b,
+           u3_rat *c,
+           u3_rat *d,
+           u3_rat *e)
 {
   u3_l     l = lv;
-  u3_l_rat guf;
+  u3_rat guf;
 
   if ( (u3_yes == u3_lr_cell(l, a, b, &guf)) &&
        (u3_yes == u3_lr_trel(l, guf, c, d, e)) ) {
@@ -575,17 +575,17 @@ u3_lr_qual(u3_lv    lv,
 **
 **   Factor (a) as a quil (b c d e f).
 */
-u3_l_flag
+u3_flag
 u3_lr_quil(u3_lv    lv,
-           u3_l_fox a,
-           u3_l_rat *b,
-           u3_l_rat *c,
-           u3_l_rat *d,
-           u3_l_rat *e,
-           u3_l_rat *f)
+           u3_fox a,
+           u3_rat *b,
+           u3_rat *c,
+           u3_rat *d,
+           u3_rat *e,
+           u3_rat *f)
 {
   u3_l     l = lv;
-  u3_l_rat guf;
+  u3_rat guf;
 
   if ( (u3_yes == u3_lr_cell(l, a, b, &guf)) &&
        (u3_yes == u3_lr_qual(l, guf, c, d, e, f)) ) {
@@ -598,18 +598,18 @@ u3_lr_quil(u3_lv    lv,
 **
 **   Factor (a) as a hext (b c d e f g).
 */
-u3_l_flag
+u3_flag
 u3_lr_hext(u3_lv    lv,
-           u3_l_fox a,
-           u3_l_rat *b,
-           u3_l_rat *c,
-           u3_l_rat *d,
-           u3_l_rat *e,
-           u3_l_rat *f,
-           u3_l_rat *g)
+           u3_fox a,
+           u3_rat *b,
+           u3_rat *c,
+           u3_rat *d,
+           u3_rat *e,
+           u3_rat *f,
+           u3_rat *g)
 {
   u3_l     l = lv;
-  u3_l_rat guf;
+  u3_rat guf;
 
   if ( (u3_yes == u3_lr_cell(l, a, b, &guf)) &&
        (u3_yes == u3_lr_quil(l, guf, c, d, e, f, g)) ) {
@@ -622,31 +622,31 @@ u3_lr_hext(u3_lv    lv,
 **
 **   Return the tail of (a).
 */
-u3_l_rat
+u3_rat
 u3_lr_t(u3_lv    lv, 
-        u3_l_fox a)
+        u3_fox a)
 {
   u3_l l = lv;
 
   c3_assert(u3_none != a);
-  c3_assert(!u3_li_rat_is_atom(a));
+  c3_assert(!u3_rat_is_atom(a));
 
-  return *u3_li_at_dog_tel(l, a);
+  return *u3_at_hog_tel(l, a);
 }
 
 /* u3_lr_trel():
 **
 **   Factor (a) as a trel (b c d).
 */
-u3_l_flag
+u3_flag
 u3_lr_trel(u3_lv    lv,
-           u3_l_fox a,
-           u3_l_rat *b,
-           u3_l_rat *c,
-           u3_l_rat *d)
+           u3_fox a,
+           u3_rat *b,
+           u3_rat *c,
+           u3_rat *d)
 {
   u3_l     l = lv;
-  u3_l_rat guf;
+  u3_rat guf;
 
   if ( (u3_yes == u3_lr_cell(l, a, b, &guf)) &&
        (u3_yes == u3_lr_cell(l, guf, c, d)) ) {
@@ -661,10 +661,10 @@ u3_lr_trel(u3_lv    lv,
 **
 **   Return twig (a) of (b).
 */
-u3_l_rat
+u3_rat
 u3_lr_twig(u3_lv     lv,
-           u3_l_atom a,
-           u3_l_fox  b)
+           u3_atom a,
+           u3_fox  b)
 {
   u3_l  l     = lv;
   c3_w  w_fol = (u3_lr_bin(l, 0, a) - 1);
@@ -701,24 +701,24 @@ u3_lr_twig(u3_lv     lv,
 c3_w
 u3_lr_word(u3_lv     lv,
            c3_w      w_a,
-           u3_l_atom b)
+           u3_atom b)
 {
   u3_l l = lv;
 
   c3_assert(u3_none != b);
-  c3_assert(u3_li_rat_is_atom(b));
+  c3_assert(u3_rat_is_atom(b));
 
-  if ( u3_li_rat_is_cat(b) ) {
+  if ( u3_rat_is_cat(b) ) {
     if ( w_a > 0 ) {
       return 0;
     }
     else return b;
   }
   else {
-    if ( w_a >= *u3_li_at_pig_len(l, b) ) {
+    if ( w_a >= *u3_at_pig_len(l, b) ) {
       return 0;
     }
-    else return *u3_li_at_pig_buf(l, b, w_a);
+    else return *u3_at_pig_buf(l, b, w_a);
   }
 }
 
@@ -731,7 +731,7 @@ u3_lr_words(u3_lv     lv,
             c3_w      w_a,
             c3_w      w_b,
             c3_w      *w_c,
-            u3_l_atom d)
+            u3_atom d)
 {
   u3_l l = lv;
   c3_w w_i;

@@ -112,9 +112,9 @@ uz_k_nock(uz_machine mac,
           uz_noun    sub,
           uz_noun    fol)
 {
-  u3_l_rat dez = u3_ln_nock(mac->zen, sub, fol);
+  u3_rat dez = u3_ln_nock(mac->zen, sub, fol);
 
-  if ( dez == u3_l_none ) {
+  if ( dez == u3_none ) {
     return uz_x_exit(mac);
   }
   else return dez;
@@ -714,7 +714,7 @@ uz_t_watt(uz_machine mac,
 {
   u3_rat rat = u3_b_read(mac->zen, src);
 
-  if ( u3_l_none == rat ) {
+  if ( u3_none == rat ) {
     return uz_x_exit(mac);
   }
   else return rat;
@@ -732,7 +732,7 @@ uz_t_vere(uz_machine mac,
 {
   u3_rat rat = u3_b_vere(mac->zen, src);
 
-  if ( u3_l_none == rat ) {
+  if ( u3_none == rat ) {
     return uz_x_exit(mac);
   }
   else return rat;
@@ -750,7 +750,7 @@ uz_t_hume(uz_machine mac,
 {
   u3_rat rat = u3_b_hume(mac->zen, src);
 
-  if ( u3_l_none == rat ) {
+  if ( u3_none == rat ) {
     return uz_x_exit(mac);
   }
   else return rat;

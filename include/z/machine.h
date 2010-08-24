@@ -17,9 +17,9 @@
 */
   /** Data types.
   **/
-    struct u3_z_core;
+    struct u3_zeno;
 
-    /* u3_z_core, z: 
+    /* u3_zeno, z: 
     **
     **   The zeno core.
     **
@@ -36,10 +36,10 @@
     **      jato    accelerated execution
     **      sith    tracing and debugging infrastructure
     */
-      struct u3_z_core {
+      struct u3_zeno {
         /** Layer: loom.
         **/
-          struct u3_l_core l;
+          struct u3_loom l;
 
         /** Layer: nock.
         ***
@@ -49,16 +49,8 @@
           struct {
             /* lab: agenda stack
             */
-            u3_ray ray_lab;
+            u3_ray lab_ray;
           } n;
-
-        /** Layer: watt.  Subject.
-        **/
-          struct {
-            /* tef: subject [type noun]
-            */
-            u3_fox tef;
-          } q;
 
         /** Layer: jato.  Built-in performance assistance.
         **/
@@ -71,12 +63,8 @@
             struct u3_zj_jet *jet_rod;
             c3_w             w_opt;
           } j;
-    
-        /** Layer: sith.  Tracing and debugging.
-        **/
       };
-      typedef struct u3_z_core *u3_z;
-
+      typedef struct u3_zeno *u3_z;
 
     /* u3_z_bench: performance statistics.
     */
@@ -88,9 +76,9 @@
         ** maz: west watermark (max)
         ** buc: east watermark (max)
         */
-        c3_d d_ruy;
-        c3_w w_cop;
-        c3_w w_vil, w_tew, w_maz, w_buc;
+        c3_d ruy_d;
+        c3_w cop_w;
+        c3_w vil_w, tew_w, maz_w, buc_w;
       };
 
 
@@ -121,12 +109,16 @@
     **   If z_bench is nonzero, set benchmark data.
     */
       u3_fox
-      u3_z_run(u3_z z,
-               u3_fox            *a,
-               u3_fox            b,
-               u3_fox            c,
-               struct u3_z_bench *d);
-
+      u3_z_run(u3_z               z,
+               u3_fox*            a,
+               u3_fox             b,
+               u3_fox             c,
+               struct u3_z_bench* d);
+    
+    /* u3_z_reset():
+    **
+    **   Reset a failed core 
+    */
     /* uz_z_mung():
     **
     **   As uz_z_run(), but [b] is gate and [c] is sample.

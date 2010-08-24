@@ -4,14 +4,14 @@
 */
     /* c3__fine: finish computation.
     */
-#     define _zn_bip_fine(field) *_zn_anvil(z, ray_bip, fine, field)
+#     define _zn_bip_fine(field) *_zn_anvil(z, bip_ray, fine, field)
 
       case c3__fine: {
         u3_fox gus = _zn_bip_fine(d.gus);
 
         *a = gus;
         if ( d ) {
-          d->w_cop = z->l.w_cop;
+          d->cop_w = z->l.cop_w;
         }
         return 0;
       }

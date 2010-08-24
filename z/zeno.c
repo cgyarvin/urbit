@@ -4,13 +4,13 @@
 */
 #include "all.h"
 
-/* _zi_boot_l(): boot the l (clam) layer.
+/* _zi_boot_l(): boot the l (loom) layer.
 */
 static void
 _zi_boot_l(u3_z z)
 {
-  z->l.ray_cap += (c3_wiseof(struct u3_z_core) - 
-                   c3_wiseof(struct u3_l_core));
+  z->l.cap_ray += (c3_wiseof(struct u3_zeno) - 
+                   c3_wiseof(struct u3_loom));
 }
 
 /* _zi_boot_n(): boot the n (nock) layer.
@@ -18,7 +18,7 @@ _zi_boot_l(u3_z z)
 static void
 _zi_boot_n(u3_z z)
 {
-  z->n.ray_lab = 0;
+  z->n.lab_ray = 0;
 }
 
 #if 0

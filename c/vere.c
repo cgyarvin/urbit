@@ -109,15 +109,15 @@
 /*  _vere_x_does(): push a debugging context.
 */
 static void
-_vere_x_does(struct vere_state*   v,
-             const c3_c*          txt)
+_vere_x_does(struct vere_state* v,
+             const c3_c*        txt)
 {
 }
 
 /*  _vere_x_done(): push a debugging context.
 */
 static void
-_vere_x_done(struct vere_state*   v)
+_vere_x_done(struct vere_state* v)
 {
 }
 #endif
@@ -125,7 +125,7 @@ _vere_x_done(struct vere_state*   v)
 /*  _vere_x_fail(): return to top.
 */
 static u3_fox
-_vere_x_fail(struct vere_state*   v)
+_vere_x_fail(struct vere_state* v)
 {
   longjmp(v->x.buf_jmp, 1);
   return u3_none;
@@ -134,8 +134,8 @@ _vere_x_fail(struct vere_state*   v)
 /*  _vere_x_use(): turn fox to rat.
 */
 static u3_fox
-_vere_x_use(struct vere_state*    v,
-            u3_rat                rat)
+_vere_x_use(struct vere_state* v,
+            u3_rat             rat)
 {
   if ( u3_none == rat ) {
     return _vere_x_fail(v);
@@ -146,9 +146,9 @@ _vere_x_use(struct vere_state*    v,
 /*  _vere_nc()::
 */
 static u3_fox
-_vere_nc(struct vere_state*   v,
-         u3_fox               hed,
-         u3_fox               tal)
+_vere_nc(struct vere_state* v,
+         u3_fox             hed,
+         u3_fox             tal)
 {
   return _vere_x_use(v, u3_ln_cell(v->z, hed, tal));
 }
@@ -156,10 +156,10 @@ _vere_nc(struct vere_state*   v,
 /*  _vere_nt()::
 */
 static u3_fox
-_vere_nt(struct vere_state*   v,
-         u3_fox               one,
-         u3_fox               two,
-         u3_fox               tri)
+_vere_nt(struct vere_state* v,
+         u3_fox             one,
+         u3_fox             two,
+         u3_fox             tri)
 {
   return _vere_nc(v, one, _vere_nc(v, two, tri));
 }
@@ -167,8 +167,8 @@ _vere_nt(struct vere_state*   v,
 /*  _vere_ns()::
 */
 static u3_fox
-_vere_ns(struct vere_state*   v,
-         const c3_c*          txt_c)
+_vere_ns(struct vere_state* v,
+         const c3_c*        txt_c)
 {
   return _vere_x_use(v, u3_ln_string(v->z, txt_c));
 }
@@ -176,8 +176,8 @@ _vere_ns(struct vere_state*   v,
 /*  _vere_h()::
 */
 static u3_fox
-_vere_h(struct vere_state*  v,
-        u3_fox              sel)
+_vere_h(struct vere_state* v,
+        u3_fox             sel)
 {
   if ( u3_yes == u3_lr_dust(v->z, sel) ) {
     return u3_h(v->z, sel);
@@ -187,8 +187,8 @@ _vere_h(struct vere_state*  v,
 /*  _vere_t()::
 */
 static u3_fox
-_vere_t(struct vere_state*  v,
-        u3_fox              sel)
+_vere_t(struct vere_state* v,
+        u3_fox             sel)
 {
   if ( u3_yes == u3_lr_dust(v->z, sel) ) {
     return u3_t(v->z, sel);
@@ -203,27 +203,27 @@ u3_fox
 _vere_file(u3_z         z,
            const c3_c*  pah_c)
 {
-  c3_i        i_fid = open(pah_c, O_RDONLY, 0666);
-  struct stat sta;
-  uint32_t    siz;
+  c3_i        fid_i = open(pah_c, O_RDONLY, 0666);
+  struct stat sox_stat;
+  c3_w        siz_w;
   uint8_t     *buf;
   u3_fox     dat; 
 
-  if ( (i_fid < 0) || (fstat(i_fid, &sta) < 0) ) {
+  if ( (fid_i < 0) || (fstat(fid_i, &sox_stat) < 0) ) {
     perror(pah_c);
     exit(1);
   }
 
-  siz = sta.st_size;
-  buf = malloc(sta.st_size);
+  siz_w = sox_stat.st_size;
+  buf = malloc(sox_stat.st_size);
 
-  if ( siz != read(i_fid, buf, siz) ) {
+  if ( siz_w != read(fid_i, buf, siz_w) ) {
     perror(pah_c);
     exit(1);
   }
-  close(i_fid);
+  close(fid_i);
 
-  dat = u3_ln_bytes(z, siz, buf);
+  dat = u3_ln_bytes(z, siz_w, buf);
   free(buf);
 
   return dat;
@@ -382,7 +382,7 @@ _vere_init_read(u3_z    z,
 {
   u3_rat rat = u3_b_read(&z->l, src);
 
-  if ( u3_l_none == rat ) {
+  if ( u3_none == rat ) {
     fprintf(stderr, "boot parse failed\n");
     exit(1);
   }
@@ -402,7 +402,7 @@ _vere_init_make(u3_z    z,
   u3_mote how;
   u3_rat  rat = u3_b_pass(&z->l, c3__blur, gen, &how);
 
-  if ( u3_l_none == rat ) {
+  if ( u3_none == rat ) {
     fprintf(stderr, "boot make failed\n");
     exit(1);
   }
@@ -469,10 +469,10 @@ _vere_kernel(struct vere_state*   v,
 /*  _vere_nock()::
 */
 static u3_fox
-_vere_nock(struct vere_state*   v,
-           u3_fox               bus,
-           u3_fox               fol,
-           c3_b                 mar_b)
+_vere_nock(struct vere_state* v,
+           u3_fox             bus,
+           u3_fox             fol,
+           c3_b               mar_b)
 {
   /*  bus:  subject
   **  fol:  formula
@@ -486,8 +486,8 @@ _vere_nock(struct vere_state*   v,
   if ( 0 == res ) {
     if ( mar_b ) {
       fprintf(stderr, " <%lld steps, %d words>\n",
-              naq.d_ruy,
-              (naq.w_maz - naq.w_vil) + (naq.w_buc - naq.w_tew));
+              naq.ruy_d,
+              (naq.maz_w - naq.vil_w) + (naq.buc_w - naq.tew_w));
     }
     return pro;
   }
@@ -516,8 +516,8 @@ _vere_mung(struct vere_state*   v,
   if ( 0 == res ) {
     if ( mar_b ) {
       fprintf(stderr, " <%lld steps, %d words>\n",
-              naq.d_ruy,
-              (naq.w_maz - naq.w_vil) + (naq.w_buc - naq.w_tew));
+              naq.ruy_d,
+              (naq.maz_w - naq.vil_w) + (naq.buc_w - naq.tew_w));
     }
     return pro;
   }
@@ -645,7 +645,7 @@ _vere_shell(struct vere_state*  v,
 }
 
 void *
-vere_boot(int siz)
+vere_boot(c3_w siz_w)
 {
   struct vere_state *v = malloc(sizeof(struct vere_state));
 
@@ -663,7 +663,7 @@ vere_boot(int siz)
   **  in a way that is exponentially slow!
   */
   {
-    v->z = u3_z_new(siz);
+    v->z = u3_z_new(siz_w);
     _vere_kernel(v, "watt/296.watt", "watt/296.nock");
   }
 
