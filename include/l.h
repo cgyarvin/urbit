@@ -216,7 +216,7 @@
     ***   u3_cell - cell structure (in beam space - do not use)
     ***   u3_atom - atom structure (in beam space - do not use)
     **/
-      /* l_core: the loom itself.
+      /* u3_loom: the loom itself.
       */
         struct u3_loom {
           /* bat: east end of the loom.
@@ -236,7 +236,7 @@
         typedef struct u3_loom *u3_l;
         typedef void *u3_lv;
 
-      /* li_atom, li_cell: imaginary structures (in beam space).
+      /* u3_atom, u3_cell: atom and cell structures.
       */
         struct u3_atom {
           c3_w mug_w;
@@ -249,7 +249,78 @@
           u3_ray hed_ray;
           u3_ray tel_ray;
         };
-   
+  
+      /* u3_mane: simple memory allocator.
+      */
+        struct u3_mane {
+#if 0
+          /* Free lists per word count, 2^30 down to 2^4.
+          */
+          u3_ray lib_ray[27];
+#else
+          /* Free list - singular.
+          */
+          u3_ray lib_ray;
+#endif
+          /* East and west control bars.  Nouns in the allocator
+          ** can point to any noun between these rays.
+          */
+          u3_ray est_ray;
+          u3_ray wst_ray;
+        };
+        struct u3_bloc {
+          /* Bit 0: free/allocated.  Bits 1-31: length.
+          */
+          c3_w fer_w;
+
+          /* Next bloc in this free list.
+          */
+          u3_ray nex_ray;
+
+          /* Previous bloc in this free list.
+          */
+          u3_ray pre_ray;
+        };
+
+      /* u3_pair: internal name-value pair.
+      */
+        struct u3_pair {
+          u3_rat nam;
+          u3_rat val;
+        };
+
+      /* u3_sham:
+      **
+      **    16-way mug-powered hashtable.  If wun != u3_none,
+      **    table is not allocated.
+      */
+        struct u3_sham {
+          /* 16 subordinate values:
+          **
+          **  [nam val]:     name-value pair
+          **  [u3_none ray]: subtable
+          **  [u3_none 0]:   empty
+          */
+          struct u3_pair dol_ray[16];
+        };
+      
+      /* u3_bask:
+      **
+      **    Memory basket.
+      */ 
+        struct u3_bask {
+          /* Total words in basket.
+          */
+          c3_w siz_w;
+
+          /* Memory allocator.
+          */
+          struct u3_mane m;
+
+          /* Hash table.
+          */
+          struct u3_sham s;
+        };
 
   /** Basic macros.
   **/
@@ -297,6 +368,14 @@
 
 #     define u3_at_nit(l, nit)   ( ((c3_w *) (l)) + (nit) )
 #     define u3_at_ray(l, ray)    u3_at_nit(l, u3_ray_nit(l, ray))
+
+#     define u3_of(l, ray, type, field) \
+        ((ray) + \
+         ( ((c3_w *)&((type *)0)->field) - \
+           ((c3_w *)0) ) \
+        ) 
+#     define u3_to(l, ray, type, field) \
+        u3_at_ray(l, u3_of(l, ray, type, field))
 
 #     define u3_ray_beam(ray)   u3_ray_a(ray)
 #     define u3_ray_point(ray)  u3_ray_b(ray)
@@ -363,7 +442,7 @@
 #     define u3_nock_trol  6
 #     define u3_nock_flac  7
 #     define u3_nock_gant  8
-#     define u3_nock_gath  9
+#     define u3_nock_mung  9
 #     define u3_nock_germ  10
 #     define u3_nock_hint  11
 #     define u3_nock_coat  12

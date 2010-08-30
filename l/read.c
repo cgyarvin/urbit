@@ -12,8 +12,8 @@
 **   For example, (y_a == 3) returns the size in bytes.
 */
 c3_w
-u3_lr_bin(u3_lv     lv,
-          c3_y      y_a,
+u3_lr_bin(u3_lv   lv,
+          c3_y    y_a,
           u3_atom b)
 {
   u3_l l = lv;

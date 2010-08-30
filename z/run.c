@@ -23,6 +23,15 @@ _zn_retreat(u3_z   z,
   u3_lm_flop(z, mat_ray);
 }
 
+/* _zn_free(): free memory in a mane.  Caller must know length.
+*/
+static inline void
+_zn_free(u3_z z,
+         u3_ray man_ray,
+         c3_w   wor_w)
+{
+}
+
 /* _zn_complete(): complete a calculation.
 **
 **   lid: destination of calculation
@@ -41,7 +50,6 @@ _zn_complete(u3_z   z,
   }
 
   z->l.cap_ray = lid_ray;
-
   _zn_push_word(z, lam);
 }
 
@@ -66,13 +74,13 @@ _zn_forge_cons(u3_z   z,
 /* _zn_forge_cook(): install a cook agent.
 **
 **   lid: cap at termination
-**   lan: subject
+**   bus: subject
 **   sef: formula
 */
 static inline void
 _zn_forge_cook(u3_z z,
                u3_ray lid_ray,
-               u3_fox lan,
+               u3_fox bus,
                u3_fox sef)
 {
   u3_ray zos_ray;
@@ -82,7 +90,7 @@ _zn_forge_cook(u3_z z,
   *_zn_forge(z, zos_ray, cook, c.poq_ray) = z->n.lab_ray;
   *_zn_forge(z, zos_ray, cook, c.lid_ray) = lid_ray;
 
-  *_zn_forge(z, zos_ray, cook, s.lan) = lan;
+  *_zn_forge(z, zos_ray, cook, s.bus) = bus;
   *_zn_forge(z, zos_ray, cook, s.sef) = sef;
   
   z->n.lab_ray = zos_ray;
@@ -165,7 +173,7 @@ _zn_forge_push(u3_z   z,
                u3_ray lid_ray,
                u3_ray mat_ray,
                u3_ray lip_ray,
-               u3_fox lan,
+               u3_fox bus,
                u3_fox dep)
 {
   u3_ray zos_ray;
@@ -178,8 +186,39 @@ _zn_forge_push(u3_z   z,
   *_zn_forge(z, zos_ray, push, r.mat_ray) = mat_ray;
   *_zn_forge(z, zos_ray, push, r.lip_ray) = lip_ray;
 
-  *_zn_forge(z, zos_ray, push, s.lan) = lan;
+  *_zn_forge(z, zos_ray, push, s.bus) = bus;
   *_zn_forge(z, zos_ray, push, s.dep) = dep;
+
+  z->n.lab_ray = zos_ray;
+}
+
+/* _zn_forge_hint(): install a hint agent.
+**
+**   lid: cap at termination
+**   mat: saved mat for departure
+**   lip: cap at departure
+**   dep: content formula.
+*/
+static inline void
+_zn_forge_hint(u3_z   z,
+               u3_ray lid_ray,
+               u3_ray mat_ray,
+               u3_ray lip_ray,
+               u3_fox bus,
+               u3_fox dep)
+{
+  u3_ray zos_ray;
+
+  zos_ray = _zn_push_forge(z, hint);
+  *_zn_forge(z, zos_ray, hint, c.ger_op) = c3__hint;
+  *_zn_forge(z, zos_ray, hint, c.poq_ray) = z->n.lab_ray;
+  *_zn_forge(z, zos_ray, hint, c.lid_ray) = lid_ray;
+
+  *_zn_forge(z, zos_ray, hint, r.mat_ray) = mat_ray;
+  *_zn_forge(z, zos_ray, hint, r.lip_ray) = lip_ray;
+
+  *_zn_forge(z, zos_ray, hint, s.bus) = bus;
+  *_zn_forge(z, zos_ray, hint, s.dep) = dep;
 
   z->n.lab_ray = zos_ray;
 }
@@ -218,7 +257,7 @@ _zn_forge_jet(u3_z            z,
 **   lid: cap at termination
 **   mat: saved mat for departure
 **   lip: cap at departure
-**   lan: subject
+**   bus: subject
 **   feg: then formula
 **   paf: else formula
 */
@@ -249,7 +288,7 @@ _zn_forge_mate(u3_z z,
 **   lid: cap at termination
 **   mat: saved mat for departure
 **   lip: cap at departure
-**   lan: subject
+**   bus: subject
 **   feg: then formula
 **   paf: else formula
 */
@@ -258,7 +297,7 @@ _zn_forge_pick(u3_z z,
                u3_ray lid_ray,
                u3_ray mat_ray,
                u3_ray lip_ray,
-               u3_fox lan,
+               u3_fox bus,
                u3_fox feg,
                u3_fox paf)
 {
@@ -272,7 +311,7 @@ _zn_forge_pick(u3_z z,
   *_zn_forge(z, zos_ray, pick, r.mat_ray) = mat_ray;
   *_zn_forge(z, zos_ray, pick, r.lip_ray) = lip_ray;
 
-  *_zn_forge(z, zos_ray, pick, s.lan) = lan;
+  *_zn_forge(z, zos_ray, pick, s.bus) = bus;
   *_zn_forge(z, zos_ray, pick, s.feg) = feg;
   *_zn_forge(z, zos_ray, pick, s.paf) = paf;
   
@@ -309,14 +348,14 @@ _zn_forge_root(u3_z       z,
 /* _zn_forge_tail(): install a tail agent.
 **
 **   lid: cap at termination
-**   lan: subject
-**   fus: formula
+**   bus: subject
+**   fel: formula
 */
 static inline void
-_zn_forge_tail(u3_z z,
+_zn_forge_tail(u3_z   z,
                u3_ray lid_ray,
-               u3_fox lan,
-               u3_fox fus)
+               u3_fox bus,
+               u3_fox fel)
 {
   u3_ray zos_ray;
 
@@ -325,23 +364,52 @@ _zn_forge_tail(u3_z z,
   *_zn_forge(z, zos_ray, tail, c.poq_ray) = z->n.lab_ray;
   *_zn_forge(z, zos_ray, tail, c.lid_ray) = lid_ray;
 
-  *_zn_forge(z, zos_ray, tail, s.lan) = lan;
-  *_zn_forge(z, zos_ray, tail, s.fus) = fus;
+  *_zn_forge(z, zos_ray, tail, s.bus) = bus;
+  *_zn_forge(z, zos_ray, tail, s.fel) = fel;
   
   z->n.lab_ray = zos_ray;
+}
+
+/* _zn_forge_bask(): install a basket sequence.
+*/
+static inline c3_b
+_zn_forge_bask(u3_z    z,
+               u3_ray  lid_ray,
+               c3_w    num_w,
+               c3_w    dem_w)
+{
+  u3_ray zos_ray;
+
+  zos_ray = _zn_push_forge(z, bask);
+  *_zn_forge(z, zos_ray, bask, c.ger_op) = c3__bask;
+  *_zn_forge(z, zos_ray, bask, c.poq_ray) = z->n.lab_ray;
+  *_zn_forge(z, zos_ray, bask, c.lid_ray) = lid_ray;
+
+  {
+    c3_w lef_w = z->l.bat_nit - 
+                 (u3_ray_b(z->l.hat_ray) + 
+                  u3_ray_b(z->l.cap_ray) + 128);
+
+    c3_w wor_w = num_w * (lef_w / dem_w);
+
+    *_zn_forge(z, zos_ray, bask, s.wor_w) = wor_w;
+    z->l.cap_ray += wor_w;
+  }
+  z->n.lab_ray = zos_ray;
+  return 1;
 }
 
 /* _zn_start_link(): install a link sequence.
 **
 **   lid: cap at termination
-**   lan: operand subject
+**   bus: operand subject
 **   sef: operand formula
 **   dep: link formula
 */
 static inline void
 _zn_start_link(u3_z   z,
                u3_ray lid_ray,
-               u3_fox lan,
+               u3_fox bus,
                u3_fox sef,
                u3_fox dep)
 {
@@ -351,20 +419,20 @@ _zn_start_link(u3_z   z,
   mat_ray = _zn_depart(z);
 
   _zn_forge_link(z, lid_ray, mat_ray, lip_ray, dep);
-  _zn_forge_cook(z, z->l.cap_ray, lan, sef);
+  _zn_forge_cook(z, z->l.cap_ray, bus, sef);
 }
 
 /* _zn_start_push(): install a push sequence.
 **
 **   lid: cap at termination
-**   lan: operand subject
+**   bus: operand subject
 **   sef: operand formula
 **   dep: push formula
 */
 static inline void
 _zn_start_push(u3_z   z,
                u3_ray lid_ray,
-               u3_fox lan,
+               u3_fox bus,
                u3_fox sef,
                u3_fox dep)
 {
@@ -373,21 +441,44 @@ _zn_start_push(u3_z   z,
   lip_ray = z->l.cap_ray;
   mat_ray = _zn_depart(z);
 
-  _zn_forge_push(z, lid_ray, mat_ray, lip_ray, lan, dep);
-  _zn_forge_cook(z, z->l.cap_ray, lan, sef);
+  _zn_forge_push(z, lid_ray, mat_ray, lip_ray, bus, dep);
+  _zn_forge_cook(z, z->l.cap_ray, bus, sef);
+}
+
+/* _zn_start_hint(): install a hint sequence.
+**
+**   lid: cap at termination
+**   bus: operand subject
+**   sef: hint formula
+**   dep: content formula
+*/
+static inline void
+_zn_start_hint(u3_z   z,
+               u3_ray lid_ray,
+               u3_fox bus,
+               u3_fox sef,
+               u3_fox dep)
+{
+  u3_ray lip_ray, mat_ray;
+
+  lip_ray = z->l.cap_ray;
+  mat_ray = _zn_depart(z);
+
+  _zn_forge_hint(z, lid_ray, mat_ray, lip_ray, bus, dep);
+  _zn_forge_cook(z, z->l.cap_ray, bus, sef);
 }
 
 /* _zn_start_jet(): install a jet sequence.
 **
 **   lid: cap at termination
-**   lan: operand subject
+**   bus: operand subject
 **   sef: operand formula
 **   sax: jet code
 */
 static inline void
 _zn_start_jet(u3_z            z,
               u3_ray          lid_ray,
-              u3_fox          lan,
+              u3_fox          bus,
               u3_fox          sef,
               enum u3_zj_code sax_code)
 {
@@ -397,21 +488,21 @@ _zn_start_jet(u3_z            z,
   mat_ray = _zn_depart(z);
 
   _zn_forge_jet(z, lid_ray, mat_ray, lip_ray, sax_code);
-  _zn_forge_cook(z, z->l.cap_ray, lan, sef);
+  _zn_forge_cook(z, z->l.cap_ray, bus, sef);
 }
 
 /* _zn_start_root(): install a root sequence.
 **
 **   ger: operation
 **   lid: cap at termination
-**   lan: operand subject
+**   bus: operand subject
 **   sef: first formula
 */
 static inline void
 _zn_start_root(u3_z       z,
                u3_zn_oper ger_op,
                u3_ray     lid_ray,
-               u3_fox     lan,
+               u3_fox     bus,
                u3_fox     sef)
 {
   u3_ray lip_ray, mat_ray;
@@ -420,25 +511,25 @@ _zn_start_root(u3_z       z,
   mat_ray = _zn_depart(z);
 
   _zn_forge_root(z, ger_op, lid_ray, mat_ray, lip_ray);
-  _zn_forge_cook(z, z->l.cap_ray, lan, sef);
+  _zn_forge_cook(z, z->l.cap_ray, bus, sef);
 }
 
 /* _zn_start_goto(): install a goto sequence.
 **
 **   lid: cap at termination
-**   lan: subject
-**   fus: target formula
+**   bus: subject
+**   fel: target formula
 */
 static inline void
 _zn_start_goto(u3_z   z,
                u3_ray lid_ray,
-               u3_fox lan, 
-               u3_fox fus)
+               u3_fox bus, 
+               u3_fox fel)
 {
 #if 1
   u3_fox ged, nar, wid, cov;
 
-  if ( u3_yes == u3_lr_fork(z, fus, &ged, &nar) ) {
+  if ( u3_yes == u3_lr_fork(z, fel, &ged, &nar) ) {
     /* ged: subject formula
     ** nar: formula formula
     */
@@ -448,16 +539,16 @@ _zn_start_goto(u3_z   z,
       /* wid: formula axis
       ** dep: static formula
       */
-      u3_rat dep = u3_lr_twig(z, wid, lan);
+      u3_rat dep = u3_lr_twig(z, wid, bus);
 
       if ( u3_none != dep ) {
         enum u3_zj_code sax_code;
 
         if ( u3_zj_code_none != (sax_code = u3_zj_look(z, dep)) ) {
-          _zn_start_jet(z, lid_ray, lan, ged, sax_code);
+          _zn_start_jet(z, lid_ray, bus, ged, sax_code);
         } 
         else {
-          _zn_start_link(z, lid_ray, lan, ged, dep);
+          _zn_start_link(z, lid_ray, bus, ged, dep);
         }
         return;
       }
@@ -465,7 +556,7 @@ _zn_start_goto(u3_z   z,
     else if ( u3_yes == u3_lr_p(z, nar, 1, &cov) ) {
       /* cov: static formula
       */
-      _zn_start_link(z, lid_ray, lan, ged, cov);
+      _zn_start_link(z, lid_ray, bus, ged, cov);
       return;
     }
   }
@@ -473,21 +564,21 @@ _zn_start_goto(u3_z   z,
 
   /* Default handling.
   */
-  _zn_start_root(z, c3__goto, lid_ray, lan, fus);
+  _zn_start_root(z, c3__goto, lid_ray, bus, fel);
 }
 
 /* _zn_start_mate(): install a mate sequence.
 **
 **   lid: cap at termination
 **   pod: jet-computed product
-**   lan: subject
+**   bus: subject
 **   sef: formula
 */
 static inline void
 _zn_start_mate(u3_z   z,
                u3_ray lid_ray,
                u3_fox pod,
-               u3_fox lan, 
+               u3_fox bus, 
                u3_fox sef)
 {
   u3_ray lip_ray, mat_ray;
@@ -496,13 +587,13 @@ _zn_start_mate(u3_z   z,
   mat_ray = _zn_depart(z);
 
   _zn_forge_mate(z, lid_ray, mat_ray, lip_ray, pod);
-  _zn_forge_cook(z, z->l.cap_ray, lan, sef);
+  _zn_forge_cook(z, z->l.cap_ray, bus, sef);
 }
 
 /* _zn_start_pick(): install a pick sequence.
 **
 **   lid: cap at termination
-**   lan: subject
+**   bus: subject
 **   cor: test formula
 **   feg: then formula
 **   paf: else formula
@@ -510,7 +601,7 @@ _zn_start_mate(u3_z   z,
 static inline void
 _zn_start_pick(u3_z   z,
                u3_ray lid_ray,
-               u3_fox lan,
+               u3_fox bus,
                u3_fox cor,
                u3_fox feg,
                u3_fox paf)
@@ -520,8 +611,8 @@ _zn_start_pick(u3_z   z,
   lip_ray = z->l.cap_ray;
   mat_ray = _zn_depart(z);
 
-  _zn_forge_pick(z, lid_ray, mat_ray, lip_ray, lan, feg, paf);
-  _zn_forge_cook(z, z->l.cap_ray, lan, cor);
+  _zn_forge_pick(z, lid_ray, mat_ray, lip_ray, bus, feg, paf);
+  _zn_forge_cook(z, z->l.cap_ray, bus, cor);
 }
 
 /* uz_z_mung():
@@ -599,15 +690,15 @@ u3_z_run(u3_z z,
   _zn_forge_cook(z, z->l.cap_ray, b, c);
 
   while ( 1 ) {
-    /* Preamble - miscellaneous noncomputational operations.
+    /* Preamble - miscelbuseous noncomputational operations.
     */
     {
       /* Test for memory exhaustion.  No agent can allocate more
-      ** than 64 words without another check.
+      ** than 256 words without another check.
       **
       ** For faster performance, this should be per-operation.
       */
-      if ( u3_no == u3_lm_open(z, 64) ) {
+      if ( u3_no == u3_lm_open(z, 256) ) {
         c3_w maz_w, buc_w;
 
         u3_lm_water(z, &maz_w, &buc_w);
@@ -650,10 +741,12 @@ u3_z_run(u3_z z,
         z->l.cap_ray = bip_ray;
 
 #   define _zn_bip_cons(field) *_zn_anvil(z, bip_ray, cons, field)
+#   define _zn_bip_bask(field) *_zn_anvil(z, bip_ray, bask, field)
 #   define _zn_bip_cook(field) *_zn_anvil(z, bip_ray, cook, field)
 #   define _zn_bip_drop(field) *_zn_anvil(z, bip_ray, drop, field)
 #   define _zn_bip_fine(field) *_zn_anvil(z, bip_ray, fine, field)
-#   define _zn_bip_jet(field) *_zn_anvil(z, bip_ray, jet, field)
+#   define _zn_bip_jet(field)  *_zn_anvil(z, bip_ray, jet, field)
+#   define _zn_bip_hint(field) *_zn_anvil(z, bip_ray, hint, field)
 #   define _zn_bip_link(field) *_zn_anvil(z, bip_ray, link, field)
 #   define _zn_bip_mate(field) *_zn_anvil(z, bip_ray, mate, field)
 #   define _zn_bip_pick(field) *_zn_anvil(z, bip_ray, pick, field)
@@ -686,7 +779,7 @@ u3_z_run(u3_z z,
       */
         case c3__cook: {
           u3_ray lid_ray = _zn_bip_cook(f.c.lid_ray);
-          u3_fox lan     = _zn_bip_cook(f.s.lan);
+          u3_fox bus     = _zn_bip_cook(f.s.bus);
           u3_fox sef     = _zn_bip_cook(f.s.sef);
 
           if ( u3_no == u3_lr_dust(z, sef) ) {
@@ -694,19 +787,19 @@ u3_z_run(u3_z z,
           }
           else {
             u3_fox hib = u3_h(z, sef);
-            u3_fox fus = u3_t(z, sef);
+            u3_fox fel = u3_t(z, sef);
 
             if ( u3_yes == u3_lr_dust(z, hib) ) {
               _zn_forge_cons(z, lid_ray);
-              _zn_forge_tail(z, z->l.cap_ray, lan, fus);
-              _zn_forge_cook(z, z->l.cap_ray, lan, hib);
+              _zn_forge_tail(z, z->l.cap_ray, bus, fel);
+              _zn_forge_cook(z, z->l.cap_ray, bus, hib);
             }
             else {
               switch ( hib ) {
                 default: return c3__exit;
 
-                case 0: {
-                  u3_fox pob = u3_lr_twig(z, fus, lan);
+                case u3_nock_frag: {
+                  u3_fox pob = u3_lr_twig(z, fel, bus);
 
                   if ( u3_none == pob ) {
                     return c3__exit;
@@ -724,8 +817,8 @@ u3_z_run(u3_z z,
                   break;
                 }
 
-                case 1: {
-                  u3_fox vik = u3_ln_ice(z, fus);
+                case u3_nock_bone: {
+                  u3_fox vik = u3_ln_ice(z, fel);
 
                   if ( u3_none == vik ) {
                     return c3__fail;
@@ -736,79 +829,91 @@ u3_z_run(u3_z z,
                   break;
                 }
 
-                case 2: _zn_start_goto(z, lid_ray, lan, fus); break;
-
-                case 3: _zn_start_root(z, c3__tap, lid_ray, lan, fus); break;
-                case 4: _zn_start_root(z, c3__inc, lid_ray, lan, fus); break;
-                case 5: _zn_start_root(z, c3__eq,  lid_ray, lan, fus); break;
-
-                case 6: {
-                  if ( u3_no == u3_lr_dust(z, fus) ) {
+                case u3_nock_sail: {
+                  _zn_start_goto(z, lid_ray, bus, fel); 
+                  break;
+                }
+                case u3_nock_dust: {
+                  _zn_start_root(z, c3__tap, lid_ray, bus, fel); 
+                  break;
+                }
+                case u3_nock_vint: {
+                  _zn_start_root(z, c3__inc, lid_ray, bus, fel); 
+                  break;
+                }
+                case u3_nock_sing: {
+                  _zn_start_root(z, c3__eq,  lid_ray, bus, fel); 
+                  break;
+                }
+                case u3_nock_trol: {
+                  if ( u3_no == u3_lr_dust(z, fel) ) {
                     return c3__exit;
                   } 
                   else {
-                    u3_fox p_fus = u3_h(z, fus);
-                    u3_fox qr_fus = u3_t(z, fus);
+                    u3_fox p_fel = u3_h(z, fel);
+                    u3_fox qr_fel = u3_t(z, fel);
 
-                    if ( u3_no == u3_lr_dust(z, qr_fus) ) {
+                    if ( u3_no == u3_lr_dust(z, qr_fel) ) {
                       return c3__exit;
                     }
                     else {
-                      u3_fox q_fus = u3_h(z, qr_fus);
-                      u3_fox r_fus = u3_t(z, qr_fus);
+                      u3_fox q_fel = u3_h(z, qr_fel);
+                      u3_fox r_fel = u3_t(z, qr_fel);
 
-                      _zn_start_pick(z, lid_ray, lan, p_fus, q_fus, r_fus);
+                      _zn_start_pick(z, lid_ray, bus, p_fel, q_fel, r_fel);
                     }
                   }
                   break;
                 }
 
-                case 7: {
-                  if ( u3_no == u3_lr_dust(z, fus) ) {
+                case u3_nock_flac: {
+                  if ( u3_no == u3_lr_dust(z, fel) ) {
                     return c3__exit;
                   }
                   else {
                     _zn_start_link
-                      (z, lid_ray, lan, u3_h(z, fus), u3_t(z, fus));
+                      (z, lid_ray, bus, u3_h(z, fel), u3_t(z, fel));
                     break;
                   }
                 }
-                case 8: {
-                  if ( u3_no == u3_lr_dust(z, fus) ) {
+                case u3_nock_gant: {
+                  if ( u3_no == u3_lr_dust(z, fel) ) {
                     return c3__exit;
                   }
                   else {
                     _zn_start_push
-                      (z, lid_ray, lan, u3_h(z, fus), u3_t(z, fus));
+                      (z, lid_ray, bus, u3_h(z, fel), u3_t(z, fel));
                     break;
                   }
                 }
-                case 11: {
-                  if ( u3_no == u3_lr_dust(z, fus) ) {
+                case u3_nock_hint: {
+                  if ( u3_no == u3_lr_dust(z, fel) ) {
                     return c3__exit;
                   }
                   else {
-                    _zn_forge_cook(z, z->l.cap_ray, lan, u3_t(z, fus));
+                    _zn_start_hint
+                      (z, lid_ray, bus, u3_h(z, fel), u3_t(z, fel));
+                    break;
                   }
                 }
-                case 12: {
-                  if ( u3_no == u3_lr_dust(z, fus) ) {
+                case u3_nock_coat: {
+                  if ( u3_no == u3_lr_dust(z, fel) ) {
                     return c3__exit;
                   }
                   else {
-                    u3_fox vik = u3_ln_ice(z, u3_t(z, fus));
+                    u3_fox vik = u3_ln_ice(z, u3_t(z, fel));
 
                     if ( u3_none == vik ) {
                       return c3__fail;
                     }
                     else {
-                      u3_fox cor = u3_ln_cell(z, lan, vik);
-                      u3_fox pup = u3_h(z, fus);
+                      u3_fox cor = u3_ln_cell(z, bus, vik);
+                      u3_fox pup = u3_h(z, fel);
 
                       if ( 0 != pup ) {
                         u3_zj_load(z, pup, cor);
                       }
-                      _zn_complete(z, lid_ray, u3_ln_cell(z, lan, vik));
+                      _zn_complete(z, lid_ray, u3_ln_cell(z, bus, vik));
                     }
                     break;
                   }
@@ -888,6 +993,57 @@ u3_z_run(u3_z z,
           break;
         }
       /*
+      **  bask
+      */
+        case c3__bask: {
+          c3_w   wor_w   = _zn_bip_bask(f.s.wor_w);
+          u3_ray anv_ray = bip_ray + c3_wiseof(struct u3_zn_forge_bask) + wor_w;
+          u3_fox gus     = *u3_at_ray(&z->l, anv_ray);
+
+          _zn_complete(z, _zn_bip_bask(f.c.lid_ray), gus);
+          break;
+        }
+      /*
+      **  hint
+      */
+        case c3__hint: {
+          _zn_retreat(z, _zn_bip_hint(f.r.mat_ray));
+          {
+            u3_ray lid_ray = _zn_bip_hint(f.c.lid_ray);
+            u3_fox bus     = _zn_bip_hint(f.s.bus);
+            u3_fox dep     = _zn_bip_hint(f.s.dep);
+            u3_fox gus     = _zn_bip_hint(d.gus);
+
+            if ( u3_no == u3_lr_dust(z, gus) ) {
+              _zn_forge_cook(z, lid_ray, bus, dep);
+            }
+            else { 
+              u3_fox p_gus, q_gus;
+
+              if ( (u3_yes == u3_lr_pq(z, gus, c3__bask, &p_gus, &q_gus)) &&
+                   u3_rat_is_cat(p_gus) &&
+                   u3_rat_is_cat(q_gus) &&
+                   (q_gus > 0) &&
+                   (p_gus > 0) &&
+                   (p_gus < q_gus) )
+              {
+                if ( _zn_forge_bask(z, lid_ray, p_gus, q_gus) ) {
+                  _zn_forge_cook(z, z->l.cap_ray, bus, dep);
+                } else {
+                  _zn_forge_cook(z, lid_ray, bus, dep);
+                }
+              }
+              else if ( u3_yes == u3_lr_p(z, gus, c3__blog, &p_gus) ) {
+                u3_b_print(z, "log", u3_t(z, gus));
+              }
+              else {
+                _zn_forge_cook(z, lid_ray, bus, dep);
+              }
+            }
+          }
+          break;
+        }
+      /*
       **  link
       */
         case c3__link: {
@@ -922,7 +1078,7 @@ u3_z_run(u3_z z,
               ** If not, we may tamp - relocating [gus] as we elide region B,
               ** and slide region A down on top of it.  If not, we can't.
               **
-              ** Without tail optimization, nolt cannot loop without leaking.
+              ** Without tail optimization, we cannot loop without leaking.
               **
               ** Note that both detecting and applying this optimization has
               ** a cost of the same order as the size of A.  Moreover, if we
@@ -963,72 +1119,72 @@ u3_z_run(u3_z z,
           u3_ray mat_ray = _zn_bip_push(f.r.mat_ray);
           u3_ray lid_ray = _zn_bip_push(f.c.lid_ray);
           u3_fox dep     = _zn_bip_push(f.s.dep);
-          u3_fox lan     = _zn_bip_push(f.s.lan);
+          u3_fox bus     = _zn_bip_push(f.s.bus);
           u3_fox gus     = _zn_bip_push(d.gus);
           u3_fox mal;
           
-          mal = u3_ln_cell(z, gus, lan);
+          mal = u3_ln_cell(z, gus, bus);
           _zn_retreat(z, mat_ray);
 
           _zn_forge_cook(z, lid_ray, mal, dep);
 
           break;
         }
-    /*
-    **  mate
-    */
-      case c3__mate: {
-        _zn_retreat(z, _zn_bip_mate(f.r.mat_ray));
-        {
-          u3_ray lid_ray = _zn_bip_mate(f.c.lid_ray);
-          u3_fox pod     = _zn_bip_mate(f.s.pod);
-          u3_fox gus     = _zn_bip_mate(d.gus);
-
-          if ( u3_yes == u3_lr_sing(z, pod, gus) ) {
-            _zn_complete(z, lid_ray, pod);
-          }
-          else {
-            printf("mate: jet mismatch\n");
-
-            u3_b_print(&z->l, "hard", pod);
-            u3_b_print(&z->l, "soft", gus);
-
-            return c3__fail;
-          }
-        }
-        break;
-      }
-    /*
-    **  pick
-    */
-      case c3__pick: {
-        _zn_retreat(z, _zn_bip_pick(f.r.mat_ray));
-        {
-          u3_ray lid_ray = _zn_bip_pick(f.c.lid_ray);
-          u3_ray lip_ray = _zn_bip_pick(f.r.lip_ray);
-          u3_fox lan     = _zn_bip_pick(f.s.lan);
-          u3_fox feg     = _zn_bip_pick(f.s.feg);
-          u3_fox paf     = _zn_bip_pick(f.s.paf);
-          u3_fox gus     = _zn_bip_pick(d.gus);
-
-          if ( 0 == gus ) {
-            c3_assert(lip_ray == z->l.cap_ray);
-
-            _zn_forge_cook(z, lid_ray, lan, feg); 
-          }
-          else if ( 1 == gus ) {
-            c3_assert(lip_ray == z->l.cap_ray);
-
-            _zn_forge_cook(z, lid_ray, lan, paf); 
-          }
-          else {
-            return c3__exit;
-          }
-        }
-        break;
-      }
       /*
-      **  root
+      **  mate
+      */
+        case c3__mate: {
+          _zn_retreat(z, _zn_bip_mate(f.r.mat_ray));
+          {
+            u3_ray lid_ray = _zn_bip_mate(f.c.lid_ray);
+            u3_fox pod     = _zn_bip_mate(f.s.pod);
+            u3_fox gus     = _zn_bip_mate(d.gus);
+
+            if ( u3_yes == u3_lr_sing(z, pod, gus) ) {
+              _zn_complete(z, lid_ray, pod);
+            }
+            else {
+              printf("mate: jet mismatch\n");
+
+              u3_b_print(&z->l, "hard", pod);
+              u3_b_print(&z->l, "soft", gus);
+
+              return c3__fail;
+            }
+          }
+          break;
+        }
+      /*
+      **  pick
+      */
+        case c3__pick: {
+          _zn_retreat(z, _zn_bip_pick(f.r.mat_ray));
+          {
+            u3_ray lid_ray = _zn_bip_pick(f.c.lid_ray);
+            u3_ray lip_ray = _zn_bip_pick(f.r.lip_ray);
+            u3_fox bus     = _zn_bip_pick(f.s.bus);
+            u3_fox feg     = _zn_bip_pick(f.s.feg);
+            u3_fox paf     = _zn_bip_pick(f.s.paf);
+            u3_fox gus     = _zn_bip_pick(d.gus);
+
+            if ( 0 == gus ) {
+              c3_assert(lip_ray == z->l.cap_ray);
+
+              _zn_forge_cook(z, lid_ray, bus, feg); 
+            }
+            else if ( 1 == gus ) {
+              c3_assert(lip_ray == z->l.cap_ray);
+
+              _zn_forge_cook(z, lid_ray, bus, paf); 
+            }
+            else {
+              return c3__exit;
+            }
+          }
+          break;
+        }
+      /*
+      **  eq
       */
         case c3__eq: {
           _zn_retreat(z, _zn_bip_root(f.r.mat_ray));
@@ -1046,6 +1202,9 @@ u3_z_run(u3_z z,
           }
           break;
         }
+      /*
+      **  goto
+      */
         case c3__goto: {
           _zn_retreat(z, _zn_bip_root(f.r.mat_ray));
           {
@@ -1055,17 +1214,20 @@ u3_z_run(u3_z z,
             if ( u3_no == u3_lr_dust(z, gus) ) {
               return c3__exit;
             } else {
-              /* lan: subject
+              /* bus: subject
               ** sef: formula
               */
-              u3_fox lan = u3_h(z, gus);
+              u3_fox bus = u3_h(z, gus);
               u3_fox sef = u3_t(z, gus);
 
-              _zn_forge_cook(z, lid_ray, lan, sef);
+              _zn_forge_cook(z, lid_ray, bus, sef);
             }
           }
           break;
         }
+      /*
+      **  inc
+      */
         case c3__inc: {
           _zn_retreat(z, _zn_bip_root(f.r.mat_ray));
           {
@@ -1087,6 +1249,9 @@ u3_z_run(u3_z z,
           }
           break;
         }
+      /*
+      **  tap
+      */
         case c3__tap: {
           _zn_retreat(z, _zn_bip_root(f.r.mat_ray));
           {
@@ -1103,14 +1268,14 @@ u3_z_run(u3_z z,
       */
         case c3__tail: {
           u3_fox gus = _zn_bip_tail(d.gus);
-          u3_fox lan = _zn_bip_tail(f.s.lan);
-          u3_fox fus = _zn_bip_tail(f.s.fus);
+          u3_fox bus = _zn_bip_tail(f.s.bus);
+          u3_fox fel = _zn_bip_tail(f.s.fel);
 
           /* Tricky: we push [gus] above the agent below,
           ** presumably a cons.
           */
           _zn_complete(z, _zn_bip_tail(f.c.lid_ray), gus);
-          _zn_forge_cook(z, z->l.cap_ray, lan, fus);
+          _zn_forge_cook(z, z->l.cap_ray, bus, fel);
 
           break;
         }

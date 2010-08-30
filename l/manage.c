@@ -6,25 +6,25 @@
 
 /* u3_lm_new():
 **
-**   Create a fresh loom, mallocing (1 << y_a) words of memory.  Return
+**   Create a fresh loom, mallocing (1 << a_y) words of memory.  Return
 **   null if malloc fails.
 **
 **   A loom can be freed with free() - it uses no external resources, 
 **   so there is no destructor.
 */
 u3_l
-u3_lm_new(c3_y y_a)
+u3_lm_new(c3_y a_y)
 {
-  c3_assert(y_a >= 8);
-  c3_assert(y_a <= 28);
+  c3_assert(a_y >= 8);
+  c3_assert(a_y <= 28);
   {
-    u3_l l = malloc(4 << y_a);
+    u3_l l = malloc(4 << a_y);
 
     if ( !l ) {
       return 0;
     }
     else {
-      l->bat_nit = ((1 << y_a) - 1);
+      l->bat_nit = ((1 << a_y) - 1);
 
       l->hat_ray = u3_ray_of(1, 0);
       l->cap_ray = u3_ray_of(0, c3_wiseof(struct u3_loom));
@@ -38,23 +38,23 @@ u3_lm_new(c3_y y_a)
 
 /* u3_lm_alloc():
 **
-**   Allocate (w_a) words of C storage on the hat.
+**   Allocate (a_w) words of C storage on the hat.
 */
 void *
 u3_lm_alloc(u3_lv lv,
-            c3_w  w_a)
+            c3_w  a_w)
 {
   u3_l l = lv;
 
-  if ( u3_no == u3_lm_open(l, w_a) ) {
+  if ( u3_no == u3_lm_open(l, a_w) ) {
     return 0;
   } else {
     u3_ray hat_ray = l->hat_ray;
 
-    l->hat_ray += w_a;
+    l->hat_ray += a_w;
 
     if ( u3_ray_a(hat_ray) ) {
-      return u3_at_ray(l, hat_ray + (w_a - 1));
+      return u3_at_ray(l, hat_ray + (a_w - 1));
     }
     else {
       return u3_at_ray(l, hat_ray);
@@ -169,14 +169,14 @@ u3_lm_mug(u3_lv    lv,
       else {
         c3_w w_len = *u3_at_pig_len(l, veb);
         c3_w w_zon = 0x18d0a625;
-        c3_w w_i;
+        c3_w i_w;
 
         while ( 1 ) {
           c3_w w_gid = w_zon;
           c3_w w_dav;
 
-          for ( w_i=0; w_i < w_len; w_i++ ) {
-            w_gid ^= *u3_at_pig_buf(l, veb, w_i);
+          for ( i_w=0; i_w < w_len; i_w++ ) {
+            w_gid ^= *u3_at_pig_buf(l, veb, i_w);
             w_gid = _li_mash(w_gid);
           }
           w_dav = 0x7fffffff & w_gid;
@@ -275,31 +275,31 @@ u3_lm_flog(u3_lv lv)
 u3_flag
 u3_lm_clear(u3_lv  lv,
             u3_fox lef,
-            u3_ray ray_lid,
-            u3_ray ray_nut)
+            u3_ray lid_ray,
+            u3_ray nut_ray)
 {
   u3_l l = lv;
 
-  c3_assert(u3_ray_a(ray_lid) == u3_ray_a(ray_nut));
+  c3_assert(u3_ray_a(lid_ray) == u3_ray_a(nut_ray));
 
   if ( u3_rat_is_cat(lef) ) {
     return u3_yes;
   } else {
     u3_ray ray_lef = u3_dog_a(lef);
 
-    if ( u3_ray_a(ray_lef) != u3_ray_a(ray_lid) ) {
+    if ( u3_ray_a(ray_lef) != u3_ray_a(lid_ray) ) {
       return u3_yes;
     }
-    else if ( ray_lef < ray_lid ) {
+    else if ( ray_lef < lid_ray ) {
       return u3_yes;
     }
-    else if ( ray_lef >= ray_nut ) {
+    else if ( ray_lef >= nut_ray ) {
       if ( u3_dog_is_hog(lef) ) {
         u3_fox hed = *u3_at_hog_hed(l, lef);
         u3_fox tel = *u3_at_hog_tel(l, lef);
 
-        if ( (u3_yes == u3_lm_clear(l, hed, ray_lid, ray_nut)) &&
-             (u3_yes == u3_lm_clear(l, tel, ray_lid, ray_nut)) ) {
+        if ( (u3_yes == u3_lm_clear(l, hed, lid_ray, nut_ray)) &&
+             (u3_yes == u3_lm_clear(l, tel, lid_ray, nut_ray)) ) {
           return u3_yes;
         }
         else return u3_no;
@@ -317,15 +317,15 @@ u3_lm_clear(u3_lv  lv,
 static void
 _li_tamp_swizzle(u3_l   l,
                  u3_fox lef,
-                 c3_w   w_pif,
-                 u3_ray ray_nut,
-                 c3_b   b_nax[])
+                 c3_w   pif_w,
+                 u3_ray nut_ray,
+                 c3_b   nax_b[])
 {
   /* Totally unnecessary assertions.
   */
   {
     c3_assert(u3_rat_is_dog(lef));
-    c3_assert(u3_dog_a(lef) >= ray_nut);
+    c3_assert(u3_dog_a(lef) >= nut_ray);
   }
 
   /* Only hogs are fixed.
@@ -335,41 +335,41 @@ _li_tamp_swizzle(u3_l   l,
     
     /* Is this hog fixed?
     */
-    if ( b_nax[ray_lef - ray_nut] ) {
+    if ( nax_b[ray_lef - nut_ray] ) {
       return;
     }
     else {
       /* Fix the hog!
       */
-      b_nax[ray_lef - ray_nut] = 1;
+      nax_b[ray_lef - nut_ray] = 1;
       {
         u3_fox fes = *u3_at_hog_hed(l, lef);
         u3_fox hoz = *u3_at_hog_tel(l, lef);
 
         if ( u3_rat_is_dog(fes) &&
-             (u3_dog_beam(fes) == u3_ray_beam(ray_nut)) &&
-             (u3_dog_ray(fes) >= ray_nut) )
+             (u3_dog_beam(fes) == u3_ray_beam(nut_ray)) &&
+             (u3_dog_ray(fes) >= nut_ray) )
         {
           /* Rewrite the pointer.
           */
-          *u3_at_hog_hed(l, lef) = (fes - (w_pif << 2));
+          *u3_at_hog_hed(l, lef) = (fes - (pif_w << 2));
           
           /* Swizzle into it.
           */
-          _li_tamp_swizzle(l, fes, w_pif, ray_nut, b_nax);
+          _li_tamp_swizzle(l, fes, pif_w, nut_ray, nax_b);
         }
 
         if ( u3_rat_is_dog(hoz) &&
-             (u3_dog_beam(hoz) == u3_ray_beam(ray_nut)) &&
-             (u3_dog_ray(hoz) >= ray_nut) )
+             (u3_dog_beam(hoz) == u3_ray_beam(nut_ray)) &&
+             (u3_dog_ray(hoz) >= nut_ray) )
         {
           /* Rewrite the pointer.
           */
-          *u3_at_hog_tel(l, lef) = (hoz - (w_pif << 2));
+          *u3_at_hog_tel(l, lef) = (hoz - (pif_w << 2));
           
           /* Swizzle into it.
           */
-          _li_tamp_swizzle(l, hoz, w_pif, ray_nut, b_nax);
+          _li_tamp_swizzle(l, hoz, pif_w, nut_ray, nax_b);
         }
       }
     }
@@ -378,7 +378,7 @@ _li_tamp_swizzle(u3_l   l,
 
 /* u3_lm_tamp():
 **
-**   Tamp, eliding the segment from [ray_lid] up to [ray_nut],
+**   Tamp, eliding the segment from [lid_ray] up to [nut_ray],
 **   preserving the root [lef].
 **
 **   Assumes u3_lm_clear() with the same arguments.
@@ -386,16 +386,16 @@ _li_tamp_swizzle(u3_l   l,
 u3_fox
 u3_lm_tamp(u3_lv  lv,
            u3_fox lef,
-           u3_ray ray_lid,
-           u3_ray ray_nut)
+           u3_ray lid_ray,
+           u3_ray nut_ray)
 {
   /* pif: length of the segment to elide.
   ** lam: length of the segment to shift down over it.
   */
   u3_l l     = lv;
-  c3_w w_pif = (ray_nut - ray_lid);
-  c3_w w_lam = (l->cap_ray - ray_nut);
-  c3_w w_i;
+  c3_w pif_w = (nut_ray - lid_ray);
+  c3_w lam_w = (l->cap_ray - nut_ray);
+  c3_w i_w;
 
   /* Stupid, unnecessary assertions.
   */
@@ -404,35 +404,35 @@ u3_lm_tamp(u3_lv  lv,
     */
     c3_assert(u3_rat_is_dog(lef));
 
-    c3_assert(u3_ray_a(ray_nut) == u3_ray_a(ray_lid));
-    c3_assert(u3_ray_a(u3_dog_a(lef)) == u3_ray_a(ray_lid));
-    c3_assert(u3_dog_a(lef) >= ray_nut);
+    c3_assert(u3_ray_a(nut_ray) == u3_ray_a(lid_ray));
+    c3_assert(u3_ray_a(u3_dog_a(lef)) == u3_ray_a(lid_ray));
+    c3_assert(u3_dog_a(lef) >= nut_ray);
   }
 
   /* Swizzle the good segment down to its new location.
   **
-  **   nax[w_i]: 1 iff a hog at nut[w_i] has been fixed.
+  **   nax[i_w]: 1 iff a hog at nut[i_w] has been fixed.
   */
   {
-    c3_b b_nax[w_lam];
-    c3_w w_i;
+    c3_b nax_b[lam_w];
+    c3_w i_w;
 
-    for ( w_i = 0; w_i < w_lam; w_i++ ) {
-      b_nax[w_i] = 0;
+    for ( i_w = 0; i_w < lam_w; i_w++ ) {
+      nax_b[i_w] = 0;
     }
-    _li_tamp_swizzle(l, lef, w_pif, ray_nut, b_nax);
+    _li_tamp_swizzle(l, lef, pif_w, nut_ray, nax_b);
   }
 
   /* Move the good segment down.
   */
-  for ( w_i = 0; w_i < w_lam; w_i++ ) {
-    *u3_at_ray(l, (ray_lid + w_i)) = *u3_at_ray(l, (ray_nut + w_i));
+  for ( i_w = 0; i_w < lam_w; i_w++ ) {
+    *u3_at_ray(l, (lid_ray + i_w)) = *u3_at_ray(l, (nut_ray + i_w));
   }
-  l->cap_ray -= w_pif;
+  l->cap_ray -= pif_w;
 
   /* Move and return [lef].
   */
-  return (lef - (w_pif << 2));
+  return (lef - (pif_w << 2));
 }
 
 /* u3_lm_water():
@@ -441,16 +441,281 @@ u3_lm_tamp(u3_lv  lv,
 */
 void
 u3_lm_water(u3_lv lv,
-            c3_w  *w_maz,
-            c3_w  *w_buc)
+            c3_w  *maz_w,
+            c3_w  *buc_w)
 {
   u3_l l = lv;
 
   if ( !u3_ray_beam(l->hat_ray) ) {
-    *w_maz = u3_ray_point(l->hat_ray);
-    *w_buc = u3_ray_point(l->cap_ray);
+    *maz_w = u3_ray_point(l->hat_ray);
+    *buc_w = u3_ray_point(l->cap_ray);
   } else {
-    *w_maz = u3_ray_point(l->cap_ray);
-    *w_buc = u3_ray_point(l->hat_ray);
+    *maz_w = u3_ray_point(l->cap_ray);
+    *buc_w = u3_ray_point(l->hat_ray);
   }
 }
+
+#if 0
+/* _lm_bask_alloc(): allocate in a basket.  Returns 0 for failure.
+*/
+static u3_ray
+_lm_bask_alloc(u3_l   l,
+               u3_ray bas_ray,
+               c3_w   siz_z)
+{
+}
+
+/* _lm_bask_free(): free from basket.
+*/
+static void
+_lm_bask_free(u3_l   l,
+              u3_ray bas_ray,
+              u3_ray vog_ray)
+{
+}
+
+/* _lm_bask_save(): save in basket.
+**
+**  XX: intense copying from u3_ln_ice().
+**  XX: does not preserve dag structure.
+*/
+static u3_rat
+_lm_bask_save(u3_l   l,
+              u3_ray bas_ray,
+              u3_fox fiz)
+{
+  u3_ray fiz_ray = u3_dog_a(fiz);
+
+  if ( u3_ray_a(fiz_ray) == 0 ) {
+    if ( fiz_ray < *u3_to(l, bas_ray, struct u3_bask, m.wst_ray) ) {
+      return fiz; 
+    }
+  } else {
+    if ( fiz_ray < *u3_to(l, bas_ray, struct u3_bask, m.est_ray) ) {
+      return fiz; 
+    }
+  }
+
+  if ( u3_dog_is_hog(fiz) ) {
+    u3_rat hed = _lm_bask_save(l, *u3_at_hog_hed(l, fiz));
+    u3_rat tel = _lm_bask_save(l, *u3_at_hog_tel(l, fiz));
+    u3_ray ray_nov;
+
+    if ( (u3_none == hed) || (u3_none == tel) ) {
+      return u3_none;
+    }
+    ray_nov = _lm_bask_alloc(c3_wiseof(struct u3_cell));
+    if ( 0 == ray_nov ) {
+      return u3_none;
+    }
+
+    *u3_at_dog_mug(l, nov) = *u3_at_dog_mug(l, fiz);
+    *u3_at_hog_hed(l, nov) = hed;
+    *u3_at_hog_tel(l, nov) = tel;
+
+    l->cop_w += 3;
+    return nov;
+    }
+  }
+  else {
+    c3_w len_w = *u3_at_pig_len(l, fiz);
+
+    if ( u3_no == u3_lm_open(l, (len_w + c3_wiseof(struct u3_atom))) ) {
+      return u3_none;
+    }
+    else {
+      u3_ray ray_nov;
+      u3_fox nov;
+
+      ray_nov = l->hat_ray;
+      l->hat_ray += (len_w + c3_wiseof(struct u3_atom));
+      nov = u3_pig_of(ray_nov, 0);
+
+      *u3_at_dog_mug(l, nov) = 0;
+      *u3_at_pig_len(l, nov) = len_w;
+
+      /* Fill the pig.
+      */
+      {
+        c3_w i_w;
+
+        for ( i_w=0; i_w < len_w; i_w++ ) {
+          *u3_at_pig_buf(l, nov, i_w) = *u3_at_pig_buf(l, fiz, i_w);
+        }
+      }
+
+      l->cop_w += (2 + len_w);
+      return nov;
+    }
+  }
+  }
+}
+
+/* _lm_bask_put():
+**
+**   Try to insert a name-value pair into a memory basket.
+*/
+static void
+_lm_bask_put(u3_l   l,
+             u3_ray bas_ray,
+             u3_ray sam_ray,
+             c3_w   mug_w,
+             c3_y   sft_y,
+             u3_fox nam,
+             u3_fox val)
+{
+  while ( 1 ) {
+    c3_w zid_w     = (mug_w >> sft_y) & 15;
+    u3_ray von_ray = (zid_w * c3_wiseof(struct u3_pair)) + 
+                     u3_of(l, sam_ray, struct u3_sham, dol_ray);
+    u3_rat nim     = *u3_to(l, von_ray, struct u3_pair, nam);
+
+    if ( u3_none == nim ) {
+      u3_ray dul_ray = *u3_to(l, von_ray, struct u3_pair, val);
+
+      if ( 0 == dul_ray ) {
+        nam = _lm_bask_save(l, bas_ray, nam);
+        val = _lm_bask_save(l, bas_ray, val);
+
+        if ( (u3_none == nam) || (u3_none == val) ) {
+          return;
+        }
+        *u3_to(l, von_ray, struct u3_pair, nam) = nam;
+        *u3_to(l, von_ray, struct u3_pair, val) = val;
+      } 
+      else {
+        sam_ray = dul_ray;
+        sft_y += 4;
+      }
+    }
+    else {
+      c3_w mog_w = u3_lm_mug(l, nim);
+
+      if ( mog_w == mug_w ) {
+        /* Collision policy: replace.
+        */
+        *u3_to(l, von_ray, struct u3_pair, nam) = 
+          _lm_bask_save(l, bas_ray, nam);
+
+        *u3_to(l, von_ray, struct u3_pair, val) = 
+          _lm_bask_save(l, bas_ray, val);
+      }
+      else {
+        u3_fox wal     = *u3_to(l, von_ray, struct u3_pair, nam);
+        u3_ray som_ray = _lm_bask_alloc(l, bas_ray, c3_wiseof(struct u3_sham));
+        c3_w   i_w;
+
+        if ( 0 == som_ray ) {
+          return;
+        }
+        for ( i_w = 0; i_w < 16; i_w++ ) {
+          u3_ray dul_ray = (zid_w * c3_wiseof(struct u3_pair)) + 
+                           u3_of(l, som_ray, struct u3_sham, dol_ray);
+          
+          *u3_to(l, dul_ray, struct u3_pair, nam) = u3_none;
+          *u3_to(l, dul_ray, struct u3_pair, val) = 0;
+        }
+        sft_y += 4;
+
+        _lm_bask_put(l, bas_ray, dul_ray, mog_w, sft_y, nim, wal);
+        sam_ray = dul_ray;
+      }
+    }
+  }
+}
+
+/* _lm_bask_get():
+**
+**   Try to find a name-value pair in a memory basket.
+*/
+static u3_rat
+_lm_bask_get(u3_l   l,
+             u3_ray sam_ray,
+             c3_w   mug_w,
+             u3_fox nam)
+{
+  while ( 1 ) {
+    c3_w zid_w     = (mug_w & 15);
+    u3_ray von_ray = (zid_w * c3_wiseof(struct u3_pair)) + 
+                     u3_of(l, sam_rayray, struct u3_sham, dol_ray);
+    u3_rat nim     = *u3_to(l, von_ray, struct u3_pair, nam);
+
+    if ( u3_none == nim ) {
+      u3_ray dul_ray = *u3_to(l, von_ray, struct u3_pair, val);
+
+      if ( 0 == dul_ray ) {
+        return u3_none;
+      } else {
+        sam_ray = dul_ray;
+        mug_w >>= 4;
+      }
+    }
+    else {
+      if ( u3_yes == u3_lr_sing(l, nim, nam) ) {
+        return *u3_to(l, von_ray, struct u3_pair, val);
+      } else {
+        return u3_none;
+      }
+    }
+  }
+}
+
+/* u3_lm_bask_save():
+**
+**   Try to save a name-value pair in a memory basket.
+*/
+void
+u3_lm_bask_save(u3_lv  lv,
+                u3_ray bas_ray,
+                u3_fox nam,
+                u3_fox val)
+{
+  u3_l l         = lv;
+  u3_ray sam_ray = u3_of(l, bas_ray, struct u3_bask, s);
+  c3_w mug_w     = u3_lm_mug(l, nam);
+
+  _lm_bask_fit(l, bas_ray, sam_ray, mug_w, nam, val);
+}
+
+/* u3_lm_bask_find():
+**
+**   Try to find a name-value pair in a memory basket.
+*/
+u3_rat
+u3_lm_bask_find(u3_lv  lv,
+                u3_ray bas_ray,
+                u3_fox nam)
+{
+  u3_l l = lv;
+  u3_ray sam_ray = u3_of(l, bas_ray, struct u3_bask, s);
+  c3_w mug_w     = u3_lm_mug(l, nam);
+
+  return _lm_bask_find(l, sam_ray, mug_w, nam);
+}
+
+/* u3_lm_bask_new():
+**
+**   Push a mane of size (hat_ray - cap_ray) * (num_w / dem_w) on the cap.
+*/
+c3_b
+u3_lm_mane_part(u3_lv  lv,
+               c3_w   num_w,
+               u3+
+{
+  c3_w met_w;
+
+  c3_assert(0 == ((1 << 31) & siz_w));
+  c3_assert(siz_w > c3_wiseof(struct u3_mane));
+  siz_w -= c3_wiseof(struct u3_mane);
+  met_w = u3_lr_bin(l, siz_w);
+
+  /* Clear the free lists.
+  */
+  {
+    c3_w i_w;
+
+    for ( i_w=0; i_w < 27; i_w++ ) {
+      *u3_at_ray(i_w + u3_of(l, u3_to(l, 
+  
+}
+#endif

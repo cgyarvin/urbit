@@ -50,6 +50,10 @@
             /* lab: agenda stack
             */
             u3_ray lab_ray;
+
+            /* bas: basket stack
+            */
+            u3_ray bas_ray;
           } n;
 
         /** Layer: jato.  Built-in performance assistance.

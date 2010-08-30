@@ -104,7 +104,7 @@ u3_ln_string(u3_lv      lv,
 /* u3_ln_cell(): 
 **
 **   Produce the cell (a b) on the hat of (l), or u3_none if
-**   this would overflow the clam.
+**   this would overflow the loom.
 */
 u3_rat
 u3_ln_cell(u3_lv    lv,
@@ -144,34 +144,34 @@ u3_ln_cell(u3_lv    lv,
 
 /* u3_ln_ice():
 **
-**   Produce a noun equivalent to (a), which does not reference
-**   any data on the can of (l).
+**   Produce a noun equivalent to [fiz], which does not reference
+**   any data on the can.
 */
 u3_rat
-u3_ln_ice(u3_lv    lv,
-          u3_fox a)
+u3_ln_ice(u3_lv  lv,
+          u3_fox fiz)
 {
   u3_l l = lv;
 
-  if ( u3_rat_is_cat(a) ) {
-    return a;
+  if ( u3_rat_is_cat(fiz) ) {
+    return fiz;
   }
   else {
-    u3_ray ray_a = u3_dog_a(a);
+    u3_ray fiz_ray = u3_dog_a(fiz);
 
-    if ( (u3_ray_a(ray_a) == u3_ray_a(l->hat_ray)) ||
-         (ray_a < l->mat_ray) )
+    if ( (u3_ray_a(fiz_ray) == u3_ray_a(l->hat_ray)) ||
+         (fiz_ray < l->mat_ray) )
     {
-      return a;
+      return fiz;
     }
     else {
-      if ( u3_dog_is_hog(a) ) {
+      if ( u3_dog_is_hog(fiz) ) {
         if ( u3_no == u3_lm_open(l, c3_wiseof(struct u3_cell)) ) {
           return u3_none;
         }
         else {
-          u3_fox hed = u3_ln_ice(l, *u3_at_hog_hed(l, a));
-          u3_fox tel = u3_ln_ice(l, *u3_at_hog_tel(l, a));
+          u3_fox hed = u3_ln_ice(l, *u3_at_hog_hed(l, fiz));
+          u3_fox tel = u3_ln_ice(l, *u3_at_hog_tel(l, fiz));
           u3_ray ray_nov;
           u3_fox nov;
 
@@ -179,7 +179,7 @@ u3_ln_ice(u3_lv    lv,
           l->hat_ray += c3_wiseof(struct u3_cell);
           nov = u3_hog_of(ray_nov, 0);
 
-          *u3_at_dog_mug(l, nov) = *u3_at_dog_mug(l, a);
+          *u3_at_dog_mug(l, nov) = *u3_at_dog_mug(l, fiz);
           *u3_at_hog_hed(l, nov) = hed;
           *u3_at_hog_tel(l, nov) = tel;
 
@@ -188,7 +188,7 @@ u3_ln_ice(u3_lv    lv,
         }
       }
       else {
-        c3_w len_w = *u3_at_pig_len(l, a);
+        c3_w len_w = *u3_at_pig_len(l, fiz);
 
         if ( u3_no == u3_lm_open(l, (len_w + c3_wiseof(struct u3_atom))) ) {
           return u3_none;
@@ -210,7 +210,7 @@ u3_ln_ice(u3_lv    lv,
             c3_w i_w;
 
             for ( i_w=0; i_w < len_w; i_w++ ) {
-              *u3_at_pig_buf(l, nov, i_w) = *u3_at_pig_buf(l, a, i_w);
+              *u3_at_pig_buf(l, nov, i_w) = *u3_at_pig_buf(l, fiz, i_w);
             }
           }
 
@@ -399,7 +399,7 @@ u3_ln_nock(u3_lv  lv,
 /* u3_ln_trel(): 
 **
 **   Produce the trel [a b c] on the hat of [l], or u3_none if
-**   this would overflow the clam.
+**   this would overflow the loom.
 */
 u3_rat
 u3_ln_trel(u3_lv  lv,

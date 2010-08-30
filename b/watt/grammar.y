@@ -262,6 +262,7 @@ wide_c
     wide_norm: di_dotask body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_dotras body_b_wide    { $$ = _ycell($1, $2); }
 
+    wide_norm: di_hatask body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatnub body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatbuc body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatpod body_b_wide    { $$ = _ycell($1, $2); }
@@ -387,6 +388,7 @@ tall
     tall_norm: di_dotask w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_dotras w body_b_tall    { $$ = _ycell($1, $3); }
 
+    tall_norm: di_hatask w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatnub w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatbuc w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatpod w body_b_tall    { $$ = _ycell($1, $3); }
@@ -545,6 +547,7 @@ tall
     di_dotask: si_dot si_ask  { $$ = u4_atom_dust; }
     di_dotras: si_dot si_ras  { $$ = u4_atom_sail; }
     
+    di_hatask: si_hat si_ask  { $$ = u4_atom_hint; }
     di_hatnub: si_hat si_nub  { $$ = u4_atom_cast; }
     di_hatbuc: si_hat si_buc  { $$ = u4_atom_germ; }
     di_hatdig: si_hat si_dig  { $$ = u4_atom_stil; }

@@ -48,7 +48,7 @@
     #define u4_nock_trol  u4_noun_6
     #define u4_nock_flac  u4_noun_7
     #define u4_nock_gant  u4_noun_8
-    #define u4_nock_gath  u4_noun_9
+    #define u4_nock_mung  u4_noun_9
     #define u4_nock_germ  u4_noun_10
     #define u4_nock_hint  u4_cod_in(11)
     #define u4_nock_coat  u4_cod_in(12)

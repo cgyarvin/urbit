@@ -309,13 +309,9 @@ _rose_gain(u4_plow p,
     } 
     else if ( u4_b_pq(gen, u4_atom_hint, &p_gen, &q_gen) ) {
       return u4_kt(lan, 
-                   u4_atom_hint,
+                   u4_nock_hint,
                    _rose_make(p, sut, p_gen),
                    _rose_make(p, sut, q_gen));
-    }
-    else if ( u4_b_pq(gen, u4_atom_hint, &p_gen, &q_gen) ) {
-      return u4_and(_rose_show(p, sut, p_gen),
-                    _rose_show(p, sut, q_gen));
     }
     else if ( u4_b_p(gen, u4_atom_grit, &p_gen) ) {
       return _rose_make(p, sut, p_gen);
