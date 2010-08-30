@@ -149,9 +149,9 @@ u3_lm_mug(u3_lv    lv,
       return *u3_at_dog_mug(l, veb);
     }
     else {
-      if ( u3_dog_is_hog(veb) ) {
-        u3_fox hed   = *u3_at_hog_hed(l, veb);
-        u3_fox tel   = *u3_at_hog_tel(l, veb);
+      if ( u3_dog_is_pom(veb) ) {
+        u3_fox hed   = *u3_at_pom_hed(l, veb);
+        u3_fox tel   = *u3_at_pom_tel(l, veb);
         c3_w   w_lus = u3_lm_mug(l, hed);
         c3_w   w_biq = u3_lm_mug(l, tel);
         c3_w   w_hur = (w_lus ^ (w_biq >> 24) ^ (w_biq << 8));
@@ -167,7 +167,7 @@ u3_lm_mug(u3_lv    lv,
         }
       }
       else {
-        c3_w w_len = *u3_at_pig_len(l, veb);
+        c3_w w_len = *u3_at_pug_len(l, veb);
         c3_w w_zon = 0x18d0a625;
         c3_w i_w;
 
@@ -176,7 +176,7 @@ u3_lm_mug(u3_lv    lv,
           c3_w w_dav;
 
           for ( i_w=0; i_w < w_len; i_w++ ) {
-            w_gid ^= *u3_at_pig_buf(l, veb, i_w);
+            w_gid ^= *u3_at_pug_buf(l, veb, i_w);
             w_gid = _li_mash(w_gid);
           }
           w_dav = 0x7fffffff & w_gid;
@@ -294,9 +294,9 @@ u3_lm_clear(u3_lv  lv,
       return u3_yes;
     }
     else if ( ray_lef >= nut_ray ) {
-      if ( u3_dog_is_hog(lef) ) {
-        u3_fox hed = *u3_at_hog_hed(l, lef);
-        u3_fox tel = *u3_at_hog_tel(l, lef);
+      if ( u3_dog_is_pom(lef) ) {
+        u3_fox hed = *u3_at_pom_hed(l, lef);
+        u3_fox tel = *u3_at_pom_tel(l, lef);
 
         if ( (u3_yes == u3_lm_clear(l, hed, lid_ray, nut_ray)) &&
              (u3_yes == u3_lm_clear(l, tel, lid_ray, nut_ray)) ) {
@@ -328,23 +328,23 @@ _li_tamp_swizzle(u3_l   l,
     c3_assert(u3_dog_a(lef) >= nut_ray);
   }
 
-  /* Only hogs are fixed.
+  /* Only poms are fixed.
   */
-  if ( u3_dog_is_hog(lef) ) {
+  if ( u3_dog_is_pom(lef) ) {
     u3_ray ray_lef = u3_dog_a(lef);
     
-    /* Is this hog fixed?
+    /* Is this pom fixed?
     */
     if ( nax_b[ray_lef - nut_ray] ) {
       return;
     }
     else {
-      /* Fix the hog!
+      /* Fix the pom!
       */
       nax_b[ray_lef - nut_ray] = 1;
       {
-        u3_fox fes = *u3_at_hog_hed(l, lef);
-        u3_fox hoz = *u3_at_hog_tel(l, lef);
+        u3_fox fes = *u3_at_pom_hed(l, lef);
+        u3_fox hoz = *u3_at_pom_tel(l, lef);
 
         if ( u3_rat_is_dog(fes) &&
              (u3_dog_beam(fes) == u3_ray_beam(nut_ray)) &&
@@ -352,7 +352,7 @@ _li_tamp_swizzle(u3_l   l,
         {
           /* Rewrite the pointer.
           */
-          *u3_at_hog_hed(l, lef) = (fes - (pif_w << 2));
+          *u3_at_pom_hed(l, lef) = (fes - (pif_w << 2));
           
           /* Swizzle into it.
           */
@@ -365,7 +365,7 @@ _li_tamp_swizzle(u3_l   l,
         {
           /* Rewrite the pointer.
           */
-          *u3_at_hog_tel(l, lef) = (hoz - (pif_w << 2));
+          *u3_at_pom_tel(l, lef) = (hoz - (pif_w << 2));
           
           /* Swizzle into it.
           */
@@ -411,7 +411,7 @@ u3_lm_tamp(u3_lv  lv,
 
   /* Swizzle the good segment down to its new location.
   **
-  **   nax[i_w]: 1 iff a hog at nut[i_w] has been fixed.
+  **   nax[i_w]: 1 iff a pom at nut[i_w] has been fixed.
   */
   {
     c3_b nax_b[lam_w];
@@ -496,9 +496,9 @@ _lm_bask_save(u3_l   l,
     }
   }
 
-  if ( u3_dog_is_hog(fiz) ) {
-    u3_rat hed = _lm_bask_save(l, *u3_at_hog_hed(l, fiz));
-    u3_rat tel = _lm_bask_save(l, *u3_at_hog_tel(l, fiz));
+  if ( u3_dog_is_pom(fiz) ) {
+    u3_rat hed = _lm_bask_save(l, *u3_at_pom_hed(l, fiz));
+    u3_rat tel = _lm_bask_save(l, *u3_at_pom_tel(l, fiz));
     u3_ray ray_nov;
 
     if ( (u3_none == hed) || (u3_none == tel) ) {
@@ -510,15 +510,15 @@ _lm_bask_save(u3_l   l,
     }
 
     *u3_at_dog_mug(l, nov) = *u3_at_dog_mug(l, fiz);
-    *u3_at_hog_hed(l, nov) = hed;
-    *u3_at_hog_tel(l, nov) = tel;
+    *u3_at_pom_hed(l, nov) = hed;
+    *u3_at_pom_tel(l, nov) = tel;
 
     l->cop_w += 3;
     return nov;
     }
   }
   else {
-    c3_w len_w = *u3_at_pig_len(l, fiz);
+    c3_w len_w = *u3_at_pug_len(l, fiz);
 
     if ( u3_no == u3_lm_open(l, (len_w + c3_wiseof(struct u3_atom))) ) {
       return u3_none;
@@ -529,18 +529,18 @@ _lm_bask_save(u3_l   l,
 
       ray_nov = l->hat_ray;
       l->hat_ray += (len_w + c3_wiseof(struct u3_atom));
-      nov = u3_pig_of(ray_nov, 0);
+      nov = u3_pug_of(ray_nov, 0);
 
       *u3_at_dog_mug(l, nov) = 0;
-      *u3_at_pig_len(l, nov) = len_w;
+      *u3_at_pug_len(l, nov) = len_w;
 
-      /* Fill the pig.
+      /* Fill the pug.
       */
       {
         c3_w i_w;
 
         for ( i_w=0; i_w < len_w; i_w++ ) {
-          *u3_at_pig_buf(l, nov, i_w) = *u3_at_pig_buf(l, fiz, i_w);
+          *u3_at_pug_buf(l, nov, i_w) = *u3_at_pug_buf(l, fiz, i_w);
         }
       }
 

@@ -57,10 +57,10 @@ u3_ln_bytes(u3_lv       lv,
 
       ray_nov = l->hat_ray;
       l->hat_ray += (len_w + c3_wiseof(struct u3_atom));
-      nov = u3_pig_of(ray_nov, 0);
+      nov = u3_pug_of(ray_nov, 0);
 
       *u3_at_dog_mug(l, nov) = 0;
-      *u3_at_pig_len(l, nov) = len_w;
+      *u3_at_pug_len(l, nov) = len_w;
 
       /* Clear the words.
       */
@@ -68,7 +68,7 @@ u3_ln_bytes(u3_lv       lv,
         c3_w i_w;
 
         for ( i_w=0; i_w < len_w; i_w++ ) {
-          *u3_at_pig_buf(l, nov, i_w) = 0;
+          *u3_at_pug_buf(l, nov, i_w) = 0;
         }
       }
 
@@ -78,7 +78,7 @@ u3_ln_bytes(u3_lv       lv,
         c3_w i_w;
 
         for ( i_w=0; i_w < a_w; i_w++ ) {
-          *u3_at_pig_buf(l, nov, (i_w >> 2))
+          *u3_at_pug_buf(l, nov, (i_w >> 2))
             |=
               (b_y[i_w] << ((i_w & 3) * 8));
         }
@@ -132,11 +132,11 @@ u3_ln_cell(u3_lv    lv,
 
     ray_nov = l->hat_ray;
     l->hat_ray += c3_wiseof(struct u3_cell);
-    nov = u3_hog_of(ray_nov, 0);
+    nov = u3_pom_of(ray_nov, 0);
 
     *u3_at_dog_mug(l, nov) = 0;
-    *u3_at_hog_hed(l, nov) = a;
-    *u3_at_hog_tel(l, nov) = b;
+    *u3_at_pom_hed(l, nov) = a;
+    *u3_at_pom_tel(l, nov) = b;
 
     return nov;
   }
@@ -165,30 +165,30 @@ u3_ln_ice(u3_lv  lv,
       return fiz;
     }
     else {
-      if ( u3_dog_is_hog(fiz) ) {
+      if ( u3_dog_is_pom(fiz) ) {
         if ( u3_no == u3_lm_open(l, c3_wiseof(struct u3_cell)) ) {
           return u3_none;
         }
         else {
-          u3_fox hed = u3_ln_ice(l, *u3_at_hog_hed(l, fiz));
-          u3_fox tel = u3_ln_ice(l, *u3_at_hog_tel(l, fiz));
+          u3_fox hed = u3_ln_ice(l, *u3_at_pom_hed(l, fiz));
+          u3_fox tel = u3_ln_ice(l, *u3_at_pom_tel(l, fiz));
           u3_ray ray_nov;
           u3_fox nov;
 
           ray_nov = l->hat_ray;
           l->hat_ray += c3_wiseof(struct u3_cell);
-          nov = u3_hog_of(ray_nov, 0);
+          nov = u3_pom_of(ray_nov, 0);
 
           *u3_at_dog_mug(l, nov) = *u3_at_dog_mug(l, fiz);
-          *u3_at_hog_hed(l, nov) = hed;
-          *u3_at_hog_tel(l, nov) = tel;
+          *u3_at_pom_hed(l, nov) = hed;
+          *u3_at_pom_tel(l, nov) = tel;
 
           l->cop_w += 3;
           return nov;
         }
       }
       else {
-        c3_w len_w = *u3_at_pig_len(l, fiz);
+        c3_w len_w = *u3_at_pug_len(l, fiz);
 
         if ( u3_no == u3_lm_open(l, (len_w + c3_wiseof(struct u3_atom))) ) {
           return u3_none;
@@ -199,18 +199,18 @@ u3_ln_ice(u3_lv  lv,
 
           ray_nov = l->hat_ray;
           l->hat_ray += (len_w + c3_wiseof(struct u3_atom));
-          nov = u3_pig_of(ray_nov, 0);
+          nov = u3_pug_of(ray_nov, 0);
 
           *u3_at_dog_mug(l, nov) = 0;
-          *u3_at_pig_len(l, nov) = len_w;
+          *u3_at_pug_len(l, nov) = len_w;
 
-          /* Fill the pig.
+          /* Fill the pug.
           */
           {
             c3_w i_w;
 
             for ( i_w=0; i_w < len_w; i_w++ ) {
-              *u3_at_pig_buf(l, nov, i_w) = *u3_at_pig_buf(l, fiz, i_w);
+              *u3_at_pug_buf(l, nov, i_w) = *u3_at_pug_buf(l, fiz, i_w);
             }
           }
 
@@ -450,10 +450,10 @@ u3_ln_words(u3_lv      lv,
 
       ray_nov = l->hat_ray;
       l->hat_ray += (a_w + c3_wiseof(struct u3_atom));
-      nov = u3_pig_of(ray_nov, 0);
+      nov = u3_pug_of(ray_nov, 0);
 
       *u3_at_dog_mug(l, nov) = 0;
-      *u3_at_pig_len(l, nov) = a_w;
+      *u3_at_pug_len(l, nov) = a_w;
 
       /* Fill the words.
       */
@@ -461,7 +461,7 @@ u3_ln_words(u3_lv      lv,
         c3_w i_w;
 
         for ( i_w=0; i_w < a_w; i_w++ ) {
-          *u3_at_pig_buf(l, nov, i_w) = w_b[i_w];
+          *u3_at_pug_buf(l, nov, i_w) = w_b[i_w];
         }
       }
       return nov;

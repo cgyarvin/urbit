@@ -18,151 +18,8 @@
 **   or a "cell" (an ordered pair of any two nouns).
 */
 
-  /** Remarks:
+  /** See Spec/zeno/2.txt for a discussion of the loom.
   **/
-    /* A "loom" is a linear allocator without fragmentation.
-    **
-    ** You may know the typical Unix process layout, in which heap
-    ** grows upward from low memory, and stack grows downward
-    ** from high memory.  The general advantage of this layout
-    ** is zero fragmentation: heap and stack can grow as far 
-    ** toward each other as possible, until they meet.
-    ** 
-    ** This design is independent of the actual structures that grow
-    ** from both ends of a linear address space.  We might just as
-    ** well have two heaps growing toward each other, or two stacks.
-    **
-    ** The loom allocator is the latter - two stacks, growing toward 
-    ** each other.  A stack is actually a more powerful structure 
-    ** than a heap; if you have a stack and you want a heap, you can
-    ** always push one on top of the stack.  If you have a heap
-    ** and you want a (contiguous) stack, you are SOL.
-    **
-    ** We call these flat stacks "beams."  A loom is two symmetric
-    ** beams, one growing up from the bottom of memory, the other
-    ** growing down from the top. The obvious constraint is that
-    ** the beams must never cross.  The unused area between them
-    ** may be of any length and at any position.
-    **
-    ** (Again, a loom imposes no external fragmentation - it can use
-    ** its complete allocated segment.  Of course, loom programmers
-    ** can still leak internally within the beams.)
-    **
-    ** All loom addresses are word (32-bit) addresses.  The loom
-    ** pointer format can address 2^28 words, or 1GB, which is 
-    ** adequate for most light-duty programming tasks.  A "nit"
-    ** is a 28-bit word pointer in the loom.
-    **
-    ** A "ray" is a 29-bit word offset onto a beam.  If bit 29
-    ** is 0, the ray grows forward from 0 and is "west."  If bit
-    ** 29 is 1, the ray grows backward from the end of the loom,
-    ** and is "east."
-    **
-    ** All u3 nouns are represented by the 32-bit word type "rat."
-    ** If bit 31 of a rat is 0, it is a "cat" - a direct atom.
-    ** Bits 0-30 of a cat are an unsigned 31-bit integer.
-    **
-    ** A rat can be a special value, u3_none - not a noun.  A
-    ** rat which is not u3_none is a "fox."
-    **
-    ** If bit 31 of a rat is 1, bits 0-28 are a ray which points
-    ** to an indirect noun - a "dog."  If bit 30 is 0, the dog is
-    ** a "hog" - an indirect cell.  If bit 30 is 1, the noun is a
-    ** "pig" - an indirect atom.  (Bit 29 is reserved.)
-    **
-    ** A loom contains four pointers: "bat," "hat," "cap" and "mat."
-    **
-    ** "bat," a nit, points to the first word in the east beam.
-    **
-    ** "hat" and "cap", rays, are the tops of two opposing stack
-    ** allocators, rays on opposite beams.  Either the hat is east
-    ** and the cap is west, or vice versa.
-    **
-    ** "mat" is a ray on the same beam as the cap, at or below it.
-    ** 
-    ** The loom is thus divided, like Gaul, into three parts:
-    **
-    ** west                                                  east
-    ** ----------------------------------------------------------
-    ** ||...............>          <*******<....................|
-    ** ||->... box .....>    pad   <* can *<...... box .......<-|
-    ** ||...............>          <*******<....................|
-    ** ----------------------------------------------------------
-    ** |                |          |       |                    | 
-    ** 0               hat        cap     mat                  bat
-    **
-    ** The "pad" is unused memory.  The "box" is stable memory.
-    ** The "can" is temporary memory.
-    **
-    ** What does all this mean?  Hat, cap and mat are the pointers
-    ** in a three-pointer noun allocation system, the "box allocator."
-    **
-    ** The box allocator imposes a seniority restriction on all
-    ** pointers.  A reference stored in the can may point into
-    ** the box, but a reference stored in the box cannot point
-    ** into the can.
-    **
-    ** Therefore, the can may be entirely destroyed without any
-    ** corruption of the box.  In general, the can is used for
-    ** temporary allocation.  Temporary structures are constructed
-    ** on the can, then either copied into the box or discarded.
-    **
-    ** Simply put: temporary structures cannot point to
-    ** stable ones.  Thus, we can clear the can without
-    ** invalidating any pointers in the box.  And thus, any
-    ** calculation can discard all its temporary results,
-    ** thus obviating classical garbage collection.  
-    **
-    ** Sadly, the calculations that produce temporary data have
-    ** a nasty tendency to require temporary storage of their own.
-    ** We do not want this to accumulate recursively - we would
-    ** like to recycle all temporary memory as soon as it is no
-    ** longer needed.
-    **
-    ** The boxer system performs this by reversing the stacks:
-    **
-    **                 old        old     old
-    ** 0               hat        cap     mat                  bat
-    ** |                |          |       |                    | 
-    ** ----------------------------------------------------------
-    ** ||...............>???>   <!!*******......................|
-    ** ||->.............>???>   <!!*******....................<-|
-    ** ||...............>???>   <!!*******......................|
-    ** ----------------------------------------------------------
-    ** |                |   |   |                               | 
-    ** 0               mat cap hat                             bat
-    **                 tmp tmp tmp
-    **
-    ** Stable storage is "."; old first-order temporary storage
-    ** is '*'; new first-order is "!"; second-order is "?".
-    **
-    ** This transition (which must save the old mat) is a "flap."
-    ** After the reverse transition, a "flop," we see:
-    **
-    **                 old        old     old
-    ** 0               hat        cap     mat                  bat
-    ** |                |          |       |                    | 
-    ** ----------------------------------------------------------
-    ** ||...............>       <!!********<....................|
-    ** ||->.............>       <!!********<..................<-|
-    ** ||...............>       <!!********<....................|
-    ** ----------------------------------------------------------
-    ** |                |       |          |                    | 
-    ** 0               hat     cap        mat                  bat
-    **                 new     new        new
-    **
-    ** Of course, if you build a temporary structure on the can and
-    ** want to save it to the box, copying has to happen.  Note that
-    ** this facility can be used as a stop-and-copy GC.
-    **
-    ** The loom algorithm, while by no means ideal for all functions,
-    ** makes a good general-purpose default.  Note especially that if
-    ** you are writing a function for which the loom is by no means
-    ** ideal, you have an unfragmented block in which to use any other
-    ** allocator.  This is most often in practice reference counting,
-    ** which always works with acyclic nouns.
-    */
- 
 
   /** Data types.
   **/
@@ -183,7 +40,7 @@
     ***         a: cat if 0, dog if 1
     ***
     ***     u3_dog - indirect atom or cell
-    ***       ?(hog, pig)
+    ***       ?(pom, pug)
     ***       |:29a:1b:1c
     ***         a: ray to data
     ***         b: reserved for extension bit
@@ -192,12 +49,12 @@
     ***       &:31a
     ***         a: unsigned integer
     ***
-    ***     u3_hog - indirect cell
+    ***     u3_pom - indirect cell
     ***       |:29a:1b:&
     ***         a: ray to struct u3_cell
     ***         b: reserved for extension bit
     ***
-    ***     u3_pig - indirect atom
+    ***     u3_pug - indirect atom
     ***       |:29a:1b:|
     ***         a: ray to struct u3_atom
     ***         b: reserved for extension bit
@@ -207,7 +64,7 @@
       typedef c3_w u3_rat;
       typedef c3_w u3_dog;
       typedef c3_w u3_cat;
-      typedef c3_w u3_pig;
+      typedef c3_w u3_pug;
 
 
     /** Structures.
@@ -335,19 +192,19 @@
 #     define u3_dog_b(dog)     ( 1 & ((dog) >> 1) )
 #     define u3_dog_c(dog)     ( 1 & (dog) )
 
-#     define u3_hog_a(hog)     u3_dog_a(hog)
-#     define u3_hog_b(hog)     u3_dog_b(hog)
-#     define u3_pig_a(pig)     u3_dog_a(pig)
-#     define u3_pig_b(pig)     u3_dog_b(pig)
+#     define u3_pom_a(pom)     u3_dog_a(pom)
+#     define u3_pom_b(pom)     u3_dog_b(pom)
+#     define u3_pug_a(pug)     u3_dog_a(pug)
+#     define u3_pug_b(pug)     u3_dog_b(pug)
 
 #     define u3_rat_is_cat(rat) ( !u3_rat_a(rat) )
 #     define u3_rat_is_dog(rat) ( u3_rat_a(rat) )
 
-#     define u3_dog_is_hog(dog) ( !u3_dog_c(dog) )
-#     define u3_dog_is_pig(dog) ( u3_dog_c(dog) )
+#     define u3_dog_is_pom(dog) ( !u3_dog_c(dog) )
+#     define u3_dog_is_pug(dog) ( u3_dog_c(dog) )
 
 #     define u3_rat_is_atom(a) \
-        (u3_rat_is_cat(a) || u3_dog_is_pig(a))
+        (u3_rat_is_cat(a) || u3_dog_is_pug(a))
        
 
     /** Bitfield packing.  See above.
@@ -357,8 +214,8 @@
 #     define u3_dog_of(a, b, c) \
         ( (1 << 31) | ((a) << 2) | ((b) << 1) | (c) )
 
-#     define u3_hog_of(a, b)   u3_dog_of(a, b, 0)
-#     define u3_pig_of(a, b)   u3_dog_of(a, b, 1)
+#     define u3_pom_of(a, b)   u3_dog_of(a, b, 0)
+#     define u3_pug_of(a, b)   u3_dog_of(a, b, 1)
 
 
     /** Cage reference and geometry.
@@ -396,12 +253,12 @@
     ***/
 #     define u3_at_dog_mug(l, a)   u3_at_ray(l, u3_dog_a(a))
 
-#     define u3_at_hog_hed(l, a)   u3_at_ray(l, (1 + u3_hog_a(a)))
-#     define u3_at_hog_tel(l, a)   u3_at_ray(l, (2 + u3_hog_a(a)))
+#     define u3_at_pom_hed(l, a)   u3_at_ray(l, (1 + u3_pom_a(a)))
+#     define u3_at_pom_tel(l, a)   u3_at_ray(l, (2 + u3_pom_a(a)))
 
-#     define u3_at_pig_len(l, a)   u3_at_ray(l, (1 + u3_pig_a(a)))
-#     define u3_at_pig_buf(l, a, b) \
-        u3_at_ray(l, (2 + (b) + u3_pig_a(a)))
+#     define u3_at_pug_len(l, a)   u3_at_ray(l, (1 + u3_pug_a(a)))
+#     define u3_at_pug_buf(l, a, b) \
+        u3_at_ray(l, (2 + (b) + u3_pug_a(a)))
 
 
   /** Constants and macros.
