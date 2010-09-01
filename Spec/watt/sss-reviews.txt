@@ -1,6 +1,8 @@
 Dear Curtis,
 
-We are sorry to inform you that your paper has not been selected for presentation at the Workshop on Self-sustaining Systems (S3) 2010 at The University of Tokyo, Japan.
+We are sorry to inform you that your paper has not been selected for
+presentation at the Workshop on Self-sustaining Systems (S3) 2010 at The
+University of Tokyo, Japan.
 
 Attached you will find the reviewers' comments. We hope you find them
 useful for improving your paper and for resubmitting to another event.
@@ -86,11 +88,30 @@ TITLE: Watt: A Self-Sustaining Functional Language
 
 The paper describes a minimal computation kernel (called Nock) and a statically typed functional language (Watt) built on top of it.
 
-I think the approach of a minimal kernel with obvious execution semantics and a real language that maps on top of it is interesting and well worth pursuing. It is also clearly relevant to S3. The problem I have with this paper is that it does not really help me to understand what is going on with Nock and Watt. While Nock is probably fully specified by the formulas given, it is very hard to see what they are doing. It would have been helpful to see some detailed examples to understand Nock a bit more directly.
+I think the approach of a minimal kernel with obvious execution semantics and a
+real language that maps on top of it is interesting and well worth pursuing. It
+is also clearly relevant to S3. The problem I have with this paper is that it
+does not really help me to understand what is going on with Nock and Watt.
+While Nock is probably fully specified by the formulas given, it is very hard
+to see what they are doing. It would have been helpful to see some detailed
+examples to understand Nock a bit more directly.
 
-The same problem is even more pronounced for the section about Watt. We learn some things about Watt (compiles to Nock, statically typed, type inference, ...), however, the actual working of the language remains unclear. The example code in Figure 2 and 3 is essentially inscrutable. I think that again some very simple and fully explained examples could have helped to understand the language and the intuition behind it better. On the other hand, I regard some parts of the Watt sections as not really necessary for the paper. It is not that helpful to get a list of semi-arbitrary names for glyphs and digraphs.
+The same problem is even more pronounced for the section about Watt. We learn
+some things about Watt (compiles to Nock, statically typed, type inference,
+...), however, the actual working of the language remains unclear. The example
+code in Figure 2 and 3 is essentially inscrutable. I think that again some very
+simple and fully explained examples could have helped to understand the
+language and the intuition behind it better. On the other hand, I regard some
+parts of the Watt sections as not really necessary for the paper. It is not
+that helpful to get a list of semi-arbitrary names for glyphs and digraphs.
 
-I understand the reasoning behind not using standard names for constructs in the language. However, the paper doesn't do a good enough job at telling me what the non-standard names actually mean, which leads to the fact that I don't understand the standard, nor the non-standard names.
+I understand the reasoning behind not using standard names for constructs in
+the language. However, the paper doesn't do a good enough job at telling me
+what the non-standard names actually mean, which leads to the fact that I don't
+understand the standard, nor the non-standard names.
 
-Another issue of the paper is the idiosyncratic and partially arcane way to describe things and the unconventional language. I was left with the impression that this approach to writing was more an end in itself and not a mean to make the reader understand better. While reading the paper I sometimes felt vaguely insulted, which is not something you want your readers to be.
-
+Another issue of the paper is the idiosyncratic and partially arcane way to
+describe things and the unconventional language. I was left with the impression
+that this approach to writing was more an end in itself and not a mean to make
+the reader understand better. While reading the paper I sometimes felt vaguely
+insulted, which is not something you want your readers to be.
