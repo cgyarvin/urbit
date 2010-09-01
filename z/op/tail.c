@@ -42,7 +42,7 @@ _zn_forge_tail(u3_z   z,
     ** presumably a cons.
     */
     _zn_complete(z, _zn_bip_tail(f.c.lid_ray), gus);
-    _zn_forge_cook(z, z->l.cap_ray, bus, fel);
+    _zn_forge_nock(z, z->l.cap_ray, bus, fel);
 
     break;
   }

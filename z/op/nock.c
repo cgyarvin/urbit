@@ -86,7 +86,7 @@ _zn_forge_nock(u3_z z,
           }
 
           case u3_nock_sail: {
-            _zn_start_goto(z, lid_ray, bus, fel); 
+            _zn_start_sail(z, lid_ray, bus, fel); 
             break;
           }
           case u3_nock_dust: {
@@ -116,7 +116,7 @@ _zn_forge_nock(u3_z z,
                 u3_fox q_fel = u3_h(z, qr_fel);
                 u3_fox r_fel = u3_t(z, qr_fel);
 
-                _zn_start_pick(z, lid_ray, bus, p_fel, q_fel, r_fel);
+                _zn_start_trol(z, lid_ray, bus, p_fel, q_fel, r_fel);
               }
             }
             break;
@@ -127,7 +127,7 @@ _zn_forge_nock(u3_z z,
               return c3__exit;
             }
             else {
-              _zn_start_link
+              _zn_start_flac
                 (z, lid_ray, bus, u3_h(z, fel), u3_t(z, fel));
               break;
             }
@@ -137,7 +137,7 @@ _zn_forge_nock(u3_z z,
               return c3__exit;
             }
             else {
-              _zn_start_push
+              _zn_start_gant
                 (z, lid_ray, bus, u3_h(z, fel), u3_t(z, fel));
               break;
             }
