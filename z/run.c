@@ -57,28 +57,28 @@ _zn_complete(u3_z   z,
 #define U3_ZN_FORGE
 # include "op/bask.c"
 # include "op/cons.c"
-# include "op/cook.c"
+# include "op/nock.c"
 # include "op/drop.c"
 # include "op/fine.c"
 # include "op/hint.c"
 # include "op/jet.c"
-# include "op/link.c"
+# include "op/flac.c"
 # include "op/mate.c"
-# include "op/pick.c"
-# include "op/push.c"
+# include "op/trol.c"
+# include "op/gant.c"
 # include "op/root.c"
 # include "op/tail.c"
 #undef U3_ZN_FORGE
 
-/* _zn_start_link(): install a link sequence.
+/* _zn_start_flac(): install a flac sequence.
 **
 **   lid: cap at termination
 **   bus: operand subject
 **   sef: operand formula
-**   dep: link formula
+**   dep: flac formula
 */
 static inline void
-_zn_start_link(u3_z   z,
+_zn_start_flac(u3_z   z,
                u3_ray lid_ray,
                u3_fox bus,
                u3_fox sef,
@@ -89,19 +89,19 @@ _zn_start_link(u3_z   z,
   lip_ray = z->l.cap_ray;
   mat_ray = _zn_depart(z);
 
-  _zn_forge_link(z, lid_ray, mat_ray, lip_ray, dep);
-  _zn_forge_cook(z, z->l.cap_ray, bus, sef);
+  _zn_forge_flac(z, lid_ray, mat_ray, lip_ray, dep);
+  _zn_forge_nock(z, z->l.cap_ray, bus, sef);
 }
 
-/* _zn_start_push(): install a push sequence.
+/* _zn_start_gant(): install a gant sequence.
 **
 **   lid: cap at termination
 **   bus: operand subject
 **   sef: operand formula
-**   dep: push formula
+**   dep: gant formula
 */
 static inline void
-_zn_start_push(u3_z   z,
+_zn_start_gant(u3_z   z,
                u3_ray lid_ray,
                u3_fox bus,
                u3_fox sef,
@@ -112,8 +112,8 @@ _zn_start_push(u3_z   z,
   lip_ray = z->l.cap_ray;
   mat_ray = _zn_depart(z);
 
-  _zn_forge_push(z, lid_ray, mat_ray, lip_ray, bus, dep);
-  _zn_forge_cook(z, z->l.cap_ray, bus, sef);
+  _zn_forge_gant(z, lid_ray, mat_ray, lip_ray, bus, dep);
+  _zn_forge_nock(z, z->l.cap_ray, bus, sef);
 }
 
 /* _zn_start_hint(): install a hint sequence.
@@ -136,7 +136,7 @@ _zn_start_hint(u3_z   z,
   mat_ray = _zn_depart(z);
 
   _zn_forge_hint(z, lid_ray, mat_ray, lip_ray, bus, dep);
-  _zn_forge_cook(z, z->l.cap_ray, bus, sef);
+  _zn_forge_nock(z, z->l.cap_ray, bus, sef);
 }
 
 /* _zn_start_jet(): install a jet sequence.
@@ -159,7 +159,7 @@ _zn_start_jet(u3_z            z,
   mat_ray = _zn_depart(z);
 
   _zn_forge_jet(z, lid_ray, mat_ray, lip_ray, sax_code);
-  _zn_forge_cook(z, z->l.cap_ray, bus, sef);
+  _zn_forge_nock(z, z->l.cap_ray, bus, sef);
 }
 
 /* _zn_start_root(): install a root sequence.
@@ -182,17 +182,17 @@ _zn_start_root(u3_z       z,
   mat_ray = _zn_depart(z);
 
   _zn_forge_root(z, ger_op, lid_ray, mat_ray, lip_ray);
-  _zn_forge_cook(z, z->l.cap_ray, bus, sef);
+  _zn_forge_nock(z, z->l.cap_ray, bus, sef);
 }
 
-/* _zn_start_goto(): install a goto sequence.
+/* _zn_start_sail(): install a sail sequence.
 **
 **   lid: cap at termination
 **   bus: subject
 **   fel: target formula
 */
 static inline void
-_zn_start_goto(u3_z   z,
+_zn_start_sail(u3_z   z,
                u3_ray lid_ray,
                u3_fox bus, 
                u3_fox fel)
@@ -219,7 +219,7 @@ _zn_start_goto(u3_z   z,
           _zn_start_jet(z, lid_ray, bus, ged, sax_code);
         } 
         else {
-          _zn_start_link(z, lid_ray, bus, ged, dep);
+          _zn_start_flac(z, lid_ray, bus, ged, dep);
         }
         return;
       }
@@ -227,7 +227,7 @@ _zn_start_goto(u3_z   z,
     else if ( u3_yes == u3_lr_p(z, nar, 1, &cov) ) {
       /* cov: static formula
       */
-      _zn_start_link(z, lid_ray, bus, ged, cov);
+      _zn_start_flac(z, lid_ray, bus, ged, cov);
       return;
     }
   }
@@ -235,7 +235,7 @@ _zn_start_goto(u3_z   z,
 
   /* Default handling.
   */
-  _zn_start_root(z, c3__goto, lid_ray, bus, fel);
+  _zn_start_root(z, c3__sail, lid_ray, bus, fel);
 }
 
 /* _zn_start_mate(): install a mate sequence.
@@ -258,10 +258,10 @@ _zn_start_mate(u3_z   z,
   mat_ray = _zn_depart(z);
 
   _zn_forge_mate(z, lid_ray, mat_ray, lip_ray, pod);
-  _zn_forge_cook(z, z->l.cap_ray, bus, sef);
+  _zn_forge_nock(z, z->l.cap_ray, bus, sef);
 }
 
-/* _zn_start_pick(): install a pick sequence.
+/* _zn_start_trol(): install a trol sequence.
 **
 **   lid: cap at termination
 **   bus: subject
@@ -270,7 +270,7 @@ _zn_start_mate(u3_z   z,
 **   paf: else formula
 */
 static inline void
-_zn_start_pick(u3_z   z,
+_zn_start_trol(u3_z   z,
                u3_ray lid_ray,
                u3_fox bus,
                u3_fox cor,
@@ -282,8 +282,8 @@ _zn_start_pick(u3_z   z,
   lip_ray = z->l.cap_ray;
   mat_ray = _zn_depart(z);
 
-  _zn_forge_pick(z, lid_ray, mat_ray, lip_ray, bus, feg, paf);
-  _zn_forge_cook(z, z->l.cap_ray, bus, cor);
+  _zn_forge_trol(z, lid_ray, mat_ray, lip_ray, bus, feg, paf);
+  _zn_forge_nock(z, z->l.cap_ray, bus, cor);
 }
 
 /* uz_z_mung():
@@ -358,7 +358,7 @@ u3_z_run(u3_z z,
   }
   *a = u3_none;
   _zn_forge_fine(z, z->l.cap_ray);
-  _zn_forge_cook(z, z->l.cap_ray, b, c);
+  _zn_forge_nock(z, z->l.cap_ray, b, c);
 
   while ( 1 ) {
     /* Preamble - miscelbuseous noncomputational operations.
@@ -419,15 +419,15 @@ u3_z_run(u3_z z,
 #       define U3_ZN_OP
 #         include "op/bask.c"
 #         include "op/cons.c"
-#         include "op/cook.c"
+#         include "op/nock.c"
 #         include "op/drop.c"
 #         include "op/fine.c"
 #         include "op/hint.c"
 #         include "op/jet.c"
-#         include "op/link.c"
+#         include "op/flac.c"
 #         include "op/mate.c"
-#         include "op/pick.c"
-#         include "op/push.c"
+#         include "op/trol.c"
+#         include "op/gant.c"
 #         include "op/root.c"
 #         include "op/tail.c"
 #       undef U3_ZN_OP 

@@ -48,7 +48,7 @@ _zn_forge_hint(u3_z   z,
       u3_fox gus     = _zn_bip_hint(d.gus);
 
       if ( u3_no == u3_lr_dust(z, gus) ) {
-        _zn_forge_cook(z, lid_ray, bus, dep);
+        _zn_forge_nock(z, lid_ray, bus, dep);
       }
       else { 
         u3_fox p_gus, q_gus;
@@ -61,16 +61,16 @@ _zn_forge_hint(u3_z   z,
              (p_gus < q_gus) )
         {
           if ( _zn_forge_bask(z, lid_ray, p_gus, q_gus) ) {
-            _zn_forge_cook(z, z->l.cap_ray, bus, dep);
+            _zn_forge_nock(z, z->l.cap_ray, bus, dep);
           } else {
-            _zn_forge_cook(z, lid_ray, bus, dep);
+            _zn_forge_nock(z, lid_ray, bus, dep);
           }
         }
         else if ( u3_yes == u3_lr_p(z, gus, c3__blog, &p_gus) ) {
           u3_b_print(z, "log", u3_t(z, gus));
         }
         else {
-          _zn_forge_cook(z, lid_ray, bus, dep);
+          _zn_forge_nock(z, lid_ray, bus, dep);
         }
       }
     }

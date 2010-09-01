@@ -35,7 +35,7 @@ _zn_forge_root(u3_z       z,
 #ifdef  U3_ZN_OP
 # define _zn_bip_root(field) *_zn_anvil(z, bip_ray, root, field)
 
-  case c3__eq: {
+  case c3__sing: {
     _zn_retreat(z, _zn_bip_root(f.r.mat_ray));
     {
       u3_ray lid_ray = _zn_bip_root(f.c.lid_ray);
@@ -51,7 +51,7 @@ _zn_forge_root(u3_z       z,
     }
     break;
   }
-  case c3__goto: {
+  case c3__sail: {
     _zn_retreat(z, _zn_bip_root(f.r.mat_ray));
     {
       u3_ray lid_ray = _zn_bip_root(f.c.lid_ray);
@@ -66,12 +66,12 @@ _zn_forge_root(u3_z       z,
         u3_fox bus = u3_h(z, gus);
         u3_fox sef = u3_t(z, gus);
 
-        _zn_forge_cook(z, lid_ray, bus, sef);
+        _zn_forge_nock(z, lid_ray, bus, sef);
       }
     }
     break;
   }
-  case c3__inc: {
+  case c3__vint: {
     _zn_retreat(z, _zn_bip_root(f.r.mat_ray));
     {
       u3_ray lid_ray = _zn_bip_root(f.c.lid_ray);
@@ -92,7 +92,7 @@ _zn_forge_root(u3_z       z,
     }
     break;
   }
-  case c3__tap: {
+  case c3__dust: {
     _zn_retreat(z, _zn_bip_root(f.r.mat_ray));
     {
       u3_ray lid_ray = _zn_bip_root(f.c.lid_ray);

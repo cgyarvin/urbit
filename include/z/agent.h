@@ -125,14 +125,14 @@
     ***
     ***   bask
     ***   cons
-    ***   cook
+    ***   nock
     ***   fine
     ***   drop
     ***   hint
     ***   goto
-    ***   link
-    ***   push
-    ***   pick
+    ***   flac
+    ***   gant
+    ***   trol
     ***   root  [inc, tap, eq]
     ***   tail
     **/
@@ -194,11 +194,11 @@
           } d;
         };
 
-      /* cook: 
+      /* nock: 
       ** 
       **   Compute a static formula on a static noun.
       */
-        struct u3_zn_forge_cook {
+        struct u3_zn_forge_nock {
           struct u3_zn_control c;
           struct {
             /* bus: subject.
@@ -208,8 +208,8 @@
             u3_fox sef;
           } s;
         };
-        struct u3_zn_anvil_cook {
-          struct u3_zn_forge_cook f;
+        struct u3_zn_anvil_nock {
+          struct u3_zn_forge_nock f;
         };
 
       /* drop:
@@ -267,11 +267,11 @@
           } d;
         };
 
-      /* link:
+      /* flac:
       **
       **   Compute a static formula on a dynamic noun.
       */
-        struct u3_zn_forge_link {
+        struct u3_zn_forge_flac {
           struct u3_zn_control c;
           struct u3_zn_retreat r;
           struct {
@@ -280,19 +280,20 @@
             u3_fox dep;
           } s;
         };
-        struct u3_zn_anvil_link {
-          struct u3_zn_forge_link f;
+        struct u3_zn_anvil_flac {
+          struct u3_zn_forge_flac f;
           struct {
             /* gus: subject.
             */
             u3_fox gus;
           } d;
         };
-      /* push:
+
+      /* gant:
       **
-      **   Compute a static formula on a dynamic noun.
+      **   Compute a static formula on a dynamic noun, consed with subject.
       */
-        struct u3_zn_forge_push {
+        struct u3_zn_forge_gant {
           struct u3_zn_control c;
           struct u3_zn_retreat r;
           struct {
@@ -303,14 +304,15 @@
             u3_fox dep;
           } s;
         };
-        struct u3_zn_anvil_push {
-          struct u3_zn_forge_push f;
+        struct u3_zn_anvil_gant {
+          struct u3_zn_forge_gant f;
           struct {
             /* gus: subject.
             */
             u3_fox gus;
           } d;
         };
+
       /* hint:
       **
       **   Compute a static formula on a dynamic noun.
@@ -357,11 +359,11 @@
           } d;
         };
 
-      /* pick: 
+      /* trol: 
       **
       **   Branch.
       */
-        struct u3_zn_forge_pick {
+        struct u3_zn_forge_trol {
           struct u3_zn_control c;
           struct u3_zn_retreat r;
           struct {
@@ -374,8 +376,8 @@
             u3_fox paf;
           } s;
         };
-        struct u3_zn_anvil_pick {
-          struct u3_zn_forge_pick f;
+        struct u3_zn_anvil_trol {
+          struct u3_zn_forge_trol f;
           struct {
             /* gus: condition value
             */

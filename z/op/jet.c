@@ -68,7 +68,7 @@ _zn_forge_jet(u3_z            z,
         case c3__punt: {
           u3_fox bat = u3_zj_bat(z, sax);
 
-          _zn_forge_cook(z, lid_ray, gus, bat);
+          _zn_forge_nock(z, lid_ray, gus, bat);
           break;
         }
         case c3__test: {

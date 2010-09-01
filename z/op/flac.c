@@ -1,18 +1,18 @@
-/* z/op/link.c
+/* z/op/flac.c
 **
 ** This file is in the public domain.
 */
 
 #ifdef  U3_ZN_FORGE
-/* _zn_forge_link(): install a link agent.
+/* _zn_forge_flac(): install a flac agent.
 **
 **   lid: cap at termination
 **   mat: saved mat for departure
 **   lip: cap at departure
-**   dep: link formula.
+**   dep: flac formula.
 */
 static inline void
-_zn_forge_link(u3_z   z,
+_zn_forge_flac(u3_z   z,
                u3_ray lid_ray,
                u3_ray mat_ray,
                u3_ray lip_ray,
@@ -20,30 +20,30 @@ _zn_forge_link(u3_z   z,
 {
   u3_ray zos_ray;
 
-  zos_ray = _zn_push_forge(z, link);
-  *_zn_forge(z, zos_ray, link, c.ger_op) = c3__link;
-  *_zn_forge(z, zos_ray, link, c.poq_ray) = z->n.lab_ray;
-  *_zn_forge(z, zos_ray, link, c.lid_ray) = lid_ray;
+  zos_ray = _zn_push_forge(z, flac);
+  *_zn_forge(z, zos_ray, flac, c.ger_op) = c3__flac;
+  *_zn_forge(z, zos_ray, flac, c.poq_ray) = z->n.lab_ray;
+  *_zn_forge(z, zos_ray, flac, c.lid_ray) = lid_ray;
 
-  *_zn_forge(z, zos_ray, link, r.mat_ray) = mat_ray;
-  *_zn_forge(z, zos_ray, link, r.lip_ray) = lip_ray;
+  *_zn_forge(z, zos_ray, flac, r.mat_ray) = mat_ray;
+  *_zn_forge(z, zos_ray, flac, r.lip_ray) = lip_ray;
 
-  *_zn_forge(z, zos_ray, link, s.dep) = dep;
+  *_zn_forge(z, zos_ray, flac, s.dep) = dep;
 
   z->n.lab_ray = zos_ray;
 }
 #endif  // U3_ZN_FORGE
 
 #ifdef  U3_ZN_OP
-# define _zn_bip_link(field) *_zn_anvil(z, bip_ray, link, field)
+# define _zn_bip_flac(field) *_zn_anvil(z, bip_ray, flac, field)
 
-  case c3__link: {
-    _zn_retreat(z, _zn_bip_link(f.r.mat_ray));
+  case c3__flac: {
+    _zn_retreat(z, _zn_bip_flac(f.r.mat_ray));
     {
-      u3_ray lid_ray = _zn_bip_link(f.c.lid_ray);
-      u3_ray lip_ray = _zn_bip_link(f.r.lip_ray);
-      u3_fox dep     = _zn_bip_link(f.s.dep);
-      u3_fox gus     = _zn_bip_link(d.gus);
+      u3_ray lid_ray = _zn_bip_flac(f.c.lid_ray);
+      u3_ray lip_ray = _zn_bip_flac(f.r.lip_ray);
+      u3_fox dep     = _zn_bip_flac(f.s.dep);
+      u3_fox gus     = _zn_bip_flac(d.gus);
 #if 1
       if ( (lid_ray != lip_ray) && (lip_ray != z->l.cap_ray) ) {
         /* Tail optimization.
@@ -58,7 +58,7 @@ _zn_forge_link(u3_z   z,
         **
         ** Because it is above [lid_ray], we know that region B will be
         ** discarded after (nock gus dep) completes.  The question is
-        ** whether it can be discarded *before* this link completion.
+        ** whether it can be discarded *before* this flac completion.
         **
         ** We know [dep] is a static formula.  So only [gus], the
         ** subject we have just produced, can point into A or B.  
@@ -85,7 +85,7 @@ _zn_forge_link(u3_z   z,
           /* Not clear to tamp.
           ** 
           ** So that further attempts to tamp in this chain can work,
-          ** the cook agent that completes the link must not tamp to
+          ** the nock agent that completes the flac must not tamp to
           ** [lid], but rather to the current cap.  Thus, to avoid
           ** leaking, we must install a drop agent to free.
           **
@@ -99,7 +99,7 @@ _zn_forge_link(u3_z   z,
         }
       }
 #endif
-      _zn_forge_cook(z, lid_ray, gus, dep);
+      _zn_forge_nock(z, lid_ray, gus, dep);
     }
     break;
   }

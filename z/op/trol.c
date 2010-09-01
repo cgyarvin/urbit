@@ -56,12 +56,12 @@ _zn_forge_pick(u3_z z,
       if ( 0 == gus ) {
         c3_assert(lip_ray == z->l.cap_ray);
 
-        _zn_forge_cook(z, lid_ray, bus, feg); 
+        _zn_forge_nock(z, lid_ray, bus, feg); 
       }
       else if ( 1 == gus ) {
         c3_assert(lip_ray == z->l.cap_ray);
 
-        _zn_forge_cook(z, lid_ray, bus, paf); 
+        _zn_forge_nock(z, lid_ray, bus, paf); 
       }
       else {
         return c3__exit;
