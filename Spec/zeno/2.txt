@@ -90,9 +90,9 @@ copying nouns.  Why copy a noun?  See below.
 
 2. Allocation (simple)
 
-Now we consider the loom's simple default allocation algorithm,
-the "Seuss system."  This separates memory with three pointers:
-hat," "cap," and "mat."
+Now we consider the loom's allocation algorithm, the "Seuss
+system."  The Seuss system manages memory with three pointers:
+"hat", "cap", and "mat".
 
 "hat" and "cap", rays, are the tops of two opposing stack
 allocators, rays on opposite beams.  Either the hat is east
@@ -337,11 +337,11 @@ west            mat   hat rut                           east
 
 "&" is the free list; "=" is a free block.
 
-Using the allocator activates a fourth memory pointer, "rut". The
-rut sets (a) the location of the free list and (b) the
-boundaries of reference control.  If the rut is set, before
-advancing the hat, zeno will try to allocate out of the free
-list.
+Using the allocator adds a fourth memory pointer, "rut", to the
+Seuss system.  The rut sets (a) the location of the free list
+and (b) the boundaries of reference control.  If the rut is set,
+before advancing the hat, zeno will try to allocate out of the
+free list.
 
 Since nouns are acyclic, reference counting is always effective.
 Why bother with this loom business, then?  Why not just a simple
