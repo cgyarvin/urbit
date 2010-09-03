@@ -535,6 +535,36 @@ _vere_mung(struct vere_state*   v,
   }
 }
 
+/*  _vere_munz()::
+*/
+static u3_fox
+_vere_munz(struct vere_state*   v,
+           u3_fox               gat,
+           u3_fox               sam,
+           c3_b                 mar_b)
+{
+  u3_fox res, pro;
+  struct u3_z_bench naq;
+
+  res = u3_z_mung(v->z, &pro, gat, sam, mar_b ? &naq : 0);
+  if ( 0 == res ) {
+    if ( mar_b ) {
+      fprintf(stderr, " <%lld steps, %d words>\n",
+              naq.ruy_d,
+              (naq.maz_w - naq.vil_w) + (naq.buc_w - naq.tew_w));
+    }
+    return pro;
+  }
+  else {
+    c3_c c_buf[5];
+
+    u3_lr_bytes(v->z, 0, 5, (c3_y *)c_buf, res);
+    fprintf(stderr, "[%s]\n", c_buf);
+    
+    return _vere_q_fail(v);
+  }
+}
+
 /*  _vere_kick():  boot make, typeless; to formula
 */
 static u3_fox
@@ -969,6 +999,24 @@ vere_line(void *vere, const c3_c *line)
   }
 }
 
+static u3_fox
+_vere_xz(struct vere_state* v,
+         u3_fox             fox)
+{
+  if ( u3_yes == u3_lr_dust(v->x, fox) ) {
+    return u3_ln_cell
+      (v->z, 
+       _vere_xz(v, u3_lr_h(v->x, fox)), 
+       _vere_xz(v, u3_lr_t(v->x, fox)));
+  }
+  else {
+    mpz_t gur_mp;
+
+    u3_lr_mp(v->x, gur_mp, fox);
+    return u3_ln_mp(v->z, gur_mp);
+  }
+}
+
 void 
 vere_line2(void* vere, const c3_c* lin_c)
 {
@@ -992,12 +1040,15 @@ vere_line2(void* vere, const c3_c* lin_c)
     {
       u3_fox gat = _vere_file(v->x, pah_c);
       u3_fox arg = u3_ln_string(v->x, arg_c);
-      u3_fox fel = _vere_kick(v, gat);
+      u3_fox fel = _vere_nock(v, 0, _vere_kick(v, gat), 0);
       u3_fox gux = _vere_nock(v, 0, _vere_kick(v, arg), 0);
       u3_fox bim;
 
-      bim = _vere_nock(v, gux, fel, 1);
-      u3_b_print(v->x, 0, bim);
+      fel = _vere_xz(v, fel);
+      gux = _vere_xz(v, gux);
+
+      bim = _vere_munz(v, fel, gux, 1);
+      u3_b_print(v->z, 0, bim);
     }
   }
 }

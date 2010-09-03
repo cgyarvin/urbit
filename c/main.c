@@ -99,8 +99,8 @@ main(int  argc,
       break;
     }
     else {
-      vere_line(ver, line);
-      // vere_line2(ver, line);
+      // vere_line(ver, line);
+      vere_line2(ver, line);
     }
   }
   return 0;
