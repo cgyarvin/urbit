@@ -227,6 +227,11 @@ Z_OFILES=\
        z/run.o \
        z/zeno.o 
 
+X_OFILES=\
+       x/jato.o \
+       x/run.o \
+       x/xeno.o 
+
 J_OFILES=\
        j/add.o \
        j/bex.o \
@@ -239,9 +244,7 @@ J_OFILES=\
        j/mod.o \
        j/mul.o \
        j/sub.o \
-       \
        j/mug.o \
-       \
        j/make.o	\
        j/mill.o \
        j/pass.o	\
@@ -251,6 +254,28 @@ J_OFILES=\
        j/show.o	\
        j/wish.o
 
+K_OFILES=\
+       k/add.o \
+       k/bex.o \
+       k/dec.o \
+       k/div.o \
+       k/gth.o \
+       k/gte.o \
+       k/lth.o \
+       k/lte.o \
+       k/mod.o \
+       k/mul.o \
+       k/sub.o \
+       k/mug.o \
+       k/make.o	\
+       k/mill.o \
+       k/pass.o	\
+       k/play.o	\
+       k/read.o \
+       k/shop.o	\
+       k/show.o	\
+       k/wish.o
+
 B_OFILES=\
        b/bunt.o
 
@@ -259,7 +284,9 @@ OFILES= \
        $(C_OFILES) \
        $(B_OFILES) \
        $(Z_OFILES) \
+       $(X_OFILES) \
        $(J_OFILES) \
+       $(K_OFILES) \
        $(U4_OFILES)
 
 $(BIN)/vere: $(OFILES)

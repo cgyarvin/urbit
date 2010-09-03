@@ -23,11 +23,15 @@
     /*  struct vere_state: vere application state.
     */
       struct vere_state {
-        /*  Z - the Nock engine.
+        /*  xeno - the old Nock engine.
+        */
+        u3_x    x;
+
+        /*  zeno - the new Nock engine.
         */
         u3_z    z;
 
-        /*  Watt - the kernel noun.  Initialized at boot.
+        /*  Watt - the kernel noun.  Initialixed at boot.
         */
         u3_fox  wot;
 
@@ -81,13 +85,13 @@
           } g;
         } m;
 
-        /*  Exception control.
+        /*  Eqception control.
         */
         struct {
-          /*  Jump buffer for all line exceptions.
+          /*  Jump buffer for all line eqceptions.
           */
           jmp_buf   buf_jmp;
-        } x;
+        } q;
       };
 
   /**   Global variables.
@@ -97,48 +101,48 @@
   /**   Internal (temporary) functions.
   **/
     static void
-    _vere_dump_in(u3_z z, FILE *fil, u3_fox nun);
+    _vere_dump_in(u3_x x, FILE *fil, u3_fox nun);
     static void
-    _vere_dump(u3_z z, FILE *fil, u3_fox nun);
+    _vere_dump(u3_x x, FILE *fil, u3_fox nun);
     static u3_fox
-    _vere_scan_cell(u3_z z, FILE *fil);
+    _vere_scan_cell(u3_x x, FILE *fil);
     static u3_fox
-    _vere_scan(u3_z z, FILE *fil);
+    _vere_scan(u3_x x, FILE *fil);
 
 #if 0
-/*  _vere_x_does(): push a debugging context.
+/*  _vere_q_does(): push a debugging context.
 */
 static void
-_vere_x_does(struct vere_state* v,
-             const c3_c*        txt)
+_vere_q_does(struct vere_state* v,
+             const c3_c*        tqt)
 {
 }
 
-/*  _vere_x_done(): push a debugging context.
+/*  _vere_q_done(): push a debugging context.
 */
 static void
-_vere_x_done(struct vere_state* v)
+_vere_q_done(struct vere_state* v)
 {
 }
 #endif
 
-/*  _vere_x_fail(): return to top.
+/*  _vere_q_fail(): return to top.
 */
 static u3_fox
-_vere_x_fail(struct vere_state* v)
+_vere_q_fail(struct vere_state* v)
 {
-  longjmp(v->x.buf_jmp, 1);
+  longjmp(v->q.buf_jmp, 1);
   return u3_none;
 }
 
-/*  _vere_x_use(): turn fox to rat.
+/*  _vere_q_use(): turn fox to rat.
 */
 static u3_fox
-_vere_x_use(struct vere_state* v,
+_vere_q_use(struct vere_state* v,
             u3_rat             rat)
 {
   if ( u3_none == rat ) {
-    return _vere_x_fail(v);
+    return _vere_q_fail(v);
   }
   else return rat;
 }
@@ -150,7 +154,7 @@ _vere_nc(struct vere_state* v,
          u3_fox             hed,
          u3_fox             tal)
 {
-  return _vere_x_use(v, u3_ln_cell(v->z, hed, tal));
+  return _vere_q_use(v, u3_ln_cell(v->x, hed, tal));
 }
 
 /*  _vere_nt()::
@@ -168,9 +172,9 @@ _vere_nt(struct vere_state* v,
 */
 static u3_fox
 _vere_ns(struct vere_state* v,
-         const c3_c*        txt_c)
+         const c3_c*        tqt_c)
 {
-  return _vere_x_use(v, u3_ln_string(v->z, txt_c));
+  return _vere_q_use(v, u3_ln_string(v->x, tqt_c));
 }
 
 /*  _vere_h()::
@@ -179,9 +183,9 @@ static u3_fox
 _vere_h(struct vere_state* v,
         u3_fox             sel)
 {
-  if ( u3_yes == u3_lr_dust(v->z, sel) ) {
-    return u3_h(v->z, sel);
-  } else return _vere_x_fail(v);
+  if ( u3_yes == u3_lr_dust(v->x, sel) ) {
+    return u3_h(v->x, sel);
+  } else return _vere_q_fail(v);
 }
 
 /*  _vere_t()::
@@ -190,9 +194,9 @@ static u3_fox
 _vere_t(struct vere_state* v,
         u3_fox             sel)
 {
-  if ( u3_yes == u3_lr_dust(v->z, sel) ) {
-    return u3_t(v->z, sel);
-  } else return _vere_x_fail(v);
+  if ( u3_yes == u3_lr_dust(v->x, sel) ) {
+    return u3_t(v->x, sel);
+  } else return _vere_q_fail(v);
 }
 
 /* _vere_file():
@@ -200,22 +204,22 @@ _vere_t(struct vere_state* v,
 **  Load the path (pah)  as an atom.
 */
 u3_fox
-_vere_file(u3_z         z,
+_vere_file(u3_x         x,
            const c3_c*  pah_c)
 {
   c3_i        fid_i = open(pah_c, O_RDONLY, 0666);
-  struct stat sox_stat;
+  struct stat soq_stat;
   c3_w        siz_w;
   uint8_t     *buf;
   u3_fox     dat; 
 
-  if ( (fid_i < 0) || (fstat(fid_i, &sox_stat) < 0) ) {
+  if ( (fid_i < 0) || (fstat(fid_i, &soq_stat) < 0) ) {
     perror(pah_c);
     exit(1);
   }
 
-  siz_w = sox_stat.st_size;
-  buf = malloc(sox_stat.st_size);
+  siz_w = soq_stat.st_size;
+  buf = malloc(soq_stat.st_size);
 
   if ( siz_w != read(fid_i, buf, siz_w) ) {
     perror(pah_c);
@@ -223,30 +227,30 @@ _vere_file(u3_z         z,
   }
   close(fid_i);
 
-  dat = u3_ln_bytes(z, siz_w, buf);
+  dat = u3_ln_bytes(x, siz_w, buf);
   free(buf);
 
   return dat;
 }
 
 /* Return true iff (atom) is an ASCII string of (3) or more bytes,
-** using no characters besides a-z and -.
+** using no characters besides a-x and -.
 */
 static uint8_t
-_vere_term(u3_z z,
+_vere_term(u3_x x,
            u3_fox    tat,
            uint32_t   qb)
 {
-  uint32_t sb = u3_lr_bin(z, 3, tat);
+  uint32_t sb = u3_lr_bin(x, 3, tat);
 
   if ( sb >= qb) {
-    uint8_t *xb = alloca(sb);
+    uint8_t *qb = alloca(sb);
     uint32_t i;
 
-    u3_lr_bytes(z, 0, sb, xb, tat);
+    u3_lr_bytes(x, 0, sb, qb, tat);
 
     for ( i=0; i < sb; i++ ) {
-      if ( ((xb[i] < 'a') || (xb[i] > 'z')) && (xb[i] != '-') ) {
+      if ( ((qb[i] < 'a') || (qb[i] > 'x')) && (qb[i] != '-') ) {
         return 0;
       }
     }
@@ -258,49 +262,49 @@ _vere_term(u3_z z,
 /* _vere_dump_in(): dump in cell.
 */
 static void
-_vere_dump_in(u3_z z,
+_vere_dump_in(u3_x x,
               FILE       *fil,
               u3_fox    nun)
 {
-  if ( u3_no == u3_lr_dust(z, nun) ) {
-    _vere_dump(z, fil, nun);
+  if ( u3_no == u3_lr_dust(x, nun) ) {
+    _vere_dump(x, fil, nun);
   }
   else {
-    _vere_dump(z, fil, u3_h(z, nun));
+    _vere_dump(x, fil, u3_h(x, nun));
     fprintf(fil, " ");
-    _vere_dump_in(z, fil, u3_t(z, nun));
+    _vere_dump_in(x, fil, u3_t(x, nun));
   }
 }
 
 /* vere_dump(): dump noun to file.
 */
 void
-_vere_dump(u3_z z,
+_vere_dump(u3_x x,
            FILE       *fil,
            u3_fox    nun)
 {
-  if ( u3_no == u3_lr_dust(z, nun) ) {
+  if ( u3_no == u3_lr_dust(x, nun) ) {
     mpz_t amp;
 
-    if ( _vere_term(z, nun, 2) ) {
-      uint32_t sb = u3_lr_bin(z, 3, nun);
-      uint8_t *xb = alloca(sb + 1);
+    if ( _vere_term(x, nun, 2) ) {
+      uint32_t sb = u3_lr_bin(x, 3, nun);
+      uint8_t *qb = alloca(sb + 1);
 
-      u3_lr_bytes(z, 0, sb, xb, nun);
-      xb[sb] = 0;
-      fprintf(fil, "%%%s", xb);
+      u3_lr_bytes(x, 0, sb, qb, nun);
+      qb[sb] = 0;
+      fprintf(fil, "%%%s", qb);
     }
     else {
-      u3_lr_mp(z, amp, nun);
+      u3_lr_mp(x, amp, nun);
       gmp_fprintf(fil, "%Zd", amp);
       mpz_clear(amp);
     }
   }
   else {
     fputc('[', fil);
-    _vere_dump(z, fil, u3_h(z, nun));
+    _vere_dump(x, fil, u3_h(x, nun));
     fprintf(fil, " ");
-    _vere_dump_in(z, fil, u3_t(z, nun));
+    _vere_dump_in(x, fil, u3_t(x, nun));
     fputc(']', fil);
   }
 }
@@ -308,16 +312,16 @@ _vere_dump(u3_z z,
 /* _vere_scan_cell(): scan cell or tuple.
 */
 static u3_fox
-_vere_scan_cell(u3_z z, 
+_vere_scan_cell(u3_x x, 
                 FILE       *fil)
 {
-  u3_fox hed = _vere_scan(z, fil);
+  u3_fox hed = _vere_scan(x, fil);
   int     c   = fgetc(fil);
 
   if ( c == ' ' ) {
-    u3_fox tal = _vere_scan_cell(z, fil);
+    u3_fox tal = _vere_scan_cell(x, fil);
 
-    return u3_ln_cell(z, hed, tal);
+    return u3_ln_cell(x, hed, tal);
   }
   else { 
     assert(c == ']');
@@ -328,19 +332,19 @@ _vere_scan_cell(u3_z z,
 /* _vere_scan(): scan noun from file.
 */
 static u3_fox
-_vere_scan(u3_z z,
+_vere_scan(u3_x x,
            FILE       *fil)
 {
   int c = fgetc(fil);
 
   if ( c == '[' ) {
-    return _vere_scan_cell(z, fil);
+    return _vere_scan_cell(x, fil);
   } 
   else if ( c == '%' )  {
     char buf[1025];
 
     fscanf(fil, "%1024[a-z-]", buf);
-    return u3_ln_string(z, buf);
+    return u3_ln_string(x, buf);
   }
 #if 0
     mpz_t amp;
@@ -356,7 +360,7 @@ _vere_scan(u3_z z,
       else {
         ungetc(c, fil);
 
-        return uz_k_mp(z, amp);
+        return ux_k_mp(x, amp);
       }
     }
 #endif
@@ -366,7 +370,7 @@ _vere_scan(u3_z z,
     ungetc(c, fil);
     mpz_init(amp);
     gmp_fscanf(fil, "%Zd", amp);
-    return u3_ln_mp(z, amp);
+    return u3_ln_mp(x, amp);
   }
 }
 
@@ -377,10 +381,10 @@ _vere_scan(u3_z z,
 **    src: source text, as atom
 */
 u3_fox
-_vere_init_read(u3_z    z,
+_vere_init_read(u3_x    x,
                 u3_fox  src)
 {
-  u3_rat rat = u3_b_read(&z->l, src);
+  u3_rat rat = u3_b_read(&x->l, src);
 
   if ( u3_none == rat ) {
     fprintf(stderr, "boot parse failed\n");
@@ -396,11 +400,11 @@ _vere_init_read(u3_z    z,
 **    src: source text, as atom
 */
 u3_fox
-_vere_init_make(u3_z    z,
+_vere_init_make(u3_x    x,
                 u3_fox  gen)
 {
   u3_mote how;
-  u3_rat  rat = u3_b_pass(&z->l, c3__blur, gen, &how);
+  u3_rat  rat = u3_b_pass(&x->l, c3__blur, gen, &how);
 
   if ( u3_none == rat ) {
     fprintf(stderr, "boot make failed\n");
@@ -414,35 +418,35 @@ _vere_init_make(u3_z    z,
 void
 _vere_kernel(struct vere_state*   v,
              const c3_c*          pod_c,
-             const c3_c*          pax_c)
+             const c3_c*          paq_c)
 {
-  struct stat pod_stat, pax_stat;
+  struct stat pod_stat, paq_stat;
 
   if ( stat(pod_c, &pod_stat) < 0 ) {
     perror(pod_c);
     exit(1);
   }
   else {
-    if ( (stat(pax_c, &pax_stat) < 0) ||
-         (pod_stat.st_mtimespec.tv_sec > pax_stat.st_mtimespec.tv_sec) ||
+    if ( (stat(paq_c, &paq_stat) < 0) ||
+         (pod_stat.st_mtimespec.tv_sec > paq_stat.st_mtimespec.tv_sec) ||
          ((pod_stat.st_mtimespec.tv_sec == (pod_stat.st_mtimespec.tv_sec)) &&
-          (pod_stat.st_mtimespec.tv_nsec > pax_stat.st_mtimespec.tv_nsec)) )
+          (pod_stat.st_mtimespec.tv_nsec > paq_stat.st_mtimespec.tv_nsec)) )
     {
       FILE *fil;
       u3_fox src, gen, ker;
 
       printf("[vere: building kernel: %s]\n", pod_c);
 
-      src = _vere_file(v->z, pod_c);
-      gen = _vere_init_read(v->z, src);
-      ker = _vere_init_make(v->z, gen);
+      src = _vere_file(v->x, pod_c);
+      gen = _vere_init_read(v->x, src);
+      ker = _vere_init_make(v->x, gen);
 
-      if ( !(fil = fopen(pax_c, "w")) ) {
-        perror(pax_c);
+      if ( !(fil = fopen(paq_c, "w")) ) {
+        perror(paq_c);
         exit(1);
       }
-      _vere_dump(v->z, fil, ker);
-       printf("[saved kernel: %s]\n", pax_c);
+      _vere_dump(v->x, fil, ker);
+       printf("[saved kernel: %s]\n", paq_c);
       fclose(fil);
 
       v->wot = ker;
@@ -452,12 +456,12 @@ _vere_kernel(struct vere_state*   v,
       FILE *fil;
       u3_fox ker;
 
-      if ( !(fil = fopen(pax_c, "r")) ) {
-        perror(pax_c);
+      if ( !(fil = fopen(paq_c, "r")) ) {
+        perror(paq_c);
         exit(1);
       }
-      ker = _vere_scan(v->z, fil);
-      printf("[vere: loaded kernel: %s]\n", pax_c);
+      ker = _vere_scan(v->x, fil);
+      printf("[vere: loaded kernel: %s]\n", paq_c);
 
       fclose(fil);
       v->wot = ker;
@@ -480,24 +484,24 @@ _vere_nock(struct vere_state* v,
   **  pro:  product
   */
   u3_fox res, pro;
-  struct u3_z_bench naq;
+  struct u3_x_bench naq;
 
-  res = u3_z_run(v->z, &pro, bus, fol, mar_b ? &naq : 0);
+  res = u3_x_run(v->x, &pro, bus, fol, mar_b ? &naq : 0);
   if ( 0 == res ) {
     if ( mar_b ) {
       fprintf(stderr, " <%lld steps, %d words>\n",
               naq.ruy_d,
-              (naq.maz_w - naq.vil_w) + (naq.buc_w - naq.tew_w));
+              (naq.max_w - naq.vil_w) + (naq.buc_w - naq.tew_w));
     }
     return pro;
   }
   else {
     c3_c c_buf[5];
 
-    u3_lr_bytes(v->z, 0, 5, (c3_y *)c_buf, res);
+    u3_lr_bytes(v->x, 0, 5, (c3_y *)c_buf, res);
     fprintf(stderr, "[%s]\n", c_buf);
  
-    return _vere_x_fail(v);
+    return _vere_q_fail(v);
   }
 }
 
@@ -510,24 +514,24 @@ _vere_mung(struct vere_state*   v,
            c3_b                 mar_b)
 {
   u3_fox res, pro;
-  struct u3_z_bench naq;
+  struct u3_x_bench naq;
 
-  res = u3_z_mung(v->z, &pro, gat, sam, mar_b ? &naq : 0);
+  res = u3_x_mung(v->x, &pro, gat, sam, mar_b ? &naq : 0);
   if ( 0 == res ) {
     if ( mar_b ) {
       fprintf(stderr, " <%lld steps, %d words>\n",
               naq.ruy_d,
-              (naq.maz_w - naq.vil_w) + (naq.buc_w - naq.tew_w));
+              (naq.max_w - naq.vil_w) + (naq.buc_w - naq.tew_w));
     }
     return pro;
   }
   else {
     c3_c c_buf[5];
 
-    u3_lr_bytes(v->z, 0, 5, (c3_y *)c_buf, res);
+    u3_lr_bytes(v->x, 0, 5, (c3_y *)c_buf, res);
     fprintf(stderr, "[%s]\n", c_buf);
     
-    return _vere_x_fail(v);
+    return _vere_q_fail(v);
   }
 }
 
@@ -602,9 +606,9 @@ _vere_fire(struct vere_state*   v,
 u3_fox
 _vere_shell(struct vere_state*  v,
             const c3_c*         pod_c,
-            const c3_c*         pax_c)
+            const c3_c*         paq_c)
 {
-  struct stat pod_stat, pax_stat;
+  struct stat pod_stat, paq_stat;
 
   if ( stat(pod_c, &pod_stat) < 0 ) {
     perror(pod_c);
@@ -615,29 +619,29 @@ _vere_shell(struct vere_state*  v,
     FILE *fil;
 
     if ( v->new_b ||
-         (stat(pax_c, &pax_stat) < 0) ||
-         (pod_stat.st_mtimespec.tv_sec > pax_stat.st_mtimespec.tv_sec) ||
+         (stat(paq_c, &paq_stat) < 0) ||
+         (pod_stat.st_mtimespec.tv_sec > paq_stat.st_mtimespec.tv_sec) ||
          ((pod_stat.st_mtimespec.tv_sec == (pod_stat.st_mtimespec.tv_sec)) &&
-          (pod_stat.st_mtimespec.tv_nsec > pax_stat.st_mtimespec.tv_nsec)) )
+          (pod_stat.st_mtimespec.tv_nsec > paq_stat.st_mtimespec.tv_nsec)) )
     {
       printf("[vere: building shell: %s]\n", pod_c);
-      ver = _vere_fire(v, _vere_file(v->z, pod_c));
+      ver = _vere_fire(v, _vere_file(v->x, pod_c));
 
-      if ( !(fil = fopen(pax_c, "w")) ) {
-        perror(pax_c);
+      if ( !(fil = fopen(paq_c, "w")) ) {
+        perror(paq_c);
       }
       else {
-        _vere_dump(v->z, fil, ver);
-         printf("[saved shell: %s]\n", pax_c);
+        _vere_dump(v->x, fil, ver);
+         printf("[saved shell: %s]\n", paq_c);
         fclose(fil);
       }
       return ver;
     }
     else {
-      fil = fopen(pax_c, "r");
-      ver = _vere_scan(v->z, fil);
+      fil = fopen(paq_c, "r");
+      ver = _vere_scan(v->x, fil);
 
-      printf("[vere: loaded shell: %s]\n", pax_c);
+      printf("[vere: loaded shell: %s]\n", paq_c);
 
       return ver;
     }
@@ -651,7 +655,7 @@ vere_boot(c3_w siz_w)
 
   u3_b_init();
 
-  if ( setjmp(v->x.buf_jmp) ) {
+  if ( setjmp(v->q.buf_jmp) ) {
     fprintf(stderr, "boot: fail\n");
     exit(1);
   }
@@ -660,9 +664,10 @@ vere_boot(c3_w siz_w)
   **
   **  XX: this whole sequence is wrong.  It is made complicated
   **  by the fact that the fake compiler can't jet !%, and punts 
-  **  in a way that is exponentially slow!
+  **  in a way that is eqponentially slow!
   */
   {
+    v->x = u3_x_new(siz_w);
     v->z = u3_z_new(siz_w);
     _vere_kernel(v, "watt/296.watt", "watt/296.nock");
   }
@@ -705,26 +710,26 @@ vere_boot(c3_w siz_w)
 
 void
 _vere_spit(struct vere_state*   v,
-           u3_fox               poz)
+           u3_fox               pox)
 {
-  if ( 0 != poz ) {
-    u3_fox i_poz = _vere_h(v, poz);
-    u3_fox t_poz = _vere_t(v, poz);
+  if ( 0 != pox ) {
+    u3_fox i_pox = _vere_h(v, pox);
+    u3_fox t_pox = _vere_t(v, pox);
 
-    switch ( _vere_h(v, i_poz) ) {
+    switch ( _vere_h(v, i_pox) ) {
       case c3__crud: {
-        u3_fox rol = _vere_t(v, i_poz);
+        u3_fox rol = _vere_t(v, i_pox);
         u3_fox typ = _vere_h(v, rol);
         u3_fox pro = _vere_t(v, rol);
 
-        u3_b_print_type(v->z, 0, typ);
-        u3_b_print(v->z, 0, pro);
+        u3_b_print_type(v->x, 0, typ);
+        u3_b_print(v->x, 0, pro);
 
         break;
       }
-      default: _vere_x_fail(v);
+      default: _vere_q_fail(v);
     }
-    _vere_spit(v, t_poz);
+    _vere_spit(v, t_pox);
   }
 }
 
@@ -737,18 +742,18 @@ _vere_path_out_a(struct vere_state*   v,
                  u3_fox               pih)
 {
   u3_fox  bis = _vere_h(v, pih);
-  c3_w    len = u3_lr_bin(v->z, 3, bis);
+  c3_w    len = u3_lr_bin(v->x, 3, bis);
 
   if ( pah_c ) {
-    u3_lr_bytes(v->z, 0, len, (c3_y *)pah_c, bis);
+    u3_lr_bytes(v->x, 0, len, (c3_y *)pah_c, bis);
     pah_c += len;
   }
   if ( 0 == _vere_t(v, pih) ) {
-    c3_w  fen = u3_lr_bin(v->z, 3, fom);
+    c3_w  fen = u3_lr_bin(v->x, 3, fom);
     
     if ( pah_c ) {
       *pah_c++ = '.';
-      u3_lr_bytes(v->z, 0, fen + 1, (c3_y *)pah_c, fom);
+      u3_lr_bytes(v->x, 0, fen + 1, (c3_y *)pah_c, fom);
     }
     return (1 + fen + len);
   }
@@ -777,7 +782,7 @@ _vere_path_out(struct vere_state* v,
     case c3__kern:  rut = "watt/"; break;
     case c3__ulib:  rut = "watt/lib/"; break;
     case c3__ubin:  rut = "watt/bin/"; break;
-    default:        return _vere_x_fail(v);
+    default:        return _vere_q_fail(v);
   }
   len_w = strlen(rut);
 
@@ -788,7 +793,7 @@ _vere_path_out(struct vere_state* v,
   return len_w + _vere_path_out_a(v, pah_c, fom, _vere_t(v, pah));
 }
 
-/*  _vere_path(): load by unix path with format.
+/*  _vere_path(): load by uniq path with format.
 */
 static u3_fox
 _vere_path_load(struct vere_state*  v,
@@ -802,18 +807,18 @@ _vere_path_load(struct vere_state*  v,
   {
     switch ( fom ) {
       case c3__watt: {
-        u3_fox des = _vere_file(v->z, pah_c);
+        u3_fox des = _vere_file(v->x, pah_c);
         return _vere_mung(v, v->g.rad, des, 0);
       }
       case c3__nock: 
       case c3__noun: {
         FILE *fil = fopen(pah_c, "r");
 
-        return _vere_scan(v->z, fil);
+        return _vere_scan(v->x, fil);
       }
       default:
       case c3__atom: {
-        return _vere_file(v->z, pah_c);
+        return _vere_file(v->x, pah_c);
       }
     }
   }
@@ -861,7 +866,7 @@ _vere_well_wood(struct vere_state* v,
           (v, ip_wol, _vere_well_wood(v, tp_wol));
       }
       default: {
-        return _vere_x_fail(v);
+        return _vere_q_fail(v);
       }
     }
   }
@@ -875,24 +880,24 @@ _vere_well(struct vere_state*   v,
 {
   u3_fox p_wol, q_wol;
 
-  if ( u3_yes == u3_lr_pq(v->z, wol, c3__data, &p_wol, &q_wol) ) {
+  if ( u3_yes == u3_lr_pq(v->x, wol, c3__data, &p_wol, &q_wol) ) {
     u3_fox dat = _vere_path_load(v, p_wol, q_wol);
 
     return _vere_nc(v, c3__bone, dat);
   }
-  else if ( u3_yes == u3_lr_pq(v->z, wol, c3__kick, &p_wol, &q_wol) ) {
+  else if ( u3_yes == u3_lr_pq(v->x, wol, c3__kick, &p_wol, &q_wol) ) {
     return _vere_nt
       (v, c3__kick, _vere_well(v, p_wol), _vere_well(v, q_wol));
   }
-  else if ( u3_yes == u3_lr_pq(v->z, wol, c3__sell, &p_wol, &q_wol) ) {
+  else if ( u3_yes == u3_lr_pq(v->x, wol, c3__sell, &p_wol, &q_wol) ) {
     return _vere_nt
       (v, c3__sell, _vere_well(v, p_wol), _vere_well(v, q_wol));
   }
-  else if ( u3_yes == u3_lr_p(v->z, wol, c3__tule, &p_wol) ) {
+  else if ( u3_yes == u3_lr_p(v->x, wol, c3__tule, &p_wol) ) {
     return _vere_nc
       (v, c3__tule, _vere_well_a(v, p_wol));
   }
-  else if ( u3_yes == u3_lr_p(v->z, wol, c3__wood, &p_wol) ) {
+  else if ( u3_yes == u3_lr_p(v->x, wol, c3__wood, &p_wol) ) {
     return _vere_nc(v, c3__wood, _vere_well_wood(v, p_wol));
   }
   else return wol;
@@ -904,26 +909,26 @@ vere_line(void *vere, const c3_c *line)
   struct vere_state*  v=vere;
   const c3_c*         lin_c=line;
 
-  if ( setjmp(v->x.buf_jmp) ) {
+  if ( setjmp(v->q.buf_jmp) ) {
     fprintf(stderr, "line: fail\n");
   }
   else {
 #if 0
     /*  lin:  line, input
-    **  fex:  gene, parsed line
+    **  feq:  gene, parsed line
     **  rol:  soul, generated line
     */
     u3_fox lin = _vere_ns(v, lin_c);
-    u3_fox fex = _vere_mung(v, v->a.g.par, lin, 0);
+    u3_fox feq = _vere_mung(v, v->a.g.par, lin, 0);
     {
-      // u3_b_print(v->z, "fex", fex);
+      // u3_b_print(v->x, "feq", feq);
 
-      u3_fox rol = _vere_mung(v, v->a.g.tog, fex, 0);
+      u3_fox rol = _vere_mung(v, v->a.g.tog, feq, 0);
       u3_fox typ = _vere_h(v, rol);
       u3_fox pro = _vere_t(v, rol);
 
-      u3_b_print_type(v->z, 0, typ);
-      u3_b_print(v->z, 0, pro);
+      u3_b_print_type(v->x, 0, typ);
+      u3_b_print(v->x, 0, pro);
     }
 #else
     {
@@ -947,11 +952,11 @@ vere_line(void *vere, const c3_c *line)
       u3_fox syn = _vere_h(v, _vere_t(v, piq));
       u3_fox wol = _vere_t(v, _vere_t(v, piq));
 
-      // u3_b_print(v->z, "syn", syn);
-      // u3_b_print(v->z, "wola", wol);
+      // u3_b_print(v->x, "syn", syn);
+      // u3_b_print(v->x, "wola", wol);
       // 
       wol = _vere_well(v, wol);
-      // u3_b_print(v->z, "wolb", wol);
+      // u3_b_print(v->x, "wolb", wol);
       {
         u3_fox mal = _vere_mung(v, fab, wol, 0);
         u3_fox tif = _vere_mung(v, hom, _vere_nc(v, syn, mal), 0);
@@ -961,5 +966,38 @@ vere_line(void *vere, const c3_c *line)
       }
     }
 #endif
+  }
+}
+
+void 
+vere_line2(void* vere, const c3_c* lin_c)
+{
+  struct vere_state*  v=vere;
+
+  if ( setjmp(v->q.buf_jmp) ) {
+    fprintf(stderr, "line: fail\n");
+  }
+  else {
+    const c3_c* spc_c = strchr(lin_c, ' ');
+    const c3_c* arg_c = (spc_c + 1);
+    c3_c*       pro_c = alloca((spc_c - lin_c) + 1);
+    c3_c        pah_c[1024];
+
+    strncpy(pro_c, lin_c, (spc_c - lin_c));
+    pro_c[spc_c - lin_c] = 0;
+    sprintf(pah_c, "watt/tst/%s.watt", pro_c);
+
+    /* Load and run program.
+    */
+    {
+      u3_fox gat = _vere_file(v->x, pah_c);
+      u3_fox arg = u3_ln_string(v->x, arg_c);
+      u3_fox fel = _vere_kick(v, gat);
+      u3_fox gux = _vere_nock(v, 0, _vere_kick(v, arg), 0);
+      u3_fox bim;
+
+      bim = _vere_nock(v, gux, fel, 1);
+      u3_b_print(v->x, 0, bim);
+    }
   }
 }

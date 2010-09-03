@@ -54,3 +54,16 @@
 #     include "z/jets.h"
 #     undef _zj_dry
 #     undef _zj_wet
+
+    /** u3_x: xeno, the interpreter.
+    **/
+#     include "x/machine.h"
+#     include "x/agent.h"
+#     include "x/jato.h"
+
+#     define _xj_dry(nam, mug) 
+#     define _xj_wet(nam, mug) \
+        u3_fox u3_xx_##nam(u3_x, u3_fox);
+#     include "x/jets.h"
+#     undef _xj_dry
+#     undef _xj_wet

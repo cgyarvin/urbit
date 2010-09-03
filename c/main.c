@@ -11,7 +11,6 @@
 #include <readline/history.h>
 #include <gmp.h>
 #include <stdint.h>
-#include "z/public.h"
 
 /* _console_init(): 
 **
@@ -80,6 +79,7 @@ _console_line(const char *history_name)
 
 extern void *vere_boot(uint32_t size);
 extern void  vere_line(void *vere, char *line);
+extern void  vere_line2(void *vere, char *line);
 
 int
 main(int  argc,
@@ -88,7 +88,7 @@ main(int  argc,
   char *history_name = _console_init();
   void *ver;
 
-  if ( !(ver = vere_boot(28)) ) {
+  if ( !(ver = vere_boot(26)) ) {
     fprintf(stderr, "vere: boot failed\n");
     return 1;
   }
@@ -100,6 +100,7 @@ main(int  argc,
     }
     else {
       vere_line(ver, line);
+      // vere_line2(ver, line);
     }
   }
   return 0;
