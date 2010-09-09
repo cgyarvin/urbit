@@ -32,6 +32,30 @@ _zn_forge_jet(u3_z            z,
 
   z->n.lab_ray = zos_ray;
 }
+
+/* _zn_start_jet(): install a jet sequence.
+**
+**   lid: cap at termination
+**   bus: operand subject
+**   sef: operand formula
+**   sax: jet code
+*/
+static inline void
+_zn_start_jet(u3_z            z,
+              u3_ray          lid_ray,
+              u3_fox          bus,
+              u3_fox          sef,
+              enum u3_zj_code sax_code)
+{
+  u3_ray lip_ray, mat_ray;
+
+  lip_ray = z->l.cap_ray;
+  mat_ray = _zn_depart(z);
+
+  _zn_forge_jet(z, lid_ray, mat_ray, lip_ray, sax_code);
+  _zn_forge_nock(z, z->l.cap_ray, bus, sef);
+}
+
 #endif  // U3_ZN_FORGE
 
 #ifdef  U3_ZN_OP

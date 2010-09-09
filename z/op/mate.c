@@ -35,6 +35,28 @@ _zn_forge_mate(u3_z z,
   z->n.lab_ray = zos_ray;
 }
 
+/* _zn_start_mate(): install a mate sequence.
+**
+**   lid: cap at termination
+**   pod: jet-computed product
+**   bus: subject
+**   sef: formula
+*/
+static inline void
+_zn_start_mate(u3_z   z,
+               u3_ray lid_ray,
+               u3_fox pod,
+               u3_fox bus, 
+               u3_fox sef)
+{
+  u3_ray lip_ray, mat_ray;
+
+  lip_ray = z->l.cap_ray;
+  mat_ray = _zn_depart(z);
+
+  _zn_forge_mate(z, lid_ray, mat_ray, lip_ray, pod);
+  _zn_forge_nock(z, z->l.cap_ray, bus, sef);
+}
 #endif  // U3_ZN_FORGE
 
 #ifdef  U3_ZN_OP

@@ -4,6 +4,8 @@
 */
 #include <sys/stat.h>
 #include <fcntl.h>
+
+#define U2_GLOBAL
 #include "all.h"
 
   /**   Central data structures.
@@ -30,6 +32,10 @@
         /*  zeno - the new Nock engine.
         */
         u3_z    z;
+
+        /*  zon_r - a new allocation thread.
+        */
+        u2_ray  zon_r;
 
         /*  Watt - the kernel noun.  Initialixed at boot.
         */
@@ -699,6 +705,10 @@ vere_boot(c3_w siz_w)
   {
     v->x = u3_x_new(siz_w);
     v->z = u3_z_new(siz_w);
+
+    u2_boot(siz_w);
+    v->zon_r = u2_zn_boot();
+
     _vere_kernel(v, "watt/296.watt", "watt/296.nock");
   }
 
@@ -1017,6 +1027,42 @@ _vere_xz(struct vere_state* v,
   }
 }
 
+static u2_noun
+_vere_32(struct vere_state* v,
+         u3_fox             fox)
+{
+  if ( u3_yes == u3_lr_dust(v->z, fox) ) {
+    return u2_zn_cell
+      (v->zon_r, 
+       _vere_32(v, u3_lr_h(v->z, fox)), 
+       _vere_32(v, u3_lr_t(v->z, fox)));
+  }
+  else {
+    mpz_t gur_mp;
+
+    u3_lr_mp(v->z, gur_mp, fox);
+    return u2_zn_mp(v->zon_r, gur_mp);
+  }
+}
+
+static u3_fox
+_vere_23(struct vere_state* v,
+         u2_noun            som)
+{
+  if ( u2_yes == u2_dust(som) ) {
+    return u3_ln_cell
+      (v->z, 
+       _vere_23(v, u2_h(som)), 
+       _vere_23(v, u2_t(som)));
+  }
+  else {
+    mpz_t gur_mp;
+
+    u2_mp(gur_mp, som);
+    return u3_ln_mp(v->z, gur_mp);
+  }
+}
+
 void 
 vere_line2(void* vere, const c3_c* lin_c)
 {
@@ -1047,8 +1093,30 @@ vere_line2(void* vere, const c3_c* lin_c)
       fel = _vere_xz(v, fel);
       gux = _vere_xz(v, gux);
 
-      bim = _vere_munz(v, fel, gux, 1);
-      u3_b_print(v->z, 0, bim);
+      /* Test with u3, x.
+      */
+      {
+        u3_fox bim = _vere_munz(v, fel, gux, 1);
+        u3_b_print(v->z, 0, bim);
+      }
+
+      /* Test with u2.
+      */
+      {
+        u2_noun fun = _vere_32(v, fel);
+        u2_noun par = _vere_32(v, gux);
+        u2_noun bus = u2_zc(v->zon_r,
+                            u2_zc(v->zon_r, par, u2_t(u2_h(fun))),
+                            fol);
+        u2_noun fol = u2_t(fun);
+
+        {
+          u2_noun pro = u2_zn_nock(v->zon_r, bus, fol);
+          u2_fox  por = _vere_23(v, pro);
+
+          u3_b_print(v->z, 0, por);
+        }
+      }
     }
   }
 }

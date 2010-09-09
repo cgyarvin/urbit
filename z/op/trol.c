@@ -38,6 +38,32 @@ _zn_forge_trol(u3_z z,
   
   z->n.lab_ray = zos_ray;
 }
+
+/* _zn_start_trol(): install a trol sequence.
+**
+**   lid: cap at termination
+**   bus: subject
+**   cor: test formula
+**   feg: then formula
+**   paf: else formula
+*/
+static inline void
+_zn_start_trol(u3_z   z,
+               u3_ray lid_ray,
+               u3_fox bus,
+               u3_fox cor,
+               u3_fox feg,
+               u3_fox paf)
+{
+  u3_ray lip_ray, mat_ray;
+
+  lip_ray = z->l.cap_ray;
+  mat_ray = _zn_depart(z);
+
+  _zn_forge_trol(z, lid_ray, mat_ray, lip_ray, bus, feg, paf);
+  _zn_forge_nock(z, z->l.cap_ray, bus, cor);
+}
+
 #endif  // U3_ZN_FORGE
 
 #ifdef  U3_ZN_OP

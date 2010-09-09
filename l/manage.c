@@ -62,6 +62,7 @@ u3_lm_alloc(u3_lv lv,
   }
 }
 
+
 /* _li_mash(): map (w_nud) to another 32-bit word.
 */
 static c3_w
@@ -118,7 +119,6 @@ _li_mash(c3_w w_nud)
          w_cog[(w_nud >> 16) & 255] +
          w_cog[(w_nud >> 24) & 255];
 }
-
 /* u3_lm_mug():
 **
 **   Compute and/or recall the mug (short hash) of (veb).

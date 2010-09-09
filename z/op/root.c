@@ -30,6 +30,83 @@ _zn_forge_root(u3_z       z,
 
   z->n.lab_ray = zos_ray;
 }
+
+/* _zn_start_root(): install a root sequence (not sail).
+**
+**   ger: operation
+**   lid: cap at termination
+**   bus: operand subject
+**   sef: first formula
+*/
+static inline void
+_zn_start_root(u3_z       z,
+               u3_zn_oper ger_op,
+               u3_ray     lid_ray,
+               u3_fox     bus,
+               u3_fox     sef)
+{
+  u3_ray lip_ray, mat_ray;
+
+  lip_ray = z->l.cap_ray;
+  mat_ray = _zn_depart(z);
+
+  _zn_forge_root(z, ger_op, lid_ray, mat_ray, lip_ray);
+  _zn_forge_nock(z, z->l.cap_ray, bus, sef);
+}
+
+/* _zn_start_sail(): install a sail sequence.
+**
+**   lid: cap at termination
+**   bus: subject
+**   fel: target formula
+*/
+static inline void
+_zn_start_sail(u3_z   z,
+               u3_ray lid_ray,
+               u3_fox bus, 
+               u3_fox fel)
+{
+#if 1
+  u3_fox ged, nar, wid, cov;
+
+  if ( u3_yes == u3_lr_fork(z, fel, &ged, &nar) ) {
+    /* ged: subject formula
+    ** nar: formula formula
+    */
+    if ( (u3_yes == u3_lr_p(z, nar, 0, &wid)) &&
+         (u3_yes == u3_lr_stud(z, wid)) )
+    {
+      /* wid: formula axis
+      ** dep: static formula
+      */
+      u3_rat dep = u3_lr_twig(z, wid, bus);
+
+      if ( u3_none != dep ) {
+        enum u3_zj_code sax_code;
+
+        if ( u3_zj_code_none != (sax_code = u3_zj_look(z, dep)) ) {
+          _zn_start_jet(z, lid_ray, bus, ged, sax_code);
+        } 
+        else {
+          _zn_start_flac(z, lid_ray, bus, ged, dep);
+        }
+        return;
+      }
+    }
+    else if ( u3_yes == u3_lr_p(z, nar, 1, &cov) ) {
+      /* cov: static formula
+      */
+      _zn_start_flac(z, lid_ray, bus, ged, cov);
+      return;
+    }
+  }
+#endif
+
+  /* Default handling.
+  */
+  _zn_start_root(z, c3__sail, lid_ray, bus, fel);
+}
+
 #endif  // U3_ZN_FORGE
 
 #ifdef  U3_ZN_OP

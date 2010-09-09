@@ -80,12 +80,14 @@
           */
           u3_nit bat_nit;
 
-          /* cap, hat, mat: allocation pointers.
+          /* cap, hat, mat, rut: allocation pointers.
           */
-          u3_ray cap_ray;
-          u3_ray hat_ray;
-          u3_ray mat_ray;
-          
+          u3_ray  cap_ray;
+          u3_ray  hat_ray;
+          u3_ray  mat_ray;
+          u3_ray  rut_ray;
+          c3_w    way;
+ 
           /* cop: count of words copied.
           */
           c3_w   cop_w;

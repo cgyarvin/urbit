@@ -354,7 +354,7 @@ drive.  Many programs pass around references to memory they use
 much more rarely, and when they use this memory it is only to
 read them.  If the entire space is in one reference pool, this
 will generate a shower of *writes* to deep data structures that
-are essentially static.  This is, in a word, ghey.
+are essentially static.
 
 Reference counting in the loom is *local*.  References only need
 to be tracked for nouns between rut and hat.  Even if these nouns

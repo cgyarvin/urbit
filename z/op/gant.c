@@ -34,6 +34,30 @@ _zn_forge_gant(u3_z   z,
 
   z->n.lab_ray = zos_ray;
 }
+
+/* _zn_start_gant(): install a gant sequence.
+**
+**   lid: cap at termination
+**   bus: operand subject
+**   sef: operand formula
+**   dep: gant formula
+*/
+static inline void
+_zn_start_gant(u3_z   z,
+               u3_ray lid_ray,
+               u3_fox bus,
+               u3_fox sef,
+               u3_fox dep)
+{
+  u3_ray lip_ray, mat_ray;
+
+  lip_ray = z->l.cap_ray;
+  mat_ray = _zn_depart(z);
+
+  _zn_forge_gant(z, lid_ray, mat_ray, lip_ray, bus, dep);
+  _zn_forge_nock(z, z->l.cap_ray, bus, sef);
+}
+
 #endif  // U3_ZN_FORGE
 
 #ifdef  U3_ZN_OP
