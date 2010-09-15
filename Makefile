@@ -281,7 +281,11 @@ B_OFILES=\
 
 F_OFILES=\
        f/loom.o	\
-       f/zone.o
+       f/zone.o \
+       f/nock/lame.o \
+       f/nock/flee.o \
+       f/nock/toss.o \
+       f/nock/main.o
 
 OFILES= \
        $(L_OFILES) \

@@ -109,7 +109,6 @@
 
 #     define u2_dog_is_pom(dog)   ( !u2_dog_c(dog) )
 #     define u2_dog_is_pug(dog)   ( u2_dog_c(dog) )
-#     define u2_dog_has_box(dog)  ( 1 == u2_dog_b(dog) ) 
 
 #     define u2_dog_is_all(dog) ( u2_dog_b(dog) )
 

@@ -4,26 +4,28 @@
 */
 #include "all.h"
 
-/* u2_zn_nock_here():
+/* u2_wr_nock_here():
 **
-**    As `u2_zn_nock_flee()`, but without cap reduction.
+**    As `u2_wr_nock_flee()`, but without cap reduction.
 */
 u2_weak
-u2_zn_nock_here(u2_ray  wir_r,
+u2_wr_nock_here(u2_ray  wir_r,
+                c3_w    stk_w,
                 u2_noun bus,
                 u2_noun fol)
 {
-  return u2_zn_nock_flee(wir_r, u2_zone_cap(wir_r), bus, fol);
+  return u2_wr_nock_flee(wir_r, 1+stk_w, u2_zone_cap(wir_r), bus, fol);
 }
 
-/* u2_zn_nock_flee():
+/* u2_wr_nock_flee():
 **
-**    Execute (nock bus fol) in the `flee` memory style.
+**    Execute `(nock bus fol)` in the `flee` memory style.
 **
 **    After using `bus`, reduce `cap` to `net`.
 */
 u2_weak
-u2_zn_nock_flee(u2_ray  wir_r,
+u2_wr_nock_flee(u2_ray  wir_r,
+                c3_w    stk_w,
                 u2_ray  net_r,
                 u2_noun bus,
                 u2_noun fol)
@@ -31,6 +33,8 @@ u2_zn_nock_flee(u2_ray  wir_r,
   u2_noun hib, gal;
 
   while ( 1 ) {
+    u2_wr_bench(wir_r, stk_w);
+
     if ( u2_no == u2_as_cell(fol, &hib, &gal) ) {
       return u2_none;
     }
@@ -38,10 +42,10 @@ u2_zn_nock_flee(u2_ray  wir_r,
     if ( u2_yes == u2_dust(hib) ) {
       u2_weak poz, riv;
 
-      if ( u2_none == (poz = u2_zn_nock_here(wir_r, bus, hib)) ) {
+      if ( u2_none == (poz = u2_wr_nock_here(wir_r, 1+stk_w, bus, hib)) ) {
         return u2_none;
       }
-      if ( u2_none == (riv = u2_zn_nock_flee(wir_r, net_r, bus, gal)) ) {
+      if ( u2_none == (riv = u2_wr_nock_flee(wir_r, 1+stk_w, net_r, bus, gal)) )      {
         return u2_none;
       }
       return u2_zn_cell(wir_r, poz, riv);
@@ -85,10 +89,12 @@ u2_zn_nock_flee(u2_ray  wir_r,
 
           if ( u2_no == u2_zn_leap(wir_r, c3__cold) ) { return u2_none; }
           {
-            if ( u2_none == (dom = u2_zn_nock_here(wir_r, bus, paz)) ) {
+            if ( u2_none == (dom = u2_wr_nock_here(wir_r, 1+stk_w, bus, paz)) ) 
+            {
               return u2_none;
             }
-            if ( u2_none == (sep = u2_zn_nock_here(wir_r, bus, mis)) ) {
+            if ( u2_none == (sep = u2_wr_nock_here(wir_r, 1+stk_w, bus, mis)) )
+            {
               return u2_none;
             }
           }
@@ -101,7 +107,7 @@ u2_zn_nock_flee(u2_ray  wir_r,
             */
             u2_noun doy;
 
-            doy = u2_zn_nock_here(wir_r, sep, dom);
+            doy = u2_wr_nock_here(wir_r, 1+stk_w, sep, dom);
 
             u2_zone_cap(wir_r) = net_r;
             return doy;
@@ -123,7 +129,7 @@ u2_zn_nock_flee(u2_ray  wir_r,
 
         if ( u2_no == u2_zn_leap(wir_r, c3__cold) ) { return u2_none; }
         {
-          gof = u2_zn_nock_here(wir_r, bus, gal);
+          gof = u2_wr_nock_here(wir_r, 1+stk_w, bus, gal);
         }
         u2_zn_fall(wir_r);
 
@@ -142,7 +148,7 @@ u2_zn_nock_flee(u2_ray  wir_r,
 
         if ( u2_no == u2_zn_leap(wir_r, c3__cold) ) { return u2_none; }
         {
-          gof = u2_zn_nock_here(wir_r, bus, gal);
+          gof = u2_wr_nock_here(wir_r, 1+stk_w, bus, gal);
         }
         u2_zn_fall(wir_r);
 
@@ -156,7 +162,7 @@ u2_zn_nock_flee(u2_ray  wir_r,
           mpz_add_ui(mp_gof, mp_gof, 1);
 
           u2_zone_cap(wir_r) = net_r;
-          return u2_zn_mp(zon_r, mp_gof);
+          return u2_zn_mp(wir_r, mp_gof);
         }
       } 
 
@@ -165,12 +171,12 @@ u2_zn_nock_flee(u2_ray  wir_r,
           return u2_none;
         }
         else {
-          u2_weak dib, rum, laz;
+          u2_weak dib, rum;
 
           if ( u2_no == u2_zn_leap(wir_r, c3__cold) ) { return u2_none; }
           {
-            dib = u2_zn_nock_here(wir_r, bus, u2_h(gal));
-            rum = u2_zn_nock_here(wir_r, bus, u2_t(gal));
+            dib = u2_wr_nock_here(wir_r, 1+stk_w, bus, u2_h(gal));
+            rum = u2_wr_nock_here(wir_r, 1+stk_w, bus, u2_t(gal));
           }
           u2_zn_fall(wir_r);
 
@@ -196,7 +202,7 @@ u2_zn_nock_flee(u2_ray  wir_r,
           
           if ( u2_no == u2_zn_leap(wir_r, c3__cold) ) { return u2_none; }
           {
-            gyl = u2_zn_nock_here(wir_r, bus, yor);
+            gyl = u2_wr_nock_here(wir_r, 1+stk_w, bus, yor);
           }
           u2_zn_fall(wir_r);
           u2_zone_cap(wir_r) = bat_r;
@@ -227,7 +233,8 @@ u2_zn_nock_flee(u2_ray  wir_r,
 
           if ( u2_no == u2_zn_leap(wir_r, c3__cold) ) { return u2_none; }
           {
-            if ( u2_none == (bod = u2_zn_nock_here(wir_r, bus, meg)) ) {
+            if ( u2_none == (bod = u2_wr_nock_here(wir_r, 1+stk_w, bus, meg)) )
+            {
               return u2_none;
             }
           }
@@ -239,7 +246,7 @@ u2_zn_nock_flee(u2_ray  wir_r,
             */
             u2_noun doy;
 
-            doy = u2_zn_nock_here(wir_r, bod, fas);
+            doy = u2_wr_nock_here(wir_r, 1+stk_w, bod, fas);
 
             u2_zone_cap(wir_r) = net_r;
             return doy;
@@ -247,9 +254,9 @@ u2_zn_nock_flee(u2_ray  wir_r,
           else {
             /* Tail compaction will succeed.
             */
-            sep = u2_zn_tamp(wir_r, sep, net_r, bat_r);
+            bod = u2_zn_tamp(wir_r, bod, net_r, bat_r);
 
-            bus = sep;
+            bus = bod;
             fol = fas;
             continue;
           }
@@ -260,20 +267,20 @@ u2_zn_nock_flee(u2_ray  wir_r,
         if ( u2_no == u2_dust(gal) ) {
           return u2_none; 
         } else {
-          u2_ray  bat_r = u2_zone_cap(wir_r);
           u2_noun meg = u2_h(gal);
           u2_noun fas = u2_t(gal);
           u2_noun bod, har;
 
           if ( u2_no == u2_zn_leap(wir_r, c3__cold) ) { return u2_none; }
           {
-            if ( u2_none == (bod = u2_zn_nock_here(wir_r, bus, meg)) ) {
+            if ( u2_none == (bod = u2_wr_nock_here(wir_r, 1+stk_w, bus, meg)) )
+            {
               return u2_none;
             }
           }
           u2_zn_fall(wir_r);
 
-          if ( u2_none == (har = u2_zn_cell(zon_r, bod, bus)) ) {
+          if ( u2_none == (har = u2_zn_cell(wir_r, bod, bus)) ) {
             return u2_none;
           }
 
@@ -295,10 +302,12 @@ u2_zn_nock_flee(u2_ray  wir_r,
 
           if ( u2_no == u2_zn_leap(wir_r, c3__cold) ) { return u2_none; }
           {
-            if ( u2_none == (pec = u2_zn_nock_here(wir_r, bus, sid)) ) {
+            if ( u2_none == (pec = u2_wr_nock_here(wir_r, 1+stk_w, bus, sid)) )
+            {
               return u2_none;
             }
-            if ( u2_none == (vud = u2_zn_nock_here(wir_r, bus, hoy)) ) {
+            if ( u2_none == (vud = u2_wr_nock_here(wir_r, 1+stk_w, bus, hoy)) )
+            {
               return u2_none;
             }
 
@@ -321,7 +330,7 @@ u2_zn_nock_flee(u2_ray  wir_r,
             */
             u2_noun doy;
 
-            doy = u2_zn_nock_here(wir_r, wod, mon);
+            doy = u2_wr_nock_here(wir_r, 1+stk_w, wod, mon);
 
             u2_zone_cap(wir_r) = net_r;
             return doy;
@@ -353,7 +362,7 @@ u2_zn_nock_flee(u2_ray  wir_r,
 
           if ( u2_no == u2_zn_leap(wir_r, c3__cold) ) { return u2_none; }
           {
-            hig = u2_zn_nock_here(wir_r, bus, yeq);
+            hig = u2_wr_nock_here(wir_r, 1+stk_w, bus, yeq);
           }
           u2_zn_fall(wir_r);
 

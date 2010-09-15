@@ -42,58 +42,108 @@ u2_zn_boot(c3_m hip_m)
   return zon_r;
 }
 
+#if 0
+/* _zn_bloq_valid()::
+*/
+static void
+_zn_bloq_valid(u2_ray zon_r)
+{
+  if ( c3__warm == u2_zone_hip(zon_r) ) {
+    u2_ray pot_r = u2_zone_mat(zon_r);
+    u2_ray fre_r = u2_zone_warm_fre(pot_r);
+
+    while ( fre_r ) {
+      if ( u2_ray_a(fre_r) > 1 ) {
+        c3_assert(0);
+      }
+      if ( u2_ray_a(fre_r) != u2_ray_a(u2_zone_hat(zon_r)) ) {
+        c3_assert(0);
+      }
+      if ( (fre_r + u2_zone_hut_siz(fre_r)) >= u2_zone_hat(zon_r) ) {
+        c3_assert(0);
+      }
+      if ( (0 != u2_zone_hut_pre(fre_r)) ) {
+        if ( u2_ray_a(u2_zone_hut_pre(fre_r)) > 1 ) {
+          {
+            printf("fre %d:%x; pre %d:%x\n",
+                    u2_ray_a(fre_r),
+                    u2_ray_b(fre_r),
+                    u2_ray_a(u2_zone_hut_pre(fre_r)),
+                    u2_ray_b(u2_zone_hut_pre(fre_r)));
+          }
+          c3_assert(0);
+        }
+        c3_assert(fre_r == u2_zone_hut_nex(u2_zone_hut_pre(fre_r)));
+      }
+      if ( (0 != u2_zone_hut_nex(fre_r)) ) {
+        if ( u2_ray_a(u2_zone_hut_nex(fre_r)) > 1 ) {
+          c3_assert(0);
+        }
+        c3_assert(fre_r == u2_zone_hut_pre(u2_zone_hut_nex(fre_r)));
+      }
+      fre_r = u2_zone_hut_nex(fre_r);
+    }
+  }
+}
+#endif
+
 /* _zn_bloq_make():
 **
-**  Install a liquid block at `nov_r`, with size `siz_w` and 
+**  Install a liquid block at `box_r`, with size `siz_w` and 
 **  use count `use_w`.
 */
-static u2_ray
-_zn_bloq_make(u2_ray nov_r,
+static void
+_zn_bloq_make(u2_ray zon_r,
+              u2_ray box_r,
               c3_w   siz_w,
               c3_w   use_w)
 {
   c3_assert(siz_w >= 6);
   {
-    *u2_at_ray(nov_r) = siz_w;
-    *u2_at_ray(nov_r + 1) = use_w;
-    *u2_at_ray(nov_r + siz_w - 1) = siz_w;
+    *u2_at_ray(box_r) = siz_w;
+    *u2_at_ray(box_r + 1) = use_w;
+    *u2_at_ray(box_r + siz_w - 1) = siz_w;
   }
 }
 
 /* _zn_bloq_attach():
 **
-**  Attach the bloq at `nov_r` to the free list.
+**  Attach the bloq at `box_r` to the free list.
 */
 static void
 _zn_bloq_attach(u2_ray zon_r, 
-                u2_ray nov_r)
+                u2_ray box_r)
 {
   u2_ray pot_r = u2_zone_mat(zon_r);
   u2_ray fre_r = u2_zone_warm_fre(pot_r);
 
-  u2_zone_hut_pre(nov_r) = 0;
-  u2_zone_hut_nex(nov_r) = u2_zone_warm_fre(pot_r);
-  u2_zone_hut_pre(fre_r) = nov_r;
+  u2_zone_hut_pre(box_r) = 0;
+  u2_zone_hut_nex(box_r) = u2_zone_warm_fre(pot_r);
 
-  u2_zone_warm_fre(pot_r) = nov_r;
+  if ( 0 != fre_r ) {
+    c3_assert(u2_zone_hut_pre(fre_r) == 0);
+    u2_zone_hut_pre(fre_r) = box_r;
+  }
+
+  u2_zone_warm_fre(pot_r) = box_r;
 }
 
 /* _zn_bloq_detach():
 **
-**  Unlist the bloq at `nov_r` from the free list.
+**  Unlist the bloq at `box_r` from the free list.
 */
 static void
 _zn_bloq_detach(u2_ray zon_r,
-                u2_ray nov_r)
+                u2_ray box_r)
 {
   u2_ray pot_r = u2_zone_mat(zon_r);
-  u2_ray pre_r = u2_zone_hut_pre(nov_r);
-  u2_ray nex_r = u2_zone_hut_nex(nov_r);
+  u2_ray pre_r = u2_zone_hut_pre(box_r);
+  u2_ray nex_r = u2_zone_hut_nex(box_r);
 
   if ( 0 != pre_r ) {
     u2_zone_hut_nex(pre_r) = nex_r;
   } else {
-    u2_zone_warm_fre(pot_r) = u2_zone_hut_nex(nov_r);
+    u2_zone_warm_fre(pot_r) = u2_zone_hut_nex(box_r);
   }
 
   if ( 0 != nex_r ) {
@@ -109,28 +159,28 @@ static u2_ray
 _zn_bloq_grab(u2_ray zon_r,
               c3_w   len_w)
 {
-  if ( c3_cold == u2_zone_hip(zon_r) ) {
+  if ( c3__cold == u2_zone_hip(zon_r) ) {
     /* Cold allocation - without a box.
     */
     if ( u2_no == u2_zn_open(zon_r, len_w) ) {
       return 0;
     }
     else { 
-      u2_ray nov_r;
+      u2_ray box_r;
 
-      nov_r = u2_zone_hat(zon_r);
+      box_r = u2_zone_hat(zon_r);
       u2_zone_hat(zon_r) += len_w;
-      return nov_r;
+      return box_r;
     }
   }
   else if ( c3__warm == u2_zone_hip(zon_r) ) {
-    c3_w   siz_w = (len_w + c3_wiseof(u2_loom_zone_pot) + 1);
+    c3_w   siz_w = (len_w + c3_wiseof(u2_loom_zone_box) + 1);
     u2_ray pot_r = u2_zone_mat(zon_r);
-    u2_ray pfr_r = &u2_zone_warm_fre(pot_r);
+    u2_ray pfr_r = u2_aftr(pot_r, u2_loom_zone_warm, fre_r);
 
     while ( 1 ) {
       u2_ray fre_r = *u2_at_ray(pfr_r);
-      u2_ray nov_r;
+      u2_ray box_r;
 
       if ( 0 == fre_r ) {
         /* Nothing found in the free list.  Try to allocate on the hat.
@@ -139,13 +189,16 @@ _zn_bloq_grab(u2_ray zon_r,
           return 0;
         }
         else { 
-          nov_r = u2_zone_hat(zon_r);
+          box_r = u2_zone_hat(zon_r);
           u2_zone_hat(zon_r) += siz_w;
 
-          _zn_bloq_make(nov_r, siz_w, 1);
-          return (nov_r + c3_wiseof(u2_loom_zone_pot));
+          _zn_bloq_make(zon_r, box_r, siz_w, 1);
+          return (box_r + c3_wiseof(u2_loom_zone_box));
         }
       } else {
+        if ( u2_ray_a(fre_r) > 1 ) {
+          c3_assert(0);
+        }
         if ( siz_w > u2_zone_hut_siz(fre_r) ) {
           /* This free block is too small.  Continue searching.
           */
@@ -155,24 +208,57 @@ _zn_bloq_grab(u2_ray zon_r,
           /* We have found a free block of adequate size.  Remove it
           ** from the free list.
           */
-          nov_r = fre_r;
-          *u2_ray_at(pfr_r) = u2_zone_hut_nex(nov_r);
+          box_r = fre_r;
+          _zn_bloq_detach(zon_r, box_r);
 
-          if ( (siz_w + 6) < u2_zone_hut_siz(nov_r) ) {
+          *u2_at_ray(pfr_r) = u2_zone_hut_nex(box_r);
+
+          if ( (siz_w + 6) < u2_zone_hut_siz(box_r) ) {
             /* Split the block.
             */
-            u2_ray end_r = (nov_r + siz_w);
+            u2_ray end_r = (box_r + siz_w);
 
-            _zn_bloq_make(end_r, u2_zone_hut_siz(fre_r) - siz_w, 0);
+            _zn_bloq_make(zon_r, end_r, u2_zone_hut_siz(fre_r) - siz_w, 0);
             _zn_bloq_attach(zon_r, end_r);
-            _zn_bloq_make(nov_r, siz_w, 1);
+            _zn_bloq_make(zon_r, box_r, siz_w, 1);
           }
-          return (nov_r + c3_wiseof(u2_loom_zone_pot));
+          else {
+            c3_assert(u2_zone_box_use(box_r) == 0);
+            u2_zone_box_use(box_r) = 1;
+          }
+          return (box_r + c3_wiseof(u2_loom_zone_box));
         }
       }
     }
   }
+  else { c3_assert(0); return 0; }
 }
+
+#if 0
+/* _zn_bloq_grap()::
+*/
+static u2_ray
+_zn_bloq_grap(u2_ray zon_r,
+              c3_w   len_w)
+{
+  u2_ray nov_r;
+
+  if ( random() & 1 ) {
+    nov_r = _zn_bloq_grab(zon_r, len_w + (random() % 1023));
+  } else {
+    nov_r = _zn_bloq_grab(zon_r, len_w);
+  }
+  {
+    c3_w i_w;
+
+    for ( i_w = 0; i_w < len_w; i_w++ ) {
+      *u2_at_ray(nov_r + i_w) = 0xdeadbeef + i_w;
+    }
+  }
+
+  return nov_r;
+}
+#endif
 
 /* _zn_bloq_free():
 **
@@ -180,60 +266,70 @@ _zn_bloq_grab(u2_ray zon_r,
 */
 static void
 _zn_bloq_free(u2_ray zon_r,
-              u2_ray nov_r)
+              u2_ray box_r)
 {
   u2_ray rut_r = u2_zone_rut(zon_r);
   u2_ray hat_r = u2_zone_hat(zon_r);
 
-  c3_assert(u2_zone_hut_use(nov_r) == 0);
-  c3_assert(u2_ray_a(nov_r) == u2_ray_a(rut_r));
-  c3_assert(nov_r >= rut_r);
+  c3_assert(u2_zone_hut_use(box_r) == 0);
+  c3_assert(u2_ray_a(box_r) == u2_ray_a(rut_r));
+  c3_assert(box_r >= rut_r);
+
+  // return;
 
   /* Try to coalesce with the previous block.
   */
-  if ( nov_r != rut_r ) {
-    c3_w   las_w = *u2_at_ray(nov_r - 1);
-    u2_ray tod_r = (nov_r - las_w);
+  if ( box_r != rut_r ) {
+    c3_w   las_w = *u2_at_ray(box_r - 1);
+    u2_ray tod_r = (box_r - las_w);
 
     if ( 0 == u2_zone_hut_use(tod_r) ) {
       _zn_bloq_detach(zon_r, tod_r);
-      _zn_bloq_make(tod_r, (las_w + u2_zone_hut_siz(nov_r)), 0);
-      nov_r = tod_r;
+      _zn_bloq_make(zon_r, tod_r, (las_w + u2_zone_hut_siz(box_r)), 0);
+      box_r = tod_r;
     }
   }
 
   /* Try to coalesce with the next block, or with the wilderness.
   */
   {
-    c3_w siz_w = u2_zone_hut_siz(nov_r);
+    c3_w siz_w = u2_zone_hut_siz(box_r);
 
-    if ( (nov_r + siz_w == hat_r) ) {
-      u2_zone_hat(zon_r) = nov_r;
+    if ( (box_r + siz_w == hat_r) ) {
+      u2_zone_hat(zon_r) = box_r;
     }
     else {
-      u2_ray hob_r = (nov_r + siz_w);
+      u2_ray hob_r = (box_r + siz_w);
 
       if ( 0 == u2_zone_hut_use(hob_r) ) {
         _zn_bloq_detach(zon_r, hob_r);
-        _zn_bloq_make(nov_r, (siz_w + u2_zone_hut_siz(hob_r)), 0);
+        _zn_bloq_make(zon_r, box_r, (siz_w + u2_zone_hut_siz(hob_r)), 0);
       }
+
+      /* Add to the free list.
+      */
+      _zn_bloq_attach(zon_r, box_r);
     }
   }
-
-  /* Add to the free list.
-  */
-  _zn_bloq_attach(zon_r, nov_r);
 }
 
 /* u2_zn_leap():
 **
 **   Reverse the beams forward.
 */
-void
-u2_zn_leap(u2_ray zon_r)
+u2_flag
+u2_zn_leap(u2_ray zon_r,
+           c3_m   hop_m)
 {
-  u2_ray mat_r = u2_zone_mat(zon_r);
-  u2_ray rut_r = u2_zone_cap(zon_r);
+  if ( hop_m == c3__warm ) {
+    if ( u2_no == u2_zn_open(zon_r, c3_wiseof(u2_loom_zone_warm)) ) {
+      return u2_no;
+    }
+  } else {
+    if ( u2_no == u2_zn_open(zon_r, c3_wiseof(u2_loom_zone_pot)) ) {
+      return u2_no;
+    }
+  }
 
   /*    Before: 
   * 0           rut   hat                                  1GB
@@ -253,18 +349,38 @@ u2_zn_leap(u2_ray zon_r)
     u2_ray hat_r = u2_zone_hat(zon_r);
     u2_ray mat_r = u2_zone_mat(zon_r);
     u2_ray rut_r = u2_zone_rut(zon_r);
- 
-    u2_zone_cap(zon_r) = hat_r + c3_wiseof(u2_loom_zone_pot);
-    u2_zone_hat(zon_r) = cap_r;
-    u2_zone_mat(zon_r) = hat_r; 
-    u2_zone_rut(zon_r) = cap_r;
+    c3_m   hip_m = u2_zone_hip(zon_r);
 
-    u2_zone_pot_fre(hat_r) = 0;
-    u2_zone_pot_mat(hat_r) = mat_r;
-    u2_zone_pot_rut(hat_r) = rut_r;
+    /* Classical beam reversal.
+    */
+    {
+      u2_zone_cap(zon_r) = hat_r;
+      u2_zone_hat(zon_r) = cap_r;
+      u2_zone_mat(zon_r) = hat_r; 
+      u2_zone_rut(zon_r) = cap_r;
+      u2_zone_hip(zon_r) = hop_m;
+    }
+
+    /* Save the old beam in the pot.
+    */
+    {
+      u2_ray pot_r = hat_r;
+
+      if ( hop_m == c3__warm ) {
+        u2_zone_cap(zon_r) += c3_wiseof(u2_loom_zone_warm);
+        u2_zone_warm_fre(pot_r) = 0;
+      } 
+      else if ( hop_m == c3__cold ) {
+        u2_zone_cap(zon_r) += c3_wiseof(u2_loom_zone_pot);
+      } 
+      else c3_assert(0);
+
+      u2_zone_pot_mat(pot_r) = mat_r;
+      u2_zone_pot_rut(pot_r) = rut_r;
+      u2_zone_pot_hip(pot_r) = hip_m;
+    }
   }
-
-  return mat_r;
+  return u2_yes;
 }
 
 /* u2_zn_fall():
@@ -288,15 +404,15 @@ u2_zn_fall(u2_ray zon_r)
   *                                   hat    rut
   */
   {
-    u2_ray cap_r = u2_zone_cap(zon_r);
     u2_ray hat_r = u2_zone_hat(zon_r);
     u2_ray mat_r = u2_zone_mat(zon_r);
-    u2_ray rut_r = u2_zone_rut(zon_r);
+    u2_ray pot_r = mat_r;
    
     u2_zone_cap(zon_r) = hat_r;
     u2_zone_hat(zon_r) = mat_r;
-    u2_zone_mat(zon_r) = u2_zone_pot_mat(mat_r);
-    u2_zone_rut(zon_r) = u2_zone_pot_rut(mat_r);
+    u2_zone_mat(zon_r) = u2_zone_pot_mat(pot_r);
+    u2_zone_rut(zon_r) = u2_zone_pot_rut(pot_r);
+    u2_zone_hip(zon_r) = u2_zone_pot_hip(pot_r);
   }
 }
 
@@ -313,10 +429,12 @@ u2_zn_gain(u2_ray  zon_r,
     u2_ray hat_r = u2_zone_hat(zon_r);
 
     if ( u2_ray_a(som_r) == u2_ray_a(hat_r) ) {
-      if ( u2_dog_has_box(som) ) {
+      c3_m   hip_m = u2_zone_hip(zon_r);
+
+      if ( c3__warm == hip_m ) {
         u2_ray rut_r = u2_zone_rut(zon_r);
         
-        if ( som_r >= rut_r ) {
+        if ( som_r > rut_r ) {
           u2_ray box_r = (som_r - c3_wiseof(u2_loom_zone_box));
           c3_w   use_w = u2_zone_box_use(box_r);
 
@@ -328,6 +446,8 @@ u2_zn_gain(u2_ray  zon_r,
       }
     }
     else {
+      /* In the can (above the mat), counting propagates down.
+      */
       if ( u2_dog_is_pom(som) ) {
         u2_ray mat_r = u2_zone_mat(zon_r);
 
@@ -353,23 +473,34 @@ u2_zn_lose(u2_ray  zon_r,
     u2_ray hat_r = u2_zone_hat(zon_r);
 
     if ( u2_ray_a(som_r) == u2_ray_a(hat_r) ) {
-      if ( u2_dog_has_box(som) ) {
+      c3_m hip_m = u2_zone_hip(zon_r);
+
+      if ( c3__warm == hip_m ) {
         u2_ray rut_r = u2_zone_rut(zon_r);
         
         if ( som_r >= rut_r ) {
           u2_ray box_r = (som_r - c3_wiseof(u2_loom_zone_box));
           c3_w   use_w = u2_zone_box_use(box_r);
 
-          if ( use_w == 0 ) {
+          if ( 1 == use_w ) {
+            if ( u2_dog_is_pom(som) ) {
+              u2_zn_lose(zon_r, u2_h(som));
+              u2_zn_lose(zon_r, u2_t(som));
+            }
+            u2_zone_box_use(box_r) = 0;
             _zn_bloq_free(zon_r, box_r);
           }
-          else if ( use_w != 0xffffffff ) {
-            u2_zone_box_use(box_r) = (use_w - 1);
+          else {
+            if ( use_w != 0xffffffff ) {
+              u2_zone_box_use(box_r) = (use_w - 1);
+            }
           }
         }
       }
     }
     else {
+      /* In the can (above the mat), counting propagates down.
+      */
       if ( u2_dog_is_pom(som) ) {
         u2_ray mat_r = u2_zone_mat(zon_r);
 
@@ -382,6 +513,38 @@ u2_zn_lose(u2_ray  zon_r,
   }
 }
 
+/* u2_zn_senior():
+**
+**   Yes iff `som` is senior in `zon` - ie, does not
+**   require reference counting.
+*/
+u2_flag
+u2_zn_senior(u2_ray  zon_r,
+             u2_noun som)
+{
+  if ( u2_fly_is_dog(som) ) {
+    u2_ray som_r = u2_dog_a(som);
+    u2_ray hat_r = u2_zone_hat(zon_r);
+
+    if ( u2_ray_a(som_r) == u2_ray_a(hat_r) ) {
+      u2_ray rut_r = u2_zone_rut(zon_r);
+      c3_m   hip_m = u2_zone_hip(zon_r);
+
+      if ( (c3__warm == hip_m) && (som_r > rut_r) ) {
+        return u2_no;
+      }
+    }
+    else {
+      u2_ray mat_r = u2_zone_mat(zon_r);
+
+      if ( som_r >= mat_r ) {
+        return u2_no;
+      }
+    }
+  }
+  return u2_yes;
+}
+
 /* u2_zn_flog():
 **
 **   Release the can, setting cap to top of pot.
@@ -389,7 +552,13 @@ u2_zn_lose(u2_ray  zon_r,
 void
 u2_zn_flog(u2_ray zon_r)
 {
-  u2_zone_cap(zon_r) = u2_zone_mat(zon_r) + c3_wiseof(u2_loom_zone_pot);
+  u2_ray pot_r = u2_zone_mat(zon_r);
+
+  if ( u2_zone_pot_hip(pot_r) == c3__warm ) {
+    u2_zone_cap(zon_r) = u2_zone_mat(zon_r) + c3_wiseof(u2_loom_zone_warm);
+  } else {
+    u2_zone_cap(zon_r) = u2_zone_mat(zon_r) + c3_wiseof(u2_loom_zone_pot);
+  }
 }
 
 /* u2_zn_open():
@@ -628,15 +797,14 @@ u2_zn_bytes(u2_ray      zon_r,
     c3_w len_w = (a_w + 3) >> 2;
 
     if ( u2_no == u2_zn_open(zon_r, 
-                             (len_w + c3_wiseof(struct u2_loom_atom))) ) {
+                             (len_w + c3_wiseof(u2_loom_atom))) ) {
       return u2_none;
     }
     else { 
       u2_ray nov_r;
       u2_noun nov;
 
-      nov_r = u2_zone_hat(zon_r);
-      u2_zone_hat(zon_r) += (len_w + c3_wiseof(struct u2_loom_atom));
+      nov_r = _zn_bloq_grab(zon_r, (len_w + c3_wiseof(u2_loom_atom)));
       nov = u2_pug_of(nov_r, 0);
 
       *u2_at_dog_mug(nov) = 0;
@@ -688,24 +856,33 @@ u2_zn_cell(u2_ray  zon_r,
            u2_noun a,
            u2_noun b)
 {
-  c3_assert(u2_none != a);
-  c3_assert(u2_none != b);
+  /* This is just plain illegal.
+  */
+  {
+    c3_assert(u2_none != a);
+    c3_assert(u2_none != b);
+  }
 
-  if ( u2_none == (a = u2_zn_ice(zon_r, a)) ) {
-    return u2_none;
+  /* Seniority restrictions.  Ice if these cannot be met.
+  */
+  {
+    c3_assert(u2_fly_is_cat(a) ||
+              (u2_ray_a(u2_dog_a(a)) == u2_ray_a(u2_zone_hat(zon_r))) ||
+              (u2_dog_a(a) < u2_zone_mat(zon_r)));
+
+    c3_assert(u2_fly_is_cat(b) ||
+              (u2_ray_a(u2_dog_a(b)) == u2_ray_a(u2_zone_hat(zon_r))) ||
+              (u2_dog_a(b) < u2_zone_mat(zon_r)));
   }
-  else if ( u2_none == (b = u2_zn_ice(zon_r, b)) ) {
-    return u2_none;
-  }
-  else if ( u2_no == u2_zn_open(zon_r, c3_wiseof(struct u2_loom_cell)) ) {
+
+  if ( u2_no == u2_zn_open(zon_r, c3_wiseof(u2_loom_cell)) ) {
     return u2_none;
   }
   else {
     u2_ray nov_r;
     u2_noun nov;
 
-    nov_r = u2_zone_hat(zon_r);
-    u2_zone_hat(zon_r) += c3_wiseof(struct u2_loom_cell);
+    nov_r = _zn_bloq_grab(zon_r, c3_wiseof(u2_loom_cell));
     nov = u2_pom_of(nov_r, 0);
 
     *u2_at_dog_mug(nov) = 0;
@@ -730,64 +907,66 @@ u2_zn_ice(u2_ray  zon_r,
   else {
     u2_ray fiz_ray = u2_dog_a(fiz);
 
-    if ( (u2_ray_a(fiz_ray) == u2_ray_a(u2_zone_hat(zon_r))) ||
-         (fiz_ray < u2_zone_mat(zon_r)) )
-    {
+    if ( (u2_ray_a(fiz_ray) == u2_ray_a(u2_zone_hat(zon_r)) ) ) {
+      u2_zn_gain(zon_r, fiz);
       return fiz;
     }
     else {
-      if ( u2_dog_is_pom(fiz) ) {
-        if ( u2_no == u2_zn_open(zon_r, c3_wiseof(struct u2_loom_cell)) ) {
-          return u2_none;
-        }
-        else {
-          u2_noun hed = u2_zn_ice(zon_r, *u2_at_pom_hed(fiz));
-          u2_noun tel = u2_zn_ice(zon_r, *u2_at_pom_tel(fiz));
-          u2_ray nov_r;
-          u2_noun nov;
-
-          nov_r = u2_zone_hat(zon_r);
-          u2_zone_hat(zon_r) += c3_wiseof(struct u2_loom_cell);
-          nov = u2_pom_of(nov_r, 0);
-
-          *u2_at_dog_mug(nov) = *u2_at_dog_mug(fiz);
-          *u2_at_pom_hed(nov) = hed;
-          *u2_at_pom_tel(nov) = tel;
-
-          u2_zone_cop(zon_r) += 3;
-          return nov;
-        }
+      if ( (fiz_ray < u2_zone_mat(zon_r)) ) {
+        return fiz;
       }
       else {
-        c3_w len_w = *u2_at_pug_len(fiz);
+        if ( u2_dog_is_pom(fiz) ) {
+          if ( u2_no == u2_zn_open(zon_r, c3_wiseof(u2_loom_cell)) ) {
+            return u2_none;
+          }
+          else {
+            u2_noun hed = u2_zn_ice(zon_r, *u2_at_pom_hed(fiz));
+            u2_noun tel = u2_zn_ice(zon_r, *u2_at_pom_tel(fiz));
+            u2_ray nov_r;
+            u2_noun nov;
 
-        if ( u2_no == u2_zn_open(zon_r, 
-                                 (len_w + c3_wiseof(struct u2_loom_atom))) ) {
-          return u2_none;
+            nov_r = _zn_bloq_grab(zon_r, c3_wiseof(u2_loom_cell));
+            nov = u2_pom_of(nov_r, 0);
+
+            *u2_at_dog_mug(nov) = *u2_at_dog_mug(fiz);
+            *u2_at_pom_hed(nov) = hed;
+            *u2_at_pom_tel(nov) = tel;
+
+            u2_zone_cop(zon_r) += 3;
+            return nov;
+          }
         }
         else {
-          u2_ray nov_r;
-          u2_noun nov;
+          c3_w len_w = *u2_at_pug_len(fiz);
 
-          nov_r = u2_zone_hat(zon_r);
-          u2_zone_hat(zon_r) += (len_w + c3_wiseof(struct u2_loom_atom));
-          nov = u2_pug_of(nov_r, 0);
-
-          *u2_at_dog_mug(nov) = 0;
-          *u2_at_pug_len(nov) = len_w;
-
-          /* Fill the pug.
-          */
-          {
-            c3_w i_w;
-
-            for ( i_w=0; i_w < len_w; i_w++ ) {
-              *u2_at_pug_buf(nov, i_w) = *u2_at_pug_buf(fiz, i_w);
-            }
+          if ( u2_no == u2_zn_open(zon_r, 
+                                   (len_w + c3_wiseof(u2_loom_atom))) ) {
+            return u2_none;
           }
+          else {
+            u2_ray nov_r;
+            u2_noun nov;
 
-          u2_zone_cop(zon_r) += (2 + len_w);
-          return nov;
+            nov_r = _zn_bloq_grab(zon_r, (len_w + c3_wiseof(u2_loom_atom)));
+            nov = u2_pug_of(nov_r, 0);
+
+            *u2_at_dog_mug(nov) = 0;
+            *u2_at_pug_len(nov) = len_w;
+
+            /* Fill the pug.
+            */
+            {
+              c3_w i_w;
+
+              for ( i_w=0; i_w < len_w; i_w++ ) {
+                *u2_at_pug_buf(nov, i_w) = *u2_at_pug_buf(fiz, i_w);
+              }
+            }
+
+            u2_zone_cop(zon_r) += (2 + len_w);
+            return nov;
+          }
         }
       }
     }
@@ -871,15 +1050,14 @@ u2_zn_words(u2_ray      zon_r,
   /* Allocate, fill, return.
   */
   {
-    if ( u2_no == u2_zn_open(zon_r, (a_w + c3_wiseof(struct u2_loom_atom))) ) {
+    if ( u2_no == u2_zn_open(zon_r, (a_w + c3_wiseof(u2_loom_atom))) ) {
       return u2_none;
     }
     else { 
       u2_ray  nov_r;
       u2_noun nov;
 
-      nov_r = u2_zone_hat(zon_r);
-      u2_zone_hat(zon_r) += (a_w + c3_wiseof(struct u2_loom_atom));
+      nov_r = _zn_bloq_grab(zon_r, (a_w + c3_wiseof(u2_loom_atom)));
       nov = u2_pug_of(nov_r, 0);
 
       *u2_at_dog_mug(nov) = 0;
@@ -898,4 +1076,3 @@ u2_zn_words(u2_ray      zon_r,
     }
   }
 }
-

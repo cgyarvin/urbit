@@ -4,29 +4,32 @@
 */
 #include "all.h"
 
-/* u2_zn_nock_lame():
+/* u2_wr_nock_lame():
 **
-**    Execute `(nock bus fol)` with a neutral reference interpreter.
+**    Execute `(nock bus fol)` with a simple reference interpreter.
 */
 u2_weak
-u2_zn_nock_lame(u2_ray  zon_r,
+u2_wr_nock_lame(u2_ray  wir_r,
+                c3_w    stk_w,
                 u2_noun bus,
                 u2_noun fol)
 {
   u2_noun hib, gal;
+
+  u2_wr_bench(wir_r, stk_w);
 
   if ( u2_no == u2_as_cell(fol, &hib, &gal) ) {
     return u2_none;
   }
   else {
     if ( u2_yes == u2_dust(hib) ) {
-      u2_weak poz = u2_zn_nock_lame(zon_r, bus, hib);
-      u2_weak riv = u2_zn_nock_lame(zon_r, bus, gal);
+      u2_weak poz = u2_wr_nock_lame(wir_r, 1+stk_w, bus, hib);
+      u2_weak riv = u2_wr_nock_lame(wir_r, 1+stk_w, bus, gal);
 
       if ( (u2_none == poz) || (u2_none == riv) ) {
         return u2_none;
       }
-      else return u2_zn_cell(zon_r, poz, riv);
+      else return u2_zn_cell(wir_r, poz, riv);
     }
     else switch ( hib ) {
       default: return u2_none;
@@ -41,12 +44,12 @@ u2_zn_nock_lame(u2_ray  zon_r,
           if ( u2_none == dof ) {
             return u2_none;
           }
-          else return u2_zn_ice(zon_r, dof);
+          else return u2_zn_ice(wir_r, dof);
         }
       }
 
       case 1: {
-        return u2_zn_ice(zon_r, gal);
+        return u2_zn_ice(wir_r, gal);
       }
 
       case 2: {
@@ -57,15 +60,15 @@ u2_zn_nock_lame(u2_ray  zon_r,
           u2_noun paz = u2_t(gal);
           u2_noun sep, dom;
 
-          sep = u2_zn_nock_lame(zon_r, bus, mis);
-          dom = u2_zn_nock_lame(zon_r, bus, paz);
+          sep = u2_wr_nock_lame(wir_r, 1+stk_w, bus, mis);
+          dom = u2_wr_nock_lame(wir_r, 1+stk_w, bus, paz);
 
-          return u2_zn_nock_lame(zon_r, sep, dom);
+          return u2_wr_nock_lame(wir_r, 1+stk_w, sep, dom);
         }
       }
 
       case 3: {
-        u2_weak gof = u2_zn_nock_lame(zon_r, bus, gal);
+        u2_weak gof = u2_wr_nock_lame(wir_r, 1+stk_w, bus, gal);
 
         if ( u2_none == gof ) {
           return u2_none;
@@ -74,7 +77,7 @@ u2_zn_nock_lame(u2_ray  zon_r,
       }
 
       case 4: {
-        u2_weak gof = u2_zn_nock_lame(zon_r, bus, gal);
+        u2_weak gof = u2_wr_nock_lame(wir_r, 1+stk_w, bus, gal);
 
         if ( (u2_none == gof) || (u2_no == u2_stud(gof)) ) {
           return u2_none;
@@ -85,12 +88,12 @@ u2_zn_nock_lame(u2_ray  zon_r,
           u2_mp(mp_gof, gof); 
           mpz_add_ui(mp_gof, mp_gof, 1);
 
-          return u2_zn_mp(zon_r, mp_gof);
+          return u2_zn_mp(wir_r, mp_gof);
         }
       } 
 
       case 5: {
-        u2_weak gof = u2_zn_nock_lame(zon_r, bus, gal);
+        u2_weak gof = u2_wr_nock_lame(wir_r, 1+stk_w, bus, gal);
 
         if ( (u2_none == gof) || (u2_no == u2_dust(gof)) ) {
           return u2_none;
@@ -107,11 +110,11 @@ u2_zn_nock_lame(u2_ray  zon_r,
           return u2_none;
         } 
         else {
-          u2_weak gyl = u2_zn_nock_lame(zon_r, bus, yor);
+          u2_weak gyl = u2_wr_nock_lame(wir_r, 1+stk_w, bus, yor);
 
           switch ( gyl ) {
-            case 0 : return u2_zn_nock_lame(zon_r, bus, fli);
-            case 1 : return u2_zn_nock_lame(zon_r, bus, paw);
+            case 0 : return u2_wr_nock_lame(wir_r, 1+stk_w, bus, fli);
+            case 1 : return u2_wr_nock_lame(wir_r, 1+stk_w, bus, paw);
             default: return u2_none;
           }
         }
@@ -121,12 +124,12 @@ u2_zn_nock_lame(u2_ray  zon_r,
         if ( u2_no == u2_dust(gal) ) {
           return u2_none;
         } else {
-          u2_weak bod = u2_zn_nock_lame(zon_r, bus, u2_h(gal));
+          u2_weak bod = u2_wr_nock_lame(wir_r, 1+stk_w, bus, u2_h(gal));
    
           if ( u2_none == bod ) {
             return u2_none;
           } else {
-            return u2_zn_nock_lame(zon_r, bod, u2_t(gal));
+            return u2_wr_nock_lame(wir_r, 1+stk_w, bod, u2_t(gal));
           }
         }
       }
@@ -135,13 +138,13 @@ u2_zn_nock_lame(u2_ray  zon_r,
         if ( u2_no == u2_dust(gal) ) {
           return u2_none;
         } else {
-          u2_weak bod = u2_zn_nock_lame(zon_r, bus, u2_h(gal));
+          u2_weak bod = u2_wr_nock_lame(wir_r, 1+stk_w, bus, u2_h(gal));
    
           if ( u2_none == bod ) {
             return u2_none;
           } else {
-            return u2_zn_nock_lame
-              (zon_r, u2_zn_cell(zon_r, bod, bus), u2_t(gal));
+            return u2_wr_nock_lame
+              (wir_r, 1+stk_w, u2_zn_cell(wir_r, bod, bus), u2_t(gal));
           }
         }
       }
@@ -150,17 +153,19 @@ u2_zn_nock_lame(u2_ray  zon_r,
         if ( u2_no == u2_dust(gal) ) {
           return u2_none;
         } else {
-          u2_weak pec = u2_zn_nock_lame(zon_r, bus, u2_h(gal));
-          u2_weak vud = u2_zn_nock_lame(zon_r, bus, u2_t(gal)); 
+          u2_weak pec = u2_wr_nock_lame(wir_r, 1+stk_w, bus, u2_h(gal));
+          u2_weak vud = u2_wr_nock_lame(wir_r, 1+stk_w, bus, u2_t(gal)); 
 
           if ( (u2_no == u2_dust(pec)) || (u2_no == u2_dust(u2_h(pec))) ) {
             return u2_none;
           } else {
-            return u2_zn_nock_lame
-              (zon_r,
-               u2_zc(zon_r,
-                     u2_zc(zon_r, vud, u2_t(u2_h(pec))),
-                     u2_t(pec)));
+            return u2_wr_nock_lame
+              (wir_r,
+               1+stk_w,
+               u2_zc(wir_r,
+                     u2_zc(wir_r, vud, u2_t(u2_h(pec))),
+                     u2_t(pec)),
+               u2_t(pec));
           }
         }
       }
@@ -173,17 +178,16 @@ u2_zn_nock_lame(u2_ray  zon_r,
         if ( u2_no == u2_dust(gal) ) {
           return u2_none;
         } else {
-          u2_weak feq = u2_zn_nock_lame(zon_r, bus, u2_h(gal));
-          u2_weak nar = u2_zn_nock_lame(zon_r, bus, u2_t(gal)); 
+          u2_wr_nock_lame(wir_r, 1+stk_w, bus, u2_h(gal));
 
-          return nar;
+          return u2_wr_nock_lame(wir_r, 1+stk_w, bus, u2_t(gal)); 
         }
       }
       case 12: {
         if ( u2_no == u2_dust(gal) ) {
           return u2_none;
         } else {
-          return u2_zn_cell(zon_r, bus, u2_t(gal));
+          return u2_zn_cell(wir_r, bus, u2_t(gal));
         }
       }
     }
