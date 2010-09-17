@@ -6,7 +6,7 @@
   **/
     /** Structures - in loom space.
     **/
-      /* Development control.
+      /* u2_loom_devl: development control.
       */
         typedef struct _u2_loom_devl {
           /* Maximum depth of C stack, in call records.
@@ -30,7 +30,7 @@
           u2_ray est_r;
         } u2_loom_devl;
 
-      /* The wire - nock thread.
+      /* u2_loom_wire: the whole thread.
       */
         typedef struct _u2_loom_wire {
           u2_loom_zone o;
@@ -93,6 +93,7 @@
         */
           void
           u2_wr_report(u2_ray wir_r,
+                       c3_w*  cop_w,
                        c3_w*  stk_w,
                        c3_w*  wst_w,
                        c3_w*  est_w);

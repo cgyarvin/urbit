@@ -141,19 +141,8 @@ u2_mug(u2_noun veb)
       if ( u2_dog_is_pom(veb) ) {
         u2_noun hed   = *u2_at_pom_hed(veb);
         u2_noun tel   = *u2_at_pom_tel(veb);
-        c3_w   lus_w = u2_mug(hed);
-        c3_w   biq_w = u2_mug(tel);
-        c3_w   hur_w = (lus_w ^ (biq_w >> 24) ^ (biq_w << 8));
 
-        while ( 1 ) {
-          c3_w dav_w = 0x7fffffff & _mash(hur_w);
-
-          if ( dav_w ) {
-            *u2_at_dog_mug(veb) = dav_w;
-            return dav_w;
-          } 
-          else hur_w++;
-        }
+        return u2_mug_cell(hed, tel);
       }
       else {
         c3_w len_w = *u2_at_pug_len(veb);
@@ -178,6 +167,29 @@ u2_mug(u2_noun veb)
         }
       }
     }
+  }
+}
+
+/* u2_mug_cell():
+**
+**   Compute the mug of the cell `[hed tel]`.
+*/
+c3_w
+u2_mug_cell(u2_noun hed,
+            u2_noun tel)
+{
+  c3_w   lus_w = u2_mug(hed);
+  c3_w   biq_w = u2_mug(tel);
+  c3_w   hur_w = (lus_w ^ (biq_w >> 24) ^ (biq_w << 8));
+
+  while ( 1 ) {
+    c3_w dav_w = 0x7fffffff & _mash(hur_w);
+
+    if ( dav_w ) {
+      *u2_at_dog_mug(veb) = dav_w;
+      return dav_w;
+    } 
+    else hur_w++;
   }
 }
 

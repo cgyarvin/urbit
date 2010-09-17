@@ -88,11 +88,27 @@
       **/
         /* u2_zn_boot():
         **
-        **  Create an empty zone in an empty loom, with memory model `hip`.
-        **  See u2_zn_leap() for storage policies.
+        **   Create an empty zone in an empty loom, with memory model `hip`.
+        **   See u2_zn_leap() for storage policies.
         */
           u2_ray
           u2_zn_boot(c3_m hip_m);
+
+        /* u2_zn_ralloc():
+        **
+        **   Allocate `siz_w` words of raw ray storage.
+        */
+          u2_ray
+          u2_zn_ralloc(u2_ray zon_r,
+                       c3_w   siz_w);
+
+        /* u2_zn_rfree():
+        **
+        **   Free raw ray storage allocated by `u2_zn_ralloc()`.
+        */
+          void
+          u2_zn_rfree(u2_ray zon_r,
+                      u2_ray nov_r);
 
         /* u2_zn_leap():
         **
@@ -218,7 +234,7 @@
 
         /* u2_zn_ice():
         **
-        **   Produce [a], not referencing the can.
+        **   Produce `a`, not referencing the can.  Copy or gain reference.
         */
           u2_weak
           u2_zn_ice(u2_ray  zon_r,

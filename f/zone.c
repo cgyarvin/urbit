@@ -153,7 +153,7 @@ _zn_bloq_detach(u2_ray zon_r,
 
 /* _zn_bloq_grab():
 **
-**  Allocate [len_w] words of memory on [zon_r], or return 0.
+**  Allocate `len_w` words of memory on `zon_r`, or return 0.
 */
 static u2_ray
 _zn_bloq_grab(u2_ray zon_r,
@@ -310,6 +310,35 @@ _zn_bloq_free(u2_ray zon_r,
       */
       _zn_bloq_attach(zon_r, box_r);
     }
+  }
+}
+
+/* u2_zn_ralloc():
+**
+**   Allocate `siz_w` words of raw ray storage.
+*/
+u2_ray
+u2_zn_ralloc(u2_ray zon_r,
+             c3_w   siz_w)
+{
+  return _zn_bloq_grab(zon_r, siz_w);
+}
+
+/* u2_zn_rfree():
+**
+**   Free raw ray storage allocated by `u2_zn_ralloc()`.
+*/
+void
+u2_zn_rfree(u2_ray zon_r,
+            u2_ray nov_r)
+{
+  if ( c3_warm == u2_zone_hip(zon_r) ) {
+    u2_ray box_r = (nov_r - c3_wiseof(u2_loom_zone_box));
+
+    c3_assert(u2_zone_box_use(box_r) == 1);
+    u2_zone_box_use(box_r) = 0;
+
+    _zn_bloq_free(zon_r, nov_r);
   }
 }
 
@@ -895,7 +924,7 @@ u2_zn_cell(u2_ray  zon_r,
 
 /* u2_zn_ice():
 **
-**   Produce [a], not referencing the can.
+**   Produce `a`, not referencing the can.  Copy or gain reference.
 */
 u2_weak
 u2_zn_ice(u2_ray  zon_r,
@@ -921,12 +950,24 @@ u2_zn_ice(u2_ray  zon_r,
             return u2_none;
           }
           else {
-            u2_noun hed = u2_zn_ice(zon_r, *u2_at_pom_hed(fiz));
-            u2_noun tel = u2_zn_ice(zon_r, *u2_at_pom_tel(fiz));
+            u2_weak hed, tel;
             u2_ray nov_r;
             u2_noun nov;
 
+            if ( u2_none == (hed = u2_zn_ice(zon_r, *u2_at_pom_hed(fiz))) ) {
+              return u2_none;
+            }
+            if ( u2_none == (tel = u2_zn_ice(zon_r, *u2_at_pom_tel(fiz))) ) {
+              u2_zn_lose(zon_r, hed);
+              return u2_none;
+            }
+
             nov_r = _zn_bloq_grab(zon_r, c3_wiseof(u2_loom_cell));
+            if ( 0 == nov_r ) {
+              u2_zn_lose(zon_r, hed);
+              u2_zn_lose(zon_r, tel);
+              return u2_none;
+            }
             nov = u2_pom_of(nov_r, 0);
 
             *u2_at_dog_mug(nov) = *u2_at_dog_mug(fiz);
@@ -939,35 +980,33 @@ u2_zn_ice(u2_ray  zon_r,
         }
         else {
           c3_w len_w = *u2_at_pug_len(fiz);
+          u2_ray nov_r;
+          u2_noun nov;
 
-          if ( u2_no == u2_zn_open(zon_r, 
-                                   (len_w + c3_wiseof(u2_loom_atom))) ) {
+          nov_r = _zn_bloq_grab(zon_r, (len_w + c3_wiseof(u2_loom_atom)));
+          if ( 0 == nov_r ) {
             return u2_none;
           }
-          else {
-            u2_ray nov_r;
-            u2_noun nov;
 
-            nov_r = _zn_bloq_grab(zon_r, (len_w + c3_wiseof(u2_loom_atom)));
-            nov = u2_pug_of(nov_r, 0);
+          nov = u2_pug_of(nov_r, 0);
 
-            *u2_at_dog_mug(nov) = 0;
-            *u2_at_pug_len(nov) = len_w;
+          *u2_at_dog_mug(nov) = 0;
+          *u2_at_pug_len(nov) = len_w;
 
-            /* Fill the pug.
-            */
-            {
-              c3_w i_w;
+          /* Fill the pug.
+          */
+          {
+            c3_w i_w;
 
-              for ( i_w=0; i_w < len_w; i_w++ ) {
-                *u2_at_pug_buf(nov, i_w) = *u2_at_pug_buf(fiz, i_w);
-              }
+            for ( i_w=0; i_w < len_w; i_w++ ) {
+              *u2_at_pug_buf(nov, i_w) = *u2_at_pug_buf(fiz, i_w);
             }
-
-            u2_zone_cop(zon_r) += (2 + len_w);
-            return nov;
           }
+
+          u2_zone_cop(zon_r) += (2 + len_w);
+          return nov;
         }
+      }
       }
     }
   }

@@ -313,6 +313,14 @@
         */
           c3_w
           u2_mug(u2_noun a);
+        
+        /* u2_mug_cell():
+        **
+        **   Compute the mug of the cell [a b].
+        */
+          c3_w
+          u2_mug_cell(u2_noun a,
+                      u2_noun b);
 
         /* u2_sing():
         **
