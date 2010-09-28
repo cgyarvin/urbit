@@ -71,5 +71,11 @@
     /** u2: the new interpreter.
     **/
 #     include "f/loom.h"
-#     include "f/zone.h"
-#     include "f/nock.h"
+#     include "f/rail.h"
+#     include "f/chad.h"
+#     include "f/bask.h"
+#     include "f/host.h"
+#     include "f/plow.h"
+#     include "f/shed.h"
+#     include "f/bail.h"
+#     include "f/wire.h"

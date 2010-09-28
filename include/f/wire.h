@@ -6,66 +6,32 @@
   **/
     /** Structures - in loom space.
     **/
-      /* u2_loom_devl: development control.
-      */
-        typedef struct _u2_loom_devl {
-          /* Maximum depth of C stack, in call records.
-          */
-          c3_w  stk_w;
-
-          /* West base.
-          */
-          u2_ray wab_r;
-
-          /* East base.
-          */
-          u2_ray eab_r;
-
-          /* West watermark.
-          */
-          u2_ray wst_r;
-
-          /* East watermark.
-          */
-          u2_ray est_r;
-        } u2_loom_devl;
-
       /* u2_loom_wire: the whole thread.
       */
         typedef struct _u2_loom_wire {
-          u2_loom_zone o;
+          u2_loom_rail o;
 
-          u2_loom_devl d;
-#if 0
           /* Kernel; u2_loom_watt; kernel and tools.
           */
-          u2_ray ken_r;
+          u2_ray wat_r;
 
           /* Basket; u2_loom_bask; memoization.
           */
           u2_ray bas_r;
 
-          /* Motor; u2_loom_motr; registration and acceleration.
+          /* Jet shed or hangar; u2_loom_shed; registration and acceleration.
           */
-          u2_ray mot_r;
+          u2_ray sad_r;
 
-          /* Devil; u2_loom_devl; benchmarking and debugging.
+          /* Ray to machine exception buffer (C jmp_buf); used in jets.
           */
-          u2_ray dev_r;
-#endif
+          u2_ray jub_r;
         } u2_loom_wire;
 
-#         define  u2_wire_cap(wir)  *u2_at(wir, u2_loom_wire, o.cap_r)
-#         define  u2_wire_hat(wir)  *u2_at(wir, u2_loom_wire, o.hat_r)
-#         define  u2_wire_mat(wir)  *u2_at(wir, u2_loom_wire, o.mat_r)
-#         define  u2_wire_rut(wir)  *u2_at(wir, u2_loom_wire, o.rut_r)
-#         define  u2_wire_hip(wir)  *u2_at(wir, u2_loom_wire, o.hip_m)
-#         define  u2_wire_cop(wir)  *u2_at(wir, u2_loom_wire, o.cop_w)
-
-#         define  u2_wire_ken_r(wir)  *u2_at(wir, u2_loom_wire, k)
-#         define  u2_wire_bas_r(wir)  *u2_at(wir, u2_loom_wire, b)
-#         define  u2_wire_mot_r(wir)  *u2_at(wir, u2_loom_wire, m)
-#         define  u2_wire_dev_r(wir)  *u2_at(wir, u2_loom_wire, d)
+#         define  u2_wire_wat_r(wir_r)  *u2_at(wir_r, u2_loom_wire, wat_r)
+#         define  u2_wire_bas_r(wir_r)  *u2_at(wir_r, u2_loom_wire, bas_r)
+#         define  u2_wire_sad_r(wir_r)  *u2_at(wir_r, u2_loom_wire, sad_r)
+#         define  u2_wire_jub_r(wir_r)  *u2_at(wir_r, u2_loom_wire, jub_r)
 
     /** Functions.
     **/
@@ -73,12 +39,24 @@
       **/
         /* u2_wr_boot():
         **
-        **  Create an empty zone in an empty loom, with memory model `hip`.
-        **  See u2_zn_leap() for storage policies.
+        **  Create a wire rail in an empty loom, with memory model `hip`.
+        **  See u2_rl_leap() for storage policies.
         */
           u2_ray
           u2_wr_boot(c3_m hip_m);
 
+        /* u2_wr_init():
+        **
+        **   Install an empty wire within `hat_r` and `mat_r` in the loom,
+        **   with memory model `hip`.
+        **
+        **   Returns ray to wire, which always equalls the passed `mat_r`.
+        */
+          u2_ray
+          u2_wr_init(c3_m   hip_m,
+                     u2_ray hat_r,
+                     u2_ray mat_r);
+#if 0
         /* u2_wr_bench():
         **
         **  Save benchmarks with stack depth.
@@ -97,6 +75,7 @@
                        c3_w*  stk_w,
                        c3_w*  wst_w,
                        c3_w*  est_w);
+#endif
 
       /** Nock.
       **/
@@ -118,32 +97,58 @@
 
         /* u2_wr_nock_here():
         **
-        **    As `u2_wr_nock_flee()`, but without cap reduction.
+        **   As `u2_wr_nock_flee()`, but without cap reduction.
         */
           u2_weak
           u2_wr_nock_here(u2_ray  wir_r,
-                          c3_w    stk_w,
                           u2_noun bus,
                           u2_noun fol);
 
         /* u2_wr_nock_flee():
         **
-        **    Execute (nock bus fol) in the `flee` memory style.
+        **   Execute (nock bus fol) in the `flee` memory style.
         **
-        **    After using `bus`, reduce `cap` to `net`.
+        **   After using `bus`, reduce `cap` to `net`.
         */
           u2_weak
           u2_wr_nock_flee(u2_ray  wir_r,
-                          c3_w    stk_w, 
                           u2_ray  net_r,
                           u2_noun bus,
                           u2_noun fol);
+
+        /* u2_wr_nock_hint():
+        */
+          u2_weak
+          u2_wr_nock_hint(u2_ray  wir_r,
+                          u2_noun hin,
+                          u2_noun bus,
+                          u2_noun fol);
+
+        /* u2_wr_nock_jet():
+        **
+        **   Jet-propel `(nock bus fol)`, or return u2_none.
+        */
+          u2_weak
+          u2_wr_nock_jet(u2_ray  wir_r,
+                         u2_noun bus,
+                         u2_noun fol);
+
+        /* u2_wr_hint():
+        **
+        **   Hint directly in a modern style.  Returns `u2_none` if hint
+        **   processing fails.
+        */
+          u2_weak
+          u2_wr_hint(u2_ray  wir_r,
+                     u2_noun zep,
+                     u2_noun hod,
+                     u2_noun bus,
+                     u2_noun fol);
 
         /* u2_wr_nock_keep(wir, bus, fol):
         */
           u2_weak
           u2_wr_nock_keep(u2_ray  wir_r,
-                          c3_w    stk_w,
                           u2_noun bus,
                           u2_noun fol);
 
@@ -153,7 +158,6 @@
         */
           u2_weak
           u2_wr_nock_lame(u2_ray  wir_r,
-                          c3_w    stk_w,
                           u2_noun bus,
                           u2_noun fol);
 
@@ -163,6 +167,5 @@
         */
           u2_weak
           u2_wr_nock_toss(u2_ray  wir_r,
-                          c3_w    stk_w,
                           u2_noun bus,
                           u2_noun fol);

@@ -280,8 +280,12 @@ B_OFILES=\
        b/bunt.o
 
 F_OFILES=\
-       f/loom.o	\
-       f/zone.o \
+       f/rail.o \
+       f/loom.o \
+       f/wire.o \
+       f/chad.o \
+       f/host.o \
+       f/bask.o \
        f/nock/lame.o \
        f/nock/flee.o \
        f/nock/toss.o \

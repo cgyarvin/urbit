@@ -417,6 +417,7 @@
 #   define c3__peg    c3_s3('p','e','g')
 #   define c3__peld   c3_s4('p','e','l','d')
 #   define c3__perd   c3_s4('p','e','r','d')
+#   define c3__pesk   c3_s4('p','e','s','k')
 #   define c3__pfix   c3_s4('p','f','i','x')
 #   define c3__pick   c3_s4('p','i','c','k')
 #   define c3__pike   c3_s4('p','i','k','e')

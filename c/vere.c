@@ -115,6 +115,11 @@
     static u3_fox
     _vere_scan(u3_x x, FILE *fil);
 
+
+/* Absolute hack - delete.
+*/
+void *Vere;
+
 #if 0
 /*  _vere_q_does(): push a debugging context.
 */
@@ -695,6 +700,7 @@ vere_boot(c3_w siz_w)
     fprintf(stderr, "boot: fail\n");
     exit(1);
   }
+  Vere = v;
 
   /*  Load the kernel itself.  XX: jets from the outside.
   **
@@ -707,7 +713,8 @@ vere_boot(c3_w siz_w)
     v->z = u3_z_new(siz_w);
 
     u2_boot(siz_w);
-    v->wir_r = u2_wr_boot(c3__cold);
+    // v->wir_r = u2_wr_boot(c3__cold);
+    v->wir_r = u2_wr_init(c3__cold, u2_ray_of(0, 0), u2_ray_of(1, 0));
 
     _vere_kernel(v, "watt/296.watt", "watt/296.nock");
   }
@@ -1032,7 +1039,7 @@ _vere_32(struct vere_state* v,
          u3_fox             fox)
 {
   if ( u3_yes == u3_lr_dust(v->z, fox) ) {
-    return u2_zn_cell
+    return u2_rl_cell
       (v->wir_r, 
        _vere_32(v, u3_lr_h(v->z, fox)), 
        _vere_32(v, u3_lr_t(v->z, fox)));
@@ -1041,7 +1048,7 @@ _vere_32(struct vere_state* v,
     mpz_t gur_mp;
 
     u3_lr_mp(v->z, gur_mp, fox);
-    return u2_zn_mp(v->wir_r, gur_mp);
+    return u2_rl_mp(v->wir_r, gur_mp);
   }
 }
 
@@ -1061,6 +1068,16 @@ _vere_23(struct vere_state* v,
     u2_mp(gur_mp, som);
     return u3_ln_mp(v->z, gur_mp);
   }
+}
+
+void
+u2_b_print(u2_ray wir_r, const c3_c* cap_c, u2_noun som)
+{
+  struct vere_state *v=Vere;
+
+  u3_fox  por = _vere_23(v, som);
+
+  u3_b_print(v->z, 0, por);
 }
 
 void 
@@ -1102,7 +1119,7 @@ vere_line2(void* vere, const c3_c* lin_c)
       /* Test with u2.
       */
       {
-        u2_zn_leap(v->wir_r, c3__cold);
+        u2_rl_leap(v->wir_r, c3__cold);
         {
           u2_noun fun = _vere_32(v, fel);
           u2_noun par = _vere_32(v, gux);
@@ -1111,36 +1128,37 @@ vere_line2(void* vere, const c3_c* lin_c)
                               u2_zc(v->wir_r, par, u2_t(u2_h(fun))),
                               fol);
 
-          // u2_zn_leap(v->wir_r, c3__cold);
-          u2_zn_leap(v->wir_r, c3__warm);
+          u2_rl_leap(v->wir_r, c3__cold);
+          // u2_rl_leap(v->wir_r, c3__warm);
           {
             u2_noun pro = u2_wr_nock_main(v->wir_r, bus, fol);
+            // u2_noun pro = u2_wr_nock_lame(v->wir_r, bus, fol);
             u3_fox  por = _vere_23(v, pro);
 
             u3_b_print(v->z, 0, por);
           }
-          u2_zn_fall(v->wir_r);
+          u2_rl_fall(v->wir_r);
         }
-        u2_zn_fall(v->wir_r);
-        u2_zn_flog(v->wir_r);
+        u2_rl_fall(v->wir_r);
+        u2_rl_flog(v->wir_r);
 
+#if 0
         {
           c3_w stk_w, wst_w, est_w;
 
           u2_wr_report(v->wir_r, &stk_w, &wst_w, &est_w);
           printf("<cstack %d, west %d, east %d>\n", stk_w, wst_w, est_w);
-#if 0
           printf("<rut %d:%x; hat %d:%x; cap %d:%x; mat %d:%x\n",
-                  u2_ray_a(u2_zone_rut(v->wir_r)),
-                  u2_ray_b(u2_zone_rut(v->wir_r)),
-                  u2_ray_a(u2_zone_hat(v->wir_r)),
-                  u2_ray_b(u2_zone_hat(v->wir_r)),
-                  u2_ray_a(u2_zone_cap(v->wir_r)),
-                  u2_ray_b(u2_zone_cap(v->wir_r)),
-                  u2_ray_a(u2_zone_mat(v->wir_r)),
-                  u2_ray_b(u2_zone_mat(v->wir_r)));
-#endif
+                  u2_ray_a(u2_rail_rut(v->wir_r)),
+                  u2_ray_b(u2_rail_rut(v->wir_r)),
+                  u2_ray_a(u2_rail_hat(v->wir_r)),
+                  u2_ray_b(u2_rail_hat(v->wir_r)),
+                  u2_ray_a(u2_rail_cap(v->wir_r)),
+                  u2_ray_b(u2_rail_cap(v->wir_r)),
+                  u2_ray_a(u2_rail_mat(v->wir_r)),
+                  u2_ray_b(u2_rail_mat(v->wir_r)));
         }
+#endif
       }
     }
   }

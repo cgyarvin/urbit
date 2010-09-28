@@ -965,8 +965,8 @@
     |*
     ::::
     ::
-        edge  =+(a=&* |:(<[| p=*mark] [& p=*a q=tube]>))
-        mark  &[l=@ c=@]
+        edge  =+(a=&* |:(<[| p=*hair] [& p=*a q=tube]>))
+        hair  &[l=@ c=@]
         rule  =+(doc=tube |=(^-(*(edge) [& ~ doc])))
     ::::
     ::
@@ -1168,9 +1168,9 @@
     ::::
     ::
         reco
-      =+  [zyc=*mark naz=*mark]
+      =+  [zyc=*hair naz=*hair]
       |=
-      ^-  *mark
+      ^-  *hair
       ?:  .=(l.zyc l.naz)
         ?:((gth c.zyc c.naz) zyc naz)
       ?:((gth l.zyc l.naz) zyc naz)
@@ -1233,7 +1233,7 @@
     ::::
     ::
         tube
-      =+  der=*mark 
+      =+  der=*hair 
       =+  tep=*tape
       |=
       ^-  [p=*(unit byte) q=tube]

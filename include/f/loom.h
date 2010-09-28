@@ -132,8 +132,31 @@
 #     define u2_ray_nit(ray) \
         ( u2_ray_a(ray) ? (LoomEnd - u2_ray_b(ray)) : (ray) )
 
+#     define u2_ray_open(tid, tat, das) \
+        ( (0 == u2_ray_a(tid)) \
+            ? ( (u2_ray_nit(tid) + (das)) < u2_ray_nit(tat) ) \
+            : ( (u2_ray_nit(tat) + (das)) < u2_ray_nit(tid) ) )
+
+#     define u2_ray_gap(tid, tat) \
+        ( (LoomSize - (u2_ray_b(tid) + u2_ray_b(tat))) )
+
+      /* last word of opposite is first word of other.  so, in a 4-word loom:
+      **
+      **  0    1    2    3
+      **  |    |    |    |
+      **  ##   ##   ##   ##
+      **   |    |    |    |
+      **   3    2    1    0
+      */
+
+#     define u2_ray_over(ray, siz_w) \
+        u2_ray_of(!u2_ray_a(ray), (LoomSize - (u2_ray_b(ray) + (siz_w))))
+
 #     define u2_at_nit(nit)    (Loom + nit)
 #     define u2_at_ray(ray)    u2_at_nit(u2_ray_nit(ray))
+
+#     define u2_at_cord(ray, siz) \
+        (u2_ray_a(ray) ? (u2_at_ray(ray) - ((siz) - 1)) : u2_at_ray(ray))
 
 #     define u2_aftr(ray, type, field) \
         ((ray) + \
@@ -270,11 +293,35 @@
     */
       typedef u2_noun u2_mote;
 
+    /* u2_term:
+    **
+    **   A Watt symbol.
+    */
+      typedef u2_noun u2_term;
+
     /* u2_list:
     **
     **   A zero-terminated, tailward list.
     */
       typedef u2_noun u2_list;
+
+    /* u2_tool:
+    **
+    **   A valid or presumptive Nock formula.
+    */
+      typedef u2_noun u2_tool;
+
+    /* u2_pool:
+    **
+    **   A set, stored as binary treap by mug.
+    */
+      typedef u2_noun u2_pool;
+
+    /* u2_book:
+    **
+    **   An associative array, stored as binary treap by mug.
+    */
+      typedef u2_noun u2_book;
 
     /** Functions.
     **/
