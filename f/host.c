@@ -409,6 +409,7 @@ _ho_select(u2_ray        wir_r,
       if ( *jet_j->cos_c == '@' ) {
         sscanf(jet_j->cos_c+1, "%u", &axe_w);
         c3_assert(!(0x80000000 & axe_w));
+        axe = axe_w;
       }
       else {
         c3_assert(0);   // hooks not yet supported

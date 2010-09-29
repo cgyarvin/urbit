@@ -174,6 +174,9 @@
 #     define u2_by(ray, type, field) \
         u2_at_ray(u2_fore(ray, type, field))
 
+#     define u2_be(ray, type, item, field) \
+        ( (item *)(void *)u2_at_ray(u2_aftr(ray, type, field)) )
+
 #     define u2_ray_beam(ray)   u2_ray_a(ray)
 #     define u2_ray_point(ray)  u2_ray_b(ray)
 

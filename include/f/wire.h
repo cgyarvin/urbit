@@ -26,25 +26,22 @@
           /* Ray to machine exception buffer (C jmp_buf); used in jets.
           */
           u2_ray jub_r;
+
+          /* Ray to performance log.
+          */
+          u2_ray bex_r;
         } u2_loom_wire;
 
 #         define  u2_wire_wat_r(wir_r)  *u2_at(wir_r, u2_loom_wire, wat_r)
 #         define  u2_wire_bas_r(wir_r)  *u2_at(wir_r, u2_loom_wire, bas_r)
 #         define  u2_wire_sad_r(wir_r)  *u2_at(wir_r, u2_loom_wire, sad_r)
 #         define  u2_wire_jub_r(wir_r)  *u2_at(wir_r, u2_loom_wire, jub_r)
+#         define  u2_wire_bex_r(wir_r)  *u2_at(wir_r, u2_loom_wire, bex_r)
 
     /** Functions.
     **/
       /** Administration.
       **/
-        /* u2_wr_boot():
-        **
-        **  Create a wire rail in an empty loom, with memory model `hip`.
-        **  See u2_rl_leap() for storage policies.
-        */
-          u2_ray
-          u2_wr_boot(c3_m hip_m);
-
         /* u2_wr_init():
         **
         **   Install an empty wire within `hat_r` and `mat_r` in the loom,
@@ -56,6 +53,12 @@
           u2_wr_init(c3_m   hip_m,
                      u2_ray hat_r,
                      u2_ray mat_r);
+
+        /* u2_wr_ice(): u2_rl_ice(), with u2_bx_copy().
+        */
+          u2_weak
+          u2_wr_ice(u2_ray  wir_r,
+                    u2_noun fiz);
 #if 0
         /* u2_wr_bench():
         **

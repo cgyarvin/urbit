@@ -4,18 +4,17 @@
 */
 #include "all.h"
 
-/* u2_wr_nock_lame():
-**
-**    Execute `(nock bus fol)` with a simple reference interpreter.
+/* _lame(): substance of u2_wr_nock_lame().
 */
-u2_weak
-u2_wr_nock_lame(u2_ray  wir_r,
-                u2_noun bus,
-                u2_noun fol)
+static u2_weak
+_lame(u2_ray  wir_r,
+      u2_noun bus,
+      u2_noun fol)
 {
   u2_noun hib, gal;
 
-  // u2_wr_bench(wir_r, stk_w);
+  u2_bx_mark(wir_r);
+  u2_bx_step(wir_r);
 
   /* Attempt jet propulsion.
   */
@@ -53,12 +52,12 @@ u2_wr_nock_lame(u2_ray  wir_r,
           if ( u2_none == dof ) {
             return u2_none;
           }
-          else return u2_rl_ice(wir_r, dof);
+          else return u2_wr_ice(wir_r, dof);
         }
       }
 
       case u2_nock_bone: {
-        return u2_rl_ice(wir_r, gal);
+        return u2_wr_ice(wir_r, gal);
       }
 
       case u2_nock_sail: {
@@ -201,3 +200,23 @@ u2_wr_nock_lame(u2_ray  wir_r,
     }
   }
 }
+
+/* u2_wr_nock_lame():
+**
+**    Execute `(nock bus fol)` with a simple reference interpreter.
+*/
+u2_weak
+u2_wr_nock_lame(u2_ray  wir_r,
+                u2_noun bus,
+                u2_noun fol)
+{
+  u2_weak fut;
+
+  u2_bx_fall(wir_r);
+  fut = _lame(wir_r, bus, fol);
+
+  u2_bx_mark(wir_r);
+  u2_bx_rise(wir_r);
+  return fut;
+}
+

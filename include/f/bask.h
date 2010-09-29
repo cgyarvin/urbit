@@ -20,9 +20,9 @@
         u2_ray par_r;
       } u2_loom_bask;
 
-#define   u2_bask_zon_r(bas_r)  *u2_at(bas_r, u2_loom_bask, zon_r)
-#define   u2_bask_cad_r(bas_r)  u2_aftr(bas_r, u2_loom_bask, cad_c)
-#define   u2_bask_par_r(bas_r)  *u2_at(bas_r, u2_loom_bask, par_r)
+#       define u2_bask_zon_r(bas_r)  *u2_at(bas_r, u2_loom_bask, zon_r)
+#       define u2_bask_cad_r(bas_r)  u2_aftr(bas_r, u2_loom_bask, cad_c)
+#       define u2_bask_par_r(bas_r)  *u2_at(bas_r, u2_loom_bask, par_r)
 
 
   /** Functions.

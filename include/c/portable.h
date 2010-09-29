@@ -26,6 +26,7 @@
 #     include <byteswap.h> 
 #     include <setjmp.h>
 #     include <stdio.h>
+#     include <sys/time.h>
 
 #   elif defined(U3_OS_osx)
 #     include <stdlib.h>
@@ -38,6 +39,7 @@
 #     include <machine/endian.h> 
 #     include <machine/byte_order.h> 
 #     include <stdio.h>
+#     include <sys/time.h>
 
 #   endif
 

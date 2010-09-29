@@ -78,4 +78,5 @@
 #     include "f/plow.h"
 #     include "f/shed.h"
 #     include "f/bail.h"
+#     include "f/benx.h"
 #     include "f/wire.h"

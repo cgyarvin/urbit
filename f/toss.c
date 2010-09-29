@@ -4,19 +4,20 @@
 */
 #include "all.h"
 
-/* u2_wr_nock_toss():
+/* _toss(): substance of u2_wr_nock_toss().
 **
 **    Execute `(nock bus fol)`, losing `bus`, holding `fol`.
 */
-u2_weak
-u2_wr_nock_toss(u2_ray  wir_r,
-                u2_noun bus,
-                u2_noun fol)
+static u2_weak
+_toss(u2_ray  wir_r,
+           u2_noun bus,
+           u2_noun fol)
 {
   u2_noun hib, gal;
 
   while ( 1 ) {
-    // u2_wr_bench(wir_r, stk_w);
+    u2_bx_step(wir_r);
+    u2_bx_mark(wir_r);
 
     /* Attempt jet propulsion.
     */
@@ -69,7 +70,7 @@ u2_wr_nock_toss(u2_ray  wir_r,
           else {
             u2_weak cul;
             
-            cul = u2_rl_ice(wir_r, dof);
+            cul = u2_wr_ice(wir_r, dof);
 
             u2_rl_lose(wir_r, bus);
             return cul;
@@ -83,7 +84,7 @@ u2_wr_nock_toss(u2_ray  wir_r,
 
         u2_rl_lose(wir_r, bus);
 
-        sug = u2_rl_ice(wir_r, gal);
+        sug = u2_wr_ice(wir_r, gal);
         return sug;
       }
     /* sail
@@ -336,13 +337,13 @@ u2_wr_nock_toss(u2_ray  wir_r,
         } else {
           u2_weak cul, han, guc;
 
-          if ( u2_none == (cul = u2_rl_ice(wir_r, bus)) ) {
+          if ( u2_none == (cul = u2_wr_ice(wir_r, bus)) ) {
             u2_rl_lose(wir_r, bus);
             return u2_none;
           }
           u2_rl_lose(wir_r, bus);
 
-          if ( u2_none == (han = u2_rl_ice(wir_r, u2_t(gal))) ) {
+          if ( u2_none == (han = u2_wr_ice(wir_r, u2_t(gal))) ) {
             u2_rl_lose(wir_r, cul);
             return u2_none;
           }
@@ -357,4 +358,23 @@ u2_wr_nock_toss(u2_ray  wir_r,
       }
     }
   }
+}
+
+/* u2_wr_nock_toss():
+**
+**    Execute `(nock bus fol)`, losing `bus`, holding `fol`.
+*/
+u2_weak
+u2_wr_nock_toss(u2_ray  wir_r,
+                u2_noun bus,
+                u2_noun fol)
+{
+  u2_weak fut;
+
+  u2_bx_fall(wir_r);
+  fut = _toss(wir_r, bus, fol);
+
+  u2_bx_mark(wir_r);
+  u2_bx_rise(wir_r);
+  return fut;
 }

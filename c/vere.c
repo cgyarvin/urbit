@@ -1080,6 +1080,82 @@ u2_b_print(u2_ray wir_r, const c3_c* cap_c, u2_noun som)
   u3_b_print(v->z, 0, por);
 }
 
+void
+_vere_print_superdecimal_w(c3_w w)
+{
+  if ( w < 65536 ) {
+    printf("%d", w);
+  } else {
+    printf("%d+%d", (w >> 16), (w & 65535));
+  }
+}
+
+void
+_vere_print_superdecimal_d(c3_d d)
+{
+  if ( d > 0x100000000ULL ) {
+    _vere_print_superdecimal_w((c3_w)(d >> 32ULL));
+    printf(":");
+    _vere_print_superdecimal_w((c3_w)(d & 0xffffffffULL));
+  }
+  else { 
+    _vere_print_superdecimal_w((c3_w) d);
+  }
+}
+
+void
+_vere_report(u2_ray wir_r)
+{
+  c3_d sap_d, cop_d, jax_d, use_d;
+  c3_w wax_w, moc_w, hix_w, ums_w;
+
+  if ( u2_no == u2_bx_post(wir_r, &sap_d, 
+                                  &cop_d, 
+                                  &jax_d, 
+                                  &use_d, 
+                                  &wax_w, 
+                                  &moc_w, 
+                                  &hix_w, 
+                                  &ums_w) )
+  {
+    return;
+  } else {
+    printf("<");
+    _vere_print_superdecimal_d(sap_d);
+    printf(" steps");
+    if ( cop_d ) {
+      printf(", ");
+      _vere_print_superdecimal_d(cop_d);
+      printf(" copies");
+    }
+    if ( jax_d ) {
+      printf(", ");
+      _vere_print_superdecimal_d(jax_d);
+      printf(" shots");
+    }
+    if ( use_d ) {
+      printf(", ");
+      _vere_print_superdecimal_d(use_d);
+      printf("shots");
+    }
+    printf("; ");
+    _vere_print_superdecimal_w(moc_w);
+    printf(" words, ");
+    _vere_print_superdecimal_w(wax_w);
+    printf(" frames");
+
+    if ( hix_w ) {
+      printf(", ");
+      _vere_print_superdecimal_w(hix_w);
+      printf("saved");
+    }
+
+    printf("; ");
+    _vere_print_superdecimal_w(ums_w);
+    printf(" ms>\n");
+  }
+}
+
 void 
 vere_line2(void* vere, const c3_c* lin_c)
 {
@@ -1119,6 +1195,7 @@ vere_line2(void* vere, const c3_c* lin_c)
       /* Test with u2.
       */
       {
+        u2_bx_boot(v->wir_r);
         u2_rl_leap(v->wir_r, c3__cold);
         {
           u2_noun fun = _vere_32(v, fel);
@@ -1142,23 +1219,7 @@ vere_line2(void* vere, const c3_c* lin_c)
         u2_rl_fall(v->wir_r);
         u2_rl_flog(v->wir_r);
 
-#if 0
-        {
-          c3_w stk_w, wst_w, est_w;
-
-          u2_wr_report(v->wir_r, &stk_w, &wst_w, &est_w);
-          printf("<cstack %d, west %d, east %d>\n", stk_w, wst_w, est_w);
-          printf("<rut %d:%x; hat %d:%x; cap %d:%x; mat %d:%x\n",
-                  u2_ray_a(u2_rail_rut(v->wir_r)),
-                  u2_ray_b(u2_rail_rut(v->wir_r)),
-                  u2_ray_a(u2_rail_hat(v->wir_r)),
-                  u2_ray_b(u2_rail_hat(v->wir_r)),
-                  u2_ray_a(u2_rail_cap(v->wir_r)),
-                  u2_ray_b(u2_rail_cap(v->wir_r)),
-                  u2_ray_a(u2_rail_mat(v->wir_r)),
-                  u2_ray_b(u2_rail_mat(v->wir_r)));
-        }
-#endif
+        _vere_report(v->wir_r);
       }
     }
   }

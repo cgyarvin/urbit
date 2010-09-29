@@ -19,12 +19,20 @@ u2_wr_init(c3_m   hip_m,
   u2_ray wir_r;
 
   wir_r = u2_rl_init(hip_m, hat_r, mat_r);
-  u2_rail_cap_r(wir_r) += (c3_wiseof(u2_loom_wire) - c3_wiseof(u2_loom_rail));
+  u2_rail_hat_r(wir_r) += (c3_wiseof(u2_loom_wire) - c3_wiseof(u2_loom_rail));
 
   u2_wire_sad_r(wir_r) = 0;
   u2_wire_bas_r(wir_r) = 0;
   u2_wire_wat_r(wir_r) = 0;
   u2_wire_jub_r(wir_r) = 0;
+
+  /* Basic performance tracking.
+  */
+  {
+    u2_wire_bex_r(wir_r) = u2_rl_ralloc(wir_r, c3_wiseof(u2_loom_benx));
+
+    u2_bx_boot(wir_r);
+  }
 
   return wir_r;
 #if 0
@@ -56,70 +64,21 @@ u2_wr_init(c3_m   hip_m,
 #endif
 }
 
-#if 0
-/* u2_wr_bench():
-**
-**  Save benchmarks with stack depth.
+/* u2_wr_ice(): u2_rl_ice(), with u2_bx_copy().
 */
-void
-u2_wr_bench(u2_ray wir_r,
-            c3_w   stk_w)
+u2_weak
+u2_wr_ice(u2_ray  wir_r,
+          u2_noun fiz)
 {
-  if ( stk_w > *u2_at(wir_r, u2_loom_wire, d.stk_w) ) {
-    *u2_at(wir_r, u2_loom_wire, d.stk_w) = stk_w;
+  u2_ray  hat_r = u2_rail_hat_r(wir_r);
+  u2_noun buz;
+  c3_w    cop_w;
+
+  buz = u2_rl_ice(wir_r, fiz);
+
+  cop_w = u2_rail_hat_r(wir_r) - hat_r;
+  if ( cop_w ) {
+    u2_bx_copy(wir_r, cop_w);
   }
-  
-  if ( u2_ray_a(u2_rail_cap_r(wir_r)) == 0 ) {
-    if ( u2_rail_cap_r(wir_r) > *u2_at(wir_r, u2_loom_wire, d.wst_r) ) {
-      *u2_at(wir_r, u2_loom_wire, d.wst_r) = u2_rail_cap_r(wir_r);
-    }
-    if ( u2_rail_hat_r(wir_r) > *u2_at(wir_r, u2_loom_wire, d.est_r) ) {
-      *u2_at(wir_r, u2_loom_wire, d.est_r) = u2_rail_hat_r(wir_r);
-    }
-  } else {
-    if ( u2_rail_cap_r(wir_r) > *u2_at(wir_r, u2_loom_wire, d.est_r) ) {
-      *u2_at(wir_r, u2_loom_wire, d.est_r) = u2_rail_cap_r(wir_r);
-    }
-    if ( u2_rail_hat_r(wir_r) > *u2_at(wir_r, u2_loom_wire, d.wst_r) ) {
-      *u2_at(wir_r, u2_loom_wire, d.wst_r) = u2_rail_hat_r(wir_r);
-    }
-  }
+  return buz;
 }
-
-/* u2_wr_report():
-**
-**  Return handy reporting information.  Reset watermarks.
-*/
-void
-u2_wr_report(u2_ray wir_r,
-             c3_w*  stk_w,
-             c3_w*  wst_w,
-             c3_w*  est_w)
-{
-  *stk_w = *u2_at(wir_r, u2_loom_wire, d.stk_w);
-  *wst_w = *u2_at(wir_r, u2_loom_wire, d.wst_r) -
-           *u2_at(wir_r, u2_loom_wire, d.wab_r);
-  *est_w = *u2_at(wir_r, u2_loom_wire, d.est_r) - 
-           *u2_at(wir_r, u2_loom_wire, d.eab_r);
-
-  *u2_at(wir_r, u2_loom_wire, d.stk_w) = 0;
-
-  if ( u2_ray_a(u2_rail_cap_r(wir_r)) == 0 ) {
-    if ( u2_rail_cap_r(wir_r) > *u2_at(wir_r, u2_loom_wire, d.wst_r) ) {
-      *u2_at(wir_r, u2_loom_wire, d.wab_r) = u2_rail_cap_r(wir_r);
-    }
-    if ( u2_rail_hat_r(wir_r) > *u2_at(wir_r, u2_loom_wire, d.est_r) ) {
-      *u2_at(wir_r, u2_loom_wire, d.eab_r) = u2_rail_hat_r(wir_r);
-    }
-  } else {
-    if ( u2_rail_cap_r(wir_r) > *u2_at(wir_r, u2_loom_wire, d.est_r) ) {
-      *u2_at(wir_r, u2_loom_wire, d.eab_r) = u2_rail_cap_r(wir_r);
-    }
-    if ( u2_rail_hat_r(wir_r) > *u2_at(wir_r, u2_loom_wire, d.wst_r) ) {
-      *u2_at(wir_r, u2_loom_wire, d.wab_r) = u2_rail_hat_r(wir_r);
-    }
-  }
-  *u2_at(wir_r, u2_loom_wire, d.wst_r) = *u2_at(wir_r, u2_loom_wire, d.wab_r);
-  *u2_at(wir_r, u2_loom_wire, d.est_r) = *u2_at(wir_r, u2_loom_wire, d.eab_r);
-}
-#endif

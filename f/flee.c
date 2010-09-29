@@ -16,22 +16,19 @@ u2_wr_nock_here(u2_ray  wir_r,
   return u2_wr_nock_flee(wir_r, u2_rail_cap_r(wir_r), bus, fol);
 }
 
-/* u2_wr_nock_flee():
-**
-**    Execute `(nock bus fol)` in the `flee` memory style.
-**
-**    After using `bus`, reduce `cap` to `net`.
+/* _flee(): substance of u2_wr_nock_flee().
 */
-u2_weak
-u2_wr_nock_flee(u2_ray  wir_r,
-                u2_ray  net_r,
-                u2_noun bus,
-                u2_noun fol)
+static u2_weak
+_flee(u2_ray  wir_r,
+      u2_ray  net_r,
+      u2_noun bus,
+      u2_noun fol)
 {
   u2_noun hib, gal;
 
   while ( 1 ) {
-    // u2_wr_bench(wir_r, stk_w);
+    u2_bx_mark(wir_r);
+    u2_bx_step(wir_r);
 
     /* Attempt jet propulsion.
     */
@@ -41,6 +38,7 @@ u2_wr_nock_flee(u2_ray  wir_r,
       if ( u2_none != (pro = u2_wr_nock_jet(wir_r, bus, fol)) ) {
         u2_rail_cap_r(wir_r) = net_r;
 
+        u2_bx_flew(wir_r);
         return pro;
       }
     }
@@ -75,7 +73,7 @@ u2_wr_nock_flee(u2_ray  wir_r,
             return u2_none;
           }
           else {
-            u2_noun hep = u2_rl_ice(wir_r, dof);
+            u2_noun hep = u2_wr_ice(wir_r, dof);
 
             u2_rail_cap_r(wir_r) = net_r;
             return hep;
@@ -87,7 +85,7 @@ u2_wr_nock_flee(u2_ray  wir_r,
       case u2_nock_bone: {
         u2_rail_cap_r(wir_r) = net_r;
 
-        return u2_rl_ice(wir_r, gal);
+        return u2_wr_ice(wir_r, gal);
       }
     /* sail = 2
     */
@@ -333,11 +331,11 @@ u2_wr_nock_flee(u2_ray  wir_r,
         } else {
           u2_weak cul, han, guc;
 
-          if ( u2_none == (cul = u2_rl_ice(wir_r, bus)) ) {
+          if ( u2_none == (cul = u2_wr_ice(wir_r, bus)) ) {
             return u2_none;
           }
 
-          if ( u2_none == (han = u2_rl_ice(wir_r, u2_t(gal))) ) {
+          if ( u2_none == (han = u2_wr_ice(wir_r, u2_t(gal))) ) {
             return u2_none;
           }
 
@@ -351,4 +349,26 @@ u2_wr_nock_flee(u2_ray  wir_r,
       }
     }
   }
+}
+
+/* u2_wr_nock_flee():
+**
+**    Execute `(nock bus fol)` in the `flee` memory style.
+**
+**    After using `bus`, reduce `cap` to `net`.
+*/
+u2_weak
+u2_wr_nock_flee(u2_ray  wir_r,
+                u2_ray  net_r,
+                u2_noun bus,
+                u2_noun fol)
+{
+  u2_weak fut;
+
+  u2_bx_fall(wir_r);
+  fut = _flee(wir_r, net_r, bus, fol);
+
+  u2_bx_mark(wir_r);
+  u2_bx_rise(wir_r);
+  return fut;
 }
