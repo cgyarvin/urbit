@@ -36,6 +36,13 @@
 
   /** Functions.
   **/
+    /* u2_ch_init():
+    **
+    **   Initialize empty chad.
+    */
+      void
+      u2_ch_init(u2_ray cad_r);
+
     /* u2_ch_find():
     **
     **   Find value for `nam` in `cad`, or return `u2_none`.

@@ -185,9 +185,15 @@ _lame(u2_ray  wir_r,
         if ( u2_no == u2_dust(gal) ) {
           return u2_none;
         } else {
-          u2_noun hin = u2_wr_nock_lame(wir_r, bus, u2_h(gal));
+          u2_noun hig = u2_wr_nock_lame(wir_r, bus, u2_h(gal));
+          u2_noun zep, hod;
 
-          return u2_wr_nock_hint(wir_r, hin, bus, u2_t(gal)); 
+          if ( u2_yes == u2_stud(hig) ) {
+            zep = hig; hod = u2_nul;
+          } else {
+            zep = u2_h(hig); hod = u2_t(hig);
+          }
+          return u2_wr_nock_hint(wir_r, zep, hod, bus, u2_t(gal)); 
         }
       }
       case u2_nock_coat: {

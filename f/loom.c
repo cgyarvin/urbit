@@ -115,6 +115,39 @@ u2_frag(u2_atom a,
            cog_w[(nud_w >> 16) & 255] +
            cog_w[(nud_w >> 24) & 255];
   }
+
+static c3_w
+_mug_dog(u2_noun veb)
+{
+  if ( u2_dog_is_pom(veb) ) {
+    u2_noun hed = *u2_at_pom_hed(veb);
+    u2_noun tel = *u2_at_pom_tel(veb);
+
+    return u2_mug_cell(hed, tel);
+  }
+  else {
+    c3_w len_w = *u2_at_pug_len(veb);
+    c3_w zun_w = 0x18d0a625;
+    c3_w i_w;
+
+    while ( 1 ) {
+      c3_w gid_w = zun_w;
+      c3_w dav_w;
+
+      for ( i_w=0; i_w < len_w; i_w++ ) {
+        gid_w ^= *u2_at_pug_buf(veb, i_w);
+        gid_w = _mash(gid_w);
+      }
+      dav_w = 0x7fffffff & gid_w;
+
+      if ( dav_w ) {
+        return dav_w;
+      } 
+      else zun_w++;
+    }
+  }
+}
+
 c3_w
 u2_mug(u2_noun veb)
 {
@@ -135,41 +168,17 @@ u2_mug(u2_noun veb)
   }
   else {
     if ( *u2_at_dog_mug(veb) ) {
-      return *u2_at_dog_mug(veb);
+      c3_w mug_w = *u2_at_dog_mug(veb);
+      // c3_w gum_w = _mug_dog(veb);
+
+      // c3_assert(mug_w == gum_w);
+      return mug_w;
     }
     else {
-      if ( u2_dog_is_pom(veb) ) {
-        u2_noun hed   = *u2_at_pom_hed(veb);
-        u2_noun tel   = *u2_at_pom_tel(veb);
-        c3_w    mug_w;
+      c3_w mug_w = _mug_dog(veb);
 
-        mug_w = u2_mug_cell(hed, tel);
-        *u2_at_dog_mug(veb) = mug_w;
-
-        return mug_w;
-      }
-      else {
-        c3_w len_w = *u2_at_pug_len(veb);
-        c3_w zun_w = 0x18d0a625;
-        c3_w i_w;
-
-        while ( 1 ) {
-          c3_w gid_w = zun_w;
-          c3_w dav_w;
-
-          for ( i_w=0; i_w < len_w; i_w++ ) {
-            gid_w ^= *u2_at_pug_buf(veb, i_w);
-            gid_w = _mash(gid_w);
-          }
-          dav_w = 0x7fffffff & gid_w;
-
-          if ( dav_w ) {
-            *u2_at_dog_mug(veb) = dav_w;
-            return dav_w;
-          } 
-          else zun_w++;
-        }
-      }
+      *u2_at_dog_mug(veb) = mug_w;
+      return mug_w;
     }
   }
 }
@@ -190,6 +199,9 @@ u2_mug_cell(u2_noun hed,
     c3_w dav_w = 0x7fffffff & _mash(hur_w);
 
     if ( dav_w ) {
+      if ( dav_w == 0x4bc48e ) {
+        printf("4bc48e lus %x biq %x\n", lus_w, biq_w);
+      }
       return dav_w;
     } 
     else hur_w++;

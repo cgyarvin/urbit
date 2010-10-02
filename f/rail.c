@@ -167,7 +167,8 @@ u2_rl_fall(u2_ray ral_r)
 
 /* u2_rl_leap_part():
 **
-**   Reverse and split rail, inserting partition of size `num_w/dem_w`.
+**   Reverse and split rail, inserting partition of size `num/dem`
+**   plus `tip`. 
 **
 **   Returns partition rail, `aux_r`.
 */
@@ -175,7 +176,8 @@ u2_ray
 u2_rl_leap_part(u2_ray ral_r,
                 c3_m   hop_m,
                 c3_w   num_w,
-                c3_w   dem_w)
+                c3_w   dem_w,
+                c3_w   tip_w)
 {
   u2_ray cap_r = u2_rail_cap_r(ral_r);
   u2_ray hat_r = u2_rail_hat_r(ral_r);
@@ -193,9 +195,9 @@ u2_rl_leap_part(u2_ray ral_r,
       c3_w   gap_w = u2_ray_gap(cap_r, hat_r);
 
       pad_w = (gap_w / dem_w);
-      siz_w = (num_w * pad_w);
+      siz_w = (num_w * pad_w) + tip_w;
 
-      if ( (siz_w < 64) || ((gap_w - siz_w) < 64) ) {
+      if ( (siz_w < 64) || (gap_w < (siz_w + 64)) ) {
         /* Entirely arbitrary, excessive and unfair.
         */
         return 0;
@@ -794,6 +796,38 @@ u2_rl_senior(u2_ray  ral_r,
     }
   }
   return u2_yes;
+}
+
+/* u2_rl_junior():
+**
+**   Yes iff `som` is junior in `ral` - ie, must be copied
+**   to be referenced on the hat.
+*/
+u2_flag
+u2_rl_junior(u2_ray  ral_r,
+             u2_noun som)
+{
+  if ( u2_fly_is_cat(som) ) {
+    return u2_no;
+  }
+  else {
+    u2_ray som_r = u2_dog_a(som);
+    u2_ray hat_r = u2_rail_hat_r(ral_r);
+    u2_ray mat_r = u2_rail_mat_r(ral_r);
+    u2_nit som_n = u2_ray_nit(som_r);
+    u2_nit hat_n = u2_ray_nit(hat_r);
+    u2_nit mat_n = u2_ray_nit(mat_r);
+
+    if ( u2_ray_a(hat_r) == 0 ) {
+      if ( (som_n >= hat_n) && (som_n <= mat_n) )
+        return u2_yes;
+      else return u2_no;
+    } else {
+      if ( (som_n >= mat_n) && (som_n <= hat_n) )
+        return u2_yes;
+      else return u2_no;
+    }
+  }
 }
 
 /* u2_rl_flog():

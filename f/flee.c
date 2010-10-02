@@ -308,15 +308,20 @@ _flee(u2_ray  wir_r,
           u2_ray  bat_r = u2_rail_cap_r(wir_r);
           u2_noun yeq = u2_h(gal);
           u2_noun zom = u2_t(gal);
-          u2_weak hig, lut;
+          u2_weak hig, zep, hod, lut;
 
           if ( u2_no == u2_rl_leap(wir_r, c3__cold) ) { return u2_none; }
           {
             hig = u2_wr_nock_here(wir_r, bus, yeq);
+            if ( u2_yes == u2_stud(hig) ) {
+              zep = hig; hod = u2_nul;
+            } else {
+              zep = u2_h(hig); hod = u2_t(hig);
+            }
           }
           u2_rl_fall(wir_r);
 
-          lut = u2_wr_nock_hint(wir_r, hig, bus, zom);
+          lut = u2_wr_nock_hint(wir_r, zep, hod, bus, zom);
 
           u2_rail_cap_r(wir_r) = bat_r;
           return lut;

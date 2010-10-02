@@ -4,15 +4,20 @@
 */
 #include "all.h"
 
-    /* u2_ba_init(): 
-    **
-    **   Initialize basket at `cap_r` for `siz_w` before `rut_r`.
-    */
-      u2_ray
-      u2_ba_init(u2_ray cap_r,
-                 c3_w   siz_w, 
-                 u2_ray rut_r);
-                
+/* u2_ba_init(): 
+**
+**   Initialize basket from rail partition, with parent if any.
+*/
+u2_ray
+u2_ba_init(u2_ray bas_r, 
+           u2_ray par_r)
+{
+  u2_bask_par_r(bas_r) = par_r;
+  u2_ch_init(u2_bask_cad_r(bas_r));
+
+  return bas_r;
+}
+ 
 /* u2_ba_find():
 **
 **   Basket search for `.*(bus fol)` in `bas`.
@@ -43,5 +48,5 @@ u2_ba_save(u2_ray  bas_r,
            u2_noun fol,
            u2_noun pro)
 {
-  u2_ch_save_cell(u2_bask_zon_r(bas_r), u2_bask_cad_r(bas_r), bus, fol, pro);
+  u2_ch_save_cell(bas_r, u2_bask_cad_r(bas_r), bus, fol, pro);
 }

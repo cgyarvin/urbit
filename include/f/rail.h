@@ -163,7 +163,8 @@
 
         /* u2_rl_leap_part():
         **
-        **   Reverse and split rail, inserting partition of size `num_w/dem_w`.
+        **   Reverse and split rail, inserting partition of size `num/dem`
+        **   plus `tip`. 
         **
         **   Returns partition rail, `aux_r`.
         */
@@ -171,7 +172,8 @@
           u2_rl_leap_part(u2_ray ral_r,
                           c3_m   hop_m,
                           c3_w   num_w,
-                          c3_w   dem_w);
+                          c3_w   dem_w,
+                          c3_w   tip_w);
         /* u2_rl_fall():
         **
         **   Reverse the beams backward, restoring the old frame.
@@ -227,6 +229,15 @@
           u2_rl_clear(u2_noun lef,
                       u2_ray  net_r,
                       u2_ray  bat_r);
+
+        /* u2_rl_junior():
+        **
+        **   Yes iff `dus` is junior in `ral` - ie, must be copied
+        **   to be referenced on the hat.
+        */
+          u2_flag
+          u2_rl_junior(u2_ray  ral_r,
+                       u2_noun dus);
 
         /* u2_rl_senior():
         **

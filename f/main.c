@@ -16,26 +16,48 @@ u2_wr_hint(u2_ray  wir_r,
            u2_noun bus,
            u2_noun fol)
 {
-  return u2_none;
+  switch ( zep ) {
+    default: return u2_none;
+
+    case c3__memo: {
+      u2_ray bas_r;
+
+      if ( 0 == (bas_r = u2_wire_bas_r(wir_r)) ) {
+        return u2_none;
+      } else {
+        u2_weak pro = u2_ba_find(bas_r, bus, fol);
+
+        if ( pro != u2_none ) {
+          printf("found mug %x\n", u2_mug_cell(bus, fol));
+          return pro;
+        } else {
+          printf("not found mug %x\n", u2_mug_cell(bus, fol));
+
+          if ( u2_none != (pro = u2_wr_nock_main(wir_r, bus, fol)) ) {
+            printf("saved mug %x\n", u2_mug_cell(bus, fol));
+            u2_ba_save(bas_r, bus, fol, pro);
+          }
+          return pro;
+        }
+      }
+    }
+  }
 }
 
 /* u2_wr_nock_hint():
 */
 u2_weak
 u2_wr_nock_hint(u2_ray  wir_r,
-                u2_noun hin,
+                u2_noun zep,
+                u2_noun hod,
                 u2_noun bus,
                 u2_noun fol)
 {
-  if ( u2_no == u2_dust(hin) ) {
-    return u2_wr_nock_main(wir_r, bus, fol);
-  } else {
-    u2_weak nuc = u2_wr_hint(wir_r, u2_h(hin), u2_t(hin), bus, fol); 
+  u2_weak nuc = u2_wr_hint(wir_r, zep, hod, bus, fol); 
 
-    if ( u2_none != nuc )
-      return nuc;
-    else return u2_wr_nock_main(wir_r, bus, fol);
-  }
+  if ( u2_none != nuc )
+    return nuc;
+  else return u2_wr_nock_main(wir_r, bus, fol);
 }
 
 /* u2_wr_nock_jet():

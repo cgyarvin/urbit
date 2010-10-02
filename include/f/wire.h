@@ -123,7 +123,8 @@
         */
           u2_weak
           u2_wr_nock_hint(u2_ray  wir_r,
-                          u2_noun hin,
+                          u2_noun zep,
+                          u2_noun hod,
                           u2_noun bus,
                           u2_noun fol);
 

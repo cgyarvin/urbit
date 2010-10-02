@@ -1071,13 +1071,13 @@ _vere_23(struct vere_state* v,
 }
 
 void
-u2_b_print(u2_ray wir_r, const c3_c* cap_c, u2_noun som)
+u2_b_print(const c3_c* cap_c, u2_noun som)
 {
   struct vere_state *v=Vere;
 
   u3_fox  por = _vere_23(v, som);
 
-  u3_b_print(v->z, 0, por);
+  u3_b_print(v->z, cap_c, por);
 }
 
 void
