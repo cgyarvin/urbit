@@ -4,46 +4,6 @@
 */
 #include "all.h"
 
-/* u2_wr_hint():
-**
-**   Hint directly in a modern style.  Returns `u2_none` if hint
-**   processing fails.
-*/
-u2_weak
-u2_wr_hint(u2_ray  wir_r,
-           u2_noun zep,
-           u2_noun hod,
-           u2_noun bus,
-           u2_noun fol)
-{
-  switch ( zep ) {
-    default: return u2_none;
-
-    case c3__memo: {
-      u2_ray bas_r;
-
-      if ( 0 == (bas_r = u2_wire_bas_r(wir_r)) ) {
-        return u2_none;
-      } else {
-        u2_weak pro = u2_ba_find(bas_r, bus, fol);
-
-        if ( pro != u2_none ) {
-          printf("found mug %x\n", u2_mug_cell(bus, fol));
-          return pro;
-        } else {
-          printf("not found mug %x\n", u2_mug_cell(bus, fol));
-
-          if ( u2_none != (pro = u2_wr_nock_main(wir_r, bus, fol)) ) {
-            printf("saved mug %x\n", u2_mug_cell(bus, fol));
-            u2_ba_save(bas_r, bus, fol, pro);
-          }
-          return pro;
-        }
-      }
-    }
-  }
-}
-
 /* u2_wr_nock_hint():
 */
 u2_weak
@@ -69,51 +29,42 @@ u2_wr_nock_jet(u2_ray  wir_r,
                u2_noun bus,
                u2_noun fol)
 {
-  u2_ray sad_r;
+  u2_noun dac = u2_sh_find(wir_r, bus);
 
-  if ( !(sad_r = u2_wire_sad_r(wir_r)) || (u2_no == u2_dust(bus)) ) {
+  if ( u2_none == dac ) {
     return u2_none;
-  }
-  else {
-    u2_noun pay = u2_h(bus);
-    u2_noun bat = u2_t(bus);
-    u2_noun dac = u2_none; // u2_sh_find(sad_r, pay, bat);
+  } else {
+    u2_noun pro;
+    c3_t    ver_t = c3_false;
 
-    if ( u2_none == dac ) {
+    if ( u2_none == (pro = u2_ho_fire(wir_r, dac, bus, fol, &ver_t)) ) {
       return u2_none;
-    } else {
-      u2_noun pro;
-      c3_t    ver_t = c3_false;
+    }
+    else {
+      if ( c3_false == ver_t ) {
+        return pro;
+      } else {
+        u2_noun vet;
 
-      if ( u2_none == (pro = u2_ho_fire(wir_r, dac, bus, fol, &ver_t)) ) {
-        return u2_none;
-      }
-      else {
-        if ( c3_false == ver_t ) {
-          return pro;
-        } else {
-          u2_noun vet;
+        if ( u2_no == u2_rl_leap(wir_r, u2_rail_hip_m(wir_r)) ) {
+          u2_rl_lose(wir_r, pro);
 
-          if ( u2_no == u2_rl_leap(wir_r, u2_rail_hip_m(wir_r)) ) {
-            u2_rl_lose(wir_r, pro);
+          return u2_none;
+        }
+        else if ( u2_none == (vet = u2_wr_nock_main(wir_r, bus, fol)) ) {
+          u2_ho_dive(wir_r, dac);
 
-            return u2_none;
-          }
-          else if ( u2_none == (vet = u2_wr_nock_main(wir_r, bus, fol)) ) {
+          u2_rl_fall(wir_r);
+          u2_rl_lose(wir_r, pro);
+
+          return u2_none;
+        }
+        else {
+          if ( u2_no == u2_sing(vet, pro) ) {
             u2_ho_dive(wir_r, dac);
-
-            u2_rl_fall(wir_r);
-            u2_rl_lose(wir_r, pro);
-
-            return u2_none;
           }
-          else {
-            if ( u2_no == u2_sing(vet, pro) ) {
-              u2_ho_dive(wir_r, dac);
-            }
-            u2_rl_fall(wir_r);
-            return pro;
-          }
+          u2_rl_fall(wir_r);
+          return pro;
         }
       }
     }

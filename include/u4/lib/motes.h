@@ -638,6 +638,7 @@
     u4_lib_mote(zero, u4_s4('z','e','r','o'))
     u4_lib_mote(zike, u4_s4('z','i','k','e'))
     u4_lib_mote(zole, u4_s4('z','o','l','e'))
+    u4_lib_mote(zond, u4_s4('z','o','n','d'))
     u4_lib_mote(zoot, u4_s4('z','o','o','t'))
     u4_lib_mote(zork, u4_s4('z','o','r','k'))
     u4_lib_mote(zush, u4_s4('z','u','s','h'))

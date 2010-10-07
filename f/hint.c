@@ -20,27 +20,28 @@ u2_wr_hint(u2_ray  wir_r,
     default: return u2_none;
 
     case c3__memo: {
-      u2_ray bas_r;
+      u2_weak pro = u2_ba_find(wir_r, bus, fol);
 
-      if ( !(bas_r = u2_wire_bas_r(wir_r) ) ) {
-        return u2_none;
-      }
-      else {
-        u2_noun pro;
-
-        if ( u2_none != (pro = u2_ba_find(bas_r, bus, fol)) ) {
-          return pro;
+      if ( pro != u2_none ) {
+        return pro;
+      } else {
+        if ( u2_none != (pro = u2_wr_nock_main(wir_r, bus, fol)) ) {
+          u2_bx_used(wir_r);
+          u2_ba_save(wir_r, bus, fol, pro);
         }
-        else {
-          if ( u2_none == (pro = u2_wr_nock_main(wir_r, bus, fol)) ) {
-            return u2_none;
-          } else {
-            u2_ba_save(bas_r, bus, fol, pro);
-            return pro;
-          }
-        }
+        return pro;
       }
     }
+
+    case c3__sole: {
+      u2_weak pro;
+
+      if ( u2_none != (pro = u2_wr_nock_main(wir_r, bus, fol)) ) {
+        u2_ba_sole(wir_r, pro);
+      }
+      return pro;
+    }
+
     case c3__mine: {
       u2_ray sad_r;
 
@@ -51,13 +52,12 @@ u2_wr_hint(u2_ray  wir_r,
         u2_noun cor = u2_wr_nock_main(wir_r, bus, fol);
 
         if ( u2_yes == u2_dust(cor) ) {
-          u2_noun pay = u2_ch(cor);
-          u2_noun bat = u2_ct(cor);
-          u2_noun bot;
+          u2_noun cyr = u2_sh_mine(wir_r, hod, cor);
 
-          bot = u2_sh_save(sad_r, hod, pay, bat);
-          if ( bot != bat ) {
-            cor = u2_rl_cell(wir_r, pay, bot);
+          if ( u2_none != cyr ) {
+            u2_rl_lose(wir_r, cor);
+
+            return cyr;
           }
         }
         return cor;

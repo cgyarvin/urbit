@@ -276,6 +276,7 @@ wide_c
     wide_norm: di_hopven body_l_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hopmit body_l_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hopdig body_a_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_hopben body_a_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_lomnub body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_lompod body_a_wide    { $$ = _ycell($1, $2); }
@@ -400,6 +401,7 @@ tall
 
     tall_norm: di_hopdax w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hopdig w body_a_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_hopben w body_a_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_lomnub w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_lompod w body_a_tall    { $$ = _ycell($1, $3); }
@@ -561,6 +563,7 @@ tall
     di_hopmit: si_hop si_mit  { $$ = u4_atom_zoot; }
     di_hopven: si_hop si_hop  { $$ = u4_atom_zike; }
     di_hopdig: si_hop si_dig  { $$ = u4_atom_zalt; }
+    di_hopben: si_hop si_ben  { $$ = u4_atom_zond; }
     
     di_lomnub: si_lom si_nub  { $$ = u4_atom_mast; }
     di_lompod: si_lom si_pod  { $$ = u4_atom_fist; }

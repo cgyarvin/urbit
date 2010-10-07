@@ -285,11 +285,13 @@ F_OFILES=\
        f/wire.o \
        f/chad.o \
        f/host.o \
+       f/hint.o \
        f/benx.o \
        f/bask.o \
        f/lame.o \
        f/flee.o \
        f/toss.o \
+       f/shed.o \
        f/main.o
 
 OFILES= \

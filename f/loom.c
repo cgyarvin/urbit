@@ -109,11 +109,13 @@ u2_frag(u2_atom a,
       0xa53ef834, 0x6f8b9c36, 0xb9e06f14, 0x76d680b9, 0x52ca46d8,  0x8445336,
       0xbb412e03, 0x2ae29f22, 0xeec357b8, 0x45bd2fb7
     };
-    
-    return cog_w[(nud_w >> 0) & 255] +
-           cog_w[(nud_w >> 8) & 255] +
-           cog_w[(nud_w >> 16) & 255] +
-           cog_w[(nud_w >> 24) & 255];
+   
+    nud_w ^= cog_w[(nud_w >> 0) & 255];
+    nud_w ^= cog_w[(nud_w >> 8) & 255];
+    nud_w ^= cog_w[(nud_w >> 16) & 255];
+    nud_w ^= cog_w[(nud_w >> 24) & 255];
+
+    return nud_w;
   }
 
 static c3_w
@@ -199,9 +201,6 @@ u2_mug_cell(u2_noun hed,
     c3_w dav_w = 0x7fffffff & _mash(hur_w);
 
     if ( dav_w ) {
-      if ( dav_w == 0x4bc48e ) {
-        printf("4bc48e lus %x biq %x\n", lus_w, biq_w);
-      }
       return dav_w;
     } 
     else hur_w++;

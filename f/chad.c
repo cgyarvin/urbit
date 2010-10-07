@@ -103,6 +103,7 @@ u2_ch_find_cell(u2_ray  cad_r,
                (u2_yes == u2_sing(hed, u2_h(nom))) &&
                (u2_yes == u2_sing(tal, u2_t(nom))) )
           {
+            printf("conflict found: %x\n", mug_w);
             return *u2_at(per_r, u2_loom_pear, val);
           }
         }
@@ -132,16 +133,19 @@ u2_ch_find_cell(u2_ray  cad_r,
       }
       else {
         if ( u2_mug(nom) == mug_w ) {
-          printf("mug conflict! %x %x; %x %x\n", 
-              u2_mug(hed), u2_mug(u2_h(nom)),
-              u2_mug_cell(u2_h(nom), u2_t(nom)), u2_mug(nom));
-
+          printf("mug conflict %x\n", mug_w);
+          if ( u2_no == u2_sing(hed, u2_h(nom)) ) {
+            printf("hed conflict! %x %x\n", u2_mug(hed), u2_mug(u2_h(nom)));
+            printf("sam %d, %d\n", u2_h(u2_h(hed)), u2_h(u2_h(u2_h(nom))));
+          }
         }
         return u2_none;
       }
     }
   }
 }
+
+extern int FOO;
 
 /* _ch_save(): as u2_ch_save(), with mug and offset, and iced nouns.
 */
@@ -160,6 +164,7 @@ _ch_save(u2_ray  ral_r,
       */
       c3_w i_w;
 
+      printf("conflict: %x\n", mug_w);
       for ( i_w = 0; i_w < 16; i_w++ ) {
         u2_ray  per_r = (cad_r + (c3_wiseof(u2_loom_pear) * i_w));
         u2_noun nom = *u2_at(per_r, u2_loom_pear, nam);
@@ -262,6 +267,7 @@ u2_ch_save_cell(u2_ray  ral_r,
   u2_weak hid, til, nim, vil;
 
   if ( u2_none == (hid = u2_rl_ice(ral_r, hed)) ) {
+    c3_assert(0);
     return u2_no;
   }
   if ( u2_none == (til = u2_rl_ice(ral_r, tal)) ) {
@@ -269,11 +275,13 @@ u2_ch_save_cell(u2_ray  ral_r,
     return u2_no;
   }
   if ( u2_none == (nim = u2_rl_cell(ral_r, hid, til)) ) {
+    c3_assert(0);
     u2_rl_lose(ral_r, hid);
     u2_rl_lose(ral_r, til);
     return u2_no;
   }
   if ( u2_none == (vil = u2_rl_ice(ral_r, val)) ) {
+    c3_assert(0);
     u2_rl_lose(ral_r, nim);
     return u2_no;
   }

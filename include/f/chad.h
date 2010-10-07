@@ -64,6 +64,8 @@
     **
     **   Save `val` under `nam` in `cad`, allocating in `zon`.
     **   Return `u2_no` iff allocation fails.  Asserts on duplicate.
+    **
+    **   Caller retains ownership of arguments.
     */
       u2_flag
       u2_ch_save(u2_ray  zon_r,
@@ -75,6 +77,8 @@
     **
     **   Save `val` under `[hed tal]` in `cad`, allocating in `zon`.
     **   Return `u2_no` iff allocation fails.  Asserts on duplicate.
+    **
+    **   Caller retains ownership of arguments.
     */
       u2_flag
       u2_ch_save_cell(u2_ray  zon_r,

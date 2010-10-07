@@ -297,7 +297,7 @@
           u2_rl_cell(u2_ray  ral_r,
                      u2_noun a,
                      u2_noun b);
-#         define u2_zc(ral_r, a, b) u2_rl_cell(ral_r, a, b)
+#         define u2_rc(ral_r, a, b) u2_rl_cell(ral_r, a, b)
 
         /* u2_rl_ice():
         **
@@ -334,7 +334,7 @@
                      u2_noun b,
                      u2_noun c,
                      u2_noun d);
-#         define u2_zq(ral_r, a, b, c, d) u2_rl_trel(ral_r, a, b, c, d)
+#         define u2_rq(ral_r, a, b, c, d) u2_rl_trel(ral_r, a, b, c, d)
 
         /* u2_rl_trel(): 
         **
@@ -345,7 +345,7 @@
                      u2_noun a,
                      u2_noun b,
                      u2_noun c);
-#         define u2_zt(ral_r, a, b, c) u2_rl_trel(ral_r, a, b, c)
+#         define u2_rt(ral_r, a, b, c) u2_rl_trel(ral_r, a, b, c)
 
         /* u2_rl_words():
         **

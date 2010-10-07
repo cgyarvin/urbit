@@ -169,8 +169,8 @@ _lame(u2_ray  wir_r,
           } else {
             return u2_wr_nock_lame
               (wir_r,
-               u2_zc(wir_r,
-                     u2_zc(wir_r, vud, u2_t(u2_h(pec))),
+               u2_rc(wir_r,
+                     u2_rc(wir_r, vud, u2_t(u2_h(pec))),
                      u2_t(pec)),
                u2_t(pec));
           }

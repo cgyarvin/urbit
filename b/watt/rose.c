@@ -368,6 +368,11 @@ _rose_gain(u4_plow p,
  
       return u4_kc(lan, u4_nock_bone, yoz);
     }
+    else if ( u4_b_p(gen, u4_atom_zond, &p_gen) ) {
+      u4_type yoz = _rose_make(p, sut, p_gen);
+ 
+      return u4_kc(lan, u4_nock_bone, yoz);
+    }
     else if ( u4_b_pq(gen, u4_atom_bran, &p_gen, &q_gen) ) {
       return _rose_make(p, sut, q_gen);
     }
@@ -777,6 +782,9 @@ _rose_orth(u4_plow p,
     else if ( u4_b_p(gen, u4_atom_zalt, &p_gen) ) {
       return u4_k_cell(lan, u4_atom_cube, _rose_play(p, sut, p_gen));
     }
+    else if ( u4_b_p(gen, u4_atom_zond, &p_gen) ) {
+      return u4_k_cell(lan, u4_atom_cube, _rose_make(p, sut, p_gen));
+    }
     else if ( u4_b_pq(gen, u4_atom_bran, &p_gen, &q_gen) ) {
       return u4_k_trel(lan, u4_atom_face, p_gen, _rose_play(p, sut, q_gen));
     }
@@ -1096,7 +1104,10 @@ _rose_seek(u4_plow p,
       return u4_yes;
     }
     else if ( u4_b_p(gen, u4_atom_zalt, &p_gen) ) {
-      return u4_yes;
+      return _rose_show(p, sut, p_gen);
+    }
+    else if ( u4_b_p(gen, u4_atom_zond, &p_gen) ) {
+      return _rose_show(p, sut, p_gen);
     }
     else if ( u4_b_pq(gen, u4_atom_bran, &p_gen, &q_gen) ) {
       return _rose_show(p, sut, q_gen);

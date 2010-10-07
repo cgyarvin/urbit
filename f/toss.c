@@ -10,8 +10,8 @@
 */
 static u2_weak
 _toss(u2_ray  wir_r,
-           u2_noun bus,
-           u2_noun fol)
+      u2_noun bus,
+      u2_noun fol)
 {
   u2_noun hib, gal;
 
@@ -328,6 +328,7 @@ _toss(u2_ray  wir_r,
           u2_rl_fall(wir_r);
 
           lut = u2_wr_nock_hint(wir_r, zep, hod, bus, zom);
+          u2_rl_lose(wir_r, bus);
           u2_rail_cap_r(wir_r) = bat_r;
 
           return lut;

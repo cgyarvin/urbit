@@ -200,6 +200,7 @@ u2_rl_leap_part(u2_ray ral_r,
       if ( (siz_w < 64) || (gap_w < (siz_w + 64)) ) {
         /* Entirely arbitrary, excessive and unfair.
         */
+        u2_ho_warn_here();
         return 0;
       }
     }
@@ -466,6 +467,7 @@ _rl_bloq_grab(u2_ray ral_r,
     /* Cold allocation - without a box.
     */
     if ( u2_no == u2_rl_open(ral_r, len_w) ) {
+      u2_ho_warn_here();
       return 0;
     }
     else { 
@@ -489,6 +491,7 @@ _rl_bloq_grab(u2_ray ral_r,
         /* Nothing found in the free list.  Try to allocate on the hat.
         */
         if ( u2_no == u2_rl_open(ral_r, siz_w) ) {
+          u2_ho_warn_here();
           return 0;
         }
         else { 
@@ -1081,6 +1084,7 @@ u2_rl_bytes(u2_ray      ral_r,
 
     if ( u2_no == u2_rl_open(ral_r, 
                              (len_w + c3_wiseof(u2_loom_atom))) ) {
+      u2_ho_warn_here();
       return u2_none;
     }
     else { 
@@ -1149,16 +1153,12 @@ u2_rl_cell(u2_ray  ral_r,
   /* Seniority restrictions.  Ice if these cannot be met.
   */
   {
-    c3_assert(u2_fly_is_cat(a) ||
-              (u2_ray_a(u2_dog_a(a)) == u2_ray_a(u2_rail_hat_r(ral_r))) ||
-              (u2_dog_a(a) < u2_rail_mat_r(ral_r)));
-
-    c3_assert(u2_fly_is_cat(b) ||
-              (u2_ray_a(u2_dog_a(b)) == u2_ray_a(u2_rail_hat_r(ral_r))) ||
-              (u2_dog_a(b) < u2_rail_mat_r(ral_r)));
+    c3_assert(u2_no == u2_rl_junior(ral_r, a));
+    c3_assert(u2_no == u2_rl_junior(ral_r, b));
   }
 
   if ( u2_no == u2_rl_open(ral_r, c3_wiseof(u2_loom_cell)) ) {
+    u2_ho_warn_here();
     return u2_none;
   }
   else {
@@ -1184,175 +1184,80 @@ u2_weak
 u2_rl_ice(u2_ray  ral_r,
           u2_noun fiz)
 {
-  if ( u2_fly_is_cat(fiz) ) {
-    return fiz;
-  }
-  else {
-    u2_ray fiz_ray = u2_dog_a(fiz);
+  if ( u2_no == u2_rl_junior(ral_r, fiz) ) {
+    u2_rl_gain(ral_r, fiz);
 
-    if ( (u2_ray_a(fiz_ray) == u2_ray_a(u2_rail_hat_r(ral_r)) ) ) {
-      u2_rl_gain(ral_r, fiz);
-      return fiz;
-    }
-    else {
-      if ( (fiz_ray < u2_rail_mat_r(ral_r)) ) {
-        return fiz;
+    return fiz;
+  } else {
+    if ( u2_dog_is_pom(fiz) ) {
+      if ( u2_no == u2_rl_open(ral_r, c3_wiseof(u2_loom_cell)) ) {
+        u2_ho_warn_here();
+
+        return u2_none;
       }
       else {
-        if ( u2_dog_is_pom(fiz) ) {
-          if ( u2_no == u2_rl_open(ral_r, c3_wiseof(u2_loom_cell)) ) {
-            return u2_none;
-          }
-          else {
-            u2_weak hed, tel;
-            u2_ray nov_r;
-            u2_noun nov;
-
-            if ( u2_none == (hed = u2_rl_ice(ral_r, *u2_at_pom_hed(fiz))) ) {
-              return u2_none;
-            }
-            if ( u2_none == (tel = u2_rl_ice(ral_r, *u2_at_pom_tel(fiz))) ) {
-              u2_rl_lose(ral_r, hed);
-              return u2_none;
-            }
-
-            nov_r = _rl_bloq_grab(ral_r, c3_wiseof(u2_loom_cell));
-            if ( 0 == nov_r ) {
-              u2_rl_lose(ral_r, hed);
-              u2_rl_lose(ral_r, tel);
-              return u2_none;
-            }
-            nov = u2_pom_of(nov_r, 0);
-
-            *u2_at_dog_mug(nov) = *u2_at_dog_mug(fiz);
-            *u2_at_pom_hed(nov) = hed;
-            *u2_at_pom_tel(nov) = tel;
-
-            // u2_rail_cop(ral_r) += 3;
-            return nov;
-          }
-        }
-        else {
-          c3_w len_w = *u2_at_pug_len(fiz);
-          u2_ray nov_r;
-          u2_noun nov;
-
-          nov_r = _rl_bloq_grab(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
-          if ( 0 == nov_r ) {
-            return u2_none;
-          }
-
-          nov = u2_pug_of(nov_r, 0);
-
-          *u2_at_dog_mug(nov) = 0;
-          *u2_at_pug_len(nov) = len_w;
-
-          /* Fill the pug.
-          */
-          {
-            c3_w i_w;
-
-            for ( i_w=0; i_w < len_w; i_w++ ) {
-              *u2_at_pug_buf(nov, i_w) = *u2_at_pug_buf(fiz, i_w);
-            }
-          }
-
-          // u2_rail_cop(ral_r) += (2 + len_w);
-          return nov;
-        }
-      }
-    }
-  }
-}
-
-#if 0
-/* u2_rl_ice():
-**
-**   Produce `a`, not referencing the can.  Copy or gain reference.
-*/
-u2_weak
-u2_rl_ice(u2_ray  ral_r,
-          u2_noun fiz)
-{
-  if ( u2_fly_is_cat(fiz) ) {
-    return fiz;
-  }
-  else {
-    u2_ray cap_r = u2_rail_cap_r(ral_r);
-    u2_ray mat_r = u2_rail_mat_r(ral_r);
-    u2_ray fiz_r = u2_dog_a(fiz);
-
-    if ( u2_ray_a(fiz_r) != u2_ray_a(cap_r) ) fiz_r = u2_ray_over(fiz_r, 1);
-    
-    if ( (fiz_r < mat_r) || (fiz_r >= cap_r) ) {
-      return fiz;
-    }
-    else {
-      if ( u2_dog_is_pom(fiz) ) {
-        if ( u2_no == u2_rl_open(ral_r, c3_wiseof(u2_loom_cell)) ) {
-          return u2_none;
-        }
-        else {
-          u2_weak hed, tel;
-          u2_ray nov_r;
-          u2_noun nov;
-
-          if ( u2_none == (hed = u2_rl_ice(ral_r, *u2_at_pom_hed(fiz))) ) {
-            return u2_none;
-          }
-          if ( u2_none == (tel = u2_rl_ice(ral_r, *u2_at_pom_tel(fiz))) ) {
-            u2_rl_lose(ral_r, hed);
-            return u2_none;
-          }
-
-          nov_r = _rl_bloq_grab(ral_r, c3_wiseof(u2_loom_cell));
-          if ( 0 == nov_r ) {
-            u2_rl_lose(ral_r, hed);
-            u2_rl_lose(ral_r, tel);
-            return u2_none;
-          }
-          nov = u2_pom_of(nov_r, 0);
-
-          *u2_at_dog_mug(nov) = *u2_at_dog_mug(fiz);
-          *u2_at_pom_hed(nov) = hed;
-          *u2_at_pom_tel(nov) = tel;
-
-          // u2_rail_cop(ral_r) += 3;
-          return nov;
-        }
-      }
-      else {
-        c3_w len_w = *u2_at_pug_len(fiz);
+        u2_weak hed, tel;
         u2_ray nov_r;
         u2_noun nov;
 
-        nov_r = _rl_bloq_grab(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
-        if ( 0 == nov_r ) {
+        if ( u2_none == (hed = u2_rl_ice(ral_r, *u2_at_pom_hed(fiz))) ) {
+          u2_ho_warn_here();
+
+          return u2_none;
+        }
+        if ( u2_none == (tel = u2_rl_ice(ral_r, *u2_at_pom_tel(fiz))) ) {
+          u2_ho_warn_here();
+
+          u2_rl_lose(ral_r, hed);
           return u2_none;
         }
 
-        nov = u2_pug_of(nov_r, 0);
+        nov_r = _rl_bloq_grab(ral_r, c3_wiseof(u2_loom_cell));
+        if ( 0 == nov_r ) {
+          u2_ho_warn_here();
 
-        *u2_at_dog_mug(nov) = 0;
-        *u2_at_pug_len(nov) = len_w;
-
-        /* Fill the pug.
-        */
-        {
-          c3_w i_w;
-
-          for ( i_w=0; i_w < len_w; i_w++ ) {
-            *u2_at_pug_buf(nov, i_w) = *u2_at_pug_buf(fiz, i_w);
-          }
+          u2_rl_lose(ral_r, hed);
+          u2_rl_lose(ral_r, tel);
+          return u2_none;
         }
+        nov = u2_pom_of(nov_r, 0);
 
-        // u2_rail_cop(ral_r) += (2 + len_w);
+        *u2_at_dog_mug(nov) = *u2_at_dog_mug(fiz);
+        *u2_at_pom_hed(nov) = hed;
+        *u2_at_pom_tel(nov) = tel;
+ 
+        c3_assert(u2_no == u2_rl_junior(ral_r, nov));
         return nov;
       }
     }
+    else {
+      c3_w len_w = *u2_at_pug_len(fiz);
+      u2_ray nov_r;
+      u2_noun nov;
+
+      nov_r = _rl_bloq_grab(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
+      if ( 0 == nov_r ) {
+        u2_ho_warn_here();
+
+        return u2_none;
+      }
+
+      nov = u2_pug_of(nov_r, 0);
+
+      *u2_at_dog_mug(nov) = 0;
+      *u2_at_pug_len(nov) = len_w;
+      {
+        c3_w i_w;
+
+        for ( i_w=0; i_w < len_w; i_w++ ) {
+          *u2_at_pug_buf(nov, i_w) = *u2_at_pug_buf(fiz, i_w);
+        }
+      }
+      c3_assert(u2_no == u2_rl_junior(ral_r, nov));
+      return nov;
+    }
   }
 }
-#endif
 
 /* u2_rl_mp():
 **
@@ -1388,7 +1293,18 @@ u2_rl_qual(u2_ray  ral_r,
            u2_noun c,
            u2_noun d)
 {
-  return u2_rl_cell(ral_r, a, u2_rl_trel(ral_r, b, c, d));
+  u2_weak hem = u2_rl_trel(ral_r, b, c, d);
+  
+  if ( u2_none == hem ) {
+    return u2_none;
+  } else {
+    u2_weak nar = u2_rl_cell(ral_r, a, hem);
+
+    if ( u2_none == nar ) {
+      u2_rl_lose(ral_r, hem);
+    }
+    return nar;
+  }
 }
 
 /* u2_rl_trel(): 
@@ -1401,7 +1317,18 @@ u2_rl_trel(u2_ray  ral_r,
            u2_noun b,
            u2_noun c)
 {
-  return u2_rl_cell(ral_r, a, u2_rl_cell(ral_r, b, c));
+  u2_weak hem = u2_rl_cell(ral_r, b, c);
+  
+  if ( u2_none == hem ) {
+    return u2_none;
+  } else {
+    u2_weak nar = u2_rl_cell(ral_r, a, hem);
+
+    if ( u2_none == nar ) {
+      u2_rl_lose(ral_r, hem);
+    }
+    return nar;
+  }
 }
 
 /* u2_rl_words():

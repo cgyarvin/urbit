@@ -558,3 +558,13 @@ u2_ho_dive(u2_ray  wir_r,
   printf("ho: dive!\n");
   c3_assert(0);
 }
+
+/* u2_ho_warn(): report a warning, file and line.
+*/
+void
+u2_ho_warn(const c3_c* fil_c,
+           c3_w        lyn_w)
+{
+  fprintf(stderr, "warn: %s:%u\n", fil_c, lyn_w);
+}
+

@@ -1136,7 +1136,7 @@ _vere_report(u2_ray wir_r)
     if ( use_d ) {
       printf(", ");
       _vere_print_superdecimal_d(use_d);
-      printf("shots");
+      printf(" used");
     }
     printf("; ");
     _vere_print_superdecimal_w(moc_w);
@@ -1185,13 +1185,14 @@ vere_line2(void* vere, const c3_c* lin_c)
       fel = _vere_xz(v, fel);
       gux = _vere_xz(v, gux);
 
+#if 0
       /* Test with u3, x.
       */
       {
         u3_fox bim = _vere_munz(v, fel, gux, 1);
         u3_b_print(v->z, 0, bim);
       }
-
+#endif
       /* Test with u2.
       */
       {
@@ -1200,16 +1201,15 @@ vere_line2(void* vere, const c3_c* lin_c)
         {
           u2_noun fun = _vere_32(v, fel);
           u2_noun par = _vere_32(v, gux);
-          u2_noun fol = u2_t(fun);
-          u2_noun bus = u2_zc(v->wir_r,
-                              u2_zc(v->wir_r, par, u2_t(u2_h(fun))),
+          u2_noun fol = u2_ba_sole(v->wir_r, u2_t(fun));
+          u2_noun bus = u2_rc(v->wir_r,
+                              u2_rc(v->wir_r, par, u2_t(u2_h(fun))),
                               fol);
 
-          u2_rl_leap(v->wir_r, c3__cold);
-          // u2_rl_leap(v->wir_r, c3__warm);
+          // u2_rl_leap(v->wir_r, c3__cold);
+          u2_rl_leap(v->wir_r, c3__warm);
           {
             u2_noun pro = u2_wr_nock_main(v->wir_r, bus, fol);
-            // u2_noun pro = u2_wr_nock_lame(v->wir_r, bus, fol);
             u3_fox  por = _vere_23(v, pro);
 
             u3_b_print(v->z, 0, por);

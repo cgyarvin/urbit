@@ -124,3 +124,12 @@
     */
       void
       u2_bx_mark(u2_ray wir_r);
+
+    /* u2_bx_warn(): report a warning at file and line.
+    */
+      void
+      u2_bx_warn(u2_ray      wir_r,
+                 const c3_c* fil_c,
+                 c3_w        lyn_w);
+#     define u2_bx_warn_here(wir_r) u2_bx_warn(wir_r, __FILE__, __LINE__)
+

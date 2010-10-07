@@ -26,9 +26,11 @@ u2_bx_boot(u2_ray wir_r)
       u2_benx_at(bex_r, wab_r) = u2_rail_cap_r(wir_r);
       u2_benx_at(bex_r, eab_r) = u2_rail_hat_r(wir_r);
     } else {
-      u2_benx_at(bex_r, wab_r) = u2_rail_cap_r(wir_r);
-      u2_benx_at(bex_r, eab_r) = u2_rail_hat_r(wir_r);
+      u2_benx_at(bex_r, wab_r) = u2_rail_hat_r(wir_r);
+      u2_benx_at(bex_r, eab_r) = u2_rail_cap_r(wir_r);
     }
+    u2_benx_at(bex_r, wst_r) = u2_benx_at(bex_r, wab_r);
+    u2_benx_at(bex_r, est_r) = u2_benx_at(bex_r, eab_r);
 
     {
       struct timeval tv;
