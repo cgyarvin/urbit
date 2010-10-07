@@ -29,19 +29,19 @@ u2_wr_nock_jet(u2_ray  wir_r,
                u2_noun bus,
                u2_noun fol)
 {
-  u2_noun dac = u2_sh_find(wir_r, bus);
+  u2_noun xip = u2_sh_find(wir_r, bus);
 
-  if ( u2_none == dac ) {
+  if ( u2_none == xip ) {
     return u2_none;
   } else {
     u2_noun pro;
-    c3_t    ver_t = c3_false;
+    u2_flag saf;
 
-    if ( u2_none == (pro = u2_ho_fire(wir_r, dac, bus, fol, &ver_t)) ) {
+    if ( u2_none == (pro = u2_ho_fire(wir_r, xip, bus, fol, &saf)) ) {
       return u2_none;
     }
     else {
-      if ( c3_false == ver_t ) {
+      if ( u2_yes == saf ) {
         return pro;
       } else {
         u2_noun vet;
@@ -52,7 +52,7 @@ u2_wr_nock_jet(u2_ray  wir_r,
           return u2_none;
         }
         else if ( u2_none == (vet = u2_wr_nock_main(wir_r, bus, fol)) ) {
-          u2_ho_dive(wir_r, dac);
+          u2_ho_dive(wir_r, xip);
 
           u2_rl_fall(wir_r);
           u2_rl_lose(wir_r, pro);
@@ -61,7 +61,7 @@ u2_wr_nock_jet(u2_ray  wir_r,
         }
         else {
           if ( u2_no == u2_sing(vet, pro) ) {
-            u2_ho_dive(wir_r, dac);
+            u2_ho_dive(wir_r, xip);
           }
           u2_rl_fall(wir_r);
           return pro;

@@ -4,21 +4,26 @@
 */
   /** Functions.
   **/
-    /* u2_ho_boot(): 
+    /* u2_ho_push(): 
     **
-    **   Boot driver system.  Note that all birds and
-    **   tools are considered permanent between reboots.
+    **   Push a driver hangar (corresponding to a jet shed).
     */
       void
-      u2_ho_boot();
+      u2_ho_push(void);
 
-    /* u2_ho_reset(): 
+    /* u2_ho_popp(): 
     **
-    **   Reboot driver system.  Note that all birds and
-    **   tools are considered permanent between reboots.
+    **   Pop a driver hangar.
     */
       void
-      u2_ho_reset();
+      u2_ho_popp(void);
+
+    /* u2_ho_klar():
+    **
+    **   Clear and release all hangars.
+    */
+      void
+      u2_ho_klar(void);
 
     /* u2_ho_warn(): 
     **
@@ -31,23 +36,36 @@
 
 #     define u2_ho_warn_here() u2_ho_warn(__FILE__, __LINE__)
 
-    /* u2_ho_fire(): 
-    **
-    **   Drive in OID to formula.  Core prevalidated.
-    **
-    **   If *ver_t is 1, caller must check result.
-    */
-      u2_weak
-      u2_ho_fire(u2_ray  wir_r,
-                 u2_noun oid,
-                 u2_noun cor,
-                 u2_noun fol,
-                 c3_t*   ver_t);
-
     /* u2_ho_dive():
     **
-    **   Report compatibility failure in `dac`.  May not return.
+    **   Report compatibility failure in `xip`. 
     */
       void
       u2_ho_dive(u2_ray  wir_r,
-                 u2_noun dac);
+                 u2_noun xip);
+
+    /* u2_ho_fire(): 
+    **
+    **   Attempt host nock driver on `xip`, `cor`, `fol`.
+    **   For any failure to compute, return `u2_none`.
+    **
+    **   If `*saf` is u2_no, result is unsafe and needs testing.
+    */
+      u2_weak
+      u2_ho_fire(u2_ray   wir_r,
+                 u2_chip  xip,
+                 u2_noun  cor,
+                 u2_noun  fol,
+                 u2_flag* saf);
+
+    /* u2_ho_kick():
+    **
+    **   As `u2_ho_fire()`, but by axis instead of formula.
+    */
+      u2_weak
+      u2_ho_kick(u2_ray   wir_r,
+                 u2_chip  xip,
+                 u2_noun  cor,
+                 u2_atom  axe,
+                 u2_flag* saf);
+

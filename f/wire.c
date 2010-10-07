@@ -39,7 +39,7 @@ u2_wr_init(c3_m   hip_m,
   }
 #endif
 
-#if 0
+#if 1
   /* Jet shed = 1/32 of address space.
   */
   {
@@ -49,6 +49,8 @@ u2_wr_init(c3_m   hip_m,
     sad_r = u2_rl_leap_part(wir_r, c3__cold, 1, 32, tip_w);
     u2_wire_sad_r(wir_r) = sad_r;
     u2_sh_init(wir_r);
+
+    u2_ho_push();
   }
 #endif
 

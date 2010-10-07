@@ -3,7 +3,6 @@
 ** This file is in the public domain.
 */
 #include "all.h"
- 
   /** Types.
   **/
     /* u2_ho_jet: a C function, per formula.
@@ -15,9 +14,9 @@
         */
         const c3_c* cos_c;
 
-        /* disc: battery identifier.
+        /* chip: battery identifier.
         */
-        u2_disc dac;
+        u2_chip xip;
 
         /* Tool: Nock formula.
         */
@@ -35,7 +34,7 @@
     /* u2_ho_driver: battery driver.
     */
       typedef struct {
-        /* Control string - matches disc from C:
+        /* Control string - matches chip from C:
         **
         **    cos: kid | kid__cos
         **    kid: pro ver
@@ -44,9 +43,9 @@
         */
         const c3_c* cos_c;
       
-        /* disc: battery identifier, from shed.
+        /* chip: battery identifier, from shed.
         */
-        u2_disc dac;
+        u2_chip xip;
 
         /* Mug: short hash of battery, or 0.  Must match if set.
         */
@@ -72,22 +71,26 @@
 
     /* u2_ho_hangar: driver system.
     */
-      typedef struct {
+      typedef struct _u2_ho_hangar {
         /* Cache from formula to jet.
         */
         u2_ho_cash jac_s;
 
-        /* Cache from disc to driver.
+        /* Cache from chip to driver.
         */
         u2_ho_cash bad_s;
+
+        /* Next hangar in stack.
+        */
+        struct _u2_ho_hangar *nex_h;
       } u2_ho_hangar;
 
 
   /** Global structures.
   **/
-    /* Static hangar.
+    /* Hangar stack; top hangar is active.
     */
-      static u2_ho_hangar JetHangar;
+      u2_ho_hangar *JetHangar;
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
@@ -279,12 +282,12 @@ _ho_mop_mark(c3_c *buf_c, u2_noun mek)
   }
 }
 
-/* _ho_mop_cost(): measure/print control string, malloced, from disc.
+/* _ho_mop_cost(): measure/print control string, from chip.
 */
 static c3_w
-_ho_mop_cost(c3_c *buf_c, u2_noun dac)
+_ho_mop_cost(c3_c *buf_c, u2_noun xip)
 {
-  u2_noun nid = u2_h(dac);
+  u2_noun nid = u2_h(xip);
   u2_noun pop = u2_h(nid);
   u2_noun mek = u2_t(nid);
 
@@ -303,44 +306,122 @@ _ho_mop_cost(c3_c *buf_c, u2_noun dac)
   }
 }
 
+/* _ho_cstring(): return malloced control string for `xip`.
+*/
+static c3_c*
+_ho_cstring(u2_noun xip)
+{
+  c3_w len_w = _ho_mop_cost(0, xip);
+  c3_c *cos_c;
+
+  if ( !(cos_c = malloc(len_w + 1)) ) abort();
+
+  _ho_mop_cost(cos_c, xip);
+  cos_c[len_w] = 0;
+
+  return cos_c;
+}
+
 /* u2_ho_boot(): 
 **
-**   Boot driver system.  Note that all discs and
+**   Boot driver system.  Note that all chips and
 **   tools are considered permanent between reboots.
 */
-void
-u2_ho_boot()
+static void
+_ho_boot(u2_ho_hangar *hag)
 {
-  _ho_cash_init(&JetHangar.jac_s);
-  _ho_cash_init(&JetHangar.bad_s);
+  _ho_cash_init(&hag->jac_s);
+  _ho_cash_init(&hag->bad_s);
 
   {
     c3_w i_w, j_w;
 
     for ( i_w=0; JetBase[i_w].cos_c; i_w++ ) {
-      JetBase[i_w].dac = u2_none;
+      JetBase[i_w].xip = u2_none;
 
       for ( j_w=0; JetBase[i_w].fan_j[j_w].cos_c; j_w++ ) {
-        JetBase[i_w].fan_j[j_w].dac = u2_none;
+        JetBase[i_w].fan_j[j_w].xip = u2_none;
         JetBase[i_w].fan_j[j_w].fol = u2_none;
       }
     }
   }
 }
 
-/* u2_ho_reset(): 
+/* _ho_down(): 
 **
-**   Reboot driver system.  Note that all discs and
-**   tools are considered permanent between reboots.
+**   Release all resources in `hag`.
+*/
+static void
+_ho_down(u2_ho_hangar *hag)
+{
+  _ho_cash_free(&hag->jac_s);
+  _ho_cash_free(&hag->bad_s);
+}
+
+/* u2_ho_push(): 
+**
+**   Push a driver hangar (corresponding to a jet shed).
 */
 void
-u2_ho_reset()
+u2_ho_push(void)
 {
-  _ho_cash_free(&JetHangar.jac_s);
-  _ho_cash_free(&JetHangar.bad_s);
+  u2_ho_hangar *hag = malloc(sizeof(u2_ho_hangar));
 
-  _ho_cash_init(&JetHangar.jac_s);
-  _ho_cash_init(&JetHangar.bad_s);
+  _ho_boot(hag);
+  hag->nex_h = JetHangar;
+  JetHangar = hag;
+}
+
+/* u2_ho_popp():
+**
+**  Pop a hangar.
+*/
+void
+u2_ho_popp(void)
+{
+  u2_ho_hangar *hag = JetHangar;
+  u2_ho_hangar *nex_h = hag->nex_h;
+
+  _ho_down(hag);
+  free(hag);
+  JetHangar = nex_h;
+}
+
+/* u2_ho_klar():
+**
+**   Clear and release all hangars.
+*/
+void
+u2_ho_klar(void)
+{
+  while ( JetHangar ) {
+    u2_ho_popp();
+  }
+}
+
+/* u2_ho_warn(): report a warning, file and line.
+*/
+void
+u2_ho_warn(const c3_c* fil_c,
+           c3_w        lyn_w)
+{
+  fprintf(stderr, "ho: warn: %s:%u\n", fil_c, lyn_w);
+}
+
+/* u2_ho_dive():
+**
+**   Report compatibility failure in `xip`. 
+*/
+void
+u2_ho_dive(u2_ray  wir_r,
+           u2_noun xip)
+{
+  c3_c *cos_c = _ho_cstring(xip);
+
+  printf("ho: jet dive: %s\n", cos_c);
+  free(cos_c);
+
+  c3_assert(0);
 }
 
 /* _ho_execute(): execute jet.
@@ -399,8 +480,8 @@ _ho_select(u2_ray        wir_r,
   for ( i_w = 0; dry_d->fan_j[i_w].cos_c; i_w++ ) {
     jet_j = &dry_d->fan_j[i_w];
 
-    if ( u2_none == jet_j->dac ) {
-      jet_j->dac = dry_d->dac;
+    if ( u2_none == jet_j->xip ) {
+      jet_j->xip = dry_d->xip;
     }
     if ( u2_none == jet_j->fol ) {
       c3_w    axe_w;
@@ -413,7 +494,7 @@ _ho_select(u2_ray        wir_r,
       }
       else {
         c3_assert(0);   // hooks not yet supported
-        // axe = u2_be_hook(dry_d->dac, jet_j->cos_c);
+        // axe = u2_be_hook(dry_d->xip, jet_j->cos_c);
       }
       jet_j->fol = u2_frag(axe, cor);
       c3_assert(u2_none != jet_j->fol);
@@ -421,7 +502,7 @@ _ho_select(u2_ray        wir_r,
     if ( u2_yes == u2_sing(fol, jet_j->fol) ) {
       printf("jet: found %s\n", jet_j->cos_c);
 
-      _ho_cash_save(&JetHangar.jac_s, jet_j->fol, jet_j);
+      _ho_cash_save(&JetHangar->jac_s, jet_j->fol, jet_j);
       return jet_j;
     }
   }
@@ -436,47 +517,41 @@ _ho_select(u2_ray        wir_r,
       abort();
     }
 
-    jet_j->dac = dry_d->dac;
+    jet_j->xip = dry_d->xip;
     jet_j->fol = fol;
     jet_j->fun_f = 0;
 
-    _ho_cash_save(&JetHangar.jac_s, fol, jet_j);
+    _ho_cash_save(&JetHangar->jac_s, fol, jet_j);
     return jet_j;
   }
 }
 
-/* _ho_explore(): find driver from disc, caching.
+/* _ho_explore(): find driver from chip, caching.
 */
 static u2_ho_driver*
 _ho_explore(u2_ray  wir_r,
-            u2_noun dac)
+            u2_noun xip)
 {
   u2_ho_driver* dry_d;
 
-  if ( 0 != (dry_d = _ho_cash_find(&JetHangar.bad_s, dac)) ) {
+  if ( 0 != (dry_d = _ho_cash_find(&JetHangar->bad_s, xip)) ) {
     return dry_d;
   } else {
-    c3_c* cos_c; 
-    c3_w  len_w;
+    c3_c* cos_c = _ho_cstring(xip);
     c3_w  i_w;
 
-    len_w = _ho_mop_cost(0, dac);
-    if ( !(cos_c = malloc(len_w + 1)) ) abort();
-    _ho_mop_cost(cos_c, dac);
-    cos_c[len_w] = 0;
-
-    printf("explore: jet: control: %s\n", cos_c);
+    printf("explore: seeking: %s\n", cos_c);
 
     for ( i_w=0; JetBase[i_w].cos_c; i_w++ ) {
-      if ( (u2_none == JetBase[i_w].dac) &&
+      if ( (u2_none == JetBase[i_w].xip) &&
            !strcmp(cos_c, JetBase[i_w].cos_c) ) 
       {
         dry_d = &JetBase[i_w];
 
-        dry_d->dac = dac;
+        dry_d->xip = xip;
         free(cos_c);
 
-        _ho_cash_save(&JetHangar.bad_s, dac, dry_d);
+        _ho_cash_save(&JetHangar->bad_s, xip, dry_d);
         return dry_d;
       }
     }
@@ -491,31 +566,31 @@ _ho_explore(u2_ray  wir_r,
       }
 
       dry_d->cos_c = cos_c;
-      dry_d->dac = dac;
+      dry_d->xip = xip;
       dry_d->fan_j[0].cos_c = 0;
 
-      _ho_cash_save(&JetHangar.bad_s, dac, dry_d);
+      _ho_cash_save(&JetHangar->bad_s, xip, dry_d);
       return dry_d;
     }
   }
 }
 
-/* _ho_discover(): find jet from dac and fol, caching.
+/* _ho_discover(): find jet from xip and fol, caching.
 */
 static u2_ho_jet*
 _ho_discover(u2_ray  wir_r,
-             u2_noun dac,
+             u2_noun xip,
              u2_noun fol,
              u2_noun cor)
 {
   u2_ho_jet*    jet_j;
   u2_ho_driver* dry_d;
 
-  if ( (0 != (jet_j = _ho_cash_find(&JetHangar.jac_s, fol)) ) ) {
+  if ( (0 != (jet_j = _ho_cash_find(&JetHangar->jac_s, fol)) ) ) {
     return jet_j;
   }
   else {
-    if ( 0 != (dry_d = _ho_explore(wir_r, dac)) ) {
+    if ( 0 != (dry_d = _ho_explore(wir_r, xip)) ) {
       return _ho_select(wir_r, dry_d, fol, cor);
     }
     else return 0;
@@ -524,47 +599,26 @@ _ho_discover(u2_ray  wir_r,
 
 /* u2_ho_fire(): 
 **
-**   Drive in disc to formula.  Core is valid.
+**   Attempt host nock driver on `xip`, `cor`, `fol`.
+**   For any failure to compute, return `u2_none`.
 **
-**   If *ver_t is 1, caller must check result.
+**   If `*saf` is u2_no, result is unsafe and needs testing.
 */
 u2_weak
-u2_ho_fire(u2_ray  wir_r,
-           u2_noun dac,
-           u2_noun cor,
-           u2_noun fol,
-           c3_t*   ver_t)
+u2_ho_fire(u2_ray   wir_r,
+         u2_chip  xip,
+         u2_noun  cor,
+         u2_noun  fol,
+         u2_flag* saf)
 {
   u2_ho_jet *jet_j;
 
-  if ( 0 == (jet_j = _ho_discover(wir_r, dac, fol, cor)) ) {
+  if ( 0 == (jet_j = _ho_discover(wir_r, xip, fol, cor)) ) {
     return u2_none;
   }
   else {
-    *ver_t = !jet_j->ace_t;
+    *saf = (jet_j->ace_t ? u2_yes : u2_no);
 
     return _ho_execute(wir_r, jet_j, cor);
   }
 }
-
-/* u2_ho_dive():
-**
-**   Report compatibility failure in `dac`.  May not return.
-*/
-void
-u2_ho_dive(u2_ray  wir_r,
-           u2_noun dac)
-{
-  printf("ho: dive!\n");
-  c3_assert(0);
-}
-
-/* u2_ho_warn(): report a warning, file and line.
-*/
-void
-u2_ho_warn(const c3_c* fil_c,
-           c3_w        lyn_w)
-{
-  fprintf(stderr, "warn: %s:%u\n", fil_c, lyn_w);
-}
-
