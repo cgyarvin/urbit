@@ -34,9 +34,8 @@ u2_wr_init(c3_m   hip_m,
     u2_ray bas_r;
 
     bas_r = u2_rl_leap_part(wir_r, c3__cold, 1, 16, tip_w);
-    u2_ba_init(bas_r, 0);
-
     u2_wire_bas_r(wir_r) = bas_r;
+    u2_ba_init(wir_r, 0);
   }
 #endif
 
@@ -48,9 +47,8 @@ u2_wr_init(c3_m   hip_m,
     u2_ray sad_r;
 
     sad_r = u2_rl_leap_part(wir_r, c3__cold, 1, 32, tip_w);
-    u2_sh_init(sad_r, 0);
-
     u2_wire_sad_r(wir_r) = sad_r;
+    u2_sh_init(wir_r);
   }
 #endif
 

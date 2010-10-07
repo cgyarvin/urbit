@@ -31,10 +31,10 @@
   **/
     /* u2_ba_init(): 
     **
-    **   Initialize basket from rail partition, with parent if any.
+    **   Initialize wire basket, with parent if any.
     */
-      u2_ray
-      u2_ba_init(u2_ray bas_r,
+      void
+      u2_ba_init(u2_ray wir_r,
                  u2_ray par_r);
  
     /* u2_ba_find():

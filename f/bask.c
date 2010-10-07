@@ -6,17 +6,19 @@
 
 /* u2_ba_init(): 
 **
-**   Initialize basket from rail partition, with parent if any.
+**   Initialize wire basket, with parent if any.
 */
-u2_ray
-u2_ba_init(u2_ray bas_r, 
+void
+u2_ba_init(u2_ray wir_r, 
            u2_ray par_r)
 {
-  u2_bask_par_r(bas_r) = par_r;
-  u2_ch_init(u2_bask_mem_r(bas_r));
-  u2_ch_init(u2_bask_sol_r(bas_r));
+  u2_ray  bas_r;
 
-  return bas_r;
+  if ( 0 != (bas_r = u2_wire_bas_r(wir_r)) ) {
+    u2_bask_par_r(bas_r) = par_r;
+    u2_ch_init(u2_bask_mem_r(bas_r));
+    u2_ch_init(u2_bask_sol_r(bas_r));
+  }
 }
  
 /* u2_ba_find():
@@ -31,7 +33,7 @@ u2_ba_find(u2_ray  wir_r,
   u2_ray bas_r;
   u2_noun pro;
 
-  if ( u2_none == (bas_r = u2_wire_bas_r(wir_r)) ) {
+  if ( 0 == (bas_r = u2_wire_bas_r(wir_r)) ) {
     return u2_none;
   }
   if ( u2_none != (pro = u2_ch_find_cell(u2_bask_mem_r(bas_r), bus, fol)) ) {
@@ -79,7 +81,7 @@ u2_ba_sole(u2_ray  wir_r,
   u2_ray  bas_r;
   u2_weak haz = u2_none;
 
-  if ( u2_none != (bas_r = u2_wire_bas_r(wir_r)) ) {
+  if ( 0 != (bas_r = u2_wire_bas_r(wir_r)) ) {
     if ( u2_none == (haz = u2_ch_find(u2_bask_sol_r(bas_r), som)) ) {
       if ( u2_none != (haz = u2_rl_ice(bas_r, som)) ) {
         u2_ch_save(bas_r, u2_bask_sol_r(bas_r), haz, haz);

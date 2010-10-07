@@ -4,7 +4,7 @@
 */
   /** Data types.
   **/
-    /* u2_ring: layer in objective battery identification
+    /* u2_seal: identification in objective battery declaration.
     **
     **  |?
     **    lef=*term
@@ -13,23 +13,25 @@
     **    [ven=*term pro=*term ver=[maj=@ min=@] kel=@]
     **  ==
     */
-      typedef u2_noun u2_ring;
+      typedef u2_noun u2_seal;
 
-    /* u2_clue: battery declaration
+    /* u2_clue: programmer's declaration hint
     **
-    **  [rig=*ring bud=*tool nut=*(list &[*term *tool]) tup=<~ *type>]
+    **  [bud=*tool sil=*seal nut=*(list &[p=*term q=*tool])]
     */
       typedef u2_noun u2_clue;
 
-    /* u2_disc: list of clue - complete battery identification
+    /* u2_disc: declaration layer (list should be book)
+    **
+    **  [sil=*seal nut=*(list &[p=*term q=*tool])]
     */
       typedef u2_noun u2_disc;
 
-    /* u2_lead: live battery record
+    /* u2_chip: complete battery record
     **
-    **  [dus=*disc pay=* bat=*]
+    **  [dac=*disc bat=* pit=<~ [axe=*axis led=*chip]>]
     */
-      typedef u2_noun u2_lead;
+      typedef u2_noun u2_chip;
 
     /* u2_loom_shed: jet registration hangar.
     */
@@ -40,7 +42,7 @@
         */
         u2_ray par_r;
 
-        /* cad_c: hash from battery to lead.
+        /* cad_c: hash from battery to chip.
         */
         u2_loom_chad cad_c;
       } u2_loom_shed;
@@ -52,13 +54,12 @@
   **/
     /* u2_sh_init(): 
     **
-    **   Initialize shed from rail partition, with parent if any.
+    **   Initialize shed, with parent if any.
     */
-      u2_ray
-      u2_sh_init(u2_ray sad_r,
-                 u2_ray par_r);
+      void
+      u2_sh_init(u2_ray wir_r);
  
-    /* u2_sh_find(): find lead by core, or none.  Includes validate.
+    /* u2_sh_find(): find chip by core, or none.  Includes validate.
     */
       u2_weak
       u2_sh_find(u2_ray  wir_r,

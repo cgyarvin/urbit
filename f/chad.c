@@ -267,7 +267,6 @@ u2_ch_save_cell(u2_ray  ral_r,
   u2_weak hid, til, nim, vil;
 
   if ( u2_none == (hid = u2_rl_ice(ral_r, hed)) ) {
-    c3_assert(0);
     return u2_no;
   }
   if ( u2_none == (til = u2_rl_ice(ral_r, tal)) ) {
@@ -275,13 +274,11 @@ u2_ch_save_cell(u2_ray  ral_r,
     return u2_no;
   }
   if ( u2_none == (nim = u2_rl_cell(ral_r, hid, til)) ) {
-    c3_assert(0);
     u2_rl_lose(ral_r, hid);
     u2_rl_lose(ral_r, til);
     return u2_no;
   }
   if ( u2_none == (vil = u2_rl_ice(ral_r, val)) ) {
-    c3_assert(0);
     u2_rl_lose(ral_r, nim);
     return u2_no;
   }
