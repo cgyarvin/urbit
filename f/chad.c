@@ -103,7 +103,6 @@ u2_ch_find_cell(u2_ray  cad_r,
                (u2_yes == u2_sing(hed, u2_h(nom))) &&
                (u2_yes == u2_sing(tal, u2_t(nom))) )
           {
-            printf("conflict found: %x\n", mug_w);
             return *u2_at(per_r, u2_loom_pear, val);
           }
         }
@@ -132,20 +131,11 @@ u2_ch_find_cell(u2_ray  cad_r,
         return *u2_at(per_r, u2_loom_pear, val);
       }
       else {
-        if ( u2_mug(nom) == mug_w ) {
-          printf("mug conflict %x\n", mug_w);
-          if ( u2_no == u2_sing(hed, u2_h(nom)) ) {
-            printf("hed conflict! %x %x\n", u2_mug(hed), u2_mug(u2_h(nom)));
-            printf("sam %d, %d\n", u2_h(u2_h(hed)), u2_h(u2_h(u2_h(nom))));
-          }
-        }
         return u2_none;
       }
     }
   }
 }
-
-extern int FOO;
 
 /* _ch_save(): as u2_ch_save(), with mug and offset, and iced nouns.
 */
@@ -199,8 +189,7 @@ _ch_save(u2_ray  ral_r,
         }
       }
       else {
-        u2_noun num = *u2_at(per_r, u2_loom_pear, nam);
-        u2_noun vul = *u2_at(per_r, u2_loom_pear, val);
+        u2_noun vol = *u2_at(per_r, u2_loom_pear, val);
         u2_ray  osh_r;
 
         if ( 0 == (osh_r = u2_rl_ralloc(ral_r, c3_wiseof(u2_loom_chad))) ) {
@@ -208,7 +197,7 @@ _ch_save(u2_ray  ral_r,
         }
         u2_ch_init(osh_r);
 
-        if ( u2_no == _ch_save(ral_r, osh_r, num, vul, u2_mug(num), 4+off_w) ) {
+        if ( u2_no == _ch_save(ral_r, osh_r, nom, vol, u2_mug(nom), 4+off_w) ) {
           u2_rl_rfree(ral_r, osh_r);
           return u2_no;
         }

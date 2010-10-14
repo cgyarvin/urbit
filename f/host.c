@@ -3,88 +3,6 @@
 ** This file is in the public domain.
 */
 #include "all.h"
-  /** Types.
-  **/
-    /* u2_ho_jet: a C function, per formula.
-    */
-      typedef struct {
-        /* Control string - formula from battery.
-        **
-        **    "%@" | "hook"
-        */
-        const c3_c* cos_c;
-
-        /* chip: battery identifier.
-        */
-        u2_chip xip;
-
-        /* Tool: Nock formula.
-        */
-        u2_tool fol;
- 
-        /* Stable iff true; test iff false.
-        */
-        c3_t ace_t;
-
-        /* C function, on core `[[sam con] bat]`.
-        */
-        u2_weak (*fun_f)(u2_ray wir_r, u2_noun cor);
-      } u2_ho_jet;
-
-    /* u2_ho_driver: battery driver.
-    */
-      typedef struct {
-        /* Control string - matches chip from C:
-        **
-        **    cos: kid | kid__cos
-        **    kid: pro ver
-        **    pro: asc | asc_asc
-        **    ver: @ | @_@ | @_@_@
-        */
-        const c3_c* cos_c;
-      
-        /* chip: battery identifier, from shed.
-        */
-        u2_chip xip;
-
-        /* Mug: short hash of battery, or 0.  Must match if set.
-        */
-        c3_w mug_w;
-
-        /* Function/formula jets.  Null `cos` terminates.
-        */
-        u2_ho_jet fan_j[1];
-      } u2_ho_driver;
-
-    /* u2_ho_pear: mug-to-pointer binding.
-    */
-      typedef struct {
-        u2_noun tag;
-        void*   ptr_v;
-      } u2_ho_pear;
-
-    /* u2_ho_cash: mug-to-pointer cache.  Semantics match sham.
-    */
-      typedef struct {
-        u2_ho_pear dol_p[16];
-      } u2_ho_cash;
-
-    /* u2_ho_hangar: driver system.
-    */
-      typedef struct _u2_ho_hangar {
-        /* Cache from formula to jet.
-        */
-        u2_ho_cash jac_s;
-
-        /* Cache from chip to driver.
-        */
-        u2_ho_cash bad_s;
-
-        /* Next hangar in stack.
-        */
-        struct _u2_ho_hangar *nex_h;
-      } u2_ho_hangar;
-
 
   /** Global structures.
   **/
@@ -99,27 +17,27 @@
       };
 
 
-/* _ho_cash_free(): free a cache, freeing.
+/* _cs_free(): free a cache, freeing.
 */
 static void
-_ho_cash_free(u2_ho_cash *cas_s)
+_cs_free(u2_ho_cash *cas_s)
 {
   c3_w i_w;
 
   for ( i_w = 0; i_w < 16; i_w++ ) {
     if ( u2_none == cas_s->dol_p[i_w].tag ) {
       if ( 0 == cas_s->dol_p[i_w].ptr_v ) {
-        _ho_cash_free(cas_s->dol_p[i_w].ptr_v);
+        _cs_free(cas_s->dol_p[i_w].ptr_v);
         free(cas_s->dol_p[i_w].ptr_v);
       }
     }
   }
 }
 
-/* _ho_cash_init(): initialize an empty cache.
+/* _cs_init(): initialize an empty cache.
 */
 static void
-_ho_cash_init(u2_ho_cash *cas_s)
+_cs_init(u2_ho_cash *cas_s)
 {
   c3_w i_w;
 
@@ -135,10 +53,114 @@ static void*
 _ho_cash_find(u2_ho_cash *cas_s,
               u2_noun    som)
 {
-#if 1
-  return 0;
-#else
-#endif
+  c3_w mug_w = u2_mug(som);
+  c3_w off_w = 0;
+
+  while ( 1 ) {
+    if ( off_w == 32 ) {
+      c3_w i_w;
+
+      for ( i_w = 0; i_w < 16; i_w++ ) {
+        u2_ho_pear* per_p = &cas_s->dol_p[i_w];
+        u2_noun     tag   = per_p->tag;
+
+        if ( (u2_none != tag) && (u2_yes == u2_sing(som, tag)) ) {
+          return per_p->ptr_v;
+        }
+      }
+      return 0;
+    }
+    else {
+      c3_w        fat_w = (mug_w >> off_w) & 15;
+      u2_ho_pear* per_p = &cas_s->dol_p[fat_w];
+      u2_noun     tag   = per_p->tag;
+
+      if ( u2_none == tag ) {
+        cas_s = per_p->ptr_v;
+
+        if ( 0 == cas_s ) {
+          return 0;
+        } else {
+          off_w += 4;
+          continue;
+        }
+      }
+      else if ( u2_yes == u2_sing(som, tag) ) {
+        return per_p->ptr_v;
+      }
+      else return 0;
+    }
+  }
+}
+
+/* _cs_save(): as _ho_cash_save(), with mug and offset.
+*/
+static void
+_cs_save(u2_ho_cash* cas_s,
+         u2_noun     som,
+         void*       ptr_v,
+         c3_w        mug_w,
+         c3_w        off_w)
+{
+  printf("cs_save: ptr %p, mug %x, off %d\n", ptr_v, mug_w, off_w);
+  while ( 1 ) {
+    if ( off_w == 32 ) {
+      /* Linear search in a list of 16 total collisions.
+      ** Overflow probability: (n/(2^31))^15 ~= 0.
+      */
+      c3_w i_w;
+
+      for ( i_w = 0; i_w < 16; i_w++ ) {
+        u2_ho_pear* per_p = &cas_s->dol_p[i_w];
+        u2_noun     tag   = per_p->tag;
+
+        if ( u2_none != tag ) {
+          c3_assert(u2_no == u2_sing(som, tag));
+        }
+        else {
+          per_p->tag = som;
+          per_p->ptr_v = ptr_v;
+        }
+      }
+      return;
+    }
+    else {
+      c3_w        fat_w = (mug_w >> off_w) & 15;
+      u2_ho_pear* per_p = &cas_s->dol_p[fat_w];
+      u2_noun     tag   = per_p->tag;
+
+      if ( u2_none == tag ) {
+        cas_s = per_p->ptr_v;
+
+        if ( 0 == cas_s ) {
+          per_p->tag = som;
+          per_p->ptr_v = ptr_v;
+          return;
+        } 
+        else {
+          off_w += 4;
+          continue;
+        }
+      }
+      else {
+        void*       qtr_v = per_p->ptr_v;
+        u2_ho_cash* cax_s;
+
+        if ( 0 == (cax_s = malloc(sizeof(*cax_s))) ) {
+          return;
+        }
+        _cs_init(cax_s);
+
+        _cs_save(cax_s, tag, qtr_v, u2_mug(tag), 4+off_w);
+        _cs_save(cax_s, som, ptr_v, mug_w, 4+off_w);
+
+        per_p->tag = u2_none;
+        per_p->ptr_v = cax_s;
+
+        return;
+      }
+    }
+  }
 }
 
 /* _ho_cash_save(): save a noun in a cache.
@@ -148,9 +170,7 @@ _ho_cash_save(u2_ho_cash *cas_s,
               u2_noun    som,
               void*      ptr_v)
 {
-#if 1
-#else
-#endif
+  _cs_save(cas_s, som, ptr_v, u2_mug(som), 0);
 }
 
 /* _ho_mop_decimal(): measure/print decimal number.
@@ -168,11 +188,12 @@ _ho_mop_decimal(c3_c *buf_c, u2_noun num)
       mpz_t num_mp;
       c3_w  len_w;
 
+      mpz_init(num_mp);
       u2_mp(num_mp, num);
       len_w = mpz_sizeinbase(num_mp, 10);
 
       if ( buf_c ) {
-        gmp_sprintf(buf_c, "%Z", num_mp);
+        gmp_sprintf(buf_c, "%Zu", num_mp);
       }
       mpz_clear(num_mp);
       return len_w;
@@ -207,102 +228,110 @@ _ho_mop_term(c3_c *buf_c, u2_noun tam)
   }
 }
 
-/* _ho_mop_mint(): measure/print mint.
-*/
-static c3_w
-_ho_mop_mint(c3_c *buf_c, u2_noun min)
-{
-  if ( u2_no == u2_dust(min) ) {
-    return _ho_mop_term(buf_c, min);
-  }
-  else {
-    c3_w len_w = _ho_mop_term(buf_c, u2_h(min));
-
-    if ( buf_c ) buf_c += len_w;
-    len_w++;
-    if ( buf_c ) *buf_c++ = '_';
-
-    return (len_w + _ho_mop_term(buf_c, u2_t(min)));
-  }
-}
-
 /* _ho_mop_version(): measure/print version.
 */
 static c3_w
 _ho_mop_version(c3_c *buf_c, u2_noun ver)
 {
   if ( u2_no == u2_dust(ver) ) {
-    return 0;
+    return _ho_mop_decimal(buf_c, ver);
   }
   else {
     c3_w len_w = _ho_mop_decimal(buf_c, u2_h(ver));
 
     if ( buf_c ) buf_c += len_w;
     len_w++;
-    if ( buf_c ) *buf_c++ = '_';
+    if ( buf_c ) *buf_c++ = 'x';
 
     return (len_w + _ho_mop_decimal(buf_c, u2_t(ver)));
   }
 }
 
-/* _ho_mop_release(): measure/print release definition.
+/* _ho_mop_seal(): measure/print identity declaration.
 */
 static c3_w
-_ho_mop_release(c3_c *buf_c, u2_noun rel)
+_ho_mop_seal(c3_c *buf_c, u2_noun mek)
 {
-  if ( u2_no == u2_dust(rel) ) {
-    return _ho_mop_decimal(buf_c, rel);
-  }
-  else {
-    c3_w len_w = _ho_mop_version(buf_c, u2_h(rel));
+  u2_noun std, ven, pro, ver, kel;
+  c3_w    len_w, lan_w, lon_w, lin_w;
 
+  if ( u2_yes == u2_as_qual(mek, &ven, &pro, &ver, &kel) ) {
+    len_w = _ho_mop_term(buf_c, ven);
     if ( buf_c ) buf_c += len_w;
     len_w++;
     if ( buf_c ) *buf_c++ = '_';
 
-    return (len_w + _ho_mop_decimal(buf_c, u2_t(rel)));
-  }
-}
+    lan_w = _ho_mop_term(buf_c, pro);
+    if ( buf_c ) buf_c += lan_w;
+    lan_w++;
+    if ( buf_c ) *buf_c++ = '_';
 
-/* _ho_mop_mark(): measure/print objective mark.
-*/
-static c3_w
-_ho_mop_mark(c3_c *buf_c, u2_noun mek)
-{
-  if ( u2_no == u2_dust(mek) ) {
-    return 0;
-  } else {
-    c3_w len_w = _ho_mop_mint(buf_c, u2_h(mek));
-  
+    lon_w = _ho_mop_version(buf_c, ver);
+    if ( buf_c ) buf_c += lon_w;
+    lon_w++;
+    if ( buf_c ) *buf_c++ = '_';
+
+    lin_w = _ho_mop_decimal(buf_c, kel);
+    if ( buf_c ) buf_c += lin_w;
+
+    return (len_w + lan_w + lon_w + lin_w);
+  }
+  else if ( u2_yes == u2_as_trel(mek, &ven, &pro, &kel) ) {
+    len_w = _ho_mop_term(buf_c, ven);
     if ( buf_c ) buf_c += len_w;
     len_w++;
     if ( buf_c ) *buf_c++ = '_';
 
-    return (len_w + _ho_mop_release(buf_c, u2_t(mek)));
+    lan_w = _ho_mop_term(buf_c, pro);
+    if ( buf_c ) buf_c += lan_w;
+    lan_w++;
+    if ( buf_c ) *buf_c++ = '_';
+
+    lon_w = _ho_mop_decimal(buf_c, kel);
+    if ( buf_c ) buf_c += lon_w;
+    lon_w++;
+    if ( buf_c ) *buf_c++ = '_';
+
+    return (len_w + lan_w + lon_w);
+  }
+  else if ( u2_yes == u2_as_cell(mek, &std, &kel) ) {
+    len_w = _ho_mop_term(buf_c, std);
+    if ( buf_c ) buf_c += len_w;
+    len_w++;
+    if ( buf_c ) *buf_c++ = '_';
+
+    lan_w = _ho_mop_decimal(buf_c, kel);
+    if ( buf_c ) buf_c += lan_w;
+
+    return (len_w + lan_w);
+  }
+  else {
+    len_w = _ho_mop_term(buf_c, mek);
+    
+    return len_w;
   }
 }
 
-/* _ho_mop_cost(): measure/print control string, from chip.
+/* _ho_mop_chip(): measure/print control string, from chip.
 */
 static c3_w
-_ho_mop_cost(c3_c *buf_c, u2_noun xip)
+_ho_mop_chip(c3_c *buf_c, u2_noun xip)
 {
-  u2_noun nid = u2_h(xip);
-  u2_noun pop = u2_h(nid);
-  u2_noun mek = u2_t(nid);
+  u2_disc dac = u2_h(xip);
+  u2_noun pit = u2_t(u2_t(xip));
 
-  if ( u2_nul == pop ) {
-    return _ho_mop_mark(buf_c, mek);
+  if ( u2_nul == pit ) {
+    return _ho_mop_seal(buf_c, u2_h(dac));
   }
   else {
-    c3_w pal_w = _ho_mop_cost(buf_c, pop);
+    c3_w len_w = _ho_mop_chip(buf_c, u2_t(pit));
 
     if ( buf_c ) {
-      buf_c += pal_w;
+      buf_c += len_w;
       *buf_c++ = '_';
       *buf_c++ = '_';
     }
-    return (pal_w + 2 + _ho_mop_mark(buf_c, mek));
+    return (len_w + 2 + _ho_mop_seal(buf_c, u2_h(dac)));
   }
 }
 
@@ -311,12 +340,12 @@ _ho_mop_cost(c3_c *buf_c, u2_noun xip)
 static c3_c*
 _ho_cstring(u2_noun xip)
 {
-  c3_w len_w = _ho_mop_cost(0, xip);
+  c3_w len_w = _ho_mop_chip(0, xip);
   c3_c *cos_c;
 
   if ( !(cos_c = malloc(len_w + 1)) ) abort();
 
-  _ho_mop_cost(cos_c, xip);
+  _ho_mop_chip(cos_c, xip);
   cos_c[len_w] = 0;
 
   return cos_c;
@@ -330,8 +359,8 @@ _ho_cstring(u2_noun xip)
 static void
 _ho_boot(u2_ho_hangar *hag)
 {
-  _ho_cash_init(&hag->jac_s);
-  _ho_cash_init(&hag->bad_s);
+  _cs_init(&hag->jac_s);
+  _cs_init(&hag->bad_s);
 
   {
     c3_w i_w, j_w;
@@ -339,7 +368,7 @@ _ho_boot(u2_ho_hangar *hag)
     for ( i_w=0; JetBase[i_w].cos_c; i_w++ ) {
       JetBase[i_w].xip = u2_none;
 
-      for ( j_w=0; JetBase[i_w].fan_j[j_w].cos_c; j_w++ ) {
+      for ( j_w=0; JetBase[i_w].fan_j[j_w].fcs_c; j_w++ ) {
         JetBase[i_w].fan_j[j_w].xip = u2_none;
         JetBase[i_w].fan_j[j_w].fol = u2_none;
       }
@@ -354,8 +383,8 @@ _ho_boot(u2_ho_hangar *hag)
 static void
 _ho_down(u2_ho_hangar *hag)
 {
-  _ho_cash_free(&hag->jac_s);
-  _ho_cash_free(&hag->bad_s);
+  _cs_free(&hag->jac_s);
+  _cs_free(&hag->bad_s);
 }
 
 /* u2_ho_push(): 
@@ -466,63 +495,70 @@ _ho_execute(u2_ray      wir_r,
   }
 }
 
-/* _ho_select(): find jet from driver, cor and fol, caching.
+/* _ho_extract(): extract jet formula from battery.
 */
-static u2_ho_jet*
-_ho_select(u2_ray        wir_r,
-           u2_ho_driver* dry_d,
-           u2_noun       fol,
-           u2_noun       cor)
+static u2_weak
+_ho_extract(u2_noun    xip,
+            const c3_c *fcs_c)
+{
+  u2_noun bat = u2_h(u2_t(xip));
+
+  if ( *fcs_c == '.' ) {
+    c3_w axe_w = 0;
+
+    sscanf(fcs_c+1, "%u", &axe_w);
+    c3_assert(!(0x80000000 & axe_w));     // that's a deep tree, dude
+
+    return u2_frag(axe_w, bat);
+  }
+  else {
+    u2_noun nut = u2_t(u2_h(xip));
+
+    while ( _0 != nut ) {
+      u2_noun i_nut = u2_h(nut);
+
+      if ( (u2_yes == u2_sing_c(fcs_c, u2_h(i_nut))) ) {
+        u2_noun fal = u2_t(i_nut);
+
+        /* `fal` must match `[2 [0 1] [0 x]]`
+        */
+        if ( (u2_yes == u2_dust(fal)) &&
+             (u2_nock_sail == u2_h(fal)) &&
+             (u2_yes == u2_dust(u2_t(fal))) )
+        {
+          u2_noun ht_fal = u2_h(u2_t(fal));
+          u2_noun tt_fal = u2_t(u2_t(fal));
+
+          if ( (_0 == u2_h(ht_fal)) && 
+               (_1 == u2_t(ht_fal)) &&
+               (_0 == u2_h(tt_fal)) &&
+               (u2_yes == u2_stud(u2_t(tt_fal))) )
+          {
+            return u2_frag(u2_t(tt_fal), bat);
+          }
+        }
+        return u2_none;
+      }
+    }
+    return u2_none;
+  }
+}
+
+/* _ho_drive(): install driver.
+*/
+static void
+_ho_drive(u2_ho_driver* dry_d)
 {
   u2_ho_jet*  jet_j;
   c3_w        i_w;
 
-  for ( i_w = 0; dry_d->fan_j[i_w].cos_c; i_w++ ) {
-    jet_j = &dry_d->fan_j[i_w];
-
-    if ( u2_none == jet_j->xip ) {
-      jet_j->xip = dry_d->xip;
-    }
-    if ( u2_none == jet_j->fol ) {
-      c3_w    axe_w;
-      u2_atom axe;
-
-      if ( *jet_j->cos_c == '@' ) {
-        sscanf(jet_j->cos_c+1, "%u", &axe_w);
-        c3_assert(!(0x80000000 & axe_w));
-        axe = axe_w;
-      }
-      else {
-        c3_assert(0);   // hooks not yet supported
-        // axe = u2_be_hook(dry_d->xip, jet_j->cos_c);
-      }
-      jet_j->fol = u2_frag(axe, cor);
-      c3_assert(u2_none != jet_j->fol);
-    }
-    if ( u2_yes == u2_sing(fol, jet_j->fol) ) {
-      printf("jet: found %s\n", jet_j->cos_c);
-
-      _ho_cash_save(&JetHangar->jac_s, jet_j->fol, jet_j);
-      return jet_j;
-    }
-  }
-  printf("jet: not in driver\n");
-
-  /* Jet not found.  Create a dummy, to avoid slow search.
-  **
-  ** XX: leaks on jet reboot.
-  */
-  {
-    if ( !(jet_j = malloc(sizeof(u2_ho_jet))) ) {
-      abort();
-    }
-
+  for ( i_w = 0; (jet_j = &dry_d->fan_j[i_w])->fcs_c; i_w++ ) {
     jet_j->xip = dry_d->xip;
-    jet_j->fol = fol;
-    jet_j->fun_f = 0;
 
-    _ho_cash_save(&JetHangar->jac_s, fol, jet_j);
-    return jet_j;
+    jet_j->fol = _ho_extract(dry_d->xip, jet_j->fcs_c);
+    if ( u2_none != jet_j->fol ) {
+      _ho_cash_save(&JetHangar->jac_s, jet_j->fol, jet_j);
+    }
   }
 }
 
@@ -552,6 +588,7 @@ _ho_explore(u2_ray  wir_r,
         free(cos_c);
 
         _ho_cash_save(&JetHangar->bad_s, xip, dry_d);
+
         return dry_d;
       }
     }
@@ -567,9 +604,11 @@ _ho_explore(u2_ray  wir_r,
 
       dry_d->cos_c = cos_c;
       dry_d->xip = xip;
-      dry_d->fan_j[0].cos_c = 0;
+      dry_d->fan_j[0].fcs_c = 0;
 
+      printf("saving: fake driver: %s\n", cos_c);
       _ho_cash_save(&JetHangar->bad_s, xip, dry_d);
+      printf("saved: fake driver: %s\n", cos_c);
       return dry_d;
     }
   }
@@ -591,9 +630,27 @@ _ho_discover(u2_ray  wir_r,
   }
   else {
     if ( 0 != (dry_d = _ho_explore(wir_r, xip)) ) {
-      return _ho_select(wir_r, dry_d, fol, cor);
+      _ho_drive(dry_d);
+
+      if ( 0 != (jet_j = _ho_cash_find(&JetHangar->jac_s, fol)) ) {
+        return jet_j;
+      } else {
+        if ( !(jet_j = malloc(sizeof(u2_ho_jet))) ) {
+          abort();
+        }
+
+        jet_j->xip = dry_d->xip;
+        jet_j->fol = fol;
+        jet_j->fun_f = 0;
+
+        printf("saving: fake jet; driver %s; fol mug %x\n",
+            dry_d->cos_c, u2_mug(fol));
+        _ho_cash_save(&JetHangar->jac_s, fol, jet_j);
+        printf("saved\n");
+        return jet_j;
+      }
     }
-    else return 0;
+    return 0;
   }
 }
 
@@ -606,10 +663,10 @@ _ho_discover(u2_ray  wir_r,
 */
 u2_weak
 u2_ho_fire(u2_ray   wir_r,
-         u2_chip  xip,
-         u2_noun  cor,
-         u2_noun  fol,
-         u2_flag* saf)
+           u2_chip  xip,
+           u2_noun  cor,
+           u2_noun  fol,
+           u2_flag* saf)
 {
   u2_ho_jet *jet_j;
 

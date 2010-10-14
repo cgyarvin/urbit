@@ -72,6 +72,7 @@ Gene - AST
     [%tung p=*gene q=*gene r=*gene s=*gene]     ::  %^  mithat
   ::
     [%zalt p=*gene]                             ::  !:  hopdig
+    [%zond p=*gene]                             ::  !=  hopben
     [%zemp p=*spot q=*gene]
     [%zike ~]                                   ::  !!  hopven
     [%zoot ~]                                   ::  !%  hopmit

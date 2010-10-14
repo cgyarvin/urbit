@@ -41,6 +41,8 @@ u2_wr_nock_jet(u2_ray  wir_r,
       return u2_none;
     }
     else {
+      u2_bx_flew(wir_r);
+
       if ( u2_yes == saf ) {
         return pro;
       } else {

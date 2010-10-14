@@ -10,6 +10,7 @@
     **    lef=*term
     **    [std=*term kel=@]
     **    [ven=*term pro=*term kel=@]
+    **    [ven=*term pro=*term ver=@ kel=@]
     **    [ven=*term pro=*term ver=[maj=@ min=@] kel=@]
     **  ==
     */

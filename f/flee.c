@@ -30,19 +30,6 @@ _flee(u2_ray  wir_r,
     u2_bx_mark(wir_r);
     u2_bx_step(wir_r);
 
-    /* Attempt jet propulsion.
-    */
-    {
-      u2_noun pro;
-
-      if ( u2_none != (pro = u2_wr_nock_jet(wir_r, bus, fol)) ) {
-        u2_rail_cap_r(wir_r) = net_r;
-
-        u2_bx_flew(wir_r);
-        return pro;
-      }
-    }
-
     if ( u2_no == u2_as_cell(fol, &hib, &gal) ) {
       return u2_none;
     }
@@ -110,6 +97,18 @@ _flee(u2_ray  wir_r,
             }
           }
           u2_rl_fall(wir_r);
+
+          /* Attempt jet propulsion.
+          */
+          {
+            u2_noun pro;
+
+            if ( u2_none != (pro = u2_wr_nock_jet(wir_r, bus, fol)) ) {
+              u2_rail_cap_r(wir_r) = net_r;
+
+              return pro;
+            }
+          }
 
           if ( (u2_no == u2_rl_senior(wir_r, dom)) ||
                (u2_no == u2_rl_clear(sep, net_r, bat_r)) ) 

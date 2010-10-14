@@ -285,8 +285,8 @@ u2_sing(u2_noun a,
 **   Yes iff (b) is the same noun as the C string a_c.
 */
 u2_flag
-u2_sing_c(c3_c*   a_c,
-          u2_noun b)
+u2_sing_c(const c3_c* a_c,
+          u2_noun     b)
 {
   c3_assert(u2_none != b);
 

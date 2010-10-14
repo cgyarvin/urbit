@@ -385,8 +385,8 @@
         **   Yes iff (b) is the same noun as the C string [a].
         */
           u2_flag
-          u2_sing_c(c3_c*   a_c,
-                    u2_noun b);
+          u2_sing_c(const c3_c* a_c,
+                    u2_noun     b);
 
         /* u2_stud():
         **

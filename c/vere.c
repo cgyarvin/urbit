@@ -716,7 +716,7 @@ vere_boot(c3_w siz_w)
     // v->wir_r = u2_wr_boot(c3__cold);
     v->wir_r = u2_wr_init(c3__cold, u2_ray_of(0, 0), u2_ray_of(1, 0));
 
-    _vere_kernel(v, "watt/296.watt", "watt/296.nock");
+    _vere_kernel(v, "watt/295.watt", "watt/295.nock");
   }
 
   /*  Create the kernel soul.
