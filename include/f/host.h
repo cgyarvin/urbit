@@ -13,14 +13,6 @@
         */
         const c3_c* fcs_c;
 
-        /* chip: battery identifier.
-        */
-        u2_chip xip;
-
-        /* Tool: Nock formula.
-        */
-        u2_tool fol;
- 
         /* Stable iff true; test iff false.
         */
         c3_t ace_t;
@@ -28,6 +20,14 @@
         /* C function, on core `[[sam con] bat]`.
         */
         u2_weak (*fun_f)(u2_ray wir_r, u2_noun cor);
+
+        /* chip: battery identifier.
+        */
+        u2_chip xip;
+
+        /* Tool: Nock formula.
+        */
+        u2_tool fol;
       } u2_ho_jet;
 
     /* u2_ho_driver: battery driver.

@@ -27,6 +27,10 @@
           */
           u2_ray jub_r;
 
+          /* Plow; special support for bootstrap code; temporary.
+          */
+          u2_ray plo_r;
+
           /* Ray to performance log.
           */
           u2_ray bex_r;

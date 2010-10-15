@@ -6,6 +6,10 @@
 
   /** Global structures.
   **/
+    /* Suppress warnings.  Set after the first.
+    */
+      c3_t JetSuppress;
+
     /* Hangar stack; top hangar is active.
     */
       u2_ho_hangar *JetHangar;
@@ -13,6 +17,9 @@
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       static u2_ho_driver JetBase[] = {
+        { "watt_274", u2_none, 0, 
+          { }
+        },
         { 0 }
       };
 
@@ -434,7 +441,10 @@ void
 u2_ho_warn(const c3_c* fil_c,
            c3_w        lyn_w)
 {
-  fprintf(stderr, "ho: warn: %s:%u\n", fil_c, lyn_w);
+  if ( !JetSuppress ) {
+    fprintf(stderr, "ho: warn: %s:%u\n", fil_c, lyn_w);
+    JetSuppress = 1;
+  }
 }
 
 /* u2_ho_dive():

@@ -154,7 +154,7 @@ _ch_save(u2_ray  ral_r,
       */
       c3_w i_w;
 
-      printf("conflict: %x\n", mug_w);
+      // printf("conflict: %x\n", mug_w);
       for ( i_w = 0; i_w < 16; i_w++ ) {
         u2_ray  per_r = (cad_r + (c3_wiseof(u2_loom_pear) * i_w));
         u2_noun nom = *u2_at(per_r, u2_loom_pear, nam);
