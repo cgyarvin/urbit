@@ -271,37 +271,37 @@ _open_fist(u4_plow p,
   }
 }
 
-_open_do_p(bean)
-{
-  u4_lane lan = p->lan;
+  _open_do_p(bean)
+  {
+    u4_lane lan = p->lan;
 
-  if ( u4_n_eq(u4_atom_atom, p_gen) ) {
-    return u4_kt
-      (lan, u4_atom_cast, 
-            u4_kt(lan, u4_atom_vint, u4_atom_bone, u4_math_0),
-            u4_kc(lan, u4_atom_bone, u4_math_0));
-  }
-  else if ( u4_n_eq(u4_atom_blur, p_gen) ) {
-    u4_noun dud = u4_kc(lan, u4_atom_bone, u4_nul);
+    if ( u4_n_eq(u4_atom_atom, p_gen) ) {
+      return u4_kt
+        (lan, u4_atom_cast, 
+              u4_kt(lan, u4_atom_vint, u4_atom_bone, u4_math_0),
+              u4_kc(lan, u4_atom_bone, u4_math_0));
+    }
+    else if ( u4_n_eq(u4_atom_blur, p_gen) ) {
+      u4_noun dud = u4_kc(lan, u4_atom_bone, u4_nul);
 
-    return u4_kt
-      (lan, u4_atom_cast, 
-            u4_kt(lan, u4_atom_sail, dud, dud),
-            dud);
-  }
-  else if ( u4_n_eq(u4_atom_cell, p_gen) ) {
-    return u4_kt
-      (lan, u4_atom_twix,
-            u4_kc(lan, u4_atom_bean, u4_atom_blur),
-            u4_kc(lan, u4_atom_bean, u4_atom_blur));
-  }
-  else if ( u4_n_eq(u4_atom_flag, p_gen) ) {
-    return u4_kt
-      (lan, u4_atom_cast,
-            u4_kt(lan, u4_atom_dust, u4_atom_bone, u4_math_0),
-            u4_kc(lan, u4_atom_bone, u4_yes));
-  }
-  else if ( u4_n_eq(u4_atom_null, p_gen) ) {
+      return u4_kt
+        (lan, u4_atom_cast, 
+              u4_kt(lan, u4_atom_sail, dud, dud),
+              dud);
+    }
+    else if ( u4_n_eq(u4_atom_cell, p_gen) ) {
+      return u4_kt
+        (lan, u4_atom_twix,
+              u4_kc(lan, u4_atom_bean, u4_atom_blur),
+              u4_kc(lan, u4_atom_bean, u4_atom_blur));
+    }
+    else if ( u4_n_eq(u4_atom_flag, p_gen) ) {
+      return u4_kt
+        (lan, u4_atom_cast,
+              u4_kt(lan, u4_atom_dust, u4_atom_bone, u4_math_0),
+              u4_kc(lan, u4_atom_bone, u4_yes));
+    }
+    else if ( u4_n_eq(u4_atom_null, p_gen) ) {
       return u4_kc(lan, u4_atom_bone, u4_nul);
     }
     else return u4_trip;

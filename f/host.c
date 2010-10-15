@@ -471,6 +471,7 @@ _ho_execute(u2_ray      wir_r,
             u2_noun     cor)
 {
   u2_ray cap_r = u2_rail_cap_r(wir_r);
+  u2_ray jub_r;
 
   if ( 0 == jet_j->fun_f ) {
     return u2_none;
@@ -478,26 +479,28 @@ _ho_execute(u2_ray      wir_r,
   else if ( u2_no == u2_rl_leap(wir_r, c3__warm) ) {
     return u2_none;
   }
+  else if ( 0 == (jub_r = u2_bl_open(wir_r)) ) {
+    u2_rl_fall(wir_r);
+    return u2_none;
+  }
   else {
-    u2_ray  jub_r = u2_wire_jub_r(wir_r);
-    void*   env_j;
-    u2_noun pro;
-   
-    u2_wire_jub_r(wir_r) = u2_rl_ralloc(wir_r, c3_wiseof(jmp_buf));
-    env_j = u2_at_cord(u2_wire_jub_r(wir_r), c3_wiseof(jmp_buf));
+    if ( 0 == (jub_r = u2_bl_open(wir_r)) ) {
+      return u2_none;
+    }
 
-    if ( 1 == setjmp(env_j) ) {
+    if ( 1 == u2_bl_set(wir_r) ) {
+      u2_bl_done(wir_r, jub_r);
       u2_rl_fall(wir_r);
-      u2_wire_jub_r(wir_r) = jub_r;
 
       u2_rail_cap_r(wir_r) = cap_r;
       return u2_none;
     } else {
-      pro = jet_j->fun_f(wir_r, cor);
+      u2_noun pro = jet_j->fun_f(wir_r, cor);
 
+      u2_bl_done(wir_r, jub_r);
       u2_rl_fall(wir_r);
-      u2_wire_jub_r(wir_r) = jub_r;
 
+      c3_assert(u2_none != pro);
       pro = u2_rl_ice(wir_r, pro);
       u2_rail_cap_r(wir_r) = cap_r;
       return pro;

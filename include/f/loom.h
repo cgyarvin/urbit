@@ -501,7 +501,7 @@
         **   Return the head of (a).
         */
           u2_noun
-          u2_h(u2_cell a);
+          u2_h(u2_noun a);
 
         /* u2_t():
         **

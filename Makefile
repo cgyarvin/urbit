@@ -287,6 +287,7 @@ F_OFILES=\
        f/host.o \
        f/hint.o \
        f/benx.o \
+       f/bail.o \
        f/bask.o \
        f/lame.o \
        f/flee.o \

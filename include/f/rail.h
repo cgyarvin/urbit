@@ -315,15 +315,6 @@
           u2_rl_mp(u2_ray ral_r,
                    mpz_t  a_mp);
 
-        /* u2_rl_nock():
-        **
-        **    Execute (nock lan sef) with a trivial interpreter.
-        */
-          u2_weak
-          u2_rl_nock(u2_ray  ral_r,
-                     u2_noun lan,
-                     u2_noun sef);
-
         /* u2_rl_qual(): 
         **
         **   Produce the quadruple [a b c d].
@@ -334,7 +325,7 @@
                      u2_noun b,
                      u2_noun c,
                      u2_noun d);
-#         define u2_rq(ral_r, a, b, c, d) u2_rl_trel(ral_r, a, b, c, d)
+#         define u2_rq(ral_r, a, b, c, d) u2_rl_qual(ral_r, a, b, c, d)
 
         /* u2_rl_trel(): 
         **
