@@ -295,6 +295,10 @@ F_OFILES=\
        f/shed.o \
        f/main.o
 
+P_OFILES=\
+       p/pool.o \
+       p/book.o
+
 OFILES= \
        $(L_OFILES) \
        $(C_OFILES) \
@@ -304,6 +308,7 @@ OFILES= \
        $(J_OFILES) \
        $(K_OFILES) \
        $(F_OFILES) \
+       $(P_OFILES) \
        $(U4_OFILES)
 
 $(BIN)/vere: $(OFILES)

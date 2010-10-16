@@ -6,8 +6,8 @@
   **/
     /* u4_bag_ok(): sanity test for bag.
     */
-    u4_t
-    u4_bag_ok(u4_bag bag);
+      u4_t
+      u4_bag_ok(u4_bag bag);
 
     /* u4_bag_in():
     **
@@ -64,12 +64,3 @@
       u4_bag_cat(u4_lane lane,
                  u4_bag  bag_a,
                  u4_bag  bag_b);
-
-    /* u4_bag_del():
-    **
-    **   Produce a version of (bag) which does not include (pig).
-    */
-      _(u4_bag, bag_pro)
-      u4_bag_del(u4_lane lane,
-                 u4_pig  pig,
-                 u4_bag  bag);

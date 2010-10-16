@@ -290,6 +290,12 @@
     */
       typedef u2_noun u2_flag;
 
+    /* u2_axis:
+    **
+    **   An atomic tree address.
+    */
+      typedef u2_noun u2_axis;
+
     /* u2_mote:
     **
     **   An ASCII string of 2-4 characters.
@@ -363,7 +369,7 @@
         */
           c3_w
           u2_mug(u2_noun a);
-        
+       
         /* u2_mug_cell():
         **
         **   Compute the mug of the cell [a b].
@@ -378,6 +384,14 @@
         */
           u2_flag
           u2_sing(u2_noun a,
+                  u2_noun b);
+
+        /* u2_nord():
+        **
+        **   Return 0, 1 or 2 if `a` is below, equal to, or above `b`.
+        */
+          u2_atom
+          u2_nord(u2_noun a,
                   u2_noun b);
 
         /* u2_sing_c():

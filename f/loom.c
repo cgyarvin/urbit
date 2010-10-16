@@ -280,6 +280,58 @@ u2_sing(u2_noun a,
   }
 }
 
+/* u2_nord():
+**
+**   Return 0, 1 or 2 if `a` is below, equal to, or above `b`.
+*/
+u2_atom
+u2_nord(u2_noun a,
+        u2_noun b)
+{
+  if ( a == b ) {
+    return _1;
+  }
+  else {
+    if ( u2_fly_is_atom(a) ) {
+      if ( !u2_fly_is_atom(b) ) {
+        return _0;
+      } else {
+        c3_w w_rez = *u2_at_pug_len(a);
+        c3_w w_mox = *u2_at_pug_len(b);
+
+        if ( w_rez != w_mox ) {
+          return (w_rez < w_mox) ? _0 : _2;
+        }
+        else {
+          c3_w i_w;
+
+          for ( i_w = 0; i_w < w_rez; i_w++ ) {
+            c3_w ai_w = *u2_at_pug_buf(a, i_w);
+            c3_w bi_w = *u2_at_pug_buf(b, i_w);
+
+            if ( ai_w != bi_w ) {
+              return (ai_w < bi_w) ? _0 : _2;
+            }
+          }
+          return _1;
+        }
+      }
+    } else {
+      if ( u2_fly_is_atom(b) ) {
+        return _2;
+      } else {
+        u2_atom c = u2_nord(u2_h(a), u2_h(b));
+
+        if ( _1 == c ) {
+          return u2_nord(u2_t(a), u2_t(b));
+        } else {
+          return c;
+        }
+      }
+    }
+  }
+}
+
 /* u2_sing_c():
 **
 **   Yes iff (b) is the same noun as the C string a_c.
