@@ -79,47 +79,6 @@
 #     define   u2_plow_(plo_r, pat)  *u2_at(plo_r, u2_loom_plow, pat)
   
 
-/** External operators (temporary):
-**/
-  /** Books.
-  **/
-    /* u2_fj_book_in():
-    **
-    **   Return 1 iff (tag) is in (tab).
-    */
-      u4_t
-      u2_fj_book_in(u4_noun tag,
-                u4_tab  tab);
-
-    /* u2_fj_book_get(): 
-    **
-    **   Produce the dog in (tab) matching (tag), or bull.
-    */
-      u4_nopt
-      u2_fj_book_get(u4_noun tag,
-                 u4_tab  tab);
-
-    /* u2_fj_book_add():
-    **
-    **   Produce a new tab which adds (tag dog) to (tab).
-    **   Replace old dog, if any.
-    */
-      _(u4_tab, tab_pro)
-      u2_fj_book_add(u4_lane lane,
-                 u4_noun tag,
-                 u4_noun dog,
-                 u4_tab  tab_sub);
-
-    /* u2_fj_book_add_list():
-    **
-    **   Produce a new tab which adds all (tag dog) cells in
-    **   (log) to (tab).  Replace old dog, if any.
-    */
-      _(u4_tab, tab_pro)
-      u2_fj_book_add_list(u4_lane lane,
-                     u4_log  log,
-                     u4_tab  tab_sub);
-
 /** Forward declarations.
 **/
 
@@ -348,7 +307,7 @@
           (wir_r,
            u4_atom_nail,
            u4_cod_in('%'),
-           u4_pump_prep(wir_r, p_typ),
+           u4_prep_noun(wir_r, p_typ),
            0);
       }
     }

@@ -296,8 +296,11 @@ F_OFILES=\
        f/main.o
 
 P_OFILES=\
+       p/book.o \
        p/pool.o \
-       p/book.o
+       p/prep.o \
+       p/saur.o
+     
 
 OFILES= \
        $(L_OFILES) \
