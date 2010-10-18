@@ -193,6 +193,16 @@
                        u2_pool pool_a,
                        u2_pool pool_b);
 
+      /* u2_fj_pool_at():
+      **
+      **   Return path to node of (pig) in (pool), under (axe); or 0.
+      */
+        u2_atom
+        u2_fj_pool_at(u2_ray  wir_r, 
+                      u2_noun  pig_in,
+                      u2_atom axe,
+                      u2_pool  pool);
+
     /** Books (associative arrays).
     **/
       /* u2_fj_book_is():

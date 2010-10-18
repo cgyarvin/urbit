@@ -167,7 +167,7 @@
                        u2_noun a,
                        u2_noun b);
 #         define u2_bc(wir_r, a, b) u2_bn_cell(wir_r, a, b)
-#         define u2_bo(wir_r, a)    u2_bn_cell(wir_r, a, _0);
+#         define u2_bo(wir_r, a)    u2_bn_cell(wir_r, a, _0)
 
           /* u2_bn_ice():
           **

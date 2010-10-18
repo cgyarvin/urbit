@@ -300,6 +300,7 @@ P_OFILES=\
        p/list.o \
        p/pool.o \
        p/prep.o \
+       p/plow.o \
        p/saur.o
      
 

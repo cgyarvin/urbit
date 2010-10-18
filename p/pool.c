@@ -301,3 +301,48 @@ u2_fj_pool_cat(u2_ray  wir_r,
   }
   return pool_b;
 }
+
+
+/* u2_fj_pool_at():
+**
+**   Return path to node of (pig) in (pool), under (axe); or 0.
+*/
+u2_atom
+u2_fj_pool_at(u2_ray  wir_r, 
+              u2_noun  pig_in,
+              u2_atom axe,
+              u2_pool  pool)
+{
+  c3_w nub_in = u2_mug(pig_in);
+
+  if ( _0 == pool ) {
+    return _0;
+  }
+  else {
+    u2_noun pig; 
+    u2_pool pool_l, pool_r;
+
+    u2_as_trel(pool, &pig, &pool_l, &pool_r);
+    {
+      c3_w nub_sub = u2_mug(pig);
+      c3_t   t_l;
+
+      if ( nub_in == nub_sub ) {
+        if ( u2_yes == u2_sing(pig_in, pig) ) {
+          return axe;
+        }
+        else t_l = _ord_simple(pig_in, pig);
+      }
+      else t_l = (nub_in < nub_sub);
+
+      if ( t_l ) {
+        return u2_fj_pool_at
+          (wir_r, pig_in, u2_fj_op_peg(wir_r, axe, _2), pool_l);
+      }
+      else {
+        return u2_fj_pool_at
+          (wir_r, pig_in, u2_fj_op_peg(wir_r, axe, _3), pool_r);
+      }
+    }
+  }
+}

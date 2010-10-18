@@ -485,6 +485,18 @@
                     u2_noun* d,
                     u2_noun* e);
 
+        /* u2_as_pqrs():
+        **
+        **   & [0] if [a] is of the form [b *c *d *e *f].
+        */
+          u2_flag
+          u2_as_pqrs(u2_noun  a,
+                     u2_noun  b,
+                     u2_noun* c,
+                     u2_noun* d,
+                     u2_noun* e,
+                     u2_noun* f);
+
         /* u2_as_qual():
         **
         **   Factor (a) as a qual (b c d e).

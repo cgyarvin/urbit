@@ -6,11 +6,11 @@
 
 /** Data structures.
 **/
-  /* Noun types.
-  */
-
   /* Adaptation macros.
   */
+    #define u2_brut(wir_r, cat, typ) \
+      u2_burp(wir_r, cat, _dump_type(wir_r, typ))
+
 
   /* u2_loom_plow: central plow structure.
   */
@@ -82,373 +82,193 @@
 
 /** Forward declarations.
 **/
-  void      _plow_trap(u2_ray wir_r, const char *msg);
-  u2_noun   _plow_fail(u2_ray wir_r, const char *msg);
-  u2_rope   _plow_rake(u2_ray wir_r, u2_gene gen);
+  static void      _plow_trap(u2_ray wir_r, const char *msg);
+  static u2_noun   _plow_fail(u2_ray wir_r, const char *msg);
+  static u2_rope   _plow_rake(u2_ray wir_r, u2_gene gen);
+  static u2_gene   _plow_open(u2_ray wir_r, u2_gene gen);
 
-/****   _dump: pretty-printing.
-****/
-      /** Global variables.
-      **/
-        u2_pool how;
+  /** *:dump
+  **/
+#if 0
+    static u2_prep
+    _dump_durb(u2_ray  wir_r,
+               u2_rail bar);
+#endif
+    static u2_prep
+    _dump_type(u2_ray  wir_r,
+               u2_type typ);
+    static u2_atom
+    _dump_size(u2_ray  wir_r,
+               u2_noun box);
 
-        static u2_prep
-        _dump_main(u2_ray  wir_r, u2_pool gil, u2_pool nip, u2_type typ);
+  /** *:gull
+  **/
+    static u2_atom
+    _gull_size(u2_ray  wir_r,
+               u2_book dab);
+    static u2_unit
+    _gull_look(u2_ray  wir_r,
+               u2_spec dab,
+               u2_term cog);
+    static u2_spec
+    _gull_fill(u2_ray  wir_r,
+               u2_spec dab,
+               u2_menu sem);
+  /** *:iris
+  **/
+    static u2_type
+    _iris_burn(u2_ray  wir_r,
+               u2_type sub,
+               u2_rail bar,
+               u2_axis axe,
+               u2_tack tac);
+    static u2_flag
+    _iris_cull(u2_ray  wir_r,
+               u2_type sub,
+               u2_rail bar,
+               u2_axis axe);
+    static u2_plan
+    _iris_find(u2_ray  wir_r,
+               u2_type sub,
+               u2_rail bar,
+               u2_axis axe,
+               u2_term cog);
+    static u2_tool
+    _iris_fish(u2_ray  wir_r,
+               u2_type sub,
+               u2_rail bar,
+               u2_axis axe);
+    static u2_type
+    _iris_half(u2_ray  wir_r,
+               u2_type sub,
+               u2_rail bar,
+               u2_axis axe,
+               u2_axis had);
+    static u2_flag
+    _iris_nest(u2_ray  wir_r,
+               u2_type sub,
+               u2_rail bar,
+               u2_axis axe,
+               u2_type bon);
+    static u2_type
+    _iris_peek(u2_ray  wir_r,
+               u2_type sub,
+               u2_rail bar,
+               u2_axis axe,
+               u2_axis bow);
+    static void
+    _iris_slip(u2_ray  wir_r,
+               u2_type *sub,
+               u2_rail *bar,
+               u2_axis *axe,
+               u2_axis had);
+    static u2_type
+    _iris_snap(u2_ray  wir_r,
+               u2_type sub,
+               u2_rail bar,
+               u2_axis axe,
+               u2_type bon);
+  /** *:lark
+  **/
+    static u2_tack
+    _lark_cram(u2_ray  wir_r,
+               u2_type sub,
+               u2_tack tac,
+               u2_tack les);
+    static u2_tack
+    _lark_feed(u2_ray  wir_r,
+               u2_type sub,
+               u2_tack tac,
+               u2_list mut);
+    static u2_tack
+    _lark_nuke(u2_ray  wir_r,
+               u2_type sub,
+               u2_tack tac,
+               u2_rope rop,
+               u2_type feg);
+  /** *:lily
+  **/
+    static u2_tool
+    _lily_cons(u2_ray  wir_r,
+               u2_tool vor,
+               u2_tool sed);
+    static u2_tool
+    _lily_comb(u2_ray  wir_r,
+               u2_tool mal,
+               u2_tool buz);
+    static u2_tool
+    _lily_flan(u2_ray  wir_r,
+               u2_tool zeg,
+               u2_tool dac);
+    static u2_tool
+    _lily_flor(u2_ray  wir_r,
+               u2_tool bos,
+               u2_tool nif);
+    static u2_tool
+    _lily_flop(u2_ray  wir_r,
+              u2_tool zet);
+    static u2_tool
+    _lily_hike(u2_ray  wir_r,
+               u2_axis axe,
+               u2_list vix);
+  /** *:open
+  **/
+    /* open:plow
+    */
+    static u2_gene
+    _plow_open(u2_ray  wir_r,
+               u2_gene gen);
+  /** *:rose
+  **/
+    static u2_type
+    _rose_edit(u2_ray  wir_r,
+               u2_type sub,
+               u2_list mut);
+    static u2_type
+    _rose_gain(u2_ray  wir_r,
+               u2_type sub,
+               u2_gene gen);
+    static u2_type
+    _rose_both(u2_ray  wir_r,
+               u2_type sub,
+               u2_type hoc);
+    static u2_type
+    _rose_eith(u2_ray  wir_r,
+               u2_type sub,
+               u2_type hoc);
+    static u2_tool
+    _rose_make(u2_ray  wir_r,
+               u2_type sub,
+               u2_gene gen);
+    static u2_flag
+    _rose_null(u2_ray  wir_r,
+               u2_type sub);
+    static u2_flag
+    _rose_orth(u2_ray  wir_r,
+               u2_type sub,
+               u2_type ref);
+    static u2_type
+    _rose_play(u2_ray  wir_r,
+               u2_type sub,
+               u2_gene gen);
+    static u2_type
+    _rose_repo(u2_ray  wir_r,
+               u2_type sub,
+               u2_gene gen);
+    static u2_plan
+    _rose_seek(u2_ray  wir_r,
+               u2_type sub,
+               u2_gene gen);
+    static u2_flag
+    _rose_show(u2_ray  wir_r,
+               u2_type sub,
+               u2_gene gen);
 
-  /* seal:dump (fake)
-  */
-    static u2_pool
-    _dump_seal_main(u2_ray  wir_r,
-                    u2_pool gil,
-                    u2_type typ)
-    {
-      
-      u2_noun p_typ, q_typ;
-
-      // %atom
-      // %blur
-      //
-      if ( u2_yes == u2_sing(c3__atom, typ) ||
-           u2_yes == u2_sing(c3__blur, typ) ||
-           u2_yes == u2_sing(c3__blot, typ) ) 
-      {
-        return u2_nul;
-      }
-
-      // [%cell p=type q=type]
-      //
-      else if ( u2_yes == u2_as_pq(typ, c3__cell, &p_typ, &q_typ) ) {
-        return u2_fj_pool_cat(wir_r, _dump_seal_main(wir_r, gil, p_typ),
-                               _dump_seal_main(wir_r, gil, q_typ));
-      }
-
-      // [%core p=type q=*]
-      //
-      else if ( u2_yes == u2_as_pq(typ, c3__core, &p_typ, &q_typ) ) {
-        return _dump_seal_main(wir_r, gil, p_typ);
-      }
-
-      // [%cube p=noun]
-      // 
-      else if ( u2_yes == u2_as_p(typ, c3__cube, &p_typ) ) {
-        return u2_nul;
-      }
-
-      // [%face p=mark q=type]
-      //
-      else if ( u2_yes == u2_as_pq(typ, c3__face, &p_typ, &q_typ) ) {
-        return _dump_seal_main(wir_r, gil, q_typ);
-      }
-
-      // [%fork p=type q=type]
-      //
-      else if ( u2_yes == u2_as_pq(typ, c3__fork, &p_typ, &q_typ) ) {
-        return u2_fj_pool_cat(wir_r, _dump_seal_main(wir_r, gil, p_typ),
-                                _dump_seal_main(wir_r, gil, q_typ));
-      }
-
-      // [%fuse p=type q=type]
-      //
-      else if ( u2_yes == u2_as_pq(typ, c3__fuse, &p_typ, &q_typ) ) {
-        return u2_fj_pool_cat(wir_r, _dump_seal_main(wir_r, gil, p_typ),
-                                _dump_seal_main(wir_r, gil, q_typ));
-      }
-
-      // [%hold p=type q=gene]
-      //
-      else if ( u2_yes == u2_as_pq(typ, c3__hold, &p_typ, &q_typ) ) {
-        if ( u2_fj_pool_in(typ, gil) ) {
-          return u2_bt(wir_r, typ, u2_nul, u2_nul);
-        } 
-        else {
-          return _dump_seal_main
-            (wir_r, u2_fj_pool_add(wir_r, typ, gil),
-                _rose_repo(wir_r, p_typ, q_typ));
-        }
-      }
-      else {
-        if ( u2_yes == u2_dust(typ) && u2_yes == u2_dust(u2_h(typ)) ) {
-          printf("hm!\n");
-        }
-        else u2_err(wir_r, "odd type", typ);
-
-
-        return u2_bl_bail(wir_r);
-      }
-    }
-
-  /* _dump_seal(): produce set of holds sealing [typ].
-  */
-  u2_pool
-  _dump_seal(u2_ray  wir_r,
-             u2_type typ)
-  {
-    return _dump_seal_main(wir_r, u2_nul, typ);
-  }
-
-  /* _dump_cell()::
-  */
-  static u2_noun
-  _dump_cell(u2_ray  wir_r,
-             u2_pool gil,
-             u2_pool nip,
-             u2_noun p_typ,
-             u2_noun q_typ)
-  {
-    
-    u2_noun pq_typ, qq_typ;
-
-    if ( u2_yes == u2_as_pq(q_typ, c3__cell, &pq_typ, &qq_typ) ) {
-      return u2_bc
-        (wir_r, _dump_main(wir_r, gil, nip, p_typ),
-              _dump_cell(wir_r, gil, nip, pq_typ, qq_typ));
-    }
-    else {
-      return u2_bt
-        (wir_r, _dump_main(wir_r, gil, nip, p_typ),
-               _dump_main(wir_r, gil, nip, q_typ),
-               u2_nul);
-    }
-  }
-
-  /* _dump_core(): dump a core.
-  */
-  static u2_prep
-  _dump_core(u2_ray  wir_r,
-             u2_pool gil,
-             u2_pool nip,
-             u2_type myt,
-             u2_atom kic,
-             u2_spec dab)
-  {
-    
-    u2_prep gum;
-    u2_prep zib;
-    u2_prep bor;
-
-    zib = _dump_main(wir_r, gil, nip, myt);
-    bor = u2_fj_op_glu
-      (wir_r, (u2_yes == u2_sing(c3__soft, kic) ? ('-') : ('+')),
-             u2_fj_op_glu
-               (wir_r, u2_fj_prep_decimal(wir_r, _gull_size(wir_r, dab)),
-                      u2_fj_op_glu
-                        (wir_r, ('.'),
-                               u2_fj_prep_hexinal
-                                  (wir_r, (u2_mug(dab) & 0xffff)))));
-
-    gum = u2_fj_prep_close
-      (wir_r, '<', '>', u2_bn_list(wir_r, zib, bor, u2_none));
-
-    return gum;
-  }
-
-  /* _dump_fork(): dump fork as list.
-  */
-  static u2_noun
-  _dump_fork(u2_ray  wir_r,
-             u2_pool gil,
-             u2_pool nip,
-             u2_type p_typ,
-             u2_type q_typ)
-  {
-    
-    u2_noun pq_typ, qq_typ;
-
-    if ( u2_yes == u2_as_pq(q_typ, c3__fork, &pq_typ, &qq_typ) ) {
-      return u2_bc
-        (wir_r, _dump_main(wir_r, gil, nip, p_typ),
-              _dump_fork(wir_r, gil, nip, pq_typ, qq_typ));
-    }
-    else {
-      return u2_bt
-        (wir_r, _dump_main(wir_r, gil, nip, p_typ),
-              _dump_main(wir_r, gil, nip, q_typ),
-              u2_nul);
-    }
-  }
-   
-  /* _dump_main(): dump with gil and nip.
-  */
-  static u2_prep
-  _dump_main(u2_ray  wir_r,
-             u2_pool gil,
-             u2_pool nip,
-             u2_type typ)
-  {
-    
-    u2_noun p_typ, q_typ, r_typ, s_typ;
-
-    if ( u2_yes == u2_stud(typ) ) {
-      if ( u2_yes == u2_sing(c3__atom, typ) ) {
-        return ('@');
-      }
-      else if ( u2_yes == u2_sing(c3__blot, typ) ) {
-        return ('#');
-      }
-      else if ( u2_yes == u2_sing(c3__blur, typ) ) {
-        return ('*');
-      }
-      else return u2_bl_bail(wir_r);
-    }
-    else if ( u2_yes == u2_as_pq(typ, c3__cell, &p_typ, &q_typ) ) {
-      return u2_fj_prep_close
-        (wir_r, '[', ']', 
-                _dump_cell(wir_r, gil, nip, p_typ, q_typ));
-    }
-    else if ( u2_yes == u2_as_pqrs(typ, c3__core, &p_typ, &q_typ, &r_typ, &s_typ) ) {
-      return _dump_core(wir_r, gil, nip, p_typ, q_typ, s_typ);
-    }
-    else if ( u2_yes == u2_as_p(typ, c3__cube, &p_typ) ) {
-      if ( (u2_nul == p_typ) ) {
-        return ('~');
-      }
-      else if ( u2_yes == u2_stud(p_typ) ) {
-        return u2_fj_op_glu
-          (wir_r, ('%'), u2_fj_prep_textual(wir_r, p_typ));
-      }
-      else {
-        return u2_bn_list
-          (wir_r,
-           c3__nail,
-           ('%'),
-           u2_fj_prep_noun(wir_r, p_typ),
-           u2_none);
-      }
-    }
-    else if ( u2_yes == u2_as_pq(typ, c3__face, &p_typ, &q_typ) ) {
-      return u2_bn_list
-        (wir_r, c3__nail, 
-               u2_fj_prep_textual(wir_r, p_typ),
-               (':'),
-               _dump_main(wir_r, gil, nip, q_typ),
-               u2_none);
-    }
-    else if ( u2_yes == u2_as_pq(typ, c3__fork, &p_typ, &q_typ) ) {
-      u2_noun pip_typ, piq_typ;
-
-      if ( u2_yes == u2_as_p(p_typ, c3__cube, &pip_typ) &&
-           u2_yes == u2_as_p(q_typ, c3__cube, &piq_typ) &&
-           (u2_yes == pip_typ) &&
-           (u2_no == piq_typ) )
-      {
-        return ('?');
-      }
-      else {
-        return
-          u2_fj_prep_close
-            (wir_r, '{', '}', _dump_fork(wir_r, gil, nip, p_typ, q_typ));
-      }
-    }
-    else if ( u2_yes == u2_as_pq(typ, c3__fuse, &p_typ, &q_typ) ) {
-      return u2_fj_prep_close
-        (wir_r, '(', ')', 
-               u2_bn_list(wir_r,
-                         _dump_main(wir_r, gil, nip, p_typ),
-                         _dump_main(wir_r, gil, nip, q_typ),
-                         u2_none));
-    }
-    else if ( u2_yes == u2_as_pq(typ, c3__hold, &p_typ, &q_typ) ) {
-      if ( u2_fj_pool_in(typ, gil) ) {
-        u2_noun fez = u2_fj_op_glu
-            (wir_r, ('$'), 
-                   u2_fj_prep_decimal(wir_r, u2_fj_pool_at(wir_r, typ, u2_axis_1, gil)));
-
-        if ( u2_fj_pool_in(typ, nip) || u2_fj_pool_in(typ, how) ) {
-          return fez;
-        }
-        else {
-          how = u2_fj_pool_add(wir_r, typ, how);
-          { 
-            u2_prep hod = 
-              _dump_main(wir_r, gil, 
-                            u2_fj_pool_add(wir_r, typ, nip),
-                            _rose_repo(wir_r, p_typ, q_typ));
-
-            
-            return u2_bn_list
-              (wir_r, c3__nail, 
-                     fez,
-                     ('='),
-                     hod,
-                     u2_none);
-          }
-        }
-      }
-      else {
-        return _dump_main(wir_r, gil, nip, _rose_repo(wir_r, p_typ, q_typ));
-      }
-    }
-    else {
-      return u2_bl_bail(wir_r);
-    }
-  }
-
-  /* _durb_in()::
-  */
-  static u2_noun
-  _durb_in(u2_ray  wir_r,
-           u2_rail bar)
-  {
-    if ( (u2_nul == bar) ) {
-      return u2_nul;
-    } else {
-      return u2_bc(wir_r, _dump_type(wir_r, u2_h(bar)), 
-                               _durb_in(wir_r, u2_t(bar)));
-    }
-  }
-
-  /* _dump_durb(): prepare rail for printing.
-  */
-  u2_prep
-  _dump_durb(u2_ray  wir_r,
-             u2_rail bar)
-  {
-    if ( (u2_nul == bar) ) {
-      return ('~');
-    }
-    else {
-      return u2_fj_prep_close
-        (wir_r, '(', ')', _durb_in(wir_r, bar));
-    }
-  }
-
-  /* _dump_type(): prepare type for printing.
-  */
-  u2_prep
-  _dump_type(u2_ray  wir_r,
-             u2_type typ)
-  {
-    u2_pool gil = _dump_seal(wir_r, typ);
-    u2_prep par;
-
-    // Lamentable.
-    //
-    how = u2_nul;
-    par = _dump_main(wir_r, gil, u2_nul, typ);
-    how = u2_nul;
-
-    return par;
-  }
-
-  /* _dump_size()::
-  */
-  u2_atom
-  _dump_size(u2_ray wir_r, u2_noun box)
-  {
-    if ( u2_yes == u2_stud(box) ) {
-      return _1;
-    }
-    else {
-      return u2_fj_op_add
-        (wir_r, _dump_size(wir_r, u2_h(box)), 
-              _dump_size(wir_r, u2_t(box)));
-    }
-  }
 /****   _lily: formula assembly.
 ****/
   /* cons:lily
   */
-  u2_tool
+  static u2_tool
   _lily_cons(u2_ray  wir_r,
              u2_tool vur,
              u2_tool sed)
@@ -462,9 +282,9 @@
     }
     else if ( u2_yes == u2_as_p(vur, u2_nock_frag, &p_vur) && 
               u2_yes == u2_as_p(sed, u2_nock_frag, &p_sed) &&
-              !(u2_yes == u2_sing(u2_axis_1, p_vur)) &&
+              !(u2_yes == u2_sing(_1, p_vur)) &&
               !(u2_yes == u2_sing(p_vur, p_sed)) &&
-              (u2_nul == u2_fj_op_ord(p_vur, p_sed)) )
+              (_0 == u2_nord(p_vur, p_sed)) )
     {
       u2_atom fub = u2_fj_op_div(wir_r, _2, p_vur);
       u2_atom nof = u2_fj_op_div(wir_r, _2, p_sed);
@@ -478,7 +298,7 @@
 
   /* comb:lily
   */
-  u2_tool
+  static u2_tool
   _lily_comb(u2_ray  wir_r,
              u2_tool mal,
              u2_tool buz)
@@ -512,7 +332,7 @@
       }
     }
     else if ( u2_yes == u2_as_p(buz, u2_nock_frag, &p_buz) ) {
-      if ( u2_yes == u2_sing(u2_axis_1, p_buz) ) {
+      if ( u2_yes == u2_sing(_1, p_buz) ) {
         return mal;
       }
     }
@@ -522,7 +342,7 @@
 
   /* flan:lily
   */
-  u2_tool
+  static u2_tool
   _lily_flan(u2_ray  wir_r,
              u2_tool zeg,
              u2_tool dac)
@@ -551,7 +371,7 @@
 
   /* flor:lily
   */
-  u2_tool
+  static u2_tool
   _lily_flor(u2_ray  wir_r,
              u2_tool bos,
              u2_tool nif)
@@ -580,7 +400,7 @@
 
   /* _lily_flop(): invert boolean.
   */
-  u2_tool
+  static u2_tool
   _lily_flop(u2_ray  wir_r,
              u2_tool zet)
   {
@@ -613,7 +433,7 @@
     {
       return u2_fj_op_add(wir_r, axis, axis);
     }
-    u2_axis 
+    static u2_axis 
     _lily_hike_axis_r(u2_ray  wir_r, 
                       u2_axis axis)
     {
@@ -634,7 +454,7 @@
         u2_tool tool     = u2_t(u2_h(vix));
         u2_list list_tool = _lily_hike_belt_root(wir_r, u2_t(vix));
 
-        if ( u2_yes == u2_sing(u2_axis_1, axis) ) {
+        if ( u2_yes == u2_sing(_1, axis) ) {
           return u2_bc(wir_r, tool, list_tool);
         }
         else return list_tool;
@@ -655,7 +475,7 @@
         u2_tool tool       = u2_t(u2_h(vix));
         u2_list belt_l = _lily_hike_belt_l(wir_r, u2_t(vix));
         {
-          if ( u2_yes == u2_sing(u2_axis_2, u2_fj_op_tip(axis)) ) {
+          if ( u2_yes == u2_sing(_2, u2_fj_op_tip(axis)) ) {
             u2_axis axis_tap = u2_fj_op_tap(wir_r, axis);
 
             return u2_bc(wir_r, u2_bc(wir_r, axis_tap, tool), belt_l);
@@ -679,7 +499,7 @@
         u2_tool tool       = u2_t(u2_h(vix));
         u2_list belt_r = _lily_hike_belt_r(wir_r, u2_t(vix));
         {
-          if ( u2_yes == u2_sing(u2_axis_3, u2_fj_op_tip(axis)) ) {
+          if ( u2_yes == u2_sing(_3, u2_fj_op_tip(axis)) ) {
             u2_axis axis_tap = u2_fj_op_tap(wir_r, axis);
 
             return u2_bc(wir_r, u2_bc(wir_r, axis_tap, tool), belt_r);
@@ -688,7 +508,7 @@
         }
       }
     }
-  u2_tool
+  static u2_tool
   _lily_hike(u2_ray  wir_r,
              u2_axis axe,
              u2_list vix)  /* (axis tool) */
@@ -773,8 +593,8 @@
         return u2_bt
           (wir_r, 
            c3__twix,
-           _open_mast_fix(wir_r, p_gen, u2_fj_op_peg(wir_r, axe, u2_axis_2)),
-           _open_mast_fix(wir_r, q_gen, u2_fj_op_peg(wir_r, axe, u2_axis_3)));
+           _open_mast_fix(wir_r, p_gen, u2_fj_op_peg(wir_r, axe, _2)),
+           _open_mast_fix(wir_r, q_gen, u2_fj_op_peg(wir_r, axe, _3)));
       }
       else if ( u2_yes == u2_as_pq(gen, c3__velt, &p_gen, &q_gen) ) {
         u2_tool ryx = u2_bc(wir_r, c3__frag, axe);
@@ -791,7 +611,8 @@
                     (wir_r, 
                      ryx,
                      u2_bq
-                      (wir_r, c3__fung, _open_mast(wir_r, q_gen), ryx, u2_nul)))),
+                      (wir_r, 
+                       c3__fung, _open_mast(wir_r, q_gen), ryx, u2_nul)))),
            _open_mast_fix(wir_r, p_gen, axe));
       }
       else if ( u2_yes == u2_as_pq(gen, c3__bran, &p_gen, &q_gen) ) {
@@ -843,7 +664,7 @@
         (wir_r,
          c3__gant,
          u2_bt(wir_r, c3__wost, c3__mave, q_gen),
-         u2_bt(wir_r, c3__lome, u2_nul, _open_mast_fix(wir_r, p_gen, u2_axis_4)));
+         u2_bt(wir_r, c3__lome, u2_nul, _open_mast_fix(wir_r, p_gen, _4)));
     }
     else if ( u2_yes == u2_as_pq(gen, c3__pock, &p_gen, &q_gen) ) {
       return _open_mast(wir_r, q_gen);
@@ -858,7 +679,7 @@
       return u2_bc(wir_r, c3__zush, _open_mast(wir_r, p_gen));
     }
     else if ( u2_yes == u2_as_pq(gen, c3__velt, &p_gen, &q_gen) ) {
-      u2_tool ryx = u2_bc(wir_r, c3__frag, u2_axis_4);
+      u2_tool ryx = u2_bc(wir_r, c3__frag, _4);
 
       return u2_bt
         (wir_r,
@@ -882,7 +703,7 @@
                      ryx,
                      u2_bq
                       (wir_r, c3__fung, _open_mast(wir_r, q_gen), ryx, u2_nul)))),
-             _open_mast_fix(wir_r, p_gen, u2_axis_4))));
+             _open_mast_fix(wir_r, p_gen, _4))));
     }
     else {
       u2_gene bog = _plow_open(wir_r, gen);
@@ -895,7 +716,7 @@
           (wir_r,
            c3__gant,
            u2_bt(wir_r, c3__wost, c3__mave, gen),
-           u2_bt(wir_r, c3__lome, u2_nul, _open_mast_fix(wir_r, gen, u2_axis_4)));
+           u2_bt(wir_r, c3__lome, u2_nul, _open_mast_fix(wir_r, gen, _4)));
       }
     }
   }
@@ -1023,7 +844,7 @@
   _open_do_pq(lonk)
   {
     
-    u2_noun beg = u2_bc(wir_r, c3__frag, u2_axis_4);
+    u2_noun beg = u2_bc(wir_r, c3__frag, _4);
 
     if ( (u2_nul == q_gen) ) {
       return _plow_fail(wir_r, "lonk");
@@ -1044,12 +865,12 @@
             (wir_r,
              c3__gant,
              u2_bt(wir_r, c3__flac,
-                        u2_bc(wir_r, c3__frag, u2_axis_3),
+                        u2_bc(wir_r, c3__frag, _3),
                         iq_gen),
              u2_bt
               (wir_r, 
                c3__gant,
-               u2_bc(wir_r, c3__frag, u2_axis_8), 
+               u2_bc(wir_r, c3__frag, _8), 
                u2_bt
                 (wir_r,
                  c3__sunt,
@@ -1064,7 +885,7 @@
                    u2_bq
                     (wir_r,
                      c3__fung,
-                     u2_bc(wir_r, c3__frag, u2_axis_10),
+                     u2_bc(wir_r, c3__frag, _10),
                      beg,
                      u2_nul),
                   u2_bt
@@ -1081,7 +902,7 @@
     }
   }
 
-    static u2_noun
+    u2_noun
     _gath_a(u2_ray  wir_r,
             u2_noun r_gen)
     {
@@ -1097,7 +918,7 @@
         return u2_bc
           (wir_r, u2_bc(wir_r, pir_gen, 
                            u2_bt(wir_r, c3__flac, 
-                                      u2_bc(wir_r, c3__frag, u2_axis_3),
+                                      u2_bc(wir_r, c3__frag, _3),
                                       qir_gen)),
                _gath_a(wir_r, tr_gen));
       }
@@ -1112,7 +933,7 @@
             u2_bt
               (wir_r,
                c3__mack,
-               u2_bc(wir_r, u2_bc(wir_r, c3__frag, u2_axis_2), p_gen),
+               u2_bc(wir_r, u2_bc(wir_r, c3__frag, _2), p_gen),
                _gath_a(wir_r, r_gen)));
   }
   _open_do_p(prex)
@@ -1151,15 +972,13 @@
 
   _open_do_pqr(hang)
   {
-    
-
     return u2_bq
       (wir_r, c3__gath,
             p_gen,
             q_gen,
             u2_bo(wir_r,
                   u2_bc(wir_r,
-                        u2_bc(wir_r, c3__frag, u2_axis_4),
+                        u2_bc(wir_r, c3__frag, _4),
                         r_gen)));
   }
 
@@ -1173,7 +992,7 @@
             p_gen,
             u2_bo(wir_r,
                   u2_bc(wir_r,
-                        u2_bc(wir_r, c3__frag, u2_axis_4),
+                        u2_bc(wir_r, c3__frag, _4),
                         q_gen)));
   }
 
@@ -1186,13 +1005,13 @@
             q_gen,
             u2_bt
               (wir_r, c3__grel,
-                    u2_bc(wir_r, c3__frag, u2_axis_2),
+                    u2_bc(wir_r, c3__frag, _2),
                     u2_bo(wir_r,
                           u2_bc(wir_r,
                                 u2_bt(wir_r, c3__flac,
-                                           u2_bc(wir_r, c3__frag, u2_axis_3),
+                                           u2_bc(wir_r, c3__frag, _3),
                                            q_gen),
-                                u2_bc(wir_r, c3__frag, u2_axis_2)))));
+                                u2_bc(wir_r, c3__frag, _2)))));
   }
 
   _open_do_p(mast)
@@ -1365,7 +1184,7 @@
          u2_bt(wir_r, c3__lome,
                     u2_nul,
                     u2_bt(wir_r, c3__moze, 
-                               u2_bc(wir_r, c3__frag, u2_axis_4),
+                               u2_bc(wir_r, c3__frag, _4),
                                p_gen)));
     }
   }
@@ -1380,12 +1199,12 @@
             u2_bt
               (wir_r,
                c3__mack,
-               u2_bo(wir_r, u2_bc(wir_r, c3__frag, u2_axis_2)),
+               u2_bo(wir_r, u2_bc(wir_r, c3__frag, _2)),
                u2_bo(wir_r,
                      u2_bc(wir_r,
-                           u2_bc(wir_r, c3__frag, u2_axis_4),
+                           u2_bc(wir_r, c3__frag, _4),
                            u2_bt(wir_r, c3__flac, 
-                                      u2_bc(wir_r, c3__frag, u2_axis_3),
+                                      u2_bc(wir_r, c3__frag, _3),
                                       q_gen)))));
   }
 
@@ -1428,7 +1247,7 @@
       (wir_r, c3__flac,
             u2_bt(wir_r, c3__twix, 
                        p_gen, 
-                       u2_bc(wir_r, c3__frag, u2_axis_1)),
+                       u2_bc(wir_r, c3__frag, _1)),
             q_gen);
   }
 
@@ -1506,7 +1325,7 @@
   _open_do_pq(pock)
   {
     
-    u2_noun rax = u2_bc(wir_r, c3__frag, u2_axis_2);
+    u2_noun rax = u2_bc(wir_r, c3__frag, _2);
 
     return u2_bt
       (wir_r,
@@ -1520,7 +1339,7 @@
                c3__stil,
                u2_bt(wir_r, 
                      c3__flac, 
-                     u2_bc(wir_r, c3__frag, u2_axis_3), 
+                     u2_bc(wir_r, c3__frag, _3), 
                      p_gen),
                rax)));
   }
@@ -1612,7 +1431,7 @@
 
   /* open:plow
   */
-    static u2_gene
+    u2_gene
     _plow_open_main(u2_ray  wir_r,
                     u2_gene gen)
     {
@@ -1671,7 +1490,7 @@
         return gen;
       }
     }
-  u2_gene
+  static u2_gene
   _plow_open(u2_ray  wir_r,
              u2_gene gen)
   {
@@ -1699,7 +1518,7 @@
 ****/
   /* size:gull:plow
   */
-  u2_atom
+  static u2_atom
   _gull_size(u2_ray  wir_r,
              u2_book dab)
   {
@@ -1717,7 +1536,7 @@
 
   /* fill:gull:plow
   */
-  u2_spec
+  static u2_spec
   _gull_fill(u2_ray  wir_r,
              u2_book dab,
              u2_menu sem)
@@ -1731,15 +1550,10 @@
   **
   **    Trip if (tag_l tag_r) are equal.
   */
-  static c3_t
+  c3_t
   _ord_tag_simple(u2_noun tag_l, u2_noun tag_r)
   {
-    u2_atom dor;
-
-    if ( u2_none == (dor = u2_nord(tag_l, tag_r)) ) {
-      return u2_bl_bail(wir_r);
-    }
-    return (_0 == dor);
+    return (_0 == u2_nord(tag_l, tag_r));
   }
 
   /* _ord_tag_tree():
@@ -1748,7 +1562,7 @@
   **
   **    Stop iff (hog_l hog_r) are equal.
   */
-  static c3_t
+  c3_t
   _ord_tag_tree(u2_noun tag_l, u2_noun tag_r)
   {
     c3_w mug_l = u2_mug(tag_l);
@@ -1762,7 +1576,7 @@
 
   /* look:gull:plow
   */
-    static u2_unit
+    u2_unit
     _gull_look_a(u2_ray  wir_r,
                  u2_spec dab,
                  u2_term cog,
@@ -1821,23 +1635,26 @@
         }
       }
     }
-  u2_unit
+  static u2_unit
   _gull_look(u2_ray  wir_r,
              u2_spec dab,
              u2_term cog)
   {
-    return _gull_look_a(wir_r, dab, cog, u2_axis_1);
+    return _gull_look_a(wir_r, dab, cog, _1);
   }
 
 
 /****   _iris: type system core.
 ****/
+    /** Forward declarations.
+    **/
+      
   /* burn:iris:rose:plow
   */
-    static u2_type
+    u2_type
     _iris_burn_sint(u2_ray, u2_type, u2_rail, u2_axis, u2_tack);
 
-    static u2_type
+    u2_type
     _iris_burn_dext(u2_ray  wir_r,
                     u2_type sut,
                     u2_rail bar,
@@ -1891,10 +1708,10 @@
           u2_noun r_sut, r_bar, r_axe;
 
           l_sut = sut; l_bar = bar; l_axe = axe;
-          _iris_slip(wir_r, &l_sut, &l_bar, &l_axe, u2_axis_2);
+          _iris_slip(wir_r, &l_sut, &l_bar, &l_axe, _2);
 
           r_sut = sut; r_bar = bar; r_axe = axe;
-          _iris_slip(wir_r, &r_sut, &r_bar, &r_axe, u2_axis_3);
+          _iris_slip(wir_r, &r_sut, &r_bar, &r_axe, _3);
 
           return u2_bt
             (wir_r,
@@ -1907,7 +1724,7 @@
           u2_type ham;
 
           l_sut = sut; l_bar = bar; l_axe = axe;
-          _iris_slip(wir_r, &l_sut, &l_bar, &l_axe, u2_axis_2);
+          _iris_slip(wir_r, &l_sut, &l_bar, &l_axe, _2);
 
           ham = _iris_burn_dext(wir_r, l_sut, l_bar, l_axe, p_tac);
 
@@ -1930,15 +1747,15 @@
           u2_noun poq = u2_bt
             (wir_r,
              c3__cell,
-             _iris_half(wir_r, sut, bar, axe, u2_axis_2),
-             _iris_half(wir_r, sut, bar, axe, u2_axis_3));
+             _iris_half(wir_r, sut, bar, axe, _2),
+             _iris_half(wir_r, sut, bar, axe, _3));
 
           return _iris_burn_dext(wir_r, poq, bar, axe, tac);
         }
       }
       else return u2_bl_bail(wir_r);
     }
-    static u2_unit
+    u2_unit
     _iris_burn_swim(u2_ray  wir_r,
                     u2_type sut,
                     u2_rail bar,
@@ -1974,7 +1791,7 @@
         }
       }
     }
-    static u2_type
+    u2_type
     _iris_burn_sint(u2_ray  wir_r,
                     u2_type sut,
                     u2_rail bar,
@@ -2006,7 +1823,7 @@
       }
       else return u2_bl_bail(wir_r);
     }
-  u2_type
+  static u2_type
   _iris_burn(u2_ray  wir_r,
              u2_type sut,
              u2_rail bar,
@@ -2018,7 +1835,7 @@
 
   /* cull:iris:rose:plow
   */
-    static u2_flag
+    u2_flag
     _iris_cull_a(u2_ray  wir_r,
                  u2_type sut,
                  u2_rail bar,
@@ -2032,7 +1849,7 @@
       }
       else return _iris_cull_a(wir_r, sut, u2_t(bar), axe);
     }
-  u2_flag
+  static u2_flag
   _iris_cull(u2_ray  wir_r,
              u2_type sut,
              u2_rail bar,
@@ -2048,10 +1865,10 @@
 
   /* find:iris:rose:plow
   */
-    static u2_unit _iris_find_main
+    u2_unit _iris_find_main
       (u2_ray, u2_type, u2_rail, u2_axis, u2_pool, u2_term);
 
-    static u2_unit
+    u2_unit
     _iris_find_half(u2_ray  wir_r,
                     u2_type sut,
                     u2_rail bar,
@@ -2064,7 +1881,7 @@
 
       return _iris_find_main(wir_r, sut, bar, axe, gil, cog);
     }
-    static u2_unit
+    u2_unit
     _iris_find_swim(u2_ray  wir_r,
                     u2_type sut,
                     u2_rail bar,
@@ -2140,7 +1957,7 @@
         }
       }
     }
-    static u2_unit
+    u2_unit
     _iris_find_main_a(u2_ray  wir_r,
                       u2_type sut,
                       u2_rail bar,
@@ -2159,8 +1976,8 @@
         return u2_nul;
       }
       else if ( u2_yes == u2_as_pq(sut, c3__cell, &p_sut, &q_sut) ) {
-        u2_unit taf = _iris_find_half(wir_r, sut, bar, axe, gil, cog, u2_axis_2);
-        u2_unit bov = _iris_find_half(wir_r, sut, bar, axe, gil, cog, u2_axis_3);
+        u2_unit taf = _iris_find_half(wir_r, sut, bar, axe, gil, cog, _2);
+        u2_unit bov = _iris_find_half(wir_r, sut, bar, axe, gil, cog, _3);
 
         if ( (u2_nul == taf) ) {
           return bov;
@@ -2183,7 +2000,7 @@
 
         zem = _gull_look(wir_r, dab, cog);
         if ( (u2_nul == zem) ) {
-          return _iris_find_half(wir_r, sut, bar, axe, gil, cog, u2_axis_2);
+          return _iris_find_half(wir_r, sut, bar, axe, gil, cog, _2);
         }
         else return 
           u2_bc
@@ -2195,7 +2012,7 @@
                u2_bq
                 (wir_r, 
                  u2_nul, 
-                 u2_fj_op_peg(wir_r, u2_axis_3, u2_h(u2_t(zem))),
+                 u2_fj_op_peg(wir_r, _3, u2_h(u2_t(zem))),
                  sut,
                  u2_t(u2_t(zem))),
                sut));
@@ -2304,7 +2121,7 @@
         return u2_bl_bail(wir_r);
       }
     }
-    static u2_unit
+    u2_unit
     _iris_find_main(u2_ray  wir_r,
                     u2_type sut,
                     u2_rail bar,
@@ -2327,7 +2144,7 @@
         return gur;
       }
     }
-  u2_plan
+  static u2_plan
   _iris_find(u2_ray  wir_r,
              u2_type sut,
              u2_rail bar,
@@ -2346,10 +2163,10 @@
 
   /* fish:iris:rose:plow
   */
-    static u2_tool
+    u2_tool
     _iris_fish_main(u2_ray, u2_type, u2_rail, u2_axis, u2_pool);
 
-    static u2_tool
+    u2_tool
     _iris_fish_slip(u2_ray  wir_r,
                     u2_type sut,
                     u2_rail bar,
@@ -2360,7 +2177,7 @@
       _iris_slip(wir_r, &sut, &bar, &axe, had);
       return _iris_fish_main(wir_r, sut, bar, axe, vit);
     }
-    static u2_unit
+    u2_unit
     _iris_fish_swim(u2_ray  wir_r,
                     u2_type sut,
                     u2_rail bar,
@@ -2390,7 +2207,7 @@
         }
       }
     }
-    static u2_tool
+    u2_tool
     _iris_fish_main(u2_ray  wir_r,
                     u2_type sut,
                     u2_rail bar,
@@ -2424,8 +2241,8 @@
           (wir_r,
            u2_bt(wir_r, u2_nock_dust, u2_nock_frag, axe),
            _lily_flan
-            (wir_r, _iris_fish_slip(wir_r, sut, bar, axe, vit, u2_axis_2),
-                _iris_fish_slip(wir_r, sut, bar, axe, vit, u2_axis_3)));
+            (wir_r, _iris_fish_slip(wir_r, sut, bar, axe, vit, _2),
+                _iris_fish_slip(wir_r, sut, bar, axe, vit, _3)));
       }
       else if ( u2_yes == u2_as_pq(sut, c3__face, &p_sut, &q_sut) ) {
         return _iris_fish_main(wir_r, q_sut, bar, axe, vit);
@@ -2457,7 +2274,7 @@
         return u2_bl_bail(wir_r);
       }
     }
-  u2_tool
+  static u2_tool
   _iris_fish(u2_ray  wir_r,
              u2_type sut,
              u2_rail bar,
@@ -2497,7 +2314,7 @@
         }
       }
     }
-    u2_type
+    static u2_type
     _iris_half_main(u2_ray  wir_r,
                     u2_type sut,
                     u2_rail bar,
@@ -2517,12 +2334,12 @@
         return c3__blur;
       }
       else if ( u2_yes == u2_as_pq(sut, c3__cell, &p_sut, &q_sut) ) {
-        if ( u2_yes == u2_sing(u2_axis_2, had) ) {
+        if ( u2_yes == u2_sing(_2, had) ) {
           return p_sut;
         } else return q_sut;
       }
       else if ( u2_yes == u2_as_pq(sut, c3__core, &p_sut, &q_sut) ) {
-        if ( u2_yes == u2_sing(u2_axis_2, had) ) {
+        if ( u2_yes == u2_sing(_2, had) ) {
           return p_sut;
         } else return c3__blur;
       }
@@ -2530,7 +2347,7 @@
         if ( u2_yes == u2_stud(p_sut) ) {
           return c3__blot;
         }
-        else if ( u2_yes == u2_sing(u2_axis_2, had) ) {
+        else if ( u2_yes == u2_sing(_2, had) ) {
           return u2_bc(wir_r, c3__cube, u2_h(p_sut));
         } else return u2_bc(wir_r, c3__cube, u2_t(p_sut));
       }
@@ -2557,7 +2374,7 @@
       else return u2_bl_bail(wir_r);
     }
 
-  u2_type
+  static u2_type
   _iris_half(u2_ray  wir_r,
              u2_type sut,
              u2_rail bar,
@@ -2581,14 +2398,14 @@
 
   /* nest:iris:rose:plow
   */
-    static u2_flag
+    u2_flag
     _iris_nest_sint
       (u2_ray, u2_type, u2_rail, u2_axis, u2_pool, u2_type, u2_rail, u2_axis); 
-    static u2_flag
+    u2_flag
     _iris_nest_dext
       (u2_ray, u2_type, u2_rail, u2_axis, u2_pool, u2_type, u2_rail, u2_axis); 
 
-    static u2_flag
+    u2_flag
     _iris_nest_dext_slip(u2_ray  wir_r,
                          u2_type sut,
                          u2_rail bar,
@@ -2604,7 +2421,7 @@
 
       return _iris_nest_dext(wir_r, sut, bar, axe, gil, bon, nef, ful);
     }
-    static u2_flag
+    u2_flag
     _iris_nest_dext_swim(u2_ray  wir_r,
                          u2_type sut,
                          u2_rail bar,
@@ -2630,7 +2447,7 @@
       }
     }
 
-    static u2_flag
+    u2_flag
     _iris_nest_dext_main(u2_ray  wir_r,
                          u2_type sut,
                          u2_rail bar,
@@ -2661,7 +2478,7 @@
           return u2_and
             (u2_sing(qrs_sut, qrs_bon),
              _iris_nest_dext_slip
-                (wir_r, sut, bar, axe, gil, bon, nef, ful, u2_axis_2));
+                (wir_r, sut, bar, axe, gil, bon, nef, ful, _2));
         }
         else return _iris_nest_sint(wir_r, sut, bar, axe, gil, bon, nef, ful);
       }
@@ -2669,9 +2486,9 @@
         if ( u2_yes == u2_as_pq(bon, c3__cell, &p_bon, &q_bon) ) {
           return u2_and
             (_iris_nest_dext_slip
-                (wir_r, sut, bar, axe, gil, bon, nef, ful, u2_axis_2),
+                (wir_r, sut, bar, axe, gil, bon, nef, ful, _2),
              _iris_nest_dext_slip
-                (wir_r, sut, bar, axe, gil, bon, nef, ful, u2_axis_3));
+                (wir_r, sut, bar, axe, gil, bon, nef, ful, _3));
         }
         else {
           return _iris_nest_sint(wir_r, sut, bar, axe, gil, bon, nef, ful);
@@ -2726,7 +2543,7 @@
         return u2_bl_bail(wir_r);
       }
     }
-    static u2_flag
+    u2_flag
     _iris_nest_dext(u2_ray  wir_r,
                     u2_type sut,
                     u2_rail bar,
@@ -2757,7 +2574,7 @@
         }
       }
     }
-    static u2_flag
+    u2_flag
     _iris_nest_sint_swim(u2_ray  wir_r,
                          u2_type sut,
                          u2_rail bar,
@@ -2782,7 +2599,7 @@
           (wir_r, sut, bar, axe, gil, bon, nef, ful);
       }
     }
-    static u2_flag
+    u2_flag
     _iris_nest_sint(u2_ray  wir_r,
                     u2_type sut,
                     u2_rail bar,
@@ -2850,7 +2667,7 @@
       }
       else return u2_bl_bail(wir_r);
     }
-  u2_flag
+  static u2_flag
   _iris_nest(u2_ray  wir_r,
              u2_type sut,
              u2_rail bar,
@@ -2866,7 +2683,7 @@
     else {
       u2_pool gil = u2_nul;
       u2_rail nef = u2_nul;
-      u2_axis ful = u2_axis_1;
+      u2_axis ful = _1;
 
       return _iris_nest_dext(wir_r, sut, bar, axe, gil, bon, nef, ful);
     }
@@ -2874,7 +2691,7 @@
 
   /* peek:iris:rose:plow
   */
-  u2_type
+  static u2_type
   _iris_peek(u2_ray  wir_r,
              u2_type sut,
              u2_rail bar,
@@ -2883,7 +2700,7 @@
   {
     
 
-    if ( u2_yes == u2_sing(u2_axis_1, bow) ) {
+    if ( u2_yes == u2_sing(_1, bow) ) {
       return sut;
     } 
     else {
@@ -2895,7 +2712,7 @@
 
   /* slip:iris:rose:plow
   */
-    static u2_rail
+    u2_rail
     _iris_slip_a(u2_ray  wir_r,
                  u2_rail bar,
                  u2_axis had)
@@ -2905,7 +2722,7 @@
       }
       else {
         return u2_bc
-          (wir_r, _iris_half(wir_r, u2_h(bar), u2_nul, u2_axis_1, had),
+          (wir_r, _iris_half(wir_r, u2_h(bar), u2_nul, _1, had),
                    _iris_slip_a(wir_r, u2_t(bar), had));
       } 
     }
@@ -2923,12 +2740,12 @@
 
   /* snap:iris:rose:plow
   */
-    static u2_type
+    u2_type
     _iris_snap_dext(u2_ray, u2_type, u2_rail, u2_axis, u2_type);
-    static u2_type
+    u2_type
     _iris_snap_sint(u2_ray, u2_type, u2_rail, u2_axis, u2_type);
 
-    static u2_type
+    u2_type
     _iris_snap_slip(u2_ray  wir_r,
                     u2_type sut,
                     u2_rail bar,
@@ -2939,7 +2756,7 @@
       _iris_slip(wir_r, &sut, &bar, &axe, had);
       return _iris_snap(wir_r, sut, bar, axe, bon);
     }
-    static u2_flag
+    u2_flag
     _iris_snap_cull(u2_ray  wir_r,
                     u2_type sut,
                     u2_rail bar,
@@ -2950,7 +2767,7 @@
         (_iris_cull(wir_r, sut, bar, axe),
          _rose_orth(wir_r, sut, bon));
     }
-    static u2_type
+    u2_type
     _iris_snap_dext(u2_ray  wir_r,
                     u2_type sut,
                     u2_rail bar,
@@ -2974,7 +2791,7 @@
           return u2_bt
             (wir_r,
              c3__cell,
-             _iris_snap_slip(wir_r, sut, bar, axe, p_bon, u2_axis_2),
+             _iris_snap_slip(wir_r, sut, bar, axe, p_bon, _2),
              _iris_snap_slip(wir_r, sut, bar, axe, q_bon, _3));
         }
         else {
@@ -3019,7 +2836,7 @@
       }
       else return u2_bl_bail(wir_r);
     }
-    static u2_type
+    u2_type
     _iris_snap_sint(u2_ray  wir_r,
                     u2_type sut,
                     u2_rail bar,
@@ -3042,7 +2859,7 @@
       }
       else return bon;
     }
-  u2_type
+  static u2_type
   _iris_snap(u2_ray  wir_r,
              u2_type sut,
              u2_rail bar,
@@ -3061,7 +2878,7 @@
 ****/
   /* nuke:lark:rose:plow
   */
-    static u2_tack
+    u2_tack
     _lark_nuke_port(u2_ray  wir_r,
                     u2_type sut,
                     u2_tack tac,
@@ -3074,7 +2891,7 @@
     {
       
 
-      if ( u2_yes == u2_sing(u2_axis_1, wam) ) {
+      if ( u2_yes == u2_sing(_1, wam) ) {
         if ( (u2_nul == yus) ) {
           return u2_bt
             (wir_r, c3__bran,
@@ -3088,7 +2905,7 @@
         u2_axis tip = u2_fj_op_tip(wam);
         u2_axis tap = u2_fj_op_tap(wir_r, wam);
 
-        if ( u2_yes == u2_sing(u2_axis_2, tip) ) {
+        if ( u2_yes == u2_sing(_2, tip) ) {
           return u2_bt
             (wir_r, 
              c3__pair,
@@ -3105,7 +2922,7 @@
       }
     }
 
-    static u2_tack
+    u2_tack
     _lark_nuke_frag(u2_ray  wir_r,
                     u2_type sut,
                     u2_tack tac,
@@ -3116,14 +2933,14 @@
     {
       
 
-      if ( u2_yes == u2_sing(u2_axis_1, wam) ) {
+      if ( u2_yes == u2_sing(_1, wam) ) {
         return _lark_nuke(wir_r, gur, tac, rop, feg);
       }
       else {
         u2_axis tip = u2_fj_op_tip(wam);
         u2_axis tap = u2_fj_op_tap(wir_r, wam);
 
-        if ( u2_yes == u2_sing(u2_axis_2, tip) ) {
+        if ( u2_yes == u2_sing(_2, tip) ) {
           return u2_bt
             (wir_r, 
              c3__pair,
@@ -3139,7 +2956,7 @@
         }
       }
     }
-  u2_tack
+  static u2_tack
   _lark_nuke(u2_ray  wir_r,
              u2_type sut,
              u2_tack tac,
@@ -3164,7 +2981,7 @@
               feg);
       }
       else if ( u2_yes == u2_as_p(i_rop, c3__pane, &pi_rop) ) {
-        u2_plan lar = _iris_find(wir_r, sut, u2_nul, u2_axis_1, pi_rop);
+        u2_plan lar = _iris_find(wir_r, sut, u2_nul, _1, pi_rop);
         u2_axis p_lar = u2_h(lar);
         u2_unit q_lar = u2_h(u2_t(lar));
         u2_type r_lar = u2_t(u2_t(lar));
@@ -3173,7 +2990,7 @@
           (wir_r, sut, tac, t_rop, feg, pi_rop, p_lar, q_lar, r_lar);
       }
       else if ( u2_yes == u2_as_p(i_rop, c3__frag, &pi_rop) ) {
-        u2_type gur = _iris_peek(wir_r, sut, u2_nul, u2_axis_1, pi_rop);
+        u2_type gur = _iris_peek(wir_r, sut, u2_nul, _1, pi_rop);
 
         return _lark_nuke_frag(wir_r, sut, tac, t_rop, feg, pi_rop, gur); 
       }
@@ -3183,7 +3000,7 @@
 
   /* cram:lark:rose:plow
   */
-  u2_tack
+  static u2_tack
   _lark_cram(u2_ray  wir_r,
              u2_type sut,
              u2_tack tac,
@@ -3223,7 +3040,7 @@
 
   /* feed:lark:rose:plow
   */
-  u2_tack
+  static u2_tack
   _lark_feed(u2_ray  wir_r,
              u2_type sut,
              u2_tack tac,
@@ -3257,7 +3074,7 @@
 ****/
   /* both:rose:plow
   */
-  u2_type
+  static u2_type
   _rose_both(u2_ray  wir_r,
              u2_type sut,
              u2_type hoc)
@@ -3275,13 +3092,13 @@
       return u2_bt(wir_r, c3__fuse, hoc, sut);
     }
 #else 
-    if ( u2_so(_iris_nest(wir_r, hoc, u2_nul, u2_axis_1, sut)) ) {
+    if ( u2_so(_iris_nest(wir_r, hoc, u2_nul, _1, sut)) ) {
       /* every sut is a hoc */
       return sut;
     }
     else {
       /* not every sut is a hoc */
-      if ( u2_so(_iris_nest(wir_r, sut, u2_nul, u2_axis_1, hoc)) ) {
+      if ( u2_so(_iris_nest(wir_r, sut, u2_nul, _1, hoc)) ) {
         /* every hoc is a sut */
         return hoc;
       }
@@ -3295,7 +3112,7 @@
 
   /* eith:rose:plow
   */
-  u2_type
+  static u2_type
   _rose_eith(u2_ray  wir_r,
              u2_type sut,
              u2_type hoc)
@@ -3316,7 +3133,7 @@
 
   /* etch:rose:plow
   */
-  u2_type
+  static u2_type
   _rose_etch(u2_ray  wir_r,
              u2_type sut)
   {
@@ -3330,23 +3147,23 @@
 
   /* edit:rose:plow
   */
-  u2_type
+  static u2_type
   _rose_edit(u2_ray  wir_r,
              u2_type sut,
              u2_list mut)
   {
     u2_tack tac = _lark_feed(wir_r, sut, u2_nul, mut);
-    u2_type fuz = _iris_burn(wir_r, sut, u2_nul, u2_axis_1, tac);
+    u2_type fuz = _iris_burn(wir_r, sut, u2_nul, _1, tac);
 
     return fuz;
   }
 
   /* gain:rose:plow
   */
-    static u2_rack
+    u2_rack
     _rose_gain_hunt(u2_ray, u2_type, u2_gene);
 
-    static u2_rack
+    u2_rack
     _rose_gain_hunt_a(u2_ray  wir_r,
                       u2_type sut,
                       u2_bank vof)
@@ -3357,7 +3174,7 @@
       else return u2_fj_list_cat(wir_r, _rose_gain_hunt(wir_r, sut, u2_h(vof)),
                                     _rose_gain_hunt_a(wir_r, sut, u2_t(vof)));
     }
-    static u2_plot
+    u2_plot
     _rose_gain_hunt(u2_ray  wir_r,
                     u2_type sut,
                     u2_gene gen)
@@ -3382,17 +3199,17 @@
       }
       else return u2_nul;
     }
-    static u2_type
+    u2_type
     _rose_gain_gild(u2_ray  wir_r,
                     u2_type sut,
                     u2_plot mut)
     {
       u2_tack tac = _lark_feed(wir_r, sut, u2_nul, mut);
-      u2_type hoc = _iris_burn(wir_r, c3__blur, u2_nul, u2_axis_1, tac);
+      u2_type hoc = _iris_burn(wir_r, c3__blur, u2_nul, _1, tac);
 
       return _rose_both(wir_r, sut, hoc);
     }
-  u2_type
+  static u2_type
   _rose_gain(u2_ray  wir_r,
              u2_type sut,
              u2_gene gen)
@@ -3404,7 +3221,7 @@
 
   /* make:rose:plow
   */
-    u2_list
+    static u2_list
     _rose_make_boil_a(u2_ray  wir_r,
                       u2_type sut,
                       u2_list rem)
@@ -3426,7 +3243,7 @@
                               _rose_make_boil_a(wir_r, sut, t_rem));
       }
     }
-    u2_tool
+    static u2_tool
     _rose_make_boil(u2_ray  wir_r,
                     u2_type sut,
                     u2_axis axe,
@@ -3434,7 +3251,7 @@
     {
       return _lily_hike(wir_r, axe, _rose_make_boil_a(wir_r, sut, rem));
     }
-    u2_noun
+    static u2_noun
     _rose_make_bake(u2_ray  wir_r,
                     u2_type sut,
                     u2_book dab)
@@ -3469,7 +3286,7 @@
         }
       }
     }
-    u2_noun
+    static u2_noun
     _rose_make_a(u2_ray  wir_r,
                  u2_type sut,
                  u2_rack dus)
@@ -3490,7 +3307,7 @@
            _rose_make_a(wir_r, sut, t_dus));
       }
     }
-    u2_noun
+    static u2_noun
     _rose_make_prop(u2_ray  wir_r,
                     u2_type sut,
                     u2_prop pup)
@@ -3506,7 +3323,7 @@
       }
     }
 
-    static u2_tool
+    u2_tool
     _rose_make_main(u2_ray  wir_r,
                     u2_type sut,
                     u2_gene gen)
@@ -3515,7 +3332,7 @@
       u2_noun p_gen, q_gen, r_gen;
 
       if ( u2_yes == u2_as_p(gen, c3__zike, &p_gen) ) {
-        return u2_bc(wir_r, u2_nock_frag, u2_axis_0);
+        return u2_bc(wir_r, u2_nock_frag, _0);
       }
       else if ( u2_yes == u2_as_p(gen, c3__zoot, &p_gen) ) {
         return u2_bl_bail(wir_r);
@@ -3574,7 +3391,7 @@
 #else
         return u2_bc
           (wir_r,
-           u2_bc(wir_r, u2_nock_frag, u2_axis_1), 
+           u2_bc(wir_r, u2_nock_frag, _1), 
            u2_bc(wir_r, u2_nock_bone, baf));
 #endif
       }
@@ -3606,7 +3423,7 @@
 #else
         return u2_bc
           (wir_r,
-           u2_bc(wir_r, u2_nock_frag, u2_axis_1), 
+           u2_bc(wir_r, u2_nock_frag, _1), 
            u2_bc(wir_r, u2_nock_bone, baf));
 #endif
       }
@@ -3641,7 +3458,7 @@
         return qip;
       }
       else if ( u2_yes == u2_as_pq(gen, c3__stil, &p_gen, &q_gen) ) {
-        return u2_bc(wir_r, u2_nock_frag, u2_axis_1);
+        return u2_bc(wir_r, u2_nock_frag, _1);
       }
       else if ( u2_yes == u2_as_pq(gen, c3__mack, &p_gen, &q_gen) ) {
         u2_plan lar = _rose_seek(wir_r, sut, p_gen);
@@ -3700,7 +3517,7 @@
         return _rose_make(wir_r, sut, _plow_open(wir_r, gen)); 
       }
     }
-  u2_tool
+  static u2_tool
   _rose_make(u2_ray  wir_r,
              u2_type sut,
              u2_gene gen)
@@ -3722,10 +3539,10 @@
 
   /* null:rose:plow
   */
-    static u2_flag
+    u2_flag
     _rose_null_a(u2_ray  wir_r, u2_type sut, u2_pool hem);
 
-    static u2_flag
+    u2_flag
     _rose_null_b(u2_ray  wir_r,
                  u2_type sut,
                  u2_pool hem)
@@ -3770,7 +3587,7 @@
       } 
       else return u2_bl_bail(wir_r);
     }
-    static u2_flag
+    u2_flag
     _rose_null_a(u2_ray  wir_r,
                  u2_type sut,
                  u2_pool hem)
@@ -3789,7 +3606,7 @@
         return gur;
       }
     }
-  u2_flag
+  static u2_flag
   _rose_null(u2_ray  wir_r,
              u2_type sut)
   {
@@ -3798,10 +3615,10 @@
 
   /* orth:rose:plow
   */
-    static u2_flag
+    u2_flag
     _rose_orth_a(u2_ray  wir_r, u2_type sut, u2_type ref, u2_pool bol);
 
-    static u2_flag
+    u2_flag
     _rose_orth_b(u2_ray  wir_r,
                  u2_type sut,
                  u2_type ref,
@@ -3888,7 +3705,7 @@
         return u2_bl_bail(wir_r);
       }
     }
-    static u2_flag
+    u2_flag
     _rose_orth_a(u2_ray  wir_r,
                  u2_type sut,
                  u2_type ref,
@@ -3908,7 +3725,7 @@
         return gur;
       }
     }
-  u2_flag
+  static u2_flag
   _rose_orth(u2_ray  wir_r,
              u2_type sut,
              u2_type ref)
@@ -3918,7 +3735,7 @@
 
   /* play:rose:plow
   */
-    static u2_plot
+    u2_plot
     _rose_play_a(u2_ray  wir_r,
                  u2_type sut,
                  u2_rack dus)
@@ -3941,7 +3758,7 @@
            _rose_play_a(wir_r, sut, t_dus));
       }
     }
-    static u2_type
+    u2_type
     _rose_play_main(u2_ray  wir_r,
                     u2_type sut,
                     u2_gene gen)
@@ -4115,7 +3932,7 @@
         return _rose_play(wir_r, sut, _plow_open(wir_r, gen)); 
       }
     }
-  u2_type
+  static u2_type
   _rose_play(u2_ray  wir_r,
              u2_type sut,
              u2_gene gen)
@@ -4137,7 +3954,7 @@
 
   /* repo:rose:plow
   */
-  u2_type
+  static u2_type
   _rose_repo(u2_ray  wir_r,
              u2_type sut,
              u2_gene gen)
@@ -4163,7 +3980,7 @@
 
   /* seek:rose:plow
   */
-    static u2_plan
+    u2_plan
     _rose_seek_a(u2_ray  wir_r,
                  u2_type sut,
                  u2_rope rop,
@@ -4189,13 +4006,13 @@
         }
         else if ( u2_yes == u2_as_p(i_rop, c3__frag, &pi_rop) ) {
           return _rose_seek_a
-            (wir_r, _iris_peek(wir_r, sut, u2_nul, u2_axis_1, pi_rop), 
+            (wir_r, _iris_peek(wir_r, sut, u2_nul, _1, pi_rop), 
                 t_rop,
                 u2_fj_op_peg(wir_r, axe, pi_rop),
                 u2_nul);
         }
         else if ( u2_yes == u2_as_p(i_rop, c3__pane, &pi_rop) ) {
-          u2_plan sap = _iris_find(wir_r, sut, u2_nul, u2_axis_1, pi_rop);
+          u2_plan sap = _iris_find(wir_r, sut, u2_nul, _1, pi_rop);
           u2_axis p_sap = u2_h(sap);
           u2_unit q_sap = u2_h(u2_t(sap));
           u2_type r_sap = u2_t(u2_t(sap));
@@ -4212,22 +4029,22 @@
         else return u2_bl_bail(wir_r);
       }
     }
-  u2_plan
+  static u2_plan
   _rose_seek(u2_ray  wir_r,
              u2_type sut,
              u2_rope rop)
   {
-    return _rose_seek_a(wir_r, sut, rop, u2_axis_1, u2_nul);
+    return _rose_seek_a(wir_r, sut, rop, _1, u2_nul);
   }
 
   /* show:rose:plow
   */
-    u2_flag
+    static u2_flag
     _rose_show_nest(u2_ray  wir_r,
                     u2_type sut,
                     u2_type bon)
     {
-      if ( !u2_so(_iris_nest(wir_r, sut, u2_nul, u2_axis_1, bon)) ) {
+      if ( !u2_so(_iris_nest(wir_r, sut, u2_nul, _1, bon)) ) {
         u2_brut(wir_r, "sut", sut);
         u2_brut(wir_r, "bon", bon);
         return _plow_fail(wir_r, "nest: show");
@@ -4265,7 +4082,7 @@
         }
       }
     }
-    u2_flag
+    static u2_flag
     _rose_show_main(u2_ray  wir_r,
                     u2_type sut,
                     u2_gene gen)
@@ -4460,7 +4277,7 @@
         return _rose_show(wir_r, sut, vul);
       }
     }
-  u2_flag
+  static u2_flag
   _rose_show(u2_ray  wir_r,
              u2_type sut,
              u2_gene gen)
@@ -4484,10 +4301,369 @@
 #endif
   }
 
+/****   _dump: pretty-printing.
+****/
+      /** Global variables.
+      **/
+        u2_pool how;
+
+        static u2_prep
+        _dump_main(u2_ray  wir_r, u2_pool gil, u2_pool nip, u2_type typ);
+
+  /* seal:dump (fake)
+  */
+    u2_pool
+    _dump_seal_main(u2_ray  wir_r,
+                    u2_pool gil,
+                    u2_type typ)
+    {
+      
+      u2_noun p_typ, q_typ;
+
+      // %atom
+      // %blur
+      //
+      if ( u2_yes == u2_sing(c3__atom, typ) ||
+           u2_yes == u2_sing(c3__blur, typ) ||
+           u2_yes == u2_sing(c3__blot, typ) ) 
+      {
+        return u2_nul;
+      }
+
+      // [%cell p=type q=type]
+      //
+      else if ( u2_yes == u2_as_pq(typ, c3__cell, &p_typ, &q_typ) ) {
+        return u2_fj_pool_cat(wir_r, _dump_seal_main(wir_r, gil, p_typ),
+                               _dump_seal_main(wir_r, gil, q_typ));
+      }
+
+      // [%core p=type q=*]
+      //
+      else if ( u2_yes == u2_as_pq(typ, c3__core, &p_typ, &q_typ) ) {
+        return _dump_seal_main(wir_r, gil, p_typ);
+      }
+
+      // [%cube p=noun]
+      // 
+      else if ( u2_yes == u2_as_p(typ, c3__cube, &p_typ) ) {
+        return u2_nul;
+      }
+
+      // [%face p=mark q=type]
+      //
+      else if ( u2_yes == u2_as_pq(typ, c3__face, &p_typ, &q_typ) ) {
+        return _dump_seal_main(wir_r, gil, q_typ);
+      }
+
+      // [%fork p=type q=type]
+      //
+      else if ( u2_yes == u2_as_pq(typ, c3__fork, &p_typ, &q_typ) ) {
+        return u2_fj_pool_cat(wir_r, _dump_seal_main(wir_r, gil, p_typ),
+                                _dump_seal_main(wir_r, gil, q_typ));
+      }
+
+      // [%fuse p=type q=type]
+      //
+      else if ( u2_yes == u2_as_pq(typ, c3__fuse, &p_typ, &q_typ) ) {
+        return u2_fj_pool_cat(wir_r, _dump_seal_main(wir_r, gil, p_typ),
+                                _dump_seal_main(wir_r, gil, q_typ));
+      }
+
+      // [%hold p=type q=gene]
+      //
+      else if ( u2_yes == u2_as_pq(typ, c3__hold, &p_typ, &q_typ) ) {
+        if ( u2_fj_pool_in(typ, gil) ) {
+          return u2_bt(wir_r, typ, u2_nul, u2_nul);
+        } 
+        else {
+          return _dump_seal_main
+            (wir_r, u2_fj_pool_add(wir_r, typ, gil),
+                _rose_repo(wir_r, p_typ, q_typ));
+        }
+      }
+      else {
+        if ( u2_yes == u2_dust(typ) && u2_yes == u2_dust(u2_h(typ)) ) {
+          printf("hm!\n");
+        }
+        else u2_err(wir_r, "odd type", typ);
+
+
+        return u2_bl_bail(wir_r);
+      }
+    }
+
+  /* _dump_seal(): produce set of holds sealing [typ].
+  */
+  static u2_pool
+  _dump_seal(u2_ray  wir_r,
+             u2_type typ)
+  {
+    return _dump_seal_main(wir_r, u2_nul, typ);
+  }
+
+  /* _dump_cell()::
+  */
+  static u2_noun
+  _dump_cell(u2_ray  wir_r,
+             u2_pool gil,
+             u2_pool nip,
+             u2_noun p_typ,
+             u2_noun q_typ)
+  {
+    
+    u2_noun pq_typ, qq_typ;
+
+    if ( u2_yes == u2_as_pq(q_typ, c3__cell, &pq_typ, &qq_typ) ) {
+      return u2_bc
+        (wir_r, _dump_main(wir_r, gil, nip, p_typ),
+              _dump_cell(wir_r, gil, nip, pq_typ, qq_typ));
+    }
+    else {
+      return u2_bt
+        (wir_r, _dump_main(wir_r, gil, nip, p_typ),
+               _dump_main(wir_r, gil, nip, q_typ),
+               u2_nul);
+    }
+  }
+
+  /* _dump_core(): dump a core.
+  */
+  static u2_prep
+  _dump_core(u2_ray  wir_r,
+             u2_pool gil,
+             u2_pool nip,
+             u2_type myt,
+             u2_atom kic,
+             u2_spec dab)
+  {
+    
+    u2_prep gum;
+    u2_prep zib;
+    u2_prep bor;
+
+    zib = _dump_main(wir_r, gil, nip, myt);
+    bor = u2_fj_op_glu
+      (wir_r, (u2_yes == u2_sing(c3__soft, kic) ? ('-') : ('+')),
+             u2_fj_op_glu
+               (wir_r, u2_fj_prep_decimal(wir_r, _gull_size(wir_r, dab)),
+                      u2_fj_op_glu
+                        (wir_r, ('.'),
+                               u2_fj_prep_hexinal
+                                  (wir_r, (u2_mug(dab) & 0xffff)))));
+
+    gum = u2_fj_prep_close
+      (wir_r, '<', '>', u2_bn_list(wir_r, zib, bor, u2_none));
+
+    return gum;
+  }
+
+  /* _dump_fork(): dump fork as list.
+  */
+  static u2_noun
+  _dump_fork(u2_ray  wir_r,
+             u2_pool gil,
+             u2_pool nip,
+             u2_type p_typ,
+             u2_type q_typ)
+  {
+    
+    u2_noun pq_typ, qq_typ;
+
+    if ( u2_yes == u2_as_pq(q_typ, c3__fork, &pq_typ, &qq_typ) ) {
+      return u2_bc
+        (wir_r, _dump_main(wir_r, gil, nip, p_typ),
+              _dump_fork(wir_r, gil, nip, pq_typ, qq_typ));
+    }
+    else {
+      return u2_bt
+        (wir_r, _dump_main(wir_r, gil, nip, p_typ),
+              _dump_main(wir_r, gil, nip, q_typ),
+              u2_nul);
+    }
+  }
+   
+  /* _dump_main(): dump with gil and nip.
+  */
+  static u2_prep
+  _dump_main(u2_ray  wir_r,
+             u2_pool gil,
+             u2_pool nip,
+             u2_type typ)
+  {
+    
+    u2_noun p_typ, q_typ, r_typ, s_typ;
+
+    if ( u2_yes == u2_stud(typ) ) {
+      if ( u2_yes == u2_sing(c3__atom, typ) ) {
+        return ('@');
+      }
+      else if ( u2_yes == u2_sing(c3__blot, typ) ) {
+        return ('#');
+      }
+      else if ( u2_yes == u2_sing(c3__blur, typ) ) {
+        return ('*');
+      }
+      else return u2_bl_bail(wir_r);
+    }
+    else if ( u2_yes == u2_as_pq(typ, c3__cell, &p_typ, &q_typ) ) {
+      return u2_fj_prep_close
+        (wir_r, '[', ']', 
+                _dump_cell(wir_r, gil, nip, p_typ, q_typ));
+    }
+    else if ( u2_yes == u2_as_pqrs(typ, c3__core, &p_typ, &q_typ, &r_typ, &s_typ) ) {
+      return _dump_core(wir_r, gil, nip, p_typ, q_typ, s_typ);
+    }
+    else if ( u2_yes == u2_as_p(typ, c3__cube, &p_typ) ) {
+      if ( (u2_nul == p_typ) ) {
+        return ('~');
+      }
+      else if ( u2_yes == u2_stud(p_typ) ) {
+        return u2_fj_op_glu
+          (wir_r, ('%'), u2_fj_prep_textual(wir_r, p_typ));
+      }
+      else {
+        return u2_bn_list
+          (wir_r,
+           c3__nail,
+           ('%'),
+           u2_fj_prep_noun(wir_r, p_typ),
+           u2_none);
+      }
+    }
+    else if ( u2_yes == u2_as_pq(typ, c3__face, &p_typ, &q_typ) ) {
+      return u2_bn_list
+        (wir_r, c3__nail, 
+               u2_fj_prep_textual(wir_r, p_typ),
+               (':'),
+               _dump_main(wir_r, gil, nip, q_typ),
+               u2_none);
+    }
+    else if ( u2_yes == u2_as_pq(typ, c3__fork, &p_typ, &q_typ) ) {
+      u2_noun pip_typ, piq_typ;
+
+      if ( u2_yes == u2_as_p(p_typ, c3__cube, &pip_typ) &&
+           u2_yes == u2_as_p(q_typ, c3__cube, &piq_typ) &&
+           (u2_yes == pip_typ) &&
+           (u2_no == piq_typ) )
+      {
+        return ('?');
+      }
+      else {
+        return
+          u2_fj_prep_close
+            (wir_r, '{', '}', _dump_fork(wir_r, gil, nip, p_typ, q_typ));
+      }
+    }
+    else if ( u2_yes == u2_as_pq(typ, c3__fuse, &p_typ, &q_typ) ) {
+      return u2_fj_prep_close
+        (wir_r, '(', ')', 
+               u2_bn_list(wir_r,
+                         _dump_main(wir_r, gil, nip, p_typ),
+                         _dump_main(wir_r, gil, nip, q_typ),
+                         u2_none));
+    }
+    else if ( u2_yes == u2_as_pq(typ, c3__hold, &p_typ, &q_typ) ) {
+      if ( u2_fj_pool_in(typ, gil) ) {
+        u2_noun fez = u2_fj_op_glu
+            (wir_r, ('$'), 
+                   u2_fj_prep_decimal(wir_r, u2_fj_pool_at(wir_r, typ, _1, gil)));
+
+        if ( u2_fj_pool_in(typ, nip) || u2_fj_pool_in(typ, how) ) {
+          return fez;
+        }
+        else {
+          how = u2_fj_pool_add(wir_r, typ, how);
+          { 
+            u2_prep hod = 
+              _dump_main(wir_r, gil, 
+                            u2_fj_pool_add(wir_r, typ, nip),
+                            _rose_repo(wir_r, p_typ, q_typ));
+
+            
+            return u2_bn_list
+              (wir_r, c3__nail, 
+                     fez,
+                     ('='),
+                     hod,
+                     u2_none);
+          }
+        }
+      }
+      else {
+        return _dump_main(wir_r, gil, nip, _rose_repo(wir_r, p_typ, q_typ));
+      }
+    }
+    else {
+      return u2_bl_bail(wir_r);
+    }
+  }
+
+  /* _durb_in()::
+  */
+  static u2_noun
+  _durb_in(u2_ray  wir_r,
+           u2_rail bar)
+  {
+    if ( (u2_nul == bar) ) {
+      return u2_nul;
+    } else {
+      return u2_bc(wir_r, _dump_type(wir_r, u2_h(bar)), 
+                               _durb_in(wir_r, u2_t(bar)));
+    }
+  }
+#if 0
+  /* _dump_durb(): prepare rail for printing.
+  */
+  static u2_prep
+  _dump_durb(u2_ray  wir_r,
+             u2_rail bar)
+  {
+    if ( (u2_nul == bar) ) {
+      return ('~');
+    }
+    else {
+      return u2_fj_prep_close
+        (wir_r, '(', ')', _durb_in(wir_r, bar));
+    }
+  }
+#endif
+
+  /* _dump_type(): prepare type for printing.
+  */
+  static u2_prep
+  _dump_type(u2_ray  wir_r,
+             u2_type typ)
+  {
+    u2_pool gil = _dump_seal(wir_r, typ);
+    u2_prep par;
+
+    // Lamentable.
+    //
+    how = u2_nul;
+    par = _dump_main(wir_r, gil, u2_nul, typ);
+    how = u2_nul;
+
+    return par;
+  }
+
+  /* _dump_size()::
+  */
+  static u2_atom
+  _dump_size(u2_ray wir_r, u2_noun box)
+  {
+    if ( u2_yes == u2_stud(box) ) {
+      return _1;
+    }
+    else {
+      return u2_fj_op_add
+        (wir_r, _dump_size(wir_r, u2_h(box)), 
+              _dump_size(wir_r, u2_t(box)));
+    }
+  }
 
 /****   _plow: top-level functions.
 ****/
-  void
+  static void
   _plow_trap(u2_ray  wir_r,
              const char *msg)
   {
@@ -4497,7 +4673,7 @@
       u2_bc(wir_r, u2_bc(wir_r, hal, u2_nul), u2_plow_(wir_r, meb));
   }
 
-  u2_noun
+  static u2_noun
   _plow_fail(u2_ray  wir_r,
              const char *msg)
   {
@@ -4540,7 +4716,7 @@
 
   /* rake:plow 
   */
-  u2_rope
+  static u2_rope
   _plow_rake(u2_ray  wir_r,
              u2_gene gen)
   {
@@ -4573,7 +4749,7 @@
 
   /* init:plow (fake)
   */
-  static void
+  void
   _plow_init(u2_ray wir_r)
   {
     c3_assert(_0 == u2_wire_plo_r(wir_r));
@@ -4596,7 +4772,7 @@
     u2_plow_(wir_r, huf) = u2_nul;
   }
 
-  static void
+  void
   _plow_exit(u2_ray wir_r)
   {
     u2_rl_rfree(wir_r, u2_wire_plo_r(wir_r));
