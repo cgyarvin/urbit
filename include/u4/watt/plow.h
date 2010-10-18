@@ -16,7 +16,6 @@
     typedef u4_noun u4_door;
     typedef u4_noun u4_gene;
     typedef u4_noun u4_home;
-    typedef u4_noun u4_init;
     typedef u4_noun u4_menu;
     typedef u4_noun u4_plan;
     typedef u4_noun u4_plot;

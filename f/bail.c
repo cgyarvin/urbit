@@ -243,6 +243,51 @@ u2_bn_ice(u2_ray  wir_r,
   return u2_bl_good(wir_r, u2_rl_ice(wir_r, a));
 }
 
+/* u2_bn_list():
+**
+**   Generate a null-terminated list, with a 0 terminator.
+*/
+u2_noun
+u2_bn_list(u2_ray wir_r, ...)
+{
+  c3_w    len_w = 0;
+  va_list ap;
+
+  /* Count.
+  */
+  {
+    va_start(ap, wir_r);
+    while ( u2_none != va_arg(ap, u2_noun) ) {
+      len_w++;
+    }
+    va_end(ap);
+  }
+
+  /* Allocate.
+  */
+  {
+    c3_w    i_w;
+    u2_noun yit[len_w];
+
+    va_start(ap, wir_r);
+    for ( i_w = 0; i_w < len_w; i_w++ ) {
+      yit[i_w] = va_arg(ap, u2_noun);
+    }
+    va_end(ap);
+
+    /* Construct.
+    */
+    {
+      u2_noun woq = u2_nul;
+
+      for ( i_w = 0; i_w < len_w; i_w++ ) {
+        woq = u2_bc(wir_r, yit[len_w - (i_w + 1)], woq);
+      }
+      return woq;
+    }
+  }
+}
+          
 /* u2_bn_mp():
 **
 **   Copy the GMP integer [a] into an atom.
@@ -266,6 +311,21 @@ u2_bn_qual(u2_ray  wir_r,
            u2_noun d)
 {
   return u2_bl_good(wir_r, u2_rl_qual(wir_r, a, b, c, d));
+}
+
+/* u2_bn_quil(): 
+**
+**   Produce the quintuple [a b c d].
+*/
+u2_noun
+u2_bn_quil(u2_ray  wir_r,
+           u2_noun a,
+           u2_noun b,
+           u2_noun c,
+           u2_noun d,
+           u2_noun e)
+{
+  return u2_bn_cell(wir_r, a, u2_bn_qual(wir_r, b, c, d, e));
 }
 
 /* u2_bn_trel(): 

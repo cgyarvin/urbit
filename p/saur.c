@@ -94,6 +94,28 @@ u2_fj_op_div(u2_ray  wir_r,
   }
 }
 
+/* u2_fj_op_glu():
+**
+**   Concatenate atomic strings `a` and `b`.
+*/
+u2_atom
+u2_fj_op_glu(u2_ray  wir_r,
+             u2_atom a,
+             u2_atom b)
+{
+  c3_w sb_a = u2_met(3, a);
+  c3_w sb_b = u2_met(3, b);
+  c3_w sb_cat = (sb_a + sb_b);
+  {
+    c3_y *xb_buf = alloca(sb_cat);
+
+    u2_bytes(0, sb_a, xb_buf, a);
+    u2_bytes(0, sb_b, xb_buf + sb_a, b);
+
+    return u2_bn_bytes(wir_r, sb_cat, xb_buf);
+  }
+}
+
 /* u2_fj_op_inc():
 **
 **   Produce (atom + 1).

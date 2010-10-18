@@ -242,16 +242,18 @@
 
     /* u2_yes, u2_no, u2_nul;
     **
-    **   Our Martian booleans and list terminator.
+    **   Our Martian booleans and list terminator; empty string.
     */
-#     define u2_yes 0
-#     define u2_no  1
-#     define u2_nul 0
+#     define u2_yes   0
+#     define u2_no    1
+#     define u2_nul   0
+#     define u2_blip  0
 
     /* Tools for Martian booleans.
     */
 #     define u2_so(x)      (u2_yes == (x))
 #     define u2_say(x)     ( (x) ? u2_yes : u2_no )
+#     define u2_not(x)     ( (x == u2_yes) ? u2_no : u2_yes )
 #     define u2_and(x, y)  ( (u2_so(x) && u2_so(y)) ? u2_yes : u2_no )
 #     define u2_or(x, y)   ( (u2_so(x) || u2_so(y)) ? u2_yes : u2_no )
 
@@ -331,6 +333,12 @@
     **   An associative array, stored as binary treap by mug.
     */
       typedef u2_noun u2_book;
+
+    /* u2_unit:
+    **
+    **   A conditional (maybe), `[0 n]` or `0`.
+    */
+      typedef u2_noun u2_unit;
 
     /** Functions.
     **/

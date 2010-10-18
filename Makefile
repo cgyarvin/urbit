@@ -297,6 +297,7 @@ F_OFILES=\
 
 P_OFILES=\
        p/book.o \
+       p/list.o \
        p/pool.o \
        p/prep.o \
        p/saur.o

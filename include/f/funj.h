@@ -4,8 +4,26 @@
 */
   /** Data structures.
   **/
-    typedef u2_noun u2_prep;
-    typedef u2_noun u2_dump;
+    /** Various nouns.
+    **/
+      typedef u2_noun u2_bank;
+      typedef u2_noun u2_cord;
+      typedef u2_noun u2_door;
+      typedef u2_noun u2_gene;
+      typedef u2_noun u2_home;
+      typedef u2_noun u2_init;
+      typedef u2_noun u2_menu;
+      typedef u2_noun u2_plan;
+      typedef u2_noun u2_plot;
+      typedef u2_noun u2_prop; 
+      typedef u2_noun u2_rack;
+      typedef u2_noun u2_rail;
+      typedef u2_noun u2_rope;
+      typedef u2_noun u2_spec;
+      typedef u2_noun u2_tack;
+      typedef u2_noun u2_type;
+      typedef u2_noun u2_prep;
+      typedef u2_noun u2_dump;
 
   /** Functions.
   **/
@@ -43,6 +61,15 @@
       */
         u2_weak
         u2_fj_op_div(u2_ray  wir_r,
+                     u2_atom a,
+                     u2_atom b);
+
+      /* u2_fj_op_glu():
+      **
+      **   Concatenate atomic strings `a` and `b`.
+      */
+        u2_atom
+        u2_fj_op_glu(u2_ray  wir_r,
                      u2_atom a,
                      u2_atom b);
 
@@ -95,8 +122,8 @@
       */
         u2_weak
         u2_fj_op_sub(u2_ray  wir_r,
-                  u2_atom a,
-                  u2_atom b);
+                     u2_atom a,
+                     u2_atom b);
 
       /* u2_fj_op_tip():
       **
@@ -113,6 +140,14 @@
         u2_fj_op_tap(u2_ray  wir_r,
                      u2_atom twig);
 
+    /** Lists.
+    **/
+      /* u2_fj_list_cat(): concatenate list.
+      */
+        u2_list
+        u2_fj_list_cat(u2_ray  wir_r,
+                       u2_list lit,
+                       u2_list lus);
 
     /** Pools (sets).
     **/
@@ -213,6 +248,71 @@
         u2_fj_book_list(u2_ray  wir_r,
                         u2_list list,
                         u2_book book);
+
+    /** Plow (Watt compilation).
+    **/
+      /* u2_fj_plow_make():
+      **
+      **   Not verifying type correctness, compile to formula.
+      */
+        u2_noun
+        u2_fj_plow_make(u2_ray  wir_r,
+                        u2_type sut,
+                        u2_gene gen);
+
+      /* u2_fj_plow_play():
+      **
+      **   Not verifying type correctness, infer product type.
+      */
+        u2_noun
+        u2_fj_plow_play(u2_ray  wir_r,
+                        u2_type sut,
+                        u2_gene gen);
+
+      /* u2_fj_plow_show():
+      **
+      **   Verify type correctness.
+      */
+        u2_noun
+        u2_fj_plow_show(u2_ray  wir_r,
+                        u2_type sut,
+                        u2_gene gen);
+
+      /* u2_fj_plow_pass():
+      **
+      **   Verifying type correctness, compile to formula.
+      */
+        u2_noun
+        u2_fj_plow_pass(u2_ray  wir_r,
+                        u2_type sut,
+                        u2_gene gen);
+
+      /* u2_fj_plow_shop():
+      **
+      **   Verifying type correctness, infer product type.
+      */
+        u2_noun
+        u2_fj_plow_shop(u2_ray  wir_r,
+                        u2_type sut,
+                        u2_gene gen);
+
+      /* u2_fj_plow_wish():
+      **
+      **   Not verifying type correctness, compile and infer.
+      */
+        u2_noun
+        u2_fj_plow_wish(u2_ray  wir_r,
+                        u2_type sut,
+                        u2_gene gen);
+
+      /* u2_fj_plow_mill():
+      **
+      **   Verifying type correctness, compile and infer.
+      */
+        u2_noun
+        u2_fj_plow_mill(u2_ray  wir_r,
+                        u2_type sut,
+                        u2_gene gen);
 
     /** Prep and pump (prettyprinting).
     **/

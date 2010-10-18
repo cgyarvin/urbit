@@ -167,6 +167,7 @@
                        u2_noun a,
                        u2_noun b);
 #         define u2_bc(wir_r, a, b) u2_bn_cell(wir_r, a, b)
+#         define u2_bo(wir_r, a)    u2_bn_cell(wir_r, a, _0);
 
           /* u2_bn_ice():
           **
@@ -176,6 +177,13 @@
             u2_bn_ice(u2_ray  wir_r,
                       u2_noun a);
 
+          /* u2_bn_list():
+          **
+          **   Generate a null-terminated list, with u2_none as terminator.
+          */
+            u2_noun
+            u2_bn_list(u2_ray wir_r, ...);
+          
           /* u2_bn_mp():
           **
           **   Copy the GMP integer [a] into an atom.
@@ -195,6 +203,19 @@
                        u2_noun c,
                        u2_noun d);
 #         define u2_bq(wir_r, a, b, c, d) u2_bn_qual(wir_r, a, b, c, d)
+
+          /* u2_bn_quil(): 
+          **
+          **   Produce the quintuple [a b c d].
+          */
+            u2_noun
+            u2_bn_quil(u2_ray  wir_r,
+                       u2_noun a,
+                       u2_noun b,
+                       u2_noun c,
+                       u2_noun d,
+                       u2_noun e);
+#         define u2_bu(wir_r, a, b, c, d, e) u2_bn_quil(wir_r, a, b, c, d, e)
 
           /* u2_bn_trel(): 
           **

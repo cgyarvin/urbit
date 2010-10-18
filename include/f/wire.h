@@ -40,6 +40,7 @@
 #         define  u2_wire_bas_r(wir_r)  *u2_at(wir_r, u2_loom_wire, bas_r)
 #         define  u2_wire_sad_r(wir_r)  *u2_at(wir_r, u2_loom_wire, sad_r)
 #         define  u2_wire_jub_r(wir_r)  *u2_at(wir_r, u2_loom_wire, jub_r)
+#         define  u2_wire_plo_r(wir_r)  *u2_at(wir_r, u2_loom_wire, plo_r)
 #         define  u2_wire_bex_r(wir_r)  *u2_at(wir_r, u2_loom_wire, bex_r)
 
     /** Functions.
