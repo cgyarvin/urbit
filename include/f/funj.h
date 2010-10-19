@@ -413,7 +413,7 @@
 
       /* u2_err():
       **
-      **   Print (nopt) with (caption), using (lane).
+      **   Print (nopt) with (caption), using (wir).
       */
         void
         u2_err(u2_ray      wir_r,
@@ -422,7 +422,7 @@
 
       /* u2_burp():
       **
-      **   Print (prep) with (caption), using (lane).
+      **   Print (prep) with (caption), using (wir).
       */
         void
         u2_burp(u2_ray      wir_r,

@@ -215,7 +215,8 @@ U4_OFILES= \
 
 C_OFILES=\
        c/main.o \
-       c/vere.o
+       c/vere.o \
+       c/ford.o
 
 L_OFILES=\
        l/manage.o \
@@ -293,6 +294,7 @@ F_OFILES=\
        f/flee.o \
        f/toss.o \
        f/shed.o \
+       f/unix.o \
        f/main.o
 
 P_OFILES=\

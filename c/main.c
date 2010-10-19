@@ -77,19 +77,20 @@ _console_line(const char *history_name)
   }
 }
 
-extern void *vere_boot(uint32_t size);
-extern void  vere_line(void *vere, char *line);
-extern void  vere_line2(void *vere, char *line);
+#if 0
+extern void *ford_boot(uint32_t size);
+extern void  ford_line(void *ford, char *line);
+extern void  ford_line2(void *ford, char *line);
 
 int
 main(int  argc,
      char **argv)
 {
   char *history_name = _console_init();
-  void *ver;
+  void *fod;
 
-  if ( !(ver = vere_boot(26)) ) {
-    fprintf(stderr, "vere: boot failed\n");
+  if ( !(fod = ford_boot(26)) ) {
+    fprintf(stderr, "ford: boot failed\n");
     return 1;
   }
   while ( 1 ) {
@@ -99,9 +100,66 @@ main(int  argc,
       break;
     }
     else {
-      // vere_line(ver, line);
-      vere_line2(ver, line);
+      // ford_line(fod, line);
+      ford_line2(fod, line);
     }
   }
   return 0;
 }
+
+#else
+
+  /* ford_boot(): create the ford engine.
+  */
+    struct ford_state*
+    ford_boot(uint32_t    siz_w,
+              const char* src_c);
+
+  /* ford_line(): execute a ford command.
+  */
+    void
+    ford_line(struct ford_state* fod_f,
+              const char*        cmd_c,
+              const char*        arg_c);
+
+  /* ford_done(): terminate and free all 
+  */
+    void
+    ford_done(struct ford_state* fod_f);
+    
+int
+main(int  argc,
+     char **argv)
+{
+  char *history_name = _console_init();
+  void *fod;
+
+  if ( !(fod = ford_boot(26, "watt/274.watt")) ) {
+    fprintf(stderr, "ford: boot failed\n");
+    return 1;
+  }
+  while ( 1 ) {
+    char *line = _console_line(history_name);
+
+    if ( !line ) {
+      break;
+    }
+    else {
+      char *cmd = line;
+      char *arg = strchr(line, ' ');
+
+      if ( 0 == arg ) {
+        free(line);
+        continue;
+      } else {
+        *arg++ = 0; 
+      }
+      ford_line(fod, cmd, arg);
+      free(line);
+    }
+  }
+  ford_done(fod);
+  return 0;
+}
+
+#endif

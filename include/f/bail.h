@@ -207,7 +207,21 @@
           */
             u2_noun
             u2_bn_list(u2_ray wir_r, ...);
-          
+         
+          /* u2_bn_nock():
+          **
+          **   Nock or bail.
+          */
+            u2_noun
+            u2_bn_nock(u2_ray wir_r, u2_noun bus, u2_noun fol);
+
+          /* u2_bn_mung():
+          **
+          **   Mung or bail.
+          */
+            u2_noun
+            u2_bn_mung(u2_ray wir_r, u2_noun bus, u2_noun fol);
+
           /* u2_bn_mp():
           **
           **   Copy the GMP integer [a] into an atom.

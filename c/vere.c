@@ -1181,7 +1181,6 @@ vere_line2(void* vere, const c3_c* lin_c)
       u3_fox arg = u3_ln_string(v->x, arg_c);
       u3_fox  mun = _vere_init_read(v->x, gat);
       u3_fox  hob = _vere_xz(v, mun);
-      u2_noun gen = _vere_32(v, hob);
 
       u3_fox fel = _vere_nock(v, 0, _vere_kick(v, gat), 0);
       u3_fox gux = _vere_nock(v, 0, _vere_kick(v, arg), 0);
@@ -1208,10 +1207,15 @@ vere_line2(void* vere, const c3_c* lin_c)
           {
             u3_fox  mun = _vere_init_read(v->x, gat);
             u3_fox  hob = _vere_xz(v, mun);
+            u2_noun ris = _vere_32(v, _vere_xz(v, gat));
+            u2_noun duf = u2_fj_watt(v->wir_r, ris);
             u2_noun gen = _vere_32(v, hob);
             u2_noun fug;
 
             fug = u2_fj_plow_make(v->wir_r, c3__blur, gen);
+            if ( u2_yes == u2_sing(gen, duf) ) {
+              printf("gen == duf\n");
+            } else printf("no\n");
 
             if ( u2_yes == u2_sing(fug, fun) ) {
               printf("they match!\n");

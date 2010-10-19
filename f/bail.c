@@ -299,6 +299,26 @@ u2_bn_mp(u2_ray wir_r,
   return u2_bl_good(wir_r, u2_rl_mp(wir_r, a_mp));
 }
 
+/* u2_bn_nock():
+**
+**   Nock or bail.
+*/
+u2_noun
+u2_bn_nock(u2_ray wir_r, u2_noun bus, u2_noun fol)
+{
+  return u2_bl_good(wir_r, u2_wr_nock_main(wir_r, bus, fol));
+}
+
+/* u2_bn_mung():
+**
+**   Mung or bail.
+*/
+u2_noun
+u2_bn_mung(u2_ray wir_r, u2_noun bus, u2_noun fol)
+{
+  return u2_bl_good(wir_r, u2_wr_nock_mung(wir_r, bus, fol));
+}
+
 /* u2_bn_qual(): 
 **
 **   Produce the quadruple [a b c d].

@@ -103,6 +103,13 @@
                           u2_noun bus,
                           u2_noun fol);
 
+        /* u2_wr_nock_mung(): call with gate and sample.
+        */
+          u2_weak
+          u2_wr_nock_mung(u2_ray  wir_r,
+                          u2_noun gat,
+                          u2_noun sam);
+
         /* u2_wr_nock_here():
         **
         **   As `u2_wr_nock_flee()`, but without cap reduction.

@@ -80,3 +80,4 @@
 #     include "f/benx.h"
 #     include "f/wire.h"
 #     include "f/funj.h"
+#     include "f/unix.h"

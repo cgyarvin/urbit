@@ -128,3 +128,35 @@ u2_wr_nock_main(u2_ray  wir_r,
     }
   }
 }
+
+/* u2_wr_nock_mung(): call with gate and sample.
+*/
+u2_weak
+u2_wr_nock_mung(u2_ray  wir_r,
+                u2_noun gat,
+                u2_noun sam)
+{
+  if ( u2_no == u2_dust(gat) ) {
+    return u2_none;
+  }
+  else {
+    u2_noun h_gat = u2_h(gat);
+    u2_noun t_gat = u2_t(gat);
+
+    if ( u2_no == u2_dust(h_gat) ) {
+      return u2_none;
+    } else {
+      u2_noun pay = u2_rc(wir_r, sam, u2_t(h_gat));
+      u2_noun pro;
+      
+      if ( u2_none == pay ) {
+        return u2_none;
+      } else {
+        pro = u2_wr_nock_main(wir_r, pay, t_gat);
+
+        u2_rl_lose(wir_r, pay);
+        return pro;
+      }
+    }
+  }
+}
