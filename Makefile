@@ -301,7 +301,8 @@ P_OFILES=\
        p/pool.o \
        p/prep.o \
        p/plow.o \
-       p/saur.o
+       p/saur.o \
+       p/watt.o
      
 
 OFILES= \

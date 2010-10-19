@@ -1179,20 +1179,16 @@ vere_line2(void* vere, const c3_c* lin_c)
     {
       u3_fox gat = _vere_file(v->x, pah_c);
       u3_fox arg = u3_ln_string(v->x, arg_c);
+      u3_fox  mun = _vere_init_read(v->x, gat);
+      u3_fox  hob = _vere_xz(v, mun);
+      u2_noun gen = _vere_32(v, hob);
+
       u3_fox fel = _vere_nock(v, 0, _vere_kick(v, gat), 0);
       u3_fox gux = _vere_nock(v, 0, _vere_kick(v, arg), 0);
 
       fel = _vere_xz(v, fel);
       gux = _vere_xz(v, gux);
 
-#if 0
-      /* Test with u3, x.
-      */
-      {
-        u3_fox bim = _vere_munz(v, fel, gux, 1);
-        u3_b_print(v->z, 0, bim);
-      }
-#endif
       /* Test with u2.
       */
       {
@@ -1206,6 +1202,26 @@ vere_line2(void* vere, const c3_c* lin_c)
                               u2_rc(v->wir_r, par, u2_t(u2_h(fun))),
                               fol);
 
+#if 1
+          /* Test equivalent compilation process.
+          */
+          {
+            u3_fox  mun = _vere_init_read(v->x, gat);
+            u3_fox  hob = _vere_xz(v, mun);
+            u2_noun gen = _vere_32(v, hob);
+            u2_noun fug;
+
+            fug = u2_fj_plow_make(v->wir_r, c3__blur, gen);
+
+            if ( u2_yes == u2_sing(fug, fun) ) {
+              printf("they match!\n");
+            } else {
+              printf("they don't match.\n");
+              u3_b_print(v->z, "fug", _vere_23(v, fug));
+              u3_b_print(v->z, "fel", fel);
+            }
+          }
+#endif
           // u2_rl_leap(v->wir_r, c3__cold);
           u2_rl_leap(v->wir_r, c3__warm);
           {

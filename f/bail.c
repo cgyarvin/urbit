@@ -328,6 +328,73 @@ u2_bn_quil(u2_ray  wir_r,
   return u2_bn_cell(wir_r, a, u2_bn_qual(wir_r, b, c, d, e));
 }
 
+/* u2_bn_tape():
+**
+**   Create an atomic string from a list of bytes.
+*/
+u2_noun 
+u2_bn_tape(u2_ray  wir_r,
+           u2_list lit)
+{
+  c3_w len_w = u2_fj_list_len(wir_r, lit);
+  c3_w lat_w = 0;
+  c3_y buf_y[len_w];
+
+  while ( u2_nul != lit ) {
+    buf_y[lat_w++] = u2_bi_byte(wir_r, 0, u2_h(lit));
+    lit = u2_t(lit);
+  }
+  return u2_bn_bytes(wir_r, len_w, buf_y);
+}
+
+/* u2_bn_decimal():
+**
+**   On (wir_r), write (list), a list of digits, as a decimal.
+*/
+u2_noun
+u2_bn_decimal(u2_ray  wir_r,
+              u2_list lit)
+{
+  mpz_t mp;
+
+  mpz_init(mp);
+  while ( u2_nul != lit ) {
+    c3_w byt_w = u2_bi_byte(wir_r, 0, u2_h(lit));
+
+    mpz_mul_ui(mp, mp, 10);
+    mpz_add_ui(mp, mp, (byt_w - '0'));
+
+    lit = u2_t(lit);
+  }
+  return u2_bn_mp(wir_r, mp);
+}
+
+/* u2_bn_heximal():
+**
+**   On (wir_r), write (lit), a list of digits, as a hexadecimal.
+*/
+u2_noun
+u2_bn_heximal(u2_ray  wir_r,
+              u2_list lit)
+{
+  mpz_t mp;
+
+  mpz_init(mp);
+  while ( u2_nul != lit ) {
+    c3_w byt_w = u2_bi_byte(wir_r, 0, u2_h(lit));
+
+    mpz_mul_ui(mp, mp, 16);
+    if ( (byt_w >= 'a') && (byt_w <= 'f') ) {
+      mpz_add_ui(mp, mp, (byt_w + 10 - 'a'));
+    }
+    else {
+      mpz_add_ui(mp, mp, (byt_w - '0'));
+    }
+    lit = u2_t(lit);
+  }
+  return u2_bn_mp(wir_r, mp);
+}
+
 /* u2_bn_trel(): 
 **
 **   Produce the triple [a b c].

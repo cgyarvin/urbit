@@ -158,6 +158,14 @@
             u2_bn_string(u2_ray      wir_r,
                          const c3_c* a_c);
 
+          /* u2_bn_tape():
+          **
+          **   Create an atomic string from a list of bytes.
+          */
+            u2_noun 
+            u2_bn_tape(u2_ray  wir_r,
+                       u2_list lit);
+
           /* u2_bn_cell(): 
           **
           **   Produce the cell [a b].
@@ -168,6 +176,22 @@
                        u2_noun b);
 #         define u2_bc(wir_r, a, b) u2_bn_cell(wir_r, a, b)
 #         define u2_bo(wir_r, a)    u2_bn_cell(wir_r, a, _0)
+
+          /* u2_bn_decimal():
+          **
+          **   On (wir_r), write (list), a list of digits, as a decimal.
+          */
+            u2_noun
+            u2_bn_decimal(u2_ray  wir_r,
+                          u2_list lit);
+
+          /* u2_bn_heximal():
+          **
+          **   On (wir_r), write (lit), a list of digits, as a hexadecimal.
+          */
+            u2_noun
+            u2_bn_heximal(u2_ray  wir_r,
+                          u2_list lit);
 
           /* u2_bn_ice():
           **

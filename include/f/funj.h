@@ -149,6 +149,18 @@
                        u2_list lit,
                        u2_list lus);
 
+      /* u2_fj_list_flip(): invert list.
+      */
+        u2_list
+        u2_fj_list_flip(u2_ray  wir_r,
+                        u2_list lit);
+
+      /* u2_fj_list_len(): length of list.
+      */
+        c3_w
+        u2_fj_list_len(u2_ray  wir_r,
+                       u2_list lit);
+
     /** Pools (sets).
     **/
       /* u2_fj_pool_ok(): sanity test for pool.
@@ -258,6 +270,16 @@
         u2_fj_book_list(u2_ray  wir_r,
                         u2_list list,
                         u2_book book);
+
+    /** Parsing.
+    **/
+      /* u2_fj_watt(): 
+      **
+      **   Convert `zar`, a text atom,  to a gene.
+      */
+        u2_gene
+        u2_fj_watt(u2_ray  wir_r,
+                   u2_noun zar);
 
     /** Plow (Watt compilation).
     **/
