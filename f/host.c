@@ -109,7 +109,6 @@ _cs_save(u2_ho_cash* cas_s,
          c3_w        mug_w,
          c3_w        off_w)
 {
-  printf("cs_save: ptr %p, mug %x, off %d\n", ptr_v, mug_w, off_w);
   while ( 1 ) {
     if ( off_w == 32 ) {
       /* Linear search in a list of 16 total collisions.

@@ -152,10 +152,18 @@ u2_wr_nock_mung(u2_ray  wir_r,
       if ( u2_none == pay ) {
         return u2_none;
       } else {
-        pro = u2_wr_nock_main(wir_r, pay, t_gat);
+        u2_noun cor = u2_rc(wir_r, pay, t_gat);
 
-        u2_rl_lose(wir_r, pay);
-        return pro;
+        if ( u2_none == cor ) {
+          u2_rl_lose(wir_r, pay);
+          return u2_none;
+        }
+        else {
+          pro = u2_wr_nock_main(wir_r, cor, t_gat);
+
+          u2_rl_lose(wir_r, pay);
+          return pro;
+        }
       }
     }
   }

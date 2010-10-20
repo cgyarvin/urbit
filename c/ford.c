@@ -59,15 +59,11 @@ ford_boot(c3_w        siz_w,
   u2_boot(siz_w);
   wir_r = u2_wr_init(c3__cold, u2_ray_of(0, 0), u2_ray_of(1, 0));
 
-  if ( 0 == wir_r ) {
-    fprintf(stderr, "boot: wire failed\n");
-    return 0;
-  }
-  else {
+  {
     struct ford_state*  fod_f = malloc(sizeof(struct ford_state));
     u2_weak             src   = u2_ux_read(wir_r, src_c, "watt");
 
-    if ( (0 == fod_f) || (0 == src) ) {
+    if ( (0 == fod_f) || (u2_none == src) ) {
       perror(src_c);
       return 0;
     }
@@ -84,13 +80,9 @@ ford_boot(c3_w        siz_w,
         u2_noun gen, mil, pyt, pit;
 
         gen = u2_fj_watt(wir_r, src);
-        printf("gen\n");
-        mil = u2_fj_plow_mill(wir_r, c3__blur, gen);
-        printf("mil\n");
+        mil = u2_fj_plow_mill(wir_r, u2_bc(wir_r, c3__cube, _0), gen);
         pyt = u2_bi_h(wir_r, mil);
-        printf("pyt\n");
         pit = u2_bn_nock(wir_r, _0, u2_t(mil));
-        printf("pit\n");
 
         u2_bl_done(wir_r, jub_r);
 
@@ -113,16 +105,9 @@ _ford_from(struct ford_state* fod_f,
   u2_noun exp, gen, fol, val;
 
   exp = u2_bn_string(wir_r, exp_c);
-  printf("  exp\n");
-
   gen = u2_fj_watt(wir_r, exp);
-  printf("  gen\n");
-
   fol = u2_fj_plow_make(wir_r, fod_f->pyt, gen);
-  printf("  fol\n");
-
   val = u2_bn_nock(wir_r, fod_f->pit, fol);
-  printf("  val\n");
 
   return val;
 }
@@ -150,17 +135,14 @@ ford_line(struct ford_state* fod_f,
       /* Construct gate from command.
       */
       gat = _ford_from(fod_f, cmd_c);
-      printf("gat\n");
 
       /* Construct sample from argument.
       */
       sam = _ford_from(fod_f, arg_c);
-      printf("sam\n");
 
       /* Construct product.
       */
       pro = u2_wr_nock_mung(wir_r, gat, sam);
-      printf("do\n");
 
       /* Print, if applicable.
       */
@@ -168,11 +150,9 @@ ford_line(struct ford_state* fod_f,
         if ( u2_none != pro ) {
           u2_prep pap = u2_fj_prep_noun(wir_r, pro);
 
-          printf("  pap\n");
           u2_burp(wir_r, 0, pap);
         }
       }
-      printf("out\n");
     }
   }
   u2_rl_fall(wir_r);

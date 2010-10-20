@@ -215,7 +215,6 @@ U4_OFILES= \
 
 C_OFILES=\
        c/main.o \
-       c/vere.o \
        c/ford.o
 
 L_OFILES=\
@@ -305,9 +304,8 @@ P_OFILES=\
        p/plow.o \
        p/saur.o \
        p/watt.o
-     
 
-OFILES= \
+OFILES=\
        $(L_OFILES) \
        $(C_OFILES) \
        $(B_OFILES) \
@@ -319,13 +317,19 @@ OFILES= \
        $(P_OFILES) \
        $(U4_OFILES)
 
-$(BIN)/vere: $(OFILES)
+NFILES=\
+       $(L_OFILES) \
+       $(F_OFILES) \
+       $(P_OFILES) \
+       $(C_OFILES)
+
+$(BIN)/ford: $(NFILES)
 	mkdir -p $(BIN)
-	$(CLD) -o $(BIN)/vere $(OFILES) -lgmp -lreadline -ltermcap
+	$(CLD) -o $(BIN)/ford $(NFILES) -lgmp -lreadline -ltermcap
 
 tags:
 	ctags -R -f .tags --exclude=root
 
 clean:
-	 $(RM) $(OFILES) $(BIN)/vere
+	 $(RM) $(OFILES) $(BIN)/ford
 
