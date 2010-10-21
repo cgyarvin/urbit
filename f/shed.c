@@ -114,9 +114,9 @@ u2_sh_mine(u2_ray  wir_r,
     return u2_none;
   }
   else {
-    u2_noun dac, bot, pit, xop, cyr;
+    u2_noun dac, bot, pet, xop, cyr;
     
-    dac = bot = pit = xop = cyr = u2_none;
+    dac = bot = pet = xop = cyr = u2_none;
     while ( 1 ) {
       /* disc: dac
       */
@@ -144,11 +144,11 @@ u2_sh_mine(u2_ray  wir_r,
         }
       }
 
-      /* trunk: pit
+      /* trunk: pet
       */
       {
         if ( _0 == bud ) {
-          pit = u2_nul;
+          pet = u2_nul;
         } 
         else {
           u2_atom p_bud = u2_t(bud);
@@ -170,7 +170,7 @@ u2_sh_mine(u2_ray  wir_r,
               u2_rl_lose(sad_r, xup);
             }
 
-            if ( u2_none == (pit = u2_rc(sad_r, p_bud, xup)) ) {
+            if ( u2_none == (pet = u2_rc(sad_r, p_bud, xup)) ) {
               u2_rl_lose(sad_r, axe);
               u2_rl_lose(sad_r, xup);
               break;
@@ -182,12 +182,18 @@ u2_sh_mine(u2_ray  wir_r,
       /* xop: new chip.
       */
       {
-        if ( u2_none == (xop = u2_rt(sad_r, dac, bot, pit)) ) {
+        if ( u2_none == (xop = u2_rt(sad_r, dac, bot, pet)) ) {
           break;
         }
         if ( u2_no == (u2_ch_save(sad_r, u2_shed_cad_r(sad_r), bot, xop)) ) {
           break;
         }
+#if 0
+        printf("battery: registered: %d.%x\n",
+                u2_ray_a(u2_dog_a(bot)),
+                u2_ray_b(u2_dog_a(bot)));
+#endif
+
         u2_rl_lose(sad_r, xop);
       }
 
@@ -210,7 +216,7 @@ u2_sh_mine(u2_ray  wir_r,
 
     if ( dac != u2_none ) u2_rl_lose(sad_r, dac);
     if ( bot != u2_none ) u2_rl_lose(sad_r, bot);
-    if ( pit != u2_none ) u2_rl_lose(sad_r, pit);
+    if ( pet != u2_none ) u2_rl_lose(sad_r, pet);
     if ( xop != u2_none ) u2_rl_lose(sad_r, xop);
 
     return u2_none;
@@ -225,24 +231,24 @@ _sh_good(u2_noun cor,
 {
   while ( 1 ) {
     u2_noun bat = u2_h(u2_t(xip));
-    u2_noun pit = u2_t(u2_t(xip));
+    u2_noun pet = u2_t(u2_t(xip));
 
     if ( u2_no == u2_sing(bat, u2_t(cor)) ) {
       u2_ho_warn_here();
       return u2_no;
     }
     else {
-      if ( _0 == pit ) {
+      if ( _0 == pet ) {
         return u2_yes;
       } else {
-        u2_atom axe = u2_h(pit);
+        u2_atom axe = u2_h(pet);
         u2_noun nub = u2_frag(axe, cor);
 
         if ( u2_none == nub ) {
           return u2_no;
         } else {
           cor = nub;
-          xip = u2_t(pit);
+          xip = u2_t(pet);
           continue;
         }
       }
@@ -279,6 +285,12 @@ u2_sh_find(u2_ray  wir_r,
         u2_chip xip = u2_ch_find(u2_shed_cad_r(sad_r), bat);
 
         if ( u2_none == xip ) {
+#if 0
+          printf("bat_r %d.%x; hat_r %d.%x; rut_r %d.%x\n",
+                  u2_ray_a(bat_r), u2_ray_b(bat_r),
+                  u2_ray_a(hat_r), u2_ray_b(hat_r),
+                  u2_ray_a(rut_r), u2_ray_b(rut_r));
+#endif
           u2_ho_warn_here();
           return u2_none;
         } else {

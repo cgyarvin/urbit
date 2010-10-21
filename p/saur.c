@@ -254,7 +254,7 @@ u2_fj_op_tip(u2_atom twig)
 */
 u2_weak
 u2_fj_op_tap(u2_ray  wir_r,
-          u2_atom twig)
+             u2_atom twig)
 {
   if ( u2_yes == u2_sing(twig, _1) ) {
     return u2_none;

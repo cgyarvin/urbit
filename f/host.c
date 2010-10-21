@@ -17,12 +17,17 @@
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       static u2_ho_driver JetBase[] = {
-        { "watt_274", u2_none, 0, 
-          { }
-        },
+        { "watt_274", u2_none },
         { 0 }
       };
 
+
+  /** Forward declarations.
+  **/
+    /* _ho_explore(): find driver from chip, caching.
+    */
+    static u2_ho_driver*
+    _ho_explore(u2_ray, u2_noun);
 
 /* _cs_free(): free a cache, freeing.
 */
@@ -367,19 +372,6 @@ _ho_boot(u2_ho_hangar *hag)
 {
   _cs_init(&hag->jac_s);
   _cs_init(&hag->bad_s);
-
-  {
-    c3_w i_w, j_w;
-
-    for ( i_w=0; JetBase[i_w].cos_c; i_w++ ) {
-      JetBase[i_w].xip = u2_none;
-
-      for ( j_w=0; JetBase[i_w].fan_j[j_w].fcs_c; j_w++ ) {
-        JetBase[i_w].fan_j[j_w].xip = u2_none;
-        JetBase[i_w].fan_j[j_w].fol = u2_none;
-      }
-    }
-  }
 }
 
 /* _ho_down(): 
@@ -521,6 +513,7 @@ _ho_extract(u2_noun    xip,
     sscanf(fcs_c+1, "%u", &axe_w);
     c3_assert(!(0x80000000 & axe_w));     // that's a deep tree, dude
 
+    axe_w = u2_fj_op_tap(0, axe_w);
     return u2_frag(axe_w, bat);
   }
   else {
@@ -546,7 +539,14 @@ _ho_extract(u2_noun    xip,
                (_0 == u2_h(tt_fal)) &&
                (u2_yes == u2_stud(u2_t(tt_fal))) )
           {
-            return u2_frag(u2_t(tt_fal), bat);
+            u2_atom axe = u2_t(tt_fal);
+
+            if ( !u2_fly_is_cat(axe) ) {
+              u2_ho_warn_here();
+            }
+            axe = u2_fj_op_tap(0, axe);
+
+            return u2_frag(axe, bat);
           }
         }
         return u2_none;
@@ -561,16 +561,79 @@ _ho_extract(u2_noun    xip,
 static void
 _ho_drive(u2_ho_driver* dry_d)
 {
-  u2_ho_jet*  jet_j;
-  c3_w        i_w;
+  u2_ho_jet*    jet_j;
+  c3_w          i_w;
 
-  for ( i_w = 0; (jet_j = &dry_d->fan_j[i_w])->fcs_c; i_w++ ) {
-    jet_j->xip = dry_d->xip;
+  if ( dry_d->fan_j ) {
+    for ( i_w = 0; (jet_j = &dry_d->fan_j[i_w])->fcs_c; i_w++ ) {
+      jet_j->xip = dry_d->xip;
 
-    jet_j->fol = _ho_extract(dry_d->xip, jet_j->fcs_c);
-    if ( u2_none != jet_j->fol ) {
-      _ho_cash_save(&JetHangar->jac_s, jet_j->fol, jet_j);
+      jet_j->fol = _ho_extract(dry_d->xip, jet_j->fcs_c);
+      if ( u2_none != jet_j->fol ) {
+        _ho_cash_save(&JetHangar->jac_s, jet_j->fol, jet_j);
+      }
     }
+  }
+}
+
+/* _ho_explore_static(): find driver from built-in list, or return 0.
+*/
+static u2_ho_driver*
+_ho_explore_static(u2_ray  wir_r,
+                   u2_noun xip,
+                   c3_c*   cos_c)
+{
+  c3_w  i_w;
+
+  for ( i_w=0; JetBase[i_w].cos_c; i_w++ ) {
+    if ( (u2_none == JetBase[i_w].xip) &&
+         !strcmp(cos_c, JetBase[i_w].cos_c) ) 
+    {
+      u2_ho_driver* dry_d = &JetBase[i_w];
+
+      dry_d->xip = xip;
+      free(cos_c);
+
+      _ho_cash_save(&JetHangar->bad_s, xip, dry_d);
+
+      return dry_d;
+    }
+  }
+  return 0;
+}
+
+/* _ho_explore_parent(): find driver from parent, or return 0.
+*/
+static u2_ho_driver*
+_ho_explore_parent(u2_ray  wir_r,
+                   u2_noun xip,
+                   c3_c*   cos_c)
+{
+  u2_noun pet = u2_t(u2_t(xip));
+
+  if ( _0 == pet ) {
+    return 0;
+  } else {
+    u2_ho_driver* par_d = _ho_explore(wir_r, u2_t(pet));
+    c3_w          i_w;
+
+    c3_assert(par_d);
+    if ( par_d->sub_d ) {
+      for ( i_w = 0; par_d->sub_d[i_w].cos_c; i_w++ ) {
+        if ( (u2_none == par_d->sub_d[i_w].xip) &&
+             !strcmp(cos_c, par_d->sub_d[i_w].cos_c) ) 
+        {
+          u2_ho_driver *dry_d = &par_d->sub_d[i_w];
+
+          dry_d->xip = xip;
+          free(cos_c);
+
+          _ho_cash_save(&JetHangar->bad_s, xip, dry_d);
+          return dry_d;
+        }
+      }
+    }
+    return 0;
   }
 }
 
@@ -586,41 +649,24 @@ _ho_explore(u2_ray  wir_r,
     return dry_d;
   } else {
     c3_c* cos_c = _ho_cstring(xip);
-    c3_w  i_w;
 
-    printf("explore: seeking: %s\n", cos_c);
-
-    for ( i_w=0; JetBase[i_w].cos_c; i_w++ ) {
-      if ( (u2_none == JetBase[i_w].xip) &&
-           !strcmp(cos_c, JetBase[i_w].cos_c) ) 
-      {
-        dry_d = &JetBase[i_w];
-
-        dry_d->xip = xip;
-        free(cos_c);
-
-        _ho_cash_save(&JetHangar->bad_s, xip, dry_d);
-
-        return dry_d;
-      }
+    if ( 0 != (dry_d = _ho_explore_parent(wir_r, xip, cos_c)) ) {
+      return dry_d;
     }
-
-    /* Driver not found.  Let's create a dummy, for speed.
-    **
-    ** XX: leaks on jet reboot.  
-    */
-    {
+    else if ( 0 != (dry_d = _ho_explore_static(wir_r, xip, cos_c)) ) {
+      return dry_d;
+    }
+    else {
       if ( !(dry_d = malloc(sizeof(u2_ho_driver))) ) {
         abort();
       }
 
       dry_d->cos_c = cos_c;
       dry_d->xip = xip;
-      dry_d->fan_j[0].fcs_c = 0;
+      dry_d->fan_j = 0;
 
-      printf("saving: fake driver: %s\n", cos_c);
+      printf("driver: dummy: %s\n", cos_c);
       _ho_cash_save(&JetHangar->bad_s, xip, dry_d);
-      printf("saved: fake driver: %s\n", cos_c);
       return dry_d;
     }
   }
@@ -655,10 +701,9 @@ _ho_discover(u2_ray  wir_r,
         jet_j->fol = fol;
         jet_j->fun_f = 0;
 
-        printf("saving: fake jet; driver %s; fol mug %x\n",
+        printf("formula: dummy: %s, %x\n",
             dry_d->cos_c, u2_mug(fol));
         _ho_cash_save(&JetHangar->jac_s, fol, jet_j);
-        printf("saved\n");
         return jet_j;
       }
     }

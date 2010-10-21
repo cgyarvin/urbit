@@ -2,12 +2,72 @@
 **
 ** This file is in the public domain.
 */
+  /** Macros.
+  **/
+    /* Symbol composition.
+    */
+#     define _j2_xd(x)        j2_##x##_d
+#     define _j2_xm(x)        j2_##x##_m
+#     define _j2_xmc(x)       j2_##x##_mc
+#     define _j2_xp(p, x)     j2_##x##_p_##p
+#     define _j2_xpc(p, x)    j2_##x##_pc_##p
+#     define _j2_xss(x)       #x
+#     define _j2_xs(x)        _j2_xss(x)
+
+#     define _j2_qd(x)        _j2_xd(x)
+#     define _j2_qm(x)        _j2_xm(x)
+#     define _j2_qmc(x)       _j2_xmc(x)
+#     define _j2_qp(p, x)     _j2_xp(p, x)
+#     define _j2_qpc(p, x)    _j2_xpc(p, x)
+
+#     define _j2_a(a)                   a
+#     define _j2_ab(a, b)               a##__##b
+#     define _j2_abc(a, b, c)           a##__##b##__##c
+#     define _j2_abcd(a, b, c, d)       a##__##b##__##c##__##d
+#     define _j2_abcde(a, b, c, d, e)   a##__##b##__##c##__##d##__##e
+
+#     define j2_sa(a)                   _j2_xs(_j2_a(a))
+#     define j2_sb(a, b)                _j2_xs(_j2_ab(a, b))
+#     define j2_sc(a, b, c)             _j2_xs(_j2_abc(a, b, c))
+#     define j2_sd(a, b, c, d)          _j2_xs(_j2_abcd(a, b, c, d))
+#     define j2_se(a, b, c, d, e)       _j2_xs(_j2_abcde(a, b, c, d, e))
+
+#     define j2_da(a)                   _j2_qd(_j2_a(a))
+#     define j2_db(a, b)                _j2_qd(_j2_ab(a, b))
+#     define j2_dc(a, b, c)             _j2_qd(_j2_abc(a, b, c))
+#     define j2_dd(a, b, c, d)          _j2_qd(_j2_abcd(a, b, c, d))
+#     define j2_de(a, b, c, d, e)       _j2_qd(_j2_abcde(a, b, c, d, e))
+
+#     define j2_ma(a)                   _j2_qm(_j2_a(a))
+#     define j2_mb(a, b)                _j2_qm(_j2_ab(a, b))
+#     define j2_mc(a, b, c)             _j2_qm(_j2_abc(a, b, c))
+#     define j2_md(a, b, c, d)          _j2_qm(_j2_abcd(a, b, c, d))
+#     define j2_me(a, b, c, d, e)       _j2_qm(_j2_abcde(a, b, c, d, e))
+
+#     define j2_mac(a)                  _j2_qmc(_j2_a(a))
+#     define j2_mbc(a, b)               _j2_qmc(_j2_ab(a, b))
+#     define j2_mcc(a, b, c)            _j2_qmc(_j2_abc(a, b, c))
+#     define j2_mdc(a, b, c, d)         _j2_qmc(_j2_abcd(a, b, c, d))
+#     define j2_mec(a, b, c, d, e)      _j2_qmc(_j2_abcde(a, b, c, d, e))
+
+#     define j2_pa(a, p)                _j2_qp(p, _j2_a(a))
+#     define j2_pb(a, b, p)             _j2_qp(p, _j2_ab(a, b))
+#     define j2_pc(a, b, c, p)          _j2_qp(p, _j2_abc(a, b, c))
+#     define j2_pd(a, b, c, d, p)       _j2_qp(p, _j2_abcd(a, b, c, d))
+#     define j2_pe(a, b, c, d, e, p)    _j2_qp(p, _j2_abcde(a, b, c, d, e)) 
+
+#     define j2_pac(a, p)               _j2_qpc(p, _j2_a(a))
+#     define j2_pbc(a, b, p)            _j2_qpc(p, _j2_ab(a, b))
+#     define j2_pcc(a, b, c, p)         _j2_qpc(p, _j2_abc(a, b, c))
+#     define j2_pdc(a, b, c, d, p)      _j2_qpc(p, _j2_abcd(a, b, c, d))
+#     define j2_pec(a, b, c, d, e, p)   _j2_qpc(p, _j2_abcde(a, b, c, d, e)) 
+
   /** Types.
   **/
     /* u2_ho_jet: a C function, per formula.
     */
       typedef struct {
-        /* Function control string - defines formula in battery.
+        /* Function control string - defines formula in core.
         **
         **    ".@" | "hook"
         */
@@ -32,7 +92,7 @@
 
     /* u2_ho_driver: battery driver.
     */
-      typedef struct {
+      typedef struct _u2_ho_driver {
         /* Control string - computed from seals.
         */
         const c3_c* cos_c;
@@ -45,9 +105,13 @@
         */
         c3_w mug_w;
 
-        /* Function/formula jets.  Null `dar` terminates.
+        /* Subdriver array, if any.
         */
-        u2_ho_jet fan_j[1];
+        struct _u2_ho_driver* sub_d;
+
+        /* Function/formula jet array.  Null `dar` terminates.
+        */
+        u2_ho_jet *fan_j;
       } u2_ho_driver;
 
     /* u2_ho_pear: mug-to-pointer binding.
@@ -109,7 +173,7 @@
     */
       void
       u2_ho_warn(const c3_c* fil_c,
-                c3_w        lyn_w);
+                 c3_w        lyn_w);
 
 #     define u2_ho_warn_here() u2_ho_warn(__FILE__, __LINE__)
 

@@ -30,7 +30,7 @@
 
     /* u2_chip: complete battery record
     **
-    **  [dac=*disc bat=* pit=<~ [axe=*axis led=*chip]>]
+    **  [dac=*disc bat=* pet=<~ [axe=*axis led=*chip]>]
     */
       typedef u2_noun u2_chip;
 

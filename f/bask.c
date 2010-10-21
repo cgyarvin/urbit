@@ -62,12 +62,9 @@ u2_ba_save(u2_ray  wir_r,
   if ( 0 == (bas_r = u2_wire_bas_r(wir_r)) ) {
     return;
   }
-  if ( u2_no == u2_rl_junior(bas_r, fol) ) {
-    u2_ch_save_cell(bas_r, u2_bask_mem_r(bas_r), bus, fol, pro);
-  }
-  else {
-    printf("junior formula?\n");
-  }
+  fol = u2_rl_ice(bas_r, fol);
+
+  u2_ch_save_cell(bas_r, u2_bask_mem_r(bas_r), bus, fol, pro);
 }
 
 /* u2_ba_sole():
