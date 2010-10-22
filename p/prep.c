@@ -78,10 +78,10 @@ u2_fj_prep_decimal(u2_ray  wir_r,
 */
 u2_prep
 u2_fj_prep_heximal(u2_ray  wir_r,
-                u2_atom atom)
+                   u2_atom atom)
 {
-  c3_ys sy_n = u2_met(2, atom);
-  c3_w sb_hex = (sy_n ? sy_n : 1) + 2;
+  c3_w gyf_w = u2_met(2, atom);
+  c3_w sb_hex = (gyf_w ? gyf_w : 1) + 2;
   c3_c *ca = malloc(sb_hex + 1);
   mpz_t mp;
   u2_noun text;
@@ -107,8 +107,8 @@ u2_prep
 u2_fj_prep_hexinal(u2_ray  wir_r,
                 u2_atom atom)
 {
-  c3_ys sy_n = u2_met(2, atom);
-  c3_w sb_hex = (sy_n ? sy_n : 1);
+  c3_w gyf_w = u2_met(2, atom);
+  c3_w sb_hex = (gyf_w ? gyf_w : 1);
   c3_c *ca = malloc(sb_hex + 1);
   mpz_t mp;
   u2_noun text;

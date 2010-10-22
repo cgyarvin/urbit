@@ -1,7 +1,8 @@
-/* l/read.c
+/* l/loom.c
 **
 ** This file is in the public domain.
 */
+#include <sys/resource.h>
 #include "all.h"
 
 /* u2_boot():
@@ -17,6 +18,14 @@ u2_boot(c3_y a_y)
     Loom = malloc(4 << a_y);
     LoomSize = (1 << a_y);
     LoomEnd = (LoomSize - 1);
+  }
+
+  {
+    struct rlimit rlm;
+
+    getrlimit(RLIMIT_STACK, &rlm);
+    rlm.rlim_cur = 65536 << 10;
+    setrlimit(RLIMIT_STACK, &rlm);
   }
 }
 
