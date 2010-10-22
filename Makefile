@@ -305,6 +305,9 @@ P_OFILES=\
        p/saur.o \
        p/watt.o
 
+H_OFILES=\
+       h/watt.o
+
 OFILES=\
        $(L_OFILES) \
        $(C_OFILES) \
@@ -321,6 +324,7 @@ NFILES=\
        $(L_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
+       $(H_OFILES) \
        $(C_OFILES)
 
 $(BIN)/ford: $(NFILES)

@@ -6,6 +6,7 @@
 #include <fcntl.h>
 
 #define U2_GLOBAL
+#define C3_GLOBAL
 #include "all.h"
 
   /**   Interpreter data structures.

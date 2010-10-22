@@ -73,13 +73,13 @@
         */
         const c3_c* fcs_c;
 
-        /* Stable iff true; test iff false.
-        */
-        c3_t ace_t;
-
         /* C function, on core `[[sam con] bat]`.
         */
         u2_weak (*fun_f)(u2_ray wir_r, u2_noun cor);
+
+        /* Stable iff true; test iff false.
+        */
+        u2_flag ace;
 
         /* chip: battery identifier.
         */
@@ -97,21 +97,21 @@
         */
         const c3_c* cos_c;
       
-        /* chip: battery identifier, from shed.
+        /* Function/formula jet array.  Null `fcs` terminates.
         */
-        u2_chip xip;
-
-        /* Mug: short hash of chip, or 0.  Must match if set.
-        */
-        c3_w mug_w;
+        u2_ho_jet *fan_j;
 
         /* Subdriver array, if any.
         */
         struct _u2_ho_driver* sub_d;
 
-        /* Function/formula jet array.  Null `dar` terminates.
+        /* Mug: short hash of chip, or 0.  Must match if set.
         */
-        u2_ho_jet *fan_j;
+        c3_w mug_w;
+
+        /* chip: battery identifier, from shed.
+        */
+        u2_chip xip;
       } u2_ho_driver;
 
     /* u2_ho_pear: mug-to-pointer binding.

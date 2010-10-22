@@ -50,6 +50,18 @@ u2_bl_good(u2_ray  wir_r,
   else return som;
 }
 
+/* u2_bl_flat(): test for atom.
+*/
+u2_atom
+u2_bl_flat(u2_ray  wir_r,
+           u2_weak som)
+{
+  if ( u2_none == som ) {
+    return u2_bl_bail(wir_r);
+  }
+  else return som;
+}
+
 /* u2_bi_h():
 **
 **   Return the head of (a).

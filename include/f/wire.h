@@ -4,6 +4,10 @@
 */
   /** Data types.
   **/
+    /** Ray types.
+    **/
+      typedef u2_ray u2_wire;
+
     /** Structures - in loom space.
     **/
       /* u2_loom_wire: the whole thread.

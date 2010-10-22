@@ -34,7 +34,7 @@
       **   Produce the sum of (a) and (b).
       */
         u2_atom
-        u2_fj_op_add(u2_ray  wir_r,
+        u2_fj_op_add(u2_wire wir_r,
                      u2_atom a,
                      u2_atom b);
 
@@ -43,7 +43,7 @@
       **   Produce (a | b).
       */
         u2_atom
-        u2_fj_op_con(u2_ray  wir_r,
+        u2_fj_op_con(u2_wire wir_r,
                      u2_atom a,
                      u2_atom b);
 
@@ -52,7 +52,7 @@
       **   Produce (atom - 1), or bull if (atom) is 0.
       */
         u2_weak
-        u2_fj_op_dec(u2_ray  wir_r,
+        u2_fj_op_dec(u2_wire wir_r,
                      u2_atom atom);
 
       /* u2_fj_op_div():
@@ -60,7 +60,7 @@
       **   Produce (b / a), or bull if (a) is 0.
       */
         u2_weak
-        u2_fj_op_div(u2_ray  wir_r,
+        u2_fj_op_div(u2_wire wir_r,
                      u2_atom a,
                      u2_atom b);
 
@@ -69,7 +69,7 @@
       **   Concatenate atomic strings `a` and `b`.
       */
         u2_atom
-        u2_fj_op_glu(u2_ray  wir_r,
+        u2_fj_op_glu(u2_wire wir_r,
                      u2_atom a,
                      u2_atom b);
 
@@ -78,7 +78,7 @@
       **   Produce (atom + 1).
       */
         u2_atom
-        u2_fj_op_inc(u2_ray  wir_r,
+        u2_fj_op_inc(u2_wire wir_r,
                      u2_atom atom);
 
       /* u2_fj_op_log():
@@ -86,7 +86,7 @@
       **   Produce the lowest m_log such that (1 << m_log) > m.
       */
         u2_atom
-        u2_fj_op_log(u2_ray  wir_r,
+        u2_fj_op_log(u2_wire wir_r,
                      u2_atom atom);
         
       /* u2_fj_op_lsh():
@@ -94,7 +94,7 @@
       **   Produce (b << a).
       */
         u2_atom
-        u2_fj_op_lsh(u2_ray  wir_r,
+        u2_fj_op_lsh(u2_wire wir_r,
                      u2_atom a,
                      u2_atom b);
 
@@ -103,7 +103,7 @@
       **   Concatenate (twig_a) above (twig_b).
       */
         u2_atom
-        u2_fj_op_peg(u2_ray  wir_r,
+        u2_fj_op_peg(u2_wire wir_r,
                      u2_atom twig_a,
                      u2_atom twig_b);
 
@@ -112,7 +112,7 @@
       **   Produce (b >> a).
       */
         u2_atom
-        u2_fj_op_rsh(u2_ray  wir_r,
+        u2_fj_op_rsh(u2_wire wir_r,
                      u2_atom a,
                      u2_atom b);
 
@@ -121,7 +121,7 @@
       **   Produce (b - a), or bull if (a > b).
       */
         u2_weak
-        u2_fj_op_sub(u2_ray  wir_r,
+        u2_fj_op_sub(u2_wire wir_r,
                      u2_atom a,
                      u2_atom b);
 
@@ -137,7 +137,7 @@
       **   Produce (twig) with the root bit removed, or bull if (twig) is 1.
       */
         u2_weak
-        u2_fj_op_tap(u2_ray  wir_r,
+        u2_fj_op_tap(u2_wire wir_r,
                      u2_atom twig);
 
     /** Lists.
@@ -145,20 +145,20 @@
       /* u2_fj_list_cat(): concatenate list.
       */
         u2_list
-        u2_fj_list_cat(u2_ray  wir_r,
+        u2_fj_list_cat(u2_wire wir_r,
                        u2_list lit,
                        u2_list lus);
 
       /* u2_fj_list_flip(): invert list.
       */
         u2_list
-        u2_fj_list_flip(u2_ray  wir_r,
+        u2_fj_list_flip(u2_wire wir_r,
                         u2_list lit);
 
       /* u2_fj_list_len(): length of list.
       */
         c3_w
-        u2_fj_list_len(u2_ray  wir_r,
+        u2_fj_list_len(u2_wire wir_r,
                        u2_list lit);
 
     /** Pools (sets).
@@ -181,7 +181,7 @@
       **   Produce a version of (pool_sub) which includes (pig).
       */
         u2_noun
-        u2_fj_pool_add(u2_ray  wir_r,
+        u2_fj_pool_add(u2_wire wir_r,
                        u2_noun pig,
                        u2_pool pool_sub);
    
@@ -191,7 +191,7 @@
       **   prepending to (list).
       */
         u2_list
-        u2_fj_pool_list(u2_ray  wir_r,
+        u2_fj_pool_list(u2_wire wir_r,
                         u2_list list,
                         u2_pool pool);
 
@@ -201,7 +201,7 @@
       **   in (pool_a).
       */
         u2_noun
-        u2_fj_pool_cat(u2_ray  wir_r,
+        u2_fj_pool_cat(u2_wire wir_r,
                        u2_pool pool_a,
                        u2_pool pool_b);
 
@@ -210,7 +210,7 @@
       **   Return path to node of (pig) in (pool), under (axe); or 0.
       */
         u2_atom
-        u2_fj_pool_at(u2_ray  wir_r, 
+        u2_fj_pool_at(u2_wire wir_r, 
                       u2_noun  pig_in,
                       u2_atom axe,
                       u2_pool  pool);
@@ -246,7 +246,7 @@
       **   Replace old dog, if any.
       */
         u2_book
-        u2_fj_book_add(u2_ray  wir_r,
+        u2_fj_book_add(u2_wire wir_r,
                        u2_noun tag_add,
                        u2_noun dog_add,
                        u2_book  book);
@@ -257,7 +257,7 @@
       **   (list) to (book).  Replace old dog, if any.
       */
         u2_book
-        u2_fj_book_add_list(u2_ray  wir_r,
+        u2_fj_book_add_list(u2_wire wir_r,
                             u2_list  list,
                             u2_book  book);
 
@@ -267,7 +267,7 @@
       **   cells, prepending to (list).
       */
         u2_list
-        u2_fj_book_list(u2_ray  wir_r,
+        u2_fj_book_list(u2_wire wir_r,
                         u2_list list,
                         u2_book book);
 
@@ -278,7 +278,7 @@
       **   Convert `zar`, a text atom,  to a gene.
       */
         u2_gene
-        u2_fj_watt(u2_ray  wir_r,
+        u2_fj_watt(u2_wire wir_r,
                    u2_noun zar);
 
     /** Plow (Watt compilation).
@@ -288,7 +288,7 @@
       **   Not verifying type correctness, compile to formula.
       */
         u2_noun
-        u2_fj_plow_make(u2_ray  wir_r,
+        u2_fj_plow_make(u2_wire wir_r,
                         u2_type sut,
                         u2_gene gen);
 
@@ -297,7 +297,7 @@
       **   Not verifying type correctness, infer product type.
       */
         u2_noun
-        u2_fj_plow_play(u2_ray  wir_r,
+        u2_fj_plow_play(u2_wire wir_r,
                         u2_type sut,
                         u2_gene gen);
 
@@ -306,7 +306,7 @@
       **   Verify type correctness.
       */
         u2_noun
-        u2_fj_plow_show(u2_ray  wir_r,
+        u2_fj_plow_show(u2_wire wir_r,
                         u2_type sut,
                         u2_gene gen);
 
@@ -315,7 +315,7 @@
       **   Verifying type correctness, compile to formula.
       */
         u2_noun
-        u2_fj_plow_pass(u2_ray  wir_r,
+        u2_fj_plow_pass(u2_wire wir_r,
                         u2_type sut,
                         u2_gene gen);
 
@@ -324,7 +324,7 @@
       **   Verifying type correctness, infer product type.
       */
         u2_noun
-        u2_fj_plow_shop(u2_ray  wir_r,
+        u2_fj_plow_shop(u2_wire wir_r,
                         u2_type sut,
                         u2_gene gen);
 
@@ -333,7 +333,7 @@
       **   Not verifying type correctness, compile and infer.
       */
         u2_noun
-        u2_fj_plow_wish(u2_ray  wir_r,
+        u2_fj_plow_wish(u2_wire wir_r,
                         u2_type sut,
                         u2_gene gen);
 
@@ -342,7 +342,7 @@
       **   Verifying type correctness, compile and infer.
       */
         u2_noun
-        u2_fj_plow_mill(u2_ray  wir_r,
+        u2_fj_plow_mill(u2_wire wir_r,
                         u2_type sut,
                         u2_gene gen);
 
@@ -353,7 +353,7 @@
       **   Prep with a text bias; fall back to decimal.
       */
         u2_prep
-        u2_fj_prep_textual(u2_ray  wir_r,
+        u2_fj_prep_textual(u2_wire wir_r,
                            u2_atom atom);
 
       /* u2_fj_prep_decimal():
@@ -361,7 +361,7 @@
       **   Prep a decimal value.
       */
         u2_prep
-        u2_fj_prep_decimal(u2_ray  wir_r,
+        u2_fj_prep_decimal(u2_wire wir_r,
                            u2_atom atom);
 
       /* u2_fj_prep_heximal():
@@ -369,7 +369,7 @@
       **   Prep a hexadecimal value, with 0x.
       */
         u2_prep
-        u2_fj_prep_heximal(u2_ray  wir_r,
+        u2_fj_prep_heximal(u2_wire wir_r,
                            u2_atom atom);
 
       /* u2_fj_prep_hexinal():
@@ -377,7 +377,7 @@
       **   Prep a heximal value, without 0x.
       */
         u2_prep
-        u2_fj_prep_hexinal(u2_ray  wir_r,
+        u2_fj_prep_hexinal(u2_wire wir_r,
                            u2_atom atom);
 
       /* u2_fj_prep_noun():
@@ -389,7 +389,7 @@
       **    | (.nail *prep)
       */
         u2_prep
-        u2_fj_prep_noun(u2_ray  wir_r,
+        u2_fj_prep_noun(u2_wire wir_r,
                         u2_noun noun);
 
       /* u2_fj_prep_close():
@@ -397,7 +397,7 @@
       **   Prep a list of preps, in (xb_a, xb_b).
       */
         u2_prep
-        u2_fj_prep_close(u2_ray  wir_r,
+        u2_fj_prep_close(u2_wire wir_r,
                          c3_y    xb_a,
                          c3_y    xb_b,
                          u2_list gah);
@@ -407,7 +407,7 @@
       **   Convert (prep) to a dump, printing (cols) wide.
       */
         u2_dump
-        u2_fj_pump_dump(u2_ray wir_r,
+        u2_fj_pump_dump(u2_wire wir_r,
                         c3_w    xw_cols,
                         u2_prep prep);
 
@@ -416,7 +416,7 @@
       **   Print (nopt) with (caption), using (wir).
       */
         void
-        u2_err(u2_ray      wir_r,
+        u2_err(u2_wire     wir_r,
                const c3_c* cl_caption,
                u2_weak     noun);
 
@@ -425,6 +425,6 @@
       **   Print (prep) with (caption), using (wir).
       */
         void
-        u2_burp(u2_ray      wir_r,
+        u2_burp(u2_wire     wir_r,
                 const c3_c* cl_caption,
                 u2_prep     prep);

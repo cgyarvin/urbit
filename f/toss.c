@@ -107,7 +107,7 @@ _toss(u2_ray  wir_r,
               u2_noun pro;
 
               if ( u2_none != (pro = u2_wr_nock_jet(wir_r, sep, dom)) ) {
-                u2_rl_lose(wir_r, bus);
+                u2_rl_lose(wir_r, sep);
 
                 return pro;
               }

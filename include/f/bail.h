@@ -37,6 +37,11 @@
         u2_noun
         u2_bl_good(u2_ray wir_r, u2_weak som);
 
+      /* u2_bl_flat(): force to atom.
+      */
+        u2_atom
+        u2_bl_flat(u2_ray wir_r, u2_noun som);
+
 
     /** General.  All functions bail out on error.
     **/
@@ -224,7 +229,7 @@
 
           /* u2_bn_mp():
           **
-          **   Copy the GMP integer [a] into an atom.
+          **   Copy the GMP integer [a] into an atom.  Free it.
           */
             u2_noun
             u2_bn_mp(u2_ray wir_r,

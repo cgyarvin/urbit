@@ -371,6 +371,15 @@
           u2_frag(u2_atom a,
                   u2_noun b);
 
+        /* u2_mean():
+        **
+        **   Attempt to deconstruct `a` by axis, noun pairs; 0 terminates.
+        **   Axes must be sorted in tree order.
+        */
+          u2_flag
+          u2_mean(u2_atom a,
+                  ...);
+
         /* u2_mug():
         **
         **   Compute and/or recall the mug (31-bit hash) of (a).

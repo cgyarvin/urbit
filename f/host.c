@@ -12,13 +12,17 @@
 
     /* Hangar stack; top hangar is active.
     */
-      u2_ho_hangar *JetHangar;
+      u2_ho_hangar *u2_HostHangar;
+
+    /* External drivers.
+    */
+      extern u2_ho_driver j2_da(watt_274);
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
-      static u2_ho_driver JetBase[] = {
-        { "watt_274", u2_none },
-        { 0 }
+      static u2_ho_driver *u2_HostDriverBase[] = {
+        &j2_da(watt_274), 
+        0
       };
 
 
@@ -395,8 +399,8 @@ u2_ho_push(void)
   u2_ho_hangar *hag = malloc(sizeof(u2_ho_hangar));
 
   _ho_boot(hag);
-  hag->nex_h = JetHangar;
-  JetHangar = hag;
+  hag->nex_h = u2_HostHangar;
+  u2_HostHangar = hag;
 }
 
 /* u2_ho_popp():
@@ -406,12 +410,12 @@ u2_ho_push(void)
 void
 u2_ho_popp(void)
 {
-  u2_ho_hangar *hag = JetHangar;
+  u2_ho_hangar *hag = u2_HostHangar;
   u2_ho_hangar *nex_h = hag->nex_h;
 
   _ho_down(hag);
   free(hag);
-  JetHangar = nex_h;
+  u2_HostHangar = nex_h;
 }
 
 /* u2_ho_klar():
@@ -421,7 +425,7 @@ u2_ho_popp(void)
 void
 u2_ho_klar(void)
 {
-  while ( JetHangar ) {
+  while ( u2_HostHangar ) {
     u2_ho_popp();
   }
 }
@@ -448,7 +452,7 @@ u2_ho_dive(u2_ray  wir_r,
 {
   c3_c *cos_c = _ho_cstring(xip);
 
-  printf("ho: jet dive: %s\n", cos_c);
+  fprintf(stderr, "ho: jet dive: %s\n", cos_c);
   free(cos_c);
 
   c3_assert(0);
@@ -570,7 +574,7 @@ _ho_drive(u2_ho_driver* dry_d)
 
       jet_j->fol = _ho_extract(dry_d->xip, jet_j->fcs_c);
       if ( u2_none != jet_j->fol ) {
-        _ho_cash_save(&JetHangar->jac_s, jet_j->fol, jet_j);
+        _ho_cash_save(&u2_HostHangar->jac_s, jet_j->fol, jet_j);
       }
     }
   }
@@ -585,17 +589,14 @@ _ho_explore_static(u2_ray  wir_r,
 {
   c3_w  i_w;
 
-  for ( i_w=0; JetBase[i_w].cos_c; i_w++ ) {
-    if ( (u2_none == JetBase[i_w].xip) &&
-         !strcmp(cos_c, JetBase[i_w].cos_c) ) 
-    {
-      u2_ho_driver* dry_d = &JetBase[i_w];
+  for ( i_w=0; u2_HostDriverBase[i_w]; i_w++ ) {
+    u2_ho_driver *dry_d = u2_HostDriverBase[i_w];
 
+    if ( (u2_none == dry_d->xip) && !strcmp(cos_c, dry_d->cos_c) ) {
       dry_d->xip = xip;
       free(cos_c);
 
-      _ho_cash_save(&JetHangar->bad_s, xip, dry_d);
-
+      _ho_cash_save(&u2_HostHangar->bad_s, xip, dry_d);
       return dry_d;
     }
   }
@@ -628,7 +629,7 @@ _ho_explore_parent(u2_ray  wir_r,
           dry_d->xip = xip;
           free(cos_c);
 
-          _ho_cash_save(&JetHangar->bad_s, xip, dry_d);
+          _ho_cash_save(&u2_HostHangar->bad_s, xip, dry_d);
           return dry_d;
         }
       }
@@ -645,15 +646,17 @@ _ho_explore(u2_ray  wir_r,
 {
   u2_ho_driver* dry_d;
 
-  if ( 0 != (dry_d = _ho_cash_find(&JetHangar->bad_s, xip)) ) {
+  if ( 0 != (dry_d = _ho_cash_find(&u2_HostHangar->bad_s, xip)) ) {
     return dry_d;
   } else {
     c3_c* cos_c = _ho_cstring(xip);
 
     if ( 0 != (dry_d = _ho_explore_parent(wir_r, xip, cos_c)) ) {
+      fprintf(stderr, "battery: child : %s\n", cos_c);
       return dry_d;
     }
     else if ( 0 != (dry_d = _ho_explore_static(wir_r, xip, cos_c)) ) {
+      fprintf(stderr, "battery: static: %s\n", cos_c);
       return dry_d;
     }
     else {
@@ -665,8 +668,8 @@ _ho_explore(u2_ray  wir_r,
       dry_d->xip = xip;
       dry_d->fan_j = 0;
 
-      printf("driver: dummy: %s\n", cos_c);
-      _ho_cash_save(&JetHangar->bad_s, xip, dry_d);
+      fprintf(stderr, "battery: dummy : %s\n", cos_c);
+      _ho_cash_save(&u2_HostHangar->bad_s, xip, dry_d);
       return dry_d;
     }
   }
@@ -683,14 +686,14 @@ _ho_discover(u2_ray  wir_r,
   u2_ho_jet*    jet_j;
   u2_ho_driver* dry_d;
 
-  if ( (0 != (jet_j = _ho_cash_find(&JetHangar->jac_s, fol)) ) ) {
+  if ( (0 != (jet_j = _ho_cash_find(&u2_HostHangar->jac_s, fol)) ) ) {
     return jet_j;
   }
   else {
     if ( 0 != (dry_d = _ho_explore(wir_r, xip)) ) {
       _ho_drive(dry_d);
 
-      if ( 0 != (jet_j = _ho_cash_find(&JetHangar->jac_s, fol)) ) {
+      if ( 0 != (jet_j = _ho_cash_find(&u2_HostHangar->jac_s, fol)) ) {
         return jet_j;
       } else {
         if ( !(jet_j = malloc(sizeof(u2_ho_jet))) ) {
@@ -701,9 +704,9 @@ _ho_discover(u2_ray  wir_r,
         jet_j->fol = fol;
         jet_j->fun_f = 0;
 
-        printf("formula: dummy: %s, %x\n",
+        fprintf(stderr, "formula: dummy : %s, %x\n",
             dry_d->cos_c, u2_mug(fol));
-        _ho_cash_save(&JetHangar->jac_s, fol, jet_j);
+        _ho_cash_save(&u2_HostHangar->jac_s, fol, jet_j);
         return jet_j;
       }
     }
@@ -731,7 +734,7 @@ u2_ho_fire(u2_ray   wir_r,
     return u2_none;
   }
   else {
-    *saf = (jet_j->ace_t ? u2_yes : u2_no);
+    *saf = jet_j->ace;
 
     return _ho_execute(wir_r, jet_j, cor);
   }
