@@ -29,6 +29,98 @@ u2_boot(c3_y a_y)
   }
 }
 
+/* u2_mean():
+**
+**   Attempt to deconstruct `a` by axis, noun pairs; 0 terminates.
+**   Axes must be sorted in tree order.
+*/
+  struct _mean_pair {
+    c3_w    axe_w;
+    u2_noun* som;
+  };
+
+  static c3_w
+  _mean_cut(c3_w               len_w,
+            struct _mean_pair* prs_m)
+  {
+    c3_w i_w;
+
+    for ( i_w = 0; i_w < len_w; i_w++ ) {
+      if ( 3 == u2_ax_cap(prs_m[i_w].axe_w) ) {
+        break;
+      }
+      c3_assert(2 == u2_ax_cap(prs_m[i_w].axe_w));
+    }
+    return i_w;
+  }
+
+  static u2_flag
+  _mean_extract(u2_noun            som,
+                c3_w               len_w,
+                struct _mean_pair* prs_m)
+  {
+    if ( len_w == 0 ) {
+      return u2_yes;
+    }
+    else if ( (len_w == 1) && (1 == prs_m[0].axe_w) ) {
+      *prs_m->som = som;
+      return u2_yes;
+    }
+    else {
+      if ( u2_no == u2_dust(som) ) {
+        return u2_no;
+      } else {
+        c3_w cut_w = _mean_cut(len_w, prs_m);
+
+        return u2_and
+          (_mean_extract(u2_h(som), cut_w, prs_m),
+           _mean_extract(u2_t(som), (len_w - cut_w), (prs_m + cut_w)));
+      }
+    }
+  }
+
+u2_flag
+u2_mean(u2_noun som,
+        ...)
+{
+  va_list            ap;
+  c3_w               len_w;
+  struct _mean_pair* prs_m;
+
+  /* Count.
+  */
+  len_w = 0;
+  {
+    va_start(ap, som);
+    while ( 1 ) {
+      if ( 0 == va_arg(ap, c3_w) ) {
+        break;
+      }
+      va_arg(ap, u2_noun*);
+      len_w++;
+    }
+    va_end(ap);
+  }
+  prs_m = alloca(len_w * sizeof(struct _mean_pair));
+
+  /* Install.
+  */
+  {
+    c3_w i_w;
+
+    va_start(ap, som);
+    for ( i_w = 0; i_w < len_w; i_w++ ) {
+      prs_m[i_w].axe_w = va_arg(ap, c3_w);
+      prs_m[i_w].som = va_arg(ap, u2_noun*);
+    }
+    va_end(ap);
+  }
+
+  /* Extract.
+  */
+  return _mean_extract(som, len_w, prs_m);
+}
+
 /* u2_frag():
 **
 **   Return fragment (a) of (b), or u2_none if not applicable.

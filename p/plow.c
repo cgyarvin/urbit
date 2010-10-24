@@ -92,7 +92,7 @@
 #if 0
     static u2_prep
     _dump_durb(u2_ray  wir_r,
-               u2_rail bar);
+               u2_rung bar);
 #endif
     static u2_prep
     _dump_type(u2_ray  wir_r,
@@ -119,53 +119,53 @@
     static u2_type
     _iris_burn(u2_ray  wir_r,
                u2_type sub,
-               u2_rail bar,
+               u2_rung bar,
                u2_axis axe,
                u2_tack tac);
     static u2_flag
     _iris_cull(u2_ray  wir_r,
                u2_type sub,
-               u2_rail bar,
+               u2_rung bar,
                u2_axis axe);
     static u2_plan
     _iris_find(u2_ray  wir_r,
                u2_type sub,
-               u2_rail bar,
+               u2_rung bar,
                u2_axis axe,
                u2_term cog);
     static u2_tool
     _iris_fish(u2_ray  wir_r,
                u2_type sub,
-               u2_rail bar,
+               u2_rung bar,
                u2_axis axe);
     static u2_type
     _iris_half(u2_ray  wir_r,
                u2_type sub,
-               u2_rail bar,
+               u2_rung bar,
                u2_axis axe,
                u2_axis had);
     static u2_flag
     _iris_nest(u2_ray  wir_r,
                u2_type sub,
-               u2_rail bar,
+               u2_rung bar,
                u2_axis axe,
                u2_type bon);
     static u2_type
     _iris_peek(u2_ray  wir_r,
                u2_type sub,
-               u2_rail bar,
+               u2_rung bar,
                u2_axis axe,
                u2_axis bow);
     static void
     _iris_slip(u2_ray  wir_r,
                u2_type *sub,
-               u2_rail *bar,
+               u2_rung *bar,
                u2_axis *axe,
                u2_axis had);
     static u2_type
     _iris_snap(u2_ray  wir_r,
                u2_type sub,
-               u2_rail bar,
+               u2_rung bar,
                u2_axis axe,
                u2_type bon);
   /** *:lark
@@ -1654,12 +1654,12 @@
   /* burn:iris:rose:plow
   */
     u2_type
-    _iris_burn_sint(u2_ray, u2_type, u2_rail, u2_axis, u2_tack);
+    _iris_burn_sint(u2_ray, u2_type, u2_rung, u2_axis, u2_tack);
 
     u2_type
     _iris_burn_dext(u2_ray  wir_r,
                     u2_type sut,
-                    u2_rail bar,
+                    u2_rung bar,
                     u2_axis axe,
                     u2_tack tac)
     {
@@ -1760,7 +1760,7 @@
     u2_unit
     _iris_burn_swim(u2_ray  wir_r,
                     u2_type sut,
-                    u2_rail bar,
+                    u2_rung bar,
                     u2_axis axe,
                     u2_tack tac)
     {
@@ -1796,7 +1796,7 @@
     u2_type
     _iris_burn_sint(u2_ray  wir_r,
                     u2_type sut,
-                    u2_rail bar,
+                    u2_rung bar,
                     u2_axis axe,
                     u2_tack tac)
     {
@@ -1828,7 +1828,7 @@
   static u2_type
   _iris_burn(u2_ray  wir_r,
              u2_type sut,
-             u2_rail bar,
+             u2_rung bar,
              u2_axis axe,
              u2_tack tac)
   {
@@ -1840,7 +1840,7 @@
     u2_flag
     _iris_cull_a(u2_ray  wir_r,
                  u2_type sut,
-                 u2_rail bar,
+                 u2_rung bar,
                  u2_axis axe)
     {
       if ( (u2_nul == bar) ) {
@@ -1854,7 +1854,7 @@
   static u2_flag
   _iris_cull(u2_ray  wir_r,
              u2_type sut,
-             u2_rail bar,
+             u2_rung bar,
              u2_axis axe)
   {
     if ( u2_so(_rose_null(wir_r, sut)) ) {
@@ -1868,12 +1868,12 @@
   /* find:iris:rose:plow
   */
     u2_unit _iris_find_main
-      (u2_ray, u2_type, u2_rail, u2_axis, u2_pool, u2_term);
+      (u2_ray, u2_type, u2_rung, u2_axis, u2_pool, u2_term);
 
     u2_unit
     _iris_find_half(u2_ray  wir_r,
                     u2_type sut,
-                    u2_rail bar,
+                    u2_rung bar,
                     u2_axis axe,
                     u2_pool gil,
                     u2_term cog,
@@ -1886,7 +1886,7 @@
     u2_unit
     _iris_find_swim(u2_ray  wir_r,
                     u2_type sut,
-                    u2_rail bar,
+                    u2_rung bar,
                     u2_axis axe,
                     u2_pool gil,
                     u2_term cog)
@@ -1962,7 +1962,7 @@
     u2_unit
     _iris_find_main_a(u2_ray  wir_r,
                       u2_type sut,
-                      u2_rail bar,
+                      u2_rung bar,
                       u2_axis axe,
                       u2_pool gil,
                       u2_term cog)
@@ -2126,7 +2126,7 @@
     u2_unit
     _iris_find_main(u2_ray  wir_r,
                     u2_type sut,
-                    u2_rail bar,
+                    u2_rung bar,
                     u2_axis axe,
                     u2_pool gil,
                     u2_term cog)
@@ -2149,7 +2149,7 @@
   static u2_plan
   _iris_find(u2_ray  wir_r,
              u2_type sut,
-             u2_rail bar,
+             u2_rung bar,
              u2_axis axe,
              u2_term cog)
   {
@@ -2166,12 +2166,12 @@
   /* fish:iris:rose:plow
   */
     u2_tool
-    _iris_fish_main(u2_ray, u2_type, u2_rail, u2_axis, u2_pool);
+    _iris_fish_main(u2_ray, u2_type, u2_rung, u2_axis, u2_pool);
 
     u2_tool
     _iris_fish_slip(u2_ray  wir_r,
                     u2_type sut,
-                    u2_rail bar,
+                    u2_rung bar,
                     u2_axis axe,
                     u2_pool vit,
                     u2_axis had)
@@ -2182,7 +2182,7 @@
     u2_unit
     _iris_fish_swim(u2_ray  wir_r,
                     u2_type sut,
-                    u2_rail bar,
+                    u2_rung bar,
                     u2_axis axe,
                     u2_pool vit)
     {
@@ -2212,7 +2212,7 @@
     u2_tool
     _iris_fish_main(u2_ray  wir_r,
                     u2_type sut,
-                    u2_rail bar,
+                    u2_rung bar,
                     u2_axis axe,
                     u2_pool vit)
     {
@@ -2279,7 +2279,7 @@
   static u2_tool
   _iris_fish(u2_ray  wir_r,
              u2_type sut,
-             u2_rail bar,
+             u2_rung bar,
              u2_axis axe)
   {
     return _iris_fish_main(wir_r, sut, bar, axe, u2_nul);
@@ -2290,7 +2290,7 @@
     static u2_unit
     _iris_half_swim(u2_ray  wir_r,
                     u2_type sut,
-                    u2_rail bar,
+                    u2_rung bar,
                     u2_axis axe,
                     u2_axis had)
     {
@@ -2319,7 +2319,7 @@
     static u2_type
     _iris_half_main(u2_ray  wir_r,
                     u2_type sut,
-                    u2_rail bar,
+                    u2_rung bar,
                     u2_axis axe,
                     u2_axis had)
     {
@@ -2379,7 +2379,7 @@
   static u2_type
   _iris_half(u2_ray  wir_r,
              u2_type sut,
-             u2_rail bar,
+             u2_rung bar,
              u2_axis axe,
              u2_axis had)
   {
@@ -2402,19 +2402,19 @@
   */
     u2_flag
     _iris_nest_sint
-      (u2_ray, u2_type, u2_rail, u2_axis, u2_pool, u2_type, u2_rail, u2_axis); 
+      (u2_ray, u2_type, u2_rung, u2_axis, u2_pool, u2_type, u2_rung, u2_axis); 
     u2_flag
     _iris_nest_dext
-      (u2_ray, u2_type, u2_rail, u2_axis, u2_pool, u2_type, u2_rail, u2_axis); 
+      (u2_ray, u2_type, u2_rung, u2_axis, u2_pool, u2_type, u2_rung, u2_axis); 
 
     u2_flag
     _iris_nest_dext_slip(u2_ray  wir_r,
                          u2_type sut,
-                         u2_rail bar,
+                         u2_rung bar,
                          u2_axis axe,
                          u2_pool gil,
                          u2_type bon,
-                         u2_rail nef,
+                         u2_rung nef,
                          u2_axis ful,
                          u2_axis had)
     {
@@ -2426,11 +2426,11 @@
     u2_flag
     _iris_nest_dext_swim(u2_ray  wir_r,
                          u2_type sut,
-                         u2_rail bar,
+                         u2_rung bar,
                          u2_axis axe,
                          u2_pool gil,
                          u2_type bon,
-                         u2_rail nef,
+                         u2_rung nef,
                          u2_axis ful)
     {
       u2_noun p_sut, q_sut;
@@ -2452,11 +2452,11 @@
     u2_flag
     _iris_nest_dext_main(u2_ray  wir_r,
                          u2_type sut,
-                         u2_rail bar,
+                         u2_rung bar,
                          u2_axis axe,
                          u2_pool gil,
                          u2_type bon,
-                         u2_rail nef,
+                         u2_rung nef,
                          u2_axis ful)
     {
       
@@ -2519,7 +2519,7 @@
         }
       }
       else if ( u2_yes == u2_as_pq(sut, c3__fuse, &p_sut, &q_sut) ) {
-        u2_rail buz = u2_bc(wir_r, p_sut, bar);
+        u2_rung buz = u2_bc(wir_r, p_sut, bar);
 
         return u2_and
           (_iris_nest_dext(wir_r, p_sut, bar, axe, gil, bon, nef, ful),
@@ -2548,11 +2548,11 @@
     u2_flag
     _iris_nest_dext(u2_ray  wir_r,
                     u2_type sut,
-                    u2_rail bar,
+                    u2_rung bar,
                     u2_axis axe,
                     u2_pool gil,
                     u2_type bon,
-                    u2_rail nef,
+                    u2_rung nef,
                     u2_axis ful)
     {
       
@@ -2579,11 +2579,11 @@
     u2_flag
     _iris_nest_sint_swim(u2_ray  wir_r,
                          u2_type sut,
-                         u2_rail bar,
+                         u2_rung bar,
                          u2_axis axe,
                          u2_pool gil,
                          u2_type bon,
-                         u2_rail nef,
+                         u2_rung nef,
                          u2_axis ful)
     {
       u2_noun p_bon, q_bon;
@@ -2604,11 +2604,11 @@
     u2_flag
     _iris_nest_sint(u2_ray  wir_r,
                     u2_type sut,
-                    u2_rail bar,
+                    u2_rung bar,
                     u2_axis axe,
                     u2_pool gil,
                     u2_type bon,
-                    u2_rail nef,
+                    u2_rung nef,
                     u2_axis ful)
     {
       
@@ -2645,7 +2645,7 @@
         return _iris_nest_sint_swim(wir_r, sut, bar, axe, gil, bon, nef, ful);
       }
       else if ( u2_yes == u2_as_pq(bon, c3__fuse, &p_bon, &q_bon) ) {
-        u2_rail gok = u2_bc(wir_r, p_bon, nef);
+        u2_rung gok = u2_bc(wir_r, p_bon, nef);
 
         return u2_or
           (_iris_nest_dext(wir_r, sut, bar, axe, gil, p_bon, nef, ful),
@@ -2672,7 +2672,7 @@
   static u2_flag
   _iris_nest(u2_ray  wir_r,
              u2_type sut,
-             u2_rail bar,
+             u2_rung bar,
              u2_axis axe,
              u2_type bon)
   {
@@ -2684,7 +2684,7 @@
     }
     else {
       u2_pool gil = u2_nul;
-      u2_rail nef = u2_nul;
+      u2_rung nef = u2_nul;
       u2_axis ful = _1;
 
       return _iris_nest_dext(wir_r, sut, bar, axe, gil, bon, nef, ful);
@@ -2696,7 +2696,7 @@
   static u2_type
   _iris_peek(u2_ray  wir_r,
              u2_type sut,
-             u2_rail bar,
+             u2_rung bar,
              u2_axis axe,
              u2_axis bow)
   {
@@ -2714,9 +2714,9 @@
 
   /* slip:iris:rose:plow
   */
-    u2_rail
+    u2_rung
     _iris_slip_a(u2_ray  wir_r,
-                 u2_rail bar,
+                 u2_rung bar,
                  u2_axis had)
     {
       if ( (u2_nul == bar) ) {
@@ -2731,7 +2731,7 @@
   void
   _iris_slip(u2_ray  wir_r,
              u2_type *sut,
-             u2_rail *bar,
+             u2_rung *bar,
              u2_axis *axe,
              u2_axis had)
   {
@@ -2743,14 +2743,14 @@
   /* snap:iris:rose:plow
   */
     u2_type
-    _iris_snap_dext(u2_ray, u2_type, u2_rail, u2_axis, u2_type);
+    _iris_snap_dext(u2_ray, u2_type, u2_rung, u2_axis, u2_type);
     u2_type
-    _iris_snap_sint(u2_ray, u2_type, u2_rail, u2_axis, u2_type);
+    _iris_snap_sint(u2_ray, u2_type, u2_rung, u2_axis, u2_type);
 
     u2_type
     _iris_snap_slip(u2_ray  wir_r,
                     u2_type sut,
-                    u2_rail bar,
+                    u2_rung bar,
                     u2_axis axe,
                     u2_type bon,
                     u2_axis had)
@@ -2761,7 +2761,7 @@
     u2_flag
     _iris_snap_cull(u2_ray  wir_r,
                     u2_type sut,
-                    u2_rail bar,
+                    u2_rung bar,
                     u2_axis axe,
                     u2_type bon)
     {
@@ -2772,7 +2772,7 @@
     u2_type
     _iris_snap_dext(u2_ray  wir_r,
                     u2_type sut,
-                    u2_rail bar,
+                    u2_rung bar,
                     u2_axis axe,
                     u2_type bon)
     {
@@ -2841,7 +2841,7 @@
     u2_type
     _iris_snap_sint(u2_ray  wir_r,
                     u2_type sut,
-                    u2_rail bar,
+                    u2_rung bar,
                     u2_axis axe,
                     u2_type bon)
     {
@@ -2864,7 +2864,7 @@
   static u2_type
   _iris_snap(u2_ray  wir_r,
              u2_type sut,
-             u2_rail bar,
+             u2_rung bar,
              u2_axis axe,
              u2_type bon)
   {
@@ -4604,7 +4604,7 @@
   */
   static u2_noun
   _durb_in(u2_ray  wir_r,
-           u2_rail bar)
+           u2_rung bar)
   {
     if ( (u2_nul == bar) ) {
       return u2_nul;
@@ -4614,11 +4614,11 @@
     }
   }
 #if 0
-  /* _dump_durb(): prepare rail for printing.
+  /* _dump_durb(): prepare rung for printing.
   */
   static u2_prep
   _dump_durb(u2_ray  wir_r,
-             u2_rail bar)
+             u2_rung bar)
   {
     if ( (u2_nul == bar) ) {
       return ('~');

@@ -48,73 +48,6 @@
       void
       ford_done(struct ford_state* fod_f);
     
-
-/* ford_boot(): create the ford engine.
-*/
-struct ford_state*
-ford_boot(c3_w        siz_w, 
-           const c3_c* src_c)
-{
-  u2_ray wir_r;
-
-  u2_boot(siz_w);
-  wir_r = u2_wr_init(c3__warm, u2_ray_of(0, 0), u2_ray_of(1, 0));
-
-  {
-    struct ford_state*  fod_f = malloc(sizeof(struct ford_state));
-    u2_weak             src   = u2_ux_read(wir_r, src_c, "watt");
-
-    if ( (0 == fod_f) || (u2_none == src) ) {
-      perror(src_c);
-      return 0;
-    }
-    else {
-      u2_ray jub_r = u2_bl_open(wir_r);
-
-      fprintf(stderr, "boot: %s\n", src_c);
-      if ( u2_bl_set(jub_r) ) {
-        u2_bl_done(wir_r, jub_r);
-        fprintf(stderr, "boot failed\n");
-        return 0;
-      }
-      else {
-        u2_noun gen, mil, pyt, fol, pit;
-
-        gen = u2_fj_watt(wir_r, src);
-        mil = u2_fj_plow_mill(wir_r, u2_bc(wir_r, c3__cube, _0), gen);
-        pyt = u2_bi_h(wir_r, mil);
-        fol = u2_bi_t(wir_r, mil);
-        fol = u2_ba_sole(wir_r, fol);
-        pit = u2_bn_nock(wir_r, _0, fol);
-
-        u2_bl_done(wir_r, jub_r);
-
-        fod_f->wir_r = wir_r;
-        fod_f->pyt = pyt;
-        fod_f->pit = pit;
-        return fod_f;
-      }
-    }
-  }
-}
-
-/* _ford_from(): expression in pit space.
-*/
-static u2_noun
-_ford_from(struct ford_state* fod_f,
-           const c3_c*        exp_c)
-{
-  u2_ray  wir_r = fod_f->wir_r;
-  u2_noun exp, gen, fol, val;
-
-  exp = u2_bn_string(wir_r, exp_c);
-  gen = u2_fj_watt(wir_r, exp);
-  fol = u2_fj_plow_make(wir_r, fod_f->pyt, gen);
-  val = u2_bn_nock(wir_r, fod_f->pit, fol);
-
-  return val;
-}
-
 void
 _ford_print_superdecimal_w(c3_w w)
 {
@@ -182,13 +115,83 @@ _ford_report(u2_ray wir_r)
     if ( hix_w ) {
       printf(", ");
       _ford_print_superdecimal_w(hix_w);
-      printf("saved");
+      printf(" saved");
     }
 
     printf("; ");
     _ford_print_superdecimal_w(ums_w);
     printf(" ms>\n");
   }
+}
+
+/* ford_boot(): create the ford engine.
+*/
+struct ford_state*
+ford_boot(c3_w        siz_w, 
+           const c3_c* src_c)
+{
+  u2_ray wir_r;
+
+  u2_boot(siz_w);
+  wir_r = u2_wr_init(c3__warm, u2_ray_of(0, 0), u2_ray_of(1, 0));
+
+  {
+    struct ford_state*  fod_f = malloc(sizeof(struct ford_state));
+    u2_weak             src   = u2_ux_read(wir_r, src_c, "watt");
+
+    if ( (0 == fod_f) || (u2_none == src) ) {
+      perror(src_c);
+      return 0;
+    }
+    else {
+      u2_ray jub_r = u2_bl_open(wir_r);
+
+      fprintf(stderr, "boot: %s\n", src_c);
+      if ( u2_bl_set(jub_r) ) {
+        u2_bl_done(wir_r, jub_r);
+        fprintf(stderr, "boot failed\n");
+        return 0;
+      }
+      else {
+        u2_noun gen, mil, pyt, fol, pit;
+
+        u2_bx_boot(wir_r);
+
+        gen = u2_fj_watt(wir_r, src);
+        mil = u2_fj_plow_mill(wir_r, u2_bc(wir_r, c3__cube, _0), gen);
+        pyt = u2_bi_h(wir_r, mil);
+        fol = u2_bi_t(wir_r, mil);
+        fol = u2_ba_sole(wir_r, fol);
+        pit = u2_bn_nock(wir_r, _0, fol);
+
+        u2_bl_done(wir_r, jub_r);
+
+        _ford_report(wir_r);
+
+        fod_f->wir_r = wir_r;
+        fod_f->pyt = pyt;
+        fod_f->pit = pit;
+        return fod_f;
+      }
+    }
+  }
+}
+
+/* _ford_from(): expression in pit space.
+*/
+static u2_noun
+_ford_from(struct ford_state* fod_f,
+           const c3_c*        exp_c)
+{
+  u2_ray  wir_r = fod_f->wir_r;
+  u2_noun exp, gen, fol, val;
+
+  exp = u2_bn_string(wir_r, exp_c);
+  gen = u2_fj_watt(wir_r, exp);
+  fol = u2_fj_plow_make(wir_r, fod_f->pyt, gen);
+  val = u2_bn_nock(wir_r, fod_f->pit, fol);
+
+  return val;
 }
 
 /* ford_line(): execute a ford line, as command and argument.

@@ -4,6 +4,16 @@
 */
   /** Data types.
   **/
+    /** Ray types.
+    **/
+      /* u2_rail: an allocation control frame.
+      */
+        typedef u2_ray u2_rail;
+
+      /* u2_wire: an execution context, inheriting rail
+      */
+        typedef u2_ray u2_wire;
+
     /** Structures - in loom space.
     **/
       /* Base rail.

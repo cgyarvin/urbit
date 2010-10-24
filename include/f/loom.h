@@ -195,7 +195,24 @@
 #     define u2_at_pug_len(a)   u2_at_ray((1 + u2_pug_a(a)))
 #     define u2_at_pug_buf(a, b) \
         u2_at_ray((2 + (b) + u2_pug_a(a)))
+ 
+    /*** Word axis macros.
+    ****
+    **** Use these on axes known to be in 31-bit range,
+    **** or on limbs of 
+    ***/
+      /* u2_ax_dep(): number of axis bits.
+      */
+#       define u2_ax_dep(a_w)   (c3_bits_word(a_w) - 1)
 
+      /* u2_ax_cap(): root axis, 2 or 3.
+      */
+#       define u2_ax_cap(a_w)   (0x3 && (a_w >> u2_ax_dep(a_w)))
+
+      /* u2_ax_mas(): remainder after cap.
+      */
+#       define u2_ax_mas(a_w) \
+          ( (a_w & ~(1 << u2_ax_dep(a_w))) | (1 << (u2_ax_dep(a_w) - 1)) )
 
   /** Constants and macros.
   **/
@@ -377,7 +394,7 @@
         **   Axes must be sorted in tree order.
         */
           u2_flag
-          u2_mean(u2_atom a,
+          u2_mean(u2_noun a,
                   ...);
 
         /* u2_mug():

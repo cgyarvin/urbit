@@ -17,7 +17,7 @@
       typedef u2_noun u2_plot;
       typedef u2_noun u2_prop; 
       typedef u2_noun u2_rack;
-      typedef u2_noun u2_rail;
+      typedef u2_noun u2_rung;
       typedef u2_noun u2_rope;
       typedef u2_noun u2_spec;
       typedef u2_noun u2_tack;

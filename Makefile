@@ -321,7 +321,6 @@ OFILES=\
        $(U4_OFILES)
 
 NFILES=\
-       $(L_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
        $(H_OFILES) \

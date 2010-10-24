@@ -45,7 +45,6 @@ u2_wr_nock_jet(u2_ray  wir_r,
 
       if ( u2_yes == saf ) {
         return pro;
-        // return u2_none;
       } else {
         u2_noun vet;
 

@@ -282,7 +282,6 @@ u2_fj_pool_list(u2_ray  wir_r,
   }
 }
 
-
 /* u2_fj_pool_cat():
 **
 **   Produce a version of (pool_b) which includes all entries
