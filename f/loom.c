@@ -43,15 +43,19 @@ u2_boot(c3_y a_y)
   _mean_cut(c3_w               len_w,
             struct _mean_pair* prs_m)
   {
-    c3_w i_w;
+    c3_w i_w, cut_t, cut_w;
 
+    cut_t = c3_false;
     for ( i_w = 0; i_w < len_w; i_w++ ) {
-      if ( 3 == u2_ax_cap(prs_m[i_w].axe_w) ) {
-        break;
+      c3_w axe_w = prs_m[i_w].axe_w;
+
+      if ( (cut_t == c3_false) && (3 == u2_ax_cap(axe_w)) ) {
+        cut_t = c3_true;
+        cut_w = i_w;
       }
-      c3_assert(2 == u2_ax_cap(prs_m[i_w].axe_w));
+      prs_m[i_w].axe_w = u2_ax_mas(axe_w);
     }
-    return i_w;
+    return cut_t ? cut_w : i_w;
   }
 
   static u2_flag
@@ -286,6 +290,75 @@ u2_mug(u2_noun veb)
   }
 }
 
+/* u2_mug_words():
+**
+**   Compute the mug of `buf`, `len`, LSW first.
+*/
+c3_w
+u2_mug_words(const c3_w *buf_w,
+             c3_w        len_w)
+{
+  c3_w zun_w = 0x18d0a625;
+  c3_w i_w;
+
+  while ( 1 ) {
+    c3_w gid_w = zun_w;
+    c3_w dav_w;
+
+    for ( i_w=0; i_w < len_w; i_w++ ) {
+      gid_w ^= buf_w[i_w];
+      gid_w = _mash(gid_w);
+    }
+    dav_w = 0x7fffffff & gid_w;
+
+    if ( dav_w ) {
+      return dav_w;
+    } 
+    else zun_w++;
+  }
+}
+
+/* u2_mug_string():
+**
+**   Compute the mug of `a`, LSB first.
+*/
+c3_w
+u2_mug_string(const c3_c *a_c)
+{
+  c3_w len_w = strlen(a_c);
+  c3_w mal_w = (len_w + 3) >> 2;
+  c3_w *buf_w = alloca(mal_w);
+  c3_w i_w;
+
+  for ( i_w = 0; i_w < mal_w; i_w++ ) {
+    buf_w[i_w] = 0;
+  }
+  for ( i_w = 0; i_w < len_w; i_w++ ) {
+    buf_w[i_w >> 2] |= (a_c[i_w] << (8 * (i_w & 3)));
+  }
+  return u2_mug_words(buf_w, mal_w);
+}
+
+/* u2_mug_both():
+**
+**   Join two mugs.
+*/
+c3_w
+u2_mug_both(c3_w lus_w,
+            c3_w biq_w)
+{
+  c3_w hur_w = (lus_w ^ (biq_w >> 24) ^ (biq_w << 8));
+
+  while ( 1 ) {
+    c3_w dav_w = 0x7fffffff & _mash(hur_w);
+
+    if ( dav_w ) {
+      return dav_w;
+    } 
+    else hur_w++;
+  }
+}
+
 /* u2_mug_cell():
 **
 **   Compute the mug of the cell `[hed tel]`.
@@ -296,16 +369,8 @@ u2_mug_cell(u2_noun hed,
 {
   c3_w   lus_w = u2_mug(hed);
   c3_w   biq_w = u2_mug(tel);
-  c3_w   hur_w = (lus_w ^ (biq_w >> 24) ^ (biq_w << 8));
 
-  while ( 1 ) {
-    c3_w dav_w = 0x7fffffff & _mash(hur_w);
-
-    if ( dav_w ) {
-      return dav_w;
-    } 
-    else hur_w++;
-  }
+  return u2_mug_both(lus_w, biq_w);
 }
 
 /* u2_sing():

@@ -15,6 +15,7 @@ u2_sh_init(u2_ray wir_r)
 
   if ( 0 != (sad_r = u2_wire_sad_r(wir_r)) ) {
     u2_ch_init(u2_shed_cad_r(sad_r));
+    u2_ch_init(u2_shed_dip_r(sad_r));
   }
 }
 
@@ -302,6 +303,93 @@ u2_sh_find(u2_ray  wir_r,
 
             return u2_none;
           }
+        }
+      }
+    }
+  }
+}
+
+/* u2_sh_cook():
+**
+**   Produce hook formula from chip, or u2_none.
+*/
+u2_weak
+u2_sh_cook(u2_wire     wir_r,
+           u2_noun     xip,
+           const c3_c* tam_c)
+{
+  u2_noun dac = u2_h(xip);
+  u2_noun nut = u2_t(dac);
+
+  while ( u2_nul != nut ) {
+    u2_noun i_nut = u2_h(nut);
+    u2_noun t_nut = u2_t(nut);
+
+    if ( u2_yes == u2_sing_c(tam_c, u2_h(i_nut)) ) {
+      return u2_t(i_nut);
+    }
+    else nut = t_nut;
+  }
+  return u2_none;
+}
+
+/* u2_sh_look():
+**
+**   Produce hook formula from core, or u2_none.
+*/
+u2_weak
+u2_sh_look(u2_wire     wir_r,
+           u2_noun     cor,
+           const c3_c* tam_c)
+{
+  u2_ray  sad_r = u2_wire_sad_r(wir_r); 
+  u2_noun bat   = u2_t(cor);
+  u2_noun fol;
+
+  if ( u2_none != (fol = u2_ch_find_mixt(u2_shed_cad_r(sad_r), tam_c, bat)) ) {
+    return fol;
+  } else {
+    u2_noun xip = u2_sh_find(wir_r, cor);
+
+    if ( u2_none == xip ) {
+      return u2_none;
+    } 
+    else {
+      u2_axis axe_w = _1;
+
+      while ( 1 ) {
+        fol = u2_sh_cook(wir_r, xip, tam_c);
+
+        if ( u2_none == fol ) {
+          u2_noun pet = u2_t(u2_t(xip));
+
+          if ( _0 == pet ) {
+            return u2_none;
+          }
+          else {
+            u2_axis pax = u2_h(pet);
+
+            c3_assert(u2_fly_is_cat(pax));
+            c3_assert((u2_ax_dep(axe_w) + u2_ax_dep(pax)) <= 30);
+
+            axe_w = u2_ax_peg(axe_w, pax);
+            xip = u2_t(pet);
+            continue;
+          }
+        }
+        else {
+          fol = u2_rl_ice(sad_r, fol);
+
+          if ( _1 != axe_w ) {
+            /* XX: suboptimal; use comb:lily.
+            */
+            fol = u2_rt(sad_r, u2_nock_flac,
+                               u2_rc(sad_r, u2_nock_frag, axe_w),
+                               fol);
+          }
+          u2_ch_save_mixt(sad_r, u2_shed_cad_r(sad_r), tam_c, bat, fol);
+
+          return fol;
         }
       }
     }

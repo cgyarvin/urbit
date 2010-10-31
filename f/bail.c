@@ -263,16 +263,16 @@ u2_noun
 u2_bn_list(u2_ray wir_r, ...)
 {
   c3_w    len_w = 0;
-  va_list ap;
+  va_list vap;
 
   /* Count.
   */
   {
-    va_start(ap, wir_r);
-    while ( u2_none != va_arg(ap, u2_noun) ) {
+    va_start(vap, wir_r);
+    while ( u2_none != va_arg(vap, u2_noun) ) {
       len_w++;
     }
-    va_end(ap);
+    va_end(vap);
   }
 
   /* Allocate.
@@ -281,11 +281,11 @@ u2_bn_list(u2_ray wir_r, ...)
     c3_w    i_w;
     u2_noun yit[len_w];
 
-    va_start(ap, wir_r);
+    va_start(vap, wir_r);
     for ( i_w = 0; i_w < len_w; i_w++ ) {
-      yit[i_w] = va_arg(ap, u2_noun);
+      yit[i_w] = va_arg(vap, u2_noun);
     }
-    va_end(ap);
+    va_end(vap);
 
     /* Construct.
     */
@@ -298,6 +298,159 @@ u2_bn_list(u2_ray wir_r, ...)
       return woq;
     }
   }
+}
+ 
+/* u2_bn_molt():
+**
+**   Mutate `som` with a 0-terminated list of axis, noun pairs.
+**   Axes must be cats (31 bit).
+*/
+  struct _molt_pair {
+    c3_w    axe_w;
+    u2_noun som;
+  };
+
+  static c3_w
+  _molt_cut(c3_w               len_w,
+            struct _molt_pair* pms_m)
+  {
+    c3_w i_w, cut_t, cut_w;
+
+    cut_t = c3_false;
+    for ( i_w = 0; i_w < len_w; i_w++ ) {
+      c3_w axe_w = pms_m[i_w].axe_w;
+
+      if ( (cut_t == c3_false) && (3 == u2_ax_cap(axe_w)) ) {
+        cut_t = c3_true;
+        cut_w = i_w;
+      }
+      pms_m[i_w].axe_w = u2_ax_mas(axe_w);
+    }
+    return cut_t ? cut_w : i_w;
+  }
+
+  static u2_noun
+  _molt_apply(u2_wire            wir_r,
+              u2_noun            som,
+              c3_w               len_w,
+              struct _molt_pair* pms_m)
+  {
+    if ( len_w == 0 ) {
+      return som;
+    }
+    else if ( (len_w == 1) && (1 == pms_m[0].axe_w) ) {
+      return pms_m[0].som;
+    }
+    else {
+      c3_w cut_w = _molt_cut(len_w, pms_m);
+
+      if ( u2_no == u2_dust(som) ) {
+        return u2_bc
+          (wir_r,
+           _molt_apply(wir_r, u2_nul, cut_w, pms_m),
+           _molt_apply(wir_r, u2_nul, (len_w - cut_w), (pms_m + cut_w)));
+      } else {
+        return u2_bc
+          (wir_r,
+           _molt_apply(wir_r, u2_h(som), cut_w, pms_m),
+           _molt_apply(wir_r, u2_t(som), (len_w - cut_w), (pms_m + cut_w)));
+      }
+    }
+  }
+
+/* u2_bn_molf():
+**
+**   As u2_bn_molt(), with argument pointer.
+*/
+u2_noun
+u2_bn_molf(u2_wire wir_r,
+           u2_noun som,
+           va_list vap)
+{
+  va_list            vaq;
+  c3_w               len_w;
+  struct _molt_pair* pms_m;
+
+  /* Count.
+  */
+  len_w = 0;
+  {
+    va_copy(vaq, vap);
+    while ( 1 ) {
+      if ( 0 == va_arg(vaq, c3_w) ) {
+        break;
+      }
+      va_arg(vaq, u2_noun*);
+      len_w++;
+    }
+    va_end(vaq);
+  }
+  pms_m = alloca(len_w * sizeof(struct _molt_pair));
+
+  /* Install.
+  */
+  {
+    c3_w i_w;
+
+    va_copy(vaq, vap);
+    for ( i_w = 0; i_w < len_w; i_w++ ) {
+      pms_m[i_w].axe_w = va_arg(vaq, c3_w);
+      pms_m[i_w].som = va_arg(vaq, u2_noun);
+    }
+    va_end(vaq);
+  }
+
+  /* Apply.
+  */
+  return _molt_apply(wir_r, som, len_w, pms_m);
+}
+
+/* u2_bn_molt():
+**
+**   Mutate `som` with a 0-terminated list of axis, noun pairs.
+**   Axes must be cats (31 bit).
+*/
+u2_noun
+u2_bn_molt(u2_wire wir_r,
+           u2_noun som,
+           ...)
+{
+  va_list            ap;
+  c3_w               len_w;
+  struct _molt_pair* pms_m;
+
+  /* Count.
+  */
+  len_w = 0;
+  {
+    va_start(ap, som);
+    while ( 1 ) {
+      if ( 0 == va_arg(ap, c3_w) ) {
+        break;
+      }
+      va_arg(ap, u2_noun*);
+      len_w++;
+    }
+    va_end(ap);
+  }
+  pms_m = alloca(len_w * sizeof(struct _molt_pair));
+
+  /* Install.
+  */
+  {
+    c3_w i_w;
+
+    va_start(ap, som);
+    for ( i_w = 0; i_w < len_w; i_w++ ) {
+      pms_m[i_w].axe_w = va_arg(ap, c3_w);
+      pms_m[i_w].som = va_arg(ap, u2_noun);
+    }
+    va_end(ap);
+  }
+
+  /* Apply.
+  */
+  return _molt_apply(wir_r, som, len_w, pms_m);
 }
           
 /* u2_bn_mp():
@@ -329,6 +482,64 @@ u2_noun
 u2_bn_mung(u2_ray wir_r, u2_noun bus, u2_noun fol)
 {
   return u2_bl_good(wir_r, u2_wr_nock_mung(wir_r, bus, fol));
+}
+
+/* u2_bn_mang():
+**
+**   Kick a core, substituting axes with nouns.
+*/
+u2_noun
+u2_bn_mang(u2_wire wir_r,
+           u2_noun cor,
+           ...)
+{
+  va_list vap;
+  u2_noun gat;
+
+  va_start(vap, cor);
+  gat = u2_bn_molf(wir_r, cor, vap);
+  va_end(vap);
+
+  return u2_bn_nock(wir_r, gat, u2_t(gat));
+}
+
+/* u2_bn_gart():
+**
+**   Call by core, hook, sample.
+*/
+u2_noun
+u2_bn_gart(u2_wire     wir_r,
+           u2_noun     cor,
+           const c3_c* tam_c,
+           u2_noun     sam)
+{
+  u2_noun fol = u2_bl_good(wir_r, u2_sh_look(wir_r, cor, tam_c));
+  u2_noun gat = u2_bn_nock(wir_r, cor, fol);
+  u2_noun tec = u2_bc(wir_r, u2_bc(wir_r, sam, u2_t(u2_h(gat))), u2_t(gat));
+
+  return u2_bn_nock(wir_r, tec, u2_t(tec));
+}
+
+/* u2_bn_gort():
+**
+**  Call by core, depth, hook, molt list.
+*/
+u2_noun
+u2_bn_gort(u2_wire     wir_r,
+           u2_noun     cor,
+           const c3_c* tam_c,
+           ...)
+{
+  u2_noun fol = u2_bl_good(wir_r, u2_sh_look(wir_r, cor, tam_c));
+  u2_noun gat = u2_bn_nock(wir_r, cor, fol);
+  u2_noun tec;
+  va_list vap;
+
+  va_start(vap, tam_c);
+  tec = u2_bn_molf(wir_r, gat, vap);
+  va_end(vap);
+
+  return u2_bn_nock(wir_r, tec, u2_t(tec));
 }
 
 /* u2_bn_qual(): 

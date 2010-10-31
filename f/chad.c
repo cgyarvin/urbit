@@ -137,6 +137,68 @@ u2_ch_find_cell(u2_ray  cad_r,
   }
 }
 
+/* u2_ch_find_mixt():
+**
+**   Find value for `[hed tal]` in `cad`, or return `u2_none`.
+*/
+u2_weak
+u2_ch_find_mixt(u2_ray      cad_r,
+                const c3_c* hed_c,
+                u2_noun     tal)
+{
+  c3_w mug_w = u2_mug_both(u2_mug_string(hed_c), u2_mug(tal));
+  c3_w off_w = 0;
+
+  while ( 1 ) {
+    if ( off_w == 32 ) {
+      /* Linear search in a list of 16 total collisions.
+      ** Overflow probability: (n/(2^31))^15 ~= 0.
+      */
+      c3_w i_w;
+
+      for ( i_w = 0; i_w < 16; i_w++ ) {
+        u2_ray  per_r = (cad_r + (c3_wiseof(u2_loom_pear) * i_w));
+        u2_noun nom = *u2_at(per_r, u2_loom_pear, nam);
+
+        if ( u2_none != nom ) {
+          if ( (u2_yes == u2_dust(nom)) &&
+               (u2_yes == u2_sing_c(hed_c, u2_h(nom))) &&
+               (u2_yes == u2_sing(tal, u2_t(nom))) )
+          {
+            return *u2_at(per_r, u2_loom_pear, val);
+          }
+        }
+      }
+      return u2_none;
+    }
+    else {
+      c3_w    fat_w = (mug_w >> off_w) & 15;
+      u2_ray  per_r = (cad_r + (c3_wiseof(u2_loom_pear )* fat_w));
+      u2_noun nom = *u2_at(per_r, u2_loom_pear, nam);
+
+      if ( u2_none == nom ) {
+        cad_r = *u2_at(per_r, u2_loom_pear, val);
+
+        if ( 0 == cad_r ) {
+          return u2_none;
+        } else {
+          off_w += 4;
+          continue;
+        }
+      }
+      else if ( u2_yes == u2_dust(nom) && 
+               (u2_yes == u2_sing_c(hed_c, u2_h(nom))) &&
+               (u2_yes == u2_sing(tal, u2_t(nom))) )
+      {
+        return *u2_at(per_r, u2_loom_pear, val);
+      }
+      else {
+        return u2_none;
+      }
+    }
+  }
+}
+
 /* _ch_save(): as u2_ch_save(), with mug and offset, and iced nouns.
 */
 static u2_flag
@@ -256,6 +318,46 @@ u2_ch_save_cell(u2_ray  ral_r,
   u2_weak hid, til, nim, vil;
 
   if ( u2_none == (hid = u2_rl_ice(ral_r, hed)) ) {
+    return u2_no;
+  }
+  if ( u2_none == (til = u2_rl_ice(ral_r, tal)) ) {
+    u2_rl_lose(ral_r, til);
+    return u2_no;
+  }
+  if ( u2_none == (nim = u2_rl_cell(ral_r, hid, til)) ) {
+    u2_rl_lose(ral_r, hid);
+    u2_rl_lose(ral_r, til);
+    return u2_no;
+  }
+  if ( u2_none == (vil = u2_rl_ice(ral_r, val)) ) {
+    u2_rl_lose(ral_r, nim);
+    return u2_no;
+  }
+  if ( u2_no == _ch_save(ral_r, cad_r, nim, vil, u2_mug(nim), 0) ) {
+    u2_rl_lose(ral_r, nim);
+    u2_rl_lose(ral_r, vil);
+    return u2_no;
+  }
+  return u2_yes;
+}
+
+/* u2_ch_save_mixt():
+**
+**   Save `val` under `[hed tal]` in `cad`, allocating in `zon`.
+**   Return `u2_no` iff allocation fails.  Asserts on duplicate.
+**
+**   Caller retains ownership of arguments.
+*/
+u2_flag
+u2_ch_save_mixt(u2_ray      ral_r,
+                u2_ray      cad_r,
+                const c3_c* hed_c,
+                u2_noun     tal,
+                u2_noun     val)
+{
+  u2_weak hid, til, nim, vil;
+
+  if ( u2_none == (hid = u2_rl_string(ral_r, hed_c)) ) {
     return u2_no;
   }
   if ( u2_none == (til = u2_rl_ice(ral_r, tal)) ) {

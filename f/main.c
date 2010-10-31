@@ -101,6 +101,18 @@ u2_wr_nock_main(u2_ray  wir_r,
                 u2_noun bus,
                 u2_noun fol)
 {
+  /* Try a jet.
+  */
+  {
+    u2_noun pro;
+
+    if ( u2_none != (pro = u2_wr_nock_jet(wir_r, bus, fol)) ) {
+      return pro;
+    }
+  }
+
+  /* Enter the interpreter.
+  */
   switch ( u2_rail_hip_m(wir_r) ) {
     default: c3_assert(0); return u2_none;
 

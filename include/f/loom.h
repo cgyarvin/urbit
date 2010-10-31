@@ -198,8 +198,7 @@
  
     /*** Word axis macros.
     ****
-    **** Use these on axes known to be in 31-bit range,
-    **** or on limbs of 
+    **** Use these on axes known to be in 31-bit range.
     ***/
       /* u2_ax_dep(): number of axis bits.
       */
@@ -207,12 +206,17 @@
 
       /* u2_ax_cap(): root axis, 2 or 3.
       */
-#       define u2_ax_cap(a_w)   (0x3 && (a_w >> u2_ax_dep(a_w)))
+#       define u2_ax_cap(a_w)   (0x2 | (a_w >> (u2_ax_dep(a_w) - 1)))
 
       /* u2_ax_mas(): remainder after cap.
       */
 #       define u2_ax_mas(a_w) \
           ( (a_w & ~(1 << u2_ax_dep(a_w))) | (1 << (u2_ax_dep(a_w) - 1)) )
+
+      /* u2_ax_peg(): connect two axes.
+      */
+#       define u2_ax_peg(a_w, b_w) \
+          ( (a_w << u2_ax_dep(b_w)) | (b_w &~ (1 << u2_ax_dep(b_w))) )
 
   /** Constants and macros.
   **/
@@ -403,7 +407,22 @@
         */
           c3_w
           u2_mug(u2_noun a);
-       
+      
+        /* u2_mug_string():
+        **
+        **   Compute the mug of `a`, LSB first.
+        */
+          c3_w
+          u2_mug_string(const c3_c *a_c);
+
+        /* u2_mug_words():
+        **
+        **   Compute the mug of `buf`, `len`, LSW first.
+        */
+          c3_w
+          u2_mug_words(const c3_w *buf_w,
+                       c3_w        len_w);
+
         /* u2_mug_cell():
         **
         **   Compute the mug of the cell [a b].
@@ -411,6 +430,14 @@
           c3_w
           u2_mug_cell(u2_noun a,
                       u2_noun b);
+
+        /* u2_mug_both():
+        **
+        **   Join two mugs.
+        */
+          c3_w
+          u2_mug_both(c3_w a_w,
+                      c3_w b_w);
 
         /* u2_sing():
         **

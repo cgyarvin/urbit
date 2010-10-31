@@ -32,6 +32,11 @@
         u2_noun
         u2_bl_bail(u2_wire wir_r);
 
+      /* u2_bl_yes(): assure yes.
+      */
+#       define u2_bl_yes(wir_r, feg) \
+          ( (u2_yes == (feg)) ? 0 : u2_bl_bail(wir_r) )
+
       /* u2_bl_good(): test for u2_none.
       */
         u2_noun
@@ -218,14 +223,9 @@
           **   Nock or bail.
           */
             u2_noun
-            u2_bn_nock(u2_wire wir_r, u2_noun bus, u2_noun fol);
-
-          /* u2_bn_mung():
-          **
-          **   Mung or bail.
-          */
-            u2_noun
-            u2_bn_mung(u2_wire wir_r, u2_noun bus, u2_noun fol);
+            u2_bn_nock(u2_wire wir_r, 
+                       u2_noun bus, 
+                       u2_noun fol);
 
           /* u2_bn_mp():
           **
@@ -277,17 +277,27 @@
           */
             u2_noun
             u2_bn_words(u2_wire      wir_r,
-                      c3_w        a_w,
-                      const c3_w* b_w);
+                        c3_w        a_w,
+                        const c3_w* b_w);
 
-          /* u2_bn_mung(): 
+          /* u2_bn_molt():
           **
-          **   Call by core and sample.
+          **   Mutate `som` with a 0-terminated list of axis, noun pairs.
+          **   Axes must be cats (31 bit).
           */
             u2_noun
-            u2_bn_mung(u2_wire wir_r,
-                       u2_noun cor,
-                       u2_noun sam);
+            u2_bn_molt(u2_wire wir_r,
+                       u2_noun som,
+                       ...);
+         
+          /* u2_bn_molf():
+          **
+          **   As u2_bn_molt(), with argument pointer.
+          */
+            u2_noun
+            u2_bn_molf(u2_wire wir_r,
+                       u2_noun som,
+                       va_list vap);
 
           /* u2_bn_mang():
           **
@@ -298,6 +308,31 @@
                        u2_noun cor,
                        ...);
 
-#           define u2_bm  u2_bn_mang
-#           define u2_bg  u2_bn_mung
+          /* u2_bn_mung(): 
+          **
+          **   Call by core and sample.
+          */
+            u2_noun
+            u2_bn_mung(u2_wire wir_r,
+                       u2_noun cor,
+                       u2_noun sam);
 
+          /* u2_bn_gart():
+          **
+          **   Call by core, hook, sample.
+          */
+            u2_noun
+            u2_bn_gart(u2_wire     wir_r,
+                       u2_noun     cor,
+                       const c3_c* tam_c,
+                       u2_noun     sam);
+
+          /* u2_bn_gort():
+          **
+          **  Call by core, depth, hook, molt list.
+          */
+            u2_noun
+            u2_bn_gort(u2_wire     wir_r,
+                       u2_noun     cor,
+                       const c3_c* tam_c,
+                       ...);

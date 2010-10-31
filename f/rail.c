@@ -680,6 +680,8 @@ void
 u2_rl_gain(u2_ray  ral_r,
            u2_noun som)
 {
+  c3_assert(u2_none != som);
+
   if ( u2_fly_is_dog(som) ) {
     u2_ray som_r = u2_dog_a(som);
     u2_ray hat_r = u2_rail_hat_r(ral_r);
@@ -724,6 +726,9 @@ void
 u2_rl_lose(u2_ray  ral_r, 
            u2_noun som)
 {
+  if ( u2_none == som ) {
+    return;
+  }
   if ( u2_fly_is_dog(som) ) {
     u2_ray som_r = u2_dog_a(som);
     u2_ray hat_r = u2_rail_hat_r(ral_r);
@@ -1143,11 +1148,10 @@ u2_rl_cell(u2_ray  ral_r,
            u2_noun a,
            u2_noun b)
 {
-  /* This is just plain illegal.
-  */
-  {
-    c3_assert(u2_none != a);
-    c3_assert(u2_none != b);
+  if ( (u2_none == a) || (u2_none == b) ) {
+    u2_rl_lose(ral_r, a);
+    u2_rl_lose(ral_r, b);
+    return u2_none;
   }
 
   /* Seniority restrictions.  Ice if these cannot be met.

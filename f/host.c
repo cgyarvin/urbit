@@ -130,6 +130,10 @@ _cs_save(u2_ho_cash* cas_s,
         u2_noun     tag   = per_p->tag;
 
         if ( u2_none != tag ) {
+          /*
+          ** If this assertion fires, you have a duplicate formula 
+          ** or battery.  Why?
+          */
           c3_assert(u2_no == u2_sing(som, tag));
         }
         else {
@@ -479,10 +483,6 @@ _ho_execute(u2_ray      wir_r,
     return u2_none;
   }
   else {
-    if ( 0 == (jub_r = u2_bl_open(wir_r)) ) {
-      return u2_none;
-    }
-
     if ( 1 == u2_bl_set(wir_r) ) {
       u2_bl_done(wir_r, jub_r);
       u2_rl_fall(wir_r);
@@ -653,10 +653,12 @@ _ho_explore(u2_ray  wir_r,
 
     if ( 0 != (dry_d = _ho_explore_parent(wir_r, xip, cos_c)) ) {
       fprintf(stderr, "battery: child : %s\n", cos_c);
+      _ho_drive(dry_d);
       return dry_d;
     }
     else if ( 0 != (dry_d = _ho_explore_static(wir_r, xip, cos_c)) ) {
       fprintf(stderr, "battery: static: %s\n", cos_c);
+      _ho_drive(dry_d);
       return dry_d;
     }
     else {
@@ -690,9 +692,10 @@ _ho_discover(u2_ray  wir_r,
     return jet_j;
   }
   else {
-    if ( 0 != (dry_d = _ho_explore(wir_r, xip)) ) {
-      _ho_drive(dry_d);
-
+    if ( 0 == (dry_d = _ho_explore(wir_r, xip)) ) {
+      return 0;
+    }
+    else {
       if ( 0 != (jet_j = _ho_cash_find(&u2_HostHangar->jac_s, fol)) ) {
         return jet_j;
       } else {
@@ -710,7 +713,6 @@ _ho_discover(u2_ray  wir_r,
         return jet_j;
       }
     }
-    return 0;
   }
 }
 

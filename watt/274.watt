@@ -1,4 +1,11 @@
-=<  ^?([%mine ~ [%watt 274] ~] .)
+=<  ^?  :^    %mine 
+            ~ 
+          [%watt 274]
+        :~
+          [%add !=(add)]
+          [%dec !=(dec)]
+        ==
+      .
 |*
 ::
 ::::  Tier 1, light math

@@ -317,15 +317,6 @@
           u2_rl_ice(u2_ray  ral_r,
                     u2_noun a);
 
-        /* u2_rl_molt():
-        **
-        **   Mutate `a` with a 0-terminated list of axis, noun pairs.
-        **   Axes must be cats (31 bit).
-        */
-          u2_weak
-          u2_rl_molt(u2_ray  ral_r,
-                     ...);
-
         /* u2_rl_mp():
         **
         **   Copy the GMP integer [a] into an atom.
