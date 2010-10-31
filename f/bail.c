@@ -317,6 +317,7 @@ u2_bn_list(u2_ray wir_r, ...)
     c3_w i_w, cut_t, cut_w;
 
     cut_t = c3_false;
+    cut_w = 0;
     for ( i_w = 0; i_w < len_w; i_w++ ) {
       c3_w axe_w = pms_m[i_w].axe_w;
 

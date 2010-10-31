@@ -134,7 +134,7 @@ main(int  argc,
   char *history_name = _console_init();
   void *fod;
 
-  if ( !(fod = ford_boot(26, "watt/274")) ) {
+  if ( !(fod = ford_boot(28, "watt/274")) ) {
     fprintf(stderr, "ford: boot failed\n");
     return 1;
   }

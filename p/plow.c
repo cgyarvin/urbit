@@ -4754,7 +4754,7 @@
   void
   _plow_init(u2_ray wir_r)
   {
-    c3_assert(_0 == u2_wire_plo_r(wir_r));
+    // c3_assert(_0 == u2_wire_plo_r(wir_r));
     u2_wire_plo_r(wir_r) = u2_rl_ralloc(wir_r, c3_wiseof(u2_loom_plow));
 
     u2_plow_(wir_r, fan) = u2_nul;
