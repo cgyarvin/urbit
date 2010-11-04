@@ -14,7 +14,8 @@ u2_bl_open(u2_ray wir_r)
   u2_wire_jub_r(wir_r) = u2_rl_ralloc(wir_r, c3_wiseof(jmp_buf));
   if ( 0 == u2_wire_jub_r(wir_r) ) {
     u2_wire_jub_r(wir_r) = jub_r;
-    return 0;
+
+    return u2_bl_bail(wir_r);
   }
   else return jub_r;
 }

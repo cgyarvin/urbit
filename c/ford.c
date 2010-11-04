@@ -76,6 +76,7 @@ _ford_report(u2_ray wir_r)
 {
   c3_d sap_d, cop_d, jax_d, use_d;
   c3_w wax_w, moc_w, hix_w, ums_w;
+  c3_ws sew_ws, bax_ws;
 
   if ( u2_no == u2_bx_post(wir_r, &sap_d, 
                                   &cop_d, 
@@ -83,41 +84,63 @@ _ford_report(u2_ray wir_r)
                                   &use_d, 
                                   &wax_w, 
                                   &moc_w, 
-                                  &hix_w, 
+                                  &hix_w,
+                                  &sew_ws,
+                                  &bax_ws,
                                   &ums_w) )
   {
     return;
   } else {
     printf("<");
     _ford_print_superdecimal_d(sap_d);
-    printf(" steps");
+    printf(" jogs");
     if ( cop_d ) {
       printf(", ");
       _ford_print_superdecimal_d(cop_d);
-      printf(" copies");
+      printf(" dups");
     }
     if ( jax_d ) {
       printf(", ");
       _ford_print_superdecimal_d(jax_d);
-      printf(" shots");
+      printf(" shot");
     }
     if ( use_d ) {
       printf(", ");
       _ford_print_superdecimal_d(use_d);
-      printf(" used");
+      printf(" pings");
     }
     printf("; ");
     _ford_print_superdecimal_w(moc_w);
-    printf(" words, ");
+    printf(" hit, ");
     _ford_print_superdecimal_w(wax_w);
-    printf(" frames");
+    printf(" deep");
 
     if ( hix_w ) {
       printf(", ");
       _ford_print_superdecimal_w(hix_w);
-      printf(" saved");
+      printf(" held");
     }
-
+    
+    if ( sew_ws ) {
+      printf(", ");
+      if ( sew_ws < 0 ) {
+        printf("-");
+        _ford_print_superdecimal_w((c3_w) -(sew_ws));
+      } else {
+        _ford_print_superdecimal_w((c3_w) sew_ws);
+      }
+      printf(" sewn");
+    }
+    if ( bax_ws ) {
+      printf(", ");
+      if ( bax_ws < 0 ) {
+        printf("-");
+        _ford_print_superdecimal_w((c3_w) -(bax_ws));
+      } else {
+        _ford_print_superdecimal_w((c3_w) bax_ws);
+      }
+      printf(" kept");
+    }
     printf("; ");
     _ford_print_superdecimal_w(ums_w);
     printf(" ms>\n");
@@ -158,6 +181,7 @@ ford_boot(c3_w        siz_w,
         u2_bx_boot(wir_r);
 
         gen = u2_fj_watt(wir_r, src);
+        gen = u2_ba_sole(wir_r, gen);
         mil = u2_fj_plow_mill(wir_r, u2_bc(wir_r, c3__cube, _0), gen);
         pyt = u2_bi_h(wir_r, mil);
         fol = u2_bi_t(wir_r, mil);

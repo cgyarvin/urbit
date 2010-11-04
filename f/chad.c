@@ -278,9 +278,11 @@ _ch_save(u2_ray  ral_r,
 /* u2_ch_save():
 **
 **   Save `val` under `nam` in `cad`, allocating in `ral`.
-**   Return `u2_no` iff allocation fails.
+**   Return `u2_none` iff allocation fails.  Asserts on duplicate.
+**
+**   Caller retains arguments; callee retains result.
 */
-u2_flag
+u2_weak
 u2_ch_save(u2_ray  ral_r,
            u2_ray  cad_r,
            u2_noun nam,
@@ -289,94 +291,82 @@ u2_ch_save(u2_ray  ral_r,
   u2_weak nim, vil;
 
   if ( u2_none == (nim = u2_rl_ice(ral_r, nam)) ) {
-    return u2_no;
+    return u2_none;
   }
   if ( u2_none == (vil = u2_rl_ice(ral_r, val)) ) {
     u2_rl_lose(ral_r, nim);
-    return u2_no;
+    return u2_none;
   }
   if ( u2_no == _ch_save(ral_r, cad_r, nim, vil, u2_mug(nim), 0) ) {
     u2_rl_lose(ral_r, nim);
     u2_rl_lose(ral_r, vil);
-    return u2_no;
+    return u2_none;
   }
-  return u2_yes;
+  return vil;
 }
 
 /* u2_ch_save_cell():
 **
 **   Save `val` under `[hed tal]` in `cad`, allocating in `ral`.
-**   Return `u2_no` iff allocation fails.
+**   Return `u2_none` iff allocation fails.  Asserts on duplicate.
+**
+**   Caller retains arguments; callee retains result.
 */
-u2_flag
+u2_weak
 u2_ch_save_cell(u2_ray  ral_r,
                 u2_ray  cad_r,
                 u2_noun hed,
                 u2_noun tal,
                 u2_noun val)
 {
-  u2_weak hid, til, nim, vil;
+  u2_weak nim, vil;
 
-  if ( u2_none == (hid = u2_rl_ice(ral_r, hed)) ) {
-    return u2_no;
-  }
-  if ( u2_none == (til = u2_rl_ice(ral_r, tal)) ) {
-    u2_rl_lose(ral_r, til);
-    return u2_no;
-  }
-  if ( u2_none == (nim = u2_rl_cell(ral_r, hid, til)) ) {
-    u2_rl_lose(ral_r, hid);
-    u2_rl_lose(ral_r, til);
-    return u2_no;
+  if ( u2_none == (nim = u2_rl_cell(ral_r, u2_rl_ice(ral_r, hed), 
+                                           u2_rl_ice(ral_r, tal))) )
+  {
+    return u2_none;
   }
   if ( u2_none == (vil = u2_rl_ice(ral_r, val)) ) {
     u2_rl_lose(ral_r, nim);
-    return u2_no;
+    return u2_none;
   }
   if ( u2_no == _ch_save(ral_r, cad_r, nim, vil, u2_mug(nim), 0) ) {
     u2_rl_lose(ral_r, nim);
     u2_rl_lose(ral_r, vil);
-    return u2_no;
+    return u2_none;
   }
-  return u2_yes;
+  return vil;
 }
 
 /* u2_ch_save_mixt():
 **
-**   Save `val` under `[hed tal]` in `cad`, allocating in `zon`.
-**   Return `u2_no` iff allocation fails.  Asserts on duplicate.
+**   Save `val` under `[hed tal]` in `cad`, allocating in `ral`.
+**   Return `u2_none` iff allocation fails.  Asserts on duplicate.
 **
-**   Caller retains ownership of arguments.
+**   Caller retains ownership of arguments; callee retains result.
 */
-u2_flag
+u2_weak
 u2_ch_save_mixt(u2_ray      ral_r,
                 u2_ray      cad_r,
                 const c3_c* hed_c,
                 u2_noun     tal,
                 u2_noun     val)
 {
-  u2_weak hid, til, nim, vil;
+  u2_weak nim, vil;
 
-  if ( u2_none == (hid = u2_rl_string(ral_r, hed_c)) ) {
-    return u2_no;
-  }
-  if ( u2_none == (til = u2_rl_ice(ral_r, tal)) ) {
-    u2_rl_lose(ral_r, til);
-    return u2_no;
-  }
-  if ( u2_none == (nim = u2_rl_cell(ral_r, hid, til)) ) {
-    u2_rl_lose(ral_r, hid);
-    u2_rl_lose(ral_r, til);
-    return u2_no;
+  if ( u2_none == (nim = u2_rl_cell(ral_r, u2_rl_string(ral_r, hed_c), 
+                                           u2_rl_ice(ral_r, tal))) )
+  {
+    return u2_none;
   }
   if ( u2_none == (vil = u2_rl_ice(ral_r, val)) ) {
     u2_rl_lose(ral_r, nim);
-    return u2_no;
+    return u2_none;
   }
   if ( u2_no == _ch_save(ral_r, cad_r, nim, vil, u2_mug(nim), 0) ) {
     u2_rl_lose(ral_r, nim);
     u2_rl_lose(ral_r, vil);
-    return u2_no;
+    return u2_none;
   }
-  return u2_yes;
+  return vil;
 }

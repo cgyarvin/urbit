@@ -25,9 +25,9 @@
           u2_ray rut_r;   // bottom of new durable region
           c3_m   hip_m;   // memory model in durable; c3__warm, c3__cold
 
-          /* Devil; u2_loom_devl; benchmarking and debugging.
+          /* Ray to allocation counter, for warm rails only.
           */
-          u2_ray dev_r;
+          u2_ray bav_r;
         } u2_loom_rail;
 
 #         define  u2_rail_cap_r(ral_r)  *u2_at(ral_r, u2_loom_rail, cap_r)
@@ -35,6 +35,7 @@
 #         define  u2_rail_mat_r(ral_r)  *u2_at(ral_r, u2_loom_rail, mat_r)
 #         define  u2_rail_rut_r(ral_r)  *u2_at(ral_r, u2_loom_rail, rut_r)
 #         define  u2_rail_hip_m(ral_r)  *u2_at(ral_r, u2_loom_rail, hip_m)
+#         define  u2_rail_bav_r(ral_r)  *u2_at(ral_r, u2_loom_rail, bav_r)
 
       /* Pork - base of frame.
       */

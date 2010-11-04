@@ -46,7 +46,15 @@
         /* East watermark.
         */
         u2_ray est_r;
-        
+
+        /* Net shed words allocated/freed.
+        */
+        c3_ws sew_ws;
+
+        /* Net basket words allocated/freed.
+        */
+        c3_ws bax_ws;
+
         /* Unix time in seconds.
         */
         c3_w sec_w;
@@ -76,18 +84,22 @@
     **  wax: maximum depth of C stack
     **  moc: number of words touched
     **  hix: number of words acquired
+    **  sew: number of words in shed allocated/freed
+    **  bax: number of words in basket allocated/freed
     **  ums: number of milliseconds consumed
     */
       u2_flag
       u2_bx_post(u2_ray wir_r,
-                 c3_d   *sap_d,
-                 c3_d   *cop_d,
-                 c3_d   *jax_d,
-                 c3_d   *use_d,
-                 c3_w   *wax_w,
-                 c3_w   *moc_w,
-                 c3_w   *hix_w,
-                 c3_w   *ums_w);
+                 c3_d*  sap_d,
+                 c3_d*  cop_d,
+                 c3_d*  jax_d,
+                 c3_d*  use_d,
+                 c3_w*  wax_w,
+                 c3_w*  moc_w,
+                 c3_w*  hix_w,
+                 c3_ws* sew_ws,
+                 c3_ws* bax_ws,
+                 c3_w*  ums_w);
  
     /* u2_bx_step(): note interpreter step.
     */
@@ -99,7 +111,19 @@
       void 
       u2_bx_copy(u2_ray wir_r,
                  c3_w   cop_w);
-                 
+
+    /* u2_bx_shed(): note `wad` allocated/freed words in hangar.
+    */
+      void
+      u2_bx_shed(u2_ray wir_r,
+                 c3_ws  wad_ws); 
+  
+    /* u2_bx_bask(): note `wad` allocated/freed words in basket.
+    */
+      void
+      u2_bx_bask(u2_ray wir_r,
+                 c3_ws  wad_ws);
+
     /* u2_bx_fall(): go deeper (call) in the C stack.
     */
       void

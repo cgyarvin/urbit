@@ -22,6 +22,9 @@ u2_bx_boot(u2_ray wir_r)
     u2_benx_be(bex_r, c3_w, wac_w) = 0;
     u2_benx_be(bex_r, c3_w, wax_w) = 0;
 
+    u2_benx_be(bex_r, c3_ws, sew_ws) = 0;
+    u2_benx_be(bex_r, c3_ws, bax_ws) = 0;
+  
     if ( 0 == u2_ray_a(u2_rail_cap_r(wir_r)) ) {
       u2_benx_at(bex_r, wab_r) = u2_rail_cap_r(wir_r);
       u2_benx_at(bex_r, eab_r) = u2_rail_hat_r(wir_r);
@@ -32,6 +35,14 @@ u2_bx_boot(u2_ray wir_r)
     u2_benx_at(bex_r, wst_r) = u2_benx_at(bex_r, wab_r);
     u2_benx_at(bex_r, est_r) = u2_benx_at(bex_r, eab_r);
 
+    if ( u2_wire_bas_r(wir_r) ) {
+      u2_rail_bav_r(u2_wire_bas_r(wir_r)) = 
+        u2_aftr(bex_r, u2_loom_benx, sew_ws);
+    }
+    if ( u2_wire_sad_r(wir_r) ) {
+      u2_rail_bav_r(u2_wire_sad_r(wir_r)) = 
+        u2_aftr(bex_r, u2_loom_benx, bax_ws);
+    }
     {
       struct timeval tv;
 
@@ -51,18 +62,22 @@ u2_bx_boot(u2_ray wir_r)
 **  wax: maximum depth of C stack
 **  moc: number of words touched
 **  hix: number of words acquired
-**  ums: number of microseconds consumed
+**  sew: number of words in shed allocated/freed
+**  bax: number of words in basket allocated/freed
+**  ums: number of milliseconds consumed
 */
 u2_flag
 u2_bx_post(u2_ray wir_r,
-           c3_d   *sap_d,
-           c3_d   *cop_d,
-           c3_d   *jax_d,
-           c3_d   *use_d,
-           c3_w   *wax_w,
-           c3_w   *moc_w,
-           c3_w   *hix_w,
-           c3_w   *ums_w)
+           c3_d*  sap_d,
+           c3_d*  cop_d,
+           c3_d*  jax_d,
+           c3_d*  use_d,
+           c3_w*  wax_w,
+           c3_w*  moc_w,
+           c3_w*  hix_w,
+           c3_ws* sew_ws,
+           c3_ws* bax_ws,
+           c3_w*  ums_w)
 {
   u2_ray bex_r;
 
@@ -78,6 +93,9 @@ u2_bx_post(u2_ray wir_r,
     *use_d = u2_benx_be(bex_r, c3_d, use_d);
 
     *wax_w = u2_benx_at(bex_r, wax_w);
+
+    *sew_ws = u2_benx_at(bex_r, sew_ws);
+    *bax_ws = u2_benx_at(bex_r, bax_ws);
 
     *moc_w = (u2_benx_at(bex_r, wst_r) - u2_benx_at(bex_r, wab_r)) + 
              (u2_benx_at(bex_r, est_r) - u2_benx_at(bex_r, eab_r));
@@ -233,5 +251,35 @@ u2_bx_mark(u2_ray wir_r)
         u2_benx_at(bex_r, wst_r) = u2_rail_hat_r(wir_r);
       }
     }
+  }
+}
+
+/* u2_bx_shed(): note `wad` allocated/freed words in hangar.
+*/
+void
+u2_bx_shed(u2_ray wir_r,
+           c3_ws  wad_ws)
+{
+  u2_ray bex_r;
+
+  if ( 0 == (bex_r = u2_wire_bex_r(wir_r)) ) {
+    return;
+  } else {
+    u2_benx_be(bex_r, c3_d, sew_ws) += wad_ws;
+  }
+}
+
+/* u2_bx_bask(): note `wad` allocated/freed words in basket.
+*/
+void
+u2_bx_bask(u2_ray wir_r,
+           c3_ws  wad_ws)
+{
+  u2_ray bex_r;
+
+  if ( 0 == (bex_r = u2_wire_bex_r(wir_r)) ) {
+    return;
+  } else {
+    u2_benx_be(bex_r, c3_d, bax_ws) += wad_ws;
   }
 }

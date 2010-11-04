@@ -136,9 +136,19 @@ u2_sh_mine(u2_ray  wir_r,
           ** by ray address.
           */
           bot = u2_rc(sad_r, u2_h(bat), u2_t(bat));
+#if 0
+        printf("battery: in basket: %d.%x\n",
+                u2_ray_a(u2_dog_a(bot)),
+                u2_ray_b(u2_dog_a(bot)));
+#endif
         } 
         else {
           bot = u2_rl_ice(sad_r, bat);
+#if 0
+          printf("battery: in shed! %d.%x\n",
+                  u2_ray_a(u2_dog_a(bot)),
+                  u2_ray_b(u2_dog_a(bot)));
+#endif
         }
         if ( u2_none == bot ) {
           break;
@@ -186,14 +196,9 @@ u2_sh_mine(u2_ray  wir_r,
         if ( u2_none == (xop = u2_rt(sad_r, dac, bot, pet)) ) {
           break;
         }
-        if ( u2_no == (u2_ch_save(sad_r, u2_shed_cad_r(sad_r), bot, xop)) ) {
+        if ( u2_none == (u2_ch_save(sad_r, u2_shed_cad_r(sad_r), bot, xop)) ) {
           break;
         }
-#if 0
-        printf("battery: registered: %d.%x\n",
-                u2_ray_a(u2_dog_a(bot)),
-                u2_ray_b(u2_dog_a(bot)));
-#endif
 
         u2_rl_lose(sad_r, xop);
       }
@@ -286,7 +291,7 @@ u2_sh_find(u2_ray  wir_r,
         u2_chip xip = u2_ch_find(u2_shed_cad_r(sad_r), bat);
 
         if ( u2_none == xip ) {
-#if 0
+#if 1
           printf("bat_r %d.%x; hat_r %d.%x; rut_r %d.%x\n",
                   u2_ray_a(bat_r), u2_ray_b(bat_r),
                   u2_ray_a(hat_r), u2_ray_b(hat_r),
@@ -387,7 +392,7 @@ u2_sh_look(u2_wire     wir_r,
                                u2_rc(sad_r, u2_nock_frag, axe_w),
                                fol);
           }
-          u2_ch_save_mixt(sad_r, u2_shed_cad_r(sad_r), tam_c, bat, fol);
+          fol = u2_ch_save_mixt(sad_r, u2_shed_cad_r(sad_r), tam_c, bat, fol);
 
           return fol;
         }

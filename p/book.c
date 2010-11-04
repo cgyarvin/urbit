@@ -318,8 +318,6 @@ u2_fj_book_add(u2_ray  wir_r,
                u2_noun dog_add,
                u2_book book)
 {
-  u2_bx_used(wir_r);
-
   return _book_add_mug(wir_r, tag_add, dog_add, u2_mug(tag_add), book);
 }
 

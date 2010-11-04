@@ -30,8 +30,8 @@
 #define   u2_chad_dol(cad_r, i_w) \
             ( (cad_r) + ((i_w) * c3_wiseof(u2_loom_pear)) )
 
-#define   u2_chad_dol_nam(cad_r, i_w) u2_pear_nam(u2_chad_dol(cad_r, i_w)
-#define   u2_chad_dol_val(cad_r, i_w) u2_pear_val(u2_chad_dol(cad_r, i_w)
+#define   u2_chad_dol_nam(cad_r, i_w) u2_pear_nam(u2_chad_dol(cad_r, i_w))
+#define   u2_chad_dol_val(cad_r, i_w) u2_pear_val(u2_chad_dol(cad_r, i_w))
 
 
   /** Functions.
@@ -71,12 +71,12 @@
       
     /* u2_ch_save():
     **
-    **   Save `val` under `nam` in `cad`, allocating in `zon`.
-    **   Return `u2_no` iff allocation fails.  Asserts on duplicate.
+    **   Save `val` under `nam` in `cad`, allocating in `ral`.
+    **   Return `u2_none` iff allocation fails.  Asserts on duplicate.
     **
-    **   Caller retains ownership of arguments.
+    **   Caller retains arguments; callee retains result.
     */
-      u2_flag
+      u2_weak
       u2_ch_save(u2_ray  ral_r,
                  u2_ray  cad_r,
                  u2_noun nam,
@@ -84,12 +84,12 @@
 
     /* u2_ch_save_cell():
     **
-    **   Save `val` under `[hed tal]` in `cad`, allocating in `zon`.
-    **   Return `u2_no` iff allocation fails.  Asserts on duplicate.
+    **   Save `val` under `[hed tal]` in `cad`, allocating in `ral`.
+    **   Return `u2_none` iff allocation fails.  Asserts on duplicate.
     **
-    **   Caller retains ownership of arguments.
+    **   Caller retains arguments; callee retains result.
     */
-      u2_flag
+      u2_weak
       u2_ch_save_cell(u2_ray  ral_r,
                       u2_ray  cad_r,
                       u2_noun hed,
@@ -98,16 +98,14 @@
 
     /* u2_ch_save_mixt():
     **
-    **   Save `val` under `[hed tal]` in `cad`, allocating in `zon`.
-    **   Return `u2_no` iff allocation fails.  Asserts on duplicate.
+    **   Save `val` under `[hed tal]` in `cad`, allocating in `ral`.
+    **   Return `u2_none` iff allocation fails.  Asserts on duplicate.
     **
-    **   Caller retains ownership of arguments.
+    **   Caller retains ownership of arguments; callee retains result.
     */
-      u2_flag
+      u2_weak
       u2_ch_save_mixt(u2_ray      ral_r,
                       u2_ray      cad_r,
                       const c3_c* hed_c,
                       u2_noun     tal,
                       u2_noun     val);
-
-

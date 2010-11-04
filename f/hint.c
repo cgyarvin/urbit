@@ -25,21 +25,20 @@ u2_wr_hint(u2_ray  wir_r,
       if ( pro != u2_none ) {
         return pro;
       } else {
-        if ( u2_none != (pro = u2_wr_nock_main(wir_r, bus, fol)) ) {
-          u2_bx_used(wir_r);
-          u2_ba_save(wir_r, bus, fol, pro);
+        if ( u2_none == (pro = u2_wr_nock_main(wir_r, bus, fol)) ) {
+          return u2_none;
         }
-        return pro;
+        return u2_ba_save(wir_r, bus, fol, pro);
       }
     }
 
     case c3__sole: {
       u2_weak pro;
 
-      if ( u2_none != (pro = u2_wr_nock_main(wir_r, bus, fol)) ) {
-        u2_ba_sole(wir_r, pro);
+      if ( u2_none == (pro = u2_wr_nock_main(wir_r, bus, fol)) ) {
+        return u2_none;
       }
-      return pro;
+      else return u2_ba_sole(wir_r, pro);
     }
 
     case c3__mine: {
