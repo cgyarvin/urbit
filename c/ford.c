@@ -185,6 +185,11 @@ ford_boot(c3_w        siz_w,
         mil = u2_fj_plow_mill(wir_r, u2_bc(wir_r, c3__cube, _0), gen);
         pyt = u2_bi_h(wir_r, mil);
         fol = u2_bi_t(wir_r, mil);
+        {
+          // XX: bad dag interaction in old plow code
+          //
+          u2_rl_gain(wir_r, fol);
+        }
         fol = u2_ba_sole(wir_r, fol);
         pit = u2_bn_nock(wir_r, _0, fol);
 

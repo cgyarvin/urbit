@@ -35,6 +35,7 @@ u2_bl_done(u2_ray wir_r,
 u2_noun
 u2_bl_bail(u2_ray wir_r)
 {
+  c3_assert(0);
   longjmp((void *)u2_at_cord(u2_wire_jub_r(wir_r), c3_wiseof(jmp_buf)), 1);
   return u2_none;
 }

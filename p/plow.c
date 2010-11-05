@@ -6,11 +6,58 @@
 
 /** Data structures.
 **/
-  /* Adaptation macros.
+  /* Adaptation macros, etc.
   */
     #define u2_brut(wir_r, cat, typ) \
       u2_burp(wir_r, cat, _dump_type(wir_r, typ))
 
+    static u2_noun
+    _plow_sole(u2_wire wir_r, u2_noun som)
+    {
+      // XX: this is necessary because we are not counting refs
+      // correctly in this old code.
+      //
+#if 1
+      u2_rl_gain(wir_r, som);
+      return u2_ba_sole(wir_r, som);
+#else
+      return som;
+#endif
+    }
+
+    static u2_flag
+    _good_type(u2_type typ)
+    {
+      if ( typ == c3__atom ||
+           typ == c3__blot ||
+           typ == c3__blur )
+      {
+        return u2_yes;
+      }
+      else if ( u2_yes == u2_dust(typ) ) {
+        if ( u2_h(typ) == c3__cell ||
+                  u2_h(typ) == c3__fork ||
+                  u2_h(typ) == c3__fuse )
+        {
+          return u2_and(_good_type(u2_h(u2_t(typ))),
+                        _good_type(u2_t(u2_t(typ))));
+        }
+        else if ( u2_h(typ) == c3__core ) {
+          return u2_and(_good_type(u2_h(u2_t(typ))),
+                        _good_type(u2_h(u2_t(u2_t(u2_t(typ))))));
+        }
+        else if ( u2_h(typ) == c3__face ) {
+          return _good_type(u2_t(u2_t(typ)));
+        }
+        else if ( u2_h(typ) == c3__hold ) {
+          return u2_yes;
+        }
+        else if ( u2_h(typ) == c3__cube ) {
+          return u2_yes;
+        }
+      }
+      return u2_no;
+    }
 
 /** Forward declarations.
 **/
@@ -741,8 +788,6 @@
 
   _open_do_p(bean)
   {
-    
-
     if ( u2_yes == u2_sing(c3__atom, p_gen) ) {
       return u2_bt
         (wir_r, c3__cast, 
@@ -1428,22 +1473,16 @@
   _plow_open(u2_ray  wir_r,
              u2_gene gen)
   {
-    u2_weak zax = u2_fj_book_get(gen, u2_plow_(wir_r, pon));
+    u2_weak zax = u2_ba_find_plow(wir_r, u2_bask_plow_pon, gen);
 
     if ( u2_none != zax ) {
       return zax;
-    }
+    } 
     else {
       zax = _plow_open_main(wir_r, gen);
+      zax = _plow_sole(wir_r, zax);
 
-#if 0
-      if ( !(u2_nul == u2_plow_(wir_r, bug)) && u2_yes == u2_as_p(gen, c3__teck, 0) ) {
-        u2_err(wir_r, "open: gen", gen);
-        u2_err(wir_r, "open: zax", zax);
-        printf("\n");
-      }
-#endif
-      u2_plow_(wir_r, pon) = u2_fj_book_add(wir_r, gen, zax, u2_plow_(wir_r, pon));
+      zax = u2_ba_save_plow(wir_r, u2_bask_plow_pon, gen, zax);
       return zax;
     }
   }
@@ -2052,6 +2091,8 @@
         }
       }
       else {
+        u2_brut(wir_r, "type", sut);
+
         return u2_bl_bail(wir_r);
       }
     }
@@ -2063,10 +2104,9 @@
                     u2_pool gil,
                     u2_term cog)
     {
-      
       u2_noun mum  = u2_bu(wir_r, sut, bar, axe, gil, cog);
-      u2_weak zod  = u2_fj_book_get(mum, u2_plow_(wir_r, fin));
-
+      u2_weak zod  = u2_ba_find_plow(wir_r, u2_bask_plow_fin, mum);
+        
       if ( zod != u2_none ) {
         return zod;
       }
@@ -2074,7 +2114,7 @@
         u2_unit gur = _iris_find_main_a
           (wir_r, sut, bar, axe, gil, cog);
 
-        u2_plow_(wir_r, fin) = u2_fj_book_add(wir_r, mum, gur, u2_plow_(wir_r, fin));
+        gur = u2_ba_save_plow(wir_r, u2_bask_plow_fin, mum, gur);
         return gur;
       }
     }
@@ -2085,7 +2125,9 @@
              u2_axis axe,
              u2_term cog)
   {
-    u2_unit fyg = _iris_find_main(wir_r, sut, bar, axe, u2_nul, cog);
+    u2_unit fyg;
+   
+    fyg = _iris_find_main(wir_r, sut, bar, axe, u2_nul, cog);
 
     if ( (u2_nul == fyg) ) {
       u2_burp(wir_r, "name", u2_fj_prep_textual(wir_r, cog));
@@ -2317,7 +2359,7 @@
   {
     
     u2_noun mum = u2_bt(wir_r, sut, bar, had);  /* axe is not used */
-    u2_weak zod = u2_fj_book_get(mum, u2_plow_(wir_r, huf));
+    u2_weak zod = u2_ba_find_plow(wir_r, u2_bask_plow_huf, mum); 
 
     if ( zod != u2_none ) {
       return zod;
@@ -2325,7 +2367,9 @@
     else {
       u2_type gur = _iris_half_main(wir_r, sut, bar, axe, had);
 
-      u2_plow_(wir_r, huf) = u2_fj_book_add(wir_r, mum, gur, u2_plow_(wir_r, huf));
+      gur = _plow_sole(wir_r, gur);
+      gur = u2_ba_save_plow(wir_r, u2_bask_plow_huf, mum, gur);
+
       return gur;
     }
   }
@@ -2491,23 +2535,8 @@
         return u2_yes;
       }
       else {
-#if 0
-        u2_noun mum = u2_bq(wir_r, bar, sut, nef, bon);
-        u2_weak zod = u2_fj_book_get(mum, u2_plow_(wir_r, vus));
-
-        if ( zod != u2_none ) {
-          return zod;
-        }
-        else {
-          u2_flag gur = _iris_nest_dext_main
-            (wir_r, sut, bar, axe, gil, bon, nef, ful);
-
-          u2_plow_(wir_r, vus) = u2_fj_book_add(wir_r, mum, gur, u2_plow_(wir_r, vus));
-          return gur;
-        }
-#else
-          /* We can memoize without respect to gil - think about it.
-          */
+        /* We can memoize without respect to gil - think about it.
+        */
         u2_noun mum = u2_bt
           (wir_r, axe, ful, u2_bq(wir_r, bar, sut, nef, bon));
         u2_weak zod = u2_ba_find_plow(wir_r, u2_bask_plow_vus, mum);
@@ -2526,15 +2555,12 @@
             return zod;
           }
           else {
-            u2_bx_used(wir_r);
-
-            u2_ba_save_plow(wir_r, u2_bask_plow_vus, mum, gur);
+            gur = u2_ba_save_plow(wir_r, u2_bask_plow_vus, mum, gur);
             c3_assert(u2_none != u2_ba_find_plow(wir_r, u2_bask_plow_vus, mum));
 
             return gur;
           }
         }
-#endif
       }
     }
     u2_flag
@@ -3487,15 +3513,17 @@
   {
     
     u2_noun mum = u2_bc(wir_r, sut, gen);
-    u2_weak zod = u2_fj_book_get(mum, u2_plow_(wir_r, niq));
-
+    u2_weak zod = u2_ba_find_plow(wir_r, u2_bask_plow_niq, mum);
+        
     if ( zod != u2_none ) {
       return zod;
     }
     else {
       u2_tool gur = _rose_make_main(wir_r, sut, gen);
 
-      u2_plow_(wir_r, niq) = u2_fj_book_add(wir_r, mum, gur, u2_plow_(wir_r, niq));
+      gur = _plow_sole(wir_r, gur);
+      gur = u2_ba_save_plow(wir_r, u2_bask_plow_niq, mum, gur);
+
       return gur;
     }
   }
@@ -3523,7 +3551,8 @@
         return u2_yes;
       }
       else if ( u2_yes == u2_as_pq(sut, c3__cell, &p_sut, &q_sut) ) {
-        return u2_or(_rose_null_a(wir_r, p_sut, hem), _rose_null_a(wir_r, q_sut, hem));
+        return u2_or(_rose_null_a(wir_r, p_sut, hem), 
+                     _rose_null_a(wir_r, q_sut, hem));
       }
       else if ( u2_yes == u2_as_pq(sut, c3__core, &p_sut, &q_sut) ) {
         return _rose_null_a(wir_r, p_sut, hem);
@@ -3557,7 +3586,7 @@
     {
       
       u2_noun mum = u2_bc(wir_r, sut, hem);
-      u2_weak zod = u2_fj_book_get(mum, u2_plow_(wir_r, tyc));
+      u2_weak zod = u2_ba_find_plow(wir_r, u2_bask_plow_tyc, mum);
 
       if ( zod != u2_none ) {
         return zod;
@@ -3565,7 +3594,7 @@
       else {
         u2_flag gur = _rose_null_b(wir_r, sut, hem);
 
-        u2_plow_(wir_r, tyc) = u2_fj_book_add(wir_r, mum, gur, u2_plow_(wir_r, tyc));
+        u2_ba_save_plow(wir_r, u2_bask_plow_tyc, mum, gur);
         return gur;
       }
     }
@@ -3676,7 +3705,7 @@
     {
       
       u2_noun mum = u2_bt(wir_r, sut, ref, bol);
-      u2_weak zod = u2_fj_book_get(mum, u2_plow_(wir_r, gam));
+      u2_weak zod = u2_ba_find_plow(wir_r, u2_bask_plow_gam, mum);
 
       if ( zod != u2_none ) {
         return zod;
@@ -3684,7 +3713,7 @@
       else {
         u2_flag gur = _rose_orth_b(wir_r, sut, ref, bol);
 
-        u2_plow_(wir_r, gam) = u2_fj_book_add(wir_r, mum, gur, u2_plow_(wir_r, gam));
+        gur = u2_ba_save_plow(wir_r, u2_bask_plow_gam, mum, gur);
         return gur;
       }
     }
@@ -3703,8 +3732,6 @@
                  u2_type sut,
                  u2_rack dus)
     {
-      
-
       if ( (u2_nul == dus) ) {
         return u2_nul;
       }
@@ -3902,7 +3929,7 @@
   {
     
     u2_noun mum = u2_bc(wir_r, sut, gen);
-    u2_weak zod = u2_fj_book_get(mum, u2_plow_(wir_r, zor));
+    u2_weak zod = u2_ba_find_plow(wir_r, u2_bask_plow_zor, mum);
 
     if ( zod != u2_none ) {
       return zod;
@@ -3910,7 +3937,8 @@
     else {
       u2_type gur = _rose_play_main(wir_r, sut, gen);
 
-      u2_plow_(wir_r, zor) = u2_fj_book_add(wir_r, mum, gur, u2_plow_(wir_r, zor));
+      gur = _plow_sole(wir_r, gur);
+      gur = u2_ba_save_plow(wir_r, u2_bask_plow_zor, mum, gur);
       return gur;
     }
   }
@@ -4245,12 +4273,8 @@
              u2_type sut,
              u2_gene gen)
   {
-#if 0
-    return u2_yes;
-#else
-    
     u2_noun mum = u2_bc(wir_r, sut, gen);
-    u2_weak zod = u2_fj_book_get(mum, u2_plow_(wir_r, hos));
+    u2_weak zod = u2_ba_find_plow(wir_r, u2_bask_plow_hos, mum);
 
     if ( zod != u2_none ) {
       return zod;
@@ -4258,10 +4282,9 @@
     else {
       u2_flag gur = _rose_show_main(wir_r, sut, gen);
 
-      u2_plow_(wir_r, hos) = u2_fj_book_add(wir_r, mum, gur, u2_plow_(wir_r, hos));
+      gur = u2_ba_save_plow(wir_r, u2_bask_plow_hos, mum, gur);
       return gur;
     }
-#endif
   }
 
 /****   _dump: pretty-printing.

@@ -545,6 +545,11 @@ _rl_bloq_grab(u2_ray ral_r,
             _rl_bloq_make(ral_r, box_r, siz_w, 1);
           }
           else {
+            if ( u2_rail_box_use(box_r) != 0 ) {
+              printf("box_r %d.%x, bxu %d\n",
+                      u2_ray_a(box_r), u2_ray_b(box_r),
+                      u2_rail_box_use(box_r));
+            }
             c3_assert(u2_rail_box_use(box_r) == 0);
             u2_rail_box_use(box_r) = 1;
           }
@@ -771,6 +776,7 @@ u2_rl_lose(u2_ray  ral_r,
             _rl_bloq_free(ral_r, box_r);
           }
           else {
+            c3_assert(use_w != 0);
             if ( use_w != 0xffffffff ) {
               u2_rail_box_use(box_r) = (use_w - 1);
             }

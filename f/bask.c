@@ -102,6 +102,7 @@ u2_ba_find_plow(u2_ray       wir_r,
   else {
     u2_weak sav = u2_ch_find(u2_bask_vig_r(bas_r, poc_o), key);
 
+    u2_bx_used(wir_r);
     if ( u2_none != sav ) {
       c3_assert(u2_yes == u2_rl_senior(wir_r, sav));
       return sav;
@@ -132,7 +133,7 @@ u2_ba_save_plow(u2_ray       wir_r,
     if ( u2_none == sav ) {
       return val;
     } else {
-      u2_rl_lose(wir_r, val);
+      // u2_rl_lose(wir_r, val);
 
       c3_assert(u2_yes == u2_rl_senior(wir_r, sav));
       return sav;
