@@ -144,7 +144,7 @@ main(int  argc,
     fprintf(stderr, "ford: boot failed\n");
     return 1;
   }
-  ford_test(fod, "watt/next");
+  ford_test(fod, "watt/273");
 
   while ( 1 ) {
     char *line = _console_line(history_name);
