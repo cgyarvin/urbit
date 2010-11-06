@@ -317,6 +317,15 @@
                        u2_noun cor,
                        u2_noun sam);
 
+          /* u2_bn_hook():
+          **
+          **   Execute hook from core.
+          */ 
+            u2_noun
+            u2_bn_hook(u2_wire     wir_r,
+                       u2_noun     cor,
+                       const c3_c* tam_c);
+
           /* u2_bn_gart():
           **
           **   Call by core, hook, sample.

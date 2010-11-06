@@ -151,7 +151,7 @@ _ford_report(u2_ray wir_r)
 */
 struct ford_state*
 ford_boot(c3_w        siz_w, 
-           const c3_c* src_c)
+          const c3_c* src_c)
 {
   u2_ray wir_r;
 
@@ -170,7 +170,7 @@ ford_boot(c3_w        siz_w,
       u2_ray jub_r = u2_bl_open(wir_r);
 
       fprintf(stderr, "boot: %s\n", src_c);
-      if ( u2_bl_set(jub_r) ) {
+      if ( u2_bl_set(wir_r) ) {
         u2_bl_done(wir_r, jub_r);
         fprintf(stderr, "boot failed\n");
         return 0;
@@ -202,6 +202,38 @@ ford_boot(c3_w        siz_w,
         fod_f->pit = pit;
         return fod_f;
       }
+    }
+  }
+}
+
+/* ford_test(): attempt ford recursion.
+*/
+void
+ford_test(struct ford_state* fod_f,
+          const char*        src_c)
+{
+  u2_wire wir_r = fod_f->wir_r;
+  u2_weak src = u2_ux_read(wir_r, src_c, "watt");
+
+  if ( (0 == fod_f) || (u2_none == src) ) {
+    perror(src_c);
+    return;
+  }
+  else {
+    u2_ray jub_r = u2_bl_open(wir_r);
+
+    fprintf(stderr, "test: %s\n", src_c);
+    if ( u2_bl_set(wir_r) ) {
+      u2_bl_done(wir_r, jub_r);
+
+      fprintf(stderr, "test failed\n");
+    }
+    else {
+      u2_noun plo = u2_bn_hook(wir_r, fod_f->pit, "plow");
+      u2_noun ryd = u2_bn_hook(wir_r, plo, "read");
+
+      printf("got a read core - %x\n", ryd);
+      u2_bl_done(wir_r, jub_r);
     }
   }
 }

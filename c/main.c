@@ -122,6 +122,12 @@ main(int  argc,
               const char*        cmd_c,
               const char*        arg_c);
 
+  /* ford_test(): initiate ford recursion.
+  */
+    void
+    ford_test(struct ford_state* fod_f,
+              const char*        src_c);
+
   /* ford_done(): terminate and free all 
   */
     void
@@ -138,6 +144,8 @@ main(int  argc,
     fprintf(stderr, "ford: boot failed\n");
     return 1;
   }
+  ford_test(fod, "watt/next");
+
   while ( 1 ) {
     char *line = _console_line(history_name);
 

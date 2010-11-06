@@ -670,7 +670,7 @@ _ho_explore(u2_ray  wir_r,
       dry_d->xip = xip;
       dry_d->fan_j = 0;
 
-      fprintf(stderr, "battery: dummy : %s\n", cos_c);
+      // fprintf(stderr, "battery: dummy : %s\n", cos_c);
       _ho_cash_save(&u2_HostHangar->bad_s, xip, dry_d);
       return dry_d;
     }
@@ -707,8 +707,9 @@ _ho_discover(u2_ray  wir_r,
         jet_j->fol = fol;
         jet_j->fun_f = 0;
 
-        fprintf(stderr, "formula: dummy : %s, %x\n",
-            dry_d->cos_c, u2_mug(fol));
+#if 0
+        fprintf(stderr, "formula: dummy : %s, %x\n", dry_d->cos_c, u2_mug(fol));
+#endif
         _ho_cash_save(&u2_HostHangar->jac_s, fol, jet_j);
         return jet_j;
       }

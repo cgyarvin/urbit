@@ -35,7 +35,6 @@ u2_bl_done(u2_ray wir_r,
 u2_noun
 u2_bl_bail(u2_ray wir_r)
 {
-  c3_assert(0);
   longjmp((void *)u2_at_cord(u2_wire_jub_r(wir_r), c3_wiseof(jmp_buf)), 1);
   return u2_none;
 }
@@ -474,6 +473,9 @@ u2_bn_mp(u2_ray wir_r,
 u2_noun
 u2_bn_nock(u2_ray wir_r, u2_noun bus, u2_noun fol)
 {
+  if ( (u2_none == bus) || (u2_none == fol) ) {
+    return u2_bl_bail(wir_r);
+  }
   return u2_bl_good(wir_r, u2_wr_nock_main(wir_r, bus, fol));
 }
 
@@ -504,6 +506,24 @@ u2_bn_mang(u2_wire wir_r,
   va_end(vap);
 
   return u2_bn_nock(wir_r, gat, u2_t(gat));
+}
+
+/* u2_bn_hook():
+**
+**   Execute hook from core.
+*/ 
+u2_noun
+u2_bn_hook(u2_wire     wir_r,
+           u2_noun     cor,
+           const c3_c* tam_c)
+{
+  u2_noun vib = u2_sh_look(wir_r, cor, tam_c);
+
+  if ( u2_none == vib ) {
+    return u2_bl_bail(wir_r);
+  } else {
+    return u2_bn_nock(wir_r, cor, vib);
+  }
 }
 
 /* u2_bn_gart():

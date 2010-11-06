@@ -1,4 +1,12 @@
-=<  ^?([%mine ~ [%watt 274] ~] .)
+=<  ^?  
+      :^    %mine 
+          ~ 
+        [%watt 274]
+      :~
+        [%add !=(add)]
+        [%plow !=(plow)]
+      ==
+    .
 |*
   ::  Tier 1, light math
 ::::
@@ -1422,6 +1430,14 @@
 ::::
 ::
     plow
+  =<  ^?
+        :^    %mine 
+            !=(-) 
+          %plow
+        :~
+          [%read !=(read)]
+        ==
+      .
   |*
   ::
   ::::  Tier 6, group A:  initiation.
