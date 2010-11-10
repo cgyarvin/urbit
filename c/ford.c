@@ -22,9 +22,17 @@
         */
         u2_noun pyt;
 
+        /*  kol - kernel formula.
+        */
+        u2_noun kol;
+
         /*  pit - the innermost core.
         */
         u2_noun pit;
+
+        /*  ryd - a read gate.
+        */
+        u2_noun ryd;
       };
 
 
@@ -147,61 +155,122 @@ _ford_report(u2_ray wir_r)
   }
 }
 
+/* _ford_save_warm(): save engine as noun.
+*/
+static void
+_ford_save_warm(struct ford_state* fod_f,
+                const c3_c*        src_c)
+{
+  u2_wire wir_r = fod_f->wir_r;
+  u2_noun fat = u2_bn_cell(wir_r, fod_f->pyt, fod_f->kol);
+
+  u2_ux_write_deep(wir_r, fat, src_c, "noun");
+}
+
+/* _ford_gates(): add various convenience gates.
+*/
+static void 
+_ford_gates(struct ford_state* fod_f)
+{
+  u2_wire wir_r = fod_f->wir_r;
+
+  fod_f->ryd = u2_bn_hook
+    (wir_r, u2_bn_hook(wir_r, fod_f->pit, "plow"), "read");
+}
+
+/* _ford_load_warm(): load engine from warm image.
+*/
+static void
+_ford_load_warm(struct ford_state* fod_f,
+                const c3_c*        src_c) 
+{
+  u2_wire wir_r = fod_f->wir_r;
+  u2_noun fat = u2_ux_read_deep(wir_r, src_c, "noun");
+
+  if ( u2_none == fat ) {
+    u2_bl_bail(wir_r);
+  } 
+  else {
+    fod_f->pyt = u2_ba_sole(wir_r, u2_h(fat));
+    fod_f->kol = u2_ba_sole(wir_r, u2_t(fat));
+    fod_f->pit = u2_bn_nock(wir_r, _0, fod_f->kol);
+  }
+}
+
+/* _ford_load_cold(): load engine from cold source.
+*/
+static void
+_ford_load_cold(struct ford_state* fod_f,
+                const c3_c*        src_c)
+{
+  u2_wire wir_r = fod_f->wir_r;
+  u2_noun src   = u2_ux_read(wir_r, src_c, "watt");
+
+  if ( u2_none == src ) {
+    u2_bl_bail(wir_r);
+  }
+  else {
+    u2_noun gen, mil, pyt, kol, pit;
+
+    gen = u2_fj_watt(wir_r, src);
+    gen = u2_ba_sole(wir_r, gen);
+    mil = u2_fj_plow_mill(wir_r, u2_bc(wir_r, c3__cube, _0), gen);
+    pyt = u2_bi_h(wir_r, mil);
+    kol = u2_bi_t(wir_r, mil);
+    {
+      // XX: bad dag interaction in old plow code
+      //
+      u2_rl_gain(wir_r, kol);
+    }
+    kol = u2_ba_sole(wir_r, kol);
+    pit = u2_bn_nock(wir_r, _0, kol);
+
+    fod_f->kol = kol;
+    fod_f->pyt = pyt;
+    fod_f->pit = pit;
+
+    _ford_save_warm(fod_f, src_c);
+  }
+}
+
 /* ford_boot(): create the ford engine.
 */
 struct ford_state*
 ford_boot(c3_w        siz_w, 
           const c3_c* src_c)
 {
+  struct ford_state* fod_f = malloc(sizeof(struct ford_state));
   u2_ray wir_r;
 
   u2_boot(siz_w);
   wir_r = u2_wr_init(c3__warm, u2_ray_of(0, 0), u2_ray_of(1, 0));
+  fod_f->wir_r = wir_r;
 
   {
-    struct ford_state*  fod_f = malloc(sizeof(struct ford_state));
-    u2_weak             src   = u2_ux_read(wir_r, src_c, "watt");
+    u2_ray jub_r = u2_bl_open(wir_r);
 
-    if ( (0 == fod_f) || (u2_none == src) ) {
-      perror(src_c);
+    fprintf(stderr, "boot: %s\n", src_c);
+    if ( u2_bl_set(wir_r) ) {
+      u2_bl_done(wir_r, jub_r);
+      fprintf(stderr, "boot failed\n");
+
+      free(fod_f);
       return 0;
     }
     else {
-      u2_ray jub_r = u2_bl_open(wir_r);
+      u2_bx_boot(wir_r);
 
-      fprintf(stderr, "boot: %s\n", src_c);
-      if ( u2_bl_set(wir_r) ) {
-        u2_bl_done(wir_r, jub_r);
-        fprintf(stderr, "boot failed\n");
-        return 0;
+      if ( u2_yes == u2_ux_fresh(src_c, "watt", "noun") ) {
+        _ford_load_warm(fod_f, src_c);
+      } else {
+        _ford_load_cold(fod_f, src_c);
       }
-      else {
-        u2_noun gen, mil, pyt, fol, pit;
+      _ford_gates(fod_f);
 
-        u2_bx_boot(wir_r);
+      u2_bl_done(wir_r, jub_r);
+      _ford_report(wir_r);
 
-        gen = u2_fj_watt(wir_r, src);
-        gen = u2_ba_sole(wir_r, gen);
-        mil = u2_fj_plow_mill(wir_r, u2_bc(wir_r, c3__cube, _0), gen);
-        pyt = u2_bi_h(wir_r, mil);
-        fol = u2_bi_t(wir_r, mil);
-        {
-          // XX: bad dag interaction in old plow code
-          //
-          u2_rl_gain(wir_r, fol);
-        }
-        fol = u2_ba_sole(wir_r, fol);
-        pit = u2_bn_nock(wir_r, _0, fol);
-
-        u2_bl_done(wir_r, jub_r);
-
-        _ford_report(wir_r);
-
-        fod_f->wir_r = wir_r;
-        fod_f->pyt = pyt;
-        fod_f->pit = pit;
-        return fod_f;
-      }
+      return fod_f;
     }
   }
 }
@@ -229,10 +298,12 @@ ford_test(struct ford_state* fod_f,
       fprintf(stderr, "test failed\n");
     }
     else {
-      u2_noun plo = u2_bn_hook(wir_r, fod_f->pit, "plow");
-      u2_noun ryd = u2_bn_hook(wir_r, plo, "read");
+      u2_noun vor;
 
-      printf("got a read core - %x\n", ryd);
+      printf("about to read...\n");
+      vor = u2_bn_mung(wir_r, fod_f->ryd, src);
+      u2_err(wir_r, "read", vor);
+
       u2_bl_done(wir_r, jub_r);
     }
   }
@@ -264,7 +335,7 @@ ford_line(struct ford_state* fod_f,
 {
   u2_ray  wir_r = fod_f->wir_r;
   u2_ray  cap_r = u2_rail_cap_r(wir_r);
-  
+ 
   u2_bx_boot(wir_r);
   u2_rl_leap(wir_r, c3__warm);
   {
@@ -274,29 +345,48 @@ ford_line(struct ford_state* fod_f,
       u2_bl_done(wir_r, jub_r);
     }
     else {
-      u2_noun gat, sam, pro;
+      if ( !arg_c && !strcmp(cmd_c, "test") ) {
+        ford_test(fod_f, "watt/273");
+      }
+      else {
+#if 0
+        u2_noun cmd = u2_bn_string(wir_r, cmd_c);
+        u2_noun cor = u2_bn_mung(wir_r, fod_f->ryd, cmd);
 
-      /* Construct gate from command.
-      */
-      gat = _ford_from(fod_f, cmd_c);
+        u2_burp(wir_r, 0, u2_fj_prep_noun(wir_r, cor));
 
-      /* Construct sample from argument.
-      */
-      sam = _ford_from(fod_f, arg_c);
+        if ( arg_c ) {
+          u2_noun arg = u2_bn_string(wir_r, arg_c);
+          u2_noun sam = u2_bn_mung(wir_r, fod_f->ryd, arg);
 
-      /* Construct product.
-      */
-      pro = u2_wr_nock_mung(wir_r, gat, sam);
+          u2_burp(wir_r, 0, u2_fj_prep_noun(wir_r, sam));
+        }
+#else
+        u2_noun gat, sam, pro;
 
-      /* Print, if applicable.
-      */
-      {
-        if ( u2_none != pro ) {
-          u2_prep pap = u2_fj_prep_noun(wir_r, pro);
+        /* Construct gate from command.
+        */
+        gat = _ford_from(fod_f, cmd_c);
 
-          u2_burp(wir_r, 0, pap);
+        /* Construct sample from argument.
+        */
+        sam = _ford_from(fod_f, arg_c);
+
+        /* Construct product.
+        */
+        pro = u2_wr_nock_mung(wir_r, gat, sam);
+
+        /* Print, if applicable.
+        */
+        {
+          if ( u2_none != pro ) {
+            u2_prep pap = u2_fj_prep_noun(wir_r, pro);
+
+            u2_burp(wir_r, 0, pap);
+          }
         }
       }
+#endif
     }
   }
   u2_rl_fall(wir_r);

@@ -20,7 +20,11 @@
     extern u2_ho_jet j2_mbj(Pit, mod)[];
     extern u2_ho_jet j2_mbj(Pit, mul)[];
     extern u2_ho_jet j2_mbj(Pit, sub)[];
-  
+ 
+  /* tier 3
+  */
+    extern u2_ho_jet j2_mbj(Pit, mug)[];
+
 /* structures
 */
   static u2_ho_driver 
@@ -38,6 +42,10 @@
       { j2_sb(Pit, mod), j2_mbj(Pit, mod), 0, 0, u2_none },
       { j2_sb(Pit, mul), j2_mbj(Pit, mul), 0, 0, u2_none },
       { j2_sb(Pit, sub), j2_mbj(Pit, sub), 0, 0, u2_none },
+
+    /* tier 3
+    */
+      { j2_sb(Pit, mug), j2_mbj(Pit, mug), 0, 0, u2_none },
     { }
   };
 

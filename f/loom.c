@@ -134,31 +134,47 @@ u2_weak
 u2_frag(u2_atom a,
         u2_noun b)
 {
-  c3_w  fol_w = (u2_met(0, a) - 1);
-  c3_w  i_w;
-  mpz_t a_mp;
+  if ( u2_fly_is_cat(a) ) {
+    c3_w dep_w = u2_ax_dep(a);
 
-  c3_assert(u2_none != b);
-  u2_mp(a_mp, a);
- 
-  for ( i_w=0; i_w < fol_w; i_w++ ) {
-    c3_w lum_w = (fol_w - (i_w + 1));
-
-    if ( u2_no == u2_dust(b) ) {
-      mpz_clear(a_mp);
-
-      return u2_none;
-    }
-    else {
-      if ( (mpz_tstbit(a_mp, lum_w) == 0) ) {
-        b = u2_h(b);
-      } else {
+    while ( dep_w ) {
+      if ( a & (1 << (dep_w - 1)) ) {
         b = u2_t(b);
+      } else {
+        b = u2_h(b);
+      }
+      dep_w--;
+    }
+
+    return b;
+  }
+  else {
+    c3_w  fol_w = (u2_met(0, a) - 1);
+    c3_w  i_w;
+    mpz_t a_mp;
+
+    c3_assert(u2_none != b);
+    u2_mp(a_mp, a);
+   
+    for ( i_w=0; i_w < fol_w; i_w++ ) {
+      c3_w lum_w = (fol_w - (i_w + 1));
+
+      if ( u2_no == u2_dust(b) ) {
+        mpz_clear(a_mp);
+
+        return u2_none;
+      }
+      else {
+        if ( (mpz_tstbit(a_mp, lum_w) == 0) ) {
+          b = u2_h(b);
+        } else {
+          b = u2_t(b);
+        }
       }
     }
+    mpz_clear(a_mp);
+    return b;
   }
-  mpz_clear(a_mp);
-  return b;
 }
 
 /* u2_mug():
@@ -813,8 +829,7 @@ u2_met(c3_y    a_y,
       case 0:
       case 1:
       case 2: {
-        /* woq_y: table of bits per byte
-        ** col_w: number of bits in (daz_w)
+        /* col_w: number of bits in (daz_w)
         ** bif_w: number of bits in (b)
         */
         c3_w bif_w, col_w;

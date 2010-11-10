@@ -144,7 +144,7 @@ main(int  argc,
     fprintf(stderr, "ford: boot failed\n");
     return 1;
   }
-  ford_test(fod, "watt/273");
+  // ford_test(fod, "watt/273");
 
   while ( 1 ) {
     char *line = _console_line(history_name);
@@ -156,10 +156,7 @@ main(int  argc,
       char *cmd = line;
       char *arg = strchr(line, ' ');
 
-      if ( 0 == arg ) {
-        free(line);
-        continue;
-      } else {
+      if ( 0 != arg ) {
         *arg++ = 0; 
       }
       ford_line(fod, cmd, arg);

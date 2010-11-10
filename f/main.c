@@ -4,6 +4,52 @@
 */
 #include "all.h"
 
+/* _nock_top(wir, bus, fol):
+**
+**  wir:  wire
+**  bus:  subject
+**  fol:  formula
+**
+**    Execute `(nock bus fol)`, allocating on `hat`.
+**
+**    If computation fails for any reason, return `u2_none`.
+**    Failure must leave the loom undamaged.
+*/
+static u2_weak
+_nock_top(u2_ray  wir_r,
+          u2_noun bus,
+          u2_noun fol)
+{
+  /* Enter the interpreter.
+  */
+  switch ( u2_rail_hip_m(wir_r) ) {
+    default: c3_assert(0); return u2_none;
+
+    case c3__cold: {
+      u2_ray  cap_r = u2_rail_cap_r(wir_r);
+      u2_ray  hat_r = u2_rail_hat_r(wir_r);
+      u2_ray  mat_r = u2_rail_mat_r(wir_r);
+      u2_ray  rut_r = u2_rail_rut_r(wir_r);
+      u2_noun pro;
+
+      pro = u2_wr_nock_flee(wir_r, cap_r, bus, fol);
+
+      if ( u2_none == pro ) {
+        u2_rail_cap_r(wir_r) = cap_r;
+        u2_rail_hat_r(wir_r) = hat_r;
+        u2_rail_mat_r(wir_r) = mat_r;
+        u2_rail_rut_r(wir_r) = rut_r;
+        u2_rail_hip_m(wir_r) = c3__cold;
+      }
+      return pro;
+    }
+
+    case c3__warm: {
+      return u2_wr_nock_keep(wir_r, bus, fol);
+    }
+  }
+}
+
 /* u2_wr_nock_hint():
 */
 u2_weak
@@ -53,7 +99,7 @@ u2_wr_nock_jet(u2_ray  wir_r,
 
           return u2_none;
         }
-        else if ( u2_none == (vet = u2_wr_nock_main(wir_r, bus, fol)) ) {
+        else if ( u2_none == (vet = _nock_top(wir_r, bus, fol)) ) {
           u2_ho_dive(wir_r, xip);
 
           u2_rl_fall(wir_r);
@@ -110,35 +156,7 @@ u2_wr_nock_main(u2_ray  wir_r,
       return pro;
     }
   }
-
-  /* Enter the interpreter.
-  */
-  switch ( u2_rail_hip_m(wir_r) ) {
-    default: c3_assert(0); return u2_none;
-
-    case c3__cold: {
-      u2_ray  cap_r = u2_rail_cap_r(wir_r);
-      u2_ray  hat_r = u2_rail_hat_r(wir_r);
-      u2_ray  mat_r = u2_rail_mat_r(wir_r);
-      u2_ray  rut_r = u2_rail_rut_r(wir_r);
-      u2_noun pro;
-
-      pro = u2_wr_nock_flee(wir_r, cap_r, bus, fol);
-
-      if ( u2_none == pro ) {
-        u2_rail_cap_r(wir_r) = cap_r;
-        u2_rail_hat_r(wir_r) = hat_r;
-        u2_rail_mat_r(wir_r) = mat_r;
-        u2_rail_rut_r(wir_r) = rut_r;
-        u2_rail_hip_m(wir_r) = c3__cold;
-      }
-      return pro;
-    }
-
-    case c3__warm: {
-      return u2_wr_nock_keep(wir_r, bus, fol);
-    }
-  }
+  return _nock_top(wir_r, bus, fol);
 }
 
 /* u2_wr_nock_mung(): call with gate and sample.

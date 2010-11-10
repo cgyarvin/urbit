@@ -1112,8 +1112,11 @@ u2_rl_bytes(u2_ray      ral_r,
   {
     c3_w len_w = (a_w + 3) >> 2;
 
-    if ( u2_no == u2_rl_open(ral_r, 
-                             (len_w + c3_wiseof(u2_loom_atom))) ) {
+    if ( len_w >= (1 << 27) ) {
+      u2_ho_warn_here();
+      return u2_none;
+    }
+    if ( u2_no == u2_rl_open(ral_r, (len_w + c3_wiseof(u2_loom_atom))) ) {
       u2_ho_warn_here();
       return u2_none;
     }
@@ -1387,6 +1390,10 @@ u2_rl_words(u2_ray      ral_r,
   /* Allocate, fill, return.
   */
   {
+    if ( a_w >= (1 << 27) ) {
+      u2_ho_warn_here();
+      return u2_none;
+    }
     if ( u2_no == u2_rl_open(ral_r, (a_w + c3_wiseof(u2_loom_atom))) ) {
       return u2_none;
     }

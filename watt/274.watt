@@ -1206,6 +1206,29 @@
     ==
   ::::
   ::
+      gall
+    =+  [von==+([* *] |:(-<)) fel=rule]
+    |:
+    =+  doc=doc.fel
+    |=
+    ^-  ((give -<+.von) doc)
+    =+  vex=(fel doc)
+    ?-  -.vex
+        |   [& p=-<+.von q=doc]
+        &   
+      =+  wag=$(doc q.vex)
+      ?-  -.wag
+        &   [& p=(von [p.vex p.wag]) q=q.wag]
+      ==
+    ==
+  ::::
+  ::
+      gore
+    =+  [von==+([p=* q=*] |:(-<)) bus=rule fel=rule]
+    |:
+    |~((comp von) fel (gall von |~(pfix bus fel)))
+  ::::
+  ::
       shim
     =+  zep=[p=*byte q=*byte]
     |=
@@ -1272,6 +1295,7 @@
       hit   |~(pose dit (cook =+(*byte |=((sub -< 87))) (shim 'a' 'f')))
       hop   (just '!')
       lep   (just '(')
+      lib   |~(pose gap (free ~))
       lom   (just ';')
       low   (shim 'a' 'z')
       mes   (cook =+([@ @] |=((add (mul 16 -<-) -<+))) |~(plug hit hit))
@@ -1465,10 +1489,10 @@
   ::::
   ::
       read
-    =+  src=@
+    =+  tex=@
     |=
     ^-  *gene
-    (scan (rip 3 src))
+    (scan (rip 3 tex))
   ::::
   ::
       scan
@@ -1484,7 +1508,7 @@
     =+  doc=tube
     |:
     ^-  ((give *gene) doc)
-    =<  (main doc)
+    =<  ((ifix [lib lib] main) doc)
     =+  tal=`?`&
     =+  wer=`?`|
     |*
@@ -1501,15 +1525,15 @@
       |:
       ^-  ((give *gene) doc)
       ?.  wer
-        %.(doc mine)
-      =+  lyf=%.(doc mine)
+        %.(doc mond)
+      =+  lyf=%.(doc mond)
       ?-  lyf
         [| *]   lyf
         [& *]   [& [%zemp [der.doc der.q.lyf] p.lyf] q.lyf]
       ==
     ::::
     ::
-        mine
+        mond
       =+  doc=tube
       |:
       ^-  ((give *gene) doc)
@@ -1540,7 +1564,7 @@
       %.  doc
       %+  cook
         =+([* *] |:([%claf [%mack -<- ~] -<+]))
-      |~((glue dig) erop wide)
+      |~((glue dig) erop mond)
     ::::
     ::
         widb
@@ -1550,7 +1574,7 @@
       %.  doc 
       %+  stag
         %bran
-      |~((glue ben) sym wide)
+      |~((glue ben) sym mond)
     ::::
     ::
         widc
@@ -1560,20 +1584,20 @@
       %.  doc 
       |~  pose
         (stag %prex (ifix [nom mon] kban))
-        (stag %slax (ifix [sud dus] (more ace wide)))
+        (stag %slax (ifix [sud dus] (more ace mond)))
         (stag %rond (ifix [der red] kban))
-        (stag %vern |~(pfix hop wide))
-        (stag %mast |~(pfix amp wide))
-        (stag %teck |~(pfix ras wide))
-        (stag %fist |~(pfix cab wide))
-        (stag %cast |~(plug |~(pfix tic wide) |~(pfix tic wide)))
-        (stag %fung (ifix [lep pel] (most ace wide)))
+        (stag %vern |~(pfix hop mond))
+        (stag %mast |~(pfix amp mond))
+        (stag %teck |~(pfix ras mond))
+        (stag %fist |~(pfix cab mond))
+        (stag %cast |~(plug |~(pfix tic mond) |~(pfix tic mond)))
+        (stag %fung (ifix [lep pel] (most ace mond)))
       ::
         %+  stag
           %hang
         %+  ifix
           [|~(plug sig lep) pel] 
-        |~(gunk erop wide (stag %prex (most ace wide)))
+        |~(gunk erop mond (stag %prex (most ace mond)))
       ==
     ::::
     ::
@@ -1685,11 +1709,10 @@
         nori  |=((jack |~(gunk main kban)))
         norj  |=((jack |~(gunk erop krac)))
         nork  |=(|~(gunk main |~(plug main (free ~))))
-        norl  |=((free ~))
-        norn  |=(=>(.(wer &) main))
-        noro  |=(|~(plug |~(pose |~(sfix ppro muck) (free ~)) main))
-        norp  |=((jack |~(gunk erop main krac)))
-        norq  |=(|~(gunk erop main main))
+        norl  |=(=>(.(wer &) main))
+        norn  |=(|~(plug |~(pose |~(sfix ppro muck) (free ~)) main))
+        noro  |=((jack |~(gunk erop main krac)))
+        norp  |=(|~(gunk erop main main))
     ::::
     ::
         norm
@@ -1701,6 +1724,7 @@
         |~(pfix bar nbar)
         |~(pfix ben nben)
         |~(pfix dig ndig)
+        |~(pfix dot ndot)
         |~(pfix hat nhat)
         |~(pfix hop nhop)
         |~(pfix lom nlom)
@@ -1726,9 +1750,9 @@
     ::
         nbar
       |~  pose
-        (cape nub %vamp noro)
-        (cape ben %lome noro)
-        (cape dig %sunt noro)
+        (cape nub %vamp norn)
+        (cape ben %lome norn)
+        (cape dig %sunt norn)
         (cape ras %pank nore)
         (cape mit %tash nore)
         (cape ask %rond nord)
@@ -1755,6 +1779,15 @@
       ==
     ::::
     ::
+        ndot
+      |~  pose
+        (cape ben %sing norb)
+        (cape hat %vint nora)
+        (cape ask %dust nora)
+        (cape ras %sail norb)
+      ==
+    ::::
+    ::
         nhat
       |~  pose
         (cape nub %cast norb)
@@ -1771,9 +1804,9 @@
     ::
         nhop
       |~  pose
-        (cape dax %zush norn)
-        (cape hop %zike norl)
-        (cape mit %zoot norl)
+        (cape dax %zush norl)
+        (cold [%zike ~] hop)
+        (cold [%zoot ~] mit)
         (cape dig %zalt nora)
         (cape ben %zond nora)
       ==
@@ -1791,34 +1824,40 @@
         (cape ben %mack norj)
         (cape ras %teck nora)
         (cape nub %fung nork)
-        (cape bar %gath norp)
+        (cape bar %gath noro)
         (cape dot %gnum norb)
         (cape dig %mung norb)
         (cape pod %bung norc)
         (cape hat %tung norf)
-        (cape sig %hang norq)
+        (cape sig %hang norp)
+      ==
+    ::::
+    ::
+        ronk
+      |~  pose
+        %+  cook
+          =+(* |:([-< ~]))
+        |~  pose
+          (stag %pane sym)
+          (stag %frag |~(pose |~(pfix dot del) (cold 1 dot) xnub))
+        ==
+      ::
+        |~  plug
+          (cold [%pane %%] buc)
+          %+  gall
+            =+([*span *rope] |=([-<- [%frag 2] -<+]))
+          (cold [%pane %%] buc)
+        ==
       ==
     ::::
     ::
         erop
       %+  cook
-        =+(* |:((flop `*rope`-<)))
-      %+  most
+        =+(* |:((flop -<)))
+      %^    gore
+          =+([*rope *rope] |=((weld -<- -<+)))
         dot
-      |~  pose
-        (stag %pane sym)
-        %+  cook
-          =+(* |:([%pane -<]))
-        sym
-      ::
-        %+  cook
-          =+(* |:([%frag -<]))
-        |~  pose
-          |~(pfix dot del)
-          (cold 1 dot)
-          xnub
-        ==
-      ==
+      ronk
     ::::
     ::
         ppro
@@ -2114,14 +2153,14 @@
     =+  ver=*(pool &[*type *gene])
     =+  bug=@
     =+  sut=*type
-    |*  #(..plow %rose 6)
+    |*
       rose  . 
     ::::
     ::
-        pass  =+(gen=*gene |=(#(..rose %pass 6) ?>((show gen) (make gen))))
-        shop  =+(gen=*gene |=(#(..rose %shop 6) ?>((show gen) (play gen))))
-        wish  =+(gen=*gene |=(#(..rose %wish 6) [p=(play gen) q=(make gen)]))
-        mill  =+(gen=*gene |=(#(..rose %mill 6) ?>((show gen) (wish gen))))
+        pass  =+(gen=*gene |=(?>((show gen) (make gen))))
+        shop  =+(gen=*gene |=(?>((show gen) (play gen))))
+        wish  =+(gen=*gene |=([p=(play gen) q=(make gen)]))
+        mill  =+(gen=*gene |=(?>((show gen) (wish gen))))
     ::::
     ::
         both
@@ -2193,7 +2232,7 @@
     ::
         make
       =+  [gen=*gene]
-      |=  #(..rose %make 6)
+      |=  
       =>  |*
           ::::
           ::
@@ -2353,7 +2392,7 @@
     ::
         play
       =+  [gen=*gene]
-      |=  #(..rose %play 6)
+      |=
       ^-  *type
       ?-  -.gen
           %bone   [%cube p.gen]
@@ -2430,7 +2469,7 @@
     ::
         show
       =+  [gen=*gene]
-      |=  #(..rose %show 6)
+      |=
       ^-  ?
       ?-  -.gen
           %bone   &

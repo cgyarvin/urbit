@@ -195,7 +195,10 @@
 #     define u2_at_pug_len(a)   u2_at_ray((1 + u2_pug_a(a)))
 #     define u2_at_pug_buf(a, b) \
         u2_at_ray((2 + (b) + u2_pug_a(a)))
- 
+
+#     define u2_atom_word(a, b) \
+        ( u2_fly_is_cat(a) ? (a) : *u2_at_pug_buf(a, b) )
+
     /*** Word axis macros.
     ****
     **** Use these on axes known to be in 31-bit range.
