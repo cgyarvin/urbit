@@ -26,8 +26,7 @@ LEX=lex
 
 INCLUDE=include
 GENERATED=generated
-DEFINES=-DU3_OS_$(OS) -DU3_OS_ENDIAN_$(ENDIAN)\
-	-DU4_ENDIAN_$(ENDIAN) -DU4_OS_$(OS)
+DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN)
 CFLAGS=-O2 -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 CWFLAGS=-Wall
 
@@ -84,7 +83,8 @@ J1_OFILES=\
        j/1/sub.o
 
 J3_OFILES=\
-       j/3/mug.o
+       j/3/mug.o \
+       j/3/rip.o
 
 J_OFILES=\
        $(J1_OFILES) \

@@ -292,6 +292,31 @@
                       c3_w        a_w,
                       const c3_y* b_y);
 
+        /* u2_rl_slab():
+        **
+        **   Create a blank atomic slab of `len` words.
+        */
+          u2_ray
+          u2_rl_slab(u2_rail ral_r,
+                     c3_w    len_w);
+
+        /* u2_rl_mint():
+        **
+        **   Initialize slab `sal` as an atom, externally measured.
+        */
+          u2_atom
+          u2_rl_mint(u2_rail ral_r,
+                     u2_ray  sal_r,
+                     c3_w    len_w);
+
+        /* u2_rl_malt():
+        **
+        **   Initialize slab `sal` as an atom, internally measured.
+        */
+          u2_atom
+          u2_rl_malt(u2_rail ral_r,
+                     u2_ray  sal_r);
+
         /* u2_rl_string():
         **
         **   u2_rl_bytes(ral_r, strlen(a_c), (c3_y *)a_c);

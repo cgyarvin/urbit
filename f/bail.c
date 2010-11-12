@@ -39,6 +39,18 @@ u2_bl_bail(u2_ray wir_r)
   return u2_none;
 }
 
+/* u2_bl_some(): test for zero ray.
+*/
+u2_ray
+u2_bl_some(u2_wire wir_r,
+           u2_ray  ray_r)
+{
+  if ( 0 == ray_r ) {
+    return u2_bl_bail(wir_r);
+  }
+  else return ray_r;
+}
+
 /* u2_bl_good(): test for u2_none.
 */
 u2_noun
@@ -684,4 +696,15 @@ u2_bn_words(u2_ray      wir_r,
             const c3_w* b_w)
 {
   return u2_bl_good(wir_r, u2_rl_words(wir_r, a_w, b_w));
+}
+
+/* u2_bn_slab():
+**
+**   Create an atomic slab of `len` words.
+*/
+u2_ray
+u2_bn_slab(u2_wire wir_r,
+           c3_w    len_w)
+{
+  return u2_bl_some(wir_r, u2_rl_slab(wir_r, len_w));
 }

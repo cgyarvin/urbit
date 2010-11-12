@@ -42,6 +42,11 @@
         u2_noun
         u2_bl_good(u2_wire wir_r, u2_weak som);
 
+      /* u2_bl_some(): test for zero ray.
+      */
+        u2_ray
+        u2_bl_some(u2_wire wir_r, u2_ray ray_r);
+
       /* u2_bl_flat(): force to atom.
       */
         u2_atom
@@ -148,6 +153,16 @@
                       c3_w    b_w,
                       c3_w*   c_w,
                       u2_noun d);
+
+        /** Allocation.
+        */
+          /* u2_bn_slab():
+          **
+          **   Create an atomic slab of `len` words.
+          */
+            u2_ray
+            u2_bn_slab(u2_wire wir_r,
+                       c3_w    len_w);
 
         /** Noun construction.
         **/

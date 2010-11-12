@@ -109,6 +109,9 @@ u2_wr_nock_jet(u2_ray  wir_r,
         }
         else {
           if ( u2_no == u2_sing(vet, pro) ) {
+            u2_err(wir_r, "vet", vet);
+            u2_err(wir_r, "pro", pro);
+
             u2_ho_dive(wir_r, xip);
           }
           u2_rl_fall(wir_r);

@@ -348,7 +348,6 @@
 ::
     axis  &@
     bloq  &@
-    mash  &@
 ::::
 ::
     cap
@@ -482,9 +481,10 @@
 ::::
 ::
     mug
+  =<  ^?([%mine !=(->) %mug ~] .)
   =+  a=*
   |=
-  ^-  *mash
+  ^-  @
   =<  $
   |*
   ::::
@@ -516,13 +516,13 @@
     =+  [b=@]
     |=
     =-  (end 5 1 -)
-    %+  add
-      (sbox (cut 3 [1 0] b))
-    %+  add
-      (sbox (cut 3 [1 1] b))
-    %+  add
-      (sbox (cut 3 [1 2] b))
-    (sbox (cut 3 [1 3] b))
+    (dice 3 (dice 2 (dice 1 (dice 0 b))))
+  ::::
+  ::
+      dice
+    =+  [b=@ c=@]
+    |=
+    (mix c (sbox (cut 3 [1 b] c))) 
   ::::
   ::
       sbox
@@ -599,6 +599,7 @@
 ::::
 ::
     rip
+  =<  ^?([%mine !=(->) %rip ~] .)
   =+  [a=*bloq b=@]
   |=
   ^-  *(list &@)

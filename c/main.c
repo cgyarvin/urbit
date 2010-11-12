@@ -89,7 +89,7 @@ main(int  argc,
   char *history_name = _console_init();
   void *fod;
 
-  if ( !(fod = ford_boot(26)) ) {
+  if ( !(fod = ford_boot(28)) ) {
     fprintf(stderr, "ford: boot failed\n");
     return 1;
   }
@@ -112,8 +112,7 @@ main(int  argc,
   /* ford_boot(): create the ford engine.
   */
     struct ford_state*
-    ford_boot(uint32_t    siz_w,
-              const char* src_c);
+    ford_boot(const char* src_c);
 
   /* ford_line(): execute a ford command.
   */
@@ -140,7 +139,7 @@ main(int  argc,
   char *history_name = _console_init();
   void *fod;
 
-  if ( !(fod = ford_boot(28, "watt/274")) ) {
+  if ( !(fod = ford_boot("watt/274")) ) {
     fprintf(stderr, "ford: boot failed\n");
     return 1;
   }

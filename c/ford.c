@@ -41,8 +41,7 @@
     /* ford_boot(): create the ford engine.
     */
       struct ford_state*
-      ford_boot(c3_w        siz_w,
-                const c3_c* src_c);
+      ford_boot(const c3_c* src_c);
 
     /* ford_line(): execute a ford command.
     */
@@ -236,13 +235,12 @@ _ford_load_cold(struct ford_state* fod_f,
 /* ford_boot(): create the ford engine.
 */
 struct ford_state*
-ford_boot(c3_w        siz_w, 
-          const c3_c* src_c)
+ford_boot(const c3_c* src_c)
 {
   struct ford_state* fod_f = malloc(sizeof(struct ford_state));
   u2_ray wir_r;
 
-  u2_boot(siz_w);
+  u2_boot();
   wir_r = u2_wr_init(c3__warm, u2_ray_of(0, 0), u2_ray_of(1, 0));
   fod_f->wir_r = wir_r;
 

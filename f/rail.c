@@ -1420,3 +1420,106 @@ u2_rl_words(u2_ray      ral_r,
     }
   }
 }
+
+/* u2_rl_slab():
+**
+**   Create a blank atomic slab of `len` words.
+*/
+u2_ray
+u2_rl_slab(u2_rail ral_r,
+           c3_w    len_w)
+{
+  u2_ray  nov_r = u2_rl_ralloc(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
+  u2_atom nov   = u2_pug_of(nov_r, 0);
+
+  *u2_at_dog_mug(nov) = 0;
+  *u2_at_pug_len(nov) = len_w;
+
+  /* Clear teh slab.
+  */
+  {
+    c3_w i_w;
+
+    for ( i_w=0; i_w < len_w; i_w++ ) {
+      *u2_at_pug_buf(nov, i_w) = 0;
+    }
+  }
+  return (nov_r + c3_wiseof(u2_loom_atom));
+}
+
+/* u2_rl_mint():
+**
+**   Initialize slab `sal` as an atom, externally measured.
+*/
+u2_atom
+u2_rl_mint(u2_rail ral_r,
+           u2_ray  sal_r,
+           c3_w    len_w)
+{
+  u2_ray  nov_r = (sal_r - c3_wiseof(u2_loom_atom));
+  u2_atom nov = u2_pug_of(nov_r, 0);
+
+  /* See if we can free the slab entirely.
+  */
+  if ( len_w == 0 ) {
+    u2_rl_lose(ral_r, nov);
+
+    return _0;
+  } 
+  else if ( len_w == 1 ) {
+    c3_w low_w = *u2_at_pug_buf(nov, 0);
+
+    if ( u2_fly_is_cat(low_w) ) {
+      u2_rl_lose(ral_r, nov);
+
+      return low_w;
+    }
+  }
+
+  /* See if we can strip off a block on the end.
+  */
+  {
+    c3_w old_w = *u2_at_pug_len(nov);
+    c3_w dif_w = (len_w - old_w);
+
+    if ( dif_w >= 6 ) {
+      u2_ray box_r = nov_r - c3_wiseof(u2_loom_rail_box);
+      c3_w   siz_w = *u2_at_ray(box_r) - dif_w;
+
+      /* Split off a new free block at the end.  Resize this one.
+      */
+      u2_ray end_r = (nov_r + c3_wiseof(u2_loom_atom) + len_w + 1);
+
+      _rl_bloq_make(ral_r, end_r, dif_w, 0);
+      _rl_bloq_attach(ral_r, end_r);
+
+      *u2_at_ray(box_r) = siz_w;
+      *u2_at_ray(box_r + siz_w - 1) = siz_w;
+
+      c3_assert(end_r == (box_r + siz_w));
+    }
+    *u2_at_pug_len(nov) = len_w;
+  }
+  return nov;
+}
+
+
+/* u2_rl_malt():
+**
+**   Initialize slab `sal` as an atom, internally measured.
+*/
+u2_atom
+u2_rl_malt(u2_rail ral_r,
+           u2_ray  sal_r)
+{
+  u2_ray  nov_r = (sal_r - c3_wiseof(u2_loom_atom));
+  u2_atom nov = u2_pug_of(nov_r, 0);
+  c3_w    len_w;
+
+  for ( len_w = *u2_at_pug_len(nov); len_w; len_w-- ) {
+    if ( 0 != *u2_at_pug_buf(nov, (len_w - 1)) ) {
+      break;
+    }
+  }
+  return u2_rl_mint(ral_r, sal_r, len_w);
+}

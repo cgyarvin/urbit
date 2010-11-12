@@ -7,17 +7,9 @@
 
   /** Global variables and definitions.
   **/
-#ifdef U2_GLOBAL
-    // c3_w Loom[1024 * 1024 * 1024];
-    //  #define LoomSize (1024 * 1024 * 1024)
-    c3_w *Loom;
-    c3_w LoomSize;
-    c3_w LoomEnd;
-#else
-    extern c3_w *Loom;
-    extern c3_w LoomSize;
-    extern c3_w LoomEnd;
-#endif
+#   define Loom ((c3_w *)U2_OS_LoomBase)
+#   define LoomSize (1 << 28)
+#   define LoomEnd  (LoomSize - 1)
 
   /** Data types.
   **/
@@ -373,7 +365,7 @@
         **   Instantiate the loom.
         */
           void
-          u2_boot(c3_y a_y);
+          u2_boot(void);
 
         /* u2_dust():
         **

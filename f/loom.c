@@ -2,7 +2,6 @@
 **
 ** This file is in the public domain.
 */
-#include <sys/resource.h>
 #include "all.h"
 
 /* u2_boot():
@@ -10,15 +9,13 @@
 **   Instantiate the loom.
 */
 void
-u2_boot(c3_y a_y)
+u2_boot(void)
 {
-  c3_assert(a_y >= 8);
-  c3_assert(a_y <= 28);
-  {
-    Loom = malloc(4 << a_y);
-    LoomSize = (1 << a_y);
-    LoomEnd = (LoomSize - 1);
-  }
+   mmap((void *)U2_OS_LoomBase,
+        (LoomSize << 2),
+        (PROT_READ | PROT_WRITE), 
+        (MAP_ANON | MAP_FIXED),
+        -1, 0);
 
   {
     struct rlimit rlm;
