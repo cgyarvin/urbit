@@ -69,33 +69,33 @@ P_OFILES=\
        p/saur.o \
        p/watt.o
 
-J1_OFILES=\
-       j/1/add.o \
-       j/1/bex.o \
-       j/1/dec.o \
-       j/1/div.o \
-       j/1/gte.o \
-       j/1/gth.o \
-       j/1/lte.o \
-       j/1/lth.o \
-       j/1/mod.o \
-       j/1/mul.o \
-       j/1/sub.o
+J274_1_OFILES=\
+       gen274/1/add.o \
+       gen274/1/bex.o \
+       gen274/1/dec.o \
+       gen274/1/div.o \
+       gen274/1/gte.o \
+       gen274/1/gth.o \
+       gen274/1/lte.o \
+       gen274/1/lth.o \
+       gen274/1/mod.o \
+       gen274/1/mul.o \
+       gen274/1/sub.o
 
-J3_OFILES=\
-       j/3/mug.o \
-       j/3/rip.o
+J274_3_OFILES=\
+       gen274/3/mug.o \
+       gen274/3/rip.o
 
-J_OFILES=\
-       $(J1_OFILES) \
-       $(J3_OFILES) \
-       j/watt.o
+J274_OFILES=\
+       $(J274_1_OFILES) \
+       $(J274_3_OFILES) \
+       gen274/watt.o
 
 OFILES=\
+       $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
-       $(J_OFILES) \
-       $(C_OFILES)
+       $(J274_OFILES)
 
 $(BIN)/ford: $(OFILES)
 	mkdir -p $(BIN)

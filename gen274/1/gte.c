@@ -3,7 +3,7 @@
 ** This file is in the public domain.
 */
 #include "all.h"
-#include "hpit.h"
+#include "../pit.h"
 
 /* functions
 */
