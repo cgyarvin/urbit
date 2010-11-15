@@ -8,31 +8,31 @@
 /* functions
 */
   u2_atom
-  j2_mbc(Pit, gth)(u2_wire wir_r, u2_atom dis, u2_atom dat)
+  j2_mbc(Pit, gth)(u2_wire wir_r, u2_atom a, u2_atom b)
   {
-    mpz_t   dis_mp, dat_mp;
+    mpz_t   a_mp, b_mp;
     u2_flag cmp;
 
-    u2_mp(dis_mp, dis);
-    u2_mp(dat_mp, dat);
+    u2_mp(a_mp, a);
+    u2_mp(b_mp, b);
 
-    cmp = (mpz_cmp(dis_mp, dat_mp) > 0) ? u3_yes : u3_no;
+    cmp = (mpz_cmp(a_mp, b_mp) > 0) ? u3_yes : u3_no;
 
-    mpz_clear(dis_mp);
-    mpz_clear(dat_mp);
+    mpz_clear(a_mp);
+    mpz_clear(b_mp);
 
     return cmp;
   }
   u2_noun
   j2_mb(Pit, gth)(u2_wire wir_r, u2_noun cor)
   {
-    u2_noun dis, dat;
+    u2_noun a, b;
 
-    u2_bl_yes(wir_r, u2_mean(cor, 8, &dis, 9, &dat, 0));
-    dis = u2_bl_flat(wir_r, dis);
-    dat = u2_bl_flat(wir_r, dat);
+    u2_bl_yes(wir_r, u2_mean(cor, 8, &a, 9, &b, 0));
+    a = u2_bl_flat(wir_r, a);
+    b = u2_bl_flat(wir_r, b);
     {
-      return j2_mbc(Pit, gth)(wir_r, dis, dat);
+      return j2_mbc(Pit, gth)(wir_r, a, b);
     }
   }
 

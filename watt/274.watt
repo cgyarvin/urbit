@@ -459,6 +459,7 @@
 ::::
 ::
     met
+  =<  ^?([%mine !=(->) %met ~] .)
   =+  [a=*bloq b=@]
   |=
   =+  c=`@`0
@@ -1097,7 +1098,7 @@
     |=
     =+  doc=tube
     |:
-    =+  gon=*doc
+    =+  gon=$.doc
     ?~  p.gon
       (fail doc)
     ?:  .=(daf u.p.gon)
@@ -1318,7 +1319,12 @@
       sig   (just '~')
       sol   (just '/')
       sud   (just '{')
-      sym   (boss 256 |~(plug low (star |~(pose num low nub))))
+      :: sym   (boss 256 |~(plug low (star |~(pose num low nub))))
+      sym 
+        %+  cook
+          =+(*(list &@) |=((rap 3 -<)))
+        |~(plug low (star |~(pose num low nub)))
+    ::
       tar   (cold ~ (plus (mask {10 32 ~})))
       tic   (just '`')
       toq   (just '"')

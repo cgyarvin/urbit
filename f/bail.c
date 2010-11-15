@@ -263,9 +263,9 @@ u2_bn_cell(u2_ray  wir_r,
 */
 u2_noun
 u2_bn_ice(u2_ray  wir_r,
-          u2_noun a)
+          u2_weak a)
 {
-  return u2_bl_good(wir_r, u2_rl_ice(wir_r, a));
+  return u2_bl_good(wir_r, u2_rl_ice(wir_r, u2_bl_good(wir_r, a)));
 }
 
 /* u2_bn_list():
@@ -707,4 +707,16 @@ u2_bn_slab(u2_wire wir_r,
            c3_w    len_w)
 {
   return u2_bl_some(wir_r, u2_rl_slab(wir_r, len_w));
+}
+
+/* u2_bn_slaq():
+**
+**   Create an atomic slab of `len` bloqs of size `met`.
+*/
+u2_ray
+u2_bn_slaq(u2_wire wir_r,
+           c3_g    met_g,
+           c3_w    len_w)
+{
+  return u2_bn_slab(wir_r, ((len_w << met_g) + 31) >> 5);
 }

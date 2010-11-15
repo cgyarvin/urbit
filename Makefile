@@ -83,6 +83,7 @@ J274_1_OFILES=\
        gen274/1/sub.o
 
 J274_3_OFILES=\
+       gen274/3/met.o \
        gen274/3/mug.o \
        gen274/3/rip.o
 

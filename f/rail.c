@@ -518,9 +518,6 @@ _rl_bloq_grab(u2_ray ral_r,
           return (box_r + c3_wiseof(u2_loom_rail_box));
         }
       } else {
-        if ( u2_ray_a(fre_r) > 1 ) {
-          c3_assert(0);
-        }
         if ( siz_w > u2_rail_hut_siz(fre_r) ) {
           /* This free block is too small.  Continue searching.
           */
@@ -545,11 +542,13 @@ _rl_bloq_grab(u2_ray ral_r,
             _rl_bloq_make(ral_r, box_r, siz_w, 1);
           }
           else {
+#if 0
             if ( u2_rail_box_use(box_r) != 0 ) {
               printf("box_r %d.%x, bxu %d\n",
                       u2_ray_a(box_r), u2_ray_b(box_r),
                       u2_rail_box_use(box_r));
             }
+#endif
             c3_assert(u2_rail_box_use(box_r) == 0);
             u2_rail_box_use(box_r) = 1;
           }
@@ -700,7 +699,7 @@ u2_rl_free(u2_ray ral_r,
 **
 **   Gain a reference to [som] in [ral_r].
 */
-void
+u2_noun
 u2_rl_gain(u2_ray  ral_r,
            u2_noun som)
 {
@@ -740,6 +739,7 @@ u2_rl_gain(u2_ray  ral_r,
       }
     }
   }
+  return som;
 }
 
 /* u2_rl_lose():
@@ -847,9 +847,9 @@ u2_rl_junior(u2_ray  ral_r,
     u2_ray som_r = u2_dog_a(som);
     u2_ray hat_r = u2_rail_hat_r(ral_r);
     u2_ray mat_r = u2_rail_mat_r(ral_r);
-    u2_nit som_n = u2_ray_nit(som_r);
-    u2_nit hat_n = u2_ray_nit(hat_r);
-    u2_nit mat_n = u2_ray_nit(mat_r);
+    u2_nit som_n = u2_ray_fnit(som_r);
+    u2_nit hat_n = u2_ray_fnit(hat_r);
+    u2_nit mat_n = u2_ray_fnit(mat_r);
 
     if ( u2_ray_a(hat_r) == 0 ) {
       if ( (som_n >= hat_n) && (som_n <= mat_n) )
@@ -1190,6 +1190,9 @@ u2_rl_cell(u2_ray  ral_r,
   }
 
   if ( u2_no == u2_rl_open(ral_r, c3_wiseof(u2_loom_cell)) ) {
+    u2_rl_lose(ral_r, a);
+    u2_rl_lose(ral_r, b);
+
     u2_ho_warn_here();
     return u2_none;
   }
@@ -1325,18 +1328,7 @@ u2_rl_qual(u2_ray  ral_r,
            u2_noun c,
            u2_noun d)
 {
-  u2_weak hem = u2_rl_trel(ral_r, b, c, d);
-  
-  if ( u2_none == hem ) {
-    return u2_none;
-  } else {
-    u2_weak nar = u2_rl_cell(ral_r, a, hem);
-
-    if ( u2_none == nar ) {
-      u2_rl_lose(ral_r, hem);
-    }
-    return nar;
-  }
+  return u2_rl_cell(ral_r, a, u2_rl_trel(ral_r, b, c, d));
 }
 
 /* u2_rl_trel(): 
@@ -1349,18 +1341,7 @@ u2_rl_trel(u2_ray  ral_r,
            u2_noun b,
            u2_noun c)
 {
-  u2_weak hem = u2_rl_cell(ral_r, b, c);
-  
-  if ( u2_none == hem ) {
-    return u2_none;
-  } else {
-    u2_weak nar = u2_rl_cell(ral_r, a, hem);
-
-    if ( u2_none == nar ) {
-      u2_rl_lose(ral_r, hem);
-    }
-    return nar;
-  }
+  return u2_rl_cell(ral_r, a, u2_rl_cell(ral_r, b, c));
 }
 
 /* u2_rl_words():

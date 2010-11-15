@@ -164,6 +164,15 @@
             u2_bn_slab(u2_wire wir_r,
                        c3_w    len_w);
 
+          /* u2_bn_slaq():
+          **
+          **   Create an atomic slab of `len` bloqs of size `met`.
+          */
+            u2_ray
+            u2_bn_slaq(u2_wire wir_r,
+                       c3_g    met_g,
+                       c3_w    len_w);
+
         /** Noun construction.
         **/
           /* u2_bn_bytes():
@@ -224,7 +233,7 @@
           */
             u2_noun
             u2_bn_ice(u2_wire wir_r,
-                      u2_noun a);
+                      u2_weak a);
 
           /* u2_bn_list():
           **
@@ -325,12 +334,67 @@
 
           /* u2_bn_mung(): 
           **
-          **   Call by core and sample.
+          **   Call by gate and sample.
           */
             u2_noun
             u2_bn_mung(u2_wire wir_r,
-                       u2_noun cor,
+                       u2_noun gat,
                        u2_noun sam);
+
+          /* u2_bn_mung_2():
+          **
+          **   Call by gate and sample cell.
+          */
+            u2_noun
+            u2_bn_mung_2(u2_wire wir_r,
+                         u2_noun gat,
+                         u2_noun dis,
+                         u2_noun dat);
+
+          /* u2_bn_mung_3():
+          **
+          **   Call by gate and sample trel.
+          */
+            u2_noun
+            u2_bn_mung_3(u2_wire wir_r,
+                         u2_noun gat,
+                         u2_noun dis,
+                         u2_noun dat);
+
+          /* u2_bn_mung_3():
+          **
+          **   Call by gate and sample trel.
+          */
+            u2_noun
+            u2_bn_mung_3(u2_wire wir_r,
+                         u2_noun gat,
+                         u2_noun dis,
+                         u2_noun dat);
+
+          /* u2_bn_mung_4():
+          **
+          **   Call by gate and sample qual.
+          */
+            u2_noun
+            u2_bn_mung_4(u2_wire wir_r,
+                         u2_noun gat,
+                         u2_noun one,
+                         u2_noun two,
+                         u2_noun tri,
+                         u2_noun fer);
+
+          /* u2_bn_mung_5():
+          **
+          **   Call by gate and sample quil.
+          */
+            u2_noun
+            u2_bn_mung_5(u2_wire wir_r,
+                         u2_noun gat,
+                         u2_noun one,
+                         u2_noun two,
+                         u2_noun tri,
+                         u2_noun fer,
+                         u2_noun fiv);
 
           /* u2_bn_hook():
           **

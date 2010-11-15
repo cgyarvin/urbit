@@ -12,7 +12,7 @@ void
 u2_boot(void)
 {
    mmap((void *)U2_OS_LoomBase,
-        (LoomSize << 2),
+        (LoomSize << 3),
         (PROT_READ | PROT_WRITE), 
         (MAP_ANON | MAP_FIXED),
         -1, 0);
@@ -763,6 +763,7 @@ u2_as_trel(u2_noun a,
   }
 }
 
+#if 0
 /* u2_h():
 **
 **   Return the head of (a).
@@ -788,6 +789,7 @@ u2_t(u2_noun a)
 
   return *u2_at_pom_tel(a);
 }
+#endif
 
 /* u2_met(): 
 **
@@ -1013,5 +1015,59 @@ u2_words(c3_w    a_w,
   */
   for ( i_w = 0; i_w < b_w; i_w++ ) {
     c_w[i_w] = u2_word((a_w + i_w), d);
+  }
+}
+
+/* u2_chop():
+**
+**   Into the bloq space of `met`, from position `fum` for a
+**   span of `wid`, to position `tou`, XOR from atom `src`
+**   into ray `dst`.
+*/
+void
+u2_chop(c3_g    met_g,
+        c3_w    fum_w,
+        c3_w    wid_w,
+        c3_w    tou_w,
+        u2_ray  dst_r,
+        u2_atom src)
+{
+  c3_w i_w;
+
+  if ( met_g < 5 ) {
+    c3_w san_w = (1 << met_g); 
+    c3_w mek_w = ((1 << san_w) - 1);
+    c3_w baf_w = (fum_w << met_g);
+    c3_w bat_w = (tou_w << met_g);
+
+    for ( i_w = 0; i_w < wid_w; i_w++ ) {
+      c3_w waf_w = (baf_w >> 5);
+      c3_g raf_g = (baf_w & 31);
+      c3_w wat_w = (bat_w >> 5);
+      c3_g rat_g = (bat_w & 31);
+      c3_w hop_w;
+
+      hop_w = u2_atom_word(src, waf_w);
+      hop_w = (hop_w >> raf_g) & mek_w;
+
+      *u2_at_ray(dst_r + wat_w) ^= (hop_w << rat_g);
+
+      baf_w += san_w;
+      bat_w += san_w;
+    }
+  }
+  else {
+    c3_g hut_g = (met_g - 5);
+    c3_w san_w = (1 << hut_g);
+    c3_w j_w;
+
+    for ( i_w = 0; i_w < wid_w; i_w++ ) {
+      c3_w wuf_w = fum_w + (i_w << hut_g);
+      c3_w wut_w = tou_w + (i_w << hut_g); 
+
+      for ( j_w = 0; j_w < san_w; j_w++ ) {
+        *u2_at_ray(dst_r + wut_w + j_w) ^= u2_atom_word(src, wuf_w + j_w);
+      }
+    }
   }
 }

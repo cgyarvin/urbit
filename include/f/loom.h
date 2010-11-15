@@ -11,6 +11,8 @@
 #   define LoomSize (1 << 28)
 #   define LoomEnd  (LoomSize - 1)
 
+// #   define LoomFold
+
   /** Data types.
   **/
     /** Bitfields.
@@ -120,14 +122,21 @@
 
 
     /** Cage reference and geometry.
+    ***
+    *** Formally, we are always folded.
     **/
-#     define u2_ray_nit(ray) \
+#     define u2_ray_fnit(ray) \
         ( u2_ray_a(ray) ? (LoomEnd - u2_ray_b(ray)) : (ray) )
+#   ifdef LoomFold
+#     define u2_ray_nit(ray) u2_ray_fnit(ray)
+#   else
+#     define u2_ray_nit(ray) (ray)
+#   endif
 
 #     define u2_ray_open(tid, tat, das) \
         ( (0 == u2_ray_a(tid)) \
-            ? ( (u2_ray_nit(tid) + (das)) < u2_ray_nit(tat) ) \
-            : ( (u2_ray_nit(tat) + (das)) < u2_ray_nit(tid) ) )
+            ? ( (u2_ray_fnit(tid) + (das)) < u2_ray_fnit(tat) ) \
+            : ( (u2_ray_fnit(tat) + (das)) < u2_ray_fnit(tid) ) )
 
 #     define u2_ray_gap(tid, tat) \
         ( (LoomSize - (u2_ray_b(tid) + u2_ray_b(tat))) )
@@ -147,8 +156,12 @@
 #     define u2_at_nit(nit)    (Loom + nit)
 #     define u2_at_ray(ray)    u2_at_nit(u2_ray_nit(ray))
 
+#   ifdef LoomFold
 #     define u2_at_cord(ray, siz) \
         (u2_ray_a(ray) ? (u2_at_ray(ray) - ((siz) - 1)) : u2_at_ray(ray))
+#   else
+#     define u2_at_cord(ray, siz) u2_at_ray(ray)
+#   endif
 
 #     define u2_aftr(ray, type, field) \
         ((ray) + \
@@ -582,16 +595,22 @@
         **
         **   Return the head of (a).
         */
+#if 0
           u2_noun
           u2_h(u2_noun a);
-
+#else
+#         define u2_h(a) (*u2_at_pom_hed(a))
+#endif
         /* u2_t():
         **
         **   Return the tail of (a).
         */
+#if 0
           u2_noun
           u2_t(u2_noun a);
-
+#else
+#         define u2_t(a) (*u2_at_pom_tel(a))
+#endif
 
       /** Atom access.
       **/
@@ -624,13 +643,27 @@
                   
         /* u2_bytes():
         **
-        **  Copy bytes (a_w) through (a_w + b_w - 1) from (d) to (c).
+        **   Copy bytes (a_w) through (a_w + b_w - 1) from (d) to (c).
         */
           void
           u2_bytes(c3_w    a_w,
                    c3_w    b_w,
                    c3_y*   c_y,
                    u2_atom d);
+
+        /* u2_chop():
+        **
+        **   Into the bloq space of `met`, from position `fum` for a
+        **   span of `wid`, to position `tou`, XOR from atom `src`
+        **   into ray `dst`.
+        */
+          void
+          u2_chop(c3_g    met_g,
+                  c3_w    fum_w,
+                  c3_w    wid_w,
+                  c3_w    tou_w,
+                  u2_ray  dst_r,
+                  u2_atom src);
 
         /* u2_mp():
         **

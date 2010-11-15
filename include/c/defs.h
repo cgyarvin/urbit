@@ -7,6 +7,7 @@
     /* Assert.  Good to capture.
     */
 #     define c3_assert(x)   assert(x)
+// #     define c3_assert(x)  
 
     /* Stub.
     */

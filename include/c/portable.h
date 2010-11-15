@@ -50,10 +50,10 @@
   /** Address space layout.
   **/
 #   if defined(U2_OS_linux)
-#     define U2_OS_LoomBase 0x10000000
+#     define U2_OS_LoomBase 0x4000000
 
 #   elif defined(U2_OS_osx)
-#     define U2_OS_LoomBase 0x10000000
+#     define U2_OS_LoomBase 0x4000000
 #   endif
 
   /** Global variable control.

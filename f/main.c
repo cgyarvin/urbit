@@ -94,6 +94,8 @@ u2_wr_nock_jet(u2_ray  wir_r,
       } else {
         u2_noun vet;
 
+        u2_bx_used(wir_r);
+
         if ( u2_no == u2_rl_leap(wir_r, u2_rail_hip_m(wir_r)) ) {
           u2_rl_lose(wir_r, pro);
 
@@ -142,6 +144,9 @@ u2_wr_nock_keep(u2_ray  wir_r,
 **
 **    Execute `(nock bus fol)`, allocating on `hat`.
 **
+**    Caller retains ownership of `bus` and `fol`.
+**    Function transfers result, if any.
+**
 **    If computation fails for any reason, return `u2_none`.
 **    Failure must leave the loom undamaged.
 */
@@ -163,6 +168,9 @@ u2_wr_nock_main(u2_ray  wir_r,
 }
 
 /* u2_wr_nock_mung(): call with gate and sample.
+**
+**    Caller retains ownership of `gat` and `sam`.
+**    Function transfers result, if any.
 */
 u2_weak
 u2_wr_nock_mung(u2_ray  wir_r,
@@ -179,24 +187,23 @@ u2_wr_nock_mung(u2_ray  wir_r,
     if ( u2_no == u2_dust(h_gat) ) {
       return u2_none;
     } else {
-      u2_noun pay = u2_rc(wir_r, sam, u2_t(h_gat));
-      u2_noun pro;
-      
-      if ( u2_none == pay ) {
+      u2_noun cor;
+
+      cor = u2_rc
+        (wir_r, 
+         u2_rc
+          (wir_r, u2_rl_gain(wir_r, sam),
+                  u2_rl_gain(wir_r, u2_t(h_gat))),
+         u2_rl_gain(wir_r, t_gat));
+
+      if ( u2_none == cor ) {
         return u2_none;
-      } else {
-        u2_noun cor = u2_rc(wir_r, pay, t_gat);
+      }
+      else {
+        u2_noun pro = u2_wr_nock_main(wir_r, cor, t_gat);
 
-        if ( u2_none == cor ) {
-          u2_rl_lose(wir_r, pay);
-          return u2_none;
-        }
-        else {
-          pro = u2_wr_nock_main(wir_r, cor, t_gat);
-
-          u2_rl_lose(wir_r, pay);
-          return pro;
-        }
+        u2_rl_lose(wir_r, cor);
+        return pro;
       }
     }
   }

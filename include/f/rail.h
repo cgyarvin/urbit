@@ -209,9 +209,9 @@
 
         /* u2_rl_gain():
         **
-        **   Gain a reference to `som`.
+        **   Gain a reference to `som`, returning it.
         */
-          void
+          u2_noun
           u2_rl_gain(u2_ray  ral_r,
                      u2_noun som);
 

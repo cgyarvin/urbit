@@ -6,7 +6,10 @@
 
 /* _toss(): substance of u2_wr_nock_toss().
 **
-**    Execute `(nock bus fol)`, losing `bus`, holding `fol`.
+**    Execute `(nock bus fol)`.  
+**
+**    Caller transfers `bus`, retains `fol`.
+**    Function transfers result, if any.
 */
 static u2_weak
 _toss(u2_ray  wir_r,
@@ -280,8 +283,6 @@ _toss(u2_ray  wir_r,
             return u2_none;
           }
           if ( u2_none == (har = u2_rl_cell(wir_r, bod, bus)) ) {
-            u2_rl_lose(wir_r, bod);
-            u2_rl_lose(wir_r, bus);
             return u2_none;
           }
           bus = har;
@@ -341,7 +342,7 @@ _toss(u2_ray  wir_r,
           u2_rl_lose(wir_r, bus);
           return u2_none;
         } else {
-          u2_weak cul, han, guc;
+          u2_weak cul, han;
 
           if ( u2_none == (cul = u2_wr_ice(wir_r, bus)) ) {
             u2_rl_lose(wir_r, bus);
@@ -353,13 +354,7 @@ _toss(u2_ray  wir_r,
             u2_rl_lose(wir_r, cul);
             return u2_none;
           }
-
-          if ( u2_none == (guc = u2_rl_cell(wir_r, cul, han)) ) {
-            u2_rl_lose(wir_r, cul);
-            u2_rl_lose(wir_r, han);
-            return u2_none;
-          }
-          return guc;
+          return u2_rl_cell(wir_r, cul, han);
         }
       }
     }

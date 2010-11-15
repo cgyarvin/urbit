@@ -23,6 +23,7 @@
  
   /* tier 3
   */
+    extern u2_ho_jet j2_mbj(Pit, met)[];
     extern u2_ho_jet j2_mbj(Pit, mug)[];
     extern u2_ho_jet j2_mbj(Pit, rip)[];
 
@@ -46,6 +47,7 @@
 
     /* tier 3
     */
+      { j2_sb(Pit, met), j2_mbj(Pit, met), 0, 0, u2_none },
       { j2_sb(Pit, mug), j2_mbj(Pit, mug), 0, 0, u2_none },
       { j2_sb(Pit, rip), j2_mbj(Pit, rip), 0, 0, u2_none },
     { }
