@@ -95,9 +95,23 @@
 #         define u2_rail_hut_pre(hut) *u2_at(hut, u2_loom_rail_hut, pre_r)
 #         define u2_rail_hut_nex(hut) *u2_at(hut, u2_loom_rail_hut, nex_r)
 
+    /** Abbreviations.
+    **/
+#     define u2_rc(ral_r, a, b)           u2_rl_cell(ral_r, a, b)
+#     define u2_rt(ral_r, a, b, c)        u2_rl_trel(ral_r, a, b, c)
+#     define u2_rq(ral_r, a, b, c, d)     u2_rl_qual(ral_r, a, b, c)
+#     define u2_ri(ral_r, a, b, c, d, e)  u2_rl_quil(ral_r, a, b, c, e)
+#     define u2_ro(ral_r, a)              u2_rl_lone(ral_r, a)
+#     define u2_ru(ral_r, a)              u2_rl_unit(ral_r, a)
+#     define u2_rl                        u2_rl_list
+#     define u2_rk                        u2_rl_rack
+
+#     define u2_rx(ral_r, a)              u2_rl_take(ral_r, a)
+
+
     /** Functions.
     **/
-      /** Management.
+      /** Miscellaneous and interesting.
       **/
         /* u2_rl_boot():
         **
@@ -107,12 +121,15 @@
           u2_ray
           u2_rl_boot(c3_m hip_m);
 
-        /* u2_rl_valid():
+        /* u2_rl_clear():
         **
-        **   Validate rail for memory bugs.
+        **   Yes iff [lef] does not point to any word >= [net]
+        **   and < [bat].
         */
-          void
-          u2_rl_valid(u2_ray ral_r);
+          u2_flag
+          u2_rl_clear(u2_noun lef,
+                      u2_ray  net_r,
+                      u2_ray  bat_r);
 
         /* u2_rl_init():
         **
@@ -126,29 +143,35 @@
                      u2_ray hat_r,
                      u2_ray mat_r);
 
-        /* u2_rl_ralloc():
+        /* u2_rl_fall():
         **
-        **   Allocate `siz_w` words of raw ray storage.
-        */
-          u2_ray
-          u2_rl_ralloc(u2_ray ral_r,
-                       c3_w   siz_w);
-
-        /* u2_rl_rfree():
-        **
-        **   Free raw ray storage allocated by `u2_rl_ralloc()`.
+        **   Reverse the beams backward, restoring the old frame.
         */
           void
-          u2_rl_rfree(u2_ray ral_r,
-                      u2_ray nov_r);
+          u2_rl_fall(u2_ray ral_r);
 
-        /* u2_rl_malloc():
+        /* u2_rl_fall_part():
         **
-        **   Allocate `sib_w` *bytes* of raw C storage.
+        **   Fall on `ral`, also releasing the partition `aux`.
         */
-          void*
-          u2_rl_malloc(u2_ray ral_r,
-                       c3_w   sib_w);
+          void
+          u2_rl_fall_part(u2_ray ral_r,
+                          u2_ray aux_r);
+
+        /* u2_rl_flog():
+        **
+        **   Release the can, setting cap to mat.
+        */
+          void
+          u2_rl_flog(u2_ray ral_r);
+
+        /* u2_rl_gain():
+        **
+        **   Gain a reference to `som`, returning it.
+        */
+          u2_weak                       //  transfer
+          u2_rl_gain(u2_ray  ral_r,
+                     u2_weak som);      //  retain
 
         /* u2_rl_free():
         **
@@ -157,6 +180,15 @@
           void
           u2_rl_free(u2_ray ral_r,
                      void*  lag_v);
+
+        /* u2_rl_junior():
+        **
+        **   Yes iff `dus` is junior in `ral` - ie, must be copied
+        **   to be referenced on the hat.
+        */
+          u2_flag
+          u2_rl_junior(u2_ray  ral_r,
+                       u2_noun dus);      //  retain
 
         /* u2_rl_leap():
         **
@@ -185,43 +217,38 @@
                           c3_w   num_w,
                           c3_w   dem_w,
                           c3_w   tip_w);
-        /* u2_rl_fall():
-        **
-        **   Reverse the beams backward, restoring the old frame.
-        */
-          void
-          u2_rl_fall(u2_ray ral_r);
-
-        /* u2_rl_fall_part():
-        **
-        **   Fall on `ral`, also releasing the partition `aux`.
-        */
-          void
-          u2_rl_fall_part(u2_ray ral_r,
-                          u2_ray aux_r);
-
-        /* u2_rl_flog():
-        **
-        **   Release the can, setting cap to mat.
-        */
-          void
-          u2_rl_flog(u2_ray ral_r);
-
-        /* u2_rl_gain():
-        **
-        **   Gain a reference to `som`, returning it.
-        */
-          u2_noun
-          u2_rl_gain(u2_ray  ral_r,
-                     u2_noun som);
-
         /* u2_rl_lose():
         **
         **   Lose a reference to `som`.  Free it if refcount == 0.
         */
           void
           u2_rl_lose(u2_ray  ral_r,
-                     u2_noun som);
+                     u2_weak som);      //  transfer
+
+        /* u2_rl_malloc():
+        **
+        **   Allocate `sib_w` *bytes* of raw C storage.
+        */
+          void*
+          u2_rl_malloc(u2_ray ral_r,
+                       c3_w   sib_w);
+
+        /* u2_rl_malt():
+        **
+        **   Initialize slab `sal` as an atom, internally measured.
+        */
+          u2_atom                       //  transfer
+          u2_rl_malt(u2_rail ral_r,
+                     u2_ray  sal_r);
+
+        /* u2_rl_mint():
+        **
+        **   Initialize slab `sal` as an atom, externally measured.
+        */
+          u2_atom                       //  transfer
+          u2_rl_mint(u2_rail ral_r,
+                     u2_ray  sal_r,
+                     c3_w    len_w);
 
         /* u2_rl_open():
         **
@@ -231,24 +258,21 @@
           u2_rl_open(u2_ray ral_r,
                      c3_w   a_w);
 
-        /* u2_rl_clear():
+        /* u2_rl_ralloc():
         **
-        **   Yes iff [lef] does not point to any word >= [net]
-        **   and < [bat].
+        **   Allocate `siz_w` words of raw ray storage.
         */
-          u2_flag
-          u2_rl_clear(u2_noun lef,
-                      u2_ray  net_r,
-                      u2_ray  bat_r);
+          u2_ray
+          u2_rl_ralloc(u2_ray ral_r,
+                       c3_w   siz_w);
 
-        /* u2_rl_junior():
+        /* u2_rl_rfree():
         **
-        **   Yes iff `dus` is junior in `ral` - ie, must be copied
-        **   to be referenced on the hat.
+        **   Free raw ray storage allocated by `u2_rl_ralloc()`.
         */
-          u2_flag
-          u2_rl_junior(u2_ray  ral_r,
-                       u2_noun dus);
+          void
+          u2_rl_rfree(u2_ray ral_r,
+                      u2_ray nov_r);
 
         /* u2_rl_senior():
         **
@@ -257,7 +281,25 @@
         */
           u2_flag
           u2_rl_senior(u2_ray  ral_r,
-                       u2_noun dus);
+                       u2_noun dus);      //  retain
+
+        /* u2_rl_slab():
+        **
+        **   Create a blank atomic slab of `len` words.
+        */
+          u2_ray
+          u2_rl_slab(u2_rail ral_r,
+                     c3_w    len_w);
+
+        /* u2_rl_take():
+        **
+        **   Produce `a`, as eligible result.  Copy juniors; reference peers.
+        */
+          u2_weak                       //  transfer
+          u2_rl_take(u2_ray  ral_r,
+                     u2_weak a);        //  retain
+#         define u2_rl_ice(ral_r, a) \
+            u2_rl_take(ral_r, a)
 
         /* u2_rl_tamp():
         **
@@ -272,6 +314,13 @@
                      u2_ray  net_r,
                      u2_ray  bat_r);
 
+        /* u2_rl_valid():
+        **
+        **   Validate rail for memory bugs.
+        */
+          void
+          u2_rl_valid(u2_ray ral_r);
+
         /* u2_rl_water():
         **
         **   Return east and west watermarks, respectively.
@@ -281,105 +330,140 @@
                       c3_w*  maz_w,
                       c3_w*  buc_w);
 
-      /** Generation.
+      /** Basic noun fabrication.
       **/
         /* u2_rl_bytes():
         **
-        **   Copy [a] bytes from [b].
+        **   Copy `a` bytes from `b` to an LSB first atom.
         */
-          u2_weak
+          u2_weak                           // transfer
           u2_rl_bytes(u2_ray      ral_r,
                       c3_w        a_w,
                       const c3_y* b_y);
 
-        /* u2_rl_slab():
-        **
-        **   Create a blank atomic slab of `len` words.
-        */
-          u2_ray
-          u2_rl_slab(u2_rail ral_r,
-                     c3_w    len_w);
-
-        /* u2_rl_mint():
-        **
-        **   Initialize slab `sal` as an atom, externally measured.
-        */
-          u2_atom
-          u2_rl_mint(u2_rail ral_r,
-                     u2_ray  sal_r,
-                     c3_w    len_w);
-
-        /* u2_rl_malt():
-        **
-        **   Initialize slab `sal` as an atom, internally measured.
-        */
-          u2_atom
-          u2_rl_malt(u2_rail ral_r,
-                     u2_ray  sal_r);
-
-        /* u2_rl_string():
-        **
-        **   u2_rl_bytes(ral_r, strlen(a_c), (c3_y *)a_c);
-        */
-          u2_weak
-          u2_rl_string(u2_ray      ral_r,
-                       const c3_c* a_c);
-
         /* u2_rl_cell(): 
         **
-        **   Produce the cell [a b].
+        **   Produce the cell `[a b]`.
         */
-          u2_weak
+          u2_weak                       //  transfer
           u2_rl_cell(u2_ray  ral_r,
-                     u2_noun a,
-                     u2_noun b);
-#         define u2_rc(ral_r, a, b) u2_rl_cell(ral_r, a, b)
+                     u2_weak a,         //  transfer
+                     u2_weak b);        //  transfer
 
-        /* u2_rl_ice():
+        /* u2_rl_list():
         **
-        **   Produce `a`, not referencing the can.  Copy or gain reference.
+        **   Produce a null-terminated list, terminating `...` with `u2_none`.
         */
-          u2_weak
-          u2_rl_ice(u2_ray  ral_r,
-                    u2_noun a);
+          u2_weak                       //  transfer
+          u2_rl_list(u2_rail ral_r,
+                     ...);              //  transfer
+
+        /* u2_rl_lone():
+        **
+        **   Create the unit `[0 a]`.
+        */
+#if 0
+          u2_weak                       //  transfer
+          u2_rl_lone(u2_rail ral_r,
+                     u2_weak a);        //  transfer
+#else
+#         define u2_rl_lone(ral_r, a) \
+            u2_rc(ral_r, a, u2_nul)
+#endif
+
+        /* u2_rl_molt():
+        **
+        **   Mutate `som` with a 0-terminated list of axis, noun pairs.
+        **   Axes must be cats (31 bit).
+        */
+          u2_weak                       //  transfer
+          u2_rl_molt(u2_rail ral_r,
+                     u2_weak som,       //  retain
+                     ...);              //  transfer
+       
+        /* u2_rl_molf():
+        **
+        **   As u2_rl_molt(), by argument pointer.
+        */
+          u2_weak                       //  transfer
+          u2_rl_molf(u2_rail ral_r,
+                     u2_weak som,       //  retain
+                     va_list vap);      //  transfer
 
         /* u2_rl_mp():
         **
         **   Copy the GMP integer [a] into an atom.
         */
-          u2_weak
+          u2_weak                       //  transfer
           u2_rl_mp(u2_ray ral_r,
-                   mpz_t  a_mp);
+                   mpz_t  a_mp);        //  transfer (GMP)
 
-        /* u2_rl_qual(): 
+        /* u2_rl_qual():
         **
-        **   Produce the quadruple [a b c d].
+        **   Produce the triple `[a b c d]`.
         */
-          u2_weak
-          u2_rl_qual(u2_ray  ral_r,
-                     u2_noun a,
-                     u2_noun b,
-                     u2_noun c,
-                     u2_noun d);
-#         define u2_rq(ral_r, a, b, c, d) u2_rl_qual(ral_r, a, b, c, d)
+#if 0
+          u2_weak                       //  transfer
+          u2_rl_qual(u2_rail ral_r,
+                     u2_weak a,         //  transfer
+                     u2_weak b,         //  transfer
+                     u2_weak c,         //  transfer
+                     u2_weak d);        //  transfer
+#else
+#         define u2_rl_qual(ral_r, a, b, c, d) \
+            u2_rc(ral_r, a, u2_rt(ral_r, b, c, d))
+#endif
 
-        /* u2_rl_trel(): 
+        /* u2_rl_rack():
         **
-        **   Produce the triple [a b c].
+        **   Produce an n-tuple, terminating `...` with `u2_none`.
         */
-          u2_weak
-          u2_rl_trel(u2_ray  ral_r,
-                     u2_noun a,
-                     u2_noun b,
-                     u2_noun c);
-#         define u2_rt(ral_r, a, b, c) u2_rl_trel(ral_r, a, b, c)
+          u2_weak                       //  transfer
+          u2_rl_rack(u2_rail ral_r,
+                     ...);              //  transfer
+
+        /* u2_rl_string():
+        **
+        **   Produce an LSB-first atom from the C string `a`.
+        */
+          u2_weak                           //  transfer
+          u2_rl_string(u2_ray      ral_r,
+                       const c3_c* a_c);
+
+        /* u2_rl_trel():
+        **
+        **   Create the triple `[a b c]`.
+        */
+#if 0
+          u2_weak                       //  transfer
+          u2_rl_trel(u2_rail ral_r,
+                     u2_weak a,         //  transfer
+                     u2_weak b,         //  transfer
+                     u2_weak c);        //  transfer
+#else
+#         define u2_rl_trel(ral_r, a, b, c) \
+            u2_rc(ral_r, a, u2_rc(ral_r, b, c))
+#endif
+
+        /* u2_rl_unit():
+        **
+        **   Create the unit `[0 a]`.
+        */
+#if 0
+          u2_weak                       //  transfer
+          u2_rl_unit(u2_rail ral_r,
+                     u2_weak a);        //  transfer
+#else
+#         define u2_rl_unit(ral_r, a) \
+            u2_rc(ral_r, u2_nul, a)
+#endif
+
 
         /* u2_rl_words():
         **
         **   Copy [a] words from [b] into an atom.
         */
-          u2_weak
+          u2_weak                         //  transfer
           u2_rl_words(u2_ray      ral_r,
                       c3_w        a_w,
                       const c3_w* b_w);
-

@@ -317,6 +317,8 @@ u2_bn_list(u2_ray wir_r, ...)
 **
 **   Mutate `som` with a 0-terminated list of axis, noun pairs.
 **   Axes must be cats (31 bit).
+**
+**   Caller retains arguments; function transfers result.
 */
   struct _molt_pair {
     c3_w    axe_w;
@@ -350,10 +352,10 @@ u2_bn_list(u2_ray wir_r, ...)
               struct _molt_pair* pms_m)
   {
     if ( len_w == 0 ) {
-      return som;
+      return u2_rl_gain(wir_r, som);
     }
     else if ( (len_w == 1) && (1 == pms_m[0].axe_w) ) {
-      return pms_m[0].som;
+      return u2_rl_gain(wir_r, pms_m[0].som);
     }
     else {
       c3_w cut_w = _molt_cut(len_w, pms_m);
@@ -491,33 +493,29 @@ u2_bn_nock(u2_ray wir_r, u2_noun bus, u2_noun fol)
   return u2_bl_good(wir_r, u2_wr_nock_main(wir_r, bus, fol));
 }
 
-/* u2_bn_mung():
-**
-**   Mung or bail.
-*/
-u2_noun
-u2_bn_mung(u2_ray wir_r, u2_noun bus, u2_noun fol)
-{
-  return u2_bl_good(wir_r, u2_wr_nock_mung(wir_r, bus, fol));
-}
 
 /* u2_bn_mang():
 **
-**   Kick a core, substituting axes with nouns.
+**   Kick a gate, substituting axes with nouns.
+**   
+**   Caller retains arguments; function transfers result. 
 */
 u2_noun
 u2_bn_mang(u2_wire wir_r,
-           u2_noun cor,
+           u2_noun gat,
            ...)
 {
   va_list vap;
-  u2_noun gat;
+  u2_noun dur, pro;
 
-  va_start(vap, cor);
-  gat = u2_bn_molf(wir_r, cor, vap);
+  va_start(vap, gat);
+  dur = u2_bn_molf(wir_r, gat, vap);
   va_end(vap);
 
-  return u2_bn_nock(wir_r, gat, u2_t(gat));
+  pro = u2_wr_nock_main(wir_r, dur, u2_t(dur));
+
+  u2_rl_lose(wir_r, dur);
+  return pro;
 }
 
 /* u2_bn_hook():
@@ -538,6 +536,24 @@ u2_bn_hook(u2_wire     wir_r,
   }
 }
 
+/* u2_bn_mung(): 
+**
+**   Call by gate and sample.
+**   Caller retains `gat`, transfers `sam`.
+*/
+u2_noun
+u2_bn_mung(u2_wire wir_r,
+           u2_weak gat,
+           u2_weak sam)
+{
+  u2_weak pro = u2_wr_mung(wir_r, gat, sam);
+
+  if ( u2_none == pro ) {
+    return u2_bl_bail(wir_r);
+  }
+  else return pro;
+}
+
 /* u2_bn_gart():
 **
 **   Call by core, hook, sample.
@@ -547,7 +563,9 @@ u2_bn_gart(u2_wire     wir_r,
            u2_noun     cor,
            const c3_c* tam_c,
            u2_noun     sam)
-{
+{ 
+  // XX: tested, but leaks.  Check memory protocol.
+  //
   u2_noun fol = u2_bl_good(wir_r, u2_sh_look(wir_r, cor, tam_c));
   u2_noun gat = u2_bn_nock(wir_r, cor, fol);
   u2_noun tec = u2_bc(wir_r, u2_bc(wir_r, sam, u2_t(u2_h(gat))), u2_t(gat));
@@ -565,6 +583,8 @@ u2_bn_gort(u2_wire     wir_r,
            const c3_c* tam_c,
            ...)
 {
+  // XX: tested, but leaks.  Check memory protocol.
+  //
   u2_noun fol = u2_bl_good(wir_r, u2_sh_look(wir_r, cor, tam_c));
   u2_noun gat = u2_bn_nock(wir_r, cor, fol);
   u2_noun tec;

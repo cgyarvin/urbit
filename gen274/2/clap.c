@@ -18,8 +18,9 @@
     else {
       return u2_bc
         (wir_r, _0, 
-                u2_bn_mung
-                  (wir_r, c, u2_bc(wir_r, u2_bi_t(a), u2_bi_t(b))));
+                u2_bn_mung_2
+                  (wir_r, c, u2_rl_gain(wir_r, u2_bi_t(wir_r, a)),
+                             u2_rl_gain(wir_r, u2_bi_t(wir_r, b))));
     }
   }
   u2_noun

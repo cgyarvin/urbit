@@ -763,33 +763,25 @@ u2_as_trel(u2_noun a,
   }
 }
 
-#if 0
-/* u2_h():
+/* u2_sh():
 **
-**   Return the head of (a).
+**   Return the head of (a), safely.
 */
 u2_noun
-u2_h(u2_cell a)
+u2_sh(u2_cell a)
 {
-  c3_assert(u2_none != a);
-  c3_assert(!u2_fly_is_atom(a));
-
-  return *u2_at_pom_hed(a);
+  return (a == u2_none) && (u2_yes == u2_dust(a)) ? a : u2_h(a);
 }
 
-/* u2_t():
+/* u2_st():
 **
-**   Return the tail of (a).
+**   Return the tail of (a), safely.
 */
 u2_noun
-u2_t(u2_noun a)
+u2_st(u2_noun a)
 {
-  c3_assert(u2_none != a);
-  c3_assert(!u2_fly_is_atom(a));
-
-  return *u2_at_pom_tel(a);
+  return (a == u2_none) && (u2_yes == u2_dust(a)) ? a : u2_t(a);
 }
-#endif
 
 /* u2_met(): 
 **

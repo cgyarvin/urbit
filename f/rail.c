@@ -1211,12 +1211,12 @@ u2_rl_cell(u2_ray  ral_r,
   }
 }
 
-/* u2_rl_ice():
+/* u2_rl_take():
 **
 **   Produce `a`, not referencing the can.  Copy or gain reference.
 */
 u2_weak
-u2_rl_ice(u2_ray  ral_r,
+u2_rl_take(u2_ray  ral_r,
           u2_noun fiz)
 {
   if ( u2_no == u2_rl_junior(ral_r, fiz) ) {
@@ -1235,12 +1235,12 @@ u2_rl_ice(u2_ray  ral_r,
         u2_ray nov_r;
         u2_noun nov;
 
-        if ( u2_none == (hed = u2_rl_ice(ral_r, *u2_at_pom_hed(fiz))) ) {
+        if ( u2_none == (hed = u2_rl_take(ral_r, *u2_at_pom_hed(fiz))) ) {
           u2_ho_warn_here();
 
           return u2_none;
         }
-        if ( u2_none == (tel = u2_rl_ice(ral_r, *u2_at_pom_tel(fiz))) ) {
+        if ( u2_none == (tel = u2_rl_take(ral_r, *u2_at_pom_tel(fiz))) ) {
           u2_ho_warn_here();
 
           u2_rl_lose(ral_r, hed);
@@ -1315,33 +1315,6 @@ u2_rl_mp(u2_ray ral_r,
 
     return u2_rl_words(ral_r, pyg_w, bav_w);
   }
-}
-
-/* u2_rl_qual(): 
-**
-**   Produce the quadruple [a b c d].
-*/
-u2_weak
-u2_rl_qual(u2_ray  ral_r,
-           u2_noun a,
-           u2_noun b,
-           u2_noun c,
-           u2_noun d)
-{
-  return u2_rl_cell(ral_r, a, u2_rl_trel(ral_r, b, c, d));
-}
-
-/* u2_rl_trel(): 
-**
-**   Produce the triple [a b c].
-*/
-u2_weak
-u2_rl_trel(u2_ray  ral_r,
-           u2_noun a,
-           u2_noun b,
-           u2_noun c)
-{
-  return u2_rl_cell(ral_r, a, u2_rl_cell(ral_r, b, c));
 }
 
 /* u2_rl_words():

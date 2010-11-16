@@ -591,19 +591,22 @@
                      u2_noun *c,
                      u2_noun *d);
 
-        /* u2_h():
+        /* u2_h(), u2_sh():
         **
-        **   Return the head of (a).
+        **   Return the head of `a`, unsafely or safely.
         */
 #if 0
           u2_noun
           u2_h(u2_noun a);
 #else
-#         define u2_h(a) (*u2_at_pom_hed(a))
+#         define u2_h(a)    (*u2_at_pom_hed(a))
 #endif
-        /* u2_t():
+          u2_noun
+          u2_sh(u2_noun a);
+
+        /* u2_t(), u2_st():
         **
-        **   Return the tail of (a).
+        **   Return the tail of `a`, unsafely or safely.
         */
 #if 0
           u2_noun
@@ -611,6 +614,8 @@
 #else
 #         define u2_t(a) (*u2_at_pom_tel(a))
 #endif
+          u2_noun
+          u2_st(u2_noun a);
 
       /** Atom access.
       **/

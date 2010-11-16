@@ -63,7 +63,7 @@ u2_wr_init(c3_m   hip_m,
     u2_bx_boot(wir_r);
   }
 
-  /* Plow support.
+  /* Special support.
   */
   {
     u2_wire_plo_r(wir_r) = u2_rl_ralloc(wir_r, c3_wiseof(u2_loom_plow));

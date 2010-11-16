@@ -4,7 +4,7 @@
 */
 #include "all.h"
 
-/* _toss(): substance of u2_wr_nock_toss().
+/* _toss(): substance of u2_wr_toss().
 **
 **    Execute `(nock bus fol)`.  
 **
@@ -32,7 +32,7 @@ _toss(u2_ray  wir_r,
         u2_rl_lose(wir_r, bus);
         return u2_none;
       }
-      if ( (u2_none == (riv = u2_wr_nock_toss(wir_r, bus, gal)) ) ) {
+      if ( (u2_none == (riv = u2_wr_toss(wir_r, bus, gal)) ) ) {
         u2_rl_lose(wir_r, poz);
         return u2_none;
       }
@@ -93,12 +93,12 @@ _toss(u2_ray  wir_r,
             u2_rl_lose(wir_r, bus);
             return u2_none;
           }
-          if ( u2_none == (sep = u2_wr_nock_toss(wir_r, bus, mis)) ) {
+          if ( u2_none == (sep = u2_wr_toss(wir_r, bus, mis)) ) {
             u2_rl_lose(wir_r, dom);
             return u2_none;
           }
           if ( u2_no == u2_rl_senior(wir_r, dom) ) {
-            u2_weak hoz = u2_wr_nock_toss(wir_r, sep, dom);
+            u2_weak hoz = u2_wr_toss(wir_r, sep, dom);
 
             u2_rl_lose(wir_r, dom);
             return hoz;
@@ -259,7 +259,7 @@ _toss(u2_ray  wir_r,
           u2_noun fas = u2_t(gal);
           u2_noun bod;
 
-          if ( u2_none == (bod = u2_wr_nock_toss(wir_r, bus, meg)) ) {
+          if ( u2_none == (bod = u2_wr_toss(wir_r, bus, meg)) ) {
             return u2_none;
           }
           bus = bod;
@@ -361,21 +361,37 @@ _toss(u2_ray  wir_r,
   }
 }
 
-/* u2_wr_nock_toss():
+/* u2_wr_toss():
 **
-**    Execute `(nock bus fol)`, losing `bus`, holding `fol`.
+**    Execute `(nock bus fol)`.
 */
-u2_weak
-u2_wr_nock_toss(u2_ray  wir_r,
-                u2_noun bus,
-                u2_noun fol)
+u2_weak                      //  transfer
+u2_wr_toss(u2_ray  wir_r,
+           u2_noun bus,      //  transfer
+           u2_noun fol)      //  retain
 {
-  u2_weak fut;
+  /* Attempt jet propulsion.
+  */
+  {
+    u2_noun pro;
 
-  u2_bx_fall(wir_r);
-  fut = _toss(wir_r, bus, fol);
+    if ( u2_none != (pro = u2_wr_nock_jet(wir_r, bus, fol)) ) {
+      u2_rl_lose(wir_r, bus);
 
-  u2_bx_mark(wir_r);
-  u2_bx_rise(wir_r);
-  return fut;
+      return pro;
+    }
+  }
+
+  /* Execute interpreter.
+  */
+  {
+    u2_weak fut;
+
+    u2_bx_fall(wir_r);
+    fut = _toss(wir_r, bus, fol);
+
+    u2_bx_mark(wir_r);
+    u2_bx_rise(wir_r);
+    return fut;
+  }
 }

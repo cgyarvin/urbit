@@ -330,71 +330,17 @@
             u2_noun
             u2_bn_mang(u2_wire wir_r,
                        u2_noun cor,
-                       ...);
+                       ...);              // nouns 
 
           /* u2_bn_mung(): 
           **
           **   Call by gate and sample.
+          **   Caller retains `gat`, transfers `sam`.
           */
             u2_noun
             u2_bn_mung(u2_wire wir_r,
                        u2_noun gat,
                        u2_noun sam);
-
-          /* u2_bn_mung_2():
-          **
-          **   Call by gate and sample cell.
-          */
-            u2_noun
-            u2_bn_mung_2(u2_wire wir_r,
-                         u2_noun gat,
-                         u2_noun dis,
-                         u2_noun dat);
-
-          /* u2_bn_mung_3():
-          **
-          **   Call by gate and sample trel.
-          */
-            u2_noun
-            u2_bn_mung_3(u2_wire wir_r,
-                         u2_noun gat,
-                         u2_noun dis,
-                         u2_noun dat);
-
-          /* u2_bn_mung_3():
-          **
-          **   Call by gate and sample trel.
-          */
-            u2_noun
-            u2_bn_mung_3(u2_wire wir_r,
-                         u2_noun gat,
-                         u2_noun dis,
-                         u2_noun dat);
-
-          /* u2_bn_mung_4():
-          **
-          **   Call by gate and sample qual.
-          */
-            u2_noun
-            u2_bn_mung_4(u2_wire wir_r,
-                         u2_noun gat,
-                         u2_noun one,
-                         u2_noun two,
-                         u2_noun tri,
-                         u2_noun fer);
-
-          /* u2_bn_mung_5():
-          **
-          **   Call by gate and sample quil.
-          */
-            u2_noun
-            u2_bn_mung_5(u2_wire wir_r,
-                         u2_noun gat,
-                         u2_noun one,
-                         u2_noun two,
-                         u2_noun tri,
-                         u2_noun fer,
-                         u2_noun fiv);
 
           /* u2_bn_hook():
           **

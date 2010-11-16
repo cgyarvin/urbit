@@ -14,7 +14,7 @@
       return u2_nul;
     }
     else {
-      return u2_bc(wir_r, u2_bi_t(a), u2_nul);
+      return u2_bc(wir_r, u2_rl_gain(u2_bi_t(wir_r, a), u2_nul);
     }
   }
   u2_noun

@@ -103,13 +103,6 @@
                           u2_noun bus,
                           u2_noun fol);
 
-        /* u2_wr_nock_mung(): call with gate and sample.
-        */
-          u2_weak
-          u2_wr_nock_mung(u2_ray  wir_r,
-                          u2_noun gat,
-                          u2_noun sam);
-
         /* u2_wr_nock_here():
         **
         **   As `u2_wr_nock_flee()`, but without cap reduction.
@@ -125,63 +118,70 @@
         **
         **   After using `bus`, reduce `cap` to `net`.
         */
-          u2_weak
+          u2_weak                           //  transfer
           u2_wr_nock_flee(u2_ray  wir_r,
                           u2_ray  net_r,
-                          u2_noun bus,
-                          u2_noun fol);
+                          u2_noun bus,      //  retain
+                          u2_noun fol);     //  retain
 
         /* u2_wr_nock_hint():
         */
-          u2_weak
+          u2_weak                           //  transfer
           u2_wr_nock_hint(u2_ray  wir_r,
-                          u2_noun zep,
-                          u2_noun hod,
-                          u2_noun bus,
-                          u2_noun fol);
+                          u2_noun zep,      //  retain
+                          u2_noun hod,      //  retain
+                          u2_noun bus,      //  retain
+                          u2_noun fol);     //  retain
 
         /* u2_wr_nock_jet():
         **
         **   Jet-propel `(nock bus fol)`, or return u2_none.
         */
-          u2_weak
+          u2_weak                           //  transfer
           u2_wr_nock_jet(u2_ray  wir_r,
-                         u2_noun bus,
-                         u2_noun fol);
+                         u2_noun bus,       //  retain
+                         u2_noun fol);      //  retain
 
         /* u2_wr_hint():
         **
         **   Hint directly in a modern style.  Returns `u2_none` if hint
         **   processing fails.
         */
-          u2_weak
+          u2_weak                           //  transfer
           u2_wr_hint(u2_ray  wir_r,
-                     u2_noun zep,
-                     u2_noun hod,
-                     u2_noun bus,
-                     u2_noun fol);
+                     u2_noun zep,           //  retain
+                     u2_noun hod,           //  retain
+                     u2_noun bus,           //  retain
+                     u2_noun fol);          //  retain
 
         /* u2_wr_nock_keep(wir, bus, fol):
         */
-          u2_weak
+          u2_weak                           //  transfer
           u2_wr_nock_keep(u2_ray  wir_r,
-                          u2_noun bus,
-                          u2_noun fol);
+                          u2_noun bus,      //  retain
+                          u2_noun fol);     //  retain
 
         /* u2_wr_nock_lame():
         **
         **    Execute `(nock bus fol)` with a simple reference interpreter.
         */
-          u2_weak
+          u2_weak                           //  transfer
           u2_wr_nock_lame(u2_ray  wir_r,
-                          u2_noun bus,
+                          u2_noun bus,      //  retain
                           u2_noun fol);
 
-        /* u2_wr_nock_toss():
+        /* u2_wr_toss():
         **
         **    Execute `(nock bus fol)`, losing `bus`, holding `fol`.
         */
-          u2_weak
-          u2_wr_nock_toss(u2_ray  wir_r,
-                          u2_noun bus,
-                          u2_noun fol);
+          u2_weak                           //  transfer
+          u2_wr_toss(u2_ray  wir_r,
+                          u2_noun bus,      //  transfer
+                          u2_noun fol);     //  retain
+
+        /* u2_wr_mung(): nock call with gate and sample.
+        */
+          u2_weak                           //  transfer
+          u2_wr_mung(u2_ray  wir_r,
+                     u2_noun gat,           //  retain
+                     u2_noun sam);          //  transfer
