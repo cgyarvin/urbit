@@ -89,6 +89,8 @@ u2_mean(u2_noun som,
   c3_w               len_w;
   struct _mean_pair* prs_m;
 
+  c3_assert(u2_none != som);
+
   /* Count.
   */
   len_w = 0;
@@ -131,6 +133,9 @@ u2_weak
 u2_frag(u2_atom a,
         u2_noun b)
 {
+  c3_assert(u2_none != a);
+  c3_assert(u2_none != b);
+
   if ( u2_fly_is_cat(a) ) {
     c3_w dep_w = u2_ax_dep(a);
 
@@ -272,6 +277,8 @@ _mug_dog(u2_noun veb)
 c3_w
 u2_mug(u2_noun veb)
 {
+  c3_assert(u2_none != veb);
+
   if ( u2_fly_is_cat(veb) ) {
     c3_w zun_w = 0x18d0a625;
 
@@ -468,6 +475,9 @@ u2_atom
 u2_nord(u2_noun a,
         u2_noun b)
 {
+  c3_assert(u2_none != a);
+  c3_assert(u2_none != b);
+
   if ( a == b ) {
     return _1;
   }
@@ -923,6 +933,8 @@ u2_bytes(c3_w    a_w,
 {
   c3_w i_w;
 
+  c3_assert(u2_none != d);
+
   /* Efficiency: don't call u2_word().
   */
   for ( i_w = 0; i_w < b_w; i_w++ ) {
@@ -1003,6 +1015,8 @@ u2_words(c3_w    a_w,
 {
   c3_w i_w;
 
+  c3_assert(u2_none != d);
+
   /* Efficiency: don't call u2_word().
   */
   for ( i_w = 0; i_w < b_w; i_w++ ) {
@@ -1026,12 +1040,17 @@ u2_chop(c3_g    met_g,
 {
   c3_w i_w;
 
+  c3_assert(u2_none != src);
+  c3_assert(u2_fly_is_atom(src));
+
   if ( met_g < 5 ) {
     c3_w san_w = (1 << met_g); 
     c3_w mek_w = ((1 << san_w) - 1);
     c3_w baf_w = (fum_w << met_g);
     c3_w bat_w = (tou_w << met_g);
 
+    // XX: efficiency: poor.  Iterate by words.
+    //
     for ( i_w = 0; i_w < wid_w; i_w++ ) {
       c3_w waf_w = (baf_w >> 5);
       c3_g raf_g = (baf_w & 31);

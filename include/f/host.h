@@ -187,11 +187,21 @@
 
     /* u2_ho_dive():
     **
-    **   Report compatibility failure in `xip`. 
+    **   Report compatibility failure in `xip`, with subject `bus`.
     */
       void
-      u2_ho_dive(u2_ray  wir_r,
-                 u2_noun xip);
+      u2_ho_dive(u2_wire wir_r,
+                 u2_noun xip,       //  retain
+                 u2_noun bus);      //  retain
+
+    /* u2_ho_fine():
+    **
+    **   Report test execution in `xip`, with subject `bus`.
+    */
+      void
+      u2_ho_fine(u2_wire wir_r,
+                 u2_noun xip,       //  retain
+                 u2_noun bus);      //  retain
 
     /* u2_ho_fire(): 
     **

@@ -7,33 +7,38 @@
 
 /* functions
 */
-  u2_atom
-  j2_mbc(Pit, met)(u2_wire wir_r, u2_atom dis, u2_atom dat)
+  u2_weak                                                         //  transfer
+  j2_mbc(Pit, met)(u2_wire wir_r, 
+                   u2_atom a,                                     //  retain
+                   u2_atom b)                                     //  retain
   {
-    if ( !u2_fly_is_cat(dis) || (dis >= 32) ) {
-      if ( _0 == dat ) {
+    if ( !u2_fly_is_cat(a) || (a >= 32) ) {
+      if ( _0 == b ) {
         return _0;
       } else return _1;
     }
     else {
-      c3_w met_w = u2_met(dis, dat);
+      c3_w met_w = u2_met(a, b);
 
       if ( !u2_fly_is_cat(met_w) ) {
-        return u2_bn_words(wir_r, 1, &met_w);
+        return u2_rl_words(wir_r, 1, &met_w);
       }
-      else return u2_met(dis, dat);
+      else return u2_met(a, b);
     }
   }
-  u2_noun
-  j2_mb(Pit, met)(u2_wire wir_r, u2_noun cor)
+  u2_weak                                                         //  transfer
+  j2_mb(Pit, met)(u2_wire wir_r, 
+                  u2_noun cor)                                    //  retain
   {
-    u2_noun dis, dat;
+    u2_noun a, b;
 
-    u2_bl_yes(wir_r, u2_mean(cor, 8, &dis, 9, &dat, 0));
-    dis = u2_bl_flat(wir_r, dis);
-    dat = u2_bl_flat(wir_r, dat);
+    if ( (u2_no == u2_mean(cor, 8, &a, 9, &b, 0)) ||
+         (u2_no == u2_stud(a)) ||
+         (u2_no == u2_stud(b)) )
     {
-      return j2_mbc(Pit, met)(wir_r, dis, dat);
+      return u2_none;
+    } else {
+      return j2_mbc(Pit, met)(wir_r, a, b);
     }
   }
 

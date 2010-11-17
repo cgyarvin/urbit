@@ -542,13 +542,6 @@ _rl_bloq_grab(u2_ray ral_r,
             _rl_bloq_make(ral_r, box_r, siz_w, 1);
           }
           else {
-#if 0
-            if ( u2_rail_box_use(box_r) != 0 ) {
-              printf("box_r %d.%x, bxu %d\n",
-                      u2_ray_a(box_r), u2_ray_b(box_r),
-                      u2_rail_box_use(box_r));
-            }
-#endif
             c3_assert(u2_rail_box_use(box_r) == 0);
             u2_rail_box_use(box_r) = 1;
           }
@@ -1072,145 +1065,6 @@ u2_rl_water(u2_ray ral_r,
   }
 }
 
-/* u2_rl_bytes():
-**
-**   Copy [a] bytes from [b].
-*/
-u2_weak
-u2_rl_bytes(u2_ray      ral_r,
-            c3_w        a_w,
-            const c3_y* b_y)
-{
-  /* Strip trailing zeroes.
-  */
-  while ( a_w && !b_y[a_w - 1] ) {
-    a_w--;
-  }
-
-  /* Check for cat.
-  */
-  if ( a_w <= 4 ) {
-    if ( !a_w ) {
-      return 0;
-    }
-    else if ( a_w == 1 ) {
-      return b_y[0];
-    }
-    else if ( a_w == 2 ) {
-      return (b_y[0] | (b_y[1] << 8));
-    }
-    else if ( a_w == 3 ) {
-      return (b_y[0] | (b_y[1] << 8) | (b_y[2] << 16));
-    }
-    else if ( (b_y[3] <= 0x7f) ) {
-      return (b_y[0] | (b_y[1] << 8) | (b_y[2] << 16) | (b_y[3] << 24));
-    }
-  }
-
-  /* Allocate, fill, return.
-  */
-  {
-    c3_w len_w = (a_w + 3) >> 2;
-
-    if ( len_w >= (1 << 27) ) {
-      u2_ho_warn_here();
-      return u2_none;
-    }
-    if ( u2_no == u2_rl_open(ral_r, (len_w + c3_wiseof(u2_loom_atom))) ) {
-      u2_ho_warn_here();
-      return u2_none;
-    }
-    else { 
-      u2_ray nov_r;
-      u2_noun nov;
-
-      nov_r = _rl_bloq_grab(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
-      nov = u2_pug_of(nov_r, 0);
-
-      *u2_at_dog_mug(nov) = 0;
-      *u2_at_pug_len(nov) = len_w;
-
-      /* Clear the words.
-      */
-      {
-        c3_w i_w;
-
-        for ( i_w=0; i_w < len_w; i_w++ ) {
-          *u2_at_pug_buf(nov, i_w) = 0;
-        }
-      }
-
-      /* Fill the bytes.
-      */
-      {
-        c3_w i_w;
-
-        for ( i_w=0; i_w < a_w; i_w++ ) {
-          *u2_at_pug_buf(nov, (i_w >> 2))
-            |=
-              (b_y[i_w] << ((i_w & 3) * 8));
-        }
-      }
-      return nov;
-    }
-  }
-}
-
-/* u2_rl_string():
-**
-**   u2_rl_bytes(ral_r, strlen(a_c), (c3_y *)a_c)
-*/
-u2_weak
-u2_rl_string(u2_ray      ral_r,
-             const c3_c* a_c)
-{
-  return u2_rl_bytes(ral_r, strlen(a_c), (c3_y *)a_c);
-}
-
-/* u2_rl_cell(): 
-**
-**   Produce the cell [a b].
-*/
-u2_weak
-u2_rl_cell(u2_ray  ral_r,
-           u2_noun a,
-           u2_noun b)
-{
-  if ( (u2_none == a) || (u2_none == b) ) {
-    u2_rl_lose(ral_r, a);
-    u2_rl_lose(ral_r, b);
-    return u2_none;
-  }
-
-  /* Seniority restrictions.  Ice if these cannot be met.
-  */
-  {
-    c3_assert(u2_no == u2_rl_junior(ral_r, a));
-    c3_assert(u2_no == u2_rl_junior(ral_r, b));
-  }
-
-  if ( u2_no == u2_rl_open(ral_r, c3_wiseof(u2_loom_cell)) ) {
-    u2_rl_lose(ral_r, a);
-    u2_rl_lose(ral_r, b);
-
-    u2_ho_warn_here();
-    return u2_none;
-  }
-  else {
-    u2_ray nov_r;
-    u2_noun nov;
-
-    nov_r = _rl_bloq_grab(ral_r, c3_wiseof(u2_loom_cell));
-    nov = u2_pom_of(nov_r, 0);
-
-    *u2_at_dog_mug(nov) = 0;
-    *u2_at_pom_hed(nov) = a;
-    *u2_at_pom_tel(nov) = b;
-
-    return nov;
-  }
-}
-
 /* u2_rl_take():
 **
 **   Produce `a`, not referencing the can.  Copy or gain reference.
@@ -1294,87 +1148,6 @@ u2_rl_take(u2_ray  ral_r,
   }
 }
 
-/* u2_rl_mp():
-**
-**   Copy the GMP integer [a] into an atom.
-*/
-u2_weak
-u2_rl_mp(u2_ray ral_r,
-         mpz_t  a_mp)
-{
-  c3_assert(sizeof(mp_limb_t) == 4);
-
-  /* Efficiency: unnecessary copy.
-  */
-  {
-    c3_w pyg_w  = mpz_size(a_mp);
-    c3_w *bav_w = alloca(pyg_w * 4);
-
-    mpz_export(bav_w, 0, -1, 4, 0, 0, a_mp);
-    mpz_clear(a_mp);
-
-    return u2_rl_words(ral_r, pyg_w, bav_w);
-  }
-}
-
-/* u2_rl_words():
-**
-**   Copy [a] words from [b] into an atom.
-*/
-u2_weak
-u2_rl_words(u2_ray      ral_r,
-            c3_w        a_w,
-            const c3_w* b_w)
-{
-  /* Strip trailing zeroes.
-  */
-  while ( a_w && !b_w[a_w - 1] ) {
-    a_w--;
-  }
-
-  /* Check for cat.
-  */
-  if ( !a_w ) {
-    return 0;
-  }
-  else if ( (a_w == 1) && !(b_w[0] >> 31) ) {
-    return b_w[0];
-  }
-
-  /* Allocate, fill, return.
-  */
-  {
-    if ( a_w >= (1 << 27) ) {
-      u2_ho_warn_here();
-      return u2_none;
-    }
-    if ( u2_no == u2_rl_open(ral_r, (a_w + c3_wiseof(u2_loom_atom))) ) {
-      return u2_none;
-    }
-    else { 
-      u2_ray  nov_r;
-      u2_noun nov;
-
-      nov_r = _rl_bloq_grab(ral_r, (a_w + c3_wiseof(u2_loom_atom)));
-      nov = u2_pug_of(nov_r, 0);
-
-      *u2_at_dog_mug(nov) = 0;
-      *u2_at_pug_len(nov) = a_w;
-
-      /* Fill the words.
-      */
-      {
-        c3_w i_w;
-
-        for ( i_w=0; i_w < a_w; i_w++ ) {
-          *u2_at_pug_buf(nov, i_w) = b_w[i_w];
-        }
-      }
-      return nov;
-    }
-  }
-}
-
 /* u2_rl_slab():
 **
 **   Create a blank atomic slab of `len` words.
@@ -1399,6 +1172,18 @@ u2_rl_slab(u2_rail ral_r,
     }
   }
   return (nov_r + c3_wiseof(u2_loom_atom));
+}
+
+/* u2_rl_slaq():
+**
+**   Create a blank atomic slab of `len` bloqs of size `met`.
+*/
+u2_ray
+u2_rl_slaq(u2_wire wir_r,
+           c3_g    met_g,
+           c3_w    len_w)
+{
+  return u2_rl_slab(wir_r, ((len_w << met_g) + 31) >> 5);
 }
 
 /* u2_rl_mint():
@@ -1476,4 +1261,521 @@ u2_rl_malt(u2_rail ral_r,
     }
   }
   return u2_rl_mint(ral_r, sal_r, len_w);
+}
+
+/* u2_rl_bytes():
+**
+**   Copy `a` bytes from `b` to an LSB first atom.
+*/
+u2_weak                           // transfer
+u2_rl_bytes(u2_ray      ral_r,
+            c3_w        a_w,
+            const c3_y* b_y)
+{
+  /* Strip trailing zeroes.
+  */
+  while ( a_w && !b_y[a_w - 1] ) {
+    a_w--;
+  }
+
+  /* Check for cat.
+  */
+  if ( a_w <= 4 ) {
+    if ( !a_w ) {
+      return 0;
+    }
+    else if ( a_w == 1 ) {
+      return b_y[0];
+    }
+    else if ( a_w == 2 ) {
+      return (b_y[0] | (b_y[1] << 8));
+    }
+    else if ( a_w == 3 ) {
+      return (b_y[0] | (b_y[1] << 8) | (b_y[2] << 16));
+    }
+    else if ( (b_y[3] <= 0x7f) ) {
+      return (b_y[0] | (b_y[1] << 8) | (b_y[2] << 16) | (b_y[3] << 24));
+    }
+  }
+
+  /* Allocate, fill, return.
+  */
+  {
+    c3_w len_w = (a_w + 3) >> 2;
+
+    if ( len_w >= (1 << 27) ) {
+      u2_ho_warn_here();
+      return u2_none;
+    }
+    if ( u2_no == u2_rl_open(ral_r, (len_w + c3_wiseof(u2_loom_atom))) ) {
+      u2_ho_warn_here();
+      return u2_none;
+    }
+    else { 
+      u2_ray nov_r;
+      u2_noun nov;
+
+      nov_r = _rl_bloq_grab(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
+      nov = u2_pug_of(nov_r, 0);
+
+      *u2_at_dog_mug(nov) = 0;
+      *u2_at_pug_len(nov) = len_w;
+
+      /* Clear the words.
+      */
+      {
+        c3_w i_w;
+
+        for ( i_w=0; i_w < len_w; i_w++ ) {
+          *u2_at_pug_buf(nov, i_w) = 0;
+        }
+      }
+
+      /* Fill the bytes.
+      */
+      {
+        c3_w i_w;
+
+        for ( i_w=0; i_w < a_w; i_w++ ) {
+          *u2_at_pug_buf(nov, (i_w >> 2))
+            |=
+              (b_y[i_w] << ((i_w & 3) * 8));
+        }
+      }
+      return nov;
+    }
+  }
+}
+
+/* u2_rl_cell(): 
+**
+**   Produce the cell `[a b]`.
+*/
+u2_weak                       //  transfer
+u2_rl_cell(u2_ray  ral_r,
+           u2_weak a,         //  transfer
+           u2_weak b)         //  transfer
+{
+  if ( (u2_none == a) || (u2_none == b) ) {
+    u2_rl_lose(ral_r, a);
+    u2_rl_lose(ral_r, b);
+    return u2_none;
+  }
+
+  /* Seniority restrictions.  Ice if these cannot be met.
+  */
+  {
+    c3_assert(u2_no == u2_rl_junior(ral_r, a));
+    c3_assert(u2_no == u2_rl_junior(ral_r, b));
+  }
+
+  if ( u2_no == u2_rl_open(ral_r, c3_wiseof(u2_loom_cell)) ) {
+    u2_rl_lose(ral_r, a);
+    u2_rl_lose(ral_r, b);
+
+    u2_ho_warn_here();
+    return u2_none;
+  }
+  else {
+    u2_ray nov_r;
+    u2_noun nov;
+
+    nov_r = _rl_bloq_grab(ral_r, c3_wiseof(u2_loom_cell));
+    nov = u2_pom_of(nov_r, 0);
+
+    *u2_at_dog_mug(nov) = 0;
+    *u2_at_pom_hed(nov) = a;
+    *u2_at_pom_tel(nov) = b;
+
+    return nov;
+  }
+}
+
+/* u2_rl_list():
+**
+**   Produce a null-terminated list, terminating `...` with `u2_none`.
+*/
+u2_weak                       //  transfer
+u2_rl_list(u2_rail ral_r,
+           ...)               //  transfer
+{
+  c3_w    len_w = 0;
+  va_list vap;
+
+  /* Count.
+  */
+  {
+    va_start(vap, ral_r);
+    while ( u2_none != va_arg(vap, u2_noun) ) {
+      len_w++;
+    }
+    va_end(vap);
+  }
+
+  /* Allocate.
+  */
+  {
+    c3_w    i_w;
+    u2_noun yit[len_w];
+
+    va_start(vap, ral_r);
+    for ( i_w = 0; i_w < len_w; i_w++ ) {
+      yit[i_w] = va_arg(vap, u2_weak);
+    }
+    va_end(vap);
+
+    /* Construct.
+    */
+    {
+      u2_weak woq = u2_nul;
+
+      for ( i_w = 0; i_w < len_w; i_w++ ) {
+        woq = u2_rc(ral_r, yit[len_w - (i_w + 1)], woq);
+      }
+      return woq;
+    }
+  }
+}
+
+/* u2_rl_molt():
+**
+**   Mutate `som` with a 0-terminated list of axis, noun pairs.
+**   Axes must be cats (31 bit).
+*/
+  struct _molt_pair {
+    c3_w    axe_w;
+    u2_noun som;
+  };
+
+  static c3_w
+  _molt_cut(c3_w               len_w,
+            struct _molt_pair* pms_m)
+  {
+    c3_w i_w, cut_t, cut_w;
+
+    cut_t = c3_false;
+    cut_w = 0;
+    for ( i_w = 0; i_w < len_w; i_w++ ) {
+      c3_w axe_w = pms_m[i_w].axe_w;
+
+      if ( (cut_t == c3_false) && (3 == u2_ax_cap(axe_w)) ) {
+        cut_t = c3_true;
+        cut_w = i_w;
+      }
+      pms_m[i_w].axe_w = u2_ax_mas(axe_w);
+    }
+    return cut_t ? cut_w : i_w;
+  }
+
+  static u2_weak                            //  transfer
+  _molt_apply(u2_rail            ral_r,
+              u2_weak            som,       //  retain
+              c3_w               len_w,
+              struct _molt_pair* pms_m)     //  transfer
+  {
+    if ( len_w == 0 ) {
+      return u2_rl_take(ral_r, som);
+    }
+    else if ( (len_w == 1) && (1 == pms_m[0].axe_w) ) {
+      return pms_m[0].som;
+    }
+    else {
+      c3_w cut_w = _molt_cut(len_w, pms_m);
+
+      if ( u2_no == u2_dust(som) ) {
+        return u2_rc
+          (ral_r,
+           _molt_apply(ral_r, u2_nul, cut_w, pms_m),
+           _molt_apply(ral_r, u2_nul, (len_w - cut_w), (pms_m + cut_w)));
+      } else {
+        return u2_rc
+          (ral_r,
+           _molt_apply(ral_r, u2_h(som), cut_w, pms_m),
+           _molt_apply(ral_r, u2_t(som), (len_w - cut_w), (pms_m + cut_w)));
+      }
+    }
+  }
+u2_weak                       //  transfer
+u2_rl_molt(u2_rail ral_r,
+           u2_weak som,       //  retain
+           ...)               //  transfer
+{
+  va_list            ap;
+  c3_w               len_w;
+  struct _molt_pair* pms_m;
+
+  /* Count.
+  */
+  len_w = 0;
+  {
+    va_start(ap, som);
+    while ( 1 ) {
+      if ( 0 == va_arg(ap, c3_w) ) {
+        break;
+      }
+      va_arg(ap, u2_weak*);
+      len_w++;
+    }
+    va_end(ap);
+  }
+  pms_m = alloca(len_w * sizeof(struct _molt_pair));
+
+  /* Install.
+  */
+  {
+    c3_w i_w;
+
+    va_start(ap, som);
+    for ( i_w = 0; i_w < len_w; i_w++ ) {
+      pms_m[i_w].axe_w = va_arg(ap, c3_w);
+      pms_m[i_w].som = va_arg(ap, u2_noun);
+    }
+    va_end(ap);
+  }
+
+  /* Apply.
+  */
+  return _molt_apply(ral_r, som, len_w, pms_m);
+}
+ 
+/* u2_rl_molv():
+**
+**   As u2_rl_molt(), by argument pointer.
+*/
+u2_weak                       //  transfer
+u2_rl_molv(u2_rail ral_r,
+           u2_weak som,       //  retain
+           va_list vap)       //  transfer
+{
+  va_list            vaq;
+  c3_w               len_w;
+  struct _molt_pair* pms_m;
+
+  /* Count.
+  */
+  len_w = 0;
+  {
+    va_copy(vaq, vap);
+    while ( 1 ) {
+      if ( 0 == va_arg(vaq, c3_w) ) {
+        break;
+      }
+      va_arg(vaq, u2_weak*);
+      len_w++;
+    }
+    va_end(vaq);
+  }
+  pms_m = alloca(len_w * sizeof(struct _molt_pair));
+
+  /* Install.
+  */
+  {
+    c3_w i_w;
+
+    va_copy(vaq, vap);
+    for ( i_w = 0; i_w < len_w; i_w++ ) {
+      pms_m[i_w].axe_w = va_arg(vaq, c3_w);
+      pms_m[i_w].som = va_arg(vaq, u2_noun);
+    }
+    va_end(vaq);
+  }
+
+  /* Apply.
+  */
+  return _molt_apply(ral_r, som, len_w, pms_m);
+}
+
+/* u2_rl_mp():
+**
+**   Copy the GMP integer [a] into an atom.
+*/
+u2_weak                       //  transfer
+u2_rl_mp(u2_ray ral_r,
+         mpz_t  a_mp)         //  transfer (GMP)
+{
+  c3_assert(sizeof(mp_limb_t) == 4);
+
+  /* Efficiency: unnecessary copy.
+  */
+  {
+    c3_w pyg_w  = mpz_size(a_mp);
+    c3_w *bav_w = alloca(pyg_w * 4);
+
+    mpz_export(bav_w, 0, -1, 4, 0, 0, a_mp);
+    mpz_clear(a_mp);
+
+    return u2_rl_words(ral_r, pyg_w, bav_w);
+  }
+}
+
+/* u2_rl_rack():
+**
+**   Produce an n-tuple, terminating `...` with `u2_none`.
+*/
+u2_weak                       //  transfer
+u2_rl_rack(u2_rail ral_r,
+           ...)               //  transfer
+{
+  c3_w    len_w = 0;
+  va_list vap;
+
+  /* Count.
+  */
+  {
+    va_start(vap, ral_r);
+    while ( u2_none != va_arg(vap, u2_noun) ) {
+      len_w++;
+    }
+    va_end(vap);
+
+    if ( 0 == len_w ) {
+      return u2_none;
+    }
+  }
+
+  /* Allocate.
+  */
+  {
+    c3_w    i_w;
+    u2_noun yit[len_w];
+
+    va_start(vap, ral_r);
+    for ( i_w = 0; i_w < len_w; i_w++ ) {
+      yit[i_w] = va_arg(vap, u2_weak);
+    }
+    va_end(vap);
+
+    /* Construct.
+    */
+    {
+      u2_weak woq = yit[len_w - 1];
+
+      for ( i_w = 1; i_w < len_w; i_w++ ) {
+        woq = u2_rc(ral_r, yit[len_w - (i_w + 1)], woq);
+      }
+      return woq;
+    }
+  }
+}
+
+/* u2_rl_string():
+**
+**   Produce an LSB-first atom from the C string `a`.
+*/
+u2_weak                           //  transfer
+u2_rl_string(u2_ray      ral_r,
+             const c3_c* a_c)
+{
+  return u2_rl_bytes(ral_r, strlen(a_c), (c3_y *)a_c);
+}
+
+/* u2_rl_vint():
+**
+**   Create `a + 1`.
+*/
+u2_weak                                                           //  transfer
+u2_rl_vint(u2_rail ral_r,
+           u2_weak a)                                             //  transfer
+{
+  if ( u2_none == a ) {
+    return a;
+  } else {
+    if ( u2_fly_is_cat(a) ) {
+      c3_w vin_w = (a + 1);
+
+      if ( a == 0x7fffffff ) {
+        return u2_rl_words(ral_r, 1, &vin_w);
+      }
+      else return vin_w;
+    }
+    else {
+      c3_w met_w = u2_met(5, a);
+      c3_w end_w = u2_atom_word(a, (met_w - 1));
+
+      if ( end_w != 0xffffffff ) {
+        u2_ray vin_r = u2_rl_slab(ral_r, met_w);
+        c3_w   i_w;
+
+        for ( i_w = 0; i_w < (met_w - 1); i_w++ ) {
+          *u2_at_ray(vin_r + i_w) = u2_atom_word(a, i_w);
+        }
+        *u2_at_ray(vin_r + (met_w - 1)) = (end_w + 1);
+
+        u2_rl_lose(ral_r, a);
+        return u2_rl_mint(ral_r, vin_r, met_w);
+      }
+      else {
+        c3_w   len_w = (met_w + 1);
+        u2_ray vin_r = u2_rl_slab(ral_r, len_w);
+        c3_w   i_w;
+
+        for ( i_w = 0; i_w < (met_w - 1); i_w++ ) {
+          *u2_at_ray(vin_r + i_w) = u2_atom_word(a, i_w);
+        }
+        *u2_at_ray(vin_r + (met_w - 1)) = 0;
+        *u2_at_ray(vin_r + met_w) = 1;
+
+        u2_rl_lose(ral_r, a);
+        return u2_rl_mint(ral_r, vin_r, len_w);
+      }
+    }
+  }
+}
+
+/* u2_rl_words():
+**
+**   Copy [a] words from [b] into an atom.
+*/
+u2_weak                         //  transfer
+u2_rl_words(u2_ray      ral_r,
+            c3_w        a_w,
+            const c3_w* b_w)
+{
+  /* Strip trailing zeroes.
+  */
+  while ( a_w && !b_w[a_w - 1] ) {
+    a_w--;
+  }
+
+  /* Check for cat.
+  */
+  if ( !a_w ) {
+    return 0;
+  }
+  else if ( (a_w == 1) && !(b_w[0] >> 31) ) {
+    return b_w[0];
+  }
+
+  /* Allocate, fill, return.
+  */
+  {
+    if ( a_w >= (1 << 27) ) {
+      u2_ho_warn_here();
+      return u2_none;
+    }
+    if ( u2_no == u2_rl_open(ral_r, (a_w + c3_wiseof(u2_loom_atom))) ) {
+      return u2_none;
+    }
+    else { 
+      u2_ray  nov_r;
+      u2_noun nov;
+
+      nov_r = _rl_bloq_grab(ral_r, (a_w + c3_wiseof(u2_loom_atom)));
+      nov = u2_pug_of(nov_r, 0);
+
+      *u2_at_dog_mug(nov) = 0;
+      *u2_at_pug_len(nov) = a_w;
+
+      /* Fill the words.
+      */
+      {
+        c3_w i_w;
+
+        for ( i_w=0; i_w < a_w; i_w++ ) {
+          *u2_at_pug_buf(nov, i_w) = b_w[i_w];
+        }
+      }
+      return nov;
+    }
+  }
 }

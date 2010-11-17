@@ -73,9 +73,9 @@
 
     /* u2_sh_mine(): 
     **
-    **   Produce replacement core with shed battery, or return u2_none.
+    **   Register and/or replace cores..
     */
-      u2_weak
+      u2_noun
       u2_sh_mine(u2_wire wir_r,
                  u2_noun hod,
                  u2_noun cor);

@@ -490,7 +490,7 @@ u2_bn_nock(u2_ray wir_r, u2_noun bus, u2_noun fol)
   if ( (u2_none == bus) || (u2_none == fol) ) {
     return u2_bl_bail(wir_r);
   }
-  return u2_bl_good(wir_r, u2_wr_nock_main(wir_r, bus, fol));
+  return u2_bl_good(wir_r, u2_nk_nock(wir_r, u2_rl_gain(wir_r, bus), fol));
 }
 
 
@@ -512,9 +512,8 @@ u2_bn_mang(u2_wire wir_r,
   dur = u2_bn_molf(wir_r, gat, vap);
   va_end(vap);
 
-  pro = u2_wr_nock_main(wir_r, dur, u2_t(dur));
+  pro = u2_nk_nock(wir_r, dur, u2_t(dur));
 
-  u2_rl_lose(wir_r, dur);
   return pro;
 }
 
@@ -546,7 +545,7 @@ u2_bn_mung(u2_wire wir_r,
            u2_weak gat,
            u2_weak sam)
 {
-  u2_weak pro = u2_wr_mung(wir_r, gat, sam);
+  u2_weak pro = u2_nk_mung(wir_r, gat, sam);
 
   if ( u2_none == pro ) {
     return u2_bl_bail(wir_r);

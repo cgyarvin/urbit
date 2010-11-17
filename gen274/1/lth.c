@@ -7,8 +7,10 @@
 
 /* functions
 */
-  u2_atom
-  j2_mbc(Pit, lth)(u2_wire wir_r, u2_atom a, u2_atom b)
+  u2_weak                                                         //  transfer
+  j2_mbc(Pit, lth)(u2_wire wir_r, 
+                   u2_atom a,                                     //  retain
+                   u2_atom b)                                     //  retain
   {
     mpz_t   a_mp, b_mp;
     u2_flag cmp;
@@ -23,15 +25,18 @@
 
     return cmp;
   }
-  u2_noun
-  j2_mb(Pit, lth)(u2_wire wir_r, u2_noun cor)
+  u2_weak                                                         //  transfer
+  j2_mb(Pit, lth)(u2_wire wir_r, 
+                  u2_noun cor)                                    //  retain
   {
     u2_noun a, b;
 
-    u2_bl_yes(wir_r, u2_mean(cor, 8, &a, 9, &b, 0));
-    a = u2_bl_flat(wir_r, a);
-    b = u2_bl_flat(wir_r, b);
+    if ( (u2_no == u2_mean(cor, 8, &a, 9, &b, 0)) ||
+         (u2_no == u2_stud(a)) ||
+         (u2_no == u2_stud(b)) )
     {
+      return u2_none;
+    } else {
       return j2_mbc(Pit, lth)(wir_r, a, b);
     }
   }

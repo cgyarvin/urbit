@@ -372,7 +372,7 @@ ford_line(struct ford_state* fod_f,
 
         /* Construct product.
         */
-        pro = u2_wr_mung(wir_r, gat, sam);
+        pro = u2_nk_mung(wir_r, gat, sam);
 
         /* Print, if applicable.
         */

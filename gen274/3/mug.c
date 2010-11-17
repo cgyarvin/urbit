@@ -7,13 +7,15 @@
 
 /* functions
 */
-  u2_noun
-  j2_mb(Pit, mug)(u2_wire wir_r, u2_noun cor)
+  u2_weak                                                         //  transfer
+  j2_mb(Pit, mug)(u2_wire wir_r, 
+                  u2_noun cor)                                    //  retain
   {
     u2_noun sam;
 
-    sam = u2_bi_frag(wir_r, 4, cor);
-    {
+    if ( u2_none == (sam = u2_frag(4, cor)) ) {
+      return u2_none;
+    } else {
       return u2_mug(sam);
     }
   }

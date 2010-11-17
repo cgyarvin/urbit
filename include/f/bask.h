@@ -64,85 +64,85 @@
  
     /* u2_ba_find():
     **
-    **   Memory search for `.*(bus fol)` in `bas`.  Result is senior.
+    **   Memory search for `.*(bus fol)` in `bas`.
     */
-      u2_weak
+      u2_weak                                                     //  senior
       u2_ba_find(u2_ray  wir_r,
-                 u2_noun bus,
-                 u2_noun fol);
+                 u2_noun bus,                                     //  retain
+                 u2_noun fol);                                    //  retain
 
     /* u2_ba_save():
     **
-    **   Save result of calculation; consumes `pro`, transmits result.
+    **   Save result of calculation.
     */
-      u2_noun
+      u2_noun                                                     //  transfer
       u2_ba_save(u2_ray  wir_r,
-                 u2_noun bus,
-                 u2_noun fol,
-                 u2_noun pro);
+                 u2_noun bus,                                     //  retain
+                 u2_noun fol,                                     //  retain
+                 u2_noun pro);                                    //  transfer
 
     /* u2_ba_find_plow():
     **
-    **   Memory search for `key` in `poc_o`.  Result is senior.
+    **   Memory search for `key` in `poc_o`.
     */
-      u2_weak
+      u2_weak                                                     //  senior
       u2_ba_find_plow(u2_ray       wir_r,
                       u2_bask_code poc_o,
-                      u2_noun      key);
+                      u2_noun      key);                          //  retain
 
     /* u2_ba_save_plow():
     **
-    **   Save custom plow; copies `key`; consumes `pro`, transmits result.
+    **   Save custom plow.
     */
-      u2_noun
+      u2_noun                                                     //  transfer
       u2_ba_save_plow(u2_ray       wir_r,
                       u2_bask_code poc_o,
-                      u2_noun      key,
-                      u2_noun      val);
+                      u2_noun      key,                           //  retain
+                      u2_noun      val);                          //  transfer
 
     /* u2_ba_sole():
     **
-    **   Save unique noun.  Consumes `som`, transmits result.
+    **   Save unique noun.
     */
-      u2_noun
+      u2_noun                                                     //  transfer
       u2_ba_sole(u2_ray  wir_r,
-                 u2_noun som);
+                 u2_noun som);                                    //  transfer
 
     /* u2_ba_sole_cell():
     **
-    **   Construct and save cell.  Consumes arguments, transmits result.
+    **   Construct and save cell.
     */
-      u2_noun
+      u2_noun                                                     //  transfer
       u2_ba_sole_cell(u2_ray  wir_r,
-                      u2_noun hed,
-                      u2_noun tal);
+                      u2_noun hed,                                //  transfer
+                      u2_noun tal);                               //  transfer
 
     /* u2_ba_sole_trel():
     **
     **   Construct and save trel.  Consumes arguments, transmits result.
     */
-      u2_noun
+      u2_noun                                                     //  transfer
       u2_ba_sole_trel(u2_ray  wir_r,
-                      u2_noun one,
-                      u2_noun two,
-                      u2_noun tri);
+                      u2_noun one,                                //  transfer
+                      u2_noun two,                                //  transfer
+                      u2_noun tri);                               //  transfer
 
     /* u2_ba_sole_qual():
     **
     **   Construct and save quadruple.  Consumes arguments, transmits result.
     */
-      u2_noun
+      u2_noun                                                     //  transfer
       u2_ba_sole_qual(u2_ray  wir_r,
-                      u2_noun one,
-                      u2_noun two,
-                      u2_noun tri,
-                      u2_noun fer);
+                      u2_noun one,                                //  transfer
+                      u2_noun two,                                //  transfer
+                      u2_noun tri,                                //  transfer
+                      u2_noun fer);                               //  transfer
 
     /* u2_ba_sole_tupl():
     **
     **   Construct and save n-tuple.  Consumes arguments, transmits result.
     **   Terminator is u2_none.
     */
-      u2_noun
+      u2_noun                                                     //  transfer
       u2_ba_sole_tupl(u2_ray  wir_r,
-                      ...);
+                      ...);                                       //  transfer

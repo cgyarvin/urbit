@@ -103,10 +103,9 @@
 #     define u2_ri(ral_r, a, b, c, d, e)  u2_rl_quil(ral_r, a, b, c, e)
 #     define u2_ro(ral_r, a)              u2_rl_lone(ral_r, a)
 #     define u2_ru(ral_r, a)              u2_rl_unit(ral_r, a)
+#     define u2_rx(ral_r, a)              u2_rl_take(ral_r, a)
 #     define u2_rl                        u2_rl_list
 #     define u2_rk                        u2_rl_rack
-
-#     define u2_rx(ral_r, a)              u2_rl_take(ral_r, a)
 
 
     /** Functions.
@@ -169,9 +168,9 @@
         **
         **   Gain a reference to `som`, returning it.
         */
-          u2_weak                       //  transfer
+          u2_weak                                                 //  transfer
           u2_rl_gain(u2_ray  ral_r,
-                     u2_weak som);      //  retain
+                     u2_weak som);                                //  retain
 
         /* u2_rl_free():
         **
@@ -188,7 +187,7 @@
         */
           u2_flag
           u2_rl_junior(u2_ray  ral_r,
-                       u2_noun dus);      //  retain
+                       u2_noun dus);                              //  retain
 
         /* u2_rl_leap():
         **
@@ -223,7 +222,7 @@
         */
           void
           u2_rl_lose(u2_ray  ral_r,
-                     u2_weak som);      //  transfer
+                     u2_weak som);                                //  transfer
 
         /* u2_rl_malloc():
         **
@@ -237,7 +236,7 @@
         **
         **   Initialize slab `sal` as an atom, internally measured.
         */
-          u2_atom                       //  transfer
+          u2_atom                                                 //  transfer
           u2_rl_malt(u2_rail ral_r,
                      u2_ray  sal_r);
 
@@ -245,7 +244,7 @@
         **
         **   Initialize slab `sal` as an atom, externally measured.
         */
-          u2_atom                       //  transfer
+          u2_atom                                                 //  transfer
           u2_rl_mint(u2_rail ral_r,
                      u2_ray  sal_r,
                      c3_w    len_w);
@@ -291,13 +290,22 @@
           u2_rl_slab(u2_rail ral_r,
                      c3_w    len_w);
 
+        /* u2_rl_slaq():
+        **
+        **   Create a blank atomic slab of `len` bloqs of size `met`.
+        */
+          u2_ray
+          u2_rl_slaq(u2_wire wir_r,
+                     c3_g    met_g,
+                     c3_w    len_w);
+
         /* u2_rl_take():
         **
         **   Produce `a`, as eligible result.  Copy juniors; reference peers.
         */
-          u2_weak                       //  transfer
+          u2_weak                                                 //  transfer
           u2_rl_take(u2_ray  ral_r,
-                     u2_weak a);        //  retain
+                     u2_weak a);                                  //  retain
 #         define u2_rl_ice(ral_r, a) \
             u2_rl_take(ral_r, a)
 
@@ -336,7 +344,7 @@
         **
         **   Copy `a` bytes from `b` to an LSB first atom.
         */
-          u2_weak                           // transfer
+          u2_weak                                                 // transfer
           u2_rl_bytes(u2_ray      ral_r,
                       c3_w        a_w,
                       const c3_y* b_y);
@@ -345,27 +353,27 @@
         **
         **   Produce the cell `[a b]`.
         */
-          u2_weak                       //  transfer
+          u2_weak                                                 //  transfer
           u2_rl_cell(u2_ray  ral_r,
-                     u2_weak a,         //  transfer
-                     u2_weak b);        //  transfer
+                     u2_weak a,                                   //  transfer
+                     u2_weak b);                                  //  transfer
 
         /* u2_rl_list():
         **
         **   Produce a null-terminated list, terminating `...` with `u2_none`.
         */
-          u2_weak                       //  transfer
+          u2_weak                                                 //  transfer
           u2_rl_list(u2_rail ral_r,
-                     ...);              //  transfer
+                     ...);                                        //  transfer
 
         /* u2_rl_lone():
         **
         **   Create the unit `[0 a]`.
         */
 #if 0
-          u2_weak                       //  transfer
+          u2_weak                                                 //  transfer
           u2_rl_lone(u2_rail ral_r,
-                     u2_weak a);        //  transfer
+                     u2_weak a);                                  //  transfer
 #else
 #         define u2_rl_lone(ral_r, a) \
             u2_rc(ral_r, a, u2_nul)
@@ -376,39 +384,39 @@
         **   Mutate `som` with a 0-terminated list of axis, noun pairs.
         **   Axes must be cats (31 bit).
         */
-          u2_weak                       //  transfer
+          u2_weak                                                 //  transfer
           u2_rl_molt(u2_rail ral_r,
-                     u2_weak som,       //  retain
-                     ...);              //  transfer
+                     u2_weak som,                                 //  retain
+                     ...);                                        //  transfer
        
-        /* u2_rl_molf():
+        /* u2_rl_molv():
         **
         **   As u2_rl_molt(), by argument pointer.
         */
-          u2_weak                       //  transfer
-          u2_rl_molf(u2_rail ral_r,
-                     u2_weak som,       //  retain
-                     va_list vap);      //  transfer
+          u2_weak                                                 //  transfer
+          u2_rl_molv(u2_rail ral_r,
+                     u2_weak som,                                 //  retain
+                     va_list vap);                                //  transfer
 
         /* u2_rl_mp():
         **
         **   Copy the GMP integer [a] into an atom.
         */
-          u2_weak                       //  transfer
+          u2_weak                                                 //  transfer
           u2_rl_mp(u2_ray ral_r,
-                   mpz_t  a_mp);        //  transfer (GMP)
+                   mpz_t  a_mp);                                  //  transfer
 
         /* u2_rl_qual():
         **
         **   Produce the triple `[a b c d]`.
         */
 #if 0
-          u2_weak                       //  transfer
+          u2_weak                                                 //  transfer
           u2_rl_qual(u2_rail ral_r,
-                     u2_weak a,         //  transfer
-                     u2_weak b,         //  transfer
-                     u2_weak c,         //  transfer
-                     u2_weak d);        //  transfer
+                     u2_weak a,                                   //  transfer
+                     u2_weak b,                                   //  transfer
+                     u2_weak c,                                   //  transfer
+                     u2_weak d);                                  //  transfer
 #else
 #         define u2_rl_qual(ral_r, a, b, c, d) \
             u2_rc(ral_r, a, u2_rt(ral_r, b, c, d))
@@ -418,15 +426,15 @@
         **
         **   Produce an n-tuple, terminating `...` with `u2_none`.
         */
-          u2_weak                       //  transfer
+          u2_weak                                                 //  transfer
           u2_rl_rack(u2_rail ral_r,
-                     ...);              //  transfer
+                     ...);                                        //  transfer
 
         /* u2_rl_string():
         **
         **   Produce an LSB-first atom from the C string `a`.
         */
-          u2_weak                           //  transfer
+          u2_weak                                                 //  transfer
           u2_rl_string(u2_ray      ral_r,
                        const c3_c* a_c);
 
@@ -435,11 +443,11 @@
         **   Create the triple `[a b c]`.
         */
 #if 0
-          u2_weak                       //  transfer
+          u2_weak                                                 //  transfer
           u2_rl_trel(u2_rail ral_r,
-                     u2_weak a,         //  transfer
-                     u2_weak b,         //  transfer
-                     u2_weak c);        //  transfer
+                     u2_weak a,                                   //  transfer
+                     u2_weak b,                                   //  transfer
+                     u2_weak c);                                  //  transfer
 #else
 #         define u2_rl_trel(ral_r, a, b, c) \
             u2_rc(ral_r, a, u2_rc(ral_r, b, c))
@@ -450,14 +458,21 @@
         **   Create the unit `[0 a]`.
         */
 #if 0
-          u2_weak                       //  transfer
+          u2_weak                                                 //  transfer
           u2_rl_unit(u2_rail ral_r,
-                     u2_weak a);        //  transfer
+                     u2_weak a);                                  //  transfer
 #else
 #         define u2_rl_unit(ral_r, a) \
             u2_rc(ral_r, u2_nul, a)
 #endif
 
+        /* u2_rl_vint():
+        **
+        **   Create `a + 1`.
+        */
+          u2_weak                                                 //  transfer
+          u2_rl_vint(u2_rail ral_r,
+                     u2_weak a);                                  //  transfer
 
         /* u2_rl_words():
         **

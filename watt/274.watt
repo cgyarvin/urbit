@@ -363,9 +363,10 @@
 ::::
 ::  
     cat
+  =<  ^?([%mine !=(->) %cat ~] .)
   =+  [a=*bloq b=@ c=@]
   |=
-  (add (lsh a (met a c) b) c)
+  (add (lsh a (met a b) c) b)
 ::::
 ::
     con
@@ -596,7 +597,7 @@
   ^-  @
   ?~  b
     0
-  (cat a $(b t.b) i.b)
+  (cat a i.b $(b t.b))
 ::::
 ::
     rip

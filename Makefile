@@ -49,16 +49,12 @@ F_OFILES=\
        f/wire.o \
        f/chad.o \
        f/host.o \
-       f/hint.o \
        f/benx.o \
        f/bail.o \
        f/bask.o \
-       f/lame.o \
-       f/flee.o \
-       f/toss.o \
        f/shed.o \
        f/unix.o \
-       f/main.o
+       f/nock.o
 
 P_OFILES=\
        p/book.o \
@@ -82,13 +78,19 @@ J274_1_OFILES=\
        gen274/1/mul.o \
        gen274/1/sub.o
 
+J274_2_OFILES=\
+       gen274/2/bind.o \
+       gen274/2/clap.o 
+
 J274_3_OFILES=\
+       gen274/3/cat.o \
        gen274/3/met.o \
        gen274/3/mug.o \
        gen274/3/rip.o
 
 J274_OFILES=\
        $(J274_1_OFILES) \
+       $(J274_2_OFILES) \
        $(J274_3_OFILES) \
        gen274/watt.o
 

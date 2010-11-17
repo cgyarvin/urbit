@@ -448,58 +448,48 @@ u2_ho_warn(const c3_c* fil_c,
 
 /* u2_ho_dive():
 **
-**   Report compatibility failure in `xip`. 
+**   Report compatibility failure in `xip`, with subject `bus`.
 */
 void
-u2_ho_dive(u2_ray  wir_r,
-           u2_noun xip)
+u2_ho_dive(u2_wire wir_r,
+           u2_noun xip,       //  retain
+           u2_noun bus)
 {
   c3_c *cos_c = _ho_cstring(xip);
 
-  fprintf(stderr, "ho: jet dive: %s\n", cos_c);
+  fprintf(stderr, "dive: %s: %x\n", cos_c, u2_mug(bus));
   free(cos_c);
 
   c3_assert(0);
 }
 
+/* u2_ho_fine():
+**
+**   Report test execution in `xip`, with subject `bus`.
+*/
+void
+u2_ho_fine(u2_wire wir_r,
+           u2_noun xip,
+           u2_noun bus)
+{
+  c3_c *cos_c = _ho_cstring(xip);
+
+  fprintf(stderr, "fine: %s: %x\n", cos_c, u2_mug(bus));
+  free(cos_c);
+}
+
 /* _ho_execute(): execute jet.
 */
-static u2_weak
+static u2_weak                    //  transfer
 _ho_execute(u2_ray      wir_r,
             u2_ho_jet*  jet_j,
-            u2_noun     cor)
+            u2_noun     cor)      //  retain
 {
-  u2_ray cap_r = u2_rail_cap_r(wir_r);
-  u2_ray jub_r;
-
   if ( 0 == jet_j->fun_f ) {
     return u2_none;
   }
-  else if ( u2_no == u2_rl_leap(wir_r, c3__warm) ) {
-    return u2_none;
-  }
-  else if ( 0 == (jub_r = u2_bl_open(wir_r)) ) {
-    u2_rl_fall(wir_r);
-    return u2_none;
-  }
   else {
-    if ( 1 == u2_bl_set(wir_r) ) {
-      u2_bl_done(wir_r, jub_r);
-      u2_rl_fall(wir_r);
-
-      u2_rail_cap_r(wir_r) = cap_r;
-      return u2_none;
-    } else {
-      u2_noun pro = jet_j->fun_f(wir_r, cor);
-
-      u2_bl_done(wir_r, jub_r);
-      u2_rl_fall(wir_r);
-
-      c3_assert(u2_none != pro);
-      pro = u2_rl_ice(wir_r, pro);
-      u2_rail_cap_r(wir_r) = cap_r;
-      return pro;
-    }
+    return jet_j->fun_f(wir_r, cor);
   }
 }
 
@@ -583,7 +573,7 @@ _ho_drive(u2_ho_driver* dry_d)
 /* _ho_explore_static(): find driver from built-in list, or return 0.
 */
 static u2_ho_driver*
-_ho_explore_static(u2_ray  wir_r,
+_ho_explore_static(u2_wire wir_r,
                    u2_noun xip,
                    c3_c*   cos_c)
 {
@@ -606,7 +596,7 @@ _ho_explore_static(u2_ray  wir_r,
 /* _ho_explore_parent(): find driver from parent, or return 0.
 */
 static u2_ho_driver*
-_ho_explore_parent(u2_ray  wir_r,
+_ho_explore_parent(u2_wire wir_r,
                    u2_noun xip,
                    c3_c*   cos_c)
 {
@@ -641,7 +631,7 @@ _ho_explore_parent(u2_ray  wir_r,
 /* _ho_explore(): find driver from chip, caching.
 */
 static u2_ho_driver*
-_ho_explore(u2_ray  wir_r,
+_ho_explore(u2_wire wir_r,
             u2_noun xip)
 {
   u2_ho_driver* dry_d;
@@ -680,7 +670,7 @@ _ho_explore(u2_ray  wir_r,
 /* _ho_discover(): find jet from xip and fol, caching.
 */
 static u2_ho_jet*
-_ho_discover(u2_ray  wir_r,
+_ho_discover(u2_wire wir_r,
              u2_noun xip,
              u2_noun fol,
              u2_noun cor)
