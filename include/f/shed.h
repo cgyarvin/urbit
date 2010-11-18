@@ -67,41 +67,33 @@
  
     /* u2_sh_find(): find chip by core, or none.  Includes validate.
     */
-      u2_weak
+      u2_weak                                                     //  senior
       u2_sh_find(u2_wire wir_r,
-                 u2_noun cor);
+                 u2_noun cor);                                    //  retain
 
     /* u2_sh_mine(): 
     **
-    **   Register and/or replace cores..
+    **   Register and/or replace core.
     */
-      u2_noun
+      u2_noun                                                     //  transfer
       u2_sh_mine(u2_wire wir_r,
-                 u2_noun hod,
-                 u2_noun cor);
-
-    /* u2_sh_etch():
-    **
-    **   Strip `dep` cores off `cor`, or return u2_none.
-    */
-      u2_weak
-      u2_sh_etch(u2_wire wir_r,
-                 c3_w    w_dep);
+                 u2_noun hod,                                     //  retain
+                 u2_noun cor);                                    //  transfer
 
     /* u2_sh_cook():
     **
     **   Produce hook formula from chip, or u2_none.
     */
-      u2_weak
+      u2_weak                                                     //  senior
       u2_sh_cook(u2_wire     wir_r,
-                 u2_noun     xip,
+                 u2_noun     xip,                                 //  retain
                  const c3_c* tam_c);
 
     /* u2_sh_look():
     **
     **   Produce hook formula from core, or u2_none.
     */
-      u2_weak
+      u2_weak                                                     //  senior
       u2_sh_look(u2_wire     wir_r,
-                 u2_noun     cor,
+                 u2_noun     cor,                                 //  retain
                  const c3_c* tam_c);

@@ -74,10 +74,10 @@ _sh_good_nut(u2_noun nut)
 
 /* u2_sh_mine(): substitute active, annotated battery.
 */
-u2_weak
+u2_weak                                                           //  transfer
 u2_sh_mine(u2_ray  wir_r,
-           u2_clue clu,
-           u2_noun cor)
+           u2_clue clu,                                           //  retain
+           u2_noun cor)                                           //  transfer
 {
   u2_ray sad_r;
   u2_noun pay, bat;
@@ -85,22 +85,21 @@ u2_sh_mine(u2_ray  wir_r,
   u2_chip xip;
 
   if ( 0 == (sad_r = u2_wire_sad_r(wir_r)) ) {
-    return u2_none;
+    return cor;
   }
   else if ( (u2_none == u2_as_cell(cor, &pay, &bat)) || 
             (u2_no == u2_dust(bat)) )
   {
-    u2_ho_warn_here();
-    return u2_none;
+    return cor;
   }
   else if ( u2_none != (xip = u2_ch_find(u2_shed_cad_r(sad_r), bat)) ) {
     u2_noun cyr;
 
-    if ( u2_none == (cyr = u2_rc(wir_r, pay, u2_h(u2_t(xip)))) ) {
-      return u2_none;
+    if ( u2_none == (cyr = u2_rc(wir_r, u2_rx(wir_r, pay), u2_h(u2_t(xip)))) ) {
+      return cor;
     }
     else {
-      u2_rl_gain(wir_r, pay);
+      u2_rl_lose(wir_r, cor);
 
       return cyr;
     }
@@ -110,9 +109,7 @@ u2_sh_mine(u2_ray  wir_r,
             (u2_no == _sh_good_sil(sil)) ||
             (u2_no == _sh_good_nut(nut)) )
   {
-    u2_ho_warn_here();
-
-    return u2_none;
+    return cor;
   }
   else {
     u2_noun dac, bot, pet, xop, cyr;
@@ -122,7 +119,7 @@ u2_sh_mine(u2_ray  wir_r,
       /* disc: dac
       */
       {
-        if ( u2_none == (dac = u2_rl_ice(sad_r, u2_t(clu))) ) {
+        if ( u2_none == (dac = u2_rl_take(sad_r, u2_t(clu))) ) {
           break;
         }
       }
@@ -143,7 +140,7 @@ u2_sh_mine(u2_ray  wir_r,
 #endif
         } 
         else {
-          bot = u2_rl_ice(sad_r, bat);
+          bot = u2_rl_take(sad_r, bat);
 #if 0
           printf("battery: in shed! %d.%x\n",
                   u2_ray_a(u2_dog_a(bot)),
@@ -177,7 +174,7 @@ u2_sh_mine(u2_ray  wir_r,
             }
             else u2_rl_gain(sad_r, xup);
 
-            if ( u2_none == (axe = u2_rl_ice(sad_r, p_bud)) ) {
+            if ( u2_none == (axe = u2_rl_take(sad_r, p_bud)) ) {
               u2_rl_lose(sad_r, xup);
             }
 
@@ -199,7 +196,6 @@ u2_sh_mine(u2_ray  wir_r,
         if ( u2_none == (u2_ch_save(sad_r, u2_shed_cad_r(sad_r), bot, xop)) ) {
           break;
         }
-
         u2_rl_lose(sad_r, xop);
       }
 
@@ -208,11 +204,11 @@ u2_sh_mine(u2_ray  wir_r,
       {
         u2_noun cyr;
 
-        if ( u2_none == (cyr = u2_rc(wir_r, pay, bot)) ) {
+        if ( u2_none == (cyr = u2_rc(wir_r, u2_rx(wir_r, pay), bot)) ) {
           break;
         }
         else {
-          u2_rl_gain(wir_r, pay);
+          u2_rl_lose(wir_r, cor);
 
           return cyr;
         }
@@ -225,7 +221,7 @@ u2_sh_mine(u2_ray  wir_r,
     if ( pet != u2_none ) u2_rl_lose(sad_r, pet);
     if ( xop != u2_none ) u2_rl_lose(sad_r, xop);
 
-    return u2_none;
+    return cor;
   }
 }
 
@@ -383,7 +379,7 @@ u2_sh_look(u2_wire     wir_r,
           }
         }
         else {
-          fol = u2_rl_ice(sad_r, fol);
+          fol = u2_rl_take(sad_r, fol);
 
           if ( _1 != axe_w ) {
             /* XX: suboptimal; use comb:lily.

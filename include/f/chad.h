@@ -73,28 +73,24 @@
     **
     **   Save `val` under `nam` in `cad`, allocating in `ral`.
     **   Return `u2_none` iff allocation fails.  Asserts on duplicate.
-    **
-    **   Caller retains arguments; callee retains result.
     */
-      u2_weak
+      u2_weak                                                     //  retain
       u2_ch_save(u2_ray  ral_r,
                  u2_ray  cad_r,
-                 u2_noun nam,
-                 u2_noun val);
+                 u2_noun nam,                                     //  retain
+                 u2_noun val);                                    //  retain
 
     /* u2_ch_save_cell():
     **
     **   Save `val` under `[hed tal]` in `cad`, allocating in `ral`.
     **   Return `u2_none` iff allocation fails.  Asserts on duplicate.
-    **
-    **   Caller retains arguments; callee retains result.
     */
-      u2_weak
+      u2_weak                                                     //  retain
       u2_ch_save_cell(u2_ray  ral_r,
                       u2_ray  cad_r,
-                      u2_noun hed,
-                      u2_noun tal,
-                      u2_noun val);
+                      u2_noun hed,                                //  retain
+                      u2_noun tal,                                //  retain
+                      u2_noun val);                               //  retain
 
     /* u2_ch_save_mixt():
     **
@@ -103,9 +99,9 @@
     **
     **   Caller retains ownership of arguments; callee retains result.
     */
-      u2_weak
+      u2_weak                                                     //  retain
       u2_ch_save_mixt(u2_ray      ral_r,
                       u2_ray      cad_r,
                       const c3_c* hed_c,
-                      u2_noun     tal,
-                      u2_noun     val);
+                      u2_noun     tal,                            //  retain
+                      u2_noun     val);                           //  retain
