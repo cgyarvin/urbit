@@ -80,12 +80,27 @@ J274_1_OFILES=\
 
 J274_2_OFILES=\
        gen274/2/bind.o \
-       gen274/2/clap.o 
+       gen274/2/clap.o \
+       gen274/2/drop.o \
+       gen274/2/flop.o \
+       gen274/2/lent.o \
+       gen274/2/levy.o \
+       gen274/2/lien.o \
+       gen274/2/need.o \
+       gen274/2/reel.o \
+       gen274/2/roll.o \
+       gen274/2/skim.o \
+       gen274/2/skip.o \
+       gen274/2/snag.o \
+       gen274/2/sort.o \
+       gen274/2/turn.o \
+       gen274/2/weld.o
 
 J274_3_OFILES=\
        gen274/3/cat.o \
        gen274/3/met.o \
        gen274/3/mug.o \
+       gen274/3/rap.o \
        gen274/3/rip.o
 
 J274_OFILES=\

@@ -18,7 +18,7 @@
         return len;
       }
       else if ( u2_no == u2_dust(a) ) {
-        u2_rl_lose(len);
+        u2_rl_lose(wir_r, len);
         return u2_none;
       }
       else {

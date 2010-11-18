@@ -23,12 +23,10 @@
         return u2_none;
       }
       else {
-        b = u2_rc(wir_r, u2_h(a), b);
+        b = u2_rc(wir_r, u2_rx(wir_r, u2_h(a)), b);
         a = u2_t(a);
       }
     }
-  }
-    return u2_bl_bail(wir_r);
   }
   u2_weak                                                         //  transfer
   j2_mb(Pit, flop)(u2_wire wir_r, 

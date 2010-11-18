@@ -1219,7 +1219,7 @@ u2_rl_mint(u2_rail ral_r,
   */
   {
     c3_w old_w = *u2_at_pug_len(nov);
-    c3_w dif_w = (len_w - old_w);
+    c3_w dif_w = (old_w - len_w);
 
     if ( dif_w >= 6 ) {
       u2_ray box_r = nov_r - c3_wiseof(u2_loom_rail_box);

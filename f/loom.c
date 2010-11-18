@@ -1073,8 +1073,8 @@ u2_chop(c3_g    met_g,
     c3_w j_w;
 
     for ( i_w = 0; i_w < wid_w; i_w++ ) {
-      c3_w wuf_w = fum_w + (i_w << hut_g);
-      c3_w wut_w = tou_w + (i_w << hut_g); 
+      c3_w wuf_w = (fum_w + i_w) << hut_g;
+      c3_w wut_w = (tou_w + i_w) << hut_g; 
 
       for ( j_w = 0; j_w < san_w; j_w++ ) {
         *u2_at_ray(dst_r + wut_w + j_w) ^= u2_atom_word(src, wuf_w + j_w);

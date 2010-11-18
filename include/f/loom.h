@@ -202,7 +202,7 @@
         u2_at_ray((2 + (b) + u2_pug_a(a)))
 
 #     define u2_atom_word(a, b) \
-        ( u2_fly_is_cat(a) ? (a) : *u2_at_pug_buf(a, b) )
+        ( u2_fly_is_cat(a) ? (b ? 0 : (a)) : *u2_at_pug_buf(a, b) )
 
     /*** Word axis macros.
     ****
