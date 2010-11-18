@@ -249,6 +249,14 @@
                      u2_ray  sal_r,
                      c3_w    len_w);
 
+        /* u2_rl_moot():
+        **
+        **   Initialize slab `sal` as an atom, originally measured.
+        */
+          u2_atom                                                 //  transfer
+          u2_rl_moot(u2_rail ral_r,
+                     u2_ray  sal_r);
+
         /* u2_rl_open():
         **
         **   Yes iff [a] more words remain in the pad.

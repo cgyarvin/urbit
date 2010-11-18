@@ -29,7 +29,7 @@
         u2_chop(a_g, 0, lew_w, 0, sal_r, b);
         u2_chop(a_g, 0, ler_w, lew_w, sal_r, c);
       }
-      return u2_rl_malt(wir_r, sal_r);
+      return u2_rl_moot(wir_r, sal_r);
     }
   }
 
@@ -57,3 +57,4 @@
     { ".3", j2_mb(Pit, cat), u2_yes, u2_none, u2_none },
     { }
   };
+

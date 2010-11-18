@@ -98,10 +98,17 @@ J274_2_OFILES=\
 
 J274_3_OFILES=\
        gen274/3/cat.o \
+       gen274/3/con.o \
+       gen274/3/cut.o \
+       gen274/3/dis.o \
+       gen274/3/end.o \
+       gen274/3/lsh.o \
        gen274/3/met.o \
+       gen274/3/mix.o \
        gen274/3/mug.o \
        gen274/3/rap.o \
-       gen274/3/rip.o
+       gen274/3/rip.o \
+       gen274/3/rsh.o 
 
 J274_OFILES=\
        $(J274_1_OFILES) \

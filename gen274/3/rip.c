@@ -54,7 +54,7 @@
             for ( j_w = 0; j_w < san_w; j_w++ ) {
               *u2_at_ray(sal_r + j_w) = u2_atom_word(b, wut_w + j_w);
             }
-            rip = u2_rl_malt(wir_r, sal_r);
+            rip = u2_rl_moot(wir_r, sal_r);
             pir = u2_rc(wir_r, rip, pir);
           }
         }

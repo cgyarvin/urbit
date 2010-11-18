@@ -52,7 +52,7 @@
         }
       }
 
-      /* Chop those motherfuckers in.
+      /* Chop those mothercussers in.
       */
       {
         u2_noun cab = b;
@@ -67,7 +67,7 @@
           cab = u2_t(cab);
         }
       }
-      return u2_rl_malt(wir_r, sal_r);
+      return u2_rl_moot(wir_r, sal_r);
     }
   }
   u2_weak                                                         //  transfer

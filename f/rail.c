@@ -1242,6 +1242,30 @@ u2_rl_mint(u2_rail ral_r,
   return nov;
 }
 
+/* u2_rl_moot():
+**
+**   Initialize slab `sal` as an atom, originally measured.
+*/
+u2_atom                                                           //  transfer
+u2_rl_moot(u2_rail ral_r,
+           u2_ray  sal_r)
+{
+  u2_ray  nov_r = (sal_r - c3_wiseof(u2_loom_atom));
+  u2_atom nov = u2_pug_of(nov_r, 0);
+  c3_w    len_w = *u2_at_pug_len(nov);
+  c3_w    las_w = *u2_at_pug_buf(nov, (len_w - 1));
+
+  c3_assert(0 != las_w);
+
+  if ( 1 == len_w ) {
+    if ( u2_fly_is_cat(las_w) ) {
+      u2_rl_lose(ral_r, nov);
+
+      return las_w;
+    }
+  }
+  return nov;
+}
 
 /* u2_rl_malt():
 **
