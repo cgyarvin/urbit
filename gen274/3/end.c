@@ -38,7 +38,7 @@
         }
         u2_chop(a_g, 0, b_w, 0, sal_r, c);
 
-        return u2_rl_moot(wir_r, sal_r);
+        return u2_rl_malt(wir_r, sal_r);
       }
     }
   }
@@ -63,6 +63,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pit, end)[] = {
-    { ".3", j2_mb(Pit, end), u2_no, u2_none, u2_none },
+    { ".3", j2_mb(Pit, end), u2_yes, u2_none, u2_none },
     { }
   };
