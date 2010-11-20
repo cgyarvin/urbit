@@ -972,6 +972,7 @@
 ::::
 ::
     rasp
+  =<  ^?([%mine !=(-) %rasp ~] .)
   |*
   ::::
   ::
@@ -1509,6 +1510,22 @@
     |=
     ^-  *gene
     (scan (rip 3 tex))
+  ::::
+  ::
+      slym
+    =+  rasp
+    =+  tex=@
+    |=
+    =+  src=(rip 3 tex)
+    (done (sym `tube`~(. tube src)))
+  ::::
+  ::
+      slug
+    =+  rasp
+    =+  tex=@
+    |=
+    =+  src=(rip 3 tex)
+    (done (del `tube`~(. tube src)))
   ::::
   ::
       scan

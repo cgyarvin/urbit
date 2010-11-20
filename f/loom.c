@@ -136,6 +136,10 @@ u2_frag(u2_atom a,
   c3_assert(u2_none != a);
   c3_assert(u2_none != b);
 
+  if ( _0 == a ) {
+    return u2_none;
+  }
+
   if ( u2_fly_is_cat(a) ) {
     c3_w dep_w = u2_ax_dep(a);
 

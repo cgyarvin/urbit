@@ -22,6 +22,16 @@ _nock_hint(u2_wire wir_r,
   switch ( zep ) {
     default: return u2_none;
 
+    case c3__chug: {
+      u2_err(wir_r, "chug", hod);
+
+      return u2_nk_nock(wir_r, bus, fol);
+    }
+    case c3__ping: {
+      u2_bx_used(wir_r);
+
+      return u2_nk_nock(wir_r, bus, fol);
+    }
     case c3__memo: {
       u2_weak pro = u2_ba_find(wir_r, bus, fol);
 
