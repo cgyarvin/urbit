@@ -171,10 +171,14 @@ _ford_save_warm(struct ford_state* fod_f,
 static void 
 _ford_gates(struct ford_state* fod_f)
 {
+#if 0
   u2_wire wir_r = fod_f->wir_r;
 
   fod_f->ryd = u2_bn_hook
     (wir_r, u2_bn_hook(wir_r, fod_f->pit, "plow"), "read");
+#else
+  fod_f->ryd = u2_none;
+#endif
 }
 
 /* _ford_load_warm(): load engine from warm image.

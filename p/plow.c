@@ -12,6 +12,29 @@
       u2_burp(wir_r, cat, _dump_type(wir_r, typ))
 
     static u2_noun
+    _plow_find(u2_wire      wir_r, 
+               u2_bask_code poc_o,
+               u2_noun      key)
+    {
+      if ( 0 == u2_plow_(wir_r, bug) ) {
+        return u2_ba_find_plow(wir_r, poc_o, key);
+      }
+      else return u2_none;
+    }
+
+    static u2_noun
+    _plow_save(u2_wire  wir_r,
+               u2_bask_code poc_o,
+               u2_noun      key,
+               u2_noun      val)
+    {
+      if ( 0 == u2_plow_(wir_r, bug) ) {
+        return u2_ba_save_plow(wir_r, poc_o, key, val);
+      }
+      else return val;
+    }
+
+    static u2_noun
     _plow_sole(u2_wire wir_r, u2_noun som)
     {
       // XX: this is necessary because we are not counting refs
@@ -1473,7 +1496,7 @@
   _plow_open(u2_ray  wir_r,
              u2_gene gen)
   {
-    u2_weak zax = u2_ba_find_plow(wir_r, u2_bask_plow_pon, gen);
+    u2_weak zax = _plow_find(wir_r, u2_bask_plow_pon, gen);
 
     if ( u2_none != zax ) {
       return zax;
@@ -1482,7 +1505,7 @@
       zax = _plow_open_main(wir_r, gen);
       zax = _plow_sole(wir_r, zax);
 
-      zax = u2_ba_save_plow(wir_r, u2_bask_plow_pon, gen, zax);
+      zax = _plow_save(wir_r, u2_bask_plow_pon, gen, zax);
       return zax;
     }
   }
@@ -2104,8 +2127,9 @@
                     u2_pool gil,
                     u2_term cog)
     {
+#if 0
       u2_noun mum  = u2_bu(wir_r, sut, bar, axe, gil, cog);
-      u2_weak zod  = u2_ba_find_plow(wir_r, u2_bask_plow_fin, mum);
+      u2_weak zod  = _plow_find(wir_r, u2_bask_plow_fin, mum);
         
       if ( zod != u2_none ) {
         return zod;
@@ -2114,9 +2138,13 @@
         u2_unit gur = _iris_find_main_a
           (wir_r, sut, bar, axe, gil, cog);
 
-        gur = u2_ba_save_plow(wir_r, u2_bask_plow_fin, mum, gur);
+        gur = _plow_save(wir_r, u2_bask_plow_fin, mum, gur);
         return gur;
       }
+#else
+      return _iris_find_main_a
+          (wir_r, sut, bar, axe, gil, cog);
+#endif
     }
   static u2_plan
   _iris_find(u2_ray  wir_r,
@@ -2359,7 +2387,7 @@
   {
     
     u2_noun mum = u2_bt(wir_r, sut, bar, had);  /* axe is not used */
-    u2_weak zod = u2_ba_find_plow(wir_r, u2_bask_plow_huf, mum); 
+    u2_weak zod = _plow_find(wir_r, u2_bask_plow_huf, mum); 
 
     if ( zod != u2_none ) {
       return zod;
@@ -2368,7 +2396,7 @@
       u2_type gur = _iris_half_main(wir_r, sut, bar, axe, had);
 
       gur = _plow_sole(wir_r, gur);
-      gur = u2_ba_save_plow(wir_r, u2_bask_plow_huf, mum, gur);
+      gur = _plow_save(wir_r, u2_bask_plow_huf, mum, gur);
 
       return gur;
     }
@@ -2539,7 +2567,7 @@
         */
         u2_noun mum = u2_bt
           (wir_r, axe, ful, u2_bq(wir_r, bar, sut, nef, bon));
-        u2_weak zod = u2_ba_find_plow(wir_r, u2_bask_plow_vus, mum);
+        u2_weak zod = _plow_find(wir_r, u2_bask_plow_vus, mum);
 
         if ( u2_none != zod ) {
           return zod;
@@ -2548,15 +2576,15 @@
           u2_flag gur = _iris_nest_dext_main
             (wir_r, sut, bar, axe, gil, bon, nef, ful);
 
-          zod = u2_ba_find_plow(wir_r, u2_bask_plow_vus, mum);
+          zod = _plow_find(wir_r, u2_bask_plow_vus, mum);
           if ( u2_none != zod ) {
             /* Saved internally with a different gil - which is fine.
             */
             return zod;
           }
           else {
-            gur = u2_ba_save_plow(wir_r, u2_bask_plow_vus, mum, gur);
-            c3_assert(u2_none != u2_ba_find_plow(wir_r, u2_bask_plow_vus, mum));
+            gur = _plow_save(wir_r, u2_bask_plow_vus, mum, gur);
+            c3_assert(u2_none != _plow_find(wir_r, u2_bask_plow_vus, mum));
 
             return gur;
           }
@@ -3069,6 +3097,10 @@
              u2_type hoc)
   {
     
+        if ( 0 != u2_plow_(wir_r, bug) ) {
+          printf("both: fuse\n");
+          c3_assert(0);
+        }
 
 #if 1
     if ( u2_yes == u2_sing(c3__blur, sut) ) {
@@ -3513,7 +3545,7 @@
   {
     
     u2_noun mum = u2_bc(wir_r, sut, gen);
-    u2_weak zod = u2_ba_find_plow(wir_r, u2_bask_plow_niq, mum);
+    u2_weak zod = _plow_find(wir_r, u2_bask_plow_niq, mum);
         
     if ( zod != u2_none ) {
       return zod;
@@ -3522,7 +3554,7 @@
       u2_tool gur = _rose_make_main(wir_r, sut, gen);
 
       gur = _plow_sole(wir_r, gur);
-      gur = u2_ba_save_plow(wir_r, u2_bask_plow_niq, mum, gur);
+      gur = _plow_save(wir_r, u2_bask_plow_niq, mum, gur);
 
       return gur;
     }
@@ -3586,7 +3618,7 @@
     {
       
       u2_noun mum = u2_bc(wir_r, sut, hem);
-      u2_weak zod = u2_ba_find_plow(wir_r, u2_bask_plow_tyc, mum);
+      u2_weak zod = _plow_find(wir_r, u2_bask_plow_tyc, mum);
 
       if ( zod != u2_none ) {
         return zod;
@@ -3594,7 +3626,7 @@
       else {
         u2_flag gur = _rose_null_b(wir_r, sut, hem);
 
-        u2_ba_save_plow(wir_r, u2_bask_plow_tyc, mum, gur);
+        _plow_save(wir_r, u2_bask_plow_tyc, mum, gur);
         return gur;
       }
     }
@@ -3705,7 +3737,7 @@
     {
       
       u2_noun mum = u2_bt(wir_r, sut, ref, bol);
-      u2_weak zod = u2_ba_find_plow(wir_r, u2_bask_plow_gam, mum);
+      u2_weak zod = _plow_find(wir_r, u2_bask_plow_gam, mum);
 
       if ( zod != u2_none ) {
         return zod;
@@ -3713,7 +3745,7 @@
       else {
         u2_flag gur = _rose_orth_b(wir_r, sut, ref, bol);
 
-        gur = u2_ba_save_plow(wir_r, u2_bask_plow_gam, mum, gur);
+        gur = _plow_save(wir_r, u2_bask_plow_gam, mum, gur);
         return gur;
       }
     }
@@ -3786,8 +3818,6 @@
 
         soq = _rose_play(wir_r, sut, p_gen);
        
-        u2_brut(wir_r, "soq", soq);
-
         u2_plow_(wir_r, bug) = bug;
         return soq;
       }
@@ -3873,30 +3903,18 @@
           u2_door uq_lar  = u2_t(q_lar);
           u2_type quq_lar = u2_h(u2_t(uq_lar));
           u2_gene ruq_lar = u2_t(u2_t(uq_lar));
-          u2_gene old     = gen;
           u2_noun p_sut, q_sut, r_sut, s_sut;
 
           sut = _rose_edit(wir_r, quq_lar, huz);
           gen = ruq_lar;
 
-          if ( u2_yes == u2_as_pqrs(sut, c3__core, &p_sut, &q_sut, &r_sut, &s_sut) ) {
+          if ( u2_yes == u2_as_pqrs
+                (sut, c3__core, &p_sut, &q_sut, &r_sut, &s_sut) ) {
             if ( u2_yes == u2_sing(c3__hard, q_sut) ) {
               sut = u2_bu(wir_r, c3__core, r_sut, q_sut, r_sut, s_sut);
-              if ( !(u2_nul == u2_plow_(wir_r, bug)) ) {
-                u2_err(wir_r, "hard: gen", old);
-                u2_brut(wir_r, "hard: sut", sut);
-                u2_brut(wir_r, "hard: mack", u2_bt(wir_r, c3__hold, sut, gen));
-                printf("\n");
-              }
             } 
             else if ( u2_yes == u2_sing(c3__soft, q_sut) ) {
               sut = sut;
-              if ( !(u2_nul == u2_plow_(wir_r, bug)) ) {
-                u2_err(wir_r, "soft: gen", old);
-                u2_brut(wir_r, "soft: sut", sut);
-                u2_brut(wir_r, "soft: mack", u2_bt(wir_r, c3__hold, sut, gen));
-                printf("\n");
-              }
             }
             else return u2_bl_bail(wir_r);
           }
@@ -3927,9 +3945,8 @@
              u2_type sut,
              u2_gene gen)
   {
-    
     u2_noun mum = u2_bc(wir_r, sut, gen);
-    u2_weak zod = u2_ba_find_plow(wir_r, u2_bask_plow_zor, mum);
+    u2_weak zod = _plow_find(wir_r, u2_bask_plow_zor, mum);
 
     if ( zod != u2_none ) {
       return zod;
@@ -3938,7 +3955,7 @@
       u2_type gur = _rose_play_main(wir_r, sut, gen);
 
       gur = _plow_sole(wir_r, gur);
-      gur = u2_ba_save_plow(wir_r, u2_bask_plow_zor, mum, gur);
+      gur = _plow_save(wir_r, u2_bask_plow_zor, mum, gur);
       return gur;
     }
   }
@@ -3950,7 +3967,6 @@
              u2_type sut,
              u2_gene gen)
   {
-    
     u2_noun vax = u2_bc(wir_r, sut, gen);
 
     if ( u2_fj_pool_in(vax, u2_plow_(wir_r, fan)) ) {
@@ -4274,7 +4290,7 @@
              u2_gene gen)
   {
     u2_noun mum = u2_bc(wir_r, sut, gen);
-    u2_weak zod = u2_ba_find_plow(wir_r, u2_bask_plow_hos, mum);
+    u2_weak zod = _plow_find(wir_r, u2_bask_plow_hos, mum);
 
     if ( zod != u2_none ) {
       return zod;
@@ -4282,7 +4298,7 @@
     else {
       u2_flag gur = _rose_show_main(wir_r, sut, gen);
 
-      gur = u2_ba_save_plow(wir_r, u2_bask_plow_hos, mum, gur);
+      gur = _plow_save(wir_r, u2_bask_plow_hos, mum, gur);
       return gur;
     }
   }
