@@ -577,37 +577,37 @@
   static u2_gene _open_in_##stem \
     (u2_ray  wir_r, u2_noun p_gen, u2_noun q_gen, u2_noun r_gen, u2_noun s_gen)
 
-  /* mast:open:plow
+  /* lmnb:open:plow
   */
     static u2_gene
-    _open_mast(u2_ray, u2_gene);
+    _open_lmnb(u2_ray, u2_gene);
 
     static u2_gene 
-    _open_mast_fix(u2_ray  wir_r,
+    _open_lmnb_fix(u2_ray  wir_r,
                    u2_gene gen,
                    u2_axis axe)
     {
       
       u2_noun p_gen, q_gen;
 
-      if ( u2_yes == u2_as_pq(gen, c3__cast, &p_gen, &q_gen) ) {
-        return _open_mast_fix(wir_r, p_gen, axe);
+      if ( u2_yes == u2_as_pq(gen, c3__htnb, &p_gen, &q_gen) ) {
+        return _open_lmnb_fix(wir_r, p_gen, axe);
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__twix, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__dgnb, &p_gen, &q_gen) ) {
         return u2_bt
           (wir_r, 
-           c3__twix,
-           _open_mast_fix(wir_r, p_gen, u2_fj_op_peg(wir_r, axe, _2)),
-           _open_mast_fix(wir_r, q_gen, u2_fj_op_peg(wir_r, axe, _3)));
+           c3__dgnb,
+           _open_lmnb_fix(wir_r, p_gen, u2_fj_op_peg(wir_r, axe, _2)),
+           _open_lmnb_fix(wir_r, q_gen, u2_fj_op_peg(wir_r, axe, _3)));
       }
       else if ( u2_yes == u2_as_pq(gen, c3__velt, &p_gen, &q_gen) ) {
         u2_tool ryx = u2_bc(wir_r, c3__frag, axe);
 
         return u2_bt
           (wir_r, 
-           c3__flac,
+           c3__bnrd,
            u2_bt(wir_r, 
-                 c3__mack, 
+                 c3__mtbn, 
                  u2_blip,
                  u2_bo
                   (wir_r,
@@ -616,89 +616,89 @@
                      ryx,
                      u2_bq
                       (wir_r, 
-                       c3__fung, _open_mast(wir_r, q_gen), ryx, u2_nul)))),
-           _open_mast_fix(wir_r, p_gen, axe));
+                       c3__mtnb, _open_lmnb(wir_r, q_gen), ryx, u2_nul)))),
+           _open_lmnb_fix(wir_r, p_gen, axe));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__bran, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__htbn, &p_gen, &q_gen) ) {
         return u2_bt
-          (wir_r, c3__bran, p_gen, _open_mast_fix(wir_r, q_gen, axe));
+          (wir_r, c3__htbn, p_gen, _open_lmnb_fix(wir_r, q_gen, axe));
       }
-      else if ( u2_yes == u2_as_p(gen, c3__teck, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__mtrs, &p_gen) ) {
         return u2_bq
-          (wir_r, c3__fung,
+          (wir_r, c3__mtnb,
                 p_gen,
                 u2_bc(wir_r, c3__frag, axe),
                 u2_nul);
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__pock, &p_gen, &q_gen) ) {
-        return _open_mast_fix(wir_r, q_gen, axe);
+      else if ( u2_yes == u2_as_pq(gen, c3__htdg, &p_gen, &q_gen) ) {
+        return _open_lmnb_fix(wir_r, q_gen, axe);
       } 
-      else if ( u2_yes == u2_as_pq(gen, c3__zemp, &p_gen, &q_gen) ) {
-        return u2_bt(wir_r, c3__zemp, p_gen, _open_mast_fix(wir_r, q_gen, axe));
+      else if ( u2_yes == u2_as_pq(gen, c3__hpcb, &p_gen, &q_gen) ) {
+        return u2_bt(wir_r, c3__hpcb, p_gen, _open_lmnb_fix(wir_r, q_gen, axe));
       }
-      else if ( u2_yes == u2_as_p(gen, c3__zush, &p_gen) ) {
-        return u2_bc(wir_r, c3__zush, _open_mast_fix(wir_r, p_gen, axe));
+      else if ( u2_yes == u2_as_p(gen, c3__hpdx, &p_gen) ) {
+        return u2_bc(wir_r, c3__hpdx, _open_lmnb_fix(wir_r, p_gen, axe));
       }
       else {
         u2_gene bog = _plow_open(wir_r, gen);
 
         if ( !(u2_yes == u2_sing(gen, bog)) ) {
-          return _open_mast_fix(wir_r, bog, axe);
+          return _open_lmnb_fix(wir_r, bog, axe);
         }
         else {
           u2_tool ryx = u2_bc(wir_r, c3__frag, axe);
 
           return u2_bt
             (wir_r,
-             c3__gram, 
-             u2_bt(wir_r, c3__plin, gen, ryx), 
+             c3__skrd, 
+             u2_bt(wir_r, c3__skbn, gen, ryx), 
              ryx);
         }
       }
     }
   static u2_gene
-  _open_mast(u2_ray  wir_r,
+  _open_lmnb(u2_ray  wir_r,
              u2_gene gen)
   {
     
     u2_noun p_gen, q_gen;
 
-    if ( u2_yes == u2_as_pq(gen, c3__cast, &p_gen, &q_gen) ) {
+    if ( u2_yes == u2_as_pq(gen, c3__htnb, &p_gen, &q_gen) ) {
       return u2_bt
         (wir_r,
-         c3__gant,
-         u2_bt(wir_r, c3__wost, c3__mave, q_gen),
-         u2_bt(wir_r, c3__lome, u2_nul, _open_mast_fix(wir_r, p_gen, _4)));
+         c3__bnpd,
+         u2_bt(wir_r, c3__htsg, c3__htrs, q_gen),
+         u2_bt(wir_r, c3__brbn, u2_nul, _open_lmnb_fix(wir_r, p_gen, _4)));
     }
-    else if ( u2_yes == u2_as_pq(gen, c3__pock, &p_gen, &q_gen) ) {
-      return _open_mast(wir_r, q_gen);
+    else if ( u2_yes == u2_as_pq(gen, c3__htdg, &p_gen, &q_gen) ) {
+      return _open_lmnb(wir_r, q_gen);
     }
-    else if ( u2_yes == u2_as_p(gen, c3__teck, &p_gen) ) {
+    else if ( u2_yes == u2_as_p(gen, c3__mtrs, &p_gen) ) {
       return p_gen;
     }
-    else if ( u2_yes == u2_as_pq(gen, c3__zemp, &p_gen, &q_gen) ) {
-      return u2_bt(wir_r, c3__zemp, p_gen, _open_mast(wir_r, q_gen));
+    else if ( u2_yes == u2_as_pq(gen, c3__hpcb, &p_gen, &q_gen) ) {
+      return u2_bt(wir_r, c3__hpcb, p_gen, _open_lmnb(wir_r, q_gen));
     }
-    else if ( u2_yes == u2_as_p(gen, c3__zush, &p_gen) ) {
-      return u2_bc(wir_r, c3__zush, _open_mast(wir_r, p_gen));
+    else if ( u2_yes == u2_as_p(gen, c3__hpdx, &p_gen) ) {
+      return u2_bc(wir_r, c3__hpdx, _open_lmnb(wir_r, p_gen));
     }
     else if ( u2_yes == u2_as_pq(gen, c3__velt, &p_gen, &q_gen) ) {
       u2_tool ryx = u2_bc(wir_r, c3__frag, _4);
 
       return u2_bt
         (wir_r,
-         c3__gant,
-         u2_bt(wir_r, c3__wost, c3__mave, q_gen),
+         c3__bnpd,
+         u2_bt(wir_r, c3__htsg, c3__htrs, q_gen),
          u2_bt
           (wir_r,
-           c3__lome,
+           c3__brbn,
            u2_nul,
            u2_bt
             (wir_r, 
-             c3__flac,
+             c3__bnrd,
               u2_bt
                 (wir_r,
-                 c3__mack,
+                 c3__mtbn,
                  u2_blip,
                  u2_bo
                   (wir_r,
@@ -706,32 +706,32 @@
                     (wir_r, 
                      ryx,
                      u2_bq
-                      (wir_r, c3__fung, _open_mast(wir_r, q_gen), ryx, u2_nul)))),
-             _open_mast_fix(wir_r, p_gen, _4))));
+                      (wir_r, c3__mtnb, _open_lmnb(wir_r, q_gen), ryx, u2_nul)))),
+             _open_lmnb_fix(wir_r, p_gen, _4))));
     }
     else {
       u2_gene bog = _plow_open(wir_r, gen);
 
       if ( !(u2_yes == u2_sing(gen, bog)) ) {
-        return _open_mast(wir_r, bog);
+        return _open_lmnb(wir_r, bog);
       }
       else {
         return u2_bt
           (wir_r,
-           c3__gant,
-           u2_bt(wir_r, c3__wost, c3__mave, gen),
-           u2_bt(wir_r, c3__lome, u2_nul, _open_mast_fix(wir_r, gen, _4)));
+           c3__bnpd,
+           u2_bt(wir_r, c3__htsg, c3__htrs, gen),
+           u2_bt(wir_r, c3__brbn, u2_nul, _open_lmnb_fix(wir_r, gen, _4)));
       }
     }
   }
 
-  /* fist:open:plow
+  /* lmpd:open:plow
   */
     static u2_gene
-    _open_fist(u2_ray, u2_gene);
+    _open_lmpd(u2_ray, u2_gene);
 
     static u2_list
-    _open_fist_a(u2_ray  wir_r,
+    _open_lmpd_a(u2_ray  wir_r,
                  u2_bank ban)
     {
       
@@ -741,11 +741,11 @@
       }
       else {
         return u2_bc
-          (wir_r, _open_fist(wir_r, u2_h(ban)), _open_fist_a(wir_r, u2_t(ban)));
+          (wir_r, _open_lmpd(wir_r, u2_h(ban)), _open_lmpd_a(wir_r, u2_t(ban)));
       }
     }
   static u2_gene
-  _open_fist(u2_ray  wir_r,
+  _open_lmpd(u2_ray  wir_r,
              u2_gene gen)
   {
     
@@ -754,45 +754,45 @@
     if ( u2_yes == u2_as_p(gen, c3__bean, &p_gen) ) {
       return gen;
     }
-    else if ( u2_yes == u2_as_pq(gen, c3__cast, &p_gen, &q_gen) ) {
+    else if ( u2_yes == u2_as_pq(gen, c3__htnb, &p_gen, &q_gen) ) {
       return u2_bt
-        (wir_r, c3__cast, p_gen, _open_fist(wir_r, q_gen));
+        (wir_r, c3__htnb, p_gen, _open_lmpd(wir_r, q_gen));
     }
-    else if ( u2_yes == u2_as_pq(gen, c3__twix, &p_gen, &q_gen) ) {
+    else if ( u2_yes == u2_as_pq(gen, c3__dgnb, &p_gen, &q_gen) ) {
       return u2_bt
-        (wir_r, c3__twix, _open_fist(wir_r, p_gen), _open_fist(wir_r, q_gen));
+        (wir_r, c3__dgnb, _open_lmpd(wir_r, p_gen), _open_lmpd(wir_r, q_gen));
     }
     else if ( u2_yes == u2_as_pq(gen, c3__velt, &p_gen, &q_gen) ) {
       return u2_bt
-        (wir_r, c3__velt, _open_fist(wir_r, p_gen), _open_fist(wir_r, q_gen));
+        (wir_r, c3__velt, _open_lmpd(wir_r, p_gen), _open_lmpd(wir_r, q_gen));
     }
-    else if ( u2_yes == u2_as_pq(gen, c3__zemp, &p_gen, &q_gen) ) {
+    else if ( u2_yes == u2_as_pq(gen, c3__hpcb, &p_gen, &q_gen) ) {
       return u2_bt
-        (wir_r, c3__zemp, p_gen, _open_fist(wir_r, q_gen));
+        (wir_r, c3__hpcb, p_gen, _open_lmpd(wir_r, q_gen));
     }
-    else if ( u2_yes == u2_as_p(gen, c3__zush, &p_gen) ) {
+    else if ( u2_yes == u2_as_p(gen, c3__hpdx, &p_gen) ) {
       return u2_bc
-        (wir_r, c3__zush, _open_fist(wir_r, p_gen));
+        (wir_r, c3__hpdx, _open_lmpd(wir_r, p_gen));
     }
-    else if ( u2_yes == u2_as_p(gen, c3__fist, &p_gen) ) {
-      return _open_fist(wir_r, p_gen);
+    else if ( u2_yes == u2_as_p(gen, c3__lmpd, &p_gen) ) {
+      return _open_lmpd(wir_r, p_gen);
     }
-    else if ( u2_yes == u2_as_pq(gen, c3__bran, &p_gen, &q_gen) ) {
+    else if ( u2_yes == u2_as_pq(gen, c3__htbn, &p_gen, &q_gen) ) {
       return u2_bt
-        (wir_r, c3__bran, p_gen, _open_fist(wir_r, q_gen));
+        (wir_r, c3__htbn, p_gen, _open_lmpd(wir_r, q_gen));
     }
-    else if ( u2_yes == u2_as_p(gen, c3__teck, &p_gen) ) {
+    else if ( u2_yes == u2_as_p(gen, c3__mtrs, &p_gen) ) {
       u2_noun pp_gen;
 
-      if ( u2_yes == u2_as_p(p_gen, c3__rond, &pp_gen) ) {
-        return u2_bt(wir_r, c3__teck, c3__rond, _open_fist_a(wir_r, pp_gen));
+      if ( u2_yes == u2_as_p(p_gen, c3__brsk, &pp_gen) ) {
+        return u2_bt(wir_r, c3__mtrs, c3__brsk, _open_lmpd_a(wir_r, pp_gen));
       }
       else {
         return u2_bc(wir_r, c3__bean, c3__blur);
       }
     }
-    else if ( u2_yes == u2_as_pq(gen, c3__pock, &p_gen, &q_gen) ) {
-      return _open_fist(wir_r, p_gen);
+    else if ( u2_yes == u2_as_pq(gen, c3__htdg, &p_gen, &q_gen) ) {
+      return _open_lmpd(wir_r, p_gen);
     }
     else if ( u2_yes == u2_as_p(gen, c3__bone, &p_gen) ) {
       return gen;
@@ -801,7 +801,7 @@
       u2_gene bog = _plow_open(wir_r, gen);
 
       if ( !(u2_yes == u2_sing(gen, bog)) ) {
-        return _open_fist(wir_r, bog);
+        return _open_lmpd(wir_r, bog);
       }
       else {
         return u2_bc(wir_r, c3__bean, c3__blur);
@@ -813,28 +813,28 @@
   {
     if ( u2_yes == u2_sing(c3__atom, p_gen) ) {
       return u2_bt
-        (wir_r, c3__cast, 
-              u2_bt(wir_r, c3__vint, c3__bone, _0),
+        (wir_r, c3__htnb, 
+              u2_bt(wir_r, c3__dtht, c3__bone, _0),
               u2_bc(wir_r, c3__bone, _0));
     }
     else if ( u2_yes == u2_sing(c3__blur, p_gen) ) {
       u2_noun dud = u2_bc(wir_r, c3__bone, u2_nul);
 
       return u2_bt
-        (wir_r, c3__cast, 
-              u2_bt(wir_r, c3__sail, dud, dud),
+        (wir_r, c3__htnb, 
+              u2_bt(wir_r, c3__dtrs, dud, dud),
               dud);
     }
     else if ( u2_yes == u2_sing(c3__cell, p_gen) ) {
       return u2_bt
-        (wir_r, c3__twix,
+        (wir_r, c3__dgnb,
               u2_bc(wir_r, c3__bean, c3__blur),
               u2_bc(wir_r, c3__bean, c3__blur));
     }
     else if ( u2_yes == u2_sing(c3__flag, p_gen) ) {
       return u2_bt
-        (wir_r, c3__cast,
-              u2_bt(wir_r, c3__dust, c3__bone, _0),
+        (wir_r, c3__htnb,
+              u2_bt(wir_r, c3__dtsk, c3__bone, _0),
               u2_bc(wir_r, c3__bone, u2_yes));
     }
     else if ( u2_yes == u2_sing(c3__null, p_gen) ) {
@@ -843,13 +843,13 @@
     else return u2_bl_bail(wir_r);
   }
 
-  _open_do_pq(lonk)
+  _open_do_pq(brsg)
   {
     
     u2_noun beg = u2_bc(wir_r, c3__frag, _4);
 
     if ( (u2_nul == q_gen) ) {
-      return _plow_fail(wir_r, "lonk");
+      return _plow_fail(wir_r, "brsg");
     }
     else {
       u2_noun iq_gen = u2_h(q_gen);
@@ -861,38 +861,38 @@
       else {
         return u2_bt
           (wir_r,
-           c3__gant,
-           _open_in_lonk(wir_r, p_gen, tq_gen),
+           c3__bnpd,
+           _open_in_brsg(wir_r, p_gen, tq_gen),
            u2_bt
             (wir_r,
-             c3__gant,
-             u2_bt(wir_r, c3__flac,
+             c3__bnpd,
+             u2_bt(wir_r, c3__bnrd,
                         u2_bc(wir_r, c3__frag, _3),
                         iq_gen),
              u2_bt
               (wir_r, 
-               c3__gant,
+               c3__bnpd,
                u2_bc(wir_r, c3__frag, _8), 
                u2_bt
                 (wir_r,
-                 c3__sunt,
+                 c3__brdg,
                  u2_nul,
                  u2_bq
                   (wir_r,
-                   c3__bung,
+                   c3__mtpd,
                    u2_bt(wir_r,
-                         c3__flac,
+                         c3__bnrd,
                          u2_bc(wir_r, c3__frag, (23)),
                          p_gen),
                    u2_bq
                     (wir_r,
-                     c3__fung,
+                     c3__mtnb,
                      u2_bc(wir_r, c3__frag, _10),
                      beg,
                      u2_nul),
                   u2_bt
                     (wir_r,
-                     c3__mack,
+                     c3__mtbn,
                      u2_bc(wir_r, 
                            u2_bc(wir_r, c3__frag, (22)), 
                            u2_nul),
@@ -905,7 +905,7 @@
   }
 
     u2_noun
-    _gath_a(u2_ray  wir_r,
+    _mtbr_a(u2_ray  wir_r,
             u2_noun r_gen)
     {
       if ( (u2_nul == r_gen) ) {
@@ -919,31 +919,31 @@
 
         return u2_bc
           (wir_r, u2_bc(wir_r, pir_gen, 
-                           u2_bt(wir_r, c3__flac, 
+                           u2_bt(wir_r, c3__bnrd, 
                                       u2_bc(wir_r, c3__frag, _3),
                                       qir_gen)),
-               _gath_a(wir_r, tr_gen));
+               _mtbr_a(wir_r, tr_gen));
       }
     }
-  _open_do_pqr(gath)
+  _open_do_pqr(mtbr)
   {
     
 
     return u2_bt
-      (wir_r, c3__gant,
+      (wir_r, c3__bnpd,
             q_gen,
             u2_bt
               (wir_r,
-               c3__mack,
+               c3__mtbn,
                u2_bc(wir_r, u2_bc(wir_r, c3__frag, _2), p_gen),
-               _gath_a(wir_r, r_gen)));
+               _mtbr_a(wir_r, r_gen)));
   }
-  _open_do_p(prex)
+  _open_do_p(dgrs)
   {
     
 
     if ( (u2_nul == p_gen) ) {
-      return u2_bc(wir_r, c3__zike, u2_nul);
+      return u2_bc(wir_r, c3__hphp, u2_nul);
     }
     else {
       u2_noun ip_gen = u2_h(p_gen);
@@ -953,29 +953,29 @@
         return ip_gen;
       } else {
         return u2_bt
-          (wir_r, c3__twix, ip_gen, _open_in_prex(wir_r, tp_gen));
+          (wir_r, c3__dgnb, ip_gen, _open_in_dgrs(wir_r, tp_gen));
       }
     }
   }
  
-  _open_do_pq(fung)
+  _open_do_pq(mtnb)
   {
     
 
     if ( (u2_nul == q_gen) ) {
       return u2_bt
-        (wir_r, c3__flac, 
+        (wir_r, c3__bnrd, 
               p_gen,
               u2_bc(wir_r, c3__pane, u2_blip));
     } else {
-      return u2_bq(wir_r, c3__mung, p_gen, c3__prex, q_gen);
+      return u2_bq(wir_r, c3__mtdg, p_gen, c3__dgrs, q_gen);
     }
   }
 
-  _open_do_pqr(hang)
+  _open_do_pqr(mtsg)
   {
     return u2_bq
-      (wir_r, c3__gath,
+      (wir_r, c3__mtbr,
             p_gen,
             q_gen,
             u2_bo(wir_r,
@@ -984,12 +984,12 @@
                         r_gen)));
   }
 
-  _open_do_pq(mung)
+  _open_do_pq(mtdg)
   {
     
 
     return u2_bq
-      (wir_r, c3__gath,
+      (wir_r, c3__mtbr,
             u2_bc(wir_r, u2_blip, u2_nul),
             p_gen,
             u2_bo(wir_r,
@@ -1003,57 +1003,57 @@
     
 
     return u2_bt
-      (wir_r, c3__gant,
+      (wir_r, c3__bnpd,
             q_gen,
             u2_bt
-              (wir_r, c3__grel,
+              (wir_r, c3__sknb,
                     u2_bc(wir_r, c3__frag, _2),
                     u2_bo(wir_r,
                           u2_bc(wir_r,
-                                u2_bt(wir_r, c3__flac,
+                                u2_bt(wir_r, c3__bnrd,
                                            u2_bc(wir_r, c3__frag, _3),
                                            q_gen),
                                 u2_bc(wir_r, c3__frag, _2)))));
   }
 
-  _open_do_p(mast)
+  _open_do_p(lmnb)
   {
-    return _open_mast(wir_r, p_gen);
+    return _open_lmnb(wir_r, p_gen);
   }
 
-  _open_do_p(wost)
-  {
-    return p_gen;
-  }
-
-  _open_do_p(zush)
+  _open_do_p(htsg)
   {
     return p_gen;
   }
 
-  _open_do_pq(marg)
+  _open_do_p(hpdx)
+  {
+    return p_gen;
+  }
+
+  _open_do_pq(skdr)
   {
     
 
     return u2_bq
-      (wir_r, c3__trol,
+      (wir_r, c3__skdg,
             p_gen,
-            u2_bc(wir_r, c3__zike, u2_nul),
+            u2_bc(wir_r, c3__hphp, u2_nul),
             q_gen);
   }
 
-  _open_do_p(vern)
+  _open_do_p(skhp)
   {
     
 
     return u2_bq
-      (wir_r, c3__trol,
+      (wir_r, c3__skdg,
             p_gen,
             u2_bc(wir_r, c3__bone, u2_no),
             u2_bc(wir_r, c3__bone, u2_yes));
   }
 
-  _open_do_p(slax)
+  _open_do_p(dgsg)
   {
     
 
@@ -1064,7 +1064,7 @@
       u2_noun ip_gen = u2_h(p_gen);
       u2_noun tp_gen = u2_t(p_gen);
 
-      return u2_bt(wir_r, c3__twix, ip_gen, _open_in_slax(wir_r, tp_gen));
+      return u2_bt(wir_r, c3__dgnb, ip_gen, _open_in_dgsg(wir_r, tp_gen));
     }
   }
 
@@ -1073,80 +1073,80 @@
     
 
     return u2_bt
-      (wir_r, c3__mack, 
+      (wir_r, c3__mtbn, 
             u2_bc(wir_r, u2_bc(wir_r, c3__frag, p_gen), u2_nul),
             u2_nul);
   }
 
-  _open_do_p(fist)
+  _open_do_p(lmpd)
   {
-    return _open_fist(wir_r, p_gen);
+    return _open_lmpd(wir_r, p_gen);
   }
 
-  _open_do_pq(lome)
+  _open_do_pq(brbn)
   {
     
 
     return u2_bt
-      (wir_r, c3__pank,
+      (wir_r, c3__brrs,
             p_gen,
             u2_bo(wir_r, u2_bc(wir_r, u2_blip, q_gen)));
   }
 
-  _open_do_pq(gnum)
+  _open_do_pq(mtdt)
   {
     
 
     return u2_bt
-      (wir_r, c3__fung, q_gen, u2_bc(wir_r, p_gen, u2_nul));
+      (wir_r, c3__mtnb, q_gen, u2_bc(wir_r, p_gen, u2_nul));
   }
 
-  _open_do_pqr(bung)
+  _open_do_pqr(mtpd)
   {
     
 
     return u2_bc
-      (wir_r, c3__fung, 
+      (wir_r, c3__mtnb, 
             u2_bq(wir_r, p_gen, q_gen, r_gen, u2_nul));
   }
 
-  _open_do_pq(claf)
+  _open_do_pq(bndr)
   {
     
 
-    return u2_bt(wir_r, c3__flac, q_gen, p_gen);
+    return u2_bt(wir_r, c3__bnrd, q_gen, p_gen);
   }
 
-  _open_do_pqr(lort)
+  _open_do_pqr(skdt)
   {
     
 
-    return u2_bq(wir_r, c3__trol, p_gen, r_gen, q_gen);
+    return u2_bq(wir_r, c3__skdg, p_gen, r_gen, q_gen);
   }
 
-  _open_do_pq(vamp)
+  _open_do_pq(brnb)
   {
     
 
     return u2_bt
-      (wir_r, c3__flac,
-            u2_bt(wir_r, c3__lome, p_gen, q_gen),
+      (wir_r, c3__bnrd,
+            u2_bt(wir_r, c3__brbn, p_gen, q_gen),
             u2_bc(wir_r, c3__pane, u2_blip));
   }
 
-  _open_do_p(zole)
+  _open_do_p(hptc)
   {
     
 
     return u2_bc(wir_r, c3__bone, p_gen);
   }
 
-  _open_do_pq(moze)
+  _open_do_pq(skrs)
   {
     
 
     if ( (u2_nul == q_gen) ) {
-      return u2_bc(wir_r, c3__zike, u2_nul);
+      return u2_bc(wir_r, c3__hphp, u2_nul);
     }
     else {
       u2_noun iq_gen = u2_h(q_gen);
@@ -1154,38 +1154,38 @@
 
 #if 0
       if ( !(u2_nul == u2_plow_(wir_r, bug)) ) {
-        u2_err(wir_r, "moze: iq_gen", iq_gen);
-        u2_err(wir_r, "moze: fist", _open_fist(wir_r, iq_gen));
-        u2_err(wir_r, "moze: mast", _open_mast(wir_r, iq_gen));
+        u2_err(wir_r, "skrs: iq_gen", iq_gen);
+        u2_err(wir_r, "skrs: lmpd", _open_lmpd(wir_r, iq_gen));
+        u2_err(wir_r, "skrs: lmnb", _open_lmnb(wir_r, iq_gen));
         printf("\n");
       }
 #endif
       return u2_bq
         (wir_r,
-         c3__trol,
-         u2_bt(wir_r, c3__plin, _open_fist(wir_r, iq_gen), p_gen),
-         u2_bq(wir_r, c3__fung, _open_mast(wir_r, iq_gen), p_gen, u2_nul),
-         _open_in_moze(wir_r, p_gen, tq_gen));
+         c3__skdg,
+         u2_bt(wir_r, c3__skbn, _open_lmpd(wir_r, iq_gen), p_gen),
+         u2_bq(wir_r, c3__mtnb, _open_lmnb(wir_r, iq_gen), p_gen, u2_nul),
+         _open_in_skrs(wir_r, p_gen, tq_gen));
     }
   }
 
-  _open_do_p(rond)
+  _open_do_p(brsk)
   {
     
 
     if ( (u2_nul == p_gen) ) {
-      return u2_bc(wir_r, c3__zike, u2_nul);
+      return u2_bc(wir_r, c3__hphp, u2_nul);
     }
     else {
       u2_noun ip_gen = u2_h(p_gen);
 
       return u2_bt
         (wir_r,
-         c3__gant,
-         u2_bc(wir_r, c3__mave, ip_gen),
-         u2_bt(wir_r, c3__lome,
+         c3__bnpd,
+         u2_bc(wir_r, c3__htrs, ip_gen),
+         u2_bt(wir_r, c3__brbn,
                     u2_nul,
-                    u2_bt(wir_r, c3__moze, 
+                    u2_bt(wir_r, c3__skrs, 
                                u2_bc(wir_r, c3__frag, _4),
                                p_gen)));
     }
@@ -1196,16 +1196,16 @@
     
 
     return u2_bt
-      (wir_r, c3__gant,
+      (wir_r, c3__bnpd,
             p_gen,
             u2_bt
               (wir_r,
-               c3__mack,
+               c3__mtbn,
                u2_bo(wir_r, u2_bc(wir_r, c3__frag, _2)),
                u2_bo(wir_r,
                      u2_bc(wir_r,
                            u2_bc(wir_r, c3__frag, _4),
-                           u2_bt(wir_r, c3__flac, 
+                           u2_bt(wir_r, c3__bnrd, 
                                       u2_bc(wir_r, c3__frag, _3),
                                       q_gen)))));
   }
@@ -1215,58 +1215,58 @@
     
 
     return u2_bt
-      (wir_r, c3__mack, 
+      (wir_r, c3__mtbn, 
             u2_bc(wir_r, u2_bc(wir_r, c3__pane, p_gen), u2_nul),
             u2_nul);
   }
 
-  _open_do_pq(tang)
+  _open_do_pq(bnnb)
   {
     
 
     return u2_bt
-      (wir_r, c3__gant, q_gen, p_gen);
+      (wir_r, c3__bnpd, q_gen, p_gen);
   }
 
-  _open_do_p(teck)
+  _open_do_p(mtrs)
   {
     
 
     return u2_bc
-      (wir_r, c3__wost,
-            u2_bt(wir_r, c3__flac,
+      (wir_r, c3__htsg,
+            u2_bt(wir_r, c3__bnrd,
                        p_gen,
-                       u2_bt(wir_r, c3__mack, 
+                       u2_bt(wir_r, c3__mtbn, 
                                   u2_bo(wir_r, u2_bc(wir_r, c3__pane, u2_blip)),
                                   u2_nul)));
   }
 
-  _open_do_pq(gant)
+  _open_do_pq(bnpd)
   {
     
 
     return u2_bt
-      (wir_r, c3__flac,
-            u2_bt(wir_r, c3__twix, 
+      (wir_r, c3__bnrd,
+            u2_bt(wir_r, c3__dgnb, 
                        p_gen, 
                        u2_bc(wir_r, c3__frag, _1)),
             q_gen);
   }
 
-  _open_do_pqrs(quax)
+  _open_do_pqrs(dght)
   {
     
 
     return u2_bt
-      (wir_r, c3__twix,
+      (wir_r, c3__dgnb,
             p_gen,
             u2_bt
-              (wir_r, c3__twix,
+              (wir_r, c3__dgnb,
                     q_gen,
-                    u2_bt(wir_r, c3__twix, r_gen, s_gen)));
+                    u2_bt(wir_r, c3__dgnb, r_gen, s_gen)));
   }
 
-  _open_do_p(chan)
+  _open_do_p(skmp)
   {
     
 
@@ -1278,19 +1278,19 @@
       u2_noun tp_gen = u2_t(p_gen);
 
       return u2_bq
-        (wir_r, c3__trol,
+        (wir_r, c3__skdg,
               ip_gen,
-              _open_in_chan(wir_r, tp_gen),
+              _open_in_skmp(wir_r, tp_gen),
               u2_bc(wir_r, c3__bone, u2_no));
     }
   }
 
-  _open_do_pq(grel)
+  _open_do_pq(sknb)
   {
     
 
     if ( (u2_nul == q_gen) ) {
-      return u2_bc(wir_r, c3__zike, u2_nul);
+      return u2_bc(wir_r, c3__hphp, u2_nul);
     }
     else {
       u2_noun iq_gen = u2_h(q_gen);
@@ -1300,53 +1300,53 @@
 
       return u2_bq
         (wir_r, 
-         c3__trol,
-         u2_bt(wir_r, c3__plin, _open_fist(wir_r, piq_gen), p_gen),
+         c3__skdg,
+         u2_bt(wir_r, c3__skbn, _open_lmpd(wir_r, piq_gen), p_gen),
          u2_bt
-          (wir_r, c3__flac,
+          (wir_r, c3__bnrd,
                 u2_bt(wir_r,
-                      c3__stil,
+                      c3__htpd,
                       piq_gen,
                       p_gen),
                 qiq_gen),
-         _open_in_grel(wir_r, p_gen, tq_gen));
+         _open_in_sknb(wir_r, p_gen, tq_gen));
     }
   }
 
-  _open_do_pq(sunt)
+  _open_do_pq(brdg)
   {
     
 
     return u2_bq
-      (wir_r, c3__tash, 
+      (wir_r, c3__brmt, 
             p_gen,
             u2_bc(wir_r, u2_blip, q_gen),
             u2_nul);
   }
 
-  _open_do_pq(pock)
+  _open_do_pq(htdg)
   {
     
     u2_noun rax = u2_bc(wir_r, c3__frag, _2);
 
     return u2_bt
       (wir_r,
-       c3__gant,
+       c3__bnpd,
        q_gen, 
        u2_bt
         (wir_r,
-         c3__claf,
+         c3__bndr,
          rax,
          u2_bt(wir_r,
-               c3__stil,
+               c3__htpd,
                u2_bt(wir_r, 
-                     c3__flac, 
+                     c3__bnrd, 
                      u2_bc(wir_r, c3__frag, _3), 
                      p_gen),
                rax)));
   }
 
-  _open_do_p(dorn)
+  _open_do_p(skbr)
   {
     
 
@@ -1358,25 +1358,25 @@
       u2_noun tp_gen = u2_t(p_gen);
 
       return u2_bq
-        (wir_r, c3__trol,
+        (wir_r, c3__skdg,
               ip_gen,
               u2_bc(wir_r, c3__bone, u2_yes),
-              _open_in_dorn(wir_r, tp_gen));
+              _open_in_skbr(wir_r, tp_gen));
     }
   }
 
-  _open_do_pq(zemp)
+  _open_do_pq(hpcb)
   {
     return q_gen;
   }
 
-  _open_do_pqr(fent)
+  _open_do_pqr(sksg)
   {
     
 
     return u2_bt
       (wir_r,
-       c3__grel,
+       c3__sknb,
        p_gen,
        u2_bt
         (wir_r,
@@ -1385,41 +1385,41 @@
          u2_nul));
   }
 
-  _open_do_pq(gram)
+  _open_do_pq(skrd)
   {
     
     
     return u2_bq
-      (wir_r, c3__trol, p_gen, q_gen, u2_bc(wir_r, c3__zike, u2_nul));
+      (wir_r, c3__skdg, p_gen, q_gen, u2_bc(wir_r, c3__hphp, u2_nul));
   }
 
-  _open_do_pqr(trex)
+  _open_do_pqr(dgpd)
   {
     
 
     return u2_bt
-      (wir_r, c3__twix,
+      (wir_r, c3__dgnb,
             p_gen,
-            u2_bt(wir_r, c3__twix, q_gen, r_gen));
+            u2_bt(wir_r, c3__dgnb, q_gen, r_gen));
   }
 
-  _open_do_pqrs(tung)
+  _open_do_pqrs(mtht)
   {
     
 
     return u2_bq
-      (wir_r, c3__fung, 
+      (wir_r, c3__mtnb, 
             p_gen, 
             q_gen,
             u2_bt(wir_r, r_gen, s_gen, u2_nul));
   }
 
-  _open_do_p(mave)
+  _open_do_p(htrs)
   {
     
 
     return u2_bt
-      (wir_r, c3__cast, 
+      (wir_r, c3__htnb, 
             u2_bc(wir_r, c3__bean, c3__blur),
             p_gen);
   }
@@ -1428,7 +1428,7 @@
   {
     
 
-    return u2_bt(wir_r, c3__fung, p_gen, q_gen);
+    return u2_bt(wir_r, c3__mtnb, p_gen, q_gen);
   }
 
   /* open:plow
@@ -1444,49 +1444,49 @@
         return _plow_fail(wir_r, "bad code");
       }
       else {
-        _open_p   (mast);
-        _open_p   (wost);
-        _open_p   (zush);
-        _open_pq  (marg);
-        _open_p   (vern);
+        _open_p   (lmnb);
+        _open_p   (htsg);
+        _open_p   (hpdx);
+        _open_pq  (skdr);
+        _open_p   (skhp);
         _open_p   (frag);
-        _open_pqr (hang);
-        _open_p   (fist);
-        _open_pq  (lome);
-        _open_pq  (gnum);
-        _open_pqr (bung);
-        _open_pq  (claf);
-        _open_pqr (lort);
-        _open_pq  (vamp);
-        _open_p   (zole);
+        _open_pqr (mtsg);
+        _open_p   (lmpd);
+        _open_pq  (brbn);
+        _open_pq  (mtdt);
+        _open_pqr (mtpd);
+        _open_pq  (bndr);
+        _open_pqr (skdt);
+        _open_pq  (brnb);
+        _open_p   (hptc);
         _open_p   (pane);
-        _open_pq  (tang);
-        _open_p   (teck);
-        _open_pq  (gant);
-        _open_pqrs(quax);
-        _open_pq  (sunt);
-        _open_pq  (zemp);
-        _open_pq  (gram);
-        _open_pqr (trex);
-        _open_pqrs(tung);
-        _open_p   (mave);
+        _open_pq  (bnnb);
+        _open_p   (mtrs);
+        _open_pq  (bnpd);
+        _open_pqrs(dght);
+        _open_pq  (brdg);
+        _open_pq  (hpcb);
+        _open_pq  (skrd);
+        _open_pqr (dgpd);
+        _open_pqrs(mtht);
+        _open_p   (htrs);
 
         _open_p   (bean);
-        _open_pq  (lonk);
-        _open_pqr (gath);
-        _open_p   (prex);
-        _open_pq  (fung);
-        _open_pq  (mung);
+        _open_pq  (brsg);
+        _open_pqr (mtbr);
+        _open_p   (dgrs);
+        _open_pq  (mtnb);
+        _open_pq  (mtdg);
         _open_pq  (velt);
-        _open_p   (slax);
-        _open_pq  (moze);
-        _open_p   (rond);
+        _open_p   (dgsg);
+        _open_pq  (skrs);
+        _open_p   (brsk);
         _open_pq  (frit);
-        _open_p   (chan);
-        _open_pq  (grel);
-        _open_pq  (pock);
-        _open_p   (dorn);
-        _open_pqr (fent);
+        _open_p   (skmp);
+        _open_pq  (sknb);
+        _open_pq  (htdg);
+        _open_p   (skbr);
+        _open_pqr (sksg);
         _open_pq  (yell);
 
         return gen;
@@ -1667,7 +1667,7 @@
       else if ( u2_yes == u2_as_p(tac, c3__leaf, &p_tac) ) {
         return _iris_snap(wir_r, sut, bar, axe, p_tac);
       }
-      else if ( u2_yes == u2_as_pq(tac, c3__bran, &p_tac, &q_tac) ) {
+      else if ( u2_yes == u2_as_pq(tac, c3__htbn, &p_tac, &q_tac) ) {
         if ( u2_yes == u2_as_pq(sut, c3__face, &p_sut, &q_sut) ) {
           if ( u2_yes == u2_sing(p_sut, p_tac) ) {
             return u2_bt
@@ -2911,7 +2911,7 @@
       if ( u2_yes == u2_sing(_1, wam) ) {
         if ( (u2_nul == yus) ) {
           return u2_bt
-            (wir_r, c3__bran,
+            (wir_r, c3__htbn,
                   gos,
                   _lark_nuke(wir_r, gur, tac, rop, feg));
         } else {
@@ -3032,14 +3032,14 @@
     else if ( (u2_nul == les) ) {
       return tac;
     }
-    else if ( u2_yes == u2_as_pq(tac, c3__bran, &p_tac, &q_tac) ) {
-      if ( !(u2_yes == u2_as_pq(les, c3__bran, &p_les, &q_les)) ||
+    else if ( u2_yes == u2_as_pq(tac, c3__htbn, &p_tac, &q_tac) ) {
+      if ( !(u2_yes == u2_as_pq(les, c3__htbn, &p_les, &q_les)) ||
            !(u2_yes == u2_sing(p_tac, p_les)) )
       {
         return _plow_fail(wir_r, "cram crash");
       }
       else return u2_bt
-        (wir_r, c3__bran,
+        (wir_r, c3__htbn,
               p_tac,
               _lark_cram(wir_r, sut, q_tac, q_les));
     }
@@ -3203,19 +3203,19 @@
       
       u2_noun p_gen, q_gen;
 
-      if ( u2_yes == u2_as_pq(gen, c3__plin, &p_gen, &q_gen) ) {
+      if ( u2_yes == u2_as_pq(gen, c3__skbn, &p_gen, &q_gen) ) {
         return u2_bc
           (wir_r, 
            u2_bc(wir_r, q_gen, _rose_play(wir_r, sut, p_gen)),
            u2_nul);
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__zemp, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__hpcb, &p_gen, &q_gen) ) {
         return _rose_gain_hunt(wir_r, sut, q_gen);
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__zush, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__hpdx, &p_gen, &q_gen) ) {
         return _rose_gain_hunt(wir_r, sut, q_gen);
       }
-      else if ( u2_yes == u2_as_p(gen, c3__chan, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__skmp, &p_gen) ) {
         return _rose_gain_hunt_a(wir_r, sut, p_gen);
       }
       else return u2_nul;
@@ -3352,26 +3352,26 @@
       
       u2_noun p_gen, q_gen, r_gen;
 
-      if ( u2_yes == u2_as_p(gen, c3__zike, &p_gen) ) {
+      if ( u2_yes == u2_as_p(gen, c3__hphp, &p_gen) ) {
         return u2_bc(wir_r, u2_nock_frag, _0);
       }
-      else if ( u2_yes == u2_as_p(gen, c3__zoot, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__hpmt, &p_gen) ) {
         return u2_bl_bail(wir_r);
       }
-      else if ( u2_yes == u2_as_p(gen, c3__vint, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__dtht, &p_gen) ) {
         return u2_bc(wir_r, u2_nock_vint, _rose_make(wir_r, sut, p_gen));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__cast, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__htnb, &p_gen, &q_gen) ) {
         return _rose_make(wir_r, sut, q_gen);
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__twix, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__dgnb, &p_gen, &q_gen) ) {
         return _lily_cons
           (wir_r, _rose_make(wir_r, sut, p_gen), _rose_make(wir_r, sut, q_gen));
       }
-      else if ( u2_yes == u2_as_p(gen, c3__wost, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__htsg, &p_gen) ) {
         return _rose_make(wir_r, sut, p_gen);
       }
-      else if ( u2_yes == u2_as_p(gen, c3__zush, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__hpdx, &p_gen) ) {
         u2_tool guz;
         u2_atom bug;
 
@@ -3383,25 +3383,25 @@
         u2_plow_(wir_r, bug) = bug;
         return guz;
       }
-      else if ( u2_yes == u2_as_p(gen, c3__dust, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__dtsk, &p_gen) ) {
         return u2_bc(wir_r, u2_nock_dust, _rose_make(wir_r, sut, p_gen));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__germ, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__htbc, &p_gen, &q_gen) ) {
         return u2_bt(wir_r, 
-                     c3__germ,
+                     c3__htbc,
                      _rose_make(wir_r, sut, p_gen),
                      _rose_make(wir_r, sut, q_gen));
       } 
-      else if ( u2_yes == u2_as_pq(gen, c3__hint, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__htsk, &p_gen, &q_gen) ) {
         return u2_bt(wir_r, 
                      u2_nock_hint,
                      _rose_make(wir_r, sut, p_gen),
                      _rose_make(wir_r, sut, q_gen));
       }
-      else if ( u2_yes == u2_as_p(gen, c3__grit, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__htpt, &p_gen) ) {
         return _rose_make(wir_r, sut, p_gen);
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__tash, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__brmt, &p_gen, &q_gen) ) {
         u2_book sec = _gull_fill(wir_r, u2_nul, q_gen);
         u2_noun heq = _rose_make_prop(wir_r, sut, p_gen);
         u2_noun baf = _rose_make_bake(wir_r, _rose_play(wir_r, sut, gen), sec);
@@ -3416,7 +3416,7 @@
            u2_bc(wir_r, u2_nock_bone, baf));
 #endif
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__plin, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__skbn, &p_gen, &q_gen) ) {
         u2_plan lar = _rose_seek(wir_r, sut, _plow_rake(wir_r, q_gen));
         u2_axis p_lar = u2_h(lar);
 
@@ -3427,13 +3427,13 @@
           return _iris_fish(wir_r, _rose_play(wir_r, sut, p_gen), u2_nul, p_lar);
         }
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__flac, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__bnrd, &p_gen, &q_gen) ) {
         return _lily_comb
           (wir_r,
            _rose_make(wir_r, sut, p_gen),
            _rose_make(wir_r, _rose_play(wir_r, sut, p_gen), q_gen));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__pank, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__brrs, &p_gen, &q_gen) ) {
         u2_book sec = _gull_fill(wir_r, u2_nul, q_gen);
         u2_noun heq = _rose_make_prop(wir_r, sut, p_gen);
         u2_noun baf = _rose_make_bake(wir_r, _rose_play(wir_r, sut, gen), sec);
@@ -3448,20 +3448,20 @@
            u2_bc(wir_r, u2_nock_bone, baf));
 #endif
       }
-      else if ( u2_yes == u2_as_p(gen, c3__zalt, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__hpdg, &p_gen) ) {
         u2_type yoz = _rose_play(wir_r, sut, p_gen);
    
         return u2_bc(wir_r, u2_nock_bone, yoz);
       }
-      else if ( u2_yes == u2_as_p(gen, c3__zond, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__hpbn, &p_gen) ) {
         u2_type yoz = _rose_make(wir_r, sut, p_gen);
    
         return u2_bc(wir_r, u2_nock_bone, yoz);
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__bran, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__htbn, &p_gen, &q_gen) ) {
         return _rose_make(wir_r, sut, q_gen);
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__sail, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__dtrs, &p_gen, &q_gen) ) {
         return u2_bt(wir_r, u2_nock_sail,
                               _rose_make(wir_r, sut, p_gen),
                               _rose_make(wir_r, sut, q_gen));
@@ -3469,7 +3469,7 @@
       else if ( u2_yes == u2_as_p(gen, c3__bone, &p_gen) ) {
         return u2_bc(wir_r, u2_nock_bone, p_gen);
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__zemp, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__hpcb, &p_gen, &q_gen) ) {
         u2_noun qip;
 
         u2_plow_(wir_r, meb) = u2_bc(wir_r, u2_bc(wir_r, u2_nul, p_gen), u2_plow_(wir_r, meb));
@@ -3478,10 +3478,10 @@
 
         return qip;
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__stil, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__htpd, &p_gen, &q_gen) ) {
         return u2_bc(wir_r, u2_nock_frag, _1);
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__mack, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__mtbn, &p_gen, &q_gen) ) {
         u2_plan lar = _rose_seek(wir_r, sut, p_gen);
         u2_noun rem = _rose_make_a(wir_r, sut, q_gen);
         u2_axis p_lar = u2_h(lar);
@@ -3513,7 +3513,7 @@
           return gak;
         }
       }
-      else if ( u2_yes == u2_as_pqr(gen, c3__trol, &p_gen, &q_gen, &r_gen) ) {
+      else if ( u2_yes == u2_as_pqr(gen, c3__skdg, &p_gen, &q_gen, &r_gen) ) {
         return u2_bq
           (wir_r,
            u2_nock_trol,
@@ -3521,7 +3521,7 @@
            _rose_make(wir_r, _rose_gain(wir_r, sut, p_gen), q_gen),
            _rose_make(wir_r, sut, r_gen));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__sing, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__dtbn, &p_gen, &q_gen) ) {
         return u2_bt
           (wir_r,
            u2_nock_sing,
@@ -3788,28 +3788,28 @@
       
       u2_noun p_gen, q_gen, r_gen;
 
-      if ( u2_yes == u2_as_p(gen, c3__zike, &p_gen) ) {
+      if ( u2_yes == u2_as_p(gen, c3__hphp, &p_gen) ) {
         return c3__blot;
       }
-      else if ( u2_yes == u2_as_p(gen, c3__zoot, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__hpmt, &p_gen) ) {
         return u2_bl_bail(wir_r);
       }
-      else if ( u2_yes == u2_as_p(gen, c3__vint, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__dtht, &p_gen) ) {
         return c3__atom;
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__cast, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__htnb, &p_gen, &q_gen) ) {
         return _rose_play(wir_r, sut, p_gen);
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__twix, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__dgnb, &p_gen, &q_gen) ) {
         return u2_bt
           (wir_r, c3__cell,
                 _rose_play(wir_r, sut, p_gen),
                 _rose_play(wir_r, sut, q_gen));
       }
-      else if ( u2_yes == u2_as_p(gen, c3__wost, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__htsg, &p_gen) ) {
         return _rose_play(wir_r, sut, p_gen);
       }
-      else if ( u2_yes == u2_as_p(gen, c3__zush, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__hpdx, &p_gen) ) {
         u2_type soq;
         u2_atom bug;
 
@@ -3821,23 +3821,23 @@
         u2_plow_(wir_r, bug) = bug;
         return soq;
       }
-      else if ( u2_yes == u2_as_p(gen, c3__dust, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__dtsk, &p_gen) ) {
         return u2_bt
           (wir_r,
            c3__fork,
            u2_bc(wir_r, c3__cube, u2_yes),
            u2_bc(wir_r, c3__cube, u2_no));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__germ, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__htbc, &p_gen, &q_gen) ) {
         return _rose_play(wir_r, sut, q_gen);
       } 
-      else if ( u2_yes == u2_as_pq(gen, c3__hint, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__htsk, &p_gen, &q_gen) ) {
         return _rose_play(wir_r, sut, q_gen);
       }
-      else if ( u2_yes == u2_as_p(gen, c3__grit, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__htpt, &p_gen) ) {
         return _rose_etch(wir_r, _rose_play(wir_r, sut, p_gen));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__tash, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__brmt, &p_gen, &q_gen) ) {
         return u2_bu
           (wir_r, c3__core, 
                 sut, 
@@ -3845,17 +3845,17 @@
                 sut,
                 _gull_fill(wir_r, u2_nul, q_gen));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__plin, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__skbn, &p_gen, &q_gen) ) {
         return u2_bt
           (wir_r,
            c3__fork,
            u2_bc(wir_r, c3__cube, u2_yes),
            u2_bc(wir_r, c3__cube, u2_no));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__flac, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__bnrd, &p_gen, &q_gen) ) {
         return _rose_play(wir_r, _rose_play(wir_r, sut, p_gen), q_gen);
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__pank, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__brrs, &p_gen, &q_gen) ) {
         return u2_bu
           (wir_r, c3__core, 
                 sut, 
@@ -3863,22 +3863,22 @@
                 sut,
                 _gull_fill(wir_r, u2_nul, q_gen));
       }
-      else if ( u2_yes == u2_as_p(gen, c3__zalt, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__hpdg, &p_gen) ) {
         return u2_bc(wir_r, c3__cube, _rose_play(wir_r, sut, p_gen));
       }
-      else if ( u2_yes == u2_as_p(gen, c3__zond, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__hpbn, &p_gen) ) {
         return u2_bc(wir_r, c3__cube, _rose_make(wir_r, sut, p_gen));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__bran, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__htbn, &p_gen, &q_gen) ) {
         return u2_bt(wir_r, c3__face, p_gen, _rose_play(wir_r, sut, q_gen));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__sail, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__dtrs, &p_gen, &q_gen) ) {
         return c3__blur;
       }
       else if ( u2_yes == u2_as_p(gen, c3__bone, &p_gen) ) {
         return u2_bc(wir_r, c3__cube, p_gen); 
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__zemp, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__hpcb, &p_gen, &q_gen) ) {
         u2_noun qip;
 
         u2_plow_(wir_r, meb) = u2_bc(wir_r, u2_bc(wir_r, u2_nul, p_gen), u2_plow_(wir_r, meb));
@@ -3887,10 +3887,10 @@
 
         return qip;
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__stil, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__htpd, &p_gen, &q_gen) ) {
         return sut;
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__mack, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__mtbn, &p_gen, &q_gen) ) {
         u2_plan lar = _rose_seek(wir_r, sut, p_gen);
         u2_noun huz = _rose_play_a(wir_r, sut, q_gen);
         u2_noun q_lar = u2_h(u2_t(lar));
@@ -3923,13 +3923,13 @@
           return u2_bt(wir_r, c3__hold, sut, gen);
         }
       }
-      else if ( u2_yes == u2_as_pqr(gen, c3__trol, &p_gen, &q_gen, &r_gen) ) {
+      else if ( u2_yes == u2_as_pqr(gen, c3__skdg, &p_gen, &q_gen, &r_gen) ) {
         return _rose_eith
           (wir_r,
            _rose_play(wir_r, _rose_gain(wir_r, sut, p_gen), q_gen),
            _rose_play(wir_r, sut, r_gen));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__sing, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__dtbn, &p_gen, &q_gen) ) {
         return u2_bt
           (wir_r,
            c3__fork,
@@ -4097,18 +4097,18 @@
       
       u2_noun p_gen, q_gen, r_gen;
 
-      if ( u2_yes == u2_as_p(gen, c3__zike, &p_gen) ) {
+      if ( u2_yes == u2_as_p(gen, c3__hphp, &p_gen) ) {
         return u2_yes;
       }
-      else if ( u2_yes == u2_as_p(gen, c3__zoot, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__hpmt, &p_gen) ) {
         return u2_yes;
       }
-      else if ( u2_yes == u2_as_p(gen, c3__vint, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__dtht, &p_gen) ) {
         return u2_and(_rose_show(wir_r, sut, p_gen),
                       _rose_show_nest
                           (wir_r, c3__atom, _rose_play(wir_r, sut, p_gen)));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__cast, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__htnb, &p_gen, &q_gen) ) {
         return u2_and
           (_rose_show(wir_r, sut, p_gen),
            u2_and
@@ -4116,13 +4116,13 @@
              _rose_show_nest(wir_r, _rose_play(wir_r, sut, p_gen),
                                 _rose_play(wir_r, sut, q_gen))));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__twix, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__dgnb, &p_gen, &q_gen) ) {
         return u2_and(_rose_show(wir_r, sut, p_gen), _rose_show(wir_r, sut, q_gen));
       }
-      else if ( u2_yes == u2_as_p(gen, c3__wost, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__htsg, &p_gen) ) {
         return _rose_show(wir_r, sut, p_gen);
       }
-      else if ( u2_yes == u2_as_p(gen, c3__zush, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__hpdx, &p_gen) ) {
         u2_flag zic;
         u2_atom bug;
 
@@ -4134,32 +4134,32 @@
         u2_plow_(wir_r, bug) = bug;
         return zic;
       }
-      else if ( u2_yes == u2_as_p(gen, c3__dust, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__dtsk, &p_gen) ) {
         return _rose_show(wir_r, sut, p_gen);
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__germ, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__htbc, &p_gen, &q_gen) ) {
         return u2_and(_rose_show(wir_r, sut, p_gen),
                       _rose_show(wir_r, sut, q_gen));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__hint, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__htsk, &p_gen, &q_gen) ) {
         return u2_and(_rose_show(wir_r, sut, p_gen),
                       _rose_show(wir_r, sut, q_gen));
       }
-      else if ( u2_yes == u2_as_p(gen, c3__grit, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__htpt, &p_gen) ) {
         return _rose_show(wir_r, sut, p_gen);
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__tash, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__brmt, &p_gen, &q_gen) ) {
         return u2_yes;
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__plin, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__skbn, &p_gen, &q_gen) ) {
         return u2_and(_rose_show(wir_r, sut, p_gen), 
                       _rose_show(wir_r, sut, q_gen));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__flac, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__bnrd, &p_gen, &q_gen) ) {
         return u2_and(_rose_show(wir_r, sut, p_gen),
                       _rose_show(wir_r, _rose_play(wir_r, sut, p_gen), q_gen));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__pank, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__brrs, &p_gen, &q_gen) ) {
         sut = _rose_play(wir_r, sut, gen);
 
         while ( !(u2_nul == q_gen) ) {
@@ -4174,23 +4174,23 @@
         }
         return u2_yes;
       }
-      else if ( u2_yes == u2_as_p(gen, c3__zalt, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__hpdg, &p_gen) ) {
         return _rose_show(wir_r, sut, p_gen);
       }
-      else if ( u2_yes == u2_as_p(gen, c3__zond, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__hpbn, &p_gen) ) {
         return _rose_show(wir_r, sut, p_gen);
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__bran, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__htbn, &p_gen, &q_gen) ) {
         return _rose_show(wir_r, sut, q_gen);
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__sail, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__dtrs, &p_gen, &q_gen) ) {
         return u2_and(_rose_show(wir_r, sut, p_gen),
                       _rose_show(wir_r, sut, q_gen));
       }
       else if ( u2_yes == u2_as_p(gen, c3__bone, &p_gen) ) {
         return u2_yes;
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__zemp, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__hpcb, &p_gen, &q_gen) ) {
         u2_noun qip;
 
         u2_plow_(wir_r, meb) = u2_bc(wir_r, u2_bc(wir_r, u2_nul, p_gen), u2_plow_(wir_r, meb));
@@ -4199,7 +4199,7 @@
 
         return qip;
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__stil, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__htpd, &p_gen, &q_gen) ) {
         return u2_and
           (_rose_show(wir_r, sut, p_gen),
            u2_and
@@ -4207,7 +4207,7 @@
              _rose_show_nest
               (wir_r, _rose_play(wir_r, sut, p_gen), _rose_play(wir_r, sut, q_gen))));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__mack, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__mtbn, &p_gen, &q_gen) ) {
         u2_plan lar = _rose_seek(wir_r, sut, p_gen);
         u2_noun huz = _rose_show_a(wir_r, sut, q_gen);
         u2_noun q_lar = u2_h(u2_t(lar));
@@ -4250,7 +4250,7 @@
                   u2_err(wir_r, "gen", gen);
                   u2_err(wir_r, "mka", _rose_make(wir_r, sut, gen));
                   u2_err(wir_r, "mkb", _rose_make(wir_r, gim, gen));
-                  return _plow_fail(wir_r, "soft mack");
+                  return _plow_fail(wir_r, "soft mtbn");
                 }
                 return goh;
               }
@@ -4260,14 +4260,14 @@
           else return u2_bl_bail(wir_r);
         }
       }
-      else if ( u2_yes == u2_as_pqr(gen, c3__trol, &p_gen, &q_gen, &r_gen) ) {
+      else if ( u2_yes == u2_as_pqr(gen, c3__skdg, &p_gen, &q_gen, &r_gen) ) {
         return u2_and
           (_rose_show(wir_r, sut, p_gen),
            u2_and
            (_rose_show(wir_r, _rose_gain(wir_r, sut, p_gen), q_gen),
             _rose_show(wir_r, sut, r_gen)));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__sing, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__dtbn, &p_gen, &q_gen) ) {
         return u2_and
           (_rose_show(wir_r, sut, p_gen),
            _rose_show(wir_r, sut, q_gen));
@@ -4725,7 +4725,7 @@
     
     u2_gene p_gen, q_gen;
 
-    if ( u2_yes == u2_as_pq(gen, c3__mack, &p_gen, &q_gen) ) {
+    if ( u2_yes == u2_as_pq(gen, c3__mtbn, &p_gen, &q_gen) ) {
       if ( !(u2_nul == q_gen) ) {
         return _plow_fail(wir_r, "rope");
       }
@@ -4737,10 +4737,10 @@
     else if ( u2_yes == u2_as_p(gen, c3__pane, &p_gen) ) {
       return u2_bo(wir_r, gen);
     }
-    else if ( u2_yes == u2_as_pq(gen, c3__zemp, &p_gen, &q_gen) ) {
+    else if ( u2_yes == u2_as_pq(gen, c3__hpcb, &p_gen, &q_gen) ) {
       return _plow_rake(wir_r, q_gen);
     }
-    else if ( u2_yes == u2_as_p(gen, c3__zush, &p_gen) ) {
+    else if ( u2_yes == u2_as_p(gen, c3__hpdx, &p_gen) ) {
       return _plow_rake(wir_r, p_gen);
     }
     else {

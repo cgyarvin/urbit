@@ -65,62 +65,62 @@ P_OFILES=\
        p/saur.o \
        p/watt.o
 
-J274_1_OFILES=\
-       gen274/1/add.o \
-       gen274/1/bex.o \
-       gen274/1/dec.o \
-       gen274/1/div.o \
-       gen274/1/gte.o \
-       gen274/1/gth.o \
-       gen274/1/lte.o \
-       gen274/1/lth.o \
-       gen274/1/mod.o \
-       gen274/1/mul.o \
-       gen274/1/sub.o
+J273_1_OFILES=\
+       gen273/1/add.o \
+       gen273/1/bex.o \
+       gen273/1/dec.o \
+       gen273/1/div.o \
+       gen273/1/gte.o \
+       gen273/1/gth.o \
+       gen273/1/lte.o \
+       gen273/1/lth.o \
+       gen273/1/mod.o \
+       gen273/1/mul.o \
+       gen273/1/sub.o
 
-J274_2_OFILES=\
-       gen274/2/bind.o \
-       gen274/2/clap.o \
-       gen274/2/drop.o \
-       gen274/2/flop.o \
-       gen274/2/lent.o \
-       gen274/2/levy.o \
-       gen274/2/lien.o \
-       gen274/2/need.o \
-       gen274/2/reel.o \
-       gen274/2/roll.o \
-       gen274/2/skim.o \
-       gen274/2/skip.o \
-       gen274/2/snag.o \
-       gen274/2/sort.o \
-       gen274/2/turn.o \
-       gen274/2/weld.o
+J273_2_OFILES=\
+       gen273/2/bind.o \
+       gen273/2/clap.o \
+       gen273/2/drop.o \
+       gen273/2/flop.o \
+       gen273/2/lent.o \
+       gen273/2/levy.o \
+       gen273/2/lien.o \
+       gen273/2/need.o \
+       gen273/2/reel.o \
+       gen273/2/roll.o \
+       gen273/2/skim.o \
+       gen273/2/skip.o \
+       gen273/2/snag.o \
+       gen273/2/sort.o \
+       gen273/2/turn.o \
+       gen273/2/weld.o
 
-J274_3_OFILES=\
-       gen274/3/cat.o \
-       gen274/3/con.o \
-       gen274/3/cut.o \
-       gen274/3/dis.o \
-       gen274/3/end.o \
-       gen274/3/lsh.o \
-       gen274/3/met.o \
-       gen274/3/mix.o \
-       gen274/3/mug.o \
-       gen274/3/rap.o \
-       gen274/3/rip.o \
-       gen274/3/rsh.o 
+J273_3_OFILES=\
+       gen273/3/cat.o \
+       gen273/3/con.o \
+       gen273/3/cut.o \
+       gen273/3/dis.o \
+       gen273/3/end.o \
+       gen273/3/lsh.o \
+       gen273/3/met.o \
+       gen273/3/mix.o \
+       gen273/3/mug.o \
+       gen273/3/rap.o \
+       gen273/3/rip.o \
+       gen273/3/rsh.o 
 
-J274_OFILES=\
-       $(J274_1_OFILES) \
-       $(J274_2_OFILES) \
-       $(J274_3_OFILES) \
-       gen274/watt.o
+J273_OFILES=\
+       $(J273_1_OFILES) \
+       $(J273_2_OFILES) \
+       $(J273_3_OFILES) \
+       gen273/watt.o
 
 OFILES=\
        $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
-       $(J274_OFILES)
+       $(J273_OFILES)
 
 $(BIN)/ford: $(OFILES)
 	mkdir -p $(BIN)

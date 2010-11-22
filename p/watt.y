@@ -85,13 +85,13 @@ gene
 wide
   : wide_a
   | wide_rope si_dig wide
-    { $$ = _ytrel(c3__claf, $1, $3); }
+    { $$ = _ytrel(c3__bndr, $1, $3); }
   ;
 
 wide_a
   : wide_c
   | tok_term si_ben wide
-    { $$ = _ytrel(c3__bran, $1, $3); }
+    { $$ = _ytrel(c3__htbn, $1, $3); }
   ;
 
 wide_c
@@ -102,7 +102,7 @@ wide_c
   | wide_cage
   | wide_pick
   | wide_call
-  | wide_hang
+  | wide_mtsg
   | wide_norm
   ;
 
@@ -138,46 +138,46 @@ wide_c
    
     wide_rope
       : rope            
-        { $$ = _ytrel(c3__mack, $1, _0); }
+        { $$ = _ytrel(c3__mtbn, $1, _0); }
       ;
     wide_cage
       : si_nom g bank_wide g si_mon 
-        { $$ = _ycell(c3__prex, $3); }
+        { $$ = _ycell(c3__dgrs, $3); }
       ; 
 
     wide_pick
       : si_der g bank_wide g si_red
-        { $$ = _ycell(c3__rond, $3); } 
+        { $$ = _ycell(c3__brsk, $3); } 
       ;
 
     wide_call
       : si_lep g bank_wide g si_pel
-        { $$ = _ycell(c3__fung, $3); }
+        { $$ = _ycell(c3__mtnb, $3); }
       ;
 
-    wide_hang
+    wide_mtsg
       : si_sig si_lep rope w gene w bank_wide si_pel
-        { $$ = _yqual(c3__hang, $3, $5, _ycell(c3__prex, $7)); }
+        { $$ = _yqual(c3__mtsg, $3, $5, _ycell(c3__dgrs, $7)); }
  
   /** Wide: funky stuff.
   **/
     wide_funk
       : si_sud g bank_wide g si_dus
-        { $$ = _ycell(c3__slax, $3); }
+        { $$ = _ycell(c3__dgsg, $3); }
       | si_sud g si_dus
-        { $$ = _ycell(c3__slax, _0); }
+        { $$ = _ycell(c3__dgsg, _0); }
       | rope si_lep rack_wide si_pel
-        { $$ = _ytrel(c3__mack, $1, $3); }
+        { $$ = _ytrel(c3__mtbn, $1, $3); }
       | si_hop wide
-        { $$ = _ycell(c3__vern, $2); }
+        { $$ = _ycell(c3__skhp, $2); }
       | si_amp wide
-        { $$ = _ycell(c3__mast, $2); }
+        { $$ = _ycell(c3__lmnb, $2); }
       | si_ras wide
-        { $$ = _ycell(c3__teck, $2); }
+        { $$ = _ycell(c3__mtrs, $2); }
       | si_cab wide
-        { $$ = _ycell(c3__fist, $2); }
+        { $$ = _ycell(c3__lmpd, $2); }
       | si_tic wide si_tic wide
-        { $$ = _ytrel(c3__cast, $2, $4); }
+        { $$ = _ytrel(c3__htnb, $2, $4); }
 /*
       | si_sol path
         { $$ = $2; }
@@ -187,7 +187,7 @@ wide_c
 /*
     path 
       : thin
-      | thin si_sol path    { $$ = _ytrel(c3__twix, $1, $3); }
+      | thin si_sol path    { $$ = _ytrel(c3__dgnb, $1, $3); }
       ;
 
     thin
@@ -488,70 +488,70 @@ tall
 
   /** Digraphs (with stem)
   **/
-    di_askdig: si_ask si_dig  { $$ = c3__trol; }
-    di_askdot: si_ask si_dot  { $$ = c3__lort; }
-    di_askred: si_ask si_red  { $$ = c3__gram; }
-    di_askder: si_ask si_der  { $$ = c3__marg; }
-    di_askamp: si_ask si_amp  { $$ = c3__chan; }
-    di_askbar: si_ask si_bar  { $$ = c3__dorn; }
-    di_asksig: si_ask si_sig  { $$ = c3__fent; }
-    di_askhop: si_ask si_hop  { $$ = c3__vern; }
-    di_askben: si_ask si_ben  { $$ = c3__plin; }
-    di_asknub: si_ask si_nub  { $$ = c3__grel; }
-    di_askras: si_ask si_ras  { $$ = c3__moze; }
+    di_askdig: si_ask si_dig  { $$ = c3__skdg; }
+    di_askdot: si_ask si_dot  { $$ = c3__skdt; }
+    di_askred: si_ask si_red  { $$ = c3__skrd; }
+    di_askder: si_ask si_der  { $$ = c3__skdr; }
+    di_askamp: si_ask si_amp  { $$ = c3__skmp; }
+    di_askbar: si_ask si_bar  { $$ = c3__skbr; }
+    di_asksig: si_ask si_sig  { $$ = c3__sksg; }
+    di_askhop: si_ask si_hop  { $$ = c3__skhp; }
+    di_askben: si_ask si_ben  { $$ = c3__skbn; }
+    di_asknub: si_ask si_nub  { $$ = c3__sknb; }
+    di_askras: si_ask si_ras  { $$ = c3__skrs; }
 
-    di_barnub: si_bar si_nub  { $$ = c3__vamp; }
-    di_barben: si_bar si_ben  { $$ = c3__lome; }
-    di_barras: si_bar si_ras  { $$ = c3__pank; }
-    di_barmit: si_bar si_mit  { $$ = c3__tash; }
-    di_bardig: si_bar si_dig  { $$ = c3__sunt; }
-    di_barask: si_bar si_ask  { $$ = c3__rond; }
-    di_barsig: si_bar si_sig  { $$ = c3__lonk; }
+    di_barnub: si_bar si_nub  { $$ = c3__brnb; }
+    di_barben: si_bar si_ben  { $$ = c3__brbn; }
+    di_barras: si_bar si_ras  { $$ = c3__brrs; }
+    di_barmit: si_bar si_mit  { $$ = c3__brmt; }
+    di_bardig: si_bar si_dig  { $$ = c3__brdg; }
+    di_barask: si_bar si_ask  { $$ = c3__brsk; }
+    di_barsig: si_bar si_sig  { $$ = c3__brsg; }
 
-    di_bender: si_ben si_der  { $$ = c3__claf; }
-    di_benred: si_ben si_red  { $$ = c3__flac; }
-    di_benpod: si_ben si_pod  { $$ = c3__gant; }
-    di_bennub: si_ben si_nub  { $$ = c3__tang; }
+    di_bender: si_ben si_der  { $$ = c3__bndr; }
+    di_benred: si_ben si_red  { $$ = c3__bnrd; }
+    di_benpod: si_ben si_pod  { $$ = c3__bnpd; }
+    di_bennub: si_ben si_nub  { $$ = c3__bnnb; }
  
-    di_digras: si_dig si_ras  { $$ = c3__prex; }
-    di_digsig: si_dig si_sig  { $$ = c3__slax; }
-    di_dignub: si_dig si_nub  { $$ = c3__twix; }
-    di_digpod: si_dig si_pod  { $$ = c3__trex; }
-    di_dighat: si_dig si_hat  { $$ = c3__quax; }
+    di_digras: si_dig si_ras  { $$ = c3__dgrs; }
+    di_digsig: si_dig si_sig  { $$ = c3__dgsg; }
+    di_dignub: si_dig si_nub  { $$ = c3__dgnb; }
+    di_digpod: si_dig si_pod  { $$ = c3__dgpd; }
+    di_dighat: si_dig si_hat  { $$ = c3__dght; }
 
-    di_dotben: si_dot si_ben  { $$ = c3__sing; }
-    di_dothat: si_dot si_hat  { $$ = c3__vint; }
-    di_dotask: si_dot si_ask  { $$ = c3__dust; }
-    di_dotras: si_dot si_ras  { $$ = c3__sail; }
+    di_dotben: si_dot si_ben  { $$ = c3__dtbn; }
+    di_dothat: si_dot si_hat  { $$ = c3__dtht; }
+    di_dotask: si_dot si_ask  { $$ = c3__dtsk; }
+    di_dotras: si_dot si_ras  { $$ = c3__dtrs; }
     
-    di_hatask: si_hat si_ask  { $$ = c3__hint; }
-    di_hatnub: si_hat si_nub  { $$ = c3__cast; }
-    di_hatbuc: si_hat si_buc  { $$ = c3__germ; }
-    di_hatdig: si_hat si_dig  { $$ = c3__stil; }
-    di_hatpod: si_hat si_pod  { $$ = c3__pock; }
-    di_hatben: si_hat si_ben  { $$ = c3__bran; }
+    di_hatask: si_hat si_ask  { $$ = c3__htsk; }
+    di_hatnub: si_hat si_nub  { $$ = c3__htnb; }
+    di_hatbuc: si_hat si_buc  { $$ = c3__htbc; }
+    di_hatdig: si_hat si_dig  { $$ = c3__htpd; }
+    di_hatpod: si_hat si_pod  { $$ = c3__htdg; }
+    di_hatben: si_hat si_ben  { $$ = c3__htbn; }
     di_hatmit: si_hat si_mit  { $$ = c3__velt; }
-    di_hatras: si_hat si_ras  { $$ = c3__mave; }
-    di_hatpat: si_hat si_pat  { $$ = c3__grit; }
+    di_hatras: si_hat si_ras  { $$ = c3__htrs; }
+    di_hatpat: si_hat si_pat  { $$ = c3__htpt; }
 
-    di_hopdax: si_hop si_dax  { $$ = c3__zush; }
-    di_hopmit: si_hop si_mit  { $$ = c3__zoot; }
-    di_hopven: si_hop si_hop  { $$ = c3__zike; }
-    di_hopdig: si_hop si_dig  { $$ = c3__zalt; }
-    di_hopben: si_hop si_ben  { $$ = c3__zond; }
+    di_hopdax: si_hop si_dax  { $$ = c3__hpdx; }
+    di_hopmit: si_hop si_mit  { $$ = c3__hpmt; }
+    di_hopven: si_hop si_hop  { $$ = c3__hphp; }
+    di_hopdig: si_hop si_dig  { $$ = c3__hpdg; }
+    di_hopben: si_hop si_ben  { $$ = c3__hpbn; }
     
-    di_lomnub: si_lom si_nub  { $$ = c3__mast; }
-    di_lompod: si_lom si_pod  { $$ = c3__fist; }
+    di_lomnub: si_lom si_nub  { $$ = c3__lmnb; }
+    di_lompod: si_lom si_pod  { $$ = c3__lmpd; }
     
-    di_mitben: si_mit si_ben  { $$ = c3__mack; }
-    di_mitras: si_mit si_ras  { $$ = c3__teck; }
-    di_mitbar: si_mit si_bar  { $$ = c3__gath; }
-    di_mitsig: si_mit si_sig  { $$ = c3__hang; }
-    di_mitnub: si_mit si_nub  { $$ = c3__fung; }
-    di_mitdig: si_mit si_dig  { $$ = c3__mung; }
-    di_mitdot: si_mit si_dot  { $$ = c3__gnum; }
-    di_mitpod: si_mit si_pod  { $$ = c3__bung; }
-    di_mithat: si_mit si_hat  { $$ = c3__tung; }
+    di_mitben: si_mit si_ben  { $$ = c3__mtbn; }
+    di_mitras: si_mit si_ras  { $$ = c3__mtrs; }
+    di_mitbar: si_mit si_bar  { $$ = c3__mtbr; }
+    di_mitsig: si_mit si_sig  { $$ = c3__mtsg; }
+    di_mitnub: si_mit si_nub  { $$ = c3__mtnb; }
+    di_mitdig: si_mit si_dig  { $$ = c3__mtdg; }
+    di_mitdot: si_mit si_dot  { $$ = c3__mtdt; }
+    di_mitpod: si_mit si_pod  { $$ = c3__mtpd; }
+    di_mithat: si_mit si_hat  { $$ = c3__mtht; }
 
   /* Signs.
   */
@@ -720,7 +720,7 @@ _watt_locate(u2_ray  wir_r,
 #else
   return u2_bt
     (wir_r, 
-     c3__zemp, 
+     c3__hpcb, 
      u2_bc
       (wir_r, 
        u2_bc
