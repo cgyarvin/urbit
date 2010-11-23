@@ -348,7 +348,7 @@ ford_line(struct ford_state* fod_f,
     }
     else {
       if ( !arg_c && !strcmp(cmd_c, "test") ) {
-        ford_test(fod_f, "watt/273");
+        ford_test(fod_f, "watt/t1-273");
       }
       else {
 #if 0

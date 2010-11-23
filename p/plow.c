@@ -305,7 +305,6 @@
              u2_tool mal,
              u2_tool buz)
   {
-    
     u2_noun p_mal, q_mal, p_buz, q_buz, pp_buz, pq_buz;
 
     if ( u2_yes == u2_as_p(mal, u2_nock_frag, &p_mal) ) {
@@ -600,7 +599,7 @@
            _open_lmnb_fix(wir_r, p_gen, u2_fj_op_peg(wir_r, axe, _2)),
            _open_lmnb_fix(wir_r, q_gen, u2_fj_op_peg(wir_r, axe, _3)));
       }
-      else if ( u2_yes == u2_as_pq(gen, c3__velt, &p_gen, &q_gen) ) {
+      else if ( u2_yes == u2_as_pq(gen, c3__htmt, &p_gen, &q_gen) ) {
         u2_tool ryx = u2_bc(wir_r, c3__frag, axe);
 
         return u2_bt
@@ -682,7 +681,7 @@
     else if ( u2_yes == u2_as_p(gen, c3__hpdx, &p_gen) ) {
       return u2_bc(wir_r, c3__hpdx, _open_lmnb(wir_r, p_gen));
     }
-    else if ( u2_yes == u2_as_pq(gen, c3__velt, &p_gen, &q_gen) ) {
+    else if ( u2_yes == u2_as_pq(gen, c3__htmt, &p_gen, &q_gen) ) {
       u2_tool ryx = u2_bc(wir_r, c3__frag, _4);
 
       return u2_bt
@@ -762,9 +761,9 @@
       return u2_bt
         (wir_r, c3__dgnb, _open_lmpd(wir_r, p_gen), _open_lmpd(wir_r, q_gen));
     }
-    else if ( u2_yes == u2_as_pq(gen, c3__velt, &p_gen, &q_gen) ) {
+    else if ( u2_yes == u2_as_pq(gen, c3__htmt, &p_gen, &q_gen) ) {
       return u2_bt
-        (wir_r, c3__velt, _open_lmpd(wir_r, p_gen), _open_lmpd(wir_r, q_gen));
+        (wir_r, c3__htmt, _open_lmpd(wir_r, p_gen), _open_lmpd(wir_r, q_gen));
     }
     else if ( u2_yes == u2_as_pq(gen, c3__hpcb, &p_gen, &q_gen) ) {
       return u2_bt
@@ -998,7 +997,7 @@
                         q_gen)));
   }
 
-  _open_do_pq(velt)
+  _open_do_pq(htmt)
   {
     
 
@@ -1477,7 +1476,7 @@
         _open_p   (dgrs);
         _open_pq  (mtnb);
         _open_pq  (mtdg);
-        _open_pq  (velt);
+        _open_pq  (htmt);
         _open_p   (dgsg);
         _open_pq  (skrs);
         _open_p   (brsk);
@@ -2127,7 +2126,7 @@
                     u2_pool gil,
                     u2_term cog)
     {
-#if 0
+#if 1
       u2_noun mum  = u2_bu(wir_r, sut, bar, axe, gil, cog);
       u2_weak zod  = _plow_find(wir_r, u2_bask_plow_fin, mum);
         

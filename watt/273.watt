@@ -795,7 +795,7 @@
   ==
 ::
 ::::
-  ::  Tier 5, pardtbn and printing
+  ::  Tier 5, parsing and printing
 ::::
 ::
     byte  &@
@@ -1352,87 +1352,85 @@
     prop  <~ [p=*rope q=*term r=@]>
     rope  (list span)
     rack  (list &[p=*gene q=*gene])
-    span  <^+(@ *term) [%frag p=*axis] [%pane p=*term]>
+    span  <^+(@ *term) [%mtcb p=*axis] [%mtmp p=*term]>
     spec  (book term gene) 
-    spot  &[at=[l=@ c=@] to=[l=@ c=@]]
+    spot  &[p=[p=@ q=@] q=[p=@ q=@]]
     term  &@
 ::::
 ::
     gene
   |?
+    [%dtsg p=*]                                 ::  .~  dotsig
   ::
-    [%bean p=*<%atom %blur %cell %flag %null>]
-    [%bone p=*]
-    [%frag p=*axis]
-    [%pane p=*term]
+    [%bndr p=*gene q=*gene]                     ::  =<  bender
+    [%bnnb p=*gene q=*gene]                     ::  =-  bennub
+    [%bnpd p=*gene q=*gene]                     ::  =+  benpod
+    [%bnrd p=*gene q=*gene]                     ::  =>  benred
   ::
-    [%skmp p=*bank]                             ::  ?&  askamp
-    [%skbr p=*bank]                             ::  ?|  askbar
-    [%sksg p=*gene q=*gene r=*gene]             ::  ?~  asksig
-    [%sknb p=*gene q=*rack]                     ::  ?-  asknub
-    [%skrd p=*gene q=*gene]                     ::  ?>  askred
-    [%skdt p=*gene q=*gene r=*gene]             ::  ?.  askdot
-    [%skdr p=*gene q=*gene]                     ::  ?<  askder
-    [%skbn p=*gene q=*gene]                     ::  ?=  askben
-    [%skrs p=*gene q=*bank]                     ::  ?*  askras
-    [%skdg p=*gene q=*gene r=*gene]             ::  ?:  askdig
-    [%skhp p=*gene]                             ::  ?!  askhop
-  ::
-    [%brsg p=*gene q=*bank]                     ::  |~  barsig
     [%brbn p=*prop q=*gene]                     ::  |=  barben
-    [%brrs p=*prop q=*menu]                     ::  |*  barras
-    [%brsk p=*bank]                             ::  |?  barask
     [%brdg p=*prop q=*gene]                     ::  |:  bardig
     [%brmt p=*prop q=*menu]                     ::  |%  barmit
     [%brnb p=*prop q=*gene]                     ::  |-  barnub
+    [%brrs p=*prop q=*menu]                     ::  |*  barras
+    [%brsg p=*gene q=*bank]                     ::  |~  barsig
+    [%brsk p=*bank]                             ::  |?  barask
   ::
-    [%bndr p=*gene q=*gene]                     ::  =<  bender
-    [%bnrd p=*gene q=*gene]                     ::  =>  benred
-    [%bnpd p=*gene q=*gene]                     ::  =+  benpod
-    [%bnnb p=*gene q=*gene]                     ::  =-  bennub
-  ::
+    [%dght p=*gene q=*gene r=*gene s=*gene]     ::  :^  dighat
+    [%dgnb p=*gene q=*gene]                     ::  :-  dignub
+    [%dgpd p=*gene q=*gene r=*gene]             ::  :+  digpod
     [%dgrs p=*bank]                             ::  :*  digras
     [%dgsg p=*bank]                             ::  :~  digsig
-    [%dght p=*gene q=*gene r=*gene s=*gene]     ::  :^  dighat
-    [%dgpd p=*gene q=*gene r=*gene]             ::  :+  digpod
-    [%dgnb p=*gene q=*gene]                     ::  :-  dignub
-  ::
-    [%dtsk p=*gene]                             ::  .?  dotask
-    [%dtrs p=*gene q=*gene]                     ::  .*  dotras
+  :: 
     [%dtbn p=*gene q=*gene]                     ::  .=  dotben
     [%dtht p=*gene]                             ::  .^  dothat
+    [%dtrs p=*gene q=*gene]                     ::  .*  dotras
+    [%dtsk p=*gene]                             ::  .?  dotask
   ::
-    [%htbn p=*term q=*gene]                     ::  ^=  hatben
-    [%htnb p=*gene q=*gene]                     ::  ^-  hatnub
-    [%htbc p=*gene q=*gene]                     ::  ^$  hatbuc
-    [%htsk p=*gene q=*gene]                     ::  ^?  hatask
-    [%htpt p=*gene]                             ::  ^@  hatpat
-    [%htrs p=*gene]                             ::  ^*  hatras
-    [%htdg p=*gene q=*gene]                     ::  ^+  hatdig
-    [%htpd p=*gene q=*gene]                     ::  ^:  hatpod
-    [%velt p=*gene q=*gene]                     ::  ^%  hatmit
-    [%htsg p=*gene]                             ::  ^~  hatsig
-  ::
-    [%lmpd p=*gene]                             ::  ;+  lompod
-    [%lmnb p=*gene]                             ::  ;-  lomnub
-  ::
-    [%mtpd p=*gene q=*gene r=*gene]             ::  %+  mitpod
-    [%mtnb p=*gene q=*bank]                     ::  %-  mitnub  
-    [%mtsg p=*rope q=*gene r=*gene]             ::  %~  mitsig
-    [%mtbr p=*rope q=*gene r=*rack]             ::  %|  mitbar
-    [%mtdt p=*gene q=*gene]                     ::  %.  mitdot
-    [%mtbn p=*rope q=*rack]                     ::  %=  mitben
-    [%mtdg p=*gene q=*gene]                     ::  %:  mitdig
-    [%mtrs p=*gene]                             ::  %*  mitras
-    [%mtht p=*gene q=*gene r=*gene s=*gene]     ::  %^  mithat
-  ::
+    [%hpbn p=*gene]                             ::  !=  hopben
+    [%hpcb p=*spot q=*gene]                     ::  !_  hopcab
     [%hpdg p=*gene]                             ::  !:  hopdig
-    [%hpcb p=*spot q=*gene]
+    [%hpdx p=*gene]                             ::  !#  hopdax
     [%hphp ~]                                   ::  !!  hopven
     [%hpmt ~]                                   ::  !%  hopmit
-    [%hpbn p=*gene]                             ::  !=  hopben
     [%hptc p=*gene]                             ::  !`  hoptic
-    [%hpdx p=*gene]                             ::  !#  hopdax
+  ::
+    [%htbc p=*gene q=*gene]                     ::  ^$  hatbuc
+    [%htbn p=*term q=*gene]                     ::  ^=  hatben
+    [%htdg p=*gene q=*gene]                     ::  ^+  hatdig
+    [%htmt p=*gene q=*gene]                     ::  ^%  hatmit
+    [%htnb p=*gene q=*gene]                     ::  ^-  hatnub
+    [%htpd p=*gene q=*gene]                     ::  ^:  hatpod
+    [%htrs p=*gene]                             ::  ^*  hatras
+    [%htsg p=*gene]                             ::  ^~  hatsig
+    [%htsk p=*gene q=*gene]                     ::  ^?  hatask
+  ::
+    [%lmbn p=*<%atom %blur %cell %flag %null>]  ::  ;=  lomben
+    [%lmnb p=*gene]                             ::  ;-  lomnub
+    [%lmpd p=*gene]                             ::  ;+  lompod
+  ::
+    [%mtbn p=*rope q=*rack]                     ::  %=  mitben
+    [%mtbr p=*rope q=*gene r=*rack]             ::  %|  mitbar
+    [%mtcb p=*axis]                             ::  %_  mitcab
+    [%mtdg p=*gene q=*gene]                     ::  %:  mitdig
+    [%mtdt p=*gene q=*gene]                     ::  %.  mitdot
+    [%mtht p=*gene q=*gene r=*gene s=*gene]     ::  %^  mithat
+    [%mtmp p=*term]                             ::  %   mitamp
+    [%mtnb p=*gene q=*bank]                     ::  %-  mitnub  
+    [%mtpd p=*gene q=*gene r=*gene]             ::  %+  mitpod
+    [%mtrs p=*gene]                             ::  %*  mitras
+    [%mtsg p=*rope q=*gene r=*gene]             ::  %~  mitsig
+  ::
+    [%skbn p=*gene q=*gene]                     ::  ?=  askben
+    [%skbr p=*bank]                             ::  ?|  askbar
+    [%skdg p=*gene q=*gene r=*gene]             ::  ?:  askdig
+    [%skdr p=*gene q=*gene]                     ::  ?<  askder
+    [%skdt p=*gene q=*gene r=*gene]             ::  ?.  askdot
+    [%skhp p=*gene]                             ::  ?!  askhop
+    [%skmp p=*bank]                             ::  ?&  askamp
+    [%sknb p=*gene q=*rack]                     ::  ?-  asknub
+    [%skrd p=*gene q=*gene]                     ::  ?>  askred
+    [%skrs p=*gene q=*bank]                     ::  ?*  askras
+    [%sksg p=*gene q=*gene r=*gene]             ::  ?~  asksig
   ==
 ::::
 ::
@@ -1461,7 +1459,8 @@
     %blot
     %atom
     [%cell p=*type q=*type]
-    [%core p=*type q=*<%hard %soft> r=*type s=*spec]
+    :: [%core p=*type q=*<%hard %soft> r=*type s=*spec]
+    [%core p=*type q=<%blue %pink [%gray p=*type] [%teal p=*type]> s=*spec]
     [%cube p=*]
     [%face p=*term q=*type]
     [%fork p=*type q=*type]
@@ -1481,7 +1480,7 @@
       .
   |*
   ::
-  ::::  Tier 6, group A:  initiation.
+  ::::  Tier 6, group A:  initiation and fabrication.
   ::::
   ::
       door  &[p=*axis q=*type r=*gene]
@@ -1501,6 +1500,37 @@
       [%bran p=*term q=*tack] 
       [%pair p=*tack q=*tack]
     ==
+  ::::
+  ::
+      eith
+    =+  [hoz=*type bur=*type]
+    |=
+    ^-  *type
+    ?:  .=(%blot hoz)
+      bur
+    ?:  .=(%blot bur)
+      hoz
+    [%fork hoz bur]
+  ::::
+  ::
+      twin
+    =+  [hed=*type tal=*type]
+    |=
+    ^-  *type
+    ?:  .=(%blot hed)
+      %blot
+    ?:  .=(%blot tal)
+      %blot
+    [%cell hed tal]
+  ::::
+  ::
+      name
+    =+  [cog=*term tip=*type]
+    |=
+    ^-  *type
+    ?:  .=(%blot tip)
+      %blot
+    [%face cog tip]
   ::
   ::::  Tier 6, group B:  translation.
   ::::
@@ -1655,7 +1685,7 @@
       ^-  ((give *gene) doc)
       %.  doc 
       %+  stag
-        %bone
+        %dtsg
       |~  pose
         |~(pfix (just '0') (just 'x') hex)
         del
@@ -1674,7 +1704,7 @@
       ^-  ((give *gene) doc)
       %.  doc 
       %+  stag
-        %bean
+        %lmbn
       |~  pose
         (cold %flag ask)
         (cold %blur ras)
@@ -1829,9 +1859,8 @@
         (cape pod %htpd norb)
         (cape dig %htdg norb)
         (cape ben %htbn norg)
-        (cape mit %velt norb)
+        (cape mit %htmt norb)
         (cape ras %htrs nora)
-        (cape pat %htpt nora)
       ==
     ::::
     ::
@@ -1871,15 +1900,15 @@
         %+  cook
           =+(* |:([-< ~]))
         |~  pose
-          (stag %pane sym)
-          (stag %frag |~(pose |~(pfix dot del) (cold 1 dot) xnub))
+          (stag %mtmp sym)
+          (stag %mtcb |~(pose |~(pfix dot del) (cold 1 dot) xnub))
         ==
       ::
         |~  plug
-          (cold [%pane %%] buc)
+          (cold [%mtmp %%] buc)
           %+  gall
-            =+([*span *rope] |=([-<- [%frag 2] -<+]))
-          (cold [%pane %%] buc)
+            =+([*span *rope] |=([-<- [%mtcb 2] -<+]))
+          (cold [%mtmp %%] buc)
         ==
       ==
     ::::
@@ -1944,13 +1973,13 @@
           [%hpcb *]   [%hpcb p.gen $(gen q.gen)]
           [%hpdx *]   [%hpdx $(gen p.gen)]
       ::
-          [%velt *]
+          [%htmt *]
         :+  %bnpd
           [%htsg [%htrs q.gen]]
         :+  %brbn
           ~
         :+  %bnrd
-          [%mtbn ~ {[[%frag 4] [%mtnb $(gen q.gen) [%frag 4] ~]]}]
+          [%mtbn ~ {[[%mtcb 4] [%mtnb $(gen q.gen) [%mtcb 4] ~]]}]
         (fix(gen p.gen) 4)
       ::
       ::
@@ -1968,7 +1997,7 @@
       ^-  *gene
       ?-  gen
           [%htnb *]   $(gen p.gen)
-          [%mtrs *]   [%mtnb p.gen [%frag axe] ~]
+          [%mtrs *]   [%mtnb p.gen [%mtcb axe] ~]
           [%htpd *]   $(gen q.gen)
           [%htbn *]   [%htbn p.gen $(gen q.gen)]
           [%hpcb *]   [%hpcb p.gen $(gen q.gen)]
@@ -1979,16 +2008,16 @@
           $(gen p.gen, axe (peg axe 2))
         $(gen q.gen, axe (peg axe 3))
       ::
-          [%velt *]
+          [%htmt *]
         :+  %bnrd
-          [%mtbn ~ {[[%frag axe] [%mtnb $$(gen q.gen) [%frag axe] ~]]}]
+          [%mtbn ~ {[[%mtcb axe] [%mtnb $$(gen q.gen) [%mtcb axe] ~]]}]
         $(gen p.gen)
       ::
           *
         =+  bog=(open gen)
         ?.  .=(bog gen)
           $(gen bog)
-        [%skrd [%skbn gen [%frag axe]] [%frag axe]]
+        [%skrd [%skbn gen [%mtcb axe]] [%mtcb axe]]
       ==
     ==
   ::
@@ -1999,26 +2028,26 @@
     |=
     ^-  *gene
     ?-  gen
-        [%bean *]   gen
+        [%lmbn *]   gen
         [%htnb *]   [%htnb p.gen $(gen q.gen)]
         [%dgnb *]   [%dgnb $(gen p.gen) $(gen q.gen)]
-        [%velt *]   [%velt $(gen p.gen) $(gen q.gen)]
+        [%htmt *]   [%htmt $(gen p.gen) $(gen q.gen)]
         [%htbn *]   [%htbn p.gen $(gen q.gen)]
         [%lmpd *]   $(gen p.gen)
         [%htpd *]   $(gen p.gen)
         [%hpcb *]   [%hpcb p.gen $(gen q.gen)]
         [%hpdx *]   [%hpdx $(gen p.gen)]
-        [%bone *]   gen
+        [%dtsg *]   gen
     ::
         [%mtrs *]   
       ?.  ?=([%brsk *] p.gen)
-        [%bean %blur]
+        [%lmbn %blur]
       gen(p.p (turn p.p.gen =+(*gene |=($$(gen -<)))))
     ::
         *           
       =+  bog=(open gen)
       ?:  .=(bog gen)
-        [%bean %blur]
+        [%lmbn %blur]
       $(gen bog)
     ==
   ::
@@ -2033,60 +2062,60 @@
         [%mtpd *]   [%mtnb p.gen q.gen r.gen ~]
         [%bndr *]   [%bnrd q.gen p.gen]
         [%lmpd *]   (lmpd p.gen)
-        [%frag *]   [%mtbn {gen} ~]
-        [%bnpd *]   [%bnrd [%dgnb p.gen [%frag 1]] q.gen]
+        [%mtcb *]   [%mtbn {gen} ~]
+        [%bnpd *]   [%bnrd [%dgnb p.gen [%mtcb 1]] q.gen]
         [%mtdt *]   [%mtnb q.gen {p.gen}]
         [%skrd *]   [%skdg p.gen q.gen [%hphp ~]]
         [%brbn *]   [%brrs p.gen [[%% q.gen] ~]]
         [%skdt *]   [%skdg p.gen r.gen q.gen]
         [%skdr *]   [%skdg p.gen [%hphp ~] q.gen]
         [%lmnb *]   (lmnb p.gen)
-        [%htrs *]   [%htnb [%bean %blur] p.gen] 
-        [%pane *]   [%mtbn {gen} ~]
+        [%htrs *]   [%htnb [%lmbn %blur] p.gen] 
+        [%mtmp *]   [%mtbn {gen} ~]
         [%dght *]   [%dgnb p.gen [%dgnb q.gen [%dgnb r.gen s.gen]]]
         [%brdg *]   [%brmt p.gen [[%% q.gen] ~]]
         [%bnnb *]   [%bnpd q.gen p.gen]
-        [%mtrs *]   [%htsg [%bnrd p.gen [%mtbn {[%pane %%]} ~]]]
+        [%mtrs *]   [%htsg [%bnrd p.gen [%mtbn {[%mtmp %%]} ~]]]
         [%dgpd *]   [%dgnb p.gen [%dgnb q.gen r.gen]]
         [%mtht *]   [%mtnb p.gen q.gen r.gen s.gen ~]
-        [%brnb *]   [%bnrd [%brbn p.gen q.gen] [%pane %%]]
-        [%skhp *]   [%skdg p.gen [%bone 1] [%bone 0]]
+        [%brnb *]   [%bnrd [%brbn p.gen q.gen] [%mtmp %%]]
+        [%skhp *]   [%skdg p.gen [%dtsg 1] [%dtsg 0]]
         [%htsg *]   p.gen
         [%hpcb *]   q.gen
-        [%hptc *]   [%bone p.gen]
+        [%hptc *]   [%dtsg p.gen]
         [%hpdx *]   p.gen
     ::
-        [%bean *]
+        [%lmbn *]
       ?-  p.gen
-        %atom   [%htnb [%dtht %bone 0] [%bone 0]]
-        %blur   [%htnb [%dtrs [%bone 0] [%bone 0]] [%bone 0]]
-        %cell   [%dgnb [%bean %blur] [%bean %blur]]
-        %flag   [%htnb [%dtsk %bone 0] [%bone 0]]
-        %null   [%bone 0]
+        %atom   [%htnb [%dtht %dtsg 0] [%dtsg 0]]
+        %blur   [%htnb [%dtrs [%dtsg 0] [%dtsg 0]] [%dtsg 0]]
+        %cell   [%dgnb [%lmbn %blur] [%lmbn %blur]]
+        %flag   [%htnb [%dtsk %dtsg 0] [%dtsg 0]]
+        %null   [%dtsg 0]
       ==
     ::
         [%skmp *]
       |-
-      ?~(p.gen [%bone 0] [%skdg i.p.gen $(p.gen t.p.gen) [%bone 1]])
+      ?~(p.gen [%dtsg 0] [%skdg i.p.gen $(p.gen t.p.gen) [%dtsg 1]])
     ::
         [%skbr *]
       |- 
-      ?~(p.gen [%bone 1] [%skdg i.p.gen [%bone 0] $(p.gen t.p.gen)])
+      ?~(p.gen [%dtsg 1] [%skdg i.p.gen [%dtsg 0] $(p.gen t.p.gen)])
     ::
         [%sksg *]
-      [%sknb p.gen {[[%bone 0] q.gen] [[%bean %cell] r.gen]}]
+      [%sknb p.gen {[[%dtsg 0] q.gen] [[%lmbn %cell] r.gen]}]
     ::
         [%mtnb *]
       ?~  q.gen
-        [%bnrd p.gen [%pane %%]]
+        [%bnrd p.gen [%mtmp %%]]
       [%mtdg p.gen [%dgrs q.gen]]
     ::  
         [%mtbr *]
       :+  %bnpd
         q.gen
       :+  %mtbn
-        [[%frag 2] p.gen]
-      (turn r.gen =+([*gene *gene] |=([-<- [%bnrd [%frag 3] -<+]])))
+        [[%mtcb 2] p.gen]
+      (turn r.gen =+([*gene *gene] |=([-<- [%bnrd [%mtcb 3] -<+]])))
     ::
         [%sknb *]
       |-
@@ -2100,7 +2129,7 @@
       $(q.gen t.q.gen)
     ::
         [%mtsg *]
-      [%mtbr p.gen q.gen {[[%frag 4] r.gen]}]
+      [%mtbr p.gen q.gen {[[%mtcb 4] r.gen]}]
     ::
         [%brsg *]
       |-
@@ -2112,15 +2141,15 @@
         :+  %bnpd
           $(q.gen t.q.gen)
         :+  %bnpd
-          [%bnrd [%frag 3] i.q.gen]
+          [%bnrd [%mtcb 3] i.q.gen]
         :+  %bnpd
-          [%frag 8]
+          [%mtcb 8]
         :+  %brdg
           ~
         :^    %mtpd
-            [%bnrd [%frag 23] p.gen]
-          [%mtnb [%frag 10] [%frag 4] ~]
-        [%mtbn {[%frag 22]} {[[%frag 4] [%frag 4]]}]
+            [%bnrd [%mtcb 23] p.gen]
+          [%mtnb [%mtcb 10] [%mtcb 4] ~]
+        [%mtbn {[%mtcb 22]} {[[%mtcb 4] [%mtcb 4]]}]
       ==
     ::
         [%skrs *]
@@ -2138,7 +2167,7 @@
         [%htdg *]
       :+  %bnpd
         q.gen
-      [%bndr [%frag 2] [%htpd [%bnrd [%frag 3] p.gen] [%frag 2]]]
+      [%bndr [%mtcb 2] [%htpd [%bnrd [%mtcb 3] p.gen] [%mtcb 2]]]
     ::
         [%dgrs *]
       |-
@@ -2147,18 +2176,18 @@
         [%brsk *]
       ?~  p.gen
         [%hphp ~]
-      [%bnpd [%htrs i.p.gen] [%brbn ~ [%skrs [%frag 4] p.gen]]]
+      [%bnpd [%htrs i.p.gen] [%brbn ~ [%skrs [%mtcb 4] p.gen]]]
     ::
         [%dgsg *]
       |-
-      ?~(p.gen [%bone 0] [%dgnb i.p.gen $(p.gen t.p.gen)])
+      ?~(p.gen [%dtsg 0] [%dgnb i.p.gen $(p.gen t.p.gen)])
     ::
-        [%velt *]
+        [%htmt *]
       :+  %bnpd 
         q.gen 
       :+  %sknb
-        [%frag 2]
-      {[[%bnrd [%frag 3] p.gen] [%frag 2]]}
+        [%mtcb 2]
+      {[[%bnrd [%mtcb 3] p.gen] [%mtcb 2]]}
     ::
         *   
       gen
@@ -2172,8 +2201,8 @@
     |=
     ?-  gen
       [%mtbn * ~]   p.gen
-      [%pane *]     {gen}
-      [%frag *]     {gen}
+      [%mtmp *]     {gen}
+      [%mtcb *]     {gen}
       [%hpcb *]     $(gen q.gen)
       [%hpdx *]     $(gen p.gen)
     ==
@@ -2213,18 +2242,7 @@
       (burn:iris (feed:lark mut))
     ::::
     ::
-        eith
-      =+  [hoc=*type]
-      |=
-      ^-  *type
-      ?:  .=(%blot hoc)
-        sut
-      ?:  .=(%blot sut)
-        hoc
-      [%fork sut hoc]
-    ::::
-    ::
-        htpt
+        grit
       ?>  ?=([%fuse *] sut)
       q.sut
     ::::
@@ -2273,12 +2291,12 @@
             =+  dab=*spec
             |=
             ^-  *
-            ?-  dab
-              ~         0
-              [* ~ ~]   (make q.n.dab)
-              [* ~ *]   [make q.n.dab $(dab r.dab)]
-              [* * ~]   [make q.n.dab $(dab l.dab)]
-              [* * *]   [make q.n.dab $(dab l.dab) $(dab r.dab)] 
+            ?-    dab
+                ~         0
+                [* ~ ~]   (make q.n.dab)
+                [* ~ *]   [make q.n.dab $(dab r.dab)]
+                [* * ~]   [make q.n.dab $(dab l.dab)]
+                [* * *]   [make q.n.dab $(dab l.dab) $(dab r.dab)] 
             ==
           ::::
           ::
@@ -2293,17 +2311,56 @@
           ::::
           ==
       |-  ^-  *tool
-      ?-  -.gen
-          %bone   [1 p.gen]
-          %htbn   $(gen q.gen)
-          %htnb   $(gen q.gen)
-          %dtsk   [3 $(gen p.gen)]
-          %bnrd   (comb:lily $(gen p.gen) $(sut (play p.gen), gen q.gen))
-          %htbc   [10 $(gen p.gen) $(gen q.gen)]
-          %htpt   $(gen p.gen)
-          %htsk   [11 $(gen p.gen) $(gen q.gen)]
+      ?-    -.gen
       ::
-          %mtbn
+          %bnrd                                                         ::  =>
+        (comb:lily $(gen p.gen) $(sut (play p.gen), gen q.gen))
+      ::
+          %brrs                                                         ::  |*
+        =>  %=(. sut (play gen))
+        [12 (bake (fill:gull q.gen))]
+      ::
+          %brmt                                                         ::  |%
+        =>  %=(. sut (play gen))
+        [12 (bake (fill:gull q.gen))]
+      ::
+          %dgnb   (cons:lily $(gen p.gen) $(gen q.gen))                 ::  :-
+      ::
+          %dtbn   [5 $(gen p.gen) $(gen q.gen)]                         ::  .=
+      ::
+          %dtht   [4 $(gen p.gen)]                                      ::  .^
+      ::
+          %dtrs   [2 $(gen p.gen) $(gen q.gen)]                         ::  .*
+      ::
+          %dtsg   [1 p.gen]                                             ::  .~
+      ::
+          %dtsk   [3 $(gen p.gen)]                                      ::  .?
+      ::
+          %hpbn   [1 $(gen p.gen)]                                      ::  !=
+      ::
+          %hpcb   $(gen q.gen)                                          ::  !_
+      ::
+          %hpdx   $(bug .^(bug), gen p.gen)
+      ::
+          %hpdg   [1 (play p.gen)]                                      ::  !:
+      ::
+          %hphp   [0 0]                                                 ::  !!
+      ::
+      ::  %hpmt   [1 ..watt]                                            ::  !%
+      ::
+          %htbn   $(gen q.gen)                                          ::  ^=
+      ::
+          %htnb   $(gen q.gen)                                          ::  ^-
+      ::
+          %htbc   [10 $(gen p.gen) $(gen q.gen)]                        ::  ^$
+      ::
+          %htpd   [0 1]                                                 ::  ^+
+      ::
+          %htsg   $(gen p.gen)                                          ::  ^~
+      ::
+          %htsk   [11 $(gen p.gen) $(gen q.gen)]                        ::  ^?
+      ::
+          %mtbn                                                         ::  %=
         =+  lar=(seek p.gen)
         =+  rem=(turn q.gen =+([p=*gene q=*gene] |=([p $$(gen q)])))
         ?-  q.lar 
@@ -2311,35 +2368,14 @@
             ^   [2 (boil(sut q.u.q.lar) p.lar rem) [0 (peg p.lar p.u.q.lar)]]
         ==
       ::
-          %brrs
-        =+  wox=?~(p.gen ~ [p:(seek p.p.gen) q.p.gen r.p.gen])
-        =>  %=(. sut (play gen))
-        [12 wox (bake (fill:gull q.gen))]
-      ::
-          %skbn
+          %skbn                                                         ::  ?=
         =+  lar=(seek (rake q.gen))
         ?>  .=(~ q.lar)
         %|(fish iris sut (play p.gen), axe p.lar) 
       ::
-          %dtrs   [2 $(gen p.gen) $(gen q.gen)]
-          %dtbn   [5 $(gen p.gen) $(gen q.gen)]
-          %htpd   [0 1]
+          %skdg                                                         ::  ?:
+        [6 $(gen p.gen) $(gen q.gen, sut (gain p.gen)) $(gen r.gen)]
       ::
-          %brmt
-        =+  wox=?~(p.gen ~ [p:(seek p.p.gen) q.p.gen r.p.gen])
-        =>  %=(. sut (play gen))
-        [12 wox (bake (fill:gull q.gen))]
-      ::
-          %skdg   [6 $(gen p.gen) $(gen q.gen, sut (gain p.gen)) $(gen r.gen)]
-          %dgnb   (cons:lily $(gen p.gen) $(gen q.gen))
-          %dtht   [4 $(gen p.gen)]
-          %htsg   $(gen p.gen)  :: XX fold constants
-          %hpdg   [1 (play p.gen)]
-          %hpcb   $(gen q.gen)
-          %hphp   [0 0]
-          ::  %hpmt   [1 ..watt] 
-          %hpbn   [1 $(gen p.gen)]
-          %hpdx   $(bug .^(bug), gen p.gen)
           *       $(gen (open gen))
       ==
     ::::
@@ -2427,45 +2463,47 @@
       =+  [gen=*gene]
       |=
       ^-  *type
-      ?-  -.gen
-          %bone   [%cube p.gen]
-          %htbn   [%face p.gen $(gen q.gen)]
-          %htnb   $(gen p.gen)
-          %dtsk   [%fork [%cube 0] [%cube 1]]
-          %bnrd   $(sut $(gen p.gen), gen q.gen)
-          %htbc   $(gen q.gen)
-          %htpt   htpt(sut $(gen p.gen))
-          %htsk   $(gen q.gen)
+      ?-    -.gen
+          %bnrd   $(sut $(gen p.gen), gen q.gen)                        ::  =>
+          %brmt   [%core sut %pink (fill:gull q.gen)]                   ::  |%
+          %brrs   [%core sut %blue (fill:gull q.gen)]                   ::  |*
+          %dgnb   [%cell $(gen p.gen) $(gen q.gen)]                     ::  :-
+          %dtbn   [%fork [%cube 0] [%cube 1]]                           ::  .=
+          %dtht   %atom                                                 ::  .^
+          %dtrs   %blur                                                 ::  .*
+          %dtsg   [%cube p.gen]                                         ::  .~
+          %dtsk   [%fork [%cube 0] [%cube 1]]                           ::  .?
+          %hpbn   [%cube (make p.gen)]                                  ::  !=
+          %hpcb   $(gen q.gen)                                          ::  !_
+          %hpdg   [%cube $(gen p.gen)]                                  ::  !:
+          %hpdx   $(bug .^(bug), gen p.gen)                             ::  !#
+          %hphp   %blot                                                 ::  !!
+          %hpmt   p:seed                                                ::  !%
+          %htbc   $(gen q.gen)                                          ::  ^$
+          %htbn   [%face p.gen $(gen q.gen)]                            ::  ^=
+          %htnb   $(gen p.gen)                                          ::  ^-
+          %htpd   sut                                                   ::  ^+
+          %htsg   $(gen p.gen)                                          ::  ^~
+          %htsk   $(gen q.gen)                                          ::  ^?
       :: 
-          %mtbn 
+          %mtbn                                                         ::  %=
         =+  lar=(seek p.gen)
         =+  mut=(turn q.gen =+([p=*gene q=*gene] |=([p $$(gen q)])))
         ?~  q.lar
           (edit(sut r.lar) mut)
         =>  .(sut (edit(sut q.u.q.lar) mut), gen r.u.q.lar)
         :+  %hold
-          ?-  sut
-            [%core * %hard *]   [%core r.sut q.sut r.sut s.sut]
-            [%core * %soft *]   sut
+          ?>  ?=([core *] sut)
+          ?-    q.sut
+              %blue       sut
+              [%gray *]   [%core p.sut %blue r.sut]
+              %pink       sut
+              [%teal *]   sut
           ==
         gen
       :: 
-          %brrs   [%core sut %hard sut (fill:gull q.gen)]
-          %skbn   [%fork [%cube 0] [%cube 1]]
-          %dtrs   %blur
-          %dtbn   [%fork [%cube 0] [%cube 1]]
-          %htpd   sut
-          %brmt   [%core sut %soft sut (fill:gull q.gen)]
-          %skdg   (eith(sut $(gen q.gen, sut (gain p.gen))) $(gen r.gen))
-          %dgnb   [%cell $(gen p.gen) $(gen q.gen)]
-          %dtht   %atom
-          %htsg   $(gen p.gen)
-          %hpdg   [%cube $(gen p.gen)]
-          %hpcb   $(gen q.gen)
-          %hphp   %blot
-          %hpmt   p:seed
-          %hpbn   [%cube (make p.gen)]
-          %hpdx   $(bug .^(bug), gen p.gen)
+          %skbn   [%fork [%cube 0] [%cube 1]]                           ::  ?=
+          %skdg   (eith $(gen q.gen, sut (gain p.gen)) $(gen r.gen))    ::  ?:
           *       $(gen (open gen))
       ==
     ::::
@@ -2489,12 +2527,12 @@
         [axe act sut]
       ?-  i.rop
           ^+(@ *term)   
-        $(rop [[%pane i.rop] t.rop])
+        $(rop [[%mtmp i.rop] t.rop])
       ::
-          [%frag *]
+          [%mtcb *]
         $(rop t.rop, sut (peek:iris p.i.rop), act ~, axe (peg axe p.i.rop))
       ::
-          [%pane *]
+          [%mtmp *]
         =+  sap=(find:iris p.i.rop)
         $(rop t.rop, sut r.sap, act q.sap, axe (peg axe p.sap))
       ==
@@ -2504,74 +2542,97 @@
       =+  [gen=*gene]
       |=
       ^-  ?
-      ?-  -.gen
-          %bone   &
-          %htbn   $(gen q.gen)
-      :: 
-          %htnb 
-        ?>  ?&  $(gen p.gen) 
-                $(gen q.gen) 
-                (%|(nest iris sut (play p.gen)) (play q.gen))
-            ==
-        &
-      :: 
-          %dtsk   &
-          %bnrd   ?&($(gen p.gen) $(sut (play p.gen), gen q.gen))
-          %htbc   ?&($(gen p.gen) $(gen q.gen))
-          %htpt   $(gen p.gen)
-          %htsk   ?&($(gen p.gen) $(gen q.gen))
-      :: 
-          %mtbn 
-        =+  lar=(seek p.gen)
-        =+  mut=(turn q.gen =+([p=*gene q=*gene] |=([p (shop q)])))
-        ?~  q.lar
-          & 
-        =>  .(sut (edit(sut q.u.q.lar) mut), gen r.u.q.lar)
-        ?-  sut
-            [%core * %hard *]
-          (%|(nest iris sut r.sut) p.sut)
-        ::
-            [%core * %soft *]
-          ?:  (~(has in ver) [sut gen])
-            &
-          =>  .(ver (~(put in ver) [sut gen]))
-          ?>  ?&  
-                $ 
-                .=((make gen) (make(sut [%core r.sut q.sut r.sut s.sut]) gen))
-              ==
-          &
-        ==
+      ?-    -.gen
       ::
-          %brrs
+          %bnrd                                                         ::  =>
+        ?&($(gen p.gen) $(sut (play p.gen), gen q.gen))
+      ::
+          %brmt   &                                                     ::  |%
+      ::
+          %brrs                                                         ::  |*
         =>  .(sut (play gen))
         |-
         ?~  q.gen
           &
         ?&($$(gen q.i.q.gen) $(q.gen t.q.gen))
+      :: 
+          %dgnb   ?&($(gen p.gen) $(gen q.gen))                         ::  :-
       ::
-          %skbn   ?&($(gen p.gen) $(gen q.gen))
-          %dtrs   ?&($(gen p.gen) $(gen q.gen))
-          %dtbn   ?>(?&($(gen p.gen) $(gen q.gen)) &)
+          %dtbn   ?>(?&($(gen p.gen) $(gen q.gen)) &)                   ::  .=
       ::
-          %htpd
-        ?>  ?&  $(gen p.gen) 
-                $(gen q.gen) 
-                (%|(nest iris sut (play p.gen)) (play q.gen))
-            ==
+          %dtht                                                         ::  .^
+        ?>(?&($(gen p.gen) (%|(nest iris sut %atom) (play p.gen))) &)
+      ::
+          %dtrs   ?&($(gen p.gen) $(gen q.gen))                         ::  .*
+      ::
+          %dtsg   &                                                     ::  .~ 
+      :: 
+          %dtsk                                                         ::  .?
         &
       ::
-          %brmt   &
-          %skdg   ?&($(gen p.gen) $(gen q.gen, sut (gain p.gen)) $(gen r.gen))
+          %hpdg   $(gen p.gen)                                          ::  !:
+      ::
+          %hpcb   $(gen q.gen)                                          ::  !_
+      ::
+          %hphp   &                                                     ::  !!
+      ::
+          %hpmt   &                                                     ::  !%
+      ::
+          %hpbn   $(gen p.gen)                                          ::  !=
+      ::
+          %hpdx   $(bug .^(bug), gen p.gen)                             ::  !#
+      ::
+          %htbc   ?&($(gen p.gen) $(gen q.gen))                         ::  ^$
+      ::
+          %htbn   $(gen q.gen)                                          ::  ^=
       :: 
-          %dgnb   ?&($(gen p.gen) $(gen q.gen))
-          %dtht   ?>(?&($(gen p.gen) (%|(nest iris sut %atom) (play p.gen))) &)
-          %htsg   $(gen p.gen)
-          %hpdg   $(gen p.gen)
-          %hpcb   $(gen q.gen)
-          %hphp   &
-          %hpmt   &
-          %hpbn   $(gen p.gen)
-          %hpdx   $(bug .^(bug), gen p.gen)
+          %htnb                                                         ::  ^-
+        ?&  $(gen p.gen) 
+            $(gen q.gen) 
+            (%|(nest iris sut (play p.gen)) (play q.gen))
+        ==
+      ::
+          %htpd                                                         ::  ^+
+        ?&  $(gen p.gen) 
+            $(gen q.gen) 
+            (%|(nest iris sut (play p.gen)) (play q.gen))
+        &
+      ::
+          %htsg   $(gen p.gen)                                          ::  ^~
+      ::
+          %htsk   ?&($(gen p.gen) $(gen q.gen))                         ::  ^?
+      :: 
+          %mtbn                                                         ::  %=
+        =+  lar=(seek p.gen)
+        =+  mut=(turn q.gen =+([p=*gene q=*gene] |=([p (shop q)])))
+        ?~  q.lar
+          & 
+        =>  .(sut (edit(sut q.u.q.lar) mut), gen r.u.q.lar)
+        ?>  ?=([core *] sut)
+        ?-    q.sut
+        ::
+            %blue
+          &
+        ::
+            [%gray *]
+          (%|(nest iris sut p.q.sut) p.sut)
+        ::
+            %pink
+          &
+        ::
+            [%teal *]
+          ?:  (~(has in ver) [sut gen])
+            &
+          =>  .(ver (~(put in ver) [sut gen]))
+          .=((make gen) (make(sut [%core p.q.sut %pink r.sut])))
+        ::
+        ==
+      ::
+          %skbn   ?&($(gen p.gen) $(gen q.gen))                         ::  ?=
+      ::
+          %skdg                                                         ::  ?:
+        ?&($(gen p.gen) $(gen q.gen, sut (gain p.gen)) $(gen r.gen))
+      ::
           *       $(gen (open gen))
       ==
     ::
@@ -2630,9 +2691,9 @@
         ^-  *tack
         ?-  rop
             ~               [%leaf feg]
-            [@ *]           $(rop [[%pane i.rop] t.rop])
+            [@ *]           $(rop [[%mtmp i.rop] t.rop])
         ::
-            [[%frag p=*axis] *]
+            [[%mtcb p=*axis] *]
           =+  gur=(peek:iris p.i.rop)
           |-
           ?:  .=(1 p.i.rop)
@@ -2641,7 +2702,7 @@
             [%pair $(p.i.rop (mas p.i.rop)) ~]
           [%pair ~ $(p.i.rop (mas p.i.rop))]
         ::
-            [[%pane p=*term] *]
+            [[%mtmp p=*term] *]
           =+  lar=(find:iris p.i.rop)
           |-
           ?:  .=(1 p.lar)
