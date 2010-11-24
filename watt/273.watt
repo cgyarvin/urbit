@@ -1460,7 +1460,7 @@
     %atom
     [%cell p=*type q=*type]
     :: [%core p=*type q=*<%hard %soft> r=*type s=*spec]
-    [%core p=*type q=<%blue %pink [%gray p=*type] [%teal p=*type]> s=*spec]
+    [%core p=*type q=*<%blue %pink [%gray p=*type] [%teal p=*type]> r=*spec]
     [%cube p=*]
     [%face p=*term q=*type]
     [%fork p=*type q=*type]
@@ -2236,6 +2236,109 @@
       [%fuse hoc sut]
     ::::
     ::
+        etch
+      =+  ref=*type
+      |=
+      =+  bol=*(pool type)
+      =<  dext
+      |*
+      ::::
+      ::
+          dext
+        ^-  *type
+        ?-    sut
+        ::
+            %atom
+          ?-    ref
+              %atom       %atom
+              [%cube *]   ?:(.?(p.ref) %blot %atom)
+              *           sint
+          ==
+        ::
+            %blot
+          %blot
+        ::
+            %blur
+          ref
+        ::
+            [%cell *]
+          ?-    ref
+          ::
+              [%cube *]   
+            ?.  .?(p.ref) 
+              %blot
+            %+  twin
+              dext(sut p.sut, ref [%cube -.p.ref]) 
+            dext(sut q.sut, ref [%cube +.p.ref])
+          ::
+              [%cell *]
+            (twin dext(sut p.sut, ref p.ref) dext(sut q.sut, ref q.ref))
+          ::
+              *
+            sint
+          ==
+        ::
+            [%core *]
+          sut
+        ::
+            [%cube *]
+          ?-    ref
+          ::
+              %atom
+            ?:(.?(p.sut) %blot sut)
+          ::
+              [%cell *]
+            ?.  .?(p.sut) 
+              %blot 
+            %+  twin
+              dext(sut [%cube -.p.sut], ref p.ref) 
+            dext(sut [%cube +.p.sut], ref q.ref)
+          ::
+              [%cube *]
+            ?:(.=(p.sut p.ref) sut %blot)
+          ::
+              *
+            sint
+          ==
+        ::
+            [%face *]
+          (name p.sut dext(sut q.sut))
+        ::
+            [%fork *]   
+          (eith dext(sut p.sut) dext(sut q.sut))
+        ::
+            [%hold *]   
+          =+  yet=(repo(sut p.sut) q.sut)
+          =+  woz=$(sut yet)
+          ?:  .=(woz yet)
+            sut
+          woz
+        ==
+      ::::
+      ::
+          sint
+        ^-  *type
+        ?-    ref
+            %blur       sut
+            [%cell *]   %blot
+            [%core *]   dext(ref [%cell p.ref %blur])
+            [%cube *]   %blot
+            [%face *]   dext(ref q.ref)
+            [%fork *]   (eith dext(ref p.ref) dext(ref q.ref))
+        ::
+            [%hold *]
+          ?<  (~(has in bol) ref)
+          dext(bol (~(put in bol) ref), ref (repo(sut p.ref) q.ref))
+        ::
+            *
+          %blot
+        ::
+        ==
+      ::
+      ::::
+      ==
+    ::::
+    ::
         edit
       =+  mut=*plot
       |=
@@ -2257,27 +2360,14 @@
         gain 
       =+  [gen=*gene]
       |=
-      =<  (gild hunt)
-      |*
-      ::::
-      ::
-          gild
-        =+  [mut=*plot]
-        |=
-        (both (burn:iris(sut %blur) (feed:lark mut)))
-      ::::
-      ::
-          hunt
-        |-
-        ^-  *plot
-        ?-  -.gen
-          %skbn   [[q.gen (play p.gen)] ~]
+      %-  edit
+      |-
+      ^-  *plot
+      ?-    -.gen
+          %skbn   [[q.gen (etch(sut (play q.gen)) (play p.gen))] ~]
           %skmp   (roll p.gen =+([a=*gene b=*plot] |=((weld $$(gen a) b))))
           %hpcb   $(gen q.gen)
           *       ~
-        ==
-      ::
-      ::::
       ==
     ::::
     ::
@@ -2318,11 +2408,11 @@
       ::
           %brrs                                                         ::  |*
         =>  %=(. sut (play gen))
-        [12 (bake (fill:gull q.gen))]
+        [12 ~ (bake (fill:gull q.gen))]
       ::
           %brmt                                                         ::  |%
         =>  %=(. sut (play gen))
-        [12 (bake (fill:gull q.gen))]
+        [12 ~ (bake (fill:gull q.gen))]
       ::
           %dgnb   (cons:lily $(gen p.gen) $(gen q.gen))                 ::  :-
       ::
@@ -2493,7 +2583,7 @@
           (edit(sut r.lar) mut)
         =>  .(sut (edit(sut q.u.q.lar) mut), gen r.u.q.lar)
         :+  %hold
-          ?>  ?=([core *] sut)
+          ?>  ?=([%core *] sut)
           ?-    q.sut
               %blue       sut
               [%gray *]   [%core p.sut %blue r.sut]
@@ -2547,7 +2637,8 @@
           %bnrd                                                         ::  =>
         ?&($(gen p.gen) $(sut (play p.gen), gen q.gen))
       ::
-          %brmt   &                                                     ::  |%
+          %brmt                                                         ::  |%
+        &
       ::
           %brrs                                                         ::  |*
         =>  .(sut (play gen))
@@ -2596,7 +2687,7 @@
         ?&  $(gen p.gen) 
             $(gen q.gen) 
             (%|(nest iris sut (play p.gen)) (play q.gen))
-        &
+        ==
       ::
           %htsg   $(gen p.gen)                                          ::  ^~
       ::
@@ -2608,7 +2699,7 @@
         ?~  q.lar
           & 
         =>  .(sut (edit(sut q.u.q.lar) mut), gen r.u.q.lar)
-        ?>  ?=([core *] sut)
+        ?>  ?=([%core *] sut)
         ?-    q.sut
         ::
             %blue
@@ -2825,7 +2916,7 @@
           (clap $(..slip (slip 2)) $(..slip (slip 3)) =+([*plan *plan] |=(-<-)))
         ::
             [%core *]
-          =+  zem=(~(look gull s.sut) cog)
+          =+  zem=(~(look gull r.sut) cog)
           ?~  zem
             $(..slip (slip 2))
           [~ [axe [~ (peg 3 p.u.zem) sut q.u.zem] sut]]
