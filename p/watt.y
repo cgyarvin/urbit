@@ -58,7 +58,7 @@
 
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 63
+  %expect 64
 
   %pure-parser
   %locations
@@ -237,7 +237,8 @@ wide_c
     wide_norm: di_dotask body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_dotras body_b_wide    { $$ = _ycell($1, $2); }
 
-    wide_norm: di_hatask body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_hatred body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_hatder body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatnub body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatbuc body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatpod body_b_wide    { $$ = _ycell($1, $2); }
@@ -364,7 +365,8 @@ tall
     tall_norm: di_dotask w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_dotras w body_b_tall    { $$ = _ycell($1, $3); }
 
-    tall_norm: di_hatask w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_hatred w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_hatder w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatnub w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatbuc w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatpod w body_b_tall    { $$ = _ycell($1, $3); }
@@ -524,7 +526,8 @@ tall
     di_dotask: si_dot si_ask  { $$ = c3__dtsk; }
     di_dotras: si_dot si_ras  { $$ = c3__dtrs; }
     
-    di_hatask: si_hat si_ask  { $$ = c3__htsk; }
+    di_hatred: si_hat si_red  { $$ = c3__htrd; }
+    di_hatder: si_hat si_der  { $$ = c3__htdr; }
     di_hatnub: si_hat si_nub  { $$ = c3__htnb; }
     di_hatbuc: si_hat si_buc  { $$ = c3__htbc; }
     di_hatdig: si_hat si_dig  { $$ = c3__htpd; }
