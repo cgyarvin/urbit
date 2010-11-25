@@ -63,7 +63,7 @@
   ?-  a
     0   0
     1   1
-    *   (add $(a (dec a)) $(a (dec (dec a))))
+    *   (add $(a (dec a)) $(a (sub a 2)))
   ==
 ::::
 ::
@@ -1393,7 +1393,6 @@
     [%hpmt ~]                                   ::  !%  hopmit
     [%hptc p=*gene]                             ::  !`  hoptic
   ::
-    [%htbc p=*gene q=*gene]                     ::  ^$  hatbuc
     [%htbn p=*term q=*gene]                     ::  ^=  hatben
     [%htdg p=*gene q=*gene]                     ::  ^:  hatdig
     [%htdr p=*gene q=*gene]                     ::  ^<  hatder
@@ -1482,6 +1481,7 @@
   ::::
   ::
       door  &[p=*axis q=*type r=*gene]
+      foot  &[p=*type q=*tool] 
       :: init  =+([a=*type b=*gene] |=((~(mill rose a) b)))
       menu  (list &[p=*term q=*gene])
       plot  (list &[p=*gene q=*type])
@@ -1852,7 +1852,6 @@
         nhat
       |~  pose
         (cape nub %htnb norb)
-        (cape buc %htbc norb)
         (cape der %htdr norb)
         (cape pod %htpd norb)
         (cape dig %htdg norb)
@@ -2469,8 +2468,6 @@
       ::
           %htnb   $(gen q.gen)                                          ::  ^-
       ::
-          %htbc   [10 $(gen p.gen) $(gen q.gen)]                        ::  ^$
-      ::
           %htpd   [0 1]                                                 ::  ^+
       ::
           %htrd   [11 $(gen p.gen) $(gen q.gen)]                        ::  ^>
@@ -2596,7 +2593,6 @@
           %hpdx   $(bug .^(bug), gen p.gen)                             ::  !#
           %hphp   %blot                                                 ::  !!
           %hpmt   p:seed                                                ::  !%
-          %htbc   $(gen q.gen)                                          ::  ^$
           %htbn   [%face p.gen $(gen q.gen)]                            ::  ^=
           %htnb   $(gen p.gen)                                          ::  ^-
           %htpd   sut                                                   ::  ^+
@@ -2685,8 +2681,7 @@
       ::
           %dtsg   &                                                     ::  .~ 
       :: 
-          %dtsk                                                         ::  .?
-        &
+          %dtsk   &                                                     ::  .?
       ::
           %hpdg   $(gen p.gen)                                          ::  !:
       ::
@@ -2699,8 +2694,6 @@
           %hpbn   $(gen p.gen)                                          ::  !=
       ::
           %hpdx   $(bug .^(bug), gen p.gen)                             ::  !#
-      ::
-          %htbc   ?&($(gen p.gen) $(gen q.gen))                         ::  ^$
       ::
           %htbn   $(gen q.gen)                                          ::  ^=
       :: 
