@@ -148,8 +148,9 @@
 ::::
 ::
     bind
-  =+  [a=*(unit) b=&*]
+  =+  [*(unit) &*]
   |:
+  =>  .(-< [a=-<- b=-<+])
   ?~  a
     ~
   [~ u=(b u.a)]
@@ -800,6 +801,7 @@
     byte  &@
     tape  (list byte)
     rock  &@
+    term  &@
     wall  (list tape)
 ::::
 ::
@@ -2262,7 +2264,7 @@
       [%fuse hoc sut]
     ::::
     ::
-        etch
+        reap
       =+  ref=*type
       |=
       =+  bol=*(pool type)
@@ -2390,7 +2392,7 @@
       |-
       ^-  *plot
       ?-    -.gen
-          %skbn   [[q.gen (etch(sut (play q.gen)) (play p.gen))] ~]
+          %skbn   [[q.gen (reap(sut (play q.gen)) (play p.gen))] ~]
           %skmp   (roll p.gen =+([a=*gene b=*plot] |=((weld $$(gen a) b))))
           %hpcb   $(gen q.gen)
           *       ~
