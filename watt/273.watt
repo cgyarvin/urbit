@@ -1301,7 +1301,7 @@
       dit   (cook =+(@ |=((sub -< '0'))) (shim '0' '9'))
       dot   (just '.')
       dus   (just '}')
-      gap   (cold ~ (plus |~(pose vul (mask {10 32 ~}))))
+      gap   (cold ~ (plus |~(pose vul (mask [10 32 ~]))))
       hat   (just '^')
       hex   (bass 16 (plus hit))
       hig   (shim 'A' 'Z')
@@ -1336,7 +1336,7 @@
           =+(*(list &@) |=((rap 3 -<)))
         |~(plug low (star |~(pose num low nub)))
     ::
-      tar   (cold ~ (plus (mask {10 32 ~})))
+      tar   (cold ~ (plus (mask [10 32 ~])))
       tic   (just '`')
       toq   (just '"')
       vul   (cold ~ |~(plug dig dig (star (shim 32 126)) (just 10)))
@@ -1979,7 +1979,7 @@
         :+  %brbn
           ~
         :+  %bnrd
-          [%mtbn ~ {[[%mtcb 4] [%mtnb $(gen q.gen) [%mtcb 4] ~]]}]
+          [%mtbn ~ [[[%mtcb 4] [%mtnb $(gen q.gen) [%mtcb 4] ~]] ~]]
         (fix(gen p.gen) 4)
       ::
       ::
@@ -2010,7 +2010,7 @@
       ::
           [%htmt *]
         :+  %bnrd
-          [%mtbn ~ {[[%mtcb axe] [%mtnb $$(gen q.gen) [%mtcb axe] ~]]}]
+          [%mtbn ~ [[[%mtcb axe] [%mtnb $$(gen q.gen) [%mtcb axe] ~]] ~]]
         $(gen p.gen)
       ::
           *
@@ -2084,7 +2084,7 @@
         :^    %mtpd
             [%bnrd [%mtcb 23] p.gen]
           [%mtnb [%mtcb 10] [%mtcb 4] ~]
-        [%mtbn {[%mtcb 22]} {[[%mtcb 4] [%mtcb 4]]}]
+        [%mtbn [[%mtcb 22] ~] [[[%mtcb 4] [%mtcb 4]] ~]]
       ==
     ::
         [%brsk *]                                                       ::  |?
@@ -2126,7 +2126,7 @@
         q.gen 
       :+  %sknb
         [%mtcb 2]
-      {[[%bnrd [%mtcb 3] p.gen] [%mtcb 2]]}
+      [[[%bnrd [%mtcb 3] p.gen] [%mtcb 2]] ~]
     ::
         [%htdr *]                                                       ::  ^<
       [%bndr [%htrd p.gen [%mtcb 1]] q.gen]
@@ -2155,15 +2155,15 @@
         [[%mtcb 2] p.gen]
       (turn r.gen =+([*gene *gene] |=([-<- [%bnrd [%mtcb 3] -<+]])))
     ::
-        [%mtcb *]   [%mtbn {gen} ~]                                     ::  %_
+        [%mtcb *]   [%mtbn [gen ~] ~]                                     ::  %_
     ::
-        [%mtdg *]   [%mtsg {%%} p.gen q.gen]                            ::  %:
+        [%mtdg *]   [%mtsg [%% ~] p.gen q.gen]                            ::  %:
     ::
-        [%mtdt *]   [%mtnb q.gen {p.gen}]                               ::  %.
+        [%mtdt *]   [%mtnb q.gen [p.gen ~]]                               ::  %.
     ::
         [%mtht *]   [%mtnb p.gen q.gen r.gen s.gen ~]                   ::  %^
     ::
-        [%mtmp *]   [%mtbn {gen} ~]                                     ::  %&
+        [%mtmp *]   [%mtbn [gen ~] ~]                                     ::  %&
     ::
         [%mtnb *]                                                       ::  %-  
       ?~  q.gen
@@ -2172,10 +2172,10 @@
     ::                                                                  ::  %+
         [%mtpd *]   [%mtnb p.gen q.gen r.gen ~]
     ::
-        [%mtrs *]   [%htsg [%bnrd p.gen [%mtbn {[%mtmp %%]} ~]]]        ::  %*
+        [%mtrs *]   [%htsg [%bnrd p.gen [%mtbn [[%mtmp %%] ~] ~]]]        ::  %*
     ::
         [%mtsg *]                                                       ::  %~
-      [%mtbr p.gen q.gen {[[%mtcb 4] r.gen]}]
+      [%mtbr p.gen q.gen [[[%mtcb 4] r.gen] ~]]
     ::
         [%skbr *]                                                       ::  ?|
       |- 
@@ -2214,7 +2214,7 @@
       $(q.gen t.q.gen)
     ::
         [%sksg *]                                                       ::  ?~
-      [%sknb p.gen {[[%dtsg 0] q.gen] [[%lmbn %cell] r.gen]}]
+      [%sknb p.gen [[[%dtsg 0] q.gen] [[%lmbn %cell] r.gen] ~]]
     ::
         *   
       gen
@@ -2229,8 +2229,8 @@
     |=
     ?-  gen
       [%mtbn * ~]   p.gen
-      [%mtmp *]     {gen}
-      [%mtcb *]     {gen}
+      [%mtmp *]     [gen ~]
+      [%mtcb *]     [gen ~]
       [%hpcb *]     $(gen q.gen)
       [%hpdx *]     $(gen p.gen)
     ==

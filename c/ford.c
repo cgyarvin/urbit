@@ -311,6 +311,29 @@ ford_test(struct ford_state* fod_f,
   }
 }
 
+/* ford_test2(): another test for recursion.
+*/
+void
+ford_test2(struct ford_state* fod_f,
+           const char*        src_c)
+{
+  u2_wire wir_r = fod_f->wir_r;
+  u2_noun src   = u2_ux_read(wir_r, src_c, "watt");
+
+  if ( u2_none == src ) {
+    u2_bl_bail(wir_r);
+  }
+  else {
+    u2_noun gen, mil;
+
+    gen = u2_fj_watt(wir_r, src);
+    gen = u2_ba_sole(wir_r, gen);
+    mil = u2_fj_plow_mill(wir_r, u2_bc(wir_r, c3__cube, _0), gen);
+
+    printf("test2: plowed.\n");
+  }
+}
+
 /* _ford_from(): expression in pit space.
 */
 static u2_noun
@@ -348,7 +371,8 @@ ford_line(struct ford_state* fod_f,
     }
     else {
       if ( !arg_c && !strcmp(cmd_c, "test") ) {
-        ford_test(fod_f, "watt/t1-273");
+        // ford_test(fod_f, "watt/t1-273");
+        ford_test2(fod_f, "watt/271");
       }
       else {
 #if 0
