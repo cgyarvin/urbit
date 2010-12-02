@@ -4,9 +4,21 @@
 */
   /** Data structures.
   **/
-    /* u2_loom_benx: the performance log.
+    /* u2_loom_benx: tracing, profiling, debugging
     */
       typedef struct _u2_loom_benx {
+        /* Source position debug stack: 
+        **
+        **  *(list &[p=* q=[p=* q=*(list [p=[p=@ q=@] q=[p=@ q=@]])]])
+        */
+        u2_weak zat;  // on shed
+
+        /* Programmer action debug stack:
+        **
+        **  *(list &*) 
+        */
+        u2_weak zof;  // on shed
+
         /* Interpreter steps.
         */
         c3_d  sap_d;
@@ -100,7 +112,23 @@
                  c3_ws* sew_ws,
                  c3_ws* bax_ws,
                  c3_w*  ums_w);
- 
+
+    /* u2_bx_spot_ent(), u2_bx_spot_out(): enter and exit source position.
+    */
+      void
+      u2_bx_spot_ent(u2_ray  wir_r,
+                     u2_noun hod);                                //  transfer
+      void
+      u2_bx_spot_out(u2_ray wir_r);
+
+    /* u2_bx_bean_ent(), u2_bx_bean_out(): enter and exit execution state.
+    */
+      void
+      u2_bx_bean_ent(u2_ray  wir_r,
+                     u2_noun hod);                                //  transfer
+      void
+      u2_bx_bean_out(u2_ray wir_r);
+
     /* u2_bx_step(): note interpreter step.
     */
       void

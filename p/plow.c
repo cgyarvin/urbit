@@ -635,6 +635,9 @@
       else if ( u2_yes == u2_as_pq(gen, c3__hpcb, &p_gen, &q_gen) ) {
         return u2_bt(wir_r, c3__hpcb, p_gen, _open_lmnb_fix(wir_r, q_gen, axe));
       }
+      else if ( u2_yes == u2_as_pq(gen, c3__htrd, &p_gen, &q_gen) ) {
+        return u2_bt(wir_r, c3__htrd, p_gen, _open_lmnb_fix(wir_r, q_gen, axe));
+      }
       else if ( u2_yes == u2_as_p(gen, c3__hpdx, &p_gen) ) {
         return u2_bc(wir_r, c3__hpdx, _open_lmnb_fix(wir_r, p_gen, axe));
       }
@@ -677,6 +680,9 @@
     }
     else if ( u2_yes == u2_as_pq(gen, c3__hpcb, &p_gen, &q_gen) ) {
       return u2_bt(wir_r, c3__hpcb, p_gen, _open_lmnb(wir_r, q_gen));
+    }
+    else if ( u2_yes == u2_as_pq(gen, c3__htrd, &p_gen, &q_gen) ) {
+      return u2_bt(wir_r, c3__htrd, p_gen, _open_lmnb(wir_r, q_gen));
     }
     else if ( u2_yes == u2_as_p(gen, c3__hpdx, &p_gen) ) {
       return u2_bc(wir_r, c3__hpdx, _open_lmnb(wir_r, p_gen));
@@ -768,6 +774,10 @@
     else if ( u2_yes == u2_as_pq(gen, c3__hpcb, &p_gen, &q_gen) ) {
       return u2_bt
         (wir_r, c3__hpcb, p_gen, _open_lmpd(wir_r, q_gen));
+    }
+    else if ( u2_yes == u2_as_pq(gen, c3__htrd, &p_gen, &q_gen) ) {
+      return u2_bt
+        (wir_r, c3__htrd, p_gen, _open_lmpd(wir_r, q_gen));
     }
     else if ( u2_yes == u2_as_p(gen, c3__hpdx, &p_gen) ) {
       return u2_bc
@@ -3220,6 +3230,9 @@
       else if ( u2_yes == u2_as_pq(gen, c3__hpcb, &p_gen, &q_gen) ) {
         return _rose_gain_hunt(wir_r, sut, q_gen);
       }
+      else if ( u2_yes == u2_as_pq(gen, c3__htrd, &p_gen, &q_gen) ) {
+        return _rose_gain_hunt(wir_r, sut, q_gen);
+      }
       else if ( u2_yes == u2_as_pq(gen, c3__hpdx, &p_gen, &q_gen) ) {
         return _rose_gain_hunt(wir_r, sut, q_gen);
       }
@@ -3480,7 +3493,8 @@
       else if ( u2_yes == u2_as_pq(gen, c3__hpcb, &p_gen, &q_gen) ) {
         u2_noun qip;
 
-        u2_plow_(wir_r, meb) = u2_bc(wir_r, u2_bc(wir_r, u2_nul, p_gen), u2_plow_(wir_r, meb));
+        u2_plow_(wir_r, meb) = 
+          u2_bc(wir_r, u2_bc(wir_r, u2_nul, p_gen), u2_plow_(wir_r, meb));
         qip = _rose_make(wir_r, sut, q_gen);
         u2_plow_(wir_r, meb) = u2_t(u2_plow_(wir_r, meb));
 

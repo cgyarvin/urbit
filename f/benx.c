@@ -14,6 +14,9 @@ u2_bx_boot(u2_ray wir_r)
   if ( 0 == (bex_r = u2_wire_bex_r(wir_r)) ) {
     return;
   } else {
+    u2_benx_at(bex_r, zat) = u2_nul;
+    u2_benx_at(bex_r, zof) = u2_nul;
+
     u2_benx_be(bex_r, c3_d, sap_d) = 0;
     u2_benx_be(bex_r, c3_d, cop_d) = 0;
     u2_benx_be(bex_r, c3_d, jax_d) = 0;
@@ -281,5 +284,97 @@ u2_bx_bask(u2_ray wir_r,
     return;
   } else {
     u2_benx_be(bex_r, c3_d, bax_ws) += wad_ws;
+  }
+}
+
+/* u2_bx_spot_ent(), u2_bx_spot_out(): enter and exit source position.
+*/
+void
+u2_bx_spot_ent(u2_ray  wir_r,
+               u2_noun hod)                                       //  transfer
+{
+  u2_ray bex_r, sad_r;
+
+  if ( (0 == (bex_r = u2_wire_bex_r(wir_r))) ||
+       (0 == (sad_r = u2_wire_sad_r(wir_r))) )
+  {
+    u2_rl_lose(wir_r, hod);
+    return;
+  } 
+  else {
+    u2_noun zat = u2_rx(sad_r, u2_benx_at(bex_r, zat));
+    u2_noun sud = u2_rc(sad_r, u2_rl_take(sad_r, hod), zat);
+
+    u2_rl_lose(wir_r, hod);
+    if ( u2_none == sud ) {
+      return;
+    } else {
+      u2_benx_at(bex_r, zat) = sud;
+    }
+  }
+}
+void
+u2_bx_spot_out(u2_ray wir_r)
+{
+  u2_ray bex_r, sad_r;
+
+  if ( (0 == (bex_r = u2_wire_bex_r(wir_r))) ||
+       (0 == (sad_r = u2_wire_sad_r(wir_r))) )
+  {
+    return;
+  } 
+  else {
+    u2_noun zat = u2_benx_at(bex_r, zat);
+
+    c3_assert(u2_nul != zat);
+
+    u2_benx_at(bex_r, zat) = u2_t(zat);
+    u2_rl_lose(wir_r, zat);
+  }
+}
+
+/* u2_bx_bean_ent(), u2_bx_bean_out(): enter and exit source position.
+*/
+void
+u2_bx_bean_ent(u2_ray  wir_r,
+               u2_noun hod)                                       //  transfer
+{
+  u2_ray bex_r, sad_r;
+
+  if ( (0 == (bex_r = u2_wire_bex_r(wir_r))) ||
+       (0 == (sad_r = u2_wire_sad_r(wir_r))) )
+  {
+    u2_rl_lose(wir_r, hod);
+    return;
+  } 
+  else {
+    u2_noun zof = u2_rx(sad_r, u2_benx_at(bex_r, zof));
+    u2_noun sud = u2_rc(sad_r, u2_rl_take(sad_r, hod), zof);
+
+    u2_rl_lose(wir_r, hod);
+    if ( u2_none == sud ) {
+      return;
+    } else {
+      u2_benx_at(bex_r, zof) = sud;
+    }
+  }
+}
+void
+u2_bx_bean_out(u2_ray wir_r)
+{
+  u2_ray bex_r, sad_r;
+
+  if ( (0 == (bex_r = u2_wire_bex_r(wir_r))) ||
+       (0 == (sad_r = u2_wire_sad_r(wir_r))) )
+  {
+    return;
+  } 
+  else {
+    u2_noun zof = u2_benx_at(bex_r, zof);
+
+    c3_assert(u2_nul != zof);
+
+    u2_benx_at(bex_r, zof) = u2_t(zof);
+    u2_rl_lose(wir_r, zof);
   }
 }

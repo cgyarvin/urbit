@@ -205,8 +205,8 @@ u2_fj_op_rsh(u2_ray  wir_r,
 */
 u2_weak
 u2_fj_op_sub(u2_ray  wir_r,
-          u2_atom a,
-          u2_atom b)
+             u2_atom a,
+             u2_atom b)
 {
   mpz_t mp_a, mp_b;
 

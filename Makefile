@@ -116,11 +116,67 @@ J273_OFILES=\
        $(J273_3_OFILES) \
        gen273/watt.o
 
+J271_1_OFILES=\
+       gen271/1/add.o \
+       gen271/1/bex.o \
+       gen271/1/dec.o \
+       gen271/1/div.o \
+       gen271/1/gte.o \
+       gen271/1/gth.o \
+       gen271/1/lte.o \
+       gen271/1/lth.o \
+       gen271/1/mod.o \
+       gen271/1/mul.o \
+       gen271/1/sub.o
+
+J271_2_OFILES=\
+       gen271/2/bind.o \
+       gen271/2/clap.o \
+       gen271/2/drop.o \
+       gen271/2/flop.o \
+       gen271/2/lent.o \
+       gen271/2/levy.o \
+       gen271/2/lien.o \
+       gen271/2/need.o \
+       gen271/2/reel.o \
+       gen271/2/roll.o \
+       gen271/2/skim.o \
+       gen271/2/skip.o \
+       gen271/2/snag.o \
+       gen271/2/sort.o \
+       gen271/2/turn.o \
+       gen271/2/weld.o
+
+J271_3_OFILES=\
+       gen271/3/cat.o \
+       gen271/3/con.o \
+       gen271/3/cut.o \
+       gen271/3/dis.o \
+       gen271/3/end.o \
+       gen271/3/lsh.o \
+       gen271/3/met.o \
+       gen271/3/mix.o \
+       gen271/3/mug.o \
+       gen271/3/rap.o \
+       gen271/3/rip.o \
+       gen271/3/rsh.o 
+
+J271_6_OFILES=\
+       gen271/6/ream.o \
+
+J271_OFILES=\
+       $(J271_1_OFILES) \
+       $(J271_2_OFILES) \
+       $(J271_3_OFILES) \
+       $(J271_6_OFILES) \
+       gen271/watt.o
+
 OFILES=\
        $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
-       $(J273_OFILES)
+       $(J273_OFILES) \
+       $(J271_OFILES)
 
 $(BIN)/ford: $(OFILES)
 	mkdir -p $(BIN)

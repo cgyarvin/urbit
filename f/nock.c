@@ -15,63 +15,100 @@
 u2_weak                                                           //  transfer
 _nock_hint(u2_wire wir_r,
            u2_noun zep,                                           //  retain
-           u2_noun hod,                                           //  retain
+           u2_noun hod,                                           //  transfer
            u2_noun bus,                                           //  transfer
            u2_noun fol)                                           //  retain
 {
+  u2_weak pro;
+
   switch ( zep ) {
-    default: return u2_none;
+    default: u2_rl_lose(wir_r, hod); return u2_none;
+
+    case c3__bean: {
+      u2_bx_bean_ent(wir_r, hod);
+      {
+        pro = u2_nk_nock(wir_r, bus, fol);
+      }
+      u2_bx_bean_out(wir_r);
+      return pro;
+    }
 
     case c3__chug: {
       u2_err(wir_r, "chug", hod);
 
+      u2_rl_lose(wir_r, hod);
       return u2_nk_nock(wir_r, bus, fol);
     }
-    case c3__ping: {
-      u2_bx_used(wir_r);
 
-      return u2_nk_nock(wir_r, bus, fol);
-    }
-    case c3__memo: {
-      u2_weak pro = u2_ba_find(wir_r, bus, fol);
+    case c3__mine: {
+      pro = u2_nk_nock(wir_r, bus, fol);
 
-      if ( pro != u2_none ) {
-        u2_rl_lose(wir_r, bus);
+      if ( u2_none == pro ) {
+        u2_rl_lose(wir_r, hod);
 
+        return u2_none;
+      }
+      else {
+        pro = u2_sh_mine(wir_r, hod, pro);
+ 
+        u2_rl_lose(wir_r, hod);
         return pro;
-      } else {
-        pro = u2_nk_nock(wir_r, u2_rl_gain(wir_r, bus), fol);
+      }
+    }
 
-        if ( u2_none == pro ) {
-          return u2_none;
-        }
-        else {
-          pro = u2_ba_save(wir_r, bus, fol, pro);
+    case c3__memo: {
+      u2_rl_lose(wir_r, hod);
+      {
+        pro = u2_ba_find(wir_r, bus, fol);
 
+        if ( pro != u2_none ) {
           u2_rl_lose(wir_r, bus);
+
           return pro;
+        } else {
+          pro = u2_nk_nock(wir_r, u2_rl_gain(wir_r, bus), fol);
+
+          if ( u2_none == pro ) {
+            return u2_none;
+          }
+          else {
+            pro = u2_ba_save(wir_r, bus, fol, pro);
+
+            u2_rl_lose(wir_r, bus);
+            return pro;
+          }
         }
+      }
+    }
+
+    case c3__ping: {
+      u2_rl_lose(wir_r, hod);
+      {
+        u2_bx_used(wir_r);
+
+        return u2_nk_nock(wir_r, bus, fol);
       }
     }
 
     case c3__sole: {
-      u2_weak pro = u2_nk_nock(wir_r, bus, fol);
+      u2_rl_lose(wir_r, hod);
+      {
+        pro = u2_nk_nock(wir_r, bus, fol);
 
-      if ( u2_none == pro ) {
-        return u2_none;
+        if ( u2_none == pro ) {
+          return u2_none;
+        }
+        else return u2_ba_sole(wir_r, pro);
       }
-      else return u2_ba_sole(wir_r, pro);
     }
 
-    case c3__mine: {
-      u2_weak pro = u2_nk_nock(wir_r, bus, fol);
-
-      if ( u2_none == pro ) {
-        return u2_none;
+    case c3__spot: {
+      u2_bx_spot_ent(wir_r, hod);
+      {
+        pro = u2_nk_nock(wir_r, bus, fol);
       }
-      else {
-        return u2_sh_mine(wir_r, hod, pro);
-      }
+      u2_bx_spot_out(wir_r);
+      return pro;
     }
   }
 }
@@ -344,7 +381,7 @@ _nock_warm(u2_wire wir_r,
               zep = u2_h(hig); hod = u2_t(hig);
             }
           }
-          lut = _nock_hint(wir_r, zep, hod, bus, zom);
+          lut = _nock_hint(wir_r, zep, u2_rx(wir_r, hod), bus, zom);
           
           u2_rl_lose(wir_r, hig);
           return lut;

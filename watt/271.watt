@@ -1,4 +1,9 @@
-^<  [%mine ~ [%watt 273] ~]
+^<  :^    %mine 
+        ~
+      [%watt 271]
+    :~
+      [%vane !=(vane)]
+    ==
 |*
   ::  Tier 1, light math
 ::::
@@ -1110,6 +1115,7 @@
   ::::
   ::
       base
+    ^>  [%chug [%base gen]]
     ?-    gen
         @           [%mtbn [gen ~] ~]
     ::
@@ -1158,7 +1164,11 @@
     ::
         [%dgrs *]                                                       ::  :*
       |-
-      ?-(p.gen ~ [%hphp ~], [* ~] i.p.gen, ^ [%dgnb i.p.gen $(p.gen t.p.gen)])
+      ?-    p.gen 
+          ~       [%hphp ~]
+          [* ~]   i.p.gen
+          ^       [%dgnb i.p.gen $(p.gen t.p.gen)]
+      ==
     ::
         [%dgsg *]                                                       ::  :~
       |-
@@ -1272,6 +1282,8 @@
       gen
     ==
   ==
+::
+    plan  &[p=*axis q=*(unit &[p=*axis q=*gene]) r=*type]
 ::::
 ::
     rake
@@ -1346,15 +1358,18 @@
 ::::
 ::
     vane
-  =+  fan=*(pool &[*type *gene])
-  =+  ver=*(pool &[*type *gene])
-  =+  bug=@
-  =+  vet=?
-  =+  sut=*type
+  ^<  [%mine !=(->+) %vane [[%mill !=(mill)] ~]]
+  =+  :*  fan=*(pool &[*type *gene])
+          ver=*(pool &[*type *gene])
+          bug=@
+          vet=?
+      ==
+  =+  sut=`*type`%blur
   |*
   ::::
   ::
       bake
+    ^<  [%mine !=(->) %bake ~]
     =+  [dab=*(book term gene)]
     |=
     ^-  *
@@ -1389,6 +1404,7 @@
   ::::
   ::
       etch
+    ^<  [%mine !=(->) %etch ~]
     =+  [rep=*rope gan=*type]
     |=
     =+  per=(flop rep)
@@ -1465,6 +1481,7 @@
   ::::
   ::
       fair
+    ^<  [%mine !=(->) %fair ~]
     =+  [ref=*type dab=*(book term gene)]
     |=
     ?-    dab
@@ -1477,6 +1494,7 @@
   ::::
   ::
       find
+    ^<  [%mine !=(->) %find ~]
     =+  cog=*term
     |=
     %-  need
@@ -1533,6 +1551,7 @@
   ::::
   ::
       fill
+    ^<  [%mine !=(->) %fill ~]
     =+  sem=*(list &[p=*term q=*gene])
     |=
     ^-  *(book term gene)
@@ -1540,12 +1559,14 @@
   ::::
   ::
       firm
+    ^<  [%mine !=(->) %firm ~]
     =+  [ref=*type gen=*gene]
     |=
     .=((make gen) (make(sut ref) gen))
   ::::
   ::
       fish
+    ^<  [%mine !=(->) %fish ~]
     =+  [axe=*axis]
     |=
     =+  vit=*(pool type)
@@ -1575,6 +1596,7 @@
   ::::
   ::
       gain
+    ^<  [%mine !=(->) %gain ~]
     =+  [gen=*gene]
     |=
     ^-  *type
@@ -1598,6 +1620,7 @@
   ::::
   ::
       look
+    ^<  [%mine !=(->) %look ~]
     =+  [cog=*term dab=*(book term gene)]
     |= 
     =+  axe=`@`1
@@ -1631,10 +1654,11 @@
       $(axe (peg axe 7), dab r.dab)
     ==
   ::
-      make  =+(gen=*gene |=(q:(mill gen)))
+      make  ^<([%mine !=(->) %make ~] =+(gen=*gene |=(q:(mill gen))))
   ::::
   ::
       mesh
+    ^<  [%mine !=(->) %mesh ~]
     =+  [axe=*axis mun=*type har=*(list &[p=*gene q=*gene])]
     |=
     =+  luf=*(list &[p=*axis q=*tool])
@@ -1650,8 +1674,10 @@
   ::::
   ::
       mill
+    ^<  [%mine !=(->) %mill ~]
     =+  [gen=*gene]
     |=
+    ^>  [%chug [%sut sut] [%gen gen]]
     ^-  [p=*type q=*tool]
     ?-    -.gen
     ::
@@ -1783,6 +1809,7 @@
   ::::
   ::
       nest
+    ^<  [%mine !=(->) %nest ~]
     =+  bon=*type
     |=
     ^-  ?
@@ -1867,6 +1894,7 @@
   ::::
   ::
       peek
+    ^<  [%mine !=(->) %peek ~]
     =+  axe=*axis
     |=
     ^-  *type
@@ -1896,12 +1924,15 @@
         [%hold *]   $(sut (play(sut p.sut) q.sut))
     ==
   ::
-      plan  &[p=*axis q=*(unit &[p=*axis q=*gene]) r=*type]
-  ::
       play  =+(gen=*gene |=(p:(mill(vet |) gen)))
+  ::
+      read  ^<([%mine !=(->) %read ~] =+(txt=*tape |=(^-(*gene [%read !!]))))
+  ::
+      ream  ^<([%mine !=(->) %ream ~] =+(txt=@ |=(^-(*gene [%ream !!]))))
   ::::
   ::
       reap
+    ^<  [%mine !=(->) %reap ~]
     =+  ref=*type
     |=
     =+  bol=*(pool type)
@@ -2005,6 +2036,7 @@
   ::::
   ::
       seek
+    ^<  [%mine !=(->) %seek ~]
     =+  rep=*rope
     |=
     ^-  *plan

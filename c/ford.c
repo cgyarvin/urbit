@@ -171,7 +171,7 @@ _ford_save_warm(struct ford_state* fod_f,
 static void 
 _ford_gates(struct ford_state* fod_f)
 {
-#if 1
+#if 0
   u2_wire wir_r = fod_f->wir_r;
 
   fod_f->ryd = u2_bn_hook
@@ -334,6 +334,51 @@ ford_test2(struct ford_state* fod_f,
   }
 }
 
+u2_weak
+j2_mbc(watt_271, ream)(u2_wire wir_r, 
+                       u2_weak txt);
+
+/* ford_test3(): accurate use of a true kernel.
+*/
+void
+ford_test3(struct ford_state* fod_f,
+           const char*        src_c)
+{
+  u2_wire wir_r = fod_f->wir_r;
+  u2_noun src   = u2_ux_read(wir_r, src_c, "watt");
+
+  printf("test3!\n");
+
+  if ( u2_none == src ) {
+    printf("test3: %s: no file\n", src_c);
+    u2_bl_bail(wir_r);
+  }
+  else {
+    u2_noun gen = j2_mbc(watt_271, ream)(wir_r, src);
+
+    if ( u2_none == gen ) {
+      printf("test3: %s: no gene\n", src_c);
+      return;
+    }
+    else {
+      u2_noun van = u2_bn_hook(wir_r, fod_f->pit, "vane");
+      u2_noun mel = u2_bn_hook(wir_r, van, "mill");
+      u2_noun lof;
+      
+      if ( (u2_none == mel) || (u2_none == van) ) {
+        printf("test3: no mill or vane\n");
+        return;
+      }
+      lof = u2_bn_mung(wir_r, mel, gen);
+      if ( u2_none == lof ) {
+        printf("test3: no lof\n");
+      }
+      u2_err(wir_r, "type", u2_h(lof));
+      u2_err(wir_r, "tool", u2_t(lof));
+    }
+  }
+}
+
 /* _ford_from(): expression in pit space.
 */
 static u2_noun
@@ -372,7 +417,8 @@ ford_line(struct ford_state* fod_f,
     else {
       if ( !arg_c && !strcmp(cmd_c, "test") ) {
         // ford_test(fod_f, "watt/t1-273");
-        ford_test2(fod_f, "watt/271");
+        printf("test3?\n");
+        ford_test3(fod_f, "watt/270");
       }
       else {
 #if 0
