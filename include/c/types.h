@@ -28,7 +28,7 @@
 #     define c3_and(x, y)   ((x) && (y))
 #     define c3_or(x, y)    ((x) || (y))
 
-    /* Deprecated integers.  Uncomment if used.
+    /* Deprecated integers. 
     */
       typedef char      c3_c;      // does not match int8_t or uint8_t
       typedef int       c3_i;      // int - really bad 

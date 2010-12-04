@@ -58,6 +58,8 @@ u2_bx_boot(u2_ray wir_r)
 
 /* u2_bx_post(): export and reset the performance log.
 **
+**  zat: source position stack (on shed)
+**  zof: programer action stack (on shed)
 **  sap: number of steps
 **  cop: number of words copied
 **  jax: number of jet activations
@@ -70,17 +72,19 @@ u2_bx_boot(u2_ray wir_r)
 **  ums: number of milliseconds consumed
 */
 u2_flag
-u2_bx_post(u2_ray wir_r,
-           c3_d*  sap_d,
-           c3_d*  cop_d,
-           c3_d*  jax_d,
-           c3_d*  use_d,
-           c3_w*  wax_w,
-           c3_w*  moc_w,
-           c3_w*  hix_w,
-           c3_ws* sew_ws,
-           c3_ws* bax_ws,
-           c3_w*  ums_w)
+u2_bx_post(u2_ray   wir_r,
+           u2_noun* zat,
+           u2_noun* zof, 
+           c3_d*    sap_d,
+           c3_d*    cop_d,
+           c3_d*    jax_d,
+           c3_d*    use_d,
+           c3_w*    wax_w,
+           c3_w*    moc_w,
+           c3_w*    hix_w,
+           c3_ws*   sew_ws,
+           c3_ws*   bax_ws,
+           c3_w*    ums_w)
 {
   u2_ray bex_r;
 
@@ -89,6 +93,9 @@ u2_bx_post(u2_ray wir_r,
   } else {
     u2_ray eab_r, wab_r;
     c3_w   sec_w, usc_w;
+
+    *zat = u2_benx_at(bex_r, zat);
+    *zof = u2_benx_at(bex_r, zof);
 
     *sap_d = u2_benx_be(bex_r, c3_d, sap_d);
     *cop_d = u2_benx_be(bex_r, c3_d, cop_d);
@@ -169,10 +176,10 @@ u2_bx_copy(u2_ray wir_r,
   }
 }
 
-/* u2_bx_fall(): go deeper (call) in the C stack.
+/* u2_bx_sink(): go deeper (call) in the C stack.
 */
 void
-u2_bx_fall(u2_ray wir_r)
+u2_bx_sink(u2_ray wir_r)
 {
   u2_ray bex_r;
 
@@ -287,11 +294,11 @@ u2_bx_bask(u2_ray wir_r,
   }
 }
 
-/* u2_bx_spot_ent(), u2_bx_spot_out(): enter and exit source position.
+/* u2_bx_spot(): declare source position.
 */
 void
-u2_bx_spot_ent(u2_ray  wir_r,
-               u2_noun hod)                                       //  transfer
+u2_bx_spot(u2_ray  wir_r,
+           u2_noun hod)                                           //  transfer
 {
   u2_ray bex_r, sad_r;
 
@@ -302,13 +309,14 @@ u2_bx_spot_ent(u2_ray  wir_r,
     return;
   } 
   else {
-    u2_noun zat = u2_rx(sad_r, u2_benx_at(bex_r, zat));
-    u2_noun sud = u2_rc(sad_r, u2_rl_take(sad_r, hod), zat);
+    u2_noun sud = u2_rl_take(sad_r, hod);
 
     u2_rl_lose(wir_r, hod);
     if ( u2_none == sud ) {
       return;
     } else {
+      u2_rl_lose(wir_r, u2_benx_at(bex_r, zat));
+
       u2_benx_at(bex_r, zat) = sud;
     }
   }
@@ -376,5 +384,139 @@ u2_bx_bean_out(u2_ray wir_r)
 
     u2_benx_at(bex_r, zof) = u2_t(zof);
     u2_rl_lose(wir_r, zof);
+  }
+}
+
+static void
+_bx_print_superdecimal_w(c3_w w)
+{
+  if ( w < 65536 ) {
+    printf("%d", w);
+  } else {
+    printf("%d+%d", (w >> 16), (w & 65535));
+  }
+}
+
+static void
+_bx_print_superdecimal_d(c3_d d)
+{
+  if ( d > 0x100000000ULL ) {
+    _bx_print_superdecimal_w((c3_w)(d >> 32ULL));
+    printf(":");
+    _bx_print_superdecimal_w((c3_w)(d & 0xffffffffULL));
+  }
+  else { 
+    _bx_print_superdecimal_w((c3_w) d);
+  }
+}
+
+/* u2_bx_show(): print benchmark report and clear structure.
+*/
+void
+u2_bx_show(u2_ray wir_r)
+{
+  u2_noun zat, zof;
+  c3_d sap_d, cop_d, jax_d, use_d;
+  c3_w wax_w, moc_w, hix_w, ums_w;
+  c3_ws sew_ws, bax_ws;
+
+  if ( u2_no == u2_bx_post(wir_r, &zat,
+                                  &zof,
+                                  &sap_d, 
+                                  &cop_d, 
+                                  &jax_d, 
+                                  &use_d, 
+                                  &wax_w, 
+                                  &moc_w, 
+                                  &hix_w,
+                                  &sew_ws,
+                                  &bax_ws,
+                                  &ums_w) )
+  {
+    return;
+  } else {
+    /* Dump and free trace information, if any.
+    */
+    {
+      u2_ray sad_r = u2_wire_sad_r(wir_r);
+
+      if ( u2_nul != zat ) {
+        // u2_noun h_zat = u2_h(zat);
+        u2_noun t_zat = u2_t(zat);
+
+        printf("place: %d.%d:%d.%d\n", 
+            u2_h(u2_h(t_zat)), u2_t(u2_h(t_zat)),
+            u2_h(u2_t(t_zat)), u2_t(u2_t(t_zat)));
+        u2_rl_lose(sad_r, zat);
+      }
+
+      if ( u2_nul != zof ) {
+        u2_noun zuf;
+
+        printf("trace:\n");
+        for ( zuf = zof; u2_nul != zuf; zuf = u2_t(zuf) ) {
+          u2_err(wir_r, 0, u2_h(zuf));
+        }
+        u2_rl_lose(sad_r, zof);
+      }
+    }
+  
+    /* Dump performance log.
+    */
+    {
+      printf("<");
+      _bx_print_superdecimal_d(sap_d);
+      printf(" jogs");
+      if ( cop_d ) {
+        printf(", ");
+        _bx_print_superdecimal_d(cop_d);
+        printf(" dups");
+      }
+      if ( jax_d ) {
+        printf(", ");
+        _bx_print_superdecimal_d(jax_d);
+        printf(" shot");
+      }
+      if ( use_d ) {
+        printf(", ");
+        _bx_print_superdecimal_d(use_d);
+        printf(" pings");
+      }
+      printf("; ");
+      _bx_print_superdecimal_w(moc_w);
+      printf(" hit, ");
+      _bx_print_superdecimal_w(wax_w);
+      printf(" deep");
+
+      if ( hix_w ) {
+        printf(", ");
+        _bx_print_superdecimal_w(hix_w);
+        printf(" held");
+      }
+      
+      if ( sew_ws ) {
+        printf(", ");
+        if ( sew_ws < 0 ) {
+          printf("-");
+          _bx_print_superdecimal_w((c3_w) -(sew_ws));
+        } else {
+          _bx_print_superdecimal_w((c3_w) sew_ws);
+        }
+        printf(" sewn");
+      }
+      if ( bax_ws ) {
+        printf(", ");
+        if ( bax_ws < 0 ) {
+          printf("-");
+          _bx_print_superdecimal_w((c3_w) -(bax_ws));
+        } else {
+          _bx_print_superdecimal_w((c3_w) bax_ws);
+        }
+        printf(" kept");
+      }
+      printf("; ");
+      _bx_print_superdecimal_w(ums_w);
+      printf(" ms>\n");
+    }
   }
 }

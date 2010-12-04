@@ -4,6 +4,14 @@
 */
 #include "all.h"
 
+/* _loom_stop(): signal handler to stop computation.
+*/
+static void
+_loom_stop(c3_i sig)
+{
+  LoomStop = 1;
+}
+
 /* u2_boot():
 **
 **   Instantiate the loom.
@@ -24,6 +32,8 @@ u2_boot(void)
     rlm.rlim_cur = 65536 << 10;
     setrlimit(RLIMIT_STACK, &rlm);
   }
+
+  signal(SIGINT, _loom_stop);
 }
 
 /* u2_mean():

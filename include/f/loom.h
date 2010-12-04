@@ -11,6 +11,25 @@
 #   define LoomSize (1 << 28)
 #   define LoomEnd  (LoomSize - 1)
 
+#   ifdef U2_GLOBAL
+      /* Frame depth in interpreter - for stack control.  Tune it.
+      ** (Ideally, do not use deep C stack at all.)
+      */
+        uint32_t LoomFrame;
+      /* Stop flag for signal handlers (eg, SIGINT).
+      */
+        volatile sig_atomic_t LoomStop;
+#   else
+      extern uint32_t LoomFrame;
+      extern volatile sig_atomic_t LoomStop;
+#   endif
+
+#     define   LoomFrameMax  131072
+#     define   LoomSink \
+        (LoomFrame == LoomFrameMax ? (LoomStop = 1) : LoomFrame++)
+#     define   LoomRise \
+        (LoomFrame--)
+ 
 // #   define LoomFold
 
   /** Data types.

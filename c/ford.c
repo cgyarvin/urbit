@@ -55,104 +55,6 @@
       void
       ford_done(struct ford_state* fod_f);
     
-void
-_ford_print_superdecimal_w(c3_w w)
-{
-  if ( w < 65536 ) {
-    printf("%d", w);
-  } else {
-    printf("%d+%d", (w >> 16), (w & 65535));
-  }
-}
-
-void
-_ford_print_superdecimal_d(c3_d d)
-{
-  if ( d > 0x100000000ULL ) {
-    _ford_print_superdecimal_w((c3_w)(d >> 32ULL));
-    printf(":");
-    _ford_print_superdecimal_w((c3_w)(d & 0xffffffffULL));
-  }
-  else { 
-    _ford_print_superdecimal_w((c3_w) d);
-  }
-}
-
-void
-_ford_report(u2_ray wir_r)
-{
-  c3_d sap_d, cop_d, jax_d, use_d;
-  c3_w wax_w, moc_w, hix_w, ums_w;
-  c3_ws sew_ws, bax_ws;
-
-  if ( u2_no == u2_bx_post(wir_r, &sap_d, 
-                                  &cop_d, 
-                                  &jax_d, 
-                                  &use_d, 
-                                  &wax_w, 
-                                  &moc_w, 
-                                  &hix_w,
-                                  &sew_ws,
-                                  &bax_ws,
-                                  &ums_w) )
-  {
-    return;
-  } else {
-    printf("<");
-    _ford_print_superdecimal_d(sap_d);
-    printf(" jogs");
-    if ( cop_d ) {
-      printf(", ");
-      _ford_print_superdecimal_d(cop_d);
-      printf(" dups");
-    }
-    if ( jax_d ) {
-      printf(", ");
-      _ford_print_superdecimal_d(jax_d);
-      printf(" shot");
-    }
-    if ( use_d ) {
-      printf(", ");
-      _ford_print_superdecimal_d(use_d);
-      printf(" pings");
-    }
-    printf("; ");
-    _ford_print_superdecimal_w(moc_w);
-    printf(" hit, ");
-    _ford_print_superdecimal_w(wax_w);
-    printf(" deep");
-
-    if ( hix_w ) {
-      printf(", ");
-      _ford_print_superdecimal_w(hix_w);
-      printf(" held");
-    }
-    
-    if ( sew_ws ) {
-      printf(", ");
-      if ( sew_ws < 0 ) {
-        printf("-");
-        _ford_print_superdecimal_w((c3_w) -(sew_ws));
-      } else {
-        _ford_print_superdecimal_w((c3_w) sew_ws);
-      }
-      printf(" sewn");
-    }
-    if ( bax_ws ) {
-      printf(", ");
-      if ( bax_ws < 0 ) {
-        printf("-");
-        _ford_print_superdecimal_w((c3_w) -(bax_ws));
-      } else {
-        _ford_print_superdecimal_w((c3_w) bax_ws);
-      }
-      printf(" kept");
-    }
-    printf("; ");
-    _ford_print_superdecimal_w(ums_w);
-    printf(" ms>\n");
-  }
-}
 
 /* _ford_save_warm(): save engine as noun.
 */
@@ -270,7 +172,8 @@ ford_boot(const c3_c* src_c)
       _ford_gates(fod_f);
 
       u2_bl_done(wir_r, jub_r);
-      _ford_report(wir_r);
+      u2_bx_spot(wir_r, u2_nul);
+      u2_bx_show(wir_r);
 
       return fod_f;
     }
@@ -347,8 +250,6 @@ ford_test3(struct ford_state* fod_f,
   u2_wire wir_r = fod_f->wir_r;
   u2_noun src   = u2_ux_read(wir_r, src_c, "watt");
 
-  printf("test3!\n");
-
   if ( u2_none == src ) {
     printf("test3: %s: no file\n", src_c);
     u2_bl_bail(wir_r);
@@ -361,6 +262,7 @@ ford_test3(struct ford_state* fod_f,
       return;
     }
     else {
+#if 0
       u2_noun van = u2_bn_hook(wir_r, fod_f->pit, "vane");
       u2_noun mel = u2_bn_hook(wir_r, van, "mill");
       u2_noun lof;
@@ -375,7 +277,23 @@ ford_test3(struct ford_state* fod_f,
       }
       u2_err(wir_r, "type", u2_h(lof));
       u2_err(wir_r, "tool", u2_t(lof));
+#else
+      u2_noun dec = u2_bn_hook(wir_r, fod_f->pit, "dec");
+
+      if ( u2_none == dec ) {
+        printf("test3: no dec\n");
+        return;
+      }
+      else {
+        u2_noun lof = u2_nk_mung(wir_r, dec, _0);
+
+        if ( u2_none == lof ) {
+          printf("test3: no lof\n");
+        }
+        else u2_bx_spot(wir_r, u2_nul); 
+      }
     }
+#endif
   }
 }
 
@@ -405,7 +323,8 @@ ford_line(struct ford_state* fod_f,
 {
   u2_ray  wir_r = fod_f->wir_r;
   u2_ray  cap_r = u2_rail_cap_r(wir_r);
- 
+
+  LoomStop = 0;
   u2_bx_boot(wir_r);
   u2_rl_leap(wir_r, c3__warm);
   {
@@ -417,7 +336,6 @@ ford_line(struct ford_state* fod_f,
     else {
       if ( !arg_c && !strcmp(cmd_c, "test") ) {
         // ford_test(fod_f, "watt/t1-273");
-        printf("test3?\n");
         ford_test3(fod_f, "watt/270");
       }
       else {
@@ -455,6 +373,7 @@ ford_line(struct ford_state* fod_f,
             u2_prep pap = u2_fj_prep_noun(wir_r, pro);
 
             u2_burp(wir_r, 0, pap);
+            u2_bx_spot(wir_r, u2_nul);
           }
         }
       }
@@ -464,7 +383,7 @@ ford_line(struct ford_state* fod_f,
   u2_rl_fall(wir_r);
   u2_rail_cap_r(wir_r) = cap_r;
 
-  _ford_report(wir_r);
+  u2_bx_show(wir_r);
 }
 
 /* ford_done(): terminate and free all.

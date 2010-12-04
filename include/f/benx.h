@@ -89,6 +89,8 @@
 
     /* u2_bx_post(): export and reset the performance log.
     **
+    **  zat: source position stack (on shed)
+    **  zof: programer action stack (on shed)
     **  sap: number of steps
     **  cop: number of words copied
     **  jax: number of jet activations
@@ -101,25 +103,25 @@
     **  ums: number of milliseconds consumed
     */
       u2_flag
-      u2_bx_post(u2_ray wir_r,
-                 c3_d*  sap_d,
-                 c3_d*  cop_d,
-                 c3_d*  jax_d,
-                 c3_d*  use_d,
-                 c3_w*  wax_w,
-                 c3_w*  moc_w,
-                 c3_w*  hix_w,
-                 c3_ws* sew_ws,
-                 c3_ws* bax_ws,
-                 c3_w*  ums_w);
+      u2_bx_post(u2_ray   wir_r,
+                 u2_noun* zat,
+                 u2_noun* zof, 
+                 c3_d*    sap_d,
+                 c3_d*    cop_d,
+                 c3_d*    jax_d,
+                 c3_d*    use_d,
+                 c3_w*    wax_w,
+                 c3_w*    moc_w,
+                 c3_w*    hix_w,
+                 c3_ws*   sew_ws,
+                 c3_ws*   bax_ws,
+                 c3_w*    ums_w);
 
-    /* u2_bx_spot_ent(), u2_bx_spot_out(): enter and exit source position.
+    /* u2_bx_spot(): declare source position.
     */
       void
-      u2_bx_spot_ent(u2_ray  wir_r,
-                     u2_noun hod);                                //  transfer
-      void
-      u2_bx_spot_out(u2_ray wir_r);
+      u2_bx_spot(u2_ray  wir_r,
+                 u2_noun hod);                                    //  transfer
 
     /* u2_bx_bean_ent(), u2_bx_bean_out(): enter and exit execution state.
     */
@@ -152,10 +154,10 @@
       u2_bx_bask(u2_ray wir_r,
                  c3_ws  wad_ws);
 
-    /* u2_bx_fall(): go deeper (call) in the C stack.
+    /* u2_bx_sink(): go deeper (call) in the C stack.
     */
       void
-      u2_bx_fall(u2_ray wir_r);
+      u2_bx_sink(u2_ray wir_r);
 
     /* u2_bx_rise(): go shallower (return) in the C stack.
     */
@@ -176,6 +178,11 @@
     */
       void
       u2_bx_mark(u2_ray wir_r);
+
+    /* u2_bx_show(): print benchmark report and clear structure.
+    */
+      void
+      u2_bx_show(u2_ray wir_r);
 
     /* u2_bx_warn(): report a warning at file and line.
     */

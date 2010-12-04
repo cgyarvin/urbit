@@ -723,17 +723,22 @@ _watt_locate(u2_ray  wir_r,
 #else
   return u2_bt
     (wir_r, 
-     c3__hpcb, 
-     u2_bc
-      (wir_r, 
+     c3__htrd,
+     u2_bq
+      (wir_r,
+       c3__bone, 
+       c3__spot,
+       u2_nul,
        u2_bc
         (wir_r, 
-         (llocp->first_line), 
-         (llocp->first_column)),
-       u2_bc
-        (wir_r,
-         (llocp->last_line), 
-         (llocp->last_column))),
+         u2_bc
+          (wir_r, 
+           (llocp->first_line), 
+           (llocp->first_column)),
+         u2_bc
+          (wir_r,
+           (llocp->last_line), 
+           (llocp->last_column)))),
      gene);
 #endif
 }
