@@ -283,10 +283,8 @@
 #     define u2_nock_trol  6
 #     define u2_nock_flac  7
 #     define u2_nock_gant  8
-#     define u2_nock_mung  9
-#     define u2_nock_germ  10
-#     define u2_nock_hint  11
-#     define u2_nock_coat  12
+#     define u2_nock_kick  9
+#     define u2_nock_hint  10
 
     /* u2_yes, u2_no, u2_nul;
     **

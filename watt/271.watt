@@ -1,27 +1,15 @@
-^<  :^    %mine 
-        ~
+^<    mine.
+    :+  ~
       [%watt 271]
     :~
       [%vane !=(vane)]
-      [%dec !=(dec)]
     ==
 |*
-::::
-::
-    loop
-  =+  a=@
-  |=  
-  ^>  [%bean %fake]
-  |-
-  ?:  .=(0 a)
-    a
-  $(a .^(a))
-
   ::  Tier 1, light math
 ::::
 ::
     add
-  ^<  [%mine !=(->) %add ~]
+  ^<  mine.[!=(->) %add ~]
   =+  [a=@ b=@]
   |=
   ^-  @
@@ -31,7 +19,7 @@
 ::::
 ::
     bex
-  ^<  [%mine !=(->) %bex ~] 
+  ^<  mine.[!=(->) %bex ~] 
   =+  [a=@]
   |=
   ^-  @
@@ -41,11 +29,11 @@
 ::::
 ::
     dec
-  ^<  [%mine !=(->) %dec ~] 
+  ^<  mine.[!=(->) %dec ~] 
   =+  [a=@]
   |=
   ^-  @
-  ^>  [%bean %dec]
+  ^>  bean.%dec
   ?<  .=(0 a)
   =+  b=@
   |-
@@ -55,11 +43,11 @@
 ::::
 ::
     div
-  ^<  [%mine !=(->) %div ~] 
+  ^<  mine.[!=(->) %div ~] 
   =+  [a=@ b=@]
   |=
   ^-  @
-  ^>  [%bean %div]
+  ^>  bean.[%div]
   ?<  .=(0 b)
   =+  c=@
   |-
@@ -71,7 +59,7 @@
     fib
   =+  a=@
   |=
-  ^>  %memo
+  ^>  memo
   ?-  a
     0   0
     1   1
@@ -80,7 +68,7 @@
 ::::
 ::
     gte
-  ^<  [%mine !=(->) %gte ~] 
+  ^<  mine.[!=(->) %gte ~] 
   =+  [a=@ b=@]
   |=
   ^-  ?
@@ -88,7 +76,7 @@
 ::::
 ::
     gth
-  ^<  [%mine !=(->) %gth ~] 
+  ^<  mine.[!=(->) %gth ~] 
   =+  [a=@ b=@]
   |=
   ^-  ?
@@ -96,14 +84,14 @@
 ::::
 ::
     lte
-  ^<  [%mine !=(->) %lte ~] 
+  ^<  mine.[!=(->) %lte ~] 
   =+  [a=@ b=@]
   |=
   ?|(.=(a b) (lth a b))
 ::::
 ::
     lth
-  ^<  [%mine !=(->) %lth ~] 
+  ^<  mine.[!=(->) %lth ~] 
   =+  [a=@ b=@]
   |=
   ^-  ?
@@ -120,7 +108,7 @@
 ::::
 ::
     mod
-  ^<  [%mine !=(->) %mod ~] 
+  ^<  mine.[!=(->) %mod ~] 
   =+  [a=@ b=@]
   |=
   ^-  @
@@ -129,7 +117,7 @@
 ::::
 ::
     mul
-  ^<  [%mine !=(->) %mul ~] 
+  ^<  mine.[!=(->) %mul ~] 
   =+  [a=@ b=@]
   |=
   ^-  @
@@ -147,7 +135,7 @@
 ::::
 ::
     sub
-  ^<  [%mine !=(->) %sub ~] 
+  ^<  mine.[!=(->) %sub ~] 
   =+  [a=@ b=@]
   |=
   ^-  @
@@ -375,14 +363,14 @@
 ::::
 ::  
     cat
-  ^<  [%mine !=(->) %cat ~] 
+  ^<  mine.[!=(->) %cat ~] 
   =+  [a=*bloq b=@ c=@]
   |=
   (add (lsh a (met a b) c) b)
 ::::
 ::
     con
-  ^<  [%mine !=(->) %con ~]
+  ^<  mine.[!=(->) %con ~]
   =+  [a=@ b=@]
   |=
   =+  [c=`@`0 d=`@`0]
@@ -398,14 +386,14 @@
 ::::
 ::
     cut
-  ^<  [%mine !=(->) %cut ~]
+  ^<  mine.[!=(->) %cut ~]
   =+  [a=*bloq [b=@ c=@] d=@]
   |=
   (end a c (rsh a b d))
 ::::
 ::
     dis
-  ^<  [%mine !=(->) %dis ~]
+  ^<  mine.[!=(->) %dis ~]
   =+  [a=@ b=@]
   |=
   =+  [c=`@`0 d=`@`0]
@@ -438,7 +426,7 @@
 ::::
 ::
     end 
-  ^<  [%mine !=(->) %end ~]
+  ^<  mine.[!=(->) %end ~]
   =+  [a=*bloq b=@ c=@]
   |=
   (mod c (bex (mul (bex a) b)))
@@ -455,14 +443,14 @@
 ::::
 ::
     lsh
-  ^<  [%mine !=(->) %lsh ~]
+  ^<  mine.[!=(->) %lsh ~]
   =+  [a=*bloq b=@ c=@]
   |=
   (mul (bex (mul (bex a) b)) c)
 ::::
 ::
     mix
-  ^<  [%mine !=(->) %mix ~]
+  ^<  mine.[!=(->) %mix ~]
   =+  [a=@ b=@]
   |=
   =+  [c=`@`0 d=`@`0]
@@ -478,7 +466,7 @@
 ::::
 ::
     met
-  ^<  [%mine !=(->) %met ~]
+  ^<  mine.[!=(->) %met ~]
   =+  [a=*bloq b=@]
   |=
   =+  c=`@`0
@@ -501,7 +489,7 @@
 ::::
 ::
     mug
-  ^<  [%mine !=(->) %mug ~]
+  ^<  mine.[!=(->) %mug ~]
   =+  a=*
   |=
   ^-  @
@@ -610,7 +598,7 @@
 ::::
 ::
     rap
-  ^<  [%mine !=(->) %rap ~]
+  ^<  mine.[!=(->) %rap ~]
   =+  [a=*bloq b=*(list &@)]
   |=
   ^-  @
@@ -620,7 +608,7 @@
 ::::
 ::
     rip
-  ^<  [%mine !=(->) %rip ~]
+  ^<  mine.[!=(->) %rip ~]
   =+  [a=*bloq b=@]
   |=
   ^-  *(list &@)
@@ -630,7 +618,7 @@
 ::::
 ::
     rsh
-  ^<  [%mine !=(->) %rsh ~]
+  ^<  mine.[!=(->) %rsh ~]
   =+  [a=*bloq b=@ c=@]
   |=
   (div c (bex (mul (bex a) b)))
@@ -823,6 +811,7 @@
     comb
   =+  [mal=*tool buz=*tool]
   |=
+  ^>  bean.[%comb]
   ^-  *tool
   ?:  ?=([0 *] mal)
     ?:  ?=([0 *] buz)
@@ -840,6 +829,7 @@
     cons
   =+  [vur=*tool sed=*tool]
   |=
+  ^>  bean.[%cons]
   ^-  *tool
   ?:  ?=([[0 *] [0 *]] -<)
     ?:  ?&(.=(.^(p.vur) p.sed) .=((div p.vur 2) (div p.sed 2)))
@@ -902,7 +892,7 @@
     gene
   |?
     ^+(@ *term)
-    [~ p=*axis]
+    [~ p=^+(@ *axis)]
   ::
     [%bndr p=*gene q=*gene]                                     ::  =<  bender
     [%bnnb p=*gene q=*gene]                                     ::  =-  bennub
@@ -939,11 +929,11 @@
   ::
     [%htbn p=*term q=*gene]                                     ::  ^=  hatben
     [%htdg p=*gene q=*gene]                                     ::  ^:  hatdig
-    [%htdr p=*gene q=*gene]                                     ::  ^<  hatder
+    [%htdr p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^<  hatder
     [%htmt p=*gene q=*gene]                                     ::  ^%  hatmit
     [%htnb p=*gene q=*gene]                                     ::  ^-  hatnub
     [%htpd p=*gene q=*gene]                                     ::  ^+  hatpod
-    [%htrd p=*gene q=*gene]                                     ::  ^>  hatred
+    [%htrd p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^>  hatred
     [%htrs p=*gene]                                             ::  ^*  hatras
     [%htsg p=*gene]                                             ::  ^~  hatsig
   ::
@@ -979,6 +969,7 @@
     hike 
   =+  [axe=*axis pac=*(list &[p=*axis q=*tool])]
   |=
+  ^>  bean.[%hike]
   ^-  *tool
   ?~  pac
     [0 axe]
@@ -1010,6 +1001,7 @@
     open
   =+  gen=*gene
   |=
+  ^>  bean.[%open]
   ^-  *gene
   =<  base
   |*
@@ -1129,7 +1121,6 @@
   ::::
   ::
       base
-    ^>  [%chug [%base gen]]
     ?-    gen
         @           [%mtbn [gen ~] ~]
     ::
@@ -1303,6 +1294,7 @@
     rake
   =+  gen=*gene
   |=
+  ^>  bean.[%rake]
   ^-  *rope
   ?-  gen
     @             {gen}
@@ -1326,10 +1318,8 @@
     [6 p=*tool q=*tool r=*tool]
     [7 p=*tool q=*tool]
     [8 p=*tool q=*tool]
-    [9 p=*tool q=*tool]
-    [10 p=*tool q=*tool]
-    [11 p=* q=*tool]
-    [12 p=* q=*]
+    [9 p=@ q=*tool]
+    [10 p=*<@ [p=@ q=*tool]> q=*tool]
     [p=^+(^ *tool) q=*tool]
   ==
 ::::
@@ -1372,7 +1362,7 @@
 ::::
 ::
     vane
-  ^<  [%mine !=(->+) %vane [[%mill !=(mill)] ~]]
+  ^<  mine.[!=(->+) %vane [[%mill !=(mill)] ~]]
   =+  :*  fan=*(pool &[*type *gene])
           ver=*(pool &[*type *gene])
           bug=@
@@ -1383,9 +1373,10 @@
   ::::
   ::
       bake
-    ^<  [%mine !=(->) %bake ~]
+    ^<  mine.[!=(->) %bake ~]
     =+  [dab=*(book term gene)]
     |=
+    ^>  bean.[%bake]
     ^-  *
     ?-    dab
         ~         0
@@ -1397,6 +1388,7 @@
   ::::
   ::
       clay
+    ^>  bean.[%clay]
     ?.  ?=([%core *] sut)
       sut
     ?-    q.sut
@@ -1418,9 +1410,10 @@
   ::::
   ::
       etch
-    ^<  [%mine !=(->) %etch ~]
+    ^<  mine.[!=(->) %etch ~]
     =+  [rep=*rope gan=*type]
     |=
+    ^>  bean.[%etch]
     =+  per=(flop rep)
     |-
     ^-  *type
@@ -1495,9 +1488,10 @@
   ::::
   ::
       fair
-    ^<  [%mine !=(->) %fair ~]
+    ^<  mine.[!=(->) %fair ~]
     =+  [ref=*type dab=*(book term gene)]
     |=
+    ^>  bean.[%fair]
     ?-    dab
         ~         0
         [* ~ ~]   (firm ref q.n.dab)
@@ -1508,7 +1502,7 @@
   ::::
   ::
       find
-    ^<  [%mine !=(->) %find ~]
+    ^<  mine.[!=(->) %find ~]
     =+  cog=*term
     |=
     %-  need
@@ -1565,7 +1559,7 @@
   ::::
   ::
       fill
-    ^<  [%mine !=(->) %fill ~]
+    ^<  mine.[!=(->) %fill ~]
     =+  sem=*(list &[p=*term q=*gene])
     |=
     ^-  *(book term gene)
@@ -1573,14 +1567,14 @@
   ::::
   ::
       firm
-    ^<  [%mine !=(->) %firm ~]
+    ^<  mine.[!=(->) %firm ~]
     =+  [ref=*type gen=*gene]
     |=
     .=((make gen) (make(sut ref) gen))
   ::::
   ::
       fish
-    ^<  [%mine !=(->) %fish ~]
+    ^<  mine.[!=(->) %fish ~]
     =+  [axe=*axis]
     |=
     =+  vit=*(pool type)
@@ -1610,7 +1604,7 @@
   ::::
   ::
       gain
-    ^<  [%mine !=(->) %gain ~]
+    ^<  mine.[!=(->) %gain ~]
     =+  [gen=*gene]
     |=
     ^-  *type
@@ -1634,7 +1628,7 @@
   ::::
   ::
       look
-    ^<  [%mine !=(->) %look ~]
+    ^<  mine.[!=(->) %look ~]
     =+  [cog=*term dab=*(book term gene)]
     |= 
     =+  axe=`@`1
@@ -1668,11 +1662,11 @@
       $(axe (peg axe 7), dab r.dab)
     ==
   ::
-      make  ^<([%mine !=(->) %make ~] =+(gen=*gene |=(q:(mill gen))))
+      make  ^<(mine.[!=(->) %make ~] =+(gen=*gene |=(q:(mill gen))))
   ::::
   ::
       mesh
-    ^<  [%mine !=(->) %mesh ~]
+    ^<  mine.[!=(->) %mesh ~]
     =+  [axe=*axis mun=*type har=*(list &[p=*gene q=*gene])]
     |=
     =+  luf=*(list &[p=*axis q=*tool])
@@ -1688,10 +1682,9 @@
   ::::
   ::
       mill
-    ^<  [%mine !=(->) %mill ~]
+    ^<  mine.[!=(->) %mill ~]
     =+  [gen=*gene]
     |=
-    ^>  [%chug [%sut sut] [%gen gen]]
     ^-  [p=*type q=*tool]
     ?-    -.gen
     ::
@@ -1705,13 +1698,13 @@
       ^-  [p=*type q=*tool]
       =+  sac=(fill p.gen)
       =+  toc=[%core sut %pink sac]
-      [toc [12 ~ (bake(sut toc) sac)]]
+      [toc [[0 1] [1 (bake(sut toc) sac)]]]
     ::
         %brrs                                                           ::  |*
       ^-  [p=*type q=*tool]
       =+  sac=(fill p.gen)
       =+  toc=[%core sut %blue sac]
-      [toc [12 ~ (bake(sut toc) sac)]]
+      [toc [[0 1] [1 (bake(sut toc) sac)]]]
     ::
         %dgnb                                                           ::  :-
       ^-  [p=*type q=*tool]
@@ -1786,9 +1779,14 @@
     ::
         %htrd                                                           ::  ^>
       ^-  [p=*type q=*tool]
-      =+  vax=(make p.gen)
       =+  hum=$(gen q.gen)
-      [p.hum [11 vax q.hum]]
+      :-  p.hum
+      :+  10
+        ?-    p.gen
+            @   p.gen
+            ^   [p.p.gen (make q.p.gen)]
+        ==
+      q.hum
     :: 
         %mtbn                                                           ::  %=
       ^-  [p=*type q=*tool]
@@ -1797,7 +1795,7 @@
       ?~  q.lar
         fup
       :-  [%hold clay(sut p.fup) q.u.q.lar] 
-      [2 q.fup [0 (peg p.lar p.u.q.lar)]]
+      [9 p.lar q.fup]
     ::
         %skbn                                                           ::  ?=
       ^-  [p=*type q=*tool]
@@ -1823,7 +1821,7 @@
   ::::
   ::
       nest
-    ^<  [%mine !=(->) %nest ~]
+    ^<  mine.[!=(->) %nest ~]
     =+  bon=*type
     |=
     ^-  ?
@@ -1908,7 +1906,7 @@
   ::::
   ::
       peek
-    ^<  [%mine !=(->) %peek ~]
+    ^<  mine.[!=(->) %peek ~]
     =+  axe=*axis
     |=
     ^-  *type
@@ -1940,13 +1938,13 @@
   ::
       play  =+(gen=*gene |=(p:(mill(vet |) gen)))
   ::
-      read  ^<([%mine !=(->) %read ~] =+(txt=*tape |=(^-(*gene [%read !!]))))
+      read  ^<(mine.[!=(->) %read ~] =+(txt=*tape |=(^-(*gene [%read !!]))))
   ::
-      ream  ^<([%mine !=(->) %ream ~] =+(txt=@ |=(^-(*gene [%ream !!]))))
+      ream  ^<(mine.[!=(->) %ream ~] =+(txt=@ |=(^-(*gene [%ream !!]))))
   ::::
   ::
       reap
-    ^<  [%mine !=(->) %reap ~]
+    ^<  mine.[!=(->) %reap ~]
     =+  ref=*type
     |=
     =+  bol=*(pool type)
@@ -2050,7 +2048,7 @@
   ::::
   ::
       seek
-    ^<  [%mine !=(->) %seek ~]
+    ^<  mine.[!=(->) %seek ~]
     =+  rep=*rope
     |=
     ^-  *plan

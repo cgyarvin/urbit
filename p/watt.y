@@ -184,6 +184,18 @@ wide_c
 */
       ;
 
+  /** Hints.
+  **/
+    hint
+      : tok_term
+      | tok_term '.' wide { $$ = _ycell($1, $3); }
+      ;
+
+    hont
+      : tok_term
+      | tok_term '.' wide   { $$ = _ycell($1, $3); }
+      | tok_term '.' w gene { $$ = _ycell($1, $4); }
+      ;
 /*
     path 
       : thin
@@ -237,8 +249,8 @@ wide_c
     wide_norm: di_dotask body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_dotras body_b_wide    { $$ = _ycell($1, $2); }
 
-    wide_norm: di_hatred body_b_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_hatder body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_hatred body_r_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_hatder body_r_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatnub body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatbuc body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatpod body_b_wide    { $$ = _ycell($1, $2); }
@@ -299,6 +311,8 @@ wide_c
       { $$ = _ytrel($3, $5, $7); }
     body_q_wide: si_lep g rope w wide w wide si_pel
       { $$ = _ytrel($3, $5, $7); }
+    body_r_wide: si_lep g hint w wide g si_pel
+      { $$ = _ycell($3, $5); }
 
     bank_wide
       : wide             { $$ = _ycell($1, _0); }
@@ -365,8 +379,8 @@ tall
     tall_norm: di_dotask w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_dotras w body_b_tall    { $$ = _ycell($1, $3); }
 
-    tall_norm: di_hatred w body_b_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_hatder w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_hatred w body_r_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_hatder w body_r_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatnub w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatbuc w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatpod w body_b_tall    { $$ = _ycell($1, $3); }
@@ -409,6 +423,7 @@ tall
     body_o_tall: prop gene                  { $$ = _ycell($1, $2); }
     body_p_tall: rope w gene w rack_tall    { $$ = _ytrel($1, $3, $5); }
     body_q_tall: rope w gene w gene         { $$ = _ytrel($1, $3, $5); }
+    body_r_tall: hont w gene                { $$ = _ycell($1, $3); }
 
   /** Tall - body parts.
   **/
@@ -721,13 +736,14 @@ _watt_locate(u2_ray  wir_r,
 #if 0
   return gene;
 #else
+#if 0
   return u2_bt
     (wir_r, 
      c3__htrd,
      u2_bq
       (wir_r,
-       c3__bone, 
        c3__spot,
+       c3__bone, 
        u2_nul,
        u2_bc
         (wir_r, 
@@ -740,6 +756,22 @@ _watt_locate(u2_ray  wir_r,
            (llocp->last_line), 
            (llocp->last_column)))),
      gene);
+#else
+  return u2_bt
+    (wir_r, 
+     c3__hpcb,
+       u2_bc
+        (wir_r, 
+         u2_bc
+          (wir_r, 
+           (llocp->first_line), 
+           (llocp->first_column)),
+         u2_bc
+          (wir_r,
+           (llocp->last_line), 
+           (llocp->last_column))),
+     gene);
+#endif
 #endif
 }
 

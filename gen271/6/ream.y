@@ -59,7 +59,7 @@
 
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 64
+  %expect 58
 
   %pure-parser
   %locations
@@ -185,6 +185,18 @@ wide_c
 */
       ;
 
+  /** Hints.
+  **/
+    hint
+      : tok_term
+      | tok_term '.' wide { $$ = _ycell($1, $3); }
+      ;
+
+    hont
+      : tok_term
+      | tok_term '.' wide   { $$ = _ycell($1, $3); }
+      | tok_term '.' w gene { $$ = _ycell($1, $4); }
+      ;
 /*
     path 
       : thin
@@ -238,8 +250,8 @@ wide_c
     wide_norm: di_dotask body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_dotras body_b_wide    { $$ = _ycell($1, $2); }
 
-    wide_norm: di_hatred body_b_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_hatder body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_hatred body_r_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_hatder body_r_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatnub body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatbuc body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatpod body_b_wide    { $$ = _ycell($1, $2); }
@@ -278,8 +290,8 @@ wide_c
       { $$ = _ytrel($3, $5, $7); }
     body_d_wide: si_lep g bank_wide g si_pel
       { $$ = $3; }
-    body_e_wide: si_lep g prop menu_wide si_pel
-      { $$ = _ycell($3, $4); }
+    body_e_wide: si_lep g menu_wide si_pel
+      { $$ = $3; }
     body_f_wide: si_lep g wide w wide w wide w wide g si_pel
       { $$ = _yqual($3, $5, $7, $9); }
     body_g_wide: si_lep g term w wide g si_pel
@@ -294,12 +306,15 @@ wide_c
       { $$ = _ytrel($3, $5, u2_nul); }
     body_l_wide:
       { $$ = u2_nul; }
-    body_o_wide: si_lep g prop wide g si_pel
-      { $$ = _ycell($3, $4); }
+    body_o_wide: si_lep g wide g si_pel
+      { $$ = $3; }
     body_p_wide: si_lep g rope w wide w rack_wide si_pel
       { $$ = _ytrel($3, $5, $7); }
     body_q_wide: si_lep g rope w wide w wide si_pel
       { $$ = _ytrel($3, $5, $7); }
+    body_r_wide: si_lep g hint w wide g si_pel
+      { $$ = _ycell($3, $5); }
+
 
     bank_wide
       : wide             { $$ = _ycell($1, _0); }
@@ -321,8 +336,7 @@ wide_c
       ;
 
     menu_wide
-      : g                             { $$ = _0; }
-      | dish_wide g                   { $$ = _ycell($1, _0); }
+      : dish_wide g                   { $$ = _ycell($1, _0); }
       | dish_wide ',' g menu_wide     { $$ = _ycell($1, $4); }
       ;
 tall
@@ -366,8 +380,8 @@ tall
     tall_norm: di_dotask w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_dotras w body_b_tall    { $$ = _ycell($1, $3); }
 
-    tall_norm: di_hatred w body_b_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_hatder w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_hatred w body_r_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_hatder w body_r_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatnub w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatbuc w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatpod w body_b_tall    { $$ = _ycell($1, $3); }
@@ -400,16 +414,17 @@ tall
     body_b_tall: gene w gene                { $$ = _ycell($1, $3); }
     body_c_tall: gene w gene w gene         { $$ = _ytrel($1, $3, $5); }
     body_d_tall: bank_tall                  { $$ = $1; }
-    body_e_tall: prop menu_tall             { $$ = _ycell($1, $2); }
+    body_e_tall: menu_tall                  { $$ = $1; }
     body_f_tall: gene w gene w gene w gene  { $$ = _yqual($1, $3, $5, $7); }
     body_g_tall: term w gene                { $$ = _ycell($1, $3); }
     body_h_tall: gene w rack_tall           { $$ = _ycell($1, $3); }
     body_i_tall: gene w bank_tall           { $$ = _ycell($1, $3); }
     body_j_tall: rope w rack_tall           { $$ = _ycell($1, $3); }
     body_k_tall: gene w gene                { $$ = _ytrel($1, $3, u2_nul); }
-    body_o_tall: prop gene                  { $$ = _ycell($1, $2); }
+    body_o_tall: gene                       { $$ = $1; }
     body_p_tall: rope w gene w rack_tall    { $$ = _ytrel($1, $3, $5); }
     body_q_tall: rope w gene w gene         { $$ = _ytrel($1, $3, $5); }
+    body_r_tall: hont w gene                { $$ = _ycell($1, $3); }
 
   /** Tall - body parts.
   **/
@@ -476,14 +491,6 @@ tall
           | si_der axis_beto    { $$ = u2_fj_op_peg(yqw_r, _2, $2); }
           | si_red axis_beto    { $$ = u2_fj_op_peg(yqw_r, _3, $2); }
           ;
-
-  /** Prop: jet reference.
-  **/
-    prop
-      : si_dax si_lep rope ' ' '%' tok_term ' ' tok_delm si_pel w
-        { $$ = _ytrel($3, $6, $8); }
-      | { $$ = u2_nul; }
-      ;
 
   /** Digraphs (with stem)
   **/
@@ -715,7 +722,7 @@ _watt_locate(u2_ray  wir_r,
 {
   const YYLTYPE *llocp = vlocp;   /* bufalo estupido */
 
-#if 0
+#if 1
   return gene;
 #else
   return u2_bt
@@ -723,8 +730,8 @@ _watt_locate(u2_ray  wir_r,
      c3__htrd,
      u2_bq
       (wir_r,
-       c3__dtsg, 
        c3__spot,
+       c3__dtsg, 
        u2_nul,
        u2_bc
         (wir_r, 

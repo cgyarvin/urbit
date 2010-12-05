@@ -3,7 +3,7 @@
   A noun is an atom or a cell.  An atom is any natural number.  
   A cell is any ordered pair of nouns.
 
-2 Reductions
+2 Pseudocode
 
   [a b c]           [a [b c]]
   nock(a)           *a

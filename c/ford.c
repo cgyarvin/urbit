@@ -262,7 +262,7 @@ ford_test3(struct ford_state* fod_f,
       return;
     }
     else {
-#if 0
+#if 1
       u2_noun van = u2_bn_hook(wir_r, fod_f->pit, "vane");
       u2_noun mel = u2_bn_hook(wir_r, van, "mill");
       u2_noun lof;
@@ -271,12 +271,17 @@ ford_test3(struct ford_state* fod_f,
         printf("test3: no mill or vane\n");
         return;
       }
-      lof = u2_bn_mung(wir_r, mel, gen);
+      lof = u2_nk_mung(wir_r, mel, gen);
       if ( u2_none == lof ) {
         printf("test3: no lof\n");
       }
-      u2_err(wir_r, "type", u2_h(lof));
-      u2_err(wir_r, "tool", u2_t(lof));
+      else {
+        printf("test3: clean\n");
+        u2_bx_spot(wir_r, u2_nul); 
+
+        u2_err(wir_r, "type", u2_h(lof));
+        u2_err(wir_r, "tool", u2_t(lof));
+      }
 #else
       u2_noun dec = u2_bn_hook(wir_r, fod_f->pit, "dec");
 
@@ -292,8 +297,8 @@ ford_test3(struct ford_state* fod_f,
         }
         else u2_bx_spot(wir_r, u2_nul); 
       }
-    }
 #endif
+    }
   }
 }
 
