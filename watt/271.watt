@@ -586,6 +586,7 @@
 ::::
 ::
     peg
+  ^<  mine.[!=(->) %peg ~]
   =+  [a=*axis b=*axis]
   |=
   ^-  *axis
@@ -803,12 +804,184 @@
     rock  &@
     term  &@
     wall  (list tape)
+::::
+::
+    steg
+  =+  yob=@
+  |=
+  (~(fly club ~(dem golf yob)) 75)
+::::
+::
+    ball
+  |?
+    ^+(@ *rock)
+    [%duct p=*tape]
+    [%meld p=*(list ball)]
+    [%grip p=[p=*rock q=*rock] q=*(list ball)]
+  ==
+::::
+::
+    club
+  =+  pup=*ball
+  |*
+  ::::
+  ::      wit: width rammed
+      wit
+    ^-  @
+    ?-    pup
+        @           (met 3 pup)
+        [%duct *]   (lent p.pup)
+    ::
+        [%grip *]
+      %+  add
+        (add (met 3 p.p.pup) (met 3 q.p.pup))
+      %+  roll
+        q.pup
+      =+  [*ball @]
+      |=((add ?~(-<+ 0 1) (add -<+ wit(pup -<-))))
+    ::
+        [%meld *]   (roll p.pup =+([*ball @] |=((add -<+ wit(pup -<-)))))
+    == 
+  ::::
+  ::        ram: print wide
+      ram
+    ^-  *tape
+    ?-    pup 
+    ::
+        @           (rip 3 pup)
+        [%meld *]   (reel p.pup =+([*ball *tape] |=((weld ram(pup -<-) -<+))))
+        [%duct *]   p.pup 
+    ::
+        [%grip *]
+      %+  weld
+        (rip 3 p.p.pup)
+      |-  ^-  *tape
+      ?-  q.pup
+        ~       (rip 3 q.p.pup)
+        [* ~]   (weld ram(pup i.q.pup) (rip 3 q.p.pup))
+        ^       (weld ram(pup i.q.pup) `*tape`[' ' $(q.pup t.q.pup)])
+      ==
+    ==
+  ::::
+  ::        fly: print tall
+      fly
+    =+  bor=@
+    |=
+    ^-  *wall
+    =+  col=@
+    =>  |*
+        ::::
+        ::        ind: indent tape
+            ind
+          =+  tep=*tape
+          |=
+          ^-  *tape
+          ?~  col
+            tep
+          $(col (dec col), tep [' ' tep])
+        ==
+    ::::
+    =+  lux=*wall
+    |-  ^-  *wall
+    ?.  ?&(?=([%grip *] pup) (gte (add col wit) bor))
+      [(ind ram) lux]
+    :-  (ind (rip 3 p.p.pup))
+    |-  ^-  *wall
+    ?~  q.pup
+      [(ind (rip 3 q.p.pup)) lux]
+    %=  $$
+      pup   i.q.pup
+      lux   $(q.pup t.q.pup)
+      col   ?:((gte col (mul 2 (div bor 3))) 0 (add 2 col))
+    ==
+  ::
+  ::::
+  ==
+::::
+::
+    golf
+  =+  nut=*
+  |%
+  ::::
+  ::
+      dem
+    (num 10 =+(@ |=((add '0' -<))))
+  ::::
+  ::
+      gut
+    |-  ^-  *ball
+    ?-  nut
+        @   unt(nut nut)
+        ^
+      :+  %grip
+        ['[' ']']
+      |-  ^-  *(list ball)
+      ?-  nut
+        [* @]   [$$(nut -.nut) $$(nut +.nut) ~]
+        [* ^]   [$$(nut -.nut) $(nut +.nut)]
+      ==
+    ==
+  ::::
+  ::
+      ham
+    (num 16 =+(@ |=(?:((lth 10 -<) (add '0' -<) (add 'a' -<)))))
+  ::::
+  ::
+      num
+    =>  ^:(@ nut)
+    =+  [zel=@ hoz==+(@ |=(@))]
+    |:
+    ^-  [%duct p=*tape]
+    :-  %duct
+    ?:  .=(0 nut)
+      [(hoz 0) ~]
+    =+  biq=`*tape`~
+    |-  ^-  *tape
+    ?:  .=(0 nut)
+      biq
+    $(nut (div nut zel), biq [(hoz (mod nut zel)) biq])
+  ::::
+  ::
+      tis
+    =>  ^:(*tape nut)
+    [%duct p=nut]
+  ::::
+  ::
+      unt
+    =>  ^:(@ nut)
+    ^-  [%duct p=*tape]
+    ?:  ?&  (gte (met 3 nut) 2)
+            |-
+            ?:  .=(0 nut)
+              &
+            =+  vis=(end 3 1 nut)
+            =+  gor=(rsh 3 1 nut)
+            ?&(?|(.=('-' vis) ?&((gte vis 'a') (lte vis 'z'))) $(nut gor))
+        ==
+      =<([- ['%' +]] vam)
+    ?:  (lte (met 3 nut) 2)
+      dem
+    ham
+  ::::
+  ::
+      vam
+    =>  ^:(@ nut)
+    ^-  [%duct p=*tape]
+    :-  %duct
+    |-  ^-  *tape
+    ?:  .=(0 nut)
+      ~
+    [(end 3 1 nut) $(nut (rsh 3 1 nut))]
+  ::
+  ::::
+  ==
 ::
 ::::
   ::  Tier 6, Watt in Watt
 ::::
 ::
     comb
+  ^<  mine.[!=(->) %comb ~]
   =+  [mal=*tool buz=*tool]
   |=
   ^>  bean.[%comb]
@@ -974,8 +1147,8 @@
   ?~  pac
     [0 axe]
   =+  zet=(skim ^@(pac) =+([p=*axis q=*tool] |=([.=(1 p)])))
-  =+  tum=(skim ^@(pac) =+([p=*axis q=*tool] |=([.=(2 (cap p))])))
-  =+  gam=(skim ^@(pac) =+([p=*axis q=*tool] |=([.=(3 (cap p))])))
+  =+  tum=(skim ^@(pac) =+([p=*axis q=*tool] |=([?&(!.=(1 p) .=(2 (cap p)))])))
+  =+  gam=(skim ^@(pac) =+([p=*axis q=*tool] |=([?&(!.=(1 p) .=(3 (cap p)))])))
   ?~  zet
     %+  cons
       %=  $
@@ -1505,6 +1678,7 @@
     ^<  mine.[!=(->) %find ~]
     =+  cog=*term
     |=
+    ^>  bean.%find
     %-  need
     =+  gil=*(pool type)
     |-
@@ -1526,7 +1700,7 @@
         ?~  taf
           ~
         [~ (peg 2 p.u.taf) q.u.taf r.u.taf]
-      [~ 1 zem clay]
+      [~ 1 [~ (peg 3 p.u.zem) q.u.zem] clay]
     ::
         [%face *]
       ?: .=(cog p.sut)
@@ -1669,6 +1843,7 @@
     ^<  mine.[!=(->) %mesh ~]
     =+  [axe=*axis mun=*type har=*(list &[p=*gene q=*gene])]
     |=
+    ^>  bean.%mesh
     =+  luf=*(list &[p=*axis q=*tool])
     |-
     ^-  [p=*type q=*tool]
@@ -1685,6 +1860,7 @@
     ^<  mine.[!=(->) %mill ~]
     =+  [gen=*gene]
     |=
+    ^>  bean.%mill
     ^-  [p=*type q=*tool]
     ?-    -.gen
     ::
@@ -1795,7 +1971,7 @@
       ?~  q.lar
         fup
       :-  [%hold clay(sut p.fup) q.u.q.lar] 
-      [9 p.lar q.fup]
+      [9 p.u.q.lar q.fup]
     ::
         %skbn                                                           ::  ?=
       ^-  [p=*type q=*tool]
@@ -1824,6 +2000,7 @@
     ^<  mine.[!=(->) %nest ~]
     =+  bon=*type
     |=
+    ^>  bean.%nest
     ^-  ?
     =+  gil=*(pool &[p=*type q=*type])
     =<  dext
@@ -1898,7 +2075,11 @@
       ::
           [%fork *]   ?&(dext(bon p.bon) dext(bon q.bon))
       ::
-          [%hold *]   dext(bon (play(sut p.bon) q.bon))
+          [%hold *]
+        ?|
+          (~(has in gil) [sut bon])
+          dext(gil (~(put in gil) [sut bon]), bon (play(sut p.bon) q.bon))
+        ==
       ==
     ::
     ::::
@@ -2051,6 +2232,7 @@
     ^<  mine.[!=(->) %seek ~]
     =+  rep=*rope
     |=
+    ^>  bean.%seek
     ^-  *plan
     ?~  rep
       [1 ~ sut]

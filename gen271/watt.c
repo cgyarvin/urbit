@@ -51,13 +51,17 @@
     extern u2_ho_jet j2_mbj(Pit, met)[];
     extern u2_ho_jet j2_mbj(Pit, mix)[];
     extern u2_ho_jet j2_mbj(Pit, mug)[];
+    extern u2_ho_jet j2_mbj(Pit, peg)[];
     extern u2_ho_jet j2_mbj(Pit, rap)[];
     extern u2_ho_jet j2_mbj(Pit, rip)[];
     extern u2_ho_jet j2_mbj(Pit, rsh)[];
 
   /* tier 6
   */
+    extern u2_ho_jet j2_mbj(Pit, comb)[];
     extern u2_ho_jet j2_mbj(Pit, ream)[];
+    
+    extern u2_ho_driver j2_mbd(Pit, vane)[];
 
 /* structures
 */
@@ -107,13 +111,17 @@
       { j2_sb(Pit, met), j2_mbj(Pit, met), 0, 0, u2_none },
       { j2_sb(Pit, mix), j2_mbj(Pit, mix), 0, 0, u2_none },
       { j2_sb(Pit, mug), j2_mbj(Pit, mug), 0, 0, u2_none },
+      { j2_sb(Pit, peg), j2_mbj(Pit, peg), 0, 0, u2_none },
       { j2_sb(Pit, rap), j2_mbj(Pit, rap), 0, 0, u2_none },
       { j2_sb(Pit, rip), j2_mbj(Pit, rip), 0, 0, u2_none },
       { j2_sb(Pit, rsh), j2_mbj(Pit, rsh), 0, 0, u2_none },
 
     /* tier 6
     */
-      { j2_sb(Pit, ream), j2_mbj(Pit, ream), 0, 0, u2_none }
+      { j2_sb(Pit, comb), j2_mbj(Pit, comb), 0, 0, u2_none },
+      { j2_sb(Pit, ream), j2_mbj(Pit, ream), 0, 0, u2_none },
+
+//      { j2_sb(Pit, vane), 0, j2_mbd(Pit, vane), 0, u2_none } 
   };
 
   u2_ho_driver

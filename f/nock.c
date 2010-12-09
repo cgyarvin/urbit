@@ -329,6 +329,8 @@ _nock_warm(u2_wire wir_r,
               return u2_none;
             }
             if ( u2_no == u2_rl_senior(wir_r, dom) ) {
+              u2_rl_gain(wir_r, dom);
+
               LoomSink; u2_bx_sink(wir_r);
               pro = _nock_warm(wir_r, sep, dom);
               u2_bx_rise(wir_r); LoomRise;

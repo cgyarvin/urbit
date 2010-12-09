@@ -736,7 +736,7 @@ _watt_locate(u2_ray  wir_r,
 #if 0
   return gene;
 #else
-#if 0
+#if 1
   return u2_bt
     (wir_r, 
      c3__htrd,

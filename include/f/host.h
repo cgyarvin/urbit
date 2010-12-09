@@ -10,6 +10,7 @@
 #     define _j2_xm(x)        j2_##x##_m
 #     define _j2_xmc(x)       j2_##x##_mc
 #     define _j2_xmj(x)       j2_##x##_jets
+#     define _j2_xmd(x)       j2_##x##_drivers
 #     define _j2_xp(p, x)     j2_##x##_p_##p
 #     define _j2_xpc(p, x)    j2_##x##_pc_##p
 #     define _j2_xss(x)       #x
@@ -18,6 +19,7 @@
 #     define _j2_qd(x)        _j2_xd(x)
 #     define _j2_qm(x)        _j2_xm(x)
 #     define _j2_qmc(x)       _j2_xmc(x)
+#     define _j2_qmd(x)       _j2_xmd(x)
 #     define _j2_qmj(x)       _j2_xmj(x)
 #     define _j2_qp(p, x)     _j2_xp(p, x)
 #     define _j2_qpc(p, x)    _j2_xpc(p, x)
@@ -57,6 +59,12 @@
 #     define j2_mcj(a, b, c)            _j2_qmj(_j2_abc(a, b, c))
 #     define j2_mdj(a, b, c, d)         _j2_qmj(_j2_abcd(a, b, c, d))
 #     define j2_mej(a, b, c, d, e)      _j2_qmj(_j2_abcde(a, b, c, d, e))
+
+#     define j2_mad(a)                  _j2_qmd(_j2_a(a))
+#     define j2_mbd(a, b)               _j2_qmd(_j2_ab(a, b))
+#     define j2_mcd(a, b, c)            _j2_qmd(_j2_abc(a, b, c))
+#     define j2_mdd(a, b, c, d)         _j2_qmd(_j2_abcd(a, b, c, d))
+#     define j2_med(a, b, c, d, e)      _j2_qmd(_j2_abcde(a, b, c, d, e))
 
 #     define j2_pa(a, p)                _j2_qp(p, _j2_a(a))
 #     define j2_pb(a, b, p)             _j2_qp(p, _j2_ab(a, b))

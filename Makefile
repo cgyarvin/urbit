@@ -157,12 +157,14 @@ J271_3_OFILES=\
        gen271/3/met.o \
        gen271/3/mix.o \
        gen271/3/mug.o \
+       gen271/3/peg.o \
        gen271/3/rap.o \
        gen271/3/rip.o \
        gen271/3/rsh.o 
 
 J271_6_OFILES=\
-       gen271/6/ream.o \
+       gen271/6/comb.o \
+       gen271/6/ream.o
 
 J271_OFILES=\
        $(J271_1_OFILES) \
