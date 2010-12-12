@@ -6,6 +6,30 @@
   **/
 #   define  Pit   watt_271
 
+  /** Cosmetic noun types.
+  **/
+#if 0
+  // get them from funj.h for now
+  //
+    typedef u2_noun u2_bank;
+    typedef u2_noun u2_cord;
+    typedef u2_noun u2_door;
+    typedef u2_noun u2_gene;
+    typedef u2_noun u2_home;
+    typedef u2_noun u2_init;
+    typedef u2_noun u2_menu;
+    typedef u2_noun u2_plan;
+    typedef u2_noun u2_plot;
+    typedef u2_noun u2_rack;
+    typedef u2_noun u2_rung;
+    typedef u2_noun u2_rope;
+    typedef u2_noun u2_spec;
+    typedef u2_noun u2_tack;
+    typedef u2_noun u2_type;
+    typedef u2_noun u2_prep;
+    typedef u2_noun u2_dump;
+#endif
+
   /** Direct C interfaces.
   **/
     /** Tier 1.
@@ -145,6 +169,11 @@
                        u2_atom d);                                //  retain
 
       u2_weak                                                     //  transfer
+      j2_mbc(Pit, dor)(u2_wire wir_r, 
+                       u2_atom a,                                 //  retain
+                       u2_atom b);                                //  retain
+
+      u2_weak                                                     //  transfer
       j2_mbc(Pit, dis)(u2_wire wir_r, 
                        u2_atom a,                                 //  retain
                        u2_atom b);                                //  retain
@@ -155,6 +184,11 @@
                        u2_atom a,                                 //  retain
                        u2_atom b,                                 //  retain
                        u2_atom c);                                //  retain
+
+      u2_weak                                                     //  transfer
+      j2_mbc(Pit, gor)(u2_wire wir_r, 
+                       u2_atom a,                                 //  retain
+                       u2_atom b);                                //  retain
 
       u2_weak                                                     //  transfer
       j2_mbc(Pit, lsh)(u2_wire wir_r, 
@@ -192,3 +226,8 @@
                        u2_atom a,                                 //  retain
                        u2_atom b,                                 //  retain
                        u2_atom c);                                //  retain
+
+      u2_weak                                                     //  transfer
+      j2_mbc(Pit, vor)(u2_wire wir_r, 
+                       u2_atom a,                                 //  retain
+                       u2_atom b);                                //  retain

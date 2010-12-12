@@ -148,29 +148,42 @@ J271_2_OFILES=\
        gen271/2/weld.o
 
 J271_3_OFILES=\
+       gen271/3/cap.o \
        gen271/3/cat.o \
        gen271/3/con.o \
        gen271/3/cut.o \
+       gen271/3/dor.o \
        gen271/3/dis.o \
        gen271/3/end.o \
+       gen271/3/gor.o \
        gen271/3/lsh.o \
+       gen271/3/mas.o \
        gen271/3/met.o \
        gen271/3/mix.o \
        gen271/3/mug.o \
        gen271/3/peg.o \
        gen271/3/rap.o \
        gen271/3/rip.o \
-       gen271/3/rsh.o 
+       gen271/3/rsh.o \
+       gen271/3/vor.o
+
+J271_4_OFILES=\
+       gen271/4/in.o \
+       gen271/4/has.o \
+       gen271/4/put.o
 
 J271_6_OFILES=\
        gen271/6/comb.o \
-       gen271/6/ream.o
+       gen271/6/nest.o \
+       gen271/6/ream.o \
+       gen271/6/vane.o
 
 J271_OFILES=\
        $(J271_1_OFILES) \
        $(J271_2_OFILES) \
        $(J271_3_OFILES) \
-       $(J271_6_OFILES) \
+       $(J271_4_OFILES) \
+       gen271/6/ream.o \
        gen271/watt.o
 
 OFILES=\
