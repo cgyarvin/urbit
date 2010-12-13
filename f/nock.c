@@ -859,40 +859,6 @@ _nock_soft(u2_wire wir_r,
   }
 }
 
-/* _nock_safe():
-**
-**   Confirm that `(nock bus fol)` does not conflict with `pro`.
-*/
-static u2_flag
-_nock_safe(u2_wire wir_r,
-           u2_noun bus,                                           //  retain
-           u2_noun fol,                                           //  retain
-           u2_noun pro)                                           //  retain
-{
-  u2_weak vet;
-
-  if ( u2_no == u2_rl_leap(wir_r, u2_rail_hip_m(wir_r)) ) {
-    return u2_no;
-  }
-  else {
-    u2_rl_gain(wir_r, bus);
-
-    if ( u2_none == (vet = _nock_soft(wir_r, bus, fol)) ) {
-      return u2_no;
-    }
-    else {
-      u2_flag sen = u2_sing(vet, pro);
-
-      if ( u2_no == sen ) {
-        u2_err(wir_r, "vet", vet);
-        u2_err(wir_r, "pro", pro);
-      }
-      u2_rl_fall(wir_r);
-      return sen;
-    }
-  }
-}
-
 /* _nock_jet():
 **
 **   Jet-propel `(nock bus fol)`, or return u2_none.
@@ -907,7 +873,7 @@ _nock_jet(u2_wire wir_r,
   if ( u2_none == xip ) {
     return u2_none;
   } else {
-    u2_noun pro;
+    u2_noun pro, vet;
     u2_flag saf;
 
     if ( u2_none == (pro = u2_ho_fire(wir_r, xip, bus, fol, &saf)) ) {
@@ -918,14 +884,28 @@ _nock_jet(u2_wire wir_r,
 
       if ( u2_yes == saf ) {
         return pro;
-      } else {
-        if ( u2_yes == _nock_safe(wir_r, bus, fol, pro) ) {
-          u2_ho_fine(wir_r, xip, bus);
-          return pro;
+      }
+      else {
+        if ( u2_no == u2_rl_leap(wir_r, u2_rail_hip_m(wir_r)) ) {
+          u2_rl_lose(wir_r, pro);
+          u2_ho_stet(wir_r, xip, bus, fol, u2_nul, u2_nul);
+          return u2_none;
         }
         else {
-          u2_ho_dive(wir_r, xip, bus);
-          return u2_none;
+          u2_rl_gain(wir_r, bus);
+          if ( u2_none == (vet = _nock_soft(wir_r, bus, fol)) ) {
+            u2_rl_fall(wir_r);
+            u2_ho_stet(wir_r, xip, bus, fol, u2_nul, u2_nul);
+            u2_rl_lose(wir_r, pro);
+
+            return u2_none;
+          }
+          else {
+            u2_rl_fall(wir_r);
+            u2_ho_stet(wir_r, xip, bus, fol, pro, vet);
+
+            return pro;
+          }
         }
       }
     }

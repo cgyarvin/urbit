@@ -14,6 +14,7 @@
   u2_ho_driver 
   j2_mbd(Pit, vane)[] = {
     { j2_sc(Pit, vane, nest), j2_mcj(Pit, vane, nest), 0, 0, u2_none },
+    { }
   };
 
   u2_ho_driver

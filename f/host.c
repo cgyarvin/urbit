@@ -714,23 +714,83 @@ _ho_discover(u2_wire wir_r,
 **   Attempt host nock driver on `xip`, `cor`, `fol`.
 **   For any failure to compute, return `u2_none`.
 **
-**   If `*saf` is u2_no, result is unsafe and needs testing.
+**   If `*saf` is u2_no, test safety, then call `u2_ho_stet()`.
 */
 u2_weak
 u2_ho_fire(u2_ray   wir_r,
-           u2_chip  xip,
-           u2_noun  cor,
-           u2_noun  fol,
-           u2_flag* saf)
+           u2_chip  xip,                                          //  retain
+           u2_noun  cor,                                          //  retain
+           u2_noun  fol,                                          //  retain
+           u2_flag  *saf)
 {
-  u2_ho_jet *jet_j;
+  u2_ho_jet* jet_j;
 
   if ( 0 == (jet_j = _ho_discover(wir_r, xip, fol, cor)) ) {
     return u2_none;
   }
   else {
-    *saf = jet_j->ace;
+    if ( jet_j->zoc_w ) {
+      return u2_none;
+    }
+    else {
+      u2_flag ace = jet_j->ace;
 
-    return _ho_execute(wir_r, jet_j, cor);
+      if ( (u2_yes == ace) || (jet_j->zic_w != 0) ) {
+        *saf = u2_yes;
+        return _ho_execute(wir_r, jet_j, cor);
+      }
+      else {
+        u2_noun pro;
+
+        /* Increment fast counter during jet execution.
+        */
+        jet_j->zic_w++;
+        pro = _ho_execute(wir_r, jet_j, cor);
+        jet_j->zic_w--;
+
+        /* Increment slow counter in anticipation of test.
+        */
+        jet_j->zoc_w++;
+
+        *saf = u2_no;
+        return pro;
+      }
+    }
+  }
+}
+
+/* u2_ho_stet():
+**
+**   Report result of jet test.  `pro` is fast; `vet` is slow.
+*/
+void
+u2_ho_stet(u2_wire wir_r,
+           u2_noun xip,                                           //  retain
+           u2_noun cor,                                           //  retain
+           u2_noun fol,                                           //  retain
+           u2_noun pro,                                           //  retain
+           u2_noun vet)                                           //  retain
+{
+  u2_ho_jet* jet_j;
+
+  if ( 0 == (jet_j = _ho_discover(wir_r, xip, fol, cor)) ) {
+    // Caller is doing something really fscked up here.
+    //
+    c3_assert(0); 
+  }
+  else {
+    if ( u2_yes == u2_sing(pro, vet) ) {
+      jet_j->zoc_w--;
+    } 
+    else {
+      c3_c *cos_c = _ho_cstring(xip);
+
+      fprintf(stderr, "dive: %s:%x\n", cos_c, u2_mug(cor));
+      u2_err(wir_r, "wrong", pro);
+      u2_err(wir_r, "right", vet);
+      free(cos_c);
+
+      c3_assert(0);
+    }
   }
 }

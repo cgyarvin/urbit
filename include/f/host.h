@@ -104,6 +104,14 @@
         /* Tool: Nock formula.
         */
         u2_tool fol;
+
+        /* Fast fork counter/lock.  Incremented on fast fork of test.
+        */
+        c3_w    zic_w;
+
+        /* Slow fork counter/lock.  Incremented on slow fork of test.
+        */
+        c3_w    zoc_w;
       } u2_ho_jet;
 
     /* u2_ho_driver: battery driver.
@@ -193,6 +201,18 @@
 
 #     define u2_ho_warn_here() u2_ho_warn(__FILE__, __LINE__)
 
+    /* u2_ho_stet():
+    **
+    **   Report result of jet test.  `pro` is fast; `vet` is slow.
+    */
+      void
+      u2_ho_stet(u2_wire wir_r,
+                 u2_noun xip,                                       //  retain
+                 u2_noun cor,                                       //  retain
+                 u2_noun fol,                                       //  retain
+                 u2_noun pro,                                       //  retain
+                 u2_noun vet);                                      //  retain
+
     /* u2_ho_dive():
     **
     **   Report compatibility failure in `xip`, with subject `bus`.
@@ -216,13 +236,13 @@
     **   Attempt host nock driver on `xip`, `cor`, `fol`.
     **   For any failure to compute, return `u2_none`.
     **
-    **   If `*saf` is u2_no, result is unsafe and needs testing.
+    **   If `*saf` is u2_no, test safety, then call `u2_ho_stet()`.
     */
       u2_weak
       u2_ho_fire(u2_ray   wir_r,
-                 u2_chip  xip,
-                 u2_noun  cor,
-                 u2_noun  fol,
+                 u2_chip  xip,                                    //  retain
+                 u2_noun  cor,                                    //  retain
+                 u2_noun  fol,                                    //  retain
                  u2_flag* saf);
 
     /* u2_ho_kick():
