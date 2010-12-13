@@ -86,7 +86,7 @@ gene
 wide
   : wide_a
   | wide_rope si_dig wide
-    { $$ = _ytrel(c3__bndr, $1, $3); }
+    { $$ = _ytrel(c3__bndv, $1, $3); }
   ;
 
 wide_a
@@ -147,7 +147,7 @@ wide_c
       ; 
 
     wide_pick
-      : si_der g bank_wide g si_red
+      : si_dev g bank_wide g si_ved
         { $$ = _ycell(c3__brsk, $3); } 
       ;
 
@@ -216,8 +216,8 @@ wide_c
   **/
     wide_norm: di_askdig body_c_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_askdot body_c_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_askder body_b_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_askred body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_askdev body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_askved body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_askamp body_d_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_askbar body_d_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_asksig body_c_wide    { $$ = _ycell($1, $2); }
@@ -228,8 +228,8 @@ wide_c
 
     wide_norm: di_benpod body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_bennub body_b_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_benred body_b_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_bender body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_benved body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_bendev body_b_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_barnub body_o_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_barben body_o_wide    { $$ = _ycell($1, $2); }
@@ -250,8 +250,8 @@ wide_c
     wide_norm: di_dotask body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_dotras body_b_wide    { $$ = _ycell($1, $2); }
 
-    wide_norm: di_hatred body_r_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_hatder body_r_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_hatved body_r_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_hatdev body_r_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatnub body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatbuc body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatpod body_b_wide    { $$ = _ycell($1, $2); }
@@ -346,8 +346,8 @@ tall
   **/
     tall_norm: di_askdig w body_c_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_askdot w body_c_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_askder w body_b_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_askred w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_askdev w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_askved w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_askamp w body_d_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_askbar w body_d_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_asksig w body_c_tall    { $$ = _ycell($1, $3); }
@@ -358,8 +358,8 @@ tall
 
     tall_norm: di_benpod w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_bennub w body_b_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_benred w body_b_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_bender w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_benved w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_bendev w body_b_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_barnub w body_o_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_barben w body_o_tall    { $$ = _ycell($1, $3); }
@@ -380,8 +380,8 @@ tall
     tall_norm: di_dotask w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_dotras w body_b_tall    { $$ = _ycell($1, $3); }
 
-    tall_norm: di_hatred w body_r_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_hatder w body_r_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_hatved w body_r_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_hatdev w body_r_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatnub w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatbuc w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatpod w body_b_tall    { $$ = _ycell($1, $3); }
@@ -486,18 +486,18 @@ tall
           | si_pod axis_galu    { $$ = u2_fj_op_peg(yqw_r, _3, $2); }
           ;
         axis_galu
-          : si_der              { $$ = _2; }
-          | si_red              { $$ = _3; }
-          | si_der axis_beto    { $$ = u2_fj_op_peg(yqw_r, _2, $2); }
-          | si_red axis_beto    { $$ = u2_fj_op_peg(yqw_r, _3, $2); }
+          : si_dev              { $$ = _2; }
+          | si_ved              { $$ = _3; }
+          | si_dev axis_beto    { $$ = u2_fj_op_peg(yqw_r, _2, $2); }
+          | si_ved axis_beto    { $$ = u2_fj_op_peg(yqw_r, _3, $2); }
           ;
 
   /** Digraphs (with stem)
   **/
     di_askdig: si_ask si_dig  { $$ = c3__skdg; }
     di_askdot: si_ask si_dot  { $$ = c3__skdt; }
-    di_askred: si_ask si_red  { $$ = c3__skrd; }
-    di_askder: si_ask si_der  { $$ = c3__skdr; }
+    di_askved: si_ask si_ved  { $$ = c3__skvd; }
+    di_askdev: si_ask si_dev  { $$ = c3__skdv; }
     di_askamp: si_ask si_amp  { $$ = c3__skmp; }
     di_askbar: si_ask si_bar  { $$ = c3__skbr; }
     di_asksig: si_ask si_sig  { $$ = c3__sksg; }
@@ -514,8 +514,8 @@ tall
     di_barask: si_bar si_ask  { $$ = c3__brsk; }
     di_barsig: si_bar si_sig  { $$ = c3__brsg; }
 
-    di_bender: si_ben si_der  { $$ = c3__bndr; }
-    di_benred: si_ben si_red  { $$ = c3__bnrd; }
+    di_bendev: si_ben si_dev  { $$ = c3__bndv; }
+    di_benved: si_ben si_ved  { $$ = c3__bnvd; }
     di_benpod: si_ben si_pod  { $$ = c3__bnpd; }
     di_bennub: si_ben si_nub  { $$ = c3__bnnb; }
  
@@ -530,8 +530,8 @@ tall
     di_dotask: si_dot si_ask  { $$ = c3__dtsk; }
     di_dotras: si_dot si_ras  { $$ = c3__dtrs; }
     
-    di_hatred: si_hat si_red  { $$ = c3__htrd; }
-    di_hatder: si_hat si_der  { $$ = c3__htdr; }
+    di_hatved: si_hat si_ved  { $$ = c3__htvd; }
+    di_hatdev: si_hat si_dev  { $$ = c3__htdv; }
     di_hatnub: si_hat si_nub  { $$ = c3__htnb; }
     di_hatbuc: si_hat si_buc  { $$ = c3__htbc; }
     di_hatdig: si_hat si_dig  { $$ = c3__htpd; }
@@ -572,7 +572,7 @@ tall
     /* si_com: ',' */
     si_dax: '#'
     si_dig: ':'
-    si_der: '<'
+    si_dev: '<'
     si_dot: '.'
     si_dus: '}'
     si_hat: '^'
@@ -587,13 +587,13 @@ tall
     si_pel: ')'
     si_pod: '+'
     si_ras: '*'
-    si_red: '>'
     si_sac: '\\'
     si_sol: '/'
     si_sud: '{'
     si_sig: '~'
     si_tic: '`'
-    /* si_tep: '"' */
+    /* si_toq: '"' */
+    si_ved: '>'
 
   /** Basic tokens.
   **/
@@ -727,7 +727,7 @@ _watt_locate(u2_ray  wir_r,
 #else
   return u2_bt
     (wir_r, 
-     c3__htrd,
+     c3__htvd,
      u2_bq
       (wir_r,
        c3__spot,

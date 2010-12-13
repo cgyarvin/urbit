@@ -7,10 +7,10 @@ Gene - AST
   |?
     [%dtsg p=*]                                 ::  .~  dotsig
   ::
-    [%bndr p=*gene q=*gene]                     ::  =<  bender
+    [%bndv p=*gene q=*gene]                     ::  =<  bendev
     [%bnnb p=*gene q=*gene]                     ::  =-  bennub
     [%bnpd p=*gene q=*gene]                     ::  =+  benpod
-    [%bnrd p=*gene q=*gene]                     ::  =>  benred
+    [%bnrd p=*gene q=*gene]                     ::  =>  benved
   ::
     [%brbn p=*prop q=*gene]                     ::  |=  barben
     [%brdg p=*prop q=*gene]                     ::  |:  bardig
@@ -69,12 +69,12 @@ Gene - AST
     [%skbn p=*gene q=*gene]                     ::  ?=  askben
     [%skbr p=*bank]                             ::  ?|  askbar
     [%skdg p=*gene q=*gene r=*gene]             ::  ?:  askdig
-    [%skdr p=*gene q=*gene]                     ::  ?<  askder
+    [%skdv p=*gene q=*gene]                     ::  ?<  askdev
     [%skdt p=*gene q=*gene r=*gene]             ::  ?.  askdot
     [%skhp p=*gene]                             ::  ?!  askhop
     [%skmp p=*bank]                             ::  ?&  askamp
     [%sknb p=*gene q=*rack]                     ::  ?-  asknub
-    [%skrd p=*gene q=*gene]                     ::  ?>  askred
+    [%skrd p=*gene q=*gene]                     ::  ?>  askved
     [%skrs p=*gene q=*bank]                     ::  ?*  askras
     [%sksg p=*gene q=*gene r=*gene]             ::  ?~  asksig
   ==
@@ -148,16 +148,16 @@ Axes
 
 Signs (ven = repeat)
 --
-  amp   &       dig   :       nub   -     tic   `
-  ask   ?       dot   .       pat   @     toq   "
+  amp   &       dig   :       nub   -     toq   "
+  ask   ?       dot   .       pat   @     ved   >
   bar   |       dus   }       pel   )
   ben   =       hat   ^       pod   +
   bot   '       hop   !       ras   *
-  buc   $       lep   (       red   >
-  cab   _       lom   ;       sac   \
-  com   ,       mit   %       sig   ~
-  dax   #       mon   ]       sol   /
-  der   <       nom   [       sud   {
+  buc   $       lep   (       sac   \
+  cab   _       lom   ;       sig   ~
+  com   ,       mit   %       sol   /
+  dax   #       mon   ]       sud   {
+  dev   <       nom   [       tic   `
 
   ace  == " "
   lit  == "\n"
