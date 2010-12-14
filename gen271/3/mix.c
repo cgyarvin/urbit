@@ -56,6 +56,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pit, mix)[] = {
-    { ".3", j2_mb(Pit, mix), u2_yes, u2_none, u2_none },
+    { ".3", c3__lite, j2_mb(Pit, mix), u2_yes, u2_none, u2_none },
     { }
   };

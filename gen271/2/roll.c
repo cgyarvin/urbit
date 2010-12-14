@@ -51,6 +51,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pit, roll)[] = {
-    { ".3", j2_mb(Pit, roll), u2_no, u2_none, u2_none },
+    { ".3", c3__lite, j2_mb(Pit, roll), u2_no, u2_none, u2_none },
     { }
   };

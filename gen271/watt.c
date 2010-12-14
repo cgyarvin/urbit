@@ -133,13 +133,12 @@
     /* tier 4
     */
       { j2_sb(Pit, in), 0, j2_mbd(Pit, in), 0, u2_none },
-      { j2_sb(Pit, ream), j2_mbj(Pit, ream), 0, 0, u2_none },
-#if 0
+
     /* tier 6
     */
       { j2_sb(Pit, comb), j2_mbj(Pit, comb), 0, 0, u2_none },
+      { j2_sb(Pit, ream), j2_mbj(Pit, ream), 0, 0, u2_none },
       { j2_sb(Pit, vane), 0, j2_mbd(Pit, vane), 0, u2_none } 
-#endif
   };
 
   u2_ho_driver

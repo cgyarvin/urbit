@@ -16,13 +16,11 @@
 
     /* External drivers.
     */
-      extern u2_ho_driver j2_da(watt_273);
       extern u2_ho_driver j2_da(watt_271);
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       static u2_ho_driver *u2_HostDriverBase[] = {
-        &j2_da(watt_273), 
         &j2_da(watt_271), 
         0
       };
@@ -448,38 +446,6 @@ u2_ho_warn(const c3_c* fil_c,
   }
 }
 
-/* u2_ho_dive():
-**
-**   Report compatibility failure in `xip`, with subject `bus`.
-*/
-void
-u2_ho_dive(u2_wire wir_r,
-           u2_noun xip,       //  retain
-           u2_noun bus)
-{
-  c3_c *cos_c = _ho_cstring(xip);
-
-  fprintf(stderr, "dive: %s: %x\n", cos_c, u2_mug(bus));
-  free(cos_c);
-
-  c3_assert(0);
-}
-
-/* u2_ho_fine():
-**
-**   Report test execution in `xip`, with subject `bus`.
-*/
-void
-u2_ho_fine(u2_wire wir_r,
-           u2_noun xip,
-           u2_noun bus)
-{
-  c3_c *cos_c = _ho_cstring(xip);
-
-  fprintf(stderr, "fine: %s: %x\n", cos_c, u2_mug(bus));
-  free(cos_c);
-}
-
 /* _ho_execute(): execute jet.
 */
 static u2_weak                    //  transfer
@@ -779,13 +745,18 @@ u2_ho_stet(u2_wire wir_r,
     c3_assert(0); 
   }
   else {
+    c3_c *cos_c = _ho_cstring(xip);
+
     if ( u2_yes == u2_sing(pro, vet) ) {
       jet_j->zoc_w--;
+
+      fprintf(stderr, "fine: %s:%x\n", cos_c, u2_mug(cor));
+      free(cos_c);
     } 
     else {
       c3_c *cos_c = _ho_cstring(xip);
 
-      fprintf(stderr, "dive: %s:%x\n", cos_c, u2_mug(cor));
+      fprintf(stderr, "fail: %s:%x\n", cos_c, u2_mug(cor));
       u2_err(wir_r, "wrong", pro);
       u2_err(wir_r, "right", vet);
       free(cos_c);

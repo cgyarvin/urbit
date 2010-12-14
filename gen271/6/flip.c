@@ -1,4 +1,4 @@
-/* j/6/comb.c
+/* j/6/flip.c
 **
 ** This file is in the public domain.
 */
@@ -8,9 +8,8 @@
 /* functions
 */
   u2_weak                                                         //  transfer
-  j2_mbc(Pit, comb)(u2_wire wir_r, 
-                    u2_weak mal,                                  //  retain
-                    u2_weak buz)                                  //  retain
+  j2_mbc(Pit, flip)(u2_wire wir_r, 
+                    u2_weak hel)                                  //  retain
   {
     if ( (u2_none == mal) || (u2_none == buz) ) {
       return u2_none;
@@ -56,22 +55,22 @@
     }
   }
   u2_weak                                                         //  transfer
-  j2_mb(Pit, comb)(u2_wire wir_r, 
+  j2_mb(Pit, flip)(u2_wire wir_r, 
                    u2_noun cor)                                   //  retain
   {
-    u2_noun mal, buz;
+    u2_noun hel;
 
-    if ( u2_no == u2_mean(cor, 8, &mal, 9, &buz, 0) ) {
+    if ( u2_none == (hel = u2_frag(4, cor)) ) {
       return u2_none;
     } else {
-      return j2_mbc(Pit, comb)(wir_r, mal, buz);
+      return j2_mbc(Pit, flip)(wir_r, hel);
     }
   }
 
 /* structures
 */
   u2_ho_jet 
-  j2_mbj(Pit, comb)[] = {
-    { ".3", c3__lite, j2_mb(Pit, comb), u2_no, u2_none, u2_none },
+  j2_mbj(Pit, flip)[] = {
+    { ".3", j2_mb(Pit, flip), u2_no, u2_none, u2_none },
     { }
   };

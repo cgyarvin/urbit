@@ -814,7 +814,7 @@ _scanner_init(struct _u2_scanner *scanner,
 */
   u2_ho_jet 
   j2_mbj(Pit, ream)[] = { 
-    { ".3", j2_mb(Pit, ream), u2_yes, u2_none, u2_none },
+    { ".3", c3__lite, j2_mb(Pit, ream), u2_yes, u2_none, u2_none },
     { }
   };
 

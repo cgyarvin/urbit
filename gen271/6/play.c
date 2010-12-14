@@ -1,4 +1,4 @@
-/* j/6/nest.c
+/* j/6/play.c
 **
 ** This file is in the public domain.
 */
@@ -10,12 +10,12 @@
   /* forward
   */
     static u2_flag
-    _nest_sint(u2_wire, u2_noun, u2_noun, u2_noun, u2_noun);
+    _play_sint(u2_wire, u2_noun, u2_noun, u2_noun, u2_noun);
   /*
   */
 
   static u2_flag
-  _nest_dext(u2_wire wir_r,
+  _play_dext(u2_wire wir_r,
              u2_noun van,
              u2_noun sut,
              u2_noun bon,
@@ -36,10 +36,10 @@
         } else if ( (u2_yes == u2_dust(bon)) && (c3__cube == u2_h(bon)) ) {
           return u2_stud(u2_t(bon));
         }
-        else return _nest_sint(wir_r, van, sut, bon, gil);
+        else return _play_sint(wir_r, van, sut, bon, gil);
       }
       case c3__blot: {
-        return _nest_sint(wir_r, van, sut, bon, gil);
+        return _play_sint(wir_r, van, sut, bon, gil);
       }
       case c3__blur: {
         return u2_yes;
@@ -53,10 +53,10 @@
           return u2_bl_bail(wir_r);
         } else {
           if ( u2_yes == u2_as_pq(bon, c3__cell, &p_bon, &q_bon) ) {
-            return u2_and(_nest_dext(wir_r, van, p_sut, p_bon, gil),
-                          _nest_dext(wir_r, van, q_sut, q_bon, gil));
+            return u2_and(_play_dext(wir_r, van, p_sut, p_bon, gil),
+                          _play_dext(wir_r, van, q_sut, q_bon, gil));
           }
-          else return _nest_sint(wir_r, van, sut, bon, gil);
+          else return _play_sint(wir_r, van, sut, bon, gil);
         }
       }
       case c3__core: {
@@ -69,10 +69,10 @@
                u2_and
                 (u2_sing(r_sut, r_bon),
                  u2_and
-                  (_nest_dext(wir_r, van, p_sut, p_bon, gil),
-                   _nest_dext(wir_r, van, q_sut, q_bon, gil))));
+                  (_play_dext(wir_r, van, p_sut, p_bon, gil),
+                   _play_dext(wir_r, van, q_sut, q_bon, gil))));
           }
-          else return _nest_sint(wir_r, van, sut, bon, gil);
+          else return _play_sint(wir_r, van, sut, bon, gil);
         }
       }
       case c3__cube: {
@@ -81,14 +81,14 @@
           if ( u2_yes == u2_as_p(bon, c3__cube, &p_bon) ) {
             return u2_sing(p_sut, p_bon);
           }
-          else return _nest_sint(wir_r, van, sut, bon, gil);
+          else return _play_sint(wir_r, van, sut, bon, gil);
         }
       }
       case c3__face: {
         if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
           return u2_bl_bail(wir_r);
         } else { 
-          return _nest_dext(wir_r, van, q_sut, bon, gil);
+          return _play_dext(wir_r, van, q_sut, bon, gil);
         }
       }
       case c3__fork: {
@@ -97,22 +97,22 @@
         }
         else {
           if ( u2_yes == u2_dust(bon) ) switch ( bon ) {
-            default: return _nest_sint(wir_r, van, sut, bon, gil);
+            default: return _play_sint(wir_r, van, sut, bon, gil);
 
             case c3__atom:
             case c3__blur:
               break;
           }
           else switch ( u2_h(bon) ) {
-            default: return _nest_sint(wir_r, van, sut, bon, gil);
+            default: return _play_sint(wir_r, van, sut, bon, gil);
             
             case c3__cell: 
             case c3__cube:
             case c3__core:
               break;
           }
-          return u2_or(_nest_dext(wir_r, van, p_sut, bon, gil),
-                       _nest_dext(wir_r, van, q_sut, bon, gil));
+          return u2_or(_play_dext(wir_r, van, p_sut, bon, gil),
+                       _play_dext(wir_r, van, q_sut, bon, gil));
         }
       } 
       case c3__hold: {
@@ -129,7 +129,7 @@
           } else {
             u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, gil, hud);
             u2_type fop = j2_mcc(Pit, vane, play)(wir_r, van, p_sut, q_sut);
-            u2_flag hiv = _nest_dext(wir_r, van, fop, bon, zoc);
+            u2_flag hiv = _play_dext(wir_r, van, fop, bon, zoc);
 
             u2_rl_lose(wir_r, hud);
             u2_rl_lose(wir_r, fop);
@@ -142,7 +142,7 @@
     }
   }
   static u2_flag
-  _nest_sint(u2_wire wir_r,
+  _play_sint(u2_wire wir_r,
              u2_noun van,
              u2_noun sut, 
              u2_noun bon,
@@ -171,7 +171,7 @@
             return u2_bl_bail(wir_r);
           } else {
             u2_noun fug = u2_bt(wir_r, c3__cell, p_bon, c3__blur);
-            u2_flag hiv = _nest_dext(wir_r, van, sut, fug, gil);
+            u2_flag hiv = _play_dext(wir_r, van, sut, fug, gil);
             
             u2_rl_lose(wir_r, fug);
             return hiv;
@@ -186,7 +186,7 @@
             u2_noun fug = u2_bt(wir_r, c3__cell, 
                                        u2_bc(wir_r, c3__cube, u2_h(p_bon)),
                                        u2_bc(wir_r, c3__cube, u2_t(p_bon)));
-            u2_flag hiv = _nest_dext(wir_r, van, sut, fug, gil);
+            u2_flag hiv = _play_dext(wir_r, van, sut, fug, gil);
  
             u2_rl_lose(wir_r, fug);
             return hiv;
@@ -196,13 +196,13 @@
           if ( u2_no == u2_as_trel(bon, 0, &p_bon, &q_bon) ) {
             return u2_bl_bail(wir_r);
           } else {
-            return _nest_dext(wir_r, van, sut, q_bon, gil);
+            return _play_dext(wir_r, van, sut, q_bon, gil);
           }
         }
         case c3__fork: {
           if ( (u2_yes == u2_mean(bon, 6, &p_bon, 7, &q_bon, 0)) ) {
-            return u2_and(_nest_dext(wir_r, van, sut, p_bon, gil),
-                          _nest_dext(wir_r, van, sut, q_bon, gil));
+            return u2_and(_play_dext(wir_r, van, sut, p_bon, gil),
+                          _play_dext(wir_r, van, sut, q_bon, gil));
           }
           else return u2_bl_bail(wir_r);
         } 
@@ -217,7 +217,7 @@
             } else {
               u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, gil, hud);
               u2_type gam = j2_mcc(Pit, vane, play)(wir_r, p_bon, q_bon);
-              u2_flag hiv = _nest_dext(wir_r, van, sut, gam, zoc);
+              u2_flag hiv = _play_dext(wir_r, van, sut, gam, zoc);
 
               u2_rl_lose(wir_r, hud);
               u2_rl_lose(wir_r, gam);
@@ -232,16 +232,16 @@
     }
   }
   
-  u2_weak                                                         //  transfer
-  j2_mcc(Pit, vane, nest)(u2_wire wir_r, 
+  u2_noun                                                         //  transfer
+  j2_mcc(Pit, vane, play)(u2_wire wir_r, 
                           u2_noun van,                            //  retain
                           u2_noun sut,                            //  retain
                           u2_noun bon)                            //  retain
   {
-    return _nest_dext(wir_r, van, sut, bon, u2_nul);
+    return u2_bl_bail(wir_r);
   }
   u2_weak                                                         //  transfer
-  j2_mc(Pit, vane, nest)(u2_wire wir_r, 
+  j2_mc(Pit, vane, play)(u2_wire wir_r, 
                          u2_noun cor)                             //  retain
   {
     u2_noun sut, bon, van;
@@ -251,14 +251,14 @@
     {
       return u2_none;
     } else {
-      return j2_mcc(Pit, vane, nest)(wir_r, van, sut, bon);
+      return j2_mcc(Pit, vane, play)(wir_r, van, sut, bon);
     }
   }
 
 /* structures
 */
   u2_ho_jet 
-  j2_mcj(Pit, vane, nest)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, vane, nest), u2_no, u2_none, u2_none },
+  j2_mcj(Pit, vane, play)[] = {
+    { ".3", j2_mc(Pit, vane, play), u2_no, u2_none, u2_none },
     { }
   };

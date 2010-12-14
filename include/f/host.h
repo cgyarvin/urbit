@@ -9,6 +9,7 @@
 #     define _j2_xd(x)        j2_##x##_d
 #     define _j2_xm(x)        j2_##x##_m
 #     define _j2_xmc(x)       j2_##x##_mc
+#     define _j2_xmy(x)       j2_##x##_my
 #     define _j2_xmj(x)       j2_##x##_jets
 #     define _j2_xmd(x)       j2_##x##_drivers
 #     define _j2_xp(p, x)     j2_##x##_p_##p
@@ -19,6 +20,7 @@
 #     define _j2_qd(x)        _j2_xd(x)
 #     define _j2_qm(x)        _j2_xm(x)
 #     define _j2_qmc(x)       _j2_xmc(x)
+#     define _j2_qmy(x)       _j2_xmy(x)
 #     define _j2_qmd(x)       _j2_xmd(x)
 #     define _j2_qmj(x)       _j2_xmj(x)
 #     define _j2_qp(p, x)     _j2_xp(p, x)
@@ -54,6 +56,12 @@
 #     define j2_mdc(a, b, c, d)         _j2_qmc(_j2_abcd(a, b, c, d))
 #     define j2_mec(a, b, c, d, e)      _j2_qmc(_j2_abcde(a, b, c, d, e))
 
+#     define j2_may(a)                  _j2_qmy(_j2_a(a))
+#     define j2_mby(a, b)               _j2_qmy(_j2_ab(a, b))
+#     define j2_mcy(a, b, c)            _j2_qmy(_j2_abc(a, b, c))
+#     define j2_mdy(a, b, c, d)         _j2_qmy(_j2_abcd(a, b, c, d))
+#     define j2_mey(a, b, c, d, e)      _j2_qmy(_j2_abcde(a, b, c, d, e))
+
 #     define j2_maj(a)                  _j2_qmj(_j2_a(a))
 #     define j2_mbj(a, b)               _j2_qmj(_j2_ab(a, b))
 #     define j2_mcj(a, b, c)            _j2_qmj(_j2_abc(a, b, c))
@@ -83,15 +91,22 @@
     /* u2_ho_jet: a C function, per formula.
     */
       typedef struct {
-        /* Function control string - defines formula in core.
+        /* Function control string - finds formula in core.
         **
         **    ".@" | "hook"
         */
         const c3_c* fcs_c;
 
+        /* Invocation model:
+        **
+        **    c3__lite
+        **    c3__hevy
+        */    
+        c3_m   vok_m;
+
         /* C function, on core `[[sam con] bat]`.
         */
-        u2_weak (*fun_f)(u2_ray wir_r, u2_noun cor);
+        u2_noun (*fun_f)(u2_ray wir_r, u2_noun cor);
 
         /* Stable iff true; test iff false.
         */

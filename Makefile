@@ -174,7 +174,6 @@ J271_4_OFILES=\
 
 J271_6_OFILES=\
        gen271/6/comb.o \
-       gen271/6/nest.o \
        gen271/6/ream.o \
        gen271/6/vane.o
 
@@ -183,14 +182,13 @@ J271_OFILES=\
        $(J271_2_OFILES) \
        $(J271_3_OFILES) \
        $(J271_4_OFILES) \
-       gen271/6/ream.o \
+       $(J271_6_OFILES) \
        gen271/watt.o
 
 OFILES=\
        $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
-       $(J273_OFILES) \
        $(J271_OFILES)
 
 $(BIN)/ford: $(OFILES)

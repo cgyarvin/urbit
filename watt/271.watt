@@ -1486,8 +1486,8 @@
   ^>  bean.[%rake]
   ^-  *rope
   ?-  gen
-    @             {gen}
-    [~ *]         {gen}
+    @             [gen ~]
+    [~ *]         [gen ~]
     [%mtbn * ~]   p.gen
     [%hpcb *]     $(gen q.gen)
     [%hpdx *]     $(gen p.gen)
