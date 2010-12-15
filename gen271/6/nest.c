@@ -128,7 +128,7 @@
             return u2_yes;
           } else {
             u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, gil, hud);
-            u2_type fop = j2_mcc(Pit, vane, play)(wir_r, van, p_sut, q_sut);
+            u2_type fop = j2_mcy(Pit, vane, play)(wir_r, van, p_sut, q_sut);
             u2_flag hiv = _nest_dext(wir_r, van, fop, bon, zoc);
 
             u2_rl_lose(wir_r, hud);
@@ -216,7 +216,7 @@
               return u2_yes;
             } else {
               u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, gil, hud);
-              u2_type gam = j2_mcc(Pit, vane, play)(wir_r, p_bon, q_bon);
+              u2_type gam = j2_mcy(Pit, vane, play)(wir_r, van, p_bon, q_bon);
               u2_flag hiv = _nest_dext(wir_r, van, sut, gam, zoc);
 
               u2_rl_lose(wir_r, hud);
@@ -232,15 +232,15 @@
     }
   }
   
-  u2_weak                                                         //  transfer
-  j2_mcc(Pit, vane, nest)(u2_wire wir_r, 
+  u2_flag                                                         //  transfer
+  j2_mcy(Pit, vane, nest)(u2_wire wir_r, 
                           u2_noun van,                            //  retain
                           u2_noun sut,                            //  retain
                           u2_noun bon)                            //  retain
   {
     return _nest_dext(wir_r, van, sut, bon, u2_nul);
   }
-  u2_weak                                                         //  transfer
+  u2_noun                                                         //  transfer
   j2_mc(Pit, vane, nest)(u2_wire wir_r, 
                          u2_noun cor)                             //  retain
   {
@@ -249,9 +249,9 @@
     if ( (u2_no == u2_mean(cor, 4, &bon, 5, &van, 0)) ||
          (u2_none == (sut = u2_frag(4, van))) )
     {
-      return u2_none;
+      return u2_bl_bail(wir_r);
     } else {
-      return j2_mcc(Pit, vane, nest)(wir_r, van, sut, bon);
+      return j2_mcy(Pit, vane, nest)(wir_r, van, sut, bon);
     }
   }
 

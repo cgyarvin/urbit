@@ -7,10 +7,10 @@
 
 /* functions
 */
-  u2_weak                                                         //  transfer
+  u2_noun                                                         //  transfer
   j2_mbc(Pit, comb)(u2_wire wir_r, 
-                    u2_weak mal,                                  //  retain
-                    u2_weak buz)                                  //  retain
+                    u2_noun mal,                                  //  retain
+                    u2_noun buz)                                  //  retain
   {
     if ( (u2_none == mal) || (u2_none == buz) ) {
       return u2_none;
@@ -55,7 +55,7 @@
                                              u2_rx(wir_r, buz));
     }
   }
-  u2_weak                                                         //  transfer
+  u2_noun                                                         //  transfer
   j2_mb(Pit, comb)(u2_wire wir_r, 
                    u2_noun cor)                                   //  retain
   {

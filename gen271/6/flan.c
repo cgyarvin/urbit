@@ -7,24 +7,40 @@
 
 /* functions
 */
-  u2_weak                                                         //  transfer
-  j2_mbc(Pit, flan)(u2_wire wir_r, 
-                    u2_weak bos,                                  //  retain
-                    u2_weak nif)                                  //  retain
+  u2_noun                                                         //  transfer
+  j2_mby(Pit, flan)(u2_wire wir_r, 
+                    u2_noun bos,                                  //  retain
+                    u2_noun nif)                                  //  retain
   {
-    return u2_none;
+    if ( u2_yes == u2_sing(u2_nock_bone, u2_h(bos)) ) {
+      if ( (u2_nul == u2_t(bos)) ) {
+        return nif;
+      }
+      else return bos;
+    }
+    else {
+      if ( u2_yes == u2_sing(u2_nock_bone, u2_h(nif)) ) {
+        if ( (u2_nul == u2_t(nif)) ) {
+          return bos;
+        }
+        else return nif;
+      }
+      else {
+        return u2_bq
+          (wir_r, u2_nock_trol, bos, nif, u2_bc(wir_r, u2_nock_bone, u2_no));
+      }
+    }
   }
-
-  u2_weak                                                         //  transfer
+  u2_noun                                                         //  transfer
   j2_mb(Pit, flan)(u2_wire wir_r, 
                    u2_noun cor)                                   //  retain
   {
     u2_noun bos, nif;
 
     if ( u2_no == u2_mean(cor, 8, &bos, 9, &nif, 0) ) {
-      return u2_none;
+      return u2_bl_bail(wir_r);
     } else {
-      return j2_mbc(Pit, flan)(wir_r, bos, nif);
+      return j2_mby(Pit, flan)(wir_r, bos, nif);
     }
   }
 
@@ -32,6 +48,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pit, flan)[] = {
-    { ".3", j2_mb(Pit, flan), u2_no, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mb(Pit, flan), u2_no, u2_none, u2_none },
     { }
   };

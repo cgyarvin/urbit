@@ -1179,11 +1179,11 @@ u2_rl_slab(u2_rail ral_r,
 **   Create a blank atomic slab of `len` bloqs of size `met`.
 */
 u2_ray
-u2_rl_slaq(u2_wire wir_r,
+u2_rl_slaq(u2_wire ral_r,
            c3_g    met_g,
            c3_w    len_w)
 {
-  return u2_rl_slab(wir_r, ((len_w << met_g) + 31) >> 5);
+  return u2_rl_slab(ral_r, ((len_w << met_g) + 31) >> 5);
 }
 
 /* u2_rl_mint():
@@ -1389,6 +1389,32 @@ u2_rl_cell(u2_ray  ral_r,
   /* Seniority restrictions.  Ice if these cannot be met.
   */
   {
+    if ( u2_yes == u2_rl_junior(ral_r, a) ) {
+      u2_noun som = a;
+
+      u2_ray som_r = u2_dog_a(som);
+      u2_ray hat_r = u2_rail_hat_r(ral_r);
+      u2_ray mat_r = u2_rail_mat_r(ral_r);
+      u2_nit som_n = u2_ray_fnit(som_r);
+      u2_nit hat_n = u2_ray_fnit(hat_r);
+      u2_nit mat_n = u2_ray_fnit(mat_r);
+
+      if ( u2_ray_a(hat_r) == 0 ) {
+        if ( (som_n >= hat_n) && (som_n <= mat_n) )
+          printf("junior x\n");
+      } else {
+        if ( (som_n >= mat_n) && (som_n <= hat_n) ) {
+          printf("junior y\n");
+          printf("hat %d.%d == %d\n", 
+              u2_ray_a(hat_r), u2_ray_b(hat_r), u2_ray_fnit(hat_r));
+          printf("mat %d.%d == %d\n", 
+              u2_ray_a(mat_r), u2_ray_b(mat_r), u2_ray_fnit(mat_r));
+          printf("som %d.%d == %d\n", 
+              u2_ray_a(som_r), u2_ray_b(som_r), u2_ray_fnit(som_r));
+        }
+      }
+    }
+
     c3_assert(u2_no == u2_rl_junior(ral_r, a));
     c3_assert(u2_no == u2_rl_junior(ral_r, b));
   }

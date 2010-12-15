@@ -1,4 +1,4 @@
-/* j/6/comb.c
+/* j/6/twin.c
 **
 ** This file is in the public domain.
 */
@@ -7,71 +7,34 @@
 
 /* functions
 */
-  u2_weak                                                         //  transfer
-  j2_mbc(Pit, comb)(u2_wire wir_r, 
-                    u2_weak mal,                                  //  retain
-                    u2_weak buz)                                  //  retain
+  u2_noun                                                         //  transfer
+  j2_mby(Pit, twin)(u2_wire wir_r, 
+                    u2_noun hed,                                  //  retain
+                    u2_noun tal)                                  //  retain
   {
-    if ( (u2_none == mal) || (u2_none == buz) ) {
-      return u2_none;
-    }
-    else {
-      u2_noun p_mal, q_mal, p_buz, q_buz, pp_buz, pq_buz;
-
-      if ( u2_yes == u2_as_p(mal, u2_nock_frag, &p_mal) ) {
-        if ( u2_yes == u2_as_p(buz, u2_nock_frag, &p_buz) ) {
-          return u2_rc(wir_r, 
-                       u2_nock_frag, 
-                       j2_mbc(Pit, peg)(wir_r, p_mal, p_buz));
-        }
-        else if ( u2_yes == u2_as_pq(buz, u2_nock_sail, &p_buz, &q_buz) &&
-                  u2_yes == u2_as_p(p_buz, u2_nock_frag, &pp_buz) &&
-                  u2_yes == u2_as_p(q_buz, u2_nock_frag, &pq_buz) )
-        {
-          return u2_rt
-            (wir_r, u2_nock_sail, 
-                   u2_rc(wir_r, u2_nock_frag, 
-                                j2_mbc(Pit, peg)(wir_r, p_mal, pp_buz)),
-                   u2_rc(wir_r, u2_nock_frag, 
-                                j2_mbc(Pit, peg)(wir_r, p_mal, pq_buz)));
-        }
-        else return u2_rt(wir_r, u2_nock_flac, u2_rx(wir_r, mal), 
-                                               u2_rx(wir_r, buz));
-      }
-      else if ( (u2_yes == u2_as_bush(mal, &p_mal, &q_mal)) &&
-                (u2_yes == u2_dust(q_mal)) && 
-                (_0 == u2_h(q_mal)) &&
-                (_1 == u2_t(q_mal)) )
-      {
-        return u2_rt(wir_r, u2_nock_gant, u2_rx(wir_r, p_mal), 
-                                          u2_rx(wir_r, buz));
-      }
-      else if ( (u2_yes == u2_as_p(buz, u2_nock_frag, &p_buz)) &&
-                (u2_yes == u2_sing(_1, p_buz)) )
-      {
-        return u2_rx(wir_r, mal);
-      }
-      else return u2_rt(wir_r, u2_nock_flac, u2_rx(wir_r, mal), 
-                                             u2_rx(wir_r, buz));
+    if ( (c3__blot == hed) || (c3__blot == tal) ) {
+      return c3__blot;
+    } else {
+      return u2_bt(wir_r, c3__cell, hed, tal);
     }
   }
-  u2_weak                                                         //  transfer
-  j2_mb(Pit, comb)(u2_wire wir_r, 
+  u2_noun                                                         //  transfer
+  j2_mb(Pit, twin)(u2_wire wir_r, 
                    u2_noun cor)                                   //  retain
   {
-    u2_noun mal, buz;
+    u2_noun hed, tal;
 
-    if ( u2_no == u2_mean(cor, 8, &mal, 9, &buz, 0) ) {
-      return u2_none;
+    if ( u2_no == u2_mean(cor, 8, &hed, 9, &tal, 0) ) {
+      return u2_bl_bail(wir_r);
     } else {
-      return j2_mbc(Pit, comb)(wir_r, mal, buz);
+      return j2_mby(Pit, twin)(wir_r, hed, tal);
     }
   }
 
 /* structures
 */
   u2_ho_jet 
-  j2_mbj(Pit, comb)[] = {
-    { ".3", j2_mb(Pit, comb), u2_no, u2_none, u2_none },
+  j2_mbj(Pit, twin)[] = {
+    { ".3", c3__hevy, j2_mb(Pit, twin), u2_no, u2_none, u2_none },
     { }
   };

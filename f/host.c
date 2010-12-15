@@ -457,7 +457,38 @@ _ho_execute(u2_ray      wir_r,
     return u2_none;
   }
   else {
-    return jet_j->fun_f(wir_r, cor);
+    if ( c3__lite == jet_j->vok_m ) {
+      return jet_j->fun_f(wir_r, cor);
+    }
+    else if ( c3__hevy == jet_j->vok_m ) {
+      u2_ray cap_r = u2_rail_cap_r(wir_r);
+
+      u2_rl_leap(wir_r, c3__warm);
+      {  
+        u2_ray jub_r = u2_bl_open(wir_r);
+
+        if ( u2_bl_set(wir_r) ) {
+          u2_bl_done(wir_r, jub_r);
+          u2_rl_fall(wir_r);
+          u2_rail_cap_r(wir_r) = cap_r;
+
+          return u2_none;
+        }
+        else {
+          u2_noun pro = jet_j->fun_f(wir_r, cor);
+
+          c3_assert(u2_none != pro);
+          u2_bl_done(wir_r, jub_r);
+          u2_rl_fall(wir_r);
+
+          pro = u2_rx(wir_r, pro);
+          u2_rail_cap_r(wir_r) = cap_r;
+
+          return pro;
+        }
+      }
+    }
+    else c3_assert(0);
   }
 }
 
@@ -610,12 +641,12 @@ _ho_explore(u2_wire wir_r,
     c3_c* cos_c = _ho_cstring(xip);
 
     if ( 0 != (dry_d = _ho_explore_parent(wir_r, xip, cos_c)) ) {
-      fprintf(stderr, "battery: child : %s\n", cos_c);
+      // fprintf(stderr, "battery: child : %s\n", cos_c);
       _ho_drive(dry_d);
       return dry_d;
     }
     else if ( 0 != (dry_d = _ho_explore_static(wir_r, xip, cos_c)) ) {
-      fprintf(stderr, "battery: static: %s\n", cos_c);
+      // fprintf(stderr, "battery: static: %s\n", cos_c);
       _ho_drive(dry_d);
       return dry_d;
     }
@@ -750,13 +781,13 @@ u2_ho_stet(u2_wire wir_r,
     if ( u2_yes == u2_sing(pro, vet) ) {
       jet_j->zoc_w--;
 
-      fprintf(stderr, "fine: %s:%x\n", cos_c, u2_mug(cor));
+      fprintf(stderr, "fine: %8x: %s\n", u2_mug(cor), cos_c);
       free(cos_c);
     } 
     else {
       c3_c *cos_c = _ho_cstring(xip);
 
-      fprintf(stderr, "fail: %s:%x\n", cos_c, u2_mug(cor));
+      fprintf(stderr, "fail: %8x: %s\n", u2_mug(cor), cos_c);
       u2_err(wir_r, "wrong", pro);
       u2_err(wir_r, "right", vet);
       free(cos_c);

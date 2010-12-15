@@ -7,23 +7,42 @@
 
 /* functions
 */
-  u2_weak                                                         //  transfer
-  j2_mbc(Pit, cons)(u2_wire wir_r, 
-                    u2_weak vur,                                  //  retain
-                    u2_weak sed)                                  //  retain
+  u2_noun                                                         //  transfer
+  j2_mby(Pit, cons)(u2_wire wir_r, 
+                    u2_noun vur,                                  //  retain
+                    u2_noun sed)                                  //  retain
   {
-    return u2_none;
+    u2_noun p_vur, p_sed;
+
+    if ( u2_yes == u2_as_p(vur, u2_nock_bone, &p_vur) && 
+         u2_yes == u2_as_p(sed, u2_nock_bone, &p_sed) ) {
+      return u2_bt(wir_r, u2_nock_bone, p_vur, p_sed);
+    }
+    else if ( u2_yes == u2_as_p(vur, u2_nock_frag, &p_vur) && 
+              u2_yes == u2_as_p(sed, u2_nock_frag, &p_sed) &&
+              !(u2_yes == u2_sing(_1, p_vur)) &&
+              !(u2_yes == u2_sing(p_vur, p_sed)) &&
+              (_0 == u2_nord(p_vur, p_sed)) )
+    {
+      u2_atom fub = u2_fj_op_div(wir_r, _2, p_vur);
+      u2_atom nof = u2_fj_op_div(wir_r, _2, p_sed);
+
+      if ( u2_yes == u2_sing(fub, nof) ) {
+        return u2_bc(wir_r, u2_nock_frag, fub);
+      }
+    }
+    return u2_bc(wir_r, vur, sed);
   }
-  u2_weak                                                         //  transfer
+  u2_noun                                                         //  transfer
   j2_mb(Pit, cons)(u2_wire wir_r, 
                    u2_noun cor)                                   //  retain
   {
     u2_noun vur, sed;
 
     if ( u2_no == u2_mean(cor, 8, &vur, 9, &sed, 0) ) {
-      return u2_none;
+      return u2_bl_bail(wir_r);
     } else {
-      return j2_mbc(Pit, cons)(wir_r, vur, sed);
+      return j2_mby(Pit, cons)(wir_r, vur, sed);
     }
   }
 
@@ -31,6 +50,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pit, cons)[] = {
-    { ".3", j2_mb(Pit, cons), u2_no, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mb(Pit, cons), u2_no, u2_none, u2_none },
     { }
   };

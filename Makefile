@@ -174,7 +174,19 @@ J271_4_OFILES=\
 
 J271_6_OFILES=\
        gen271/6/comb.o \
+       gen271/6/cons.o \
+       gen271/6/eith.o \
+       gen271/6/flan.o \
+       gen271/6/flip.o \
+       gen271/6/flor.o \
+       gen271/6/hike.o \
+       gen271/6/make.o \
+       gen271/6/mill.o \
+       gen271/6/name.o \
+       gen271/6/nest.o \
+       gen271/6/play.o \
        gen271/6/ream.o \
+       gen271/6/twin.o \
        gen271/6/vane.o
 
 J271_OFILES=\

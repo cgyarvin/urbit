@@ -1016,6 +1016,7 @@
 ::::
 ::
     cons
+  ^<  mine.[!=(->) %cons ~]
   =+  [vur=*tool sed=*tool]
   |=
   ^>  bean.[%cons]
@@ -1030,6 +1031,7 @@
 ::::
 ::
     eith
+  ^<  mine.[!=(->) %eith ~]
   =+  [hoz=*type bur=*type]
   |=
   ^-  *type
@@ -1041,6 +1043,7 @@
 ::::
 ::
     flan
+  ^<  mine.[!=(->) %flan ~]
   =+  [bos=*tool nif=*tool]
   |=
   ^-  *tool
@@ -1057,12 +1060,14 @@
 ::::
 ::
     flip
+  ^<  mine.[!=(->) %flip ~]
   =+  [hel=*tool]
   |=
   [6 hel [1 1] [1 0]]
 ::::
 ::
     flor
+  ^<  mine.[!=(->) %flor ~]
   =+  [bos=*tool nif=*tool]
   |=
   ^-  *tool
@@ -1156,6 +1161,7 @@
 ::::
 ::
     hike 
+  ^<  mine.[!=(->) %hike ~]
   =+  [axe=*axis pac=*(list &[p=*axis q=*tool])]
   |=
   ^>  bean.[%hike]
@@ -1179,6 +1185,7 @@
 ::::
 ::
     name
+  ^<  mine.[!=(->) %name ~]
   =+  [cog=*term tip=*type]
   |=
   ^-  *type
@@ -1540,6 +1547,7 @@
 ::::
 ::
     twin
+  ^<  mine.[!=(->) %twin ~]
   =+  [hed=*type tal=*type]
   |=
   ^-  *type
@@ -1551,7 +1559,12 @@
 ::::
 ::
     vane
-  ^<  mine.[!=(->+) %vane [[%mill !=(mill)] ~]]
+  ^<    mine.
+      :+  !=(->+) 
+        %vane 
+      :~
+        [%mill !=(mill)]
+      ==
   =+  :*  fan=*(pool &[*type *gene])
           ver=*(pool &[*type *gene])
           bug=@

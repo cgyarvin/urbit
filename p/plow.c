@@ -348,8 +348,6 @@
              u2_tool zeg,
              u2_tool dac)
   {
-    
-
     if ( u2_yes == u2_sing(u2_nock_bone, u2_h(zeg)) ) {
       if ( (u2_nul == u2_t(zeg)) ) {
         return dac;
@@ -377,8 +375,6 @@
              u2_tool bos,
              u2_tool nif)
   {
-    
-
     if ( u2_yes == u2_sing(u2_nock_bone, u2_h(bos)) ) {
       if ( (u2_nul == u2_t(bos)) ) {
         return bos;
@@ -3156,8 +3152,6 @@
              u2_type sut,
              u2_type hoc)
   {
-    
-
     if ( u2_yes == u2_sing(sut, hoc) ) {
       return sut;
     }

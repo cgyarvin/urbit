@@ -68,8 +68,17 @@
   /* tier 6
   */
     extern u2_ho_jet j2_mbj(Pit, comb)[];
+    extern u2_ho_jet j2_mbj(Pit, cons)[];
+    extern u2_ho_jet j2_mbj(Pit, eith)[];
+    extern u2_ho_jet j2_mbj(Pit, flan)[];
+    extern u2_ho_jet j2_mbj(Pit, flip)[];
+    extern u2_ho_jet j2_mbj(Pit, flor)[];
+    extern u2_ho_jet j2_mbj(Pit, hike)[];
+    extern u2_ho_jet j2_mbj(Pit, name)[];
+    extern u2_ho_jet j2_mbj(Pit, twin)[];
     extern u2_ho_jet j2_mbj(Pit, ream)[];
-    
+    extern u2_ho_jet j2_mbj(Pit, twin)[];
+ 
     extern u2_ho_driver j2_mbd(Pit, vane)[];
 
 /* structures
@@ -137,7 +146,15 @@
     /* tier 6
     */
       { j2_sb(Pit, comb), j2_mbj(Pit, comb), 0, 0, u2_none },
+      { j2_sb(Pit, cons), j2_mbj(Pit, cons), 0, 0, u2_none },
+      { j2_sb(Pit, eith), j2_mbj(Pit, eith), 0, 0, u2_none },
+      { j2_sb(Pit, flan), j2_mbj(Pit, flan), 0, 0, u2_none },
+      { j2_sb(Pit, flip), j2_mbj(Pit, flip), 0, 0, u2_none },
+      { j2_sb(Pit, flor), j2_mbj(Pit, flor), 0, 0, u2_none },
+      { j2_sb(Pit, hike), j2_mbj(Pit, hike), 0, 0, u2_none },
+      { j2_sb(Pit, name), j2_mbj(Pit, name), 0, 0, u2_none },
       { j2_sb(Pit, ream), j2_mbj(Pit, ream), 0, 0, u2_none },
+      { j2_sb(Pit, twin), j2_mbj(Pit, twin), 0, 0, u2_none },
       { j2_sb(Pit, vane), 0, j2_mbd(Pit, vane), 0, u2_none } 
   };
 
