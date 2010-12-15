@@ -234,6 +234,7 @@
             u2_noun
             u2_bn_ice(u2_wire wir_r,
                       u2_weak a);
+#         define u2_bx(wir_r, a)  u2_bn_ice(wir_r, a)
 
           /* u2_bn_list():
           **

@@ -54,7 +54,7 @@
   =+  [a=@ b=@]
   |=
   ^-  @
-  ^>  bean.[%div]
+  ^>  bean.%div
   ?<  .=(0 b)
   =+  c=@
   |-
@@ -1000,7 +1000,7 @@
   ^<  mine.[!=(->) %comb ~]
   =+  [mal=*tool buz=*tool]
   |=
-  ^>  bean.[%comb]
+  ^>  bean.%comb
   ^-  *tool
   ?:  ?=([0 *] mal)
     ?:  ?=([0 *] buz)
@@ -1019,7 +1019,7 @@
   ^<  mine.[!=(->) %cons ~]
   =+  [vur=*tool sed=*tool]
   |=
-  ^>  bean.[%cons]
+  ^>  bean.%cons
   ^-  *tool
   ?:  ?=([[0 *] [0 *]] -<)
     ?:  ?&(.=(.^(p.vur) p.sed) .=((div p.vur 2) (div p.sed 2)))
@@ -1164,7 +1164,7 @@
   ^<  mine.[!=(->) %hike ~]
   =+  [axe=*axis pac=*(list &[p=*axis q=*tool])]
   |=
-  ^>  bean.[%hike]
+  ^>  bean.%hike
   ^-  *tool
   ?~  pac
     [0 axe]
@@ -1197,7 +1197,7 @@
     open
   =+  gen=*gene
   |=
-  ^>  bean.[%open]
+  ^>  bean.%open
   ^-  *gene
   =<  base
   |*
@@ -1490,7 +1490,7 @@
     rake
   =+  gen=*gene
   |=
-  ^>  bean.[%rake]
+  ^>  bean.%rake
   ^-  *rope
   ?-  gen
     @             [gen ~]
@@ -1615,7 +1615,7 @@
     ^<  mine.[!=(->) %etch ~]
     =+  [rep=*rope gan=*type]
     |=
-    ^>  bean.[%etch]
+    ^>  bean.%etch
     =+  per=(flop rep)
     |-
     ^-  *type
@@ -1634,14 +1634,22 @@
         ?:  .=(2 tip)
           [%cell $(sut p.sut, p.wer tap) q.sut]
         ?>  .=(3 tip)
-        [%cell p.sut $(sut q.sut)]
+        [%cell p.sut $(sut q.sut, p.wer tap)]
       ::
           [%core *]
         ?:  .=(1 p.wer)
           giv
         =+  [tip=(cap p.wer) tap=(mas p.wer)]
         ?>  .=(2 tip)
-        [%core $(sut p.sut, p.wer tap) q.sut r.sut]
+        :^    %core
+            $(sut p.sut, p.wer tap)
+          ?-    q.sut
+              %blue       [%gray p.sut]
+              [%gray *]   q.sut
+              %pink       [%teal p.sut]
+              [%teal *]   q.sut
+          ==
+        r.sut
       ::
           [%face *]
         ?>  ?&(.=(i.per p.sut) .=(1 p.wer))
@@ -1671,9 +1679,16 @@
         [%cell p.sut $(sut q.sut, p.i.per tap)]
       ::
           [%core *]
-        ?:  .=(2 tip) 
-          [%core $(sut p.sut, p.i.per tap) q.sut r.sut]
-        [%cell p.sut $(sut %blur, p.i.per tap)]
+        ?>  .=(2 tip) 
+        :^    %core
+            $(sut p.sut, p.i.per tap)
+          ?-    q.sut
+              %blue       [%gray p.sut]
+              [%gray *]   q.sut
+              %pink       [%teal p.sut]
+              [%teal *]   q.sut
+          ==
+        r.sut
       ::
           [%cube *]   
         ?>  .?(p.sut) 

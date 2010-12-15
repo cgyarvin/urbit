@@ -16,7 +16,9 @@
 
     if ( u2_yes == u2_as_p(vur, u2_nock_bone, &p_vur) && 
          u2_yes == u2_as_p(sed, u2_nock_bone, &p_sed) ) {
-      return u2_bt(wir_r, u2_nock_bone, p_vur, p_sed);
+      return u2_bt(wir_r, u2_nock_bone, 
+                          u2_bx(wir_r, p_vur),
+                          u2_bx(wir_r, p_sed));
     }
     else if ( u2_yes == u2_as_p(vur, u2_nock_frag, &p_vur) && 
               u2_yes == u2_as_p(sed, u2_nock_frag, &p_sed) &&
@@ -28,10 +30,16 @@
       u2_atom nof = u2_fj_op_div(wir_r, _2, p_sed);
 
       if ( u2_yes == u2_sing(fub, nof) ) {
+        u2_rl_lose(wir_r, nof);
+
         return u2_bc(wir_r, u2_nock_frag, fub);
       }
+      else {
+        u2_rl_lose(wir_r, fub);
+        u2_rl_lose(wir_r, nof);
+      }
     }
-    return u2_bc(wir_r, vur, sed);
+    return u2_bc(wir_r, u2_bx(wir_r, vur), u2_bx(wir_r, sed));
   }
   u2_noun                                                         //  transfer
   j2_mb(Pit, cons)(u2_wire wir_r, 

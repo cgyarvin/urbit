@@ -173,6 +173,7 @@ J271_4_OFILES=\
        gen271/4/put.o
 
 J271_6_OFILES=\
+       gen271/6/bake.o \
        gen271/6/comb.o \
        gen271/6/cons.o \
        gen271/6/eith.o \
