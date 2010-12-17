@@ -239,6 +239,7 @@
     u2_noun sut, cog, van;
 
     if ( (u2_no == u2_mean(cor, 4, &cog, 5, &van, 0)) ||
+         (u2_no == u2_stud(cog)) ||
          (u2_none == (sut = u2_frag(4, van))) )
     {
       return u2_bl_bail(wir_r);
