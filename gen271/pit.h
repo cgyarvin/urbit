@@ -152,6 +152,10 @@
     /** Tier 3.
     **/
       u2_weak                                                     //  transfer
+      j2_mbc(Pit, cap)(u2_wire wir_r, 
+                       u2_atom a);                                //  retain
+
+      u2_weak                                                     //  transfer
       j2_mbc(Pit, cat)(u2_wire wir_r, 
                        u2_atom a,                                 //  retain
                        u2_atom b,                                 //  retain
@@ -196,6 +200,10 @@
                        u2_atom a,                                 //  retain
                        u2_atom b,                                 //  retain
                        u2_atom c);                                //  retain
+
+      u2_weak                                                     //  transfer
+      j2_mbc(Pit, mas)(u2_wire wir_r, 
+                       u2_atom a);                                //  retain
 
       u2_weak                                                     //  transfer
       j2_mbc(Pit, met)(u2_wire wir_r, 
@@ -251,9 +259,24 @@
                         u2_noun vur,                              //  retain
                         u2_noun sed);                             //  retain
       u2_noun                                                     //  transfer
+      j2_mby(Pit, eith)(u2_wire wir_r, 
+                        u2_noun hoz,                              //  retain
+                        u2_noun bur);                             //  retain
+
+      u2_noun                                                     //  transfer
+      j2_mby(Pit, name)(u2_wire wir_r, 
+                        u2_noun cog,                              //  retain
+                        u2_noun tip);                             //  retain
+
+      u2_noun                                                     //  transfer
       j2_mby(Pit, hike)(u2_wire wir_r, 
                         u2_noun axe,                              //  retain
                         u2_noun pac);                             //  retain
+
+      u2_noun                                                     //  transfer
+      j2_mby(Pit, twin)(u2_wire wir_r, 
+                        u2_noun hed,                              //  retain
+                        u2_noun tal);                             //  retain
 
       u2_noun                                                     //  transfer
       j2_mcy(Pit, vane, make)(u2_wire wir_r, 

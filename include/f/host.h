@@ -88,6 +88,10 @@
 
   /** Types.
   **/
+    /* u2_ho_fun: actual function.
+    */
+      typedef u2_noun (*u2_ho_fun)(u2_ray wir_r, u2_noun cor);
+
     /* u2_ho_jet: a C function, per formula.
     */
       typedef struct {

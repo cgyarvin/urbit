@@ -14,20 +14,23 @@
   {
     if ( u2_yes == u2_sing(u2_nock_bone, u2_h(bos)) ) {
       if ( (u2_nul == u2_t(bos)) ) {
-        return bos;
+        return u2_rx(wir_r, bos);
       }
-      else return nif;
+      else return u2_rx(wir_r, nif);
     }
     else {
       if ( u2_yes == u2_sing(u2_nock_bone, u2_h(nif)) ) {
         if ( (u2_nul == u2_t(nif)) ) {
-          return nif;
+          return u2_rx(wir_r, nif);
         }
-        else return bos;
+        else return u2_rx(wir_r, bos);
       }
       else {
         return u2_bq
-          (wir_r, u2_nock_trol, bos, u2_bc(wir_r, u2_nock_bone, u2_yes), nif);
+          (wir_r, u2_nock_trol, 
+                  u2_rx(wir_r, bos), 
+                  u2_bc(wir_r, u2_nock_bone, u2_yes), 
+                  u2_rx(wir_r, nif));
       }
     }
   }

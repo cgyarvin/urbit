@@ -24,7 +24,7 @@
     else {
       return u2_bq
         (wir_r, u2_nock_trol, 
-               hel, 
+               u2_rx(wir_r, hel),
                u2_bc(wir_r, u2_nock_bone, u2_no), 
                u2_bc(wir_r, u2_nock_bone, u2_yes));
     }

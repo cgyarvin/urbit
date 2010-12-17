@@ -13,15 +13,16 @@
                     u2_noun bur)                                  //  retain
   {
     if ( u2_yes == u2_sing(hoz, bur) ) {
-      return hoz;
+      return u2_rx(wir_r, hoz);
     }
     else if ( c3__blot == bur ) {
-      return hoz;
+      return u2_rx(wir_r, hoz);
     }
     else if ( c3__blot == hoz ) {
-      return bur;
+      return u2_rx(wir_r, bur);
     }
-    else return u2_bt(wir_r, c3__fork, hoz, bur);
+    else return u2_bt
+      (wir_r, c3__fork, u2_rx(wir_r, hoz), u2_rx(wir_r, bur));
   }
   u2_noun                                                         //  transfer
   j2_mb(Pit, eith)(u2_wire wir_r, 
