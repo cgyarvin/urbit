@@ -21,3 +21,11 @@
       u2_nk_mung(u2_wire wir_r,
                  u2_weak gat,                                     //  retain
                  u2_weak sam);                                    //  transfer
+
+    /* u2_nk_kick():
+    **
+    **   Fire `gat` without changing the sample.
+    */
+      u2_weak                                                     //  transfer
+      u2_nk_kick(u2_wire wir_r,
+                 u2_weak gat);                                    //  retain

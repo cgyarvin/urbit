@@ -734,6 +734,7 @@ u2_ho_fire(u2_ray   wir_r,
 
       if ( (u2_yes == ace) || (jet_j->zic_w != 0) ) {
         *saf = u2_yes;
+        // fprintf(stderr, "fire: %s\n", _ho_cstring(xip));
         return _ho_execute(wir_r, jet_j, cor);
       }
       else {
@@ -781,7 +782,7 @@ u2_ho_stet(u2_wire wir_r,
     if ( u2_yes == u2_sing(pro, vet) ) {
       jet_j->zoc_w--;
 
-      fprintf(stderr, "fine: %8x: %s\n", u2_mug(cor), cos_c);
+      fprintf(stderr, "nice: %8x: %s\n", u2_mug(cor), cos_c);
       free(cos_c);
     } 
     else {

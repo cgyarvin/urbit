@@ -13,6 +13,7 @@
                           u2_noun sut,                            //  retain
                           u2_noun gen)                            //  retain
   {
+#if 1
     u2_noun vun, pro;
 
     vun = u2_bn_molt(wir_r, van, 4, sut, 0);
@@ -20,6 +21,53 @@
 
     u2_rl_lose(wir_r, vun);
     return pro;
+#else 
+    if ( u2_no == u2_dust(gen) ) {
+      return u2_bl_bail(wir_r);
+    } else {
+      u2_noun vet;
+
+      if ( (u2_none == (vet = u2_frag(87, van))) ||
+           ((vet != u2_no) && (vet != u2_yes)) )
+      {
+        return u2_bl_bail(wir_r);
+      }
+
+      switch ( u2_h(gen) ) {
+        case c3__bnvd: {
+        }
+        case c3__brmt: {
+        }
+        case c3__brrs: {
+        }
+        case c3__dgnb: {
+        }
+        case c3__dtbn: {
+        }
+        case c3__dtht: {
+        }
+        case c3__dtrs: {
+        }
+        case c3__dtsg: {
+        }
+        case c3__dtsk: {
+        }
+        case c3__hpbn: {
+        }
+        case c3__hphp: {
+        }
+        case c3__hpmt: {
+        }
+        case c3__hpdx: {
+        }
+        case c3__htbn: {
+        }
+        case c3__htnb: {
+        }
+        case c3__htpd: {
+        }
+    }
+#endif
   }
   u2_noun                                                         //  transfer
   j2_mc(Pit, vane, mill)(u2_wire wir_r, 

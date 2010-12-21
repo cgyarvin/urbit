@@ -51,6 +51,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, in, has)[] = {
-    { ".3", c3__lite, j2_mc(Pit, in, has), u2_no, u2_none, u2_none },
+    { ".3", c3__lite, j2_mc(Pit, in, has), u2_yes, u2_none, u2_none },
     { }
   };

@@ -389,11 +389,10 @@ _nock_warm(u2_wire wir_r,
               return pro;
             }
 
-            case c3__dump: {
-              u2_err(wir_r, "dump", hod);
+            case c3__loaf: {
+              u2_err(wir_r, "loaf", hod);
               u2_rl_lose(wir_r, hod);
-
-              fol = zom;
+              fol = zom; 
               continue;
             }
 
@@ -961,5 +960,19 @@ u2_nk_mung(u2_wire wir_r,
       (wir_r,
        u2_rc(wir_r, sam, u2_rx(wir_r, u2_st(u2_sh(gat)))),
        u2_rx(wir_r, u2_st(gat))),
+     u2_st(gat));
+}
+
+/* u2_nk_kick():
+**
+**   Fire `gat` without changing the sample.
+*/
+u2_weak                                                           //  transfer
+u2_nk_kick(u2_wire wir_r,
+           u2_weak gat)                                           //  retain
+{
+  return u2_nk_nock
+    (wir_r,
+     u2_rx(wir_r, gat),
      u2_st(gat));
 }

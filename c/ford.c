@@ -245,7 +245,8 @@ j2_mbc(watt_271, ream)(u2_wire wir_r,
 */
 void
 ford_test3(struct ford_state* fod_f,
-           const char*        src_c)
+           const char*        src_c,
+           const char*        arg_c)
 {
   u2_wire wir_r = fod_f->wir_r;
   u2_noun src   = u2_ux_read(wir_r, src_c, "watt");
@@ -262,7 +263,6 @@ ford_test3(struct ford_state* fod_f,
       return;
     }
     else {
-#if 1
       u2_noun van = u2_bn_hook(wir_r, fod_f->pit, "vane");
       u2_noun mel = u2_bn_hook(wir_r, van, "mill");
       u2_noun lof;
@@ -278,26 +278,29 @@ ford_test3(struct ford_state* fod_f,
       else {
         printf("test3: clean\n");
         u2_bx_spot(wir_r, u2_nul); 
-
+#if 0
         u2_err(wir_r, "type", u2_h(lof));
         u2_err(wir_r, "tool", u2_t(lof));
-      }
 #else
-      u2_noun dec = u2_bn_hook(wir_r, fod_f->pit, "dec");
+        if ( arg_c ) {
+          u2_noun src = u2_rl_string(wir_r, arg_c);
+          u2_noun gen = j2_mbc(watt_271, ream)(wir_r, src);
+          u2_noun vad = u2_bn_hook(wir_r, fod_f->pit, "vade");
+          u2_noun hup = u2_nk_mung(wir_r, vad, u2_rc(wir_r, u2_h(lof), gen));
+          u2_noun pug = u2_nk_nock(wir_r, _0, u2_t(lof));
 
-      if ( u2_none == dec ) {
-        printf("test3: no dec\n");
-        return;
-      }
-      else {
-        u2_noun lof = u2_nk_mung(wir_r, dec, _0);
+          if ( (u2_none != hup) && (u2_none != pug) ) {
+            printf("ready to test...\n");
+            {
+              u2_noun muf = u2_nk_nock(wir_r, pug, u2_t(hup));
 
-        if ( u2_none == lof ) {
-          printf("test3: no lof\n");
+              u2_err(wir_r, "muf", muf);
+              u2_bx_spot(wir_r, u2_nul);
+            }
+          }
         }
-        else u2_bx_spot(wir_r, u2_nul); 
-      }
 #endif
+      }
     }
   }
 }
@@ -339,9 +342,9 @@ ford_line(struct ford_state* fod_f,
       u2_bl_done(wir_r, jub_r);
     }
     else {
-      if ( !arg_c && !strcmp(cmd_c, "test") ) {
+      if ( !strcmp(cmd_c, "test") ) {
         // ford_test(fod_f, "watt/t1-273");
-        ford_test3(fod_f, "watt/270");
+        ford_test3(fod_f, "watt/270", arg_c);
       }
       else {
 #if 0

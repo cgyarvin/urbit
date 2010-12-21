@@ -24,6 +24,7 @@
 */
   u2_ho_driver 
   j2_mbd(Pit, vane)[] = {
+#if 0
     { j2_sc(Pit, vane, bake), j2_mcj(Pit, vane, bake), 0, 0, u2_none },
     { j2_sc(Pit, vane, etch), j2_mcj(Pit, vane, etch), 0, 0, u2_none },
     { j2_sc(Pit, vane, make), j2_mcj(Pit, vane, make), 0, 0, u2_none },
@@ -32,11 +33,14 @@
     { j2_sc(Pit, vane, play), j2_mcj(Pit, vane, play), 0, 0, u2_none },
     { j2_sc(Pit, vane, reap), j2_mcj(Pit, vane, reap), 0, 0, u2_none },
     { }
+#endif
   };
 
   u2_ho_jet 
   j2_mbj(Pit, vane)[] = {
+#if 0
     { "clay", c3__hevy, j2_mc(Pit, vane, clay), u2_no, u2_none, u2_none },
+#endif
     { }
   };
 

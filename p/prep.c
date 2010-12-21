@@ -575,7 +575,7 @@ u2_err(u2_ray      wir_r,
        u2_weak     noun)
 {
   if ( u2_none == noun ) {
-    printf("%s: <bull>", cl_caption);
+    printf("%s: <none>\n", cl_caption);
   }
   else {
     u2_prep prep = u2_fj_prep_noun(wir_r, noun);

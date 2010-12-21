@@ -21,6 +21,9 @@
 
       if ( (u2_no == u2_as_trel(a, &n_a, &l_a, &r_a)) ) {
         return u2_bl_bail(wir_r);
+      } 
+      else if ( u2_yes == u2_sing(n_a, b) ) {
+        return u2_rx(wir_r, a);
       }
       else {
         if ( u2_yes == j2_mbc(Pit, gor)(wir_r, b, n_a) ) {
@@ -31,6 +34,7 @@
           }
           else {
             if ( u2_yes == j2_mbc(Pit, vor)(wir_r, n_a, u2_h(c)) ) {
+              printf("input: A\n");
               return u2_rt(wir_r, u2_rx(wir_r, n_a), 
                                   c, 
                                   u2_rx(wir_r, r_a));
@@ -47,6 +51,7 @@
                                 u2_rx(wir_r, r_a)));
 
                 u2_rl_lose(wir_r, c);
+                printf("input: B\n");
                 return d;
               }
             }
@@ -60,12 +65,14 @@
           }
           else {
             if ( u2_yes == j2_mbc(Pit, vor)(wir_r, n_a, u2_h(c)) ) {
+              printf("input: C\n");
               return u2_rt(wir_r, u2_rx(wir_r, n_a),
                                   u2_rx(wir_r, l_a), 
                                   c);
             }
             else {
               u2_as_trel(c, &n_c, &l_c, &r_c);
+              printf("input: D\n");
               {
                 u2_noun d = u2_rt
                   (wir_r, u2_rx(wir_r, n_c),
@@ -93,7 +100,6 @@
     if ( u2_no == u2_mean(cor, 4, &b, 20, &a, 0) ) {
       return u2_none;
     } else {
-      c3_assert(u2_nul == a);
       return j2_mcc(Pit, in, put)(wir_r, a, b);
     }
   }
@@ -102,6 +108,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, in, put)[] = {
-    { ".3", c3__lite, j2_mc(Pit, in, put), u2_no, u2_none, u2_none },
+    { ".3", c3__lite, j2_mc(Pit, in, put), u2_yes, u2_none, u2_none },
     { }
   };

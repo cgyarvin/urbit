@@ -1,17 +1,12 @@
-^<    mine.
-    :+  ~
-      [%watt 271]
-    :~
-      [%vane !=(vane)]
-    ==
+^<  mine.
+  :+  ~
+    [%watt 271]
+  :~
+    [%vade !=(vade)]
+    [%vane !=(vane)]
+    [%club !=(club)]
+  ==
 |*
-::::
-::
-    fake
-  =+  [a=* b=*(pool)]
-  |:
-  (~(put in b) a)
-
   ::  Tier 1, light math
 ::::
 ::
@@ -832,32 +827,55 @@
   |?
     ^+(@ *rock)
     [%duct p=*tape]
-    [%meld p=*(list ball)]
     [%grip p=[p=*rock q=*rock] q=*(list ball)]
+    [%meld p=*(list ball)]
   ==
 ::::
 ::
     club
+  ^<    mine.
+      :+  !=(->) 
+        %club 
+      :~
+        [%fly !=(fly)]
+        [%ram !=(ram)]
+        [%wit !=(wit)]
+      ==
   =+  pup=*ball
   |*
   ::::
-  ::      wit: width rammed
-      wit
-    ^-  @
-    ?-    pup
-        @           (met 3 pup)
-        [%duct *]   (lent p.pup)
-    ::
-        [%grip *]
-      %+  add
-        (add (met 3 p.p.pup) (met 3 q.p.pup))
-      %+  roll
-        q.pup
-      =+  [*ball @]
-      |=((add ?~(-<+ 0 1) (add -<+ wit(pup -<-))))
-    ::
-        [%meld *]   (roll p.pup =+([*ball @] |=((add -<+ wit(pup -<-)))))
-    == 
+  ::        fly: print tall
+      fly
+    ^<  mine.[!=(->) %fly ~]
+    =+  bor=@
+    |=
+    ^-  *wall
+    =+  col=@
+    =>  |*
+        ::::
+        ::        ind: indent tape
+            ind
+          =+  tep=*tape
+          |=
+          ^-  *tape
+          ?:  .=(0 col)
+            tep
+          $(col (dec col), tep [' ' tep])
+        ==
+    ::::
+    =+  lux=*wall
+    |-  ^-  *wall
+    ?.  ?&(?=([%grip *] pup) (gte (add col wit) bor))
+      [(ind ram) lux]
+    :-  (ind (rip 3 p.p.pup))
+    |-  ^-  *wall
+    ?~  q.pup
+      [(ind (rip 3 q.p.pup)) lux]
+    %=  $$
+      pup   i.q.pup
+      lux   $(q.pup t.q.pup)
+      col   ?:((gte col (mul 2 (div bor 3))) 0 (add 2 col))
+    ==
   ::::
   ::        ram: print wide
       ram
@@ -879,37 +897,23 @@
       ==
     ==
   ::::
-  ::        fly: print tall
-      fly
-    =+  bor=@
-    |=
-    ^-  *wall
-    =+  col=@
-    =>  |*
-        ::::
-        ::        ind: indent tape
-            ind
-          =+  tep=*tape
-          |=
-          ^-  *tape
-          ?~  col
-            tep
-          $(col (dec col), tep [' ' tep])
-        ==
-    ::::
-    =+  lux=*wall
-    |-  ^-  *wall
-    ?.  ?&(?=([%grip *] pup) (gte (add col wit) bor))
-      [(ind ram) lux]
-    :-  (ind (rip 3 p.p.pup))
-    |-  ^-  *wall
-    ?~  q.pup
-      [(ind (rip 3 q.p.pup)) lux]
-    %=  $$
-      pup   i.q.pup
-      lux   $(q.pup t.q.pup)
-      col   ?:((gte col (mul 2 (div bor 3))) 0 (add 2 col))
-    ==
+  ::      wit: width rammed
+      wit
+    ^-  @
+    ?-    pup
+        @           (met 3 pup)
+        [%duct *]   (lent p.pup)
+    ::
+        [%grip *]
+      %+  add
+        (add (met 3 p.p.pup) (met 3 q.p.pup))
+      %+  roll
+        q.pup
+      =+  [*ball @]
+      |=((add ?:(.=(0 -<+) 0 1) (add -<+ wit(pup -<-))))
+    ::
+        [%meld *]   (roll p.pup =+([*ball @] |=((add -<+ wit(pup -<-)))))
+    == 
   ::
   ::::
   ==
@@ -941,6 +945,20 @@
   ::
       ham
     (num 16 =+(@ |=(?:((lth 10 -<) (add '0' -<) (add 'a' -<)))))
+  ::::
+  ::
+      loc
+    ^-  *ball
+    ?>  ?=([p=@ q=[p=[p=@ q=@] q=[p=@ q=@]]] nut)   :: should be static
+    :+  %grip
+      ['<' '>']
+    =+  ^=  rov
+        :~  [%grip ['[' ']'] dem(nut p.p.q.nut) dem(nut q.p.q.nut) ~]
+            [%grip ['[' ']'] dem(nut p.q.q.nut) dem(nut q.q.q.nut) ~]
+        ==
+    ?:  .=(%% p.nut)
+      rov
+    [p.nut rov]
   ::::
   ::
       num
@@ -1088,7 +1106,7 @@
     ^+(@ *term)
     [~ p=^+(@ *axis)]
   ::
-    [%bndv p=*gene q=*gene]                                     ::  =<  bender
+    [%bndv p=*gene q=*gene]                                     ::  =<  bendev
     [%bnnb p=*gene q=*gene]                                     ::  =-  bennub
     [%bnpd p=*gene q=*gene]                                     ::  =+  benpod
     [%bnvd p=*gene q=*gene]                                     ::  =>  benved
@@ -1122,7 +1140,7 @@
   ::
     [%htbn p=*term q=*gene]                                     ::  ^=  hatben
     [%htdg p=*gene q=*gene]                                     ::  ^:  hatdig
-    [%htdv p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^<  hatder
+    [%htdv p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^<  hatdev
     [%htmt p=*gene q=*gene]                                     ::  ^%  hatmit
     [%htnb p=*gene q=*gene]                                     ::  ^-  hatnub
     [%htpd p=*gene q=*gene]                                     ::  ^+  hatpod
@@ -1148,7 +1166,7 @@
     [%skbn p=*gene q=*gene]                                     ::  ?=  askben
     [%skbr p=*(list gene)]                                      ::  ?|  askbar
     [%skdg p=*gene q=*gene r=*gene]                             ::  ?:  askdig
-    [%skdv p=*gene q=*gene]                                     ::  ?<  askder
+    [%skdv p=*gene q=*gene]                                     ::  ?<  askdev
     [%skdt p=*gene q=*gene r=*gene]                             ::  ?.  askdot
     [%skhp p=*gene]                                             ::  ?!  askhop
     [%skmp p=*(list gene)]                                      ::  ?&  askamp
@@ -1444,7 +1462,7 @@
       :+  %bnpd
         q.gen
       :+  %mtbn
-        [[~ 2] p.gen]
+        (weld p.gen `*rope`[[~ 2] ~])
       (turn r.gen =+([*gene *gene] |=([-<- [%bnvd [~ 3] -<+]])))
     ::
         [%mtdg *]   [%mtsg [%% ~] p.gen q.gen]                          ::  %:
@@ -1584,6 +1602,12 @@
   [%cell hed tal]
 ::::
 ::
+    vade
+  =+  [tip=*type gen=*gene]
+  |=
+  (~(mill vane tip) gen)
+::::
+::
     vane
   ^<    mine.
       :+  !=(->+) 
@@ -1605,7 +1629,6 @@
     ^<  mine.[!=(->) %bake ~]
     =+  [dab=*(book term gene)]
     |=
-    ^>  bean.[%bake]
     ^-  *
     ?-    dab
         ~         0
@@ -1617,7 +1640,7 @@
   ::::
   ::
       clay
-    ^>  bean.[%clay]
+    ^>  bean.[%clay |=((~(fly club dump) 75))]
     ?.  ?=([%core *] sut)
       sut
     ?-    q.sut
@@ -1625,7 +1648,7 @@
       sut
     ::
         [%gray *]
-      ?>  ?|(!vet (nest(sut p.sut) p.q.sut))
+      ?>  ?|(!vet (nest(sut p.q.sut) p.sut))
       [%core p.q.sut %blue r.sut]
     ::
         %pink
@@ -1638,11 +1661,65 @@
     ==
   ::::
   ::
+      dump
+    ^-  *ball
+    =+  gil=*(pool type)
+    |-
+    ?-    sut
+        %atom       '@'
+        %blot       '#'
+        %blur       '*'
+    ::
+        [%cell *]
+      :+  %grip
+        ['[' ']']
+      :-  $(sut p.sut)
+      |-
+      ?.  ?=([%cell *] q.sut)
+        [$$(sut q.sut) ~]
+      [$$(sut p.q.sut) $(q.sut q.q.sut)]
+    ::
+        [%core *]
+      :+  %grip
+        ['{' '}']
+      :~  
+        :^    %meld
+            '+'
+          %~  dem
+            golf
+          |-(^-(@ ?~(r.sut 0 .^((add $(r.sut l.r.sut) $(r.sut r.r.sut))))))
+        ~
+      ::
+        $(sut p.sut)
+      ==
+    ::
+        [%cube *]   ~(gut golf p.sut)
+        [%face *]   [%meld ~(vam golf p.sut) '=' $(sut q.sut) ~]
+    ::
+        [%fork *]
+      :+  %grip
+        ['<' '>']
+      :-  $(sut p.sut)
+      |-
+      ?.  ?=([%cell *] q.sut)
+        [$$(sut q.sut) ~]
+      [$$(sut p.q.sut) $(q.sut q.q.sut)]
+    ::
+        [%hold *]
+      ?:  (~(has in gil) sut)
+        ~(dem golf (mug sut))
+      =>  .(gil (~(put in gil) sut))
+      $(gil (~(put in gil) sut), sut (play(sut p.sut) q.sut))
+    ==
+  ::::
+  ::
       etch
     ^<  mine.[!=(->) %etch ~]
     =+  [rep=*rope gan=*type]
     |=
-    ^>  bean.%etch
+    ^>  bean.[%etch-sut |=((~(fly club dump) 75))]
+    ^>  bean.[%etch-rep |=((~(fly club ~(gut golf `*`rep)) 75))]
+    ^>  bean.[%etch-gan |=((~(fly club dump(sut gan)) 75))]
     =+  per=(flop rep)
     |-
     ^-  *type
@@ -1869,7 +1946,9 @@
     ^<  mine.[!=(->) %mesh ~]
     =+  [axe=*axis mun=*type har=*(list &[p=*gene q=*gene])]
     |=
-    ^>  bean.%mesh
+    ^>  bean.[%mesh-sut |=((~(fly club dump) 75))]
+    ^>  bean.[%mesh-axe |=((~(fly club ~(dem golf axe)) 75))]
+    ^>  bean.[%mesh-mun |=((~(fly club dump(sut mun)) 75))]
     =+  luf=*(list &[p=*axis q=*tool])
     |-
     ^-  [p=*type q=*tool]
@@ -1886,7 +1965,6 @@
     ^<  mine.[!=(->) %mill ~]
     =+  [gen=*gene]
     |=
-    ^>  bean.%mill
     ^-  [p=*type q=*tool]
     ?-    -.gen
     ::
@@ -1977,16 +2055,34 @@
     ::
         %htvd                                                           ::  ^>
       ^-  [p=*type q=*tool]
-      =+  hum=$(gen q.gen)
-      :-  p.hum
-      :+  10
-        ?-    p.gen
-            @   p.gen
-            ^   [p.p.gen (make q.p.gen)]
-        ==
-      q.hum
+      =<  dext
+      |*
+      ::::
+      ::
+          dext
+        ?.  ?=([%spot %dtsg *] p.gen)
+          sint
+        ^>  bean.[%spot |=((~(fly club ~(loc golf +>.p.gen)) 75))]
+        sint
+      ::::
+      ::
+          sint
+        =+  hum=$(gen q.gen)
+        :-  p.hum
+        :+  10
+          ?-    p.gen
+              @   p.gen
+              ^   [p.p.gen (make q.p.gen)]
+          ==
+        q.hum
+      ::
+      ::::
+      ==
     :: 
         %mtbn                                                           ::  %=
+      ^>  bean.[%mtbn-sut |=((~(fly club dump) 75))]
+      ^>  bean.[%mtbn-gen |=((~(fly club ~(gut golf `*`gen)) 75))]
+      ^>  bean.%mtbn
       ^-  [p=*type q=*tool]
       =+  lar=(seek p.gen)
       =+  fup=(mesh p.lar r.lar q.gen)

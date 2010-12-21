@@ -145,6 +145,8 @@
 
     /* tier 6
     */
+      { j2_sb(Pit, ream), j2_mbj(Pit, ream), 0, 0, u2_none },
+#if 0
       { j2_sb(Pit, comb), j2_mbj(Pit, comb), 0, 0, u2_none },
       { j2_sb(Pit, cons), j2_mbj(Pit, cons), 0, 0, u2_none },
       { j2_sb(Pit, eith), j2_mbj(Pit, eith), 0, 0, u2_none },
@@ -153,9 +155,9 @@
       { j2_sb(Pit, flor), j2_mbj(Pit, flor), 0, 0, u2_none },
       { j2_sb(Pit, hike), j2_mbj(Pit, hike), 0, 0, u2_none },
       { j2_sb(Pit, name), j2_mbj(Pit, name), 0, 0, u2_none },
-      { j2_sb(Pit, ream), j2_mbj(Pit, ream), 0, 0, u2_none },
       { j2_sb(Pit, twin), j2_mbj(Pit, twin), 0, 0, u2_none },
       { j2_sb(Pit, vane), 0, j2_mbd(Pit, vane), 0, u2_none } 
+#endif
   };
 
   u2_ho_driver

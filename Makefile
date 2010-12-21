@@ -20,14 +20,14 @@ BIN=run
 
 RM=rm -f
 CC=gcc
-CLD=gcc -O2 -bind_at_load -L/sw/lib
+CLD=gcc -g -bind_at_load -L/sw/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
 INCLUDE=include
 GENERATED=generated
 DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN)
-CFLAGS=-O2 -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
+CFLAGS=-g -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 CWFLAGS=-Wall
 
 .y.o:
@@ -199,7 +199,7 @@ J271_OFILES=\
        $(J271_2_OFILES) \
        $(J271_3_OFILES) \
        $(J271_4_OFILES) \
-       $(J271_6_OFILES) \
+       gen271/6/ream.o \
        gen271/watt.o
 
 OFILES=\

@@ -991,8 +991,6 @@
 
   _open_do_pq(mtdg)
   {
-    
-
     return u2_bq
       (wir_r, c3__mtbr,
             u2_bc(wir_r, u2_blip, u2_nul),

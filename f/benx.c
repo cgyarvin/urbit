@@ -347,6 +347,9 @@ void
 u2_bx_bean_ent(u2_ray  wir_r,
                u2_noun hod)                                       //  transfer
 {
+#if 0
+  u2_rl_lose(wir_r, hod);
+#else
   u2_ray bex_r, sad_r;
 
   if ( (0 == (bex_r = u2_wire_bex_r(wir_r))) ||
@@ -363,13 +366,16 @@ u2_bx_bean_ent(u2_ray  wir_r,
     if ( u2_none == sud ) {
       return;
     } else {
+      u2_rl_lose(sad_r, u2_benx_at(bex_r, zof));
       u2_benx_at(bex_r, zof) = sud;
     }
   }
+#endif
 }
 void
 u2_bx_bean_out(u2_ray wir_r)
 {
+#if 1
   u2_ray bex_r, sad_r;
 
   if ( (0 == (bex_r = u2_wire_bex_r(wir_r))) ||
@@ -382,8 +388,106 @@ u2_bx_bean_out(u2_ray wir_r)
 
     c3_assert(u2_nul != zof);
 
-    u2_benx_at(bex_r, zof) = u2_t(zof);
-    u2_rl_lose(wir_r, zof);
+    u2_benx_at(bex_r, zof) = u2_rx(sad_r, u2_t(zof));
+    u2_rl_lose(sad_r, zof);
+  }
+#endif
+}
+
+/* _print_tape(): print a byte tape.
+*/
+static void
+_print_tape(u2_noun som,
+            FILE*   fil_F)
+{
+  u2_noun h_som;
+
+  while ( (u2_yes == u2_dust(som)) && ((h_som = u2_h(som)) < 128) ) {
+    putc(h_som, fil_F);
+    som = u2_t(som);
+  }
+}
+
+/* _print_term(): print a terminal.
+*/
+static void
+_print_term(u2_noun som,
+            FILE*   fil_F)
+{
+  if ( u2_yes == u2_stud(som) ) {
+    c3_w len_w = u2_met(3, som);
+    c3_y *som_y = alloca(len_w) + 1;
+
+    u2_bytes(0, len_w, som_y, som);
+    som_y[len_w] = 0;
+    fprintf(fil_F, "%s", (c3_c *)som_y);
+  }
+}
+
+/* _print_space(): print `feq_w` spaces.
+*/
+static void
+_print_space(c3_w  feq_w,
+             FILE* fil_F)
+{
+  while ( feq_w-- ) {
+    putc(' ', fil_F);
+  }
+}
+
+/* u2_bx_bean_print(): print bean stack to FILE *.
+*/
+void
+u2_bx_bean_print(u2_ray  wir_r,
+                 FILE *  fil_F,
+                 u2_noun zof)                                     //  retain
+{
+  while ( u2_yes == u2_dust(zof) ) {
+    u2_noun i_zof = u2_h(zof);
+    u2_noun t_zof = u2_t(zof);
+
+    if ( u2_yes == u2_stud(i_zof) ) {
+      _print_term(i_zof, fil_F);
+      fprintf(fil_F, "\n");
+    } else {
+      u2_noun hi_zof = u2_h(i_zof);
+      u2_noun ti_zof = u2_t(i_zof);
+      u2_weak gol;
+
+      gol = u2_nk_kick(wir_r, ti_zof);
+      if ( u2_none == gol ) {
+        _print_term(hi_zof, fil_F);
+        fprintf(fil_F, ":!\n");
+      }
+      else {
+        u2_noun gal = gol;
+
+        if ( u2_nul == hi_zof ) {
+          while ( u2_yes == u2_dust(gal) ) {
+            _print_tape(u2_h(gal), fil_F);
+            fprintf(fil_F, "\n");
+            gal = u2_t(gal);
+          }
+        }
+        else {
+          c3_w feq_w = u2_met(3, hi_zof);
+
+          _print_term(hi_zof, fil_F);
+          printf(": ");
+
+          while ( u2_yes == u2_dust(gal) ) {
+            if ( gal != gol ) {
+              _print_space(feq_w + 2, fil_F);
+            }
+            _print_tape(u2_h(gal), fil_F);
+            fprintf(fil_F, "\n");
+            gal = u2_t(gal);
+          }
+        }
+        u2_rl_lose(wir_r, gol);
+      }
+    }
+    zof = t_zof;
   }
 }
 
@@ -451,16 +555,12 @@ u2_bx_show(u2_ray wir_r)
       }
 
       if ( u2_nul != zof ) {
-        u2_noun zuf;
-
         printf("trace:\n");
-        for ( zuf = zof; u2_nul != zuf; zuf = u2_t(zuf) ) {
-          u2_err(wir_r, 0, u2_h(zuf));
-        }
+        u2_bx_bean_print(wir_r, stdout, zof);
         u2_rl_lose(sad_r, zof);
       }
     }
-  
+
     /* Dump performance log.
     */
     {

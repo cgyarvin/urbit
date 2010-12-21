@@ -5,7 +5,7 @@
 #include "all.h"
 #include "../pit.h"
 
-/*
+/* 
 */
   u2_noun                                                         //  transfer
   j2_mcy(Pit, vane, clay)(u2_wire wir_r, 
@@ -31,7 +31,7 @@
         }
         else if ( c3__gray == hq_sut ) {
           if ( (vet == u2_yes) &&
-               (u2_no == j2_mcy(Pit, vane, nest)(wir_r, van, p_sut, pq_sut)) )
+               (u2_no == j2_mcy(Pit, vane, nest)(wir_r, van, pq_sut, p_sut)) )
           {
             fprintf(stderr, "clay: gray error\n");
             return u2_bl_bail(wir_r);

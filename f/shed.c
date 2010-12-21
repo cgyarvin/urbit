@@ -141,10 +141,11 @@ u2_sh_mine(u2_ray  wir_r,
         } 
         else {
           bot = u2_rl_take(sad_r, bat);
-#if 0
+#if 1
           printf("battery: in shed! %d.%x\n",
                   u2_ray_a(u2_dog_a(bot)),
                   u2_ray_b(u2_dog_a(bot)));
+
 #endif
         }
         if ( u2_none == bot ) {

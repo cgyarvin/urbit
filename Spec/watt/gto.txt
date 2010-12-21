@@ -3,80 +3,81 @@ Watt GTO: Gran Tabula Operazioni
 (Copied from watt.watt - any discrepancies favor watt.watt.)
 
 Gene - AST
+::::
+::
     gene
   |?
-    [%dtsg p=*]                                 ::  .~  dotsig
+    ^+(@ *term)
+    [~ p=^+(@ *axis)]
   ::
-    [%bndv p=*gene q=*gene]                     ::  =<  bendev
-    [%bnnb p=*gene q=*gene]                     ::  =-  bennub
-    [%bnpd p=*gene q=*gene]                     ::  =+  benpod
-    [%bnrd p=*gene q=*gene]                     ::  =>  benved
+    [%bndv p=*gene q=*gene]                                     ::  =<  bendev
+    [%bnnb p=*gene q=*gene]                                     ::  =-  bennub
+    [%bnpd p=*gene q=*gene]                                     ::  =+  benpod
+    [%bnvd p=*gene q=*gene]                                     ::  =>  benved
   ::
-    [%brbn p=*prop q=*gene]                     ::  |=  barben
-    [%brdg p=*prop q=*gene]                     ::  |:  bardig
-    [%brmt p=*prop q=*menu]                     ::  |%  barmit
-    [%brnb p=*prop q=*gene]                     ::  |-  barnub
-    [%brrs p=*prop q=*menu]                     ::  |*  barras
-    [%brsg p=*gene q=*bank]                     ::  |~  barsig
-    [%brsk p=*bank]                             ::  |?  barask
+    [%brbn p=*gene]                                             ::  |=  barben
+    [%brdg p=*gene]                                             ::  |:  bardig
+    [%brmt p=*(list &[p=*term q=*gene])]                        ::  |%  barmit
+    [%brnb p=*gene]                                             ::  |-  barnub
+    [%brrs p=*(list &[p=*term q=*gene])]                        ::  |*  barras
+    [%brsg p=*gene q=*(list gene)]                              ::  |~  barsig
+    [%brsk p=*(list gene)]                                      ::  |?  barask
   ::
-    [%dght p=*gene q=*gene r=*gene s=*gene]     ::  :^  dighat
-    [%dgnb p=*gene q=*gene]                     ::  :-  dignub
-    [%dgpd p=*gene q=*gene r=*gene]             ::  :+  digpod
-    [%dgrs p=*bank]                             ::  :*  digras
-    [%dgsg p=*bank]                             ::  :~  digsig
+    [%dght p=*gene q=*gene r=*gene s=*gene]                     ::  :^  dighat
+    [%dgnb p=*gene q=*gene]                                     ::  :-  dignub
+    [%dgpd p=*gene q=*gene r=*gene]                             ::  :+  digpod
+    [%dgrs p=*(list gene)]                                      ::  :*  digras
+    [%dgsg p=*(list gene)]                                      ::  :~  digsig
   :: 
-    [%dtbn p=*gene q=*gene]                     ::  .=  dotben
-    [%dtht p=*gene]                             ::  .^  dothat
-    [%dtrs p=*gene q=*gene]                     ::  .*  dotras
-    [%dtsk p=*gene]                             ::  .?  dotask
+    [%dtbn p=*gene q=*gene]                                     ::  .=  dotben
+    [%dtht p=*gene]                                             ::  .^  dothat
+    [%dtrs p=*gene q=*gene]                                     ::  .*  dotras
+    [%dtsg p=*]                                                 ::  .~  dotsig
+    [%dtsk p=*gene]                                             ::  .?  dotask
   ::
-    [%hpbn p=*gene]                             ::  !=  hopben
-    [%hpcb p=*spot q=*gene]                     ::  !_  hopcab
-    [%hpdg p=*gene]                             ::  !:  hopdig
-    [%hpdx p=*gene]                             ::  !#  hopdax
-    [%hphp ~]                                   ::  !!  hopven
-    [%hpmt ~]                                   ::  !%  hopmit
-    [%hptc p=*gene]                             ::  !`  hoptic
+    [%hpbn p=*gene]                                             ::  !=  hopben
+    [%hpdg p=*gene]                                             ::  !:  hopdig
+    [%hpdx p=*gene]                                             ::  !#  hopdax
+    [%hphp ~]                                                   ::  !!  hophop
+    [%hpmt ~]                                                   ::  !%  hopmit
+    [%hptc p=*gene]                                             ::  !`  hoptic
   ::
-    [%htbc p=*gene q=*gene]                     ::  ^$  hatbuc
-    [%htbn p=*term q=*gene]                     ::  ^=  hatben
-    [%htdg p=*gene q=*gene]                     ::  ^+  hatdig
-    [%htmt p=*gene q=*gene]                     ::  ^%  hatmit
-    [%htnb p=*gene q=*gene]                     ::  ^-  hatnub
-    [%htpd p=*gene q=*gene]                     ::  ^:  hatpod
-    [%htpt p=*gene]                             ::  ^@  hatpat
-    [%htrs p=*gene]                             ::  ^*  hatras
-    [%htsg p=*gene]                             ::  ^~  hatsig
-    [%htsk p=*gene q=*gene]                     ::  ^?  hatask
+    [%htbn p=*term q=*gene]                                     ::  ^=  hatben
+    [%htdg p=*gene q=*gene]                                     ::  ^:  hatdig
+    [%htdv p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^<  hatdev
+    [%htmt p=*gene q=*gene]                                     ::  ^%  hatmit
+    [%htnb p=*gene q=*gene]                                     ::  ^-  hatnub
+    [%htpd p=*gene q=*gene]                                     ::  ^+  hatpod
+    [%htvd p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^>  hatved
+    [%htrs p=*gene]                                             ::  ^*  hatras
+    [%htsg p=*gene]                                             ::  ^~  hatsig
   ::
-    [%lmbn p=*<%atom %blur %cell %flag %null>]  ::  ;=  lomben
-    [%lmnb p=*gene]                             ::  ;-  lomnub
-    [%lmpd p=*gene]                             ::  ;+  lompod
+    [%lmbn p=*<%atom %blur %cell %flag %null>]                  ::  ;=  lomben
+    [%lmnb p=*gene]                                             ::  ;-  lomnub
+    [%lmpd p=*gene]                                             ::  ;+  lompod
   ::
-    [%mtbn p=*rope q=*rack]                     ::  %=  mitben
-    [%mtbr p=*rope q=*gene r=*rack]             ::  %|  mitbar
-    [%mtcb p=*axis]                             ::  %_  mitcab
-    [%mtdg p=*gene q=*gene]                     ::  %:  mitdig
-    [%mtdt p=*gene q=*gene]                     ::  %.  mitdot
-    [%mtht p=*gene q=*gene r=*gene s=*gene]     ::  %^  mithat
-    [%mtmp p=*term]                             ::  %   mitamp
-    [%mtnb p=*gene q=*bank]                     ::  %-  mitnub  
-    [%mtpd p=*gene q=*gene r=*gene]             ::  %+  mitpod
-    [%mtrs p=*gene]                             ::  %*  mitras
-    [%mtsg p=*rope q=*gene r=*gene]             ::  %~  mitsig
+    [%mtbn p=*rope q=*(list &[p=*gene q=*gene])]                ::  %=  mitben
+    [%mtbr p=*rope q=*gene r=*(list &[p=*gene q=*gene])]        ::  %|  mitbar
+    [%mtdg p=*gene q=*gene]                                     ::  %:  mitdig
+    [%mtdt p=*gene q=*gene]                                     ::  %.  mitdot
+    [%mtht p=*gene q=*gene r=*gene s=*gene]                     ::  %^  mithat
+    [%mtmp p=*term]                                             ::  %&  mitamp
+    [%mtnb p=*gene q=*(list gene)]                              ::  %-  mitnub  
+    [%mtpd p=*gene q=*gene r=*gene]                             ::  %+  mitpod
+    [%mtrs p=*gene]                                             ::  %*  mitras
+    [%mtsg p=*rope q=*gene r=*gene]                             ::  %~  mitsig
   ::
-    [%skbn p=*gene q=*gene]                     ::  ?=  askben
-    [%skbr p=*bank]                             ::  ?|  askbar
-    [%skdg p=*gene q=*gene r=*gene]             ::  ?:  askdig
-    [%skdv p=*gene q=*gene]                     ::  ?<  askdev
-    [%skdt p=*gene q=*gene r=*gene]             ::  ?.  askdot
-    [%skhp p=*gene]                             ::  ?!  askhop
-    [%skmp p=*bank]                             ::  ?&  askamp
-    [%sknb p=*gene q=*rack]                     ::  ?-  asknub
-    [%skrd p=*gene q=*gene]                     ::  ?>  askved
-    [%skrs p=*gene q=*bank]                     ::  ?*  askras
-    [%sksg p=*gene q=*gene r=*gene]             ::  ?~  asksig
+    [%skbn p=*gene q=*gene]                                     ::  ?=  askben
+    [%skbr p=*(list gene)]                                      ::  ?|  askbar
+    [%skdg p=*gene q=*gene r=*gene]                             ::  ?:  askdig
+    [%skdv p=*gene q=*gene]                                     ::  ?<  askdev
+    [%skdt p=*gene q=*gene r=*gene]                             ::  ?.  askdot
+    [%skhp p=*gene]                                             ::  ?!  askhop
+    [%skmp p=*(list gene)]                                      ::  ?&  askamp
+    [%sknb p=*gene q=*(list &[p=*gene q=*gene])]                ::  ?-  asknub
+    [%skvd p=*gene q=*gene]                                     ::  ?>  askved
+    [%skrs p=*gene q=*(list gene)]                              ::  ?*  askras
+    [%sksg p=*gene q=*gene r=*gene]                             ::  ?~  asksig
   ==
 
   ::
