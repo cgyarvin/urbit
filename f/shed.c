@@ -141,7 +141,7 @@ u2_sh_mine(u2_ray  wir_r,
         } 
         else {
           bot = u2_rl_take(sad_r, bat);
-#if 1
+#if 0
           printf("battery: in shed! %d.%x\n",
                   u2_ray_a(u2_dog_a(bot)),
                   u2_ray_b(u2_dog_a(bot)));
@@ -170,7 +170,6 @@ u2_sh_mine(u2_ray  wir_r,
             u2_noun xup, axe;
 
             if ( u2_none == (xup = u2_ch_find(u2_shed_cad_r(sad_r), but)) ) {
-              u2_ho_warn_here();
               break;
             }
             else u2_rl_gain(sad_r, xup);
@@ -288,13 +287,13 @@ u2_sh_find(u2_ray  wir_r,
         u2_chip xip = u2_ch_find(u2_shed_cad_r(sad_r), bat);
 
         if ( u2_none == xip ) {
-#if 1
+#if 0
           printf("bat_r %d.%x; hat_r %d.%x; rut_r %d.%x\n",
                   u2_ray_a(bat_r), u2_ray_b(bat_r),
                   u2_ray_a(hat_r), u2_ray_b(hat_r),
                   u2_ray_a(rut_r), u2_ray_b(rut_r));
-#endif
           u2_ho_warn_here();
+#endif
           return u2_none;
         } else {
           if ( u2_yes == _sh_good(cor, xip) ) {

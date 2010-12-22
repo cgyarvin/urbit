@@ -347,9 +347,6 @@ void
 u2_bx_bean_ent(u2_ray  wir_r,
                u2_noun hod)                                       //  transfer
 {
-#if 0
-  u2_rl_lose(wir_r, hod);
-#else
   u2_ray bex_r, sad_r;
 
   if ( (0 == (bex_r = u2_wire_bex_r(wir_r))) ||
@@ -370,12 +367,10 @@ u2_bx_bean_ent(u2_ray  wir_r,
       u2_benx_at(bex_r, zof) = sud;
     }
   }
-#endif
 }
 void
 u2_bx_bean_out(u2_ray wir_r)
 {
-#if 1
   u2_ray bex_r, sad_r;
 
   if ( (0 == (bex_r = u2_wire_bex_r(wir_r))) ||
@@ -391,7 +386,6 @@ u2_bx_bean_out(u2_ray wir_r)
     u2_benx_at(bex_r, zof) = u2_rx(sad_r, u2_t(zof));
     u2_rl_lose(sad_r, zof);
   }
-#endif
 }
 
 /* _print_tape(): print a byte tape.

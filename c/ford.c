@@ -276,7 +276,7 @@ ford_test3(struct ford_state* fod_f,
         printf("test3: no lof\n");
       }
       else {
-        printf("test3: clean\n");
+        printf("::::  ::::  ::::  ::::\n");
         u2_bx_spot(wir_r, u2_nul); 
 #if 0
         u2_err(wir_r, "type", u2_h(lof));
@@ -290,11 +290,10 @@ ford_test3(struct ford_state* fod_f,
           u2_noun pug = u2_nk_nock(wir_r, _0, u2_t(lof));
 
           if ( (u2_none != hup) && (u2_none != pug) ) {
-            printf("ready to test...\n");
             {
               u2_noun muf = u2_nk_nock(wir_r, pug, u2_t(hup));
 
-              u2_err(wir_r, "muf", muf);
+              u2_err(wir_r, 0, muf);
               u2_bx_spot(wir_r, u2_nul);
             }
           }

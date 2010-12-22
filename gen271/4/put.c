@@ -34,7 +34,6 @@
           }
           else {
             if ( u2_yes == j2_mbc(Pit, vor)(wir_r, n_a, u2_h(c)) ) {
-              printf("input: A\n");
               return u2_rt(wir_r, u2_rx(wir_r, n_a), 
                                   c, 
                                   u2_rx(wir_r, r_a));
@@ -51,7 +50,6 @@
                                 u2_rx(wir_r, r_a)));
 
                 u2_rl_lose(wir_r, c);
-                printf("input: B\n");
                 return d;
               }
             }
@@ -65,14 +63,12 @@
           }
           else {
             if ( u2_yes == j2_mbc(Pit, vor)(wir_r, n_a, u2_h(c)) ) {
-              printf("input: C\n");
               return u2_rt(wir_r, u2_rx(wir_r, n_a),
                                   u2_rx(wir_r, l_a), 
                                   c);
             }
             else {
               u2_as_trel(c, &n_c, &l_c, &r_c);
-              printf("input: D\n");
               {
                 u2_noun d = u2_rt
                   (wir_r, u2_rx(wir_r, n_c),

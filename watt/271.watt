@@ -1641,15 +1641,14 @@
   ::
       clay
     ^>  bean.[%clay |=((~(fly club dump) 75))]
-    ?.  ?=([%core *] sut)
-      sut
+    ?>  ?=([%core *] sut)
     ?-    q.sut
         %blue
       sut
     ::
         [%gray *]
       ?>  ?|(!vet (nest(sut p.q.sut) p.sut))
-      [%core p.q.sut %blue r.sut]
+      [%core p=p.q.sut q=%blue r=r.sut]
     ::
         %pink
       sut
@@ -1680,17 +1679,27 @@
       [$$(sut p.q.sut) $(q.sut q.q.sut)]
     ::
         [%core *]
-      :+  %grip
-        ['{' '}']
-      :~  
-        :^    %meld
-            '+'
+      =+  ^=  wut
           %~  dem
             golf
           |-(^-(@ ?~(r.sut 0 .^((add $(r.sut l.r.sut) $(r.sut r.r.sut))))))
-        ~
-      ::
-        $(sut p.sut)
+      :*  %grip
+          ['{' '}']
+          :~  %meld
+              ?-  q.sut
+                  %blue       '+'
+                  [%gray *]   '-'
+                  %pink       '*'
+                  [%teal *]   '/'
+              ==
+              wut
+          ==
+          ?-  q.sut
+            %blue       [$(sut p.sut) ~]
+            [%gray *]   [$(sut p.sut) $(sut p.q.sut) ~]
+            %pink       [$(sut p.sut) ~]
+            [%teal *]   [$(sut p.sut) $(sut p.q.sut) ~]
+          ==
       ==
     ::
         [%cube *]   ~(gut golf p.sut)
@@ -2149,8 +2158,12 @@
           sint 
         ?&
           dext(sut p.sut, bon p.bon)
-          .=(q.sut q.bon)
-          .=(r.sut r.bon)
+        ::
+          =>  .(sut clay(vet |), bon clay(vet |, sut bon))
+          ?&
+            .=(q.sut q.bon)
+            .=(r.sut r.bon)
+          ==
         ==
       ::
           [%cube *]   ?.(?=([%cube *] bon) sint .=(sut bon))
