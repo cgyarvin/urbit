@@ -16,7 +16,7 @@
   {
     u2_noun old = j2_mcy(Pit, vane, make)(wir_r, van, sut, gen);
     u2_noun new = j2_mcy(Pit, vane, make)(wir_r, van, ref, gen);
-    u2_flag pro = u2_sing(wir_r, old, new);
+    u2_flag pro = u2_sing(old, new);
 
     u2_rl_lose(wir_r, new);
     u2_rl_lose(wir_r, old);

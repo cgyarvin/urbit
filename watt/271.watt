@@ -1660,6 +1660,16 @@
     ==
   ::::
   ::
+      dirt
+    ?>  ?=([%core *] sut)
+    ?-    q.sut
+        %blue       sut
+        [%gray *]   [%core p=p.q.sut q=%blue r=r.sut]
+        %pink       sut
+        [%teal *]   [%core p=p.q.sut q=%pink r=r.sut]
+    ==
+  ::::
+  ::
       dump
     ^-  *ball
     =+  gil=*(pool type)
@@ -1823,7 +1833,7 @@
     ^-  ?
     ^>  bean.[%fair]
     ?-    dab
-        ~         0
+        ~         &
         [* ~ ~]   (firm ref q.n.dab)
         [* ~ *]   ?&((firm ref q.n.dab) $(dab r.dab))
         [* * ~]   ?&((firm ref q.n.dab) $(dab l.dab))
@@ -2158,12 +2168,7 @@
           sint 
         ?&
           dext(sut p.sut, bon p.bon)
-        ::
-          =>  .(sut clay(vet |), bon clay(vet |, sut bon))
-          ?&
-            .=(q.sut q.bon)
-            .=(r.sut r.bon)
-          ==
+          =>(.(sut dirt, bon dirt(sut bon)) .=(+>.sut +>.bon))
         ==
       ::
           [%cube *]   ?.(?=([%cube *] bon) sint .=(sut bon))

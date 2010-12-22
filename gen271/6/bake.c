@@ -17,29 +17,34 @@
       return _0;
     }
     else {
-      u2_noun n_dab, l_dab, r_dab, qn_dab;
-
+      u2_noun n_dab, l_dab, r_dab; 
+     
       u2_as_trel(dab, &n_dab, &l_dab, &r_dab);
-      qn_dab = u2_t(n_dab);
-      
-      if ( (u2_nul == l_dab) && (u2_nul == r_dab) ) {
-        return j2_mcy(Pit, vane, make)(wir_r, van, sut, qn_dab);
-      }
-      else if ( (u2_nul == l_dab) ) {
-        return u2_bc
-          (wir_r, j2_mcy(Pit, vane, make)(wir_r, van, sut, qn_dab),
-                  j2_mcy(Pit, vane, bake)(wir_r, van, sut, r_dab));
-      }
-      else if ( (u2_nul == r_dab) ) {
-        return u2_bc
-          (wir_r, j2_mcy(Pit, vane, make)(wir_r, van, sut, qn_dab),
-                  j2_mcy(Pit, vane, bake)(wir_r, van, sut, l_dab));
-      }
+      if ( u2_no == u2_dust(n_dab) ) {
+        return u2_bl_bail(wir_r);
+      } 
       else {
-        return u2_bt
-          (wir_r, j2_mcy(Pit, vane, make)(wir_r, van, sut, qn_dab),
-                  j2_mcy(Pit, vane, bake)(wir_r, van, sut, l_dab),
-                  j2_mcy(Pit, vane, bake)(wir_r, van, sut, r_dab));
+        u2_noun qn_dab = u2_t(n_dab);
+      
+        if ( (u2_nul == l_dab) && (u2_nul == r_dab) ) {
+          return j2_mcy(Pit, vane, make)(wir_r, van, sut, qn_dab);
+        }
+        else if ( (u2_nul == l_dab) ) {
+          return u2_bc
+            (wir_r, j2_mcy(Pit, vane, make)(wir_r, van, sut, qn_dab),
+                    j2_mcy(Pit, vane, bake)(wir_r, van, sut, r_dab));
+        }
+        else if ( (u2_nul == r_dab) ) {
+          return u2_bc
+            (wir_r, j2_mcy(Pit, vane, make)(wir_r, van, sut, qn_dab),
+                    j2_mcy(Pit, vane, bake)(wir_r, van, sut, l_dab));
+        }
+        else {
+          return u2_bt
+            (wir_r, j2_mcy(Pit, vane, make)(wir_r, van, sut, qn_dab),
+                    j2_mcy(Pit, vane, bake)(wir_r, van, sut, l_dab),
+                    j2_mcy(Pit, vane, bake)(wir_r, van, sut, r_dab));
+        }
       }
     }
   }

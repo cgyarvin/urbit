@@ -13,6 +13,14 @@
     _nest_sint(u2_wire, u2_noun, u2_noun, u2_noun, u2_noun);
   /*
   */
+  static void
+  _nest_dirt(u2_noun *p_sut, u2_noun *q_sut)
+  {
+    if ( u2_yes == u2_dust(*q_sut) ) switch ( u2_h(*q_sut) ) {
+      case c3__gray: *p_sut = u2_t(*q_sut); *q_sut = c3__blue;
+      case c3__teal: *p_sut = u2_t(*q_sut); *q_sut = c3__pink;
+    }
+  }
 
   static u2_flag
   _nest_dext(u2_wire wir_r,
@@ -64,6 +72,9 @@
           return u2_bl_bail(wir_r);
         } else {
           if ( (u2_yes == u2_as_pqr(bon, c3__core, &p_bon, &q_bon, &r_bon)) ) {
+            _nest_dirt(&p_sut, &q_sut);
+            _nest_dirt(&p_bon, &q_bon);
+
             return u2_and
               (u2_sing(q_sut, q_bon),
                u2_and

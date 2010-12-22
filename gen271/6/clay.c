@@ -50,7 +50,9 @@
                       c3__pink, 
                       u2_rx(wir_r, r_sut));
 
-            if ( u2_no == j2_mcy(Pit, vane, fair)(wir_r, van, dox, r_sut) ) {
+            if ( u2_no == j2_mcy(Pit, vane, fair)
+                (wir_r, van, sut, dox, r_sut) ) 
+            {
               fprintf(stderr, "clay: pink error\n");
 
               u2_rl_lose(wir_r, dox);

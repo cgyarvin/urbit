@@ -174,32 +174,37 @@ J271_4_OFILES=\
 
 J271_6_OFILES=\
        gen271/6/bake.o \
+       gen271/6/clay.o \
        gen271/6/comb.o \
        gen271/6/cons.o \
        gen271/6/eith.o \
        gen271/6/etch.o \
+       gen271/6/fair.o \
        gen271/6/find.o \
+       gen271/6/firm.o \
        gen271/6/fish.o \
        gen271/6/flan.o \
        gen271/6/flip.o \
        gen271/6/flor.o \
        gen271/6/hike.o \
+       gen271/6/look.o \
        gen271/6/make.o \
        gen271/6/mill.o \
        gen271/6/name.o \
        gen271/6/nest.o \
+       gen271/6/peek.o \
        gen271/6/play.o \
        gen271/6/reap.o \
        gen271/6/ream.o \
        gen271/6/twin.o \
-       gen271/6/vane.o
+       gen271/6/vane.o 
 
 J271_OFILES=\
        $(J271_1_OFILES) \
        $(J271_2_OFILES) \
        $(J271_3_OFILES) \
        $(J271_4_OFILES) \
-       gen271/6/ream.o \
+       $(J271_6_OFILES) \
        gen271/watt.o
 
 OFILES=\

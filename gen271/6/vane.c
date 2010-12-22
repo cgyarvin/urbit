@@ -27,18 +27,20 @@
 #if 0
     { j2_sc(Pit, vane, bake), j2_mcj(Pit, vane, bake), 0, 0, u2_none },
     { j2_sc(Pit, vane, etch), j2_mcj(Pit, vane, etch), 0, 0, u2_none },
+    { j2_sc(Pit, vane, find), j2_mcj(Pit, vane, find), 0, 0, u2_none },
     { j2_sc(Pit, vane, make), j2_mcj(Pit, vane, make), 0, 0, u2_none },
     { j2_sc(Pit, vane, mill), j2_mcj(Pit, vane, mill), 0, 0, u2_none },
     { j2_sc(Pit, vane, nest), j2_mcj(Pit, vane, nest), 0, 0, u2_none },
     { j2_sc(Pit, vane, play), j2_mcj(Pit, vane, play), 0, 0, u2_none },
     { j2_sc(Pit, vane, reap), j2_mcj(Pit, vane, reap), 0, 0, u2_none },
+    { j2_sc(Pit, vane, seek), j2_mcj(Pit, vane, seek), 0, 0, u2_none },
     { }
 #endif
   };
 
   u2_ho_jet 
   j2_mbj(Pit, vane)[] = {
-#if 0
+#if 1
     { "clay", c3__hevy, j2_mc(Pit, vane, clay), u2_no, u2_none, u2_none },
 #endif
     { }
