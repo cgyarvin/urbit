@@ -16,7 +16,7 @@
 
     if ( u2_no == u2_as_pqr(sut, c3__core, &p_sut, &q_sut, &r_sut) ) {
       return u2_bl_bail(wir_r);
-    } else{
+    } else {
       if ( u2_yes == u2_stud(q_sut) ) {
         return u2_rx(wir_r, sut);
       } else {
@@ -38,7 +38,7 @@
           }
           return u2_bq
             (wir_r, c3__core,
-                    u2_rx(wir_r, p_sut),
+                    u2_rx(wir_r, pq_sut),
                     c3__blue,
                     u2_rx(wir_r, r_sut));
         }

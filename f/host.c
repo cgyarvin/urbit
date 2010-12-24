@@ -518,32 +518,36 @@ _ho_extract(u2_noun    xip,
       if ( (u2_yes == u2_sing_c(fcs_c, u2_h(i_nut))) ) {
         u2_noun fal = u2_t(i_nut);
 
-        /* `fal` must match `[2 [0 1] [0 x]]`
+        /* `fal` must match `[9 x [0 1]]`
         */
-        if ( (u2_yes == u2_dust(fal)) &&
-             (u2_nock_sail == u2_h(fal)) &&
-             (u2_yes == u2_dust(u2_t(fal))) )
-        {
-          u2_noun ht_fal = u2_h(u2_t(fal));
-          u2_noun tt_fal = u2_t(u2_t(fal));
+        if ( (u2_yes == u2_dust(fal)) && (u2_nock_kick == u2_h(fal)) ) {
+          u2_noun t_fal = u2_t(fal);
 
-          if ( (_0 == u2_h(ht_fal)) && 
-               (_1 == u2_t(ht_fal)) &&
-               (_0 == u2_h(tt_fal)) &&
-               (u2_yes == u2_stud(u2_t(tt_fal))) )
-          {
-            u2_atom axe = u2_t(tt_fal);
+          if ( u2_yes == u2_dust(t_fal) ) {
+            u2_noun ht_fal = u2_h(t_fal);
+            u2_noun tt_fal = u2_t(t_fal);
 
-            if ( !u2_fly_is_cat(axe) ) {
-              u2_ho_warn_here();
+            if ( (u2_yes == u2_stud(ht_fal)) &&
+                 (u2_yes == u2_dust(tt_fal)) &&
+                 (_0 == u2_h(tt_fal)) &&
+                 (_1 == u2_t(tt_fal)) )
+            {
+              u2_atom axe = ht_fal;
+
+              if ( !u2_fly_is_cat(axe) ) {
+                u2_ho_warn_here();
+              }
+              axe = u2_fj_op_tap(0, axe);
+
+              return u2_frag(axe, bat);
             }
-            axe = u2_fj_op_tap(0, axe);
-
-            return u2_frag(axe, bat);
           }
         }
+        printf("%s: bad formula\n", fcs_c);
+        u2_err(0, "fal", fal);
         return u2_none;
       }
+      nut = u2_t(nut);
     }
     return u2_none;
   }

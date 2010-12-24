@@ -614,8 +614,8 @@ u2_as_cell(u2_noun  a,
     return u2_no;
   }
   else {
-    *b = u2_h(a);
-    *c = u2_t(a);
+    if ( b ) *b = u2_h(a);
+    if ( c ) *c = u2_t(a);
     return u2_yes;
   }
 }

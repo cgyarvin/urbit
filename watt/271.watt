@@ -1567,11 +1567,8 @@
     type
   |?
     %atom
-  ::
     %blur
-  ::
     %blot
-  ::
     [%cell p=*type q=*type]
   ::
     :*  %core
@@ -1581,11 +1578,8 @@
     ==
   ::
     [%cube p=*]
-  ::
     [%face p=*term q=*type]
-  ::
     [%fork p=*type q=*type]
-  ::
     [%hold p=*type q=*gene]
   ==
 ::::

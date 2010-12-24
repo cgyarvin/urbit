@@ -56,7 +56,6 @@
               return pro;
             }
           }
-
         }
         else if ( (u2_nul == r_dab) ) {
           if ( u2_yes == u2_sing(cog, pn_dab) ) {
@@ -97,7 +96,7 @@
               u2_noun pro;
 
               axe = j2_mbc(Pit, peg)(wir_r, axe, _7);
-              pro = _look_in(wir_r, cog, l_dab, axe);
+              pro = _look_in(wir_r, cog, r_dab, axe);
               u2_rl_lose(wir_r, axe);
               return pro;
             }
