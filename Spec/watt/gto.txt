@@ -11,20 +11,20 @@ Gene - AST
     [~ p=^+(@ *axis)]
   ::
     [%bndv p=*gene q=*gene]                                     ::  =<  bendev
-    [%bnnb p=*gene q=*gene]                                     ::  =-  bennub
+    [%bnnp p=*gene q=*gene]                                     ::  =-  bennup
     [%bnpd p=*gene q=*gene]                                     ::  =+  benpod
     [%bnvd p=*gene q=*gene]                                     ::  =>  benved
   ::
     [%brbn p=*gene]                                             ::  |=  barben
     [%brdg p=*gene]                                             ::  |:  bardig
     [%brmt p=*(list &[p=*term q=*gene])]                        ::  |%  barmit
-    [%brnb p=*gene]                                             ::  |-  barnub
+    [%brnp p=*gene]                                             ::  |-  barnup
     [%brrs p=*(list &[p=*term q=*gene])]                        ::  |*  barras
     [%brsg p=*gene q=*(list gene)]                              ::  |~  barsig
     [%brsk p=*(list gene)]                                      ::  |?  barask
   ::
     [%dght p=*gene q=*gene r=*gene s=*gene]                     ::  :^  dighat
-    [%dgnb p=*gene q=*gene]                                     ::  :-  dignub
+    [%dgnp p=*gene q=*gene]                                     ::  :-  dignup
     [%dgpd p=*gene q=*gene r=*gene]                             ::  :+  digpod
     [%dgrs p=*(list gene)]                                      ::  :*  digras
     [%dgsg p=*(list gene)]                                      ::  :~  digsig
@@ -46,14 +46,14 @@ Gene - AST
     [%htdg p=*gene q=*gene]                                     ::  ^:  hatdig
     [%htdv p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^<  hatdev
     [%htmt p=*gene q=*gene]                                     ::  ^%  hatmit
-    [%htnb p=*gene q=*gene]                                     ::  ^-  hatnub
+    [%htnp p=*gene q=*gene]                                     ::  ^-  hatnup
     [%htpd p=*gene q=*gene]                                     ::  ^+  hatpod
     [%htvd p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^>  hatved
     [%htrs p=*gene]                                             ::  ^*  hatras
     [%htsg p=*gene]                                             ::  ^~  hatsig
   ::
     [%lmbn p=*<%atom %blur %cell %flag %null>]                  ::  ;=  lomben
-    [%lmnb p=*gene]                                             ::  ;-  lomnub
+    [%lmnp p=*gene]                                             ::  ;-  lomnup
     [%lmpd p=*gene]                                             ::  ;+  lompod
   ::
     [%mtbn p=*rope q=*(list &[p=*gene q=*gene])]                ::  %=  mitben
@@ -62,7 +62,7 @@ Gene - AST
     [%mtdt p=*gene q=*gene]                                     ::  %.  mitdot
     [%mtht p=*gene q=*gene r=*gene s=*gene]                     ::  %^  mithat
     [%mtmp p=*term]                                             ::  %&  mitamp
-    [%mtnb p=*gene q=*(list gene)]                              ::  %-  mitnub  
+    [%mtnp p=*gene q=*(list gene)]                              ::  %-  mitnup  
     [%mtpd p=*gene q=*gene r=*gene]                             ::  %+  mitpod
     [%mtrs p=*gene]                                             ::  %*  mitras
     [%mtsg p=*rope q=*gene r=*gene]                             ::  %~  mitsig
@@ -74,7 +74,7 @@ Gene - AST
     [%skdt p=*gene q=*gene r=*gene]                             ::  ?.  askdot
     [%skhp p=*gene]                                             ::  ?!  askhop
     [%skmp p=*(list gene)]                                      ::  ?&  askamp
-    [%sknb p=*gene q=*(list &[p=*gene q=*gene])]                ::  ?-  asknub
+    [%sknp p=*gene q=*(list &[p=*gene q=*gene])]                ::  ?-  asknup
     [%skvd p=*gene q=*gene]                                     ::  ?>  askved
     [%skrs p=*gene q=*(list gene)]                              ::  ?*  askras
     [%sksg p=*gene q=*gene r=*gene]                             ::  ?~  asksig
@@ -149,7 +149,7 @@ Axes
 
 Signs (ven = repeat)
 --
-  amp   &       dig   :       nub   -     toq   "
+  amp   &       dig   :       nup   -     toq   "
   ask   ?       dot   .       pat   @     ved   >
   bar   |       dus   }       pel   )
   ben   =       hat   ^       pod   +

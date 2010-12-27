@@ -61,7 +61,7 @@
             u2_noun rac = j2_mby(Pit, rake)(wir_r, q_gen);
             u2_noun hap = j2_mcy(Pit, vane, play)(wir_r, van, sut, p_gen);
             u2_noun vul = j2_mcy(Pit, vane, play)(wir_r, van, sut, q_gen);
-            u2_noun gav = j2_mcy(Pit, vane, reap)(wir_r, vul, hap);
+            u2_noun gav = j2_mcy(Pit, vane, reap)(wir_r, van, vul, hap);
             u2_noun pro = j2_mcy(Pit, vane, etch)(wir_r, van, sut, rac, gav);
 
             u2_rl_lose(wir_r, rac);

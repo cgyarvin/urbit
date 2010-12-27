@@ -33,8 +33,8 @@
           u2_noun pi_har = u2_h(i_har);
           u2_noun qi_har = u2_t(i_har);
           u2_noun rep = j2_mby(Pit, rake)(wir_r, pi_har);
-          u2_noun cux = j2_mcy(Pit, mill)(wir_r, van, sun, qi_har);
-          u2_noun bop = j2_mcy(Pit, make)(wir_r, van, mun, pi_har);
+          u2_noun cux = j2_mcy(Pit, vane, mill)(wir_r, van, sut, qi_har);
+          u2_noun bop = j2_mcy(Pit, vane, make)(wir_r, van, mun, pi_har);
           u2_noun p_cux = u2_h(cux);
           u2_noun q_cux = u2_t(cux);
           u2_noun h_bop = u2_h(bop);
@@ -44,13 +44,13 @@
             return u2_bl_bail(wir_r);
           }
           else {
-            u2_noun hec = j2_mcy(Pit, vane, etch)(wir_r, mun, rep, p_cux);
+            u2_noun hec = j2_mcy(Pit, vane, etch)(wir_r, van, mun, rep, p_cux);
 
             u2_rl_lose(wir_r, mun);
             mun = hec;
 
             luf = u2_bc(wir_r,
-                        u2_bc(wir_r, u2_rx(wir_r, p_bop),
+                        u2_bc(wir_r, u2_rx(wir_r, t_bop),
                                      u2_rx(wir_r, q_cux)),
                         luf);
 

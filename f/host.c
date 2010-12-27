@@ -725,6 +725,7 @@ u2_ho_fire(u2_ray   wir_r,
            u2_flag  *saf)
 {
   u2_ho_jet* jet_j;
+  u2_weak pro;
 
   if ( 0 == (jet_j = _ho_discover(wir_r, xip, fol, cor)) ) {
     return u2_none;
@@ -739,11 +740,17 @@ u2_ho_fire(u2_ray   wir_r,
       if ( (u2_yes == ace) || (jet_j->zic_w != 0) ) {
         *saf = u2_yes;
         // fprintf(stderr, "fire: %s\n", _ho_cstring(xip));
-        return _ho_execute(wir_r, jet_j, cor);
+        pro =_ho_execute(wir_r, jet_j, cor);
+
+        if ( u2_none == pro ) {
+          c3_c *cos_c = _ho_cstring(xip);
+
+          fprintf(stderr, "jet bail: %s\n", cos_c);
+          free(cos_c);
+        }
+        return pro;
       }
       else {
-        u2_noun pro;
-
         /* Increment fast counter during jet execution.
         */
         jet_j->zic_w++;
@@ -755,6 +762,13 @@ u2_ho_fire(u2_ray   wir_r,
         jet_j->zoc_w++;
 
         *saf = u2_no;
+
+        if ( u2_none == pro ) {
+          c3_c *cos_c = _ho_cstring(xip);
+
+          fprintf(stderr, "jet bail: %s\n", cos_c);
+          free(cos_c);
+        }
         return pro;
       }
     }

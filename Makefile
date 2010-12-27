@@ -186,9 +186,11 @@ J271_6_OFILES=\
        gen271/6/flan.o \
        gen271/6/flip.o \
        gen271/6/flor.o \
+       gen271/6/gain.o \
        gen271/6/hike.o \
        gen271/6/look.o \
        gen271/6/make.o \
+       gen271/6/mesh.o \
        gen271/6/mill.o \
        gen271/6/name.o \
        gen271/6/nest.o \
@@ -196,6 +198,7 @@ J271_6_OFILES=\
        gen271/6/play.o \
        gen271/6/reap.o \
        gen271/6/ream.o \
+       gen271/6/seek.o \
        gen271/6/twin.o \
        gen271/6/vane.o 
 

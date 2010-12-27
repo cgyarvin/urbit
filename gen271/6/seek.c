@@ -21,8 +21,8 @@
       return u2_bl_bail(wir_r);
     }
     else {
-      u2_noun i_rep = u2_ch(rep);
-      u2_noun t_rep = u2_ct(rep);
+      u2_noun i_rep = u2_h(rep);
+      u2_noun t_rep = u2_t(rep);
       u2_noun vag = j2_mcy(Pit, vane, seek)(wir_r, van, sut, t_rep);
       u2_noun p_vag, q_vag, r_vag;
       u2_noun pro;
@@ -56,7 +56,7 @@
           pro = u2_bt
             (wir_r, j2_mbc(Pit, peg)(wir_r, p_vag, pi_rep),
                     u2_nul,
-                    j2_mcy(Pit, peek)(wir_r, r_vag, pi_rep));
+                    j2_mcy(Pit, vane, peek)(wir_r, van, r_vag, pi_rep));
 
           u2_rl_lose(wir_r, vag);
           return pro;

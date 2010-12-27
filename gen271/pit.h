@@ -255,6 +255,10 @@
     /** Tier 6.
     **/
       u2_noun                                                     //  transfer
+      j2_mbc(Pit, comb)(u2_wire wir_r, 
+                        u2_noun mal,                              //  retain
+                        u2_noun buz);                             //  retain
+      u2_noun                                                     //  transfer
       j2_mby(Pit, cons)(u2_wire wir_r, 
                         u2_noun vur,                              //  retain
                         u2_noun sed);                             //  retain
