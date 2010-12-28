@@ -1155,7 +1155,6 @@
     [%mtdg p=*gene q=*gene]                                     ::  %:  mitdig
     [%mtdt p=*gene q=*gene]                                     ::  %.  mitdot
     [%mtht p=*gene q=*gene r=*gene s=*gene]                     ::  %^  mithat
-    [%mtmp p=*term]                                             ::  %   mitamp
     [%mtnp p=*gene q=*(list gene)]                              ::  %-  mitnup  
     [%mtpd p=*gene q=*gene r=*gene]                             ::  %+  mitpod
     [%mtrs p=*gene]                                             ::  %*  mitras
@@ -1342,11 +1341,15 @@
     ::
         [%htbn *]   [%htbn p.gen $(gen q.gen)]
     ::
+        [%htdv *]   [%htdv p.gen $(gen q.gen)]
+    ::
         [%htmt *]   [%htmt $(gen p.gen) $(gen q.gen)]
+    ::
+        [%htnp *]   $(gen p.gen)
     ::
         [%htpd *]   $(gen p.gen)
     ::
-        [%htnp *]   $(gen p.gen)
+        [%htvd *]   [%htvd p.gen $(gen q.gen)]
     ::
         [%lmbn *]   gen
     ::
@@ -1375,7 +1378,7 @@
     ::
         [%brdg *]   [%brmt [[%% p.gen] ~]]                              ::  |:
     ::
-        [%brnp *]   [%bnvd [%brbn p.gen] [%mtmp %%]]                    ::  |-
+        [%brnp *]   [%bnvd [%brbn p.gen] %%]                            ::  |-
     ::
         [%brsg *]                                                       ::  |~
       |-
@@ -1469,11 +1472,9 @@
     ::
         [%mtht *]   [%mtnp p.gen q.gen r.gen s.gen ~]                   ::  %^
     ::
-        [%mtmp *]   [%mtbn [p.gen ~] ~]                                 ::  %&
-    ::
         [%mtnp *]                                                       ::  %-  
       ?~  q.gen
-        [%bnvd p.gen [%mtmp %%]]
+        [%bnvd p.gen %%]
       [%mtdg p.gen [%dgrs q.gen]]
     ::                                                                  ::  %+
         [%mtpd *]   [%mtnp p.gen q.gen r.gen ~]
