@@ -169,8 +169,11 @@ J271_3_OFILES=\
 
 J271_4_OFILES=\
        gen271/4/in.o \
-       gen271/4/has.o \
-       gen271/4/put.o
+       gen271/4/by.o \
+       gen271/4/in_has.o \
+       gen271/4/in_put.o \
+       gen271/4/by_put.o \
+       gen271/4/by_gas.o \
 
 J271_6_OFILES=\
        gen271/6/bake.o \
@@ -193,9 +196,11 @@ J271_6_OFILES=\
        gen271/6/mesh.o \
        gen271/6/mill.o \
        gen271/6/name.o \
+       gen271/6/open.o \
        gen271/6/nest.o \
        gen271/6/peek.o \
        gen271/6/play.o \
+       gen271/6/rake.o \
        gen271/6/reap.o \
        gen271/6/ream.o \
        gen271/6/seek.o \

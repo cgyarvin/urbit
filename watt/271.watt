@@ -1893,14 +1893,6 @@
     ==
   ::::
   ::
-      fill
-    ^<  mine.[!=(->) %fill ~]
-    =+  sem=*(list &[p=*term q=*gene])
-    |=
-    ^-  *(book term gene)
-    (~(gas by *(book term gene)) sem) 
-  ::::
-  ::
       firm
     ^<  mine.[!=(->) %firm ~]
     =+  [ref=*type gen=*gene]
@@ -1985,12 +1977,12 @@
       [p.dov (comb q.fid q.dov)]
     ::
         %brmt                                                           ::  |%
-      =+  sac=(fill p.gen)
+      =+  sac=(~(gas by ~) p.gen) 
       =+  toc=[%core sut %pink sac]
       [toc [[0 1] [1 (bake(sut toc) sac)]]]
     ::
         %brrs                                                           ::  |*
-      =+  sac=(fill p.gen)
+      =+  sac=(~(gas by ~) p.gen) 
       =+  toc=[%core sut %blue sac]
       [toc [[0 1] [1 (bake(sut toc) sac)]]]
     ::

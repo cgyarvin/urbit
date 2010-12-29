@@ -247,9 +247,19 @@
       j2_mcc(Pit, in, put)(u2_wire wir_r, 
                            u2_noun a,                             //  retain
                            u2_noun b);                            //  retain
-
       u2_flag 
       j2_mcc(Pit, in, has)(u2_wire wir_r, 
+                           u2_noun a,                             //  retain
+                           u2_noun b);                            //  retain
+
+      u2_weak                                                     //  transfer
+      j2_mcc(Pit, by, put)(u2_wire wir_r, 
+                           u2_noun a,                             //  retain
+                           u2_noun b,                             //  retain
+                           u2_noun c);                            //  retain
+
+      u2_weak                                                     //  transfer
+      j2_mcc(Pit, by, gas)(u2_wire wir_r, 
                            u2_noun a,                             //  retain
                            u2_noun b);                            //  retain
     /** Tier 6.
@@ -295,6 +305,14 @@
       j2_mby(Pit, look)(u2_wire wir_r, 
                         u2_noun cog,                              //  retain
                         u2_noun dab);                             //  retain
+
+      u2_noun                                                     //  transfer
+      j2_mby(Pit, open)(u2_wire wir_r, 
+                        u2_noun gen);                             //  retain
+
+      u2_noun                                                     //  transfer
+      j2_mby(Pit, rake)(u2_wire wir_r, 
+                        u2_noun gen);                             //  retain
 
       u2_noun                                                     //  transfer
       j2_mby(Pit, twin)(u2_wire wir_r, 
@@ -346,6 +364,12 @@
                               u2_noun gen);                       //  retain
 
       u2_noun                                                     //  transfer
+      j2_mcy(Pit, vane, fish)(u2_wire wir_r, 
+                              u2_noun van,                        //  retain
+                              u2_noun sut,                        //  retain
+                              u2_atom axe);                       //  retain
+
+      u2_noun                                                     //  transfer
       j2_mcy(Pit, vane, gain)(u2_wire wir_r, 
                               u2_noun van,                        //  retain
                               u2_noun sut,                        //  retain
@@ -377,11 +401,13 @@
                               u2_noun van,                        //  retain
                               u2_noun sut,                        //  retain
                               u2_noun gen);                       //  retain
+
       u2_flag                                                     //  transfer
       j2_mcy(Pit, vane, nest)(u2_wire wir_r, 
                               u2_noun van,                        //  retain
                               u2_noun sut,                        //  retain
                               u2_noun bon);                       //  retain
+
       u2_noun                                                     //  transfer
       j2_mcy(Pit, vane, peek)(u2_wire wir_r, 
                               u2_noun van,                        //  retain

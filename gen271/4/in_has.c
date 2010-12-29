@@ -1,4 +1,4 @@
-/* j/4/has.c
+/* j/4/in_has.c
 **
 ** This file is in the public domain.
 */

@@ -24,8 +24,8 @@
 */
   u2_ho_driver 
   j2_mbd(Pit, vane)[] = {
-    { j2_sc(Pit, vane, nest), j2_mcj(Pit, vane, nest), 0, 0, u2_none },
 #if 0
+    { j2_sc(Pit, vane, nest), j2_mcj(Pit, vane, nest), 0, 0, u2_none },
     { j2_sc(Pit, vane, bake), j2_mcj(Pit, vane, bake), 0, 0, u2_none },
     { j2_sc(Pit, vane, etch), j2_mcj(Pit, vane, etch), 0, 0, u2_none },
     { j2_sc(Pit, vane, find), j2_mcj(Pit, vane, find), 0, 0, u2_none },

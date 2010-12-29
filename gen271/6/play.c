@@ -13,11 +13,14 @@
                           u2_noun sut,                            //  retain
                           u2_noun gen)                            //  retain
   {
-    u2_noun pox = j2_mcy(Pit, vane, mill)(wir_r, van, sut, gen);
+    u2_noun vin = u2_bn_molt(wir_r, van, 87, u2_no, 0);
+    u2_noun pox = j2_mcy(Pit, vane, mill)(wir_r, vin, sut, gen);
     u2_noun h_pox = u2_h(pox);
 
     u2_rl_gain(wir_r, h_pox);
     u2_rl_lose(wir_r, pox); 
+    u2_rl_lose(wir_r, vin);
+
     return h_pox;
   }
   u2_noun                                                         //  transfer

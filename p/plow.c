@@ -909,7 +909,7 @@
     }
   }
 
-    u2_noun
+    static u2_noun
     _mtbr_a(u2_ray  wir_r,
             u2_noun r_gen)
     {

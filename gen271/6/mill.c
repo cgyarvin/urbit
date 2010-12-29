@@ -87,7 +87,7 @@
         case c3__brmt: {
           p_gen = u2_t(gen);
           {
-            u2_noun sac = j2_mby(Pit, fill)(wir_r, p_gen);
+            u2_noun sac = j2_mcc(Pit, by, gas)(wir_r, u2_nul, p_gen);
             u2_noun toc = u2_bq(wir_r, c3__core,
                                        u2_rx(wir_r, sut),
                                        c3__pink,
@@ -108,7 +108,7 @@
         case c3__brrs: {
           p_gen = u2_t(gen);
           {
-            u2_noun sac = j2_mby(Pit, fill)(wir_r, p_gen);
+            u2_noun sac = j2_mcc(Pit, by, gas)(wir_r, u2_nul, p_gen);
             u2_noun toc = u2_bq(wir_r, c3__core,
                                        u2_rx(wir_r, sut),
                                        c3__blue,
