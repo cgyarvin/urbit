@@ -18,6 +18,7 @@
 
     u2_rl_gain(wir_r, t_pox);
     u2_rl_lose(wir_r, pox); 
+
     return t_pox;
   }
   u2_noun                                                         //  transfer

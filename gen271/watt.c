@@ -64,6 +64,7 @@
   /* tier 4
   */
     extern u2_ho_driver j2_mbd(Pit, in)[];
+    extern u2_ho_driver j2_mbd(Pit, by)[];
 
   /* tier 6
   */
@@ -76,6 +77,8 @@
     extern u2_ho_jet j2_mbj(Pit, hike)[];
     extern u2_ho_jet j2_mbj(Pit, look)[];
     extern u2_ho_jet j2_mbj(Pit, name)[];
+    extern u2_ho_jet j2_mbj(Pit, open)[];
+    extern u2_ho_jet j2_mbj(Pit, rake)[];
     extern u2_ho_jet j2_mbj(Pit, ream)[];
     extern u2_ho_jet j2_mbj(Pit, twin)[];
     extern u2_ho_jet j2_mbj(Pit, vane)[];
@@ -143,6 +146,7 @@
     /* tier 4
     */
       { j2_sb(Pit, in), 0, j2_mbd(Pit, in), 0, u2_none },
+      { j2_sb(Pit, by), 0, j2_mbd(Pit, by), 0, u2_none },
 
     /* tier 6
     */
@@ -155,6 +159,8 @@
       { j2_sb(Pit, hike), j2_mbj(Pit, hike), 0, 0, u2_none },
       { j2_sb(Pit, look), j2_mbj(Pit, look), 0, 0, u2_none },
       { j2_sb(Pit, name), j2_mbj(Pit, name), 0, 0, u2_none },
+      { j2_sb(Pit, open), j2_mbj(Pit, open), 0, 0, u2_none },
+      { j2_sb(Pit, rake), j2_mbj(Pit, rake), 0, 0, u2_none },
       { j2_sb(Pit, ream), j2_mbj(Pit, ream), 0, 0, u2_none },
       { j2_sb(Pit, twin), j2_mbj(Pit, twin), 0, 0, u2_none },
 #if 1

@@ -754,6 +754,7 @@
   ::::
   ::
       gas
+    ^<  mine.[!=(->) %gas ~]
     =+  b=*(list &[p=* q=*])
     |:  |-
     ^-  a
@@ -775,6 +776,7 @@
   ::::
   ::
       put
+    ^<  mine.[!=(->) %put ~]
     =+  [b=* c=*]
     |:
     ^-  a
@@ -784,16 +786,16 @@
       ?>  .=(c q.n.a)
       a
     ?:  (gor b p.n.a)
-      =+  c=$(a l.a)
-      ?>  ?=(^ c)
-      ?:  (vor p.n.a p.n.c)
-        [n.a c r.a]
-      [n.c l.c [n.a r.c r.a]]
-    =+  c=$(a r.a)
-    ?>  ?=(^ c)
-    ?:  (vor p.n.a p.n.c)
-      [n.a l.a c] 
-    [n.c [n.a l.a l.c] r.c]
+      =+  d=$(a l.a)
+      ?>  ?=(^ d)
+      ?:  (vor p.n.a p.n.d)
+        [n.a d r.a]
+      [n.d l.d [n.a r.d r.a]]
+    =+  d=$(a r.a)
+    ?>  ?=(^ d)
+    ?:  (vor p.n.a p.n.d)
+      [n.a l.a d] 
+    [n.d [n.a l.a l.d] r.d]
   ::::
   ::
       tap
@@ -1183,9 +1185,9 @@
   ?~  pac
     [0 axe]
   =+  zet=(skim ^@(pac) =+([p=*axis q=*tool] |=([.=(1 p)])))
-  =+  tum=(skim ^@(pac) =+([p=*axis q=*tool] |=([?&(!.=(1 p) .=(2 (cap p)))])))
-  =+  gam=(skim ^@(pac) =+([p=*axis q=*tool] |=([?&(!.=(1 p) .=(3 (cap p)))])))
   ?~  zet
+    =+  tum=(skim ^@(pac) =+([p=*axis q=*tool] |=(?&(!.=(1 p) .=(2 (cap p))))))
+    =+  gam=(skim ^@(pac) =+([p=*axis q=*tool] |=(?&(!.=(1 p) .=(3 (cap p))))))
     %+  cons
       %=  $
         axe (peg axe 2)
@@ -1195,7 +1197,7 @@
       axe (peg axe 3)
       pac (turn gam =+([p=*axis q=*tool] |=([(mas p) q])))
     ==
-  ?>(?&(.=(~ tum) .=(~ gam) ?=([* ~] zet)) q.i.zet)
+  ?>(?=([* ~] zet) q.i.zet)
 ::::
 ::
     look
@@ -1245,6 +1247,7 @@
 ::::
 ::
     open
+  ^<  mine.[!=(->) %open ~]
   =+  gen=*gene
   |=
   ^>  bean.%open
@@ -1532,6 +1535,7 @@
 ::::
 ::
     rake
+  ^<  mine.[!=(->) %rake ~]
   =+  gen=*gene
   |=
   ^>  bean.%rake
@@ -1609,6 +1613,7 @@
       :~
         [%mill !=(mill)]
         [%clay !=(clay)]
+        [%dump !=(dump)]
       ==
   =+  :*  fan=*(pool &[*type *gene])      ::  20 in van
           ver=*(pool &[*type *gene])      ::  42 in van
@@ -1714,13 +1719,13 @@
         ['<' '>']
       :-  $(sut p.sut)
       |-
-      ?.  ?=([%cell *] q.sut)
+      ?.  ?=([%fork *] q.sut)
         [$$(sut q.sut) ~]
       [$$(sut p.q.sut) $(q.sut q.q.sut)]
     ::
         [%hold *]
       ?:  (~(has in gil) sut)
-        ~(dem golf (mug sut))
+        [%meld '%' ~(dem golf (mug sut)) ~]
       =>  .(gil (~(put in gil) sut))
       $(gil (~(put in gil) sut), sut (play(sut p.sut) q.sut))
     ==
@@ -1730,9 +1735,6 @@
     ^<  mine.[!=(->) %etch ~]
     =+  [rep=*rope gan=*type]
     |=
-    ^>  bean.[%etch-sut |=((~(fly club dump) 75))]
-    ^>  bean.[%etch-rep |=((~(fly club ~(gut golf `*`rep)) 75))]
-    ^>  bean.[%etch-gan |=((~(fly club dump(sut gan)) 75))]
     =+  per=(flop rep)
     |-
     ^-  *type

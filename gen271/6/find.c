@@ -73,6 +73,8 @@
             u2_noun taf = _find_in(wir_r, van, p_sut, cog, gil);
 
             if ( u2_nul == taf ) {
+              u2_err(wir_r, "blank: cog", cog);
+              u2_err(wir_r, "blank: r_sut", r_sut);
               return u2_nul;
             } else {
               u2_noun p_taf, q_taf, r_taf;
@@ -201,7 +203,7 @@
           else {
             u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, gil, sut);
             u2_type fop = j2_mcy(Pit, vane, play)(wir_r, van, p_sut, q_sut);
-            u2_noun pro = _find_in(wir_r, van, sut, cog, zoc);
+            u2_noun pro = _find_in(wir_r, van, fop, cog, zoc);
 
             u2_rl_lose(wir_r, fop);
             u2_rl_lose(wir_r, zoc);
@@ -224,6 +226,8 @@
     u2_noun fin = _find_in(wir_r, van, sut, cog, u2_nul);
 
     if ( u2_nul == fin ) {
+      u2_err(wir_r, "cog", cog);
+      u2_err(wir_r, "sut", sut);
       return u2_bl_bail(wir_r);
     } else {
       u2_noun pro = u2_rx(wir_r, u2_t(fin));

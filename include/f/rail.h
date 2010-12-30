@@ -180,6 +180,14 @@
           u2_rl_free(u2_ray ral_r,
                      void*  lag_v);
 
+        /* u2_rl_ok():
+        **
+        **   Ensure that all reference counts are valid in `som`.
+        */
+          void
+          u2_rl_ok(u2_ray  ral_r,
+                   u2_noun som);
+          
         /* u2_rl_junior():
         **
         **   Yes iff `dus` is junior in `ral` - ie, must be copied

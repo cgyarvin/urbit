@@ -33,7 +33,7 @@ u2_boot(void)
     setrlimit(RLIMIT_STACK, &rlm);
   }
 
-  signal(SIGINT, _loom_stop);
+  // signal(SIGINT, _loom_stop);
 }
 
 /* u2_mean():

@@ -45,8 +45,13 @@
     u2_noun pro;
 
     if ( u2_no == u2_dust(gen) ) {
-      return u2_bl_bail(wir_r);
-    } else {
+      u2_noun rex = j2_mby(Pit, open)(wir_r, gen);
+
+      pro = j2_mcy(Pit, vane, mill)(wir_r, van, sut, rex);
+      u2_rl_lose(wir_r, rex);
+      return pro;
+    } 
+    else {
       u2_noun vet;
 
       if ( (u2_none == (vet = u2_frag(87, van))) ||
@@ -59,7 +64,9 @@
         default: {
           u2_noun rex = j2_mby(Pit, open)(wir_r, gen);
 
+          u2_rl_ok(wir_r, rex);
           pro = j2_mcy(Pit, vane, mill)(wir_r, van, sut, rex);
+          u2_rl_ok(wir_r, rex);
           u2_rl_lose(wir_r, rex);
           return pro;
         }
@@ -92,8 +99,7 @@
                                        u2_rx(wir_r, sut),
                                        c3__pink,
                                        sac);
-            u2_noun vaq = j2_mcy(Pit, vane, bake)
-                              (wir_r, van, toc, sac);
+            u2_noun vaq = j2_mcy(Pit, vane, bake)(wir_r, van, toc, sac);
 
             pro = u2_bc(wir_r, 
                         toc, 
@@ -101,7 +107,6 @@
                               u2_bc(wir_r, _0, _1),
                               u2_bc(wir_r, _1, vaq)));
 
-            u2_rl_lose(wir_r, sac);
             return pro;
           }
         }
@@ -113,16 +118,13 @@
                                        u2_rx(wir_r, sut),
                                        c3__blue,
                                        sac);
-            u2_noun vaq = j2_mcy(Pit, vane, bake)
-                              (wir_r, van, toc, sac);
+            u2_noun vaq = j2_mcy(Pit, vane, bake)(wir_r, van, toc, sac);
 
             pro = u2_bc(wir_r, 
                         toc, 
                         u2_bc(wir_r,
                               u2_bc(wir_r, _0, _1),
                               u2_bc(wir_r, _1, vaq)));
-
-            u2_rl_lose(wir_r, sac);
             return pro;
           }
         }
@@ -222,7 +224,7 @@
           {
             u2_noun vod = j2_mcy(Pit, vane, make)(wir_r, van, sut, p_gen);
 
-            return u2_bc(wir_r, c3__atom, u2_bc(wir_r, _3, vod));
+            return u2_bc(wir_r, _mill_flag(wir_r), u2_bc(wir_r, _3, vod));
           }
         }
         case c3__hpbn: {
@@ -360,8 +362,8 @@
                                    (wir_r, van, sut, u2_t(p_gen)));
             }
             pro = u2_bc(wir_r, 
-                        u2_t(hum), 
-                        u2_bt(wir_r, _10, bez, u2_rx(wir_r, q_gen)));
+                        u2_rx(wir_r, u2_h(hum)),
+                        u2_bt(wir_r, _10, bez, u2_rx(wir_r, u2_t(hum))));
 
             u2_rl_lose(wir_r, hum);
             return pro;
@@ -395,6 +397,7 @@
                                 u2_rx(wir_r, u2_h(uq_lar)),
                                 u2_rx(wir_r, u2_t(fup))));
 
+                u2_rl_lose(wir_r, fup);
                 u2_rl_lose(wir_r, lar);
                 return pro;
               }
@@ -440,6 +443,7 @@
                  (u2_no == j2_mcy(Pit, vane, nest)
                     (wir_r, van, bol, u2_h(nor))) ) 
             {
+              j2_mcy(Pit, vane, dupt)(wir_r, van, "test", u2_h(nor));
               printf("skdg: nest fail\n");
               return u2_bl_bail(wir_r);
             } else {

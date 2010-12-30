@@ -21,4 +21,4 @@
 
   u2_ho_driver
   j2_db(Pit, by) = 
-    { j2_sb(Pit, by), 0, j2_mbd(Pit, by) , 0, u2_none };
+    { j2_sb(Pit, by), 0, j2_mbd(Pit, by), 0, u2_none };

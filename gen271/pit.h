@@ -432,3 +432,10 @@
                               u2_noun sut,                        //  retain
                               u2_noun rep);                       //  retain
 
+    /** Debugging hacks.
+    **/
+      void
+      j2_mcy(Pit, vane, dupt)(u2_wire     wir_r,
+                              u2_noun     van,                    //  retain
+                              const c3_c* cap_c,
+                              u2_noun     typ);                   //  retain

@@ -236,6 +236,7 @@ _sh_good(u2_noun cor,
     u2_noun pet = u2_t(u2_t(xip));
 
     if ( u2_no == u2_sing(bat, u2_t(cor)) ) {
+      c3_assert(0);
       u2_ho_warn_here();
       return u2_no;
     }

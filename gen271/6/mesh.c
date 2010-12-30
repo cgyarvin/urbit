@@ -30,6 +30,8 @@
         u2_noun t_har = u2_t(har);
 
         if ( u2_no == u2_dust(i_har) ) {
+          return u2_bl_bail(wir_r);
+        } else {
           u2_noun pi_har = u2_h(i_har);
           u2_noun qi_har = u2_t(i_har);
           u2_noun rep = j2_mby(Pit, rake)(wir_r, pi_har);

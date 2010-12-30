@@ -67,7 +67,7 @@
           return u2_bt
             (wir_r, _5, 
                     u2_bc(wir_r, _1, u2_rx(wir_r, p_sut)),
-                    u2_bc(wir_r, _1, u2_rx(wir_r, axe)));
+                    u2_bc(wir_r, _0, u2_rx(wir_r, axe)));
         }
       }
       case c3__face: {

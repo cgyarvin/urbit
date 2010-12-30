@@ -17,8 +17,8 @@
   _nest_dirt(u2_noun *p_sut, u2_noun *q_sut)
   {
     if ( u2_yes == u2_dust(*q_sut) ) switch ( u2_h(*q_sut) ) {
-      case c3__gray: *p_sut = u2_t(*q_sut); *q_sut = c3__blue;
-      case c3__teal: *p_sut = u2_t(*q_sut); *q_sut = c3__pink;
+      case c3__gray: *p_sut = u2_t(*q_sut); *q_sut = c3__blue; break;
+      case c3__teal: *p_sut = u2_t(*q_sut); *q_sut = c3__pink; break;
     }
   }
 
@@ -107,7 +107,7 @@
           return u2_bl_bail(wir_r);
         }
         else {
-          if ( u2_yes == u2_dust(bon) ) switch ( bon ) {
+          if ( u2_no == u2_dust(bon) ) switch ( bon ) {
             default: return _nest_sint(wir_r, van, sut, bon, gil);
 
             case c3__atom:
@@ -131,7 +131,8 @@
           return u2_bl_bail(wir_r);
         }
         else {
-          u2_noun hud = u2_bc(wir_r, sut, bon);
+          u2_noun hud = u2_bc(wir_r, u2_rx(wir_r, sut), 
+                                     u2_rx(wir_r, bon));
 
           if ( (u2_yes == j2_mcc(Pit, in, has)(wir_r, gil, hud)) ) {
             u2_rl_lose(wir_r, hud);
@@ -172,8 +173,10 @@
     }
     else {
       switch ( u2_h(bon) ) {
-        default: return u2_bl_bail(wir_r);
-
+        default: {
+          u2_err(wir_r, "sint: bon", bon);
+          return u2_bl_bail(wir_r);
+        }
         case c3__cell: {
           return u2_no;
         }
@@ -219,7 +222,8 @@
         } 
         case c3__hold: {
           if ( (u2_yes == u2_mean(bon, 6, &p_bon, 7, &q_bon, 0)) ) {
-            u2_noun hud = u2_bc(wir_r, sut, bon);
+            u2_noun hud = u2_bc(wir_r, u2_rx(wir_r, sut), 
+                                       u2_rx(wir_r, bon));
 
             if ( (u2_yes == j2_mcc(Pit, in, has)(wir_r, gil, hud)) ) {
               u2_rl_lose(wir_r, hud);
@@ -228,13 +232,19 @@
             } else {
               u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, gil, hud);
               u2_type gam = j2_mcy(Pit, vane, play)(wir_r, van, p_bon, q_bon);
-              u2_flag hiv = _nest_dext(wir_r, van, sut, gam, zoc);
 
-              u2_rl_lose(wir_r, hud);
-              u2_rl_lose(wir_r, gam);
-              u2_rl_lose(wir_r, zoc);
+              u2_rl_ok(wir_r, gam);
+              {
+                u2_flag hiv = _nest_dext(wir_r, van, sut, gam, zoc);
 
-              return hiv;
+                u2_rl_ok(wir_r, gam);
+                u2_rl_lose(wir_r, hud);
+                u2_rl_ok(wir_r, gam);
+                u2_rl_lose(wir_r, gam);
+                u2_rl_lose(wir_r, zoc);
+
+                return hiv;
+              }
             }
           }
           else return u2_bl_bail(wir_r);

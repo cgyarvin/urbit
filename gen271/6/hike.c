@@ -7,19 +7,6 @@
 
 /* internal tools
 */
-  static u2_axis 
-  _lily_hike_axis_l(u2_ray  wir_r, 
-                    u2_axis axis)
-  {
-    return u2_fj_op_add(wir_r, axis, axis);
-  }
-  static u2_axis 
-  _lily_hike_axis_r(u2_ray  wir_r, 
-                    u2_axis axis)
-  {
-    return u2_fj_op_inc(wir_r, _lily_hike_axis_l(wir_r, axis));
-  }
-
   /* _lily_hike_belt_root(): convert (pac) to a list of root tools.
   */
   static u2_list
@@ -35,7 +22,8 @@
       u2_list list_tool = _lily_hike_belt_root(wir_r, u2_t(pac));
 
       if ( u2_yes == u2_sing(_1, axis) ) {
-        return u2_bc(wir_r, tool, list_tool);
+        return u2_bc(wir_r, u2_rx(wir_r, tool), 
+                            list_tool);
       }
       else return list_tool;
     }
@@ -59,7 +47,11 @@
         if ( (_1 != axis) && u2_yes == u2_sing(_2, u2_fj_op_tip(axis)) ) {
           u2_axis axis_tap = u2_fj_op_tap(wir_r, axis);
 
-          return u2_bc(wir_r, u2_bc(wir_r, axis_tap, tool), belt_l);
+          return u2_bc(wir_r, 
+                       u2_bc(wir_r, 
+                             u2_rx(wir_r, axis_tap), 
+                             u2_rx(wir_r, tool)), 
+                       belt_l);
         }
         else return belt_l;
       }
@@ -68,9 +60,9 @@
 
   /* _lily_hike_belt_r(): factor (pac) right.
   */
-  static u2_list
+  static u2_list                                                  //  transfer
   _lily_hike_belt_r(u2_ray  wir_r,
-                    u2_list pac)
+                    u2_list pac)                                  //  retain
   {
     if ( (u2_nul == pac) ) {
       return u2_nul;
@@ -84,7 +76,10 @@
         if ( (_1 != axis) && u2_yes == u2_sing(_3, u2_fj_op_tip(axis)) ) {
           u2_axis axis_tap = u2_fj_op_tap(wir_r, axis);
 
-          return u2_bc(wir_r, u2_bc(wir_r, axis_tap, tool), belt_r);
+          return u2_bc(wir_r, 
+                       u2_bc(wir_r, u2_rx(wir_r, axis_tap), 
+                                    u2_rx(wir_r, tool)),
+                       belt_r);
         }
         else return belt_r;
       }
@@ -99,26 +94,34 @@
                     u2_noun pac)                                  //  retain
   {
     if ( (u2_nul == pac) ) {
-      return u2_bc(wir_r, u2_nock_frag, axe);
+      return u2_bc(wir_r, u2_nock_frag, u2_rx(wir_r, axe));
     }
     else {
-      u2_list list_tool    = _lily_hike_belt_root(wir_r, pac);
-      u2_list belt_l  = _lily_hike_belt_l(wir_r, pac);
-      u2_list belt_r  = _lily_hike_belt_r(wir_r, pac);
+      u2_noun zet = _lily_hike_belt_root(wir_r, pac);
 
-      if ( !(u2_nul == list_tool) ) {
-        return u2_h(list_tool);
+      if ( u2_nul != zet ) {
+        u2_noun fol = u2_rx(wir_r, u2_h(zet));
+
+        u2_rl_lose(wir_r, zet);
+        return fol;
       }
       else {
-        u2_tool tool_l, tool_r;
-        
-        tool_l = j2_mby(Pit, hike)
-          (wir_r, _lily_hike_axis_l(wir_r, axe), belt_l);
+        u2_noun tum = _lily_hike_belt_l(wir_r, pac);
+        u2_noun gam = _lily_hike_belt_r(wir_r, pac);
+        u2_noun hax = j2_mbc(Pit, peg)(wir_r, axe, 2);
+        u2_noun moz = j2_mbc(Pit, peg)(wir_r, axe, 3);
+        u2_noun zip = j2_mby(Pit, hike)(wir_r, hax, tum);
+        u2_noun dof = j2_mby(Pit, hike)(wir_r, moz, gam);
+        u2_noun fol = j2_mby(Pit, cons)(wir_r, zip, dof);
 
-        tool_r = j2_mby(Pit, hike)
-          (wir_r, _lily_hike_axis_r(wir_r, axe), belt_r);
+        u2_rl_lose(wir_r, tum);
+        u2_rl_lose(wir_r, gam);
+        u2_rl_lose(wir_r, hax);
+        u2_rl_lose(wir_r, moz);
+        u2_rl_lose(wir_r, zip);
+        u2_rl_lose(wir_r, dof);
 
-        return j2_mby(Pit, cons)(wir_r, tool_l, tool_r);
+        return fol;
       }
     }
   }

@@ -34,6 +34,8 @@
                (u2_no == j2_mcy(Pit, vane, nest)(wir_r, van, pq_sut, p_sut)) )
           {
             fprintf(stderr, "clay: gray error\n");
+            j2_mcy(Pit, vane, dupt)(wir_r, van, "pq_sut", pq_sut);
+            j2_mcy(Pit, vane, dupt)(wir_r, van, "p_sut", p_sut);
             return u2_bl_bail(wir_r);
           }
           return u2_bq

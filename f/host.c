@@ -457,8 +457,18 @@ _ho_execute(u2_ray      wir_r,
     return u2_none;
   }
   else {
+    u2_weak pro;
+
     if ( c3__lite == jet_j->vok_m ) {
-      return jet_j->fun_f(wir_r, cor);
+      pro = jet_j->fun_f(wir_r, cor);
+
+      if ( u2_none == pro ) {
+        c3_c *cos_c = _ho_cstring(jet_j->xip);
+
+        fprintf(stderr, "jet bail (lite): %s\n", cos_c);
+        free(cos_c);
+      }
+      return pro;
     }
     else if ( c3__hevy == jet_j->vok_m ) {
       u2_ray cap_r = u2_rail_cap_r(wir_r);
@@ -472,6 +482,12 @@ _ho_execute(u2_ray      wir_r,
           u2_rl_fall(wir_r);
           u2_rail_cap_r(wir_r) = cap_r;
 
+          {
+            c3_c *cos_c = _ho_cstring(jet_j->xip);
+
+            fprintf(stderr, "jet bail (hevy): %s\n", cos_c);
+            free(cos_c);
+          }
           return u2_none;
         }
         else {
@@ -742,12 +758,6 @@ u2_ho_fire(u2_ray   wir_r,
         // fprintf(stderr, "fire: %s\n", _ho_cstring(xip));
         pro =_ho_execute(wir_r, jet_j, cor);
 
-        if ( u2_none == pro ) {
-          c3_c *cos_c = _ho_cstring(xip);
-
-          fprintf(stderr, "jet bail: %s\n", cos_c);
-          free(cos_c);
-        }
         return pro;
       }
       else {
@@ -762,13 +772,6 @@ u2_ho_fire(u2_ray   wir_r,
         jet_j->zoc_w++;
 
         *saf = u2_no;
-
-        if ( u2_none == pro ) {
-          c3_c *cos_c = _ho_cstring(xip);
-
-          fprintf(stderr, "jet bail: %s\n", cos_c);
-          free(cos_c);
-        }
         return pro;
       }
     }

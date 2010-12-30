@@ -44,7 +44,7 @@
             return u2_none;
           }
           else {
-            if ( u2_yes == j2_mbc(Pit, vor)(wir_r, pn_a, u2_h(d)) ) {
+            if ( u2_yes == j2_mbc(Pit, vor)(wir_r, pn_a, u2_h(u2_h(d))) ) {
               return u2_rt(wir_r, u2_rx(wir_r, n_a), 
                                   d, 
                                   u2_rx(wir_r, r_a));
@@ -73,7 +73,7 @@
             return u2_none;
           }
           else {
-            if ( u2_yes == j2_mbc(Pit, vor)(wir_r, n_a, u2_h(d)) ) {
+            if ( u2_yes == j2_mbc(Pit, vor)(wir_r, pn_a, u2_h(u2_h(d))) ) {
               return u2_rt(wir_r, u2_rx(wir_r, n_a),
                                   u2_rx(wir_r, l_a), 
                                   d);
@@ -115,6 +115,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, by, put)[] = {
-    { ".3", c3__lite, j2_mc(Pit, by, put), u2_no, u2_none, u2_none },
+    { ".3", c3__lite, j2_mc(Pit, by, put), u2_yes, u2_none, u2_none },
     { }
   };

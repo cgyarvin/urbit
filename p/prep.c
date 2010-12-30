@@ -574,18 +574,22 @@ u2_err(u2_ray      wir_r,
        const c3_c* cl_caption,
        u2_weak     noun)
 {
-  if ( u2_none == noun ) {
-    printf("%s: <none>\n", cl_caption);
-  }
-  else {
-    u2_prep prep = u2_fj_prep_noun(wir_r, noun);
-    u2_dump dump = u2_fj_pump_dump(wir_r, (75), prep);
-
-    if ( cl_caption ) {
-      printf("%s:\n", cl_caption);
+  u2_rl_leap(wir_r, c3__warm);
+  {
+    if ( u2_none == noun ) {
+      printf("%s: <none>\n", cl_caption);
     }
-    _print_dump(dump);
+    else {
+      u2_prep prep = u2_fj_prep_noun(wir_r, noun);
+      u2_dump dump = u2_fj_pump_dump(wir_r, (75), prep);
+
+      if ( cl_caption ) {
+        printf("%s:\n", cl_caption);
+      }
+      _print_dump(dump);
+    }
   }
+  u2_rl_fall(wir_r);
 }
 
 /* u2_burp():
@@ -597,10 +601,14 @@ u2_burp(u2_ray      wir_r,
         const c3_c* cl_caption,
         u2_prep     prep)
 {
-  u2_dump dump = u2_fj_pump_dump(wir_r, (75), prep);
+  u2_rl_leap(wir_r, c3__warm);
+  {
+    u2_dump dump = u2_fj_pump_dump(wir_r, (75), prep);
 
-  if ( cl_caption ) {
-    printf("%s:\n", cl_caption);
+    if ( cl_caption ) {
+      printf("%s:\n", cl_caption);
+    }
+    _print_dump(dump);
   }
-  _print_dump(dump);
+  u2_rl_fall(wir_r);
 }

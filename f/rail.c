@@ -735,6 +735,45 @@ u2_rl_gain(u2_ray  ral_r,
   return som;
 }
 
+/* u2_rl_ok():
+**
+**   Ensure that all reference counts are valid in `som`.
+*/
+void
+u2_rl_ok(u2_ray  ral_r,
+         u2_noun som)
+{
+  if ( (u2_none == som) || u2_fly_is_cat(som) ) {
+    return;
+  }
+  else {
+    u2_ray som_r = u2_dog_a(som);
+    u2_ray hat_r = u2_rail_hat_r(ral_r);
+
+    if ( u2_ray_a(som_r) == u2_ray_a(hat_r) ) {
+      c3_m hip_m = u2_rail_hip_m(ral_r);
+
+      if ( c3__warm == hip_m ) {
+        u2_ray rut_r = u2_rail_rut_r(ral_r);
+        
+        if ( som_r >= rut_r ) {
+          u2_ray box_r = (som_r - c3_wiseof(u2_loom_rail_box));
+          c3_w   use_w = u2_rail_box_use(box_r);
+
+          if ( use_w == 0 ) {
+            fprintf(stderr, "free noun: %u\n", som);
+            c3_assert(0);
+          }
+        }
+      }
+    }
+    if ( u2_yes == u2_dust(som) ) {
+      u2_rl_ok(ral_r, u2_h(som));
+      u2_rl_ok(ral_r, u2_t(som));
+    }
+  }
+}
+          
 /* u2_rl_lose():
 **
 **   Lose a reference to (som).  Free it if refcount == 0.
@@ -769,6 +808,10 @@ u2_rl_lose(u2_ray  ral_r,
             _rl_bloq_free(ral_r, box_r);
           }
           else {
+            if ( use_w == 0 ) {
+              u2_err(ral_r, "useless", som);
+            }
+
             c3_assert(use_w != 0);
             if ( use_w != 0xffffffff ) {
               u2_rail_box_use(box_r) = (use_w - 1);
