@@ -73,8 +73,6 @@
             u2_noun taf = _find_in(wir_r, van, p_sut, cog, gil);
 
             if ( u2_nul == taf ) {
-              u2_err(wir_r, "blank: cog", cog);
-              u2_err(wir_r, "blank: r_sut", r_sut);
               return u2_nul;
             } else {
               u2_noun p_taf, q_taf, r_taf;
@@ -227,7 +225,7 @@
 
     if ( u2_nul == fin ) {
       u2_err(wir_r, "cog", cog);
-      u2_err(wir_r, "sut", sut);
+      j2_mcy(Pit, vane, dupt)(wir_r, van, "sut", sut);
       return u2_bl_bail(wir_r);
     } else {
       u2_noun pro = u2_rx(wir_r, u2_t(fin));

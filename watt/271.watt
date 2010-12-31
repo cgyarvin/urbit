@@ -1615,12 +1615,12 @@
         [%clay !=(clay)]
         [%dump !=(dump)]
       ==
-  =+  :*  fan=*(pool &[*type *gene])      ::  20 in van
-          ver=*(pool &[*type *gene])      ::  42 in van
-          bug=@                           ::  86 in van
-          vet=?                           ::  87 in van
+  =+  :*  fan=*(pool &[*type *gene])          ::  20 in van
+          ver=*(pool &[*type *type *gene])    ::  42 in van
+          bug=@                               ::  86 in van
+          vet=?                               ::  87 in van
       ==
-  =+  sut=`*type`%blur                    ::  4 in van
+  =+  sut=`*type`%blur                        ::  4 in van
   |*
   ::::
   ::
@@ -1671,7 +1671,30 @@
   ::
       dump
     ^-  *ball
-    =+  gil=*(pool type)
+    =+  ^=  gil
+        =+  den=[p=`@`1 q=*(book type &@)]
+        =+  vax=*(pool type)
+        =<  q
+        |-
+        ^-  den
+        ?-    sut
+            [%cell *]   $(sut q.sut, den $(sut p.sut))
+        ::
+            [%core *]   
+          ?:  ?=(^ q.sut) 
+            $(sut p.sut, den $(sut p.q.sut))
+          $(sut p.sut)
+        ::
+            [%fork *]   $(sut q.sut, den $(sut p.sut))
+        ::
+            [%hold *]
+          ?:  (~(has in vax) sut)
+            [.^(p.den) (~(put by q.den) [sut p.den])]
+          $(vax (~(put in vax) sut), sut (play(sut p.sut) q.sut))
+        ::
+            *           den
+        ==
+    =+  gax=*(pool type)
     |-
     ?-    sut
         %atom       '@'
@@ -1711,10 +1734,12 @@
           ==
       ==
     ::
-        [%cube *]   ~(gut golf p.sut)
+        [%cube *]   ?:(.=(0 p.sut) '~' ~(gut golf p.sut))
         [%face *]   [%meld ~(vam golf p.sut) '=' $(sut q.sut) ~]
     ::
         [%fork *]
+      ?:  .=([%fork [%cube 0] [%cube 1]] sut)
+        '?'
       :+  %grip
         ['<' '>']
       :-  $(sut p.sut)
@@ -1724,10 +1749,16 @@
       [$$(sut p.q.sut) $(q.sut q.q.sut)]
     ::
         [%hold *]
-      ?:  (~(has in gil) sut)
-        [%meld '%' ~(dem golf (mug sut)) ~]
-      =>  .(gil (~(put in gil) sut))
-      $(gil (~(put in gil) sut), sut (play(sut p.sut) q.sut))
+      =+  piv=(~(get by gil) sut)
+      ?~  piv
+        $(sut (play(sut p.sut) q.sut))
+      :*  %meld
+          '%'
+          ~(dem golf u.piv)
+          ?:  (~(has in gax) sut)
+            ~
+          [':' $(gax (~(put in gax) sut), sut (play(sut p.sut) q.sut)) ~]
+      ==
     ==
   ::::
   ::
@@ -1899,6 +1930,9 @@
     ^<  mine.[!=(->) %firm ~]
     =+  [ref=*type gen=*gene]
     |=
+    ?:  (~(has in ver) [sut ref gen])
+      &
+    =>  .(ver (~(put in ver) [sut ref gen]))
     .=((make gen) (make(sut ref) gen))
   ::::
   ::

@@ -310,10 +310,10 @@
           **   Mutate `som` with a 0-terminated list of axis, noun pairs.
           **   Axes must be cats (31 bit).
           */
-            u2_noun
+            u2_noun                                               //  transfer
             u2_bn_molt(u2_wire wir_r,
-                       u2_noun som,
-                       ...);
+                       u2_noun som,                               //  retain
+                       ...);                                      //  retain
          
           /* u2_bn_molf():
           **

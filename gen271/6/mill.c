@@ -5,24 +5,6 @@
 #include "all.h"
 #include "../pit.h"
 
-#if 0
-    u2_noun vun;
-
-    vun = u2_bn_molt(wir_r, van, 4, sut, 0);
-    {
-      u2_noun fol = u2_sh_look(wir_r, vun, "mill");
-      u2_weak gat = u2_nk_nock(wir_r, vun, fol);
-      u2_noun tec = u2_bc(wir_r, u2_bc(wir_r, gen, u2_t(u2_h(gat))), u2_t(gat));
-      u2_weak pro = u2_nk_nock(wir_r, tec, u2_t(tec));
-
-      if ( u2_none == pro ) {
-        u2_err(wir_r, "gen", gen);
-        u2_err(wir_r, "sut", sut);
-      }
-      return pro;
-    }
-#endif
-
 /* functions
 */
   static u2_noun
@@ -487,6 +469,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, vane, mill)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, vane, mill), u2_no, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, vane, mill), u2_yes, u2_none, u2_none },
     { }
   };

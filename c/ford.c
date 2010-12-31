@@ -241,6 +241,12 @@ u2_weak
 j2_mbc(watt_271, ream)(u2_wire wir_r, 
                        u2_weak txt);
 
+void
+j2_mcy(watt_271, vane, dupt)(u2_wire     wir_r,
+                             u2_noun     van,
+                             const c3_c* cap_c,
+                             u2_noun     typ);
+
 /* ford_test3(): accurate use of a true kernel.
 */
 void
@@ -286,16 +292,18 @@ ford_test3(struct ford_state* fod_f,
           u2_noun src = u2_rl_string(wir_r, arg_c);
           u2_noun gen = j2_mbc(watt_271, ream)(wir_r, src);
           u2_noun vad = u2_bn_hook(wir_r, fod_f->pit, "vade");
+          u2_noun van = u2_bn_hook(wir_r, fod_f->pit, "vane");
           u2_noun hup = u2_nk_mung(wir_r, vad, u2_rc(wir_r, u2_h(lof), gen));
           u2_noun pug = u2_nk_nock(wir_r, _0, u2_t(lof));
 
           if ( (u2_none != hup) && (u2_none != pug) ) {
-            {
-              u2_noun muf = u2_nk_nock(wir_r, pug, u2_t(hup));
+            u2_weak muf = u2_nk_nock(wir_r, pug, u2_t(hup));
 
+            j2_mcy(watt_271, vane, dupt)(wir_r, van, 0, u2_h(hup));
+            if ( muf != u2_none ) {
               u2_err(wir_r, 0, muf);
-              u2_bx_spot(wir_r, u2_nul);
             }
+            u2_bx_spot(wir_r, u2_nul);
           }
         }
 #endif
