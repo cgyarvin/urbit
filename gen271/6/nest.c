@@ -34,7 +34,7 @@
     if ( (u2_yes == u2_sing(sut, bon)) ) {
       return u2_yes;
     }
-     
+
     if ( (u2_no == u2_dust(sut)) ) switch ( sut ) {
       default: return u2_bl_bail(wir_r);
 
@@ -122,6 +122,7 @@
             case c3__core:
               break;
           }
+
           return u2_or(_nest_dext(wir_r, van, p_sut, bon, gil),
                        _nest_dext(wir_r, van, q_sut, bon, gil));
         }
@@ -233,13 +234,10 @@
               u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, gil, hud);
               u2_type gam = j2_mcy(Pit, vane, play)(wir_r, van, p_bon, q_bon);
 
-              u2_rl_ok(wir_r, gam);
               {
                 u2_flag hiv = _nest_dext(wir_r, van, sut, gam, zoc);
 
-                u2_rl_ok(wir_r, gam);
                 u2_rl_lose(wir_r, hud);
-                u2_rl_ok(wir_r, gam);
                 u2_rl_lose(wir_r, gam);
                 u2_rl_lose(wir_r, zoc);
 

@@ -35,6 +35,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pit, twin)[] = {
-    { ".3", c3__hevy, j2_mb(Pit, twin), u2_no, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mb(Pit, twin), u2_yes, u2_none, u2_none },
     { }
   };

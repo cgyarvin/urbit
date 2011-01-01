@@ -237,17 +237,6 @@
   u.a
 ::::
 ::
-    newt
-  =+  a=&*
-  |:
-  =+  b=*
-  |=
-  ?-  b
-    ~       ~
-    [* *]   [(a -.b) $(b +.b)]
-  ==
-::::
-::
     reel
   =+  [a=*(list) b==+([* *] |=(-<+))]
   |:  |-
@@ -1685,6 +1674,7 @@
             $(sut p.sut, den $(sut p.q.sut))
           $(sut p.sut)
         ::
+            [%face *]   $(sut q.sut)
             [%fork *]   $(sut q.sut, den $(sut p.sut))
         ::
             [%hold *]
@@ -1755,6 +1745,7 @@
       :*  %meld
           '%'
           ~(dem golf u.piv)
+          ~
           ?:  (~(has in gax) sut)
             ~
           [':' $(gax (~(put in gax) sut), sut (play(sut p.sut) q.sut)) ~]
@@ -1858,7 +1849,7 @@
     =+  [ref=*type dab=*(book term gene)]
     |=
     ^-  ?
-    ^>  bean.[%fair]
+    ^>  bean.%fair
     ?-    dab
         ~         &
         [* ~ ~]   (firm ref q.n.dab)
@@ -2066,6 +2057,8 @@
         %htnp                                                           ::  ^-
       =+  hif=(play p.gen)
       =+  dan=$(gen q.gen)
+      ^>  bean.[%htnp-hif |=((~(fly club dump(sut hif)) 75))]
+      ^>  bean.[%htnp-dan |=((~(fly club dump(sut p.dan)) 75))]
       ?>  ?|(!vet (nest(sut hif) p.dan))
       [hif q.dan]
     ::
@@ -2348,7 +2341,6 @@
       ::
           *
         %blot
-      ::
       ==
     ::
     ::::

@@ -383,10 +383,6 @@ _nock_warm(u2_wire wir_r,
                 LoomSink; u2_bx_sink(wir_r);
                 if ( (pro = _nock_warm(wir_r, bus, zom)) != u2_none ) {
                   u2_bx_bean_out(wir_r);
-                } else {
-                  printf("fail in bean!\n");
-                  u2_err(wir_r, "hod", hod);
-                  c3_assert(0);
                 }
                 u2_bx_rise(wir_r); LoomRise;
               }
