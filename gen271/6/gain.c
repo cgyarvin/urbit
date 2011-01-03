@@ -8,7 +8,7 @@
 /* internals
 */
   static u2_noun
-  _gain_skmp(u2_wire wir_r,
+  _gain_kspm(u2_wire wir_r,
              u2_noun van,
              u2_noun sut,
              u2_noun p_gen)
@@ -23,7 +23,7 @@
       u2_noun ip_gen = u2_h(p_gen);
       u2_noun tp_gen = u2_t(p_gen);
       u2_noun lev = j2_mcy(Pit, vane, gain)(wir_r, van, sut, ip_gen);
-      u2_noun pro = _gain_skmp(wir_r, van, lev, tp_gen);
+      u2_noun pro = _gain_kspm(wir_r, van, lev, tp_gen);
 
       u2_rl_lose(wir_r, lev);
       return pro;
@@ -54,7 +54,7 @@
             return j2_mcy(Pit, vane, gain)(wir_r, van, sut, q_gen);
           }
         }
-        case c3__skbn: {
+        case c3__ksbn: {
           if ( u2_no == u2_mean(gen, 6, &p_gen, 7, &q_gen, 0) ) {
             return u2_bl_bail(wir_r);
           } else {
@@ -72,8 +72,8 @@
             return pro;
           }
         }
-        case c3__skmp: {
-          return _gain_skmp(wir_r, van, sut, u2_t(gen));
+        case c3__kspm: {
+          return _gain_kspm(wir_r, van, sut, u2_t(gen));
         }
       }
     }

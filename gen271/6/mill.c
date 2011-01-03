@@ -201,7 +201,7 @@
                u2_bc(wir_r, _1, u2_rx(wir_r, p_gen)));
           }
         }
-        case c3__dtsk: {
+        case c3__dtks: {
           p_gen = u2_t(gen);
           {
             u2_noun vod = j2_mcy(Pit, vane, make)(wir_r, van, sut, p_gen);
@@ -386,7 +386,7 @@
             }
           }
         }
-        case c3__skbn: {
+        case c3__ksbn: {
           if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
             return u2_bl_bail(wir_r);
           }
@@ -410,7 +410,7 @@
             }
           }
         }
-        case c3__skdg: {
+        case c3__ksdg: {
           if ( u2_no == u2_as_trel(u2_t(gen), &p_gen, &q_gen, &r_gen) ) {
             return u2_bl_bail(wir_r);
           }
@@ -426,7 +426,7 @@
                     (wir_r, van, bol, u2_h(nor))) ) 
             {
               j2_mcy(Pit, vane, dupt)(wir_r, van, "test", u2_h(nor));
-              printf("skdg: nest fail\n");
+              printf("ksdg: nest fail\n");
               return u2_bl_bail(wir_r);
             } else {
               pro = u2_bc

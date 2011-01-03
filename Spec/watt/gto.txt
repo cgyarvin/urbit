@@ -10,12 +10,12 @@ Gene - AST
     ^+(@ *term)
     [~ p=^+(@ *axis)]
   ::
-    [%bndv p=*gene q=*gene]                                     ::  =<  bendev
-    [%bnnp p=*gene q=*gene]                                     ::  =-  bennup
-    [%bnpd p=*gene q=*gene]                                     ::  =+  benpod
-    [%bnvd p=*gene q=*gene]                                     ::  =>  benved
+    [%bndv p=*gene q=*gene]                                     ::  =<  bindev
+    [%bnnp p=*gene q=*gene]                                     ::  =-  binnup
+    [%bnpd p=*gene q=*gene]                                     ::  =+  binpod
+    [%bnvd p=*gene q=*gene]                                     ::  =>  binved
   ::
-    [%brbn p=*gene]                                             ::  |=  barben
+    [%brbn p=*gene]                                             ::  |=  barbin
     [%brdg p=*gene]                                             ::  |:  bardig
     [%brmt p=*(list &[p=*term q=*gene])]                        ::  |%  barmit
     [%brnp p=*gene]                                             ::  |-  barnup
@@ -29,20 +29,20 @@ Gene - AST
     [%dgrs p=*(list gene)]                                      ::  :*  digras
     [%dgsg p=*(list gene)]                                      ::  :~  digsig
   :: 
-    [%dtbn p=*gene q=*gene]                                     ::  .=  dotben
+    [%dtbn p=*gene q=*gene]                                     ::  .=  dotbin
     [%dtht p=*gene]                                             ::  .^  dothat
     [%dtrs p=*gene q=*gene]                                     ::  .*  dotras
     [%dtsg p=*]                                                 ::  .~  dotsig
     [%dtsk p=*gene]                                             ::  .?  dotask
   ::
-    [%hpbn p=*gene]                                             ::  !=  hopben
+    [%hpbn p=*gene]                                             ::  !=  hopbin
     [%hpdg p=*gene]                                             ::  !:  hopdig
     [%hpdx p=*gene]                                             ::  !#  hopdax
     [%hphp ~]                                                   ::  !!  hophop
     [%hpmt ~]                                                   ::  !%  hopmit
     [%hptc p=*gene]                                             ::  !`  hoptic
   ::
-    [%htbn p=*term q=*gene]                                     ::  ^=  hatben
+    [%htbn p=*term q=*gene]                                     ::  ^=  hatbin
     [%htdg p=*gene q=*gene]                                     ::  ^:  hatdig
     [%htdv p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^<  hatdev
     [%htmt p=*gene q=*gene]                                     ::  ^%  hatmit
@@ -52,11 +52,11 @@ Gene - AST
     [%htrs p=*gene]                                             ::  ^*  hatras
     [%htsg p=*gene]                                             ::  ^~  hatsig
   ::
-    [%lmbn p=*<%atom %blur %cell %flag %null>]                  ::  ;=  lomben
+    [%lmbn p=*<%atom %blur %cell %flag %null>]                  ::  ;=  lombin
     [%lmnp p=*gene]                                             ::  ;-  lomnup
     [%lmpd p=*gene]                                             ::  ;+  lompod
   ::
-    [%mtbn p=*rope q=*(list &[p=*gene q=*gene])]                ::  %=  mitben
+    [%mtbn p=*rope q=*(list &[p=*gene q=*gene])]                ::  %=  mitbin
     [%mtbr p=*rope q=*gene r=*(list &[p=*gene q=*gene])]        ::  %|  mitbar
     [%mtdg p=*gene q=*gene]                                     ::  %:  mitdig
     [%mtdt p=*gene q=*gene]                                     ::  %.  mitdot
@@ -67,7 +67,7 @@ Gene - AST
     [%mtrs p=*gene]                                             ::  %*  mitras
     [%mtsg p=*rope q=*gene r=*gene]                             ::  %~  mitsig
   ::
-    [%skbn p=*gene q=*gene]                                     ::  ?=  askben
+    [%skbn p=*gene q=*gene]                                     ::  ?=  askbin
     [%skbr p=*(list gene)]                                      ::  ?|  askbar
     [%skdg p=*gene q=*gene r=*gene]                             ::  ?:  askdig
     [%skdv p=*gene q=*gene]                                     ::  ?<  askdev
@@ -152,7 +152,7 @@ Signs (ven = repeat)
   amp   &       dig   :       nup   -     toq   "
   ask   ?       dot   .       pat   @     ved   >
   bar   |       dus   }       pel   )
-  ben   =       hat   ^       pod   +
+  bin   =       hat   ^       pod   +
   bot   '       hop   !       ras   *
   buc   $       lep   (       sac   \
   cab   _       lom   ;       sig   ~

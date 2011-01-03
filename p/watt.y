@@ -111,7 +111,7 @@ wide_c
         { $$ = _ycell(c3__bone, $3); }
       | tok_delm
         { $$ = _ycell(c3__bone, $1); }
-      | si_amp
+      | si_pam
         { $$ = _ycell(c3__bone, _0); }
       | si_bar
         { $$ = _ycell(c3__bone, _1); }
@@ -124,7 +124,7 @@ wide_c
       ;
    
     wide_base
-      : si_ask
+      : si_kes
         { $$ = _ycell(c3__bean, c3__flag); }
       | si_ras
         { $$ = _ycell(c3__bean, c3__blur); }
@@ -147,7 +147,7 @@ wide_c
 
     wide_pick
       : si_dev g bank_wide g si_ved
-        { $$ = _ycell(c3__brsk, $3); } 
+        { $$ = _ycell(c3__brks, $3); } 
       ;
 
     wide_call
@@ -169,8 +169,8 @@ wide_c
       | rope si_lep rack_wide si_pel
         { $$ = _ytrel(c3__mtbn, $1, $3); }
       | si_hop wide
-        { $$ = _ycell(c3__skhp, $2); }
-      | si_amp wide
+        { $$ = _ycell(c3__kshp, $2); }
+      | si_pam wide
         { $$ = _ycell(c3__lmnp, $2); }
       | si_ras wide
         { $$ = _ycell(c3__mtrs, $2); }
@@ -213,17 +213,17 @@ wide_c
 
   /** Wide: normals.
   **/
-    wide_norm: di_askdig body_c_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_askdot body_c_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_askdev body_b_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_askved body_b_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_askamp body_d_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_askbar body_d_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_asksig body_c_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_askhop body_a_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_askben body_b_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_asknup body_h_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_askras body_i_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_kesdig body_c_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_kesdot body_c_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_kesdev body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_kesved body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_kespam body_d_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_kesbar body_d_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_kessig body_c_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_keshop body_a_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_kesben body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_kesnup body_h_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_kesras body_i_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_benpod body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_bennup body_b_wide    { $$ = _ycell($1, $2); }
@@ -235,7 +235,7 @@ wide_c
     wide_norm: di_barras body_e_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_barmit body_e_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_bardig body_o_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_barask body_d_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_barkes body_d_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_barsig body_i_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_digras body_d_wide    { $$ = _ycell($1, $2); }
@@ -246,7 +246,7 @@ wide_c
 
     wide_norm: di_dotben body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_dothat body_a_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_dotask body_a_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_dotkes body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_dotras body_b_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_hatved body_r_wide    { $$ = _ycell($1, $2); }
@@ -343,17 +343,17 @@ tall
 
   /** Tall - normals.
   **/
-    tall_norm: di_askdig w body_c_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_askdot w body_c_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_askdev w body_b_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_askved w body_b_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_askamp w body_d_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_askbar w body_d_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_asksig w body_c_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_askhop w body_a_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_askben w body_b_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_asknup w body_h_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_askras w body_i_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_kesdig w body_c_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_kesdot w body_c_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_kesdev w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_kesved w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_kespam w body_d_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_kesbar w body_d_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_kessig w body_c_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_keshop w body_a_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_kesben w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_kesnup w body_h_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_kesras w body_i_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_benpod w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_bennup w body_b_tall    { $$ = _ycell($1, $3); }
@@ -365,7 +365,7 @@ tall
     tall_norm: di_bardig w body_o_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_barras w body_e_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_barmit w body_e_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_barask w body_d_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_barkes w body_d_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_barsig w body_i_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_digras w body_d_tall    { $$ = _ycell($1, $3); }
@@ -376,7 +376,7 @@ tall
 
     tall_norm: di_dotben w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_dothat w body_a_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_dotask w body_a_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_dotkes w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_dotras w body_b_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_hatved w body_r_tall    { $$ = _ycell($1, $3); }
@@ -505,24 +505,24 @@ tall
 
   /** Digraphs (with stem)
   **/
-    di_askdig: si_ask si_dig  { $$ = c3__skdg; }
-    di_askdot: si_ask si_dot  { $$ = c3__skdt; }
-    di_askved: si_ask si_ved  { $$ = c3__skvd; }
-    di_askdev: si_ask si_dev  { $$ = c3__skdv; }
-    di_askamp: si_ask si_amp  { $$ = c3__skmp; }
-    di_askbar: si_ask si_bar  { $$ = c3__skbr; }
-    di_asksig: si_ask si_sig  { $$ = c3__sksg; }
-    di_askhop: si_ask si_hop  { $$ = c3__skhp; }
-    di_askben: si_ask si_ben  { $$ = c3__skbn; }
-    di_asknup: si_ask si_nup  { $$ = c3__sknp; }
-    di_askras: si_ask si_ras  { $$ = c3__skrs; }
+    di_kesdig: si_kes si_dig  { $$ = c3__ksdg; }
+    di_kesdot: si_kes si_dot  { $$ = c3__ksdt; }
+    di_kesved: si_kes si_ved  { $$ = c3__ksvd; }
+    di_kesdev: si_kes si_dev  { $$ = c3__ksdv; }
+    di_kespam: si_kes si_pam  { $$ = c3__kspm; }
+    di_kesbar: si_kes si_bar  { $$ = c3__ksbr; }
+    di_kessig: si_kes si_sig  { $$ = c3__kssg; }
+    di_keshop: si_kes si_hop  { $$ = c3__kshp; }
+    di_kesben: si_kes si_ben  { $$ = c3__ksbn; }
+    di_kesnup: si_kes si_nup  { $$ = c3__ksnp; }
+    di_kesras: si_kes si_ras  { $$ = c3__ksrs; }
 
     di_barnup: si_bar si_nup  { $$ = c3__brnp; }
     di_barben: si_bar si_ben  { $$ = c3__brbn; }
     di_barras: si_bar si_ras  { $$ = c3__brrs; }
     di_barmit: si_bar si_mit  { $$ = c3__brmt; }
     di_bardig: si_bar si_dig  { $$ = c3__brdg; }
-    di_barask: si_bar si_ask  { $$ = c3__brsk; }
+    di_barkes: si_bar si_kes  { $$ = c3__brks; }
     di_barsig: si_bar si_sig  { $$ = c3__brsg; }
 
     di_bendev: si_ben si_dev  { $$ = c3__bndv; }
@@ -538,7 +538,7 @@ tall
 
     di_dotben: si_dot si_ben  { $$ = c3__dtbn; }
     di_dothat: si_dot si_hat  { $$ = c3__dtht; }
-    di_dotask: si_dot si_ask  { $$ = c3__dtsk; }
+    di_dotkes: si_dot si_kes  { $$ = c3__dtks; }
     di_dotras: si_dot si_ras  { $$ = c3__dtrs; }
     
     di_hatved: si_hat si_ved  { $$ = c3__htvd; }
@@ -573,8 +573,8 @@ tall
 
   /* Signs.
   */
-    si_amp: '&'
-    si_ask: '?'
+    si_pam: '&'
+    si_kes: '?'
     si_bar: '|'
     si_ben: '='
     si_buc: '$'
