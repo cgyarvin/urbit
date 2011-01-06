@@ -8,7 +8,7 @@
 /* internals
 */
   static u2_noun
-  _gain_kspm(u2_wire wir_r,
+  _gain_cspm(u2_wire wir_r,
              u2_noun van,
              u2_noun sut,
              u2_noun p_gen)
@@ -23,7 +23,7 @@
       u2_noun ip_gen = u2_h(p_gen);
       u2_noun tp_gen = u2_t(p_gen);
       u2_noun lev = j2_mcy(Pit, vane, gain)(wir_r, van, sut, ip_gen);
-      u2_noun pro = _gain_kspm(wir_r, van, lev, tp_gen);
+      u2_noun pro = _gain_cspm(wir_r, van, lev, tp_gen);
 
       u2_rl_lose(wir_r, lev);
       return pro;
@@ -46,15 +46,15 @@
       switch ( u2_h(gen) ) {
         default: return u2_rx(wir_r, sut);
 
-        case c3__htdv:
-        case c3__htvd: {
+        case c3__ktdv:
+        case c3__ktvd: {
           if ( u2_none == (q_gen = u2_frag(6, gen)) ) {
             return u2_bl_bail(wir_r);
           } else {
             return j2_mcy(Pit, vane, gain)(wir_r, van, sut, q_gen);
           }
         }
-        case c3__ksbn: {
+        case c3__csbn: {
           if ( u2_no == u2_mean(gen, 6, &p_gen, 7, &q_gen, 0) ) {
             return u2_bl_bail(wir_r);
           } else {
@@ -72,8 +72,8 @@
             return pro;
           }
         }
-        case c3__kspm: {
-          return _gain_kspm(wir_r, van, sut, u2_t(gen));
+        case c3__cspm: {
+          return _gain_cspm(wir_r, van, sut, u2_t(gen));
         }
       }
     }

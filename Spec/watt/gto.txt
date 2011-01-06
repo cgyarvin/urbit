@@ -1,12 +1,16 @@
+hp->bp
+rs->rt
+ht->kt
+
 Chars
 --
   pam   &       
   deg   :       
   nep   -     
   tol   "
-  kas   ?       
+  cas   ?       
   dot   .       
-  pat   @     
+  fat   @     
   vod   >
   bar   |       
   des   }       
@@ -15,7 +19,7 @@ Chars
   ket   ^       
   ped   +
   bot   '       
-  lop   !       
+  bop   !       
   rat   *
   bec   $       
   lep   (       
@@ -23,7 +27,7 @@ Chars
   cab   _       
   lam   ;       
   sig   ~
-  com   ,       
+  cam   ,       
   mit   %       
   sol   /
   dax   #       
@@ -39,82 +43,80 @@ Watt GTO: Gran Tabula Operazioni
 (Copied from watt.watt - any discrepancies favor watt.watt.)
 
 Gene - AST
-::::
-::
     gene
   |?
     ^+(@ *term)
     [~ p=^+(@ *axis)]
   ::
-    [%bndv p=*gene q=*gene]                                     ::  =<  bindev
-    [%bnnp p=*gene q=*gene]                                     ::  =-  binnup
-    [%bnpd p=*gene q=*gene]                                     ::  =+  binpod
-    [%bnvd p=*gene q=*gene]                                     ::  =>  binved
+    [%bndv p=*gene q=*gene]                                     ::  =<  bindov
+    [%bnnp p=*gene q=*gene]                                     ::  =-  binnep
+    [%bnpd p=*gene q=*gene]                                     ::  =+  binped
+    [%bnvd p=*gene q=*gene]                                     ::  =>  binvod
   ::
     [%brbn p=*gene]                                             ::  |=  barbin
     [%brdg p=*gene]                                             ::  |:  bardeg
+    [%brdv p=*gene q=*gene]                                     ::  |<  bardov
+    [%brks p=*(list gene)]                                      ::  |?  barkas
     [%brmt p=*(list &[p=*term q=*gene])]                        ::  |%  barmit
-    [%brnp p=*gene]                                             ::  |-  barnup
-    [%brrs p=*(list &[p=*term q=*gene])]                        ::  |*  barras
+    [%brnp p=*gene]                                             ::  |-  barnep
+    [%brrs p=*(list &[p=*term q=*gene])]                        ::  |*  barrat
     [%brsg p=*gene q=*(list gene)]                              ::  |~  barsig
-    [%brsk p=*(list gene)]                                      ::  |?  barask
+    [%brvd p=*gene q=*gene]                                     ::  |>  barvod
   ::
-    [%dght p=*gene q=*gene r=*gene s=*gene]                     ::  :^  deghat
-    [%dgnp p=*gene q=*gene]                                     ::  :-  degnup
-    [%dgpd p=*gene q=*gene r=*gene]                             ::  :+  degpod
-    [%dgrs p=*(list gene)]                                      ::  :*  degras
+    [%dgkt p=*gene q=*gene r=*gene s=*gene]                     ::  :^  degket
+    [%dgnp p=*gene q=*gene]                                     ::  :-  degnep
+    [%dgpd p=*gene q=*gene r=*gene]                             ::  :+  degped
+    [%dgrs p=*(list gene)]                                      ::  :*  degrat
     [%dgsg p=*(list gene)]                                      ::  :~  degsig
   :: 
     [%dtbn p=*gene q=*gene]                                     ::  .=  dotbin
-    [%dtht p=*gene]                                             ::  .^  dothat
-    [%dtrs p=*gene q=*gene]                                     ::  .*  dotras
+    [%dtkt p=*gene]                                             ::  .^  dotket
+    [%dtks p=*gene]                                             ::  .?  dotkas
+    [%dtrs p=*gene q=*gene]                                     ::  .*  dotrat
     [%dtsg p=*]                                                 ::  .~  dotsig
-    [%dtsk p=*gene]                                             ::  .?  dotask
   ::
-    [%hpbn p=*gene]                                             ::  !=  lopbin
-    [%hpdg p=*gene]                                             ::  !:  lopdeg
-    [%hpdx p=*gene]                                             ::  !#  lopdax
-    [%hphp ~]                                                   ::  !!  loplop
-    [%hpmt ~]                                                   ::  !%  lopmit
-    [%hptc p=*gene]                                             ::  !`  loptic
+    [%hpbn p=*gene]                                             ::  !=  bopbin
+    [%hpcb p=*spot q=*gene]                                     ::  !_  bopcab
+    [%hpdg p=*gene]                                             ::  !:  bopdeg
+    [%hphp ~]                                                   ::  !!  bopbop
+    [%hpmt ~]                                                   ::  !%  bopmit
   ::
-    [%htbn p=*term q=*gene]                                     ::  ^=  hatbin
-    [%htdg p=*gene q=*gene]                                     ::  ^:  hatdeg
-    [%htdv p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^<  hatdev
-    [%htmt p=*gene q=*gene]                                     ::  ^%  hatmit
-    [%htnp p=*gene q=*gene]                                     ::  ^-  hatnup
-    [%htpd p=*gene q=*gene]                                     ::  ^+  hatpod
-    [%htvd p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^>  hatved
-    [%htrs p=*gene]                                             ::  ^*  hatras
-    [%htsg p=*gene]                                             ::  ^~  hatsig
+    [%ktbn p=*term q=*gene]                                     ::  ^=  ketbin
+    [%ktdg p=*gene q=*gene]                                     ::  ^:  ketdeg
+    [%ktdv p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^<  ketdov
+    [%ktmt p=*gene q=*gene]                                     ::  ^%  ketmit
+    [%ktnp p=*gene q=*gene]                                     ::  ^-  ketnep
+    [%ktpd p=*gene q=*gene]                                     ::  ^+  ketped
+    [%ktvd p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^>  ketvod
+    [%ktrs p=*gene]                                             ::  ^*  ketrat
+    [%ktsg p=*gene]                                             ::  ^~  ketsig
+  ::
+    [%ksbn p=*gene q=*gene]                                     ::  ?=  kasbin
+    [%ksbr p=*(list gene)]                                      ::  ?|  kasbar
+    [%ksdg p=*gene q=*gene r=*gene]                             ::  ?:  kasdeg
+    [%ksdv p=*gene q=*gene]                                     ::  ?<  kasdov
+    [%ksdt p=*gene q=*gene r=*gene]                             ::  ?.  kasdot
+    [%kshp p=*gene]                                             ::  ?!  kasbop
+    [%ksnp p=*gene q=*(list &[p=*gene q=*gene])]                ::  ?-  kasnep
+    [%kspm p=*(list gene)]                                      ::  ?&  kaspam
+    [%ksvd p=*gene q=*gene]                                     ::  ?>  kasvod
+    [%ksrs p=*gene q=*(list gene)]                              ::  ?*  kasrat
+    [%kssg p=*gene q=*gene r=*gene]                             ::  ?~  kassig
   ::
     [%lmbn p=*<%atom %blur %cell %flag %null>]                  ::  ;=  lambin
-    [%lmnp p=*gene]                                             ::  ;-  lamnup
-    [%lmpd p=*gene]                                             ::  ;+  lampod
+    [%lmnp p=*gene]                                             ::  ;-  lamnep
+    [%lmpd p=*gene]                                             ::  ;+  lamped
   ::
     [%mtbn p=*rope q=*(list &[p=*gene q=*gene])]                ::  %=  mitbin
     [%mtbr p=*rope q=*gene r=*(list &[p=*gene q=*gene])]        ::  %|  mitbar
     [%mtdg p=*gene q=*gene]                                     ::  %:  mitdeg
     [%mtdt p=*gene q=*gene]                                     ::  %.  mitdot
-    [%mtht p=*gene q=*gene r=*gene s=*gene]                     ::  %^  mithat
-    [%mtmp p=*term]                                             ::  %&  mitamp
-    [%mtnp p=*gene q=*(list gene)]                              ::  %-  mitnup  
-    [%mtpd p=*gene q=*gene r=*gene]                             ::  %+  mitpod
-    [%mtrs p=*gene]                                             ::  %*  mitras
+    [%mtkt p=*gene q=*gene r=*gene s=*gene]                     ::  %^  mitket
+    [%mtnp p=*gene q=*(list gene)]                              ::  %-  mitnep  
+    [%mtpd p=*gene q=*gene r=*gene]                             ::  %+  mitped
+    [%mtrs p=*gene]                                             ::  %*  mitrat
     [%mtsg p=*rope q=*gene r=*gene]                             ::  %~  mitsig
-  ::
-    [%skbn p=*gene q=*gene]                                     ::  ?=  askbin
-    [%skbr p=*(list gene)]                                      ::  ?|  askbar
-    [%skdg p=*gene q=*gene r=*gene]                             ::  ?:  askdeg
-    [%skdv p=*gene q=*gene]                                     ::  ?<  askdev
-    [%skdt p=*gene q=*gene r=*gene]                             ::  ?.  askdot
-    [%skhp p=*gene]                                             ::  ?!  asklop
-    [%skmp p=*(list gene)]                                      ::  ?&  askamp
-    [%sknp p=*gene q=*(list &[p=*gene q=*gene])]                ::  ?-  asknup
-    [%skvd p=*gene q=*gene]                                     ::  ?>  askved
-    [%skrs p=*gene q=*(list gene)]                              ::  ?*  askras
-    [%sksg p=*gene q=*gene r=*gene]                             ::  ?~  asksig
-  ==
+  --
 
   ::
     axis  &@
@@ -176,8 +178,4 @@ Type
       [%hold p=*type q=*gene]
     ==
   ::
-
-hp->lp
-rs->rt
-ht->kt
 

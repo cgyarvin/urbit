@@ -34,7 +34,7 @@
           }
         }
       }
-      case c3__htdv: {
+      case c3__ktdv: {
         if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
           return u2_bl_bail(wir_r);
         }
@@ -59,6 +59,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pit, rake)[] = {
-    { ".3", c3__hevy, j2_mb(Pit, rake), u2_yes, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mb(Pit, rake), SafeTier6, u2_none, u2_none },
     { }
   };

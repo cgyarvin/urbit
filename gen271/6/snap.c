@@ -52,7 +52,7 @@
         }
         else {
           return u2_bt
-            (wir_r, c3__htbn,
+            (wir_r, c3__ktbn,
                     u2_rx(wir_r, p_sut),
                     j2_mcy(Pit, vane, snap)(wir_r, van, q_sut, ref, gen));
         }

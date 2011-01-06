@@ -560,7 +560,7 @@ u2_bx_show(u2_ray wir_r)
     {
       printf("<");
       _bx_print_superdecimal_d(sap_d);
-      printf(" jogs");
+      printf(" hops");
       if ( cop_d ) {
         printf(", ");
         _bx_print_superdecimal_d(cop_d);
