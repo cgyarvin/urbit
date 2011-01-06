@@ -255,7 +255,7 @@ wide_c
     wide_norm: di_hatved body_r_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatdev body_r_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatnup body_b_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_hatbuc body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_hatbec body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatpod body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatdig body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_hatben body_g_wide    { $$ = _ycell($1, $2); }
@@ -386,7 +386,7 @@ tall
     tall_norm: di_hatved w body_r_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatdev w body_r_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatnup w body_b_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_hatbuc w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_hatbec w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatpod w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatdig w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_hatben w body_g_tall    { $$ = _ycell($1, $3); }
@@ -431,7 +431,7 @@ tall
   /** Tall - body parts.
   **/
     bank_tall
-      : tall_star e                     { $$ = $1; }
+      : tall_star f                     { $$ = $1; }
       ;
       tall_star
         :                               { $$ = _0; }
@@ -439,7 +439,7 @@ tall
         ;
 
     rack_tall
-      : tall_tall_star e                { $$ = $1; }
+      : tall_tall_star f                { $$ = $1; }
       ;
       tall_tall_star
         :                               { $$ = _0; }
@@ -460,13 +460,13 @@ tall
     rope
       : cord                    { $$ = _ycell($1, _0); }
       | cord si_dot g rope      { $$ = _ycell($1, $4); }
-      | bucs                    { $$ = $1; }
-      | bucs si_dot g rope      { $$ = u2_fj_list_cat(yqw_r, $1, $4); }
+      | becs                    { $$ = $1; }
+      | becs si_dot g rope      { $$ = u2_fj_list_cat(yqw_r, $1, $4); }
       ;
 
-      bucs
-        : si_buc                { $$ = _ycell(_0, _0); }
-        | si_buc bucs           
+      becs
+        : si_bec                { $$ = _ycell(_0, _0); }
+        | si_bec becs           
           { $$ = _ytrel(_0, 
                         _ycell(_0, _2),
                         $2); }
@@ -537,7 +537,7 @@ tall
     di_hatved: si_hat si_ved  { $$ = c3__htvd; }
     di_hatdev: si_hat si_dev  { $$ = c3__htdv; }
     di_hatnup: si_hat si_nup  { $$ = c3__htnp; }
-    di_hatbuc: si_hat si_buc  { $$ = c3__htbc; }
+    di_hatbec: si_hat si_bec  { $$ = c3__htbc; }
     di_hatdig: si_hat si_dig  { $$ = c3__htpd; }
     di_hatpod: si_hat si_pod  { $$ = c3__htdg; }
     di_hatben: si_hat si_ben  { $$ = c3__htbn; }
@@ -569,7 +569,7 @@ tall
     si_kes: '?'
     si_bar: '|'
     si_ben: '='
-    si_buc: '$'
+    si_bec: '$'
     si_bot: '\''
     si_cab: '_'
     /* si_com: ',' */
@@ -602,7 +602,7 @@ tall
   **/
     term
       : tok_term
-      | si_buc    { $$ = _0; }
+      | si_bec    { $$ = _0; }
       ;
 
     tok_term
@@ -677,6 +677,9 @@ tall
      ;
 
     e: '=' '='
+        ;
+
+    f: '-' '-'
         ;
 
     comment: ':' ':' comment_body '\n' { $$ = _0; }

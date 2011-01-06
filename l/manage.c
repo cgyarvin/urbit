@@ -442,16 +442,16 @@ u3_lm_tamp(u3_lv  lv,
 void
 u3_lm_water(u3_lv lv,
             c3_w  *maz_w,
-            c3_w  *buc_w)
+            c3_w  *boc_w)
 {
   u3_l l = lv;
 
   if ( !u3_ray_beam(l->hat_ray) ) {
     *maz_w = u3_ray_point(l->hat_ray);
-    *buc_w = u3_ray_point(l->cap_ray);
+    *boc_w = u3_ray_point(l->cap_ray);
   } else {
     *maz_w = u3_ray_point(l->cap_ray);
-    *buc_w = u3_ray_point(l->hat_ray);
+    *boc_w = u3_ray_point(l->hat_ray);
   }
 }
 

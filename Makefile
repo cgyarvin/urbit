@@ -180,6 +180,7 @@ J271_6_OFILES=\
        gen271/6/clay.o \
        gen271/6/comb.o \
        gen271/6/cons.o \
+       gen271/6/edit.o \
        gen271/6/eith.o \
        gen271/6/etch.o \
        gen271/6/fair.o \
@@ -190,6 +191,7 @@ J271_6_OFILES=\
        gen271/6/flip.o \
        gen271/6/flor.o \
        gen271/6/gain.o \
+       gen271/6/hack.o \
        gen271/6/hike.o \
        gen271/6/look.o \
        gen271/6/make.o \
@@ -204,6 +206,8 @@ J271_6_OFILES=\
        gen271/6/reap.o \
        gen271/6/ream.o \
        gen271/6/seek.o \
+       gen271/6/snap.o \
+       gen271/6/tuck.o \
        gen271/6/twin.o \
        gen271/6/vane.o 
 
@@ -230,4 +234,3 @@ tags:
 
 clean:
 	 $(RM) $(OFILES) $(BIN)/ford
-

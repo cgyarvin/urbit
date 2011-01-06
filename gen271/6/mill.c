@@ -46,9 +46,7 @@
         default: {
           u2_noun rex = j2_mby(Pit, open)(wir_r, gen);
 
-          u2_rl_ok(wir_r, rex);
           pro = j2_mcy(Pit, vane, mill)(wir_r, van, sut, rex);
-          u2_rl_ok(wir_r, rex);
           u2_rl_lose(wir_r, rex);
           return pro;
         }
@@ -217,6 +215,14 @@
             return u2_bc
               (wir_r, u2_bc(wir_r, c3__cube, sev),
                       u2_bc(wir_r, _1, u2_rx(wir_r, sev)));
+          }
+        }
+        case c3__hpcb: {
+          if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
+            return u2_bl_bail(wir_r);
+          }
+          else {
+            return j2_mcy(Pit, vane, mill)(wir_r, van, sut, q_gen);
           }
         }
         case c3__hpdg: {

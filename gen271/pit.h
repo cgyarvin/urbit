@@ -297,6 +297,10 @@
                         u2_noun tip);                             //  retain
 
       u2_noun                                                     //  transfer
+      j2_mby(Pit, hack)(u2_wire wir_r, 
+                        u2_noun gen);                             //  retain
+
+      u2_noun                                                     //  transfer
       j2_mby(Pit, hike)(u2_wire wir_r, 
                         u2_noun axe,                              //  retain
                         u2_noun pac);                             //  retain
@@ -431,6 +435,21 @@
                               u2_noun van,                        //  retain
                               u2_noun sut,                        //  retain
                               u2_noun rep);                       //  retain
+
+      u2_noun                                                     //  transfer
+      j2_mcy(Pit, vane, snap)(u2_wire wir_r, 
+                              u2_noun van,                        //  retain
+                              u2_noun sut,                        //  retain
+                              u2_noun ref,                        //  retain
+                              u2_noun gen);                       //  retain
+
+      u2_noun                                                     //  transfer
+      j2_mcy(Pit, vane, tuck)(u2_wire wir_r, 
+                              u2_noun van,                        //  retain
+                              u2_noun sut,                        //  retain
+                              u2_noun rup,                        //  retain
+                              u2_noun boz,                        //  retain
+                              u2_noun rix);                       //  retain
 
     /** Debugging hacks.
     **/

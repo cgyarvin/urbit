@@ -1097,14 +1097,14 @@ u2_rl_tamp(u2_ray  ral_r,
 void
 u2_rl_water(u2_ray ral_r,
             c3_w*  maz_w,
-            c3_w*  buc_w)
+            c3_w*  boc_w)
 {
   if ( !u2_ray_beam(u2_rail_hat_r(ral_r)) ) {
     *maz_w = u2_ray_point(u2_rail_hat_r(ral_r));
-    *buc_w = u2_ray_point(u2_rail_cap_r(ral_r));
+    *boc_w = u2_ray_point(u2_rail_cap_r(ral_r));
   } else {
     *maz_w = u2_ray_point(u2_rail_cap_r(ral_r));
-    *buc_w = u2_ray_point(u2_rail_hat_r(ral_r));
+    *boc_w = u2_ray_point(u2_rail_hat_r(ral_r));
   }
 }
 
