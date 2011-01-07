@@ -346,6 +346,14 @@
                               u2_noun sut);                       //  retain
 
       u2_noun                                                     //  transfer
+      j2_mcy(Pit, vane, edit)(u2_wire wir_r,
+                              u2_noun van,                        //  retain
+                              u2_noun sut,                        //  retain
+                              u2_atom axe,                        //  retain
+                              u2_noun mun,                        //  retain
+                              u2_noun har);                       //  retain
+
+      u2_noun                                                     //  transfer
       j2_mcy(Pit, vane, etch)(u2_wire wir_r, 
                               u2_noun van,                        //  retain
                               u2_noun sut,                        //  retain
@@ -464,6 +472,9 @@
 
     /** Debugging hacks.
     **/
+      void
+      j2_mby(Pit, type)(u2_wire  wir_r,
+                        u2_noun  typ);                            //  retain
       void
       j2_mcy(Pit, vane, dupt)(u2_wire     wir_r,
                               u2_noun     van,                    //  retain

@@ -54,6 +54,85 @@
     u2_rl_lose(wir_r, fly);
     u2_rl_lose(wir_r, wal);
   }
+  static void
+  _type_in(u2_wire wir_r, 
+           u2_noun typ)
+  {
+    u2_noun p_typ, q_typ, r_typ;
+
+    if ( u2_no == u2_dust(typ) ) switch ( typ ) {
+      default: goto fail;
+
+      case c3__atom: break;
+      case c3__blot: break;
+      case c3__blur: break;
+    } 
+    else switch ( u2_h(typ) ) {
+      default: fail: u2_err(wir_r, "bum type", typ); u2_bl_bail(wir_r); break;
+
+      case c3__cell: {
+        if ( u2_no == u2_as_cell(u2_t(typ), &p_typ, &q_typ) ) {
+          goto fail;
+        } else {
+          _type_in(wir_r, p_typ);
+          _type_in(wir_r, q_typ);
+          break;
+        }
+      }
+      case c3__core: {
+        if ( u2_no == u2_as_trel(u2_t(typ), &p_typ, &q_typ, &r_typ) ) {
+          goto fail;
+        } else {
+          _type_in(wir_r, p_typ);
+
+          if ( u2_yes == u2_dust(q_typ) ) {
+            _type_in(wir_r, u2_t(q_typ));
+          }
+          break;
+        }
+      }
+      case c3__cube: { 
+        p_typ = u2_t(typ);
+        {
+          break;
+        }
+      case c3__face: {
+        if ( u2_no == u2_as_cell(u2_t(typ), &p_typ, &q_typ) ) {
+          goto fail;
+        } else {
+          if ( u2_no == u2_stud(p_typ) ) {
+            goto fail;
+          }
+          _type_in(wir_r, q_typ);
+          break;
+        }
+      }
+      case c3__fork: {
+        if ( u2_no == u2_as_cell(u2_t(typ), &p_typ, &q_typ) ) {
+          goto fail;
+        } else {
+          _type_in(wir_r, p_typ);
+          _type_in(wir_r, q_typ);
+          break;
+        }
+      }
+      case c3__hold:
+        if ( u2_no == u2_as_cell(u2_t(typ), &p_typ, &q_typ) ) {
+          goto fail;
+        } else {
+          _type_in(wir_r, p_typ);
+          break;
+        }
+      }
+    } 
+  }
+  void
+  j2_mby(Pit, type)(u2_wire  wir_r,
+                    u2_noun  typ)
+  {
+    u2_rl_ok(wir_r, typ);
+    _type_in(wir_r, typ);
+  }
 
 /* declarations
 */
@@ -62,14 +141,12 @@
                          u2_noun cor);                            //  retain
 
   extern u2_ho_jet j2_mcj(Pit, vane, bake)[];
-  extern u2_ho_jet j2_mcj(Pit, vane, etch)[];
   extern u2_ho_jet j2_mcj(Pit, vane, fair)[];
   extern u2_ho_jet j2_mcj(Pit, vane, firm)[];
   extern u2_ho_jet j2_mcj(Pit, vane, find)[];
   extern u2_ho_jet j2_mcj(Pit, vane, fish)[];
   extern u2_ho_jet j2_mcj(Pit, vane, gain)[];
   extern u2_ho_jet j2_mcj(Pit, vane, make)[];
-  extern u2_ho_jet j2_mcj(Pit, vane, mesh)[];
   extern u2_ho_jet j2_mcj(Pit, vane, mill)[];
   extern u2_ho_jet j2_mcj(Pit, vane, nest)[];
   extern u2_ho_jet j2_mcj(Pit, vane, peek)[];
@@ -82,7 +159,6 @@
   u2_ho_driver 
   j2_mbd(Pit, vane)[] = {
     { j2_sc(Pit, vane, bake), j2_mcj(Pit, vane, bake), 0, 0, u2_none },
-    { j2_sc(Pit, vane, etch), j2_mcj(Pit, vane, etch), 0, 0, u2_none },
     { j2_sc(Pit, vane, find), j2_mcj(Pit, vane, find), 0, 0, u2_none },
     { j2_sc(Pit, vane, fair), j2_mcj(Pit, vane, fair), 0, 0, u2_none },
     { j2_sc(Pit, vane, firm), j2_mcj(Pit, vane, firm), 0, 0, u2_none },
@@ -90,7 +166,6 @@
     { j2_sc(Pit, vane, gain), j2_mcj(Pit, vane, gain), 0, 0, u2_none },
     { j2_sc(Pit, vane, nest), j2_mcj(Pit, vane, nest), 0, 0, u2_none },
     { j2_sc(Pit, vane, make), j2_mcj(Pit, vane, make), 0, 0, u2_none },
-    { j2_sc(Pit, vane, mesh), j2_mcj(Pit, vane, mesh), 0, 0, u2_none },
     { j2_sc(Pit, vane, mill), j2_mcj(Pit, vane, mill), 0, 0, u2_none },
     { j2_sc(Pit, vane, peek), j2_mcj(Pit, vane, peek), 0, 0, u2_none },
     { j2_sc(Pit, vane, play), j2_mcj(Pit, vane, play), 0, 0, u2_none },

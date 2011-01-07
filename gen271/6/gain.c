@@ -42,39 +42,41 @@
 
     if ( u2_no == u2_dust(gen) ) { 
       return u2_rx(wir_r, sut);
-    } else {
-      switch ( u2_h(gen) ) {
-        default: return u2_rx(wir_r, sut);
+    } else switch ( u2_h(gen) ) {
+      default: return u2_rx(wir_r, sut);
 
-        case c3__ktdv:
-        case c3__ktvd: {
-          if ( u2_none == (q_gen = u2_frag(6, gen)) ) {
-            return u2_bl_bail(wir_r);
-          } else {
-            return j2_mcy(Pit, vane, gain)(wir_r, van, sut, q_gen);
-          }
+      case c3__ktdv:
+      case c3__ktvd: {
+        if ( u2_none == (q_gen = u2_frag(6, gen)) ) {
+          return u2_bl_bail(wir_r);
+        } else {
+          return j2_mcy(Pit, vane, gain)(wir_r, van, sut, q_gen);
         }
-        case c3__csbn: {
-          if ( u2_no == u2_mean(gen, 6, &p_gen, 7, &q_gen, 0) ) {
-            return u2_bl_bail(wir_r);
-          } else {
-            u2_noun rac = j2_mby(Pit, rake)(wir_r, q_gen);
-            u2_noun hap = j2_mcy(Pit, vane, play)(wir_r, van, sut, p_gen);
-            u2_noun vul = j2_mcy(Pit, vane, play)(wir_r, van, sut, q_gen);
-            u2_noun gav = j2_mcy(Pit, vane, reap)(wir_r, van, vul, hap);
-            u2_noun pro = j2_mcy(Pit, vane, etch)(wir_r, van, sut, rac, gav);
+      }
+      case c3__csbn: {
+        if ( u2_no == u2_mean(gen, 6, &p_gen, 7, &q_gen, 0) ) {
+          return u2_bl_bail(wir_r);
+        } else {
+          u2_noun rac = j2_mby(Pit, rake)(wir_r, q_gen);
+          u2_noun hap = j2_mcy(Pit, vane, play)(wir_r, van, sut, p_gen);
+          u2_noun vul = j2_mcy(Pit, vane, play)(wir_r, van, sut, q_gen);
+          u2_noun gav = j2_mcy(Pit, vane, reap)(wir_r, van, vul, hap);
+          u2_noun tof = u2_bc(wir_r, u2_nul, _1);
+          u2_noun tuq = j2_mcy(Pit, vane, tuck)(wir_r, van, sut, rac, gav, tof);
+          u2_noun ret = u2_rx(wir_r, u2_h(tuq));
 
-            u2_rl_lose(wir_r, rac);
-            u2_rl_lose(wir_r, hap);
-            u2_rl_lose(wir_r, vul);
-            u2_rl_lose(wir_r, gav);
+          u2_rl_lose(wir_r, rac);
+          u2_rl_lose(wir_r, hap);
+          u2_rl_lose(wir_r, vul);
+          u2_rl_lose(wir_r, gav);
+          u2_rl_lose(wir_r, tof);
+          u2_rl_lose(wir_r, tuq);
 
-            return pro;
-          }
+          return ret;
         }
-        case c3__cspm: {
-          return _gain_cspm(wir_r, van, sut, u2_t(gen));
-        }
+      }
+      case c3__cspm: {
+        return _gain_cspm(wir_r, van, sut, u2_t(gen));
       }
     }
   }

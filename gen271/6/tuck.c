@@ -277,7 +277,7 @@
       u2_noun p_lof = u2_h(lof);
       u2_noun q_lof = u2_t(lof);
 
-      tuk = u2_bt(wir_r, p_lof, axe, q_lof);
+      tuk = u2_bt(wir_r, u2_rx(wir_r, p_lof), axe, u2_rx(wir_r, q_lof));
       u2_rl_lose(wir_r, lof);
 
       return tuk;

@@ -37,31 +37,18 @@
           u2_noun rup = j2_mby(Pit, rake)(wir_r, pi_har);
           u2_noun taq = j2_mcy(Pit, vane, tuck)
             (wir_r, van, mun, rup, sut, qi_har);
-          u2_noun bop = j2_mcy(Pit, vane, make)(wir_r, van, mun, pi_har);
           u2_noun p_taq = u2_h(taq);
           u2_noun q_taq = u2_t(taq);
-          u2_noun h_bop = u2_h(bop);
-          u2_noun t_bop = u2_t(bop);
 
-          if ( (_0 != h_bop) || (u2_no == u2_stud(t_bop)) ) {
-            return u2_bl_bail(wir_r);
-          }
-          else {
-            har = t_har;
+          har = t_har;
 
-            u2_rl_lose(wir_r, mun);
-            mun = u2_rx(wir_r, p_taq);
+          u2_rl_lose(wir_r, mun);
+          mun = u2_rx(wir_r, p_taq);
 
-            luf = u2_bc(wir_r,
-                        u2_bc(wir_r, u2_rx(wir_r, t_bop),
-                                     u2_rx(wir_r, q_taq)),
-                        luf);
+          luf = u2_bc(wir_r, u2_rx(wir_r, q_taq), luf);
 
-            u2_rl_lose(wir_r, rup);
-            u2_rl_lose(wir_r, taq);
-            u2_rl_lose(wir_r, bop);
-            har = t_har;
-          }
+          u2_rl_lose(wir_r, rup);
+          u2_rl_lose(wir_r, taq);
         }
       }
     }
@@ -73,7 +60,7 @@
   {
     u2_noun van, sut, axe, mun, har;
 
-    if ( (u2_no == u2_mean(cor, 8, &axe, 18, &mun, 19, &har,  5, &van, 0)) ||
+    if ( (u2_no == u2_mean(cor, 8, &axe, 18, &mun, 19, &har, 5, &van, 0)) ||
          (u2_no == u2_stud(axe)) ||
          (u2_none == (sut = u2_frag(4, van))) )
     {

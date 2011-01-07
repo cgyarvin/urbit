@@ -367,7 +367,7 @@
 
             u2_as_trel(lar, &p_lar, &q_lar, &r_lar);
             {
-              u2_noun fup = j2_mcy(Pit, vane, mesh)
+              u2_noun fup = j2_mcy(Pit, vane, edit)
                               (wir_r, van, sut, p_lar, r_lar, q_gen);
 
               if ( u2_nul == q_lar ) {

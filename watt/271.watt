@@ -7,7 +7,7 @@
     [%club !=(club)]
   --
 |*
-  ::  Tier 1, ligkt math
+  ::  Tier 1, light math
 ::::
 ::
     add
@@ -1168,6 +1168,28 @@
   --
 ::::
 ::
+    hack
+  ^<  mine.[!=(->) %hack ~]
+  =+  gen=*gene
+  |=
+  ^-  *<[& p=*gene q=*gene] [| p=*gene]>
+  ?-    gen
+      [%dgnp *]   [& p.gen q.gen]
+      [%bpcb *] 
+    =+  pyr=$(gen q.gen)
+    ?-    -.pyr
+        &   [& [%bpcb p.gen p.pyr] [%bpcb p.gen q.pyr]]
+        |   [| %bpcb p.gen p.pyr]
+    --
+  ::    ::
+      *
+    =+  voq=(open gen)
+    ?:  .=(gen voq)
+      [| gen]
+    $(gen voq)
+  --
+::::
+::
     hike 
   ^<  mine.[!=(->) %hike ~]
   =+  [axe=*axis pac=*(list &[p=*axis q=*tool])]
@@ -2242,28 +2264,6 @@
     ::
         [~ *]
       [(peg p.vag p.i.rup) ~ (peek(sut r.vag) p.i.rup)]
-    --
-  ::::
-  ::
-      hack
-    ^<  mine.[!=(->) %hack ~]
-    =+  gen=*gene
-    |=
-    ^-  *<[& p=*gene q=*gene] [| p=*gene]>
-    ?-    gen
-        [%dgnp *]   [& p.gen q.gen]
-        [%bpcb *] 
-      =+  pyr=$(gen q.gen)
-      ?-    -.pyr
-          &   [& [%bpcb p.gen p.pyr] [%bpcb p.gen q.pyr]]
-          |   [| %bpcb p.gen p.pyr]
-      --
-    ::    ::
-        *
-      =+  voq=(open gen)
-      ?:  .=(gen voq)
-        [| gen]
-      $(gen voq)
     --
   ::::
   ::

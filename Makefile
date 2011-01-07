@@ -182,7 +182,6 @@ J271_6_OFILES=\
        gen271/6/cons.o \
        gen271/6/edit.o \
        gen271/6/eith.o \
-       gen271/6/etch.o \
        gen271/6/fair.o \
        gen271/6/find.o \
        gen271/6/firm.o \
@@ -195,7 +194,6 @@ J271_6_OFILES=\
        gen271/6/hike.o \
        gen271/6/look.o \
        gen271/6/make.o \
-       gen271/6/mesh.o \
        gen271/6/mill.o \
        gen271/6/name.o \
        gen271/6/open.o \

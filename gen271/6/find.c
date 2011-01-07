@@ -191,6 +191,7 @@
         }
       } 
       case c3__hold: {
+        u2_rl_ok(wir_r, sut);
         if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
           return u2_bl_bail(wir_r);
         }
@@ -224,7 +225,6 @@
     u2_noun fin = _find_in(wir_r, van, sut, cog, u2_nul);
 
     if ( u2_nul == fin ) {
-      u2_err(wir_r, "cog", cog);
       j2_mcy(Pit, vane, dupt)(wir_r, van, "sut", sut);
       return u2_bl_bail(wir_r);
     } else {
