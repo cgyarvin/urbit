@@ -15,7 +15,37 @@
     u2_noun ret;
 
     if ( u2_yes == u2_dust(gen) ) {
-      if ( c3__dgnp == u2_h(gen) ) {
+      u2_noun h_gen = u2_h(gen);
+
+      if ( (c3__bpcb == h_gen) || (c3__bnvd == h_gen) ) {
+        if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
+          return u2_bl_bail(wir_r);
+        }
+        else {
+          u2_noun pyr = j2_mby(Pit, hack)(wir_r, q_gen);
+
+          if ( u2_yes == u2_h(pyr) ) {
+            ret = u2_bt
+              (wir_r, u2_yes,
+                      u2_bt(wir_r, h_gen, 
+                                   u2_rx(wir_r, p_gen), 
+                                   u2_rx(wir_r, u2_h(u2_t(pyr)))),
+                      u2_bt(wir_r, h_gen, 
+                                   u2_rx(wir_r, p_gen), 
+                                   u2_rx(wir_r, u2_t(u2_t(pyr)))));
+          }
+          else {
+            ret = u2_bc
+              (wir_r, u2_no,
+                      u2_bt(wir_r, h_gen, 
+                                   u2_rx(wir_r, p_gen), 
+                                   u2_rx(wir_r, u2_t(pyr))));
+          }
+          u2_rl_lose(wir_r, pyr);
+          return ret;
+        }
+      }
+      else if ( c3__dgnp == u2_h(gen) ) {
         if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
           return u2_bl_bail(wir_r);
         }
@@ -23,34 +53,6 @@
           return u2_bt(wir_r, u2_yes, 
                               u2_rx(wir_r, p_gen),
                               u2_rx(wir_r, q_gen));
-        }
-      }
-      else if ( c3__bpcb == u2_h(gen) ) {
-        if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
-          return u2_bl_bail(wir_r);
-        }
-        else {
-          u2_noun pyr = j2_mby(Pit, hack)(wir_r, gen);
-
-          if ( u2_yes == u2_h(pyr) ) {
-            ret = u2_bt
-              (wir_r, u2_yes,
-                      u2_bt(wir_r, c3__bpcb, 
-                                   u2_rx(wir_r, p_gen), 
-                                   u2_rx(wir_r, u2_h(u2_t(pyr)))),
-                      u2_bt(wir_r, c3__bpcb, 
-                                   u2_rx(wir_r, q_gen), 
-                                   u2_rx(wir_r, u2_t(u2_t(pyr)))));
-          }
-          else {
-            ret = u2_bc
-              (wir_r, u2_no,
-                      u2_bt(wir_r, c3__bpcb, 
-                                   u2_rx(wir_r, p_gen), 
-                                   u2_rx(wir_r, u2_t(pyr))));
-          }
-          u2_rl_lose(wir_r, pyr);
-          return ret;
         }
       }
     }

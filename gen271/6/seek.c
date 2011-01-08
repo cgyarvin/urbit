@@ -85,6 +85,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, vane, seek)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, vane, seek), u2_no, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, vane, seek), SafeTier6, u2_none, u2_none },
     { }
   };

@@ -1102,6 +1102,12 @@
     [%bnpd p=*gene q=*gene]                                     ::  =+  binped
     [%bnvd p=*gene q=*gene]                                     ::  =>  binvod
   ::
+    [%bpbn p=*gene]                                             ::  !=  bopbin
+    [%bpcb p=*spot q=*gene]                                     ::  !_  bopcab
+    [%bpdg p=*gene]                                             ::  !:  bopdeg
+    [%bpbp ~]                                                   ::  !!  bopbop
+    [%bpmt ~]                                                   ::  !%  bopmit
+  ::
     [%brbn p=*gene]                                             ::  |=  barbin
     [%brdg p=*gene]                                             ::  |:  bardeg
     [%brdv p=*gene q=*gene]                                     ::  |<  bardov
@@ -1111,6 +1117,18 @@
     [%brrt p=*(list &[p=*term q=*gene])]                        ::  |*  barrat
     [%brsg p=*gene q=*(list gene)]                              ::  |~  barsig
     [%brvd p=*gene q=*gene]                                     ::  |>  barvod
+  ::
+    [%csbp p=*gene]                                             ::  ?!  casbop
+    [%csbn p=*gene q=*gene]                                     ::  ?=  casbin
+    [%csbr p=*(list gene)]                                      ::  ?|  casbar
+    [%csdg p=*gene q=*gene r=*gene]                             ::  ?:  casdeg
+    [%csdv p=*gene q=*gene]                                     ::  ?<  casdov
+    [%csdt p=*gene q=*gene r=*gene]                             ::  ?.  casdot
+    [%csnp p=*gene q=*(list &[p=*gene q=*gene])]                ::  ?-  casnep
+    [%cspm p=*(list gene)]                                      ::  ?&  caspam
+    [%csrt p=*gene q=*(list gene)]                              ::  ?*  casrat
+    [%cssg p=*gene q=*gene r=*gene]                             ::  ?~  cassig
+    [%csvd p=*gene q=*gene]                                     ::  ?>  casvod
   ::
     [%dgkt p=*gene q=*gene r=*gene s=*gene]                     ::  :^  degket
     [%dgnp p=*gene q=*gene]                                     ::  :-  degnep
@@ -1124,12 +1142,6 @@
     [%dtrt p=*gene q=*gene]                                     ::  .*  dotrat
     [%dtsg p=*]                                                 ::  .~  dotsig
   ::
-    [%bpbn p=*gene]                                             ::  !=  lopbin
-    [%bpcb p=*spot q=*gene]                                     ::  !_  lopcab
-    [%bpdg p=*gene]                                             ::  !:  lopdeg
-    [%bpbp ~]                                                   ::  !!  loplop
-    [%bpmt ~]                                                   ::  !%  lopmit
-  ::
     [%ktbn p=*term q=*gene]                                     ::  ^=  ketbin
     [%ktdg p=*gene q=*gene]                                     ::  ^:  ketdeg
     [%ktdv p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^<  ketdov
@@ -1139,18 +1151,6 @@
     [%ktvd p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^>  ketvod
     [%ktrt p=*gene]                                             ::  ^*  ketrat
     [%ktsg p=*gene]                                             ::  ^~  ketsig
-  ::
-    [%csbn p=*gene q=*gene]                                     ::  ?=  casbin
-    [%csbr p=*(list gene)]                                      ::  ?|  casbar
-    [%csdg p=*gene q=*gene r=*gene]                             ::  ?:  casdeg
-    [%csdv p=*gene q=*gene]                                     ::  ?<  casdov
-    [%csdt p=*gene q=*gene r=*gene]                             ::  ?.  casdot
-    [%csbp p=*gene]                                             ::  ?!  caslop
-    [%csnp p=*gene q=*(list &[p=*gene q=*gene])]                ::  ?-  casnep
-    [%cspm p=*(list gene)]                                      ::  ?&  caspam
-    [%csvd p=*gene q=*gene]                                     ::  ?>  casvod
-    [%csrt p=*gene q=*(list gene)]                              ::  ?*  casrat
-    [%cssg p=*gene q=*gene r=*gene]                             ::  ?~  cassig
   ::
     [%lmbn p=*<%atom %blur %cell %flag %null>]                  ::  ;=  lambin
     [%lmnp p=*gene]                                             ::  ;-  lamnep
@@ -1174,14 +1174,23 @@
   |=
   ^-  *<[& p=*gene q=*gene] [| p=*gene]>
   ?-    gen
-      [%dgnp *]   [& p.gen q.gen]
+      [%bnvd *]
+    ?.  ?=([~ *] p.gen)
+      [| gen] 
+    =+  pyr=$(gen q.gen)
+    ?-    -.pyr
+        |   [| [%bnvd p.gen p.pyr]]
+        &   [& [%bnvd p.gen p.pyr] [%bnvd p.gen q.pyr]]
+    --
+  ::
       [%bpcb *] 
     =+  pyr=$(gen q.gen)
     ?-    -.pyr
+        |   [| [%bpcb p.gen p.pyr]]
         &   [& [%bpcb p.gen p.pyr] [%bpcb p.gen q.pyr]]
-        |   [| %bpcb p.gen p.pyr]
     --
-  ::    ::
+  ::
+      [%dgnp *]   [& p.gen q.gen]
       *
     =+  voq=(open gen)
     ?:  .=(gen voq)
@@ -1767,7 +1776,12 @@
     =+  cog=*term
     |=
     ^>  bean.%find
-    %-  need
+    =-  ?~  hoq
+          ^>  bean.[%type |=((~(fly club dump) 75))]
+          ^>  bean.[%name |=((~(fly club cog) 75))]
+          !!
+        u.hoq
+    ^=  hoq
     =+  gil=*(pool type)
     |-
     ^-  *(unit plan)

@@ -135,7 +135,7 @@
     u2_noun p_sut, q_sut, r_sut;
 
     if ( _1 == pi_pur ) {
-      return u2_rx(wir_r, sut);
+      return u2_rx(wir_r, p_giv);
     }
     else {
       if ( u2_yes == u2_stud(sut) ) switch( sut ) {
@@ -373,6 +373,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, vane, tuck)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, vane, tuck), u2_no, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, vane, tuck), SafeTier6, u2_none, u2_none },
     { }
   };

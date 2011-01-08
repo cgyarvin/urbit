@@ -429,6 +429,32 @@ _print_space(c3_w  feq_w,
   }
 }
 
+/* _print_wall(): print debug wall.
+*/
+static void
+_print_wall(u2_noun wal,
+            FILE* fil_F)
+{
+  while ( u2_yes == u2_dust(wal) ) {
+    _print_tape(u2_h(wal), fil_F);
+    putc('\n', fil_F);
+    wal = u2_t(wal);
+  }
+}
+            
+/* u2_bx_loaf(): print debug loaf.
+*/
+void
+u2_bx_loaf(u2_ray  wir_r,
+           u2_noun luf)                                           //  retain
+{
+  if ( u2_yes == u2_dust(luf) ) {
+    _print_term(u2_h(luf), stdout);
+    printf(":\n");
+    _print_wall(u2_t(luf), stdout);
+  }
+}
+
 /* u2_bx_bean_print(): print bean stack to FILE *.
 */
 void

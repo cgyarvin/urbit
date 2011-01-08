@@ -15,7 +15,6 @@
 #   define  SafeTier4         u2_and(SafeTier3, u2_yes)
 #   define  SafeTier5         u2_and(SafeTier4, u2_yes)
 #   define  SafeTier6         u2_and(SafeTier5, u2_yes)
-#   define  SafeTier6_vane    u2_and(SafeTier6, u2_yes)
 
   /** Cosmetic noun types.
   **/

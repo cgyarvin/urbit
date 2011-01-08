@@ -390,7 +390,7 @@ _nock_warm(u2_wire wir_r,
             }
 
             case c3__loaf: {
-              u2_err(wir_r, "loaf", hod);
+              u2_bx_loaf(wir_r, hod);
               u2_rl_lose(wir_r, hod);
               fol = zom; 
               continue;

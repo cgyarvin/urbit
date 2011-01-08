@@ -810,8 +810,8 @@ u2_ho_stet(u2_wire wir_r,
       c3_c *cos_c = _ho_cstring(xip);
 
       fprintf(stderr, "fail: %8x: %s\n", u2_mug(cor), cos_c);
-      u2_err(wir_r, "wrong", pro);
-      u2_err(wir_r, "right", vet);
+      // u2_err(wir_r, "wrong", pro);
+      // u2_err(wir_r, "right", vet);
       free(cos_c);
 
       c3_assert(0);

@@ -153,6 +153,8 @@
   extern u2_ho_jet j2_mcj(Pit, vane, play)[];
   extern u2_ho_jet j2_mcj(Pit, vane, reap)[];
   extern u2_ho_jet j2_mcj(Pit, vane, seek)[];
+  extern u2_ho_jet j2_mcj(Pit, vane, snap)[];
+  extern u2_ho_jet j2_mcj(Pit, vane, tuck)[];
 
 /* structures
 */
@@ -171,12 +173,14 @@
     { j2_sc(Pit, vane, play), j2_mcj(Pit, vane, play), 0, 0, u2_none },
     { j2_sc(Pit, vane, reap), j2_mcj(Pit, vane, reap), 0, 0, u2_none },
     { j2_sc(Pit, vane, seek), j2_mcj(Pit, vane, seek), 0, 0, u2_none },
+    { j2_sc(Pit, vane, snap), j2_mcj(Pit, vane, snap), 0, 0, u2_none },
+    { j2_sc(Pit, vane, tuck), j2_mcj(Pit, vane, tuck), 0, 0, u2_none },
     { }
   };
 
   u2_ho_jet 
   j2_mbj(Pit, vane)[] = {
-    { "clay", c3__hevy, j2_mc(Pit, vane, clay), u2_no, u2_none, u2_none },
+    // { "clay", c3__hevy, j2_mc(Pit, vane, clay), u2_no, u2_none, u2_none },
     { }
   };
 

@@ -123,6 +123,12 @@
       u2_bx_spot(u2_ray  wir_r,
                  u2_noun hod);                                    //  transfer
 
+    /* u2_bx_loaf(): print debug wall.
+    */
+      void
+      u2_bx_loaf(u2_ray  wir_r,
+                 u2_noun wal);                                    //  retain
+
     /* u2_bx_bean_ent(), u2_bx_bean_out(): enter and exit execution state.
     */
       void
