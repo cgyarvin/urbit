@@ -753,6 +753,7 @@
   ::::
   ::
       get
+    ^<  mine.[!=(->) %get ~]
     =+  b=*
     |:  |-
     ?~  a
@@ -762,6 +763,13 @@
     ?:  (gor b p.n.a)
       $(a l.a)
     $(a r.a)
+  ::::
+  ::
+      has
+    ^<  mine.[!=(->) %has ~]
+    =+  b=*
+    |:
+    !.=(~ (get b))
   ::::
   ::
       put
@@ -1109,9 +1117,9 @@
     [%bpmt ~]                                                   ::  !%  bopmit
   ::
     [%brbn p=*gene]                                             ::  |=  barbin
+    [%brcs p=*(list gene)]                                      ::  |?  barcas
     [%brdg p=*gene]                                             ::  |:  bardeg
     [%brdv p=*gene q=*gene]                                     ::  |<  bardov
-    [%brcs p=*(list gene)]                                      ::  |?  barcas
     [%brmt p=*(list &[p=*term q=*gene])]                        ::  |%  barmit
     [%brnp p=*gene]                                             ::  |-  barnep
     [%brrt p=*(list &[p=*term q=*gene])]                        ::  |*  barrat
@@ -1667,6 +1675,8 @@
         ::
             [%hold *]
           ?:  (~(has in vax) sut)
+            ?:  (~(has by q.den) sut)
+              den
             [.^(p.den) (~(put by q.den) [sut p.den])]
           $(vax (~(put in vax) sut), sut (play(sut p.sut) q.sut))
         ::
@@ -2017,7 +2027,6 @@
     ::
         *       
       :: ^>  bean.[%open |=((~(fly club ~(gut golf `*`gen)) 75))]
-      ^>  bean.%open
       =+  doz=(open gen)
       ?<  .=(doz gen)
       $(gen doz)
@@ -2051,9 +2060,7 @@
         &
       ?-  sut
           %atom       ?-(bon %atom &, [%cube *] !.?(p.bon), * sint)
-      ::
           %blot       sint
-      ::
           %blur       &
       ::
           [%cell *]
@@ -2073,9 +2080,7 @@
         --
       ::
           [%cube *]   ?.(?=([%cube *] bon) sint .=(sut bon))
-      ::
           [%face *]   dext(sut q.sut)
-      ::
           [%fork *]
         ?.  ?=(*<%atom %blur [%cell *] [%cube *] [%core *]> bon)
           sint
@@ -2093,25 +2098,16 @@
       ^-  ?
       ?-  bon
           %atom       |
-      ::
           %blot       &
-      ::
           %blur       |
-      ::
           [%cell *]   |
-      ::
           [%core *]   dext(bon [%cell p.bon %blur])
-      ::
-          [%cube *]               
-        ?&
-          .?(p.bon) 
-          dext(bon [%cell [%cube -.p.bon] [%cube +.p.bon]])
-        --
-      ::
+          [%cube *]   ?&
+                        .?(p.bon) 
+                        dext(bon [%cell [%cube -.p.bon] [%cube +.p.bon]])
+                      --
           [%face *]   dext(bon q.bon)
-      ::
           [%fork *]   ?&(dext(bon p.bon) dext(bon q.bon))
-      ::
           [%hold *]
         ?|
           (~(has in gil) [sut bon])
@@ -2124,9 +2120,40 @@
   ::::
   ::
       orth
+    ^<  mine.[!=(->) %orth ~]
     =+  ref=*type
     |=
-    .=(%blot (reap ref))
+    ^>  bean.%orth
+    =+  bix=*(pool &[*type *type])
+    |-
+    ?-    sut
+        %atom       ?-(ref %atom |, [%cell *] &, * $(sut ref, ref sut))
+        %blot       &
+        %blur       (nest(sut %blot) ref)
+        [%cell *]
+      ?:  ?=([%cell *] ref)
+        ?|($(sut p.sut, ref p.ref) $(sut q.sut, ref q.ref))
+      $(sut ref, ref sut)
+    ::
+        [%core *]   $(sut [%cell p.sut %blur])
+        [%cube *]
+      ?-  ref
+          %atom       .?(p.sut)
+          [%cell *]   ?|  !.?(p.sut)
+                          $(sut [%cell [%cube -.p.sut ] [%cube +.p.sut]])
+                      --
+          [%cube *]   .=(p.sut p.ref)
+          *           $(sut ref, ref sut)
+      --
+    ::
+        [%face *]   $(sut q.sut)
+        [%fork *]   ?&($(sut p.sut) $(sut q.sut))
+        [%hold *]
+      ?|
+        (~(has in bix) [ref sut])
+        $(bix (~(put in bix) [ref sut]), sut (play(sut p.sut) q.sut))
+      --
+    --
   ::::
   ::
       peek
@@ -2165,6 +2192,8 @@
     ^<  mine.[!=(->) %reap ~]
     =+  ref=*type
     |=
+    ^>  bean.[%reap-ref |=((~(fly club dump(sut ref)) 75))]
+    ^>  bean.[%reap-sut |=((~(fly club dump) 75))]
     =+  bol=*(pool type)
     =<  dext
     |*
@@ -2173,23 +2202,19 @@
         dext
       ^-  *type
       ?-    sut
-      ::
           %atom
         ?-    ref
             %atom       %atom
             [%cube *]   ?:(.?(p.ref) %blot ref)
             *           sint
         --
-      ::
-          %blot
-        %blot
+          %blot   %blot
       ::
           %blur
         ref
       ::
           [%cell *]
         ?-    ref
-        ::
             [%cube *]   
           ?.  .?(p.ref) 
             %blot
@@ -2204,15 +2229,11 @@
           sint
         --
       ::
-          [%core *]
-        sut
+          [%core *]   sut
       ::
           [%cube *]
         ?-    ref
-        ::
-            %atom
-          ?:(.?(p.sut) %blot sut)
-        ::
+            %atom       ?:(.?(p.sut) %blot sut)
             [%cell *]
           ?.  .?(p.sut) 
             %blot 
@@ -2220,19 +2241,12 @@
             dext(sut [%cube -.p.sut], ref p.ref) 
           dext(sut [%cube +.p.sut], ref q.ref)
         ::
-            [%cube *]
-          ?:(.=(p.sut p.ref) sut %blot)
-        ::
-            *
-          sint
+            [%cube *]   ?:(.=(p.sut p.ref) sut %blot)
+            *           sint
         --
       ::
-          [%face *]
-        (name(sut dext(sut q.sut)) p.sut) 
-      ::
-          [%fork *]   
-        (eith dext(sut p.sut) dext(sut q.sut))
-      ::
+          [%face *]   (name(sut dext(sut q.sut)) p.sut) 
+          [%fork *]   (eith dext(sut p.sut) dext(sut q.sut))
           [%hold *]   
         =+  yet=(play(sut p.sut) q.sut)
         =+  woz=dext(sut yet)
@@ -2285,6 +2299,9 @@
     ^<  mine.[!=(->) %snap ~]
     =+  [ref=*type gen=*gene]
     |=
+    ^>  bean.[%snap-type |=((~(fly club dump) 75))]
+    ^>  bean.[%snap-gene |=((~(fly club ~(gut golf `*`gen)) 75))]
+    ^>  bean.%snap
     ^-  *gene 
     ?-    sut
         [%cell *]
@@ -2296,6 +2313,7 @@
     ::
         [%face *]   [%ktbn p.sut $(sut q.sut)]
         [%fork *]
+      ^>  bean.%snap-fork
       =+  vap=(play(sut ref) gen)
       ?:  (orth(sut p.sut) vap)
         ?:  (orth(sut q.sut) vap)

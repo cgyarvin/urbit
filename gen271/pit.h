@@ -430,6 +430,12 @@
                               u2_noun sut,                        //  retain
                               u2_noun bon);                       //  retain
 
+      u2_flag                                                     //  transfer
+      j2_mcy(Pit, vane, orth)(u2_wire wir_r, 
+                              u2_noun van,                        //  retain
+                              u2_noun sut,                        //  retain
+                              u2_noun ref);                       //  retain
+
       u2_noun                                                     //  transfer
       j2_mcy(Pit, vane, peek)(u2_wire wir_r, 
                               u2_noun van,                        //  retain

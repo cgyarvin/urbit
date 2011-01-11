@@ -64,13 +64,13 @@
         else {
           u2_noun vap = j2_mcy(Pit, vane, play)(wir_r, van, ref, gen);
 
-          if ( c3__blot == j2_mcy(Pit, vane, reap)(wir_r, van, p_sut, vap) ) {
-            if ( c3__blot == j2_mcy(Pit, vane, reap)(wir_r, van, q_sut, vap) ) {
+          if ( u2_yes == j2_mcy(Pit, vane, orth)(wir_r, van, p_sut, vap) ) {
+            if ( u2_yes == j2_mcy(Pit, vane, orth)(wir_r, van, q_sut, vap) ) {
               ret = u2_rx(wir_r, gen);
             }
             else ret = j2_mcy(Pit, vane, snap)(wir_r, van, q_sut, ref, gen);
           } else {
-            if ( c3__blot == j2_mcy(Pit, vane, reap)(wir_r, van, q_sut, vap) ) {
+            if ( u2_yes == j2_mcy(Pit, vane, orth)(wir_r, van, q_sut, vap) ) {
               ret = j2_mcy(Pit, vane, snap)(wir_r, van, p_sut, ref, gen);
             }
             else ret = u2_rx(wir_r, gen);

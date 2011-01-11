@@ -398,6 +398,12 @@
     }
   }
 
+  _open_do_pq(brdv)   //  |<
+  {
+    return u2_bq
+      (wir_r, c3__bnpd, p_gen, c3__brdg, q_gen);
+  }
+
   _open_do_pq(brvd)   //  |>
   {
     return u2_bq
@@ -885,6 +891,7 @@
 
       _open_p   (brbn);
       _open_p   (brdg);
+      _open_pq  (brdv);
       _open_pq  (brsg);
       _open_p   (brnp);
       _open_p   (brcs);

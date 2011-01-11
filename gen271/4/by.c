@@ -7,15 +7,19 @@
 
 /* declarations
 */
-  extern u2_ho_jet j2_mcj(Pit, by, put)[];
   extern u2_ho_jet j2_mcj(Pit, by, gas)[];
+  extern u2_ho_jet j2_mcj(Pit, by, get)[];
+  extern u2_ho_jet j2_mcj(Pit, by, has)[];
+  extern u2_ho_jet j2_mcj(Pit, by, put)[];
 
 /* structures
 */
   u2_ho_driver 
   j2_mbd(Pit, by)[] = {
-    { j2_sc(Pit, by, put), j2_mcj(Pit, by, put), 0, 0, u2_none },
     { j2_sc(Pit, by, gas), j2_mcj(Pit, by, gas), 0, 0, u2_none },
+    { j2_sc(Pit, by, get), j2_mcj(Pit, by, get), 0, 0, u2_none },
+    { j2_sc(Pit, by, has), j2_mcj(Pit, by, has), 0, 0, u2_none },
+    { j2_sc(Pit, by, put), j2_mcj(Pit, by, put), 0, 0, u2_none },
     {}
   };
 
