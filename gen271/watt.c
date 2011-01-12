@@ -165,7 +165,7 @@
       { j2_sb(Pit, rake), j2_mbj(Pit, rake), 0, 0, u2_none },
       { j2_sb(Pit, ream), j2_mbj(Pit, ream), 0, 0, u2_none },
       { j2_sb(Pit, twin), j2_mbj(Pit, twin), 0, 0, u2_none },
-#if 1
+#if 0
       { j2_sb(Pit, vane), j2_mbj(Pit, vane), j2_mbd(Pit, vane), 0, u2_none } 
 #endif
   };

@@ -446,67 +446,6 @@ u2_ho_warn(const c3_c* fil_c,
   }
 }
 
-/* _ho_execute(): execute jet.
-*/
-static u2_weak                    //  transfer
-_ho_execute(u2_ray      wir_r,
-            u2_ho_jet*  jet_j,
-            u2_noun     cor)      //  retain
-{
-  if ( 0 == jet_j->fun_f ) {
-    return u2_none;
-  }
-  else {
-    u2_weak pro;
-
-    if ( c3__lite == jet_j->vok_m ) {
-      pro = jet_j->fun_f(wir_r, cor);
-
-      if ( u2_none == pro ) {
-        c3_c *cos_c = _ho_cstring(jet_j->xip);
-
-        fprintf(stderr, "jet bail (lite): %s\n", cos_c);
-        free(cos_c);
-      }
-      return pro;
-    }
-    else if ( c3__hevy == jet_j->vok_m ) {
-      u2_ray cap_r = u2_rail_cap_r(wir_r);
-
-      u2_rl_leap(wir_r, c3__warm);
-      {  
-        u2_ray jub_r = u2_bl_open(wir_r);
-
-        if ( u2_bl_set(wir_r) ) {
-          u2_bl_done(wir_r, jub_r);
-          u2_rl_fall(wir_r);
-          u2_rail_cap_r(wir_r) = cap_r;
-
-          {
-            c3_c *cos_c = _ho_cstring(jet_j->xip);
-
-            fprintf(stderr, "jet bail (hevy): %s\n", cos_c);
-            free(cos_c);
-          }
-          return u2_none;
-        }
-        else {
-          u2_noun pro = jet_j->fun_f(wir_r, cor);
-
-          c3_assert(u2_none != pro);
-          u2_bl_done(wir_r, jub_r);
-          u2_rl_fall(wir_r);
-
-          pro = u2_rx(wir_r, pro);
-          u2_rail_cap_r(wir_r) = cap_r;
-
-          return pro;
-        }
-      }
-    }
-    else c3_assert(0);
-  }
-}
 
 /* _ho_extract(): extract jet formula from battery.
 */
@@ -714,6 +653,7 @@ _ho_discover(u2_wire wir_r,
 
         jet_j->xip = dry_d->xip;
         jet_j->fol = fol;
+        jet_j->sat_s = u2_jet_dead;
         jet_j->fun_f = 0;
 
 #if 0
@@ -726,6 +666,7 @@ _ho_discover(u2_wire wir_r,
   }
 }
 
+#if 0
 /* u2_ho_fire(): 
 **
 **   Attempt host nock driver on `xip`, `cor`, `fol`.
@@ -777,44 +718,169 @@ u2_ho_fire(u2_ray   wir_r,
     }
   }
 }
+#endif
 
-/* u2_ho_stet():
+/* u2_ho_test():
 **
 **   Report result of jet test.  `pro` is fast; `vet` is slow.
 */
 void
-u2_ho_stet(u2_wire wir_r,
-           u2_noun xip,                                           //  retain
-           u2_noun cor,                                           //  retain
-           u2_noun fol,                                           //  retain
-           u2_noun pro,                                           //  retain
-           u2_noun vet)                                           //  retain
+u2_ho_test(u2_ho_jet* jet_j,
+           u2_noun    cor,                                         //  retain
+           u2_noun    pro,                                         //  retain
+           u2_noun    vet)                                         //  retain
 {
-  u2_ho_jet* jet_j;
+  if ( (u2_none == cor) || 
+       ((u2_none == pro) && (u2_none == vet)) ||
+       (u2_none == jet_j->xip) ) 
+  {
+    return;
+  } else {
+    c3_c*       cos_c = _ho_cstring(jet_j->xip);
+    c3_w        mug_w = u2_mug(cor);
+    const c3_c* msg_c;
 
-  if ( 0 == (jet_j = _ho_discover(wir_r, xip, fol, cor)) ) {
-    // Caller is doing something really fscked up here.
-    //
-    c3_assert(0); 
-  }
-  else {
-    c3_c *cos_c = _ho_cstring(xip);
-
-    if ( u2_yes == u2_sing(pro, vet) ) {
-      jet_j->zoc_w--;
-
-      fprintf(stderr, "nice: %8x: %s\n", u2_mug(cor), cos_c);
-      free(cos_c);
-    } 
-    else {
-      c3_c *cos_c = _ho_cstring(xip);
-
-      fprintf(stderr, "fail: %8x: %s\n", u2_mug(cor), cos_c);
+    if ( u2_none == pro ) {
+      msg_c = "bail";
+    } else if ( u2_none == vet ) {
+      msg_c = "funk";
+    } else if ( u2_no == u2_sing(pro, vet) ) {
+      msg_c = "fail";
       // u2_err(wir_r, "wrong", pro);
       // u2_err(wir_r, "right", vet);
-      free(cos_c);
+      LoomStop = 1;
+    } else {
+      msg_c = "nice";
+    }
 
-      c3_assert(0);
+    fprintf(stderr, "%s: %8x: %s\n", msg_c, mug_w, cos_c);
+    free(cos_c);
+  }
+}
+
+/* _ho_run(): execute jet.
+*/
+static u2_weak                                                    //  transfer
+_ho_run(u2_ray      wir_r,
+        u2_ho_jet*  jet_j,
+        u2_noun     cor)                                          //  retain
+{
+  u2_noun ret;
+
+  switch ( jet_j->vok_m ) {
+    default: c3_assert(0); return u2_none;
+
+    case c3__lite: {
+      return jet_j->fun_f(wir_r, cor);
+    }
+    case c3__hevy: {
+      u2_ray cap_r = u2_rail_cap_r(wir_r);
+
+      if ( u2_no == u2_rl_leap(wir_r, c3__warm) ) {
+        return u2_none;
+      }
+      ret = jet_j->fun_f(wir_r, cor);
+
+      u2_rl_fall(wir_r);
+      ret = u2_rx(wir_r, ret);
+      u2_rail_cap_r(wir_r) = cap_r;
+
+      return ret;
+    }
+  }
+}
+
+/* u2_ho_punt():
+**
+**   Apply host nock driver on `xip`, `cor`, `fol`.
+*/
+u2_weak                                                           //  transfer
+u2_ho_punt(u2_ray  wir_r,
+           u2_chip xip,                                           //  retain
+           u2_noun cor,                                           //  retain
+           u2_noun fol)                                           //  retain
+{
+  u2_ho_jet* jet_j;
+  u2_weak had, sof;
+
+  if ( 0 == (jet_j = _ho_discover(wir_r, xip, fol, cor)) ) {
+    return u2_none;
+  }
+  else if ( 0 == jet_j->fun_f ) {
+    soft: {
+      return u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
+    }
+  }
+  else switch ( jet_j->sat_s ) {
+    default: c3_assert(0); return u2_none;
+
+    case u2_jet_live: {
+      u2_ray jub_r = u2_bl_open(wir_r);
+
+      if ( u2_bl_set(wir_r) ) {
+        u2_bl_done(wir_r, jub_r);
+        had = u2_none;
+      } 
+      else {
+        had = _ho_run(wir_r, jet_j, cor);
+        u2_bl_done(wir_r, jub_r);
+      }
+
+      if ( u2_none != had ) {
+        return had;
+      } else {
+        /* The C jet bailed; turn it off and compute the native value.
+        */
+        jet_j->sat_s = u2_jet_dead;
+        {
+          sof = u2_nk_nock(wir_r, u2_rx(wir_r, cor), fol);
+        }
+        jet_j->sat_s = u2_jet_live;
+
+        u2_ho_test(jet_j, cor, u2_none, sof);
+        return sof;
+      }
+    }
+    case u2_jet_dead: {
+      goto soft;
+    }
+    case u2_jet_limp: {
+      /* Compute `had`, the C version.  Jet is full-on recursively.
+      */
+      {
+        jet_j->sat_s = u2_jet_live;
+        {
+          u2_ray jub_r = u2_bl_open(wir_r);
+
+          if ( u2_bl_set(wir_r) ) {
+            u2_bl_done(wir_r, jub_r);
+            had = u2_none;
+          } 
+          else {
+            had = _ho_run(wir_r, jet_j, cor);
+            u2_bl_done(wir_r, jub_r);
+          }
+        }
+        jet_j->sat_s = u2_jet_limp;
+      }
+
+      /* Compute `sof`, the Nock version.  Jet is full-off recursively.
+      */
+      {
+        jet_j->sat_s = u2_jet_dead;
+        {
+          sof = u2_nk_nock(wir_r, u2_rx(wir_r, cor), fol);
+        }
+        jet_j->sat_s = u2_jet_limp;
+      }
+
+      u2_ho_test(jet_j, cor, had, sof);
+      if ( u2_none == sof ) {
+        return had;
+      } else {
+        u2_rl_lose(wir_r, had);
+        return sof;
+      }
     }
   }
 }

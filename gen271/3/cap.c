@@ -14,7 +14,7 @@
     c3_w met_w = u2_met(0, a);
 
     if ( met_w < 2 ) {
-      return u2_bl_bail(wir_r);
+      return u2_none;
     }
     else if ( (1 == u2_bit((met_w - 2), a)) ) {
       return _3;

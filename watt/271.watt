@@ -1019,8 +1019,8 @@
   |=
   ^>  bean.%comb
   ^-  *tool
-  ?:  ?=([0 *] mal)
-    ?:  ?=([0 *] buz)
+  ?:  ?&(?=([0 *] mal) !.=(0 p.mal))
+    ?:  ?&(?=([0 *] buz) !.=(0 p.buz)) 
       [0 (peg p.mal p.buz)]
     ?:  ?=([2 [0 *] [0 *]] buz)
       [2 [0 (peg p.mal p.p.buz)] [0 (peg p.mal p.q.buz)]]
@@ -1848,6 +1848,7 @@
     ^<  mine.[!=(->) %firm ~]
     =+  [ref=*type gen=*gene]
     |=
+    ^>  ping
     ?:  (~(has in ver) [sut ref gen])
       &
     =>  .(ver (~(put in ver) [sut ref gen]))
@@ -1921,6 +1922,24 @@
       =+  dov=$(sut p.fid, gen q.gen)
       [p.dov (comb q.fid q.dov)]
     ::
+        %bpbn                                                           ::  !=
+      =+  sev=q:$(gen p.gen)
+      [[%cube sev] [1 sev]]
+    ::
+        %bpcb
+      :: ^>  bean.[%spot |=((~(fly club ~(loc golf p.gen)) 75))]
+      $(gen q.gen)
+    ::
+        %bpdg 
+      =+  vot=(play p.gen)
+      [[%cube vot] [1 vot]]
+    ::
+        %bpbp                                                           ::  !!
+      [%blot [0 0]]
+    ::
+        %bpmt                                                           ::  !%
+      [%blur [1 ..vane]]          ::  needs !: for bootstrap
+    ::
         %brmt                                                           ::  |%
       =+  sac=(~(gas by ~) p.gen) 
       =+  toc=[%core sut %pink sac]
@@ -1954,34 +1973,16 @@
         %dtcs                                                           ::  .?
       [[%fork [%cube 0] [%cube 1]] [3 (make p.gen)]]
     ::
-        %bpbn                                                           ::  !=
-      =+  sev=q:$(gen p.gen)
-      [[%cube sev] [1 sev]]
-    ::
-        %bpcb
-      ^>  bean.[%spot |=((~(fly club ~(loc golf p.gen)) 75))]
-      $(gen q.gen)
-    ::
-        %bpdg 
-      =+  vot=(play p.gen)
-      [[%cube vot] [1 vot]]
-    ::
-        %bpbp                                                           ::  !!
-      [%blot [0 0]]
-    ::
-        %bpmt                                                           ::  !%
-      [%blur [1 ..vane]]          ::  needs !: for bootstrap
-    ::
         %ktbn                                                           ::  ^=
       =+  vat=$(gen q.gen)
       [(name(sut p.vat) p.gen) q.vat]
     ::
         %ktnp                                                           ::  ^-
+      ?.  vet
+        [(play p.gen) 0 0]
       =+  hif=(play p.gen)
       =+  dan=$(gen q.gen)
-      ^>  bean.[%ktnp-hif |=((~(fly club dump(sut hif)) 75))]
-      ^>  bean.[%ktnp-dan |=((~(fly club dump(sut p.dan)) 75))]
-      ?>  ?|(!vet (nest(sut hif) p.dan))
+      ?>  (nest(sut hif) p.dan)
       [hif q.dan]
     ::
         %ktpd                                                           ::  ^+
@@ -2192,8 +2193,6 @@
     ^<  mine.[!=(->) %reap ~]
     =+  ref=*type
     |=
-    ^>  bean.[%reap-ref |=((~(fly club dump(sut ref)) 75))]
-    ^>  bean.[%reap-sut |=((~(fly club dump) 75))]
     =+  bol=*(pool type)
     =<  dext
     |*
@@ -2299,8 +2298,6 @@
     ^<  mine.[!=(->) %snap ~]
     =+  [ref=*type gen=*gene]
     |=
-    ^>  bean.[%snap-type |=((~(fly club dump) 75))]
-    ^>  bean.[%snap-gene |=((~(fly club ~(gut golf `*`gen)) 75))]
     ^>  bean.%snap
     ^-  *gene 
     ?-    sut

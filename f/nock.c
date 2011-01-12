@@ -4,11 +4,6 @@
 */
 #include "all.h"
 
-    /** Forward declarations.
-    **/
-      static u2_weak
-      _nock_jet(u2_wire wir_r, u2_noun bus, u2_noun fol);
-
     /** Internal variables.
     **/
 
@@ -148,11 +143,12 @@ _nock_warm(u2_wire wir_r,
             /* Attempt jet propulsion.
             */
             {
-              u2_noun pro;
+              u2_noun pro, xip;
 
-              if ( u2_none != (pro = _nock_jet(wir_r, sep, dom)) ) {
+              if ( u2_none != (xip = u2_sh_find(wir_r, sep)) ) {
+                pro = u2_ho_punt(wir_r, xip, sep, dom);
+
                 u2_rl_lose(wir_r, sep);
-
                 return pro;
               }
             }
@@ -310,7 +306,7 @@ _nock_warm(u2_wire wir_r,
         } else {
           u2_noun fac = u2_h(gal);
           u2_noun dym = u2_t(gal);
-          u2_noun sep, dom, pro;
+          u2_noun sep, dom, pro, xip;
 
           if ( u2_no == u2_stud(fac) ) {
             u2_rl_lose(wir_r, bus);
@@ -338,9 +334,11 @@ _nock_warm(u2_wire wir_r,
               u2_rl_lose(wir_r, dom);
               return pro;
             }
-            if ( u2_none != (pro = _nock_jet(wir_r, sep, dom)) ) {
-              u2_rl_lose(wir_r, sep);
 
+            if ( u2_none != (xip = u2_sh_find(wir_r, sep)) ) {
+              pro = u2_ho_punt(wir_r, xip, sep, dom);
+
+              u2_rl_lose(wir_r, sep);
               return pro;
             }
 
@@ -567,11 +565,12 @@ _nock_cold(u2_wire wir_r,
           /* Attempt jet propulsion.
           */
           {
-            u2_noun pro;
+            u2_noun pro, xip;
 
-            if ( u2_none != (pro = _nock_jet(wir_r, bus, fol)) ) {
+            if ( u2_none != (xip = u2_sh_find(wir_r, bus)) ) {
+              pro = u2_ho_punt(wir_r, xip, bus, fol);
+
               u2_rail_cap_r(wir_r) = net_r;
-
               return pro;
             }
           }
@@ -812,12 +811,12 @@ _nock_cold(u2_wire wir_r,
   }
 }
 
-/* _nock_soft():
+/* u2_nk_soft():
 **
 **   Compute `(nock bus fol)`, interpreter first.
 */
-static u2_weak                                                    //  transfer
-_nock_soft(u2_wire wir_r,
+u2_weak                                                           //  transfer
+u2_nk_soft(u2_wire wir_r,
            u2_noun bus,                                           //  transfer
            u2_noun fol)                                           //  retain
 {
@@ -858,59 +857,6 @@ _nock_soft(u2_wire wir_r,
   }
 }
 
-/* _nock_jet():
-**
-**   Jet-propel `(nock bus fol)`, or return u2_none.
-*/
-static u2_weak                                                    //  transfer
-_nock_jet(u2_wire wir_r,
-          u2_noun bus,                                            //  retain
-          u2_noun fol)                                            //  retain
-{
-  u2_noun xip = u2_sh_find(wir_r, bus);
-
-  if ( u2_none == xip ) {
-    return u2_none;
-  } else {
-    u2_noun pro, vet;
-    u2_flag saf;
-
-    if ( u2_none == (pro = u2_ho_fire(wir_r, xip, bus, fol, &saf)) ) {
-      return u2_none;
-    }
-    else {
-      u2_bx_flew(wir_r);
-
-      if ( u2_yes == saf ) {
-        return pro;
-      }
-      else {
-        if ( u2_no == u2_rl_leap(wir_r, u2_rail_hip_m(wir_r)) ) {
-          u2_rl_lose(wir_r, pro);
-          u2_ho_stet(wir_r, xip, bus, fol, u2_nul, u2_nul);
-          return u2_none;
-        }
-        else {
-          u2_rl_gain(wir_r, bus);
-          if ( u2_none == (vet = _nock_soft(wir_r, bus, fol)) ) {
-            u2_rl_fall(wir_r);
-            u2_ho_stet(wir_r, xip, bus, fol, u2_nul, u2_nul);
-            u2_rl_lose(wir_r, pro);
-
-            return u2_none;
-          }
-          else {
-            u2_rl_fall(wir_r);
-            u2_ho_stet(wir_r, xip, bus, fol, pro, vet);
-
-            return pro;
-          }
-        }
-      }
-    }
-  }
-}
-
 /* u2_nk_nock():
 **
 **   Compute `(nock bus fol)`.
@@ -920,7 +866,7 @@ u2_nk_nock(u2_wire wir_r,
            u2_weak bus,                                           //  transfer
            u2_weak fol)                                           //  retain
 {
-  u2_noun pro;
+  u2_noun pro, xip;
 
   if ( u2_none == fol ) {
     u2_rl_lose(wir_r, bus);
@@ -929,18 +875,15 @@ u2_nk_nock(u2_wire wir_r,
   else if ( u2_none == bus ) {
     return u2_none;
   }
-#if 1
-  else if ( u2_none != (pro = (_nock_jet(wir_r, bus, fol))) ) {
+  else if ( u2_none != (xip = u2_sh_find(wir_r, bus)) ) {
+    pro = u2_ho_punt(wir_r, xip, bus, fol);
+      
     u2_rl_lose(wir_r, bus);
-
     return pro;
   }
   else {
-    return _nock_soft(wir_r, bus, fol);
+    return u2_nk_soft(wir_r, bus, fol);
   }
-#else
-  return _nock_warm(wir_r, bus, fol);
-#endif
 }
 
 /* u2_nk_mung():

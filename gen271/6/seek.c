@@ -28,7 +28,6 @@
       u2_noun pro;
 
       u2_as_trel(vag, &p_vag, &q_vag, &r_vag);
-      j2_mby(Pit, type)(wir_r, r_vag); 
 
       if ( u2_no == u2_dust(i_rep) ) {
         u2_noun hup = j2_mcy(Pit, vane, find)(wir_r, van, r_vag, i_rep);

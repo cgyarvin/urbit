@@ -167,6 +167,33 @@
   --
 ::::
 ::
+    skim
+  |<  [a=*(list) b=|>(c=* .?(c))]
+  |-
+  ^-  a
+  ?~  a
+    ~
+  ?:((b i.a) [i.a $(a t.a)] $(a t.a))
+::::
+::
+    sort
+  |<  [a=*(list) b=|>([p=* q=*] .=(p q))]
+  |-
+  ^-  a
+  ?~  a
+    ~
+  %+  weld
+    $(a (skim a.$ |<(c=i.a (b c i.a))))
+  `a.$`[i.a $(a (skim a.$ |<(c=i.a (b i.a c))))]
+::::
+::
+    slox
+  |<  a=*(list)
+  |-
+  ^-  a
+  (skim a |>(x=* .=(2 x)))
+::::
+::
     unit
   |<  a=&*
   |>  b=*
@@ -179,7 +206,6 @@
     weld
   =+  [a=*(list) b=*(list)]
   |:
-  =>  .(a `b`a)
   |-
   ^-  b
   ?~  a

@@ -13,6 +13,15 @@
                  u2_weak bus,                                     //  transfer
                  u2_weak fol);                                    //  retain
 
+    /* u2_nk_soft():
+    **
+    **   Compute `(nock bus fol)`, interpreter first.
+    */
+      u2_weak                                                     //  transfer
+      u2_nk_soft(u2_wire wir_r,
+                 u2_weak bus,                                     //  transfer
+                 u2_weak fol);                                    //  retain
+
     /* u2_nk_mung():
     **
     **   Compute `(nock gat(-< sam) +.gat)`.

@@ -18,8 +18,8 @@
     else {
       u2_noun p_mal, q_mal, p_buz, q_buz, pp_buz, pq_buz;
 
-      if ( u2_yes == u2_as_p(mal, u2_nock_frag, &p_mal) ) {
-        if ( u2_yes == u2_as_p(buz, u2_nock_frag, &p_buz) ) {
+      if ( (u2_yes == u2_as_p(mal, u2_nock_frag, &p_mal)) && (_0 != p_mal) ) {
+        if ( (u2_yes == u2_as_p(buz, u2_nock_frag, &p_buz)) && (_0 != p_buz) ) {
           return u2_rc(wir_r, 
                        u2_nock_frag, 
                        j2_mbc(Pit, peg)(wir_r, p_mal, p_buz));

@@ -37,7 +37,9 @@
 
     if ( (u2_no == u2_mean(cor, 8, &a, 9, &b, 0)) ||
          (u2_no == u2_stud(a)) ||
-         (u2_no == u2_stud(b)) )
+         (u2_no == u2_stud(b)) ||
+         (0 == a) ||
+         (0 == b) )
     {
       return u2_none;
     } else {

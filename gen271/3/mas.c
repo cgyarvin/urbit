@@ -16,7 +16,7 @@
 
     b_w = u2_met(0, a);
     if ( b_w < 2 ) {
-      return u2_bl_bail(wir_r);
+      return u2_none;
     } 
     else {
       c = j2_mbc(Pit, bex)(wir_r, (b_w - 1));

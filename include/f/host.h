@@ -10,6 +10,8 @@
 #     define _j2_xm(x)        j2_##x##_m
 #     define _j2_xmc(x)       j2_##x##_mc
 #     define _j2_xmy(x)       j2_##x##_my
+#     define _j2_xmx(x)       j2_##x##_mx
+#     define _j2_xmi(x)       j2_##x##_mi
 #     define _j2_xmj(x)       j2_##x##_jets
 #     define _j2_xmd(x)       j2_##x##_drivers
 #     define _j2_xp(p, x)     j2_##x##_p_##p
@@ -21,6 +23,8 @@
 #     define _j2_qm(x)        _j2_xm(x)
 #     define _j2_qmc(x)       _j2_xmc(x)
 #     define _j2_qmy(x)       _j2_xmy(x)
+#     define _j2_qmx(x)       _j2_xmx(x)
+#     define _j2_qmi(x)       _j2_xmi(x)
 #     define _j2_qmd(x)       _j2_xmd(x)
 #     define _j2_qmj(x)       _j2_xmj(x)
 #     define _j2_qp(p, x)     _j2_xp(p, x)
@@ -62,6 +66,18 @@
 #     define j2_mdy(a, b, c, d)         _j2_qmy(_j2_abcd(a, b, c, d))
 #     define j2_mey(a, b, c, d, e)      _j2_qmy(_j2_abcde(a, b, c, d, e))
 
+#     define j2_max(a)                  _j2_qmx(_j2_a(a))
+#     define j2_mbx(a, b)               _j2_qmx(_j2_ab(a, b))
+#     define j2_mcx(a, b, c)            _j2_qmx(_j2_abc(a, b, c))
+#     define j2_mdx(a, b, c, d)         _j2_qmx(_j2_abcd(a, b, c, d))
+#     define j2_mex(a, b, c, d, e)      _j2_qmx(_j2_abcde(a, b, c, d, e))
+
+#     define j2_mai(a)                  _j2_qmi(_j2_a(a))
+#     define j2_mbi(a, b)               _j2_qmi(_j2_ab(a, b))
+#     define j2_mci(a, b, c)            _j2_qmi(_j2_abc(a, b, c))
+#     define j2_mdi(a, b, c, d)         _j2_qmi(_j2_abcd(a, b, c, d))
+#     define j2_mei(a, b, c, d, e)      _j2_qmi(_j2_abcde(a, b, c, d, e))
+
 #     define j2_maj(a)                  _j2_qmj(_j2_a(a))
 #     define j2_mbj(a, b)               _j2_qmj(_j2_ab(a, b))
 #     define j2_mcj(a, b, c)            _j2_qmj(_j2_abc(a, b, c))
@@ -92,6 +108,22 @@
     */
       typedef u2_noun (*u2_ho_fun)(u2_ray wir_r, u2_noun cor);
 
+    /* u2_ho_state: jet state
+    */
+      typedef enum {
+        /* Off - use soft code exclusively.
+        */
+        u2_jet_dead,
+
+        /* Testing - run both and compare.
+        */
+        u2_jet_limp,
+
+        /* On - no testing required.
+        */
+        u2_jet_live
+      } u2_ho_state;
+
     /* u2_ho_jet: a C function, per formula.
     */
       typedef struct {
@@ -112,9 +144,9 @@
         */
         u2_noun (*fun_f)(u2_ray wir_r, u2_noun cor);
 
-        /* Stable iff true; test iff false.
+        /* State - see above.  May change dynamically.
         */
-        u2_flag ace;
+        u2_ho_state sat_s;
 
         /* chip: battery identifier.
         */
@@ -123,14 +155,6 @@
         /* Tool: Nock formula.
         */
         u2_tool fol;
-
-        /* Fast fork counter/lock.  Incremented on fast fork of test.
-        */
-        c3_w    zic_w;
-
-        /* Slow fork counter/lock.  Incremented on slow fork of test.
-        */
-        c3_w    zoc_w;
       } u2_ho_jet;
 
     /* u2_ho_driver: battery driver.
@@ -220,7 +244,7 @@
 
 #     define u2_ho_warn_here() u2_ho_warn(__FILE__, __LINE__)
 
-    /* u2_ho_stet():
+    /* u2_ho_test():
     **
     **   Report result of jet test.  `pro` is fast; `vet` is slow.
     */
@@ -231,6 +255,16 @@
                  u2_noun fol,                                       //  retain
                  u2_noun pro,                                       //  retain
                  u2_noun vet);                                      //  retain
+
+    /* u2_ho_test():
+    **
+    **   Report result of jet test on `cor`.  `pro` is fast; `vet` is slow.
+    */
+      void
+      u2_ho_test(u2_ho_jet* jet_j,
+                 u2_weak    cor,                                    //  retain
+                 u2_weak    pro,                                    //  retain
+                 u2_weak    vet);                                   //  retain
 
     /* u2_ho_dive():
     **
@@ -249,6 +283,16 @@
       u2_ho_fine(u2_wire wir_r,
                  u2_noun xip,       //  retain
                  u2_noun bus);      //  retain
+
+    /* u2_ho_punt():
+    **
+    **   Apply host nock driver on `xip`, `cor`, `fol`.
+    */
+      u2_weak
+      u2_ho_punt(u2_ray  wir_r,
+                 u2_chip xip,                                     //  retain
+                 u2_noun cor,                                     //  retain
+                 u2_noun fol);                                    //  retain
 
     /* u2_ho_fire(): 
     **

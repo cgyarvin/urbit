@@ -286,6 +286,15 @@
 #     define u2_nock_kick  9
 #     define u2_nock_hint  10
 
+    /* Conventional axes for gate call.
+    */
+#     define u2_conv_sam    4
+#       define u2_conv_sam_1  4
+#       define u2_conv_sam_2  8
+#       define u2_conv_sam_3  9
+#     define u2_conv_con    5
+#     define u2_conv_noc    3
+
     /* u2_yes, u2_no, u2_nul;
     **
     **   Our Martian booleans and list terminator; empty string.

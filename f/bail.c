@@ -527,7 +527,7 @@ u2_bn_hook(u2_wire     wir_r,
            u2_noun     cor,
            const c3_c* tam_c)
 {
-  u2_noun vib = u2_sh_look(wir_r, cor, tam_c);
+  u2_weak vib = u2_sh_look(wir_r, cor, tam_c);
 
   if ( u2_none == vib ) {
     return u2_bl_bail(wir_r);

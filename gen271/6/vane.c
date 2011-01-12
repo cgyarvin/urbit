@@ -182,7 +182,7 @@
 
   u2_ho_jet 
   j2_mbj(Pit, vane)[] = {
-    // { "clay", c3__hevy, j2_mc(Pit, vane, clay), u2_no, u2_none, u2_none },
+    { "clay", c3__hevy, j2_mc(Pit, vane, clay), u2_no, u2_none, u2_none },
     { }
   };
 
