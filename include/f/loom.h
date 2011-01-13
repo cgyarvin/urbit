@@ -292,6 +292,8 @@
 #       define u2_cv_sam_1  4
 #       define u2_cv_sam_2  8
 #       define u2_cv_sam_3  9
+#       define u2_cv_sam_6  18
+#       define u2_cv_sam_7  19
 #     define u2_cv_con      5
 #     define u2_cv_noc      3
 

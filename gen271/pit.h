@@ -398,14 +398,7 @@
       j2_mcy(Pit, vane, gain)(u2_wire wir_r, 
                               u2_noun van,                        //  retain
                               u2_noun sut,                        //  retain
-                              u2_atom gen);                       //  retain
-
-      u2_noun                                                     //  transfer
-      j2_mcy(Pit, vane, look)(u2_wire wir_r, 
-                              u2_noun van,                        //  retain
-                              u2_noun sut,                        //  retain
-                              u2_noun cog,                        //  retain
-                              u2_noun dab);                       //  retain
+                              u2_noun gen);                       //  retain
 
       u2_noun                                                     //  transfer
       j2_mcy(Pit, vane, make)(u2_wire wir_r, 

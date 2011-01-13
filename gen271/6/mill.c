@@ -484,11 +484,11 @@
     }
   }
 
-  u2_weak
+  u2_weak                                                         //  transfer
   j2_mci(Pit, vane, mill)(u2_wire wir_r,
-                          u2_noun van,
-                          u2_noun sut,
-                          u2_noun gen)
+                          u2_noun van,                            //  retain
+                          u2_noun sut,                            //  retain 
+                          u2_noun gen)                            //  retain
   {
     u2_weak hoc = u2_sh_look(wir_r, van, "mill");
 
@@ -511,16 +511,16 @@
     }
   }
 
-  u2_noun
+  u2_noun                                                         //  transfer
   j2_mcy(Pit, vane, mill)(u2_wire wir_r,
-                          u2_noun van,
-                          u2_noun sut,
-                          u2_noun gen)
+                          u2_noun van,                            //  retain
+                          u2_noun sut,                            //  retain
+                          u2_noun gen)                            //  retain
   {
     u2_ho_jet *jet_j = &j2_mcj(Pit, vane, mill)[0];
 
     switch ( jet_j->sat_s ) {
-      default: c3_assert(0); return u2_none;
+      default: c3_assert(0); return u2_bl_bail(wir_r);
 
       case u2_jet_live: {
         return j2_mcx(Pit, vane, mill)(wir_r, van, sut, gen);
@@ -587,3 +587,6 @@
     { ".3", c3__hevy, j2_mc(Pit, vane, mill), SafeTier6_b, u2_none, u2_none },
     { }
   };
+
+
+

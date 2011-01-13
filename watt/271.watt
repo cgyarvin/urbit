@@ -1599,7 +1599,20 @@
         [%bake !=(bake)]
         [%clay !=(clay)]
         [%dump !=(dump)]
+        [%find !=(find)]
+        [%fair !=(fair)]
+        [%fish !=(fish)]
+        [%gain !=(gain)]
+        [%make !=(make)]
         [%mill !=(mill)]
+        [%nest !=(nest)]
+        [%orth !=(orth)]
+        [%peek !=(peek)]
+        [%play !=(play)]
+        [%reap !=(reap)]
+        [%seek !=(seek)]
+        [%snap !=(snap)]
+        [%tuck !=(tuck)]
       --
   =+  :*  fan=*(pool &[*type *gene])          ::  20 in van
           ver=*(pool &[*type *type *gene])    ::  42 in van
@@ -2184,8 +2197,13 @@
         [%fork *]   (eith $(sut p.sut) $(sut q.sut))
         [%hold *]   $(sut (play(sut p.sut) q.sut))
     --
+  ::::
   ::
-      play  =+(gen=*gene |=(p:(mill(vet |) gen)))
+      play
+    ^<  mine.[!=(->) %reap ~]
+    =+  gen=*gene
+    |=
+    p:(mill(vet |) gen)
   ::
       read  ^<(mine.[!=(->) %read ~] =+(txt=*tape |=(^-(*gene [%read !!]))))
   ::::
