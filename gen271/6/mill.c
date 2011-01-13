@@ -464,11 +464,25 @@
     }
   }
 
-
 /* boilerplate
 */
   u2_ho_jet 
   j2_mcj(Pit, vane, mill)[];
+
+  u2_noun                                                         //  transfer
+  j2_mc(Pit, vane, mill)(u2_wire wir_r, 
+                         u2_noun cor)                             //  retain
+  {
+    u2_noun sut, gen, van;
+
+    if ( (u2_no == u2_mean(cor, u2_cv_sam, &gen, u2_cv_con, &van, 0)) ||
+         (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
+    {
+      return u2_bl_bail(wir_r);
+    } else {
+      return j2_mcx(Pit, vane, mill)(wir_r, van, sut, gen);
+    }
+  }
 
   u2_weak
   j2_mci(Pit, vane, mill)(u2_wire wir_r,
@@ -476,21 +490,25 @@
                           u2_noun sut,
                           u2_noun gen)
   {
-    u2_weak von = u2_rl_molt(wir_r, van, u2_conv_sam, u2_rx(wir_r, sut), 0);
-    u2_weak hoc = u2_sh_look(wir_r, von, "mill");
-    u2_weak gat = u2_nk_nock(wir_r, von, hoc);
-    u2_weak cor = u2_rl_molt(wir_r, von, u2_conv_sam, u2_rx(wir_r, gen), 0);
+    u2_weak hoc = u2_sh_look(wir_r, van, "mill");
 
-    if ( (u2_none == j2_mcj(Pit, vane, mill)[0].xip) ) {
-      u2_noun xip = u2_sh_find(wir_r, cor);
-   
-      c3_assert(u2_none != xip);
-      j2_mcj(Pit, vane, mill)[0].xip = xip;
+    if ( u2_none == hoc ) {
+      c3_assert(!"register mill");
+      return u2_none;
+    } else {
+      u2_weak von = u2_rl_molt(wir_r, van, u2_cv_sam, u2_rx(wir_r, sut), 0);
+      u2_weak gat = u2_nk_soft(wir_r, von, hoc);
+      u2_weak cor = u2_rl_molt(wir_r, gat, u2_cv_sam, u2_rx(wir_r, gen), 0);
+
+      if ( (u2_none == j2_mcj(Pit, vane, mill)[0].xip) ) {
+        u2_noun xip = u2_sh_find(wir_r, cor);
+     
+        c3_assert(u2_none != xip);
+        j2_mcj(Pit, vane, mill)[0].xip = xip;
+      }
+      u2_rl_lose(wir_r, gat);
+      return cor;
     }
-
-    u2_rl_lose(wir_r, von);
-    u2_rl_lose(wir_r, gat);
-    return cor;
   }
 
   u2_noun
@@ -499,22 +517,19 @@
                           u2_noun sut,
                           u2_noun gen)
   {
-# if 1
-    return j2_mcy(Pit, vane, mill)(wir_r, van, sut, gen);
-# else
     u2_ho_jet *jet_j = &j2_mcj(Pit, vane, mill)[0];
 
     switch ( jet_j->sat_s ) {
       default: c3_assert(0); return u2_none;
 
       case u2_jet_live: {
-        return j2_mcy(Pit, vane, mill)(wir_r, van, sut, gen);
+        return j2_mcx(Pit, vane, mill)(wir_r, van, sut, gen);
       }
       case u2_jet_dead: {
         u2_noun cor, sof;
 
         cor = j2_mci(Pit, vane, mill)(wir_r, van, sut, gen);
-        sof = u2_nk_soft(wir_r, cor, u2_frag(u2_conv_noc, cor));
+        sof = u2_nk_soft(wir_r, cor, u2_frag(u2_cv_noc, cor));
 
         return u2_bl_good(wir_r, sof);
       }
@@ -534,7 +549,7 @@
               had = u2_none;
             } 
             else {
-              had = j2_mcy(Pit, vane, mill)(wir_r, van, sut, gen);
+              had = j2_mcx(Pit, vane, mill)(wir_r, van, sut, gen);
               u2_bl_done(wir_r, jub_r);
             }
           }
@@ -548,7 +563,7 @@
           {
             cor = j2_mci(Pit, vane, mill)(wir_r, van, sut, gen);
             sof = u2_nk_soft(wir_r, u2_rx(wir_r, cor), 
-                                    u2_frag(u2_conv_noc, cor));
+                                    u2_frag(u2_cv_noc, cor));
           }
           jet_j->sat_s = u2_jet_limp;
         }
@@ -563,29 +578,12 @@
         }
       }
     }
-# endif
   }
-
-  u2_noun                                                         //  transfer
-  j2_mc(Pit, vane, mill)(u2_wire wir_r, 
-                         u2_noun cor)                             //  retain
-  {
-    u2_noun sut, gen, van;
-
-    if ( (u2_no == u2_mean(cor, 4, &gen, 5, &van, 0)) ||
-         (u2_none == (sut = u2_frag(4, van))) )
-    {
-      return u2_bl_bail(wir_r);
-    } else {
-      return j2_mcx(Pit, vane, mill)(wir_r, van, sut, gen);
-    }
-  }
-
 
 /* structures
 */
   u2_ho_jet 
   j2_mcj(Pit, vane, mill)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, vane, mill), SafeTier6, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, vane, mill), SafeTier6_b, u2_none, u2_none },
     { }
   };

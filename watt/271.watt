@@ -1596,9 +1596,10 @@
       :+  !=(->+) 
         %vane 
       :~
-        [%mill !=(mill)]
+        [%bake !=(bake)]
         [%clay !=(clay)]
         [%dump !=(dump)]
+        [%mill !=(mill)]
       --
   =+  :*  fan=*(pool &[*type *gene])          ::  20 in van
           ver=*(pool &[*type *type *gene])    ::  42 in van

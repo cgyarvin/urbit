@@ -808,9 +808,7 @@ u2_rl_lose(u2_ray  ral_r,
             _rl_bloq_free(ral_r, box_r);
           }
           else {
-            if ( use_w == 0 ) {
-              u2_err(ral_r, "useless", som);
-            }
+            // if ( use_w == 0 ) { u2_err(ral_r, "useless", som); }
 
             c3_assert(use_w != 0);
             if ( use_w != 0xffffffff ) {

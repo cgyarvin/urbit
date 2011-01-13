@@ -779,13 +779,25 @@ _ho_run(u2_ray      wir_r,
       if ( u2_no == u2_rl_leap(wir_r, c3__warm) ) {
         return u2_none;
       }
-      ret = jet_j->fun_f(wir_r, cor);
+      else {
+        u2_ray jub_r = u2_bl_open(wir_r);
 
-      u2_rl_fall(wir_r);
-      ret = u2_rx(wir_r, ret);
-      u2_rail_cap_r(wir_r) = cap_r;
+        if ( u2_bl_set(wir_r) ) {
+          u2_bl_done(wir_r, jub_r);
+          u2_rl_fall(wir_r);
+          ret = u2_none;
+        } 
+        else {
+          ret = jet_j->fun_f(wir_r, cor);
 
-      return ret;
+          u2_bl_done(wir_r, jub_r);
+          u2_rl_fall(wir_r);
+          ret = u2_rx(wir_r, ret);
+        }
+        u2_rail_cap_r(wir_r) = cap_r;
+
+        return ret;
+      }
     }
   }
 }
@@ -815,16 +827,7 @@ u2_ho_punt(u2_ray  wir_r,
     default: c3_assert(0); return u2_none;
 
     case u2_jet_live: {
-      u2_ray jub_r = u2_bl_open(wir_r);
-
-      if ( u2_bl_set(wir_r) ) {
-        u2_bl_done(wir_r, jub_r);
-        had = u2_none;
-      } 
-      else {
-        had = _ho_run(wir_r, jet_j, cor);
-        u2_bl_done(wir_r, jub_r);
-      }
+      had = _ho_run(wir_r, jet_j, cor);
 
       if ( u2_none != had ) {
         return had;
@@ -850,16 +853,7 @@ u2_ho_punt(u2_ray  wir_r,
       {
         jet_j->sat_s = u2_jet_live;
         {
-          u2_ray jub_r = u2_bl_open(wir_r);
-
-          if ( u2_bl_set(wir_r) ) {
-            u2_bl_done(wir_r, jub_r);
-            had = u2_none;
-          } 
-          else {
-            had = _ho_run(wir_r, jet_j, cor);
-            u2_bl_done(wir_r, jub_r);
-          }
+          had = _ho_run(wir_r, jet_j, cor);
         }
         jet_j->sat_s = u2_jet_limp;
       }
