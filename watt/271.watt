@@ -1599,8 +1599,9 @@
         [%bake !=(bake)]
         [%clay !=(clay)]
         [%dump !=(dump)]
-        [%find !=(find)]
         [%fair !=(fair)]
+        [%find !=(find)]
+        [%firm !=(firm)]
         [%fish !=(fish)]
         [%gain !=(gain)]
         [%make !=(make)]
@@ -2200,7 +2201,7 @@
   ::::
   ::
       play
-    ^<  mine.[!=(->) %reap ~]
+    ^<  mine.[!=(->) %play ~]
     =+  gen=*gene
     |=
     p:(mill(vet |) gen)
@@ -2226,8 +2227,8 @@
             [%cube *]   ?:(.?(p.ref) %blot ref)
             *           sint
         --
-          %blot   %blot
       ::
+          %blot   %blot
           %blur
         ref
       ::

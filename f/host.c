@@ -746,9 +746,10 @@ u2_ho_test(u2_ho_jet* jet_j,
       msg_c = "funk";
     } else if ( u2_no == u2_sing(pro, vet) ) {
       msg_c = "fail";
-      u2_err(wir_r, "wrong", pro);
-      u2_err(wir_r, "right", vet);
-      LoomStop = 1;
+      printf("cos_c: %s\n", cos_c);
+      u2_err(0, "wrong", pro);
+      u2_err(0, "right", vet);
+      // LoomStop = 1;
       c3_assert(0);
     } else {
       msg_c = "nice";

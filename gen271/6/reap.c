@@ -121,7 +121,7 @@
               if ( (u2_no == u2_as_trel(ref, 0, &p_ref, &q_ref)) ) {
                 return u2_bl_bail(wir_r);
               } else {
-                if ( u2_no == u2_dust(p_ref) ) {
+                if ( u2_no == u2_dust(p_sut) ) {
                   return c3__blot;
                 }
                 else {
@@ -287,7 +287,12 @@
     {
       return u2_bl_bail(wir_r);
     } else {
-      return j2_mcx(Pit, vane, reap)(wir_r, van, sut, ref);
+      u2_noun ret = j2_mcx(Pit, vane, reap)(wir_r, van, sut, ref);
+
+      u2_err(wir_r, "reap: sut", sut);
+      u2_err(wir_r, "reap: ref", ref);
+      u2_err(wir_r, "reap: ret", ret);
+      return ret;
     }
   }
 
@@ -374,6 +379,7 @@
           }
           jet_j->sat_s = u2_jet_limp;
         }
+
         u2_ho_test(jet_j, cor, sof, had);
         u2_rl_lose(wir_r, cor);
 
@@ -394,6 +400,4 @@
     { ".3", c3__hevy, j2_mc(Pit, vane, reap), SafeTier6_b, u2_none, u2_none },
     { }
   };
-
-
 
