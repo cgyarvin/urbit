@@ -505,6 +505,8 @@ _rl_bloq_grab(u2_ray ral_r,
         /* Nothing found in the free list.  Try to allocate on the hat.
         */
         if ( u2_no == u2_rl_open(ral_r, siz_w) ) {
+          /* This rail is totally full.
+          */
           u2_ho_warn_here();
           return 0;
         }

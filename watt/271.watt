@@ -1052,6 +1052,8 @@
   =+  [hoz=*type bur=*type]
   |=
   ^-  *type
+  ?:  .=(hoz bur)
+    hoz
   ?:  .=(%blot hoz)
     bur
   ?:  .=(%blot bur)
@@ -1309,6 +1311,7 @@
         [%bpbp ~]
       [%bnpd [%ktrt i.p.gen] [%brbn [%csrt [~ 4] p.gen]]]
     ::
+        [%brdv *]   [%bnpd p.gen [%brdg q.gen]]
         [%brvd *]   [%bnpd p.gen [%brbn q.gen]]
         [%bndv *]   [%bnvd q.gen p.gen]                                 ::  =<
         [%bnnp *]   [%bnpd q.gen p.gen]                                 ::  =-
@@ -2044,7 +2047,9 @@
         *       
       :: ^>  bean.[%open |=((~(fly club ~(gut golf `*`gen)) 75))]
       =+  doz=(open gen)
-      ?<  .=(doz gen)
+      ?:  .=(doz gen)
+        ^>  bean.[%open-bad |=((~(fly club ~(vam golf `@`-.gen)) 75))]
+        !!
       $(gen doz)
     --
   ::::
@@ -2158,12 +2163,14 @@
           [%cell *]   ?|  !.?(p.sut)
                           $(sut [%cell [%cube -.p.sut ] [%cube +.p.sut]])
                       --
-          [%cube *]   .=(p.sut p.ref)
+          [%cube *]   !.=(p.sut p.ref)
           *           $(sut ref, ref sut)
       --
     ::
         [%face *]   $(sut q.sut)
-        [%fork *]   ?&($(sut p.sut) $(sut q.sut))
+        [%fork *]   
+      ?&($(sut p.sut) $(sut q.sut))
+    ::
         [%hold *]
       ?|
         (~(has in bix) [ref sut])

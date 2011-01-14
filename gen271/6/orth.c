@@ -116,16 +116,21 @@
         if ( u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut) ) {
           goto fail;
         } else {
-          if ( (u2_yes == j2_mcc(Pit, in, has)(wir_r, bix, sut)) ) {
+          u2_noun tor = u2_bc(wir_r, u2_rx(wir_r, ref), 
+                                     u2_rx(wir_r, sut));
+
+          if ( (u2_yes == j2_mcc(Pit, in, has)(wir_r, bix, tor)) ) {
+            u2_rl_lose(wir_r, tor);
             return u2_yes;
           } 
           else {
-            u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, bix, sut);
+            u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, bix, tor);
             u2_type fop = j2_mcy(Pit, vane, play)(wir_r, van, p_sut, q_sut);
             u2_noun ret = _orth_in(wir_r, van, fop, ref, zoc);
 
             u2_rl_lose(wir_r, fop);
             u2_rl_lose(wir_r, zoc);
+            u2_rl_lose(wir_r, tor);
 
             return ret;
           }
@@ -262,7 +267,7 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, vane, orth)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, vane, orth), SafeTier6_b, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, vane, orth), SafeTier6, u2_none, u2_none },
     { }
   };
 

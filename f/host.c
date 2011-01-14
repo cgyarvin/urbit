@@ -722,16 +722,16 @@ u2_ho_fire(u2_ray   wir_r,
 
 /* u2_ho_test():
 **
-**   Report result of jet test.  `pro` is fast; `vet` is slow.
+**   Report result of jet test.  `had` is native; `sof` is nock.
 */
 void
 u2_ho_test(u2_ho_jet* jet_j,
            u2_noun    cor,                                         //  retain
-           u2_noun    pro,                                         //  retain
-           u2_noun    vet)                                         //  retain
+           u2_noun    sof,                                         //  retain
+           u2_noun    had)                                         //  retain
 {
   if ( (u2_none == cor) || 
-       ((u2_none == pro) && (u2_none == vet)) ||
+       ((u2_none == had) && (u2_none == sof)) ||
        (u2_none == jet_j->xip) ) 
   {
     return;
@@ -740,22 +740,24 @@ u2_ho_test(u2_ho_jet* jet_j,
     c3_w        mug_w = u2_mug(cor);
     const c3_c* msg_c;
 
-    if ( u2_none == pro ) {
+    if ( u2_none == had ) {
       msg_c = "bail";
-    } else if ( u2_none == vet ) {
+    } else if ( u2_none == sof ) {
       msg_c = "funk";
-    } else if ( u2_no == u2_sing(pro, vet) ) {
+    } else if ( u2_no == u2_sing(had, sof) ) {
       msg_c = "fail";
       printf("cos_c: %s\n", cos_c);
-      u2_err(0, "wrong", pro);
-      u2_err(0, "right", vet);
+      u2_err(0, "wrong", had);
+      u2_err(0, "right", sof);
       // LoomStop = 1;
       c3_assert(0);
     } else {
       msg_c = "nice";
     }
 
-    fprintf(stderr, "%s: %8x: %s\n", msg_c, mug_w, cos_c);
+    if ( strcmp("noce", msg_c) ) {
+      fprintf(stderr, "%s: %8x: %s\n", msg_c, mug_w, cos_c);
+    }
     free(cos_c);
   }
 }
@@ -842,7 +844,7 @@ u2_ho_punt(u2_ray  wir_r,
         }
         jet_j->sat_s = u2_jet_live;
 
-        u2_ho_test(jet_j, cor, u2_none, sof);
+        u2_ho_test(jet_j, cor, sof, u2_none);
         return sof;
       }
     }
@@ -870,7 +872,7 @@ u2_ho_punt(u2_ray  wir_r,
         jet_j->sat_s = u2_jet_limp;
       }
 
-      u2_ho_test(jet_j, cor, had, sof);
+      u2_ho_test(jet_j, cor, sof, had);
       if ( u2_none == sof ) {
         return had;
       } else {

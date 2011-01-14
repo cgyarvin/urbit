@@ -141,6 +141,7 @@
                          u2_noun cor);                            //  retain
 
   extern u2_ho_jet j2_mcj(Pit, vane, bake)[];
+  extern u2_ho_jet j2_mcj(Pit, vane, edit)[];
   extern u2_ho_jet j2_mcj(Pit, vane, fair)[];
   extern u2_ho_jet j2_mcj(Pit, vane, firm)[];
   extern u2_ho_jet j2_mcj(Pit, vane, find)[];
@@ -162,8 +163,9 @@
   u2_ho_driver 
   j2_mbd(Pit, vane)[] = {
     { j2_sc(Pit, vane, bake), j2_mcj(Pit, vane, bake), 0, 0, u2_none },
-    { j2_sc(Pit, vane, find), j2_mcj(Pit, vane, find), 0, 0, u2_none },
+    { j2_sc(Pit, vane, edit), j2_mcj(Pit, vane, edit), 0, 0, u2_none },
     { j2_sc(Pit, vane, fair), j2_mcj(Pit, vane, fair), 0, 0, u2_none },
+    { j2_sc(Pit, vane, find), j2_mcj(Pit, vane, find), 0, 0, u2_none },
     { j2_sc(Pit, vane, firm), j2_mcj(Pit, vane, firm), 0, 0, u2_none },
     { j2_sc(Pit, vane, fish), j2_mcj(Pit, vane, fish), 0, 0, u2_none },
     { j2_sc(Pit, vane, gain), j2_mcj(Pit, vane, gain), 0, 0, u2_none },
@@ -182,7 +184,7 @@
 
   u2_ho_jet 
   j2_mbj(Pit, vane)[] = {
-    { "clay", c3__hevy, j2_mc(Pit, vane, clay), u2_no, u2_none, u2_none },
+    { "clay", c3__hevy, j2_mc(Pit, vane, clay), SafeTier6, u2_none, u2_none },
     { }
   };
 

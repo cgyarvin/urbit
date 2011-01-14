@@ -287,12 +287,7 @@
     {
       return u2_bl_bail(wir_r);
     } else {
-      u2_noun ret = j2_mcx(Pit, vane, reap)(wir_r, van, sut, ref);
-
-      u2_err(wir_r, "reap: sut", sut);
-      u2_err(wir_r, "reap: ref", ref);
-      u2_err(wir_r, "reap: ret", ret);
-      return ret;
+      return j2_mcx(Pit, vane, reap)(wir_r, van, sut, ref);
     }
   }
 
@@ -397,7 +392,7 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, vane, reap)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, vane, reap), SafeTier6_b, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, vane, reap), SafeTier6, u2_none, u2_none },
     { }
   };
 

@@ -246,25 +246,13 @@
 
     /* u2_ho_test():
     **
-    **   Report result of jet test.  `pro` is fast; `vet` is slow.
-    */
-      void
-      u2_ho_stet(u2_wire wir_r,
-                 u2_noun xip,                                       //  retain
-                 u2_noun cor,                                       //  retain
-                 u2_noun fol,                                       //  retain
-                 u2_noun pro,                                       //  retain
-                 u2_noun vet);                                      //  retain
-
-    /* u2_ho_test():
-    **
     **   Report result of jet test on `cor`.  `pro` is fast; `vet` is slow.
     */
       void
       u2_ho_test(u2_ho_jet* jet_j,
                  u2_weak    cor,                                    //  retain
-                 u2_weak    pro,                                    //  retain
-                 u2_weak    vet);                                   //  retain
+                 u2_weak    sof,                                    //  retain
+                 u2_weak    had);                                   //  retain
 
     /* u2_ho_dive():
     **
