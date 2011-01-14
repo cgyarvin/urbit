@@ -1,4 +1,4 @@
-/* j/6/vane.c
+/* j/6/ut.c
 **
 ** This file is in the public domain.
 */
@@ -8,9 +8,9 @@
 /* 
 */
   u2_noun                                                         //  transfer
-  j2_mcy(Pit, vane, clay)(u2_wire wir_r, 
-                          u2_noun van,                            //  retain
-                          u2_noun sut)                            //  retain
+  j2_mcy(Pit, ut, clay)(u2_wire wir_r, 
+                        u2_noun van,                              //  retain
+                        u2_noun sut)                              //  retain
   {
     u2_noun p_sut, q_sut, r_sut;
 
@@ -31,11 +31,11 @@
         }
         else if ( c3__gray == hq_sut ) {
           if ( (vet == u2_yes) &&
-               (u2_no == j2_mcy(Pit, vane, nest)(wir_r, van, pq_sut, p_sut)) )
+               (u2_no == j2_mcy(Pit, ut, nest)(wir_r, van, pq_sut, p_sut)) )
           {
             fprintf(stderr, "clay: gray error\n");
-            j2_mcy(Pit, vane, dupt)(wir_r, van, "pq_sut", pq_sut);
-            j2_mcy(Pit, vane, dupt)(wir_r, van, "p_sut", p_sut);
+            j2_mcy(Pit, ut, dupt)(wir_r, van, "pq_sut", pq_sut);
+            j2_mcy(Pit, ut, dupt)(wir_r, van, "p_sut", p_sut);
             return u2_bl_bail(wir_r);
           }
           return u2_bq
@@ -52,7 +52,7 @@
                       c3__pink, 
                       u2_rx(wir_r, r_sut));
 
-            if ( u2_no == j2_mcy(Pit, vane, fair)
+            if ( u2_no == j2_mcy(Pit, ut, fair)
                 (wir_r, van, sut, dox, r_sut) ) 
             {
               fprintf(stderr, "clay: pink error\n");
@@ -70,14 +70,14 @@
   }
 
   u2_noun                                                         //  transfer
-  j2_mc(Pit, vane, clay)(u2_wire wir_r, 
-                         u2_noun cor)                             //  retain
+  j2_mc(Pit, ut, clay)(u2_wire wir_r, 
+                       u2_noun cor)                               //  retain
   {
     u2_noun sut;
 
     if ( u2_none == (sut = u2_frag(4, cor)) ) {
       return u2_bl_bail(wir_r);
     } else {
-      return j2_mcy(Pit, vane, clay)(wir_r, cor, sut);
+      return j2_mcy(Pit, ut, clay)(wir_r, cor, sut);
     }
   }

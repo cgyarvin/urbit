@@ -3,8 +3,8 @@
     [%watt 271]
   :~
     [%vade !=(vade)]
-    [%vane !=(vane)]
-    [%club !=(club)]
+    [%ut !=(ut)]
+    [%to !=(to)]
   --
 |*
   ::  Tier 1, light math
@@ -819,7 +819,7 @@
     steg
   =+  yob=@
   |=
-  (~(fly club ~(dem golf yob)) 75)
+  (~(fly to ~(dem go yob)) 75)
 ::::
 ::
     ball
@@ -831,10 +831,10 @@
   --
 ::::
 ::
-    club
+    to
   ^<    mine.
       :+  !=(->) 
-        %club 
+        %to 
       :~
         [%fly !=(fly)]
         [%ram !=(ram)]
@@ -918,7 +918,7 @@
   ==
 ::::
 ::
-    golf
+    go
   =+  nut=*
   |%
   ::::
@@ -1591,13 +1591,13 @@
     vade
   =+  [tip=*type gen=*gene]
   |=
-  (~(mill vane tip) gen)
+  (~(mill ut tip) gen)
 ::::
 ::
-    vane
+    ut
   ^<    mine.
       :+  !=(->+) 
-        %vane 
+        %ut 
       :~
         [%bake !=(bake)]
         [%clay !=(clay)]
@@ -1719,7 +1719,7 @@
         [%core *]
       =+  ^=  wut
           %~  dem
-            golf
+            go
           |-(^-(@ ?~(r.sut 0 .^((add $(r.sut l.r.sut) $(r.sut r.r.sut))))))
       :*  %grip
           ['{' '}']
@@ -1740,8 +1740,8 @@
           --
       --
     ::
-        [%cube *]   ?:(.=(0 p.sut) '~' ~(gut golf p.sut))
-        [%face *]   [%meld ~(vam golf p.sut) '=' $(sut q.sut) ~]
+        [%cube *]   ?:(.=(0 p.sut) '~' ~(gut go p.sut))
+        [%face *]   [%meld ~(vam go p.sut) '=' $(sut q.sut) ~]
     ::
         [%fork *]
       ?:  .=([%fork [%cube 0] [%cube 1]] sut)
@@ -1760,7 +1760,7 @@
         $(sut (play(sut p.sut) q.sut))
       :*  %meld
           '%'
-          ~(dem golf u.piv)
+          ~(dem go u.piv)
           ~
           ?:  (~(has in gax) sut)
             ~
@@ -1805,8 +1805,8 @@
     |=
     ^>  bean.%find
     =-  ?~  hoq
-          ^>  bean.[%type |=((~(fly club dump) 75))]
-          ^>  bean.[%name |=((~(fly club cog) 75))]
+          ^>  bean.[%type |=((~(fly to dump) 75))]
+          ^>  bean.[%name |=((~(fly to cog) 75))]
           !!
         u.hoq
     ^=  hoq
@@ -1945,7 +1945,7 @@
       [[%cube sev] [1 sev]]
     ::
         %bpcb
-      :: ^>  bean.[%spot |=((~(fly club ~(loc golf p.gen)) 75))]
+      :: ^>  bean.[%spot |=((~(fly to ~(loc go p.gen)) 75))]
       $(gen q.gen)
     ::
         %bpdg 
@@ -1956,7 +1956,7 @@
       [%blot [0 0]]
     ::
         %bpmt                                                           ::  !%
-      [%blur [1 ..vane]]          ::  needs !: for bootstrap
+      [%blur [1 ..ut]]          ::  needs !: for bootstrap
     ::
         %brmt                                                           ::  |%
       =+  sac=(~(gas by ~) p.gen) 
@@ -2045,10 +2045,10 @@
       [9 p.u.q.lar q.fup]
     ::
         *       
-      :: ^>  bean.[%open |=((~(fly club ~(gut golf `*`gen)) 75))]
+      :: ^>  bean.[%open |=((~(fly to ~(gut go `*`gen)) 75))]
       =+  doz=(open gen)
       ?:  .=(doz gen)
-        ^>  bean.[%open-bad |=((~(fly club ~(vam golf `@`-.gen)) 75))]
+        ^>  bean.[%open-bad |=((~(fly to ~(vam go `@`-.gen)) 75))]
         !!
       $(gen doz)
     --

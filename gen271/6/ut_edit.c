@@ -8,12 +8,12 @@
 /* functions
 */
   u2_noun                                                         //  transfer
-  j2_mcy(Pit, vane, edit)(u2_wire wir_r, 
-                          u2_noun van,                            //  retain
-                          u2_noun sut,                            //  retain
-                          u2_atom axe,                            //  retain
-                          u2_noun mun,                            //  retain
-                          u2_noun har)                            //  retain
+  j2_mcy(Pit, ut, edit)(u2_wire wir_r, 
+                        u2_noun van,                              //  retain
+                        u2_noun sut,                              //  retain
+                        u2_atom axe,                              //  retain
+                        u2_noun mun,                              //  retain
+                        u2_noun har)                              //  retain
   {
     u2_noun luf = u2_nul;
 
@@ -35,7 +35,7 @@
           u2_noun pi_har = u2_h(i_har);
           u2_noun qi_har = u2_t(i_har);
           u2_noun rup = j2_mby(Pit, rake)(wir_r, pi_har);
-          u2_noun taq = j2_mcy(Pit, vane, tuck)
+          u2_noun taq = j2_mcy(Pit, ut, tuck)
             (wir_r, van, mun, rup, sut, qi_har);
           u2_noun p_taq = u2_h(taq);
           u2_noun q_taq = u2_t(taq);
@@ -55,8 +55,8 @@
   }
 
   u2_noun                                                         //  transfer
-  j2_mc(Pit, vane, edit)(u2_wire wir_r, 
-                         u2_noun cor)                             //  retain
+  j2_mc(Pit, ut, edit)(u2_wire wir_r, 
+                       u2_noun cor)                               //  retain
   {
     u2_noun van, sut, axe, mun, har;
 
@@ -66,14 +66,14 @@
     {
       return u2_bl_bail(wir_r);
     } else {
-      return j2_mcy(Pit, vane, edit)(wir_r, van, sut, axe, mun, har);
+      return j2_mcy(Pit, ut, edit)(wir_r, van, sut, axe, mun, har);
     }
   }
 
 /* structures
 */
   u2_ho_jet 
-  j2_mcj(Pit, vane, edit)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, vane, edit), SafeTier6, u2_none, u2_none },
+  j2_mcj(Pit, ut, edit)[] = {
+    { ".3", c3__hevy, j2_mc(Pit, ut, edit), SafeTier6, u2_none, u2_none },
     { }
   };

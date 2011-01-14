@@ -178,39 +178,39 @@ J271_4_OFILES=\
        gen271/4/by_put.o 
 
 J271_6_OFILES=\
-       gen271/6/bake.o \
-       gen271/6/clay.o \
        gen271/6/comb.o \
        gen271/6/cons.o \
-       gen271/6/edit.o \
        gen271/6/eith.o \
-       gen271/6/fair.o \
-       gen271/6/find.o \
-       gen271/6/firm.o \
-       gen271/6/fish.o \
        gen271/6/flan.o \
        gen271/6/flip.o \
        gen271/6/flor.o \
-       gen271/6/gain.o \
        gen271/6/hack.o \
        gen271/6/hike.o \
        gen271/6/look.o \
-       gen271/6/make.o \
-       gen271/6/mill.o \
        gen271/6/name.o \
        gen271/6/open.o \
-       gen271/6/orth.o \
-       gen271/6/nest.o \
-       gen271/6/peek.o \
-       gen271/6/play.o \
        gen271/6/rake.o \
-       gen271/6/reap.o \
        gen271/6/ream.o \
-       gen271/6/seek.o \
-       gen271/6/snap.o \
-       gen271/6/tuck.o \
        gen271/6/twin.o \
-       gen271/6/vane.o 
+       gen271/6/ut.o \
+       gen271/6/ut_bake.o \
+       gen271/6/ut_clay.o \
+       gen271/6/ut_edit.o \
+       gen271/6/ut_fair.o \
+       gen271/6/ut_find.o \
+       gen271/6/ut_firm.o \
+       gen271/6/ut_fish.o \
+       gen271/6/ut_gain.o \
+       gen271/6/ut_make.o \
+       gen271/6/ut_mill.o \
+       gen271/6/ut_orth.o \
+       gen271/6/ut_nest.o \
+       gen271/6/ut_peek.o \
+       gen271/6/ut_play.o \
+       gen271/6/ut_reap.o \
+       gen271/6/ut_seek.o \
+       gen271/6/ut_snap.o \
+       gen271/6/ut_tuck.o
 
 J271_OFILES=\
        $(J271_1_OFILES) \

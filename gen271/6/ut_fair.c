@@ -8,11 +8,11 @@
 /* functions
 */
   u2_flag
-  j2_mcx(Pit, vane, fair)(u2_wire wir_r, 
-                          u2_noun van,                            //  retain
-                          u2_noun sut,                            //  retain
-                          u2_noun ref,                            //  retain
-                          u2_noun dab)                            //  retain
+  j2_mcx(Pit, ut, fair)(u2_wire wir_r, 
+                        u2_noun van,                              //  retain
+                        u2_noun sut,                              //  retain
+                        u2_noun ref,                              //  retain
+                        u2_noun dab)                              //  retain
   {
     if ( u2_nul == dab ) {
       return u2_yes;
@@ -28,23 +28,23 @@
         u2_noun qn_dab = u2_t(n_dab);
       
         if ( (u2_nul == l_dab) && (u2_nul == r_dab) ) {
-          return j2_mcy(Pit, vane, firm)(wir_r, van, sut, ref, qn_dab);
+          return j2_mcy(Pit, ut, firm)(wir_r, van, sut, ref, qn_dab);
         }
         else if ( (u2_nul == l_dab) ) {
           return u2_and
-            (j2_mcy(Pit, vane, firm)(wir_r, van, sut, ref, qn_dab),
-             j2_mcx(Pit, vane, fair)(wir_r, van, sut, ref, r_dab));
+            (j2_mcy(Pit, ut, firm)(wir_r, van, sut, ref, qn_dab),
+             j2_mcx(Pit, ut, fair)(wir_r, van, sut, ref, r_dab));
         }
         else if ( (u2_nul == r_dab) ) {
           return u2_and
-            (j2_mcy(Pit, vane, firm)(wir_r, van, sut, ref, qn_dab),
-             j2_mcx(Pit, vane, fair)(wir_r, van, sut, ref, l_dab));
+            (j2_mcy(Pit, ut, firm)(wir_r, van, sut, ref, qn_dab),
+             j2_mcx(Pit, ut, fair)(wir_r, van, sut, ref, l_dab));
         }
         else {
           return u2_and
-            (j2_mcy(Pit, vane, firm)(wir_r, van, sut, ref, qn_dab),
-             u2_and(j2_mcx(Pit, vane, fair)(wir_r, van, sut, ref, l_dab),
-                    j2_mcx(Pit, vane, fair)(wir_r, van, sut, ref, r_dab)));
+            (j2_mcy(Pit, ut, firm)(wir_r, van, sut, ref, qn_dab),
+             u2_and(j2_mcx(Pit, ut, fair)(wir_r, van, sut, ref, l_dab),
+                    j2_mcx(Pit, ut, fair)(wir_r, van, sut, ref, r_dab)));
         }
       }
     }
@@ -53,11 +53,11 @@
 /* boilerplate
 */
   u2_ho_jet 
-  j2_mcj(Pit, vane, fair)[];
+  j2_mcj(Pit, ut, fair)[];
 
   u2_noun                                                         //  transfer
-  j2_mc(Pit, vane, fair)(u2_wire wir_r, 
-                         u2_noun cor)                             //  retain
+  j2_mc(Pit, ut, fair)(u2_wire wir_r, 
+                       u2_noun cor)                               //  retain
   {
     u2_noun van, sut, ref, dab;
 
@@ -69,16 +69,16 @@
     {
       return u2_bl_bail(wir_r);
     } else {
-      return j2_mcx(Pit, vane, fair)(wir_r, van, sut, ref, dab);
+      return j2_mcx(Pit, ut, fair)(wir_r, van, sut, ref, dab);
     }
   }
 
   u2_weak                                                         //  transfer
-  j2_mci(Pit, vane, fair)(u2_wire wir_r,
-                          u2_noun van,                            //  retain
-                          u2_noun sut,                            //  retain
-                          u2_noun ref,                            //  retain
-                          u2_noun dab)                            //  retain
+  j2_mci(Pit, ut, fair)(u2_wire wir_r,
+                        u2_noun van,                              //  retain
+                        u2_noun sut,                              //  retain
+                        u2_noun ref,                              //  retain
+                        u2_noun dab)                              //  retain
   {
     u2_weak hoc = u2_sh_look(wir_r, van, "fair");
 
@@ -92,11 +92,11 @@
                                            u2_cv_sam_3, u2_rx(wir_r, dab),
                                            0);
 
-      if ( (u2_none == j2_mcj(Pit, vane, fair)[0].xip) ) {
+      if ( (u2_none == j2_mcj(Pit, ut, fair)[0].xip) ) {
         u2_noun xip = u2_sh_find(wir_r, cor);
      
         c3_assert(u2_none != xip);
-        j2_mcj(Pit, vane, fair)[0].xip = xip;
+        j2_mcj(Pit, ut, fair)[0].xip = xip;
       }
       u2_rl_lose(wir_r, gat);
       return cor;
@@ -104,24 +104,24 @@
   }
 
   u2_noun
-  j2_mcy(Pit, vane, fair)(u2_wire wir_r,
+  j2_mcy(Pit, ut, fair)(u2_wire wir_r,
                           u2_noun van,
                           u2_noun sut,
                           u2_noun ref,
                           u2_noun dab)
   {
-    u2_ho_jet *jet_j = &j2_mcj(Pit, vane, fair)[0];
+    u2_ho_jet *jet_j = &j2_mcj(Pit, ut, fair)[0];
 
     switch ( jet_j->sat_s ) {
       default: c3_assert(0); return u2_none;
 
       case u2_jet_live: {
-        return j2_mcx(Pit, vane, fair)(wir_r, van, sut, ref, dab);
+        return j2_mcx(Pit, ut, fair)(wir_r, van, sut, ref, dab);
       }
       case u2_jet_dead: {
         u2_noun cor, sof;
 
-        cor = j2_mci(Pit, vane, fair)(wir_r, van, sut, ref, dab);
+        cor = j2_mci(Pit, ut, fair)(wir_r, van, sut, ref, dab);
         sof = u2_nk_soft(wir_r, cor, u2_frag(u2_cv_noc, cor));
 
         return u2_bl_good(wir_r, sof);
@@ -142,7 +142,7 @@
               had = u2_none;
             } 
             else {
-              had = j2_mcx(Pit, vane, fair)(wir_r, van, sut, ref, dab);
+              had = j2_mcx(Pit, ut, fair)(wir_r, van, sut, ref, dab);
               u2_bl_done(wir_r, jub_r);
             }
           }
@@ -154,7 +154,7 @@
         {
           jet_j->sat_s = u2_jet_dead;
           {
-            cor = j2_mci(Pit, vane, fair)(wir_r, van, sut, ref, dab);
+            cor = j2_mci(Pit, ut, fair)(wir_r, van, sut, ref, dab);
             sof = u2_nk_soft(wir_r, u2_rx(wir_r, cor), 
                                     u2_frag(u2_cv_noc, cor));
           }
@@ -176,7 +176,7 @@
 /* structures
 */
   u2_ho_jet 
-  j2_mcj(Pit, vane, fair)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, vane, fair), SafeTier6, u2_none, u2_none },
+  j2_mcj(Pit, ut, fair)[] = {
+    { ".3", c3__hevy, j2_mc(Pit, ut, fair), SafeTier6, u2_none, u2_none },
     { }
   };
