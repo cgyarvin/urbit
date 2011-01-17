@@ -50,7 +50,7 @@
           u2_rl_lose(wir_r, rex);
           return pro;
         }
-        case c3__bnvd: {
+        case c3__bnld: {
           if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
             return u2_bl_bail(wir_r);
           }
@@ -207,7 +207,7 @@
             return u2_bc(wir_r, _mill_flag(wir_r), u2_bc(wir_r, _3, vod));
           }
         }
-        case c3__bpbn: {
+        case c3__zpbn: {
           p_gen = u2_t(gen);
           {
             u2_noun sev = j2_mcy(Pit, ut, make)(wir_r, van, sut, p_gen);
@@ -217,7 +217,7 @@
                       u2_bc(wir_r, _1, u2_rx(wir_r, sev)));
           }
         }
-        case c3__bpcb: {
+        case c3__zpcb: {
           if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
             return u2_bl_bail(wir_r);
           }
@@ -225,7 +225,7 @@
             return j2_mcx(Pit, ut, mill)(wir_r, van, sut, q_gen);
           }
         }
-        case c3__bpdg: {
+        case c3__zpdg: {
           p_gen = u2_t(gen);
           {
             u2_noun vot = j2_mcy(Pit, ut, play)(wir_r, van, sut, p_gen);
@@ -235,16 +235,16 @@
                       u2_bc(wir_r, _1, u2_rx(wir_r, vot)));
           }
         }
-        case c3__bpbp: {
+        case c3__zpzp: {
           return u2_bc
             (wir_r, c3__blot,
                     u2_bc(wir_r, _0, _0));
         }
-        case c3__bpmt: {
+        case c3__zpmt: {
           return u2_bc(wir_r, c3__blur, 
                               u2_bc(wir_r, _1, u2_rx(wir_r, van)));
         }
-        case c3__bpdx: {
+        case c3__zpdx: {
           p_gen = u2_t(gen);
           {
             u2_noun bug;
@@ -341,7 +341,7 @@
           p_gen = u2_t(gen);
           return j2_mcx(Pit, ut, mill)(wir_r, van, sut, p_gen);
         }
-        case c3__ktvd: {
+        case c3__ktld: {
           if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
             return u2_bl_bail(wir_r);
           }

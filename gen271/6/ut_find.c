@@ -101,7 +101,7 @@
                       u2_bt(wir_r, u2_nul, 
                                    j2_mbc(Pit, peg)(wir_r, 3, p_zem),
                                    u2_rx(wir_r, q_zem)),
-                      j2_mcy(Pit, ut, clay)(wir_r, van, sut));
+                      u2_rx(wir_r, sut));
 
             u2_rl_lose(wir_r, zem);
             return pro;

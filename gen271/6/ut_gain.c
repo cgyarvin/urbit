@@ -45,8 +45,8 @@
     } else switch ( u2_h(gen) ) {
       default: return u2_rx(wir_r, sut);
 
-      case c3__ktdv:
-      case c3__ktvd: {
+      case c3__ktdl:
+      case c3__ktld: {
         if ( u2_none == (q_gen = u2_frag(6, gen)) ) {
           return u2_bl_bail(wir_r);
         } else {

@@ -14,7 +14,9 @@
                         u2_noun ref,                              //  retain
                         u2_noun gen)                              //  retain
   {
-    u2_noun bax = u2_bt(wir_r, sut, ref, gen);
+    u2_noun bax = u2_bt(wir_r, u2_rx(wir_r, sut), 
+                               u2_rx(wir_r, ref), 
+                               u2_rx(wir_r, gen));
     u2_noun ver = u2_frag(42, van); 
 
     if ( u2_yes == j2_mcc(Pit, in, has)(wir_r, ver, bax) ) {
@@ -22,18 +24,26 @@
       return u2_yes;
     }
     else {
-      u2_noun vor = j2_mcc(Pit, in, put)(wir_r, ver, bax);
-      u2_noun von = u2_bn_molt(wir_r, van, 42, vor, 0);
-      u2_noun old = j2_mcy(Pit, ut, make)(wir_r, van, sut, gen);
-      u2_noun new = j2_mcy(Pit, ut, make)(wir_r, van, ref, gen);
-      u2_flag pro = u2_sing(old, new);
+      // j2_mcy(Pit, ut, dupt)(wir_r, van, "firm: sut", sut);
+      // j2_mcy(Pit, ut, dupt)(wir_r, van, "firm: ref", ref);
+      // u2_err(wir_r, "firm: gen", gen);
+      // printf("firm: gen: mug: %x\n\n", u2_mug(gen));
 
-      u2_rl_lose(wir_r, new);
-      u2_rl_lose(wir_r, old);
-      u2_rl_lose(wir_r, von);
-      u2_rl_lose(wir_r, vor);
+      {
+        u2_noun vor = j2_mcc(Pit, in, put)(wir_r, ver, bax);
+        u2_noun von = u2_bn_molt(wir_r, van, 42, vor, 0);
+        u2_noun old = j2_mcy(Pit, ut, make)(wir_r, von, sut, gen);
+        u2_noun new = j2_mcy(Pit, ut, make)(wir_r, von, ref, gen);
+        u2_flag pro = u2_sing(old, new);
 
-      return pro;
+        u2_rl_lose(wir_r, new);
+        u2_rl_lose(wir_r, old);
+        u2_rl_lose(wir_r, von);
+        u2_rl_lose(wir_r, vor);
+        u2_rl_lose(wir_r, bax);
+
+        return pro;
+      }
     }
   }
 

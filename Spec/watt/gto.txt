@@ -1,39 +1,40 @@
 Chars
 --
-  pam   &       
-  deg   :       
-  nep   -     
-  tol   "
-  cas   ?       
-  dot   .       
-  fat   @     
-  vod   >
   bar   |       
-  des   }       
-  pel   )
-  bin   =       
-  ket   ^
-  ped   +
-  bot   '       
-  bop   !       
-  rat   *
   bec   $       
-  lep   (       
-  sac   \
+  bon   =       
+  bot   '       
   cab   _       
-  lam   ;       
-  sig   ~
   cam   ,       
-  mit   %       
-  sol   /
+  cas   ?       
   dax   #       
+  deg   :       
   den   ]       
-  sed   {
-  dov   <
+  des   }       
+  dot   .       
+  dul   <
+  ket   ^
+  lep   (       
+  lud   >
+  mit   %       
+  nat   @     
   ned   [       
+  nep   -     
+  pam   &       
+  ped   +
+  pel   )
+  rat   *
+  sac   \
+  sed   {
+  sig   ~
+  sol   /
+  tam   ;       
   tic   `
+  tol   "
+  zap   !       
 
-  ace  == " " or "\n" in any quantity
+  ace  == whitespace, " " or "\n" in any quantity
+
 Watt GTO: Gran Tabula Operazioni 
 
 (Copied from watt.watt - any discrepancies favor watt.watt.)
@@ -47,7 +48,7 @@ Gene - AST
     [%bndv p=*gene q=*gene]                                     ::  =<  bindov
     [%bnnp p=*gene q=*gene]                                     ::  =-  binnep
     [%bnpd p=*gene q=*gene]                                     ::  =+  binped
-    [%bnvd p=*gene q=*gene]                                     ::  =>  binvod
+    [%bnld p=*gene q=*gene]                                     ::  =>  binvod
   ::
     [%brbn p=*gene]                                             ::  |=  barbin
     [%brdg p=*gene]                                             ::  |:  bardeg
@@ -57,7 +58,7 @@ Gene - AST
     [%brnp p=*gene]                                             ::  |-  barnep
     [%brrs p=*(list &[p=*term q=*gene])]                        ::  |*  barrat
     [%brsg p=*gene q=*(list gene)]                              ::  |~  barsig
-    [%brvd p=*gene q=*gene]                                     ::  |>  barvod
+    [%brld p=*gene q=*gene]                                     ::  |>  barvod
   ::
     [%dgkt p=*gene q=*gene r=*gene s=*gene]                     ::  :^  degket
     [%dgnp p=*gene q=*gene]                                     ::  :-  degnep
@@ -83,8 +84,8 @@ Gene - AST
     [%ktmt p=*gene q=*gene]                                     ::  ^%  ketmit
     [%ktnp p=*gene q=*gene]                                     ::  ^-  ketnep
     [%ktpd p=*gene q=*gene]                                     ::  ^+  ketped
-    [%ktvd p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^>  ketvod
-    [%ktrs p=*gene]                                             ::  ^*  ketrat
+    [%ktld p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^>  ketvod
+    [%ktrt p=*gene]                                             ::  ^*  ketrat
     [%ktsg p=*gene]                                             ::  ^~  ketsig
   ::
     [%ksbn p=*gene q=*gene]                                     ::  ?=  kasbin
@@ -95,7 +96,7 @@ Gene - AST
     [%kshp p=*gene]                                             ::  ?!  kasbop
     [%ksnp p=*gene q=*(list &[p=*gene q=*gene])]                ::  ?-  kasnep
     [%kspm p=*(list gene)]                                      ::  ?&  kaspam
-    [%ksvd p=*gene q=*gene]                                     ::  ?>  kasvod
+    [%ksld p=*gene q=*gene]                                     ::  ?>  kasvod
     [%ksrs p=*gene q=*(list gene)]                              ::  ?*  kasrat
     [%kssg p=*gene q=*gene r=*gene]                             ::  ?~  kassig
   ::
@@ -157,6 +158,27 @@ Tack: change to data
     ==
 
 Type
+::::
+::
+    type
+  |?
+    %atom
+    %blur
+    %blot
+    [%cell p=*type q=*type]
+  :: [%core p=*type q=*<| & [| p=*type] [& p=*type]> r=*(book term gene)]
+  ::
+    :*  %core
+        p=*type
+        q=*<%blue [%gray p=*type] %pink [%teal p=*type]> 
+        r=*(book term gene)
+    --
+  ::
+    [%cube p=*]
+    [%face p=*term q=*type]
+    [%fork p=*type q=*type]
+    [%hold p=*type q=*gene]
+  --
   ::
   ::::::::
   ::

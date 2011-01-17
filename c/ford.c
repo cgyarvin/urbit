@@ -247,6 +247,11 @@ j2_mcy(watt_271, ut, dupt)(u2_wire     wir_r,
                              const c3_c* cap_c,
                              u2_noun     typ);
 
+/* _ford_mo_mill(): mill from C source and pit.
+*/
+u2_noun
+_ford_mo_mill(struct ford_state* fod_f,
+              u2_
 /* ford_test3(): accurate use of a true kernel.
 */
 void
@@ -272,7 +277,7 @@ ford_test3(struct ford_state* fod_f,
       u2_noun van = u2_bn_hook(wir_r, fod_f->pit, "ut");
       u2_noun mel = u2_bn_hook(wir_r, van, "mill");
       u2_noun lof;
-      
+   
       if ( (u2_none == mel) || (u2_none == van) ) {
         printf("test3: no mill or ut\n");
         return;

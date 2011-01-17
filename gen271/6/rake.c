@@ -34,7 +34,7 @@
           }
         }
       }
-      case c3__ktdv: {
+      case c3__ktdl: {
         if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
           return u2_bl_bail(wir_r);
         }

@@ -17,7 +17,7 @@
     if ( u2_yes == u2_dust(gen) ) {
       u2_noun h_gen = u2_h(gen);
 
-      if ( (c3__bpcb == h_gen) || (c3__bnvd == h_gen) ) {
+      if ( (c3__zpcb == h_gen) || (c3__bnld == h_gen) ) {
         if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
           return u2_bl_bail(wir_r);
         }

@@ -13,7 +13,7 @@
 #   define  SafeTier3         u2_jet_live
 #   define  SafeTier4         u2_jet_live
 #   define  SafeTier5         u2_jet_live
-#   define  SafeTier6         u2_jet_live
+#   define  SafeTier6         u2_jet_dead
 
   /** Cosmetic noun types.
   **/
