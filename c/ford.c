@@ -243,15 +243,79 @@ j2_mbc(watt_271, ream)(u2_wire wir_r,
 
 void
 j2_mcy(watt_271, ut, dupt)(u2_wire     wir_r,
-                             u2_noun     van,
-                             const c3_c* cap_c,
-                             u2_noun     typ);
+                           u2_noun     van,
+                           const c3_c* cap_c,
+                           u2_noun     typ);
 
-/* _ford_mo_mill(): mill from C source and pit.
+/* _ford_mo_mill(): mill from gen and pit.
 */
-u2_noun
-_ford_mo_mill(struct ford_state* fod_f,
-              u2_
+u2_weak                                                           //  transfer
+_ford_mo_mill(u2_wire wir_r,
+              u2_noun pit,                                        //  retain
+              u2_noun typ,                                        //  retain
+              u2_noun gen)                                        //  retain
+{
+  u2_noun fut = u2_sh_look(wir_r, pit, "ut");
+
+  if ( u2_none == fut ) {
+    printf("ford: fut failed\n");
+    return u2_none;
+  } else {
+    u2_noun tut = u2_nk_nock(wir_r, u2_rx(wir_r, pit), fut);
+
+    if ( u2_none == tut ) {
+      printf("ford: tut failed\n");
+      return u2_none;
+    }
+    else {
+      u2_noun van = u2_rl_molt(wir_r, tut, u2_cv_sam, u2_rx(wir_r, typ), 0);
+
+      u2_rl_lose(wir_r, tut);
+      if ( u2_none == van ) {
+        printf("ford: van failed\n");
+        return u2_none;
+      }
+      else {
+        u2_noun gom = u2_sh_look(wir_r, van, "mo"); 
+
+        if ( u2_none == gom ) {
+          printf("ford: mo failed\n");
+          u2_rl_lose(wir_r, van); return u2_none;
+        } else {
+          u2_noun fiq = u2_nk_nock(wir_r, van, gom);
+
+          if ( u2_none == fiq ) {
+            printf("ford: fiq failed\n");
+            return u2_none;
+          }
+          else {
+            u2_noun hop = u2_rl_molt
+                            (wir_r, fiq, u2_cv_sam, u2_rx(wir_r, gen), 0);
+
+            u2_rl_lose(wir_r, fiq);
+            if ( u2_none == hop ) {
+              printf("ford: hop failed\n");
+              return u2_none;
+            }
+            else {
+              u2_noun mil = u2_sh_look(wir_r, hop, "mill");
+
+              if ( u2_none == mil ) {
+                printf("ford: mil failed\n");
+                u2_rl_lose(wir_r, hop);
+                return u2_none;
+              }
+              else {
+                return u2_nk_soft(wir_r, hop, mil);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 /* ford_test3(): accurate use of a true kernel.
 */
 void
@@ -274,22 +338,15 @@ ford_test3(struct ford_state* fod_f,
       return;
     }
     else {
-      u2_noun van = u2_bn_hook(wir_r, fod_f->pit, "ut");
-      u2_noun mel = u2_bn_hook(wir_r, van, "mill");
-      u2_noun lof;
-   
-      if ( (u2_none == mel) || (u2_none == van) ) {
-        printf("test3: no mill or ut\n");
-        return;
-      }
-      lof = u2_nk_mung(wir_r, mel, gen);
+      u2_noun lof = _ford_mo_mill(wir_r, fod_f->pit, c3__blur, gen); 
+
       if ( u2_none == lof ) {
-        printf("test3: no lof\n");
+        printf("test: failed\n");
       }
       else {
         printf("::::  ::::  ::::  ::::\n");
         u2_bx_spot(wir_r, u2_nul); 
-#if 0
+#if 1
         u2_err(wir_r, "type", u2_h(lof));
         u2_err(wir_r, "tool", u2_t(lof));
 #else
