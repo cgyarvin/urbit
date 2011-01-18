@@ -1606,7 +1606,7 @@
   =+  :*  fan=*(pool &[*type *gene])          ::  20 in van
           ver=*(pool &[*type *type *gene])    ::  42 in van
           rib=*(pool &[*type *type])          ::  86 in van
-          vet=?                               ::  87 in van
+          vet=`?`&                            ::  87 in van
       --
   =+  sut=`*type`%blur                        ::  4 in van
   |*
@@ -1843,7 +1843,7 @@
     ::::
     ::
         gain
-      ^>  bean.[%mo-gain |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
+      :: ^>  bean.[%mo-gain |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
       ^-  *type
       ?-    gen
           [%zpcb *]   gain(gen q.gen)
@@ -1862,7 +1862,7 @@
     ::::
     ::
         make
-      ^>  bean.[%mo-make |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
+      :: ^>  bean.[%mo-make |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
       ^-  *tool
       ?-    gen
           [%bnld *]                                                     ::  =>
@@ -1946,7 +1946,6 @@
         =+  fup=(edit p.lar r.lar q.gen)
         ?~  q.lar
           q.fup
-        =+  (ripe(sut p.fup) &)
         [9 p.u.q.lar q.fup]
       ::
           [%zpbn *]                                                     ::  !=
@@ -1964,7 +1963,8 @@
     ::::
     ::
         play
-      ^>  bean.[%mo-play |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
+      :: ^>  bean.[%mo-play |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
+      =>  .(vet |)
       ^-  *type
       ?-    gen
           [%bnld *]                                                     ::  =>
@@ -2020,7 +2020,8 @@
         =+  fup=(edit p.lar r.lar q.gen)
         ?~  q.lar
           p.fup
-        [%hold (ripe(sut p.fup) |) q.u.q.lar] 
+        ?<  vet
+        [%hold ripe(sut p.fup) q.u.q.lar] 
       ::
           [%zpbn *]                                                     ::  !=
         %blur
@@ -2037,7 +2038,7 @@
     ::::
     ::
         mill
-      ^>  bean.[%mo-mill |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
+    :: ^>  bean.[%mo-mill |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
       ^-  [p=*type q=*tool]
       ?-    gen
           [%bnld *]                                                     ::  =>
@@ -2119,7 +2120,7 @@
         =+  fup=(edit p.lar r.lar q.gen)
         ?~  q.lar
           fup
-        :-  [%hold (ripe(sut p.fup) &) q.u.q.lar] 
+        :-  [%hold ripe(sut p.fup) q.u.q.lar] 
         [9 p.u.q.lar q.fup]
       ::
           [%zpbn *]                                                     ::  !=
@@ -2395,19 +2396,16 @@
   ::::
   ::
       ripe
-    ^<  mine.[!=(->) %bake ~]
-    =+  hec=?
-    |=
     ^>  bean.%ripe
     ?>  ?=([%core *] sut)
     ?-    q.sut
         %blue       sut
         [%gray *]   
-      ?.  ?|  !hec
+      ?.  ?|  !vet
               (nest(sut p.q.sut) p.sut)
           -- 
-        ^>  bean.[%pq-sut |=((~(fly to dump(sut p.q.sut)) 75))]
-        ^>  bean.[%p-sut |=((~(fly to dump(sut p.sut)) 75))]
+        ^>  bean.[%a-sut |=((~(fly to dump(sut p.q.sut)) 75))]
+        ^>  bean.[%b-sut |=((~(fly to dump(sut p.sut)) 75))]
         ^>(bean.'mitbon-gray' !!)
       [%core p=p.q.sut q=%blue r=r.sut]
     ::
@@ -2415,7 +2413,7 @@
     ::
         [%teal *]
       =+  dox=[%core p.q.sut q.sut r.sut]
-      ?:  ?|  !hec 
+      ?.  ?|  !vet
               .=(sut dox)
               (~(has in rib) [sut dox])
           ::
@@ -2444,6 +2442,7 @@
     ?~  rup
       [1 ~ sut]
     =+  vag=$(rup t.rup)
+    =>  .(r.vag ?~(q.vag r.vag ?:(?=([[~ *] *] t.rup) r.vag ripe(sut r.vag))))
     ?-    i.rup
         @
       =+  hup=(find(sut r.vag) i.rup)
