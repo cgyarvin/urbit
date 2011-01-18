@@ -316,6 +316,26 @@ _ford_mo_mill(u2_wire wir_r,
   }
 }
 
+/* _ford_dump_type(): print type with internal tools.
+*/
+void
+_ford_dump_type(u2_wire wir_r,
+                u2_noun     pit,                                  //  retain
+                const c3_c* cap_c,
+                u2_noun     typ)
+{
+  u2_noun fut = u2_sh_look(wir_r, pit, "ut");
+
+  if ( u2_none == fut ) {
+    printf("ford: fut failed\n");
+  } else {
+    u2_noun van = u2_nk_nock(wir_r, u2_rx(wir_r, pit), fut);
+
+    j2_mcy(watt_271, ut, dupt)(wir_r, van, cap_c, typ);
+    u2_rl_lose(wir_r, van);
+  }
+}
+
 /* ford_test3(): accurate use of a true kernel.
 */
 void
@@ -346,29 +366,28 @@ ford_test3(struct ford_state* fod_f,
       else {
         printf("::::  ::::  ::::  ::::\n");
         u2_bx_spot(wir_r, u2_nul); 
-#if 1
+#if 0
         u2_err(wir_r, "type", u2_h(lof));
         u2_err(wir_r, "tool", u2_t(lof));
-#else
+#endif
         if ( arg_c ) {
+          u2_noun typ = u2_h(lof);
+          u2_noun tul = u2_t(lof);
+          u2_noun pug = u2_bn_nock(wir_r, _0, tul);
           u2_noun src = u2_rl_string(wir_r, arg_c);
-          u2_noun gen = j2_mbc(watt_271, ream)(wir_r, src);
-          u2_noun vad = u2_bn_hook(wir_r, fod_f->pit, "vade");
-          u2_noun van = u2_bn_hook(wir_r, fod_f->pit, "ut");
-          u2_noun hup = u2_nk_mung(wir_r, vad, u2_rc(wir_r, u2_h(lof), gen));
-          u2_noun pug = u2_nk_nock(wir_r, _0, u2_t(lof));
+          u2_noun ger = j2_mbc(watt_271, ream)(wir_r, src);
+          u2_noun hup = _ford_mo_mill(wir_r, fod_f->pit, typ, ger);
 
           if ( (u2_none != hup) && (u2_none != pug) ) {
             u2_weak muf = u2_nk_nock(wir_r, pug, u2_t(hup));
 
-            j2_mcy(watt_271, ut, dupt)(wir_r, van, 0, u2_h(hup));
+            _ford_dump_type(wir_r, fod_f->pit, 0, u2_h(hup));
             if ( muf != u2_none ) {
               u2_err(wir_r, 0, muf);
             }
             u2_bx_spot(wir_r, u2_nul);
           }
         }
-#endif
       }
     }
   }

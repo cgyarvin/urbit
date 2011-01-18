@@ -968,6 +968,16 @@
     $(nut (div nut zel), biq [(hoz (mod nut zel)) biq])
   ::::
   ::
+      tem
+    =>  ^:(@ nut)
+    ^-  [%duct p=*tape]
+    :-  %duct
+    |-  ^-  *tape
+    ?:  .=(0 nut)
+      ~
+    [(end 3 1 nut) $(nut (rsh 3 1 nut))]
+  ::::
+  ::
       tis
     =>  ^:(*tape nut)
     [%duct p=nut]
@@ -984,20 +994,10 @@
             =+  gor=(rsh 3 1 nut)
             ?&(?|(.=('-' vis) ?&((gte vis 'a') (lte vis 'z'))) $(nut gor))
         --
-      =<([- ['%' +]] vam)
+      =<([- ['%' +]] tem)
     ?:  (lte (met 3 nut) 2)
       dem
     ham
-  ::::
-  ::
-      vam
-    =>  ^:(@ nut)
-    ^-  [%duct p=*tape]
-    :-  %duct
-    |-  ^-  *tape
-    ?:  .=(0 nut)
-      ~
-    [(end 3 1 nut) $(nut (rsh 3 1 nut))]
   ::
   ::::
   ==
@@ -1693,7 +1693,7 @@
       --
     ::
         [%cube *]   ?:(.=(0 p.sut) '~' ~(gut go p.sut))
-        [%face *]   [%meld ~(vam go p.sut) '=' $(sut q.sut) ~]
+        [%face *]   [%meld ~(tem go p.sut) '=' $(sut q.sut) ~]
     ::
         [%fork *]
       ?:  .=([%fork [%cube 0] [%cube 1]] sut)
@@ -1843,6 +1843,7 @@
     ::::
     ::
         gain
+      ^>  bean.[%mo-gain |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
       ^-  *type
       ?-    gen
           [%zpcb *]   gain(gen q.gen)
@@ -1861,6 +1862,7 @@
     ::::
     ::
         make
+      ^>  bean.[%mo-make |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
       ^-  *tool
       ?-    gen
           [%bnld *]                                                     ::  =>
@@ -1947,15 +1949,22 @@
         =+  (ripe(sut p.fup) &)
         [9 p.u.q.lar q.fup]
       ::
+          [%zpbn *]                                                     ::  !=
+        [1 make(gen p.gen)]
+      ::
           [%zpcb *]                                                     ::  !_
         make(gen q.gen)
       ::
           [%zpzp ~]                                                     ::  !!
         [0 0]
+      ::
+          *           
+        =+(doz=(open gen) ?:(.=(doz gen) ^>(bean.%open !!) make(gen doz)))
       --
     ::::
     ::
         play
+      ^>  bean.[%mo-play |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
       ^-  *type
       ?-    gen
           [%bnld *]                                                     ::  =>
@@ -2013,6 +2022,9 @@
           p.fup
         [%hold (ripe(sut p.fup) |) q.u.q.lar] 
       ::
+          [%zpbn *]                                                     ::  !=
+        %blur
+      ::
           [%zpcb *]                                                     ::  !_
         play(gen q.gen)
       ::
@@ -2025,6 +2037,7 @@
     ::::
     ::
         mill
+      ^>  bean.[%mo-mill |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
       ^-  [p=*type q=*tool]
       ?-    gen
           [%bnld *]                                                     ::  =>
@@ -2088,6 +2101,13 @@
           --
         q.hum
       ::
+          [%ktnp *]
+        =+  hif=play(gen p.gen)
+        =+  dan=mill(gen q.gen)
+        ?.  (nest(sut hif) p.dan)
+          ^>(bean.'ketnep-type' !!)
+        [hif q.dan]
+      ::
           [%ktpd *]                                                     ::  ^+
         [play make]
       ::
@@ -2101,6 +2121,9 @@
           fup
         :-  [%hold (ripe(sut p.fup) &) q.u.q.lar] 
         [9 p.u.q.lar q.fup]
+      ::
+          [%zpbn *]                                                     ::  !=
+        [play make]
       ::
           [%zpcb *]                                                     ::  !_
         mill(gen q.gen)
@@ -2380,9 +2403,11 @@
     ?-    q.sut
         %blue       sut
         [%gray *]   
-      ?:  ?|  !hec
+      ?.  ?|  !hec
               (nest(sut p.q.sut) p.sut)
           -- 
+        ^>  bean.[%pq-sut |=((~(fly to dump(sut p.q.sut)) 75))]
+        ^>  bean.[%p-sut |=((~(fly to dump(sut p.sut)) 75))]
         ^>(bean.'mitbon-gray' !!)
       [%core p=p.q.sut q=%blue r=r.sut]
     ::
