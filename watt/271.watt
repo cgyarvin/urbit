@@ -1115,7 +1115,7 @@
     [%brdl p=*gene q=*gene]                                     ::  |<  bardul
     [%brmt p=*(list &[p=*term q=*gene])]                        ::  |%  barmit
     [%brnp p=*gene]                                             ::  |-  barnep
-    [%brrt p=*(list &[p=*term q=*gene])]                        ::  |*  barrat
+    [%brsr p=*(list &[p=*term q=*gene])]                        ::  |*  barsar
     [%brsg p=*gene q=*(list gene)]                              ::  |~  barsig
     [%brld p=*gene q=*gene]                                     ::  |>  barlud
   ::
@@ -1127,20 +1127,20 @@
     [%csdt p=*gene q=*gene r=*gene]                             ::  ?.  casdot
     [%csnp p=*gene q=*(list &[p=*gene q=*gene])]                ::  ?-  casnep
     [%cspm p=*(list gene)]                                      ::  ?&  caspam
-    [%csrt p=*gene q=*(list gene)]                              ::  ?*  casrat
+    [%cssr p=*gene q=*(list gene)]                              ::  ?*  cassar
     [%cssg p=*gene q=*gene r=*gene]                             ::  ?~  cassig
     [%csld p=*gene q=*gene]                                     ::  ?>  caslud
   ::
     [%dgkt p=*gene q=*gene r=*gene s=*gene]                     ::  :^  degket
     [%dgnp p=*gene q=*gene]                                     ::  :-  degnep
     [%dgpd p=*gene q=*gene r=*gene]                             ::  :+  degped
-    [%dgrt p=*(list gene)]                                      ::  :*  degrat
+    [%dgsr p=*(list gene)]                                      ::  :*  degsar
     [%dgsg p=*(list gene)]                                      ::  :~  degsig
   :: 
     [%dtbn p=*gene q=*gene]                                     ::  .=  dotbon
     [%dtkt p=*gene]                                             ::  .^  dotket
     [%dtcs p=*gene]                                             ::  .?  dotcas
-    [%dtrt p=*gene q=*gene]                                     ::  .*  dotrat
+    [%dtsr p=*gene q=*gene]                                     ::  .*  dotsar
     [%dtsg p=*]                                                 ::  .~  dotsig
   ::
     [%ktbn p=*term q=*gene]                                     ::  ^=  ketbon
@@ -1150,7 +1150,7 @@
     [%ktnp p=*gene q=*gene]                                     ::  ^-  ketnep
     [%ktpd p=*gene q=*gene]                                     ::  ^+  ketped
     [%ktld p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^>  ketlud
-    [%ktrt p=*gene]                                             ::  ^*  ketrat
+    [%ktsr p=*gene]                                             ::  ^*  ketsar
     [%ktsg p=*gene]                                             ::  ^~  ketsig
   ::
     [%mtbn p=*rope q=*(list &[p=*gene q=*gene])]                ::  %=  mitbon
@@ -1160,7 +1160,7 @@
     [%mtkt p=*gene q=*gene r=*gene s=*gene]                     ::  %^  mitket
     [%mtnp p=*gene q=*(list gene)]                              ::  %-  mitnep  
     [%mtpd p=*gene q=*gene r=*gene]                             ::  %+  mitped
-    [%mtrt p=*gene]                                             ::  %*  mitrat
+    [%mtsr p=*gene]                                             ::  %*  mitsar
     [%mtsg p=*rope q=*gene r=*gene]                             ::  %~  mitsig
   ::
     [%tmbn p=*<%atom %blur %cell %flag %null>]                  ::  ;=  tambon
@@ -1278,7 +1278,7 @@
     ?-    gen
         @           [%mtbn [gen ~] ~]
         [~ *]       [%mtbn [gen ~] ~]
-        [%brbn *]   [%brrt [[%% p.gen] ~]]                              ::  |=
+        [%brbn *]   [%brsr [[%% p.gen] ~]]                              ::  |=
         [%brdg *]   [%brmt [[%% p.gen] ~]]                              ::  |:
         [%brnp *]   [%bnld [%brbn p.gen] %%]                            ::  |-
         [%brsg *]                                                       ::  |~
@@ -1304,7 +1304,7 @@
         [%brcs *]                                                       ::  |?
       ?~  p.gen
         [%zpzp ~]
-      [%bnpd [%ktrt i.p.gen] [%brbn [%csrt [~ 4] p.gen]]]
+      [%bnpd [%ktsr i.p.gen] [%brbn [%cssr [~ 4] p.gen]]]
     ::
         [%brdl *]   [%bnpd p.gen [%brdg q.gen]]
         [%brld *]   [%bnpd p.gen [%brbn q.gen]]
@@ -1313,7 +1313,7 @@
         [%bnpd *]   [%bnld [%dgnp p.gen [~ 1]] q.gen]                   ::  =+
         [%dgkt *]   [%dgnp p.gen [%dgnp q.gen [%dgnp r.gen s.gen]]]     ::  :^
         [%dgpd *]   [%dgnp p.gen [%dgnp q.gen r.gen]]                   ::  :+
-        [%dgrt *]                                                       ::  :*
+        [%dgsr *]                                                       ::  :*
       |-
       ?-    p.gen 
           ~       [%zpzp ~]
@@ -1338,7 +1338,7 @@
       [[[%bnld [~ 3] p.gen] [~ 2]] ~]
     ::
         [%ktdl *]   [%bndl [%ktld p.gen [~ 1]] q.gen]                   ::  ^<
-        [%ktrt *]   [%ktnp [%tmbn %blur] p.gen]                         ::  ^*
+        [%ktsr *]   [%ktnp [%tmbn %blur] p.gen]                         ::  ^*
         [%ktsg *]   p.gen                                               ::  ^~
         [%csbr *]                                                       ::  ?|
       |- 
@@ -1363,7 +1363,7 @@
       ?~(p.gen [%dtsg 0] [%csdg i.p.gen $(p.gen t.p.gen) [%dtsg 1]])
     ::
         [%csld *]   [%csdg p.gen q.gen [%zpzp ~]]                       ::  ?>
-        [%csrt *]                                                       ::  ?*
+        [%cssr *]                                                       ::  ?*
       |-
       ?~  q.gen
         [%zpzp ~]
@@ -1378,7 +1378,7 @@
         [%tmbn *]                                                       ::  ;=
       ?-  p.gen
         %atom   [%ktnp [%dtkt %dtsg 0] [%dtsg 0]]
-        %blur   [%ktnp [%dtrt [%dtsg 0] [%dtsg 0]] [%dtsg 0]]
+        %blur   [%ktnp [%dtsr [%dtsg 0] [%dtsg 0]] [%dtsg 0]]
         %cell   [%dgnp [%tmbn %blur] [%tmbn %blur]]
         %flag   [%ktnp [%dtcs %dtsg 0] [%dtsg 0]]
         %null   [%dtsg 0]
@@ -1397,10 +1397,10 @@
         [%mtdt *]   [%mtnp q.gen [p.gen ~]]                             ::  %.
         [%mtkt *]   [%mtnp p.gen q.gen r.gen s.gen ~]                   ::  %^
         [%mtnp *]                                                       ::  %-  
-      ?~(q.gen [%bnld p.gen %%] [%mtdg p.gen [%dgrt q.gen]])
+      ?~(q.gen [%bnld p.gen %%] [%mtdg p.gen [%dgsr q.gen]])
     ::                                                                  ::  %+
         [%mtpd *]   [%mtnp p.gen q.gen r.gen ~]
-        [%mtrt *]   [%ktsg [%bnld p.gen [%mtbn [%% ~] ~]]]              ::  %*
+        [%mtsr *]   [%ktsg [%bnld p.gen [%mtbn [%% ~] ~]]]              ::  %*
         [%mtsg *]   [%mtbr p.gen q.gen [[[~ 4] r.gen] ~]]               ::  %~
         *   
       gen
@@ -1423,23 +1423,23 @@
           [%ktdl *]   [%ktdl p.gen pax(gen q.gen)]
           [%ktmt *]
         :+  %bnpd
-          [%ktsg [%ktrt q.gen]]
+          [%ktsg [%ktsr q.gen]]
         :-  %brbn
         :+  %bnld
           [%mtbn ~ [[[~ 4] [%mtnp pax(gen q.gen) [~ 4] ~]] ~]]
         (fix(gen p.gen) 4)
       ::
           [%ktnp *]   
-        [%bnpd [%ktsg [%ktrt q.gen]] [%brbn (fix(gen p.gen) 4)]]
+        [%bnpd [%ktsg [%ktsr q.gen]] [%brbn (fix(gen p.gen) 4)]]
       ::
           [%ktpd *]   pax(gen q.gen)
           [%ktld *]   [%ktld p.gen pax(gen q.gen)]
-          [%mtrt *]   p.gen
+          [%mtsr *]   p.gen
           *           
         =+  bog=(open gen)
         ?.  .=(bog gen)
           pax(gen bog)
-        [%bnpd [%ktsg [%ktrt gen]] [%brbn (fix 4)]]
+        [%bnpd [%ktsg [%ktsr gen]] [%brbn (fix 4)]]
       --
     ::::
     ::
@@ -1464,7 +1464,7 @@
         $(gen p.gen)
       ::
           [%ktld *]   [%ktld p.gen $(gen q.gen)]
-          [%mtrt *]   [%mtnp p.gen [~ axe] ~]
+          [%mtsr *]   [%mtnp p.gen [~ axe] ~]
       ::
           *
         =+  bog=(open gen)
@@ -1493,7 +1493,7 @@
         [%ktld *]   [%ktld p.gen $(gen q.gen)]
         [%tmbn *]   gen
         [%tmpd *]   $(gen p.gen)
-        [%mtrt *]   
+        [%mtsr *]   
       ?.  ?=([%brcs *] p.gen)
         [%tmbn %blur]
       gen(p.p (turn p.p.gen =+(*gene |=($$(gen -<)))))
@@ -1875,7 +1875,7 @@
         =+  toc=[%core sut %pink sac]
         [[0 1] [1 (bake(sut toc) sac)]]
       ::
-          [%brrt *]                                                     ::  |*
+          [%brsr *]                                                     ::  |*
         =+  sac=(~(gas by ~) p.gen) 
         =+  toc=[%core sut %blue sac]
         [[0 1] [1 (bake(sut toc) sac)]]
@@ -1909,7 +1909,7 @@
           ^>(bean.'dotket-type' !!)
         [4 q.sam]
       ::
-          [%dtrt *]                                                     ::  .*
+          [%dtsr *]                                                     ::  .*
         [2 make(gen p.gen) make(gen q.gen)]
       ::
           [%dtsg *]                                                     ::  .~ 
@@ -1973,7 +1973,7 @@
           [%brmt *]                                                     ::  |%
         [%core sut %pink (~(gas by ~) p.gen)]
       ::
-          [%brrt *]                                                     ::  |*
+          [%brsr *]                                                     ::  |*
         [%core sut %blue (~(gas by ~) p.gen)]
       ::
           [%csbn *]                                                     ::  ?=
@@ -1994,7 +1994,7 @@
           [%dtkt *]                                                     ::  .^
         %atom
       ::
-          [%dtrt *]                                                     ::  .*
+          [%dtsr *]                                                     ::  .*
         %blur
       ::
           [%dtsg *]                                                     ::  .~ 
@@ -2051,7 +2051,7 @@
         =+  toc=[%core sut %pink sac]
         [toc [[0 1] [1 (bake(sut toc) sac)]]]
       ::
-          [%brrt *]                                                     ::  |*
+          [%brsr *]                                                     ::  |*
         =+  sac=(~(gas by ~) p.gen) 
         =+  toc=[%core sut %blue sac]
         [toc [[0 1] [1 (bake(sut toc) sac)]]]
@@ -2082,7 +2082,7 @@
           [%dtkt *]                                                     ::  .^
         [play make]
       ::
-          [%dtrt *]                                                     ::  .*
+          [%dtsr *]                                                     ::  .*
         [play make]
       ::
           [%dtsg *]                                                     ::  .~ 

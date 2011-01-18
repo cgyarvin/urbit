@@ -90,7 +90,7 @@
             return pro;
           }
         }
-        case c3__brrt: {
+        case c3__brsr: {
           p_gen = u2_t(gen);
           {
             u2_noun sac = j2_mcc(Pit, by, gas)(wir_r, u2_nul, p_gen);
@@ -167,7 +167,7 @@
             }
           }
         }
-        case c3__dtrt: {
+        case c3__dtsr: {
           if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
             return u2_bl_bail(wir_r);
           }

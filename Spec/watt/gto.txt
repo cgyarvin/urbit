@@ -23,8 +23,8 @@ Chars
   pam   &       
   ped   +
   pel   )
-  rat   *
   sac   \
+  sar   *
   sed   {
   sig   ~
   sol   /
