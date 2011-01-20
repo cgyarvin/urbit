@@ -779,7 +779,8 @@
     ?~  a
       [[b c] ~ ~]
     ?:  .=(b p.n.a)
-      ?>  .=(c q.n.a)
+      ?.  .=(c q.n.a)
+        ^>(bean.%put-by !!)
       a
     ?:  (gor b p.n.a)
       =+  d=$(a l.a)
@@ -1795,7 +1796,10 @@
       ?:  .=(hax yor)
         hax
       ?.  ?&(.=(p.u.hax p.u.yor) .=(~ q.u.hax) .=(~ q.u.yor))
-        ^>(bean.%fork-c !!)
+        ^>  bean.%fork-c
+        ^>  bean.[%port |=((~(fly to ~(tem go `@`cog)) 75))]
+        ^>  bean.[%type |=((~(fly to dump) 75))]
+        !!
       [~ p.u.hax ~ [%fork r.u.hax r.u.yor]]
     ::
         [%hold *]
@@ -1954,7 +1958,7 @@
     ::::
     ::
         mill
-    :: ^>  bean.[%mo-mill |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
+      :: ^>  loaf.[%mo-mill (~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75)]
       ^-  [p=*type q=*tool]
       ?-    gen
           [%bnld *]                                                     ::  =>
@@ -1975,7 +1979,7 @@
         [toc [[0 1] [1 (bake(sut toc) sac)]]]
       ::
           [%csbn *]                                                     ::  ?=
-        :-  play
+        :-  flag
         =+  vol=make(gen q.gen)
         ?>  ?=([0 *] vol)
         (fish(sut play(gen p.gen)) p.vol)

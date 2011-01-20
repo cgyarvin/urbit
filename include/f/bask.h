@@ -31,13 +31,17 @@
         */
         u2_ray par_r;
 
-        /* mem: chad: hash from subject/formula to product
+        /* mem: chad: memoize hash from subject/formula to product
         */
         u2_loom_chad mem_c;
 
         /* sol: chad: hash of singleton values.
         */
         u2_loom_chad sol_c;
+
+        /* hag: chad: hash from battery to jet chip.
+        */
+        u2_loom_chad hag_c;
 
         /* vig: custom chads for plow.
         */
@@ -47,6 +51,7 @@
 #       define u2_bask_par_r(bas_r)  *u2_at(bas_r, u2_loom_bask, par_r)
 #       define u2_bask_mem_r(bas_r)  u2_aftr(bas_r, u2_loom_bask, mem_c)
 #       define u2_bask_sol_r(bas_r)  u2_aftr(bas_r, u2_loom_bask, sol_c)
+#       define u2_bask_hag_r(bas_r)  u2_aftr(bas_r, u2_loom_bask, hag_c)
 
 #       define u2_bask_vig_r(bas_r, i_w) \
           ( u2_aftr(bas_r, u2_loom_bask, vig_c) + \

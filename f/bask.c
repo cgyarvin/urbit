@@ -20,6 +20,7 @@ u2_ba_init(u2_ray wir_r,
     u2_bask_par_r(bas_r) = par_r;
     u2_ch_init(u2_bask_mem_r(bas_r));
     u2_ch_init(u2_bask_sol_r(bas_r));
+    u2_ch_init(u2_bask_hag_r(bas_r));
 
     for ( i_w = 0; i_w < u2_bask_plow_end; i_w++ ) {
       u2_ch_init(u2_bask_vig_r(bas_r, i_w));
@@ -142,11 +143,11 @@ u2_ba_save_plow(u2_ray       wir_r,
 
 /* u2_ba_sole():
 **
-**   Save unique noun.  Consumes `som`, transmits result.
+**   Save unique noun.
 */
-u2_noun
+u2_noun                                                           //  transfer
 u2_ba_sole(u2_ray  wir_r,
-           u2_noun som)
+           u2_noun som)                                           //  transfer
 {
   u2_ray bas_r;
 

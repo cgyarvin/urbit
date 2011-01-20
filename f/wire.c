@@ -21,7 +21,6 @@ u2_wr_init(c3_m   hip_m,
   wir_r = u2_rl_init(hip_m, hat_r, mat_r);
   u2_rail_hat_r(wir_r) += (c3_wiseof(u2_loom_wire) - c3_wiseof(u2_loom_rail));
 
-  u2_wire_sad_r(wir_r) = 0;
   u2_wire_bas_r(wir_r) = 0;
   u2_wire_wat_r(wir_r) = 0;
   u2_wire_plo_r(wir_r) = 0;
@@ -41,16 +40,9 @@ u2_wr_init(c3_m   hip_m,
 #endif
 
 #if 1
-  /* Jet shed = 1/32 of address space.
+  /* Host control.
   */
   {
-    c3_w   tip_w = (c3_wiseof(u2_loom_shed) - c3_wiseof(u2_loom_rail));
-    u2_ray sad_r;
-
-    sad_r = u2_rl_leap_part(wir_r, c3__cold, 1, 32, tip_w);
-    u2_wire_sad_r(wir_r) = sad_r;
-    u2_sh_init(wir_r);
-
     u2_ho_push();
   }
 #endif

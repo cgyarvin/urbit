@@ -39,10 +39,6 @@
       typedef struct {
         u2_loom_rail o;
 
-        /* par_r: parent shed.
-        */
-        u2_ray par_r;
-
         /* cad_c: hash from battery to chip.
         */
         u2_loom_chad cad_c;
@@ -52,7 +48,6 @@
         u2_loom_chad dip_c;
       } u2_loom_shed;
 
-#       define u2_shed_par_r(sad_r)  *u2_at(sad_r, u2_loom_shed, par_r)
 #       define u2_shed_cad_r(sad_r)  u2_aftr(sad_r, u2_loom_shed, cad_c)
 #       define u2_shed_dip_r(sad_r)  u2_aftr(sad_r, u2_loom_shed, dip_c)
 

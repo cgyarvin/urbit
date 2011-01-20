@@ -19,10 +19,6 @@
           */
           u2_ray bas_r;
 
-          /* Jet shed or hangar; u2_loom_shed; registration and acceleration.
-          */
-          u2_ray sad_r;
-
           /* Ray to machine exception buffer (C jmp_buf); used in jets.
           */
           u2_ray jub_r;
@@ -38,7 +34,6 @@
 
 #         define  u2_wire_wat_r(wir_r)  *u2_at(wir_r, u2_loom_wire, wat_r)
 #         define  u2_wire_bas_r(wir_r)  *u2_at(wir_r, u2_loom_wire, bas_r)
-#         define  u2_wire_sad_r(wir_r)  *u2_at(wir_r, u2_loom_wire, sad_r)
 #         define  u2_wire_jub_r(wir_r)  *u2_at(wir_r, u2_loom_wire, jub_r)
 #         define  u2_wire_plo_r(wir_r)  *u2_at(wir_r, u2_loom_wire, plo_r)
 #         define  u2_wire_bex_r(wir_r)  *u2_at(wir_r, u2_loom_wire, bex_r)

@@ -4,21 +4,6 @@
 */
 #include "all.h"
 
-/* u2_sh_init(): 
-**
-**   Initialize jet shed.
-*/
-void
-u2_sh_init(u2_ray wir_r)
-{
-  u2_ray sad_r;
-
-  if ( 0 != (sad_r = u2_wire_sad_r(wir_r)) ) {
-    u2_ch_init(u2_shed_cad_r(sad_r));
-    u2_ch_init(u2_shed_dip_r(sad_r));
-  }
-}
-
 /* _sh_good_sil()::
 */
 static u2_flag
@@ -79,12 +64,12 @@ u2_sh_mine(u2_ray  wir_r,
            u2_clue clu,                                           //  retain
            u2_noun cor)                                           //  transfer
 {
-  u2_ray sad_r;
+  u2_ray bas_r;
   u2_noun pay, bat;
   u2_noun sil, bud, nut;
   u2_chip xip;
 
-  if ( 0 == (sad_r = u2_wire_sad_r(wir_r)) ) {
+  if ( 0 == (bas_r = u2_wire_bas_r(wir_r)) ) {
     return cor;
   }
   else if ( (u2_none == u2_as_cell(cor, &pay, &bat)) || 
@@ -92,7 +77,7 @@ u2_sh_mine(u2_ray  wir_r,
   {
     return cor;
   }
-  else if ( u2_none != (xip = u2_ch_find(u2_shed_cad_r(sad_r), bat)) ) {
+  else if ( u2_none != (xip = u2_ch_find(u2_bask_hag_r(bas_r), bat)) ) {
     u2_noun cyr;
 
     if ( u2_none == (cyr = u2_rc(wir_r, u2_rx(wir_r, pay), u2_h(u2_t(xip)))) ) {
@@ -119,7 +104,7 @@ u2_sh_mine(u2_ray  wir_r,
       /* disc: dac
       */
       {
-        if ( u2_none == (dac = u2_rl_take(sad_r, u2_t(clu))) ) {
+        if ( u2_none == (dac = u2_rl_take(bas_r, u2_t(clu))) ) {
           break;
         }
       }
@@ -127,12 +112,12 @@ u2_sh_mine(u2_ray  wir_r,
       /* battery: bot
       */
       {
-        if ( u2_no == u2_rl_junior(sad_r, bat) ) {
+        if ( u2_no == u2_rl_junior(bas_r, bat) ) {
           /* We need the jet battery to be in the shed, so that we 
           ** have a fast algorithm for distinguishing jet batteries
           ** by ray address.
           */
-          bot = u2_rc(sad_r, u2_h(bat), u2_t(bat));
+          bot = u2_rc(bas_r, u2_h(bat), u2_t(bat));
 #if 0
         printf("battery: in basket: %d.%x\n",
                 u2_ray_a(u2_dog_a(bot)),
@@ -140,7 +125,7 @@ u2_sh_mine(u2_ray  wir_r,
 #endif
         } 
         else {
-          bot = u2_rl_take(sad_r, bat);
+          bot = u2_rl_take(bas_r, bat);
 #if 0
           printf("battery: in shed! %d.%x\n",
                   u2_ray_a(u2_dog_a(bot)),
@@ -169,18 +154,18 @@ u2_sh_mine(u2_ray  wir_r,
             u2_noun but = u2_t(car);
             u2_noun xup, axe;
 
-            if ( u2_none == (xup = u2_ch_find(u2_shed_cad_r(sad_r), but)) ) {
+            if ( u2_none == (xup = u2_ch_find(u2_bask_hag_r(bas_r), but)) ) {
               break;
             }
-            else u2_rl_gain(sad_r, xup);
+            else u2_rl_gain(bas_r, xup);
 
-            if ( u2_none == (axe = u2_rl_take(sad_r, p_bud)) ) {
-              u2_rl_lose(sad_r, xup);
+            if ( u2_none == (axe = u2_rl_take(bas_r, p_bud)) ) {
+              u2_rl_lose(bas_r, xup);
             }
 
-            if ( u2_none == (pet = u2_rc(sad_r, p_bud, xup)) ) {
-              u2_rl_lose(sad_r, axe);
-              u2_rl_lose(sad_r, xup);
+            if ( u2_none == (pet = u2_rc(bas_r, p_bud, xup)) ) {
+              u2_rl_lose(bas_r, axe);
+              u2_rl_lose(bas_r, xup);
               break;
             }
           }
@@ -190,13 +175,13 @@ u2_sh_mine(u2_ray  wir_r,
       /* xop: new chip.
       */
       {
-        if ( u2_none == (xop = u2_rt(sad_r, dac, bot, pet)) ) {
+        if ( u2_none == (xop = u2_rt(bas_r, dac, bot, pet)) ) {
           break;
         }
-        if ( u2_none == (u2_ch_save(sad_r, u2_shed_cad_r(sad_r), bot, xop)) ) {
+        if ( u2_none == (u2_ch_save(bas_r, u2_bask_hag_r(bas_r), bot, xop)) ) {
           break;
         }
-        u2_rl_lose(sad_r, xop);
+        u2_rl_lose(bas_r, xop);
       }
 
       /* cyr: new core.
@@ -216,10 +201,10 @@ u2_sh_mine(u2_ray  wir_r,
     }
     u2_ho_warn_here();
 
-    if ( dac != u2_none ) u2_rl_lose(sad_r, dac);
-    if ( bot != u2_none ) u2_rl_lose(sad_r, bot);
-    if ( pet != u2_none ) u2_rl_lose(sad_r, pet);
-    if ( xop != u2_none ) u2_rl_lose(sad_r, xop);
+    if ( dac != u2_none ) u2_rl_lose(bas_r, dac);
+    if ( bot != u2_none ) u2_rl_lose(bas_r, bot);
+    if ( pet != u2_none ) u2_rl_lose(bas_r, pet);
+    if ( xop != u2_none ) u2_rl_lose(bas_r, xop);
 
     return cor;
   }
@@ -265,9 +250,9 @@ u2_weak
 u2_sh_find(u2_ray  wir_r,
            u2_noun cor)
 {
-  u2_ray sad_r;
+  u2_ray bas_r;
 
-  if ( 0 == (sad_r = u2_wire_sad_r(wir_r)) ) {
+  if ( 0 == (bas_r = u2_wire_bas_r(wir_r)) ) {
     return u2_none;
   }
   if ( u2_no == u2_dust(cor) ) {
@@ -279,13 +264,13 @@ u2_sh_find(u2_ray  wir_r,
       return u2_none;
     } else {
       u2_ray bat_r = u2_dog_a(bat);
-      u2_ray rut_r = u2_rail_rut_r(sad_r);
-      u2_ray hat_r = u2_rail_hat_r(sad_r);
+      u2_ray rut_r = u2_rail_rut_r(bas_r);
+      u2_ray hat_r = u2_rail_hat_r(bas_r);
 
       if ( (bat_r < rut_r) || (bat_r >= hat_r) ) {
         return u2_none;
       } else {
-        u2_chip xip = u2_ch_find(u2_shed_cad_r(sad_r), bat);
+        u2_chip xip = u2_ch_find(u2_bask_hag_r(bas_r), bat);
 
         if ( u2_none == xip ) {
 #if 0
@@ -344,11 +329,11 @@ u2_sh_look(u2_wire     wir_r,
            u2_noun     cor,
            const c3_c* tam_c)
 {
-  u2_ray  sad_r = u2_wire_sad_r(wir_r); 
+  u2_ray  bas_r = u2_wire_bas_r(wir_r); 
   u2_noun bat   = u2_t(cor);
   u2_noun fol;
 
-  if ( u2_none != (fol = u2_ch_find_mixt(u2_shed_cad_r(sad_r), tam_c, bat)) ) {
+  if ( u2_none != (fol = u2_ch_find_mixt(u2_bask_hag_r(bas_r), tam_c, bat)) ) {
     return fol;
   } else {
     u2_noun xip = u2_sh_find(wir_r, cor);
@@ -380,16 +365,16 @@ u2_sh_look(u2_wire     wir_r,
           }
         }
         else {
-          fol = u2_rl_take(sad_r, fol);
+          fol = u2_rl_take(bas_r, fol);
 
           if ( _1 != axe_w ) {
             /* XX: suboptimal; use comb:lily.
             */
-            fol = u2_rt(sad_r, u2_nock_flac,
-                               u2_rc(sad_r, u2_nock_frag, axe_w),
+            fol = u2_rt(bas_r, u2_nock_flac,
+                               u2_rc(bas_r, u2_nock_frag, axe_w),
                                fol);
           }
-          fol = u2_ch_save_mixt(sad_r, u2_shed_cad_r(sad_r), tam_c, bat, fol);
+          fol = u2_ch_save_mixt(bas_r, u2_bask_hag_r(bas_r), tam_c, bat, fol);
 
           return fol;
         }

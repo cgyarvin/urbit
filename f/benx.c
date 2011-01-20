@@ -25,7 +25,6 @@ u2_bx_boot(u2_ray wir_r)
     u2_benx_be(bex_r, c3_w, wac_w) = 0;
     u2_benx_be(bex_r, c3_w, wax_w) = 0;
 
-    u2_benx_be(bex_r, c3_ws, sew_ws) = 0;
     u2_benx_be(bex_r, c3_ws, bax_ws) = 0;
   
     if ( 0 == u2_ray_a(u2_rail_cap_r(wir_r)) ) {
@@ -40,10 +39,6 @@ u2_bx_boot(u2_ray wir_r)
 
     if ( u2_wire_bas_r(wir_r) ) {
       u2_rail_bav_r(u2_wire_bas_r(wir_r)) = 
-        u2_aftr(bex_r, u2_loom_benx, sew_ws);
-    }
-    if ( u2_wire_sad_r(wir_r) ) {
-      u2_rail_bav_r(u2_wire_sad_r(wir_r)) = 
         u2_aftr(bex_r, u2_loom_benx, bax_ws);
     }
     {
@@ -67,7 +62,6 @@ u2_bx_boot(u2_ray wir_r)
 **  wax: maximum depth of C stack
 **  moc: number of words touched
 **  hix: number of words acquired
-**  sew: number of words in shed allocated/freed
 **  bax: number of words in basket allocated/freed
 **  ums: number of milliseconds consumed
 */
@@ -82,7 +76,6 @@ u2_bx_post(u2_ray   wir_r,
            c3_w*    wax_w,
            c3_w*    moc_w,
            c3_w*    hix_w,
-           c3_ws*   sew_ws,
            c3_ws*   bax_ws,
            c3_w*    ums_w)
 {
@@ -104,7 +97,6 @@ u2_bx_post(u2_ray   wir_r,
 
     *wax_w = u2_benx_at(bex_r, wax_w);
 
-    *sew_ws = u2_benx_at(bex_r, sew_ws);
     *bax_ws = u2_benx_at(bex_r, bax_ws);
 
     *moc_w = (u2_benx_at(bex_r, wst_r) - u2_benx_at(bex_r, wab_r)) + 
@@ -264,21 +256,6 @@ u2_bx_mark(u2_ray wir_r)
   }
 }
 
-/* u2_bx_shed(): note `wad` allocated/freed words in hangar.
-*/
-void
-u2_bx_shed(u2_ray wir_r,
-           c3_ws  wad_ws)
-{
-  u2_ray bex_r;
-
-  if ( 0 == (bex_r = u2_wire_bex_r(wir_r)) ) {
-    return;
-  } else {
-    u2_benx_be(bex_r, c3_d, sew_ws) += wad_ws;
-  }
-}
-
 /* u2_bx_bask(): note `wad` allocated/freed words in basket.
 */
 void
@@ -300,16 +277,16 @@ void
 u2_bx_spot(u2_ray  wir_r,
            u2_noun hod)                                           //  transfer
 {
-  u2_ray bex_r, sad_r;
+  u2_ray bex_r, bas_r;
 
   if ( (0 == (bex_r = u2_wire_bex_r(wir_r))) ||
-       (0 == (sad_r = u2_wire_sad_r(wir_r))) )
+       (0 == (bas_r = u2_wire_bas_r(wir_r))) )
   {
     u2_rl_lose(wir_r, hod);
     return;
   } 
   else {
-    u2_noun sud = u2_rl_take(sad_r, hod);
+    u2_noun sud = u2_rl_take(bas_r, hod);
 
     u2_rl_lose(wir_r, hod);
     if ( u2_none == sud ) {
@@ -324,10 +301,10 @@ u2_bx_spot(u2_ray  wir_r,
 void
 u2_bx_spot_out(u2_ray wir_r)
 {
-  u2_ray bex_r, sad_r;
+  u2_ray bex_r, bas_r;
 
   if ( (0 == (bex_r = u2_wire_bex_r(wir_r))) ||
-       (0 == (sad_r = u2_wire_sad_r(wir_r))) )
+       (0 == (bas_r = u2_wire_bas_r(wir_r))) )
   {
     return;
   } 
@@ -347,23 +324,23 @@ void
 u2_bx_bean_ent(u2_ray  wir_r,
                u2_noun hod)                                       //  transfer
 {
-  u2_ray bex_r, sad_r;
+  u2_ray bex_r, bas_r;
 
   if ( (0 == (bex_r = u2_wire_bex_r(wir_r))) ||
-       (0 == (sad_r = u2_wire_sad_r(wir_r))) )
+       (0 == (bas_r = u2_wire_bas_r(wir_r))) )
   {
     u2_rl_lose(wir_r, hod);
     return;
   } 
   else {
-    u2_noun zof = u2_rx(sad_r, u2_benx_at(bex_r, zof));
-    u2_noun sud = u2_rc(sad_r, u2_rl_take(sad_r, hod), zof);
+    u2_noun zof = u2_rx(bas_r, u2_benx_at(bex_r, zof));
+    u2_noun sud = u2_rc(bas_r, u2_rl_take(bas_r, hod), zof);
 
     u2_rl_lose(wir_r, hod);
     if ( u2_none == sud ) {
       return;
     } else {
-      u2_rl_lose(sad_r, u2_benx_at(bex_r, zof));
+      u2_rl_lose(bas_r, u2_benx_at(bex_r, zof));
       u2_benx_at(bex_r, zof) = sud;
     }
   }
@@ -371,10 +348,10 @@ u2_bx_bean_ent(u2_ray  wir_r,
 void
 u2_bx_bean_out(u2_ray wir_r)
 {
-  u2_ray bex_r, sad_r;
+  u2_ray bex_r, bas_r;
 
   if ( (0 == (bex_r = u2_wire_bex_r(wir_r))) ||
-       (0 == (sad_r = u2_wire_sad_r(wir_r))) )
+       (0 == (bas_r = u2_wire_bas_r(wir_r))) )
   {
     return;
   } 
@@ -383,8 +360,8 @@ u2_bx_bean_out(u2_ray wir_r)
 
     c3_assert(u2_nul != zof);
 
-    u2_benx_at(bex_r, zof) = u2_rx(sad_r, u2_t(zof));
-    u2_rl_lose(sad_r, zof);
+    u2_benx_at(bex_r, zof) = u2_rx(bas_r, u2_t(zof));
+    u2_rl_lose(bas_r, zof);
   }
 }
 
@@ -542,7 +519,7 @@ u2_bx_show(u2_ray wir_r)
   u2_noun zat, zof;
   c3_d sap_d, cop_d, jax_d, use_d;
   c3_w wax_w, moc_w, hix_w, ums_w;
-  c3_ws sew_ws, bax_ws;
+  c3_ws bax_ws;
 
   if ( u2_no == u2_bx_post(wir_r, &zat,
                                   &zof,
@@ -553,7 +530,6 @@ u2_bx_show(u2_ray wir_r)
                                   &wax_w, 
                                   &moc_w, 
                                   &hix_w,
-                                  &sew_ws,
                                   &bax_ws,
                                   &ums_w) )
   {
@@ -562,7 +538,7 @@ u2_bx_show(u2_ray wir_r)
     /* Dump and free trace information, if any.
     */
     {
-      u2_ray sad_r = u2_wire_sad_r(wir_r);
+      u2_ray bas_r = u2_wire_bas_r(wir_r);
 
       if ( u2_nul != zat ) {
         // u2_noun h_zat = u2_h(zat);
@@ -571,13 +547,13 @@ u2_bx_show(u2_ray wir_r)
         printf("place: %d.%d:%d.%d\n", 
             u2_h(u2_h(t_zat)), u2_t(u2_h(t_zat)),
             u2_h(u2_t(t_zat)), u2_t(u2_t(t_zat)));
-        u2_rl_lose(sad_r, zat);
+        u2_rl_lose(bas_r, zat);
       }
 
       if ( u2_nul != zof ) {
         printf("trace:\n");
         u2_bx_bean_print(wir_r, stdout, zof);
-        u2_rl_lose(sad_r, zof);
+        u2_rl_lose(bas_r, zof);
       }
     }
 
@@ -591,11 +567,6 @@ u2_bx_show(u2_ray wir_r)
         printf(", ");
         _bx_print_superdecimal_d(cop_d);
         printf(" dups");
-      }
-      if ( jax_d ) {
-        printf(", ");
-        _bx_print_superdecimal_d(jax_d);
-        printf(" shot");
       }
       if ( use_d ) {
         printf(", ");
@@ -614,16 +585,6 @@ u2_bx_show(u2_ray wir_r)
         printf(" held");
       }
       
-      if ( sew_ws ) {
-        printf(", ");
-        if ( sew_ws < 0 ) {
-          printf("-");
-          _bx_print_superdecimal_w((c3_w) -(sew_ws));
-        } else {
-          _bx_print_superdecimal_w((c3_w) sew_ws);
-        }
-        printf(" sewn");
-      }
       if ( bax_ws ) {
         printf(", ");
         if ( bax_ws < 0 ) {

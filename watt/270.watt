@@ -598,12 +598,192 @@
   (lth c d)
 ::
 ::::
+  ::  Tier 4, associative containers 
+::::
+::
+    pool  |<(a=&* (tree a))
+    book  |<([a=&* b=&*] (tree &[p=*a q=*b]))
+::::
+::
+    in
+  ^<  mine.[!=(->) %in ~]
+  =+  a=*(pool)
+  |%
+  ::::
+  ::
+      all
+    ^<  mine.[!=(->) %all ~]
+    |<  b=|>(* ?)
+    |-
+    ^-  ?
+    ?~  a
+      &
+    ?&((b n.a) $(a l.a) $(a r.a))
+  ::::
+  ::
+      any
+    ^<  mine.[!=(->) %any ~]
+    |<  b=|>(* ?)
+    |-
+    ^-  ?
+    ?~  a
+      |
+    ?|((b n.a) $(a l.a) $(a r.a))
+  ::::
+  ::
+      gas
+    ^<  mine.[!=(->) %gas ~]
+    |<  b=*(list)
+    |-
+    ^-  a
+    ?~  b
+      a
+    $(b t.b, a (put i.b))
+  ::::
+  ::
+      has
+    ^<  mine.[!=(->) %has ~]
+    |<  b=*
+    |-
+    ^-  ?
+    ?~  a
+      |
+    ?:  .=(b n.a)
+      &
+    ?:  (gor b n.a)
+      $(a l.a)
+    $(a r.a)
+  ::::
+  ::
+      put
+    ^<  mine.[!=(->) %put ~]
+    |<  b=*
+    |-
+    ^-  a
+    ?~  a
+      [b ~ ~]
+    ?:  .=(b n.a)
+      a
+    ?:  (gor b n.a)
+      =+  c=$(a l.a)
+      ?>  ?=(^ c)
+      ?:  (vor n.a n.c)
+        [n.a c r.a]
+      [n.c l.c [n.a r.c r.a]]
+    =+  c=$(a r.a)
+    ?>  ?=(^ c)
+    ?:  (vor n.a n.c)
+      [n.a l.a c] 
+    [n.c [n.a l.a l.c] r.c]
+  ::::
+  ::
+      tap
+    ^<  mine.[!=(->) %tap ~]
+    |<  b=*(list)
+    |-
+    ?~  a
+      b
+    $(a r.a, b [n.a $(a l.a)])
+  ::
+  ::::
+  ==
+::::
+::
+    by
+  ^<  mine.[!=(->) %by ~]
+  =+  a=*(book)
+  |%
+  ::::
+  ::
+      all
+    =+  b==+(* |=(?))
+    |:  |-
+    ^-  ?
+    ?~  a
+      &
+    ?&((b q.n.a) $(a l.a) $(a r.a))
+  ::::
+  ::
+      any
+    =+  b==+(* |=(?))
+    |:  |-
+    ^-  ?
+    ?~  a
+      |
+    ?|((b q.n.a) $(a l.a) $(a r.a))
+  ::::
+  ::
+      gas
+    ^<  mine.[!=(->) %gas ~]
+    =+  b=*(list &[p=* q=*])
+    |:  |-
+    ^-  a
+    ?~  b
+      a
+    $(b t.b, a (put p.i.b q.i.b))
+  ::::
+  ::
+      get
+    ^<  mine.[!=(->) %get ~]
+    |<  b=*
+    |-
+    ?~  a
+      ~
+    ?:  .=(b p.n.a)
+      [~ u=q.n.a]
+    ?:  (gor b p.n.a)
+      $(a l.a)
+    $(a r.a)
+  ::::
+  ::
+      has
+    ^<  mine.[!=(->) %has ~]
+    =+  b=*
+    |:
+    !.=(~ (get b))
+  ::::
+  ::
+      put
+    ^<  mine.[!=(->) %put ~]
+    |<  [b=* c=*]
+    |-
+    ^-  a
+    ?~  a
+      [[b c] ~ ~]
+    ?:  .=(b p.n.a)
+      ?>  .=(c q.n.a)
+      a
+    ?:  (gor b p.n.a)
+      =+  d=$(a l.a)
+      ?>  ?=(^ d)
+      ?:  (vor p.n.a p.n.d)
+        [n.a d r.a]
+      [n.d l.d [n.a r.d r.a]]
+    =+  d=$(a r.a)
+    ?>  ?=(^ d)
+    ?:  (vor p.n.a p.n.d)
+      [n.a l.a d] 
+    [n.d [n.a l.a l.d] r.d]
+  ::::
+  ::
+      tap
+    |<  b=*(list &[p=* q=*])
+    |-
+    ?~  a
+      b
+    $(a r.a, b [n.a $(a l.a)])
+  ::
+  ::::
+  ==
+::
+::::
   ::  Tier 5, parsing and printing
 ::::
 ::
     byte  &@
     tape  (list byte)
     rock  &@
+    spot  &[p=[p=@ q=@] q=[p=@ q=@]]
     term  &@
     wall  (list tape)
 ::::
@@ -615,6 +795,84 @@
     [%grip p=[p=*rock q=*rock] q=*(list ball)]
     [%meld p=*(list ball)]
   --
+::::
+::
+    go
+  =+  nut=*
+  |%
+  ::::
+  ::
+      dem
+    ^-  [%duct p=*tape]
+    (num 10 |>(p=@ (add '0' p)))
+  ::::
+  ::
+      ham
+    ^-  [%duct p=*tape]
+    (num 16 |>(p=@ ?:((lth 10 p) (add '0' p) (add 'a' p))))
+  ::::
+  ::
+      loc
+    ^-  [%duct p=*tape]
+    =>  .(nut ^-([p=@ q=[p=[p=@ q=@] q=[p=@ q=@]]] nut))
+    :+  %grip
+      ['<' '>']
+    =+  ^=  rov
+        :~  [%grip ['[' ']'] dem(nut p.p.q.nut) dem(nut q.p.q.nut) ~]
+            [%grip ['[' ']'] dem(nut p.q.q.nut) dem(nut q.q.q.nut) ~]
+        --
+    ?:  .=(%% p.nut)
+      rov
+    [p.nut rov]
+  ::::
+  ::
+      num
+    =>  .(nut ^-(@ nut))
+    |<  [zel=@ hoz=|>(@ @)]
+    ^-  [%duct p=*tape]
+    :-  %duct
+    ?:  .=(0 nut)
+      [(hoz 0) ~]
+    =+  biq=`*tape`~
+    |-  ^-  *tape
+    ?:  .=(0 nut)
+      biq
+    $(nut (div nut zel), biq [(hoz (mod nut zel)) biq])
+  ::::
+  ::
+      tem
+    =>  .(nut ^-(@ nut))
+    ^-  [%duct p=*tape]
+    :-  %duct
+    |-  ^-  *tape
+    ?:  .=(0 nut)
+      ~
+    [(end 3 1 nut) $(nut (rsh 3 1 nut))]
+  ::::
+  ::
+      tis
+    =>  .(nut ^-(*tape nut))
+    [%duct p=nut]
+  ::::
+  ::
+      unt
+    =>  .(nut ^-(@ nut))
+    ^-  [%duct p=*tape]
+    ?:  ?&  (gte (met 3 nut) 2)
+            |-
+            ?:  .=(0 nut)
+              &
+            =+  vis=(end 3 1 nut)
+            =+  gor=(rsh 3 1 nut)
+            ?&(?|(.=('-' vis) ?&((gte vis 'a') (lte vis 'z'))) $(nut gor))
+        --
+      =<([- ['%' +]] tem)
+    ?:  (lte (met 3 nut) 2)
+      dem
+    ham
+  ::
+  ::::
+  ==
 ::::
 ::
     to
@@ -698,20 +956,9 @@
   ::
   ::::
   ==
-::::
-::
-    go
-  =+  nut=*
-  |%
-  ::::
-  ::
-      gun
-    ^-  @
-    =>  .(nut ^-(@ nut))
-    (dec nut)
-  ::
-  ::::
-  ==
 ::
 ::::
+  ::  Tier 6, Watt in Watt
+::::
+::
 ==

@@ -59,10 +59,6 @@
         */
         u2_ray est_r;
 
-        /* Net shed words allocated/freed.
-        */
-        c3_ws sew_ws;
-
         /* Net basket words allocated/freed.
         */
         c3_ws bax_ws;
@@ -98,7 +94,6 @@
     **  wax: maximum depth of C stack
     **  moc: number of words touched
     **  hix: number of words acquired
-    **  sew: number of words in shed allocated/freed
     **  bax: number of words in basket allocated/freed
     **  ums: number of milliseconds consumed
     */
@@ -113,7 +108,6 @@
                  c3_w*    wax_w,
                  c3_w*    moc_w,
                  c3_w*    hix_w,
-                 c3_ws*   sew_ws,
                  c3_ws*   bax_ws,
                  c3_w*    ums_w);
 

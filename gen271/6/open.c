@@ -948,6 +948,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pit, open)[] = {
-    { ".3", c3__hevy, j2_mb(Pit, open), SafeTier6, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mb(Pit, open), SafeTier6_a, u2_none, u2_none },
     { }
   };
