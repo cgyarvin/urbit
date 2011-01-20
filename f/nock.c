@@ -394,6 +394,13 @@ _nock_warm(u2_wire wir_r,
               continue;
             }
 
+            case c3__turd: {
+              u2_err(wir_r, "turd", hod);
+              u2_rl_lose(wir_r, hod);
+              fol = zom; 
+              continue;
+            }
+
             case c3__mine: {
               LoomSink; u2_bx_sink(wir_r);
               pro = _nock_warm(wir_r, bus, zom);

@@ -1638,6 +1638,7 @@
   ::
       dump
     ^-  *ball
+    ^>  bean.%dump
     =+  ^=  gil
         =+  den=[p=`@`1 q=*(book type &@)]
         =+  vax=*(pool type)
@@ -1665,6 +1666,7 @@
             *           den
         --
     =+  gax=*(pool type)
+    ^>  bean.%dump-main
     |-
     ?-    sut
         %atom       '@'
@@ -1741,6 +1743,9 @@
     =+  cog=*term
     |=
     =-  ?~  hoq
+          ^>  bean.%find-fail
+          ^>  bean.[%port |=((~(fly to ~(tem go `@`cog)) 75))]
+          ^>  bean.[%type |=((~(fly to dump) 75))]
           !!
         u.hoq
     ^=  hoq
@@ -1773,17 +1778,24 @@
       ~
     ::
         [%fork *]
+      ^>  bean.%find-fork
       =+  hax=$(sut p.sut)
       =+  yor=$(sut q.sut)
       ?~  hax
         ?~  yor
           ~
-        ?>(.=(%blot (peek(sut p.sut) p.u.yor)) yor)
+        ?.(.=(%blot (peek(sut p.sut) p.u.yor)) ^>(bean.%fork-a !!) yor)
       ?~  yor
-        ?>(.=(%blot (peek(sut q.sut) p.u.hax)) hax)
+        ?.  .=(%blot (peek(sut q.sut) p.u.hax)) 
+          ^>  bean.%fork-b
+          ^>  bean.[%port |=((~(fly to ~(tem go `@`cog)) 75))]
+          ^>  bean.[%type |=((~(fly to dump) 75))]
+          !!
+        hax
       ?:  .=(hax yor)
         hax
-      ?>  ?&(.=(p.u.hax p.u.yor) .=(~ q.u.hax) .=(~ q.u.yor))
+      ?.  ?&(.=(p.u.hax p.u.yor) .=(~ q.u.hax) .=(~ q.u.yor))
+        ^>(bean.%fork-c !!)
       [~ p.u.hax ~ [%fork r.u.hax r.u.yor]]
     ::
         [%hold *]
@@ -1858,107 +1870,6 @@
       ::
           [%cspm *]   |-(?~(p.gen sut $(p.gen t.p.gen, sut gain(gen i.p.gen))))
           *           sut
-      --
-    ::::
-    ::
-        make
-      :: ^>  bean.[%mo-make |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
-      ^-  *tool
-      ?-    gen
-          [%bnld *]                                                     ::  =>
-        =+  fid=mill(gen p.gen)
-        =+  soq=make(sut p.fid, gen q.gen)
-        (comb q.fid soq)
-      ::
-          [%brmt *]                                                     ::  |%
-        =+  sac=(~(gas by ~) p.gen) 
-        =+  toc=[%core sut %pink sac]
-        [[0 1] [1 (bake(sut toc) sac)]]
-      ::
-          [%brsr *]                                                     ::  |*
-        =+  sac=(~(gas by ~) p.gen) 
-        =+  toc=[%core sut %blue sac]
-        [[0 1] [1 (bake(sut toc) sac)]]
-      ::
-          [%csbn *]                                                     ::  ?=
-        =+  vol=make(gen q.gen)
-        ?>  ?=([0 *] vol)
-        (fish(sut play(gen p.gen)) p.vol)
-      ::
-          [%csdg *]                                                     ::  ?:
-        =+  nor=mill(gen p.gen)
-        =+  fex=gain(gen p.gen)
-        =+  hiq=make(sut fex, gen q.gen)
-        =+  ran=make(gen r.gen)
-        ?.  (nest(sut flag) p.nor)
-          ^>(bean.'casdeg-type' !!) 
-        [6 q.nor hiq ran]
-      ::
-          [%dgnp *]                                                     ::  :-
-        (cons make(gen p.gen) make(gen q.gen))
-      ::
-          [%dtbn *]                                                     ::  .=
-        [5 make(gen p.gen) make(gen q.gen)]
-      :: 
-          [%dtcs *]                                                     ::  .?
-        [3 make(gen p.gen)]
-      ::
-          [%dtkt *]                                                     ::  .^
-        =+  sam=mill(gen p.gen)
-        ?.  (nest(sut %atom) p.sam)
-          ^>(bean.'dotket-type' !!)
-        [4 q.sam]
-      ::
-          [%dtsr *]                                                     ::  .*
-        [2 make(gen p.gen) make(gen q.gen)]
-      ::
-          [%dtsg *]                                                     ::  .~ 
-        [1 p.gen]
-      ::
-          [%ktbn *]                                                     ::  ^=
-        make(gen q.gen)
-      ::
-          [%ktld *]                                                     ::  ^>
-        :+  10
-          ?-    p.gen
-              @   p.gen
-              ^   [p.p.gen make(gen q.p.gen)]
-          --
-        make(gen q.gen)
-      ::
-          [%ktnp *]                                                     ::  ^-
-        =+  hif=play(gen p.gen)
-        =+  dan=mill(gen q.gen)
-        ?.  (nest(sut hif) p.dan)
-          ^>(bean.'ketnep-type' !!)
-        q.dan
-      ::
-          [%ktpd *]                                                     ::  ^+
-        ?.  (nest(sut play(gen p.gen)) play(gen q.gen))
-          ^>(bean.'ketped-type' !!)
-        [0 1]
-      ::
-          [%ktsg *]                                                     ::  ^~
-        make(gen p.gen)
-      ::
-          [%mtbn *]                                                     ::  %=
-        =+  lar=(seek p.gen)
-        =+  fup=(edit p.lar r.lar q.gen)
-        ?~  q.lar
-          q.fup
-        [9 p.u.q.lar q.fup]
-      ::
-          [%zpbn *]                                                     ::  !=
-        [1 make(gen p.gen)]
-      ::
-          [%zpcb *]                                                     ::  !_
-        make(gen q.gen)
-      ::
-          [%zpzp ~]                                                     ::  !!
-        [0 0]
-      ::
-          *           
-        =+(doz=(open gen) ?:(.=(doz gen) ^>(bean.%open !!) make(gen doz)))
       --
     ::::
     ::
@@ -2037,6 +1948,11 @@
       --
     ::::
     ::
+        make
+      ^-  *tool
+      q:mill
+    ::::
+    ::
         mill
     :: ^>  bean.[%mo-mill |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
       ^-  [p=*type q=*tool]
@@ -2047,17 +1963,22 @@
         [p.soq (comb q.fid q.soq)]
       ::
           [%brmt *]                                                     ::  |%
+        ^>  bean.%mill-brmt
         =+  sac=(~(gas by ~) p.gen) 
         =+  toc=[%core sut %pink sac]
-        [toc [[0 1] [1 (bake(sut toc) sac)]]]
+        [toc [[0 1] [1 (bake(sut toc, vet |) sac)]]]
       ::
           [%brsr *]                                                     ::  |*
+        ^>  bean.%mill-brsr
         =+  sac=(~(gas by ~) p.gen) 
         =+  toc=[%core sut %blue sac]
         [toc [[0 1] [1 (bake(sut toc) sac)]]]
       ::
           [%csbn *]                                                     ::  ?=
-        [play make]
+        :-  play
+        =+  vol=make(gen q.gen)
+        ?>  ?=([0 *] vol)
+        (fish(sut play(gen p.gen)) p.vol)
       ::
           [%csdg *]                                                     ::  ?:
         =+  nor=mill(gen p.gen)
@@ -2074,19 +1995,27 @@
         [[%cell p.hed p.tal] (cons q.hed q.tal)]
       ::
           [%dtbn *]                                                     ::  .=
-        [play make]
+        :-  flag
+        [5 make(gen p.gen) make(gen q.gen)]
       ::
           [%dtcs *]                                                     ::  .?
-        [play make]
+        :-  flag
+        [3 make(gen p.gen)]
       ::
           [%dtkt *]                                                     ::  .^
-        [play make]
+        :-  %atom
+        =+  sam=mill(gen p.gen)
+        ?.  (nest(sut %atom) p.sam)
+          ^>(bean.'dotket-type' !!)
+        [4 q.sam]
       ::
           [%dtsr *]                                                     ::  .*
-        [play make]
+        :-  %blur
+        [2 make(gen p.gen) make(gen q.gen)]
       ::
           [%dtsg *]                                                     ::  .~ 
-        [play make]
+        :-  [%cube p.gen]
+        [1 p.gen]
       ::
           [%ktbn *]                                                     ::  ^=
         =+  vat=mill(gen q.gen)
@@ -2105,12 +2034,19 @@
           [%ktnp *]
         =+  hif=play(gen p.gen)
         =+  dan=mill(gen q.gen)
-        ?.  (nest(sut hif) p.dan)
+        ?.  ?|(!vet (nest(sut hif) p.dan))
+          ^>  bean.[%need |=((~(fly to dump(sut hif)) 75))]
+          ^>  bean.[%have |=((~(fly to dump(sut p.dan)) 75))]
           ^>(bean.'ketnep-type' !!)
         [hif q.dan]
       ::
           [%ktpd *]                                                     ::  ^+
-        [play make]
+        :-  sut
+        ?.  (nest(sut play(gen p.gen)) play(gen q.gen))
+          ^>  bean.[%need |=((~(fly to dump(sut play(gen p.gen))) 75))]
+          ^>  bean.[%have |=((~(fly to dump(sut play(gen q.gen))) 75))]
+          ^>(bean.'ketped-type' !!)
+        [0 1]
       ::
           [%ktsg *]                                                     ::  ^~
         mill(gen p.gen)
@@ -2124,13 +2060,16 @@
         [9 p.u.q.lar q.fup]
       ::
           [%zpbn *]                                                     ::  !=
-        [play make]
+        :-  %blur
+        [1 make(gen p.gen)]
       ::
           [%zpcb *]                                                     ::  !_
+      :: ^>  bean.[%spot |=((~(fly to ~(loc go p.gen)) 75))]
         mill(gen q.gen)
       ::
           [%zpzp ~]                                                     ::  !!
-        [play make]
+        :-  %blot
+        [0 0]
       ::
           *           
         =+(doz=(open gen) ?:(.=(doz gen) ^>(bean.%open !!) mill(gen doz)))
@@ -2404,8 +2343,8 @@
       ?.  ?|  !vet
               (nest(sut p.q.sut) p.sut)
           -- 
-        ^>  bean.[%a-sut |=((~(fly to dump(sut p.q.sut)) 75))]
-        ^>  bean.[%b-sut |=((~(fly to dump(sut p.sut)) 75))]
+        ^>  bean.[%need |=((~(fly to dump(sut p.q.sut)) 75))]
+        ^>  bean.[%have |=((~(fly to dump(sut p.sut)) 75))]
         ^>(bean.'mitbon-gray' !!)
       [%core p=p.q.sut q=%blue r=r.sut]
     ::
@@ -2419,6 +2358,7 @@
           ::
               =>  .(rib (~(put in rib) [sut dox]))
               =+  dab=r.sut
+              ^>  bean.%pure
               |-  ^-  ?
               ?-    dab
                   ~         &
@@ -2441,15 +2381,22 @@
     ^-  *plan
     ?~  rup
       [1 ~ sut]
-    =+  vag=$(rup t.rup)
-    =>  .(r.vag ?~(q.vag r.vag ?:(?=([[~ *] *] t.rup) r.vag ripe(sut r.vag))))
+    =+  zar=$(rup t.rup)
+    =>  %=    .           ::  cumbersome; should fork .
+            r.zar 
+          ?~  q.zar 
+            r.zar 
+          ?:  ?=([[~ *] *] t.rup)
+            r.zar 
+          ripe(sut r.zar)
+        --
     ?-    i.rup
         @
-      =+  hup=(find(sut r.vag) i.rup)
-      [(peg p.vag p.hup) q.hup r.hup]
+      =+  hup=(find(sut r.zar) i.rup)
+      [(peg p.zar p.hup) q.hup r.hup]
     ::
         [~ *]
-      [(peg p.vag p.i.rup) ~ (peek(sut r.vag) p.i.rup)]
+      [(peg p.zar p.i.rup) ~ (peek(sut r.zar) p.i.rup)]
     --
   ::::
   ::

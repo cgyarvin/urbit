@@ -29,7 +29,7 @@
           return u2_rc(wir_r, u2_nul, qn_a);
         } 
         else {
-          if ( u2_yes == j2_mbc(Pit, gor)(wir_r, b, n_a) ) {
+          if ( u2_yes == j2_mbc(Pit, gor)(wir_r, b, pn_a) ) {
             return j2_mcc(Pit, by, get)(wir_r, l_a, b);
           } 
           else return j2_mcc(Pit, by, get)(wir_r, r_a, b);
