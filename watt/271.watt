@@ -1605,7 +1605,7 @@
       --
   =+  :*  fan=*(pool &[*type *gene])          ::  20 in van
           ver=*(pool &[*type *type *gene])    ::  42 in van
-          rib=*(pool &[*type *type])          ::  86 in van
+          rib=*(pool &[*type *type *gene])    ::  86 in van
           vet=`?`&                            ::  87 in van
       --
   =+  sut=`*type`%blur                        ::  4 in van
@@ -1932,7 +1932,7 @@
         ?~  q.lar
           p.fup
         ?<  vet
-        [%hold ripe(sut p.fup) q.u.q.lar] 
+        (ripe(sut p.fup) q.u.q.lar)
       ::
           [%zpbn *]                                                     ::  !=
         %blur
@@ -2056,7 +2056,7 @@
         =+  fup=(edit p.lar r.lar q.gen)
         ?~  q.lar
           fup
-        :-  [%hold ripe(sut p.fup) q.u.q.lar] 
+        :-  (ripe(sut p.fup) q.u.q.lar)
         [9 p.u.q.lar q.fup]
       ::
           [%zpbn *]                                                     ::  !=
@@ -2335,7 +2335,12 @@
   ::::
   ::
       ripe
+    ^<  mine.[!=(->) %ripe ~]
+    =+  gen=*gene
+    |=
     ^>  bean.%ripe
+    =-  [%hold typ gen]
+    ^=  typ
     ?>  ?=([%core *] sut)
     ?-    q.sut
         %blue       sut
@@ -2351,22 +2356,12 @@
         %pink   sut
     ::
         [%teal *]
-      =+  dox=[%core p.q.sut q.sut r.sut]
+      =+  dox=[%core p.q.sut %pink r.sut]
       ?.  ?|  !vet
               .=(sut dox)
-              (~(has in rib) [sut dox])
-          ::
-              =>  .(rib (~(put in rib) [sut dox]))
-              =+  dab=r.sut
-              ^>  bean.%pure
-              |-  ^-  ?
-              ?-    dab
-                  ~         &
-                  [* ~ ~]   .=(~(make mo q.n.dab) ~(make mo(sut dox) q.n.dab))
-                  [* ~ *]   ?&($(dab [n.dab ~ ~]) $(dab r.dab))
-                  [* * ~]   ?&($(dab [n.dab ~ ~]) $(dab l.dab))
-                  [* * *]   ?&($(dab [n.dab ~ ~]) $(dab l.dab) $(dab r.dab))
-              --
+              (~(has in rib) [sut dox gen])
+              =>  .(rib (~(put in rib) [sut dox gen]))
+                .=(~(make mo gen) ~(make mo(sut dox, vet |) gen))
           --
         ^>(bean.'mitbon-teal' !!)
       sut
@@ -2388,7 +2383,7 @@
             r.zar 
           ?:  ?=([[~ *] *] t.rup)
             r.zar 
-          ripe(sut r.zar)
+          (ripe(sut r.zar) [~ 1])
         --
     ?-    i.rup
         @
