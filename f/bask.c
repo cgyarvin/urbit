@@ -178,60 +178,48 @@ u2_ba_sole(u2_ray  wir_r,
   }
 }
 
-#if 0
-/* u2_ba_sole():
+/* u2_ba_uniq():
 **
-**   Save unique noun, or at least try to.
+**   Save unique noun; return senior version, if any.
 */
-u2_noun
-u2_ba_sole(u2_ray  wir_r,
-           u2_noun som)
+u2_weak                                                           //  senior
+u2_ba_uniq(u2_ray  wir_r,
+           u2_noun som)                                           //  retain
 {
-  u2_ray  bas_r;
-  u2_weak haz = u2_none;
+  u2_ray bas_r;
 
-  if ( 0 == (bas_r = u2_wire_bas_r(wir_r)) ) {
+  if ( u2_fly_is_cat(som) ) {
     return som;
   }
-  if 
-  if ( u2_none != (haz = u2_ch_find(u2_bask_sol_r(bas_r), som)) ) {
-    u2_rl_lose(wir_r, som);
-    return haz;
-  } 
+  else if ( (0 == (bas_r = u2_wire_bas_r(wir_r)) ) ) {
+    return u2_none;
+  }
   else {
+    u2_noun cad_r = u2_bask_sol_r(bas_r);
+    u2_noun sav;
 
-    if ( u2_yes == u2_dust(som) ) {
-      u2_noun hed = u2_ba_sole(wir_r, u2_h(som));
-      u2_noun tal = u2_ba_sole(wir_r, u2_t(som));
-
-      if ( (u2_no == u2_rl_junior(bas_r, hed)) ||
-           (u2_no == u2_rl_junior(bas_r, tal)) )
-      {
-        return som;
-      } 
-      else {
-        haz = u2_rl_cell(bas_r, hed, tal);
-        if ( u2_no == haz ) {
-          return som;
-        } 
-        else if ( u2_no == u2_ch_save(bas_r, u2_bask_sol_r(bas_r), haz, haz) ) {
-          u2_rl_lose(bas_r, haz);
-          return som;
-        }
-        else {
-          u2_rl_lose(bas_r, som);
-          return haz;
-        }
-      }
+    if ( u2_none != (sav = u2_ch_find(cad_r, som)) ) {
+      return sav;
     }
     else {
-      if ( u2_none != (haz = u2_rl_ice(bas_r, som)) ) {
-        u2_rl_lose(som);
-        return haz;
-      } else {
-        return som;
+      u2_noun one;
+
+      u2_bx_used(wir_r);
+      if ( u2_yes == u2_dust(som) ) {
+        u2_noun hed = u2_ba_uniq(wir_r, u2_h(som));
+        u2_noun tal = u2_ba_uniq(wir_r, u2_t(som));
+
+        if ( (u2_none == hed) || (u2_none == tal) ) {
+          return u2_none; 
+        }
+        else one = u2_rc(bas_r, u2_rx(bas_r, hed), u2_rx(bas_r, tal));
       }
+      else one = u2_rx(bas_r, som);
+
+      sav = u2_ch_save(bas_r, cad_r, one, one);
+
+      u2_rl_lose(wir_r, one);
+      return sav;
     }
   }
 }
-#endif

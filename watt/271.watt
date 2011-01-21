@@ -1867,6 +1867,9 @@
           [%ktld *]   gain(gen q.gen)
           [%csbn *]   
         =<  p
+        :: ^>  loaf.[%gain-sut (~(fly to dump(sut play(gen q.gen))) 75)]
+        :: ^>  loaf.[%gain-ref (~(fly to dump(sut play(gen p.gen))) 75)]
+        :: ^>  loaf.[%gain-reap (~(fly to dump(sut (reap(sut play(gen q.gen)) play(gen p.gen)))) 75)]
         %^    tuck
             (rake q.gen)
           (reap(sut play(gen q.gen)) play(gen p.gen))
@@ -2068,7 +2071,7 @@
         [1 make(gen p.gen)]
       ::
           [%zpcb *]                                                     ::  !_
-      :: ^>  bean.[%spot |=((~(fly to ~(loc go p.gen)) 75))]
+        ^>  bean.[%spot |=((~(fly to ~(loc go p.gen)) 75))]
         mill(gen q.gen)
       ::
           [%zpzp ~]                                                     ::  !!
@@ -2244,6 +2247,8 @@
     ^<  mine.[!=(->) %reap ~]
     =+  ref=*type
     |=
+    ::  ^>  loaf.[%reap-sut (~(fly to dump) 75)]
+    ::  ^>  loaf.[%reap-ref (~(fly to dump(sut ref)) 75)]
     =+  bol=*(pool type)
     =<  dext
     |*
@@ -2328,6 +2333,7 @@
   ::
       repo
     ^>  bean.%repo
+    ^>  memo
     ?-    sut
         [%hold *]   
       ?:  (~(has in fan) sut)

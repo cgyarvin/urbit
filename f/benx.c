@@ -333,18 +333,21 @@ u2_bx_bean_ent(u2_ray  wir_r,
     return;
   } 
   else {
-    u2_noun zof = u2_rx(bas_r, u2_benx_at(bex_r, zof));
-    u2_noun sud = u2_rc(bas_r, u2_rl_take(bas_r, hod), zof);
+    u2_noun naz = u2_ba_uniq(wir_r, hod);
 
     u2_rl_lose(wir_r, hod);
-    if ( u2_none == sud ) {
-      return;
-    } else {
-      u2_rl_lose(bas_r, u2_benx_at(bex_r, zof));
-      u2_benx_at(bex_r, zof) = sud;
+    if ( u2_none != naz ) { 
+      u2_noun zof = u2_rc
+        (bas_r, u2_rx(bas_r, naz), u2_rx(bas_r, u2_benx_at(bex_r, zof)));
+      
+      if ( u2_none != zof ) {
+        u2_rl_lose(bas_r, u2_benx_at(bex_r, zof));
+        u2_benx_at(bex_r, zof) = zof;
+      }
     }
   }
 }
+
 void
 u2_bx_bean_out(u2_ray wir_r)
 {

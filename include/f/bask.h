@@ -113,6 +113,14 @@
       u2_ba_sole(u2_ray  wir_r,
                  u2_noun som);                                    //  transfer
 
+    /* u2_ba_uniq():
+    **
+    **   Save unique noun; return senior version, if any.
+    */
+      u2_weak                                                     //  senior
+      u2_ba_uniq(u2_ray  wir_r,
+                 u2_noun som);                                    //  retain
+
     /* u2_ba_sole_cell():
     **
     **   Construct and save cell.
