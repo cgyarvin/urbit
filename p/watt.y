@@ -545,8 +545,8 @@ tall
     di_ketdul: si_ket si_dul  { $$ = c3__ktdl; }
     di_ketnep: si_ket si_nep  { $$ = c3__ktnp; }
     di_ketbec: si_ket si_bec  { $$ = c3__ktbc; }
-    di_ketdig: si_ket si_dig  { $$ = c3__ktpd; }
-    di_ketped: si_ket si_ped  { $$ = c3__ktdg; }
+    di_ketdig: si_ket si_dig  { $$ = c3__ktdg; }
+    di_ketped: si_ket si_ped  { $$ = c3__ktpd; }
     di_ketbon: si_ket si_bon  { $$ = c3__ktbn; }
     di_ketmit: si_ket si_mit  { $$ = c3__velt; }
     di_ketrat: si_ket si_rat  { $$ = c3__ktrt; }
