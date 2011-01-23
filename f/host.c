@@ -836,8 +836,6 @@ u2_ho_punt(u2_ray  wir_r,
       if ( u2_none != had ) {
         return had;
       } else {
-        /* The C jet bailed; turn it off and compute the native value.
-        */
         jet_j->sat_s = u2_jet_dead;
         {
           sof = u2_nk_nock(wir_r, u2_rx(wir_r, cor), fol);

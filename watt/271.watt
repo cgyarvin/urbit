@@ -1147,7 +1147,6 @@
     [%ktbn p=*term q=*gene]                                     ::  ^=  ketbon
     [%ktdg p=*gene q=*gene]                                     ::  ^:  ketdeg
     [%ktdl p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^<  ketdul
-    [%ktmt p=*gene q=*gene]                                     ::  ^%  ketmit
     [%ktnp p=*gene q=*gene]                                     ::  ^-  ketnep
     [%ktpd p=*gene q=*gene]                                     ::  ^+  ketped
     [%ktld p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^>  ketlud
@@ -1331,13 +1330,6 @@
         q.gen
       [%bndl [~ 2] [%ktpd [%bnld [~ 3] p.gen] [~ 2]]]
     ::
-        [%ktmt *]                                                       ::  ^%
-      :+  %bnpd 
-        q.gen 
-      :+  %csnp
-        [~ 2]
-      [[[%bnld [~ 3] p.gen] [~ 2]] ~]
-    ::
         [%ktdl *]   [%bndl [%ktld p.gen [~ 1]] q.gen]                   ::  ^<
         [%ktsr *]   [%ktnp [%tmbn %blur] p.gen]                         ::  ^*
         [%ktsg *]   p.gen                                               ::  ^~
@@ -1412,6 +1404,10 @@
     =+  gen=*gene
     |=
     ^-  *gene
+    ::  =-  ^>  loaf.[%mast-in (~(fly to ~(gut go `*`gen)) 75)]
+    ::      ^>  loaf.[%mast-out (~(fly to ~(gut go `*`zig)) 75)]
+    ::      zig
+    ::  ^=  zig
     =<  pax
     |*
     ::::
@@ -1419,23 +1415,13 @@
         pax
       ^-  *gene
       ?-    gen
-          [%zpcb *]   [%zpcb p.gen pax(gen q.gen)]
           [%ktdg *]   pax(gen q.gen)
           [%ktdl *]   [%ktdl p.gen pax(gen q.gen)]
-          [%ktmt *]
-        :+  %bnpd
-          [%ktsg [%ktsr q.gen]]
-        :-  %brbn
-        :+  %bnld
-          [%mtbn ~ [[[~ 4] [%mtnp pax(gen q.gen) [~ 4] ~]] ~]]
-        (fix(gen p.gen) 4)
-      ::
-          [%ktnp *]   
-        [%bnpd [%ktsg [%ktsr q.gen]] [%brbn (fix(gen p.gen) 4)]]
-      ::
+          [%ktnp *]   [%bnpd [%ktsg [%ktsr q.gen]] [%brbn (fix(gen p.gen) 4)]]
           [%ktpd *]   pax(gen q.gen)
           [%ktld *]   [%ktld p.gen pax(gen q.gen)]
           [%mtsr *]   p.gen
+          [%zpcb *]   [%zpcb p.gen pax(gen q.gen)]
           *           
         =+  bog=(open gen)
         ?.  .=(bog gen)
@@ -1459,11 +1445,6 @@
           [%ktdl *]   [%ktdl p.gen $(gen q.gen)]
           [%ktnp *]   $(gen p.gen)
           [%ktpd *]   $(gen q.gen)
-          [%ktmt *]
-        :+  %bnld
-          [%mtbn ~ [[[~ axe] [%mtnp $$(gen q.gen) [~ axe] ~]] ~]]
-        $(gen p.gen)
-      ::
           [%ktld *]   [%ktld p.gen $(gen q.gen)]
           [%mtsr *]   [%mtnp p.gen [~ axe] ~]
       ::
@@ -1488,7 +1469,6 @@
         [%zpcb *]   [%zpcb p.gen $(gen q.gen)]
         [%ktbn *]   [%ktbn p.gen $(gen q.gen)]
         [%ktdl *]   [%ktdl p.gen $(gen q.gen)]
-        [%ktmt *]   [%ktmt $(gen p.gen) $(gen q.gen)]
         [%ktnp *]   $(gen p.gen)
         [%ktpd *]   $(gen p.gen)
         [%ktld *]   [%ktld p.gen $(gen q.gen)]
@@ -1598,7 +1578,6 @@
         [%orth !=(orth)]
         [%peek !=(peek)]
         [%repo !=(repo)]
-        [%reap !=(reap)]
         [%ripe !=(ripe)]
         [%seek !=(seek)]
         [%snap !=(snap)]
@@ -1624,6 +1603,84 @@
         [* ~ *]   [~(make mo q.n.dab) $(dab r.dab)]
         [* * ~]   [~(make mo q.n.dab) $(dab l.dab)]
         [* * *]   [~(make mo q.n.dab) $(dab l.dab) $(dab r.dab)] 
+    --
+  ::::
+  ::
+      fuse
+    ^<  mine.[!=(->) %tine ~]
+    =+  ref=*type
+    |=
+    ^>  bean.%fuse
+    =+  bix=*(pool &[*type *type])
+    |-  ^-  *type
+    ?:  .=(sut ref)
+      sut
+    ?-    sut
+        %atom 
+      ?-    ref
+          [%cell *]   %blot
+          *           $(sut ref, ref sut)
+      --
+    ::
+        %blur       ref
+        %blot       %blot
+        [%cell *]   
+      ?-    ref
+          [%cell *]   (twin $(sut p.sut, ref p.ref) $(sut q.sut, ref q.ref))
+          *           $(sut ref, ref sut)
+      --
+    ::
+        [%core *]   $(sut repo)
+        [%cube *]
+      ?-    ref
+          %atom       ?:(.?(p.sut) %blot sut)
+          [%cell *]   ?:(.?(p.sut) $(sut repo) %blot)
+          [%cube *]   %blot
+          *           $(sut ref, ref sut)
+      --
+    ::
+        [%face *]     (name(sut $(sut q.sut)) p.sut)
+        [%fork *]     (eith $(sut p.sut) $(sut q.sut))
+        [%hold *]
+      ?:  (~(has in bix) [sut ref])
+        ^>(bean.%fuse-loop !!)  
+      $(bix (~(put in bix) [sut ref]), sut repo)
+    --
+
+  ::::
+  ::
+      cull
+    ^<  mine.[!=(->) %cull ~]
+    =+  [axe=*axis ref=*type]
+    |=
+    ^>  bean.%cull
+    ^-  *type
+    ?:  .=(1 axe)
+      ^>  bean.%cull-arm
+      =+  zor=(fuse ref)
+      ::  ^>  loaf.[%cull-sut (~(fly to dump) 75)]
+      ::  ^>  loaf.[%cull-ref (~(fly to dump(sut ref)) 75)]
+      ::  ^>  loaf.[%cull-zor (~(fly to dump(sut zor)) 75)]
+      zor
+    =+  [now=(cap axe) den=(mas axe)]
+    |-  ^-  *type
+    ^>  bean.%cull-leg
+    ?-    sut
+        %atom       %blot
+        %blot       %blot
+        %blur       (reco =+(p=*type |=($$(sut p))))
+        [%cell *]   
+      ?:  .=(2 now)
+        (twin $$(axe den, sut p.sut) q.sut)
+      (twin p.sut $$(axe den, sut q.sut))
+    ::
+        [%core *]
+      ?.(.=(2 now) sut (gore $$(axe den, sut (peek 2)) p.sut q.sut r.sut))
+    ::
+        [%cube *]   (reco =+(p=*type |=($$(sut p))))
+        [%face *]   (reco =+(p=*type |=((name(sut $$(sut p)) p.sut))))
+        [%fork *]   (eith $(sut p.sut) $(sut q.sut))
+        [%hold *]   (reco =+(p=*type |=($$(sut p))))
     --
   ::::
   ::
@@ -1785,9 +1842,9 @@
       ?~  hax
         ?~  yor
           ~
-        ?.(.=(%blot (peek(sut p.sut) p.u.yor)) ^>(bean.%fork-a !!) yor)
+        ?.((orth(sut %blur) (peek(sut p.sut) p.u.yor)) ^>(bean.%fork-a !!) yor)
       ?~  yor
-        ?.  .=(%blot (peek(sut q.sut) p.u.hax)) 
+        ?.  (orth(sut %blur) (peek(sut q.sut) p.u.hax))
           ^>  bean.%fork-b
           ^>  bean.[%port |=((~(fly to ~(tem go `@`cog)) 75))]
           ^>  bean.[%type |=((~(fly to dump) 75))]
@@ -1844,6 +1901,28 @@
     --
   ::::
   ::
+      gore
+    ^<  mine.[!=(->) %gore ~]
+    =+  :*  vod=*type 
+            suz=*type
+            hel=*<%blue [%gray p=*type] %pink [%teal p=*type]> 
+            don=*(book term gene)
+        --
+    |=
+    ^-  *type
+    ?:  .=(%blot vod)
+      %blot
+    :^    %core
+        vod
+      ?-    hel
+          %blue       ?:(.=(vod suz) %blue [%gray suz])
+          [%gray *]   ?:(.=(vod p.hel) %blue hel)
+          %pink       ?:(.=(vod suz) %pink [%teal suz])
+          [%teal *]   ?:(.=(vod p.hel) %pink hel)
+      --
+    don
+  ::::
+  ::
       mo
     ^<    mine.
         :+  !=(->) 
@@ -1862,20 +1941,11 @@
       :: ^>  bean.[%mo-gain |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
       ^-  *type
       ?-    gen
-          [%zpcb *]   gain(gen q.gen)
+          [%csbn *]   (cull p:(seek (rake q.gen)) play(gen p.gen))
+          [%cspm *]   |-(?~(p.gen sut $(p.gen t.p.gen, sut gain(gen i.p.gen))))
           [%ktdl *]   gain(gen q.gen)
           [%ktld *]   gain(gen q.gen)
-          [%csbn *]   
-        =<  p
-        :: ^>  loaf.[%gain-sut (~(fly to dump(sut play(gen q.gen))) 75)]
-        :: ^>  loaf.[%gain-ref (~(fly to dump(sut play(gen p.gen))) 75)]
-        :: ^>  loaf.[%gain-reap (~(fly to dump(sut (reap(sut play(gen q.gen)) play(gen p.gen)))) 75)]
-        %^    tuck
-            (rake q.gen)
-          (reap(sut play(gen q.gen)) play(gen p.gen))
-        [~ 1] 
-      ::
-          [%cspm *]   |-(?~(p.gen sut $(p.gen t.p.gen, sut gain(gen i.p.gen))))
+          [%zpcb *]   gain(gen q.gen)
           *           sut
       --
     ::::
@@ -1901,7 +1971,7 @@
         (eith play(sut gain(gen p.gen), gen q.gen) play(gen r.gen))
       ::
           [%dgnp *]                                                     ::  :-
-        [%cell play(gen p.gen) play(gen q.gen)]
+        (twin play(gen p.gen) play(gen q.gen))
       ::
           [%dtbn *]                                                     ::  .=
         flag
@@ -1999,7 +2069,7 @@
           [%dgnp *]                                                     ::  :-
         =+  hed=mill(gen p.gen)
         =+  tal=mill(gen q.gen)
-        [[%cell p.hed p.tal] (cons q.hed q.tal)]
+        [(twin p.hed p.tal) (cons q.hed q.tal)]
       ::
           [%dtbn *]                                                     ::  .=
         :-  flag
@@ -2071,7 +2141,7 @@
         [1 make(gen p.gen)]
       ::
           [%zpcb *]                                                     ::  !_
-        ^>  bean.[%spot |=((~(fly to ~(loc go p.gen)) 75))]
+        ::  ^>  bean.[%spot |=((~(fly to ~(loc go p.gen)) 75))]
         mill(gen q.gen)
       ::
           [%zpzp ~]                                                     ::  !!
@@ -2084,7 +2154,6 @@
     ::
     ::::
     ==
-  ::
   ::::
   ::
       name
@@ -2201,9 +2270,7 @@
       --
     ::
         [%face *]   $(sut q.sut)
-        [%fork *]   
-      ?&($(sut p.sut) $(sut q.sut))
-    ::
+        [%fork *]   ?&($(sut p.sut) $(sut q.sut))
         [%hold *]
       ?|
         (~(has in bix) [ref sut])
@@ -2216,7 +2283,6 @@
     ^<  mine.[!=(->) %peek ~]
     =+  axe=*axis
     |=
-    ^>  bean.%peek
     ^-  *type
     ?:  .=(1 axe)
       sut
@@ -2243,99 +2309,26 @@
       read  ^<(mine.[!=(->) %read ~] =+(txt=*tape |=(^-(*gene [%read !!]))))
   ::::
   ::
-      reap
-    ^<  mine.[!=(->) %reap ~]
-    =+  ref=*type
-    |=
-    ::  ^>  loaf.[%reap-sut (~(fly to dump) 75)]
-    ::  ^>  loaf.[%reap-ref (~(fly to dump(sut ref)) 75)]
-    =+  bol=*(pool type)
-    =<  dext
-    |*
-    ::::
-    ::
-        dext
-      ^-  *type
-      ?-    sut
-          %atom
-        ?-    ref
-            %atom       %atom
-            [%cube *]   ?:(.?(p.ref) %blot ref)
-            *           sint
-        --
-      ::
-          %blot   %blot
-          %blur
-        ref
-      ::
-          [%cell *]
-        ?-    ref
-            [%cube *]   
-          ?.  .?(p.ref) 
-            %blot
-          %+  twin
-            dext(sut p.sut, ref [%cube -.p.ref]) 
-          dext(sut q.sut, ref [%cube +.p.ref])
-        ::
-            [%cell *]
-          (twin dext(sut p.sut, ref p.ref) dext(sut q.sut, ref q.ref))
-        ::
-            *
-          sint
-        --
-      ::
-          [%core *]   sut
-      ::
-          [%cube *]
-        ?-    ref
-            %atom       ?:(.?(p.sut) %blot sut)
-            [%cell *]
-          ?.  .?(p.sut) 
-            %blot 
-          %+  twin
-            dext(sut [%cube -.p.sut], ref p.ref) 
-          dext(sut [%cube +.p.sut], ref q.ref)
-        ::
-            [%cube *]   ?:(.=(p.sut p.ref) sut %blot)
-            *           sint
-        --
-      ::
-          [%face *]   (name(sut dext(sut q.sut)) p.sut) 
-          [%fork *]   (eith dext(sut p.sut) dext(sut q.sut))
-          [%hold *]   
-        =+  yet=repo
-        =+  woz=dext(sut yet)
-        ?:  .=(woz yet)
-          sut
-        woz
-      --
-    ::::
-    ::
-        sint
-      ^-  *type
-      ?-    ref
-          %blur       sut
-          [%core *]   dext(ref [%cell p.ref %blur])
-          [%face *]   dext(ref q.ref)
-          [%fork *]   (eith dext(ref p.ref) dext(ref q.ref))
-      ::
-          [%hold *]
-        ?<  (~(has in bol) ref)
-        dext(bol (~(put in bol) ref), ref repo(sut ref))
-      ::
-          *
-        %blot
-      --
-    ::
-    ::::
-    ==
+      reco
+    =+  fud==+(p=*type |=(p))
+    |:
+    =+  por=repo
+    =+  yot=(fud por)
+    ?:  .=(yot por)
+      sut
+    yot
   ::::
   ::
       repo
     ^>  bean.%repo
-    ^>  memo
+    ^-  *type
     ?-    sut
+        %blur       [%cell %blur %blur]
+        [%cube *]   ?.(.?(p.sut) sut [%cell [%cube -.p.sut] [%cube +.p.sut]])
+        [%core *]   [%cell p.sut %blur]
+        [%face *]   q.sut
         [%hold *]   
+      ^>  memo
       ?:  (~(has in fan) sut)
         ^>(bean.'inference recursion' !!)
       ~(play mo(sut p.sut, fan (~(put in fan) sut)) q.sut)
@@ -2448,9 +2441,9 @@
             ?<  .=(1 p.wer)
             =+  [tip=(cap p.wer) tap=(mas p.wer)]
             ?:  .=(2 tip)
-              [%cell $(sut p.sut, p.wer tap) q.sut]
+              (twin $(sut p.sut, p.wer tap) q.sut)
             ?>  .=(3 tip)
-            [%cell p.sut $(sut q.sut, p.wer tap)]
+            (twin p.sut $(sut q.sut, p.wer tap))
           ::
               [%core *]
             ?:  .=(1 p.wer)
@@ -2491,8 +2484,8 @@
               %blur       $(sut [%cell %blur %blur])
               [%cell *]   
             ?:  .=(2 tip) 
-              [%cell $(sut p.sut, p.i.pur tap) q.sut]
-            [%cell p.sut $(sut q.sut, p.i.pur tap)]
+              (twin $(sut p.sut, p.i.pur tap) q.sut)
+            (twin p.sut $(sut q.sut, p.i.pur tap))
           ::
               [%core *]
             ?>  .=(2 tip) 

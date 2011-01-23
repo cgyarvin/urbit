@@ -9,8 +9,8 @@ Chars
   cas   ?       
   dax   #       
   deg   :       
-  den   ]       
-  des   }       
+  den   [
+  des   {
   dot   .       
   dul   <
   ket   ^
@@ -18,14 +18,14 @@ Chars
   lud   >
   mit   %       
   nat   @     
-  ned   [       
+  ned   ]
   nep   -     
   pam   &       
   ped   +
   pel   )
   sac   \
   sar   *
-  sed   {
+  sed   }
   sig   ~
   sol   /
   tam   ;       

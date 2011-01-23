@@ -163,9 +163,9 @@ wide_c
   /** Wide: funky stuff.
   **/
     wide_funk
-      : si_sed g bank_wide g si_des
+      : si_des g bank_wide g si_sed
         { $$ = _ycell(c3__dgsg, $3); }
-      | si_sed g si_des
+      | si_des g si_sed
         { $$ = _ycell(c3__dgsg, _0); }
       | rope si_lep rack_wide si_pel
         { $$ = _ytrel(c3__mtbn, $1, $3); }
@@ -259,7 +259,6 @@ wide_c
     wide_norm: di_ketped body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_ketdig body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_ketbon body_g_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_ketmit body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_ketsar body_a_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_zapdax body_a_wide    { $$ = _ycell($1, $2); }
@@ -390,7 +389,6 @@ tall
     tall_norm: di_ketped w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_ketdig w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_ketbon w body_g_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_ketmit w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_ketsar w body_a_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_zapdax w body_a_tall    { $$ = _ycell($1, $3); }
@@ -541,7 +539,6 @@ tall
     di_ketdig: si_ket si_dig  { $$ = c3__ktpd; }
     di_ketped: si_ket si_ped  { $$ = c3__ktdg; }
     di_ketbon: si_ket si_bon  { $$ = c3__ktbn; }
-    di_ketmit: si_ket si_mit  { $$ = c3__ktmt; }
     di_ketsar: si_ket si_sar  { $$ = c3__ktsr; }
 
     di_zapdax: si_zap si_dax  { $$ = c3__zpdx; }
@@ -577,7 +574,7 @@ tall
     si_dig: ':'
     si_dul: '<'
     si_dot: '.'
-    si_des: '}'
+    si_des: '{'
     si_ket: '^'
     si_zap: '!'
     si_lam: ';'
@@ -592,7 +589,7 @@ tall
     si_sar: '*'
     si_sac: '\\'
     si_sol: '/'
-    si_sed: '{'
+    si_sed: '}'
     si_sig: '~'
     si_tic: '`'
     /* si_toq: '"' */

@@ -188,7 +188,7 @@ u2_ba_uniq(u2_ray  wir_r,
 {
   u2_ray bas_r;
 
-  if ( u2_fly_is_cat(som) ) {
+  if ( u2_fly_is_cat(som) || (u2_yes == u2_rl_senior(wir_r, som)) ) {
     return som;
   }
   else if ( (0 == (bas_r = u2_wire_bas_r(wir_r)) ) ) {
