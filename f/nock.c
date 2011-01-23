@@ -437,13 +437,6 @@ _nock_warm(u2_wire wir_r,
                     return u2_none;
                   }
                   else {
-#if 0
-                    pro = u2_ba_save(wir_r, bus, zom, pro);
-
-                    // u2_bx_used(wir_r);
-                    u2_rl_lose(wir_r, bus);
-                    return pro;
-#else
                     u2_noun zab = u2_ba_uniq(wir_r, bus);
                     u2_noun woq = u2_ba_uniq(wir_r, zom);
                     u2_noun lip = u2_ba_uniq(wir_r, pro);
@@ -461,7 +454,6 @@ _nock_warm(u2_wire wir_r,
                       u2_rl_lose(wir_r, bus);
                       return pro;
                     }
-#endif
                   }
                 }
               }

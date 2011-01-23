@@ -806,6 +806,21 @@
     (num 10 |>(p=@ (add '0' p)))
   ::::
   ::
+      gut
+    |-  ^-  *ball
+    ?-  nut
+        @   unt(nut nut)
+        ^
+      :+  %grip
+        ['[' ']']
+      |-  ^-  *(list ball)
+      ?-  nut
+        [* @]   [$$(nut -.nut) $$(nut +.nut) ~]
+        [* ^]   [$$(nut -.nut) $(nut +.nut)]
+      --
+    --
+  ::::
+  ::
       ham
     ^-  [%duct p=*tape]
     (num 16 |>(p=@ ?:((lth 10 p) (add '0' p) (add 'a' p))))

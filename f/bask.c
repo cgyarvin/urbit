@@ -204,7 +204,6 @@ u2_ba_uniq(u2_ray  wir_r,
     else {
       u2_noun one;
 
-      u2_bx_used(wir_r);
       if ( u2_yes == u2_dust(som) ) {
         u2_noun hed = u2_ba_uniq(wir_r, u2_h(som));
         u2_noun tal = u2_ba_uniq(wir_r, u2_t(som));
