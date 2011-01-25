@@ -1891,7 +1891,7 @@
         play(gen p.gen)
       ::
           [%ktpd *]                                                     ::  ^+
-        sut
+        play(gen q.gen)
       ::
           [%ktsg *]                                                     ::  ^~
         play(gen p.gen)
@@ -2011,8 +2011,10 @@
         [hif q.dan]
       ::
           [%ktpd *]                                                     ::  ^+
-        :-  sut
-        ?.  (nest(sut play(gen p.gen)) play(gen q.gen))
+        =+  gaf=play(gen p.gen)
+        =+  vul=play(gen q.gen)
+        :-  vul
+        ?.  (nest(sut gaf) vul)
           ^>  bean.[%need |=((~(fly to dump(sut play(gen p.gen))) 75))]
           ^>  bean.[%have |=((~(fly to dump(sut play(gen q.gen))) 75))]
           ^>(bean.'ketped-type' !!)
