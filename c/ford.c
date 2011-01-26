@@ -247,12 +247,13 @@ j2_mcy(watt_271, ut, dupt)(u2_wire     wir_r,
                            const c3_c* cap_c,
                            u2_noun     typ);
 
-/* _ford_mo_mill(): mill from gen and pit.
+/* _ford_mo_mill(): mill from gen, pit, gol.
 */
 u2_weak                                                           //  transfer
 _ford_mo_mill(u2_wire wir_r,
               u2_noun pit,                                        //  retain
               u2_noun typ,                                        //  retain
+              u2_noun gol,                                        //  retain
               u2_noun gen)                                        //  retain
 {
   u2_noun fut = u2_sh_look(wir_r, pit, "ut");
@@ -306,7 +307,13 @@ _ford_mo_mill(u2_wire wir_r,
                 return u2_none;
               }
               else {
-                return u2_nk_soft(wir_r, hop, mil);
+                u2_noun ruq = u2_nk_soft(wir_r, hop, mil);
+
+                if ( u2_none == ruq ) {
+                  printf("ford: ruq failed\n");
+                  return u2_none;
+                }
+                else return u2_nk_mung(wir_r, ruq, u2_rx(wir_r, gol));
               }
             }
           }
@@ -358,7 +365,7 @@ ford_test3(struct ford_state* fod_f,
       return;
     }
     else {
-      u2_noun lof = _ford_mo_mill(wir_r, fod_f->pit, c3__blur, gen); 
+      u2_noun lof = _ford_mo_mill(wir_r, fod_f->pit, c3__blur, c3__blur, gen); 
 
       if ( u2_none == lof ) {
         printf("test: failed\n");
@@ -376,7 +383,7 @@ ford_test3(struct ford_state* fod_f,
           u2_noun pug = u2_bn_nock(wir_r, _0, tul);
           u2_noun src = u2_rl_string(wir_r, arg_c);
           u2_noun ger = j2_mbc(watt_271, ream)(wir_r, src);
-          u2_noun hup = _ford_mo_mill(wir_r, fod_f->pit, typ, ger);
+          u2_noun hup = _ford_mo_mill(wir_r, fod_f->pit, typ, c3__blur, ger);
 
           if ( (u2_none != hup) && (u2_none != pug) ) {
             u2_weak muf = u2_nk_nock(wir_r, pug, u2_t(hup));
