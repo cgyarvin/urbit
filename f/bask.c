@@ -59,29 +59,29 @@ u2_ba_find(u2_ray  wir_r,
 
 /* u2_ba_save():
 **
-**   Save result of calculation; consumes `pro`, transmits result.
+**   Save result of calculation; produce senior result if any.
 */
-u2_noun
+u2_weak                                                           //  senior
 u2_ba_save(u2_ray  wir_r,
-           u2_noun bus,
-           u2_noun fol,
-           u2_noun pro)
+           u2_noun bus,                                           //  retain
+           u2_noun fol,                                           //  retain
+           u2_noun pro)                                           //  retain
 {
   u2_ray  bas_r;
 
   if ( 0 == (bas_r = u2_wire_bas_r(wir_r)) ) {
-    return pro;
+    return u2_none;
   }
   else {
-    u2_weak sav = u2_ch_save_cell(bas_r, u2_bask_mem_r(bas_r), bus, fol, pro);
+    u2_noun sub = u2_ba_uniq(wir_r, bus);
+    u2_noun lof = u2_ba_uniq(wir_r, fol); 
+    u2_noun por = u2_ba_uniq(wir_r, pro);
 
-    if ( u2_none == sav ) {
-      return pro;
-    } else {
-      u2_rl_lose(wir_r, pro);
-
-      c3_assert(u2_yes == u2_rl_senior(wir_r, sav));
-      return sav;
+    if ( (u2_none == sub) || (u2_none == lof) || (u2_none == por) ) {
+      return u2_none;
+    }
+    else {
+      return u2_ch_save_cell(bas_r, u2_bask_mem_r(bas_r), sub, lof, por);
     }
   }
 }

@@ -80,11 +80,11 @@
     **
     **   Save result of calculation.
     */
-      u2_noun                                                     //  transfer
+      u2_weak                                                     //  senior
       u2_ba_save(u2_ray  wir_r,
                  u2_noun bus,                                     //  retain
                  u2_noun fol,                                     //  retain
-                 u2_noun pro);                                    //  transfer
+                 u2_noun pro);                                    //  retain
 
     /* u2_ba_find_plow():
     **

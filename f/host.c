@@ -850,6 +850,14 @@ u2_ho_punt(u2_ray  wir_r,
       goto soft;
     }
     case u2_jet_limp: {
+      u2_noun pro;
+
+      /* Check if we've saved the result.
+      */
+      if ( u2_none != (pro = u2_ba_find(wir_r, cor, fol)) ) {
+        return pro;
+      }
+
       /* Compute `had`, the C version.  Jet is full-on recursively.
       */
       {
@@ -874,8 +882,15 @@ u2_ho_punt(u2_ray  wir_r,
       if ( u2_none == sof ) {
         return had;
       } else {
+        u2_noun sav;
+
         u2_rl_lose(wir_r, had);
-        return sof;
+
+        if ( u2_none != (sav = u2_ba_save(wir_r, cor, fol, sof)) ) {
+          u2_rl_lose(wir_r, sof);
+          return sav;
+        }
+        else return sof;
       }
     }
   }

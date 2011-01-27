@@ -437,21 +437,13 @@ _nock_warm(u2_wire wir_r,
                     return u2_none;
                   }
                   else {
-                    u2_noun zab = u2_ba_uniq(wir_r, bus);
-                    u2_noun woq = u2_ba_uniq(wir_r, zom);
-                    u2_noun lip = u2_ba_uniq(wir_r, pro);
-                    
-                    if ( (u2_none != zab) && 
-                         (u2_none != woq) &&
-                         (u2_none != lip) ) 
-                    {
-                      u2_rl_lose(wir_r, bus);
-                      u2_rl_lose(wir_r, pro);
+                    u2_noun sav = u2_ba_save(wir_r, bus, zom, pro);
 
-                      //  u2_bx_used(wir_r);
-                      return u2_ba_save(wir_r, zab, woq, lip);
+                    u2_rl_lose(wir_r, bus);
+                    if ( sav != u2_none ) {
+                      u2_rl_lose(wir_r, pro);
+                      return sav;
                     } else {
-                      u2_rl_lose(wir_r, bus);
                       return pro;
                     }
                   }

@@ -2153,7 +2153,7 @@
             [%ktsg *]                                                   ::  ^~
           =+  cag=burn  
           =+  nef=$(gen p.gen, sut p.cag)
-          [p.nef [1 .*(p.cag q.nef)]]
+          [p.nef [1 ^>(bean.%ketsig-nock .*(q.cag q.nef))]]
         ::
             [%mtbn *]                                                   ::  %=
           =+  lar=(seek p.gen)
