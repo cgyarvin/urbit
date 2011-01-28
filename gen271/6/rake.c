@@ -34,11 +34,14 @@
           }
         }
       }
-      case c3__ktdl: {
+      case c3__zpcb: {
         if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
           return u2_bl_bail(wir_r);
         }
         else return j2_mby(Pit, rake)(wir_r, q_gen);
+      }
+      case c3__zpdx: { 
+        return j2_mby(Pit, rake)(wir_r, u2_t(gen));
       }
     }
   }
@@ -59,6 +62,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pit, rake)[] = {
-    { ".3", c3__hevy, j2_mb(Pit, rake), SafeTier6_a, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mb(Pit, rake), SafeTier6_c, u2_none, u2_none },
     { }
   };

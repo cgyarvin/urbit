@@ -72,6 +72,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pit, comb)[] = {
-    { ".3", c3__lite, j2_mb(Pit, comb), SafeTier6_a, u2_none, u2_none },
+    { ".3", c3__lite, j2_mb(Pit, comb), SafeTier6_c, u2_none, u2_none },
     { }
   };

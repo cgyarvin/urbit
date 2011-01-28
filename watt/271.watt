@@ -1145,7 +1145,6 @@
     [%ktnp p=*gene q=*gene]                                     ::  ^-  ketnep
     [%ktpd p=*gene q=*gene]                                     ::  ^+  ketpad
     [%ktld p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^>  ketlud
-    [%ktsr p=*gene]                                             ::  ^*  ketsar
     [%ktsg p=*gene]                                             ::  ^~  ketsig
   ::
     [%mtbn p=*rope q=*(list &[p=*gene q=*gene])]                ::  %=  mitbon
@@ -1159,8 +1158,8 @@
     [%mtsg p=*rope q=*gene r=*gene]                             ::  %~  mitsig
   ::
     [%tmbn p=*<%atom %blur %cell %flag %null>]                  ::  ;=  tambon
-    [%tmpd p=*gene q=*gene]                                     ::  ;+  tampad
     [%tmnp p=*gene]                                             ::  ;-  tamnep
+    [%tmpd p=*gene q=*gene]                                     ::  ;+  tampad
   ::
     [%zpbn p=*gene]                                             ::  !=  zapbon
     [%zpdx p=*gene]                                             ::  !#  zapdax
@@ -1184,19 +1183,19 @@
         &   [& [%bnld p.gen p.pyr] [%bnld p.gen q.pyr]]
     --
   ::
-      [%zpcb *] 
-    =+  pyr=$(gen q.gen)
-    ?-    -.pyr
-        |   [| [%zpcb p.gen p.pyr]]
-        &   [& [%zpcb p.gen p.pyr] [%zpcb p.gen q.pyr]]
-    --
-  ::
       [%dgnp *]   [& p.gen q.gen]
       *
     =+  voq=(open gen)
     ?:  .=(gen voq)
       [| gen]
     $(gen voq)
+  ::
+      [%zpcb *] 
+    =+  pyr=$(gen q.gen)
+    ?-    -.pyr
+        |   [| [%zpcb p.gen p.pyr]]
+        &   [& [%zpcb p.gen p.pyr] [%zpcb p.gen q.pyr]]
+    --
   --
 ::::
 ::
@@ -1288,6 +1287,8 @@
       [%brld [%ktnp [%tmbn %blur] i.p.gen] [%cssr [~ 4] p.gen]]
     ::
         [%brdg *]   [%brmt [[%% p.gen] ~]]                              ::  |:
+        [%brdl *]   [%bnpd p.gen [%brdg q.gen]]
+        [%brld *]   [%bnpd p.gen [%brbn q.gen]]
         [%brnp *]   [%bnld [%brbn p.gen] %%]                            ::  |-
         [%brsg *]                                                       ::  |~
       |-
@@ -1308,9 +1309,6 @@
           [%mtnp [~ 10] [~ 4] ~]
         [%mtbn [[~ 22] ~] [[[~ 4] [~ 4]] ~]]
       --
-    ::
-        [%brdl *]   [%bnpd p.gen [%brdg q.gen]]
-        [%brld *]   [%bnpd p.gen [%brbn q.gen]]
     ::::
     ::::
         [%csbr *]                                                       ::  ?|
@@ -1319,6 +1317,7 @@
     ::
         [%csdl *]   [%csdg p.gen [%zpzp ~] q.gen]                       ::  ?<
         [%csdt *]   [%csdg p.gen r.gen q.gen]                           ::  ?.
+        [%csld *]   [%csdg p.gen q.gen [%zpzp ~]]                       ::  ?>
         [%csnp *]                                                       ::  ?-
       |-
       ?~  q.gen
@@ -1332,7 +1331,6 @@
       |-
       ?~(p.gen [%dtsg 0] [%csdg i.p.gen $(p.gen t.p.gen) [%dtsg 1]])
     ::
-        [%csld *]   [%csdg p.gen q.gen [%zpzp ~]]                       ::  ?>
         [%cssr *]                                                       ::  ?*
       |-
       ?~  q.gen
@@ -1350,6 +1348,10 @@
     ::::
         [%dgkt *]   [%dgnp p.gen [%dgnp q.gen [%dgnp r.gen s.gen]]]     ::  :^
         [%dgpd *]   [%dgnp p.gen [%dgnp q.gen r.gen]]                   ::  :+
+        [%dgsg *]                                                       ::  :~
+      |-
+      ?~(p.gen [%dtsg ~] [%dgnp i.p.gen $(p.gen t.p.gen)])
+    ::
         [%dgsr *]                                                       ::  :*
       |-
       ?-    p.gen 
@@ -1357,14 +1359,9 @@
           [* ~]   i.p.gen
           ^       [%dgnp i.p.gen $(p.gen t.p.gen)]
       --
-    ::
-        [%dgsg *]                                                       ::  :~
-      |-
-      ?~(p.gen [%dtsg ~] [%dgnp i.p.gen $(p.gen t.p.gen)])
     ::::
     ::::
         [%ktdl *]   [%bndl [%ktld p.gen [~ 1]] q.gen]                   ::  ^<
-        [%ktsr *]   [%ktnp [%tmbn %blur] p.gen]                         ::  ^*
     ::::
     ::::
         [%mtbr *]                                                       ::  %|
@@ -1394,8 +1391,8 @@
         %null   [%dtsg 0]
       --
     ::
-        [%tmpd *]   (mold (rake q.gen) p.gen)                           ::  ;+
         [%tmnp *]   (sift p.gen)                                        ::  ;-
+        [%tmpd *]   (mold (rake q.gen) p.gen)                           ::  ;+
     ::::
     ::::
         *           gen
@@ -1469,8 +1466,6 @@
     [%mtbn * ~]   p.gen
     [%zpcb *]     $(gen q.gen)
     [%zpdx *]     $(gen p.gen)
-    [%ktdl *]     $(gen q.gen)
-    [%ktld *]     $(gen q.gen)
   --
 ::
     ream  ^<(mine.[!=(->) %ream ~] =+(txt=@ |=(^-(*gene [%ream !!]))))
