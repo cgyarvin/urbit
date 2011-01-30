@@ -178,20 +178,21 @@ J271_4_OFILES=\
        gen271/4/by_put.o 
 
 J271_6_OFILES=\
+       gen271/6/cell.o \
        gen271/6/comb.o \
        gen271/6/cons.o \
-       gen271/6/eith.o \
+       gen271/6/core.o \
+       gen271/6/face.o \
        gen271/6/flan.o \
        gen271/6/flip.o \
        gen271/6/flor.o \
+       gen271/6/fork.o \
        gen271/6/hack.o \
        gen271/6/hike.o \
        gen271/6/look.o \
-       gen271/6/name.o \
        gen271/6/open.o \
        gen271/6/rake.o \
        gen271/6/ream.o \
-       gen271/6/twin.o \
        gen271/6/ut.o \
        gen271/6/ut_bake.o \
        gen271/6/ut_clay.o \

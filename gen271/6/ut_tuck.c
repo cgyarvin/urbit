@@ -105,7 +105,7 @@
           return u2_bl_bail(wir_r);
         }
         else {
-          return j2_mby(Pit, eith)
+          return j2_mby(Pit, fork)
             (wir_r, _tuck_term(wir_r, van, p_sut, p_wer, p_giv),
                     _tuck_term(wir_r, van, q_sut, p_wer, p_giv));
         }
@@ -240,7 +240,7 @@
             return u2_bl_bail(wir_r);
           }
           else {
-            return j2_mby(Pit, eith)
+            return j2_mby(Pit, fork)
               (wir_r, _tuck_frag(wir_r, van, p_sut, pi_pur, p_giv),
                       _tuck_frag(wir_r, van, q_sut, pi_pur, p_giv));
           }

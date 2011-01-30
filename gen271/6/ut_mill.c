@@ -90,7 +90,7 @@
             return pro;
           }
         }
-        case c3__brsr: {
+        case c3__brtr: {
           p_gen = u2_t(gen);
           {
             u2_noun sac = j2_mcc(Pit, by, gas)(wir_r, u2_nul, p_gen);
@@ -108,7 +108,7 @@
             return pro;
           }
         }
-        case c3__dgnp: {
+        case c3__dgdp: {
           if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
             return u2_bl_bail(wir_r);
           }
@@ -167,7 +167,7 @@
             }
           }
         }
-        case c3__dtsr: {
+        case c3__dttr: {
           if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
             return u2_bl_bail(wir_r);
           }
@@ -283,7 +283,7 @@
             return pro;
           }
         }
-        case c3__ktnp: {
+        case c3__ktdp: {
           if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
             return u2_bl_bail(wir_r);
           }
@@ -301,7 +301,7 @@
                    (u2_no == j2_mcy(Pit, ut, nest)
                                 (wir_r, van, hif, u2_h(dan))) )
               {
-                printf("ktnp: nest failure\n");
+                printf("ktdp: nest failure\n");
                 return u2_bl_bail(wir_r);
               }
               else {
@@ -443,7 +443,7 @@
               return u2_bl_bail(wir_r);
             } else {
               pro = u2_bc
-                (wir_r, j2_mby(Pit, eith)(wir_r, u2_h(hiq), u2_h(ran)),
+                (wir_r, j2_mby(Pit, fork)(wir_r, u2_h(hiq), u2_h(ran)),
                         u2_bq(wir_r, 
                               _6,
                               u2_rx(wir_r, u2_t(nor)),

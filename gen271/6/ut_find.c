@@ -177,7 +177,7 @@
                      u2_nul,
                      u2_rx(wir_r, p_hax),
                      u2_nul,
-                     j2_mby(Pit, eith)
+                     j2_mby(Pit, fork)
                         (wir_r, u2_rx(wir_r, r_hax), u2_rx(wir_r, r_yor)));
 
                   u2_rl_lose(wir_r, hax);

@@ -70,7 +70,7 @@
               if ( (u2_no == u2_as_trel(ref, 0, &p_ref, &q_ref)) ) {
                 return u2_bl_bail(wir_r);
               } else {
-                return j2_mby(Pit, twin)
+                return j2_mby(Pit, cell)
                   (wir_r, _reap_dext(wir_r, van, p_sut, p_ref, bol),
                           _reap_dext(wir_r, van, q_sut, q_ref, bol));
               }
@@ -87,7 +87,7 @@
                   heg = u2_bc(wir_r, c3__cube, u2_rx(wir_r, u2_h(p_ref)));
                   vil = u2_bc(wir_r, c3__cube, u2_rx(wir_r, u2_t(p_ref)));
 
-                  pro = j2_mby(Pit, twin)
+                  pro = j2_mby(Pit, cell)
                     (wir_r, _reap_dext(wir_r, van, p_sut, heg, bol),
                             _reap_dext(wir_r, van, q_sut, vil, bol));
 
@@ -130,7 +130,7 @@
                   heg = u2_bc(wir_r, c3__cube, u2_rx(wir_r, u2_h(p_ref)));
                   vil = u2_bc(wir_r, c3__cube, u2_rx(wir_r, u2_t(p_ref)));
 
-                  pro = j2_mby(Pit, twin)
+                  pro = j2_mby(Pit, cell)
                     (wir_r, _reap_dext(wir_r, van, p_sut, heg, bol),
                             _reap_dext(wir_r, van, q_sut, vil, bol));
 
@@ -156,7 +156,7 @@
         if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
           return u2_bl_bail(wir_r);
         } else { 
-          return j2_mby(Pit, name)
+          return j2_mby(Pit, face)
             (wir_r, p_sut, _reap_dext(wir_r, van, q_sut, ref, bol));
         }
       }
@@ -165,7 +165,7 @@
           return u2_bl_bail(wir_r);
         }
         else {
-          return j2_mby(Pit, eith)
+          return j2_mby(Pit, fork)
             (wir_r, _reap_dext(wir_r, van, p_sut, ref, bol),
                     _reap_dext(wir_r, van, q_sut, ref, bol));
         }
@@ -235,7 +235,7 @@
           return u2_bl_bail(wir_r);
         }
         else {
-          return j2_mby(Pit, eith)
+          return j2_mby(Pit, fork)
             (wir_r, _reap_dext(wir_r, van, sut, p_ref, bol),
                     _reap_dext(wir_r, van, sut, q_ref, bol));
         }

@@ -45,7 +45,7 @@
           return ret;
         }
       }
-      else if ( c3__dgnp == u2_h(gen) ) {
+      else if ( c3__dgdp == u2_h(gen) ) {
         if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
           return u2_bl_bail(wir_r);
         }

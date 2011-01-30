@@ -158,8 +158,7 @@
   extern u2_ho_jet j2_mcj(Pit, ut, snap)[];
   extern u2_ho_jet j2_mcj(Pit, ut, tuck)[];
 
-  extern u2_ho_jet    j2_mcj(Pit, ut, mo)[];
-  extern u2_ho_driver j2_mcd(Pit, ut, mo)[];
+  extern u2_ho_jet j2_mcj(Pit, ut, mo)[];
 
 /* structures
 */
@@ -182,14 +181,13 @@
     { j2_sc(Pit, ut, seek), j2_mcj(Pit, ut, seek), 0, 0, u2_none },
     { j2_sc(Pit, ut, snap), j2_mcj(Pit, ut, snap), 0, 0, u2_none },
     { j2_sc(Pit, ut, tuck), j2_mcj(Pit, ut, tuck), 0, 0, u2_none },
-#if 0
+
     { j2_sc(Pit, ut, mo), 
       j2_mcj(Pit, ut, mo), 
       j2_mcd(Pit, ut, mo), 
       0, 
       u2_none 
     },
-#endif
     { }
   };
 

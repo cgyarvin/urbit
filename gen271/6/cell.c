@@ -1,4 +1,4 @@
-/* j/6/twin.c
+/* j/6/cell.c
 **
 ** This file is in the public domain.
 */
@@ -8,7 +8,7 @@
 /* functions
 */
   u2_noun                                                         //  transfer
-  j2_mby(Pit, twin)(u2_wire wir_r, 
+  j2_mby(Pit, cell)(u2_wire wir_r, 
                     u2_noun hed,                                  //  retain
                     u2_noun tal)                                  //  retain
   {
@@ -19,7 +19,7 @@
     }
   }
   u2_noun                                                         //  transfer
-  j2_mb(Pit, twin)(u2_wire wir_r, 
+  j2_mb(Pit, cell)(u2_wire wir_r, 
                    u2_noun cor)                                   //  retain
   {
     u2_noun hed, tal;
@@ -27,14 +27,14 @@
     if ( u2_no == u2_mean(cor, 8, &hed, 9, &tal, 0) ) {
       return u2_bl_bail(wir_r);
     } else {
-      return j2_mby(Pit, twin)(wir_r, hed, tal);
+      return j2_mby(Pit, cell)(wir_r, hed, tal);
     }
   }
 
 /* structures
 */
   u2_ho_jet 
-  j2_mbj(Pit, twin)[] = {
-    { ".3", c3__hevy, j2_mb(Pit, twin), SafeTier6_c, u2_none, u2_none },
+  j2_mbj(Pit, cell)[] = {
+    { ".3", c3__hevy, j2_mb(Pit, cell), SafeTier6_c, u2_none, u2_none },
     { }
   };

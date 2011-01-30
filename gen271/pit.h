@@ -278,6 +278,10 @@
     /** Tier 6.
     **/
       u2_noun                                                     //  transfer
+      j2_mby(Pit, cell)(u2_wire wir_r, 
+                        u2_noun hed,                              //  retain
+                        u2_noun tal);                             //  retain
+      u2_noun                                                     //  transfer
       j2_mbc(Pit, comb)(u2_wire wir_r, 
                         u2_noun mal,                              //  retain
                         u2_noun buz);                             //  retain
@@ -285,10 +289,23 @@
       j2_mby(Pit, cons)(u2_wire wir_r, 
                         u2_noun vur,                              //  retain
                         u2_noun sed);                             //  retain
+
       u2_noun                                                     //  transfer
-      j2_mby(Pit, eith)(u2_wire wir_r, 
+      j2_mby(Pit, core)(u2_wire wir_r, 
+                        u2_noun vod,                              //  retain
+                        u2_noun suz,                              //  retain
+                        u2_noun hel,                              //  retain
+                        u2_noun don);                             //  retain
+
+      u2_noun                                                     //  transfer
+      j2_mby(Pit, fork)(u2_wire wir_r, 
                         u2_noun hoz,                              //  retain
                         u2_noun bur);                             //  retain
+
+      u2_noun                                                     //  transfer
+      j2_mby(Pit, face)(u2_wire wir_r, 
+                        u2_noun cog,                              //  retain
+                        u2_noun tip);                             //  retain
 
       u2_noun                                                     //  transfer
       j2_mby(Pit, flip)(u2_wire wir_r, 
@@ -303,11 +320,6 @@
       j2_mby(Pit, flan)(u2_wire wir_r,
                         u2_noun bos,                              //  retain
                         u2_noun nif);                             //  retain
-
-      u2_noun                                                     //  transfer
-      j2_mby(Pit, name)(u2_wire wir_r, 
-                        u2_noun cog,                              //  retain
-                        u2_noun tip);                             //  retain
 
       u2_noun                                                     //  transfer
       j2_mby(Pit, hack)(u2_wire wir_r, 
@@ -330,11 +342,6 @@
       u2_noun                                                     //  transfer
       j2_mby(Pit, rake)(u2_wire wir_r, 
                         u2_noun gen);                             //  retain
-
-      u2_noun                                                     //  transfer
-      j2_mby(Pit, twin)(u2_wire wir_r, 
-                        u2_noun hed,                              //  retain
-                        u2_noun tal);                             //  retain
 
       u2_noun                                                     //  transfer
       j2_mcy(Pit, ut, bake)(u2_wire wir_r, 

@@ -100,7 +100,7 @@
             u2_noun hed = j2_mcx(Pit, ut, peek)(wir_r, van, p_sut, axe);
             u2_noun tal = j2_mcx(Pit, ut, peek)(wir_r, van, q_sut, axe);
 
-            pro = j2_mby(Pit, eith)(wir_r, hed, tal);
+            pro = j2_mby(Pit, fork)(wir_r, hed, tal);
 
             u2_rl_lose(wir_r, hed);
             u2_rl_lose(wir_r, tal);

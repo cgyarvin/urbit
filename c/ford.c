@@ -277,45 +277,27 @@ _ford_mo_mill(u2_wire wir_r,
         return u2_none;
       }
       else {
-        u2_noun gom = u2_sh_look(wir_r, van, "mo"); 
+        u2_noun gom = u2_sh_look(wir_r, van, "mill"); 
 
         if ( u2_none == gom ) {
-          printf("ford: mo failed\n");
+          printf("ford: gom failed\n");
           u2_rl_lose(wir_r, van); return u2_none;
         } else {
-          u2_noun fiq = u2_nk_nock(wir_r, van, gom);
+          u2_noun mil = u2_nk_nock(wir_r, van, gom);
 
-          if ( u2_none == fiq ) {
-            printf("ford: fiq failed\n");
+          if ( u2_none == mil ) {
+            printf("ford: mil failed\n");
             return u2_none;
           }
           else {
-            u2_noun hop = u2_rl_molt
-                            (wir_r, fiq, u2_cv_sam, u2_rx(wir_r, gen), 0);
+            u2_noun ruq = u2_rc(wir_r, u2_rx(wir_r, gol), 
+                                       u2_rx(wir_r, gen));
 
-            u2_rl_lose(wir_r, fiq);
-            if ( u2_none == hop ) {
-              printf("ford: hop failed\n");
+            if ( u2_none == ruq ) {
+              printf("ford: ruq failed\n");
               return u2_none;
             }
-            else {
-              u2_noun mil = u2_sh_look(wir_r, hop, "mill");
-
-              if ( u2_none == mil ) {
-                printf("ford: mil failed\n");
-                u2_rl_lose(wir_r, hop);
-                return u2_none;
-              }
-              else {
-                u2_noun ruq = u2_nk_soft(wir_r, hop, mil);
-
-                if ( u2_none == ruq ) {
-                  printf("ford: ruq failed\n");
-                  return u2_none;
-                }
-                else return u2_nk_mung(wir_r, ruq, u2_rx(wir_r, gol));
-              }
-            }
+            else return u2_nk_mung(wir_r, mil, ruq);
           }
         }
       }

@@ -7,6 +7,7 @@ Chars
   cab   _       
   cam   ,       
   cas   ?       
+  dap   -     
   dax   #       
   deg   :       
   den   [
@@ -19,16 +20,15 @@ Chars
   mit   %       
   nat   @     
   ned   ]
-  nap   -     
   pam   &       
   ped   +
   pel   )
   sac   \
-  sar   *
   sed   }
   sig   ~
   sol   /
   tam   ;       
+  tar   *
   tic   `
   tol   "
   zap   !       
