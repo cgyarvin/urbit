@@ -1805,21 +1805,20 @@
       ?~  hax
         ?~  yor
           ~
-        ?.((orth(sut %blur) (peek(sut p.sut) p.u.yor)) ^>(bean.%fork-a !!) yor)
+        ^>  bean.[%port |=((~(fly to ~(tem go `@`cog)) 75))]
+        ^>  bean.[%type |=((~(fly to dump) 75))]
+        ^>(bean.%find-fork !!)
       ?~  yor
-        ?.  (orth(sut %blur) (peek(sut q.sut) p.u.hax))
-          ^>  bean.%fork-b
-          ^>  bean.[%port |=((~(fly to ~(tem go `@`cog)) 75))]
-          ^>  bean.[%type |=((~(fly to dump) 75))]
-          !!
-        hax
+        ^>  bean.[%port |=((~(fly to ~(tem go `@`cog)) 75))]
+        ^>  bean.[%type |=((~(fly to dump) 75))]
+        ^>(bean.%find-fork !!)
       ?:  .=(hax yor)
         hax
       ?.  ?&(.=(p.u.hax p.u.yor) .=(~ q.u.hax) .=(~ q.u.yor))
         ^>  bean.%fork-c
         ^>  bean.[%port |=((~(fly to ~(tem go `@`cog)) 75))]
         ^>  bean.[%type |=((~(fly to dump) 75))]
-        !!
+        ^>(bean.%find-mate !!) 
       [~ p.u.hax ~ [%fork r.u.hax r.u.yor]]
     ::
         [%hold *]
