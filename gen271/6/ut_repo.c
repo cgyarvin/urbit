@@ -1,150 +1,152 @@
-/* j/6/play.c
+/* j/6/ut_repo.c
 **
 ** This file is in the public domain.
 */
 #include "all.h"
 #include "../pit.h"
 
-/* functions
+/* logic
 */
-  u2_noun                                                         //  transfer
-  j2_mcx(Pit, ut, play)(u2_wire wir_r, 
-                          u2_noun van,                            //  retain
-                          u2_noun sut,                            //  retain
-                          u2_noun gen)                            //  retain
+  static u2_noun 
+  _repo_hold_gar(u2_wire wir_r,
+                 u2_noun van,
+                 u2_noun p_sut,
+                 u2_noun q_sut)
   {
-    u2_noun vin = u2_bn_molt(wir_r, van, 87, u2_no, 0);
-    u2_noun pox = j2_mcy(Pit, ut, mill)(wir_r, vin, sut, gen);
-    u2_noun h_pox = u2_h(pox);
-
-    u2_rl_gain(wir_r, h_pox);
-    u2_rl_lose(wir_r, pox); 
-    u2_rl_lose(wir_r, vin);
-
-    return h_pox;
-  }
-
-
-/* boilerplate
-*/
-  u2_ho_jet 
-  j2_mcj(Pit, ut, play)[];
-
-  u2_noun                                                         //  transfer
-  j2_mc(Pit, ut, play)(u2_wire wir_r, 
-                         u2_noun cor)                             //  retain
-  {
-    u2_noun sut, gen, van;
-
-    if ( (u2_no == u2_mean(cor, u2_cv_sam, &gen, u2_cv_con, &van, 0)) ||
-         (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
-    {
-      return u2_bl_bail(wir_r);
+    if ( u2_no == u2_dust(q_sut) ) {
+      return (u2_nul == q_sut ? u2_nul : u2_bl_bail(wir_r));
     } else {
-      return j2_mcx(Pit, ut, play)(wir_r, van, sut, gen);
+      return u2_bc
+        (wir_r, j2_mcy(Pit, ut, play)(wir_r, van, p_sut, u2_h(q_sut)),
+                _repo_hold_gar(wir_r, van, p_sut, u2_t(q_sut)));
+    }
+  }
+  static u2_noun
+  _repo_hold_nog(u2_wire wir_r,
+                 u2_noun van,
+                 u2_noun gar)
+  {
+    u2_noun gun = j2_mcc(Pit, in, gas)(wir_r, u2_nul, gar);
+    u2_noun nog = j2_mcc(Pit, in, tap)(wir_r, gun, u2_nul);
+
+    u2_rl_lose(wir_r, gun);
+    return nog;
+  }
+  static u2_noun
+  _repo_hold_fub(u2_wire wir_r,
+                 u2_noun nog,
+                 u2_noun fub)
+  {
+    if ( u2_no == u2_dust(nog) ) {
+      return (u2_nul == q_sut ? u2_rx(wir_r, fub) : u2_bl_bail(wir_r));
+    } else {
+      u2_noun buf = j2_mby(Pit, fork)(wir_r, fub, u2_h(nog));
+      u2_noun rud = _repo_hold_fub(wir_r, u2_t(nog), buf);
+
+      u2_rl_lose(wir_r, buf);
+      return rud;
     }
   }
 
-  u2_weak                                                         //  transfer
-  j2_mci(Pit, ut, play)(u2_wire wir_r,
-                          u2_noun van,                            //  retain
-                          u2_noun sut,                            //  retain 
-                          u2_noun gen)                            //  retain
+  static u2_noun
+  _repo_hold(u2_wire wir_r,
+             u2_noun van,
+             u2_noun p_sut,
+             u2_noun q_sut)
   {
-    u2_weak hoc = u2_sh_look(wir_r, van, "play");
+    u2_noun gar = _repo_hold_gar(wir_r, van, p_sut, q_sut);
+    u2_noun nog = _repo_hold_nog(wir_r, gar);
+    u2_noun fub = _repo_hold_fub(wir_r, nog, c3__blot);
 
-    if ( u2_none == hoc ) {
-      c3_assert(!"register play");
-      return u2_none;
-    } else {
-      u2_weak von = u2_rl_molt(wir_r, van, u2_cv_sam, u2_rx(wir_r, sut), 0);
-      u2_weak gat = u2_nk_soft(wir_r, von, hoc);
-      u2_weak cor = u2_rl_molt(wir_r, gat, u2_cv_sam, u2_rx(wir_r, gen), 0);
+    u2_rl_lose(wir_r, gar);
+    u2_rl_lose(wir_r, nog);
 
-      if ( (u2_none == j2_mcj(Pit, ut, play)[0].xip) ) {
-        u2_noun xip = u2_sh_find(wir_r, cor);
-     
-        c3_assert(u2_none != xip);
-        j2_mcj(Pit, ut, play)[0].xip = xip;
-      }
-      u2_rl_lose(wir_r, gat);
-      return cor;
-    }
+    return fub;
   }
-
   u2_noun                                                         //  transfer
-  j2_mcy(Pit, ut, play)(u2_wire wir_r,
-                          u2_noun van,                            //  retain
-                          u2_noun sut,                            //  retain
-                          u2_noun gen)                            //  retain
+  j2_mcy(Pit, ut, repo)(u2_wire wir_r, 
+                        u2_noun van,                              //  retain
+                        u2_noun sut)                              //  retain
   {
-    u2_ho_jet *jet_j = &j2_mcj(Pit, ut, play)[0];
+    u2_noun p_sut, q_sut, r_sut;
 
-    switch ( jet_j->sat_s ) {
-      default: c3_assert(0); return u2_bl_bail(wir_r);
+    if ( _1 == axe ) {
+      return j2_mcy(Pit, ut, fuse)(wir_r, van, sut, ref);
+    } else {
+      u2_atom now = j2_mbc(Pit, cap)(wir_r, axe);
+      u2_atom den = j2_mbc(Pit, mas)(wir_r, axe);
 
-      case u2_jet_live: {
-        return j2_mcx(Pit, ut, play)(wir_r, van, sut, gen);
+      if ( u2_no == u2_dust(sut) ) switch ( sut ) {
+        default: return u2_rx(wir_r, sut);
+
+        case c3__blur: return u2_bt(wir_r, c3__cell, c3__blur, c3__blur);
       }
-      case u2_jet_dead: {
-        u2_noun cor, sof;
+      else switch ( u2_h(sut) ) {
+        default: return u2_rx(wir_r, sut);
 
-        cor = j2_mci(Pit, ut, play)(wir_r, van, sut, gen);
-        sof = u2_nk_soft(wir_r, cor, u2_frag(u2_cv_noc, cor));
-
-        return u2_bl_good(wir_r, sof);
-      }
-      case u2_jet_limp: {
-        u2_weak had, cor, sof;
-
-        /* Compute `had`, the C version.  Jet is full-on recursive.
-        ** Catch bails.
-        */
-        {
-          jet_j->sat_s = u2_jet_live;
+        case c3__core: {
+          if ( u2_no == u2_as_trel(u2_t(sut), &p_sut, &q_sut, &r_sut) ) {
+            return u2_bl_bail(wir_r);
+          } else {
+            return u2_bt(wir_r, c3__cell, u2_rx(wir_r, p_sut), c3__blur);
+          }
+        }
+        case c3__cube: {
+          p_sut = u2_t(sut);
           {
-            u2_ray jub_r = u2_bl_open(wir_r);
-
-            if ( u2_bl_set(wir_r) ) {
-              u2_bl_done(wir_r, jub_r);
-              had = u2_none;
-            } 
+            if ( u2_yes == u2_stud(p_sut) ) {
+              return u2_rx(wir_r, p_sut);
+            }
             else {
-              had = j2_mcx(Pit, ut, play)(wir_r, van, sut, gen);
-              u2_bl_done(wir_r, jub_r);
+              return u2_bt
+                (wir_r, c3__cell,
+                        u2_bc(wir_r, c3__cube, u2_rx(wir_r, u2_h(p_sut))),
+                        u2_bc(wir_r, c3__cube, u2_rx(wir_r, u2_t(p_sut))));
+          }
+        }
+        case c3__face: {
+          if ( u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut)) {
+            return u2_bl_bail(wir_r);
+          } else {
+            return u2_rx(wir_r, q_sut);
+          }
+        }
+        case c3__hold: {
+          if ( u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut)) {
+            return u2_bl_bail(wir_r);
+          } else {
+            u2_noun fan = u2_bn_hook(wir_r, van, "fan");
+
+            if ( u2_yes == j2_mcc(Pit, in, has)(wir_r, fan, sut) ) {
+              printf("jet: inference recursion\n");
+              return u2_bl_bail(wir_r);
+            }
+            else {
+              u2_noun nav = u2_bn_cook
+                (wir_r, van, 
+                        "fan", 
+                        j2_mcc(Pit, in, put)(wir_r, fan, _u2_rx(wir_r, sut)));
+              u2_noun mez = _repo_hold
+                (wir_r, nav, p_sut, q_sut);
+
+              u2_rl_lose(wir_r, nav);
+              return mez;
             }
           }
-          jet_j->sat_s = u2_jet_limp;
         }
-
-        /* Compute `sof`, the Nock version.  Jet is full-off recursively.
-        */
-        {
-          jet_j->sat_s = u2_jet_dead;
-          {
-            cor = j2_mci(Pit, ut, play)(wir_r, van, sut, gen);
-            sof = u2_nk_soft(wir_r, u2_rx(wir_r, cor), 
-                                    u2_frag(u2_cv_noc, cor));
-          }
-          jet_j->sat_s = u2_jet_limp;
-        }
-        u2_ho_test(jet_j, cor, sof, had);
-        u2_rl_lose(wir_r, cor);
-
-        if ( u2_none == sof ) {
-          return had;
-        } else {
-          u2_rl_lose(wir_r, had);
-          return sof;
-        }
-      }
+      }   
     }
   }
 
-/* structures
-*/
-  u2_ho_jet 
-  j2_mcj(Pit, ut, play)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, play), SafeTier6, u2_none, u2_none },
-    { }
-  };
+  u2_noun                                                         //  transfer
+  j2_mc(Pit, ut, repo)(u2_wire wir_r, 
+                       u2_noun cor)                               //  retain
+  {
+    u2_noun sut;
+
+    if ( u2_none == (sut = u2_frag(4, cor)) ) {
+      return u2_bl_bail(wir_r);
+    } else {
+      return j2_mcy(Pit, ut, repo)(wir_r, cor, sut);
+    }
+  }

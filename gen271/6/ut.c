@@ -158,17 +158,15 @@
   extern u2_ho_jet j2_mcj(Pit, ut, snap)[];
   extern u2_ho_jet j2_mcj(Pit, ut, tuck)[];
 
-  extern u2_ho_jet    j2_mcj(Pit, ut, mo)[];
-  extern u2_ho_driver j2_mcd(Pit, ut, mo)[];
-
 /* structures
 */
   u2_ho_driver 
   j2_mbd(Pit, ut)[] = {
+#if 0
     { j2_sc(Pit, ut, bake), j2_mcj(Pit, ut, bake), 0, 0, u2_none },
     { j2_sc(Pit, ut, edit), j2_mcj(Pit, ut, edit), 0, 0, u2_none },
     { j2_sc(Pit, ut, fair), j2_mcj(Pit, ut, fair), 0, 0, u2_none },
-    { j2_sc(Pit, ut, find), j2_mcj(Pit, ut, find), 0, 0, u2_none },
+  // { j2_sc(Pit, ut, find), j2_mcj(Pit, ut, find), 0, 0, u2_none },
     { j2_sc(Pit, ut, firm), j2_mcj(Pit, ut, firm), 0, 0, u2_none },
     { j2_sc(Pit, ut, fish), j2_mcj(Pit, ut, fish), 0, 0, u2_none },
     { j2_sc(Pit, ut, gain), j2_mcj(Pit, ut, gain), 0, 0, u2_none },
@@ -182,19 +180,13 @@
     { j2_sc(Pit, ut, seek), j2_mcj(Pit, ut, seek), 0, 0, u2_none },
     { j2_sc(Pit, ut, snap), j2_mcj(Pit, ut, snap), 0, 0, u2_none },
     { j2_sc(Pit, ut, tuck), j2_mcj(Pit, ut, tuck), 0, 0, u2_none },
-#if 0
-    { j2_sc(Pit, ut, mo), 
-      j2_mcj(Pit, ut, mo), 
-      j2_mcd(Pit, ut, mo), 
-      0, 
-      u2_none 
-    },
 #endif
     { }
   };
 
   u2_ho_jet 
   j2_mbj(Pit, ut)[] = {
+ //   { "repo", c3__hevy, j2_mc(Pit, ut, repo), SafeTier6_a, u2_none, u2_none },
     { }
   };
 

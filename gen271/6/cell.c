@@ -15,7 +15,7 @@
     if ( (c3__blot == hed) || (c3__blot == tal) ) {
       return c3__blot;
     } else {
-      return u2_bt(wir_r, c3__cell, hed, tal);
+      return u2_bt(wir_r, c3__cell, u2_rx(wir_r, hed), u2_rx(wir_r, tal));
     }
   }
   u2_noun                                                         //  transfer

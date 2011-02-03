@@ -167,7 +167,7 @@
       { j2_sb(Pit, open), j2_mbj(Pit, open), 0, 0, u2_none },
       { j2_sb(Pit, rake), j2_mbj(Pit, rake), 0, 0, u2_none },
       { j2_sb(Pit, ream), j2_mbj(Pit, ream), 0, 0, u2_none },
-      { j2_sb(Pit, ut), j2_mbj(Pit, ut), j2_mbd(Pit, ut), 0, u2_none } 
+    //  { j2_sb(Pit, ut), j2_mbj(Pit, ut), j2_mbd(Pit, ut), 0, u2_none } 
   };
 
   u2_ho_driver

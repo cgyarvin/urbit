@@ -20,10 +20,7 @@
     mun = u2_rx(wir_r, mun);
     while ( 1 ) {
       if ( u2_nul == har ) {
-        u2_noun pro = u2_bc(wir_r, mun, j2_mby(Pit, hike)(wir_r, axe, luf));
-
-        u2_rl_lose(wir_r, luf);
-        return pro;
+        return mun;
       }
       else {
         u2_noun i_har = u2_h(har);
@@ -34,21 +31,15 @@
         } else {
           u2_noun pi_har = u2_h(i_har);
           u2_noun qi_har = u2_t(i_har);
-          u2_noun rup = j2_mby(Pit, rake)(wir_r, pi_har);
-          u2_noun taq = j2_mcy(Pit, ut, tuck)
-            (wir_r, van, mun, rup, sut, qi_har);
-          u2_noun p_taq = u2_h(taq);
-          u2_noun q_taq = u2_t(taq);
+          u2_noun hep = j2_mby(Pit, rake)(wir_r, pi_har);
+          u2_noun taq = j2_mcy(Pit, ut, tusk)
+            (wir_r, van, mun, hep, sut, qi_har);
 
           har = t_har;
 
+          u2_rl_lose(wir_r, hep);
           u2_rl_lose(wir_r, mun);
-          mun = u2_rx(wir_r, p_taq);
-
-          luf = u2_bc(wir_r, u2_rx(wir_r, q_taq), luf);
-
-          u2_rl_lose(wir_r, rup);
-          u2_rl_lose(wir_r, taq);
+          mun = taq;
         }
       }
     }

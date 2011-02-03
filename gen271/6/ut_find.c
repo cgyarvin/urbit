@@ -100,7 +100,7 @@
                       _1,
                       u2_bt(wir_r, u2_nul, 
                                    j2_mbc(Pit, peg)(wir_r, 3, p_zem),
-                                   u2_rx(wir_r, q_zem)),
+                                   u2_bc(wir_r, u2_rx(wir_r, q_zem), u2_nul)),
                       u2_rx(wir_r, sut));
 
             u2_rl_lose(wir_r, zem);
@@ -133,31 +133,11 @@
           if ( u2_nul == hax ) {
             if ( u2_nul == yor ) {
               return u2_nul;
-            } else {
-              u2_mean(yor, 6, &p_yor, 14, &q_yor, 15, &r_yor, 0);
-              {
-                u2_noun vum = j2_mcy(Pit, ut, peek)
-                  (wir_r, van, p_sut, p_yor);
-
-                if ( c3__blot != vum ) {
-                  return u2_bl_bail(wir_r);
-                }
-                else return yor;
-              }
-            }
+            } else return u2_bl_bail(wir_r);
           }
           else {
             if ( u2_nul == hax ) {
-              u2_mean(hax, 6, &p_hax, 14, &q_hax, 15, &r_hax, 0);
-              {
-                u2_noun vum = j2_mcy(Pit, ut, peek)
-                  (wir_r, van, p_sut, p_hax);
-
-                if ( c3__blot != vum ) {
-                  return u2_bl_bail(wir_r);
-                }
-                else return hax;
-              }
+              return u2_bl_bail(wir_r);
             }
             else {
               if ( u2_yes == u2_sing(hax, yor) ) {
@@ -168,10 +148,10 @@
                 u2_mean(hax, 6, &p_hax, 14, &q_hax, 15, &r_hax, 0);
                 u2_mean(yor, 6, &p_yor, 14, &q_yor, 15, &r_yor, 0);
 
-                if ( (u2_yes == u2_sing(p_hax, p_yor)) &&
-                     (u2_nul == q_hax) &&
-                     (u2_nul == q_yor) )
-                {
+                if ( u2_no == u2_sing(p_hax, p_yor) ) {
+                  return u2_bl_bail(wir_r);
+                }
+                else if ( (u2_nul == q_hax) && (u2_nul == q_yor) ) {
                   pro = u2_bq
                     (wir_r, 
                      u2_nul,
@@ -184,6 +164,12 @@
                   u2_rl_lose(wir_r, yor);
 
                   return pro;
+                }
+                else if ( (u2_nul == q_hax) || (u2_nul == q_yor) ) {
+                  return u2_bl_bail(wir_r);
+                }
+                else {
+
                 }
               }
             }
@@ -200,7 +186,7 @@
           } 
           else {
             u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, gil, sut);
-            u2_type fop = j2_mcy(Pit, ut, play)(wir_r, van, p_sut, q_sut);
+            u2_type fop = j2_mcy(Pit, ut, repo)(wir_r, van, sut);
             u2_noun pro = _find_in(wir_r, van, fop, cog, zoc);
 
             u2_rl_lose(wir_r, fop);

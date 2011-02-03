@@ -171,7 +171,9 @@ J271_4_OFILES=\
        gen271/4/in.o \
        gen271/4/by.o \
        gen271/4/in_has.o \
+       gen271/4/in_gas.o \
        gen271/4/in_put.o \
+       gen271/4/in_tap.o \
        gen271/4/by_gas.o \
        gen271/4/by_get.o \
        gen271/4/by_has.o \
@@ -194,6 +196,8 @@ J271_6_OFILES=\
        gen271/6/rake.o \
        gen271/6/ream.o \
        gen271/6/ut.o \
+
+J271_6_OFILES_UT=\
        gen271/6/ut_bake.o \
        gen271/6/ut_clay.o \
        gen271/6/ut_edit.o \

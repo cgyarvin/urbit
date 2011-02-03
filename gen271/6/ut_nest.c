@@ -383,4 +383,3 @@
     { ".3", c3__hevy, j2_mc(Pit, ut, nest), SafeTier6, u2_none, u2_none },
     { }
   };
-

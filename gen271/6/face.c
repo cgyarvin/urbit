@@ -15,7 +15,8 @@
     if ( c3__blot == tip ) {
       return c3__blot;
     }
-    else return u2_bt(wir_r, c3__face, cog, tip);
+    else return u2_bt
+      (wir_r, c3__face, u2_rx(wir_r, cog), u2_rx(wir_r, tip));
   }
   u2_noun                                                         //  transfer
   j2_mb(Pit, face)(u2_wire wir_r, 

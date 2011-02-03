@@ -14,7 +14,7 @@
 #   define  SafeTier4         u2_jet_live
 #   define  SafeTier5         u2_jet_live
 #   define  SafeTier6_a       u2_jet_dead
-#   define  SafeTier6_b       u2_jet_limp
+#   define  SafeTier6_b       u2_jet_dead
 #   define  SafeTier6_c       u2_jet_live
 
 #   define  SafeTier6         u2_jet_dead

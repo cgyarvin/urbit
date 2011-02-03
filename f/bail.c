@@ -536,6 +536,33 @@ u2_bn_hook(u2_wire     wir_r,
   }
 }
 
+/* u2_bn_cook():
+**
+**   Reverse hook as molt.
+*/
+u2_noun                                                           //  transfer
+u2_bn_cook(u2_wire     wir_r,
+           u2_noun     cor,                                       //  retain
+           const c3_c* tam_c,
+           u2_noun     som)                                       //  transfer
+{
+  u2_weak vib = u2_sh_look(wir_r, cor, tam_c);
+  u2_noun axe;
+
+  if ( (u2_none == vib) ||
+       (u2_no == u2_dust(vib)) ||
+       (u2_nul != u2_h(vib)) ||
+       (u2_no == u2_stud(axe = u2_t(vib)) ) )
+  {
+    return u2_bl_bail(wir_r);
+  } else {
+    u2_noun gon = u2_bn_molt(wir_r, cor, 0, axe, som);
+
+    u2_rl_lose(wir_r, som);
+    return gon;
+  }
+}
+
 /* u2_bn_mung(): 
 **
 **   Call by gate and sample.
@@ -740,3 +767,70 @@ u2_bn_slaq(u2_wire wir_r,
 {
   return u2_bn_slab(wir_r, ((len_w << met_g) + 31) >> 5);
 }
+
+/* u2_bi_cell():
+**
+**   Factor `a` as a cell `[b c].
+*/
+void
+u2_bi_cell(u2_wire  wir_r, 
+           u2_noun  a,
+           u2_noun* b,
+           u2_noun* c)
+{
+  if ( u2_no == u2_as_cell(a, b, c) ) {
+    u2_bl_bail(wir_r);
+  }
+}
+
+/* u2_bi_qual():
+**
+**   Factor `a` as a quadruple `[b c d e]`.
+*/
+void
+u2_bi_qual(u2_wire  wir_r, 
+           u2_noun  a,
+           u2_noun* b,
+           u2_noun* c,
+           u2_noun* d,
+           u2_noun* e)
+{
+  if ( u2_no == u2_as_qual(a, b, c, d, e) ) {
+    u2_bl_bail(wir_r);
+  }
+}
+
+/* u2_bi_quil():
+**
+**   Factor `a` as a quintuple `[b c d e f]`, or bail.
+*/
+void
+u2_bi_quil(u2_wire  wir_r,
+           u2_noun  a,
+           u2_noun* b,
+           u2_noun* c,
+           u2_noun* d,
+           u2_noun* e,
+           u2_noun* f)
+{
+  if ( u2_no == u2_as_quil(a, b, c, d, e, f) ) {
+    u2_bl_bail(wir_r);
+  }
+}
+
+/* u2_bi_trel():
+**
+**   Factor `a` as a trel `[b c d]`, or bail.
+*/
+void
+u2_bi_trel(u2_wire  wir_r,
+           u2_noun  a,
+           u2_noun* b,
+           u2_noun* c,
+           u2_noun* d)
+{
+  if ( u2_no == u2_as_trel(a, b, c, d) ) {
+    u2_bl_bail(wir_r);
+  }
+}
+

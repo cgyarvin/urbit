@@ -44,11 +44,11 @@ Gene - AST
 ::
     gene
   |?
-    ^:(@ *term)
-    [~ p=^:(@ *axis)]
+    ^+(@ *term)
+    [~ p=^+(@ *axis)]
   ::
     [%bndl p=*gene q=*gene]                                     ::  =<  bondul
-    [%bnnp p=*gene q=*gene]                                     ::  =-  bonnap
+    [%bndp p=*gene q=*gene]                                     ::  =-  bondap
     [%bnpd p=*gene q=*gene]                                     ::  =+  bonpad
     [%bnld p=*gene q=*gene]                                     ::  =>  bonlud
   ::
@@ -57,8 +57,8 @@ Gene - AST
     [%brdg p=*gene]                                             ::  |:  bardeg
     [%brdl p=*gene q=*gene]                                     ::  |<  bardul
     [%brmt p=*(list &[p=*term q=*gene])]                        ::  |%  barmit
-    [%brnp p=*gene]                                             ::  |-  barnep
-    [%brsr p=*(list &[p=*term q=*gene])]                        ::  |*  barsar
+    [%brdp p=*gene]                                             ::  |-  bardap
+    [%brtr p=*(list &[p=*term q=*gene])]                        ::  |*  bartar
     [%brsg p=*gene q=*(list gene)]                              ::  |~  barsig
     [%brld p=*gene q=*gene]                                     ::  |>  barlud
   ::
@@ -68,30 +68,29 @@ Gene - AST
     [%csdl p=*gene q=*gene]                                     ::  ?<  casdul
     [%csdt p=*gene q=*gene r=*gene]                             ::  ?.  casdot
     [%csld p=*gene q=*gene]                                     ::  ?>  caslud
-    [%csnp p=*gene q=*(list &[p=*gene q=*gene])]                ::  ?-  casnep
+    [%csdp p=*gene q=*(list &[p=*gene q=*gene])]                ::  ?-  casdap
     [%cspm p=*(list gene)]                                      ::  ?&  caspam
-    [%cssr p=*gene q=*(list gene)]                              ::  ?*  cassar
+    [%cstr p=*gene q=*(list gene)]                              ::  ?*  castar
     [%cssg p=*gene q=*gene r=*gene]                             ::  ?~  cassig
     [%cszp p=*gene]                                             ::  ?!  caszap
   ::
     [%dgkt p=*gene q=*gene r=*gene s=*gene]                     ::  :^  degket
-    [%dgnp p=*gene q=*gene]                                     ::  :-  degnep
+    [%dgdp p=*gene q=*gene]                                     ::  :-  degdap
     [%dgpd p=*gene q=*gene r=*gene]                             ::  :+  degpad
-    [%dgsr p=*(list gene)]                                      ::  :*  degsar
+    [%dgtr p=*(list gene)]                                      ::  :*  degtar
     [%dgsg p=*(list gene)]                                      ::  :~  degsig
   :: 
     [%dtbn p=*gene q=*gene]                                     ::  .=  dotbon
     [%dtkt p=*gene]                                             ::  .^  dotket
     [%dtcs p=*gene]                                             ::  .?  dotcas
-    [%dtsr p=*gene q=*gene]                                     ::  .*  dotsar
+    [%dttr p=*gene q=*gene]                                     ::  .*  dottar
     [%dtsg p=*]                                                 ::  .~  dotsig
   ::
     [%ktbn p=*term q=*gene]                                     ::  ^=  ketbon
     [%ktdl p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^<  ketdul
-    [%ktnp p=*gene q=*gene]                                     ::  ^-  ketnep
+    [%ktdp p=*gene q=*gene]                                     ::  ^-  ketdap
     [%ktpd p=*gene q=*gene]                                     ::  ^+  ketpad
     [%ktld p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^>  ketlud
-    [%ktsr p=*gene]                                             ::  ^*  ketsar
     [%ktsg p=*gene]                                             ::  ^~  ketsig
   ::
     [%mtbn p=*rope q=*(list &[p=*gene q=*gene])]                ::  %=  mitbon
@@ -99,34 +98,20 @@ Gene - AST
     [%mtdg p=*gene q=*gene]                                     ::  %:  mitdeg
     [%mtdt p=*gene q=*gene]                                     ::  %.  mitdot
     [%mtkt p=*gene q=*gene r=*gene s=*gene]                     ::  %^  mitket
-    [%mtnp p=*gene q=*(list gene)]                              ::  %-  mitnep  
+    [%mtdp p=*gene q=*(list gene)]                              ::  %-  mitdap  
     [%mtpd p=*gene q=*gene r=*gene]                             ::  %+  mitpad
-    [%mtsr p=*gene]                                             ::  %*  mitsar
+    [%mttr p=*gene]                                             ::  %*  mittar
     [%mtsg p=*rope q=*gene r=*gene]                             ::  %~  mitsig
   ::
     [%tmbn p=*<%atom %blur %cell %flag %null>]                  ::  ;=  tambon
+    [%tmdp p=*gene]                                             ::  ;-  tamdap
     [%tmpd p=*gene q=*gene]                                     ::  ;+  tampad
-    [%tmnp p=*gene]                                             ::  ;-  tamnep
   ::
     [%zpbn p=*gene]                                             ::  !=  zapbon
     [%zpdx p=*gene]                                             ::  !#  zapdax
     [%zpcb p=*spot q=*gene]                                     ::  !_  zapcab
     [%zpzp ~]                                                   ::  !!  zapzap
-  ==
-  ::
-    axis  &@
-    bank  (list gene)
-    cord  *<^+(@ *term) [%frag p=*axis] [%pith p=*term] [%port p=*term]>
-    door  &[p=*axis q=*type r=*gene]
-    home  (list term)
-    menu  (list &[p=*term q=*gene])
-    plan  &[p=*axis q=*(unit door) r=*type]
-    rack  (list &[p=*gene p=*gene])
-    rope  (list cord)
-    spec  *<[%none ~] [%leaf p=*term q=*gene] [p=^+(^ *spec) q=*spec]>
-    spot  &[p=[p=@ q=@] [[p=@ q=@]]
-  ::
-
+  --
 Nock formula
   ::
   ::::::::

@@ -82,6 +82,52 @@
                      u2_atom a,
                      u2_noun b);
 
+        /* u2_bi_cell():
+        **
+        **   Factor `a` as a cell `[b c]`.
+        */
+          void
+          u2_bi_cell(u2_wire  wir_r, 
+                     u2_noun  a,
+                     u2_noun* b,
+                     u2_noun* c);
+
+        /* u2_bi_qual():
+        **
+        **   Factor `a` as a quadruple `[b c d e]`.
+        */
+          void
+          u2_bi_qual(u2_wire  wir_r, 
+                     u2_noun  a,
+                     u2_noun* b,
+                     u2_noun* c,
+                     u2_noun* d,
+                     u2_noun* e);
+
+        /* u2_bi_quil():
+        **
+        **   Factor `a` as a quintuple `[b c d e f]`, or bail.
+        */
+          void
+          u2_bi_quil(u2_wire  wir_r,
+                     u2_noun  a,
+                     u2_noun* b,
+                     u2_noun* c,
+                     u2_noun* d,
+                     u2_noun* e,
+                     u2_noun* f);
+
+        /* u2_bi_trel():
+        **
+        **   Factor `a` as a trel `[b c d]`, or bail.
+        */
+          void
+          u2_bi_trel(u2_wire  wir_r,
+                     u2_noun  a,
+                     u2_noun* b,
+                     u2_noun* c,
+                     u2_noun* d);
+
       /** Atom access.
       **/
         /* u2_bi_met(): 
@@ -351,6 +397,16 @@
             u2_bn_hook(u2_wire     wir_r,
                        u2_noun     cor,
                        const c3_c* tam_c);
+
+          /* u2_bn_cook():
+          **
+          **   Reverse hook as molt.
+          */
+            u2_noun                                               //  transfer
+            u2_bn_cook(u2_wire     wir_r,
+                       u2_noun     cor,                           //  retain
+                       const c3_c* tam_c,
+                       u2_noun     som);                          //  transfer
 
           /* u2_bn_gart():
           **
