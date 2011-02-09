@@ -1,0 +1,59 @@
+  ::::
+  ::
+      mask
+    ^<  mine.[!=(->) %tine ~]
+    =+  ref=*type
+    |=
+    ^>  bean.%mask
+    =+  bix=*(set &[*type *type])
+    |-  ^-  *type
+    =<  f
+    |*
+    ::::
+        f
+      ?:  .=(sut ref)
+        %void
+      ?-    sut
+          %atom         ?:(?=([%cell *] ref) %atom g)
+      ::
+          [%cell *]
+        ?.  ?=([%cell *] ref)
+          g
+        (cell $(sut p.sut, ref p.ref) $(sut q.sut, ref q.ref))
+      ::
+          [%core *]     $(sut repo)
+          [%cube *]
+        ?-    ref
+            %atom       ?:(.?(p.sut) sut %void)
+            [%cell *]   ?:(.?(p.sut) (reco =+(p=*type |=($$(sut p))) sut)
+            [%cube *]   %void
+            *           g
+        --
+      ::
+          [%face *]     (face p.sut $(sut q.sut))
+          [%fork *]     (fork $(sut p.sut) $(sut q.sut))
+          [%hold *]
+        ?:  (~(has in bix) [sut ref])
+          ^>  bean.[%mask-sut |=((~(fly to dump) 75))]
+          ^>  bean.[%mask-ref |=((~(fly to dump(sut ref)) 75))]
+          ^>  bean.%mask-loop 
+          !!
+        $(bix (~(put in bix) [sut ref]), sut repo)
+      ::
+          %noun       (reco =+(p=*type |=($$(sut p))))
+          %void       ref
+      --
+    ::::
+        g
+      ?-    ref
+          %atom       (fuse [%cell %noun %noun])
+          [%cell *]   %void
+          [%core *]   f(ref repo(sut ref))
+          [%cube *]   f(ref repo(sut ref))
+          [%face *]   f(ref repo(sut ref))
+          [%fork *]   f(ref q.ref, sut f(ref p.ref))
+          %noun       %void
+          %void       sut
+          *           f(ref repo(sut ref))
+      --
+    ==
