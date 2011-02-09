@@ -5,7 +5,7 @@ Chars
   bon   =       
   bot   '       
   cab   _       
-  cam   ,       
+  com   ,       
   cas   ?       
   dap   -     
   dax   #       
@@ -25,11 +25,11 @@ Chars
   pel   )
   sac   \
   sed   }
-  sig   ~
   sol   /
   tam   ;       
   tar   *
-  tic   `
+  tec   `
+  tig   ~
   tol   "
   zap   !       
 
@@ -40,8 +40,6 @@ Watt GTO: Gran Tabula Operazioni
 (Copied from watt.watt - any discrepancies favor watt.watt.)
 
 Gene - AST
-::::
-::
     gene
   |?
     ^+(@ *term)
@@ -52,15 +50,14 @@ Gene - AST
     [%bnpd p=*gene q=*gene]                                     ::  =+  bonpad
     [%bnld p=*gene q=*gene]                                     ::  =>  bonlud
   ::
-    [%brbn p=*gene]                                             ::  |=  barbon
+    [%brbn p=*gene q=*gene]                                     ::  |=  barbon
     [%brcs p=*(list gene)]                                      ::  |?  barcas
     [%brdg p=*gene]                                             ::  |:  bardeg
-    [%brdl p=*gene q=*gene]                                     ::  |<  bardul
-    [%brmt p=*(list &[p=*term q=*gene])]                        ::  |%  barmit
     [%brdp p=*gene]                                             ::  |-  bardap
-    [%brtr p=*(list &[p=*term q=*gene])]                        ::  |*  bartar
+    [%brdt p=*gene q=*gene]                                     ::  |.  bardot
+    [%brmt p=*gene q=*gene r=*gene]                             ::  |%  barmit
     [%brsg p=*gene q=*(list gene)]                              ::  |~  barsig
-    [%brld p=*gene q=*gene]                                     ::  |>  barlud
+    [%brtr p=*gene q=*gene]                                     ::  |*  bartar
   ::
     [%csbn p=*gene q=*gene]                                     ::  ?=  casbon
     [%csbr p=*(list gene)]                                      ::  ?|  casbar
@@ -93,19 +90,28 @@ Gene - AST
     [%ktld p=*<@ [p=@ q=*gene]> q=*gene]                        ::  ^>  ketlud
     [%ktsg p=*gene]                                             ::  ^~  ketsig
   ::
-    [%mtbn p=*rope q=*(list &[p=*gene q=*gene])]                ::  %=  mitbon
-    [%mtbr p=*rope q=*gene r=*(list &[p=*gene q=*gene])]        ::  %|  mitbar
+    [%mtbn p=*twig q=*(list &[p=*gene q=*gene])]                ::  %=  mitbon
+    [%mtbr p=*twig q=*gene r=*(list &[p=*gene q=*gene])]        ::  %|  mitbar
     [%mtdg p=*gene q=*gene]                                     ::  %:  mitdeg
     [%mtdt p=*gene q=*gene]                                     ::  %.  mitdot
     [%mtkt p=*gene q=*gene r=*gene s=*gene]                     ::  %^  mitket
     [%mtdp p=*gene q=*(list gene)]                              ::  %-  mitdap  
     [%mtpd p=*gene q=*gene r=*gene]                             ::  %+  mitpad
     [%mttr p=*gene]                                             ::  %*  mittar
-    [%mtsg p=*rope q=*gene r=*gene]                             ::  %~  mitsig
+    [%mtsg p=*twig q=*gene r=*gene]                             ::  %~  mitsig
+  ::
+    [%pmbn p=*gene q=*(book term foot)]                         ::  &=  pambon
+    [%pmdg p=*(book term foot)]                                 ::  &:  pamdeg
+    [%pmdp p=*gene q=*(book term foot)]                         ::  &-  pamdap
+    [%pmdt p=*gene q=*(book term foot)]                         ::  &.  pamdot
+    [%pmmt p=*gene q=*gene r=*(book term foot)]                 ::  &%  pammit
+    [%pmtr p=*gene q=*(book term foot)]                         ::  &*  pamtar
+    [%pmzp p=*<%gold %lead %iron %wood %zinc> q=*(book term foot)]
   ::
     [%tmbn p=*<%atom %blur %cell %flag %null>]                  ::  ;=  tambon
     [%tmdp p=*gene]                                             ::  ;-  tamdap
     [%tmpd p=*gene q=*gene]                                     ::  ;+  tampad
+    [%tmtr p=*(list gene)]                                      ::  ;*  tamtar
   ::
     [%zpbn p=*gene]                                             ::  !=  zapbon
     [%zpdx p=*gene]                                             ::  !#  zapdax
