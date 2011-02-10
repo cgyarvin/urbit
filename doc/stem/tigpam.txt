@@ -1,0 +1,4 @@
+~&  %tgpm   "tigpam"
+
+  gene:
+    [%tgpm p=*gene q=*gene]

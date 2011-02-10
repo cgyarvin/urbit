@@ -1,0 +1,4 @@
+;*  %tmtr   "tamtar"
+
+  gene:
+    [%tmtr p=*(list gene)]

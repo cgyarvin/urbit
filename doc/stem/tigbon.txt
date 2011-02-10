@@ -1,0 +1,4 @@
+~=  %tgbn   "tigbon"
+
+  gene:
+    [%tgbn p=*gene q=*gene]                                     ::  ~=  tigbon

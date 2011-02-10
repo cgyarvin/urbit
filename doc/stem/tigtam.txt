@@ -1,0 +1,4 @@
+~;  %tgtm   "tigtam"
+
+  gene:
+    [%tgtm p=*gene q=*gene r=*gene]

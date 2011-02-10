@@ -1,0 +1,4 @@
+|%  %brmt   "barmit"
+
+  gene:
+    [%brmt p=*gene q=*gene r=*gene]

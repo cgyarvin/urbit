@@ -1,0 +1,4 @@
+~^  %tgkt   "tigket"
+
+  gene:
+    [%tgkt p=*gene]

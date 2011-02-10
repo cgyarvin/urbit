@@ -1,0 +1,4 @@
+~<  %tgdl   "tigdel"
+
+  gene:
+    [%tgdl p=*term q=*gene r=*gene]

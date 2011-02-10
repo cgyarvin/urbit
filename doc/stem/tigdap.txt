@@ -1,0 +1,4 @@
+~-  %tgdp   "tigdap"
+
+  gene:
+    [%tgdp p=@ q=*gene]

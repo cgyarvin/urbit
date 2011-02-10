@@ -1,0 +1,4 @@
+?~  %cstg   "castig"
+
+  gene:
+    [%cstg p=*gene q=*gene r=*gene]

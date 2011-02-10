@@ -1,0 +1,4 @@
+~.  %tgdt   "tigdot"
+
+  gene:
+    [%tgdt p=*gene q=*gene r=*gene]

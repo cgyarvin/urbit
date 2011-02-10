@@ -1,0 +1,4 @@
+~,  %tgcm   "tigcom"
+
+  gene:
+    [%tgcm p=*gene q=*gene]

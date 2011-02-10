@@ -1,0 +1,4 @@
+&-  %pmdp   "pamdap"
+
+  gene:
+    [%pmdp p=*gene q=*(map term foot)]

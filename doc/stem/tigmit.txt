@@ -1,0 +1,4 @@
+~%  %tgmt   "tigmit"
+
+  gene:
+    [%tgmt p=*seal q=*gene r=*gene s=*gene]

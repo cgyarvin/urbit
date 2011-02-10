@@ -1,0 +1,4 @@
+|?  %brcs   "barcas"
+
+  gene:
+    [%brcs p=*(list gene)]

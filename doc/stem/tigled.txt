@@ -1,0 +1,4 @@
+~>  %tgld   "tigled"
+
+  gene:
+    [%tgld p=*term q=*gene r=*gene]                             ::  ~>  tigled

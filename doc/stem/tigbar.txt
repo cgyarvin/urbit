@@ -1,0 +1,4 @@
+~|  %tgbr   "tigbar"
+
+  gene:
+    [%tgbr p=*gene q=*gene]

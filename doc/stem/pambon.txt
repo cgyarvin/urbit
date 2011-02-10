@@ -1,0 +1,4 @@
+&=  %pmbn   "pambon"
+  
+  gene:
+    [%pmbn p=*gene q=*(map term foot)]

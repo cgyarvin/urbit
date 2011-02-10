@@ -1,0 +1,4 @@
+|=  %brbn   "barbon"
+
+  gene:
+    [%brbn p=*gene q=*gene]

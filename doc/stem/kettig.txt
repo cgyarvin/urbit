@@ -1,0 +1,4 @@
+^~  %kttg   "kettig"
+
+  gene:
+    [%kttg p=*gene]

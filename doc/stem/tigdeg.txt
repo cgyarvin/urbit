@@ -1,0 +1,4 @@
+~:  %tgdg   "tigdeg"
+
+  gene:
+    [%tgdg p=[p=@ q=@] q=*gene]

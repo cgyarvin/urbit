@@ -1,0 +1,4 @@
+~+  %tgpd   "tigpad"
+
+  gene:
+    [%tgpd p=@ q=*gene]

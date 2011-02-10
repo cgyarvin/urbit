@@ -1,0 +1,4 @@
+&%  %pmmt   "pammit"
+
+  gene:
+    [%pmmt p=*gene q=*gene r=*(map term foot)]

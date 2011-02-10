@@ -1,0 +1,4 @@
+|-  %brdp   "bardap"
+
+  gene:
+    [%brdp p=*gene]

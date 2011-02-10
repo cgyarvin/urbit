@@ -1,0 +1,4 @@
+~*  %tgtr   "tigtar"
+
+  gene:
+    [%tgtr p=*gene]                                             ::  ~*  tigtar
