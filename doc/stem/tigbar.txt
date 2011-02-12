@@ -2,3 +2,6 @@
 
   gene:
     [%tgbr p=*gene q=*gene]
+
+  ap open:
+    [%tgld [%bean p.gen] q.gen]

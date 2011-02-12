@@ -2,3 +2,6 @@
 
   gene:
     [%tgpm p=*gene q=*gene]
+
+  ap open:
+    [%tgld [%loaf p.gen] q.gen]

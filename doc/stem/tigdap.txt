@@ -2,3 +2,6 @@
 
   gene:
     [%tgdp p=@ q=*gene]
+
+  ap open:
+    [%tgld [%sole %dttg p.gen] q.gen]

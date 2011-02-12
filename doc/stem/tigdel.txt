@@ -2,3 +2,6 @@
 
   gene:
     [%tgdl p=*term q=*gene r=*gene]
+
+  ap open:
+    [%bndl [%tgld p.gen [~ 1]] q.gen]

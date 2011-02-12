@@ -2,3 +2,6 @@
 
   gene:
     [%tgbn p=*gene q=*gene]                                     ::  ~=  tigbon
+
+  ap open:
+    [%tgld [%germ p.gen] q.gen]

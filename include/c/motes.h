@@ -677,6 +677,20 @@
 #   define c3__term   c3_s4('t','e','r','m')
 #   define c3__test   c3_s4('t','e','s','t')
 #   define c3__text   c3_s4('t','e','x','t')
+
+#   define c3__tgbn   c3_s4('t','g','b','n')
+#   define c3__tgbr   c3_s4('t','g','b','r')
+#   define c3__tgdg   c3_s4('t','g','d','g')
+#   define c3__tgdl   c3_s4('t','g','d','l')
+#   define c3__tgdp   c3_s4('t','g','d','p')
+#   define c3__tgdx   c3_s4('t','g','d','x')
+#   define c3__tgkt   c3_s4('t','g','k','t')
+#   define c3__tgld   c3_s4('t','g','l','d')
+#   define c3__tgmt   c3_s4('t','g','m','t')
+#   define c3__tgpd   c3_s4('t','g','p','d')
+#   define c3__tgpm   c3_s4('t','g','p','m')
+
+
 #   define c3__then   c3_s4('t','h','e','n')
 #   define c3__tick   c3_s4('t','i','c','k')
 #   define c3__tip    c3_s3('t','i','p')

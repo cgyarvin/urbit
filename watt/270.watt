@@ -1,10 +1,12 @@
-^<  mine.[~ [%watt 270] ~]
+~%    watt.270
+    ~   
+  ~
 |*
   ::  Tier 1, light math
 ::::
 ::
     add
-  ^<  mine.[!=(->) %add ~]
+  ~%  %add  ->  ~ 
   |>  [a=@ b=@] 
   ^-  @
   ?:  .=(0 a)

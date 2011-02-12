@@ -1,4 +1,7 @@
 ~+  %tgpd   "tigpad"
 
   gene:
-    [%tgpd p=@ q=*gene]
+    [%tgpd p=@ q=*gene] 
+
+  ap open:
+    [%tgld [%memo %dttg p.gen] q.gen]

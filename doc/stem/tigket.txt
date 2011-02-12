@@ -2,3 +2,6 @@
 
   gene:
     [%tgkt p=*gene]
+
+  ap open:
+    [%tgld %keep p.gen]
