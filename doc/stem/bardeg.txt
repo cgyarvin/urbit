@@ -2,3 +2,6 @@
 
   gene:
     [%brdg p=*gene]
+
+  ap open:
+    [%pmdg [[%% [& p.gen]] ~ ~]]

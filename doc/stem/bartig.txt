@@ -2,3 +2,36 @@
 
   gene:
     [%brtg p=*gene q=*(list gene)]
+
+  ap open:
+    |-
+    ?-  q.gen
+        ~       !!
+        [* ~]   i.q.gen
+        ^
+      :+  %bnpd
+        $(q.gen t.q.gen)
+      :+  %bnpd
+        [%bnld [~ 3] i.q.gen]
+      :+  %brtr
+        [~ 8]
+      :^    %mtpd
+          [%bnld [~ 23] p.gen]
+        [%mtdp [~ 10] [~ 4] ~]
+      [%mtbn [[~ 22] ~] [[[~ 4] [~ 4]] ~]]
+    --
+
+  ap open (meta):
+    |-
+    ?-  q.gen
+        ~       !!
+        [* ~]   i.q.gen
+        ^
+      !$
+      =+  {$(q.gen t.q.gen)}
+      =+  =>(.3 {i.q.gen})
+      |*  .8
+      %+  =>(.23 {p.gen})
+        %-(.10 .4)
+      %=(.22 .4 .4)
+    --

@@ -6,7 +6,7 @@
 /* Pre-bison prologue.
 */
 %{
-# inclede "all.h"
+# include "all.h"
 #   define  Pit   watt_271
 
   /* Everything is a noun - no yacc type declarations!
@@ -48,6 +48,7 @@
 #   define _yqual(a, b, c, d)      u2_bq(yqw_r, a, b, c, d)
 #   define _yquil(a, b, c, d, e)   u2_bu(yqw_r, a, b, c, d, e)
 
+#   define _ybook(a)               j2_mcc(Pit, by, gas)(yqw_r, u2_nul, a);
 %}
 
 /* Bison directives.
@@ -59,7 +60,7 @@
 
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 59
+  %expect 56
 
   %pure-parser
   %locations
@@ -171,8 +172,10 @@ wide_c
         { $$ = _ytrel(c3__mtbn, $1, $3); }
       | si_zap wide
         { $$ = _ycell(c3__cszp, $2); }
+/*
       | si_pam wide
         { $$ = _ytrel(c3__brcs, $2, u2_nul); }
+*/
       | si_tar wide
         { $$ = _ycell(c3__mttr, $2); }
       | si_tic wide si_tic wide
@@ -303,8 +306,10 @@ wide_c
       { $$ = _ytrel($3, $5, u2_nul); }
     body_l_wide:
       { $$ = u2_nul; }
+/*
     body_o_wide: si_lep g wide g si_pel
       { $$ = $3; }
+*/
     body_p_wide: si_lep g rope w wide w rack_wide si_pel
       { $$ = _ytrel($3, $5, $7); }
     body_q_wide: si_lep g rope w wide w wide si_pel
@@ -321,21 +326,17 @@ wide_c
     pair_wide
       : wide w wide      { $$ = _ycell($1, $3); }
       ;
-
+/*
     dish_wide
       : term w wide      { $$ = _ycell($1, $3); }
       ;
-
+*/
     rack_wide
       : g                             { $$ = _0; }
       | pair_wide g                   { $$ = _ycell($1, _0); }
       | pair_wide ',' g rack_wide     { $$ = _ycell($1, $4); }
       ;
 
-    menu_wide
-      : dish_wide g                   { $$ = _ycell($1, _0); }
-      | dish_wide ',' g menu_wide     { $$ = _ycell($1, $4); }
-      ;
 tall
   : tall_norm
 
@@ -353,14 +354,14 @@ tall
     tall_norm: di_casdap w body_h_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_castar w body_i_tall    { $$ = _ycell($1, $3); }
 
-    tall_norm: di_barbon body_b_tall      { $$ = _ycell($1, $2); }
-    tall_norm: di_barcas body_d_tall      { $$ = _ycell($1, $2); }
-    tall_norm: di_bardeg body_a_tall      { $$ = _ycell($1, $2); }
-    tall_norm: di_bardap body_a_tall      { $$ = _ycell($1, $2); }
-    tall_norm: di_bardot body_b_tall      { $$ = _ycell($1, $2); }
-    tall_norm: di_barmit body_c_tall      { $$ = _ycell($1, $2); }
-    tall_norm: di_bartig body_i_tall      { $$ = _ycell($1, $2); }
-    tall_norm: di_bartar body_b_tall      { $$ = _ycell($1, $2); }
+    tall_norm: di_barbon w body_b_tall      { $$ = _ycell($1, $2); }
+    tall_norm: di_barcas w body_d_tall      { $$ = _ycell($1, $2); }
+    tall_norm: di_bardeg w body_a_tall      { $$ = _ycell($1, $2); }
+    tall_norm: di_bardap w body_a_tall      { $$ = _ycell($1, $2); }
+    tall_norm: di_bardot w body_b_tall      { $$ = _ycell($1, $2); }
+    tall_norm: di_barmit w body_c_tall      { $$ = _ycell($1, $2); }
+    tall_norm: di_bartig w body_i_tall      { $$ = _ycell($1, $2); }
+    tall_norm: di_bartar w body_b_tall      { $$ = _ycell($1, $2); }
 
     tall_norm: di_bonpad w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_bondap w body_b_tall    { $$ = _ycell($1, $3); }
@@ -406,7 +407,6 @@ tall
     tall_norm: di_pamdap w body_ex_tall   { $$ = _ycell($1, $3); }
     tall_norm: di_pamdot w body_ex_tall   { $$ = _ycell($1, $3); }
     tall_norm: di_pammit w body_ey_tall   { $$ = _ycell($1, $3); }
-    tall_norm: di_pampad w body_ex_tall   { $$ = _ycell($1, $3); }
     tall_norm: di_pamtar w body_ex_tall   { $$ = _ycell($1, $3); }
 
     tall_norm: di_zapdax w body_a_tall    { $$ = _ycell($1, $3); }
@@ -428,7 +428,9 @@ tall
     body_i_tall: gene w bank_tall           { $$ = _ycell($1, $3); }
     body_j_tall: rope w rack_tall           { $$ = _ycell($1, $3); }
     body_k_tall: gene w gene                { $$ = _ytrel($1, $3, u2_nul); }
+/*
     body_o_tall: gene                       { $$ = $1; }
+*/
     body_p_tall: rope w gene w rack_tall    { $$ = _ytrel($1, $3, $5); }
     body_q_tall: rope w gene w gene         { $$ = _ytrel($1, $3, $5); }
     body_r_tall: hont w gene                { $$ = _ycell($1, $3); }
@@ -447,8 +449,8 @@ tall
       ;
 
       foot_star
-        :                   { $$ = _0; }
-        | foot w foot_star  { $$ = _ycell(_ycell($1, $3), $5); }
+        :                   { $$ = u2_nul; }
+        | foot w foot_star  { $$ = _ycell($1, $3); }
         ;
  
   /** Tall - body parts.
@@ -467,14 +469,6 @@ tall
       tall_tall_star
         :                               { $$ = _0; }
         | gene w gene w tall_tall_star  { $$ = _ycell(_ycell($1, $3), $5); }
-        ;
-
-    menu_tall
-      : term_tall_star e                { $$ = $1; }
-      ;
-      term_tall_star
-        :                               { $$ = _0; }
-        | foot w term_tall_star  { $$ = _ycell(_ycell($1, $3), $5); }
         ;
 
 
@@ -533,12 +527,12 @@ tall
 
     di_barbon: si_bar si_bon  { $$ = c3__brbn; }
     di_barcas: si_bar si_cas  { $$ = c3__brcs; }
-    di_bardeg: si_bar si_deg  { $$ = c3__brdg; }
     di_bardap: si_bar si_dap  { $$ = c3__brdp; }
+    di_bardeg: si_bar si_deg  { $$ = c3__brdg; }
+    di_bardot: si_bar si_dot  { $$ = c3__brdt; }
     di_barmit: si_bar si_mit  { $$ = c3__brmt; }
     di_bartar: si_bar si_tar  { $$ = c3__brtr; }
     di_bartig: si_bar si_tig  { $$ = c3__brtg; }
-    di_barled: si_bar si_led  { $$ = c3__brld; }
 
     di_bondel: si_bon si_del  { $$ = c3__bndl; }
     di_bonled: si_bon si_led  { $$ = c3__bnld; }
@@ -577,12 +571,11 @@ tall
     di_mitket: si_mit si_ket  { $$ = c3__mtkt; }
 
     di_pambon: si_pam si_bon  { $$ = c3__pmbn; }
-    di_pamdeg: si_pam si_deg  { $$ = c3__pmdg; }
     di_pamdap: si_pam si_dap  { $$ = c3__pmdp; }
+    di_pamdeg: si_pam si_deg  { $$ = c3__pmdg; }
+    di_pamdot: si_pam si_dot  { $$ = c3__pmdt; }
     di_pammit: si_pam si_mit  { $$ = c3__pmmt; }
     di_pamtar: si_pam si_tar  { $$ = c3__pmtr; }
-    di_pamtig: si_pam si_tig  { $$ = c3__pmtg; }
-    di_pamled: si_pam si_led  { $$ = c3__pmld; }
 
     di_tamdap: si_tam si_dap  { $$ = c3__tmdp; }
     di_tampad: si_tam si_pad  { $$ = c3__tmpd; }

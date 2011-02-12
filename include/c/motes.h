@@ -64,6 +64,7 @@
 #   define c3__brdg   c3_s4('b','r','d','g')
 #   define c3__brdl   c3_s4('b','r','d','l')
 #   define c3__brdp   c3_s4('b','r','d','p')
+#   define c3__brdt   c3_s4('b','r','d','t')
 #   define c3__brip   c3_s4('b','r','i','p')
 #   define c3__brld   c3_s4('b','r','l','d')
 #   define c3__brmt   c3_s4('b','r','m','t')

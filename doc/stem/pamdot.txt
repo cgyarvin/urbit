@@ -2,3 +2,6 @@
   
   gene:
     [%pmdt p=*gene q=*(map term foot)]
+
+  ap open:
+    [%bnpd p.gen [%pmzp %zinc q.gen]]

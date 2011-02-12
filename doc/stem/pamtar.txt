@@ -1,7 +1,7 @@
-&=  %pmbn   "pambon"
+&*  %pmtr   "pamtar"
   
   gene:
     [%pmtr p=*gene q=*(map term foot)]
 
   ap open:
-    [%bnpd p.gen [%pmzp %gold q.gen]]
+    [%bnpd p.gen [%pmzp %wood q.gen]]
