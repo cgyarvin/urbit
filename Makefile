@@ -156,6 +156,7 @@ J271_3_OFILES=\
        gen271/3/dis.o \
        gen271/3/end.o \
        gen271/3/gor.o \
+       gen271/3/hor.o \
        gen271/3/lsh.o \
        gen271/3/mas.o \
        gen271/3/met.o \

@@ -342,12 +342,13 @@ ford_test3(struct ford_state* fod_f,
   else {
     u2_noun gen = j2_mbc(watt_271, ream)(wir_r, src);
 
+    // u2_err(wir_r, "gene", gen);
     if ( u2_none == gen ) {
       printf("test3: %s: no gene\n", src_c);
       return;
     }
     else {
-      u2_noun lof = _ford_mo_mill(wir_r, fod_f->pit, c3__blur, c3__blur, gen); 
+      u2_noun lof = _ford_mo_mill(wir_r, fod_f->pit, c3__noun, c3__noun, gen); 
 
       if ( u2_none == lof ) {
         printf("test: failed\n");
@@ -365,7 +366,7 @@ ford_test3(struct ford_state* fod_f,
           u2_noun pug = u2_bn_nock(wir_r, _0, tul);
           u2_noun src = u2_rl_string(wir_r, arg_c);
           u2_noun ger = j2_mbc(watt_271, ream)(wir_r, src);
-          u2_noun hup = _ford_mo_mill(wir_r, fod_f->pit, typ, c3__blur, ger);
+          u2_noun hup = _ford_mo_mill(wir_r, fod_f->pit, typ, c3__noun, ger);
 
           if ( (u2_none != hup) && (u2_none != pug) ) {
             u2_weak muf = u2_nk_nock(wir_r, pug, u2_t(hup));

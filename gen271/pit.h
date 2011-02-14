@@ -209,6 +209,11 @@
                        u2_atom b);                                //  retain
 
       u2_weak                                                     //  transfer
+      j2_mbc(Pit, hor)(u2_wire wir_r, 
+                       u2_atom a,                                 //  retain
+                       u2_atom b);                                //  retain
+
+      u2_weak                                                     //  transfer
       j2_mbc(Pit, lsh)(u2_wire wir_r, 
                        u2_atom a,                                 //  retain
                        u2_atom b,                                 //  retain

@@ -23,7 +23,7 @@ Chars
   pam   &       
   ped   +
   pel   )
-  tig   $       
+  sig   $       
   sed   }
   tam   ;       
   tar   *

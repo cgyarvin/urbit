@@ -9,8 +9,8 @@
 */
   u2_weak                                                         //  transfer
   j2_mbc(Pit, gor)(u2_wire wir_r, 
-                   u2_atom a,                                     //  retain
-                   u2_atom b)                                     //  retain
+                   u2_noun a,                                     //  retain
+                   u2_noun b)                                     //  retain
   {
     c3_w c_w = u2_mug(a);
     c3_w d_w = u2_mug(b);

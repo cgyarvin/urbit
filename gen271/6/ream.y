@@ -60,7 +60,7 @@
 
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 71
+  %expect 61
 
   %pure-parser
   %locations
@@ -129,7 +129,7 @@ wide_c
       : si_cas
         { $$ = _ycell(c3__tmbn, c3__flag); }
       | si_tar
-        { $$ = _ycell(c3__tmbn, c3__blur); }
+        { $$ = _ycell(c3__tmbn, c3__noun); }
       | si_ket
         { $$ = _ycell(c3__tmbn, c3__cell); }
       | si_nat
@@ -200,7 +200,7 @@ wide_c
       ;
 
     huny
-      :                { $$ = 0; } 
+      : si_bon         { $$ = 1; } 
       | si_bon huny    { $$ = 1 + $2; }     // XX vulnerable
       ;
 
@@ -232,14 +232,14 @@ wide_c
         ;
 
     chop
-      : tok_term                  
-        { $$ = $1; } 
-      | tok_term si_dot tok_delm  
-        { $$ = _ycell($1, $3); }
-      | tok_term si_deg tok_term si_dot tok_delm
-        { $$ = _ytrel($1, $3, $5); }
-      | tok_term si_deg tok_term si_dot tok_delm si_dot tok_delm
-        { $$ = _yqual($1, $3, $5, $7); }
+      : '%' tok_term                  
+        { $$ = $2; } 
+      | '%' tok_term si_dot tok_delm  
+        { $$ = _ycell($2, $4); }
+      | '%' tok_term si_deg tok_term si_dot tok_delm
+        { $$ = _ytrel($2, $4, $6); }
+      | '%' tok_term si_deg tok_term si_dot tok_delm si_dot tok_delm
+        { $$ = _yqual($2, $4, $6, $8); }
 
 /*
     path 
@@ -398,13 +398,13 @@ wide_c
       { $$ = _ycell($1, $3); }
 
     hint_c_wide
-      : huny w wide   { $$ = _ycell($1, $2); }
-      | wide          { $$ = _ycell($1, 0); }
+      : huny w wide   { $$ = _ycell($1, $3); }
+      | wide          { $$ = _ycell(0, $1); }
       ;
 
     hint_d_wide
-      : chop w gene w chit_wide w gene
-        { $$ = _yqual($1, $3, $5, $7); }
+      : gene w chop w chit_wide w gene
+        { $$ = _yqual($3, $1, $5, $7); }
       ;
 
 tall
@@ -424,14 +424,14 @@ tall
     tall_norm: di_casdap w body_h_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_castar w body_i_tall    { $$ = _ycell($1, $3); }
 
-    tall_norm: di_barbon w body_b_tall      { $$ = _ycell($1, $2); }
-    tall_norm: di_barcas w body_d_tall      { $$ = _ycell($1, $2); }
-    tall_norm: di_bardeg w body_a_tall      { $$ = _ycell($1, $2); }
-    tall_norm: di_bardap w body_a_tall      { $$ = _ycell($1, $2); }
-    tall_norm: di_bardot w body_b_tall      { $$ = _ycell($1, $2); }
-    tall_norm: di_barmit w body_c_tall      { $$ = _ycell($1, $2); }
-    tall_norm: di_bartig w body_i_tall      { $$ = _ycell($1, $2); }
-    tall_norm: di_bartar w body_b_tall      { $$ = _ycell($1, $2); }
+    tall_norm: di_barbon w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_barcas w body_d_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_bardeg w body_a_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_bardap w body_a_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_bardot w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_barmit w body_c_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_bartig w body_i_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_bartar w body_b_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_bonpad w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_bondap w body_b_tall    { $$ = _ycell($1, $3); }
@@ -470,8 +470,8 @@ tall
     tall_norm: di_mitket w body_f_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_mittig w body_q_tall    { $$ = _ycell($1, $3); }
 
-    tall_norm: di_pambon w body_ex_tall   { $$ = _ycell($1, $3); }
-    tall_norm: di_pamdeg w body_e_tall  { $$ = _ycell($1, $3); }
+    tall_norm: di_pambon w body_e_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_pamdeg w body_e_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_pamdap w body_ex_tall   { $$ = _ycell($1, $3); }
     tall_norm: di_pamdot w body_ex_tall   { $$ = _ycell($1, $3); }
     tall_norm: di_pammit w body_ey_tall   { $$ = _ycell($1, $3); }
@@ -523,13 +523,13 @@ tall
       { $$ = _ycell($1, $3); }
 
     hint_c_tall
-      : huny w gene   { $$ = _ycell($1, $2); }
-      | gene          { $$ = _ycell($1, 0); }
+      : huny w gene   { $$ = _ycell($1, $3); }
+      | gene          { $$ = _ycell(0, $1); }
       ;
 
     hint_d_tall
-      : chop w gene w chit_tall w gene
-        { $$ = _yqual($1, $3, $5, $7); }
+      : gene w chop w chit_tall w gene
+        { $$ = _yqual($3, $1, $5, $7); }
       ;
 
   /** Tall - feet and wings.

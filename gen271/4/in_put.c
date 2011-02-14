@@ -26,7 +26,7 @@
         return u2_rx(wir_r, a);
       }
       else {
-        if ( u2_yes == j2_mbc(Pit, gor)(wir_r, b, n_a) ) {
+        if ( u2_yes == j2_mbc(Pit, hor)(wir_r, b, n_a) ) {
           c = j2_mcc(Pit, in, put)(wir_r, l_a, b);
 
           if ( u2_none == c ) {

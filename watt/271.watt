@@ -442,8 +442,10 @@
   ^-  ?
   ?:  ?=(@ a)
     ?:  ?=(@ b)
-      (lth a b) 
+      (gor a b) 
     &
+  ?:  ?=(@ b)
+    |
   ?:  .=(-.a -.b)
     (gor +.a +.b)
   (gor -.a -.b)
@@ -775,7 +777,7 @@
       ~
     ?:  .=(b p.n.a)
       [~ u=q.n.a]
-    ?:  (hor b p.n.a)
+    ?:  (gor b p.n.a)
       $(a l.a)
     $(a r.a)
   ::::
@@ -798,7 +800,7 @@
       ?.  .=(c q.n.a)
         ^>(bean.%put-by !!)
       a
-    ?:  (hor b p.n.a)
+    ?:  (gor b p.n.a)
       =+  d=$(a l.a)
       ?>  ?=(^ d)
       ?:  (vor n.a n.d)
@@ -1346,6 +1348,7 @@
     ::::
     ::::
         [%pmbn *]   [%bnpd p.gen [%pmzp %gold q.gen]]
+        [%pmdg *]   [%pmzp %lead p.gen] 
         [%pmdp *]   [%bnld [%pmdg q.gen] p.gen] 
         [%pmdt *]   [%bnpd p.gen [%pmzp %zinc q.gen]]
         [%pmmt *]   [%bnpd p.gen [%bnpd q.gen [%pmzp %iron r.gen]]]
@@ -1359,6 +1362,7 @@
         %cell   [%dgdp [%tmbn %noun] [%tmbn %noun]]
         %flag   [%ktdp [%dtcs %dttg 0] [%dttg 0]]
         %null   [%dttg 0]
+        *       ^>(bean.[%tmbn-bad |=((~(fly to ~(gut go `*`gen)) 75))] !!)
       --
     ::
         [%tmdp *]   (sift p.gen)
@@ -1384,7 +1388,7 @@
         ?~  r.gen
           nob
         [[%dgdp [%dttg p.i.r.gen] [%zpbn q.i.r.gen]] $(r.gen t.r.gen)]
-      q.gen
+      s.gen
     ::
         [%tgpd *]   [%tgld [%memo %dttg p.gen] q.gen]
         [%tgpm *]   [%tgld [%loaf p.gen] q.gen]
@@ -1593,21 +1597,21 @@
       [* ~ *]
     ?:  .=(cog p.n.dab)
       [~ (peg axe 2) ?>(?=([& *] q.n.dab) p.q.n.dab)]
-    ?:  (hor cog p.n.dab)
+    ?:  (gor cog p.n.dab)
       ~
     $(axe (peg axe 3), dab r.dab)
   ::
       [* * ~]
     ?:  .=(cog p.n.dab)
       [~ (peg axe 2) ?>(?=([& *] q.n.dab) p.q.n.dab)]
-    ?:  (hor cog p.n.dab)
+    ?:  (gor cog p.n.dab)
       $(axe (peg axe 3), dab l.dab)
     ~
   ::
       [* * *]
     ?:  .=(cog p.n.dab)
       [~ (peg axe 2) ?>(?=([& *] q.n.dab) p.q.n.dab)]
-    ?:  (hor cog p.n.dab)
+    ?:  (gor cog p.n.dab)
       $(axe (peg axe 6), dab l.dab)
     $(axe (peg axe 7), dab r.dab)
   --
@@ -1832,10 +1836,16 @@
       ?~  zem
         =+  taf=$(sut p.sut)
         ?~  taf
-          ~
-        ?.  (park way p.u.taf)
+          =+  foo=q.r.q.sut
+          ^>  bean.[%spam |=((~(fly to ~(gut go `*`foo)) 75))]
           ^>  bean.[%port |=((~(fly to ~(tem go `@`cog)) 75))]
           ^>  bean.[%type |=((~(fly to dump) 75))]
+          ^>(bean.%find-dumb !!)
+        ?.  ?|(!vet (park way p.u.taf))
+          ^>  bean.[%port |=((~(fly to ~(tem go `@`cog)) 75))]
+          ^>  bean.[%type |=((~(fly to dump) 75))]
+          ^>  bean.[%way |=((~(fly to ~(tem go `@`way)) 75))]
+          ^>  bean.[%axe |=((~(fly to ~(dem go `@`p.u.taf)) 75))]
           ^>(bean.%find-core !!)
         [~ (peg 2 p.u.taf) q.u.taf r.u.taf]
       [~ 1 [~ (peg 3 p.u.zem) [q.u.zem ~]] sut]
@@ -2012,9 +2022,11 @@
   ::::
   ::
       mill
-::    ^>  bean.[%mo-mill |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
     =+  [gol=*type gen=*gene]
     |=
+    ::  ^>  bean.[%mo-mill |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
+    ::  ^>  bean.[%mo-gene |=((~(fly to ~(gut go `*`gen)) 75))]
+    ::  ^>  bean.[%mo-type |=((~(fly to dump) 75))]
     ^-  [p=*type q=*form]
     =<  $
     |*
@@ -2152,7 +2164,7 @@
         [1 q:$(gen p.gen)]
       ::
           [%zpcb *]                                                   ::  !_
-        :: ^>  bean.[%spot |=((~(fly to ~(loc go p.gen)) 75))]
+        ^>  bean.[%spot |=((~(fly to ~(loc go p.gen)) 75))]
         $(gen q.gen)
       ::
           [%zpdx *]                                                   ::  !#
@@ -2164,7 +2176,11 @@
         [0 0]
       ::
           *           
-        =+(doz=~(open ap gen) ?:(.=(doz gen) ^>(bean.%open !!) $(gen doz)))
+        =+  doz=~(open ap gen) 
+        ?:  .=(doz gen)
+          ^>  bean.[%open-gene |=((~(fly to ~(gut go `*`gen)) 75))]
+          ^>(bean.%open !!)
+        $(gen doz)
       --
     ::
     ::::
@@ -2399,7 +2415,7 @@
         [%cell *]   ?:(.=(2 now) $(sut p.sut, axe lat) $(sut q.sut, axe lat))
         [%core *]   
       ?:  .=(2 now) 
-        ?.  (park way lat)
+        ?.  ?|(!vet (park way lat))
           ^>  bean.[%axis |=((~(fly to ~(dem go `@`axe)) 75))]
           ^>  bean.[%type |=((~(fly to dump) 75))]
           ^>(bean.%peek-park !!)
@@ -2422,7 +2438,8 @@
       play
     =+  gen=*gene
     |=
-    :: ^>  bean.[%mo-play |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
+    ::  ^>  bean.[%play-gene |=((~(fly to ~(gut go `*`gen)) 75))]
+    ::  ^>  bean.[%play-type |=((~(fly to dump) 75))]
     =>  .(vet |)
     ^-  *type
     ?-    gen
