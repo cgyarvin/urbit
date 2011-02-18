@@ -11,10 +11,11 @@
   _find_in(u2_wire wir_r,
            u2_noun van,
            u2_noun sut,
+           u2_noun way,
            u2_noun cog,
            u2_noun gil)
   {
-    u2_noun p_sut, q_sut, r_sut;
+    u2_noun p_sut, q_sut;
 
     if ( u2_yes == u2_stud(sut) ) {
       return u2_nul;
@@ -26,10 +27,10 @@
         if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
           return u2_bl_bail(wir_r);
         } else {
-          u2_noun taf = _find_in(wir_r, van, p_sut, cog, gil);
+          u2_noun taf = _find_in(wir_r, van, p_sut, way, cog, gil);
 
           if ( u2_nul == taf ) {
-            u2_noun bov = _find_in(wir_r, van, q_sut, cog, gil);
+            u2_noun bov = _find_in(wir_r, van, q_sut, way, cog, gil);
 
             if ( u2_nul == bov ) {
               return u2_nul;
@@ -64,13 +65,19 @@
         }
       }
       case c3__core: {
-        if ( u2_no == u2_as_qual(sut, 0, &p_sut, &q_sut, &r_sut) ) {
+        u2_noun pq_sut, qq_sut, rq_sut;
+        u2_noun prq_sut, qrq_sut;
+
+        if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ||
+             (u2_no == u2_as_trel(q_sut, &pq_sut, &qq_sut, &rq_sut)) ||
+             (u2_no == u2_as_cell(rq_sut, &prq_sut, &qrq_sut)) )
+        {
           return u2_bl_bail(wir_r);
         } else {
-          u2_noun zem = j2_mby(Pit, look)(wir_r, cog, r_sut);
+          u2_noun zem = j2_mby(Pit, look)(wir_r, cog, qrq_sut);
 
           if ( u2_nul == zem ) {
-            u2_noun taf = _find_in(wir_r, van, p_sut, cog, gil);
+            u2_noun taf = _find_in(wir_r, van, p_sut, way, cog, gil);
 
             if ( u2_nul == taf ) {
               return u2_nul;
@@ -79,14 +86,20 @@
               u2_noun pro;
 
               u2_mean(taf, 6, &p_taf, 14, &q_taf, 15, &r_taf, 0);
-              pro = u2_bq
-                (wir_r, u2_nul,
-                        j2_mbc(Pit, peg)(wir_r, 2, p_taf),
-                        u2_rx(wir_r, q_taf),
-                        u2_rx(wir_r, r_taf));
 
-              u2_rl_lose(wir_r, taf);
-              return pro;
+              if ( u2_no == j2_mcy(Pit, ut, park)(wir_r, van, sut, way, p_taf) )              {
+                return u2_bl_bail(wir_r);
+              }
+              else {
+                pro = u2_bq
+                  (wir_r, u2_nul,
+                          j2_mbc(Pit, peg)(wir_r, 2, p_taf),
+                          u2_rx(wir_r, q_taf),
+                          u2_rx(wir_r, r_taf));
+
+                u2_rl_lose(wir_r, taf);
+                return pro;
+              }
             }
           }
           else {

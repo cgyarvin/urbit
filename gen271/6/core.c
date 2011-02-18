@@ -9,59 +9,25 @@
 */
   u2_noun                                                         //  transfer
   j2_mby(Pit, core)(u2_wire wir_r, 
-                    u2_noun vod,                                  //  retain
-                    u2_noun suz,                                  //  retain
-                    u2_noun hel,                                  //  retain
-                    u2_noun don)                                  //  retain
+                    u2_noun pac,                                  //  retain
+                    u2_noun con)                                  //  retain
   {
-    if ( c3__blot == vod ) {
-      return c3__blot;
-    }
-    else {
-      u2_noun caf;
-
-      if ( u2_no == u2_dust(hel) ) {
-        if ( c3__blue == hel ) {
-          if ( u2_yes == u2_sing(vod, suz) ) {
-            caf = c3__blue;
-          } else caf = u2_bc(wir_r, c3__gray, u2_rx(wir_r, suz));
-        }
-        else if ( c3__pink == hel ) {
-          if ( u2_yes == u2_sing(vod, suz) ) {
-            caf = c3__pink;
-          } else caf = u2_bc(wir_r, c3__teal, u2_rx(wir_r, suz));
-        }
-        else return u2_bl_bail(wir_r);
-      } else {
-        if ( c3__gray == u2_h(hel) ) {
-          if ( u2_yes == u2_sing(vod, u2_t(hel)) ) {
-            caf = c3__blue;
-          } else {
-            caf= u2_rx(wir_r, hel);
-          }
-        }
-        else if ( c3__teal == u2_h(hel) ) {
-          if ( u2_yes == u2_sing(vod, u2_t(hel)) ) {
-            caf = c3__pink;
-          } else {
-            caf= u2_rx(wir_r, hel);
-          }
-        }
-        else return u2_bl_bail(wir_r);
-      }
-      return u2_bq(wir_r, c3__core, u2_rx(wir_r, vod), caf, u2_rx(wir_r, don));
+    if ( (c3__void == hed) || (c3__void == tal) ) {
+      return c3__void;
+    } else {
+      return u2_bt(wir_r, c3__cell, u2_rx(wir_r, hed), u2_rx(wir_r, tal));
     }
   }
   u2_noun                                                         //  transfer
   j2_mb(Pit, core)(u2_wire wir_r, 
                    u2_noun cor)                                   //  retain
   {
-    u2_noun vod, suz, hel, don;
+    u2_noun pac, con;
 
-    if ( u2_no == u2_mean(cor, 8, &vod, 18, &suz, 38, &hel, 39, &don, 0) ) {
+    if ( u2_no == u2_mean(cor, 8, &pac, 9, &con, 0) ) {
       return u2_bl_bail(wir_r);
     } else {
-      return j2_mby(Pit, core)(wir_r, vod, suz, hel, don);
+      return j2_mby(Pit, core)(wir_r, pac, con);
     }
   }
 

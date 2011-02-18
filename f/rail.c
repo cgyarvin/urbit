@@ -1108,6 +1108,133 @@ u2_rl_water(u2_ray ral_r,
   }
 }
 
+/* u2_rl_copy():
+**
+**   Copy indirect noun `fiz` into main storage, preserving dags.
+**   Must be followed by `rl_wash(fiz)` if `fiz` is to be preserved.
+*/
+u2_weak                                                           //  transfer
+u2_rl_copy(u2_ray ral_r,
+           u2_dog fiz)                                            //  retain
+{
+  c3_w mug_w = *u2_at_dog_mug(fiz);
+
+  /* Borrow mug slot to record new destination, if it doesn't already.
+  */
+  if ( mug_w >> 31 ) {      //  mug is 31 bits
+    u2_noun nov = mug_w;
+
+    printf("mug: dag!\n");
+    u2_rl_gain(ral_r, nov);
+    return nov;
+  } else {
+    u2_noun nov;
+
+    if ( u2_no == u2_dust(fiz) ) {
+      if ( u2_no == u2_rl_open(ral_r, c3_wiseof(u2_loom_cell)) ) {
+        u2_ho_warn_here(); 
+        return u2_none;
+      } else {
+        u2_weak hed, tel;
+        u2_ray nov_r;
+        u2_noun nov;
+
+        if ( u2_none == (hed = u2_rl_copy(ral_r, u2_h(fiz))) ) {
+          u2_ho_warn_here();
+
+          return u2_none;
+        }
+        if ( u2_none == (tel = u2_rl_copy(ral_r, u2_t(fiz))) ) {
+          u2_ho_warn_here();
+
+          u2_rl_lose(ral_r, hed);
+          return u2_none;
+        }
+
+        nov_r = _rl_bloq_grab(ral_r, c3_wiseof(u2_loom_cell));
+        if ( 0 == nov_r ) {
+          u2_ho_warn_here();
+
+          u2_rl_lose(ral_r, hed);
+          u2_rl_lose(ral_r, tel);
+          return u2_none;
+        }
+        nov = u2_pom_of(nov_r, 0);
+
+        *u2_at_dog_mug(nov) = mug_w;
+        *u2_at_pom_hed(nov) = hed;
+        *u2_at_pom_tel(nov) = tel;
+      }
+    } else {
+      c3_w len_w = *u2_at_pug_len(fiz);
+      u2_ray nov_r;
+      u2_noun nov;
+
+      nov_r = _rl_bloq_grab(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
+      if ( 0 == nov_r ) {
+        u2_ho_warn_here();
+
+        return u2_none;
+      }
+      nov = u2_pug_of(nov_r, 0);
+
+      *u2_at_dog_mug(nov) = mug_w;
+      *u2_at_pug_len(nov) = len_w;
+      {
+        c3_w i_w;
+
+        for ( i_w=0; i_w < len_w; i_w++ ) {
+          *u2_at_pug_buf(nov, i_w) = *u2_at_pug_buf(fiz, i_w);
+        }
+      }
+    }
+    c3_assert(nov >> 31);
+
+    *u2_at_dog_mug(fiz) = nov;
+    return nov;
+  }
+}
+
+void
+u2_rl_wash(u2_ral ral_r,
+           u2_dog fiz)                                            //  retain
+{
+  if ( u2_yes == u2_rl_junior(ral_r, fiz) ) {
+    c3_w mug_w = *u2_at_dog_mug(fiz);
+
+    if ( mug_w >> 31 ) {
+      u2_noun nov = mug_w;
+
+      *u2_at_dog_mug(fiz) = *u2_at_dog_mug(nov);
+    }
+    if ( u2_yes == u2_dust(fiz) ) {
+      u2_rl_wash(ral_r, u2_h(fiz));
+      u2_rl_wash(ral_r, u2_t(fiz));
+    }
+  }
+}
+
+/* u2_rl_take():
+**
+**   Produce `a`, not referencing the can.  Copy or gain reference.
+*/
+u2_weak
+u2_rl_take(u2_ray  ral_r,
+          u2_noun fiz)
+{
+  if ( u2_no == u2_rl_junior(ral_r, fiz) ) {
+    u2_rl_gain(ral_r, fiz);
+
+    return fiz;
+  } else {
+    u2_noun nov = u2_rl_copy(ral_r, fiz);
+
+    u2_rl_wash(ral_r, fiz);
+    return nov;
+  }
+}
+
+#if 0
 /* u2_rl_take():
 **
 **   Produce `a`, not referencing the can.  Copy or gain reference.
@@ -1190,6 +1317,7 @@ u2_rl_take(u2_ray  ral_r,
     }
   }
 }
+#endif
 
 /* u2_rl_slab():
 **

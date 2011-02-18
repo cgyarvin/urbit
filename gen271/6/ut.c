@@ -186,7 +186,7 @@
 
   u2_ho_jet 
   j2_mbj(Pit, ut)[] = {
- //   { "repo", c3__hevy, j2_mc(Pit, ut, repo), SafeTier6_a, u2_none, u2_none },
+    { "repo", c3__hevy, j2_mc(Pit, ut, repo), SafeTier6_a, u2_none, u2_none },
     { }
   };
 

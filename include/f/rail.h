@@ -104,6 +104,7 @@
 #     define u2_ro(ral_r, a)              u2_rl_lone(ral_r, a)
 #     define u2_ru(ral_r, a)              u2_rl_unit(ral_r, a)
 #     define u2_rx(ral_r, a)              u2_rl_take(ral_r, a)
+#     define u2_rz(ral_r, a)              u2_rl_lose(ral_r, a)
 #     define u2_rl                        u2_rl_list
 #     define u2_rk                        u2_rl_rack
 

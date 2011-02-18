@@ -32,11 +32,11 @@
       return pro;
     }
   }
-  u2_noun                                                         //  transfer
-  j2_mcx(Pit, ut, gain)(u2_wire wir_r, 
-                        u2_noun van,                              //  retain
-                        u2_noun sut,                              //  retain
-                        u2_noun gen)                              //  retain
+  static u2_noun
+  _gain_in(u2_wire wir_r, 
+           u2_noun van,
+           u2_noun sut,
+           u2_noun gen)
   {
     u2_noun p_gen, q_gen;
 
@@ -45,14 +45,6 @@
     } else switch ( u2_h(gen) ) {
       default: return u2_rx(wir_r, sut);
 
-      case c3__ktdl:
-      case c3__ktld: {
-        if ( u2_none == (q_gen = u2_frag(6, gen)) ) {
-          return u2_bl_bail(wir_r);
-        } else {
-          return j2_mcx(Pit, ut, gain)(wir_r, van, sut, q_gen);
-        }
-      }
       case c3__csbn: {
         if ( u2_no == u2_mean(gen, 6, &p_gen, 7, &q_gen, 0) ) {
           return u2_bl_bail(wir_r);
@@ -78,6 +70,27 @@
       case c3__cspm: {
         return _gain_cspm(wir_r, van, sut, u2_t(gen));
       }
+      case c3__zpcb: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
+      {
+        return j2_mcx(Pit, ut, gain)(wir_r, van, sut, q_gen);
+      }
+      case c3__zpdx: p_gen = u2_t(gen);
+      {
+        return j2_mcx(Pit, ut, gain)(wir_r, van, sut, p_gen);
+      }
+    }
+  }
+  u2_noun                                                         //  transfer
+  j2_mcx(Pit, ut, gain)(u2_wire wir_r, 
+                        u2_noun van,                              //  retain
+                        u2_noun sut,                              //  retain
+                        u2_noun gen)                              //  retain
+  {
+    u2_noun fiz = _gain_in(wir_r, van, sut, gen);
+
+    if ( u2_yes == j2_mcy(Pit, ut, orth)(wir_r, van, c3__noun, fiz) ) {
+      u2_rl_lose(wir_r, fiz);
+      return c3__void;
     }
   }
 

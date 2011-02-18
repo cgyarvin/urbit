@@ -12,8 +12,8 @@
                     u2_noun hed,                                  //  retain
                     u2_noun tal)                                  //  retain
   {
-    if ( (c3__blot == hed) || (c3__blot == tal) ) {
-      return c3__blot;
+    if ( (c3__void == hed) || (c3__void == tal) ) {
+      return c3__void;
     } else {
       return u2_bt(wir_r, c3__cell, u2_rx(wir_r, hed), u2_rx(wir_r, tal));
     }

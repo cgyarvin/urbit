@@ -15,10 +15,10 @@
     if ( u2_yes == u2_sing(hoz, bur) ) {
       return u2_rx(wir_r, hoz);
     }
-    else if ( c3__blot == bur ) {
+    else if ( c3__void == bur ) {
       return u2_rx(wir_r, hoz);
     }
-    else if ( c3__blot == hoz ) {
+    else if ( c3__void == hoz ) {
       return u2_rx(wir_r, bur);
     }
     else return u2_bt

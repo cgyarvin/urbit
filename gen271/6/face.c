@@ -12,8 +12,8 @@
                     u2_noun cog,                                  //  retain
                     u2_noun tip)                                  //  retain
   {
-    if ( c3__blot == tip ) {
-      return c3__blot;
+    if ( c3__void == tip ) {
+      return c3__void;
     }
     else return u2_bt
       (wir_r, c3__face, u2_rx(wir_r, cog), u2_rx(wir_r, tip));
