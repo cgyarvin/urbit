@@ -32,11 +32,11 @@
           case c3__cell: return u2_yes;
         }
       }
-      case c3__blot: {
-        return u2_yes;
+      case c3__noun: {
+        return j2_mcy(Pit, ut, nest)(wir_r, van, c3__void, ref);
       }
-      case c3__blur: {
-        return j2_mcy(Pit, ut, nest)(wir_r, van, c3__blot, ref);
+      case c3__void: {
+        return u2_yes;
       }
     } 
     else switch ( u2_h(sut) ) {
@@ -57,10 +57,10 @@
         }
       }
       case c3__core: {
-        if ( u2_no == u2_as_trel(u2_t(sut), &p_sut, &q_sut, &r_sut) ) {
+        if ( u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut) ) {
           goto fail;
         } else {
-          u2_noun faz = u2_bt(wir_r, c3__cell, p_sut, c3__blur);
+          u2_noun faz = u2_bt(wir_r, c3__cell, p_sut, c3__noun);
           u2_flag ret = _orth_in(wir_r, van, faz, ref, bix);
 
           u2_rl_lose(wir_r, faz);

@@ -7,6 +7,19 @@
 
 /* logic
 */
+  static u2_noun
+  _bake_make(u2_wire wir_r,
+             u2_noun van,
+             u2_noun sut,
+             u2_noun gen)
+  {
+    u2_noun mil = j2_mcy(Pit, ut, mill)(wir_r, van, sut, c3__noun, gen);
+    u2_noun fol = u2_rx(wir_r, u2_t(mil));
+
+    u2_rl_lose(wir_r, mil);
+    return fol;
+  }
+
   u2_noun                                                         //  transfer
   j2_mcx(Pit, ut, bake)(u2_wire wir_r, 
                         u2_noun van,                              //  retain
@@ -25,23 +38,24 @@
       } 
       else {
         u2_noun qn_dab = u2_t(n_dab);
+        u2_noun pqn_dab = u2_t(qn_dab);   //  XX actual wing support
       
         if ( (u2_nul == l_dab) && (u2_nul == r_dab) ) {
           return j2_mcy(Pit, ut, make)(wir_r, van, sut, qn_dab);
         }
         else if ( (u2_nul == l_dab) ) {
           return u2_bc
-            (wir_r, j2_mcy(Pit, ut, make)(wir_r, van, sut, qn_dab),
+            (wir_r, _bake_make(wir_r, van, sut, pqn_dab),
                     j2_mcx(Pit, ut, bake)(wir_r, van, sut, r_dab));
         }
         else if ( (u2_nul == r_dab) ) {
           return u2_bc
-            (wir_r, j2_mcy(Pit, ut, make)(wir_r, van, sut, qn_dab),
+            (wir_r, _bake_make(wir_r, van, sut, qn_dab),
                     j2_mcx(Pit, ut, bake)(wir_r, van, sut, l_dab));
         }
         else {
           return u2_bt
-            (wir_r, j2_mcy(Pit, ut, make)(wir_r, van, sut, qn_dab),
+            (wir_r, _bake_make(wir_r, van, sut, qn_dab),
                     j2_mcx(Pit, ut, bake)(wir_r, van, sut, l_dab),
                     j2_mcx(Pit, ut, bake)(wir_r, van, sut, r_dab));
         }

@@ -68,7 +68,7 @@
                         u2_noun van,                              //  retain
                         u2_noun sut)                              //  retain
   {
-    u2_noun p_sut, q_sut, r_sut;
+    u2_noun p_sut, q_sut;
 
     if ( _1 == axe ) {
       return j2_mcy(Pit, ut, fuse)(wir_r, van, sut, ref);
@@ -79,16 +79,19 @@
       if ( u2_no == u2_dust(sut) ) switch ( sut ) {
         default: return u2_rx(wir_r, sut);
 
-        case c3__blur: return u2_bt(wir_r, c3__cell, c3__blur, c3__blur);
+        case c3__noun: 
+          return u2_bt(wir_r, c3__fork, 
+                              c3__atom, 
+                              u2_bt(wir_r, c3__cell, c3__noun, c3__noun));
       }
       else switch ( u2_h(sut) ) {
         default: return u2_rx(wir_r, sut);
 
         case c3__core: {
-          if ( u2_no == u2_as_trel(u2_t(sut), &p_sut, &q_sut, &r_sut) ) {
+          if ( u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut) ) {
             return u2_bl_bail(wir_r);
           } else {
-            return u2_bt(wir_r, c3__cell, u2_rx(wir_r, p_sut), c3__blur);
+            return u2_bt(wir_r, c3__cell, u2_rx(wir_r, p_sut), c3__noun);
           }
         }
         case c3__cube: {

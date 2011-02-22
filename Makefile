@@ -208,7 +208,7 @@ J271_6_OFILES_UT=\
        gen271/6/ut_fish.o \
        gen271/6/ut_gain.o \
        gen271/6/ut_make.o \
-       gen271/6/ut_mill.o \
+       gen271/6/ut_mint.o \
        gen271/6/ut_orth.o \
        gen271/6/ut_nest.o \
        gen271/6/ut_peek.o \

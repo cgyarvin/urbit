@@ -293,4 +293,3 @@
     { ".3", c3__hevy, j2_mc(Pit, ut, heal), SafeTier6, u2_none, u2_none },
     { }
   };
-

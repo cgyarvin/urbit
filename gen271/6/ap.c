@@ -486,23 +486,12 @@
 /***
 ****
 ***/
-  _open_do_pq(pmbn)   //  &=
+  _open_do_pq(pmdp)   //  &-
   {
-  }
-  _open_do_p(pmdg)    //  &:
-  {
-  }
-  _open_do_p(pmdp)    //  &-
-  {
-  }
-  _open_do_pq(pmdt)   //  &.
-  {
-  }
-  _open_do_pqr(pmmt)  //  &%
-  {
-  }
-  _open_do_pq(pmtr)   //  &*
-  {
+    return u2_bt
+      (wir_r, c3__bnld, 
+              u2_bc(wir_r, c3__pmdg, u2_rx(wir_r, q_gen)),
+              u2_rx(wir_r, p_gen));
   }
 
 /***
@@ -753,12 +742,7 @@
         _open_p   (mttr);
         _open_pqr (mtsg);
 
-        _open_pq  (pmbn);
-        _open_p   (pmdg);
         _open_pq  (pmdp);
-        _open_pq  (pmdt);
-        _open_pqr (pmmt);
-        _open_pq  (pmtr);
 
         _open_p   (tmbn);
         _open_p   (tmdp);
