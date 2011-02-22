@@ -1922,16 +1922,16 @@
     :+  %hold
       ?.  .=(%wood p.q.sut)
         ?.  ?|(!vet (nest(sut q.q.sut) p.sut))
-          ^>  bean.[%need |=((~(fly to dump(sut q.q.sut)) 75))]
-          ^>  bean.[%have |=((~(fly to dump(sut p.sut)) 75))]
+          ^>  bean.[%metl-need |=((~(fly to dump(sut q.q.sut)) 75))]
+          ^>  bean.[%metl-have |=((~(fly to dump(sut p.sut)) 75))]
           ^>(bean.'mitbon-metl' !!)
         dox
       ?.  ?|  !vet
-              .=(sut dox)
+              .=(p.sut q.q.sut)
               (levy hag =+(p=*gene |=((fret dox p))))
           --
-        ^>  bean.[%need |=((~(fly to dump(sut q.q.sut)) 75))]
-        ^>  bean.[%have |=((~(fly to dump(sut p.sut)) 75))]
+        ^>  bean.[%wood-need |=((~(fly to dump(sut q.q.sut)) 75))]
+        ^>  bean.[%wood-have |=((~(fly to dump(sut p.sut)) 75))]
         ^>(bean.'mitbon-wood' !!)
       sut
 ::  ~(tap in (~(gas in *(set gene)) hag))
@@ -2503,8 +2503,8 @@
         [%dtbn *]   flag
         [%dtcs *]   flag
         [%dtkt *]   %atom
-        [%dttr *]   %noun
         [%dttg *]   [%cube p.gen]
+        [%dttr *]   %noun
         [%ktbn *]   (face p.gen $(gen q.gen))
         [%ktdp *]   $(gen p.gen)
         [%ktpd *]   $(gen q.gen)
@@ -2533,8 +2533,8 @@
     ::
         [%tgld *]   $(gen q.gen)
         [%zpbn *]   %noun
-        [%zpdx *]   $(gen p.gen)
         [%zpcb *]   $(gen q.gen)
+        [%zpdx *]   $(gen p.gen)
         [%zpzp ~]   %void
         *           
       =+(doz=~(open ap gen) ?:(.=(doz gen) ^>(bean.%open !!) $(gen doz)))

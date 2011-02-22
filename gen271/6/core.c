@@ -12,10 +12,10 @@
                     u2_noun pac,                                  //  retain
                     u2_noun con)                                  //  retain
   {
-    if ( (c3__void == hed) || (c3__void == tal) ) {
+    if ( (c3__void == pac) ) {
       return c3__void;
     } else {
-      return u2_bt(wir_r, c3__cell, u2_rx(wir_r, hed), u2_rx(wir_r, tal));
+      return u2_bt(wir_r, c3__cell, u2_rx(wir_r, pac), u2_rx(wir_r, con));
     }
   }
   u2_noun                                                         //  transfer

@@ -7,6 +7,13 @@
 
 /* logic
 */
+  static u2_noun
+  _mint_flag(u2_wire wir_r)
+  {
+    return u2_bt(wir_r, c3__fork, u2_bc(wir_r, c3__cube, _0),
+                                  u2_bc(wir_r, c3__cube, _1));
+  }
+
   static u2_flag
   _mint_vet(u2_wire wir_r, 
             u2_noun van)
@@ -353,7 +360,7 @@
             u2_noun uq_lar = u2_t(q_lar);
             uq_noun puq_lar = u2_h(uq_lar);
             u2_noun quq_lar = u2_t(uq_lar);
-            u2_noun rip = j2_mcy(Pit, ut, ripe)(wir_r, van, p_fup, quq_lar);
+            u2_noun rip = j2_mcy(Pit, ut, fire)(wir_r, van, p_fup, quq_lar);
            
             pro = u2_bc
               (wir_r, 
