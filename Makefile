@@ -20,14 +20,14 @@ BIN=run
 
 RM=rm -f
 CC=gcc
-CLD=gcc -O2 -bind_at_load -L/sw/lib
+CLD=gcc -g -bind_at_load -L/sw/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
 INCLUDE=include
 GENERATED=generated
 DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN)
-CFLAGS=-O2 -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
+CFLAGS=-g -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 CWFLAGS=-Wall
 
 .y.o:
@@ -41,7 +41,7 @@ CWFLAGS=-Wall
 
 C_OFILES=\
        c/main.o \
-       c/ford.o
+       c/zuse.o
 
 F_OFILES=\
        f/rail.o \
@@ -236,12 +236,12 @@ OFILES=\
        $(P_OFILES) \
        $(J271_OFILES)
 
-$(BIN)/ford: $(OFILES)
+$(BIN)/zuse: $(OFILES)
 	mkdir -p $(BIN)
-	$(CLD) -o $(BIN)/ford $(OFILES) -lgmp -lreadline -ltermcap
+	$(CLD) -o $(BIN)/zuse $(OFILES) -lgmp -lreadline -ltermcap
 
 tags:
 	ctags -R -f .tags --exclude=root
 
 clean:
-	 $(RM) $(OFILES) $(BIN)/ford
+	 $(RM) $(OFILES) $(BIN)/zuse

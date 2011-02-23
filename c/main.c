@@ -78,9 +78,9 @@ _console_line(const char *history_name)
 }
 
 #if 0
-extern void *ford_boot(uint32_t size);
-extern void  ford_line(void *ford, char *line);
-extern void  ford_line2(void *ford, char *line);
+extern void *zuse_boot(uint32_t size);
+extern void  zuse_line(void *zuse, char *line);
+extern void  zuse_line2(void *zuse, char *line);
 
 int
 main(int  argc,
@@ -89,8 +89,8 @@ main(int  argc,
   char *history_name = _console_init();
   void *fod;
 
-  if ( !(fod = ford_boot(28)) ) {
-    fprintf(stderr, "ford: boot failed\n");
+  if ( !(fod = zuse_boot(28)) ) {
+    fprintf(stderr, "zuse: boot failed\n");
     return 1;
   }
   while ( 1 ) {
@@ -100,8 +100,8 @@ main(int  argc,
       break;
     }
     else {
-      // ford_line(fod, line);
-      ford_line2(fod, line);
+      // zuse_line(fod, line);
+      zuse_line2(fod, line);
     }
   }
   return 0;
@@ -109,28 +109,28 @@ main(int  argc,
 
 #else
 
-  /* ford_boot(): create the ford engine.
+  /* zuse_boot(): create the zuse engine.
   */
-    struct ford_state*
-    ford_boot(const char* src_c);
+    struct zuse_state*
+    zuse_boot(const char* src_c);
 
-  /* ford_line(): execute a ford command.
+  /* zuse_line(): execute a zuse command.
   */
     void
-    ford_line(struct ford_state* fod_f,
+    zuse_line(struct zuse_state* fod_f,
               const char*        cmd_c,
               const char*        arg_c);
 
-  /* ford_test(): initiate ford recursion.
+  /* zuse_test(): initiate zuse recursion.
   */
     void
-    ford_test(struct ford_state* fod_f,
+    zuse_test(struct zuse_state* fod_f,
               const char*        src_c);
 
-  /* ford_done(): terminate and free all 
+  /* zuse_done(): terminate and free all 
   */
     void
-    ford_done(struct ford_state* fod_f);
+    zuse_done(struct zuse_state* fod_f);
     
 int
 main(int  argc,
@@ -139,11 +139,11 @@ main(int  argc,
   char *history_name = _console_init();
   void *fod;
 
-  if ( !(fod = ford_boot("watt/271")) ) {
-    fprintf(stderr, "ford: boot failed\n");
+  if ( !(fod = zuse_boot("watt/271")) ) {
+    fprintf(stderr, "zuse: boot failed\n");
     return 1;
   }
-  // ford_test(fod, "watt/t1-273");
+  // zuse_test(fod, "watt/t1-273");
 
   while ( 1 ) {
     char *line = _console_line(history_name);
@@ -158,11 +158,11 @@ main(int  argc,
       if ( 0 != arg ) {
         *arg++ = 0; 
       }
-      ford_line(fod, cmd, arg);
+      zuse_line(fod, cmd, arg);
       free(line);
     }
   }
-  ford_done(fod);
+  zuse_done(fod);
   return 0;
 }
 

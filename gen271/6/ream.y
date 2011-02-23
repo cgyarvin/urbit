@@ -277,9 +277,9 @@ wide_c
 
     wide_norm: di_barbon body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_barcas body_d_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_bardeg body_a_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_bardeg body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_bardap body_a_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_bardot body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_bardot body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_barmit body_c_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_bartig body_i_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_bartar body_b_wide    { $$ = _ycell($1, $2); }
@@ -471,9 +471,9 @@ tall
     tall_norm: di_mittig w body_q_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_pambon w body_e_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_pamdeg w body_e_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_pamdeg w body_ex_tall   { $$ = _ycell($1, $3); }
     tall_norm: di_pamdap w body_ex_tall   { $$ = _ycell($1, $3); }
-    tall_norm: di_pamdot w body_ex_tall   { $$ = _ycell($1, $3); }
+    tall_norm: di_pamdot w body_e_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_pammit w body_ey_tall   { $$ = _ycell($1, $3); }
     tall_norm: di_pamtar w body_ex_tall   { $$ = _ycell($1, $3); }
 

@@ -1,4 +1,4 @@
-/* c/ford.c
+/* c/zuse.c
 **
 ** This file is in the public domain.
 */
@@ -11,9 +11,9 @@
 
   /**   Interpreter data structures.
   **/
-    /* struct ford_state: ford application state.
+    /* struct zuse_state: zuse application state.
     */
-      struct ford_state {
+      struct zuse_state {
         /*  wir - the execution wire.
         */
         u2_ray wir_r;
@@ -38,28 +38,28 @@
 
   /**   Public functions.
   **/
-    /* ford_boot(): create the ford engine.
+    /* zuse_boot(): create the zuse engine.
     */
-      struct ford_state*
-      ford_boot(const c3_c* src_c);
+      struct zuse_state*
+      zuse_boot(const c3_c* src_c);
 
-    /* ford_line(): execute a ford command.
+    /* zuse_line(): execute a zuse command.
     */
       void
-      ford_line(struct ford_state* fod_f,
+      zuse_line(struct zuse_state* fod_f,
                 const c3_c*        cmd_c,
                 const c3_c*        arg_c);
 
-    /* ford_done(): terminate and free all.
+    /* zuse_done(): terminate and free all.
     */
       void
-      ford_done(struct ford_state* fod_f);
+      zuse_done(struct zuse_state* fod_f);
     
 
-/* _ford_save_warm(): save engine as noun.
+/* _zuse_save_warm(): save engine as noun.
 */
 static void
-_ford_save_warm(struct ford_state* fod_f,
+_zuse_save_warm(struct zuse_state* fod_f,
                 const c3_c*        src_c)
 {
   u2_wire wir_r = fod_f->wir_r;
@@ -68,10 +68,10 @@ _ford_save_warm(struct ford_state* fod_f,
   u2_ux_write_deep(wir_r, fat, src_c, "noun");
 }
 
-/* _ford_gates(): add various convenience gates.
+/* _zuse_gates(): add various convenience gates.
 */
 static void 
-_ford_gates(struct ford_state* fod_f)
+_zuse_gates(struct zuse_state* fod_f)
 {
 #if 0
   u2_wire wir_r = fod_f->wir_r;
@@ -83,10 +83,10 @@ _ford_gates(struct ford_state* fod_f)
 #endif
 }
 
-/* _ford_load_warm(): load engine from warm image.
+/* _zuse_load_warm(): load engine from warm image.
 */
 static void
-_ford_load_warm(struct ford_state* fod_f,
+_zuse_load_warm(struct zuse_state* fod_f,
                 const c3_c*        src_c) 
 {
   u2_wire wir_r = fod_f->wir_r;
@@ -102,10 +102,10 @@ _ford_load_warm(struct ford_state* fod_f,
   }
 }
 
-/* _ford_load_cold(): load engine from cold source.
+/* _zuse_load_cold(): load engine from cold source.
 */
 static void
-_ford_load_cold(struct ford_state* fod_f,
+_zuse_load_cold(struct zuse_state* fod_f,
                 const c3_c*        src_c)
 {
   u2_wire wir_r = fod_f->wir_r;
@@ -134,16 +134,16 @@ _ford_load_cold(struct ford_state* fod_f,
     fod_f->pyt = pyt;
     fod_f->pit = pit;
 
-    _ford_save_warm(fod_f, src_c);
+    _zuse_save_warm(fod_f, src_c);
   }
 }
 
-/* ford_boot(): create the ford engine.
+/* zuse_boot(): create the zuse engine.
 */
-struct ford_state*
-ford_boot(const c3_c* src_c)
+struct zuse_state*
+zuse_boot(const c3_c* src_c)
 {
-  struct ford_state* fod_f = malloc(sizeof(struct ford_state));
+  struct zuse_state* fod_f = malloc(sizeof(struct zuse_state));
   u2_ray wir_r;
 
   u2_boot();
@@ -165,11 +165,11 @@ ford_boot(const c3_c* src_c)
       u2_bx_boot(wir_r);
 
       if ( u2_yes == u2_ux_fresh(src_c, "watt", "noun") ) {
-        _ford_load_warm(fod_f, src_c);
+        _zuse_load_warm(fod_f, src_c);
       } else {
-        _ford_load_cold(fod_f, src_c);
+        _zuse_load_cold(fod_f, src_c);
       }
-      _ford_gates(fod_f);
+      _zuse_gates(fod_f);
 
       u2_bl_done(wir_r, jub_r);
       u2_bx_spot(wir_r, u2_nul);
@@ -180,10 +180,10 @@ ford_boot(const c3_c* src_c)
   }
 }
 
-/* ford_test(): attempt ford recursion.
+/* zuse_test(): attempt zuse recursion.
 */
 void
-ford_test(struct ford_state* fod_f,
+zuse_test(struct zuse_state* fod_f,
           const char*        src_c)
 {
   u2_wire wir_r = fod_f->wir_r;
@@ -214,10 +214,10 @@ ford_test(struct ford_state* fod_f,
   }
 }
 
-/* ford_test2(): another test for recursion.
+/* zuse_test2(): another test for recursion.
 */
 void
-ford_test2(struct ford_state* fod_f,
+zuse_test2(struct zuse_state* fod_f,
            const char*        src_c)
 {
   u2_wire wir_r = fod_f->wir_r;
@@ -247,10 +247,10 @@ j2_mcy(watt_271, ut, dupt)(u2_wire     wir_r,
                            const c3_c* cap_c,
                            u2_noun     typ);
 
-/* _ford_mo_mill(): mill from gen, pit, gol.
+/* _zuse_mo_mint(): mint from gen, pit, gol.
 */
 u2_weak                                                           //  transfer
-_ford_mo_mill(u2_wire wir_r,
+_zuse_mo_mint(u2_wire wir_r,
               u2_noun pit,                                        //  retain
               u2_noun typ,                                        //  retain
               u2_noun gol,                                        //  retain
@@ -259,13 +259,13 @@ _ford_mo_mill(u2_wire wir_r,
   u2_noun fut = u2_sh_look(wir_r, pit, "ut");
 
   if ( u2_none == fut ) {
-    printf("ford: fut failed\n");
+    printf("zuse: fut failed\n");
     return u2_none;
   } else {
     u2_noun tut = u2_nk_nock(wir_r, u2_rx(wir_r, pit), fut);
 
     if ( u2_none == tut ) {
-      printf("ford: tut failed\n");
+      printf("zuse: tut failed\n");
       return u2_none;
     }
     else {
@@ -273,20 +273,20 @@ _ford_mo_mill(u2_wire wir_r,
 
       u2_rl_lose(wir_r, tut);
       if ( u2_none == van ) {
-        printf("ford: van failed\n");
+        printf("zuse: van failed\n");
         return u2_none;
       }
       else {
-        u2_noun gom = u2_sh_look(wir_r, van, "mill"); 
+        u2_noun gom = u2_sh_look(wir_r, van, "mint"); 
 
         if ( u2_none == gom ) {
-          printf("ford: gom failed\n");
+          printf("zuse: gom failed\n");
           u2_rl_lose(wir_r, van); return u2_none;
         } else {
           u2_noun mil = u2_nk_nock(wir_r, van, gom);
 
           if ( u2_none == mil ) {
-            printf("ford: mil failed\n");
+            printf("zuse: mil failed\n");
             return u2_none;
           }
           else {
@@ -294,7 +294,7 @@ _ford_mo_mill(u2_wire wir_r,
                                        u2_rx(wir_r, gen));
 
             if ( u2_none == ruq ) {
-              printf("ford: ruq failed\n");
+              printf("zuse: ruq failed\n");
               return u2_none;
             }
             else return u2_nk_mung(wir_r, mil, ruq);
@@ -305,10 +305,10 @@ _ford_mo_mill(u2_wire wir_r,
   }
 }
 
-/* _ford_dump_type(): print type with internal tools.
+/* _zuse_dump_type(): print type with internal tools.
 */
 void
-_ford_dump_type(u2_wire wir_r,
+_zuse_dump_type(u2_wire wir_r,
                 u2_noun     pit,                                  //  retain
                 const c3_c* cap_c,
                 u2_noun     typ)
@@ -316,7 +316,7 @@ _ford_dump_type(u2_wire wir_r,
   u2_noun fut = u2_sh_look(wir_r, pit, "ut");
 
   if ( u2_none == fut ) {
-    printf("ford: fut failed\n");
+    printf("zuse: fut failed\n");
   } else {
     u2_noun van = u2_nk_nock(wir_r, u2_rx(wir_r, pit), fut);
 
@@ -325,10 +325,10 @@ _ford_dump_type(u2_wire wir_r,
   }
 }
 
-/* ford_test3(): accurate use of a true kernel.
+/* zuse_test3(): accurate use of a true kernel.
 */
 void
-ford_test3(struct ford_state* fod_f,
+zuse_test3(struct zuse_state* fod_f,
            const char*        src_c,
            const char*        arg_c)
 {
@@ -348,7 +348,7 @@ ford_test3(struct ford_state* fod_f,
       return;
     }
     else {
-      u2_noun lof = _ford_mo_mill(wir_r, fod_f->pit, c3__noun, c3__noun, gen); 
+      u2_noun lof = _zuse_mo_mint(wir_r, fod_f->pit, c3__noun, c3__noun, gen); 
 
       if ( u2_none == lof ) {
         printf("test: failed\n");
@@ -366,12 +366,12 @@ ford_test3(struct ford_state* fod_f,
           u2_noun pug = u2_bn_nock(wir_r, _0, tul);
           u2_noun src = u2_rl_string(wir_r, arg_c);
           u2_noun ger = j2_mbc(watt_271, ream)(wir_r, src);
-          u2_noun hup = _ford_mo_mill(wir_r, fod_f->pit, typ, c3__noun, ger);
+          u2_noun hup = _zuse_mo_mint(wir_r, fod_f->pit, typ, c3__noun, ger);
 
           if ( (u2_none != hup) && (u2_none != pug) ) {
             u2_weak muf = u2_nk_nock(wir_r, pug, u2_t(hup));
 
-            _ford_dump_type(wir_r, fod_f->pit, 0, u2_h(hup));
+            _zuse_dump_type(wir_r, fod_f->pit, 0, u2_h(hup));
             if ( muf != u2_none ) {
               u2_err(wir_r, 0, muf);
             }
@@ -383,10 +383,10 @@ ford_test3(struct ford_state* fod_f,
   }
 }
 
-/* _ford_from(): expression in pit space.
+/* _zuse_from(): expression in pit space.
 */
 static u2_noun
-_ford_from(struct ford_state* fod_f,
+_zuse_from(struct zuse_state* fod_f,
            const c3_c*        exp_c)
 {
   u2_ray  wir_r = fod_f->wir_r;
@@ -400,10 +400,10 @@ _ford_from(struct ford_state* fod_f,
   return val;
 }
 
-/* ford_line(): execute a ford line, as command and argument.
+/* zuse_line(): execute a zuse line, as command and argument.
 */
 void
-ford_line(struct ford_state* fod_f,
+zuse_line(struct zuse_state* fod_f,
           const c3_c*        cmd_c,
           const c3_c*        arg_c)
 {
@@ -421,8 +421,8 @@ ford_line(struct ford_state* fod_f,
     }
     else {
       if ( !strcmp(cmd_c, "test") ) {
-        // ford_test(fod_f, "watt/t1-273");
-        ford_test3(fod_f, "watt/270", arg_c);
+        // zuse_test(fod_f, "watt/t1-273");
+        zuse_test3(fod_f, "watt/270", arg_c);
       }
       else {
 #if 0
@@ -442,11 +442,11 @@ ford_line(struct ford_state* fod_f,
 
         /* Construct gate from command.
         */
-        gat = _ford_from(fod_f, cmd_c);
+        gat = _zuse_from(fod_f, cmd_c);
 
         /* Construct sample from argument.
         */
-        sam = _ford_from(fod_f, arg_c);
+        sam = _zuse_from(fod_f, arg_c);
 
         /* Construct product.
         */
@@ -472,9 +472,9 @@ ford_line(struct ford_state* fod_f,
   u2_bx_show(wir_r);
 }
 
-/* ford_done(): terminate and free all.
+/* zuse_done(): terminate and free all.
 */
 void
-ford_done(struct ford_state* fod_f)
+zuse_done(struct zuse_state* fod_f)
 {
 }

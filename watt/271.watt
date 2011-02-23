@@ -1121,9 +1121,9 @@
   ::
     [%brbn p=*gene q=*gene]                                     ::  |=  barbon
     [%brcs p=*(list gene)]                                      ::  |?  barcas
-    [%brdg p=*gene]                                             ::  |:  bardeg
+    [%brdg p=*gene q=*gene]                                     ::  |:  bardeg
     [%brdp p=*gene]                                             ::  |-  bardap
-    [%brdt p=*gene q=*gene]                                     ::  |.  bardot
+    [%brdt p=*gene]                                             ::  |.  bardot
     [%brmt p=*gene q=*gene r=*gene]                             ::  |%  barmit
     [%brtg p=*gene q=*(list gene)]                              ::  |~  bartig
     [%brtr p=*gene q=*gene]                                     ::  |*  bartar
@@ -1168,7 +1168,7 @@
     [%mttr p=*gene]                                             ::  %*  mittar
   ::
     [%pmbn p=*gene q=*(map term foot)]                          ::  &=  pambon
-    [%pmdg p=*(map term foot)]                                  ::  &:  pamdeg
+    [%pmdg p=*gene q=*(map term foot)]                          ::  &:  pamdeg
     [%pmdp p=*gene q=*(map term foot)]                          ::  &-  pamdap
     [%pmdt p=*(map term foot)]                                  ::  &.  pamdot
     [%pmmt p=*gene q=*gene r=*(map term foot)]                  ::  &%  pammit
@@ -1274,9 +1274,9 @@
         [%zpzp ~]
       [%brbn [%ktdp [%tmbn %noun] i.p.gen] [%cstr [~ 4] p.gen]]
     ::
-        [%brdp *]   [%bnld [%brdg p.gen] %%]
-        [%brdg *]   [%pmdg [[%% [& p.gen]] ~ ~]]
-        [%brdt *]   [%pmdt p.gen [[%% [& q.gen]] ~ ~]]
+        [%brdp *]   [%bnld [%brdt p.gen] %%]
+        [%brdg *]   [%pmdg p.gen [[%% [& q.gen]] ~ ~]]
+        [%brdt *]   [%pmdt [[%% [& p.gen]] ~ ~]]
         [%brmt *]   [%pmmt p.gen q.gen [[%% [& r.gen]] ~ ~]]
         [%brtg *]
       |-
@@ -1360,7 +1360,7 @@
         [%mttr *]   [%bnld p.gen [%mtbn [%% ~] ~]]
     ::::
     ::::
-        [%pmdp *]   [%bnld [%pmdg q.gen] p.gen] 
+        [%pmdp *]   [%bnld [%pmdt q.gen] p.gen] 
     ::::
     ::::
         [%tmbn *]
@@ -1659,10 +1659,10 @@
         ~   0
         ^
       ?-    dab
-          [* ~ ~]   q:$$(gen p.q.n.dab)
-          [* ~ *]   [q:$$(gen p.q.n.dab) $(dab r.dab)]
-          [* * ~]   [q:$$(gen p.q.n.dab) $(dab l.dab)]
-          [* * *]   [q:$$(gen p.q.n.dab) $(dab l.dab) $(dab r.dab)] 
+          [* ~ ~]   q:(mint %noun p.q.n.dab)
+          [* ~ *]   [q:(mint %noun p.q.n.dab) $(dab r.dab)]
+          [* * ~]   [q:(mint %noun p.q.n.dab) $(dab l.dab)]
+          [* * *]   [q:(mint %noun p.q.n.dab) $(dab l.dab) $(dab r.dab)] 
       --
     --
   ::::
@@ -2085,7 +2085,7 @@
         crow
       =+  [mel=*<%gold %iron %lead %zinc> ruf=*gene dab=*(map term foot)]
       |=
-      =+  dan=$(gen ruf, gol %noun)
+      =+  dan=$$(gen ruf, gol %noun)
       =+  toc=(core p.dan [%gold p.dan [~ dab]])
       =+  dez=(bake(sut toc) dab)
       :-  (nice (core p.dan mel p.dan [dez dab]))
@@ -2193,10 +2193,11 @@
         (crow %zinc [%dgdp p.gen [%dgdp q.gen [~ 1]]] r.gen)
       ::
           [%pmtr *]                                                   ::  &*
-        =+  dan=$(gen [%dgdp p.gen [~ 1]] q.gen)
+        =+  dan=$(gen [%dgdp p.gen [~ 1]], gol %noun)
         =+  toc=(core p.dan [%wood p.dan [~ q.gen]])
         =+  dez=(bake(sut toc, vet |) q.gen)
-        :-  (nice toc(p.r.q dez))
+        ::  :-  (nice toc(p.r.q dez))
+        :-  (nice (core p.dan [%wood p.dan [dez q.gen]]))
         (comb q.dan [[0 1] [1 dez]])
       ::
           [%tgld *]                                                   ::  ~>
@@ -2259,7 +2260,7 @@
         ?&(.=(%wood p.q.ref) .=(q.r.q.sut q.r.q.ref))
       ?&
         ?|(.=(p.q.sut p.q.ref) .=(%lead p.q.ref))
-        (cram(p.sut q.q.sut, p.ref q.q.ref) q.r.q.sut q.r.q.ref)
+        (cram(sut sut(p q.q.sut), ref ref(p q.q.ref)) q.r.q.sut q.r.q.ref)
         ?-    p.q.sut
             %gold
           =+  sam=[s=(peek(sut q.q.sut) %nest 2) r=(peek(sut q.q.ref) %nest 2)]
@@ -2526,7 +2527,7 @@
     ::
         [%pmmt *]
       =+  gur=(cell $(gen p.gen) (cell $(gen q.gen) sut))
-      (core gur %zinc gur [0 0] r.gen))
+      (core gur %zinc gur [0 0] r.gen)
     ::
         [%pmtr *]
       =+(gur=(cell $(gen p.gen) sut) (core gur %wood gur [0 0] q.gen))
