@@ -294,13 +294,10 @@
       j2_mby(Pit, cons)(u2_wire wir_r, 
                         u2_noun vur,                              //  retain
                         u2_noun sed);                             //  retain
-
       u2_noun                                                     //  transfer
       j2_mby(Pit, core)(u2_wire wir_r, 
-                        u2_noun vod,                              //  retain
-                        u2_noun suz,                              //  retain
-                        u2_noun hel,                              //  retain
-                        u2_noun don);                             //  retain
+                        u2_noun pac,                              //  retain
+                        u2_noun con);                             //  retain
 
       u2_noun                                                     //  transfer
       j2_mby(Pit, fork)(u2_wire wir_r, 
@@ -355,9 +352,16 @@
                             u2_noun dab);                         //  retain
 
       u2_noun                                                     //  transfer
-      j2_mcy(Pit, ut, clay)(u2_wire wir_r, 
+      j2_mcy(Pit, ut, burn)(u2_wire wir_r, 
                             u2_noun van,                          //  retain
                             u2_noun sut);                         //  retain
+
+      u2_noun                                                     //  transfer
+      j2_mcy(Pit, ut, cull)(u2_wire wir_r,
+                            u2_noun van,                          //  retain
+                            u2_noun sut,                          //  retain
+                            u2_atom axe,                          //  retain
+                            u2_noun ref);                         //  retain
 
       u2_noun                                                     //  transfer
       j2_mcy(Pit, ut, edit)(u2_wire wir_r,
@@ -368,37 +372,25 @@
                             u2_noun har);                         //  retain
 
       u2_noun                                                     //  transfer
-      j2_mcy(Pit, ut, etch)(u2_wire wir_r, 
+      j2_mcy(Pit, ut, emit)(u2_wire wir_r, 
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
-                            u2_noun rep,                          //  retain
-                            u2_noun gan);                         //  retain
-
-      u2_flag
-      j2_mcy(Pit, ut, fair)(u2_wire wir_r, 
-                            u2_noun van,                          //  retain
-                            u2_noun sut,                          //  retain
-                            u2_noun ref,                          //  retain
-                            u2_noun dab);                         //  retain
+                            u2_atom axe,                          //  retain
+                            u2_noun mun,                          //  retain
+                            u2_noun har);                         //  retain
 
       u2_noun                                                     //  transfer
-      j2_mcy(Pit, ut, fill)(u2_wire wir_r, 
+      j2_mcy(Pit, ut, find)(u2_wire wir_r,
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
-                            u2_noun sem);                         //  retain
-
-      u2_noun                                                     //  transfer
-      j2_mcy(Pit, ut, find)(u2_wire wir_r, 
-                            u2_noun van,                          //  retain
-                            u2_noun sut,                          //  retain
+                            u2_noun way,                          //  retain
                             u2_noun cog);                         //  retain
 
-      u2_flag
-      j2_mcy(Pit, ut, firm)(u2_wire wir_r, 
+      u2_noun                                                     //  transfer
+      j2_mcy(Pit, ut, fire)(u2_wire wir_r,
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
-                            u2_noun ref,                          //  retain
-                            u2_noun gen);                         //  retain
+                            u2_noun hag);                         //  retain
 
       u2_noun                                                     //  transfer
       j2_mcy(Pit, ut, fish)(u2_wire wir_r, 
@@ -407,28 +399,29 @@
                             u2_atom axe);                         //  retain
 
       u2_noun                                                     //  transfer
+      j2_mcy(Pit, ut, fuse)(u2_wire wir_r,
+                            u2_noun van,                          //  retain
+                            u2_noun sut,                          //  retain
+                            u2_noun ref);                         //  retain
+
+      u2_noun                                                     //  transfer
       j2_mcy(Pit, ut, gain)(u2_wire wir_r, 
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
                             u2_noun gen);                         //  retain
 
       u2_noun                                                     //  transfer
-      j2_mcy(Pit, ut, make)(u2_wire wir_r, 
+      j2_mcy(Pit, ut, mint)(u2_wire wir_r,
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
+                            u2_noun gol,                          //  retain
                             u2_noun gen);                         //  retain
-
       u2_noun                                                     //  transfer
-      j2_mcy(Pit, ut, mill)(u2_wire wir_r, 
-                            u2_noun van,                          //  retain
-                            u2_noun sut,                          //  retain
-                            u2_noun gen);                         //  retain
-
       u2_flag                                                     //  transfer
       j2_mcy(Pit, ut, nest)(u2_wire wir_r, 
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
-                            u2_noun bon);                         //  retain
+                            u2_noun ref);                         //  retain
 
       u2_flag                                                     //  transfer
       j2_mcy(Pit, ut, orth)(u2_wire wir_r, 
@@ -437,28 +430,36 @@
                             u2_noun ref);                         //  retain
 
       u2_noun                                                     //  transfer
-      j2_mcy(Pit, ut, peek)(u2_wire wir_r, 
+      j2_mcy(Pit, ut, park)(u2_wire wir_r,
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
-                            u2_atom axe);                         //  retain
+                            u2_noun way,                          //  retain
+                            u2_noun axe);                         //  retain
 
+      u2_noun                                                     //  transfer
+      j2_mcy(Pit, ut, peek)(u2_wire wir_r,
+                            u2_noun van,                          //  retain
+                            u2_noun sut,                          //  retain
+                            u2_noun way,                          //  retain
+                            u2_noun axe);                         //  retain
+      
       u2_noun                                                     //  transfer
       j2_mcy(Pit, ut, play)(u2_wire wir_r, 
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
                             u2_noun gen);                         //  retain
 
-      u2_flag                                                     //  transfer
-      j2_mcy(Pit, ut, reap)(u2_wire wir_r, 
+      u2_noun                                                     //  transfer
+      j2_mcy(Pit, ut, repo)(u2_wire wir_r, 
                             u2_noun van,                          //  retain
-                            u2_noun sut,                          //  retain
-                            u2_noun ref);                         //  retain
+                            u2_noun sut);                         //  retain
 
       u2_noun                                                     //  transfer
-      j2_mcy(Pit, ut, seek)(u2_wire wir_r, 
+      j2_mcy(Pit, ut, seek)(u2_wire wir_r,
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
-                            u2_noun rep);                         //  retain
+                            u2_noun way,
+                            u2_noun hep);                         //  retain
 
       u2_noun                                                     //  transfer
       j2_mcy(Pit, ut, snap)(u2_wire wir_r, 

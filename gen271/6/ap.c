@@ -5,6 +5,17 @@
 #include "all.h"
 #include "../pit.h"
 
+/** forward declares
+**/
+    static u2_noun
+    j2_mcy(Pit, ap, sift)(u2_wire, u2_noun);
+
+    static u2_noun
+    j2_mcy(Pit, ap, mold)(u2_wire, u2_noun, u2_noun);
+
+    static u2_noun
+    j2_mcy(Pit, ap, open)(u2_wire, u2_noun);
+
 /** open cases
 **/
 
@@ -749,6 +760,18 @@
         _open_pq  (tmpd);
       }
     }
+    u2_noun                                                       //  transfer
+    j2_mc(Pit, ap, open)(u2_wire wir_r, 
+                         u2_noun cor)                             //  retain
+    {
+      u2_noun gen;
+
+      if ( u2_none == (gen = u2_frag(u2_cv_sam, cor)) ) {
+        return u2_bl_bail(wir_r);
+      } else {
+        return j2_mcy(Pit, ap, open)(wir_r, gen);
+      }
+    }
 
   /** rake
   **/
@@ -794,7 +817,7 @@
     j2_mc(Pit, ap, rake)(u2_wire wir_r, 
                          u2_noun cor)                             //  retain
     {
-      u2_noun sut;
+      u2_noun gen;
 
       if ( u2_none == (gen = u2_frag(u2_cv_sam, cor)) ) {
         return u2_bl_bail(wir_r);
@@ -896,7 +919,7 @@
     j2_mc(Pit, ap, sift)(u2_wire wir_r, 
                          u2_noun cor)                             //  retain
     {
-      u2_noun sut;
+      u2_noun gen;
 
       if ( u2_none == (gen = u2_frag(u2_cv_sam, cor)) ) {
         return u2_bl_bail(wir_r);
