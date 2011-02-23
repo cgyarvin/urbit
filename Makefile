@@ -181,6 +181,7 @@ J271_4_OFILES=\
        gen271/4/by_put.o 
 
 J271_6_OFILES=\
+       gen271/6/ap.o \
        gen271/6/cell.o \
        gen271/6/comb.o \
        gen271/6/cons.o \
@@ -193,30 +194,32 @@ J271_6_OFILES=\
        gen271/6/hack.o \
        gen271/6/hike.o \
        gen271/6/look.o \
-       gen271/6/open.o \
-       gen271/6/rake.o \
        gen271/6/ream.o \
-       gen271/6/ut.o \
+       gen271/6/ut.o
 
 J271_6_OFILES_UT=\
        gen271/6/ut_bake.o \
-       gen271/6/ut_clay.o \
+       gen271/6/ut_burn.o \
+       gen271/6/ut_cull.o \
        gen271/6/ut_edit.o \
-       gen271/6/ut_fair.o \
+       gen271/6/ut_emit.o \
        gen271/6/ut_find.o \
-       gen271/6/ut_firm.o \
+       gen271/6/ut_fire.o \
        gen271/6/ut_fish.o \
+       gen271/6/ut_fuse.o \
        gen271/6/ut_gain.o \
-       gen271/6/ut_make.o \
+       gen271/6/ut_heal.o \
        gen271/6/ut_mint.o \
        gen271/6/ut_orth.o \
        gen271/6/ut_nest.o \
+       gen271/6/ut_park.o \
        gen271/6/ut_peek.o \
        gen271/6/ut_play.o \
-       gen271/6/ut_reap.o \
+       gen271/6/ut_repo.o \
        gen271/6/ut_seek.o \
        gen271/6/ut_snap.o \
-       gen271/6/ut_tuck.o
+       gen271/6/ut_tuck.o \
+       gen271/6/ut_tusk.o
 
 J271_OFILES=\
        $(J271_1_OFILES) \
@@ -224,6 +227,7 @@ J271_OFILES=\
        $(J271_3_OFILES) \
        $(J271_4_OFILES) \
        $(J271_6_OFILES) \
+       $(J271_6_OFILES_UT) \
        gen271/watt.o
 
 OFILES=\

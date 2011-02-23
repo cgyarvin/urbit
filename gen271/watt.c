@@ -157,19 +157,17 @@
       { j2_sb(Pit, cons), j2_mbj(Pit, cons), 0, 0, u2_none },
       { j2_sb(Pit, core), j2_mbj(Pit, core), 0, 0, u2_none },
       { j2_sb(Pit, face), j2_mbj(Pit, face), 0, 0, u2_none },
-      { j2_sb(Pit, fork), j2_mbj(Pit, fork), 0, 0, u2_none },
       { j2_sb(Pit, flan), j2_mbj(Pit, flan), 0, 0, u2_none },
       { j2_sb(Pit, flip), j2_mbj(Pit, flip), 0, 0, u2_none },
       { j2_sb(Pit, flor), j2_mbj(Pit, flor), 0, 0, u2_none },
+      { j2_sb(Pit, fork), j2_mbj(Pit, fork), 0, 0, u2_none },
       { j2_sb(Pit, hack), j2_mbj(Pit, hack), 0, 0, u2_none },
       { j2_sb(Pit, hike), j2_mbj(Pit, hike), 0, 0, u2_none },
       { j2_sb(Pit, look), j2_mbj(Pit, look), 0, 0, u2_none },
-      { j2_sb(Pit, open), j2_mbj(Pit, open), 0, 0, u2_none },
-      { j2_sb(Pit, rake), j2_mbj(Pit, rake), 0, 0, u2_none },
       { j2_sb(Pit, ream), j2_mbj(Pit, ream), 0, 0, u2_none },
 
       { j2_sb(Pit, ap), j2_mbj(Pit, ap), j2_mbd(Pit, ap), 0, u2_none } 
-    //  { j2_sb(Pit, ut), j2_mbj(Pit, ut), j2_mbd(Pit, ut), 0, u2_none } 
+      { j2_sb(Pit, ut), j2_mbj(Pit, ut), j2_mbd(Pit, ut), 0, u2_none } 
   };
 
   u2_ho_driver

@@ -1137,7 +1137,6 @@ u2_rl_copy(u2_ray ral_r,
       } else {
         u2_weak hed, tel;
         u2_ray nov_r;
-        u2_noun nov;
 
         if ( u2_none == (hed = u2_rl_copy(ral_r, u2_h(fiz))) ) {
           u2_ho_warn_here();
@@ -1168,7 +1167,6 @@ u2_rl_copy(u2_ray ral_r,
     } else {
       c3_w len_w = *u2_at_pug_len(fiz);
       u2_ray nov_r;
-      u2_noun nov;
 
       nov_r = _rl_bloq_grab(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
       if ( 0 == nov_r ) {
@@ -1196,8 +1194,8 @@ u2_rl_copy(u2_ray ral_r,
 }
 
 void
-u2_rl_wash(u2_ral ral_r,
-           u2_dog fiz)                                            //  retain
+u2_rl_wash(u2_rail ral_r,
+           u2_dog  fiz)                                            //  retain
 {
   if ( u2_yes == u2_rl_junior(ral_r, fiz) ) {
     c3_w mug_w = *u2_at_dog_mug(fiz);
