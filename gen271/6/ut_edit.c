@@ -15,8 +15,6 @@
                         u2_noun mun,                              //  retain
                         u2_noun har)                              //  retain
   {
-    u2_noun luf = u2_nul;
-
     mun = u2_rx(wir_r, mun);
     while ( 1 ) {
       if ( u2_nul == har ) {
@@ -31,7 +29,7 @@
         } else {
           u2_noun pi_har = u2_h(i_har);
           u2_noun qi_har = u2_t(i_har);
-          u2_noun hep = j2_mby(Pit, rake)(wir_r, pi_har);
+          u2_noun hep = j2_mcy(Pit, ap, rake)(wir_r, pi_har);
           u2_noun taq = j2_mcy(Pit, ut, tusk)
             (wir_r, van, mun, hep, sut, qi_har);
 

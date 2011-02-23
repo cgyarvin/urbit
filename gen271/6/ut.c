@@ -64,8 +64,8 @@
       default: goto fail;
 
       case c3__atom: break;
-      case c3__blot: break;
-      case c3__blur: break;
+      case c3__noun: break;
+      case c3__void: break;
     } 
     else switch ( u2_h(typ) ) {
       default: fail: u2_err(wir_r, "bum type", typ); u2_bl_bail(wir_r); break;
@@ -137,8 +137,8 @@
 /* declarations
 */
   u2_noun                                                         //  transfer
-  j2_mc(Pit, ut, clay)(u2_wire wir_r, 
-                         u2_noun cor);                            //  retain
+  j2_mc(Pit, ut, repo)(u2_wire wir_r, 
+                       u2_noun cor);                              //  retain
 
   extern u2_ho_jet j2_mcj(Pit, ut, bake)[];
   extern u2_ho_jet j2_mcj(Pit, ut, edit)[];

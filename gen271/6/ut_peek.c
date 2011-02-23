@@ -18,20 +18,20 @@
       return u2_rx(wir_r, sut);
     }
     else {
-      u2_noun p_sut, q_sut, r_sut;
+      u2_noun p_sut, q_sut;
       u2_noun pro;
 
       if ( (u2_no == u2_dust(sut)) ) switch ( sut ) {
         default: return u2_bl_bail(wir_r);
 
         case c3__atom: {
-          return c3__blot;
+          return c3__void;
         }
-        case c3__blot: {
-          return c3__blot;
+        case c3__noun: {
+          return c3__noun;
         }
-        case c3__blur: {
-          return c3__blur;
+        case c3__void: {
+          return c3__void;
         }
       }
       else switch ( u2_h(sut) ) {
@@ -45,10 +45,10 @@
             u2_atom tap = j2_mbc(Pit, mas)(wir_r, axe);
 
             if ( _2 == tip ) {
-              pro = j2_mcx(Pit, ut, peek)(wir_r, van, p_sut, tap);
+              pro = j2_mcx(Pit, ut, peek)(wir_r, van, p_sut, way, tap);
             }
             else {
-              pro = j2_mcx(Pit, ut, peek)(wir_r, van, q_sut, tap);
+              pro = j2_mcx(Pit, ut, peek)(wir_r, van, q_sut, way, tap);
             }
             u2_rl_lose(wir_r, tap); 
             u2_rl_lose(wir_r, tip);
@@ -74,10 +74,10 @@
               {
                 return u2_bl_bail(wir_r);
               }
-              else pro = j2_mcx(Pit, ut, peek)(wir_r, van, p_sut, tap);
+              else pro = j2_mcx(Pit, ut, peek)(wir_r, van, p_sut, way, tap);
             }
             else {
-              pro = c3__blur;
+              pro = c3__noun;
             }
             u2_rl_lose(wir_r, tap); 
             u2_rl_lose(wir_r, tip);
@@ -91,7 +91,7 @@
             u2_noun gud;
 
             if ( u2_none == (gud = u2_frag(axe, p_sut)) ) {
-              return c3__blot;
+              return c3__void;
             } else {
               return u2_rx(wir_r, gud);
             }

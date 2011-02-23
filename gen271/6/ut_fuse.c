@@ -97,15 +97,15 @@
       case c3__face: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {
         u2_noun vot = _fuse_in(wir_r, van, q_sut, ref, bix);
-        u2_noun ret = j2_mby(Pit, face, p_sut, vot);
+        u2_noun ret = j2_mby(Pit, face)(wir_r, p_sut, vot);
 
         u2_rl_lose(wir_r, vot);
         return ret;
       }
       case c3__fork: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {
-        u2_noun dis = _fuse_in(wir_r, van, p_sut, p_ref, bix);
-        u2_noun dat = _fuse_in(wir_r, van, q_sut, q_ref, bix);
+        u2_noun dis = _fuse_in(wir_r, van, p_sut, ref, bix);
+        u2_noun dat = _fuse_in(wir_r, van, q_sut, ref, bix);
         u2_noun ret = j2_mby(Pit, fork)(wir_r, dis, dat);
 
         u2_rl_lose(wir_r, dis);

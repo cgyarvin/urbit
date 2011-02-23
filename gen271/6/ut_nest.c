@@ -11,6 +11,8 @@
   */
     static u2_flag
     _nest_sint(u2_wire, u2_noun, u2_noun, u2_noun, u2_noun);
+    static u2_flag
+    _nest_dext(u2_wire, u2_noun, u2_noun, u2_noun, u2_noun);
 
   static u2_flag
   _nest_cram(u2_wire wir_r,
@@ -50,8 +52,8 @@
           if ( u2_h(qn_dab) != u2_h(qn_hem) ) {
             return u2_no;
           } else if ( u2_yes == u2_h(qn_dab) ) {
-            u2_noun vis = j2_mcy(Pit, van, play)(wir_r, van, sut, u2_t(qn_dab));
-            u2_noun lon = j2_mcy(Pit, van, play)(wir_r, van, ref, u2_t(qn_hem));
+            u2_noun vis = j2_mcy(Pit, ut, play)(wir_r, van, sut, u2_t(qn_dab));
+            u2_noun lon = j2_mcy(Pit, ut, play)(wir_r, van, ref, u2_t(qn_hem));
             u2_flag ret = _nest_dext(wir_r, van, vis, lon, gil);
 
             u2_rz(wir_r, vis);
@@ -99,86 +101,90 @@
         return u2_no;
       }
       else {
-        u2_noun tus = u2_bt(wir_r, c3__core, u2_rx(qq_sut), u2_rx(q_sut));
-        u2_noun fer = u2_bt(wir_r, c3__core, u2_rx(qq_ref), u2_rx(q_ref));
+        u2_noun tus = u2_bt(wir_r, c3__core, 
+                                   u2_rx(wir_r, qq_sut), 
+                                   u2_rx(wir_r, q_sut));
+        u2_noun fer = u2_bt(wir_r, c3__core, 
+                                   u2_rx(wir_r, qq_ref), 
+                                   u2_rx(wir_r, q_ref));
 
-        ret = _nest_cram(wir_r, van, tus, fer, qrq_sut, qrq_ref);
+        ret = _nest_cram(wir_r, van, tus, fer, qrq_sut, qrq_ref, gil);
         u2_rz(wir_r, tus);
         u2_rz(wir_r, fer);
 
         if ( u2_no == ret ) {
           return u2_no;
         }
-      }
-      else {
-        #define _peek_at(wir_r, van, typ, axe) \
-          j2_mcy(Pit, ut, peek)(wir_r, van, typ, c3__nest, axe)
+        else {
+          #define _peek_at(wir_r, van, typ, axe) \
+            j2_mcy(Pit, ut, peek)(wir_r, van, typ, c3__nest, axe)
 
-        switch ( pq_sut ) {
-          default: return u2_bl_bail(wir_r);
+          switch ( pq_sut ) {
+            default: return u2_bl_bail(wir_r);
 
-          case c3__gold: {
-            u2_noun s_sam = _peek_at(wir_r, van, qq_sut, _2);
-            u2_noun r_sam = _peek_at(wir_r, van, qq_ref, _2);
-            u2_noun s_con = _peek_at(wir_r, van, qq_sut, _3);
-            u2_noun r_con = _peek_at(wir_r, van, qq_ref, _3);
+            case c3__gold: {
+              u2_noun s_sam = _peek_at(wir_r, van, qq_sut, _2);
+              u2_noun r_sam = _peek_at(wir_r, van, qq_ref, _2);
+              u2_noun s_con = _peek_at(wir_r, van, qq_sut, _3);
+              u2_noun r_con = _peek_at(wir_r, van, qq_ref, _3);
 
-            ret = u2_and
-              (_nest_dext(wir_r, van, r_sam, s_sam, gil),
-               u2_and
-                (_nest_dext(wir_r, van, s_con, r_con, gil),
-                 _nest_dext(wir_r, van, r_con, s_con, gil)));
+              ret = u2_and
+                (_nest_dext(wir_r, van, r_sam, s_sam, gil),
+                 u2_and
+                  (_nest_dext(wir_r, van, s_con, r_con, gil),
+                   _nest_dext(wir_r, van, r_con, s_con, gil)));
 
-            u2_rz(wir_r, s_sam); u2_rz(wir_r, r_sam);
-            u2_rz(wir_r, s_con); u2_rz(wir_r, r_con);
+              u2_rz(wir_r, s_sam); u2_rz(wir_r, r_sam);
+              u2_rz(wir_r, s_con); u2_rz(wir_r, r_con);
 
-            return ret;
-          } 
-          case c3__lead: {
-            return u2_and(_nest_dext(wir_r, van, qq_sut, qq_ref),
-                          _nest_dext(wir_r, van, qq_ref, qq_sut));
-          }
-          case c3__iron: {
-            u2_noun s_sam = _peek_at(wir_r, van, qq_sut, _2);
-            u2_noun r_sam = _peek_at(wir_r, van, qq_ref, _2);
-            u2_noun s_pal = _peek_at(wir_r, van, qq_sut, _6);
-            u2_noun r_pal = _peek_at(wir_r, van, qq_ref, _6);
-            u2_noun s_con = _peek_at(wir_r, van, qq_sut, _7);
-            u2_noun r_con = _peek_at(wir_r, van, qq_ref, _7);
+              return ret;
+            } 
+            case c3__lead: {
+              return u2_and(_nest_dext(wir_r, van, qq_sut, qq_ref, gil),
+                            _nest_dext(wir_r, van, qq_ref, qq_sut, gil));
+            }
+            case c3__iron: {
+              u2_noun s_sam = _peek_at(wir_r, van, qq_sut, _2);
+              u2_noun r_sam = _peek_at(wir_r, van, qq_ref, _2);
+              u2_noun s_pal = _peek_at(wir_r, van, qq_sut, _6);
+              u2_noun r_pal = _peek_at(wir_r, van, qq_ref, _6);
+              u2_noun s_con = _peek_at(wir_r, van, qq_sut, _7);
+              u2_noun r_con = _peek_at(wir_r, van, qq_ref, _7);
 
-            u2_rz(wir_r, s_sam); u2_rz(wir_r, r_sam);
-            u2_rz(wir_r, s_con); u2_rz(wir_r, r_con);
+              u2_rz(wir_r, s_sam); u2_rz(wir_r, r_sam);
+              u2_rz(wir_r, s_con); u2_rz(wir_r, r_con);
 
-            ret = u2_and
-              (_nest_dext(wir_r, van, r_sam, s_sam, gil),
-               u2_and
+              ret = u2_and
+                (_nest_dext(wir_r, van, r_sam, s_sam, gil),
+                 u2_and
+                  (_nest_dext(wir_r, van, s_pal, r_pal, gil),
+                   u2_and
+                    (_nest_dext(wir_r, van, s_con, r_con, gil),
+                     _nest_dext(wir_r, van, r_con, s_con, gil))));
+
+              u2_rz(wir_r, s_sam); u2_rz(wir_r, r_sam);
+              u2_rz(wir_r, s_pal); u2_rz(wir_r, r_pal);
+              u2_rz(wir_r, s_con); u2_rz(wir_r, r_con);
+
+              return ret;
+            }
+            case c3__zinc: {
+              u2_noun s_pal = _peek_at(wir_r, van, qq_sut, _2);
+              u2_noun r_pal = _peek_at(wir_r, van, qq_ref, _2);
+              u2_noun s_con = _peek_at(wir_r, van, qq_sut, _3);
+              u2_noun r_con = _peek_at(wir_r, van, qq_ref, _3);
+
+              ret = u2_and
                 (_nest_dext(wir_r, van, s_pal, r_pal, gil),
                  u2_and
                   (_nest_dext(wir_r, van, s_con, r_con, gil),
-                   _nest_dext(wir_r, van, r_con, s_con, gil))));
+                   _nest_dext(wir_r, van, r_con, s_con, gil)));
 
-            u2_rz(wir_r, s_sam); u2_rz(wir_r, r_sam);
-            u2_rz(wir_r, s_pal); u2_rz(wir_r, r_pal);
-            u2_rz(wir_r, s_con); u2_rz(wir_r, r_con);
+              u2_rz(wir_r, s_pal); u2_rz(wir_r, r_pal);
+              u2_rz(wir_r, s_con); u2_rz(wir_r, r_con);
 
-            return ret;
-          }
-          case c3__zinc: {
-            u2_noun s_pal = _peek_at(wir_r, van, qq_sut, _2);
-            u2_noun r_pal = _peek_at(wir_r, van, qq_ref, _2);
-            u2_noun s_con = _peek_at(wir_r, van, qq_sut, _3);
-            u2_noun r_con = _peek_at(wir_r, van, qq_ref, _3);
-
-            ret = u2_and
-              (_nest_dext(wir_r, van, s_pal, r_pal, gil),
-               u2_and
-                (_nest_dext(wir_r, van, s_con, r_con, gil),
-                 _nest_dext(wir_r, van, r_con, s_con, gil)));
-
-            u2_rz(wir_r, s_pal); u2_rz(wir_r, r_pal);
-            u2_rz(wir_r, s_con); u2_rz(wir_r, r_con);
-
-            return ret;
+              return ret;
+            }
           }
         }
       }

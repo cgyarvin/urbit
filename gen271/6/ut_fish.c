@@ -26,11 +26,11 @@
         u2_rl_lose(wir_r, ton);
         return pro;
       }
-      case c3__blot: {
-        return u2_bc(wir_r, _1, _1);
-      }
-      case c3__blur: {
+      case c3__noun: {
         return u2_bc(wir_r, _1, _0);
+      }
+      case c3__void: {
+        return u2_bc(wir_r, _1, _1);
       }
     }
     else switch ( u2_h(sut) ) {

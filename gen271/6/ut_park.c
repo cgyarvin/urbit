@@ -18,7 +18,7 @@
       return u2_bl_bail(wir_r);
     }
     else {
-      u2_noun p_sut, q_sut, pq_sut, qq_sut;
+      u2_noun p_sut, q_sut, pq_sut;
 
       u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       u2_bi_cell(wir_r, q_sut, &pq_sut, 0);
@@ -59,6 +59,7 @@
           case c3__zinc: return u2_sing(_3, j2_mbc(Pit, cap)(wir_r, axe));
         }
       }
+      else return u2_bl_bail(wir_r);
     }
   }
 

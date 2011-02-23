@@ -17,6 +17,8 @@
            u2_noun sut,
            u2_noun ref)
   {
+    u2_noun p_sut, q_sut;
+
     if ( u2_no == u2_dust(sut) ) {
       goto repo;
     }
@@ -61,6 +63,8 @@
            u2_atom now,
            u2_atom lat)
   {
+    u2_noun p_sut, q_sut;
+
     if ( u2_no == u2_dust(sut) ) {
       if ( c3__atom == sut ) {
         return c3__void;
@@ -93,10 +97,10 @@
         } else {
           u2_noun ter = _heal_as(wir_r, van, p_sut, qog, lat, ref);
           u2_noun ret = j2_mby(Pit, core)(wir_r, ter, q_sut);
-        }
 
-        u2_rz(wir_r, ter);
-        return ret;
+          u2_rz(wir_r, ter);
+          return ret;
+        }
       }
 
       case c3__fork: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
@@ -128,16 +132,14 @@
            u2_atom axe,
            u2_noun ref)
   {
-    u2_noun p_sut, q_sut;
-
     if ( _1 == axe ) {
       if ( u2_nul == qog ) {
         return u2_rx(wir_r, ref);
       } else return _heal_by(wir_r, van, sut, ref);
     }
     else {
-      u2_atom now = j2_mcc(Pit, cap)(wir_r, axe);
-      u2_atom lat = j2_mcc(Pit, mas)(wir_r, axe);
+      u2_atom now = j2_mbc(Pit, cap)(wir_r, axe);
+      u2_atom lat = j2_mbc(Pit, mas)(wir_r, axe);
       u2_noun ret = _heal_to(wir_r, van, sut, qog, ref, now, lat);
 
       u2_rz(wir_r, lat);

@@ -49,20 +49,15 @@
         if ( u2_no == u2_mean(gen, 6, &p_gen, 7, &q_gen, 0) ) {
           return u2_bl_bail(wir_r);
         } else {
-          u2_noun rac = j2_mby(Pit, rake)(wir_r, q_gen);
+          u2_noun rac = j2_mcy(Pit, ap, rake)(wir_r, q_gen);
           u2_noun hap = j2_mcy(Pit, ut, play)(wir_r, van, sut, p_gen);
-          u2_noun vul = j2_mcy(Pit, ut, play)(wir_r, van, sut, q_gen);
-          u2_noun gav = j2_mcy(Pit, ut, reap)(wir_r, van, vul, hap);
-          u2_noun tof = u2_bc(wir_r, u2_nul, _1);
-          u2_noun tuq = j2_mcy(Pit, ut, tuck)(wir_r, van, sut, rac, gav, tof);
-          u2_noun ret = u2_rx(wir_r, u2_h(tuq));
+          u2_noun guz = j2_mcy(Pit, ut, seek)(wir_r, van, sut, c3__nest, rac);
+          u2_noun axe = u2_h(guz);
+          u2_noun ret = j2_mcy(Pit, ut, cull)(wir_r, van, sut, axe, hap);
 
           u2_rl_lose(wir_r, rac);
           u2_rl_lose(wir_r, hap);
-          u2_rl_lose(wir_r, vul);
-          u2_rl_lose(wir_r, gav);
-          u2_rl_lose(wir_r, tof);
-          u2_rl_lose(wir_r, tuq);
+          u2_rl_lose(wir_r, guz);
 
           return ret;
         }
@@ -92,6 +87,7 @@
       u2_rl_lose(wir_r, fiz);
       return c3__void;
     }
+    else return fiz;
   }
 
 /* boilerplate

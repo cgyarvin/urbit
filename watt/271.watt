@@ -2033,7 +2033,7 @@
     =-  ?:((orth(sut %noun) fiz) %void fiz)   ::  ?? - do we need this?
     ^=  fiz
     ?-    gen
-        [%csbn *]   (cull p:(seek %nest ~(rake ap q.gen)) (play p.gen))
+        [%csbn *]   (cull p:(seek %read ~(rake ap q.gen)) (play p.gen))
         [%cspm *]   |-(?~(p.gen sut $(p.gen t.p.gen, sut $$(gen i.p.gen))))
         [%zpcb *]   $(gen q.gen)
         [%zpdx *]   $(gen p.gen)

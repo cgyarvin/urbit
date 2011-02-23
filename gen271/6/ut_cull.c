@@ -33,8 +33,8 @@
           break;
         }
         case c3__noun: {
-          u2_noun por = j2_mcy(Pit, ut, repo)(wir_r, sut);
-          u2_noun yot = j2_mcx(Pit, ut, cull)(wir_r, van, rep, axe, ref);
+          u2_noun por = j2_mcy(Pit, ut, repo)(wir_r, van, sut);
+          u2_noun yot = j2_mcx(Pit, ut, cull)(wir_r, van, por, axe, ref);
           
           if ( u2_yes == u2_sing(por, yot) ) {
             ret = u2_rx(wir_r, sut); 
@@ -73,7 +73,7 @@
           } else {
             u2_noun hub = j2_mcx(Pit, ut, cull)(wir_r, van, p_sut, lat, ref);
 
-            ret = j2_mby(Pit, core)(wir_r, hub, p_sut, q_sut);
+            ret = j2_mby(Pit, core)(wir_r, hub, q_sut);
 
             u2_rl_lose(wir_r, hub);
           }
@@ -84,8 +84,8 @@
           if ( u2_no == u2_dust(p_sut) ) {
             ret = c3__void;
           } else {
-            u2_noun por = j2_mcy(Pit, ut, repo)(wir_r, sut);
-            u2_noun yot = j2_mcx(Pit, ut, cull)(wir_r, van, rep, axe, ref);
+            u2_noun por = j2_mcy(Pit, ut, repo)(wir_r, van, sut);
+            u2_noun yot = j2_mcx(Pit, ut, cull)(wir_r, van, por, axe, ref);
             
             if ( u2_yes == u2_sing(por, yot) ) {
               ret = u2_rx(wir_r, sut); 
@@ -99,8 +99,8 @@
         }
         case c3__face: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
         {
-          u2_noun por = j2_mcy(Pit, ut, repo)(wir_r, sut);
-          u2_noun hic = j2_mcx(Pit, ut, cull)(wir_r, van, rep, axe, ref);
+          u2_noun por = j2_mcy(Pit, ut, repo)(wir_r, van, sut);
+          u2_noun hic = j2_mcx(Pit, ut, cull)(wir_r, van, por, axe, ref);
           u2_noun yot = j2_mby(Pit, face)(wir_r, p_sut, hic);
 
           if ( u2_yes == u2_sing(por, yot) ) {
@@ -125,8 +125,8 @@
         }
         case c3__hold: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
         {
-          u2_noun por = j2_mcy(Pit, ut, repo)(wir_r, sut);
-          u2_noun yot = j2_mcx(Pit, ut, cull)(wir_r, van, rep, axe, ref);
+          u2_noun por = j2_mcy(Pit, ut, repo)(wir_r, van, sut);
+          u2_noun yot = j2_mcx(Pit, ut, cull)(wir_r, van, por, axe, ref);
 
           if ( u2_yes == u2_sing(por, yot) ) {
             ret = u2_rx(wir_r, sut); 
@@ -152,7 +152,7 @@
   j2_mc(Pit, ut, cull)(u2_wire wir_r, 
                        u2_noun cor)                               //  retain
   {
-    u2_noun sut, ref, van;
+    u2_noun sut, axe, ref, van;
 
     if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &axe, 
                                 u2_cv_sam_3, &ref,
@@ -248,7 +248,7 @@
         {
           jet_j->sat_s = u2_jet_dead;
           {
-            cor = j2_mci(Pit, ut, cull)(wir_r, van, sut, ref);
+            cor = j2_mci(Pit, ut, cull)(wir_r, van, sut, axe, ref);
             sof = u2_nk_soft(wir_r, u2_rx(wir_r, cor), 
                                     u2_frag(u2_cv_noc, cor));
           }

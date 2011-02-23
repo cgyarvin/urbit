@@ -34,8 +34,8 @@
           u2_noun rob = j2_mcc(Pit, in, put)(wir_r, rib, key);
           u2_noun von = u2_bn_cook(wir_r, van, "rib", rob);
           u2_noun vin = u2_bn_cook(wir_r, von, "vet", u2_no);
-          u2_noun dis = j2_mcy(Pit, in, mint)(wir_r, von, sut, c3__noun, gen);
-          u2_noun dat = j2_mcy(Pit, in, mint)(wir_r, vin, dox, c3__noun, gen);
+          u2_noun dis = j2_mcy(Pit, ut, mint)(wir_r, von, sut, c3__noun, gen);
+          u2_noun dat = j2_mcy(Pit, ut, mint)(wir_r, vin, dox, c3__noun, gen);
 
           if ( u2_no == u2_sing(u2_t(dis), u2_t(dat)) ) {
             ret = u2_no;
@@ -62,24 +62,21 @@
                         u2_noun sut,                              //  retain
                         u2_noun hag)                              //  retain
   {
-    u2_noun p_sut, q_sut;
-    u2_noun pq_sut, qq_sut, rq_sut;
     u2_flag vet = u2_bn_hook(wir_r, van, "vet");
+    u2_noun p_sut, q_sut;
+    u2_noun ret;
 
-    if ( u2_no == u2_b_pq(sut, c3__core, &p_sut, &q_sut) ) {
+    if ( u2_no == u2_as_pq(sut, c3__core, &p_sut, &q_sut) ) {
       return u2_bl_bail(wir_r);
     } else {
       u2_noun pq_sut, qq_sut, rq_sut;
 
-      u2_bi_trel(q_sut, &pq_sut, &qq_sut, &rq_sut)
+      u2_bi_trel(wir_r, q_sut, &pq_sut, &qq_sut, &rq_sut);
       {
         u2_noun dox = u2_bt
           (wir_r, c3__core, u2_rx(wir_r, qq_sut), u2_rx(wir_r, q_sut));
-        u2_noun typ;
 
         if ( c3__wood != pq_sut ) {
-          typ = u2_rx(wir_r, dox);
-
           if ( (u2_yes == vet) && 
                (u2_no == j2_mcy(Pit, ut, nest)(wir_r, van, qq_sut, p_sut)) )
           {
@@ -87,10 +84,9 @@
 
             return u2_bl_bail(wir_r);
           }
+          ret = u2_rx(wir_r, dox);
         }
         else {
-          typ = u2_rx(wir_r, dox);
-
           if ( u2_yes == vet &&
                (u2_no == u2_sing(p_sut, qq_sut)) &&
                _fire_levy(wir_r, van, sut, dox, hag) )
@@ -98,7 +94,11 @@
             printf("fire: wood: levy fail\n");
             return u2_bl_bail(wir_r);
           }
-        }  
+          ret = u2_rx(wir_r, sut);
+        }
+
+        u2_rz(wir_r, dox);
+        return ret;
       }
     }
   }

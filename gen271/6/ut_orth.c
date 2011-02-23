@@ -14,7 +14,7 @@
            u2_noun ref,
            u2_noun bix)
   {
-    u2_noun p_sut, q_sut, r_sut;
+    u2_noun p_sut, q_sut;
     u2_noun p_ref, q_ref;
 
     if ( u2_no == u2_dust(sut) ) switch ( sut ) {

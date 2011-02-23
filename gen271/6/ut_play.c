@@ -20,22 +20,22 @@
            u2_noun sut,
            u2_noun gen)
   {
-    u2_noun p_gen, q_gen, r_gen, s_gen;
+    u2_noun p_gen, q_gen, r_gen;
 
     if ( u2_no == u2_dust(gen) ) {
-      u2_noun rex = j2_mby(Pit, open)(wir_r, gen);
+      u2_noun rex = j2_mcy(Pit, ap, open)(wir_r, gen);
+      u2_noun ret = _play_in(wir_r, van, sut, rex);
 
-      pro = _play_in(wir_r, van, sut, rex);
       u2_rl_lose(wir_r, rex);
-      return pro;
+      return ret;
     } 
     else switch ( u2_h(gen) ) {
       default: {
         u2_noun rex = j2_mcy(Pit, ap, open)(wir_r, gen);
+        u2_noun ret = _play_in(wir_r, van, sut, rex);
 
-        pro = _play_in(wir_r, van, sut, rex);
         u2_rl_lose(wir_r, rex);
-        return pro;
+        return ret;
       }
       
       case c3__bnld: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
@@ -62,7 +62,7 @@
       case c3__dgdp: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       {
         return j2_mby(Pit, cell)
-          (wir_r, _play_in(wir_r, van, fex, q_gen),
+          (wir_r, _play_in(wir_r, van, sut, q_gen),
                   _play_in(wir_r, van, sut, r_gen));
       }
       case c3__dtbn: 
@@ -157,6 +157,7 @@
       }
       case c3__pmdt: p_gen = u2_t(gen);
       {
+        u2_noun zun = u2_bc(wir_r, u2_bc(wir_r, 0, 0), u2_rx(wir_r, q_gen));
         u2_noun con = u2_bt(wir_r, c3__gold, u2_rx(wir_r, sut), zun);
         u2_noun ret = j2_mby(Pit, core)(wir_r, sut, con);
 

@@ -7,14 +7,11 @@
 
 /** forward declares
 **/
-    static u2_noun
+    u2_noun
     j2_mcy(Pit, ap, sift)(u2_wire, u2_noun);
 
-    static u2_noun
+    u2_noun
     j2_mcy(Pit, ap, mold)(u2_wire, u2_noun, u2_noun);
-
-    static u2_noun
-    j2_mcy(Pit, ap, open)(u2_wire, u2_noun);
 
 /** open cases
 **/
@@ -288,7 +285,7 @@
     else {
       u2_noun iq_gen = u2_h(q_gen);
       u2_noun tq_gen = u2_t(q_gen);
-      u2_noun rak = j2_mby(Pit, rake)(wir_r, p_gen);
+      u2_noun rak = j2_mcy(Pit, ap, rake)(wir_r, p_gen);
       u2_noun sif = j2_mcy(Pit, ap, sift)(wir_r, iq_gen);
       u2_noun mol = j2_mcy(Pit, ap, mold)(wir_r, iq_gen, rak);
 
@@ -549,7 +546,7 @@
   }
   _open_do_pq(tmpd)    //  ;+
   {
-    u2_noun rak = j2_mby(Pit, rake)(wir_r, q_gen);
+    u2_noun rak = j2_mcy(Pit, ap, rake)(wir_r, q_gen);
     u2_noun pro = j2_mcy(Pit, ap, mold)(wir_r, p_gen, rak);
 
     u2_rl_lose(wir_r, rak);
@@ -560,7 +557,7 @@
 */
   /** mold 
   **/
-    static u2_noun
+    u2_noun
     j2_mcy(Pit, ap, mold)(u2_wire wir_r,
                           u2_noun gen,
                           u2_noun hep)
@@ -633,7 +630,7 @@
       }
 
       plain: {
-        u2_noun bog = j2_mby(Pit, open)(wir_r, gen);
+        u2_noun bog = j2_mcy(Pit, ap, open)(wir_r, gen);
         u2_noun gad;
 
         if ( u2_no == u2_sing(bog, gen) ) {
@@ -668,7 +665,7 @@
 
   /** open
   **/
-    static u2_noun
+    u2_noun
     j2_mcy(Pit, ap, open)(u2_wire wir_r,
                           u2_noun gen)
     {
@@ -775,7 +772,7 @@
 
   /** rake
   **/
-    static u2_noun
+    u2_noun
     j2_mcy(Pit, ap, rake)(u2_wire wir_r,
                           u2_noun gen)
     {
@@ -806,10 +803,10 @@
           if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
             return u2_bl_bail(wir_r);
           }
-          else return j2_mby(Pit, rake)(wir_r, q_gen);
+          else return j2_mcy(Pit, ap, rake)(wir_r, q_gen);
         }
         case c3__zpdx: { 
-          return j2_mby(Pit, rake)(wir_r, u2_t(gen));
+          return j2_mcy(Pit, ap, rake)(wir_r, u2_t(gen));
         }
       }
     }
@@ -841,7 +838,7 @@
                     _open_sift_a(wir_r, u2_t(ban)));
         }
       }
-    static u2_noun
+    u2_noun
     j2_mcy(Pit, ap, sift)(u2_wire wir_r,
                           u2_noun gen)
     {
@@ -902,7 +899,7 @@
           (wir_r, c3__zpdx, j2_mcy(Pit, ap, sift)(wir_r, q_gen));
       }
       else {
-        u2_noun bog = j2_mby(Pit, open)(wir_r, gen);
+        u2_noun bog = j2_mcy(Pit, ap, open)(wir_r, gen);
         u2_noun gad;
 
         if ( !(u2_yes == u2_sing(gen, bog)) ) {

@@ -13,7 +13,7 @@
              u2_noun sut,
              u2_noun gen)
   {
-    u2_noun mil = j2_mcy(Pit, ut, mill)(wir_r, van, sut, c3__noun, gen);
+    u2_noun mil = j2_mcy(Pit, ut, mint)(wir_r, van, sut, c3__noun, gen);
     u2_noun fol = u2_rx(wir_r, u2_t(mil));
 
     u2_rl_lose(wir_r, mil);
@@ -41,7 +41,7 @@
         u2_noun pqn_dab = u2_t(qn_dab);   //  XX actual wing support
       
         if ( (u2_nul == l_dab) && (u2_nul == r_dab) ) {
-          return j2_mcy(Pit, ut, make)(wir_r, van, sut, qn_dab);
+          return _bake_make(wir_r, van, sut, pqn_dab);
         }
         else if ( (u2_nul == l_dab) ) {
           return u2_bc

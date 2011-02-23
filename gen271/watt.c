@@ -84,6 +84,9 @@
     extern u2_ho_jet j2_mbj(Pit, rake)[];
     extern u2_ho_jet j2_mbj(Pit, ream)[];
 
+    extern u2_ho_jet j2_mbj(Pit, ap)[];
+    extern u2_ho_driver j2_mbd(Pit, ap)[];
+
     extern u2_ho_jet j2_mbj(Pit, ut)[];
     extern u2_ho_driver j2_mbd(Pit, ut)[];
 
@@ -166,7 +169,7 @@
       { j2_sb(Pit, look), j2_mbj(Pit, look), 0, 0, u2_none },
       { j2_sb(Pit, ream), j2_mbj(Pit, ream), 0, 0, u2_none },
 
-      { j2_sb(Pit, ap), j2_mbj(Pit, ap), j2_mbd(Pit, ap), 0, u2_none } 
+      { j2_sb(Pit, ap), j2_mbj(Pit, ap), j2_mbd(Pit, ap), 0, u2_none },
       { j2_sb(Pit, ut), j2_mbj(Pit, ut), j2_mbd(Pit, ut), 0, u2_none } 
   };
 
