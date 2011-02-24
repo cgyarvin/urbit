@@ -1655,6 +1655,7 @@
       0
     ?>  ?=(^ dab)
     ?>  ?=([& *] q.n.dab)
+    ^>  bean.[%bake |=((~(fly to dump) 75))]
     ?-    dab
         ~   0
         ^
@@ -1760,7 +1761,7 @@
       =+  gep=?:(?=([[%% [& *]] ~ ~] q.r.q.sut) '|' '&')
       =+  ^=  nox
           ^-  @
-          ?-(p.q.sut %gold '=', %iron '.', %lead ':', %wood '*', %zinc '%')
+          ?-(p.q.sut %gold '.', %iron ':', %lead '=', %wood '*', %zinc '%')
       =+  viq=(cat 3 gep nox)
       :^    %grip
           [(cat 3 viq '{') '}']
@@ -2429,9 +2430,9 @@
         %nest   &
         %read
       ?-    p.q.sut
-          %gold   .=(3 (cap axe))
+          %gold   &
           %iron   &
-          %lead   &
+          %lead   .=(3 (cap axe))
           %wood   &
           %zinc   .=(3 (cap axe))
       --
