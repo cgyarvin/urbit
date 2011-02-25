@@ -84,3 +84,12 @@
       return j2_mcy(Pit, ut, burn)(wir_r, cor, sut);
     }
   }
+
+/* structures
+*/
+  u2_ho_jet 
+  j2_mcj(Pit, ut, burn)[] = {
+    { ".3", c3__hevy, j2_mc(Pit, ut, burn), SafeTier6, u2_none, u2_none },
+    { }
+  };
+

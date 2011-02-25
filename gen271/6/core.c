@@ -15,7 +15,7 @@
     if ( (c3__void == pac) ) {
       return c3__void;
     } else {
-      return u2_bt(wir_r, c3__cell, u2_rx(wir_r, pac), u2_rx(wir_r, con));
+      return u2_bt(wir_r, c3__core, u2_rx(wir_r, pac), u2_rx(wir_r, con));
     }
   }
   u2_noun                                                         //  transfer
@@ -35,6 +35,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pit, core)[] = {
-    { ".3", c3__hevy, j2_mb(Pit, core), SafeTier6, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mb(Pit, core), SafeTier6_c, u2_none, u2_none },
     { }
   };

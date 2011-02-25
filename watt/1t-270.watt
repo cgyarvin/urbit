@@ -1,23 +1,23 @@
 ~%    ~   
     %zuse.270 
   ()
-&:
+&.
 ::
-++  add                   ~%  ->  %add  ()
+++  add                                                     ~%  ->  %add  ()
   |=  [a=@ b=@] 
   ^-  @
   ?:  .=(0 a)
     b
   $(a (dec a), b .^(b))
 ::
-++  bex                   ~%  ->  %bex  ()
+++  bex                                                     ~%  ->  %bex  ()
   |=  [a=@]
   ^-  @
   ?:  .=(0 a)
     1
   (mul 2 $(a (dec a)))
 ::
-++  dec                   ~%  ->  %dec  ()
+++  dec                                                     ~%  ->  %dec  ()
   |=  a=@
   ^-  @
   ~|  %dec
@@ -28,7 +28,7 @@
     b
   $(b .^(b))
 ::
-++  div                   ~%  ->  %div  ()
+++  div                                                     ~%  ->  %div  ()
   |=  [a=@ b=@]
   ^-  @
   ~|  %div
@@ -49,24 +49,24 @@
       *   (add $(a (sub a 1)) $(a (sub a 2)))
   --
 ::
-++  gte                   ~%  ->  %gte  ()
+++  gte                                                     ~%  ->  %gte  ()
   |=  [a=@ b=@]
   ^-  ?
   !(lth a b)
 ::
 ++
-    gth                   ~%  ->  %gth  ()
+    gth                                                     ~%  ->  %gth  ()
   |=  [a=@ b=@]
   ^-  ?
   !(lte a b)
 ::
 ++
-    lte                   ~%  ->  %lte  ()
+    lte                                                     ~%  ->  %lte  ()
   |=  [a=@ b=@]
   ?|(.=(a b) (lth a b))
 ::
 ++
-    lth                   ~%  ->  %lth  ()
+    lth                                                     ~%  ->  %lth  ()
   |=  [a=@ b=@]
   ^-  ?
   ?&
@@ -79,27 +79,27 @@
   --
 ::
 ++
-    max                   ~%  ->  %max  () 
+    max                                                     ~%  ->  %max  () 
   |=  [a=@ b=@]
   ^-  @
   ?:  (gth a b)
     a
   b
 ::
-++  min                   ~%  ->  %min  ()
+++  min                                                     ~%  ->  %min  ()
   |=  [a=@ b=@]
   ^-  @
   ?:  (lth a b)
     a
   b
 ::
-++  mod                   ~%  ->  %mod  ()
+++  mod                                                     ~%  ->  %mod  ()
   |=  [a=@ b=@]
   ^-  @
   ?<  .=(0 b)
   (sub a (mul b (div a b)))
 ::
-++  mul                   ~%  ->  %mul  ()
+++  mul                                                     ~%  ->  %mul  ()
   |=  [a=@ b=@]
   ^-  @
   =+  c=^-(@ 0)
@@ -112,7 +112,7 @@
   |*  a=*
   a
 ::
-++  sub                   ~%  ->  %sub  ()
+++  sub                                                     ~%  ->  %sub  ()
   |=  [a=@ b=@]
   ^-  @
   ?:  .=(0 b)

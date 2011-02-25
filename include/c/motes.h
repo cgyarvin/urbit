@@ -693,6 +693,18 @@
 #   define c3__tgpd   c3_s4('t','g','p','d')
 #   define c3__tgpm   c3_s4('t','g','p','m')
 
+#   define c3__sgbn   c3_s4('s','g','b','n')
+#   define c3__sgbr   c3_s4('s','g','b','r')
+#   define c3__sgdg   c3_s4('s','g','d','g')
+#   define c3__sgdl   c3_s4('s','g','d','l')
+#   define c3__sgdp   c3_s4('s','g','d','p')
+#   define c3__sgdx   c3_s4('s','g','d','x')
+#   define c3__sgkt   c3_s4('s','g','k','t')
+#   define c3__sgld   c3_s4('s','g','l','d')
+#   define c3__sgmt   c3_s4('s','g','m','t')
+#   define c3__sgpd   c3_s4('s','g','p','d')
+#   define c3__sgpm   c3_s4('s','g','p','m')
+
 
 #   define c3__then   c3_s4('t','h','e','n')
 #   define c3__tick   c3_s4('t','i','c','k')

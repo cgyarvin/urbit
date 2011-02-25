@@ -747,8 +747,8 @@ u2_ho_test(u2_ho_jet* jet_j,
     } else if ( u2_no == u2_sing(had, sof) ) {
       msg_c = "fail";
       printf("cos_c: %s\n", cos_c);
-      u2_err(0, "wrong", had);
-      u2_err(0, "right", sof);
+      // u2_err(0, "wrong", had);
+      // u2_err(0, "right", sof);
       // LoomStop = 1;
       c3_assert(0);
     } else {

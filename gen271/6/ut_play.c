@@ -32,10 +32,16 @@
     else switch ( u2_h(gen) ) {
       default: {
         u2_noun rex = j2_mcy(Pit, ap, open)(wir_r, gen);
-        u2_noun ret = _play_in(wir_r, van, sut, rex);
 
-        u2_rl_lose(wir_r, rex);
-        return ret;
+        if ( u2_yes == u2_sing(rex, gen) ) {
+          u2_err(wir_r, "open: loop: h_gen", u2_h(gen));
+          c3_assert(0);
+        } else { 
+          u2_noun ret = _play_in(wir_r, van, sut, rex);
+
+          u2_rl_lose(wir_r, rex);
+          return ret;
+        }
       }
       
       case c3__bnld: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
@@ -352,6 +358,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, ut, play)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, play), SafeTier6, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ut, play), SafeTier6_b, u2_none, u2_none },
     { }
   };
