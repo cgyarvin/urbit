@@ -140,6 +140,11 @@
         cor = j2_mci(Pit, ut, seek)(wir_r, van, sut, way, hep);
         sof = u2_nk_soft(wir_r, cor, u2_frag(u2_cv_noc, cor));
 
+        if ( u2_none == sof ) {
+          j2_mcy(Pit, ut, dupt)(wir_r, van, "seek: sut", sut);
+          u2_err(wir_r, "seek: sut", sut);
+          u2_err(wir_r, "seek: hep", hep);
+        }
         return u2_bl_good(wir_r, sof);
       }
       case u2_jet_limp: {

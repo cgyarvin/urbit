@@ -147,7 +147,7 @@ u2_sh_mine(u2_ray  wir_r,
         else {
           u2_atom p_bud = u2_t(bud);
           u2_noun car   = u2_frag(p_bud, cor);
-         
+ 
           if ( (u2_none == car) || (u2_no == u2_dust(car)) ) {
             break;
           } else {
@@ -155,6 +155,8 @@ u2_sh_mine(u2_ray  wir_r,
             u2_noun xup, axe;
 
             if ( u2_none == (xup = u2_ch_find(u2_bask_hag_r(bas_r), but)) ) {
+              printf("no base!\n");
+              u2_err(wir_r, "clu", clu);
               break;
             }
             else u2_rl_gain(bas_r, xup);
@@ -200,12 +202,15 @@ u2_sh_mine(u2_ray  wir_r,
       }
     }
     u2_ho_warn_here();
-
+#if 0
+    //  XXX: an unknown bug is triggered here;
+    //  but basket needs a minor rewrite.
+    //
     if ( dac != u2_none ) u2_rl_lose(bas_r, dac);
     if ( bot != u2_none ) u2_rl_lose(bas_r, bot);
     if ( pet != u2_none ) u2_rl_lose(bas_r, pet);
     if ( xop != u2_none ) u2_rl_lose(bas_r, xop);
-
+#endif
     return cor;
   }
 }

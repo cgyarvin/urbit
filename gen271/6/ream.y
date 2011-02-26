@@ -318,6 +318,7 @@ wide_c
     wide_norm: di_sigdax body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_sigdel hint_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_sigdeg hint_a_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_sigdot hint_e_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_sigket body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_sigled hint_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_sigmit hint_d_wide    { $$ = _ycell($1, $2); }
@@ -403,8 +404,13 @@ wide_c
       ;
 
     hint_d_wide
-      : gene w chop w chit_wide w gene
-        { $$ = _yqual($3, $1, $5, $7); }
+      : chop w gene w chit_wide w gene
+        { $$ = _yqual($1, $3, $5, $7); }
+      ;
+
+    hint_e_wide
+      : chop w gene
+        { $$ = _ycell($1, $3); }
       ;
 
 tall
@@ -483,6 +489,7 @@ tall
     tall_norm: di_sigdax w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_sigdel w hint_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_sigdeg w hint_a_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_sigdot w hint_e_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_sigket w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_sigled w hint_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_sigmit w hint_d_tall    { $$ = _ycell($1, $3); }
@@ -528,8 +535,13 @@ tall
       ;
 
     hint_d_tall
-      : gene w chop w chit_tall w gene
-        { $$ = _yqual($3, $1, $5, $7); }
+      : chop w gene w chit_tall w gene
+        { $$ = _yqual($1, $3, $5, $7); }
+      ;
+
+    hint_e_tall
+      : chop w gene
+        { $$ = _ycell($1, $3); }
       ;
 
   /** Tall - feet and wings.
@@ -681,6 +693,7 @@ tall
     di_sigdax: si_sig si_dax  { $$ = c3__sgdx; }
     di_sigdeg: si_sig si_deg  { $$ = c3__sgdg; }
     di_sigdel: si_sig si_del  { $$ = c3__sgdl; }
+    di_sigdot: si_sig si_dot  { $$ = c3__sgdt; }
     di_sigket: si_sig si_ket  { $$ = c3__sgkt; }
     di_sigled: si_sig si_led  { $$ = c3__sgld; }
     di_sigmit: si_sig si_mit  { $$ = c3__sgmt; }

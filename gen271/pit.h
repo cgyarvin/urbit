@@ -509,6 +509,6 @@
                         u2_noun  typ);                            //  retain
       void
       j2_mcy(Pit, ut, dupt)(u2_wire     wir_r,
-                              u2_noun     van,                    //  retain
-                              const c3_c* cap_c,
-                              u2_noun     typ);                   //  retain
+                            u2_noun     van,                      //  retain
+                            const c3_c* cap_c,
+                            u2_noun     typ);                     //  retain

@@ -742,13 +742,15 @@ u2_ho_test(u2_ho_jet* jet_j,
 
     if ( u2_none == had ) {
       msg_c = "bail";
+      printf("cos_c: %s\n", cos_c);
+      u2_err(0, "right", sof);
     } else if ( u2_none == sof ) {
       msg_c = "funk";
     } else if ( u2_no == u2_sing(had, sof) ) {
       msg_c = "fail";
       printf("cos_c: %s\n", cos_c);
-      // u2_err(0, "wrong", had);
-      // u2_err(0, "right", sof);
+      u2_err(0, "wrong", had);
+      u2_err(0, "right", sof);
       // LoomStop = 1;
       c3_assert(0);
     } else {

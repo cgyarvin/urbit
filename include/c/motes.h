@@ -698,6 +698,7 @@
 #   define c3__sgdg   c3_s4('s','g','d','g')
 #   define c3__sgdl   c3_s4('s','g','d','l')
 #   define c3__sgdp   c3_s4('s','g','d','p')
+#   define c3__sgdt   c3_s4('s','g','d','t')
 #   define c3__sgdx   c3_s4('s','g','d','x')
 #   define c3__sgkt   c3_s4('s','g','k','t')
 #   define c3__sgld   c3_s4('s','g','l','d')

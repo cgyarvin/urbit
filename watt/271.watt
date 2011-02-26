@@ -1177,12 +1177,13 @@
     [%sgbn p=*gene q=*gene]                                     ::  ~=  sigbon
     [%sgbr p=*gene q=*gene]                                     ::  ~|  sigbar
     [%sgdg p=[p=@ q=@] q=*gene]                                 ::  ~:  sigdeg
+    [%sgdt p=*chop q=*gene]                                     ::  ~%  sigdot
     [%sgdl p=*<^+(@ *term) [p=*term q=*gene]> q=*gene]          ::  ~>  sigdel
     [%sgdp p=@ q=*gene]                                         ::  ~-  sigdap
     [%sgdx p=*gene]                                             ::  ~#  sigdax
     [%sgkt p=*gene]                                             ::  ~^  sigket
     [%sgld p=*<^+(@ *term) [p=*term q=*gene]> q=*gene]          ::  ~>  sigled
-    [%sgmt p=*chop q=*gene r=*(list &[p=*term q=*gene]) s=*gene]::  ~%  sigmet
+    [%sgmt p=*chop q=*gene r=*(list &[p=*term q=*gene]) s=*gene]::  ~%  sigmit
     [%sgpd p=@ q=*gene]                                         ::  ~+  sigpad
     [%sgpm p=*gene q=*gene]                                     ::  ~&  sigpam
   ::
@@ -1226,7 +1227,15 @@
 ::::
 ::
     ap
-  ^<  mine.[!=(->) %ap ~]
+  ^<    mine.
+      :+  !=(->) 
+        %ap
+      :~
+        [%mold !=(mold)]
+        [%open !=(open)]
+        [%rake !=(rake)]
+        [%sift !=(sift)]
+      --
   =+  gen=*gene
   |*
   ::::
@@ -1368,6 +1377,7 @@
         [%sgdg *]   [%sgld [%bank %dtsg p.gen] q.gen]
         [%sgdl *]   [%bndl [%sgld p.gen [~ 1]] q.gen]
         [%sgdp *]   [%sgld [%sole %dtsg p.gen] q.gen]
+        [%sgdt *]   [%sgmt p.gen [~ 5] ~ q.gen]
         [%sgdx *]   [%sgld %ping p.gen]
         [%sgkt *]   [%sgld %keep p.gen]
         [%sgmt *]
@@ -1624,20 +1634,28 @@
         [%fan !=(fan)]
         [%rib !=(rib)]
         [%vet !=(vet)]
+        [%bake !=(bake)]
+        [%burn !=(burn)]
+        [%cull !=(cull)]
         [%dump !=(dump)]
+        [%edit !=(edit)]
+        [%emit !=(emit)]
         [%find !=(find)]
         [%fire !=(fire)]
         [%fish !=(fish)]
         [%gain !=(gain)]
-        [%nest !=(nest)]
-        [%play !=(play)]
+        [%heal !=(heal)]
         [%mint !=(mint)]
+        [%nest !=(nest)]
         [%orth !=(orth)]
+        [%play !=(play)]
+        [%park !=(park)]
         [%peek !=(peek)]
         [%repo !=(repo)]
         [%seek !=(seek)]
         [%snap !=(snap)]
         [%tuck !=(tuck)]
+        [%tusk !=(tusk)]
       --
   =+  :*  fan=*(set type)
           rib=*(set &[*type *type *gene])

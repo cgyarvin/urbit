@@ -35,7 +35,7 @@ u2_bl_done(u2_ray wir_r,
 u2_noun
 u2_bl_bail(u2_ray wir_r)
 {
-  // c3_assert(!"bail!");
+  c3_assert(!"bail!");
   longjmp((void *)u2_at_cord(u2_wire_jub_r(wir_r), c3_wiseof(jmp_buf)), 1);
   return u2_none;
 }
@@ -556,7 +556,7 @@ u2_bn_cook(u2_wire     wir_r,
   {
     return u2_bl_bail(wir_r);
   } else {
-    u2_noun gon = u2_bn_molt(wir_r, cor, 0, axe, som);
+    u2_noun gon = u2_bn_molt(wir_r, cor, axe, som, 0);
 
     u2_rl_lose(wir_r, som);
     return gon;
