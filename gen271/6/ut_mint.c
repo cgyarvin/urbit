@@ -480,7 +480,6 @@
                                 u2_cv_sam_3, &gen,
                                 u2_cv_con, &van, 
                                 0)) ||
-         (u2_no == u2_stud(gen)) ||
          (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
       return u2_bl_bail(wir_r);
@@ -553,6 +552,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, ut, mint)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, mint), SafeTier6, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ut, mint), SafeTier6_c, u2_none, u2_none },
     { }
   };
