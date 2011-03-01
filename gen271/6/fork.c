@@ -41,6 +41,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pit, fork)[] = {
-    { ".3", c3__hevy, j2_mb(Pit, fork), SafeTier6_c, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mb(Pit, fork), SafeTier6, u2_none, u2_none },
     { }
   };

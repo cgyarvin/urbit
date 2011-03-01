@@ -142,6 +142,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pit, look)[] = {
-    { ".3", c3__hevy, j2_mb(Pit, look), SafeTier6_c, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mb(Pit, look), SafeTier6, u2_none, u2_none },
     { }
   };

@@ -1944,7 +1944,7 @@
         ?.  ?|(!vet (nest(sut q.q.sut) p.sut))
           ^>  bean.[%metl-need |=((~(fly to dump(sut q.q.sut)) 75))]
           ^>  bean.[%metl-have |=((~(fly to dump(sut p.sut)) 75))]
-          ^>(bean.'mitbon-metl' !!)
+          ^>(bean.'fire-metl' !!)
         dox
       ?.  ?|  !vet
               .=(p.sut q.q.sut)
@@ -1952,7 +1952,7 @@
           --
         ^>  bean.[%wood-need |=((~(fly to dump(sut q.q.sut)) 75))]
         ^>  bean.[%wood-have |=((~(fly to dump(sut p.sut)) 75))]
-        ^>(bean.'mitbon-wood' !!)
+        ^>(bean.'fire-wood' !!)
       sut
 ::  ~(tap in (~(gas in *(set gene)) hag))
     hag

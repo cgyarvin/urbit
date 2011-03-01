@@ -566,5 +566,300 @@
   ?:  .=(c d)
     (dor a b)
   (lth c d)
+::
+  ::  Tier 4, associative containers
+::
+++  set   |*(a=<*> (tree a))
+++  map   |*([a=<*> b=<*>] (tree <[p=*a q=*b]>))
+++  in
+  ~.  %in
+  &*  a=*(set)
+  ++  all
+    ~.  %all
+    |*  b=|=(* ?)
+    |-  ^-  ?
+    ?~  a
+      &
+    ?&((b n.a) $(a l.a) $(a r.a))
+  ::
+  ++  any
+    ~.  %any
+    |*  b=|=(* ?)
+    |-  ^-  ?
+    ?~  a
+      |
+    ?|((b n.a) $(a l.a) $(a r.a))
+  ::
+  ++  gas
+    ~.  %gas
+    |*  b=*(list)
+    |-  ^-  a
+    ?~  b
+      a
+    $(b t.b, a (put i.b))
+  ::
+  ++  has
+    ~.  %has
+    |*  b=*
+    |-  ^-  ?
+    ?~  a
+      |
+    ?:  .=(b n.a)
+      &
+    ?:  (hor b n.a)
+      $(a l.a)
+    $(a r.a)
+  ::
+  ++  put
+    ~.  %put
+    |*  b=*
+    |-  ^-  a
+    ?~  a
+      [b ~ ~]
+    ?:  .=(b n.a)
+      a
+    ?:  (hor b n.a)
+      =+  c=$(a l.a)
+      ?>  ?=(^ c)
+      ?:  (vor n.a n.c)
+        [n.a c r.a]
+      [n.c l.c [n.a r.c r.a]]
+    =+  c=$(a r.a)
+    ?>  ?=(^ c)
+    ?:  (vor n.a n.c)
+      [n.a l.a c] 
+    [n.c [n.a l.a l.c] r.c]
+  ::
+  ++  tap
+    ~.  %tap
+    |*  b=*(list)
+    |-  ^-  b
+    ?~  a
+      b
+    $(a r.a, b [n.a $(a l.a)])
+  ==
+::
+++  by
+  ~.  %by
+  &*  a=*(map)
+  ++  all
+    ~.  %all
+    |*  b=|=(* ?)
+    |-  ^-  ?
+    ?~  a
+      &
+    ?&((b q.n.a) $(a l.a) $(a r.a))
+  ::
+  ++  any
+    ~.  %any
+    |*  b=|=(* ?)
+    |-  ^-  ?
+    ?~  a
+      |
+    ?|((b q.n.a) $(a l.a) $(a r.a))
+  ::
+  ++  gas
+    ~.  %gas
+    |*  b=*(list <[p=* q=*]>)
+    |-  ^-  a
+    ?~  b
+      a
+    $(b t.b, a (put p.i.b q.i.b))
+  ::
+  ++  get
+    ~.  %get
+    |*  b=*
+    |-  ^-  *<~ [~ u=?>(?=(^ a) q.n.a)]>
+    ?~  a
+      ~
+    ?:  .=(b p.n.a)
+      [~ u=q.n.a]
+    ?:  (gor b p.n.a)
+      $(a l.a)
+    $(a r.a)
+  ::
+  ++  has
+    ~.  %has
+    |*  b=*
+    !.=(~ (get b))
+  ::
+  ++  put
+    ~.  %put
+    |*  [b=* c=*]
+    |-  ^-  a
+    ?~  a
+      [[b c] ~ ~]
+    ?:  .=(b p.n.a)
+      ?.  .=(c q.n.a)
+        ~|(%put-by !!)
+      a
+    ?:  (gor b p.n.a)
+      =+  d=$(a l.a)
+      ?>  ?=(^ d)
+      ?:  (vor n.a n.d)
+        [n.a d r.a]
+      [n.d l.d [n.a r.d r.a]]
+    =+  d=$(a r.a)
+    ?>  ?=(^ d)
+    ?:  (vor n.a n.d)
+      [n.a l.a d] 
+    [n.d [n.a l.a l.d] r.d]
+  ::
+  ++  tap
+    ~.  %tap
+    |*  b=*(list <[p=* q=*]>)
+    |-  ^-  b
+    ?~  a
+      b
+    $(a r.a, b [n.a $(a l.a)])
+  ==
+::
+  ::  Tier 5, parsing and printing
+::
+++  ball
+  |?
+    ^+(@ *rock)
+    [%duct p=*tape]
+    [%grip p=[p=*rock q=*rock] q=*(list ball)]
+    [%meld p=*(list ball)]
+  --
+::
+++  byte  <@>
+++  tape  (list byte)
+++  rock  <@>
+++  term  <@>
+++  wall  (list tape)
+++  to
+  ~.  %to
+  &*  pup=*ball
+  ++  fly
+    ~.  %fly
+    |=  bor=@
+    ^-  *wall
+    =+  col=@
+    =>  &.
+        ++  ind
+          |=  tep=*tape
+          ^-  *tape
+          ?:  .=(0 col)
+            tep
+          $(col (dec col), tep [' ' tep])
+        ==
+    =+  lux=*wall
+    |-  ^-  *wall
+    ?.  ?&(?=([%grip *] pup) (gte (add col wit) bor))
+      [(ind ram) lux]
+    :-  (ind (rip 3 p.p.pup))
+    |-  ^-  *wall
+    ?~  q.pup
+      [(ind (rip 3 q.p.pup)) lux]
+    %=  $$
+      pup   i.q.pup
+      lux   $(q.pup t.q.pup)
+      col   ?:((gte col (mul 2 (div bor 3))) 0 (add 2 col))
+    --
+  ::
+  ++  ram
+    ^-  *tape
+    ?-    pup 
+        @           (rip 3 pup)
+        [%meld *]   (reel p.pup |=([*ball *tape] (weld ram(pup -<-) -<+)))
+        [%duct *]   p.pup 
+        [%grip *]
+      %+  weld
+        (rip 3 p.p.pup)
+      |-  ^-  *tape
+      ?-  q.pup
+        ~       (rip 3 q.p.pup)
+        [* ~]   (weld ram(pup i.q.pup) (rip 3 q.p.pup))
+        ^       (weld ram(pup i.q.pup) `*tape`[' ' $(q.pup t.q.pup)])
+      --
+    --
+  ::
+  ++  wit
+    ^-  @
+    ?-    pup
+        @           (met 3 pup)
+        [%duct *]   (lent p.pup)
+    ::
+        [%grip *]
+      %+  add
+        (add (met 3 p.p.pup) (met 3 q.p.pup))
+      %+  roll
+        q.pup
+      |=([*ball @] (add ?:(.=(0 -<+) 0 1) (add -<+ wit(pup -<-))))
+    ::
+        [%meld *]   (roll p.pup |=([*ball @] (add -<+ wit(pup -<-))))
+    -- 
+  ==
+::
+++  go
+  &*  nut=*
+  ++  dem   (num 10 |=(p=@ (add '0' p)))
+  ++  gut
+    |-  ^-  *ball
+    ?-  nut
+        @   unt(nut nut)
+        ^
+      :+  %grip
+        ['[' ']']
+      |-  ^-  *(list ball)
+      ?-  nut
+        [* @]   [$$(nut -.nut) $$(nut +.nut) ~]
+        [* ^]   [$$(nut -.nut) $(nut +.nut)]
+      --
+    --
+  ::
+  ++  ham   (num 16 |=(p=@ ?:((lth 10 p) (add '0' p) (add 'a' p))))
+  ++  loc
+    ^-  *ball
+    ?>  ?=([p=@ q=[p=[p=@ q=@] q=[p=@ q=@]]] nut)   :: should be static
+    :+  %grip
+      ['<' '>']
+    =+  ^=  rov
+        :~  [%grip ['[' ']'] dem(nut p.p.q.nut) dem(nut q.p.q.nut) ~]
+            [%grip ['[' ']'] dem(nut p.q.q.nut) dem(nut q.q.q.nut) ~]
+        --
+    ?:  .=(%% p.nut)
+      rov
+    [p.nut rov]
+  ::
+  ++  num
+    |*  [zel=@ hoz=|=(@ @)]
+    ^-  [%duct p=*tape]
+    :-  %duct
+    ?:  .=(0 nut)
+      [(hoz 0) ~]
+    =+  biq=`*tape`~
+    |-  ^-  *tape
+    ?:  .=(0 nut)
+      biq
+    $(nut (div nut zel), biq [(hoz (mod nut zel)) biq])
+  ::
+  ++  tem
+    ^-  [%duct p=*tape]
+    :-  %duct
+    |-  ^-  *tape
+    ?:  .=(0 nut)
+      ~
+    [(end 3 1 nut) $(nut (rsh 3 1 nut))]
+  ::
+  ++  tis
+    [%duct p=nut]
+  ::
+  ++  unt
+    ^-  [%duct p=*tape]
+    ?:  ?&  (gte (met 3 nut) 2)
+            |-
+            ?:  .=(0 nut)
+              &
+            =+  vis=(end 3 1 nut)
+            =+  goz=(rsh 3 1 nut)
+            ?&(?|(.=('-' vis) ?&((gte vis 'a') (lte vis 'z'))) $(nut goz))
+        --
+      =<([- ['%' +]] tem)
+    ?:  (lte (met 3 nut) 2)
+      dem
+    ham
+  ==
 ==
-

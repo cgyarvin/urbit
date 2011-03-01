@@ -1048,12 +1048,12 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, ap, sift)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ap, sift), SafeTier6_c, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ap, sift), SafeTier6, u2_none, u2_none },
     { }
   };
   u2_ho_jet 
   j2_mcj(Pit, ap, mold)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ap, mold), SafeTier6_c, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ap, mold), SafeTier6, u2_none, u2_none },
     { }
   };
 
@@ -1066,8 +1066,8 @@
 
   u2_ho_jet 
   j2_mbj(Pit, ap)[] = {
-    { "open", c3__hevy, j2_mc(Pit, ap, open), SafeTier6_c, u2_none, u2_none },
-    { "rake", c3__hevy, j2_mc(Pit, ap, rake), SafeTier6_c, u2_none, u2_none },
+    { "open", c3__hevy, j2_mc(Pit, ap, open), SafeTier6, u2_none, u2_none },
+    { "rake", c3__hevy, j2_mc(Pit, ap, rake), SafeTier6, u2_none, u2_none },
     { }
   };
 
