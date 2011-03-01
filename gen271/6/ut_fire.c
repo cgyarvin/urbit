@@ -56,11 +56,11 @@
     }
   }
 
-  u2_noun                                                         //  transfer
-  j2_mcx(Pit, ut, fire)(u2_wire wir_r, 
-                        u2_noun van,                              //  retain
-                        u2_noun sut,                              //  retain
-                        u2_noun hag)                              //  retain
+  static u2_noun 
+  _fire_in(u2_wire wir_r,
+           u2_noun van,
+           u2_noun sut,
+           u2_noun hag)
   {
     u2_flag vet = u2_bn_hook(wir_r, van, "vet");
     u2_noun p_sut, q_sut;
@@ -101,6 +101,17 @@
         return ret;
       }
     }
+  }
+
+  u2_noun                                                         //  transfer
+  j2_mcx(Pit, ut, fire)(u2_wire wir_r, 
+                        u2_noun van,                              //  retain
+                        u2_noun sut,                              //  retain
+                        u2_noun hag)                              //  retain
+  {
+    u2_noun typ = _fire_in(wir_r, van, sut, hag);
+
+    return u2_bt(wir_r, c3__hold, typ, u2_rx(wir_r, hag));
   }
   
 /* boilerplate
@@ -158,64 +169,23 @@
   {
     u2_ho_jet *jet_j = &j2_mcj(Pit, ut, fire)[0];
 
-    switch ( jet_j->sat_s ) {
-      default: c3_assert(0); return u2_bl_bail(wir_r);
+    if ( jet_j->sat_s == u2_jet_live ) {
+      return j2_mcx(Pit, ut, fire)(wir_r, van, sut, hag);
+    }
+    else {
+      u2_noun cor, fol, xip, pro;
 
-      case u2_jet_live: {
-        return j2_mcx(Pit, ut, fire)(wir_r, van, sut, hag);
-      }
-      case u2_jet_dead: {
-        u2_noun cor, sof;
+      cor = j2_mci(Pit, ut, fire)(wir_r, van, sut, hag);
+      fol = u2_bt(wir_r, _2, u2_bc(wir_r, _0, _1), u2_bc(wir_r, _0, _3));
+      xip = j2_mcj(Pit, ut, fire)[0].xip;
 
-        cor = j2_mci(Pit, ut, fire)(wir_r, van, sut, hag);
-        sof = u2_nk_soft(wir_r, cor, u2_frag(u2_cv_noc, cor));
+      pro = u2_ho_punt(wir_r, xip, cor, fol);
+      c3_assert(pro != u2_none);
 
-        return u2_bl_good(wir_r, sof);
-      }
-      case u2_jet_limp: {
-        u2_weak had, cor, sof;
+      u2_rz(wir_r, cor);
+      u2_rz(wir_r, fol);
 
-        /* Compute `had`, the C version.  Jet is full-on recursive.
-        ** Catch bails.
-        */
-        {
-          jet_j->sat_s = u2_jet_live;
-          {
-            u2_ray jub_r = u2_bl_open(wir_r);
-
-            if ( u2_bl_set(wir_r) ) {
-              u2_bl_done(wir_r, jub_r);
-              had = u2_none;
-            } 
-            else {
-              had = j2_mcx(Pit, ut, fire)(wir_r, van, sut, hag);
-              u2_bl_done(wir_r, jub_r);
-            }
-          }
-          jet_j->sat_s = u2_jet_limp;
-        }
-
-        /* Compute `sof`, the Nock version.  Jet is full-off recursively.
-        */
-        {
-          jet_j->sat_s = u2_jet_dead;
-          {
-            cor = j2_mci(Pit, ut, fire)(wir_r, van, sut, hag);
-            sof = u2_nk_soft(wir_r, u2_rx(wir_r, cor), 
-                                    u2_frag(u2_cv_noc, cor));
-          }
-          jet_j->sat_s = u2_jet_limp;
-        }
-        u2_ho_test(jet_j, cor, sof, had);
-        u2_rl_lose(wir_r, cor);
-
-        if ( u2_none == sof ) {
-          return had;
-        } else {
-          u2_rl_lose(wir_r, had);
-          return sof;
-        }
-      }
+      return pro;
     }
   }
 
@@ -223,8 +193,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, ut, fire)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, fire), SafeTier6, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ut, fire), SafeTier6_c, u2_none, u2_none },
     { }
   };
-
-

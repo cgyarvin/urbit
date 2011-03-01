@@ -95,7 +95,7 @@
     u2_bi_cell(wir_r, rq_ref, &prq_ref, &qrq_ref);
 
     if ( c3__wood == pq_sut ) {
-      return u2_and(u2_sing(c3__wood, pq_ref), u2_sing(qrq_sut, prq_sut));
+      return u2_and(u2_sing(c3__wood, pq_ref), u2_sing(qrq_sut, qrq_ref));
     } else {
       if ( (pq_sut != pq_ref) && (c3__lead != pq_ref) ) {
         return u2_no;
@@ -301,7 +301,7 @@
             return u2_yes;
           } else {
             u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, gil, hud);
-            u2_type fop = j2_mcy(Pit, ut, play)(wir_r, van, p_sut, q_sut);
+            u2_type fop = j2_mcy(Pit, ut, rest)(wir_r, van, p_sut, q_sut);
             u2_flag hiv = _nest_dext(wir_r, van, fop, ref, zoc);
 
             u2_rl_lose(wir_r, hud);
@@ -321,7 +321,7 @@
              u2_noun ref,
              u2_noun gil)
   {
-    u2_noun p_ref, q_ref, r_ref;
+    u2_noun p_ref, q_ref;
 
     if ( (u2_no == u2_dust(ref)) ) {
       switch ( ref ) {
@@ -342,15 +342,11 @@
           return u2_no;
         }
         case c3__core: {
-          if ( u2_no == u2_as_qual(ref, 0, &p_ref, &q_ref, &r_ref) ) {
-            return u2_bl_bail(wir_r);
-          } else {
-            u2_noun fug = u2_bt(wir_r, c3__cell, p_ref, c3__noun);
-            u2_flag hiv = _nest_dext(wir_r, van, sut, fug, gil);
-            
-            u2_rl_lose(wir_r, fug);
-            return hiv;
-          }
+          u2_type gam = j2_mcy(Pit, ut, repo)(wir_r, van, ref);
+          u2_flag hiv = _nest_dext(wir_r, van, sut, gam, gil);
+
+          u2_rl_lose(wir_r, gam);
+          return hiv;
         }
         case c3__cube: {
           p_ref = u2_t(ref);
@@ -392,7 +388,7 @@
               return u2_yes;
             } else {
               u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, gil, hud);
-              u2_type gam = j2_mcy(Pit, ut, play)(wir_r, van, p_ref, q_ref);
+              u2_type gam = j2_mcy(Pit, ut, repo)(wir_r, van, ref);
 
               {
                 u2_flag hiv = _nest_dext(wir_r, van, sut, gam, zoc);
@@ -475,64 +471,23 @@
   {
     u2_ho_jet *jet_j = &j2_mcj(Pit, ut, nest)[0];
 
-    switch ( jet_j->sat_s ) {
-      default: c3_assert(0); return u2_bl_bail(wir_r);
+    if ( jet_j->sat_s == u2_jet_live ) {
+      return j2_mcx(Pit, ut, nest)(wir_r, van, sut, ref);
+    }
+    else {
+      u2_noun cor, fol, xip, pro;
 
-      case u2_jet_live: {
-        return j2_mcx(Pit, ut, nest)(wir_r, van, sut, ref);
-      }
-      case u2_jet_dead: {
-        u2_noun cor, sof;
+      cor = j2_mci(Pit, ut, nest)(wir_r, van, sut, ref);
+      fol = u2_bt(wir_r, _2, u2_bc(wir_r, _0, _1), u2_bc(wir_r, _0, _3));
+      xip = j2_mcj(Pit, ut, nest)[0].xip;
 
-        cor = j2_mci(Pit, ut, nest)(wir_r, van, sut, ref);
-        sof = u2_nk_soft(wir_r, cor, u2_frag(u2_cv_noc, cor));
+      pro = u2_ho_punt(wir_r, xip, cor, fol);
+      c3_assert(pro != u2_none);
 
-        return u2_bl_good(wir_r, sof);
-      }
-      case u2_jet_limp: {
-        u2_weak had, cor, sof;
+      u2_rz(wir_r, cor);
+      u2_rz(wir_r, fol);
 
-        /* Compute `had`, the C version.  Jet is full-on recursive.
-        ** Catch bails.
-        */
-        {
-          jet_j->sat_s = u2_jet_live;
-          {
-            u2_ray jub_r = u2_bl_open(wir_r);
-
-            if ( u2_bl_set(wir_r) ) {
-              u2_bl_done(wir_r, jub_r);
-              had = u2_none;
-            } 
-            else {
-              had = j2_mcx(Pit, ut, nest)(wir_r, van, sut, ref);
-              u2_bl_done(wir_r, jub_r);
-            }
-          }
-          jet_j->sat_s = u2_jet_limp;
-        }
-
-        /* Compute `sof`, the Nock version.  Jet is full-off recursively.
-        */
-        {
-          jet_j->sat_s = u2_jet_dead;
-          {
-            cor = j2_mci(Pit, ut, nest)(wir_r, van, sut, ref);
-            sof = u2_nk_soft(wir_r, u2_rx(wir_r, cor), 
-                                    u2_frag(u2_cv_noc, cor));
-          }
-          jet_j->sat_s = u2_jet_limp;
-        }
-        u2_ho_test(jet_j, cor, sof, had);
-        u2_rl_lose(wir_r, cor);
-
-        if ( u2_none == sof ) {
-          return had;
-        } else {
-          u2_rl_lose(wir_r, had);
-          return sof;
-        }
-      }
+      return pro;
     }
   }
 
@@ -540,6 +495,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, ut, nest)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, nest), SafeTier6, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ut, nest), SafeTier6_c, u2_none, u2_none },
     { }
   };

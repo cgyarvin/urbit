@@ -126,6 +126,12 @@
                         u2_noun a,                                //  retain
                         u2_noun b);                               //  retain
 
+      u2_noun                                                     //  transfer
+      j2_mcy(Pit, ut, rest)(u2_wire wir_r,
+                            u2_noun van,                          //  retain
+                            u2_noun sut,                          //  retain
+                            u2_noun leg);                         //  retain
+
       u2_weak                                                     //  transfer
       j2_mbc(Pit, roll)(u2_wire wir_r, 
                         u2_noun a,                                //  retain

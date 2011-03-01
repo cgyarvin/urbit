@@ -1,23 +1,28 @@
-~%    ~   
-    %zuse.270 
+~%    %zuse.270 
+    ~ 
   ()
 &.
 ::
-++  add                                                     ~%  ->  %add  ()
+  ::  Tier 1, atomic arithmetic
+::
+++  add
+  ~.  %add
   |=  [a=@ b=@] 
   ^-  @
   ?:  .=(0 a)
     b
   $(a (dec a), b .^(b))
 ::
-++  bex                                                     ~%  ->  %bex  ()
+++  bex
+  ~.  %bex
   |=  [a=@]
   ^-  @
   ?:  .=(0 a)
     1
   (mul 2 $(a (dec a)))
 ::
-++  dec                                                     ~%  ->  %dec  ()
+++  dec
+  ~.  %dec
   |=  a=@
   ^-  @
   ~|  %dec
@@ -28,7 +33,8 @@
     b
   $(b .^(b))
 ::
-++  div                                                     ~%  ->  %div  ()
+++  div
+  ~.  %div
   |=  [a=@ b=@]
   ^-  @
   ~|  %div
@@ -49,24 +55,26 @@
       *   (add $(a (sub a 1)) $(a (sub a 2)))
   --
 ::
-++  gte                                                     ~%  ->  %gte  ()
+++  gte
+  ~.  %gte
   |=  [a=@ b=@]
   ^-  ?
   !(lth a b)
 ::
 ++
-    gth                                                     ~%  ->  %gth  ()
+    gth
+  ~.  %gth
   |=  [a=@ b=@]
   ^-  ?
   !(lte a b)
 ::
-++
-    lte                                                     ~%  ->  %lte  ()
+++  lte
+  ~.  %lte
   |=  [a=@ b=@]
   ?|(.=(a b) (lth a b))
 ::
-++
-    lth                                                     ~%  ->  %lth  ()
+++  lth
+  ~.  %lth
   |=  [a=@ b=@]
   ^-  ?
   ?&
@@ -78,28 +86,31 @@
         $(a (dec a), b (dec b))
   --
 ::
-++
-    max                                                     ~%  ->  %max  () 
+++  max
+  ~.  %max
   |=  [a=@ b=@]
   ^-  @
   ?:  (gth a b)
     a
   b
 ::
-++  min                                                     ~%  ->  %min  ()
+++  min
+  ~.  %min
   |=  [a=@ b=@]
   ^-  @
   ?:  (lth a b)
     a
   b
 ::
-++  mod                                                     ~%  ->  %mod  ()
+++  mod
+  ~.  %mod
   |=  [a=@ b=@]
   ^-  @
   ?<  .=(0 b)
   (sub a (mul b (div a b)))
 ::
-++  mul                                                     ~%  ->  %mul  ()
+++  mul
+  ~.  %mul
   |=  [a=@ b=@]
   ^-  @
   =+  c=^-(@ 0)
@@ -112,24 +123,25 @@
   |*  a=*
   a
 ::
-++  sub                                                     ~%  ->  %sub  ()
+++  sub
+  ~.  %sub
   |=  [a=@ b=@]
   ^-  @
   ?:  .=(0 b)
     a
   $(a (dec a), b (dec b))
 ::
-::::::
   ::  Tier 2, lists and units
-::::::
 ::
-++  bind                                                    ~%  ->  %bind   ()
+++  bind
+  ~.  %bind 
   |*  [a=*(unit) b=<*>]
   ?~  a
     ~
   [~ u=(b u.a)]
 ::
-++  clap                                                    ~%  ->  %clap   ()
+++  clap
+  ~.  %clap
   |*  [a=*(unit) b=*(unit) c=|=(^ -<-)]
   ?~  a
     b
@@ -137,13 +149,15 @@
     a
   [~ u=(c u.a u.b)]
 ::
-++  drop                                                    ~%  ->  %drop   ()
+++  drop
+  ~.  %drop
   |*  a=*(unit)
   ?~  a
     ~
   [i=u.a t=~]
 ::
-++  flop                                                    ~%  ->  %flop   ()
+++  flop
+  ~.  %flop
   |*  a=*(list)
   ^-  a
   =+  b=`a`~
@@ -152,14 +166,16 @@
     b
   $(a t.a, b [i.a b])
 ::
-++  lent                                                    ~%  ->  %lent   ()
+++  lent
+  ~.  %lent
   |=  a=*(list)
   ^-  @
   =+  b=@
   |-
   ?~(a b $(a t.a, b .^(b)))
 ::
-++  levy                                                    ~%  ->  %levy   ()
+++  levy
+  ~.  %levy
   |*  [a=*(list) b=|=(p=* .?(p))]
   |-
   ^-  ?
@@ -169,7 +185,8 @@
     $(a t.a)
   |
 ::
-++  lien                                                    ~%  ->  %lien   ()
+++  lien
+  ~.  %lien
   |*  [a=*(list) b=|=(p=* .?(p))]
   |-
   ^-  ?
@@ -187,13 +204,15 @@
       [i=* t=*]   [i=(a i.b) t=$(b t.b)]
   --
 ::
-++  need                                                    ~%  ->  %need   ()
+++  need
+  ~.  %need
   |*  a=*(unit)
   ?~  a
     !!
   u.a
 ::
-++  reel                                                    ~%  ->  %reel   ()
+++  reel
+  ~.  %reel
   |*  [a=*(list) b==+([p=* q=*] |.(q))]
   |-
   ^-  q.b
@@ -201,7 +220,8 @@
     q.b
   (b i.a $(a t.a))
 ::
-++  roll                                                    ~%  ->  %roll   ()
+++  roll
+  ~.  %roll
   |*  [a=*(list) b==+([p=* q=*] |.(q))]
   |-
   ^-  q.b
@@ -209,7 +229,8 @@
     q.b
   $(a t.a, b b(q (b i.a q.b)))
 ::
-++  skim                                                    ~%  ->  %skim   ()
+++  skim
+  ~.  %skim
   |*  [a=*(list) b=|=(p=* .?(p))]
   |-
   ^-  a
@@ -217,7 +238,8 @@
     ~
   ?:((b i.a) [i.a $(a t.a)] $(a t.a))
 ::
-++  skip                                                    ~%  ->  %skip   ()
+++  skip
+  ~.  %skip
   |*  [a=*(list) b=|=(p=* .?(p))]
   |-
   ^-  a
@@ -225,7 +247,8 @@
     ~
   ?:((b i.a) $(a t.a) [i.a $(a t.a)])
 ::
-++  snag                                                    ~%  ->  %snag   ()
+++  snag
+  ~.  %snag
   |*  [a=@ b=*(list)]
   |-
   ?~  b
@@ -235,7 +258,8 @@
     i.b
   $(b t.b, a (dec a))
 ::
-++  sort                                                    ~%  ->  %sort   ()
+++  sort
+  ~.  %sort
   |*  [a=*(list) b=|=([p=* q=*] .=(p q))]
   |-
   ^-  a
@@ -253,7 +277,8 @@
       [n=* l=* r=*]   [n=(a n.b) l=$(b l.b) r=$(b r.b)]
   --
 ::
-++  turn                                                    ~%  ->  %turn   ()
+++  turn
+  ~.  %turn
   |*  [a=*(list) b=<*>]
   |-
   ?~  a
@@ -268,7 +293,8 @@
       [~ *]   [~ u=(a +.b)]
   --
 ::
-++  weld                                                    ~%  ->  %weld   ()
+++  weld
+  ~.  %weld
   |*  [a=*(list) b=*(list)]
   |-
   ^-  b

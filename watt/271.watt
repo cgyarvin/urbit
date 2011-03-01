@@ -1652,12 +1652,13 @@
         [%park !=(park)]
         [%peek !=(peek)]
         [%repo !=(repo)]
+        [%rest !=(rest)]
         [%seek !=(seek)]
         [%snap !=(snap)]
         [%tuck !=(tuck)]
         [%tusk !=(tusk)]
       --
-  =+  :*  fan=*(set type)
+  =+  :*  fan=*(set &[*type *(list gene)])
           rib=*(set &[*type *type *gene])
           vet=`?`&
       --
@@ -1720,9 +1721,7 @@
         (cell $$(axe lat, sut p.sut) q.sut)
       (cell p.sut $$(axe lat, sut q.sut))
     ::
-        [%core *]
-      ?.(.=(2 now) sut (core $$(axe lat, sut p.sut) q.sut))
-    ::
+        [%core *]   ?.(.=(2 now) sut (core $$(axe lat, sut p.sut) q.sut))
         [%cube *]   ?.(.?(p.sut) %void (reco =+(p=*type |=($$(sut p)))))
         [%face *]   (reco =+(p=*type |=((face p.sut $$(sut p)))))
         [%fork *]   (fork $(sut p.sut) $(sut q.sut))
@@ -1805,7 +1804,7 @@
       ?~  piv
         $(sut repo)
       :*  %meld
-          '%'
+          '$'
           ~(dem go u.piv)
           ~
           ?:  (~(has in gax) sut)
@@ -1874,7 +1873,7 @@
           ^>  bean.[%port |=((~(fly to ~(tem go `@`cog)) 75))]
           ^>  bean.[%type |=((~(fly to dump) 75))]
           ^>(bean.%find-dumb !!)
-        ?.  ?|(!vet (park way p.u.taf))
+        ?.  (park way p.u.taf)
           ^>  bean.[%port |=((~(fly to ~(tem go `@`cog)) 75))]
           ^>  bean.[%type |=((~(fly to dump) 75))]
           ^>  bean.[%way |=((~(fly to ~(tem go `@`way)) 75))]
@@ -2091,6 +2090,7 @@
   ::::
   ::
       mint
+    ^<  mine.[!=(->) %mint ~]
     =+  [gol=*type gen=*gene]
     |=
     ::  ^>  bean.[%mo-mint |=((~(fly to ~(tem go ?-(gen @ gen, ^ -.gen))) 75))]
@@ -2444,26 +2444,29 @@
     |=
     ^-  ?
     ?>  ?=([%core *] sut)
-    ?-    way
-        %nest   &
-        %read
-      ?-    p.q.sut
-          %gold   &
-          %iron   &
-          %lead   .=(3 (cap axe))
-          %wood   &
-          %zinc   .=(3 (cap axe))
-      --
-    ::
-        %rite
-      ?-    p.q.sut
-          %gold   &
-          %iron   .=(3 (cap axe))
-          %zinc   
-        ?|(.=(2 (cap axe)) =+(lat=(mas axe) ?&(!.=(1 lat) .=(3 (cap lat)))))
+    ?|  
+      !vet
+      ?-    way
+          %nest   &
+          %read
+        ?-    p.q.sut
+            %gold   &
+            %iron   &
+            %lead   .=(3 (cap axe))
+            %wood   &
+            %zinc   .=(3 (cap axe))
+        --
       ::
-          %lead   &
-          %wood   &
+          %rite
+        ?-    p.q.sut
+            %gold   &
+            %iron   .=(3 (cap axe))
+            %zinc   
+          ?|(.=(2 (cap axe)) =+(lat=(mas axe) ?&(!.=(1 lat) .=(3 (cap lat)))))
+        ::
+            %lead   &
+            %wood   &
+        --
       --
     --
   ::::
@@ -2483,7 +2486,7 @@
         [%cell *]   ?:(.=(2 now) $(sut p.sut, axe lat) $(sut q.sut, axe lat))
         [%core *]   
       ?:  .=(2 now) 
-        ?.  ?|(!vet (park way lat))
+        ?.  (park way lat)
           ^>  bean.[%axis |=((~(fly to ~(dem go `@`axe)) 75))]
           ^>  bean.[%type |=((~(fly to dump) 75))]
           ^>(bean.%peek-park !!)
@@ -2582,19 +2585,24 @@
         [%cube *]   ?.(.?(p.sut) %atom [%cell [%cube -.p.sut] [%cube +.p.sut]])
         [%core *]   [%cell p.sut %noun]
         [%face *]   q.sut
-        [%hold *]   
-      ^>  memo
-      ?:  (~(has in fan) sut)
-        ^>(bean.'inference recursion' !!)
-      =>  .(fan (~(put in fan) sut))
-      =+  gar=(turn q.sut =+(p=*gene |=((play(sut p.sut) p))))
-      =+  gun=(~(gas in *(set type)) gar)    ::  XX
-      =+  nog=(~(tap in gun) *(list type))
-      (roll nog =+([p=*type q=`*type`%void] |=((fork p q))))
-    ::
+        [%hold *]   (rest(sut p.sut) q.sut)
         %noun       [%fork %atom [%cell %noun %noun]]
         *           !!
     --
+  ::::
+  ::
+      rest
+    ^<  mine.[!=(->) %rest ~]
+    =+  leg=*(list gene)
+    |=
+    ^>  memo
+    ?:  (~(has in fan) [sut leg])
+      ^>(bean.'inference recursion' !!)
+    =>  .(fan (~(put in fan) [sut leg]))
+    =+  gar=(turn leg =+(p=*gene |=((play p))))
+    =+  gun=(~(gas in *(set type)) gar)    ::  XX
+    =+  nog=(~(tap in gun) *(list type))
+    (roll nog =+([p=*type q=`*type`%void] |=((fork p q))))
   ::::
   ::
       seek
@@ -2606,14 +2614,10 @@
     ?~  hep
       [1 ~ sut]
     =+  zar=$(hep t.hep)
-    =>  %=    .           ::  cumbersome; should fork .
-            r.zar 
-          ?~  q.zar 
-            r.zar 
-          ?:  ?=([[~ *] *] t.hep)
-            r.zar 
-          (fire(sut r.zar) [[~ 1] ~])
-        --
+    =>  ^-  .
+        ?~  q.zar
+          .
+        .(r.zar (fire(sut r.zar) [[~ 1] ~]))
     ?-    i.hep
         @
       =+  hup=(find(sut r.zar) way i.hep)

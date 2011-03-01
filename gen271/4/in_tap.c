@@ -13,7 +13,7 @@
                        u2_noun b)                                 //  transfer
   {
     if ( u2_nul == a ) {
-      return u2_nul;
+      return u2_rx(wir_r, b);
     }
     else {
       u2_noun l_a, n_a, r_a;

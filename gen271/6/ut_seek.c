@@ -24,24 +24,36 @@
     else {
       u2_noun i_hep = u2_h(hep);
       u2_noun t_hep = u2_t(hep);
-      u2_noun vag = j2_mcx(Pit, ut, seek)(wir_r, van, sut, way, t_hep);
-      u2_noun p_vag, q_vag, r_vag;
+      u2_noun zar = j2_mcx(Pit, ut, seek)(wir_r, van, sut, way, t_hep);
+      u2_noun p_zar, q_zar, r_zar;
       u2_noun pro;
 
-      u2_as_trel(vag, &p_vag, &q_vag, &r_vag);
+      u2_as_trel(zar, &p_zar, &q_zar, &r_zar);
+
+      if ( u2_nul != q_zar ) {
+        u2_noun neg = u2_bc(wir_r, u2_bc(wir_r, u2_nul, 1), u2_nul);
+        u2_noun bor = j2_mcy(Pit, ut, fire)(wir_r, van, r_zar, neg);
+        u2_noun raz = u2_bt(wir_r, u2_rx(wir_r, p_zar),
+                                   u2_rx(wir_r, q_zar), 
+                                   bor);
+   
+        u2_rz(wir_r, zar);
+        u2_as_trel(raz, &p_zar, &q_zar, &r_zar);
+        zar = raz;
+      }
 
       if ( u2_no == u2_dust(i_hep) ) {
-        u2_noun hup = j2_mcy(Pit, ut, find)(wir_r, van, r_vag, way, i_hep);
+        u2_noun hup = j2_mcy(Pit, ut, find)(wir_r, van, r_zar, way, i_hep);
         u2_noun p_hup, q_hup, r_hup;
 
         u2_as_trel(hup, &p_hup, &q_hup, &r_hup);
 
         pro = u2_bt
-          (wir_r, j2_mbc(Pit, peg)(wir_r, p_vag, p_hup), 
+          (wir_r, j2_mbc(Pit, peg)(wir_r, p_zar, p_hup), 
                   u2_rx(wir_r, q_hup),
                   u2_rx(wir_r, r_hup));
 
-        u2_rl_lose(wir_r, vag);
+        u2_rl_lose(wir_r, zar);
         u2_rl_lose(wir_r, hup);
 
         return pro;
@@ -55,11 +67,11 @@
         }
         else {
           pro = u2_bt
-            (wir_r, j2_mbc(Pit, peg)(wir_r, p_vag, pi_hep),
+            (wir_r, j2_mbc(Pit, peg)(wir_r, p_zar, pi_hep),
                     u2_nul,
-                    j2_mcy(Pit, ut, peek)(wir_r, van, r_vag, way, pi_hep));
+                    j2_mcy(Pit, ut, peek)(wir_r, van, r_zar, way, pi_hep));
 
-          u2_rl_lose(wir_r, vag);
+          u2_rl_lose(wir_r, zar);
           return pro;
         }
       }
@@ -123,74 +135,28 @@
   j2_mcy(Pit, ut, seek)(u2_wire wir_r,
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
-                        u2_noun way,
+                        u2_noun way,                              //  retain
                         u2_noun hep)                              //  retain
   {
     u2_ho_jet *jet_j = &j2_mcj(Pit, ut, seek)[0];
 
-    switch ( jet_j->sat_s ) {
-      default: c3_assert(0); return u2_bl_bail(wir_r);
+    if ( jet_j->sat_s == u2_jet_live ) {
+      return j2_mcx(Pit, ut, seek)(wir_r, van, sut, way, hep);
+    }
+    else {
+      u2_noun cor, fol, xip, pro;
 
-      case u2_jet_live: {
-        return j2_mcx(Pit, ut, seek)(wir_r, van, sut, way, hep);
-      }
-      case u2_jet_dead: {
-        u2_noun cor, sof;
+      cor = j2_mci(Pit, ut, seek)(wir_r, van, sut, way, hep);
+      fol = u2_bt(wir_r, _2, u2_bc(wir_r, _0, _1), u2_bc(wir_r, _0, _3));
+      xip = j2_mcj(Pit, ut, seek)[0].xip;
 
-        cor = j2_mci(Pit, ut, seek)(wir_r, van, sut, way, hep);
-        sof = u2_nk_soft(wir_r, cor, u2_frag(u2_cv_noc, cor));
+      pro = u2_ho_punt(wir_r, xip, cor, fol);
+      c3_assert(pro != u2_none);
 
-        if ( u2_none == sof ) {
-          j2_mcy(Pit, ut, dupt)(wir_r, van, "seek: sut", sut);
-          u2_err(wir_r, "seek: sut", sut);
-          u2_err(wir_r, "seek: hep", hep);
-        }
-        return u2_bl_good(wir_r, sof);
-      }
-      case u2_jet_limp: {
-        u2_weak had, cor, sof;
+      u2_rz(wir_r, cor);
+      u2_rz(wir_r, fol);
 
-        /* Compute `had`, the C version.  Jet is full-on recursive.
-        ** Catch bails.
-        */
-        {
-          jet_j->sat_s = u2_jet_live;
-          {
-            u2_ray jub_r = u2_bl_open(wir_r);
-
-            if ( u2_bl_set(wir_r) ) {
-              u2_bl_done(wir_r, jub_r);
-              had = u2_none;
-            } 
-            else {
-              had = j2_mcx(Pit, ut, seek)(wir_r, van, sut, way, hep);
-              u2_bl_done(wir_r, jub_r);
-            }
-          }
-          jet_j->sat_s = u2_jet_limp;
-        }
-
-        /* Compute `sof`, the Nock version.  Jet is full-off recursively.
-        */
-        {
-          jet_j->sat_s = u2_jet_dead;
-          {
-            cor = j2_mci(Pit, ut, seek)(wir_r, van, sut, way, hep);
-            sof = u2_nk_soft(wir_r, u2_rx(wir_r, cor), 
-                                    u2_frag(u2_cv_noc, cor));
-          }
-          jet_j->sat_s = u2_jet_limp;
-        }
-        u2_ho_test(jet_j, cor, sof, had);
-        u2_rl_lose(wir_r, cor);
-
-        if ( u2_none == sof ) {
-          return had;
-        } else {
-          u2_rl_lose(wir_r, had);
-          return sof;
-        }
-      }
+      return pro;
     }
   }
 
@@ -198,6 +164,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, ut, seek)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, seek), SafeTier6, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ut, seek), SafeTier6_c, u2_none, u2_none },
     { }
   };

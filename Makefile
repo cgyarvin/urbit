@@ -20,7 +20,7 @@ BIN=run
 
 RM=rm -f
 CC=gcc
-CLD=gcc -g -bind_at_load -L/sw/lib
+CLD=gcc -g -L/sw/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
@@ -216,6 +216,7 @@ J271_6_OFILES_UT=\
        gen271/6/ut_peek.o \
        gen271/6/ut_play.o \
        gen271/6/ut_repo.o \
+       gen271/6/ut_rest.o \
        gen271/6/ut_seek.o \
        gen271/6/ut_snap.o \
        gen271/6/ut_tuck.o \

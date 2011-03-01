@@ -33,6 +33,9 @@
   {
     u2_noun p_sut, q_sut;
 
+    if ( u2_yes == u2_sing(sut, ref) ) {
+      return u2_rx(wir_r, sut);
+    }
     if ( u2_no == u2_dust(sut) ) switch ( sut ) {
       default: return u2_bl_bail(wir_r);
 
@@ -76,22 +79,25 @@
       }
       case c3__cube: p_sut = u2_t(sut);
       {
-        if ( c3__atom == ref ) {
-          if ( u2_yes == u2_dust(p_sut) ) {
-            return c3__void;
+        if ( u2_no == u2_dust(ref) ) {
+          if ( c3__atom == ref ) {
+            if ( u2_yes == u2_dust(p_sut) ) {
+              return c3__void;
+            } else return u2_rx(wir_r, sut);
           }
-          else return u2_rx(wir_r, sut);
+          else return _fuse_in(wir_r, van, ref, sut, bix);
         }
-        else {
-          if ( (u2_yes == u2_dust(ref)) && (c3__cell == u2_h(ref)) ) {
+        else switch ( u2_h(ref) ) {
+          default: return _fuse_in(wir_r, van, ref, sut, bix);
+
+          case c3__cell: {
             if ( u2_yes == u2_dust(p_sut) ) {
               return _fuse_repo(wir_r, van, sut, ref, bix);
-            }
-            else return c3__void;
+            } else return c3__void;
           }
-          else if ( (u2_yes == u2_dust(ref)) && (c3__cube == u2_h(ref)) ) {
+          case c3__cube: {
+            return c3__void;
           }
-          else return _fuse_repo(wir_r, van, sut, ref, bix);
         }
       }
       case c3__face: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
@@ -193,64 +199,23 @@
   {
     u2_ho_jet *jet_j = &j2_mcj(Pit, ut, fuse)[0];
 
-    switch ( jet_j->sat_s ) {
-      default: c3_assert(0); return u2_bl_bail(wir_r);
+    if ( jet_j->sat_s == u2_jet_live ) {
+      return j2_mcx(Pit, ut, fuse)(wir_r, van, sut, ref);
+    }
+    else {
+      u2_noun cor, fol, xip, pro;
 
-      case u2_jet_live: {
-        return j2_mcx(Pit, ut, fuse)(wir_r, van, sut, ref);
-      }
-      case u2_jet_dead: {
-        u2_noun cor, sof;
+      cor = j2_mci(Pit, ut, fuse)(wir_r, van, sut, ref);
+      fol = u2_bt(wir_r, _2, u2_bc(wir_r, _0, _1), u2_bc(wir_r, _0, _3));
+      xip = j2_mcj(Pit, ut, fuse)[0].xip;
 
-        cor = j2_mci(Pit, ut, fuse)(wir_r, van, sut, ref);
-        sof = u2_nk_soft(wir_r, cor, u2_frag(u2_cv_noc, cor));
+      pro = u2_ho_punt(wir_r, xip, cor, fol);
+      c3_assert(pro != u2_none);
 
-        return u2_bl_good(wir_r, sof);
-      }
-      case u2_jet_limp: {
-        u2_weak had, cor, sof;
+      u2_rz(wir_r, cor);
+      u2_rz(wir_r, fol);
 
-        /* Compute `had`, the C version.  Jet is full-on recursive.
-        ** Catch bails.
-        */
-        {
-          jet_j->sat_s = u2_jet_live;
-          {
-            u2_ray jub_r = u2_bl_open(wir_r);
-
-            if ( u2_bl_set(wir_r) ) {
-              u2_bl_done(wir_r, jub_r);
-              had = u2_none;
-            } 
-            else {
-              had = j2_mcx(Pit, ut, fuse)(wir_r, van, sut, ref);
-              u2_bl_done(wir_r, jub_r);
-            }
-          }
-          jet_j->sat_s = u2_jet_limp;
-        }
-
-        /* Compute `sof`, the Nock version.  Jet is full-off recursively.
-        */
-        {
-          jet_j->sat_s = u2_jet_dead;
-          {
-            cor = j2_mci(Pit, ut, fuse)(wir_r, van, sut, ref);
-            sof = u2_nk_soft(wir_r, u2_rx(wir_r, cor), 
-                                    u2_frag(u2_cv_noc, cor));
-          }
-          jet_j->sat_s = u2_jet_limp;
-        }
-        u2_ho_test(jet_j, cor, sof, had);
-        u2_rl_lose(wir_r, cor);
-
-        if ( u2_none == sof ) {
-          return had;
-        } else {
-          u2_rl_lose(wir_r, had);
-          return sof;
-        }
-      }
+      return pro;
     }
   }
 
@@ -258,6 +223,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, ut, fuse)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, fuse), SafeTier6, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ut, fuse), SafeTier6_b, u2_none, u2_none },
     { }
   };

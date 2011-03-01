@@ -749,8 +749,64 @@ u2_ho_test(u2_ho_jet* jet_j,
     } else if ( u2_no == u2_sing(had, sof) ) {
       msg_c = "fail";
       printf("cos_c: %s\n", cos_c);
-      u2_err(0, "wrong", had);
-      u2_err(0, "right", sof);
+
+      //  For detailed debugging, activate/extend this junk as needed.
+      //
+#if 0
+      {
+        u2_err(0, "wrong", had);
+        u2_err(0, "right", sof);
+      }
+      {
+        u2_noun sut, ref, van;
+
+        if ( (u2_no == u2_mean(cor, u2_cv_sam, &ref, u2_cv_con, &van, 0)) ||
+             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
+        {
+          c3_assert(0);
+        } else {
+          j2_mcy(watt_271, ut, dupt)(0, van, "sut", sut);
+          j2_mcy(watt_271, ut, dupt)(0, van, "ref", ref);
+
+          j2_mcy(watt_271, ut, dupt)(0, van, "sof", sof);
+          j2_mcy(watt_271, ut, dupt)(0, van, "had", had);
+        }
+      }
+      {
+        u2_noun sut, ref, van;
+
+        if ( (u2_no == u2_mean(cor, u2_cv_sam, &ref, u2_cv_con, &van, 0)) ||
+             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
+        {
+          c3_assert(0);
+        } else {
+          j2_mcy(watt_271, ut, dupt)(0, van, "sut", sut);
+          j2_mcy(watt_271, ut, dupt)(0, van, "ref", ref);
+        }
+      }
+      {
+        u2_wire wir_r = 0;
+        u2_noun sut, way, hep, van;
+
+        if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &way, 
+                                    u2_cv_sam_3, &hep,
+                                    u2_cv_con, &van, 0)) ||
+             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
+        {
+          c3_assert(0);
+        } else {
+          j2_mcy(watt_271, ut, dupt)(0, van, "sut", sut);
+          u2_err(wir_r, "way", way);
+          u2_err(wir_r, "hep", hep);
+
+          u2_err(wir_r, "p_sof", u2_h(sof));
+          u2_err(wir_r, "p_had", u2_h(had));
+
+          j2_mcy(watt_271, ut, dupt)(0, van, "r_sof", u2_t(u2_t(sof)));
+          j2_mcy(watt_271, ut, dupt)(0, van, "r_had", u2_t(u2_t(had)));
+        }
+      }
+#endif
       // LoomStop = 1;
       c3_assert(0);
     } else {
@@ -897,3 +953,4 @@ u2_ho_punt(u2_ray  wir_r,
     }
   }
 }
+

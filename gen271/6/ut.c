@@ -153,9 +153,11 @@
   extern u2_ho_jet j2_mcj(Pit, ut, heal)[];
   extern u2_ho_jet j2_mcj(Pit, ut, mint)[];
   extern u2_ho_jet j2_mcj(Pit, ut, nest)[];
+  extern u2_ho_jet j2_mcj(Pit, ut, orth)[];
   extern u2_ho_jet j2_mcj(Pit, ut, park)[];
   extern u2_ho_jet j2_mcj(Pit, ut, peek)[];
   extern u2_ho_jet j2_mcj(Pit, ut, play)[];
+  extern u2_ho_jet j2_mcj(Pit, ut, rest)[];
   extern u2_ho_jet j2_mcj(Pit, ut, seek)[];
   extern u2_ho_jet j2_mcj(Pit, ut, snap)[];
   extern u2_ho_jet j2_mcj(Pit, ut, tuck)[];
@@ -178,9 +180,11 @@
     { j2_sc(Pit, ut, heal), j2_mcj(Pit, ut, heal), 0, 0, u2_none },
     { j2_sc(Pit, ut, mint), j2_mcj(Pit, ut, mint), 0, 0, u2_none },
     { j2_sc(Pit, ut, nest), j2_mcj(Pit, ut, nest), 0, 0, u2_none },
+    { j2_sc(Pit, ut, orth), j2_mcj(Pit, ut, orth), 0, 0, u2_none },
     { j2_sc(Pit, ut, park), j2_mcj(Pit, ut, park), 0, 0, u2_none },
     { j2_sc(Pit, ut, peek), j2_mcj(Pit, ut, peek), 0, 0, u2_none },
     { j2_sc(Pit, ut, play), j2_mcj(Pit, ut, play), 0, 0, u2_none },
+    { j2_sc(Pit, ut, rest), j2_mcj(Pit, ut, rest), 0, 0, u2_none },
     { j2_sc(Pit, ut, seek), j2_mcj(Pit, ut, seek), 0, 0, u2_none },
     { j2_sc(Pit, ut, snap), j2_mcj(Pit, ut, snap), 0, 0, u2_none },
     { j2_sc(Pit, ut, tuck), j2_mcj(Pit, ut, tuck), 0, 0, u2_none },
@@ -190,7 +194,7 @@
 
   u2_ho_jet 
   j2_mbj(Pit, ut)[] = {
-    { "repo", c3__hevy, j2_mc(Pit, ut, repo), SafeTier6, u2_none, u2_none },
+    { "repo", c3__hevy, j2_mc(Pit, ut, repo), SafeTier6_c, u2_none, u2_none },
     { }
   };
 
