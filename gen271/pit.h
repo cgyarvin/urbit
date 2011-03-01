@@ -16,7 +16,7 @@
 #   define  SafeTier6         u2_jet_dead
 #   define  SafeTier6_a       u2_jet_dead
 #   define  SafeTier6_b       u2_jet_limp
-#   define  SafeTier6_c       u2_jet_live
+#   define  SafeTier6_c       u2_jet_limp
 
   /** Cosmetic noun types.
   **/
@@ -391,7 +391,6 @@
       j2_mcy(Pit, ut, edit)(u2_wire wir_r,
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
-                            u2_atom axe,                          //  retain
                             u2_noun mun,                          //  retain
                             u2_noun har);                         //  retain
 

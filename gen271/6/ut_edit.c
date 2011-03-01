@@ -11,7 +11,6 @@
   j2_mcy(Pit, ut, edit)(u2_wire wir_r, 
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
-                        u2_atom axe,                              //  retain
                         u2_noun mun,                              //  retain
                         u2_noun har)                              //  retain
   {
@@ -47,15 +46,14 @@
   j2_mc(Pit, ut, edit)(u2_wire wir_r, 
                        u2_noun cor)                               //  retain
   {
-    u2_noun van, sut, axe, mun, har;
+    u2_noun van, sut, mun, har;
 
-    if ( (u2_no == u2_mean(cor, 8, &axe, 18, &mun, 19, &har, 5, &van, 0)) ||
-         (u2_no == u2_stud(axe)) ||
+    if ( (u2_no == u2_mean(cor, 8, &mun, 9, &har, 5, &van, 0)) ||
          (u2_none == (sut = u2_frag(4, van))) )
     {
       return u2_bl_bail(wir_r);
     } else {
-      return j2_mcy(Pit, ut, edit)(wir_r, van, sut, axe, mun, har);
+      return j2_mcy(Pit, ut, edit)(wir_r, van, sut, mun, har);
     }
   }
 
@@ -63,6 +61,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, ut, edit)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, edit), SafeTier6, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ut, edit), SafeTier6_c, u2_none, u2_none },
     { }
   };

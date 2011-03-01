@@ -50,12 +50,12 @@
         }
         else if ( (u2_nul == r_dab) ) {
           return u2_bc
-            (wir_r, _bake_make(wir_r, van, sut, qn_dab),
+            (wir_r, _bake_make(wir_r, van, sut, pqn_dab),
                     j2_mcx(Pit, ut, bake)(wir_r, van, sut, l_dab));
         }
         else {
           return u2_bt
-            (wir_r, _bake_make(wir_r, van, sut, qn_dab),
+            (wir_r, _bake_make(wir_r, van, sut, pqn_dab),
                     j2_mcx(Pit, ut, bake)(wir_r, van, sut, l_dab),
                     j2_mcx(Pit, ut, bake)(wir_r, van, sut, r_dab));
         }
@@ -142,6 +142,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, ut, bake)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, bake), SafeTier6, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ut, bake), SafeTier6_c, u2_none, u2_none },
     { }
   };

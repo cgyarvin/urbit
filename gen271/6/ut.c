@@ -139,9 +139,11 @@
   u2_noun                                                         //  transfer
   j2_mc(Pit, ut, repo)(u2_wire wir_r, 
                        u2_noun cor);                              //  retain
+  u2_noun                                                         //  transfer
+  j2_mc(Pit, ut, burn)(u2_wire wir_r, 
+                       u2_noun cor);                              //  retain
 
   extern u2_ho_jet j2_mcj(Pit, ut, bake)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, burn)[];
   extern u2_ho_jet j2_mcj(Pit, ut, cull)[];
   extern u2_ho_jet j2_mcj(Pit, ut, edit)[];
   extern u2_ho_jet j2_mcj(Pit, ut, emit)[];
@@ -168,7 +170,6 @@
   u2_ho_driver 
   j2_mbd(Pit, ut)[] = {
     { j2_sc(Pit, ut, bake), j2_mcj(Pit, ut, bake), 0, 0, u2_none },
-    { j2_sc(Pit, ut, burn), j2_mcj(Pit, ut, burn), 0, 0, u2_none },
     { j2_sc(Pit, ut, cull), j2_mcj(Pit, ut, cull), 0, 0, u2_none },
     { j2_sc(Pit, ut, edit), j2_mcj(Pit, ut, edit), 0, 0, u2_none },
     { j2_sc(Pit, ut, emit), j2_mcj(Pit, ut, emit), 0, 0, u2_none },
@@ -194,6 +195,7 @@
 
   u2_ho_jet 
   j2_mbj(Pit, ut)[] = {
+    { "burn", c3__hevy, j2_mc(Pit, ut, burn), SafeTier6_c, u2_none, u2_none },
     { "repo", c3__hevy, j2_mc(Pit, ut, repo), SafeTier6_c, u2_none, u2_none },
     { }
   };

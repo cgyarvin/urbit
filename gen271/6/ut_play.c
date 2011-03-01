@@ -126,7 +126,7 @@
         u2_bi_trel(wir_r, lar, &p_lar, &q_lar, &r_lar);
         {
           u2_noun wix = j2_mcy(Pit, ut, edit)
-              (wir_r, van, sut, p_lar, r_lar, q_gen);
+              (wir_r, van, sut, r_lar, q_gen);
 
           if ( u2_nul == q_lar ) {
             u2_rl_lose(wir_r, lar);

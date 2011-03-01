@@ -813,7 +813,7 @@ u2_ho_test(u2_ho_jet* jet_j,
       msg_c = "nice";
     }
 
-    if ( strcmp("noce", msg_c) ) {
+    if ( strcmp("nice", msg_c) ) {
       fprintf(stderr, "%s: %8x: %s\n", msg_c, mug_w, cos_c);
     }
     free(cos_c);

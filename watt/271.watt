@@ -1643,6 +1643,7 @@
         [%find !=(find)]
         [%fire !=(fire)]
         [%fish !=(fish)]
+        [%fuse !=(fuse)]
         [%gain !=(gain)]
         [%heal !=(heal)]
         [%mint !=(mint)]
@@ -1667,6 +1668,7 @@
   ::::
   ::
       bake
+    ^<  mine.[!=(->) %bake ~]
     =+  [dab=*(map term foot)]
     |=
     ^-  *<~ ^>
