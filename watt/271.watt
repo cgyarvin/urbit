@@ -2567,9 +2567,6 @@
     --
   ::::
   ::
-      read  ^<(mine.[!=(->) %read ~] =+(txt=*tape |=(^-(*gene [%read !!]))))
-  ::::
-  ::
       reco
     =+  fud==+(p=*type |=(p))
     |:

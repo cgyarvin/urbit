@@ -205,8 +205,8 @@ wide_c
       ;
 
     chit_tall
-      : chit_rack_tall f
-        { $$ = $1; }
+      : f w chit_rack_tall f
+        { $$ = $3; }
       | chit_wide
       ;
       chit_rack_tall
