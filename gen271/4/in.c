@@ -30,4 +30,4 @@
 
   u2_ho_driver
   j2_db(Pit, in) = 
-    { j2_sb(Pit, in), j2_mcj(Pit, in, tap), j2_mbd(Pit, in), 0, u2_none };
+    { j2_sb(Pit, in), j2_mbj(Pit, in), j2_mbd(Pit, in), 0, u2_none };

@@ -1320,7 +1320,7 @@
       ?~  q.gen
         [%zpzp ~]
       :^    %csdg
-          [%csbn (sift p.i.q.gen) p.gen]
+          [%csbn p.i.q.gen p.gen]
         [%bnld [%mtbn ~ [[p.gen [%ktpd p.i.q.gen p.gen]] ~]] q.i.q.gen]
       $(q.gen t.q.gen)
     ::
@@ -1329,12 +1329,13 @@
       ?~(p.gen [%dtsg 0] [%csdg i.p.gen $(p.gen t.p.gen) [%dtsg 1]])
     ::
         [%cstr *]
+      =+  hep=rake(gen p.gen)
       |-
       ?~  q.gen
         [%zpzp ~]
       :^    %csdg
-          [%csbn (sift i.q.gen) [%mtbn rake(gen p.gen) ~]]
-        (mold(gen i.q.gen) rake(gen p.gen))
+          [%csbn (sift i.q.gen) [%mtbn hep ~]]
+        (mold(gen i.q.gen) hep)
       $(q.gen t.q.gen)
     ::
         [%cssg *]   [%csdp p.gen [[[%dtsg 0] q.gen] [[%tmbn %cell] r.gen] ~]]
@@ -1418,6 +1419,7 @@
   ::
       rake
     ^-  *twig
+    ^>  bean.%rake
     ?-  gen
       @             [gen ~]
       [~ *]         [gen ~]
@@ -1435,17 +1437,15 @@
     ?-  gen
         [%dgdp *]   [%dgdp $(gen p.gen) $(gen q.gen)]
         [%dtsg *]   gen
-        [%ktbn *]   [%ktbn p.gen $(gen q.gen)]
+        [%ktbn *]   $(gen q.gen)
         [%ktpd *]   $(gen p.gen)
-        [%mttr *]   
+        [%mttr *]
       ?.  ?=([%brcs *] p.gen)
         [%tmbn %noun]
       gen(p.p (turn p.p.gen =+(*gene |=($$(gen -<)))))
     ::
         [%tmbn *]   gen
-        [%tmdp *]   $(gen p.gen)                            ::  XX delete
         [%zpcb *]   [%zpcb p.gen $(gen q.gen)]
-        [%zpdx *]   [%zpdx $(gen p.gen)]
         *
       =+  bog=~(open ap gen)
       ?:  .=(bog gen)
@@ -2280,10 +2280,10 @@
       ?:  .=(%wood p.q.sut)
         ?&(.=(%wood p.q.ref) .=(q.r.q.sut q.r.q.ref))
       ?&
-        ?|(.=(p.q.sut p.q.ref) .=(%lead p.q.ref))
+        ?|(.=(p.q.sut p.q.ref) .=(%gold p.q.ref))
         (cram(sut sut(p q.q.sut), ref ref(p q.q.ref)) q.r.q.sut q.r.q.ref)
         ?-    p.q.sut
-            %gold
+            %lead
           =+  sam=[s=(peek(sut q.q.sut) %nest 2) r=(peek(sut q.q.ref) %nest 2)]
           =+  con=[s=(peek(sut q.q.sut) %nest 3) r=(peek(sut q.q.ref) %nest 3)]
           ?&  dext(sut r.sam, ref s.sam)
@@ -2291,7 +2291,7 @@
               dext(sut r.con, ref s.con)
           --
         ::
-            %lead
+            %gold
           =+  pac=[s=q.q.sut r=q.q.ref]
           ?&  dext(sut s.pac, ref r.pac)
               dext(sut r.pac, ref s.pac)
@@ -2549,7 +2549,6 @@
       =+(gur=(cell $(gen p.gen) sut) (core gur %iron gur [0 0] q.gen))
     ::
         [%pmdt *]   (core sut %gold sut [[0 0] p.gen])
-    ::
         [%pmmt *]
       =+  gur=(cell $(gen p.gen) (cell $(gen q.gen) sut))
       (core gur %zinc gur [0 0] r.gen)
@@ -2629,7 +2628,7 @@
   ::
       snap
     ^<  mine.[!=(->) %snap ~]
-    =+  [ref=*type gen=*gene]
+    =+  gen=*gene
     |=
     ^>  bean.%snap
     ^-  *gene 
@@ -2670,7 +2669,7 @@
       =+  ^=  giv
           %=    $
               sut   vas
-              rix   ?~(t.peh (snap(sut vas) boz rix) rix)
+              rix   ?~(t.peh (snap(sut vas) rix) rix)
               axe   (peg axe p.i.peh)
               peh   t.peh
           --
@@ -2697,7 +2696,7 @@
       %-  heal
       :+  ~
         p.i.peh
-      $(sut vas, peh t.peh, rix ?~(t.peh (snap(sut vas) boz rix) rix))
+      $(sut vas, peh t.peh, rix ?~(t.peh (snap(sut vas) rix) rix))
     --
   ::
   ::::

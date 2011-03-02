@@ -67,7 +67,7 @@
         u2_noun rox;
 
         if ( u2_nul == t_peh ) {
-          rox = j2_mcy(Pit, ut, snap)(wir_r, van, vas, boz, rix);
+          rox = j2_mcy(Pit, ut, snap)(wir_r, van, vas, rix);
         } else rox = u2_rx(wir_r, rix);
         
         {
@@ -197,7 +197,7 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, ut, tuck)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, tuck), SafeTier6, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ut, tuck), SafeTier6_b, u2_none, u2_none },
     { }
   };
 

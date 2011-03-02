@@ -758,6 +758,11 @@ u2_ho_test(u2_ho_jet* jet_j,
         u2_err(0, "right", sof);
       }
       {
+        u2_err(0, "gene", u2_frag(u2_cv_sam, cor));
+        u2_err(0, "wrong", had);
+        u2_err(0, "right", sof);
+      }
+      {
         u2_noun sut, ref, van;
 
         if ( (u2_no == u2_mean(cor, u2_cv_sam, &ref, u2_cv_con, &van, 0)) ||
@@ -949,6 +954,37 @@ u2_ho_punt(u2_ray  wir_r,
           return sav;
         }
         else return sof;
+      }
+    }
+    case u2_jet_memo: {
+      u2_noun pro;
+
+      /* Check if we've saved the result.
+      */
+      if ( u2_none != (pro = u2_ba_find(wir_r, cor, fol)) ) {
+        return pro;
+      }
+
+      /* Compute `had`, the C version.  Automemo remains on internally.
+      */
+      {
+        jet_j->sat_s = u2_jet_live;
+        {
+          had = _ho_run(wir_r, jet_j, cor);
+        }
+        jet_j->sat_s = u2_jet_limp;
+      }
+
+      if ( u2_none == had ) {
+        return had;
+      } else {
+        u2_noun sav;
+
+        if ( u2_none != (sav = u2_ba_save(wir_r, cor, fol, had)) ) {
+          u2_rl_lose(wir_r, had);
+          return sav;
+        }
+        else return had;
       }
     }
   }

@@ -245,7 +245,7 @@
         (wir_r, 
          c3__csdg,
          u2_bt(wir_r, c3__csbn, 
-                      j2_mcy(Pit, ap, sift)(wir_r, piq_gen), 
+                      u2_rx(wir_r, piq_gen), 
                       u2_rx(wir_r, p_gen)),
          u2_bt
           (wir_r, c3__bnld,
@@ -972,10 +972,7 @@
         return u2_rx(wir_r, gen);
       }
       else if ( u2_yes == u2_as_pq(gen, c3__ktbn, &p_gen, &q_gen) ) {
-        return u2_bt
-          (wir_r, c3__ktbn, 
-                  u2_rx(wir_r, p_gen), 
-                  j2_mcy(Pit, ap, sift)(wir_r, q_gen));
+        return j2_mcy(Pit, ap, sift)(wir_r, q_gen);
       }
       else if ( u2_yes == u2_as_pq(gen, c3__ktpd, &p_gen, &q_gen) ) {
         return j2_mcy(Pit, ap, sift)(wir_r, p_gen);
@@ -1004,9 +1001,6 @@
       else if ( u2_yes == u2_as_p(gen, c3__tmbn, &p_gen) ) {
         return u2_rx(wir_r, gen);
       }
-      else if ( u2_yes == u2_as_p(gen, c3__tmdp, &p_gen) ) {    // XX delete
-        return j2_mcy(Pit, ap, sift)(wir_r, p_gen);
-      }
       else if ( u2_yes == u2_as_pq(gen, c3__zpcb, &p_gen, &q_gen) ) {
         return u2_bt
           (wir_r, c3__zpcb, u2_rx(wir_r, p_gen), 
@@ -1020,7 +1014,7 @@
         u2_noun bog = j2_mcy(Pit, ap, open)(wir_r, gen);
         u2_noun gad;
 
-        if ( !(u2_yes == u2_sing(gen, bog)) ) {
+        if ( u2_no == u2_sing(gen, bog) ) {
           gad =j2_mcy(Pit, ap, sift)(wir_r, bog);
         }
         else {
@@ -1048,12 +1042,12 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, ap, sift)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ap, sift), SafeTier6, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ap, sift), SafeTier6_a, u2_none, u2_none },
     { }
   };
   u2_ho_jet 
   j2_mcj(Pit, ap, mold)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ap, mold), SafeTier6, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ap, mold), SafeTier6_a, u2_none, u2_none },
     { }
   };
 
@@ -1066,8 +1060,8 @@
 
   u2_ho_jet 
   j2_mbj(Pit, ap)[] = {
-    { "open", c3__hevy, j2_mc(Pit, ap, open), SafeTier6, u2_none, u2_none },
-    { "rake", c3__hevy, j2_mc(Pit, ap, rake), SafeTier6, u2_none, u2_none },
+    { "open", c3__hevy, j2_mc(Pit, ap, open), SafeTier6_a, u2_none, u2_none },
+    { "rake", c3__hevy, j2_mc(Pit, ap, rake), SafeTier6_a, u2_none, u2_none },
     { }
   };
 

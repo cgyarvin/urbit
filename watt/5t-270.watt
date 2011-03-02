@@ -283,7 +283,7 @@
   |-
   ?~  a
     ~
-  [(b i.a) $(a t.a)]
+  [i=(b i.a) t=$(a t.a)]
 ::
 ++  unit
   |*  a=<*>
@@ -731,7 +731,7 @@
 ++  wall  (list tape)
 ++  to
   ~.  %to
-  &*  pup=*ball
+  &=  pup=*ball
   ++  fly
     ~.  %fly
     |=  bor=@
@@ -763,7 +763,7 @@
     ^-  *tape
     ?-    pup 
         @           (rip 3 pup)
-        [%meld *]   (reel p.pup |=([*ball *tape] (weld ram(pup -<-) -<+)))
+        [%meld *]   (reel p.pup =+([p=*ball q=*tape] |.((weld ram(pup p) q))))
         [%duct *]   p.pup 
         [%grip *]
       %+  weld
@@ -781,15 +781,14 @@
     ?-    pup
         @           (met 3 pup)
         [%duct *]   (lent p.pup)
-    ::
         [%grip *]
       %+  add
         (add (met 3 p.p.pup) (met 3 q.p.pup))
       %+  roll
         q.pup
-      |=([*ball @] (add ?:(.=(0 -<+) 0 1) (add -<+ wit(pup -<-))))
+      =+([p=*ball q=@] |.((add ?:(.=(0 q) 0 1) (add q wit(pup p)))))
     ::
-        [%meld *]   (roll p.pup |=([*ball @] (add -<+ wit(pup -<-))))
+        [%meld *]   (roll p.pup =+([p=*ball q=@] |.((add q wit(pup p)))))
     -- 
   ==
 ::
@@ -862,4 +861,7 @@
       dem
     ham
   ==
+::
+  ::  Tier 6, Watt in Watt
+::
 ==

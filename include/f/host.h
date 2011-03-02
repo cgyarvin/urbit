@@ -121,7 +121,11 @@
 
         /* On - no testing required.
         */
-        u2_jet_live
+        u2_jet_live,
+
+        /* Memo - live, but automatically memoize.
+        */
+        u2_jet_memo
       } u2_ho_state;
 
     /* u2_ho_jet: a C function, per formula.

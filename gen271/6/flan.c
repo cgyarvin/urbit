@@ -51,6 +51,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pit, flan)[] = {
-    { ".3", c3__hevy, j2_mb(Pit, flan), SafeTier6, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mb(Pit, flan), SafeTier6_a, u2_none, u2_none },
     { }
   };
