@@ -551,7 +551,7 @@
   }
   _open_do_p(sgdx)    //  ~#
   {
-    return u2_bc(wir_r, c3__ping, u2_rx(wir_r, p_gen));
+    return u2_bt(wir_r, c3__sgld, c3__ping, u2_rx(wir_r, p_gen));
   }
   _open_do_p(sgkt)    //  ~^
   {

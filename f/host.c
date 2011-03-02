@@ -750,15 +750,15 @@ u2_ho_test(u2_ho_jet* jet_j,
       msg_c = "fail";
       printf("cos_c: %s\n", cos_c);
 
+      {
+        u2_err(0, "gene", u2_frag(u2_cv_sam, cor));
+        u2_err(0, "wrong", had);
+        u2_err(0, "right", sof);
+      }
       //  For detailed debugging, activate/extend this junk as needed.
       //
 #if 0
       {
-        u2_err(0, "wrong", had);
-        u2_err(0, "right", sof);
-      }
-      {
-        u2_err(0, "gene", u2_frag(u2_cv_sam, cor));
         u2_err(0, "wrong", had);
         u2_err(0, "right", sof);
       }

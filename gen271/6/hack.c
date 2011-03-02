@@ -14,12 +14,11 @@
     u2_noun p_gen, q_gen;
     u2_noun ret;
 
-    if ( u2_yes == u2_dust(gen) ) {
-      u2_noun h_gen = u2_h(gen);
-
-      if ( (c3__zpcb == h_gen) || (c3__bnld == h_gen) ) {
-        if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
-          return u2_bl_bail(wir_r);
+    if ( u2_yes == u2_dust(gen) ) switch ( u2_h(gen) ) {
+      case c3__bnld: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
+      {
+        if ( (u2_no == u2_dust(p_gen)) || (u2_nul != u2_h(p_gen)) ) {
+          return u2_bc(wir_r, u2_no, u2_rx(wir_r, gen));
         }
         else {
           u2_noun pyr = j2_mby(Pit, hack)(wir_r, q_gen);
@@ -27,34 +26,55 @@
           if ( u2_yes == u2_h(pyr) ) {
             ret = u2_bt
               (wir_r, u2_yes,
-                      u2_bt(wir_r, h_gen, 
+                      u2_bt(wir_r, c3__bnld, 
                                    u2_rx(wir_r, p_gen), 
                                    u2_rx(wir_r, u2_h(u2_t(pyr)))),
-                      u2_bt(wir_r, h_gen, 
+                      u2_bt(wir_r, c3__bnld, 
                                    u2_rx(wir_r, p_gen), 
                                    u2_rx(wir_r, u2_t(u2_t(pyr)))));
           }
           else {
             ret = u2_bc
               (wir_r, u2_no,
-                      u2_bt(wir_r, h_gen, 
+                      u2_bt(wir_r, c3__bnld, 
                                    u2_rx(wir_r, p_gen), 
                                    u2_rx(wir_r, u2_t(pyr))));
           }
-          u2_rl_lose(wir_r, pyr);
+          u2_rz(wir_r, pyr);
           return ret;
         }
       }
-      else if ( c3__dgdp == u2_h(gen) ) {
-        if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
-          return u2_bl_bail(wir_r);
+      case c3__dgdp: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
+      {
+        return u2_bt(wir_r, u2_yes, 
+                            u2_rx(wir_r, p_gen),
+                            u2_rx(wir_r, q_gen));
+      }
+      case c3__zpcb: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
+      {
+        u2_noun pyr = j2_mby(Pit, hack)(wir_r, q_gen);
+
+        if ( u2_yes == u2_h(pyr) ) {
+          ret = u2_bt
+            (wir_r, u2_yes,
+                    u2_bt(wir_r, c3__zpcb, 
+                                 u2_rx(wir_r, p_gen), 
+                                 u2_rx(wir_r, u2_h(u2_t(pyr)))),
+                    u2_bt(wir_r, c3__zpcb, 
+                                 u2_rx(wir_r, p_gen), 
+                                 u2_rx(wir_r, u2_t(u2_t(pyr)))));
         }
         else {
-          return u2_bt(wir_r, u2_yes, 
-                              u2_rx(wir_r, p_gen),
-                              u2_rx(wir_r, q_gen));
+          ret = u2_bc
+            (wir_r, u2_no,
+                    u2_bt(wir_r, c3__zpcb, 
+                                 u2_rx(wir_r, p_gen), 
+                                 u2_rx(wir_r, u2_t(pyr))));
         }
-      }
+        u2_rz(wir_r, pyr);
+        return ret;
+      } 
+      default: break;
     }
 
     {

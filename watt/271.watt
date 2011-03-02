@@ -1542,24 +1542,24 @@
     ?.  ?=([~ *] p.gen)
       [| gen] 
     =+  pyr=$(gen q.gen)
-    ?-    -.pyr
-        |   [| [%bnld p.gen p.pyr]]
-        &   [& [%bnld p.gen p.pyr] [%bnld p.gen q.pyr]]
+    ?-    pyr
+        [| *]  [| [%bnld p.gen p.pyr]]
+        [& *]  [& [%bnld p.gen p.pyr] [%bnld p.gen q.pyr]]
     --
   ::
       [%dgdp *]   [& p.gen q.gen]
+      [%zpcb *] 
+    =+  pyr=$(gen q.gen)
+    ?-    pyr
+        [| *]  [| [%zpcb p.gen p.pyr]]
+        [& *]  [& [%zpcb p.gen p.pyr] [%zpcb p.gen q.pyr]]
+    --
+  ::
       *
     =+  voq=~(open ap gen)
     ?:  .=(gen voq)
       [| gen]
     $(gen voq)
-  ::
-      [%zpcb *] 
-    =+  pyr=$(gen q.gen)
-    ?-    -.pyr
-        |   [| [%zpcb p.gen p.pyr]]
-        &   [& [%zpcb p.gen p.pyr] [%zpcb p.gen q.pyr]]
-    --
   --
 ::::
 ::
