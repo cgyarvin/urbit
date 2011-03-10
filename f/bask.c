@@ -19,6 +19,7 @@ u2_ba_init(u2_ray wir_r,
 
     u2_bask_par_r(bas_r) = par_r;
     u2_ch_init(u2_bask_mem_r(bas_r));
+    u2_ch_init(u2_bask_cus_r(bas_r));
     u2_ch_init(u2_bask_sol_r(bas_r));
     u2_ch_init(u2_bask_hag_r(bas_r));
 
@@ -49,10 +50,7 @@ u2_ba_find(u2_ray  wir_r,
       c3_assert(u2_yes == u2_rl_senior(wir_r, sav));
       return sav;
     } else {
-      if ( 0 != (bas_r = u2_bask_par_r(bas_r)) ) {
-        return u2_ba_find(bas_r, bus, fol);
-      } 
-      else return u2_none;
+      return u2_none;
     }
   }
 }
@@ -82,6 +80,58 @@ u2_ba_save(u2_ray  wir_r,
     }
     else {
       return u2_ch_save_cell(bas_r, u2_bask_mem_r(bas_r), sub, lof, por);
+    }
+  }
+}
+
+/* u2_ba_find_cus():
+**
+**   Basket search for custom key.
+*/
+u2_weak                                                           //  senior
+u2_ba_find_cus(u2_ray  wir_r,
+               u2_noun key)                                       //  retain
+{
+  u2_ray bas_r;
+
+  if ( 0 == (bas_r = u2_wire_bas_r(wir_r)) ) {
+    return u2_none;
+  }
+  else {
+    u2_noun sav = u2_ch_find(u2_bask_cus_r(bas_r), key);
+
+    if ( u2_none != sav ) {
+      c3_assert(u2_yes == u2_rl_senior(wir_r, sav));
+      return sav;
+    } else {
+      return u2_none;
+    }
+  }
+}
+
+/* u2_ba_save_cus():
+**
+**   Basket save by custom key.
+*/
+u2_weak                                                           //  senior
+u2_ba_save_cus(u2_ray  wir_r,
+               u2_noun key,                                       //  retain
+               u2_noun pro)                                       //  retain
+{
+  u2_ray  bas_r;
+
+  if ( 0 == (bas_r = u2_wire_bas_r(wir_r)) ) {
+    return u2_none;
+  }
+  else {
+    u2_noun yek = u2_ba_uniq(wir_r, key);
+    u2_noun por = u2_ba_uniq(wir_r, pro);
+
+    if ( (u2_none == yek) || (u2_none == por) ) {
+      return u2_none;
+    }
+    else {
+      return u2_ch_save(bas_r, u2_bask_cus_r(bas_r), yek, por);
     }
   }
 }

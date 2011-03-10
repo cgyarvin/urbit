@@ -1,4 +1,0 @@
-:`  %dgtg   "degtig"
-
-  gene:
-    [%dgtg p=*(list gene)]

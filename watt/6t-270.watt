@@ -1023,7 +1023,7 @@
 ::
 ++  knot  <^+(@ *term) [~ p=*axis]>
 ++  port  <[p=*axis q=*(unit <[p=*axis q=*(list gene)]>) r=*type]>
-++  spot  <[p=[p=@ q=@] q=[p=@ q=@]]>
+++  spot  <[p=@ q=[p=[p=@ q=@] q=[p=@ q=@]]]>
 ++  twig  (list knot)
 ++  type
   |?  %atom

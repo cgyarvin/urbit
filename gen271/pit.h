@@ -12,9 +12,10 @@
 #   define  SafeTier2         u2_jet_live
 #   define  SafeTier3         u2_jet_live
 #   define  SafeTier4         u2_jet_live
-#   define  SafeTier5         u2_jet_live
-#   define  SafeTier6_a       u2_jet_limp
-#   define  SafeTier6_b       u2_jet_dead
+#   define  SafeTier5         (u2_jet_live | u2_jet_test)
+#   define  SafeTier6_a       u2_jet_live
+#   define  SafeTier6_b       u2_jet_live
+#   define  SafeTier6_b_memo  (SafeTier6_b | u2_jet_memo)
 
   /** Cosmetic noun types.
   **/

@@ -33,7 +33,16 @@
         }
       }
       case c3__noun: {
-        return j2_mcy(Pit, ut, nest)(wir_r, van, c3__void, ref);
+        if ( c3__noun == ref ) {
+          return u2_no;
+        }
+        else {
+          u2_type rep = j2_mcy(Pit, ut, repo)(wir_r, van, sut);
+          u2_flag ret = _orth_in(wir_r, van, rep, ref, bix);
+
+          u2_rz(wir_r, rep);
+          return ret;
+        }
       }
       case c3__void: {
         return u2_yes;
@@ -60,7 +69,7 @@
         if ( u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut) ) {
           goto fail;
         } else {
-          u2_noun faz = u2_bt(wir_r, c3__cell, p_sut, c3__noun);
+          u2_noun faz = u2_bt(wir_r, c3__cell, u2_rx(wir_r, p_sut), c3__noun);
           u2_flag ret = _orth_in(wir_r, van, faz, ref, bix);
 
           u2_rl_lose(wir_r, faz);
@@ -84,8 +93,8 @@
               } else {
                 u2_noun goz = u2_bt
                   (wir_r, c3__cell,
-                          u2_bc(wir_r, c3__cube, u2_h(p_sut)),
-                          u2_bc(wir_r, c3__cube, u2_t(p_sut)));
+                          u2_bc(wir_r, c3__cube, u2_rx(wir_r, u2_h(p_sut))),
+                          u2_bc(wir_r, c3__cube, u2_rx(wir_r, u2_t(p_sut))));
                 u2_flag ret = _orth_in(wir_r, van, goz, ref, bix);
 
                 u2_rl_lose(wir_r, goz);
@@ -209,7 +218,7 @@
       u2_noun cor, fol, xip, pro;
 
       cor = j2_mci(Pit, ut, orth)(wir_r, van, sut, ref);
-      fol = u2_bt(wir_r, _2, u2_bc(wir_r, _0, _1), u2_bc(wir_r, _0, _3));
+      fol = u2_t(cor);
       xip = j2_mcj(Pit, ut, orth)[0].xip;
 
       pro = u2_ho_punt(wir_r, xip, cor, fol);

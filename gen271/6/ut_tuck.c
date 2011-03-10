@@ -180,7 +180,7 @@
       u2_noun cor, fol, xip, pro;
 
       cor = j2_mci(Pit, ut, tuck)(wir_r, van, sut, hep, boz, rix);
-      fol = u2_bt(wir_r, _2, u2_bc(wir_r, _0, _1), u2_bc(wir_r, _0, _3));
+      fol = u2_t(cor);
       xip = j2_mcj(Pit, ut, tuck)[0].xip;
 
       pro = u2_ho_punt(wir_r, xip, cor, fol);
@@ -200,4 +200,3 @@
     { ".3", c3__hevy, j2_mc(Pit, ut, tuck), SafeTier6_b, u2_none, u2_none },
     { }
   };
-

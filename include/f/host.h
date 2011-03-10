@@ -11,6 +11,7 @@
 #     define _j2_xmc(x)       j2_##x##_mc
 #     define _j2_xmy(x)       j2_##x##_my
 #     define _j2_xmx(x)       j2_##x##_mx
+#     define _j2_xmk(x)       j2_##x##_mk
 #     define _j2_xmi(x)       j2_##x##_mi
 #     define _j2_xmj(x)       j2_##x##_jets
 #     define _j2_xmd(x)       j2_##x##_drivers
@@ -25,6 +26,7 @@
 #     define _j2_qmy(x)       _j2_xmy(x)
 #     define _j2_qmx(x)       _j2_xmx(x)
 #     define _j2_qmi(x)       _j2_xmi(x)
+#     define _j2_qmk(x)       _j2_xmk(x)
 #     define _j2_qmd(x)       _j2_xmd(x)
 #     define _j2_qmj(x)       _j2_xmj(x)
 #     define _j2_qp(p, x)     _j2_xp(p, x)
@@ -78,6 +80,12 @@
 #     define j2_mdi(a, b, c, d)         _j2_qmi(_j2_abcd(a, b, c, d))
 #     define j2_mei(a, b, c, d, e)      _j2_qmi(_j2_abcde(a, b, c, d, e))
 
+#     define j2_mak(a)                  _j2_qmk(_j2_a(a))
+#     define j2_mbk(a, b)               _j2_qmk(_j2_ab(a, b))
+#     define j2_mck(a, b, c)            _j2_qmk(_j2_abc(a, b, c))
+#     define j2_mdk(a, b, c, d)         _j2_qmk(_j2_abcd(a, b, c, d))
+#     define j2_mek(a, b, c, d, e)      _j2_qmk(_j2_abcde(a, b, c, d, e))
+
 #     define j2_maj(a)                  _j2_qmj(_j2_a(a))
 #     define j2_mbj(a, b)               _j2_qmj(_j2_ab(a, b))
 #     define j2_mcj(a, b, c)            _j2_qmj(_j2_abc(a, b, c))
@@ -108,25 +116,13 @@
     */
       typedef u2_noun (*u2_ho_fun)(u2_ray wir_r, u2_noun cor);
 
-    /* u2_ho_state: jet state
+    /* u2_ho_state: jet state flags
     */
-      typedef enum {
-        /* Off - use soft code exclusively.
-        */
-        u2_jet_dead,
+    typedef c3_w u2_ho_state;
 
-        /* Testing - run both and compare.
-        */
-        u2_jet_limp,
-
-        /* On - no testing required.
-        */
-        u2_jet_live,
-
-        /* Memo - live, but automatically memoize.
-        */
-        u2_jet_memo
-      } u2_ho_state;
+#       define u2_jet_live    0x1   // live: C jet active
+#       define u2_jet_test    0x2   // test: C jet must be tested
+#       define u2_jet_memo    0x4   // memo: memoize, even if jet is dead
 
     /* u2_ho_jet: a C function, per formula.
     */
@@ -159,6 +155,10 @@
         /* Tool: Nock formula.
         */
         u2_tool fol;
+
+        /* Custom key from core.
+        */
+        u2_noun (*key_f)(u2_ray wir_r, u2_noun cor);
       } u2_ho_jet;
 
     /* u2_ho_driver: battery driver.
@@ -253,10 +253,11 @@
     **   Report result of jet test on `cor`.  `pro` is fast; `vet` is slow.
     */
       void
-      u2_ho_test(u2_ho_jet* jet_j,
-                 u2_weak    cor,                                    //  retain
-                 u2_weak    sof,                                    //  retain
-                 u2_weak    had);                                   //  retain
+      u2_ho_test(u2_wire    wir_r,
+                 u2_ho_jet* jet_j,
+                 u2_weak    cor,                                   //  retain
+                 u2_weak    sof,                                   //  retain
+                 u2_weak    had);                                  //  retain
 
     /* u2_ho_dive():
     **
@@ -275,6 +276,16 @@
       u2_ho_fine(u2_wire wir_r,
                  u2_noun xip,       //  retain
                  u2_noun bus);      //  retain
+
+    /* u2_ho_use():
+    **
+    **   Run a jet.
+    */
+      u2_weak                                                     //  transfer
+      u2_ho_use(u2_ray     wir_r,
+                u2_ho_jet* jet_j,
+                u2_noun    cor,                                   //  retain
+                u2_noun    fol);                                  //  retain
 
     /* u2_ho_punt():
     **

@@ -2219,7 +2219,7 @@
         =+  dez=(bake(sut toc, vet |) q.gen)
         ::  :-  (nice toc(p.r.q dez))
         :-  (nice (core p.dan [%wood p.dan [dez q.gen]]))
-        (comb q.dan [[0 1] [1 dez]])
+        (cons q.dan [1 dez])
       ::
           [%sgld *]                                                   ::  ~>
         =+  hum=$(gen q.gen)
@@ -2236,7 +2236,7 @@
         [1 q:$(gen p.gen)]
       ::
           [%zpcb *]                                                   ::  !_
-        ^>  bean.[%spot |=((~(fly to ~(loc go p.gen)) 75))]
+        ::  ^>  bean.[%spot |=((~(fly to ~(loc go p.gen)) 75))]
         $(gen q.gen)
       ::
           [%zpdx *]                                                   ::  !#
@@ -2435,7 +2435,7 @@
         $(bix (~(put in bix) [ref sut]), sut repo)
       --
     ::
-        %noun       (nest(sut %void) ref)
+        %noun       ?-(ref %noun |, * $(sut repo))
         %void       &
     --
   ::::

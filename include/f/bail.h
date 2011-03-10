@@ -293,10 +293,10 @@
           **
           **   Nock or bail.
           */
-            u2_noun
+            u2_noun                                                 //  transfer
             u2_bn_nock(u2_wire wir_r, 
-                       u2_noun bus, 
-                       u2_noun fol);
+                       u2_noun bus,                                 //  retain
+                       u2_noun fol);                                //  retain
 
           /* u2_bn_mp():
           **

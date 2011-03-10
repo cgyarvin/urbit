@@ -21,7 +21,7 @@
     */
       typedef u2_noun u2_clue;
 
-    /* u2_disc: declaration layer (list should be book)
+    /* u2_disc: declaration layer (list should be map)
     **
     **  [sil=*seal nut=*(list &[p=*term q=*tool])]
     */

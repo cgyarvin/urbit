@@ -35,6 +35,10 @@
         */
         u2_loom_chad mem_c;
 
+        /* cus: chad: memoize by custom key
+        */
+        u2_loom_chad cus_c;
+
         /* sol: chad: hash of singleton values.
         */
         u2_loom_chad sol_c;
@@ -50,6 +54,7 @@
 
 #       define u2_bask_par_r(bas_r)  *u2_at(bas_r, u2_loom_bask, par_r)
 #       define u2_bask_mem_r(bas_r)  u2_aftr(bas_r, u2_loom_bask, mem_c)
+#       define u2_bask_cus_r(bas_r)  u2_aftr(bas_r, u2_loom_bask, cus_c)
 #       define u2_bask_sol_r(bas_r)  u2_aftr(bas_r, u2_loom_bask, sol_c)
 #       define u2_bask_hag_r(bas_r)  u2_aftr(bas_r, u2_loom_bask, hag_c)
 
@@ -85,6 +90,23 @@
                  u2_noun bus,                                     //  retain
                  u2_noun fol,                                     //  retain
                  u2_noun pro);                                    //  retain
+
+    /* u2_ba_find_cus():
+    **
+    **   Basket search for custom key.
+    */
+      u2_weak                                                     //  senior
+      u2_ba_find_cus(u2_ray  wir_r,
+                     u2_noun key);                                //  retain
+
+    /* u2_ba_save_cus():
+    **
+    **   Basket save by custom key.
+    */
+      u2_weak                                                       //  senior
+      u2_ba_save_cus(u2_ray  wir_r,
+                     u2_noun key,                                   //  retain
+                     u2_noun pro);                                  //  retain
 
     /* u2_ba_find_plow():
     **

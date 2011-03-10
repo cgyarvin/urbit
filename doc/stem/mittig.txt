@@ -1,4 +1,0 @@
-%~  %mttg   "mittig"
-
-  gene:
-    [%mttg p=*twig q=*gene r=*gene]

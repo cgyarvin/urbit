@@ -1,7 +1,7 @@
-|~  %brtg   "bartig"
+|~  %brsg   "barsig"
 
   gene:
-    [%brtg p=*gene q=*(list gene)]
+    [%brsg p=*gene q=*(list gene)]
 
   ap open:
     |-

@@ -61,8 +61,7 @@
   ^-  ?
   !(lth a b)
 ::
-++
-    gth
+++  gth
   ~.  %gth
   |=  [a=@ b=@]
   ^-  ?
@@ -861,7 +860,4 @@
       dem
     ham
   ==
-::
-  ::  Tier 6, Watt in Watt
-::
 ==

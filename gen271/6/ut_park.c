@@ -136,7 +136,7 @@
       u2_noun cor, fol, xip, pro;
 
       cor = j2_mci(Pit, ut, park)(wir_r, van, sut, way, axe);
-      fol = u2_bt(wir_r, _2, u2_bc(wir_r, _0, _1), u2_bc(wir_r, _0, _3));
+      fol = u2_t(cor);
       xip = j2_mcj(Pit, ut, park)[0].xip;
 
       pro = u2_ho_punt(wir_r, xip, cor, fol);

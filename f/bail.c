@@ -532,7 +532,14 @@ u2_bn_hook(u2_wire     wir_r,
   if ( u2_none == vib ) {
     return u2_bl_bail(wir_r);
   } else {
-    return u2_bn_nock(wir_r, cor, vib);
+    if ( u2_nul == u2_h(vib) ) {
+      u2_noun rag = u2_frag(u2_t(vib), cor);
+
+      return u2_rx(wir_r, rag);
+    }
+    else {
+      return u2_bn_nock(wir_r, cor, vib);
+    }
   }
 }
 

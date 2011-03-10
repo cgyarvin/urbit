@@ -653,11 +653,11 @@ _ho_discover(u2_wire wir_r,
 
         jet_j->xip = dry_d->xip;
         jet_j->fol = fol;
-        jet_j->sat_s = u2_jet_dead;
+        jet_j->sat_s = 0;
         jet_j->fun_f = 0;
-
+        jet_j->fcs_c = 0;
 #if 0
-        fprintf(stderr, "formula: dummy : %s, %x\n", dry_d->cos_c, u2_mug(fol));
+        fprintf(stderr, "jet: dummy : %s, %x\n", dry_d->cos_c, u2_mug(fol));
 #endif
         _ho_cash_save(&u2_HostHangar->jac_s, fol, jet_j);
         return jet_j;
@@ -725,7 +725,8 @@ u2_ho_fire(u2_ray   wir_r,
 **   Report result of jet test.  `had` is native; `sof` is nock.
 */
 void
-u2_ho_test(u2_ho_jet* jet_j,
+u2_ho_test(u2_wire    wir_r, 
+           u2_ho_jet* jet_j,
            u2_noun    cor,                                         //  retain
            u2_noun    sof,                                         //  retain
            u2_noun    had)                                         //  retain
@@ -743,24 +744,19 @@ u2_ho_test(u2_ho_jet* jet_j,
     if ( u2_none == had ) {
       msg_c = "bail";
       printf("cos_c: %s\n", cos_c);
-      u2_err(0, "right", sof);
+      u2_err(wir_r, "right", sof);
     } else if ( u2_none == sof ) {
       msg_c = "funk";
     } else if ( u2_no == u2_sing(had, sof) ) {
       msg_c = "fail";
       printf("cos_c: %s\n", cos_c);
 
-      {
-        u2_err(0, "gene", u2_frag(u2_cv_sam, cor));
-        u2_err(0, "wrong", had);
-        u2_err(0, "right", sof);
-      }
-      //  For detailed debugging, activate/extend this junk as needed.
+      //  For detailed debugging, activate/extend this junkheap as needed.
       //
 #if 0
       {
-        u2_err(0, "wrong", had);
-        u2_err(0, "right", sof);
+        u2_err(wir_r, "wrong", had);
+        u2_err(wir_r, "right", sof);
       }
       {
         u2_noun sut, ref, van;
@@ -770,11 +766,11 @@ u2_ho_test(u2_ho_jet* jet_j,
         {
           c3_assert(0);
         } else {
-          j2_mcy(watt_271, ut, dupt)(0, van, "sut", sut);
-          j2_mcy(watt_271, ut, dupt)(0, van, "ref", ref);
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "sut", sut);
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "ref", ref);
 
-          j2_mcy(watt_271, ut, dupt)(0, van, "sof", sof);
-          j2_mcy(watt_271, ut, dupt)(0, van, "had", had);
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "sof", sof);
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "had", had);
         }
       }
       {
@@ -785,8 +781,8 @@ u2_ho_test(u2_ho_jet* jet_j,
         {
           c3_assert(0);
         } else {
-          j2_mcy(watt_271, ut, dupt)(0, van, "sut", sut);
-          j2_mcy(watt_271, ut, dupt)(0, van, "ref", ref);
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "sut", sut);
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "ref", ref);
         }
       }
       {
@@ -800,15 +796,36 @@ u2_ho_test(u2_ho_jet* jet_j,
         {
           c3_assert(0);
         } else {
-          j2_mcy(watt_271, ut, dupt)(0, van, "sut", sut);
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "sut", sut);
           u2_err(wir_r, "way", way);
           u2_err(wir_r, "hep", hep);
 
           u2_err(wir_r, "p_sof", u2_h(sof));
           u2_err(wir_r, "p_had", u2_h(had));
 
-          j2_mcy(watt_271, ut, dupt)(0, van, "r_sof", u2_t(u2_t(sof)));
-          j2_mcy(watt_271, ut, dupt)(0, van, "r_had", u2_t(u2_t(had)));
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "r_sof", u2_t(u2_t(sof)));
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "r_had", u2_t(u2_t(had)));
+        }
+      }
+      {
+        u2_noun sut, gol, gen, van;
+
+        if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &gol, 
+                                    u2_cv_sam_3, &gen,
+                                    u2_cv_con, &van, 0)) ||
+             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
+        {
+          c3_assert(0);
+        } else {
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "sut", sut);
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "gol", gol);
+          u2_err(wir_r, "gen", gen);
+
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_sof", u2_h(sof));
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_had", u2_h(had));
+
+          u2_err(wir_r, "t_sof", u2_t(sof));
+          u2_err(wir_r, "t_had", u2_t(had));
         }
       }
 #endif
@@ -869,6 +886,89 @@ _ho_run(u2_ray      wir_r,
   }
 }
 
+/* u2_ho_use():
+**
+**   Run a jet.
+*/
+u2_weak                                                           //  transfer
+u2_ho_use(u2_ray     wir_r,
+          u2_ho_jet* jet_j,
+          u2_noun    cor,                                         //  retain
+          u2_noun    fol)                                         //  retain
+{
+  u2_noun key=0, pro;
+
+  if ( jet_j->sat_s & u2_jet_memo ) {
+    if ( jet_j->key_f ) {
+      if ( u2_none == (key = jet_j->key_f(wir_r, cor)) ) {
+        return u2_none;
+      }
+      if ( u2_none != (pro = u2_ba_find_cus(wir_r, key)) ) {
+        u2_rz(wir_r, key);
+        return pro;
+      }
+    } else {
+      if ( u2_none != (pro = u2_ba_find(wir_r, cor, fol)) ) {
+        return pro;
+      }
+    }
+  }
+
+  if ( !(jet_j->sat_s & u2_jet_live) ) {
+    pro = u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
+  }
+  else {
+    pro = _ho_run(wir_r, jet_j, cor);
+
+    if ( jet_j->sat_s & u2_jet_test ) {
+      u2_noun sof;
+      
+      jet_j->sat_s &= ~u2_jet_live;
+      {
+        sof = u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
+      }
+      jet_j->sat_s |= u2_jet_live;
+
+      u2_ho_test(wir_r, jet_j, cor, sof, pro);
+      u2_rz(wir_r, pro);
+
+      pro = sof;
+    }
+    else {
+      if ( u2_none == pro ) {
+        jet_j->sat_s &= ~u2_jet_live;
+        {
+          pro = u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
+        }
+        jet_j->sat_s |= u2_jet_live;
+
+        u2_ho_test(wir_r, jet_j, cor, pro, u2_none);
+      }
+    }
+  }
+
+  if ( !(jet_j->sat_s & u2_jet_memo) ) {
+    return pro;
+  }
+  else {
+    u2_noun sav;
+
+    if ( jet_j->key_f ) {
+      sav = u2_ba_save_cus(wir_r, key, pro);
+      u2_rz(wir_r, key);
+    }
+    else {
+      sav = u2_ba_save(wir_r, cor, fol, pro);
+    }
+
+    if ( u2_none != sav ) {
+      u2_rz(wir_r, pro);
+      return sav;
+    }
+    else return pro;
+  }
+}
+
 /* u2_ho_punt():
 **
 **   Apply host nock driver on `xip`, `cor`, `fol`.
@@ -880,113 +980,9 @@ u2_ho_punt(u2_ray  wir_r,
            u2_noun fol)                                           //  retain
 {
   u2_ho_jet* jet_j;
-  u2_weak had, sof;
 
   if ( 0 == (jet_j = _ho_discover(wir_r, xip, fol, cor)) ) {
     return u2_none;
   }
-  else if ( 0 == jet_j->fun_f ) {
-    soft: {
-      return u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
-    }
-  }
-  else switch ( jet_j->sat_s ) {
-    default: c3_assert(0); return u2_none;
-
-    case u2_jet_live: {
-      had = _ho_run(wir_r, jet_j, cor);
-
-      if ( u2_none != had ) {
-        return had;
-      } else {
-        jet_j->sat_s = u2_jet_dead;
-        {
-          sof = u2_nk_nock(wir_r, u2_rx(wir_r, cor), fol);
-        }
-        jet_j->sat_s = u2_jet_live;
-
-        u2_ho_test(jet_j, cor, sof, u2_none);
-        return sof;
-      }
-    }
-    case u2_jet_dead: {
-      goto soft;
-    }
-    case u2_jet_limp: {
-      u2_noun pro;
-
-      /* Check if we've saved the result.
-      */
-      if ( u2_none != (pro = u2_ba_find(wir_r, cor, fol)) ) {
-        return pro;
-      }
-
-      /* Compute `had`, the C version.  Jet is full-on recursively.
-      */
-      {
-        jet_j->sat_s = u2_jet_live;
-        {
-          had = _ho_run(wir_r, jet_j, cor);
-        }
-        jet_j->sat_s = u2_jet_limp;
-      }
-
-      /* Compute `sof`, the Nock version.  Jet is full-off recursively.
-      */
-      {
-        jet_j->sat_s = u2_jet_dead;
-        {
-          sof = u2_nk_nock(wir_r, u2_rx(wir_r, cor), fol);
-        }
-        jet_j->sat_s = u2_jet_limp;
-      }
-
-      u2_ho_test(jet_j, cor, sof, had);
-      if ( u2_none == sof ) {
-        return had;
-      } else {
-        u2_noun sav;
-
-        u2_rl_lose(wir_r, had);
-
-        if ( u2_none != (sav = u2_ba_save(wir_r, cor, fol, sof)) ) {
-          u2_rl_lose(wir_r, sof);
-          return sav;
-        }
-        else return sof;
-      }
-    }
-    case u2_jet_memo: {
-      u2_noun pro;
-
-      /* Check if we've saved the result.
-      */
-      if ( u2_none != (pro = u2_ba_find(wir_r, cor, fol)) ) {
-        return pro;
-      }
-
-      /* Compute `had`, the C version.  Automemo remains on internally.
-      */
-      {
-        jet_j->sat_s = u2_jet_live;
-        {
-          had = _ho_run(wir_r, jet_j, cor);
-        }
-        jet_j->sat_s = u2_jet_limp;
-      }
-
-      if ( u2_none == had ) {
-        return had;
-      } else {
-        u2_noun sav;
-
-        if ( u2_none != (sav = u2_ba_save(wir_r, cor, fol, had)) ) {
-          u2_rl_lose(wir_r, had);
-          return sav;
-        }
-        else return had;
-      }
-    }
-  }
+  else return u2_ho_use(wir_r, jet_j, cor, fol);
 }
-

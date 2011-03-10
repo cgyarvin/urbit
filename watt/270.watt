@@ -1405,7 +1405,35 @@
 ++  ut
   ~%    %ut
       ->+
-    ()
+    --
+      %fan    fan
+      %rib    rib
+      %vet    vet
+      %bake   bake
+      %burn   burn
+      %cull   cull
+      %dump   dump
+      %edit   edit
+      %emit   emit
+      %find   find
+      %fire   fire
+      %fish   fish
+      %fuse   fuse
+      %gain   gain
+      %heal   heal
+      %mint   mint
+      %nest   nest
+      %orth   orth
+      %play   play
+      %park   park
+      %peek   peek
+      %repo   repo
+      %rest   rest
+      %seek   seek
+      %snap   snap
+      %tuck   tuck
+      %tusk   tusk
+    --
   =+  :*  fan=*(set <[*type *(list gene)]>)
           rib=*(set <[*type *type *gene]>)
           vet=`?`&
