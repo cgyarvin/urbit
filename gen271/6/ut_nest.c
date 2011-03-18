@@ -539,9 +539,7 @@
     {
       return u2_none;
     } else {
-      return u2_rt(wir_r, (0x7fffffff & (c3_w)jet_j),
-                          u2_rx(wir_r, sut), 
-                          u2_rx(wir_r, ref));
+      return u2_rc(wir_r, u2_rx(wir_r, sut), u2_rx(wir_r, ref));
     }
   }
 
@@ -553,7 +551,7 @@
         j2_mc(Pit, ut, nest), 
         SafeTier6_b_memo,
         u2_none, u2_none,
-        j2_mck(Pit, ut, nest)
+        0 // j2_mck(Pit, ut, nest)
     },
     { }
   };

@@ -33,7 +33,7 @@ u2_wr_init(c3_m   hip_m,
     c3_w   tip_w = (c3_wiseof(u2_loom_bask) - c3_wiseof(u2_loom_rail));
     u2_ray bas_r;
 
-    bas_r = u2_rl_leap_part(wir_r, c3__cold, 1, 4, tip_w);
+    bas_r = u2_rl_leap_part(wir_r, c3__sand, 1, 4, tip_w);
     u2_wire_bas_r(wir_r) = bas_r;
     u2_ba_init(wir_r, 0);
   }

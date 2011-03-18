@@ -713,8 +713,8 @@ vere_boot(c3_w siz_w)
     v->z = u3_z_new(siz_w);
 
     u2_boot(siz_w);
-    // v->wir_r = u2_wr_boot(c3__cold);
-    v->wir_r = u2_wr_init(c3__cold, u2_ray_of(0, 0), u2_ray_of(1, 0));
+    // v->wir_r = u2_wr_boot(c3__sand);
+    v->wir_r = u2_wr_init(c3__sand, u2_ray_of(0, 0), u2_ray_of(1, 0));
 
     _vere_kernel(v, "watt/295.watt", "watt/295.nock");
   }
@@ -1192,7 +1192,7 @@ vere_line2(void* vere, const c3_c* lin_c)
       */
       {
         u2_bx_boot(v->wir_r);
-        u2_rl_leap(v->wir_r, c3__cold);
+        u2_rl_leap(v->wir_r, c3__sand);
         {
           u2_noun fun = _vere_32(v, fel);
           u2_noun par = _vere_32(v, gux);
@@ -1200,7 +1200,6 @@ vere_line2(void* vere, const c3_c* lin_c)
           u2_noun bus = u2_rc(v->wir_r,
                               u2_rc(v->wir_r, par, u2_t(u2_h(fun))),
                               fol);
-
 #if 1
           /* Test equivalent compilation process.
           */
@@ -1226,8 +1225,8 @@ vere_line2(void* vere, const c3_c* lin_c)
             }
           }
 #endif
-          // u2_rl_leap(v->wir_r, c3__cold);
-          u2_rl_leap(v->wir_r, c3__warm);
+          // u2_rl_leap(v->wir_r, c3__sand);
+          u2_rl_leap(v->wir_r, c3__rock);
           {
             u2_noun pro = u2_wr_nock_main(v->wir_r, bus, fol);
             u3_fox  por = _vere_23(v, pro);

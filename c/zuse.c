@@ -56,10 +56,10 @@
       zuse_done(struct zuse_state* fod_f);
     
 
-/* _zuse_save_warm(): save engine as noun.
+/* _zuse_save_rock(): save engine as noun.
 */
 static void
-_zuse_save_warm(struct zuse_state* fod_f,
+_zuse_save_rock(struct zuse_state* fod_f,
                 const c3_c*        src_c)
 {
   u2_wire wir_r = fod_f->wir_r;
@@ -83,10 +83,10 @@ _zuse_gates(struct zuse_state* fod_f)
 #endif
 }
 
-/* _zuse_load_warm(): load engine from warm image.
+/* _zuse_load_rock(): load engine from rock image.
 */
 static void
-_zuse_load_warm(struct zuse_state* fod_f,
+_zuse_load_rock(struct zuse_state* fod_f,
                 const c3_c*        src_c) 
 {
   u2_wire wir_r = fod_f->wir_r;
@@ -134,7 +134,7 @@ _zuse_load_cold(struct zuse_state* fod_f,
     fod_f->pyt = pyt;
     fod_f->pit = pit;
 
-    _zuse_save_warm(fod_f, src_c);
+    _zuse_save_rock(fod_f, src_c);
   }
 }
 
@@ -147,7 +147,7 @@ zuse_boot(const c3_c* src_c)
   u2_ray wir_r;
 
   u2_boot();
-  wir_r = u2_wr_init(c3__warm, u2_ray_of(0, 0), u2_ray_of(1, 0));
+  wir_r = u2_wr_init(c3__rock, u2_ray_of(0, 0), u2_ray_of(1, 0));
   fod_f->wir_r = wir_r;
 
   {
@@ -165,7 +165,7 @@ zuse_boot(const c3_c* src_c)
       u2_bx_boot(wir_r);
 
       if ( u2_yes == u2_ux_fresh(src_c, "watt", "noun") ) {
-        _zuse_load_warm(fod_f, src_c);
+        _zuse_load_rock(fod_f, src_c);
       } else {
         _zuse_load_cold(fod_f, src_c);
       }
@@ -412,7 +412,7 @@ zuse_line(struct zuse_state* fod_f,
 
   LoomStop = 0;
   u2_bx_boot(wir_r);
-  u2_rl_leap(wir_r, c3__warm);
+  u2_rl_leap(wir_r, c3__rock);
   {
     u2_ray jub_r = u2_bl_open(wir_r);
 

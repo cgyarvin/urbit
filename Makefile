@@ -48,6 +48,7 @@ F_OFILES=\
        f/loom.o \
        f/wire.o \
        f/chad.o \
+       f/cash.o \
        f/host.o \
        f/benx.o \
        f/bail.o \

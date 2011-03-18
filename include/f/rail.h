@@ -23,9 +23,9 @@
           u2_ray hat_r;   // top of new durable region
           u2_ray mat_r;   // bottom of transient region
           u2_ray rut_r;   // bottom of new durable region
-          c3_m   hip_m;   // memory model in durable; c3__warm, c3__cold
+          c3_m   hip_m;   // memory model in durable; c3__rock, c3__sand
 
-          /* Ray to allocation counter, for warm rails only.
+          /* Ray to allocation counter, for rock rails only.
           */
           u2_ray bav_r;
         } u2_loom_rail;
@@ -48,7 +48,7 @@
 #         define u2_pork_rit_r(pik_r)  *u2_at(pik_r, u2_loom_pork, rit_r)
 #         define u2_pork_hap_m(pik_r)  *u2_at(pik_r, u2_loom_pork, hap_m)
 
-      /* Floe - a solid rail allocator.  Implied by `hip_m == c3__cold`.
+      /* Floe - a solid rail allocator.  Implied by `hip_m == c3__sand`.
       */
         typedef struct {
         } u2_loom_floe;
@@ -56,9 +56,11 @@
       /* Soup - a liquid rail allocator.
       */
         typedef struct {
-          u2_ray fre_r;   // single, doubly-linked free list
+          u2_ray         fre_r;     // single, doubly-linked free list
+          u2_cash_slot_a lot_s;     // modern memo cache
         } u2_loom_soup;
 #         define u2_soup_fre_r(sop_r)  *u2_at(sop_r, u2_loom_soup, fre_r)
+#         define u2_soup_lot_r(sop_r)  u2_aftr(sop_r, u2_loom_soup, lot_s)
 
       /* A noun box, for liquid hats.  Behind pointer, addressed fwd.
       **
@@ -187,7 +189,7 @@
         */
           void
           u2_rl_ok(u2_ray  ral_r,
-                   u2_noun som);
+                   u2_noun som);                                  //  retain
           
         /* u2_rl_junior():
         **
@@ -203,8 +205,8 @@
         **   Reverse the beams forward, with memory model `hip`.
         **   Memory models at present:
         **
-        **    c3__cold    solid, no boxes or reference counts
-        **    c3__warm    liquid, boxes, reference-counted heap
+        **    c3__sand    solid, no boxes or reference counts
+        **    c3__rock    liquid, boxes, reference-counted heap
         **
         **   Returns u2_yes on success.
         */
@@ -297,7 +299,7 @@
         */
           u2_flag
           u2_rl_senior(u2_ray  ral_r,
-                       u2_noun dus);      //  retain
+                       u2_noun dus);                              //  retain
 
         /* u2_rl_slab():
         **
@@ -495,7 +497,87 @@
         **
         **   Copy [a] words from [b] into an atom.
         */
-          u2_weak                         //  transfer
+          u2_weak                                                 //  transfer
           u2_rl_words(u2_ray      ral_r,
                       c3_w        a_w,
                       const c3_w* b_w);
+
+      /** Caching.
+      **/
+        /* u2_rl_find():
+        **
+        **   Cache search for function (0 means nock) and sample.
+        */
+          u2_weak                                                 //  transfer
+          u2_rl_find(u2_ray  ral_r,
+                     u2_mote fun_m,
+                     u2_noun sam);                                //  retain
+
+        /* u2_rl_save():
+        **
+        **   Cache store for function (0 means nock), sample and product.
+        */
+          u2_weak                                                 //  transfer
+          u2_rl_save(u2_ray  ral_r,
+                     u2_mote fun_m,                               //  retain
+                     u2_noun sam,                                 //  retain
+                     u2_noun pro);                                //  transfer
+
+        /* u2_rl_find_cell(): as u2_rl_find(), for `sam=[a b]`.
+        ** u2_rl_find_trel(): as u2_rl_find(), for `sam=[a b c]`.
+        ** u2_rl_find_qual(): as u2_rl_find(), for `sam=[a b d]`.
+        ** u2_rl_find_quil(): as u2_rl_find(), for `sam=[a b c d e]`.
+        **
+        ** Extend as needed...
+        */
+          u2_weak                                                 //  transfer
+          u2_rl_find_cell(u2_ray, u2_mote, u2_noun,               //  retain 
+                                           u2_noun);              //  retain
+          u2_weak                                                 //  transfer
+          u2_rl_find_trel(u2_ray, u2_mote, u2_noun,               //  retain 
+                                           u2_noun,               //  retain
+                                           u2_noun);              //  retain
+          u2_weak                                                 //  transfer
+          u2_rl_find_qual(u2_ray, u2_mote, u2_noun,               //  retain 
+                                           u2_noun,               //  retain
+                                           u2_noun,               //  retain
+                                           u2_noun);              //  retain
+          u2_weak                                                 //  transfer
+          u2_rl_find_quil(u2_ray, u2_mote, u2_noun,               //  retain 
+                                           u2_noun,               //  retain
+                                           u2_noun,               //  retain
+                                           u2_noun,               //  retain
+                                           u2_noun);              //  retain
+
+        /* u2_rl_save_cell(): as u2_rl_save(), for `sam=[a b]`.
+        ** u2_rl_save_trel(): as u2_rl_save(), for `sam=[a b c]`.
+        ** u2_rl_save_qual(): as u2_rl_save(), for `sam=[a b c d]`.
+        ** u2_rl_save_quil(): as u2_rl_save(), for `sam=[a b c d e]`.
+        **
+        ** Extended
+        */
+          u2_weak                                                 //  transfer
+          u2_rl_save_cell(u2_ray, u2_mote, u2_noun,               //  retain 
+                                           u2_noun,               //  retain
+                                           u2_noun);              //  transfer
+
+          u2_weak                                                 //  transfer
+          u2_rl_save_trel(u2_ray, u2_mote, u2_noun,               //  retain 
+                                           u2_noun,               //  retain
+                                           u2_noun,               //  retain
+                                           u2_noun);              //  transfer
+
+          u2_weak                                                 //  transfer
+          u2_rl_save_qual(u2_ray, u2_mote, u2_noun,               //  retain 
+                                           u2_noun,               //  retain
+                                           u2_noun,               //  retain
+                                           u2_noun,               //  retain
+                                           u2_noun);              //  transfer
+
+          u2_weak                                                 //  transfer
+          u2_rl_save_quil(u2_ray, u2_mote, u2_noun,               //  retain 
+                                           u2_noun,               //  retain
+                                           u2_noun,               //  retain
+                                           u2_noun,               //  retain
+                                           u2_noun,               //  retain
+                                           u2_noun);              //  transfer

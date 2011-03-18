@@ -357,9 +357,9 @@
 
     /* u2_mote:
     **
-    **   An ASCII string of 2-4 characters.
+    **   An atom < (1 << 31).
     */
-      typedef u2_noun u2_mote;
+      typedef u2_atom u2_mote;
 
     /* u2_term:
     **
@@ -461,11 +461,20 @@
 
         /* u2_mug_cell():
         **
-        **   Compute the mug of the cell [a b].
+        **   Compute the mug of `[a b]`.
         */
           c3_w
           u2_mug_cell(u2_noun a,
                       u2_noun b);
+
+        /* u2_mug_trel():
+        **
+        **   Compute the mug of `[a b c]`.
+        */
+          c3_w
+          u2_mug_trel(u2_noun a,
+                      u2_noun b,
+                      u2_noun c);
 
         /* u2_mug_both():
         **

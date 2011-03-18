@@ -574,7 +574,7 @@ u2_err(u2_ray      wir_r,
        const c3_c* cl_caption,
        u2_weak     noun)
 {
-  u2_rl_leap(wir_r, c3__warm);
+  u2_rl_leap(wir_r, c3__rock);
   {
     if ( u2_none == noun ) {
       printf("%s: <none>\n", cl_caption);
@@ -601,7 +601,7 @@ u2_burp(u2_ray      wir_r,
         const c3_c* cl_caption,
         u2_prep     prep)
 {
-  u2_rl_leap(wir_r, c3__warm);
+  u2_rl_leap(wir_r, c3__rock);
   {
     u2_dump dump = u2_fj_pump_dump(wir_r, (75), prep);
 

@@ -11,11 +11,14 @@
 static void
 _rl_feed(u2_ray ral_r)
 {
-  if ( c3__warm == u2_rail_hip_m(ral_r) ) {
+  if ( c3__rock == u2_rail_hip_m(ral_r) ) {
     u2_ray sop_r = u2_rail_rut_r(ral_r);
+    u2_ray lot_r = u2_soup_lot_r(sop_r);
 
     u2_rail_hat_r(ral_r) += c3_wiseof(u2_loom_soup);
     u2_soup_fre_r(sop_r) = 0;
+
+    u2_cs_init(lot_r);
   }
 }
 
@@ -73,7 +76,7 @@ u2_flag
 u2_rl_leap(u2_ray ral_r,
            c3_m   hop_m)
 {
-  if ( hop_m == c3__warm ) {
+  if ( hop_m == c3__rock ) {
     if ( u2_no == u2_rl_open(ral_r, c3_wiseof(u2_loom_soup)) ) {
       return u2_no;
     }
@@ -242,7 +245,7 @@ u2_rl_leap_part(u2_ray ral_r,
       u2_rail_hat_r(aux_r) = hat_r;
       u2_rail_mat_r(aux_r) = mat_r;
       u2_rail_cap_r(aux_r) = (aux_r + c3_wiseof(u2_loom_rail));
-      u2_rail_hip_m(aux_r) = c3__warm;
+      u2_rail_hip_m(aux_r) = c3__rock;
 
       _rl_feed(aux_r);
     }
@@ -343,7 +346,7 @@ u2_rl_fall_part(u2_ray ral_r,
   **   (1) gain all aux storage referenced from main hat
   **   (2) release all aux storage
   **   (3) copy main hat noun to aux store
-  **   (4) merge aux store with deep rut, if warm; compact
+  **   (4) merge aux store with deep rut, if rock; compact
   */
 }
 
@@ -353,7 +356,7 @@ u2_rl_fall_part(u2_ray ral_r,
 void
 u2_rl_valid(u2_ray ral_r)
 {
-  if ( c3__warm == u2_rail_hip_m(ral_r) ) {
+  if ( c3__rock == u2_rail_hip_m(ral_r) ) {
     u2_ray sop_r = u2_rail_rut_r(ral_r);
     u2_ray fre_r = u2_soup_fre_r(sop_r);
 
@@ -477,8 +480,8 @@ static u2_ray
 _rl_bloq_grab(u2_ray ral_r,
               c3_w   len_w)
 {
-  if ( c3__cold == u2_rail_hip_m(ral_r) ) {
-    /* Cold allocation - without a box.
+  if ( c3__sand == u2_rail_hip_m(ral_r) ) {
+    /* Sand allocation - no box, no overhead.
     */
     if ( u2_no == u2_rl_open(ral_r, len_w) ) {
       u2_ho_warn_here();
@@ -492,7 +495,7 @@ _rl_bloq_grab(u2_ray ral_r,
       return box_r;
     }
   }
-  else if ( c3__warm == u2_rail_hip_m(ral_r) ) {
+  else if ( c3__rock == u2_rail_hip_m(ral_r) ) {
     c3_w   siz_w = (len_w + c3_wiseof(u2_loom_rail_box) + 1);
     u2_ray sop_r = u2_rail_rut_r(ral_r);
     u2_ray pfr_r = u2_aftr(sop_r, u2_loom_soup, fre_r);
@@ -594,7 +597,7 @@ _rl_bloq_free(u2_ray ral_r,
   u2_ray beg_r = (rut_r + c3_wiseof(u2_loom_soup));
   u2_ray hat_r = u2_rail_hat_r(ral_r);
 
-  c3_assert(u2_rail_hip_m(ral_r) == c3__warm);
+  c3_assert(u2_rail_hip_m(ral_r) == c3__rock);
   c3_assert(u2_rail_hut_use(box_r) == 0);
   c3_assert(u2_ray_a(box_r) == u2_ray_a(rut_r));
   c3_assert(box_r >= rut_r);
@@ -658,7 +661,7 @@ void
 u2_rl_rfree(u2_ray ral_r,
             u2_ray nov_r)
 {
-  if ( c3__warm == u2_rail_hip_m(ral_r) ) {
+  if ( c3__rock == u2_rail_hip_m(ral_r) ) {
     u2_ray box_r = (nov_r - c3_wiseof(u2_loom_rail_box));
 
     c3_assert(u2_rail_box_use(box_r) == 1);
@@ -698,7 +701,9 @@ u2_noun
 u2_rl_gain(u2_ray  ral_r,
            u2_noun som)
 {
-  c3_assert(u2_none != som);
+  if ( u2_none == som ) {
+    return u2_none;
+  }
 
   if ( u2_fly_is_dog(som) ) {
     u2_ray som_r = u2_dog_a(som);
@@ -707,7 +712,7 @@ u2_rl_gain(u2_ray  ral_r,
     if ( u2_ray_a(som_r) == u2_ray_a(hat_r) ) {
       c3_m   hip_m = u2_rail_hip_m(ral_r);
 
-      if ( c3__warm == hip_m ) {
+      if ( c3__rock == hip_m ) {
         u2_ray rut_r = u2_rail_rut_r(ral_r);
         
         if ( som_r > rut_r ) {
@@ -755,7 +760,7 @@ u2_rl_ok(u2_ray  ral_r,
     if ( u2_ray_a(som_r) == u2_ray_a(hat_r) ) {
       c3_m hip_m = u2_rail_hip_m(ral_r);
 
-      if ( c3__warm == hip_m ) {
+      if ( c3__rock == hip_m ) {
         u2_ray rut_r = u2_rail_rut_r(ral_r);
         
         if ( som_r >= rut_r ) {
@@ -794,7 +799,7 @@ u2_rl_lose(u2_ray  ral_r,
     if ( u2_ray_a(som_r) == u2_ray_a(hat_r) ) {
       c3_m hip_m = u2_rail_hip_m(ral_r);
 
-      if ( c3__warm == hip_m ) {
+      if ( c3__rock == hip_m ) {
         u2_ray rut_r = u2_rail_rut_r(ral_r);
         
         if ( som_r >= rut_r ) {
@@ -852,7 +857,7 @@ u2_rl_senior(u2_ray  ral_r,
       u2_ray rut_r = u2_rail_rut_r(ral_r);
       c3_m   hip_m = u2_rail_hip_m(ral_r);
 
-      if ( (c3__warm == hip_m) && (som_r > rut_r) ) {
+      if ( (c3__rock == hip_m) && (som_r > rut_r) ) {
         return u2_no;
       }
     }
@@ -1839,12 +1844,12 @@ u2_rl_mp(u2_ray ral_r,
   */
   {
     c3_w pyg_w  = mpz_size(a_mp);
-    c3_w *bav_w = alloca(pyg_w * 4);
+    c3_w *buz_w = alloca(pyg_w * 4);
 
-    mpz_export(bav_w, 0, -1, 4, 0, 0, a_mp);
+    mpz_export(buz_w, 0, -1, 4, 0, 0, a_mp);
     mpz_clear(a_mp);
 
-    return u2_rl_words(ral_r, pyg_w, bav_w);
+    return u2_rl_words(ral_r, pyg_w, buz_w);
   }
 }
 
@@ -2016,6 +2021,107 @@ u2_rl_words(u2_ray      ral_r,
         }
       }
       return nov;
+    }
+  }
+}
+
+/* u2_rl_find():
+**
+**   Cache search for function (0 means nock) and sample.
+*/
+u2_weak                                                           //  transfer
+u2_rl_find(u2_ray  ral_r,
+           u2_mote fun_m,
+           u2_noun sam)                                           //  retain
+{ 
+  if ( c3__rock != u2_rail_hip_m(ral_r) ) {
+    return u2_none;
+  } else {
+    u2_ray  sop_r = u2_rail_rut_r(ral_r);
+    u2_ray  lot_r = u2_soup_lot_r(sop_r);
+    c3_w    key_w = (u2_mug(fun_m) ^ u2_mug(sam));
+    u2_noun pro   = u2_cs_find(lot_r, key_w, 0, fun_m, sam);
+
+    return u2_rx(ral_r, pro);
+  }
+}
+
+/* u2_rl_find_cell():
+**
+**   As `u2_rl_find()`, for `[a b]`.
+*/
+u2_weak                                                           //  transfer
+u2_rl_find_cell(u2_ray  ral_r,
+                u2_mote fun_m,
+                u2_noun a,                                        //  retain
+                u2_noun b)                                        //  retain
+{
+  if ( c3__rock != u2_rail_hip_m(ral_r) ) {
+    return u2_none;
+  } else {
+    u2_noun sam = u2_rc(ral_r, u2_rx(ral_r, a), u2_rx(ral_r, b));
+
+    if ( u2_none == sam ) {
+      return u2_none;
+    } else {
+      u2_ray  sop_r = u2_rail_rut_r(ral_r);
+      u2_ray  lot_r = u2_soup_lot_r(sop_r);
+      c3_w    key_w = (u2_mug(fun_m) ^ u2_mug(sam));
+      u2_noun pro = u2_cs_find(lot_r, key_w, 0, fun_m, sam);
+
+      u2_rz(ral_r, sam);
+      return u2_rx(ral_r, pro);
+    }
+  }
+}
+
+/* u2_rl_save():
+**
+**   Cache store for function (0 means nock), sample and product.
+*/
+u2_weak                                                           //  transfer
+u2_rl_save(u2_ray  ral_r,
+           u2_mote fun_m,
+           u2_noun sam,                                           //  retain
+           u2_noun pro)                                           //  transfer
+{
+  if ( c3__rock != u2_rail_hip_m(ral_r) ) {
+    return pro;
+  } else {
+    u2_ray sop_r = u2_rail_rut_r(ral_r);
+    u2_ray lot_r = u2_soup_lot_r(sop_r);
+    c3_w   key_w = (u2_mug(fun_m) ^ u2_mug(sam));
+
+    return u2_cs_save(ral_r, lot_r, key_w, 0, fun_m, sam, pro);
+  }
+}
+
+/* u2_rl_save_cell():
+**
+**   As `u2_rl_save()`, for `[a b]`.
+*/
+u2_weak                                                           //  transfer
+u2_rl_save_cell(u2_ray  ral_r,
+                u2_mote fun_m,
+                u2_noun a,                                        //  retain
+                u2_noun b,
+                u2_noun pro)                                      //  transfer
+{
+  if ( c3__rock != u2_rail_hip_m(ral_r) ) {
+    return pro;
+  } else {
+    u2_noun sam = u2_rc(ral_r, u2_rx(ral_r, a), u2_rx(ral_r, b));
+
+    if ( u2_none == sam ) {
+      return pro;
+    } else {
+      u2_ray  sop_r = u2_rail_rut_r(ral_r);
+      u2_ray  lot_r = u2_soup_lot_r(sop_r);
+      c3_w    key_w = (u2_mug(fun_m) ^ u2_mug(sam));
+      u2_noun sav = u2_cs_save(ral_r, lot_r, key_w, 0, fun_m, sam, pro);
+
+      u2_rz(ral_r, sam);
+      return sav;
     }
   }
 }

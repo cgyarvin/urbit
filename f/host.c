@@ -860,7 +860,7 @@ _ho_run(u2_ray      wir_r,
     case c3__hevy: {
       u2_ray cap_r = u2_rail_cap_r(wir_r);
 
-      if ( u2_no == u2_rl_leap(wir_r, c3__warm) ) {
+      if ( u2_no == u2_rl_leap(wir_r, c3__rock) ) {
         return u2_none;
       }
       else {
@@ -896,20 +896,25 @@ u2_ho_use(u2_ray     wir_r,
           u2_noun    cor,                                         //  retain
           u2_noun    fol)                                         //  retain
 {
-  u2_noun key=0, pro;
+  u2_noun key=u2_none, pro;
+  c3_m    fun_m = 0;
 
   if ( jet_j->sat_s & u2_jet_memo ) {
     if ( jet_j->key_f ) {
       if ( u2_none == (key = jet_j->key_f(wir_r, cor)) ) {
         return u2_none;
       }
-      if ( u2_none != (pro = u2_ba_find_cus(wir_r, key)) ) {
-        u2_rz(wir_r, key);
-        return pro;
+      else {
+        fun_m = (0x7fffffff & (c3_w)jet_j);
+
+        if ( u2_none != (pro = u2_rl_find(wir_r, fun_m, key)) ) {
+          u2_rz(wir_r, key);
+          return pro;
+        }
       }
     } else {
-      if ( u2_none != (pro = u2_ba_find(wir_r, cor, fol)) ) {
-        return pro;
+      if ( u2_none != (pro = u2_rl_find_cell(wir_r, 0, cor, fol)) ) {
+        return u2_rx(wir_r, pro);
       }
     }
   }
@@ -951,21 +956,15 @@ u2_ho_use(u2_ray     wir_r,
     return pro;
   }
   else {
-    u2_noun sav;
-
     if ( jet_j->key_f ) {
-      sav = u2_ba_save_cus(wir_r, key, pro);
+      pro = u2_rl_save(wir_r, fun_m, key, pro);
       u2_rz(wir_r, key);
+
+      return pro;
     }
     else {
-      sav = u2_ba_save(wir_r, cor, fol, pro);
+      return u2_rl_save_cell(wir_r, 0, cor, fol, pro);
     }
-
-    if ( u2_none != sav ) {
-      u2_rz(wir_r, pro);
-      return sav;
-    }
-    else return pro;
   }
 }
 
