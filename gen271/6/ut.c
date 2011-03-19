@@ -150,6 +150,7 @@
   extern u2_ho_jet j2_mcj(Pit, ut, find)[];
   extern u2_ho_jet j2_mcj(Pit, ut, fire)[];
   extern u2_ho_jet j2_mcj(Pit, ut, fish)[];
+  extern u2_ho_jet j2_mcj(Pit, ut, fret)[];
   extern u2_ho_jet j2_mcj(Pit, ut, fuse)[];
   extern u2_ho_jet j2_mcj(Pit, ut, gain)[];
   extern u2_ho_jet j2_mcj(Pit, ut, heal)[];
@@ -176,6 +177,7 @@
     { j2_sc(Pit, ut, find), j2_mcj(Pit, ut, find), 0, 0, u2_none },
     { j2_sc(Pit, ut, fire), j2_mcj(Pit, ut, fire), 0, 0, u2_none },
     { j2_sc(Pit, ut, fish), j2_mcj(Pit, ut, fish), 0, 0, u2_none },
+    { j2_sc(Pit, ut, fret), j2_mcj(Pit, ut, fret), 0, 0, u2_none },
     { j2_sc(Pit, ut, fuse), j2_mcj(Pit, ut, fuse), 0, 0, u2_none },
     { j2_sc(Pit, ut, gain), j2_mcj(Pit, ut, gain), 0, 0, u2_none },
     { j2_sc(Pit, ut, heal), j2_mcj(Pit, ut, heal), 0, 0, u2_none },

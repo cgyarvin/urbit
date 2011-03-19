@@ -14,6 +14,7 @@
 #   define  SafeTier4         u2_jet_live
 #   define  SafeTier5         (u2_jet_live | u2_jet_test)
 #   define  SafeTier6_a       u2_jet_live
+#   define  SafeTier6_a_memo  (SafeTier6_a | u2_jet_memo)
 #   define  SafeTier6_b       u2_jet_live
 #   define  SafeTier6_b_memo  (SafeTier6_b | u2_jet_memo)
 
@@ -419,6 +420,13 @@
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
                             u2_atom axe);                         //  retain
+
+      u2_noun                                                     //  transfer
+      j2_mcy(Pit, ut, fret)(u2_wire wir_r,
+                            u2_noun van,                          //  retain
+                            u2_noun sut,                          //  retain
+                            u2_noun gol,                          //  retain
+                            u2_noun gen);                         //  retain
 
       u2_noun                                                     //  transfer
       j2_mcy(Pit, ut, fuse)(u2_wire wir_r,

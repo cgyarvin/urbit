@@ -19,40 +19,9 @@
     } else {
       u2_noun i_hag = u2_h(hag);
       u2_noun t_hag = u2_t(hag);
-      u2_noun gen = i_hag;
-      {
-        u2_noun rib = u2_bn_hook(wir_r, van, "rib");
-        u2_noun key = u2_bt(wir_r, u2_rx(wir_r, sut),
-                                   u2_rx(wir_r, dox),
-                                   u2_rx(wir_r, gen));
-        u2_noun ret;
-        
-        if ( u2_yes == j2_mcc(Pit, in, has)(wir_r, rib, key) ) {
-          ret = _fire_levy(wir_r, van, sut, dox, t_hag);
-        }
-        else {
-          u2_noun rob = j2_mcc(Pit, in, put)(wir_r, rib, key);
-          u2_noun von = u2_bn_cook(wir_r, van, "rib", rob);
-          u2_noun vin = u2_bn_cook(wir_r, von, "vet", u2_no);
-          u2_noun dis = j2_mcy(Pit, ut, mint)(wir_r, von, sut, c3__noun, gen);
-          u2_noun dat = j2_mcy(Pit, ut, mint)(wir_r, vin, dox, c3__noun, gen);
 
-          if ( u2_no == u2_sing(u2_t(dis), u2_t(dat)) ) {
-            ret = u2_no;
-          }
-          else ret = _fire_levy(wir_r, van, sut, dox, t_hag);
-
-          u2_rz(wir_r, von);
-          u2_rz(wir_r, vin);
-          u2_rz(wir_r, dis);
-          u2_rz(wir_r, dat);
-        }
-
-        u2_rz(wir_r, rib);
-        u2_rz(wir_r, key);
-
-        return ret;
-      }
+      return u2_and(j2_mcy(Pit, ut, fret)(wir_r, van, sut, dox, i_hag),
+                    _fire_levy(wir_r, van, sut, dox, t_hag));
     }
   }
 

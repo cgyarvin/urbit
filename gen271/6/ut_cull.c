@@ -206,8 +206,23 @@
   {
     u2_ho_jet *jet_j = &j2_mcj(Pit, ut, cull)[0];
 
-    if ( jet_j->sat_s == u2_jet_live ) {
-      return j2_mcx(Pit, ut, cull)(wir_r, van, sut, axe, ref);
+    if ( (jet_j->sat_s & u2_jet_live) && !(jet_j->sat_s & u2_jet_test) ) {
+      if ( !(jet_j->sat_s & u2_jet_memo) ) {
+        return j2_mcx(Pit, ut, cull)(wir_r, van, sut, axe, ref);
+      }
+      else {
+        c3_m    fun_m = (0x7fffffff & (c3_w)jet_j);
+        u2_noun pro   = u2_rl_find_trel(wir_r, fun_m, sut, axe, ref);
+
+        if ( u2_none != pro ) {
+          return pro;
+        }
+        else {
+          pro = j2_mcx(Pit, ut, cull)(wir_r, van, sut, axe, ref);
+
+          return u2_rl_save_trel(wir_r, fun_m, sut, axe, ref, pro);
+        }
+      }
     }
     else {
       u2_noun cor, fol, xip, pro;
@@ -226,10 +241,34 @@
     }
   }
 
+  u2_weak
+  j2_mck(Pit, ut, cull)(u2_wire wir_r,
+                        u2_noun cor)
+  {
+    u2_noun sut, axe, ref, van;
+
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &axe, 
+                                u2_cv_sam_3, &ref,
+                                u2_cv_con, &van, 
+                                0)) ||
+         (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
+    {
+      return u2_none;
+    } else {
+      return u2_rt
+        (wir_r, u2_rx(wir_r, sut), u2_rx(wir_r, axe), u2_rx(wir_r, ref));
+    }
+  }
+
 /* structures
 */
   u2_ho_jet 
   j2_mcj(Pit, ut, cull)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, cull), SafeTier6_b, u2_none, u2_none },
+    { ".3", c3__hevy, 
+        j2_mc(Pit, ut, cull), 
+        SafeTier6_b_memo,
+        u2_none, u2_none,
+        j2_mck(Pit, ut, cull)
+    },
     { }
   };

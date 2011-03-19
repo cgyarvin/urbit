@@ -101,8 +101,8 @@
     **/
 #     define u2_rc(ral_r, a, b)           u2_rl_cell(ral_r, a, b)
 #     define u2_rt(ral_r, a, b, c)        u2_rl_trel(ral_r, a, b, c)
-#     define u2_rq(ral_r, a, b, c, d)     u2_rl_qual(ral_r, a, b, c)
-#     define u2_ri(ral_r, a, b, c, d, e)  u2_rl_quil(ral_r, a, b, c, e)
+#     define u2_rq(ral_r, a, b, c, d)     u2_rl_qual(ral_r, a, b, c, d)
+#     define u2_ri(ral_r, a, b, c, d, e)  u2_rl_quil(ral_r, a, b, c, d, e)
 #     define u2_ro(ral_r, a)              u2_rl_lone(ral_r, a)
 #     define u2_ru(ral_r, a)              u2_rl_unit(ral_r, a)
 #     define u2_rx(ral_r, a)              u2_rl_take(ral_r, a)

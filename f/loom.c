@@ -408,6 +408,33 @@ u2_mug_cell(u2_noun hed,
   return u2_mug_both(lus_w, biq_w);
 }
 
+/* u2_mug_trel():
+**
+**   Compute the mug of `[a b c]`.
+*/
+c3_w
+u2_mug_trel(u2_noun a,
+            u2_noun b,
+            u2_noun c)
+{
+  return u2_mug_both(u2_mug(a), u2_mug_both(u2_mug(b), u2_mug(c)));
+}
+
+/* u2_mug_qual():
+**
+**   Compute the mug of `[a b c d]`.
+*/
+c3_w
+u2_mug_qual(u2_noun a,
+            u2_noun b,
+            u2_noun c,
+            u2_noun d)
+{
+  return u2_mug_both(u2_mug(a), 
+                     u2_mug_both(u2_mug(b), 
+                                 u2_mug_both(u2_mug(c), u2_mug(d))));
+}
+
 /* u2_sing():
 **
 **   Yes iff (a) and (b) are the same noun.
@@ -479,6 +506,51 @@ u2_sing(u2_noun a,
       }
     }
   }
+}
+
+/* u2_sing_cell():
+**
+**   Yes iff `[p q]` and `b` are the same noun.
+*/
+u2_flag
+u2_sing_cell(u2_noun p,
+             u2_noun q,
+             u2_noun b)
+{
+  return u2_and(u2_dust(b),
+                u2_and(u2_sing(p, u2_h(b)), 
+                       u2_sing(q, u2_t(b))));
+}
+
+/* u2_sing_trel():
+**
+**   Yes iff `[p q r]` and `b` are the same noun.
+*/
+u2_flag
+u2_sing_trel(u2_noun p,
+             u2_noun q,
+             u2_noun r,
+             u2_noun b)
+{
+  return u2_and(u2_dust(b),
+                u2_and(u2_sing(p, u2_h(b)), 
+                       u2_sing_cell(q, r, u2_t(b))));
+}
+
+/* u2_sing_qual():
+**
+**   Yes iff `[p q r]` and `b` are the same noun.
+*/
+u2_flag
+u2_sing_qual(u2_noun p,
+             u2_noun q,
+             u2_noun r,
+             u2_noun s,
+             u2_noun b)
+{
+  return u2_and(u2_dust(b),
+                u2_and(u2_sing(p, u2_h(b)), 
+                       u2_sing_trel(q, r, s, u2_t(b))));
 }
 
 /* u2_nord():

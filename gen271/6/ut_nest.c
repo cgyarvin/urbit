@@ -14,6 +14,9 @@
     static u2_flag
     _nest_dext(u2_wire, u2_noun, u2_noun, u2_noun, u2_noun);
 
+    u2_ho_jet 
+    j2_mcj(Pit, ut, nest)[];
+
   static u2_flag
   _nest_cram(u2_wire wir_r,
              u2_noun van,
@@ -192,17 +195,13 @@
   }
 
   static u2_flag
-  _nest_dext(u2_wire wir_r,
-             u2_noun van,
-             u2_noun sut,
-             u2_noun ref,
-             u2_noun gil)
+  _nest_dext_in(u2_wire wir_r,
+                u2_noun van,
+                u2_noun sut,
+                u2_noun ref,
+                u2_noun gil)
   {
     u2_noun p_sut, q_sut, p_ref, q_ref;
-
-    if ( (u2_yes == u2_sing(sut, ref)) ) {
-      return u2_yes;
-    }
 
     if ( (u2_no == u2_dust(sut)) ) switch ( sut ) {
       default: return u2_bl_bail(wir_r);
@@ -314,6 +313,39 @@
       }
     }
   }
+
+  static u2_flag
+  _nest_dext(u2_wire wir_r,
+             u2_noun van,
+             u2_noun sut,
+             u2_noun ref,
+             u2_noun gil)
+  {
+    if ( (u2_yes == u2_sing(sut, ref)) ) {
+      return u2_yes;
+    }
+
+    {
+      u2_ho_jet *jet_j = &j2_mcj(Pit, ut, nest)[0];
+
+      if ( !(jet_j->sat_s & u2_jet_memo) ) {
+        return _nest_dext_in(wir_r, van, sut, ref, gil);
+      } else {
+        c3_m    fun_m = (0x7fffffff & (c3_w)jet_j);
+        u2_noun pro   = u2_rl_find_cell(wir_r, fun_m, sut, ref);
+
+        if ( u2_none != pro ) {
+          return pro;
+        }
+        else {
+          pro = _nest_dext_in(wir_r, van, sut, ref, gil);
+
+          return u2_rl_save_cell(wir_r, fun_m, sut, ref, pro);
+        }
+      }
+    }
+  }
+
   static u2_flag
   _nest_sint(u2_wire wir_r,
              u2_noun van,
@@ -418,9 +450,6 @@
 
 /* boilerplate
 */
-  u2_ho_jet 
-  j2_mcj(Pit, ut, nest)[];
-
   u2_noun                                                         //  transfer
   j2_mc(Pit, ut, nest)(u2_wire wir_r, 
                        u2_noun cor)                               //  retain
@@ -472,43 +501,7 @@
     u2_ho_jet *jet_j = &j2_mcj(Pit, ut, nest)[0];
 
     if ( (jet_j->sat_s & u2_jet_live) && !(jet_j->sat_s & u2_jet_test) ) {
-      if ( !(jet_j->sat_s & u2_jet_memo) ) {
-#if 0
-        if ( c3__void == sut ) {
-          u2_bx_used(wir_r);
-
-          j2_mcy(Pit, ut, dupt)(wir_r, van, "nest: sut", sut);
-          j2_mcy(Pit, ut, dupt)(wir_r, van, "nest: ref", ref);
-          printf("\n");
-          c3_assert(0);
-        }
-#endif
-        return j2_mcx(Pit, ut, nest)(wir_r, van, sut, ref);
-      }
-      else {
-        u2_noun key = u2_rt(wir_r, (0x7fffffff & (c3_w)jet_j),
-                                   u2_rx(wir_r, sut), 
-                                   u2_rx(wir_r, ref));
-        u2_noun pro;
-
-        if ( u2_none != (pro = u2_ba_find_cus(wir_r, key)) ) {
-          u2_rz(wir_r, key);
-          return pro;
-        } else {
-          u2_noun sav;
-
-          pro = j2_mcx(Pit, ut, nest)(wir_r, van, sut, ref);
-          sav = u2_ba_save_cus(wir_r, key, pro);
-          u2_bx_used(wir_r);
-          u2_rz(wir_r, key);
-
-          if ( u2_none != sav ) {
-            u2_rz(wir_r, pro);
-            return sav;
-          }
-          else return pro;
-        } 
-      }
+      return j2_mcx(Pit, ut, nest)(wir_r, van, sut, ref);
     }
     else {
       u2_noun cor, fol, xip, pro;
@@ -531,7 +524,6 @@
   j2_mck(Pit, ut, nest)(u2_wire wir_r,
                         u2_noun cor)
   {
-    u2_ho_jet *jet_j = &j2_mcj(Pit, ut, nest)[0];
     u2_noun sut, ref, van;
 
     if ( (u2_no == u2_mean(cor, u2_cv_sam, &ref, u2_cv_con, &van, 0)) ||
@@ -551,7 +543,7 @@
         j2_mc(Pit, ut, nest), 
         SafeTier6_b_memo,
         u2_none, u2_none,
-        0 // j2_mck(Pit, ut, nest)
+        j2_mck(Pit, ut, nest)
     },
     { }
   };

@@ -393,9 +393,9 @@
           **
           **   Execute hook from core.
           */ 
-            u2_noun
+            u2_noun                                               //  transfer
             u2_bn_hook(u2_wire     wir_r,
-                       u2_noun     cor,
+                       u2_noun     cor,                           //  retain
                        const c3_c* tam_c);
 
           /* u2_bn_cook():

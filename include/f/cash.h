@@ -37,8 +37,8 @@
     ** mode when it exceeds `cash_hi` recursively counted entries, and
     ** reverts to collision mode when it falls back below `cash_lo`.
     */
-#     define u2_tune_cash_lo  7
-#     define u2_tune_cash_hi  11
+#     define u2_tune_cash_lo  6
+#     define u2_tune_cash_hi  10
 
   /** Data types.
   **/
@@ -53,7 +53,7 @@
       typedef struct {
         /*  fun_m: opaque, unique function identity (0 for nock)
         **  sam:   sample
-        **  pro:   product;
+        **  pro:   product
         */
         c3_m    fun_m;
         u2_noun sam;
@@ -112,30 +112,92 @@
 
     /* u2_cs_find():
     **
-    **   Find in cash, or return `u2_none`.
-    **
-    **    lot_r: ray to slot
-    **    key_w: search key, (u2_mug(fun_m) ^ u2_mug(sam))
-    **    sif_w: shift of search key, 0 to 32 by 4s
-    **    fun_m: function
-    **    sam:   sample 
+    **   Find `sam` for `fun`, or return `u2_none`.
     */
       u2_weak                                                     //  retain
       u2_cs_find(u2_ray  lot_r,
-                 c3_w    key_w,
-                 c3_w    sif_w,
                  c3_m    fun_m,
                  u2_noun sam);                                    //  retain
- 
+
+    /* u2_cs_find_cell():
+    **
+    **   Find `[a b]` for `fun`, or return `u2_none`.
+    */
+      u2_weak                                                     //  retain
+      u2_cs_find_cell(u2_ray  lot_r,
+                      c3_m    fun_m,
+                      u2_noun a,                                  //  retain
+                      u2_noun b);                                 //  retain
+
+    /* u2_cs_find_trel():
+    **
+    **   Find `[a b c]` for `fun`, or return `u2_none`.
+    */
+      u2_weak                                                     //  retain
+      u2_cs_find_trel(u2_ray  lot_r,
+                      c3_m    fun_m,
+                      u2_noun a,                                  //  retain
+                      u2_noun b,                                  //  retain
+                      u2_noun c);                                 //  retain
+
+    /* u2_cs_find_qual():
+    **
+    **   Find `[a b c d]` for `fun`, or return `u2_none`.
+    */
+      u2_weak                                                     //  retain
+      u2_cs_find_qual(u2_ray  lot_r,
+                      c3_m    fun_m,
+                      u2_noun a,                                  //  retain
+                      u2_noun b,                                  //  retain
+                      u2_noun c,                                  //  retain
+                      u2_noun d);                                 //  retain
+
     /* u2_cs_save():
     **
-    **   Save in cash, or try to.
+    **   Save `sam` as `pro` for `fun`.
     */
       u2_noun                                                     //  transfer
       u2_cs_save(u2_ray  ral_r,
                  u2_ray  lot_r,
-                 c3_w    key_w,
-                 c3_w    sif_w,
                  c3_m    fun_m,
                  u2_noun sam,                                     //  retain
                  u2_noun pro);                                    //  transfer
+
+    /* u2_cs_save_cell():
+    **
+    **   Save `[a b]` as `pro` for `fun`.
+    */
+      u2_noun                                                     //  transfer
+      u2_cs_save_cell(u2_ray  ral_r,
+                      u2_ray  lot_r,
+                      c3_m    fun_m,
+                      u2_noun a,                                  //  retain
+                      u2_noun b,                                  //  retain
+                      u2_noun pro);                               //  transfer
+
+    /* u2_cs_save_trel():
+    **
+    **   Save `[a b c]` as `pro` for `fun`.
+    */
+      u2_noun                                                     //  transfer
+      u2_cs_save_trel(u2_ray  ral_r,
+                      u2_ray  lot_r,
+                      c3_m    fun_m,
+                      u2_noun a,                                  //  retain
+                      u2_noun b,                                  //  retain
+                      u2_noun c,                                  //  retain
+                      u2_noun pro);                               //  transfer
+
+    /* u2_cs_save_qual():
+    **
+    **   Save `[a b c d]` as `pro` for `fun`.
+    */
+      u2_noun                                                     //  transfer
+      u2_cs_save_qual(u2_ray  ral_r,
+                      u2_ray  lot_r,
+                      c3_m    fun_m,
+                      u2_noun a,                                  //  retain
+                      u2_noun b,                                  //  retain
+                      u2_noun c,                                  //  retain
+                      u2_noun d,                                  //  retain
+                      u2_noun pro);                               //  transfer

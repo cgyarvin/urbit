@@ -2039,8 +2039,7 @@ u2_rl_find(u2_ray  ral_r,
   } else {
     u2_ray  sop_r = u2_rail_rut_r(ral_r);
     u2_ray  lot_r = u2_soup_lot_r(sop_r);
-    c3_w    key_w = (u2_mug(fun_m) ^ u2_mug(sam));
-    u2_noun pro   = u2_cs_find(lot_r, key_w, 0, fun_m, sam);
+    u2_noun pro   = u2_cs_find(lot_r, fun_m, sam);
 
     return u2_rx(ral_r, pro);
   }
@@ -2059,19 +2058,56 @@ u2_rl_find_cell(u2_ray  ral_r,
   if ( c3__rock != u2_rail_hip_m(ral_r) ) {
     return u2_none;
   } else {
-    u2_noun sam = u2_rc(ral_r, u2_rx(ral_r, a), u2_rx(ral_r, b));
+    u2_ray  sop_r = u2_rail_rut_r(ral_r);
+    u2_ray  lot_r = u2_soup_lot_r(sop_r);
+    u2_noun pro   = u2_cs_find_cell(lot_r, fun_m, a, b);
 
-    if ( u2_none == sam ) {
-      return u2_none;
-    } else {
-      u2_ray  sop_r = u2_rail_rut_r(ral_r);
-      u2_ray  lot_r = u2_soup_lot_r(sop_r);
-      c3_w    key_w = (u2_mug(fun_m) ^ u2_mug(sam));
-      u2_noun pro = u2_cs_find(lot_r, key_w, 0, fun_m, sam);
+    return u2_rx(ral_r, pro);
+  }
+}
 
-      u2_rz(ral_r, sam);
-      return u2_rx(ral_r, pro);
-    }
+/* u2_rl_find_trel():
+**
+**   As `u2_rl_find()`, for `[a b c]`.
+*/
+u2_weak                                                           //  transfer
+u2_rl_find_trel(u2_ray  ral_r,
+                u2_mote fun_m,
+                u2_noun a,                                        //  retain
+                u2_noun b,                                        //  retain
+                u2_noun c)                                        //  retain
+{
+  if ( c3__rock != u2_rail_hip_m(ral_r) ) {
+    return u2_none;
+  } else {
+    u2_ray  sop_r = u2_rail_rut_r(ral_r);
+    u2_ray  lot_r = u2_soup_lot_r(sop_r);
+    u2_noun pro   = u2_cs_find_trel(lot_r, fun_m, a, b, c);
+
+    return u2_rx(ral_r, pro);
+  }
+}
+
+/* u2_rl_find_qual():
+**
+**   As `u2_rl_find()`, for `[a b c d]`.
+*/
+u2_weak                                                           //  transfer
+u2_rl_find_qual(u2_ray  ral_r,
+                u2_mote fun_m,
+                u2_noun a,                                        //  retain
+                u2_noun b,                                        //  retain
+                u2_noun c,                                        //  retain
+                u2_noun d)                                        //  retain
+{
+  if ( c3__rock != u2_rail_hip_m(ral_r) ) {
+    return u2_none;
+  } else {
+    u2_ray  sop_r = u2_rail_rut_r(ral_r);
+    u2_ray  lot_r = u2_soup_lot_r(sop_r);
+    u2_noun pro   = u2_cs_find_qual(lot_r, fun_m, a, b, c, d);
+
+    return u2_rx(ral_r, pro);
   }
 }
 
@@ -2090,9 +2126,8 @@ u2_rl_save(u2_ray  ral_r,
   } else {
     u2_ray sop_r = u2_rail_rut_r(ral_r);
     u2_ray lot_r = u2_soup_lot_r(sop_r);
-    c3_w   key_w = (u2_mug(fun_m) ^ u2_mug(sam));
 
-    return u2_cs_save(ral_r, lot_r, key_w, 0, fun_m, sam, pro);
+    return u2_cs_save(ral_r, lot_r, fun_m, sam, pro);
   }
 }
 
@@ -2104,24 +2139,60 @@ u2_weak                                                           //  transfer
 u2_rl_save_cell(u2_ray  ral_r,
                 u2_mote fun_m,
                 u2_noun a,                                        //  retain
-                u2_noun b,
+                u2_noun b,                                        //  retain
                 u2_noun pro)                                      //  transfer
 {
   if ( c3__rock != u2_rail_hip_m(ral_r) ) {
     return pro;
   } else {
-    u2_noun sam = u2_rc(ral_r, u2_rx(ral_r, a), u2_rx(ral_r, b));
+    u2_ray sop_r = u2_rail_rut_r(ral_r);
+    u2_ray lot_r = u2_soup_lot_r(sop_r);
 
-    if ( u2_none == sam ) {
-      return pro;
-    } else {
-      u2_ray  sop_r = u2_rail_rut_r(ral_r);
-      u2_ray  lot_r = u2_soup_lot_r(sop_r);
-      c3_w    key_w = (u2_mug(fun_m) ^ u2_mug(sam));
-      u2_noun sav = u2_cs_save(ral_r, lot_r, key_w, 0, fun_m, sam, pro);
+    return u2_cs_save_cell(ral_r, lot_r, fun_m, a, b, pro);
+  }
+}
 
-      u2_rz(ral_r, sam);
-      return sav;
-    }
+/* u2_rl_save_trel():
+**
+**   As `u2_rl_save()`, for `[a b c]`.
+*/
+u2_weak                                                           //  transfer
+u2_rl_save_trel(u2_ray  ral_r,
+                u2_mote fun_m,
+                u2_noun a,                                        //  retain
+                u2_noun b,                                        //  retain
+                u2_noun c,                                        //  retain
+                u2_noun pro)                                      //  transfer
+{
+  if ( c3__rock != u2_rail_hip_m(ral_r) ) {
+    return pro;
+  } else {
+    u2_ray sop_r = u2_rail_rut_r(ral_r);
+    u2_ray lot_r = u2_soup_lot_r(sop_r);
+
+    return u2_cs_save_trel(ral_r, lot_r, fun_m, a, b, c, pro);
+  }
+}
+
+/* u2_rl_save_qual():
+**
+**   As `u2_rl_save()`, for `[a b c d]`.
+*/
+u2_weak                                                           //  transfer
+u2_rl_save_qual(u2_ray  ral_r,
+                u2_mote fun_m,
+                u2_noun a,                                        //  retain
+                u2_noun b,                                        //  retain
+                u2_noun c,                                        //  retain
+                u2_noun d,                                        //  retain
+                u2_noun pro)                                      //  transfer
+{
+  if ( c3__rock != u2_rail_hip_m(ral_r) ) {
+    return pro;
+  } else {
+    u2_ray sop_r = u2_rail_rut_r(ral_r);
+    u2_ray lot_r = u2_soup_lot_r(sop_r);
+
+    return u2_cs_save_qual(ral_r, lot_r, fun_m, a, b, c, d, pro);
   }
 }
