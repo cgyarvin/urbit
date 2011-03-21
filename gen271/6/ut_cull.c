@@ -266,7 +266,7 @@
   j2_mcj(Pit, ut, cull)[] = {
     { ".3", c3__hevy, 
         j2_mc(Pit, ut, cull), 
-        SafeTier6_b_memo,
+        Tier6_b_memo,
         u2_none, u2_none,
         j2_mck(Pit, ut, cull)
     },

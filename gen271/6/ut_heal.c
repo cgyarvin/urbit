@@ -288,7 +288,7 @@
   j2_mcj(Pit, ut, heal)[] = {
     { ".3", c3__hevy, 
         j2_mc(Pit, ut, heal), 
-        SafeTier6_b_memo,
+        Tier6_b_memo,
         u2_none, u2_none,
         j2_mck(Pit, ut, heal)
     },

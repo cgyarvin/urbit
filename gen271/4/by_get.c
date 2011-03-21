@@ -54,6 +54,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, by, get)[] = {
-    { ".3", c3__lite, j2_mc(Pit, by, get), SafeTier4, u2_none, u2_none },
+    { ".3", c3__lite, j2_mc(Pit, by, get), Tier4, u2_none, u2_none },
     { }
   };

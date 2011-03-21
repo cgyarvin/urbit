@@ -46,6 +46,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, in, tap)[] = {
-    { ".3", c3__lite, j2_mc(Pit, in, tap), SafeTier4, u2_none, u2_none },
+    { ".3", c3__lite, j2_mc(Pit, in, tap), Tier4, u2_none, u2_none },
     { }
   };

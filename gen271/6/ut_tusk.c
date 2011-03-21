@@ -181,7 +181,7 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, ut, tusk)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, tusk), SafeTier6_b, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ut, tusk), Tier6_b, u2_none, u2_none },
     { }
   };
 
