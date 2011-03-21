@@ -17,6 +17,18 @@
 #   define  SafeTier6_a_memo  (SafeTier6_a | u2_jet_memo)
 #   define  SafeTier6_b       u2_jet_live
 #   define  SafeTier6_b_memo  (SafeTier6_b | u2_jet_memo)
+#   define  SafeTier6_b_test  (SafeTier6_b | u2_jet_test)
+
+#   define  Tier1         u2_jet_live
+#   define  Tier2         u2_jet_live
+#   define  Tier3         u2_jet_live
+#   define  Tier4         u2_jet_live
+#   define  Tier5         (u2_jet_live | u2_jet_test)
+#   define  Tier6_a       u2_jet_live
+#   define  Tier6_a_memo  (Tier6_a | u2_jet_memo)
+#   define  Tier6_b       u2_jet_live
+#   define  Tier6_b_memo  (Tier6_b | u2_jet_memo)
+#   define  Tier6_b_test  (SafeTier6_b | u2_jet_test)
 
   /** Cosmetic noun types.
   **/

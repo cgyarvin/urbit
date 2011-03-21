@@ -123,6 +123,7 @@
 #       define u2_jet_live    0x1   // live: C jet active
 #       define u2_jet_test    0x2   // test: C jet must be tested
 #       define u2_jet_memo    0x4   // memo: memoize, even if jet is dead
+#       define u2_jet_dead    0
 
     /* u2_ho_jet: a C function, per formula.
     */

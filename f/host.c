@@ -855,31 +855,60 @@ _ho_run(u2_ray      wir_r,
     default: c3_assert(0); return u2_none;
 
     case c3__lite: {
-      return jet_j->fun_f(wir_r, cor);
+      /* Lite jet: bail prohibited.  The lite jet must detect and control
+      ** its own internal errors, freeing stray nouns and returning u2_none.
+      ** u2_b functions may not be used.
+      **
+      ** Pro: lite jets minimize invocation latency. 
+      **
+      ** Con: manual programming of large functions in lite mode is difficult.
+      ** Con: lite jets produce no crash report, requiring soft rerun.
+      */
+      {
+        u2_ray  jub_r = u2_wire_jub_r(wir_r);
+        u2_noun ret; 
+
+        u2_wire_jub_r(wir_r) = 0;
+        ret = jet_j->fun_f(wir_r, cor);
+        u2_wire_jub_r(wir_r) = jub_r;
+
+        return ret;
+      }
+    }
+    case c3__fine: {
+      /* Fine jet: bail context and crash tracking.
+      **
+      ** Pro: bail support and efficient crash reporting.
+      **
+      ** Con: invocation latency is higher than 'lite'.
+      ** Con: programmer must accurately reproduce crash trace.
+      ** Con: not yet supported - treated as hevy.
+      */
     }
     case c3__hevy: {
-      u2_ray cap_r = u2_rail_cap_r(wir_r);
-
-      if ( u2_no == u2_rl_leap(wir_r, c3__rock) ) {
-        return u2_none;
-      }
-      else {
+      /* Hevy jet: maintains recursive bail context.  The hevy jet can
+      ** bail out at any time.  The host framework should (but does not
+      ** yet) free stray nouns.
+      **
+      ** Pro: hevy jets are the easiest to program.
+      **
+      ** Con: invocation latency is higher.
+      ** Con: hevy jets produce no crash report, requiring soft rerun.
+      */
+      if ( 0 != u2_wire_jub_r(wir_r) ) {
+        return jet_j->fun_f(wir_r, cor);
+      } else {
         u2_ray jub_r = u2_bl_open(wir_r);
 
         if ( u2_bl_set(wir_r) ) {
           u2_bl_done(wir_r, jub_r);
-          u2_rl_fall(wir_r);
           ret = u2_none;
         } 
         else {
           ret = jet_j->fun_f(wir_r, cor);
 
           u2_bl_done(wir_r, jub_r);
-          u2_rl_fall(wir_r);
-          ret = u2_rx(wir_r, ret);
         }
-        u2_rail_cap_r(wir_r) = cap_r;
-
         return ret;
       }
     }
@@ -923,23 +952,9 @@ u2_ho_use(u2_ray     wir_r,
     pro = u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
   }
   else {
-    pro = _ho_run(wir_r, jet_j, cor);
+    if ( !(jet_j->sat_s & u2_jet_test) ) {
+      pro = _ho_run(wir_r, jet_j, cor);
 
-    if ( jet_j->sat_s & u2_jet_test ) {
-      u2_noun sof;
-      
-      jet_j->sat_s &= ~u2_jet_live;
-      {
-        sof = u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
-      }
-      jet_j->sat_s |= u2_jet_live;
-
-      u2_ho_test(wir_r, jet_j, cor, sof, pro);
-      u2_rz(wir_r, pro);
-
-      pro = sof;
-    }
-    else {
       if ( u2_none == pro ) {
         jet_j->sat_s &= ~u2_jet_live;
         {
@@ -949,6 +964,27 @@ u2_ho_use(u2_ray     wir_r,
 
         u2_ho_test(wir_r, jet_j, cor, pro, u2_none);
       }
+    }
+    else { 
+      u2_noun sof;
+
+      jet_j->sat_s &= ~u2_jet_test;
+      {
+        pro = _ho_run(wir_r, jet_j, cor);
+      }
+      jet_j->sat_s |= u2_jet_test;
+
+      jet_j->sat_s &= ~u2_jet_live;
+      {
+        sof = u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
+      }
+      jet_j->sat_s |= u2_jet_live;
+
+      u2_bx_used(wir_r);
+      u2_ho_test(wir_r, jet_j, cor, sof, pro);
+      u2_rz(wir_r, pro);
+
+      pro = sof;
     }
   }
 
