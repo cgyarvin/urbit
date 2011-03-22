@@ -191,6 +191,7 @@
 #   define c3__dtbn   c3_s4('d','t','b','n')
 #   define c3__dtcs   c3_s4('d','t','c','s')
 #   define c3__dtkt   c3_s4('d','t','k','t')
+#   define c3__dtpd   c3_s4('d','t','p','d')
 #   define c3__dtrt   c3_s4('d','t','r','t')
 #   define c3__dtsg   c3_s4('d','t','s','g')
 #   define c3__dttg   c3_s4('d','t','t','g')

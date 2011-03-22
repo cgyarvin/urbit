@@ -819,7 +819,7 @@
     if ( u2_yes == u2_sing(c3__atom, p_gen) ) {
       return u2_bt
         (wir_r, c3__ktnp, 
-              u2_bt(wir_r, c3__dtkt, c3__bone, _0),
+              u2_bt(wir_r, c3__dtpd, c3__bone, _0),
               u2_bc(wir_r, c3__bone, _0));
     }
     else if ( u2_yes == u2_sing(c3__blur, p_gen) ) {
@@ -3371,7 +3371,7 @@
       else if ( u2_yes == u2_as_p(gen, c3__zpmt, &p_gen) ) {
         return u2_bl_bail(wir_r);
       }
-      else if ( u2_yes == u2_as_p(gen, c3__dtkt, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__dtpd, &p_gen) ) {
         return u2_bc(wir_r, u2_nock_vint, _rose_make(wir_r, sut, p_gen));
       }
       else if ( u2_yes == u2_as_pq(gen, c3__ktnp, &p_gen, &q_gen) ) {
@@ -3825,7 +3825,7 @@
       else if ( u2_yes == u2_as_p(gen, c3__zpmt, &p_gen) ) {
         return u2_bl_bail(wir_r);
       }
-      else if ( u2_yes == u2_as_p(gen, c3__dtkt, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__dtpd, &p_gen) ) {
         return c3__atom;
       }
       else if ( u2_yes == u2_as_pq(gen, c3__ktnp, &p_gen, &q_gen) ) {
@@ -4134,7 +4134,7 @@
       else if ( u2_yes == u2_as_p(gen, c3__zpmt, &p_gen) ) {
         return u2_yes;
       }
-      else if ( u2_yes == u2_as_p(gen, c3__dtkt, &p_gen) ) {
+      else if ( u2_yes == u2_as_p(gen, c3__dtpd, &p_gen) ) {
         return u2_and(_rose_show(wir_r, sut, p_gen),
                       _rose_show_nest
                           (wir_r, c3__atom, _rose_play(wir_r, sut, p_gen)));

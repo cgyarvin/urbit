@@ -383,6 +383,9 @@ zuse_test3(struct zuse_state* fod_f,
   }
 }
 
+/* zuse_next4(): forward iteration from source, with comparison verify
+*/
+
 /* _zuse_from(): expression in pit space.
 */
 static u2_noun

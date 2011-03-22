@@ -16,7 +16,7 @@
   ^-  @
   ?:  .=(0 a)
     b
-  $(a (dec a), b .^(b))
+  $(a (dec a), b .+(b))
 ::::
 ::
     bex
@@ -38,9 +38,9 @@
   ?<  .=(0 a)
   =+  b=@
   |-
-  ?:  .=(a .^(b))
+  ?:  .=(a .+(b))
     b
-  $(b .^(b))
+  $(b .+(b))
 ::::
 ::
     div
@@ -54,7 +54,7 @@
   |-
   ?:  (lth a b)
     c
-  $(a (sub a b), c .^(c))
+  $(a (sub a b), c .+(c))
 ::::
 ::
     fib
@@ -192,7 +192,7 @@
   ^-  @
   =+  b=@
   |-
-  ?~(a b $(a t.a, b .^(b)))
+  ?~(a b $(a t.a, b .+(b)))
 ::::
 ::
     levy
@@ -371,7 +371,7 @@
   %=  $
     a   (rsh 0 1 a)
     b   (rsh 0 1 b)
-    c   .^(c)
+    c   .+(c)
     d   (add d (lsh 0 c ?&(.=(0 (end 0 1 a)) .=(0 (end 0 1 b)))))
   --
 ::::
@@ -394,7 +394,7 @@
   %=  $
     a   (rsh 0 1 a)
     b   (rsh 0 1 b)
-    c   .^(c)
+    c   .+(c)
     d   (add d (lsh 0 c ?|(.=(0 (end 0 1 a)) .=(0 (end 0 1 b)))))
   --
 ::::
@@ -469,7 +469,7 @@
   %=  $
     a   (rsh 0 1 a)
     b   (rsh 0 1 b)
-    c   .^(c)
+    c   .+(c)
     d   (add d (lsh 0 c .=((end 0 1 a) (end 0 1 b))))
   --
 ::::
@@ -482,7 +482,7 @@
   |-
   ?:  .=(0 b)
     c
-  $(b (rsh a 1 b), c .^(c))
+  $(b (rsh a 1 b), c .+(c))
 ::::
 ::
     mas
@@ -514,7 +514,7 @@
       |-
       =+  e=(dis 0x7fffffff (chum d))
       ?:  .=(0 e)
-        $(d .^(d))
+        $(d .+(d))
       e
     =+  b=`@`0x18d0a625
     |-
@@ -525,9 +525,9 @@
     ?:  .=(d c)
       =+  f=(dis 0x7fffffff e)
       ?:  .=(0 f)
-        $$(b .^(b))
+        $$(b .+(b))
       f
-    $(d .^(d), e (chum (mix e (cut 5 [1 d] a))))
+    $(d .+(d), e (chum (mix e (cut 5 [1 d] a))))
   ::::
   ::
       chum
@@ -603,7 +603,7 @@
   ?-  b
     1   a
     2   (mul a 2)
-    3   .^((mul a 2))
+    3   .+((mul a 2))
     *   (add (mod b 2) (mul $(b (div b 2)) 2))
   --
 ::::
@@ -1147,7 +1147,7 @@
     [%dgtr p=*(list gene)]                                      ::  :*  degtar
   :: 
     [%dtbn p=*gene q=*gene]                                     ::  .=  dotbon
-    [%dtkt p=*gene]                                             ::  .^  dotket
+    [%dtkt p=*gene]                                             ::  .+  dotket
     [%dtcs p=*gene]                                             ::  .?  dotcas
     [%dtsg p=*]                                                 ::  .~  dotsig
     [%dttr p=*gene q=*gene]                                     ::  .*  dottar
@@ -1483,7 +1483,7 @@
   ^>  bean.%cons
   ^-  *form
   ?:  ?=([[0 *] [0 *]] -<)
-    ?:  ?&(.=(.^(p.vur) p.sed) .=((div p.vur 2) (div p.sed 2)))
+    ?:  ?&(.=(.+(p.vur) p.sed) .=((div p.vur 2) (div p.sed 2)))
       [0 (div p.vur 2)]
     [vur sed]
   ?:  ?=([[1 *] [1 *]] -<)
@@ -1754,7 +1754,7 @@
           ?:  (~(has in vax) sut)
             ?:  (~(has by q.den) sut)
               den
-            [.^(p.den) (~(put by q.den) [sut p.den])]
+            [.+(p.den) (~(put by q.den) [sut p.den])]
           $(vax (~(put in vax) sut), sut repo)
         ::
             *           den
@@ -2160,7 +2160,7 @@
         :-  (nice flag)
         [3 q:$(gen p.gen, gol %noun)]
       ::
-          [%dtkt *]                                                   ::  .^
+          [%dtkt *]                                                   ::  .+
         :-  (nice %atom)
         [4 q:$(gen p.gen, gol %atom)]
       ::

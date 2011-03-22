@@ -291,7 +291,7 @@ wide_c
     wide_norm: di_degket body_f_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_dotbon body_b_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_dotket body_a_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_dotpad body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_dotcas body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_dottar body_b_wide    { $$ = _ycell($1, $2); }
 
@@ -451,7 +451,7 @@ tall
     tall_norm: di_degket w body_f_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_dotbon w body_b_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_dotket w body_a_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_dotpad w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_dotcas w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_dottar w body_b_tall    { $$ = _ycell($1, $3); }
 
@@ -655,7 +655,7 @@ tall
     di_degket: si_deg si_ket  { $$ = c3__dgkt; }
 
     di_dotbon: si_dot si_bon  { $$ = c3__dtbn; }
-    di_dotket: si_dot si_ket  { $$ = c3__dtkt; }
+    di_dotpad: si_dot si_pad  { $$ = c3__dtpd; }
     di_dotcas: si_dot si_cas  { $$ = c3__dtcs; }
     di_dottar: si_dot si_tar  { $$ = c3__dttr; }
     
