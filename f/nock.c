@@ -418,7 +418,46 @@ _nock_rock(u2_wire wir_r,
                 return pro;
               }
             }
+            case c3__fast: {
+              LoomSink; u2_bx_sink(wir_r);
+              pro = _nock_rock(wir_r, bus, zom);
+              u2_bx_rise(wir_r); LoomRise; 
 
+              if ( u2_none == pro ) {
+                u2_rl_lose(wir_r, hod);
+
+                return u2_none;
+              }
+              else {
+                u2_noun p_hod, q_hod, r_hod;
+
+                /* XX: translate hod to old clue form.
+                */
+                if ( u2_no == u2_as_trel(hod, &p_hod, &q_hod, &r_hod) ) {
+                  u2_rz(wir_r, hod);
+                  return pro;
+                }
+                else {
+                  u2_noun xod;
+
+                  if ( u2_yes == u2_dust(q_hod) &&
+                       (_1 == u2_h(q_hod)) &&
+                       (_0 == u2_t(q_hod)) ) {
+                    u2_rz(wir_r, q_hod);
+                    q_hod = 0;
+                  }
+                  xod = u2_rt(wir_r, u2_rx(wir_r, q_hod),
+                                     u2_rx(wir_r, p_hod),
+                                     u2_rx(wir_r, r_hod));
+                  u2_rz(wir_r, hod);
+                  hod = xod;
+                }
+                pro = u2_sh_mine(wir_r, hod, pro);
+         
+                u2_rl_lose(wir_r, hod);
+                return pro;
+              }
+            }
             case c3__memo: {
               u2_rl_lose(wir_r, hod);
               {

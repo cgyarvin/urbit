@@ -4,18 +4,19 @@
 */
   /** Revision number for built-in jets.
   **/
-#   define  Pit   watt_271
+#   define  Pit   zuse_270
 
   /** Test codes.
   **/
 #   define  Tier1         u2_jet_live
-#   define  Tier2         u2_jet_live
-#   define  Tier3         u2_jet_live
-#   define  Tier4         u2_jet_live
+#   define  Tier2         (u2_jet_live | u2_jet_test)
+#   define  Tier3         (u2_jet_live | u2_jet_test)
+#   define  Tier4         (u2_jet_live | u2_jet_test)
 #   define  Tier5         (u2_jet_live | u2_jet_test)
-#   define  Tier6_a       u2_jet_live
+#   define  Tier6         u2_jet_live
+#   define  Tier6_a       Tier6
 #   define  Tier6_a_memo  (Tier6_a | u2_jet_memo)
-#   define  Tier6_b       u2_jet_live
+#   define  Tier6_b       Tier6
 #   define  Tier6_b_memo  (Tier6_b | u2_jet_memo)
 #   define  Tier6_b_test  (Tier6_b | u2_jet_test)
 

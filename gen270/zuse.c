@@ -1,4 +1,4 @@
-/* j/watt.c
+/* j/zuse.c
 **
 ** This file is in the public domain.
 */
@@ -93,7 +93,7 @@
 /* structures
 */
   static u2_ho_driver 
-  _watt_drivers[] = {
+  _zuse_drivers[] = {
     /* tier 1
     */
       { j2_sb(Pit, add), j2_mbj(Pit, add), 0, 0, u2_none },
@@ -175,4 +175,4 @@
 
   u2_ho_driver
   j2_da(Pit) = 
-    { j2_sa(Pit), 0, _watt_drivers, 0, u2_none };
+    { j2_sa(Pit), 0, _zuse_drivers, 0, u2_none };

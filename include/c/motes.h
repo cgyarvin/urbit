@@ -215,6 +215,7 @@
 #   define c3__fair   c3_s4('f','a','i','r')
 #   define c3__fan    c3_s3('f','a','n')
 #   define c3__farg   c3_s4('f','a','r','g')
+#   define c3__fast   c3_s4('f','a','s','t')
 #   define c3__fdec   c3_s4('f','d','e','c')
 #   define c3__felk   c3_s4('f','e','l','k')
 #   define c3__feng   c3_s4('f','e','n','g')

@@ -1179,7 +1179,7 @@
         [%sgkt *]   [%sgld %keep p.gen]
         [%sgmt *]
       :+  %sgdl
-        :-  %mine
+        :-  %fast
         :-  %dgpd
         :+  [%dtsg p.gen]
           [%zpbn q.gen]

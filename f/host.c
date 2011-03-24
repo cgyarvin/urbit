@@ -16,11 +16,13 @@
 
     /* External drivers.
     */
+      extern u2_ho_driver j2_da(zuse_270);
       extern u2_ho_driver j2_da(watt_271);
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       static u2_ho_driver *u2_HostDriverBase[] = {
+        &j2_da(zuse_270), 
         &j2_da(watt_271), 
         0
       };
@@ -354,10 +356,10 @@ _ho_mop_chip(c3_c *buf_c, u2_noun xip)
   }
 }
 
-/* _ho_cstring(): return malloced control string for `xip`.
+/* u2_ho_cstring(): return malloced control string for `xip`.
 */
-static c3_c*
-_ho_cstring(u2_noun xip)
+c3_c*                                                             //  transfer
+u2_ho_cstring(u2_noun xip)                                        //  retain
 {
   c3_w len_w = _ho_mop_chip(0, xip);
   c3_c *cos_c;
@@ -597,7 +599,7 @@ _ho_explore(u2_wire wir_r,
   if ( 0 != (dry_d = _ho_cash_find(&u2_HostHangar->bad_s, xip)) ) {
     return dry_d;
   } else {
-    c3_c* cos_c = _ho_cstring(xip);
+    c3_c* cos_c = u2_ho_cstring(xip);
 
     if ( 0 != (dry_d = _ho_explore_parent(wir_r, xip, cos_c)) ) {
       // fprintf(stderr, "battery: child : %s\n", cos_c);
@@ -737,7 +739,7 @@ u2_ho_test(u2_wire    wir_r,
   {
     return;
   } else {
-    c3_c*       cos_c = _ho_cstring(jet_j->xip);
+    c3_c*       cos_c = u2_ho_cstring(jet_j->xip);
     c3_w        mug_w = u2_mug(cor);
     const c3_c* msg_c;
 
@@ -751,13 +753,13 @@ u2_ho_test(u2_wire    wir_r,
       msg_c = "fail";
       printf("cos_c: %s\n", cos_c);
 
-      //  For detailed debugging, activate/extend this junkheap as needed.
-      //
-#if 0
       {
         u2_err(wir_r, "wrong", had);
         u2_err(wir_r, "right", sof);
       }
+      //  For detailed debugging, activate/extend this junkheap as needed.
+      //
+#if 0
       {
         u2_noun sut, ref, van;
 

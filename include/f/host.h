@@ -238,6 +238,11 @@
       void
       u2_ho_klar(void);
 
+    /* u2_ho_cstring(): return malloced control string for `xip`.
+    */
+      c3_c*                                                       //  transfer
+      u2_ho_cstring(u2_noun xip);                                 //  retain
+
     /* u2_ho_warn(): 
     **
     **   Report a warning at file and line.  This is assumed

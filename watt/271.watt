@@ -527,7 +527,7 @@
       ?:  .=(0 f)
         $$(b .+(b))
       f
-    $(d .+(d), e (chum (mix e (cut 5 [1 d] a))))
+    $(d .+(d), e (chum (mix e (cut 5 [d 1] a))))
   ::::
   ::
       chum
@@ -540,13 +540,13 @@
       dice
     =+  [b=@ c=@]
     |=
-    (mix c (sbox (cut 3 [1 b] c))) 
+    (mix c (sbox (cut 3 [b 1] c))) 
   ::::
   ::
       sbox
     =+  [b=@]
     |=
-    =-  (cut 5 [1 b] -)
+    =-  (cut 5 [b 1] -)
     0x45bd2fb7\ /eec357b8\ /2ae29f22\ /bb412e03\ /08445336\ /52ca46d8\
      /76d680b9\ /b9e06f14\ /6f8b9c36\ /a53ef834\ /e3533b5b\ /c5cd423e\
      /0cfd4d14\ /12924b1a\ /3e77ee18\ /1804e2a5\ /75d9c4e1\ /6d4b9a3e\
@@ -1383,7 +1383,7 @@
         [%sgkt *]   [%sgld %keep p.gen]
         [%sgmt *]
       :+  %sgdl
-        :-  %mine
+        :-  %fast
         :-  %dgpd
         :+  [%dtsg p.gen]
           [%zpbn q.gen]
