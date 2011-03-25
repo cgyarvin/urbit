@@ -501,7 +501,7 @@
   {
     return u2_bt
       (wir_r, c3__bnld, 
-              u2_bc(wir_r, c3__pmdg, u2_rx(wir_r, q_gen)),
+              u2_bc(wir_r, c3__pmdt, u2_rx(wir_r, q_gen)),
               u2_rx(wir_r, p_gen));
   }
 /***
@@ -609,6 +609,13 @@
     return u2_bt
       (wir_r, c3__sgld,
               u2_bc(wir_r, c3__loaf, u2_rx(wir_r, p_gen)),
+              u2_rx(wir_r, q_gen));
+  }
+  _open_do_pq(sgsg)   //  ~~
+  {
+    return u2_bt
+      (wir_r, c3__sgld,
+              u2_bt(wir_r, c3__mean, c3__brdt, u2_rx(wir_r, p_gen)),
               u2_rx(wir_r, q_gen));
   }
 /***
@@ -872,6 +879,7 @@
         _open_pqrs(sgmt);
         _open_pq  (sgpd);
         _open_pq  (sgpm);
+        _open_pq  (sgsg);
 
         _open_p   (tmbn);
         _open_p   (tmdp);
@@ -1091,7 +1099,3 @@
     { "rake", c3__hevy, j2_mc(Pit, ap, rake), Tier6_a, u2_none, u2_none },
     { }
   };
-
-  u2_ho_driver
-  j2_db(Pit, ap) = 
-    { j2_sb(Pit, ap), j2_mbj(Pit, ap), j2_mbd(Pit, ap), 0, u2_none };

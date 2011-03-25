@@ -144,6 +144,10 @@
       default: {
         u2_noun rex = j2_mcy(Pit, ap, open)(wir_r, gen);
 
+        if ( u2_yes == u2_sing(rex, gen) ) {
+          u2_err(wir_r, "rex", rex);
+          c3_assert(0);
+        }
         ret = j2_mcx(Pit, ut, mint)(wir_r, van, sut, gol, rex);
         u2_rl_lose(wir_r, rex);
 

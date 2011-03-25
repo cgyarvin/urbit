@@ -1,4 +1,4 @@
-/* j/watt.c
+/* gen?/watt.c
 **
 ** This file is in the public domain.
 */
@@ -65,6 +65,11 @@
   */
     extern u2_ho_driver j2_mbd(Pit, in)[];
     extern u2_ho_driver j2_mbd(Pit, by)[];
+
+  /* tier 5
+  */
+    extern u2_ho_jet j2_mbj(Pit, to)[];
+    extern u2_ho_driver j2_mbd(Pit, to)[];
 
   /* tier 6
   */
@@ -152,6 +157,10 @@
     */
       { j2_sb(Pit, in), 0, j2_mbd(Pit, in), 0, u2_none },
       { j2_sb(Pit, by), 0, j2_mbd(Pit, by), 0, u2_none },
+
+    /* tier 5
+    */
+      { j2_sb(Pit, to), j2_mbj(Pit, to), j2_mbd(Pit, to), 0, u2_none },
 
     /* tier 6
     */

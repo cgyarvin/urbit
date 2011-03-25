@@ -130,6 +130,9 @@ J271_4_OFILES=\
        gen271/4/by_has.o \
        gen271/4/by_put.o 
 
+J271_5_OFILES=\
+       gen271/5/to.o
+
 J271_6_OFILES=\
        gen271/6/ap.o \
        gen271/6/cell.o \
@@ -178,6 +181,7 @@ J271_OFILES=\
        $(J271_2_OFILES) \
        $(J271_3_OFILES) \
        $(J271_4_OFILES) \
+       $(J271_5_OFILES) \
        $(J271_6_OFILES) \
        $(J271_6_OFILES_UT) \
        gen271/watt.o
@@ -246,6 +250,9 @@ J270_4_OFILES=\
        gen270/4/by_has.o \
        gen270/4/by_put.o 
 
+J270_5_OFILES=\
+       gen270/5/to.o
+
 J270_6_OFILES=\
        gen270/6/ap.o \
        gen270/6/cell.o \
@@ -294,9 +301,10 @@ J270_OFILES=\
        $(J270_2_OFILES) \
        $(J270_3_OFILES) \
        $(J270_4_OFILES) \
+       $(J270_5_OFILES) \
        $(J270_6_OFILES) \
        $(J270_6_OFILES_UT) \
-       gen270/zuse.o
+       gen270/watt.o
 
 OFILES=\
        $(C_OFILES) \

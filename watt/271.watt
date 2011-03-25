@@ -835,12 +835,12 @@
     wall  (list tape)
 ::::
 ::
-    ball
+    bill
   |?
     ^+(@ *rock)
     [%duct p=*tape]
-    [%grip p=[p=*rock q=*rock] q=*(list ball)]
-    [%meld p=*(list ball)]
+    [%grip p=[p=*rock q=*rock] q=*(list bill)]
+    [%meld p=*(list bill)]
   --
 ::::
 ::
@@ -853,7 +853,7 @@
         [%ram !=(ram)]
         [%wit !=(wit)]
       --
-  =+  pup=*ball
+  =+  pup=*bill
   |*
   ::::
   ::        fly: print tall
@@ -895,7 +895,7 @@
     ?-    pup 
     ::
         @           (rip 3 pup)
-        [%meld *]   (reel p.pup =+([*ball *tape] |=((weld ram(pup -<-) -<+))))
+        [%meld *]   (reel p.pup =+([*bill *tape] |=((weld ram(pup -<-) -<+))))
         [%duct *]   p.pup 
     ::
         [%grip *]
@@ -921,10 +921,10 @@
         (add (met 3 p.p.pup) (met 3 q.p.pup))
       %+  roll
         q.pup
-      =+  [*ball @]
+      =+  [*bill @]
       |=((add ?:(.=(0 -<+) 0 1) (add -<+ wit(pup -<-))))
     ::
-        [%meld *]   (roll p.pup =+([*ball @] |=((add -<+ wit(pup -<-)))))
+        [%meld *]   (roll p.pup =+([*bill @] |=((add -<+ wit(pup -<-)))))
     -- 
   ::
   ::::
@@ -941,13 +941,13 @@
   ::::
   ::
       gut
-    |-  ^-  *ball
+    |-  ^-  *bill
     ?-  nut
         @   unt(nut nut)
         ^
       :+  %grip
         ['[' ']']
-      |-  ^-  *(list ball)
+      |-  ^-  *(list bill)
       ?-  nut
         [* @]   [$$(nut -.nut) $$(nut +.nut) ~]
         [* ^]   [$$(nut -.nut) $(nut +.nut)]
@@ -960,7 +960,7 @@
   ::::
   ::
       loc
-    ^-  *ball
+    ^-  *bill
     ?>  ?=([p=@ q=[p=[p=@ q=@] q=[p=@ q=@]]] nut)   :: should be static
     :+  %grip
       ['<' '>']
@@ -1186,6 +1186,7 @@
     [%sgmt p=*chop q=*gene r=*(list &[p=*term q=*gene]) s=*gene]::  ~%  sigmit
     [%sgpd p=@ q=*gene]                                         ::  ~+  sigpad
     [%sgpm p=*gene q=*gene]                                     ::  ~&  sigpam
+    [%sgsg p=*gene q=*gene]                                     ::  ~|  sigsig
   ::
     [%tmbn p=*<%atom %noun %cell %flag %null>]                  ::  ;=  tambon
     [%tmdp p=*gene]                                             ::  ;-  tamdap
@@ -1397,6 +1398,7 @@
     ::
         [%sgpd *]   [%sgld [%memo %dtsg p.gen] q.gen]
         [%sgpm *]   [%sgld [%loaf p.gen] q.gen]
+        [%sgsg *]   [%sgld [%mean [%brdt p.gen]] q.gen]
     ::::
     ::::
         [%tmbn *]
@@ -1734,7 +1736,7 @@
   ::::
   ::
       dump
-    ^-  *ball
+    ^-  *bill
     ^>  bean.%dump
     =+  ^=  gil
         =+  den=[p=`@`1 q=*(map type &@)]

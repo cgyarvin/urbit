@@ -16,13 +16,13 @@
 
     /* External drivers.
     */
-      extern u2_ho_driver j2_da(zuse_270);
+      extern u2_ho_driver j2_da(watt_270);
       extern u2_ho_driver j2_da(watt_271);
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       static u2_ho_driver *u2_HostDriverBase[] = {
-        &j2_da(zuse_270), 
+        &j2_da(watt_270), 
         &j2_da(watt_271), 
         0
       };

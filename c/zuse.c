@@ -469,6 +469,8 @@ zuse_line(struct zuse_state* fod_f,
 #endif
     }
   }
+  u2_nk_show(wir_r, stderr);
+
   u2_rl_fall(wir_r);
   u2_rail_cap_r(wir_r) = cap_r;
 

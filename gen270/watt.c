@@ -1,4 +1,4 @@
-/* j/zuse.c
+/* gen?/watt.c
 **
 ** This file is in the public domain.
 */
@@ -66,6 +66,11 @@
     extern u2_ho_driver j2_mbd(Pit, in)[];
     extern u2_ho_driver j2_mbd(Pit, by)[];
 
+  /* tier 5
+  */
+    extern u2_ho_jet j2_mbj(Pit, to)[];
+    extern u2_ho_driver j2_mbd(Pit, to)[];
+
   /* tier 6
   */
     extern u2_ho_jet j2_mbj(Pit, cell)[];
@@ -93,7 +98,7 @@
 /* structures
 */
   static u2_ho_driver 
-  _zuse_drivers[] = {
+  _watt_drivers[] = {
     /* tier 1
     */
       { j2_sb(Pit, add), j2_mbj(Pit, add), 0, 0, u2_none },
@@ -153,6 +158,10 @@
       { j2_sb(Pit, in), 0, j2_mbd(Pit, in), 0, u2_none },
       { j2_sb(Pit, by), 0, j2_mbd(Pit, by), 0, u2_none },
 
+    /* tier 5
+    */
+      { j2_sb(Pit, to), j2_mbj(Pit, to), j2_mbd(Pit, to), 0, u2_none },
+
     /* tier 6
     */
       { j2_sb(Pit, cell), j2_mbj(Pit, cell), 0, 0, u2_none },
@@ -175,4 +184,4 @@
 
   u2_ho_driver
   j2_da(Pit) = 
-    { j2_sa(Pit), 0, _zuse_drivers, 0, u2_none };
+    { j2_sa(Pit), 0, _watt_drivers, 0, u2_none };

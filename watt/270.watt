@@ -1,4 +1,4 @@
-~%    %zuse.270 
+~%    %watt.270 
     ~ 
   ()
 &.
@@ -442,30 +442,26 @@
   ~.  %mug
   |=  a=*
   ^-  @
-  =<  $
-  &.
-  ::
-  ++  $
-    ?.  ?=(@ a)
-      =+  [b=$(a -.a) c=$(a +.a)]
-      =+  d=(mix b (add (end 5 1 (lsh 3 1 c)) (rsh 3 3 c)))
+  &-  ?.  ?=(@ a)
+        =+  [b=$(a -.a) c=$(a +.a)]
+        =+  d=(mix b (add (end 5 1 (lsh 3 1 c)) (rsh 3 3 c)))
+        |-
+        =+  e=(dis 0x7fffffff (chum d))
+        ?:  .=(0 e)
+          $(d .+(d))
+        e
+      =+  b=`@`0x18d0a625
       |-
-      =+  e=(dis 0x7fffffff (chum d))
-      ?:  .=(0 e)
-        $(d .+(d))
-      e
-    =+  b=`@`0x18d0a625
-    |-
-    =+  c=(met 5 a)
-    =+  d=`@`0
-    =+  e=b
-    |-
-    ?:  .=(d c)
-      =+  f=(dis 0x7fffffff e)
-      ?:  .=(0 f)
-        $$(b .+(b))
-      f
-    $(d .+(d), e (chum (mix e (cut 5 [d 1] a))))
+      =+  c=(met 5 a)
+      =+  d=`@`0
+      =+  e=b
+      |-
+      ?:  .=(d c)
+        =+  f=(dis 0x7fffffff e)
+        ?:  .=(0 f)
+          $$(b .+(b))
+        f
+      $(d .+(d), e (chum (mix e (cut 5 [d 1] a))))
   ::
   ++  chum
     |=  [b=@]
@@ -716,12 +712,12 @@
 ::
   ::  Tier 5, parsing and printing
 ::
-++  ball
+++  bill
   |?
     ^+(@ *rock)
     [%duct p=*tape]
-    [%grip p=[p=*rock q=*rock] q=*(list ball)]
-    [%meld p=*(list ball)]
+    [%grip p=[p=*rock q=*rock] q=*(list bill)]
+    [%meld p=*(list bill)]
   --
 ::
 ++  byte  <@>
@@ -730,8 +726,8 @@
 ++  term  <@>
 ++  wall  (list tape)
 ++  to
-  ~.  %to
-  &=  pup=*ball
+  ~%  %to   ->  (%wit wit)
+  &=  pup=*bill
   ++  fly
     ~.  %fly
     |=  bor=@
@@ -763,7 +759,7 @@
     ^-  *tape
     ?-    pup 
         @           (rip 3 pup)
-        [%meld *]   (reel p.pup =+([p=*ball q=*tape] |.((weld ram(pup p) q))))
+        [%meld *]   (reel p.pup =+([p=*bill q=*tape] |.((weld ram(pup p) q))))
         [%duct *]   p.pup 
         [%grip *]
       %+  weld
@@ -786,9 +782,9 @@
         (add (met 3 p.p.pup) (met 3 q.p.pup))
       %+  roll
         q.pup
-      =+([p=*ball q=@] |.((add ?:(.=(0 q) 0 1) (add q wit(pup p)))))
+      =+([p=*bill q=@] |.((add ?:(.=(0 q) 0 1) (add q wit(pup p)))))
     ::
-        [%meld *]   (roll p.pup =+([p=*ball q=@] |.((add q wit(pup p)))))
+        [%meld *]   (roll p.pup =+([p=*bill q=@] |.((add q wit(pup p)))))
     -- 
   ==
 ::
@@ -796,13 +792,13 @@
   &*  nut=*
   ++  dem   (num 10 |=(p=@ (add '0' p)))
   ++  gut
-    |-  ^-  *ball
+    |-  ^-  *bill
     ?-  nut
         @   unt(nut nut)
         ^
       :+  %grip
         ['[' ']']
-      |-  ^-  *(list ball)
+      |-  ^-  *(list bill)
       ?-  nut
         [* @]   [$$(nut -.nut) $$(nut +.nut) ~]
         [* ^]   [$$(nut -.nut) $(nut +.nut)]
@@ -811,7 +807,7 @@
   ::
   ++  ham   (num 16 |=(p=@ ?:((lth 10 p) (add '0' p) (add 'a' p))))
   ++  loc
-    ^-  *ball
+    ^-  *bill
     ?>  ?=([p=@ q=[p=[p=@ q=@] q=[p=@ q=@]]] nut)   :: should be static
     :+  %grip
       ['<' '>']
@@ -1010,6 +1006,7 @@
     [%sgmt p=*chop q=*gene r=*(list <[p=*term q=*gene]>) s=*gene] ::  ~%  sigmit
     [%sgpd p=@ q=*gene]                                           ::  ~+  sigpad
     [%sgpm p=*gene q=*gene]                                       ::  ~&  sigpam
+    [%sgsg p=*gene q=*gene]                                       ::  ~|  sigsig
   ::
     [%tmbn p=*<%atom %noun %cell %flag %null>]                    ::  ;=  tambon
     [%tmdp p=*gene]                                               ::  ;-  tamdap
@@ -1193,6 +1190,7 @@
     ::
         [%sgpd *]   [%sgld [%memo %dtsg p.gen] q.gen]
         [%sgpm *]   [%sgld [%loaf p.gen] q.gen]
+        [%sgsg *]   [%sgld [%mean [%brdt p.gen]] q.gen]
     ::::
     ::::
         [%tmbn *]
@@ -1501,7 +1499,7 @@
     --
   ::
   ++  dump
-    ^-  *ball
+    ^-  *bill
     ~|  %dump
     =+  ^=  gil
         =+  den=[p=`@`1 q=*(map type <@>)]

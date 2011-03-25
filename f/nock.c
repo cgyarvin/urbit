@@ -970,3 +970,89 @@ u2_nk_kick(u2_wire wir_r,
      u2_rx(wir_r, gat),
      u2_st(gat));
 }
+
+/* u2_nk_wipe():
+**
+**   Clear the trace stacks.
+*/
+void
+u2_nk_wipe(u2_wire wir_r)
+{
+  u2_rz(wir_r, u2_wire_loc(wir_r)); u2_wire_loc(wir_r) = u2_nul;
+  u2_rz(wir_r, u2_wire_tac(wir_r)); u2_wire_tac(wir_r) = u2_nul;
+  u2_rz(wir_r, u2_wire_toc(wir_r)); u2_wire_toc(wir_r) = u2_nul;
+}
+
+/* _nk_show_loc(): show location.
+*/
+static void 
+_nk_show_loc(u2_wire wir_r,
+             u2_noun loc,
+             FILE*   fil_f)
+{
+  //  Low-tech
+  //
+  if ( (u2_nul != loc) && (u2_yes == u2_dust(loc)) ) {
+    // u2_noun h_loc = u2_h(loc);
+    u2_noun t_loc = u2_t(loc);
+
+    printf("place: %d.%d:%d.%d\n", 
+        u2_h(u2_h(t_loc)), u2_t(u2_h(t_loc)),
+        u2_h(u2_t(t_loc)), u2_t(u2_t(t_loc)));
+  }
+}
+
+/* u2_nk_show():
+**
+**   Display and/or clear the trace stacks.  If there is not
+**   an uncleared trace, this is a no-op.
+*/
+void
+u2_nk_show(u2_wire wir_r,
+           FILE*   fil_f)
+{
+}
+#if 0
+  u2_noun 
+  u2_noun zat = 
+    
+      u2_ray bas_r = u2_wire_bas_r(wir_r);
+
+      if ( u2_nul != zat ) {
+        // u2_noun h_zat = u2_h(zat);
+        u2_noun t_zat = u2_t(zat);
+
+        printf("place: %d.%d:%d.%d\n", 
+            u2_h(u2_h(t_zat)), u2_t(u2_h(t_zat)),
+            u2_h(u2_t(t_zat)), u2_t(u2_t(t_zat)));
+        u2_rl_lose(bas_r, zat);
+      }
+
+      if ( u2_nul != zof ) {
+        printf("trace:\n");
+        u2_bx_bean_print(wir_r, stdout, zof);
+        u2_rl_lose(bas_r, zof);
+      }
+
+    /* Dump and free trace information, if any.
+    */
+    {
+      u2_ray bas_r = u2_wire_bas_r(wir_r);
+
+      if ( u2_nul != zat ) {
+        // u2_noun h_zat = u2_h(zat);
+        u2_noun t_zat = u2_t(zat);
+
+        printf("place: %d.%d:%d.%d\n", 
+            u2_h(u2_h(t_zat)), u2_t(u2_h(t_zat)),
+            u2_h(u2_t(t_zat)), u2_t(u2_t(t_zat)));
+        u2_rl_lose(bas_r, zat);
+      }
+
+      if ( u2_nul != zof ) {
+        printf("trace:\n");
+        u2_bx_bean_print(wir_r, stdout, zof);
+        u2_rl_lose(bas_r, zof);
+      }
+    }
+#endif

@@ -26,6 +26,14 @@ u2_wr_init(c3_m   hip_m,
   u2_wire_plo_r(wir_r) = 0;
   u2_wire_jub_r(wir_r) = 0;
 
+  /* Trace stacks.
+  */
+  {
+    u2_wire_loc(wir_r) = u2_nul;
+    u2_wire_tac(wir_r) = u2_nul;
+    u2_wire_toc(wir_r) = u2_nul;
+  }
+
 #if 1
   /* Central memoization basket = 1/4 of address space.
   */
