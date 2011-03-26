@@ -241,6 +241,10 @@ u2_weak
 j2_mbc(watt_271, ream)(u2_wire wir_r, 
                        u2_weak txt);
 
+u2_weak
+j2_mbc(watt_270, ream)(u2_wire wir_r, 
+                       u2_weak txt);
+
 void
 j2_mcy(watt_271, ut, dupt)(u2_wire     wir_r,
                            u2_noun     van,
@@ -383,8 +387,137 @@ zuse_test3(struct zuse_state* fod_f,
   }
 }
 
-/* zuse_next4(): forward iteration from source, with comparison verify
+/* zuse_boot_gene(): boot from present shoe and gene, producing new shoe.
 */
+u2_noun                                                           //  transfer
+zuse_boot_gene(u2_wire wir_r, 
+               u2_noun sho,                                       //  retain
+               u2_noun gen)                                       //  retain
+{
+  u2_noun gam = _zuse_mo_mint(wir_r, sho, c3__noun, c3__noun, gen); 
+
+  if ( u2_none == gam ) {
+    fprintf(stderr, "  {boot: mint failed}\n");
+    u2_bx_show(wir_r);
+    u2_bx_spot(wir_r, u2_nul);
+
+    return u2_none;
+  }
+  u2_bx_show(wir_r);
+  u2_bx_spot(wir_r, u2_nul);
+
+  {
+    u2_noun typ = u2_h(gam);
+    u2_noun fol = u2_t(gam);
+    u2_noun cor = u2_nk_nock(wir_r, _0, fol);
+    u2_noun hos;
+
+    if ( u2_none == cor ) {
+      fprintf(stderr, "  {boot: nock failed}\n");
+
+      hos = u2_none;
+    }
+    else {
+      hos = u2_bc(wir_r, u2_rx(wir_r, typ), cor);
+    }
+    u2_bx_show(wir_r);
+    u2_bx_spot(wir_r, u2_nul);
+    u2_rz(wir_r, gam);
+
+    return hos;
+  }
+}
+
+/* zuse_fire_gene(): execute a stateless kernel expression, as a gene.
+*/
+void                                                              //  transfer
+zuse_fire_gene(u2_wire wir_r, 
+               u2_noun sho,                                       //  retain
+               u2_noun hos,                                       //  retain
+               u2_noun gen)                                       //  retain
+{
+  u2_noun gam = _zuse_mo_mint(wir_r, sho, c3__noun, c3__noun, gen); 
+
+  if ( u2_none == gam ) {
+    fprintf(stderr, "  {fire: mint failed}\n");
+    return;
+  }
+  u2_bx_show(wir_r);
+  u2_bx_spot(wir_r, u2_nul);
+
+  {
+    u2_noun typ = u2_h(gam);
+    u2_noun fol = u2_t(gam);
+
+    _zuse_dump_type(wir_r, sho, 0, typ);
+    u2_bx_spot(wir_r, u2_nul);
+    {
+      u2_noun som = u2_nk_nock(wir_r, u2_rx(wir_r, u2_t(hos)), fol);
+
+      if ( u2_none == som ) {
+        fprintf(stderr, "  {fire: nock failed}\n");
+      }
+      else {
+        u2_err(wir_r, 0, som);
+        hos = u2_none;
+      }
+      u2_bx_show(wir_r);
+      u2_bx_spot(wir_r, u2_nul);
+
+      u2_rz(wir_r, gam);
+      u2_rz(wir_r, som);
+    }
+  }
+}
+
+/* zuse_next4(): forward iteration from source, still a hack.
+*/
+void
+zuse_next4(struct zuse_state* fod_f,
+           const char*        ken_c,        //  now 270
+           const char*        nex_c,        //  now 269
+           const char*        arg_c)        //  command-line string
+{
+  u2_wire wir_r = fod_f->wir_r;
+  u2_noun ken   = u2_ux_read(wir_r, ken_c, "watt");
+  u2_noun nex   = u2_ux_read(wir_r, nex_c, "watt");
+  u2_noun arg   = arg_c ? u2_bn_string(wir_r, arg_c) : u2_none;
+
+  if ( u2_none == ken ) {
+    printf("zuse: %s: no file\n", ken_c);
+    u2_bl_bail(wir_r);
+  }
+  if ( u2_none == nex ) {
+    printf("zuse: %s: no file\n", nex_c);
+    u2_bl_bail(wir_r);
+  }
+
+  { 
+    u2_noun gen = j2_mbc(watt_271, ream)(wir_r, ken);
+    u2_noun xen = j2_mbc(watt_270, ream)(wir_r, nex);
+    u2_noun gar = (arg_c ? j2_mbc(watt_271, ream)(wir_r, arg) : u2_none);
+
+    /* Boot sequence!
+    */
+    {
+      u2_noun sho, hos;
+
+      fprintf(stderr, "{boot: %s}\n", ken_c);
+      sho = zuse_boot_gene(wir_r, fod_f->pit, gen);
+
+      fprintf(stderr, "{boot: %s}\n", nex_c);
+      hos = zuse_boot_gene(wir_r, sho, xen);
+
+      if ( u2_none != gar ) {
+        fprintf(stderr, "{fire: %s, \"%s\"}\n", nex_c, arg_c);
+        zuse_fire_gene(wir_r, fod_f->pit, sho, gar);
+      }
+
+      u2_rz(wir_r, sho);
+      u2_rz(wir_r, hos);
+    }
+  }
+}
 
 /* _zuse_from(): expression in pit space.
 */

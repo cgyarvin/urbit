@@ -73,6 +73,7 @@
           u2_bi_t(u2_wire wir_r,
                   u2_noun a);
 
+
         /* u2_bi_frag():
         **
         **   Return fragment (a) of (b).
