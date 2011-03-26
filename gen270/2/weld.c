@@ -13,7 +13,7 @@
                     u2_noun b)                                    //  retain
   {
     if ( _0 == a ) {
-      return b;
+      return u2_rx(wir_r, b);
     } 
     else if ( u2_no == u2_dust(a) ) {
       return u2_none;

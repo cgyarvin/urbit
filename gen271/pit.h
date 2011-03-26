@@ -11,12 +11,14 @@
 #   define  Tier1         u2_jet_live
 #   define  Tier2         u2_jet_live
 #   define  Tier3         u2_jet_live
-#   define  Tier3_test    (Tier3 | u2_jet_test)
 #   define  Tier4         u2_jet_live
-#   define  Tier5         (u2_jet_live | u2_jet_test)
-#   define  Tier6_a       u2_jet_live
+#   define  Tier5         u2_jet_live
+#   define  Tier6         u2_jet_live
+#   define  Tier6_a       Tier6
+#   define  Tier6_b       Tier6
+
+#   define  Tier5_test    (Tier5 | u2_jet_test)
 #   define  Tier6_a_memo  (Tier6_a | u2_jet_memo)
-#   define  Tier6_b       u2_jet_live
 #   define  Tier6_b_memo  (Tier6_b | u2_jet_memo)
 #   define  Tier6_b_test  (Tier6_b | u2_jet_test)
 
@@ -298,6 +300,21 @@
       j2_mcc(Pit, by, gas)(u2_wire wir_r, 
                            u2_noun a,                             //  retain
                            u2_noun b);                            //  retain
+    /** Tier 5.
+    **/
+      u2_noun                                                     //  transfer
+      j2_mcy(Pit, to, fly)(u2_wire wir_r,
+                           u2_noun pup,                           //  retain
+                           u2_noun bor);                          //  retain
+
+      u2_atom                                                     //  transfer
+      j2_mcy(Pit, to, ram)(u2_wire wir_r,
+                           u2_noun pup);                          //  retain
+
+      u2_atom                                                     //  transfer
+      j2_mcy(Pit, to, wit)(u2_wire wir_r,
+                           u2_noun pup);                          //  retain
+
     /** Tier 6.
     **/
       u2_noun                                                     //  transfer

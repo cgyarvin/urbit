@@ -421,6 +421,7 @@
 ++  met
   ~.  %met
   |=  [a=*bloq b=@]
+  ^-  @
   =+  c=`@`0
   |-
   ?:  .=(0 b)
@@ -726,7 +727,9 @@
 ++  term  <@>
 ++  wall  (list tape)
 ++  to
-  ~%  %to   ->  (%wit wit)
+  ~%    %to  
+      ->  
+    (%wit wit, %ram ram)
   &=  pup=*bill
   ++  fly
     ~.  %fly
@@ -737,9 +740,7 @@
         ++  ind
           |=  tep=*tape
           ^-  *tape
-          ?:  .=(0 col)
-            tep
-          $(col (dec col), tep [' ' tep])
+          ?:(.=(0 col) tep $(col (dec col), tep [' ' tep]))
         ==
     =+  lux=*wall
     |-  ^-  *wall
@@ -759,8 +760,8 @@
     ^-  *tape
     ?-    pup 
         @           (rip 3 pup)
-        [%meld *]   (reel p.pup =+([p=*bill q=*tape] |.((weld ram(pup p) q))))
         [%duct *]   p.pup 
+        [%meld *]   (reel p.pup =+([p=*bill q=*tape] |.((weld ram(pup p) q))))
         [%grip *]
       %+  weld
         (rip 3 p.p.pup)
@@ -794,7 +795,7 @@
   ++  gut
     |-  ^-  *bill
     ?-  nut
-        @   unt(nut nut)
+        @   unt(nut nut)      ::  XX - type hack for obsolete reasons
         ^
       :+  %grip
         ['[' ']']

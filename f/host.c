@@ -746,20 +746,19 @@ u2_ho_test(u2_wire    wir_r,
     if ( u2_none == had ) {
       msg_c = "bail";
       printf("cos_c: %s\n", cos_c);
-      u2_err(wir_r, "right", sof);
     } else if ( u2_none == sof ) {
       msg_c = "funk";
     } else if ( u2_no == u2_sing(had, sof) ) {
       msg_c = "fail";
       printf("cos_c: %s\n", cos_c);
 
+      //  For detailed debugging, activate/extend this junkheap as needed.
+      //
+#if 0
       {
         u2_err(wir_r, "wrong", had);
         u2_err(wir_r, "right", sof);
       }
-      //  For detailed debugging, activate/extend this junkheap as needed.
-      //
-#if 0
       {
         u2_noun sut, ref, van;
 
