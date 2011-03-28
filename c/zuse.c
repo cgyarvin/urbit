@@ -30,6 +30,10 @@
         */
         u2_noun pit;
 
+        /*  bot - the pair [pyt pit].
+        */
+        u2_noun bot;
+
         /*  ryd - a read gate.
         */
         u2_noun ryd;
@@ -99,6 +103,8 @@ _zuse_load_rock(struct zuse_state* fod_f,
     fod_f->pyt = u2_ba_sole(wir_r, u2_h(fat));
     fod_f->kol = u2_ba_sole(wir_r, u2_t(fat));
     fod_f->pit = u2_bn_nock(wir_r, _0, fod_f->kol);
+    fod_f->bot = u2_bc(wir_r, u2_rx(wir_r, fod_f->pyt), 
+                              u2_rx(wir_r, fod_f->pit));
   }
 }
 
@@ -133,6 +139,8 @@ _zuse_load_cold(struct zuse_state* fod_f,
     fod_f->kol = kol;
     fod_f->pyt = pyt;
     fod_f->pit = pit;
+    fod_f->bot = u2_bc(wir_r, u2_rx(wir_r, fod_f->pyt), 
+                              u2_rx(wir_r, fod_f->pit));
 
     _zuse_save_rock(fod_f, src_c);
   }
@@ -251,10 +259,10 @@ j2_mcy(watt_271, ut, dupt)(u2_wire     wir_r,
                            const c3_c* cap_c,
                            u2_noun     typ);
 
-/* _zuse_mo_mint(): mint from gen, pit, gol.
+/* _zuse_ol_mint(): mint from gen, pit, gol.
 */
 u2_weak                                                           //  transfer
-_zuse_mo_mint(u2_wire wir_r,
+_zuse_ol_mint(u2_wire wir_r,
               u2_noun pit,                                        //  retain
               u2_noun typ,                                        //  retain
               u2_noun gol,                                        //  retain
@@ -308,6 +316,17 @@ _zuse_mo_mint(u2_wire wir_r,
     }
   }
 }
+/* _zuse_nu_mint(): mint from gene, shoe, type, goal.
+*/
+u2_weak                                                           //  transfer
+_zuse_nu_mint(u2_wire wir_r,
+              u2_noun sho,                                        //  retain
+              u2_noun typ,                                        //  retain
+              u2_noun gol,                                        //  retain
+              u2_noun gen)                                        //  retain
+{
+  return _zuse_ol_mint(wir_r, u2_t(sho), typ, gol, gen);
+}
 
 /* _zuse_dump_type(): print type with internal tools.
 */
@@ -326,6 +345,84 @@ _zuse_dump_type(u2_wire wir_r,
 
     j2_mcy(watt_271, ut, dupt)(wir_r, van, cap_c, typ);
     u2_rl_lose(wir_r, van);
+  }
+}
+
+/* zuse_boot_gene(): boot from present shoe and gene, producing new shoe.
+*/
+u2_noun                                                           //  transfer
+zuse_boot_gene(u2_wire wir_r, 
+               u2_noun sho,                                       //  retain
+               u2_noun gen)                                       //  retain
+{
+  u2_noun gam = _zuse_nu_mint(wir_r, sho, c3__noun, c3__noun, gen); 
+
+  if ( u2_none == gam ) {
+    fprintf(stderr, "  {boot: mint failed}\n");
+    u2_bx_show(wir_r);
+    u2_bx_spot(wir_r, u2_nul);
+
+    return u2_none;
+  }
+
+  {
+    u2_noun typ = u2_h(gam);
+    u2_noun fol = u2_t(gam);
+    u2_noun cor = u2_nk_nock(wir_r, _0, u2_rx(wir_r, fol));   //  !!
+    u2_noun hos;
+
+    if ( u2_none == cor ) {
+      fprintf(stderr, "  {boot: nock failed}\n");
+
+      hos = u2_none;
+      u2_bx_show(wir_r);
+      u2_bx_spot(wir_r, u2_nul);
+    }
+    else {
+      hos = u2_bc(wir_r, u2_rx(wir_r, typ), cor);
+    }
+    u2_rz(wir_r, gam);
+
+    return hos;
+  }
+}
+
+/* zuse_fire_gene(): execute a stateless kernel expression, as a gene.
+*/
+void                                                              //  transfer
+zuse_fire_gene(u2_wire wir_r, 
+               u2_noun sho,                                       //  retain
+               u2_noun hos,                                       //  retain
+               u2_noun gen)                                       //  retain
+{
+  u2_noun gam = _zuse_nu_mint(wir_r, sho, u2_h(hos), c3__noun, gen); 
+
+  if ( u2_none == gam ) {
+    fprintf(stderr, "  {fire: mint failed}\n");
+    return;
+  }
+  {
+    u2_noun typ = u2_h(gam);
+    u2_noun fol = u2_t(gam);
+
+    _zuse_dump_type(wir_r, u2_t(sho), 0, typ);
+    u2_bx_spot(wir_r, u2_nul);
+    {
+      u2_noun som = u2_nk_nock(wir_r, u2_rx(wir_r, u2_t(hos)), fol);
+
+      if ( u2_none == som ) {
+        fprintf(stderr, "  {fire: nock failed}\n");
+      }
+      else {
+        u2_err(wir_r, 0, som);
+        hos = u2_none;
+      }
+      u2_bx_show(wir_r);
+      u2_bx_spot(wir_r, u2_nul);
+
+      u2_rz(wir_r, gam);
+      u2_rz(wir_r, som);
+    }
   }
 }
 
@@ -352,7 +449,7 @@ zuse_test3(struct zuse_state* fod_f,
       return;
     }
     else {
-      u2_noun lof = _zuse_mo_mint(wir_r, fod_f->pit, c3__noun, c3__noun, gen); 
+      u2_noun lof = _zuse_ol_mint(wir_r, fod_f->pit, c3__noun, c3__noun, gen); 
 
       if ( u2_none == lof ) {
         printf("test: failed\n");
@@ -370,7 +467,7 @@ zuse_test3(struct zuse_state* fod_f,
           u2_noun pug = u2_bn_nock(wir_r, _0, tul);
           u2_noun src = u2_rl_string(wir_r, arg_c);
           u2_noun ger = j2_mbc(watt_271, ream)(wir_r, src);
-          u2_noun hup = _zuse_mo_mint(wir_r, fod_f->pit, typ, c3__noun, ger);
+          u2_noun hup = _zuse_ol_mint(wir_r, fod_f->pit, typ, c3__noun, ger);
 
           if ( (u2_none != hup) && (u2_none != pug) ) {
             u2_weak muf = u2_nk_nock(wir_r, pug, u2_t(hup));
@@ -383,89 +480,6 @@ zuse_test3(struct zuse_state* fod_f,
           }
         }
       }
-    }
-  }
-}
-
-/* zuse_boot_gene(): boot from present shoe and gene, producing new shoe.
-*/
-u2_noun                                                           //  transfer
-zuse_boot_gene(u2_wire wir_r, 
-               u2_noun sho,                                       //  retain
-               u2_noun gen)                                       //  retain
-{
-  u2_noun gam = _zuse_mo_mint(wir_r, sho, c3__noun, c3__noun, gen); 
-
-  if ( u2_none == gam ) {
-    fprintf(stderr, "  {boot: mint failed}\n");
-    u2_bx_show(wir_r);
-    u2_bx_spot(wir_r, u2_nul);
-
-    return u2_none;
-  }
-  u2_bx_show(wir_r);
-  u2_bx_spot(wir_r, u2_nul);
-
-  {
-    u2_noun typ = u2_h(gam);
-    u2_noun fol = u2_t(gam);
-    u2_noun cor = u2_nk_nock(wir_r, _0, fol);
-    u2_noun hos;
-
-    if ( u2_none == cor ) {
-      fprintf(stderr, "  {boot: nock failed}\n");
-
-      hos = u2_none;
-    }
-    else {
-      hos = u2_bc(wir_r, u2_rx(wir_r, typ), cor);
-    }
-    u2_bx_show(wir_r);
-    u2_bx_spot(wir_r, u2_nul);
-    u2_rz(wir_r, gam);
-
-    return hos;
-  }
-}
-
-/* zuse_fire_gene(): execute a stateless kernel expression, as a gene.
-*/
-void                                                              //  transfer
-zuse_fire_gene(u2_wire wir_r, 
-               u2_noun sho,                                       //  retain
-               u2_noun hos,                                       //  retain
-               u2_noun gen)                                       //  retain
-{
-  u2_noun gam = _zuse_mo_mint(wir_r, sho, c3__noun, c3__noun, gen); 
-
-  if ( u2_none == gam ) {
-    fprintf(stderr, "  {fire: mint failed}\n");
-    return;
-  }
-  u2_bx_show(wir_r);
-  u2_bx_spot(wir_r, u2_nul);
-
-  {
-    u2_noun typ = u2_h(gam);
-    u2_noun fol = u2_t(gam);
-
-    _zuse_dump_type(wir_r, sho, 0, typ);
-    u2_bx_spot(wir_r, u2_nul);
-    {
-      u2_noun som = u2_nk_nock(wir_r, u2_rx(wir_r, u2_t(hos)), fol);
-
-      if ( u2_none == som ) {
-        fprintf(stderr, "  {fire: nock failed}\n");
-      }
-      else {
-        u2_err(wir_r, 0, som);
-        hos = u2_none;
-      }
-      u2_bx_show(wir_r);
-      u2_bx_spot(wir_r, u2_nul);
-
-      u2_rz(wir_r, gam);
-      u2_rz(wir_r, som);
     }
   }
 }
@@ -495,26 +509,38 @@ zuse_next4(struct zuse_state* fod_f,
   { 
     u2_noun gen = j2_mbc(watt_271, ream)(wir_r, ken);
     u2_noun xen = j2_mbc(watt_270, ream)(wir_r, nex);
-    u2_noun gar = (arg_c ? j2_mbc(watt_271, ream)(wir_r, arg) : u2_none);
+    u2_noun gar = (arg_c ? j2_mbc(watt_270, ream)(wir_r, arg) : u2_none);
 
     /* Boot sequence!
     */
     {
       u2_noun sho, hos;
 
-      fprintf(stderr, "{boot: %s}\n", ken_c);
-      sho = zuse_boot_gene(wir_r, fod_f->pit, gen);
-
+      fprintf(stderr, "{booting: %s}\n", ken_c);
+      sho = zuse_boot_gene(wir_r, fod_f->bot, gen);
+      if ( u2_none == sho ) {
+        return;
+      }
+      fprintf(stderr, "{booted: %s}\n", ken_c);
+#if 1
       fprintf(stderr, "{boot: %s}\n", nex_c);
       hos = zuse_boot_gene(wir_r, sho, xen);
-
+      if ( u2_none == hos ) {
+        return;
+      }
+      fprintf(stderr, "{booted: %s}\n", nex_c);
+#endif
       if ( u2_none != gar ) {
-        fprintf(stderr, "{fire: %s, \"%s\"}\n", nex_c, arg_c);
-        zuse_fire_gene(wir_r, fod_f->pit, sho, gar);
+        // fprintf(stderr, "{fire: %s}\n", ken_c);
+        // zuse_fire_gene(wir_r, fod_f->bot, sho, gar);
+        fprintf(stderr, "{fire: %s}\n", nex_c);
+        zuse_fire_gene(wir_r, sho, hos, gar);
       }
 
       u2_rz(wir_r, sho);
+#if 1
       u2_rz(wir_r, hos);
+#endif
     }
   }
 }
@@ -559,6 +585,9 @@ zuse_line(struct zuse_state* fod_f,
       if ( !strcmp(cmd_c, "test") ) {
         // zuse_test(fod_f, "watt/t1-273");
         zuse_test3(fod_f, "watt/270", arg_c);
+      }
+      else if ( !strcmp(cmd_c, "next") ) {
+        zuse_next4(fod_f, "watt/270", "watt/269", arg_c);
       }
       else {
 #if 0

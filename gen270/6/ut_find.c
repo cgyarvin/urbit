@@ -223,7 +223,7 @@
 
     if ( u2_nul == fin ) {
       u2_err(wir_r, "cog", cog);
-      j2_mcy(Pit, ut, dupt)(wir_r, van, "sut", sut);
+      j2_mcy(watt_271, ut, dupt)(wir_r, van, "sut", sut);
       return u2_bl_bail(wir_r);
     } else {
       u2_noun pro = u2_rx(wir_r, u2_t(fin));

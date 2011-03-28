@@ -556,6 +556,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, ut, mint)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, mint), Tier6_b, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ut, mint), Tier6_b_test, u2_none, u2_none },
     { }
   };

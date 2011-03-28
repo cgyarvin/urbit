@@ -1,6 +1,6 @@
 ~%    %watt.270 
     ~ 
-  ()
+  (%ut ut, %to to)
 &.
 ::
   ::  Tier 1, atomic arithmetic
@@ -729,7 +729,7 @@
 ++  to
   ~%    %to  
       ->  
-    (%wit wit, %ram ram)
+    (%wit wit, %ram ram, %fly fly)
   &=  pup=*bill
   ++  fly
     ~.  %fly
@@ -967,8 +967,8 @@
     [%dgtr p=*(list gene)]                                        ::  :*  degtar
   :: 
     [%dtbn p=*gene q=*gene]                                       ::  .=  dotbon
-    [%dtkt p=*gene]                                               ::  .+  dotket
     [%dtcs p=*gene]                                               ::  .?  dotcas
+    [%dtpd p=*gene]                                               ::  .+  dotket
     [%dtsg p=*]                                                   ::  .~  dotsig
     [%dttr p=*gene q=*gene]                                       ::  .*  dottar
   ::
@@ -1196,7 +1196,7 @@
     ::::
         [%tmbn *]
       ?-  p.gen
-        %atom   [%ktdp [%dtkt %dtsg 0] [%dtsg 0]]
+        %atom   [%ktdp [%dtpd %dtsg 0] [%dtsg 0]]
         %noun   [%ktdp [%dttr [%dtsg 0] [%dtsg 0]] [%dtsg 0]]
         %cell   [%dgdp [%tmbn %noun] [%tmbn %noun]]
         %flag   [%ktdp [%dtcs %dtsg 0] [%dtsg 0]]
@@ -1417,6 +1417,7 @@
       %find   find
       %fire   fire
       %fish   fish
+      %fret   fret
       %fuse   fuse
       %gain   gain
       %heal   heal
@@ -1897,7 +1898,7 @@
         :-  (nice flag)
         [3 q:$(gen p.gen, gol %noun)]
       ::
-          [%dtkt *]                                                   ::  .+
+          [%dtpd *]                                                   ::  .+
         :-  (nice %atom)
         [4 q:$(gen p.gen, gol %atom)]
       ::
@@ -2246,7 +2247,7 @@
         [%dgdp *]   (cell $(gen p.gen) $(gen q.gen))
         [%dtbn *]   flag
         [%dtcs *]   flag
-        [%dtkt *]   %atom
+        [%dtpd *]   %atom
         [%dtsg *]   [%cube p.gen]
         [%dttr *]   %noun
         [%ktbn *]   (face p.gen $(gen q.gen))

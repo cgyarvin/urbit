@@ -745,16 +745,90 @@ u2_ho_test(u2_wire    wir_r,
 
     if ( u2_none == had ) {
       msg_c = "bail";
-      printf("cos_c: %s\n", cos_c);
+      printf("bail: cos_c: %s\n", cos_c);
     } else if ( u2_none == sof ) {
       msg_c = "funk";
+      printf("funk: cos_c: %s\n", cos_c);
+      c3_assert(0);
+
     } else if ( u2_no == u2_sing(had, sof) ) {
       msg_c = "fail";
-      printf("cos_c: %s\n", cos_c);
+      printf("fail: cos_c: %s\n", cos_c);
 
+      {
+        u2_noun sut, gol, gen, van;
+
+        if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &gol, 
+                                    u2_cv_sam_3, &gen,
+                                    u2_cv_con, &van, 0)) ||
+             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
+        {
+          c3_assert(0);
+        } else {
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "sut", sut);
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "gol", gol);
+          // u2_err(wir_r, "gen", gen);
+
+          // u2_err(wir_r, "SOFT", sof);
+          // u2_err(wir_r, "HARD", had);
+
+          // j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_sof", u2_h(sof));
+          // j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_had", u2_h(had));
+
+          u2_err(wir_r, "h_sof", u2_h(sof));
+          u2_err(wir_r, "h_had", u2_h(had));
+        }
+      }
       //  For detailed debugging, activate/extend this junkheap as needed.
       //
 #if 0
+      {
+        u2_noun sut, dab, van;
+
+        if ( (u2_no == u2_mean(cor, u2_cv_sam, &dab, u2_cv_con, &van, 0)) ||
+             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
+        {
+          c3_assert(0);
+        } else {
+          j2_mcy(watt_270, ut, dupt)(wir_r, van, "sut", sut);
+        }
+      }
+      {
+        u2_noun sut, gol, gen, van;
+
+        if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &gol, 
+                                    u2_cv_sam_3, &gen,
+                                    u2_cv_con, &van, 0)) ||
+             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
+        {
+          c3_assert(0);
+        } else {
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "sut", sut);
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "gol", gol);
+          u2_err(wir_r, "gen", gen);
+/*
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_sof", u2_h(sof));
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_had", u2_h(had));
+
+          u2_err(wir_r, "t_sof", u2_t(sof));
+          u2_err(wir_r, "t_had", u2_t(had));
+*/
+        }
+      }
+      {
+        u2_noun sut, gen, van;
+
+        if ( (u2_no == u2_mean(cor, u2_cv_sam, &gen,
+                                    u2_cv_con, &van, 0)) ||
+             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
+        {
+          c3_assert(0);
+        } else {
+          u2_err(wir_r, "sut", sut);
+          // j2_mcy(watt_271, ut, dupt)(wir_r, van, "sut", sut);
+          u2_err(wir_r, "gen", gen);
+        }
+      }
       {
         u2_err(wir_r, "wrong", had);
         u2_err(wir_r, "right", sof);
