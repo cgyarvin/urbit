@@ -45,16 +45,6 @@
     c
   $(a (sub a b), c .+(c))
 ::
-++  fib
-  |=  a=@
-  ~+
-  ^-  @
-  ?-    a
-      0   0
-      1   1
-      *   (add $(a (sub a 1)) $(a (sub a 2)))
-  --
-::
 ++  gte
   ~.  %gte
   |=  [a=@ b=@]
@@ -1957,7 +1947,7 @@
         =+  dez=(bake(sut toc, vet |) q.gen)
         ::  :-  (nice toc(p.r.q dez))
         :-  (nice (core p.dan [%wood p.dan [dez q.gen]]))
-        (comb q.dan [[0 1] [1 dez]])
+        (cons q.dan [1 dez])
       ::
           [%sgld *]                                                   ::  ~>
         =+  hum=$(gen q.gen)

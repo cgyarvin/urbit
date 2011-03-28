@@ -253,6 +253,10 @@ u2_weak
 j2_mbc(watt_270, ream)(u2_wire wir_r, 
                        u2_weak txt);
 
+u2_weak
+j2_mbc(watt_269, ream)(u2_wire wir_r, 
+                       u2_weak txt);
+
 void
 j2_mcy(watt_271, ut, dupt)(u2_wire     wir_r,
                            u2_noun     van,
@@ -490,11 +494,13 @@ void
 zuse_next4(struct zuse_state* fod_f,
            const char*        ken_c,        //  now 270
            const char*        nex_c,        //  now 269
+           const char*        ult_c,        //  now 268
            const char*        arg_c)        //  command-line string
 {
   u2_wire wir_r = fod_f->wir_r;
   u2_noun ken   = u2_ux_read(wir_r, ken_c, "watt");
   u2_noun nex   = u2_ux_read(wir_r, nex_c, "watt");
+  u2_noun ult   = u2_ux_read(wir_r, ult_c, "watt");
   u2_noun arg   = arg_c ? u2_bn_string(wir_r, arg_c) : u2_none;
 
   if ( u2_none == ken ) {
@@ -505,42 +511,52 @@ zuse_next4(struct zuse_state* fod_f,
     printf("zuse: %s: no file\n", nex_c);
     u2_bl_bail(wir_r);
   }
+  if ( u2_none == ult ) {
+    printf("zuse: %s: no file\n", ult_c);
+    u2_bl_bail(wir_r);
+  }
 
   { 
     u2_noun gen = j2_mbc(watt_271, ream)(wir_r, ken);
     u2_noun xen = j2_mbc(watt_270, ream)(wir_r, nex);
-    u2_noun gar = (arg_c ? j2_mbc(watt_270, ream)(wir_r, arg) : u2_none);
+    u2_noun las = j2_mbc(watt_269, ream)(wir_r, ult);
+    u2_noun gar = (arg_c ? j2_mbc(watt_269, ream)(wir_r, arg) : u2_none);
 
     /* Boot sequence!
     */
     {
-      u2_noun sho, hos;
+      u2_noun sho, hos, osh;
 
-      fprintf(stderr, "{booting: %s}\n", ken_c);
+      fprintf(stderr, "{boot: %s}\n", ken_c);
       sho = zuse_boot_gene(wir_r, fod_f->bot, gen);
       if ( u2_none == sho ) {
         return;
       }
-      fprintf(stderr, "{booted: %s}\n", ken_c);
-#if 1
       fprintf(stderr, "{boot: %s}\n", nex_c);
       hos = zuse_boot_gene(wir_r, sho, xen);
       if ( u2_none == hos ) {
         return;
       }
-      fprintf(stderr, "{booted: %s}\n", nex_c);
-#endif
+      fprintf(stderr, "{boot: %s}\n", ult_c);
+      osh = zuse_boot_gene(wir_r, hos, las);
+      if ( u2_none == osh ) {
+        return;
+      }
+
       if ( u2_none != gar ) {
         // fprintf(stderr, "{fire: %s}\n", ken_c);
         // zuse_fire_gene(wir_r, fod_f->bot, sho, gar);
-        fprintf(stderr, "{fire: %s}\n", nex_c);
-        zuse_fire_gene(wir_r, sho, hos, gar);
+        
+        // fprintf(stderr, "{fire: %s}\n", nex_c);
+        // zuse_fire_gene(wir_r, sho, hos, gar);
+
+        fprintf(stderr, "{fire: %s}\n", ult_c);
+        zuse_fire_gene(wir_r, hos, osh, gar);
       }
 
       u2_rz(wir_r, sho);
-#if 1
       u2_rz(wir_r, hos);
-#endif
+      u2_rz(wir_r, osh);
     }
   }
 }
@@ -587,7 +603,7 @@ zuse_line(struct zuse_state* fod_f,
         zuse_test3(fod_f, "watt/270", arg_c);
       }
       else if ( !strcmp(cmd_c, "next") ) {
-        zuse_next4(fod_f, "watt/270", "watt/269", arg_c);
+        zuse_next4(fod_f, "watt/270", "watt/269", "watt/268", arg_c);
       }
       else {
 #if 0

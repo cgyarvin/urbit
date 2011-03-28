@@ -306,12 +306,133 @@ J270_OFILES=\
        $(J270_6_OFILES_UT) \
        gen270/watt.o
 
+J269_1_OFILES=\
+       gen269/1/add.o \
+       gen269/1/bex.o \
+       gen269/1/dec.o \
+       gen269/1/div.o \
+       gen269/1/gte.o \
+       gen269/1/gth.o \
+       gen269/1/lte.o \
+       gen269/1/lth.o \
+       gen269/1/mod.o \
+       gen269/1/mul.o \
+       gen269/1/sub.o
+
+J269_2_OFILES=\
+       gen269/2/bind.o \
+       gen269/2/clap.o \
+       gen269/2/drop.o \
+       gen269/2/flop.o \
+       gen269/2/lent.o \
+       gen269/2/levy.o \
+       gen269/2/lien.o \
+       gen269/2/need.o \
+       gen269/2/reel.o \
+       gen269/2/roll.o \
+       gen269/2/skim.o \
+       gen269/2/skip.o \
+       gen269/2/snag.o \
+       gen269/2/sort.o \
+       gen269/2/turn.o \
+       gen269/2/weld.o
+
+J269_3_OFILES=\
+       gen269/3/cap.o \
+       gen269/3/cat.o \
+       gen269/3/con.o \
+       gen269/3/cut.o \
+       gen269/3/dor.o \
+       gen269/3/dis.o \
+       gen269/3/end.o \
+       gen269/3/gor.o \
+       gen269/3/hor.o \
+       gen269/3/lsh.o \
+       gen269/3/mas.o \
+       gen269/3/met.o \
+       gen269/3/mix.o \
+       gen269/3/mug.o \
+       gen269/3/peg.o \
+       gen269/3/rap.o \
+       gen269/3/rip.o \
+       gen269/3/rsh.o \
+       gen269/3/vor.o
+
+J269_4_OFILES=\
+       gen269/4/in.o \
+       gen269/4/by.o \
+       gen269/4/in_has.o \
+       gen269/4/in_gas.o \
+       gen269/4/in_put.o \
+       gen269/4/in_tap.o \
+       gen269/4/by_gas.o \
+       gen269/4/by_get.o \
+       gen269/4/by_has.o \
+       gen269/4/by_put.o 
+
+J269_5_OFILES=\
+       gen269/5/to.o
+
+J269_6_OFILES=\
+       gen269/6/ap.o \
+       gen269/6/cell.o \
+       gen269/6/comb.o \
+       gen269/6/cons.o \
+       gen269/6/core.o \
+       gen269/6/face.o \
+       gen269/6/flan.o \
+       gen269/6/flip.o \
+       gen269/6/flor.o \
+       gen269/6/fork.o \
+       gen269/6/hack.o \
+       gen269/6/hike.o \
+       gen269/6/look.o \
+       gen269/6/ream.o \
+       gen269/6/ut.o
+
+J269_6_OFILES_UT=\
+       gen269/6/ut_bake.o \
+       gen269/6/ut_burn.o \
+       gen269/6/ut_cull.o \
+       gen269/6/ut_edit.o \
+       gen269/6/ut_emit.o \
+       gen269/6/ut_find.o \
+       gen269/6/ut_fire.o \
+       gen269/6/ut_fish.o \
+       gen269/6/ut_fret.o \
+       gen269/6/ut_fuse.o \
+       gen269/6/ut_gain.o \
+       gen269/6/ut_heal.o \
+       gen269/6/ut_mint.o \
+       gen269/6/ut_orth.o \
+       gen269/6/ut_nest.o \
+       gen269/6/ut_park.o \
+       gen269/6/ut_peek.o \
+       gen269/6/ut_play.o \
+       gen269/6/ut_repo.o \
+       gen269/6/ut_rest.o \
+       gen269/6/ut_seek.o \
+       gen269/6/ut_snap.o \
+       gen269/6/ut_tuck.o \
+       gen269/6/ut_tusk.o
+
+J269_OFILES=\
+       $(J269_1_OFILES) \
+       $(J269_2_OFILES) \
+       $(J269_3_OFILES) \
+       $(J269_4_OFILES) \
+       $(J269_5_OFILES) \
+       $(J269_6_OFILES) \
+       $(J269_6_OFILES_UT) \
+       gen269/watt.o
+
 OFILES=\
        $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
        $(J271_OFILES) \
-       $(J270_OFILES)
+       $(J270_OFILES) \
+       $(J269_OFILES)
 
 $(BIN)/zuse: $(OFILES)
 	mkdir -p $(BIN)

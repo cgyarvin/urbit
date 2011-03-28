@@ -16,12 +16,14 @@
 
     /* External drivers.
     */
+      extern u2_ho_driver j2_da(watt_269);
       extern u2_ho_driver j2_da(watt_270);
       extern u2_ho_driver j2_da(watt_271);
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       static u2_ho_driver *u2_HostDriverBase[] = {
+        &j2_da(watt_269), 
         &j2_da(watt_270), 
         &j2_da(watt_271), 
         0
@@ -132,11 +134,9 @@ _cs_save(u2_ho_cash* cas_s,
         u2_noun     tag   = per_p->tag;
 
         if ( u2_none != tag ) {
-          /*
-          ** If this assertion fires, you have a duplicate formula 
-          ** or battery.  Why?
+          /* Duplicate entry - no need to save it.
           */
-          c3_assert(u2_no == u2_sing(som, tag));
+          return;
         }
         else {
           per_p->tag = som;
@@ -772,11 +772,11 @@ u2_ho_test(u2_wire    wir_r,
           // u2_err(wir_r, "SOFT", sof);
           // u2_err(wir_r, "HARD", had);
 
-          // j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_sof", u2_h(sof));
-          // j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_had", u2_h(had));
+         //  j2_mcy(watt_270, ut, dupt)(wir_r, van, "h_sof", u2_h(sof));
+         // j2_mcy(watt_270, ut, dupt)(wir_r, van, "h_had", u2_h(had));
 
-          u2_err(wir_r, "h_sof", u2_h(sof));
-          u2_err(wir_r, "h_had", u2_h(had));
+          // u2_err(wir_r, "h_sof", u2_h(sof));
+          // u2_err(wir_r, "h_had", u2_h(had));
         }
       }
       //  For detailed debugging, activate/extend this junkheap as needed.

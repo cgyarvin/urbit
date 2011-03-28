@@ -1957,7 +1957,7 @@
         =+  dez=(bake(sut toc, vet |) q.gen)
         ::  :-  (nice toc(p.r.q dez))
         :-  (nice (core p.dan [%wood p.dan [dez q.gen]]))
-        (comb q.dan [[0 1] [1 dez]])
+        (cons q.dan [1 dez])
       ::
           [%sgld *]                                                   ::  ~>
         =+  hum=$(gen q.gen)
