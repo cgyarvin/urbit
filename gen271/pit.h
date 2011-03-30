@@ -363,14 +363,6 @@
                         u2_noun gen);                             //  retain
 
       u2_noun                                                     //  transfer
-      j2_mcy(Pit, ut, heal)(u2_wire wir_r,
-                            u2_noun van,                          //  retain
-                            u2_noun sut,                          //  retain
-                            u2_noun qog,                          //  retain
-                            u2_noun axe,                          //  retain
-                            u2_noun ref);                         //  retain
-
-      u2_noun                                                     //  transfer
       j2_mby(Pit, hike)(u2_wire wir_r, 
                         u2_noun axe,                              //  retain
                         u2_noun pac);                             //  retain
@@ -458,6 +450,14 @@
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
                             u2_noun gen);                         //  retain
+
+      u2_noun                                                     //  transfer
+      j2_mcy(Pit, ut, heal)(u2_wire wir_r,
+                            u2_noun van,                          //  retain
+                            u2_noun sut,                          //  retain
+                            u2_noun qog,                          //  retain
+                            u2_noun axe,                          //  retain
+                            u2_noun ref);                         //  retain
 
       u2_noun                                                     //  transfer
       j2_mcy(Pit, ut, mint)(u2_wire wir_r,

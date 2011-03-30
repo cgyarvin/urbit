@@ -17,7 +17,8 @@
     if ( u2_no == u2_dust(sut) || c3__core != u2_h(sut) ) {
       return u2_bl_bail(wir_r);
     }
-    else if ( u2_no == u2_bn_hook(wir_r, van, "vet") ) {
+    // else if ( u2_no == u2_bn_hook(wir_r, van, "vet") ) {
+    else if ( u2_no == u2_frag(j2_ut_van_vet, van) ) {
       return u2_yes;
     }
     else {

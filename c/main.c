@@ -77,20 +77,20 @@ _console_line(const char *history_name)
   }
 }
 
-#if 0
-extern void *zuse_boot(uint32_t size);
-extern void  zuse_line(void *zuse, char *line);
-extern void  zuse_line2(void *zuse, char *line);
+#if 1
+
+extern void *hill_boot(void);
+extern void  hill_line(void *hill, const char *line);
+extern void  hill_lose(void *hill);
 
 int
 main(int  argc,
      char **argv)
 {
   char *history_name = _console_init();
-  void *fod;
+  void *hill;
 
-  if ( !(fod = zuse_boot(28)) ) {
-    fprintf(stderr, "zuse: boot failed\n");
+  if ( !(hill = hill_boot()) ) {
     return 1;
   }
   while ( 1 ) {
@@ -100,10 +100,10 @@ main(int  argc,
       break;
     }
     else {
-      // zuse_line(fod, line);
-      zuse_line2(fod, line);
+      hill_line(hill, line);
     }
   }
+  hill_lose(hill);
   return 0;
 }
 

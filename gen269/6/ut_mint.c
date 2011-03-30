@@ -21,7 +21,8 @@
   _mint_vet(u2_wire wir_r, 
             u2_noun van)
   {
-    u2_flag vet = u2_bn_hook(wir_r, van, "vet");
+    // u2_flag vet = u2_bn_hook(wir_r, van, "vet");
+    u2_flag vet = u2_frag(j2_ut_van_vet, van);
 
     switch ( vet ) {
       case u2_no: 
@@ -105,7 +106,8 @@
               u2_bt(wir_r, c3__wood, 
                            u2_rx(wir_r, p_dan), 
                            u2_bc(wir_r, u2_nul, u2_rx(wir_r, dab))));
-    u2_noun von = u2_bn_cook(wir_r, van, "vet", u2_no);
+    // u2_noun von = u2_bn_cook(wir_r, van, "vet", u2_no);
+    u2_noun von = u2_bn_molt(wir_r, van, j2_ut_van_vet, u2_no, 0);
     u2_noun dez = j2_mcy(Pit, ut, bake)(wir_r, von, toc, dab);
     u2_noun cot = j2_mby(Pit, core)
       (wir_r, u2_rx(wir_r, p_dan),
@@ -556,6 +558,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, ut, mint)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, mint), Tier6_b_test, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ut, mint), Tier6_b, u2_none, u2_none },
     { }
   };

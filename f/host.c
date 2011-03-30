@@ -755,30 +755,6 @@ u2_ho_test(u2_wire    wir_r,
       msg_c = "fail";
       printf("fail: cos_c: %s\n", cos_c);
 
-      {
-        u2_noun sut, gol, gen, van;
-
-        if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &gol, 
-                                    u2_cv_sam_3, &gen,
-                                    u2_cv_con, &van, 0)) ||
-             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
-        {
-          c3_assert(0);
-        } else {
-          j2_mcy(watt_271, ut, dupt)(wir_r, van, "sut", sut);
-          j2_mcy(watt_271, ut, dupt)(wir_r, van, "gol", gol);
-          // u2_err(wir_r, "gen", gen);
-
-          // u2_err(wir_r, "SOFT", sof);
-          // u2_err(wir_r, "HARD", had);
-
-         //  j2_mcy(watt_270, ut, dupt)(wir_r, van, "h_sof", u2_h(sof));
-         // j2_mcy(watt_270, ut, dupt)(wir_r, van, "h_had", u2_h(had));
-
-          // u2_err(wir_r, "h_sof", u2_h(sof));
-          // u2_err(wir_r, "h_had", u2_h(had));
-        }
-      }
       //  For detailed debugging, activate/extend this junkheap as needed.
       //
 #if 0

@@ -41,7 +41,7 @@ CWFLAGS=-Wall
 
 C_OFILES=\
        c/main.o \
-       c/zuse.o
+       c/hill.o
 
 F_OFILES=\
        f/rail.o \
@@ -434,12 +434,12 @@ OFILES=\
        $(J270_OFILES) \
        $(J269_OFILES)
 
-$(BIN)/zuse: $(OFILES)
+$(BIN)/hill: $(OFILES)
 	mkdir -p $(BIN)
-	$(CLD) -o $(BIN)/zuse $(OFILES) -lgmp -lreadline -ltermcap
+	$(CLD) -o $(BIN)/hill $(OFILES) -lgmp -lreadline -ltermcap
 
 tags:
 	ctags -R -f .tags --exclude=root
 
 clean:
-	 $(RM) $(OFILES) $(BIN)/zuse
+	 $(RM) $(OFILES) $(BIN)/hill

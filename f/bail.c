@@ -535,6 +535,7 @@ u2_bn_hook(u2_wire     wir_r,
     if ( u2_nul == u2_h(vib) ) {
       u2_noun rag = u2_frag(u2_t(vib), cor);
 
+      // printf("%s %d\n", tam_c, u2_t(vib));
       return u2_rx(wir_r, rag);
     }
     else {

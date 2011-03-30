@@ -31,7 +31,8 @@
            u2_noun sut,
            u2_noun hag)
   {
-    u2_flag vet = u2_bn_hook(wir_r, van, "vet");
+    // u2_flag vet = u2_bn_hook(wir_r, van, "vet");
+    u2_flag vet = u2_frag(j2_ut_van_vet, van);
     u2_noun p_sut, q_sut;
     u2_noun ret;
 

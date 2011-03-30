@@ -532,6 +532,12 @@
                             u2_noun boz,                          //  retain
                             u2_noun rix);                         //  retain
 
+    /** Direct ut axes.
+    **/
+#     define j2_ut_van_fan  20
+#     define j2_ut_van_rib  42
+#     define j2_ut_van_vet  43
+
     /** Debugging hacks.
     **/
       void

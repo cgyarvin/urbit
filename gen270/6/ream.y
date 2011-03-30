@@ -35,7 +35,7 @@
         c3_w    xw_col;   /* current column */
       } s;
     };
-#   define yrw_r (scanner->wir_r)
+#   define ywir_r (scanner->wir_r)
 
   /* Forward declarations.
   */
@@ -43,12 +43,12 @@
 
   /* Construction macros.
   */
-#   define _ycell(a, b)            u2_bc(yrw_r, a, b)
-#   define _ytrel(a, b, c)         u2_bt(yrw_r, a, b, c)
-#   define _yqual(a, b, c, d)      u2_bq(yrw_r, a, b, c, d)
-#   define _yquil(a, b, c, d, e)   u2_bu(yrw_r, a, b, c, d, e)
+#   define _ycell(a, b)            u2_bc(ywir_r, a, b)
+#   define _ytrel(a, b, c)         u2_bt(ywir_r, a, b, c)
+#   define _yqual(a, b, c, d)      u2_bq(ywir_r, a, b, c, d)
+#   define _yquil(a, b, c, d, e)   u2_bu(ywir_r, a, b, c, d, e)
 
-#   define _ybook(a)               j2_mcc(Pit, by, gas)(yrw_r, u2_nul, a);
+#   define _ybook(a)               j2_mcc(Pit, by, gas)(ywir_r, u2_nul, a);
 %}
 
 /* Bison directives.
@@ -56,7 +56,7 @@
   /* With the mighty power of GLR... 
   */
   %glr-parser
-  %name-prefix="yr"
+  %name-prefix="y270_"
 
   /* We laugh at your petty shift-reduce conflicts.
   */
@@ -80,8 +80,8 @@ file
   ;
 
 gene
-  : tall  { $$ = _watt_locate(yrw_r, &@1, $1); }
-  | wide  /* { $$ = _watt_locate(yrw_r, &@1, $1); } */
+  : tall  { $$ = _watt_locate(ywir_r, &@1, $1); }
+  | wide  /* { $$ = _watt_locate(ywir_r, &@1, $1); } */
   ;
 
 wide
@@ -587,7 +587,7 @@ tall
       : cord                    { $$ = _ycell($1, _0); }
       | cord si_dot g rope      { $$ = _ycell($1, $4); }
       | secs                    { $$ = $1; }
-      | secs si_dot g rope      { $$ = u2_fj_list_cat(yrw_r, $1, $4); }
+      | secs si_dot g rope      { $$ = u2_fj_list_cat(ywir_r, $1, $4); }
       ;
 
       secs
@@ -610,14 +610,14 @@ tall
         axis_beto
           : si_dap              { $$ = _2; }
           | si_pad              { $$ = _3; }
-          | si_dap axis_galu    { $$ = u2_fj_op_peg(yrw_r, _2, $2); }
-          | si_pad axis_galu    { $$ = u2_fj_op_peg(yrw_r, _3, $2); }
+          | si_dap axis_galu    { $$ = u2_fj_op_peg(ywir_r, _2, $2); }
+          | si_pad axis_galu    { $$ = u2_fj_op_peg(ywir_r, _3, $2); }
           ;
         axis_galu
           : si_del              { $$ = _2; }
           | si_led              { $$ = _3; }
-          | si_del axis_beto    { $$ = u2_fj_op_peg(yrw_r, _2, $2); }
-          | si_led axis_beto    { $$ = u2_fj_op_peg(yrw_r, _3, $2); }
+          | si_del axis_beto    { $$ = u2_fj_op_peg(ywir_r, _2, $2); }
+          | si_led axis_beto    { $$ = u2_fj_op_peg(ywir_r, _3, $2); }
           ;
 
   /** Digraphs (with stem)
@@ -751,7 +751,7 @@ tall
     tok_term
       : tok_term_pre
       | tok_term_pre tok_term_load
-        { $$ = u2_bn_tape(yrw_r, _ycell($1, $2)); }
+        { $$ = u2_bn_tape(ywir_r, _ycell($1, $2)); }
       ;
         tok_term_pre
           : ca
@@ -769,7 +769,7 @@ tall
       : '0' 
         { $$ = _0; }
       | tok_chex_pre tok_chex_load
-        { $$ = u2_bn_heximal(yrw_r, _ycell($1, $2)); }
+        { $$ = u2_bn_heximal(ywir_r, _ycell($1, $2)); }
       ;
         tok_chex_pre
           : cn | ch
@@ -785,7 +785,7 @@ tall
     tok_delm
       : '0' { $$ = _0; }
       | tok_delm_pre tok_delm_load
-        { $$ = u2_bn_decimal(yrw_r, _ycell($1, $2)); }
+        { $$ = u2_bn_decimal(ywir_r, _ycell($1, $2)); }
       ;
         tok_delm_pre: cn;
         tok_delm_load: { $$ = _0; }
@@ -794,7 +794,7 @@ tall
 
     tok_loct
       : si_bot loct_mid si_bot
-        { $$ = u2_bn_tape(yrw_r, $2); }
+        { $$ = u2_bn_tape(ywir_r, $2); }
       ;
         loct_mid: { $$ = _0; }
                  | cq loct_mid { $$ = _ycell($1, $2); }
@@ -945,7 +945,7 @@ _scanner_init(struct _u2_scanner *scanner,
 
       _scanner_init(&scanner, wir_r, txt);
 
-      if ( !yrparse(&scanner) ) {
+      if ( !y270_parse(&scanner) ) {
         c3_assert(scanner.scan);
 
         return scanner.scan;
@@ -979,7 +979,7 @@ _scanner_init(struct _u2_scanner *scanner,
 /* Trivial scanner.
 */
 int 
-yrlex(YYSTYPE *lvalp, YYLTYPE *llocp, struct _u2_scanner *scanner)
+y270_lex(YYSTYPE *lvalp, YYLTYPE *llocp, struct _u2_scanner *scanner)
 {
   if ( scanner->s.token ) {
     int token = scanner->s.token;
@@ -1009,7 +1009,7 @@ yrlex(YYSTYPE *lvalp, YYLTYPE *llocp, struct _u2_scanner *scanner)
 
 /* Error printer.
 */
-int yrerror(YYLTYPE *locp, struct _u2_scanner *scanner, char const *msg)
+int y270_error(YYLTYPE *locp, struct _u2_scanner *scanner, char const *msg)
 {
   printf("%s: (%d:%d - %d:%d)\n", 
     msg, locp->first_line, locp->first_column,

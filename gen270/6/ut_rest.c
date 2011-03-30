@@ -72,7 +72,8 @@
                         u2_noun sut,                              //  retain
                         u2_noun leg)                              //  retain
   {
-    u2_noun fan = u2_bn_hook(wir_r, van, "fan");
+    // u2_noun fan = u2_bn_hook(wir_r, van, "fan");
+    u2_noun fan = u2_rx(wir_r, u2_frag(j2_ut_van_fan, van));
     u2_noun key = u2_bc(wir_r, u2_rx(wir_r, sut), u2_rx(wir_r, leg));
 
     if ( u2_yes == j2_mcc(Pit, in, has)(wir_r, fan, key) ) {
@@ -81,9 +82,11 @@
     }
     else {
       u2_noun naf = j2_mcc(Pit, in, put)(wir_r, fan, key);
-      u2_noun nav = u2_bn_cook(wir_r, van, "fan", naf);
+      // u2_noun nav = u2_bn_cook(wir_r, van, "fan", naf);
+      u2_noun nav = u2_bn_molt(wir_r, van, j2_ut_van_fan, naf, 0);
       u2_noun mez = _rest_in(wir_r, nav, sut, leg);
 
+      u2_rz(wir_r, naf);
       u2_rz(wir_r, nav);
       u2_rz(wir_r, key);
       return mez;
