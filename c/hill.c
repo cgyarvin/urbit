@@ -14,7 +14,7 @@
 #define   PitB  watt_268
 
 #define   FileA   "watt/269"
-#define   FileB   "watt/270"
+#define   FileB   "watt/268"
 
   /**   Interpreter data structures.
   **/
@@ -267,11 +267,10 @@ _hill_fire_a(u2_wire     wir_r,
              u2_noun     sob,                                     //  retain
              const c3_c* exp_c)                                   //  retain
 {
-  u2_noun txt, gen, gam, som;
+  u2_noun txt, gam, som;
 
   txt = u2_bn_string(wir_r, exp_c);
-  gen = j2_mbc(PitA, ream)(wir_r, txt);
-  gam = _hill_mint_a(wir_r, soa, u2_h(sob), c3__noun, gen);
+  gam = _hill_mint_a(wir_r, soa, u2_h(sob), c3__noun, txt);
 
   _hill_dump_a(wir_r, soa, 0, u2_h(gam));
   som = u2_nk_nock(wir_r, u2_rx(wir_r, u2_t(sob)), u2_t(gam));
@@ -283,7 +282,6 @@ _hill_fire_a(u2_wire     wir_r,
     u2_err(wir_r, 0, som);
   }
   u2_rz(wir_r, txt);
-  u2_rz(wir_r, gen);
   u2_rz(wir_r, gam);
   u2_rz(wir_r, som);
 }
@@ -297,8 +295,6 @@ hill_boot(void)
 
   u2_boot();
   wir_r = u2_wr_init(c3__rock, u2_ray_of(0, 0), u2_ray_of(1, 0));
-
-  fprintf(stderr, "{boot}\n");
 
   /* Mint the shoes.  Impeccable memory practices.
   */
@@ -323,7 +319,7 @@ hill_boot(void)
           soa = _hill_shoe_z(wir_r, FileA);
         }
       }
-      fprintf(stderr, "{boot %s}\n", FileA);
+      fprintf(stderr, "{booted: %s}\n", FileA);
 
       /* Boot shoe B.
       */
@@ -341,7 +337,7 @@ hill_boot(void)
           sob = _hill_shoe_a(wir_r, soa, FileB);
         }
       }
-      fprintf(stderr, "{boot %s}\n", FileB);
+      fprintf(stderr, "{booted: %s}\n", FileB);
 
       /* Create state and return on success.
       */

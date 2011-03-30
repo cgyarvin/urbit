@@ -1,4 +1,4 @@
-~%    %watt.269
+~%    %watt.268
     ~ 
   (%ut ut, %to to)
 &.
@@ -44,16 +44,6 @@
   ?:  (lth a b)
     c
   $(a (sub a b), c .+(c))
-::
-++  fib
-  |=  a=@
-  ~+
-  ^-  @
-  ?-    a
-      0   0
-      1   1
-      *   (add $(a (sub a 1)) $(a (sub a 2)))
-  --
 ::
 ++  gte
   ~.  %gte
