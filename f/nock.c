@@ -140,6 +140,7 @@ _nock_rock(u2_wire wir_r,
             return hoz;
           }
           else {
+#if 0
             /* Attempt jet propulsion.
             */
             {
@@ -152,7 +153,7 @@ _nock_rock(u2_wire wir_r,
                 return pro;
               }
             }
-
+#endif
             bus = sep;
             fol = dom;
             continue;
@@ -320,6 +321,13 @@ _nock_rock(u2_wire wir_r,
             if ( u2_none == sep ) {
               return u2_none;
             }
+            if ( u2_none != (xip = u2_sh_find(wir_r, sep)) ) {
+              pro = u2_ho_kick(wir_r, xip, sep, fac);
+
+              u2_rl_lose(wir_r, sep);
+              return pro;
+            }
+
             if ( u2_none == (dom = u2_frag(fac, sep)) ) {
               u2_rl_lose(wir_r, sep);
               return u2_none;
@@ -332,13 +340,6 @@ _nock_rock(u2_wire wir_r,
               u2_bx_rise(wir_r); LoomRise;
 
               u2_rl_lose(wir_r, dom);
-              return pro;
-            }
-
-            if ( u2_none != (xip = u2_sh_find(wir_r, sep)) ) {
-              pro = u2_ho_punt(wir_r, xip, sep, dom);
-
-              u2_rl_lose(wir_r, sep);
               return pro;
             }
 
@@ -443,7 +444,6 @@ _nock_rock(u2_wire wir_r,
                   if ( u2_yes == u2_dust(q_hod) &&
                        (_1 == u2_h(q_hod)) &&
                        (_0 == u2_t(q_hod)) ) {
-                    u2_rz(wir_r, q_hod);
                     q_hod = 0;
                   }
                   xod = u2_rt(wir_r, u2_rx(wir_r, q_hod),
@@ -525,6 +525,7 @@ _nock_rock(u2_wire wir_r,
   }
 }
 
+#if 0
 /* _nock_sand(): 
 **
 **   In sand memory, produce `(nock bus fol)` on the hat; then reduce
@@ -861,6 +862,7 @@ _nock_sand(u2_wire wir_r,
     }
   }
 }
+#endif
 
 /* u2_nk_soft():
 **
@@ -873,6 +875,7 @@ u2_nk_soft(u2_wire wir_r,
 {
   u2_weak pro;
 
+#if 0
   switch ( u2_rail_hip_m(wir_r) ) {
     default: c3_assert(0); return u2_none;
 
@@ -897,7 +900,6 @@ u2_nk_soft(u2_wire wir_r,
 
       return pro;
     }
-
     case c3__rock: {
       LoomSink; u2_bx_sink(wir_r);
       pro = _nock_rock(wir_r, bus, fol);
@@ -906,6 +908,12 @@ u2_nk_soft(u2_wire wir_r,
       return pro;
     }
   }
+#else
+  LoomSink; u2_bx_sink(wir_r);
+  pro = _nock_rock(wir_r, bus, fol);
+  u2_bx_rise(wir_r); LoomRise;
+  return pro;
+#endif
 }
 
 /* u2_nk_nock():
@@ -917,8 +925,6 @@ u2_nk_nock(u2_wire wir_r,
            u2_weak bus,                                           //  transfer
            u2_weak fol)                                           //  retain
 {
-  u2_noun pro, xip;
-
   if ( u2_none == fol ) {
     u2_rl_lose(wir_r, bus);
     return u2_none;
@@ -926,12 +932,23 @@ u2_nk_nock(u2_wire wir_r,
   else if ( u2_none == bus ) {
     return u2_none;
   }
+#if 0
   else if ( u2_none != (xip = u2_sh_find(wir_r, bus)) ) {
+    {
+      c3_c *cos_c = u2_ho_cstring(xip);
+
+      printf("top punt: %s\n", cos_c);
+      if ( !strcmp(cos_c, "watt_269__ut__mint") ) {
+        c3_assert(0);
+      }
+      free(cos_c);
+    }
     pro = u2_ho_punt(wir_r, xip, bus, fol);
-      
+  
     u2_rl_lose(wir_r, bus);
     return pro;
   }
+#endif
   else {
     return u2_nk_soft(wir_r, bus, fol);
   }
@@ -939,22 +956,27 @@ u2_nk_nock(u2_wire wir_r,
 
 /* u2_nk_mung():
 **
-**   Compute `(nock gat(-< sam) +.gat)`.
+**   Call with standard convention.
 */
 u2_weak                                                           //  transfer
 u2_nk_mung(u2_wire wir_r,
            u2_weak gat,                                           //  retain
            u2_weak sam)                                           //  transfer
 {
-  /*  XX: could be slightly faster, but admirably terse.
-  */
-  return u2_nk_nock
-    (wir_r,
-     u2_rc
+  u2_noun cor, xip;
+
+  cor = u2_rc
       (wir_r,
        u2_rc(wir_r, sam, u2_rx(wir_r, u2_st(u2_sh(gat)))),
-       u2_rx(wir_r, u2_st(gat))),
-     u2_st(gat));
+       u2_rx(wir_r, u2_st(gat)));
+
+  if ( u2_none != (xip = u2_sh_find(wir_r, cor)) ) {
+    u2_noun pro = u2_ho_kick(wir_r, xip, cor, u2_cv_noc);
+
+    u2_rz(wir_r, cor);
+    return pro;
+  }
+  else return u2_nk_nock(wir_r, cor, u2_st(gat));
 }
 
 /* u2_nk_kick():

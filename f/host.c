@@ -668,6 +668,26 @@ _ho_discover(u2_wire wir_r,
   }
 }
 
+/* u2_ho_kick():
+**
+**   As `u2_ho_punt()`, but by axis instead of formula.
+*/
+u2_weak
+u2_ho_kick(u2_ray   wir_r,
+           u2_chip  xip,                                          //  retain
+           u2_noun  cor,                                          //  retain
+           u2_atom  axe)                                          //  retain
+{
+  u2_noun fol; 
+
+  if ( u2_none == (fol = u2_frag(axe, cor)) ) {
+    return u2_none;
+  }
+  else {
+    return u2_ho_punt(wir_r, xip, cor, fol);
+  }
+}
+
 #if 0
 /* u2_ho_fire(): 
 **

@@ -303,28 +303,12 @@
                  u2_noun cor,                                     //  retain
                  u2_noun fol);                                    //  retain
 
-    /* u2_ho_fire(): 
-    **
-    **   Attempt host nock driver on `xip`, `cor`, `fol`.
-    **   For any failure to compute, return `u2_none`.
-    **
-    **   If `*saf` is u2_no, test safety, then call `u2_ho_stet()`.
-    */
-      u2_weak
-      u2_ho_fire(u2_ray   wir_r,
-                 u2_chip  xip,                                    //  retain
-                 u2_noun  cor,                                    //  retain
-                 u2_noun  fol,                                    //  retain
-                 u2_flag* saf);
-
     /* u2_ho_kick():
     **
-    **   As `u2_ho_fire()`, but by axis instead of formula.
+    **   As `u2_ho_punt()`, but by axis instead of formula.
     */
       u2_weak
       u2_ho_kick(u2_ray   wir_r,
-                 u2_chip  xip,
-                 u2_noun  cor,
-                 u2_atom  axe,
-                 u2_flag* saf);
-
+                 u2_chip  xip,                                    //  retain
+                 u2_noun  cor,                                    //  retain
+                 u2_atom  axe);                                   //  retain
