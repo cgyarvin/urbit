@@ -206,10 +206,6 @@
     /* u2_ho_hangar: driver system.
     */
       typedef struct _u2_ho_hangar {
-        /* Cache from formula to jet.
-        */
-        u2_ho_cash jac_s;
-
         /* Cache from chip to driver.
         */
         u2_ho_cash bad_s;
@@ -309,7 +305,7 @@
 
     /* u2_ho_kick():
     **
-    **   As `u2_ho_punt()`, but by axis instead of formula.
+    **   Apply host nock driver on `xip`, `cor`, `fol`.
     */
       u2_weak
       u2_ho_kick(u2_ray   wir_r,

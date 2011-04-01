@@ -134,13 +134,12 @@
       return j2_mcx(Pit, ut, park)(wir_r, van, sut, way, axe);
     }
     else {
-      u2_noun cor, fol, xip, pro;
+      u2_noun cor, fol, pro;
 
       cor = j2_mci(Pit, ut, park)(wir_r, van, sut, way, axe);
       fol = u2_t(cor);
-      xip = j2_mcj(Pit, ut, park)[0].xip;
 
-      pro = u2_ho_punt(wir_r, xip, cor, fol);
+      pro = u2_ho_use(wir_r, jet_j, cor, fol);
       c3_assert(pro != u2_none);
 
       u2_rz(wir_r, cor);

@@ -16,12 +16,14 @@
 
     /* External drivers.
     */
+      extern u2_ho_driver j2_da(watt_268);
       extern u2_ho_driver j2_da(watt_269);
       extern u2_ho_driver j2_da(watt_270);
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       static u2_ho_driver *u2_HostDriverBase[] = {
+        &j2_da(watt_268), 
         &j2_da(watt_269), 
         &j2_da(watt_270), 
         0
@@ -378,7 +380,6 @@ u2_ho_cstring(u2_noun xip)                                        //  retain
 static void
 _ho_boot(u2_ho_hangar *hag)
 {
-  _cs_init(&hag->jac_s);
   _cs_init(&hag->bad_s);
 }
 
@@ -389,7 +390,6 @@ _ho_boot(u2_ho_hangar *hag)
 static void
 _ho_down(u2_ho_hangar *hag)
 {
-  _cs_free(&hag->jac_s);
   _cs_free(&hag->bad_s);
 }
 
@@ -446,67 +446,6 @@ u2_ho_warn(const c3_c* fil_c,
   }
 }
 
-
-/* _ho_extract(): extract jet formula from battery.
-*/
-static u2_weak
-_ho_extract(u2_noun    xip,
-            const c3_c *fcs_c)
-{
-  u2_noun bat = u2_h(u2_t(xip));
-
-  if ( *fcs_c == '.' ) {
-    c3_w axe_w = 0;
-
-    sscanf(fcs_c+1, "%u", &axe_w);
-    c3_assert(!(0x80000000 & axe_w));     // that's a deep tree, dude
-
-    axe_w = u2_fj_op_tap(0, axe_w);
-    return u2_frag(axe_w, bat);
-  }
-  else {
-    u2_noun nut = u2_t(u2_h(xip));
-
-    while ( _0 != nut ) {
-      u2_noun i_nut = u2_h(nut);
-
-      if ( (u2_yes == u2_sing_c(fcs_c, u2_h(i_nut))) ) {
-        u2_noun fal = u2_t(i_nut);
-
-        /* `fal` must match `[9 x [0 1]]`
-        */
-        if ( (u2_yes == u2_dust(fal)) && (u2_nock_kick == u2_h(fal)) ) {
-          u2_noun t_fal = u2_t(fal);
-
-          if ( u2_yes == u2_dust(t_fal) ) {
-            u2_noun ht_fal = u2_h(t_fal);
-            u2_noun tt_fal = u2_t(t_fal);
-
-            if ( (u2_yes == u2_stud(ht_fal)) &&
-                 (u2_yes == u2_dust(tt_fal)) &&
-                 (_0 == u2_h(tt_fal)) &&
-                 (_1 == u2_t(tt_fal)) )
-            {
-              u2_atom axe = ht_fal;
-
-              if ( !u2_fly_is_cat(axe) ) {
-                u2_ho_warn_here();
-              }
-              axe = u2_fj_op_tap(0, axe);
-
-              return u2_frag(axe, bat);
-            }
-          }
-        }
-        printf("%s: bad formula\n", fcs_c);
-        u2_err(0, "fal", fal);
-        return u2_none;
-      }
-      nut = u2_t(nut);
-    }
-    return u2_none;
-  }
-}
 
 /* _ho_abstract(): compute 31-bit jet axis in core battery.
 */
@@ -585,17 +524,7 @@ _ho_attach(u2_rail ral_r,
     for ( i_w = 0; (jet_j = &dry_d->fan_j[i_w])->fcs_c; i_w++ ) {
       jet_j->xip = dry_d->xip;
 
-      jet_j->fol = _ho_extract(dry_d->xip, jet_j->fcs_c);
       jet_j->axe_l = _ho_abstract(dry_d->xip, jet_j->fcs_c);
-#if 0
-      fprintf(stderr, "attach: cos %s, fcs %s, axe %d\n", 
-          u2_ho_cstring(dry_d->xip),
-          jet_j->fcs_c, 
-          jet_j->axe_l);
-#endif
-      if ( u2_none != jet_j->fol ) {
-        _ho_cash_save(&u2_HostHangar->jac_s, jet_j->fol, jet_j);
-      }
     }
   }
 }
@@ -713,46 +642,13 @@ _ho_explore(u2_rail ral_r,
   }
 }
 
-/* _ho_discover(): find jet from xip and fol, caching.
+/* u2_ho_prepare(): prepare jets in `xip`.
 */
-static u2_ho_jet*
-_ho_discover(u2_rail ral_r,
-             u2_noun xip,
-             u2_noun fol,
-             u2_noun cor)
+void
+u2_ho_prepare(u2_rail ral_r,
+              u2_noun xip)                                        //  retain
 {
-  u2_ho_jet*    jet_j;
-  u2_ho_driver* dry_d;
-
-  if ( (0 != (jet_j = _ho_cash_find(&u2_HostHangar->jac_s, fol)) ) ) {
-    return jet_j;
-  }
-  else {
-    if ( 0 == (dry_d = _ho_explore(ral_r, xip)) ) {
-      return 0;
-    }
-    else {
-      if ( 0 != (jet_j = _ho_cash_find(&u2_HostHangar->jac_s, fol)) ) {
-        return jet_j;
-      } else {
-        if ( !(jet_j = malloc(sizeof(u2_ho_jet))) ) {
-          abort();
-        }
-
-        jet_j->xip = dry_d->xip;
-        jet_j->fol = fol;
-        jet_j->sat_s = 0;
-        jet_j->fun_f = 0;
-        jet_j->fcs_c = 0;
-#if 0
-        fprintf(stderr, "jet: dummy : %s, %x, %p\n", 
-            dry_d->cos_c, u2_mug(fol), jet_j);
-#endif
-        _ho_cash_save(&u2_HostHangar->jac_s, fol, jet_j);
-        return jet_j;
-      }
-    }
-  }
+  _ho_explore(ral_r, xip);
 }
 
 /* _ho_conquer(): find jet from xip and axe.
@@ -781,60 +677,6 @@ _ho_conquer(u2_rail ral_r,
   }
 }
  
-#if 0
-/* u2_ho_fire(): 
-**
-**   Attempt host nock driver on `xip`, `cor`, `fol`.
-**   For any failure to compute, return `u2_none`.
-**
-**   If `*saf` is u2_no, test safety, then call `u2_ho_stet()`.
-*/
-u2_weak
-u2_ho_fire(u2_ray   wir_r,
-           u2_chip  xip,                                          //  retain
-           u2_noun  cor,                                          //  retain
-           u2_noun  fol,                                          //  retain
-           u2_flag  *saf)
-{
-  u2_ho_jet* jet_j;
-  u2_weak pro;
-
-  if ( 0 == (jet_j = _ho_discover(wir_r, xip, fol, cor)) ) {
-    return u2_none;
-  }
-  else {
-    if ( jet_j->zoc_w ) {
-      return u2_none;
-    }
-    else {
-      u2_flag ace = jet_j->ace;
-
-      if ( (u2_yes == ace) || (jet_j->zic_w != 0) ) {
-        *saf = u2_yes;
-        // fprintf(stderr, "fire: %s\n", _ho_cstring(xip));
-        pro =_ho_execute(wir_r, jet_j, cor);
-
-        return pro;
-      }
-      else {
-        /* Increment fast counter during jet execution.
-        */
-        jet_j->zic_w++;
-        pro = _ho_execute(wir_r, jet_j, cor);
-        jet_j->zic_w--;
-
-        /* Increment slow counter in anticipation of test.
-        */
-        jet_j->zoc_w++;
-
-        *saf = u2_no;
-        return pro;
-      }
-    }
-  }
-}
-#endif
-
 /* u2_ho_test():
 **
 **   Report result of jet test.  `had` is native; `sof` is nock.
@@ -1168,29 +1010,9 @@ u2_ho_use(u2_ray     wir_r,
   }
 }
 
-#if 1
-/* u2_ho_punt():
-**
-**   Apply host nock driver on `xip`, `cor`, `fol`.
-*/
-u2_weak                                                           //  produce
-u2_ho_punt(u2_ray  wir_r,
-           u2_chip xip,                                           //  senior
-           u2_noun cor,                                           //  retain
-           u2_noun fol)                                           //  retain
-{
-  u2_ho_jet* jet_j;
-
-  if ( 0 == (jet_j = _ho_discover(wir_r, xip, fol, cor)) ) {
-    return u2_none;
-  }
-  else return u2_ho_use(wir_r, jet_j, cor, fol);
-}
-#endif
-
 /* u2_ho_kick():
 **
-**   As `u2_ho_punt()`, but by axis instead of formula.
+**   Apply host nock driver on `xip`, `cor`, `fol`.
 */
 u2_weak                                                           //  produce
 u2_ho_kick(u2_ray   wir_r,
@@ -1216,8 +1038,8 @@ u2_ho_kick(u2_ray   wir_r,
     return u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
   }
   else {
-    c3_assert(jet_j == _ho_discover(wir_r, xip, fol, cor));
 #if 0
+    c3_assert(jet_j == _ho_discover(wir_r, xip, fol, cor));
     if ( jet_j != (jut_j = _ho_discover(wir_r, xip, fol, cor)) ) {
       printf("kick axe %d mas %d\n", axe, u2_ax_mas(axe));
       printf("jet_j %p, axe %d, fcs %s, xip %s\n", 
