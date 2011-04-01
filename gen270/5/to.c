@@ -175,7 +175,7 @@
         return u2_bl_bail(wir_r);
       } else if ( u2_nul == u2_t(q_pup) ) {
         return _to_wc(wir_r, j2_mcy(Pit, to, ram)(wir_r, u2_h(q_pup)),
-                             j2_mbc(Pit, rip)(wir_r, 3, q_pup));
+                             j2_mbc(Pit, rip)(wir_r, 3, qp_pup));
       } else {
         return _to_wc
           (wir_r, j2_mcy(Pit, to, ram)(wir_r, u2_h(q_pup)),

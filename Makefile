@@ -19,7 +19,7 @@ ENDIAN=little
 BIN=run
 
 RM=rm -f
-CC=gcc
+CC=gcc 
 CLD=gcc -O3 -L/sw/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
@@ -430,7 +430,6 @@ OFILES=\
        $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
-       $(J271_OFILES) \
        $(J270_OFILES) \
        $(J269_OFILES)
 

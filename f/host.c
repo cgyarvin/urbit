@@ -18,14 +18,12 @@
     */
       extern u2_ho_driver j2_da(watt_269);
       extern u2_ho_driver j2_da(watt_270);
-      extern u2_ho_driver j2_da(watt_271);
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       static u2_ho_driver *u2_HostDriverBase[] = {
         &j2_da(watt_269), 
         &j2_da(watt_270), 
-        &j2_da(watt_271), 
         0
       };
 
@@ -358,7 +356,7 @@ _ho_mop_chip(c3_c *buf_c, u2_noun xip)
 
 /* u2_ho_cstring(): return malloced control string for `xip`.
 */
-c3_c*                                                             //  transfer
+c3_c*                                                             //  produce
 u2_ho_cstring(u2_noun xip)                                        //  retain
 {
   c3_w len_w = _ho_mop_chip(0, xip);
@@ -510,10 +508,75 @@ _ho_extract(u2_noun    xip,
   }
 }
 
-/* _ho_drive(): install driver.
+/* _ho_abstract(): compute 31-bit jet axis in core battery.
+*/
+static c3_l
+_ho_abstract(u2_noun xip,                                         //  retain 
+             const c3_c *fcs_c)                                   //  retain
+{
+  if ( *fcs_c == '.' ) {
+    c3_d axe_d = 0;
+    c3_l axe_l = 0;
+
+    sscanf(fcs_c+1, "%llu", &axe_d);
+    if ( axe_d >> 32ULL || 
+         ((1 << 31) & (axe_l = (c3_w)axe_d)) || 
+         (axe_l < 3) )
+    {
+      u2_ho_warn_here();
+      return 0;
+    }
+    // return u2_ax_mas(axe_l);
+    return axe_l;
+  }
+  else {
+    u2_noun nut = u2_t(u2_h(xip));
+
+    while ( _0 != nut ) {
+      u2_noun i_nut = u2_h(nut);
+
+      if ( (u2_yes == u2_sing_c(fcs_c, u2_h(i_nut))) ) {
+        u2_noun fal = u2_t(i_nut);
+
+        /* `fal` must match `[9 x [0 1]]`
+        */
+        if ( (u2_yes == u2_dust(fal)) && (u2_nock_kick == u2_h(fal)) ) {
+          u2_noun t_fal = u2_t(fal);
+
+          if ( u2_yes == u2_dust(t_fal) ) {
+            u2_noun ht_fal = u2_h(t_fal);
+            u2_noun tt_fal = u2_t(t_fal);
+
+            if ( (u2_yes == u2_stud(ht_fal)) &&
+                 (u2_yes == u2_dust(tt_fal)) &&
+                 (_0 == u2_h(tt_fal)) &&
+                 (_1 == u2_t(tt_fal)) )
+            {
+              u2_atom axe = ht_fal;
+
+              if ( !u2_fly_is_cat(axe) ) {
+                u2_ho_warn_here();
+              }
+              // return u2_ax_mas(axe);
+              return axe;
+            }
+          }
+        }
+        u2_ho_warn_here();
+        return 0;
+      }
+      nut = u2_t(nut);
+    }
+    u2_ho_warn_here();
+    return 0;
+  }
+}
+
+/* _ho_attach(): process static driver for execution.
 */
 static void
-_ho_drive(u2_ho_driver* dry_d)
+_ho_attach(u2_rail ral_r,
+           u2_ho_driver* dry_d)                                   //  retain
 {
   u2_ho_jet*    jet_j;
   c3_w          i_w;
@@ -523,6 +586,13 @@ _ho_drive(u2_ho_driver* dry_d)
       jet_j->xip = dry_d->xip;
 
       jet_j->fol = _ho_extract(dry_d->xip, jet_j->fcs_c);
+      jet_j->axe_l = _ho_abstract(dry_d->xip, jet_j->fcs_c);
+#if 0
+      fprintf(stderr, "attach: cos %s, fcs %s, axe %d\n", 
+          u2_ho_cstring(dry_d->xip),
+          jet_j->fcs_c, 
+          jet_j->axe_l);
+#endif
       if ( u2_none != jet_j->fol ) {
         _ho_cash_save(&u2_HostHangar->jac_s, jet_j->fol, jet_j);
       }
@@ -530,10 +600,32 @@ _ho_drive(u2_ho_driver* dry_d)
   }
 }
 
+/* _ho_explore_dummy(): produce dummy driver.
+*/
+static u2_ho_driver*                                              //  produce
+_ho_explore_dummy(u2_rail     ral_r,
+                  const c3_c* cos_c,                              //  submit
+                  u2_noun     xip)                                //  senior
+{
+  u2_ho_driver *dry_d;
+
+  if ( !(dry_d = malloc(sizeof(u2_ho_driver))) ) {
+    abort();
+  }
+  dry_d->cos_c = cos_c;
+  dry_d->xip = xip;
+  if ( !(dry_d->fan_j = malloc(sizeof(u2_ho_jet))) ) {
+    abort();
+  }
+  dry_d->fan_j->fcs_c = 0;
+
+  return dry_d;
+}
+
 /* _ho_explore_static(): find driver from built-in list, or return 0.
 */
 static u2_ho_driver*
-_ho_explore_static(u2_wire wir_r,
+_ho_explore_static(u2_rail ral_r,
                    u2_noun xip,
                    c3_c*   cos_c)
 {
@@ -556,7 +648,7 @@ _ho_explore_static(u2_wire wir_r,
 /* _ho_explore_parent(): find driver from parent, or return 0.
 */
 static u2_ho_driver*
-_ho_explore_parent(u2_wire wir_r,
+_ho_explore_parent(u2_rail ral_r,
                    u2_noun xip,
                    c3_c*   cos_c)
 {
@@ -565,7 +657,7 @@ _ho_explore_parent(u2_wire wir_r,
   if ( _0 == pet ) {
     return 0;
   } else {
-    u2_ho_driver* par_d = _ho_explore(wir_r, u2_t(pet));
+    u2_ho_driver* par_d = _ho_explore(ral_r, u2_t(pet));
     c3_w          i_w;
 
     c3_assert(par_d);
@@ -590,9 +682,9 @@ _ho_explore_parent(u2_wire wir_r,
 
 /* _ho_explore(): find driver from chip, caching.
 */
-static u2_ho_driver*
-_ho_explore(u2_wire wir_r,
-            u2_noun xip)
+static u2_ho_driver*                                              //  discover
+_ho_explore(u2_rail ral_r,
+            u2_noun xip)                                          //  senior
 {
   u2_ho_driver* dry_d;
 
@@ -601,26 +693,20 @@ _ho_explore(u2_wire wir_r,
   } else {
     c3_c* cos_c = u2_ho_cstring(xip);
 
-    if ( 0 != (dry_d = _ho_explore_parent(wir_r, xip, cos_c)) ) {
+    if ( 0 != (dry_d = _ho_explore_parent(ral_r, xip, cos_c)) ) {
       // fprintf(stderr, "battery: child : %s\n", cos_c);
-      _ho_drive(dry_d);
+      _ho_attach(ral_r, dry_d);
       return dry_d;
     }
-    else if ( 0 != (dry_d = _ho_explore_static(wir_r, xip, cos_c)) ) {
+    else if ( 0 != (dry_d = _ho_explore_static(ral_r, xip, cos_c)) ) {
       // fprintf(stderr, "battery: static: %s\n", cos_c);
-      _ho_drive(dry_d);
+      _ho_attach(ral_r, dry_d);
       return dry_d;
     }
     else {
-      if ( !(dry_d = malloc(sizeof(u2_ho_driver))) ) {
-        abort();
-      }
-
-      dry_d->cos_c = cos_c;
-      dry_d->xip = xip;
-      dry_d->fan_j = 0;
-
       // fprintf(stderr, "battery: dummy : %s\n", cos_c);
+      dry_d = _ho_explore_dummy(ral_r, cos_c, xip);
+
       _ho_cash_save(&u2_HostHangar->bad_s, xip, dry_d);
       return dry_d;
     }
@@ -630,7 +716,7 @@ _ho_explore(u2_wire wir_r,
 /* _ho_discover(): find jet from xip and fol, caching.
 */
 static u2_ho_jet*
-_ho_discover(u2_wire wir_r,
+_ho_discover(u2_rail ral_r,
              u2_noun xip,
              u2_noun fol,
              u2_noun cor)
@@ -642,7 +728,7 @@ _ho_discover(u2_wire wir_r,
     return jet_j;
   }
   else {
-    if ( 0 == (dry_d = _ho_explore(wir_r, xip)) ) {
+    if ( 0 == (dry_d = _ho_explore(ral_r, xip)) ) {
       return 0;
     }
     else {
@@ -659,7 +745,8 @@ _ho_discover(u2_wire wir_r,
         jet_j->fun_f = 0;
         jet_j->fcs_c = 0;
 #if 0
-        fprintf(stderr, "jet: dummy : %s, %x\n", dry_d->cos_c, u2_mug(fol));
+        fprintf(stderr, "jet: dummy : %s, %x, %p\n", 
+            dry_d->cos_c, u2_mug(fol), jet_j);
 #endif
         _ho_cash_save(&u2_HostHangar->jac_s, fol, jet_j);
         return jet_j;
@@ -668,26 +755,32 @@ _ho_discover(u2_wire wir_r,
   }
 }
 
-/* u2_ho_kick():
-**
-**   As `u2_ho_punt()`, but by axis instead of formula.
+/* _ho_conquer(): find jet from xip and axe.
 */
-u2_weak
-u2_ho_kick(u2_ray   wir_r,
-           u2_chip  xip,                                          //  retain
-           u2_noun  cor,                                          //  retain
-           u2_atom  axe)                                          //  retain
+static u2_ho_jet*
+_ho_conquer(u2_rail ral_r,
+            u2_noun xip,
+            u2_atom axe)
 {
-  u2_noun fol; 
+  u2_ho_driver *dry_d;
 
-  if ( u2_none == (fol = u2_frag(axe, cor)) ) {
-    return u2_none;
-  }
-  else {
-    return u2_ho_punt(wir_r, xip, cor, fol);
+  if ( 0 == (dry_d = _ho_explore(ral_r, xip)) ) {
+    return 0;
+  } else if ( 0 == dry_d->fan_j ) {
+    return 0;
+  } else {
+    u2_ho_jet *jet_j = dry_d->fan_j;
+
+    while ( jet_j->fcs_c ) {
+      if ( axe == jet_j->axe_l ) {
+        return jet_j;
+      }
+      jet_j++;
+    }
+    return 0;
   }
 }
-
+ 
 #if 0
 /* u2_ho_fire(): 
 **
@@ -915,7 +1008,7 @@ u2_ho_test(u2_wire    wir_r,
 
 /* _ho_run(): execute jet.
 */
-static u2_weak                                                    //  transfer
+static u2_weak                                                    //  produce
 _ho_run(u2_ray      wir_r,
         u2_ho_jet*  jet_j,
         u2_noun     cor)                                          //  retain
@@ -990,7 +1083,7 @@ _ho_run(u2_ray      wir_r,
 **
 **   Run a jet.
 */
-u2_weak                                                           //  transfer
+u2_weak                                                           //  produce
 u2_ho_use(u2_ray     wir_r,
           u2_ho_jet* jet_j,
           u2_noun    cor,                                         //  retain
@@ -1075,13 +1168,14 @@ u2_ho_use(u2_ray     wir_r,
   }
 }
 
+#if 1
 /* u2_ho_punt():
 **
 **   Apply host nock driver on `xip`, `cor`, `fol`.
 */
-u2_weak                                                           //  transfer
+u2_weak                                                           //  produce
 u2_ho_punt(u2_ray  wir_r,
-           u2_chip xip,                                           //  retain
+           u2_chip xip,                                           //  senior
            u2_noun cor,                                           //  retain
            u2_noun fol)                                           //  retain
 {
@@ -1091,4 +1185,55 @@ u2_ho_punt(u2_ray  wir_r,
     return u2_none;
   }
   else return u2_ho_use(wir_r, jet_j, cor, fol);
+}
+#endif
+
+/* u2_ho_kick():
+**
+**   As `u2_ho_punt()`, but by axis instead of formula.
+*/
+u2_weak                                                           //  produce
+u2_ho_kick(u2_ray   wir_r,
+           u2_chip  xip,                                          //  retain
+           u2_noun  cor,                                          //  retain
+           u2_atom  axe)                                          //  retain
+{
+  u2_noun fol; 
+#if 0
+  if ( u2_none == (fol = u2_frag(axe, cor)) ) {
+    return u2_none;
+  }
+  else {
+    return u2_ho_punt(wir_r, xip, cor, fol);
+  }
+#else
+  u2_ho_jet* jet_j;
+
+  if ( u2_none == (fol = u2_frag(axe, cor)) ) {
+    return u2_none;
+  }
+  else if ( 0 == (jet_j = _ho_conquer(wir_r, xip, axe)) ) {
+    return u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
+  }
+  else {
+    c3_assert(jet_j == _ho_discover(wir_r, xip, fol, cor));
+#if 0
+    if ( jet_j != (jut_j = _ho_discover(wir_r, xip, fol, cor)) ) {
+      printf("kick axe %d mas %d\n", axe, u2_ax_mas(axe));
+      printf("jet_j %p, axe %d, fcs %s, xip %s\n", 
+              jet_j,
+              jet_j->axe_l,
+              jet_j->fcs_c,
+              u2_ho_cstring(jet_j->xip));
+      printf("jut_j %p, axe %d, fcs %s, xip %s\n", 
+              jut_j,
+              jut_j->axe_l,
+              jut_j->fcs_c,
+              u2_ho_cstring(jut_j->xip));
+      c3_assert(0);
+    }
+#endif
+    return u2_ho_use(wir_r, jet_j, cor, fol);
+  }
+#endif
 }

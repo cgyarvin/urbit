@@ -19,7 +19,7 @@
       typedef uint8_t c3_t;   // boolean
       typedef uint8_t c3_g;   // 32-bit log - 0-31 bits
       typedef uint32_t c3_l;  // little; 31-bit unsigned integer
-      typedef uint32_t c3_m;  // mote; LSB first a-z 4-char string.
+      typedef uint32_t c3_m;  // mote; also c3_l; LSB first a-z 4-char string.
 
     /* C true and false; boolean logic
     */

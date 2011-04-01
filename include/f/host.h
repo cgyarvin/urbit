@@ -128,38 +128,42 @@
     /* u2_ho_jet: a C function, per formula.
     */
       typedef struct {
-        /* Function control string - finds formula in core.
+        /* Function control string - finds formula in core.  Declared.
         **
         **    ".@" | "hook"
         */
         const c3_c* fcs_c;
 
-        /* Invocation model:
+        /* Invocation model.  Declared:
         **
-        **    c3__lite
-        **    c3__hevy
+        **    c3__lite      //  does not bail
+        **    c3__hevy      //  may bail
         */    
         c3_m   vok_m;
 
-        /* C function, on core `[[sam con] bat]`.
+        /* C function, on core.  Declared.
         */
         u2_noun (*fun_f)(u2_ray wir_r, u2_noun cor);
 
-        /* State - see above.  May change dynamically.
+        /* State - see above.  Declared, but may change dynamically.
         */
         u2_ho_state sat_s;
 
-        /* chip: battery identifier.
+        /* chip: battery identifier.  Computed (declare u2_none).
         */
         u2_chip xip;
 
-        /* Tool: Nock formula.
+        /* Tool: Nock formula.  Computed (declare u2_none).
         */
         u2_tool fol;
 
-        /* Custom key from core.
+        /* Custom memoization key from core.  Declared - should reorder.
         */
         u2_noun (*key_f)(u2_ray wir_r, u2_noun cor);
+
+        /* Axis in battery.  Computed (declare 0).
+        */
+        c3_l axe_l;
       } u2_ho_jet;
 
     /* u2_ho_driver: battery driver.
