@@ -125,6 +125,19 @@
 #       define u2_jet_memo    0x4   // memo: memoize, even if jet is dead
 #       define u2_jet_dead    0
 
+    /* u2_ho_pear: mug-to-pointer binding.
+    */
+      typedef struct {
+        u2_noun tag;
+        void*   ptr_v;
+      } u2_ho_pear;
+
+    /* u2_ho_cash: mug-to-pointer cache.  Semantics match sham.
+    */
+      typedef struct {
+        u2_ho_pear dol_p[16];
+      } u2_ho_cash;
+
     /* u2_ho_jet: a C function, per formula.
     */
       typedef struct {
@@ -188,20 +201,11 @@
         /* chip: battery identifier, from shed.
         */
         u2_chip xip;
+
+        /* Cache from axe to jet.
+        */
+        u2_ho_cash jax_s;
       } u2_ho_driver;
-
-    /* u2_ho_pear: mug-to-pointer binding.
-    */
-      typedef struct {
-        u2_noun tag;
-        void*   ptr_v;
-      } u2_ho_pear;
-
-    /* u2_ho_cash: mug-to-pointer cache.  Semantics match sham.
-    */
-      typedef struct {
-        u2_ho_pear dol_p[16];
-      } u2_ho_cash;
 
     /* u2_ho_hangar: driver system.
     */

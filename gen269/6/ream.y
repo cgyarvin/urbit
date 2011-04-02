@@ -587,7 +587,7 @@ tall
       : cord                    { $$ = _ycell($1, _0); }
       | cord si_dot g rope      { $$ = _ycell($1, $4); }
       | secs                    { $$ = $1; }
-      | secs si_dot g rope      { $$ = u2_fj_list_cat(ywir_r, $1, $4); }
+      | secs si_dot g rope      { $$ = j2_mbc(Pit, weld)(ywir_r, $1, $4); }
       ;
 
       secs
@@ -610,14 +610,14 @@ tall
         axis_beto
           : si_dap              { $$ = _2; }
           | si_pad              { $$ = _3; }
-          | si_dap axis_galu    { $$ = u2_fj_op_peg(ywir_r, _2, $2); }
-          | si_pad axis_galu    { $$ = u2_fj_op_peg(ywir_r, _3, $2); }
+          | si_dap axis_galu    { $$ = j2_mbc(Pit, peg)(ywir_r, _2, $2); }
+          | si_pad axis_galu    { $$ = j2_mbc(Pit, peg)(ywir_r, _3, $2); }
           ;
         axis_galu
           : si_del              { $$ = _2; }
           | si_led              { $$ = _3; }
-          | si_del axis_beto    { $$ = u2_fj_op_peg(ywir_r, _2, $2); }
-          | si_led axis_beto    { $$ = u2_fj_op_peg(ywir_r, _3, $2); }
+          | si_del axis_beto    { $$ = j2_mbc(Pit, peg)(ywir_r, _2, $2); }
+          | si_led axis_beto    { $$ = j2_mbc(Pit, peg)(ywir_r, _3, $2); }
           ;
 
   /** Digraphs (with stem)

@@ -669,15 +669,23 @@ u2_noun
 u2_bn_tape(u2_ray  wir_r,
            u2_list lit)
 {
-  c3_w len_w = u2_fj_list_len(wir_r, lit);
-  c3_w lat_w = 0;
-  c3_y buf_y[len_w];
+  c3_w len_w = 0;
 
-  while ( u2_nul != lit ) {
-    buf_y[lat_w++] = u2_bi_byte(wir_r, 0, u2_h(lit));
-    lit = u2_t(lit);
+  {
+    u2_noun ilt = lit;
+
+    while ( u2_nul != ilt ) { len_w++; ilt = u2_t(ilt); }
   }
-  return u2_bn_bytes(wir_r, len_w, buf_y);
+  {
+    c3_w lat_w = 0;
+    c3_y buf_y[len_w];
+
+    while ( u2_nul != lit ) {
+      buf_y[lat_w++] = u2_bi_byte(wir_r, 0, u2_h(lit));
+      lit = u2_t(lit);
+    }
+    return u2_bn_bytes(wir_r, len_w, buf_y);
+  }
 }
 
 /* u2_bn_decimal():

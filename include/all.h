@@ -79,7 +79,6 @@
 #     include "f/host.h"
 #     include "f/bail.h"
 #     include "f/benx.h"
-#     include "f/plow.h"
 #     include "f/wire.h"
 #     include "f/nock.h"
 #     include "f/funj.h"

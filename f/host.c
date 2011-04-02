@@ -67,7 +67,7 @@ _cs_init(u2_ho_cash *cas_s)
   }
 }
 
-/* jx_cash_find(): find a noun in a cache, or return 0.
+/* _ho_cash_find(): find a pointer in a cache, or return 0.
 */
 static void*
 _ho_cash_find(u2_ho_cash *cas_s,
@@ -520,11 +520,14 @@ _ho_attach(u2_rail ral_r,
   u2_ho_jet*    jet_j;
   c3_w          i_w;
 
+  _cs_init(&dry_d->jax_s);
+
   if ( dry_d->fan_j ) {
     for ( i_w = 0; (jet_j = &dry_d->fan_j[i_w])->fcs_c; i_w++ ) {
       jet_j->xip = dry_d->xip;
-
       jet_j->axe_l = _ho_abstract(dry_d->xip, jet_j->fcs_c);
+
+      _ho_cash_save(&dry_d->jax_s, jet_j->axe_l, jet_j);
     }
   }
 }
@@ -665,15 +668,21 @@ _ho_conquer(u2_rail ral_r,
   } else if ( 0 == dry_d->fan_j ) {
     return 0;
   } else {
-    u2_ho_jet *jet_j = dry_d->fan_j;
+    if ( 3 == axe ) {
+      //  Linear search - slow, except in this common case.
+      //
+      u2_ho_jet *jet_j = dry_d->fan_j;
 
-    while ( jet_j->fcs_c ) {
-      if ( axe == jet_j->axe_l ) {
-        return jet_j;
+      while ( jet_j->fcs_c ) {
+        if ( axe == jet_j->axe_l ) {
+          return jet_j;
+        }
+        jet_j++;
       }
-      jet_j++;
+      return 0;
+    } else {
+      return _ho_cash_find(&dry_d->jax_s, axe);
     }
-    return 0;
   }
 }
  
@@ -1020,15 +1029,7 @@ u2_ho_kick(u2_ray   wir_r,
            u2_noun  cor,                                          //  retain
            u2_atom  axe)                                          //  retain
 {
-  u2_noun fol; 
-#if 0
-  if ( u2_none == (fol = u2_frag(axe, cor)) ) {
-    return u2_none;
-  }
-  else {
-    return u2_ho_punt(wir_r, xip, cor, fol);
-  }
-#else
+  u2_noun    fol; 
   u2_ho_jet* jet_j;
 
   if ( u2_none == (fol = u2_frag(axe, cor)) ) {
@@ -1038,24 +1039,6 @@ u2_ho_kick(u2_ray   wir_r,
     return u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
   }
   else {
-#if 0
-    c3_assert(jet_j == _ho_discover(wir_r, xip, fol, cor));
-    if ( jet_j != (jut_j = _ho_discover(wir_r, xip, fol, cor)) ) {
-      printf("kick axe %d mas %d\n", axe, u2_ax_mas(axe));
-      printf("jet_j %p, axe %d, fcs %s, xip %s\n", 
-              jet_j,
-              jet_j->axe_l,
-              jet_j->fcs_c,
-              u2_ho_cstring(jet_j->xip));
-      printf("jut_j %p, axe %d, fcs %s, xip %s\n", 
-              jut_j,
-              jut_j->axe_l,
-              jut_j->fcs_c,
-              u2_ho_cstring(jut_j->xip));
-      c3_assert(0);
-    }
-#endif
     return u2_ho_use(wir_r, jet_j, cor, fol);
   }
-#endif
 }

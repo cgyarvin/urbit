@@ -23,10 +23,6 @@
           */
           u2_ray jub_r;
 
-          /* Plow; special support for bootstrap code; temporary.
-          */
-          u2_ray plo_r;
-
           /* Ray to performance log.
           */
           u2_ray bex_r;
@@ -47,7 +43,6 @@
 #         define  u2_wire_wat_r(wir_r)  *u2_at(wir_r, u2_loom_wire, wat_r)
 #         define  u2_wire_bas_r(wir_r)  *u2_at(wir_r, u2_loom_wire, bas_r)
 #         define  u2_wire_jub_r(wir_r)  *u2_at(wir_r, u2_loom_wire, jub_r)
-#         define  u2_wire_plo_r(wir_r)  *u2_at(wir_r, u2_loom_wire, plo_r)
 #         define  u2_wire_bex_r(wir_r)  *u2_at(wir_r, u2_loom_wire, bex_r)
 
 #         define  u2_wire_loc(wir_r)    *u2_at(wir_r, u2_loom_wire, loc)

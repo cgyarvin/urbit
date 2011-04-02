@@ -44,8 +44,10 @@
       u2_list belt_l = _lily_hike_belt_l(wir_r, u2_t(pac));
 
       {
-        if ( (_1 != axis) && u2_yes == u2_sing(_2, u2_fj_op_tip(axis)) ) {
-          u2_axis axis_tap = u2_fj_op_tap(wir_r, axis);
+        if ( (_1 != axis) && 
+             (u2_yes == u2_sing(_2, j2_mbc(Pit, cap)(wir_r, axis))) )
+        {
+          u2_axis axis_tap = j2_mbc(Pit, mas)(wir_r, axis);
 
           return u2_bc(wir_r, 
                        u2_bc(wir_r, 
@@ -73,8 +75,10 @@
       u2_list belt_r = _lily_hike_belt_r(wir_r, u2_t(pac));
 
       {
-        if ( (_1 != axis) && u2_yes == u2_sing(_3, u2_fj_op_tip(axis)) ) {
-          u2_axis axis_tap = u2_fj_op_tap(wir_r, axis);
+        if ( (_1 != axis) && 
+             (u2_yes == u2_sing(_3, j2_mbc(Pit, cap)(wir_r, axis))) )
+        {
+          u2_axis axis_tap = j2_mbc(Pit, mas)(wir_r, axis);
 
           return u2_bc(wir_r, 
                        u2_bc(wir_r, u2_rx(wir_r, axis_tap), 

@@ -23,7 +23,6 @@ u2_wr_init(c3_m   hip_m,
 
   u2_wire_bas_r(wir_r) = 0;
   u2_wire_wat_r(wir_r) = 0;
-  u2_wire_plo_r(wir_r) = 0;
   u2_wire_jub_r(wir_r) = 0;
 
   /* Trace stacks.
@@ -63,13 +62,6 @@ u2_wr_init(c3_m   hip_m,
     u2_bx_boot(wir_r);
   }
 
-  /* Special support.
-  */
-  {
-    u2_wire_plo_r(wir_r) = u2_rl_ralloc(wir_r, c3_wiseof(u2_loom_plow));
-
-    u2_pl_boot(wir_r);
-  }
   return wir_r;
 }
 
