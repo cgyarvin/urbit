@@ -458,7 +458,15 @@
       }
       case c3__zpcb: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       {
-        return j2_mcx(Pit, ut, mint)(wir_r, van, sut, gol, q_gen);
+        u2_noun hum = j2_mcx(Pit, ut, mint)(wir_r, van, sut, gol, q_gen);
+        u2_noun bez = u2_bt(wir_r, c3__spot, _1, u2_rx(wir_r, p_gen));
+
+        ret = u2_bc(wir_r, 
+                    u2_rx(wir_r, u2_h(hum)),
+                    u2_bt(wir_r, _10, bez, u2_rx(wir_r, u2_t(hum))));
+
+        u2_rz(wir_r, hum);
+        return ret;
       }
       case c3__zpdx: p_gen = u2_t(gen);
       {

@@ -324,6 +324,7 @@ wide_c
     wide_norm: di_sigmit hint_d_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_sigpad hint_c_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_sigpam body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_sigsig body_b_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_mitbon body_j_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_mittar body_a_wide    { $$ = _ycell($1, $2); }
@@ -495,6 +496,7 @@ tall
     tall_norm: di_sigmit w hint_d_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_sigpad w hint_c_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_sigpam w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_sigsig w body_b_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_zapdax w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_zapdeg w body_a_tall    { $$ = _ycell($1, $3); }
@@ -699,6 +701,7 @@ tall
     di_sigmit: si_sig si_mit  { $$ = c3__sgmt; }
     di_sigpad: si_sig si_pad  { $$ = c3__sgpd; }
     di_sigpam: si_sig si_pam  { $$ = c3__sgpm; }
+    di_sigsig: si_sig si_sig  { $$ = c3__sgsg; }
 
     di_zapdax: si_zap si_dax  { $$ = c3__zpdx; }
     di_zapmit: si_zap si_mit  { $$ = c3__zpmt; }

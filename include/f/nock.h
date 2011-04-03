@@ -38,20 +38,3 @@
       u2_weak                                                     //  transfer
       u2_nk_kick(u2_wire wir_r,
                  u2_weak gat);                                    //  retain
-
-    /* u2_nk_show():
-    **
-    **   Display and/or clear the trace stacks.  If there is not
-    **   an uncleared trace, this is a no-op.
-    */
-      void
-      u2_nk_show(u2_wire wir_r,
-                 FILE*   fil_f);
-
-    /* u2_nk_wipe():
-    **
-    **   Clear trace stacks without display.
-    */
-      void
-      u2_nk_wipe(u2_wire wir_r);
-

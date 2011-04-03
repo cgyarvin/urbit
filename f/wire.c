@@ -25,12 +25,10 @@ u2_wr_init(c3_m   hip_m,
   u2_wire_wat_r(wir_r) = 0;
   u2_wire_jub_r(wir_r) = 0;
 
-  /* Trace stacks.
+  /* Trace stack.
   */
   {
-    u2_wire_loc(wir_r) = u2_nul;
-    u2_wire_tac(wir_r) = u2_nul;
-    u2_wire_toc(wir_r) = u2_nul;
+    u2_wire_tax(wir_r) = u2_nul;
   }
 
 #if 1

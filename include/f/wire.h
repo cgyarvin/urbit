@@ -27,17 +27,9 @@
           */
           u2_ray bex_r;
 
-          /* Location stack.
+          /* Interpreter trace.
           */
-          u2_noun loc;
-
-          /* Trace stack (modern/advanced).
-          */
-          u2_noun tac;
-
-          /* Trace stack (old-fashioned).
-          */
-          u2_noun toc;
+          u2_noun tax;
         } u2_loom_wire;
 
 #         define  u2_wire_wat_r(wir_r)  *u2_at(wir_r, u2_loom_wire, wat_r)
@@ -45,9 +37,7 @@
 #         define  u2_wire_jub_r(wir_r)  *u2_at(wir_r, u2_loom_wire, jub_r)
 #         define  u2_wire_bex_r(wir_r)  *u2_at(wir_r, u2_loom_wire, bex_r)
 
-#         define  u2_wire_loc(wir_r)    *u2_at(wir_r, u2_loom_wire, loc)
-#         define  u2_wire_tac(wir_r)    *u2_at(wir_r, u2_loom_wire, tac)
-#         define  u2_wire_toc(wir_r)    *u2_at(wir_r, u2_loom_wire, toc)
+#         define  u2_wire_tax(wir_r)    *u2_at(wir_r, u2_loom_wire, tax)
 
     /** Functions.
     **/

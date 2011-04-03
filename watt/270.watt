@@ -1975,7 +1975,8 @@
       ::
           [%zpcb *]                                                   ::  !_
         ~|  [%spot |.((~(fly to ~(loc go p.gen)) 75))]
-        $(gen q.gen)
+        =+  hum=$(gen q.gen)
+        [p.hum [10 [%spot 1 p.gen] q.hum]]
       ::
           [%zpdx *]                                                   ::  !#
         ~#

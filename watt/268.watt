@@ -5,6 +5,13 @@
 ::
   ::  Tier 1, atomic arithmetic
 ::
+++  bug
+  |=  [a=@]
+  ?.  .=(0 (mod a 2))
+    =+  z=2
+    ~~  ~(dem go (mul 3 a))
+    !! 
+  [%foo a]
 ++  add
   ~.  %add
   |=  [a=@ b=@] 
@@ -997,7 +1004,7 @@
     [%sgmt p=*chop q=*gene r=*(list <[p=*term q=*gene]>) s=*gene] ::  ~%  sigmit
     [%sgpd p=@ q=*gene]                                           ::  ~+  sigpad
     [%sgpm p=*gene q=*gene]                                       ::  ~&  sigpam
-    [%sgsg p=*gene q=*gene]                                       ::  ~|  sigsig
+    [%sgsg p=*gene q=*gene]                                       ::  ~~  sigsig
   ::
     [%tmbn p=*<%atom %noun %cell %flag %null>]                    ::  ;=  tambon
     [%tmdp p=*gene]                                               ::  ;-  tamdap
@@ -1965,7 +1972,8 @@
       ::
           [%zpcb *]                                                   ::  !_
         ~|  [%spot |.((~(fly to ~(loc go p.gen)) 75))]
-        $(gen q.gen)
+        =+  hum=$(gen q.gen)
+        [p.hum [10 [%spot 1 p.gen] q.hum]]
       ::
           [%zpdx *]                                                   ::  !#
         ~#

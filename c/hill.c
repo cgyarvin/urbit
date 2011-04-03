@@ -4,6 +4,7 @@
 */
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <sys/ioctl.h>
 
 #define U2_GLOBAL
 #define C3_GLOBAL
@@ -39,6 +40,7 @@
         */
         hi_shoa sob;
       };
+      static struct hill_state *Hill;     //  XX - always & everywhere a hack!
 
   /**   Direct-jet hacks.  All but PitZ should be removed.
   **/
@@ -60,14 +62,28 @@
       j2_mbc(PitA, ream)(u2_wire wir_r, 
                          u2_noun txt);                            //  transfer
 
-    /* Type printing - hack squared.
+    /* Flying - also a hack.
     */
-      void
-      j2_mcy(PitA, ut, dupt)(u2_wire     wir_r,
-                             u2_noun     van,                     //  retain
-                             const c3_c* cap_c,                   //  retain
-                             u2_noun     typ);                    //  retain
+      u2_noun                                                     //  transfer
+      j2_mcy(PitA, to, fly)(u2_wire wir_r,
+                            u2_noun pup,                          //  retain
+                            u2_noun bor);                         //  retain
 
+  /**   Forward declarations.
+  **/
+#if 0
+    static void
+    _hill_print_delm(u2_wire, FILE*, u2_noun);
+    static void
+    _hill_print_term(u2_wire, FILE*, u2_noun);
+    static void
+    _hill_print_type(u2_wire, FILE*, const c3_c*, u2_noun);
+#endif
+    static void
+    _hill_print_noun(u2_wire, FILE*, const c3_c*, u2_noun);
+
+    static u2_noun
+    _hill_nock(u2_wire, u2_noun, u2_noun);
 
 /* _hill_fill_1(): fill one argument in shoe; type assumed
 */
@@ -96,6 +112,18 @@ _hill_fill_2(u2_wire wir_r,
                                          0));  
 }
 
+/* _hill_columns(): return screen column width from OS.
+*/
+static c3_l
+_hill_columns(void)
+{
+  c3_s buf_s[4];
+  
+  ioctl(0, TIOCGWINSZ, &buf_s);
+
+  return buf_s[1] - 1;
+}
+
 #if 0
 /* _hill_fill_3(): fill three arguments in shoe; type assumed
 */
@@ -115,25 +143,44 @@ _hill_fill_3(u2_wire wir_r,
 }
 #endif
 
-/* _hill_print_wall(): print a wall of txt.
+/* _hill_print_tape(): print a tape of txt to FIL_f.
+*/
+static void
+_hill_print_tape(u2_wire     wir_r,                               
+                 FILE*       fil_f,                               //  retain
+                 u2_noun     tep)                                 //  retain
+{
+  if ( 0 == fil_f) fil_f = stdout;
+
+  while ( u2_nul != tep ) {
+    c3_c car_c;
+
+    if ( u2_h(tep) >= 127 ) {
+      car_c = '?';
+    } else car_c = u2_h(tep);
+
+    putc(car_c, fil_f);
+    tep = u2_t(tep);
+  }
+}
+
+/* _hill_print_wall(): print a wall of txt to FIL_f.
 */
 static void
 _hill_print_wall(u2_wire     wir_r,                               
+                 FILE*       fil_f,                               //  retain
                  const c3_c* cap_c,                               //  retain
                  u2_noun     wal)                                 //  retain
 {
-  if ( cap_c ) printf("%s:\n", cap_c);
+  if ( 0 == fil_f) fil_f = stdout;
+
+  if ( cap_c && *cap_c ) printf("%s:\n", cap_c);
 
   while ( u2_nul != wal ) {
-    u2_noun h_wal = u2_h(wal);
+    if ( cap_c ) { putc(' ', fil_f); putc(' ', fil_f); }
+    _hill_print_tape(wir_r, fil_f, u2_h(wal));
+    putc(10, fil_f);
 
-    while ( u2_nul != h_wal ) {
-      c3_assert(u2_h(h_wal) < 128);
-
-      putchar(u2_h(h_wal));
-      h_wal = u2_t(h_wal);
-    }
-    putchar(10);
     wal = u2_t(wal);
   }
 }
@@ -146,7 +193,7 @@ _hill_wake(u2_wire wir_r,
 {
   return u2_bc
     (wir_r, u2_rx(wir_r, u2_h(gam)),
-            u2_nk_nock(wir_r, _0, u2_t(gam)));
+            _hill_nock(wir_r, _0, u2_t(gam)));
 }
 
 /* _hill_z_mint_gen(): mint `gen` to `[type form]` with PitZ jets.
@@ -201,7 +248,7 @@ _hill_z_make_gen(u2_wire wir_r,
                  u2_noun gen)                                     //  retain
 {
   u2_noun gam = _hill_z_mint_gen(wir_r, u2_h(sho), c3__noun, gen);
-  u2_noun pro = u2_nk_nock(wir_r, u2_rx(wir_r, u2_t(sho)), u2_t(gam));
+  u2_noun pro = _hill_nock(wir_r, u2_t(sho), u2_t(gam));
   u2_noun ret = u2_bc(wir_r, u2_rx(wir_r, u2_h(gam)), pro);
 
   u2_rz(wir_r, gam);
@@ -256,7 +303,6 @@ _hill_z_hang(u2_wire     wir_r,
   return ret;
 }
 
-#if 0
 /* _hill_z_call_1(): invoke 1-argument function on core shoe; type assumed
 */
 static u2_noun                                                    //  produce
@@ -274,9 +320,8 @@ _hill_z_call_1(u2_wire     wir_r,
 
   return ret;
 }
-#endif
 
-/* _hill_z_call_2(): invoke 1-argument function on core shoe; type assumed
+/* _hill_z_call_2(): invoke 2-argument function on core shoe; type assumed
 */
 static u2_noun                                                    //  produce
 _hill_z_call_2(u2_wire     wir_r,
@@ -360,6 +405,110 @@ _hill_a_mint_txt(u2_wire wir_r,
   }
 }
 
+/* _hill_a_ram(): dump `bil` as a flat tape.
+*/
+static u2_noun
+_hill_a_ram(u2_wire wir_r,
+            hi_shoz soa,
+            u2_noun bil)
+{
+  u2_noun cor = _hill_z_hang(wir_r, soa, "to", bil);
+  u2_noun dog = _hill_z_make_txt_c(wir_r, cor, "ram");
+  u2_noun pro = u2_rx(wir_r, u2_t(dog));
+
+  u2_rz(wir_r, cor);
+  u2_rz(wir_r, dog);
+
+  return pro;
+}
+
+/* _hill_a_fly(): dump `bil` to `col`, producing wall.
+*/
+static u2_noun
+_hill_a_fly(u2_wire wir_r,
+            hi_shoz soa,
+            u2_noun bil,
+            c3_l    col_l)
+{
+  u2_noun cor = _hill_z_hang(wir_r, soa, "to", bil);
+  u2_noun dog = _hill_z_call_1(wir_r, cor, "fly", col_l);
+  u2_noun pro = u2_rx(wir_r, u2_t(dog));
+
+  u2_rz(wir_r, cor);
+  u2_rz(wir_r, dog);
+
+  return pro;
+}
+
+/* _hill_a_dump(): dump `typ`, producing bill.
+*/
+static u2_noun                                                    //  produce
+_hill_a_dump(u2_wire wir_r,
+             hi_shoz soa,                                         //  retain
+             u2_noun typ)                                         //  retain
+{
+  u2_noun cor = _hill_z_hang(wir_r, soa, "ut", typ);
+  u2_noun dog = _hill_z_make_txt_c(wir_r, cor, "dump");
+  u2_noun pro = u2_rx(wir_r, u2_t(dog));
+
+  u2_rz(wir_r, cor);
+  u2_rz(wir_r, dog);
+
+  return pro;
+}
+
+/* _hill_a_delm(): dump decimal atom, producing bill.
+*/
+static u2_noun
+_hill_a_delm(u2_wire wir_r,
+             hi_shoz soa,
+             u2_atom dem)
+{
+  u2_noun cor = _hill_z_hang(wir_r, soa, "go", dem);
+  u2_noun dog = _hill_z_make_txt_c(wir_r, cor, "dem");
+  u2_noun pro = u2_rx(wir_r, u2_t(dog));
+
+  u2_rz(wir_r, cor);
+  u2_rz(wir_r, dog);
+
+  return pro;
+}
+
+/* _hill_a_term(): dump decimal atom, producing bill.
+*/
+static u2_noun
+_hill_a_term(u2_wire wir_r,
+             hi_shoz soa,
+             u2_atom tem)
+{
+  u2_noun cor = _hill_z_hang(wir_r, soa, "go", tem);
+  u2_noun dog = _hill_z_make_txt_c(wir_r, cor, "tem");
+  u2_noun pro = u2_rx(wir_r, u2_t(dog));
+
+  u2_rz(wir_r, cor);
+  u2_rz(wir_r, dog);
+
+  return pro;
+}
+
+/* _hill_a_gunt(): dump untyped noun, producing bill.
+*/
+static u2_noun
+_hill_a_gunt(u2_wire wir_r,
+             hi_shoz soa,
+             u2_noun som)
+{
+  u2_noun cor = _hill_z_hang(wir_r, soa, "go", som);
+  u2_noun dog = _hill_z_make_txt_c(wir_r, cor, "gut");
+  u2_noun pro = u2_rx(wir_r, u2_t(dog));
+
+  u2_rz(wir_r, cor);
+  u2_rz(wir_r, dog);
+
+  return pro;
+}
+
+#if 0
 /* _hill_a_make_gen(): execute gene against core.
 */
 static hi_shoa                                                    //  produce
@@ -369,7 +518,7 @@ _hill_a_make_gen(u2_wire wir_r,
                  u2_noun gen)                                     //  retain
 {
   u2_noun gam = _hill_a_mint_gen(wir_r, soa, u2_h(cor), c3__noun, gen);
-  u2_noun pro = u2_nk_nock(wir_r, u2_rx(wir_r, u2_t(cor)), u2_t(gam));
+  u2_noun pro = _hill_nock(wir_r, u2_t(cor), u2_t(gam));
   u2_noun ret = u2_bc(wir_r, u2_rx(wir_r, u2_h(gam)), pro);
 
   u2_rz(wir_r, gam);
@@ -427,7 +576,6 @@ _hill_a_hang(u2_wire     wir_r,
   return ret;
 }
 
-#if 0
 /* _hill_a_call_1(): invoke 1-argument function on core shoe; type assumed
 */
 static hi_shoa                                                    //  produce
@@ -446,7 +594,6 @@ _hill_a_call_1(u2_wire     wir_r,
 
   return ret;
 }
-#endif
 
 /* _hill_a_call_2(): invoke 1-argument function on core shoe; type assumed
 */
@@ -466,54 +613,6 @@ _hill_a_call_2(u2_wire     wir_r,
   u2_rz(wir_r, lod);
 
   return ret;
-}
-
-/* _hill_a_ugly(): dump type with shoe A.
-*/
-static void
-_hill_a_ugly(u2_wire     wir_r,
-             hi_shoz     soa,                                     //  retain
-             const c3_c* cap_c,                                   //  retain
-             u2_noun     typ)                                     //  retain
-{
-#if 0
-  u2_noun nut = _hill_z_make_txt_c(wir_r, soa, "ut");
-  u2_noun fut = _hill_fill(wir_r, nut, typ);
-  u2_noun fun = _hill_z_make_txt_c(wir_r, fut, "dump");
-  u2_noun sam = u2_bc(wir_r, u2_rx(wir_r, gol), u2_rx(wir_r, gen));
-  u2_noun dog = _hill_z_post(wir_r, fun, sam);  
-  u2_noun pro = u2_rx(wir_r, u2_t(dog));
-#else
-  u2_noun cor = u2_t(soa);
-  u2_noun fut = u2_sh_look(wir_r, cor, "ut");
-
-  if ( u2_none == fut ) {
-    printf("dump: fut failed\n");
-    u2_bl_bail(wir_r);
-
-  } else {
-    u2_noun van = u2_nk_nock(wir_r, u2_rx(wir_r, cor), fut);
-
-    j2_mcy(PitA, ut, dupt)(wir_r, van, cap_c, typ);
-    u2_rl_lose(wir_r, van);
-  }
-#endif
-}
-
-#if 0
-/* _hill_a_nice(): pretty-print with shoe A.  Still very crude.
-*/
-_hill_a_nice(u2_wire     wir_r,
-             hi_shoz     soa,                                     //  retain
-             const c3_c* cap_c,                                   //  retain
-             hi_shob     som)                                     //  retain
-{
-  u2_noun typ = u2_h(som);
-  u2_noun val = u2_t(som);
-  {
-    _hill_a_ugly(wir_r, soa, cap_c, typ);
-    u2_err(wir_r, 
-  }
 }
 #endif
 
@@ -541,6 +640,78 @@ _hill_a_boot(u2_wire     wir_r,
   }
 }
 
+#if 0
+/* _hill_a_print_delm():
+*/
+static void
+_hill_a_print_delm(u2_wire     wir_r,
+                   hi_shoz     soa,                               //  retain
+                   FILE*       fil_f,                             //  retain
+                   u2_atom     dem)                               //  retain
+{
+  u2_noun bil = _hill_a_delm(wir_r, soa, dem);
+  u2_noun tep = _hill_a_ram(wir_r, soa, bil);
+
+  _hill_print_tape(wir_r, fil_f, tep);
+
+  u2_rz(wir_r, bil);
+  u2_rz(wir_r, tep);
+}
+
+/* _hill_a_print_term():
+*/
+static void
+_hill_a_print_term(u2_wire     wir_r,
+                   hi_shoz     soa,                               //  retain
+                   FILE*       fil_f,                             //  retain
+                   u2_atom     tem)                               //  retain
+{
+  u2_noun bil = _hill_a_term(wir_r, soa, tem);
+  u2_noun tep = _hill_a_ram(wir_r, soa, bil);
+
+  _hill_print_tape(wir_r, fil_f, tep);
+
+  u2_rz(wir_r, bil);
+  u2_rz(wir_r, tep);
+}
+#endif
+
+/* _hill_a_print_type():
+*/
+static void
+_hill_a_print_type(u2_wire     wir_r,
+                   hi_shoz     soa,                               //  retain
+                   FILE*       fil_f,                             //  retain
+                   const c3_c* cap_c,                             //  retain
+                   u2_noun     typ)                               //  retain
+{
+  u2_noun bil = _hill_a_dump(wir_r, soa, typ);
+  u2_noun wal = _hill_a_fly(wir_r, soa, bil, _hill_columns());
+
+  _hill_print_wall(wir_r, fil_f, cap_c, wal);
+
+  u2_rz(wir_r, bil);
+  u2_rz(wir_r, wal);
+}
+
+/* _hill_a_print_noun():
+*/
+static void
+_hill_a_print_noun(u2_wire     wir_r,
+                   hi_shoz     soa,                               //  retain
+                   FILE*       fil_f,                             //  retain
+                   const c3_c* cap_c,                             //  retain
+                   u2_noun     typ)                               //  retain
+{
+  u2_noun bil = _hill_a_gunt(wir_r, soa, typ);
+  u2_noun wal = _hill_a_fly(wir_r, soa, bil, _hill_columns());
+
+  _hill_print_wall(wir_r, fil_f, cap_c, wal);
+
+  u2_rz(wir_r, bil);
+  u2_rz(wir_r, wal);
+}
+
 /* _hill_a_fire(): execute and print expression over pit B (with shoe A).
 */
 static void                                                       //  produce
@@ -554,18 +725,219 @@ _hill_a_fire(u2_wire     wir_r,
   txt = u2_bn_string(wir_r, exp_c);
   gam = _hill_a_mint_txt(wir_r, soa, u2_h(sob), c3__noun, txt);
 
-  _hill_a_ugly(wir_r, soa, 0, u2_h(gam));
-  som = u2_nk_nock(wir_r, u2_rx(wir_r, u2_t(sob)), u2_t(gam));
+  _hill_a_print_type(wir_r, soa, 0, 0, u2_h(gam));
 
+  som = _hill_nock(wir_r, u2_t(sob), u2_t(gam));
   if ( u2_none == som ) {
     fprintf(stderr, "{none}\n");
   }
   else {
-    u2_err(wir_r, 0, som);
+    _hill_print_noun(wir_r, 0, "", som);
   }
   u2_rz(wir_r, txt);
   u2_rz(wir_r, gam);
   u2_rz(wir_r, som);
+}
+
+#if 0
+/* _hill_print_delm(): print wrapper for decimal.
+*/
+static void
+_hill_print_delm(u2_wire     wir_r,
+                 FILE*       fil_f,                               //  retain
+                 u2_noun     som)                                 //  retain
+{
+  _hill_a_print_delm(wir_r, Hill->soa, fil_f, som);
+}
+
+/* _hill_print_term(): print wrapper for terminal.
+*/
+static void
+_hill_print_term(u2_wire     wir_r,
+                 FILE*       fil_f,                               //  retain
+                 u2_noun     som)                                 //  retain
+{
+  _hill_a_print_term(wir_r, Hill->soa, fil_f, som);
+}
+
+/* _hill_print_type(): print wrapper for type.
+*/
+static void
+_hill_print_type(u2_wire     wir_r,
+                 FILE*       fil_f,                               //  retain
+                 const c3_c* cap_c,                               //  retain
+                 u2_noun     typ)                                 //  retain
+{
+  _hill_a_print_type(wir_r, Hill->soa, fil_f, cap_c, typ);
+}
+#endif
+
+/* _hill_print_noun(): print wrapper for noun.
+*/
+static void
+_hill_print_noun(u2_wire     wir_r,
+                 FILE*       fil_f,                               //  retain
+                 const c3_c* cap_c,                               //  retain
+                 u2_noun     som)                                 //  retain
+{
+  _hill_a_print_noun(wir_r, Hill->soa, fil_f, cap_c, som);
+}
+
+/* _hill_print_spot(): print wrapper for file location, at tab of 2.
+*/
+static void
+_hill_print_spot(u2_wire wir_r,
+                 FILE*   fil_f,                                   //  retain
+                 u2_noun sot)                                     //  retain
+{
+  u2_noun p_sot, q_sot, r_sot, pq_sot, qq_sot, pr_sot, qr_sot;
+
+  if ( (u2_yes == u2_as_trel(sot, &p_sot, &q_sot, &r_sot)) &&
+       (u2_yes == u2_as_cell(q_sot, &pq_sot, &qq_sot)) &&
+       (u2_yes == u2_as_cell(r_sot, &pr_sot, &qr_sot)) &&
+       (u2_yes == u2_stud(pq_sot)) &&
+       (u2_yes == u2_stud(qq_sot)) &&
+       (u2_yes == u2_stud(pr_sot)) &&
+       (u2_yes == u2_stud(qr_sot)) )
+  {
+    u2_noun blt = _hill_a_term(wir_r, Hill->soa, p_sot);
+    u2_noun bla = _hill_a_delm(wir_r, Hill->soa, pq_sot);
+    u2_noun blb = _hill_a_delm(wir_r, Hill->soa, qq_sot);
+    u2_noun blc = _hill_a_delm(wir_r, Hill->soa, pr_sot);
+    u2_noun bld = _hill_a_delm(wir_r, Hill->soa, qr_sot);
+    u2_noun tlt = _hill_a_ram(wir_r, Hill->soa, blt);
+    u2_noun tla = _hill_a_ram(wir_r, Hill->soa, bla);
+    u2_noun tlb = _hill_a_ram(wir_r, Hill->soa, blb);
+    u2_noun tlc = _hill_a_ram(wir_r, Hill->soa, blc);
+    u2_noun tld = _hill_a_ram(wir_r, Hill->soa, bld);
+
+    fprintf(fil_f, "  {");
+    if ( u2_nul != tlt ) {
+      _hill_print_tape(wir_r, fil_f, tlt);
+      fprintf(fil_f, ": ");
+    }
+
+    _hill_print_tape(wir_r, fil_f, tla);
+    fprintf(fil_f, "/");
+    _hill_print_tape(wir_r, fil_f, tlb);
+    fprintf(fil_f, "--");
+    _hill_print_tape(wir_r, fil_f, tlc);
+    fprintf(fil_f, "/");
+    _hill_print_tape(wir_r, fil_f, tld);
+    fprintf(fil_f, "}\n");
+     
+    u2_rz(wir_r, blt);
+    u2_rz(wir_r, bla);
+    u2_rz(wir_r, blb);
+    u2_rz(wir_r, blc);
+    u2_rz(wir_r, bld);
+
+    u2_rz(wir_r, tlt);
+    u2_rz(wir_r, tla);
+    u2_rz(wir_r, tlb);
+    u2_rz(wir_r, tlc);
+    u2_rz(wir_r, tld);
+
+    return;
+  }
+  fprintf(fil_f, "  {spot!}\n");
+  u2_err(wir_r, "{{invalid}}", sot);
+}
+
+/* _hill_print_mean(): print wrapper for user meaning.
+*/
+static void
+_hill_print_mean(u2_wire wir_r,
+                 FILE*   fil_f,                                   //  retain
+                 u2_noun mon)                                     //  retain
+{
+  if ( u2_yes == u2_dust(mon) ) {
+    u2_noun bil = u2_nk_nock(wir_r, u2_rx(wir_r, mon), u2_t(mon));
+
+    if ( u2_none != bil ) {
+#if 0
+      u2_noun wal = _hill_a_fly(wir_r, Hill->soa, bil, _hill_columns());
+#else
+    //  This will bail safely if the bill is bad, rather than 
+    //  recursing back into _hill_nock().
+    //
+      u2_noun wal = j2_mcy(PitA, to, fly)(wir_r, bil, _hill_columns());
+#endif
+
+      _hill_print_wall(wir_r, fil_f, "", wal);
+      u2_rz(wir_r, wal);
+      u2_rz(wir_r, bil);
+      return;
+    }
+    else fprintf(fil_f, "  {maen!}\n");
+  }
+  fprintf(fil_f, "  {mean!}\n");
+}
+
+/* _hill_print_tent(): print wrapper for trace entry.
+*/
+static void
+_hill_print_tent(u2_wire wir_r,
+                 FILE*   fil_f,                                   //  retain
+                 u2_noun tax)                                     //  retain
+{
+  if ( u2_yes == u2_dust(tax) ) switch ( u2_h(tax) ) {
+    case c3__spot: _hill_print_spot(wir_r, fil_f, u2_t(tax)); return;
+    case c3__mean: _hill_print_mean(wir_r, fil_f, u2_t(tax)); return;
+  }
+  fprintf(fil_f, "  {tent!}\n");
+}
+
+/* _hill_print_trac(): print wrapper for trace stack.
+*/
+static void
+_hill_print_trac(u2_wire wir_r,
+                 FILE*   fil_f,                                   //  retain
+                 u2_noun tax)                                     //  retain
+{
+  while ( u2_nul != tax ) {
+    _hill_print_tent(wir_r, fil_f, u2_h(tax));
+    tax = u2_t(tax);
+  }
+}
+
+/* _hill_nock(): control and trace wrapper for interpreter.
+*/
+static u2_noun                                                    //  produce
+_hill_nock(u2_wire wir_r,
+           u2_noun bus,                                           //  retain
+           u2_noun fol)                                           //  retain
+{
+  u2_noun pro;
+
+  pro = u2_nk_nock(wir_r, u2_rx(wir_r, bus), fol);
+
+  if ( u2_none != pro ) {
+    return pro;
+  }
+  else {
+    u2_ray jub_r = u2_bl_open(wir_r);
+
+    if ( u2_bl_set(wir_r) ) {
+      u2_bl_done(wir_r, jub_r);
+      fprintf(stderr, "{trace failed!}\n");
+    }
+    else {
+      u2_noun tax;
+     
+      fprintf(stderr, "{trace}\n");
+      tax = u2_rx(wir_r, u2_wire_tax(wir_r));
+      u2_wire_tax(wir_r) = u2_nul;
+
+      _hill_print_trac(wir_r, stderr, tax);
+      u2_rz(wir_r, tax);
+
+      u2_bl_done(wir_r, jub_r);
+    }
+
+    u2_bl_bail(wir_r);
+    return u2_none;
+  }
 }
 
 /* hill_boot(): create the hill engine.
@@ -596,9 +968,8 @@ hill_boot(void)
           break;
         }
         else {
-          u2_bl_done(wir_r, jub_r);
-
           soa = _hill_z_boot(wir_r, FileA);
+          u2_bl_done(wir_r, jub_r);
         }
       }
       fprintf(stderr, "{hard boot: %s, with %s jets}\n", FileA, FileZ);
@@ -614,9 +985,8 @@ hill_boot(void)
           break;
         }
         else {
-          u2_bl_done(wir_r, jub_r);
-
           sob = _hill_a_boot(wir_r, soa, FileB);
+          u2_bl_done(wir_r, jub_r);
         }
       }
       fprintf(stderr, "{soft boot: %s, with %s}\n", FileB, FileA);
@@ -633,6 +1003,7 @@ hill_boot(void)
         hil_h->soa = soa;
         hil_h->sob = sob;
 
+        Hill = hil_h;   // XX
         return hil_h;
       } 
     } while (0);
@@ -665,11 +1036,23 @@ hill_line(struct hill_state* hil_h,
   hi_shoa soa   = hil_h->soa;
   hi_shoz sob   = hil_h->sob;
 
+/*
   u2_bx_boot(wir_r);
   u2_bx_spot(wir_r, u2_nul);
+*/
 
-  _hill_a_fire(wir_r, soa, sob, lin_c);
+  {
+    u2_ray jub_r = u2_bl_open(wir_r);
+
+    if ( u2_bl_set(wir_r) ) {
+      u2_bl_done(wir_r, jub_r);
+      fprintf(stderr, "{exit}\n");
+    } else {
+      _hill_a_fire(wir_r, soa, sob, lin_c);
+      u2_bl_done(wir_r, jub_r);
+    }
+  }
 
   LoomStop = 0;
-  u2_bx_show(wir_r);
+  // u2_bx_show(wir_r);
 }
