@@ -6,14 +6,18 @@
   ***
   ***   The cash system is a 16-way hash tree designed to
   ***   scale smoothly, remaining small for small usage 
-  ***   and fast for big usage.
+  ***   and fast for big usage.  It is also salted for use
+  ***   of multiple associations in the same table.
   ***
   ***   A logical key is the combination of an opaque
-  ***   function selector, any number < (1 << 31), and a
-  ***   sample noun.  Function 0 is nock.
+  ***   function salt, any number < (1 << 31), and a
+  ***   sample noun.  Matches are in every case within
+  ***   the salt.
   ***
-  ***   The search key is the mug of the function selector,
-  ***   XORed with the mug of the sample.
+  ***   The search key is the mug of the salt, XORed 
+  ***   with the mug of the sample.  [XX - This sacrifices
+  ***   efficiency to internal convenience and should
+  ***   be replaced with direct salt.]
   ***
   ***   A single slot stores a single entry.  If a new entry
   ***   is added, the slot expands to a 16-way table.  If the
@@ -51,23 +55,25 @@
     /* u2_cash_slot_a: cache slot, containing exactly one entry.
     */
       typedef struct {
-        /*  fun_m: opaque, unique function identity (0 for nock)
+        /*  sel_m: opaque, unique function identity (0 for nock)
         **  sam:   sample
         **  pro:   product
         */
-        c3_m    fun_m;
+        c3_m    sel_m;
         u2_noun sam;
         u2_noun pro;
       } u2_cash_slot_a;
 
-#       define u2_slot_a_fun(lot_r)  *u2_at(lot_r, u2_cash_slot_a, fun_m)
+      typedef u2_cash_slot_a u2_cash_slot;
+
+#       define u2_slot_a_sel(lot_r)  *u2_at(lot_r, u2_cash_slot_a, sel_m)
 #       define u2_slot_a_sam(lot_r)  *u2_at(lot_r, u2_cash_slot_a, sam)
 #       define u2_slot_a_pro(lot_r)  *u2_at(lot_r, u2_cash_slot_a, pro)
 
 #       define u2_slot_gunk_coll (7 << 29)
 #       define u2_slot_gunk_radx (6 << 29)
 
-#       define u2_slot_gunk_is_coll(gun_w) ((gun_w) & (1 << 29))
+#       define u2_slot_gunk_is_coll(gun_w) (!!((gun_w) & (1 << 29)))
 #       define u2_slot_gunk_is_radx(gun_w) (!((gun_w) & (1 << 29)))
 
     /* u2_cash_slot_b: cache slot, with 16-way table - if not empty.
@@ -94,8 +100,8 @@
         /*  emt_w: (1 << 31)
         */
         c3_w emt_w;
-        c3_w xxx_w;
-        c3_w xxy_w;
+        c3_w xxx_w;         //  unused
+        c3_w xxy_w;         //  unused
       } u2_cash_slot_c;
 
 #       define u2_slot_emty          (1 << 31)
@@ -112,41 +118,51 @@
 
     /* u2_cs_find():
     **
-    **   Find `sam` for `fun`, or return `u2_none`.
+    **   Find `sam` for `sel`, or return `u2_none`.
     */
       u2_weak                                                     //  retain
       u2_cs_find(u2_ray  lot_r,
-                 c3_m    fun_m,
+                 c3_m    sel_m,
                  u2_noun sam);                                    //  retain
 
     /* u2_cs_find_cell():
     **
-    **   Find `[a b]` for `fun`, or return `u2_none`.
+    **   Find `[a b]` for `sel`, or return `u2_none`.
     */
       u2_weak                                                     //  retain
       u2_cs_find_cell(u2_ray  lot_r,
-                      c3_m    fun_m,
+                      c3_m    sel_m,
                       u2_noun a,                                  //  retain
                       u2_noun b);                                 //  retain
 
+    /* u2_cs_find_mixt():
+    **
+    **   Find `[a b]` for `sel`, or return `u2_none`.
+    */
+      u2_weak                                                     //  retain
+      u2_cs_find_mixt(u2_ray      lot_r,
+                      c3_m        sel_m,
+                      const c3_c* a_c,                            //  retain
+                      u2_noun     b);                             //  retain
+
     /* u2_cs_find_trel():
     **
-    **   Find `[a b c]` for `fun`, or return `u2_none`.
+    **   Find `[a b c]` for `sel`, or return `u2_none`.
     */
       u2_weak                                                     //  retain
       u2_cs_find_trel(u2_ray  lot_r,
-                      c3_m    fun_m,
+                      c3_m    sel_m,
                       u2_noun a,                                  //  retain
                       u2_noun b,                                  //  retain
                       u2_noun c);                                 //  retain
 
     /* u2_cs_find_qual():
     **
-    **   Find `[a b c d]` for `fun`, or return `u2_none`.
+    **   Find `[a b c d]` for `sel`, or return `u2_none`.
     */
       u2_weak                                                     //  retain
       u2_cs_find_qual(u2_ray  lot_r,
-                      c3_m    fun_m,
+                      c3_m    sel_m,
                       u2_noun a,                                  //  retain
                       u2_noun b,                                  //  retain
                       u2_noun c,                                  //  retain
@@ -154,35 +170,47 @@
 
     /* u2_cs_save():
     **
-    **   Save `sam` as `pro` for `fun`.
+    **   Save `sam` as `pro` for `sel`.  Replace existing `pro`, if any.
     */
       u2_noun                                                     //  transfer
       u2_cs_save(u2_ray  ral_r,
                  u2_ray  lot_r,
-                 c3_m    fun_m,
+                 c3_m    sel_m,
                  u2_noun sam,                                     //  retain
                  u2_noun pro);                                    //  transfer
 
     /* u2_cs_save_cell():
     **
-    **   Save `[a b]` as `pro` for `fun`.
+    **   Save `[a b]` as `pro` for `sel`.
     */
       u2_noun                                                     //  transfer
       u2_cs_save_cell(u2_ray  ral_r,
                       u2_ray  lot_r,
-                      c3_m    fun_m,
+                      c3_m    sel_m,
                       u2_noun a,                                  //  retain
                       u2_noun b,                                  //  retain
                       u2_noun pro);                               //  transfer
 
+    /* u2_cs_save_mixt():
+    **
+    **   Save `[a b]` as `pro` for `sel`.
+    */
+      u2_noun                                                     //  transfer
+      u2_cs_save_mixt(u2_ray      ral_r,
+                      u2_ray      lot_r,
+                      c3_m        sel_m,
+                      const c3_c* a_c,                            //  retain
+                      u2_noun     b,                              //  retain
+                      u2_noun     pro);                           //  transfer
+
     /* u2_cs_save_trel():
     **
-    **   Save `[a b c]` as `pro` for `fun`.
+    **   Save `[a b c]` as `pro` for `sel`.
     */
       u2_noun                                                     //  transfer
       u2_cs_save_trel(u2_ray  ral_r,
                       u2_ray  lot_r,
-                      c3_m    fun_m,
+                      c3_m    sel_m,
                       u2_noun a,                                  //  retain
                       u2_noun b,                                  //  retain
                       u2_noun c,                                  //  retain
@@ -190,12 +218,12 @@
 
     /* u2_cs_save_qual():
     **
-    **   Save `[a b c d]` as `pro` for `fun`.
+    **   Save `[a b c d]` as `pro` for `sel`.
     */
       u2_noun                                                     //  transfer
       u2_cs_save_qual(u2_ray  ral_r,
                       u2_ray  lot_r,
-                      c3_m    fun_m,
+                      c3_m    sel_m,
                       u2_noun a,                                  //  retain
                       u2_noun b,                                  //  retain
                       u2_noun c,                                  //  retain

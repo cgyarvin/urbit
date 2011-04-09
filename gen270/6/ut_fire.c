@@ -50,8 +50,6 @@
           if ( (u2_yes == vet) && 
                (u2_no == j2_mcy(Pit, ut, nest)(wir_r, van, qq_sut, p_sut)) )
           {
-            printf("fire: metal: nest fail\n");
-
             return u2_bl_bail(wir_r);
           }
           ret = u2_rx(wir_r, dox);
@@ -61,7 +59,6 @@
                (u2_no == u2_sing(p_sut, qq_sut)) &&
                _fire_levy(wir_r, van, sut, dox, hag) )
           {
-            printf("fire: wood: levy fail\n");
             return u2_bl_bail(wir_r);
           }
           ret = u2_rx(wir_r, sut);

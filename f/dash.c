@@ -1,23 +1,23 @@
-/* l/shed.c
+/* l/dash.c
 **
 ** This file is in the public domain.
 */
 #include "all.h"
 
-/* _sh_good_sil()::
+/* _ds_good_sil()::
 */
 static u2_flag
-_sh_good_sil(u2_noun sil)
+_ds_good_sil(u2_noun sil)
 {
-  // XX: verify seal.
+  // XX: verify chop.
   //
   return u2_yes;
 }
 
-/* _sh_good_bud()::
+/* _ds_good_bud()::
 */
 static u2_flag
-_sh_good_bud(u2_noun bud)
+_ds_good_bud(u2_noun bud)
 {
   u2_noun p_bud, q_bud;
 
@@ -36,10 +36,10 @@ _sh_good_bud(u2_noun bud)
   else return u2_no;
 }
 
-/* _sh_good_nut()::
+/* _ds_good_nut()::
 */
 static u2_flag
-_sh_good_nut(u2_noun nut)
+_ds_good_nut(u2_noun nut)
 {
   if ( u2_nul == nut ) {
     return u2_yes;
@@ -57,10 +57,85 @@ _sh_good_nut(u2_noun nut)
   }
 }
 
-/* u2_sh_mine(): substitute active, annotated battery.
+/* _ds_good(): verify payload integrity in core.
+*/
+static u2_flag
+_ds_good(u2_noun cor,
+         u2_noun xip)
+{
+  u2_noun rec = cor;
+  u2_noun pux = xip;
+
+  // printf("sh: good: %s\n", u2_ho_cstring(xip));
+
+  while ( 1 ) {
+    u2_noun bat = u2_h(u2_t(xip));
+    u2_noun pet = u2_t(u2_t(xip));
+
+    if ( u2_no == u2_sing(bat, u2_t(cor)) ) {
+#if 1
+      {
+        printf("sh: cos_c: %s\n", u2_ho_cstring(xip));
+
+        printf("dash: chip: %d.%x, %x\n",
+                u2_ray_a(u2_dog_a(xip)),
+                u2_ray_b(u2_dog_a(xip)), 
+                u2_mug(xip));
+
+        printf("dash: battery: %d.%x, %x\n",
+                u2_ray_a(u2_dog_a(bat)),
+                u2_ray_b(u2_dog_a(bat)), u2_mug(bat));
+
+        printf("live: battery: %d.%x, %x\n",
+                u2_ray_a(u2_dog_a(u2_t(cor))),
+                u2_ray_b(u2_dog_a(u2_t(cor))), 
+                u2_mug(u2_t(cor)));
+
+        printf("\nsh: cos_c: %s\n", u2_ho_cstring(pux));
+
+        printf("dash: chip: %d.%x, %x\n",
+                u2_ray_a(u2_dog_a(pux)),
+                u2_ray_b(u2_dog_a(pux)), 
+                u2_mug(pux));
+
+        printf("dash: battery: %d.%x, %x\n",
+                u2_ray_a(u2_dog_a(u2_h(u2_t(pux)))),
+                u2_ray_b(u2_dog_a(u2_h(u2_t(pux)))), u2_mug(u2_h(u2_t(pux))));
+
+        printf("live: battery: %d.%x, %x\n",
+                u2_ray_a(u2_dog_a(u2_t(rec))),
+                u2_ray_b(u2_dog_a(u2_t(rec))), 
+                u2_mug(u2_t(rec)));
+        
+      }
+      c3_assert(0);
+#endif
+      u2_ho_warn_here();
+      return u2_no;
+    }
+    else {
+      if ( _0 == pet ) {
+        return u2_yes;
+      } else {
+        u2_atom axe = u2_h(pet);
+        u2_noun nub = u2_frag(axe, cor);
+
+        if ( u2_none == nub ) {
+          return u2_no;
+        } else {
+          cor = nub;
+          xip = u2_t(pet);
+          continue;
+        }
+      }
+    }
+  }
+}
+
+/* u2_ds_mine(): substitute active, annotated battery.
 */
 u2_weak                                                           //  transfer
-u2_sh_mine(u2_ray  wir_r,
+u2_ds_mine(u2_ray  wir_r,
            u2_clue clu,                                           //  retain
            u2_noun cor)                                           //  transfer
 {
@@ -72,13 +147,19 @@ u2_sh_mine(u2_ray  wir_r,
   if ( 0 == (bas_r = u2_wire_bas_r(wir_r)) ) {
     return cor;
   }
-  else if ( (u2_none == u2_as_cell(cor, &pay, &bat)) || 
+  else if ( (u2_no == u2_mean(cor, u2_cv_pay, &pay, u2_cv_bat, &bat, 0)) || 
             (u2_no == u2_dust(bat)) )
   {
     return cor;
   }
   else if ( u2_none != (xip = u2_ch_find(u2_bask_hag_r(bas_r), bat)) ) {
+    u2_noun tub = u2_h(u2_t(xip));
     u2_noun cyr;
+
+    if ( u2_no == u2_sing(tub, bat) ) {
+      printf("mine: mismatch: cos_c %s\n", u2_ho_cstring(xip));
+    }
+    c3_assert(u2_yes == u2_rl_senior(wir_r, tub));
 
     if ( u2_none == (cyr = u2_rc(wir_r, u2_rx(wir_r, pay), u2_h(u2_t(xip)))) ) {
       return cor;
@@ -90,17 +171,19 @@ u2_sh_mine(u2_ray  wir_r,
     }
   }
   else if ( (u2_no == u2_as_trel(clu, &bud, &sil, &nut)) ||
-            (u2_no == _sh_good_bud(bud)) ||
-            (u2_no == _sh_good_sil(sil)) ||
-            (u2_no == _sh_good_nut(nut)) )
+            (u2_no == _ds_good_bud(bud)) ||
+            (u2_no == _ds_good_sil(sil)) ||
+            (u2_no == _ds_good_nut(nut)) )
   {
     return cor;
   }
   else {
     u2_noun dac, bot, pet, xop, cyr;
-    
+ 
     dac = bot = pet = xop = cyr = u2_none;
     while ( 1 ) {
+      c3_t jun_t;
+
       /* disc: dac
       */
       {
@@ -113,25 +196,29 @@ u2_sh_mine(u2_ray  wir_r,
       */
       {
         if ( u2_no == u2_rl_junior(bas_r, bat) ) {
-          /* We need the jet battery to be in the shed, so that we 
+          /* We need the jet battery to be in the basket, so that we 
           ** have a fast algorithm for distinguishing jet batteries
           ** by ray address.
           */
           bot = u2_rc(bas_r, u2_h(bat), u2_t(bat));
 #if 0
-        printf("battery: in basket: %d.%x\n",
-                u2_ray_a(u2_dog_a(bot)),
-                u2_ray_b(u2_dog_a(bot)));
+          printf("battery: senior: %d.%x\n",
+                  u2_ray_a(u2_dog_a(bot)),
+                  u2_ray_b(u2_dog_a(bot)));
+
+          jun_t = 0;
 #endif
         } 
         else {
           bot = u2_rl_take(bas_r, bat);
 #if 0
-          printf("battery: in shed! %d.%x\n",
+          printf("battery: junior! %d.%x\n",
                   u2_ray_a(u2_dog_a(bot)),
                   u2_ray_b(u2_dog_a(bot)));
-
+         
+          u2_err(wir_r, "clu", clu);
 #endif
+          jun_t = 1;
         }
         if ( u2_none == bot ) {
           break;
@@ -183,6 +270,40 @@ u2_sh_mine(u2_ray  wir_r,
         if ( u2_none == (u2_ch_save(bas_r, u2_bask_hag_r(bas_r), bot, xop)) ) {
           break;
         }
+        if ( u2_none == (xop = (u2_cs_save(bas_r, u2_bask_hog_r(bas_r), 0,
+                                           bot, u2_rx(bas_r, xop)))) ) {
+          break;
+        }
+        if ( jun_t ) {
+          printf("\n\njunior: cos_c %s\n", u2_ho_cstring(xop));
+          printf("junior: battery: %d.%x, %x\n",
+                  u2_ray_a(u2_dog_a(bot)),
+                  u2_ray_b(u2_dog_a(bot)),
+                  u2_mug(bot));
+     
+          printf("junior: chip: %d.%x, %x\n",
+                  u2_ray_a(u2_dog_a(xop)),
+                  u2_ray_b(u2_dog_a(xop)), 
+                  u2_mug(xop));
+          // u2_err(wir_r, "junior: clue", clu);
+        }
+#if 1
+        else {
+          printf("\n\nsenior: cos_c %s\n", u2_ho_cstring(xop));
+          printf("senior: battery: %d.%x, %x\n",
+                  u2_ray_a(u2_dog_a(bot)),
+                  u2_ray_b(u2_dog_a(bot)),
+                  u2_mug(bot));
+     
+          printf("senior: chip: %d.%x, %x\n",
+                  u2_ray_a(u2_dog_a(xop)),
+                  u2_ray_b(u2_dog_a(xop)), 
+                  u2_mug(xop));
+        } 
+#endif
+        c3_assert(u2_none != u2_cs_find(u2_bask_hog_r(bas_r), 0, bot));
+        c3_assert(xop == u2_cs_find(u2_bask_hog_r(bas_r), 0, bot));
+
         u2_rl_lose(bas_r, xop);
       }
 
@@ -197,6 +318,7 @@ u2_sh_mine(u2_ray  wir_r,
         else {
           u2_rl_lose(wir_r, cor);
 
+          _ds_good(cyr, xop);
           return cyr;
         }
       }
@@ -215,53 +337,10 @@ u2_sh_mine(u2_ray  wir_r,
   }
 }
 
-/* _sh_good(): verify payload integrity in core.
-*/
-static u2_flag
-_sh_good(u2_noun cor,
-         u2_noun xip)
-{
-#if 1
-  return u2_yes;    //  Good!  Ja!  Everything good!
-#else
-  while ( 1 ) {
-    u2_noun bat = u2_h(u2_t(xip));
-    u2_noun pet = u2_t(u2_t(xip));
-
-    if ( u2_no == u2_sing(bat, u2_t(cor)) ) {
-      {
-        char *cos_c = u2_ho_cstring(xip);
-
-        printf("sh: cos_c: %s\n", cos_c);
-      }
-      c3_assert(0);
-      u2_ho_warn_here();
-      return u2_no;
-    }
-    else {
-      if ( _0 == pet ) {
-        return u2_yes;
-      } else {
-        u2_atom axe = u2_h(pet);
-        u2_noun nub = u2_frag(axe, cor);
-
-        if ( u2_none == nub ) {
-          return u2_no;
-        } else {
-          cor = nub;
-          xip = u2_t(pet);
-          continue;
-        }
-      }
-    }
-  }
-#endif
-}
-
-/* u2_sh_find(): find chip by core.
+/* u2_ds_find(): find chip by core.
 */
 u2_weak
-u2_sh_find(u2_ray  wir_r,
+u2_ds_find(u2_ray  wir_r,
            u2_noun cor)
 {
   u2_ray bas_r;
@@ -285,7 +364,9 @@ u2_sh_find(u2_ray  wir_r,
         return u2_none;
       } else {
         u2_chip xip = u2_ch_find(u2_bask_hag_r(bas_r), bat);
+        u2_chip xap = u2_cs_find(u2_bask_hog_r(bas_r), 0, bat);
 
+        c3_assert(xip == xap); 
         if ( u2_none == xip ) {
 #if 0
           printf("bat_r %d.%x; hat_r %d.%x; rut_r %d.%x\n",
@@ -296,7 +377,8 @@ u2_sh_find(u2_ray  wir_r,
 #endif
           return u2_none;
         } else {
-          if ( u2_yes == _sh_good(cor, xip) ) {
+
+          if ( u2_yes == _ds_good(cor, xip) ) {
             return xip;
           }
           else {
@@ -310,12 +392,12 @@ u2_sh_find(u2_ray  wir_r,
   }
 }
 
-/* u2_sh_cook():
+/* u2_ds_cook():
 **
 **   Produce hook formula from chip, or u2_none.
 */
 u2_weak
-u2_sh_cook(u2_wire     wir_r,
+u2_ds_cook(u2_wire     wir_r,
            u2_noun     xip,
            const c3_c* tam_c)
 {
@@ -334,12 +416,12 @@ u2_sh_cook(u2_wire     wir_r,
   return u2_none;
 }
 
-/* u2_sh_look():
+/* u2_ds_look():
 **
 **   Produce hook formula from core, or u2_none.
 */
 u2_weak
-u2_sh_look(u2_wire     wir_r,
+u2_ds_look(u2_wire     wir_r,
            u2_noun     cor,
            const c3_c* tam_c)
 {
@@ -350,7 +432,7 @@ u2_sh_look(u2_wire     wir_r,
   if ( u2_none != (fol = u2_ch_find_mixt(u2_bask_hag_r(bas_r), tam_c, bat)) ) {
     return fol;
   } else {
-    u2_noun xip = u2_sh_find(wir_r, cor);
+    u2_noun xip = u2_ds_find(wir_r, cor);
 
     if ( u2_none == xip ) {
       return u2_none;
@@ -359,7 +441,7 @@ u2_sh_look(u2_wire     wir_r,
       u2_axis axe_w = _1;
 
       while ( 1 ) {
-        fol = u2_sh_cook(wir_r, xip, tam_c);
+        fol = u2_ds_cook(wir_r, xip, tam_c);
 
         if ( u2_none == fol ) {
           u2_noun pet = u2_t(u2_t(xip));

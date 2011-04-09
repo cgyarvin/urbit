@@ -47,6 +47,10 @@
         */
         u2_loom_chad hag_c;
 
+        /* hog: slot: hash from battery to jet chip (new).
+        */
+        u2_cash_slot hog_s;
+
         /* vig: custom chads for plow.
         */
         u2_loom_chad vig_c[u2_bask_plow_end];
@@ -57,6 +61,7 @@
 #       define u2_bask_cus_r(bas_r)  u2_aftr(bas_r, u2_loom_bask, cus_c)
 #       define u2_bask_sol_r(bas_r)  u2_aftr(bas_r, u2_loom_bask, sol_c)
 #       define u2_bask_hag_r(bas_r)  u2_aftr(bas_r, u2_loom_bask, hag_c)
+#       define u2_bask_hog_r(bas_r)  u2_aftr(bas_r, u2_loom_bask, hog_s)
 
 #       define u2_bask_vig_r(bas_r, i_w) \
           ( u2_aftr(bas_r, u2_loom_bask, vig_c) + \

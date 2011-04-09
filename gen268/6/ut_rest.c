@@ -77,7 +77,6 @@
     u2_noun key = u2_bc(wir_r, u2_rx(wir_r, sut), u2_rx(wir_r, leg));
 
     if ( u2_yes == j2_mcc(Pit, in, has)(wir_r, fan, key) ) {
-      printf("jet: inference recursion\n");
       return u2_bl_bail(wir_r);
     }
     else {

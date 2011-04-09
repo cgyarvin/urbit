@@ -288,14 +288,16 @@
 
     /* Conventional axes for gate call.
     */
-#     define u2_cv_sam      4
+#     define u2_cv_pay      2       //  payload
+#     define u2_cv_sam      4       //  sample
 #       define u2_cv_sam_1  4
 #       define u2_cv_sam_2  8
 #       define u2_cv_sam_3  9
 #       define u2_cv_sam_6  18
 #       define u2_cv_sam_7  19
-#     define u2_cv_con      5
-#     define u2_cv_noc      3
+#     define u2_cv_con      5       //  context
+#     define u2_cv_noc      3       //  deprecated
+#     define u2_cv_bat      3       //  battery
 
     /* u2_yes, u2_no, u2_nul;
     **
@@ -502,6 +504,14 @@
           u2_sing(u2_noun a,
                   u2_noun b);
 
+        /* u2_sing_c():
+        **
+        **   Yes iff (b) is the same noun as the C string [a].
+        */
+          u2_flag
+          u2_sing_c(const c3_c* a_c,
+                    u2_noun     b);
+
         /* u2_sing_cell():
         **
         **   Yes iff `[p q]` and `b` are the same noun.
@@ -510,6 +520,15 @@
           u2_sing_cell(u2_noun p,
                        u2_noun q,
                        u2_noun b);
+
+        /* u2_sing_mixt():
+        **
+        **   Yes iff `[p q]` and `b` are the same noun.
+        */
+          u2_flag
+          u2_sing_mixt(const c3_c* p_c,
+                       u2_noun     q,
+                       u2_noun     b);
 
         /* u2_sing_trel():
         **
@@ -539,14 +558,6 @@
           u2_atom
           u2_nord(u2_noun a,
                   u2_noun b);
-
-        /* u2_sing_c():
-        **
-        **   Yes iff (b) is the same noun as the C string [a].
-        */
-          u2_flag
-          u2_sing_c(const c3_c* a_c,
-                    u2_noun     b);
 
         /* u2_stud():
         **

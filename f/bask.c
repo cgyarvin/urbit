@@ -22,6 +22,7 @@ u2_ba_init(u2_ray wir_r,
     u2_ch_init(u2_bask_cus_r(bas_r));
     u2_ch_init(u2_bask_sol_r(bas_r));
     u2_ch_init(u2_bask_hag_r(bas_r));
+    u2_cs_init(u2_bask_hog_r(bas_r));
 
     for ( i_w = 0; i_w < u2_bask_plow_end; i_w++ ) {
       u2_ch_init(u2_bask_vig_r(bas_r, i_w));

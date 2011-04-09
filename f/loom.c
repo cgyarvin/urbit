@@ -522,6 +522,20 @@ u2_sing_cell(u2_noun p,
                        u2_sing(q, u2_t(b))));
 }
 
+/* u2_sing_cell():
+**
+**   Yes iff `[p q]` and `b` are the same noun.
+*/
+u2_flag
+u2_sing_mixt(const c3_c* p_c,
+             u2_noun     q,
+             u2_noun     b)
+{
+  return u2_and(u2_dust(b),
+                u2_and(u2_sing_c(p_c, u2_h(b)), 
+                       u2_sing(q, u2_t(b))));
+}
+
 /* u2_sing_trel():
 **
 **   Yes iff `[p q r]` and `b` are the same noun.

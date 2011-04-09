@@ -174,7 +174,7 @@ _hill_print_wall(u2_wire     wir_r,
 {
   if ( 0 == fil_f) fil_f = stdout;
 
-  if ( cap_c && *cap_c ) printf("%s:\n", cap_c);
+  if ( cap_c && *cap_c ) printf("%s\n", cap_c);
 
   while ( u2_nul != wal ) {
     if ( cap_c ) { putc(' ', fil_f); putc(' ', fil_f); }
@@ -725,14 +725,14 @@ _hill_a_fire(u2_wire     wir_r,
   txt = u2_bn_string(wir_r, exp_c);
   gam = _hill_a_mint_txt(wir_r, soa, u2_h(sob), c3__noun, txt);
 
-  _hill_a_print_type(wir_r, soa, 0, 0, u2_h(gam));
+  _hill_a_print_type(wir_r, soa, 0, "{type}", u2_h(gam));
 
   som = _hill_nock(wir_r, u2_t(sob), u2_t(gam));
   if ( u2_none == som ) {
     fprintf(stderr, "{none}\n");
   }
   else {
-    _hill_print_noun(wir_r, 0, "", som);
+    _hill_print_noun(wir_r, 0, 0, som);
   }
   u2_rz(wir_r, txt);
   u2_rz(wir_r, gam);
@@ -811,18 +811,18 @@ _hill_print_spot(u2_wire wir_r,
     u2_noun tlc = _hill_a_ram(wir_r, Hill->soa, blc);
     u2_noun tld = _hill_a_ram(wir_r, Hill->soa, bld);
 
-    fprintf(fil_f, "  {");
+    fprintf(fil_f, " {");
     if ( u2_nul != tlt ) {
       _hill_print_tape(wir_r, fil_f, tlt);
       fprintf(fil_f, ": ");
     }
 
     _hill_print_tape(wir_r, fil_f, tla);
-    fprintf(fil_f, "/");
+    fprintf(fil_f, ".");
     _hill_print_tape(wir_r, fil_f, tlb);
-    fprintf(fil_f, "--");
+    fprintf(fil_f, ":");
     _hill_print_tape(wir_r, fil_f, tlc);
-    fprintf(fil_f, "/");
+    fprintf(fil_f, ".");
     _hill_print_tape(wir_r, fil_f, tld);
     fprintf(fil_f, "}\n");
      

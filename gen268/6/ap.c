@@ -934,7 +934,7 @@
         return u2_bc(wir_r, u2_rx(wir_r, gen), u2_nul);
       }
       else switch ( u2_h(gen) ) {
-        default: printf("rake error\n"); return u2_bl_bail(wir_r);
+        default: return u2_bl_bail(wir_r);
 
         case u2_nul:  return u2_bc(wir_r, u2_rx(wir_r, gen), u2_nul);
 

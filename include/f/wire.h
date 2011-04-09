@@ -15,9 +15,13 @@
           */
           u2_ray wat_r;
 
-          /* Basket; u2_loom_bask; memoization.
+          /* Basket; u2_loom_bask; senior storage.
           */
           u2_ray bas_r;
+
+          /* Dashboard; u2_loom_dash; jet registration.
+          */
+          u2_ray des_r;
 
           /* Ray to machine exception buffer (C jmp_buf); used in jets.
           */

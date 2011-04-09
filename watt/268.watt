@@ -1,6 +1,6 @@
 ~%    %watt.268
     ~ 
-  (%ut ut, %to to)
+  ()
 &.
 ::
   ::  Tier 1, atomic arithmetic
@@ -32,7 +32,7 @@
   ~.  %dec
   |=  a=@
   ^-  @
-  ~|  %dec
+  ~~  %dec
   ?<  .=(0 a)
   =+  b=@
   |-

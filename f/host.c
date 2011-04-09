@@ -910,9 +910,7 @@ _ho_run(u2_ray      wir_r,
       ** Con: invocation latency is higher.
       ** Con: hevy jets produce no crash report, requiring soft rerun.
       */
-      if ( 0 != u2_wire_jub_r(wir_r) ) {
-        return jet_j->fun_f(wir_r, cor);
-      } else {
+      {
         u2_ray jub_r = u2_bl_open(wir_r);
 
         if ( u2_bl_set(wir_r) ) {
@@ -929,6 +927,18 @@ _ho_run(u2_ray      wir_r,
     }
   }
 }
+
+    /* u2_ho_nice():
+    **
+    **   Verify quickly that a chip's jet supports this core.
+    **
+    **   Only the outer battery is assumed to match.
+    */
+      u2_flag
+      u2_ho_nice(u2_ray     wir_r,
+                 u2_ho_jet* jet_j,
+                 u2_noun    cor);
+
 
 /* u2_ho_use():
 **
@@ -973,6 +983,10 @@ u2_ho_use(u2_ray     wir_r,
       if ( u2_none == pro ) {
         jet_j->sat_s &= ~u2_jet_live;
         {
+          char *cos_c = u2_ho_cstring(jet_j->xip);
+
+          fprintf(stderr, "<<lose: %s>>\n", cos_c);
+          free(cos_c);
           pro = u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
         }
         jet_j->sat_s |= u2_jet_live;

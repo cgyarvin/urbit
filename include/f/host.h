@@ -289,13 +289,24 @@
 
     /* u2_ho_use():
     **
-    **   Run a jet.
+    **   Run a jet.  Must be previously verified with u2_ho_nice().
     */
       u2_weak                                                     //  transfer
       u2_ho_use(u2_ray     wir_r,
-                u2_ho_jet* jet_j,
+                u2_ho_jet* jet_j,                                 //  retain
                 u2_noun    cor,                                   //  retain
                 u2_noun    fol);                                  //  retain
+
+    /* u2_ho_nice():
+    **
+    **   Verify quickly that a chip's jet supports this core.
+    **
+    **   Only the outer battery is assumed to match.
+    */
+      u2_flag
+      u2_ho_nice(u2_ray     wir_r,
+                 u2_ho_jet* jet_j,
+                 u2_noun    cor);
 
     /* u2_ho_punt():
     **

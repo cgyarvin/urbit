@@ -330,7 +330,6 @@
         if ( (u2_yes ==_mint_vet(wir_r, van)) &&
              (u2_no == j2_mcy(Pit, ut, nest)(wir_r, van, gol, zut)) )
         {
-          printf("ktpd: nest failure\n");
           return u2_bl_bail(wir_r);
         }
         else {
