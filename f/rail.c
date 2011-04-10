@@ -1113,7 +1113,7 @@ u2_rl_water(u2_ray ral_r,
   }
 }
 
-#if 0
+#if 1
 /* u2_rl_copy():
 **
 **   Copy indirect noun `fiz` into main storage, preserving dags.
@@ -1237,7 +1237,7 @@ u2_rl_wash(u2_rail ral_r,
 */
 u2_weak
 u2_rl_take(u2_ray  ral_r,
-          u2_noun fiz)
+           u2_noun fiz)
 {
   if ( u2_no == u2_rl_junior(ral_r, fiz) ) {
     u2_rl_gain(ral_r, fiz);
@@ -1258,7 +1258,7 @@ u2_rl_take(u2_ray  ral_r,
 }
 #endif
 
-#if 1
+#if 0
 /* u2_rl_take():
 **
 **   Produce `a`, not referencing the can.  Copy or gain reference.

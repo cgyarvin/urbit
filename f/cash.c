@@ -426,7 +426,7 @@ _cs_more_b(u2_rail ral_r,
   u2_rl_rfree(ral_r, sid_r);
 }
 
-/* _cs_save_b(): add to slot of type b.  See `_cs_save_in()` for special.
+/* _cs_save_b(): add to slot of type b.
 */
 static u2_flag
 _cs_save_b(u2_rail ral_r,
@@ -434,8 +434,8 @@ _cs_save_b(u2_rail ral_r,
            c3_w    key_w,
            c3_w    sif_w,
            c3_m    sel_m,
-           u2_noun sam,                                           //  special
-           u2_noun pro)                                           //  special
+           u2_noun sam,                                           //  retain
+           u2_noun pro)                                           //  retain
 {
   top: {
     c3_w gun_w = u2_slot_b_gun(lot_r);
@@ -454,7 +454,16 @@ _cs_save_b(u2_rail ral_r,
         do {
           u2_ray tol_r = u2_slot_b_sid_i(lot_r, j_w);
 
-          if ( u2_slot_is_c(tol_r) ) {
+          if ( u2_slot_is_a(tol_r) ) {
+            if ( u2_yes == u2_sing(sam, u2_slot_a_sam(tol_r)) ) {
+              if ( u2_no == u2_sing(pro, u2_slot_a_pro(tol_r)) ) {
+                u2_rz(ral_r, u2_slot_a_pro(tol_r));
+                u2_slot_a_pro(tol_r) = u2_rx(ral_r, pro);
+              }
+              return u2_no;
+            }
+          }
+          else if ( u2_slot_is_c(tol_r) ) {
             u2_slot_b_rag(lot_r) += 1;
 
             return _cs_save_c(ral_r, tol_r, sel_m, sam, pro);
@@ -479,7 +488,7 @@ _cs_save_b(u2_rail ral_r,
   }
 }
 
-/* _cs_save_a(): add to slot of type a.  See `cs_save_in()` for special.
+/* _cs_save_a(): add to slot of type a.
 */
 static u2_flag
 _cs_save_a(u2_rail ral_r,

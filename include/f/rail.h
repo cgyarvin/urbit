@@ -57,7 +57,7 @@
       */
         typedef struct {
           u2_ray         fre_r;     // single, doubly-linked free list
-          u2_cash_slot_a lot_s;     // modern memo cache
+          u2_cash_slot   lot_s;     // modern memo cache
         } u2_loom_soup;
 #         define u2_soup_fre_r(sop_r)  *u2_at(sop_r, u2_loom_soup, fre_r)
 #         define u2_soup_lot_r(sop_r)  u2_aftr(sop_r, u2_loom_soup, lot_s)

@@ -11,19 +11,15 @@
         typedef struct _u2_loom_wire {
           u2_loom_rail o;
 
-          /* Kernel; u2_loom_watt; kernel and tools.
-          */
-          u2_ray wat_r;
-
           /* Basket; u2_loom_bask; senior storage.
           */
           u2_ray bas_r;
 
-          /* Dashboard; u2_loom_dash; jet registration.
+          /* Dashboard; u2_loom_dash; map battery to chip list.
           */
-          u2_ray des_r;
+          u2_cash_slot des_s;
 
-          /* Ray to machine exception buffer (C jmp_buf); used in jets.
+          /* Ray to jet exception buffer, or 0.
           */
           u2_ray jub_r;
 
@@ -36,8 +32,8 @@
           u2_noun tax;
         } u2_loom_wire;
 
-#         define  u2_wire_wat_r(wir_r)  *u2_at(wir_r, u2_loom_wire, wat_r)
 #         define  u2_wire_bas_r(wir_r)  *u2_at(wir_r, u2_loom_wire, bas_r)
+#         define  u2_wire_des_r(wir_r)  u2_aftr(wir_r, u2_loom_wire, des_s) 
 #         define  u2_wire_jub_r(wir_r)  *u2_at(wir_r, u2_loom_wire, jub_r)
 #         define  u2_wire_bex_r(wir_r)  *u2_at(wir_r, u2_loom_wire, bex_r)
 

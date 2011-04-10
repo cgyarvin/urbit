@@ -536,10 +536,15 @@ u2_bn_hook(u2_wire     wir_r,
       u2_noun rag = u2_frag(u2_t(vib), cor);
 
       // printf("%s %d\n", tam_c, u2_t(vib));
+      u2_rz(wir_r, vib);
+
       return u2_rx(wir_r, rag);
     }
     else {
-      return u2_bn_nock(wir_r, cor, vib);
+      u2_noun ret = u2_bn_nock(wir_r, cor, vib);
+
+      u2_rz(wir_r, vib);
+      return ret;
     }
   }
 }
@@ -562,11 +567,14 @@ u2_bn_cook(u2_wire     wir_r,
        (u2_nul != u2_h(vib)) ||
        (u2_no == u2_stud(axe = u2_t(vib)) ) )
   {
+    u2_rz(wir_r, vib);
+
     return u2_bl_bail(wir_r);
   } else {
     u2_noun gon = u2_bn_molt(wir_r, cor, axe, som, 0);
 
-    u2_rl_lose(wir_r, som);
+    u2_rz(wir_r, vib);
+    u2_rz(wir_r, som);
     return gon;
   }
 }
@@ -605,6 +613,7 @@ u2_bn_gart(u2_wire     wir_r,
   u2_noun gat = u2_bn_nock(wir_r, cor, fol);
   u2_noun tec = u2_bc(wir_r, u2_bc(wir_r, sam, u2_t(u2_h(gat))), u2_t(gat));
 
+  u2_rz(wir_r, fol);
   return u2_bn_nock(wir_r, tec, u2_t(tec));
 }
 
@@ -629,6 +638,7 @@ u2_bn_gort(u2_wire     wir_r,
   tec = u2_bn_molf(wir_r, gat, vap);
   va_end(vap);
 
+  u2_rz(wir_r, fol);
   return u2_bn_nock(wir_r, tec, u2_t(tec));
 }
 

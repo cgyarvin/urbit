@@ -54,6 +54,7 @@ F_OFILES=\
        f/bail.o \
        f/bask.o \
        f/shed.o \
+       f/dash.o \
        f/unix.o \
        f/nock.o
 

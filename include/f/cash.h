@@ -120,7 +120,7 @@
     **
     **   Find `sam` for `sel`, or return `u2_none`.
     */
-      u2_weak                                                     //  retain
+      u2_weak                                                     //  discover
       u2_cs_find(u2_ray  lot_r,
                  c3_m    sel_m,
                  u2_noun sam);                                    //  retain
