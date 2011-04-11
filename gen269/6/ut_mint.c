@@ -27,7 +27,7 @@
     switch ( vet ) {
       case u2_no: 
       case u2_yes: return vet;
-      default: return u2_bl_bail(wir_r); 
+      default: return u2_bl_bail(wir_r, c3__fail); 
     }
   }
   static u2_noun
@@ -53,7 +53,7 @@
     if ( (u2_yes == _mint_vet(wir_r, van)) &&
          (u2_no == j2_mcy(Pit, ut, nest)(wir_r, van, gol, typ)) ) 
     {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     }
     else return typ;
   }
@@ -179,7 +179,7 @@
         u2_noun wam = j2_mcy(Pit, ut, play)(wir_r, van, sut, p_gen);
 
         if ( _0 != u2_h(vol) ) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         } 
         else {
           ret = u2_bc
@@ -330,7 +330,7 @@
         if ( (u2_yes ==_mint_vet(wir_r, van)) &&
              (u2_no == j2_mcy(Pit, ut, nest)(wir_r, van, gol, zut)) )
         {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         }
         else {
           ret = j2_mcx(Pit, ut, mint)(wir_r, van, sut, zut, q_gen);
@@ -495,7 +495,7 @@
                                 0)) ||
          (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcx(Pit, ut, mint)(wir_r, van, sut, gol, gen);
     }
@@ -508,7 +508,7 @@
                         u2_noun gol,                              //  retain
                         u2_noun gen)                              //  retain
   {
-    u2_weak hoc = u2_sh_look(wir_r, van, "mint");
+    u2_weak hoc = u2_ds_look(wir_r, van, "mint");
 
     if ( u2_none == hoc ) {
       c3_assert(!"register mint");
@@ -522,7 +522,7 @@
                                       0);
 
       if ( (u2_none == j2_mcj(Pit, ut, mint)[0].xip) ) {
-        u2_noun xip = u2_sh_find(wir_r, cor);
+        u2_noun xip = u2_ds_find(wir_r, cor);
      
         c3_assert(u2_none != xip);
         j2_mcj(Pit, ut, mint)[0].xip = xip;
@@ -551,7 +551,7 @@
       fol = u2_t(cor);
 
       pro = u2_ho_use(wir_r, jet_j, cor, fol);
-      c3_assert(pro != u2_none);
+      if ( u2_none == pro ) return u2_bl_bail(wir_r, c3__fail);
 
       u2_rz(wir_r, cor);
       u2_rz(wir_r, fol);
@@ -564,6 +564,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, ut, mint)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, mint), Tier6_b, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ut, mint), Tier6_b_test, u2_none, u2_none },
     { }
   };

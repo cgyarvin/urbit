@@ -36,7 +36,7 @@
     u2_noun hel;
 
     if ( u2_none == (hel = u2_frag(4, cor)) ) {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mby(Pit, flip)(wir_r, hel);
     }

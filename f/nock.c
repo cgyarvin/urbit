@@ -1,4 +1,4 @@
-/* l/nock.c
+/* f/nock.c
 ** 
 ** This file is in the public domain.
 */
@@ -140,20 +140,6 @@ _nock_rock(u2_wire wir_r,
             return hoz;
           }
           else {
-#if 0
-            /* Attempt jet propulsion.
-            */
-            {
-              u2_noun pro, xip;
-
-              if ( u2_none != (xip = u2_sh_find(wir_r, sep)) ) {
-                pro = u2_ho_punt(wir_r, xip, sep, dom);
-
-                u2_rl_lose(wir_r, sep);
-                return pro;
-              }
-            }
-#endif
             bus = sep;
             fol = dom;
             continue;
@@ -321,7 +307,7 @@ _nock_rock(u2_wire wir_r,
             if ( u2_none == sep ) {
               return u2_none;
             }
-            if ( u2_none != (xip = u2_sh_find(wir_r, sep)) ) {
+            if ( u2_none != (xip = u2_ds_find(wir_r, sep)) ) {
               pro = u2_ho_kick(wir_r, xip, sep, fac);
 
               u2_rl_lose(wir_r, sep);
@@ -377,17 +363,22 @@ _nock_rock(u2_wire wir_r,
             default: u2_rl_lose(wir_r, hod); fol = zom; continue;
 
             case c3__bean: {
-              u2_bx_bean_ent(wir_r, hod);
+              u2_noun tax = u2_rx(wir_r, u2_wire_tax(wir_r));
+              u2_noun tac = u2_rc(wir_r, c3__bean, hod);
+
+              u2_wire_tax(wir_r) = u2_rc(wir_r, tac, tax);
               {
                 LoomSink; u2_bx_sink(wir_r);
-                if ( (pro = _nock_rock(wir_r, bus, zom)) != u2_none ) {
-                  u2_bx_bean_out(wir_r);
-                }
+                pro = _nock_rock(wir_r, bus, zom);
                 u2_bx_rise(wir_r); LoomRise;
+              }
+
+              if ( pro != u2_none ) {
+                u2_rx(wir_r, u2_wire_tax(wir_r));
+                u2_wire_tax(wir_r) = tax;
               }
               return pro;
             }
-
             case c3__mean: {
               u2_noun tax = u2_rx(wir_r, u2_wire_tax(wir_r));
               u2_noun tac = u2_rc(wir_r, c3__mean, hod);
@@ -448,7 +439,7 @@ _nock_rock(u2_wire wir_r,
                 return u2_none;
               }
               else {
-                pro = u2_sh_mine(wir_r, hod, pro);
+                pro = u2_ds_mine(wir_r, hod, pro);
          
                 u2_rl_lose(wir_r, hod);
                 return pro;
@@ -487,7 +478,7 @@ _nock_rock(u2_wire wir_r,
                   u2_rz(wir_r, hod);
                   hod = xod;
                 }
-                pro = u2_sh_mine(wir_r, hod, pro);
+                pro = u2_ds_mine(wir_r, hod, pro);
          
                 u2_rl_lose(wir_r, hod);
                 return pro;
@@ -647,7 +638,7 @@ _nock_sand(u2_wire wir_r,
           {
             u2_noun pro, xip;
 
-            if ( u2_none != (xip = u2_sh_find(wir_r, bus)) ) {
+            if ( u2_none != (xip = u2_ds_find(wir_r, bus)) ) {
               pro = u2_ho_punt(wir_r, xip, bus, fol);
 
               u2_rail_cap_r(wir_r) = net_r;
@@ -983,7 +974,7 @@ u2_nk_mung(u2_wire wir_r,
        u2_rc(wir_r, sam, u2_rx(wir_r, u2_st(u2_sh(gat)))),
        u2_rx(wir_r, u2_st(gat)));
 
-  if ( u2_none != (xip = u2_sh_find(wir_r, cor)) ) {
+  if ( u2_none != (xip = u2_ds_find(wir_r, cor)) ) {
     u2_noun pro = u2_ho_kick(wir_r, xip, cor, u2_cv_noc);
 
     u2_rz(wir_r, cor);

@@ -21,7 +21,7 @@
 
           /* Ray to jet exception buffer, or 0.
           */
-          u2_ray jub_r;
+          u2_ray kit_r;
 
           /* Ray to performance log.
           */
@@ -34,7 +34,7 @@
 
 #         define  u2_wire_bas_r(wir_r)  *u2_at(wir_r, u2_loom_wire, bas_r)
 #         define  u2_wire_des_r(wir_r)  u2_aftr(wir_r, u2_loom_wire, des_s) 
-#         define  u2_wire_jub_r(wir_r)  *u2_at(wir_r, u2_loom_wire, jub_r)
+#         define  u2_wire_kit_r(wir_r)  *u2_at(wir_r, u2_loom_wire, kit_r)
 #         define  u2_wire_bex_r(wir_r)  *u2_at(wir_r, u2_loom_wire, bex_r)
 
 #         define  u2_wire_tax(wir_r)    *u2_at(wir_r, u2_loom_wire, tax)

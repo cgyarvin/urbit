@@ -26,7 +26,7 @@
       u2_atom lat = j2_mbc(Pit, mas)(wir_r, axe);
 
       if ( u2_no == u2_dust(sut) ) switch ( sut ) {
-        default: return u2_bl_bail(wir_r);
+        default: return u2_bl_bail(wir_r, c3__fail);
 
         case c3__atom: {
           ret = c3__void; 
@@ -50,7 +50,7 @@
         }
       }
       else switch ( u2_h(sut) ) {
-        default: return u2_bl_bail(wir_r);
+        default: return u2_bl_bail(wir_r, c3__fail);
 
         case c3__cell: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
         {
@@ -160,7 +160,7 @@
          (u2_no == u2_stud(axe)) ||
          (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcx(Pit, ut, cull)(wir_r, van, sut, axe, ref);
     }
@@ -173,7 +173,7 @@
                         u2_atom axe,                              //  retain
                         u2_noun ref)                              //  retain
   {
-    u2_weak hoc = u2_sh_look(wir_r, van, "cull");
+    u2_weak hoc = u2_ds_look(wir_r, van, "cull");
 
     if ( u2_none == hoc ) {
       c3_assert(!"register cull");
@@ -187,7 +187,7 @@
                                       0);
 
       if ( (u2_none == j2_mcj(Pit, ut, cull)[0].xip) ) {
-        u2_noun xip = u2_sh_find(wir_r, cor);
+        u2_noun xip = u2_ds_find(wir_r, cor);
      
         c3_assert(u2_none != xip);
         j2_mcj(Pit, ut, cull)[0].xip = xip;

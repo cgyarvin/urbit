@@ -25,7 +25,7 @@
     u2_noun cog, tip;
 
     if ( u2_no == u2_mean(cor, 8, &cog, 9, &tip, 0) ) {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mby(Pit, face)(wir_r, cog, tip);
     }

@@ -15,7 +15,7 @@
                         u2_atom axe)                              //  retain
   {
     if ( u2_no == u2_dust(sut) || c3__core != u2_h(sut) ) {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     }
     // else if ( u2_no == u2_bn_hook(wir_r, van, "vet") ) {
     else if ( u2_no == u2_frag(j2_ut_van_vet, van) ) {
@@ -32,7 +32,7 @@
       }
       else if ( c3__read == way ) {
         switch ( pq_sut ) {
-          default: return u2_bl_bail(wir_r);
+          default: return u2_bl_bail(wir_r, c3__fail);
 
           case c3__gold: u2_yes;
           case c3__iron: return u2_yes;
@@ -43,7 +43,7 @@
       }
       else if ( c3__rite == way ) {
         switch ( pq_sut ) {
-          default: return u2_bl_bail(wir_r);
+          default: return u2_bl_bail(wir_r, c3__fail);
 
           case c3__gold: return u2_yes;
           case c3__iron: return u2_sing(_3, j2_mbc(Pit, cap)(wir_r, axe));
@@ -63,7 +63,7 @@
           }
         }
       }
-      else return u2_bl_bail(wir_r);
+      else return u2_bl_bail(wir_r, c3__fail);
     }
   }
 
@@ -84,7 +84,7 @@
          (u2_no == u2_stud(axe)) ||
          (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcx(Pit, ut, park)(wir_r, van, sut, way, axe);
     }
@@ -97,7 +97,7 @@
                         u2_noun way,                              //  retain
                         u2_noun axe)                              //  retain
   {
-    u2_weak hoc = u2_sh_look(wir_r, van, "park");
+    u2_weak hoc = u2_ds_look(wir_r, van, "park");
 
     if ( u2_none == hoc ) {
       c3_assert(!"register park");
@@ -111,7 +111,7 @@
                                       0);
 
       if ( (u2_none == j2_mcj(Pit, ut, park)[0].xip) ) {
-        u2_noun xip = u2_sh_find(wir_r, cor);
+        u2_noun xip = u2_ds_find(wir_r, cor);
      
         c3_assert(u2_none != xip);
         j2_mcj(Pit, ut, park)[0].xip = xip;

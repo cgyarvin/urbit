@@ -19,7 +19,7 @@
         (wir_r, _1, u2_nul, u2_rx(wir_r, sut));
     }
     else if ( u2_no == u2_dust(hep) ) {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     }
     else {
       u2_noun i_hep = u2_h(hep);
@@ -63,7 +63,7 @@
         u2_noun pi_hep = u2_t(i_hep);
 
         if ( (u2_nul != hi_hep) || (u2_no == u2_stud(pi_hep)) ) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         }
         else {
           pro = u2_bt
@@ -94,7 +94,7 @@
                                 u2_cv_con, &van, 0)) ||
          (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcx(Pit, ut, seek)(wir_r, van, sut, way, hep);
     }
@@ -107,7 +107,7 @@
                         u2_noun way,                              //  retain
                         u2_noun hep)                              //  retain
   {
-    u2_weak hoc = u2_sh_look(wir_r, van, "seek");
+    u2_weak hoc = u2_ds_look(wir_r, van, "seek");
 
     if ( u2_none == hoc ) {
       c3_assert(!"register seek");
@@ -121,7 +121,7 @@
                                       0);
 
       if ( (u2_none == j2_mcj(Pit, ut, seek)[0].xip) ) {
-        u2_noun xip = u2_sh_find(wir_r, cor);
+        u2_noun xip = u2_ds_find(wir_r, cor);
      
         c3_assert(u2_none != xip);
         j2_mcj(Pit, ut, seek)[0].xip = xip;

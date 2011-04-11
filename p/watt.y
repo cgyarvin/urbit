@@ -823,7 +823,7 @@ u2_fj_watt(u2_ray  wir_r,
     return scanner.scan;
   }
   else {
-    return u2_bl_bail(wir_r);
+    return u2_bl_bail(wir_r, c3__fail);
   }
 }
 

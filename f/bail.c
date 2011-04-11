@@ -1,4 +1,4 @@
-/* l/bail.c
+/* f/bail.c
 **
 ** This file is in the public domain.
 */
@@ -9,35 +9,81 @@
 u2_ray
 u2_bl_open(u2_ray wir_r)
 {
-  u2_ray jub_r = u2_wire_jub_r(wir_r);
+  u2_ray kit_r = u2_wire_kit_r(wir_r);
 
-  u2_wire_jub_r(wir_r) = u2_rl_ralloc(wir_r, c3_wiseof(jmp_buf));
-  if ( 0 == u2_wire_jub_r(wir_r) ) {
-    u2_wire_jub_r(wir_r) = jub_r;
+  u2_wire_kit_r(wir_r) = u2_rl_ralloc(wir_r, c3_wiseof(u2_loom_kite));
+  if ( 0 == u2_wire_kit_r(wir_r) ) {
+    u2_wire_kit_r(wir_r) = kit_r;
 
-    return u2_bl_bail(wir_r);
+    return u2_bl_bail(wir_r, c3__fail);
   }
-  else return jub_r;
+  else {
+    u2_kite_tax(u2_wire_kit_r(wir_r)) = u2_rx(wir_r, u2_wire_tax(wir_r));
+
+    return kit_r;
+  }
 }
 
 /* u2_bl_done(): terminate and restore old bail context.
 */
 void
 u2_bl_done(u2_ray wir_r,
-           u2_ray jub_r)
+           u2_ray kit_r)
 {
-  u2_rl_rfree(wir_r, u2_wire_jub_r(wir_r));
-  u2_wire_jub_r(wir_r) = jub_r;
+  u2_rz(wir_r, u2_kite_tax(u2_wire_kit_r(wir_r)));
+  u2_rl_rfree(wir_r, u2_wire_kit_r(wir_r));
+
+  u2_wire_kit_r(wir_r) = kit_r;
 }
 
 /* u2_bl_bail(): bail out.
+**
+**  Bail codes: 
+**
+**    c3__exit for normal exit with correct trace
+**    c3__fail for abnormal failure without assumptions
+**
+**  When in doubt, fail.
+**
+**  In both cases, a mark-and-sweep is necessary (and
+**  not currently performed) to clean up leaks.
 */
 u2_noun
-u2_bl_bail(u2_ray wir_r)
+u2_bl_bail(u2_wire wir_r,
+           c3_l    how_l)
 {
+  u2_ray kit_r = u2_wire_kit_r(wir_r);
+
   // c3_assert(!"bail!");
-  longjmp((void *)u2_at_cord(u2_wire_jub_r(wir_r), c3_wiseof(jmp_buf)), 1);
+  longjmp((void *)u2_at_cord(u2_kite_buf_r(kit_r), c3_wiseof(jmp_buf)), how_l);
   return u2_none;
+}
+
+/* u2_bl_push(): push on meaning stack.
+*/
+void
+u2_bl_push(u2_wire wir_r,
+           u2_noun mon)                                           //  transfer
+{
+  u2_noun tax = u2_rc(wir_r, u2_rx(wir_r, u2_wire_tax(wir_r)), mon);
+
+  if ( u2_none != tax ) {
+    u2_rz(wir_r, u2_wire_tax(wir_r));
+    u2_wire_tax(wir_r) = tax;
+  }
+}
+
+/* u2_bl_drop(): drop from meaning stack.
+*/
+void
+u2_bl_drop(u2_wire wir_r)
+{
+  u2_noun tax = u2_wire_tax(wir_r);
+
+  c3_assert(u2_yes == u2_dust(tax));
+
+  u2_wire_tax(wir_r) = u2_rx(wir_r, u2_t(tax));
+  u2_rz(wir_r, tax);
 }
 
 /* u2_bl_some(): test for zero ray.
@@ -47,7 +93,7 @@ u2_bl_some(u2_wire wir_r,
            u2_ray  ray_r)
 {
   if ( 0 == ray_r ) {
-    return u2_bl_bail(wir_r);
+    return u2_bl_bail(wir_r, c3__fail);
   }
   else return ray_r;
 }
@@ -59,7 +105,7 @@ u2_bl_good(u2_ray  wir_r,
            u2_weak som)
 {
   if ( u2_none == som ) {
-    return u2_bl_bail(wir_r);
+    return u2_bl_bail(wir_r, c3__fail);
   }
   else return som;
 }
@@ -71,7 +117,7 @@ u2_bl_flat(u2_ray  wir_r,
            u2_weak som)
 {
   if ( u2_none == som ) {
-    return u2_bl_bail(wir_r);
+    return u2_bl_bail(wir_r, c3__fail);
   }
   else return som;
 }
@@ -84,7 +130,7 @@ u2_noun
 u2_bi_h(u2_ray  wir_r,
         u2_noun a)
 {
-  if ( u2_no == u2_dust(a) ) return u2_bl_bail(wir_r);
+  if ( u2_no == u2_dust(a) ) return u2_bl_bail(wir_r, c3__fail);
 
   return u2_h(a);
 }
@@ -97,7 +143,7 @@ u2_noun
 u2_bi_t(u2_ray  wir_r,
         u2_noun a)
 {
-  if ( u2_no == u2_dust(a) ) return u2_bl_bail(wir_r);
+  if ( u2_no == u2_dust(a) ) return u2_bl_bail(wir_r, c3__fail);
 
   return u2_t(a);
 }
@@ -114,7 +160,7 @@ u2_bi_frag(u2_ray  wir_r,
   u2_weak c = u2_frag(a, b);
 
   if ( u2_none == c ) {
-    return u2_bl_bail(wir_r);
+    return u2_bl_bail(wir_r, c3__fail);
   } else return c;
 }
 
@@ -130,7 +176,7 @@ u2_bi_met(u2_ray  wir_r,
           c3_y    a_y,
           u2_noun b)
 {
-  if ( u2_no == u2_stud(b) ) return u2_bl_bail(wir_r);
+  if ( u2_no == u2_stud(b) ) return u2_bl_bail(wir_r, c3__fail);
 
   return u2_met(a_y, b);
 }
@@ -144,7 +190,7 @@ u2_bi_bit(u2_ray  wir_r,
           c3_w    a_w,
           u2_noun b)
 {
-  if ( u2_no == u2_stud(b) ) return u2_bl_bail(wir_r);
+  if ( u2_no == u2_stud(b) ) return u2_bl_bail(wir_r, c3__fail);
 
   return u2_bit(a_w, b);
 }
@@ -158,7 +204,7 @@ u2_bi_byte(u2_ray  wir_r,
            c3_w    a_w,
            u2_noun b)
 {
-  if ( u2_no == u2_stud(b) ) return u2_bl_bail(wir_r);
+  if ( u2_no == u2_stud(b) ) return u2_bl_bail(wir_r, c3__fail);
 
   return u2_byte(a_w, b);
 }
@@ -174,7 +220,7 @@ u2_bi_bytes(u2_ray  wir_r,
             c3_y*   c_y,
             u2_noun d)
 {
-  if ( u2_no == u2_stud(d) ) u2_bl_bail(wir_r);
+  if ( u2_no == u2_stud(d) ) u2_bl_bail(wir_r, c3__fail);
 
   u2_bytes(a_w, b_w, c_y, d);
 }
@@ -188,7 +234,7 @@ u2_bi_mp(u2_ray  wir_r,
          mpz_t   a_mp,
          u2_noun b)
 {
-  if ( u2_no == u2_stud(b) ) u2_bl_bail(wir_r);
+  if ( u2_no == u2_stud(b) ) u2_bl_bail(wir_r, c3__fail);
 
   u2_mp(a_mp, b);
 }
@@ -202,7 +248,7 @@ u2_bi_word(u2_ray  wir_r,
            c3_w    a_w,
            u2_noun b)
 {
-  if ( u2_no == u2_stud(b) ) return u2_bl_bail(wir_r);
+  if ( u2_no == u2_stud(b) ) return u2_bl_bail(wir_r, c3__fail);
 
   return u2_word(a_w, b);
 }
@@ -218,7 +264,7 @@ u2_bi_words(u2_ray  wir_r,
             c3_w*   c_w,
             u2_noun d)
 {
-  if ( u2_no == u2_stud(d) ) u2_bl_bail(wir_r);
+  if ( u2_no == u2_stud(d) ) u2_bl_bail(wir_r, c3__fail);
 
   u2_words(a_w, b_w, c_w, d);
 }
@@ -489,7 +535,7 @@ u2_noun
 u2_bn_nock(u2_ray wir_r, u2_noun bus, u2_noun fol)
 {
   if ( (u2_none == bus) || (u2_none == fol) ) {
-    return u2_bl_bail(wir_r);
+    return u2_bl_bail(wir_r, c3__fail);
   }
   return u2_bl_good(wir_r, u2_nk_nock(wir_r, u2_rl_gain(wir_r, bus), fol));
 }
@@ -527,10 +573,10 @@ u2_bn_hook(u2_wire     wir_r,
            u2_noun     cor,
            const c3_c* tam_c)
 {
-  u2_weak vib = u2_sh_look(wir_r, cor, tam_c);
+  u2_weak vib = u2_ds_look(wir_r, cor, tam_c);
 
   if ( u2_none == vib ) {
-    return u2_bl_bail(wir_r);
+    return u2_bl_bail(wir_r, c3__fail);
   } else {
     if ( u2_nul == u2_h(vib) ) {
       u2_noun rag = u2_frag(u2_t(vib), cor);
@@ -559,7 +605,7 @@ u2_bn_cook(u2_wire     wir_r,
            const c3_c* tam_c,
            u2_noun     som)                                       //  transfer
 {
-  u2_weak vib = u2_sh_look(wir_r, cor, tam_c);
+  u2_weak vib = u2_ds_look(wir_r, cor, tam_c);
   u2_noun axe;
 
   if ( (u2_none == vib) ||
@@ -569,7 +615,7 @@ u2_bn_cook(u2_wire     wir_r,
   {
     u2_rz(wir_r, vib);
 
-    return u2_bl_bail(wir_r);
+    return u2_bl_bail(wir_r, c3__fail);
   } else {
     u2_noun gon = u2_bn_molt(wir_r, cor, axe, som, 0);
 
@@ -592,7 +638,7 @@ u2_bn_mung(u2_wire wir_r,
   u2_weak pro = u2_nk_mung(wir_r, gat, sam);
 
   if ( u2_none == pro ) {
-    return u2_bl_bail(wir_r);
+    return u2_bl_bail(wir_r, c3__fail);
   }
   else return pro;
 }
@@ -609,7 +655,7 @@ u2_bn_gart(u2_wire     wir_r,
 { 
   // XX: tested, but leaks.  Check memory protocol.
   //
-  u2_noun fol = u2_bl_good(wir_r, u2_sh_look(wir_r, cor, tam_c));
+  u2_noun fol = u2_bl_good(wir_r, u2_ds_look(wir_r, cor, tam_c));
   u2_noun gat = u2_bn_nock(wir_r, cor, fol);
   u2_noun tec = u2_bc(wir_r, u2_bc(wir_r, sam, u2_t(u2_h(gat))), u2_t(gat));
 
@@ -629,7 +675,7 @@ u2_bn_gort(u2_wire     wir_r,
 {
   // XX: tested, but leaks.  Check memory protocol.
   //
-  u2_noun fol = u2_bl_good(wir_r, u2_sh_look(wir_r, cor, tam_c));
+  u2_noun fol = u2_bl_good(wir_r, u2_ds_look(wir_r, cor, tam_c));
   u2_noun gat = u2_bn_nock(wir_r, cor, fol);
   u2_noun tec;
   va_list vap;
@@ -805,7 +851,7 @@ u2_bi_cell(u2_wire  wir_r,
            u2_noun* c)
 {
   if ( u2_no == u2_as_cell(a, b, c) ) {
-    u2_bl_bail(wir_r);
+    u2_bl_bail(wir_r, c3__fail);
   }
 }
 
@@ -822,7 +868,7 @@ u2_bi_qual(u2_wire  wir_r,
            u2_noun* e)
 {
   if ( u2_no == u2_as_qual(a, b, c, d, e) ) {
-    u2_bl_bail(wir_r);
+    u2_bl_bail(wir_r, c3__fail);
   }
 }
 
@@ -840,7 +886,7 @@ u2_bi_quil(u2_wire  wir_r,
            u2_noun* f)
 {
   if ( u2_no == u2_as_quil(a, b, c, d, e, f) ) {
-    u2_bl_bail(wir_r);
+    u2_bl_bail(wir_r, c3__fail);
   }
 }
 
@@ -856,7 +902,7 @@ u2_bi_trel(u2_wire  wir_r,
            u2_noun* d)
 {
   if ( u2_no == u2_as_trel(a, b, c, d) ) {
-    u2_bl_bail(wir_r);
+    u2_bl_bail(wir_r, c3__fail);
   }
 }
 

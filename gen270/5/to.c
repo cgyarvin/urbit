@@ -131,7 +131,7 @@
                        u2_noun bor)                               //  retain
   {
     if ( !u2_fly_is_cat(bor) ) {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       c3_w bor_w = bor;
 
@@ -172,7 +172,7 @@
       if ( u2_nul == q_pup) {
         return j2_mbc(Pit, rip)(wir_r, 3, q_pup);
       } else if ( u2_no == u2_dust(q_pup) ) {
-        return u2_bl_bail(wir_r);
+        return u2_bl_bail(wir_r, c3__fail);
       } else if ( u2_nul == u2_t(q_pup) ) {
         return _to_wc(wir_r, j2_mcy(Pit, to, ram)(wir_r, u2_h(q_pup)),
                              j2_mbc(Pit, rip)(wir_r, 3, qp_pup));
@@ -193,7 +193,7 @@
     if ( u2_no == u2_dust(pup) ) {
       return j2_mbc(Pit, rip)(wir_r, 3, pup);
     } else switch ( u2_h(pup) ) {
-      default: return u2_bl_bail(wir_r);
+      default: return u2_bl_bail(wir_r, c3__fail);
 
       case c3__duct: p_pup = u2_t(pup);
       {
@@ -220,7 +220,7 @@
     u2_noun pup;
 
     if ( u2_none == (pup = u2_frag(4, cor)) ) {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcy(Pit, to, ram)(wir_r, pup);
     }
@@ -285,7 +285,7 @@
     if ( u2_no == u2_dust(pup) ) {
       return j2_mbc(Pit, met)(wir_r, _3, pup);
     } else  switch ( u2_h(pup) ) {
-      default: return u2_bl_bail(wir_r);
+      default: return u2_bl_bail(wir_r, c3__fail);
 
       case c3__duct: p_pup = u2_t(pup);
       {
@@ -320,7 +320,7 @@
     u2_noun pup;
 
     if ( u2_none == (pup = u2_frag(4, cor)) ) {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcy(Pit, to, wit)(wir_r, pup);
     }

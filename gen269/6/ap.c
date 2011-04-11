@@ -130,7 +130,7 @@
   _open_do_pq(brsg)   //  |~
   {
     if ( (u2_nul == q_gen) ) {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     }
     else {
       u2_noun iq_gen = u2_h(q_gen);
@@ -654,7 +654,7 @@
     else if ( u2_yes == u2_sing(c3__null, p_gen) ) {
         return u2_bc(wir_r, c3__dtsg, u2_nul);
     }
-    else return u2_bl_bail(wir_r);
+    else return u2_bl_bail(wir_r, c3__fail);
   }
   _open_do_p(tmdp)    //  ;-
   {
@@ -686,7 +686,7 @@
         default: goto plain;
 
         case c3__dgdp:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r); else
+                          return u2_bl_bail(wir_r, c3__fail); else
         {
           u2_noun hed = u2_bc(wir_r, u2_bc(wir_r, u2_nul, _2), 
                                      u2_rx(wir_r, hep));
@@ -702,7 +702,7 @@
           return lag;
         }
         case c3__ktbn:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r); else
+                          return u2_bl_bail(wir_r, c3__fail); else
         {
           return u2_bt
             (wir_r, c3__ktbn, 
@@ -710,12 +710,12 @@
                     j2_mcy(Pit, ap, mold)(wir_r, q_gen, hep));
         }
         case c3__ktdp:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r); else
+                          return u2_bl_bail(wir_r, c3__fail); else
         {
           return j2_mcy(Pit, ap, mold)(wir_r, p_gen, hep);
         }
         case c3__ktpd:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r); else
+                          return u2_bl_bail(wir_r, c3__fail); else
         {
           return u2_bt
             (wir_r, c3__ktpd, 
@@ -731,7 +731,7 @@
                     u2_nul);
         }
         case c3__zpcb:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r); else
+                          return u2_bl_bail(wir_r, c3__fail); else
         {
           return u2_bt
             (wir_r, c3__zpcb, 
@@ -773,7 +773,7 @@
 
       if ( (u2_no == u2_mean(cor, u2_cv_sam, &hep, u2_cv_con, &van, 0)) ||
            (u2_none == (gen = u2_frag(u2_cv_sam, van))) ) {
-        return u2_bl_bail(wir_r);
+        return u2_bl_bail(wir_r, c3__fail);
       } else {
         return j2_mcy(Pit, ap, mold)(wir_r, gen, hep);
       }
@@ -810,13 +810,13 @@
 #     define _open_pq(stem) \
           case c3__##stem: \
             if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) { \
-              return u2_bl_bail(wir_r); \
+              return u2_bl_bail(wir_r, c3__fail); \
             } else return _open_in_##stem(wir_r, p_gen, q_gen);
 
 #     define _open_pqr(stem) \
           case c3__##stem: \
             if ( u2_no == u2_as_trel(u2_t(gen), &p_gen, &q_gen, &r_gen) ) { \
-              return u2_bl_bail(wir_r); \
+              return u2_bl_bail(wir_r, c3__fail); \
             } else return _open_in_##stem(wir_r, p_gen, q_gen, r_gen);
 
 #     define _open_pqrs(stem) \
@@ -824,7 +824,7 @@
             if ( u2_no == u2_as_qual\
                           (u2_t(gen), &p_gen, &q_gen, &r_gen, &s_gen) )\
             { \
-              return u2_bl_bail(wir_r); \
+              return u2_bl_bail(wir_r, c3__fail); \
             } else return _open_in_##stem(wir_r, p_gen, q_gen, r_gen, s_gen);
 
         _open_pq  (bndl);
@@ -916,7 +916,7 @@
       u2_noun gen;
 
       if ( u2_none == (gen = u2_frag(u2_cv_sam, cor)) ) {
-        return u2_bl_bail(wir_r);
+        return u2_bl_bail(wir_r, c3__fail);
       } else {
         return j2_mcy(Pit, ap, open)(wir_r, gen);
       }
@@ -934,17 +934,17 @@
         return u2_bc(wir_r, u2_rx(wir_r, gen), u2_nul);
       }
       else switch ( u2_h(gen) ) {
-        default: return u2_bl_bail(wir_r);
+        default: return u2_bl_bail(wir_r, c3__fail);
 
         case u2_nul:  return u2_bc(wir_r, u2_rx(wir_r, gen), u2_nul);
 
         case c3__mtbn: {
           if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
-            return u2_bl_bail(wir_r);
+            return u2_bl_bail(wir_r, c3__fail);
           }
           else {
             if ( u2_nul != q_gen ) {
-              return u2_bl_bail(wir_r);
+              return u2_bl_bail(wir_r, c3__fail);
             }
             else {
               return u2_rx(wir_r, p_gen);
@@ -953,7 +953,7 @@
         }
         case c3__zpcb: {
           if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) ) {
-            return u2_bl_bail(wir_r);
+            return u2_bl_bail(wir_r, c3__fail);
           }
           else return j2_mcy(Pit, ap, rake)(wir_r, q_gen);
         }
@@ -969,7 +969,7 @@
       u2_noun gen;
 
       if ( u2_none == (gen = u2_frag(u2_cv_sam, cor)) ) {
-        return u2_bl_bail(wir_r);
+        return u2_bl_bail(wir_r, c3__fail);
       } else {
         return j2_mcy(Pit, ap, rake)(wir_r, gen);
       }
@@ -1065,7 +1065,7 @@
       u2_noun gen;
 
       if ( u2_none == (gen = u2_frag(u2_cv_sam, cor)) ) {
-        return u2_bl_bail(wir_r);
+        return u2_bl_bail(wir_r, c3__fail);
       } else {
         return j2_mcy(Pit, ap, sift)(wir_r, gen);
       }

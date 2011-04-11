@@ -874,10 +874,10 @@ _watt_locate(u2_ray  wir_r,
 {
   const YYLTYPE *llocp = vlocp;   /* bufalo estupido */
 
-#if 0
+#if 1
   return gene;
 #endif
-#if 1
+#if 0
   return u2_bt
   (wir_r,
    c3__zpcb,
@@ -954,7 +954,7 @@ _scanner_init(struct _u2_scanner *scanner,
         return scanner.scan;
       }
       else {
-        return u2_bl_bail(wir_r);
+        return u2_bl_bail(wir_r, c3__fail);
       }
     }
   }

@@ -138,7 +138,7 @@
     if ( (u2_no == u2_mean(cor, 8, &axe, 9, &pac, 0)) ||
          (u2_no == u2_stud(axe)) )
     {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mby(Pit, hike)(wir_r, axe, pac);
     }

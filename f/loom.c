@@ -1,4 +1,4 @@
-/* l/loom.c
+/* f/loom.c
 **
 ** This file is in the public domain.
 */

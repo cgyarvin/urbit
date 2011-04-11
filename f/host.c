@@ -338,7 +338,7 @@ _ho_mop_seal(c3_c *buf_c, u2_noun mek)
 static c3_w
 _ho_mop_chip(c3_c *buf_c, u2_noun xip)
 {
-  u2_disc dac = u2_h(xip);
+  u2_noun dac = u2_h(xip);
   u2_noun pit = u2_t(u2_t(xip));
 
   if ( u2_nul == pit ) {
@@ -857,12 +857,13 @@ u2_ho_test(u2_wire    wir_r,
   }
 }
 
-/* _ho_run(): execute jet.
+/* _ho_run(): execute jet, shedding trace if any is available.
 */
 static u2_weak                                                    //  produce
 _ho_run(u2_ray      wir_r,
         u2_ho_jet*  jet_j,
-        u2_noun     cor)                                          //  retain
+        u2_noun     cor,                                          //  retain
+        u2_weak     *tax)                                         //  produce
 {
   u2_noun ret;
 
@@ -871,34 +872,39 @@ _ho_run(u2_ray      wir_r,
 
     case c3__lite: {
       /* Lite jet: bail prohibited.  The lite jet must detect and control
-      ** its own internal errors, freeing stray nouns and returning u2_none.
-      ** u2_b functions may not be used.
+      ** its own internal errors, freeing stray nouns and returning u2_none
+      ** if and only if nock exits.
+      **
+      ** u2_b functions may not be used.  Trace must be correct.
       **
       ** Pro: lite jets minimize invocation latency. 
+      ** Pro: no garbage collection is required on error.
       **
       ** Con: manual programming of large functions in lite mode is difficult.
-      ** Con: lite jets produce no crash report, requiring soft rerun.
       */
       {
-        u2_ray  jub_r = u2_wire_jub_r(wir_r);
+        u2_noun hoc = u2_rx(wir_r, u2_wire_tax(wir_r));
+        u2_ray  kit_r = u2_wire_kit_r(wir_r);
         u2_noun ret; 
 
-        u2_wire_jub_r(wir_r) = 0;
+        u2_wire_kit_r(wir_r) = 0;
         ret = jet_j->fun_f(wir_r, cor);
-        u2_wire_jub_r(wir_r) = jub_r;
+        u2_wire_kit_r(wir_r) = kit_r;
 
+        if ( u2_none == ret ) {
+          //  Restore base trace; shed C-generated trace.
+          //
+          *tax = u2_rx(wir_r, u2_wire_tax(wir_r));
+          u2_wire_tax(wir_r) = hoc;
+        } else {
+          //  Jet should return base trace.
+          //
+          c3_assert(hoc == u2_wire_tax(wir_r));
+          u2_rz(wir_r, hoc);
+          *tax = u2_none;
+        }
         return ret;
       }
-    }
-    case c3__fine: {
-      /* Fine jet: bail context and crash tracking.
-      **
-      ** Pro: bail support and efficient crash reporting.
-      **
-      ** Con: invocation latency is higher than 'lite'.
-      ** Con: programmer must accurately reproduce crash trace.
-      ** Con: not yet supported - treated as hevy.
-      */
     }
     case c3__hevy: {
       /* Hevy jet: maintains recursive bail context.  The hevy jet can
@@ -908,36 +914,40 @@ _ho_run(u2_ray      wir_r,
       ** Pro: hevy jets are the easiest to program.
       **
       ** Con: invocation latency is higher.
-      ** Con: hevy jets produce no crash report, requiring soft rerun.
       */
       {
-        u2_ray jub_r = u2_bl_open(wir_r);
+        u2_ray kit_r = u2_bl_open(wir_r);
+        c3_l   how_l;
 
-        if ( u2_bl_set(wir_r) ) {
-          u2_bl_done(wir_r, jub_r);
+        if ( (how_l = u2_bl_set(wir_r)) ) {
+          if ( (c3__exit == how_l) || (c3__stop == how_l) ) {
+            //  The jet promises that its trace calculations are correct.
+            //
+            *tax = u2_rx(wir_r, u2_wire_tax(wir_r));
+          }
+          else {
+            //  Something failed - nothing is promised.
+            //
+            u2_rz(wir_r, u2_wire_tax(wir_r));
+            *tax = u2_none;
+          }
+          u2_wire_tax(wir_r) = u2_rx(wir_r, u2_kite_tax(u2_wire_kit_r(wir_r)));
+
+          u2_bl_done(wir_r, kit_r);
           ret = u2_none;
         } 
         else {
           ret = jet_j->fun_f(wir_r, cor);
+          *tax = u2_none;
 
-          u2_bl_done(wir_r, jub_r);
+          c3_assert(u2_wire_tax(wir_r) == u2_kite_tax(u2_wire_kit_r(wir_r)));
+          u2_bl_done(wir_r, kit_r);
         }
         return ret;
       }
     }
   }
 }
-
-    /* u2_ho_nice():
-    **
-    **   Verify quickly that a chip's jet supports this core.
-    **
-    **   Only the outer battery is assumed to match.
-    */
-      u2_flag
-      u2_ho_nice(u2_ray     wir_r,
-                 u2_ho_jet* jet_j,
-                 u2_noun    cor);
 
 
 /* u2_ho_use():
@@ -978,28 +988,44 @@ u2_ho_use(u2_ray     wir_r,
   }
   else {
     if ( !(jet_j->sat_s & u2_jet_test) ) {
-      pro = _ho_run(wir_r, jet_j, cor);
+      u2_noun tax = u2_none;
+
+      pro = _ho_run(wir_r, jet_j, cor, &tax);
 
       if ( u2_none == pro ) {
-        jet_j->sat_s &= ~u2_jet_live;
-        {
-          char *cos_c = u2_ho_cstring(jet_j->xip);
+        if ( u2_none != tax ) {
+          //  Trace in tax is correct.
+          //
+          u2_rz(wir_r, u2_wire_tax(wir_r));
+          u2_wire_tax(wir_r) = tax;
+        } 
+        else {
+          //  Rerun in soft mode to get correct trace.
+          //
+          if ( !LoomStop ) {
+            jet_j->sat_s &= ~u2_jet_live;
+            {
+              c3_c *cos_c = u2_ho_cstring(jet_j->xip);
 
-          fprintf(stderr, "<<lose: %s>>\n", cos_c);
-          free(cos_c);
-          pro = u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
+              fprintf(stderr, "<<lose: %s>>\n", cos_c);
+              pro = u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
+              fprintf(stderr, "<<lost: %s>>\n", cos_c);
+              free(cos_c);
+            }
+            jet_j->sat_s |= u2_jet_live;
+            u2_ho_test(wir_r, jet_j, cor, pro, u2_none);
+          }
         }
-        jet_j->sat_s |= u2_jet_live;
-
-        u2_ho_test(wir_r, jet_j, cor, pro, u2_none);
       }
+      return pro;
     }
     else { 
+      u2_noun tax = u2_none;
       u2_noun sof;
 
       jet_j->sat_s &= ~u2_jet_test;
       {
-        pro = _ho_run(wir_r, jet_j, cor);
+        pro = _ho_run(wir_r, jet_j, cor, &tax);
       }
       jet_j->sat_s |= u2_jet_test;
 
@@ -1011,9 +1037,18 @@ u2_ho_use(u2_ray     wir_r,
 
       u2_bx_used(wir_r);
       u2_ho_test(wir_r, jet_j, cor, sof, pro);
-      u2_rz(wir_r, pro);
 
-      pro = sof;
+      if ( tax != u2_none ) {
+        if ( u2_no == u2_sing(tax, u2_wire_tax(wir_r)) ) {
+          c3_c *cos_c = u2_ho_cstring(jet_j->xip);
+
+          fprintf(stderr, "<<trax: %s>>\n", cos_c);
+          free(cos_c);
+          c3_assert(0);
+        }
+        u2_rz(wir_r, tax);
+      }
+      u2_rz(wir_r, sof);
     }
   }
 
@@ -1039,7 +1074,7 @@ u2_ho_use(u2_ray     wir_r,
 */
 u2_weak                                                           //  produce
 u2_ho_kick(u2_ray   wir_r,
-           u2_chip  xip,                                          //  retain
+           u2_noun  xip,                                          //  retain
            u2_noun  cor,                                          //  retain
            u2_atom  axe)                                          //  retain
 {

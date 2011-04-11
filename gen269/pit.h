@@ -20,7 +20,7 @@
 #   define  Tier5_test    (Tier5 | u2_jet_test)
 #   define  Tier6_a_memo  (Tier6_a | u2_jet_memo)
 #   define  Tier6_b_memo  (Tier6_b | u2_jet_memo)
-#   define  Tier6_b_test  (Tier6_b | u2_jet_memo | u2_jet_test)
+#   define  Tier6_b_test  (Tier6_b | u2_jet_test)
 
   /** Cosmetic noun types.
   **/

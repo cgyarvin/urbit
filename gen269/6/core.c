@@ -25,7 +25,7 @@
     u2_noun pac, con;
 
     if ( u2_no == u2_mean(cor, 8, &pac, 9, &con, 0) ) {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mby(Pit, core)(wir_r, pac, con);
     }

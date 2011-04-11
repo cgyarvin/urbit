@@ -539,7 +539,7 @@ u2_fj_pump_dump(u2_ray  wir_r,
     u2_noun tail = u2_t(prep);
 
     switch ( head ) {
-      default: u2_err(wir_r, "head", head); return u2_bl_bail(wir_r);
+      default: u2_err(wir_r, "head", head); return u2_bl_bail(wir_r, c3__fail);
 
       case c3__glue: return _c_dump_glue(wir_r, xw_cols, tail);
       case c3__nail: return _c_dump_nail(wir_r, xw_cols, tail);

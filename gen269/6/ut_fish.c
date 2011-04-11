@@ -17,7 +17,7 @@
     u2_noun p_sut, q_sut;
 
     if ( u2_yes == u2_stud(sut) ) switch ( sut ) {
-      default: return u2_bl_bail(wir_r);
+      default: return u2_bl_bail(wir_r, c3__fail);
 
       case c3__atom: {
         u2_noun ton = u2_bt(wir_r, _3, _0, u2_rx(wir_r, axe));
@@ -34,11 +34,11 @@
       }
     }
     else switch ( u2_h(sut) ) {
-      default: return u2_bl_bail(wir_r);
+      default: return u2_bl_bail(wir_r, c3__fail);
 
       case c3__cell: {
         if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         } else {
           u2_noun hut = u2_bt(wir_r, _3, _0, u2_rx(wir_r, axe));
           u2_noun lef = j2_mbc(Pit, peg)(wir_r, axe, _2);
@@ -72,14 +72,14 @@
       }
       case c3__face: {
         if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         } else { 
           return _fish_in(wir_r, van, q_sut, axe, vit);
         }
       }
       case c3__fork: {
         if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         }
         else {
           u2_noun hed = _fish_in(wir_r, van, p_sut, axe, vit);
@@ -94,11 +94,11 @@
       } 
       case c3__hold: {
         if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         }
         else {
           if ( (u2_yes == j2_mcc(Pit, in, has)(wir_r, vit, sut)) ) {
-            return u2_bl_bail(wir_r);
+            return u2_bl_bail(wir_r, c3__fail);
           } else {
             u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, vit, sut);
             u2_noun fop = j2_mcy(Pit, ut, rest)(wir_r, van, p_sut, q_sut);
@@ -138,7 +138,7 @@
          (u2_no == u2_stud(axe)) ||
          (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcx(Pit, ut, fish)(wir_r, van, sut, axe);
     }
@@ -150,7 +150,7 @@
                         u2_noun sut,                              //  retain 
                         u2_noun axe)                              //  retain
   {
-    u2_weak hoc = u2_sh_look(wir_r, van, "fish");
+    u2_weak hoc = u2_ds_look(wir_r, van, "fish");
 
     if ( u2_none == hoc ) {
       c3_assert(!"register fish");
@@ -161,7 +161,7 @@
       u2_weak cor = u2_rl_molt(wir_r, gat, u2_cv_sam, u2_rx(wir_r, axe), 0);
 
       if ( (u2_none == j2_mcj(Pit, ut, fish)[0].xip) ) {
-        u2_noun xip = u2_sh_find(wir_r, cor);
+        u2_noun xip = u2_ds_find(wir_r, cor);
      
         c3_assert(u2_none != xip);
         j2_mcj(Pit, ut, fish)[0].xip = xip;
@@ -204,7 +204,7 @@
       fol = u2_t(cor);
 
       pro = u2_ho_use(wir_r, jet_j, cor, fol);
-      c3_assert(pro != u2_none);
+      if ( u2_none == pro ) return u2_bl_bail(wir_r, c3__fail);
 
       u2_rz(wir_r, cor);
       u2_rz(wir_r, fol);

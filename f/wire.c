@@ -1,4 +1,4 @@
-/* l/wire.c
+/* f/wire.c
 ** 
 ** This file is in the public domain.
 */
@@ -22,7 +22,7 @@ u2_wr_init(c3_m   hip_m,
   u2_rail_hat_r(wir_r) += (c3_wiseof(u2_loom_wire) - c3_wiseof(u2_loom_rail));
 
   u2_wire_bas_r(wir_r) = 0;
-  u2_wire_jub_r(wir_r) = 0;
+  u2_wire_kit_r(wir_r) = 0;
 
   u2_cs_init(u2_wire_des_r(wir_r));
 

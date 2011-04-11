@@ -27,7 +27,7 @@
 
       case c3__core: {
         if ( u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut) ) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         } else {
           return u2_bt(wir_r, c3__cell, u2_rx(wir_r, p_sut), c3__noun);
         }
@@ -48,14 +48,14 @@
       }
       case c3__face: {
         if ( u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut)) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         } else {
           return u2_rx(wir_r, q_sut);
         }
       }
       case c3__hold: {
         if ( u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut)) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         } else {
           return j2_mcy(Pit, ut, rest)(wir_r, van, p_sut, q_sut);
         }
@@ -70,7 +70,7 @@
     u2_noun sut;
 
     if ( u2_none == (sut = u2_frag(4, cor)) ) {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcy(Pit, ut, repo)(wir_r, cor, sut);
     }

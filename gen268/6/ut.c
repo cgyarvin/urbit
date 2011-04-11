@@ -68,7 +68,7 @@
       case c3__void: break;
     } 
     else switch ( u2_h(typ) ) {
-      default: fail: u2_err(wir_r, "bum type", typ); u2_bl_bail(wir_r); break;
+      default: fail: u2_err(wir_r, "bum type", typ); u2_bl_bail(wir_r, c3__fail); break;
 
       case c3__cell: {
         if ( u2_no == u2_as_cell(u2_t(typ), &p_typ, &q_typ) ) {

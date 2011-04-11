@@ -93,7 +93,7 @@
       case c3__core: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {
         if ( _2 != now ) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         } else {
           u2_noun ter = _heal_as(wir_r, van, p_sut, qog, lat, ref);
           u2_noun ret = j2_mby(Pit, core)(wir_r, ter, q_sut);
@@ -179,7 +179,7 @@
          (u2_no == u2_stud(axe)) ||
          (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcx(Pit, ut, heal)(wir_r, van, sut, qog, axe, ref);
     }
@@ -193,7 +193,7 @@
                         u2_noun axe,                              //  retain
                         u2_noun ref)                              //  retain
   {
-    u2_weak hoc = u2_sh_look(wir_r, van, "heal");
+    u2_weak hoc = u2_ds_look(wir_r, van, "heal");
 
     if ( u2_none == hoc ) {
       c3_assert(!"register heal");
@@ -207,7 +207,7 @@
                                            0);
 
       if ( (u2_none == j2_mcj(Pit, ut, heal)[0].xip) ) {
-        u2_noun xip = u2_sh_find(wir_r, cor);
+        u2_noun xip = u2_ds_find(wir_r, cor);
      
         c3_assert(u2_none != xip);
         j2_mcj(Pit, ut, heal)[0].xip = xip;
@@ -252,7 +252,7 @@
       fol = u2_t(cor);
 
       pro = u2_ho_use(wir_r, jet_j, cor, fol);
-      c3_assert(pro != u2_none);
+      if ( u2_none == pro ) return u2_bl_bail(wir_r, c3__fail);
 
       u2_rz(wir_r, cor);
       u2_rz(wir_r, fol);

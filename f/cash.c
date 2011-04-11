@@ -1,4 +1,4 @@
-/* l/cash.c
+/* f/cash.c
 ** 
 ** This file is in the public domain.
 */

@@ -954,7 +954,7 @@ _scanner_init(struct _u2_scanner *scanner,
         return scanner.scan;
       }
       else {
-        return u2_bl_bail(wir_r);
+        return u2_bl_bail(wir_r, c3__fail);
       }
     }
   }

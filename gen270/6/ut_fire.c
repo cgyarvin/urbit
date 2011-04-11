@@ -37,7 +37,7 @@
     u2_noun ret;
 
     if ( u2_no == u2_as_pq(sut, c3__core, &p_sut, &q_sut) ) {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       u2_noun pq_sut, qq_sut, rq_sut;
 
@@ -50,7 +50,7 @@
           if ( (u2_yes == vet) && 
                (u2_no == j2_mcy(Pit, ut, nest)(wir_r, van, qq_sut, p_sut)) )
           {
-            return u2_bl_bail(wir_r);
+            return u2_bl_bail(wir_r, c3__fail);
           }
           ret = u2_rx(wir_r, dox);
         }
@@ -59,7 +59,7 @@
                (u2_no == u2_sing(p_sut, qq_sut)) &&
                _fire_levy(wir_r, van, sut, dox, hag) )
           {
-            return u2_bl_bail(wir_r);
+            return u2_bl_bail(wir_r, c3__fail);
           }
           ret = u2_rx(wir_r, sut);
         }
@@ -95,7 +95,7 @@
     if ( (u2_no == u2_mean(cor, u2_cv_sam, &hag, u2_cv_con, &van, 0)) ||
          (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcx(Pit, ut, fire)(wir_r, van, sut, hag);
     }
@@ -107,7 +107,7 @@
                         u2_noun sut,                              //  retain 
                         u2_noun hag)                              //  retain
   {
-    u2_weak hoc = u2_sh_look(wir_r, van, "fire");
+    u2_weak hoc = u2_ds_look(wir_r, van, "fire");
 
     if ( u2_none == hoc ) {
       c3_assert(!"register fire");
@@ -118,7 +118,7 @@
       u2_weak cor = u2_rl_molt(wir_r, gat, u2_cv_sam, u2_rx(wir_r, hag), 0);
 
       if ( (u2_none == j2_mcj(Pit, ut, fire)[0].xip) ) {
-        u2_noun xip = u2_sh_find(wir_r, cor);
+        u2_noun xip = u2_ds_find(wir_r, cor);
      
         c3_assert(u2_none != xip);
         j2_mcj(Pit, ut, fire)[0].xip = xip;

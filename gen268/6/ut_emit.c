@@ -30,7 +30,7 @@
         u2_noun t_har = u2_t(har);
 
         if ( u2_no == u2_dust(i_har) ) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         } else {
           u2_noun pi_har = u2_h(i_har);
           u2_noun qi_har = u2_t(i_har);
@@ -64,7 +64,7 @@
          (u2_no == u2_stud(axe)) ||
          (u2_none == (sut = u2_frag(4, van))) )
     {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcy(Pit, ut, emit)(wir_r, van, sut, axe, mun, har);
     }

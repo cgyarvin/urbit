@@ -25,7 +25,7 @@
   ~.  %dec
   |=  a=@
   ^-  @
-  ~~  %dec
+  ~|  %dec
   ?<  .=(0 a)
   =+  b=@
   |-
@@ -37,7 +37,7 @@
   ~.  %div
   |=  [a=@ b=@]
   ^-  @
-  ~~  %div
+  ~|  %div
   ?<  .=(0 b)
   =+  c=@
   |-
@@ -1203,7 +1203,7 @@
   ::
   ++  rake
     ^-  *twig
-    ~~  %rake
+    ~|  %rake
     ?-  gen
       @             [gen ~]
       [~ *]         [gen ~]
@@ -1240,7 +1240,7 @@
 ++  comb
   ~.  %comb
   |=  [mal=*form buz=*form]
-  ~~  %comb
+  ~|  %comb
   ^-  *form
   ?:  ?&(?=([0 *] mal) !.=(0 p.mal))
     ?:  ?&(?=([0 *] buz) !.=(0 p.buz)) 
@@ -1257,7 +1257,7 @@
 ++  cons
   ~.  %cons
   |=  [vur=*form sed=*form]
-  ~~  %cons
+  ~|  %cons
   ^-  *form
   ?:  ?=([[0 *] [0 *]] -<)
     ?:  ?&(.=(.+(p.vur) p.sed) .=((div p.vur 2) (div p.sed 2)))
@@ -1334,7 +1334,7 @@
 ++  hike 
   ~.  %hike
   |=  [axe=*axis pac=*(list <[p=*axis q=*form]>)]
-  ~~  %hike
+  ~|  %hike
   ^-  *form
   ?~  pac
     [0 axe]
@@ -1449,7 +1449,7 @@
     --
   ::
   ++  burn
-    ~~  %burn
+    ~|  %burn
     |-
     ^-  *
     ?-    sut
@@ -1467,7 +1467,7 @@
   ++  cull
     ~.  %cull
     |=  [axe=*axis ref=*type]
-    ~~  %cull
+    ~|  %cull
     ^-  *type
     ?:  .=(1 axe)
       (fuse ref)
@@ -1491,7 +1491,7 @@
   ::
   ++  dump
     ^-  *bill
-    ~~  %dump
+    ~|  %dump
     =+  ^=  gil
         =+  den=[p=`@`1 q=*(map type <@>)]
         =+  vax=*(set type)
@@ -1573,7 +1573,7 @@
   ++  edit
     ~.  %edit
     |=  [mun=*type har=*(list <[p=*gene q=*gene]>)]
-    ~~  %edit
+    ~|  %edit
     |-  ^-  *type
     ?~  har
       mun
@@ -1583,7 +1583,7 @@
   ++  emit
     ~.  %emit
     |=  [axe=*axis mun=*type har=*(list <[p=*gene q=*gene]>)]
-    ~~  %emit
+    ~|  %emit
     =+  luf=*(list <[p=*axis q=*form]>)
     |-
     ^-  [p=*type q=*form]
@@ -1623,13 +1623,13 @@
         ?~  taf
           ~|  [%port |.((~(fly to ~(tem go `@`cog)) 75))]
           ~|  [%type |.((~(fly to dump) 75))]
-          ~~(%find-dumb !!)
+          ~|(%find-dumb !!)
         ?.  (park way p.u.taf)
           ~|  [%port |.((~(fly to ~(tem go `@`cog)) 75))]
           ~|  [%type |.((~(fly to dump) 75))]
           ~|  [%way |.((~(fly to ~(tem go `@`way)) 75))]
           ~|  [%axe |.((~(fly to ~(dem go `@`p.u.taf)) 75))]
-          ~~(%find-core !!)
+          ~|(%find-core !!)
         [~ (peg 2 p.u.taf) q.u.taf r.u.taf]
       [~ 1 [~ (peg 3 p.u.zem) [q.u.zem ~]] sut]
     ::
@@ -1647,24 +1647,24 @@
           ~
         ~|  [%port |.((~(fly to ~(tem go `@`cog)) 75))]
         ~|  [%type |.((~(fly to dump) 75))]
-        ~~(%find-fork !!)
+        ~|(%find-fork !!)
       ?~  yor
         ~|  [%port |.((~(fly to ~(tem go `@`cog)) 75))]
         ~|  [%type |.((~(fly to dump) 75))]
-        ~~(%find-fork !!)
+        ~|(%find-fork !!)
       ?:  .=(hax yor)
         hax
       ?.  ?&(.=(p.u.hax p.u.yor) .=(.=(~ q.u.hax) .=(~ q.u.yor)))
         ~|  [%port |.((~(fly to ~(tem go `@`cog)) 75))]
         ~|  [%type |.((~(fly to dump) 75))]
-        ~~(%find-mate !!)
+        ~|(%find-mate !!)
       ?~  q.u.hax
         [~ p.u.hax ~ (fork r.u.hax r.u.yor)]
       ?>  ?=(^ q.u.yor)
       ?.  ?&(.=(p.u.q.u.yor p.u.q.u.hax)) 
         ~|  [%port |.((~(fly to ~(tem go `@`cog)) 75))]
         ~|  [%type |.((~(fly to dump) 75))]
-        ~~(%find-call !!)
+        ~|(%find-call !!)
       :^    ~
           p.u.hax
         [~ p.u.q.u.hax (weld q.u.q.u.hax q.u.q.u.yor)] 
@@ -1690,7 +1690,7 @@
         ?.  ?|(!vet (nest(sut q.q.sut) p.sut))
           ~~  dump(sut q.q.sut)   ::  need
           ~~  dump(sut p.sut)     ::  have
-          ~~('fire-metl' !!)
+          ~|('fire-metl' !!)
         dox
       ?.  ?|  !vet
               .=(p.sut q.q.sut)
@@ -1698,7 +1698,7 @@
           --
         ~~  dump(sut q.q.sut)     ::  need
         ~~  dump(sut p.sut)       ::  have
-        ~~('fire-wood' !!)
+        ~|('fire-wood' !!)
       sut
 ::  ~(tap in (~(gas in *(set gene)) hag))
     hag
@@ -1727,7 +1727,7 @@
       ?:  (~(has in vit) sut)
         ~|  [%type |.((~(fly to dump) 75))]
         ~|  [%axis |.((~(fly to ~(gut go `*`axe)) 75))]
-        ~~(%fish-hold !!)
+        ~|(%fish-hold !!)
       =>  %=(. vit (~(put in vit) sut))
       $(sut repo)
     --
@@ -1846,7 +1846,7 @@
       ?.  ?|(!vet (nest(sut gol) typ))
         ~|  [%need |.((~(fly to dump(sut gol)) 75))]
         ~|  [%have |.((~(fly to dump(sut typ)) 75))]
-        ~~('type-fail' !!)
+        ~|('type-fail' !!)
       typ
     ::
     ++  $
@@ -1861,7 +1861,7 @@
         :-  (nice flag)
         =+  vol=q:$(gen q.gen, gol %noun)
         ?.  ?=([0 *] vol)
-          ~~(%casbon-form !!)
+          ~|(%casbon-form !!)
         (fish(sut (play p.gen)) p.vol)
       ::
           [%csdg *]                                                   ::  ?:
@@ -1911,7 +1911,7 @@
         ?.  ?|(!vet (nest(sut gol) zut))
           ~|  [%need |.((~(fly to dump(sut gol)) 75))]
           ~|  [%have |.((~(fly to dump(sut zut)) 75))]
-          ~~('type-fail' !!)
+          ~|('type-fail' !!)
         $(gen q.gen, gol zut)
       ::
           [%ktsg *]                                                   ::  ^~
@@ -1962,7 +1962,8 @@
         [1 q:$(gen p.gen)]
       ::
           [%zpcb *]                                                   ::  !_
-        ~|  [%spot |.((~(fly to ~(loc go p.gen)) 75))]
+        ~~  ~(loc go p.gen)
+        :: ~|  [%spot |.((~(fly to ~(loc go p.gen)) 75))]
         =+  hum=$(gen q.gen)
         [p.hum [10 [%spot 1 p.gen] q.hum]]
       ::
@@ -1978,7 +1979,7 @@
         =+  doz=~(open ap gen) 
         ?:  .=(doz gen)
           ~|  [%open-gene |.((~(fly to ~(gut go `*`gen)) 75))]
-          ~~(%open !!)
+          ~|(%open !!)
         $(gen doz)
       --
     ==
@@ -2201,7 +2202,7 @@
         ?.  (park way lat)
           ~|  [%axis |.((~(fly to ~(dem go `@`axe)) 75))]
           ~|  [%type |.((~(fly to dump) 75))]
-          ~~(%peek-park !!)
+          ~|(%peek-park !!)
         $(sut p.sut, axe lat) 
       %noun
     ::
@@ -2270,7 +2271,7 @@
         [%zpdx *]   $(gen p.gen)
         [%zpzp ~]   %void
         *           
-      =+(doz=~(open ap gen) ?:(.=(doz gen) ~~(%open !!) $(gen doz)))
+      =+(doz=~(open ap gen) ?:(.=(doz gen) ~|(%open !!) $(gen doz)))
     --
   ::
   ++  reco
@@ -2299,7 +2300,7 @@
     ^-  *type
     ~+
     ?:  (~(has in fan) [sut leg])
-      ~~('inference recursion' !!)
+      ~|('inference recursion' !!)
     =>  .(fan (~(put in fan) [sut leg]))
     =+  gar=(turn leg |=(p=*gene (play p)))
     =+  gun=(~(gas in *(set type)) gar)    ::  XX

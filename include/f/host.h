@@ -164,7 +164,7 @@
 
         /* chip: battery identifier.  Computed (declare u2_none).
         */
-        u2_chip xip;
+        u2_noun xip;
 
         /* Tool: Nock formula.  Computed (declare u2_none).
         */
@@ -200,7 +200,7 @@
 
         /* chip: battery identifier, from shed.
         */
-        u2_chip xip;
+        u2_noun xip;
 
         /* Cache from axe to jet.
         */
@@ -314,7 +314,7 @@
     */
       u2_weak
       u2_ho_punt(u2_ray  wir_r,
-                 u2_chip xip,                                     //  retain
+                 u2_noun xip,                                     //  retain
                  u2_noun cor,                                     //  retain
                  u2_noun fol);                                    //  retain
 
@@ -324,6 +324,6 @@
     */
       u2_weak
       u2_ho_kick(u2_ray   wir_r,
-                 u2_chip  xip,                                    //  retain
+                 u2_noun  xip,                                    //  retain
                  u2_noun  cor,                                    //  retain
                  u2_atom  axe);                                   //  retain

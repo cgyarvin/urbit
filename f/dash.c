@@ -1,4 +1,4 @@
-/* l/dash.c
+/* f/dash.c
 **
 ** This file is in the public domain.
 */
@@ -56,6 +56,8 @@ u2_ds_find(u2_wire wir_r,
            u2_noun cor)                                           //  retain
 {
   if ( u2_no == u2_dust(cor) ) {
+    return u2_none;
+  } else {
     u2_noun pug = u2_cs_find(u2_wire_des_r(wir_r), 0, u2_t(cor));
 
     if ( u2_none == pug ) {
@@ -63,7 +65,6 @@ u2_ds_find(u2_wire wir_r,
     }
     else return _ds_scan(pug, cor);
   }
-  else return u2_none;
 }
 
 /* _ds_good_cop()::
@@ -171,7 +172,6 @@ _ds_chip(u2_wire wir_r,
     */
     {
       if ( _0 == bud_clu ) {
-        printf("not used?\n");
         pet = u2_nul;
       } 
       else if ( _1 == u2_h(bud_clu) ) {
@@ -222,7 +222,6 @@ u2_ds_mine(u2_wire wir_r,
       pug = u2_nul;
     }
     if ( u2_none == (xip = _ds_scan(pug, cor)) ) {
-      pug = _ds_chip(bas_r, clu, cor);
       gop = u2_rc(bas_r, (xip = _ds_chip(wir_r, clu, cor)), u2_rx(bas_r, pug));
 
       if ( u2_none == gop ) {

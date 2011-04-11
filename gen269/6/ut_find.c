@@ -25,7 +25,7 @@
 
       case c3__cell: {
         if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         } else {
           u2_noun taf = _find_in(wir_r, van, p_sut, way, cog, gil);
 
@@ -72,7 +72,7 @@
              (u2_no == u2_as_trel(q_sut, &pq_sut, &qq_sut, &rq_sut)) ||
              (u2_no == u2_as_cell(rq_sut, &prq_sut, &qrq_sut)) )
         {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         } else {
           u2_noun zem = j2_mby(Pit, look)(wir_r, cog, qrq_sut);
 
@@ -88,7 +88,7 @@
               u2_mean(taf, 6, &p_taf, 14, &q_taf, 15, &r_taf, 0);
 
               if ( u2_no == j2_mcy(Pit, ut, park)(wir_r, van, sut, way, p_taf) )              {
-                return u2_bl_bail(wir_r);
+                return u2_bl_bail(wir_r, c3__fail);
               }
               else {
                 pro = u2_bq
@@ -123,7 +123,7 @@
       }
       case c3__face: {
         if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         } else { 
           if ( u2_no == u2_sing(cog, p_sut) ) {
             return u2_nul;
@@ -134,7 +134,7 @@
       }
       case c3__fork: {
         if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         }
         else {
           u2_noun hax = _find_in(wir_r, van, p_sut, way, cog, gil);
@@ -146,11 +146,11 @@
           if ( u2_nul == hax ) {
             if ( u2_nul == yor ) {
               return u2_nul;
-            } else return u2_bl_bail(wir_r);
+            } else return u2_bl_bail(wir_r, c3__fail);
           }
           else {
             if ( u2_nul == hax ) {
-              return u2_bl_bail(wir_r);
+              return u2_bl_bail(wir_r, c3__fail);
             }
             else {
               if ( u2_yes == u2_sing(hax, yor) ) {
@@ -162,7 +162,7 @@
                 u2_mean(yor, 6, &p_yor, 14, &q_yor, 15, &r_yor, 0);
 
                 if ( u2_no == u2_sing(p_hax, p_yor) ) {
-                  return u2_bl_bail(wir_r);
+                  return u2_bl_bail(wir_r, c3__fail);
                 }
                 else if ( (u2_nul == q_hax) && (u2_nul == q_yor) ) {
                   pro = u2_bq
@@ -179,7 +179,7 @@
                   return pro;
                 }
                 else if ( (u2_nul == q_hax) || (u2_nul == q_yor) ) {
-                  return u2_bl_bail(wir_r);
+                  return u2_bl_bail(wir_r, c3__fail);
                 }
                 else {
 
@@ -191,7 +191,7 @@
       } 
       case c3__hold: {
         if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         }
         else {
           if ( (u2_yes == j2_mcc(Pit, in, has)(wir_r, gil, sut)) ) {
@@ -225,7 +225,7 @@
       u2_err(wir_r, "cog", cog);
       j2_mcy(Pit, ut, dupt)(wir_r, van, "sut", sut);
 
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       u2_noun pro = u2_rx(wir_r, u2_t(fin));
 
@@ -251,7 +251,7 @@
                                 0)) ||
          (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcx(Pit, ut, find)(wir_r, van, sut, way, cog);
     }
@@ -264,7 +264,7 @@
                         u2_noun way,                              //  retain
                         u2_noun cog)                              //  retain
   {
-    u2_weak hoc = u2_sh_look(wir_r, van, "find");
+    u2_weak hoc = u2_ds_look(wir_r, van, "find");
 
     if ( u2_none == hoc ) {
       c3_assert(!"register find");
@@ -278,7 +278,7 @@
                                       0);
 
       if ( (u2_none == j2_mcj(Pit, ut, find)[0].xip) ) {
-        u2_noun xip = u2_sh_find(wir_r, cor);
+        u2_noun xip = u2_ds_find(wir_r, cor);
      
         c3_assert(u2_none != xip);
         j2_mcj(Pit, ut, find)[0].xip = xip;
@@ -322,7 +322,7 @@
       fol = u2_t(cor);
 
       pro = u2_ho_use(wir_r, jet_j, cor, fol);
-      c3_assert(pro != u2_none);
+      if ( u2_none == pro ) return u2_bl_bail(wir_r, c3__fail);
 
       u2_rz(wir_r, cor);
       u2_rz(wir_r, fol);

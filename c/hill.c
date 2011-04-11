@@ -230,7 +230,7 @@ _hill_z_mint_txt(u2_wire wir_r,
 
   if ( u2_none == (gen = j2_mbc(PitZ, ream)(wir_r, txt)) ) {
     fprintf(stderr, "{%s: parser failed}\n", FileZ);
-    return u2_bl_bail(wir_r);
+    return u2_bl_bail(wir_r, c3__fail);
   }
   else {
     u2_noun ret = _hill_z_mint_gen(wir_r, sut, gol, gen);
@@ -266,7 +266,7 @@ _hill_z_make_txt(u2_wire wir_r,
 
   if ( u2_none == (gen = j2_mbc(PitZ, ream)(wir_r, txt)) ) {
     fprintf(stderr, "{%s: parser failed}\n", FileZ);
-    return u2_bl_bail(wir_r);
+    return u2_bl_bail(wir_r, c3__fail);
   }
   ret = _hill_z_make_gen(wir_r, sho, gen);
 
@@ -350,7 +350,7 @@ _hill_z_boot(u2_wire     wir_r,
 
   if ( u2_none == txt ) {
     fprintf(stderr, "{not found: %s.watt}\n", fil_c);
-    return u2_bl_bail(wir_r);
+    return u2_bl_bail(wir_r, c3__fail);
   }
   else {
     u2_noun gam = _hill_z_mint_txt(wir_r, c3__noun, c3__noun, txt); 
@@ -395,7 +395,7 @@ _hill_a_mint_txt(u2_wire wir_r,
 
   if ( u2_none == (gen = j2_mbc(PitA, ream)(wir_r, txt)) ) {
     fprintf(stderr, "{%s: parse failed}\n", FileA);
-    return u2_bl_bail(wir_r);
+    return u2_bl_bail(wir_r, c3__fail);
   }
   else {
     u2_noun ret = _hill_a_mint_gen(wir_r, soa, sut, gol, gen);
@@ -537,7 +537,7 @@ _hill_a_make_txt(u2_wire wir_r,
 
   if ( u2_none == (gen = j2_mbc(PitZ, ream)(wir_r, txt)) ) {
     fprintf(stderr, "{%s: parser failed}\n", FileZ);
-    return u2_bl_bail(wir_r);
+    return u2_bl_bail(wir_r, c3__fail);
   }
   ret = _hill_a_make_gen(wir_r, soa, cor, gen);
 
@@ -627,7 +627,7 @@ _hill_a_boot(u2_wire     wir_r,
 
   if ( u2_none == txt ) {
     fprintf(stderr, "{not found: %s.watt}\n", fil_c);
-    return u2_bl_bail(wir_r);
+    return u2_bl_bail(wir_r, c3__fail);
   }
   else {
     u2_noun gam = _hill_a_mint_txt(wir_r, soa, c3__noun, c3__noun, txt); 
@@ -844,7 +844,27 @@ _hill_print_spot(u2_wire wir_r,
   u2_err(wir_r, "{{invalid}}", sot);
 }
 
-/* _hill_print_mean(): print wrapper for user meaning.
+/* _hill_print_bean(): print wrapper for flat meaning.
+*/
+static void
+_hill_print_bean(u2_wire wir_r,
+                 FILE*   fil_f,                                   //  retain
+                 u2_noun ben)                                     //  retain
+{
+#if 0
+  u2_noun wal = _hill_a_fly(wir_r, Hill->soa, ben, _hill_columns());
+#else
+  //  This will bail safely if the benl is bad, rather than 
+  //  recursing back into _hill_nock().
+  //
+  u2_noun wal = j2_mcy(PitA, to, fly)(wir_r, ben, _hill_columns());
+#endif
+  _hill_print_wall(wir_r, fil_f, "", wal);
+  u2_rz(wir_r, wal);
+  return;
+}
+
+/* _hill_print_mean(): print wrapper for meta-meaning.
 */
 static void
 _hill_print_mean(u2_wire wir_r,
@@ -852,21 +872,11 @@ _hill_print_mean(u2_wire wir_r,
                  u2_noun mon)                                     //  retain
 {
   if ( u2_yes == u2_dust(mon) ) {
-    u2_noun bil = u2_nk_nock(wir_r, u2_rx(wir_r, mon), u2_t(mon));
+    u2_noun ben = u2_nk_nock(wir_r, u2_rx(wir_r, mon), u2_t(mon));
 
-    if ( u2_none != bil ) {
-#if 0
-      u2_noun wal = _hill_a_fly(wir_r, Hill->soa, bil, _hill_columns());
-#else
-    //  This will bail safely if the bill is bad, rather than 
-    //  recursing back into _hill_nock().
-    //
-      u2_noun wal = j2_mcy(PitA, to, fly)(wir_r, bil, _hill_columns());
-#endif
-
-      _hill_print_wall(wir_r, fil_f, "", wal);
-      u2_rz(wir_r, wal);
-      u2_rz(wir_r, bil);
+    if ( u2_none != ben ) {
+      _hill_print_bean(wir_r, fil_f, ben);
+      u2_rz(wir_r, ben);
       return;
     }
     else fprintf(fil_f, "  {maen!}\n");
@@ -883,6 +893,7 @@ _hill_print_tent(u2_wire wir_r,
 {
   if ( u2_yes == u2_dust(tax) ) switch ( u2_h(tax) ) {
     case c3__spot: _hill_print_spot(wir_r, fil_f, u2_t(tax)); return;
+    case c3__bean: _hill_print_bean(wir_r, fil_f, u2_t(tax)); return;
     case c3__mean: _hill_print_mean(wir_r, fil_f, u2_t(tax)); return;
   }
   fprintf(fil_f, "  {tent!}\n");
@@ -916,10 +927,10 @@ _hill_nock(u2_wire wir_r,
     return pro;
   }
   else {
-    u2_ray jub_r = u2_bl_open(wir_r);
+    u2_ray kit_r = u2_bl_open(wir_r);
 
     if ( u2_bl_set(wir_r) ) {
-      u2_bl_done(wir_r, jub_r);
+      u2_bl_done(wir_r, kit_r);
       fprintf(stderr, "{trace failed!}\n");
     }
     else {
@@ -932,10 +943,10 @@ _hill_nock(u2_wire wir_r,
       _hill_print_trac(wir_r, stderr, tax);
       u2_rz(wir_r, tax);
 
-      u2_bl_done(wir_r, jub_r);
+      u2_bl_done(wir_r, kit_r);
     }
 
-    u2_bl_bail(wir_r);
+    u2_bl_bail(wir_r, c3__fail);
     return u2_none;
   }
 }
@@ -945,10 +956,16 @@ _hill_nock(u2_wire wir_r,
 struct hill_state*                                                //  produce
 hill_boot(void)
 {
+  struct hill_state* hil_h = malloc(sizeof(struct hill_state));
   u2_ray wir_r;
 
   u2_boot();
   wir_r = u2_wr_init(c3__rock, u2_ray_of(0, 0), u2_ray_of(1, 0));
+
+  Hill = hil_h;
+  Hill->wir_r = wir_r;
+  Hill->soa = u2_none;
+  Hill->sob = u2_none;
 
   /* Mint the shoes.  Impeccable memory practices.
   */
@@ -960,57 +977,49 @@ hill_boot(void)
       /* Boot shoe A.
       */
       {
-        u2_ray  jub_r = u2_bl_open(wir_r);
+        u2_ray  kit_r = u2_bl_open(wir_r);
 
         if ( u2_bl_set(wir_r) ) {
-          u2_bl_done(wir_r, jub_r);
+          u2_bl_done(wir_r, kit_r);
           fprintf(stderr, "{no boot, a}\n");
           break;
         }
         else {
           soa = _hill_z_boot(wir_r, FileA);
-          u2_bl_done(wir_r, jub_r);
+          u2_bl_done(wir_r, kit_r);
         }
       }
       fprintf(stderr, "{hard boot: %s, with %s jets}\n", FileA, FileZ);
+      Hill->soa = soa;
 
       /* Boot shoe B.
       */
       {
-        u2_ray  jub_r = u2_bl_open(wir_r);
+        u2_ray  kit_r = u2_bl_open(wir_r);
 
         if ( u2_bl_set(wir_r) ) {
-          u2_bl_done(wir_r, jub_r);
+          u2_bl_done(wir_r, kit_r);
           fprintf(stderr, "{no boot, b}\n");
           break;
         }
         else {
           sob = _hill_a_boot(wir_r, soa, FileB);
-          u2_bl_done(wir_r, jub_r);
+          u2_bl_done(wir_r, kit_r);
         }
       }
       fprintf(stderr, "{soft boot: %s, with %s}\n", FileB, FileA);
+      Hill->sob = sob;
 
       u2_bx_spot(wir_r, u2_nul);
       u2_bx_show(wir_r);
 
-      /* Create state and return on success.
-      */
-      {
-        struct hill_state* hil_h = malloc(sizeof(struct hill_state));
-
-        hil_h->wir_r = wir_r;
-        hil_h->soa = soa;
-        hil_h->sob = sob;
-
-        Hill = hil_h;   // XX
-        return hil_h;
-      } 
+      return Hill;
     } while (0);
 
     u2_rz(wir_r, soa);
     u2_rz(wir_r, sob);
 
+    free(Hill);
     return 0;
   }
 }
@@ -1042,14 +1051,14 @@ hill_line(struct hill_state* hil_h,
 */
 
   {
-    u2_ray jub_r = u2_bl_open(wir_r);
+    u2_ray kit_r = u2_bl_open(wir_r);
 
     if ( u2_bl_set(wir_r) ) {
-      u2_bl_done(wir_r, jub_r);
+      u2_bl_done(wir_r, kit_r);
       fprintf(stderr, "{exit}\n");
     } else {
       _hill_a_fire(wir_r, soa, sob, lin_c);
-      u2_bl_done(wir_r, jub_r);
+      u2_bl_done(wir_r, kit_r);
     }
   }
 

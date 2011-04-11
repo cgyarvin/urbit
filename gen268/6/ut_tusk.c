@@ -109,7 +109,7 @@
                                 0)) ||
          (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcx(Pit, ut, tusk)(wir_r, van, sut, hep, boz, rix);
     }
@@ -123,7 +123,7 @@
                         u2_noun boz,                              //  retain
                         u2_noun rix)                              //  retain
   {
-    u2_weak hoc = u2_sh_look(wir_r, van, "tusk");
+    u2_weak hoc = u2_ds_look(wir_r, van, "tusk");
 
     if ( u2_none == hoc ) {
       c3_assert(!"register tusk");
@@ -137,7 +137,7 @@
                                            0);
 
       if ( (u2_none == j2_mcj(Pit, ut, tusk)[0].xip) ) {
-        u2_noun xip = u2_sh_find(wir_r, cor);
+        u2_noun xip = u2_ds_find(wir_r, cor);
      
         c3_assert(u2_none != xip);
         j2_mcj(Pit, ut, tusk)[0].xip = xip;

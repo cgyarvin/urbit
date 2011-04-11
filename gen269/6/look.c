@@ -22,7 +22,7 @@
       u2_as_trel(dab, &n_dab, &l_dab, &r_dab);
       if ( u2_no == u2_dust(n_dab) ) {
         u2_err(wir_r, "n_dab", n_dab);
-        return u2_bl_bail(wir_r);
+        return u2_bl_bail(wir_r, c3__fail);
       } 
       else {
         u2_noun pn_dab = u2_h(n_dab);
@@ -132,7 +132,7 @@
     u2_noun cog, dab;
 
     if ( u2_no == u2_mean(cor, 8, &cog, 9, &dab, 0) ) {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mby(Pit, look)(wir_r, cog, dab);
     }

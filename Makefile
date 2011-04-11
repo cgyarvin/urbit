@@ -53,7 +53,6 @@ F_OFILES=\
        f/benx.o \
        f/bail.o \
        f/bask.o \
-       f/shed.o \
        f/dash.o \
        f/unix.o \
        f/nock.o

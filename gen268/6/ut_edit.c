@@ -24,7 +24,7 @@
         u2_noun t_har = u2_t(har);
 
         if ( u2_no == u2_dust(i_har) ) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         } else {
           u2_noun pi_har = u2_h(i_har);
           u2_noun qi_har = u2_t(i_har);
@@ -51,7 +51,7 @@
     if ( (u2_no == u2_mean(cor, 8, &mun, 9, &har, 5, &van, 0)) ||
          (u2_none == (sut = u2_frag(4, van))) )
     {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcy(Pit, ut, edit)(wir_r, van, sut, mun, har);
     }

@@ -31,7 +31,7 @@
     u2_noun hoz, bur;
 
     if ( u2_no == u2_mean(cor, 8, &hoz, 9, &bur, 0) ) {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mby(Pit, fork)(wir_r, hoz, bur);
     }

@@ -20,7 +20,7 @@
       u2_noun c, l_c, n_c, r_c;
 
       if ( (u2_no == u2_as_trel(a, &n_a, &l_a, &r_a)) ) {
-        return u2_bl_bail(wir_r);
+        return u2_bl_bail(wir_r, c3__fail);
       } 
       else if ( u2_yes == u2_sing(n_a, b) ) {
         return u2_rx(wir_r, a);

@@ -2,6 +2,26 @@
 **
 ** This file is in the public domain.
 */
+  /** Data types.
+  **/
+    /** Structures - in loom space.
+    **/
+      /* u2_loom_kite: jump buffer.
+      */
+        typedef struct _u2_loom_kite {
+          /* Interpreter trace, as of jumpoff.
+          */
+          u2_noun tax;
+
+          /* C escape buffer.
+          */
+          jmp_buf buf_f;
+        } u2_loom_kite;
+
+#       define  u2_kite_tax(kit_r)    *u2_at(kit_r, u2_loom_kite, tax)
+#       define  u2_kite_buf_r(kit_r)  u2_aftr(kit_r, u2_loom_kite, buf_f) 
+
+
   /** Functions.
   **/
     /** Fail-specific.
@@ -24,18 +44,33 @@
         u2_bl_set(u2_wire wir_r);
 #     else
 #       define u2_bl_set(wir_r) \
-          setjmp((void *)u2_at_cord(u2_wire_jub_r(wir_r), c3_wiseof(jmp_buf)))
+          ( (c3_l) \
+            setjmp((void *) \
+                    u2_at_cord(u2_kite_buf_r(u2_wire_kit_r(wir_r)), \
+                               c3_wiseof(jmp_buf))) \
+          )
 #     endif
            
       /* u2_bl_bail(): bail out.
+      **
+      **  Bail codes: 
+      **
+      **    c3__exit for normal exit with correct trace
+      **    c3__fail for abnormal failure without assumptions
+      **
+      **  When in doubt, fail.
+      **
+      **  In both cases, a mark-and-sweep is necessary (and
+      **  not currently performed) to clean up leaks.
       */
-        u2_noun
-        u2_bl_bail(u2_wire wir_r);
+        u2_noun                                                   //  blocked
+        u2_bl_bail(u2_wire wir_r,
+                   c3_l    how_l);
 
       /* u2_bl_yes(): assure yes.
       */
 #       define u2_bl_yes(wir_r, feg) \
-          ( (u2_yes == (feg)) ? 0 : u2_bl_bail(wir_r) )
+          ( (u2_yes == (feg)) ? 0 : u2_bl_bail(wir_r, c3__fail) )
 
       /* u2_bl_good(): test for u2_none.
       */

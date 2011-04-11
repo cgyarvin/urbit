@@ -24,7 +24,7 @@
 
       case c3__cell: {
         if ( (u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut)) ) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         }
         else {
           u2_noun haq = j2_mby(Pit, hack)(wir_r, gen);
@@ -47,7 +47,7 @@
       }
       case c3__face: {
         if ( (u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut)) ) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         }
         else {
           return u2_bt
@@ -58,7 +58,7 @@
       }
       case c3__hold: {
         if ( (u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut)) ) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         }
         else {
           u2_noun fop = j2_mcy(Pit, ut, rest)(wir_r, van, p_sut, q_sut);
@@ -86,7 +86,7 @@
     if ( (u2_no == u2_mean(cor, u2_cv_sam, &gen, u2_cv_con, &van, 0)) ||
          (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcx(Pit, ut, snap)(wir_r, van, sut, gen);
     }
@@ -98,7 +98,7 @@
                         u2_noun sut,                              //  retain
                         u2_noun gen)                              //  retain
   {
-    u2_weak hoc = u2_sh_look(wir_r, van, "snap");
+    u2_weak hoc = u2_ds_look(wir_r, van, "snap");
 
     if ( u2_none == hoc ) {
       c3_assert(!"register snap");
@@ -109,7 +109,7 @@
       u2_weak cor = u2_rl_molt(wir_r, gat, u2_cv_sam, u2_rx(wir_r, gen), 0);
 
       if ( (u2_none == j2_mcj(Pit, ut, snap)[0].xip) ) {
-        u2_noun xip = u2_sh_find(wir_r, cor);
+        u2_noun xip = u2_ds_find(wir_r, cor);
      
         c3_assert(u2_none != xip);
         j2_mcj(Pit, ut, snap)[0].xip = xip;

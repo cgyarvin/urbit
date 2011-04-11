@@ -48,7 +48,7 @@
     u2_noun vur, sed;
 
     if ( u2_no == u2_mean(cor, 8, &vur, 9, &sed, 0) ) {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mby(Pit, cons)(wir_r, vur, sed);
     }

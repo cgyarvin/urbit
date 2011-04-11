@@ -37,7 +37,7 @@
       return u2_rx(wir_r, sut);
     }
     if ( u2_no == u2_dust(sut) ) switch ( sut ) {
-      default: return u2_bl_bail(wir_r);
+      default: return u2_bl_bail(wir_r, c3__fail);
 
       case c3__atom:
       {
@@ -56,7 +56,7 @@
       }
     }
     else switch ( u2_h(sut) ) {
-      default: return u2_bl_bail(wir_r);
+      default: return u2_bl_bail(wir_r, c3__fail);
 
       case c3__cell: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {
@@ -123,7 +123,7 @@
         u2_noun hud = u2_bc(wir_r, sut, ref);
 
         if ( u2_yes == j2_mcc(Pit, in, has)(wir_r, bix, hud) ) {
-          return u2_bl_bail(wir_r);
+          return u2_bl_bail(wir_r, c3__fail);
         } else {
           u2_noun bux = j2_mcc(Pit, in, put)(wir_r, bix, hud);
           u2_noun ret = _fuse_repo(wir_r, van, sut, ref, bux);
@@ -158,7 +158,7 @@
     if ( (u2_no == u2_mean(cor, u2_cv_sam, &ref, u2_cv_con, &van, 0)) ||
          (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
-      return u2_bl_bail(wir_r);
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcx(Pit, ut, fuse)(wir_r, van, sut, ref);
     }
@@ -170,7 +170,7 @@
                         u2_noun sut,                              //  retain 
                         u2_noun ref)                              //  retain
   {
-    u2_weak hoc = u2_sh_look(wir_r, van, "fuse");
+    u2_weak hoc = u2_ds_look(wir_r, van, "fuse");
 
     if ( u2_none == hoc ) {
       c3_assert(!"register fuse");
@@ -181,7 +181,7 @@
       u2_weak cor = u2_rl_molt(wir_r, gat, u2_cv_sam, u2_rx(wir_r, ref), 0);
 
       if ( (u2_none == j2_mcj(Pit, ut, fuse)[0].xip) ) {
-        u2_noun xip = u2_sh_find(wir_r, cor);
+        u2_noun xip = u2_ds_find(wir_r, cor);
      
         c3_assert(u2_none != xip);
         j2_mcj(Pit, ut, fuse)[0].xip = xip;
