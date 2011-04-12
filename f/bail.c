@@ -65,7 +65,7 @@ void
 u2_bl_push(u2_wire wir_r,
            u2_noun mon)                                           //  transfer
 {
-  u2_noun tax = u2_rc(wir_r, u2_rx(wir_r, u2_wire_tax(wir_r)), mon);
+  u2_noun tax = u2_rc(wir_r, mon, u2_rx(wir_r, u2_wire_tax(wir_r)));
 
   if ( u2_none != tax ) {
     u2_rz(wir_r, u2_wire_tax(wir_r));
@@ -84,6 +84,17 @@ u2_bl_drop(u2_wire wir_r)
 
   u2_wire_tax(wir_r) = u2_rx(wir_r, u2_t(tax));
   u2_rz(wir_r, tax);
+}
+
+/* u2_bl_error(): simple string error.
+*/
+u2_noun 
+u2_bl_error(u2_wire     wir_r,
+            const c3_c* err_c)                                    //  retain
+{
+  u2_bl_push(wir_r, u2_bc(wir_r, c3__bean, u2_bn_string(wir_r, err_c)));
+
+  return u2_bl_bail(wir_r, c3__exit);
 }
 
 /* u2_bl_some(): test for zero ray.
@@ -686,6 +697,31 @@ u2_bn_gort(u2_wire     wir_r,
 
   u2_rz(wir_r, fol);
   return u2_bn_nock(wir_r, tec, u2_t(tec));
+}
+
+/* u2_bn_wait():
+**
+**  Produce the functional equivalent of `|.(~(tam cor sam))`.
+*/
+u2_noun                                                           //  produce
+u2_bn_wait(u2_wire     wir_r,
+           u2_noun     cor,                                       //  retain
+           u2_noun     sam,                                       //  retain
+           const c3_c* tam_c)                                     //  retain
+{
+  u2_noun rac = u2_bn_molt(wir_r, cor, u2_cv_sam, sam, 0);
+  u2_noun rox = u2_ds_look(wir_r, rac, tam_c);
+
+  if ( u2_none == rox ) {
+    return u2_bl_bail(wir_r, c3__fail);
+  } else {
+    return u2_bc
+      (wir_r, rac,
+              u2_bt(wir_r,
+                    u2_nock_flac,
+                    u2_bc(wir_r, 0, 2),
+                    rox));
+  }
 }
 
 /* u2_bn_qual(): 

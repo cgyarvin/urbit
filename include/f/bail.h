@@ -164,6 +164,25 @@
                      u2_noun* c,
                      u2_noun* d);
 
+      /** Tracing.
+      **/
+        /* u2_bl_push(): push on meaning stack.
+        */
+          void
+          u2_bl_push(u2_wire wir_r,
+                     u2_noun mon);                                //  transfer
+
+        /* u2_bl_error(): simple string error.
+        */
+          u2_noun                                                 //  blocked
+          u2_bl_error(u2_wire     wir_r,
+                      const c3_c* err_c);                         //  retain
+
+        /* u2_bl_drop(): drop from meaning stack.
+        */
+          void
+          u2_bl_drop(u2_wire wir_r);
+
       /** Atom access.
       **/
         /* u2_bi_met(): 
@@ -237,7 +256,7 @@
                       u2_noun d);
 
         /** Allocation.
-        */
+        **/
           /* u2_bn_slab():
           **
           **   Create an atomic slab of `len` words.
@@ -396,7 +415,7 @@
             u2_bn_molt(u2_wire wir_r,
                        u2_noun som,                               //  retain
                        ...);                                      //  retain
-         
+        
           /* u2_bn_molf():
           **
           **   As u2_bn_molt(), with argument pointer.
@@ -463,3 +482,13 @@
                        u2_noun     cor,
                        const c3_c* tam_c,
                        ...);
+
+          /* u2_bn_wait():
+          **
+          **  Produce the functional equivalent of `|.(~(tam cor sam))`.
+          */
+            u2_noun                                               //  produce
+            u2_bn_wait(u2_wire     wir_r,
+                       u2_noun     cor,                           //  retain
+                       u2_noun     sam,                           //  retain
+                       const c3_c* tam_c);                        //  retain

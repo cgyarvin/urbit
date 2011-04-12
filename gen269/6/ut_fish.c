@@ -98,7 +98,7 @@
         }
         else {
           if ( (u2_yes == j2_mcc(Pit, in, has)(wir_r, vit, sut)) ) {
-            return u2_bl_bail(wir_r, c3__fail);
+            return u2_bl_error(wir_r, "fish-loop");
           } else {
             u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, vit, sut);
             u2_noun fop = j2_mcy(Pit, ut, rest)(wir_r, van, p_sut, q_sut);

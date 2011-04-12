@@ -130,7 +130,7 @@
   _open_do_pq(brsg)   //  |~
   {
     if ( (u2_nul == q_gen) ) {
-      return u2_bl_bail(wir_r, c3__fail);
+      return u2_bl_error(wir_r, "open-brsg");
     }
     else {
       u2_noun iq_gen = u2_h(q_gen);

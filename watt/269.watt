@@ -1,6 +1,6 @@
 ~%    %watt.269
     ~ 
-  (%ut ut, %to to)
+  (%ut ut, %go go, %to to)
 &.
 ::
   ::  Tier 1, atomic arithmetic
@@ -780,6 +780,9 @@
   ==
 ::
 ++  go
+  ~%    %go  
+      ->  
+    (%dem dem, %gut gut, %ham ham, %loc loc, %num num, %tis tis, %unt unt)
   &*  nut=*
   ++  dem   (num 10 |=(p=@ (add '0' p)))
   ++  gut
@@ -1075,7 +1078,7 @@
         [%brsg *]
       |-
       ?-  q.gen
-          ~       !!
+          ~       ~|(%open-brsg !!)
           [* ~]   i.q.gen
       ::
           ^
@@ -1191,7 +1194,6 @@
         %cell   [%dgdp [%tmbn %noun] [%tmbn %noun]]
         %flag   [%ktdp [%dtcs %dtsg 0] [%dtsg 0]]
         %null   [%dtsg 0]
-        *       ~~(~(gut go `*`gen) !!)
       --
     ::
         [%tmdp *]   (sift p.gen)
@@ -1203,7 +1205,6 @@
   ::
   ++  rake
     ^-  *twig
-    ~|  %rake
     ?-  gen
       @             [gen ~]
       [~ *]         [gen ~]
@@ -1240,7 +1241,6 @@
 ++  comb
   ~.  %comb
   |=  [mal=*form buz=*form]
-  ~|  %comb
   ^-  *form
   ?:  ?&(?=([0 *] mal) !.=(0 p.mal))
     ?:  ?&(?=([0 *] buz) !.=(0 p.buz)) 
@@ -1257,7 +1257,6 @@
 ++  cons
   ~.  %cons
   |=  [vur=*form sed=*form]
-  ~|  %cons
   ^-  *form
   ?:  ?=([[0 *] [0 *]] -<)
     ?:  ?&(.=(.+(p.vur) p.sed) .=((div p.vur 2) (div p.sed 2)))
@@ -1334,7 +1333,6 @@
 ++  hike 
   ~.  %hike
   |=  [axe=*axis pac=*(list <[p=*axis q=*form]>)]
-  ~|  %hike
   ^-  *form
   ?~  pac
     [0 axe]
@@ -1449,7 +1447,6 @@
     --
   ::
   ++  burn
-    ~|  %burn
     |-
     ^-  *
     ?-    sut
@@ -1461,13 +1458,12 @@
         [%fork *]   =+([heb=$(sut p.sut) nar=$(sut q.sut)] ?>(.=(heb nar) heb))
         [%hold *]   $(sut repo)
         %noun       ~
-        %void       !!
+        %void       ~|(%burn-void !!)
     --
   ::
   ++  cull
     ~.  %cull
     |=  [axe=*axis ref=*type]
-    ~|  %cull
     ^-  *type
     ?:  .=(1 axe)
       (fuse ref)
@@ -1491,7 +1487,6 @@
   ::
   ++  dump
     ^-  *bill
-    ~|  %dump
     =+  ^=  gil
         =+  den=[p=`@`1 q=*(map type <@>)]
         =+  vax=*(set type)
@@ -1573,7 +1568,6 @@
   ++  edit
     ~.  %edit
     |=  [mun=*type har=*(list <[p=*gene q=*gene]>)]
-    ~|  %edit
     |-  ^-  *type
     ?~  har
       mun
@@ -1583,7 +1577,6 @@
   ++  emit
     ~.  %emit
     |=  [axe=*axis mun=*type har=*(list <[p=*gene q=*gene]>)]
-    ~|  %emit
     =+  luf=*(list <[p=*axis q=*form]>)
     |-
     ^-  [p=*type q=*form]
@@ -1597,9 +1590,9 @@
     ~.  %find
     |=  [way=*<%nest %read %rite> cog=*term]
     =-  ?~  hoq
-          ~~  ~(tem go `@`cog)
-          ~~  dump
-          ~~(%find-fail !!)
+          ::  ~~  ~(tem go `@`cog)
+          ::  ~~  dump
+          ~|(%find-fail !!)
         u.hoq
     ^=  hoq
     =+  gil=*(set type)
@@ -1621,15 +1614,13 @@
       ?~  zem
         =+  taf=$(sut p.sut)
         ?~  taf
-          ~|  [%port |.((~(fly to ~(tem go `@`cog)) 75))]
-          ~|  [%type |.((~(fly to dump) 75))]
-          ~|(%find-dumb !!)
+          ~
         ?.  (park way p.u.taf)
-          ~|  [%port |.((~(fly to ~(tem go `@`cog)) 75))]
-          ~|  [%type |.((~(fly to dump) 75))]
-          ~|  [%way |.((~(fly to ~(tem go `@`way)) 75))]
-          ~|  [%axe |.((~(fly to ~(dem go `@`p.u.taf)) 75))]
-          ~|(%find-core !!)
+          ::  ~|  [%port |.((~(fly to ~(tem go `@`cog)) 75))]
+          ::  ~|  [%type |.((~(fly to dump) 75))]
+          ::  ~|  [%way |.((~(fly to ~(tem go `@`way)) 75))]
+          ::  ~|  [%axe |.((~(fly to ~(dem go `@`p.u.taf)) 75))]
+          ~|(%find-park !!)
         [~ (peg 2 p.u.taf) q.u.taf r.u.taf]
       [~ 1 [~ (peg 3 p.u.zem) [q.u.zem ~]] sut]
     ::
@@ -1639,32 +1630,31 @@
       ~
     ::
         [%fork *]
-      ~|  %find-fork
       =+  hax=$(sut p.sut)
       =+  yor=$(sut q.sut)
       ?~  hax                     ::  XX - this should be a lot prettier.
         ?~  yor
           ~
-        ~|  [%port |.((~(fly to ~(tem go `@`cog)) 75))]
-        ~|  [%type |.((~(fly to dump) 75))]
-        ~|(%find-fork !!)
+        ::  ~|  [%port |.((~(fly to ~(tem go `@`cog)) 75))]
+        ::  ~|  [%type |.((~(fly to dump) 75))]
+        ~|(%find-half !!)
       ?~  yor
-        ~|  [%port |.((~(fly to ~(tem go `@`cog)) 75))]
-        ~|  [%type |.((~(fly to dump) 75))]
-        ~|(%find-fork !!)
+        ::  ~|  [%port |.((~(fly to ~(tem go `@`cog)) 75))]
+        ::  ~|  [%type |.((~(fly to dump) 75))]
+        ~|(%find-half !!)
       ?:  .=(hax yor)
         hax
       ?.  ?&(.=(p.u.hax p.u.yor) .=(.=(~ q.u.hax) .=(~ q.u.yor)))
-        ~|  [%port |.((~(fly to ~(tem go `@`cog)) 75))]
-        ~|  [%type |.((~(fly to dump) 75))]
+        ::  ~|  [%port |.((~(fly to ~(tem go `@`cog)) 75))]
+        ::  ~|  [%type |.((~(fly to dump) 75))]
         ~|(%find-mate !!)
       ?~  q.u.hax
         [~ p.u.hax ~ (fork r.u.hax r.u.yor)]
       ?>  ?=(^ q.u.yor)
       ?.  ?&(.=(p.u.q.u.yor p.u.q.u.hax)) 
-        ~|  [%port |.((~(fly to ~(tem go `@`cog)) 75))]
-        ~|  [%type |.((~(fly to dump) 75))]
-        ~|(%find-call !!)
+        ::  ~|  [%port |.((~(fly to ~(tem go `@`cog)) 75))]
+        ::  ~|  [%type |.((~(fly to dump) 75))]
+        ~|(%find-fire !!)
       :^    ~
           p.u.hax
         [~ p.u.q.u.hax (weld q.u.q.u.hax q.u.q.u.yor)] 
@@ -1682,22 +1672,21 @@
     ~.  %fire
     |=  hag=*(list gene)
     ^-  *type
-    ~|  %fire
     ?>  ?=([%core *] sut)
     =+  dox=[%core q.q.sut q.sut]
     :+  %hold
       ?.  .=(%wood p.q.sut)
         ?.  ?|(!vet (nest(sut q.q.sut) p.sut))
-          ~~  dump(sut q.q.sut)   ::  need
-          ~~  dump(sut p.sut)     ::  have
+          ::  ~~  dump(sut q.q.sut)   ::  need
+          ::  ~~  dump(sut p.sut)     ::  have
           ~|('fire-metl' !!)
         dox
       ?.  ?|  !vet
               .=(p.sut q.q.sut)
               (levy hag |=(p=*gene (fret dox p)))
           --
-        ~~  dump(sut q.q.sut)     ::  need
-        ~~  dump(sut p.sut)       ::  have
+        ::  ~~  dump(sut q.q.sut)     ::  need
+        ::  ~~  dump(sut p.sut)       ::  have
         ~|('fire-wood' !!)
       sut
 ::  ~(tap in (~(gas in *(set gene)) hag))
@@ -1725,9 +1714,9 @@
         [%fork *]   (flor $(sut p.sut) $(sut q.sut))
         [%hold *]
       ?:  (~(has in vit) sut)
-        ~|  [%type |.((~(fly to dump) 75))]
-        ~|  [%axis |.((~(fly to ~(gut go `*`axe)) 75))]
-        ~|(%fish-hold !!)
+        ::  ~|  [%type |.((~(fly to dump) 75))]
+        ::  ~|  [%axis |.((~(fly to ~(gut go `*`axe)) 75))]
+        ~|(%fish-loop !!)
       =>  %=(. vit (~(put in vit) sut))
       $(sut repo)
     --
@@ -1744,7 +1733,6 @@
   ++  fuse
     ~.  %fuse
     |=  ref=*type
-    ~|  %fuse
     =+  bix=*(set <[*type *type]>)
     |-  ^-  *type
     ?:  .=(sut ref)
@@ -1775,10 +1763,9 @@
         [%fork *]     (fork $(sut p.sut) $(sut q.sut))
         [%hold *]
       ?:  (~(has in bix) [sut ref])
-        ~|  [%fuse-sut |.((~(fly to dump) 75))]
-        ~|  [%fuse-ref |.((~(fly to dump(sut ref)) 75))]
-        ~|  %fuse-loop 
-        !!
+        ::  ~|  [%fuse-sut |.((~(fly to dump) 75))]
+        ::  ~|  [%fuse-ref |.((~(fly to dump(sut ref)) 75))]
+        ~|(%fuse-loop !!)
       $(bix (~(put in bix) [sut ref]), sut repo)
     ::
         %noun       ref
@@ -1844,9 +1831,9 @@
     ++  nice
       |=  typ=*type
       ?.  ?|(!vet (nest(sut gol) typ))
-        ~|  [%need |.((~(fly to dump(sut gol)) 75))]
-        ~|  [%have |.((~(fly to dump(sut typ)) 75))]
-        ~|('type-fail' !!)
+        ::  ~|  [%need |.((~(fly to dump(sut gol)) 75))]
+        ::  ~|  [%have |.((~(fly to dump(sut typ)) 75))]
+        ~|('mint-nice' !!)
       typ
     ::
     ++  $
@@ -1861,7 +1848,7 @@
         :-  (nice flag)
         =+  vol=q:$(gen q.gen, gol %noun)
         ?.  ?=([0 *] vol)
-          ~|(%casbon-form !!)
+          ~|(%mint-like !!)
         (fish(sut (play p.gen)) p.vol)
       ::
           [%csdg *]                                                   ::  ?:
@@ -1909,15 +1896,15 @@
           [%ktpd *]                                                   ::  ^+
         =+  zut=(play p.gen)
         ?.  ?|(!vet (nest(sut gol) zut))
-          ~|  [%need |.((~(fly to dump(sut gol)) 75))]
-          ~|  [%have |.((~(fly to dump(sut zut)) 75))]
-          ~|('type-fail' !!)
+          ::  ~|  [%need |.((~(fly to dump(sut gol)) 75))]
+          ::  ~|  [%have |.((~(fly to dump(sut zut)) 75))]
+          ~|(%mint-make !!)
         $(gen q.gen, gol zut)
       ::
           [%ktsg *]                                                   ::  ^~
         =+  cag=burn  
         =+  nef=$(gen p.gen)
-        [p.nef [1 ~~(%ketsig-nock .*(cag q.nef))]]
+        [p.nef [1 ~|(%ketsig-nock .*(cag q.nef))]]
       ::
           [%mtbn *]                                                   ::  %=
         =+  lar=(seek %read p.gen)
@@ -1963,7 +1950,7 @@
       ::
           [%zpcb *]                                                   ::  !_
         ~~  ~(loc go p.gen)
-        :: ~|  [%spot |.((~(fly to ~(loc go p.gen)) 75))]
+        ::  ~|  [%spot |.((~(fly to ~(loc go p.gen)) 75))]
         =+  hum=$(gen q.gen)
         [p.hum [10 [%spot 1 p.gen] q.hum]]
       ::
@@ -1978,8 +1965,8 @@
           *           
         =+  doz=~(open ap gen) 
         ?:  .=(doz gen)
-          ~|  [%open-gene |.((~(fly to ~(gut go `*`gen)) 75))]
-          ~|(%open !!)
+          ::  ~|  [%open-gene |.((~(fly to ~(gut go `*`gen)) 75))]
+          ~|(%mint-open !!)
         $(gen doz)
       --
     ==
@@ -1987,7 +1974,6 @@
   ++  nest
     ~.  %nest
     |=  ref=*type
-    ~|  %nest
     ^-  ?
     =+  gil=*(set <[p=*type q=*type]>)
     =<  dext
@@ -2121,7 +2107,6 @@
     ~.  %orth
     |=  ref=*type
     ^-  ?
-    ~|  %orth
     =+  bix=*(set <[*type *type]>)
     |-
     ?-    sut
@@ -2200,8 +2185,8 @@
         [%core *]   
       ?:  .=(2 now) 
         ?.  (park way lat)
-          ~|  [%axis |.((~(fly to ~(dem go `@`axe)) 75))]
-          ~|  [%type |.((~(fly to dump) 75))]
+          ::  ~|  [%axis |.((~(fly to ~(dem go `@`axe)) 75))]
+          ::  ~|  [%type |.((~(fly to dump) 75))]
           ~|(%peek-park !!)
         $(sut p.sut, axe lat) 
       %noun
@@ -2271,7 +2256,7 @@
         [%zpdx *]   $(gen p.gen)
         [%zpzp ~]   %void
         *           
-      =+(doz=~(open ap gen) ?:(.=(doz gen) ~|(%open !!) $(gen doz)))
+      =+(doz=~(open ap gen) ?:(.=(doz gen) ~|(%play-open !!) $(gen doz)))
     --
   ::
   ++  reco
@@ -2283,7 +2268,6 @@
     yot
   ::
   ++  repo
-    ~|  %repo
     ^-  *type
     ?-    sut
         [%cube *]   ?.(.?(p.sut) %atom [%cell [%cube -.p.sut] [%cube +.p.sut]])
@@ -2291,7 +2275,6 @@
         [%face *]   q.sut
         [%hold *]   (rest(sut p.sut) q.sut)
         %noun       [%fork %atom [%cell %noun %noun]]
-        *           !!
     --
   ::
   ++  rest
@@ -2300,7 +2283,7 @@
     ^-  *type
     ~+
     ?:  (~(has in fan) [sut leg])
-      ~|('inference recursion' !!)
+      ~|(%rest-loop !!)
     =>  .(fan (~(put in fan) [sut leg]))
     =+  gar=(turn leg |=(p=*gene (play p)))
     =+  gun=(~(gas in *(set type)) gar)    ::  XX
@@ -2310,7 +2293,6 @@
   ++  seek
     ~.  %seek
     |=  [way=*<%nest %read %rite> hep=*twig]
-    ~|  %seek
     ^-  *port
     ?~  hep
       [1 ~ sut]
@@ -2331,7 +2313,6 @@
   ++  snap
     ~.  %snap
     |=  gen=*gene
-    ~|  %snap
     ^-  *gene 
     ?-    sut
         [%cell *]
@@ -2349,7 +2330,6 @@
   ++  tuck
     ~.  %tuck
     |=  [hep=*twig boz=*type rix=*gene]
-    ~|  %tuck
     =+  peh=(flop hep)
     =+  axe=`@`1
     |-
@@ -2378,7 +2358,6 @@
   ++  tusk
     ~.  %tusk
     |=  [hep=*twig boz=*type rix=*gene]
-    ~|  %tusk
     =+  peh=(flop hep)
     |-  ^-  *type
     ?~  peh
