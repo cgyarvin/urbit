@@ -44,11 +44,11 @@
     return fol;
   }
 
-  static u2_noun                                                  //  transfer
+  static u2_noun                                                  //  produce
   _mint_nice(u2_wire wir_r,
              u2_noun van,                                         //  retain
              u2_noun gol,                                         //  retain
-             u2_noun typ)                                         //  transfer
+             u2_noun typ)                                         //  submit
   {
     if ( (u2_yes == _mint_vet(wir_r, van)) &&
          (u2_no == j2_mcy(Pit, ut, nest)(wir_r, van, gol, typ)) ) 
@@ -56,6 +56,18 @@
       return u2_bl_error(wir_r, "mint-nice");
     }
     else return typ;
+  }
+
+  static u2_noun                                                  //  produce
+  _mint_coke(u2_wire wir_r,
+             u2_noun nug)                                         //  retain
+  {
+    if ( 0 == u2_h(nug) ) {
+      return u2_rx(wir_r, u2_t(nug));
+    } else if ( 10 == u2_h(nug) ) {
+      return _mint_coke(wir_r, u2_t(u2_t(nug)));
+    }
+    else return u2_bl_error(wir_r, "mint-coke");
   }
 
   static u2_noun 
@@ -136,7 +148,7 @@
     return gon;
   }
 
-  u2_noun                                                         //  transfer
+  u2_noun                                                         //  produce
   j2_mcx(Pit, ut, mint)(u2_wire wir_r, 
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
@@ -189,21 +201,17 @@
       {
         u2_noun vol = _mint_make(wir_r, van, sut, c3__noun, q_gen);
         u2_noun wam = j2_mcy(Pit, ut, play)(wir_r, van, sut, p_gen);
+        u2_noun axe = _mint_coke(wir_r, vol);
 
-        if ( _0 != u2_h(vol) ) {
-          return u2_bl_error(wir_r, "mint-like");
-        } 
-        else {
-          ret = u2_bc
-            (wir_r,
-             _mint_nice(wir_r, van, gol, _mint_flag(wir_r)),
-             j2_mcy(Pit, ut, fish)(wir_r, van, wam, u2_t(vol)));
+        ret = u2_bc
+          (wir_r,
+           _mint_nice(wir_r, van, gol, _mint_flag(wir_r)),
+           j2_mcy(Pit, ut, fish)(wir_r, van, wam, axe));
 
-          u2_rl_lose(wir_r, vol);
-          u2_rl_lose(wir_r, wam);
+        u2_rl_lose(wir_r, vol);
+        u2_rl_lose(wir_r, wam);
 
-          return ret;
-        }
+        return ret;
       }
       case c3__csdg: u2_bi_trel(wir_r, u2_t(gen), &p_gen, &q_gen, &r_gen);
       {
@@ -499,7 +507,7 @@
   u2_ho_jet 
   j2_mcj(Pit, ut, mint)[];
 
-  u2_noun                                                         //  transfer
+  u2_noun                                                         //  produce
   j2_mc(Pit, ut, mint)(u2_wire wir_r, 
                        u2_noun cor)                               //  retain
   {
@@ -517,7 +525,7 @@
     }
   }
 
-  u2_weak                                                         //  transfer
+  u2_weak                                                         //  produce
   j2_mci(Pit, ut, mint)(u2_wire wir_r,
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain 
@@ -548,7 +556,7 @@
     }
   }
 
-  u2_noun                                                         //  transfer
+  u2_noun                                                         //  produce
   j2_mcy(Pit, ut, mint)(u2_wire wir_r,
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain

@@ -25,7 +25,6 @@
   ~.  %dec
   |=  a=@
   ^-  @
-  ~|  %dec
   ?<  .=(0 a)
   =+  b=@
   |-
@@ -1820,6 +1819,15 @@
     ^-  [p=*type q=*form]
     =<  $
     &.
+    ++  coke
+      ~.  %coke
+      |=  [nug=*form]
+      ?-    nug
+          [0 *]   p.nug
+          [10 *]  $(nug q.nug)
+          *       ~|(%mint-coke !!)
+      --
+    ::
     ++  crow
       |=  [mel=*<%gold %iron %lead %zinc> ruf=*gene dab=*(map term foot)]
       =+  dan=$$(gen ruf, gol %noun)
@@ -1846,10 +1854,7 @@
       ::
           [%csbn *]                                                   ::  ?=
         :-  (nice flag)
-        =+  vol=q:$(gen q.gen, gol %noun)
-        ?.  ?=([0 *] vol)
-          ~|(%csbn-form !!)
-        (fish(sut (play p.gen)) p.vol)
+        (fish(sut (play p.gen)) (coke q:$(gen q.gen, gol %noun)))
       ::
           [%csdg *]                                                   ::  ?:
         =+  nor=$(gen p.gen, gol flag)

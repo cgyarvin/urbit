@@ -640,7 +640,6 @@ _hill_a_boot(u2_wire     wir_r,
   }
 }
 
-#if 0
 /* _hill_a_print_delm():
 */
 static void
@@ -674,7 +673,6 @@ _hill_a_print_term(u2_wire     wir_r,
   u2_rz(wir_r, bil);
   u2_rz(wir_r, tep);
 }
-#endif
 
 /* _hill_a_print_type():
 */
@@ -712,34 +710,6 @@ _hill_a_print_noun(u2_wire     wir_r,
   u2_rz(wir_r, wal);
 }
 
-/* _hill_a_fire(): execute and print expression over pit B (with shoe A).
-*/
-static void                                                       //  produce
-_hill_a_fire(u2_wire     wir_r,
-             u2_noun     soa,                                     //  retain
-             u2_noun     sob,                                     //  retain
-             const c3_c* exp_c)                                   //  retain
-{
-  u2_noun txt, gam, som;
-
-  txt = u2_bn_string(wir_r, exp_c);
-  gam = _hill_a_mint_txt(wir_r, soa, u2_h(sob), c3__noun, txt);
-
-  _hill_a_print_type(wir_r, soa, 0, "{type}", u2_h(gam));
-
-  som = _hill_nock(wir_r, u2_t(sob), u2_t(gam));
-  if ( u2_none == som ) {
-    fprintf(stderr, "{none}\n");
-  }
-  else {
-    _hill_print_noun(wir_r, 0, 0, som);
-  }
-  u2_rz(wir_r, txt);
-  u2_rz(wir_r, gam);
-  u2_rz(wir_r, som);
-}
-
-#if 0
 /* _hill_print_delm(): print wrapper for decimal.
 */
 static void
@@ -770,7 +740,6 @@ _hill_print_type(u2_wire     wir_r,
 {
   _hill_a_print_type(wir_r, Hill->soa, fil_f, cap_c, typ);
 }
-#endif
 
 /* _hill_print_noun(): print wrapper for noun.
 */
@@ -912,6 +881,50 @@ _hill_print_trac(u2_wire wir_r,
   }
 }
 
+/* _hill_a_fire(): execute and print expression over pit B (with shoe A).
+*/
+static void                                                       //  produce
+_hill_a_fire(u2_wire     wir_r,
+             u2_noun     soa,                                     //  retain
+             u2_noun     sob,                                     //  retain
+             const c3_c* exp_c,                                   //  retain
+             const c3_c* out_c)                                   //  retain
+{
+  u2_noun txt, gam, som;
+
+  txt = u2_bn_string(wir_r, exp_c);
+  gam = _hill_a_mint_txt(wir_r, soa, u2_h(sob), c3__noun, txt);
+
+  _hill_a_print_type(wir_r, soa, 0, 0, u2_h(gam));
+
+  som = _hill_nock(wir_r, u2_t(sob), u2_t(gam));
+  if ( u2_none == som ) {
+    fprintf(stderr, "{none}\n");
+  }
+  else {
+    if ( !out_c ) {
+      _hill_print_noun(wir_r, 0, 0, som);
+    } else if ( !strcmp("w", out_c) ) {
+      _hill_print_wall(wir_r, 0, 0, som);
+    }
+    else if ( !strcmp("t", out_c) ) {
+      _hill_print_tape(wir_r, 0, som);
+    }
+    else if ( !strcmp("d", out_c) ) {
+      _hill_print_delm(wir_r, 0, som);
+    }
+    else if ( !strcmp("e", out_c) ) {
+      _hill_print_term(wir_r, 0, som);
+    }
+    else if ( !strcmp("y", out_c) ) {
+      _hill_print_type(wir_r, 0, 0, som);
+    }
+  }
+  u2_rz(wir_r, txt);
+  u2_rz(wir_r, gam);
+  u2_rz(wir_r, som);
+}
+
 /* _hill_nock(): control and trace wrapper for interpreter.
 */
 static u2_noun                                                    //  produce
@@ -1045,10 +1058,8 @@ hill_line(struct hill_state* hil_h,
   hi_shoa soa   = hil_h->soa;
   hi_shoz sob   = hil_h->sob;
 
-/*
   u2_bx_boot(wir_r);
   u2_bx_spot(wir_r, u2_nul);
-*/
 
   {
     u2_ray kit_r = u2_bl_open(wir_r);
@@ -1057,11 +1068,11 @@ hill_line(struct hill_state* hil_h,
       u2_bl_done(wir_r, kit_r);
       fprintf(stderr, "{exit}\n");
     } else {
-      _hill_a_fire(wir_r, soa, sob, lin_c);
+      _hill_a_fire(wir_r, soa, sob, lin_c, 0);
       u2_bl_done(wir_r, kit_r);
     }
   }
 
   LoomStop = 0;
-  // u2_bx_show(wir_r);
+  u2_bx_show(wir_r);
 }

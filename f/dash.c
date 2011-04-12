@@ -106,6 +106,9 @@ _ds_good_bud(u2_noun bud)
   if ( (u2_nock_frag == p_bud) && (u2_yes == u2_stud(q_bud)) ) {
     return u2_yes;
   }
+  if ( u2_nock_hint == p_bud ) {
+    return u2_yes == u2_dust(u2_t(bud)) ? _ds_good_bud(u2_t(u2_t(bud))) : u2_no;
+  }
   else return u2_no;
 }
 
@@ -174,23 +177,29 @@ _ds_chip(u2_wire wir_r,
       if ( _0 == bud_clu ) {
         pet = u2_nul;
       } 
-      else if ( _1 == u2_h(bud_clu) ) {
-        pet = u2_nul;
-      }
       else {
-        u2_atom axe = u2_t(bud_clu);
-        u2_noun ruc = u2_frag(axe, cor);
-        u2_noun led;
+        while ( _10 == u2_h(bud_clu) ) {
+          bud_clu = u2_t(u2_t(bud_clu));
+        }
 
-        if ( u2_none == ruc ) {
-          u2_ho_warn_here();
-          u2_rz(bas_r, dac); u2_rz(bas_r, bat); return u2_none;
-        } else {
-          if ( u2_none == (led = u2_ds_find(wir_r, ruc)) ) {
+        if ( _1 == u2_h(bud_clu) ) {
+          pet = u2_nul;
+        }
+        else {
+          u2_atom axe = u2_t(bud_clu);
+          u2_noun ruc = u2_frag(axe, cor);
+          u2_noun led;
+
+          if ( u2_none == ruc ) {
             u2_ho_warn_here();
             u2_rz(bas_r, dac); u2_rz(bas_r, bat); return u2_none;
+          } else {
+            if ( u2_none == (led = u2_ds_find(wir_r, ruc)) ) {
+              u2_ho_warn_here();
+              u2_rz(bas_r, dac); u2_rz(bas_r, bat); return u2_none;
+            }
+            pet = u2_rc(bas_r, u2_rx(bas_r, axe), u2_rx(bas_r, led));
           }
-          pet = u2_rc(bas_r, u2_rx(bas_r, axe), u2_rx(bas_r, led));
         }
       }
     }

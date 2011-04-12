@@ -81,7 +81,7 @@ file
 
 gene
   : tall  { $$ = _watt_locate(ywir_r, &@1, $1); }
-  | wide  /* { $$ = _watt_locate(ywir_r, &@1, $1); } */
+  | wide  { $$ = _watt_locate(ywir_r, &@1, $1); }
   ;
 
 wide
