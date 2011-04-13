@@ -908,13 +908,13 @@ _hill_a_fire(u2_wire     wir_r,
       _hill_print_wall(wir_r, 0, 0, som);
     }
     else if ( !strcmp("t", out_c) ) {
-      _hill_print_tape(wir_r, 0, som);
+      _hill_print_tape(wir_r, 0, som); printf("\n");
     }
     else if ( !strcmp("d", out_c) ) {
-      _hill_print_delm(wir_r, 0, som);
+      _hill_print_delm(wir_r, 0, som); printf("\n");
     }
     else if ( !strcmp("e", out_c) ) {
-      _hill_print_term(wir_r, 0, som);
+      _hill_print_term(wir_r, 0, som); printf("\n");
     }
     else if ( !strcmp("y", out_c) ) {
       _hill_print_type(wir_r, 0, 0, som);
@@ -1057,9 +1057,25 @@ hill_line(struct hill_state* hil_h,
   u2_wire wir_r = hil_h->wir_r;
   hi_shoa soa   = hil_h->soa;
   hi_shoz sob   = hil_h->sob;
+  const c3_c* out_c;
 
   u2_bx_boot(wir_r);
   u2_bx_spot(wir_r, u2_nul);
+
+  //  XX - a heinous hack.
+  //
+  if ( !strncmp(lin_c, "w ", 2) ) {
+    lin_c += 2; out_c = "w";
+  } else if ( !strncmp(lin_c, "t ", 2) ) {
+    lin_c += 2; out_c = "t";
+  } else if (  !strncmp(lin_c, "d ", 2) ) {
+    lin_c += 2; out_c = "d";
+  } else if (  !strncmp(lin_c, "e ", 2) ) {
+    lin_c += 2; out_c = "e";
+  } else if (  !strncmp(lin_c, "y ", 2) ) {
+    lin_c += 2; out_c = "y";
+  }
+  else out_c = 0;
 
   {
     u2_ray kit_r = u2_bl_open(wir_r);
@@ -1068,7 +1084,7 @@ hill_line(struct hill_state* hil_h,
       u2_bl_done(wir_r, kit_r);
       fprintf(stderr, "{exit}\n");
     } else {
-      _hill_a_fire(wir_r, soa, sob, lin_c, 0);
+      _hill_a_fire(wir_r, soa, sob, lin_c, out_c);
       u2_bl_done(wir_r, kit_r);
     }
   }
