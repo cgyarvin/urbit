@@ -1,6 +1,6 @@
-~%    %watt.268
+~%    %watt.267
     ~ 
-  ()
+  (%ut ut, %bo bo)
 &.
 ::
   ::  Tier 1, atomic arithmetic
@@ -25,7 +25,6 @@
   ~.  %dec
   |=  a=@
   ^-  @
-  ~|  %dec
   ?<  .=(0 a)
   =+  b=@
   |-
@@ -512,7 +511,6 @@
      /7824fff6\ /dee5b579\ /99267e88\ /f8820121\ /6220ecc5\ /f40f7a8d\
      /fe8c511a\ /a9afcd63\ /ba9cd382\ /352598d8
   ==
-::
 ++  peg
   ~.  %peg
   |=  [a=*axis b=*axis]
@@ -702,31 +700,6 @@
 ::
   ::  Tier 5, parsing and printing
 ::
-++  nyb   (nym 2 |=(a=@ (add '0' a)))
-++  nyd   (nym 10 |=(a=@ (add '0' a)))
-++  nym
-  |=  [a=@ b=|=(@ @)]
-  |=  c=@
-  ^-  *(list <@>)
-  ?:  .=(0 c)
-    [(b 0) ~]
-  =+  d=`*(list <@>)`~
-  |-
-  ?:  .=(0 c)
-    d
-  $(c (div c a), d [(b (mod c a)) d])
-::
-++  nyx   (nym 16 |=(a=@ (add a ?:((lth a 10) 48 87))))
-++  nyw
-  %+  nym
-    64
-  |=  a=@
-  ?:  .=(62 a) 
-    45 
-  (add a ?:((lth a 26) 65 ?:((lth a 52) 71 ?:((lth a 62) 4 32))))
-::
-
-
 ++  bowl  <*>
 ++  bo
   ~%    %bo  
@@ -739,7 +712,7 @@
         [s=* c=*]
       ?-    c.bol
           @   (vel c.bol)
-          *
+          ^
         :-  [%ly '[' ']']
         |-  
         ?-    c.bol
@@ -754,7 +727,7 @@
     |-
     ?-    bol
         @       (rip 3 bol) 
-        [~ *]   ((list <@>) +)
+        [~ *]   c.bol
         *       $(bol red)
     --
   ::
@@ -763,158 +736,10 @@
     ?-    bol
         @             bol
         [s=~ c=*]     bol
+        [s=%nb c=*]   (dub nyb)
         [s=%nd c=*]   (dub nyd)
+        [s=%nw c=*]   (dub nyw)
+        [s=%nx c=*]   (dub nyx)
     --
-  ==
-
-
-++  bill
-  |?
-    ^+(@ *rock)
-    [%duct p=*tape]
-    [%grip p=[p=*rock q=*rock] q=*(list bill)]
-    [%meld p=*(list bill)]
-  --
-::
-++  byte  <@>
-++  tape  (list byte)
-++  rock  <@>
-++  term  <@>
-++  wall  (list tape)
-::
-++  to
-  ~%    %to  
-      ->  
-    (%wit wit, %ram ram, %fly fly)
-  &=  pup=*bill
-  ++  fly
-    ~.  %fly
-    |=  bor=@
-    ^-  *wall
-    =+  col=@
-    =>  &.
-        ++  ind
-          |=  tep=*tape
-          ^-  *tape
-          ?:(.=(0 col) tep $(col (dec col), tep [' ' tep]))
-        ==
-    =+  lux=*wall
-    |-  ^-  *wall
-    ?.  ?&(?=([%grip *] pup) (gte (add col wit) bor))
-      [(ind ram) lux]
-    :-  (ind (rip 3 p.p.pup))
-    |-  ^-  *wall
-    ?~  q.pup
-      [(ind (rip 3 q.p.pup)) lux]
-    %=  $$
-      pup   i.q.pup
-      lux   $(q.pup t.q.pup)
-      col   ?:((gte col (mul 2 (div bor 3))) 0 (add 2 col))
-    --
-  ::
-  ++  ram
-    ^-  *tape
-    ?-    pup 
-        @           (rip 3 pup)
-        [%duct *]   p.pup 
-        [%meld *]   (reel p.pup =+([p=*bill q=*tape] |.((weld ram(pup p) q))))
-        [%grip *]
-      %+  weld
-        (rip 3 p.p.pup)
-      |-  ^-  *tape
-      ?-  q.pup
-        ~       (rip 3 q.p.pup)
-        [* ~]   (weld ram(pup i.q.pup) (rip 3 q.p.pup))
-        ^       (weld ram(pup i.q.pup) `*tape`[' ' $(q.pup t.q.pup)])
-      --
-    --
-  ::
-  ++  wit
-    ^-  @
-    ?-    pup
-        @           (met 3 pup)
-        [%duct *]   (lent p.pup)
-        [%grip *]
-      %+  add
-        (add (met 3 p.p.pup) (met 3 q.p.pup))
-      %+  roll
-        q.pup
-      =+([p=*bill q=@] |.((add ?:(.=(0 q) 0 1) (add q wit(pup p)))))
-    ::
-        [%meld *]   (roll p.pup =+([p=*bill q=@] |.((add q wit(pup p)))))
-    -- 
-  ==
-::
-++  go
-  ~%    %go  
-      ->  
-    (%dem dem, %gut gut, %ham ham, %loc loc, %num num, %tis tis, %unt unt)
-  &*  nut=*
-  ++  dem   (num 10 |=(p=@ (add '0' p)))
-  ++  gut
-    |-  ^-  *bill
-    ?-  nut
-        @   unt
-        ^
-      :+  %grip
-        ['[' ']']
-      |-  ^-  *(list bill)
-      ?-  nut
-        [* @]   [$$(nut -.nut) $$(nut +.nut) ~]
-        [* ^]   [$$(nut -.nut) $(nut +.nut)]
-      --
-    --
-  ::
-  ++  ham   (num 16 |=(p=@ ?:((lth 10 p) (add '0' p) (add 'a' p))))
-  ++  loc
-    ^-  *bill
-    ?>  ?=([p=@ q=[p=[p=@ q=@] q=[p=@ q=@]]] nut)   :: should be static
-    :+  %grip
-      ['<' '>']
-    =+  ^=  rov
-        :~  [%grip ['[' ']'] dem(nut p.p.q.nut) dem(nut q.p.q.nut) ~]
-            [%grip ['[' ']'] dem(nut p.q.q.nut) dem(nut q.q.q.nut) ~]
-        --
-    ?:  .=(%% p.nut)
-      rov
-    [p.nut rov]
-  ::
-  ++  num
-    |*  [zel=@ hoz=|=(@ @)]
-    ^-  [%duct p=*tape]
-    :-  %duct
-    ?:  .=(0 nut)
-      [(hoz 0) ~]
-    =+  biq=`*tape`~
-    |-  ^-  *tape
-    ?:  .=(0 nut)
-      biq
-    $(nut (div nut zel), biq [(hoz (mod nut zel)) biq])
-  ::
-  ++  tem
-    ^-  [%duct p=*tape]
-    :-  %duct
-    |-  ^-  *tape
-    ?:  .=(0 nut)
-      ~
-    [(end 3 1 nut) $(nut (rsh 3 1 nut))]
-  ::
-  ++  tis
-    [%duct p=nut]
-  ::
-  ++  unt
-    ^-  [%duct p=*tape]
-    ?:  ?&  (gte (met 3 nut) 2)
-            |-
-            ?:  .=(0 nut)
-              &
-            =+  vis=(end 3 1 nut)
-            =+  goz=(rsh 3 1 nut)
-            ?&(?|(.=('-' vis) ?&((gte vis 'a') (lte vis 'z'))) $(nut goz))
-        --
-      =<([- ['%' +]] tem)
-    ?:  (lte (met 3 nut) 2)
-      dem
-    ham
   ==
 ==

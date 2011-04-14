@@ -54,7 +54,7 @@ u2_bl_bail(u2_wire wir_r,
 {
   u2_ray kit_r = u2_wire_kit_r(wir_r);
 
-  // c3_assert(!"bail!");
+  c3_assert(!"bail!");
   longjmp((void *)u2_at_cord(u2_kite_buf_r(kit_r), c3_wiseof(jmp_buf)), how_l);
   return u2_none;
 }

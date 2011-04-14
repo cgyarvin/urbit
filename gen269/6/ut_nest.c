@@ -45,7 +45,7 @@
       u2_bi_cell(wir_r, n_dab, &pn_dab, &qn_dab);
       u2_bi_cell(wir_r, n_hem, &pn_hem, &qn_hem);
 
-      if ( pn_dab != pn_hem ) {
+      if ( u2_no == u2_sing(pn_dab, pn_hem) ) {
         return u2_no;
       } else {
         if ( (u2_no == u2_dust(qn_dab)) || (u2_no == u2_dust(qn_hem)) ) {
@@ -540,7 +540,7 @@
   j2_mcj(Pit, ut, nest)[] = {
     { ".3", c3__hevy, 
         j2_mc(Pit, ut, nest), 
-        Tier6_b_memo,
+        u2_jet_live | u2_jet_test,
         u2_none, u2_none,
         j2_mck(Pit, ut, nest)
     },

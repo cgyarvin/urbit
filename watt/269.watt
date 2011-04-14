@@ -1590,8 +1590,8 @@
     ~.  %find
     |=  [way=*<%nest %read %rite> cog=*term]
     =-  ?~  hoq
-          ::  ~~  ~(tem go `@`cog)
-          ::  ~~  dump
+          ~~  ~(tem go `@`cog)
+          ~~  dump
           ~|(%find-fail !!)
         u.hoq
     ^=  hoq
@@ -1820,6 +1820,13 @@
     ^-  [p=*type q=*form]
     =<  $
     &.
+    ++  coke
+      |=  [nug=*form]
+      ?-    nug
+          [0 *]   p.nug
+          [10 *]  $(nug q.nug)
+          *       ~|(%mint-coke !!)
+      --
     ++  crow
       |=  [mel=*<%gold %iron %lead %zinc> ruf=*gene dab=*(map term foot)]
       =+  dan=$$(gen ruf, gol %noun)
@@ -1846,10 +1853,7 @@
       ::
           [%csbn *]                                                   ::  ?=
         :-  (nice flag)
-        =+  vol=q:$(gen q.gen, gol %noun)
-        ?.  ?=([0 *] vol)
-          ~|(%mint-like !!)
-        (fish(sut (play p.gen)) p.vol)
+        (fish(sut (play p.gen)) (coke q:$(gen q.gen, gol %noun)))
       ::
           [%csdg *]                                                   ::  ?:
         =+  nor=$(gen p.gen, gol flag)
