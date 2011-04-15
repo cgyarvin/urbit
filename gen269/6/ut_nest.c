@@ -540,7 +540,7 @@
   j2_mcj(Pit, ut, nest)[] = {
     { ".3", c3__hevy, 
         j2_mc(Pit, ut, nest), 
-        u2_jet_live | u2_jet_test,
+        Tier6_b_memo,
         u2_none, u2_none,
         j2_mck(Pit, ut, nest)
     },

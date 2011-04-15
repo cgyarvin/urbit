@@ -385,8 +385,7 @@
   j2_mcj(Pit, ut, find)[] = {
     { ".3", c3__hevy, 
         j2_mc(Pit, ut, find), 
-        // Tier6_b_memo,
-        u2_jet_dead,
+        Tier6_b_memo,
         u2_none, u2_none,
         j2_mck(Pit, ut, find)
     },
