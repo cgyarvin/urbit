@@ -739,7 +739,7 @@
         [s=* c=*]
       ?-    c.bol
           @   (vel c.bol)
-          *
+          ^
         :-  [%ly '[' ']']
         |-  
         ?-    c.bol
@@ -763,7 +763,7 @@
     ?-    bol
         @             bol
         [s=~ c=*]     bol
-        [s=%nd c=*]   (dub nyd)
+        :: [s=%nd c=*]   (dub nyd)
     --
   ==
 

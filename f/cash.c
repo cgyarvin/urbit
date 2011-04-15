@@ -455,7 +455,9 @@ _cs_save_b(u2_rail ral_r,
           u2_ray tol_r = u2_slot_b_sid_i(lot_r, j_w);
 
           if ( u2_slot_is_a(tol_r) ) {
-            if ( u2_yes == u2_sing(sam, u2_slot_a_sam(tol_r)) ) {
+            if ( (sel_m == u2_slot_a_sel(tol_r)) &&
+                 (u2_yes == u2_sing(sam, u2_slot_a_sam(tol_r))) )
+            {
               if ( u2_no == u2_sing(pro, u2_slot_a_pro(tol_r)) ) {
                 u2_rz(ral_r, u2_slot_a_pro(tol_r));
                 u2_slot_a_pro(tol_r) = u2_rx(ral_r, pro);

@@ -331,16 +331,24 @@
       if ( !(jet_j->sat_s & u2_jet_memo) ) {
         return _nest_dext_in(wir_r, van, sut, ref, gil);
       } else {
-        c3_m    fun_m = (0x7fffffff & (c3_w)jet_j);
-        u2_noun pro   = u2_rl_find_cell(wir_r, fun_m, sut, ref);
+        c3_m    sel_m = (0x7fffffff & (c3_w)jet_j);
+        u2_noun pro   = u2_rl_find_cell(wir_r, sel_m, sut, ref);
 
         if ( u2_none != pro ) {
+          if ( (u2_no == pro) && (c3__noun == sut) ) {
+            printf("sel_m: %x\n", sel_m);
+            c3_assert(!"remembered something very strange");
+          }
           return pro;
         }
         else {
           pro = _nest_dext_in(wir_r, van, sut, ref, gil);
 
-          return u2_rl_save_cell(wir_r, fun_m, sut, ref, pro);
+          if ( (u2_no == pro) && (c3__noun == sut) ) {
+            printf("sel_m: %x\n", sel_m);
+            c3_assert(!"discovered something very strange");
+          }
+          return u2_rl_save_cell(wir_r, sel_m, sut, ref, pro);
         }
       }
     }
@@ -540,7 +548,7 @@
   j2_mcj(Pit, ut, nest)[] = {
     { ".3", c3__hevy, 
         j2_mc(Pit, ut, nest), 
-        Tier6_b_memo,
+        u2_jet_live | u2_jet_memo,
         u2_none, u2_none,
         j2_mck(Pit, ut, nest)
     },

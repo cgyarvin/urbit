@@ -1832,8 +1832,9 @@
       =+  dan=$$(gen ruf, gol %noun)
       =+  toc=(core p.dan [%gold p.dan [~ dab]])
       =+  dez=(bake(sut toc) dab)
-      :-  (nice (core p.dan mel p.dan [dez dab]))
-      (cons q.dan [1 dez])
+      :*  (nice (core p.dan mel p.dan [dez dab]))
+          (cons q.dan [1 dez])
+      --
     ::
     ++  nice
       |=  typ=*type
