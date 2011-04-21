@@ -1,7 +1,0 @@
-&%  %pmmt   "pammit"
-
-  gene:
-    [%pmmt p=*gene q=*gene r=*(map term foot)]
-
-  ap open:
-    [%bnpd p.gen [%bnpd q.gen [%pmzp %iron r.gen]]]

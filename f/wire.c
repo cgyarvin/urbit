@@ -64,6 +64,20 @@ u2_wr_init(c3_m   hip_m,
   return wir_r;
 }
 
+        /* u2_wr_save():
+        **
+        **   Save reactor noun to basket.
+        */
+          u2_noun
+          u2_wr_save(u2_ray wir_r);
+
+        /* u2_wr_nuke():
+        **
+        **   Reinitialize the reactor partition.
+        */
+          u2_noun
+          u2_wr_nuke(u2_ray wir_r);
+
 /* u2_wr_ice(): u2_rl_ice(), with u2_bx_copy().
 */
 u2_weak

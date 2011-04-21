@@ -77,7 +77,7 @@
     u2_noun key = u2_bc(wir_r, u2_rx(wir_r, sut), u2_rx(wir_r, leg));
 
     if ( u2_yes == j2_mcc(Pit, in, has)(wir_r, fan, key) ) {
-      return u2_bl_bail(wir_r, c3__fail);
+      return u2_bl_error(wir_r, "rest-loop");
     }
     else {
       u2_noun naf = j2_mcc(Pit, in, put)(wir_r, fan, key);
@@ -172,7 +172,7 @@
       fol = u2_t(cor);
 
       pro = u2_ho_use(wir_r, jet_j, cor, fol);
-      c3_assert(pro != u2_none);
+      if ( u2_none == pro ) return u2_bl_bail(wir_r, c3__fail);
 
       u2_rz(wir_r, cor);
       u2_rz(wir_r, fol);

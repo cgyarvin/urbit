@@ -123,7 +123,7 @@
         u2_noun hud = u2_bc(wir_r, sut, ref);
 
         if ( u2_yes == j2_mcc(Pit, in, has)(wir_r, bix, hud) ) {
-          return u2_bl_bail(wir_r, c3__fail);
+          return u2_bl_error(wir_r, "fuse-loop");
         } else {
           u2_noun bux = j2_mcc(Pit, in, put)(wir_r, bix, hud);
           u2_noun ret = _fuse_repo(wir_r, van, sut, ref, bux);
@@ -224,7 +224,7 @@
       fol = u2_t(cor);
 
       pro = u2_ho_use(wir_r, jet_j, cor, fol);
-      c3_assert(pro != u2_none);
+      if ( u2_none == pro ) return u2_bl_bail(wir_r, c3__fail);
 
       u2_rz(wir_r, cor);
       u2_rz(wir_r, fol);

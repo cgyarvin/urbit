@@ -18,7 +18,7 @@
     u2_mp(a_mp, a);
     u2_mp(b_mp, b);
 
-    cmp = (mpz_cmp(a_mp, b_mp) > 0) ? u3_yes : u3_no;
+    cmp = (mpz_cmp(a_mp, b_mp) > 0) ? u2_yes : u2_no;
 
     mpz_clear(a_mp);
     mpz_clear(b_mp);

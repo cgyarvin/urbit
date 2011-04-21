@@ -40,18 +40,15 @@
         u2_noun rex = j2_mcy(Pit, ap, open)(wir_r, gen);
 
         if ( u2_yes == u2_sing(rex, gen) ) {
-          u2_err(wir_r, "open: loop: gen", gen);
-          c3_assert(0);
+          return u2_bl_error(wir_r, "play-open");
         } else { 
-          {
-            u2_noun ret = _play_in(wir_r, van, sut, rex);
+          u2_noun ret = _play_in(wir_r, van, sut, rex);
 
-            u2_rl_lose(wir_r, rex);
-            return ret;
-          }
+          u2_rl_lose(wir_r, rex);
+          return ret;
         }
       }
-      
+   
       case c3__bnld: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       {
         return _play_in(wir_r, van, _play_in(wir_r, van, sut, p_gen), q_gen);
@@ -312,7 +309,7 @@
       fol = u2_t(cor);
 
       pro = u2_ho_use(wir_r, jet_j, cor, fol);
-      c3_assert(pro != u2_none);
+      if ( u2_none == pro ) return u2_bl_bail(wir_r, c3__fail);
 
       u2_rz(wir_r, cor);
       u2_rz(wir_r, fol);

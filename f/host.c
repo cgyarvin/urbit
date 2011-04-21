@@ -477,6 +477,9 @@ _ho_abstract(u2_noun xip,                                         //  retain
       if ( (u2_yes == u2_sing_c(fcs_c, u2_h(i_nut))) ) {
         u2_noun fal = u2_t(i_nut);
 
+        while ( (u2_yes == u2_dust(fal)) && (u2_nock_hint == u2_h(fal)) ) {
+          fal = u2_t(u2_t(fal));
+        }
         /* `fal` must match `[9 x [0 1]]`
         */
         if ( (u2_yes == u2_dust(fal)) && (u2_nock_kick == u2_h(fal)) ) {
@@ -501,6 +504,7 @@ _ho_abstract(u2_noun xip,                                         //  retain
             }
           }
         }
+        printf("weird! cos_c %s\n", u2_ho_cstring(xip));
         u2_ho_warn_here();
         return 0;
       }

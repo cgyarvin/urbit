@@ -18,8 +18,10 @@
       default: return u2_bl_bail(wir_r, c3__fail);
 
       case c3__atom: return _0;
-      case c3__void: return u2_bl_bail(wir_r, c3__fail);
       case c3__noun: return _0;
+      case c3__void: {
+        return u2_bl_error(wir_r, "burn-void");
+      }
     }
     else switch ( u2_h(sut) ) {
       default: return u2_bl_bail(wir_r, c3__fail);

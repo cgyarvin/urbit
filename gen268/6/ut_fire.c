@@ -50,7 +50,7 @@
           if ( (u2_yes == vet) && 
                (u2_no == j2_mcy(Pit, ut, nest)(wir_r, van, qq_sut, p_sut)) )
           {
-            return u2_bl_bail(wir_r, c3__fail);
+            return u2_bl_error(wir_r, "fire-metl");
           }
           ret = u2_rx(wir_r, dox);
         }
@@ -59,7 +59,7 @@
                (u2_no == u2_sing(p_sut, qq_sut)) &&
                _fire_levy(wir_r, van, sut, dox, hag) )
           {
-            return u2_bl_bail(wir_r, c3__fail);
+            return u2_bl_error(wir_r, "fire-wood");
           }
           ret = u2_rx(wir_r, sut);
         }
@@ -146,7 +146,7 @@
       fol = u2_t(cor);
 
       pro = u2_ho_use(wir_r, jet_j, cor, fol);
-      c3_assert(pro != u2_none);
+      if ( u2_none == pro ) return u2_bl_bail(wir_r, c3__fail);
 
       u2_rz(wir_r, cor);
       u2_rz(wir_r, fol);

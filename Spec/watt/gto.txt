@@ -1,5 +1,3 @@
-Chars
---
   bar   |       
   bon   =       
   bot   '       

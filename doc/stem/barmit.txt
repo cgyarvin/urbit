@@ -1,7 +1,0 @@
-|%  %brmt   "barmit"
-
-  gene:
-    [%brmt p=*gene q=*gene r=*gene]
-
-  ap open:
-    [%pmmt p.gen q.gen [[%% [& q.gen]] ~ ~]]

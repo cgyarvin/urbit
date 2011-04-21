@@ -19,7 +19,7 @@
   ^-  @
   ?:  .=(0 a)
     1
-  (mul 2 $(a (dec a)))
+  (mul $(a (dec a)) 2)
 ::
 ++  dec
   ~.  %dec
@@ -620,7 +620,7 @@
   ++  tap
     ~.  %tap
     |*  b=*(list)
-    |-  ^-  b
+    |-  ^-  *(list <?>(?=(^ a) n.a)>)
     ?~  a
       b
     $(a r.a, b [n.a $(a l.a)])
@@ -1690,6 +1690,7 @@
         ~|('fire-wood' !!)
       sut
 ::  ~(tap in (~(gas in *(set gene)) hag))
+::  ~(tap in (~(gas in *(set gene)) hag))
     hag
   ::
   ++  fish
@@ -1839,8 +1840,8 @@
     ++  nice
       |=  typ=*type
       ?.  ?|(!vet (nest(sut gol) typ))
-        ::  ~|  [%need |.((~(fly to dump(sut gol)) 75))]
-        ::  ~|  [%have |.((~(fly to dump(sut typ)) 75))]
+        ~~  dump(sut gol)
+        ~~  dump(sut typ)
         ~|('mint-nice' !!)
       typ
     ::

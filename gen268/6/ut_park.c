@@ -34,7 +34,7 @@
         switch ( pq_sut ) {
           default: return u2_bl_bail(wir_r, c3__fail);
 
-          case c3__gold: u2_yes;
+          case c3__gold: return u2_yes;
           case c3__iron: return u2_yes;
           case c3__lead: return u2_sing(_3, j2_mbc(Pit, cap)(wir_r, axe));
           case c3__wood: return u2_yes;
@@ -140,7 +140,7 @@
       fol = u2_t(cor);
 
       pro = u2_ho_use(wir_r, jet_j, cor, fol);
-      c3_assert(pro != u2_none);
+      if ( u2_none == pro ) return u2_bl_bail(wir_r, c3__fail);
 
       u2_rz(wir_r, cor);
       u2_rz(wir_r, fol);

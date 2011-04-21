@@ -72,7 +72,7 @@
             if ( _2 == tip ) {
               if ( u2_no == j2_mcy(Pit, ut, park)(wir_r, van, sut, way, tap) ) 
               {
-                return u2_bl_bail(wir_r, c3__fail);
+                return u2_bl_error(wir_r, "peek-park");
               }
               else pro = j2_mcx(Pit, ut, peek)(wir_r, van, p_sut, way, tap);
             }
@@ -224,7 +224,7 @@
       fol = u2_t(cor);
 
       pro = u2_ho_use(wir_r, jet_j, cor, fol);
-      c3_assert(pro != u2_none);
+      if ( u2_none == pro ) return u2_bl_bail(wir_r, c3__fail);
 
       u2_rz(wir_r, cor);
       u2_rz(wir_r, fol);

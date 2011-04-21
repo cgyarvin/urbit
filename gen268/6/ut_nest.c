@@ -45,7 +45,7 @@
       u2_bi_cell(wir_r, n_dab, &pn_dab, &qn_dab);
       u2_bi_cell(wir_r, n_hem, &pn_hem, &qn_hem);
 
-      if ( pn_dab != pn_hem ) {
+      if ( u2_no == u2_sing(pn_dab, pn_hem) ) {
         return u2_no;
       } else {
         if ( (u2_no == u2_dust(qn_dab)) || (u2_no == u2_dust(qn_hem)) ) {
@@ -510,7 +510,7 @@
       fol = u2_t(cor);
 
       pro = u2_ho_use(wir_r, jet_j, cor, fol);
-      c3_assert(pro != u2_none);
+      if ( u2_none == pro ) return u2_bl_bail(wir_r, c3__fail);
 
       u2_rz(wir_r, cor);
       u2_rz(wir_r, fol);
