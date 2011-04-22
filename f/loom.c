@@ -508,6 +508,13 @@ u2_sing(u2_noun a,
   }
 }
 
+u2_flag
+u2_fing(u2_noun a, 
+        u2_noun b)
+{
+  return (a == b) ? u2_yes : u2_no;
+}
+
 /* u2_sing_cell():
 **
 **   Yes iff `[p q]` and `b` are the same noun.
@@ -521,8 +528,17 @@ u2_sing_cell(u2_noun p,
                 u2_and(u2_sing(p, u2_h(b)), 
                        u2_sing(q, u2_t(b))));
 }
+u2_flag
+u2_fing_cell(u2_noun p,
+             u2_noun q,
+             u2_noun b)
+{
+  return u2_and(u2_dust(b),
+                u2_and(u2_fing(p, u2_h(b)), 
+                       u2_fing(q, u2_t(b))));
+}
 
-/* u2_sing_cell():
+/* u2_sing_mixt():
 **
 **   Yes iff `[p q]` and `b` are the same noun.
 */
@@ -534,6 +550,15 @@ u2_sing_mixt(const c3_c* p_c,
   return u2_and(u2_dust(b),
                 u2_and(u2_sing_c(p_c, u2_h(b)), 
                        u2_sing(q, u2_t(b))));
+}
+u2_flag
+u2_fing_mixt(const c3_c* p_c,
+             u2_noun     q,
+             u2_noun     b)
+{
+  return u2_and(u2_dust(b),
+                u2_and(u2_sing_c(p_c, u2_h(b)), 
+                       u2_fing(q, u2_t(b))));
 }
 
 /* u2_sing_trel():
@@ -550,6 +575,16 @@ u2_sing_trel(u2_noun p,
                 u2_and(u2_sing(p, u2_h(b)), 
                        u2_sing_cell(q, r, u2_t(b))));
 }
+u2_flag
+u2_fing_trel(u2_noun p,
+             u2_noun q,
+             u2_noun r,
+             u2_noun b)
+{
+  return u2_and(u2_dust(b),
+                u2_and(u2_fing(p, u2_h(b)), 
+                       u2_fing_cell(q, r, u2_t(b))));
+}
 
 /* u2_sing_qual():
 **
@@ -565,6 +600,17 @@ u2_sing_qual(u2_noun p,
   return u2_and(u2_dust(b),
                 u2_and(u2_sing(p, u2_h(b)), 
                        u2_sing_trel(q, r, s, u2_t(b))));
+}
+u2_flag
+u2_fing_qual(u2_noun p,
+             u2_noun q,
+             u2_noun r,
+             u2_noun s,
+             u2_noun b)
+{
+  return u2_and(u2_dust(b),
+                u2_and(u2_fing(p, u2_h(b)), 
+                       u2_fing_trel(q, r, s, u2_t(b))));
 }
 
 /* u2_nord():

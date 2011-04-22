@@ -10,26 +10,24 @@ static u2_flag
 _ds_mate(u2_noun xip,                                             //  retain
          u2_noun cor)                                             //  retain
 {
-  u2_noun dac_xip, bat_xip, pet_xip;
+  u2_noun dac, bat, pet;
 
-  u2_as_trel(xip, &dac_xip, &bat_xip, &pet_xip);
+  u2_as_trel(xip, &dac, &bat, &pet);
 
-  if ( u2_no == u2_sing(bat_xip, u2_t(cor)) ) {
-    return u2_no;
-  }
-  else if ( u2_nul == pet_xip ) {
-    return u2_yes;
-  }
-  else { 
-    u2_noun axe = u2_h(pet_xip);
-    u2_noun led = u2_t(pet_xip);
+  //  Very important for performance that we mate top-down.
+  //  Reason: duplicates are much more common in shallower
+  //  batteries, and duplicate comparison is always slow.
+  //
+  if ( u2_nul != pet ) {
+    u2_noun axe = u2_h(pet);
+    u2_noun led = u2_t(pet);
     u2_noun ruc = u2_frag(axe, cor);
  
-    if ( u2_none == ruc ) {
+    if ( (u2_none == ruc) || (u2_no == _ds_mate(led, ruc)) ) {
       return u2_no;
     }
-    else return _ds_mate(led, ruc);
-  }
+  } 
+  return u2_sing(bat, u2_t(cor));
 }
 
 /* _ds_scan(): linear search for matching chip.
@@ -58,7 +56,8 @@ u2_ds_find(u2_wire wir_r,
   if ( u2_no == u2_dust(cor) ) {
     return u2_none;
   } else {
-    u2_noun pug = u2_cs_find(u2_wire_des_r(wir_r), 0, u2_t(cor));
+    u2_rail bas_r = u2_wire_bas_r(wir_r);
+    u2_noun pug = u2_cs_find(bas_r, u2_wire_des_r(wir_r), 0, u2_t(cor));
 
     if ( u2_none == pug ) {
       return u2_none;
@@ -161,7 +160,7 @@ _ds_chip(u2_wire wir_r,
         return u2_none;
       }
     }
-
+#if 1
     /* battery: bat
     */
     {
@@ -170,7 +169,29 @@ _ds_chip(u2_wire wir_r,
         u2_rz(bas_r, dac); return u2_none;
       }
     }
+#endif
+#if 0
+    /* bat: battery
+    */
+    {
+      // Important to reuse existing battery even if it does not match
+      // the whole chip - since battery is a comparison key, we don't
+      // want duplicates, which compare slowly.
+      //
+      if ( u2_nul == pug ) {
+        bat = u2_rx(bas_r, u2_t(cor));
+      }
+      else {
+        u2_noun i_pug = u2_h(pug);
+        bat = u2_rx(bas_r, u2_h(u2_t(i_pug)));
+      }
 
+      if ( u2_none == bat ) {
+        u2_ho_warn_here();
+        u2_rz(bas_r, dac); return u2_none;
+      }
+    }
+#endif
     /* trunk: pet
     */
     {
@@ -223,7 +244,7 @@ u2_ds_mine(u2_wire wir_r,
   } else {
     u2_noun pay = u2_h(cor);
     u2_noun bat = u2_t(cor);
-    u2_noun pug = u2_cs_find(u2_wire_des_r(wir_r), 0, bat);
+    u2_noun pug = u2_cs_find(bas_r, u2_wire_des_r(wir_r), 0, bat);
     u2_noun xip, bat_xip;
     u2_noun gop;
 
@@ -245,7 +266,7 @@ u2_ds_mine(u2_wire wir_r,
     else bat_xip = u2_h(u2_t(xip));
 
     if ( bat_xip != bat ) {
-      u2_noun cyr = u2_rc(wir_r, u2_rx(wir_r, pay), u2_h(u2_t(xip)));
+      u2_noun cyr = u2_rc(wir_r, u2_rx(wir_r, pay), bat_xip);
 
       if ( u2_none == cyr ) {
         return cor;

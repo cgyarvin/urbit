@@ -56,18 +56,18 @@
     */
       typedef struct {
         /*  sel_m: opaque, unique function identity (0 for nock)
-        **  sam:   sample
+        **  sap:   sample list
         **  pro:   product
         */
         c3_m    sel_m;
-        u2_noun sam;
+        u2_noun sap;
         u2_noun pro;
       } u2_cash_slot_a;
 
       typedef u2_cash_slot_a u2_cash_slot;
 
 #       define u2_slot_a_sel(lot_r)  *u2_at(lot_r, u2_cash_slot_a, sel_m)
-#       define u2_slot_a_sam(lot_r)  *u2_at(lot_r, u2_cash_slot_a, sam)
+#       define u2_slot_a_sap(lot_r)  *u2_at(lot_r, u2_cash_slot_a, sap)
 #       define u2_slot_a_pro(lot_r)  *u2_at(lot_r, u2_cash_slot_a, pro)
 
 #       define u2_slot_gunk_coll (7 << 29)
@@ -121,7 +121,8 @@
     **   Find `sam` for `sel`, or return `u2_none`.
     */
       u2_weak                                                     //  discover
-      u2_cs_find(u2_ray  lot_r,
+      u2_cs_find(u2_ray  ral_r,
+                 u2_ray  lot_r,
                  c3_m    sel_m,
                  u2_noun sam);                                    //  retain
 
@@ -130,7 +131,8 @@
     **   Find `[a b]` for `sel`, or return `u2_none`.
     */
       u2_weak                                                     //  retain
-      u2_cs_find_cell(u2_ray  lot_r,
+      u2_cs_find_cell(u2_ray  ral_r,
+                      u2_ray  lot_r,
                       c3_m    sel_m,
                       u2_noun a,                                  //  retain
                       u2_noun b);                                 //  retain
@@ -140,7 +142,8 @@
     **   Find `[a b]` for `sel`, or return `u2_none`.
     */
       u2_weak                                                     //  retain
-      u2_cs_find_mixt(u2_ray      lot_r,
+      u2_cs_find_mixt(u2_ray      ral_r,
+                      u2_ray      lot_r,
                       c3_m        sel_m,
                       const c3_c* a_c,                            //  retain
                       u2_noun     b);                             //  retain
@@ -150,7 +153,8 @@
     **   Find `[a b c]` for `sel`, or return `u2_none`.
     */
       u2_weak                                                     //  retain
-      u2_cs_find_trel(u2_ray  lot_r,
+      u2_cs_find_trel(u2_ray  ral_r,
+                      u2_ray  lot_r,
                       c3_m    sel_m,
                       u2_noun a,                                  //  retain
                       u2_noun b,                                  //  retain
@@ -161,7 +165,8 @@
     **   Find `[a b c d]` for `sel`, or return `u2_none`.
     */
       u2_weak                                                     //  retain
-      u2_cs_find_qual(u2_ray  lot_r,
+      u2_cs_find_qual(u2_ray  ral_r,
+                      u2_ray  lot_r,
                       c3_m    sel_m,
                       u2_noun a,                                  //  retain
                       u2_noun b,                                  //  retain
@@ -172,12 +177,12 @@
     **
     **   Save `sam` as `pro` for `sel`.  Replace existing `pro`, if any.
     */
-      u2_noun                                                     //  transfer
+      u2_noun                                                     //  produce
       u2_cs_save(u2_ray  ral_r,
                  u2_ray  lot_r,
                  c3_m    sel_m,
                  u2_noun sam,                                     //  retain
-                 u2_noun pro);                                    //  transfer
+                 u2_noun pro);                                    //  submit
 
     /* u2_cs_save_cell():
     **

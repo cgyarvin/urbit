@@ -2039,7 +2039,7 @@ u2_rl_find(u2_ray  ral_r,
   } else {
     u2_ray  sop_r = u2_rail_rut_r(ral_r);
     u2_ray  lot_r = u2_soup_lot_r(sop_r);
-    u2_noun pro   = u2_cs_find(lot_r, fun_m, sam);
+    u2_noun pro   = u2_cs_find(ral_r, lot_r, fun_m, sam);
 
     return u2_rx(ral_r, pro);
   }
@@ -2060,7 +2060,7 @@ u2_rl_find_cell(u2_ray  ral_r,
   } else {
     u2_ray  sop_r = u2_rail_rut_r(ral_r);
     u2_ray  lot_r = u2_soup_lot_r(sop_r);
-    u2_noun pro   = u2_cs_find_cell(lot_r, fun_m, a, b);
+    u2_noun pro   = u2_cs_find_cell(ral_r, lot_r, fun_m, a, b);
 
     return u2_rx(ral_r, pro);
   }
@@ -2082,7 +2082,7 @@ u2_rl_find_trel(u2_ray  ral_r,
   } else {
     u2_ray  sop_r = u2_rail_rut_r(ral_r);
     u2_ray  lot_r = u2_soup_lot_r(sop_r);
-    u2_noun pro   = u2_cs_find_trel(lot_r, fun_m, a, b, c);
+    u2_noun pro   = u2_cs_find_trel(ral_r, lot_r, fun_m, a, b, c);
 
     return u2_rx(ral_r, pro);
   }
@@ -2105,7 +2105,7 @@ u2_rl_find_qual(u2_ray  ral_r,
   } else {
     u2_ray  sop_r = u2_rail_rut_r(ral_r);
     u2_ray  lot_r = u2_soup_lot_r(sop_r);
-    u2_noun pro   = u2_cs_find_qual(lot_r, fun_m, a, b, c, d);
+    u2_noun pro   = u2_cs_find_qual(ral_r, lot_r, fun_m, a, b, c, d);
 
     return u2_rx(ral_r, pro);
   }

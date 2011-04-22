@@ -26,6 +26,7 @@
     */
     typedef u2_noun hi_shoz;                  //  type is PitZ type
     typedef u2_noun hi_shoa;                  //  type is PitA type
+    typedef u2_noun hi_shob;                  //  type is PitB type
 
     /* struct hill_state
     */
@@ -1079,10 +1080,12 @@ hill_boot(void)
         }
         else {
           soa = _hill_z_boot(wir_r, FileA);
+          fprintf(stderr, "soa: %x\n", u2_mug(soa));
           u2_bl_done(wir_r, kit_r);
         }
       }
-      fprintf(stderr, "{hard boot: %s, with %s jets}\n", FileA, FileZ);
+      fprintf(stderr, "{hard boot: %s, with %s jets: %x}\n", 
+          FileA, FileZ, u2_mug(soa));
       Hill->soa = u2_rl_take(u2_wire_bas_r(wir_r), soa);
       u2_rl_fall(wir_r);
 
@@ -1105,10 +1108,12 @@ hill_boot(void)
         }
         else {
           sob = _hill_a_boot(wir_r, soa, FileB);
+          fprintf(stderr, "sob: %x\n", u2_mug(sob));
           u2_bl_done(wir_r, kit_r);
         }
       }
-      fprintf(stderr, "{soft boot: %s, with %s}\n", FileB, FileA);
+      fprintf(stderr, "{soft boot: %s, with %s: %x}\n", 
+          FileB, FileA, u2_mug(sob));
       Hill->sob = u2_rl_take(u2_wire_bas_r(wir_r), sob);
       u2_rl_fall(wir_r);
 
@@ -1134,6 +1139,8 @@ hill_lose(struct hill_state* hil_h)                               //  submit
   u2_rz(wir_r, hil_h->sob);
 }
 
+int FooBar;
+
 /* hill_line(): execute a hill command line.
 */
 void
@@ -1143,6 +1150,7 @@ hill_line(struct hill_state* hil_h,
   u2_wire wir_r = hil_h->wir_r;
   hi_shoa soa   = hil_h->soa;
   hi_shoz sob   = hil_h->sob;
+  hi_shob soc;
   const c3_c* out_c = 0;
 
   u2_bx_boot(wir_r);
@@ -1152,6 +1160,7 @@ hill_line(struct hill_state* hil_h,
   //
 #if 1
   if ( !strcmp(lin_c, "!") ) {
+    FooBar = 1;
     {
       u2_ray  kit_r = u2_bl_open(wir_r);
 
@@ -1160,9 +1169,9 @@ hill_line(struct hill_state* hil_h,
         fprintf(stderr, "{no boot, c}\n");
       }
       else {
-        fprintf(stderr, "{test boot: %s, with %s}\n", FileC, FileB);
-        sob = _hill_b_boot(wir_r, soa, sob, FileC);
-        fprintf(stderr, "{good boot: %s, with %s}\n", FileC, FileB);
+        soc = _hill_b_boot(wir_r, soa, sob, FileC);
+        fprintf(stderr, "{test boot: %s, with %s: %x}\n", FileC, FileB,
+            u2_mug(soc));
         u2_bl_done(wir_r, kit_r);
       }
       LoomStop = 0;

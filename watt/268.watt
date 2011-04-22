@@ -1,6 +1,6 @@
 ~%    %watt.268
     ~ 
-  (%ut ut, %go go, %to to)
+  ()
 &.
 ::
   ::  Tier 1, atomic arithmetic
@@ -1029,7 +1029,7 @@
   --
 ::
 ++  ap
-  ~%  %ap   ->  (%mold mold, %open open, %rake rake, %sift sift)
+  ~%  %ap  ->  (%mold mold, %open open, %rake rake, %sift sift)
   &=  gen=*gene
   ++  mold
     ~.  %mold

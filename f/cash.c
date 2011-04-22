@@ -12,11 +12,185 @@
     static u2_flag
     _cs_save_b(u2_rail, u2_ray, c3_w, c3_w, c3_m, u2_noun, u2_noun);
 
+/* _cs_find_sap(): check if sample matches list; if not, add.
+*/
+static u2_flag
+_cs_find_sap(u2_rail ral_r,
+             u2_ray  lot_r,
+             u2_noun sam)                                         //  retain
+{
+  u2_noun sap = u2_slot_a_sap(lot_r);
+  {
+    u2_noun pos = sap;
+
+    while ( u2_nul != pos ) {
+      if ( u2_yes == u2_fing(sam, u2_h(pos)) ) {
+        return u2_yes;
+      }
+      pos = u2_t(pos);
+    }
+  }
+  if ( u2_yes == u2_sing(sam, u2_h(sap)) ) {
+    if ( u2_no == u2_rl_junior(ral_r, sam) ) {
+      u2_slot_a_sap(lot_r) = u2_rc(ral_r, u2_rx(ral_r, sam), sap);
+    }
+    return u2_yes;
+  }
+  else return u2_no;
+}
+
+/* _cs_find_sap_cell(): _cs_find_sap() for cell.
+*/
+static u2_flag
+_cs_find_sap_cell(u2_rail ral_r,
+                  u2_ray  lot_r,
+                  u2_noun a_sam,                                  //  retain
+                  u2_noun b_sam)                                  //  retain
+{
+  u2_noun sap = u2_slot_a_sap(lot_r);
+  {
+    u2_noun pos = sap;
+
+    while ( u2_nul != pos ) {
+      if ( u2_yes == u2_fing_cell(a_sam, b_sam, u2_h(pos)) ) {
+        return u2_yes;
+      }
+      pos = u2_t(pos);
+    }
+  }
+  if ( u2_yes == u2_sing_cell(a_sam, b_sam, u2_h(sap)) ) {
+    if ( (u2_no == u2_rl_junior(ral_r, a_sam)) &&
+         (u2_no == u2_rl_junior(ral_r, b_sam)) )
+    {
+      u2_noun sam = u2_rc(ral_r, u2_rx(ral_r, a_sam),
+                                 u2_rx(ral_r, b_sam));
+
+      if ( u2_none != sam ) {
+        u2_slot_a_sap(lot_r) = u2_rc(ral_r, sam, sap);
+      }
+    }
+    return u2_yes;
+  }
+  else return u2_no;
+}
+
+/* _cs_find_sap_mixt(): _cs_find_sap() for mixed cell.
+*/
+static u2_flag
+_cs_find_sap_mixt(u2_rail     ral_r,
+                  u2_ray      lot_r,
+                  const c3_c* a_sam_c,                            //  retain
+                  u2_noun     b_sam)                              //  retain
+{
+  u2_noun sap = u2_slot_a_sap(lot_r);
+  {
+    u2_noun pos = sap;
+
+    while ( u2_nul != pos ) {
+      if ( u2_yes == u2_fing_mixt(a_sam_c, b_sam, u2_h(pos)) ) {
+        return u2_yes;
+      }
+      pos = u2_t(pos);
+    }
+  }
+  if ( u2_yes == u2_sing_mixt(a_sam_c, b_sam, u2_h(sap)) ) {
+    if ( u2_no == u2_rl_junior(ral_r, b_sam) ) {
+      u2_noun sam = u2_rc(ral_r, u2_rl_string(ral_r, a_sam_c),
+                                 u2_rx(ral_r, b_sam));
+
+      if ( u2_none != sam ) {
+        u2_slot_a_sap(lot_r) = u2_rc(ral_r, sam, sap);
+      }
+    }
+    return u2_yes;
+  }
+  else return u2_no;
+}
+
+/* _cs_find_sap_trel(): _cs_find_sap() for cell.
+*/
+static u2_flag
+_cs_find_sap_trel(u2_rail ral_r,
+                  u2_ray  lot_r,
+                  u2_noun a_sam,                                  //  retain
+                  u2_noun b_sam,                                  //  retain
+                  u2_noun c_sam)                                  //  retain
+{
+  u2_noun sap = u2_slot_a_sap(lot_r);
+  {
+    u2_noun pos = sap;
+
+    while ( u2_nul != pos ) {
+      if ( u2_yes == u2_fing_trel(a_sam, b_sam, c_sam, u2_h(pos)) ) {
+        return u2_yes;
+      }
+      pos = u2_t(pos);
+    }
+  }
+  if ( u2_yes == u2_sing_trel(a_sam, b_sam, c_sam, u2_h(sap)) ) {
+    if ( (u2_no == u2_rl_junior(ral_r, a_sam)) &&
+         (u2_no == u2_rl_junior(ral_r, b_sam)) &&
+         (u2_no == u2_rl_junior(ral_r, c_sam)) )
+    {
+      u2_noun sam = u2_rt(ral_r, u2_rx(ral_r, a_sam),
+                                 u2_rx(ral_r, b_sam),
+                                 u2_rx(ral_r, c_sam));
+
+      if ( u2_none != sam ) {
+        u2_slot_a_sap(lot_r) = u2_rc(ral_r, sam, sap);
+      }
+    }
+    return u2_yes;
+  }
+  else return u2_no;
+}
+
+/* _cs_find_sap_qual(): _cs_find_sap() for cell.
+*/
+static u2_flag
+_cs_find_sap_qual(u2_rail ral_r,
+                  u2_ray  lot_r,
+                  u2_noun a_sam,                                  //  retain
+                  u2_noun b_sam,                                  //  retain
+                  u2_noun c_sam,                                  //  retain
+                  u2_noun d_sam)                                  //  retain
+{
+  u2_noun sap = u2_slot_a_sap(lot_r);
+  {
+    u2_noun pos = sap;
+
+    while ( u2_nul != pos ) {
+      if ( u2_yes == u2_fing_qual(a_sam, b_sam, c_sam, d_sam, u2_h(pos)) ) {
+        return u2_yes;
+      }
+      pos = u2_t(pos);
+    }
+  }
+  if ( u2_yes == u2_sing_qual(a_sam, b_sam, c_sam, d_sam, u2_h(sap)) ) {
+    if ( (u2_no == u2_rl_junior(ral_r, a_sam)) &&
+         (u2_no == u2_rl_junior(ral_r, b_sam)) &&
+         (u2_no == u2_rl_junior(ral_r, c_sam)) &&
+         (u2_no == u2_rl_junior(ral_r, d_sam)) )
+    {
+      u2_noun sam = u2_rq(ral_r, u2_rx(ral_r, a_sam),
+                                 u2_rx(ral_r, b_sam),
+                                 u2_rx(ral_r, c_sam),
+                                 u2_rx(ral_r, d_sam));
+
+      if ( u2_none != sam ) {
+        u2_slot_a_sap(lot_r) = u2_rc(ral_r, sam, sap);
+      }
+    }
+    return u2_yes;
+  }
+  else return u2_no;
+}
 
 /* _cs_find_1()::
 */
 static u2_weak                                                    //  retain
-_cs_find_1(u2_ray  lot_r,
+_cs_find_1(u2_rail ral_r,
+           u2_ray  lot_r,
            c3_w    key_w,
            c3_w    sif_w,
            c3_m    sel_m,
@@ -25,7 +199,7 @@ _cs_find_1(u2_ray  lot_r,
   top: {
     if ( u2_slot_is_a(lot_r) ) {
       if ( (sel_m == u2_slot_a_sel(lot_r)) &&
-           (u2_yes == u2_sing(sam, u2_slot_a_sam(lot_r)) ) )
+           (u2_yes == _cs_find_sap(ral_r, lot_r, sam)) )
       {
         return u2_slot_a_pro(lot_r);
       } else {
@@ -47,7 +221,7 @@ _cs_find_1(u2_ray  lot_r,
 
           if ( u2_slot_is_a(tol_r) &&
               (sel_m == u2_slot_a_sel(tol_r)) &&
-              (u2_yes == u2_sing(sam, u2_slot_a_sam(tol_r)) ) )
+              (u2_yes == _cs_find_sap(ral_r, tol_r, sam)) ) 
           {
             return u2_slot_a_pro(tol_r);
           }
@@ -70,7 +244,8 @@ _cs_find_1(u2_ray  lot_r,
 /* _cs_find_2()::
 */
 static u2_weak                                                    //  retain
-_cs_find_2(u2_ray  lot_r,
+_cs_find_2(u2_rail ral_r,
+           u2_ray  lot_r,
            c3_w    key_w,
            c3_w    sif_w,
            c3_m    sel_m,
@@ -80,7 +255,7 @@ _cs_find_2(u2_ray  lot_r,
   top: {
     if ( u2_slot_is_a(lot_r) ) {
       if ( (sel_m == u2_slot_a_sel(lot_r)) &&
-           (u2_yes == u2_sing_cell(a, b, u2_slot_a_sam(lot_r)) ) )
+           (u2_yes == _cs_find_sap_cell(ral_r, lot_r, a, b)) )
       {
         return u2_slot_a_pro(lot_r);
       } else {
@@ -102,7 +277,7 @@ _cs_find_2(u2_ray  lot_r,
 
           if ( u2_slot_is_a(tol_r) &&
               (sel_m == u2_slot_a_sel(tol_r)) &&
-              (u2_yes == u2_sing_cell(a, b, u2_slot_a_sam(tol_r)) ) )
+              (u2_yes == _cs_find_sap_cell(ral_r, tol_r, a, b)) ) 
           {
             return u2_slot_a_pro(tol_r);
           }
@@ -125,7 +300,8 @@ _cs_find_2(u2_ray  lot_r,
 /* _cs_find_2m()::
 */
 static u2_weak                                                    //  retain
-_cs_find_2m(u2_ray      lot_r,
+_cs_find_2m(u2_rail     ral_r,
+            u2_ray      lot_r,
             c3_w        key_w,
             c3_w        sif_w,
             c3_m        sel_m,
@@ -135,7 +311,7 @@ _cs_find_2m(u2_ray      lot_r,
   top: {
     if ( u2_slot_is_a(lot_r) ) {
       if ( (sel_m == u2_slot_a_sel(lot_r)) &&
-           (u2_yes == u2_sing_mixt(a_c, b, u2_slot_a_sam(lot_r)) ) )
+           (u2_yes == _cs_find_sap_mixt(ral_r, lot_r, a_c, b)) )
       {
         return u2_slot_a_pro(lot_r);
       } else {
@@ -157,7 +333,7 @@ _cs_find_2m(u2_ray      lot_r,
 
           if ( u2_slot_is_a(tol_r) &&
               (sel_m == u2_slot_a_sel(tol_r)) &&
-              (u2_yes == u2_sing_mixt(a_c, b, u2_slot_a_sam(tol_r)) ) )
+              (u2_yes == _cs_find_sap_mixt(ral_r, tol_r, a_c, b)) )
           {
             return u2_slot_a_pro(tol_r);
           }
@@ -180,7 +356,8 @@ _cs_find_2m(u2_ray      lot_r,
 /* _cs_find_3()::
 */
 static u2_weak                                                    //  retain
-_cs_find_3(u2_ray  lot_r,
+_cs_find_3(u2_rail ral_r,
+           u2_ray  lot_r,
            c3_w    key_w,
            c3_w    sif_w,
            c3_m    sel_m,
@@ -191,7 +368,7 @@ _cs_find_3(u2_ray  lot_r,
   top: {
     if ( u2_slot_is_a(lot_r) ) {
       if ( (sel_m == u2_slot_a_sel(lot_r)) &&
-           (u2_yes == u2_sing_trel(a, b, c, u2_slot_a_sam(lot_r)) ) )
+           (u2_yes == _cs_find_sap_trel(ral_r, lot_r, a, b, c) ) )
       {
         return u2_slot_a_pro(lot_r);
       } else {
@@ -213,7 +390,7 @@ _cs_find_3(u2_ray  lot_r,
 
           if ( u2_slot_is_a(tol_r) &&
               (sel_m == u2_slot_a_sel(tol_r)) &&
-              (u2_yes == u2_sing_trel(a, b, c, u2_slot_a_sam(tol_r)) ) )
+              (u2_yes == _cs_find_sap_trel(ral_r, tol_r, a, b, c) ) )
           {
             return u2_slot_a_pro(tol_r);
           }
@@ -236,7 +413,8 @@ _cs_find_3(u2_ray  lot_r,
 /* _cs_find_4()::
 */
 static u2_weak                                                    //  retain
-_cs_find_4(u2_ray  lot_r,
+_cs_find_4(u2_rail ral_r,
+           u2_ray  lot_r,
            c3_w    key_w,
            c3_w    sif_w,
            c3_m    sel_m,
@@ -248,7 +426,7 @@ _cs_find_4(u2_ray  lot_r,
   top: {
     if ( u2_slot_is_a(lot_r) ) {
       if ( (sel_m == u2_slot_a_sel(lot_r)) &&
-           (u2_yes == u2_sing_qual(a, b, c, d, u2_slot_a_sam(lot_r)) ) )
+           (u2_yes == _cs_find_sap_qual(ral_r, lot_r, a, b, c, d) ) )
       {
         return u2_slot_a_pro(lot_r);
       } else {
@@ -270,7 +448,7 @@ _cs_find_4(u2_ray  lot_r,
 
           if ( u2_slot_is_a(tol_r) &&
               (sel_m == u2_slot_a_sel(tol_r)) &&
-              (u2_yes == u2_sing_qual(a, b, c, d, u2_slot_a_sam(tol_r)) ) )
+              (u2_yes == _cs_find_sap_qual(ral_r, tol_r, a, b, c, d) ) )
           {
             return u2_slot_a_pro(tol_r);
           }
@@ -295,13 +473,14 @@ _cs_find_4(u2_ray  lot_r,
 **   Find `sam` for `sel`, or return `u2_none`.
 */
 u2_weak                                                           //  retain
-u2_cs_find(u2_ray  lot_r,
+u2_cs_find(u2_rail ral_r,
+           u2_ray  lot_r,
            c3_m    sel_m,
            u2_noun sam)                                           //  retain
 {
   c3_w key_w = u2_mug(sel_m) ^ u2_mug(sam);
 
-  return _cs_find_1(lot_r, key_w, 0, sel_m, sam);
+  return _cs_find_1(ral_r, lot_r, key_w, 0, sel_m, sam);
 }
 
 /* u2_cs_find_cell():
@@ -309,14 +488,15 @@ u2_cs_find(u2_ray  lot_r,
 **   Find `[a b]` for `sel`, or return `u2_none`.
 */
 u2_weak                                                           //  retain
-u2_cs_find_cell(u2_ray  lot_r,
+u2_cs_find_cell(u2_rail ral_r,
+                u2_ray  lot_r,
                 c3_m    sel_m,
                 u2_noun a,                                        //  retain
                 u2_noun b)                                        //  retain
 {
   c3_w key_w = u2_mug(sel_m) ^ u2_mug_cell(a, b);
 
-  return _cs_find_2(lot_r, key_w, 0, sel_m, a, b);
+  return _cs_find_2(ral_r, lot_r, key_w, 0, sel_m, a, b);
 }
 
 /* u2_cs_find_mixt():
@@ -324,7 +504,8 @@ u2_cs_find_cell(u2_ray  lot_r,
 **   Find `[a b]` for `sel`, or return `u2_none`.
 */
 u2_weak                                                     //  retain
-u2_cs_find_mixt(u2_ray      lot_r,
+u2_cs_find_mixt(u2_rail     ral_r,
+                u2_ray      lot_r,
                 c3_m        sel_m,
                 const c3_c* a_c,                            //  retain
                 u2_noun     b)                              //  retain
@@ -332,7 +513,7 @@ u2_cs_find_mixt(u2_ray      lot_r,
   c3_w mug_w = u2_mug_both(u2_mug_string(a_c), u2_mug(b));
   c3_w key_w = u2_mug(sel_m) ^ mug_w;
 
-  return _cs_find_2m(lot_r, key_w, 0, sel_m, a_c, b);
+  return _cs_find_2m(ral_r, lot_r, key_w, 0, sel_m, a_c, b);
 }
 
 /* u2_cs_find_trel():
@@ -340,7 +521,8 @@ u2_cs_find_mixt(u2_ray      lot_r,
 **   Find `[a b]` for `sel`, or return `u2_none`.
 */
 u2_weak                                                           //  retain
-u2_cs_find_trel(u2_ray  lot_r,
+u2_cs_find_trel(u2_rail ral_r,
+                u2_ray  lot_r,
                 c3_m    sel_m,
                 u2_noun a,                                        //  retain
                 u2_noun b,                                        //  retain
@@ -348,7 +530,7 @@ u2_cs_find_trel(u2_ray  lot_r,
 {
   c3_w key_w = u2_mug(sel_m) ^ u2_mug_trel(a, b, c);
 
-  return _cs_find_3(lot_r, key_w, 0, sel_m, a, b, c);
+  return _cs_find_3(ral_r, lot_r, key_w, 0, sel_m, a, b, c);
 }
 
 /* u2_cs_find_qual():
@@ -356,7 +538,8 @@ u2_cs_find_trel(u2_ray  lot_r,
 **   Find `[a b]` for `sel`, or return `u2_none`.
 */
 u2_weak                                                           //  retain
-u2_cs_find_qual(u2_ray  lot_r,
+u2_cs_find_qual(u2_rail ral_r,
+                u2_ray  lot_r,
                 c3_m    sel_m,
                 u2_noun a,                                        //  retain
                 u2_noun b,                                        //  retain
@@ -365,20 +548,20 @@ u2_cs_find_qual(u2_ray  lot_r,
 {
   c3_w key_w = u2_mug(sel_m) ^ u2_mug_qual(a, b, c, d);
 
-  return _cs_find_4(lot_r, key_w, 0, sel_m, a, b, c, d);
+  return _cs_find_4(ral_r, lot_r, key_w, 0, sel_m, a, b, c, d);
 }
 
 /* _cs_save_c(): add to slot of type c.
 */
 static u2_flag
-_cs_save_c(u2_ray  ral_r,
+_cs_save_c(u2_rail ral_r,
            u2_ray  lot_r,
            c3_m    sel_m,
-           u2_noun sam,                                           //  retain
+           u2_noun sap,                                           //  retain
            u2_noun pro)                                           //  retain
 {
   u2_slot_a_sel(lot_r) = sel_m;
-  u2_slot_a_sam(lot_r) = u2_rx(ral_r, sam);
+  u2_slot_a_sap(lot_r) = u2_rx(ral_r, sap);
   u2_slot_a_pro(lot_r) = u2_rx(ral_r, pro);
 
   return u2_yes;
@@ -413,14 +596,14 @@ _cs_more_b(u2_rail ral_r,
 
     if ( u2_slot_is_a(tol_r) ) {
       c3_m    sel_m = u2_slot_a_sel(tol_r);
-      u2_noun sam   = u2_slot_a_sam(tol_r);
+      u2_noun sap   = u2_slot_a_sap(tol_r);
       u2_noun pro   = u2_slot_a_pro(tol_r);
-      c3_w    key_w = u2_mug(sel_m) ^ u2_mug(sam);
+      c3_w    key_w = u2_mug(sel_m) ^ u2_mug(u2_h(sap));
 
-      if ( u2_no == _cs_save_b(ral_r, lot_r, key_w, sif_w, sel_m, sam, pro) ) {
-        u2_rz(ral_r, sam);
-        u2_rz(ral_r, pro);
-      }
+      _cs_save_b(ral_r, lot_r, key_w, sif_w, sel_m, sap, pro);
+
+      u2_rz(ral_r, sap);
+      u2_rz(ral_r, pro);
     }
   }
   u2_rl_rfree(ral_r, sid_r);
@@ -434,7 +617,7 @@ _cs_save_b(u2_rail ral_r,
            c3_w    key_w,
            c3_w    sif_w,
            c3_m    sel_m,
-           u2_noun sam,                                           //  retain
+           u2_noun sap,                                           //  retain
            u2_noun pro)                                           //  retain
 {
   top: {
@@ -456,7 +639,7 @@ _cs_save_b(u2_rail ral_r,
 
           if ( u2_slot_is_a(tol_r) ) {
             if ( (sel_m == u2_slot_a_sel(tol_r)) &&
-                 (u2_yes == u2_sing(sam, u2_slot_a_sam(tol_r))) )
+                 (u2_yes == _cs_find_sap(ral_r, tol_r, u2_h(sap))) )
             {
               if ( u2_no == u2_sing(pro, u2_slot_a_pro(tol_r)) ) {
                 u2_rz(ral_r, u2_slot_a_pro(tol_r));
@@ -468,7 +651,7 @@ _cs_save_b(u2_rail ral_r,
           else if ( u2_slot_is_c(tol_r) ) {
             u2_slot_b_rag(lot_r) += 1;
 
-            return _cs_save_c(ral_r, tol_r, sel_m, sam, pro);
+            return _cs_save_c(ral_r, tol_r, sel_m, sap, pro);
           }
           j_w = ((j_w + 1) & 15);
         }
@@ -481,7 +664,7 @@ _cs_save_b(u2_rail ral_r,
                                 u2_slot_b_sid_i(lot_r, i_w), 
                                 key_w, 
                                 (sif_w + 4), 
-                                sel_m, sam, pro);
+                                sel_m, sap, pro);
       if ( u2_yes == ave ) {
         u2_slot_b_rag(lot_r) += 1;
       }
@@ -498,11 +681,11 @@ _cs_save_a(u2_rail ral_r,
            c3_w    key_w,
            c3_w    sif_w,
            c3_m    sel_m,
-           u2_noun sam,                                           //  retain
+           u2_noun sap,                                           //  retain
            u2_noun pro)                                           //  retain
 {
   if ( (sel_m == u2_slot_a_sel(lot_r)) &&
-       (u2_yes == u2_sing(sam, u2_slot_a_sam(lot_r)) ) ) 
+       (u2_yes == _cs_find_sap(ral_r, lot_r, u2_h(sap)) ) ) 
   {
     if ( u2_no == u2_sing(pro, u2_slot_a_pro(lot_r)) ) {
       u2_rz(ral_r, u2_slot_a_pro(lot_r));
@@ -516,9 +699,9 @@ _cs_save_a(u2_rail ral_r,
       return u2_no;
     } else {
       c3_m lus_m  = u2_slot_a_sel(lot_r);
-      u2_noun mas = u2_slot_a_sam(lot_r);
+      u2_noun pes = u2_slot_a_sap(lot_r);
       u2_noun rop = u2_slot_a_pro(lot_r);
-      c3_w yek_w  = u2_mug(lus_m) ^ u2_mug(mas);
+      c3_w yek_w  = u2_mug(lus_m) ^ u2_mug(u2_h(pes));
       u2_flag ave;
 
       u2_slot_b_gun(lot_r) = u2_slot_gunk_coll;
@@ -535,13 +718,15 @@ _cs_save_a(u2_rail ral_r,
         }
       }
 
-      ave = _cs_save_b(ral_r, lot_r, yek_w, sif_w, lus_m, mas, rop);
-      c3_assert(u2_yes == ave);
+      {
+        ave = _cs_save_b(ral_r, lot_r, yek_w, sif_w, lus_m, pes, rop);
+        c3_assert(u2_yes == ave);
 
-      u2_rz(ral_r, mas);
-      u2_rz(ral_r, rop);
+        u2_rz(ral_r, pes);
+        u2_rz(ral_r, rop);
+      }
 
-      return _cs_save_b(ral_r, lot_r, key_w, sif_w, sel_m, sam, pro);
+      return _cs_save_b(ral_r, lot_r, key_w, sif_w, sel_m, sap, pro);
     }
   }
 }
@@ -556,16 +741,18 @@ _cs_save_in(u2_rail ral_r,
             c3_w    key_w,
             c3_w    sif_w,
             c3_m    sel_m,
-            u2_noun sam,                                          //  retain
+            u2_noun sap,                                          //  retain
             u2_noun pro)                                          //  retain
 {
   if ( u2_slot_is_a(lot_r) ) {
-    return _cs_save_a(ral_r, lot_r, key_w, sif_w, sel_m, sam, pro);
+    return _cs_save_a(ral_r, lot_r, key_w, sif_w, sel_m, sap, pro);
   }
   else if ( u2_slot_is_b(lot_r) ) {
-    return _cs_save_b(ral_r, lot_r, key_w, sif_w, sel_m, sam, pro);
+    return _cs_save_b(ral_r, lot_r, key_w, sif_w, sel_m, sap, pro);
   }
-  else return _cs_save_c(ral_r, lot_r, sel_m, sam, pro);
+  else {
+    return _cs_save_c(ral_r, lot_r, sel_m, sap, pro);
+  }
 }
 
 /* u2_cs_save():
@@ -581,8 +768,11 @@ u2_cs_save(u2_rail ral_r,
 {
   c3_w key_w = u2_mug(sel_m) ^ u2_mug(sam);
   c3_w sif_w = 0;
+  u2_noun sap = u2_rc(ral_r, u2_rx(ral_r, sam), u2_nul);
 
-  _cs_save_in(ral_r, lot_r, key_w, sif_w, sel_m, sam, pro);
+  _cs_save_in(ral_r, lot_r, key_w, sif_w, sel_m, sap, pro);
+
+  u2_rz(ral_r, sap);
   return pro;
 }
 

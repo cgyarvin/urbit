@@ -496,6 +496,62 @@
           u2_mug_both(c3_w a_w,
                       c3_w b_w);
 
+        /* u2_fing():
+        **
+        **   Yes iff (a) and (b) are the same copy of the same noun.
+        **   (Ie, by pointer equality - u2_sing with false negatives.)
+        */
+          u2_flag
+          u2_fing(u2_noun a,
+                  u2_noun b);
+
+        /* u2_fing_c():
+        **
+        **   Yes iff (b) is the same copy of the same noun as the C string [a].
+        */
+          u2_flag
+          u2_fing_c(const c3_c* a_c,
+                    u2_noun     b);
+
+        /* u2_fing_cell():
+        **
+        **   Yes iff `[p q]` and `b` are the same copy of the same noun.
+        */
+          u2_flag
+          u2_fing_cell(u2_noun p,
+                       u2_noun q,
+                       u2_noun b);
+
+        /* u2_fing_mixt():
+        **
+        **   Yes iff `[p q]` and `b` are the same copy of the same noun.
+        */
+          u2_flag
+          u2_fing_mixt(const c3_c* p_c,
+                       u2_noun     q,
+                       u2_noun     b);
+
+        /* u2_fing_trel():
+        **
+        **   Yes iff `[p q r]` and `b` are the same copy of the same noun.
+        */
+          u2_flag
+          u2_fing_trel(u2_noun p,
+                       u2_noun q,
+                       u2_noun r,
+                       u2_noun b);
+
+        /* u2_fing_qual():
+        **
+        **   Yes iff `[p q r s]` and `b` are the same copy of the same noun.
+        */
+          u2_flag
+          u2_fing_qual(u2_noun p,
+                       u2_noun q,
+                       u2_noun r,
+                       u2_noun s,
+                       u2_noun b);
+
         /* u2_sing():
         **
         **   Yes iff (a) and (b) are the same noun.

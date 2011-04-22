@@ -19,7 +19,7 @@
   ^-  @
   ?:  .=(0 a)
     1
-  (mul 2 $(a (dec a)))
+  (mul $(a (dec a)) 2)
 ::
 ++  dec
   ~.  %dec
