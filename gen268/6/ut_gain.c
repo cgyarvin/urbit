@@ -51,7 +51,7 @@
         } else {
           u2_noun rac = j2_mcy(Pit, ap, rake)(wir_r, q_gen);
           u2_noun hap = j2_mcy(Pit, ut, play)(wir_r, van, sut, p_gen);
-          u2_noun guz = j2_mcy(Pit, ut, seek)(wir_r, van, sut, c3__nest, rac);
+          u2_noun guz = j2_mcy(Pit, ut, seek)(wir_r, van, sut, c3__read, rac);
           u2_noun axe = u2_h(guz);
           u2_noun ret = j2_mcy(Pit, ut, cull)(wir_r, van, sut, axe, hap);
 

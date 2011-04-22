@@ -27,18 +27,14 @@
       u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       u2_bi_cell(wir_r, q_sut, &pq_sut, 0);
 
-      if ( c3__nest == way ) {
-        return u2_yes;
-      }
-      else if ( c3__read == way ) {
+      if ( c3__read == way ) {
         switch ( pq_sut ) {
           default: return u2_bl_bail(wir_r, c3__fail);
 
           case c3__gold: return u2_yes;
-          case c3__iron: return u2_yes;
-          case c3__lead: return u2_sing(_3, j2_mbc(Pit, cap)(wir_r, axe));
+          case c3__iron: return u2_no;
+          case c3__lead: return u2_sing(_2, j2_mbc(Pit, cap)(wir_r, axe));
           case c3__wood: return u2_yes;
-          case c3__zinc: return u2_sing(_3, j2_mbc(Pit, cap)(wir_r, axe));
         }
       }
       else if ( c3__rite == way ) {
@@ -46,21 +42,9 @@
           default: return u2_bl_bail(wir_r, c3__fail);
 
           case c3__gold: return u2_yes;
-          case c3__iron: return u2_sing(_3, j2_mbc(Pit, cap)(wir_r, axe));
-          case c3__lead: return u2_yes;
+          case c3__iron: return u2_sing(_2, j2_mbc(Pit, cap)(wir_r, axe));
+          case c3__lead: return u2_no;
           case c3__wood: return u2_yes;
-          case c3__zinc: 
-          {
-            if ( u2_sing(_2, j2_mbc(Pit, cap)(wir_r, axe)) ) {
-              return u2_yes;
-            } else {
-              u2_noun lat = j2_mbc(Pit, mas)(wir_r, axe);
-
-              return u2_and
-                (u2_not(u2_sing(_1, lat)),
-                 u2_sing(_3, j2_mbc(Pit, cap)(wir_r, axe)));
-            }
-          }
         }
       }
       else return u2_bl_bail(wir_r, c3__fail);

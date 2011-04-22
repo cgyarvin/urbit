@@ -408,7 +408,7 @@
       case c3__pmbn: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       {
         u2_noun ruf = u2_bq(wir_r, c3__dgdp, u2_rx(wir_r, p_gen), u2_nul, _1);
-        u2_noun ret = _mint_crow(wir_r, van, sut, gol, c3__lead, ruf, q_gen);
+        u2_noun ret = _mint_crow(wir_r, van, sut, gol, c3__iron, ruf, q_gen);
 
         u2_rz(wir_r, ruf);
         return ret;
@@ -416,7 +416,7 @@
       case c3__pmdg: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       {
         u2_noun ruf = u2_bq(wir_r, c3__dgdp, u2_rx(wir_r, p_gen), u2_nul, _1);
-        u2_noun ret = _mint_crow(wir_r, van, sut, gol, c3__iron, ruf, q_gen);
+        u2_noun ret = _mint_crow(wir_r, van, sut, gol, c3__lead, ruf, q_gen);
 
         u2_rz(wir_r, ruf);
         return ret;
@@ -426,18 +426,6 @@
         u2_noun ruf = u2_bc(wir_r, u2_nul, _1);
 
         ret = _mint_crow(wir_r, van, sut, gol, c3__gold, ruf, p_gen);
-        u2_rz(wir_r, ruf);
-
-        return ret;
-      }
-      case c3__pmmt: u2_bi_trel(wir_r, u2_t(gen), &p_gen, &q_gen, &r_gen);
-      {
-        u2_noun ruf = u2_bt
-          (wir_r, c3__dgdp, 
-                  u2_rx(wir_r, p_gen),
-                  u2_bq(wir_r, c3__dgdp, u2_rx(wir_r, q_gen), u2_nul, _1));
-
-        ret = _mint_crow(wir_r, van, sut, gol, c3__zinc, ruf, r_gen);
         u2_rz(wir_r, ruf);
 
         return ret;
@@ -471,8 +459,10 @@
       }
       case c3__zpbn: p_gen = u2_t(gen);
       {
-        u2_noun sev = _mint_make(wir_r, van, sut, c3__noun, p_gen);
+        u2_noun von = u2_bn_molt(wir_r, van, j2_ut_van_vet, u2_no, 0);
+        u2_noun sev = _mint_make(wir_r, von, sut, c3__noun, p_gen);
 
+        u2_rz(wir_r, von);
         return u2_bc(wir_r, c3__noun, u2_bc(wir_r, _1, sev));
       }
       case c3__zpcb: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);

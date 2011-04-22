@@ -143,7 +143,7 @@
         u2_noun dim = _play_in(wir_r, van, sut, p_gen);
         u2_noun gur = j2_mby(Pit, cell)(wir_r, dim, sut);
         u2_noun zun = u2_bc(wir_r, u2_bc(wir_r, 0, 0), u2_rx(wir_r, q_gen));
-        u2_noun con = u2_bt(wir_r, c3__lead, u2_rx(wir_r, gur), zun);
+        u2_noun con = u2_bt(wir_r, c3__iron, u2_rx(wir_r, gur), zun);
         u2_noun ret = j2_mby(Pit, core)(wir_r, gur, con);
 
         u2_rz(wir_r, dim);
@@ -157,7 +157,7 @@
         u2_noun dim = _play_in(wir_r, van, sut, p_gen);
         u2_noun gur = j2_mby(Pit, cell)(wir_r, dim, sut);
         u2_noun zun = u2_bc(wir_r, u2_bc(wir_r, 0, 0), u2_rx(wir_r, q_gen));
-        u2_noun con = u2_bt(wir_r, c3__iron, u2_rx(wir_r, gur), zun);
+        u2_noun con = u2_bt(wir_r, c3__lead, u2_rx(wir_r, gur), zun);
         u2_noun ret = j2_mby(Pit, core)(wir_r, gur, con);
 
         u2_rz(wir_r, dim);
@@ -173,24 +173,6 @@
         u2_noun ret = j2_mby(Pit, core)(wir_r, sut, con);
 
         u2_rz(wir_r, con);
-        return ret;
-      }
-      case c3__pmmt: u2_bi_trel(wir_r, u2_t(gen), &p_gen, &q_gen, &r_gen);
-      {
-        u2_noun dim = _play_in(wir_r, van, sut, p_gen);
-        u2_noun hen = _play_in(wir_r, van, sut, q_gen);
-        u2_noun sib = j2_mby(Pit, cell)(wir_r, hen, sut);
-        u2_noun gur = j2_mby(Pit, cell)(wir_r, dim, sib);
-        u2_noun zun = u2_bc(wir_r, u2_bc(wir_r, 0, 0), u2_rx(wir_r, r_gen));
-        u2_noun con = u2_bt(wir_r, c3__zinc, u2_rx(wir_r, gur), zun);
-        u2_noun ret = j2_mby(Pit, core)(wir_r, gur, con);
-
-        u2_rz(wir_r, dim);
-        u2_rz(wir_r, hen);
-        u2_rz(wir_r, sib);
-        u2_rz(wir_r, gur);
-        u2_rz(wir_r, con);
-
         return ret;
       }
       case c3__pmtr: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);

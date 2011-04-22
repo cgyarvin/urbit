@@ -1,6 +1,39 @@
+::  bar   |       
+::  bon   =       
+::  bot   '       
+::  cab   _       
+::  com   ,       
+::  cas   ?       
+::  dap   -     
+::  dax   #       
+::  deg   :       
+::  den   [
+::  des   {
+::  dot   .       
+::  del   <
+::  ket   ^
+::  lep   (       
+::  led   >
+::  mit   %       
+::  nat   @     
+::  ned   ]
+::  nov   \
+::  pam   &       
+::  ped   +
+::  pel   )
+::  sec   $
+::  sed   }
+::  sig   ~
+::  tam   ;       
+::  tar   *
+::  tec   `
+::  tob   "
+::  von   /
+::  zap   !       
+::
 ~%    %watt.268
     ~ 
-  ()
+  (%ut ut, %go go, %to to)
 &.
 ::
   ::  Tier 1, atomic arithmetic
@@ -19,7 +52,7 @@
   ^-  @
   ?:  .=(0 a)
     1
-  (mul $(a (dec a)) 2)
+  (mul 2 $(a (dec a)))
 ::
 ++  dec
   ~.  %dec
@@ -880,7 +913,7 @@
 ::
 ++  cone
   |?
-    :+    p=*<%gold %iron %lead %wood %zinc>
+    :+    p=*<%gold %lead %iron %wood>
         q=*type
       r=[p=*<~ ^> q=*(map term foot)]
   --
@@ -937,7 +970,6 @@
     [%brdg p=*gene q=*gene]                                       ::  |:  bardeg
     [%brdp p=*gene]                                               ::  |-  bardap
     [%brdt p=*gene]                                               ::  |.  bardot
-    [%brmt p=*gene q=*gene r=*gene]                               ::  |%  barmit
     [%brsg p=*gene q=*(list gene)]                                ::  |~  barsig
     [%brtr p=*gene q=*gene]                                       ::  |*  bartar
   ::
@@ -985,7 +1017,6 @@
     [%pmdg p=*gene q=*(map term foot)]                            ::  &:  pamdeg
     [%pmdp p=*gene q=*(map term foot)]                            ::  &-  pamdap
     [%pmdt p=*(map term foot)]                                    ::  &.  pamdot
-    [%pmmt p=*gene q=*gene r=*(map term foot)]                    ::  &%  pammit
     [%pmtr p=*gene q=*(map term foot)]                            ::  &*  pamtar
   ::
     [%sgbn p=*gene q=*gene]                                       ::  ~=  sigbon
@@ -1074,7 +1105,6 @@
         [%brdp *]   [%bnld [%brdt p.gen] %%]
         [%brdg *]   [%pmdg p.gen [[%% [& q.gen]] ~ ~]]
         [%brdt *]   [%pmdt [[%% [& p.gen]] ~ ~]]
-        [%brmt *]   [%pmmt p.gen q.gen [[%% [& r.gen]] ~ ~]]
         [%brsg *]
       |-
       ?-  q.gen
@@ -1530,7 +1560,7 @@
       =+  gep=?:(?=([[%% [& *]] ~ ~] q.r.q.sut) '|' '&')
       =+  ^=  nox
           ^-  @
-          ?-(p.q.sut %gold '.', %iron ':', %lead '=', %wood '*', %zinc '%')
+          ?-(p.q.sut %gold '.', %iron '=', %lead ':', %wood '*')
       =+  viq=(cat 3 gep nox)
       :^    %grip
           [(cat 3 viq '{') '}']
@@ -1588,7 +1618,7 @@
   ::
   ++  find
     ~.  %find
-    |=  [way=*<%nest %read %rite> cog=*term]
+    |=  [way=*<%read %rite> cog=*term]
     =-  ?~  hoq
           ~~  ~(tem go `@`cog)
           ~~  dump
@@ -1689,9 +1719,7 @@
         ::  ~~  dump(sut p.sut)       ::  have
         ~|('fire-wood' !!)
       sut
-::  ~(tap in (~(gas in *(set gene)) hag))
-::  ~(tap in (~(gas in *(set gene)) hag))
-    hag
+    (~(tap in (~(gas in *(set gene)) hag)) ~)
   ::
   ++  fish
     ~.  %fish
@@ -1829,7 +1857,7 @@
           *       ~|(%mint-coke !!)
       --
     ++  crow
-      |=  [mel=*<%gold %iron %lead %zinc> ruf=*gene dab=*(map term foot)]
+      |=  [mel=*<%gold %lead %iron> ruf=*gene dab=*(map term foot)]
       =+  dan=$$(gen ruf, gol %noun)
       =+  toc=(core p.dan [%gold p.dan [~ dab]])
       =+  dez=(bake(sut toc) dab)
@@ -1921,16 +1949,13 @@
         [9 p.u.q.lar q.fup]
       ::
           [%pmbn *]                                                   ::  &=
-        (crow %lead [%dgdp p.gen [~ 1]] q.gen)
+        (crow %iron [%dgdp p.gen [~ 1]] q.gen)
       ::
           [%pmdg *]                                                   ::  &:
-        (crow %iron [%dgdp p.gen [~ 1]] q.gen)
+        (crow %lead [%dgdp p.gen [~ 1]] q.gen)
       ::
           [%pmdt *]                                                   ::  &.
         (crow %gold [~ 1] p.gen)
-      ::
-          [%pmmt *]                                                   ::  &%
-        (crow %zinc [%dgdp p.gen [%dgdp q.gen [~ 1]]] r.gen)
       ::
           [%pmtr *]                                                   ::  &*
         =+  dan=$(gen [%dgdp p.gen [~ 1]], gol %noun)
@@ -1952,7 +1977,7 @@
       ::
           [%zpbn *]                                                   ::  !=
         :-  (nice %noun)
-        [1 q:$(gen p.gen)]
+        [1 q:$(vet |, gen p.gen)]
       ::
           [%zpcb *]                                                   ::  !_
         ~~  ~(loc go p.gen)
@@ -1994,40 +2019,22 @@
       ?:  .=(%wood p.q.sut)
         ?&(.=(%wood p.q.ref) .=(q.r.q.sut q.r.q.ref))
       ?&
-        ?|(.=(p.q.sut p.q.ref) .=(%lead p.q.ref))
+        ?|(.=(p.q.sut p.q.ref) .=(%gold p.q.ref))
         (cram(sut sut(p q.q.sut), ref ref(p q.q.ref)) q.r.q.sut q.r.q.ref)
         ?-    p.q.sut
             %gold
-          =+  sam=[s=(peek(sut q.q.sut) %nest 2) r=(peek(sut q.q.ref) %nest 2)]
-          =+  con=[s=(peek(sut q.q.sut) %nest 3) r=(peek(sut q.q.ref) %nest 3)]
-          ?&  dext(sut r.sam, ref s.sam)
-              dext(sut s.con, ref r.con)
-              dext(sut r.con, ref s.con)
-          --
-        ::
-            %lead
           =+  pac=[s=q.q.sut r=q.q.ref]
           ?&  dext(sut s.pac, ref r.pac)
               dext(sut r.pac, ref s.pac)
           --
         ::
             %iron
-          =+  pal=[s=(peek(sut q.q.sut) %nest 2) r=(peek(sut q.q.ref) %nest 2)]
-          =+  con=[s=(peek(sut q.q.sut) %nest 3) r=(peek(sut q.q.ref) %nest 3)]
-          ?&  dext(sut s.pal, ref r.pal)
-              dext(sut s.con, ref r.con)
-              dext(sut r.con, ref s.con)
-          --
+          =+  sam=[s=(peek(sut q.q.sut) %rite 2) r=(peek(sut q.q.ref) %rite 2)]
+          dext(sut r.sam, ref s.sam)
         ::
-            %zinc
-          =+  sam=[s=(peek(sut q.q.sut) %nest 2) r=(peek(sut q.q.ref) %nest 2)]
-          =+  pal=[s=(peek(sut q.q.sut) %nest 6) r=(peek(sut q.q.ref) %nest 6)]
-          =+  con=[s=(peek(sut q.q.sut) %nest 7) r=(peek(sut q.q.ref) %nest 7)]
-          ?&  dext(sut r.sam, ref s.sam)
-              dext(sut s.pal, ref r.pal)
-              dext(sut s.con, ref r.con)
-              dext(sut r.con, ref s.con)
-          --
+            %lead
+          =+  pal=[s=(peek(sut q.q.sut) %read 2) r=(peek(sut q.q.ref) %read 2)]
+          dext(sut s.pal, ref r.pal)
         --
       --
     ::
@@ -2147,30 +2154,25 @@
   ::
   ++  park
     ~.  %park
-    |=  [way=*<%nest %read %rite> axe=*axis]
+    |=  [way=*<%read %rite> axe=*axis]
     ^-  ?
     ?>  ?=([%core *] sut)
     ?|  
       !vet
       ?-    way
-          %nest   &
           %read
         ?-    p.q.sut
             %gold   &
-            %iron   &
-            %lead   .=(3 (cap axe))
+            %iron   | 
+            %lead   .=(2 (cap axe))
             %wood   &
-            %zinc   .=(3 (cap axe))
         --
       ::
           %rite
         ?-    p.q.sut
             %gold   &
-            %iron   .=(3 (cap axe))
-            %zinc   
-          ?|(.=(2 (cap axe)) =+(lat=(mas axe) ?&(!.=(1 lat) .=(3 (cap lat)))))
-        ::
-            %lead   &
+            %iron   .=(2 (cap axe))
+            %lead   | 
             %wood   &
         --
       --
@@ -2178,7 +2180,7 @@
   ::
   ++  peek
     ~.  %peek
-    |=  [way=*<%nest %read %rite> axe=*axis]
+    |=  [way=*<%read %rite> axe=*axis]
     ^-  *type
     ?:  .=(1 axe)
       sut
@@ -2243,16 +2245,12 @@
       (fire(sut wix) q.u.q.lar)
     ::
         [%pmbn *]
-      =+(gur=(cell $(gen p.gen) sut) (core gur %lead gur [0 0] q.gen))
-    ::
-        [%pmdg *]
       =+(gur=(cell $(gen p.gen) sut) (core gur %iron gur [0 0] q.gen))
     ::
-        [%pmdt *]   (core sut %gold sut [[0 0] p.gen])
-        [%pmmt *]
-      =+  gur=(cell $(gen p.gen) (cell $(gen q.gen) sut))
-      (core gur %zinc gur [0 0] r.gen)
+        [%pmdg *]
+      =+(gur=(cell $(gen p.gen) sut) (core gur %lead gur [0 0] q.gen))
     ::
+        [%pmdt *]   (core sut %gold sut [[0 0] p.gen])
         [%pmtr *]
       =+(gur=(cell $(gen p.gen) sut) (core gur %wood gur [0 0] q.gen))
     ::
@@ -2291,14 +2289,13 @@
     ?:  (~(has in fan) [sut leg])
       ~|(%rest-loop !!)
     =>  .(fan (~(put in fan) [sut leg]))
-    =+  gar=(turn leg |=(p=*gene (play p)))
-    =+  gun=(~(gas in *(set type)) gar)    ::  XX
-    =+  nog=(~(tap in gun) *(list type))
-    (roll nog =+([p=*type q=`*type`%void] |.((fork p q))))
+    %+  roll
+      (~(tap in (~(gas in *(set type)) (turn leg |=(p=*gene (play p))))) ~)
+    =+([p=*type q=`*type`%void] |.((fork p q)))
   ::
   ++  seek
     ~.  %seek
-    |=  [way=*<%nest %read %rite> hep=*twig]
+    |=  [way=*<%read %rite> hep=*twig]
     ^-  *port
     ?~  hep
       [1 ~ sut]

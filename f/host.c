@@ -732,6 +732,28 @@ u2_ho_test(u2_wire    wir_r,
       u2_err(wir_r, "hard", had);
 
       {
+        u2_noun sut, gol, gen, van;
+
+        if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &gol, 
+                                    u2_cv_sam_3, &gen,
+                                    u2_cv_con, &van, 0)) ||
+             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
+        {
+          c3_assert(0);
+        } else {
+          j2_mcy(watt_268, ut, dupt)(wir_r, van, "sut", sut);
+          j2_mcy(watt_268, ut, dupt)(wir_r, van, "gol", gol);
+          u2_err(wir_r, "gen", gen);
+/*
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_sof", u2_h(sof));
+          j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_had", u2_h(had));
+
+          u2_err(wir_r, "t_sof", u2_t(sof));
+          u2_err(wir_r, "t_had", u2_t(had));
+*/
+        }
+      }
+      {
         u2_noun sut, ref, van;
 
         if ( (u2_no == u2_mean(cor, u2_cv_sam, &ref, u2_cv_con, &van, 0)) ||
@@ -755,28 +777,6 @@ u2_ho_test(u2_wire    wir_r,
           c3_assert(0);
         } else {
           j2_mcy(watt_270, ut, dupt)(wir_r, van, "sut", sut);
-        }
-      }
-      {
-        u2_noun sut, gol, gen, van;
-
-        if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &gol, 
-                                    u2_cv_sam_3, &gen,
-                                    u2_cv_con, &van, 0)) ||
-             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
-        {
-          c3_assert(0);
-        } else {
-          j2_mcy(watt_271, ut, dupt)(wir_r, van, "sut", sut);
-          j2_mcy(watt_271, ut, dupt)(wir_r, van, "gol", gol);
-          u2_err(wir_r, "gen", gen);
-/*
-          j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_sof", u2_h(sof));
-          j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_had", u2_h(had));
-
-          u2_err(wir_r, "t_sof", u2_t(sof));
-          u2_err(wir_r, "t_had", u2_t(had));
-*/
         }
       }
       {
@@ -1072,7 +1072,8 @@ u2_ho_use(u2_ray     wir_r,
         }
         u2_rz(wir_r, tax);
       }
-      u2_rz(wir_r, sof);
+      u2_rz(wir_r, pro);
+      pro = sof;
     }
   }
 
@@ -1081,6 +1082,10 @@ u2_ho_use(u2_ray     wir_r,
   }
   else {
     if ( jet_j->key_f ) {
+      if ( u2_none == pro ) {
+        printf("no pro: %s\n", u2_ho_cstring(jet_j->xip));
+        return u2_none;
+      }
       pro = u2_rl_save(wir_r, fun_m, key, pro);
       u2_rz(wir_r, key);
 

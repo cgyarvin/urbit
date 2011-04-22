@@ -81,7 +81,7 @@ file
 
 gene
   : tall  { $$ = _watt_locate(ywir_r, &@1, $1); }
-  | wide  { $$ = _watt_locate(ywir_r, &@1, $1); }
+  | wide  // { $$ = _watt_locate(ywir_r, &@1, $1); }
   ;
 
 wide
@@ -874,10 +874,10 @@ _watt_locate(u2_ray  wir_r,
 {
   const YYLTYPE *llocp = vlocp;   /* bufalo estupido */
 
-#if 1
+#if 0
   return gene;
 #endif
-#if 0
+#if 1
   return u2_bt
   (wir_r,
    c3__zpcb,
