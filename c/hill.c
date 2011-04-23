@@ -42,8 +42,13 @@
         /*  sob - shoe B, type/core for PitB, File B by mint A
         */
         hi_shoa sob;
+
+        /*  soc - shoe C, type/core for PitC, File C by mint B
+        */
+        hi_shob soc;
       };
       static struct hill_state *Hill;     //  XX - always & everywhere a hack!
+
 
   /**   Direct-jet hacks.  All but PitZ should be removed.
   **/
@@ -581,7 +586,6 @@ _hill_a_hang(u2_wire     wir_r,
   return ret;
 }
 
-#if 0
 /* _hill_a_call_1(): invoke 1-argument function on core shoe; type assumed
 */
 static hi_shoa                                                    //  produce
@@ -600,7 +604,6 @@ _hill_a_call_1(u2_wire     wir_r,
 
   return ret;
 }
-#endif
 
 /* _hill_a_call_2(): invoke 1-argument function on core shoe; type assumed
 */
@@ -804,7 +807,6 @@ _hill_b_mint_txt(u2_wire wir_r,
   }
 }
 
-#if 1
 /* _hill_b_boot(): generate kernel C (with kernel B).
 */
 static u2_noun                                                    //  produce
@@ -829,7 +831,107 @@ _hill_b_boot(u2_wire     wir_r,
     return soh;
   }
 }
-#endif
+
+/* _hill_b_fly(): dump `bil` to `col`, producing wall.
+*/
+static u2_noun
+_hill_b_fly(u2_wire wir_r,
+            hi_shoz soa,
+            hi_shoa sob,
+            u2_noun bil,
+            c3_l    col_l)
+{
+  u2_noun cor = _hill_a_hang(wir_r, soa, sob, "to", bil);
+  u2_noun dog = _hill_a_call_1(wir_r, soa, cor, "fly", col_l);
+  u2_noun pro = u2_rx(wir_r, u2_t(dog));
+
+  u2_rz(wir_r, cor);
+  u2_rz(wir_r, dog);
+
+  return pro;
+}
+
+/* _hill_b_dump(): dump `typ`, producing bill.
+*/
+static u2_noun                                                    //  produce
+_hill_b_dump(u2_wire wir_r,
+             hi_shoz soa,                                         //  retain
+             hi_shoa sob,                                         //  retain
+             u2_noun typ)                                         //  retain
+{
+  u2_noun cor = _hill_a_hang(wir_r, soa, sob, "ut", typ);
+  u2_noun dog = _hill_a_make_txt_c(wir_r, soa, cor, "dump");
+  u2_noun pro = u2_rx(wir_r, u2_t(dog));
+
+  u2_rz(wir_r, cor);
+  u2_rz(wir_r, dog);
+
+  return pro;
+}
+
+/* _hill_b_print_type():
+*/
+static void
+_hill_b_print_type(u2_wire     wir_r,
+                   hi_shoz     soa,                               //  retain
+                   hi_shoa     sob,                               //  retain
+                   FILE*       fil_f,                             //  retain
+                   const c3_c* cap_c,                             //  retain
+                   u2_noun     typ)                               //  retain
+{
+  u2_noun bil = _hill_b_dump(wir_r, soa, sob, typ);
+  u2_noun wal = _hill_b_fly(wir_r, soa, sob, bil, _hill_columns());
+
+  _hill_print_wall(wir_r, fil_f, cap_c, wal);
+
+  u2_rz(wir_r, bil);
+  u2_rz(wir_r, wal);
+}
+
+/* _hill_b_fire(): execute and print expression over pit C (with shoe B).
+*/
+static void                                                       //  produce
+_hill_b_fire(u2_wire     wir_r,
+             u2_noun     soa,                                     //  retain
+             u2_noun     sob,                                     //  retain
+             u2_noun     soc,                                     //  retain
+             const c3_c* exp_c,                                   //  retain
+             const c3_c* out_c)                                   //  retain
+{
+  u2_noun txt, gam, som;
+
+  txt = u2_bn_string(wir_r, exp_c);
+  gam = _hill_b_mint_txt(wir_r, soa, sob, u2_h(soc), c3__noun, txt);
+
+  _hill_b_print_type(wir_r, soa, sob, 0, 0, u2_h(gam));
+
+  som = _hill_nock(wir_r, u2_t(soc), u2_t(gam));
+  if ( u2_none == som ) {
+    fprintf(stderr, "{none}\n");
+  }
+  else {
+    if ( !out_c ) {
+      _hill_print_noun(wir_r, 0, 0, som);
+    } else if ( !strcmp("w", out_c) ) {
+      _hill_print_wall(wir_r, 0, 0, som);
+    }
+    else if ( !strcmp("t", out_c) ) {
+      _hill_print_tape(wir_r, 0, som); printf("\n");
+    }
+    else if ( !strcmp("d", out_c) ) {
+      _hill_print_delm(wir_r, 0, som); printf("\n");
+    }
+    else if ( !strcmp("e", out_c) ) {
+      _hill_print_term(wir_r, 0, som); printf("\n");
+    }
+    else if ( !strcmp("y", out_c) ) {
+      _hill_print_type(wir_r, 0, 0, som);
+    }
+  }
+  u2_rz(wir_r, txt);
+  u2_rz(wir_r, gam);
+  u2_rz(wir_r, som);
+}
 
 /* _hill_print_delm(): print wrapper for decimal.
 */
@@ -1056,12 +1158,14 @@ hill_boot(void)
   Hill->wir_r = wir_r;
   Hill->soa = u2_none;
   Hill->sob = u2_none;
+  Hill->soc = u2_none;
 
   /* Mint the shoes.  Impeccable memory practices.
   */
   {
     u2_noun soa = u2_none;
     u2_noun sob = u2_none;
+    u2_noun soc = u2_none;
 
     do {
       /* Boot shoe A.
@@ -1083,7 +1187,7 @@ hill_boot(void)
           u2_bl_done(wir_r, kit_r);
         }
       }
-      fprintf(stderr, "{hard boot: %s, with %s jets: %x}\n", 
+      fprintf(stderr, "{cold boot: %s, with %s jets: %x}\n", 
           FileA, FileZ, u2_mug(soa));
       Hill->soa = u2_rl_take(u2_wire_bas_r(wir_r), soa);
       u2_rl_fall(wir_r);
@@ -1110,9 +1214,36 @@ hill_boot(void)
           u2_bl_done(wir_r, kit_r);
         }
       }
-      fprintf(stderr, "{soft boot: %s, with %s: %x}\n", 
+      fprintf(stderr, "{warm boot: %s, with %s: %x}\n", 
           FileB, FileA, u2_mug(sob));
       Hill->sob = u2_rl_take(u2_wire_bas_r(wir_r), sob);
+      u2_rl_fall(wir_r);
+
+      u2_bx_spot(wir_r, u2_nul);
+      u2_bx_show(wir_r);
+
+      /* Boot shoe C.
+      */
+      if ( u2_no == u2_rl_leap(wir_r, c3__rock) ) {
+        c3_assert(0);
+      }
+      {
+        u2_ray  kit_r = u2_bl_open(wir_r);
+
+        if ( u2_bl_set(wir_r) ) {
+          u2_bl_done(wir_r, kit_r);
+          u2_rl_fall(wir_r);
+          fprintf(stderr, "{no boot, c}\n");
+          break;
+        }
+        else {
+          soc = _hill_b_boot(wir_r, soa, sob, FileB);
+          u2_bl_done(wir_r, kit_r);
+        }
+      }
+      fprintf(stderr, "{warm boot: %s, with %s: %x}\n", 
+          FileC, FileB, u2_mug(soc));
+      Hill->soc = u2_rl_take(u2_wire_bas_r(wir_r), soc);
       u2_rl_fall(wir_r);
 
       u2_bx_spot(wir_r, u2_nul);
@@ -1148,7 +1279,7 @@ hill_line(struct hill_state* hil_h,
   u2_wire wir_r = hil_h->wir_r;
   hi_shoa soa   = hil_h->soa;
   hi_shoz sob   = hil_h->sob;
-  hi_shob soc;
+  hi_shob soc   = hil_h->soc;
   const c3_c* out_c = 0;
 
   u2_bx_boot(wir_r);
@@ -1156,7 +1287,7 @@ hill_line(struct hill_state* hil_h,
 
   //  XX - a heinous hack.
   //
-#if 1
+#if 0
   if ( !strcmp(lin_c, "!") ) {
     FooBar = 1;
     {
@@ -1199,7 +1330,9 @@ hill_line(struct hill_state* hil_h,
       u2_bl_done(wir_r, kit_r);
       fprintf(stderr, "{exit}\n");
     } else {
-      _hill_a_fire(wir_r, soa, sob, lin_c, out_c);
+      // _hill_a_fire(wir_r, soa, sob, lin_c, out_c);
+      _hill_b_fire(wir_r, soa, sob, soc, lin_c, out_c);
+
       u2_bl_done(wir_r, kit_r);
     }
   }
