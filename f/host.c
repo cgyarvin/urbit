@@ -1085,7 +1085,7 @@ u2_ho_use(u2_ray     wir_r,
   else {
     if ( jet_j->key_f ) {
       if ( u2_none == pro ) {
-        printf("no pro: %s\n", u2_ho_cstring(jet_j->xip));
+        // printf("no pro: %s\n", u2_ho_cstring(jet_j->xip));
         return u2_none;
       }
       pro = u2_rl_save(wir_r, fun_m, key, pro);

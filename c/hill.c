@@ -1237,7 +1237,7 @@ hill_boot(void)
           break;
         }
         else {
-          soc = _hill_b_boot(wir_r, soa, sob, FileB);
+          soc = _hill_b_boot(wir_r, soa, sob, FileC);
           u2_bl_done(wir_r, kit_r);
         }
       }
