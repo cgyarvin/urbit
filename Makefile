@@ -65,126 +65,6 @@ P_OFILES=\
        p/saur.o \
        p/watt.o
 
-J271_1_OFILES=\
-       gen271/1/add.o \
-       gen271/1/bex.o \
-       gen271/1/dec.o \
-       gen271/1/div.o \
-       gen271/1/gte.o \
-       gen271/1/gth.o \
-       gen271/1/lte.o \
-       gen271/1/lth.o \
-       gen271/1/mod.o \
-       gen271/1/mul.o \
-       gen271/1/sub.o
-
-J271_2_OFILES=\
-       gen271/2/bind.o \
-       gen271/2/clap.o \
-       gen271/2/drop.o \
-       gen271/2/flop.o \
-       gen271/2/lent.o \
-       gen271/2/levy.o \
-       gen271/2/lien.o \
-       gen271/2/need.o \
-       gen271/2/reel.o \
-       gen271/2/roll.o \
-       gen271/2/skim.o \
-       gen271/2/skip.o \
-       gen271/2/snag.o \
-       gen271/2/sort.o \
-       gen271/2/turn.o \
-       gen271/2/weld.o
-
-J271_3_OFILES=\
-       gen271/3/cap.o \
-       gen271/3/cat.o \
-       gen271/3/con.o \
-       gen271/3/cut.o \
-       gen271/3/dor.o \
-       gen271/3/dis.o \
-       gen271/3/end.o \
-       gen271/3/gor.o \
-       gen271/3/hor.o \
-       gen271/3/lsh.o \
-       gen271/3/mas.o \
-       gen271/3/met.o \
-       gen271/3/mix.o \
-       gen271/3/mug.o \
-       gen271/3/peg.o \
-       gen271/3/rap.o \
-       gen271/3/rip.o \
-       gen271/3/rsh.o \
-       gen271/3/vor.o
-
-J271_4_OFILES=\
-       gen271/4/in.o \
-       gen271/4/by.o \
-       gen271/4/in_has.o \
-       gen271/4/in_gas.o \
-       gen271/4/in_put.o \
-       gen271/4/in_tap.o \
-       gen271/4/by_gas.o \
-       gen271/4/by_get.o \
-       gen271/4/by_has.o \
-       gen271/4/by_put.o 
-
-J271_5_OFILES=\
-       gen271/5/to.o
-
-J271_6_OFILES=\
-       gen271/6/ap.o \
-       gen271/6/cell.o \
-       gen271/6/comb.o \
-       gen271/6/cons.o \
-       gen271/6/core.o \
-       gen271/6/face.o \
-       gen271/6/flan.o \
-       gen271/6/flip.o \
-       gen271/6/flor.o \
-       gen271/6/fork.o \
-       gen271/6/hack.o \
-       gen271/6/hike.o \
-       gen271/6/look.o \
-       gen271/6/ream.o \
-       gen271/6/ut.o
-
-J271_6_OFILES_UT=\
-       gen271/6/ut_bake.o \
-       gen271/6/ut_burn.o \
-       gen271/6/ut_cull.o \
-       gen271/6/ut_edit.o \
-       gen271/6/ut_emit.o \
-       gen271/6/ut_find.o \
-       gen271/6/ut_fire.o \
-       gen271/6/ut_fish.o \
-       gen271/6/ut_fret.o \
-       gen271/6/ut_fuse.o \
-       gen271/6/ut_gain.o \
-       gen271/6/ut_heal.o \
-       gen271/6/ut_mint.o \
-       gen271/6/ut_orth.o \
-       gen271/6/ut_nest.o \
-       gen271/6/ut_park.o \
-       gen271/6/ut_peek.o \
-       gen271/6/ut_play.o \
-       gen271/6/ut_repo.o \
-       gen271/6/ut_rest.o \
-       gen271/6/ut_seek.o \
-       gen271/6/ut_snap.o \
-       gen271/6/ut_tuck.o \
-       gen271/6/ut_tusk.o
-
-J271_OFILES=\
-       $(J271_1_OFILES) \
-       $(J271_2_OFILES) \
-       $(J271_3_OFILES) \
-       $(J271_4_OFILES) \
-       $(J271_5_OFILES) \
-       $(J271_6_OFILES) \
-       $(J271_6_OFILES_UT) \
-       gen271/watt.o
-
 J270_1_OFILES=\
        gen270/1/add.o \
        gen270/1/bex.o \
@@ -545,6 +425,126 @@ J268_OFILES=\
        $(J268_6_OFILES_UT) \
        gen268/watt.o
 
+J267_1_OFILES=\
+       gen267/1/add.o \
+       gen267/1/bex.o \
+       gen267/1/dec.o \
+       gen267/1/div.o \
+       gen267/1/gte.o \
+       gen267/1/gth.o \
+       gen267/1/lte.o \
+       gen267/1/lth.o \
+       gen267/1/mod.o \
+       gen267/1/mul.o \
+       gen267/1/sub.o
+
+J267_2_OFILES=\
+       gen267/2/bind.o \
+       gen267/2/clap.o \
+       gen267/2/drop.o \
+       gen267/2/flop.o \
+       gen267/2/lent.o \
+       gen267/2/levy.o \
+       gen267/2/lien.o \
+       gen267/2/need.o \
+       gen267/2/reel.o \
+       gen267/2/roll.o \
+       gen267/2/skim.o \
+       gen267/2/skip.o \
+       gen267/2/snag.o \
+       gen267/2/sort.o \
+       gen267/2/turn.o \
+       gen267/2/weld.o
+
+J267_3_OFILES=\
+       gen267/3/cap.o \
+       gen267/3/cat.o \
+       gen267/3/con.o \
+       gen267/3/cut.o \
+       gen267/3/dor.o \
+       gen267/3/dis.o \
+       gen267/3/end.o \
+       gen267/3/gor.o \
+       gen267/3/hor.o \
+       gen267/3/lsh.o \
+       gen267/3/mas.o \
+       gen267/3/met.o \
+       gen267/3/mix.o \
+       gen267/3/mug.o \
+       gen267/3/peg.o \
+       gen267/3/rap.o \
+       gen267/3/rip.o \
+       gen267/3/rsh.o \
+       gen267/3/vor.o
+
+J267_4_OFILES=\
+       gen267/4/in.o \
+       gen267/4/by.o \
+       gen267/4/in_has.o \
+       gen267/4/in_gas.o \
+       gen267/4/in_put.o \
+       gen267/4/in_tap.o \
+       gen267/4/by_gas.o \
+       gen267/4/by_get.o \
+       gen267/4/by_has.o \
+       gen267/4/by_put.o 
+
+J267_5_OFILES=\
+       gen267/5/to.o
+
+J267_6_OFILES=\
+       gen267/6/ap.o \
+       gen267/6/cell.o \
+       gen267/6/comb.o \
+       gen267/6/cons.o \
+       gen267/6/core.o \
+       gen267/6/face.o \
+       gen267/6/flan.o \
+       gen267/6/flip.o \
+       gen267/6/flor.o \
+       gen267/6/fork.o \
+       gen267/6/hack.o \
+       gen267/6/hike.o \
+       gen267/6/look.o \
+       gen267/6/ream.o \
+       gen267/6/ut.o
+
+J267_6_OFILES_UT=\
+       gen267/6/ut_bake.o \
+       gen267/6/ut_burn.o \
+       gen267/6/ut_cull.o \
+       gen267/6/ut_edit.o \
+       gen267/6/ut_emit.o \
+       gen267/6/ut_find.o \
+       gen267/6/ut_fire.o \
+       gen267/6/ut_fish.o \
+       gen267/6/ut_fret.o \
+       gen267/6/ut_fuse.o \
+       gen267/6/ut_gain.o \
+       gen267/6/ut_heal.o \
+       gen267/6/ut_mint.o \
+       gen267/6/ut_orth.o \
+       gen267/6/ut_nest.o \
+       gen267/6/ut_park.o \
+       gen267/6/ut_peek.o \
+       gen267/6/ut_play.o \
+       gen267/6/ut_repo.o \
+       gen267/6/ut_rest.o \
+       gen267/6/ut_seek.o \
+       gen267/6/ut_snap.o \
+       gen267/6/ut_tuck.o \
+       gen267/6/ut_tusk.o
+
+J267_OFILES=\
+       $(J267_1_OFILES) \
+       $(J267_2_OFILES) \
+       $(J267_3_OFILES) \
+       $(J267_4_OFILES) \
+       $(J267_5_OFILES) \
+       $(J267_6_OFILES) \
+       $(J267_6_OFILES_UT) \
+       gen267/watt.o
+
 OFILES=\
        $(C_OFILES) \
        $(F_OFILES) \
@@ -552,6 +552,7 @@ OFILES=\
        $(J270_OFILES) \
        $(J269_OFILES) \
        $(J268_OFILES) \
+       $(J267_OFILES)
 
 $(BIN)/hill: $(OFILES)
 	mkdir -p $(BIN)
