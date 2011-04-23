@@ -1080,7 +1080,6 @@ hill_boot(void)
         }
         else {
           soa = _hill_z_boot(wir_r, FileA);
-          fprintf(stderr, "soa: %x\n", u2_mug(soa));
           u2_bl_done(wir_r, kit_r);
         }
       }
@@ -1108,7 +1107,6 @@ hill_boot(void)
         }
         else {
           sob = _hill_a_boot(wir_r, soa, FileB);
-          fprintf(stderr, "sob: %x\n", u2_mug(sob));
           u2_bl_done(wir_r, kit_r);
         }
       }

@@ -652,8 +652,8 @@
   ::
   ++  tap
     ~.  %tap
-    |*  b=*(list)
-    |-  ^-  *(list <?>(?=(^ a) n.a)>)
+    |=  b=`*(list <?>(?=(^ a) n.a)>)`~
+    ^-  b
     ?~  a
       b
     $(a r.a, b [n.a $(a l.a)])
@@ -726,8 +726,8 @@
   ::
   ++  tap
     ~.  %tap
-    |*  b=*(list <[p=* q=*]>)
-    |-  ^-  b
+    |=  b=`*(list <?>(?=(^ a) n.a)>)`~
+    ^-  b
     ?~  a
       b
     $(a r.a, b [n.a $(a l.a)])
@@ -770,7 +770,7 @@
         [s=* c=*]
       ?-    c.bol
           @   (vel c.bol)
-          ^
+          *
         :-  [%ly '[' ']']
         |-  
         ?-    c.bol
@@ -794,7 +794,7 @@
     ?-    bol
         @             bol
         [s=~ c=*]     bol
-        :: [s=%nd c=*]   (dub nyd)
+        [s=%nd c=*]   (dub nyd)
     --
   ==
 
@@ -2075,10 +2075,13 @@
     ++  cong
       ^-  ?
       ?>  ?&(?=([%core *] sut) ?=([%core *] ref))   :: XX use wood
-      ?.  dext(sut p.sut, ref p.ref)
+      ?:  .=(q.sut q.ref)
+        dext(sut p.sut, ref p.ref)
+      ?.  ?&  dext(sut q.q.sut, ref p.sut)
+              dext(sut p.sut, ref q.q.sut) 
+              dext(sut q.q.ref, ref p.ref) 
+          --
         |
-      ?.  .=(q.sut q.ref)
-        &
       ?:  .=(%wood p.q.sut)
         ?&(.=(%wood p.q.ref) .=(q.r.q.sut q.r.q.ref))
       ?&

@@ -97,7 +97,10 @@
     u2_bi_cell(wir_r, rq_sut, &prq_sut, &qrq_sut);
     u2_bi_cell(wir_r, rq_ref, &prq_ref, &qrq_ref);
 
-    if ( c3__wood == pq_sut ) {
+    if ( u2_yes == u2_sing(q_sut, q_ref) ) {
+      return _nest_dext(wir_r, van, p_sut, p_ref, gil);
+    }
+    else if ( c3__wood == pq_sut ) {
       return u2_and(u2_sing(c3__wood, pq_ref), u2_sing(qrq_sut, qrq_ref));
     } else {
       if ( (pq_sut != pq_ref) && (c3__lead != pq_ref) ) {

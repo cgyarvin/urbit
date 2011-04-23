@@ -1989,7 +1989,7 @@
       ?>  ?&(?=([%core *] sut) ?=([%core *] ref))   :: XX use wood
       ?.  dext(sut p.sut, ref p.ref)
         |
-      ?.  .=(q.sut q.ref)
+      ?:  .=(q.sut q.ref)
         &
       ?:  .=(%wood p.q.sut)
         ?&(.=(%wood p.q.ref) .=(q.r.q.sut q.r.q.ref))

@@ -50,6 +50,9 @@
           if ( (u2_yes == vet) && 
                (u2_no == j2_mcy(Pit, ut, nest)(wir_r, van, qq_sut, p_sut)) )
           {
+            j2_mcy(Pit, ut, dupt)(wir_r, van, "qq_sut", qq_sut);
+            j2_mcy(Pit, ut, dupt)(wir_r, van, "p_sut", p_sut);
+
             return u2_bl_error(wir_r, "fire-metl");
           }
           ret = u2_rx(wir_r, dox);
