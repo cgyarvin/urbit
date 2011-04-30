@@ -733,11 +733,52 @@
     $(a r.a, b [n.a $(a l.a)])
   ==
 ::
-  ::  Tier 5, parsing and printing
+  ::  Tier 5, parsing and pretty-printing
 ::
-++  nyb   (nym 2 |=(a=@ (add '0' a)))
-++  nyd   (nym 10 |=(a=@ (add '0' a)))
-++  nym
+++  re
+  &=  tec=*tank
+  ++  ram
+    ^-  *tape
+    ?-    -.tec
+        %leaf  p.tec
+    ::
+        %rose
+      %+  weld
+        q.p.tec
+      |-  ^-  *tape
+      ?~  q.tec
+        r.p.tec
+      =+  voz=$(q.tec t.q.tec)
+      (weld ram(tec i.q.tec) ?~(t.q.tec voz (weld p.p.tec voz)))
+    --
+  ::
+  ++  win
+    |=  [tab=@ edg=@]
+    ^-  *wall
+    =+  lug=`*wall`~
+    |- 
+    ?-    -.tec
+        %leaf  (wind [tab edg] p.tec lug)
+        %rose
+      ?:  (fit (sub edg tab))
+        [ram lug]
+      %^    wind
+          [tab edg]
+        q.p.tec
+      |-  ^-  *wall
+      ?~  q.tec
+        (wind [tab edg] r.p.tec ~)
+      $$(tec i.q.tec, lug $(q.tec t.q.tec), tab (add 2 tab))
+    --
+  ::
+  ++  fit
+    |=  wet=@
+    (lte (lent ram) wet)
+  ==
+::
+++  slyb  (slym 2 |=(a=@ (add '0' a)))
+++  slyd  (slym 10 |=(a=@ (add '0' a)))
+++  slym
   |=  [a=@ b=|=(@ @)]
   |=  c=@
   ^-  *(list <@>)
@@ -749,55 +790,180 @@
     d
   $(c (div c a), d [(b (mod c a)) d])
 ::
-++  nyx   (nym 16 |=(a=@ (add a ?:((lth a 10) 48 87))))
-++  nyw
-  %+  nym
+++  slys  |=(a=@ `*tape`[39 (weld (mesc (rip 3 a)) `*tape`[39 ~])])
+++  slyp
+  |=  a=@
+  ^-  *tape
+  =+  b=(met 3 a)
+  &-  |-  ^-  *tape
+      ?:  (gth (met 5 a) 1)
+        %+  weld
+          $(a (rsh 5 1 a), b (sub b 4)) 
+        `*tape`['-' '-' $(a (end 5 1 a), b 4)]
+      ?:  (lte b 1)
+        fon
+      |-  ^-  *tape
+      ?:  .=(2 b)
+        =+  c=(rsh 3 1 a)
+        =+  d=(end 3 1 a)
+        (weld fon(a (mix c d)) nof(a d))
+      =+  c=(rsh 3 2 a)
+      =+  d=(end 3 2 a)
+      (weld $(a (mix c d), b 2) `*tape`['-' $(a d, b 2)])
+  ::
+  ++  fon
+    ^-  *tape
+    :~  (cut 3 [(cut 0 [0 3] a) 1] %bkflmtdy)
+        (cut 3 [(cut 0 [3 2] a) 1] %oaie)
+        (cut 3 [(cut 0 [5 3] a) 1] %xvsrpngw)
+    --
+  ::
+  ++  nof
+    ^-  *tape
+    :~  (cut 3 [(cut 0 [0 3] a) 1] %yvswpmqd)
+        (cut 3 [(cut 0 [3 2] a) 1] %euia)
+        (cut 3 [(cut 0 [5 3] a) 1] %bcflntrz)
+    --
+  ==
+::
+++  slyq
+  |=  a=@
+  ^-  *tape
+  ?:  ?&  (gte (met 3 a) 2)
+          |-
+          ?:  .=(0 a)
+            &
+          =+  vis=(end 3 1 a)
+          ?&(?|(.=('-' vis) ?&((gte vis 'a') (lte vis 'z'))) $(a (rsh 3 1 a)))
+      --
+    (slys a)
+  ?:  (lte (met 3 a) 2)
+    (slyd a)
+  (slyx a)
+::
+++  slyv
+  %+  slym
     64
   |=  a=@
   ?:  .=(62 a) 
     45 
   (add a ?:((lth a 26) 65 ?:((lth a 52) 71 ?:((lth a 62) 4 32))))
 ::
-++  bowl  <*>
-++  bo
-  ~%    %bo  
-      ->  
-    ()
-  &=  bol=*bowl
-  ++  dub
-    |=  vel=|=(a=@ *bowl)
-    ?-    bol
-        [s=* c=*]
-      ?-    c.bol
-          @   (vel c.bol)
-          *
-        :-  [%ly '[' ']']
-        |-  
-        ?-    c.bol
-            @   (vel c.bol)
-            ^   [$$(c.bol -.c.bol) $(c.bol +.c.bol)]
-        --
+++  slyx  (slym 16 |=(a=@ (add a ?:((lth a 10) 48 87))))
+::
+++  ship
+  |=  [fom=@ gar=*]
+  ^-  *tank
+  =+  l=(met 3 fom)
+  =+  i=`@`0
+  :-  %leaf
+  |-  ^-  *tape
+  ?:  (gte i l)
+    ~
+  =+  c=(cut 3 [i 1] fom)
+  ?.  .=(37 c)
+    (weld (mesc [c ~]) $(i .+(i)))
+  =+  d=(cut 3 [.+(i) 1] fom)
+  ?.  .?(gar)
+    [92 35 $(i (add 2 i))]
+  (weld ~(ram re (show d -.gar)) $(i (add 2 i), gar +.gar))
+::
+++  shop
+  |=  [aug=* vel=|=(a=@ *tape)]
+  ^-  *tank
+  ?:  ?=(@ aug)
+    [%leaf (vel aug)]
+  :+  %rose 
+    [[' ' ~] ['[' ~] [']' ~]]
+  |-  ^-  *(list tank)
+  ?:  ?=(@ aug)
+    [$$ ~]
+  [$$(aug -.aug) $(aug +.aug)]
+::
+++  show
+  |=  vem=*
+  ^-  *tank
+  ?:  ?=(@ vem)
+    [%leaf (mesc (rip 3 vem))]
+  ?-    vem
+      [s=~ c=*]         [%leaf 39 (weld (mesc (tape +.vem)) `*tape`[39 ~])]
+      [s=%b c=*]        (shop c.vem slyb)
+      [s=%d c=*]        (shop c.vem slyd)
+      [s=%p c=*]        (shop c.vem slyp)
+      [s=%q c=*]        (shop c.vem slyq)
+      [s=%r c=*]        $(vem [[%r ' ' '{' '}'] c.vem])
+      [s=%s c=*]        (shop c.vem slys)
+      [s=%v c=*]        (shop c.vem slyv)
+      [s=%x c=*]        (shop c.vem slyx)
+  ::
+      [s=[%m p=@] c=*]  (ship p.s.vem c.vem)
+      [s=[%r p=@] c=*]
+    $(vem [[%r ' ' (cut 3 [0 1] p.s.vem) (cut 3 [1 1] p.s.vem)] c.vem])
+  ::
+      [s=[%r p=@ q=@ r=@] c=*]
+    :+  %rose
+      :*  p=(mesc (rip 3 p.s.vem))
+          q=(mesc (rip 3 q.s.vem))
+          r=(mesc (rip 3 r.s.vem))
       --
-    --
-  ::
-  ++  ram
-    ^-  *tape
-    |-
-    ?-    bol
-        @       (rip 3 bol) 
-        [~ *]   ((list <@>) +)
-        *       $(bol red)
-    --
-  ::
-  ++  red
-    ^-  *bowl
-    ?-    bol
-        @             bol
-        [s=~ c=*]     bol
-        [s=%nd c=*]   (dub nyd)
-    --
-  ==
-
+    |-  ^-  *(list tank)
+    ?~  c.vem
+      ~
+    [$$(vem -.c.vem) $(c.vem +.c.vem)]
+  --
+::
+++  mesc
+  |=  vib=*tape
+  ^-  *tape
+  ?~  vib
+    ~
+  ?:  .=(92 i.vib)
+    [92 92 $(vib t.vib)]
+  ?:  ?|((gth i.vib 126) (lth i.vib 32) .=(39 i.vib))
+    [92 (weld (slyx i.vib) (runt [1 47] $(vib t.vib)))]
+  [i.vib $(vib t.vib)]
+::
+++  runt
+  |=  [[a=@ b=@] c=*tape]
+  ^-  *tape
+  ?:  .=(0 a)
+    c
+  [b $(a (dec a))]
+::
+++  tank
+  |?  [%leaf p=*tape]
+      [%palm p=[p=*tape q=*tape r=*tape s=*tape] q=*(list tank)]
+      [%rose p=[p=*tape q=*tape r=*tape] q=*(list tank)]
+      :: [%farm p=[p=*tape q=*tape r=*tape] q=*(list (list tank))]
+  --
+::
+++  trim
+  |=  [a=@ b=*tape]
+  ^-  [p=*tape q=*tape]
+  ?~  b
+    [~ ~]
+  ?:  .=(0 a)
+    [~ b]
+  =+  c=$(a (dec a), b +.b)
+  [[-.b p.c] q.c]
+::
+++  wind
+  |=  [[tab=@ edg=@] hom=*tape wol=*wall]
+  ^-  *wall
+  =>  .(tab (mod tab (mul 2 (div edg 3))))
+  ?:  (lte (lent hom) (sub edg tab))
+    [(runt [tab 32] hom) wol]
+  =>  .(tab (add tab 2), edg (sub edg 2))
+  =+  mut=(trim (sub edg tab) hom)
+  :-  (runt [(sub tab 2) 32] [92 47 (weld p.mut `hom`[92 47 ~])])
+  =>  .(hom q.mut)
+  |-
+  ?~  hom
+    [(runt [(sub tab 2) 32] [92 47 (runt [(sub edg tab) 32] [92 47 ~])]) wol]
+  =>  .(mut (trim (sub edg tab) hom))
+  [(runt [tab 32] p.mut) $(hom q.mut)]
+::::
+::::
 ++  bill
   |?
     ^+(@ *rock)
