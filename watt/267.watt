@@ -741,7 +741,7 @@
     ^-  *tape
     ?-    -.tec
         %leaf  p.tec
-    ::
+        %palm  ram(tec [%rose [p.p.tec (weld q.p.tec r.p.tec) s.p.tec] q.tec])
         %rose
       %+  weld
         q.p.tec
@@ -756,24 +756,42 @@
     |=  [tab=@ edg=@]
     ^-  *wall
     =+  lug=`*wall`~
-    |- 
-    ?-    -.tec
-        %leaf  (wind [tab edg] p.tec lug)
-        %rose
-      ?:  (fit (sub edg tab))
-        [ram lug]
-      %^    wind
-          [tab edg]
-        q.p.tec
-      |-  ^-  *wall
-      ?~  q.tec
-        (wind [tab edg] r.p.tec ~)
-      $$(tec i.q.tec, lug $(q.tec t.q.tec), tab (add 2 tab))
-    --
-  ::
-  ++  fit
-    |=  wet=@
-    (lte (lent ram) wet)
+    &-  |- 
+        ?-    -.tec
+            %leaf  (wind [tab edg] p.tec lug)
+            %farm  !!
+            %palm  !!
+            %rose
+          ?:  fit
+            (rig ram)
+          %-  %=    rig
+                  lug
+                |-  ^-  *wall
+                ?~  q.tec
+                  (rig r.p.tec)
+                $$(tec i.q.tec, lug $(q.tec t.q.tec), tab din)
+              --
+          q.p.tec
+        --
+    ::
+    ++  din  (mod (add 2 tab) (mul 2 (div edg 3)))
+    ++  fit  (lte (lent ram) (sub edg tab))
+    ++  rig
+      |=  hom=*tape
+      ^-  *wall
+      ?:  (lte (lent hom) (sub edg tab))
+        [(runt [tab 32] hom) lug]
+      =>  .(tab (add tab 2), edg (sub edg 2))
+      =+  mut=(trim (sub edg tab) hom)
+      :-  (runt [(sub tab 2) 32] [92 47 (weld p.mut `hom`[92 47 ~])])
+      =>  .(hom q.mut)
+      |-
+      ?~  hom
+        :-  (runt [(sub tab 2) 32] [92 47 (runt [(sub edg tab) 32] [92 47 ~])])
+        lug
+      =>  .(mut (trim (sub edg tab) hom))
+      [(runt [tab 32] p.mut) $(hom q.mut)]
+    ==
   ==
 ::
 ++  slyb  (slym 2 |=(a=@ (add '0' a)))
@@ -850,7 +868,6 @@
   (add a ?:((lth a 26) 65 ?:((lth a 52) 71 ?:((lth a 62) 4 32))))
 ::
 ++  slyx  (slym 16 |=(a=@ (add a ?:((lth a 10) 48 87))))
-::
 ++  ship
   |=  [fom=@ gar=*]
   ^-  *tank
