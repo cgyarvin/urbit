@@ -554,7 +554,9 @@ tall
 
     foot
       : '+' '+' w term w gene
-        { $$ = _ytrel($4, u2_yes, $6); }
+        { $$ = _yqual($4, u2_yes, u2_yes, $6); }
+      | '+' '-' w term w gene
+        { $$ = _yqual($4, u2_yes, u2_no, $6); }
       | '*' '*' w term w wing
         { $$ = _ytrel($4, u2_no, $6); }
       ;

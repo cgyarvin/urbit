@@ -594,7 +594,7 @@
 ++  in
   ~.  %in
   &*  a=*(set)
-  ++  all
+  +-  all
     ~.  %all
     |*  b=|=(* ?)
     |-  ^-  ?
@@ -602,7 +602,7 @@
       &
     ?&((b n.a) $(a l.a) $(a r.a))
   ::
-  ++  any
+  +-  any
     ~.  %any
     |*  b=|=(* ?)
     |-  ^-  ?
@@ -610,7 +610,7 @@
       |
     ?|((b n.a) $(a l.a) $(a r.a))
   ::
-  ++  gas
+  +-  gas
     ~.  %gas
     |*  b=*(list)
     |-  ^-  a
@@ -618,7 +618,7 @@
       a
     $(b t.b, a (put i.b))
   ::
-  ++  has
+  +-  has
     ~.  %has
     |*  b=*
     |-  ^-  ?
@@ -630,7 +630,7 @@
       $(a l.a)
     $(a r.a)
   ::
-  ++  put
+  +-  put
     ~.  %put
     |*  b=*
     |-  ^-  a
@@ -650,7 +650,7 @@
       [n.a l.a c] 
     [n.c [n.a l.a l.c] r.c]
   ::
-  ++  tap
+  +-  tap
     ~.  %tap
     |=  b=`*(list <?>(?=(^ a) n.a)>)`~
     ^-  b
@@ -662,7 +662,7 @@
 ++  by
   ~.  %by
   &*  a=*(map)
-  ++  all
+  +-  all
     ~.  %all
     |*  b=|=(* ?)
     |-  ^-  ?
@@ -670,7 +670,7 @@
       &
     ?&((b q.n.a) $(a l.a) $(a r.a))
   ::
-  ++  any
+  +-  any
     ~.  %any
     |*  b=|=(* ?)
     |-  ^-  ?
@@ -678,7 +678,7 @@
       |
     ?|((b q.n.a) $(a l.a) $(a r.a))
   ::
-  ++  gas
+  +-  gas
     ~.  %gas
     |*  b=*(list <[p=* q=*]>)
     |-  ^-  a
@@ -686,7 +686,7 @@
       a
     $(b t.b, a (put p.i.b q.i.b))
   ::
-  ++  get
+  +-  get
     ~.  %get
     |*  b=*
     |-  ^-  *<~ [~ u=?>(?=(^ a) q.n.a)]>
@@ -698,12 +698,12 @@
       $(a l.a)
     $(a r.a)
   ::
-  ++  has
+  +-  has
     ~.  %has
     |*  b=*
     !.=(~ (get b))
   ::
-  ++  put
+  +-  put
     ~.  %put
     |*  [b=* c=*]
     |-  ^-  a
@@ -724,7 +724,7 @@
       [n.a l.a d] 
     [n.d [n.a l.a l.d] r.d]
   ::
-  ++  tap
+  +-  tap
     ~.  %tap
     |=  b=`*(list <?>(?=(^ a) n.a)>)`~
     ^-  b
@@ -1063,8 +1063,8 @@
       ->  
     (%dem dem, %gut gut, %ham ham, %loc loc, %num num, %tis tis, %unt unt)
   &*  nut=*
-  ++  dem   (num 10 |=(p=@ (add '0' p)))
-  ++  gut
+  +-  dem   (num 10 |=(p=@ (add '0' p)))
+  +-  gut
     |-  ^-  *bill
     ?-  nut
         @   unt
@@ -1078,8 +1078,8 @@
       --
     --
   ::
-  ++  ham   (num 16 |=(p=@ ?:((lth 10 p) (add '0' p) (add 'a' p))))
-  ++  loc
+  +-  ham   (num 16 |=(p=@ ?:((lth 10 p) (add '0' p) (add 'a' p))))
+  +-  loc
     ^-  *bill
     ?>  ?=([p=@ q=[p=[p=@ q=@] q=[p=@ q=@]]] nut)   :: should be static
     :+  %grip
@@ -1092,7 +1092,7 @@
       rov
     [p.nut rov]
   ::
-  ++  num
+  +-  num
     |*  [zel=@ hoz=|=(@ @)]
     ^-  [%duct p=*tape]
     :-  %duct
@@ -1104,7 +1104,7 @@
       biq
     $(nut (div nut zel), biq [(hoz (mod nut zel)) biq])
   ::
-  ++  tem
+  +-  tem
     ^-  [%duct p=*tape]
     :-  %duct
     |-  ^-  *tape
@@ -1112,10 +1112,10 @@
       ~
     [(end 3 1 nut) $(nut (rsh 3 1 nut))]
   ::
-  ++  tis
+  +-  tis
     [%duct p=nut]
   ::
-  ++  unt
+  +-  unt
     ^-  [%duct p=*tape]
     ?:  ?&  (gte (met 3 nut) 2)
             |-

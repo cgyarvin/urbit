@@ -107,7 +107,7 @@
             u2_noun p_zem, q_zem;
             u2_noun pro;
 
-            u2_mean(zem, 6, &p_zem, 7, &q_zem, 0);
+            u2_mean(zem, 6, &p_zem, 7, &q_zem);
 
             pro = u2_bq
               (wir_r, u2_nul,

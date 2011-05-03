@@ -989,7 +989,10 @@ u2_ho_use(u2_ray     wir_r,
   u2_noun key=u2_none, pro;
   c3_m    fun_m = 0;
 
-  if ( jet_j->sat_s & u2_jet_memo ) {
+  if ( (jet_j->sat_s & u2_jet_memo) 
+       // || ((jet_j->sat_s & u2_jet_live) && (jet_j->sat_s & u2_jet_test))
+     )
+  {
     if ( jet_j->key_f ) {
       if ( u2_none == (key = jet_j->key_f(wir_r, cor)) ) {
         return u2_none;
@@ -1079,10 +1082,10 @@ u2_ho_use(u2_ray     wir_r,
     }
   }
 
-  if ( !(jet_j->sat_s & u2_jet_memo) ) {
-    return pro;
-  }
-  else {
+  if ( (jet_j->sat_s & u2_jet_memo)
+       // || ((jet_j->sat_s & u2_jet_live) && (jet_j->sat_s & u2_jet_test))
+     )
+  {
     if ( jet_j->key_f ) {
       if ( u2_none == pro ) {
         // printf("no pro: %s\n", u2_ho_cstring(jet_j->xip));
@@ -1097,6 +1100,7 @@ u2_ho_use(u2_ray     wir_r,
       return u2_rl_save_cell(wir_r, 0, cor, fol, pro);
     }
   }
+  else return pro;
 }
 
 /* u2_ho_kick():

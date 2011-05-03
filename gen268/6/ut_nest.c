@@ -55,8 +55,12 @@
           if ( u2_h(qn_dab) != u2_h(qn_hem) ) {
             return u2_no;
           } else if ( u2_yes == u2_h(qn_dab) ) {
-            u2_noun vis = j2_mcy(Pit, ut, play)(wir_r, van, sut, u2_t(qn_dab));
-            u2_noun lon = j2_mcy(Pit, ut, play)(wir_r, van, ref, u2_t(qn_hem));
+            u2_noun pqn_dab = u2_t(qn_dab);
+            u2_noun pqn_hem = u2_t(qn_hem);
+            u2_noun qpqn_dab = u2_t(pqn_dab);
+            u2_noun qpqn_hem = u2_t(pqn_hem);
+            u2_noun vis = j2_mcy(Pit, ut, play)(wir_r, van, sut, qpqn_dab);
+            u2_noun lon = j2_mcy(Pit, ut, play)(wir_r, van, ref, qpqn_hem);
             u2_flag ret = _nest_dext(wir_r, van, vis, lon, gil);
 
             u2_rz(wir_r, vis);

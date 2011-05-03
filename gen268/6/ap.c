@@ -68,7 +68,7 @@
       (wir_r, c3__pmbn,
               u2_rx(wir_r, p_gen), 
               u2_bt(wir_r,
-                    u2_bt(wir_r, u2_blip, u2_yes, u2_rx(wir_r, q_gen)),
+                    u2_bq(wir_r, u2_blip, u2_yes, u2_yes, u2_rx(wir_r, q_gen)),
                     u2_nul, 
                     u2_nul));
   }
@@ -103,7 +103,7 @@
       (wir_r, c3__pmdg,
               u2_rx(wir_r, p_gen), 
               u2_bt(wir_r,
-                    u2_bt(wir_r, u2_blip, u2_yes, u2_rx(wir_r, q_gen)),
+                    u2_bq(wir_r, u2_blip, u2_yes, u2_yes, u2_rx(wir_r, q_gen)),
                     u2_nul, 
                     u2_nul));
   }
@@ -112,7 +112,7 @@
     return u2_bc
       (wir_r, c3__pmdt,
               u2_bt(wir_r,
-                    u2_bt(wir_r, u2_blip, u2_yes, u2_rx(wir_r, p_gen)),
+                    u2_bq(wir_r, u2_blip, u2_yes, u2_yes, u2_rx(wir_r, p_gen)),
                     u2_nul, 
                     u2_nul));
   }
@@ -176,7 +176,7 @@
       (wir_r, c3__pmtr,
               u2_rx(wir_r, p_gen), 
               u2_bt(wir_r,
-                    u2_bt(wir_r, u2_blip, u2_yes, u2_rx(wir_r, q_gen)),
+                    u2_bq(wir_r, u2_blip, u2_yes, u2_no, u2_rx(wir_r, q_gen)),
                     u2_nul, 
                     u2_nul));
   }
@@ -1064,12 +1064,12 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, ap, sift)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ap, sift), Tier6_a, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ap, sift), Tier6_b, u2_none, u2_none },
     { }
   };
   u2_ho_jet 
   j2_mcj(Pit, ap, mold)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ap, mold), Tier6_a, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ap, mold), Tier6_b, u2_none, u2_none },
     { }
   };
 
@@ -1083,7 +1083,7 @@
   u2_ho_jet 
   j2_mbj(Pit, ap)[] = {
     { "open", 
-      c3__hevy, j2_mc(Pit, ap, open), Tier6_a_memo, u2_none, u2_none },
-    { "rake", c3__hevy, j2_mc(Pit, ap, rake), Tier6_a, u2_none, u2_none },
+      c3__hevy, j2_mc(Pit, ap, open), Tier6_b_memo | u2_jet_test, u2_none, u2_none },
+    { "rake", c3__hevy, j2_mc(Pit, ap, rake), Tier6_b, u2_none, u2_none },
     { }
   };

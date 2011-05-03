@@ -25,16 +25,62 @@
     }
   }
 
+  static u2_noun                                                  //  produce
+  _fire_turn(u2_wire wir_r,
+             u2_noun van,                                         //  retain
+             u2_noun sut,                                         //  retain
+             u2_noun p_sut,                                       //  retain
+             u2_noun qq_sut,                                      //  retain
+             u2_noun dox,                                         //  retain
+             u2_flag vet,                                         //  retain
+             u2_noun hag)                                         //  retain
+  {
+    if ( u2_nul == hag ) {
+      return u2_nul;
+    } else {
+      u2_noun i_hag = u2_h(hag);
+      u2_noun pi_hag = u2_h(i_hag);
+      u2_noun qi_hag = u2_t(i_hag);
+      u2_noun t_hag = u2_t(hag);
+
+      if ( u2_yes == pi_hag ) {
+        if ( (u2_yes == vet) &&
+             (u2_no == j2_mcy(Pit, ut, nest)(wir_r, van, qq_sut, p_sut)) )
+        {
+          return u2_bl_error(wir_r, "fire-hard");
+        }
+        else {
+          return u2_bc
+            (wir_r, u2_bc(wir_r, u2_rx(wir_r, dox),
+                                 u2_rx(wir_r, qi_hag)),
+                    _fire_turn
+                      (wir_r, van, sut, p_sut, qq_sut, dox, vet, t_hag));
+        }
+      } else {
+        if ( (u2_yes == vet) &&
+             (u2_no == u2_sing(p_sut, qq_sut)) &&
+             (u2_no == j2_mcy(Pit, ut, fret)(wir_r, van, sut, dox, qi_hag)) )
+        {
+          return u2_bl_error(wir_r, "fire-soft");
+        } else {
+          return u2_bc
+            (wir_r, u2_bc(wir_r, u2_rx(wir_r, dox),
+                                 u2_rx(wir_r, qi_hag)),
+                    _fire_turn
+                      (wir_r, van, sut, p_sut, qq_sut, dox, vet, t_hag));
+        }
+      }
+    }
+  }
+
   static u2_noun 
   _fire_in(u2_wire wir_r,
            u2_noun van,
            u2_noun sut,
            u2_noun hag)
   {
-    // u2_flag vet = u2_bn_hook(wir_r, van, "vet");
     u2_flag vet = u2_frag(j2_ut_van_vet, van);
     u2_noun p_sut, q_sut;
-    u2_noun ret;
 
     if ( u2_no == u2_as_pq(sut, c3__core, &p_sut, &q_sut) ) {
       return u2_bl_bail(wir_r, c3__fail);
@@ -45,27 +91,12 @@
       {
         u2_noun dox = u2_bt
           (wir_r, c3__core, u2_rx(wir_r, qq_sut), u2_rx(wir_r, q_sut));
+        u2_noun ret;
 
-        if ( c3__wood != pq_sut ) {
-          if ( (u2_yes == vet) && 
-               (u2_no == j2_mcy(Pit, ut, nest)(wir_r, van, qq_sut, p_sut)) )
-          {
-            // j2_mcy(Pit, ut, dupt)(wir_r, van, "qq_sut", qq_sut);
-            // j2_mcy(Pit, ut, dupt)(wir_r, van, "p_sut", p_sut);
-
-            return u2_bl_error(wir_r, "fire-metl");
-          }
-          ret = u2_rx(wir_r, dox);
-        }
-        else {
-          if ( u2_yes == vet &&
-               (u2_no == u2_sing(p_sut, qq_sut)) &&
-               _fire_levy(wir_r, van, sut, dox, hag) )
-          {
-            return u2_bl_error(wir_r, "fire-wood");
-          }
-          ret = u2_rx(wir_r, sut);
-        }
+        ret = u2_bc
+          (wir_r, c3__hold,
+                  _fire_turn
+                    (wir_r, van, sut, p_sut, qq_sut, dox, vet, hag));
 
         u2_rz(wir_r, dox);
         return ret;

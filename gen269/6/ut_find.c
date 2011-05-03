@@ -247,14 +247,7 @@
     u2_noun fin = _find_in(wir_r, van, sut, way, cog, u2_nul);
 
     if ( u2_nul == fin ) {
-#if 0
-      u2_err(wir_r, "cog", cog);
-      j2_mcy(Pit, ut, dupt)(wir_r, van, "sut", sut);
-#endif
-      u2_bl_push(wir_r, 
-                 u2_bc(wir_r, c3__bean, u2_bn_string(wir_r, "find-fail")));
-
-      return u2_bl_bail(wir_r, c3__fail);
+      return u2_bl_error(wir_r, "find-none");
     } else {
       u2_noun pro = u2_rx(wir_r, u2_t(fin));
 

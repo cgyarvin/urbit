@@ -927,7 +927,7 @@
   [%face cog der]
 ::
 ++  flag  ^-(*type [%fork [%cube 0] [%cube 1]])
-++  foot  <[& p=*gene] [| p=*(map term foot)]>
+++  foot  <[& p=*gate] [| p=*(map term foot)]>
 ++  fork
   ~.  %fork
   |=  [hoz=*type bur=*type]
@@ -954,7 +954,7 @@
       [10 p=*<@ [p=@ q=*form]> q=*form]
       [p=^+(^ *form) q=*form]
   --
-::  
+++  gate  <[p=? q=*gene]>
 ++  gene
   |?
     ^+(@ *term)
@@ -1044,7 +1044,7 @@
   --
 ::
 ++  knot  <^+(@ *term) [~ p=*axis]>
-++  port  <[p=*axis q=*(unit <[p=*axis q=*(list gene)]>) r=*type]>
+++  port  <[p=*axis q=*(unit <[p=*axis q=*(list gate)]>) r=*type]>
 ++  spot  <[p=@ q=[p=[p=@ q=@] q=[p=@ q=@]]]>
 ++  twig  (list knot)
 ++  type
@@ -1054,7 +1054,7 @@
       [%cube p=*]
       [%face p=*term q=*type]
       [%fork p=*type q=*type]
-      [%hold p=*type q=*(list gene)]
+      [%hold p=*(list <[p=*type q=*gene]>)]
       %noun
       %void
   --
@@ -1096,15 +1096,15 @@
         [%bnpd *]   [%bnld [%dgdp p.gen [~ 1]] q.gen]
     ::::
     ::::
-        [%brbn *]   [%pmbn p.gen [[%% [& q.gen]] ~ ~]]
+        [%brbn *]   [%pmbn p.gen [[%% [& & q.gen]] ~ ~]]
         [%brcs *]
       ?~  p.gen
         [%zpzp ~]
       [%brbn [%ktdp [%tmbn %noun] i.p.gen] [%cstr [~ 4] p.gen]]
     ::
         [%brdp *]   [%bnld [%brdt p.gen] %%]
-        [%brdg *]   [%pmdg p.gen [[%% [& q.gen]] ~ ~]]
-        [%brdt *]   [%pmdt [[%% [& p.gen]] ~ ~]]
+        [%brdg *]   [%pmdg p.gen [[%% [& & q.gen]] ~ ~]]
+        [%brdt *]   [%pmdt [[%% [& & p.gen]] ~ ~]]
         [%brsg *]
       |-
       ?-  q.gen
@@ -1123,7 +1123,7 @@
           [%mtdp [~ 10] [~ 4] ~]
         [%mtbn [[~ 22] ~] [[[~ 4] [~ 4]] ~]]
       --
-        [%brtr *]   [%pmtr p.gen [[%% [& q.gen]] ~ ~]]
+        [%brtr *]   [%pmtr p.gen [[%% [& | q.gen]] ~ ~]]
     ::::
     ::::
         [%csbr *]
@@ -1386,7 +1386,7 @@
   |=  [cog=*term dab=*(map term foot)]
   =+  axe=`@`1
   |-
-  ^-  *(unit <[p=*axis q=*gene]>)
+  ^-  *(unit <[p=*axis q=*gate]>)
   ?-  dab
       ~         ~
       [* ~ ~]   
@@ -1452,7 +1452,7 @@
       %tuck   tuck
       %tusk   tusk
     --
-  =+  :*  fan=*(set <[*type *(list gene)]>)
+  =+  :*  fan=*(set <[*type *gene]>)
           rib=*(set <[*type *type *gene]>)
           vet=`?`&
       --
@@ -1468,11 +1468,12 @@
     ?-    dab
         ~   0
         ^
+      =+  vad=q:(mint(vet ?:(p.p.q.n.dab vet |)) %noun q.p.q.n.dab)
       ?-    dab
-          [* ~ ~]   q:(mint %noun p.q.n.dab)
-          [* ~ *]   [q:(mint %noun p.q.n.dab) $(dab r.dab)]
-          [* * ~]   [q:(mint %noun p.q.n.dab) $(dab l.dab)]
-          [* * *]   [q:(mint %noun p.q.n.dab) $(dab l.dab) $(dab r.dab)] 
+          [* ~ ~]   vad
+          [* ~ *]   [vad $(dab r.dab)]
+          [* * ~]   [vad $(dab l.dab)]
+          [* * *]   [vad $(dab l.dab) $(dab r.dab)] 
       --
     --
   ::
@@ -1700,26 +1701,25 @@
   ::
   ++  fire
     ~.  %fire
-    |=  hag=*(list gene)
+    |=  hag=*(list gate)
     ^-  *type
-    ?>  ?=([%core *] sut)
+    ?>  ?=([%core *] sut)         ::  XX use +-
     =+  dox=[%core q.q.sut q.sut]
-    :+  %hold
-      ?.  .=(%wood p.q.sut)
-        ?.  ?|(!vet (nest(sut q.q.sut) p.sut))
-          ::  ~~  dump(sut q.q.sut)   ::  need
-          ::  ~~  dump(sut p.sut)     ::  have
-          ~|('fire-metl' !!)
-        dox
-      ?.  ?|  !vet
-              .=(p.sut q.q.sut)
-              (levy hag |=(p=*gene (fret dox p)))
-          --
-        ::  ~~  dump(sut q.q.sut)     ::  need
-        ::  ~~  dump(sut p.sut)       ::  have
-        ~|('fire-wood' !!)
-      sut
-    (~(tap in (~(gas in *(set gene)) hag)) ~)
+    :-  %hold
+    %+  turn
+      hag
+    |=  p=*gate
+    ?:  p.p
+      ?.  ?|(!vet (nest(sut q.q.sut) p.sut))
+        ::  ~~  dump(sut q.q.sut)   ::  need
+        ::  ~~  dump(sut p.sut)     ::  have
+        ~|('fire-hard' !!)
+      [dox q.p]
+    ?.  ?|(!vet .=(p.sut q.q.sut) (fret dox q.p))
+      ::  ~~  dump(sut q.q.sut)     ::  need
+      ::  ~~  dump(sut p.sut)       ::  have
+      ~|('fire-soft' !!)
+    [sut q.p]
   ::
   ++  fish
     ~.  %fish
@@ -1856,6 +1856,7 @@
           [10 *]  $(nug q.nug)
           *       ~|(%mint-coke !!)
       --
+    ::
     ++  crow
       |=  [mel=*<%gold %lead %iron> ruf=*gene dab=*(map term foot)]
       =+  dan=$$(gen ruf, gol %noun)
@@ -1958,12 +1959,7 @@
         (crow %gold [~ 1] p.gen)
       ::
           [%pmtr *]                                                   ::  &*
-        =+  dan=$(gen [%dgdp p.gen [~ 1]], gol %noun)
-        =+  toc=(core p.dan [%wood p.dan [~ q.gen]])
-        =+  dez=(bake(sut toc, vet |) q.gen)
-        ::  :-  (nice toc(p.r.q dez))
-        :-  (nice (core p.dan [%wood p.dan [dez q.gen]]))
-        (cons q.dan [1 dez])
+        (crow %iron [%dgdp p.gen [~ 1]] q.gen)
       ::
           [%sgld *]                                                   ::  ~>
         =+  hum=$(gen q.gen)
@@ -2054,7 +2050,8 @@
             ?-    q.n.dab
                 [& *]
               ?&  ?=([& *] q.n.hem) 
-                  dext(sut (play p.q.n.dab), ref (play(sut ref) p.q.n.hem))
+                  ?&(p.p.q.n.dab p.p.q.n.hem)
+                  dext(sut (play q.p.q.n.dab), ref (play(sut ref) q.p.q.n.hem))
               --
             ::
                 [| *]
@@ -2280,20 +2277,23 @@
         [%cube *]   ?.(.?(p.sut) %atom [%cell [%cube -.p.sut] [%cube +.p.sut]])
         [%core *]   [%cell p.sut %noun]
         [%face *]   q.sut
-        [%hold *]   (rest(sut p.sut) q.sut)
+        [%hold *]   (rest p.sut)
         %noun       [%fork %atom [%cell %noun %noun]]
     --
   ::
   ++  rest
     ~.  %rest
-    |=  leg=*(list gene)
+    |=  leg=*(list <[p=*type q=*gene]>)   ::  XX use +-
     ^-  *type
-    ~+
-    ?:  (~(has in fan) [sut leg])
+    ?:  (lien leg |=([p=*type q=*gene] (~(has in fan) [p q])))
       ~|(%rest-loop !!)
-    =>  .(fan (~(put in fan) [sut leg]))
+    =>  .(fan (~(gas in fan) leg))
     %+  roll
-      (~(tap in (~(gas in *(set type)) (turn leg |=(p=*gene (play p))))) ~)
+      %-  %~  tap 
+            in 
+          %-  ~(gas in *(set type))
+          (turn leg |=([p=*type q=*gene] (play(sut p) q)))
+      ~
     =+([p=*type q=`*type`%void] |.((fork p q)))
   ::
   ++  seek
