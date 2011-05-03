@@ -254,29 +254,25 @@
                        _nest_dext(wir_r, van, q_sut, ref, gil));
         }
       } 
-      case c3__hold: {
-        if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
-          return u2_bl_bail(wir_r, c3__fail);
-        }
-        else {
-          u2_noun hud = u2_bc(wir_r, u2_rx(wir_r, sut), 
-                                     u2_rx(wir_r, ref));
+      case c3__hold: p_sut = u2_t(sut);
+      {
+        u2_noun hud = u2_bc(wir_r, u2_rx(wir_r, sut), 
+                                   u2_rx(wir_r, ref));
 
-          if ( (u2_yes == j2_mcc(Pit, in, has)(wir_r, gil, hud)) ) {
-            u2_rl_lose(wir_r, hud);
+        if ( (u2_yes == j2_mcc(Pit, in, has)(wir_r, gil, hud)) ) {
+          u2_rl_lose(wir_r, hud);
 
-            return u2_yes;
-          } else {
-            u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, gil, hud);
-            u2_type fop = j2_mcy(Pit, ut, rest)(wir_r, van, p_sut, q_sut);
-            u2_flag hiv = _nest_dext(wir_r, van, fop, ref, zoc);
+          return u2_yes;
+        } else {
+          u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, gil, hud);
+          u2_type fop = j2_mcy(Pit, ut, rest)(wir_r, van, sut, p_sut);
+          u2_flag hiv = _nest_dext(wir_r, van, fop, ref, zoc);
 
-            u2_rl_lose(wir_r, hud);
-            u2_rl_lose(wir_r, fop);
-            u2_rl_lose(wir_r, zoc);
+          u2_rl_lose(wir_r, hud);
+          u2_rl_lose(wir_r, fop);
+          u2_rl_lose(wir_r, zoc);
 
-            return hiv;
-          }
+          return hiv;
         }
       }
     }
@@ -378,7 +374,8 @@
           else return u2_bl_bail(wir_r, c3__fail);
         } 
         case c3__hold: {
-          if ( (u2_yes == u2_mean(ref, 6, &p_ref, 7, &q_ref, 0)) ) {
+          p_ref = u2_t(ref);
+          {
             u2_noun hud = u2_bc(wir_r, u2_rx(wir_r, sut), 
                                        u2_rx(wir_r, ref));
 
@@ -401,8 +398,7 @@
               }
             }
           }
-          else return u2_bl_bail(wir_r, c3__fail);
-        }
+        } 
       }
     }
   }

@@ -7,24 +7,6 @@
 
 /* logic
 */
-  static u2_flag
-  _fire_levy(u2_wire wir_r,
-             u2_noun van,
-             u2_noun sut,
-             u2_noun dox,
-             u2_noun hag)
-  {
-    if ( u2_nul == hag ) {
-      return u2_yes;
-    } else {
-      u2_noun i_hag = u2_h(hag);
-      u2_noun t_hag = u2_t(hag);
-
-      return u2_and(j2_mcy(Pit, ut, fret)(wir_r, van, sut, dox, i_hag),
-                    _fire_levy(wir_r, van, sut, dox, t_hag));
-    }
-  }
-
   static u2_noun                                                  //  produce
   _fire_turn(u2_wire wir_r,
              u2_noun van,                                         //  retain
@@ -64,7 +46,7 @@
           return u2_bl_error(wir_r, "fire-soft");
         } else {
           return u2_bc
-            (wir_r, u2_bc(wir_r, u2_rx(wir_r, dox),
+            (wir_r, u2_bc(wir_r, u2_rx(wir_r, sut),
                                  u2_rx(wir_r, qi_hag)),
                     _fire_turn
                       (wir_r, van, sut, p_sut, qq_sut, dox, vet, t_hag));
@@ -73,11 +55,11 @@
     }
   }
 
-  static u2_noun 
-  _fire_in(u2_wire wir_r,
-           u2_noun van,
-           u2_noun sut,
-           u2_noun hag)
+  u2_noun                                                         //  transfer
+  j2_mcx(Pit, ut, fire)(u2_wire wir_r, 
+                        u2_noun van,                              //  retain
+                        u2_noun sut,                              //  retain
+                        u2_noun hag)                              //  retain
   {
     u2_flag vet = u2_frag(j2_ut_van_vet, van);
     u2_noun p_sut, q_sut;
@@ -102,17 +84,6 @@
         return ret;
       }
     }
-  }
-
-  u2_noun                                                         //  transfer
-  j2_mcx(Pit, ut, fire)(u2_wire wir_r, 
-                        u2_noun van,                              //  retain
-                        u2_noun sut,                              //  retain
-                        u2_noun hag)                              //  retain
-  {
-    u2_noun typ = _fire_in(wir_r, van, sut, hag);
-
-    return u2_bt(wir_r, c3__hold, typ, u2_rx(wir_r, hag));
   }
   
 /* boilerplate

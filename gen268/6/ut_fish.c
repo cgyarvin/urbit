@@ -93,15 +93,13 @@
         }
       } 
       case c3__hold: {
-        if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
-          return u2_bl_bail(wir_r, c3__fail);
-        }
-        else {
+        p_sut = u2_t(sut);
+        {
           if ( (u2_yes == j2_mcc(Pit, in, has)(wir_r, vit, sut)) ) {
             return u2_bl_error(wir_r, "fish-loop");
           } else {
             u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, vit, sut);
-            u2_noun fop = j2_mcy(Pit, ut, rest)(wir_r, van, p_sut, q_sut);
+            u2_noun fop = j2_mcy(Pit, ut, rest)(wir_r, van, sut, p_sut);
             u2_noun pro = _fish_in(wir_r, van, fop, axe, zoc);
 
             u2_rl_lose(wir_r, fop);

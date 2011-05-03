@@ -31,7 +31,8 @@
       u2_as_trel(zar, &p_zar, &q_zar, &r_zar);
 
       if ( u2_nul != q_zar ) {
-        u2_noun neg = u2_bc(wir_r, u2_bc(wir_r, u2_nul, 1), u2_nul);
+        u2_noun neg = u2_bc
+          (wir_r, u2_bc(wir_r, u2_yes, u2_bc(wir_r, u2_nul, 1)), u2_nul);
         u2_noun bor = j2_mcy(Pit, ut, fire)(wir_r, van, r_zar, neg);
         u2_noun raz = u2_bt(wir_r, u2_rx(wir_r, p_zar),
                                    u2_rx(wir_r, q_zar), 

@@ -63,7 +63,7 @@
         u2_rl_lose(wir_r, nar);
         return heb;
       }
-      case c3__hold: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
+      case c3__hold: p_sut = u2_t(sut);
       {
         u2_noun rep = j2_mcy(Pit, ut, repo)(wir_r, van, sut);
         u2_noun fos = j2_mcy(Pit, ut, burn)(wir_r, van, rep);

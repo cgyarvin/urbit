@@ -54,11 +54,8 @@
         }
       }
       case c3__hold: {
-        if ( u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut)) {
-          return u2_bl_bail(wir_r, c3__fail);
-        } else {
-          return j2_mcy(Pit, ut, rest)(wir_r, van, p_sut, q_sut);
-        }
+        p_sut = u2_t(sut);
+        return j2_mcy(Pit, ut, rest)(wir_r, van, sut, p_sut);
       }
     }
   }

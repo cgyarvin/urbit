@@ -107,7 +107,7 @@
             u2_noun p_zem, q_zem;
             u2_noun pro;
 
-            u2_mean(zem, 6, &p_zem, 7, &q_zem);
+            u2_mean(zem, 6, &p_zem, 7, &q_zem, 0);
 
             pro = u2_bq
               (wir_r, u2_nul,
@@ -214,24 +214,20 @@
           }
         }
       } 
-      case c3__hold: {
-        if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
-          return u2_bl_bail(wir_r, c3__fail);
-        }
+      case c3__hold: p_sut = u2_t(sut);
+      {
+        if ( (u2_yes == j2_mcc(Pit, in, has)(wir_r, gil, sut)) ) {
+          return u2_nul;
+        } 
         else {
-          if ( (u2_yes == j2_mcc(Pit, in, has)(wir_r, gil, sut)) ) {
-            return u2_nul;
-          } 
-          else {
-            u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, gil, sut);
-            u2_type fop = j2_mcy(Pit, ut, repo)(wir_r, van, sut);
-            u2_noun pro = _find_in(wir_r, van, fop, way, cog, zoc);
+          u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, gil, sut);
+          u2_type fop = j2_mcy(Pit, ut, repo)(wir_r, van, sut);
+          u2_noun pro = _find_in(wir_r, van, fop, way, cog, zoc);
 
-            u2_rl_lose(wir_r, fop);
-            u2_rl_lose(wir_r, zoc);
+          u2_rl_lose(wir_r, fop);
+          u2_rl_lose(wir_r, zoc);
 
-            return pro;
-          }
+          return pro;
         }
       }
     }

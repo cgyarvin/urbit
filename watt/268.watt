@@ -2306,7 +2306,7 @@
     =>  ^-  .
         ?~  q.zar
           .
-        .(r.zar (fire(sut r.zar) [[~ 1] ~]))
+        .(r.zar (fire(sut r.zar) [[& ~ 1] ~]))
     ?-    i.hep
         @
       =+  hup=(find(sut r.zar) way i.hep)

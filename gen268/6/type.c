@@ -39,7 +39,7 @@
     case c3__fork: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
     {
     }
-    case c3__hold: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
+    case c3__hold: p_sut = u2_t(sut);
     {
     }
   }
