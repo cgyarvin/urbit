@@ -525,6 +525,8 @@
   {
     u2_weak hoc = u2_ds_look(wir_r, van, "mint");
 
+    printf("mint core\n");
+    c3_assert(0);
     if ( u2_none == hoc ) {
       c3_assert(!"register mint");
       return u2_none;
@@ -556,7 +558,7 @@
   {
     u2_ho_jet *jet_j = &j2_mcj(Pit, ut, mint)[0];
 
-    if ( jet_j->sat_s == u2_jet_live ) {
+    if ( (jet_j->sat_s & u2_jet_live) && !(jet_j->sat_s & u2_jet_test) ) {
       return j2_mcx(Pit, ut, mint)(wir_r, van, sut, gol, gen);
     }
     else {
@@ -577,8 +579,38 @@
 
 /* structures
 */
+  u2_weak
+  j2_mck(Pit, ut, mint)(u2_wire wir_r,
+                        u2_noun cor)
+  {
+    u2_noun sut, gol, gen, van;
+
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &gol, 
+                                u2_cv_sam_3, &gen,
+                                u2_cv_con, &van, 
+                                0)) ||
+         (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
+    {
+      return u2_bl_bail(wir_r, c3__fail);
+    } else {
+      u2_flag vet = u2_frag(j2_ut_van_vet, van);
+
+      return u2_rq(wir_r, u2_rx(wir_r, sut),
+                          u2_rx(wir_r, gol),
+                          u2_rx(wir_r, gen),
+                          u2_rx(wir_r, vet));
+    }
+  }
+
+/* structures
+*/
   u2_ho_jet 
   j2_mcj(Pit, ut, mint)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, mint), Tier6_b, u2_none, u2_none },
+    { ".3", c3__hevy, 
+        j2_mc(Pit, ut, mint), 
+        Tier6_b_memo,
+        u2_none, u2_none,
+        j2_mck(Pit, ut, mint)
+    },
     { }
   };

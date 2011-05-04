@@ -1,230 +1,9 @@
+
 ::
 ::::
   ::  Tier 5, parsing
 ::::
 ::
-    byte  &@
-    tape  (list byte)
-    tube  &[p=*hair q=*tape]
-    edge  &[p=*hair q=*(unit &[p=* q=*tube])]
-    hair  &[p=@ q=@]
-    rule  =+(tub=*tube |=(*edge))
-    spew  =+(* |:([p=*hair q=?:(.=(-< -<) ~ [p=-< q=*tube])))
-  ::::
-  ::
-      bass
-    =+  [rum=@ tyd=rule]
-    |:
-    %+  cook
-      =+(*(list &@) |=((roll -< =+([a=@ b=@] |=((add a (mul rum b)))))))
-    tyd
-  ::::
-  ::
-      boss
-    =+  [rum=@ tyd=rule]
-    |:
-    %+  cook
-      =+(*(list &@) |=((reel -< =+([a=@ b=@] |=((add a (mul rum b)))))))
-    tyd
-  ::::
-  ::
-      bend
-    =+  raq==+([* *] |:(-<))
-    |:
-    =+  [vex=*edge sab=rule]
-    |:
-    ?~  q.vex
-      vex 
-    =+  yit=(sab q.u.q.vex)
-    ?~  q.yit
-      [p=p.yit q=q.vex]
-    [p=p.yit q=[~ u=[p=(raq p.u.q.vex p.u.q.yit) q=q.yit]]]
-  ::::
-  ::
-      cold
-    =+  [cus=* sef=rule]
-    |:
-    =+  tub=*tube
-    |=
-    =+  vex=(sef tub)
-    ?~  q.vex
-      vex
-    [p=p.vex q=[~ u=[p=cus q=q.u.vex]]]
-  ::::
-  ::
-      cook
-    =+  [poq=&* sef=rule]
-    |:
-    =+  tub=*tube
-    |=
-    =+  vex=(sef tub)
-    ?~  q.vex
-      vex
-    [p=p.vex q=[~ u=[p=(poq p.u.vex) q=q.u.vex]]]
-  ::::
-  ::
-      comp
-    =+  raq==+([* *] |:(-<))
-    |:
-    =+  [vex=*edge sab=rule]
-    |:
-    ?~  q.vex
-      vex
-    =+  yit=(sab q.u.q.vex)
-    ?~  q.yit
-      yit
-    [p=p.yit q=[~ u=[p=(raq p.u.q.vex p.u.q.yit) q=q.yit]]]
-  ::::
-  ::
-      fail
-    =+  tub=*tube
-    |=
-    [p=p.tub q=~]
-  ::::
-  ::
-      fine
-    =+  vex=*edge
-    |:
-    ?~  q.vex
-      ^?([%chug %flu p.vex] !!)
-    ?~  q.q.u.vex
-      p.u.vex
-    ^?([%chug %gas p.q.u.vex] !!)
-  ::::
-  ::
-      glue
-    =+  bus=rule
-    |:
-    =+  [vex=*edge sab=rule]
-    |:
-    (plug vex |~(pfix bus sab))
-  ::::
-  ::
-      free
-    =+  huf=*
-    |:
-    =+  tub=*tube
-    |=
-    [p=p.tub q=[~ u=[p=huf q=tub]]]
-  ::::
-  ::
-      ifix
-    =+  [fel=[p=rule q=rule] hof=rule]
-    |:
-    |~(pfix p.fel |~(sfix hof q.fel))
-  ::::
-  ::
-      just
-    =+  daf=*byte
-    |=
-    =+  tub=*tube
-    |=
-    ^-  (spew *byte)
-    ?~  q.tub
-      (fail tub) 
-    ?.  .=(daf i.q.tub)
-      (fail tub)
-    =+  suz=(nair i.q.tub p.tub)
-    [suz [~ daf [suz t.q.tub]]]
-  ::::
-  ::
-      mask
-    =+  bud=*(list byte)
-    |=
-    =+  tub=*tube
-    |=
-    ^-  (spew *byte)
-    ?~  q.tub
-      (fail tub) 
-    ?.  (lien bud =+(*byte |=(.=(i.q.tub -<))))
-      (fail tub)
-    =+  suz=(nair i.q.tub p.tub)
-    [suz [~ i.q.tub [suz t.q.tub]]]
-  ::::
-  ::
-      more
-    =+  [bus=rule fel=rule]
-    |:
-    |~  pose
-      |~(plug fel (star |~(pfix bus fel)))
-      (free ~)
-    ==
-  ::::
-  ::
-      nair
-    =+  [weq=*byte naz=*hair]
-    |=
-    ^-  *hair
-    ?:  .=(10 weq)
-      [.^(p.naz 0)]
-    [p.naz .^(q.naz)]
-  ::::
-  ::
-      most
-    =+  [bus=rule fel=rule]
-    |:
-    |~(plug fel (star |~(pfix bus fel)))
-  ::::
-  ::
-      pfix
-    =+  [vex=*edge sab=rule]
-    |:
-    ?~  q.vex
-      vex
-    (sab q.u.vex)
-  ::::
-  ::
-      plug
-    *comp
-  ::::
-  ::
-      plus
-    =+  fel=rule
-    |:
-    |~(plug fel (star fel))
-  ::::
-  ::
-      pose
-    =+  [vex=*edge sab=rule]
-    |:
-    ?~  q.vex
-      =+  roq=$:sab
-      [p=(reco p.vex p.roq) q=q.roq]
-    vex
-  ::::
-  ::
-      reco
-    =+  [zyc=*hair naz=*hair]
-    |=
-    ^-  *hair
-    ?:  .=(p.zyc p.naz)
-      ?:((gth q.zyc q.naz) zyc naz)
-    ?:((gth p.zyc p.naz) zyc naz)
-  ::::
-  ::
-      sfix
-    =+  [vex=*(edge) sab=rule]
-    |:
-    ?~  q.vex
-      vex
-    =+  yit=(sab q.u.q.vex)
-    ?~  yit
-      yit
-    [p=p.yit q=[~ u=[p=p.u.q.vex q=q.u.q.yit]]]
-  ::::
-  ::
-      star
-    =+  fel=rule
-    |:
-    =+  tub=*tube
-    |=
-    ^-  (spew *(list &(fine *fel)))
-    =+  vex=(fel tub)
-    ?~  q.vex
-      [p.vex [~ ~ tub]]
-    =+  wag=$(tub q.u.q.vex)
-    ?>  ?=(^ q.wag)
-    [p.wag [~ [p.u.q.vex p.u.q.wag] q.u.q.wag]]
   ::::
   ::
       gall
@@ -232,7 +11,7 @@
     |:
     =+  tub=tub.fel
     |=
-    ^-  (spew -<+.von)
+    ^-  (earn -<+.von)
     =+  vex=(fel tub)
     ?~  q.vex
       [p.vex [~ -<+.von tub]]
@@ -245,31 +24,6 @@
     =+  [von==+([p=* q=*] |:(-<)) bus=rule fel=rule]
     |:
     |~((comp von) fel (gall von |~(pfix bus fel)))
-  ::::
-  ::
-      shim
-    =+  zep=[p=*byte q=*byte]
-    |=
-    =+  tub=*tube
-    |=
-    ^-  (spew *byte)
-    ?~  q.tub
-      (fail tub) 
-    ?.  ?&((gte i.q.tub p.zep) (lte i.q.tub q.zep))
-      (fail tub)
-    =+  suz=(nair i.q.tub p.tub)
-    [suz [~ i.q.tub [suz t.q.tub]]]
-  ::::
-  ::
-      stag
-    =+  [gob=* sef=rule]
-    |:
-    =+  tub=*tube
-    |=
-    =+  vex=(sef tub)
-    ?~  q.vex
-      vex
-    [p=p.vex q=[~ u=[p=[gob p.u.q.vex] q=q.u.q.vex]]]
   ::
   ::::
   ::::
@@ -298,10 +52,10 @@
       hat   (just '^')
       hex   (bass 16 (plus hit))
       hig   (shim 'A' 'Z')
-      hit   |~(pose dit (cook =+(*byte |=((sub -< 87))) (shim 'a' 'f')))
+      hit   |~(pose dit (cook =+(*char |=((sub -< 87))) (shim 'a' 'f')))
       hop   (just '!')
       lep   (just '(')
-      lib   |~(pose gap (free ~))
+      lib   |~(pose gap (easy ~))
       lom   (just ';')
       low   (shim 'a' 'z')
       mes   (cook =+([@ @] |=((add (mul 16 -<-) -<+))) |~(plug hit hit))
