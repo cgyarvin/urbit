@@ -525,8 +525,6 @@
   {
     u2_weak hoc = u2_ds_look(wir_r, van, "mint");
 
-    printf("mint core\n");
-    c3_assert(0);
     if ( u2_none == hoc ) {
       c3_assert(!"register mint");
       return u2_none;

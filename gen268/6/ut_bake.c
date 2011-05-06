@@ -18,8 +18,10 @@
     
     switch ( tov ) {
       default: return u2_bl_bail(wir_r, c3__fail);
-      case u2_yes: von = u2_rx(wir_r, van);
-      case u2_no: von = u2_bn_molt(wir_r, van, j2_ut_van_vet, u2_no, 0);
+      case u2_yes: 
+        von = u2_rx(wir_r, van); break;
+      case u2_no: 
+        von = u2_bn_molt(wir_r, van, j2_ut_van_vet, u2_no, 0); break;
     }
     {
       u2_noun mil = j2_mcy(Pit, ut, mint)(wir_r, von, sut, c3__noun, gen);

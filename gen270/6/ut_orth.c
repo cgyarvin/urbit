@@ -26,7 +26,7 @@
 
           case c3__atom: return u2_no;
         } 
-        else switch u2_h(ref) {
+        else switch ( u2_h(ref) ) {
           default: goto flip;
           
           case c3__cell: return u2_yes;
@@ -84,7 +84,7 @@
 
             case c3__atom: return u2_dust(p_sut);
           } 
-          else switch u2_h(ref) {
+          else switch ( u2_h(ref) ) {
             default: goto flip;
            
             case c3__cell: {

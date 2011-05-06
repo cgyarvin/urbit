@@ -154,6 +154,9 @@ u2_frag(u2_atom a,
     c3_w dep_w = u2_ax_dep(a);
 
     while ( dep_w ) {
+      if ( u2_no == u2_dust(b) ) {
+        return u2_none;
+      }
       if ( a & (1 << (dep_w - 1)) ) {
         b = u2_t(b);
       } else {

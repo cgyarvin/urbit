@@ -1,36 +1,3 @@
-::  bar   |       
-::  bon   =       
-::  bot   '       
-::  cab   _       
-::  com   ,       
-::  cas   ?       
-::  dap   -     
-::  dax   #       
-::  deg   :       
-::  den   [
-::  des   {
-::  dot   .       
-::  del   <
-::  ket   ^
-::  lep   (       
-::  led   >
-::  mit   %       
-::  nat   @     
-::  ned   ]
-::  nov   \
-::  pam   &       
-::  ped   +
-::  pel   )
-::  sec   $
-::  sed   }
-::  sig   ~
-::  tam   ;       
-::  tar   *
-::  tec   `
-::  tob   "
-::  von   /
-::  zap   !       
-::
 ~%    %watt.267
     ~ 
   (%ut ut, %go go, %to to)
@@ -756,7 +723,7 @@
     |=  waq=*tape
     %+  roll
       waq
-    =+([a=@ b=@] |.((add a (mul rum b))))
+    =+([p=@ q=@] |.((add p (mul rum q))))
   tyd
 ::
 ++  boss
@@ -765,7 +732,7 @@
     |=  waq=*tape
     %+  reel
       waq
-    =+([a=@ b=@] |.((add a (mul rum b))))
+    =+([p=@ q=@] |.((add p (mul rum q))))
   tyd
 ::
 ++  bend
@@ -920,68 +887,42 @@
     [p.tub [~ ~ q.tub]]
   =+  wag=$(p.tub p.vex, q.tub q.u.q.vex)
   ?>  ?=(^ q.wag)
-  [p.wag [~ [p.u.q.vex p.u.q.wag]] q.u.q.wag]
+  [p.wag [~ [p.u.q.vex p.u.q.wag] q.u.q.wag]]
 ::
   ::  Tier 5a, core 2, randoms
 ::
-++  ace   (just 32)
-++  alf   |~(pose low hig)
-++  aln   |~(pose low hig num)
-++  amp   (just '&')
-++  ask   (just '?')
-++  bar   (just '|')
-++  ben   (just '=')
-++  bin   (bass 2 (plus bit))
-++  bit   (cook |=(a=@ (sub a '0')) (shim '0' '1'))
-++  bot   (just '\'')
-++  buc   (just '$')
-++  cab   (just '_')
-++  com   (just ',')
-++  dax   (just '#')
-++  del   (bass 10 (plus dit))
-++  der   (just '<')
-++  dig   (just ':')
-++  dit   (cook |=(a=@ (sub a '0')) (shim '0' '9'))
-++  dot   (just '.')
-++  dus   (just '}')
-++  gap   (cold ~ (plus |~(pose vul (mask {10 32 ~}))))
-++  hat   (just '^')
-++  hex   (bass 16 (plus hit))
-++  hig   (shim 'A' 'Z')
-++  hit   |~(pose dit (cook |=(a=*char (sub a 87)) (shim 'a' 'f')))
-++  hop   (just '!')
-++  lep   (just '(')
-++  lib   |~(pose gap (easy ~))
-++  lom   (just ';')
-++  low   (shim 'a' 'z')
-++  mes   (cook |=([a=@ b=@] (add (mul 16 a) b)) |~(plug hit hit))
-++  mit   (just '%')
-++  mon   (just ']')
-++  nix   (boss 256 (star |~(pose aln cab)))
-++  nom   (just '[')
-++  nub   (just '-')
-++  num   (shim '0' '9')
-++  pat   (just '@')
-++  pel   (just ')')
-++  pod   (just '+')
-++  poy   |~(pfix sac |~(pose sac bot mes))
-++  qit   |~(pose (shim 32 38) (shim 40 91) (shim 92 126) poy)
-++  quo   (ifix [bot bot] (bass 256 (plus qit)))
-++  ras   (just '*')
-++  red   (just '>')
-++  sac   (just '\\')
-++  sig   (just '~')
-++  sol   (just '/')
-++  sud   (just '{')
-++  sym 
-      %+  cook
-        |=(a=*tape (rap 3 a))
-      |~(plug low (star |~(pose num low nub)))
-::
-++  tar   (cold ~ (plus (mask {10 32 ~})))
-++  tic   (just '`')
-++  toq   (just '"')
-++  vul   (cold ~ |~(plug dig dig (star (shim 32 126)) (just 10)))
+++  bar  (just '|')
+++  bon  (just '=')
+++  bot  (just '\'')
+++  cab  (just '_')
+++  com  (just ',')
+++  cas  (just '?')
+++  dap  (just '- ')
+++  dax  (just '#')
+++  deg  (just ':')
+++  den  (just '[')
+++  des  (just '{')
+++  dot  (just '.')
+++  del  (just '<')
+++  ket  (just '^')
+++  lep  (just '(')
+++  led  (just '>')
+++  mit  (just '%')
+++  nat  (just '@')
+++  ned  (just ']')
+++  nov  (just '\\')
+++  pam  (just '&')
+++  ped  (just '+')
+++  pel  (just ')')
+++  sec  (just '$')
+++  sed  (just '}')
+++  sig  (just '~')
+++  tam  (just ';')
+++  tar  (just '*')
+++  tec  (just '`')
+++  tob  (just '"')
+++  von  (just '/')
+++  zap  (just '!')
 ::
   ::  Tier 5b, core 0, prototypes
 ::
@@ -1501,7 +1442,7 @@
     [%mtdg p=*gene q=*gene]                                       ::  %:  mitdeg
     [%mtdt p=*gene q=*gene]                                       ::  %.  mitdot
     [%mtkt p=*gene q=*gene r=*gene s=*gene]                       ::  %^  mitket
-    
+
     [%mtdp p=*gene q=*(list gene)]                                ::  %-  mitdap
     [%mtpd p=*gene q=*gene r=*gene]                               ::  %+  mitpad
     [%mtsg p=*twig q=*gene r=*gene]                               ::  %~  mitsig
@@ -1746,7 +1687,7 @@
         [%dtsg *]   gen
         [%ktbn *]   $(gen q.gen)
         [%ktpd *]   $(gen p.gen)
-        [%mttr *]   
+        [%mttr *]
       ?.  ?=([%brcs *] p.gen)
         [%tmbn %noun]
       gen(p.p (turn p.p.gen |=(*gene $$(gen -<))))
@@ -1883,7 +1824,7 @@
   ^-  *(unit <[p=*axis q=*gene]>)
   ?-  dab
       ~         ~
-      [* ~ ~]   
+      [* ~ ~]
     ?:(.=(cog p.n.dab) [~ axe ?>(?=([& *] q.n.dab) p.q.n.dab)] ~)
   ::
       [* ~ *]
@@ -1995,7 +1936,7 @@
     |-  ^-  *type
     ?-    sut
         %atom       %void
-        [%cell *]   
+        [%cell *]
       ?:  .=(2 now)
         (cell $$(axe lat, sut p.sut) q.sut)
       (cell p.sut $$(axe lat, sut q.sut))
@@ -2267,7 +2208,7 @@
           *           $(sut ref, ref sut)
       --
     ::
-        [%cell *]   
+        [%cell *]
       ?-    ref
           [%cell *]   (cell $(sut p.sut, ref p.ref) $(sut q.sut, ref q.ref))
           *           $(sut ref, ref sut)
@@ -2487,7 +2428,7 @@
         :-  %void
         [0 0]
       ::
-          *           
+          *
         =+  doz=~(open ap gen) 
         ?:  .=(doz gen)
           ::  ~|  [%open-gene |.((~(fly to ~(gut go `*`gen)) 75))]
@@ -2576,7 +2517,7 @@
           dext(sut q.sut, ref q.ref)
         --
       ::
-          [%core *]   
+          [%core *]
         ?.  ?=([%core *] ref) 
           sint
         cong
@@ -2687,7 +2628,7 @@
         %void       %void
         %noun       %noun
         [%cell *]   ?:(.=(2 now) $(sut p.sut, axe lat) $(sut q.sut, axe lat))
-        [%core *]   
+        [%core *]
       ?:  .=(2 now) 
         ?.  (park way lat)
           ::  ~|  [%axis |.((~(fly to ~(dem go `@`axe)) 75))]
@@ -2696,7 +2637,7 @@
         $(sut p.sut, axe lat) 
       %noun
     ::
-        [%cube *]   
+        [%cube *]
       ?.  .?(p.sut) 
         %void 
       ?:  .=(2 now) 
@@ -2756,7 +2697,7 @@
         [%zpcb *]   $(gen q.gen)
         [%zpdx *]   $(gen p.gen)
         [%zpzp ~]   %void
-        *           
+        *
       =+(doz=~(open ap gen) ?:(.=(doz gen) ~|(%play-open !!) $(gen doz)))
     --
   ::
@@ -2813,7 +2754,7 @@
   ++  snap
     ~.  %snap
     |=  gen=*gene
-    ^-  *gene 
+    ^-  *gene
     ?-    sut
         [%cell *]
       =+  haq=(hack gen)

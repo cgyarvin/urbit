@@ -1,4 +1,87 @@
 
+
+
+++  bug  
+  |~  pfix 
+    bar 
+    bon
+  --
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+++  ace   (just 32)
+++  alf   |~(pose low hig)
+++  aln   |~(pose low hig num)
+++  amp   (just '&')
+++  ask   (just '?')
+++  bar   (just '|')
+++  ben   (just '=')
+++  bin   (bass 2 (plus bit))
+++  bit   (cook |=(a=@ (sub a '0')) (shim '0' '1'))
+++  bot   (just '\'')
+++  buc   (just '$')
+++  cab   (just '_')
+++  com   (just ',')
+++  dax   (just '#')
+++  del   (bass 10 (plus dit))
+++  der   (just '<')
+++  dig   (just ':')
+++  dit   (cook |=(a=@ (sub a '0')) (shim '0' '9'))
+++  dot   (just '.')
+++  dus   (just '}')
+++  gap   (cold ~ (plus |~(pose vul (mask {10 32 ~}))))
+++  hat   (just '^')
+++  hex   (bass 16 (plus hit))
+++  hig   (shim 'A' 'Z')
+++  hit   |~(pose dit (cook |=(a=*char (sub a 87)) (shim 'a' 'f')))
+++  hop   (just '!')
+++  lep   (just '(')
+++  lib   |~(pose gap (easy ~))
+++  lom   (just ';')
+++  low   (shim 'a' 'z')
+++  mes   (cook |=([a=@ b=@] (add (mul 16 a) b)) |~(plug hit hit))
+++  mit   (just '%')
+++  mon   (just ']')
+++  nix   (boss 256 (star |~(pose aln cab)))
+++  nom   (just '[')
+++  nub   (just '-')
+++  num   (shim '0' '9')
+++  pat   (just '@')
+++  pel   (just ')')
+++  pod   (just '+')
+++  poy   |~(pfix sac |~(pose sac bot mes))
+++  qit   |~(pose (shim 32 38) (shim 40 91) (shim 92 126) poy)
+++  quo   (ifix [bot bot] (bass 256 (plus qit)))
+++  ras   (just '*')
+++  red   (just '>')
+++  sac   (just '\\')
+++  sig   (just '~')
+++  sol   (just '/')
+++  sud   (just '{')
+++  sym 
+      %+  cook
+        |=(a=*tape (rap 3 a))
+      |~(plug low (star |~(pose num low nub)))
+::
+++  tar   (cold ~ (plus (mask {10 32 ~})))
+++  tic   (just '`')
+++  toq   (just '"')
+++  vul   (cold ~ |~(plug dig dig (star (shim 32 126)) (just 10)))
+
 ::
 ::::
   ::  Tier 5, parsing
@@ -24,69 +107,3 @@
     =+  [von==+([p=* q=*] |:(-<)) bus=rule fel=rule]
     |:
     |~((comp von) fel (gall von |~(pfix bus fel)))
-  ::
-  ::::
-  ::::
-  ::
-      ace   (just 32)
-      alf   |~(pose low hig)
-      aln   |~(pose low hig num)
-      amp   (just '&')
-      ask   (just '?')
-      bar   (just '|')
-      ben   (just '=')
-      bin   (bass 2 (plus bit))
-      bit   (cook =+(@ |=((sub -< '0'))) (shim '0' '1'))
-      bot   (just '\'')
-      buc   (just '$')
-      cab   (just '_')
-      com   (just ',')
-      dax   (just '#')
-      del   (bass 10 (plus dit))
-      der   (just '<')
-      dig   (just ':')
-      dit   (cook =+(@ |=((sub -< '0'))) (shim '0' '9'))
-      dot   (just '.')
-      dus   (just '}')
-      gap   (cold ~ (plus |~(pose vul (mask {10 32 ~}))))
-      hat   (just '^')
-      hex   (bass 16 (plus hit))
-      hig   (shim 'A' 'Z')
-      hit   |~(pose dit (cook =+(*char |=((sub -< 87))) (shim 'a' 'f')))
-      hop   (just '!')
-      lep   (just '(')
-      lib   |~(pose gap (easy ~))
-      lom   (just ';')
-      low   (shim 'a' 'z')
-      mes   (cook =+([@ @] |=((add (mul 16 -<-) -<+))) |~(plug hit hit))
-      mit   (just '%')
-      mon   (just ']')
-      nix   (boss 256 (star |~(pose aln cab)))
-      nom   (just '[')
-      nub   (just '-')
-      num   (shim '0' '9')
-      pat   (just '@')
-      pel   (just ')')
-      pod   (just '+')
-      poy   |~(pfix sac |~(pose sac bot mes))
-      qit   |~(pose (shim 32 38) (shim 40 91) (shim 92 126) poy)
-      quo   (ifix [bot bot] (bass 256 (plus qit)))
-      ras   (just '*')
-      red   (just '>')
-      sac   (just '\\')
-      sig   (just '~')
-      sol   (just '/')
-      sud   (just '{')
-      :: sym   (boss 256 |~(plug low (star |~(pose num low nub))))
-      sym 
-        %+  cook
-          =+(*(list &@) |=((rap 3 -<)))
-        |~(plug low (star |~(pose num low nub)))
-    ::
-      tar   (cold ~ (plus (mask {10 32 ~})))
-      tic   (just '`')
-      toq   (just '"')
-      vul   (cold ~ |~(plug dig dig (star (shim 32 126)) (just 10)))
-  ::
-  ::::
-  ==
