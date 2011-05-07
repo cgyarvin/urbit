@@ -351,7 +351,7 @@
         if ( (u2_yes ==_mint_vet(wir_r, van)) &&
              (u2_no == j2_mcy(Pit, ut, nest)(wir_r, van, gol, zut)) )
         {
-          return u2_bl_error(wir_r, "mint-make");
+          return u2_bl_error(wir_r, "mint-cool");
         }
         else {
           ret = j2_mcx(Pit, ut, mint)(wir_r, van, sut, zut, q_gen);
@@ -549,7 +549,24 @@
     u2_ho_jet *jet_j = &j2_mcj(Pit, ut, mint)[0];
 
     if ( (jet_j->sat_s & u2_jet_live) && !(jet_j->sat_s & u2_jet_test) ) {
-      return j2_mcx(Pit, ut, mint)(wir_r, van, sut, gol, gen);
+      if ( !(jet_j->sat_s & u2_jet_memo) ) {
+        return j2_mcx(Pit, ut, mint)(wir_r, van, sut, gol, gen);
+      }
+      else {
+        c3_m    fun_m = (0x7fffffff & (c3_w)jet_j);
+        u2_flag vet   = u2_frag(j2_ut_van_vet, van);
+        u2_noun pro   = u2_rl_find_qual(wir_r, fun_m, vet, sut, gol, gen);
+
+        if ( u2_none != pro ) {
+          return pro;
+        }
+        else {
+          pro = j2_mcx(Pit, ut, mint)(wir_r, van, sut, gol, gen);
+
+          u2_bx_used(wir_r);
+          return u2_rl_save_qual(wir_r, fun_m, vet, sut, gol, gen, pro);
+        }
+      }
     }
     else {
       u2_noun cor, fol, pro;
@@ -585,10 +602,10 @@
     } else {
       u2_flag vet = u2_frag(j2_ut_van_vet, van);
 
-      return u2_rq(wir_r, u2_rx(wir_r, sut),
+      return u2_rq(wir_r, u2_rx(wir_r, vet),
+                          u2_rx(wir_r, sut),
                           u2_rx(wir_r, gol),
-                          u2_rx(wir_r, gen),
-                          u2_rx(wir_r, vet));
+                          u2_rx(wir_r, gen));
     }
   }
 

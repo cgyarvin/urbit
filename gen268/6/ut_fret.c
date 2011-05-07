@@ -14,13 +14,16 @@
                         u2_noun dox,                              //  retain
                         u2_noun gen)                              //  retain
   {
+#if 0
+    return u2_yes;
+#else
     // u2_noun rib = u2_bn_hook(wir_r, van, "rib");
     u2_noun rib = u2_rx(wir_r, u2_frag(j2_ut_van_rib, van));
     u2_noun key = u2_bt(wir_r, u2_rx(wir_r, sut),
                                u2_rx(wir_r, dox),
                                u2_rx(wir_r, gen));
     u2_flag ret;
-    
+   
     if ( u2_yes == j2_mcc(Pit, in, has)(wir_r, rib, key) ) {
       ret = u2_yes;
     }
@@ -34,8 +37,8 @@
       u2_noun dis = j2_mcy(Pit, ut, mint)(wir_r, von, sut, c3__noun, gen);
       u2_noun dat = j2_mcy(Pit, ut, mint)(wir_r, vin, dox, c3__noun, gen);
 
-      // ret = u2_sing(u2_t(dis), u2_t(dat));
-      ret = u2_yes;
+      ret = u2_sing(u2_t(dis), u2_t(dat));
+      // ret = u2_yes;
 
       u2_rz(wir_r, von);
       u2_rz(wir_r, vin);
@@ -48,6 +51,7 @@
     u2_rz(wir_r, key);
 
     return ret;
+#endif
   }
 
 /* boilerplate

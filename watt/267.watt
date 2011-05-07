@@ -935,8 +935,8 @@
 ++  nix  (boss 256 (star $~(pose aln cab)))
 ++  nov  (just '\\')
 ++  num  (shim '0' '9')
+++  pad  (just '+')
 ++  pam  (just '&')
-++  ped  (just '+')
 ++  pel  (just ')')
 ++  poy  $~(pfix nov $~(pose nov bot mes))
 ++  qit  $~(pose (shim 32 38) (shim 40 91) (shim 92 126) poy)
@@ -957,6 +957,11 @@
 ++  vul  (cold ~ $~(plug deg deg (star (shim 32 126)) (just 10)))
 ++  zap  (just '!')
 ::
+
+++  zoy  $~(pfix von $~(pose von bot mes))
+++  zit  $~(pose (shim 32 39) (shim 40 92) (shim 92 120) zoy)
+++  zuo  (ifix [bot bot] (bass 256 (plus zit)))
+
   ::  Tier 5b, core 0, prototypes
 ::
 ++  tank

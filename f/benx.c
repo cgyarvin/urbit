@@ -19,6 +19,7 @@ u2_bx_boot(u2_ray wir_r)
 
     u2_benx_be(bex_r, c3_d, sap_d) = 0;
     u2_benx_be(bex_r, c3_d, cop_d) = 0;
+    u2_benx_be(bex_r, c3_d, det_d) = 0;
     u2_benx_be(bex_r, c3_d, jax_d) = 0;
     u2_benx_be(bex_r, c3_d, use_d) = 0;
 
@@ -57,6 +58,7 @@ u2_bx_boot(u2_ray wir_r)
 **  zof: programer action stack (on shed)
 **  sap: number of steps
 **  cop: number of words copied
+**  det: number of identical nouns compared
 **  jax: number of jet activations
 **  use: number of user counts
 **  wax: maximum depth of C stack
@@ -71,6 +73,7 @@ u2_bx_post(u2_ray   wir_r,
            u2_noun* zof, 
            c3_d*    sap_d,
            c3_d*    cop_d,
+           c3_d*    det_d,
            c3_d*    jax_d,
            c3_d*    use_d,
            c3_w*    wax_w,
@@ -92,6 +95,7 @@ u2_bx_post(u2_ray   wir_r,
 
     *sap_d = u2_benx_be(bex_r, c3_d, sap_d);
     *cop_d = u2_benx_be(bex_r, c3_d, cop_d);
+    *det_d = u2_benx_be(bex_r, c3_d, det_d);
     *jax_d = u2_benx_be(bex_r, c3_d, jax_d);
     *use_d = u2_benx_be(bex_r, c3_d, use_d);
 
@@ -165,6 +169,21 @@ u2_bx_copy(u2_ray wir_r,
     return;
   } else {
     u2_benx_be(bex_r, c3_d, cop_d) += (c3_d) cop_w;
+  }
+}
+
+/* u2_bx_dent(): note `det` identical comparisons.
+*/
+void 
+u2_bx_dent(u2_ray wir_r,
+           c3_w   det_w)
+{
+  u2_ray bex_r;
+
+  if ( 0 == (bex_r = u2_wire_bex_r(wir_r)) ) {
+    return;
+  } else {
+    u2_benx_be(bex_r, c3_d, det_d) += (c3_d) det_w;
   }
 }
 
@@ -520,7 +539,7 @@ void
 u2_bx_show(u2_ray wir_r)
 {
   u2_noun zat, zof;
-  c3_d sap_d, cop_d, jax_d, use_d;
+  c3_d sap_d, cop_d, det_d, jax_d, use_d;
   c3_w wax_w, moc_w, hix_w, ums_w;
   c3_ws bax_ws;
 
@@ -528,6 +547,7 @@ u2_bx_show(u2_ray wir_r)
                                   &zof,
                                   &sap_d, 
                                   &cop_d, 
+                                  &det_d, 
                                   &jax_d, 
                                   &use_d, 
                                   &wax_w, 
@@ -570,6 +590,11 @@ u2_bx_show(u2_ray wir_r)
         printf(", ");
         _bx_print_superdecimal_d(cop_d);
         printf(" dups");
+      }
+      if ( det_d ) {
+        printf(", ");
+        _bx_print_superdecimal_d(det_d);
+        printf(" nods");
       }
       if ( use_d ) {
         printf(", ");

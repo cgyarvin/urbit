@@ -27,6 +27,10 @@
         */
         c3_d  cop_d;
 
+        /* Matching comparisons.
+        */
+        c3_d  det_d;
+
         /* Jet activations.
         */
         c3_d  jax_d;
@@ -89,6 +93,7 @@
     **  zof: programer action stack (on shed)
     **  sap: number of steps
     **  cop: number of words copied
+    **  det: number of identical nouns compared
     **  jax: number of jet activations
     **  use: number of user counts
     **  wax: maximum depth of C stack
@@ -103,6 +108,7 @@
                  u2_noun* zof, 
                  c3_d*    sap_d,
                  c3_d*    cop_d,
+                 c3_d*    det_d,
                  c3_d*    jax_d,
                  c3_d*    use_d,
                  c3_w*    wax_w,
@@ -141,6 +147,12 @@
       void 
       u2_bx_copy(u2_ray wir_r,
                  c3_w   cop_w);
+
+    /* u2_bx_dent(): note 'det' identicals.
+    */
+      void 
+      u2_bx_dent(u2_ray wir_r,
+                 c3_w   det_w);
 
     /* u2_bx_shed(): note `wad` allocated/freed words in hangar.
     */

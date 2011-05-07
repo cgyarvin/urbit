@@ -438,17 +438,24 @@ u2_mug_qual(u2_noun a,
                                  u2_mug_both(u2_mug(c), u2_mug(d))));
 }
 
-/* u2_sing():
+#ifdef U2_PROFILE
+  c3_w X;   // XX not thread-safe
+#endif
+
+/* _sing_x():
 **
 **   Yes iff (a) and (b) are the same noun.
 */
-u2_flag
-u2_sing(u2_noun a,
+static u2_flag
+_sing_x(u2_noun a,
         u2_noun b)
 {
   c3_assert(u2_none != a);
   c3_assert(u2_none != b);
 
+#ifdef U2_PROFILE
+  X++;
+#endif
   if ( a == b ) {
     return u2_yes;
   }
@@ -501,14 +508,53 @@ u2_sing(u2_noun a,
           return u2_no;
         }
         else {
-          if ( u2_no == u2_sing(u2_h(a), u2_h(b)) ) {
+          if ( u2_no == _sing_x(u2_h(a), u2_h(b)) ) {
             return u2_no;
           }
-          else return u2_sing(u2_t(a), u2_t(b));
+          else return _sing_x(u2_t(a), u2_t(b));
         }
       }
     }
   }
+}
+
+#ifdef U2_PROFILE
+/* _weight(): count subordinate nouns.
+*/
+static c3_w
+_weight(u2_noun n)
+{
+  if ( u2_yes == u2_stud(n) ) {
+    return 1;
+  } else {
+    return _weight(u2_h(n)) + _weight(u2_t(n));
+  }
+}
+#endif
+
+/* u2_sing():
+**
+**   Yes iff (a) and (b) are the same noun.
+*/
+u2_flag
+u2_sing(u2_noun a,
+        u2_noun b)
+{
+#ifndef U2_PROFILE
+  return _sing_x(a, b);
+#else
+  X=0;
+  {
+    u2_flag sit = _sing_x(a, b);
+
+#if 1
+    if ( (u2_yes == sit) && (a != b) ) {
+      u2_bx_dent(0, X);
+    }
+#endif
+    return sit;
+  }
+#endif
 }
 
 u2_flag

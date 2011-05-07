@@ -19,7 +19,7 @@ ENDIAN=little
 BIN=run
 
 RM=rm -f
-CC=gcc 
+CC=gcc
 CLD=gcc -O3 -L/sw/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex

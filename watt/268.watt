@@ -1319,8 +1319,8 @@
 ::
 ++  flip
   ~.  %flip
-  |=  [hel=*form]
-  [6 hel [1 1] [1 0]]
+  |=  [dyr=*form]
+  [6 dyr [1 1] [1 0]]
 ::
 ++  flor
   ~.  %flor
@@ -1937,9 +1937,7 @@
           [%ktpd *]                                                   ::  ^+
         =+  zut=(play p.gen)
         ?.  ?|(!vet (nest(sut gol) zut))
-          ::  ~|  [%need |.((~(fly to dump(sut gol)) 75))]
-          ::  ~|  [%have |.((~(fly to dump(sut zut)) 75))]
-          ~|(%mint-make !!)
+          ~|(%mint-cool !!)
         $(gen q.gen, gol zut)
       ::
           [%ktsg *]                                                   ::  ^~
@@ -1962,9 +1960,6 @@
         (crow %gold [~ 1] p.gen)
       ::
           [%pmpd *]                                                   ::  &+
-        (crow %iron [%dgdp p.gen [~ 1]] q.gen)
-      ::
-          [%pmtr *]                                                   ::  &*
         (crow %iron [%dgdp p.gen [~ 1]] q.gen)
       ::
           [%sgld *]                                                   ::  ~>
@@ -2220,8 +2215,6 @@
   ++  play
     ~.  %play
     |=  gen=*gene
-    ::  ~|  [%play-gene |.((~(fly to ~(gut go `*`gen)) 75))]
-    ::  ~|  [%play-type |.((~(fly to dump) 75))]
     =>  .(vet |)
     ^-  *type
     ?-    gen
@@ -2256,9 +2249,6 @@
         [%pmdt *]   (core sut %gold sut [[0 0] p.gen])
         [%pmpd *]
       =+(gur=(cell $(gen p.gen) sut) (core gur %iron gur [0 0] q.gen))
-    ::
-        [%pmtr *]
-      =+(gur=(cell $(gen p.gen) sut) (core gur %wood gur [0 0] q.gen))
     ::
         [%sgld *]   $(gen q.gen)
         [%zpbn *]   %noun

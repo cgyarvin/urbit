@@ -6,6 +6,10 @@
   **/
     /** Profiling.
     **/
+      /* Profile at all.
+      */
+#       define U2_PROFILE
+
       /* Measure memory usage.
       */
 #       define U2_PROFILE_MEMORY
