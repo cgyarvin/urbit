@@ -1,11 +1,6 @@
 
 
 
-++  bug  
-  |~  pfix 
-    bar 
-    bon
-  --
 
 
 
@@ -22,16 +17,6 @@
 
 
 
-
-++  ace   (just 32)
-++  alf   |~(pose low hig)
-++  aln   |~(pose low hig num)
-++  amp   (just '&')
-++  ask   (just '?')
-++  bar   (just '|')
-++  ben   (just '=')
-++  bin   (bass 2 (plus bit))
-++  bit   (cook |=(a=@ (sub a '0')) (shim '0' '1'))
 ++  bot   (just '\'')
 ++  buc   (just '$')
 ++  cab   (just '_')

@@ -168,6 +168,7 @@
                      ((u2_nul == q_hax) != (u2_nul == q_yor)) )
                 {
                   j2_mcy(Pit, ut, dupt)(wir_r, van, "sut", sut);
+                  u2_err(wir_r, "cog", cog);
                   return u2_bl_error(wir_r, "find-mate");
                 }
                 else if ( (u2_nul == q_hax) && (u2_nul == q_yor) ) {

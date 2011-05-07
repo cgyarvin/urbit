@@ -34,7 +34,8 @@
       u2_noun dis = j2_mcy(Pit, ut, mint)(wir_r, von, sut, c3__noun, gen);
       u2_noun dat = j2_mcy(Pit, ut, mint)(wir_r, vin, dox, c3__noun, gen);
 
-      ret = u2_sing(u2_t(dis), u2_t(dat));
+      // ret = u2_sing(u2_t(dis), u2_t(dat));
+      ret = u2_yes;
 
       u2_rz(wir_r, von);
       u2_rz(wir_r, vin);

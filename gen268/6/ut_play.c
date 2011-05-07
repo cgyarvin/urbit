@@ -138,20 +138,6 @@
           }
         }
       }
-      case c3__pmbn: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
-      {
-        u2_noun dim = _play_in(wir_r, van, sut, p_gen);
-        u2_noun gur = j2_mby(Pit, cell)(wir_r, dim, sut);
-        u2_noun zun = u2_bc(wir_r, u2_bc(wir_r, 0, 0), u2_rx(wir_r, q_gen));
-        u2_noun con = u2_bt(wir_r, c3__iron, u2_rx(wir_r, gur), zun);
-        u2_noun ret = j2_mby(Pit, core)(wir_r, gur, con);
-
-        u2_rz(wir_r, dim);
-        u2_rz(wir_r, gur);
-        u2_rz(wir_r, con);
-
-        return ret;
-      }
       case c3__pmdg: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       { 
         u2_noun dim = _play_in(wir_r, van, sut, p_gen);
@@ -175,12 +161,12 @@
         u2_rz(wir_r, con);
         return ret;
       }
-      case c3__pmtr: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
-      { 
+      case c3__pmpd: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
+      {
         u2_noun dim = _play_in(wir_r, van, sut, p_gen);
         u2_noun gur = j2_mby(Pit, cell)(wir_r, dim, sut);
         u2_noun zun = u2_bc(wir_r, u2_bc(wir_r, 0, 0), u2_rx(wir_r, q_gen));
-        u2_noun con = u2_bt(wir_r, c3__wood, u2_rx(wir_r, gur), zun);
+        u2_noun con = u2_bt(wir_r, c3__iron, u2_rx(wir_r, gur), zun);
         u2_noun ret = j2_mby(Pit, core)(wir_r, gur, con);
 
         u2_rz(wir_r, dim);

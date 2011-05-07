@@ -970,7 +970,7 @@
     [%brdg p=*gene q=*gene]                                       ::  |:  bardeg
     [%brdp p=*gene]                                               ::  |-  bardap
     [%brdt p=*gene]                                               ::  |.  bardot
-    [%brsg p=*gene q=*(list gene)]                                ::  |~  barsig
+    [%brpd p=*gene q=*gene]                                       ::  |+  barpad
     [%brtr p=*gene q=*gene]                                       ::  |*  bartar
   ::
     [%csbn p=*gene q=*gene]                                       ::  ?=  casbon
@@ -1007,7 +1007,6 @@
     [%mtdg p=*gene q=*gene]                                       ::  %:  mitdeg
     [%mtdt p=*gene q=*gene]                                       ::  %.  mitdot
     [%mtkt p=*gene q=*gene r=*gene s=*gene]                       ::  %^  mitket
-    
     [%mtdp p=*gene q=*(list gene)]                                ::  %-  mitdap
     [%mtpd p=*gene q=*gene r=*gene]                               ::  %+  mitpad
     [%mtsg p=*twig q=*gene r=*gene]                               ::  %~  mitsig
@@ -1017,7 +1016,9 @@
     [%pmdg p=*gene q=*(map term foot)]                            ::  &:  pamdeg
     [%pmdp p=*gene q=*(map term foot)]                            ::  &-  pamdap
     [%pmdt p=*(map term foot)]                                    ::  &.  pamdot
-    [%pmtr p=*gene q=*(map term foot)]                            ::  &*  pamtar
+    [%pmpd p=*gene q=*(map term foot)]                            ::  &+  pampad
+  ::
+    [%scsg p=*gene q=*(list gene)]                                ::  $~  secsig
   ::
     [%sgbn p=*gene q=*gene]                                       ::  ~=  sigbon
     [%sgbr p=*gene q=*gene]                                       ::  ~|  sigbar
@@ -1105,25 +1106,9 @@
         [%brdp *]   [%bnld [%brdt p.gen] %%]
         [%brdg *]   [%pmdg p.gen [[%% [& & q.gen]] ~ ~]]
         [%brdt *]   [%pmdt [[%% [& & p.gen]] ~ ~]]
-        [%brsg *]
-      |-
-      ?-  q.gen
-          ~       ~|(%open-brsg !!)
-          [* ~]   i.q.gen
-      ::
-          ^
-        :+  %bnpd
-          $(q.gen t.q.gen)
-        :+  %bnpd
-          [%bnld [~ 3] i.q.gen]
-        :+  %brtr
-          [~ 8]
-        :^    %mtpd
-            [%bnld [~ 23] p.gen]
-          [%mtdp [~ 10] [~ 4] ~]
-        [%mtbn [[~ 22] ~] [[[~ 4] [~ 4]] ~]]
-      --
-        [%brtr *]   [%pmtr p.gen [[%% [& | q.gen]] ~ ~]]
+        [%brpd *]   [%pmpd p.gen [[%% [& & q.gen]] ~ ~]]
+    ::
+        [%brtr *]   [%pmbn p.gen [[%% [& | q.gen]] ~ ~]]
     ::::
     ::::
         [%csbr *]
@@ -1188,6 +1173,27 @@
     ::::
     ::::
         [%pmdp *]   [%bnld [%pmdt q.gen] p.gen] 
+        [%pmbn *]   [%bnpd p.gen [%pmdt q.gen]]
+    ::::
+    ::::
+        [%scsg *]
+      |-
+      ?-  q.gen
+          ~       ~|(%open-scsg !!)
+          [* ~]   i.q.gen
+      ::
+          ^
+        :+  %bnpd
+          $(q.gen t.q.gen)
+        :+  %bnpd
+          [%bnld [~ 3] i.q.gen]
+        :+  %brtr
+          [~ 8]
+        :^    %mtpd
+            [%bnld [~ 23] p.gen]
+          [%mtdp [~ 10] [~ 4] ~]
+        [%mtbn [[~ 22] ~] [[[~ 4] [~ 4]] ~]]
+      --
     ::::
     ::::
         [%sgbn *]   [%sgld [%germ p.gen] q.gen]
@@ -1949,14 +1955,14 @@
         :-  (nice (fire(sut p.fup) q.u.q.lar))
         [9 p.u.q.lar q.fup]
       ::
-          [%pmbn *]                                                   ::  &=
-        (crow %iron [%dgdp p.gen [~ 1]] q.gen)
-      ::
           [%pmdg *]                                                   ::  &:
         (crow %lead [%dgdp p.gen [~ 1]] q.gen)
       ::
           [%pmdt *]                                                   ::  &.
         (crow %gold [~ 1] p.gen)
+      ::
+          [%pmpd *]                                                   ::  &+
+        (crow %iron [%dgdp p.gen [~ 1]] q.gen)
       ::
           [%pmtr *]                                                   ::  &*
         (crow %iron [%dgdp p.gen [~ 1]] q.gen)
@@ -2244,13 +2250,13 @@
         wix
       (fire(sut wix) q.u.q.lar)
     ::
-        [%pmbn *]
-      =+(gur=(cell $(gen p.gen) sut) (core gur %iron gur [0 0] q.gen))
-    ::
         [%pmdg *]
       =+(gur=(cell $(gen p.gen) sut) (core gur %lead gur [0 0] q.gen))
     ::
         [%pmdt *]   (core sut %gold sut [[0 0] p.gen])
+        [%pmpd *]
+      =+(gur=(cell $(gen p.gen) sut) (core gur %iron gur [0 0] q.gen))
+    ::
         [%pmtr *]
       =+(gur=(cell $(gen p.gen) sut) (core gur %wood gur [0 0] q.gen))
     ::
