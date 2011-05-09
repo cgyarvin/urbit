@@ -422,6 +422,13 @@
                             u2_noun har);                         //  retain
 
       u2_noun                                                     //  transfer
+      j2_mcy(Pit, ut, fern)(u2_wire wir_r,
+                            u2_noun van,                          //  retain
+                            u2_noun sut,                          //  retain
+                            u2_noun dox,                          //  retain
+                            u2_noun gen);                         //  retain
+
+      u2_noun                                                     //  transfer
       j2_mcy(Pit, ut, find)(u2_wire wir_r,
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
@@ -444,7 +451,7 @@
       j2_mcy(Pit, ut, fret)(u2_wire wir_r,
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
-                            u2_noun gol,                          //  retain
+                            u2_noun dox,                          //  retain
                             u2_noun gen);                         //  retain
 
       u2_noun                                                     //  transfer

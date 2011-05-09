@@ -471,7 +471,7 @@
     }
   }
 
-  u2_weak                                                         //  transfer
+  u2_weak                                                         //  produce
   j2_mci(Pit, ut, fern)(u2_wire wir_r,
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain 
@@ -502,7 +502,7 @@
     }
   }
 
-  u2_noun                                                         //  transfer
+  u2_noun                                                         //  produce
   j2_mcy(Pit, ut, fern)(u2_wire wir_r,
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
