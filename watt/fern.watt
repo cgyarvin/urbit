@@ -1,11 +1,14 @@
   ::
   ++  fern
     ~.  %fern
-    |=  [dox=*type gol=*type gen=*gene]
+    |=  [dox=*type gen=*gene]
     ^-  ?
     ?:  (~(has in rib) [sut dox gen])
       &
     =>  .(rib (~(put in rib) [sut dox gen]))
+    =+  gol=*type
+    =<  =+  hel=$
+        &
     &.
     ++  crow
       |=  [mel=*<%gold %lead %iron> ruf=*gene dab=*(map term foot)]
@@ -14,16 +17,16 @@
           :-  (core p.dan [%gold p.dan [~ dab]])
           (core q.dan [%gold q.dan [~ dab]])
       =+  ^=  hel
-          |-  ^-  &
+          |-  ^-  ?
           ?~  dab
             &
           ?>  ?=([& *] q.n.dab)
-          =+  vad=$$$(vet ?:(p.p.q.n.dab vet |), gol %noun, gen q.p.q.n.dab)
+          =+  hel=$$$(vet ?:(p.p.q.n.dab vet |), gol %noun, gen q.p.q.n.dab)
           ?-    dab
-              [* ~ ~]   vad
-              [* ~ *]   ?&(vad $(dab r.dab))
-              [* * ~]   ?&(vad $(dab l.dab))
-              [* * *]   [vad $(dab l.dab) $(dab r.dab)] 
+              [* ~ ~]   &
+              [* ~ *]   $(dab r.dab)
+              [* * ~]   $(dab l.dab)
+              [* * *]   ?&($(dab l.dab) $(dab r.dab))
           --
       :-  (nice (core p.dan mel p.dan [~ dab]))
       (core q.dan mel q.dan [~ dab])
@@ -85,10 +88,10 @@
       ::
           [%ktbn *]
         =+  vat=$(gen q.gen)
-        [(face p.gen p.vat) (face q.gen q.vat)]
+        [(face p.gen p.vat) (face p.gen q.vat)]
       ::
           [%ktdp *]
-        =+  hif=[(nice (play p.gen)) (play(sut dox) p.gen)]
+        =+  hif=[p=(nice (play p.gen)) q=(play(sut dox) p.gen)]
         =+  hel=$(gen q.gen, gol p.hif)
         hif
       ::
@@ -111,11 +114,12 @@
           [%pmpd *]  (crow %iron [%dgdp p.gen [~ 1]] q.gen)
       ::
           [%sgld *]  $(gen q.gen)
-          [%zpbn *]  %noun
+          [%zpbn *]  [%noun %noun]
           [%zpcb *]  $(gen q.gen)
           [%zpdx *]  $(gen p.gen)
-          [%zpzp ~]  %void
+          [%zpzp ~]  [%void %void]
           *           
         =+(doz=~(open ap gen) ?:(.=(doz gen) ~|(%play-open !!) $(gen doz)))
       --
     ==
+

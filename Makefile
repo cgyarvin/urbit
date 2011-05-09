@@ -395,6 +395,7 @@ J268_6_OFILES_UT=\
        gen268/6/ut_cull.o \
        gen268/6/ut_edit.o \
        gen268/6/ut_emit.o \
+       gen268/6/ut_fern.o \
        gen268/6/ut_find.o \
        gen268/6/ut_fire.o \
        gen268/6/ut_fish.o \

@@ -53,6 +53,8 @@
     if ( (u2_yes == _mint_vet(wir_r, van)) &&
          (u2_no == j2_mcy(Pit, ut, nest)(wir_r, van, gol, typ)) ) 
     {
+      // j2_mcy(Pit, ut, dupt)(wir_r, van, "gol", gol);
+      // j2_mcy(Pit, ut, dupt)(wir_r, van, "typ", typ);
       return u2_bl_error(wir_r, "mint-nice");
     }
     else return typ;
