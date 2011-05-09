@@ -1632,7 +1632,7 @@
     ?:  (~(has in rib) [sut dox gen])
       &
     =>  .(rib (~(put in rib) [sut dox gen]))
-    =+  gol=*type
+    =+  gol=`*type`%noun
     =<  =+  hel=$
         &
     &.
@@ -1854,7 +1854,7 @@
         ::  ~~  dump(sut p.sut)     ::  have
         ~|('fire-hard' !!)
       [dox q.p]
-    ?.  ?|(!vet .=(p.sut q.q.sut) (fret dox q.p))
+    ?.  ?|(!vet .=(p.sut q.q.sut) (fern dox q.p))
       ::  ~~  dump(sut q.q.sut)     ::  need
       ::  ~~  dump(sut p.sut)       ::  have
       ~|('fire-soft' !!)

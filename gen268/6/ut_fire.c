@@ -41,7 +41,8 @@
       } else {
         if ( (u2_yes == vet) &&
              (u2_no == u2_sing(p_sut, qq_sut)) &&
-             (u2_no == j2_mcy(Pit, ut, fret)(wir_r, van, sut, dox, qi_hag)) )
+             // (u2_no == j2_mcy(Pit, ut, fret)(wir_r, van, sut, dox, qi_hag)) )
+             (u2_no == j2_mcy(Pit, ut, fern)(wir_r, van, sut, dox, qi_hag)) )
         {
           return u2_bl_error(wir_r, "fire-soft");
         } else {

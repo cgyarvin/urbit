@@ -185,7 +185,7 @@
     if ( u2_no == u2_dust(gen) ) {
       u2_noun rex = j2_mcy(Pit, ap, open)(wir_r, gen);
 
-      ret = _fern_in(wir_r, van, sut, dox, gen, gol);
+      ret = _fern_in(wir_r, van, sut, dox, rex, gol);
       u2_rl_lose(wir_r, rex);
 
       return ret;
@@ -195,11 +195,12 @@
         u2_noun rex = j2_mcy(Pit, ap, open)(wir_r, gen);
 
         if ( u2_yes == u2_sing(rex, gen) ) {
-          // u2_err(wir_r, "hrex", u2_h(rex));
-          // c3_assert(0);
+          u2_err(wir_r, "hrex", u2_h(rex));
+          u2_err(wir_r, "gen", gen);
+          c3_assert(0);
           return u2_bl_error(wir_r, "fern-open");
         }
-        ret = _fern_in(wir_r, van, sut, dox, gen, gol);
+        ret = _fern_in(wir_r, van, sut, dox, rex, gol);
         u2_rl_lose(wir_r, rex);
 
         return ret;
@@ -208,10 +209,11 @@
       case c3__bnld: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       {
         u2_noun fid = _fern_in(wir_r, van, sut, dox, p_gen, c3__noun);
-        u2_noun roy = _fern_in(wir_r, van, u2_h(fid), u2_t(fid), q_gen, gol);
+        u2_noun ret = _fern_in(wir_r, van, u2_h(fid), u2_t(fid), q_gen, gol);
 
         u2_rz(wir_r, fid);
-        return roy;
+        
+        return ret;
       }
       case c3__csbn: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       {
@@ -221,6 +223,7 @@
           (wir_r, _fern_nice(wir_r, van, gol, u2_rx(wir_r, bol)), bol);
      
         u2_rz(wir_r, hel);
+        
         return ret;
       }
       case c3__csdg: u2_bi_trel(wir_r, u2_t(gen), &p_gen, &q_gen, &r_gen);
@@ -271,6 +274,8 @@
 
         u2_rz(wir_r, hed);
         u2_rz(wir_r, tal);
+
+        return ret;
       }
       case c3__dtbn: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       {
@@ -282,6 +287,7 @@
      
         u2_rz(wir_r, p_hel);
         u2_rz(wir_r, q_hel);
+
         return ret;
       }
       case c3__dtcs: p_gen = u2_t(gen);
@@ -306,9 +312,10 @@
       case c3__dtsg: p_gen = u2_t(gen);
       {
         u2_noun nik = u2_bc(wir_r, c3__cube, u2_rx(wir_r, p_gen));
-
-        return u2_bc
+        u2_noun ret = u2_bc
           (wir_r, _fern_nice(wir_r, van, gol, u2_rx(wir_r, nik)), nik);
+
+        return ret;
       }
       case c3__dttr: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       {
@@ -319,11 +326,13 @@
      
         u2_rz(wir_r, p_hel);
         u2_rz(wir_r, q_hel);
+
         return ret;
       }
       case c3__ktbn: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       {
         u2_noun vat = _fern_in(wir_r, van, sut, dox, q_gen, gol);
+
         u2_noun ret = u2_bc
           (wir_r,
            j2_mby(Pit, face)(wir_r, p_gen, u2_h(vat)), 
@@ -338,9 +347,11 @@
           (wir_r, van, gol, j2_mcy(Pit, ut, play)(wir_r, van, sut, p_gen));
         u2_noun q_hif = j2_mcy(Pit, ut, play)(wir_r, van, dox, p_gen);
         u2_noun hel = _fern_in(wir_r, van, sut, dox, q_gen, p_hif);
+        u2_noun ret = u2_bc(wir_r, p_hif, q_hif);
 
         u2_rz(wir_r, hel);
-        return u2_bc(wir_r, p_hif, q_hif);
+
+        return ret;
       }
       case c3__ktpd: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       {
@@ -372,11 +383,13 @@
         if ( u2_no == u2_sing(u2_t(dow), u2_t(rux)) ) {
           return u2_bl_error(wir_r, "fern-rage");
         }
-        ret = u2_bc(wir_r, u2_h(dow), u2_h(rux));
+        ret = u2_bc(wir_r, u2_rx(wir_r, u2_h(dow)), u2_rx(wir_r, u2_h(rux)));
 
         u2_rz(wir_r, von);
         u2_rz(wir_r, dow);
         u2_rz(wir_r, rux);
+
+        return ret;
       }
       case c3__pmdg: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       {
@@ -570,7 +583,7 @@
   j2_mcj(Pit, ut, fern)[] = {
     { ".3", c3__hevy, 
         j2_mc(Pit, ut, fern), 
-        u2_jet_dead,    // Tier6_b_memo,
+        Tier6_b_memo,
         u2_none, u2_none,
         j2_mck(Pit, ut, fern)
     },

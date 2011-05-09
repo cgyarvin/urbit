@@ -526,7 +526,6 @@
         else {
           pro = j2_mcx(Pit, ut, mint)(wir_r, van, sut, gol, gen);
 
-          u2_bx_used(wir_r);
           return u2_rl_save_qual(wir_r, fun_m, vet, sut, gol, gen, pro);
         }
       }
