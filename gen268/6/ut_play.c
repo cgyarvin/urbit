@@ -28,7 +28,7 @@
     printf("\n");
 #endif
 
-    u2_bx_used(wir_r);
+    // u2_bx_used(wir_r);
     if ( u2_no == u2_dust(gen) ) {
       u2_noun rex = j2_mcy(Pit, ap, open)(wir_r, gen);
       u2_noun ret = _play_in(wir_r, van, sut, rex);

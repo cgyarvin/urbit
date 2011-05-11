@@ -17,6 +17,7 @@
     u2_noun p_sut, q_sut;
     u2_noun p_ref, q_ref;
 
+    u2_bx_used(wir_r);
     if ( u2_no == u2_dust(sut) ) switch ( sut ) {
       default: goto fail;
 
@@ -37,11 +38,7 @@
           return u2_no;
         }
         else {
-          u2_type rep = j2_mcy(Pit, ut, repo)(wir_r, van, sut);
-          u2_flag ret = _orth_in(wir_r, van, rep, ref, bix);
-
-          u2_rz(wir_r, rep);
-          return ret;
+          return j2_mcy(Pit, ut, nest)(wir_r, van, c3__void, ref);
         }
       }
       case c3__void: {
@@ -151,7 +148,10 @@
                         u2_noun sut,                              //  retain
                         u2_noun ref)                              //  retain
   {
-    return _orth_in(wir_r, van, sut, ref, u2_nul);
+    u2_flag ret;
+    
+    ret = _orth_in(wir_r, van, sut, ref, u2_nul);
+    return ret;
   }
   
 /* boilerplate

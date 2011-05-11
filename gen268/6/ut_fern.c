@@ -524,15 +524,8 @@
 
       pux_d = (u2_benx_be(bex_r, c3_d, use_d) - pux_d);
       // printf("fern: pux %lld\n", pux_d);
-#if 0
-      if ( 3050 == pux_d ) {
-        j2_mcy(Pit, ut, dupt)(wir_r, van, "fern: sut", sut);
-        j2_mcy(Pit, ut, dupt)(wir_r, van, "fern: dox", dox);
-        u2_err(wir_r, "fern: gen", gen);
-      }
-#endif
     }
-    // u2_bx_used(wir_r);
+
     u2_rz(wir_r, hel);
     return u2_yes;
   }
