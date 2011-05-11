@@ -484,7 +484,7 @@
                         u2_rx(wir_r, iq_gen)),
              u2_bt
               (wir_r, 
-               c3__brtr,
+               c3__brbn,
                u2_bc(wir_r, u2_nul, _8), 
                u2_bq
                 (wir_r,

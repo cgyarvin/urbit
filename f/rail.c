@@ -2020,6 +2020,7 @@ u2_rl_words(u2_ray      ral_r,
           *u2_at_pug_buf(nov, i_w) = b_w[i_w];
         }
       }
+      // if ( nov == 2416376677 ) { c3_assert(0); }
       return nov;
     }
   }
@@ -2115,7 +2116,7 @@ u2_rl_find_qual(u2_ray  ral_r,
 **
 **   Cache store for function (0 means nock), sample and product.
 */
-u2_weak                                                           //  transfer
+u2_noun                                                           //  transfer
 u2_rl_save(u2_ray  ral_r,
            u2_mote fun_m,
            u2_noun sam,                                           //  retain
@@ -2128,6 +2129,24 @@ u2_rl_save(u2_ray  ral_r,
     u2_ray lot_r = u2_soup_lot_r(sop_r);
 
     return u2_cs_save(ral_r, lot_r, fun_m, sam, pro);
+  }
+}
+
+/* u2_rl_uniq():
+**
+**   Use cache to render object unique.
+*/
+u2_noun                                                            //  produce
+u2_rl_uniq(u2_ray  ral_r,
+           u2_noun som)                                            //  submit
+{
+  if ( c3__rock != u2_rail_hip_m(ral_r) ) {
+    return som;
+  } else {
+    u2_ray sop_r = u2_rail_rut_r(ral_r);
+    u2_ray lot_r = u2_soup_lot_r(sop_r);
+
+    return u2_cs_save(ral_r, lot_r, 1, som, som);
   }
 }
 

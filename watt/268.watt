@@ -1187,7 +1187,7 @@
           $(q.gen t.q.gen)
         :+  %bnpd
           [%bnld [~ 3] i.q.gen]
-        :+  %brtr
+        :+  %brbn
           [~ 8]
         :^    %mtpd
             [%bnld [~ 23] p.gen]
@@ -1570,7 +1570,8 @@
       =+  ^=  nox
           ^-  @
           ?-(p.q.sut %gold '.', %iron '=', %lead ':', %wood '*')
-      =+  viq=(cat 3 gep nox)
+      =+  wil=?:(.=(p.sut q.q.sut) nox (cat 3 nox nox))
+      =+  viq=(cat 3 gep wil)
       :^    %grip
           [(cat 3 viq '{') '}']
         $(sut p.sut)
@@ -1734,13 +1735,22 @@
           ~|(%fern-cool !!)
         $(gen q.gen, gol zut)
       ::
-          [%ktsg *]  $(gen p.gen)
           [%mtbn *]
-        =+  dow=(mint gol gen)
-        =+  rux=(mint(sut dox, vet |) gol gen)
-        ?.  .=(q.dow q.rux)
-          ~|(%fern-rage !!)
-        [p.dow p.rux]
+        =+  ^=  hel  |-  ^-  ?
+            ?~  q.gen
+              &
+            =+(hel=$$(gen q.i.q.gen, gol %noun) $(q.gen t.q.gen))
+        =+  lar=[p=(seek %read p.gen) q=(seek(sut dox, vet |) %read p.gen)]
+        ?.  .=(p.p.lar p.q.lar)
+          ~|(%fern-bonk !!)
+        =+  wix=[p=(edit r.p.lar q.gen) q=(edit(sut dox, vet |) r.q.lar q.gen)]
+        ?~  q.p.lar
+          ?~(q.q.lar wix |~(%fern-bonk !!))
+        ?~  q.q.lar
+          |~(%fern-bonk !!)
+        ?.  .=(p.u.q.p.lar p.u.q.q.lar)
+          |~(%fern-bonk !!)
+        [(fire(sut p.wix) q.u.q.p.lar) (fire(sut q.wix, vet |) q.u.q.q.lar)]
       ::
           [%pmdg *]  (crow %lead [%dgdp p.gen [~ 1]] q.gen)
           [%pmdt *]  (crow %gold [~ 1] p.gen)

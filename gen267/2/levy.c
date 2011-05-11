@@ -45,9 +45,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pit, levy)[] = {
-    { ".3", c3__lite, j2_mb(Pit, levy), u2_no, u2_none, u2_none },
+    { ".3", c3__lite, j2_mb(Pit, levy), Tier2, u2_none, u2_none },
     { }
   };
-
-
-

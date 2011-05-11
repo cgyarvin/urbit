@@ -1,7 +1,7 @@
-|~  %brsg   "barsig"
+|~  %scsg   "secsig"
 
   gene:
-    [%brsg p=*gene q=*(list gene)]
+    [%scsg p=*gene q=*(list gene)]
 
   ap open:
     |-
@@ -13,7 +13,7 @@
         $(q.gen t.q.gen)
       :+  %bnpd
         [%bnld [~ 3] i.q.gen]
-      :+  %brtr
+      :+  %brbn
         [~ 8]
       :^    %mtpd
           [%bnld [~ 23] p.gen]

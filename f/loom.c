@@ -440,6 +440,7 @@ u2_mug_qual(u2_noun a,
 
 #ifdef U2_PROFILE
   c3_w X;   // XX not thread-safe
+  c3_w FUN;
 #endif
 
 /* _sing_x():
@@ -456,6 +457,7 @@ _sing_x(u2_noun a,
 #ifdef U2_PROFILE
   X++;
 #endif
+
   if ( a == b ) {
     return u2_yes;
   }
@@ -547,11 +549,14 @@ u2_sing(u2_noun a,
   {
     u2_flag sit = _sing_x(a, b);
 
-#if 1
     if ( (u2_yes == sit) && (a != b) ) {
       u2_bx_dent(0, X);
     }
-#endif
+    if ( FUN && (X > 10) ) {
+      // printf("mug %x, X %d\n", u2_mug(a), X);
+      // if ( u2_mug(a) == 0xe5c2279 ) 
+      // { printf("a %x, b %x\n", a, b); c3_assert(0); }
+    }
     return sit;
   }
 #endif

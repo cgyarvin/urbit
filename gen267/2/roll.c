@@ -13,7 +13,7 @@
                     u2_noun b)                                    //  retain
   {
     if ( _0 == a ) {
-      return u2_frag(9, b);
+      return u2_rx(wir_r, u2_frag(9, b));
     }
     else if ( u2_no == u2_dust(a) ) {
       return u2_none;
@@ -51,6 +51,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pit, roll)[] = {
-    { ".3", c3__lite, j2_mb(Pit, roll), u2_no, u2_none, u2_none },
+    { ".3", c3__lite, j2_mb(Pit, roll), Tier2, u2_none, u2_none },
     { }
   };

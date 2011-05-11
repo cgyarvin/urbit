@@ -523,6 +523,14 @@
                      u2_noun sam,                                 //  retain
                      u2_noun pro);                                //  transfer
 
+        /* u2_rl_uniq():
+        **
+        **   Use cache to render object unique.
+        */
+          u2_noun                                                 //  produce
+          u2_rl_uniq(u2_ray  ral_r,
+                     u2_noun som);                                //  submit
+
         /* u2_rl_find_cell(): as u2_rl_find(), for `sam=[a b]`.
         ** u2_rl_find_trel(): as u2_rl_find(), for `sam=[a b c]`.
         ** u2_rl_find_qual(): as u2_rl_find(), for `sam=[a b d]`.
