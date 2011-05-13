@@ -1368,23 +1368,23 @@
   =<  (main tub)
   &=  tal=`?`&
   ++  cape
-    |*  [dif=rule tuq=* har=rule]
-    $~(pfix dif (stag tuq har)) 
+    |*  [dif=rule tuq=* har=expa]
+    $~(pfix dif (stag tuq (exon har) ))
   ::
   ++  expa  |.(main)
-  ++  knot
-    |*  dux=rule
+  ++  exon
+    |*  dux=expa
     |=  tub=*clip
-    ?:  tal
-      %.(doc 
-    %.(tub (ifix [lep pel] har))
+    ?:  tal 
+      %.(tub $~(pose $~(pfix gap $.dux) (ifix [lep pel] $.dux(tal |))))
+    %.(tub (ifix [lep pel] $.dux))
   ::
   ++  main
     |=  tub=*clip
     ^-  *(like gene)
     ?:  tal
-      ($~(pose norm wide(tal |)) tub)
-    ($~(pose norm wide) tub)
+      %.(tub $~(pose norm wide(tal |)))
+    %.(tub $~(pose norm wide))
   ::
   ++  norm
     $~  pose
@@ -1580,10 +1580,10 @@
     [%zpzp ~]                                                     ::  !!  zapzap
   --
 ::
-++  knot  <^+(@ *term) [~ p=*axis]>
+++  nail  <^+(@ *term) [~ p=*axis]>
 ++  port  <[p=*axis q=*(unit <[p=*axis q=*(list gate)]>) r=*type]>
 ++  spot  <[p=@ q=[p=[p=@ q=@] q=[p=@ q=@]]]>
-++  twig  (list knot)
+++  twig  (list nail)
 ++  type
   |?  %atom
       [%cell p=*type q=*type]
