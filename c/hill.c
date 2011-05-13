@@ -905,7 +905,10 @@ _hill_b_fire(u2_wire     wir_r,
 
   _hill_b_print_type(wir_r, soa, sob, 0, 0, u2_h(gam));
 
+  u2_bx_boot(wir_r);
   som = _hill_nock(wir_r, u2_t(soc), u2_t(gam));
+  u2_bx_show(wir_r);
+
   if ( u2_none == som ) {
     fprintf(stderr, "{none}\n");
   }
@@ -1338,5 +1341,4 @@ hill_line(struct hill_state* hil_h,
   }
 
   LoomStop = 0;
-  u2_bx_show(wir_r);
 }

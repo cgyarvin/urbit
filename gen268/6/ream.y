@@ -180,10 +180,6 @@ wide_c
         { $$ = _ycell(c3__mttr, $2); }
       | si_tic wide si_tic wide
         { $$ = _ytrel(c3__ktdp, $2, $4); }
-/*
-      | si_von nath
-        { $$ = $2; }
-*/
       ;
 
   /** Hints.

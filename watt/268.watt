@@ -1745,11 +1745,11 @@
           ~|(%fern-bonk !!)
         =+  wix=[p=(edit r.p.lar q.gen) q=(edit(sut dox, vet |) r.q.lar q.gen)]
         ?~  q.p.lar
-          ?~(q.q.lar wix |~(%fern-bonk !!))
+          ?~(q.q.lar wix ~|(%fern-bonk !!))
         ?~  q.q.lar
-          |~(%fern-bonk !!)
+          ~|(%fern-bonk !!)
         ?.  .=(p.u.q.p.lar p.u.q.q.lar)
-          |~(%fern-bonk !!)
+          ~|(%fern-bonk !!)
         [(fire(sut p.wix) q.u.q.p.lar) (fire(sut q.wix, vet |) q.u.q.q.lar)]
       ::
           [%pmdg *]  (crow %lead [%dgdp p.gen [~ 1]] q.gen)
