@@ -276,7 +276,6 @@ wide_c
     wide_norm: di_bardeg body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_bardap body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_bardot body_a_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_barmit body_c_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_barpad body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_bartar body_b_wide    { $$ = _ycell($1, $2); }
 
@@ -431,10 +430,9 @@ tall
 
     tall_norm: di_barbon w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_barcas w body_d_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_bardeg w body_a_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_bardeg w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_bardap w body_a_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_bardot w body_b_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_barmit w body_c_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_bardot w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_barpad w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_bartar w body_b_tall    { $$ = _ycell($1, $3); }
 
@@ -644,7 +642,6 @@ tall
     di_bardap: si_bar si_dap  { $$ = c3__brdp; }
     di_bardeg: si_bar si_deg  { $$ = c3__brdg; }
     di_bardot: si_bar si_dot  { $$ = c3__brdt; }
-    di_barmit: si_bar si_mit  { $$ = c3__brmt; }
     di_barpad: si_bar si_pad  { $$ = c3__brpd; }
     di_bartar: si_bar si_tar  { $$ = c3__brtr; }
 

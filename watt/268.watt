@@ -1852,23 +1852,27 @@
     ~.  %fire
     |=  hag=*(list gate)
     ^-  *type
-    ?>  ?=([%core *] sut)         ::  XX use +-
-    =+  dox=[%core q.q.sut q.sut]
-    :-  %hold
-    %+  turn
-      hag
-    |=  p=*gate
-    ?:  p.p
-      ?.  ?|(!vet (nest(sut q.q.sut) p.sut))
-        ::  ~~  dump(sut q.q.sut)   ::  need
-        ::  ~~  dump(sut p.sut)     ::  have
-        ~|('fire-hard' !!)
-      [dox q.p]
-    ?.  ?|(!vet .=(p.sut q.q.sut) (fern dox q.p))
-      ::  ~~  dump(sut q.q.sut)     ::  need
-      ::  ~~  dump(sut p.sut)       ::  have
-      ~|('fire-soft' !!)
-    [sut q.p]
+    ?-    sut
+        [%core *]
+      =+  dox=[%core q.q.sut q.sut]
+      :-  %hold
+      %+  turn
+        hag
+      |=  p=*gate
+      ?:  p.p
+        ?.  ?|(!vet (nest(sut q.q.sut) p.sut))
+          ::  ~~  dump(sut q.q.sut)   ::  need
+          ::  ~~  dump(sut p.sut)     ::  have
+          ~|('fire-hard' !!)
+        [dox q.p]
+      ?.  ?|(!vet .=(p.sut q.q.sut) (fern dox q.p))
+        ::  ~~  dump(sut q.q.sut)     ::  need
+        ::  ~~  dump(sut p.sut)       ::  have
+        ~|('fire-soft' !!)
+      [sut q.p]
+    ::
+        [%fork *]  (fork $(sut p.sut) $(sut q.sut))
+    --
   ::
   ++  fish
     ~.  %fish

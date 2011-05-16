@@ -844,13 +844,21 @@
     roq
   vex
 ::
+++  posh
+  |*  [vex=*edge sab=rule]
+  ?~  q.vex
+    ~|('off posh' !!)
+  vex
+::
 ++  rash  |*([naf=@ sab=rule] (rasp (rip 3 naf) sab))
 ++  rasp
   |*  [los=*tape sab=rule]
   =+  vex=(sab *hair los)
   ?~  q.vex
-    !!
-  ?>(.=(~ q.u.q.vex) p.u.q.vex)
+    ~|('trailing error' !!)
+  ?.  .=(~ q.u.q.vex) 
+    ~|('syntax error' !!)
+  p.u.q.vex
 ::
 ++  sfix
   |*  [vex=*edge sab=rule]
@@ -920,13 +928,13 @@
 ++  dem  (bass 10 (plus dit))
 ++  dit  (cook |=(a=@ (sub a '0')) (shim '0' '9'))
 ++  gap  (cold ~ (plus $~(pose vul (mask [10 32 ~]))))
+++  gay  $~(pose gap (easy ~))
 ++  hex  (bass 16 (plus hit))
 ++  hig  (shim 'A' 'Z')
 ++  hit  $~(pose dit (cook |=(a=*char (sub a 87)) (shim 'a' 'f')))
 ++  ket  (just '^')
 ++  lep  (just '(')
 ++  led  (just '>')
-++  lib  $~(pose gap (easy ~))
 ++  low  (shim 'a' 'z')
 ++  mes  (cook |=([a=@ b=@] (add (mul 16 a) b)) $~(plug hit hit))
 ++  mit  (just '%')
@@ -1355,48 +1363,35 @@
 ::
   ::  Tier 6, Watt in Watt
 ::
-::
   ::  Tier 6, core 0, prototypes
-::
 ::
   ::  Tier 6, core 1, parsing
 ::
 ++  vest
-  ~.  %vest
-  |=  tub=*clip
-  ^-  *(like gene)
-  =<  (main tub)
-  &=  tal=`?`&
-  ++  cape
-    |*  [dif=rule tuq=* har=expa]
-    $~(pfix dif (stag tuq (exon har) ))
-  ::
-  ++  expa  |.(main)
-  ++  exon
-    |*  dux=expa
-    |=  tub=*clip
-    ?:  tal 
-      %.(tub $~(pose $~(pfix gap $.dux) (ifix [lep pel] $.dux(tal |))))
-    %.(tub (ifix [lep pel] $.dux))
-  ::
-  ++  main
-    |=  tub=*clip
+  =<  tall
+  &.  
+  ++  tall  
+    |=  tub=*clip 
     ^-  *(like gene)
-    ?:  tal
-      %.(tub $~(pose norm wide(tal |)))
-    %.(tub $~(pose norm wide))
-  ::
-  ++  norm
+    %.  tub
     $~  pose
-      $~(pfix bar nbar)
+      (norm &)
+      flat
     --
   ::
-  ++  nbar
-    (cape dap %brdp expa)
-  ::
-  ++  wide  
+  ++  wide
+    |=  tub=*clip 
+    ^-  *(like gene)
+    %.  tub
     $~  pose
-      (stag %dgtr (ifix [den ned] (most ace main)))
+      (norm |)
+      flat
+    --
+  ::
+  ++  flat
+    $~  pose
+      (stag %dgtr (ifix [den ned] (most ace wide)))
+    ::
       %+  stag
         %dtsg
       $~  pose
@@ -1419,6 +1414,38 @@
         (cold %null sig)
       --
     --
+  ::
+  ++  norm
+    |=  tol=?
+    =<  $~  pose
+          $~  pfix
+            bar
+            $~  pose
+              (rune dap %brdp expa)
+            --
+          --
+        --
+    &.
+    ++  rune
+      |*  [dif=rule tuq=* har=expa]
+      $~  pfix
+        dif
+        %+  stag
+          tuq
+        =+  dur=(ifix [lep pel] $:har(tol |))
+        ?:  tol
+          $~(pose $~(pfix gap $:har(tol &)) dur)
+        dur
+      --
+    ::
+    ++  glop  (glue mash)
+    ++  gunk  (glue muck)
+    ++  loaf  ?:(tol tall wide)
+    ++  mash  ?:(tol gap |~(plug com ace))
+    ++  muck  ?:(tol gap ace)
+    ::
+    ++  expa  |.(loaf)
+    ==
   ==
 ::
   ::  Tier 6, core 2, compilation
