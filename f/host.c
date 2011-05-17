@@ -1088,9 +1088,9 @@ u2_ho_use(u2_ray     wir_r,
         if ( u2_no == u2_sing(tax, u2_wire_tax(wir_r)) ) {
           c3_c *cos_c = u2_ho_cstring(jet_j->xip);
 
-          fprintf(stderr, "<<trax: %s>>\n", cos_c);
+          // fprintf(stderr, "<<trax: %s>>\n", cos_c);
           free(cos_c);
-          c3_assert(0);
+          // c3_assert(0);
         }
         u2_rz(wir_r, tax);
       }

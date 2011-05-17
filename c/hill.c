@@ -905,6 +905,11 @@ _hill_b_fire(u2_wire     wir_r,
 
   _hill_b_print_type(wir_r, soa, sob, 0, 0, u2_h(gam));
 
+  if ( out_c && !strcmp("p", out_c) ) {
+    u2_rz(wir_r, txt);
+    u2_rz(wir_r, gam);
+    return;
+  }
   u2_bx_boot(wir_r);
   som = _hill_nock(wir_r, u2_t(soc), u2_t(gam));
   u2_bx_show(wir_r);
@@ -1321,6 +1326,8 @@ hill_line(struct hill_state* hil_h,
     lin_c += 2; out_c = "d";
   } else if (  !strncmp(lin_c, "e ", 2) ) {
     lin_c += 2; out_c = "e";
+  } else if (  !strncmp(lin_c, "p ", 2) ) {
+    lin_c += 2; out_c = "p";
   } else if (  !strncmp(lin_c, "y ", 2) ) {
     lin_c += 2; out_c = "y";
   }

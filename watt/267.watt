@@ -1441,12 +1441,16 @@
     ++  glop  (glue mash)
     ++  gunk  (glue muck)
     ++  loaf  ?:(tol tall wide)
-    ++  mash  ?:(tol gap |~(plug com ace))
+    ++  mash  ?:(tol gap $~(plug com ace))
     ++  muck  ?:(tol gap ace)
     ::
     ++  expa  |.(loaf)
+    :: ++  expb  |.($~((glue ace) loaf loaf))
     ==
+    :: $~(pfix ?:(tol gap ace) ket)
   ==
+++  toll
+  =>(?:(| ace gap) $)
 ::
   ::  Tier 6, core 2, compilation
 ::
