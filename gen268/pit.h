@@ -15,7 +15,7 @@
 #   define  Tier5         u2_jet_live | u2_jet_test
 #   define  Tier6         u2_jet_live
 #   define  Tier6_a       Tier6
-#   define  Tier6_b       Tier6
+#   define  Tier6_b       u2_jet_dead
 
 #   define  Tier5_test    (Tier5 | u2_jet_test)
 #   define  Tier6_a_memo  (Tier6_a | u2_jet_memo)
@@ -543,7 +543,8 @@
     **/
 #     define j2_ut_van_fan  20
 #     define j2_ut_van_rib  42
-#     define j2_ut_van_vet  43
+#     define j2_ut_van_vet  86
+#     define j2_ut_van_rup  87
 
     /** Debugging hacks.
     **/

@@ -219,7 +219,7 @@ _hill_z_mint_gen(u2_wire wir_r,
   u2_noun van = u2_bc
     (wir_r, u2_bc(wir_r, 
                   c3__blur,
-                  u2_bc(wir_r, u2_bt(wir_r, _0, _0, _0),
+                  u2_bc(wir_r, u2_bt(wir_r, _0, _0, _0),  // bq for 268 on
                                u2_bc(wir_r, _0, 42))),
             87);
 
