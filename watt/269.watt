@@ -2158,18 +2158,20 @@
         ?-    p.q.sut
             %gold   &
             %iron   &
-            %lead   .=(3 (cap axe))
+            %lead   ?&(!.=(1 axe) .=(3 (cap axe)))
             %wood   &
-            %zinc   .=(3 (cap axe))
+            %zinc   ?&(!.=(1 axe) .=(3 (cap axe)))
         --
       ::
           %rite
         ?-    p.q.sut
             %gold   &
-            %iron   .=(3 (cap axe))
-            %zinc   
-          ?|(.=(2 (cap axe)) =+(lat=(mas axe) ?&(!.=(1 lat) .=(3 (cap lat)))))
-        ::
+            %iron   ?&(!.=(1 axe) .=(3 (cap axe)))
+            %zinc   ?&  !.=(1 axe)
+                        ?|  .=(2 (cap axe)
+                            =+(lat=(mas axe) ?&(!.=(1 lat) .=(3 (cap lat)))))
+                        --
+                    --
             %lead   &
             %wood   &
         --

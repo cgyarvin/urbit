@@ -33,7 +33,9 @@
 
           case c3__gold: return u2_yes;
           case c3__iron: return u2_no;
-          case c3__lead: return u2_sing(_2, j2_mbc(Pit, cap)(wir_r, axe));
+          case c3__lead: return 
+                          u2_and(u2_not(u2_sing(_1, axe)),
+                                 u2_sing(_2, j2_mbc(Pit, cap)(wir_r, axe)));
           case c3__wood: return u2_yes;
         }
       }
@@ -42,7 +44,9 @@
           default: return u2_bl_bail(wir_r, c3__fail);
 
           case c3__gold: return u2_yes;
-          case c3__iron: return u2_sing(_2, j2_mbc(Pit, cap)(wir_r, axe));
+          case c3__iron: return 
+                          u2_and(u2_not(u2_sing(_1, axe)),
+                                 u2_sing(_2, j2_mbc(Pit, cap)(wir_r, axe)));
           case c3__lead: return u2_no;
           case c3__wood: return u2_yes;
         }

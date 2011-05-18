@@ -1609,15 +1609,15 @@
   ++  emit
     ~.  %emit
     |=  :*  axe=*axis 
-            men=*(list <[p=*type q=*gate]) 
+            men=*(list <[p=*type q=*gate]>)
             har=*(list <[p=*gene q=*gene]>)
         --
     =+  luf=*(list <[p=*axis q=*form]>)
-    |-  ^-  [p=*(list <[p=*type q=*gate]> q=*form]
+    |-  ^-  [p=*(list <[p=*type q=*gate]>) q=*form]
     ?~  har
       [men (hike axe luf)]
     =+  peh=(flop ~(rake ap p.i.har))
-    =-  $(har t.har, men q.zos, luf [(need p.zos) luf]
+    =-  $(har t.har, men q.zos, luf [(need p.zos) luf])
     ^=  zos
     |-  ^-  [p=*(unit <[p=*axis q=*form]>) q=*(list <[p=*type q=*gate]>)]
     ?~  men
@@ -1693,7 +1693,7 @@
       ?-    -.q.u.hax
           &
         ?-    -.q.u.yor
-            &  [~ p.u.hax [& (fork p.q.u.hax p.q.u.yor]]
+            &  [~ p.u.hax [& (fork p.q.u.hax p.q.u.yor)]]
             |  ~|(%find-fork !!)
         --
       ::
@@ -1964,7 +1964,7 @@
         ::
             |
           =+  fup=(emit p.lar q.q.lar q.gen)
-          [(nice (fire p.fup) [9 p.q.lar q.fup]]
+          [(nice (fire p.fup)) [9 p.q.lar q.fup]]
         --
       ::
           [%pmdg *]                                                   ::  &:
@@ -2316,7 +2316,7 @@
         @
       =+  wer=(find %rite i.peh)
       ?.  ?=(& -.q.wer)
-        ~|('tuck-gate !!') 
+        ~|('tuck-gate' !!) 
       =+  giv=$(sut p.q.wer, axe (peg axe p.wer), peh t.peh)
       [(heal [~ i.peh] p.wer p.giv) q.giv]
     ::
