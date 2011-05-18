@@ -2168,8 +2168,8 @@
             %gold   &
             %iron   ?&(!.=(1 axe) .=(3 (cap axe)))
             %zinc   ?&  !.=(1 axe)
-                        ?|  .=(2 (cap axe)
-                            =+(lat=(mas axe) ?&(!.=(1 lat) .=(3 (cap lat)))))
+                        ?|  .=(2 (cap axe))
+                            =+(lat=(mas axe) ?&(!.=(1 lat) .=(3 (cap lat))))
                         --
                     --
             %lead   &

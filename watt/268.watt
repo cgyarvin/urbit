@@ -226,6 +226,14 @@
       [i=* t=*]   [i=(a i.b) t=$(b t.b)]
   --
 ::
+++  mate
+  |*  [a=*(unit) b=*(unit)]
+  ?~  a
+    b
+  ?~  b
+    a
+  ?.(.=(u.a u.b) ~|('mate' !!) a)
+::
 ++  need
   ~.  %need
   |*  a=*(unit)
@@ -1046,7 +1054,7 @@
 ::
 ++  knot  <^+(@ *term) [~ p=*axis]>
 ++  port  |?  :-  p=*axis 
-              q=<[& p=*type] [| p=*axis q=*(list <[p=*type q=*gate]>)]>
+              q=*<[& p=*type] [| p=*axis q=*(list <[p=*type q=*gate]>)]>
           --
 ++  spot  <[p=@ q=[p=[p=@ q=@] q=[p=@ q=@]]]>
 ++  twig  (list knot)
@@ -1624,11 +1632,8 @@
       [~ ~] 
     =+  lax=$(men t.men)
     =+  taq=(tuck(sut p.i.men) peh sut q.i.har)
-    :-  %^    clap 
-            p.lax 
-          [~ q.taq] 
-        |=([a=@ b=@] ?:(.=(a b) a ~|('emit-clap' !!)))
-    [[p.taq q.i.har] q.lax]
+    :-  (mate p.lax `p.lax`[~ u=q.taq])
+    [[p.taq q.i.men] q.lax]
   ::
   ++  find
     ~.  %find
@@ -1960,7 +1965,7 @@
         ?-    -.q.lar
             & 
           =+  fup=(emit p.lar [[p.q.lar [& ~ 1]] ~] q.gen)
-          [(nice -.p.fup) q.fup]
+          [(nice -<.p.fup) q.fup]
         ::
             |
           =+  fup=(emit p.lar q.q.lar q.gen)
@@ -2275,15 +2280,15 @@
     =+  ^=  syp
         ?-    -.q.zar
             &  p.q.zar
-            |  (fire (turn q.q.zar |=([p=*type q=*gene] [p [~ 1]])))
+            |  (fire (turn q.q.zar |=([p=*type q=*gate] [p [& ~ 1]])))
         --
     ?-    i.hep
         @
-      =+  hup=(find(sut syp) way i.hep)
-      [(peg p.zar p.hup) q.hup r.hup]
+      =+  hud=(find(sut syp) way i.hep)
+      [(peg p.zar p.hud) q.hud]
     ::
         [~ *]
-      [(peg p.zar p.i.hep) ~ (peek(sut syp) way p.i.hep)]
+      [(peg p.zar p.i.hep) & (peek(sut syp) way p.i.hep)]
     --
   ::
   ++  snap
