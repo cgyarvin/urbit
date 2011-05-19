@@ -18,7 +18,7 @@
 #define   FileZ   "watt/270"
 #define   FileA   "watt/269"
 #define   FileB   "watt/268"
-#define   FileC   "watt/267"
+#define   FileC   "watt/test-267"
 
   /**   Interpreter data structures.
   **/

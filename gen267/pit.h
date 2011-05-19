@@ -8,12 +8,12 @@
 
   /** Test codes.
   **/
-#   define  Tier1         u2_jet_live
-#   define  Tier2         u2_jet_live
-#   define  Tier3         u2_jet_live
-#   define  Tier4         u2_jet_live
-#   define  Tier5         u2_jet_live | u2_jet_test
-#   define  Tier6         u2_jet_live
+#   define  Tier1         u2_jet_dead
+#   define  Tier2         u2_jet_dead
+#   define  Tier3         u2_jet_dead
+#   define  Tier4         u2_jet_dead
+#   define  Tier5         u2_jet_dead | u2_jet_test
+#   define  Tier6         u2_jet_dead
 #   define  Tier6_a       Tier6
 #   define  Tier6_b       Tier6
 

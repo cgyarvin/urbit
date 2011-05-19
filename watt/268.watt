@@ -1117,7 +1117,6 @@
         [%brdg *]   [%pmdg p.gen [[%% [& & q.gen]] ~ ~]]
         [%brdt *]   [%pmdt [[%% [& & p.gen]] ~ ~]]
         [%brpd *]   [%pmpd p.gen [[%% [& & q.gen]] ~ ~]]
-    ::
         [%brtr *]   [%pmbn p.gen [[%% [& | q.gen]] ~ ~]]
     ::::
     ::::
@@ -1736,9 +1735,11 @@
         ::  ~~  dump(sut p.p)     ::  have
         ~|('fire-hard' !!)
       [dox q.q]
-    ?.  ?|(!vet .=(p.p q.q.p) (fret dox q.q))
-      ::  ~~  dump(sut q.q.p)     ::  need
-      ::  ~~  dump(sut p.p)       ::  have
+    ?.  ?|(!vet .=(p.p q.q.p) (fret(sut p) dox q.q))
+      ~~  ~(gut go `*`q:(mint(sut dox, vet |, rup |) %noun q.q))
+      ~~  ~(gut go `*`q:(mint(sut p, rup |) %noun q.q))
+      ~~  dump(sut p)
+      ~~  dump(sut dox)
       ~|('fire-soft' !!)
     [p q.q]
   ::
