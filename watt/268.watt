@@ -1100,13 +1100,9 @@
     ?-    gen
         @           [%mtbn [gen ~] ~]
         [~ *]       [%mtbn [gen ~] ~]
-    ::::
-    ::::
         [%bndl *]   [%bnld q.gen p.gen]
         [%bndp *]   [%bnpd q.gen p.gen]
         [%bnpd *]   [%bnld [%dgdp p.gen [~ 1]] q.gen]
-    ::::
-    ::::
         [%brbn *]   [%pmbn p.gen [[%% [& & q.gen]] ~ ~]]
         [%brcs *]
       ?~  p.gen
@@ -1118,8 +1114,6 @@
         [%brdt *]   [%pmdt [[%% [& & p.gen]] ~ ~]]
         [%brpd *]   [%pmpd p.gen [[%% [& & q.gen]] ~ ~]]
         [%brtr *]   [%pmbn p.gen [[%% [& | q.gen]] ~ ~]]
-    ::::
-    ::::
         [%csbr *]
       |- 
       ?~(p.gen [%dtsg 1] [%csdg i.p.gen [%dtsg 0] $(p.gen t.p.gen)])
@@ -1151,8 +1145,6 @@
     ::
         [%cssg *]   [%csdp p.gen [[[%dtsg 0] q.gen] [[%tmbn %cell] r.gen] ~]]
         [%cszp *]   [%csdg p.gen [%dtsg 1] [%dtsg 0]]
-    ::::
-    ::::
         [%dgkt *]   [%dgdp p.gen [%dgdp q.gen [%dgdp r.gen s.gen]]]
         [%dgpd *]   [%dgdp p.gen [%dgdp q.gen r.gen]]
         [%dgsg *]   |-(?~(p.gen [%dtsg ~] [%dgdp i.p.gen $(p.gen t.p.gen)]))
@@ -1163,8 +1155,7 @@
           [* ~]   i.p.gen
           ^       [%dgdp i.p.gen $(p.gen t.p.gen)]
       --
-    ::::
-    ::::
+    ::
         [%mtbr *]
       :+  %bnpd
         q.gen
@@ -1179,12 +1170,8 @@
         [%mtpd *]   [%mtdp p.gen q.gen r.gen ~]
         [%mtsg *]   [%mtbr p.gen q.gen [[[~ 4] r.gen] ~]]
         [%mttr *]   [%bnld p.gen [%mtbn [%% ~] ~]]
-    ::::
-    ::::
         [%pmdp *]   [%bnld [%pmdt q.gen] p.gen] 
         [%pmbn *]   [%bnpd p.gen [%pmdt q.gen]]
-    ::::
-    ::::
         [%scsg *]
       |-
       ?-  q.gen
@@ -1203,8 +1190,7 @@
           [%mtdp [~ 10] [~ 4] ~]
         [%mtbn [[~ 22] ~] [[[~ 4] [~ 4]] ~]]
       --
-    ::::
-    ::::
+    ::
         [%sgbn *]   [%sgld [%germ p.gen] q.gen]
         [%sgbr *]   [%sgld [%bean p.gen] q.gen]
         [%sgdg *]   [%sgld [%bank %dtsg p.gen] q.gen]
@@ -1230,8 +1216,7 @@
         [%sgpd *]   [%sgld [%memo %dtsg p.gen] q.gen]
         [%sgpm *]   [%sgld [%loaf p.gen] q.gen]
         [%sgsg *]   [%sgld [%mean [%brdt p.gen]] q.gen]
-    ::::
-    ::::
+    ::
         [%tmbn *]
       ?-  p.gen
         %atom   [%ktdp [%dtpd %dtsg 0] [%dtsg 0]]
@@ -1243,8 +1228,7 @@
     ::
         [%tmdp *]   (sift p.gen)
         [%tmpd *]   (mold(gen p.gen) rake(gen q.gen))
-    ::::
-    ::::
+    ::
         *           gen
     --
   ::
@@ -1631,7 +1615,7 @@
       [~ ~] 
     =+  lax=$(men t.men)
     =+  taq=(tuck(sut p.i.men) peh sut q.i.har)
-    :-  (mate p.lax `p.lax`[~ u=q.taq])
+    :-  ~|('emit-mate' (mate p.lax `p.lax`[~ u=q.taq]))
     [[p.taq q.i.men] q.lax]
   ::
   ++  find
@@ -1673,7 +1657,7 @@
       [~ 1 | (peg 3 p.u.zem) [[sut q.u.zem] ~]]
     ::
         [%face *]
-      ?: .=(cog p.sut)
+      ?:  .=(cog p.sut)
         [~ 1 & q.sut]
       ~
     ::
@@ -1736,8 +1720,8 @@
         ~|('fire-hard' !!)
       [dox q.q]
     ?.  ?|(!vet .=(p.p q.q.p) (fret(sut p) dox q.q))
-      ~~  ~(gut go `*`q:(mint(sut dox, vet |, rup |) %noun q.q))
-      ~~  ~(gut go `*`q:(mint(sut p, rup |) %noun q.q))
+      ::  ~~  ~(gut go `*`q:(mint(sut dox, vet |, rup |) %noun q.q))
+      ::  ~~  ~(gut go `*`q:(mint(sut p, rup |) %noun q.q))
       ~~  dump(sut p)
       ~~  dump(sut dox)
       ~|('fire-soft' !!)
@@ -1911,7 +1895,7 @@
           [%csdg *]                                                   ::  ?:
         =+  nor=$(gen p.gen, gol flag)
         =+  fex=(gain p.gen)
-        ?:  .=(%void fex)
+        ?:  ?&(rup .=(%void fex))
           $(gen r.gen)
         =+  hiq=$(sut fex, gen q.gen)
         =+  ran=$(gen r.gen)

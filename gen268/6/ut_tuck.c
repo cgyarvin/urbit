@@ -39,12 +39,17 @@
       if ( u2_yes == u2_stud(i_peh) ) {
         u2_noun cog = i_peh;
         u2_noun wer = j2_mcy(Pit, ut, find)(wir_r, van, sut, c3__rite, i_peh);
-        u2_noun p_wer, r_wer;
+        u2_noun p_wer, q_wer, pq_wer;
 
-        u2_as_trel(wer, &p_wer, 0, &r_wer);
+        u2_as_cell(wer, &p_wer, &q_wer);
+        if ( u2_yes != u2_h(q_wer) ) {
+          return u2_bl_error(wir_r, "tuck-gate");
+        }
+        pq_wer = u2_t(q_wer);
+
         {
           u2_noun nax   = j2_mbc(Pit, peg)(wir_r, axe, p_wer); 
-          u2_noun giv   = _tuck_in(wir_r, van, r_wer, t_peh, boz, rix, nax);
+          u2_noun giv   = _tuck_in(wir_r, van, pq_wer, t_peh, boz, rix, nax);
           u2_noun p_giv = u2_h(giv);
           u2_noun q_giv = u2_t(giv);
           u2_noun qog   = u2_bc(wir_r, u2_nul, cog);
@@ -96,14 +101,12 @@
   j2_mcx(Pit, ut, tuck)(u2_wire wir_r, 
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
-                        u2_noun hep,                              //  retain
+                        u2_noun peh,                              //  retain
                         u2_noun boz,                              //  retain
                         u2_noun rix)                              //  retain
   {
-    u2_noun peh = j2_mbc(Pit, flop)(wir_r, hep);
     u2_noun pro = _tuck_in(wir_r, van, sut, peh, boz, rix, _1);
 
-    u2_rl_lose(wir_r, peh);
     return pro;
   }
 

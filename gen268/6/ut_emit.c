@@ -7,23 +7,75 @@
 
 /* functions
 */
-  u2_noun                                                         //  transfer
+  static u2_noun
+  _emit_each(u2_wire wir_r,
+             u2_noun van,
+             u2_noun sut,
+             u2_noun men,
+             u2_noun pi_har,
+             u2_noun qi_har)
+  {
+    u2_noun hep = j2_mcy(Pit, ap, rake)(wir_r, pi_har);
+    u2_noun peh = j2_mbc(Pit, flop)(wir_r, hep);
+    u2_noun ret;
+    
+    if ( u2_nul == men ) {
+      ret = u2_bc(wir_r, u2_nul, u2_nul);
+    } 
+    else {
+      u2_noun i_men  = u2_h(men);
+      u2_noun pi_men = u2_h(i_men);
+      u2_noun qi_men = u2_t(i_men);
+      u2_noun t_men  = u2_t(men);
+      u2_noun lax    = _emit_each(wir_r, van, sut, t_men, pi_har, qi_har);
+      u2_noun p_lax  = u2_h(lax);
+      u2_noun q_lax  = u2_t(lax);
+      u2_noun taq    = j2_mcy(Pit, ut, tuck)
+                        (wir_r, van, pi_men, peh, sut, qi_har);
+      u2_noun p_taq  = u2_h(taq);
+      u2_noun q_taq  = u2_t(taq);
+      u2_noun qux;
+
+      if ( u2_nul == p_lax ) {
+        qux = u2_bc(wir_r, u2_nul, u2_rx(wir_r, q_taq));
+      } else {
+        if ( u2_no == u2_sing(q_taq, u2_t(p_lax)) ) {
+          return u2_bl_error(wir_r, "emit-mate");
+        }
+        qux = u2_rx(wir_r, p_lax);
+      }
+      ret = u2_bc
+        (wir_r, qux, 
+                u2_bc(wir_r, 
+                      u2_bc(wir_r, u2_rx(wir_r, p_taq), u2_rx(wir_r, qi_men)),
+                      u2_rx(wir_r, q_lax)));
+
+      u2_rz(wir_r, lax);
+      u2_rz(wir_r, taq);
+    }
+    u2_rz(wir_r, hep);
+    u2_rz(wir_r, peh);
+
+    return ret;
+  }
+             
+  u2_noun                                                         //  produce
   j2_mcy(Pit, ut, emit)(u2_wire wir_r, 
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
                         u2_atom axe,                              //  retain
-                        u2_noun mun,                              //  retain
+                        u2_noun men,                              //  retain
                         u2_noun har)                              //  retain
   {
     u2_noun luf = u2_nul;
 
-    mun = u2_rx(wir_r, mun);
+    men = u2_rx(wir_r, men);
     while ( 1 ) {
       if ( u2_nul == har ) {
-        u2_noun pro = u2_bc(wir_r, mun, j2_mby(Pit, hike)(wir_r, axe, luf));
+        u2_noun ret = u2_bc(wir_r, men, j2_mby(Pit, hike)(wir_r, axe, luf));
 
         u2_rl_lose(wir_r, luf);
-        return pro;
+        return ret;
       }
       else {
         u2_noun i_har = u2_h(har);
@@ -31,24 +83,21 @@
 
         if ( u2_no == u2_dust(i_har) ) {
           return u2_bl_bail(wir_r, c3__fail);
-        } else {
+        } 
+        else {
           u2_noun pi_har = u2_h(i_har);
           u2_noun qi_har = u2_t(i_har);
-          u2_noun hep = j2_mcy(Pit, ap, rake)(wir_r, pi_har);
-          u2_noun taq = j2_mcy(Pit, ut, tuck)
-            (wir_r, van, mun, hep, sut, qi_har);
-          u2_noun p_taq = u2_h(taq);
-          u2_noun q_taq = u2_t(taq);
+          u2_noun ech    = _emit_each(wir_r, van, sut, men, pi_har, qi_har);
+          u2_noun p_ech  = u2_h(ech);
+          u2_noun q_ech  = u2_t(ech);
 
           har = t_har;
 
-          u2_rl_lose(wir_r, mun);
-          mun = u2_rx(wir_r, p_taq);
+          u2_rl_lose(wir_r, men);
+          men = u2_rx(wir_r, q_ech);
 
-          luf = u2_bc(wir_r, u2_rx(wir_r, q_taq), luf);
-
-          u2_rl_lose(wir_r, hep);
-          u2_rl_lose(wir_r, taq);
+          luf = u2_bc(wir_r, u2_rx(wir_r, u2_t(p_ech)), luf);
+          u2_rz(wir_r, ech);
         }
       }
     }
