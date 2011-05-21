@@ -304,6 +304,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, ut, play)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, play), Tier6_b, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ut, play), Tier6_x, u2_none, u2_none },
     { }
   };

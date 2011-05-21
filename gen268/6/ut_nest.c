@@ -171,7 +171,6 @@
   {
     u2_noun p_sut, q_sut, p_ref, q_ref;
 
-    u2_bx_used(wir_r);
     if ( (u2_no == u2_dust(sut)) ) switch ( sut ) {
       default: return u2_bl_bail(wir_r, c3__fail);
 

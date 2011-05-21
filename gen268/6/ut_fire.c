@@ -168,6 +168,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, ut, fire)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, fire), Tier6_b, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ut, fire), Tier6_t, u2_none, u2_none },
     { }
   };

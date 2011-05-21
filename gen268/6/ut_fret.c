@@ -174,7 +174,7 @@
   j2_mcj(Pit, ut, fret)[] = {
     { ".3", c3__hevy, 
         j2_mc(Pit, ut, fret), 
-        Tier6_b_memo,
+        Tier6_x_memo,
         u2_none, u2_none,
         j2_mck(Pit, ut, fret)
     },
