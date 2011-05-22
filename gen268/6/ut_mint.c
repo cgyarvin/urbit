@@ -382,7 +382,7 @@
         else {
           u2_noun pq_lar, qq_lar;
 
-          u2_bi_cell(wir_r, u2_t(lar), &pq_lar, &qq_lar);
+          u2_bi_cell(wir_r, u2_t(q_lar), &pq_lar, &qq_lar);
           {
             u2_noun fup = j2_mcy(Pit, ut, emit)
               (wir_r, van, sut, p_lar, qq_lar, q_gen);
@@ -611,7 +611,7 @@
   j2_mcj(Pit, ut, mint)[] = {
     { ".3", c3__hevy, 
         j2_mc(Pit, ut, mint), 
-        Tier6_x_memo,
+        Tier6_b_memo,
         u2_none, u2_none,
         j2_mck(Pit, ut, mint)
     },

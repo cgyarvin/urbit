@@ -207,7 +207,6 @@
                           u2_noun sut,                            //  retain
                           u2_noun gen)                            //  retain
   {
-
     // u2_noun von = u2_bn_cook(wir_r, van, "vet", u2_no);
     u2_noun von = u2_bn_molt(wir_r, van, j2_ut_van_vet, u2_no, 0);
     u2_noun ret;
@@ -215,7 +214,7 @@
     ret = _play_in(wir_r, von, sut, gen);
 #else
     {
-      u2_noun fug = j2_mcy(Pit, ut, mint)(wir_r, van, sut, c3__noun, gen);
+      u2_noun fug = j2_mcy(Pit, ut, mint)(wir_r, von, sut, c3__noun, gen);
 
       ret = u2_rx(wir_r, u2_h(fug));
       u2_rz(wir_r, fug);
@@ -304,6 +303,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pit, ut, play)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, play), Tier6_x, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pit, ut, play), Tier6_b, u2_none, u2_none },
     { }
   };
