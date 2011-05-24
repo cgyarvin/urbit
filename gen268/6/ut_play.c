@@ -208,7 +208,9 @@
                           u2_noun gen)                            //  retain
   {
     // u2_noun von = u2_bn_cook(wir_r, van, "vet", u2_no);
-    u2_noun von = u2_bn_molt(wir_r, van, j2_ut_van_vet, u2_no, 0);
+    u2_noun von = u2_bn_molt(wir_r, van, j2_ut_van_vet, u2_no, 
+                                         j2_ut_van_fab, u2_no,
+                                         0);
     u2_noun ret;
 #if 0
     ret = _play_in(wir_r, von, sut, gen);

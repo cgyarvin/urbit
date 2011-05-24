@@ -1440,6 +1440,7 @@
       %rib    rib
       %vet    vet
       %rup    rup
+      %fab    fab
       %bake   bake
       %burn   burn
       %cull   cull
@@ -1468,6 +1469,7 @@
           rib=*(set <[*type *type *gene]>)
           vet=`?`&
           rup=`?`&
+          fab=`?`&
       --
   &=  sut=`*type`%noun
   ++  bake
@@ -1733,8 +1735,8 @@
         ~|('fire-dry' !!)
       [dox q.q]
     ?.  ?|(!vet .=(p.p q.q.p) (fret(sut p) dox q.q))
-      ::  ~~  ~(gut go `*`q:(mint(sut dox, vet |, rup |) %noun q.q))
-      ::  ~~  ~(gut go `*`q:(mint(sut p, rup |) %noun q.q))
+      ::  ~~  ~(gut go `*`q:(mint(sut dox, vet |, rup |, fab &) %noun q.q))
+      ::  ~~  ~(gut go `*`q:(mint(sut p, rup |, fab &) %noun q.q))
       ~~  dump(sut p)
       ~~  dump(sut dox)
       ~|('fire-wet' !!)
@@ -1774,8 +1776,8 @@
     |=  [dox=*type gen=*gene]
     ^-  ?
     ?|  (~(has in rib) [sut dox gen])
-        .=  q:(mint(rib (~(put in rib) [sut dox gen]), rup |) %noun gen)
-          q:(mint(sut dox, vet |, rup |) %noun gen)
+        .=  q:(mint(fab &, sut dox, vet |, rup |) %noun gen)
+          q:(mint(fab &, rib (~(put in rib) [sut dox gen]), rup |) %noun gen)
     --
   ::
   ++  fuse
@@ -1868,6 +1870,7 @@
     ^-  [p=*type q=*form]
     =<  $
     &.
+    ::  ++  boil  |=(rey=|.(*form) ?.(fab [0 0] $.rey))
     ++  coke
       |=  [nug=*form]
       ?-    nug
@@ -1878,7 +1881,10 @@
     ::
     ++  crow
       |=  [mel=*<%gold %lead %iron> ruf=*gene dab=*(map term foot)]
+      ^-  [p=*type q=*form]
       =+  dan=$$(gen ruf, gol %noun)
+      ?.  fab
+        [(core p.dan mel p.dan [[0 0] dab]) [0 0]]
       =+  toc=(core p.dan [%gold p.dan [~ dab]])
       =+  dez=(bake(sut toc) dab)
       :*  (nice (core p.dan mel p.dan [dez dab]))
@@ -1945,7 +1951,7 @@
       ::
           [%ktdp *]                                                   ::  ^-
         =+  hif=(nice (play p.gen))
-        [hif q:$(gen q.gen, gol hif)]
+        [hif ?.(fab [0 0] q:$(gen q.gen, gol hif))]
       ::
           [%ktpd *]                                                   ::  ^+
         =+  zut=(play p.gen)
@@ -2233,7 +2239,7 @@
     ~.  %play
     |=  gen=*gene
     ^-  *type
-    p:(mint(vet |) %noun gen)
+    p:(mint(vet |, fab |) %noun gen)
   ::
   ++  reco
     |*  fud=|=(p=*type p)
