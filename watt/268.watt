@@ -1439,7 +1439,6 @@
       %fan    fan
       %rib    rib
       %vet    vet
-      %rup    rup
       %fab    fab
       %bake   bake
       %burn   burn
@@ -1468,7 +1467,6 @@
   =+  :*  fan=*(set <[*type *gene]>)
           rib=*(set <[*type *type *gene]>)
           vet=`?`&
-          rup=`?`&
           fab=`?`&
       --
   &=  sut=`*type`%noun
@@ -1735,8 +1733,8 @@
         ~|('fire-dry' !!)
       [dox q.q]
     ?.  ?|(!vet .=(p.p q.q.p) (fret(sut p) dox q.q))
-      ::  ~~  ~(gut go `*`q:(mint(sut dox, vet |, rup |, fab &) %noun q.q))
-      ::  ~~  ~(gut go `*`q:(mint(sut p, rup |, fab &) %noun q.q))
+      ::  ~~  ~(gut go `*`q:(mint(sut dox, vet |, fab &) %noun q.q))
+      ::  ~~  ~(gut go `*`q:(mint(sut p, fab &) %noun q.q))
       ~~  dump(sut p)
       ~~  dump(sut dox)
       ~|('fire-wet' !!)
@@ -1776,8 +1774,8 @@
     |=  [dox=*type gen=*gene]
     ^-  ?
     ?|  (~(has in rib) [sut dox gen])
-        .=  q:(mint(fab &, sut dox, vet |, rup |) %noun gen)
-          q:(mint(fab &, rib (~(put in rib) [sut dox gen]), rup |) %noun gen)
+        .=  q:(mint(fab &, sut dox, vet |) %noun gen)
+          q:(mint(fab &, rib (~(put in rib) [sut dox gen])) %noun gen)
     --
   ::
   ++  fuse
@@ -1909,14 +1907,16 @@
       ::
           [%csbn *]                                                   ::  ?=
         :-  (nice flag)
+        ?.  fab
+          [0 0]
         (fish(sut (play p.gen)) (coke q:$(gen q.gen, gol %noun)))
       ::
           [%csdg *]                                                   ::  ?:
         =+  nor=$(gen p.gen, gol flag)
         =+  fex=(gain p.gen)
-        ?:  ?&(rup .=(%void fex))
+        ?:  .=(%void fex)
           $(gen r.gen)
-        =+  hiq=$(sut fex, gen q.gen)
+        =+  hiq=$(sut ?:(.=(%void fex) sut fex), gen q.gen)
         =+  ran=$(gen r.gen)
         [(fork p.hiq p.ran) [6 q.nor q.hiq q.ran]]
       ::

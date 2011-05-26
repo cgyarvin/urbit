@@ -37,11 +37,7 @@
           return u2_no;
         }
         else {
-          u2_type rep = j2_mcy(Pit, ut, repo)(wir_r, van, sut);
-          u2_flag ret = _orth_in(wir_r, van, rep, ref, bix);
-
-          u2_rz(wir_r, rep);
-          return ret;
+          return j2_mcy(Pit, ut, nest)(wir_r, van, c3__void, ref);
         }
       }
       case c3__void: {
@@ -121,10 +117,8 @@
                         _orth_in(wir_r, van, q_sut, ref, bix));
         }
       }
-      case c3__hold:
-        if ( u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut) ) {
-          goto fail;
-        } else {
+      case c3__hold: p_sut = u2_t(sut);
+        {
           u2_noun tor = u2_bc(wir_r, u2_rx(wir_r, ref), 
                                      u2_rx(wir_r, sut));
 
@@ -134,7 +128,7 @@
           } 
           else {
             u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, bix, tor);
-            u2_type fop = j2_mcy(Pit, ut, rest)(wir_r, van, p_sut, q_sut);
+            u2_type fop = j2_mcy(Pit, ut, rest)(wir_r, van, sut, p_sut);
             u2_noun ret = _orth_in(wir_r, van, fop, ref, zoc);
 
             u2_rl_lose(wir_r, fop);
@@ -153,7 +147,10 @@
                         u2_noun sut,                              //  retain
                         u2_noun ref)                              //  retain
   {
-    return _orth_in(wir_r, van, sut, ref, u2_nul);
+    u2_flag ret;
+    
+    ret = _orth_in(wir_r, van, sut, ref, u2_nul);
+    return ret;
   }
   
 /* boilerplate

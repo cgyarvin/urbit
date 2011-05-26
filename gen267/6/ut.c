@@ -117,9 +117,8 @@
         }
       }
       case c3__hold:
-        if ( u2_no == u2_as_cell(u2_t(typ), &p_typ, &q_typ) ) {
-          goto fail;
-        } else {
+        p_typ = u2_t(typ);
+        {
           _type_in(wir_r, p_typ);
           break;
         }

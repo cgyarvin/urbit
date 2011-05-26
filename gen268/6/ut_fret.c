@@ -27,12 +27,10 @@
       u2_noun rob = j2_mcc(Pit, in, put)(wir_r, rib, key);
       u2_noun von = u2_bn_molt(wir_r, van, 
                                       j2_ut_van_rib, rob, 
-                                      j2_ut_van_rup, u2_no,
                                       j2_ut_van_fab, u2_yes,
                                       0);
       u2_noun vin = u2_bn_molt(wir_r, von, 
                                       j2_ut_van_vet, u2_no, 
-                                      j2_ut_van_rup, u2_no,
                                       j2_ut_van_fab, u2_yes,
                                       0);
 

@@ -123,7 +123,7 @@
 
           return ret;
         }
-        case c3__hold: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
+        case c3__hold: p_sut = u2_t(sut);
         {
           u2_noun por = j2_mcy(Pit, ut, repo)(wir_r, van, sut);
           u2_noun yot = j2_mcx(Pit, ut, cull)(wir_r, van, por, axe, ref);

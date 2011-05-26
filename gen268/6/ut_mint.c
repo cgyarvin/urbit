@@ -31,19 +31,6 @@
     }
   }
   static u2_flag
-  _mint_rup(u2_wire wir_r,
-            u2_noun van)
-  {
-    // u2_flag rup = u2_bn_hook(wir_r, van, "rup");
-    u2_flag rup = u2_frag(j2_ut_van_rup, van);
-
-    switch ( rup ) {
-      case u2_no: 
-      case u2_yes: return rup;
-      default: return u2_bl_bail(wir_r, c3__fail); 
-    }
-  }
-  static u2_flag
   _mint_fab(u2_wire wir_r,
             u2_noun van)
   {
@@ -217,6 +204,7 @@
       }
       case c3__csbn: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       {
+        u2_flag fab = _mint_fab(wir_r, van);
         u2_noun vol = _mint_make(wir_r, van, sut, c3__noun, q_gen);
         u2_noun wam = j2_mcy(Pit, ut, play)(wir_r, van, sut, p_gen);
         u2_noun axe = _mint_coke(wir_r, vol);
@@ -224,7 +212,9 @@
         ret = u2_bc
           (wir_r,
            _mint_nice(wir_r, van, gol, _mint_flag(wir_r)),
-           j2_mcy(Pit, ut, fish)(wir_r, van, wam, axe));
+           (u2_no == fab)
+             ? u2_bc(wir_r, _0, _0)
+             : j2_mcy(Pit, ut, fish)(wir_r, van, wam, axe));
 
         u2_rl_lose(wir_r, vol);
         u2_rl_lose(wir_r, wam);
@@ -236,12 +226,12 @@
         u2_noun bol = _mint_flag(wir_r);
         u2_noun nor = j2_mcx(Pit, ut, mint)(wir_r, van, sut, bol, p_gen);
         u2_noun fex = j2_mcy(Pit, ut, gain)(wir_r, van, sut, p_gen);
-        u2_flag rup = _mint_rup(wir_r, van);
 
-        if ( (u2_yes == rup) && (c3__void == fex) ) {
+        if ( (c3__void == fex) ) {
           return j2_mcx(Pit, ut, mint)(wir_r, van, sut, gol, r_gen);
         } else {
-          u2_noun hiq = j2_mcx(Pit, ut, mint)(wir_r, van, fex, gol, q_gen);
+          u2_noun rog = (c3__void == fex) ? sut : fex;
+          u2_noun hiq = j2_mcx(Pit, ut, mint)(wir_r, van, rog, gol, q_gen);
           u2_noun ran = j2_mcx(Pit, ut, mint)(wir_r, van, sut, gol, r_gen);
 
           ret = u2_bc
@@ -403,7 +393,7 @@
           u2_noun pq_lar = u2_t(q_lar);
           u2_noun gix = u2_bc
             (wir_r,
-             u2_bc(wir_r, pq_lar,
+             u2_bc(wir_r, u2_rx(wir_r, pq_lar),
                           u2_bt(wir_r, u2_yes, u2_nul, _1)),
              u2_nul);
           u2_noun fup = j2_mcy(Pit, ut, emit)

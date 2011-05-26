@@ -118,7 +118,7 @@
         u2_rl_lose(wir_r, dat);
         return ret;
       }
-      case c3__hold: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
+      case c3__hold: p_sut = u2_t(sut);
       {
         u2_noun hud = u2_bc(wir_r, sut, ref);
 

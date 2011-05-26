@@ -57,11 +57,9 @@
         }
       }
       case c3__hold: {
-        if ( (u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut)) ) {
-          return u2_bl_bail(wir_r, c3__fail);
-        }
-        else {
-          u2_noun fop = j2_mcy(Pit, ut, rest)(wir_r, van, p_sut, q_sut);
+        p_sut = u2_t(sut);
+        {
+          u2_noun fop = j2_mcy(Pit, ut, rest)(wir_r, van, sut, p_sut);
           
           ret = j2_mcx(Pit, ut, snap)(wir_r, van, fop, gen);
           u2_rl_lose(wir_r, fop);

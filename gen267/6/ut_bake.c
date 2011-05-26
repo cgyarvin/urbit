@@ -11,13 +11,26 @@
   _bake_make(u2_wire wir_r,
              u2_noun van,
              u2_noun sut,
+             u2_flag tov,
              u2_noun gen)
   {
-    u2_noun mil = j2_mcy(Pit, ut, mint)(wir_r, van, sut, c3__noun, gen);
-    u2_noun fol = u2_rx(wir_r, u2_t(mil));
+    u2_noun von;
+    
+    switch ( tov ) {
+      default: return u2_bl_bail(wir_r, c3__fail);
+      case u2_yes: 
+        von = u2_rx(wir_r, van); break;
+      case u2_no: 
+        von = u2_bn_molt(wir_r, van, j2_ut_van_vet, u2_no, 0); break;
+    }
+    {
+      u2_noun mil = j2_mcy(Pit, ut, mint)(wir_r, von, sut, c3__noun, gen);
+      u2_noun fol = u2_rx(wir_r, u2_t(mil));
 
-    u2_rl_lose(wir_r, mil);
-    return fol;
+      u2_rl_lose(wir_r, mil);
+      u2_rl_lose(wir_r, von);
+      return fol;
+    }
   }
 
   u2_noun                                                         //  transfer
@@ -39,23 +52,24 @@
       else {
         u2_noun qn_dab = u2_t(n_dab);
         u2_noun pqn_dab = u2_t(qn_dab);   //  XX actual wing support
-      
+        u2_noun ppqn_dab = u2_h(pqn_dab);
+        u2_noun qpqn_dab = u2_t(pqn_dab);
+        u2_noun vad = _bake_make(wir_r, van, sut, ppqn_dab, qpqn_dab);
+
         if ( (u2_nul == l_dab) && (u2_nul == r_dab) ) {
-          return _bake_make(wir_r, van, sut, pqn_dab);
+          return vad;
         }
         else if ( (u2_nul == l_dab) ) {
           return u2_bc
-            (wir_r, _bake_make(wir_r, van, sut, pqn_dab),
-                    j2_mcx(Pit, ut, bake)(wir_r, van, sut, r_dab));
+            (wir_r, vad, j2_mcx(Pit, ut, bake)(wir_r, van, sut, r_dab));
         }
         else if ( (u2_nul == r_dab) ) {
           return u2_bc
-            (wir_r, _bake_make(wir_r, van, sut, pqn_dab),
-                    j2_mcx(Pit, ut, bake)(wir_r, van, sut, l_dab));
+            (wir_r, vad, j2_mcx(Pit, ut, bake)(wir_r, van, sut, l_dab));
         }
         else {
           return u2_bt
-            (wir_r, _bake_make(wir_r, van, sut, pqn_dab),
+            (wir_r, vad,
                     j2_mcx(Pit, ut, bake)(wir_r, van, sut, l_dab),
                     j2_mcx(Pit, ut, bake)(wir_r, van, sut, r_dab));
         }

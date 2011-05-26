@@ -8,23 +8,26 @@
 /* logic
 */
   static u2_noun 
-  _rest_in_gar(u2_wire wir_r,
-               u2_noun van,
-               u2_noun p_sut,
-               u2_noun q_sut)
+  _rest_in_list(u2_wire wir_r, 
+                u2_noun van,                                      //  retain
+                u2_noun leg)                                      //  retain
   {
-    if ( u2_no == u2_dust(q_sut) ) {
-      return (u2_nul == q_sut ? u2_nul : u2_bl_bail(wir_r, c3__fail));
+    if ( u2_nul == leg ) {
+      return u2_nul;
     } else {
+      u2_noun i_leg = u2_h(leg);
+      u2_noun t_leg = u2_t(leg);
+
       return u2_bc
-        (wir_r, j2_mcy(Pit, ut, play)(wir_r, van, p_sut, u2_h(q_sut)),
-                _rest_in_gar(wir_r, van, p_sut, u2_t(q_sut)));
+        (wir_r, j2_mcy(Pit, ut, play)(wir_r, van, u2_h(i_leg), u2_t(i_leg)),
+                _rest_in_list(wir_r, van, t_leg));
     }
   }
+
   static u2_noun
-  _rest_in_nog(u2_wire wir_r,
-               u2_noun van,
-               u2_noun gar)
+  _rest_in_stil(u2_wire wir_r,
+                u2_noun van,
+                u2_noun gar)
   {
     u2_noun gun = j2_mcc(Pit, in, gas)(wir_r, u2_nul, gar);
     u2_noun nog = j2_mcc(Pit, in, tap)(wir_r, gun, u2_nul);
@@ -32,15 +35,16 @@
     u2_rl_lose(wir_r, gun);
     return nog;
   }
-  static u2_noun                                                  //  transfer
-  _rest_in_fub(u2_wire wir_r,
-               u2_noun nog,                                       //  retain
-               u2_noun fub)                                       //  transfer
+
+  static u2_noun                                                  //  produce
+  _rest_in_fork(u2_wire wir_r, 
+                u2_noun nog,                                      //  retain
+                u2_noun fub)                                      //  retain
   {
     if ( u2_no == u2_dust(nog) ) {
       return fub;
     } else {
-      u2_noun buf = _rest_in_fub
+      u2_noun buf = _rest_in_fork
         (wir_r, 
          u2_t(nog),
          j2_mby(Pit, fork)(wir_r, u2_h(nog), fub));
@@ -50,44 +54,52 @@
     }
   }
 
-  static u2_noun
+  static u2_noun                                                  //  produce
   _rest_in(u2_wire wir_r,
-           u2_noun van,
-           u2_noun p_sut,
-           u2_noun q_sut)
+           u2_noun van,                                           //  retain
+           u2_noun leg)                                           //  retain
   {
-    u2_noun gar = _rest_in_gar(wir_r, van, p_sut, q_sut);
-    u2_noun nog = _rest_in_nog(wir_r, van, gar);
-    u2_noun fub = _rest_in_fub(wir_r, nog, c3__void);
+    u2_noun gar = _rest_in_list(wir_r, van, leg);
+    u2_noun nog = _rest_in_stil(wir_r, van, gar);
+    u2_noun fub = _rest_in_fork(wir_r, nog, c3__void);
 
     u2_rl_lose(wir_r, gar);
     u2_rl_lose(wir_r, nog);
 
     return fub;
   }
-  
-  u2_flag                                                         //  transfer
+
+  static u2_flag
+  _rest_hit_fan(u2_wire wir_r,
+                u2_noun fan,                                      //  retain
+                u2_noun leg)                                      //  retain
+  {
+    if ( u2_nul == leg ) {
+      return u2_no;
+    } else {
+      return u2_or(j2_mcc(Pit, in, has)(wir_r, fan, u2_h(leg)),
+                   _rest_hit_fan(wir_r, fan, u2_t(leg)));
+    }
+  }
+
+  u2_noun                                                         //  produce
   j2_mcx(Pit, ut, rest)(u2_wire wir_r, 
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
                         u2_noun leg)                              //  retain
   {
-    // u2_noun fan = u2_bn_hook(wir_r, van, "fan");
-    u2_noun fan = u2_rx(wir_r, u2_frag(j2_ut_van_fan, van));
-    u2_noun key = u2_bc(wir_r, u2_rx(wir_r, sut), u2_rx(wir_r, leg));
+    u2_noun fan = u2_frag(j2_ut_van_fan, van);
 
-    if ( u2_yes == j2_mcc(Pit, in, has)(wir_r, fan, key) ) {
+    if ( u2_yes == _rest_hit_fan(wir_r, fan, leg) ) {
       return u2_bl_error(wir_r, "rest-loop");
     }
     else {
-      u2_noun naf = j2_mcc(Pit, in, put)(wir_r, fan, key);
-      // u2_noun nav = u2_bn_cook(wir_r, van, "fan", naf);
+      u2_noun naf = j2_mcc(Pit, in, gas)(wir_r, fan, leg);
       u2_noun nav = u2_bn_molt(wir_r, van, j2_ut_van_fan, naf, 0);
-      u2_noun mez = _rest_in(wir_r, nav, sut, leg);
+      u2_noun mez = _rest_in(wir_r, nav, leg);
 
       u2_rz(wir_r, naf);
       u2_rz(wir_r, nav);
-      u2_rz(wir_r, key);
       return mez;
     }
   } 

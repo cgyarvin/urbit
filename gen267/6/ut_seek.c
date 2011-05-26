@@ -7,6 +7,23 @@
 
 /* logic
 */
+  static u2_noun                                                  //  produce
+  _seek_flat(u2_wire wir_r,
+             u2_noun wob)                                         //  retain
+  {
+    if ( u2_nul == wob ) {
+      return u2_nul;
+    } else {
+      u2_noun i_wob = u2_h(wob);
+      u2_noun t_wob = u2_t(wob);
+
+      return u2_bc
+        (wir_r, u2_bc(wir_r, u2_rx(wir_r, u2_h(i_wob)),
+                             u2_bt(wir_r, u2_yes, u2_nul, _1)),
+                _seek_flat(wir_r, t_wob));
+    }
+  }
+
   u2_noun                                                         //  transfer
   j2_mcx(Pit, ut, seek)(u2_wire wir_r, 
                         u2_noun van,                              //  retain
@@ -16,7 +33,7 @@
   {
     if ( u2_nul == hep ) {
       return u2_bt
-        (wir_r, _1, u2_nul, u2_rx(wir_r, sut));
+        (wir_r, _1, u2_yes, u2_rx(wir_r, sut));
     }
     else if ( u2_no == u2_dust(hep) ) {
       return u2_bl_bail(wir_r, c3__fail);
@@ -25,38 +42,34 @@
       u2_noun i_hep = u2_h(hep);
       u2_noun t_hep = u2_t(hep);
       u2_noun zar = j2_mcx(Pit, ut, seek)(wir_r, van, sut, way, t_hep);
-      u2_noun p_zar, q_zar, r_zar;
-      u2_noun pro;
+      u2_noun p_zar, q_zar;
+      u2_noun syp;
+      u2_noun ret;
 
-      u2_as_trel(zar, &p_zar, &q_zar, &r_zar);
+      u2_as_cell(zar, &p_zar, &q_zar);
 
-      if ( u2_nul != q_zar ) {
-        u2_noun neg = u2_bc(wir_r, u2_bc(wir_r, u2_nul, 1), u2_nul);
-        u2_noun bor = j2_mcy(Pit, ut, fire)(wir_r, van, r_zar, neg);
-        u2_noun raz = u2_bt(wir_r, u2_rx(wir_r, p_zar),
-                                   u2_rx(wir_r, q_zar), 
-                                   bor);
-   
-        u2_rz(wir_r, zar);
-        u2_as_trel(raz, &p_zar, &q_zar, &r_zar);
-        zar = raz;
+      if ( u2_yes == u2_h(q_zar) ) {
+        syp = u2_rx(wir_r, u2_t(q_zar));
+      } else {
+        u2_noun pq_zar, qq_zar;
+        u2_noun wip;
+
+        u2_as_cell(u2_t(q_zar), &pq_zar, &qq_zar);
+        wip = _seek_flat(wir_r, qq_zar);
+        syp = j2_mcy(Pit, ut, fire)(wir_r, van, sut, wip);
+
+        u2_rz(wir_r, wip);
       }
 
       if ( u2_no == u2_dust(i_hep) ) {
-        u2_noun hup = j2_mcy(Pit, ut, find)(wir_r, van, r_zar, way, i_hep);
-        u2_noun p_hup, q_hup, r_hup;
+        u2_noun hud = j2_mcy(Pit, ut, find)(wir_r, van, syp, way, i_hep);
+        u2_noun p_hud, q_hud;
 
-        u2_as_trel(hup, &p_hup, &q_hup, &r_hup);
+        u2_as_cell(hud, &p_hud, &q_hud);
 
-        pro = u2_bt
-          (wir_r, j2_mbc(Pit, peg)(wir_r, p_zar, p_hup), 
-                  u2_rx(wir_r, q_hup),
-                  u2_rx(wir_r, r_hup));
-
-        u2_rl_lose(wir_r, zar);
-        u2_rl_lose(wir_r, hup);
-
-        return pro;
+        ret = u2_bc(wir_r, j2_mbc(Pit, peg)(wir_r, p_zar, p_hud), 
+                           u2_rx(wir_r, q_hud));
+        u2_rz(wir_r, hud);
       } 
       else {
         u2_noun hi_hep = u2_h(i_hep);
@@ -66,15 +79,15 @@
           return u2_bl_bail(wir_r, c3__fail);
         }
         else {
-          pro = u2_bt
+          ret = u2_bt
             (wir_r, j2_mbc(Pit, peg)(wir_r, p_zar, pi_hep),
-                    u2_nul,
-                    j2_mcy(Pit, ut, peek)(wir_r, van, r_zar, way, pi_hep));
-
-          u2_rl_lose(wir_r, zar);
-          return pro;
+                    u2_yes,
+                    j2_mcy(Pit, ut, peek)(wir_r, van, syp, way, pi_hep));
         }
       }
+      u2_rz(wir_r, syp);
+      u2_rz(wir_r, zar);
+      return ret;
     }
   }
 

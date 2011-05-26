@@ -120,10 +120,9 @@
           }
         } 
         case c3__hold: {
-          if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
-            return u2_bl_bail(wir_r, c3__fail);
-          } else {
-            u2_noun fop = j2_mcy(Pit, ut, rest)(wir_r, van, p_sut, q_sut);
+          p_sut = u2_t(sut);
+          {
+            u2_noun fop = j2_mcy(Pit, ut, rest)(wir_r, van, sut, p_sut);
 
             pro = j2_mcx(Pit, ut, peek)(wir_r, van, fop, way, axe);
 

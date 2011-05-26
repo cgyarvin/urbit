@@ -416,17 +416,17 @@ tall
 
   /** Tall - normals.
   **/
-    tall_norm: di_casdeg w body_c_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_casdot w body_c_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_casdel w body_b_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_casled w body_b_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_caspam w body_d_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_casbar w body_d_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_cassig w body_c_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_caszap w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_casbon w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_casdap w body_h_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_casdeg w body_c_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_casdel w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_casdot w body_c_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_casled w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_caspam w body_d_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_cassig w body_c_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_castar w body_i_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_caszap w body_a_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_barbon w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_barcas w body_d_tall    { $$ = _ycell($1, $3); }

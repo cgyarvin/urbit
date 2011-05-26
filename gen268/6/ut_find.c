@@ -249,7 +249,7 @@
       u2_err(wir_r, "cog", cog);
       j2_mcy(Pit, ut, dupt)(wir_r, van, "sut", sut);
 #endif
-      c3_assert(0);
+      // c3_assert(0);
       return u2_bl_error(wir_r, "find-none");
     } else {
       u2_noun pro = u2_rx(wir_r, u2_t(fin));
