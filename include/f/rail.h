@@ -24,10 +24,6 @@
           u2_ray mat_r;   // bottom of transient region
           u2_ray rut_r;   // bottom of new durable region
           c3_m   hip_m;   // memory model in durable; c3__rock, c3__sand
-
-          /* Ray to allocation counter, for rock rails only.
-          */
-          u2_ray bav_r;
         } u2_loom_rail;
 
 #         define  u2_rail_cap_r(ral_r)  *u2_at(ral_r, u2_loom_rail, cap_r)
@@ -35,7 +31,6 @@
 #         define  u2_rail_mat_r(ral_r)  *u2_at(ral_r, u2_loom_rail, mat_r)
 #         define  u2_rail_rut_r(ral_r)  *u2_at(ral_r, u2_loom_rail, rut_r)
 #         define  u2_rail_hip_m(ral_r)  *u2_at(ral_r, u2_loom_rail, hip_m)
-#         define  u2_rail_bav_r(ral_r)  *u2_at(ral_r, u2_loom_rail, bav_r)
 
       /* Pork - base of frame.
       */
@@ -58,9 +53,13 @@
         typedef struct {
           u2_ray         fre_r;     // single, doubly-linked free list
           u2_cash_slot   lot_s;     // modern memo cache
+#ifdef U2_PROFILE_MEMORY
+          c3_w           liv_w;    // number of memory words live
+#endif
         } u2_loom_soup;
-#         define u2_soup_fre_r(sop_r)  *u2_at(sop_r, u2_loom_soup, fre_r)
-#         define u2_soup_lot_r(sop_r)  u2_aftr(sop_r, u2_loom_soup, lot_s)
+#         define u2_soup_fre_r(sop_r)   *u2_at(sop_r, u2_loom_soup, fre_r)
+#         define u2_soup_lot_r(sop_r)   u2_aftr(sop_r, u2_loom_soup, lot_s)
+#         define u2_soup_liv_w(sop_r)   *u2_at(sop_r, u2_loom_soup, liv_w)
 
       /* A noun box, for liquid hats.  Behind pointer, addressed fwd.
       **

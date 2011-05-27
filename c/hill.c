@@ -1181,6 +1181,7 @@ hill_boot(void)
       if ( u2_no == u2_rl_leap(wir_r, c3__rock) ) {
         c3_assert(0);
       }
+      u2_bx_boot(wir_r);
       {
         u2_ray  kit_r = u2_bl_open(wir_r);
 
@@ -1193,6 +1194,8 @@ hill_boot(void)
         else {
           soa = _hill_z_boot(wir_r, FileA);
           u2_bl_done(wir_r, kit_r);
+          u2_bx_spot(wir_r, u2_nul);
+          u2_bx_show(wir_r);
         }
       }
       fprintf(stderr, "{cold boot: %s, with %s jets: %x}\n", 
@@ -1200,14 +1203,12 @@ hill_boot(void)
       Hill->soa = u2_rl_take(u2_wire_bas_r(wir_r), soa);
       u2_rl_fall(wir_r);
 
-      u2_bx_spot(wir_r, u2_nul);
-      u2_bx_show(wir_r);
-
       /* Boot shoe B.
       */
       if ( u2_no == u2_rl_leap(wir_r, c3__rock) ) {
         c3_assert(0);
       }
+      u2_bx_boot(wir_r);
       {
         u2_ray  kit_r = u2_bl_open(wir_r);
 
@@ -1220,6 +1221,9 @@ hill_boot(void)
         else {
           sob = _hill_a_boot(wir_r, soa, FileB);
           u2_bl_done(wir_r, kit_r);
+
+          u2_bx_spot(wir_r, u2_nul);
+          u2_bx_show(wir_r);
         }
       }
       fprintf(stderr, "{warm boot: %s, with %s: %x}\n", 
@@ -1227,14 +1231,12 @@ hill_boot(void)
       Hill->sob = u2_rl_take(u2_wire_bas_r(wir_r), sob);
       u2_rl_fall(wir_r);
 
-      u2_bx_spot(wir_r, u2_nul);
-      u2_bx_show(wir_r);
-
       /* Boot shoe C.
       */
       if ( u2_no == u2_rl_leap(wir_r, c3__rock) ) {
         c3_assert(0);
       }
+      u2_bx_boot(wir_r);
       {
         u2_ray  kit_r = u2_bl_open(wir_r);
 
@@ -1247,15 +1249,15 @@ hill_boot(void)
         else {
           soc = _hill_b_boot(wir_r, soa, sob, FileC);
           u2_bl_done(wir_r, kit_r);
+
+          u2_bx_spot(wir_r, u2_nul);
+          u2_bx_show(wir_r);
         }
       }
       fprintf(stderr, "{warm boot: %s, with %s: %x}\n", 
           FileC, FileB, u2_mug(soc));
       Hill->soc = u2_rl_take(u2_wire_bas_r(wir_r), soc);
       u2_rl_fall(wir_r);
-
-      u2_bx_spot(wir_r, u2_nul);
-      u2_bx_show(wir_r);
 
       return Hill;
     } while (0);

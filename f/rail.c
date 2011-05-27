@@ -17,7 +17,9 @@ _rl_feed(u2_ray ral_r)
 
     u2_rail_hat_r(ral_r) += c3_wiseof(u2_loom_soup);
     u2_soup_fre_r(sop_r) = 0;
-
+#ifdef U2_MEMORY_PROFILE
+    u2_soup_liv_w(sop_r) = 0;
+#endif
     u2_cs_init(lot_r);
   }
 }
@@ -49,7 +51,6 @@ u2_rl_init(c3_m   hip_m,
     u2_rail_mat_r(ral_r) = mat_r;
     u2_rail_rut_r(ral_r) = hat_r;
     u2_rail_hip_m(ral_r) = hip_m;
-    u2_rail_bav_r(ral_r) = 0;
 
     _rl_feed(ral_r);
 
@@ -459,19 +460,21 @@ _rl_bloq_detach(u2_ray ral_r,
   }
 }
 
-/* _rl_benx_grab(): 
+/* _rl_live_grab(): 
 */
-static void
-_rl_benx_grab(u2_ray ral_r,
-              c3_ws  wad_ws)
-{
-  u2_ray bav_r;
+#ifdef U2_PROFILE_MEMORY
+  static void
+  _rl_live_grab(u2_ray ral_r,
+                c3_ws  wad_ws)
+  {
+    u2_ray sop_r = u2_rail_rut_r(ral_r);
 
-  if ( (bav_r = u2_rail_bav_r(ral_r)) ) {
-    *(c3_ws *)u2_at_ray(bav_r) += wad_ws;
+    u2_soup_liv_w(sop_r) += wad_ws;
   }
-}
-              
+#else
+#  define _rl_live_grab(ral_r, wad_ws)
+#endif
+
 /* _rl_bloq_grab():
 **
 **  Allocate `len_w` words of memory on `ral_r`, or return 0.
@@ -518,7 +521,7 @@ _rl_bloq_grab(u2_ray ral_r,
           u2_rail_hat_r(ral_r) += siz_w;
 
           _rl_bloq_make(ral_r, box_r, siz_w, 1);
-          _rl_benx_grab(ral_r, siz_w);
+          _rl_live_grab(ral_r, siz_w);
 
           return (box_r + c3_wiseof(u2_loom_rail_box));
         }
@@ -550,7 +553,7 @@ _rl_bloq_grab(u2_ray ral_r,
             c3_assert(u2_rail_box_use(box_r) == 0);
             u2_rail_box_use(box_r) = 1;
           }
-          _rl_benx_grab(ral_r, siz_w);
+          _rl_live_grab(ral_r, siz_w);
           return (box_r + c3_wiseof(u2_loom_rail_box));
         }
       }
@@ -602,7 +605,7 @@ _rl_bloq_free(u2_ray ral_r,
   c3_assert(u2_ray_a(box_r) == u2_ray_a(rut_r));
   c3_assert(box_r >= rut_r);
 
-  _rl_benx_grab(ral_r, (-1 * u2_rail_hut_siz(box_r)));
+  _rl_live_grab(ral_r, (-1 * u2_rail_hut_siz(box_r)));
 
   // return;
 

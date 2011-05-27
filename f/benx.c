@@ -26,22 +26,10 @@ u2_bx_boot(u2_ray wir_r)
     u2_benx_be(bex_r, c3_w, wac_w) = 0;
     u2_benx_be(bex_r, c3_w, wax_w) = 0;
 
-    u2_benx_be(bex_r, c3_ws, bax_ws) = 0;
-  
-    if ( 0 == u2_ray_a(u2_rail_cap_r(wir_r)) ) {
-      u2_benx_at(bex_r, wab_r) = u2_rail_cap_r(wir_r);
-      u2_benx_at(bex_r, eab_r) = u2_rail_hat_r(wir_r);
-    } else {
-      u2_benx_at(bex_r, wab_r) = u2_rail_hat_r(wir_r);
-      u2_benx_at(bex_r, eab_r) = u2_rail_cap_r(wir_r);
-    }
-    u2_benx_at(bex_r, wst_r) = u2_benx_at(bex_r, wab_r);
-    u2_benx_at(bex_r, est_r) = u2_benx_at(bex_r, eab_r);
+    u2_benx_be(bex_r, c3_w, lif_w) = u2_soup_liv_w(u2_rail_rut_r(wir_r));
+    u2_benx_be(bex_r, c3_w, bos_w) = 
+      u2_soup_liv_w(u2_rail_rut_r(u2_wire_bas_r(wir_r)));
 
-    if ( u2_wire_bas_r(wir_r) ) {
-      u2_rail_bav_r(u2_wire_bas_r(wir_r)) = 
-        u2_aftr(bex_r, u2_loom_benx, bax_ws);
-    }
     {
       struct timeval tv;
 
@@ -62,9 +50,8 @@ u2_bx_boot(u2_ray wir_r)
 **  jax: number of jet activations
 **  use: number of user counts
 **  wax: maximum depth of C stack
-**  moc: number of words touched
-**  hix: number of words acquired
-**  bax: number of words in basket allocated/freed
+**  viq: words in wire allocated
+**  zor: words in basket allocated
 **  ums: number of milliseconds consumed
 */
 u2_flag
@@ -77,9 +64,8 @@ u2_bx_post(u2_ray   wir_r,
            c3_d*    jax_d,
            c3_d*    use_d,
            c3_w*    wax_w,
-           c3_w*    moc_w,
-           c3_w*    hix_w,
-           c3_ws*   bax_ws,
+           c3_ws*   viq_ws,
+           c3_ws*   zor_ws,
            c3_w*    ums_w)
 {
   u2_ray bex_r;
@@ -87,7 +73,6 @@ u2_bx_post(u2_ray   wir_r,
   if ( 0 == (bex_r = u2_wire_bex_r(wir_r)) ) {
     return u2_no;
   } else {
-    u2_ray eab_r, wab_r;
     c3_w   sec_w, usc_w;
 
     *zat = u2_benx_at(bex_r, zat);
@@ -101,28 +86,15 @@ u2_bx_post(u2_ray   wir_r,
 
     *wax_w = u2_benx_at(bex_r, wax_w);
 
-    *bax_ws = u2_benx_at(bex_r, bax_ws);
+    *viq_ws = u2_soup_liv_w(u2_rail_rut_r(wir_r)) - 
+              u2_benx_be(bex_r, c3_w, lif_w);
 
-    *moc_w = (u2_benx_at(bex_r, wst_r) - u2_benx_at(bex_r, wab_r)) + 
-             (u2_benx_at(bex_r, est_r) - u2_benx_at(bex_r, eab_r));
+    *zor_ws = u2_soup_liv_w(u2_rail_rut_r(u2_wire_bas_r(wir_r))) - 
+              u2_benx_be(bex_r, c3_w, bos_w);
 
-    wab_r = u2_benx_at(bex_r, wab_r);
-    eab_r = u2_benx_at(bex_r, eab_r);
     sec_w = u2_benx_at(bex_r, sec_w);
     usc_w = u2_benx_at(bex_r, usc_w);
     u2_bx_boot(wir_r);
-
-    /* Measure and return saved words.
-    */
-    {
-      *hix_w = 0;
-      if ( u2_benx_at(bex_r, wab_r) > wab_r ) {
-        *hix_w += (u2_benx_at(bex_r, wab_r) - wab_r);
-      }
-      if ( u2_benx_at(bex_r, eab_r) > eab_r ) {
-        *hix_w += (u2_benx_at(bex_r, wab_r) - wab_r);
-      }
-    }
 
     /* Measure and return time change.
     */
@@ -244,49 +216,6 @@ u2_bx_flew(u2_ray wir_r)
     return;
   } else {
     u2_benx_be(bex_r, c3_d, jax_d) += (c3_d) 1;
-  }
-}
-
-/* u2_bx_mark(): apply memory watermarks.
-*/
-void
-u2_bx_mark(u2_ray wir_r)
-{
-  u2_ray bex_r;
-
-  if ( 0 == (bex_r = u2_wire_bex_r(wir_r)) ) {
-    return;
-  } else {
-    if ( u2_ray_a(u2_rail_cap_r(wir_r)) == 0 ) {
-      if ( u2_rail_cap_r(wir_r) > u2_benx_at(bex_r, wst_r) ) {
-        u2_benx_at(bex_r, wst_r) = u2_rail_cap_r(wir_r);
-      }
-      if ( u2_rail_hat_r(wir_r) > u2_benx_at(bex_r, est_r) ) {
-        u2_benx_at(bex_r, est_r) = u2_rail_hat_r(wir_r);
-      }
-    } else {
-      if ( u2_rail_cap_r(wir_r) > u2_benx_at(bex_r, est_r) ) {
-        u2_benx_at(bex_r, est_r) = u2_rail_cap_r(wir_r);
-      }
-      if ( u2_rail_hat_r(wir_r) > u2_benx_at(bex_r, wst_r) ) {
-        u2_benx_at(bex_r, wst_r) = u2_rail_hat_r(wir_r);
-      }
-    }
-  }
-}
-
-/* u2_bx_bask(): note `wad` allocated/freed words in basket.
-*/
-void
-u2_bx_bask(u2_ray wir_r,
-           c3_ws  wad_ws)
-{
-  u2_ray bex_r;
-
-  if ( 0 == (bex_r = u2_wire_bex_r(wir_r)) ) {
-    return;
-  } else {
-    u2_benx_be(bex_r, c3_d, bax_ws) += wad_ws;
   }
 }
 
@@ -521,6 +450,17 @@ _bx_print_superdecimal_w(c3_w w)
 }
 
 static void
+_bx_print_superdecimal_ws(c3_ws ws)
+{
+  if ( ws < 0 ) {
+    printf("-");
+    _bx_print_superdecimal_w((c3_w) -(ws));
+  } else {
+    _bx_print_superdecimal_w((c3_w) ws);
+  }
+}
+
+static void
 _bx_print_superdecimal_d(c3_d d)
 {
   if ( d > 0x100000000ULL ) {
@@ -540,8 +480,8 @@ u2_bx_show(u2_ray wir_r)
 {
   u2_noun zat, zof;
   c3_d sap_d, cop_d, det_d, jax_d, use_d;
-  c3_w wax_w, moc_w, hix_w, ums_w;
-  c3_ws bax_ws;
+  c3_w wax_w, ums_w;
+  c3_ws viq_ws, zor_ws;
 
   if ( u2_no == u2_bx_post(wir_r, &zat,
                                   &zof,
@@ -551,9 +491,8 @@ u2_bx_show(u2_ray wir_r)
                                   &jax_d, 
                                   &use_d, 
                                   &wax_w, 
-                                  &moc_w, 
-                                  &hix_w,
-                                  &bax_ws,
+                                  &viq_ws, 
+                                  &zor_ws,
                                   &ums_w) )
   {
     return;
@@ -601,28 +540,21 @@ u2_bx_show(u2_ray wir_r)
         _bx_print_superdecimal_d(use_d);
         printf(" pings");
       }
-      printf("; ");
-      _bx_print_superdecimal_w(moc_w);
-      printf(" hit, ");
+      printf(", ");
       _bx_print_superdecimal_w(wax_w);
       printf(" deep");
 
-      if ( hix_w ) {
+      if ( viq_ws ) {
+        printf("; ");
+        _bx_print_superdecimal_ws(viq_ws);
+        printf(" kept");
+      }
+      if ( zor_ws ) {
         printf(", ");
-        _bx_print_superdecimal_w(hix_w);
+        _bx_print_superdecimal_ws(zor_ws);
         printf(" held");
       }
       
-      if ( bax_ws ) {
-        printf(", ");
-        if ( bax_ws < 0 ) {
-          printf("-");
-          _bx_print_superdecimal_w((c3_w) -(bax_ws));
-        } else {
-          _bx_print_superdecimal_w((c3_w) bax_ws);
-        }
-        printf(" kept");
-      }
       printf("; ");
       _bx_print_superdecimal_w(ums_w);
       printf(" ms>\n");

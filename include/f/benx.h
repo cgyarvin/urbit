@@ -47,25 +47,13 @@
         */
         c3_w  wax_w;
 
-        /* West base.
+        /* Original words in wire.
         */
-        u2_ray wab_r;
+        c3_w lif_w;
 
-        /* East base.
+        /* Original words in basket.
         */
-        u2_ray eab_r;
-
-        /* West watermark.
-        */
-        u2_ray wst_r;
-
-        /* East watermark.
-        */
-        u2_ray est_r;
-
-        /* Net basket words allocated/freed.
-        */
-        c3_ws bax_ws;
+        c3_w bos_w;
 
         /* Unix time in seconds.
         */
@@ -97,9 +85,8 @@
     **  jax: number of jet activations
     **  use: number of user counts
     **  wax: maximum depth of C stack
-    **  moc: number of words touched
-    **  hix: number of words acquired
-    **  bax: number of words in basket allocated/freed
+    **  viq: words in wire allocated
+    **  zor: words in basket allocated
     **  ums: number of milliseconds consumed
     */
       u2_flag
@@ -112,9 +99,8 @@
                  c3_d*    jax_d,
                  c3_d*    use_d,
                  c3_w*    wax_w,
-                 c3_w*    moc_w,
-                 c3_w*    hix_w,
-                 c3_ws*   bax_ws,
+                 c3_ws*   viq_ws,
+                 c3_ws*   zor_ws,
                  c3_w*    ums_w);
 
     /* u2_bx_spot(): declare source position.

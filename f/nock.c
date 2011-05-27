@@ -25,7 +25,6 @@ _nock_rock(u2_wire wir_r,
 
   while ( 1 ) {
     u2_bx_step(wir_r);
-    u2_bx_mark(wir_r);
 
     if ( LoomStop ) {
       fprintf(stderr, "{stop}\n");
