@@ -542,7 +542,7 @@ tall
   /** Tall - feet and wings.
   **/
     wing
-      :  foot_star e        { $$ = _ybook($1); }
+      :  foot_star e        { $$ = _ybook($1); u2_rz(ywir_r, $1); }
       ;
 
     foot
@@ -749,7 +749,9 @@ tall
     tok_term
       : tok_term_pre
       | tok_term_pre tok_term_load
-        { $$ = u2_bn_tape(ywir_r, _ycell($1, $2)); }
+        { u2_noun a = _ycell($1, $2);
+          $$ = u2_bn_tape(ywir_r, a); 
+          u2_rz(ywir_r, a); }
       ;
         tok_term_pre
           : ca
@@ -767,7 +769,9 @@ tall
       : '0' 
         { $$ = _0; }
       | tok_chex_pre tok_chex_load
-        { $$ = u2_bn_heximal(ywir_r, _ycell($1, $2)); }
+        { u2_noun a = _ycell($1, $2);
+          $$ = u2_bn_heximal(ywir_r, a); 
+          u2_rz(ywir_r, a); }
       ;
         tok_chex_pre
           : cn | ch
@@ -783,7 +787,11 @@ tall
     tok_delm
       : '0' { $$ = _0; }
       | tok_delm_pre tok_delm_load
-        { $$ = u2_bn_decimal(ywir_r, _ycell($1, $2)); }
+        { 
+          u2_noun a = _ycell($1, $2); 
+          $$ = u2_bn_decimal(ywir_r, a); 
+          u2_rz(ywir_r, a);
+        }
       ;
         tok_delm_pre: cn;
         tok_delm_load: { $$ = _0; }
@@ -792,7 +800,7 @@ tall
 
     tok_loct
       : si_bot loct_mid si_bot
-        { $$ = u2_bn_tape(ywir_r, $2); }
+        { $$ = u2_bn_tape(ywir_r, $2); u2_rz(ywir_r, $2); }
       ;
         loct_mid: { $$ = _0; }
                  | cq loct_mid { $$ = _ycell($1, $2); }

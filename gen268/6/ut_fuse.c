@@ -120,7 +120,8 @@
       }
       case c3__hold: p_sut = u2_t(sut);
       {
-        u2_noun hud = u2_bc(wir_r, sut, ref);
+        u2_noun hud = u2_bc(wir_r, u2_rx(wir_r, sut), 
+                                   u2_rx(wir_r, ref));
 
         if ( u2_yes == j2_mcc(Pit, in, has)(wir_r, bix, hud) ) {
           return u2_bl_error(wir_r, "fuse-loop");
@@ -128,7 +129,8 @@
           u2_noun bux = j2_mcc(Pit, in, put)(wir_r, bix, hud);
           u2_noun ret = _fuse_repo(wir_r, van, sut, ref, bux);
 
-          u2_rl_lose(wir_r, bux);
+          u2_rz(wir_r, hud);
+          u2_rz(wir_r, bux);
           return ret;
         }
       }

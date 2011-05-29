@@ -84,6 +84,19 @@
     else return u2_bl_error(wir_r, "mint-coke");
   }
 
+  static u2_noun                                                  //  produce
+  _mint_core(u2_wire wir_r,
+             u2_noun pac,                                         //  submit
+             u2_noun con)                                         //  submit
+  {
+    if ( c3__void == pac ) {
+      u2_rz(wir_r, con);
+      return c3__void;
+    } else {
+      return u2_bt(wir_r, c3__core, pac, con);
+    }
+  }
+
   static u2_noun 
   _mint_crow(u2_wire wir_r,
              u2_noun van,
@@ -100,7 +113,7 @@
     
     if ( u2_no == fab ) {
       u2_noun tuf = u2_bc(wir_r, _0, _0);
-      u2_noun cot = j2_mby(Pit, core)
+      u2_noun cot = _mint_core
         (wir_r, u2_rx(wir_r, p_dan),
                 u2_bt(wir_r, mel, 
                              u2_rx(wir_r, p_dan), 
@@ -115,14 +128,14 @@
       return ret;
     } 
     else {
-      u2_noun toc = j2_mby(Pit, core)
+      u2_noun toc = _mint_core
         (wir_r, u2_rx(wir_r, p_dan),
                 u2_bt(wir_r, c3__gold, 
                              u2_rx(wir_r, p_dan), 
                              u2_bc(wir_r, u2_nul, u2_rx(wir_r, dab))));
       u2_noun dez = j2_mcy(Pit, ut, bake)(wir_r, van, toc, dab);
       u2_noun zod = u2_bc(wir_r, 1, dez);
-      u2_noun cot = j2_mby(Pit, core)
+      u2_noun cot = _mint_core
         (wir_r, u2_rx(wir_r, p_dan),
                 u2_bt(wir_r, mel, 
                              u2_rx(wir_r, p_dan), 

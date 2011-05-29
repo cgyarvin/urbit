@@ -24,7 +24,7 @@
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       static u2_ho_driver *u2_HostDriverBase[] = {
-        &j2_da(watt_267), 
+//         &j2_da(watt_267), 
         &j2_da(watt_268), 
         &j2_da(watt_269), 
         &j2_da(watt_270), 
@@ -1086,7 +1086,53 @@ u2_ho_use(u2_ray     wir_r,
 
       jet_j->sat_s &= ~u2_jet_test;
       {
-        pro = _ho_run(wir_r, jet_j, cor, &tax);
+        if ( !(jet_j->sat_s & u2_jet_leak) ) {
+          pro = _ho_run(wir_r, jet_j, cor, &tax);
+        } else {
+          u2_ho_state mem = jet_j->sat_s;
+
+          jet_j->sat_s &= ~u2_jet_leak;
+          jet_j->sat_s &= ~u2_jet_memo;
+          {
+            c3_w liv_w = u2_soup_liv_w(u2_rail_rut_r(wir_r));
+            c3_w nex_w;
+
+            pro = _ho_run(wir_r, jet_j, cor, &tax);
+            u2_rz(wir_r, pro);
+            nex_w =  u2_soup_liv_w(u2_rail_rut_r(wir_r));
+
+            if ( nex_w > liv_w ) {
+              fprintf(stderr, "leak: %d, %s\n", 
+                  (nex_w - liv_w), u2_ho_cstring(jet_j->xip));
+
+              {
+                u2_noun sut, gol, gen, van;
+
+                if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &gol, 
+                                            u2_cv_sam_3, &gen,
+                                            u2_cv_con, &van, 0)) ||
+                     (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
+                {
+                  c3_assert(0);
+                } else {
+                  j2_mcy(watt_268, ut, dupt)(wir_r, van, "sut", sut);
+                  j2_mcy(watt_268, ut, dupt)(wir_r, van, "gol", gol);
+                  u2_err(wir_r, "gen", gen);
+        /*
+                  j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_sof", u2_h(sof));
+                  j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_had", u2_h(had));
+
+                  u2_err(wir_r, "t_sof", u2_t(sof));
+                  u2_err(wir_r, "t_had", u2_t(had));
+        */
+                }
+              }
+              c3_assert(0);
+            }
+            pro = _ho_run(wir_r, jet_j, cor, &tax);
+          }
+          jet_j->sat_s = mem;
+        }
       }
       jet_j->sat_s |= u2_jet_test;
 

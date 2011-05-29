@@ -1244,6 +1244,7 @@ hill_boot(void)
           u2_bl_done(wir_r, kit_r);
           u2_rl_fall(wir_r);
           fprintf(stderr, "{no boot, c}\n");
+          u2_bx_show(wir_r);
           break;
         }
         else {

@@ -373,7 +373,7 @@ _nock_rock(u2_wire wir_r,
               }
 
               if ( pro != u2_none ) {
-                u2_rx(wir_r, u2_wire_tax(wir_r));
+                u2_rz(wir_r, u2_wire_tax(wir_r));
                 u2_wire_tax(wir_r) = tax;
               }
               return pro;
@@ -390,7 +390,7 @@ _nock_rock(u2_wire wir_r,
               }
 
               if ( pro != u2_none ) {
-                u2_rx(wir_r, u2_wire_tax(wir_r));
+                u2_rz(wir_r, u2_wire_tax(wir_r));
                 u2_wire_tax(wir_r) = tax;
               }
               return pro;
@@ -407,7 +407,7 @@ _nock_rock(u2_wire wir_r,
               }
 
               if ( pro != u2_none ) {
-                u2_rx(wir_r, u2_wire_tax(wir_r));
+                u2_rz(wir_r, u2_wire_tax(wir_r));
                 u2_wire_tax(wir_r) = tax;
               }
               return pro;

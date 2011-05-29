@@ -81,6 +81,7 @@
       u2_noun voq = j2_mcy(Pit, ap, open)(wir_r, gen);
 
       if ( u2_yes == u2_sing(voq, gen) ) {
+
         return u2_bc(wir_r, u2_no, voq);
       }
       else {

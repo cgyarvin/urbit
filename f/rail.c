@@ -17,7 +17,7 @@ _rl_feed(u2_ray ral_r)
 
     u2_rail_hat_r(ral_r) += c3_wiseof(u2_loom_soup);
     u2_soup_fre_r(sop_r) = 0;
-#ifdef U2_MEMORY_PROFILE
+#ifdef U2_PROFILE_MEMORY
     u2_soup_liv_w(sop_r) = 0;
 #endif
     u2_cs_init(lot_r);
@@ -548,12 +548,15 @@ _rl_bloq_grab(u2_ray ral_r,
             _rl_bloq_make(ral_r, end_r, u2_rail_hut_siz(fre_r) - siz_w, 0);
             _rl_bloq_attach(ral_r, end_r);
             _rl_bloq_make(ral_r, box_r, siz_w, 1);
+
+            _rl_live_grab(ral_r, siz_w);
           }
           else {
             c3_assert(u2_rail_box_use(box_r) == 0);
             u2_rail_box_use(box_r) = 1;
+
+            _rl_live_grab(ral_r, u2_rail_hut_siz(box_r));
           }
-          _rl_live_grab(ral_r, siz_w);
           return (box_r + c3_wiseof(u2_loom_rail_box));
         }
       }
@@ -606,8 +609,6 @@ _rl_bloq_free(u2_ray ral_r,
   c3_assert(box_r >= rut_r);
 
   _rl_live_grab(ral_r, (-1 * u2_rail_hut_siz(box_r)));
-
-  // return;
 
   /* Try to coalesce with the previous block.
   */
