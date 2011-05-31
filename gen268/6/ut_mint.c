@@ -537,6 +537,7 @@
       }
       case c3__zpdx: p_gen = u2_t(gen);
       {
+        u2_bx_used(wir_r);
         return j2_mcx(Pit, ut, mint)(wir_r, van, sut, gol, p_gen);
       }
       case c3__zpzp:

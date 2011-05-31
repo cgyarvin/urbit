@@ -361,16 +361,16 @@
     }
   _open_do_pqr(mtbr)  //  %|
   {
+    u2_noun vop = u2_bc(wir_r, u2_bc(wir_r, u2_nul, _2), u2_nul);
+    u2_noun zil = j2_mbc(Pit, weld)(wir_r, p_gen, vop);
+
+    u2_rz(wir_r, vop);
+
     return u2_bt
       (wir_r, c3__bnpd,
               u2_rx(wir_r, q_gen),
               u2_bt
-                (wir_r,
-                 c3__mtbn,
-                 j2_mbc(Pit, weld)
-                    (wir_r, u2_rx(wir_r, p_gen),
-                            u2_bc(wir_r, u2_bc(wir_r, u2_nul, _2), u2_nul)),
-                 _mtbr_a(wir_r, r_gen)));
+                (wir_r, c3__mtbn, zil, _mtbr_a(wir_r, r_gen)));
   }
   _open_do_pq(mtdg)   //  %:
   {
@@ -1099,7 +1099,7 @@
         u2_noun gad;
 
         if ( u2_no == u2_sing(gen, bog) ) {
-          gad =j2_mcy(Pit, ap, sift)(wir_r, bog);
+          gad = j2_mcy(Pit, ap, sift)(wir_r, bog);
         }
         else {
           gad = u2_bc(wir_r, c3__tmbn, c3__noun);

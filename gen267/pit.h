@@ -10,23 +10,24 @@
   **/
 #   define  Tier1         u2_jet_live
 #   define  Tier2         u2_jet_live
-#   define  Tier3         u2_jet_live
+#   define  Tier3         u2_jet_live 
 #   define  Tier4         u2_jet_live
 #   define  Tier5         u2_jet_live
 #   define  Tier6         u2_jet_live
 #   define  Tier6_a       Tier6
-#   define  Tier6_b       u2_jet_live
+#   define  Tier6_b       Tier6
 // #   define  Tier6_b       (u2_jet_live | u2_jet_test)
 // #   define  Tier6_b       u2_jet_dead
-#   define  Tier6_c       u2_jet_live
-#   define  Tier6_x       u2_jet_dead
+#   define  Tier6_c       Tier6
 #   define  Tier6_t       (u2_jet_live | u2_jet_test)
+#   define  Tier6_l       (u2_jet_live | u2_jet_test | u2_jet_leak)
+#   define  Tier6_l_memo  Tier6_l
 
 #   define  Tier5_test    (Tier5 | u2_jet_test)
 #   define  Tier6_a_memo  (Tier6_a | u2_jet_memo)
 #   define  Tier6_b_memo  (Tier6_b | u2_jet_memo)
 #   define  Tier6_c_memo  (Tier6_c | u2_jet_memo)
-#   define  Tier6_x_memo  (Tier6_x | u2_jet_memo)
+#   define  Tier6_x_memo  (Tier6_x)
 #   define  Tier6_t_memo  (Tier6_t | u2_jet_memo)
 #   define  Tier6_b_test  (Tier6_b | u2_jet_test)
 
@@ -282,8 +283,8 @@
       j2_mcc(Pit, in, put)(u2_wire wir_r, 
                            u2_noun a,                             //  retain
                            u2_noun b);                            //  retain
-      u2_weak                                                     //  transfer
 
+      u2_weak                                                     //  transfer
       j2_mcc(Pit, in, gas)(u2_wire wir_r, 
                            u2_noun a,                             //  retain
                            u2_noun b);                            //  retain
@@ -296,7 +297,7 @@
       u2_weak                                                     //  transfer 
       j2_mcc(Pit, in, tap)(u2_wire wir_r, 
                            u2_noun a,                             //  retain
-                           u2_noun b);                            //  transfer
+                           u2_noun b);                            //  retain
 
       u2_weak                                                     //  transfer
       j2_mcc(Pit, by, put)(u2_wire wir_r, 

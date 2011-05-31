@@ -42,6 +42,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pit, add)[] = {
-    { ".3", c3__lite, j2_mb(Pit, add), Tier1, u2_none, u2_none },
+    { ".3", c3__lite, j2_mb(Pit, add), u2_jet_live, u2_none, u2_none },
     { }
   };

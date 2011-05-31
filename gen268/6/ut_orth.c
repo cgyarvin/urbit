@@ -7,6 +7,95 @@
 
 /* logic
 */
+#if 0
+  static u2_flag
+  _orth_void(u2_wire wir_r,
+             u2_noun van,
+             u2_noun sut,
+             u2_noun pug)
+  {
+    return 
+    u2_noun p_sut, q_sut;
+
+    if ( u2_no == u2_dust(sut) ) switch ( sut ) {
+      default: goto fail;
+
+      case c3__atom: {
+        return u2_no;
+      }
+      case c3__noun: {
+        return u2_no;
+      }
+      case c3__void: {
+        return u2_yes;
+      }
+    } 
+    else switch ( u2_h(sut) ) {
+      default: fail: return u2_bl_bail(wir_r, c3__fail);
+
+      case c3__cell: {
+        if ( u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut) ) {
+          goto fail;
+        } else {
+#if 0
+          u2_flag a = _orth_void(wir_r, van, p_sut, pug);
+          u2_flag b = _orth_void(wir_r, van, q_sut, pug);
+
+          if ( u2_yes == u2_or(a, b) ) {
+            return u2_yes;
+          }
+#endif
+          return u2_no;
+        }
+      }
+      case c3__core: {
+        if ( u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut) ) {
+          goto fail;
+        } else {
+          if ( u2_yes == _orth_void(wir_r, van, p_sut, pug) ) {
+            c3_assert(0);
+          }
+          return u2_no;
+        }
+      }
+      case c3__cube: { 
+        return u2_no;
+      }
+      case c3__face: {
+        if ( u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut) ) {
+          goto fail;
+        } else {
+          return _orth_void(wir_r, van, q_sut, pug);
+        }
+      }
+      case c3__fork: {
+        if ( u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut) ) {
+          goto fail;
+        } else {
+          return u2_and(_orth_void(wir_r, van, p_sut, pug),
+                        _orth_void(wir_r, van, q_sut, pug));
+        }
+      }
+      case c3__hold: p_sut = u2_t(sut);
+      {
+        if ( (u2_yes == j2_mcc(Pit, in, has)(wir_r, pug, sut)) ) {
+          return u2_yes;
+        } 
+        else {
+          u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, pug, sut);
+          u2_type fop = j2_mcy(Pit, ut, rest)(wir_r, van, sut, p_sut);
+          u2_noun ret = _orth_void(wir_r, van, fop, zoc);
+
+          u2_rl_lose(wir_r, fop);
+          u2_rl_lose(wir_r, zoc);
+
+          return ret;
+        }
+      }
+    } 
+  }
+#endif
+
   static u2_flag
   _orth_in(u2_wire wir_r,
            u2_noun van,

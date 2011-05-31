@@ -14,6 +14,9 @@
                         u2_noun dox,                              //  retain
                         u2_noun gen)                              //  retain
   {
+#if 0
+    return u2_yes;
+#else
     u2_noun rib = u2_rx(wir_r, u2_frag(j2_ut_van_rib, van));
     u2_noun key = u2_bt(wir_r, u2_rx(wir_r, sut),
                                u2_rx(wir_r, dox),
@@ -50,6 +53,7 @@
     u2_rz(wir_r, key);
 
     return ret;
+#endif
   }
 
 /* boilerplate

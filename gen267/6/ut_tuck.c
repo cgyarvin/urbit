@@ -85,6 +85,7 @@
 
           ret = u2_bc(wir_r, typ, u2_rx(wir_r, q_giv));
 
+          u2_rl_lose(wir_r, vas);
           u2_rl_lose(wir_r, rox);
           u2_rl_lose(wir_r, nax);
           u2_rl_lose(wir_r, giv);
