@@ -7,7 +7,7 @@
 */
 %{
 # include "all.h"
-#   define  Pit   watt_267
+#   define  Pit   watt_266
 
   /* Everything is a noun - no yacc type declarations!
   */
@@ -56,7 +56,7 @@
   /* With the mighty power of GLR... 
   */
   %glr-parser
-  %name-prefix="y267_"
+  %name-prefix="y266_"
 
   /* We laugh at your petty shift-reduce conflicts.
   */
@@ -86,7 +86,7 @@ gene
 
 wide
   : wide_a
-  | wide_a si_deg wide
+  | wide_rope si_deg wide
     { $$ = _ytrel(c3__bndl, $1, $3); }
   ;
 
@@ -589,7 +589,10 @@ tall
 
       secs
         : si_sec                { $$ = _ycell(_0, _0); }
-        | si_sec secs           { $$ = _ytrel(_0, _ycell(_0, _2), $2); }
+        | si_sec secs           
+          { $$ = _ytrel(_0, 
+                        _ycell(_0, _2),
+                        $2); }
         ;
       cord
         : axis                  { $$ = _ycell(_0, $1); }
@@ -874,7 +877,7 @@ _watt_locate(u2_ray  wir_r,
 {
   const YYLTYPE *llocp = vlocp;   /* bufalo estupido */
 
-#if 1
+#if 0
   return gene;
 #else
   return u2_bt
@@ -947,7 +950,7 @@ _scanner_init(struct _u2_scanner *scanner,
 
       _scanner_init(&scanner, wir_r, txt);
 
-      if ( !y267_parse(&scanner) ) {
+      if ( !y266_parse(&scanner) ) {
         c3_assert(scanner.scan);
 
         return scanner.scan;
@@ -974,14 +977,14 @@ _scanner_init(struct _u2_scanner *scanner,
 */
   u2_ho_jet 
   j2_mbj(Pit, ream)[] = { 
-    { ".3", c3__lite, j2_mb(Pit, ream), u2_jet_dead, u2_none, u2_none },
+    { ".3", c3__lite, j2_mb(Pit, ream), u2_yes, u2_none, u2_none },
     { }
   };
 
 /* Trivial scanner.
 */
 int 
-y267_lex(YYSTYPE *lvalp, YYLTYPE *llocp, struct _u2_scanner *scanner)
+y266_lex(YYSTYPE *lvalp, YYLTYPE *llocp, struct _u2_scanner *scanner)
 {
   if ( scanner->s.token ) {
     int token = scanner->s.token;
@@ -1011,7 +1014,7 @@ y267_lex(YYSTYPE *lvalp, YYLTYPE *llocp, struct _u2_scanner *scanner)
 
 /* Error printer.
 */
-int y267_error(YYLTYPE *locp, struct _u2_scanner *scanner, char const *msg)
+int y266_error(YYLTYPE *locp, struct _u2_scanner *scanner, char const *msg)
 {
   printf("%s: (%d:%d - %d:%d)\n", 
     msg, locp->first_line, locp->first_column,

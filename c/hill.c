@@ -10,15 +10,15 @@
 #define C3_GLOBAL
 #include "all.h"
 
-#define   PitZ  watt_270
-#define   PitA  watt_269
-#define   PitB  watt_268
-#define   PitC  watt_267
+#define   PitZ  watt_269
+#define   PitA  watt_268
+#define   PitB  watt_267
+#define   PitC  watt_266
 
-#define   FileZ   "watt/270"
-#define   FileA   "watt/269"
-#define   FileB   "watt/268"
-#define   FileC   "watt/267"
+#define   FileZ   "watt/269"
+#define   FileA   "watt/268"
+#define   FileB   "watt/267"
+#define   FileC   "watt/266"
 
   /**   Interpreter data structures.
   **/
@@ -783,6 +783,22 @@ _hill_b_mint_gen(u2_wire wir_r,
   return pro;
 }
 
+/* _hill_b_ream_txt(): ream `txt` as gene.
+*/
+static u2_noun 
+_hill_b_ream_txt(u2_wire wir_r,
+                 hi_shoz soa,
+                 hi_shoa sob,
+                 u2_atom txt)
+{
+  u2_noun duk = _hill_a_call_1(wir_r, soa, sob, "ream", txt);
+  u2_noun pro = u2_rx(wir_r, u2_t(duk));
+
+  u2_err(wir_r, "duck", pro);
+  u2_rz(wir_r, duk);
+  return pro;
+}
+
 /* _hill_b_mint_txt(): mint `txt` as `[type form]` with PitA shoe.
 */
 static u2_noun                                                    //  produce
@@ -793,18 +809,11 @@ _hill_b_mint_txt(u2_wire wir_r,
                  u2_noun gol,                                     //  retain
                  u2_atom txt)                                     //  retain
 {
-  u2_noun gen;
+  u2_noun gen = _hill_b_ream_txt(wir_r, soa, sob, txt);
+  u2_noun ret = _hill_b_mint_gen(wir_r, soa, sob, sut, gol, gen);
 
-  if ( u2_none == (gen = j2_mbc(PitB, ream)(wir_r, txt)) ) {
-    fprintf(stderr, "{%s: parse failed}\n", FileA);
-    return u2_bl_bail(wir_r, c3__fail);
-  }
-  else {
-    u2_noun ret = _hill_b_mint_gen(wir_r, soa, sob, sut, gol, gen);
-
-    u2_rz(wir_r, gen);
-    return ret;
-  }
+  u2_rz(wir_r, gen);
+  return ret;
 }
 
 /* _hill_b_boot(): generate kernel C (with kernel B).
@@ -1343,8 +1352,8 @@ hill_line(struct hill_state* hil_h,
       u2_bl_done(wir_r, kit_r);
       fprintf(stderr, "{exit}\n");
     } else {
-      // _hill_a_fire(wir_r, soa, sob, lin_c, out_c);
-      _hill_b_fire(wir_r, soa, sob, soc, lin_c, out_c);
+      _hill_a_fire(wir_r, soa, sob, lin_c, out_c);
+      // _hill_b_fire(wir_r, soa, sob, soc, lin_c, out_c);
 
       u2_bl_done(wir_r, kit_r);
     }

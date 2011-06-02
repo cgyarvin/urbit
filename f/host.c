@@ -19,7 +19,6 @@
       extern u2_ho_driver j2_da(watt_267);
       extern u2_ho_driver j2_da(watt_268);
       extern u2_ho_driver j2_da(watt_269);
-      extern u2_ho_driver j2_da(watt_270);
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
@@ -27,7 +26,6 @@
         &j2_da(watt_267), 
         &j2_da(watt_268), 
         &j2_da(watt_269), 
-        &j2_da(watt_270), 
         0
       };
 
@@ -1105,28 +1103,6 @@ u2_ho_use(u2_ray     wir_r,
               fprintf(stderr, "leak: %d, %s\n", 
                   (nex_w - liv_w), u2_ho_cstring(jet_j->xip));
 
-              {
-                u2_noun sut, gol, gen, van;
-
-                if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &gol, 
-                                            u2_cv_sam_3, &gen,
-                                            u2_cv_con, &van, 0)) ||
-                     (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
-                {
-                  c3_assert(0);
-                } else {
-                  j2_mcy(watt_268, ut, dupt)(wir_r, van, "sut", sut);
-                  j2_mcy(watt_268, ut, dupt)(wir_r, van, "gol", gol);
-                  u2_err(wir_r, "gen", gen);
-        /*
-                  j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_sof", u2_h(sof));
-                  j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_had", u2_h(had));
-
-                  u2_err(wir_r, "t_sof", u2_t(sof));
-                  u2_err(wir_r, "t_had", u2_t(had));
-        */
-                }
-              }
               c3_assert(0);
             }
             pro = _ho_run(wir_r, jet_j, cor, &tax);

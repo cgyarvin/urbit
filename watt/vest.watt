@@ -1,7 +1,15 @@
 ::
 ++  vest
-  =<  tall
+  =<  (ifix [gay gay] tall)
   &.  
+  ++  rope
+    |=  tub=*clip 
+    ^-  *(like twig)
+    %.  tub
+    %+  (slug `*twig`~ |=([a=*twig b=*twig] (weld a b)))
+      dot
+    (cook |*(a=* [a ~]) sym)
+  ::
   ++  tall  
     |=  tub=*clip 
     ^-  *(like gene)
@@ -23,6 +31,7 @@
   ++  flat
     ;~  pose
       (stag %dgtr (ifix [den ned] (most ace wide)))
+      (cook |=(a=*twig [%mtbn a ~]) rope)
     ::
       %+  stag
         %dtsg
@@ -156,13 +165,6 @@
         |=(a=*(list <[p=*term q=*foot]>) (~(gas in *(map term foot)) a))
       (more muck boot)
     ::
-    ++  nail  sym 
-    ++  rope  
-      |=  tub=*clip 
-      ^-  *(like twig)
-      %.  tub
-      ;~(plug nail ;~(pose ;~(pfix dot rope) (easy ~)))
-    ::
     ++  rune
       |*  [dif=rule tuq=* har=expa]
       ;~  pfix
@@ -198,3 +200,4 @@
     ++  expx  |.(;~(gunk loaf wing))
     ==
   ==
+
