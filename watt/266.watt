@@ -1,4 +1,4 @@
-~%    %watt.267
+~%    %watt.266
     ~ 
   (%ut ut, %go go, %to to)
 &.
@@ -1023,7 +1023,7 @@
   |?  [%leaf p=*tape]
       [%palm p=[p=*tape q=*tape r=*tape s=*tape] q=*(list tank)]
       [%rose p=[p=*tape q=*tape r=*tape] q=*(list tank)]
-      :: [%farm p=[p=*tape q=*tape r=*tape] q=*(list (list tank))]
+      [%farm p=[p=*tape q=*tape r=*tape] q=*(list (list tank))]
   --
 ::
   ::  Tier 5b, core 1, processors

@@ -1351,8 +1351,8 @@ hill_line(struct hill_state* hil_h,
       u2_bl_done(wir_r, kit_r);
       fprintf(stderr, "{exit}\n");
     } else {
-      _hill_a_fire(wir_r, soa, sob, lin_c, out_c);
-      // _hill_b_fire(wir_r, soa, sob, soc, lin_c, out_c);
+      // _hill_a_fire(wir_r, soa, sob, lin_c, out_c);
+      _hill_b_fire(wir_r, soa, sob, soc, lin_c, out_c);
 
       u2_bl_done(wir_r, kit_r);
     }
