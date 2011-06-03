@@ -19,7 +19,6 @@
       extern u2_ho_driver j2_da(watt_266);
       extern u2_ho_driver j2_da(watt_267);
       extern u2_ho_driver j2_da(watt_268);
-      extern u2_ho_driver j2_da(watt_269);
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
@@ -27,7 +26,6 @@
         &j2_da(watt_266), 
         &j2_da(watt_267), 
         &j2_da(watt_268), 
-        &j2_da(watt_269), 
         0
       };
 

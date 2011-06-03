@@ -10,15 +10,15 @@
 #define C3_GLOBAL
 #include "all.h"
 
-#define   PitZ  watt_269
-#define   PitA  watt_268
-#define   PitB  watt_267
-#define   PitC  watt_266
+#define   PitZ  watt_268
+#define   PitA  watt_267
+#define   PitB  watt_266
+#define   PitC  watt_265
 
-#define   FileZ   "watt/269"
-#define   FileA   "watt/268"
-#define   FileB   "watt/267"
-#define   FileC   "watt/266"
+#define   FileZ   "watt/268"
+#define   FileA   "watt/267"
+#define   FileB   "watt/266"
+#define   FileC   "watt/265"
 
   /**   Interpreter data structures.
   **/
@@ -219,7 +219,7 @@ _hill_z_mint_gen(u2_wire wir_r,
   u2_noun van = u2_bc
     (wir_r, u2_bc(wir_r, 
                   c3__blur,
-                  u2_bc(wir_r, u2_bt(wir_r, _0, _0, _0),  // bq for 268 on
+                  u2_bc(wir_r, u2_bq(wir_r, _0, _0, _0, _0),  // bq for 268 on
                                u2_bc(wir_r, _0, 42))),
             87);
 

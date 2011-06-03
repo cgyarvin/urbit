@@ -543,7 +543,6 @@ OFILES=\
        $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
-       $(J269_OFILES) \
        $(J268_OFILES) \
        $(J267_OFILES) \
        $(J266_OFILES)
