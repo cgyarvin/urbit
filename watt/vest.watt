@@ -8,7 +8,33 @@
     %.  tub
     %+  (slug `*twig`~ |=([a=*twig b=*twig] (weld a b)))
       dot
-    (cook |*(a=* [a ~]) sym)
+    ;~  pose
+      (cook |=(a=*(list) ?.(.?(-.a) [%% ~] [%% [~ 2] $(a +.a)])) (plus sec))
+      %+  cook
+        |=(a=*knot [a ~])
+      ;~  pose
+        sym
+        (cook |=(a=*axis [~ a]) ;~(pose ven ;~(pfix dot dem) (cold 1 dot)))
+      --
+    --
+  ::
+  ++  suck
+    |=  [dim=*gene wit=*gene]
+    ^-  *gene
+    !!
+  ::
+  ++  plow
+    |=  [ros=*gene peq=@ yar=*gene]
+    ^-  *gene
+    ?-    peq
+        ':'  [%bnld ros yar]
+        '='
+      ?-  ros
+        @                [%ktbn ros yar]
+        [%mtbn [@ ~] ~]  [%ktbn i.p.ros yar]
+        [%zpcb *]        $(ros q.ros)
+      --
+    --
   ::
   ++  tall  
     |=  tub=*clip 
@@ -16,7 +42,7 @@
     %.  tub
     ;~  pose
       (norm &)
-      flat
+      long
     --
   ::
   ++  wide
@@ -25,12 +51,25 @@
     %.  tub
     ;~  pose
       (norm |)
-      flat
+      long
     --
   ::
+  ++  long
+    |=  tub=*clip 
+    ^-  *(like gene)
+    %.  tub
+    %+  mend
+      flat
+    [i=[p=suck q=bon] t=[i=[p=suck q=deg] t=~]]
+  ::
   ++  flat
+    |=  tub=*clip
+    ^-  *(like gene)
+    %.  tub
     ;~  pose
       (stag %dgtr (ifix [den ned] (most ace wide)))
+      (stag %mtdp (ifix [lep pel] (most ace wide)))
+      (stag %brcs (ifix [del led] (most ace wide)))
       (cook |=(a=*twig [%mtbn a ~]) rope)
     ::
       %+  stag
@@ -200,4 +239,3 @@
     ++  expx  |.(;~(gunk loaf wing))
     ==
   ==
-

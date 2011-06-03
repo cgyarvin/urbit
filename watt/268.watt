@@ -1733,8 +1733,8 @@
         ~|('fire-dry' !!)
       [dox q.q]
     ?.  ?|(!vet .=(p.p q.q.p) (fret(sut p) dox q.q))
-      ::  ~~  ~(gut go `*`q:(mint(sut dox, vet |, fab &) %noun q.q))
-      ::  ~~  ~(gut go `*`q:(mint(sut p, fab &) %noun q.q))
+      ~~  ~(gut go `*`q:(mint(sut dox, vet |, fab &) %noun q.q))
+      ~~  ~(gut go `*`q:(mint(sut p, fab &) %noun q.q))
       ~~  dump(sut p)
       ~~  dump(sut dox)
       ~|('fire-wet' !!)

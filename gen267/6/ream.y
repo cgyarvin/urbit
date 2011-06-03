@@ -86,7 +86,7 @@ gene
 
 wide
   : wide_a
-  | wide_a si_deg wide
+  | wide_rope si_deg wide
     { $$ = _ytrel(c3__bndl, $1, $3); }
   ;
 
@@ -874,7 +874,7 @@ _watt_locate(u2_ray  wir_r,
 {
   const YYLTYPE *llocp = vlocp;   /* bufalo estupido */
 
-#if 1
+#if 0
   return gene;
 #else
   return u2_bt
@@ -974,7 +974,7 @@ _scanner_init(struct _u2_scanner *scanner,
 */
   u2_ho_jet 
   j2_mbj(Pit, ream)[] = { 
-    { ".3", c3__lite, j2_mb(Pit, ream), u2_jet_dead, u2_none, u2_none },
+    { ".3", c3__lite, j2_mb(Pit, ream), u2_jet_live, u2_none, u2_none },
     { }
   };
 

@@ -1,7 +1,7 @@
-|~  %scsg   "secsig"
+|~  %tmsg   "tamsig"
 
   gene:
-    [%scsg p=*gene q=*(list gene)]
+    [%tmsg p=*gene q=*(list gene)]
 
   ap open:
     |-

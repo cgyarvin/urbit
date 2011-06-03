@@ -794,7 +794,6 @@ _hill_b_ream_txt(u2_wire wir_r,
   u2_noun duk = _hill_a_call_1(wir_r, soa, sob, "ream", txt);
   u2_noun pro = u2_rx(wir_r, u2_t(duk));
 
-  u2_err(wir_r, "duck", pro);
   u2_rz(wir_r, duk);
   return pro;
 }

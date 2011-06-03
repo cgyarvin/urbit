@@ -748,7 +748,7 @@
   |*  [vex=*edge sab=rule]
   ?~  q.vex
     vex 
-  =+  yit=(sab q.u.q.vex)
+  =+  yit=(sab p.vex q.u.q.vex)
   ?~  q.yit
     [p=p.yit q=q.vex]
   [p=p.yit q=[~ u=[p=(raq p.u.q.vex p.u.q.yit) q=q.u.q.yit]]]
@@ -827,6 +827,23 @@
   ?.  (lien bud |=(a=*char .=(i.q.tub a)))
     (fail tub)
   [(slip i.q.tub p.tub) [~ i.q.tub t.q.tub]]
+::
+++  mend
+  |*  [sef=rule zil=*(list <[p=|=([a=* b=*] [a b]) q=rule]>)]
+  |=  tub=*clip
+  =+  vex=(sef tub)
+  ?~  q.vex
+    vex
+  =<  $
+  &.
+  +-  $
+    ?~  zil
+      [p=p.vex q=~]
+    =+  lig=(q.i.zil tub) 
+    ?~  q.lig
+      $(zil t.zil)
+    [p=p.lig q=[~ u=[p=(p.i.zil p.u.q.vex p.u.q.lig) q=q.u.q.lig]]]
+  ==
 ::
 ++  more
   |*  [bus=rule fel=rule]
@@ -1035,7 +1052,6 @@
     &-  |- 
         ?-    -.tec
             %leaf  (wind [tab edg] p.tec lug)
-            %farm  !!
             %palm  !!
             %rose
           ?:  fit
@@ -1933,7 +1949,8 @@
   ~.  %ream 
   |=  txt=@ 
   ^-  *gene 
-  (rash txt vest)
+  ~|('ream-soft' !!)
+  :: (rash txt vest)
 ::  
 ++  ut
   ~%    %ut
@@ -1981,16 +1998,12 @@
       0
     ?>  ?=(^ dab)
     ?>  ?=([& *] q.n.dab)
+    =+  vad=q:(mint(vet ?:(p.p.q.n.dab vet |)) %noun q.p.q.n.dab)
     ?-    dab
-        ~   0
-        ^
-      =+  vad=q:(mint(vet ?:(p.p.q.n.dab vet |)) %noun q.p.q.n.dab)
-      ?-    dab
-          [* ~ ~]   vad
-          [* ~ *]   [vad $(dab r.dab)]
-          [* * ~]   [vad $(dab l.dab)]
-          [* * *]   [vad $(dab l.dab) $(dab r.dab)] 
-      --
+        [* ~ ~]   vad
+        [* ~ *]   [vad $(dab r.dab)]
+        [* * ~]   [vad $(dab l.dab)]
+        [* * *]   [vad $(dab l.dab) $(dab r.dab)] 
     --
   ::
   ++  burn
@@ -2417,8 +2430,6 @@
           [%csdg *]                                                   ::  ?:
         =+  nor=$(gen p.gen, gol flag)
         =+  fex=(gain p.gen)
-        ?:  .=(%void fex)
-          $(gen r.gen)
         =+  hiq=$(sut ?:(.=(%void fex) sut fex), gen q.gen)
         =+  ran=$(gen r.gen)
         [(fork p.hiq p.ran) [6 q.nor q.hiq q.ran]]
@@ -2846,215 +2857,5 @@
   ==
 ::
 ++  vest
-  =<  (ifix [gay gay] tall)
-  &.  
-  ++  rope
-    |=  tub=*clip 
-    ^-  *(like twig)
-    %.  tub
-    %+  (slug `*twig`~ |=([a=*twig b=*twig] (weld a b)))
-      dot
-    ;~  pose
-      (cook |=(a=*(list) ?.(.?(-.a) [%% ~] [%% [~ 2] $(a +.a)])) (plus sec))
-      %+  cook
-        |=(a=*knot [a ~])
-      ;~  pose
-        sym
-        (cook |=(a=*axis [~ a]) ;~(pose ven ;~(pfix dot dem) (cold 1 dot)))
-      --
-    --
-  ::
-  ++  tall  
-    |=  tub=*clip 
-    ^-  *(like gene)
-    %.  tub
-    ;~  pose
-      (norm &)
-      flat
-    --
-  ::
-  ++  wide
-    |=  tub=*clip 
-    ^-  *(like gene)
-    %.  tub
-    ;~  pose
-      (norm |)
-      flat
-    --
-  ::
-  ++  flat
-    |=  tub=*clip
-    ^-  *(like gene)
-    %.  tub
-    ;~  pose
-      (stag %dgtr (ifix [den ned] (most ace wide)))
-      (cook |=(a=*twig [%mtbn a ~]) rope)
-    ::
-      %+  stag
-        %dtsg
-      ;~  pose
-        ;~(pfix (just '0') (just 'x') hex)
-        dem
-        quo
-        (cold & pam)
-        (cold | bar)
-        ;~(pfix mit sym)
-        (cold %% ;~(plug mit mit))
-      --
-    ::
-      %+  stag
-        %tmbn
-      ;~  pose
-        (cold %flag cas)
-        (cold %noun tar)
-        (cold %cell ket)
-        (cold %atom nat)
-        (cold %null sig)
-      --
-    --
-  ::
-  ++  norm
-    |=  tol=?
-    =<  ;~  pose
-          ;~  pfix  bar
-            ;~  pose
-              (rune bon %brbn expb)
-              (rune cas %brcs expd)
-              (rune deg %brdg expb)
-              (rune dap %brdp expa)
-              (rune dot %brdt expa)
-              (rune pad %brpd expb)
-              (rune tar %brtr expb)
-            --
-          --
-          ;~  pfix  bon
-            ;~  pose
-              (rune dap %bndp expb)
-              (rune del %bndl expb)
-              (rune led %bnld expb)
-              (rune pad %bnpd expb)
-            --
-          --
-          ;~  pfix  cas
-            ;~  pose
-              (rune bar %csbr expd)
-              (rune bon %csbn expb)
-              (rune dap %csdp exph)
-              (rune deg %csdg expc)
-              (rune del %csdl expb)
-              (rune dot %csdt expc)
-              (rune led %csld expb)
-              (rune pam %cspm expd)
-              (rune sig %cssg expc)
-              (rune tar %cstr expi)
-              (rune zap %cszp expa)
-            --
-          --
-          ;~  pfix  deg
-            ;~  pose
-              (rune dap %dgdp expb)
-              (rune ket %dgkt expf)
-              (rune pad %dgpd expc)
-              (rune sig %dgsg expd)
-              (rune tar %dgtr expd)
-            --
-          --
-          ;~  pfix  dot
-            ;~  pose
-              (rune bon %dtbn expb)
-              (rune cas %dtcs expa)
-              (rune pad %dtpd expa)
-              (rune tar %dttr expb)
-            --
-          --
-          ;~  pfix  ket
-            ;~  pose
-              (rune bon %ktbn expg)
-              (rune dap %ktdp expb)
-              (rune pad %ktpd expb)
-              (rune sig %ktsg expa)
-            --
-          --
-          ;~  pfix  mit
-            ;~  pose
-              (rune bar %mtbr expp)
-              (rune bon %mtbn expj)
-              (rune deg %mtdg expb)
-              (rune dap %mtdp expk)
-              (rune dot %mtdt expb)
-              (rune ket %mtkt expf)
-              (rune pad %mtpd expc) 
-              (rune sig %mtsg expq)
-              (rune tar %mttr expa)
-            --
-          --
-          ;~  pfix  pam
-            ;~  pose
-              (rune bon %pmbn expx)
-              (rune deg %pmdg expx)
-              (rune dap %pmdp expx)
-              (rune dot %pmdt expe)
-              (rune pad %pmpd expx)
-            --
-          --
-          ;~  pfix  sig
-            ;~  pose
-              (rune bar %sgbr expb)
-              (rune bon %sgbn expb)
-            --
-          --
-        --
-    &.
-    ::
-    ++  boot
-      %+  cook
-        |=([a=& b=? c=*term d=*gene] [c a b d])
-      ;~  plug
-        (cold & (just '+'))
-        ;~  gunk 
-          ;~(pose (cold | (just '-')) (cold & (just '+')))
-          sym
-          loaf
-        --
-      --
-    ++  wing
-      %+  cook
-        |=(a=*(list <[p=*term q=*foot]>) (~(gas in *(map term foot)) a))
-      (more muck boot)
-    ::
-    ++  rune
-      |*  [dif=rule tuq=* har=expa]
-      ;~  pfix
-        dif
-        %+  stag
-          tuq
-        =+  dur=(ifix [lep pel] $:har(tol |))
-        ?:  tol
-          ;~(pose ;~(pfix gap $:har(tol &)) dur)
-        dur
-      --
-    ::
-    ++  glop  (glue mash)
-    ++  gunk  (glue muck)
-    ++  hank  (most muck loaf)
-    ++  loaf  ?:(tol tall wide)
-    ++  mash  ?:(tol gap ;~(plug com ace))
-    ++  muck  ?:(tol gap ace)
-    ++  rack  (most mash ;~(gunk loaf loaf))
-    ++  expa  |.(loaf)
-    ++  expb  |.(;~(gunk loaf loaf))
-    ++  expc  |.(;~(gunk loaf loaf loaf))
-    ++  expd  |.(hank)
-    ++  expe  |.(wing)
-    ++  expf  |.(;~(gunk loaf loaf loaf loaf))
-    ++  expg  |.(;~(gunk sym loaf))
-    ++  exph  |.(;~(gunk loaf rack))
-    ++  expi  |.(;~(gunk loaf hank))
-    ++  expj  |.(;~(gunk rope rack))
-    ++  expk  |.(;~(gunk loaf ;~(plug loaf (easy ~)))) 
-    ++  expp  |.(;~(gunk rope loaf rack))
-    ++  expq  |.(;~(gunk rope loaf loaf))
-    ++  expx  |.(;~(gunk loaf wing))
-    ==
-  ==
+  !!
 ==
