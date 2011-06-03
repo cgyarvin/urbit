@@ -158,6 +158,7 @@ J270_6_OFILES_UT=\
        gen270/6/ut_find.o \
        gen270/6/ut_fire.o \
        gen270/6/ut_fish.o \
+       gen270/6/ut_fret.o \
        gen270/6/ut_fuse.o \
        gen270/6/ut_gain.o \
        gen270/6/ut_heal.o \
@@ -396,6 +397,7 @@ J268_6_OFILES_UT=\
        gen268/6/ut_find.o \
        gen268/6/ut_fire.o \
        gen268/6/ut_fish.o \
+       gen268/6/ut_fret.o \
        gen268/6/ut_fuse.o \
        gen268/6/ut_gain.o \
        gen268/6/ut_heal.o \
@@ -513,6 +515,7 @@ J267_6_OFILES_UT=\
        gen267/6/ut_find.o \
        gen267/6/ut_fire.o \
        gen267/6/ut_fish.o \
+       gen267/6/ut_fret.o \
        gen267/6/ut_fuse.o \
        gen267/6/ut_gain.o \
        gen267/6/ut_heal.o \
@@ -630,6 +633,7 @@ J266_6_OFILES_UT=\
        gen266/6/ut_find.o \
        gen266/6/ut_fire.o \
        gen266/6/ut_fish.o \
+       gen266/6/ut_fret.o \
        gen266/6/ut_fuse.o \
        gen266/6/ut_gain.o \
        gen266/6/ut_heal.o \
