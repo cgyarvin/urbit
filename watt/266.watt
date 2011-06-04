@@ -1949,8 +1949,8 @@
   ~.  %ream 
   |=  txt=@ 
   ^-  *gene 
-  ~|('ream-soft' !!)
-  :: (rash txt vest)
+  :: ~|('ream-soft' !!)
+  (rash txt vest)
 ::  
 ++  ut
   ~%    %ut
@@ -2912,12 +2912,38 @@
     --
   ::
   ++  long
-    |=  tub=*clip 
-    ^-  *(like gene)
+    |=  tub=*clip  
+    ^-  *(like gene)  
     %.  tub
-    %+  mend
+    ;~  %-  bend
+        |=  :-  ros=*gene 
+                ^=  vil  %*
+                  |?  [%bon p=*gene] 
+                      [%deg p=*gene] 
+                      [%lep p=*(list <[p=*gene q=*gene]>)]
+                  --
+        ?-    -.vil
+            %bon 
+          ?-  ros
+            @                [%ktbn ros p.vil]
+            [%mtbn [@ ~] ~]  [%ktbn i.p.ros p.vil]
+            [%zpcb *]        $(ros q.ros)
+          --
+            %deg  [%bnld ros p.vil]
+            %lep  [%mtbn ~(rake ap ros) p.vil]
+        --
       flat
-    [i=[p=suck q=bon] t=[i=[p=suck q=deg] t=~]]
+      ;~  pose
+        ;~(plug (cold %bon bon) wide)
+        ;~(plug (cold %deg deg) wide)
+        ;~  plug
+          (easy %lep)
+          %+  ifix
+            [lep pel]
+          (most ;~(plug com ace) ;~((glue ace) wide wide))
+        --
+      --
+    --
   ::
   ++  flat
     |=  tub=*clip

@@ -1,4 +1,3 @@
-::
 ++  vest
   =<  (ifix [gay gay] tall)
   &.  
@@ -55,12 +54,26 @@
     --
   ::
   ++  long
-    |=  tub=*clip 
-    ^-  *(like gene)
+    |=  tub=*clip  
+    ^-  *(like gene)  
     %.  tub
-    %+  mend
+    ;~  %-  bend
+        |=  [ros=*gene vil=*<[p='=' q=*gene] [p=':' q=*gene] ~>]
+        ?-    p.vil
+            ':'  [%bnld ros q.vil]
+            '='
+          ?-  ros
+            @                [%ktbn ros q.vil]
+            [%mtbn [@ ~] ~]  [%ktbn i.p.ros q.vil]
+            [%zpcb *]        $(ros q.ros)
+          --
+        --
       flat
-    [i=[p=suck q=bon] t=[i=[p=suck q=deg] t=~]]
+      ;~  pose
+        ;~(plug bon wide)
+        ;~(plug deg wide)
+      --
+    --
   ::
   ++  flat
     |=  tub=*clip
@@ -239,5 +252,4 @@
     ++  expx  |.(;~(gunk loaf wing))
     ==
   ==
-
 
