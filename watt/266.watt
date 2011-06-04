@@ -744,7 +744,7 @@
   tyd
 ::
 ++  bend
-  |*  raq=|=([a=* b=*] [a b])
+  |*  raq=|*([a=* b=*] [a b])
   |*  [vex=*edge sab=rule]
   ?~  q.vex
     vex 
@@ -2954,6 +2954,16 @@
       (stag %mtdp (ifix [lep pel] (most ace wide)))
       (stag %brcs (ifix [del led] (most ace wide)))
       (cook |=(a=*twig [%mtbn a ~]) rope)
+      (stag %cszp ;~(pfix zap wide))
+      (stag %mttr ;~(pfix tar wide))
+      (stag %ktdp ;~(plug ;~(pfix tec wide) ;~(pfix tec wide)))
+      (stag %zpzp (cold ~ ;~(plug zap zap)))
+      %+  stag
+        %mtsg 
+      ;~  pfix 
+        sig 
+        (ifix [lep pel] ;~((glue ace) rope wide (stag %dgtr (most ace wide))))
+      --
     ::
       %+  stag
         %dtsg
@@ -3066,6 +3076,25 @@
             ;~  pose
               (rune bar %sgbr expb)
               (rune bon %sgbn expb)
+              (rune dap %sgdp hinc)
+              (rune dax %sgdx expa)
+              (rune deg %sgdg hina)
+              (rune del %sgdl hinb)
+              (rune dot %sgdt hine)
+            --
+          --
+          ;~  pfix  tam
+            ;~  pose
+              (rune dap %tmdp expa)
+              (rune pad %tmpd expb)
+              (rune sig %tmsg expi)
+              (rune tar %tmtr expb)
+            --
+          --
+          ;~  pfix  zap
+            ;~  pose
+              (rune dax %zpdx expa)
+              (rune bon %zpbn expa)
             --
           --
         --
@@ -3098,7 +3127,6 @@
           ;~(pose ;~(pfix gap $:har(tol &)) dur)
         dur
       --
-    ::
     ++  glop  (glue mash)
     ++  gunk  (glue muck)
     ++  hank  (most muck loaf)
@@ -3120,6 +3148,21 @@
     ++  expp  |.(;~(gunk rope loaf rack))
     ++  expq  |.(;~(gunk rope loaf loaf))
     ++  expx  |.(;~(gunk loaf wing))
+    ++  hina  |.(;~(gunk (ifix [den ned] ;~(gunk dem dem)) loaf))
+    ++  hinb  |.(;~(gunk bont loaf))
+    ++  hinc  |.(;~(pose ;~(gunk bony loaf) ;~(plug (easy ~) loaf)))
+    ++  hine  |.(;~(gunk bonk loaf))
+    ++  bonk  
+      ;~  pfix  mit
+        ;~  pose
+          sym
+          ;~(plug sym ;~(pfix dot dem))
+          ;~(plug sym ;~(pfix deg ;~(plug sym ;~(pfix dot dem))))
+          ;~(plug sym ;~(pfix deg ;~(plug sym ;~(pfix dot ;~(pfix dot dem)))))
+        --
+      --
+    ++  bont  ;~((bend) sym ;~(pfix dot ;~(pose wide ;~(pfix muck loaf))))
+    ++  bony  (cook |=(a=*(list) (lent a)) (plus bon))
     ==
   ==
 ==
