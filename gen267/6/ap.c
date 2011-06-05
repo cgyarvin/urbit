@@ -1144,7 +1144,7 @@
 
   u2_ho_jet 
   j2_mbj(Pit, ap)[] = {
-    { "open", c3__hevy, j2_mc(Pit, ap, open), Tier6_c_memo, u2_none, u2_none },
+    { "open", c3__hevy, j2_mc(Pit, ap, open), Tier6_c, u2_none, u2_none },
     { "rake", c3__hevy, j2_mc(Pit, ap, rake), Tier6_c, u2_none, u2_none },
     { }
   };

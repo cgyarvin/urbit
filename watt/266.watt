@@ -721,47 +721,41 @@
   ::  Tier 5, parsing and pretty-printing
 ::
 ::
-  ::  Tier 5a, core 0, prototypes
+  ::  Tier 5a, core 0, internal and miscellaneous
 ::
 ++  char  <@>
 ++  clip  <[p=*hair q=*tape]>
 ++  edge  <[p=*hair q=*(unit <[p=* q=*tape]>)]>
 ++  hair  <[p=`@`1 q=`@`1]>
+++  know  |*(vex=*edge ?~(q.vex !! p.u.q.vex))
+++  last  |=  [zyc=*hair naz=*hair]
+          ^-  *hair
+          ?:  .=(p.zyc p.naz)
+            ?:((gth q.zyc q.naz) zyc naz)
+          ?:((gth p.zyc p.naz) zyc naz)
+++  like  |*  a=<*>
+          |=  b=*
+          [p=(hair -.b) q=?~(+.b ~ [~ u=[p=(a +>-.b) q=(tape +>+.b)]])]
+++  rash  |*([naf=@ sab=rule] (rasp (rip 3 naf) sab))
+++  rasp  |*  [los=*tape sab=rule]
+          =+  vex=(sab *hair los)
+          ?~  q.vex
+            ~~  `*bill`[%grip ['[' ']'] ~(dem go p.p.vex) ~(dem go q.p.vex) ~]
+            ~|('syntax error/a' !!)
+          ?.  .=(~ q.u.q.vex) 
+            ~~  `*bill`[%grip ['[' ']'] ~(dem go p.p.vex) ~(dem go q.p.vex) ~]
+            ~|('syntax error/b' !!)
+          p.u.q.vex
+++  slip  |=  [weq=*char naz=*hair]
+          ^-  *hair
+          ?:(.=(10 weq) [.+(p.naz) 1] [p.naz .+(q.naz)])
 ++  rock  <@>
 ++  rule  |=(p=*clip `*edge`[p.p ~ ~ q.p])
 ++  tape  (list char)
 ++  term  <@>
 ++  wall  (list tape)
 ::
-  ::  Tier 5a, core 1, general parsing
-::
-++  bass
-  |*  [rum=@ tyd=rule]
-  %+  cook
-    |=  waq=*tape
-    %+  roll
-      waq
-    =+([p=@ q=@] |.((add p (mul rum q))))
-  tyd
-::
-++  boss
-  |*  [rum=@ tyd=rule]
-  %+  cook
-    |=  waq=*tape
-    %+  reel
-      waq
-    =+([p=@ q=@] |.((add p (mul rum q))))
-  tyd
-::
-++  bend
-  |*  raq=|*([a=* b=*] [a b])
-  |*  [vex=*edge sab=rule]
-  ?~  q.vex
-    vex 
-  =+  yit=(sab p.vex q.u.q.vex)
-  ?~  q.yit
-    [p=p.yit q=q.vex]
-  [p=p.yit q=[~ u=[p=(raq p.u.q.vex p.u.q.yit) q=q.u.q.yit]]]
+  ::  Tier 5a, core 1, custom processing
 ::
 ++  cold
   |*  [cus=* sef=rule]
@@ -770,16 +764,6 @@
   ?~  q.vex
     vex
   [p=p.vex q=[~ u=[p=cus q=q.u.q.vex]]]
-::
-++  comp
-  |*  raq=|*([a=* b=*] [a b])
-  |*  [vex=*edge sab=rule]
-  ?~  q.vex
-    vex
-  =+  yit=(sab p.vex q.u.q.vex)
-  ?~  q.yit
-    yit
-  [p=p.yit q=[~ u=[p=(raq p.u.q.vex p.u.q.yit) q=q.u.q.yit]]]
 ::
 ++  cook
   |*  [poq=<*> sef=rule]
@@ -796,15 +780,6 @@
   [p=p.tub q=[~ u=[p=huf q=q.tub]]]
 ::
 ++  fail  |=(tub=*clip [p=p.tub q=~])
-++  glue
-  |*  bus=rule
-  |*  [vex=*edge sab=rule]
-  (plug vex ;~(pfix bus sab))
-::
-++  ifix
-  |*  [fel=[p=rule q=rule] hof=rule]
-  ;~(pfix p.fel ;~(sfix hof q.fel))
-::
 ++  just
   |=  daf=*char
   |=  tub=*clip
@@ -815,18 +790,11 @@
     (fail tub)
   [(slip i.q.tub p.tub) [~ i.q.tub t.q.tub]]
 ::
-++  know  |*(vex=*edge ?~(q.vex !! p.u.q.vex))
-++  like
-  |*  a=<*>
-  |=  b=*
-  [p=(hair -.b) q=?~(+.b ~ [~ u=[p=(a +>-.b) q=(tape +>+.b)]])]
-::
-++  last
-  |=  [zyc=*hair naz=*hair]
-  ^-  *hair
-  ?:  .=(p.zyc p.naz)
-    ?:((gth q.zyc q.naz) zyc naz)
-  ?:((gth p.zyc p.naz) zyc naz)
+++  knee
+  |*  [gar=* sef=|.(rule)]
+  |=  tub=*clip
+  ^-  *(like <gar>)
+  ((sef) tub)
 ::
 ++  mask
   |=  bud=*(list char)
@@ -855,58 +823,6 @@
     [p=p.lig q=[~ u=[p=(p.i.zil p.u.q.vex p.u.q.lig) q=q.u.q.lig]]]
   ==
 ::
-++  more
-  |*  [bus=rule fel=rule]
-  ;~(pose (most bus fel) (easy ~))
-::
-++  most
-  |*  [bus=rule fel=rule]
-  ;~(plug fel (star ;~(pfix bus fel)))
-::
-++  pfix
-  |*  [vex=*edge sab=rule]
-  ?~  q.vex
-    vex
-  (sab p.vex q.u.q.vex)
-::
-++  plug  *comp
-++  plus  |*(fel=rule ;~(plug fel (star fel)))
-++  pose
-  |*  [vex=*edge sab=rule]
-  ?~  q.vex
-    =+  roq=$:sab
-    ?~  q.roq
-      [p=(last p.vex p.roq) q=~]
-    roq
-  vex
-::
-++  posh
-  |*  [vex=*edge sab=rule]
-  ?~  q.vex
-    ~|('off posh' !!)
-  vex
-::
-++  rash  |*([naf=@ sab=rule] (rasp (rip 3 naf) sab))
-++  rasp
-  |*  [los=*tape sab=rule]
-  =+  vex=(sab *hair los)
-  ?~  q.vex
-    ~~  `*bill`[%grip ['[' ']'] ~(dem go p.p.vex) ~(dem go q.p.vex) ~]
-    ~|('syntax error/a' !!)
-  ?.  .=(~ q.u.q.vex) 
-    ~~  `*bill`[%grip ['[' ']'] ~(dem go p.p.vex) ~(dem go q.p.vex) ~]
-    ~|('syntax error/b' !!)
-  p.u.q.vex
-::
-++  sfix
-  |*  [vex=*edge sab=rule]
-  ?~  q.vex
-    vex
-  =+  yit=(sab p.vex q.u.q.vex)
-  ?~  q.yit
-    yit
-  [p=p.yit q=[~ u=[p=p.u.q.vex q=q.u.q.yit]]]
-::
 ++  shim
   |=  zep=[p=*char q=*char]
   |=  tub=*clip
@@ -916,30 +832,6 @@
   ?.  ?&((gte i.q.tub p.zep) (lte i.q.tub q.zep))
     (fail tub)
   [(slip i.q.tub p.tub) [~ i.q.tub t.q.tub]]
-::
-++  slip
-  |=  [weq=*char naz=*hair]
-  ^-  *hair
-  ?:  .=(10 weq)
-    [.+(p.naz) 1]
-  [p.naz .+(q.naz)]
-::
-++  slug
-  |*  [rud=* raq=|*([a=* b=*] [a b])]
-  |*  [bus=rule fel=rule]
-  ;~((comp raq) fel (stir rud raq ;~(pfix bus fel)))
-::
-++  stag
-  |*  [gob=* sef=rule]
-  |=  tub=*clip
-  =+  vex=(sef tub)
-  ?~  q.vex
-    vex
-  [p=p.vex q=[~ u=[p=[gob p.u.q.vex] q=q.u.q.vex]]]
-::
-++  star
-  |*  fel=rule
-  (stir `*(list <(know *fel)>)`~ |*([a=* b=*] [a b]) fel)
 ::
 ++  stir
   |*  [rud=* raq=|*([a=* b=*] [a b]) fel=rule]
@@ -952,7 +844,109 @@
   ?>  ?=(^ q.wag)
   [p.wag [~ (raq p.u.q.vex p.u.q.wag) q.u.q.wag]]
 ::
-  ::  Tier 5a, core 2, ASCII
+++  stag
+  |*  [gob=* sef=rule]
+  |=  tub=*clip
+  =+  vex=(sef tub)
+  ?~  q.vex
+    vex
+  [p=p.vex q=[~ u=[p=[gob p.u.q.vex] q=q.u.q.vex]]]
+::
+  ::  Tier 5a, core 2, bolts
+::
+++  bend
+  |*  raq=|*([a=* b=*] [a b])
+  |*  [vex=*edge sab=rule]
+  ?~  q.vex
+    vex 
+  =+  yit=(sab p.vex q.u.q.vex)
+  ?~  q.yit
+    [p=p.yit q=q.vex]
+  [p=p.yit q=[~ u=[p=(raq p.u.q.vex p.u.q.yit) q=q.u.q.yit]]]
+::
+++  comp
+  |*  raq=|*([a=* b=*] [a b])
+  |*  [vex=*edge sab=rule]
+  ?~  q.vex
+    vex
+  =+  yit=(sab p.vex q.u.q.vex)
+  ?~  q.yit
+    yit
+  [p=p.yit q=[~ u=[p=(raq p.u.q.vex p.u.q.yit) q=q.u.q.yit]]]
+::
+++  glue
+  |*  bus=rule
+  |*  [vex=*edge sab=rule]
+  (plug vex ;~(pfix bus sab))
+::
+++  pfix
+  |*  [vex=*edge sab=rule]
+  ?~  q.vex
+    vex
+  (sab p.vex q.u.q.vex)
+::
+++  plug  *comp
+++  pose
+  |*  [vex=*edge sab=rule]
+  ?~  q.vex
+    =+  roq=$:sab
+    ?~  q.roq
+      [p=(last p.vex p.roq) q=~]
+    roq
+  vex
+::
+++  sfix
+  |*  [vex=*edge sab=rule]
+  ?~  q.vex
+    vex
+  =+  yit=(sab p.vex q.u.q.vex)
+  ?~  q.yit
+    yit
+  [p=p.yit q=[~ u=[p=p.u.q.vex q=q.u.q.yit]]]
+::
+  ::  Tier 5a, core 3, rule composers
+::
+++  bass
+  |*  [rum=@ tyd=rule]
+  %+  cook
+    |=  waq=*tape
+    %+  roll
+      waq
+    =+([p=@ q=@] |.((add p (mul rum q))))
+  tyd
+::
+++  boss
+  |*  [rum=@ tyd=rule]
+  %+  cook
+    |=  waq=*tape
+    %+  reel
+      waq
+    =+([p=@ q=@] |.((add p (mul rum q))))
+  tyd
+::
+++  ifix
+  |*  [fel=[p=rule q=rule] hof=rule]
+  ;~(pfix p.fel ;~(sfix hof q.fel))
+::
+++  more
+  |*  [bus=rule fel=rule]
+  ;~(pose (most bus fel) (easy ~))
+::
+++  most
+  |*  [bus=rule fel=rule]
+  ;~(plug fel (star ;~(pfix bus fel)))
+::
+++  plus  |*(fel=rule ;~(plug fel (star fel)))
+++  slug
+  |*  [rud=* raq=|*([a=* b=*] [a b])]
+  |*  [bus=rule fel=rule]
+  ;~((comp raq) fel (stir rud raq ;~(pfix bus fel)))
+::
+++  star
+  |*  fel=rule
+  (stir `*(list <(know *fel)>)`~ |*([a=* b=*] [a b]) fel)
+::
+  ::  Tier 5a, core 4, ASCII and utilities
 ::
 ++  ace  (just ' ')
 ++  alf  ;~(pose low hig)
@@ -975,7 +969,6 @@
 ++  del  (just '<')
 ++  dem  (bass 10 (plus dit))
 ++  dit  (cook |=(a=@ (sub a '0')) (shim '0' '9'))
-++  dux  (cold ~ ;~(plug dax dax))
 ++  dun  (cold ~ ;~(plug dap dap))
 ++  duz  (cold ~ ;~(plug bon bon))
 ++  gal  ;~(pose (cold 2 del) (cold 3 led))
@@ -2873,10 +2866,7 @@
   =<  (ifix [gay gay] tall)
   &.  
   ++  flat
-    |=  tub=*clip
-    ^-  *(like gene)
-    %.  tub
-    ~+  ~#
+    %+  knee  *gene  |.  ~+
     ;~  pose
       (stag %dgtr (ifix [den ned] (most ace wide)))
       (stag %mtdp (ifix [lep pel] (most ace wide)))
@@ -3111,10 +3101,7 @@
     ==
   ::
   ++  long
-    |=  tub=*clip  
-    ^-  *(like gene)  
-    %.  tub
-    ~+  ~#
+    %+  knee  *gene  |.  ~+
     ;~  %-  bend
         |=  :-  ros=*gene 
                 ^=  vil  %*
@@ -3146,10 +3133,9 @@
     --
   ::
   ++  rope
-    |=  tub=*clip 
-    ^-  *(like twig)
-    %.  tub
-    ~+  ~#
+    %+  knee
+      *twig
+    |.  ~+
     %+  (slug `*twig`~ |=([a=*twig b=*twig] (weld a b)))
       dot
     ;~  pose
@@ -3162,24 +3148,7 @@
       --
     --
   ::
-  ++  tall  
-    |=  tub=*clip 
-    ^-  *(like gene)
-    %.  tub
-    ~+  ~#
-    ;~  pose
-      (norm &)
-      long
-    --
-  ::
-  ++  wide
-    |=  tub=*clip 
-    ^-  *(like gene)
-    %.  tub
-    ~+  ~#
-    ;~  pose
-      (norm |)
-      long
-    --
+  ++  tall  (knee *gene |.(~+(;~(pose (norm &) long))))
+  ++  wide  (knee *gene |.(~+(;~(pose (norm |) long))))
   ==
 ==
