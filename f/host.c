@@ -723,21 +723,8 @@ u2_ho_test(u2_wire    wir_r,
       msg_c = "miss";
       printf("miss: cos_c: %s\n", cos_c);
       
-      {
-        u2_noun sut, hag, van;
-
-        if ( (u2_no == u2_mean(cor, u2_cv_sam, &hag, u2_cv_con, &van, 0)) ||
-             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
-        {
-          c3_assert(0);
-        } else {
-          // u2_err(wir_r, "hag", hag);
-          u2_err(wir_r, "right", sof);
-          u2_err(wir_r, "wrong", had);
-          // j2_mcy(watt_269, ut, dupt)(wir_r, van, "right", sof);
-          // j2_mcy(watt_269, ut, dupt)(wir_r, van, "wrong", had);
-        }
-      }
+      u2_err(wir_r, "right", sof);
+      u2_err(wir_r, "wrong", had);
       c3_assert(0);
 
       //  For detailed debugging, activate/extend this junkheap as needed.

@@ -454,14 +454,14 @@ _sing_x(u2_noun a,
   c3_assert(u2_none != a);
   c3_assert(u2_none != b);
 
-#ifdef U2_PROFILE
-  X++;
-#endif
-
   if ( a == b ) {
     return u2_yes;
   }
   else {
+#ifdef U2_PROFILE
+    X++;
+#endif
+
     if ( u2_fly_is_atom(a) ) {
       if ( !u2_fly_is_atom(b) || 
            u2_fly_is_cat(a) || 

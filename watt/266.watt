@@ -5,6 +5,16 @@
 ::
   ::  Tier 1, atomic arithmetic
 ::
+++  fib
+  |=  a=@
+  ~+
+  ~#
+  ^-  @
+  ?-    a
+      0   0
+      1   1
+      *   (add $(a (sub a 1)) $(a (sub a 2)))
+  --
 ++  add
   ~.  %add
   |=  [a=@ b=@] 
@@ -965,6 +975,9 @@
 ++  del  (just '<')
 ++  dem  (bass 10 (plus dit))
 ++  dit  (cook |=(a=@ (sub a '0')) (shim '0' '9'))
+++  dux  (cold ~ ;~(plug dax dax))
+++  dun  (cold ~ ;~(plug dap dap))
+++  duz  (cold ~ ;~(plug bon bon))
 ++  gal  ;~(pose (cold 2 del) (cold 3 led))
 ++  gap  (cold ~ (plus ;~(pose vul (mask [10 32 ~]))))
 ++  gay  ;~(pose gap (easy ~))
@@ -2859,96 +2872,11 @@
 ++  vest
   =<  (ifix [gay gay] tall)
   &.  
-  ++  rope
-    |=  tub=*clip 
-    ^-  *(like twig)
-    %.  tub
-    %+  (slug `*twig`~ |=([a=*twig b=*twig] (weld a b)))
-      dot
-    ;~  pose
-      (cook |=(a=*(list) ?.(.?(-.a) [%% ~] [%% [~ 2] $(a +.a)])) (plus sec))
-      %+  cook
-        |=(a=*knot [a ~])
-      ;~  pose
-        sym
-        (cook |=(a=*axis [~ a]) ;~(pose ven ;~(pfix dot dem) (cold 1 dot)))
-      --
-    --
-  ::
-  ++  suck
-    |=  [dim=*gene wit=*gene]
-    ^-  *gene
-    !!
-  ::
-  ++  plow
-    |=  [ros=*gene peq=@ yar=*gene]
-    ^-  *gene
-    ?-    peq
-        ':'  [%bnld ros yar]
-        '='
-      ?-  ros
-        @                [%ktbn ros yar]
-        [%mtbn [@ ~] ~]  [%ktbn i.p.ros yar]
-        [%zpcb *]        $(ros q.ros)
-      --
-    --
-  ::
-  ++  tall  
-    |=  tub=*clip 
-    ^-  *(like gene)
-    %.  tub
-    ;~  pose
-      (norm &)
-      long
-    --
-  ::
-  ++  wide
-    |=  tub=*clip 
-    ^-  *(like gene)
-    %.  tub
-    ;~  pose
-      (norm |)
-      long
-    --
-  ::
-  ++  long
-    |=  tub=*clip  
-    ^-  *(like gene)  
-    %.  tub
-    ;~  %-  bend
-        |=  :-  ros=*gene 
-                ^=  vil  %*
-                  |?  [%bon p=*gene] 
-                      [%deg p=*gene] 
-                      [%lep p=*(list <[p=*gene q=*gene]>)]
-                  --
-        ?-    -.vil
-            %bon 
-          ?-  ros
-            @                [%ktbn ros p.vil]
-            [%mtbn [@ ~] ~]  [%ktbn i.p.ros p.vil]
-            [%zpcb *]        $(ros q.ros)
-          --
-            %deg  [%bnld ros p.vil]
-            %lep  [%mtbn ~(rake ap ros) p.vil]
-        --
-      flat
-      ;~  pose
-        ;~(plug (cold %bon bon) wide)
-        ;~(plug (cold %deg deg) wide)
-        ;~  plug
-          (easy %lep)
-          %+  ifix
-            [lep pel]
-          (most ;~(plug com ace) ;~((glue ace) wide wide))
-        --
-      --
-    --
-  ::
   ++  flat
     |=  tub=*clip
     ^-  *(like gene)
     %.  tub
+    ~+  ~#
     ;~  pose
       (stag %dgtr (ifix [den ned] (most ace wide)))
       (stag %mtdp (ifix [lep pel] (most ace wide)))
@@ -3081,6 +3009,12 @@
               (rune deg %sgdg hina)
               (rune del %sgdl hinb)
               (rune dot %sgdt hine)
+              (rune ket %sgkt expa)
+              (rune led %sgld hinb)
+              (rune mit %sgmt hind)
+              (rune pad %sgpd hinc)
+              (rune pam %sgpm expb)
+              (rune sig %sgsg expb)
             --
           --
           ;~  pfix  tam
@@ -3112,8 +3046,9 @@
         --
       --
     ++  wing
+      %-  hand
       %+  cook
-        |=(a=*(list <[p=*term q=*foot]>) (~(gas in *(map term foot)) a))
+        |=(a=*(list <[p=*term q=*foot]>) (~(gas by *(map term foot)) a))
       (more muck boot)
     ::
     ++  rune
@@ -3129,6 +3064,8 @@
       --
     ++  glop  (glue mash)
     ++  gunk  (glue muck)
+    ++  butt  |*(zor=rule ?:(tol ;~(sfix zor ;~(pfix gap duz)) zor))
+    ++  hand  |*(zor=rule ?:(tol ;~(sfix zor ;~(plug gap dun)) zor))
     ++  hank  (most muck loaf)
     ++  loaf  ?:(tol tall wide)
     ++  mash  ?:(tol gap ;~(plug com ace))
@@ -3137,32 +3074,112 @@
     ++  expa  |.(loaf)
     ++  expb  |.(;~(gunk loaf loaf))
     ++  expc  |.(;~(gunk loaf loaf loaf))
-    ++  expd  |.(hank)
+    ++  expd  |.((butt hank))
     ++  expe  |.(wing)
     ++  expf  |.(;~(gunk loaf loaf loaf loaf))
     ++  expg  |.(;~(gunk sym loaf))
-    ++  exph  |.(;~(gunk loaf rack))
-    ++  expi  |.(;~(gunk loaf hank))
-    ++  expj  |.(;~(gunk rope rack))
+    ++  exph  |.((butt ;~(gunk loaf rack)))
+    ++  expi  |.((butt ;~(gunk loaf hank)))
+    ++  expj  |.((butt ;~(gunk rope rack)))
     ++  expk  |.(;~(gunk loaf ;~(plug loaf (easy ~)))) 
-    ++  expp  |.(;~(gunk rope loaf rack))
+    ++  expp  |.((butt ;~(gunk rope loaf rack)))
     ++  expq  |.(;~(gunk rope loaf loaf))
     ++  expx  |.(;~(gunk loaf wing))
     ++  hina  |.(;~(gunk (ifix [den ned] ;~(gunk dem dem)) loaf))
     ++  hinb  |.(;~(gunk bont loaf))
     ++  hinc  |.(;~(pose ;~(gunk bony loaf) ;~(plug (easy ~) loaf)))
+    ++  hind  |.(;~(gunk bonk loaf bonz loaf))
     ++  hine  |.(;~(gunk bonk loaf))
     ++  bonk  
       ;~  pfix  mit
         ;~  pose
-          sym
-          ;~(plug sym ;~(pfix dot dem))
-          ;~(plug sym ;~(pfix deg ;~(plug sym ;~(pfix dot dem))))
           ;~(plug sym ;~(pfix deg ;~(plug sym ;~(pfix dot ;~(pfix dot dem)))))
+          ;~(plug sym ;~(pfix deg ;~(plug sym ;~(pfix dot dem))))
+          ;~(plug sym ;~(pfix dot dem))
+          sym
         --
       --
     ++  bont  ;~((bend) sym ;~(pfix dot ;~(pose wide ;~(pfix muck loaf))))
     ++  bony  (cook |=(a=*(list) (lent a)) (plus bon))
+    ++  bonz
+      ;~  pose
+        (cold ~ sig)
+        %+  ifix
+          ?:(tol [p=;~(plug dun gap) q=;~(plug gap dun)] [p=lep q=pel])
+        (more mash ;~(gunk ;~(pfix mit sym) loaf))
+      --
     ==
+  ::
+  ++  long
+    |=  tub=*clip  
+    ^-  *(like gene)  
+    %.  tub
+    ~+  ~#
+    ;~  %-  bend
+        |=  :-  ros=*gene 
+                ^=  vil  %*
+                  |?  [%bon p=*gene] 
+                      [%deg p=*gene] 
+                      [%lep p=*(list <[p=*gene q=*gene]>)]
+                  --
+        ?-    -.vil
+            %bon 
+          ?-  ros
+            @                [%ktbn ros p.vil]
+            [%mtbn [@ ~] ~]  [%ktbn i.p.ros p.vil]
+            [%zpcb *]        $(ros q.ros)
+          --
+            %deg  [%bnld ros p.vil]
+            %lep  [%mtbn ~(rake ap ros) p.vil]
+        --
+      flat
+      ;~  pose
+        ;~(plug (cold %bon bon) wide)
+        ;~(plug (cold %deg deg) wide)
+        ;~  plug
+          (easy %lep)
+          %+  ifix
+            [lep pel]
+          (most ;~(plug com ace) ;~((glue ace) wide wide))
+        --
+      --
+    --
+  ::
+  ++  rope
+    |=  tub=*clip 
+    ^-  *(like twig)
+    %.  tub
+    ~+  ~#
+    %+  (slug `*twig`~ |=([a=*twig b=*twig] (weld a b)))
+      dot
+    ;~  pose
+      (cook |=(a=*(list) ?.(.?(-.a) [%% ~] [%% [~ 2] $(a +.a)])) (plus sec))
+      %+  cook
+        |=(a=*knot [a ~])
+      ;~  pose
+        sym
+        (cook |=(a=*axis [~ a]) ;~(pose ven ;~(pfix dot dem) (cold 1 dot)))
+      --
+    --
+  ::
+  ++  tall  
+    |=  tub=*clip 
+    ^-  *(like gene)
+    %.  tub
+    ~+  ~#
+    ;~  pose
+      (norm &)
+      long
+    --
+  ::
+  ++  wide
+    |=  tub=*clip 
+    ^-  *(like gene)
+    %.  tub
+    ~+  ~#
+    ;~  pose
+      (norm |)
+      long
+    --
   ==
 ==

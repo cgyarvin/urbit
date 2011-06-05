@@ -217,6 +217,8 @@ wide_c
     chit_wide
       : si_lep chit_rack_wide si_pel
         { $$ = $2 }
+      | si_sig 
+        { $$ = u2_nul; }
       ;
       chit_rack_wide
         : g                                       { $$ = _0; }
@@ -822,10 +824,10 @@ tall
      | comment w  { $$ = _0; }
      ;
 
-    e: '=' '='
+    e: '-' '-'
         ;
 
-    f: '-' '-'
+    f: '=' '='
         ;
 
     comment: ':' ':' comment_body '\n' { $$ = _0; }
@@ -874,7 +876,7 @@ _watt_locate(u2_ray  wir_r,
 {
   const YYLTYPE *llocp = vlocp;   /* bufalo estupido */
 
-#if 0
+#if 1
   return gene;
 #else
   return u2_bt
@@ -974,7 +976,12 @@ _scanner_init(struct _u2_scanner *scanner,
 */
   u2_ho_jet 
   j2_mbj(Pit, ream)[] = { 
-    { ".3", c3__lite, j2_mb(Pit, ream), u2_jet_live, u2_none, u2_none },
+    { ".3", 
+       c3__lite, 
+       j2_mb(Pit, ream), 
+       u2_jet_dead,
+       // u2_jet_live | u2_jet_test, 
+       u2_none, u2_none },
     { }
   };
 

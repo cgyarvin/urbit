@@ -874,7 +874,7 @@ _watt_locate(u2_ray  wir_r,
 {
   const YYLTYPE *llocp = vlocp;   /* bufalo estupido */
 
-#if 0
+#if 1
   return gene;
 #else
   return u2_bt
