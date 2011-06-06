@@ -967,6 +967,8 @@ _ho_run(u2_ray      wir_r,
             //  The jet promises that its trace calculations are correct.
             //
             *tax = u2_rx(wir_r, u2_wire_tax(wir_r));
+            u2_wire_tax(wir_r) = u2_rx
+              (wir_r, u2_kite_tax(u2_wire_kit_r(wir_r)));
           }
           else {
             //  Something failed - nothing is promised.
@@ -974,8 +976,6 @@ _ho_run(u2_ray      wir_r,
             u2_rz(wir_r, u2_wire_tax(wir_r));
             *tax = u2_none;
           }
-          u2_wire_tax(wir_r) = u2_rx(wir_r, u2_kite_tax(u2_wire_kit_r(wir_r)));
-
           u2_bl_done(wir_r, kit_r);
           ret = u2_none;
         } 

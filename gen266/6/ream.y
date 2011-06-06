@@ -979,8 +979,8 @@ _scanner_init(struct _u2_scanner *scanner,
     { ".3", 
        c3__lite, 
        j2_mb(Pit, ream), 
-       // u2_jet_dead,
-       u2_jet_live | u2_jet_test, 
+       u2_jet_dead,
+       // u2_jet_live | u2_jet_test, 
        u2_none, u2_none },
     { }
   };

@@ -41,11 +41,12 @@
       u2_noun dat = j2_mcy(Pit, ut, mint)(wir_r, vin, dox, c3__noun, gen);
 
       ret = u2_sing(u2_t(dis), u2_t(dat));
+#if 0
       if ( u2_no == ret ) {
         u2_err(wir_r, "dis", dis);
         u2_err(wir_r, "dat", dat);
       }
-
+#endif
       u2_rz(wir_r, von);
       u2_rz(wir_r, vin);
       u2_rz(wir_r, rob);
