@@ -399,8 +399,8 @@ wide_c
       { $$ = _ycell($1, $3); }
 
     hint_c_wide
-      : huny w wide   { $$ = _ycell($1, $3); }
-      | wide          { $$ = _ycell(0, $1); }
+      : si_lep huny w wide si_pel  { $$ = _ycell($2, $4); }
+      | si_lep wide si_pel         { $$ = _ycell(0, $2); }
       ;
 
     hint_d_wide
@@ -979,8 +979,8 @@ _scanner_init(struct _u2_scanner *scanner,
     { ".3", 
        c3__lite, 
        j2_mb(Pit, ream), 
-       u2_jet_dead,
-       // u2_jet_live | u2_jet_test, 
+       // u2_jet_dead,
+       u2_jet_live | u2_jet_test, 
        u2_none, u2_none },
     { }
   };
