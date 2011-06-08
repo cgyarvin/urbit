@@ -781,6 +781,14 @@
   [p=p.tub q=[~ u=[p=huf q=tub]]]
 ::
 ++  fail  |=(tub=*clip [p=p.tub q=~])
+++  here
+  |*  [hez=|=([a=*spot b=*] [a b]) sef=rule]
+  |=  tub=*clip
+  =+  vex=(sef tub)
+  ?~  q.vex
+    vex
+  [p=p.vex q=[~ u=[p=(hez [%% p.tub p.q.u.q.vex] p.u.q.vex) q=q.u.q.vex]]]
+::
 ++  just
   |=  daf=*char
   |=  tub=*clip
@@ -1578,6 +1586,7 @@
     [%tmtr p=*gene q=*gene]                                       ::  ;*  tamtar
   ::
     [%zpbn p=*gene]                                               ::  !=  zapbon
+    [%zpdg p=*gene]                                               ::  !:  zapdeg
     [%zpdx p=*gene]                                               ::  !#  zapdax
     [%zpcb p=*spot q=*gene]                                       ::  !_  zapcab
     [%zpzp ~]                                                     ::  !!  zapzap
@@ -2870,6 +2879,7 @@
 ::
 ++  vest
   =<  (ifix [gay gay] tall)
+  =+  bug=`?`|
   &.  
   ++  flat
     %+  knee  *gene  |.  ~+
@@ -3023,8 +3033,9 @@
           --
           ;~  pfix  zap
             ;~  pose
-              (rune dax %zpdx expa)
               (rune bon %zpbn expa)
+              ;~(pfix deg (toad expz))
+              (rune dax %zpdx expa)
             --
           --
         --
@@ -3041,23 +3052,22 @@
           loaf
         --
       --
+    ::
     ++  wing
       %-  hand
       %+  cook
         |=(a=*(list <[p=*term q=*foot]>) (~(gas by *(map term foot)) a))
       (more muck boot)
     ::
+    ++  toad
+      |*  har=expa
+      =+  dur=(ifix [lep pel] $:har(tol |))
+      ?:(tol ;~(pose ;~(pfix gap $:har(tol &)) dur) dur)
+    ::
     ++  rune
       |*  [dif=rule tuq=* har=expa]
-      ;~  pfix
-        dif
-        %+  stag
-          tuq
-        =+  dur=(ifix [lep pel] $:har(tol |))
-        ?:  tol
-          ;~(pose ;~(pfix gap $:har(tol &)) dur)
-        dur
-      --
+      ;~(pfix dif (stag tuq (toad har)))
+    ::
     ++  glop  (glue mash)
     ++  gunk  (glue muck)
     ++  butt  |*(zor=rule ?:(tol ;~(sfix zor ;~(pfix gap duz)) zor))
@@ -3081,6 +3091,7 @@
     ++  expp  |.((butt ;~(gunk rope loaf rack)))
     ++  expq  |.(;~(gunk rope loaf loaf))
     ++  expx  |.(;~(gunk loaf wing))
+    ++  expz  |.(loaf(bug &))
     ++  hina  |.(;~(gunk (ifix [den ned] ;~(gunk dem dem)) loaf))
     ++  hinb  |.(;~(gunk bont loaf))
     ++  hinc  |.(;~(pose ;~(gunk bony loaf) ;~(plug (easy ~) loaf)))
@@ -3154,7 +3165,13 @@
       --
     --
   ::
-  ++  tall  (knee *gene |.(~+(;~(pose (norm &) long))))
-  ++  wide  (knee *gene |.(~+(;~(pose (norm |) long))))
+  ++  tall  (knee *gene |.(~+((wart ;~(pose (norm &) long)))))
+  ++  wide  (knee *gene |.(~+((wart ;~(pose (norm |) long)))))
+  ++  wart  
+    |*  zor=rule 
+    %+  here 
+      |=  [a=*spot b=*gene] 
+      ?:(bug [%zpcb a b] b)
+    zor
   ==
 ==

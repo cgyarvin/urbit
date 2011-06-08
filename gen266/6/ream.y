@@ -17,6 +17,7 @@
   */
     struct _u2_scanner {
       u2_ray  wir_r;
+      u2_flag bug;
       u2_noun scan;     /* result - set by parser */
 
       /* Per-parse state.
@@ -39,7 +40,7 @@
 
   /* Forward declarations.
   */
-    static u2_noun _watt_locate(u2_ray, const void *, u2_noun);
+    static u2_noun _watt_locate(struct _u2_scanner *, const void *, u2_noun);
 
   /* Construction macros.
   */
@@ -80,8 +81,8 @@ file
   ;
 
 gene
-  : tall  { $$ = _watt_locate(ywir_r, &@1, $1); }
-  | wide  { $$ = _watt_locate(ywir_r, &@1, $1); }
+  : tall  { $$ = _watt_locate(scanner, &@1, $1); }
+  | wide  { $$ = _watt_locate(scanner, &@1, $1); }
   ;
 
 wide
@@ -303,7 +304,7 @@ wide_c
     wide_norm: di_zapdax body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_zapven body_l_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_zapmit body_l_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_zapdeg body_a_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_zapdeg body_a_wide    { $$ = $2; scanner->bug = u2_no; }
     wide_norm: di_zapbon body_a_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_sigbar body_b_wide    { $$ = _ycell($1, $2); }
@@ -495,7 +496,7 @@ tall
     tall_norm: di_tamtar w body_b_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_zapdax w body_a_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_zapdeg w body_a_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_zapdeg w body_a_tall    { $$ = $3; scanner->bug = u2_no; }
     tall_norm: di_zapbon w body_a_tall    { $$ = _ycell($1, $3); }
 
   /** Tall - bodies.
@@ -700,7 +701,7 @@ tall
     di_zapdax: si_zap si_dax  { $$ = c3__zpdx; }
     di_zapmit: si_zap si_mit  { $$ = c3__zpmt; }
     di_zapven: si_zap si_zap  { $$ = c3__zpzp; }
-    di_zapdeg: si_zap si_deg  { $$ = c3__zpdg; }
+    di_zapdeg: si_zap si_deg  { $$ = c3__zpdg; scanner->bug = u2_yes; }
     di_zapbon: si_zap si_bon  { $$ = c3__zpbn; }
     
   /* Signs.
@@ -870,43 +871,32 @@ tall
 /* Annotate (gene) with spot.
 */
 static u2_noun
-_watt_locate(u2_ray  wir_r,
+_watt_locate(struct _u2_scanner *scanner,
              const void *vlocp,
              u2_noun gene)
 {
+  u2_wire wir_r = scanner->wir_r;
   const YYLTYPE *llocp = vlocp;   /* bufalo estupido */
 
-#if 1
-  return gene;
-#else
-  return u2_bt
-  (wir_r,
-   c3__zpcb,
-   u2_bt
-    (wir_r, 
-     u2_nul,
-     u2_bc
-      (wir_r, 
-       (llocp->first_line), 
-       (llocp->first_column)),
-     u2_bc
+  if ( u2_no == scanner->bug ) {
+    return gene;
+  } else {
+    return u2_bt
       (wir_r,
-       (llocp->last_line), 
-       (llocp->last_column))),
-    gene);
-#endif
-
-#if 0
-  return u2_bt
-    (wir_r, 
-     c3__ktld,
-     u2_bq
-      (wir_r,
-       c3__spot,
-       c3__dtsg, 
-       u2_nul,
-     gene);
-#endif
+       c3__zpcb,
+       u2_bt
+        (wir_r, 
+         u2_nul,
+         u2_bc
+          (wir_r, 
+           (llocp->first_line), 
+           (llocp->first_column)),
+         u2_bc
+          (wir_r,
+           (llocp->last_line), 
+           (llocp->last_column))),
+        gene);
+  }
 }
 
 /* Initialize (scanner) for (sack).
@@ -918,6 +908,7 @@ _scanner_init(struct _u2_scanner *scanner,
 {
   scanner->wir_r = wir_r;
   scanner->scan = u2_none;
+  scanner->bug = u2_no;
 
   if ( u2_yes == u2_stud(sack) ) {
     scanner->p.tube = sack;
@@ -979,8 +970,8 @@ _scanner_init(struct _u2_scanner *scanner,
     { ".3", 
        c3__lite, 
        j2_mb(Pit, ream), 
-       u2_jet_dead,
-       // u2_jet_live | u2_jet_test, 
+       // u2_jet_dead,
+       u2_jet_live | u2_jet_test, 
        u2_none, u2_none },
     { }
   };
