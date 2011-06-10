@@ -20,9 +20,14 @@
       u2_flag bug;
       u2_noun scan;     /* result - set by parser */
 
+      /* Error escape.
+      */
+      jmp_buf env;
+
       /* Per-parse state.
       */
       struct {
+        u2_weak tape;   /* if set, character list */
         u2_atom tube;   /* part data (ie, source document) */
         u2_book bowl;   /* parts - (mark sack). */
       } p;
@@ -902,13 +907,19 @@ _watt_locate(struct _u2_scanner *scanner,
 /* Initialize (scanner) for (sack).
 */
 static void
-_scanner_init(struct _u2_scanner *scanner,
-              u2_ray  wir_r,
-              u2_noun sack)
+_scanner_init_sack(struct _u2_scanner *scanner,
+                   u2_ray  wir_r,
+                   u2_noun sack)
 {
   scanner->wir_r = wir_r;
   scanner->scan = u2_none;
   scanner->bug = u2_no;
+  scanner->s.token = 0;
+  scanner->s.pb = 0;
+
+  scanner->p.tape = u2_none;
+  scanner->s.xw_line = 1;
+  scanner->s.xw_col = 1;
 
   if ( u2_yes == u2_stud(sack) ) {
     scanner->p.tube = sack;
@@ -918,31 +929,57 @@ _scanner_init(struct _u2_scanner *scanner,
     scanner->p.tube = u2_h(sack);
     scanner->p.bowl = u2_t(sack);
   }
-
-  scanner->s.token = 0;
-  scanner->s.pb = 0;
-  scanner->s.xw_line = 1;
-  scanner->s.xw_col = 1;
 }
 
+/* Initialize (scanner) for (clip).
+*/
+static void
+_scanner_init_clip(struct _u2_scanner *scanner,
+                   u2_ray  wir_r,
+                   u2_noun clip)
+{
+  scanner->wir_r = wir_r;
+  scanner->scan = u2_none;
+  scanner->bug = u2_no;
+  scanner->s.token = 0;
+  scanner->s.pb = 0;
+
+  if ( u2_no == u2_dust(clip) ) {
+    u2_bl_bail(wir_r, c3__fail);
+  }
+  else {
+    u2_noun hair = u2_h(clip);
+    u2_noun tape = u2_t(clip);
+
+    scanner->p.tape = tape;
+ 
+    if ( (u2_no == u2_stud(u2_h(hair))) || (u2_no == u2_stud(u2_t(hair))) ) {
+      u2_bl_bail(wir_r, c3__fail);
+    }
+    else {
+      scanner->s.xw_line = u2_word(0, u2_h(hair));
+      scanner->s.xw_col = u2_word(0, u2_t(hair));
+    }
+  }
+}
 
 /* functions
 */
-  u2_weak                                                         //  transfer
-  j2_mbc(Pit, ream)(u2_wire wir_r, 
-                    u2_weak txt)                                  //  transfer
+  u2_noun                                                         //  transfer
+  j2_mby(Pit, ream)(u2_wire wir_r, 
+                    u2_noun txt)                                  //  retain
   {
-    if ( u2_none == txt ) {
-      return u2_none;
+    struct _u2_scanner scanner;
+
+    _scanner_init_sack(&scanner, wir_r, txt);
+
+    if ( 0 != setjmp(scanner.env) ) {
+      fprintf(stderr, "ream error: %d, %d\n", 
+                      scanner.s.xw_line, scanner.s.xw_col);
+      return u2_bl_bail(wir_r, c3__fail);
     }
     else {
-      struct _u2_scanner scanner;
-
-      _scanner_init(&scanner, wir_r, txt);
-
       if ( !y266_parse(&scanner) ) {
-        c3_assert(scanner.scan);
-
         return scanner.scan;
       }
       else {
@@ -950,16 +987,55 @@ _scanner_init(struct _u2_scanner *scanner,
       }
     }
   }
-  u2_weak                                                         //  transfer
+  u2_noun                                                         //  transfer
+  j2_mby(Pit, vest)(u2_wire wir_r, 
+                    u2_noun tub)                                  //  retain
+  {
+    struct  _u2_scanner scanner;
+    u2_noun hor;
+
+    _scanner_init_clip(&scanner, wir_r, tub);
+
+    if ( 0 != setjmp(scanner.env) ) {
+      hor = u2_bc(wir_r, scanner.s.xw_line, scanner.s.xw_col);
+
+      return u2_bc(wir_r, hor, u2_nul);
+    }
+    else {
+      if ( !y266_parse(&scanner) ) {
+        hor = u2_bc(wir_r, scanner.s.xw_line, scanner.s.xw_col);
+
+        return u2_bt(wir_r, u2_rx(wir_r, hor), 
+                            u2_nul,
+                            u2_bt(wir_r, scanner.scan, hor, u2_nul));
+      }
+      else {
+        return u2_bl_bail(wir_r, c3__fail);
+      }
+    }
+  }
+  u2_noun                                                         //  transfer
   j2_mb(Pit, ream)(u2_wire wir_r, 
                    u2_noun cor)                                   //  retain
   {
     u2_noun txt;
 
     if ( u2_none == (txt = u2_frag(4, cor)) ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__fail);
     } else {
-      return j2_mbc(Pit, ream)(wir_r, txt);
+      return j2_mby(Pit, ream)(wir_r, txt);
+    }
+  }
+  u2_noun
+  j2_mb(Pit, vest)(u2_wire wir_r,
+                   u2_noun cor)
+  {
+    u2_noun tub;
+
+    if ( u2_none == (tub = u2_frag(4, cor)) ) {
+      return u2_bl_bail(wir_r, c3__fail);
+    } else {
+      return j2_mby(Pit, vest)(wir_r, tub);
     }
   }
 
@@ -968,10 +1044,23 @@ _scanner_init(struct _u2_scanner *scanner,
   u2_ho_jet 
   j2_mbj(Pit, ream)[] = { 
     { ".3", 
-       c3__lite, 
+       c3__hevy, 
        j2_mb(Pit, ream), 
        // u2_jet_dead,
-       u2_jet_live | u2_jet_test, 
+       // u2_jet_live | u2_jet_test, 
+       u2_jet_live,
+       u2_none, u2_none },
+    { }
+  };
+
+  u2_ho_jet 
+  j2_mbj(Pit, vest)[] = { 
+    { ".3", 
+       c3__hevy, 
+       j2_mb(Pit, vest), 
+       // u2_jet_dead,
+       // u2_jet_live | u2_jet_test, 
+       u2_jet_live,
        u2_none, u2_none },
     { }
   };
@@ -988,7 +1077,26 @@ y266_lex(YYSTYPE *lvalp, YYLTYPE *llocp, struct _u2_scanner *scanner)
     return token;
   }
   else {
-    c3_y xb = u2_byte(scanner->s.pb, scanner->p.tube);
+    c3_y xb;
+
+    if ( u2_none != scanner->p.tape ) {
+      if ( u2_no == u2_dust(scanner->p.tape) ) {
+        *lvalp = 0;
+        return 0;
+      }
+      else {
+        u2_noun b = u2_h(scanner->p.tape);
+
+        if ( b > 255 ) {
+          return y266_error(llocp, scanner, "tape error");
+        }
+        else {
+          xb = b;
+          scanner->p.tape = u2_t(scanner->p.tape);
+        }
+      }
+    }
+    else xb = u2_byte(scanner->s.pb, scanner->p.tube);
 
     llocp->first_line = llocp->last_line = scanner->s.xw_line;
     llocp->first_column = llocp->last_column = scanner->s.xw_col;
@@ -1007,11 +1115,17 @@ y266_lex(YYSTYPE *lvalp, YYLTYPE *llocp, struct _u2_scanner *scanner)
   }
 }  
 
-/* Error printer.
+/* Error stub.
 */
-int y266_error(YYLTYPE *locp, struct _u2_scanner *scanner, char const *msg)
+int y266_error(YYLTYPE *llocp, struct _u2_scanner *scanner, char const *msg)
 {
+#if 0
   printf("%s: (%d:%d - %d:%d)\n", 
-    msg, locp->first_line, locp->first_column,
-         locp->last_line, locp->last_column);
+    msg, llocp->first_line, llocp->first_column,
+         llocp->last_line, llocp->last_column);
+#endif
+  scanner->s.xw_line = llocp->first_line;
+  scanner->s.xw_col = llocp->first_column;
+
+  longjmp(scanner->env, 1);
 }
