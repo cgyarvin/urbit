@@ -26,7 +26,7 @@
       }
       else {
         if ( (u2_yes == u2_sing(b, pn_a)) ) {
-          return u2_rc(wir_r, u2_nul, qn_a);
+          return u2_rc(wir_r, u2_nul, u2_rx(wir_r, qn_a));
         } 
         else {
           if ( u2_yes == j2_mbc(Pit, gor)(wir_r, b, pn_a) ) {

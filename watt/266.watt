@@ -580,56 +580,65 @@
 ::
 ++  cue
   |=  a=@
-  ^-  [p=@ q=*]
+  ^-  *
   =+  b=`@`0
   =+  m=`*(map <@> <*>)`~
-  =<  [p q]
+  =<  q
   |-  ^-  [p=@ q=* r=m]
-  =+  c=.+(b)
   ?:  .=(0 (cut 0 [b 1] a))
-    =+  d=(rub .+(c) a)
-    :-  (add 2 p.d)
-    ?:  .=(0 (cut 0 [c 1] a))
-      [q.d (~(put by m) b q.d)]
-    [(need (~(get by m) q.d)) m]
-  =+  u=$(b c)
-  =+  v=$(b (add p.u c), m r.u)
-  =+  w=[q.u q.v]
-  [.+((add p.u p.v)) w (~(put by r.v) b w)]
+    =+  c=(rub .+(b) a)
+    [.+(p.c) q.c (~(put by m) b q.c)]
+  =+  c=(add 2 b)
+  ?:  .=(0 (cut 0 [.+(b) 1] a))
+    =+  u=$(b c)
+    =+  v=$(b (add p.u c), m r.u)
+    =+  w=[q.u q.v]
+    [(add 2 (add p.u p.v)) w (~(put by r.v) b w)]
+  =+  d=(rub c a)
+  [(add 2 p.d) (need (~(get by m) q.d)) m]
 ::
 ++  jam
   |=  a=*
-  ^-  [p=@ q=@]
+  ^-  @
   =+  b=`@`0
   =+  m=`*(map <*> <@>)`~
-  =<  [p q]
+  =<  q
   |-  ^-  [p=@ q=@ r=m] 
   =+  c=(~(get by m) a)
   ?~  c
     =>  .(m (~(put by m) a b))
-    ?:  ?=(@ c)
-      =+  d=(mat c)
-      [(add 2 p.d) (lsh 0 2 q.d) m]
+    ?:  ?=(@ a)
+      =+  d=(mat a)
+      [(add 1 p.d) (lsh 0 1 q.d) m]
+    =>  .(b (add 2 b))
     =+  d=$(a -.a)
     =+  e=$(a +.a, b (add b p.d), m r.d)
-    [.+((add p.d p.e)) (mix 1 (lsh 0 1 (cat 0 q.d q.e))) r.e]
+    [(add 2 (add p.d p.e)) (mix 1 (lsh 0 2 (cat 0 q.d q.e))) r.e]
+  ?:  ?&(?=(@ a) (lte (met 0 a) (met 0 u.c)))
+    =+  d=(mat a)
+    [(add 1 p.d) (lsh 0 1 q.d) m]
   =+  d=(mat u.c)
-  [(add 2 p.d) (mix 2 (lsh 0 2 q.d)) m]
+  [(add 2 p.d) (mix 3 (lsh 0 2 q.d)) m]
 ::
 ++  mat
   |=  a=@
   ^-  [p=@ q=@]
+  ?:  .=(0 a)
+    [1 1]
   =+  b=(met 0 a)
   =+  c=(met 0 b)
-  [(add (add .+(c) c) b) (cat 0 (bex c) (cat 0 b a))]
+  :-  (add (add c c) b)
+  (cat 0 (bex c) (mix (end 0 (dec c) b) (lsh 0 (dec c) a)))
 ::
 ++  rub
   |=  [a=@ b=@]
   ^-  [p=@ q=@]
   =+  c==+(c=`@`0 |-(?.(.=(0 (cut 0 [(add a c) 1] b)) c $(c .+(c)))))
+  ?:  .=(0 c)
+    [1 1]
   =+  d=(add a .+(c))
-  =+  e=(cut 0 [d c] b)
-  [(add (add .+(c) c) e) (cut 0 [(add d c) e] b)]
+  =+  e=(add (bex (dec c)) (cut 0 [d (dec c)] b))
+  [(add (add c c) e) (cut 0 [(add d (dec c)) e] b)]
 ::::
 ::::  Tier 4, containers
 ::::
