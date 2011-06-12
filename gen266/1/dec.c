@@ -8,6 +8,13 @@
 /* functions
 */
   u2_weak                                                         //  transfer
+  j2_mbc(Pit, inc)(u2_wire wir_r,
+                   u2_atom a)                                     //  retain
+  {
+    return u2_rl_vint(wir_r, u2_rx(wir_r, a));
+  }
+
+  u2_weak                                                         //  transfer
   j2_mbc(Pit, dec)(u2_wire wir_r, 
                    u2_atom a)                                     //  retain
   {

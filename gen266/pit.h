@@ -23,6 +23,7 @@
 #   define  Tier6_l       (u2_jet_live | u2_jet_test | u2_jet_leak)
 #   define  Tier6_l_memo  Tier6_l
 
+#   define  Tier3_test    (Tier3 | u2_jet_test)
 #   define  Tier5_test    (Tier5 | u2_jet_test)
 #   define  Tier6_a_memo  (Tier6_a | u2_jet_memo)
 #   define  Tier6_b_memo  (Tier6_b | u2_jet_memo)
@@ -81,6 +82,9 @@
       j2_mbc(Pit, gth)(u2_wire wir_r, 
                        u2_atom a,                                 //  retain
                        u2_atom b);                                //  retain
+      u2_weak                                                     //  transfer
+      j2_mbc(Pit, inc)(u2_wire wir_r, 
+                       u2_atom a);                                //  retain
       u2_weak                                                     //  transfer
       j2_mbc(Pit, lte)(u2_wire wir_r, 
                        u2_atom a,                                 //  retain
@@ -272,6 +276,11 @@
                        u2_atom b,                                 //  retain
                        u2_atom c);                                //  retain
 
+      u2_noun                                                     //  produce
+      j2_mby(Pit, rub)(u2_wire wir_r, 
+                       u2_atom a,                                 //  retain
+                       u2_atom b);                                //  retain
+
       u2_weak                                                     //  transfer
       j2_mbc(Pit, vor)(u2_wire wir_r, 
                        u2_atom a,                                 //  retain
@@ -296,6 +305,11 @@
 
       u2_weak                                                     //  transfer 
       j2_mcc(Pit, in, tap)(u2_wire wir_r, 
+                           u2_noun a,                             //  retain
+                           u2_noun b);                            //  retain
+
+      u2_noun                                                     //  transfer
+      j2_mcc(Pit, by, get)(u2_wire wir_r, 
                            u2_noun a,                             //  retain
                            u2_noun b);                            //  retain
 

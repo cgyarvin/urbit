@@ -579,6 +579,7 @@
 ::      Tier 3f, packing
 ::
 ++  cue
+  ~.  %cue
   |=  a=@
   ^-  *
   =+  b=`@`0
@@ -621,6 +622,7 @@
   [(add 2 p.d) (mix 3 (lsh 0 2 q.d)) m]
 ::
 ++  mat
+  ~.  %mat
   |=  a=@
   ^-  [p=@ q=@]
   ?:  .=(0 a)
@@ -631,6 +633,7 @@
   (cat 0 (bex c) (mix (end 0 (dec c) b) (lsh 0 (dec c) a)))
 ::
 ++  rub
+  ~.  %rub
   |=  [a=@ b=@]
   ^-  [p=@ q=@]
   =+  c==+(c=`@`0 |-(?.(.=(0 (cut 0 [(add a c) 1] b)) c $(c .+(c)))))

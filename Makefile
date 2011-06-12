@@ -20,14 +20,14 @@ BIN=run
 
 RM=rm -f
 CC=gcc
-CLD=gcc -O3 -L/sw/lib
+CLD=gcc -g -L/sw/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
 INCLUDE=include
 GENERATED=generated
 DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN)
-CFLAGS=-O3 -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
+CFLAGS=-g -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 CWFLAGS=-Wall
 
 .y.o:
@@ -456,6 +456,7 @@ J266_3_OFILES=\
        gen266/3/cap.o \
        gen266/3/cat.o \
        gen266/3/con.o \
+       gen266/3/cue.o \
        gen266/3/cut.o \
        gen266/3/dor.o \
        gen266/3/dis.o \
@@ -464,12 +465,14 @@ J266_3_OFILES=\
        gen266/3/hor.o \
        gen266/3/lsh.o \
        gen266/3/mas.o \
+       gen266/3/mat.o \
        gen266/3/met.o \
        gen266/3/mix.o \
        gen266/3/mug.o \
        gen266/3/peg.o \
        gen266/3/rap.o \
        gen266/3/rip.o \
+       gen266/3/rub.o \
        gen266/3/rsh.o \
        gen266/3/vor.o
 
