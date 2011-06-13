@@ -56,6 +56,7 @@
 
         p = j2_mbc(Pit, add)(wir_r, _2, u2_h(d));
         if ( u2_nul == x ) {
+          u2_err(wir_r, "ptr not found", u2_h(d));
           return u2_bl_bail(wir_r, c3__exit);
         }
         q = u2_rx(wir_r, u2_t(x));

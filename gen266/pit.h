@@ -186,6 +186,11 @@
 
     /** Tier 3.
     **/
+      u2_noun                                                     //  transfer
+      j2_mbc(Pit, can)(u2_wire wir_r, 
+                       u2_atom a,                                 //  retain
+                       u2_noun b);                                //  retain
+
       u2_weak                                                     //  transfer
       j2_mbc(Pit, cap)(u2_wire wir_r, 
                        u2_atom a);                                //  retain
@@ -200,6 +205,10 @@
       j2_mbc(Pit, con)(u2_wire wir_r, 
                        u2_atom a,                                 //  retain
                        u2_atom b);                                //  retain
+
+      u2_noun                                                     //  transfer
+      j2_mby(Pit, cue)(u2_wire wir_r, 
+                       u2_atom a);                                //  retain
 
       u2_weak                                                     //  transfer
       j2_mbc(Pit, cut)(u2_wire wir_r, 
@@ -235,6 +244,10 @@
                        u2_atom a,                                 //  retain
                        u2_atom b);                                //  retain
 
+      u2_noun                                                     //  transfer
+      j2_mby(Pit, jam)(u2_wire wir_r, 
+                       u2_atom a);                                //  retain
+
       u2_weak                                                     //  transfer
       j2_mbc(Pit, lsh)(u2_wire wir_r, 
                        u2_atom a,                                 //  retain
@@ -243,6 +256,10 @@
 
       u2_weak                                                     //  transfer
       j2_mbc(Pit, mas)(u2_wire wir_r, 
+                       u2_atom a);                                //  retain
+
+      u2_noun                                                     //  produce
+      j2_mby(Pit, mat)(u2_wire wir_r, 
                        u2_atom a);                                //  retain
 
       u2_weak                                                     //  transfer

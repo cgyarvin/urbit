@@ -786,6 +786,36 @@ _hill_b_mint_gen(u2_wire wir_r,
   return pro;
 }
 
+/* _hill_b_jam(): jam with PitB shoe.
+*/
+static u2_noun
+_hill_b_jam(u2_wire wir_r,
+            hi_shoz soa,
+            hi_shoa sob,
+            u2_noun som)
+{
+  u2_noun dog = _hill_a_call_1(wir_r, soa, sob, "jam", som);
+  u2_noun pro = u2_rx(wir_r, u2_t(dog));
+
+  u2_rz(wir_r, dog);
+  return pro;
+}
+            
+/* _hill_b_cue(): cue with PitB shoe.
+*/
+static u2_noun
+_hill_b_cue(u2_wire wir_r,
+            hi_shoz soa,
+            hi_shoa sob,
+            u2_noun som)
+{
+  u2_noun dog = _hill_a_call_1(wir_r, soa, sob, "cue", som);
+  u2_noun pro = u2_rx(wir_r, u2_t(dog));
+
+  u2_rz(wir_r, dog);
+  return pro;
+}
+            
 /* _hill_b_ream_txt(): ream `txt` as gene.
 */
 static u2_noun 
@@ -797,7 +827,27 @@ _hill_b_ream_txt(u2_wire wir_r,
   u2_noun duk = _hill_a_call_1(wir_r, soa, sob, "ream", txt);
   u2_noun pro = u2_rx(wir_r, u2_t(duk));
 
-  u2_err(wir_r, "pro", pro);
+          printf("jammin...\n");
+          {
+            u2_noun syc = _hill_b_jam(wir_r, soa, sob, pro);
+            u2_noun sac;
+
+            printf("jammed %d bits\n", u2_met(0, syc));
+
+            sac = _hill_b_cue(wir_r, soa, sob, syc);
+
+            if ( u2_yes == u2_sing(pro, sac) ) {
+              printf("they match.\n");
+            } else {
+              printf("they don't match.\n");
+              u2_err(wir_r, "pro", pro);
+              u2_err(wir_r, "sac", sac);
+            }
+            u2_rz(wir_r, sac);
+            u2_rz(wir_r, syc);
+          }
+          printf("jammed.\n");
+
   u2_rz(wir_r, duk);
   return pro;
 }

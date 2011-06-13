@@ -453,6 +453,7 @@ J266_2_OFILES=\
        gen266/2/weld.o
 
 J266_3_OFILES=\
+       gen266/3/can.o \
        gen266/3/cap.o \
        gen266/3/cat.o \
        gen266/3/con.o \
@@ -463,6 +464,7 @@ J266_3_OFILES=\
        gen266/3/end.o \
        gen266/3/gor.o \
        gen266/3/hor.o \
+       gen266/3/jam.o \
        gen266/3/lsh.o \
        gen266/3/mas.o \
        gen266/3/mat.o \

@@ -28,7 +28,7 @@
       }
       if ( u2_yes == u2_sing(x, a) ) {
         u2_rz(wir_r, x);
-        return u2_bc(wir_r, _1, _1);
+        return u2_bc(wir_r, _1, _0);
       }
       c = j2_mbc(Pit, sub)(wir_r, x, a);
       d = j2_mbc(Pit, inc)(wir_r, x);

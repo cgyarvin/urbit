@@ -344,6 +344,14 @@
     1
   (mul 2 $(a (dec a)))
 ::
+++  can
+  ~.  %can
+  |=  [a=*bloq b=*(list <[p=@ q=@]>)]
+  ^-  @
+  ?~  b
+    0
+  (mix (end a p.i.b q.i.b) (lsh a p.i.b $(b t.b)))
+::
 ++  cat
   ~.  %cat
   |=  [a=*bloq b=@ c=@]
@@ -599,6 +607,7 @@
   [(add 2 p.d) (need (~(get by m) q.d)) m]
 ::
 ++  jam
+  ~.  %jam
   |=  a=*
   ^-  @
   =+  b=`@`0
@@ -638,7 +647,7 @@
   ^-  [p=@ q=@]
   =+  c==+(c=`@`0 |-(?.(.=(0 (cut 0 [(add a c) 1] b)) c $(c .+(c)))))
   ?:  .=(0 c)
-    [1 1]
+    [1 0]
   =+  d=(add a .+(c))
   =+  e=(add (bex (dec c)) (cut 0 [d (dec c)] b))
   [(add (add c c) e) (cut 0 [(add d (dec c)) e] b)]

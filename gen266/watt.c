@@ -41,6 +41,7 @@
 
   /* tier 3
   */
+    extern u2_ho_jet j2_mbj(Pit, can)[];
     extern u2_ho_jet j2_mbj(Pit, cap)[];
     extern u2_ho_jet j2_mbj(Pit, cat)[];
     extern u2_ho_jet j2_mbj(Pit, con)[];
@@ -50,6 +51,8 @@
     extern u2_ho_jet j2_mbj(Pit, dor)[];
     extern u2_ho_jet j2_mbj(Pit, end)[];
     extern u2_ho_jet j2_mbj(Pit, gor)[];
+    extern u2_ho_jet j2_mbj(Pit, hor)[];
+    extern u2_ho_jet j2_mbj(Pit, jam)[];
     extern u2_ho_jet j2_mbj(Pit, lsh)[];
     extern u2_ho_jet j2_mbj(Pit, mas)[];
     extern u2_ho_jet j2_mbj(Pit, mat)[];
@@ -136,6 +139,7 @@
 
     /* tier 3
     */
+      { j2_sb(Pit, can), j2_mbj(Pit, can), 0, 0, u2_none },
       { j2_sb(Pit, cap), j2_mbj(Pit, cap), 0, 0, u2_none },
       { j2_sb(Pit, cat), j2_mbj(Pit, cat), 0, 0, u2_none },
       { j2_sb(Pit, con), j2_mbj(Pit, con), 0, 0, u2_none },
@@ -145,6 +149,8 @@
       { j2_sb(Pit, dis), j2_mbj(Pit, dis), 0, 0, u2_none },
       { j2_sb(Pit, end), j2_mbj(Pit, end), 0, 0, u2_none },
       { j2_sb(Pit, gor), j2_mbj(Pit, gor), 0, 0, u2_none },
+      { j2_sb(Pit, hor), j2_mbj(Pit, hor), 0, 0, u2_none },
+      { j2_sb(Pit, jam), j2_mbj(Pit, jam), 0, 0, u2_none },
       { j2_sb(Pit, lsh), j2_mbj(Pit, lsh), 0, 0, u2_none },
       { j2_sb(Pit, mas), j2_mbj(Pit, mas), 0, 0, u2_none },
       { j2_sb(Pit, mat), j2_mbj(Pit, mat), 0, 0, u2_none },
