@@ -43,10 +43,9 @@
 
         y = j2_mbc(Pit, add)(wir_r, u2_h(u), u2_h(v));
 
-
         p = j2_mbc(Pit, add)(wir_r, _2, y);
         q = w;
-        r = j2_mcc(Pit, by, put)(wir_r, m, b, w);
+        r = j2_mcc(Pit, by, put)(wir_r, u2_t(u2_t(v)), b, w);
 
         u2_rz(wir_r, u); u2_rz(wir_r, v); u2_rz(wir_r, x); u2_rz(wir_r, y);
       }
@@ -56,7 +55,6 @@
 
         p = j2_mbc(Pit, add)(wir_r, _2, u2_h(d));
         if ( u2_nul == x ) {
-          u2_err(wir_r, "ptr not found", u2_h(d));
           return u2_bl_bail(wir_r, c3__exit);
         }
         q = u2_rx(wir_r, u2_t(x));
@@ -97,6 +95,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pit, cue)[] = {
-    { ".3", c3__hevy, j2_mb(Pit, cue), Tier3_test, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mb(Pit, cue), Tier3, u2_none, u2_none },
     { }
   };

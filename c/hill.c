@@ -827,27 +827,6 @@ _hill_b_ream_txt(u2_wire wir_r,
   u2_noun duk = _hill_a_call_1(wir_r, soa, sob, "ream", txt);
   u2_noun pro = u2_rx(wir_r, u2_t(duk));
 
-          printf("jammin...\n");
-          {
-            u2_noun syc = _hill_b_jam(wir_r, soa, sob, pro);
-            u2_noun sac;
-
-            printf("jammed %d bits\n", u2_met(0, syc));
-
-            sac = _hill_b_cue(wir_r, soa, sob, syc);
-
-            if ( u2_yes == u2_sing(pro, sac) ) {
-              printf("they match.\n");
-            } else {
-              printf("they don't match.\n");
-              u2_err(wir_r, "pro", pro);
-              u2_err(wir_r, "sac", sac);
-            }
-            u2_rz(wir_r, sac);
-            u2_rz(wir_r, syc);
-          }
-          printf("jammed.\n");
-
   u2_rz(wir_r, duk);
   return pro;
 }
