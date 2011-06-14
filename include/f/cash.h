@@ -11,8 +11,12 @@
   ***
   ***   A logical key is the combination of an opaque
   ***   function salt, any number < (1 << 31), and a
-  ***   sample noun.  Matches are in every case within
+  ***   sample list.  Matches are in every case within
   ***   the salt.
+  ***
+  ***   All the nouns in the sample list are equal, but 
+  ***   duplicate.  Comparing duplicates is expensive, so
+  ***   the hash-table stores every duplicate it finds.
   ***
   ***   The search key is the mug of the salt, XORed 
   ***   with the mug of the sample.  [XX - This sacrifices
@@ -28,7 +32,7 @@
   ***   all improbable, revert to linear search.  16 collisions
   ***   on the same 31-bit key will produce storage failure.
   ***
-  ***   Future revisions will add a reclamation mode based on 
+  ***   Future revisions should add a reclamation mode based on 
   ***   the "clock algorithm" (a variant on LRU).  The clock
   ***   rotates around search-key space.  Entries are reclaimed
   ***   if they are clocked out and either key or value has a
@@ -109,13 +113,36 @@
 
   /** Functions.
   **/
+    /* u2_cs_free():
+    **
+    **   Release an old hashtable.
+    */
+      void
+      u2_cs_free(u2_ray  ral_r,
+                 u2_ray  lot_r);                                    //  submit
+
     /* u2_cs_init():
     **
-    **   Initialize empty slot.
+    **  Initialize slot to empty.
     */
       void
       u2_cs_init(u2_ray lot_r);
 
+    /* u2_cs_lose():
+    **
+    **   Release all resources in and under slot (but not slot itself).
+    */
+      void
+      u2_cs_lose(u2_ray  ral_r,
+                 u2_ray lot_r);                                     //  submit
+
+    /* u2_cs_make():
+    **
+    **  Create a new hashtable.
+    */
+      u2_ray                                                        //  produce
+      u2_cs_make(u2_ray  ral_r);
+        
     /* u2_cs_find():
     **
     **   Find `sam` for `sel`, or return `u2_none`.

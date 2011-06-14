@@ -1,24 +1,15 @@
-~%    %watt.266
+~%    %watt.265
     ~ 
   ==
-    %ut  ut
-    %go  go
-    %to  to
+    %go    go
+    %seed  seed
+    %to    to
+    %ut    ut
   ==
 &.
-::
-  ::  Tier 1, atomic arithmetic
-::
-++  fib
-  |=  a=@
-  ~+
-  ~#
-  ^-  @
-  ?-    a
-      0   0
-      1   1
-      *   (add $(a (sub a 1)) $(a (sub a 2)))
-  ==
+::::
+::::  Tier 1, atomic arithmetic
+::::
 ++  add
   ~.  %add
   |=  [a=@ b=@] 
@@ -26,14 +17,6 @@
   ?:  .=(0 a)
     b
   $(a (dec a), b .+(b))
-::
-++  bex
-  ~.  %bex
-  |=  [a=@]
-  ^-  @
-  ?:  .=(0 a)
-    1
-  (mul 2 $(a (dec a)))
 ::
 ++  dec
   ~.  %dec
@@ -133,8 +116,10 @@
   ?:  .=(0 b)
     a
   $(a (dec a), b (dec b))
-::
-  ::  Tier 2, lists and units
+::::
+::::  Tier 2, lists and units
+::::
+::      Tier 2a, units
 ::
 ++  bind
   ~.  %bind 
@@ -158,6 +143,31 @@
   ?~  a
     ~
   [i=u.a t=~]
+::
+++  mate
+  |*  [a=*(unit) b=*(unit)]
+  ?~  a
+    b
+  ?~  b
+    a
+  ?.(.=(u.a u.b) ~|('mate' !!) a)
+::
+++  need
+  ~.  %need
+  |*  a=*(unit)
+  ?~  a
+    !!
+  u.a
+::
+++  unit
+  |*  a=<*>
+  |=  b=*
+  ?-    b
+      ~       ~
+      [~ *]   [~ u=(a +.b)]
+  ==
+::
+::    Tier 2b, lists
 ::
 ++  flop
   ~.  %flop
@@ -206,21 +216,6 @@
       ~           ~
       [i=* t=*]   [i=(a i.b) t=$(b t.b)]
   ==
-::
-++  mate
-  |*  [a=*(unit) b=*(unit)]
-  ?~  a
-    b
-  ?~  b
-    a
-  ?.(.=(u.a u.b) ~|('mate' !!) a)
-::
-++  need
-  ~.  %need
-  |*  a=*(unit)
-  ?~  a
-    !!
-  u.a
 ::
 ++  reel
   ~.  %reel
@@ -296,14 +291,6 @@
     ~
   [i=(b i.a) t=$(a t.a)]
 ::
-++  unit
-  |*  a=<*>
-  |=  b=*
-  ?-    b
-      ~       ~
-      [~ *]   [~ u=(a +.b)]
-  ==
-::
 ++  weld
   ~.  %weld
   |*  [a=*(list) b=*(list)]
@@ -312,11 +299,12 @@
   ?~  a
     b
   [i.a $(a t.a)]
-::
-  ::  Tier 3, noun surgery
+::::
+::::  Tier 3, noun surgery
+::::
+::      Tier 3a, axes
 ::
 ++  axis  <@>
-++  bloq  <@>
 ++  cap
   ~.  %cap
   |=  [a=*axis]
@@ -327,11 +315,100 @@
       *<0 1>  !!
       *       $(a (div a 2))
   ==
-::  
+::
+++  mas
+  ~.  %mas
+  |=  [a=*axis]
+  ^-  *axis
+  ?-  a
+    1   !!
+    2   1
+    3   1
+    *   (add (mod a 2) (mul $(a (div a 2)) 2))
+  ==
+::
+++  peg
+  ~.  %peg
+  |=  [a=*axis b=*axis]
+  ^-  *axis
+  ?-  b
+    1   a
+    2   (mul a 2)
+    3   .+((mul a 2))
+    *   (add (mod b 2) (mul $(b (div b 2)) 2))
+  ==
+::
+::      Tier 3b, bit surgery
+::
+++  bloq  <@>
+++  bex
+  ~.  %bex
+  |=  [a=@]
+  ^-  @
+  ?:  .=(0 a)
+    1
+  (mul 2 $(a (dec a)))
+::
+++  can
+  ~.  %can
+  |=  [a=*bloq b=*(list <[p=@ q=@]>)]
+  ^-  @
+  ?~  b
+    0
+  (mix (end a p.i.b q.i.b) (lsh a p.i.b $(b t.b)))
+::
 ++  cat
   ~.  %cat
   |=  [a=*bloq b=@ c=@]
   (add (lsh a (met a b) c) b)
+::
+++  cut
+  ~.  %cut
+  |=  [a=*bloq [b=@ c=@] d=@]
+  (end a c (rsh a b d))
+::
+++  end
+  ~.  %end
+  |=  [a=*bloq b=@ c=@]
+  (mod c (bex (mul (bex a) b)))
+::
+++  lsh
+  ~.  %lsh
+  |=  [a=*bloq b=@ c=@]
+  (mul (bex (mul (bex a) b)) c)
+::
+++  met
+  ~.  %met
+  |=  [a=*bloq b=@]
+  ^-  @
+  =+  c=`@`0
+  |-
+  ?:  .=(0 b)
+    c
+  $(b (rsh a 1 b), c .+(c))
+::
+++  rap
+  ~.  %rap
+  |=  [a=*bloq b=*(list <@>)]
+  ^-  @
+  ?~  b
+    0
+  (cat a i.b $(b t.b))
+::
+++  rip
+  ~.  %rip
+  |=  [a=*bloq b=@]
+  ^-  *(list <@>)
+  ?:  .=(0 b)
+    ~
+  [(end a 1 b) $(b (rsh a 1 b))]
+::
+++  rsh
+  ~.  %rsh
+  |=  [a=*bloq b=@ c=@]
+  (div c (bex (mul (bex a) b)))
+::
+::      Tier 3c, bit logic
 ::
 ++  con
   ~.  %con
@@ -347,11 +424,6 @@
     d   (add d (lsh 0 c ?&(.=(0 (end 0 1 a)) .=(0 (end 0 1 b)))))
   ==
 ::
-++  cut
-  ~.  %cut
-  |=  [a=*bloq [b=@ c=@] d=@]
-  (end a c (rsh a b d))
-::
 ++  dis
   ~.  %dis
   |=  [a=@ b=@]
@@ -365,6 +437,23 @@
     c   .+(c)
     d   (add d (lsh 0 c ?|(.=(0 (end 0 1 a)) .=(0 (end 0 1 b)))))
   ==
+::
+++  mix
+  ~.  %mix
+  |=  [a=@ b=@]
+  ^-  @
+  =+  [c=`@`0 d=`@`0]
+  |-
+  ?:  ?&(.=(0 a) .=(0 b))
+    d
+  %=  $
+    a   (rsh 0 1 a)
+    b   (rsh 0 1 b)
+    c   .+(c)
+    d   (add d (lsh 0 c .=((end 0 1 a) (end 0 1 b))))
+  ==
+::
+::      Tier 3d, noun orders
 ::
 ++  dor
   ~.  %dor
@@ -381,11 +470,6 @@
   ?.  ?=(@ b)
     &
   (lth a b)
-::
-++  end
-  ~.  %end
-  |=  [a=*bloq b=@ c=@]
-  (mod c (bex (mul (bex a) b)))
 ::
 ++  gor
   ~.  %gor
@@ -410,46 +494,16 @@
     (gor +.a +.b)
   (gor -.a -.b)
 ::
-++  lsh
-  ~.  %lsh
-  |=  [a=*bloq b=@ c=@]
-  (mul (bex (mul (bex a) b)) c)
+++  vor
+  ~.  %vor
+  |=  [a=* b=*]
+  ^-  ?
+  =+  [c=(mug (mug a)) d=(mug (mug b))]
+  ?:  .=(c d)
+    (dor a b)
+  (lth c d)
 ::
-++  mix
-  ~.  %mix
-  |=  [a=@ b=@]
-  ^-  @
-  =+  [c=`@`0 d=`@`0]
-  |-
-  ?:  ?&(.=(0 a) .=(0 b))
-    d
-  %=  $
-    a   (rsh 0 1 a)
-    b   (rsh 0 1 b)
-    c   .+(c)
-    d   (add d (lsh 0 c .=((end 0 1 a) (end 0 1 b))))
-  ==
-::
-++  met
-  ~.  %met
-  |=  [a=*bloq b=@]
-  ^-  @
-  =+  c=`@`0
-  |-
-  ?:  .=(0 b)
-    c
-  $(b (rsh a 1 b), c .+(c))
-::
-++  mas
-  ~.  %mas
-  |=  [a=*axis]
-  ^-  *axis
-  ?-  a
-    1   !!
-    2   1
-    3   1
-    *   (add (mod a 2) (mul $(a (div a 2)) 2))
-  ==
+::      Tier 3e, insecure hashing
 ::
 ++  mug
   ~.  %mug
@@ -535,51 +589,79 @@
      /fe8c511a\ /a9afcd63\ /ba9cd382\ /352598d8
   --
 ::
-++  peg
-  ~.  %peg
-  |=  [a=*axis b=*axis]
-  ^-  *axis
-  ?-  b
-    1   a
-    2   (mul a 2)
-    3   .+((mul a 2))
-    *   (add (mod b 2) (mul $(b (div b 2)) 2))
-  ==
+::      Tier 3f, packing
 ::
-++  rap
-  ~.  %rap
-  |=  [a=*bloq b=*(list <@>)]
+++  cue
+  ~.  %cue
+  |=  a=@
+  ^-  *
+  =+  b=`@`0
+  =+  m=`*(map <@> <*>)`~
+  =<  q
+  |-  ^-  [p=@ q=* r=m]
+  ?:  .=(0 (cut 0 [b 1] a))
+    =+  c=(rub .+(b) a)
+    [.+(p.c) q.c (~(put by m) b q.c)]
+  =+  c=(add 2 b)
+  ?:  .=(0 (cut 0 [.+(b) 1] a))
+    =+  u=$(b c)
+    =+  v=$(b (add p.u c), m r.u)
+    =+  w=[q.u q.v]
+    [(add 2 (add p.u p.v)) w (~(put by r.v) b w)]
+  =+  d=(rub c a)
+  [(add 2 p.d) (need (~(get by m) q.d)) m]
+::
+++  jam
+  ~.  %jam
+  |=  a=*
   ^-  @
-  ?~  b
-    0
-  (cat a i.b $(b t.b))
+  =+  b=`@`0
+  =+  m=`*(map <*> <@>)`~
+  =<  q
+  |-  ^-  [p=@ q=@ r=m] 
+  =+  c=(~(get by m) a)
+  ?~  c
+    =>  .(m (~(put by m) a b))
+    ?:  ?=(@ a)
+      =+  d=(mat a)
+      [(add 1 p.d) (lsh 0 1 q.d) m]
+    =>  .(b (add 2 b))
+    =+  d=$(a -.a)
+    =+  e=$(a +.a, b (add b p.d), m r.d)
+    [(add 2 (add p.d p.e)) (mix 1 (lsh 0 2 (cat 0 q.d q.e))) r.e]
+  ?:  ?&(?=(@ a) (lte (met 0 a) (met 0 u.c)))
+    =+  d=(mat a)
+    [(add 1 p.d) (lsh 0 1 q.d) m]
+  =+  d=(mat u.c)
+  [(add 2 p.d) (mix 3 (lsh 0 2 q.d)) m]
 ::
-++  rip
-  ~.  %rip
-  |=  [a=*bloq b=@]
-  ^-  *(list <@>)
-  ?:  .=(0 b)
-    ~
-  [(end a 1 b) $(b (rsh a 1 b))]
+++  mat
+  ~.  %mat
+  |=  a=@
+  ^-  [p=@ q=@]
+  ?:  .=(0 a)
+    [1 1]
+  =+  b=(met 0 a)
+  =+  c=(met 0 b)
+  :-  (add (add c c) b)
+  (cat 0 (bex c) (mix (end 0 (dec c) b) (lsh 0 (dec c) a)))
 ::
-++  rsh
-  ~.  %rsh
-  |=  [a=*bloq b=@ c=@]
-  (div c (bex (mul (bex a) b)))
-::
-++  vor
-  ~.  %vor
-  |=  [a=* b=*]
-  ^-  ?
-  =+  [c=(mug (mug a)) d=(mug (mug b))]
-  ?:  .=(c d)
-    (dor a b)
-  (lth c d)
-::
-  ::  Tier 4, associative containers
+++  rub
+  ~.  %rub
+  |=  [a=@ b=@]
+  ^-  [p=@ q=@]
+  =+  c==+(c=`@`0 |-(?.(.=(0 (cut 0 [(add a c) 1] b)) c $(c .+(c)))))
+  ?:  .=(0 c)
+    [1 0]
+  =+  d=(add a .+(c))
+  =+  e=(add (bex (dec c)) (cut 0 [d (dec c)] b))
+  [(add (add c c) e) (cut 0 [(add d (dec c)) e] b)]
+::::
+::::  Tier 4, containers
+::::
+::      Tier 4a, sets
 ::
 ++  set   |*(a=<*> (tree a))
-++  map   |*([a=<*> b=<*>] (tree <[p=*a q=*b]>))
 ++  in
   ~.  %in
   &=  a=*(set)
@@ -648,6 +730,9 @@
     $(a r.a, b [n.a $(a l.a)])
   --
 ::
+::      Tier 4b, maps
+::
+++  map   |*([a=<*> b=<*>] (tree <[p=*a q=*b]>))
 ++  by
   ~.  %by
   &=  a=*(map)
@@ -721,15 +806,14 @@
       b
     $(a r.a, b [n.a $(a l.a)])
   --
-::
-  ::  Tier 5, parsing and pretty-printing
-::
-::
-  ::  Tier 5a, core 0, internal and miscellaneous
+::::
+::::  Tier 5, parsing and printing
+::::
+::      Tier 5a/0, parsing: internal and miscellaneous
 ::
 ++  char  <@>
 ++  clip  <[p=*hair q=*tape]>
-++  edge  <[p=*hair q=*(unit <[p=* q=*tape]>)]>
+++  edge  <[p=*hair q=*(unit <[p=* q=*clip]>)]>
 ++  hair  <[p=`@`1 q=`@`1]>
 ++  know  |*(vex=*edge ?~(q.vex !! p.u.q.vex))
 ++  last  |=  [zyc=*hair naz=*hair]
@@ -739,27 +823,25 @@
           ?:((gth p.zyc p.naz) zyc naz)
 ++  like  |*  a=<*>
           |=  b=*
-          [p=(hair -.b) q=?~(+.b ~ [~ u=[p=(a +>-.b) q=(tape +>+.b)]])]
+          :-  p=(hair -.b) 
+          q=?~(+.b ~ [~ u=[p=(a +>-.b) q=[p=(hair -.b) q=(tape +.b)]]])
 ++  rash  |*([naf=@ sab=rule] (rasp (rip 3 naf) sab))
 ++  rasp  |*  [los=*tape sab=rule]
-          =+  vex=(sab *hair los)
+          =+  vex=((full sab) [p=*hair q=los])
           ?~  q.vex
-            ~~  `*bill`[%grip ['[' ']'] ~(dem go p.p.vex) ~(dem go q.p.vex) ~]
-            ~|('syntax error/a' !!)
-          ?.  .=(~ q.u.q.vex) 
-            ~~  `*bill`[%grip ['[' ']'] ~(dem go p.p.vex) ~(dem go q.p.vex) ~]
-            ~|('syntax error/b' !!)
+            ~~  `*bill`[%grip ['{' '}'] ~(dem go p.p.vex) ~(dem go q.p.vex) ~]
+            ~|('syntax error' !!)
           p.u.q.vex
 ++  slip  |=  [weq=*char naz=*hair]
           ^-  *hair
           ?:(.=(10 weq) [.+(p.naz) 1] [p.naz .+(q.naz)])
 ++  rock  <@>
-++  rule  |=(p=*clip `*edge`[p.p ~ ~ q.p])
+++  rule  |=(p=*clip `*edge`[p.p ~ ~ p])
 ++  tape  (list char)
 ++  term  <@>
 ++  wall  (list tape)
 ::
-  ::  Tier 5a, core 1, custom processing
+::      Tier 5a/1, parsing: custom processing
 ::
 ++  cold
   |*  [cus=* sef=rule]
@@ -781,9 +863,23 @@
   |*  huf=*
   |=  tub=*clip
   ^-  *(like <huf>)
-  [p=p.tub q=[~ u=[p=huf q=q.tub]]]
+  [p=p.tub q=[~ u=[p=huf q=tub]]]
 ::
 ++  fail  |=(tub=*clip [p=p.tub q=~])
+++  full
+  |*  sef=rule
+  |=  tub=*clip
+  =+  vex=(sef tub)
+  ?~(q.vex vex ?:(.=(~ q.q.u.q.vex) vex [p=p.vex q=~]))
+::
+++  here
+  |*  [hez=|=([a=*spot b=*] [a b]) sef=rule]
+  |=  tub=*clip
+  =+  vex=(sef tub)
+  ?~  q.vex
+    vex
+  [p=p.vex q=[~ u=[p=(hez [%% p.tub p.q.u.q.vex] p.u.q.vex) q=q.u.q.vex]]]
+::
 ++  just
   |=  daf=*char
   |=  tub=*clip
@@ -792,7 +888,7 @@
     (fail tub) 
   ?.  .=(daf i.q.tub)
     (fail tub)
-  [(slip i.q.tub p.tub) [~ i.q.tub t.q.tub]]
+  (next tub)
 ::
 ++  knee
   |*  [gar=* sef=|.(rule)]
@@ -808,7 +904,7 @@
     (fail tub) 
   ?.  (lien bud |=(a=*char .=(i.q.tub a)))
     (fail tub)
-  [(slip i.q.tub p.tub) [~ i.q.tub t.q.tub]]
+  (next tub)
 ::
 ++  mend
   |*  [sef=rule zil=*(list <[p=|=([a=* b=*] [a b]) q=rule]>)]
@@ -822,10 +918,19 @@
     ?~  zil
       [p=p.vex q=~]
     =+  lig=(q.i.zil tub) 
+    =+  yur=(last p.vex p.lig) 
     ?~  q.lig
-      $(zil t.zil)
-    [p=p.lig q=[~ u=[p=(p.i.zil p.u.q.vex p.u.q.lig) q=q.u.q.lig]]]
+      $(p.vex yur, zil t.zil)
+    [p=yur q=[~ u=[p=(p.i.zil p.u.q.vex p.u.q.lig) q=q.u.q.lig]]]
   --
+::
+++  next
+  |=  tub=*clip
+  ^-  *(like char)
+  ?~  q.tub
+    (fail tub) 
+  =+  zac=(slip i.q.tub p.tub) 
+  [zac [~ i.q.tub [zac t.q.tub]]]
 ::
 ++  shim
   |=  zep=[p=*char q=*char]
@@ -835,18 +940,7 @@
     (fail tub) 
   ?.  ?&((gte i.q.tub p.zep) (lte i.q.tub q.zep))
     (fail tub)
-  [(slip i.q.tub p.tub) [~ i.q.tub t.q.tub]]
-::
-++  stir
-  |*  [rud=* raq=|*([a=* b=*] [a b]) fel=rule]
-  |=  tub=*clip 
-  ^-  *(like <rud>)
-  =+  vex=(fel tub) 
-  ?~  q.vex
-    [p.tub [~ rud q.tub]]
-  =+  wag=$(p.tub p.vex, q.tub q.u.q.vex)
-  ?>  ?=(^ q.wag)
-  [p.wag [~ (raq p.u.q.vex p.u.q.wag) q.u.q.wag]]
+  (next tub)
 ::
 ++  stag
   |*  [gob=* sef=rule]
@@ -856,27 +950,40 @@
     vex
   [p=p.vex q=[~ u=[p=[gob p.u.q.vex] q=q.u.q.vex]]]
 ::
-  ::  Tier 5a, core 2, bolts
+++  stir
+  |*  [rud=* raq=|*([a=* b=*] [a b]) fel=rule]
+  |=  tub=*clip 
+  ^-  *(like <rud>)
+  =+  vex=(fel tub) 
+  ?~  q.vex
+    [p.vex [~ rud tub]]
+  =+  wag=$(tub q.u.q.vex)
+  ?>  ?=(^ q.wag)
+  [(last p.vex p.wag) [~ (raq p.u.q.vex p.u.q.wag) q.u.q.wag]]
+::
+::      Tier 5a/2, parsing: bolts
 ::
 ++  bend
   |*  raq=|*([a=* b=*] [a b])
   |*  [vex=*edge sab=rule]
   ?~  q.vex
     vex 
-  =+  yit=(sab p.vex q.u.q.vex)
+  =+  yit=(sab q.u.q.vex)
+  =+  yur=(last p.vex p.yit)
   ?~  q.yit
-    [p=p.yit q=q.vex]
-  [p=p.yit q=[~ u=[p=(raq p.u.q.vex p.u.q.yit) q=q.u.q.yit]]]
+    [p=yur q=q.vex]
+  [p=yur q=[~ u=[p=(raq p.u.q.vex p.u.q.yit) q=q.u.q.yit]]]
 ::
 ++  comp
   |*  raq=|*([a=* b=*] [a b])
   |*  [vex=*edge sab=rule]
   ?~  q.vex
     vex
-  =+  yit=(sab p.vex q.u.q.vex)
+  =+  yit=(sab q.u.q.vex)
+  =+  yur=(last p.vex p.yit)
   ?~  q.yit
     yit
-  [p=p.yit q=[~ u=[p=(raq p.u.q.vex p.u.q.yit) q=q.u.q.yit]]]
+  [p=yur q=[~ u=[p=(raq p.u.q.vex p.u.q.yit) q=q.u.q.yit]]]
 ::
 ++  glue
   |*  bus=rule
@@ -887,28 +994,25 @@
   |*  [vex=*edge sab=rule]
   ?~  q.vex
     vex
-  (sab p.vex q.u.q.vex)
+  =+  yit=(sab q.u.q.vex)
+  [p=(last p.yit p.vex) q=q.yit]
 ::
 ++  plug  *comp
 ++  pose
   |*  [vex=*edge sab=rule]
   ?~  q.vex
-    =+  roq=$:sab
-    ?~  q.roq
-      [p=(last p.vex p.roq) q=~]
-    roq
+    =+  roq=(sab)
+    [p=(last p.vex p.roq) q=q.roq]
   vex
 ::
 ++  sfix
   |*  [vex=*edge sab=rule]
   ?~  q.vex
     vex
-  =+  yit=(sab p.vex q.u.q.vex)
-  ?~  q.yit
-    yit
-  [p=p.yit q=[~ u=[p=p.u.q.vex q=q.u.q.yit]]]
+  =+  yit=(sab q.u.q.vex)
+  [p=(last p.vex p.yit) q=?~(q.yit ~ [~ u=[p=p.u.q.vex q=q.u.q.yit]])]
 ::
-  ::  Tier 5a, core 3, rule composers
+::      Tier 5a/3, parsing: rule composers
 ::
 ++  bass
   |*  [rum=@ tyd=rule]
@@ -950,14 +1054,14 @@
   |*  fel=rule
   (stir `*(list <(know *fel)>)`~ |*([a=* b=*] [a b]) fel)
 ::
-  ::  Tier 5a, core 4, ASCII and utilities
+::      Tier 5a/4, parsing: ASCII and utilities
 ::
 ++  ace  (just ' ')
 ++  alf  ;~(pose low hig)
 ++  aln  ;~(pose low hig num)
 ++  bar  (just '|')
 ++  bet  ;~(pose (cold 2 dap) (cold 3 pad))
-++  bin  (bass 2 (most gon bit))
+++  bin  (bass 2 (plus bit))
 ++  bit  (cook |=(a=@ (sub a '0')) (shim '0' '1'))
 ++  bon  (just '=')
 ++  bot  (just '\'')
@@ -971,15 +1075,14 @@
 ++  des  (just '{')
 ++  dot  (just '.')
 ++  del  (just '<')
-++  dem  (bass 10 (most gon dit))
+++  dem  (bass 10 (plus dit))
 ++  dit  (cook |=(a=@ (sub a '0')) (shim '0' '9'))
 ++  dun  (cold ~ ;~(plug dap dap))
 ++  duz  (cold ~ ;~(plug bon bon))
 ++  gal  ;~(pose (cold 2 del) (cold 3 led))
 ++  gap  (cold ~ (plus ;~(pose vul (mask [10 32 ~]))))
 ++  gay  ;~(pose gap (easy ~))
-++  gon  ;~(pose ;~(plug nov gay von) (easy ~))
-++  hex  (bass 16 (most gon hit))
+++  hex  (bass 16 (plus hit))
 ++  hig  (shim 'A' 'Z')
 ++  hit  ;~(pose dit (cook |=(a=*char (sub a 87)) (shim 'a' 'f')))
 ++  ket  (just '^')
@@ -997,38 +1100,35 @@
 ++  pam  (just '&')
 ++  pel  (just ')')
 ++  poy  ;~(pfix nov ;~(pose nov bot mes))
-++  qit  ;~(pose (shim 32 38) (shim 40 91) (shim 93 126) poy)
-++  quo  (ifix [bot bot] (boss 256 (plus qit)))
+++  qit  ;~(pose (shim 32 38) (shim 40 91) (shim 92 126) poy)
+++  quo  (ifix [bot bot] (bass 256 (plus qit)))
 ++  sec  (just '$')
 ++  sed  (just '}')
 ++  sig  (just '~')
-++  sym 
-  %+  cook
-    |=(a=*tape (rap 3 a))
-  ;~(plug low (star ;~(pose num low dap)))
-::
+++  sym   %+  cook
+            |=(a=*tape (rap 3 a))
+          ;~(plug low (star ;~(pose num low dap)))
 ++  tam  (just ';')
 ++  tar  (just '*')
 ++  tec  (just '`')
 ++  tob  (just '"')
-++  ven
-  ;~  (comp |=([a=@ b=@] (peg a b)))
-    bet
-    =+  hom=`?`|
-    |=  tub=*clip
-    ^-  *(like axis)
-    =+  vex=?:(hom (bet tub) (gal tub))
-    ?~  q.vex
-      [p.tub [~ 1 q.tub]] 
-    =+  wag=$(p.tub p.vex, hom !hom, q.tub q.u.q.vex)
-    ?>  ?=(^ q.wag)
-    [p.wag [~ (peg p.u.q.vex p.u.q.wag) q.u.q.wag]]
-  == 
+++  ven  ;~  (comp |=([a=@ b=@] (peg a b)))
+           bet
+           =+  hom=`?`|
+           |=  tub=*clip
+           ^-  *(like axis)
+           =+  vex=?:(hom (bet tub) (gal tub))
+           ?~  q.vex
+             [p.tub [~ 1 tub]] 
+           =+  wag=$(p.tub p.vex, hom !hom, tub q.u.q.vex)
+           ?>  ?=(^ q.wag)
+           [p.wag [~ (peg p.u.q.vex p.u.q.wag) q.u.q.wag]]
+         == 
 ++  von  (just '/')
 ++  vul  (cold ~ ;~(plug deg deg (star (shim 32 126)) (just 10)))
 ++  zap  (just '!')
 ::
-  ::  Tier 5b, core 0, prototypes
+::    Tier 5b/0, prettyprinting: types
 ::
 ++  tank
   |?  [%leaf p=*tape]
@@ -1037,7 +1137,7 @@
       [%farm p=[p=*tape q=*tape r=*tape] q=*(list (list tank))]
   ==
 ::
-  ::  Tier 5b, core 1, processors
+::    Tier 5b/1, prettyprinting: processors
 ::
 ++  re
   &=  tec=*tank
@@ -1291,9 +1391,9 @@
   ~%    %to  
       ->  
     ==
-      %wit  wit
-      %ram  ram
       %fly  fly
+      %ram  ram
+      %wit  wit
     ==
   &=  pup=*bill
   ++  fly
@@ -1522,6 +1622,7 @@
     [%brdt p=*gene]                                               ::  |.  bardot
     [%brpd p=*gene q=*gene]                                       ::  |+  barpad
     [%brtr p=*gene q=*gene]                                       ::  |*  bartar
+    [%brzp p=*gene q=*gene]                                       ::  |!  barzap
   ::
     [%csbn p=*gene q=*gene]                                       ::  ?=  casbon
     [%csbr p=*(list gene)]                                        ::  ?|  casbar
@@ -1567,6 +1668,7 @@
     [%pmdp p=*gene q=*(map term foot)]                            ::  &-  pamdap
     [%pmdt p=*(map term foot)]                                    ::  &.  pamdot
     [%pmpd p=*gene q=*(map term foot)]                            ::  &+  pampad
+    [%pmzp p=*gene q=*(map term foot)]                            ::  &!  pamzap
   ::
     [%sgbn p=*gene q=*gene]                                       ::  ~=  sigbon
     [%sgbr p=*gene q=*gene]                                       ::  ~|  sigbar
@@ -1589,8 +1691,10 @@
     [%tmtr p=*gene q=*gene]                                       ::  ;*  tamtar
   ::
     [%zpbn p=*gene]                                               ::  !=  zapbon
-    [%zpdx p=*gene]                                               ::  !#  zapdax
     [%zpcb p=*spot q=*gene]                                       ::  !_  zapcab
+    [%zpdx p=*gene]                                               ::  !#  zapdax
+    [%zpmt ~]                                                     ::  !%  zapmit
+    [%zptm p=*gene q=*gene]                                       ::  !;  zaptam
     [%zpzp ~]                                                     ::  !!  zapzap
   ==
 ::
@@ -1663,6 +1767,7 @@
         [%brdt *]   [%pmdt [[%% [& & p.gen]] ~ ~]]
         [%brpd *]   [%pmpd p.gen [[%% [& & q.gen]] ~ ~]]
         [%brtr *]   [%pmbn p.gen [[%% [& | q.gen]] ~ ~]]
+        [%brzp *]   [%bnld %zpmt [%brbn p.gen q.gen]]
         [%csbr *]
       |- 
       ?~(p.gen [%dtsg 1] [%csdg i.p.gen [%dtsg 0] $(p.gen t.p.gen)])
@@ -1721,6 +1826,7 @@
         [%mttr *]   [%bnld p.gen [%mtbn [%% ~] ~]]
         [%pmdp *]   [%bnld [%pmdt q.gen] p.gen] 
         [%pmbn *]   [%bnpd p.gen [%pmdt q.gen]]
+        [%pmzp *]   [%bnld [%zpmt ~] [%pmbn p.gen q.gen]]
         [%sgbn *]   [%sgld [%germ p.gen] q.gen]
         [%sgbr *]   [%sgld [%bean p.gen] q.gen]
         [%sgdg *]   [%sgld [%bank %dtsg p.gen] q.gen]
@@ -1976,11 +2082,14 @@
   ==
 ::  
 ++  ream  
-  ~.  %ream 
   |=  txt=@ 
-  ^-  *gene 
-  :: ~|('ream-soft' !!)
+  ^-  *gene
   (rash txt vest)
+::
+++  seed
+  ^-  [p=*type q=*]
+  ~+
+  !;(*type ..seed)
 ::  
 ++  ut
   ~%    %ut
@@ -2553,6 +2662,15 @@
         ~#
         $(gen p.gen)
       ::
+          [%zpmt ~]                                                   ::  !%
+        =+  pet=seed
+        [(nice p.pet) [1 q.pet]]
+      ::
+          [%zptm *]                                                   ::  !;
+        =+  vos=$(gol %noun, gen q.gen)
+        :-  (nice (cell (play p.gen) p.vos))      ::  XX validate!
+        (cons [1 p.vos] q.vos) 
+      ::
           [%zpzp ~]                                                   ::  !!
         :-  %void
         [0 0]
@@ -2702,7 +2820,7 @@
       ?-  ref
           %atom       .?(p.sut)
           [%cell *]   ?|  !.?(p.sut)
-                          $(sut [%cell [%cube -.p.sut] [%cube +.p.sut]])
+                          $(sut [%cell [%cube -.p.sut ] [%cube +.p.sut]])
                       ==
           [%cube *]   !.=(p.sut p.ref)
           *           $(sut ref, ref sut)
@@ -2887,7 +3005,13 @@
   --
 ::
 ++  vest
+  ~.  %vest
+  |=  tub=*clip
+  ^-  *(like gene)
+  %.  tub
+  %-  full
   =<  (ifix [gay gay] tall)
+  =+  bug=`?`|
   &.  
   ++  flat
     %+  knee  *gene  |.  ~+
@@ -2900,6 +3024,7 @@
       (stag %mttr ;~(pfix tar wide))
       (stag %ktdp ;~(plug ;~(pfix tec wide) ;~(pfix tec wide)))
       (stag %zpzp (cold ~ ;~(plug zap zap)))
+      (stag %zpmt (cold ~ ;~(plug zap mit)))
       %+  stag
         %mtsg 
       ;~  pfix 
@@ -3041,8 +3166,10 @@
           ==
           ;~  pfix  zap
             ;~  pose
-              (rune dax %zpdx expa)
               (rune bon %zpbn expa)
+              (rune tam %zptm expb)
+              ;~(pfix deg (toad expz))
+              (rune dax %zpdx expa)
             ==
           ==
         ==
@@ -3055,27 +3182,26 @@
         (cold & (just '+'))
         ;~  gunk 
           ;~(pose (cold | (just '-')) (cold & (just '+')))
-          ;~(pose (cold %% sec) sym)
+          sym
           loaf
         ==
       ==
+    ::
     ++  wing
       %-  hand
       %+  cook
         |=(a=*(list <[p=*term q=*foot]>) (~(gas by *(map term foot)) a))
       (more muck boot)
     ::
+    ++  toad
+      |*  har=expa
+      =+  dur=(ifix [lep pel] $:har(tol |))
+      ?:(tol ;~(pose ;~(pfix gap $:har(tol &)) dur) dur)
+    ::
     ++  rune
       |*  [dif=rule tuq=* har=expa]
-      ;~  pfix
-        dif
-        %+  stag
-          tuq
-        =+  dur=(ifix [lep pel] $:har(tol |))
-        ?:  tol
-          ;~(pose ;~(pfix gap $:har(tol &)) dur)
-        dur
-      ==
+      ;~(pfix dif (stag tuq (toad har)))
+    ::
     ++  glop  (glue mash)
     ++  gunk  (glue muck)
     ++  butt  |*(zor=rule ?:(tol ;~(sfix zor ;~(pfix gap duz)) zor))
@@ -3099,6 +3225,7 @@
     ++  expp  |.((butt ;~(gunk rope loaf rack)))
     ++  expq  |.(;~(gunk rope loaf loaf))
     ++  expx  |.(;~(gunk loaf wing))
+    ++  expz  |.(loaf(bug &))
     ++  hina  |.(;~(gunk (ifix [den ned] ;~(gunk dem dem)) loaf))
     ++  hinb  |.(;~(gunk bont loaf))
     ++  hinc  |.(;~(pose ;~(gunk bony loaf) ;~(plug (easy ~) loaf)))
@@ -3119,7 +3246,7 @@
       ;~  pose
         (cold ~ sig)
         %+  ifix
-          ?:(tol [p=;~(plug duz gap) q=;~(plug gap duz)] [p=lep q=pel])
+          ?:(tol [p=;~(plug dun gap) q=;~(plug gap dun)] [p=lep q=pel])
         (more mash ;~(gunk ;~(pfix mit sym) loaf))
       ==
     --
@@ -3140,7 +3267,7 @@
             [%mtbn [@ ~] ~]  [%ktbn i.p.ros p.vil]
             [%zpcb *]        $(ros q.ros)
           ==
-            %deg  [%bndl ros p.vil]
+            %deg  [%bnld ros p.vil]
             %lep  [%mtbn ~(rake ap ros) p.vil]
         ==
       flat
@@ -3163,7 +3290,7 @@
     %+  (slug `*twig`~ |=([a=*twig b=*twig] (weld a b)))
       dot
     ;~  pose
-      (cook |=(a=*(list) ?:(.=(~ +.a) [%% ~] [%% [~ 2] $(a +.a)])) (plus sec))
+      (cook |=(a=*(list) ?.(.?(-.a) [%% ~] [%% [~ 2] $(a +.a)])) (plus sec))
       %+  cook
         |=(a=*knot [a ~])
       ;~  pose
@@ -3172,7 +3299,13 @@
       ==
     ==
   ::
-  ++  tall  (knee *gene |.(~+(;~(pose (norm &) long))))
-  ++  wide  (knee *gene |.(~+(;~(pose (norm |) long))))
+  ++  tall  (knee *gene |.(~+((wart ;~(pose (norm &) long)))))
+  ++  wide  (knee *gene |.(~+((wart ;~(pose (norm |) long)))))
+  ++  wart  
+    |*  zor=rule 
+    %+  here 
+      |=  [a=*spot b=*gene] 
+      ?:(bug [%zpcb a b] b)
+    zor
   --
 --

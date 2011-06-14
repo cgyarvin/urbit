@@ -211,7 +211,7 @@ u2_ux_write(u2_wire     wir_r,
     c3_w    fln_w;
     c3_y*   fil_y;
 
-    fid_i = open(nam_c, O_WRONLY, 0666);
+    fid_i = open(nam_c, O_WRONLY | O_CREAT, 0666);
     if ( fid_i < 0 ) {
       return u2_no;
     }

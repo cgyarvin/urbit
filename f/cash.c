@@ -859,6 +859,18 @@ u2_cs_save_qual(u2_rail ral_r,
   return ret;
 }
 
+/* u2_cs_free():
+**
+**   Release an old hashtable.
+*/
+void
+u2_cs_free(u2_rail ral_r,
+           u2_ray  lot_r)                                         //  submit
+{
+  u2_cs_lose(ral_r, lot_r);
+  u2_rl_rfree(ral_r, lot_r);
+}
+
 /* u2_cs_init():
 **
 **  Initialize slot to empty.
@@ -868,3 +880,46 @@ u2_cs_init(u2_ray lot_r)
 {
   u2_slot_c_emt(lot_r) = u2_slot_emty;
 }
+
+/* u2_cs_lose():
+**
+**   Release all resources in and under slot (but not slot itself).
+*/
+void
+u2_cs_lose(u2_rail ral_r,
+           u2_ray lot_r)                                          //  submit
+{
+  if ( u2_slot_is_a(lot_r) ) {
+    u2_rz(ral_r, u2_slot_a_sap(lot_r));
+    u2_rz(ral_r, u2_slot_a_pro(lot_r));
+  }
+  else if ( u2_slot_is_b(lot_r) ) {
+    u2_ray sid_r = u2_slot_b_sid(lot_r);
+    c3_w   i_w;
+
+    for ( i_w = 0; i_w < 16; i_w++ ) {
+      u2_ray tol_r = (sid_r + ((i_w) * c3_wiseof(u2_cash_slot_a)));
+
+      u2_cs_lose(ral_r, tol_r);
+    }
+    u2_rl_rfree(ral_r, sid_r);
+  }
+}
+
+/* u2_cs_make():
+**
+**  Create a new hashtable.
+*/
+u2_ray                                                            //  produce
+u2_cs_make(u2_rail ral_r)
+{
+  u2_ray lot_r = u2_rl_ralloc(ral_r, c3_wiseof(u2_cash_slot_a));
+
+  if ( 0 == lot_r ) {
+    return 0;
+  } else {
+    u2_cs_init(lot_r);
+    return lot_r;
+  }
+}
+

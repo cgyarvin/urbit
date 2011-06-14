@@ -18,7 +18,7 @@
 #define   FileZ   "watt/268"
 #define   FileA   "watt/267"
 #define   FileB   "watt/266"
-#define   FileC   "watt/test-265"
+#define   FileC   "watt/265"
 
   /**   Interpreter data structures.
   **/
@@ -1301,6 +1301,33 @@ hill_boot(void)
       Hill->soc = u2_rl_take(u2_wire_bas_r(wir_r), soc);
       u2_rl_fall(wir_r);
 
+#if 0
+      {
+        u2_noun soa = Hill->soa;
+        u2_noun sob = Hill->sob;
+        u2_noun dat = sob;
+        u2_noun pak, bag;
+
+        fprintf(stderr, "jam test: jam\n");
+        u2_bx_boot(wir_r);
+        pak = _hill_b_jam(wir_r, soa, sob, dat);
+        u2_bx_show(wir_r);
+
+        fprintf(stderr, "jam test: %d bits\n", u2_met(0, pak));
+        u2_ux_write(wir_r, pak, "/tmp/jam-test", "atom");
+
+        fprintf(stderr, "jam test: cue\n");
+        u2_bx_boot(wir_r);
+        bag = _hill_b_cue(wir_r, soa, sob, pak);
+        u2_bx_show(wir_r);
+
+        if ( u2_yes == u2_sing(bag, dat) ) {
+          fprintf(stderr, "jam test: match\n");
+        } else {
+          fprintf(stderr, "jam test: NO MATCH\n");
+        }
+      }
+#endif
       return Hill;
     } while (0);
 

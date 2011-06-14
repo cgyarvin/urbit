@@ -1,6 +1,6 @@
 ~%    %watt.266
     ~ 
-  (%ut ut, %go go, %to to)
+  (%go go, %to to, %seed seed, %ut ut)
 &.
 ::::
 ::::  Tier 1, atomic arithmetic
@@ -1605,6 +1605,7 @@
     [%brdt p=*gene]                                               ::  |.  bardot
     [%brpd p=*gene q=*gene]                                       ::  |+  barpad
     [%brtr p=*gene q=*gene]                                       ::  |*  bartar
+    [%brzp p=*gene q=*gene]                                       ::  |!  barzap
   ::
     [%csbn p=*gene q=*gene]                                       ::  ?=  casbon
     [%csbr p=*(list gene)]                                        ::  ?|  casbar
@@ -1650,11 +1651,12 @@
     [%pmdp p=*gene q=*(map term foot)]                            ::  &-  pamdap
     [%pmdt p=*(map term foot)]                                    ::  &.  pamdot
     [%pmpd p=*gene q=*(map term foot)]                            ::  &+  pampad
+    [%pmzp p=*gene q=*(map term foot)]                            ::  &!  pamzap
   ::
     [%sgbn p=*gene q=*gene]                                       ::  ~=  sigbon
     [%sgbr p=*gene q=*gene]                                       ::  ~|  sigbar
     [%sgdg p=[p=@ q=@] q=*gene]                                   ::  ~:  sigdeg
-    [%sgdt p=*chop q=*gene]                                       ::  ~%  sigdot
+    [%sgdt p=*chop q=*gene]                                       ::  ~.  sigdot
     [%sgdl p=*<^+(@ *term) [p=*term q=*gene]> q=*gene]            ::  ~>  sigdel
     [%sgdp p=@ q=*gene]                                           ::  ~-  sigdap
     [%sgdx p=*gene]                                               ::  ~#  sigdax
@@ -1672,9 +1674,10 @@
     [%tmtr p=*gene q=*gene]                                       ::  ;*  tamtar
   ::
     [%zpbn p=*gene]                                               ::  !=  zapbon
-    [%zpdg p=*gene]                                               ::  !:  zapdeg
-    [%zpdx p=*gene]                                               ::  !#  zapdax
     [%zpcb p=*spot q=*gene]                                       ::  !_  zapcab
+    [%zpdx p=*gene]                                               ::  !#  zapdax
+    [%zpmt ~]                                                     ::  !%  zapmit
+    [%zptm p=*gene q=*gene]                                       ::  !;  zaptam
     [%zpzp ~]                                                     ::  !!  zapzap
   --
 ::
@@ -1740,6 +1743,7 @@
         [%brdt *]   [%pmdt [[%% [& & p.gen]] ~ ~]]
         [%brpd *]   [%pmpd p.gen [[%% [& & q.gen]] ~ ~]]
         [%brtr *]   [%pmbn p.gen [[%% [& | q.gen]] ~ ~]]
+        [%brzp *]   [%bnld %zpmt [%brbn p.gen q.gen]]
         [%csbr *]
       |- 
       ?~(p.gen [%dtsg 1] [%csdg i.p.gen [%dtsg 0] $(p.gen t.p.gen)])
@@ -1798,6 +1802,7 @@
         [%mttr *]   [%bnld p.gen [%mtbn [%% ~] ~]]
         [%pmdp *]   [%bnld [%pmdt q.gen] p.gen] 
         [%pmbn *]   [%bnpd p.gen [%pmdt q.gen]]
+        [%pmzp *]   [%bnld [%zpmt ~] [%pmbn p.gen q.gen]]
         [%sgbn *]   [%sgld [%germ p.gen] q.gen]
         [%sgbr *]   [%sgld [%bean p.gen] q.gen]
         [%sgdg *]   [%sgld [%bank %dtsg p.gen] q.gen]
@@ -2056,6 +2061,12 @@
   |=  txt=@ 
   ^-  *gene
   (rash txt vest)
+::
+++  seed
+  ^-  [p=*type q=*]
+  ~+
+  ::  [!;(*type ..seed) ..seed]
+  !!
 ::  
 ++  ut
   ~%    %ut
@@ -2628,6 +2639,15 @@
         ~#
         $(gen p.gen)
       ::
+          [%zpmt ~]                                                   ::  !%
+        =+  pet=seed
+        [(nice p.pet) [1 q.pet]]
+      ::
+          [%zptm *]                                                   ::  !;
+        =+  vos=$(gol %noun, gen q.gen)
+        :-  (nice (cell (play p.gen) p.vos))      ::  XX validate!
+        (cons [1 p.vos] q.vos) 
+      ::
           [%zpzp ~]                                                   ::  !!
         :-  %void
         [0 0]
@@ -2981,6 +3001,7 @@
       (stag %mttr ;~(pfix tar wide))
       (stag %ktdp ;~(plug ;~(pfix tec wide) ;~(pfix tec wide)))
       (stag %zpzp (cold ~ ;~(plug zap zap)))
+      (stag %zpmt (cold ~ ;~(plug zap mit)))
       %+  stag
         %mtsg 
       ;~  pfix 
@@ -3123,6 +3144,7 @@
           ;~  pfix  zap
             ;~  pose
               (rune bon %zpbn expa)
+              (rune tam %zptm expb)
               ;~(pfix deg (toad expz))
               (rune dax %zpdx expa)
             --

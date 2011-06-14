@@ -136,6 +136,16 @@
                     u2_nul, 
                     u2_nul));
   }
+  _open_do_pq(brzp)   //  |!
+  {
+    return u2_bt
+      (wir_r, c3__bnld,
+              u2_bc(wir_r, c3__zpmt, u2_nul),
+              u2_bt
+                (wir_r, c3__brbn,
+                        u2_rx(wir_r, p_gen),
+                        u2_rx(wir_r, q_gen)));
+  }
 /***
 ****
 ***/
@@ -442,6 +452,13 @@
 /***
 ****
 ***/
+  _open_do_pq(pmbn)   //  &=
+  {
+    return u2_bt
+      (wir_r, c3__bnpd, 
+              u2_rx(wir_r, p_gen),
+              u2_bc(wir_r, c3__pmdt, u2_rx(wir_r, q_gen)));
+  }
   _open_do_pq(pmdp)   //  &-
   {
     return u2_bt
@@ -449,12 +466,15 @@
               u2_bc(wir_r, c3__pmdt, u2_rx(wir_r, q_gen)),
               u2_rx(wir_r, p_gen));
   }
-  _open_do_pq(pmbn)   //  &=
+  _open_do_pq(pmzp)   //  |!
   {
     return u2_bt
-      (wir_r, c3__bnpd, 
-              u2_rx(wir_r, p_gen),
-              u2_bc(wir_r, c3__pmdt, u2_rx(wir_r, q_gen)));
+      (wir_r, c3__bnld,
+              u2_bc(wir_r, c3__zpmt, u2_nul),
+              u2_bt
+                (wir_r, c3__pmbn,
+                        u2_rx(wir_r, p_gen),
+                        u2_rx(wir_r, q_gen)));
   }
 /***
 ****
@@ -886,6 +906,7 @@
         _open_p   (brdt);
         _open_pq  (brpd);
         _open_pq  (brtr);
+        _open_pq  (brzp);
 
         _open_pqrs(dgkt);
         _open_pqr (dgpd);
@@ -915,6 +936,7 @@
 
         _open_pq  (pmbn);
         _open_pq  (pmdp);
+        _open_pq  (pmzp);
 
         _open_pq  (sgbn);
         _open_pq  (sgbr);

@@ -306,11 +306,12 @@ wide_c
     wide_norm: di_kettar body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_ketsig body_a_wide    { $$ = _ycell($1, $2); }
 
+    wide_norm: di_zapbon body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_zapdax body_a_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_zapven body_l_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_zapzap body_l_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_zapmit body_l_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_zapdeg body_a_wide    { $$ = $2; scanner->bug = u2_no; }
-    wide_norm: di_zapbon body_a_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_zaptam body_b_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_sigbar body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_sigbon body_b_wide    { $$ = _ycell($1, $2); }
@@ -503,6 +504,7 @@ tall
     tall_norm: di_zapdax w body_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_zapdeg w body_a_tall    { $$ = $3; scanner->bug = u2_no; }
     tall_norm: di_zapbon w body_a_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_zaptam w body_b_tall    { $$ = _ycell($1, $3); }
 
   /** Tall - bodies.
   **/
@@ -703,11 +705,12 @@ tall
     di_sigpam: si_sig si_pam  { $$ = c3__sgpm; }
     di_sigsig: si_sig si_sig  { $$ = c3__sgsg; }
 
+    di_zapbon: si_zap si_bon  { $$ = c3__zpbn; }
     di_zapdax: si_zap si_dax  { $$ = c3__zpdx; }
     di_zapmit: si_zap si_mit  { $$ = c3__zpmt; }
-    di_zapven: si_zap si_zap  { $$ = c3__zpzp; }
+    di_zaptam: si_zap si_tam  { $$ = c3__zptm; }
+    di_zapzap: si_zap si_zap  { $$ = c3__zpzp; }
     di_zapdeg: si_zap si_deg  { $$ = c3__zpdg; scanner->bug = u2_yes; }
-    di_zapbon: si_zap si_bon  { $$ = c3__zpbn; }
     
   /* Signs.
   */

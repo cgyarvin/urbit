@@ -7,6 +7,8 @@
 
 /* functions
 */
+  u2_ray T_r;
+
   static u2_noun                                                  //  produce
   _cue_in(u2_wire wir_r,
           u2_atom a,                                              //  retain
@@ -21,6 +23,7 @@
 
       p = j2_mbc(Pit, inc)(wir_r, u2_h(c));
       q = u2_rx(wir_r, u2_t(c));
+      // q = u2_cs_save(wir_r, T_r, 0, b, q);
       r = j2_mcc(Pit, by, put)(wir_r, m, b, u2_t(c));
 
       u2_rz(wir_r, c);
@@ -45,6 +48,7 @@
 
         p = j2_mbc(Pit, add)(wir_r, _2, y);
         q = w;
+        // q = u2_cs_save(wir_r, T_r, 0, b, w);
         r = j2_mcc(Pit, by, put)(wir_r, u2_t(u2_t(v)), b, w);
 
         u2_rz(wir_r, u); u2_rz(wir_r, v); u2_rz(wir_r, x); u2_rz(wir_r, y);
@@ -52,11 +56,18 @@
       else {
         u2_noun d = j2_mby(Pit, rub)(wir_r, c, a);
         u2_noun x = j2_mcc(Pit, by, get)(wir_r, m, u2_t(d));
+        // u2_weak T = u2_cs_find(wir_r, T_r, 0, u2_t(d));
 
         p = j2_mbc(Pit, add)(wir_r, _2, u2_h(d));
         if ( u2_nul == x ) {
           return u2_bl_bail(wir_r, c3__exit);
         }
+#if 0
+        else if ( (u2_none == T) || (u2_no == u2_sing(T, x)) ) {
+          printf("fail!\n");
+          return u2_bl_bail(wir_r, c3__fail);
+        }
+#endif
         q = u2_rx(wir_r, u2_t(x));
         r = u2_rx(wir_r, m);
 
@@ -72,11 +83,16 @@
   j2_mby(Pit, cue)(u2_wire wir_r, 
                    u2_atom a)                                     //  retain
   {
-    u2_noun x = _cue_in(wir_r, a, _0, u2_nul);
-    u2_noun y = u2_rx(wir_r, u2_h(u2_t(x)));
+    if ( 0 == T_r ) {
+      T_r = u2_cs_make(wir_r);
+    }
+    {
+      u2_noun x = _cue_in(wir_r, a, _0, u2_nul);
+      u2_noun y = u2_rx(wir_r, u2_h(u2_t(x)));
 
-    u2_rz(wir_r, x);
-    return y;
+      u2_rz(wir_r, x);
+      return y;
+    }
   }
   u2_noun                                                         //  transfer
   j2_mb(Pit, cue)(u2_wire wir_r, 
