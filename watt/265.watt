@@ -1061,7 +1061,7 @@
 ++  aln  ;~(pose low hig num)
 ++  bar  (just '|')
 ++  bet  ;~(pose (cold 2 dap) (cold 3 pad))
-++  bin  (bass 2 (plus bit))
+++  bin  (bass 2 (most gon bit))
 ++  bit  (cook |=(a=@ (sub a '0')) (shim '0' '1'))
 ++  bon  (just '=')
 ++  bot  (just '\'')
@@ -1075,14 +1075,15 @@
 ++  des  (just '{')
 ++  dot  (just '.')
 ++  del  (just '<')
-++  dem  (bass 10 (plus dit))
+++  dem  (bass 10 (most gon dit))
 ++  dit  (cook |=(a=@ (sub a '0')) (shim '0' '9'))
 ++  dun  (cold ~ ;~(plug dap dap))
 ++  duz  (cold ~ ;~(plug bon bon))
 ++  gal  ;~(pose (cold 2 del) (cold 3 led))
 ++  gap  (cold ~ (plus ;~(pose vul (mask [10 32 ~]))))
 ++  gay  ;~(pose gap (easy ~))
-++  hex  (bass 16 (plus hit))
+++  gon  ;~(pose ;~(plug nov gay von) (easy ~))
+++  hex  (bass 16 (most gon hit))
 ++  hig  (shim 'A' 'Z')
 ++  hit  ;~(pose dit (cook |=(a=*char (sub a 87)) (shim 'a' 'f')))
 ++  ket  (just '^')
@@ -1100,14 +1101,16 @@
 ++  pam  (just '&')
 ++  pel  (just ')')
 ++  poy  ;~(pfix nov ;~(pose nov bot mes))
-++  qit  ;~(pose (shim 32 38) (shim 40 91) (shim 92 126) poy)
-++  quo  (ifix [bot bot] (bass 256 (plus qit)))
+++  qit  ;~(pose (shim 32 38) (shim 40 91) (shim 93 126) poy)
+++  quo  (ifix [bot bot] (boss 256 (plus qit)))
 ++  sec  (just '$')
 ++  sed  (just '}')
 ++  sig  (just '~')
-++  sym   %+  cook
-            |=(a=*tape (rap 3 a))
-          ;~(plug low (star ;~(pose num low dap)))
+++  sym 
+  %+  cook
+    |=(a=*tape (rap 3 a))
+  ;~(plug low (star ;~(pose num low dap)))
+::
 ++  tam  (just ';')
 ++  tar  (just '*')
 ++  tec  (just '`')
@@ -2820,7 +2823,7 @@
       ?-  ref
           %atom       .?(p.sut)
           [%cell *]   ?|  !.?(p.sut)
-                          $(sut [%cell [%cube -.p.sut ] [%cube +.p.sut]])
+                          $(sut [%cell [%cube -.p.sut] [%cube +.p.sut]])
                       ==
           [%cube *]   !.=(p.sut p.ref)
           *           $(sut ref, ref sut)
@@ -3182,7 +3185,7 @@
         (cold & (just '+'))
         ;~  gunk 
           ;~(pose (cold | (just '-')) (cold & (just '+')))
-          sym
+          ;~(pose (cold %% sec) sym)
           loaf
         ==
       ==
@@ -3246,7 +3249,7 @@
       ;~  pose
         (cold ~ sig)
         %+  ifix
-          ?:(tol [p=;~(plug dun gap) q=;~(plug gap dun)] [p=lep q=pel])
+          ?:(tol [p=;~(plug duz gap) q=;~(plug gap duz)] [p=lep q=pel])
         (more mash ;~(gunk ;~(pfix mit sym) loaf))
       ==
     --
@@ -3267,7 +3270,7 @@
             [%mtbn [@ ~] ~]  [%ktbn i.p.ros p.vil]
             [%zpcb *]        $(ros q.ros)
           ==
-            %deg  [%bnld ros p.vil]
+            %deg  [%bndl ros p.vil]
             %lep  [%mtbn ~(rake ap ros) p.vil]
         ==
       flat
@@ -3290,7 +3293,7 @@
     %+  (slug `*twig`~ |=([a=*twig b=*twig] (weld a b)))
       dot
     ;~  pose
-      (cook |=(a=*(list) ?.(.?(-.a) [%% ~] [%% [~ 2] $(a +.a)])) (plus sec))
+      (cook |=(a=*(list) ?:(.=(~ +.a) [%% ~] [%% [~ 2] $(a +.a)])) (plus sec))
       %+  cook
         |=(a=*knot [a ~])
       ;~  pose

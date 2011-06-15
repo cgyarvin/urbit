@@ -7,7 +7,7 @@
 */
 %{
 # include "all.h"
-#   define  Pit   watt_266
+#   define  Pit   watt_265
 
   /* Everything is a noun - no yacc type declarations!
   */
@@ -62,7 +62,7 @@
   /* With the mighty power of GLR... 
   */
   %glr-parser
-  %name-prefix="y266_"
+  %name-prefix="y265_"
 
   /* We laugh at your petty shift-reduce conflicts.
   */
@@ -982,7 +982,7 @@ _scanner_init_clip(struct _u2_scanner *scanner,
       return u2_bl_bail(wir_r, c3__fail);
     }
     else {
-      if ( !y266_parse(&scanner) ) {
+      if ( !y265_parse(&scanner) ) {
         return scanner.scan;
       }
       else {
@@ -1005,7 +1005,7 @@ _scanner_init_clip(struct _u2_scanner *scanner,
       return u2_bc(wir_r, hor, u2_nul);
     }
     else {
-      if ( !y266_parse(&scanner) ) {
+      if ( !y265_parse(&scanner) ) {
         hor = u2_bc(wir_r, scanner.s.xw_line, scanner.s.xw_col);
 
         return u2_bt(wir_r, u2_rx(wir_r, hor), 
@@ -1071,7 +1071,7 @@ _scanner_init_clip(struct _u2_scanner *scanner,
 /* Trivial scanner.
 */
 int 
-y266_lex(YYSTYPE *lvalp, YYLTYPE *llocp, struct _u2_scanner *scanner)
+y265_lex(YYSTYPE *lvalp, YYLTYPE *llocp, struct _u2_scanner *scanner)
 {
   if ( scanner->s.token ) {
     int token = scanner->s.token;
@@ -1091,7 +1091,7 @@ y266_lex(YYSTYPE *lvalp, YYLTYPE *llocp, struct _u2_scanner *scanner)
         u2_noun b = u2_h(scanner->p.tape);
 
         if ( b > 255 ) {
-          return y266_error(llocp, scanner, "tape error");
+          return y265_error(llocp, scanner, "tape error");
         }
         else {
           xb = b;
@@ -1120,7 +1120,7 @@ y266_lex(YYSTYPE *lvalp, YYLTYPE *llocp, struct _u2_scanner *scanner)
 
 /* Error stub.
 */
-int y266_error(YYLTYPE *llocp, struct _u2_scanner *scanner, char const *msg)
+int y265_error(YYLTYPE *llocp, struct _u2_scanner *scanner, char const *msg)
 {
 #if 0
   printf("%s: (%d:%d - %d:%d)\n", 

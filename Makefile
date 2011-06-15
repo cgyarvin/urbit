@@ -544,17 +544,140 @@ J266_OFILES=\
        $(J266_6_OFILES_UT) \
        gen266/watt.o
 
-OFILES=\
+J265_1_OFILES=\
+       gen265/1/add.o \
+       gen265/1/bex.o \
+       gen265/1/dec.o \
+       gen265/1/div.o \
+       gen265/1/gte.o \
+       gen265/1/gth.o \
+       gen265/1/lte.o \
+       gen265/1/lth.o \
+       gen265/1/mod.o \
+       gen265/1/mul.o \
+       gen265/1/sub.o
+
+J265_2_OFILES=\
+       gen265/2/bind.o \
+       gen265/2/clap.o \
+       gen265/2/drop.o \
+       gen265/2/flop.o \
+       gen265/2/lent.o \
+       gen265/2/levy.o \
+       gen265/2/lien.o \
+       gen265/2/need.o \
+       gen265/2/reel.o \
+       gen265/2/roll.o \
+       gen265/2/skim.o \
+       gen265/2/skip.o \
+       gen265/2/snag.o \
+       gen265/2/sort.o \
+       gen265/2/turn.o \
+       gen265/2/weld.o
+
+J265_3_OFILES=\
+       gen265/3/can.o \
+       gen265/3/cap.o \
+       gen265/3/cat.o \
+       gen265/3/con.o \
+       gen265/3/cue.o \
+       gen265/3/cut.o \
+       gen265/3/dor.o \
+       gen265/3/dis.o \
+       gen265/3/end.o \
+       gen265/3/gor.o \
+       gen265/3/hor.o \
+       gen265/3/jam.o \
+       gen265/3/lsh.o \
+       gen265/3/mas.o \
+       gen265/3/mat.o \
+       gen265/3/met.o \
+       gen265/3/mix.o \
+       gen265/3/mug.o \
+       gen265/3/peg.o \
+       gen265/3/rap.o \
+       gen265/3/rip.o \
+       gen265/3/rub.o \
+       gen265/3/rsh.o \
+       gen265/3/vor.o
+
+J265_4_OFILES=\
+       gen265/4/in.o \
+       gen265/4/by.o \
+       gen265/4/in_has.o \
+       gen265/4/in_gas.o \
+       gen265/4/in_put.o \
+       gen265/4/in_tap.o \
+       gen265/4/by_gas.o \
+       gen265/4/by_get.o \
+       gen265/4/by_has.o \
+       gen265/4/by_put.o 
+
+J265_5_OFILES=\
+       gen265/5/to.o
+
+J265_6_OFILES=\
+       gen265/6/ap.o \
+       gen265/6/cell.o \
+       gen265/6/comb.o \
+       gen265/6/cons.o \
+       gen265/6/core.o \
+       gen265/6/face.o \
+       gen265/6/flan.o \
+       gen265/6/flip.o \
+       gen265/6/flor.o \
+       gen265/6/fork.o \
+       gen265/6/hack.o \
+       gen265/6/hike.o \
+       gen265/6/look.o \
+       gen265/6/ream.o \
+       gen265/6/ut.o
+
+J265_6_OFILES_UT=\
+       gen265/6/ut_bake.o \
+       gen265/6/ut_burn.o \
+       gen265/6/ut_cull.o \
+       gen265/6/ut_emit.o \
+       gen265/6/ut_find.o \
+       gen265/6/ut_fire.o \
+       gen265/6/ut_fish.o \
+       gen265/6/ut_fret.o \
+       gen265/6/ut_fuse.o \
+       gen265/6/ut_gain.o \
+       gen265/6/ut_heal.o \
+       gen265/6/ut_mint.o \
+       gen265/6/ut_orth.o \
+       gen265/6/ut_nest.o \
+       gen265/6/ut_park.o \
+       gen265/6/ut_peek.o \
+       gen265/6/ut_play.o \
+       gen265/6/ut_repo.o \
+       gen265/6/ut_rest.o \
+       gen265/6/ut_seek.o \
+       gen265/6/ut_snap.o \
+       gen265/6/ut_tuck.o
+
+J265_OFILES=\
+       $(J265_1_OFILES) \
+       $(J265_2_OFILES) \
+       $(J265_3_OFILES) \
+       $(J265_4_OFILES) \
+       $(J265_5_OFILES) \
+       $(J265_6_OFILES) \
+       $(J265_6_OFILES_UT) \
+       gen265/watt.o
+
+HILL_OFILES=\
        $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
-       $(J268_OFILES) \
        $(J267_OFILES) \
-       $(J266_OFILES)
+       $(J266_OFILES) \
+       $(J265_OFILES) 
 
-$(BIN)/hill: $(OFILES)
+$(BIN)/hill: $(HILL_OFILES)
 	mkdir -p $(BIN)
-	$(CLD) -o $(BIN)/hill $(OFILES) -lgmp -lreadline -ltermcap
+	$(CLD) -o $(BIN)/hill $(HILL_OFILES) -lgmp -lreadline -ltermcap
 
 tags:
 	ctags -R -f .tags --exclude=root

@@ -587,6 +587,7 @@ u2_bn_hook(u2_wire     wir_r,
   u2_weak vib = u2_ds_look(wir_r, cor, tam_c);
 
   if ( u2_none == vib ) {
+    fprintf(stderr, "no hook: %s\n", tam_c);
     return u2_bl_bail(wir_r, c3__fail);
   } else {
     if ( u2_nul == u2_h(vib) ) {

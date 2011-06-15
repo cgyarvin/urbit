@@ -10,15 +10,15 @@
 #define C3_GLOBAL
 #include "all.h"
 
-#define   PitZ  watt_268
-#define   PitA  watt_267
-#define   PitB  watt_266
-#define   PitC  watt_265
+#define   PitZ  watt_267
+#define   PitA  watt_266
+#define   PitB  watt_265
+#define   PitC  watt_264
 
-#define   FileZ   "watt/268"
-#define   FileA   "watt/267"
-#define   FileB   "watt/266"
-#define   FileC   "watt/265"
+#define   FileZ   "watt/267"
+#define   FileA   "watt/266"
+#define   FileB   "watt/265"
+#define   FileC   "watt/264"
 
   /**   Interpreter data structures.
   **/
@@ -67,10 +67,10 @@
       j2_mbc(PitZ, ream)(u2_wire wir_r, 
                          u2_noun txt);
       u2_weak
-      j2_mbc(PitA, ream)(u2_wire wir_r, 
+      j2_mby(PitA, ream)(u2_wire wir_r, 
                          u2_noun txt);
       u2_weak
-      j2_mbc(PitB, ream)(u2_wire wir_r, 
+      j2_mby(PitB, ream)(u2_wire wir_r, 
                          u2_noun txt);
 
     /* Flying - also a hack.
@@ -404,7 +404,7 @@ _hill_a_mint_txt(u2_wire wir_r,
 {
   u2_noun gen;
 
-  if ( u2_none == (gen = j2_mbc(PitA, ream)(wir_r, txt)) ) {
+  if ( u2_none == (gen = j2_mby(PitA, ream)(wir_r, txt)) ) {
     fprintf(stderr, "{%s: parse failed}\n", FileA);
     return u2_bl_bail(wir_r, c3__fail);
   }
