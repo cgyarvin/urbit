@@ -220,6 +220,10 @@
         struct _u2_ho_hangar *nex_h;
       } u2_ho_hangar;
 
+  /** Globals.
+  **/
+    extern u2_ho_driver *HostDriverBase[];
+
   /** Functions.
   **/
     /* u2_ho_push(): 

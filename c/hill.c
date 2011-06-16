@@ -20,6 +20,23 @@
 #define   FileB   "watt/265"
 #define   FileC   "watt/264"
 
+    /* External drivers.
+    */
+      extern u2_ho_driver j2_da(watt_264);
+      extern u2_ho_driver j2_da(watt_265);
+      extern u2_ho_driver j2_da(watt_266);
+      extern u2_ho_driver j2_da(watt_267);
+
+    /* Built-in battery drivers.   Null `cos` terminates. 
+    */
+      u2_ho_driver *HostDriverBase[] = {
+        &j2_da(watt_264), 
+        &j2_da(watt_265), 
+        &j2_da(watt_266), 
+        &j2_da(watt_267), 
+        0
+      };
+
   /**   Interpreter data structures.
   **/
     /*  ++  shoe  <[p=*type q=*noun]>
@@ -1363,7 +1380,7 @@ hill_boot(void)
         u2_bx_show(wir_r);
 
         fprintf(stderr, "jam test: %d bits\n", u2_met(0, pak));
-        u2_ux_write(wir_r, pak, "/tmp/jam-test", "atom");
+        u2_ux_write(wir_r, pak, "watt/264", "noun");
 
         fprintf(stderr, "jam test: cue\n");
         u2_bx_boot(wir_r);

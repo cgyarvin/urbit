@@ -12,8 +12,8 @@
 
   static u2_noun                                                  //  produce
   _jam_in_pair(u2_wire wir_r,
-               u2_noun h_a,                                       //  retain
-               u2_noun t_a,                                       //  retain
+               u2_atom h_a,                                       //  retain
+               u2_atom t_a,                                       //  retain
                u2_atom b,                                         //  retain
                u2_noun m,                                         //  retain
                u2_noun l)                                         //  retain
@@ -97,7 +97,7 @@
 
   static u2_noun                                                  //  produce
   _jam_in(u2_wire wir_r,
-          u2_noun a,                                              //  retain
+          u2_atom a,                                              //  retain
           u2_atom b,                                              //  retain
           u2_noun m,                                              //  retain
           u2_noun l)                                              //  retain
@@ -131,7 +131,7 @@
 
   u2_noun                                                         //  transfer
   j2_mby(Pit, jam)(u2_wire wir_r, 
-                   u2_noun a)                                     //  retain
+                   u2_atom a)                                     //  retain
   {
     u2_noun x = _jam_in(wir_r, a, _0, u2_nul, u2_nul);
     u2_noun q = j2_mbc(Pit, flop)(wir_r, u2_h(u2_t(x)));

@@ -14,25 +14,6 @@
     */
       u2_ho_hangar *u2_HostHangar;
 
-    /* External drivers.
-    */
-      extern u2_ho_driver j2_da(watt_264);
-      extern u2_ho_driver j2_da(watt_265);
-      extern u2_ho_driver j2_da(watt_266);
-      extern u2_ho_driver j2_da(watt_267);
-//       extern u2_ho_driver j2_da(watt_268);
-
-    /* Built-in battery drivers.   Null `cos` terminates. 
-    */
-      static u2_ho_driver *u2_HostDriverBase[] = {
-        &j2_da(watt_264), 
-        &j2_da(watt_265), 
-        &j2_da(watt_266), 
-        &j2_da(watt_267), 
-//         &j2_da(watt_268), 
-        0
-      };
-
 
   /** Forward declarations.
   **/
@@ -571,8 +552,8 @@ _ho_explore_static(u2_rail ral_r,
 {
   c3_w  i_w;
 
-  for ( i_w=0; u2_HostDriverBase[i_w]; i_w++ ) {
-    u2_ho_driver *dry_d = u2_HostDriverBase[i_w];
+  for ( i_w=0; HostDriverBase[i_w]; i_w++ ) {
+    u2_ho_driver *dry_d = HostDriverBase[i_w];
 
     if ( (u2_none == dry_d->xip) && !strcmp(cos_c, dry_d->cos_c) ) {
       dry_d->xip = xip;

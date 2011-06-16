@@ -40,9 +40,7 @@ CWFLAGS=-Wall
 	 $(CC) -c $(CWFLAGS) $(CFLAGS) -o $@ $<
 
 C_OFILES=\
-       c/main.o \
-       c/comd.o \
-       c/hill.o
+       c/comd.o
 
 F_OFILES=\
        f/rail.o \
@@ -553,7 +551,133 @@ J264_OFILES=\
        $(J264_6_OFILES_UT) \
        gen264/watt.o
 
+
+J263_1_OFILES=\
+       gen263/1/add.o \
+       gen263/1/bex.o \
+       gen263/1/dec.o \
+       gen263/1/div.o \
+       gen263/1/gte.o \
+       gen263/1/gth.o \
+       gen263/1/lte.o \
+       gen263/1/lth.o \
+       gen263/1/mod.o \
+       gen263/1/mul.o \
+       gen263/1/sub.o
+
+J263_2_OFILES=\
+       gen263/2/bind.o \
+       gen263/2/clap.o \
+       gen263/2/drop.o \
+       gen263/2/flop.o \
+       gen263/2/lent.o \
+       gen263/2/levy.o \
+       gen263/2/lien.o \
+       gen263/2/need.o \
+       gen263/2/reel.o \
+       gen263/2/roll.o \
+       gen263/2/skim.o \
+       gen263/2/skip.o \
+       gen263/2/snag.o \
+       gen263/2/sort.o \
+       gen263/2/turn.o \
+       gen263/2/weld.o
+
+J263_3_OFILES=\
+       gen263/3/can.o \
+       gen263/3/cap.o \
+       gen263/3/cat.o \
+       gen263/3/con.o \
+       gen263/3/cue.o \
+       gen263/3/cut.o \
+       gen263/3/dor.o \
+       gen263/3/dis.o \
+       gen263/3/end.o \
+       gen263/3/gor.o \
+       gen263/3/hor.o \
+       gen263/3/jam.o \
+       gen263/3/lsh.o \
+       gen263/3/mas.o \
+       gen263/3/mat.o \
+       gen263/3/met.o \
+       gen263/3/mix.o \
+       gen263/3/mug.o \
+       gen263/3/peg.o \
+       gen263/3/rap.o \
+       gen263/3/rip.o \
+       gen263/3/rub.o \
+       gen263/3/rsh.o \
+       gen263/3/vor.o
+
+J263_4_OFILES=\
+       gen263/4/in.o \
+       gen263/4/by.o \
+       gen263/4/in_has.o \
+       gen263/4/in_gas.o \
+       gen263/4/in_put.o \
+       gen263/4/in_tap.o \
+       gen263/4/by_gas.o \
+       gen263/4/by_get.o \
+       gen263/4/by_has.o \
+       gen263/4/by_put.o 
+
+J263_5_OFILES=\
+       gen263/5/to.o
+
+J263_6_OFILES=\
+       gen263/6/ap.o \
+       gen263/6/cell.o \
+       gen263/6/comb.o \
+       gen263/6/cons.o \
+       gen263/6/core.o \
+       gen263/6/face.o \
+       gen263/6/flan.o \
+       gen263/6/flip.o \
+       gen263/6/flor.o \
+       gen263/6/fork.o \
+       gen263/6/hack.o \
+       gen263/6/hike.o \
+       gen263/6/look.o \
+       gen263/6/ream.o \
+       gen263/6/ut.o
+
+J263_6_OFILES_UT=\
+       gen263/6/ut_bake.o \
+       gen263/6/ut_burn.o \
+       gen263/6/ut_cull.o \
+       gen263/6/ut_emit.o \
+       gen263/6/ut_find.o \
+       gen263/6/ut_fire.o \
+       gen263/6/ut_fish.o \
+       gen263/6/ut_fret.o \
+       gen263/6/ut_fuse.o \
+       gen263/6/ut_gain.o \
+       gen263/6/ut_heal.o \
+       gen263/6/ut_mint.o \
+       gen263/6/ut_orth.o \
+       gen263/6/ut_nest.o \
+       gen263/6/ut_park.o \
+       gen263/6/ut_peek.o \
+       gen263/6/ut_play.o \
+       gen263/6/ut_repo.o \
+       gen263/6/ut_rest.o \
+       gen263/6/ut_seek.o \
+       gen263/6/ut_snap.o \
+       gen263/6/ut_tuck.o
+
+J263_OFILES=\
+       $(J263_1_OFILES) \
+       $(J263_2_OFILES) \
+       $(J263_3_OFILES) \
+       $(J263_4_OFILES) \
+       $(J263_5_OFILES) \
+       $(J263_6_OFILES) \
+       $(J263_6_OFILES_UT) \
+       gen263/watt.o
+
 HILL_OFILES=\
+       c/hill.o \
+       c/main.o \
        $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
@@ -562,12 +686,26 @@ HILL_OFILES=\
        $(J265_OFILES) \
        $(J264_OFILES)
 
+EYRE_OFILES=\
+       c/eyre.o \
+       $(C_OFILES) \
+       $(F_OFILES) \
+       $(P_OFILES) \
+       $(J264_OFILES) \
+       $(J263_OFILES)
+
+all: $(BIN)/hill $(BIN)/eyre
+
 $(BIN)/hill: $(HILL_OFILES)
 	mkdir -p $(BIN)
 	$(CLD) -o $(BIN)/hill $(HILL_OFILES) -lgmp -lreadline -ltermcap
+
+$(BIN)/eyre: $(EYRE_OFILES)
+	mkdir -p $(BIN)
+	$(CLD) -o $(BIN)/eyre $(EYRE_OFILES) -lgmp -lreadline -ltermcap
 
 tags:
 	ctags -R -f .tags --exclude=root
 
 clean:
-	 $(RM) $(HILL_OFILES) $(BIN)/hill
+	 $(RM) $(HILL_OFILES) $(BIN)/hill $(BIN)/eyre
