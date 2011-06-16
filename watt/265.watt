@@ -2084,6 +2084,10 @@
     $(axe (peg axe 7), dab r.dab)
   ==
 ::  
+++  make
+  |=  txt=@
+  q:(~(mint ut %noun) %noun (ream txt)) 
+::  
 ++  ream  
   |=  txt=@ 
   ^-  *gene

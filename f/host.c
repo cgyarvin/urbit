@@ -16,6 +16,7 @@
 
     /* External drivers.
     */
+      extern u2_ho_driver j2_da(watt_264);
       extern u2_ho_driver j2_da(watt_265);
       extern u2_ho_driver j2_da(watt_266);
       extern u2_ho_driver j2_da(watt_267);
@@ -24,6 +25,7 @@
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       static u2_ho_driver *u2_HostDriverBase[] = {
+        &j2_da(watt_264), 
         &j2_da(watt_265), 
         &j2_da(watt_266), 
         &j2_da(watt_267), 

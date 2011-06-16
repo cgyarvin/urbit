@@ -1,4 +1,8 @@
-~%    %watt.265
+?>  ?=(@ .)
+%.  .
+=<  make
+=>  ~
+~%    %watt.264
     ~ 
   ==
     %go    go
@@ -146,10 +150,10 @@
 ::
 ++  mate
   |*  [a=*(unit) b=*(unit)]
-  ?~  a
-    b
   ?~  b
     a
+  ?~  a
+    b
   ?.(.=(u.a u.b) ~|('mate' !!) a)
 ::
 ++  need
@@ -2084,6 +2088,10 @@
     $(axe (peg axe 7), dab r.dab)
   ==
 ::  
+++  make
+  |=  txt=@
+  q:(~(mint ut %noun) %noun (ream txt)) 
+::
 ++  ream  
   |=  txt=@ 
   ^-  *gene

@@ -12,6 +12,7 @@
 #     include "c/types.h"
 #     include "c/defs.h"
 #     include "c/motes.h"
+#     include "c/comd.h"
 
     /** u2: the new interpreter.
     **/

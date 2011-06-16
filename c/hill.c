@@ -873,6 +873,31 @@ _hill_b_boot(u2_wire     wir_r,
   }
 }
 
+/* _hill_b_eyre(): generate the first eyre kernel (with kernel B).
+*/
+static u2_noun                                                    //  produce
+_hill_b_eyre(u2_wire     wir_r,
+             hi_shoz     soa,                                     //  retain
+             hi_shoa     sob,                                     //  retain
+             const c3_c* fil_c)                                   //  retain
+{
+  u2_noun txt = u2_ux_read(wir_r, fil_c, "watt");
+
+  if ( u2_none == txt ) {
+    fprintf(stderr, "{not found: %s.watt}\n", fil_c);
+    return u2_bl_bail(wir_r, c3__fail);
+  }
+  else {
+    u2_noun gam = _hill_b_mint_txt(wir_r, soa, sob, c3__noun, c3__noun, txt); 
+    u2_noun nok = u2_rx(wir_r, u2_t(gam));
+
+    u2_rz(wir_r, txt);
+    u2_rz(wir_r, gam);
+ 
+    return nok;
+  }
+}
+
 /* _hill_b_fly(): dump `bil` to `col`, producing wall.
 */
 static u2_noun
@@ -1289,23 +1314,47 @@ hill_boot(void)
           break;
         }
         else {
-          soc = _hill_b_boot(wir_r, soa, sob, FileC);
+          soc = _hill_b_eyre(wir_r, soa, sob, FileC);
           u2_bl_done(wir_r, kit_r);
 
           u2_bx_spot(wir_r, u2_nul);
           u2_bx_show(wir_r);
         }
       }
-      fprintf(stderr, "{warm boot: %s, with %s: %x}\n", 
+      fprintf(stderr, "{last boot: %s, with %s: %x}\n", 
           FileC, FileB, u2_mug(soc));
       Hill->soc = u2_rl_take(u2_wire_bas_r(wir_r), soc);
       u2_rl_fall(wir_r);
 
-#if 0
+      /* Testing basics of soc.
+      */
+      printf("testing eyre...\n");
+      {
+        u2_noun foo = u2_rl_string(wir_r, "|!(a=@ (dec a))");
+        u2_noun bar = u2_nk_nock(wir_r, foo, Hill->soc);
+
+        if ( u2_none == bar ) {
+          printf("no bar\n");
+        }
+        else {
+          u2_noun moo = u2_nk_nock(wir_r, _0, bar);
+            
+          if ( u2_none == moo ) {
+            printf("no moo\n");
+          } else {
+            u2_noun zor = u2_nk_mung(wir_r, moo, 13);
+
+            u2_err(wir_r, "zor", zor);
+          }
+        }
+      }
+      printf("tested.\n");
+
+#if 1
       {
         u2_noun soa = Hill->soa;
         u2_noun sob = Hill->sob;
-        u2_noun dat = sob;
+        u2_noun dat = Hill->soc;
         u2_noun pak, bag;
 
         fprintf(stderr, "jam test: jam\n");
