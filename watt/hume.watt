@@ -1,15 +1,9 @@
-=>  !%
 ~%    %hume
     ->  
   ==
-    %bump  bump
     %line  line
   ==
-&=  env=seed
-++  bump
-  |=  x=@
-  (add 2 x)
-::
+&!  env=seed
 ++  line
   |=  txt=@
   ^-  [p=*bill q=*bill]
