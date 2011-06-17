@@ -13,9 +13,9 @@
 
     /* c3_comd_line():
     **
-    **   Read a line from the console, saving to history file (fel).
+    **   Read a line from the console, saving to history file `fel`.
     **
     **   Returns 0 iff the console has exited.
     */
       c3_c*                                                       //  produce
-      c3_comd_line(const c3_c *fel);                              //  retain
+      c3_comd_line(const c3_c *fel_c);                              //  retain

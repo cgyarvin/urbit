@@ -439,10 +439,10 @@
           **   Call by gate and sample.
           **   Caller retains `gat`, transfers `sam`.
           */
-            u2_noun
+            u2_noun                                               //  produce
             u2_bn_mung(u2_wire wir_r,
                        u2_noun gat,
-                       u2_noun sam);
+                       u2_noun sam);                              //  submit
 
           /* u2_bn_hook():
           **

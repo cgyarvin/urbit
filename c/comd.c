@@ -24,27 +24,27 @@ c3_comd_init(void)
   ** fel: history pathname
   */
   const c3_c* gib_c = getenv("HOME");
-  c3_c*       fel;
+  c3_c*       fel_c;
   c3_i        fd;
 
   if ( !gib_c ) {
     fprintf(stderr, "no home directory\n");
     exit(1);
   }
-  fel = malloc(strlen(gib_c) + 13);
-  strcpy(fel, gib_c);
-  strcat(fel, "/.u3_history");
+  fel_c = malloc(strlen(gib_c) + 13);
+  strcpy(fel_c, gib_c);
+  strcat(fel_c, "/.u3_history");
 
-  if ( (fd = open(fel, O_CREAT | O_RDWR, 0666)) < 0 ) {
-    perror(fel);
+  if ( (fd = open(fel_c, O_CREAT | O_RDWR, 0666)) < 0 ) {
+    perror(fel_c);
     exit(1);
   }
   close(fd);
 
   using_history();
-  read_history(fel);
+  read_history(fel_c);
 
-  return fel;
+  return fel_c;
 }
 
 /* c3_comd_line():
@@ -55,7 +55,7 @@ c3_comd_init(void)
 **   free the line.
 */
 c3_c*                                                             //  produce
-c3_comd_line(const c3_c *fel)                                     //  retain
+c3_comd_line(const c3_c *fel_c)                                   //  retain
 {
   while ( 1 ) {
     c3_c *vid_c;
@@ -70,7 +70,7 @@ c3_comd_line(const c3_c *fel)                                     //  retain
     }
 
     add_history(vid_c);
-    if ( append_history(1, fel) ) {
+    if ( append_history(1, fel_c) ) {
       perror("console");
       exit(1);
     }

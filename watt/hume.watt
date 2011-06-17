@@ -1,0 +1,20 @@
+=>  !%
+~%    %hume
+    ->  
+  ==
+    %bump  bump
+    %line  line
+  ==
+&=  env=seed
+++  bump
+  |=  x=@
+  (add 2 x)
+::
+++  line
+  |=  txt=@
+  ^-  [p=*bill q=*bill]
+  =+  gen=(ream txt)
+  =+  man=(~(mint ut p.env) %noun gen)
+  :-  ~(dump ut p.man)
+  ~(gut go .*(q.env q.man))
+--
