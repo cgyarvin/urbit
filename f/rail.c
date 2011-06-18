@@ -928,7 +928,7 @@ u2_rl_open(u2_ray ral_r,
 {
   return 
     ((a_w + u2_ray_b(u2_rail_hat_r(ral_r)) + u2_ray_b(u2_rail_cap_r(ral_r)))
-     >= LoomSize)
+     >= HalfSize)
     ? u2_no
     : u2_yes;
 }

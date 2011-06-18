@@ -19,11 +19,28 @@ _loom_stop(c3_i sig)
 void
 u2_boot(void)
 {
-   mmap((void *)U2_OS_LoomBase,
-        (LoomSize << 3),
-        (PROT_READ | PROT_WRITE), 
-        (MAP_ANON | MAP_FIXED),
-        -1, 0);
+  c3_ps map;
+  
+  map = mmap((void *)U2_OS_LoomBase,
+             (HalfSize << 3),
+             (PROT_READ | PROT_WRITE), 
+             (MAP_ANON | MAP_FIXED),
+             -1, 0);
+
+  if ( -1 == map ) {
+    map = mmap((void *)0,
+               (HalfSize << 3),
+               (PROT_READ | PROT_WRITE), 
+                MAP_ANON,
+               -1, 0);
+
+    if ( -1 == map ) {
+      fprintf(stderr, "map failed twice\n");
+    } else {
+      fprintf(stderr, "map failed - try U2_OS_LoomBase %p\n", map);
+    }
+    exit(1);
+  }
 
   {
     struct rlimit rlm;

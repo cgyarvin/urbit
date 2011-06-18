@@ -32,4 +32,5 @@
     */
       typedef char      c3_c;      // does not match int8_t or uint8_t
       typedef int       c3_i;      // int - really bad 
-      typedef uintptr_t c3_p;      // pointer-length int - really really bad
+      typedef uintptr_t c3_p;      // pointer-length uint - really really bad
+      typedef intptr_t c3_ps;      // pointer-length int - really really bad

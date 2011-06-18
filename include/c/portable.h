@@ -56,6 +56,7 @@
 
 #   elif defined(U2_OS_osx)
 #     define U2_OS_LoomBase 0x4000000
+#     define U2_OS_LoomBits 29            //  ie, 2^29 words == 
 #   endif
 
   /** Global variable control.

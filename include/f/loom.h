@@ -8,8 +8,11 @@
   /** Global variables and definitions.
   **/
 #   define Loom ((c3_w *)U2_OS_LoomBase)
-#   define LoomSize (1 << 28)
-#   define LoomEnd  (LoomSize - 1)
+#   define LoomBits U2_OS_LoomBits
+#   define LoomSize (1 << LoomBits)
+#   define HalfBits (U2_OS_LoomBits - 1)
+#   define HalfSize (1 << HalfBits)
+#   define HalfEnd  (HalfSize - 1)
 
 #   ifdef U2_GLOBAL
       /* Frame depth in interpreter - for stack control.  Tune it.
@@ -34,7 +37,7 @@
 
   /** Data types.
   **/
-    /** Bitfields.
+    /** Bitfields.  Assumes HalfBits == 28 (the maximum).
     ***
     ***     u2_nit - word offset in loom
     ***       &&&&:28a
@@ -103,8 +106,8 @@
   **/
     /** Bitfield unpacking.  See above.
     **/
-#     define u2_ray_a(ray)     ( (ray) >> 28 )
-#     define u2_ray_b(ray)     ( (ray) & ((1 << 28) - 1) )
+#     define u2_ray_a(ray)     ( (ray) >> HalfBits )
+#     define u2_ray_b(ray)     ( (ray) & ((1 << HalfBits) - 1) )
 
 #     define u2_fly_a(fly)     ( (fly) >> 31 )
 
@@ -131,7 +134,7 @@
 
     /** Bitfield packing.  See above.
     **/
-#     define u2_ray_of(a, b)   ( ((a) << 28) | (b) )
+#     define u2_ray_of(a, b)   ( ((a) << HalfBits) | (b) )
 
 #     define u2_dog_of(a, b, c) \
         ( (1 << 31) | ((a) << 2) | ((b) << 1) | (c) )
@@ -145,7 +148,7 @@
     *** Formally, we are always folded.
     **/
 #     define u2_ray_fnit(ray) \
-        ( u2_ray_a(ray) ? (LoomEnd - u2_ray_b(ray)) : (ray) )
+        ( u2_ray_a(ray) ? (HalfEnd - u2_ray_b(ray)) : (ray) )
 #   ifdef LoomFold
 #     define u2_ray_nit(ray) u2_ray_fnit(ray)
 #   else
@@ -158,7 +161,7 @@
             : ( (u2_ray_fnit(tat) + (das)) < u2_ray_fnit(tid) ) )
 
 #     define u2_ray_gap(tid, tat) \
-        ( (LoomSize - (u2_ray_b(tid) + u2_ray_b(tat))) )
+        ( (HalfSize - (u2_ray_b(tid) + u2_ray_b(tat))) )
 
       /* last word of opposite is first word of other.  so, in a 4-word loom:
       **
@@ -170,7 +173,7 @@
       */
 
 #     define u2_ray_over(ray, siz_w) \
-        u2_ray_of(!u2_ray_a(ray), (LoomSize - (u2_ray_b(ray) + (siz_w))))
+        u2_ray_of(!u2_ray_a(ray), (HalfSize - (u2_ray_b(ray) + (siz_w))))
 
 #     define u2_at_nit(nit)    (Loom + nit)
 #     define u2_at_ray(ray)    u2_at_nit(u2_ray_nit(ray))
