@@ -788,8 +788,9 @@
     ?~  a
       [[b c] ~ ~]
     ?:  .=(b p.n.a)
-      ?>  .=(c q.n.a)
-      a
+      ?:  .=(c q.n.a)
+        a
+      [[b c] l.a r.a]
     ?:  (gor b p.n.a)
       =+  d=$(a l.a)
       ?>  ?=(^ d)
