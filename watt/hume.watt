@@ -6,9 +6,9 @@
 &!  env=seed
 ++  line
   |=  txt=@
-  ^-  [p=*bill q=*bill]
+  ^-  [p=*tank q=*bill]
   =+  gen=(ream txt)
   =+  man=(~(mint ut p.env) %noun gen)
-  :-  ~(dump ut p.man)
+  :-  (show ~(dunk ut p.man))
   ~(gut go .*(q.env q.man))
 --
