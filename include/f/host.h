@@ -116,6 +116,10 @@
     */
       typedef u2_noun (*u2_ho_fun)(u2_ray wir_r, u2_noun cor);
 
+    /* Jet to hash selector.
+    */
+#       define u2_jet_fun_m(jet_j) (0x7fffffff & (c3_w)(c3_p)(jet_j))
+
     /* u2_ho_state: jet state flags
     */
     typedef c3_w u2_ho_state;

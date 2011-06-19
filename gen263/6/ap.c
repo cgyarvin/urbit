@@ -968,7 +968,7 @@
       if ( !(jet_j->sat_s & u2_jet_memo) ) {
         return _open_in(wir_r, gen);
       } else {
-        c3_m    fun_m = (0x7fffffff & (c3_w)jet_j);
+        c3_m    fun_m = u2_jet_fun_m(jet_j);
         u2_noun pro   = u2_rl_find(wir_r, fun_m, gen);
 
         if ( u2_none != pro ) {

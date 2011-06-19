@@ -158,7 +158,7 @@
         return j2_mcx(Pit, ut, seek)(wir_r, van, sut, way, hep);
       }
       else {
-        c3_m    fun_m = (0x7fffffff & (c3_w)jet_j);
+        c3_m    fun_m = u2_jet_fun_m(jet_j);
         u2_noun pro   = u2_rl_find_trel(wir_r, fun_m, sut, way, hep);
 
         if ( u2_none != pro ) {

@@ -331,7 +331,7 @@
       if ( !(jet_j->sat_s & u2_jet_memo) ) {
         return _nest_dext_in(wir_r, van, sut, ref, gil);
       } else {
-        c3_m    sel_m = (0x7fffffff & (c3_w)jet_j);
+        c3_m    sel_m = u2_jet_fun_m(jet_j);
         u2_noun pro   = u2_rl_find_cell(wir_r, sel_m, sut, ref);
 
         if ( u2_none != pro ) {
