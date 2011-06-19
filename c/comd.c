@@ -70,7 +70,7 @@ c3_comd_line(const c3_c *fel_c)                                   //  retain
     }
 
     add_history(vid_c);
-    if ( append_history(1, fel_c) ) {
+    if ( write_history(fel_c) ) {
       perror("console");
       exit(1);
     }
