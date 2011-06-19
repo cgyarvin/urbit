@@ -1000,7 +1000,7 @@ u2_ho_use(u2_ray     wir_r,
         return u2_none;
       }
       else {
-        fun_m = (0x7fffffff & (c3_w)jet_j);
+        fun_m = u2_jet_fun_m(jet_j);
 
         if ( u2_none != (pro = u2_rl_find(wir_r, fun_m, key)) ) {
           u2_rz(wir_r, key);

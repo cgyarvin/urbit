@@ -1842,13 +1842,11 @@ u2_weak                       //  transfer
 u2_rl_mp(u2_ray ral_r,
          mpz_t  a_mp)         //  transfer (GMP)
 {
-  c3_assert(sizeof(mp_limb_t) == 4);
-
   /* Efficiency: unnecessary copy.
   */
   {
     c3_w pyg_w  = mpz_size(a_mp);
-    c3_w *buz_w = alloca(pyg_w * 4);
+    c3_w *buz_w = alloca(pyg_w * sizeof(mp_limb_t));
 
     mpz_export(buz_w, 0, -1, 4, 0, 0, a_mp);
     mpz_clear(a_mp);

@@ -55,8 +55,12 @@
 #     define U2_OS_LoomBase 0x4000000
 
 #   elif defined(U2_OS_osx)
+#   ifdef __LP64__
+#     define U2_OS_LoomBase 0x100300000
+#   else
 #     define U2_OS_LoomBase 0x4000000
-#     define U2_OS_LoomBits 29            //  ie, 2^29 words == 
+#   endif
+#     define U2_OS_LoomBits 28            //  ie, 2^28 words == 1GB
 #   endif
 
   /** Global variable control.

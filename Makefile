@@ -1,4 +1,4 @@
-# A remarkably simple makefile.
+# A simple makefile.
 #
 
 # Pick one of:
@@ -708,4 +708,4 @@ tags:
 	ctags -R -f .tags --exclude=root
 
 clean:
-	 $(RM) $(HILL_OFILES) $(BIN)/hill $(BIN)/eyre
+	 $(RM) $(HILL_OFILES) $(EYRE_OFILES) $(BIN)/hill $(BIN)/eyre
