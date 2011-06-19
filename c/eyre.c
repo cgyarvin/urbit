@@ -387,6 +387,29 @@ _eyre_call_2(u2_wire     wir_r,
   return pro;
 }
 
+/* _eyre_call_3(): call a text function, with argument `[a b c]`.
+*/
+static u2_noun                                                    //  produce
+_eyre_call_3(u2_wire     wir_r,
+             u2_noun     ken,                                     //  retain
+             const c3_c* src_c,                                   //  retain
+             u2_noun     a,                                       //  retain
+             u2_noun     b,                                       //  retain
+             u2_noun     c)                                       //  retain
+{
+  u2_noun src = u2_bn_string(wir_r, src_c);
+  u2_noun noc = _eyre_nock(wir_r, src, ken);
+  u2_noun cor = _eyre_nock(wir_r, 0, noc);
+  u2_noun pro = _eyre_mung(wir_r, cor, u2_bt(wir_r, u2_rx(wir_r, a),
+                                                    u2_rx(wir_r, b),
+                                                    u2_rx(wir_r, c)));
+
+  u2_rz(wir_r, cor);
+  u2_rz(wir_r, noc);
+
+  return pro;
+}
+
 /* _eyre_columns(): return screen column width from OS.
 */
 static c3_l
@@ -399,6 +422,22 @@ _eyre_columns(void)
   return buf_s[1] - 1;
 }
 
+/* _eyre_tank_win(): tank to wall.
+*/
+static u2_noun
+_eyre_tank_win(u2_wire wir_r,
+               u2_noun ken,                                       //  retain
+               c3_l    tab_l,
+               u2_noun tec)                                       //  retain
+{
+  c3_l    edg_l = _eyre_columns();
+
+  return _eyre_call_3
+    (wir_r, ken, 
+            "|!([a=@ b=@ c=*tank] (~(win re c) [a b]))", 
+            tab_l, edg_l, tec);
+}
+
 /* _eyre_bill(): bill to wall.
 */
 static u2_noun
@@ -406,10 +445,10 @@ _eyre_bill(u2_wire wir_r,
            u2_noun ken,                                           //  retain
            u2_noun bil)                                           //  retain
 {
-  c3_l    col_l = _eyre_columns();
+  c3_l    edg_l = _eyre_columns();
 
   return _eyre_call_2
-    (wir_r, ken, "|!([a=@ b=*bill] (~(fly to b) a))", col_l, bil);
+    (wir_r, ken, "|!([a=@ b=*bill] (~(fly to b) a))", edg_l, bil);
 }
 
 /* _eyre_print_tape(): print a tape of txt to FIL_f.
@@ -448,6 +487,23 @@ _eyre_print_wall(u2_wire     wir_r,
   }
 }
 
+/* _eyre_gnaw(): dump a tank to a wall, with tab.
+*/
+static void
+_eyre_gnaw(u2_wire wir_r,
+           u2_noun ken,                                           //  retain
+           c3_l    tab_l,
+           u2_noun tec)                                           //  retain
+{
+  u2_noun wal;
+
+  wal = _eyre_tank_win(wir_r, ken, tab_l, tec);
+  _eyre_print_wall(wir_r, 0, wal);
+
+  u2_rz(wir_r, wal);
+}
+
+
 /* _eyre_dump(): dump a bill to a wall.
 */
 static void
@@ -480,7 +536,7 @@ _eyre_print_spot(u2_wire wir_r,
        (u2_yes == u2_stud(pr_sot)) &&
        (u2_yes == u2_stud(qr_sot)) )
   {
-    printf("{%d.%d:%d.%d}", pq_sot, qq_sot, pr_sot, qr_sot);
+    printf("{%d.%d:%d.%d}\n", pq_sot, qq_sot, pr_sot, qr_sot);
   }
   else {
     printf("  {spot!}\n");
@@ -564,7 +620,7 @@ _eyre_line(u2_wire wir_r,
     u2_noun pro;
 
     pro = _eyre_mung(wir_r, gat, u2_rx(wir_r, txt));
-    _eyre_dump(wir_r, ken, u2_h(pro));
+    _eyre_gnaw(wir_r, ken, 0, u2_h(pro));
     _eyre_dump(wir_r, ken, u2_t(pro));
 
     u2_bl_done(wir_r, kit_r);

@@ -830,6 +830,7 @@
           |=  b=*
           :-  p=(hair -.b) 
           q=?~(+.b ~ [~ u=[p=(a +>-.b) q=[p=(hair -.b) q=(tape +.b)]]])
+++  pork  <*>
 ++  rash  |*([naf=@ sab=rule] (rasp (rip 3 naf) sab))
 ++  rasp  |*  [los=*tape sab=rule]
           =+  vex=((full sab) [p=*hair q=los])
@@ -1309,8 +1310,9 @@
   [$$(aug -.aug) $(aug +.aug)]
 ::
 ++  show
-  |=  vem=*
+  |=  vem=*pork
   ^-  *tank
+  ~~  ~(gut go `*`vem)
   ?:  ?=(@ vem)
     [%leaf (mesc (rip 3 vem))]
   ?-    vem
@@ -1338,6 +1340,8 @@
     ?~  c.vem
       ~
     [$$(vem -.c.vem) $(c.vem +.c.vem)]
+  ::
+      [s=%z c=*]        $(vem [[%r %% %% %%] c.vem])
   ==
 ::
 ++  mesc
@@ -1571,7 +1575,7 @@
 ::
 ++  cone
   |?
-    :+    p=*<%gold %lead %iron %wood>
+    :+    p=*<%gold %lead %iron>
         q=*type
       r=[p=*<~ ^> q=*(map term foot)]
   ==
@@ -2241,7 +2245,7 @@
       =+  gep=?:(?=([[%% [& *]] ~ ~] q.r.q.sut) '|' '&')
       =+  ^=  nox
           ^-  @
-          ?-(p.q.sut %gold '.', %iron '=', %lead ':', %wood '*')
+          ?-(p.q.sut %gold '.', %iron '=', %lead ':')
       =+  wil=?:(.=(p.sut q.q.sut) nox (cat 3 nox nox))
       =+  viq=(cat 3 gep wil)
       :^    %grip
@@ -2271,6 +2275,81 @@
           '$'
           ~(dem go u.piv)
           ~
+          ?:  (~(has in gax) sut)
+            ~
+          [':' $(gax (~(put in gax) sut), sut repo) ~]
+      ==
+    ==
+  ::
+  ++  dunk
+    ^-  *pork
+    =+  ^=  gil
+        =+  den=[p=`@`1 q=*(map type <@>)]
+        =+  vax=*(set type)
+        =<  q
+        |-  ^-  den
+        ?-    sut
+            [%cell *]   $(sut q.sut, den $(sut p.sut))
+            [%core *]
+          ?:  .=(p.sut q.q.sut) 
+            $(sut p.sut)
+          $(sut p.sut, den $(sut q.q.sut))
+        ::
+            [%face *]   $(sut q.sut)
+            [%fork *]   $(sut q.sut, den $(sut p.sut))
+            [%hold *]
+          ?:  (~(has in vax) sut)
+            ?:  (~(has by q.den) sut)
+              den
+            [.+(p.den) (~(put by q.den) [sut p.den])]
+          $(vax (~(put in vax) sut), sut repo)
+        ::
+            *           den
+        ==
+    =+  gax=*(set type)
+    |-
+    ?-    sut
+        %atom      '@'
+        %noun      '*'
+        %void      '#'
+        [%cell *] 
+      :*  [%r ' ' '[' ']'] 
+          $(sut p.sut)
+          |-
+          ?.  ?=([%cell *] q.sut)
+            [$$(sut q.sut) ~]
+          [$$(sut p.q.sut) $(q.sut q.q.sut)]
+      ==
+        [%core *]
+      =+  gep=?:(?=([[%% [& *]] ~ ~] q.r.q.sut) '|' '&')
+      =+  ^=  nox
+          ^-  @
+          ?-(p.q.sut %gold '.', %iron '=', %lead ':')
+      =+  wil=?:(.=(p.sut q.q.sut) nox (cat 3 nox nox))
+      =+  viq=(cat 3 gep wil)
+      :*  [%r '{}']
+          $(sut p.sut)
+          ?:(.=(p.sut q.q.sut) ~ [$(sut q.q.sut) ~])
+      ==
+        [%cube *]   ?:(.=(0 p.sut) '~' [%q p.sut])
+        [%face *]   [[%r '=' %% %%] p.sut $(sut q.sut) ~]
+        [%fork *]
+      ?:  .=([%fork [%cube 0] [%cube 1]] sut)
+        '?'
+      :*  [%r '<>']
+          $(sut p.sut)
+          |-
+          ?.  ?=([%fork *] q.sut)
+            [$$(sut q.sut) ~]
+          [$$(sut p.q.sut) $(q.sut q.q.sut)]
+      ==
+        [%hold *]
+      =+  piv=(~(get by gil) sut)
+      ?~  piv
+        $(sut repo)
+      :*  %z
+          '$'
+          [%d u.piv]
           ?:  (~(has in gax) sut)
             ~
           [':' $(gax (~(put in gax) sut), sut repo) ~]
@@ -2705,7 +2784,7 @@
     &.
     ++  cong
       ^-  ?
-      ?>  ?&(?=([%core *] sut) ?=([%core *] ref))   :: XX use wood
+      ?>  ?&(?=([%core *] sut) ?=([%core *] ref))   :: XX generic?
       ?:  .=(q.sut q.ref)
         dext(sut p.sut, ref p.ref)
       ?.  ?&  dext(sut q.q.sut, ref p.sut)
@@ -2713,8 +2792,6 @@
               dext(sut q.q.ref, ref p.ref) 
           ==
         |
-      ?:  .=(%wood p.q.sut)
-        ?&(.=(%wood p.q.ref) .=(q.r.q.sut q.r.q.ref))
       ?&
         ?|(.=(p.q.sut p.q.ref) .=(%gold p.q.ref))
         (cram(sut sut(p q.q.sut), ref ref(p q.q.ref)) q.r.q.sut q.r.q.ref)
@@ -2863,7 +2940,6 @@
             %gold   &
             %iron   | 
             %lead   .=(2 (cap axe))
-            %wood   &
         ==
       ::
           %rite
@@ -2871,7 +2947,6 @@
             %gold   &
             %iron   .=(2 (cap axe))
             %lead   | 
-            %wood   &
         ==
       ==
     ==
