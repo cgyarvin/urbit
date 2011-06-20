@@ -35,6 +35,7 @@
     extern u2_ho_jet j2_mbj(Pit, roll)[];
     extern u2_ho_jet j2_mbj(Pit, skim)[];
     extern u2_ho_jet j2_mbj(Pit, skip)[];
+    extern u2_ho_jet j2_mbj(Pit, slag)[];
     extern u2_ho_jet j2_mbj(Pit, snag)[];
     extern u2_ho_jet j2_mbj(Pit, turn)[];
     extern u2_ho_jet j2_mbj(Pit, weld)[];
@@ -133,6 +134,7 @@
       { j2_sb(Pit, roll), j2_mbj(Pit, roll), 0, 0, u2_none },
       { j2_sb(Pit, skim), j2_mbj(Pit, skim), 0, 0, u2_none },
       { j2_sb(Pit, skip), j2_mbj(Pit, skip), 0, 0, u2_none },
+      { j2_sb(Pit, slag), j2_mbj(Pit, slag), 0, 0, u2_none },
       { j2_sb(Pit, snag), j2_mbj(Pit, snag), 0, 0, u2_none },
       { j2_sb(Pit, turn), j2_mbj(Pit, turn), 0, 0, u2_none },
       { j2_sb(Pit, weld), j2_mbj(Pit, weld), 0, 0, u2_none },

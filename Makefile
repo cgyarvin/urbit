@@ -578,6 +578,7 @@ J263_2_OFILES=\
        gen263/2/roll.o \
        gen263/2/skim.o \
        gen263/2/skip.o \
+       gen263/2/slag.o \
        gen263/2/snag.o \
        gen263/2/sort.o \
        gen263/2/turn.o \

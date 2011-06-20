@@ -620,8 +620,8 @@ _eyre_line(u2_wire wir_r,
     u2_noun pro;
 
     pro = _eyre_mung(wir_r, gat, u2_rx(wir_r, txt));
-    _eyre_gnaw(wir_r, ken, 0, u2_h(pro));
-    _eyre_dump(wir_r, ken, u2_t(pro));
+    _eyre_gnaw(wir_r, ken, 2, u2_h(pro));
+    _eyre_gnaw(wir_r, ken, 0, u2_t(pro));
 
     u2_bl_done(wir_r, kit_r);
   }
