@@ -695,7 +695,7 @@ EYRE_OFILES=\
        $(J264_OFILES) \
        $(J263_OFILES)
 
-all: $(BIN)/eyre
+all: $(BIN)/hill $(BIN)/eyre
 
 $(BIN)/hill: $(HILL_OFILES)
 	mkdir -p $(BIN)
