@@ -1153,7 +1153,7 @@
   |?  [%leaf p=*tape]
       [%palm p=[p=*tape q=*tape r=*tape s=*tape] q=*(list tank)]
       [%rose p=[p=*tape q=*tape r=*tape] q=*(list tank)]
-      [%farm p=[p=*tape q=*tape r=*tape] q=*(list (list tank))]
+      ::  [%farm p=[p=*tape q=*tape r=*tape] q=*(list (list tank))]
   ==
 ::
 ::    Tier 5b/1, prettyprinting: processors
@@ -1339,7 +1339,6 @@
 ++  show
   |=  vem=*pork
   ^-  *tank
-  ~~  ~(gut go `*`vem)
   ?:  ?=(@ vem)
     [%leaf (mesc (rip 3 vem))]
   ?-    vem
@@ -2339,21 +2338,25 @@
         ::
             *           den
         ==
-    =+  gax=*(set type)
-    |-
+    =+  [gax=*(set type) dex=*(set type)]
+    =<  q
+    |-  ^-  [p=*(set type) q=*tank]
     ?-    sut
-        %atom      (show '@')
-        %noun      (show '*')
-        %void      (show '#')
+        %atom      [dex (show '@')]
+        %noun      [dex (show '*')]
+        %void      [dex (show '#')]
         [%cell *] 
-      :*  %rose
-          [[' ' ~]  ['[' ~] [']' ~]]
-          $(sut p.sut)
-          |-
+      =+  vir=$(sut p.sut)
+      =+  ^=  tov
+          |-  ^-  [p=*(set type) q=*(list tank)]
           ?.  ?=([%cell *] q.sut)
-            [$$(sut q.sut) ~]
-          [$$(sut p.q.sut) $(q.sut q.q.sut)]
-      ==
+            =+  yar=$$(sut q.sut, dex p.vir)
+            [p.yar [q.yar ~]]
+          =+  dey=$$(sut p.q.sut, dex p.vir)
+          =+  hoy=$(sut q.sut, p.vir p.dey)
+          [p.hoy [q.dey q.hoy]]
+      [p.tov [%rose [[' ' ~]  ['[' ~] [']' ~]] q.vir q.tov]]
+    ::
         [%core *]
       =+  gep=?:(?=([[%% [& *]] ~ ~] q.r.q.sut) '|' '&')
       =+  ^=  nox
@@ -2378,41 +2381,43 @@
           ?:  .=('&' gep)
             ~(ram re (show [%m '&%d:%x'] dyr tas ~))
           ~(ram re (show [%m '|:%x'] tas ~))
-      :~  %palm
-          [[' ' ~] wil ~ [')' ~]]
+      =+  vir=$(sut p.sut)
+      =+  ^=  rey
           ?:  .=(p.sut q.q.sut)
-            $(sut p.sut)
-          :~  %palm [[' ' ~] ~ ['{' ~] ['}' ~]] 
-              $(sut p.sut)
-              $(sut q.q.sut)
-          ==
-          lor
-      ==
-        [%cube *]   (show ?:(.=(0 p.sut) '~' [%q p.sut]))
-        [%face *]   [%palm [~ (rip 3 p.sut) ['=' ~] ~] [$(sut q.sut) ~]]
+            [p=p.vir q=[q.vir lor ~]]
+          =+  zam=$(sut q.q.sut, dex p.vir) 
+          [p=p.zam q=[q.vir q.zam lor ~]]
+      [p.rey [%palm [[' ' ~] wil ~ [')' ~]] q.rey]]
+    ::
+        [%cube *]   [dex (show ?:(.=(0 p.sut) '~' [%q p.sut]))]
+        [%face *]   
+      =+  vir=$(sut q.sut)
+      [p.vir [%palm [~ (rip 3 p.sut) ['=' ~] ~] [q.vir ~]]]
+    ::
         [%fork *]
       ?:  .=([%fork [%cube 0] [%cube 1]] sut)
-        (show '?')
-      :*  %rose
-          [[' ' ~]  ['[' ~] [']' ~]]
-          $(sut p.sut)
-          |-
+        [dex (show '?')]
+      =+  vir=$(sut p.sut)
+      =+  ^=  tov
+          |-  ^-  [p=*(set type) q=*(list tank)]
           ?.  ?=([%fork *] q.sut)
-            [$$(sut q.sut) ~]
-          [$$(sut p.q.sut) $(q.sut q.q.sut)]
-      ==
+            =+  yar=$$(sut q.sut, dex p.vir)
+            [p.yar [q.yar ~]]
+          =+  dey=$$(sut p.q.sut, dex p.vir)
+          =+  hoy=$(sut q.sut, p.vir p.dey)
+          [p.hoy [q.dey q.hoy]]
+      [p.tov [%rose [[' ' ~]  ['<' ~] ['>' ~]] q.vir q.tov]]
+    ::
         [%hold *]
       =+  piv=(~(get by gil) sut)
       ?~  piv
         $(sut repo)
       =+  yow=(show [%m '$%d'] u.piv ~)
-      ?:  (~(has in gax) sut)
-        yow
-      :*  %palm
-          [~ ~(ram re yow) [':' ~] ~]
-          $(gax (~(put in gax) sut), sut repo)
-          ~
-      ==
+      ?:  ?|((~(has in gax) sut) (~(has in dex) sut))
+        [dex yow]
+      =+  vir=$(gax (~(put in gax) sut), sut repo)
+      :-  (~(put in p.vir) sut)
+      [%palm [~ ~(ram re yow) [':' ~] ~] q.vir ~]
     ==
   ::
   ++  emit
