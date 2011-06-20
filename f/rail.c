@@ -796,6 +796,8 @@ u2_rl_lose(u2_ray  ral_r,
   if ( u2_none == som ) {
     return;
   }
+
+top: 
   if ( u2_fly_is_dog(som) ) {
     u2_ray som_r = u2_dog_a(som);
     u2_ray hat_r = u2_rail_hat_r(ral_r);
@@ -812,11 +814,16 @@ u2_rl_lose(u2_ray  ral_r,
 
           if ( 1 == use_w ) {
             if ( u2_dog_is_pom(som) ) {
-              u2_rl_lose(ral_r, u2_h(som));
-              u2_rl_lose(ral_r, u2_t(som));
+              u2_noun h_som = u2_h(som);
+              u2_noun t_som = u2_t(som);
+
+              u2_rl_lose(ral_r, h_som);
+
+              u2_rail_box_use(box_r) = 0;
+              _rl_bloq_free(ral_r, box_r);
+              som = t_som;
+              goto top;
             }
-            u2_rail_box_use(box_r) = 0;
-            _rl_bloq_free(ral_r, box_r);
           }
           else {
             // if ( use_w == 0 ) { u2_err(ral_r, "useless", som); }
@@ -836,8 +843,12 @@ u2_rl_lose(u2_ray  ral_r,
         u2_ray mat_r = u2_rail_mat_r(ral_r);
 
         if ( som_r >= mat_r ) {
-          u2_rl_lose(ral_r, *u2_at(som_r, u2_loom_cell, hed_r));
-          u2_rl_lose(ral_r, *u2_at(som_r, u2_loom_cell, tel_r));
+          u2_noun h_som = u2_h(som);
+          u2_noun t_som = u2_t(som);
+
+          u2_rl_lose(ral_r, h_som);
+          som = t_som;
+          goto top;
         }
       }
     }
@@ -1845,9 +1856,13 @@ u2_rl_mp(u2_ray ral_r,
   /* Efficiency: unnecessary copy.
   */
   {
-    c3_w pyg_w  = mpz_size(a_mp);
-    c3_w *buz_w = alloca(pyg_w * sizeof(mp_limb_t));
+    c3_w pyg_w  = mpz_size(a_mp) * ((sizeof(mp_limb_t)) / 4);
+    c3_w *buz_w = alloca(pyg_w * 4);
+    c3_w i_w;
 
+    for ( i_w = 0; i_w < pyg_w; i_w++ ) {
+      buz_w[i_w] = 0;
+    }
     mpz_export(buz_w, 0, -1, 4, 0, 0, a_mp);
     mpz_clear(a_mp);
 
@@ -2022,7 +2037,6 @@ u2_rl_words(u2_ray      ral_r,
           *u2_at_pug_buf(nov, i_w) = b_w[i_w];
         }
       }
-      // if ( nov == 2416376677 ) { c3_assert(0); }
       return nov;
     }
   }
