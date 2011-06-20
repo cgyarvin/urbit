@@ -56,7 +56,7 @@
 
 #   elif defined(U2_OS_osx)
 #   ifdef __LP64__
-#     define U2_OS_LoomBase 0x100300000
+#     define U2_OS_LoomBase 0x200000000
 #   else
 #     define U2_OS_LoomBase 0x4000000
 #   endif
