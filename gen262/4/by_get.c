@@ -8,7 +8,7 @@
 /* functions
 */
   u2_noun                                                         //  transfer
-  j2_mcc(Pit, by, get)(u2_wire wir_r, 
+  j2_mcc(Pt4, by, get)(u2_wire wir_r, 
                        u2_noun a,                                 //  retain
                        u2_noun b)                                 //  retain
   {
@@ -29,16 +29,16 @@
           return u2_rc(wir_r, u2_nul, u2_rx(wir_r, qn_a));
         } 
         else {
-          if ( u2_yes == j2_mbc(Pit, gor)(wir_r, b, pn_a) ) {
-            return j2_mcc(Pit, by, get)(wir_r, l_a, b);
+          if ( u2_yes == j2_mbc(Pt3, gor)(wir_r, b, pn_a) ) {
+            return j2_mcc(Pt4, by, get)(wir_r, l_a, b);
           } 
-          else return j2_mcc(Pit, by, get)(wir_r, r_a, b);
+          else return j2_mcc(Pt4, by, get)(wir_r, r_a, b);
         }
       }
     }
   }
   u2_weak                                                         //  transfer
-  j2_mc(Pit, by, get)(u2_wire wir_r, 
+  j2_mc(Pt4, by, get)(u2_wire wir_r, 
                       u2_noun cor)                                //  retain
   {
     u2_noun a, b;
@@ -46,14 +46,14 @@
     if ( u2_no == u2_mean(cor, 4, &b, 20, &a, 0) ) {
       return u2_none;
     } else {
-      return j2_mcc(Pit, by, get)(wir_r, a, b);
+      return j2_mcc(Pt4, by, get)(wir_r, a, b);
     }
   }
 
 /* structures
 */
   u2_ho_jet 
-  j2_mcj(Pit, by, get)[] = {
-    { ".3", c3__lite, j2_mc(Pit, by, get), Tier4, u2_none, u2_none },
+  j2_mcj(Pt4, by, get)[] = {
+    { ".3", c3__lite, j2_mc(Pt4, by, get), Tier4, u2_none, u2_none },
     { }
   };

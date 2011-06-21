@@ -8,14 +8,14 @@
 /* functions
 */
   u2_weak                                                         //  transfer
-  j2_mbc(Pit, inc)(u2_wire wir_r,
+  j2_mbc(Pt1, inc)(u2_wire wir_r,
                    u2_atom a)                                     //  retain
   {
     return u2_rl_vint(wir_r, u2_rx(wir_r, a));
   }
 
   u2_weak                                                         //  transfer
-  j2_mbc(Pit, dec)(u2_wire wir_r, 
+  j2_mbc(Pt1, dec)(u2_wire wir_r, 
                    u2_atom a)                                     //  retain
   {
     if ( _0 == a ) {
@@ -31,7 +31,7 @@
     }
   }
   u2_weak                                                         //  transfer
-  j2_mb(Pit, dec)(u2_wire wir_r, 
+  j2_mb(Pt1, dec)(u2_wire wir_r, 
                   u2_noun cor)                                    //  retain
   {
     u2_noun a;
@@ -41,14 +41,14 @@
     {
       return u2_none;
     } else {
-      return j2_mbc(Pit, dec)(wir_r, a);
+      return j2_mbc(Pt1, dec)(wir_r, a);
     }
   }
 
 /* structures
 */
   u2_ho_jet 
-  j2_mbj(Pit, dec)[] = { 
-    { ".3", c3__lite, j2_mb(Pit, dec), u2_jet_live, u2_none, u2_none },
+  j2_mbj(Pt1, dec)[] = { 
+    { ".3", c3__lite, j2_mb(Pt1, dec), u2_jet_live, u2_none, u2_none },
     { }
   };

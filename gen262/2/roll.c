@@ -8,7 +8,7 @@
 /* functions
 */
   u2_weak                                                         //  transfer
-  j2_mbc(Pit, roll)(u2_wire wir_r, 
+  j2_mbc(Pt2, roll)(u2_wire wir_r, 
                     u2_noun a,                                    //  retain
                     u2_noun b)                                    //  retain
   {
@@ -27,7 +27,7 @@
       if ( u2_none == vel ) {
         return u2_none;
       } else {
-        u2_weak hox = j2_mbc(Pit, roll)(wir_r, u2_t(a), vel);
+        u2_weak hox = j2_mbc(Pt2, roll)(wir_r, u2_t(a), vel);
 
         u2_rl_lose(wir_r, vel);
         return hox;
@@ -35,7 +35,7 @@
     }
   }
   u2_noun                                                         // transfer
-  j2_mb(Pit, roll)(u2_wire wir_r, 
+  j2_mb(Pt2, roll)(u2_wire wir_r, 
                    u2_noun cor)                                   // retain
   {
     u2_noun a, b;
@@ -43,14 +43,14 @@
     if ( u2_no == u2_mean(cor, 8, &a, 9, &b, 0) ) {
       return u2_none;
     } else {
-      return j2_mbc(Pit, roll)(wir_r, a, b);
+      return j2_mbc(Pt2, roll)(wir_r, a, b);
     }
   }
 
 /* structures
 */
   u2_ho_jet 
-  j2_mbj(Pit, roll)[] = {
-    { ".3", c3__lite, j2_mb(Pit, roll), Tier2, u2_none, u2_none },
+  j2_mbj(Pt2, roll)[] = {
+    { ".3", c3__lite, j2_mb(Pt2, roll), Tier2, u2_none, u2_none },
     { }
   };

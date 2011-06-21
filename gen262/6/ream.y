@@ -7,7 +7,13 @@
 */
 %{
 # include "all.h"
-#   define  Pit   watt_262
+
+#   define Pt1           k_262__a
+#   define Pt2           k_262__a__b
+#   define Pt3           k_262__a__b__c
+#   define Pt4           k_262__a__b__c__d
+#   define Pt5           k_262__a__b__c__d__e
+#   define Pt6           k_262__a__b__c__d__e__f
 
   /* Everything is a noun - no yacc type declarations!
   */
@@ -54,7 +60,7 @@
 #   define _yqual(a, b, c, d)      u2_bq(ywir_r, a, b, c, d)
 #   define _yquil(a, b, c, d, e)   u2_bu(ywir_r, a, b, c, d, e)
 
-#   define _ybook(a)               j2_mcc(Pit, by, gas)(ywir_r, u2_nul, a);
+#   define _ybook(a)               j2_mcc(Pt4, by, gas)(ywir_r, u2_nul, a);
 %}
 
 /* Bison directives.
@@ -597,7 +603,7 @@ tall
       : cord                    { $$ = _ycell($1, _0); }
       | cord si_dot g rope      { $$ = _ycell($1, $4); }
       | secs                    { $$ = $1; }
-      | secs si_dot g rope      { $$ = j2_mbc(Pit, weld)(ywir_r, $1, $4); }
+      | secs si_dot g rope      { $$ = j2_mbc(Pt2, weld)(ywir_r, $1, $4); }
       ;
 
       secs
@@ -617,14 +623,14 @@ tall
         axis_beto
           : si_dap              { $$ = _2; }
           | si_pad              { $$ = _3; }
-          | si_dap axis_galu    { $$ = j2_mbc(Pit, peg)(ywir_r, _2, $2); }
-          | si_pad axis_galu    { $$ = j2_mbc(Pit, peg)(ywir_r, _3, $2); }
+          | si_dap axis_galu    { $$ = j2_mbc(Pt3, peg)(ywir_r, _2, $2); }
+          | si_pad axis_galu    { $$ = j2_mbc(Pt3, peg)(ywir_r, _3, $2); }
           ;
         axis_galu
           : si_del              { $$ = _2; }
           | si_led              { $$ = _3; }
-          | si_del axis_beto    { $$ = j2_mbc(Pit, peg)(ywir_r, _2, $2); }
-          | si_led axis_beto    { $$ = j2_mbc(Pit, peg)(ywir_r, _3, $2); }
+          | si_del axis_beto    { $$ = j2_mbc(Pt3, peg)(ywir_r, _2, $2); }
+          | si_led axis_beto    { $$ = j2_mbc(Pt3, peg)(ywir_r, _3, $2); }
           ;
 
   /** Digraphs (with stem)
@@ -974,7 +980,7 @@ _scanner_init_clip(struct _u2_scanner *scanner,
 /* functions
 */
   u2_noun                                                         //  transfer
-  j2_mby(Pit, ream)(u2_wire wir_r, 
+  j2_mby(Pt6, ream)(u2_wire wir_r, 
                     u2_noun txt)                                  //  retain
   {
     struct _u2_scanner scanner;
@@ -996,7 +1002,7 @@ _scanner_init_clip(struct _u2_scanner *scanner,
     }
   }
   u2_noun                                                         //  transfer
-  j2_mby(Pit, vest)(u2_wire wir_r, 
+  j2_mby(Pt6, vest)(u2_wire wir_r, 
                     u2_noun tub)                                  //  retain
   {
     struct  _u2_scanner scanner;
@@ -1023,7 +1029,7 @@ _scanner_init_clip(struct _u2_scanner *scanner,
     }
   }
   u2_noun                                                         //  transfer
-  j2_mb(Pit, ream)(u2_wire wir_r, 
+  j2_mb(Pt6, ream)(u2_wire wir_r, 
                    u2_noun cor)                                   //  retain
   {
     u2_noun txt;
@@ -1031,11 +1037,11 @@ _scanner_init_clip(struct _u2_scanner *scanner,
     if ( u2_none == (txt = u2_frag(4, cor)) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
-      return j2_mby(Pit, ream)(wir_r, txt);
+      return j2_mby(Pt6, ream)(wir_r, txt);
     }
   }
   u2_noun
-  j2_mb(Pit, vest)(u2_wire wir_r,
+  j2_mb(Pt6, vest)(u2_wire wir_r,
                    u2_noun cor)
   {
     u2_noun tub;
@@ -1043,17 +1049,17 @@ _scanner_init_clip(struct _u2_scanner *scanner,
     if ( u2_none == (tub = u2_frag(4, cor)) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
-      return j2_mby(Pit, vest)(wir_r, tub);
+      return j2_mby(Pt6, vest)(wir_r, tub);
     }
   }
 
 /* structures
 */
   u2_ho_jet 
-  j2_mbj(Pit, ream)[] = { 
+  j2_mbj(Pt6, ream)[] = { 
     { ".3", 
        c3__hevy, 
-       j2_mb(Pit, ream), 
+       j2_mb(Pt6, ream), 
        // u2_jet_dead,
        // u2_jet_live | u2_jet_test, 
        u2_jet_live,
@@ -1062,10 +1068,10 @@ _scanner_init_clip(struct _u2_scanner *scanner,
   };
 
   u2_ho_jet 
-  j2_mbj(Pit, vest)[] = { 
+  j2_mbj(Pt6, vest)[] = { 
     { ".3", 
        c3__hevy, 
-       j2_mb(Pit, vest), 
+       j2_mb(Pt6, vest), 
        // u2_jet_dead,
        // u2_jet_live | u2_jet_test, 
        u2_jet_live,

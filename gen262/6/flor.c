@@ -8,7 +8,7 @@
 /* functions
 */
   u2_noun                                                         //  transfer
-  j2_mby(Pit, flor)(u2_wire wir_r, 
+  j2_mby(Pt6, flor)(u2_wire wir_r, 
                     u2_noun bos,                                  //  retain
                     u2_noun nif)                                  //  retain
   {
@@ -35,7 +35,7 @@
     }
   }
   u2_noun                                                         //  transfer
-  j2_mb(Pit, flor)(u2_wire wir_r, 
+  j2_mb(Pt6, flor)(u2_wire wir_r, 
                    u2_noun cor)                                   //  retain
   {
     u2_noun bos, nif;
@@ -43,14 +43,14 @@
     if ( u2_no == u2_mean(cor, 8, &bos, 9, &nif, 0) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
-      return j2_mby(Pit, flor)(wir_r, bos, nif);
+      return j2_mby(Pt6, flor)(wir_r, bos, nif);
     }
   }
 
 /* structures
 */
   u2_ho_jet 
-  j2_mbj(Pit, flor)[] = {
-    { ".3", c3__hevy, j2_mb(Pit, flor), Tier6_a, u2_none, u2_none },
+  j2_mbj(Pt6, flor)[] = {
+    { ".3", c3__hevy, j2_mb(Pt6, flor), Tier6_a, u2_none, u2_none },
     { }
   };

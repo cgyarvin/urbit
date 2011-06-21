@@ -8,7 +8,7 @@
 /* functions
 */
   u2_noun                                                         //  transfer
-  j2_mcy(Pit, ut, edit)(u2_wire wir_r, 
+  j2_mcy(Pt6, ut, edit)(u2_wire wir_r, 
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
                         u2_noun mun,                              //  retain
@@ -28,8 +28,8 @@
         } else {
           u2_noun pi_har = u2_h(i_har);
           u2_noun qi_har = u2_t(i_har);
-          u2_noun hep = j2_mcy(Pit, ap, rake)(wir_r, pi_har);
-          u2_noun taq = j2_mcy(Pit, ut, tusk)
+          u2_noun hep = j2_mcy(Pt6, ap, rake)(wir_r, pi_har);
+          u2_noun taq = j2_mcy(Pt6, ut, tusk)
             (wir_r, van, mun, hep, sut, qi_har);
 
           har = t_har;
@@ -43,7 +43,7 @@
   }
 
   u2_noun                                                         //  transfer
-  j2_mc(Pit, ut, edit)(u2_wire wir_r, 
+  j2_mc(Pt6, ut, edit)(u2_wire wir_r, 
                        u2_noun cor)                               //  retain
   {
     u2_noun van, sut, mun, har;
@@ -53,14 +53,14 @@
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
-      return j2_mcy(Pit, ut, edit)(wir_r, van, sut, mun, har);
+      return j2_mcy(Pt6, ut, edit)(wir_r, van, sut, mun, har);
     }
   }
 
 /* structures
 */
   u2_ho_jet 
-  j2_mcj(Pit, ut, edit)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, edit), Tier6_b, u2_none, u2_none },
+  j2_mcj(Pt6, ut, edit)[] = {
+    { ".3", c3__hevy, j2_mc(Pt6, ut, edit), Tier6_b, u2_none, u2_none },
     { }
   };

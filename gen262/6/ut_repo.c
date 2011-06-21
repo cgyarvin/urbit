@@ -8,7 +8,7 @@
 /* logic
 */
   u2_noun                                                         //  transfer
-  j2_mcy(Pit, ut, repo)(u2_wire wir_r, 
+  j2_mcy(Pt6, ut, repo)(u2_wire wir_r, 
                         u2_noun van,                              //  retain
                         u2_noun sut)                              //  retain
   {
@@ -55,13 +55,13 @@
       }
       case c3__hold: {
         p_sut = u2_t(sut);
-        return j2_mcy(Pit, ut, rest)(wir_r, van, sut, p_sut);
+        return j2_mcy(Pt6, ut, rest)(wir_r, van, sut, p_sut);
       }
     }
   }
 
   u2_noun                                                         //  transfer
-  j2_mc(Pit, ut, repo)(u2_wire wir_r, 
+  j2_mc(Pt6, ut, repo)(u2_wire wir_r, 
                        u2_noun cor)                               //  retain
   {
     u2_noun sut;
@@ -69,6 +69,6 @@
     if ( u2_none == (sut = u2_frag(4, cor)) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
-      return j2_mcy(Pit, ut, repo)(wir_r, cor, sut);
+      return j2_mcy(Pt6, ut, repo)(wir_r, cor, sut);
     }
   }

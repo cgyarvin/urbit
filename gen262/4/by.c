@@ -7,22 +7,22 @@
 
 /* declarations
 */
-  extern u2_ho_jet j2_mcj(Pit, by, gas)[];
-  extern u2_ho_jet j2_mcj(Pit, by, get)[];
-  extern u2_ho_jet j2_mcj(Pit, by, has)[];
-  extern u2_ho_jet j2_mcj(Pit, by, put)[];
+  extern u2_ho_jet j2_mcj(Pt4, by, gas)[];
+  extern u2_ho_jet j2_mcj(Pt4, by, get)[];
+  extern u2_ho_jet j2_mcj(Pt4, by, has)[];
+  extern u2_ho_jet j2_mcj(Pt4, by, put)[];
 
 /* structures
 */
   u2_ho_driver 
-  j2_mbd(Pit, by)[] = {
-    { j2_sc(Pit, by, gas), j2_mcj(Pit, by, gas), 0, 0, u2_none },
-    { j2_sc(Pit, by, get), j2_mcj(Pit, by, get), 0, 0, u2_none },
-    { j2_sc(Pit, by, has), j2_mcj(Pit, by, has), 0, 0, u2_none },
-    { j2_sc(Pit, by, put), j2_mcj(Pit, by, put), 0, 0, u2_none },
+  j2_mbd(Pt4, by)[] = {
+    { j2_sc(Pt4, by, gas), j2_mcj(Pt4, by, gas), 0, 0, u2_none },
+    { j2_sc(Pt4, by, get), j2_mcj(Pt4, by, get), 0, 0, u2_none },
+    { j2_sc(Pt4, by, has), j2_mcj(Pt4, by, has), 0, 0, u2_none },
+    { j2_sc(Pt4, by, put), j2_mcj(Pt4, by, put), 0, 0, u2_none },
     {}
   };
 
   u2_ho_driver
-  j2_db(Pit, by) = 
-    { j2_sb(Pit, by), 0, j2_mbd(Pit, by), 0, u2_none };
+  j2_db(Pt4, by) = 
+    { j2_sb(Pt4, by), 0, j2_mbd(Pt4, by), 0, u2_none };

@@ -8,7 +8,7 @@
 /* functions
 */
   u2_weak                                                         //  transfer
-  j2_mcc(Pit, in, gas)(u2_wire wir_r, 
+  j2_mcc(Pt4, in, gas)(u2_wire wir_r, 
                        u2_noun a,                                 //  retain
                        u2_noun b)                                 //  retain
   {
@@ -23,10 +23,10 @@
         u2_noun t_b = u2_t(b);
         u2_noun c;
 
-        if ( u2_none == (c = j2_mcc(Pit, in, put)(wir_r, a, i_b)) ) {
+        if ( u2_none == (c = j2_mcc(Pt4, in, put)(wir_r, a, i_b)) ) {
           return u2_none;
         } else {
-          u2_noun d = j2_mcc(Pit, in, gas)(wir_r, c, t_b);
+          u2_noun d = j2_mcc(Pt4, in, gas)(wir_r, c, t_b);
 
           u2_rl_lose(wir_r, c);
           return d;
@@ -35,7 +35,7 @@
     }
   }
   u2_weak                                                         //  transfer
-  j2_mc(Pit, in, gas)(u2_wire wir_r, 
+  j2_mc(Pt4, in, gas)(u2_wire wir_r, 
                       u2_noun cor)                                //  retain
   {
     u2_noun a, b;
@@ -43,14 +43,14 @@
     if ( u2_no == u2_mean(cor, 4, &b, 20, &a, 0) ) {
       return u2_none;
     } else {
-      return j2_mcc(Pit, in, gas)(wir_r, a, b);
+      return j2_mcc(Pt4, in, gas)(wir_r, a, b);
     }
   }
 
 /* structures
 */
   u2_ho_jet 
-  j2_mcj(Pit, in, gas)[] = {
-    { ".3", c3__lite, j2_mc(Pit, in, gas), Tier4, u2_none, u2_none },
+  j2_mcj(Pt4, in, gas)[] = {
+    { ".3", c3__lite, j2_mc(Pt4, in, gas), Tier4, u2_none, u2_none },
     { }
   };

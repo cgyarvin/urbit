@@ -24,7 +24,7 @@
         von = u2_bn_molt(wir_r, van, j2_ut_van_vet, u2_no, 0); break;
     }
     {
-      u2_noun mil = j2_mcy(Pit, ut, mint)(wir_r, von, sut, c3__noun, gen);
+      u2_noun mil = j2_mcy(Pt6, ut, mint)(wir_r, von, sut, c3__noun, gen);
       u2_noun fol = u2_rx(wir_r, u2_t(mil));
 
       u2_rl_lose(wir_r, mil);
@@ -34,7 +34,7 @@
   }
 
   u2_noun                                                         //  transfer
-  j2_mcx(Pit, ut, bake)(u2_wire wir_r, 
+  j2_mcx(Pt6, ut, bake)(u2_wire wir_r, 
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
                         u2_noun dab)                              //  retain
@@ -61,17 +61,17 @@
         }
         else if ( (u2_nul == l_dab) ) {
           return u2_bc
-            (wir_r, vad, j2_mcx(Pit, ut, bake)(wir_r, van, sut, r_dab));
+            (wir_r, vad, j2_mcx(Pt6, ut, bake)(wir_r, van, sut, r_dab));
         }
         else if ( (u2_nul == r_dab) ) {
           return u2_bc
-            (wir_r, vad, j2_mcx(Pit, ut, bake)(wir_r, van, sut, l_dab));
+            (wir_r, vad, j2_mcx(Pt6, ut, bake)(wir_r, van, sut, l_dab));
         }
         else {
           return u2_bt
             (wir_r, vad,
-                    j2_mcx(Pit, ut, bake)(wir_r, van, sut, l_dab),
-                    j2_mcx(Pit, ut, bake)(wir_r, van, sut, r_dab));
+                    j2_mcx(Pt6, ut, bake)(wir_r, van, sut, l_dab),
+                    j2_mcx(Pt6, ut, bake)(wir_r, van, sut, r_dab));
         }
       }
     }
@@ -80,10 +80,10 @@
 /* boilerplate
 */
   u2_ho_jet 
-  j2_mcj(Pit, ut, bake)[];
+  j2_mcj(Pt6, ut, bake)[];
 
   u2_noun                                                         //  transfer
-  j2_mc(Pit, ut, bake)(u2_wire wir_r, 
+  j2_mc(Pt6, ut, bake)(u2_wire wir_r, 
                        u2_noun cor)                               //  retain
   {
     u2_noun sut, dab, van;
@@ -93,12 +93,12 @@
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
-      return j2_mcx(Pit, ut, bake)(wir_r, van, sut, dab);
+      return j2_mcx(Pt6, ut, bake)(wir_r, van, sut, dab);
     }
   }
 
   u2_weak                                                         //  transfer
-  j2_mci(Pit, ut, bake)(u2_wire wir_r,
+  j2_mci(Pt6, ut, bake)(u2_wire wir_r,
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain 
                         u2_noun dab)                              //  retain
@@ -113,11 +113,11 @@
       u2_weak gat = u2_nk_soft(wir_r, von, hoc);
       u2_weak cor = u2_rl_molt(wir_r, gat, u2_cv_sam, u2_rx(wir_r, dab), 0);
 
-      if ( (u2_none == j2_mcj(Pit, ut, bake)[0].xip) ) {
+      if ( (u2_none == j2_mcj(Pt6, ut, bake)[0].xip) ) {
         u2_noun xip = u2_ds_find(wir_r, cor);
      
         c3_assert(u2_none != xip);
-        j2_mcj(Pit, ut, bake)[0].xip = xip;
+        j2_mcj(Pt6, ut, bake)[0].xip = xip;
       }
       u2_rl_lose(wir_r, gat);
       return cor;
@@ -125,20 +125,20 @@
   }
 
   u2_noun                                                         //  transfer
-  j2_mcy(Pit, ut, bake)(u2_wire wir_r,
+  j2_mcy(Pt6, ut, bake)(u2_wire wir_r,
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
                         u2_noun dab)                              //  retain
   {
-    u2_ho_jet *jet_j = &j2_mcj(Pit, ut, bake)[0];
+    u2_ho_jet *jet_j = &j2_mcj(Pt6, ut, bake)[0];
 
     if ( jet_j->sat_s == u2_jet_live ) {
-      return j2_mcx(Pit, ut, bake)(wir_r, van, sut, dab);
+      return j2_mcx(Pt6, ut, bake)(wir_r, van, sut, dab);
     }
     else {
       u2_noun cor, fol, pro;
 
-      cor = j2_mci(Pit, ut, bake)(wir_r, van, sut, dab);
+      cor = j2_mci(Pt6, ut, bake)(wir_r, van, sut, dab);
       fol = u2_t(cor);
 
       pro = u2_ho_use(wir_r, jet_j, cor, fol);
@@ -154,7 +154,7 @@
 /* structures
 */
   u2_ho_jet 
-  j2_mcj(Pit, ut, bake)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, bake), Tier6_b, u2_none, u2_none },
+  j2_mcj(Pt6, ut, bake)[] = {
+    { ".3", c3__hevy, j2_mc(Pt6, ut, bake), Tier6_b, u2_none, u2_none },
     { }
   };

@@ -8,7 +8,7 @@
 /* functions
 */
   u2_weak                                                         //  transfer
-  j2_mbc(Pit, rsh)(u2_wire wir_r, 
+  j2_mbc(Pt3, rsh)(u2_wire wir_r, 
                    u2_atom a,                                     //  retain
                    u2_atom b,                                     //  retain
                    u2_atom c)                                     //  retain
@@ -40,7 +40,7 @@
     }
   }
   u2_weak                                                         //  transfer
-  j2_mb(Pit, rsh)(u2_wire wir_r, 
+  j2_mb(Pt3, rsh)(u2_wire wir_r, 
                   u2_noun cor)                                    //  retain
   {
     u2_noun a, b, c;
@@ -52,14 +52,14 @@
     {
       return u2_none;
     } else {
-      return j2_mbc(Pit, rsh)(wir_r, a, b, c);
+      return j2_mbc(Pt3, rsh)(wir_r, a, b, c);
     }
   }
 
 /* structures
 */
   u2_ho_jet 
-  j2_mbj(Pit, rsh)[] = {
-    { ".3", c3__lite, j2_mb(Pit, rsh), Tier3, u2_none, u2_none },
+  j2_mbj(Pt3, rsh)[] = {
+    { ".3", c3__lite, j2_mb(Pt3, rsh), Tier3, u2_none, u2_none },
     { }
   };

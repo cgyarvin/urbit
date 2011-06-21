@@ -1,4 +1,4 @@
-/* gen?/watt.c
+/* genxxx/watt.c
 **
 ** This file is in the public domain.
 */
@@ -9,193 +9,218 @@
 */
   /* tier 1
   */
-    extern u2_ho_jet j2_mbj(Pit, add)[];
-    extern u2_ho_jet j2_mbj(Pit, bex)[];
-    extern u2_ho_jet j2_mbj(Pit, dec)[];
-    extern u2_ho_jet j2_mbj(Pit, div)[];
-    extern u2_ho_jet j2_mbj(Pit, gte)[];
-    extern u2_ho_jet j2_mbj(Pit, gth)[];
-    extern u2_ho_jet j2_mbj(Pit, lte)[];
-    extern u2_ho_jet j2_mbj(Pit, lth)[];
-    extern u2_ho_jet j2_mbj(Pit, mod)[];
-    extern u2_ho_jet j2_mbj(Pit, mul)[];
-    extern u2_ho_jet j2_mbj(Pit, sub)[];
+    extern u2_ho_jet j2_mbj(Pt1, add)[];
+    extern u2_ho_jet j2_mbj(Pt1, bex)[];
+    extern u2_ho_jet j2_mbj(Pt1, dec)[];
+    extern u2_ho_jet j2_mbj(Pt1, div)[];
+    extern u2_ho_jet j2_mbj(Pt1, gte)[];
+    extern u2_ho_jet j2_mbj(Pt1, gth)[];
+    extern u2_ho_jet j2_mbj(Pt1, lte)[];
+    extern u2_ho_jet j2_mbj(Pt1, lth)[];
+    extern u2_ho_jet j2_mbj(Pt1, mod)[];
+    extern u2_ho_jet j2_mbj(Pt1, mul)[];
+    extern u2_ho_jet j2_mbj(Pt1, sub)[];
 
   /* tier 2
   */
-    extern u2_ho_jet j2_mbj(Pit, bind)[];
-    extern u2_ho_jet j2_mbj(Pit, clap)[];
-    extern u2_ho_jet j2_mbj(Pit, drop)[];
-    extern u2_ho_jet j2_mbj(Pit, flop)[];
-    extern u2_ho_jet j2_mbj(Pit, lent)[];
-    extern u2_ho_jet j2_mbj(Pit, levy)[];
-    extern u2_ho_jet j2_mbj(Pit, lien)[];
-    extern u2_ho_jet j2_mbj(Pit, need)[];
-    extern u2_ho_jet j2_mbj(Pit, reel)[];
-    extern u2_ho_jet j2_mbj(Pit, roll)[];
-    extern u2_ho_jet j2_mbj(Pit, skim)[];
-    extern u2_ho_jet j2_mbj(Pit, skip)[];
-    extern u2_ho_jet j2_mbj(Pit, slag)[];
-    extern u2_ho_jet j2_mbj(Pit, snag)[];
-    extern u2_ho_jet j2_mbj(Pit, turn)[];
-    extern u2_ho_jet j2_mbj(Pit, weld)[];
+    extern u2_ho_jet j2_mbj(Pt2, bind)[];
+    extern u2_ho_jet j2_mbj(Pt2, clap)[];
+    extern u2_ho_jet j2_mbj(Pt2, drop)[];
+    extern u2_ho_jet j2_mbj(Pt2, flop)[];
+    extern u2_ho_jet j2_mbj(Pt2, lent)[];
+    extern u2_ho_jet j2_mbj(Pt2, levy)[];
+    extern u2_ho_jet j2_mbj(Pt2, lien)[];
+    extern u2_ho_jet j2_mbj(Pt2, need)[];
+    extern u2_ho_jet j2_mbj(Pt2, reel)[];
+    extern u2_ho_jet j2_mbj(Pt2, roll)[];
+    extern u2_ho_jet j2_mbj(Pt2, skim)[];
+    extern u2_ho_jet j2_mbj(Pt2, skip)[];
+    extern u2_ho_jet j2_mbj(Pt2, slag)[];
+    extern u2_ho_jet j2_mbj(Pt2, snag)[];
+    extern u2_ho_jet j2_mbj(Pt2, turn)[];
+    extern u2_ho_jet j2_mbj(Pt2, weld)[];
 
   /* tier 3
   */
-    extern u2_ho_jet j2_mbj(Pit, can)[];
-    extern u2_ho_jet j2_mbj(Pit, cap)[];
-    extern u2_ho_jet j2_mbj(Pit, cat)[];
-    extern u2_ho_jet j2_mbj(Pit, con)[];
-    extern u2_ho_jet j2_mbj(Pit, cue)[];
-    extern u2_ho_jet j2_mbj(Pit, cut)[];
-    extern u2_ho_jet j2_mbj(Pit, dis)[];
-    extern u2_ho_jet j2_mbj(Pit, dor)[];
-    extern u2_ho_jet j2_mbj(Pit, end)[];
-    extern u2_ho_jet j2_mbj(Pit, gor)[];
-    extern u2_ho_jet j2_mbj(Pit, hor)[];
-    extern u2_ho_jet j2_mbj(Pit, jam)[];
-    extern u2_ho_jet j2_mbj(Pit, lsh)[];
-    extern u2_ho_jet j2_mbj(Pit, mas)[];
-    extern u2_ho_jet j2_mbj(Pit, mat)[];
-    extern u2_ho_jet j2_mbj(Pit, met)[];
-    extern u2_ho_jet j2_mbj(Pit, mix)[];
-    extern u2_ho_jet j2_mbj(Pit, mug)[];
-    extern u2_ho_jet j2_mbj(Pit, peg)[];
-    extern u2_ho_jet j2_mbj(Pit, rap)[];
-    extern u2_ho_jet j2_mbj(Pit, rip)[];
-    extern u2_ho_jet j2_mbj(Pit, rsh)[];
-    extern u2_ho_jet j2_mbj(Pit, rub)[];
-    extern u2_ho_jet j2_mbj(Pit, vor)[];
+    extern u2_ho_jet j2_mbj(Pt3, can)[];
+    extern u2_ho_jet j2_mbj(Pt3, cap)[];
+    extern u2_ho_jet j2_mbj(Pt3, cat)[];
+    extern u2_ho_jet j2_mbj(Pt3, con)[];
+    extern u2_ho_jet j2_mbj(Pt3, cut)[];
+    extern u2_ho_jet j2_mbj(Pt3, dis)[];
+    extern u2_ho_jet j2_mbj(Pt3, dor)[];
+    extern u2_ho_jet j2_mbj(Pt3, end)[];
+    extern u2_ho_jet j2_mbj(Pt3, gor)[];
+    extern u2_ho_jet j2_mbj(Pt3, hor)[];
+    extern u2_ho_jet j2_mbj(Pt3, lsh)[];
+    extern u2_ho_jet j2_mbj(Pt3, mas)[];
+    extern u2_ho_jet j2_mbj(Pt3, met)[];
+    extern u2_ho_jet j2_mbj(Pt3, mix)[];
+    extern u2_ho_jet j2_mbj(Pt3, mug)[];
+    extern u2_ho_jet j2_mbj(Pt3, peg)[];
+    extern u2_ho_jet j2_mbj(Pt3, rap)[];
+    extern u2_ho_jet j2_mbj(Pt3, rip)[];
+    extern u2_ho_jet j2_mbj(Pt3, rsh)[];
+    extern u2_ho_jet j2_mbj(Pt3, vor)[];
 
   /* tier 4
   */
-    extern u2_ho_driver j2_mbd(Pit, in)[];
-    extern u2_ho_driver j2_mbd(Pit, by)[];
+    extern u2_ho_driver j2_mbd(Pt4, in)[];
+    extern u2_ho_driver j2_mbd(Pt4, by)[];
 
   /* tier 5
   */
-    extern u2_ho_jet j2_mbj(Pit, to)[];
-    extern u2_ho_driver j2_mbd(Pit, to)[];
+    extern u2_ho_jet j2_mbj(Pt5, cue)[];
+    extern u2_ho_jet j2_mbj(Pt5, mat)[];
+    extern u2_ho_jet j2_mbj(Pt5, jam)[];
+    extern u2_ho_jet j2_mbj(Pt5, rub)[];
 
   /* tier 6
   */
-    extern u2_ho_jet j2_mbj(Pit, cell)[];
-    extern u2_ho_jet j2_mbj(Pit, comb)[];
-    extern u2_ho_jet j2_mbj(Pit, cons)[];
-    extern u2_ho_jet j2_mbj(Pit, core)[];
-    extern u2_ho_jet j2_mbj(Pit, face)[];
-    extern u2_ho_jet j2_mbj(Pit, flan)[];
-    extern u2_ho_jet j2_mbj(Pit, flip)[];
-    extern u2_ho_jet j2_mbj(Pit, flor)[];
-    extern u2_ho_jet j2_mbj(Pit, fork)[];
-    extern u2_ho_jet j2_mbj(Pit, hack)[];
-    extern u2_ho_jet j2_mbj(Pit, hike)[];
-    extern u2_ho_jet j2_mbj(Pit, look)[];
-    extern u2_ho_jet j2_mbj(Pit, open)[];
-    extern u2_ho_jet j2_mbj(Pit, rake)[];
-    extern u2_ho_jet j2_mbj(Pit, ream)[];
-    extern u2_ho_jet j2_mbj(Pit, vest)[];
+    extern u2_ho_jet j2_mbj(Pt6, cell)[];
+    extern u2_ho_jet j2_mbj(Pt6, comb)[];
+    extern u2_ho_jet j2_mbj(Pt6, cons)[];
+    extern u2_ho_jet j2_mbj(Pt6, core)[];
+    extern u2_ho_jet j2_mbj(Pt6, face)[];
+    extern u2_ho_jet j2_mbj(Pt6, flan)[];
+    extern u2_ho_jet j2_mbj(Pt6, flip)[];
+    extern u2_ho_jet j2_mbj(Pt6, flor)[];
+    extern u2_ho_jet j2_mbj(Pt6, fork)[];
+    extern u2_ho_jet j2_mbj(Pt6, hack)[];
+    extern u2_ho_jet j2_mbj(Pt6, hike)[];
+    extern u2_ho_jet j2_mbj(Pt6, look)[];
+    extern u2_ho_jet j2_mbj(Pt6, open)[];
+    extern u2_ho_jet j2_mbj(Pt6, rake)[];
+    extern u2_ho_jet j2_mbj(Pt6, ream)[];
+    extern u2_ho_jet j2_mbj(Pt6, vest)[];
 
-    extern u2_ho_jet j2_mbj(Pit, ap)[];
-    extern u2_ho_driver j2_mbd(Pit, ap)[];
+    extern u2_ho_jet j2_mbj(Pt6, ap)[];
+    extern u2_ho_driver j2_mbd(Pt6, ap)[];
 
-    extern u2_ho_jet j2_mbj(Pit, ut)[];
-    extern u2_ho_driver j2_mbd(Pit, ut)[];
+    extern u2_ho_jet j2_mbj(Pt6, ut)[];
+    extern u2_ho_driver j2_mbd(Pt6, ut)[];
 
 /* structures
 */
-  static u2_ho_driver 
-  _watt_drivers[] = {
-    /* tier 1
-    */
-      { j2_sb(Pit, add), j2_mbj(Pit, add), 0, 0, u2_none },
-      { j2_sb(Pit, bex), j2_mbj(Pit, bex), 0, 0, u2_none },
-      { j2_sb(Pit, dec), j2_mbj(Pit, dec), 0, 0, u2_none },
-      { j2_sb(Pit, div), j2_mbj(Pit, div), 0, 0, u2_none },
-      { j2_sb(Pit, gte), j2_mbj(Pit, gte), 0, 0, u2_none },
-      { j2_sb(Pit, gth), j2_mbj(Pit, gth), 0, 0, u2_none },
-      { j2_sb(Pit, lte), j2_mbj(Pit, lte), 0, 0, u2_none },
-      { j2_sb(Pit, lth), j2_mbj(Pit, lth), 0, 0, u2_none },
-      { j2_sb(Pit, mod), j2_mbj(Pit, mod), 0, 0, u2_none },
-      { j2_sb(Pit, mul), j2_mbj(Pit, mul), 0, 0, u2_none },
-      { j2_sb(Pit, sub), j2_mbj(Pit, sub), 0, 0, u2_none },
-
-    /* tier 2
-    */
-      { j2_sb(Pit, bind), j2_mbj(Pit, bind), 0, 0, u2_none },
-      { j2_sb(Pit, clap), j2_mbj(Pit, clap), 0, 0, u2_none },
-      { j2_sb(Pit, drop), j2_mbj(Pit, drop), 0, 0, u2_none },
-      { j2_sb(Pit, flop), j2_mbj(Pit, flop), 0, 0, u2_none },
-      { j2_sb(Pit, lent), j2_mbj(Pit, lent), 0, 0, u2_none },
-      { j2_sb(Pit, levy), j2_mbj(Pit, levy), 0, 0, u2_none },
-      { j2_sb(Pit, lien), j2_mbj(Pit, lien), 0, 0, u2_none },
-      { j2_sb(Pit, need), j2_mbj(Pit, need), 0, 0, u2_none },
-      { j2_sb(Pit, reel), j2_mbj(Pit, reel), 0, 0, u2_none },
-      { j2_sb(Pit, roll), j2_mbj(Pit, roll), 0, 0, u2_none },
-      { j2_sb(Pit, skim), j2_mbj(Pit, skim), 0, 0, u2_none },
-      { j2_sb(Pit, skip), j2_mbj(Pit, skip), 0, 0, u2_none },
-      { j2_sb(Pit, slag), j2_mbj(Pit, slag), 0, 0, u2_none },
-      { j2_sb(Pit, snag), j2_mbj(Pit, snag), 0, 0, u2_none },
-      { j2_sb(Pit, turn), j2_mbj(Pit, turn), 0, 0, u2_none },
-      { j2_sb(Pit, weld), j2_mbj(Pit, weld), 0, 0, u2_none },
-
-    /* tier 3
-    */
-      { j2_sb(Pit, can), j2_mbj(Pit, can), 0, 0, u2_none },
-      { j2_sb(Pit, cap), j2_mbj(Pit, cap), 0, 0, u2_none },
-      { j2_sb(Pit, cat), j2_mbj(Pit, cat), 0, 0, u2_none },
-      { j2_sb(Pit, con), j2_mbj(Pit, con), 0, 0, u2_none },
-      { j2_sb(Pit, cue), j2_mbj(Pit, cue), 0, 0, u2_none },
-      { j2_sb(Pit, cut), j2_mbj(Pit, cut), 0, 0, u2_none },
-      { j2_sb(Pit, dor), j2_mbj(Pit, dor), 0, 0, u2_none },
-      { j2_sb(Pit, dis), j2_mbj(Pit, dis), 0, 0, u2_none },
-      { j2_sb(Pit, end), j2_mbj(Pit, end), 0, 0, u2_none },
-      { j2_sb(Pit, gor), j2_mbj(Pit, gor), 0, 0, u2_none },
-      { j2_sb(Pit, hor), j2_mbj(Pit, hor), 0, 0, u2_none },
-      { j2_sb(Pit, jam), j2_mbj(Pit, jam), 0, 0, u2_none },
-      { j2_sb(Pit, lsh), j2_mbj(Pit, lsh), 0, 0, u2_none },
-      { j2_sb(Pit, mas), j2_mbj(Pit, mas), 0, 0, u2_none },
-      { j2_sb(Pit, mat), j2_mbj(Pit, mat), 0, 0, u2_none },
-      { j2_sb(Pit, met), j2_mbj(Pit, met), 0, 0, u2_none },
-      { j2_sb(Pit, mix), j2_mbj(Pit, mix), 0, 0, u2_none },
-      { j2_sb(Pit, mug), j2_mbj(Pit, mug), 0, 0, u2_none },
-      { j2_sb(Pit, peg), j2_mbj(Pit, peg), 0, 0, u2_none },
-      { j2_sb(Pit, rap), j2_mbj(Pit, rap), 0, 0, u2_none },
-      { j2_sb(Pit, rip), j2_mbj(Pit, rip), 0, 0, u2_none },
-      { j2_sb(Pit, rsh), j2_mbj(Pit, rsh), 0, 0, u2_none },
-      { j2_sb(Pit, rub), j2_mbj(Pit, rub), 0, 0, u2_none },
-      { j2_sb(Pit, vor), j2_mbj(Pit, vor), 0, 0, u2_none },
-
-    /* tier 4
-    */
-      { j2_sb(Pit, in), 0, j2_mbd(Pit, in), 0, u2_none },
-      { j2_sb(Pit, by), 0, j2_mbd(Pit, by), 0, u2_none },
-
-    /* tier 5
-    */
-      { j2_sb(Pit, to), j2_mbj(Pit, to), j2_mbd(Pit, to), 0, u2_none },
-
-    /* tier 6
-    */
-      { j2_sb(Pit, cell), j2_mbj(Pit, cell), 0, 0, u2_none },
-      { j2_sb(Pit, comb), j2_mbj(Pit, comb), 0, 0, u2_none },
-      { j2_sb(Pit, cons), j2_mbj(Pit, cons), 0, 0, u2_none },
-      { j2_sb(Pit, core), j2_mbj(Pit, core), 0, 0, u2_none },
-      { j2_sb(Pit, face), j2_mbj(Pit, face), 0, 0, u2_none },
-      { j2_sb(Pit, flan), j2_mbj(Pit, flan), 0, 0, u2_none },
-      { j2_sb(Pit, flip), j2_mbj(Pit, flip), 0, 0, u2_none },
-      { j2_sb(Pit, flor), j2_mbj(Pit, flor), 0, 0, u2_none },
-      { j2_sb(Pit, fork), j2_mbj(Pit, fork), 0, 0, u2_none },
-      { j2_sb(Pit, hack), j2_mbj(Pit, hack), 0, 0, u2_none },
-      { j2_sb(Pit, hike), j2_mbj(Pit, hike), 0, 0, u2_none },
-      { j2_sb(Pit, look), j2_mbj(Pit, look), 0, 0, u2_none },
-      { j2_sb(Pit, ream), j2_mbj(Pit, ream), 0, 0, u2_none },
-      { j2_sb(Pit, vest), j2_mbj(Pit, vest), 0, 0, u2_none },
-
-      { j2_sb(Pit, ap), j2_mbj(Pit, ap), j2_mbd(Pit, ap), 0, u2_none },
-      { j2_sb(Pit, ut), j2_mbj(Pit, ut), j2_mbd(Pit, ut), 0, u2_none } 
-  };
+  static u2_ho_driver
+    _watt_drivers_0[],
+    _watt_drivers_1[],
+    _watt_drivers_2[],
+    _watt_drivers_3[],
+    _watt_drivers_4[],
+    _watt_drivers_5[],
+    _watt_drivers_6[];
 
   u2_ho_driver
-  j2_da(Pit) = 
-    { j2_sa(Pit), 0, _watt_drivers, 0, u2_none };
+  j2_da(Pt0) = { j2_sa(Pt0), 0, _watt_drivers_0, 0, u2_none };
+
+  static u2_ho_driver
+  _watt_drivers_0[] = {
+    { j2_sb(Pt0, a), 0, _watt_drivers_1, 0, u2_none },
+    { }
+  };
+
+  static u2_ho_driver 
+  _watt_drivers_1[] = {
+    { j2_sb(Pt1, add), j2_mbj(Pt1, add), 0, 0, u2_none },
+    { j2_sb(Pt1, bex), j2_mbj(Pt1, bex), 0, 0, u2_none },
+    { j2_sb(Pt1, dec), j2_mbj(Pt1, dec), 0, 0, u2_none },
+    { j2_sb(Pt1, div), j2_mbj(Pt1, div), 0, 0, u2_none },
+    { j2_sb(Pt1, gte), j2_mbj(Pt1, gte), 0, 0, u2_none },
+    { j2_sb(Pt1, gth), j2_mbj(Pt1, gth), 0, 0, u2_none },
+    { j2_sb(Pt1, lte), j2_mbj(Pt1, lte), 0, 0, u2_none },
+    { j2_sb(Pt1, lth), j2_mbj(Pt1, lth), 0, 0, u2_none },
+    { j2_sb(Pt1, mod), j2_mbj(Pt1, mod), 0, 0, u2_none },
+    { j2_sb(Pt1, mul), j2_mbj(Pt1, mul), 0, 0, u2_none },
+    { j2_sb(Pt1, sub), j2_mbj(Pt1, sub), 0, 0, u2_none },
+    { j2_sb(Pt1, b), 0, _watt_drivers_2, 0, u2_none },
+    { }
+  };
+
+  static u2_ho_driver 
+  _watt_drivers_2[] = {
+    { j2_sb(Pt2, bind), j2_mbj(Pt2, bind), 0, 0, u2_none },
+    { j2_sb(Pt2, clap), j2_mbj(Pt2, clap), 0, 0, u2_none },
+    { j2_sb(Pt2, drop), j2_mbj(Pt2, drop), 0, 0, u2_none },
+    { j2_sb(Pt2, flop), j2_mbj(Pt2, flop), 0, 0, u2_none },
+    { j2_sb(Pt2, lent), j2_mbj(Pt2, lent), 0, 0, u2_none },
+    { j2_sb(Pt2, levy), j2_mbj(Pt2, levy), 0, 0, u2_none },
+    { j2_sb(Pt2, lien), j2_mbj(Pt2, lien), 0, 0, u2_none },
+    { j2_sb(Pt2, need), j2_mbj(Pt2, need), 0, 0, u2_none },
+    { j2_sb(Pt2, reel), j2_mbj(Pt2, reel), 0, 0, u2_none },
+    { j2_sb(Pt2, roll), j2_mbj(Pt2, roll), 0, 0, u2_none },
+    { j2_sb(Pt2, skim), j2_mbj(Pt2, skim), 0, 0, u2_none },
+    { j2_sb(Pt2, skip), j2_mbj(Pt2, skip), 0, 0, u2_none },
+    { j2_sb(Pt2, slag), j2_mbj(Pt2, slag), 0, 0, u2_none },
+    { j2_sb(Pt2, snag), j2_mbj(Pt2, snag), 0, 0, u2_none },
+    { j2_sb(Pt2, turn), j2_mbj(Pt2, turn), 0, 0, u2_none },
+    { j2_sb(Pt2, weld), j2_mbj(Pt2, weld), 0, 0, u2_none },
+    { j2_sb(Pt2, c), 0, _watt_drivers_3, 0, u2_none },
+    { }
+  };
+
+  static u2_ho_driver
+  _watt_drivers_3[] = {
+    { j2_sb(Pt3, can), j2_mbj(Pt3, can), 0, 0, u2_none },
+    { j2_sb(Pt3, cap), j2_mbj(Pt3, cap), 0, 0, u2_none },
+    { j2_sb(Pt3, cat), j2_mbj(Pt3, cat), 0, 0, u2_none },
+    { j2_sb(Pt3, con), j2_mbj(Pt3, con), 0, 0, u2_none },
+    { j2_sb(Pt3, cut), j2_mbj(Pt3, cut), 0, 0, u2_none },
+    { j2_sb(Pt3, dor), j2_mbj(Pt3, dor), 0, 0, u2_none },
+    { j2_sb(Pt3, dis), j2_mbj(Pt3, dis), 0, 0, u2_none },
+    { j2_sb(Pt3, end), j2_mbj(Pt3, end), 0, 0, u2_none },
+    { j2_sb(Pt3, gor), j2_mbj(Pt3, gor), 0, 0, u2_none },
+    { j2_sb(Pt3, hor), j2_mbj(Pt3, hor), 0, 0, u2_none },
+    { j2_sb(Pt3, lsh), j2_mbj(Pt3, lsh), 0, 0, u2_none },
+    { j2_sb(Pt3, mas), j2_mbj(Pt3, mas), 0, 0, u2_none },
+    { j2_sb(Pt3, met), j2_mbj(Pt3, met), 0, 0, u2_none },
+    { j2_sb(Pt3, mix), j2_mbj(Pt3, mix), 0, 0, u2_none },
+    { j2_sb(Pt3, mug), j2_mbj(Pt3, mug), 0, 0, u2_none },
+    { j2_sb(Pt3, peg), j2_mbj(Pt3, peg), 0, 0, u2_none },
+    { j2_sb(Pt3, rap), j2_mbj(Pt3, rap), 0, 0, u2_none },
+    { j2_sb(Pt3, rip), j2_mbj(Pt3, rip), 0, 0, u2_none },
+    { j2_sb(Pt3, rsh), j2_mbj(Pt3, rsh), 0, 0, u2_none },
+    { j2_sb(Pt3, vor), j2_mbj(Pt3, vor), 0, 0, u2_none },
+    { j2_sb(Pt3, d), 0, _watt_drivers_4, 0, u2_none },
+    { }
+  };
+
+  static u2_ho_driver
+  _watt_drivers_4[] = {
+    { j2_sb(Pt4, in), 0, j2_mbd(Pt4, in), 0, u2_none },
+    { j2_sb(Pt4, by), 0, j2_mbd(Pt4, by), 0, u2_none },
+    { j2_sb(Pt4, e), 0, _watt_drivers_5, 0, u2_none },
+    { }
+  };
+
+  static u2_ho_driver
+  _watt_drivers_5[] = {
+    { j2_sb(Pt5, cue), j2_mbj(Pt5, cue), 0, 0, u2_none },
+    { j2_sb(Pt5, jam), j2_mbj(Pt5, jam), 0, 0, u2_none },
+    { j2_sb(Pt5, mat), j2_mbj(Pt5, mat), 0, 0, u2_none },
+    { j2_sb(Pt5, rub), j2_mbj(Pt5, rub), 0, 0, u2_none },
+    { j2_sb(Pt5, f), 0, _watt_drivers_6, 0, u2_none },
+    { }
+  };
+
+  static u2_ho_driver
+  _watt_drivers_6[] = {
+    { j2_sb(Pt6, cell), j2_mbj(Pt6, cell), 0, 0, u2_none },
+    { j2_sb(Pt6, comb), j2_mbj(Pt6, comb), 0, 0, u2_none },
+    { j2_sb(Pt6, cons), j2_mbj(Pt6, cons), 0, 0, u2_none },
+    { j2_sb(Pt6, core), j2_mbj(Pt6, core), 0, 0, u2_none },
+    { j2_sb(Pt6, face), j2_mbj(Pt6, face), 0, 0, u2_none },
+    { j2_sb(Pt6, flan), j2_mbj(Pt6, flan), 0, 0, u2_none },
+    { j2_sb(Pt6, flip), j2_mbj(Pt6, flip), 0, 0, u2_none },
+    { j2_sb(Pt6, flor), j2_mbj(Pt6, flor), 0, 0, u2_none },
+    { j2_sb(Pt6, fork), j2_mbj(Pt6, fork), 0, 0, u2_none },
+    { j2_sb(Pt6, hack), j2_mbj(Pt6, hack), 0, 0, u2_none },
+    { j2_sb(Pt6, hike), j2_mbj(Pt6, hike), 0, 0, u2_none },
+    { j2_sb(Pt6, look), j2_mbj(Pt6, look), 0, 0, u2_none },
+    { j2_sb(Pt6, ream), j2_mbj(Pt6, ream), 0, 0, u2_none },
+    { j2_sb(Pt6, vest), j2_mbj(Pt6, vest), 0, 0, u2_none },
+
+    { j2_sb(Pt6, ap), j2_mbj(Pt6, ap), j2_mbd(Pt6, ap), 0, u2_none },
+    { j2_sb(Pt6, ut), j2_mbj(Pt6, ut), j2_mbd(Pt6, ut), 0, u2_none },
+    { }
+  };

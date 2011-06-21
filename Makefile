@@ -713,24 +713,20 @@ J262_3_OFILES=\
        gen262/3/cap.o \
        gen262/3/cat.o \
        gen262/3/con.o \
-       gen262/3/cue.o \
        gen262/3/cut.o \
        gen262/3/dor.o \
        gen262/3/dis.o \
        gen262/3/end.o \
        gen262/3/gor.o \
        gen262/3/hor.o \
-       gen262/3/jam.o \
        gen262/3/lsh.o \
        gen262/3/mas.o \
-       gen262/3/mat.o \
        gen262/3/met.o \
        gen262/3/mix.o \
        gen262/3/mug.o \
        gen262/3/peg.o \
        gen262/3/rap.o \
        gen262/3/rip.o \
-       gen262/3/rub.o \
        gen262/3/rsh.o \
        gen262/3/vor.o
 
@@ -747,7 +743,10 @@ J262_4_OFILES=\
        gen262/4/by_put.o 
 
 J262_5_OFILES=\
-       gen262/5/to.o
+       gen262/5/cue.o \
+       gen262/5/jam.o \
+       gen262/5/mat.o \
+       gen262/5/rub.o 
 
 J262_6_OFILES=\
        gen262/6/ap.o \

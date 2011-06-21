@@ -8,7 +8,7 @@
 /* logic
 */
   u2_noun                                                         //  transfer
-  j2_mcy(Pit, ut, burn)(u2_wire wir_r, 
+  j2_mcy(Pt6, ut, burn)(u2_wire wir_r, 
                         u2_noun van,                              //  retain
                         u2_noun sut)                              //  retain
   {
@@ -29,8 +29,8 @@
       case c3__cell: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {
         return u2_bc
-          (wir_r, j2_mcy(Pit, ut, burn)(wir_r, van, p_sut),
-                  j2_mcy(Pit, ut, burn)(wir_r, van, q_sut));
+          (wir_r, j2_mcy(Pt6, ut, burn)(wir_r, van, p_sut),
+                  j2_mcy(Pt6, ut, burn)(wir_r, van, q_sut));
       }
       case c3__core: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
                      u2_bi_trel(wir_r, q_sut, &pq_sut, &qq_sut, &rq_sut);
@@ -40,7 +40,7 @@
           return u2_bl_bail(wir_r, c3__fail);
         } else {
           return u2_bc
-            (wir_r, j2_mcy(Pit, ut, burn)(wir_r, van, p_sut),
+            (wir_r, j2_mcy(Pt6, ut, burn)(wir_r, van, p_sut),
                     u2_rx(wir_r, prq_sut));
         }
       }
@@ -50,12 +50,12 @@
       }
       case c3__face: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {
-        return j2_mcy(Pit, ut, burn)(wir_r, van, q_sut);
+        return j2_mcy(Pt6, ut, burn)(wir_r, van, q_sut);
       }
       case c3__fork: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {
-        u2_noun heb = j2_mcy(Pit, ut, burn)(wir_r, van, p_sut);
-        u2_noun nar = j2_mcy(Pit, ut, burn)(wir_r, van, q_sut);
+        u2_noun heb = j2_mcy(Pt6, ut, burn)(wir_r, van, p_sut);
+        u2_noun nar = j2_mcy(Pt6, ut, burn)(wir_r, van, q_sut);
 
         if ( u2_no == u2_sing(heb, nar) ) {
           return u2_bl_bail(wir_r, c3__fail);
@@ -65,8 +65,8 @@
       }
       case c3__hold: p_sut = u2_t(sut);
       {
-        u2_noun rep = j2_mcy(Pit, ut, repo)(wir_r, van, sut);
-        u2_noun fos = j2_mcy(Pit, ut, burn)(wir_r, van, rep);
+        u2_noun rep = j2_mcy(Pt6, ut, repo)(wir_r, van, sut);
+        u2_noun fos = j2_mcy(Pt6, ut, burn)(wir_r, van, rep);
 
         u2_rl_lose(wir_r, rep);
         return fos;
@@ -75,7 +75,7 @@
   }
 
   u2_noun                                                         //  transfer
-  j2_mc(Pit, ut, burn)(u2_wire wir_r, 
+  j2_mc(Pt6, ut, burn)(u2_wire wir_r, 
                        u2_noun cor)                               //  retain
   {
     u2_noun sut;
@@ -83,6 +83,6 @@
     if ( u2_none == (sut = u2_frag(u2_cv_sam, cor)) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
-      return j2_mcy(Pit, ut, burn)(wir_r, cor, sut);
+      return j2_mcy(Pt6, ut, burn)(wir_r, cor, sut);
     }
   }

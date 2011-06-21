@@ -17,7 +17,7 @@
              u2_noun ref,
              u2_noun bix)
   {
-    u2_noun rep = j2_mcy(Pit, ut, repo)(wir_r, van, sut);
+    u2_noun rep = j2_mcy(Pt6, ut, repo)(wir_r, van, sut);
     u2_noun ret = _fuse_in(wir_r, van, rep, ref, bix);
 
     u2_rl_lose(wir_r, rep);
@@ -65,7 +65,7 @@
         if ( u2_yes == u2_as_pq(ref, c3__cell, &p_ref, &q_ref) ) {
           u2_noun hed = _fuse_in(wir_r, van, p_sut, p_ref, bix);
           u2_noun tal = _fuse_in(wir_r, van, q_sut, q_ref, bix);
-          u2_noun ret = j2_mby(Pit, cell)(wir_r, hed, tal);
+          u2_noun ret = j2_mby(Pt6, cell)(wir_r, hed, tal);
 
           u2_rl_lose(wir_r, hed);
           u2_rl_lose(wir_r, tal);
@@ -103,7 +103,7 @@
       case c3__face: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {
         u2_noun vot = _fuse_in(wir_r, van, q_sut, ref, bix);
-        u2_noun ret = j2_mby(Pit, face)(wir_r, p_sut, vot);
+        u2_noun ret = j2_mby(Pt6, face)(wir_r, p_sut, vot);
 
         u2_rl_lose(wir_r, vot);
         return ret;
@@ -112,7 +112,7 @@
       {
         u2_noun dis = _fuse_in(wir_r, van, p_sut, ref, bix);
         u2_noun dat = _fuse_in(wir_r, van, q_sut, ref, bix);
-        u2_noun ret = j2_mby(Pit, fork)(wir_r, dis, dat);
+        u2_noun ret = j2_mby(Pt6, fork)(wir_r, dis, dat);
 
         u2_rl_lose(wir_r, dis);
         u2_rl_lose(wir_r, dat);
@@ -123,16 +123,16 @@
         u2_noun hud = u2_bc(wir_r, u2_rx(wir_r, sut), 
                                    u2_rx(wir_r, ref));
 
-        if ( u2_yes == j2_mcc(Pit, in, has)(wir_r, bix, hud) ) {
-          u2_noun dun = j2_mcy(Pit, ut, dunq)(wir_r, van, "type", sut);
-          u2_noun niz = j2_mcy(Pit, ut, dunq)(wir_r, van, "over", ref);
+        if ( u2_yes == j2_mcc(Pt4, in, has)(wir_r, bix, hud) ) {
+          u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "type", sut);
+          u2_noun niz = j2_mcy(Pt6, ut, dunq)(wir_r, van, "over", ref);
 
           u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
           u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
 
           return u2_bl_error(wir_r, "fuse-loop");
         } else {
-          u2_noun bux = j2_mcc(Pit, in, put)(wir_r, bix, hud);
+          u2_noun bux = j2_mcc(Pt4, in, put)(wir_r, bix, hud);
           u2_noun ret = _fuse_repo(wir_r, van, sut, ref, bux);
 
           u2_rz(wir_r, hud);
@@ -144,7 +144,7 @@
   }
 
   u2_noun                                                         //  transfer
-  j2_mcx(Pit, ut, fuse)(u2_wire wir_r, 
+  j2_mcx(Pt6, ut, fuse)(u2_wire wir_r, 
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
                         u2_noun ref)                              //  retain
@@ -155,10 +155,10 @@
 /* boilerplate
 */
   u2_ho_jet 
-  j2_mcj(Pit, ut, fuse)[];
+  j2_mcj(Pt6, ut, fuse)[];
 
   u2_noun                                                         //  transfer
-  j2_mc(Pit, ut, fuse)(u2_wire wir_r, 
+  j2_mc(Pt6, ut, fuse)(u2_wire wir_r, 
                        u2_noun cor)                               //  retain
   {
     u2_noun sut, ref, van;
@@ -168,12 +168,12 @@
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
-      return j2_mcx(Pit, ut, fuse)(wir_r, van, sut, ref);
+      return j2_mcx(Pt6, ut, fuse)(wir_r, van, sut, ref);
     }
   }
 
   u2_weak                                                         //  transfer
-  j2_mci(Pit, ut, fuse)(u2_wire wir_r,
+  j2_mci(Pt6, ut, fuse)(u2_wire wir_r,
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain 
                         u2_noun ref)                              //  retain
@@ -188,11 +188,11 @@
       u2_weak gat = u2_nk_soft(wir_r, von, hoc);
       u2_weak cor = u2_rl_molt(wir_r, gat, u2_cv_sam, u2_rx(wir_r, ref), 0);
 
-      if ( (u2_none == j2_mcj(Pit, ut, fuse)[0].xip) ) {
+      if ( (u2_none == j2_mcj(Pt6, ut, fuse)[0].xip) ) {
         u2_noun xip = u2_ds_find(wir_r, cor);
      
         c3_assert(u2_none != xip);
-        j2_mcj(Pit, ut, fuse)[0].xip = xip;
+        j2_mcj(Pt6, ut, fuse)[0].xip = xip;
       }
       u2_rl_lose(wir_r, gat);
       return cor;
@@ -200,16 +200,16 @@
   }
 
   u2_noun                                                         //  transfer
-  j2_mcy(Pit, ut, fuse)(u2_wire wir_r,
+  j2_mcy(Pt6, ut, fuse)(u2_wire wir_r,
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
                         u2_noun ref)                              //  retain
   {
-    u2_ho_jet *jet_j = &j2_mcj(Pit, ut, fuse)[0];
+    u2_ho_jet *jet_j = &j2_mcj(Pt6, ut, fuse)[0];
 
     if ( (jet_j->sat_s & u2_jet_live) && !(jet_j->sat_s & u2_jet_test) ) {
       if ( !(jet_j->sat_s & u2_jet_memo) ) {
-        return j2_mcx(Pit, ut, fuse)(wir_r, van, sut, ref);
+        return j2_mcx(Pt6, ut, fuse)(wir_r, van, sut, ref);
       }
       else {
         c3_m    fun_m = u2_jet_fun_m(jet_j);
@@ -219,7 +219,7 @@
           return pro;
         }
         else {
-          pro = j2_mcx(Pit, ut, fuse)(wir_r, van, sut, ref);
+          pro = j2_mcx(Pt6, ut, fuse)(wir_r, van, sut, ref);
 
           return u2_rl_save_cell(wir_r, fun_m, sut, ref, pro);
         }
@@ -228,7 +228,7 @@
     else {
       u2_noun cor, fol, pro;
 
-      cor = j2_mci(Pit, ut, fuse)(wir_r, van, sut, ref);
+      cor = j2_mci(Pt6, ut, fuse)(wir_r, van, sut, ref);
       fol = u2_t(cor);
 
       pro = u2_ho_use(wir_r, jet_j, cor, fol);
@@ -242,7 +242,7 @@
   }
 
   u2_weak
-  j2_mck(Pit, ut, fuse)(u2_wire wir_r,
+  j2_mck(Pt6, ut, fuse)(u2_wire wir_r,
                         u2_noun cor)
   {
     u2_noun sut, ref, van;
@@ -259,12 +259,12 @@
 /* structures
 */
   u2_ho_jet 
-  j2_mcj(Pit, ut, fuse)[] = {
+  j2_mcj(Pt6, ut, fuse)[] = {
     { ".3", c3__hevy, 
-        j2_mc(Pit, ut, fuse), 
+        j2_mc(Pt6, ut, fuse), 
         Tier6_b_memo,
         u2_none, u2_none,
-        j2_mck(Pit, ut, fuse)
+        j2_mck(Pt6, ut, fuse)
     },
     { }
   };

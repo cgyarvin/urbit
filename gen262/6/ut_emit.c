@@ -15,8 +15,8 @@
              u2_noun pi_har,
              u2_noun qi_har)
   {
-    u2_noun hep = j2_mcy(Pit, ap, rake)(wir_r, pi_har);
-    u2_noun peh = j2_mbc(Pit, flop)(wir_r, hep);
+    u2_noun hep = j2_mcy(Pt6, ap, rake)(wir_r, pi_har);
+    u2_noun peh = j2_mbc(Pt2, flop)(wir_r, hep);
     u2_noun ret;
     
     if ( u2_nul == men ) {
@@ -30,7 +30,7 @@
       u2_noun lax    = _emit_each(wir_r, van, sut, t_men, pi_har, qi_har);
       u2_noun p_lax  = u2_h(lax);
       u2_noun q_lax  = u2_t(lax);
-      u2_noun taq    = j2_mcy(Pit, ut, tuck)
+      u2_noun taq    = j2_mcy(Pt6, ut, tuck)
                         (wir_r, van, pi_men, peh, sut, qi_har);
       u2_noun p_taq  = u2_h(taq);
       u2_noun q_taq  = u2_t(taq);
@@ -60,7 +60,7 @@
   }
              
   u2_noun                                                         //  produce
-  j2_mcy(Pit, ut, emit)(u2_wire wir_r, 
+  j2_mcy(Pt6, ut, emit)(u2_wire wir_r, 
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
                         u2_atom axe,                              //  retain
@@ -72,7 +72,7 @@
     men = u2_rx(wir_r, men);
     while ( 1 ) {
       if ( u2_nul == har ) {
-        u2_noun ret = u2_bc(wir_r, men, j2_mby(Pit, hike)(wir_r, axe, luf));
+        u2_noun ret = u2_bc(wir_r, men, j2_mby(Pt6, hike)(wir_r, axe, luf));
 
         u2_rl_lose(wir_r, luf);
         return ret;
@@ -104,7 +104,7 @@
   }
 
   u2_noun                                                         //  transfer
-  j2_mc(Pit, ut, emit)(u2_wire wir_r, 
+  j2_mc(Pt6, ut, emit)(u2_wire wir_r, 
                        u2_noun cor)                               //  retain
   {
     u2_noun van, sut, axe, mun, har;
@@ -115,15 +115,15 @@
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
-      return j2_mcy(Pit, ut, emit)(wir_r, van, sut, axe, mun, har);
+      return j2_mcy(Pt6, ut, emit)(wir_r, van, sut, axe, mun, har);
     }
   }
 
 /* structures
 */
   u2_ho_jet 
-  j2_mcj(Pit, ut, emit)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, emit), Tier6_b, u2_none, u2_none },
+  j2_mcj(Pt6, ut, emit)[] = {
+    { ".3", c3__hevy, j2_mc(Pt6, ut, emit), Tier6_b, u2_none, u2_none },
     { }
   };
 

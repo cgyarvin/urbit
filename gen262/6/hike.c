@@ -45,9 +45,9 @@
 
       {
         if ( (_1 != axis) && 
-             (u2_yes == u2_sing(_2, j2_mbc(Pit, cap)(wir_r, axis))) )
+             (u2_yes == u2_sing(_2, j2_mbc(Pt3, cap)(wir_r, axis))) )
         {
-          u2_axis axis_tap = j2_mbc(Pit, mas)(wir_r, axis);
+          u2_axis axis_tap = j2_mbc(Pt3, mas)(wir_r, axis);
 
           return u2_bc(wir_r, 
                        u2_bc(wir_r, 
@@ -76,9 +76,9 @@
 
       {
         if ( (_1 != axis) && 
-             (u2_yes == u2_sing(_3, j2_mbc(Pit, cap)(wir_r, axis))) )
+             (u2_yes == u2_sing(_3, j2_mbc(Pt3, cap)(wir_r, axis))) )
         {
-          u2_axis axis_tap = j2_mbc(Pit, mas)(wir_r, axis);
+          u2_axis axis_tap = j2_mbc(Pt3, mas)(wir_r, axis);
 
           return u2_bc(wir_r, 
                        u2_bc(wir_r, u2_rx(wir_r, axis_tap), 
@@ -93,7 +93,7 @@
 /* functions
 */
   u2_noun                                                         //  transfer
-  j2_mby(Pit, hike)(u2_wire wir_r, 
+  j2_mby(Pt6, hike)(u2_wire wir_r, 
                     u2_noun axe,                                  //  retain
                     u2_noun pac)                                  //  retain
   {
@@ -112,11 +112,11 @@
       else {
         u2_noun tum = _lily_hike_belt_l(wir_r, pac);
         u2_noun gam = _lily_hike_belt_r(wir_r, pac);
-        u2_noun hax = j2_mbc(Pit, peg)(wir_r, axe, 2);
-        u2_noun moz = j2_mbc(Pit, peg)(wir_r, axe, 3);
-        u2_noun zip = j2_mby(Pit, hike)(wir_r, hax, tum);
-        u2_noun dof = j2_mby(Pit, hike)(wir_r, moz, gam);
-        u2_noun fol = j2_mby(Pit, cons)(wir_r, zip, dof);
+        u2_noun hax = j2_mbc(Pt3, peg)(wir_r, axe, 2);
+        u2_noun moz = j2_mbc(Pt3, peg)(wir_r, axe, 3);
+        u2_noun zip = j2_mby(Pt6, hike)(wir_r, hax, tum);
+        u2_noun dof = j2_mby(Pt6, hike)(wir_r, moz, gam);
+        u2_noun fol = j2_mby(Pt6, cons)(wir_r, zip, dof);
 
         u2_rl_lose(wir_r, tum);
         u2_rl_lose(wir_r, gam);
@@ -130,7 +130,7 @@
     }
   }
   u2_noun                                                         //  transfer
-  j2_mb(Pit, hike)(u2_wire wir_r, 
+  j2_mb(Pt6, hike)(u2_wire wir_r, 
                    u2_noun cor)                                   //  retain
   {
     u2_noun axe, pac;
@@ -140,14 +140,14 @@
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
-      return j2_mby(Pit, hike)(wir_r, axe, pac);
+      return j2_mby(Pt6, hike)(wir_r, axe, pac);
     }
   }
 
 /* structures
 */
   u2_ho_jet 
-  j2_mbj(Pit, hike)[] = {
-    { ".3", c3__hevy, j2_mb(Pit, hike), Tier6_a, u2_none, u2_none },
+  j2_mbj(Pt6, hike)[] = {
+    { ".3", c3__hevy, j2_mb(Pt6, hike), Tier6_a, u2_none, u2_none },
     { }
   };

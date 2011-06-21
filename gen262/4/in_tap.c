@@ -30,14 +30,14 @@
   }
 
   u2_weak                                                         //  produce 
-  j2_mcc(Pit, in, tap)(u2_wire wir_r, 
+  j2_mcc(Pt4, in, tap)(u2_wire wir_r, 
                        u2_noun a,                                 //  retain
                        u2_noun b)                                 //  retain
   {
     return _tap_in(wir_r, a, u2_rx(wir_r, b));
   }
   u2_weak                                                         //  produce
-  j2_mc(Pit, in, tap)(u2_wire wir_r, 
+  j2_mc(Pt4, in, tap)(u2_wire wir_r, 
                       u2_noun cor)                                //  retain
   {
     u2_noun a, b;
@@ -45,14 +45,14 @@
     if ( u2_no == u2_mean(cor, 4, &b, 20, &a, 0) ) {
       return u2_none;
     } else {
-      return j2_mcc(Pit, in, tap)(wir_r, a, b);
+      return j2_mcc(Pt4, in, tap)(wir_r, a, b);
     }
   }
 
 /* structures
 */
   u2_ho_jet 
-  j2_mcj(Pit, in, tap)[] = {
-    { ".3", c3__lite, j2_mc(Pit, in, tap), Tier4, u2_none, u2_none },
+  j2_mcj(Pt4, in, tap)[] = {
+    { ".3", c3__lite, j2_mc(Pt4, in, tap), Tier4, u2_none, u2_none },
     { }
   };

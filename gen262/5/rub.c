@@ -8,7 +8,7 @@
 /* functions
 */
   u2_noun                                                         //  produce
-  j2_mby(Pit, rub)(u2_wire wir_r, 
+  j2_mby(Pt5, rub)(u2_wire wir_r, 
                    u2_atom a,                                     //  retain
                    u2_atom b)                                     //  retain
   {
@@ -20,8 +20,8 @@
     {
       x = u2_rx(wir_r, a);
 
-      while ( _0 == j2_mbc(Pit, cut)(wir_r, _0, x, _1, b) ) {
-        u2_atom y = j2_mbc(Pit, inc)(wir_r, x);
+      while ( _0 == j2_mbc(Pt3, cut)(wir_r, _0, x, _1, b) ) {
+        u2_atom y = j2_mbc(Pt1, inc)(wir_r, x);
 
         u2_rz(wir_r, x);
         x = y;
@@ -30,27 +30,27 @@
         u2_rz(wir_r, x);
         return u2_bc(wir_r, _1, _0);
       }
-      c = j2_mbc(Pit, sub)(wir_r, x, a);
-      d = j2_mbc(Pit, inc)(wir_r, x);
+      c = j2_mbc(Pt1, sub)(wir_r, x, a);
+      d = j2_mbc(Pt1, inc)(wir_r, x);
 
       u2_rz(wir_r, x);
     }
  
     //  Compute e, p, q.
     {
-      x = j2_mbc(Pit, dec)(wir_r, c);
-      y = j2_mbc(Pit, bex)(wir_r, x);
-      z = j2_mbc(Pit, cut)(wir_r, _0, d, x, b);
+      x = j2_mbc(Pt1, dec)(wir_r, c);
+      y = j2_mbc(Pt1, bex)(wir_r, x);
+      z = j2_mbc(Pt3, cut)(wir_r, _0, d, x, b);
 
-      e = j2_mbc(Pit, add)(wir_r, y, z);
+      e = j2_mbc(Pt1, add)(wir_r, y, z);
       u2_rz(wir_r, y); u2_rz(wir_r, z);
 
-      w = j2_mbc(Pit, add)(wir_r, c, c);
-      y = j2_mbc(Pit, add)(wir_r, w, e);
-      z = j2_mbc(Pit, add)(wir_r, d, x);
+      w = j2_mbc(Pt1, add)(wir_r, c, c);
+      y = j2_mbc(Pt1, add)(wir_r, w, e);
+      z = j2_mbc(Pt1, add)(wir_r, d, x);
 
-      p = j2_mbc(Pit, add)(wir_r, w, e);
-      q = j2_mbc(Pit, cut)(wir_r, _0, z, e, b);
+      p = j2_mbc(Pt1, add)(wir_r, w, e);
+      q = j2_mbc(Pt3, cut)(wir_r, _0, z, e, b);
 
       u2_rz(wir_r, w); u2_rz(wir_r, x); u2_rz(wir_r, y); u2_rz(wir_r, z);
 
@@ -58,7 +58,7 @@
     }
   }
   u2_noun                                                         //  transfer
-  j2_mb(Pit, rub)(u2_wire wir_r, 
+  j2_mb(Pt5, rub)(u2_wire wir_r, 
                   u2_noun cor)                                    //  retain
   {
     u2_noun a, b;
@@ -69,14 +69,14 @@
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
-      return j2_mby(Pit, rub)(wir_r, a, b);
+      return j2_mby(Pt5, rub)(wir_r, a, b);
     }
   }
 
 /* structures
 */
   u2_ho_jet 
-  j2_mbj(Pit, rub)[] = {
-    { ".3", c3__hevy, j2_mb(Pit, rub), Tier3, u2_none, u2_none },
+  j2_mbj(Pt5, rub)[] = {
+    { ".3", c3__hevy, j2_mb(Pt5, rub), Tier3, u2_none, u2_none },
     { }
   };

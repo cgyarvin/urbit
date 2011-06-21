@@ -7,6 +7,7 @@
 
 /* debugging hacks
 */
+#if 0
   static void
   _dump_wall(u2_wire     wir_r,
              const c3_c* cap_c,
@@ -27,11 +28,12 @@
       wal = u2_t(wal);
     }
   }
+#endif
 
   //  dunq: create a dunk core for mean
   //
   u2_noun                                                         //  produce
-  j2_mcy(Pit, ut, dunq)(u2_wire     wir_r,
+  j2_mcy(Pt6, ut, dunq)(u2_wire     wir_r,
                         u2_noun     van,                          //  retain
                         const c3_c* paz_c,                        //  retain
                         u2_noun     typ)                          //  retain
@@ -50,7 +52,7 @@
   //  shew: create a show core for mean
   //
   u2_noun                                                         //  produce
-  j2_mcy(Pit, ut, shew)(u2_wire wir_r,
+  j2_mcy(Pt6, ut, shew)(u2_wire wir_r,
                         u2_noun van,                              //  retain
                         u2_noun mol)                              //  submit
   {
@@ -65,13 +67,13 @@
   //  shep: show with caption and style
   //
   u2_noun                                                         //  produce
-  j2_mcy(Pit, ut, shep)(u2_wire     wir_r,
+  j2_mcy(Pt6, ut, shep)(u2_wire     wir_r,
                         u2_noun     van,                          //  retain
                         const c3_c* paz_c,                        //  retain
                         u2_noun     sty,                          //  retain
                         u2_noun     mol)                          //  submit
   {
-    return j2_mcy(Pit, ut, shew)
+    return j2_mcy(Pt6, ut, shew)
       (wir_r, van,
               u2_bc
                 (wir_r, u2_bc(wir_r, 'c', u2_bn_string(wir_r, paz_c)),
@@ -150,7 +152,7 @@
     } 
   }
   void
-  j2_mby(Pit, type)(u2_wire  wir_r,
+  j2_mby(Pt6, type)(u2_wire  wir_r,
                     u2_noun  typ)
   {
     u2_rl_ok(wir_r, typ);
@@ -160,67 +162,67 @@
 /* declarations
 */
   u2_noun                                                         //  transfer
-  j2_mc(Pit, ut, repo)(u2_wire wir_r, 
+  j2_mc(Pt6, ut, repo)(u2_wire wir_r, 
                        u2_noun cor);                              //  retain
   u2_noun                                                         //  transfer
-  j2_mc(Pit, ut, burn)(u2_wire wir_r, 
+  j2_mc(Pt6, ut, burn)(u2_wire wir_r, 
                        u2_noun cor);                              //  retain
 
-  extern u2_ho_jet j2_mcj(Pit, ut, bake)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, cull)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, emit)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, find)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, fire)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, fish)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, fret)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, fuse)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, gain)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, heal)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, mint)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, nest)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, orth)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, park)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, peek)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, play)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, rest)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, seek)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, snap)[];
-  extern u2_ho_jet j2_mcj(Pit, ut, tuck)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, bake)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, cull)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, emit)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, find)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, fire)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, fish)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, fret)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, fuse)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, gain)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, heal)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, mint)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, nest)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, orth)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, park)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, peek)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, play)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, rest)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, seek)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, snap)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, tuck)[];
 
 /* structures
 */
   u2_ho_driver 
-  j2_mbd(Pit, ut)[] = {
-    { j2_sc(Pit, ut, bake), j2_mcj(Pit, ut, bake), 0, 0, u2_none },
-    { j2_sc(Pit, ut, cull), j2_mcj(Pit, ut, cull), 0, 0, u2_none },
-    { j2_sc(Pit, ut, emit), j2_mcj(Pit, ut, emit), 0, 0, u2_none },
-    { j2_sc(Pit, ut, find), j2_mcj(Pit, ut, find), 0, 0, u2_none },
-    { j2_sc(Pit, ut, fire), j2_mcj(Pit, ut, fire), 0, 0, u2_none },
-    { j2_sc(Pit, ut, fish), j2_mcj(Pit, ut, fish), 0, 0, u2_none },
-    { j2_sc(Pit, ut, fret), j2_mcj(Pit, ut, fret), 0, 0, u2_none },
-    { j2_sc(Pit, ut, fuse), j2_mcj(Pit, ut, fuse), 0, 0, u2_none },
-    { j2_sc(Pit, ut, gain), j2_mcj(Pit, ut, gain), 0, 0, u2_none },
-    { j2_sc(Pit, ut, heal), j2_mcj(Pit, ut, heal), 0, 0, u2_none },
-    { j2_sc(Pit, ut, mint), j2_mcj(Pit, ut, mint), 0, 0, u2_none },
-    { j2_sc(Pit, ut, nest), j2_mcj(Pit, ut, nest), 0, 0, u2_none },
-    { j2_sc(Pit, ut, orth), j2_mcj(Pit, ut, orth), 0, 0, u2_none },
-    { j2_sc(Pit, ut, park), j2_mcj(Pit, ut, park), 0, 0, u2_none },
-    { j2_sc(Pit, ut, peek), j2_mcj(Pit, ut, peek), 0, 0, u2_none },
-    { j2_sc(Pit, ut, play), j2_mcj(Pit, ut, play), 0, 0, u2_none },
-    { j2_sc(Pit, ut, rest), j2_mcj(Pit, ut, rest), 0, 0, u2_none },
-    { j2_sc(Pit, ut, seek), j2_mcj(Pit, ut, seek), 0, 0, u2_none },
-    { j2_sc(Pit, ut, snap), j2_mcj(Pit, ut, snap), 0, 0, u2_none },
-    { j2_sc(Pit, ut, tuck), j2_mcj(Pit, ut, tuck), 0, 0, u2_none },
+  j2_mbd(Pt6, ut)[] = {
+    { j2_sc(Pt6, ut, bake), j2_mcj(Pt6, ut, bake), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, cull), j2_mcj(Pt6, ut, cull), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, emit), j2_mcj(Pt6, ut, emit), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, find), j2_mcj(Pt6, ut, find), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, fire), j2_mcj(Pt6, ut, fire), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, fish), j2_mcj(Pt6, ut, fish), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, fret), j2_mcj(Pt6, ut, fret), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, fuse), j2_mcj(Pt6, ut, fuse), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, gain), j2_mcj(Pt6, ut, gain), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, heal), j2_mcj(Pt6, ut, heal), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, mint), j2_mcj(Pt6, ut, mint), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, nest), j2_mcj(Pt6, ut, nest), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, orth), j2_mcj(Pt6, ut, orth), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, park), j2_mcj(Pt6, ut, park), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, peek), j2_mcj(Pt6, ut, peek), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, play), j2_mcj(Pt6, ut, play), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, rest), j2_mcj(Pt6, ut, rest), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, seek), j2_mcj(Pt6, ut, seek), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, snap), j2_mcj(Pt6, ut, snap), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, tuck), j2_mcj(Pt6, ut, tuck), 0, 0, u2_none },
     { }
   };
 
   u2_ho_jet 
-  j2_mbj(Pit, ut)[] = {
-    { "burn", c3__hevy, j2_mc(Pit, ut, burn), Tier6_b, u2_none, u2_none },
-    { "repo", c3__hevy, j2_mc(Pit, ut, repo), Tier6_b, u2_none, u2_none },
+  j2_mbj(Pt6, ut)[] = {
+    { "burn", c3__hevy, j2_mc(Pt6, ut, burn), Tier6_b, u2_none, u2_none },
+    { "repo", c3__hevy, j2_mc(Pt6, ut, repo), Tier6_b, u2_none, u2_none },
     { }
   };
 
   u2_ho_driver
-  j2_db(Pit, ut) = 
-    { j2_sb(Pit, ut), j2_mbj(Pit, ut), j2_mbd(Pit, ut), 0, u2_none };
+  j2_db(Pt6, ut) = 
+    { j2_sb(Pt6, ut), j2_mbj(Pt6, ut), j2_mbd(Pt6, ut), 0, u2_none };

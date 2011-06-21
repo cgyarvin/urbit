@@ -29,10 +29,10 @@
 
       if ( u2_yes == u2_h(gat) ) {
         if ( (u2_yes == vet) &&
-             (u2_no == j2_mcy(Pit, ut, nest)(wir_r, van, qq_typ, p_typ)) )
+             (u2_no == j2_mcy(Pt6, ut, nest)(wir_r, van, qq_typ, p_typ)) )
         {
-          u2_noun dun = j2_mcy(Pit, ut, dunq)(wir_r, van, "need", qq_typ);
-          u2_noun niz = j2_mcy(Pit, ut, dunq)(wir_r, van, "have", p_typ);
+          u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "need", qq_typ);
+          u2_noun niz = j2_mcy(Pt6, ut, dunq)(wir_r, van, "have", p_typ);
 
           u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
           u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
@@ -46,10 +46,10 @@
       else {
         if ( (u2_yes == vet) &&
              (u2_no == u2_sing(p_typ, qq_typ)) &&
-             (u2_no == j2_mcy(Pit, ut, fret)(wir_r, van, typ, dox, t_gat)) )
+             (u2_no == j2_mcy(Pt6, ut, fret)(wir_r, van, typ, dox, t_gat)) )
         {
-          u2_noun dun = j2_mcy(Pit, ut, dunq)(wir_r, van, "wild", typ);
-          u2_noun niz = j2_mcy(Pit, ut, dunq)(wir_r, van, "tame", dox);
+          u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "wild", typ);
+          u2_noun niz = j2_mcy(Pt6, ut, dunq)(wir_r, van, "tame", dox);
 
           u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
           u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
@@ -87,7 +87,7 @@
     }
   }
   u2_noun                                                         //  produce
-  j2_mcx(Pit, ut, fire)(u2_wire wir_r, 
+  j2_mcx(Pt6, ut, fire)(u2_wire wir_r, 
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
                         u2_noun hag)                              //  retain
@@ -100,10 +100,10 @@
 /* boilerplate
 */
   u2_ho_jet 
-  j2_mcj(Pit, ut, fire)[];
+  j2_mcj(Pt6, ut, fire)[];
 
   u2_noun                                                         //  transfer
-  j2_mc(Pit, ut, fire)(u2_wire wir_r, 
+  j2_mc(Pt6, ut, fire)(u2_wire wir_r, 
                        u2_noun cor)                               //  retain
   {
     u2_noun sut, hag, van;
@@ -113,12 +113,12 @@
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
-      return j2_mcx(Pit, ut, fire)(wir_r, van, sut, hag);
+      return j2_mcx(Pt6, ut, fire)(wir_r, van, sut, hag);
     }
   }
 
   u2_weak                                                         //  transfer
-  j2_mci(Pit, ut, fire)(u2_wire wir_r,
+  j2_mci(Pt6, ut, fire)(u2_wire wir_r,
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain 
                         u2_noun hag)                              //  retain
@@ -133,11 +133,11 @@
       u2_weak gat = u2_nk_soft(wir_r, von, hoc);
       u2_weak cor = u2_rl_molt(wir_r, gat, u2_cv_sam, u2_rx(wir_r, hag), 0);
 
-      if ( (u2_none == j2_mcj(Pit, ut, fire)[0].xip) ) {
+      if ( (u2_none == j2_mcj(Pt6, ut, fire)[0].xip) ) {
         u2_noun xip = u2_ds_find(wir_r, cor);
      
         c3_assert(u2_none != xip);
-        j2_mcj(Pit, ut, fire)[0].xip = xip;
+        j2_mcj(Pt6, ut, fire)[0].xip = xip;
       }
       u2_rl_lose(wir_r, gat);
       return cor;
@@ -145,20 +145,20 @@
   }
 
   u2_noun                                                         //  transfer
-  j2_mcy(Pit, ut, fire)(u2_wire wir_r,
+  j2_mcy(Pt6, ut, fire)(u2_wire wir_r,
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
                         u2_noun hag)                              //  retain
   {
-    u2_ho_jet *jet_j = &j2_mcj(Pit, ut, fire)[0];
+    u2_ho_jet *jet_j = &j2_mcj(Pt6, ut, fire)[0];
 
     if ( jet_j->sat_s == u2_jet_live ) {
-      return j2_mcx(Pit, ut, fire)(wir_r, van, sut, hag);
+      return j2_mcx(Pt6, ut, fire)(wir_r, van, sut, hag);
     }
     else {
       u2_noun cor, fol, pro;
 
-      cor = j2_mci(Pit, ut, fire)(wir_r, van, sut, hag);
+      cor = j2_mci(Pt6, ut, fire)(wir_r, van, sut, hag);
       fol = u2_t(cor);
 
       pro = u2_ho_use(wir_r, jet_j, cor, fol);
@@ -174,7 +174,7 @@
 /* structures
 */
   u2_ho_jet 
-  j2_mcj(Pit, ut, fire)[] = {
-    { ".3", c3__hevy, j2_mc(Pit, ut, fire), Tier6_b, u2_none, u2_none },
+  j2_mcj(Pt6, ut, fire)[] = {
+    { ".3", c3__hevy, j2_mc(Pt6, ut, fire), Tier6_b, u2_none, u2_none },
     { }
   };
