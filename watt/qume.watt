@@ -1,0 +1,14 @@
+~%    %hume
+    ->  
+  ==
+    %line  line
+  ==
+&!  env=seed
+++  line
+  |=  txt=@
+  ^-  [p=*tank q=*tank]
+  =+  gen=(ream txt)
+  =+  man=(~(mint ut p.env) %noun gen)
+  :-  (~(dunk ut p.man) 'type')
+  (show %p .*(q.env q.man)) 
+--
