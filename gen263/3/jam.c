@@ -132,14 +132,11 @@
                    u2_atom a)                                     //  retain
   {
     u2_noun x = _jam_in(wir_r, a, _0, u2_nul, u2_nul);
-    // u2_noun q = j2_mbc(Pit, flop)(wir_r, u2_h(u2_t(x)));
-    // u2_noun r = j2_mbc(Pit, can)(wir_r, _0, q);
-    u2_noun r = 0;
+    u2_noun q = j2_mbc(Pit, flop)(wir_r, u2_h(u2_t(x)));
+    u2_noun r = j2_mbc(Pit, can)(wir_r, _0, q);
 
-    printf("about to free x\n");
     u2_rz(wir_r, x);
-    printf("freed x\n");
-    // u2_rz(wir_r, q);
+    u2_rz(wir_r, q);
 
     return r;
   }

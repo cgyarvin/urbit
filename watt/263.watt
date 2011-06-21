@@ -6,10 +6,8 @@
 ~%    %watt.263
     ~ 
   ==
-    %go    go
     %seed  seed
-    %to    to
-    %ut    ut
+    %show  show
   ==
 &.
 ::::
@@ -845,7 +843,7 @@
 ++  rasp  |*  [los=*tape sab=rule]
           =+  vex=((full sab) [p=*hair q=los])
           ?~  q.vex
-            ~~  `*bill`[%grip ['{' '}'] ~(dem go p.p.vex) ~(dem go q.p.vex) ~]
+            ~~  (show [%m '{%d++%d}'] p.p.vex q.p.vex ~)
             ~|('syntax error' !!)
           p.u.q.vex
 ++  slip  |=  [weq=*char naz=*hair]
@@ -1351,6 +1349,13 @@
     [%palm [~ (mesc (rip 3 p.s.vem)) [':' ' ' ~] ~] [$(vem c.vem) ~]]
   ::
       [s=%d c=*]        (shop c.vem slyd)
+      [s=%o c=*]        
+    %=    $
+        vem 
+      :-  [%m '%a:<[%d %d].[%d %d]>'] 
+      [-.c.vem +<-.c.vem +<+.c.vem +>-.c.vem +>+.c.vem ~]
+    ==
+  ::
       [s=%p c=*]        (shop c.vem slyp)
       [s=%q c=*]        (shop c.vem slyq)
       [s=%r c=*]        $(vem [[%r ' ' '{' '}'] c.vem])
@@ -1420,164 +1425,6 @@
     [(runt [(sub tab 2) 32] [92 47 (runt [(sub edg tab) 32] [92 47 ~])]) wol]
   =>  .(mut (trim (sub edg tab) hom))
   [(runt [tab 32] p.mut) $(hom q.mut)]
-::::
-::::
-++  bill
-  |?
-    ^+(@ *rock)
-    [%duct p=*tape]
-    [%grip p=[p=*rock q=*rock] q=*(list bill)]
-    [%meld p=*(list bill)]
-  ==
-::
-::
-++  to
-  ~%    %to  
-      ->  
-    ==
-      %fly  fly
-      %ram  ram
-      %wit  wit
-    ==
-  &=  pup=*bill
-  ++  fly
-    ~.  %fly
-    |=  bor=@
-    ^-  *wall
-    =+  col=@
-    =>  &.
-        ++  ind
-          |=  tep=*tape
-          ^-  *tape
-          ?:(.=(0 col) tep $(col (dec col), tep [' ' tep]))
-        --
-    =+  lux=*wall
-    |-  ^-  *wall
-    ?.  ?&(?=([%grip *] pup) (gte (add col wit) bor))
-      [(ind ram) lux]
-    :-  (ind (rip 3 p.p.pup))
-    |-  ^-  *wall
-    ?~  q.pup
-      [(ind (rip 3 q.p.pup)) lux]
-    %=  $$
-      pup   i.q.pup
-      lux   $(q.pup t.q.pup)
-      col   ?:((gte col (mul 2 (div bor 3))) 0 (add 2 col))
-    ==
-  ::
-  ++  ram
-    ^-  *tape
-    ?-    pup 
-        @           (rip 3 pup)
-        [%duct *]   p.pup 
-        [%meld *]   (reel p.pup =+([p=*bill q=*tape] |.((weld ram(pup p) q))))
-        [%grip *]
-      %+  weld
-        (rip 3 p.p.pup)
-      |-  ^-  *tape
-      ?-  q.pup
-        ~       (rip 3 q.p.pup)
-        [* ~]   (weld ram(pup i.q.pup) (rip 3 q.p.pup))
-        ^       (weld ram(pup i.q.pup) `*tape`[' ' $(q.pup t.q.pup)])
-      ==
-    ==
-  ::
-  ++  wit
-    ^-  @
-    ?-    pup
-        @           (met 3 pup)
-        [%duct *]   (lent p.pup)
-        [%grip *]
-      %+  add
-        (add (met 3 p.p.pup) (met 3 q.p.pup))
-      %+  roll
-        q.pup
-      =+([p=*bill q=@] |.((add ?:(.=(0 q) 0 1) (add q wit(pup p)))))
-    ::
-        [%meld *]   (roll p.pup =+([p=*bill q=@] |.((add q wit(pup p)))))
-    == 
-  --
-::
-++  go
-  ~%    %go  
-      ->  
-    ==
-      %dem  dem
-      %gut  gut
-      %ham  ham
-      %loc  loc
-      %num  num 
-      %tis  tis
-      %unt  unt
-    ==
-  &=  nut=*
-  +-  dem   (num 10 |=(p=@ (add '0' p)))
-  +-  gut
-    |-  ^-  *bill
-    ?-  nut
-        @   unt
-        ^
-      :+  %grip
-        ['[' ']']
-      |-  ^-  *(list bill)
-      ?-  nut
-        [* @]   [$$(nut -.nut) $$(nut +.nut) ~]
-        [* ^]   [$$(nut -.nut) $(nut +.nut)]
-      ==
-    ==
-  ::
-  +-  ham   (num 16 |=(p=@ ?:((lth 10 p) (add '0' p) (add 'a' p))))
-  +-  loc
-    ^-  *bill
-    ?>  ?=([p=@ q=[p=[p=@ q=@] q=[p=@ q=@]]] nut)   :: should be static
-    :+  %grip
-      ['<' '>']
-    =+  ^=  rov
-        :~  [%grip ['[' ']'] dem(nut p.p.q.nut) dem(nut q.p.q.nut) ~]
-            [%grip ['[' ']'] dem(nut p.q.q.nut) dem(nut q.q.q.nut) ~]
-        ==
-    ?:  .=(%% p.nut)
-      rov
-    [p.nut rov]
-  ::
-  +-  num
-    |*  [zel=@ hoz=|=(@ @)]
-    ^-  [%duct p=*tape]
-    :-  %duct
-    ?:  .=(0 nut)
-      [(hoz 0) ~]
-    =+  biq=`*tape`~
-    |-  ^-  *tape
-    ?:  .=(0 nut)
-      biq
-    $(nut (div nut zel), biq [(hoz (mod nut zel)) biq])
-  ::
-  +-  tem
-    ^-  [%duct p=*tape]
-    :-  %duct
-    |-  ^-  *tape
-    ?:  .=(0 nut)
-      ~
-    [(end 3 1 nut) $(nut (rsh 3 1 nut))]
-  ::
-  +-  tis
-    [%duct p=nut]
-  ::
-  +-  unt
-    ^-  [%duct p=*tape]
-    ?:  ?&  (gte (met 3 nut) 2)
-            |-
-            ?:  .=(0 nut)
-              &
-            =+  vis=(end 3 1 nut)
-            =+  goz=(rsh 3 1 nut)
-            ?&(?|(.=('-' vis) ?&((gte vis 'a') (lte vis 'z'))) $(nut goz))
-        ==
-      =<([- ['%' +]] tem)
-    ?:  (lte (met 3 nut) 2)
-      dem
-    ham
-  --
 ::
   ::  Tier 6, Watt in Watt
 ::
@@ -2150,7 +1997,7 @@
       %bake   bake
       %burn   burn
       %cull   cull
-      %dump   dump
+      %dunk   dunk
       %emit   emit
       %find   find
       %fire   fire
@@ -2232,89 +2079,11 @@
         %void       %void
     ==
   ::
-  ++  dump
-    ^-  *bill
-    =+  ^=  gil
-        =+  den=[p=`@`1 q=*(map type <@>)]
-        =+  vax=*(set type)
-        =<  q
-        |-  ^-  den
-        ?-    sut
-            [%cell *]   $(sut q.sut, den $(sut p.sut))
-            [%core *]
-          ?:  .=(p.sut q.q.sut) 
-            $(sut p.sut)
-          $(sut p.sut, den $(sut q.q.sut))
-        ::
-            [%face *]   $(sut q.sut)
-            [%fork *]   $(sut q.sut, den $(sut p.sut))
-            [%hold *]
-          ?:  (~(has in vax) sut)
-            ?:  (~(has by q.den) sut)
-              den
-            [.+(p.den) (~(put by q.den) [sut p.den])]
-          $(vax (~(put in vax) sut), sut repo)
-        ::
-            *           den
-        ==
-    =+  gax=*(set type)
-    |-
-    ?-    sut
-        %atom       '@'
-        %noun       '*'
-        %void       '#'
-    ::
-        [%cell *]
-      :+  %grip
-        ['[' ']']
-      :-  $(sut p.sut)
-      |-
-      ?.  ?=([%cell *] q.sut)
-        [$$(sut q.sut) ~]
-      [$$(sut p.q.sut) $(q.sut q.q.sut)]
-    ::
-        [%core *]
-      =+  gep=?:(?=([[%% [& *]] ~ ~] q.r.q.sut) '|' '&')
-      =+  ^=  nox
-          ^-  @
-          ?-(p.q.sut %gold '.', %iron '=', %lead ':')
-      =+  wil=?:(.=(p.sut q.q.sut) nox (cat 3 nox nox))
-      =+  viq=(cat 3 gep wil)
-      :^    %grip
-          [(cat 3 viq '{') '}']
-        $(sut p.sut)
-      ?:(.=(p.sut q.q.sut) ~ [$(sut q.q.sut) ~])
-    ::
-        [%cube *]   ?:(.=(0 p.sut) '~' ~(gut go p.sut))
-        [%face *]   [%meld ~(tem go p.sut) '=' $(sut q.sut) ~]
-    ::
-        [%fork *]
-      ?:  .=([%fork [%cube 0] [%cube 1]] sut)
-        '?'
-      :+  %grip
-        ['<' '>']
-      :-  $(sut p.sut)
-      |-
-      ?.  ?=([%fork *] q.sut)
-        [$$(sut q.sut) ~]
-      [$$(sut p.q.sut) $(q.sut q.q.sut)]
-    ::
-        [%hold *]
-      =+  piv=(~(get by gil) sut)
-      ?~  piv
-        $(sut repo)
-      :*  %meld
-          '$'
-          ~(dem go u.piv)
-          ~
-          ?:  (~(has in gax) sut)
-            ~
-          [':' $(gax (~(put in gax) sut), sut repo) ~]
-      ==
-    ==
-  ::
   ++  dunk
+    |=  paz=*term
     ^-  *tank
+    =-  [%palm [~ (mesc (rip 3 paz)) [':' ' ' ~] ~] [duc ~]]
+    ^=  duc
     =+  ^=  gil
         =+  den=[p=`@`1 q=*(map type <@>)]
         =+  vax=*(set type)
@@ -2445,8 +2214,8 @@
     ~.  %find
     |=  [way=*<%read %rite> cog=*term]
     =-  ?~  hoq
-          ~~  ~(tem go `@`cog)
-          ~~  dump
+          ~~  (show [%m 'name: %a'] cog ~)
+          ~~  (dunk 'type')
           ~|(%find-fail !!)
         u.hoq
     ^=  hoq
@@ -2543,10 +2312,8 @@
         ~|('fire-dry' !!)
       [dox q.q]
     ?.  ?|(!vet .=(p.p q.q.p) (fret(sut p) dox q.q))
-      ::  ~~  ~(gut go `*`q:(mint(sut dox, vet |, fab &) %noun q.q))
-      ::  ~~  ~(gut go `*`q:(mint(sut p, fab &) %noun q.q))
-      ~~  dump(sut p)
-      ~~  dump(sut dox)
+      ~~  (dunk(sut p) 'wild')
+      ~~  (dunk(sut dox) 'tame')
       ~|('fire-wet' !!)
     [p q.q]
   ::
@@ -2702,8 +2469,8 @@
     ++  nice
       |=  typ=*type
       ?.  ?|(!vet (nest(sut gol) typ))
-        ~~  dump(sut gol)
-        ~~  dump(sut typ)
+        ~~  (dunk(sut gol) 'need')
+        ~~  (dunk(sut typ) 'have')
         ~|('mint-nice' !!)
       typ
     ::
@@ -2808,8 +2575,7 @@
         [1 q:$(vet |, gen p.gen)]
       ::
           [%zpcb *]                                                   ::  !_
-        ~~  ~(loc go p.gen)
-        ::  ~|  [%spot |.((~(fly to ~(loc go p.gen)) 75))]
+        ~~  (show %o p.gen)
         =+  hum=$(gen q.gen)
         [p.hum [10 [%spot 1 p.gen] q.hum]]
       ::

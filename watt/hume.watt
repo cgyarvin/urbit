@@ -9,6 +9,6 @@
   ^-  [p=*tank q=*tank]
   =+  gen=(ream txt)
   =+  man=(~(mint ut p.env) %noun gen)
-  :-  ~(dunk ut p.man)
+  :-  (~(dunk ut p.man) 'type')
   (show %q .*(q.env q.man)) 
 --

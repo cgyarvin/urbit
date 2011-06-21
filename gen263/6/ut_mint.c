@@ -158,11 +158,14 @@
             u2_noun van,                                          //  retain
             u2_noun loc)                                          //  retain
   {
-    u2_noun goo = u2_bn_hook(wir_r, van, "go");
-    u2_noun gon = u2_bn_wait(wir_r, goo, loc, "loc");
+    u2_noun mol = u2_bc(wir_r, 'o', u2_rx(wir_r, loc)); 
+    u2_noun sho = u2_bn_hook(wir_r, van, "show");
+    u2_noun ret = u2_bn_molt(wir_r, sho, u2_cv_sam, mol, 0);
+ 
+    u2_rz(wir_r, mol);
+    u2_rz(wir_r, sho);
 
-    u2_rz(wir_r, goo);
-    return gon;
+    return ret;
   }
 
 # define _mint_used(wir_r)

@@ -332,6 +332,8 @@ _eyre_app(u2_wire wir_r,
     u2_noun src   = u2_ux_read(wir_r, pot_c, "watt");
     u2_noun noc, cor;
 
+    printf("app: loading: %s\n", pot_c);
+
     noc = _eyre_nock(wir_r, src, ken);
     cor = _eyre_nock(wir_r, 0, noc);
 
@@ -344,7 +346,6 @@ _eyre_app(u2_wire wir_r,
   }
 }
 
-#if 0
 /* _eyre_call_1(): call a text function, with argument `a`.
 */
 static u2_noun                                                    //  produce
@@ -364,7 +365,6 @@ _eyre_call_1(u2_wire     wir_r,
 
   return pro;
 }
-#endif
 
 /* _eyre_call_2(): call a text function, with argument `[a b]`.
 */
@@ -469,17 +469,13 @@ _eyre_print_tape(u2_wire     wir_r,
   }
 }
 
-/* _eyre_print_wall(): print a wall of txt to FIL_f.
+/* _eyre_print_wall(): print a wall of txt.
 */
 static void
 _eyre_print_wall(u2_wire     wir_r,                               
-                 const c3_c* cap_c,                               //  retain
                  u2_noun     wal)                                 //  retain
 {
-  if ( cap_c && *cap_c ) printf("%s\n", cap_c);
-
   while ( u2_nul != wal ) {
-    if ( cap_c ) { putchar(' '); putchar(' '); }
     _eyre_print_tape(wir_r, u2_h(wal));
     putchar(10);
 
@@ -498,12 +494,28 @@ _eyre_gnaw(u2_wire wir_r,
   u2_noun wal;
 
   wal = _eyre_tank_win(wir_r, ken, tab_l, tec);
-  _eyre_print_wall(wir_r, 0, wal);
+  _eyre_print_wall(wir_r, wal);
 
   u2_rz(wir_r, wal);
 }
 
+/* _eyre_dirt(): print an arbitrary noun as a wall.  Works <= 263.
+*/
+static void
+_eyre_dirt(u2_wire wir_r, 
+           u2_noun ken,
+           c3_l    tab_l,                                   //  retain
+           u2_noun som)                                     //  retain
+{
+  u2_noun poq = u2_bc(wir_r, 'q', u2_rx(wir_r, som));
+  u2_noun tec = _eyre_call_1(wir_r, ken, "=>(!% show)", poq);
 
+  _eyre_gnaw(wir_r, ken, tab_l, tec);
+
+  u2_rz(wir_r, tec);
+  u2_rz(wir_r, poq);
+}
+                  
 /* _eyre_dump(): dump a bill to a wall.
 */
 static void
@@ -514,7 +526,7 @@ _eyre_dump(u2_wire wir_r,
   u2_noun wal;
 
   wal = _eyre_bill(wir_r, ken, bil);
-  _eyre_print_wall(wir_r, 0, wal);
+  _eyre_print_wall(wir_r, wal);
 
   u2_rz(wir_r, wal);
 }
@@ -551,7 +563,12 @@ _eyre_print_bean(u2_wire wir_r,
                  u2_noun ken,                                     //  retain
                  u2_noun ben)                                     //  retain
 {
-  _eyre_dump(wir_r, ken, ben);
+  if ( Kno_w == 264 ) {
+    _eyre_dump(wir_r, ken, ben);
+  }
+  else {
+    _eyre_dirt(wir_r, ken, 2, ben);
+  }
 }
 
 /* _eyre_print_mean(): print wrapper for meta-meaning.
@@ -561,17 +578,30 @@ _eyre_print_mean(u2_wire wir_r,
                  u2_noun ken,                                     //  retain
                  u2_noun mon)                                     //  retain
 {
-  if ( u2_yes == u2_dust(mon) ) {
-    u2_noun ben = u2_nk_nock(wir_r, u2_rx(wir_r, mon), u2_t(mon));
+  if ( Kno_w == 264 ) {
+    if ( u2_yes == u2_dust(mon) ) {
+      u2_noun ben = u2_nk_nock(wir_r, u2_rx(wir_r, mon), u2_t(mon));
 
-    if ( u2_none != ben ) {
-      _eyre_print_bean(wir_r, ken, ben);
-      u2_rz(wir_r, ben);
-      return;
+      if ( u2_none != ben ) {
+        _eyre_print_bean(wir_r, ken, ben);
+        u2_rz(wir_r, ben);
+        return;
+      }
+      else printf("  {mean!}\n");
     }
-    else printf("  {maen!}\n");
+    printf("  {meno!}\n");
+  } else {
+    if ( u2_yes == u2_dust(mon) ) {
+      u2_noun som = u2_nk_nock(wir_r, u2_rx(wir_r, mon), u2_t(mon));
+
+      if ( u2_none != som ) {
+        _eyre_gnaw(wir_r, ken, 2, som);
+        u2_rz(wir_r, som);
+        return;
+      }
+      else printf("  {mean!}\n");
+    }
   }
-  printf("  {mean!}\n");
 }
 
 /* _eyre_print_tent(): print wrapper for trace entry.
