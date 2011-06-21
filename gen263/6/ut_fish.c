@@ -96,6 +96,13 @@
         p_sut = u2_t(sut);
         {
           if ( (u2_yes == j2_mcc(Pit, in, has)(wir_r, vit, sut)) ) {
+            u2_noun dun = j2_mcy(Pit, ut, dunq)(wir_r, van, "type", sut);
+            u2_noun niz = j2_mcy(Pit, ut, shep)
+              (wir_r, van, "axis", 'd', u2_rx(wir_r, axe));
+
+            u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
+            u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
+
             return u2_bl_error(wir_r, "fish-loop");
           } else {
             u2_noun zoc = j2_mcc(Pit, in, put)(wir_r, vit, sut);

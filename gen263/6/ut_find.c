@@ -87,6 +87,13 @@
 
               if ( u2_no == j2_mcy(Pit, ut, park)(wir_r, van, sut, way, p_taf) )
               {
+                u2_noun weh = j2_mcy(Pit, ut, shep)
+                  (wir_r, van, "way", 'a', u2_rx(wir_r, way));
+                u2_noun waz = j2_mcy(Pit, ut, shep)
+                  (wir_r, van, "axis", 'd', u2_rx(wir_r, p_taf));
+
+                u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, weh));
+                u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, waz));
                 return u2_bl_error(wir_r, "find-park");
               }
               else {
@@ -242,21 +249,28 @@
                         u2_noun way,                              //  retain
                         u2_noun cog)                              //  retain
   {
-    u2_noun fin = _find_in(wir_r, van, sut, way, cog, u2_nul);
+    u2_noun dun = j2_mcy(Pit, ut, dunq)(wir_r, van, "type", sut);
+    u2_noun nuc = j2_mcy(Pit, ut, shep)
+      (wir_r, van, "feature", 'a', u2_rx(wir_r, cog));
+    u2_noun pro;
 
-    if ( u2_nul == fin ) {
-#if 1
-      u2_err(wir_r, "cog", cog);
-      j2_mcy(Pit, ut, dupt)(wir_r, van, "sut", sut);
-#endif
-      // c3_assert(0);
-      return u2_bl_error(wir_r, "find-none");
-    } else {
-      u2_noun pro = u2_rx(wir_r, u2_t(fin));
+    u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
+    u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, nuc));
+    {
+      u2_noun fin = _find_in(wir_r, van, sut, way, cog, u2_nul);
 
-      u2_rl_lose(wir_r, fin);
-      return pro;
+      if ( u2_nul == fin ) {
+        return u2_bl_error(wir_r, "find-none");
+      }
+      else {
+        pro = u2_rx(wir_r, u2_t(fin));
+        u2_rl_lose(wir_r, fin);
+      }
     }
+    u2_bl_drop(wir_r);
+    u2_bl_drop(wir_r);
+
+    return pro;
   }
 
 /* boilerplate

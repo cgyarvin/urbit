@@ -67,6 +67,12 @@
     if ( (u2_yes == _mint_vet(wir_r, van)) &&
          (u2_no == j2_mcy(Pit, ut, nest)(wir_r, van, gol, typ)) ) 
     {
+      u2_noun dun = j2_mcy(Pit, ut, dunq)(wir_r, van, "need", gol);
+      u2_noun niz = j2_mcy(Pit, ut, dunq)(wir_r, van, "have", typ);
+
+      u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
+      u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
+
       return u2_bl_error(wir_r, "mint-nice");
     }
     else return typ;
@@ -193,8 +199,10 @@
         u2_noun rex = j2_mcy(Pit, ap, open)(wir_r, gen);
 
         if ( u2_yes == u2_sing(rex, gen) ) {
-          // u2_err(wir_r, "hrex", u2_h(rex));
-          // c3_assert(0);
+          u2_noun zix = j2_mcy(Pit, ut, shep)
+                (wir_r, van, "gene", 'q', u2_rx(wir_r, gen));
+
+          u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, zix));
           return u2_bl_error(wir_r, "mint-open");
         }
         ret = j2_mcx(Pit, ut, mint)(wir_r, van, sut, gol, rex);
@@ -384,6 +392,12 @@
         if ( (u2_yes ==_mint_vet(wir_r, van)) &&
              (u2_no == j2_mcy(Pit, ut, nest)(wir_r, van, gol, zut)) )
         {
+          u2_noun dun = j2_mcy(Pit, ut, dunq)(wir_r, van, "need", gol);
+          u2_noun niz = j2_mcy(Pit, ut, dunq)(wir_r, van, "have", sut);
+
+          u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
+          u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
+
           return u2_bl_error(wir_r, "mint-cool");
         }
         else {

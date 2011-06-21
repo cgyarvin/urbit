@@ -27,33 +27,57 @@
       wal = u2_t(wal);
     }
   }
-  void
-  j2_mcy(Pit, ut, dupt)(u2_wire     wir_r,
-                          u2_noun     van,
-                          const c3_c* cap_c,
-                          u2_noun     typ)
+
+  //  dunq: create a dunk core for mean
+  //
+  u2_noun                                                         //  produce
+  j2_mcy(Pit, ut, dunq)(u2_wire     wir_r,
+                        u2_noun     van,                          //  retain
+                        const c3_c* paz_c,                        //  retain
+                        u2_noun     typ)                          //  retain
   {
-    u2_noun vin;
-    u2_noun pup, cul, col, fly, wal;
+    u2_noun von = u2_bn_molt(wir_r, van, u2_cv_sam, typ, 0);
+    u2_noun duq = u2_bn_hook(wir_r, von, "dunk");
+    u2_noun paz = u2_bn_string(wir_r, paz_c);
+    u2_noun ret = u2_bn_molt(wir_r, duq, u2_cv_sam, paz, 0);
 
-    vin = u2_bn_molt(wir_r, van, 4, typ, 0);
-    pup = u2_bn_hook(wir_r, vin, "dump");
-    cul = u2_bn_hook(wir_r, van, "to");
-    col = u2_bn_molt(wir_r, cul, 4, pup, 0); 
-
-    fly = u2_bn_hook(wir_r, col, "fly");
-
-    wal = u2_bn_mung(wir_r, fly, 75);
-
-    _dump_wall(wir_r, cap_c, wal);
-
-    u2_rl_lose(wir_r, vin);
-    u2_rl_lose(wir_r, pup);
-    u2_rl_lose(wir_r, cul);
-    u2_rl_lose(wir_r, col);
-    u2_rl_lose(wir_r, fly);
-    u2_rl_lose(wir_r, wal);
+    u2_rz(wir_r, paz);
+    u2_rz(wir_r, duq);
+    u2_rz(wir_r, von);
+    return ret;
   }
+
+  //  shew: create a show core for mean
+  //
+  u2_noun                                                         //  produce
+  j2_mcy(Pit, ut, shew)(u2_wire wir_r,
+                        u2_noun van,                              //  retain
+                        u2_noun mol)                              //  submit
+  {
+    u2_noun sho = u2_bn_hook(wir_r, van, "show");
+    u2_noun ret = u2_bn_molt(wir_r, sho, u2_cv_sam, mol, 0);
+ 
+    u2_rz(wir_r, sho);
+    u2_rz(wir_r, mol);
+    return ret;
+  }
+
+  //  shep: show with caption and style
+  //
+  u2_noun                                                         //  produce
+  j2_mcy(Pit, ut, shep)(u2_wire     wir_r,
+                        u2_noun     van,                          //  retain
+                        const c3_c* paz_c,                        //  retain
+                        u2_noun     sty,                          //  retain
+                        u2_noun     mol)                          //  submit
+  {
+    return j2_mcy(Pit, ut, shew)
+      (wir_r, van,
+              u2_bc
+                (wir_r, u2_bc(wir_r, 'c', u2_bn_string(wir_r, paz_c)),
+                        u2_bc(wir_r, u2_rx(wir_r, sty), mol)));
+  }
+
   static void
   _type_in(u2_wire wir_r, 
            u2_noun typ)

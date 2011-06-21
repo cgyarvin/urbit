@@ -72,6 +72,13 @@
             if ( _2 == tip ) {
               if ( u2_no == j2_mcy(Pit, ut, park)(wir_r, van, sut, way, tap) ) 
               {
+                u2_noun dun = j2_mcy(Pit, ut, dunq)(wir_r, van, "type", sut);
+                u2_noun waz = j2_mcy(Pit, ut, shep)
+                  (wir_r, van, "axis", 'd', u2_rx(wir_r, axe));
+
+                u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
+                u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, waz));
+
                 return u2_bl_error(wir_r, "peek-park");
               }
               else pro = j2_mcx(Pit, ut, peek)(wir_r, van, p_sut, way, tap);

@@ -31,6 +31,12 @@
         if ( (u2_yes == vet) &&
              (u2_no == j2_mcy(Pit, ut, nest)(wir_r, van, qq_typ, p_typ)) )
         {
+          u2_noun dun = j2_mcy(Pit, ut, dunq)(wir_r, van, "need", qq_typ);
+          u2_noun niz = j2_mcy(Pit, ut, dunq)(wir_r, van, "have", p_typ);
+
+          u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
+          u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
+
           return u2_bl_error(wir_r, "fire-dry");
         }
         else {
@@ -42,6 +48,12 @@
              (u2_no == u2_sing(p_typ, qq_typ)) &&
              (u2_no == j2_mcy(Pit, ut, fret)(wir_r, van, typ, dox, t_gat)) )
         {
+          u2_noun dun = j2_mcy(Pit, ut, dunq)(wir_r, van, "wild", typ);
+          u2_noun niz = j2_mcy(Pit, ut, dunq)(wir_r, van, "tame", dox);
+
+          u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
+          u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
+
           return u2_bl_error(wir_r, "fire-wet");
         }
         else {

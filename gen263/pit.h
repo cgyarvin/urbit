@@ -592,8 +592,21 @@
       void
       j2_mby(Pit, type)(u2_wire  wir_r,
                         u2_noun  typ);                            //  retain
-      void
-      j2_mcy(Pit, ut, dupt)(u2_wire     wir_r,
+
+      u2_noun                                                     //  produce
+      j2_mcy(Pit, ut, dunq)(u2_wire     wir_r,
                             u2_noun     van,                      //  retain
-                            const c3_c* cap_c,
+                            const c3_c* cap_c,                    //  retain
                             u2_noun     typ);                     //  retain
+
+      u2_noun                                                     //  produce
+      j2_mcy(Pit, ut, shew)(u2_wire     wir_r,
+                            u2_noun     van,                      //  retain
+                            u2_noun     mol);                     //  submit
+
+      u2_noun                                                     //  produce
+      j2_mcy(Pit, ut, shep)(u2_wire     wir_r,
+                            u2_noun     van,                      //  retain
+                            const c3_c* paz_c,                    //  retain
+                            u2_noun     sty,                      //  retain
+                            u2_noun     mol);                     //  submit
