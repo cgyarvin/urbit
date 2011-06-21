@@ -33,7 +33,10 @@
         if ( u2_yes == u2_sing(qn_a, c) ) {
           return u2_rx(wir_r, a);
         } else {
-          return u2_none;
+          return u2_rt
+            (wir_r, u2_rc(wir_r, u2_rx(wir_r, b), u2_rx(wir_r, c)),
+                    u2_rx(wir_r, l_a),
+                    u2_rx(wir_r, r_a));
         }
       }
       else {

@@ -676,6 +676,130 @@ J263_OFILES=\
        $(J263_6_OFILES_UT) \
        gen263/watt.o
 
+J262_1_OFILES=\
+       gen262/1/add.o \
+       gen262/1/bex.o \
+       gen262/1/dec.o \
+       gen262/1/div.o \
+       gen262/1/gte.o \
+       gen262/1/gth.o \
+       gen262/1/lte.o \
+       gen262/1/lth.o \
+       gen262/1/mod.o \
+       gen262/1/mul.o \
+       gen262/1/sub.o
+
+J262_2_OFILES=\
+       gen262/2/bind.o \
+       gen262/2/clap.o \
+       gen262/2/drop.o \
+       gen262/2/flop.o \
+       gen262/2/lent.o \
+       gen262/2/levy.o \
+       gen262/2/lien.o \
+       gen262/2/need.o \
+       gen262/2/reel.o \
+       gen262/2/roll.o \
+       gen262/2/skim.o \
+       gen262/2/skip.o \
+       gen262/2/slag.o \
+       gen262/2/snag.o \
+       gen262/2/sort.o \
+       gen262/2/turn.o \
+       gen262/2/weld.o
+
+J262_3_OFILES=\
+       gen262/3/can.o \
+       gen262/3/cap.o \
+       gen262/3/cat.o \
+       gen262/3/con.o \
+       gen262/3/cue.o \
+       gen262/3/cut.o \
+       gen262/3/dor.o \
+       gen262/3/dis.o \
+       gen262/3/end.o \
+       gen262/3/gor.o \
+       gen262/3/hor.o \
+       gen262/3/jam.o \
+       gen262/3/lsh.o \
+       gen262/3/mas.o \
+       gen262/3/mat.o \
+       gen262/3/met.o \
+       gen262/3/mix.o \
+       gen262/3/mug.o \
+       gen262/3/peg.o \
+       gen262/3/rap.o \
+       gen262/3/rip.o \
+       gen262/3/rub.o \
+       gen262/3/rsh.o \
+       gen262/3/vor.o
+
+J262_4_OFILES=\
+       gen262/4/in.o \
+       gen262/4/by.o \
+       gen262/4/in_has.o \
+       gen262/4/in_gas.o \
+       gen262/4/in_put.o \
+       gen262/4/in_tap.o \
+       gen262/4/by_gas.o \
+       gen262/4/by_get.o \
+       gen262/4/by_has.o \
+       gen262/4/by_put.o 
+
+J262_5_OFILES=\
+       gen262/5/to.o
+
+J262_6_OFILES=\
+       gen262/6/ap.o \
+       gen262/6/cell.o \
+       gen262/6/comb.o \
+       gen262/6/cons.o \
+       gen262/6/core.o \
+       gen262/6/face.o \
+       gen262/6/flan.o \
+       gen262/6/flip.o \
+       gen262/6/flor.o \
+       gen262/6/fork.o \
+       gen262/6/hack.o \
+       gen262/6/hike.o \
+       gen262/6/look.o \
+       gen262/6/ream.o \
+       gen262/6/ut.o
+
+J262_6_OFILES_UT=\
+       gen262/6/ut_bake.o \
+       gen262/6/ut_burn.o \
+       gen262/6/ut_cull.o \
+       gen262/6/ut_emit.o \
+       gen262/6/ut_find.o \
+       gen262/6/ut_fire.o \
+       gen262/6/ut_fish.o \
+       gen262/6/ut_fret.o \
+       gen262/6/ut_fuse.o \
+       gen262/6/ut_gain.o \
+       gen262/6/ut_heal.o \
+       gen262/6/ut_mint.o \
+       gen262/6/ut_orth.o \
+       gen262/6/ut_nest.o \
+       gen262/6/ut_park.o \
+       gen262/6/ut_peek.o \
+       gen262/6/ut_play.o \
+       gen262/6/ut_repo.o \
+       gen262/6/ut_rest.o \
+       gen262/6/ut_seek.o \
+       gen262/6/ut_snap.o \
+       gen262/6/ut_tuck.o
+
+J262_OFILES=\
+       $(J262_1_OFILES) \
+       $(J262_2_OFILES) \
+       $(J262_3_OFILES) \
+       $(J262_4_OFILES) \
+       $(J262_5_OFILES) \
+       $(J262_6_OFILES) \
+       $(J262_6_OFILES_UT) \
+       gen262/watt.o
+
 HILL_OFILES=\
        c/hill.o \
        c/main.o \
