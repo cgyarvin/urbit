@@ -1,8 +1,9 @@
+!:
 ?>  ?=(@ .)
 %.  .
 =<  make
 =>  ~
-~%    %watt.263
+~%    %watt.262
     ~ 
   ==
     %seed  seed
@@ -148,10 +149,10 @@
 ::
 ++  mate
   |*  [a=*(unit) b=*(unit)]
-  ?~  a
-    b
   ?~  b
     a
+  ?~  a
+    b
   ?.(.=(u.a u.b) ~|('mate' !!) a)
 ::
 ++  need

@@ -817,7 +817,8 @@ EYRE_OFILES=\
        $(F_OFILES) \
        $(P_OFILES) \
        $(J264_OFILES) \
-       $(J263_OFILES)
+       $(J263_OFILES) \
+       $(J262_OFILES)
 
 all: $(BIN)/eyre
 
