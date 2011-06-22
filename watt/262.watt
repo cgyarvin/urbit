@@ -810,7 +810,7 @@
             =+  vex=((full sab) [p=*hair q=los])
             ?~  q.vex
               ~~  (show [%m '{%d %d}'] p.p.vex q.p.vex ~)
-              ~|('syntax error' !!)
+              ~|('rasp-stop' !!)
             p.u.q.vex
   ++  slip  |=  [weq=*char naz=*hair]
             ^-  *hair

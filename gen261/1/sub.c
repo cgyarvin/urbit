@@ -21,6 +21,7 @@
       mpz_clear(a_mp);
       mpz_clear(b_mp);
 
+      u2_bl_push(wir_r, u2_rc(wir_r, c3__bean, u2_rl_string(wir_r, "dec")));
       return u2_none;
     }
     mpz_sub(a_mp, a_mp, b_mp);

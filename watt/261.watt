@@ -1,6 +1,7 @@
 ?>  ?=(@ .)
 %.  .
 =<  make
+=>  261
 =>  
   ::::
   ::::  Tier 0, kernel stub
@@ -9,7 +10,8 @@
       ~
     ~
   &.
-  ++  stub  261
+  ++  all   |=(a=* a)
+  ++  nat   |=(a=* ~|(%nat ?>(?=(@ a) a)))
   --
 =>
   ::::
@@ -810,7 +812,7 @@
             =+  vex=((full sab) [p=*hair q=los])
             ?~  q.vex
               ~~  (show [%m '{%d %d}'] p.p.vex q.p.vex ~)
-              ~|('syntax error' !!)
+              ~|('rasp-stop' !!)
             p.u.q.vex
   ++  slip  |=  [weq=*char naz=*hair]
             ^-  *hair
@@ -1153,14 +1155,18 @@
               (wind [tab edg] q.p.tec lug)
             ?~  t.q.tec
               (wind [(add tab 2) edg] q.p.tec $(tec i.q.tec))
-            =+  dof=`*(list tank)`q.tec
-            =+  lyn=(mul 2 (dec (lent dof)))
+            =>  .(q.tec `*(list tank)`q.tec)
+            =+  lyn=(mul 2 (lent q.tec))
             =+  vaz=(lent q.p.tec)
             =+  ^=  qyr
                 |-  ^-  *wall
-                ?~  dof
+                ?~  q.tec
                   lug
-                $$(tec i.dof, tab lyn, lug $(dof t.dof, lyn (sub lyn 2)))
+                %=  $$
+                  tec i.q.tec
+                  tab (sub lyn 2)
+                  lug $(q.tec t.q.tec, lyn (sub lyn 2))
+                ==
             ?.  (gte lyn .+(vaz))
               qyr
             ?>(?=(^ qyr) [(weld q.p.tec (slag vaz i.qyr)) t.qyr])
@@ -1260,6 +1266,8 @@
             =+  vis=(end 3 1 a)
             ?&(?|(.=('-' vis) ?&((gte vis 'a') (lte vis 'z'))) $(a (rsh 3 1 a)))
         ==
+      (slys a)
+    ?:  .=(20 a)
       (slys a)
     ?:  (lte (met 3 a) 2)
       (slyd a)
@@ -2090,7 +2098,12 @@
     ?-    sut
         %atom       0
         [%cell *]   [$(sut p.sut) $(sut q.sut)]
-        [%core *]   ?>(?=(^ p.r.q.sut) [$(sut p.sut) p.r.q.sut])
+        [%core *]   
+      ?:  ?=(^ p.r.q.sut) 
+        [$(sut p.sut) p.r.q.sut]
+      ~~  (dunk 'type')
+      ~|('burn-cold' !!)
+    ::
         [%cube *]   p.sut
         [%face *]   $(sut q.sut)
         [%fork *]   =+([heb=$(sut p.sut) nar=$(sut q.sut)] ?>(.=(heb nar) heb))

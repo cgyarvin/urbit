@@ -37,7 +37,10 @@
                      u2_bi_cell(wir_r, rq_sut, &prq_sut, &qrq_sut);
       {
         if ( u2_no == u2_dust(prq_sut) ) {
-          return u2_bl_bail(wir_r, c3__fail);
+          u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "type", sut);
+
+          u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
+          return u2_bl_error(wir_r, "burn-cold");
         } else {
           return u2_bc
             (wir_r, j2_mcy(Pt6, ut, burn)(wir_r, van, p_sut),

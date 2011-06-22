@@ -13,6 +13,7 @@
                    u2_atom b)                                     //  retain
   {
     if ( _0 == b ) {
+      u2_bl_push(wir_r, u2_rc(wir_r, c3__bean, u2_rl_string(wir_r, "div")));
       return u2_none;
     } 
     else {

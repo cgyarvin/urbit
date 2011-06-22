@@ -412,7 +412,7 @@
       {
         u2_noun cag = j2_mcy(Pt6, ut, burn)(wir_r, van, sut);
         u2_noun nef = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, gol, p_gen);
-        
+       
         ret = u2_bt
           (wir_r, u2_rx(wir_r, u2_h(nef)),
                   _1,
