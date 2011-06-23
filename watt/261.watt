@@ -4,7 +4,7 @@
 =>  261
 =>  
   ::::
-  ::::  Tier 0, kernel stub
+  ::::  Tier 0, axle root
   ::::
   ~%    %k.261
       ~
@@ -1167,9 +1167,7 @@
                   tab (sub lyn 2)
                   lug $(q.tec t.q.tec, lyn (sub lyn 2))
                 ==
-            ?.  (gte lyn .+(vaz))
-              qyr
-            ?>(?=(^ qyr) [(weld q.p.tec (slag vaz i.qyr)) t.qyr])
+            [q.p.tec qyr]
           ::
               %rose
             ?:  fit
@@ -2102,13 +2100,19 @@
       ?:  ?=(^ p.r.q.sut) 
         [$(sut p.sut) p.r.q.sut]
       ~~  (dunk 'type')
-      ~|('burn-cold' !!)
+      ~|('burn-warm' !!)
     ::
         [%cube *]   p.sut
         [%face *]   $(sut q.sut)
-        [%fork *]   =+([heb=$(sut p.sut) nar=$(sut q.sut)] ?>(.=(heb nar) heb))
-        [%hold *]   $(sut repo)
-        %noun       ~
+        [%fork *]   $(sut p.sut)
+        [%hold *]   
+      ?~  p.sut
+        $(sut %void)
+      =+  dat=$(sut p.i.p.sut)
+      =+  fyl=q:(mint(vet |, sut p.i.p.sut) %noun q.i.p.sut)
+      ~|(%burn-live .*(dat fyl))
+    ::
+        %noun       0
         %void       ~|(%burn-void !!)
     ==
   ::
@@ -2590,9 +2594,8 @@
         $(gen q.gen, gol zut)
       ::
           [%ktsg *]                                                   ::  ^~
-        =+  cag=burn  
-        =+  nef=$(gen p.gen)
-        [p.nef [1 ~|(%ketsig-nock .*(cag q.nef))]]
+        =+  nef=$(fab |, gen p.gen)
+        [p.nef ?.(fab [0 0] [1 burn(sut p.nef)])]
       ::
           [%mtbn *]                                                   ::  %=
         =+  lar=(seek %read p.gen)

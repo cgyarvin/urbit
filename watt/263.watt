@@ -1185,17 +1185,19 @@
             (wind [tab edg] q.p.tec lug)
           ?~  t.q.tec
             (wind [(add tab 2) edg] q.p.tec $(tec i.q.tec))
-          =+  dof=`*(list tank)`q.tec
-          =+  lyn=(mul 2 (dec (lent dof)))
+          =>  .(q.tec `*(list tank)`q.tec)
+          =+  lyn=(mul 2 (lent q.tec))
           =+  vaz=(lent q.p.tec)
           =+  ^=  qyr
               |-  ^-  *wall
-              ?~  dof
+              ?~  q.tec
                 lug
-              $$(tec i.dof, tab lyn, lug $(dof t.dof, lyn (sub lyn 2)))
-          ?.  (gte lyn .+(vaz))
-            qyr
-          ?>(?=(^ qyr) [(weld q.p.tec (slag vaz i.qyr)) t.qyr])
+              %=  $$
+                tec i.q.tec
+                tab (sub lyn 2)
+                lug $(q.tec t.q.tec, lyn (sub lyn 2))
+              ==
+          [q.p.tec qyr]
         ::
             %rose
           ?:  fit
@@ -1223,7 +1225,9 @@
       =>  .(hom q.mut)
       |-
       ?~  hom
-        :-  (runt [(sub tab 2) 32] [92 47 (runt [(sub edg tab) 32] [92 47 ~])])
+        :-  %+  runt 
+              [(sub tab 2) 32] 
+            [92 47 (runt [(sub edg tab) 32] [92 47 ~])]
         lug
       =>  .(mut (trim (sub edg tab) hom))
       [(runt [tab 32] p.mut) $(hom q.mut)]

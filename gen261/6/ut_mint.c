@@ -410,15 +410,19 @@
       case c3__ktsg: p_gen = u2_t(gen);
       _mint_used(wir_r);
       {
-        u2_noun cag = j2_mcy(Pt6, ut, burn)(wir_r, van, sut);
-        u2_noun nef = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, gol, p_gen);
-       
-        ret = u2_bt
-          (wir_r, u2_rx(wir_r, u2_h(nef)),
-                  _1,
-                  u2_nk_nock(wir_r, cag, u2_t(nef)));
+        u2_noun von = u2_bn_molt(wir_r, van, j2_ut_van_fab, u2_no, 0);
+        u2_noun nef = j2_mcx(Pt6, ut, mint)(wir_r, von, sut, gol, p_gen);
+        u2_noun p_nef = u2_h(nef);
+        u2_flag fab = _mint_fab(wir_r, van);
+ 
+        ret = u2_bc
+          (wir_r, u2_rx(wir_r, p_nef),
+                 (fab == u2_yes)
+                  ? u2_bc(wir_r, _1, j2_mcy(Pt6, ut, burn)(wir_r, van, p_nef)) 
+                  : u2_bc(wir_r, _0, _0));
 
         u2_rz(wir_r, nef);
+        u2_rz(wir_r, von);
         return ret;
       }
       case c3__mtbn: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
