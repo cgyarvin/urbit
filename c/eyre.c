@@ -620,6 +620,7 @@ _eyre_print_tent(u2_wire wir_r,
     case c3__bean: _eyre_print_bean(wir_r, ken, u2_t(tax)); return;
     case c3__mean: _eyre_print_mean(wir_r, ken, u2_t(tax)); return;
   }
+  // u2_err(wir_r, "htax", u2_h(tax));
   printf("  {tent!}\n");
 }
 
@@ -664,6 +665,7 @@ _eyre_line(u2_wire wir_r,
   }
 }
 
+#ifdef U2_EYRE_PROTO
 /* _eyre_line_proto(): parse line with old kernel, execute with new.
 */
 static void
@@ -683,10 +685,15 @@ _eyre_line_proto(u2_wire wir_r,
     u2_noun pro;
    
     u2_bx_boot(wir_r);
+    u2_err(wir_r, "proto", ken);
     pro = _eyre_nock(wir_r, som, ken);
+    u2_err(wir_r, "pro", pro);
     u2_bx_show(wir_r);
 
+    u2_bx_boot(wir_r);
     _eyre_dirt(wir_r, las, 0, pro); 
+    u2_bx_show(wir_r);
+
     u2_rz(wir_r, fol);
     u2_rz(wir_r, som);
     u2_rz(wir_r, pro);
@@ -694,6 +701,7 @@ _eyre_line_proto(u2_wire wir_r,
     u2_bl_done(wir_r, kit_r);
   }
 }
+#endif
 
 /* main()::
 */
@@ -735,7 +743,7 @@ main(c3_i   argc,
   las = _eyre_ken(wir_r, (kno_w + 1));
   ken = _eyre_ken(wir_r, kno_w);
 
-  // u2_err(wir_r, "kernel", ken);
+  u2_err(wir_r, "kernel", ken);
 #else
   //  Load the designated application.
   //

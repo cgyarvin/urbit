@@ -1,10 +1,4 @@
-::  Standalone decrement, as simple as possible.
-::
-~|  %decrement
-=>  a=.
-?>  ?=(@ .)
-=+  b=@
-|-
-?:  .=(a .+(b))
-  b
-$(b .+(b))
+%.  .
+=>  261
+|=  a=*
+[%echo a]
