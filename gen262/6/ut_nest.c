@@ -110,9 +110,6 @@
     {
       return u2_no;
     }
-    else if ( c3__wood == pq_sut ) {
-      return u2_and(u2_sing(c3__wood, pq_ref), u2_sing(qrq_sut, qrq_ref));
-    } 
     else {
       if ( (pq_sut != pq_ref) && (c3__gold != pq_ref) ) {
         return u2_no;
@@ -149,6 +146,9 @@
               return _nest_dext(wir_r, van, r_sam, s_sam, gil);
             }
             case c3__lead: {
+              return u2_yes;
+            }
+            case c3__zinc: {
               u2_noun s_pal = j2_mcy(Pt6, ut, peek)
                                       (wir_r, van, qq_sut, c3__read, _2);
               u2_noun r_pal = j2_mcy(Pt6, ut, peek)

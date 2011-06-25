@@ -1,3 +1,4 @@
+!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -2087,17 +2088,11 @@
     ==
   ::
   ++  burn
-    |-
-    ^-  *
+    |-  ^-  *
     ?-    sut
         %atom       0
         [%cell *]   [$(sut p.sut) $(sut q.sut)]
-        [%core *]   
-      ?:  ?=(^ p.r.q.sut) 
-        [$(sut p.sut) p.r.q.sut]
-      ~~  (dunk 'type')
-      ~|('burn-warm' !!)
-    ::
+        [%core *]   [$(sut p.sut) p.r.q.sut]
         [%cube *]   p.sut
         [%face *]   $(sut q.sut)
         [%fork *]   $(sut p.sut)
@@ -2496,9 +2491,21 @@
     ~.  %mint
     |=  [gol=*type gen=*gene]
     ^-  [p=*type q=*form]
+    =+  cot=`?`|
     =<  $
     &.
-    ::  ++  boil  |=(rey=|.(*form) ?.(fab [0 0] $.rey))
+    ++  boil
+      |=  sel=|%(*form)
+      ^-  *form
+      ?.  fab
+        [0 0]
+      ?.  cot
+        $.sel
+      =+  goz=$.sel
+      ?:  ?=([1 *] goz)
+        goz
+      ~|('mint-boil' [1 .*(0 goz)])
+    ::
     ++  coke
       |=  [nug=*form]
       ?-    nug
@@ -2515,9 +2522,8 @@
         [(core p.dan mel p.dan [[0 0] dab]) [0 0]]
       =+  toc=(core p.dan [%gold p.dan [~ dab]])
       =+  dez=(bake(sut toc) dab)
-      :*  (nice (core p.dan mel p.dan [dez dab]))
-          (cons q.dan [1 dez])
-      ==
+      :-  (nice (core p.dan mel p.dan [dez dab]))
+      (boil |.((cons q.dan [1 dez])))
     ::
     ++  nice
       |=  typ=*type
@@ -2533,45 +2539,45 @@
           [%bnld *]                                                   ::  =>
         =+  fid=$(gen p.gen, gol %noun)
         =+  soq=$(sut p.fid, gen q.gen)
-        [p.soq (comb q.fid q.soq)]
+        [p.soq (boil |%((comb q.fid q.soq)))]
       ::
           [%csbn *]                                                   ::  ?=
         :-  (nice flag)
-        ?.  fab
-          [0 0]
-        (fish(sut (play p.gen)) (coke q:$(gen q.gen, gol %noun)))
+        %-  boil  |%
+        %-  fish(sut (play p.gen))
+        (coke q:$$(gen q.gen, gol %noun, cot |))
       ::
           [%csdg *]                                                   ::  ?:
         =+  nor=$(gen p.gen, gol flag)
         =+  fex=(gain p.gen)
         =+  hiq=$(sut ?:(.=(%void fex) sut fex), gen q.gen)
         =+  ran=$(gen r.gen)
-        [(fork p.hiq p.ran) [6 q.nor q.hiq q.ran]]
+        :-  (fork p.hiq p.ran)
+        (boil |%([6 q.nor q.hiq q.ran]))
       ::
           [%dgdp *]                                                   ::  :-
         =+  hed=$(gen p.gen, gol %noun)
         =+  tal=$(gen q.gen, gol %noun)
-        [(nice (cell p.hed p.tal)) (cons q.hed q.tal)]
+        [(nice (cell p.hed p.tal)) (boil |%((cons q.hed q.tal)))]
       ::
           [%dtbn *]                                                   ::  .=
         :-  (nice flag)
-        [5 q:$(gen p.gen, gol %noun) q:$(gen q.gen, gol %noun)]
+        (boil |%([5 q:$$(gen p.gen, gol %noun) q:$$(gen q.gen, gol %noun)]))
       ::
           [%dtcs *]                                                   ::  .?
         :-  (nice flag)
-        [3 q:$(gen p.gen, gol %noun)]
+        (boil |%([3 q:$$(gen p.gen, gol %noun)]))
       ::
           [%dtpd *]                                                   ::  .+
         :-  (nice %atom)
-        [4 q:$(gen p.gen, gol %atom)]
+        (boil |%([4 q:$$(gen p.gen, gol %atom)]))
       ::
           [%dtsg *]                                                   ::  .~ 
-        :-  (nice [%cube p.gen])
-        [1 p.gen]
+        [(nice [%cube p.gen]) (boil |%([1 p.gen]))]
       ::
           [%dttr *]                                                   ::  .*
         :-  (nice %noun)
-        [2 q:$(gen p.gen, gol %noun) q:$(gen q.gen, gol %noun)]
+        (boil |%([2 q:$$(gen p.gen, gol %noun) q:$$(gen q.gen, gol %noun)]))
       ::
           [%ktbn *]                                                   ::  ^=
         =+  vat=$(gen q.gen)
@@ -2579,7 +2585,7 @@
       ::
           [%ktdp *]                                                   ::  ^-
         =+  hif=(nice (play p.gen))
-        [hif ?.(fab [0 0] q:$(gen q.gen, gol hif))]
+        [hif (boil |%(q:$$(gen q.gen, gol hif)))]
       ::
           [%ktpd *]                                                   ::  ^+
         =+  zut=(play p.gen)
@@ -2590,19 +2596,28 @@
         $(gen q.gen, gol zut)
       ::
           [%ktsg *]                                                   ::  ^~
-        =+  nef=$(fab |, gen p.gen)
-        [p.nef ?.(fab [0 0] [1 burn(sut p.nef)])]
+        $(cot &, gen p.gen)
       ::
           [%mtbn *]                                                   ::  %=
         =+  lar=(seek %read p.gen)
         ?-    -.q.lar
             & 
           =+  fup=(emit p.lar [[p.q.lar [& ~ 1]] ~] q.gen)
-          [(nice -<.p.fup) q.fup]
+          :-  (nice -<.p.fup)
+          ?.  fab
+            [0 0]
+          ?.  cot
+            q.fup
+          [1 burn(sut -<.p.fup)]
         ::
             |
           =+  fup=(emit p.lar q.q.lar q.gen)
-          [(nice (fire p.fup)) [9 p.q.lar q.fup]]
+          :-  (nice (fire p.fup)) 
+          ?.  fab
+            [0 0]
+          ?.  cot
+            [9 p.q.lar q.fup]
+          [1 ~|('mint-burn' .*(burn(sut -<.p.fup) [9 p.q.lar q.fup]))]
         ==
       ::
           [%pmdg *]                                                   ::  &:
@@ -2617,16 +2632,17 @@
           [%sgld *]                                                   ::  ~>
         =+  hum=$(gen q.gen)
         :-  p.hum
+        %-  boil  |%
         :+  10
           ?-    p.gen
               @   p.gen
-              ^   [p.p.gen q:$(gen q.p.gen, gol %noun)]
+              ^   [p.p.gen q:$$(gen q.p.gen, gol %noun)]
           ==
         q.hum
       ::
           [%zpbn *]                                                   ::  !=
         :-  (nice %noun)
-        [1 q:$(vet |, gen p.gen)]
+        (boil |%([1 q:$$(vet |, gen p.gen)]))
       ::
           [%zpcb *]                                                   ::  !_
         ~~  (show %o p.gen)
@@ -2644,7 +2660,7 @@
           [%zptm *]                                                   ::  !;
         =+  vos=$(gol %noun, gen q.gen)
         :-  (nice (cell (play p.gen) p.vos))      ::  XX validate!
-        (cons [1 p.vos] q.vos) 
+        (boil |%((cons [1 p.vos] q.vos)))
       ::
           [%zpzp ~]                                                   ::  !!
         :-  %void

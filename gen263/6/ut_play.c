@@ -145,7 +145,7 @@
         u2_noun dim = _play_in(wir_r, van, sut, p_gen);
         u2_noun gur = j2_mby(Pit, cell)(wir_r, dim, sut);
         u2_noun zun = u2_bc(wir_r, u2_bc(wir_r, 0, 0), u2_rx(wir_r, q_gen));
-        u2_noun con = u2_bt(wir_r, c3__lead, u2_rx(wir_r, gur), zun);
+        u2_noun con = u2_bt(wir_r, c3__zinc, u2_rx(wir_r, gur), zun);
         u2_noun ret = j2_mby(Pit, core)(wir_r, gur, con);
 
         u2_rz(wir_r, dim);

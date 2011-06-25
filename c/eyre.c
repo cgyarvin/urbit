@@ -17,6 +17,7 @@
 #define C3_GLOBAL
 #include "all.h"
 
+#define U2_EYRE_PROTO
 #define FirstKernel 264
 
   /**  Global kernel - used only for trace printing.
@@ -506,9 +507,9 @@ _eyre_gnaw(u2_wire wir_r,
 */
 static void
 _eyre_dirt(u2_wire wir_r, 
-           u2_noun ken,
-           c3_l    tab_l,                                   //  retain
-           u2_noun som)                                     //  retain
+           u2_noun ken,                                           //  retain
+           c3_l    tab_l,                                         //  retain
+           u2_noun som)                                           //  retain
 {
   u2_noun poq = u2_bc(wir_r, 'q', u2_rx(wir_r, som));
   u2_noun tec = _eyre_call_1(wir_r, ken, "=>(!% show)", poq);
@@ -652,9 +653,43 @@ _eyre_line(u2_wire wir_r,
     u2_noun gat = u2_bn_hook(wir_r, cor, "line");
     u2_noun pro;
 
+    u2_bx_boot(wir_r);
     pro = _eyre_mung(wir_r, gat, u2_rx(wir_r, txt));
+    u2_bx_show(wir_r);
+
     _eyre_gnaw(wir_r, ken, 2, u2_h(pro));
     _eyre_gnaw(wir_r, ken, 0, u2_t(pro));
+
+    u2_bl_done(wir_r, kit_r);
+  }
+}
+
+/* _eyre_line_proto(): parse line with old kernel, execute with new.
+*/
+static void
+_eyre_line_proto(u2_wire wir_r, 
+                 u2_noun las,                                     //  retain
+                 u2_noun ken,                                     //  retain
+                 u2_noun txt)                                     //  retain
+{
+  u2_ray kit_r = u2_bl_open(wir_r);
+
+  if ( u2_bl_set(wir_r) ) {
+    u2_bl_done(wir_r, kit_r);
+    fprintf(stderr, "{stop}\n");
+  } else {
+    u2_noun fol = _eyre_call_1(wir_r, las, "=>(!% make)", txt);
+    u2_noun som = _eyre_nock(wir_r, 0, fol);
+    u2_noun pro;
+   
+    u2_bx_boot(wir_r);
+    pro = _eyre_nock(wir_r, som, ken);
+    u2_bx_show(wir_r);
+
+    _eyre_dirt(wir_r, las, 0, pro); 
+    u2_rz(wir_r, fol);
+    u2_rz(wir_r, som);
+    u2_rz(wir_r, pro);
 
     u2_bl_done(wir_r, kit_r);
   }
@@ -671,7 +706,11 @@ main(c3_i   argc,
   c3_c*   fel_c;
   c3_c*   lid_c;
   u2_noun ken;
-  u2_noun app;
+# ifdef U2_EYRE_PROTO
+    u2_noun las;
+# else
+    u2_noun app;
+# endif
 
   //  Parse arguments.
   //
@@ -692,11 +731,17 @@ main(c3_i   argc,
 
   //  Load the designated kernel.
   //
+#ifdef U2_EYRE_PROTO
+  las = _eyre_ken(wir_r, (kno_w + 1));
   ken = _eyre_ken(wir_r, kno_w);
 
+  // u2_err(wir_r, "kernel", ken);
+#else
   //  Load the designated application.
   //
+  ken = _eyre_ken(wir_r, kno_w);
   app = _eyre_app(wir_r, ken, lid_c);
+#endif
 
   //  Do some lines.
   //
@@ -709,8 +754,11 @@ main(c3_i   argc,
     else {
       u2_noun lin = u2_bn_string(wir_r, lin_c);
 
+#ifndef U2_EYRE_PROTO
       _eyre_line(wir_r, ken, app, lin);
-
+#else
+      _eyre_line_proto(wir_r, las, ken, lin);
+#endif
       free(lin_c);
       u2_rz(wir_r, lin);
     }

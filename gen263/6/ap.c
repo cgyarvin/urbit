@@ -116,6 +116,15 @@
                     u2_nul, 
                     u2_nul));
   }
+  _open_do_p(brmt)   //  |.
+  {
+    return u2_bc
+      (wir_r, c3__pmmt,
+              u2_bt(wir_r,
+                    u2_bq(wir_r, u2_blip, u2_yes, u2_yes, u2_rx(wir_r, p_gen)),
+                    u2_nul, 
+                    u2_nul));
+  }
   _open_do_pq(brpd)   //  |+
   {
     return u2_bt
@@ -904,6 +913,7 @@
         _open_p   (brdp);
         _open_pq  (brdg);
         _open_p   (brdt);
+        _open_p   (brmt);
         _open_pq  (brpd);
         _open_pq  (brtr);
         _open_pq  (brzp);

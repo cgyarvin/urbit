@@ -1457,7 +1457,7 @@
 ::
 ++  cone
   |?
-    :+    p=*<%gold %lead %iron>
+    :+    p=*<%gold %iron %lead %zinc>
         q=*type
       r=[p=*<~ ^> q=*(map term foot)]
   ==
@@ -1514,6 +1514,7 @@
     [%brdg p=*gene q=*gene]                                       ::  |:  bardeg
     [%brdp p=*gene]                                               ::  |-  bardap
     [%brdt p=*gene]                                               ::  |.  bardot
+    [%brmt p=*gene]                                               ::  |%  barmit
     [%brpd p=*gene q=*gene]                                       ::  |+  barpad
     [%brtr p=*gene q=*gene]                                       ::  |*  bartar
     [%brzp p=*gene q=*gene]                                       ::  |!  barzap
@@ -1561,6 +1562,7 @@
     [%pmdg p=*gene q=*(map term foot)]                            ::  &:  pamdeg
     [%pmdp p=*gene q=*(map term foot)]                            ::  &-  pamdap
     [%pmdt p=*(map term foot)]                                    ::  &.  pamdot
+    [%pmmt p=*(map term foot)]                                    ::  &.  pamdot
     [%pmpd p=*gene q=*(map term foot)]                            ::  &+  pampad
     [%pmzp p=*gene q=*(map term foot)]                            ::  &!  pamzap
   ::
@@ -1659,6 +1661,7 @@
         [%brdp *]   [%bnld [%brdt p.gen] %%]
         [%brdg *]   [%pmdg p.gen [[%% [& & q.gen]] ~ ~]]
         [%brdt *]   [%pmdt [[%% [& & p.gen]] ~ ~]]
+        [%brmt *]   [%pmmt [[%% [& & p.gen]] ~ ~]]
         [%brpd *]   [%pmpd p.gen [[%% [& & q.gen]] ~ ~]]
         [%brtr *]   [%pmbn p.gen [[%% [& | q.gen]] ~ ~]]
         [%brzp *]   [%bnld %zpmt [%brbn p.gen q.gen]]
@@ -2133,7 +2136,7 @@
       =+  gep=?:(?=([[%% [& *]] ~ ~] q.r.q.sut) '|' '&')
       =+  ^=  nox
           ^-  @
-          ?-(p.q.sut %gold '.', %iron '=', %lead ':')
+          ?-(p.q.sut %gold '.', %iron '+', %lead '%', %zinc ':')
       =+  wil=?:(.=(p.sut q.q.sut) [nox '(' ~] [nox nox '(' ~])
       =+  ^=  dyr
           =+  dyr=`@`0
@@ -2454,7 +2457,7 @@
       ==
     ::
     ++  crow
-      |=  [mel=*<%gold %lead %iron> ruf=*gene dab=*(map term foot)]
+      |=  [mel=*<%gold %iron %lead %zinc> ruf=*gene dab=*(map term foot)]
       ^-  [p=*type q=*form]
       =+  dan=$$(gen ruf, gol %noun)
       ?.  fab
@@ -2553,10 +2556,13 @@
         ==
       ::
           [%pmdg *]                                                   ::  &:
-        (crow %lead [%dgdp p.gen [~ 1]] q.gen)
+        (crow %zinc [%dgdp p.gen [~ 1]] q.gen)
       ::
           [%pmdt *]                                                   ::  &.
         (crow %gold [~ 1] p.gen)
+      ::
+          [%pmmt *]                                                   ::  &%
+        (crow %lead [~ 1] p.gen)
       ::
           [%pmpd *]                                                   ::  &+
         (crow %iron [%dgdp p.gen [~ 1]] q.gen)
@@ -2637,7 +2643,8 @@
           =+  sam=[s=(peek(sut q.q.sut) %rite 2) r=(peek(sut q.q.ref) %rite 2)]
           dext(sut r.sam, ref s.sam)
         ::
-            %lead
+            %lead  &
+            %zinc
           =+  pal=[s=(peek(sut q.q.sut) %read 2) r=(peek(sut q.q.ref) %read 2)]
           dext(sut s.pal, ref r.pal)
         ==
@@ -2770,14 +2777,16 @@
         ?-    p.q.sut
             %gold   &
             %iron   | 
-            %lead   .=(2 (cap axe))
+            %lead   |
+            %zinc   .=(2 (cap axe))
         ==
       ::
           %rite
         ?-    p.q.sut
             %gold   &
             %iron   .=(2 (cap axe))
-            %lead   | 
+            %lead   |
+            %zinc   | 
         ==
       ==
     ==
@@ -2983,6 +2992,7 @@
               (rune deg %brdg expb)
               (rune dap %brdp expa)
               (rune dot %brdt expa)
+              (rune mit %brmt expa)
               (rune pad %brpd expb)
               (rune tar %brtr expb)
             ==
@@ -3054,6 +3064,7 @@
               (rune deg %pmdg expx)
               (rune dap %pmdp expx)
               (rune dot %pmdt expe)
+              (rune mit %pmmt expe)
               (rune pad %pmpd expx)
             ==
           ==

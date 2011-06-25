@@ -482,7 +482,7 @@
       _mint_used(wir_r);
       {
         u2_noun ruf = u2_bq(wir_r, c3__dgdp, u2_rx(wir_r, p_gen), u2_nul, _1);
-        u2_noun ret = _mint_crow(wir_r, van, sut, gol, c3__lead, ruf, q_gen);
+        u2_noun ret = _mint_crow(wir_r, van, sut, gol, c3__zinc, ruf, q_gen);
 
         u2_rz(wir_r, ruf);
         return ret;
@@ -493,6 +493,16 @@
         u2_noun ruf = u2_bc(wir_r, u2_nul, _1);
 
         ret = _mint_crow(wir_r, van, sut, gol, c3__gold, ruf, p_gen);
+        u2_rz(wir_r, ruf);
+
+        return ret;
+      }
+      case c3__pmmt: p_gen = u2_t(gen);
+      _mint_used(wir_r);
+      {
+        u2_noun ruf = u2_bc(wir_r, u2_nul, _1);
+
+        ret = _mint_crow(wir_r, van, sut, gol, c3__lead, ruf, p_gen);
         u2_rz(wir_r, ruf);
 
         return ret;

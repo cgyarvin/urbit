@@ -442,7 +442,7 @@
       {
         u2_noun ruf = u2_bq(wir_r, c3__dgdp, u2_rx(wir_r, p_gen), u2_nul, _1);
         u2_noun ret = _fern_crow
-          (wir_r, van, sut, dox, gol, c3__lead, ruf, q_gen);
+          (wir_r, van, sut, dox, gol, c3__zinc, ruf, q_gen);
 
         u2_rz(wir_r, ruf);
         return ret;
