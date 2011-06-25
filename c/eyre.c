@@ -17,7 +17,7 @@
 #define C3_GLOBAL
 #include "all.h"
 
-#define U2_EYRE_PROTO
+// #define U2_EYRE_PROTO
 #define FirstKernel 264
 
   /**  Global kernel - used only for trace printing.
@@ -685,15 +685,10 @@ _eyre_line_proto(u2_wire wir_r,
     u2_noun pro;
    
     u2_bx_boot(wir_r);
-    u2_err(wir_r, "proto", ken);
     pro = _eyre_nock(wir_r, som, ken);
-    u2_err(wir_r, "pro", pro);
     u2_bx_show(wir_r);
 
-    u2_bx_boot(wir_r);
     _eyre_dirt(wir_r, las, 0, pro); 
-    u2_bx_show(wir_r);
-
     u2_rz(wir_r, fol);
     u2_rz(wir_r, som);
     u2_rz(wir_r, pro);
@@ -742,8 +737,6 @@ main(c3_i   argc,
 #ifdef U2_EYRE_PROTO
   las = _eyre_ken(wir_r, (kno_w + 1));
   ken = _eyre_ken(wir_r, kno_w);
-
-  u2_err(wir_r, "kernel", ken);
 #else
   //  Load the designated application.
   //
