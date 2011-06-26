@@ -17,7 +17,7 @@
 #define C3_GLOBAL
 #include "all.h"
 
-// #define U2_EYRE_PROTO
+#define U2_EYRE_PROTO
 #define FirstKernel 264
 
   /**  Global kernel - used only for trace printing.
