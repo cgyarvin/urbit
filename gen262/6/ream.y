@@ -144,7 +144,7 @@ wide_c
         { $$ = _ycell(c3__tmbn, c3__noun); }
       | si_ket
         { $$ = _ycell(c3__tmbn, c3__cell); }
-      | si_nat
+      | si_wat
         { $$ = _ycell(c3__tmbn, c3__atom); }
       | si_sig
         { $$ = _ycell(c3__tmbn, c3__null); }
@@ -749,7 +749,6 @@ tall
     si_mit: '%'
     si_ned: ']'
     si_den: '['
-    si_nat: '@'
     si_pel: ')'
     si_pad: '+'
     si_pam: '&'
@@ -761,6 +760,7 @@ tall
     si_tic: '`'
     /* si_toq: '"' */
     si_von: '/'
+    si_wat: '@'
     si_zap: '!'
 
   /** Basic tokens.
@@ -1060,14 +1060,16 @@ _scanner_init_clip(struct _u2_scanner *scanner,
 
 /* structures
 */
+# define Tier6_c  u2_jet_live
+// # define Tier6_c  u2_jet_dead
+// # define Tier6_c  (u2_jet_live | u2_jet_test)
+
   u2_ho_jet 
   j2_mbj(Pt6, ream)[] = { 
     { ".3", 
        c3__hevy, 
        j2_mb(Pt6, ream), 
-       // u2_jet_dead,
-       // u2_jet_live | u2_jet_test, 
-       u2_jet_live,
+       Tier6_c,
        u2_none, u2_none },
     { }
   };
@@ -1077,9 +1079,7 @@ _scanner_init_clip(struct _u2_scanner *scanner,
     { ".3", 
        c3__hevy, 
        j2_mb(Pt6, vest), 
-       // u2_jet_dead,
-       // u2_jet_live | u2_jet_test, 
-       u2_jet_live,
+       Tier6_c,
        u2_none, u2_none },
     { }
   };

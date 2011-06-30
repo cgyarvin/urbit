@@ -1,6 +1,7 @@
 ?>  ?=(@ .)
 %.  .
 =<  make
+=>  262
 =>  
   ::::
   ::::  Tier 0, kernel stub
@@ -115,10 +116,6 @@
     ?:  .=(0 a)
       c
     $(a (dec a), c (add b c))
-  ::
-  ++  nat
-    |=  a=*
-    ~|(%nat ?>(?=(@ a) a))
   ::
   ++  nop
     |*  a=*
@@ -1070,7 +1067,6 @@
   ++  hig  (shim 'A' 'Z')
   ++  hit  ;~(pose dit (cook |=(a=*char (sub a 87)) (shim 'a' 'f')))
   ++  ket  (just '^')
-  ++  lat  (just '@')
   ++  lep  (just '(')
   ++  led  (just '>')
   ++  low  (shim 'a' 'z')
@@ -1085,7 +1081,7 @@
   ++  pel  (just ')')
   ++  poy  ;~(pfix nov ;~(pose nov bot mes))
   ++  qit  ;~(pose (shim 32 38) (shim 40 91) (shim 93 126) poy)
-  ++  quo  (ifix [bot bot] (boss 256 (plus qit)))
+  ++  qut  (ifix [bot bot] (boss 256 (plus qit)))
   ++  sec  (just '$')
   ++  sed  (just '}')
   ++  sig  (just '~')
@@ -1112,6 +1108,7 @@
            == 
   ++  von  (just '/')
   ++  vul  (cold ~ ;~(plug deg deg (star (shim 32 126)) (just 10)))
+  ++  wat  (just '@')
   ++  zap  (just '!')
   ::
   ::    Tier 5b/0, prettyprinting: types
@@ -1497,13 +1494,13 @@
 ::
 ++  core
   ~.  %core 
-  |=  [pac=*type con=*cone]
+  |=  [pac=*type con=*coil]
   ^-  *type
   ?:(.=(%void pac) %void [%core pac con])
 ::
-++  cone
+++  coil
   |?
-    :+    p=*<%gold %lead %iron>
+    :+    p=*<%gold %iron %lead %zinc>
         q=*type
       r=[p=*<~ ^> q=*(map term foot)]
   ==
@@ -1560,6 +1557,7 @@
     [%brdg p=*gene q=*gene]                                       ::  |:  bardeg
     [%brdp p=*gene]                                               ::  |-  bardap
     [%brdt p=*gene]                                               ::  |.  bardot
+    [%brmt p=*gene]                                               ::  |%  barmit
     [%brpd p=*gene q=*gene]                                       ::  |+  barpad
     [%brtr p=*gene q=*gene]                                       ::  |*  bartar
     [%brzp p=*gene q=*gene]                                       ::  |!  barzap
@@ -1607,6 +1605,7 @@
     [%pmdg p=*gene q=*(map term foot)]                            ::  &:  pamdeg
     [%pmdp p=*gene q=*(map term foot)]                            ::  &-  pamdap
     [%pmdt p=*(map term foot)]                                    ::  &.  pamdot
+    [%pmmt p=*(map term foot)]                                    ::  &.  pamdot
     [%pmpd p=*gene q=*(map term foot)]                            ::  &+  pampad
     [%pmzp p=*gene q=*(map term foot)]                            ::  &!  pamzap
   ::
@@ -1646,7 +1645,7 @@
 ++  type
   |?  %atom
       [%cell p=*type q=*type]
-      [%core p=*type q=*cone]
+      [%core p=*type q=*coil]
       [%cube p=*]
       [%face p=*term q=*type]
       [%fork p=*type q=*type]
@@ -1659,14 +1658,14 @@
   ~%    %ap  
       ->  
     ==
-      %mold  mold
+      %modl  modl
       %open  open
       %rake  rake
       %sift  sift
     ==
   &=  gen=*gene
-  ++  mold
-    ~.  %mold
+  ++  modl
+    ~.  %modl
     |=  hep=*twig
     ^-  *gene
     ?-    gen
@@ -1675,12 +1674,13 @@
         $(gen p.gen, hep [[~ 2] hep])
       $(gen q.gen, hep [[~ 3] hep])
     :: 
-        [%ktbn *]   [%ktbn p.gen $(gen q.gen)]
-        [%ktdp *]   $(gen p.gen)
-        [%ktpd *]   [%ktpd p.gen $(gen q.gen)]
-        [%mttr *]   [%mtdp p.gen [%mtbn hep ~] ~]
-        [%zpcb *]   [%zpcb p.gen $(gen q.gen)]
-        [%zpdx *]   [%zpdx $(gen p.gen)]
+        [%ktbn *]     [%ktbn p.gen $(gen q.gen)]
+        [%ktdp *]     $(gen p.gen)
+        [%ktpd *]     [%ktpd p.gen $(gen q.gen)]
+        [%mttr *]     [%mtdp p.gen [%mtbn hep ~] ~]
+        [%mtdp * ~]   [%mtdp p.gen [%mtbn hep ~] ~]
+        [%zpcb *]     [%zpcb p.gen $(gen q.gen)]
+        [%zpdx *]     [%zpdx $(gen p.gen)]
         *
       =+  bog=~(open ap gen)
       ?.  .=(bog gen)
@@ -1704,6 +1704,7 @@
         [%brdp *]   [%bnld [%brdt p.gen] %%]
         [%brdg *]   [%pmdg p.gen [[%% [& & q.gen]] ~ ~]]
         [%brdt *]   [%pmdt [[%% [& & p.gen]] ~ ~]]
+        [%brmt *]   [%pmmt [[%% [& & p.gen]] ~ ~]]
         [%brpd *]   [%pmpd p.gen [[%% [& & q.gen]] ~ ~]]
         [%brtr *]   [%pmbn p.gen [[%% [& | q.gen]] ~ ~]]
         [%brzp *]   [%bnld [%zpmt ~] [%brbn p.gen q.gen]]
@@ -1733,7 +1734,7 @@
         [%zpzp ~]
       :^    %csdg
           [%csbn (sift i.q.gen) [%mtbn rake(gen p.gen) ~]]
-        (mold(gen i.q.gen) rake(gen p.gen))
+        (modl(gen i.q.gen) rake(gen p.gen))
       $(q.gen t.q.gen)
     ::
         [%cssg *]   [%csdp p.gen [[[%dtsg 0] q.gen] [[%tmbn %cell] r.gen] ~]]
@@ -1802,7 +1803,7 @@
       ==
     ::
         [%tmdp *]   (sift p.gen)
-        [%tmpd *]   (mold(gen p.gen) rake(gen q.gen))
+        [%tmpd *]   (modl(gen p.gen) rake(gen q.gen))
         [%tmsg *]
       |-
       ?-  q.gen
@@ -2383,7 +2384,7 @@
         [%hold *]
       ?:  (~(has in vit) sut)
         ~~  (dunk 'type')
-        ~~  (show [%c 'axis'] axe)
+        ~~  (show [%c 'axis'] [%d axe])
         ~|(%fish-loop !!)
       =>  %=(. vit (~(put in vit) sut))
       $(sut repo)
@@ -2502,7 +2503,7 @@
       ==
     ::
     ++  crow
-      |=  [mel=*<%gold %lead %iron> ruf=*gene dab=*(map term foot)]
+      |=  [mel=*<%gold %iron %lead %zinc> ruf=*gene dab=*(map term foot)]
       ^-  [p=*type q=*form]
       =+  dan=$$(gen ruf, gol %noun)
       ?.  fab
@@ -2587,6 +2588,8 @@
         [p.nef (boil |.([1 ~|(%mint-burn .*(burn q.nef))]))]
       ::
           [%mtbn *]                                                   ::  %=
+        ~~  (dunk %mtbn)
+        ~~  (show [%c %mtbn-p] [%q p.gen])
         =+  lar=(seek %read p.gen)
         ?-    -.q.lar
             & 
@@ -2599,10 +2602,13 @@
         ==
       ::
           [%pmdg *]                                                   ::  &:
-        (crow %lead [%dgdp p.gen [~ 1]] q.gen)
+        (crow %zinc [%dgdp p.gen [~ 1]] q.gen)
       ::
           [%pmdt *]                                                   ::  &.
         (crow %gold [~ 1] p.gen)
+      ::
+          [%pmmt *]                                                   ::  &%
+        (crow %lead [~ 1] p.gen)
       ::
           [%pmpd *]                                                   ::  &+
         (crow %iron [%dgdp p.gen [~ 1]] q.gen)
@@ -2684,7 +2690,8 @@
           =+  sam=[s=(peek(sut q.q.sut) %rite 2) r=(peek(sut q.q.ref) %rite 2)]
           dext(sut r.sam, ref s.sam)
         ::
-            %lead
+            %lead  &
+            %zinc
           =+  pal=[s=(peek(sut q.q.sut) %read 2) r=(peek(sut q.q.ref) %read 2)]
           dext(sut s.pal, ref r.pal)
         ==
@@ -2817,14 +2824,16 @@
         ?-    p.q.sut
             %gold   &
             %iron   | 
-            %lead   .=(2 (cap axe))
+            %lead   |
+            %zinc   .=(2 (cap axe))
         ==
       ::
           %rite
         ?-    p.q.sut
             %gold   &
             %iron   .=(2 (cap axe))
-            %lead   | 
+            %lead   |
+            %zinc   | 
         ==
       ==
     ==
@@ -3002,7 +3011,7 @@
       ;~  pose
         ;~(pfix (just '0') (just 'x') hex)
         dem
-        quo
+        qut
         (cold & pam)
         (cold | bar)
         ;~(pfix mit sym)
@@ -3015,7 +3024,7 @@
         (cold %flag cas)
         (cold %noun tar)
         (cold %cell ket)
-        (cold %atom nat)
+        (cold %atom wat)
         (cold %null sig)
       ==
     ==
@@ -3030,6 +3039,7 @@
               (rune deg %brdg expb)
               (rune dap %brdp expa)
               (rune dot %brdt expa)
+              (rune mit %brmt expa)
               (rune pad %brpd expb)
               (rune tar %brtr expb)
             ==
@@ -3101,6 +3111,7 @@
               (rune deg %pmdg expx)
               (rune dap %pmdp expx)
               (rune dot %pmdt expe)
+              (rune mit %pmmt expe)
               (rune pad %pmpd expx)
             ==
           ==

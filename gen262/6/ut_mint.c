@@ -444,13 +444,21 @@
           u2_noun cag = j2_mcy(Pt6, ut, burn)(wir_r, van, sut);
           u2_noun cod;
 
-          u2_bl_push(wir_r, u2_bc(wir_r, c3__bean, 
-                                         u2_bn_string(wir_r, "mint-burn")));
-          cod = u2_bn_nock(wir_r, cag, q_nef);
-          u2_bl_drop(wir_r);
+          {
+            extern int EyreTrak;
 
-          u2_rz(wir_r, cag);
-          ret = u2_bc(wir_r, u2_rx(wir_r, p_nef), cod);
+            if ( EyreTrak ) { c3_assert(0); }
+
+            cod = u2_nk_nock(wir_r, cag, q_nef);
+            if ( u2_none == cod ) {
+              u2_err(wir_r, "ktsg: cag", cag);
+              u2_err(wir_r, "ktsg: q_nef", q_nef);
+              fprintf(stderr, "ktsg: none\n");
+              return u2_bl_error(wir_r, "mint_burn");
+            }
+            // u2_err(wir_r, "ktsg: cod", cod);
+          }
+          ret = u2_bc(wir_r, u2_rx(wir_r, p_nef), u2_bc(wir_r, _1, cod));
         }
         u2_rz(wir_r, nef);
         return ret;
@@ -787,6 +795,9 @@
     { ".3", c3__hevy, 
         j2_mc(Pt6, ut, mint), 
         Tier6_b_memo,
+        // u2_jet_live | u2_jet_test | u2_jet_memo,
+        // u2_jet_live | u2_jet_memo,
+        // u2_jet_dead | u2_jet_memo,
         u2_none, u2_none,
         j2_mck(Pt6, ut, mint)
     },

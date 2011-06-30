@@ -545,12 +545,22 @@ u2_bn_mp(u2_ray wir_r,
 u2_noun
 u2_bn_nock(u2_ray wir_r, u2_noun bus, u2_noun fol)
 {
+  u2_noun pro;
+
   if ( (u2_none == bus) || (u2_none == fol) ) {
     return u2_bl_bail(wir_r, c3__fail);
   }
-  return u2_bl_good(wir_r, u2_nk_nock(wir_r, u2_rl_gain(wir_r, bus), fol));
-}
+#if 1
+  pro = u2_nk_nock(wir_r, u2_rl_gain(wir_r, bus), fol);
 
+  if ( u2_none == pro ) {
+    return u2_bl_bail(wir_r, c3__exit);
+  }
+  else return pro;
+#else
+  return u2_bl_good(wir_r, u2_nk_nock(wir_r, u2_rl_gain(wir_r, bus), fol));
+#endif
+}
 
 /* u2_bn_mang():
 **

@@ -441,7 +441,8 @@
   }
   _open_do_p(mttr)    //  %*
   {
-    return u2_bt(wir_r, c3__bnld,
+    return u2_bq(wir_r, c3__ktsg,
+                        c3__bnld,
                         u2_rx(wir_r, p_gen),
                         u2_bt(wir_r, c3__mtbn, 
                                      u2_bo(wir_r, u2_blip),
@@ -806,6 +807,19 @@
                     u2_rx(wir_r, p_gen),
                     u2_bt(wir_r, c3__mtbn, u2_rx(wir_r, hep), u2_nul),
                     u2_nul);
+        }
+        case c3__mtdp:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
+                          return u2_bl_bail(wir_r, c3__fail); else
+        {
+          if ( u2_nul == q_gen ) {
+            return u2_bq
+              (wir_r, c3__mtdp,
+                      u2_rx(wir_r, p_gen),
+                      u2_bt(wir_r, c3__mtbn, u2_rx(wir_r, hep), u2_nul),
+                      u2_rx(wir_r, q_gen));
+          } else {
+            goto plain;
+          }
         }
         case c3__zpcb:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
                           return u2_bl_bail(wir_r, c3__fail); else

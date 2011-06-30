@@ -17,17 +17,17 @@
 #define C3_GLOBAL
 #include "all.h"
 
-#define U2_EYRE_PROTO
-#define FirstKernel 264
+#define EyreFirstKernel 264
+u2_flag EyreSmoke;
 
   /**  Global kernel - used only for trace printing.
   **/
     u2_noun Ken   = u2_nul;
-    c3_w    Kno_w = FirstKernel;
+    c3_w    Kno_w = EyreFirstKernel;
   
     /* External drivers.
     */
-      extern u2_ho_driver j2_da(k_261);
+//       extern u2_ho_driver j2_da(k_261);
       extern u2_ho_driver j2_da(k_262);
       extern u2_ho_driver j2_da(watt_263);
       extern u2_ho_driver j2_da(watt_264);
@@ -35,7 +35,7 @@
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       u2_ho_driver *HostDriverBase[] = {
-        &j2_da(k_261),
+//         &j2_da(k_261),
         &j2_da(k_262),
         &j2_da(watt_263), 
         &j2_da(watt_264), 
@@ -83,7 +83,7 @@ _eyre_nock(u2_wire wir_r,
     }
     else {
       u2_noun tax;
-     
+ 
       fprintf(stderr, "{trace}\n");
       tax = u2_rx(wir_r, u2_wire_tax(wir_r));
       u2_wire_tax(wir_r) = u2_nul;
@@ -276,9 +276,9 @@ _eyre_ken_load_soft(u2_wire wir_r,
 */
 static u2_noun                                                    //  produce
 _eyre_ken(u2_wire wir_r,
-          c3_w kno_w)
+          c3_w    kno_w)
 {
-  c3_w    nec_w = FirstKernel;
+  c3_w    nec_w = EyreFirstKernel;
   u2_noun ken = u2_nul;
   u2_flag nuw = u2_no;
 
@@ -287,8 +287,8 @@ _eyre_ken(u2_wire wir_r,
       if ( u2_yes == _eyre_ken_nuw(nec_w) ) {
         nuw = u2_yes;
 
-        if ( FirstKernel == nec_w ) {
-          fprintf(stderr, "eyre: %d is not fresh\n", FirstKernel);
+        if ( EyreFirstKernel == nec_w ) {
+          fprintf(stderr, "eyre: %d is not fresh\n", EyreFirstKernel);
           exit(1);
         }
         else {
@@ -665,7 +665,6 @@ _eyre_line(u2_wire wir_r,
   }
 }
 
-#ifdef U2_EYRE_PROTO
 /* _eyre_line_proto(): parse line with old kernel, execute with new.
 */
 static void
@@ -690,13 +689,11 @@ _eyre_line_proto(u2_wire wir_r,
 
     _eyre_dirt(wir_r, las, 0, pro); 
     u2_rz(wir_r, fol);
-    u2_rz(wir_r, som);
     u2_rz(wir_r, pro);
 
     u2_bl_done(wir_r, kit_r);
   }
 }
-#endif
 
 /* main()::
 */
@@ -707,24 +704,41 @@ main(c3_i   argc,
   u2_wire wir_r;
   c3_w    kno_w;
   c3_c*   fel_c;
-  c3_c*   lid_c;
+  c3_c*   lid_c = 0;
   u2_noun ken;
-# ifdef U2_EYRE_PROTO
-    u2_noun las;
-# else
-    u2_noun app;
-# endif
+  u2_noun las = 0;
+  u2_noun app = 0;
 
   //  Parse arguments.
   //
-  if ( (3 != argc) ||
-       (0 == (kno_w = strtol(argv[1], 0, 10))) ||
-       (kno_w > FirstKernel) ||
-       !(lid_c = strdup(argv[2])) ) {
-    fprintf(stderr, "usage: eyre <kernel> <shell>\n");
-    exit(1);
+  if ( argc < 2 ) {
+    goto usage;
   }
- 
+  if ( (0 == (kno_w = strtol(argv[1], 0, 10))) || (kno_w > EyreFirstKernel) ) {
+    goto usage;
+  }
+  if ( 2 == argc ) {
+    EyreSmoke = u2_yes;
+
+    if ( kno_w > (EyreFirstKernel - 1) ) {
+      goto usage;
+    }
+    printf("{smoke test %d}\n", kno_w);
+    goto proceed;
+  }
+  else if ( 3 == argc ) {
+    if ( !(lid_c = strdup(argv[2])) ) {
+      goto usage;
+    }
+    EyreSmoke = u2_no;
+    goto proceed;
+  }
+
+  usage: {
+    fprintf(stderr, "usage: eyre <kernel> [<shell>]\n");
+    exit(1);
+  } proceed:
+
   //  Instantiate system utilities.
   {
     u2_boot();
@@ -732,17 +746,21 @@ main(c3_i   argc,
     fel_c = c3_comd_init();
   }
 
-  //  Load the designated kernel.
+  //  Load the kernel(s) and/or shell.
   //
-#ifdef U2_EYRE_PROTO
-  las = _eyre_ken(wir_r, (kno_w + 1));
-  ken = _eyre_ken(wir_r, kno_w);
-#else
-  //  Load the designated application.
-  //
-  ken = _eyre_ken(wir_r, kno_w);
-  app = _eyre_app(wir_r, ken, lid_c);
-#endif
+  {
+    if ( u2_yes == EyreSmoke ) {
+      las = _eyre_ken(wir_r, (kno_w + 1));
+      ken = _eyre_ken_load_soft(wir_r, las, kno_w);
+
+      Ken = las;
+      Kno_w = (kno_w + 1);
+    }
+    else {
+      ken = _eyre_ken(wir_r, kno_w);
+      app = _eyre_app(wir_r, ken, lid_c);
+    }
+  }
 
   //  Do some lines.
   //
@@ -755,11 +773,11 @@ main(c3_i   argc,
     else {
       u2_noun lin = u2_bn_string(wir_r, lin_c);
 
-#ifndef U2_EYRE_PROTO
-      _eyre_line(wir_r, ken, app, lin);
-#else
-      _eyre_line_proto(wir_r, las, ken, lin);
-#endif
+      if ( u2_yes == EyreSmoke ) {
+        _eyre_line_proto(wir_r, las, ken, lin);
+      } else {
+        _eyre_line(wir_r, ken, app, lin);
+      }
       free(lin_c);
       u2_rz(wir_r, lin);
     }
