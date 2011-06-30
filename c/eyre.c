@@ -17,7 +17,7 @@
 #define C3_GLOBAL
 #include "all.h"
 
-#define EyreFirstKernel 264
+#define EyreFirstKernel 261
 u2_flag EyreSmoke;
 
   /**  Global kernel - used only for trace printing.
@@ -30,9 +30,9 @@ u2_flag EyreSmoke;
       extern u2_ho_driver j2_da(k_259);
       extern u2_ho_driver j2_da(k_260);
       extern u2_ho_driver j2_da(k_261);
-      extern u2_ho_driver j2_da(k_262);
-      extern u2_ho_driver j2_da(watt_263);
-      extern u2_ho_driver j2_da(watt_264);
+//      extern u2_ho_driver j2_da(k_262);
+//      extern u2_ho_driver j2_da(watt_263);
+//      extern u2_ho_driver j2_da(watt_264);
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
@@ -40,24 +40,24 @@ u2_flag EyreSmoke;
         &j2_da(k_259),
         &j2_da(k_260),
         &j2_da(k_261),
-        &j2_da(k_262),
-        &j2_da(watt_263), 
-        &j2_da(watt_264), 
+//         &j2_da(k_262),
+//         &j2_da(watt_263), 
+//         &j2_da(watt_264), 
         0
       };
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define PitY watt_264
+#   define Pt5Y   k_261__a__b__c__d__e
 
     u2_noun
-    j2_mby(PitY, cue)(u2_wire, u2_noun a);
+    j2_mby(Pt5Y, cue)(u2_wire, u2_noun a);
 
     u2_noun
-    j2_mby(PitY, jam)(u2_wire, u2_noun a);
+    j2_mby(Pt5Y, jam)(u2_wire, u2_noun a);
 
-#   define _eyre_cue  j2_mby(PitY, cue)
-#   define _eyre_jam  j2_mby(PitY, jam)
+#   define _eyre_cue  j2_mby(Pt5Y, cue)
+#   define _eyre_jam  j2_mby(Pt5Y, jam)
 
   /**  Forward declarations.
   **/
@@ -739,7 +739,12 @@ main(c3_i   argc,
   }
 
   usage: {
-    fprintf(stderr, "usage: eyre <kernel> [<shell>]\n");
+    fprintf(stderr, "usage: eyre $kernel [$shell]\n");
+    fprintf(stderr, "  watt/$kernel.watt\n");
+    fprintf(stderr, "    (FirstKernel is %d, kernels count down)\n", 
+            EyreFirstKernel);
+    fprintf(stderr, "  watt/$shell.watt\n");
+
     exit(1);
   } proceed:
 
