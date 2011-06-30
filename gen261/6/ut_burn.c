@@ -36,16 +36,9 @@
                      u2_bi_trel(wir_r, q_sut, &pq_sut, &qq_sut, &rq_sut);
                      u2_bi_cell(wir_r, rq_sut, &prq_sut, &qrq_sut);
       {
-        if ( u2_no == u2_dust(prq_sut) ) {
-          u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "type", sut);
-
-          u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
-          return u2_bl_error(wir_r, "burn-warm");
-        } else {
-          return u2_bc
-            (wir_r, j2_mcy(Pt6, ut, burn)(wir_r, van, p_sut),
-                    u2_rx(wir_r, prq_sut));
-        }
+        return u2_bc
+          (wir_r, j2_mcy(Pt6, ut, burn)(wir_r, van, p_sut),
+                  u2_rx(wir_r, prq_sut));
       }
       case c3__cube: p_sut = u2_t(sut);
       {
@@ -61,23 +54,11 @@
       }
       case c3__hold: p_sut = u2_t(sut);
       {
-        if ( u2_nul == p_sut ) {
-          return u2_bl_error(wir_r, "burn-void");
-        }
-        else {
-          u2_noun ip_sut = u2_h(p_sut);
-          u2_noun typ = u2_h(ip_sut);
-          u2_noun gen = u2_t(ip_sut);
-          u2_noun dat = j2_mcy(Pt6, ut, burn)(wir_r, van, typ);
-          u2_noun fyl = j2_mcy(Pt6, ut, mint)(wir_r, van, typ, c3__noun, gen);
-          u2_noun pro;
+        u2_type fop = j2_mcy(Pt6, ut, repo)(wir_r, van, sut);
+        u2_noun pro = j2_mcy(Pt6, ut, burn)(wir_r, van, fop);
 
-          pro = u2_bn_nock(wir_r, dat, u2_t(fyl));
-          u2_rz(wir_r, dat);
-          u2_rz(wir_r, fyl);
-
-          return pro;
-        }
+        u2_rz(wir_r, fop);
+        return pro;
       }
     }
   }

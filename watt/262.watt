@@ -2585,11 +2585,12 @@
       ::
           [%ktsg *]                                                   ::  ^~
         =+  nef=$(gen p.gen)
+        ~~  (dunk %ktsg)
         [p.nef (boil |.([1 ~|(%mint-burn .*(burn q.nef))]))]
       ::
           [%mtbn *]                                                   ::  %=
-        ~~  (dunk %mtbn)
-        ~~  (show [%c %mtbn-p] [%q p.gen])
+        ::  ~~  (dunk %mtbn)
+        ::  ~~  (show [%c %mtbn-p] [%q p.gen])
         =+  lar=(seek %read p.gen)
         ?-    -.q.lar
             & 

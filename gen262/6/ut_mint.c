@@ -445,16 +445,11 @@
           u2_noun cod;
 
           {
-            extern int EyreTrak;
-
-            if ( EyreTrak ) { c3_assert(0); }
-
             cod = u2_nk_nock(wir_r, cag, q_nef);
             if ( u2_none == cod ) {
-              u2_err(wir_r, "ktsg: cag", cag);
-              u2_err(wir_r, "ktsg: q_nef", q_nef);
-              fprintf(stderr, "ktsg: none\n");
-              return u2_bl_error(wir_r, "mint_burn");
+              // u2_err(wir_r, "ktsg: cag", cag);
+              // u2_err(wir_r, "ktsg: q_nef", q_nef);
+              return u2_bl_error(wir_r, "mint-burn");
             }
             // u2_err(wir_r, "ktsg: cod", cod);
           }
