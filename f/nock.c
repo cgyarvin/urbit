@@ -258,7 +258,6 @@ _nock_rock(u2_wire wir_r,
     /* gant
     */
       case u2_nock_gant: {
-        c3_assert(0);
         if ( u2_no == u2_dust(gal) ) {
           u2_rl_lose(wir_r, bus);
           return u2_none; 
@@ -275,7 +274,7 @@ _nock_rock(u2_wire wir_r,
             u2_rl_lose(wir_r, bus);
             return u2_none;
           }
-          if ( u2_none == (har = u2_rl_cell(wir_r, bod, bus)) ) {
+          if ( u2_none == (har = u2_rl_cell(wir_r, bus, bod)) ) {
             return u2_none;
           }
           bus = har;
@@ -810,7 +809,7 @@ _nock_sand(u2_wire wir_r,
             if ( u2_none == (bod = _nock_sand_here(wir_r, bus, meg)) ) {
               return u2_none;
             }
-            if ( u2_none == (har = u2_rl_cell(wir_r, bod, bus)) ) {
+            if ( u2_none == (har = u2_rl_cell(wir_r, bus, bod)) ) {
               return u2_none;
             }
           }
