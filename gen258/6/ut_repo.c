@@ -66,7 +66,7 @@
   {
     u2_noun sut;
 
-    if ( u2_none == (sut = u2_frag(4, cor)) ) {
+    if ( u2_none == (sut = u2_frag(u2_cw_sam, cor)) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcy(Pt6, ut, repo)(wir_r, cor, sut);

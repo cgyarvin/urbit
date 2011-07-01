@@ -258,6 +258,7 @@ _nock_rock(u2_wire wir_r,
     /* gant
     */
       case u2_nock_gant: {
+        c3_assert(0);
         if ( u2_no == u2_dust(gal) ) {
           u2_rl_lose(wir_r, bus);
           return u2_none; 

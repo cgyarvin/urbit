@@ -1,3 +1,4 @@
+!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -1368,6 +1369,7 @@
   ++  show
     |=  vem=*pork
     ^-  *tank
+    ~|  %bug-show
     ?:  ?=(@ vem)
       [%leaf (mesc (rip 3 vem))]
     ?-    vem
@@ -2120,6 +2122,7 @@
   ++  dunk
     |=  paz=*term
     ^-  *tank
+    ~|  %bug-dunk
     =-  [%palm [~ (mesc (rip 3 paz)) [':' ' ' ~] ~] [duc ~]]
     ^=  duc
     =+  ^=  gil
@@ -2148,11 +2151,13 @@
     =+  [gax=*(set type) dex=*(set type)]
     =<  q
     |-  ^-  [p=*(set type) q=*tank]
+    ~|  %bug-loop
     ?-    sut
-        %atom      [dex (show '@')]
-        %noun      [dex (show '*')]
-        %void      [dex (show '#')]
+        %atom      ~|(%bug-atom [dex (show '@')])
+        %noun      ~|(%bug-noun [dex (show '*')])
+        %void      ~|(%bug-void [dex (show '#')])
         [%cell *] 
+      ~|  %bug-cell
       =+  vir=$(sut p.sut)
       =+  ^=  tov
           |-  ^-  [p=*(set type) q=*(list tank)]
@@ -2165,6 +2170,7 @@
       [p.tov [%rose [[' ' ~]  ['[' ~] [']' ~]] q.vir q.tov]]
     ::
         [%core *]
+      ~|  %bug-core
       =+  gep=?:(?=([[%% [& *]] ~ ~] q.r.q.sut) '|' '&')
       =+  ^=  nox
           ^-  @
@@ -2196,12 +2202,14 @@
           [p=p.zam q=[q.vir q.zam lor ~]]
       [p.rey [%palm [[' ' ~] wil ~ [')' ~]] q.rey]]
     ::
-        [%cube *]   [dex (show ?:(.=(0 p.sut) '~' [%q p.sut]))]
+        [%cube *]   ~|(%bug-cube [dex (show ?:(.=(0 p.sut) '~' [%q p.sut]))])
         [%face *]   
+      ~|  %bug-face
       =+  vir=$(sut q.sut)
       [p.vir [%palm [~ (rip 3 p.sut) ['=' ~] ~] [q.vir ~]]]
     ::
         [%fork *]
+      ~|  %bug-fork
       ?:  .=([%fork [%cube 0] [%cube 1]] sut)
         [dex (show '?')]
       =+  vir=$(sut p.sut)
@@ -2216,15 +2224,21 @@
       [p.tov [%rose [[' ' ~]  ['<' ~] ['>' ~]] q.vir q.tov]]
     ::
         [%hold *]
+      ~|  %bug-hold
       =+  piv=(~(get by gil) sut)
       ?~  piv
-        $(sut repo)
+        =+  yad=repo
+        $(sut yad)
       =+  yow=(show [%m '$%d'] u.piv ~)
       ?:  ?|((~(has in gax) sut) (~(has in dex) sut))
         [dex yow]
       =+  vir=$(gax (~(put in gax) sut), sut repo)
       :-  (~(put in p.vir) sut)
       [%palm [~ ~(ram re yow) [':' ~] ~] q.vir ~]
+    ::
+        *
+      ~|  %bug-type
+      !!
     ==
   ::
   ++  emit
