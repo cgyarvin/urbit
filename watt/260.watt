@@ -822,7 +822,7 @@
     ~
   &.
   ::
-  ::  Tier 5a/0, parsing: tracing and external
+  ::  Tier 5a/0, parsing: tracing
   ::
   ++  last  |=  [zyc=*hair naz=*hair]
             ^-  *hair
@@ -830,13 +830,6 @@
               ?:((gth q.zyc q.naz) zyc naz)
             ?:((gth p.zyc p.naz) zyc naz)
   ::
-  ++  rash  |*([naf=@ sab=rule] (rasp (rip 3 naf) sab))
-  ++  rasp  |*  [los=*tape sab=rule]
-            =+  vex=((full sab) [p=*hair q=los])
-            ?~  q.vex
-              ~~  (show [%m '{%d %d}'] p.p.vex q.p.vex ~)
-              ~|('rasp-stop' !!)
-            p.u.q.vex
   ++  slip  |=  [weq=*char naz=*hair]
             ^-  *hair
             ?:(.=(10 weq) [.+(p.naz) 1] [p.naz .+(q.naz)])
@@ -1131,63 +1124,120 @@
   ++  wat  (just '@')
   ++  zap  (just '!')
   ::
+  ::      Tier 5a/5, parsing: external interface
+  ::
+  ++  rash  |*([naf=@ sab=rule] (rasp (rip 3 naf) sab))
+  ++  rasp  |*  [los=*tape sab=rule]
+            =+  vex=((full sab) [p=*hair q=los])
+            ?~  q.vex
+              ~~  (show [%m '{%d %d}'] p.p.vex q.p.vex ~)
+              ~|('rasp-stop' !!)
+            p.u.q.vex
+  ::
+  ::      Tier 5b/0, printing: basic text handling
+  ::
+  ++  mesc
+    |=  vib=*tape
+    ^-  *tape
+    ?~  vib
+      ~
+    ?:  .=(92 i.vib)
+      [92 92 $(vib t.vib)]
+    ?:  ?|((gth i.vib 126) (lth i.vib 32) .=(39 i.vib))
+      [92 (weld (slyx i.vib) (runt [1 47] $(vib t.vib)))]
+    [i.vib $(vib t.vib)]
+  ::
+  ++  runt
+    |=  [[a=@ b=@] c=*tape]
+    ^-  *tape
+    ?:  .=(0 a)
+      c
+    [b $(a (dec a))]
+  ::
+  ::
+  ++  trim
+    |=  [a=@ b=*tape]
+    ^-  [p=*tape q=*tape]
+    ?~  b
+      [~ ~]
+    ?:  .=(0 a)
+      [~ b]
+    =+  c=$(a (dec a), b +.b)
+    [[-.b p.c] q.c]
+  ::
+  ++  wind
+    |=  [[tab=@ edg=@] hom=*tape wol=*wall]
+    ^-  *wall
+    =>  .(tab (mod tab (mul 2 (div edg 3))))
+    ?:  (lte (lent hom) (sub edg tab))
+      [(runt [tab 32] hom) wol]
+    =>  .(tab (add tab 2), edg (sub edg 2))
+    =+  mut=(trim (sub edg tab) hom)
+    :-  (runt [(sub tab 2) 32] [92 47 (weld p.mut `hom`[92 47 ~])])
+    =>  .(hom q.mut)
+    |-
+    ?~  hom
+      [(runt [(sub tab 2) 32] [92 47 (runt [(sub edg tab) 32] [92 47 ~])]) wol]
+    =>  .(mut (trim (sub edg tab) hom))
+    [(runt [tab 32] p.mut) $(hom q.mut)]
+  ::
   ::    Tier 5b/1, prettyprinting: processors
   ::
   ++  re
-    &=  tec=*tank
+    &=  tac=*tank
     ++  ram
       ^-  *tape
-      ?-    -.tec
-          %leaf  p.tec
-          %palm  ram(tec [%rose [p.p.tec (weld q.p.tec r.p.tec) s.p.tec] q.tec])
+      ?-    -.tac
+          %leaf  p.tac
+          %palm  ram(tac [%rose [p.p.tac (weld q.p.tac r.p.tac) s.p.tac] q.tac])
           %rose
         %+  weld
-          q.p.tec
+          q.p.tac
         |-  ^-  *tape
-        ?~  q.tec
-          r.p.tec
-        =+  voz=$(q.tec t.q.tec)
-        (weld ram(tec i.q.tec) ?~(t.q.tec voz (weld p.p.tec voz)))
+        ?~  q.tac
+          r.p.tac
+        =+  voz=$(q.tac t.q.tac)
+        (weld ram(tac i.q.tac) ?~(t.q.tac voz (weld p.p.tac voz)))
       ==
     ::
     ++  win
       |=  [tab=@ edg=@]
       =+  lug=`*wall`~
       &-  |-  ^-  *wall
-          ?-    -.tec
-              %leaf  (wind [tab edg] p.tec lug)
+          ?-    -.tac
+              %leaf  (wind [tab edg] p.tac lug)
               %palm 
             ?:  fit
               (rig ram)
-            ?~  q.tec
-              (wind [tab edg] q.p.tec lug)
-            ?~  t.q.tec
-              (wind [(add tab 2) edg] q.p.tec $(tec i.q.tec))
-            =>  .(q.tec `*(list tank)`q.tec)
-            =+  lyn=(mul 2 (lent q.tec))
-            =+  vaz=(lent q.p.tec)
+            ?~  q.tac
+              (wind [tab edg] q.p.tac lug)
+            ?~  t.q.tac
+              (wind [(add tab 2) edg] q.p.tac $(tac i.q.tac))
+            =>  .(q.tac `*(list tank)`q.tac)
+            =+  lyn=(mul 2 (lent q.tac))
+            =+  vaz=(lent q.p.tac)
             =+  ^=  qyr
                 |-  ^-  *wall
-                ?~  q.tec
+                ?~  q.tac
                   lug
                 %=  $$
-                  tec i.q.tec
+                  tac i.q.tac
                   tab (sub lyn 2)
-                  lug $(q.tec t.q.tec, lyn (sub lyn 2))
+                  lug $(q.tac t.q.tac, lyn (sub lyn 2))
                 ==
-            [q.p.tec qyr]
+            [q.p.tac qyr]
           ::
               %rose
             ?:  fit
               (rig ram)
             =+  ^=  gyl
               |-  ^-  *wall
-              ?~  q.tec
-                ?:(.=(%% r.p.tec) lug (rig r.p.tec))
-              $$(tec i.q.tec, lug $(q.tec t.q.tec), tab din)
-            ?:  .=(%% q.p.tec)
+              ?~  q.tac
+                ?:(.=(%% r.p.tac) lug (rig r.p.tac))
+              $$(tac i.q.tac, lug $(q.tac t.q.tac), tab din)
+            ?:  .=(%% q.p.tac)
               gyl
-            (rig(lug gyl) q.p.tec)
+            (rig(lug gyl) q.p.tac)
           ==
       ::
       ++  din  (mod (add 2 tab) (mul 2 (div edg 3)))
@@ -1361,51 +1411,6 @@
     ::
         [s=%z c=*]        $(vem [[%r %% %% %%] c.vem])
     ==
-  ::
-  ++  mesc
-    |=  vib=*tape
-    ^-  *tape
-    ?~  vib
-      ~
-    ?:  .=(92 i.vib)
-      [92 92 $(vib t.vib)]
-    ?:  ?|((gth i.vib 126) (lth i.vib 32) .=(39 i.vib))
-      [92 (weld (slyx i.vib) (runt [1 47] $(vib t.vib)))]
-    [i.vib $(vib t.vib)]
-  ::
-  ++  runt
-    |=  [[a=@ b=@] c=*tape]
-    ^-  *tape
-    ?:  .=(0 a)
-      c
-    [b $(a (dec a))]
-  ::
-  ::
-  ++  trim
-    |=  [a=@ b=*tape]
-    ^-  [p=*tape q=*tape]
-    ?~  b
-      [~ ~]
-    ?:  .=(0 a)
-      [~ b]
-    =+  c=$(a (dec a), b +.b)
-    [[-.b p.c] q.c]
-  ::
-  ++  wind
-    |=  [[tab=@ edg=@] hom=*tape wol=*wall]
-    ^-  *wall
-    =>  .(tab (mod tab (mul 2 (div edg 3))))
-    ?:  (lte (lent hom) (sub edg tab))
-      [(runt [tab 32] hom) wol]
-    =>  .(tab (add tab 2), edg (sub edg 2))
-    =+  mut=(trim (sub edg tab) hom)
-    :-  (runt [(sub tab 2) 32] [92 47 (weld p.mut `hom`[92 47 ~])])
-    =>  .(hom q.mut)
-    |-
-    ?~  hom
-      [(runt [(sub tab 2) 32] [92 47 (runt [(sub edg tab) 32] [92 47 ~])]) wol]
-    =>  .(mut (trim (sub edg tab) hom))
-    [(runt [tab 32] p.mut) $(hom q.mut)]
   ::
   ::      Tier 5c, packing
   ::
@@ -2258,13 +2263,13 @@
     ?-    sut
     ::
         [%cell *]
-      =+  taf=$(sut p.sut)
+      =+  taf=$(sut q.sut)
       ?~  taf
-        =+  bov=$(sut q.sut)
+        =+  bov=$(sut p.sut)
         ?~  bov
           ~
-        [~ (peg 3 p.u.bov) q.u.bov]
-      [~ (peg 2 p.u.taf) q.u.taf]
+        [~ (peg 2 p.u.bov) q.u.bov]
+      [~ (peg 3 p.u.taf) q.u.taf]
     ::
         [%core *]
       =+  zem=(look cog q.r.q.sut)
@@ -2674,12 +2679,12 @@
           ==
         ::
             %iron
-          =+  sam=[s=(peek(sut q.q.sut) %rite 2) r=(peek(sut q.q.ref) %rite 2)]
+          =+  sam=[s=(peek(sut q.q.sut) %rite 3) r=(peek(sut q.q.ref) %rite 3)]
           dext(sut r.sam, ref s.sam)
         ::
             %lead  &
             %zinc
-          =+  pal=[s=(peek(sut q.q.sut) %read 2) r=(peek(sut q.q.ref) %read 2)]
+          =+  pal=[s=(peek(sut q.q.sut) %read 3) r=(peek(sut q.q.ref) %read 3)]
           dext(sut s.pal, ref r.pal)
         ==
       ==
@@ -2812,13 +2817,13 @@
             %gold   &
             %iron   | 
             %lead   |
-            %zinc   .=(2 (cap axe))
+            %zinc   .=(3 (cap axe))
         ==
       ::
           %rite
         ?-    p.q.sut
             %gold   &
-            %iron   .=(2 (cap axe))
+            %iron   .=(3 (cap axe))
             %lead   |
             %zinc   | 
         ==

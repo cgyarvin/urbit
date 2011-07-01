@@ -27,10 +27,10 @@
         if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
           return u2_bl_bail(wir_r, c3__fail);
         } else {
-          u2_noun taf = _find_in(wir_r, van, p_sut, way, cog, gil);
+          u2_noun taf = _find_in(wir_r, van, q_sut, way, cog, gil);
 
           if ( u2_nul == taf ) {
-            u2_noun bov = _find_in(wir_r, van, q_sut, way, cog, gil);
+            u2_noun bov = _find_in(wir_r, van, p_sut, way, cog, gil);
 
             if ( u2_nul == bov ) {
               return u2_nul;
@@ -41,7 +41,7 @@
               u2_mean(bov, 6, &p_bov, 7, &q_bov, 0);
               pro = u2_bt
                 (wir_r, u2_nul,
-                        j2_mbc(Pt3, peg)(wir_r, 3, p_bov),
+                        j2_mbc(Pt3, peg)(wir_r, 2, p_bov),
                         u2_rx(wir_r, q_bov));
 
               u2_rl_lose(wir_r, bov);
@@ -54,7 +54,7 @@
             u2_mean(taf, 6, &p_taf, 7, &q_taf, 0);
             pro = u2_bt
               (wir_r, u2_nul,
-                      j2_mbc(Pt3, peg)(wir_r, 2, p_taf),
+                      j2_mbc(Pt3, peg)(wir_r, 3, p_taf),
                       u2_rx(wir_r, q_taf));
 
             u2_rl_lose(wir_r, taf);

@@ -87,7 +87,10 @@
     } else if ( 10 == u2_h(nug) ) {
       return _mint_coke(wir_r, u2_t(u2_t(nug)));
     }
-    else return u2_bl_error(wir_r, "mint-coke");
+    else {
+      u2_err(wir_r, "nug", nug);
+      return u2_bl_error(wir_r, "mint-coke");
+    }
   }
 
   static u2_noun                                                  //  produce

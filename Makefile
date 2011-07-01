@@ -20,14 +20,14 @@ BIN=run
 
 RM=rm -f
 CC=gcc
-CLD=gcc -O3 -L/sw/lib
+CLD=gcc -g -L/sw/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
 INCLUDE=include
 GENERATED=generated
 DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN)
-CFLAGS=-O3 -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
+CFLAGS=-g -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 CWFLAGS=-Wall
 
 .y.o:
@@ -1185,7 +1185,8 @@ EYRE_OFILES=\
        $(F_OFILES) \
        $(P_OFILES) \
        $(J261_OFILES) \
-       $(J260_OFILES) 
+       $(J260_OFILES) \
+       $(J259_OFILES) \
 
 all: $(BIN)/eyre
 
