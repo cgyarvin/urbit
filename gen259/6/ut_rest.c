@@ -115,7 +115,7 @@
   {
     u2_noun sut, leg, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam, &leg, u2_cw_con, &van, 0)) ||
+    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &leg, 0)) ||
          (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
@@ -199,7 +199,7 @@
   {
     u2_noun sut, leg, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam, &leg, u2_cw_con, &van, 0)) ||
+    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &leg, 0)) ||
          (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
     {
       return u2_none;

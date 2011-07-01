@@ -139,7 +139,7 @@
   {
     u2_noun sut, axe, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam, &axe, u2_cw_con, &van, 0)) ||
+    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &axe, 0)) ||
          (u2_no == u2_stud(axe)) ||
          (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
     {
@@ -224,7 +224,7 @@
   {
     u2_noun sut, axe, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam, &axe, u2_cw_con, &van, 0)) ||
+    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &axe, 0)) ||
          (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
     {
       return u2_none;

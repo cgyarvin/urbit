@@ -171,10 +171,10 @@
   {
     u2_noun van, sut, qog, axe, ref;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &qog, 
+    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, 
+                                u2_cw_sam_2, &qog, 
                                 u2_cw_sam_6, &axe,
                                 u2_cw_sam_7, &ref,
-                                u2_cw_con, &van, 
                                 0)) ||
          (u2_no == u2_stud(axe)) ||
          (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
@@ -267,10 +267,10 @@
   {
     u2_noun sut, qog, axe, ref, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &qog, 
+    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, 
+                                u2_cw_sam_2, &qog, 
                                 u2_cw_sam_6, &axe,
                                 u2_cw_sam_7, &ref,
-                                u2_cw_con, &van, 
                                 0)) ||
          (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
     {

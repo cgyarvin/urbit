@@ -102,9 +102,10 @@
   {
     u2_noun sut, way, hep, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &way, 
+    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, 
+                                u2_cw_sam_2, &way, 
                                 u2_cw_sam_3, &hep, 
-                                u2_cw_con, &van, 0)) ||
+                                0)) ||
          (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
@@ -193,9 +194,9 @@
   {
     u2_noun sut, way, hep, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &way, 
-                                u2_cw_sam_3, &hep,
-                                u2_cw_con, &van, 
+    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, 
+                                u2_cw_sam_2, &way, 
+                                u2_cw_sam_3, &hep, 
                                 0)) ||
          (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
     {

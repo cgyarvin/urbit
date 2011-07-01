@@ -122,10 +122,10 @@
   {
     u2_noun van, sut, hep, boz, rix;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &hep, 
+    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, 
+                                u2_cw_sam_2, &hep, 
                                 u2_cw_sam_6, &boz,
                                 u2_cw_sam_7, &rix,
-                                u2_cw_con, &van, 
                                 0)) ||
          (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
     {

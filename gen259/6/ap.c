@@ -823,7 +823,7 @@
     {
       u2_noun hep, van, gen;
 
-      if ( (u2_no == u2_mean(cor, u2_cw_sam, &hep, u2_cw_con, &van, 0)) ||
+      if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &hep, 0)) ||
            (u2_none == (gen = u2_frag(u2_cw_sam, van))) ) {
         return u2_bl_bail(wir_r, c3__fail);
       } else {

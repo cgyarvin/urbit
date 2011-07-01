@@ -87,7 +87,10 @@
     } else if ( 10 == u2_h(nug) ) {
       return _mint_coke(wir_r, u2_t(u2_t(nug)));
     }
-    else return u2_bl_error(wir_r, "mint-coke");
+    else {
+      u2_err(wir_r, "nug", nug);
+      return u2_bl_error(wir_r, "mint-coke");
+    }
   }
 
   static u2_noun                                                  //  produce
@@ -677,9 +680,9 @@
   {
     u2_noun sut, gol, gen, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &gol, 
+    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, 
+                                u2_cw_sam_2, &gol, 
                                 u2_cw_sam_3, &gen,
-                                u2_cw_con, &van, 
                                 0)) ||
          (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
     {
@@ -772,9 +775,9 @@
   {
     u2_noun sut, gol, gen, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &gol, 
+    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, 
+                                u2_cw_sam_2, &gol, 
                                 u2_cw_sam_3, &gen,
-                                u2_cw_con, &van, 
                                 0)) ||
          (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
     {

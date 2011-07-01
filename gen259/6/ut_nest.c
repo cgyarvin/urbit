@@ -139,9 +139,9 @@
             }
             case c3__iron: {
               u2_noun s_sam = j2_mcy(Pt6, ut, peek)
-                                      (wir_r, van, qq_sut, c3__rite, _2);
+                                      (wir_r, van, qq_sut, c3__rite, _3);
               u2_noun r_sam = j2_mcy(Pt6, ut, peek)
-                                      (wir_r, van, qq_ref, c3__rite, _2);
+                                      (wir_r, van, qq_ref, c3__rite, _3);
 
               return _nest_dext(wir_r, van, r_sam, s_sam, gil);
             }
@@ -150,9 +150,9 @@
             }
             case c3__zinc: {
               u2_noun s_pal = j2_mcy(Pt6, ut, peek)
-                                      (wir_r, van, qq_sut, c3__read, _2);
+                                      (wir_r, van, qq_sut, c3__read, _3);
               u2_noun r_pal = j2_mcy(Pt6, ut, peek)
-                                      (wir_r, van, qq_ref, c3__read, _2);
+                                      (wir_r, van, qq_ref, c3__read, _3);
 
               return _nest_dext(wir_r, van, s_pal, r_pal, gil);
             }
@@ -420,7 +420,7 @@
   {
     u2_noun sut, ref, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam, &ref, u2_cw_con, &van, 0)) ||
+    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &ref, 0)) ||
          (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
@@ -489,7 +489,7 @@
   {
     u2_noun sut, ref, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam, &ref, u2_cw_con, &van, 0)) ||
+    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &ref, 0)) ||
          (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
     {
       return u2_none;
