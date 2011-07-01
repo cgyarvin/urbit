@@ -30,7 +30,7 @@
   {
     u2_noun hoz, bur;
 
-    if ( u2_no == u2_mean(cor, 8, &hoz, 9, &bur, 0) ) {
+    if ( u2_no == u2_mean(cor, u2_cw_sam_2, &hoz, u2_cw_sam_3, &bur, 0) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mby(Pt6, fork)(wir_r, hoz, bur);

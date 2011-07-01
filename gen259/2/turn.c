@@ -21,7 +21,7 @@
     else {   
       return u2_rc
         (wir_r,
-         u2_nk_mung(wir_r, b, u2_rx(wir_r, u2_h(a))),
+         u2_nk_mong(wir_r, b, u2_rx(wir_r, u2_h(a))),
          j2_mbc(Pt2, turn)(wir_r, u2_t(a), b));
     }
   }
@@ -31,7 +31,7 @@
   {
     u2_noun a, b;
 
-    if ( u2_no == u2_mean(cor, 8, &a, 9, &b, 0) ) {
+    if ( u2_no == u2_mean(cor, u2_cw_sam_2, &a, u2_cw_sam_3, &b, 0) ) {
       return u2_none;
     } else {
       return j2_mbc(Pt2, turn)(wir_r, a, b);

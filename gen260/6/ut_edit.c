@@ -48,8 +48,10 @@
   {
     u2_noun van, sut, mun, har;
 
-    if ( (u2_no == u2_mean(cor, 8, &mun, 9, &har, 5, &van, 0)) ||
-         (u2_none == (sut = u2_frag(4, van))) )
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &mun, 
+                                u2_cv_sam_3, &har, 
+                                u2_cv_con, &van, 0)) ||
+         (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {

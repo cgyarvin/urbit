@@ -109,9 +109,12 @@
   {
     u2_noun van, sut, axe, mun, har;
 
-    if ( (u2_no == u2_mean(cor, 8, &axe, 18, &mun, 19, &har, 5, &van, 0)) ||
+    if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &axe, 
+                                u2_cw_sam_6, &mun, 
+                                u2_cw_sam_7, &har, 
+                                u2_cw_con, &van, 0)) ||
          (u2_no == u2_stud(axe)) ||
-         (u2_none == (sut = u2_frag(4, van))) )
+         (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {

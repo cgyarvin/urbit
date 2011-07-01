@@ -107,7 +107,9 @@
   {
     u2_noun a, b, c;
 
-    if ( u2_no == u2_mean(cor, 8, &b, 9, &c, 20, &a, 0) ) {
+    if ( u2_no == u2_mean(cor, u2_cv_sam_2, &b, 
+                               u2_cv_sam_3, &c, 
+                               u2_cv_con_sam, &a, 0) ) {
       return u2_none;
     } else {
       return j2_mcc(Pt4, by, put)(wir_r, a, b, c);

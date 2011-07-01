@@ -57,7 +57,10 @@
   {
     u2_noun a, b, c, d;
 
-    if ( (u2_no == u2_mean(cor, 8, &a, 36, &b, 37, &c, 19, &d, 0)) ||
+    if ( (u2_no == u2_mean(cor, u2_cw_sam_2,  &a, 
+                                u2_cw_sam_12, &b, 
+                                u2_cw_sam_13, &c, 
+                                u2_cw_sam_7,  &d, 0)) ||
          (u2_no == u2_stud(a)) ||
          (u2_no == u2_stud(b)) ||
          (u2_no == u2_stud(c)) ||

@@ -38,10 +38,10 @@
                         const c3_c* paz_c,                        //  retain
                         u2_noun     typ)                          //  retain
   {
-    u2_noun von = u2_bn_molt(wir_r, van, u2_cv_sam, typ, 0);
+    u2_noun von = u2_bn_molt(wir_r, van, u2_cw_sam, typ, 0);
     u2_noun duq = u2_bn_hook(wir_r, von, "dunk");
     u2_noun paz = u2_bn_string(wir_r, paz_c);
-    u2_noun ret = u2_bn_molt(wir_r, duq, u2_cv_sam, paz, 0);
+    u2_noun ret = u2_bn_molt(wir_r, duq, u2_cw_sam, paz, 0);
 
     u2_rz(wir_r, paz);
     u2_rz(wir_r, duq);
@@ -57,7 +57,7 @@
                         u2_noun mol)                              //  submit
   {
     u2_noun sho = u2_bn_hook(wir_r, van, "show");
-    u2_noun ret = u2_bn_molt(wir_r, sho, u2_cv_sam, mol, 0);
+    u2_noun ret = u2_bn_molt(wir_r, sho, u2_cw_sam, mol, 0);
  
     u2_rz(wir_r, sho);
     u2_rz(wir_r, mol);

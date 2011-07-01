@@ -34,7 +34,7 @@
   {
     u2_noun a;
 
-    if ( u2_none == (a = u2_frag(4, cor)) ) {
+    if ( u2_none == (a = u2_frag(u2_cv_sam, cor)) ) {
       return u2_none;
     } else {
       return j2_mbc(Pt2, flop)(wir_r, a);

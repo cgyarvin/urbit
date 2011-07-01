@@ -22,7 +22,7 @@
     else {
       return u2_ru
         (wir_r,
-         u2_nk_mung(wir_r, c, u2_rc(wir_r, u2_rx(wir_r, u2_st(a)),
+         u2_nk_mong(wir_r, c, u2_rc(wir_r, u2_rx(wir_r, u2_st(a)),
                                            u2_rx(wir_r, u2_st(b)))));
     }
   }
@@ -32,7 +32,9 @@
   {
     u2_noun a, b, c;
 
-    if ( u2_no == u2_mean(cor, 8, &a, 18, &b, 19, &c, 0) ) {
+    if ( u2_no == u2_mean(cor, u2_cw_sam_2, &a, 
+                               u2_cw_sam_6, &b, 
+                               u2_cw_sam_7, &c, 0) ) {
       return u2_none;
     } else {
       return j2_mbc(Pt2, clap)(wir_r, a, b, c);

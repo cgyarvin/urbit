@@ -36,7 +36,7 @@
   {
     u2_noun a, b;
 
-    if ( u2_no == u2_mean(cor, 8, &a, 9, &b, 0) ) {
+    if ( u2_no == u2_mean(cor, u2_cv_sam_2, &a, u2_cv_sam_3, &b, 0) ) {
       return u2_none;
     } else {
       return j2_mbc(Pt2, skip)(wir_r, a, b);

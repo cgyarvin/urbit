@@ -13,7 +13,7 @@
   {
     u2_noun sam;
 
-    if ( u2_none == (sam = u2_frag(4, cor)) ) {
+    if ( u2_none == (sam = u2_frag(u2_cw_sam, cor)) ) {
       return u2_none;
     } else {
       return u2_mug(sam);

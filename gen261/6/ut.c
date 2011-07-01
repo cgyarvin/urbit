@@ -218,7 +218,7 @@
 
   u2_ho_jet 
   j2_mbj(Pt6, ut)[] = {
-    { "burn", c3__hevy, j2_mc(Pt6, ut, burn), Tier6_b, u2_none, u2_none },
+    { "burn", c3__hevy, j2_mc(Pt6, ut, burn), Tier6_b_memo, u2_none, u2_none },
     { "repo", c3__hevy, j2_mc(Pt6, ut, repo), Tier6_b, u2_none, u2_none },
     { }
   };

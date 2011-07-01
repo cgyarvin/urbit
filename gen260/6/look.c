@@ -131,7 +131,7 @@
   {
     u2_noun cog, dab;
 
-    if ( u2_no == u2_mean(cor, 8, &cog, 9, &dab, 0) ) {
+    if ( u2_no == u2_mean(cor, u2_cv_sam_2, &cog, u2_cv_sam_3, &dab, 0) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mby(Pt6, look)(wir_r, cog, dab);

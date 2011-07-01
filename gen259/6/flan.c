@@ -40,7 +40,7 @@
   {
     u2_noun bos, nif;
 
-    if ( u2_no == u2_mean(cor, 8, &bos, 9, &nif, 0) ) {
+    if ( u2_no == u2_mean(cor, u2_cw_sam_2, &bos, u2_cw_sam_3, &nif, 0) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mby(Pt6, flan)(wir_r, bos, nif);

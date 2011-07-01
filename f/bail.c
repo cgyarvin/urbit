@@ -650,7 +650,7 @@ u2_bn_cook(u2_wire     wir_r,
 
 /* u2_bn_mung(): 
 **
-**   Call by gate and sample.
+**   Call by gate and sample (old convention).
 **   Caller retains `gat`, transfers `sam`.
 */
 u2_noun
@@ -659,6 +659,24 @@ u2_bn_mung(u2_wire wir_r,
            u2_weak sam)
 {
   u2_weak pro = u2_nk_mung(wir_r, gat, sam);
+
+  if ( u2_none == pro ) {
+    return u2_bl_bail(wir_r, c3__fail);
+  }
+  else return pro;
+}
+
+/* u2_bn_mong(): 
+**
+**   Call by gate and sample (new convention).
+**   Caller retains `gat`, transfers `sam`.
+*/
+u2_noun
+u2_bn_mong(u2_wire wir_r,
+           u2_weak gat,
+           u2_weak sam)
+{
+  u2_weak pro = u2_nk_mong(wir_r, gat, sam);
 
   if ( u2_none == pro ) {
     return u2_bl_bail(wir_r, c3__fail);

@@ -152,12 +152,12 @@
   {
     u2_noun sut, way, axe, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &way, 
-                                u2_cv_sam_3, &axe,
-                                u2_cv_con, &van, 
+    if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &way, 
+                                u2_cw_sam_3, &axe,
+                                u2_cw_con, &van, 
                                 0)) ||
          (u2_no == u2_stud(axe)) ||
-         (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
+         (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
@@ -178,11 +178,11 @@
       c3_assert(!"register peek");
       return u2_none;
     } else {
-      u2_weak von = u2_rl_molt(wir_r, van, u2_cv_sam, u2_rx(wir_r, sut), 0);
+      u2_weak von = u2_rl_molt(wir_r, van, u2_cw_sam, u2_rx(wir_r, sut), 0);
       u2_weak gat = u2_nk_soft(wir_r, von, hoc);
       u2_weak cor = u2_rl_molt(wir_r, gat, 
-                                      u2_cv_sam_2, u2_rx(wir_r, way), 
-                                      u2_cv_sam_3, u2_rx(wir_r, axe), 
+                                      u2_cw_sam_2, u2_rx(wir_r, way), 
+                                      u2_cw_sam_3, u2_rx(wir_r, axe), 
                                       0);
 
       if ( (u2_none == j2_mcj(Pt6, ut, peek)[0].xip) ) {
@@ -245,11 +245,11 @@
   {
     u2_noun sut, way, axe, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &way, 
-                                u2_cv_sam_3, &axe,
-                                u2_cv_con, &van, 
+    if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &way, 
+                                u2_cw_sam_3, &axe,
+                                u2_cw_con, &van, 
                                 0)) ||
-         (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
+         (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
     {
       return u2_none;
     } else {

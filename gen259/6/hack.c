@@ -99,7 +99,7 @@
   {
     u2_noun gen;
 
-    if ( u2_none == (gen = u2_frag(4, cor)) ) {
+    if ( u2_none == (gen = u2_frag(u2_cw_sam, cor)) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mby(Pt6, hack)(wir_r, gen);

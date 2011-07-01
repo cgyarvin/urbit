@@ -1039,7 +1039,7 @@ _scanner_init_clip(struct _u2_scanner *scanner,
   {
     u2_noun txt;
 
-    if ( u2_none == (txt = u2_frag(4, cor)) ) {
+    if ( u2_none == (txt = u2_frag(u2_cw_sam, cor)) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mby(Pt6, ream)(wir_r, txt);
@@ -1051,7 +1051,7 @@ _scanner_init_clip(struct _u2_scanner *scanner,
   {
     u2_noun tub;
 
-    if ( u2_none == (tub = u2_frag(4, cor)) ) {
+    if ( u2_none == (tub = u2_frag(u2_cw_sam, cor)) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mby(Pt6, vest)(wir_r, tub);

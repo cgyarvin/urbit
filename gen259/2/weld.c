@@ -31,7 +31,7 @@
   {
     u2_noun a, b;
 
-    if ( u2_no == u2_mean(cor, 8, &a, 9, &b, 0) ) {
+    if ( u2_no == u2_mean(cor, u2_cw_sam_2, &a, u2_cw_sam_3, &b, 0) ) {
       return u2_none;
     } else {
       return j2_mbc(Pt2, weld)(wir_r, a, b);

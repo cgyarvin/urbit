@@ -1581,7 +1581,6 @@
       [%tmdp p=(gene)]
       [%tmpd p=(gene) q=(gene)]
       [%tmsg p=(gene) q=*(list gene)]
-      [%tmtr p=(gene) q=(gene)]
       [%zpbn p=(gene)]
       [%zpcb p=*spot q=(gene)]
       [%zpdx p=(gene)]
@@ -1694,12 +1693,12 @@
         [~ *]       [%mtbn [gen ~] ~]
         [%bndl *]   [%bnld q.gen p.gen]
         [%bndp *]   [%bnpd q.gen p.gen]
-        [%bnpd *]   [%bnld [%dgdp p.gen [~ 1]] q.gen]
+        [%bnpd *]   [%bnld [%dgdp [~ 1] p.gen] q.gen]
         [%brbn *]   [%pmbn p.gen [[%% [& & q.gen]] ~ ~]]
         [%brcs *]
       ?~  p.gen
         [%zpzp ~]
-      [%brbn [%ktdp [%tmbn %noun] i.p.gen] [%cstr [~ 4] p.gen]]
+      [%brbn [%ktdp [%tmbn %noun] i.p.gen] [%cstr [~ 5] p.gen]]
     ::
         [%brdp *]   [%bnld [%brdt p.gen] %%]
         [%brdg *]   [%pmdg p.gen [[%% [& & q.gen]] ~ ~]]
@@ -1754,15 +1753,15 @@
       :+  %bnpd
         q.gen
       :+  %mtbn
-        (weld p.gen `*twig`[[~ 2] ~])
-      (turn r.gen |=([p=*gene q=*gene] [p [%bnld [~ 3] q]]))
+        (weld p.gen `*twig`[[~ 3] ~])
+      (turn r.gen |=([p=*gene q=*gene] [p [%bnld [~ 2] q]]))
     ::
         [%mtdg *]   [%mtsg [%% ~] p.gen q.gen]
         [%mtdp *]   ?~(q.gen [%bnld p.gen %%] [%mtdg p.gen [%dgtr q.gen]])
         [%mtdt *]   [%mtdp q.gen [p.gen ~]]
         [%mtkt *]   [%mtdp p.gen q.gen r.gen s.gen ~]
         [%mtpd *]   [%mtdp p.gen q.gen r.gen ~]
-        [%mtsg *]   [%mtbr p.gen q.gen [[[~ 4] r.gen] ~]]
+        [%mtsg *]   [%mtbr p.gen q.gen [[[~ 5] r.gen] ~]]
         [%mttr *]   [%ktsg [%bnld p.gen [%mtbn [%% ~] ~]]]
         [%pmdp *]   [%bnld [%pmdt q.gen] p.gen] 
         [%pmbn *]   [%bnpd p.gen [%pmdt q.gen]]
@@ -1772,7 +1771,7 @@
         [%sgdg *]   [%sgld [%bank %dtsg p.gen] q.gen]
         [%sgdl *]   [%bndl [%sgld p.gen [~ 1]] q.gen]
         [%sgdp *]   [%sgld [%sole %dtsg p.gen] q.gen]
-        [%sgdt *]   [%sgmt p.gen [~ 5] ~ q.gen]
+        [%sgdt *]   [%sgmt p.gen [~ 4] ~ q.gen]
         [%sgdx *]   [%sgld %ping p.gen]
         [%sgkt *]   [%sgld %keep p.gen]
         [%sgmt *]
@@ -1814,27 +1813,13 @@
         :+  %bnpd
           $(q.gen t.q.gen)
         :+  %bnpd
-          [%bnld [~ 3] i.q.gen]
+          [%bnld [~ 2] i.q.gen]
         :+  %brbn
-          [~ 8]
+          [~ 13]
         :^    %mtpd
-            [%bnld [~ 23] p.gen]
-          [%mtdp [~ 10] [~ 4] ~]
-        [%mtbn [[~ 22] ~] [[[~ 4] [~ 4]] ~]]
-      ==
-    ::
-        [%tmtr *]
-      =+  req=rake(gen p.gen)
-      =+  nus=[%mtbn req ~]
-      :*  %brdp
-          %cssg
-          nus
-          [%tmbn %null]
-          :+    %mtbn
-              req
-            :~  [[~ 2] q.gen]
-                [[~ 3] [%mtbn [%% ~] [[nus [%mtbn [[~ 3] req] ~]] ~]]]
-            ==
+            [%bnld [~ 16] p.gen]
+          [%mtdp [~ 9] [~ 5] ~]
+        [%mtbn [[~ 17] ~] [[[~ 5] [~ 5]] ~]]
       ==
     ::
         *           gen
@@ -1885,8 +1870,8 @@
     ?:  ?=([2 [0 *] [0 *]] buz)
       [2 [0 (peg p.mal p.p.buz)] [0 (peg p.mal p.q.buz)]]
     [7 mal buz]
-  ?:  ?=([^ [0 1]] mal)
-    [8 p.mal buz]
+  ::  ?:  ?=([^ [0 1]] mal)
+  ::    [8 p.mal buz]
   ?:  .=([0 1] buz)
     mal
   [7 mal buz]
@@ -2383,9 +2368,10 @@
         [%fork *]   (flor $(sut p.sut) $(sut q.sut))
         [%hold *]
       ?:  (~(has in vit) sut)
-        ~~  (dunk 'type')
-        ~~  (show [%c 'axis'] [%d axe])
-        ~|(%fish-loop !!)
+        ::  ~~  (dunk 'type')
+        ::  ~~  (show [%c 'axis'] [%d axe])
+        ::  ~|(%fish-loop !!)
+        [0 0]
       =>  %=(. vit (~(put in vit) sut))
       $(sut repo)
     ==
@@ -2603,7 +2589,7 @@
         ==
       ::
           [%pmdg *]                                                   ::  &:
-        (crow %zinc [%dgdp p.gen [~ 1]] q.gen)
+        (crow %zinc [%dgdp [~ 1] p.gen] q.gen)
       ::
           [%pmdt *]                                                   ::  &.
         (crow %gold [~ 1] p.gen)
@@ -2612,7 +2598,7 @@
         (crow %lead [~ 1] p.gen)
       ::
           [%pmpd *]                                                   ::  &+
-        (crow %iron [%dgdp p.gen [~ 1]] q.gen)
+        (crow %iron [%dgdp [~ 1] p.gen] q.gen)
       ::
           [%sgld *]                                                   ::  ~>
         =+  hum=$(gen q.gen)
@@ -3138,7 +3124,6 @@
               (rune dap %tmdp expa)
               (rune pad %tmpd expb)
               (rune sig %tmsg expi)
-              (rune tar %tmtr expb)
             ==
           ==
           ;~  pfix  zap

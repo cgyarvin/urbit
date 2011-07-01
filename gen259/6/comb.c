@@ -16,7 +16,7 @@
       return u2_none;
     }
     else {
-      u2_noun p_mal, q_mal, p_buz, q_buz, pp_buz, pq_buz;
+      u2_noun p_mal, p_buz, q_buz, pp_buz, pq_buz;
 
       if ( (u2_yes == u2_as_p(mal, u2_nock_frag, &p_mal)) && (_0 != p_mal) ) {
         if ( (u2_yes == u2_as_p(buz, u2_nock_frag, &p_buz)) && (_0 != p_buz) ) {
@@ -38,6 +38,7 @@
         else return u2_rt(wir_r, u2_nock_flac, u2_rx(wir_r, mal), 
                                                u2_rx(wir_r, buz));
       }
+#if 0
       else if ( (u2_yes == u2_as_bush(mal, &p_mal, &q_mal)) &&
                 (u2_yes == u2_dust(q_mal)) && 
                 (_0 == u2_h(q_mal)) &&
@@ -46,6 +47,7 @@
         return u2_rt(wir_r, u2_nock_gant, u2_rx(wir_r, p_mal), 
                                           u2_rx(wir_r, buz));
       }
+#endif
       else if ( (u2_yes == u2_as_p(buz, u2_nock_frag, &p_buz)) &&
                 (u2_yes == u2_sing(_1, p_buz)) )
       {
@@ -61,7 +63,7 @@
   {
     u2_noun mal, buz;
 
-    if ( u2_no == u2_mean(cor, 8, &mal, 9, &buz, 0) ) {
+    if ( u2_no == u2_mean(cor, u2_cw_sam_2, &mal, u2_cw_sam_3, &buz, 0) ) {
       return u2_none;
     } else {
       return j2_mbc(Pt6, comb)(wir_r, mal, buz);

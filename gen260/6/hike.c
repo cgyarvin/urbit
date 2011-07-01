@@ -135,7 +135,7 @@
   {
     u2_noun axe, pac;
 
-    if ( (u2_no == u2_mean(cor, 8, &axe, 9, &pac, 0)) ||
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &axe, u2_cv_sam_3, &pac, 0)) ||
          (u2_no == u2_stud(axe)) )
     {
       return u2_bl_bail(wir_r, c3__fail);

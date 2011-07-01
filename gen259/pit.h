@@ -16,6 +16,9 @@
 #   define Pt5           k_259__a__b__c__d__e
 #   define Pt6           k_259__a__b__c__d__e__f
 
+  /** Driver polarity.
+  **/
+
   /** Test codes.
   **/
 #   define  Tier1         u2_jet_live

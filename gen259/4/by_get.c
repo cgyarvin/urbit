@@ -43,7 +43,7 @@
   {
     u2_noun a, b;
 
-    if ( u2_no == u2_mean(cor, 4, &b, 20, &a, 0) ) {
+    if ( u2_no == u2_mean(cor, u2_cw_sam, &b, u2_cw_con_sam, &a, 0) ) {
       return u2_none;
     } else {
       return j2_mcc(Pt4, by, get)(wir_r, a, b);

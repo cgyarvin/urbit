@@ -24,7 +24,7 @@
   {
     u2_noun hed, tal;
 
-    if ( u2_no == u2_mean(cor, 8, &hed, 9, &tal, 0) ) {
+    if ( u2_no == u2_mean(cor, u2_cv_sam_2, &hed, u2_cv_sam_3, &tal, 0) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mby(Pt6, cell)(wir_r, hed, tal);

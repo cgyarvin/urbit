@@ -33,7 +33,7 @@
   {
     u2_noun a;
 
-    if ( u2_none == (a = u2_frag(4, cor)) ) {
+    if ( u2_none == (a = u2_frag(u2_cw_sam, cor)) ) {
       return u2_none;
     } else {
       return j2_mbc(Pt2, lent)(wir_r, a);
