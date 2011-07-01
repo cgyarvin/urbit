@@ -17,7 +17,7 @@
 #define C3_GLOBAL
 #include "all.h"
 
-#define EyreFirstKernel 261     //  max 264
+#define EyreFirstKernel 259     //  max 264; > 259 needs nock7
 u2_flag EyreSmoke;
 
   /**  Global kernel - used only for trace printing.
@@ -27,9 +27,10 @@ u2_flag EyreSmoke;
   
     /* External drivers.
     */
+      extern u2_ho_driver j2_da(k_258);
       extern u2_ho_driver j2_da(k_259);
-      extern u2_ho_driver j2_da(k_260);
-      extern u2_ho_driver j2_da(k_261);
+//      extern u2_ho_driver j2_da(k_260);
+//      extern u2_ho_driver j2_da(k_261);
 //      extern u2_ho_driver j2_da(k_262);
 //      extern u2_ho_driver j2_da(watt_263);
 //      extern u2_ho_driver j2_da(watt_264);
@@ -37,9 +38,10 @@ u2_flag EyreSmoke;
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       u2_ho_driver *HostDriverBase[] = {
+        &j2_da(k_258),
         &j2_da(k_259),
-        &j2_da(k_260),
-        &j2_da(k_261),
+//          &j2_da(k_260),
+//          &j2_da(k_261),
 //         &j2_da(k_262),
 //         &j2_da(watt_263), 
 //         &j2_da(watt_264), 
@@ -48,7 +50,7 @@ u2_flag EyreSmoke;
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt5Y   k_261__a__b__c__d__e
+#   define Pt5Y   k_259__a__b__c__d__e
 
     u2_noun
     j2_mby(Pt5Y, cue)(u2_wire, u2_noun a);
@@ -108,16 +110,16 @@ _eyre_nock(u2_wire wir_r,
   }
 }
 
-/* _eyre_mung(): mung with trace.
+/* _eyre_mong(): mong with trace.
 */
 static u2_noun                                                    //  produce
-_eyre_mung(u2_wire wir_r,
+_eyre_mong(u2_wire wir_r,
            u2_noun gat,                                           //  retain
            u2_noun sam)                                           //  submit
 {
   u2_noun pro;
 
-  pro = u2_nk_mung(wir_r, gat, sam);
+  pro = u2_nk_mong(wir_r, gat, sam);
 
   if ( u2_none != pro ) {
     return pro;
@@ -365,7 +367,7 @@ _eyre_call_1(u2_wire     wir_r,
   u2_noun src = u2_bn_string(wir_r, src_c);
   u2_noun noc = _eyre_nock(wir_r, src, ken);
   u2_noun cor = _eyre_nock(wir_r, 0, noc);
-  u2_noun pro = u2_bn_mung(wir_r, cor, u2_rx(wir_r, a));
+  u2_noun pro = u2_bn_mong(wir_r, cor, u2_rx(wir_r, a));
 
   u2_rz(wir_r, cor);
   u2_rz(wir_r, noc);
@@ -386,7 +388,7 @@ _eyre_call_2(u2_wire     wir_r,
   u2_noun src = u2_bn_string(wir_r, src_c);
   u2_noun noc = _eyre_nock(wir_r, src, ken);
   u2_noun cor = _eyre_nock(wir_r, 0, noc);
-  u2_noun pro = _eyre_mung(wir_r, cor, u2_bc(wir_r, u2_rx(wir_r, a),
+  u2_noun pro = _eyre_mong(wir_r, cor, u2_bc(wir_r, u2_rx(wir_r, a),
                                                     u2_rx(wir_r, b)));
 
   u2_rz(wir_r, cor);
@@ -408,7 +410,7 @@ _eyre_call_3(u2_wire     wir_r,
   u2_noun src = u2_bn_string(wir_r, src_c);
   u2_noun noc = _eyre_nock(wir_r, src, ken);
   u2_noun cor = _eyre_nock(wir_r, 0, noc);
-  u2_noun pro = _eyre_mung(wir_r, cor, u2_bt(wir_r, u2_rx(wir_r, a),
+  u2_noun pro = _eyre_mong(wir_r, cor, u2_bt(wir_r, u2_rx(wir_r, a),
                                                     u2_rx(wir_r, b),
                                                     u2_rx(wir_r, c)));
 
@@ -659,7 +661,7 @@ _eyre_line(u2_wire wir_r,
     u2_noun pro;
 
     u2_bx_boot(wir_r);
-    pro = _eyre_mung(wir_r, gat, u2_rx(wir_r, txt));
+    pro = _eyre_mong(wir_r, gat, u2_rx(wir_r, txt));
     u2_bx_show(wir_r);
 
     _eyre_gnaw(wir_r, ken, 2, u2_h(pro));
@@ -824,7 +826,7 @@ _eyre_test2(u2_wire wir_r,
     bum = u2_bn_hook(wir_r, cor, "bump");
     printf("bumped...\n");
 
-    goo = u2_bn_mung(wir_r, bum, 13);
+    goo = u2_bn_mong(wir_r, bum, 13);
     u2_err(wir_r, "goo", goo);
 
     u2_bl_done(wir_r, kit_r);

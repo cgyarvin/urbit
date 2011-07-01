@@ -1,6 +1,6 @@
 !:
 ~%    %hume
-    ->  
+    -<
   ==
     %line  line
   ==
@@ -10,6 +10,7 @@
   ^-  [p=*tank q=*tank]
   =+  gen=(ream txt)
   =+  man=(~(mint ut p.env) %noun gen)
-  :-  (~(dunk ut p.man) 'type')
+  ::  :-  (~(dunk ut p.man) 'type')
+  :-  (show 'foo')
   (show %q .*(q.env q.man)) 
 --
