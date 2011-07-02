@@ -393,10 +393,6 @@
                         u2_noun nif);                             //  retain
 
       u2_noun                                                     //  transfer
-      j2_mby(Pt6, hack)(u2_wire wir_r, 
-                        u2_noun gen);                             //  retain
-
-      u2_noun                                                     //  transfer
       j2_mcy(Pt6, ut, heal)(u2_wire wir_r,
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
@@ -413,6 +409,10 @@
       j2_mby(Pt6, look)(u2_wire wir_r, 
                         u2_noun cog,                              //  retain
                         u2_noun dab);                             //  retain
+
+      u2_noun                                                     //  transfer
+      j2_mcy(Pt6, ap, hack)(u2_wire wir_r, 
+                            u2_noun gen);                         //  retain
 
       u2_noun                                                     //  transfer
       j2_mcy(Pt6, ap, open)(u2_wire wir_r,

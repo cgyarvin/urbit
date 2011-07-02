@@ -1663,22 +1663,79 @@
 ++  ap
   ~%    %ap  
       -<
-    ==
-      %modl  modl
-      %open  open
-      %rake  rake
-      %sift  sift
-    ==
+    ~
   &=  gen=*gene
+  ++  hack
+    ~.  %hack
+    |-  ^-  *<[& p=*gene q=*gene] [| p=*gene]>
+    ?-    gen
+        [%bnld *]
+      ?.  ?=([~ *] p.gen)
+        [| gen] 
+      =+  pyr=$(gen q.gen)
+      ?-    -.pyr
+          |   [| [%bnld p.gen p.pyr]]
+          &   [& [%bnld p.gen p.pyr] [%bnld p.gen q.pyr]]
+      ==
+    ::
+        [%dgdp *]   [& p.gen q.gen]
+        [%zpcb *] 
+      =+  pyr=$(gen q.gen)
+      ?-    -.pyr
+          |   [| [%zpcb p.gen p.pyr]]
+          &   [& [%zpcb p.gen p.pyr] [%zpcb p.gen q.pyr]]
+      ==
+    ::
+        *
+      =+  voq=~(open ap gen)
+      ?:  .=(gen voq)
+        [| gen]
+      $(gen voq)
+    ==
+  ::
+  ++  reap
+    ~.  %reap
+    |*  [ban=|+(*gene *(unit gene)) lur=|+(*gene *gene)]
+    ^-  *gene
+    =+  vot=(ban gen)
+    ?~  vot
+      ?-    gen
+          [%ktbn *]     [%ktbn p.gen $(gen q.gen)]
+          [%ktdp *]     [%ktdp p.gen $(gen q.gen)]
+          [%zpcb *]     [%zpcb p.gen $(gen q.gen)]
+          [%zpdx *]     [%zpdx $(gen p.gen)]
+          *             
+        =+(bog=~(open ap gen) ?.(.=(bog gen) $(gen bog) (lur gen)))
+      ==
+    u.vot
+  ::
+  ++  pick
+    ~.  %pick
+    |=  hep=*twig
+    [%csld [%csbn gen [%mtbn hep ~]] [%mtbn hep ~]]
+  ::
+  ++  grow
+    ~.  %grow
+    |=  hep=*twig
+    %+  reap
+      |=  neg=*gene
+      ^-  *(unit gene)
+      ?-  neg
+          [%dgdp *]
+        [~ %dgdp $$(gen p.neg, hep [[~ 2] hep]) $$(gen q.neg, hep [[~ 3] hep])]
+      ::
+          [%mtbn * ~]   [~ %mtbn p.neg [[[~ 5] [%mtbn hep ~]] ~]]
+          [%mtdp * ~]   [~ %mtdp p.neg [%mtbn hep ~] ~]
+          [%mttr *]     [~ %mtdp p.neg [%mtbn hep ~] ~]
+          *             ~
+      ==
+    |=(neg=*gene (pick(gen neg) hep))
+  ::
   ++  modl
     ~.  %modl
     |=  hep=*twig
     ^-  *gene
     ?-    gen
-        [%dgdp *]
-      :+  %dgdp
-        $(gen p.gen, hep [[~ 2] hep])
-      $(gen q.gen, hep [[~ 3] hep])
     :: 
         [%ktbn *]     [%ktbn p.gen $(gen q.gen)]
         [%ktdp *]     $(gen p.gen)
@@ -1928,35 +1985,6 @@
         [1 0]   nif
         *       [6 bos [1 0] nif]
     ==
-  ==
-::
-++  hack
-  ~.  %hack
-  |=  gen=*gene
-  ^-  *<[& p=*gene q=*gene] [| p=*gene]>
-  ?-    gen
-      [%bnld *]
-    ?.  ?=([~ *] p.gen)
-      [| gen] 
-    =+  pyr=$(gen q.gen)
-    ?-    -.pyr
-        |   [| [%bnld p.gen p.pyr]]
-        &   [& [%bnld p.gen p.pyr] [%bnld p.gen q.pyr]]
-    ==
-  ::
-      [%dgdp *]   [& p.gen q.gen]
-      [%zpcb *] 
-    =+  pyr=$(gen q.gen)
-    ?-    -.pyr
-        |   [| [%zpcb p.gen p.pyr]]
-        &   [& [%zpcb p.gen p.pyr] [%zpcb p.gen q.pyr]]
-    ==
-  ::
-      *
-    =+  voq=~(open ap gen)
-    ?:  .=(gen voq)
-      [| gen]
-    $(gen voq)
   ==
 ::
 ++  hike 
@@ -2943,7 +2971,7 @@
     ^-  *gene 
     ?-    sut
         [%cell *]
-      =+  haq=(hack gen)
+      =+  haq=~(hack ap gen)
       ?-  -.haq
         &   [%dgdp $(sut p.sut, gen p.haq) $(sut q.sut, gen q.haq)]
         |   p.haq

@@ -1374,7 +1374,6 @@ J257_6_OFILES=\
        gen257/6/flip.o \
        gen257/6/flor.o \
        gen257/6/fork.o \
-       gen257/6/hack.o \
        gen257/6/hike.o \
        gen257/6/look.o \
        gen257/6/ream.o \

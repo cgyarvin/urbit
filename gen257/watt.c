@@ -86,7 +86,6 @@
     extern u2_ho_jet j2_mbj(Pt6, flip)[];
     extern u2_ho_jet j2_mbj(Pt6, flor)[];
     extern u2_ho_jet j2_mbj(Pt6, fork)[];
-    extern u2_ho_jet j2_mbj(Pt6, hack)[];
     extern u2_ho_jet j2_mbj(Pt6, hike)[];
     extern u2_ho_jet j2_mbj(Pt6, look)[];
     extern u2_ho_jet j2_mbj(Pt6, open)[];
@@ -214,7 +213,6 @@
     { j2_sb(Pt6, flip), j2_mbj(Pt6, flip), 0, 0, u2_none },
     { j2_sb(Pt6, flor), j2_mbj(Pt6, flor), 0, 0, u2_none },
     { j2_sb(Pt6, fork), j2_mbj(Pt6, fork), 0, 0, u2_none },
-    { j2_sb(Pt6, hack), j2_mbj(Pt6, hack), 0, 0, u2_none },
     { j2_sb(Pt6, hike), j2_mbj(Pt6, hike), 0, 0, u2_none },
     { j2_sb(Pt6, look), j2_mbj(Pt6, look), 0, 0, u2_none },
     { j2_sb(Pt6, ream), j2_mbj(Pt6, ream), 0, 0, u2_none },
