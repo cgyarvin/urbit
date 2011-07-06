@@ -71,6 +71,7 @@ u2_bl_push(u2_wire wir_r,
     u2_rz(wir_r, u2_wire_tax(wir_r));
     u2_wire_tax(wir_r) = tax;
   }
+  else u2_bl_bail(wir_r, c3__fail);
 }
 
 /* u2_bl_drop(): drop from meaning stack.
