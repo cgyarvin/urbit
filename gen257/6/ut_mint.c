@@ -205,8 +205,9 @@
           u2_noun zix = j2_mcy(Pt6, ut, shep)
                 (wir_r, van, "gene", 'q', u2_rx(wir_r, gen));
 
-          u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, zix));
-          return u2_bl_error(wir_r, "mint-open");
+          return u2_bl_bail(wir_r, c3__fail);
+          // u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, zix));
+          // return u2_bl_error(wir_r, "mint-open");
         }
         ret = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, gol, rex);
         u2_rl_lose(wir_r, rex);
@@ -279,6 +280,41 @@
         u2_rl_lose(wir_r, bol);
         u2_rl_lose(wir_r, nor);
         u2_rl_lose(wir_r, fex);
+        u2_rl_lose(wir_r, hiq);
+        u2_rl_lose(wir_r, ran);
+
+        return ret;
+      }
+      case c3__cssg: u2_bi_trel(wir_r, u2_t(gen), &p_gen, &q_gen, &r_gen);
+      _mint_used(wir_r);
+      {
+        u2_flag fab = _mint_fab(wir_r, van);
+        u2_noun hec = j2_mcy(Pt6, ap, rake)(wir_r, p_gen);
+        u2_noun guz = j2_mcy(Pt6, ut, seek)(wir_r, van, sut, c3__read, hec);
+        u2_noun axe = u2_h(guz);
+        u2_noun vim = u2_bt(wir_r, c3__cell, c3__noun, c3__noun);
+        u2_noun bor = j2_mcy(Pt6, ut, cull)(wir_r, van, sut, axe, c3__atom);
+        u2_noun wul = j2_mcy(Pt6, ut, cull)(wir_r, van, sut, axe, vim);
+        u2_noun rog = (c3__void == bor) ? sut : bor;
+        u2_noun dix = (c3__void == wul) ? sut : wul;
+        u2_noun hiq = j2_mcx(Pt6, ut, mint)(wir_r, van, rog, gol, q_gen);
+        u2_noun ran = j2_mcx(Pt6, ut, mint)(wir_r, van, dix, gol, r_gen);
+
+        ret = u2_bc
+          (wir_r, j2_mby(Pt6, fork)(wir_r, u2_h(hiq), u2_h(ran)),
+                  (u2_no == fab)
+                    ? u2_bc(wir_r, _0, _0)
+                    : u2_bq(wir_r, 
+                            _6,
+                            u2_bt(wir_r, _3, _0, u2_rx(wir_r, axe)),
+                            u2_rx(wir_r, u2_t(ran)),
+                            u2_rx(wir_r, u2_t(hiq))));
+
+        u2_rl_lose(wir_r, hec);
+        u2_rl_lose(wir_r, guz);
+        u2_rl_lose(wir_r, vim);
+        u2_rl_lose(wir_r, bor);
+        u2_rl_lose(wir_r, wul);
         u2_rl_lose(wir_r, hiq);
         u2_rl_lose(wir_r, ran);
 

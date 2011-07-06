@@ -2278,10 +2278,6 @@
         ?~  taf
           ~
         ?.  (park way p.u.taf)
-          ~~  (dunk 'type')
-          ~~  (show [%c 'feature'] [%a cog])
-          ~~  (show [%c 'way'] [%a way])
-          ~~  (show [%c 'axis'] [%d p.u.taf])
           ~|(%find-park !!)
         [~ (peg 2 p.u.taf) q.u.taf]
       [~ 1 | (peg 3 p.u.zem) [[sut q.u.zem] ~]]

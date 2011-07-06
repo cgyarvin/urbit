@@ -250,8 +250,14 @@
                         u2_noun cog)                              //  retain
   {
     u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "type", sut);
-    u2_noun nuc = j2_mcy(Pt6, ut, shep)
-      (wir_r, van, "feature", 'a', u2_rx(wir_r, cog));
+    u2_noun nuc = (u2_blip == cog) 
+      ? j2_mcy(Pt6, ut, shew)
+          (wir_r, van,
+                  u2_bc
+                    (wir_r, u2_bc(wir_r, 'c', u2_bn_string(wir_r, "feature")),
+                            9509))
+      :  j2_mcy(Pt6, ut, shep)
+          (wir_r, van, "feature", 'a', u2_rx(wir_r, cog));
     u2_noun pro;
 
     u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));

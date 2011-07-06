@@ -1039,7 +1039,8 @@ u2_ho_use(u2_ray     wir_r,
               c3_c *cos_c = u2_ho_cstring(jet_j->xip);
 
               fprintf(stderr, "<<lose: %s>>\n", cos_c);
-              pro = u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
+              u2_rx(wir_r, cor);
+              pro = u2_nk_soft(wir_r, cor, fol);
               fprintf(stderr, "<<lost: %s>>\n", cos_c);
               free(cos_c);
             }

@@ -31,7 +31,7 @@
 #   define  Tier6_b       Tier6
 // #   define  Tier6_b       (u2_jet_live | u2_jet_test)
 // #   define  Tier6_b       u2_jet_dead
-#   define  Tier6_c       Tier6
+#   define  Tier6_c       u2_jet_dead
 #   define  Tier6_t       (u2_jet_live | u2_jet_test)
 #   define  Tier6_l       (u2_jet_live | u2_jet_test | u2_jet_leak)
 #   define  Tier6_l_memo  Tier6_l
