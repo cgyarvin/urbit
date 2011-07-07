@@ -708,7 +708,7 @@ u2_ho_test(u2_wire    wir_r,
     } else if ( u2_no == u2_sing(had, sof) ) {
       msg_c = "miss";
       printf("miss: cos_c: %s\n", cos_c);
-      
+     
       u2_err(wir_r, "right", sof);
       u2_err(wir_r, "wrong", had);
       c3_assert(0);

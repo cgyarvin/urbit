@@ -1,4 +1,3 @@
-!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -1674,7 +1673,6 @@
     ==
   &=  gen=*gene
   ++  hack
-    ~.  %hack
     |-  ^-  *<[& p=*gene q=*gene] [| p=*gene]>
     ?-    gen
         [%bnld *]
@@ -1745,6 +1743,10 @@
     |=  hep=*twig
     ^-  *gene
     ?-    gen
+        [%dgdp *]
+      :+  %dgdp
+        $(gen p.gen, hep [[~ 2] hep])
+      $(gen q.gen, hep [[~ 3] hep])
     :: 
         [%ktbn *]     [%ktbn p.gen $(gen q.gen)]
         [%ktdp *]     $(gen p.gen)
@@ -1917,6 +1919,8 @@
           [%mtdp [~ 9] [~ 5] ~]
         [%mtbn [[~ 17] ~] [[[~ 5] [~ 5]] ~]]
       ==
+    ::
+        *           gen
     ==
   ::
   ++  rake
@@ -2600,9 +2604,9 @@
         =+  bor=(cull axe %atom)
         =+  wul=(cull axe [%cell %noun %noun])
         =+  hiq=$(sut ?:(.=(%void bor) sut bor), gen q.gen)
-        =+  ran=$(sut ?:(.=(%void wul) sut wul), gen q.gen)
+        =+  ran=$(sut ?:(.=(%void wul) sut wul), gen r.gen)
         :-  (fork p.hiq p.ran)
-        (boil |.([6 [0 axe] q.hiq q.ran]))
+        (boil |.([6 [3 0 axe] q.ran q.hiq]))
       ::
           [%dgdp *]                                                   ::  :-
         =+  hed=$(gen p.gen, gol %noun)
