@@ -665,8 +665,11 @@
     _tmdg_in(u2_wire wir_r,
              u2_noun q_gen)                                       //  retain
     {
-      if ( u2_no == u2_dust(q_gen) ) {
-        return u2_rx(wir_r, u2_h(q_gen));
+      u2_noun hq_gen = u2_h(q_gen);
+      u2_noun tq_gen = u2_t(q_gen);
+
+      if ( u2_no == u2_dust(tq_gen) ) {
+        return u2_rx(wir_r, hq_gen);
       } else {
         return u2_bc
           (wir_r,
@@ -675,8 +678,8 @@
                  u2_bc(wir_r, u2_nul, _3),
                  u2_bt(wir_r, c3__bnld,
                               u2_bc(wir_r, u2_nul, _2),
-                              u2_rx(wir_r, u2_h(q_gen))),
-                 _tmdg_in(wir_r, u2_t(q_gen)),
+                              u2_rx(wir_r, hq_gen)),
+                 _tmdg_in(wir_r, tq_gen),
                  u2_nul));
       }
     }

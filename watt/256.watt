@@ -3059,6 +3059,7 @@
     ;~  pose
       (stag %dgtr (ifix [den ned] (most ace wide)))
       (stag %mtdp (ifix [lep pel] (most ace wide)))
+      (stag %tmdg ;~(pfix deg (ifix [lep pel] (most ace wide))))
       (stag %brcs (ifix [del led] (most ace wide)))
       (cook |=(a=*twig [%mtbn a ~]) rope)
       (stag %cszp ;~(pfix zap wide))

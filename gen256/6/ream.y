@@ -72,7 +72,7 @@
 
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 67
+  %expect 70
 
   %pure-parser
   %locations
@@ -167,6 +167,8 @@ wide_c
     wide_call
       : si_lep g bank_wide g si_pel
         { $$ = _ycell(c3__mtdp, $3); }
+      | si_deg si_lep g bank_wide g si_pel
+        { $$ = _ycell(c3__tmdg, $4); }
       ;
 
     wide_mtsg
