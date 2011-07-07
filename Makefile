@@ -20,14 +20,14 @@ BIN=run
 
 RM=rm -f
 CC=gcc
-CLD=gcc -g -L/sw/lib
+CLD=gcc -O3 -L/sw/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
 INCLUDE=include
 GENERATED=generated
 DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN)
-CFLAGS=-g -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
+CFLAGS=-O3 -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 CWFLAGS=-Wall
 
 .y.o:
@@ -1413,6 +1413,128 @@ J257_OFILES=\
        $(J257_6_OFILES_UT) \
        gen257/watt.o
 
+J256_1_OFILES=\
+       gen256/1/add.o \
+       gen256/1/bex.o \
+       gen256/1/dec.o \
+       gen256/1/div.o \
+       gen256/1/gte.o \
+       gen256/1/gth.o \
+       gen256/1/lte.o \
+       gen256/1/lth.o \
+       gen256/1/mod.o \
+       gen256/1/mul.o \
+       gen256/1/sub.o
+
+J256_2_OFILES=\
+       gen256/2/bind.o \
+       gen256/2/clap.o \
+       gen256/2/drop.o \
+       gen256/2/flop.o \
+       gen256/2/lent.o \
+       gen256/2/levy.o \
+       gen256/2/lien.o \
+       gen256/2/need.o \
+       gen256/2/reel.o \
+       gen256/2/roll.o \
+       gen256/2/skim.o \
+       gen256/2/skip.o \
+       gen256/2/slag.o \
+       gen256/2/snag.o \
+       gen256/2/sort.o \
+       gen256/2/turn.o \
+       gen256/2/weld.o
+
+J256_3_OFILES=\
+       gen256/3/can.o \
+       gen256/3/cap.o \
+       gen256/3/cat.o \
+       gen256/3/con.o \
+       gen256/3/cut.o \
+       gen256/3/dor.o \
+       gen256/3/dis.o \
+       gen256/3/end.o \
+       gen256/3/gor.o \
+       gen256/3/hor.o \
+       gen256/3/lsh.o \
+       gen256/3/mas.o \
+       gen256/3/met.o \
+       gen256/3/mix.o \
+       gen256/3/mug.o \
+       gen256/3/peg.o \
+       gen256/3/rap.o \
+       gen256/3/rip.o \
+       gen256/3/rsh.o \
+       gen256/3/vor.o
+
+J256_4_OFILES=\
+       gen256/4/in.o \
+       gen256/4/by.o \
+       gen256/4/in_has.o \
+       gen256/4/in_gas.o \
+       gen256/4/in_put.o \
+       gen256/4/in_tap.o \
+       gen256/4/by_gas.o \
+       gen256/4/by_get.o \
+       gen256/4/by_has.o \
+       gen256/4/by_put.o 
+
+J256_5_OFILES=\
+       gen256/5/cue.o \
+       gen256/5/jam.o \
+       gen256/5/mat.o \
+       gen256/5/rub.o 
+
+J256_6_OFILES=\
+       gen256/6/ap.o \
+       gen256/6/cell.o \
+       gen256/6/comb.o \
+       gen256/6/cons.o \
+       gen256/6/core.o \
+       gen256/6/face.o \
+       gen256/6/flan.o \
+       gen256/6/flip.o \
+       gen256/6/flor.o \
+       gen256/6/fork.o \
+       gen256/6/hike.o \
+       gen256/6/look.o \
+       gen256/6/ream.o \
+       gen256/6/ut.o
+
+J256_6_OFILES_UT=\
+       gen256/6/ut_bake.o \
+       gen256/6/ut_burn.o \
+       gen256/6/ut_cull.o \
+       gen256/6/ut_emit.o \
+       gen256/6/ut_find.o \
+       gen256/6/ut_fire.o \
+       gen256/6/ut_fish.o \
+       gen256/6/ut_fret.o \
+       gen256/6/ut_fuse.o \
+       gen256/6/ut_gain.o \
+       gen256/6/ut_heal.o \
+       gen256/6/ut_mint.o \
+       gen256/6/ut_orth.o \
+       gen256/6/ut_nest.o \
+       gen256/6/ut_park.o \
+       gen256/6/ut_peek.o \
+       gen256/6/ut_play.o \
+       gen256/6/ut_repo.o \
+       gen256/6/ut_rest.o \
+       gen256/6/ut_seek.o \
+       gen256/6/ut_snap.o \
+       gen256/6/ut_tuck.o
+
+J256_OFILES=\
+       $(J256_1_OFILES) \
+       $(J256_2_OFILES) \
+       $(J256_3_OFILES) \
+       $(J256_4_OFILES) \
+       $(J256_5_OFILES) \
+       $(J256_6_OFILES) \
+       $(J256_6_OFILES_UT) \
+       gen256/watt.o
+
 HILL_OFILES=\
        c/hill.o \
        c/main.o \
@@ -1431,7 +1553,8 @@ EYRE_OFILES=\
        $(P_OFILES) \
        $(J259_OFILES) \
        $(J258_OFILES) \
-       $(J257_OFILES)
+       $(J257_OFILES) \
+       $(J256_OFILES)
 
 all: $(BIN)/eyre
 

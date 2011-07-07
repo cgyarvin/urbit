@@ -495,6 +495,7 @@ _ho_abstract(u2_noun xip,                                         //  retain
       }
       nut = u2_t(nut);
     }
+    printf("wacky! cos_c %s, fcs_c %s\n", u2_ho_cstring(xip), fcs_c);
     u2_ho_warn_here();
     return 0;
   }
@@ -996,6 +997,7 @@ u2_ho_use(u2_ray     wir_r,
   {
     if ( jet_j->key_f ) {
       if ( u2_none == (key = jet_j->key_f(wir_r, cor)) ) {
+        u2_ho_warn_here();
         return u2_none;
       }
       else {

@@ -1369,7 +1369,6 @@
   ++  show
     |=  vem=*pork
     ^-  *tank
-    ~|  %bug-show
     ?:  ?=(@ vem)
       [%leaf (mesc (rip 3 vem))]
     ?-    vem
@@ -1666,10 +1665,15 @@
 ++  ap
   ~%    %ap  
       -<
-    ~
+    ==
+      %hack  hack
+      %modl  modl
+      %open  open
+      %rake  rake
+      %snif  snif
+    ==
   &=  gen=*gene
   ++  hack
-    ~.  %hack
     |-  ^-  *<[& p=*gene q=*gene] [| p=*gene]>
     ?-    gen
         [%bnld *]
@@ -2175,7 +2179,6 @@
   ++  dunk
     |=  paz=*term
     ^-  *tank
-    ~|  %bug-dunk
     =-  [%palm [~ (mesc (rip 3 paz)) [':' ' ' ~] ~] [duc ~]]
     ^=  duc
     =+  ^=  gil
@@ -2204,13 +2207,11 @@
     =+  [gax=*(set type) dex=*(set type)]
     =<  q
     |-  ^-  [p=*(set type) q=*tank]
-    ~|  %bug-loop
     ?-    sut
-        %atom      ~|(%bug-atom [dex (show '@')])
-        %noun      ~|(%bug-noun [dex (show '*')])
-        %void      ~|(%bug-void [dex (show '#')])
+        %atom      [dex (show '@')]
+        %noun      [dex (show '*')]
+        %void      [dex (show '#')]
         [%cell *] 
-      ~|  %bug-cell
       =+  vir=$(sut p.sut)
       =+  ^=  tov
           |-  ^-  [p=*(set type) q=*(list tank)]
@@ -2223,7 +2224,6 @@
       [p.tov [%rose [[' ' ~]  ['[' ~] [']' ~]] q.vir q.tov]]
     ::
         [%core *]
-      ~|  %bug-core
       =+  gep=?:(?=([[%% [& *]] ~ ~] q.r.q.sut) '|' '&')
       =+  ^=  nox
           ^-  @
@@ -2255,14 +2255,12 @@
           [p=p.zam q=[q.vir q.zam lor ~]]
       [p.rey [%palm [[' ' ~] wil ~ [')' ~]] q.rey]]
     ::
-        [%cube *]   ~|(%bug-cube [dex (show ?:(.=(0 p.sut) '~' [%q p.sut]))])
+        [%cube *]   [dex (show ?:(.=(0 p.sut) '~' [%q p.sut]))]
         [%face *]   
-      ~|  %bug-face
       =+  vir=$(sut q.sut)
       [p.vir [%palm [~ (rip 3 p.sut) ['=' ~] ~] [q.vir ~]]]
     ::
         [%fork *]
-      ~|  %bug-fork
       ?:  .=([%fork [%cube 0] [%cube 1]] sut)
         [dex (show '?')]
       =+  vir=$(sut p.sut)
@@ -2277,7 +2275,6 @@
       [p.tov [%rose [[' ' ~]  ['<' ~] ['>' ~]] q.vir q.tov]]
     ::
         [%hold *]
-      ~|  %bug-hold
       =+  piv=(~(get by gil) sut)
       ?~  piv
         =+  yad=repo
@@ -2290,7 +2287,6 @@
       [%palm [~ ~(ram re yow) [':' ~] ~] q.vir ~]
     ::
         *
-      ~|  %bug-type
       !!
     ==
   ::
@@ -2317,9 +2313,9 @@
   ::
   ++  find
     ~.  %find
-    |=  [way=*<%read %rite> cog=*term]
-    ~~  (dunk 'type')
-    ~~  (show [%c 'feature'] ?:(.=(%% cog) '%%' [%a cog]))
+    |=  [way=`*<%read %rite>`%read cog=*term]
+    ::  ~~  (dunk 'type')
+    ::  ~~  (show [%c 'feature'] ?:(.=(%% cog) '%%' [%a cog]))
     =-  ?~  hoq
           ~|(%find-none !!)
         u.hoq
@@ -2989,7 +2985,8 @@
         ==
     ?-    i.hep
         @
-      =+  hud=(find(sut syp) way i.hep)
+      =>  .(sut syp)
+      =+  hud=(find way i.hep)
       [(peg p.zar p.hud) q.hud]
     ::
         [~ *]

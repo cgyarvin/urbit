@@ -17,7 +17,7 @@
 #define C3_GLOBAL
 #include "all.h"
 
-#define EyreFirstKernel 259     //  max 264; > 259 needs nock7
+#define EyreFirstKernel 259     //  counts down; max 264; > 259 needs nock7
 u2_flag EyreSmoke;
 
   /**  Global kernel - used only for trace printing.
@@ -27,6 +27,7 @@ u2_flag EyreSmoke;
   
     /* External drivers.
     */
+      extern u2_ho_driver j2_da(k_256);
       extern u2_ho_driver j2_da(k_257);
       extern u2_ho_driver j2_da(k_258);
       extern u2_ho_driver j2_da(k_259);
@@ -39,6 +40,7 @@ u2_flag EyreSmoke;
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       u2_ho_driver *HostDriverBase[] = {
+        &j2_da(k_256),
         &j2_da(k_257),
         &j2_da(k_258),
         &j2_da(k_259),
@@ -626,6 +628,7 @@ _eyre_print_tent(u2_wire wir_r,
   if ( u2_yes == u2_dust(tax) ) switch ( u2_h(tax) ) {
     case c3__spot: _eyre_print_spot(wir_r, ken, u2_t(tax)); return;
     case c3__bean: _eyre_print_bean(wir_r, ken, u2_t(tax)); return;
+                   // u2_err(wir_r, "bean", u2_t(tax)); return;
     case c3__mean: _eyre_print_mean(wir_r, ken, u2_t(tax)); return;
   }
   // u2_err(wir_r, "htax", u2_h(tax));

@@ -212,7 +212,9 @@ _ds_chip(u2_wire wir_r,
           u2_noun led;
 
           if ( u2_none == ruc ) {
+            u2_err(wir_r, "clu", clu);
             u2_ho_warn_here();
+            c3_assert(0);
             u2_rz(bas_r, dac); u2_rz(bas_r, bat); return u2_none;
           } else {
             if ( u2_none == (led = u2_ds_find(wir_r, ruc)) ) {
