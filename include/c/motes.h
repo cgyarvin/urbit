@@ -104,6 +104,7 @@
 #   define c3__cat    c3_s3('c','a','t')
 #   define c3__cato   c3_s4('c','a','t','o')
 #   define c3__cbdg   c3_s4('c','b','d','g')
+#   define c3__cbtr   c3_s4('c','b','t','r')
 #   define c3__cdr    c3_s3('c','d','r')
 #   define c3__cell   c3_s4('c','e','l','l')
 #   define c3__chaf   c3_s4('c','h','a','f')

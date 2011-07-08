@@ -1,3 +1,4 @@
+!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -1528,7 +1529,7 @@
       [%brpd p=(gene) q=(gene)]
       [%brtr p=(gene) q=(gene)]
       [%brzp p=(gene) q=(gene)]
-      [%cbdg p=(gene) q=((map term foot))]
+      [%cbdg p=((list gene)) q=((map term foot))]
       [%cbtr p=((list gene)) q=((map term foot))]
       [%csbn p=(gene) q=(gene)]
       [%csbr p=((list gene))]
@@ -1782,13 +1783,29 @@
         [%brpd *]   [%pmpd p.gen [[%% [& & q.gen]] ~ ~]]
         [%brtr *]   [%pmbn p.gen [[%% [& | q.gen]] ~ ~]]
         [%brzp *]   [%bnld [%zpmt ~] [%brbn p.gen q.gen]]
+        [%cbdg *]   
+      :+  %pmbn
+        [%tmbn %noun]
+      (~(put by q.gen) %% [& & (~(grow ap [%dgtr p.gen]) [[~ 5] ~])])
+    :: 
+        [%cbtr *]
+      :+  %pmbn
+        ?~  p.gen
+          [%tmbn %noun]
+        [%ktdp [%tmbn %noun] i.p.gen]
+      =-  (~(put by q.gen) %% [& & gos])
+      ^=  gos
+      |-  ^-  *gene
+      ?~  p.gen
+        [%zpzp ~]
+      (pick(gen i.p.gen) [[~ 5] ~] $(p.gen t.p.gen))
+    ::
         [%csbr *]
       |- 
       ?~(p.gen [%dtsg 1] [%csdg i.p.gen [%dtsg 0] $(p.gen t.p.gen)])
     ::
         [%csdl *]   [%csdg p.gen [%zpzp ~] q.gen]
         [%csdt *]   [%csdg p.gen r.gen q.gen]
-        [%csld *]   [%csdg p.gen q.gen [%zpzp ~]]
         [%csdp *]
       |-
       ?~  q.gen
@@ -1798,6 +1815,7 @@
         [%bnld [%mtbn ~ [[p.gen [%ktpd p.i.q.gen p.gen]] ~]] q.i.q.gen]
       $(q.gen t.q.gen)
     ::
+        [%csld *]   [%csdg p.gen q.gen [%zpzp ~]]
         [%cspm *]
       |-
       ?~(p.gen [%dtsg 0] [%csdg i.p.gen $(p.gen t.p.gen) [%dtsg 1]])
@@ -1840,15 +1858,6 @@
         [%pmdp *]   [%bnld [%pmdt q.gen] p.gen] 
         [%pmbn *]   [%bnpd p.gen [%pmdt q.gen]]
         [%pmzp *]   [%bnld [%zpmt ~] [%pmbn p.gen q.gen]]
-        [%cbdg *]   
-      :+  %pmbn
-        [%tmbn %noun]
-      (~(put by q.gen) %% [& & (~(grow ap p.gen) [[~ 5] ~])])
-    :: 
-        [%cbtr *]
-      :+  %pmbn
-        [%tmbn %noun]
-      !!
     ::
         [%sgbn *]   [%sgld [%germ p.gen] q.gen]
         [%sgbr *]   [%sgld [%bean p.gen] q.gen]
@@ -3058,18 +3067,23 @@
     %+  knee  *gene  |.  ~+
     ;~  pose
       (stag %dgtr (ifix [den ned] (most ace wide)))
+      (cook |=(a=*(list gene) [%cbtr a ~]) (ifix [des sed] (most ace wide)))
       (stag %mtdp (ifix [lep pel] (most ace wide)))
       (stag %tmdg ;~(pfix deg (ifix [lep pel] (most ace wide))))
       (stag %brcs (ifix [del led] (most ace wide)))
       (cook |=(a=*twig [%mtbn a ~]) rope)
       (stag %cszp ;~(pfix zap wide))
       (stag %mttr ;~(pfix tar wide))
-      (cook |=(a=*gene [%cbdg a ~]) ;~(pfix cab wide))
       (stag %dtbn ;~(pfix bon (ifix [lep pel] ;~((glue ace) wide wide))))
       (stag %dtpd ;~(pfix pad (ifix [lep pel] wide)))
       (stag %ktdp ;~(plug ;~(pfix tec wide) ;~(pfix tec wide)))
       (stag %zpzp (cold ~ ;~(plug zap zap)))
       (stag %zpmt (cold ~ ;~(plug zap mit)))
+    ::
+      %+  cook
+        |=(a=*(list gene) [%cbdg a ~])
+      ;~(pfix cab (ifix [den ned] (most ace wide)))
+    ::
       %+  stag
         %mtsg 
       ;~  pfix 
@@ -3126,7 +3140,8 @@
           ==
           ;~  pfix  cab
             ;~  pose
-              (rune deg %cbdg expx)
+              (rune deg %cbdg expy)
+              (rune tar %cbtr expy)
             ==
           ==
           ;~  pfix  cas
@@ -3229,7 +3244,7 @@
         ==
     &.
     ::
-    ++  boot
+    ++  boon
       %+  cook
         |=([a=& b=? c=*term d=*gene] [c a b d])
       ;~  plug
@@ -3245,7 +3260,7 @@
       %-  hand
       %+  cook
         |=(a=*(list <[p=*term q=*foot]>) (~(gas by *(map term foot)) a))
-      (more muck boot)
+      (most muck boon)
     ::
     ++  toad
       |*  har=expa
@@ -3278,8 +3293,9 @@
     ++  expk  |.(;~(gunk loaf ;~(plug loaf (easy ~)))) 
     ++  expp  |.((butt ;~(gunk rope loaf rack)))
     ++  expq  |.(;~(gunk rope loaf loaf))
-    ++  expx  |.(;~(gunk loaf wing))
-    ++  expw  |.(;~(gunk hank wing))
+    ++  expx  |.(;~(plug loaf ;~(pose ;~(pfix muck wing) (easy ~))))
+    ++  expy  |.(;~(plug hank ;~(pose ;~(pfix muck wing) (easy ~))))
+    ++  expw  |.(;~(plug hank ;~(pose ;~(pfix muck wing) (easy ~))))
     ++  expz  |.(loaf(bug &))
     ++  hina  |.(;~(gunk (ifix [den ned] ;~(gunk dem dem)) loaf))
     ++  hinb  |.(;~(gunk bont loaf))

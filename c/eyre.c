@@ -272,7 +272,17 @@ _eyre_ken_load_soft(u2_wire wir_r,
     paq = _eyre_jam(wir_r, ken);
     u2_ux_write(wir_r, paq, pot_c, "noun");
     printf("  {%d bits}\n", u2_met(0, paq));
-    
+
+#if 0
+    {
+      u2_noun foo;
+
+      u2_bx_boot(wir_r);
+      foo = _eyre_cue(wir_r, paq);
+      u2_bx_show(wir_r);
+      u2_rz(wir_r, foo);
+    }
+#endif 
     u2_rz(wir_r, paq);
     free(pot_c);
   }
@@ -627,8 +637,8 @@ _eyre_print_tent(u2_wire wir_r,
 {
   if ( u2_yes == u2_dust(tax) ) switch ( u2_h(tax) ) {
     case c3__spot: _eyre_print_spot(wir_r, ken, u2_t(tax)); return;
-    case c3__bean: // _eyre_print_bean(wir_r, ken, u2_t(tax)); return;
-                   u2_err(wir_r, "bean", u2_t(tax)); return;
+    case c3__bean: _eyre_print_bean(wir_r, ken, u2_t(tax)); return;
+                   // u2_err(wir_r, "bean", u2_t(tax)); return;
     case c3__mean: _eyre_print_mean(wir_r, ken, u2_t(tax)); return;
   }
   // u2_err(wir_r, "htax", u2_h(tax));

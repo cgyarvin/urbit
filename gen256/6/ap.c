@@ -14,6 +14,9 @@
     j2_mcy(Pt6, ap, modl)(u2_wire, u2_noun, u2_noun);
 
     u2_noun
+    j2_mcy(Pt6, ap, pick)(u2_wire, u2_noun, u2_noun, u2_noun);
+
+    u2_noun
     j2_mcy(Pt6, ap, grow)(u2_wire, u2_noun, u2_noun);
 
     u2_ho_jet 
@@ -157,6 +160,56 @@
                 (wir_r, c3__brbn,
                         u2_rx(wir_r, p_gen),
                         u2_rx(wir_r, q_gen)));
+  }
+/***
+****
+***/
+  _open_do_pq(cbdg)   //  _:
+  {
+    u2_noun tog, vam, bey, wor, hoo, ret;
+
+    tog = u2_bc(wir_r, u2_bc(wir_r, u2_nul, _5), u2_nul);
+    vam = u2_bc(wir_r, c3__dgtr, u2_rx(wir_r, p_gen));
+    bey = j2_mcy(Pt6, ap, grow)(wir_r, vam, tog);
+    wor = u2_bt(wir_r, u2_yes, u2_yes, bey);
+    hoo = j2_mcc(Pt4, by, put)(wir_r, q_gen, u2_nul, wor);
+
+    ret = u2_bt(wir_r, c3__pmbn, u2_bc(wir_r, c3__tmbn, c3__noun), hoo);
+
+    u2_rz(wir_r, wor); u2_rz(wir_r, vam); u2_rz(wir_r, tog);
+
+    return ret;
+  }
+    static u2_noun
+    _cbtr_in(u2_wire wir_r,
+             u2_noun tog,
+             u2_noun p_gen)
+    {
+      if ( u2_no == u2_dust(p_gen) ) {
+        return u2_bc(wir_r, c3__zpzp, u2_nul);
+      } else {
+        return j2_mcy(Pt6, ap, pick)
+          (wir_r, u2_h(p_gen), tog, _cbtr_in(wir_r, tog, u2_t(p_gen)));
+      }
+    }
+  _open_do_pq(cbtr)   //  _*
+  {
+    u2_noun tog, bey, wor, hoo, wig, ret;
+
+    tog = u2_bc(wir_r, u2_bc(wir_r, u2_nul, _5), u2_nul);
+    bey = _cbtr_in(wir_r, tog, p_gen);
+    wor = u2_bt(wir_r, u2_yes, u2_yes, bey);
+    hoo = j2_mcc(Pt4, by, put)(wir_r, q_gen, u2_nul, wor);
+
+    wig = u2_bc(wir_r, c3__tmbn, c3__noun);
+    if ( u2_nul != p_gen ) {
+      wig = u2_bt(wir_r, c3__ktdp, wig, u2_rx(wir_r, u2_h(p_gen)));
+    }
+    ret = u2_bt(wir_r, c3__pmbn, wig, hoo);
+
+    u2_rz(wir_r, wor); u2_rz(wir_r, tog);
+
+    return ret;
   }
 /***
 ****
@@ -490,24 +543,6 @@
                 (wir_r, c3__pmbn,
                         u2_rx(wir_r, p_gen),
                         u2_rx(wir_r, q_gen)));
-  }
-/***
-****
-***/
-  _open_do_pq(cbdg)   //  +:
-  {
-    u2_noun tog, bey, wor, hoo, ret;
-
-    tog = u2_bc(wir_r, u2_bc(wir_r, u2_nul, _5), u2_nul);
-    bey = j2_mcy(Pt6, ap, grow)(wir_r, p_gen, tog);
-    wor = u2_bt(wir_r, u2_yes, u2_yes, bey);
-    hoo = j2_mcc(Pt4, by, put)(wir_r, q_gen, u2_nul, wor);
-
-    ret = u2_bt(wir_r, c3__pmbn, u2_bc(wir_r, c3__tmbn, c3__noun), hoo);
-
-    u2_rz(wir_r, wor); u2_rz(wir_r, tog);
-
-    return ret;
   }
 /***
 ****
@@ -1115,6 +1150,7 @@
         _open_p   (dgsg);
 
         _open_pq  (cbdg);
+        _open_pq  (cbtr);
 
         _open_p   (csbr);
         _open_pqr (csdt);

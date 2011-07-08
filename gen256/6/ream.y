@@ -72,7 +72,7 @@
 
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 70
+  %expect 72
 
   %pure-parser
   %locations
@@ -179,15 +179,13 @@ wide_c
   **/
     wide_funk
       : si_des g bank_wide g si_sed
-        { $$ = _ycell(c3__dgsg, $3); }
-      | si_des g si_sed
-        { $$ = _ycell(c3__dgsg, _0); }
+        { $$ = _ytrel(c3__cbtr, $3, u2_nul); }
       | rope si_lep rack_wide si_pel
         { $$ = _ytrel(c3__mtbn, $1, $3); }
       | si_zap wide
         { $$ = _ycell(c3__cszp, $2); }
-      | si_cab wide
-        { $$ = _ytrel(c3__cbdg, $2, u2_nul); }
+      | si_cab si_den g bank_wide g si_ned
+        { $$ = _ytrel(c3__cbdg, $4, u2_nul); }
       | si_tar wide
         { $$ = _ycell(c3__mttr, $2); }
       | si_tic wide si_tic wide
@@ -272,7 +270,8 @@ wide_c
 
   /** Wide: normals.
   **/
-    wide_norm: di_cabdeg body_a_wide    { $$ = _ytrel($1, $2, u2_nul); }
+    wide_norm: di_cabdeg body_d_wide    { $$ = _ytrel($1, $2, u2_nul); }
+    wide_norm: di_cabtar body_d_wide    { $$ = _ytrel($1, $2, u2_nul); }
 
     wide_norm: di_casdeg body_c_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_casdot body_c_wide    { $$ = _ycell($1, $2); }
@@ -440,7 +439,8 @@ tall
 
   /** Tall - normals.
   **/
-    tall_norm: di_cabdeg w body_ex_tall   { $$ = _ycell($1, $3); }
+    tall_norm: di_cabdeg w body_ey_tall   { $$ = _ycell($1, $3); }
+    tall_norm: di_cabtar w body_ey_tall   { $$ = _ycell($1, $3); }
 
     tall_norm: di_barbon w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_barcas w body_d_tall    { $$ = _ycell($1, $3); }
@@ -536,6 +536,7 @@ tall
     body_d_tall: bank_tall                  { $$ = $1; }
     body_e_tall: wing                       { $$ = $1; }
     body_ex_tall: gene w wing               { $$ = _ycell($1, $3); }
+    body_ey_tall: bank_tall w wing          { $$ = _ycell($1, $3); }
     body_f_tall: gene w gene w gene w gene  { $$ = _yqual($1, $3, $5, $7); }
     body_g_tall: term w gene                { $$ = _ycell($1, $3); }
     body_h_tall: gene w rack_tall           { $$ = _ycell($1, $3); }
@@ -661,6 +662,7 @@ tall
     di_castar: si_cas si_tar  { $$ = c3__cstr; }
 
     di_cabdeg: si_cab si_deg  { $$ = c3__cbdg; }
+    di_cabtar: si_cab si_tar  { $$ = c3__cbtr; }
 
     di_barbon: si_bar si_bon  { $$ = c3__brbn; }
     di_barcas: si_bar si_cas  { $$ = c3__brcs; }
@@ -1073,16 +1075,16 @@ _scanner_init_clip(struct _u2_scanner *scanner,
 
 /* structures
 */
-# define Tier6_c  u2_jet_live
-// # define Tier6_c  u2_jet_dead
-// # define Tier6_c  (u2_jet_live | u2_jet_test)
+# define Tier6_y  u2_jet_live
+// # define Tier6_y  u2_jet_dead
+// # define Tier6_y  (u2_jet_live | u2_jet_test)
 
   u2_ho_jet 
   j2_mbj(Pt6, ream)[] = { 
     { ".3", 
        c3__hevy, 
        j2_mb(Pt6, ream), 
-       Tier6_c,
+       Tier6_y,
        u2_none, u2_none },
     { }
   };
@@ -1092,7 +1094,7 @@ _scanner_init_clip(struct _u2_scanner *scanner,
     { ".3", 
        c3__hevy, 
        j2_mb(Pt6, vest), 
-       Tier6_c,
+       Tier6_y,
        u2_none, u2_none },
     { }
   };
