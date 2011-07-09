@@ -16,9 +16,6 @@
     u2_noun
     j2_mcy(Pt6, ap, pick)(u2_wire, u2_noun, u2_noun, u2_noun);
 
-    u2_noun
-    j2_mcy(Pt6, ap, grow)(u2_wire, u2_noun, u2_noun);
-
     u2_ho_jet 
     j2_mbj(Pt6, ap)[];
 
@@ -982,145 +979,6 @@
          u2_rx(wir_r, dug));
     } 
 
-  /** grow
-  **/
-    u2_noun
-    j2_mcy(Pt6, ap, grow)(u2_wire wir_r,
-                          u2_noun gen,
-                          u2_noun hep)
-    {
-      u2_noun p_gen, q_gen;
-
-      if ( u2_no == u2_dust(gen) ) {
-        goto plain;
-      } else switch ( u2_h(gen) ) {
-        default: goto plain;
-
-        case c3__dgdp:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r, c3__fail); else
-        {
-          u2_noun hed = u2_bc(wir_r, u2_bc(wir_r, u2_nul, _2), 
-                                     u2_rx(wir_r, hep));
-          u2_noun tal = u2_bc(wir_r, u2_bc(wir_r, u2_nul, _3), 
-                                     u2_rx(wir_r, hep));
-          u2_noun lag = u2_bt
-            (wir_r, c3__dgdp,
-                    j2_mcy(Pt6, ap, grow)(wir_r, p_gen, hed),
-                    j2_mcy(Pt6, ap, grow)(wir_r, q_gen, tal));
-
-          u2_rl_lose(wir_r, hed); 
-          u2_rl_lose(wir_r, tal);
-          return lag;
-        }
-        case c3__ktbn:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r, c3__fail); else
-        {
-          return u2_bt
-            (wir_r, c3__ktbn, 
-                    u2_rx(wir_r, p_gen), 
-                    j2_mcy(Pt6, ap, grow)(wir_r, q_gen, hep));
-        }
-        case c3__ktdp:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r, c3__fail); else
-        {
-          return j2_mcy(Pt6, ap, mold)(wir_r, p_gen, hep);
-        }
-#if 0
-        case c3__ktdp:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r, c3__fail); else
-        {
-          return u2_bt
-            (wir_r, c3__ktdp,
-                    u2_rx(wir_r, p_gen), 
-                    j2_mcy(Pt6, ap, grow)(wir_r, q_gen, hep));
-        }
-#endif
-        case c3__mttr:  p_gen = u2_t(gen);
-        {
-          return u2_bq
-            (wir_r, c3__mtdp,
-                    u2_rx(wir_r, p_gen),
-                    u2_bt(wir_r, c3__mtbn, u2_rx(wir_r, hep), u2_nul),
-                    u2_nul);
-        }
-        case c3__mtbn:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r, c3__fail); else
-        {
-          if ( u2_nul == q_gen ) {
-            return u2_bq
-              (wir_r, c3__mtdp,
-                      u2_rx(wir_r, p_gen),
-                      u2_bc(wir_r, 
-                            u2_bc(wir_r, 
-                                  u2_bc(wir_r, u2_nul, _5),
-                                  u2_bt(wir_r, c3__mtbn, 
-                                               u2_rx(wir_r, hep), 
-                                               u2_nul)),
-                            u2_nul),
-                      u2_rx(wir_r, q_gen));
-          } else {
-            goto plain;
-          }
-        }
-        case c3__mtdp:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r, c3__fail); else
-        {
-          if ( u2_nul == q_gen ) {
-            return u2_bq
-              (wir_r, c3__mtdp,
-                      u2_rx(wir_r, p_gen),
-                      u2_bt(wir_r, c3__mtbn, u2_rx(wir_r, hep), u2_nul),
-                      u2_rx(wir_r, q_gen));
-          } else {
-            goto plain;
-          }
-        }
-        case c3__zpcb:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r, c3__fail); else
-        {
-          return u2_bt
-            (wir_r, c3__zpcb, 
-                    u2_rx(wir_r, p_gen), 
-                    j2_mcy(Pt6, ap, grow)(wir_r, q_gen, hep));
-        }
-        case c3__zpdx:  p_gen = u2_t(gen);
-        {
-          return u2_bc
-            (wir_r, c3__zpcb, j2_mcy(Pt6, ap, grow)(wir_r, q_gen, hep));
-        }
-      }
-
-      plain: {
-        u2_noun bog = j2_mcy(Pt6, ap, open)(wir_r, gen);
-        u2_noun ret;
-
-        if ( u2_no == u2_sing(bog, gen) ) {
-          ret = j2_mcy(Pt6, ap, grow)(wir_r, bog, hep);
-        }
-        else {
-          u2_noun dug = u2_bc(wir_r, c3__zpzp, u2_nul);
-
-          ret = j2_mcy(Pt6, ap, pick)(wir_r, bog, hep, dug);
-          u2_rz(wir_r, dug);
-        }
-        u2_rl_lose(wir_r, bog);
-        return ret;
-      }
-    }
-    u2_noun                                                       //  transfer
-    j2_mc(Pt6, ap, grow)(u2_wire wir_r, 
-                         u2_noun cor)                             //  retain
-    {
-      u2_noun hep, van, gen;
-
-      if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &hep, 0)) ||
-           (u2_none == (gen = u2_frag(u2_cw_sam, van))) ) {
-        return u2_bl_bail(wir_r, c3__fail);
-      } else {
-        return j2_mcy(Pt6, ap, grow)(wir_r, gen, hep);
-      }
-    }
-
   /** mold
   **/
     u2_noun
@@ -1176,17 +1034,15 @@
                           return u2_bl_bail(wir_r, c3__fail); else
         {
           if ( u2_nul == q_gen ) {
-            return u2_bq
-              (wir_r, c3__mtdp,
+            return u2_bt
+              (wir_r, c3__mtbn,
                       u2_rx(wir_r, p_gen),
-                      u2_bc(wir_r, 
+                      _lone(wir_r,
                             u2_bc(wir_r, 
-                                  u2_bc(wir_r, u2_nul, _5),
+                                  _frag(wir_r, _5),
                                   u2_bt(wir_r, c3__mtbn, 
                                                u2_rx(wir_r, hep), 
-                                               u2_nul)),
-                            u2_nul),
-                      u2_rx(wir_r, q_gen));
+                                               u2_nul))));
           } else {
             goto plain;
           }
@@ -1676,11 +1532,6 @@
   };
   u2_ho_jet 
   j2_mcj(Pt6, ap, mold)[] = {
-    { ".3", c3__hevy, j2_mc(Pt6, ap, mold), Tier6_c, u2_none, u2_none },
-    { }
-  };
-  u2_ho_jet 
-  j2_mcj(Pt6, ap, grow)[] = {
     { ".3", c3__hevy, j2_mc(Pt6, ap, mold), Tier6_c, u2_none, u2_none },
     { }
   };
