@@ -1075,8 +1075,8 @@ _scanner_init_clip(struct _u2_scanner *scanner,
 
 /* structures
 */
-# define Tier6_y  u2_jet_live
-// # define Tier6_y  u2_jet_dead
+// # define Tier6_y  u2_jet_live
+# define Tier6_y  u2_jet_dead
 // # define Tier6_y  (u2_jet_live | u2_jet_test)
 
   u2_ho_jet 
