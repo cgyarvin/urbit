@@ -328,14 +328,19 @@
         return u2_bc(wir_r, c3__zpzp, u2_nul);
       }
       else {
-        return u2_bq
-          (wir_r, c3__csdg,
-                  u2_bt(wir_r,
-                        c3__dtbn, 
-                        u2_bc(wir_r, u2_nul, 5),
-                        u2_bc(wir_r, c3__dtsg, u2_rx(wir_r, dix))),
-                  u2_rx(wir_r, u2_h(p_gen)),
-                  _cbmt_in(wir_r, dix, u2_t(p_gen)));
+        u2_noun dyx = j2_mbc(Pt1, inc)(wir_r, dix);
+        u2_noun ret =
+           u2_bq
+            (wir_r, c3__csdg,
+                    u2_bt(wir_r,
+                          c3__dtbn, 
+                          u2_bc(wir_r, u2_nul, 5),
+                          u2_bc(wir_r, c3__dtsg, u2_rx(wir_r, dix))),
+                    u2_rx(wir_r, u2_h(p_gen)),
+                    _cbmt_in(wir_r, dix, u2_t(p_gen)));
+
+        u2_rz(wir_r, dyx);
+        return ret;
       }
     }
   _open_do_pq(cbmt)   //  _:  weed

@@ -181,7 +181,7 @@ wide_c
       : si_des g bank_wide g si_sed
         { $$ = _ytrel(c3__cbtr, $3, u2_nul); }
       | si_mit si_des g bank_wide g si_sed
-        { $$ = _ytrel(c3__cbtr, $4, u2_nul); }
+        { $$ = _ytrel(c3__cbmt, $4, u2_nul); }
       | rope si_lep rack_wide si_pel
         { $$ = _ytrel(c3__mtbn, $1, $3); }
       | si_zap wide

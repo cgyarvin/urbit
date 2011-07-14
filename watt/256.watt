@@ -1806,7 +1806,7 @@
         :^    %csdg
             [%dtbn [~ 5] [%dtsg dix]]
           i.p.gen
-        $(p.gen t.p.gen)
+        $(p.gen t.p.gen, dix .+(dix))
       q.gen
     ::
         [%cbpm *]
