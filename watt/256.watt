@@ -1532,6 +1532,7 @@
       [%cbbn p=(gene) q=(gene) r=((map term foot))]
       [%cbbr p=((list gene)) q=((map term foot))]
       [%cbdg p=((list gene)) q=((map term foot))]
+      [%cbmt p=((list gene)) q=((map term foot))]
       [%cbpm p=(gene) q=((list gene)) r=((map term foot))]
       [%cbtr p=((list gene)) q=((map term foot))]
       [%csbn p=(gene) q=(gene)]
@@ -1795,6 +1796,18 @@
     ::
         [%cbdg *]   
       (knit(gen [%dgtr p.gen]) (mold(gen [%dgtr p.gen]) [[~ 5] ~]) q.gen)
+    ::
+        [%cbmt *]
+      %+  knit(gen [%dtsg 0])
+        =+  dix=`@`0
+        |-  ^-  *gene
+        ?~  p.gen
+          [%zpzp ~] 
+        :^    %csdg
+            [%dtbn [~ 5] [%dtsg dix]]
+          i.p.gen
+        $(p.gen t.p.gen)
+      q.gen
     ::
         [%cbpm *]
       %+  knit(gen ?:(lost(gen p.gen) ?~(q.gen [%dtsg ~] i.q.gen) p.gen))
@@ -3097,6 +3110,10 @@
       (stag %zpzp (cold ~ ;~(plug zap zap)))
       (stag %zpmt (cold ~ ;~(plug zap mit)))
     ::
+      %+  cook 
+        |=(a=*(list gene) [%cbmt a ~]) 
+      ;~(pfix mit (ifix [des sed] (most ace wide)))
+    ::
       %+  cook
         |=(a=*(list gene) [%cbdg a ~])
       ;~(pfix cab (ifix [den ned] (most ace wide)))
@@ -3160,6 +3177,7 @@
               (rune bon %cbbn expv)
               (rune bar %cbbr expy)
               (rune deg %cbdg expy)
+              (rune mit %cbmt expy)
               (rune pam %cbpm expu)
               (rune tar %cbtr expy)
             ==
