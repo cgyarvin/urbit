@@ -407,7 +407,7 @@ When it gets the product, however, the product will be right.
 
 There is another reduction for hints - line 37:
 
-    *[a 10 [b c] d]   *[a 8 c 7 [0 3] d]
+    *[a 10 [b c] d]   *[a 8 c 7 [0 2] d]
 
 Once we see what `7` and `8` do, we'll see that this complex hint
 throws away an arbitrary `b`, but computes the formula `c`

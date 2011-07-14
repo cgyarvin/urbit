@@ -318,6 +318,37 @@
 
     return ret;
   }
+   
+    u2_noun                                                       //  produce
+    _cbmt_in(u2_wire wir_r, 
+             u2_noun dix,                                         //  retain
+             u2_noun p_gen)                                       //  retain
+    {
+      if ( u2_no == u2_dust(p_gen) ) {
+        return u2_bc(wir_r, c3__zpzp, u2_nul);
+      }
+      else {
+        return u2_bq
+          (wir_r, c3__csdg,
+                  u2_bt(wir_r,
+                        c3__dtbn, 
+                        u2_bc(wir_r, u2_nul, 5),
+                        u2_bc(wir_r, c3__dtsg, u2_rx(wir_r, dix))),
+                  u2_rx(wir_r, u2_h(p_gen)),
+                  _cbmt_in(wir_r, dix, u2_t(p_gen)));
+      }
+    }
+  _open_do_pq(cbmt)   //  _:  weed
+  {
+    u2_noun hel = u2_bc(wir_r, c3__dtsg, u2_nul);
+    u2_noun zex = _cbmt_in(wir_r, _0, p_gen);
+    u2_noun ret = _ap_knit(wir_r, hel, zex, q_gen);
+
+    u2_rz(wir_r, zex);
+    u2_rz(wir_r, hel);
+
+    return ret;
+  }
 
   _open_do_pqr(cbpm)  //  _&  bush
   {
@@ -1187,6 +1218,7 @@
 
         _open_pqr (cbbn);
         _open_pq  (cbbr);
+        _open_pq  (cbmt);
         _open_pq  (cbdg);
         _open_pqr (cbpm);
         _open_pq  (cbtr);
