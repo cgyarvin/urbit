@@ -1,4 +1,3 @@
-!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -1530,7 +1529,7 @@
       [%brtr p=(gene) q=(gene)]
       [%brzp p=(gene) q=(gene)]
       [%cbbn p=(gene) q=(gene) r=((map term foot))]
-      [%cbbr p=((list gene)) q=((map term foot))]
+      [%cbbr p=(gene) q=((list gene)) r=((map term foot))]
       [%cbdg p=((list gene)) q=((map term foot))]
       [%cbmt p=((list gene)) q=((map term foot))]
       [%cbpm p=(gene) q=((list gene)) r=((map term foot))]
@@ -1785,14 +1784,12 @@
       r.gen
     ::
         [%cbbr *]
-      %+  knit(gen ?~(p.gen [%dtsg ~] i.p.gen))
+      %+  knit(gen ?~(q.gen [%dtsg ~] i.q.gen))
         :^    %cssg
             [~ 10]
-          (lung(gen [%zpzp ~]) [[~ 5] ~] p.gen)
-        :+  %dgdp
-          [%mtbn [%% ~] [[~ 5] [~ 10]] ~]
-        [%mtbn [%% ~] [[~ 5] [~ 11]] ~]
-      q.gen 
+          (lung(gen [%zpzp ~]) [[~ 5] ~] q.gen)
+        (mold(gen p.gen) [[~ 5] ~]) 
+      r.gen 
     ::
         [%cbdg *]   
       (knit(gen [%dgtr p.gen]) (mold(gen [%dgtr p.gen]) [[~ 5] ~]) q.gen)
@@ -3175,7 +3172,7 @@
           ;~  pfix  cab
             ;~  pose
               (rune bon %cbbn expv)
-              (rune bar %cbbr expy)
+              (rune bar %cbbr expu)
               (rune deg %cbdg expy)
               (rune mit %cbmt expy)
               (rune pam %cbpm expu)
