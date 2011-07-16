@@ -72,7 +72,7 @@
 
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 89
+  %expect 91
 
   %pure-parser
   %locations
@@ -186,11 +186,13 @@ wide_c
         { $$ = _ytrel(c3__mtbn, $1, $3); }
       | si_zap wide
         { $$ = _ycell(c3__cszp, $2); }
+      | si_com wide 
+        { $$ = _ycell(c3__ktsg, $2); }
       | si_cab si_den g bank_wide g si_ned
         { $$ = _ytrel(c3__cbdg, $4, u2_nul); }
       | si_tar wide
         { $$ = _ycell(c3__mttr, $2); }
-      | si_tic wide si_tic wide
+      | si_tec wide si_tec wide
         { $$ = _ytrel(c3__ktdp, $2, $4); }
       | si_bon si_lep g wide w wide g si_pel
         { $$ = _ytrel(c3__dtbn, $4, $6); }
@@ -794,7 +796,7 @@ tall
     si_nov: '\\'
     si_sed: '}'
     si_sig: '~'
-    si_tic: '`'
+    si_tec: '`'
     /* si_toq: '"' */
     si_von: '/'
     si_wat: '@'

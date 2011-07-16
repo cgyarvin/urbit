@@ -17,10 +17,12 @@
     u2_noun p_typ, q_typ, pq_typ, qq_typ, rq_typ;
     u2_noun h_gat, t_gat;
 
-    if ( (c3__core != u2_h(typ)) ||
-         (u2_no == u2_as_cell(u2_t(typ), &p_typ, &q_typ)) ||
-         (u2_no == u2_as_trel(q_typ, &pq_typ, &qq_typ, &rq_typ)) ||
-         (u2_no == u2_as_cell(gat, &h_gat, &t_gat)) )
+    if ( (u2_no == u2_dust(typ)) || (c3__core != u2_h(typ)) ) {
+      return u2_bl_error(wir_r, "fire-core");
+    } else if 
+         ( (u2_no == u2_as_cell(u2_t(typ), &p_typ, &q_typ)) ||
+           (u2_no == u2_as_trel(q_typ, &pq_typ, &qq_typ, &rq_typ)) ||
+           (u2_no == u2_as_cell(gat, &h_gat, &t_gat)) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
