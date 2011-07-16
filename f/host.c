@@ -700,6 +700,18 @@ u2_ho_test(u2_wire    wir_r,
     if ( u2_none == had ) {
       msg_c = "bail";
       printf("bail: cos_c: %s\n", cos_c);
+
+      {
+        u2_noun gen;
+
+        if ( (u2_no == u2_mean(cor, u2_cw_sam, &gen, 0)) )
+        {
+          c3_assert(0);
+        } else {
+          u2_err(wir_r, "gen", gen);
+        }
+      }
+      c3_assert(0);
     } else if ( u2_none == sof ) {
       msg_c = "funk";
       printf("funk: cos_c: %s\n", cos_c);
@@ -716,6 +728,16 @@ u2_ho_test(u2_wire    wir_r,
       //  For detailed debugging, activate/extend this junkheap as needed.
       //
 #if 0
+      {
+        u2_noun gen;
+
+        if ( (u2_no == u2_mean(cor, u2_cv_sam, &gen, 0)) )
+        {
+          c3_assert(0);
+        } else {
+          u2_err(wir_r, "gen", gen);
+        }
+      }
       {
         u2_noun sut, hag, van;
 

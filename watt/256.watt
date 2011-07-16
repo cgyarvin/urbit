@@ -1531,6 +1531,7 @@
       [%cbbn p=(gene) q=(gene) r=((map term foot))]
       [%cbbr p=(gene) q=((list gene)) r=((map term foot))]
       [%cbdg p=((list gene)) q=((map term foot))]
+      [%cbkt p=((list gene)) q=((map term foot))]
       [%cbmt p=((list gene)) q=((map term foot))]
       [%cbpm p=(gene) q=((list gene)) r=((map term foot))]
       [%cbtr p=((list gene)) q=((map term foot))]
@@ -1703,15 +1704,6 @@
       $(gen voq)
     ==
   ::
-  ++  lost
-    |-  ^-  ?
-    ?-  gen
-      [%zpcb *]  $(gen q.gen)
-      [%zpdx *]  $(gen p.gen)
-      [%zpzp *]  &
-      *          |
-    ==
-  ::
   ++  knit
     |=  [nug=*gene dab=*(map term foot)]
     :+  %pmbn
@@ -1794,6 +1786,11 @@
         [%cbdg *]   
       (knit(gen [%dgtr p.gen]) (mold(gen [%dgtr p.gen]) [[~ 5] ~]) q.gen)
     ::
+        [%cbkt *]   
+      %+  knit(gen ?~(p.gen [%dtsg ~] i.p.gen))
+        (lung(gen [%zpzp ~]) [[~ 5] ~] p.gen)
+      q.gen
+    :: 
         [%cbmt *]
       %+  knit(gen [%dtsg 0])
         =+  dix=`@`0
@@ -1807,7 +1804,7 @@
       q.gen
     ::
         [%cbpm *]
-      %+  knit(gen ?:(lost(gen p.gen) ?~(q.gen [%dtsg ~] i.q.gen) p.gen))
+      %+  knit(gen p.gen)
         :^    %cssg
             [~ 5]
           (pick(gen p.gen) [[~ 5] ~] [%zpzp ~]) 
@@ -3174,6 +3171,7 @@
               (rune bon %cbbn expv)
               (rune bar %cbbr expu)
               (rune deg %cbdg expy)
+              (rune ket %cbkt expy)
               (rune mit %cbmt expy)
               (rune pam %cbpm expu)
               (rune tar %cbtr expy)

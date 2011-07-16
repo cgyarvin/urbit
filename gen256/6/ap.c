@@ -199,7 +199,7 @@
     if ( u2_no == u2_dust(doy) ) {
       return u2_rx(wir_r, gen);
     } else {
-      u2_noun haq = j2_mcy(Pt6, ap, hack)(wir_r, gen);
+      u2_noun haq = j2_mcy(Pt6, ap, hack)(wir_r, u2_h(doy));
 
       if ( u2_no == u2_h(haq) ) {
         return u2_bl_error(wir_r, "lung-hack");
@@ -209,10 +209,8 @@
         u2_noun q_haq = u2_t(u2_t(haq));
         u2_noun dog = u2_bt(wir_r,
                             c3__mtbn,
-                            u2_bc(wir_r,
-                                  u2_bc(wir_r, u2_bc(wir_r, u2_nul, _2),
-                                               u2_rx(wir_r, hep)),
-                                  u2_nul),
+                            u2_bc(wir_r, u2_bc(wir_r, u2_nul, _2),
+                                         u2_rx(wir_r, hep)),
                             u2_nul);
         u2_noun cat = u2_bc(wir_r, u2_bc(wir_r, u2_nul, _3), 
                                    u2_rx(wir_r, hep));
@@ -231,22 +229,6 @@
         u2_rz(wir_r, cat);
         u2_rz(wir_r, haq);
         return ret;
-      }
-    }
-  }
-
-  static u2_flag
-  _ap_lost(u2_wire wir_r,
-           u2_noun gen)
-  {
-    if ( u2_no == u2_dust(gen) ) {
-      return u2_no;
-    } else {
-      switch ( u2_h(gen) ) {
-        case c3__zpcb: return _ap_lost(wir_r, u2_t(u2_t(gen)));
-        case c3__zpdx: return _ap_lost(wir_r, u2_t(gen));
-        case c3__zpzp: return u2_yes;
-        default:       return u2_no;
       }
     }
   }
@@ -314,7 +296,26 @@
 
     return ret;
   }
-   
+  
+  _open_do_pq(cbkt)   //  _^  moss
+  {
+    u2_noun riq = _lone(wir_r, _frag(wir_r, _5));
+    u2_noun vaq = u2_bc(wir_r, c3__zpzp, u2_nul);
+    u2_noun hel = u2_no == u2_dust(p_gen)
+                     ? u2_bc(wir_r, c3__dtsg, u2_nul)
+                     : u2_rx(wir_r, u2_h(p_gen));
+    u2_noun lug = _ap_lung(wir_r, vaq, riq, p_gen);
+    u2_noun ret;
+
+    ret = _ap_knit(wir_r, hel, lug, q_gen);
+
+    u2_rz(wir_r, hel);
+    u2_rz(wir_r, vaq);
+    u2_rz(wir_r, riq);
+    u2_rz(wir_r, lug);
+
+    return ret;
+  }
     u2_noun                                                       //  produce
     _cbmt_in(u2_wire wir_r, 
              u2_noun dix,                                         //  retain
@@ -339,7 +340,7 @@
         return ret;
       }
     }
-  _open_do_pq(cbmt)   //  _:  weed
+  _open_do_pq(cbmt)   //  _%  weed
   {
     u2_noun hel = u2_bc(wir_r, c3__dtsg, u2_nul);
     u2_noun zex = _cbmt_in(wir_r, _0, p_gen);
@@ -355,9 +356,7 @@
   {
     u2_noun riq = _lone(wir_r, _frag(wir_r, _5));
     u2_noun vaq = u2_bc(wir_r, c3__zpzp, u2_nul);
-    u2_noun hel = (u2_yes == _ap_lost(wir_r, p_gen))
-                    ? u2_bc(wir_r, c3__dtsg, u2_nul)
-                    : u2_rx(wir_r, u2_h(p_gen));
+    u2_noun hel = u2_rx(wir_r, p_gen);
     u2_noun pix = j2_mcy(Pt6, ap, pick)(wir_r, p_gen, riq, vaq);
     u2_noun lug = _ap_lung(wir_r, vaq, riq, q_gen);
     u2_noun cag = u2_bq(wir_r, c3__cssg, _frag(wir_r, 5), pix, lug);
@@ -365,6 +364,7 @@
 
     ret = _ap_knit(wir_r, hel, cag, r_gen);
 
+    u2_rz(wir_r, cag);
     u2_rz(wir_r, hel);
     u2_rz(wir_r, vaq);
     u2_rz(wir_r, riq);
@@ -1219,8 +1219,9 @@
 
         _open_pqr (cbbn);
         _open_pqr (cbbr);
-        _open_pq  (cbmt);
         _open_pq  (cbdg);
+        _open_pq  (cbkt);
+        _open_pq  (cbmt);
         _open_pqr (cbpm);
         _open_pq  (cbtr);
 

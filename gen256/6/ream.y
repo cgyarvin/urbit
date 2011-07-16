@@ -72,7 +72,7 @@
 
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 74
+  %expect 89
 
   %pure-parser
   %locations
@@ -272,8 +272,14 @@ wide_c
 
   /** Wide: normals.
   **/
+    wide_norm: di_cabbon body_b_wide    { $$ = _ytrel($1, $2, u2_nul); }
+    wide_norm: di_cabbar body_i_wide    
+              { $$ = _yqual($1, u2_h($2), u2_t($2), u2_nul); }
     wide_norm: di_cabdeg body_d_wide    { $$ = _ytrel($1, $2, u2_nul); }
+    wide_norm: di_cabket body_d_wide    { $$ = _ytrel($1, $2, u2_nul); }
     wide_norm: di_cabmit body_d_wide    { $$ = _ytrel($1, $2, u2_nul); }
+    wide_norm: di_cabpam body_i_wide
+              { $$ = _yqual($1, u2_h($2), u2_t($2), u2_nul); }
     wide_norm: di_cabtar body_d_wide    { $$ = _ytrel($1, $2, u2_nul); }
 
     wide_norm: di_casdeg body_c_wide    { $$ = _ycell($1, $2); }
@@ -391,6 +397,7 @@ wide_c
       { $$ = _ytrel($3, $5, $7); }
     body_q_wide: si_lep g rope w wide w wide si_pel
       { $$ = _ytrel($3, $5, $7); }
+
     hint_b_wide: si_lep g hint w wide g si_pel
       { $$ = _ycell($3, $5); }
 
@@ -442,8 +449,12 @@ tall
 
   /** Tall - normals.
   **/
+    tall_norm: di_cabbar w body_ev_tall   { $$ = _ycell($1, $3); }
+    tall_norm: di_cabbon w body_ew_tall   { $$ = _ycell($1, $3); }
     tall_norm: di_cabdeg w body_ey_tall   { $$ = _ycell($1, $3); }
+    tall_norm: di_cabket w body_ey_tall   { $$ = _ycell($1, $3); }
     tall_norm: di_cabmit w body_ey_tall   { $$ = _ycell($1, $3); }
+    tall_norm: di_cabpam w body_ev_tall   { $$ = _ycell($1, $3); }
     tall_norm: di_cabtar w body_ey_tall   { $$ = _ycell($1, $3); }
 
     tall_norm: di_barbon w body_b_tall    { $$ = _ycell($1, $3); }
@@ -540,7 +551,9 @@ tall
     body_d_tall: bank_tall                  { $$ = $1; }
     body_e_tall: wing                       { $$ = $1; }
     body_ex_tall: gene w wing               { $$ = _ycell($1, $3); }
-    body_ey_tall: bank_tall w wing          { $$ = _ycell($1, $3); }
+    body_ey_tall: tall_star wing          { $$ = _ycell($1, $2); }
+    body_ew_tall: gene w gene w wing        { $$ = _ytrel($1, $3, $5); }
+    body_ev_tall: gene w tall_star wing   { $$ = _ytrel($1, $3, $4); }
     body_f_tall: gene w gene w gene w gene  { $$ = _yqual($1, $3, $5, $7); }
     body_g_tall: term w gene                { $$ = _ycell($1, $3); }
     body_h_tall: gene w rack_tall           { $$ = _ycell($1, $3); }
@@ -665,8 +678,12 @@ tall
     di_casdap: si_cas si_dap  { $$ = c3__csdp; }
     di_castar: si_cas si_tar  { $$ = c3__cstr; }
 
+    di_cabbon: si_cab si_bon  { $$ = c3__cbbn; }
+    di_cabbar: si_cab si_bar  { $$ = c3__cbbr; }
     di_cabdeg: si_cab si_deg  { $$ = c3__cbdg; }
+    di_cabket: si_cab si_ket  { $$ = c3__cbkt; }
     di_cabmit: si_cab si_mit  { $$ = c3__cbmt; }
+    di_cabpam: si_cab si_pam  { $$ = c3__cbpm; }
     di_cabtar: si_cab si_tar  { $$ = c3__cbtr; }
 
     di_barbon: si_bar si_bon  { $$ = c3__brbn; }

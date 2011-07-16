@@ -106,6 +106,7 @@
 #   define c3__cbbn   c3_s4('c','b','b','n')
 #   define c3__cbbr   c3_s4('c','b','b','r')
 #   define c3__cbdg   c3_s4('c','b','d','g')
+#   define c3__cbkt   c3_s4('c','b','k','t')
 #   define c3__cbmt   c3_s4('c','b','m','t')
 #   define c3__cbpm   c3_s4('c','b','p','m')
 #   define c3__cbtr   c3_s4('c','b','t','r')
