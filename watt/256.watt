@@ -2351,8 +2351,8 @@
   ++  find
     ~.  %find
     |=  [way=`*<%read %rite>`%read cog=*term]
-    ::  ~~  (dunk 'type')
-    ::  ~~  (show [%c 'feature'] ?:(.=(%% cog) '%%' [%a cog]))
+    ~~  (dunk 'type')
+    ~~  (show [%c 'feature'] ?:(.=(%% cog) '%%' [%a cog]))
     =-  ?~  hoq
           ~|(%find-none !!)
         u.hoq

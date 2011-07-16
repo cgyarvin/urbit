@@ -262,15 +262,8 @@
                     ? u2_bc(wir_r, c3__dtsg, u2_nul)
                     : u2_rx(wir_r, u2_h(q_gen));
     u2_noun lug = _ap_lung(wir_r, vaq, riq, q_gen);
-    u2_noun dis = 
-      u2_bt
-       (wir_r, c3__mtbn, 
-               _lone(wir_r, u2_blip),
-               _lone(wir_r, u2_bc(wir_r, u2_rx(wir_r, duq), 
-                                         u2_rx(wir_r, doq))));
     u2_noun dat = j2_mcy(Pt6, ap, mold)(wir_r, p_gen, riq);
-    u2_noun dem = u2_bt(wir_r, c3__dgdp, dis, dat);
-    u2_noun cag = u2_bq(wir_r, c3__cssg, doq, lug, dem); 
+    u2_noun cag = u2_bq(wir_r, c3__cssg, doq, lug, dat); 
     u2_noun ret;
 
     ret = _ap_knit(wir_r, hel, cag, r_gen);
