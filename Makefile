@@ -1535,6 +1535,251 @@ J256_OFILES=\
        $(J256_6_OFILES_UT) \
        gen256/watt.o
 
+J255_1_OFILES=\
+       gen255/1/add.o \
+       gen255/1/bex.o \
+       gen255/1/dec.o \
+       gen255/1/div.o \
+       gen255/1/gte.o \
+       gen255/1/gth.o \
+       gen255/1/lte.o \
+       gen255/1/lth.o \
+       gen255/1/mod.o \
+       gen255/1/mul.o \
+       gen255/1/sub.o
+
+J255_2_OFILES=\
+       gen255/2/bind.o \
+       gen255/2/clap.o \
+       gen255/2/drop.o \
+       gen255/2/flop.o \
+       gen255/2/lent.o \
+       gen255/2/levy.o \
+       gen255/2/lien.o \
+       gen255/2/need.o \
+       gen255/2/reel.o \
+       gen255/2/roll.o \
+       gen255/2/skim.o \
+       gen255/2/skip.o \
+       gen255/2/slag.o \
+       gen255/2/snag.o \
+       gen255/2/sort.o \
+       gen255/2/turn.o \
+       gen255/2/weld.o
+
+J255_3_OFILES=\
+       gen255/3/can.o \
+       gen255/3/cap.o \
+       gen255/3/cat.o \
+       gen255/3/con.o \
+       gen255/3/cut.o \
+       gen255/3/dor.o \
+       gen255/3/dis.o \
+       gen255/3/end.o \
+       gen255/3/gor.o \
+       gen255/3/hor.o \
+       gen255/3/lsh.o \
+       gen255/3/mas.o \
+       gen255/3/met.o \
+       gen255/3/mix.o \
+       gen255/3/mug.o \
+       gen255/3/peg.o \
+       gen255/3/rap.o \
+       gen255/3/rip.o \
+       gen255/3/rsh.o \
+       gen255/3/vor.o
+
+J255_4_OFILES=\
+       gen255/4/in.o \
+       gen255/4/by.o \
+       gen255/4/in_has.o \
+       gen255/4/in_gas.o \
+       gen255/4/in_put.o \
+       gen255/4/in_tap.o \
+       gen255/4/by_gas.o \
+       gen255/4/by_get.o \
+       gen255/4/by_has.o \
+       gen255/4/by_put.o 
+
+J255_5_OFILES=\
+       gen255/5/cue.o \
+       gen255/5/jam.o \
+       gen255/5/mat.o \
+       gen255/5/rub.o 
+
+J255_6_OFILES=\
+       gen255/6/ap.o \
+       gen255/6/cell.o \
+       gen255/6/comb.o \
+       gen255/6/cons.o \
+       gen255/6/core.o \
+       gen255/6/face.o \
+       gen255/6/flan.o \
+       gen255/6/flip.o \
+       gen255/6/flor.o \
+       gen255/6/fork.o \
+       gen255/6/hike.o \
+       gen255/6/look.o \
+       gen255/6/ream.o \
+       gen255/6/ut.o
+
+J255_6_OFILES_UT=\
+       gen255/6/ut_bake.o \
+       gen255/6/ut_burn.o \
+       gen255/6/ut_cull.o \
+       gen255/6/ut_emit.o \
+       gen255/6/ut_find.o \
+       gen255/6/ut_fire.o \
+       gen255/6/ut_fish.o \
+       gen255/6/ut_fret.o \
+       gen255/6/ut_fuse.o \
+       gen255/6/ut_gain.o \
+       gen255/6/ut_heal.o \
+       gen255/6/ut_mint.o \
+       gen255/6/ut_orth.o \
+       gen255/6/ut_nest.o \
+       gen255/6/ut_park.o \
+       gen255/6/ut_peek.o \
+       gen255/6/ut_play.o \
+       gen255/6/ut_repo.o \
+       gen255/6/ut_rest.o \
+       gen255/6/ut_seek.o \
+       gen255/6/ut_snap.o \
+       gen255/6/ut_tuck.o
+
+J255_OFILES=\
+       $(J255_1_OFILES) \
+       $(J255_2_OFILES) \
+       $(J255_3_OFILES) \
+       $(J255_4_OFILES) \
+       $(J255_5_OFILES) \
+       $(J255_6_OFILES) \
+       $(J255_6_OFILES_UT) \
+       gen255/watt.o
+
+J254_1_OFILES=\
+       gen254/1/add.o \
+       gen254/1/bex.o \
+       gen254/1/dec.o \
+       gen254/1/div.o \
+       gen254/1/gte.o \
+       gen254/1/gth.o \
+       gen254/1/lte.o \
+       gen254/1/lth.o \
+       gen254/1/mod.o \
+       gen254/1/mul.o \
+       gen254/1/sub.o
+
+J254_2_OFILES=\
+       gen254/2/bind.o \
+       gen254/2/clap.o \
+       gen254/2/drop.o \
+       gen254/2/flop.o \
+       gen254/2/lent.o \
+       gen254/2/levy.o \
+       gen254/2/lien.o \
+       gen254/2/need.o \
+       gen254/2/reel.o \
+       gen254/2/roll.o \
+       gen254/2/skim.o \
+       gen254/2/skip.o \
+       gen254/2/slag.o \
+       gen254/2/snag.o \
+       gen254/2/sort.o \
+       gen254/2/turn.o \
+       gen254/2/weld.o
+
+J254_3_OFILES=\
+       gen254/3/can.o \
+       gen254/3/cap.o \
+       gen254/3/cat.o \
+       gen254/3/con.o \
+       gen254/3/cut.o \
+       gen254/3/dor.o \
+       gen254/3/dis.o \
+       gen254/3/end.o \
+       gen254/3/gor.o \
+       gen254/3/hor.o \
+       gen254/3/lsh.o \
+       gen254/3/mas.o \
+       gen254/3/met.o \
+       gen254/3/mix.o \
+       gen254/3/mug.o \
+       gen254/3/peg.o \
+       gen254/3/rap.o \
+       gen254/3/rip.o \
+       gen254/3/rsh.o \
+       gen254/3/vor.o
+
+J254_4_OFILES=\
+       gen254/4/in.o \
+       gen254/4/by.o \
+       gen254/4/in_has.o \
+       gen254/4/in_gas.o \
+       gen254/4/in_put.o \
+       gen254/4/in_tap.o \
+       gen254/4/by_gas.o \
+       gen254/4/by_get.o \
+       gen254/4/by_has.o \
+       gen254/4/by_put.o 
+
+J254_5_OFILES=\
+       gen254/5/cue.o \
+       gen254/5/jam.o \
+       gen254/5/mat.o \
+       gen254/5/rub.o 
+
+J254_6_OFILES=\
+       gen254/6/ap.o \
+       gen254/6/cell.o \
+       gen254/6/comb.o \
+       gen254/6/cons.o \
+       gen254/6/core.o \
+       gen254/6/face.o \
+       gen254/6/flan.o \
+       gen254/6/flip.o \
+       gen254/6/flor.o \
+       gen254/6/fork.o \
+       gen254/6/hike.o \
+       gen254/6/look.o \
+       gen254/6/ream.o \
+       gen254/6/ut.o
+
+J254_6_OFILES_UT=\
+       gen254/6/ut_bake.o \
+       gen254/6/ut_burn.o \
+       gen254/6/ut_cull.o \
+       gen254/6/ut_emit.o \
+       gen254/6/ut_find.o \
+       gen254/6/ut_fire.o \
+       gen254/6/ut_fish.o \
+       gen254/6/ut_fret.o \
+       gen254/6/ut_fuse.o \
+       gen254/6/ut_gain.o \
+       gen254/6/ut_heal.o \
+       gen254/6/ut_mint.o \
+       gen254/6/ut_orth.o \
+       gen254/6/ut_nest.o \
+       gen254/6/ut_park.o \
+       gen254/6/ut_peek.o \
+       gen254/6/ut_play.o \
+       gen254/6/ut_repo.o \
+       gen254/6/ut_rest.o \
+       gen254/6/ut_seek.o \
+       gen254/6/ut_snap.o \
+       gen254/6/ut_tuck.o
+
+J254_OFILES=\
+       $(J254_1_OFILES) \
+       $(J254_2_OFILES) \
+       $(J254_3_OFILES) \
+       $(J254_4_OFILES) \
+       $(J254_5_OFILES) \
+       $(J254_6_OFILES) \
+       $(J254_6_OFILES_UT) \
+       gen254/watt.o
+
+
 HILL_OFILES=\
        c/hill.o \
        c/main.o \
@@ -1551,10 +1796,8 @@ EYRE_OFILES=\
        $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
-       $(J259_OFILES) \
-       $(J258_OFILES) \
-       $(J257_OFILES) \
-       $(J256_OFILES)
+       $(J255_OFILES) \
+       $(J254_OFILES)
 
 all: $(BIN)/eyre
 

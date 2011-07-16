@@ -4,17 +4,17 @@
 */
   /** Revision number for built-in jets.
   **/
-// #   define  Pit   watt_256
+// #   define  Pit   watt_254
 
   /** Driver control strings for each tier.
   **/
-#   define Pt0           k_256
-#   define Pt1           k_256__a
-#   define Pt2           k_256__a__b
-#   define Pt3           k_256__a__b__c
-#   define Pt4           k_256__a__b__c__d
-#   define Pt5           k_256__a__b__c__d__e
-#   define Pt6           k_256__a__b__c__d__e__f
+#   define Pt0           k_254
+#   define Pt1           k_254__a
+#   define Pt2           k_254__a__b
+#   define Pt3           k_254__a__b__c
+#   define Pt4           k_254__a__b__c__d
+#   define Pt5           k_254__a__b__c__d__e
+#   define Pt6           k_254__a__b__c__d__e__f
 
   /** Driver polarity.
   **/

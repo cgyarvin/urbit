@@ -17,7 +17,7 @@
 #define C3_GLOBAL
 #include "all.h"
 
-#define EyreFirstKernel 259     //  counts down; max 264; > 259 needs nock7
+#define EyreFirstKernel 255     //  counts down; max 264; > 259 needs nock7
 u2_flag EyreSmoke;
 
   /**  Global kernel - used only for trace printing.
@@ -27,6 +27,8 @@ u2_flag EyreSmoke;
   
     /* External drivers.
     */
+      extern u2_ho_driver j2_da(k_254);
+      extern u2_ho_driver j2_da(k_255);
       extern u2_ho_driver j2_da(k_256);
       extern u2_ho_driver j2_da(k_257);
       extern u2_ho_driver j2_da(k_258);
@@ -40,21 +42,23 @@ u2_flag EyreSmoke;
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       u2_ho_driver *HostDriverBase[] = {
-        &j2_da(k_256),
-        &j2_da(k_257),
-        &j2_da(k_258),
-        &j2_da(k_259),
-//          &j2_da(k_260),
-//          &j2_da(k_261),
-//         &j2_da(k_262),
-//         &j2_da(watt_263), 
-//         &j2_da(watt_264), 
+        &j2_da(k_254),
+        &j2_da(k_255),
+//        &j2_da(k_256),
+//        &j2_da(k_257),
+//        &j2_da(k_258),
+//        &j2_da(k_259),
+//        &j2_da(k_260),
+//        &j2_da(k_261),
+//        &j2_da(k_262),
+//        &j2_da(watt_263), 
+//        &j2_da(watt_264), 
         0
       };
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt5Y   k_259__a__b__c__d__e
+#   define Pt5Y   k_255__a__b__c__d__e
 
     u2_noun
     j2_mby(Pt5Y, cue)(u2_wire, u2_noun a);
