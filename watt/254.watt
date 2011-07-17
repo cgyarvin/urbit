@@ -1,3 +1,4 @@
+!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -1500,7 +1501,6 @@
       [%bnpd p=(gene) q=(gene)]
       [%bnld p=(gene) q=(gene)]
       [%brbn p=(gene) q=(gene)]
-      [%brcs p=((list gene))]
       [%brdg p=(gene) q=(gene)]
       [%brdp p=(gene)]
       [%brdt p=(gene)]
@@ -1523,7 +1523,6 @@
       [%csld p=(gene) q=(gene)]
       [%csdp p=(gene) q=((list _[p=(gene) q=(gene)]))]
       [%cspm p=((list gene))]
-      [%cstr p=(gene) q=((list gene))]
       [%cssg p=(gene) q=(gene) r=(gene)]
       [%cszp p=(gene)]
       [%dgkt p=(gene) q=(gene) r=(gene) s=(gene)]
@@ -1571,8 +1570,6 @@
       [%sgsg p=(gene) q=(gene)]
       [%tmbn p=*{%atom %noun %cell %flag %null}]
       [%tmdg p=(gene) q=((list gene))]
-      [%tmdp p=(gene)]
-      [%tmpd p=(gene) q=(gene)]
       [%tmsg p=(gene) q=((list gene))]
       [%zpbn p=(gene)]
       [%zpcb p=*spot q=(gene)]
@@ -1652,7 +1649,6 @@
       %mold  mold
       %open  open
       %rake  rake
-      %snif  snif
     ==
   &=  gen=*gene
   ++  hack
@@ -1733,10 +1729,6 @@
         [%bndp *]  [%bnpd q.gen p.gen]
         [%bnpd *]  [%bnld [%dgdp [~ 1] p.gen] q.gen]
         [%brbn *]  [%pmbn p.gen [[%% [& & q.gen]] ~ ~]]
-        [%brcs *]
-      ?~  p.gen
-        [%zpzp ~]
-      [%brbn [%ktdp [%tmbn %noun] i.p.gen] [%cstr [~ 5] p.gen]]
     ::
         [%brdp *]  [%bnld [%brdt p.gen] %%]
         [%brdg *]  [%pmdg p.gen [[%% [& & q.gen]] ~ ~]]
@@ -1817,15 +1809,6 @@
       |-
       ?~(p.gen [%dtsg 0] [%csdg i.p.gen $(p.gen t.p.gen) [%dtsg 1]])
     ::
-        [%cstr *]
-      |-
-      ?~  q.gen
-        [%zpzp ~]
-      :^    %csdg
-          [%csbn (snif i.q.gen) [%mtbn rake(gen p.gen) ~]]
-        (mold(gen i.q.gen) rake(gen p.gen))
-      $(q.gen t.q.gen)
-    ::
         [%cszp *]   [%csdg p.gen [%dtsg 1] [%dtsg 0]]
         [%dgkt *]   [%dgdp p.gen [%dgdp q.gen [%dgdp r.gen s.gen]]]
         [%dgpd *]   [%dgdp p.gen [%dgdp q.gen r.gen]]
@@ -1905,8 +1888,6 @@
         ==
       ==
     ::
-        [%tmdp *]   (snif p.gen)
-        [%tmpd *]   (mold(gen p.gen) rake(gen q.gen))
         [%tmsg *]
       |-
       ?-  q.gen
@@ -1942,30 +1923,6 @@
       [%mtbn * ~]   p.gen
       [%zpcb *]     rake(gen q.gen)
       [%zpdx *]     rake(gen p.gen)
-    ==
-  ::
-  ++  snif
-    ~.  %snif
-    |=  gen=*gene
-    ^-  *gene
-    ?-  gen
-        [%dgdp *]   [%dgdp $(gen p.gen) $(gen q.gen)]
-        [%dtsg *]   gen
-        [%ktbn *]   $(gen q.gen)
-        [%ktpd *]   $(gen p.gen)
-        [%mttr *]   
-      ?.  ?=([%brcs *] p.gen)
-        [%tmbn %noun]
-      gen(p.p (turn p.p.gen |=(*gene $$(gen ->))))
-    ::
-        [%tmbn *]   gen
-        [%zpcb *]   [%zpcb p.gen $(gen q.gen)]
-        [%zpdx *]   [%zpdx $(gen p.gen)]
-        *
-      =+  bog=~(open ap gen)
-      ?:  .=(bog gen)
-        [%tmbn %noun]
-      $(gen bog)
     ==
   --
 ::
@@ -3073,7 +3030,6 @@
       (cook |=(a=*(list gene) [%cbtr a ~]) (ifix [des sed] (most ace wide)))
       (stag %mtdp (ifix [lep pel] (most ace wide)))
       (stag %tmdg ;~(pfix deg (ifix [lep pel] (most ace wide))))
-      (stag %brcs (ifix [del led] (most ace wide)))
       (cook |=(a=*twig [%mtbn a ~]) rope)
       (stag %cszp ;~(pfix zap wide))
       (stag %mttr ;~(pfix tar wide))
@@ -3137,7 +3093,6 @@
           ;~  pfix  bar
             ;~  pose
               (rune bon %brbn expb)
-              (rune cas %brcs expd)
               (rune deg %brdg expb)
               (rune dap %brdp expa)
               (rune dot %brdt expa)
@@ -3177,7 +3132,6 @@
               (rune led %csld expb)
               (rune pam %cspm expd)
               (rune sig %cssg expc)
-              (rune tar %cstr expi)
               (rune zap %cszp expa)
             ==
           ==
@@ -3249,9 +3203,7 @@
           ==
           ;~  pfix  tam
             ;~  pose
-              (rune dap %tmdp expa)
               (rune deg %tmdg expi)
-              (rune pad %tmpd expb)
               (rune sig %tmsg expi)
             ==
           ==

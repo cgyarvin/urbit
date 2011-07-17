@@ -83,24 +83,6 @@
                     u2_nul, 
                     u2_nul));
   }
-  _open_do_p(brcs)    //  |?
-  {
-    if ( (u2_nul == p_gen) ) {
-      return u2_bc(wir_r, c3__zpzp, u2_nul);
-    }
-    else {
-      u2_noun ip_gen = u2_h(p_gen);
-
-      return u2_bt
-        (wir_r,
-         c3__brbn,
-         u2_bt(wir_r, c3__ktdp, u2_bc(wir_r, c3__tmbn, c3__noun),
-                                u2_rx(wir_r, ip_gen)),
-         u2_bt(wir_r, c3__cstr,
-                      u2_bc(wir_r, u2_nul, _5),
-                      u2_rx(wir_r, p_gen)));
-    }
-  }
   _open_do_p(brdp)    //  |-
   {
     return u2_bt
@@ -917,18 +899,6 @@
          _tmdg_in(wir_r, q_gen));
     }
   }
-  _open_do_p(tmdp)    //  ;-
-  {
-    return j2_mcy(Pt6, ap, sift)(wir_r, p_gen);
-  }
-  _open_do_pq(tmpd)    //  ;+
-  {
-    u2_noun rak = j2_mcy(Pt6, ap, rake)(wir_r, q_gen);
-    u2_noun pro = j2_mcy(Pt6, ap, mold)(wir_r, p_gen, rak);
-
-    u2_rl_lose(wir_r, rak);
-    return pro;
-  }
   _open_do_pq(tmsg)   //  ;~
   {
     if ( (u2_nul == q_gen) ) {
@@ -1196,7 +1166,6 @@
         _open_pq  (bnpd);
 
         _open_pq  (brbn);
-        _open_p   (brcs);
         _open_p   (brdp);
         _open_pq  (brdg);
         _open_p   (brdt);
@@ -1257,9 +1226,7 @@
         _open_pq  (sgsg);
 
         _open_p   (tmbn);
-        _open_p   (tmdp);
         _open_pq  (tmdg);
-        _open_pq  (tmpd);
         _open_pq  (tmsg);
       }
     }
@@ -1497,18 +1464,6 @@
           (wir_r, c3__ktmt, 
                   j2_mcy(Pt6, ap, sift)(wir_r, p_gen), 
                   j2_mcy(Pt6, ap, sift)(wir_r, q_gen));
-      }
-      else if ( u2_yes == u2_as_p(gen, c3__mttr, &p_gen) ) {
-        u2_noun pp_gen;
-
-        if ( u2_yes == u2_as_p(p_gen, c3__brcs, &pp_gen) ) {
-          return u2_bt(wir_r, c3__mttr,  
-                              c3__brcs, 
-                              _open_sift_a(wir_r, pp_gen));
-        }
-        else {
-          return u2_bc(wir_r, c3__tmbn, c3__noun);
-        }
       }
       else if ( u2_yes == u2_as_p(gen, c3__tmbn, &p_gen) ) {
         return u2_rx(wir_r, gen);
