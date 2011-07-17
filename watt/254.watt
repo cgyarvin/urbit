@@ -2177,7 +2177,7 @@
         ::
             *           den
         ==
-    =+  [gax=*(set type) dex=*(set type)]
+    =+  dex=*(set type)
     =<  q
     |-  ^-  [p=*(set type) q=*tank]
     ?-    sut
@@ -2253,10 +2253,10 @@
         =+  yad=repo
         $(sut yad)
       =+  yow=(show [%m '$%d'] u.piv ~)
-      ?:  ?|((~(has in gax) sut) (~(has in dex) sut))
+      ?:  (~(has in dex) sut)
         [dex yow]
-      =+  vir=$(gax (~(put in gax) sut), sut repo)
-      :-  (~(put in p.vir) sut)
+      =+  vir=$(dex (~(put in dex) sut), sut repo)
+      :-  p.vir
       [%palm [~ ~(ram re yow) [':' ~] ~] q.vir ~]
     ::
         *
