@@ -285,7 +285,7 @@
     ?~  b
       ~|('slag-fail' !!)
     ?:  .=(0 a)
-      t.b
+      b
     $(b t.b, a (dec a))
   ::
   ++  snag
@@ -1148,22 +1148,6 @@
     =+  c=$(a (dec a), b +.b)
     [[-.b p.c] q.c]
   ::
-  ++  wind
-    |=  [[tab=@ edg=@] hom=*tape wol=*wall]
-    ^-  *wall
-    =>  .(tab (mod tab (mul 2 (div edg 3))))
-    ?:  (lte (lent hom) (sub edg tab))
-      [(runt [tab 32] hom) wol]
-    =>  .(tab (add tab 2), edg (sub edg 2))
-    =+  mut=(trim (sub edg tab) hom)
-    :-  (runt [(sub tab 2) 32] [92 47 (weld p.mut `hom`[92 47 ~])])
-    =>  .(hom q.mut)
-    |-
-    ?~  hom
-      [(runt [(sub tab 2) 32] [92 47 (runt [(sub edg tab) 32] [92 47 ~])]) wol]
-    =>  .(mut (trim (sub edg tab) hom))
-    [(runt [tab 32] p.mut) $(hom q.mut)]
-  ::
   ::    Tier 5b/1, prettyprinting: processors
   ::
   ++  re
@@ -1188,27 +1172,26 @@
       =+  lug=`*wall`~
       &-  |-  ^-  *wall
           ?-    -.tac
-              %leaf  (wind [tab edg] p.tac lug)
+              %leaf  (rig p.tac)
               %palm 
             ?:  fit
               (rig ram)
             ?~  q.tac
-              (wind [tab edg] q.p.tac lug)
+              (rig q.p.tac)
             ?~  t.q.tac
-              (wind [(add tab 2) edg] q.p.tac $(tac i.q.tac))
+              (rig(tab (add 2 tab), lug $(tac i.q.tac)) q.p.tac)
             =>  .(q.tac `*(list tank)`q.tac)
             =+  lyn=(mul 2 (lent q.tac))
-            =+  vaz=(lent q.p.tac)
             =+  ^=  qyr
                 |-  ^-  *wall
                 ?~  q.tac
                   lug
                 %=  $$
                   tac i.q.tac
-                  tab (sub lyn 2)
+                  tab (add tab (sub lyn 2))
                   lug $(q.tac t.q.tac, lyn (sub lyn 2))
                 ==
-            [q.p.tac qyr]
+            (wig(lug qyr) q.p.tac)
           ::
               %rose
             ?:  fit
@@ -1220,7 +1203,7 @@
               $$(tac i.q.tac, lug $(q.tac t.q.tac), tab din)
             ?:  .=(%% q.p.tac)
               gyl
-            (rig(lug gyl) q.p.tac)
+            (wig(lug gyl) q.p.tac)
           ==
       ::
       ++  din  (mod (add 2 tab) (mul 2 (div edg 3)))
@@ -1242,6 +1225,20 @@
           lug
         =>  .(mut (trim (sub edg tab) hom))
         [(runt [tab 32] p.mut) $(hom q.mut)]
+      ::
+      ++  wig
+        |=  hom=*tape
+        ^-  *wall
+        ?~  lug
+          (rig hom)
+        =+  lin=(lent hom)
+        =+  wug=:(add 1 tab lin)
+        ?.  =+  mir=i.lug 
+            |-  ?~  mir 
+                  |
+                ?|(.=(0 wug) ?&(.=(' ' i.mir) $(mir t.mir, wug (dec wug))))
+          (rig hom)
+        [(runt [tab 32] (weld hom `*tape`[' ' (slag wug i.lug)])) t.lug]
       --
     --
   ::
@@ -1360,7 +1357,9 @@
         [s=%a c=@]        [%leaf (mesc (rip 3 c.vem))]
         [s=%b c=*]        (shop c.vem slyb)
         [s=[%c p=@] c=*]
-      [%palm [~ (mesc (rip 3 p.s.vem)) [':' ' ' ~] ~] [$(vem c.vem) ~]]
+      :+  %palm
+        [~ (mesc (rip 3 p.s.vem)) [':' ' ' ~] ~] 
+      [$(vem c.vem) ~]
     ::
         [s=%d c=*]        (shop c.vem slyd)
         [s=%o c=*]        
@@ -1923,6 +1922,7 @@
       [%mtbn * ~]   p.gen
       [%zpcb *]     rake(gen q.gen)
       [%zpdx *]     rake(gen p.gen)
+      *             ~|(%rake-gene !!)
     ==
   --
 ::
@@ -2231,7 +2231,10 @@
         [%cube *]   [dex (show ?:(.=(0 p.sut) '~' [%q p.sut]))]
         [%face *]   
       =+  vir=$(sut q.sut)
-      [p.vir [%palm [~ (rip 3 p.sut) ['=' ~] ~] [q.vir ~]]]
+      :-  p.vir
+      :+  %palm
+        [[' ' ~] ['=' ~] ['(' ~] [')' ~]]
+      [[%leaf (rip 3 p.sut)] q.vir ~]
     ::
         [%fork *]
       ?:  .=([%fork [%cube 0] [%cube 1]] sut)
@@ -2245,7 +2248,7 @@
           =+  dey=$$(sut p.q.sut, dex p.vir)
           =+  hoy=$(sut q.sut, p.vir p.dey)
           [p.hoy [q.dey q.hoy]]
-      [p.tov [%rose [[' ' ~]  ['<' ~] ['>' ~]] q.vir q.tov]]
+      [p.tov [%rose [[' ' ~]  ['{' ~] ['}' ~]] q.vir q.tov]]
     ::
         [%hold *]
       =+  piv=(~(get by gil) sut)
@@ -2257,7 +2260,9 @@
         [dex yow]
       =+  vir=$(dex (~(put in dex) sut), sut repo)
       :-  p.vir
-      [%palm [~ ~(ram re yow) [':' ~] ~] q.vir ~]
+      :+  %palm
+        [[' ' ~] [':' ~] ['(' ~] [')' ~]]
+      [[%leaf ~(ram re yow)] q.vir ~]
     ::
         *
       !!
@@ -2428,7 +2433,7 @@
     |=  ref=*type
     =+  bix=*(set _[*type *type])
     |-  ^-  *type
-    ?:  .=(sut ref)
+    ?:  ?|(.=(sut ref) .=(%noun ref))
       sut
     ?-    sut
         %atom 

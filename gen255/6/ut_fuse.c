@@ -33,7 +33,7 @@
   {
     u2_noun p_sut, q_sut;
 
-    if ( u2_yes == u2_sing(sut, ref) ) {
+    if ( u2_yes == u2_sing(sut, ref) || (c3__noun == ref) ) {
       return u2_rx(wir_r, sut);
     }
     if ( u2_no == u2_dust(sut) ) switch ( sut ) {
@@ -122,6 +122,8 @@
       {
         u2_noun hud = u2_bc(wir_r, u2_rx(wir_r, sut), 
                                    u2_rx(wir_r, ref));
+
+        c3_assert(c3__noun != ref);
 
         if ( u2_yes == j2_mcc(Pt4, in, has)(wir_r, bix, hud) ) {
           u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "type", sut);

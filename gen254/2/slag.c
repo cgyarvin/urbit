@@ -28,7 +28,7 @@
       if ( u2_no == u2_dust(a) ) {
         return u2_none;
       }
-      return u2_rx(wir_r, u2_t(a));
+      return u2_rx(wir_r, a);
     }
   }
   u2_noun                                                         // transfer
