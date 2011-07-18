@@ -1358,8 +1358,8 @@
         [s=%b c=*]        (shop c.vem slyb)
         [s=[%c p=@] c=*]
       :+  %palm
-        [~ (mesc (rip 3 p.s.vem)) [':' ' ' ~] ~] 
-      [$(vem c.vem) ~]
+        [['.' ~] ['-' ~] ~ ~]
+      [[%leaf (mesc (rip 3 p.s.vem))] $(vem c.vem) ~]
     ::
         [s=%d c=*]        (shop c.vem slyd)
         [s=%o c=*]        
@@ -1834,10 +1834,9 @@
         [%mtpd *]   [%mtdp p.gen q.gen r.gen ~]
         [%mtsg *]   [%mtbr p.gen q.gen [[[~ 5] r.gen] ~]]
         [%mttr *]   [%ktsg [%bnld p.gen [%mtbn [%% ~] ~]]]
-        [%pmdp *]   [%bnld [%pmdt q.gen] p.gen] 
+        [%pmdp *]   [%bnld [%pmdt (~(put by q.gen) %% [& & p.gen])] %%]
         [%pmbn *]   [%bnpd p.gen [%pmdt q.gen]]
         [%pmzp *]   [%bnld [%zpmt ~] [%pmbn p.gen q.gen]]
-    ::
         [%sgbn *]   [%sgld [%germ p.gen] q.gen]
         [%sgbr *]   [%sgld [%bean p.gen] q.gen]
         [%sgdg *]   [%sgld [%bank %dtsg p.gen] q.gen]
@@ -1863,7 +1862,6 @@
         [%sgpd *]   [%sgld [%memo %dtsg p.gen] q.gen]
         [%sgpm *]   [%sgld [%loaf p.gen] q.gen]
         [%sgsg *]   [%sgld [%mean [%brdt p.gen]] q.gen]
-    ::
         [%tmbn *]
       ?-  p.gen
         %atom   [%ktdp [%dtpd %dtsg 0] [%dtsg 0]]
@@ -2149,10 +2147,45 @@
         %void       %void
     ==
   ::
+  ++  croc
+    ?>  ?=([%core *] sut)
+    |-  ^-  *_^([& p=*tape] [| p=*tape])
+    =+  ^=  voy
+        |-  ^-  *(unit _[p=@ q=@]) 
+        ?:  ?=([%cube @] p.sut)
+          [~ 0 p.p.sut]
+        ?:  ?=([%core *] p.sut)
+          =+  voy=$(sut p.sut)
+          ?~  voy
+            ~
+          [~ .+(p.u.voy) q.u.voy]
+        ~
+    ?~  voy
+      =-  :-  |
+          %~  ram
+            re
+          ?:  .=(1 q.hab)
+            (show [%m '|%a%x'] p.hab r.hab ~)
+          (show [%m '&%d%a%x'] q.hab p.hab r.hab ~)
+      ^=  hab  ^-  [p=@ q=@ r=@]
+      :+  ?-(p.q.sut %gold '.', %iron '=', %lead ':', %zinc '%')
+        |-  ^-  @
+        ?-  q.r.q.sut
+          ~        0
+          [* ~ ~]  1
+          [* ~ *]  .+($(q.r.q.sut r.q.r.q.sut))
+          [* * ~]  .+($(q.r.q.sut l.q.r.q.sut))
+          [* * *]  .+((add $(q.r.q.sut l.q.r.q.sut) $(q.r.q.sut r.q.r.q.sut)))
+        ==
+      (end 2 4 (mug q.r.q.sut))
+    [& ~(ram re (show [%m '#%d:%d'] p.u.voy q.u.voy ~))]
+  ::
   ++  dunk
     |=  paz=*term
     ^-  *tank
-    =-  [%palm [~ (mesc (rip 3 paz)) [':' ' ' ~] ~] [duc ~]]
+    =-  :+  %palm
+          [[':' ~] ['-' ~] ~ ~]
+        [[%leaf (mesc (rip 3 paz))] duc ~]
     ^=  duc
     =+  ^=  gil
         =+  den=[p=`@`1 q=*(map type nat)]
@@ -2161,11 +2194,7 @@
         |-  ^-  den
         ?-    sut
             [%cell *]   $(sut q.sut, den $(sut p.sut))
-            [%core *]
-          ?:  .=(p.sut q.q.sut) 
-            $(sut p.sut)
-          $(sut p.sut, den $(sut q.q.sut))
-        ::
+            [%core *]   $(sut p.sut)
             [%face *]   $(sut q.sut)
             [%fork *]   $(sut q.sut, den $(sut p.sut))
             [%hold *]
@@ -2197,43 +2226,20 @@
       [p.tov [%rose [[' ' ~]  ['[' ~] [']' ~]] q.vir q.tov]]
     ::
         [%core *]
-      =+  gep=?:(?=([[%% [& *]] ~ ~] q.r.q.sut) '|' '&')
-      =+  ^=  nox
-          ^-  @
-          ?-(p.q.sut %gold '.', %iron '=', %lead ':')
-      =+  wil=?:(.=(p.sut q.q.sut) [nox '(' ~] [nox nox '(' ~])
-      =+  ^=  dyr
-          =+  dyr=`@`0
-          |-  ^-  @
-          ?-  q.r.q.sut
-            ~         dyr
-            [* ~ ~]   .+(dyr)
-            [* ~ *]   .+($(q.r.q.sut r.q.r.q.sut))
-            [* * ~]   .+($(q.r.q.sut l.q.r.q.sut))
-            [* * *]   .+  %+  add
-                            $(q.r.q.sut l.q.r.q.sut)
-                          $(q.r.q.sut r.q.r.q.sut)
-          ==
-      =+  tas=(end 2 4 (mug q.r.q.sut))
-      =+  ^=  lor
-          :-  %leaf
-          ?:  .=('&' gep)
-            ~(ram re (show [%m '&%d:%x'] dyr tas ~))
-          ~(ram re (show [%m '|:%x'] tas ~))
-      =+  vir=$(sut p.sut)
-      =+  ^=  rey
-          ?:  .=(p.sut q.q.sut)
-            [p=p.vir q=[q.vir lor ~]]
-          =+  zam=$(sut q.q.sut, dex p.vir) 
-          [p=p.zam q=[q.vir q.zam lor ~]]
-      [p.rey [%palm [[' ' ~] wil ~ [')' ~]] q.rey]]
+      =+  rog=croc
+      ?-  -.rog
+          &  [dex [%leaf p.rog]]
+          |
+        =+  vir=$(sut p.sut)
+        [p.vir [%rose [[' ' ~]  ['[' ~] [']' ~]] q.vir [%leaf p.rog] ~]]
+      ==
     ::
         [%cube *]   [dex (show ?:(.=(0 p.sut) '~' [%q p.sut]))]
         [%face *]   
       =+  vir=$(sut q.sut)
       :-  p.vir
       :+  %palm
-        [[' ' ~] ['=' ~] ['(' ~] [')' ~]]
+        [['.' ~] ['=' ~] ~ ~]
       [[%leaf (rip 3 p.sut)] q.vir ~]
     ::
         [%fork *]
@@ -2261,7 +2267,7 @@
       =+  vir=$(dex (~(put in dex) sut), sut repo)
       :-  p.vir
       :+  %palm
-        [[' ' ~] [':' ~] ['(' ~] [')' ~]]
+        [['.' ~] [':' ~] ~ ~]
       [[%leaf ~(ram re yow)] q.vir ~]
     ::
         *

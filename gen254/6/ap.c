@@ -694,10 +694,19 @@
   }
   _open_do_pq(pmdp)   //  &-
   {
-    return u2_bt
-      (wir_r, c3__bnld, 
-              u2_bc(wir_r, c3__pmdt, u2_rx(wir_r, q_gen)),
-              u2_rx(wir_r, p_gen));
+    //  [%pmdp *]   [%bnld [%pmdt (~(put by q.gen) %% [& & p.gen])] %%]
+    //
+    u2_noun diz = u2_bt(wir_r, u2_yes, u2_yes, u2_rx(wir_r, p_gen));
+    u2_noun ret = u2_bt
+      (wir_r,
+       c3__bnld,
+       u2_bc(wir_r,
+             c3__pmdt,
+             j2_mcc(Pt4, by, put)(wir_r, q_gen, u2_blip, diz)),
+       u2_blip);
+
+    u2_rz(wir_r, diz);
+    return ret;
   }
   _open_do_pq(pmzp)   //  |!
   {
