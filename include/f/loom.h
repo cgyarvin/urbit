@@ -27,7 +27,7 @@
       extern volatile sig_atomic_t LoomStop;
 #   endif
 
-#     define   LoomFrameMax  131072
+#     define   LoomFrameMax  16384
 #     define   LoomSink \
         (LoomFrame == LoomFrameMax ? (LoomStop = 1) : LoomFrame++)
 #     define   LoomRise \
