@@ -449,29 +449,6 @@
              ? u2_bc(wir_r, _0, _0)
              : _mint_make(wir_r, van, sut, hif, q_gen));
       }
-      case c3__ktpd: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
-      _mint_used(wir_r);
-      {
-        u2_noun zut = j2_mcy(Pt6, ut, play)(wir_r, van, sut, p_gen);
-
-        if ( (u2_yes ==_mint_vet(wir_r, van)) &&
-             (u2_no == j2_mcy(Pt6, ut, nest)(wir_r, van, gol, zut)) )
-        {
-          u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "need", gol);
-          u2_noun niz = j2_mcy(Pt6, ut, dunq)(wir_r, van, "have", sut);
-
-          u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
-          u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
-
-          return u2_bl_error(wir_r, "mint-cool");
-        }
-        else {
-          ret = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, zut, q_gen);
-
-          u2_rl_lose(wir_r, zut);
-          return ret;
-        }
-      }
       case c3__ktsg: p_gen = u2_t(gen);
       _mint_used(wir_r);
       {

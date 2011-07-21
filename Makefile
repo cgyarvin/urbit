@@ -61,8 +61,7 @@ P_OFILES=\
        p/list.o \
        p/pool.o \
        p/prep.o \
-       p/saur.o \
-       p/watt.o
+       p/saur.o
 
 J267_1_OFILES=\
        gen267/1/add.o \
@@ -1736,6 +1735,7 @@ J254_6_OFILES=\
        gen254/6/cons.o \
        gen254/6/core.o \
        gen254/6/face.o \
+       gen254/6/fine.o \
        gen254/6/flan.o \
        gen254/6/flip.o \
        gen254/6/flor.o \

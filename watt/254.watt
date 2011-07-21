@@ -1535,8 +1535,11 @@
       [%dtsg p=*mud]
       [%dttr p=(gene) q=(gene)]
       [%ktbn p=*term q=(gene)]
+      [%ktbr p=(gene)]
+      [%ktdl p=(gene) q=(gene)]
       [%ktdp p=(gene) q=(gene)]
-      [%ktpd p=(gene) q=(gene)]
+      [%ktld p=(gene) q=(gene)]
+      [%ktpm p=(gene)]
       [%ktsg p=(gene)]
       [%mtbn p=(twig) q=((list _[p=(gene) q=(gene)]))]
       [%mtbr p=(twig) q=(gene) r=((list _[p=(gene) q=(gene)]))]
@@ -1589,6 +1592,7 @@
       [%core p=(type) q=(coil)]
       [%cube p=*mud]
       [%face p=*term q=(type)]
+      [%fine p=*{%pure %very} q=*type r=*type]
       [%fork p=(type) q=(type)]
       [%hold p=((list _[p=(type) q=(gene)]))]
     --
@@ -1626,6 +1630,14 @@
   ?:  .=(%void der)
     %void
   [%face cog der]
+::
+++  fine
+  ~.  %fine
+  |=  [fuv=*{%pure %very} lup=*type mar=*type]
+  ^-  *type
+  ?:  ?|(.=(%void lup) .=(%void mar))
+    %void
+  [%fine fuv lup mar]
 ::
 ++  flag  ^-(*type [%fork [%cube 0] [%cube 1]])
 ++  fork
@@ -1707,7 +1719,6 @@
     :: 
         [%ktbn *]     [%ktbn p.gen $(gen q.gen)]
         [%ktdp *]     $(gen p.gen)
-        [%ktpd *]     [%ktpd p.gen $(gen q.gen)]
         [%mtbn * ~]   [%mtbn p.gen [[[~ 5] [%mtbn hep ~]] ~]]
         [%mtdp * ~]   [%mtdp p.gen [%mtbn hep ~] ~]
         [%mttr *]     [%mtdp p.gen [%mtbn hep ~] ~]
@@ -1800,8 +1811,9 @@
         [%zpzp ~]
       :^    %csdg
           [%csbn p.i.q.gen p.gen]
-        [%bnld [%mtbn ~ [[p.gen [%ktpd p.i.q.gen p.gen]] ~]] q.i.q.gen]
+        q.i.q.gen
       $(q.gen t.q.gen)
+    ::
     ::
         [%csld *]   [%csdg p.gen q.gen [%zpzp ~]]
         [%cspm *]
@@ -2116,7 +2128,8 @@
         [%cell *]   [$(sut p.sut) $(sut q.sut)]
         [%core *]   [$(sut p.sut) p.r.q.sut]
         [%cube *]   p.sut
-        [%face *]   $(sut q.sut)
+        [%face *]   $(sut repo)
+        [%fine *]   $(sut repo)       ::  XX actually refine
         [%fork *]   $(sut p.sut)
         [%hold *]   $(sut repo)
         %noun       0
@@ -2141,6 +2154,7 @@
         [%core *]   ?.(.=(2 now) sut (core $$(axe lat, sut p.sut) q.sut))
         [%cube *]   ?.(.?(p.sut) %void (reco |=(p=*type $$(sut p))))
         [%face *]   (reco |=(p=*type (face p.sut $$(sut p))))
+        [%fine *]   (reco |=(p=*type (fine p.sut q.sut $$(sut p))))
         [%fork *]   (fork $(sut p.sut) $(sut q.sut))
         [%hold *]   (reco |=(p=*type $$(sut p)))
         %noun       (reco |=(p=*type $$(sut p)))
@@ -2195,7 +2209,8 @@
         ?-    sut
             [%cell *]   $(sut q.sut, den $(sut p.sut))
             [%core *]   $(sut p.sut)
-            [%face *]   $(sut q.sut)
+            [%face *]   $(sut repo)
+            [%fine *]   $(sut repo)
             [%fork *]   $(sut q.sut, den $(sut p.sut))
             [%hold *]
           ?:  (~(has in vax) sut)
@@ -2231,7 +2246,7 @@
           &  [dex [%leaf p.rog]]
           |
         =+  vir=$(sut p.sut)
-        [p.vir [%rose [[' ' ~]  ['[' ~] [']' ~]] q.vir [%leaf p.rog] ~]]
+        [p.vir [%rose [[' ' ~]  ['(' ~] [')' ~]] q.vir [%leaf p.rog] ~]]
       ==
     ::
         [%cube *]   [dex (show ?:(.=(0 p.sut) '~' [%q p.sut]))]
@@ -2241,6 +2256,13 @@
       :+  %palm
         [['.' ~] ['=' ~] ~ ~]
       [[%leaf (rip 3 p.sut)] q.vir ~]
+    ::
+        [%fine *]
+      =+  vir=$(sut r.sut)
+      :-  p.vir
+      :+  %palm
+        [['.' ~] ['^' ~] ~ ~]
+      [[%leaf (slyx (end 2 4 (mug q.sut)))] q.vir ~]
     ::
         [%fork *]
       ?:  .=([%fork [%cube 0] [%cube 1]] sut)
@@ -2334,6 +2356,9 @@
         [~ 1 & q.sut]
       ~
     ::
+        [%fine *]
+      $(sut repo)
+    ::
         [%fork *]
       =+  hax=$(sut p.sut)
       =+  yor=$(sut q.sut)
@@ -2414,6 +2439,7 @@
         [%core *]   [0 0]
         [%cube *]   [5 [1 p.sut] [0 axe]]
         [%face *]   $(sut q.sut)
+        [%fine *]   [0 0]
         [%fork *]   (flor $(sut p.sut) $(sut q.sut))
         [%hold *]
       ?:  (~(has in vit) sut)
@@ -2464,6 +2490,7 @@
       ==
     ::
         [%face *]     (face p.sut $(sut q.sut))
+        [%fine *]     (fine p.sut q.sut $(sut r.sut))
         [%fork *]     (fork $(sut p.sut) $(sut q.sut))
         [%hold *]
       ?:  (~(has in bix) [sut ref])
@@ -2499,10 +2526,11 @@
         ref
       |-  ^-  *type
       ?-    sut
-          [%core *]   ref
-          [%face *]   (face p.sut ref)
+          [%face *]   ?.(.=(u.qog p.sut) ~|('heal-name' !!) (face p.sut ref))
           [%fork *]   (fork $(sut p.sut) $(sut q.sut))
-          *           $(sut repo)
+          [%fine *]   $(sut repo)
+          [%hold *]   $(sut repo)
+          *           ~|('heal-name' !!)
       ==
     =+  [now=(cap axe) lat=(mas axe)]
     |-  ^-  *type
@@ -2620,14 +2648,6 @@
         =+  hif=(nice (play p.gen))
         [hif (boil |.(q:$$(gen q.gen, gol hif)))]
       ::
-          [%ktpd *]                                                   ::  ^+
-        =+  zut=(play p.gen)
-        ?.  ?|(!vet (nest(sut gol) zut))
-          ~~  (dunk(sut gol) 'need')
-          ~~  (dunk 'have')
-          ~|(%mint-cool !!)
-        $(gen q.gen, gol zut)
-      ::
           [%ktsg *]                                                   ::  ^~
         =+  nef=$(gen p.gen)
         ~~  (dunk %ktsg)
@@ -2714,7 +2734,7 @@
     &.
     ++  cong
       ^-  ?
-      ?>  ?&(?=([%core *] sut) ?=([%core *] ref))   :: XX generic?
+      ?>  ?&(?=([%core *] sut) ?=([%core *] ref))   :: XX use +-
       ?:  .=(q.sut q.ref)
         dext(sut p.sut, ref p.ref)
       ?.  ?&  dext(sut q.q.sut, ref p.sut)
@@ -2792,6 +2812,11 @@
       ::
           [%cube *]   ?.(?=([%cube *] ref) sint .=(sut ref))
           [%face *]   dext(sut q.sut)
+          [%fine *]
+        ?.  ?=([%fine *] ref)
+          sint
+        ?&(.=(q.sut q.ref) dext(sut r.sut, ref r.ref))
+      ::
           [%fork *]
         ?.  ?=(*%{%atom %noun [%cell *] [%cube *] [%core *]} ref)
           sint
@@ -2846,7 +2871,6 @@
           *           $(sut ref, ref sut)
       ==
     ::
-        [%face *]   $(sut q.sut)
         [%fork *]   ?&($(sut p.sut) $(sut q.sut))
         [%hold *]
       ?|
@@ -2856,6 +2880,7 @@
     ::
         %noun       (nest(sut %void) ref)
         %void       &
+        *           $(sut repo) 
     ==
   ::
   ++  park
@@ -2912,9 +2937,8 @@
         $(sut [%cube -.p.sut], axe lat)
       $(sut [%cube +.p.sut], axe lat)
     ::
-        [%face *]   $(sut q.sut)
         [%fork *]   (fork $(sut p.sut) $(sut q.sut))
-        [%hold *]   $(sut repo)
+        *           $(sut repo)
     ==
   ::
   ++  play
@@ -2937,6 +2961,7 @@
         [%cube *]   ?.(.?(p.sut) %atom [%cell [%cube -.p.sut] [%cube +.p.sut]])
         [%core *]   [%cell p.sut %noun]
         [%face *]   q.sut
+        [%fine *]   r.sut
         [%hold *]   (rest p.sut)
         %noun       [%fork %atom [%cell %noun %noun]]
     ==
@@ -2991,6 +3016,7 @@
       ==
     ::
         [%face *]   [%ktbn p.sut $(sut q.sut)]
+        [%fine *]   $(sut repo)
         [%hold *]   $(sut repo)
         *           gen
     ==
@@ -3167,7 +3193,6 @@
             ;~  pose
               (rune bon %ktbn expg)
               (rune dap %ktdp expb)
-              (rune pad %ktpd expb)
               (rune sig %ktsg expa)
             ==
           ==

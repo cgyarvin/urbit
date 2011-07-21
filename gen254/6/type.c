@@ -6,7 +6,7 @@
 /* new template for type switching
 */
 {
-  u2_noun p_sut, q_sut;
+  u2_noun p_sut, q_sut, r_sut;
 
   if ( u2_no == u2_dust(sut) ) switch ( sut ) {
     default: return u2_bl_bail(wir_r, c3__fail);
@@ -34,6 +34,9 @@
     {
     }
     case c3__face: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
+    {
+    }
+    case c3__fine: u2_bi_trel(wir_r, u2_t(sut), &p_sut, &q_sut, &r_sut);
     {
     }
     case c3__fork: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);

@@ -139,6 +139,13 @@
           }
         }
       }
+      case c3__fine: {
+        u2_type fop = j2_mcy(Pt6, ut, repo)(wir_r, van, sut);
+        u2_noun ret = _find_in(wir_r, van, fop, way, cog, gil);
+        
+        u2_rz(wir_r, fop);
+        return ret;
+      }
       case c3__fork: {
         if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
           return u2_bl_bail(wir_r, c3__fail);

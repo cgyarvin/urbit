@@ -103,7 +103,7 @@
            u2_noun ref,
            u2_noun bix)
   {
-    u2_noun p_sut, q_sut;
+    u2_noun p_sut, q_sut, r_sut;
     u2_noun p_ref, q_ref;
 
     if ( u2_no == u2_dust(sut) ) switch ( sut ) {
@@ -196,6 +196,13 @@
           goto fail;
         } else {
           return _orth_in(wir_r, van, q_sut, ref, bix);
+        }
+      }
+      case c3__fine: {
+        if ( u2_no == u2_as_trel(u2_t(sut), &p_sut, &q_sut, &r_sut) ) {
+          goto fail;
+        } else {
+          return _orth_in(wir_r, van, r_sut, ref, bix);
         }
       }
       case c3__fork: {

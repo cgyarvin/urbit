@@ -56,10 +56,11 @@
                     j2_mcx(Pt6, ut, snap)(wir_r, van, q_sut, gen));
         }
       }
+      case c3__fine: 
       case c3__hold: {
         p_sut = u2_t(sut);
         {
-          u2_noun fop = j2_mcy(Pt6, ut, rest)(wir_r, van, sut, p_sut);
+          u2_noun fop = j2_mcy(Pt6, ut, repo)(wir_r, van, sut);
           
           ret = j2_mcx(Pt6, ut, snap)(wir_r, van, fop, gen);
           u2_rl_lose(wir_r, fop);

@@ -26,7 +26,7 @@
 #   define  Tier3         u2_jet_live 
 #   define  Tier4         u2_jet_live
 #   define  Tier5         u2_jet_live
-#   define  Tier6         u2_jet_live
+#   define  Tier6         u2_jet_dead
 #   define  Tier6_a       Tier6
 #   define  Tier6_b       Tier6
 // #   define  Tier6_b       (u2_jet_live | u2_jet_test)
@@ -370,14 +370,20 @@
                         u2_noun con);                             //  retain
 
       u2_noun                                                     //  transfer
-      j2_mby(Pt6, fork)(u2_wire wir_r, 
-                        u2_noun hoz,                              //  retain
-                        u2_noun bur);                             //  retain
-
-      u2_noun                                                     //  transfer
       j2_mby(Pt6, face)(u2_wire wir_r, 
                         u2_noun cog,                              //  retain
                         u2_noun tip);                             //  retain
+
+      u2_noun                                                     //  transfer
+      j2_mby(Pt6, fine)(u2_wire wir_r, 
+                        u2_noun fuv,                              //  retain
+                        u2_noun lup,                              //  retain
+                        u2_noun mar);                             //  retain
+
+      u2_noun                                                     //  transfer
+      j2_mby(Pt6, fork)(u2_wire wir_r, 
+                        u2_noun hoz,                              //  retain
+                        u2_noun bur);                             //  retain
 
       u2_noun                                                     //  transfer
       j2_mby(Pt6, flip)(u2_wire wir_r, 

@@ -374,22 +374,6 @@
 
         return ret;
       }
-      case c3__ktpd: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
-      {
-        u2_noun zut = j2_mcy(Pt6, ut, play)(wir_r, van, sut, p_gen);
-
-        if ( (u2_yes ==_fern_vet(wir_r, van)) &&
-             (u2_no == j2_mcy(Pt6, ut, nest)(wir_r, van, gol, zut)) )
-        {
-          return u2_bl_error(wir_r, "fern-cool");
-        }
-        else {
-          ret = _fern_in(wir_r, van, sut, dox, q_gen, zut);
-
-          u2_rl_lose(wir_r, zut);
-          return ret;
-        }
-      }
       case c3__ktsg: p_gen = u2_t(gen);
       {
         return _fern_in(wir_r, van, sut, dox, p_gen, gol);

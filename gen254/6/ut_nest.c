@@ -169,7 +169,7 @@
                 u2_noun ref,
                 u2_noun gil)
   {
-    u2_noun p_sut, q_sut, p_ref, q_ref;
+    u2_noun p_sut, q_sut, r_sut, p_ref, q_ref, r_ref;
 
     if ( (u2_no == u2_dust(sut)) ) switch ( sut ) {
       default: return u2_bl_bail(wir_r, c3__fail);
@@ -227,6 +227,18 @@
           return u2_bl_bail(wir_r, c3__fail);
         } else { 
           return _nest_dext(wir_r, van, q_sut, ref, gil);
+        }
+      }
+      case c3__fine: {
+        if ( (u2_no == u2_as_qual(sut, 0, &p_sut, &q_sut, &r_sut)) ) {
+          return u2_bl_bail(wir_r, c3__fail);
+        } else { 
+          if ( (u2_yes == u2_as_pqr(ref, c3__fine, &p_ref, &q_ref, &r_ref)) ) {
+            return u2_and
+              (u2_sing(q_sut, q_ref),
+               _nest_dext(wir_r, van, r_sut, r_ref, gil));
+          }
+          else return _nest_sint(wir_r, van, sut, ref, gil);
         }
       }
       case c3__fork: {

@@ -15,15 +15,16 @@
   _heal_by(u2_wire wir_r,
            u2_noun van,
            u2_noun sut,
+           u2_noun qog, 
            u2_noun ref)
   {
     u2_noun p_sut, q_sut;
 
     if ( u2_no == u2_dust(sut) ) {
-      goto repo;
+      return u2_bl_error(wir_r, "heal-name");
     }
     else switch ( u2_h(sut) ) {
-      default: goto repo;
+      default: return u2_bl_error(wir_r, "heal-name");
 
       case c3__core:
       {
@@ -31,26 +32,29 @@
       }
       case c3__face: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {
-        return j2_mby(Pt6, face)(wir_r, p_sut, ref);
+        if ( u2_yes == u2_sing(p_sut, u2_t(qog)) ) {
+          return j2_mby(Pt6, face)(wir_r, p_sut, ref);
+        }
+        else return u2_bl_error(wir_r, "heal-name");
+      }
+      case c3__fine: 
+      case c3__hold: {
+        u2_noun rep = j2_mcy(Pt6, ut, repo)(wir_r, van, sut);
+        u2_noun ret = _heal_by(wir_r, van, rep, qog, ref);
+
+        u2_rz(wir_r, rep);
+        return ret;
       }
       case c3__fork: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {
-        u2_noun dis = _heal_by(wir_r, van, p_sut, ref);
-        u2_noun dat = _heal_by(wir_r, van, q_sut, ref);
+        u2_noun dis = _heal_by(wir_r, van, p_sut, qog, ref);
+        u2_noun dat = _heal_by(wir_r, van, q_sut, qog, ref);
         u2_noun ret = j2_mby(Pt6, fork)(wir_r, dis, dat);
 
         u2_rl_lose(wir_r, dis);
         u2_rl_lose(wir_r, dat);
         return ret;
       }
-    }
-
-    repo: {
-      u2_noun rep = j2_mcy(Pt6, ut, repo)(wir_r, van, sut);
-      u2_noun ret = _heal_by(wir_r, van, rep, ref);
-
-      u2_rz(wir_r, rep);
-      return ret;
     }
   }
 
@@ -135,7 +139,7 @@
     if ( _1 == axe ) {
       if ( u2_nul == qog ) {
         return u2_rx(wir_r, ref);
-      } else return _heal_by(wir_r, van, sut, ref);
+      } else return _heal_by(wir_r, van, sut, qog, ref);
     }
     else {
       u2_atom now = j2_mbc(Pt3, cap)(wir_r, axe);

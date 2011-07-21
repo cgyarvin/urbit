@@ -18,7 +18,7 @@
       return u2_rx(wir_r, sut);
     }
     else {
-      u2_noun p_sut, q_sut;
+      u2_noun p_sut, q_sut, r_sut;
       u2_noun pro;
 
       if ( (u2_no == u2_dust(sut)) ) switch ( sut ) {
@@ -109,6 +109,13 @@
             return u2_bl_bail(wir_r, c3__fail);
           } else {
             return j2_mcx(Pt6, ut, peek)(wir_r, van, q_sut, way, axe);
+          }
+        }
+        case c3__fine: {
+          if ( (u2_no == u2_as_qual(sut, 0, &p_sut, &q_sut, &r_sut)) ) {
+            return u2_bl_bail(wir_r, c3__fail);
+          } else {
+            return j2_mcx(Pt6, ut, peek)(wir_r, van, r_sut, way, axe);
           }
         }
         case c3__fork: {
