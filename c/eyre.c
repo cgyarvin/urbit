@@ -739,8 +739,12 @@ main(c3_i   argc,
 
   //  Parse arguments.
   //
-  if ( argc < 2 ) {
-    goto usage;
+  if ( argc == 1 ) {
+    EyreSmoke = u2_no;
+    kno_w = EyreFirstKernel;
+    lid_c = strdup("hume");
+
+    goto proceed;
   }
   if ( (0 == (kno_w = strtol(argv[1], 0, 10))) || (kno_w > EyreFirstKernel) ) {
     goto usage;

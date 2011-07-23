@@ -989,10 +989,26 @@
                     u2_rx(wir_r, p_gen), 
                     j2_mcy(Pt6, ap, mold)(wir_r, q_gen, hep));
         }
+        case c3__ktdl:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
+                          return u2_bl_bail(wir_r, c3__fail); else
+        {
+          return u2_bt
+            (wir_r, c3__ktdl, 
+                    u2_rx(wir_r, p_gen), 
+                    j2_mcy(Pt6, ap, mold)(wir_r, q_gen, hep));
+        }
         case c3__ktdp:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
                           return u2_bl_bail(wir_r, c3__fail); else
         {
           return j2_mcy(Pt6, ap, mold)(wir_r, p_gen, hep);
+        }
+        case c3__ktld:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
+                          return u2_bl_bail(wir_r, c3__fail); else
+        {
+          return u2_bt
+            (wir_r, c3__ktld, 
+                    u2_rx(wir_r, p_gen), 
+                    j2_mcy(Pt6, ap, mold)(wir_r, q_gen, hep));
         }
         case c3__mtbn:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
                           return u2_bl_bail(wir_r, c3__fail); else

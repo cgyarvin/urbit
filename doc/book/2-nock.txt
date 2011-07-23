@@ -1,0 +1,258 @@
+2: Decrement as Pons Asinorum
+
+The normal way to learn Nock is to write a single function in it:
+a partial function that produces `(s - 1)` if `s` is a nonzero
+atom, and otherwise does not terminate.  
+
+The normal Watt programmer, novice or expert, has written exactly
+one Nock formula: this one.  Since decrement uses all the Nock
+techniques the Watt compiler uses, the exercise is a sufficient
+foundation.  Those who try to learn Watt without it risk severe
+brain contusions.
+
+If `s` is your subject, what formula `f` implements decrement?
+As applied from the Watt command line:
+
+  : .*(s f)
+
+If you read the last chapter, you know that the equivalent
+formula for increment is
+
+  [4 0 1]
+
+Thus:
+
+  : .*(42 [4 0 1])
+  43
+
+Of course, increment is built into Nock.  So, ha, that's easy.
+
+How do we decrement?  A good way to start is to gaze fondly on
+how we'd do it if we actually had a real language, ie, Watt.
+Here is a minimal decrement in Watt:
+
+  =>  a=.                     ::  line 1
+  =+  b=`@`0                  ::  line 2
+  |-                          ::  line 3
+  ?:  =(a +(b))               ::  line 4
+    b                         ::  line 5
+  $(b +(b))                   ::  line 6
+
+Or for fun, on one line:
+
+  =>(a=. =+(b=`@`0 |-(?:(=(a +(b)) b $(b +(b))))))
+
+Does Watt actually work?
+
+  : =>(42 =>(a=. =+(b=`@`0 |-(?:(=(a +(b)) b $(b +(b)))))))
+  41
+
+Let's translate this into English.  How do we decrement the
+subject?  First (line 1), we rename the subject `a`.  Second
+(line 2), we add a variable, `b`, of atom type and value 0.
+Third (line 3), we loop.  Fourth, we test if `a` equals `b` plus
+1 (line 4), produce `b` if it does (line 5), repeat the loop with
+`b` set to `b` plus 1 (line 6) if it doesn't.  Obviously, while
+the syntax is bizarre, the algorithm is anything but recondite.
+We are calculating `b` minus one by counting up to it.
+
+(Obviously, this is an O(n) algorithm.  Is there a better way?
+There is not.  Do we actually do this in practice?  A variant of
+this exact code is on the first page of the Watt kernel.  So,
+yes.  But on the other hand, no...)
+
+Unfortunately we are missing a third of our Rosetta stone.  We
+have decrement in Watt and we have it in English.  How do we
+express this in Nock?  What will the Watt compiler generate from
+the code above?  We seek
+
+  f
+
+Obviously, Watt has no types, variable names, etc.  So line 1
+is a no-op.
+
+How do we add a variable (line 2)?  We compute a new subject,
+which is a cell of the present subject and the variable.  With
+this new subject, we execute another formula.
+
+Since the initial value of our variable is `0`, this heavy
+computation yields to the humble formula
+
+  [1 0]
+
+and with the handy `8` operator, we can express `f` neatly as
+
+  [8 [1 0] g]
+
+For instance, if `s` is 42, the subject for `g` is `[42 0]`.
+Hopefully any rocket scientists in the class are yawning.
+
+Okay, great.  But then - we loop?  Does Nock have a loop
+operator?  It most certainly does not.  So what do we do?
+
+We build a noun called a *core* - a construct which is behind any
+kind of interesting control flow in Watt.  Of course, the Nock
+programmer is not constrained to use the same techniques as the
+Watt compiler, but it is probably a good idea. 
+
+In Watt, all the flow structures from your old life as an Earth
+programmer become cores.  Functions and/or closures are cores,
+objects are cores modules are cores, even loops are cores.
+
+The core is just a cell whose head is data (possibly containing
+other cores) and whose tail is code (containing one or more
+formulas).  The head is the *payload* and the tail is the
+*battery*.  Hence your core is
+
+  [pay bat]
+
+Wernher von Braun is still not in town.  To activate a core, pick
+a formula out of the battery, and use the entire core (*not* just
+the payload) as the subject.  
+
+(This formula is inevitably known as a *method* - but note that
+the parallel to the classic object-oriented paradigm is not
+exact.  The method produces a function of the core, not the core
+and some argument.  Ie, it is more of a functional attribute.)
+
+Of course, because we feed it the entire core, our method can
+invoke itself (or any other formula in the battery).  Hence, it
+can loop.  And this is what a loop is - the simplest of cores.
+
+We need to do two things with this core: create it, and activate
+it.  To be precise, we need two formulas: a formula which
+produces the core, and one which activates its subject.  We can
+compose these functions with the handy `7` operator:
+
+  [8 [1 0] [7 p a]]
+
+`p` produces our core, `a` activates it.  Let's take these in
+reverse order.  How do we activate a core?
+
+Since we have only one formula, it's is the battery itself.
+Thus we want to execute Nock with the whole core (already the
+subject, and the entire battery (slot `3`).  Hence, `a` is
+
+  [2 [0 1] [0 3]]
+
+We could also use the handy `9` macro:
+
+  [9 3 [0 1]]
+
+Which leaves us seeking 
+
+ [8 [1 0] [7 p [9 3 0 1]]]
+
+And all we have to do is build the core, `p`.  How do we build a
+core?  We add code to the subject, just as we added a variable
+above.  The initial value of our counter was a constant, `0`.
+The initial (and permanent) value of our battery is a constant, 
+the loop formula `l`.  So `p` is
+
+  [8 [1 l] [0 1]]
+
+Which would leave us seeking
+
+  [8 [1 0] [7 [8 [1 l] [0 1]] [9 3 0 1]]]
+
+except that, we notice, we can collapse these expressions:
+
+  [8 [1 0] [8 [1 l] [9 3 0 1]]]
+
+Thus our only formula to compose is the loop body, `l`.
+Its subject is the loop core:
+
+  [pay bat]
+
+where `bat` is just the loop formula, and `pay` is the pair `[a
+b]`, `a` being the input and `b` the counter.  Thus we could also
+write this subject as
+
+  [[a b] l]
+
+and we see readily that `a` is at slot `4`, `b` `5`, `l` `3`.
+With this subject, we need to express the Watt loop body
+
+  ?:  =(a +(b))               ::  line 4
+    b                         ::  line 5
+  $(b +(b))                   ::  line 6
+
+This is obviously an if statement, and it calls for `6`.  Ie:
+
+  [6 t y n]
+
+Giving our decrement program as:
+
+ [8 [1 0] [8 [1 6 t y n] [9 3 0 1]]]
+
+For `t`, how do we compute a flag that is yes (`0`) if `a` equals
+`b` plus one?  Equals, we recall, is `5`.  So `t` can only be
+ 
+  [5 [0 4] [4 0 5]]
+
+If so, our product `y` is just the counter `b`:
+
+  [0 5]
+
+And if not?  We have to re-execute the loop with the counter 
+incremented.  If we were executing it with the same counter, 
+obviously an infinite loop, we could use the same core:
+
+  [9 3 0 1]
+
+But instead we need to construct a new core with the counter 
+incremented:
+
+  [[a +(b)] l]
+
+ie, 
+
+  [[[0 4] [4 0 5]] [0 3]]
+
+and `n` is:
+
+  [9 3 [[0 4] [4 0 5]] [0 3]]
+ 
+Hence our complete decrement.  Let's reformat vertically so we
+can actually read it:
+
+ [ 8 
+   [1 0] 
+   [ 8 
+     [ 1 
+       [ 6 
+         t 
+         y 
+         n
+       ]
+     ]
+     [9 3 0 1]
+    ]
+ ]
+
+which becomes
+
+ [ 8 
+   [1 0] 
+   [ 8 
+     [ 1 
+       [ 6 
+         [5 [0 4] [4 0 5]]
+         [0 5]
+         [9 3 [[0 4] [4 0 5]] [0 3]]
+       ]
+     ]
+     [9 3 0 1]
+    ]
+ ]
+
+or, on one line without superfluous brackets:
+
+  [8 [1 0] 8 [1 6 [5 [0 4] 4 0 5] [0 5] 9 3 [[0 4] 4 0 5] 0 3] 9 3 0 1]
+
+which works for at least one case:
+
+  : .*(42 [8 [1 0] 8 [1 6 [5 [0 4] 4 0 5] [0 5] 9 3 [[0 4] 4 0 5] 0 3] 9 3 0 1])
+  41
+
+If you understood this, you understand nock.  At least in principle!

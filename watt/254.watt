@@ -631,6 +631,13 @@
   ::
   ::  Tier 4 cones
   ::
+  ++  tree
+    |*  a=mud
+    |=  b=*
+    ?-    b
+        ~               ~
+        [n=* l=* r=*]   [n=(a n.b) l=$(b l.b) r=$(b r.b)]
+    ==
   ++  set   |*(a=mud (tree a))
   ++  map   |*([a=mud b=mud] (tree _[p=(a) q=(b)]))
   --
@@ -1535,11 +1542,9 @@
       [%dtsg p=*mud]
       [%dttr p=(gene) q=(gene)]
       [%ktbn p=*term q=(gene)]
-      [%ktbr p=(gene)]
       [%ktdl p=(gene) q=(gene)]
       [%ktdp p=(gene) q=(gene)]
       [%ktld p=(gene) q=(gene)]
-      [%ktpm p=(gene)]
       [%ktsg p=(gene)]
       [%mtbn p=(twig) q=((list _[p=(gene) q=(gene)]))]
       [%mtbr p=(twig) q=(gene) r=((list _[p=(gene) q=(gene)]))]
@@ -1718,7 +1723,9 @@
       $(gen q.gen, hep [[~ 3] hep])
     :: 
         [%ktbn *]     [%ktbn p.gen $(gen q.gen)]
+        [%ktdl *]     [%ktdl p.gen $(gen q.gen)]
         [%ktdp *]     $(gen p.gen)
+        [%ktld *]     [%ktld p.gen $(gen q.gen)]
         [%mtbn * ~]   [%mtbn p.gen [[[~ 5] [%mtbn hep ~]] ~]]
         [%mtdp * ~]   [%mtdp p.gen [%mtbn hep ~] ~]
         [%mttr *]     [%mtdp p.gen [%mtbn hep ~] ~]
@@ -1831,8 +1838,6 @@
           [* ~]   i.p.gen
           ^       [%dgdp i.p.gen $(p.gen t.p.gen)]
       ==
-    ::
-        [%ktbr *]
     ::
         [%mtbr *]
       :+  %bnpd

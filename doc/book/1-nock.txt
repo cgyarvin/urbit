@@ -12,13 +12,14 @@ Indeed, in theory we could compile Watt to the JVM (or Java to
 Nock).  What's the difference between Nock and the JVM, anyway?
 Why do we need a new virtual machine?
 
-There is no formal difference between Nock and the JVM.  Both are
-Turing-complete computers.  In practice, they have just about
-nothing in common.
+There is no formal difference between Nock and the JVM.  In
+theory, both are Turing-complete computers.  In practice, they
+have just about nothing in common.
 
-The main practical difference is that Nock is about 100 times as
-simple as the JVM.  The Nock spec is less than 200 words; it
-gzips to 372 bytes.
+The main practical difference is that Nock is two orders of
+magnitude simpler.  The JVM spec is a book.  The Nock spec is 197
+words; it gzips to 372 bytes.  There are lots of other
+differences, but they all follow from this.
 
 Why does size matter?  The goal of any programming language is to
 become a standard.  The simpler a specification is, the easier to
@@ -71,13 +72,14 @@ than Walt Disney, does have versions.  Nock versions are measured
 by integer degrees Kelvin, newer being colder.  The newest is
 Nock 6K - roughly the temperature of Neptune.  No change is
 anticipated between 6K and absolute zero, though you never know.
+Any such change would certainly be quite painful.
 
 The 197-word Nock spec contains no non-normative text and is
 strictly for hardcore supergeeks.  We have verified that hardcore
 supergeeks can write correct implementations from this spec
 alone.  If you're a hardcore supergeek, you might want to stop
 right here and write your own Nock implementation, followed by
-the standard exercise - a Nock decrement program.  If not, keep
+the standard exercise - a Nock decrement formula.  If not, keep
 reading.
 
 To make Nock make sense, let's work through Nock 6K line by line.
@@ -125,13 +127,13 @@ It's important to recognize that the pseudocode of the Nock spec
 is just that: pseudocode.  It looks a little like Watt.  It isn't
 Watt - it's just pseudocode.  Or in other words, just English.
 At the bottom of every formal system is a system of axioms, which
-can only be written in English.  Why pseudocode, not Watt?  Since
+can only be written in English.  (Why pseudocode, not Watt?  Since
 Watt is defined in Nock, this would only give a false impression
-of nonexistent precision.
+of nonexistent precision.)
 
 The logic of this pseudocode is a pattern-matching reduction,
 matching from the top down.  To compute Nock, repeatedly reduce
-with the first line that matches.
+with the first line that matches.   Let's jump right in!
 
 Line 8:
 
@@ -143,15 +145,15 @@ that Nock and Watt use tuples or "improper lists" much more
 heavily than Lisp.  The list terminator, normally 0, is never 
 automatic.  So the Lisp list 
 
-    (a b c)
+  (a b c)
 
 becomes the Nock noun
 
-    [a b c 0]
+  [a b c 0]
 
 which is equivalent to
 
-    [a [b [c 0]]]
+  [a [b [c 0]]]
 
 Note that we can and do use unnecessary brackets anyway, for
 emphasis.  Line 9:
@@ -192,7 +194,7 @@ Again, no rocket science here.
 
 We should note that in Nock and Watt, 0 (pronounced "yes") is
 true, and 1 ("no") is false.  Why?  It's fresh, it's different,
-it's new.  And it's annoying.  But it keeps you on your toes.
+it's new.  And it's annoying.  And it keeps you on your toes.
 
 Slightly more interesting is our tree numbering.  Lines 17-21:
 
@@ -226,73 +228,10 @@ is
 
     [14 15]
 
-I do hope this isn't so terribly hard to follow.  Line 23:
+I do hope this isn't so terribly hard to follow.  
 
-    *[a [b c] d]      [*[a b c] *[a d]]
-
-This may be the trickiest line in the spec.
-
-Since Nock of an atom just crashes, the practical domain of the
-Nock function is always a cell.  Conventionally, the head of this
-cell is the "subject," the tail is the "formula," and the result
-of Nocking it is the "product."  Basically, the subject is your
-data and the formula is your code.
-
-We could write line 23 less formally:
-
-      *[subject [formula-x formula-y]]
-  =>  [*[subject formula-x] *[subject formula-y]]
-
-In other words, if you have two Nock formulas `x` and `y`, a
-formula that computes the pair of them is just `[x y]`.  We can 
-recognize this because no atom is a valid formula, and
-every formula that _does not_ use line 23 has an atomic head.
-
-If you know Lisp, you can think of this feature as a sort of
-"implicit cons."  Where in Lisp you would write `(cons x y)`,
-in Nock you write `[x y]`.
-
-For example,
-
-    *[42 [4 0 1]]
-
-where `42` is the subject (data) and `[4 0 1]` is the formula
-(code), happens to evaluate to `43`.  Whereas
-
-    *[42 [3 0 1]]
-
-is `1`.  So if we evaluate
-
-    *[42 [[4 0 1] [3 0 1]]]
-
-we get
-
-    [43 1]
-
-Perhaps this is a good time to fire up the Watt interpreter,
-`eyre`, and test this in practice.  Watt is not Nock, of course,
-but it has a Nock syntax.  To test Nock expressions in Watt,
-instead of 
-
-    *[subject formula]
-
-write 
-
-    .*(subject formula)
-
-So if you run 
-
-  $ eyre 256 hume
-
-and type, at the `:` prompt, 
-
-  : .*(42 [[4 0 1] [3 0 1]])
-
-you should see
-
-  [43 1]
-
-which is all the Watt you need to know right now.  Line 25:
+Now we enter the definition of Nock itself - ie, the `*`
+operator.
 
     *[a 0 b]          /[b a]
 
@@ -362,8 +301,74 @@ and
   : .*([132 19] [4 0 3])
   20
 
-If this seems obvious, you're doin' good.
+If this seems obvious, you're doin' good.  Finally, we jump back up
+to line 23, the trickiest in the spec:
 
+    *[a [b c] d]      [*[a b c] *[a d]]
+
+Um, what?
+
+Since Nock of an atom just crashes, the practical domain of the
+Nock function is always a cell.  Conventionally, the head of this
+cell is the "subject," the tail is the "formula," and the result
+of Nocking it is the "product."  Basically, the subject is your
+data and the formula is your code.
+
+We could write line 23 less formally:
+
+      *[subject [formula-x formula-y]]
+  =>  [*[subject formula-x] *[subject formula-y]]
+
+In other words, if you have two Nock formulas `x` and `y`, a
+formula that computes the pair of them is just `[x y]`.  We can 
+recognize this because no atom is a valid formula, and
+every formula that _does not_ use line 23 has an atomic head.
+
+If you know Lisp, you can think of this feature as a sort of
+"implicit cons."  Where in Lisp you would write `(cons x y)`,
+in Nock you write `[x y]`.
+
+For example,
+
+    *[42 [4 0 1]]
+
+where `42` is the subject (data) and `[4 0 1]` is the formula
+(code), happens to evaluate to `43`.  Whereas
+
+    *[42 [3 0 1]]
+
+is `1`.  So if we evaluate
+
+    *[42 [[4 0 1] [3 0 1]]]
+
+we get
+
+    [43 1]
+
+Perhaps this is a good time to fire up the Watt interpreter,
+`eyre`, and test this in practice.  Watt is not Nock, of course,
+but it has a Nock syntax.  To test Nock expressions in Watt,
+instead of 
+
+    *[subject formula]
+
+write 
+
+    .*(subject formula)
+
+So if you run 
+
+  $ eyre 256 hume
+
+and type, at the `:` prompt, 
+
+  : .*(42 [[4 0 1] [3 0 1]])
+
+you should see
+
+  [43 1]
+
+which is all the Watt you need to know right now.  Line 25:
 Except for the crash defaults (lines 39-42), we've actually
 completed all the _essential_ aspects of Nock.  The operators up
 through 5 provide all necessary computational functionality.
@@ -542,5 +547,4 @@ does.  Or you could just agree that `6` is "if," and move on.
 
 (It's worth noting that in real, generated Nock, we never do
 anything this funky.  There's no reason we couldn't build
-formulas at runtime, but we have no reason to and we don't. 
-They are always constants resolved through tree addressing.)
+formulas at runtime, but we have no reason to and we don't.)
