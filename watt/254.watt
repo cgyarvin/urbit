@@ -1832,6 +1832,8 @@
           ^       [%dgdp i.p.gen $(p.gen t.p.gen)]
       ==
     ::
+        [%ktbr *]
+    ::
         [%mtbr *]
       :+  %bnpd
         q.gen
@@ -2644,9 +2646,30 @@
         =+  vat=$(gen q.gen)
         [(face p.gen p.vat) q.vat]
       ::
+          [%ktdl *]                                                   ::  ^<
+        =-  [(nice (fine %very (play p.gen) p.ryd)) q.ryd]
+        ^=  ryd  =-  $(gen hos, gol %noun)
+        ^=  hos
+        :+  %bnpd  [%ktbn %a p.gen]               `   ::  =+  a=<p.gen>
+        :+  %bnpd  [%ktbn %b [%bnld [~ 2] q.gen]]     ::  =+  b==>(.2 <q.gen>)
+        :+  %csld  [%mtdp %a %b ~]                    ::  ?>  (a b)
+        %b                                            ::  b
+      ::
           [%ktdp *]                                                   ::  ^-
         =+  hif=(nice (play p.gen))
         [hif (boil |.(q:$$(gen q.gen, gol hif)))]
+      ::
+          [%ktld *]                                                   ::  ^>
+        =-  [(nice (fine %pure (play p.gen) p.ryd)) q.ryd]
+        ^=  ryd  =-  $(gen hos, gol %noun)
+        ^=  hos
+        :+  %bnpd  [%ktbn %a p.gen]               `   ::  =+  a=<p.gen>
+        :+  %bnpd  [%ktbn %b [%bnld [~ 2] q.gen]]     ::  =+  b==>(.2 <q.gen>)
+        :-  %brdp  :+  %ktdp  [%mttr %a]              ::  |-  ^-  *a
+        :+  %bnpd  [%ktbn %c [%mtdp %a %b ~]]         ::  =+  c=(a b)
+        :^  %csdg  [%dtbn %b %c]                      ::  ?:  .=(b c)
+          %c                                          ::    c
+        [%mtbn [%% ~] [[%b %c] ~]]                    ::  $(b c)
       ::
           [%ktsg *]                                                   ::  ^~
         =+  nef=$(gen p.gen)
@@ -2815,7 +2838,7 @@
           [%fine *]
         ?.  ?=([%fine *] ref)
           sint
-        ?&(.=(q.sut q.ref) dext(sut r.sut, ref r.ref))
+        ?&(.=(p.sut p.ref) .=(q.sut q.ref) dext(sut r.sut, ref r.ref))
       ::
           [%fork *]
         ?.  ?=(*%{%atom %noun [%cell *] [%cube *] [%core *]} ref)

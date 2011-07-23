@@ -235,8 +235,9 @@
         } else { 
           if ( (u2_yes == u2_as_pqr(ref, c3__fine, &p_ref, &q_ref, &r_ref)) ) {
             return u2_and
-              (u2_sing(q_sut, q_ref),
-               _nest_dext(wir_r, van, r_sut, r_ref, gil));
+              (u2_sing(p_sut, p_ref),
+               u2_and(u2_sing(q_sut, q_ref),
+                      _nest_dext(wir_r, van, r_sut, r_ref, gil)));
           }
           else return _nest_sint(wir_r, van, sut, ref, gil);
         }
