@@ -1,16 +1,16 @@
 ?>  ?=(@ .)
 %.  .
 =<  make
-=>  254
+=>  252
 =>  
   ::::
   ::::  Tier 0, kernel stub
   ::::
-  ~%    %k.254
+  ~%    %k.252
       ~
     ~
   &.
-  ++  stub  254
+  ++  stub  252
   ++  nat   |=(a=* ?>(?=(@ a) a))
   ++  mud   |=(a=* a)
   ++  bit   |=(a=* ?-(a & &, | |))
@@ -1579,6 +1579,7 @@
       [%tmsg p=(gene) q=((list gene))]
       [%zpbn p=(gene)]
       [%zpcb p=*spot q=(gene)]
+      [%zpcm p=(gene) q=(gene)]
       [%zpdx p=(gene)]
       [%zpmt ~]
       [%zptm p=(gene) q=(gene)]
@@ -2721,6 +2722,10 @@
         :-  (nice %noun)
         (boil |.([1 q:$$(vet |, gen p.gen)]))
       ::
+          [%zpcm *]                                                   ::  !;
+        :-  (nice (play p.gen))                    ::  XX validate!
+        [1 q.gen]
+      ::
           [%zpcb *]                                                   ::  !_
         ~~  (show %o p.gen)
         =+  hum=$(gen q.gen)
@@ -3273,6 +3278,7 @@
           ;~  pfix  zap
             ;~  pose
               (rune bon %zpbn expa)
+              (rune tam %zpcm expb)
               (rune tam %zptm expb)
               ;~(pfix deg (toad expz))
               (rune dax %zpdx expa)

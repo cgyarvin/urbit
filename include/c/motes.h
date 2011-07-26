@@ -845,6 +845,7 @@
 #   define c3__zork   c3_s4('z','o','r','k')
 #   define c3__zpbn   c3_s4('z','p','b','n')
 #   define c3__zpcb   c3_s4('z','p','c','b')
+#   define c3__zpcm   c3_s4('z','p','c','m')
 #   define c3__zpdg   c3_s4('z','p','d','g')
 #   define c3__zpdx   c3_s4('z','p','d','x')
 #   define c3__zplc   c3_s4('z','p','l','c')
