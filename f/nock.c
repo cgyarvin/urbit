@@ -66,9 +66,7 @@ _nock_rock(u2_wire wir_r,
         u2_rl_lose(wir_r, bus);
         return u2_none;
       }
-    /* frag
-    */
-      case u2_nock_frag: {
+      case u2_nock_0: {
         if ( u2_no == u2_stud(gal) ) {
           u2_rl_lose(wir_r, bus);
           return u2_none;
@@ -90,9 +88,7 @@ _nock_rock(u2_wire wir_r,
           }
         }
       }
-    /* bone
-    */
-      case u2_nock_bone: {
+      case u2_nock_1: {
         u2_noun sug;
 
         u2_rl_lose(wir_r, bus);
@@ -100,9 +96,7 @@ _nock_rock(u2_wire wir_r,
         sug = u2_wr_ice(wir_r, gal);
         return sug;
       }
-    /* sail
-    */
-      case u2_nock_sail: {
+      case u2_nock_2: {
         if ( u2_no == u2_dust(gal) ) {
           u2_rl_lose(wir_r, bus);
           return u2_none;
@@ -145,9 +139,7 @@ _nock_rock(u2_wire wir_r,
           }
         }
       }
-    /* dust
-    */
-      case u2_nock_dust: {
+      case u2_nock_3: {
         u2_weak gof, laz;
 
         LoomSink; u2_bx_sink(wir_r);
@@ -159,9 +151,7 @@ _nock_rock(u2_wire wir_r,
         u2_rl_lose(wir_r, gof);
         return laz;
       }
-    /* vint
-    */
-      case u2_nock_vint: {
+      case u2_nock_4: {
         u2_weak gof, laz;
        
         LoomSink; u2_bx_sink(wir_r);
@@ -171,9 +161,7 @@ _nock_rock(u2_wire wir_r,
         laz = u2_rl_vint(wir_r, gof);
         return laz;
       }
-    /* sing
-    */
-      case u2_nock_sing: {
+      case u2_nock_5: {
         if ( u2_no == u2_dust(gal) ) {
           u2_rl_lose(wir_r, bus);
           return u2_none;
@@ -198,9 +186,7 @@ _nock_rock(u2_wire wir_r,
           return laz;
         }
       }
-    /* trol
-    */
-      case u2_nock_trol: {
+      case u2_nock_6: {
         u2_weak yor, fli, paw;
 
         if ( u2_no == u2_as_trel(gal, &yor, &fli, &paw) ) {
@@ -231,9 +217,7 @@ _nock_rock(u2_wire wir_r,
           }
         }
       }
-    /* flac
-    */
-      case u2_nock_flac: {
+      case u2_nock_7: {
         if ( u2_no == u2_dust(gal) ) {
           u2_rl_lose(wir_r, bus);
 
@@ -255,9 +239,7 @@ _nock_rock(u2_wire wir_r,
           continue;
         }
       }
-    /* gant
-    */
-      case u2_nock_gant: {
+      case u2_nock_8: {
         if ( u2_no == u2_dust(gal) ) {
           u2_rl_lose(wir_r, bus);
           return u2_none; 
@@ -282,9 +264,7 @@ _nock_rock(u2_wire wir_r,
           continue;
         }
       }
-    /* kick
-    */
-      case u2_nock_kick: {
+      case u2_nock_9: {
         if ( u2_no == u2_dust(gal) ) {
           u2_rl_lose(wir_r, bus);
 
@@ -334,9 +314,7 @@ _nock_rock(u2_wire wir_r,
           }
         }
       }
-    /* hint
-    */
-      case u2_nock_hint: {
+      case u2_nock_10: {
         if ( u2_no == u2_dust(gal) ) {
           return u2_none;
         } else {
@@ -583,7 +561,7 @@ _nock_sand(u2_wire wir_r,
 
     /* frag = 0
     */
-      case u2_nock_frag: {
+      case u2_nock_0: {
         if ( u2_no == u2_stud(gal) ) {
           return u2_none;
         }
@@ -601,16 +579,12 @@ _nock_sand(u2_wire wir_r,
           }
         }
       }
-    /* bone = 1
-    */
-      case u2_nock_bone: {
+      case u2_nock_1: {
         u2_rail_cap_r(wir_r) = net_r;
 
         return u2_wr_ice(wir_r, gal);
       }
-    /* sail = 2
-    */
-      case u2_nock_sail: {
+      case u2_nock_2: {
         if ( (u2_no == u2_dust(gal)) || (u2_no == u2_dust(u2_h(gal))) ) {
           return u2_none;
         } else {
@@ -668,9 +642,7 @@ _nock_sand(u2_wire wir_r,
           }
         }
       }
-    /* dust = 3 
-    */
-      case u2_nock_dust: {
+      case u2_nock_3: {
         u2_weak gof;
 
         if ( u2_no == u2_rl_leap(wir_r, c3__sand) ) { return u2_none; }
@@ -688,9 +660,7 @@ _nock_sand(u2_wire wir_r,
           return u2_dust(gof);
         }
       }
-    /* vint = 4
-    */
-      case u2_nock_vint: {
+      case u2_nock_4: {
         u2_weak gof;
 
         if ( u2_no == u2_rl_leap(wir_r, c3__sand) ) { return u2_none; }
@@ -712,9 +682,7 @@ _nock_sand(u2_wire wir_r,
           return u2_rl_mp(wir_r, mp_gof);
         }
       } 
-    /* sing = 5
-    */
-      case u2_nock_sing: {
+      case u2_nock_5: {
         if ( u2_no == u2_dust(gal) ) {
           return u2_none;
         }
@@ -737,9 +705,7 @@ _nock_sand(u2_wire wir_r,
           }
         }
       }
-    /* trol = 6
-    */
-      case u2_nock_trol: {
+      case u2_nock_6: {
         u2_weak yor, fli, paw;
 
         if ( u2_no == u2_as_trel(gal, &yor, &fli, &paw) ) {
@@ -770,9 +736,7 @@ _nock_sand(u2_wire wir_r,
           }
         }
       }
-    /* flac = 7
-    */
-      case u2_nock_flac: {
+      case u2_nock_7: {
         if ( u2_no == u2_dust(gal) ) {
           return u2_none; 
         } else {
@@ -794,9 +758,7 @@ _nock_sand(u2_wire wir_r,
           continue;
         }
       }
-    /* gant = 8
-    */
-      case u2_nock_gant: {
+      case u2_nock_8: {
         if ( u2_no == u2_dust(gal) ) {
           return u2_none; 
         } else {
@@ -820,9 +782,7 @@ _nock_sand(u2_wire wir_r,
           continue;
         }
       }
-    /* kick = 9
-    */
-      case u2_nock_kick: {
+      case u2_nock_9: {
         if ( u2_no == u2_dust(gal) ) {
           return u2_none; 
         } else {
@@ -848,9 +808,7 @@ _nock_sand(u2_wire wir_r,
           continue;
         }
       }
-    /* hint = 10
-    */
-      case u2_nock_hint: {
+      case u2_nock_10: {
         if ( u2_no == u2_dust(gal) ) {
           return u2_none;
         } else {

@@ -514,7 +514,9 @@ _rl_bloq_grab(u2_ray ral_r,
           /* This rail is totally full.
           */
           u2_ho_warn_here();
-          return 0;
+          //  A bunch of testing is needed to make this actually work.
+          // return 0;    
+          c3_assert(0);
         }
         else { 
           box_r = u2_rail_hat_r(ral_r);

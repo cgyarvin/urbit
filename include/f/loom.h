@@ -289,6 +289,19 @@
 #     define u2_nock_kick  9
 #     define u2_nock_hint  10
 
+#     define u2_nock_0  0
+#     define u2_nock_1  1
+#     define u2_nock_2  2
+#     define u2_nock_3  3
+#     define u2_nock_4  4
+#     define u2_nock_5  5
+#     define u2_nock_6  6
+#     define u2_nock_7  7
+#     define u2_nock_8  8
+#     define u2_nock_9  9
+#     define u2_nock_10  10
+
+
     /* Old (Nock 7) conventional axes for gate call.
     */
 #     define u2_cv_pay      2       //  payload
