@@ -1,3 +1,4 @@
+!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -1108,6 +1109,15 @@
              ?>  ?=(^ q.wag)
              [p.wag [~ (peg p.u.q.vex p.u.q.wag) q.u.q.wag]]
            == 
+  ++  vit 
+    ;~  pose 
+      (cook |=(a=@ (sub a 65)) (shim 'A' 'Z'))
+      (cook |=(a=@ (sub a 71)) (shim 'a' 'z'))
+      (cook |=(a=@ (add a 4)) (shim '0' '9'))
+      (cold `@`62 (just '-'))
+      (cold `@`63 (just '_'))
+    ==
+  ++  viz  (bass 64 (most gon vit))
   ++  von  (just '/')
   ++  vul  (cold ~ ;~(plug deg deg (star (shim 32 126)) (just 10)))
   ++  wat  (just '@')
@@ -1123,7 +1133,7 @@
               ~|('rasp-stop' !!)
             p.u.q.vex
   ::
-  ::      Tier 5b/0, printing: basic text handling
+  ::    Tier 5b/0, printing: basic text handling
   ::
   ++  mesc
     |=  vib=*tape
@@ -1247,6 +1257,38 @@
         [(runt [tab 32] (weld hom `*tape`[' ' (slag wug i.lug)])) t.lug]
       --
     --
+  ::
+  ::    Tier 5b/2, atom rendering
+  ::
+  ++  at
+    &=  a=@
+    ++  aub  (aum 2 ['0' 'b' ~] |=(b=@ (add '0' b)))
+    ++  aud  (aum 10 ~ |=(b=@ (add '0' b)))
+    ++  aum
+      |=  [b=@ c=*tape d=|+(@ @)]
+      %+  weld
+        c
+      ^-  *tape
+      ?:  .=(0 a)
+        [(d 0) ~]
+      =+  e=*tape
+      |-(?:(.=(0 a) e $(a (div a b), e [(d (mod a b)) e])))
+    ::
+    ++  auv
+      %^    aum
+          64
+        ['0' 'v' ~]
+      |=  b=@
+      ?:  .=(63 b)
+        '_'
+      ?:  .=(62 b) 
+        '-'
+      ?:((lth b 26) (add 65 b) ?:((lth b 52) (add 71 b) (sub b 4)))
+    ::
+    ++  aux  (aum 16 ['0' 'x' ~] |=(b=@ (add b ?:((lth a 10) 48 87))))
+    --
+  ::
+  ::
   ::
   ++  slyb  (slym 2 |=(a=@ (add '0' a)))
   ++  slyd  (slym 10 |=(a=@ (add '0' a)))
@@ -2474,7 +2516,7 @@
   ++  fish
     ~.  %fish
     |=  axe=*axis
-    =+  vit=*(set type)
+    =+  vot=*(set type)
     |-
     ^-  *form
     ?-  sut
@@ -2493,9 +2535,9 @@
         [%fine *]   [0 0]
         [%fork *]   (flor $(sut p.sut) $(sut q.sut))
         [%hold *]
-      ?:  (~(has in vit) sut)
+      ?:  (~(has in vot) sut)
         [0 0]
-      =>  %=(. vit (~(put in vit) sut))
+      =>  %=(. vot (~(put in vot) sut))
       $(sut repo)
     ==
   ::
@@ -3167,6 +3209,7 @@
         %dtsg
       ;~  pose
         ;~(pfix (just '0') (just 'x') hex)
+        ;~(pfix (just '0') (just 'v') viz)
         dem
         qut
         (cold & pam)

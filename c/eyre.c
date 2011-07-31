@@ -109,7 +109,6 @@ _eyre_nock(u2_wire wir_r,
       u2_noun tax;
  
       fprintf(stderr, "{trace}\n");
-      c3_assert(0);
       tax = u2_rx(wir_r, u2_wire_tax(wir_r));
       u2_wire_tax(wir_r) = u2_nul;
 
