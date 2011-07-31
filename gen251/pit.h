@@ -2,10 +2,6 @@
 **
 ** This file is in the public domain.
 */
-  /** Revision number for built-in jets.
-  **/
-// #   define  Pit   watt_251
-
   /** Driver control strings for each tier.
   **/
 #   define Pt0           k_251
@@ -15,9 +11,6 @@
 #   define Pt4           k_251__a__b__c__d
 #   define Pt5           k_251__a__b__c__d__e
 #   define Pt6           k_251__a__b__c__d__e__f
-
-  /** Driver polarity.
-  **/
 
   /** Test codes.
   **/
@@ -370,6 +363,11 @@
                         u2_noun con);                             //  retain
 
       u2_noun                                                     //  transfer
+      j2_mby(Pt6, cube)(u2_wire wir_r, 
+                        u2_noun dil,                              //  retain
+                        u2_noun goq);                             //  retain
+
+      u2_noun                                                     //  transfer
       j2_mby(Pt6, face)(u2_wire wir_r, 
                         u2_noun cog,                              //  retain
                         u2_noun tip);                             //  retain
@@ -481,6 +479,12 @@
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
                             u2_noun hag);                         //  retain
+
+      u2_noun                                                     //  transfer
+      j2_mcy(Pt6, ut, firm)(u2_wire wir_r,
+                            u2_noun van,                          //  retain
+                            u2_noun sut,                          //  retain
+                            u2_noun gib);                         //  retain
 
       u2_noun                                                     //  transfer
       j2_mcy(Pt6, ut, fish)(u2_wire wir_r, 

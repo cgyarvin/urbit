@@ -1538,7 +1538,7 @@
       [%dtbn p=(gene) q=(gene)]
       [%dtcs p=(gene)]
       [%dtpd p=(gene)]
-      [%dtsg p=*mud]
+      [%dtsg p=*]
       [%dttr p=(gene) q=(gene)]
       [%ktbn p=*term q=(gene)]
       [%ktdl p=(gene) q=(gene)]
@@ -1593,10 +1593,10 @@
   ++  twig  (list knot)
   ++  type
     _&  *{%noun %void}
-      [%bone p=*term]
+      [%atom p=*term]
       [%cell p=(type) q=(type)]
       [%core p=(type) q=(coil)]
-      [%cube p=*mud]
+      [%cube p=* q=(type)]
       [%face p=*term q=(type)]
       [%fine p=*{%pure %very} q=*type r=*type]
       [%fork p=(type) q=(type)]
@@ -1629,6 +1629,14 @@
   ^-  *type
   ?:(.=(%void pac) %void [%core pac con])
 ::
+++  cube
+  ~.  %cube
+  |=  [dil=* goq=*type]
+  ^-  *type
+  ?:  .=(%void goq)
+    %void
+  [%cube dil goq]
+::
 ++  face
   ~.  %face
   |=  [cog=*term der=*type] 
@@ -1645,7 +1653,7 @@
     %void
   [%fine fuv lup mar]
 ::
-++  flag  ^-(*type [%fork [%cube 0] [%cube 1]])
+++  flag  ^-(*type [%fork [%cube 0 %atom %f] [%cube 1 %atom %f]])
 ++  fork
   ~.  %fork
   |=  [hoz=*type bur=*type]
@@ -1738,6 +1746,7 @@
         $(gen bog)
       [%csld [%csbn gen [%mtbn hep ~]] [%mtbn hep ~]]
     ==
+  ::
   ++  open
     ^-  *gene
     ?-    gen
@@ -2090,6 +2099,7 @@
       %emit   emit
       %find   find
       %fire   fire
+      %firm   firm
       %fish   fish
       %fret   fret
       %fuse   fuse
@@ -2132,7 +2142,7 @@
   ++  burn
     |-  ^-  *
     ?-    sut
-        [%bone *]   0
+        [%atom *]   0
         [%cell *]   [$(sut p.sut) $(sut q.sut)]
         [%core *]   [$(sut p.sut) p.r.q.sut]
         [%cube *]   p.sut
@@ -2153,14 +2163,14 @@
     =+  [now=(cap axe) lat=(mas axe)]
     |-  ^-  *type
     ?-    sut
-        [%bone *]   %void
+        [%atom *]   %void
         [%cell *]   
       ?:  .=(2 now)
         (cell $$(axe lat, sut p.sut) q.sut)
       (cell p.sut $$(axe lat, sut q.sut))
     ::
         [%core *]   ?.(.=(2 now) sut (core $$(axe lat, sut p.sut) q.sut))
-        [%cube *]   ?.(.?(p.sut) %void (reco |=(p=*type $$(sut p))))
+        [%cube *]   (reco |=(p=*type $$(sut p)))
         [%face *]   (reco |=(p=*type (face p.sut $$(sut p))))
         [%fine *]   (reco |=(p=*type (fine p.sut q.sut $$(sut p))))
         [%fork *]   (fork $(sut p.sut) $(sut q.sut))
@@ -2174,7 +2184,7 @@
     |-  ^-  *_^([& p=*tape] [| p=*tape])
     =+  ^=  voy
         |-  ^-  *(unit _[p=@ q=@]) 
-        ?:  ?=([%cube @] p.sut)
+        ?:  ?=([%cube @ *] p.sut)
           [~ 0 p.p.sut]
         ?:  ?=([%core *] p.sut)
           =+  voy=$(sut p.sut)
@@ -2217,6 +2227,7 @@
         ?-    sut
             [%cell *]   $(sut q.sut, den $(sut p.sut))
             [%core *]   $(sut p.sut)
+            [%cube *]   $(sut q.sut)
             [%face *]   $(sut repo)
             [%fine *]   $(sut repo)
             [%fork *]   $(sut q.sut, den $(sut p.sut))
@@ -2233,7 +2244,7 @@
     =<  q
     |-  ^-  [p=*(set type) q=*tank]
     ?-    sut
-        [%bone *]  [dex (show '@')]
+        [%atom *]  [dex (show '@')]
         %noun      [dex (show '*')]
         %void      [dex (show '#')]
         [%cell *] 
@@ -2257,7 +2268,13 @@
         [p.vir [%rose [[' ' ~]  ['(' ~] [')' ~]] q.vir [%leaf p.rog] ~]]
       ==
     ::
-        [%cube *]   [dex (show ?:(.=(0 p.sut) '~' [%q p.sut]))]
+        [%cube *]
+      =+  vir=$(sut q.sut)
+      :-  p.vir
+      :+  %palm
+        [['.' ~] ['~' ~] ~ ~]
+      [(show ?:(.=(0 p.sut) '~' [%q p.sut])) q.vir ~]
+    ::
         [%face *]   
       =+  vir=$(sut q.sut)
       :-  p.vir
@@ -2273,7 +2290,7 @@
       [[%leaf (slyx (end 2 4 (mug q.sut)))] q.vir ~]
     ::
         [%fork *]
-      ?:  .=([%fork [%cube 0] [%cube 1]] sut)
+      ?:  .=([%fork [%cube 0 %atom %f] [%cube 1 %atom %f]] sut)
         [dex (show '?')]
       =+  vir=$(sut p.sut)
       =+  ^=  tov
@@ -2359,6 +2376,9 @@
         [~ (peg 2 p.u.taf) q.u.taf]
       [~ 1 | (peg 3 p.u.zem) [[sut q.u.zem] ~]]
     ::
+        [%cube *]
+      $(sut repo)
+    ::
         [%face *]
       ?:  .=(cog p.sut)
         [~ 1 & q.sut]
@@ -2428,6 +2448,29 @@
       ~|('fire-wet' !!)
     [p q.q]
   ::
+  ++  firm
+    ~.  %firm
+    |=  [gib=*]
+    ^-  ?
+    ?-    sut
+        %void      |
+        %noun      &
+        [%atom *]  !.?(gib)
+        [%cell *]   
+      ?&(.?(gib) $(sut p.sut, gib -.gib) $(sut q.sut, gib +.gib))
+    ::
+        [%core *]
+      ?:  .=(~ p.r.q.sut)
+        ~|(%firm-core !!)
+      ?&(.?(gib) $(sut p.sut, gib -.gib) .=(p.r.q.sut +.gib))
+    ::
+        [%cube *]  .=(gib p.sut)
+        [%fork *]  ?|($(sut p.sut) $(sut q.sut))
+        [%face *]  $(sut repo)
+        [%fine *]  $(sut repo)      ::  XX actually refine?
+        [%hold *]  $(sut repo)
+    ==
+  ::
   ++  fish
     ~.  %fish
     |=  axe=*axis
@@ -2435,7 +2478,7 @@
     |-
     ^-  *form
     ?-  sut
-        [%bone *]   (flip [3 0 axe])
+        [%atom *]   (flip [3 0 axe])
         %void       [1 1]
         %noun       [1 0]
     ::
@@ -2451,9 +2494,6 @@
         [%fork *]   (flor $(sut p.sut) $(sut q.sut))
         [%hold *]
       ?:  (~(has in vit) sut)
-        ::  ~~  (dunk 'type')
-        ::  ~~  (show [%c 'axis'] [%d axe])
-        ::  ~|(%fish-loop !!)
         [0 0]
       =>  %=(. vit (~(put in vit) sut))
       $(sut repo)
@@ -2476,26 +2516,24 @@
     ?:  ?|(.=(sut ref) .=(%noun ref))
       sut
     ?-    sut
-        [%bone *] 
+        [%atom *] 
       ?-    ref
           [%cell *]   %void
           *           $(sut ref, ref sut)
       ==
     ::
         [%cell *]   
-      ?-    ref
-          [%cell *]   (cell $(sut p.sut, ref p.ref) $(sut q.sut, ref q.ref))
-          *           $(sut ref, ref sut)
+      ?-  ref
+        [%cell *]   (cell $(sut p.sut, ref p.ref) $(sut q.sut, ref q.ref))
+        *           $(sut ref, ref sut)
       ==
     ::
-        [%core *]   $(sut repo)
+        [%core *]     $(sut repo)
         [%cube *]
-      ?-    ref
-          [%bone *]   ?:(.?(p.sut) %void sut)
-          [%cell *]   ?:(.?(p.sut) $(sut repo) %void)
-          [%cube *]   %void
-          *           $(sut ref, ref sut)
-      ==
+      =+  foz=$(sut q.sut)
+      ?:  (firm(sut foz) p.sut)
+        (cube p.sut foz)
+      %void
     ::
         [%face *]     (face p.sut $(sut q.sut))
         [%fine *]     (fine p.sut q.sut $(sut r.sut))
@@ -2543,7 +2581,7 @@
     =+  [now=(cap axe) lat=(mas axe)]
     |-  ^-  *type
     ?-    sut
-        [%bone *]   %void
+        [%atom *]   %void
         [%cell *]
       ?:  .=(2 now)
         (cell $$(sut p.sut, axe lat) q.sut)
@@ -2617,7 +2655,7 @@
           [%cssg *]                                                   ::  ?~
         =+  hec=~(rake ap p.gen)
         =+  axe=p:(seek %read hec)
-        =+  bor=(cull axe [%bone %%])
+        =+  bor=(cull axe [%atom %%])
         =+  wul=(cull axe [%cell %noun %noun])
         =+  hiq=$(sut ?:(.=(%void bor) sut bor), gen q.gen)
         =+  ran=$(sut ?:(.=(%void wul) sut wul), gen r.gen)
@@ -2638,11 +2676,13 @@
         (boil |.([3 q:$$(gen p.gen, gol %noun)]))
       ::
           [%dtpd *]                                                   ::  .+
-        :-  (nice [%bone %%])
-        (boil |.([4 q:$$(gen p.gen, gol [%bone %%])]))
+        :-  (nice [%atom %%])
+        (boil |.([4 q:$$(gen p.gen, gol [%atom %%])]))
       ::
           [%dtsg *]                                                   ::  .~ 
-        [(nice [%cube p.gen]) [1 p.gen]]
+        ?:  .?(p.gen)
+          [(nice [%cube p.gen %noun]) [1 p.gen]]
+        [(nice [%cube p.gen %atom %%]) [1 p.gen]]
       ::
           [%dttr *]                                                   ::  .*
         :-  (nice %noun)
@@ -2829,7 +2869,7 @@
           %void       sint
           %noun       &
       ::
-          [%bone *]   ?-(ref [%bone *] &, [%cube *] !.?(p.ref), * sint)
+          [%atom *]   ?-(ref [%atom *] &, * sint)
           [%cell *]
         ?.  ?=([%cell *] ref)
           sint
@@ -2843,7 +2883,11 @@
           sint
         cong
       ::
-          [%cube *]   ?.(?=([%cube *] ref) sint .=(sut ref))
+          [%cube *]   
+        ?:  ?=([%cube *] ref)
+          .=(p.sut p.ref)
+        sint
+      ::
           [%face *]   dext(sut q.sut)
           [%fine *]
         ?.  ?=([%fine *] ref)
@@ -2851,7 +2895,7 @@
         ?&(.=(p.sut p.ref) .=(q.sut q.ref) dext(sut r.sut, ref r.ref))
       ::
           [%fork *]
-        ?.  ?=(*%{[%bone *] %noun [%cell *] [%cube *] [%core *]} ref)
+        ?.  ?=(*%{[%atom *] %noun [%cell *] [%cube *] [%core *]} ref)
           sint
         ?|(dext(sut p.sut) dext(sut q.sut))
       ::
@@ -2865,7 +2909,7 @@
     ++  sint
       ^-  ?
       ?-  ref
-          [%bone *]   |
+          [%atom *]   |
           [%cell *]   |
           [%fork *]   ?&(dext(ref p.ref) dext(ref q.ref))
           [%hold *]
@@ -2887,23 +2931,14 @@
     =+  bix=*(set _[*type *type])
     |-
     ?-    sut
-        [%bone *]     ?-(ref [%bone *] |, [%cell *] &, * $(sut ref, ref sut))
+        [%atom *]     ?-(ref [%atom *] |, [%cell *] &, * $(sut ref, ref sut))
         [%cell *]
       ?:  ?=([%cell *] ref)
         ?|($(sut p.sut, ref p.ref) $(sut q.sut, ref q.ref))
       $(sut ref, ref sut)
     ::
         [%core *]   $(sut [%cell p.sut %noun])
-        [%cube *]
-      ?-  ref
-          [%bone *]   .?(p.sut)
-          [%cell *]   ?|  !.?(p.sut)
-                          $(sut [%cell [%cube -.p.sut] [%cube +.p.sut]])
-                      ==
-          [%cube *]   !.=(p.sut p.ref)
-          *           $(sut ref, ref sut)
-      ==
-    ::
+        [%cube *]   (firm(sut ref) p.sut)
         [%fork *]   ?&($(sut p.sut) $(sut q.sut))
         [%hold *]
       ?|
@@ -2952,7 +2987,7 @@
     ?-    sut
         %void       %void
         %noun       %noun
-        [%bone *]   %void
+        [%atom *]   %void
         [%cell *]   ?:(.=(2 now) $(sut p.sut, axe lat) $(sut q.sut, axe lat))
         [%core *]   
       ?:  .=(2 now) 
@@ -2962,13 +2997,6 @@
           ~|(%peek-park !!)
         $(sut p.sut, axe lat) 
       %noun
-    ::
-        [%cube *]   
-      ?.  .?(p.sut) 
-        %void 
-      ?:  .=(2 now) 
-        $(sut [%cube -.p.sut], axe lat)
-      $(sut [%cube +.p.sut], axe lat)
     ::
         [%fork *]   (fork $(sut p.sut) $(sut q.sut))
         *           $(sut repo)
@@ -2991,14 +3019,12 @@
   ++  repo
     ^-  *type
     ?-    sut
-        [%cube *]   
-      ?.(.?(p.sut) [%bone %%] [%cell [%cube -.p.sut] [%cube +.p.sut]])
-    ::
         [%core *]   [%cell p.sut %noun]
+        [%cube *]   q.sut
         [%face *]   q.sut
         [%fine *]   r.sut
         [%hold *]   (rest p.sut)
-        %noun       [%fork [%bone %%] [%cell %noun %noun]]
+        %noun       [%fork [%atom %%] [%cell %noun %noun]]
     ==
   ::
   ++  rest
@@ -3050,6 +3076,7 @@
         |   p.haq
       ==
     ::
+        [%cube *]   $(sut repo)
         [%face *]   [%ktbn p.sut $(sut q.sut)]
         [%fine *]   $(sut repo)
         [%hold *]   $(sut repo)
