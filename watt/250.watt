@@ -1083,7 +1083,7 @@
   ++  pel  (just ')')
   ++  poy  ;~(pfix nov ;~(pose nov bot mes))
   ++  qit  ;~(pose (shim 32 38) (shim 40 91) (shim 93 126) poy)
-  ++  qut  (ifix [bot bot] (boss 256 (plus qit)))
+  ++  qut  (ifix [bot bot] (boss 256 (most gon qit)))
   ++  sec  (just '$')
   ++  sed  (just '}')
   ++  sig  (just '~')

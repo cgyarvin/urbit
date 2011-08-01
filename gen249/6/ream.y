@@ -23,6 +23,7 @@
   */
     struct _u2_scanner {
       u2_ray  wir_r;
+      u2_noun cor;
       u2_flag bug;
       u2_noun scan;     /* result - set by parser */
 
@@ -72,7 +73,7 @@
 
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 85
+  %expect 88
 
   %pure-parser
   %locations
@@ -83,6 +84,73 @@
 /* Support routines.
 */
 %{
+  static u2_noun
+  _yfon_byte(struct _u2_scanner *scanner, 
+            u2_noun x,
+            u2_noun y,
+            u2_noun z)
+  {
+    u2_wire wir_r = scanner->wir_r;
+    u2_noun fug = u2_bq(wir_r, x, y, z, u2_nul);
+    u2_noun ret = u2_bn_tape(wir_r, fug);
+
+    u2_rz(wir_r, fug);
+    return ret;
+  }
+
+  static u2_noun                                                  //  produce
+  _yfon_far(struct _u2_scanner *scanner,
+           u2_noun x)                                             //  submit
+  {
+    u2_wire wir_r = scanner->wir_r;
+    u2_noun cor = scanner->cor;
+    u2_noun far = u2_bn_hook(wir_r, cor, "far");
+    u2_noun ret = u2_bn_mong(wir_r, far, x);
+
+    u2_rz(wir_r, far);
+    return ret;
+  }
+  static u2_noun                                                  //  produce
+  _yfon_fyr(struct _u2_scanner *scanner,
+           u2_noun x)                                             //  submit
+  {
+    u2_wire wir_r = scanner->wir_r;
+    u2_noun cor = scanner->cor;
+    u2_noun fyr = u2_bn_hook(wir_r, cor, "fyr");
+    u2_noun ret = u2_bn_mong(wir_r, fyr, x);
+
+    u2_rz(wir_r, fyr);
+    return ret;
+  }
+  static u2_noun                                                  //  produce
+  _yfon_16(struct _u2_scanner *scanner,
+          u2_atom x,                                              //  submit
+          u2_atom y)                                              //  submit
+  {
+    return (x << 8) | (x ^ y);
+  }
+  static u2_noun                                                  //  produce
+  _yfon_32(struct _u2_scanner *scanner,
+          u2_atom x,                                              //  submit
+          u2_atom y)                                              //  submit
+  {
+    u2_wire wir_r = scanner->wir_r;
+    uint32_t z = (x << 16) | (x ^ y);
+
+    return u2_bn_words(scanner->wir_r, 1, &z); 
+  }
+  static u2_noun                                                  //  produce
+  _yfon_list(struct _u2_scanner *scanner,
+            u2_noun l)                                            //  submit
+  {
+    u2_wire wir_r = scanner->wir_r;
+    u2_noun p = j2_mbc(Pt2, flop)(wir_r, l);
+    u2_noun r = j2_mbc(Pt3, can)(wir_r, 5, p);
+
+    u2_rz(wir_r, p);
+    u2_rz(wir_r, l);
+    return r;
+  }
 %}
 
 %%
@@ -128,6 +196,8 @@ wide_c
         { $$ = _ycell(c3__dtsg, _0); }
       | si_bar
         { $$ = _ycell(c3__dtsg, _1); }
+      | si_sig tok_fon
+        { $$ = _ycell(c3__dtsg, $2); }
       | tok_loct
         { $$ = _ycell(c3__dtsg, $1); }
       | si_mit tok_term
@@ -838,13 +908,39 @@ tall
         tok_delm_load: { $$ = _0; }
                     | cd tok_delm_load { $$ = _ycell($1, $2); }
                     ;
+    tok_fonq
+      : ca ca ca 
+        { $$ = _yfon_byte(scanner, $1, $2, $3); }
+
+    tok_far: tok_fonq           { $$ = _yfon_far(scanner, $1); }
+    tok_fyr: tok_fonq           { $$ = _yfon_fyr(scanner, $1); }
+    tok_ff: tok_far tok_fyr     { $$ = _yfon_16(scanner, $1, $2); }
+    tok_fff: tok_far '-' tok_ff { $$ = _yfon_32(scanner, $1, $3); }
+    tok_ffff: tok_ff '-' tok_ff { $$ = _yfon_32(scanner, $1, $3); }
+
+    tok_fon
+      : tok_fpre tok_frest
+        { $$ = _yfon_list(scanner, u2_bc(ywir_r, u2_bc(ywir_r, 1, $1), $2)); }
+
+    tok_fpre
+      : tok_far
+      | tok_ff
+      | tok_fff
+      | tok_ffff
+      ;
+
+    tok_frest
+      : '-' '-' tok_ffff tok_frest
+        { $$ = u2_bc(ywir_r, u2_bc(ywir_r, 1, $3), $4); }
+      | { $$ = u2_nul; }
+      ;
 
     tok_loct
       : si_bot loct_mid si_bot
         { $$ = u2_bn_tape(ywir_r, $2); u2_rz(ywir_r, $2); }
       ;
         loct_mid: { $$ = _0; }
-                 | cq loct_mid { $$ = _ycell($1, $2); }
+                 | cq gap loct_mid { $$ = _ycell($1, $3); }
                  ;
 
 
@@ -945,10 +1041,12 @@ _watt_locate(struct _u2_scanner *scanner,
 static void
 _scanner_init_sack(struct _u2_scanner *scanner,
                    u2_ray  wir_r,
+                   u2_noun cor,
                    u2_noun sack)
 {
   scanner->wir_r = wir_r;
   scanner->scan = u2_none;
+  scanner->cor = cor;
   scanner->bug = u2_no;
   scanner->s.token = 0;
   scanner->s.pb = 0;
@@ -972,10 +1070,12 @@ _scanner_init_sack(struct _u2_scanner *scanner,
 static void
 _scanner_init_clip(struct _u2_scanner *scanner,
                    u2_ray  wir_r,
+                   u2_noun cor,
                    u2_noun clip)
 {
   scanner->wir_r = wir_r;
   scanner->scan = u2_none;
+  scanner->cor = cor;
   scanner->bug = u2_no;
   scanner->s.token = 0;
   scanner->s.pb = 0;
@@ -1002,12 +1102,13 @@ _scanner_init_clip(struct _u2_scanner *scanner,
 /* functions
 */
   u2_noun                                                         //  transfer
-  j2_mby(Pt6, ream)(u2_wire wir_r, 
+  j2_mby(Pt6, ream)(u2_ray  wir_r, 
+                    u2_noun cor,
                     u2_noun txt)                                  //  retain
   {
     struct _u2_scanner scanner;
 
-    _scanner_init_sack(&scanner, wir_r, txt);
+    _scanner_init_sack(&scanner, wir_r, cor, txt);
 
     if ( 0 != setjmp(scanner.env) ) {
       fprintf(stderr, "ream error: %d, %d\n", 
@@ -1025,12 +1126,13 @@ _scanner_init_clip(struct _u2_scanner *scanner,
   }
   u2_noun                                                         //  transfer
   j2_mby(Pt6, vest)(u2_wire wir_r, 
+                    u2_noun cor,
                     u2_noun tub)                                  //  retain
   {
     struct  _u2_scanner scanner;
     u2_noun hor;
 
-    _scanner_init_clip(&scanner, wir_r, tub);
+    _scanner_init_clip(&scanner, wir_r, cor, tub);
 
     if ( 0 != setjmp(scanner.env) ) {
       hor = u2_bc(wir_r, scanner.s.xw_line, scanner.s.xw_col);
@@ -1059,7 +1161,7 @@ _scanner_init_clip(struct _u2_scanner *scanner,
     if ( u2_none == (txt = u2_frag(u2_cw_sam, cor)) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
-      return j2_mby(Pt6, ream)(wir_r, txt);
+      return j2_mby(Pt6, ream)(wir_r, cor, txt);
     }
   }
   u2_noun
@@ -1071,7 +1173,7 @@ _scanner_init_clip(struct _u2_scanner *scanner,
     if ( u2_none == (tub = u2_frag(u2_cw_sam, cor)) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
-      return j2_mby(Pt6, vest)(wir_r, tub);
+      return j2_mby(Pt6, vest)(wir_r, cor, tub);
     }
   }
 

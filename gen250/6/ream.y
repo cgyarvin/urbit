@@ -72,7 +72,7 @@
 
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 85
+  %expect 86
 
   %pure-parser
   %locations
@@ -844,7 +844,7 @@ tall
         { $$ = u2_bn_tape(ywir_r, $2); u2_rz(ywir_r, $2); }
       ;
         loct_mid: { $$ = _0; }
-                 | cq loct_mid { $$ = _ycell($1, $2); }
+                 | cq gap loct_mid { $$ = _ycell($1, $3); }
                  ;
 
 

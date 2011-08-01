@@ -342,7 +342,10 @@
   ::::
   ~%    %c
       -
-    ~
+    ==
+      %far  far
+      %fyr  fyr
+    ==
   &.
   ::      Tier 3a, axes
   ::
@@ -629,6 +632,68 @@
        /fe8c511a\ /a9afcd63\ /ba9cd382\ /352598d8
     --
   ::
+  ::      Tier 3f, phonetic encoding
+  ::
+  ++  fal
+    'bocmarbinwansamlitsighidfidlissogdirwacsabwissib\
+    /rigsoldopmodfoglidhopdardorlorhodfolrintogsilmir\
+    /holpaslacrovlivdalsatlibtabhanticpidtorbolfosdot\
+    /losdilforpilramtirwintadbicdifrocwidbisdasmidlop\
+    /rilnardapmolsanlocnovsitnidtipsicropwitnatpanmin\
+    /ritpodmottamtolsavposnapnopsomfinfonbanporworsip\
+    /ronnorbotwicsocwatdolmagpicdavbidbaltimtasmallig\
+    /sivtagpadsaldivdactansidfabtarmonranniswolmispal\
+    /lasdismaprabtobrollatlonnodnavfignomnibpagsopral\
+    /bilhaddocridmocpacravripfaltodtiltinhapmicfanpat\
+    /taclabmogsimsonpinlomrictapfirhasbosbatpochactid\
+    /havsaplindibhosdabbitbarracparloddosbortochilmac\
+    /tomdigfilfasmithobharmighinradmashalraslagfadtop\
+    /mophabnilnosmilfopfardatnoldinhatnacrisfotribhoc\
+    /nimlarfitwalrapsarnalmoslandondanladdovrivbacpol\
+    /laptalpitnambonrostonfodponsovnocsorlavmatmipfap'
+  ::
+  ++  fyl
+    'lesnecbudwessevpersutletfulpensytdurwepserwylsun\
+    /rypsyxdyrnuphebpeglupdepdysputlughecryttyssydnex\
+    /lunmeplutseppesdelsulpedtemledtulmetwenbynhexfeb\
+    /pyldulhetmevruttylwydtepbesdexsefwycburderneppur\
+    /rysrebdennutsubpetrulsynregtydsupsemwynrecmegnet\
+    /secmulnymtevwebsummutnyxrextebfushepbenmuswyxsym\
+    /selrucdecwexsyrwetdylmynmesdetbetbeltuxtugmyrpel\
+    /syptermebsetdutdegtexsurfeltudnuxruxrenwytnubmed\
+    /lytdusnebrumtynseglyxpunresredfunrevrefmectedrus\
+    /bexlebduxrynnumpyxrygryxfeptyrtustyclegnemfermer\
+    /tenlusnussyltecmexpubrymtucfyllepdebbermughuttun\
+    /bylsudpemdevlurdefbusbeprunmelpexdytbyttyplevmyl\
+    /wedducfurfexnulluclennerlexrupnedlecrydlydfenwel\
+    /nydhusrelrudneshesfetdesretdunlernyrsebhulryllud\
+    /remlysfynwerrycsugnysnyllyndyndemluxfedsedbecmun\
+    /lyrtesmudnytbyrsenwegfyrmurtelreptegpecnelnevfes'
+  ::
+  ++  fap
+    |=  a=@
+    ~|  %fap
+    ?>  (lth a 256)
+    (cut 3 [(mul 3 a) 3] fal) 
+  ::
+  ++  fyp
+    |=  a=@
+    ~|  %fyp
+    ?>  (lth a 256)
+    (cut 3 [(mul 3 a) 3] fyl)
+  ::
+  ++  far
+    |=  a=@
+    ~|  [%far a]
+    =+  b=`@`0
+    |-(?:(.=(a (fap b)) b $(b +(b))))
+  ::
+  ++  fyr
+    |=  a=@
+    ~|  [%fyr a]
+    =+  b=`@`0
+    |-(?:(.=(a (fyp b)) b $(b +(b))))
+  ::
   ::  Tier 4 cones
   ::
   ++  tree
@@ -891,6 +956,16 @@
       (fail tub)
     (next tub)
   ::
+  ++  lean
+    |=  daf=*(list char)
+    |=  tub=*clip
+    ^-  *(like char)
+    ?~  q.tub
+      (fail tub) 
+    ?.  |-(?~(daf | ?|(.=(i.daf i.q.tub) $(daf t.daf))))
+      (fail tub)
+    (next tub)
+  ::
   ++  knee
     |*  [gar=* sef=|.(rule)]
     |=  tub=*clip
@@ -1062,6 +1137,35 @@
   ++  dit  (cook |=(a=@ (sub a '0')) (shim '0' '9'))
   ++  dun  (cold ~ ;~(plug dap dap))
   ++  duz  (cold ~ ;~(plug bon bon))
+  ++  fad
+    %+  cook
+      |=([x=@ y=@ z=@] (far :(mix (lsh 3 2 z) (lsh 3 1 y) x)))
+    ;~(plug low low low)
+  ::
+  ++  fed
+    %+  cook
+      |=(a=*(list nat) (roll a |=([p=@ q=@] (add p (lsh 5 1 q)))))
+    ;~  plug
+      ;~(pose fud fwd fod fad)
+      (star ;~(pfix ;~(pose dun ;~(plug nov gay von)) fud))
+    ==
+  ::
+  ++  fod  (cook |=([a=@ b=@] (add (lsh 3 1 a) (mix a b))) ;~(plug fad fyd))
+  ++  fud
+    %+  cook 
+      |=([a=@ b=@] (add (lsh 4 1 a) (mix a b)))
+    ;~(plug fod ;~(pfix dap fod))
+  ::
+  ++  fwd  
+    %+  cook 
+      |=([a=@ b=@] (add (lsh 4 1 a) (mix a b)))
+    ;~(plug fad ;~(pfix dap fod))
+  ::
+  ++  fyd
+    %+  cook
+      |=([x=@ y=@ z=@] (fyr :(mix (lsh 3 2 z) (lsh 3 1 y) x)))
+    ;~(plug low low low)
+  ::
   ++  gal  ;~(pose (cold 2 del) (cold 3 led))
   ++  gap  (cold ~ (plus ;~(pose vul (mask [10 32 ~]))))
   ++  gay  ;~(pose gap (easy ~))
@@ -1084,7 +1188,7 @@
   ++  pel  (just ')')
   ++  poy  ;~(pfix nov ;~(pose nov bot mes))
   ++  qit  ;~(pose (shim 32 38) (shim 40 91) (shim 93 126) poy)
-  ++  qut  (ifix [bot bot] (boss 256 (plus qit)))
+  ++  qut  (ifix [bot bot] (boss 256 (most gon qit)))
   ++  sec  (just '$')
   ++  sed  (just '}')
   ++  sig  (just '~')
@@ -1274,6 +1378,24 @@
       =+  e=*tape
       |-(?:(.=(0 a) e $(a (div a b), e [(d (mod a b)) e])))
     ::
+    ++  aup
+      =+  b=(met 3 a)
+      |-  ^-  *tape
+      ?:  (gth (met 5 a) 1)
+        %+  weld
+          $(a (rsh 5 1 a), b (sub b 4)) 
+        `*tape`['-' '-' $(a (end 5 1 a), b 4)]
+      ?:  (lte b 1)
+        (rip 3 (fap a))
+      |-  ^-  *tape
+      ?:  .=(2 b)
+        =+  c=(rsh 3 1 a)
+        =+  d=(end 3 1 a)
+        (weld (rip 3 (fap c)) (rip 3 (fyp (mix c d))))
+      =+  c=(rsh 3 2 a)
+      =+  d=(end 3 2 a)
+      (weld $$(a c, b (met 3 a)) `*tape`['-' $(a (mix c d), b 2)])
+    ::
     ++  auv
       %^    aum
           64
@@ -1288,7 +1410,7 @@
     ++  aux  (aum 16 ['0' 'x' ~] |=(b=@ (add b ?:((lth a 10) 48 87))))
     --
   ::
-  ::
+  ::  Old atom rendering.
   ::
   ++  slyb  (slym 2 |=(a=@ (add '0' a)))
   ++  slyd  (slym 10 |=(a=@ (add '0' a)))
@@ -1951,7 +2073,7 @@
           p.gen 
         |-  ^-  *gene
         ?-  q.gen  
-          [* ~]  i.q.gen
+          [* ~]  [%bnld [~ 2] i.q.gen]
           [* ^]  [%mtdp [~ 3] [%bnld [~ 2] i.q.gen] $(q.gen t.q.gen) ~]
         ==
       ==
@@ -2676,9 +2798,9 @@
       ^-  [p=*type q=*form]
       ?-    gen
           [%bnld *]                                                   ::  =>
-        =+  fid=$(gen p.gen, gol %noun)
-        =+  soq=$(sut p.fid, gen q.gen)
-        [p.soq (boil |.((comb q.fid q.soq)))]
+        =+  lem=$(gen p.gen, gol %noun)
+        =+  soq=$(sut p.lem, gen q.gen)
+        [p.soq (boil |.((comb q.lem q.soq)))]
       ::
           [%csbn *]                                                   ::  ?=
         :-  (nice flag)
@@ -3051,9 +3173,9 @@
     p:(mint(vet |, fab |) %noun gen)
   ::
   ++  reco
-    |*  fud=|=(p=*type p)
+    |*  fuy=|=(p=*type p)
     =+  por=repo
-    =+  yot=(fud por)
+    =+  yot=(fuy por)
     ?:  .=(yot por)
       sut
     yot
@@ -3214,6 +3336,7 @@
         qut
         (cold & pam)
         (cold | bar)
+        ;~(pfix sig fed)
         ;~(pfix mit sym)
         (cold %% ;~(plug mit mit))
       ==

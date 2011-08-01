@@ -434,17 +434,7 @@
                        u2_noun cor,
                        ...);              // nouns 
 
-          /* u2_bn_mung(): 
-          **
-          **   Call by gate and sample (old convention).
-          **   Caller retains `gat`, transfers `sam`.
-          */
-            u2_noun                                               //  produce
-            u2_bn_mung(u2_wire wir_r,
-                       u2_noun gat,                               //  retain
-                       u2_noun sam);                              //  submit
-
-          /* u2_bn_mung(): 
+          /* u2_bn_mong(): 
           **
           **   Call by gate and sample (new convention).
           **   Caller retains `gat`, transfers `sam`.

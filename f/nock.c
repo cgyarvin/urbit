@@ -915,31 +915,6 @@ u2_nk_nock(u2_wire wir_r,
   }
 }
 
-/* u2_nk_mung():
-**
-**   Call with old convention.
-*/
-u2_weak                                                           //  transfer
-u2_nk_mung(u2_wire wir_r,
-           u2_weak gat,                                           //  retain
-           u2_weak sam)                                           //  transfer
-{
-  u2_noun cor, xip;
-
-  cor = u2_rc
-      (wir_r,
-       u2_rc(wir_r, sam, u2_rx(wir_r, u2_st(u2_sh(gat)))),
-       u2_rx(wir_r, u2_st(gat)));
-
-  if ( u2_none != (xip = u2_ds_find(wir_r, cor)) ) {
-    u2_noun pro = u2_ho_kick(wir_r, xip, cor, u2_cv_noc);
-
-    u2_rz(wir_r, cor);
-    return pro;
-  }
-  else return u2_nk_nock(wir_r, cor, u2_st(gat));
-}
-
 /* u2_nk_mong():
 **
 **   Call with new convention.

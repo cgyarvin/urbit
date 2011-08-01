@@ -19,16 +19,16 @@
       c3_w len_w = a;
 
       while ( len_w ) {
-        if ( u2_no == u2_dust(a) ) {
+        if ( u2_no == u2_dust(b) ) {
           return u2_none;
         }
-        a = u2_t(a);
+        b = u2_t(b);
         len_w--;
       }
-      if ( u2_no == u2_dust(a) ) {
+      if ( u2_no == u2_dust(b) ) {
         return u2_none;
       }
-      return u2_rx(wir_r, u2_h(a));
+      return u2_rx(wir_r, u2_h(b));
     }
   }
   u2_noun                                                         // transfer

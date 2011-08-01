@@ -649,24 +649,6 @@ u2_bn_cook(u2_wire     wir_r,
   }
 }
 
-/* u2_bn_mung(): 
-**
-**   Call by gate and sample (old convention).
-**   Caller retains `gat`, transfers `sam`.
-*/
-u2_noun
-u2_bn_mung(u2_wire wir_r,
-           u2_weak gat,
-           u2_weak sam)
-{
-  u2_weak pro = u2_nk_mung(wir_r, gat, sam);
-
-  if ( u2_none == pro ) {
-    return u2_bl_bail(wir_r, c3__fail);
-  }
-  else return pro;
-}
-
 /* u2_bn_mong(): 
 **
 **   Call by gate and sample (new convention).
@@ -683,26 +665,6 @@ u2_bn_mong(u2_wire wir_r,
     return u2_bl_bail(wir_r, c3__fail);
   }
   else return pro;
-}
-
-/* u2_bn_gart():
-**
-**   Call by core, hook, sample.
-*/
-u2_noun
-u2_bn_gart(u2_wire     wir_r,
-           u2_noun     cor,
-           const c3_c* tam_c,
-           u2_noun     sam)
-{ 
-  // XX: tested, but leaks.  Check memory protocol.
-  //
-  u2_noun fol = u2_bl_good(wir_r, u2_ds_look(wir_r, cor, tam_c));
-  u2_noun gat = u2_bn_nock(wir_r, cor, fol);
-  u2_noun tec = u2_bc(wir_r, u2_bc(wir_r, sam, u2_t(u2_h(gat))), u2_t(gat));
-
-  u2_rz(wir_r, fol);
-  return u2_bn_nock(wir_r, tec, u2_t(tec));
 }
 
 /* u2_bn_gort():
