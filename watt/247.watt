@@ -1364,6 +1364,7 @@
   ::    Tier 5b/2, prettyprinting: atom rendering
   ::
   ++  at
+    ~|  %at
     &=  a=@
     ++  r
       ?:  ?&  (gte (met 3 a) 2)
@@ -1380,6 +1381,8 @@
         rud
       rux
     ::
+    ++  rf    `*tape`[?-(a & '&', | '|') ~]
+    ++  rn    `*tape`[?>(=(0 a) '~') ~]
     ++  rt    `*tape`[39 (weld (mesc (rip 3 a)) `*tape`[39 ~])]
     ++  rta   rt
     ++  rtam  `*tape`['%' (rip 3 a)]
@@ -1648,9 +1651,11 @@
       [%dtsg p=*term q=*]
       [%dttr p=(gene) q=(gene)]
       [%ktbn p=*term q=(gene)]
+      [%ktdg p=(gene) q=(gene)]
       [%ktdl p=(gene) q=(gene)]
       [%ktdp p=(gene) q=(gene)]
       [%ktld p=(gene) q=(gene)]
+      [%ktpd p=(gene) q=(gene)]
       [%ktsg p=(gene)]
       [%mtbn p=(twig) q=((list _[p=(gene) q=(gene)]))]
       [%mtbr p=(twig) q=(gene) r=((list _[p=(gene) q=(gene)]))]
@@ -1839,6 +1844,7 @@
       $(gen q.gen, hep [[~ 3] hep])
     :: 
         [%ktbn *]     [%ktbn p.gen $(gen q.gen)]
+        [%ktdg *]     [%ktdg p.gen $(gen q.gen)]
         [%ktdl *]     [%ktdl p.gen $(gen q.gen)]
         [%ktdp *]     $(gen p.gen)
         [%ktld *]     [%ktld p.gen $(gen q.gen)]
@@ -1955,6 +1961,13 @@
           [* ~]   i.p.gen
           ^       [%dgdp i.p.gen $(p.gen t.p.gen)]
       ==
+    ::
+        [%ktdg *]
+      :+  %bnpd
+        q.gen
+      :+  %csld 
+        [%csbn [%bnld [~ 2] p.gen] [~ 3]]
+      [~ 3]
     ::
         [%mtbr *]
       :+  %bnpd
@@ -2286,7 +2299,71 @@
         %void       %void
     ==
   ::
-  ++  croc
+  ++  deal
+    |=  lum=*  
+    ~|  %deal
+    &-  ^-  *tank
+        ?-    sut
+            [%atom *]
+          ?>  ?=(@ lum)
+          :-  %leaf
+          ?-  p.sut
+            %f    ~(rf at lum)
+            %n    ~(rn at lum)
+            %ta   ~(rta at lum)
+            %tam  ~(rtam at lum)
+            %ub   ~(rub at lum)
+            %ud   ~(rud at lum)
+            %up   ~(rup at lum)
+            %uv   ~(ruv at lum)
+            %ux   ~(rux at lum)
+            *     ~(rud at lum)
+          ==
+        ::
+            [%cell *]
+          :+  %rose 
+            [[' ' ~] ['[' ~] [']' ~]]
+          |-  ^-  *(list tank)
+          :-  $$(sut p.sut, lum -.lum)
+          ?:  ?=([%cell *] q.sut)
+            $(sut q.sut)
+          [$$(sut q.sut, lum +.lum) ~]
+        ::
+            [%core *]
+          =+  rog=dent
+          ?-  -.rog
+            &  [%leaf p.rog]
+            |  :+  %rose 
+                 [[' '  ~] ['(' ~] [')' ~]] 
+               [$(sut p.sut, lum -.lum) [%leaf p.rog] ~]
+          ==
+        ::
+            [%cube *]  $(sut repo)
+            [%face *]
+          [%palm [['.' ~] ['=' ~] ~ ~] [%leaf (rip 3 p.sut)] $(sut q.sut) ~]
+        ::
+            [%fine *]  $(sut repo)
+            [%fork *]  ?.(lose(sut p.sut) $(sut p.sut) $(sut q.sut))
+            [%hold *]  $(sut repo)
+        ::
+            %noun      $(sut ?:(?=(@ lum) [%atom %%] [%cell %noun %noun]))
+            %void      !!
+        ==
+    ::
+    ++  lose 
+      |-  ^-  ?
+      ?-  sut
+        [%atom *]  .?(lum)
+        [%cell *]  ?|(!.?(lum) $(sut p.sut, lum -.lum) $(sut q.sut, lum +.lum))
+        [%cube *]  !.=(lum p.sut)
+        [%fork *]  ?&($(sut p.sut) $(sut q.sut))
+        %noun      |
+        %void      &
+        *          $(sut repo)
+      ==
+    --
+  ::
+  ++  dent
     ?>  ?=([%core *] sut)
     |-  ^-  *_^([& p=*tape] [| p=*tape])
     =+  ^=  voy
@@ -2351,7 +2428,7 @@
     =<  q
     |-  ^-  [p=*(set type) q=*tank]
     ?-    sut
-        [%atom *]  [dex (show '@')]
+        [%atom *]  [dex [%leaf ['@' (rip 3 p.sut)]]]
         %noun      [dex (show '*')]
         %void      [dex (show '#')]
         [%cell *] 
@@ -2367,7 +2444,7 @@
       [p.tov [%rose [[' ' ~]  ['[' ~] [']' ~]] q.vir q.tov]]
     ::
         [%core *]
-      =+  rog=croc
+      =+  rog=dent
       ?-  -.rog
           &  [dex [%leaf p.rog]]
           |
@@ -2380,7 +2457,7 @@
       :-  p.vir
       :+  %palm
         [['.' ~] ['~' ~] ~ ~]
-      [(show ?:(.=(0 p.sut) '~' [%q p.sut])) q.vir ~]
+      [(deal(sut q.sut) p.sut) q.vir ~]
     ::
         [%face *]   
       =+  vir=$(sut q.sut)
@@ -2825,6 +2902,10 @@
           %c                                          ::    c
         [%mtbn [%% ~] [[%b %c] ~]]                    ::  $(b c)
       ::
+          [%ktpd *]                                                   ::  ^+
+        =+  hif=(nice p:(mint(vet |, fab |) [%atom %%] p.gen))
+        [hif (boil |.(q:$$(gen q.gen, gol [%atom %%])))]
+      ::
           [%ktsg *]                                                   ::  ^~
         =+  nef=$(gen p.gen)
         ~~  (dunk %ktsg)
@@ -3126,13 +3207,14 @@
   ::
   ++  repo
     ^-  *type
-    ?-    sut
-        [%core *]   [%cell p.sut %noun]
-        [%cube *]   q.sut
-        [%face *]   q.sut
-        [%fine *]   r.sut
-        [%hold *]   (rest p.sut)
-        %noun       [%fork [%atom %%] [%cell %noun %noun]]
+    ?-  sut
+      [%core *]   [%cell p.sut %noun]
+      [%cube *]   q.sut
+      [%face *]   q.sut
+      [%fine *]   r.sut
+      [%hold *]   (rest p.sut)
+      %noun       [%fork [%atom %%] [%cell %noun %noun]]
+      *           ~|(%repo-flat !!)
     ==
   ::
   ++  rest
@@ -3367,6 +3449,10 @@
             ;~  pose
               (rune bon %ktbn expg)
               (rune dap %ktdp expb)
+              (rune deg %ktdg expb)
+              (rune del %ktdl expb)
+              (rune led %ktld expb)
+              (rune pad %ktpd expb)
               (rune sig %ktsg expa)
             ==
           ==

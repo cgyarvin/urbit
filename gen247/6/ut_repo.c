@@ -23,7 +23,7 @@
                             u2_bt(wir_r, c3__cell, c3__noun, c3__noun));
     }
     else switch ( u2_h(sut) ) {
-      default: return u2_rx(wir_r, sut);
+      default: return u2_bl_error(wir_r, "repo-flat");
 
       case c3__core: {
         if ( u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut) ) {

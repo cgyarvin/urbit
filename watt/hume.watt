@@ -7,9 +7,8 @@
 &!  env=seed
 ++  line
   |=  txt=@
-  ^-  [p=*tank q=*tank]
-  =+  gen=(ream txt)
-  =+  man=(~(mint ut p.env) %noun gen)
-  :-  (~(dunk ut p.man) 'type')
-  (show %q .*(q.env q.man)) 
+  ^-  [*tank *tank]
+  =+  man=(~(mint ut p.env) %noun (ream txt))
+  :-  (~(dunk ut p.man) %type)
+  (~(deal ut p.man) .*(q.env q.man))
 --

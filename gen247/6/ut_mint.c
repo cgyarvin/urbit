@@ -545,6 +545,30 @@
 
         return ret;
       }
+      case c3__ktpd: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
+      _mint_used(wir_r);
+      {
+        u2_noun gas = u2_bc(wir_r, c3__atom, u2_blip);
+        u2_noun von = u2_bn_molt(wir_r, van, j2_ut_van_vet, u2_no, 
+                                             j2_ut_van_fab, u2_no,
+                                             0);
+        u2_noun goy = j2_mcy(Pt6, ut, mint)(wir_r, von, sut, gas, p_gen);
+        u2_flag fab = _mint_fab(wir_r, van);
+        u2_noun ret;
+
+        ret = u2_bc
+          (wir_r,
+           _mint_nice(wir_r, van, gol, u2_rx(wir_r, u2_h(goy))),
+           (u2_no == fab)
+             ? u2_bc(wir_r, _0, _0)
+             : _mint_make(wir_r, van, sut, gas, q_gen));
+
+        u2_rz(wir_r, goy);
+        u2_rz(wir_r, von);
+        u2_rz(wir_r, gas);
+
+        return ret;
+      }
       case c3__ktsg: p_gen = u2_t(gen);
       _mint_used(wir_r);
       {

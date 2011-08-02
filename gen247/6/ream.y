@@ -73,7 +73,7 @@
 
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 90
+  %expect 91
 
   %pure-parser
   %locations
@@ -389,8 +389,10 @@ wide_c
 
     wide_norm: di_ketbon body_g_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_ketdap body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_ketdeg body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_ketdel body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_ketled body_b_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_ketpad body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_ketsig body_a_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_zapbon body_a_wide    { $$ = _ycell($1, $2); }
@@ -558,8 +560,10 @@ tall
 
     tall_norm: di_ketbon w body_g_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_ketdap w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_ketdeg w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_ketdel w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_ketled w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_ketpad w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_ketsig w body_a_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_mitbar w body_p_tall    { $$ = _ycell($1, $3); }
@@ -772,8 +776,10 @@ tall
    
     di_ketbon: si_ket si_bon  { $$ = c3__ktbn; }
     di_ketdap: si_ket si_dap  { $$ = c3__ktdp; }
+    di_ketdeg: si_ket si_deg  { $$ = c3__ktdg; }
     di_ketdel: si_ket si_del  { $$ = c3__ktdl; }
     di_ketled: si_ket si_led  { $$ = c3__ktld; }
+    di_ketpad: si_ket si_pad  { $$ = c3__ktpd; }
     di_ketsig: si_ket si_sig  { $$ = c3__ktsg; }
 
     di_mitbon: si_mit si_bon  { $$ = c3__mtbn; }

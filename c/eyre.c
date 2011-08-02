@@ -697,8 +697,12 @@ _eyre_line(u2_wire wir_r,
     pro = _eyre_mong(wir_r, gat, u2_rx(wir_r, txt));
     u2_bx_show(wir_r);
 
+#if 1
     _eyre_gnaw(wir_r, ken, 2, u2_h(pro));
     _eyre_gnaw(wir_r, ken, 0, u2_t(pro));
+#else
+    _eyre_gnaw(wir_r, ken, 0, pro);
+#endif
 
     u2_bl_done(wir_r, kit_r);
   }
