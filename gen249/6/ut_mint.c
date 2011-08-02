@@ -398,7 +398,12 @@
         u2_rz(wir_r, tom);
         return ret;
       }
-      case c3__dtsg: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
+      case c3__dtsg: 
+      if ( u2_no == u2_dust(u2_t(gen))) {
+        u2_err(wir_r, "gen", gen);
+        c3_assert(0);
+      }
+      u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mint_used(wir_r);
       {
         u2_noun boc = (u2_no == u2_stud(q_gen)) 

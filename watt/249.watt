@@ -1362,13 +1362,31 @@
       --
     --
   ::
-  ::    Tier 5b/2, atom rendering
+  ::    Tier 5b/2, prettyprinting: atom rendering
   ::
   ++  at
     &=  a=@
-    ++  aub  (aum 2 ['0' 'b' ~] |=(b=@ (add '0' b)))
-    ++  aud  (aum 10 ~ |=(b=@ (add '0' b)))
-    ++  aum
+    ++  r
+      ?:  ?&  (gte (met 3 a) 2)
+              |-
+              ?:  .=(0 a)
+                &
+              =+  vis=(end 3 1 a)
+              ?&  ?|(.=('-' vis) ?&((gte vis 'a') (lte vis 'z'))) 
+                  $(a (rsh 3 1 a))
+              ==
+          ==
+        rtam
+      ?:  (lte (met 3 a) 2)
+        rud
+      rux
+    ::
+    ++  rt    `*tape`[39 (weld (mesc (rip 3 a)) `*tape`[39 ~])]
+    ++  rta   rt
+    ++  rtam  `*tape`['%' (rip 3 a)]
+    ++  rub   (rum 2 ['0' 'b' ~] |=(b=@ (add '0' b)))
+    ++  rud   (rum 10 ~ |=(b=@ (add '0' b)))
+    ++  rum
       |=  [b=@ c=*tape d=|+(@ @)]
       %+  weld
         c
@@ -1378,7 +1396,7 @@
       =+  e=*tape
       |-(?:(.=(0 a) e $(a (div a b), e [(d (mod a b)) e])))
     ::
-    ++  aup
+    ++  rup
       =+  b=(met 3 a)
       |-  ^-  *tape
       ?:  (gth (met 5 a) 1)
@@ -1396,8 +1414,8 @@
       =+  d=(end 3 2 a)
       (weld $$(a c, b (met 3 a)) `*tape`['-' $(a (mix c d), b 2)])
     ::
-    ++  auv
-      %^    aum
+    ++  ruv
+      %^    rum
           64
         ['0' 'v' ~]
       |=  b=@
@@ -1407,7 +1425,7 @@
         '-'
       ?:((lth b 26) (add 65 b) ?:((lth b 52) (add 71 b) (sub b 4)))
     ::
-    ++  aux  (aum 16 ['0' 'x' ~] |=(b=@ (add b ?:((lth a 10) 48 87))))
+    ++  rux   (rum 16 ['0' 'x' ~] |=(b=@ (add b ?:((lth a 10) 48 87))))
     --
   ::
   ::  Old atom rendering.
@@ -1486,83 +1504,83 @@
     (add a ?:((lth a 26) 65 ?:((lth a 52) 71 ?:((lth a 62) 4 32))))
   ::
   ++  slyx  (slym 16 |=(a=@ (add a ?:((lth a 10) 48 87))))
-  ++  ship
-    |=  [fom=@ gar=*]
-    ^-  *tank
-    =+  l=(met 3 fom)
-    =+  i=`@`0
-    :-  %leaf
-    |-  ^-  *tape
-    ?:  (gte i l)
-      ~
-    =+  c=(cut 3 [i 1] fom)
-    ?.  .=(37 c)
-      (weld (mesc [c ~]) $(i .+(i)))
-    =+  d=(cut 3 [.+(i) 1] fom)
-    ?.  .?(gar)
-      [92 35 $(i (add 2 i))]
-    (weld ~(ram re (show d -.gar)) $(i (add 2 i), gar +.gar))
-  ::
-  ++  shop
-    |=  [aug=* vel=|+(a=@ *tape)]
-    ^-  *tank
-    ?:  ?=(@ aug)
-      [%leaf (vel aug)]
-    :+  %rose 
-      [[' ' ~] ['[' ~] [']' ~]]
-    |-  ^-  *(list tank)
-    ?:  ?=(@ aug)
-      [$$ ~]
-    [$$(aug -.aug) $(aug +.aug)]
-  ::
   ++  show
-    |=  vem=*pork
-    ^-  *tank
-    ?:  ?=(@ vem)
-      [%leaf (mesc (rip 3 vem))]
-    ?-    vem
-        [s=~ c=*]         
-      [%leaf 39 (weld (mesc (tape +.vem)) `*tape`[39 ~])]
-    ::
-        [s=%a c=@]        [%leaf (mesc (rip 3 c.vem))]
-        [s=%b c=*]        (shop c.vem slyb)
-        [s=[%c p=@] c=*]
-      :+  %palm
-        [['.' ~] ['-' ~] ~ ~]
-      [[%leaf (mesc (rip 3 p.s.vem))] $(vem c.vem) ~]
-    ::
-        [s=%d c=*]        (shop c.vem slyd)
-        [s=%o c=*]        
-      %=    $
-          vem 
-        :-  [%m '%a:<[%d %d].[%d %d]>'] 
-        [-.c.vem +<-.c.vem +<+.c.vem +>-.c.vem +>+.c.vem ~]
-      ==
-    ::
-        [s=%p c=*]        (shop c.vem slyp)
-        [s=%q c=*]        (shop c.vem slyq)
-        [s=%r c=*]        $(vem [[%r ' ' '{' '}'] c.vem])
-        [s=%s c=*]        (shop c.vem slys)
-        [s=%t c=*]        (tank c.vem)
-        [s=%v c=*]        (shop c.vem slyv)
-        [s=%x c=*]        (shop c.vem slyx)
-        [s=[%m p=@] c=*]  (ship p.s.vem c.vem)
-        [s=[%r p=@] c=*]
-      $(vem [[%r ' ' (cut 3 [0 1] p.s.vem) (cut 3 [1 1] p.s.vem)] c.vem])
-    ::
-        [s=[%r p=@ q=@ r=@] c=*]
-      :+  %rose
-        :*  p=(mesc (rip 3 p.s.vem))
-            q=(mesc (rip 3 q.s.vem))
-            r=(mesc (rip 3 r.s.vem))
+    |=  vem=*
+    &-  ^-  *tank
+        ?:  ?=(@ vem)
+          [%leaf (mesc (rip 3 vem))]
+        ?-    vem
+            [s=~ c=*]         
+          [%leaf 39 (weld (mesc (tape +.vem)) `*tape`[39 ~])]
+        ::
+            [s=%a c=@]        [%leaf (mesc (rip 3 c.vem))]
+            [s=%b c=*]        (shop c.vem |=(a=@ ~(rub at a)))
+            [s=[%c p=@] c=*]
+          :+  %palm
+            [['.' ~] ['-' ~] ~ ~]
+          [[%leaf (mesc (rip 3 p.s.vem))] $(vem c.vem) ~]
+        ::
+            [s=%d c=*]        (shop c.vem |=(a=@ ~(rud at a)))
+            [s=%k c=*]        (tank c.vem)
+            [s=%o c=*]        
+          %=    $
+              vem 
+            :-  [%m '%a:<[%d %d].[%d %d]>'] 
+            [-.c.vem +<-.c.vem +<+.c.vem +>-.c.vem +>+.c.vem ~]
+          ==
+        ::
+            [s=%p c=*]        (shop c.vem |=(a=@ ~(rup at a)))
+            [s=%q c=*]        (shop c.vem |=(a=@ ~(r at a)))
+            [s=%r c=*]        $(vem [[%r ' ' '{' '}'] c.vem])
+            [s=%t c=*]        (shop c.vem |=(a=@ ~(rt at a)))
+            [s=%v c=*]        (shop c.vem |=(a=@ ~(ruv at a)))
+            [s=%x c=*]        (shop c.vem |=(a=@ ~(rux at a)))
+            [s=[%m p=@] c=*]  (ship p.s.vem c.vem)
+            [s=[%r p=@] c=*]
+          $(vem [[%r ' ' (cut 3 [0 1] p.s.vem) (cut 3 [1 1] p.s.vem)] c.vem])
+        ::
+            [s=[%r p=@ q=@ r=@] c=*]
+          :+  %rose
+            :*  p=(mesc (rip 3 p.s.vem))
+                q=(mesc (rip 3 q.s.vem))
+                r=(mesc (rip 3 r.s.vem))
+            ==
+          |-  ^-  *(list tank)
+          ?~  c.vem
+            ~
+          [$$(vem -.c.vem) $(c.vem +.c.vem)]
+        ::
+            [s=%z c=*]        $(vem [[%r %% %% %%] c.vem])
         ==
-      |-  ^-  *(list tank)
-      ?~  c.vem
+    ++  ship
+      |=  [fom=@ gar=*]
+      ^-  *tank
+      =+  l=(met 3 fom)
+      =+  i=`@`0
+      :-  %leaf
+      |-  ^-  *tape
+      ?:  (gte i l)
         ~
-      [$$(vem -.c.vem) $(c.vem +.c.vem)]
+      =+  c=(cut 3 [i 1] fom)
+      ?.  .=(37 c)
+        (weld (mesc [c ~]) $(i .+(i)))
+      =+  d=(cut 3 [.+(i) 1] fom)
+      ?.  .?(gar)
+        [92 35 $(i (add 2 i))]
+      (weld ~(ram re (show d -.gar)) $(i (add 2 i), gar +.gar))
     ::
-        [s=%z c=*]        $(vem [[%r %% %% %%] c.vem])
-    ==
+    ++  shop
+      |=  [aug=* vel=|+(a=@ *tape)]
+      ^-  *tank
+      ?:  ?=(@ aug)
+        [%leaf (vel aug)]
+      :+  %rose 
+        [[' ' ~] ['[' ~] [']' ~]]
+      |-  ^-  *(list tank)
+      ?:  ?=(@ aug)
+        [$$ ~]
+      [$$(aug -.aug) $(aug +.aug)]
+    --
   ::
   ::      Tier 5c, packing
   ::
@@ -3296,6 +3314,8 @@
       (stag %tmdg ;~(pfix deg (ifix [lep pel] (most ace wide))))
       (cook |=(a=*twig [%mtbn a ~]) rope)
       (stag %cszp ;~(pfix zap wide))
+      (stag %csbr ;~(pfix bar (ifix [lep pel] (most ace wide))))
+      (stag %cspm ;~(pfix pam (ifix [lep pel] (most ace wide))))
       (stag %mttr ;~(pfix tar wide))
       (stag %dtbn ;~(pfix bon (ifix [lep pel] ;~((glue ace) wide wide))))
       (stag %dtpd ;~(pfix pad (ifix [lep pel] wide)))

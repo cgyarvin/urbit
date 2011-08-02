@@ -73,7 +73,7 @@
 
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 88
+  %expect 90
 
   %pure-parser
   %locations
@@ -246,6 +246,10 @@ wide_c
         { $$ = _ytrel(c3__cbtr, $3, u2_nul); }
       | si_mit si_des g bank_wide g si_sed
         { $$ = _ytrel(c3__cbmt, $4, u2_nul); }
+      | si_bar si_lep g bank_wide g si_pel
+        { $$ = _ycell(c3__csbr, $4); }
+      | si_pam si_lep g bank_wide g si_pel
+        { $$ = _ycell(c3__cspm, $4); }
       | rope si_lep rack_wide si_pel
         { $$ = _ytrel(c3__mtbn, $1, $3); }
       | si_zap wide
