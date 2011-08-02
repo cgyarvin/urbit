@@ -189,21 +189,21 @@ wide_c
 
     wide_hard
       : '0' 'x' tok_chex
-        { $$ = _ycell(c3__dtsg, $3); }
+        { $$ = _ytrel(c3__dtsg, c3_s2('u', 'x'), $3); }
       | tok_delm
-        { $$ = _ycell(c3__dtsg, $1); }
+        { $$ = _ytrel(c3__dtsg, c3_s2('u', 'd'), $1); }
       | si_pam
-        { $$ = _ycell(c3__dtsg, _0); }
+        { $$ = _ytrel(c3__dtsg, 'f', _0); }
       | si_bar
-        { $$ = _ycell(c3__dtsg, _1); }
+        { $$ = _ytrel(c3__dtsg, 'f', _1); }
       | si_sig tok_fon
-        { $$ = _ycell(c3__dtsg, $2); }
+        { $$ = _ytrel(c3__dtsg, c3_s2('u', 'p'), $2); }
       | tok_loct
-        { $$ = _ycell(c3__dtsg, $1); }
+        { $$ = _ytrel(c3__dtsg, c3_s2('t', 'a'), $1); }
       | si_mit tok_term
-        { $$ = _ycell(c3__dtsg, $2); }
+        { $$ = _ytrel(c3__dtsg, c3_s3('t', 'a', 'm'), $2); }
       | si_mit si_mit
-        { $$ = _ycell(c3__dtsg, _0); }
+        { $$ = _ytrel(c3__dtsg, c3_s3('t', 'a', 'm'), _0); }
       ;
    
     wide_base

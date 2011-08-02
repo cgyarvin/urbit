@@ -1702,7 +1702,7 @@
       [%dtbn p=(gene) q=(gene)]
       [%dtcs p=(gene)]
       [%dtpd p=(gene)]
-      [%dtsg p=*]
+      [%dtsg p=*term q=*]
       [%dttr p=(gene) q=(gene)]
       [%ktbn p=*term q=(gene)]
       [%ktdl p=(gene) q=(gene)]
@@ -1937,7 +1937,7 @@
       r.gen
     ::
         [%cbbr *]
-      %+  knit(gen ?~(q.gen [%dtsg ~] i.q.gen))
+      %+  knit(gen ?~(q.gen [%dtsg %n ~] i.q.gen))
         :^    %cssg
             [~ 10]
           (lung(gen [%zpzp ~]) [[~ 5] ~] q.gen)
@@ -1948,18 +1948,18 @@
       (knit(gen [%dgtr p.gen]) (mold(gen [%dgtr p.gen]) [[~ 5] ~]) q.gen)
     ::
         [%cbkt *]   
-      %+  knit(gen ?~(p.gen [%dtsg ~] i.p.gen))
+      %+  knit(gen ?~(p.gen [%dtsg %n ~] i.p.gen))
         (lung(gen [%zpzp ~]) [[~ 5] ~] p.gen)
       q.gen
     :: 
         [%cbmt *]
-      %+  knit(gen [%dtsg 0])
+      %+  knit(gen [%dtsg %n 0])
         =+  dix=`@`0
         |-  ^-  *gene
         ?~  p.gen
           [%zpzp ~] 
         :^    %csdg
-            [%dtbn [~ 5] [%dtsg dix]]
+            [%dtbn [~ 5] [%dtsg %u dix]]
           i.p.gen
         $(p.gen t.p.gen, dix .+(dix))
       q.gen
@@ -1973,7 +1973,7 @@
       r.gen 
     :: 
         [%cbtr *]
-      %+  knit(gen ?~(p.gen [%dtsg ~] i.p.gen))
+      %+  knit(gen ?~(p.gen [%dtsg %n ~] i.p.gen))
         |-  ^-  *gene
         ?~  p.gen
           [%zpzp ~]
@@ -1982,7 +1982,7 @@
     ::
         [%csbr *]
       |- 
-      ?~(p.gen [%dtsg 1] [%csdg i.p.gen [%dtsg 0] $(p.gen t.p.gen)])
+      ?~(p.gen [%dtsg %f 1] [%csdg i.p.gen [%dtsg %f 0] $(p.gen t.p.gen)])
     ::
         [%csdl *]   [%csdg p.gen [%zpzp ~] q.gen]
         [%csdt *]   [%csdg p.gen r.gen q.gen]
@@ -1999,12 +1999,12 @@
         [%csld *]   [%csdg p.gen q.gen [%zpzp ~]]
         [%cspm *]
       |-
-      ?~(p.gen [%dtsg 0] [%csdg i.p.gen $(p.gen t.p.gen) [%dtsg 1]])
+      ?~(p.gen [%dtsg %f 0] [%csdg i.p.gen $(p.gen t.p.gen) [%dtsg %f 1]])
     ::
-        [%cszp *]   [%csdg p.gen [%dtsg 1] [%dtsg 0]]
+        [%cszp *]   [%csdg p.gen [%dtsg %f 1] [%dtsg %f 0]]
         [%dgkt *]   [%dgdp p.gen [%dgdp q.gen [%dgdp r.gen s.gen]]]
         [%dgpd *]   [%dgdp p.gen [%dgdp q.gen r.gen]]
-        [%dgsg *]   |-(?~(p.gen [%dtsg ~] [%dgdp i.p.gen $(p.gen t.p.gen)]))
+        [%dgsg *]   |-(?~(p.gen [%dtsg %n ~] [%dgdp i.p.gen $(p.gen t.p.gen)]))
         [%dgtr *]
       |-
       ?-    p.gen 
@@ -2032,9 +2032,9 @@
         [%pmzp *]   [%bnld [%zpmt ~] [%pmbn p.gen q.gen]]
         [%sgbn *]   [%sgld [%germ p.gen] q.gen]
         [%sgbr *]   [%sgld [%bean p.gen] q.gen]
-        [%sgdg *]   [%sgld [%bank %dtsg p.gen] q.gen]
+        [%sgdg *]   [%sgld [%bank %dtsg %% p.gen] q.gen]
         [%sgdl *]   [%bndl [%sgld p.gen [~ 1]] q.gen]
-        [%sgdp *]   [%sgld [%sole %dtsg p.gen] q.gen]
+        [%sgdp *]   [%sgld [%sole %dtsg %% p.gen] q.gen]
         [%sgdt *]   [%sgmt p.gen [~ 4] ~ q.gen]
         [%sgdx *]   [%sgld %ping p.gen]
         [%sgkt *]   [%sgld %keep p.gen]
@@ -2042,26 +2042,26 @@
       :+  %sgdl
         :-  %fast
         :-  %dgpd
-        :+  [%dtsg p.gen]
+        :+  [%dtsg %% p.gen]
           [%zpbn q.gen]
         :-  %dgsg
         =+  nob=`*(list gene)`~
         |-  ^-  nob
         ?~  r.gen
           nob
-        [[%dgdp [%dtsg p.i.r.gen] [%zpbn q.i.r.gen]] $(r.gen t.r.gen)]
+        [[%dgdp [%dtsg %% p.i.r.gen] [%zpbn q.i.r.gen]] $(r.gen t.r.gen)]
       s.gen
     ::
-        [%sgpd *]   [%sgld [%memo %dtsg p.gen] q.gen]
+        [%sgpd *]   [%sgld [%memo %dtsg %% p.gen] q.gen]
         [%sgpm *]   [%sgld [%loaf p.gen] q.gen]
         [%sgsg *]   [%sgld [%mean [%brdt p.gen]] q.gen]
         [%tmbn *]
       ?-  p.gen
-        %atom   [%ktdp [%dtpd %dtsg 0] [%dtsg 0]]
-        %noun   [%ktdp [%dttr [%dtsg 0] [%dtsg 0]] [%dtsg 0]]
+        %atom   [%ktdp [%dtpd %dtsg %% 0] [%dtsg %% 0]]
+        %noun   [%ktdp [%dttr [%dtsg %% 0] [%dtsg %% 0]] [%dtsg %% 0]]
         %cell   [%dgdp [%tmbn %noun] [%tmbn %noun]]
-        %flag   [%ktdp [%dtcs %dtsg 0] [%dtsg 0]]
-        %null   [%dtsg 0]
+        %flag   [%ktdp [%dtcs %dtsg %% 0] [%dtsg %% 0]]
+        %null   [%dtsg %n ~]
       ==
     ::
         [%tmdg *]
@@ -2682,6 +2682,7 @@
     ?-    sut
         [%atom *] 
       ?-    ref
+          [%atom *]   sut       ::  XX flavor logic
           [%cell *]   %void
           *           $(sut ref, ref sut)
       ==
@@ -2844,9 +2845,9 @@
         (boil |.([4 q:$$(gen p.gen, gol [%atom %%])]))
       ::
           [%dtsg *]                                                   ::  .~ 
-        ?:  .?(p.gen)
-          [(nice [%cube p.gen %noun]) [1 p.gen]]
-        [(nice [%cube p.gen %atom %%]) [1 p.gen]]
+        ?:  .?(q.gen)
+          [(nice [%cube q.gen %noun]) [1 q.gen]]
+        [(nice [%cube q.gen %atom p.gen]) [1 q.gen]]
       ::
           [%dttr *]                                                   ::  .*
         :-  (nice %noun)
@@ -3330,15 +3331,15 @@
       %+  stag
         %dtsg
       ;~  pose
-        ;~(pfix (just '0') (just 'x') hex)
-        ;~(pfix (just '0') (just 'v') viz)
-        dem
-        qut
-        (cold & pam)
-        (cold | bar)
-        ;~(pfix sig fed)
-        ;~(pfix mit sym)
-        (cold %% ;~(plug mit mit))
+        (stag %ux ;~(pfix (just '0') (just 'x') hex))
+        (stag %uv ;~(pfix (just '0') (just 'v') viz))
+        (stag %ud dem)
+        (stag %ta qut)
+        (stag %f (cold & pam))
+        (stag %f (cold | bar))
+        (stag %up ;~(pfix sig fed))
+        (stag %tam ;~(pfix mit sym))
+        (stag %tam (cold %% ;~(plug mit mit)))
       ==
     ::
       %+  stag

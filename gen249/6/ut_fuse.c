@@ -53,10 +53,15 @@
 
       case c3__atom:
       {
-        if ( (u2_yes == u2_dust(ref)) && (c3__cell == u2_h(ref)) ) {
-          return c3__void;
+        if ( u2_yes == u2_dust(ref) ) {
+          if ( c3__atom == u2_h(ref) ) {
+            return u2_rx(wir_r, sut);
+          }
+          else if ( c3__cell == u2_h(ref) ) {
+            return c3__void;
+          }
         }
-        else return _fuse_in(wir_r, van, ref, sut, bix);
+        return _fuse_in(wir_r, van, ref, sut, bix);
       }
       case c3__cell: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {

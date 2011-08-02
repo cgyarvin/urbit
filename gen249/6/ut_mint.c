@@ -398,17 +398,17 @@
         u2_rz(wir_r, tom);
         return ret;
       }
-      case c3__dtsg: p_gen = u2_t(gen);
+      case c3__dtsg: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mint_used(wir_r);
       {
-        u2_noun boc = (u2_no == u2_stud(p_gen)) 
+        u2_noun boc = (u2_no == u2_stud(q_gen)) 
                         ? c3__noun
-                        : u2_bc(wir_r, c3__atom, u2_nul);
-        u2_noun typ = j2_mby(Pt6, cube)(wir_r, p_gen, boc);
+                        : u2_bc(wir_r, c3__atom, u2_rx(wir_r, p_gen));
+        u2_noun typ = j2_mby(Pt6, cube)(wir_r, q_gen, boc);
         u2_noun ret = 
             u2_bc(wir_r,
                   _mint_nice(wir_r, van, gol, typ),
-                  u2_bc(wir_r, _1, u2_rx(wir_r, p_gen)));
+                  u2_bc(wir_r, _1, u2_rx(wir_r, q_gen)));
 
         u2_rz(wir_r, boc);
         return ret;
