@@ -1117,15 +1117,13 @@
   ++  alf  ;~(pose low hig)
   ++  aln  ;~(pose low hig num)
   ++  bar  (just '|')
-  ++  bet  ;~(pose (cold 2 dap) (cold 3 pad))
+  ++  bet  ;~(pose (cold 2 sep) (cold 3 pes))
   ++  bin  (bass 2 (most gon but))
-  ++  bon  (just '=')
   ++  bot  (just '\'')
   ++  but  (cook |=(a=@ (sub a '0')) (shim '0' '1'))
   ++  cab  (just '_')
   ++  com  (just ',')
   ++  cas  (just '?')
-  ++  dap  (just '-')
   ++  dax  (just '#')
   ++  deg  (just ':')
   ++  den  (just '[')
@@ -1134,8 +1132,8 @@
   ++  del  (just '<')
   ++  dem  (bass 10 (most gon dit))
   ++  dit  (cook |=(a=@ (sub a '0')) (shim '0' '9'))
-  ++  dun  (cold ~ ;~(plug dap dap))
-  ++  duz  (cold ~ ;~(plug bon bon))
+  ++  dun  (cold ~ ;~(plug sep sep))
+  ++  duz  (cold ~ ;~(plug lyc lyc))
   ++  fad
     %+  cook
       |=([x=@ y=@ z=@] (far :(mix (lsh 3 2 z) (lsh 3 1 y) x)))
@@ -1153,12 +1151,12 @@
   ++  fud
     %+  cook 
       |=([a=@ b=@] (add (lsh 4 1 a) (mix a b)))
-    ;~(plug fod ;~(pfix dap fod))
+    ;~(plug fod ;~(pfix sep fod))
   ::
   ++  fwd  
     %+  cook 
       |=([a=@ b=@] (add (lsh 4 1 a) (mix a b)))
-    ;~(plug fad ;~(pfix dap fod))
+    ;~(plug fad ;~(pfix sep fod))
   ::
   ++  fyd
     %+  cook
@@ -1170,31 +1168,33 @@
   ++  gay  ;~(pose gap (easy ~))
   ++  gon  ;~(pose ;~(plug nov gay von) (easy ~))
   ++  hex  (bass 16 (most gon hit))
+  ++  hes  (just '$')
   ++  hig  (shim 'A' 'Z')
   ++  hit  ;~(pose dit (cook |=(a=*char (sub a 87)) (shim 'a' 'f')))
   ++  ket  (just '^')
   ++  lep  (just '(')
   ++  led  (just '>')
   ++  low  (shim 'a' 'z')
+  ++  lyc  (just '=')
   ++  mes  (cook |=([a=@ b=@] (add (mul 16 a) b)) ;~(plug hit hit))
   ++  mit  (just '%')
   ++  ned  (just ']')
   ++  nix  (boss 256 (star ;~(pose aln cab)))
   ++  nov  (just '\\')
   ++  num  (shim '0' '9')
-  ++  pad  (just '+')
   ++  pam  (just '&')
   ++  pel  (just ')')
+  ++  pes  (just '+')
   ++  poy  ;~(pfix nov ;~(pose nov bot mes))
   ++  qit  ;~(pose (shim 32 38) (shim 40 91) (shim 93 126) poy)
   ++  qut  (ifix [bot bot] (boss 256 (most gon qit)))
-  ++  sec  (just '$')
   ++  sed  (just '}')
+  ++  sep  (just '-')
   ++  sig  (just '~')
   ++  sym 
     %+  cook
       |=(a=*tape (rap 3 a))
-    ;~(plug low (star ;~(pose num low dap)))
+    ;~(plug low (star ;~(pose num low sep)))
   ::
   ++  tam  (just ';')
   ++  tar  (just '*')
@@ -1611,88 +1611,88 @@
   ++  gene
     _&  *term
       [~ p=*axis]
-      [%bndl p=(gene) q=(gene)]
-      [%bndp p=(gene) q=(gene)]
-      [%bnpd p=(gene) q=(gene)]
-      [%bnld p=(gene) q=(gene)]
-      [%brbn p=(gene) q=(gene)]
       [%brdg p=(gene) q=(gene)]
-      [%brdp p=(gene)]
       [%brdt p=(gene)]
+      [%brlc p=(gene) q=(gene)]
       [%brmt p=(gene)]
-      [%brpd p=(gene) q=(gene)]
+      [%brps p=(gene) q=(gene)]
       [%brtr p=(gene) q=(gene)]
+      [%brsp p=(gene)]
       [%brzp p=(gene) q=(gene)]
-      [%cbbn p=(gene) q=(gene) r=((map term foot))]
       [%cbbr p=(gene) q=((list gene)) r=((map term foot))]
       [%cbdg p=((list gene)) q=((map term foot))]
       [%cbkt p=((list gene)) q=((map term foot))]
+      [%cblc p=(gene) q=(gene) r=((map term foot))]
       [%cbmt p=((list gene)) q=((map term foot))]
       [%cbpm p=(gene) q=((list gene)) r=((map term foot))]
       [%cbtr p=((list gene)) q=((map term foot))]
-      [%csbn p=(gene) q=(gene)]
       [%csbr p=((list gene))]
       [%csdg p=(gene) q=(gene) r=(gene)]
       [%csdl p=(gene) q=(gene)]
       [%csdt p=(gene) q=(gene) r=(gene)]
+      [%cslc p=(gene) q=(gene)]
       [%csld p=(gene) q=(gene)]
-      [%csdp p=(gene) q=((list _[p=(gene) q=(gene)]))]
       [%cspm p=((list gene))]
       [%cssg p=(gene) q=(gene) r=(gene)]
+      [%cssp p=(gene) q=((list _[p=(gene) q=(gene)]))]
       [%cszp p=(gene)]
       [%dgkt p=(gene) q=(gene) r=(gene) s=(gene)]
-      [%dgdp p=(gene) q=(gene)]
-      [%dgpd p=(gene) q=(gene) r=(gene)]
+      [%dgps p=(gene) q=(gene) r=(gene)]
       [%dgsg p=((list gene))]
+      [%dgsp p=(gene) q=(gene)]
       [%dgtr p=((list gene))]
-      [%dtbn p=(gene) q=(gene)]
       [%dtcs p=(gene)]
-      [%dtpd p=(gene)]
+      [%dtlc p=(gene) q=(gene)]
+      [%dtps p=(gene)]
       [%dtsg p=*term q=*]
       [%dttr p=(gene) q=(gene)]
-      [%ktbn p=*term q=(gene)]
       [%ktdg p=(gene) q=(gene)]
       [%ktdl p=(gene) q=(gene)]
-      [%ktdp p=(gene) q=(gene)]
+      [%ktlc p=*term q=(gene)]
       [%ktld p=(gene) q=(gene)]
-      [%ktpd p=(gene) q=(gene)]
+      [%ktps p=(gene) q=(gene)]
       [%ktsg p=(gene)]
-      [%mtbn p=(twig) q=((list _[p=(gene) q=(gene)]))]
+      [%ktsp p=(gene) q=(gene)]
+      [%lcdl p=(gene) q=(gene)]
+      [%lcld p=(gene) q=(gene)]
+      [%lcps p=(gene) q=(gene)]
+      [%lcsp p=(gene) q=(gene)]
       [%mtbr p=(twig) q=(gene) r=((list _[p=(gene) q=(gene)]))]
       [%mtdg p=(gene) q=(gene)]
       [%mtdt p=(gene) q=(gene)]
       [%mtkt p=(gene) q=(gene) r=(gene) s=(gene)]
-      [%mtdp p=(gene) q=((list gene))]
-      [%mtpd p=(gene) q=(gene) r=(gene)]
+      [%mtlc p=(twig) q=((list _[p=(gene) q=(gene)]))]
+      [%mtps p=(gene) q=(gene) r=(gene)]
       [%mtsg p=(twig) q=(gene) r=(gene)]
+      [%mtsp p=(gene) q=((list gene))]
       [%mttr p=(gene)]
-      [%pmbn p=(gene) q=((map term foot))]
+      [%pmlc p=(gene) q=((map term foot))]
       [%pmdg p=(gene) q=((map term foot))]
-      [%pmdp p=(gene) q=((map term foot))]
       [%pmdt p=((map term foot))]
       [%pmmt p=((map term foot))]
-      [%pmpd p=(gene) q=((map term foot))]
+      [%pmps p=(gene) q=((map term foot))]
+      [%pmsp p=(gene) q=((map term foot))]
       [%pmzp p=(gene) q=((map term foot))]
-      [%sgbn p=(gene) q=(gene)]
       [%sgbr p=(gene) q=(gene)]
       [%sgdg p=[p=@ q=@] q=(gene)]
       [%sgdt p=(chop) q=(gene)]
       [%sgdl p=(_&(*term [p=*term q=(gene)])) q=(gene)]
-      [%sgdp p=@ q=(gene)]
       [%sgdx p=(gene)]
       [%sgkt p=(gene)]
+      [%sglc p=(gene) q=(gene)]
       [%sgld p=(_&(*term [p=*term q=(gene)])) q=(gene)]
       [%sgmt p=(chop) q=(gene) r=((list _[p=*term q=(gene)])) s=(gene)]
-      [%sgpd p=@ q=(gene)]
       [%sgpm p=(gene) q=(gene)]
+      [%sgps p=@ q=(gene)]
       [%sgsg p=(gene) q=(gene)]
-      [%tmbn p=*{%atom %noun %cell %flag %null}]
+      [%sgsp p=@ q=(gene)]
+      [%tmlc p=*{%atom %noun %cell %flag %null}]
       [%tmdg p=(gene) q=((list gene))]
       [%tmsg p=(gene) q=((list gene))]
-      [%zpbn p=(gene)]
       [%zpcb p=*spot q=(gene)]
       [%zpcm p=(gene) q=(gene)]
       [%zpdx p=(gene)]
+      [%zplc p=(gene)]
       [%zpmt ~]
       [%zptm p=(gene) q=(gene)]
       [%zpzp ~]
@@ -1791,16 +1791,16 @@
   ++  hack
     |-  ^-  *_^([& p=*gene q=*gene] [| p=*gene])
     ?-    gen
-        [%bnld *]
+        [%lcld *]
       ?.  ?=([~ *] p.gen)
         [| gen] 
       =+  pyr=$(gen q.gen)
       ?-    -.pyr
-          |   [| [%bnld p.gen p.pyr]]
-          &   [& [%bnld p.gen p.pyr] [%bnld p.gen q.pyr]]
+          |   [| [%lcld p.gen p.pyr]]
+          &   [& [%lcld p.gen p.pyr] [%lcld p.gen q.pyr]]
       ==
     ::
-        [%dgdp *]   [& p.gen q.gen]
+        [%dgsp *]   [& p.gen q.gen]
         [%zpcb *] 
       =+  pyr=$(gen q.gen)
       ?-    -.pyr
@@ -1817,8 +1817,8 @@
   ::
   ++  knit
     |=  [nug=*gene dab=*(map term foot)]
-    :+  %pmbn
-      [%ktdp [%tmbn %noun] gen]
+    :+  %pmlc
+      [%ktsp [%tmlc %noun] gen]
     (~(put by dab) %% [& & nug])
   ::
   ++  lung
@@ -1829,8 +1829,8 @@
     ?.  ?=(& -.haq)
       ~|(%lung-hack !!)
     :^    %csdg
-        [%csbn p.haq [%mtbn [[~ 2] hep] ~]]
-      [%dgdp [%mtbn [[~ 2] hep] ~] (mold(gen q.haq) [[~ 3] hep])]
+        [%cslc p.haq [%mtlc [[~ 2] hep] ~]]
+      [%dgsp [%mtlc [[~ 2] hep] ~] (mold(gen q.haq) [[~ 3] hep])]
     $(doy t.doy)
   ::
   ++  mold
@@ -1838,53 +1838,41 @@
     |=  hep=*twig
     ^-  *gene
     ?-    gen
-        [%dgdp *]
-      :+  %dgdp
+        [%dgsp *]
+      :+  %dgsp
         $(gen p.gen, hep [[~ 2] hep])
       $(gen q.gen, hep [[~ 3] hep])
     :: 
-        [%ktbn *]     [%ktbn p.gen $(gen q.gen)]
+        [%ktlc *]     [%ktlc p.gen $(gen q.gen)]
         [%ktdg *]     [%ktdg p.gen $(gen q.gen)]
         [%ktdl *]     [%ktdl p.gen $(gen q.gen)]
-        [%ktdp *]     $(gen p.gen)
         [%ktld *]     [%ktld p.gen $(gen q.gen)]
-        [%mtbn * ~]   [%mtbn p.gen [[[~ 5] [%mtbn hep ~]] ~]]
-        [%mtdp * ~]   [%mtdp p.gen [%mtbn hep ~] ~]
-        [%mttr *]     [%mtdp p.gen [%mtbn hep ~] ~]
+        [%ktsp *]     $(gen p.gen)
+        [%mtlc * ~]   [%mtlc p.gen [[[~ 5] [%mtlc hep ~]] ~]]
+        [%mtsp * ~]   [%mtsp p.gen [%mtlc hep ~] ~]
+        [%mttr *]     [%mtsp p.gen [%mtlc hep ~] ~]
         [%zpcb *]     [%zpcb p.gen $(gen q.gen)]
         [%zpdx *]     [%zpdx $(gen p.gen)]
         *
       =+  bog=~(open ap gen)
       ?.  .=(bog gen)
         $(gen bog)
-      [%csld [%csbn gen [%mtbn hep ~]] [%mtbn hep ~]]
+      [%csld [%cslc gen [%mtlc hep ~]] [%mtlc hep ~]]
     ==
   ::
   ++  open
     ^-  *gene
     ?-    gen
-        @          [%mtbn [gen ~] ~]
-        [~ *]      [%mtbn [gen ~] ~]
-        [%bndl *]  [%bnld q.gen p.gen]
-        [%bndp *]  [%bnpd q.gen p.gen]
-        [%bnpd *]  [%bnld [%dgdp [~ 1] p.gen] q.gen]
-        [%brbn *]  [%pmbn p.gen [[%% [& & q.gen]] ~ ~]]
-    ::
-        [%brdp *]  [%bnld [%brdt p.gen] %%]
+        @          [%mtlc [gen ~] ~]
+        [~ *]      [%mtlc [gen ~] ~]
         [%brdg *]  [%pmdg p.gen [[%% [& & q.gen]] ~ ~]]
         [%brdt *]  [%pmdt [[%% [& & p.gen]] ~ ~]]
+        [%brlc *]  [%pmlc p.gen [[%% [& & q.gen]] ~ ~]]
         [%brmt *]  [%pmmt [[%% [& & p.gen]] ~ ~]]
-        [%brpd *]  [%pmpd p.gen [[%% [& & q.gen]] ~ ~]]
-        [%brtr *]  [%pmbn p.gen [[%% [& | q.gen]] ~ ~]]
-        [%brzp *]  [%bnld [%zpmt ~] [%brbn p.gen q.gen]]
-        [%cbbn *]   
-      %+  knit(gen p.gen)
-        :^    %cssg
-            [~ 5]
-          (pick(gen p.gen) [[~ 5] ~] [%zpzp ~]) 
-        (mold(gen q.gen) [[~ 5] ~])
-      r.gen
-    ::
+        [%brps *]  [%pmps p.gen [[%% [& & q.gen]] ~ ~]]
+        [%brsp *]  [%lcld [%brdt p.gen] %%]
+        [%brtr *]  [%pmlc p.gen [[%% [& | q.gen]] ~ ~]]
+        [%brzp *]  [%lcld [%zpmt ~] [%brlc p.gen q.gen]]
         [%cbbr *]
       %+  knit(gen ?~(q.gen [%dtsg %n ~] i.q.gen))
         :^    %cssg
@@ -1901,6 +1889,14 @@
         (lung(gen [%zpzp ~]) [[~ 5] ~] p.gen)
       q.gen
     :: 
+        [%cblc *]   
+      %+  knit(gen p.gen)
+        :^    %cssg
+            [~ 5]
+          (pick(gen p.gen) [[~ 5] ~] [%zpzp ~]) 
+        (mold(gen q.gen) [[~ 5] ~])
+      r.gen
+    ::
         [%cbmt *]
       %+  knit(gen [%dtsg %n 0])
         =+  dix=`@`0
@@ -1908,7 +1904,7 @@
         ?~  p.gen
           [%zpzp ~] 
         :^    %csdg
-            [%dtbn [~ 5] [%dtsg %u dix]]
+            [%dtlc [~ 5] [%dtsg %u dix]]
           i.p.gen
         $(p.gen t.p.gen, dix .+(dix))
       q.gen
@@ -1935,88 +1931,90 @@
     ::
         [%csdl *]   [%csdg p.gen [%zpzp ~] q.gen]
         [%csdt *]   [%csdg p.gen r.gen q.gen]
-        [%csdp *]
-      |-
-      ?~  q.gen
-        [%zpzp ~]
-      :^    %csdg
-          [%csbn p.i.q.gen p.gen]
-        q.i.q.gen
-      $(q.gen t.q.gen)
-    ::
-    ::
         [%csld *]   [%csdg p.gen q.gen [%zpzp ~]]
         [%cspm *]
       |-
       ?~(p.gen [%dtsg %f 0] [%csdg i.p.gen $(p.gen t.p.gen) [%dtsg %f 1]])
     ::
+        [%cssp *]
+      |-
+      ?~  q.gen
+        [%zpzp ~]
+      :^    %csdg
+          [%cslc p.i.q.gen p.gen]
+        q.i.q.gen
+      $(q.gen t.q.gen)
+    ::
         [%cszp *]   [%csdg p.gen [%dtsg %f 1] [%dtsg %f 0]]
-        [%dgkt *]   [%dgdp p.gen [%dgdp q.gen [%dgdp r.gen s.gen]]]
-        [%dgpd *]   [%dgdp p.gen [%dgdp q.gen r.gen]]
-        [%dgsg *]   |-(?~(p.gen [%dtsg %n ~] [%dgdp i.p.gen $(p.gen t.p.gen)]))
+        [%dgkt *]   [%dgsp p.gen [%dgsp q.gen [%dgsp r.gen s.gen]]]
+        [%dgps *]   [%dgsp p.gen [%dgsp q.gen r.gen]]
+        [%dgsg *]   |-(?~(p.gen [%dtsg %n ~] [%dgsp i.p.gen $(p.gen t.p.gen)]))
         [%dgtr *]
       |-
       ?-    p.gen 
           ~       [%zpzp ~]
           [* ~]   i.p.gen
-          ^       [%dgdp i.p.gen $(p.gen t.p.gen)]
+          ^       [%dgsp i.p.gen $(p.gen t.p.gen)]
       ==
     ::
         [%ktdg *]
-      :+  %bnpd
+      :+  %lcps
         q.gen
       :+  %csld 
-        [%csbn [%bnld [~ 2] p.gen] [~ 3]]
+        [%cslc [%lcld [~ 2] p.gen] [~ 3]]
       [~ 3]
     ::
+        [%lcdl *]  [%lcld q.gen p.gen]
+        [%lcps *]  [%lcld [%dgsp [~ 1] p.gen] q.gen]
+        [%lcsp *]  [%lcps q.gen p.gen]
         [%mtbr *]
-      :+  %bnpd
+      :+  %lcps
         q.gen
-      :+  %mtbn
+      :+  %mtlc
         (weld p.gen `*twig`[[~ 3] ~])
-      (turn r.gen |=([p=*gene q=*gene] [p [%bnld [~ 2] q]]))
+      (turn r.gen |=([p=*gene q=*gene] [p [%lcld [~ 2] q]]))
     ::
         [%mtdg *]   [%mtsg [%% ~] p.gen q.gen]
-        [%mtdp *]   ?~(q.gen [%bnld p.gen %%] [%mtdg p.gen [%dgtr q.gen]])
-        [%mtdt *]   [%mtdp q.gen [p.gen ~]]
-        [%mtkt *]   [%mtdp p.gen q.gen r.gen s.gen ~]
-        [%mtpd *]   [%mtdp p.gen q.gen r.gen ~]
+        [%mtdt *]   [%mtsp q.gen [p.gen ~]]
+        [%mtkt *]   [%mtsp p.gen q.gen r.gen s.gen ~]
+        [%mtps *]   [%mtsp p.gen q.gen r.gen ~]
         [%mtsg *]   [%mtbr p.gen q.gen [[[~ 5] r.gen] ~]]
-        [%mttr *]   [%ktsg [%bnld p.gen [%mtbn [%% ~] ~]]]
-        [%pmdp *]   [%bnld [%pmdt (~(put by q.gen) %% [& & p.gen])] %%]
-        [%pmbn *]   [%bnpd p.gen [%pmdt q.gen]]
-        [%pmzp *]   [%bnld [%zpmt ~] [%pmbn p.gen q.gen]]
-        [%sgbn *]   [%sgld [%germ p.gen] q.gen]
+        [%mtsp *]   ?~(q.gen [%lcld p.gen %%] [%mtdg p.gen [%dgtr q.gen]])
+        [%mttr *]   [%ktsg [%lcld p.gen [%mtlc [%% ~] ~]]]
+        [%pmsp *]   [%lcld [%pmdt (~(put by q.gen) %% [& & p.gen])] %%]
+        [%pmlc *]   [%lcps p.gen [%pmdt q.gen]]
+        [%pmzp *]   [%lcld [%zpmt ~] [%pmlc p.gen q.gen]]
+        [%sglc *]   [%sgld [%germ p.gen] q.gen]
         [%sgbr *]   [%sgld [%bean p.gen] q.gen]
         [%sgdg *]   [%sgld [%bank %dtsg %% p.gen] q.gen]
-        [%sgdl *]   [%bndl [%sgld p.gen [~ 1]] q.gen]
-        [%sgdp *]   [%sgld [%sole %dtsg %% p.gen] q.gen]
+        [%sgdl *]   [%lcdl [%sgld p.gen [~ 1]] q.gen]
+        [%sgsp *]   [%sgld [%sole %dtsg %% p.gen] q.gen]
         [%sgdt *]   [%sgmt p.gen [~ 4] ~ q.gen]
         [%sgdx *]   [%sgld %ping p.gen]
         [%sgkt *]   [%sgld %keep p.gen]
         [%sgmt *]
       :+  %sgdl
         :-  %fast
-        :-  %dgpd
+        :-  %dgps
         :+  [%dtsg %% p.gen]
-          [%zpbn q.gen]
+          [%zplc q.gen]
         :-  %dgsg
         =+  nob=`*(list gene)`~
         |-  ^-  nob
         ?~  r.gen
           nob
-        [[%dgdp [%dtsg %% p.i.r.gen] [%zpbn q.i.r.gen]] $(r.gen t.r.gen)]
+        [[%dgsp [%dtsg %% p.i.r.gen] [%zplc q.i.r.gen]] $(r.gen t.r.gen)]
       s.gen
     ::
-        [%sgpd *]   [%sgld [%memo %dtsg %% p.gen] q.gen]
+        [%sgps *]   [%sgld [%memo %dtsg %% p.gen] q.gen]
         [%sgpm *]   [%sgld [%loaf p.gen] q.gen]
         [%sgsg *]   [%sgld [%mean [%brdt p.gen]] q.gen]
-        [%tmbn *]
+        [%tmlc *]
       ?-  p.gen
-        %atom   [%ktdp [%dtpd %dtsg %% 0] [%dtsg %% 0]]
-        %noun   [%ktdp [%dttr [%dtsg %% 0] [%dtsg %% 0]] [%dtsg %% 0]]
-        %cell   [%dgdp [%tmbn %noun] [%tmbn %noun]]
-        %flag   [%ktdp [%dtcs %dtsg %% 0] [%dtsg %% 0]]
+        %atom   [%ktsp [%dtps %dtsg %% 0] [%dtsg %% 0]]
+        %noun   [%ktsp [%dttr [%dtsg %% 0] [%dtsg %% 0]] [%dtsg %% 0]]
+        %cell   [%dgsp [%tmlc %noun] [%tmlc %noun]]
+        %flag   [%ktsp [%dtcs %dtsg %% 0] [%dtsg %% 0]]
         %null   [%dtsg %n ~]
       ==
     ::
@@ -2025,12 +2023,12 @@
           ~       [%zpzp ~]
           [* ~]   i.q.gen
           ^
-        :+  %bnpd
+        :+  %lcps
           p.gen 
         |-  ^-  *gene
         ?-  q.gen  
-          [* ~]  [%bnld [~ 2] i.q.gen]
-          [* ^]  [%mtdp [~ 3] [%bnld [~ 2] i.q.gen] $(q.gen t.q.gen) ~]
+          [* ~]  [%lcld [~ 2] i.q.gen]
+          [* ^]  [%mtsp [~ 3] [%lcld [~ 2] i.q.gen] $(q.gen t.q.gen) ~]
         ==
       ==
     ::
@@ -2041,16 +2039,16 @@
           [* ~]   i.q.gen
       ::
           ^
-        :+  %bnpd
+        :+  %lcps
           $(q.gen t.q.gen)
-        :+  %bnpd
-          [%bnld [~ 2] i.q.gen]
-        :+  %brbn
+        :+  %lcps
+          [%lcld [~ 2] i.q.gen]
+        :+  %brlc
           [~ 13]
-        :^    %mtpd
-            [%bnld [~ 16] p.gen]
-          [%mtdp [~ 9] [~ 5] ~]
-        [%mtbn [[~ 17] ~] [[[~ 5] [~ 5]] ~]]
+        :^    %mtps
+            [%lcld [~ 16] p.gen]
+          [%mtsp [~ 9] [~ 5] ~]
+        [%mtlc [[~ 17] ~] [[[~ 5] [~ 5]] ~]]
       ==
     ::
         *           gen
@@ -2059,14 +2057,14 @@
   ++  pick
     ~.  %pick
     |=  [hep=*twig dug=*gene]
-    [%csdg [%csbn gen [%mtbn hep ~]] [%mtbn hep ~] dug]
+    [%csdg [%cslc gen [%mtlc hep ~]] [%mtlc hep ~] dug]
   ::
   ++  rake
     ^-  *twig
     ?-  gen
       @             [gen ~]
       [~ *]         [gen ~]
-      [%mtbn * ~]   p.gen
+      [%mtlc * ~]   p.gen
       [%zpcb *]     rake(gen q.gen)
       [%zpdx *]     rake(gen p.gen)
       *             ~|(%rake-gene !!)
@@ -2741,7 +2739,7 @@
     =-  ?:((orth(sut %noun) fiz) %void fiz)   ::  ?? - do we need this?
     ^=  fiz
     ?-    gen
-        [%csbn *]   (cull p:(seek %read ~(rake ap q.gen)) (play p.gen))
+        [%cslc *]   (cull p:(seek %read ~(rake ap q.gen)) (play p.gen))
         [%cspm *]   |-(?~(p.gen sut $(p.gen t.p.gen, sut $$(gen i.p.gen))))
         [%zpcb *]   $(gen q.gen)
         [%zpdx *]   $(gen p.gen)
@@ -2818,12 +2816,7 @@
     ++  $
       ^-  [p=*type q=*form]
       ?-    gen
-          [%bnld *]                                                   ::  =>
-        =+  lem=$(gen p.gen, gol %noun)
-        =+  soq=$(sut p.lem, gen q.gen)
-        [p.soq (boil |.((comb q.lem q.soq)))]
-      ::
-          [%csbn *]                                                   ::  ?=
+          [%cslc *]                                                   ::  ?=
         :-  (nice flag)
         %-  boil  |.
         %-  fish(sut (play p.gen))
@@ -2847,12 +2840,12 @@
         :-  (fork p.hiq p.ran)
         (boil |.([6 [3 0 axe] q.ran q.hiq]))
       ::
-          [%dgdp *]                                                   ::  :-
+          [%dgsp *]                                                   ::  :-
         =+  hed=$(gen p.gen, gol %noun)
         =+  tal=$(gen q.gen, gol %noun)
         [(nice (cell p.hed p.tal)) (boil |.((cons q.hed q.tal)))]
       ::
-          [%dtbn *]                                                   ::  .=
+          [%dtlc *]                                                   ::  .=
         :-  (nice flag)
         (boil |.([5 q:$$(gen p.gen, gol %noun) q:$$(gen q.gen, gol %noun)]))
       ::
@@ -2860,7 +2853,7 @@
         :-  (nice flag)
         (boil |.([3 q:$$(gen p.gen, gol %noun)]))
       ::
-          [%dtpd *]                                                   ::  .+
+          [%dtps *]                                                   ::  .+
         :-  (nice [%atom %%])
         (boil |.([4 q:$$(gen p.gen, gol [%atom %%])]))
       ::
@@ -2873,7 +2866,7 @@
         :-  (nice %noun)
         (boil |.([2 q:$$(gen p.gen, gol %noun) q:$$(gen q.gen, gol %noun)]))
       ::
-          [%ktbn *]                                                   ::  ^=
+          [%ktlc *]                                                   ::  ^=
         =+  vat=$(gen q.gen)
         [(face p.gen p.vat) q.vat]
       ::
@@ -2881,28 +2874,24 @@
         =-  [(nice (fine %very (play p.gen) p.ryd)) q.ryd]
         ^=  ryd  =-  $(gen hos, gol %noun)
         ^=  hos
-        :+  %bnpd  [%ktbn %a p.gen]                   ::  =+  a=<p.gen>
-        :+  %bnpd  [%ktbn %b [%bnld [~ 2] q.gen]]     ::  =+  b==>(.2 <q.gen>)
-        :+  %csld  [%mtdp %a %b ~]                    ::  ?>  (a b)
+        :+  %lcps  [%ktlc %a p.gen]                   ::  =+  a=<p.gen>
+        :+  %lcps  [%ktlc %b [%lcld [~ 2] q.gen]]     ::  =+  b==>(.2 <q.gen>)
+        :+  %csld  [%mtsp %a %b ~]                    ::  ?>  (a b)
         %b                                            ::  b
-      ::
-          [%ktdp *]                                                   ::  ^-
-        =+  hif=(nice (play p.gen))
-        [hif (boil |.(q:$$(gen q.gen, gol hif)))]
       ::
           [%ktld *]                                                   ::  ^>
         =-  [(nice (fine %pure (play p.gen) p.ryd)) q.ryd]
         ^=  ryd  =-  $(gen hos, gol %noun)
         ^=  hos
-        :+  %bnpd  [%ktbn %a p.gen]                   ::  =+  a=<p.gen>
-        :+  %bnpd  [%ktbn %b [%bnld [~ 2] q.gen]]     ::  =+  b==>(.2 <q.gen>)
-        :-  %brdp  :+  %ktdp  [%mttr %a]              ::  |-  ^-  *a
-        :+  %bnpd  [%ktbn %c [%mtdp %a %b ~]]         ::  =+  c=(a b)
-        :^  %csdg  [%dtbn %b %c]                      ::  ?:  .=(b c)
+        :+  %lcps  [%ktlc %a p.gen]                   ::  =+  a=<p.gen>
+        :+  %lcps  [%ktlc %b [%lcld [~ 2] q.gen]]     ::  =+  b==>(.2 <q.gen>)
+        :-  %brsp  :+  %ktsp  [%mttr %a]              ::  |-  ^-  *a
+        :+  %lcps  [%ktlc %c [%mtsp %a %b ~]]         ::  =+  c=(a b)
+        :^  %csdg  [%dtlc %b %c]                      ::  ?:  .=(b c)
           %c                                          ::    c
-        [%mtbn [%% ~] [[%b %c] ~]]                    ::  $(b c)
+        [%mtlc [%% ~] [[%b %c] ~]]                    ::  $(b c)
       ::
-          [%ktpd *]                                                   ::  ^+
+          [%ktps *]                                                   ::  ^+
         =+  hif=(nice p:(mint(vet |, fab |) [%atom %%] p.gen))
         [hif (boil |.(q:$$(gen q.gen, gol [%atom %%])))]
       ::
@@ -2911,9 +2900,18 @@
         ~~  (dunk %ktsg)
         [p.nef (boil |.([1 ~|(%mint-burn .*(burn q.nef))]))]
       ::
-          [%mtbn *]                                                   ::  %=
-        ::  ~~  (dunk %mtbn)
-        ::  ~~  (show [%c %mtbn-p] [%q p.gen])
+          [%ktsp *]                                                   ::  ^-
+        =+  hif=(nice (play p.gen))
+        [hif (boil |.(q:$$(gen q.gen, gol hif)))]
+      ::
+          [%lcld *]                                                   ::  =>
+        =+  lem=$(gen p.gen, gol %noun)
+        =+  soq=$(sut p.lem, gen q.gen)
+        [p.soq (boil |.((comb q.lem q.soq)))]
+      ::
+          [%mtlc *]                                                   ::  %=
+        ::  ~~  (dunk %mtlc)
+        ::  ~~  (show [%c %mtlc-p] [%q p.gen])
         =+  lar=(seek %read p.gen)
         ?-    -.q.lar
             & 
@@ -2926,7 +2924,7 @@
         ==
       ::
           [%pmdg *]                                                   ::  &:
-        (crow %zinc [%dgdp [~ 1] p.gen] q.gen)
+        (crow %zinc [%dgsp [~ 1] p.gen] q.gen)
       ::
           [%pmdt *]                                                   ::  &.
         (crow %gold [~ 1] p.gen)
@@ -2934,8 +2932,8 @@
           [%pmmt *]                                                   ::  &%
         (crow %lead [~ 1] p.gen)
       ::
-          [%pmpd *]                                                   ::  &+
-        (crow %iron [%dgdp [~ 1] p.gen] q.gen)
+          [%pmps *]                                                   ::  &+
+        (crow %iron [%dgsp [~ 1] p.gen] q.gen)
       ::
           [%sgld *]                                                   ::  ~>
         =+  hum=$(gen q.gen)
@@ -2947,10 +2945,6 @@
               ^   [p.p.gen q:$$(gen q.p.gen, gol %noun)]
           ==
         q.hum
-      ::
-          [%zpbn *]                                                   ::  !=
-        :-  (nice %noun)
-        (boil |.([1 q:$$(vet |, gen p.gen)]))
       ::
           [%zpcm *]                                                   ::  !;
         :-  (nice (play p.gen))                    ::  XX validate!
@@ -2964,6 +2958,10 @@
           [%zpdx *]                                                   ::  !#
         ~#
         $(gen p.gen)
+      ::
+          [%zplc *]                                                   ::  !=
+        :-  (nice %noun)
+        (boil |.([1 q:$$(vet |, gen p.gen)]))
       ::
           [%zpmt ~]                                                   ::  !%
         =+  pet=seed
@@ -3262,12 +3260,12 @@
         [%cell *]
       =+  haq=~(hack ap gen)
       ?-  -.haq
-        &   [%dgdp $(sut p.sut, gen p.haq) $(sut q.sut, gen q.haq)]
+        &   [%dgsp $(sut p.sut, gen p.haq) $(sut q.sut, gen q.haq)]
         |   p.haq
       ==
     ::
         [%cube *]   $(sut repo)
-        [%face *]   [%ktbn p.sut $(sut q.sut)]
+        [%face *]   [%ktlc p.sut $(sut q.sut)]
         [%fine *]   $(sut repo)
         [%hold *]   $(sut repo)
         *           gen
@@ -3317,23 +3315,23 @@
     ;~  pose
       (stag %dgtr (ifix [den ned] (most ace wide)))
       (cook |=(a=*(list gene) [%cbtr a ~]) (ifix [des sed] (most ace wide)))
-      (stag %mtdp (ifix [lep pel] (most ace wide)))
+      (stag %mtsp (ifix [lep pel] (most ace wide)))
       (stag %tmdg ;~(pfix deg (ifix [lep pel] (most ace wide))))
-      (cook |=(a=*twig [%mtbn a ~]) rope)
+      (cook |=(a=*twig [%mtlc a ~]) rope)
       (stag %cszp ;~(pfix zap wide))
       (stag %csbr ;~(pfix bar (ifix [lep pel] (most ace wide))))
       (stag %cspm ;~(pfix pam (ifix [lep pel] (most ace wide))))
       (stag %mttr ;~(pfix tar wide))
-      (stag %dtbn ;~(pfix bon (ifix [lep pel] ;~((glue ace) wide wide))))
-      (stag %dtpd ;~(pfix pad (ifix [lep pel] wide)))
-      (stag %ktdp ;~(plug ;~(pfix tec wide) ;~(pfix tec wide)))
+      (stag %dtlc ;~(pfix lyc (ifix [lep pel] ;~((glue ace) wide wide))))
+      (stag %dtps ;~(pfix pes (ifix [lep pel] wide)))
+      (stag %ktsp ;~(plug ;~(pfix tec wide) ;~(pfix tec wide)))
       (stag %zpzp (cold ~ ;~(plug zap zap)))
       (stag %zpmt (cold ~ ;~(plug zap mit)))
       (stag %ktsg ;~(pfix com wide))
       ;~  pfix
         tec
         %+  cook
-          |=([a=*gene b=*(unit gene)] ?~(b [%ktsg a] [%ktdp a u.b]))
+          |=([a=*gene b=*(unit gene)] ?~(b [%ktsg a] [%ktsp a u.b]))
         ;~  plug
           wide
           ;~(pose (easy ~) (stag ~ ;~(pfix tec wide)))
@@ -3370,7 +3368,7 @@
       ==
     ::
       %+  stag
-        %tmbn
+        %tmlc
       ;~  pose
         (cold %flag cas)
         (cold %noun tar)
@@ -3385,30 +3383,22 @@
     =<  ;~  pose
           ;~  pfix  bar
             ;~  pose
-              (rune bon %brbn expb)
+              (rune lyc %brlc expb)
               (rune deg %brdg expb)
-              (rune dap %brdp expa)
+              (rune sep %brsp expa)
               (rune dot %brdt expa)
               (rune mit %brmt expa)
-              (rune pad %brpd expb)
+              (rune pes %brps expb)
               (rune tar %brtr expb)
               (rune zap %brzp expb)
             ==
           ==
-          ;~  pfix  bon
-            ;~  pose
-              (rune dap %bndp expb)
-              (rune del %bndl expb)
-              (rune led %bnld expb)
-              (rune pad %bnpd expb)
-            ==
-          ==
           ;~  pfix  cab
             ;~  pose
-              (rune bon %cbbn expv)
               (rune bar %cbbr expu)
               (rune deg %cbdg expy)
               (rune ket %cbkt expy)
+              (rune lyc %cblc expv)
               (rune mit %cbmt expy)
               (rune pam %cbpm expu)
               (rune tar %cbtr expy)
@@ -3416,84 +3406,92 @@
           ==
           ;~  pfix  cas
             ;~  pose
-              (rune bar %csbr expd)
-              (rune bon %csbn expb)
-              (rune dap %csdp exph)
+              (rune bar %csbr exps)
               (rune deg %csdg expc)
               (rune del %csdl expb)
               (rune dot %csdt expc)
               (rune led %csld expb)
-              (rune pam %cspm expd)
+              (rune lyc %cslc expb)
+              (rune pam %cspm exps)
+              (rune sep %cssp exph)
               (rune sig %cssg expc)
               (rune zap %cszp expa)
             ==
           ==
           ;~  pfix  deg
             ;~  pose
-              (rune dap %dgdp expb)
               (rune ket %dgkt expf)
-              (rune pad %dgpd expc)
-              (rune sig %dgsg expd)
-              (rune tar %dgtr expd)
+              (rune pes %dgps expc)
+              (rune sep %dgsp expb)
+              (rune sig %dgsg exps)
+              (rune tar %dgtr exps)
             ==
           ==
           ;~  pfix  dot
             ;~  pose
-              (rune bon %dtbn expb)
               (rune cas %dtcs expa)
-              (rune pad %dtpd expa)
+              (rune lyc %dtlc expb)
+              (rune pes %dtps expa)
               (rune tar %dttr expb)
             ==
           ==
           ;~  pfix  ket
             ;~  pose
-              (rune bon %ktbn expg)
-              (rune dap %ktdp expb)
               (rune deg %ktdg expb)
               (rune del %ktdl expb)
               (rune led %ktld expb)
-              (rune pad %ktpd expb)
+              (rune lyc %ktlc expg)
+              (rune pes %ktps expb)
+              (rune sep %ktsp expb)
               (rune sig %ktsg expa)
+            ==
+          ==
+          ;~  pfix  lyc
+            ;~  pose
+              (rune sep %lcsp expb)
+              (rune del %lcdl expb)
+              (rune led %lcld expb)
+              (rune pes %lcps expb)
             ==
           ==
           ;~  pfix  mit
             ;~  pose
               (rune bar %mtbr expp)
-              (rune bon %mtbn expj)
               (rune deg %mtdg expb)
-              (rune dap %mtdp expk)
               (rune dot %mtdt expb)
               (rune ket %mtkt expf)
-              (rune pad %mtpd expc) 
+              (rune lyc %mtlc expj)
+              (rune pes %mtps expc) 
+              (rune sep %mtsp expk)
               (rune sig %mtsg expq)
               (rune tar %mttr expa)
             ==
           ==
           ;~  pfix  pam
             ;~  pose
-              (rune bon %pmbn expx)
               (rune deg %pmdg expx)
-              (rune dap %pmdp expx)
               (rune dot %pmdt expe)
+              (rune lyc %pmlc expx)
               (rune mit %pmmt expe)
-              (rune pad %pmpd expx)
+              (rune pes %pmps expx)
+              (rune sep %pmsp expx)
               (rune zap %pmzp expx)
             ==
           ==
           ;~  pfix  sig
             ;~  pose
               (rune bar %sgbr expb)
-              (rune bon %sgbn expb)
-              (rune dap %sgdp hinc)
               (rune dax %sgdx expa)
               (rune deg %sgdg hina)
               (rune del %sgdl hinb)
               (rune dot %sgdt hine)
               (rune ket %sgkt expa)
               (rune led %sgld hinb)
+              (rune lyc %sglc expb)
               (rune mit %sgmt hind)
-              (rune pad %sgpd hinc)
+              (rune pes %sgps hinc)
               (rune pam %sgpm expb)
+              (rune sep %sgsp hinc)
               (rune sig %sgsg expb)
             ==
           ==
@@ -3505,7 +3503,7 @@
           ==
           ;~  pfix  zap
             ;~  pose
-              (rune bon %zpbn expa)
+              (rune lyc %zplc expa)
               (rune tam %zpcm expb)
               (rune tam %zptm expb)
               ;~(pfix deg (toad expz))
@@ -3522,7 +3520,7 @@
         (cold & (just '+'))
         ;~  gunk 
           ;~(pose (cold | (just '-')) (cold & (just '+')))
-          ;~(pose (cold %% sec) sym)
+          ;~(pose (cold %% hes) sym)
           loaf
         ==
       ==
@@ -3554,7 +3552,7 @@
     ++  expa  |.(loaf)
     ++  expb  |.(;~(gunk loaf loaf))
     ++  expc  |.(;~(gunk loaf loaf loaf))
-    ++  expd  |.((butt hank))
+    ++  exps  |.((butt hank))
     ++  expe  |.(wing)
     ++  expf  |.(;~(gunk loaf loaf loaf loaf))
     ++  expg  |.(;~(gunk sym loaf))
@@ -3587,7 +3585,7 @@
         ==
       ==
     ++  bont  ;~((bend) sym ;~(pfix dot ;~(pose wide ;~(pfix muck loaf))))
-    ++  bony  (cook |=(a=*(list) (lent a)) (plus bon))
+    ++  bony  (cook |=(a=*(list) (lent a)) (plus lyc))
     ++  bonz
       ;~  pose
         (cold ~ sig)
@@ -3602,23 +3600,23 @@
     ;~  %-  bend
         |=  :-  ros=*gene 
                 ^=  vil  %*
-                  _^  [%bon p=*gene] 
+                  _^  [%lyc p=*gene] 
                       [%deg p=*gene] 
                       [%lep p=*(list _[p=*gene q=*gene])]
                   --
         ?-    -.vil
-            %bon 
+            %lyc 
           ?-  ros
-            @                [%ktbn ros p.vil]
-            [%mtbn [@ ~] ~]  [%ktbn i.p.ros p.vil]
+            @                [%ktlc ros p.vil]
+            [%mtlc [@ ~] ~]  [%ktlc i.p.ros p.vil]
             [%zpcb *]        $(ros q.ros)
           ==
-            %deg  [%bndl ros p.vil]
-            %lep  [%mtbn ~(rake ap ros) p.vil]
+            %deg  [%lcdl ros p.vil]
+            %lep  [%mtlc ~(rake ap ros) p.vil]
         ==
       flat
       ;~  pose
-        ;~(plug (cold %bon bon) wide)
+        ;~(plug (cold %lyc lyc) wide)
         ;~(plug (cold %deg deg) wide)
         ;~  plug
           (easy %lep)
@@ -3636,7 +3634,7 @@
     %+  (slug `*twig`~ |=([a=*twig b=*twig] (weld a b)))
       dot
     ;~  pose
-      (cook |=(a=*(list) ?:(.=(~ +.a) [%% ~] [%% [~ 2] $(a +.a)])) (plus sec))
+      (cook |=(a=*(list) ?:(.=(~ +.a) [%% ~] [%% [~ 2] $(a +.a)])) (plus hes))
       %+  cook
         |=(a=*knot [a ~])
       ;~  pose
