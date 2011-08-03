@@ -89,6 +89,10 @@
   j2_mc(Pt6, ut, burn)(u2_wire wir_r, 
                        u2_noun cor);                              //  retain
 
+  u2_noun                                                         //  transfer
+  j2_mc(Pt6, ut, odor)(u2_wire wir_r, 
+                       u2_noun cor);                              //  retain
+
   extern u2_ho_jet j2_mcj(Pt6, ut, bake)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, cull)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, emit)[];
@@ -147,6 +151,7 @@
       j2_mc(Pt6, ut, burn), 
       u2_jet_live | u2_jet_memo,  // special performance category
       u2_none, u2_none },
+    { "odor", c3__hevy, j2_mc(Pt6, ut, odor), Tier6_b, u2_none, u2_none },
     { "repo", c3__hevy, j2_mc(Pt6, ut, repo), Tier6_b, u2_none, u2_none },
     { }
   };

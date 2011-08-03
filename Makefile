@@ -292,6 +292,7 @@ J245_6_OFILES_UT=\
        gen245/6/ut_gain.o \
        gen245/6/ut_heal.o \
        gen245/6/ut_mint.o \
+       gen245/6/ut_odor.o \
        gen245/6/ut_orth.o \
        gen245/6/ut_nest.o \
        gen245/6/ut_park.o \

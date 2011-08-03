@@ -2225,6 +2225,7 @@
       %heal   heal
       %mint   mint
       %nest   nest
+      %odor   odor
       %orth   orth
       %play   play
       %park   park
@@ -2892,8 +2893,9 @@
         [%mtlc [%% ~] [[%b %c] ~]]                    ::  $(b c)
       ::
           [%ktps *]                                                   ::  ^+
-        =+  hif=(nice p:(mint(vet |, fab |) [%atom %%] p.gen))
-        [hif (boil |.(q:$$(gen q.gen, gol [%atom %%])))]
+        =+  hif=p:(mint(vet |, fab |) [%atom %%] p.gen)
+        :-  (nice [%atom odor(sut hif)])
+        (boil |.(q:$$(gen q.gen, gol [%atom %%])))
       ::
           [%ktsg *]                                                   ::  ^~
         =+  nef=$(gen p.gen)
@@ -3110,6 +3112,24 @@
           *           dext(ref repo(sut ref))
       ==
     --
+  ::
+  ++  odor
+    ~.  %odor
+    |-  ^-  *term
+    ?-    sut
+        [%atom *]                       p.sut
+        [%fork *]
+      =+  [duv=$(sut p.sut) wil=$(sut q.sut)]
+      |-
+      ?:  |(=(%% duv) =(%% wil) !=((end 3 1 duv) (end 3 1 wil)))
+        %%
+      %+  add
+        (end 3 1 duv)
+      (lsh 3 1 $(duv (rsh 3 1 duv), wil (rsh 3 1 wil)))
+    ::
+        [*{%cube %fine %face %hold} *]  $(sut repo)
+        *                               ~|(%odor-less !!)
+    ==
   ::
   ++  orth
     ~.  %orth

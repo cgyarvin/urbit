@@ -524,6 +524,11 @@
                             u2_noun sut,                          //  retain
                             u2_noun ref);                         //  retain
 
+      u2_noun                                                     //  transfer
+      j2_mcy(Pt6, ut, odor)(u2_wire wir_r, 
+                            u2_noun van,                          //  retain
+                            u2_noun sut);                         //  retain
+
       u2_flag                                                     //  transfer
       j2_mcy(Pt6, ut, orth)(u2_wire wir_r, 
                             u2_noun van,                          //  retain
