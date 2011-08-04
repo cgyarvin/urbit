@@ -217,6 +217,7 @@
 #   define c3__dtsg   c3_s4('d','t','s','g')
 #   define c3__dttg   c3_s4('d','t','t','g')
 #   define c3__dttr   c3_s4('d','t','t','r')
+#   define c3__dtwt   c3_s4('d','t','w','t')
 #   define c3__dub    c3_s3('d','u','b')
 #   define c3__duct   c3_s4('d','u','c','t')
 #   define c3__dumb   c3_s4('d','u','m','b')
