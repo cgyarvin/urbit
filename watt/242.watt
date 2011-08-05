@@ -1,16 +1,16 @@
 ?>  ?=(@ .)
 %.  .
 =<  make
-=>  243
+=>  242
 =>  
   ::::
   ::::  Tier 0, kernel stub
   ::::
-  ~%    %k.243
+  ~%    %k.242
       ~
     ~
   &.
-  ++  stub  243
+  ++  stub  242
   ++  nat   |=(a=* ?>(?=(@ a) a))
   ++  mud   |=(a=* a)
   ++  bit   |=(a=* ?-(a & &, | |))
@@ -880,7 +880,7 @@
         [%palm p=[p=(tape) q=(tape) r=(tape) s=(tape)] q=((list tank))]
         [%rose p=[p=(tape) q=(tape) r=(tape)] q=((list tank))]
     ::  [%farm p=[p=(tape) q=(tape) r=(tape)] q=((list (list tank)))]
-    --
+    ==
   ++  tape  (list char)
   ++  term  nat
   ++  wall  (list tape)
@@ -1588,13 +1588,13 @@
         [std=*term kel=@]
         [ven=*term pro=*term kel=@]
         [ven=*term pro=*term ver=@ kel=@]
-    --
+    ==
   ::
   ++  coil
     $~  p=*{%gold %iron %lead %zinc}
         q=(type)
         r=[p=*{~ ^} q=((map term foot))]
-    --
+    ==
   ++  foot  $^([& p=(gate)] [| p=((map term foot))])
   ++  form
     $|  [p=(form) q=(form)]
@@ -1609,7 +1609,7 @@
       [8 p=(form) q=(form)]
       [9 p=@ q=(form)]
       [10 p=*$&(@ [p=@ q=(form)]) q=(form)]
-    --
+    ==
   ++  gate  ~[p=? q=(gene)]
   ++  gene
     $&  *term
@@ -1700,12 +1700,12 @@
       [%zpmt ~]
       [%zptm p=(gene) q=(gene)]
       [%zpzp ~]
-    --
+    ==
   ++  knot  $&(*term [~ p=*axis])
   ++  port  
     $~  p=*axis 
         q=($^([& p=(type)] [| p=*axis q=((list ~[p=(type) q=(gate)]))]))
-    --
+    ==
   ++  twig  (list knot)
   ++  type
     $&  *{%noun %void}
@@ -1717,7 +1717,7 @@
       [%fine p=*{%pure %very} q=*type r=*type]
       [%fork p=(type) q=(type)]
       [%hold p=((list ~[p=(type) q=(gene)]))]
-    --
+    ==
   --
 ::::
 ::::  Tier 6, Watt in Watt
@@ -2338,7 +2338,7 @@
           ?-  -.rog
             &  [%leaf p.rog]
             |  :+  %rose 
-                 [[' '  ~] ['(' ~] [')' ~]] 
+                 [[' ' ~] ['(' ~] [')' ~]] 
                [$(sut p.sut, lum -.lum) [%leaf p.rog] ~]
           ==
         ::
@@ -2445,7 +2445,7 @@
           =+  dey=$$(sut p.q.sut, dex p.vir)
           =+  hoy=$(sut q.sut, p.vir p.dey)
           [p.hoy [q.dey q.hoy]]
-      [p.tov [%rose [[' ' ~]  ['[' ~] [']' ~]] q.vir q.tov]]
+      [p.tov [%rose [[' ' ~] ['[' ~] [']' ~]] q.vir q.tov]]
     ::
         [%core *]
       =+  rog=dent
@@ -2453,7 +2453,7 @@
           &  [dex [%leaf p.rog]]
           |
         =+  vir=$(sut p.sut)
-        [p.vir [%rose [[' ' ~]  ['(' ~] [')' ~]] q.vir [%leaf p.rog] ~]]
+        [p.vir [%rose [[' ' ~] ['(' ~] [')' ~]] q.vir [%leaf p.rog] ~]]
       ==
     ::
         [%cube *]
@@ -2489,7 +2489,7 @@
           =+  dey=$$(sut p.q.sut, dex p.vir)
           =+  hoy=$(sut q.sut, p.vir p.dey)
           [p.hoy [q.dey q.hoy]]
-      [p.tov [%rose [[' ' ~]  ['{' ~] ['}' ~]] q.vir q.tov]]
+      [p.tov [%rose [[' ' ~] ['{' ~] ['}' ~]] q.vir q.tov]]
     ::
         [%hold *]
       =+  piv=(~(get by gil) sut)
@@ -3643,7 +3643,7 @@
                       [%deg p=*gene] 
                       [%cab p=*gene]
                       [%lep p=*(list ~[p=*gene q=*gene])]
-                  --
+                  ==
         ?-    -.vil
             %lyc 
           ?-  ros
