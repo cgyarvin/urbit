@@ -27,6 +27,8 @@ u2_flag EyreSmoke;
   
     /* External drivers.
     */
+      extern u2_ho_driver j2_da(k_243);
+      extern u2_ho_driver j2_da(k_244);
       extern u2_ho_driver j2_da(k_245);
       extern u2_ho_driver j2_da(k_246);
 //      extern u2_ho_driver j2_da(k_247);
@@ -51,6 +53,8 @@ u2_flag EyreSmoke;
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       u2_ho_driver *HostDriverBase[] = {
+        &j2_da(k_243),
+        &j2_da(k_244),
         &j2_da(k_245),
         &j2_da(k_246),
 //        &j2_da(k_247),
@@ -92,6 +96,8 @@ u2_flag EyreSmoke;
     static void
     _eyre_print_trac(u2_wire, u2_noun, u2_noun);
 
+uint32_t Trace_w;
+
 /* _eyre_nock(): control and trace wrapper for interpreter.
 */
 static u2_noun                                                    //  produce
@@ -107,30 +113,34 @@ _eyre_nock(u2_wire wir_r,
     return pro;
   }
   else {
-    u2_ray kit_r = u2_bl_open(wir_r);
+    if ( 0 == Trace_w ) {
+      u2_ray kit_r = u2_bl_open(wir_r);
 
-    if ( u2_bl_set(wir_r) ) {
-      u2_bl_done(wir_r, kit_r);
-      fprintf(stderr, "{trace failed!}\n");
-    }
-    else {
-      u2_noun tax;
- 
-      fprintf(stderr, "{trace}\n");
-      tax = u2_rx(wir_r, u2_wire_tax(wir_r));
-      u2_wire_tax(wir_r) = u2_nul;
-
-      if ( u2_nul == Ken ) {
-        fprintf(stderr, "{trace: no kernel}\n");
+      if ( u2_bl_set(wir_r) ) {
+        u2_bl_done(wir_r, kit_r);
+        fprintf(stderr, "{trace failed!}\n");
+        Trace_w = 0;
       }
       else {
-        _eyre_print_trac(wir_r, Ken, tax);
+        u2_noun tax;
+   
+        fprintf(stderr, "{trace}\n");
+        tax = u2_rx(wir_r, u2_wire_tax(wir_r));
+        u2_wire_tax(wir_r) = u2_nul;
+
+        if ( u2_nul == Ken ) {
+          fprintf(stderr, "{trace: no kernel}\n");
+        }
+        else {
+          Trace_w = 1;
+          _eyre_print_trac(wir_r, Ken, tax);
+          Trace_w = 0;
+        }
+        u2_rz(wir_r, tax);
+
+        u2_bl_done(wir_r, kit_r);
       }
-      u2_rz(wir_r, tax);
-
-      u2_bl_done(wir_r, kit_r);
     }
-
     u2_bl_bail(wir_r, c3__fail);
     return u2_none;
   }
@@ -151,30 +161,34 @@ _eyre_mong(u2_wire wir_r,
     return pro;
   }
   else {
-    u2_ray kit_r = u2_bl_open(wir_r);
+    if ( 0 == Trace_w ) {
+      u2_ray kit_r = u2_bl_open(wir_r);
 
-    if ( u2_bl_set(wir_r) ) {
-      u2_bl_done(wir_r, kit_r);
-      fprintf(stderr, "{trace failed!}\n");
-    }
-    else {
-      u2_noun tax;
-     
-      fprintf(stderr, "{trace}\n");
-      tax = u2_rx(wir_r, u2_wire_tax(wir_r));
-      u2_wire_tax(wir_r) = u2_nul;
-
-      if ( u2_nul == Ken ) {
-        fprintf(stderr, "{trace: no kernel}\n");
+      if ( u2_bl_set(wir_r) ) {
+        u2_bl_done(wir_r, kit_r);
+        fprintf(stderr, "{trace failed!}\n");
+        Trace_w = 0;
       }
       else {
-        _eyre_print_trac(wir_r, Ken, tax);
+        u2_noun tax;
+       
+        fprintf(stderr, "{trace}\n");
+        tax = u2_rx(wir_r, u2_wire_tax(wir_r));
+        u2_wire_tax(wir_r) = u2_nul;
+
+        if ( u2_nul == Ken ) {
+          fprintf(stderr, "{trace: no kernel}\n");
+        }
+        else {
+          Trace_w = 1;
+          _eyre_print_trac(wir_r, Ken, tax);
+          Trace_w = 0;
+        }
+        u2_rz(wir_r, tax);
+
+        u2_bl_done(wir_r, kit_r);
       }
-      u2_rz(wir_r, tax);
-
-      u2_bl_done(wir_r, kit_r);
     }
-
     u2_bl_bail(wir_r, c3__fail);
     return u2_none;
   }

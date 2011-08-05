@@ -73,7 +73,7 @@
 
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 94
+  %expect 93
 
   %pure-parser
   %locations
@@ -176,8 +176,7 @@ gene
 
 wide
   : wide_x
-  | wide_x si_cab wide
-    { $$ = _ytrel(c3__dgsp, $1, $3); }
+  | wide_x si_cab wide { $$ = _ytrel(c3__dgsp, $1, $3); }
   ;
 
 wide_x
@@ -206,7 +205,7 @@ wide_c
 
     wide_hard
       : hard      { $$ = _ycell(c3__dtsg, $1); }
-      | hard '@'  { $$ = _ycell(c3__dtwt, $1); }
+      | hard '*'  { $$ = _ycell(c3__dtwt, $1); }
       ;
  
       hard 
@@ -283,9 +282,9 @@ wide_c
   **/
     wide_funk
       : si_des g bank_wide g si_sed
-        { $$ = _ytrel(c3__cbtr, $3, u2_nul); }
+        { $$ = _ytrel(c3__hstr, $3, u2_nul); }
       | si_mit si_des g bank_wide g si_sed
-        { $$ = _ytrel(c3__cbmt, $4, u2_nul); }
+        { $$ = _ytrel(c3__hsmt, $4, u2_nul); }
       | si_bar si_lep g bank_wide g si_pel
         { $$ = _ycell(c3__csbr, $4); }
       | si_pam si_lep g bank_wide g si_pel
@@ -296,8 +295,8 @@ wide_c
         { $$ = _ycell(c3__cszp, $2); }
       | si_com wide 
         { $$ = _ycell(c3__ktsg, $2); }
-      | si_cab si_den g bank_wide g si_ned
-        { $$ = _ytrel(c3__cbdg, $4, u2_nul); }
+      | si_sig si_den g bank_wide g si_ned
+        { $$ = _ytrel(c3__hssg, $4, u2_nul); }
       | si_tar wide
         { $$ = _ycell(c3__mttr, $2); }
       | si_tec wide si_tec wide
@@ -368,15 +367,15 @@ wide_c
 
   /** Wide: normals.
   **/
-    wide_norm: di_cabbar body_i_wide    
+    wide_norm: di_hesbar body_i_wide    
               { $$ = _yqual($1, u2_h($2), u2_t($2), u2_nul); }
-    wide_norm: di_cabdeg body_d_wide    { $$ = _ytrel($1, $2, u2_nul); }
-    wide_norm: di_cabket body_d_wide    { $$ = _ytrel($1, $2, u2_nul); }
-    wide_norm: di_cablyc body_b_wide    { $$ = _ytrel($1, $2, u2_nul); }
-    wide_norm: di_cabmit body_d_wide    { $$ = _ytrel($1, $2, u2_nul); }
-    wide_norm: di_cabpam body_i_wide
+    wide_norm: di_hessig body_d_wide    { $$ = _ytrel($1, $2, u2_nul); }
+    wide_norm: di_hesket body_d_wide    { $$ = _ytrel($1, $2, u2_nul); }
+    wide_norm: di_heslyc body_b_wide    { $$ = _ytrel($1, $2, u2_nul); }
+    wide_norm: di_hesmit body_d_wide    { $$ = _ytrel($1, $2, u2_nul); }
+    wide_norm: di_hespam body_i_wide
               { $$ = _yqual($1, u2_h($2), u2_t($2), u2_nul); }
-    wide_norm: di_cabtar body_d_wide    { $$ = _ytrel($1, $2, u2_nul); }
+    wide_norm: di_hestar body_d_wide    { $$ = _ytrel($1, $2, u2_nul); }
 
     wide_norm: di_casdeg body_c_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_casdot body_c_wide    { $$ = _ycell($1, $2); }
@@ -541,13 +540,13 @@ tall
 
   /** Tall - normals.
   **/
-    tall_norm: di_cabbar w body_ev_tall   { $$ = _ycell($1, $3); }
-    tall_norm: di_cablyc w body_ew_tall   { $$ = _ycell($1, $3); }
-    tall_norm: di_cabdeg w body_ey_tall   { $$ = _ycell($1, $3); }
-    tall_norm: di_cabket w body_ey_tall   { $$ = _ycell($1, $3); }
-    tall_norm: di_cabmit w body_ey_tall   { $$ = _ycell($1, $3); }
-    tall_norm: di_cabpam w body_ev_tall   { $$ = _ycell($1, $3); }
-    tall_norm: di_cabtar w body_ey_tall   { $$ = _ycell($1, $3); }
+    tall_norm: di_hesbar w body_ev_tall   { $$ = _ycell($1, $3); }
+    tall_norm: di_heslyc w body_ew_tall   { $$ = _ycell($1, $3); }
+    tall_norm: di_hessig w body_ey_tall   { $$ = _ycell($1, $3); }
+    tall_norm: di_hesket w body_ey_tall   { $$ = _ycell($1, $3); }
+    tall_norm: di_hesmit w body_ey_tall   { $$ = _ycell($1, $3); }
+    tall_norm: di_hespam w body_ev_tall   { $$ = _ycell($1, $3); }
+    tall_norm: di_hestar w body_ey_tall   { $$ = _ycell($1, $3); }
 
     tall_norm: di_barlyc w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_bardeg w body_b_tall    { $$ = _ycell($1, $3); }
@@ -768,13 +767,13 @@ tall
     di_caslyc: si_cas si_lyc  { $$ = c3__cslc; }
     di_cassep: si_cas si_sep  { $$ = c3__cssp; }
 
-    di_cablyc: si_cab si_lyc  { $$ = c3__cblc; }
-    di_cabbar: si_cab si_bar  { $$ = c3__cbbr; }
-    di_cabdeg: si_cab si_deg  { $$ = c3__cbdg; }
-    di_cabket: si_cab si_ket  { $$ = c3__cbkt; }
-    di_cabmit: si_cab si_mit  { $$ = c3__cbmt; }
-    di_cabpam: si_cab si_pam  { $$ = c3__cbpm; }
-    di_cabtar: si_cab si_tar  { $$ = c3__cbtr; }
+    di_heslyc: si_hes si_lyc  { $$ = c3__hslc; }
+    di_hesbar: si_hes si_bar  { $$ = c3__hsbr; }
+    di_hesket: si_hes si_ket  { $$ = c3__hskt; }
+    di_hesmit: si_hes si_mit  { $$ = c3__hsmt; }
+    di_hespam: si_hes si_pam  { $$ = c3__hspm; }
+    di_hessig: si_hes si_sig  { $$ = c3__hssg; }
+    di_hestar: si_hes si_tar  { $$ = c3__hstr; }
 
     di_barlyc: si_bar si_lyc  { $$ = c3__brlc; }
     di_barsep: si_bar si_sep  { $$ = c3__brsp; }

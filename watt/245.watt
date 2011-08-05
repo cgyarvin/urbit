@@ -1,4 +1,3 @@
-!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -1427,7 +1426,7 @@
         ['0' 'v' ~]
       |=  b=@
       ?:  =(63 b)
-        '_'
+        '+'
       ?:  =(62 b) 
         '-'
       ?:((lth b 26) (add 65 b) ?:((lth b 52) (add 71 b) (sub b 4)))
@@ -1622,13 +1621,6 @@
       [%brtr p=(gene) q=(gene)]
       [%brsp p=(gene)]
       [%brzp p=(gene) q=(gene)]
-      [%cbbr p=(gene) q=((list gene)) r=((map term foot))]
-      [%cbdg p=((list gene)) q=((map term foot))]
-      [%cbkt p=((list gene)) q=((map term foot))]
-      [%cblc p=(gene) q=(gene) r=((map term foot))]
-      [%cbmt p=((list gene)) q=((map term foot))]
-      [%cbpm p=(gene) q=((list gene)) r=((map term foot))]
-      [%cbtr p=((list gene)) q=((map term foot))]
       [%csbr p=((list gene))]
       [%csdg p=(gene) q=(gene) r=(gene)]
       [%csdl p=(gene) q=(gene)]
@@ -1650,6 +1642,13 @@
       [%dtsg p=*term q=*]
       [%dttr p=(gene) q=(gene)]
       [%dtwt p=*term q=@]
+      [%hsbr p=(gene) q=((list gene)) r=((map term foot))]
+      [%hssg p=((list gene)) q=((map term foot))]
+      [%hskt p=((list gene)) q=((map term foot))]
+      [%hslc p=(gene) q=(gene) r=((map term foot))]
+      [%hsmt p=((list gene)) q=((map term foot))]
+      [%hspm p=(gene) q=((list gene)) r=((map term foot))]
+      [%hstr p=((list gene)) q=((map term foot))]
       [%ktdg p=(gene) q=(gene)]
       [%ktdl p=(gene) q=(gene)]
       [%ktlc p=*term q=(gene)]
@@ -1877,58 +1876,6 @@
         [%brsp *]  [%lcld [%brdt p.gen] %%]
         [%brtr *]  [%pmlc p.gen [[%% [& | q.gen]] ~ ~]]
         [%brzp *]  [%lcld [%zpmt ~] [%brlc p.gen q.gen]]
-        [%cbbr *]
-      %+  knit(gen ?~(q.gen [%dtsg %n ~] i.q.gen))
-        :^    %cssg
-            [~ 10]
-          (lung(gen [%zpzp ~]) [[~ 5] ~] q.gen)
-        (mold(gen p.gen) [[~ 5] ~]) 
-      r.gen 
-    ::
-        [%cbdg *]   
-      (knit(gen [%dgtr p.gen]) (mold(gen [%dgtr p.gen]) [[~ 5] ~]) q.gen)
-    ::
-        [%cbkt *]   
-      %+  knit(gen ?~(p.gen [%dtsg %n ~] i.p.gen))
-        (lung(gen [%zpzp ~]) [[~ 5] ~] p.gen)
-      q.gen
-    :: 
-        [%cblc *]   
-      %+  knit(gen p.gen)
-        :^    %cssg
-            [~ 5]
-          (pick(gen p.gen) [[~ 5] ~] [%zpzp ~]) 
-        (mold(gen q.gen) [[~ 5] ~])
-      r.gen
-    ::
-        [%cbmt *]
-      %+  knit(gen [%dtsg %n 0])
-        =+  dix=`@`0
-        |-  ^-  *gene
-        ?~  p.gen
-          [%zpzp ~] 
-        :^    %csdg
-            [%dtlc [~ 5] [%dtsg %u dix]]
-          i.p.gen
-        $(p.gen t.p.gen, dix +(dix))
-      q.gen
-    ::
-        [%cbpm *]
-      %+  knit(gen p.gen)
-        :^    %cssg
-            [~ 5]
-          (pick(gen p.gen) [[~ 5] ~] [%zpzp ~]) 
-        (lung(gen [%zpzp ~]) [[~ 5] ~] q.gen)
-      r.gen 
-    :: 
-        [%cbtr *]
-      %+  knit(gen ?~(p.gen [%dtsg %n ~] i.p.gen))
-        |-  ^-  *gene
-        ?~  p.gen
-          [%zpzp ~]
-        (pick(gen i.p.gen) [[~ 5] ~] $(p.gen t.p.gen))
-      q.gen
-    ::
         [%csbr *]
       |- 
       ?~(p.gen [%dtsg %f 1] [%csdg i.p.gen [%dtsg %f 0] $(p.gen t.p.gen)])
@@ -1962,6 +1909,58 @@
       ==
     ::
         [%dtwt *]   [%ktps [%dtsg p.gen 0] [%dtsg %% q.gen]]
+        [%hsbr *]
+      %+  knit(gen ?~(q.gen [%dtsg %n ~] i.q.gen))
+        :^    %cssg
+            [~ 10]
+          (lung(gen [%zpzp ~]) [[~ 5] ~] q.gen)
+        (mold(gen p.gen) [[~ 5] ~]) 
+      r.gen 
+    ::
+        [%hssg *]   
+      (knit(gen [%dgtr p.gen]) (mold(gen [%dgtr p.gen]) [[~ 5] ~]) q.gen)
+    ::
+        [%hskt *]   
+      %+  knit(gen ?~(p.gen [%dtsg %n ~] i.p.gen))
+        (lung(gen [%zpzp ~]) [[~ 5] ~] p.gen)
+      q.gen
+    :: 
+        [%hslc *]   
+      %+  knit(gen p.gen)
+        :^    %cssg
+            [~ 5]
+          (pick(gen p.gen) [[~ 5] ~] [%zpzp ~]) 
+        (mold(gen q.gen) [[~ 5] ~])
+      r.gen
+    ::
+        [%hsmt *]
+      %+  knit(gen [%dtsg %n 0])
+        =+  dix=`@`0
+        |-  ^-  *gene
+        ?~  p.gen
+          [%zpzp ~] 
+        :^    %csdg
+            [%dtlc [~ 5] [%dtsg %u dix]]
+          i.p.gen
+        $(p.gen t.p.gen, dix +(dix))
+      q.gen
+    ::
+        [%hspm *]
+      %+  knit(gen p.gen)
+        :^    %cssg
+            [~ 5]
+          (pick(gen p.gen) [[~ 5] ~] [%zpzp ~]) 
+        (lung(gen [%zpzp ~]) [[~ 5] ~] q.gen)
+      r.gen 
+    :: 
+        [%hstr *]
+      %+  knit(gen ?~(p.gen [%dtsg %n ~] i.p.gen))
+        |-  ^-  *gene
+        ?~  p.gen
+          [%zpzp ~]
+        (pick(gen i.p.gen) [[~ 5] ~] $(p.gen t.p.gen))
+      q.gen
+    ::
         [%ktdg *]
       :+  %lcps
         q.gen
@@ -3352,11 +3351,11 @@
           (stag %tam ;~(pfix mit sym))
           (stag %tam (cold %% ;~(plug mit mit)))
         ==
-        wat
+        tar
       == 
     ::
       (stag %dgtr (ifix [den ned] (most ace wide)))
-      (cook |=(a=*(list gene) [%cbtr a ~]) (ifix [des sed] (most ace wide)))
+      (cook |=(a=*(list gene) [%hstr a ~]) (ifix [des sed] (most ace wide)))
       (stag %mtsp (ifix [lep pel] (most ace wide)))
       (stag %tmdg ;~(pfix deg (ifix [lep pel] (most ace wide))))
       (cook |=(a=*twig [%mtlc a ~]) rope)
@@ -3381,12 +3380,12 @@
       ==
     ::
       %+  cook 
-        |=(a=*(list gene) [%cbmt a ~]) 
+        |=(a=*(list gene) [%hsmt a ~]) 
       ;~(pfix mit (ifix [des sed] (most ace wide)))
     ::
       %+  cook
-        |=(a=*(list gene) [%cbdg a ~])
-      ;~(pfix cab (ifix [den ned] (most ace wide)))
+        |=(a=*(list gene) [%hssg a ~])
+      ;~(pfix sig (ifix [den ned] (most ace wide)))
     ::
       %+  stag
         %mtsg 
@@ -3432,13 +3431,13 @@
           ==
           ;~  pfix  cab
             ;~  pose
-              (rune bar %cbbr expu)
-              (rune deg %cbdg expy)
-              (rune ket %cbkt expy)
-              (rune lyc %cblc expv)
-              (rune mit %cbmt expy)
-              (rune pam %cbpm expu)
-              (rune tar %cbtr expy)
+              (rune bar %hsbr expu)
+              (rune ket %hskt expy)
+              (rune lyc %hslc expv)
+              (rune mit %hsmt expy)
+              (rune pam %hspm expu)
+              (rune sig %hssg expy)
+              (rune tar %hstr expy)
             ==
           ==
           ;~  pfix  cas
@@ -3657,7 +3656,7 @@
       ;~  pose
         ;~(plug (cold %lyc lyc) wide)
         ;~(plug (cold %deg deg) wide)
-        ;~(plug (cold %cab cab) wide)
+      ::  ;~(plug (cold %cab cab) wide)
         ;~  plug
           (easy %lep)
           %+  ifix

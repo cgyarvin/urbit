@@ -1,34 +1,34 @@
   bar   |       
-  bon   =       
   bot   '       
   cab   _       
   com   ,       
   cas   ?       
-  dap   -     
   dax   #       
   deg   :       
   den   [
   des   {
   dot   .       
   del   <
+  hes   $
   ket   ^
   lep   (       
   led   >
+  lyc   =       
   mit   %       
-  nat   @     
   ned   ]
   nov   \
   pam   &       
-  ped   +
+  pes   +
   pel   )
-  sec   $
   sed   }
+  sep   -     
   sig   ~
   tam   ;       
   tar   *
   tec   `
   tob   "
   von   /
+  wat   @     
   zap   !       
 
   ace  == whitespace, " " or "\n" in any quantity
