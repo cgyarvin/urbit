@@ -49,7 +49,7 @@ there's an actual hole in it.
 
 (How does Nock obtain native performance, if it can't call out to
 C?  How does it print "hello, world," if it can't call a print
-function?  Patience, grasshopper.  All will be revealed.)
+function?  Patience, grasshopper.)
 
 These are all reasons to _use_ Nock.  But they're not reasons to
 _learn_ Nock.  Like JVM bytecode, Nock is as inscrutable as
@@ -74,7 +74,7 @@ Nock 6K - roughly the temperature of Neptune.  No change is
 anticipated between 6K and absolute zero, though you never know.
 Any such change would certainly be quite painful.
 
-The 197-word Nock spec contains no non-normative text and is
+The 197-word Nock spec contains no informative text and is
 strictly for hardcore supergeeks.  We have verified that hardcore
 supergeeks can write correct implementations from this spec
 alone.  If you're a hardcore supergeek, you might want to stop

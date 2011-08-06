@@ -1,19 +1,15 @@
-2: Decrement as Pons Asinorum
+2: Decrement 
 
-The normal way to learn Nock is to write a single function in it:
-a partial function that produces `(s - 1)` if `s` is a nonzero
-atom, and otherwise does not terminate.  
+A good practice exercise for Nock is a decrement formula.  Ie, a
+formula `f` which implements the partial function that produces
+`(s - 1)` if `s` is a nonzero atom, and otherwise does not
+terminate.  
 
-The normal Watt programmer, novice or expert, has written exactly
-one Nock formula: this one.  Since decrement uses all the Nock
-techniques the Watt compiler uses, the exercise is a sufficient
-foundation.  Those who try to learn Watt without it risk severe
-brain contusions.
-
-If `s` is your subject, what formula `f` implements decrement?
-As applied from the Watt command line:
-
-  : .*(s f)
+The normal Watt programmer has written one Nock formula: this
+one.  Since decrement uses all the Nock techniques the Watt
+compiler uses, the exercise is a good foundation.  After you
+write decrement (or just follow this example), you'll never need
+to deal with Nock again.
 
 If you read the last chapter, you know that the equivalent
 formula for increment is
@@ -40,11 +36,11 @@ Here is a minimal decrement in Watt:
 
 Or for fun, on one line:
 
-  =>(a=. =+(b=`@`0 |-(?:(=(a +(b)) b $(b +(b))))))
+  =>(a=. =+(b=0* |-(?:(=(a +(b)) b $(b +(b))))))
 
 Does Watt actually work?
 
-  : =>(42 =>(a=. =+(b=`@`0 |-(?:(=(a +(b)) b $(b +(b)))))))
+  : =>(42 =>(a=. =+(b=0* |-(?:(=(a +(b)) b $(b +(b)))))))
   41
 
 Let's translate this into English.  How do we decrement the
@@ -53,7 +49,7 @@ subject?  First (line 1), we rename the subject `a`.  Second
 Third (line 3), we loop.  Fourth, we test if `a` equals `b` plus
 1 (line 4), produce `b` if it does (line 5), repeat the loop with
 `b` set to `b` plus 1 (line 6) if it doesn't.  Obviously, while
-the syntax is bizarre, the algorithm is anything but recondite.
+the syntax is unusual, the algorithm is anything but recondite.
 We are calculating `b` minus one by counting up to it.
 
 (Obviously, this is an O(n) algorithm.  Is there a better way?
@@ -64,7 +60,7 @@ yes.  But on the other hand, no...)
 Unfortunately we are missing a third of our Rosetta stone.  We
 have decrement in Watt and we have it in English.  How do we
 express this in Nock?  What will the Watt compiler generate from
-the code above?  We seek
+the code above?  We seek a formula, 
 
   f
 
@@ -75,8 +71,7 @@ How do we add a variable (line 2)?  We compute a new subject,
 which is a cell of the present subject and the variable.  With
 this new subject, we execute another formula.
 
-Since the initial value of our variable is `0`, this heavy
-computation yields to the humble formula
+Since `0` is a constant, a formula that produces it is
 
   [1 0]
 

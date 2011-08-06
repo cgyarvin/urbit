@@ -1,3 +1,4 @@
+!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -3196,21 +3197,28 @@
     ?:  =(1 axe)
       sut
     =+  [now=(cap axe) lat=(mas axe)]
+    =+  gil=*(set type)
+    |-  ^-  *type
     ?-    sut
-        %void       %void
-        %noun       %noun
         [%atom *]   %void
-        [%cell *]   ?:(=(2 now) $(sut p.sut, axe lat) $(sut q.sut, axe lat))
+        [%cell *]   ?:(=(2 now) $$(sut p.sut, axe lat) $$(sut q.sut, axe lat))
         [%core *]   
       ?:  =(2 now) 
         ?.  (park way lat)
           ~~  (dunk 'type')
           ~~  (show [%c 'axis'] [%d axe])
           ~|(%peek-park !!)
-        $(sut p.sut, axe lat) 
+        $$(sut p.sut, axe lat) 
       %noun
     ::
         [%fork *]   (fork $(sut p.sut) $(sut q.sut))
+        [%hold *]   
+      ?:  (~(has in gil) sut) 
+        %void 
+      $(gil (~(put in gil) sut), sut repo)
+    ::
+        %void       %void
+        %noun       %noun
         *           $(sut repo)
     ==
   ::
