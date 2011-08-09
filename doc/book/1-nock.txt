@@ -1,85 +1,81 @@
-1: Nock Made Stupid
+1: Crash course in Nock
 
-WTF?  What is this Nock thing?  Why do you have to learn it?
+So let's learn Nock!  But wait - why learn Nock?  After all,
+we're going to be programming in Watt, not Nock.
 
-Nock is a virtual machine, like the Java VM or Microsoft CLR.
-Just as you execute Java by compiling it to the JVM, you execute
-Watt by compiling it to Nock.  
+Like JVM bytecode, Nock is as inscrutable as assembly language.
+In fact, you can think of it as a sort of "functional assembly
+language."  There are sometimes reasons to program in real
+assembly language; there is never a reason to program in Nock.
+Except to learn Nock.
 
-Do you need to know Nock to learn in Watt?  In theory, no, just
-as you don't need to know anything about the JVM to learn Java.
-Indeed, in theory we could compile Watt to the JVM (or Java to
-Nock).  What's the difference between Nock and the JVM, anyway?
-Why do we need a new virtual machine?
+Indeed, it is not necessary for the Watt programmer to learn
+Nock.  We recommend it strongly, however, because Watt has a very
+special relationship with Nock - not unlike the relationship
+between C and assembly language.  Just as C is a very shallow
+layer over the raw CPU, Watt is a very shallow layer over raw
+Nock - often little more than a macro.  If you try to learn C
+without understanding the CPU under it, you will be forever
+bemused by why it works the way it does.
 
-There is no formal difference between Nock and the JVM.  In
-theory, both are Turing-complete computers.  In practice, they
-have just about nothing in common.
+So let's learn Nock!  But wait - which Nock?  Nock, though more
+frozen than Walt Disney, does have versions.  Nock versions are
+measured by integer degrees Kelvin, newer being colder.  The
+newest, Nock 6K - roughly the temperature of Neptune.  No change
+is anticipated between 6K and absolute zero, though you never
+know.  Any such change would certainly be quite painful.
 
-The main practical difference is that Nock is two orders of
-magnitude simpler.  The JVM spec is a book.  The Nock spec is 197
-words; it gzips to 372 bytes.  There are lots of other
-differences, but they all follow from this.
+Here is Nock 6K:
 
-Why does size matter?  The goal of any programming language is to
-become a standard.  The simpler a specification is, the easier to
-standardize.  Nock is a practical interpreter as simple as the
-most frozen and fundamental of protocols or formats: IPv4, XML,
-JSON.  A 200-word spec needs no standards process.
+  1 Structures
 
-Since every program in Watt (including the Watt compiler) reduces
-to Nock, every program in Watt inherits this precision.  If two
-Nock interpreters produce different results, one is wrong, and
-it is always easy to tell which - without a "standards lawyer."
+    A noun is an atom or a cell.  An atom is any natural number.  
+    A cell is any ordered pair of nouns.
 
-Nearly as important is a second difference between Nock and the
-JVM, which is that the JVM can call Unix system calls and
-libraries, and Nock can't.  Nock has no "native methods" or
-foreign-function interface.  Nor is it ever extended,
-embellished, forked, improved or advanced.
+  2 Pseudocode
 
-Java began as a portable language; so did C.  Most Java today is
-server-side Java, dependent no less than C on library and OS
-configuration.  It is possible to write portable Java; it is
-possible to write portable C.  It is not possible to write
-unportable Nock or Watt.  It is also not possible to write
-insecure Nock or Watt, unless your interpreter is so broken
-there's an actual hole in it.
+    [a b c]           [a [b c]]
+    nock(a)           *a
+   
+    ?[a b]            0
+    ?a                1
+    ^a                1 + a
+    =[a a]            0
+    =[a b]            1
 
-(How does Nock obtain native performance, if it can't call out to
-C?  How does it print "hello, world," if it can't call a print
-function?  Patience, grasshopper.)
+    /[1 a]            a
+    /[2 a b]          a
+    /[3 a b]          b
+    /[(a + a) b]      /[2 /[a b]]
+    /[(a + a + 1) b]  /[3 /[a b]]
 
-These are all reasons to _use_ Nock.  But they're not reasons to
-_learn_ Nock.  Like JVM bytecode, Nock is as inscrutable as
-assembly language.  In fact, you can think of it as a sort of
-"functional assembly language."  There are sometimes reasons to
-program in real assembly language; there is never a reason to
-program in Nock.  Except to learn Nock.
+    *[a [b c] d]      [*[a b c] *[a d]]
 
-It is not necessary for the Watt programmer to learn Nock.  We
-recommend it strongly, however, because Watt has a very special
-relationship with Nock - not unlike the relationship between C
-and assembly language.  Just as C is a very shallow layer over
-the raw CPU, Watt is a very shallow layer over raw Nock - often
-little more than a macro.  If you try to learn C without
-understanding the CPU under it, you will be forever bemused by
-why it works the way it does.  The same is true of Watt and Nock.
+    *[a 0 b]          /[b a]
+    *[a 1 b]          b
+    *[a 2 b c]        *[*[a b] *[a c]]
+    *[a 3 b]          ?*[a b]
+    *[a 4 b]          ^*[a b]
+    *[a 5 b]          =*[a b]
 
-So let's learn Nock!  But which Nock?  Nock, though more frozen
-than Walt Disney, does have versions.  Nock versions are measured
-by integer degrees Kelvin, newer being colder.  The newest is
-Nock 6K - roughly the temperature of Neptune.  No change is
-anticipated between 6K and absolute zero, though you never know.
-Any such change would certainly be quite painful.
+    *[a 6 b c d]      *[a 2 [0 1] 2 [1 c d] [1 0] 2 [1 2 3] [1 0] 4 4 b]
+    *[a 7 b c]        *[a 2 b 1 c]
+    *[a 8 b c]        *[a 7 [[0 1] b] c]
+    *[a 9 b c]        *[a 7 c 0 b]
+    *[a 10 b c]       *[a c]
+    *[a 10 [b c] d]   *[a 8 c 7 [0 2] d]
 
-The 197-word Nock spec contains no informative text and is
-strictly for hardcore supergeeks.  We have verified that hardcore
-supergeeks can write correct implementations from this spec
-alone.  If you're a hardcore supergeek, you might want to stop
-right here and write your own Nock implementation, followed by
-the standard exercise - a Nock decrement formula.  If not, keep
-reading.
+    ^[a b]            ^[a b]
+    =a                =a
+    /a                /a
+    *a                *a
+
+The above spec contains no informative text and is strictly for
+hardcore supergeeks.  We have verified that hardcore supergeeks
+can write correct implementations from this spec alone.  If
+you're a hardcore supergeek, you might want to stop right here
+and write your own Nock implementation, followed by the standard
+exercise - a Nock decrement formula.  If not, keep reading.
 
 To make Nock make sense, let's work through Nock 6K line by line.
 First the data model (lines 1-4):
@@ -89,10 +85,10 @@ First the data model (lines 1-4):
     A noun is an atom or a cell.  An atom is any natural number.
     A cell is any ordered pair of nouns.
 
-Nouns are the stupidest data model ever.  Nouns make JSON look
-like XML and XML look like ASN.1.  It may also remind you of
-Lisp's S-expressions - you can think of nouns as "S-expressions
-without the S."
+Nouns are the dumbest data model ever.  Nouns make JSON look like
+XML and XML look like ASN.1.  It may also remind you of Lisp's
+S-expressions - you can think of nouns as "S-expressions without
+the S."
 
 To be exact, a noun _is_ an S-expression, except that classic
 S-expressions have multiple atom types ("S" is for "symbol").
@@ -112,7 +108,7 @@ cyclical data structures.  It is normal and common for nouns in a
 Nock runtime system to have acyclic structure - shared subtrees.
 But there is no Nock computation that can make a child point to
 its parent.  One consequence: Nock has no garbage collector.
-(Nor can acyclic structure be detected, as with Lisp `eq`.)
+(Nor can dag structure be detected, as with Lisp `eq`.)
 
 There is also no single syntax for nouns.  If you have nouns you
 have Nock; if you have Nock you have Watt; if you have Watt, you
@@ -417,7 +413,8 @@ Once we see what `7` and `8` do, we'll see that this complex hint
 throws away an arbitrary `b`, but computes the formula `c`
 against the subject and... throws away the product.  This formula
 is simply equivalent to `d`.  Of course, in practice the product
-of `c` will be put to some sordid and practical use.
+of `c` will be put to some sordid and useful use.  It could even
+wind up as a side effect, though we try not to get _that_ sordid.
 
 (Why do we even care that `c` is computed?  Because `c` could
 crash.  A correct Nock cannot simply ignore it, and treat both
@@ -549,3 +546,276 @@ never do anything as funky as these `6` macro internals.  There's
 no reason we couldn't build formulas at runtime, but we have no
 reason to and we don't - except when actually metaprogramming.
 As in most languages, normally code is code and data is data.)
+
+A good practice exercise for Nock is a decrement formula.  Ie, a
+formula `f` which implements the partial function that produces
+`(s - 1)` if `s` is a nonzero atom, and otherwise does not
+terminate.  
+
+The normal Watt programmer has written one Nock formula: this
+one.  Since decrement uses all the Nock techniques the Watt
+compiler uses, the exercise is a good foundation.  After you
+write decrement (or just follow this example), you'll never need
+to deal with Nock again.
+
+As we know, the equivalent formula for increment is
+
+  [4 0 1]
+
+Thus:
+
+  : .*(42 [4 0 1])
+  43
+
+Of course, increment is built into Nock.  So, ha, that's easy.
+
+How do we decrement?  A good way to start is to gaze fondly on
+how we'd do it if we actually had a real language, ie, Watt.
+Here is a minimal decrement in Watt:
+
+  =>  a=.                     ::  line 1
+  =+  b=`@`0                  ::  line 2
+  |-                          ::  line 3
+  ?:  =(a +(b))               ::  line 4
+    b                         ::  line 5
+  $(b +(b))                   ::  line 6
+
+Or for fun, on one line:
+
+  =>(a=. =+(b=0* |-(?:(=(a +(b)) b $(b +(b))))))
+
+Does Watt actually work?
+
+  : =>(42 =>(a=. =+(b=0* |-(?:(=(a +(b)) b $(b +(b)))))))
+  41
+
+Let's translate this into English.  How do we decrement the
+subject?  First (line 1), we rename the subject `a`.  Second
+(line 2), we add a variable, `b`, an atom with value `0`.
+Third (line 3), we loop.  Fourth, we test if `a` equals `b` plus
+1 (line 4), produce `b` if it does (line 5), repeat the loop with
+`b` set to `b` plus 1 (line 6) if it doesn't.  Obviously, while
+the syntax is unusual, the algorithm is anything but deep.  We
+are calculating `b` minus one by counting up from `0.
+
+(Obviously, this is an O(n) algorithm.  Is there a better way?
+There is not.  Do we actually do this in practice?  Yes and no.)
+
+Unfortunately we are missing a third of our Rosetta stone.  We
+have decrement in Watt and we have it in English.  How do we
+express this in Nock?  What will the Watt compiler generate from
+the code above?  Let's work through it line by line.
+
+Nock has no types, variable names, etc.  So line 1 is a no-op.
+
+How do we add a variable (line 2)?  We compute a new subject,
+which is a cell of the present subject and the variable.  With
+this new subject, we execute another formula.
+
+Since `0` is a constant, a formula that produces it is
+
+  [1 0]
+
+To combine `0` with the subject, we compute
+
+  [[0 1] [1 0]]
+
+which, if our subject is 42, gives us
+
+  [42 0]
+
+which we can use as the subject for an inner formula, `g`.
+Composing our new variable with `g`, we have `f` as
+
+  [2 [[0 1] [1 0]] [1 g]]
+
+which seems a little funky for something so simple.  But we
+can simplify it with the composition macro, `7`:
+
+  [7 [[0 1] [1 0]] g]
+
+and still further with the augmentation macro, `8`:
+
+  [8 [1 0] g]
+
+If you refer back to the Nock definition, you'll see that these
+transformations are absolutely invariant.
+
+So what's `g`?  We seem to loop.  Does Nock have a loop
+operator?  It most certainly does not.  So what do we do?
+
+We build a noun called a _core_ - a construct which is behind any
+kind of interesting control flow in Watt.  Of course, the Nock
+programmer is not constrained to use the same techniques as the
+Watt compiler, but it is probably a good idea. 
+
+In Watt, all the flow structures from your old life as an Earth
+programmer become cores.  Functions and/or closures are cores,
+objects are cores modules are cores, even loops are cores.
+
+The core is just a cell whose head is data (possibly containing
+other cores) and whose tail is code (containing one or more
+formulas).  The head is the _payload_ and the tail is the
+_battery_.  Hence your core is
+
+  [pay bat]
+
+To activate a core, pick a formula out of the battery, and use
+the entire core (_not_ just the payload) as the subject.  
+
+(A core formula is inevitably known as a _method_ - but note that
+the parallel to the classic object-oriented paradigm is not
+exact.  The method produces a function of the core, not the core
+and some argument.  Ie, it is more of a functional attribute.)
+
+Of course, because we feed it the entire core, our method can
+invoke itself (or any other formula in the battery).  Hence, it
+can loop.  And this is what a loop is - the simplest of cores.
+
+We need to do two things with this core: create it, and activate
+it.  To be precise, we need two formulas: a formula which
+produces the core, and one which activates its subject.  We can
+compose these functions with the handy `7` operator:
+
+  [8 [1 0] [7 p a]]
+
+`p` produces our core, `a` activates it.  Let's take these in
+reverse order.  How do we activate a core?
+
+Since we have only one formula, it's is the battery itself.
+Thus we want to execute Nock with the whole core (already the
+subject, and the entire battery (slot `3`).  Hence, `a` is
+
+  [2 [0 1] [0 3]]
+
+We could also use the handy `9` macro - which almost seems
+designed for firing methods on cores:
+
+  [9 3 [0 1]]
+
+Which leaves us seeking 
+
+ [8 [1 0] [7 p [9 3 0 1]]]
+
+And all we have to do is build the core, `p`.  How do we build a
+core?  We add code to the subject, just as we added a variable
+above.  The initial value of our counter was a constant, `0`.
+The initial (and permanent) value of our battery is a constant, 
+the loop formula `l`.  So `p` is
+
+  [8 [1 l] [0 1]]
+
+Which would leave us seeking
+
+  [8 [1 0] [7 [8 [1 l] [0 1]] [9 3 0 1]]]
+
+except that we have duplicated the `8` pattern again, since we
+know
+
+  [7 [8 [1 l] [0 1]] [9 3 0 1]]
+
+is equivalent to  
+
+  [8 [1 l] [9 3 0 1]]
+
+so the full value of `f` is
+
+  [8 [1 0] [8 [1 l] [9 3 0 1]]]
+
+Thus our only formula to compose is the loop body, `l`.
+Its subject is the loop core:
+
+  [pay bat]
+
+where `bat` is just the loop formula, and `pay` is the pair `[a
+b]`, `a` being the input subject, and `b` the counter.  Thus we
+could also write this subject as
+
+  [[a b] l]
+
+and we see readily that `a` is at slot `4`, `b` `5`, `l` `3`.
+With this subject, we need to express the Watt loop body
+
+  ?:  =(a +(b))               ::  line 4
+    b                         ::  line 5
+  $(b +(b))                   ::  line 6
+
+This is obviously an if statement, and it calls for `6`.  Ie:
+
+  [6 t y n]
+
+Giving our decrement program as:
+
+ [8 [1 0] [8 [1 6 t y n] [9 3 0 1]]]
+
+For `t`, how do we compute a flag that is yes (`0`) if `a` equals
+`b` plus one?  Equals, we recall, is `5`.  So `t` can only be
+ 
+  [5 [0 4] [4 0 5]]
+
+If so, our product `y` is just the counter `b`:
+
+  [0 5]
+
+And if not?  We have to re-execute the loop with the counter 
+incremented.  If we were executing it with the same counter, 
+obviously an infinite loop, we could use the same core:
+
+  [9 3 0 1]
+
+But instead we need to construct a new core with the counter 
+incremented:
+
+  [[a +(b)] l]
+
+ie, 
+
+  [[[0 4] [4 0 5]] [0 3]]
+
+and `n` is:
+
+  [9 3 [[0 4] [4 0 5]] [0 3]]
+ 
+Hence our complete decrement.  Let's reformat vertically so we
+can actually read it:
+
+ [ 8 
+   [1 0] 
+   [ 8 
+     [ 1 
+       [ 6 
+         t 
+         y 
+         n
+       ]
+     ]
+     [9 3 0 1]
+    ]
+ ]
+
+which becomes
+
+ [ 8 
+   [1 0] 
+   [ 8 
+     [ 1 
+       [ 6 
+         [5 [0 4] [4 0 5]]
+         [0 5]
+         [9 3 [[0 4] [4 0 5]] [0 3]]
+       ]
+     ]
+     [9 3 0 1]
+    ]
+ ]
+
+or, on one line without superfluous brackets:
+
+  [8 [1 0] 8 [1 6 [5 [0 4] 4 0 5] [0 5] 9 3 [[0 4] 4 0 5] 0 3] 9 3 0 1]
+
+which works for the important special case, 42:
+
+  : .*(42 [8 [1 0] 8 [1 6 [5 [0 4] 4 0 5] [0 5] 9 3 [[0 4] 4 0 5] 0 3] 9 3 0 1])
+  41
+
+If you understood this, you understand Nock.  At least in principle!
