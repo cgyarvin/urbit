@@ -25,8 +25,7 @@ Why does size matter?  The goal of any programming language is to
 become a standard.  The simpler a specification is, the easier to
 standardize.  Nock is a practical interpreter as simple as the
 most frozen and fundamental of protocols or formats: IPv4, XML,
-JSON.  No standards process or organization should be needed to
-freeze a 200-word spec.
+JSON.  A 200-word spec needs no standards process.
 
 Since every program in Watt (including the Watt compiler) reduces
 to Nock, every program in Watt inherits this precision.  If two
@@ -39,7 +38,7 @@ libraries, and Nock can't.  Nock has no "native methods" or
 foreign-function interface.  Nor is it ever extended,
 embellished, forked, improved or advanced.
 
-Java began as a portable language; so did C.  All Java today is
+Java began as a portable language; so did C.  Most Java today is
 server-side Java, dependent no less than C on library and OS
 configuration.  It is possible to write portable Java; it is
 possible to write portable C.  It is not possible to write
@@ -545,6 +544,8 @@ we accomplish this?  This is an excellent way to prove to
 yourself that you understand Nock: figure out what the real `6`
 does.  Or you could just agree that `6` is "if," and move on.
 
-(It's worth noting that in real, generated Nock, we never do
-anything this funky.  There's no reason we couldn't build
-formulas at runtime, but we have no reason to and we don't.)
+(It's worth noting that in practical, compiler-generated Nock, we
+never do anything as funky as these `6` macro internals.  There's
+no reason we couldn't build formulas at runtime, but we have no
+reason to and we don't - except when actually metaprogramming.
+As in most languages, normally code is code and data is data.)

@@ -1,0 +1,176 @@
+!:
+~%    %gunn
+    -<-<
+  ==
+    %line  line
+  ==
+=>  !% 
+=>  &.
+    ++  deed                          ::  command-line action
+      $~  p=(sink)                    ::  data destination
+          q=(well)                    ::  data source
+          r=(tool)                    ::  data transformation
+      ==
+    ++  func                          ::  transformation function
+      $^  [%body p=*gene]             ::  unwrapped code
+          [%disk p=(path)]            ::  %fund path
+          [%gate p=*gene]             ::  predefined gate
+      ==
+    ++  lard                          ::  library definition
+      $^  [%disk p=(path)]            ::  %libd path
+          [%gene p=*gene]             ::  resolved gene 
+      ==
+    ++  mine                          ::  filesystem mapping
+      $~  p=(mode)                    ::  noun conversion
+          q=(spot)                    ::  search model 
+          r=(path)                    ::  unix path
+      ==
+    ++  mode
+      $&  %*  $*  %atom               ::  file as flat atom
+                  %auto               ::  default
+                  %blob               ::  file as byte length, atom
+                  %dlog               ::  directory as sequence
+                  %dmap               ::  directory as map
+                  %noun               ::  file as noun jam
+                  %text               ::  file as list of list of chars
+                  %watt               ::  watt source as atom
+              ==
+        [%dlog p=(mode)]
+        [%dmap p=(mode)]
+      ==
+    ++  path  (list tape)             ::  unix path
+    ++  sink
+      $&  ~                           ::  print to screen
+        [%comd p=''*]                 ::  pipe to unix command
+        [%disk p=(mine)]              ::  write to filesystem
+        [%name p=*term]               ::  add to environment
+      ==
+    ++  spot                          ::  filesystem search model
+      $*  %curd                       ::  current directory
+          %fund                       ::  function directory
+          %home                       ::  home directory
+          %libd                       ::  library directory
+          %resd                       ::  resource directory
+          %root                       ::  root path
+      ==
+    ++  tool                          ::  transformation
+      $~  p=((list lard))             ::  libraries
+          q=(func)                    ::  function
+      ==
+    ++  well                          ::  data source
+      $&  ~                           ::  null
+        [%comd p=''*]                 ::  pipe from unix command
+        [%disk p=(mine)]              ::  read from filesystem
+        [%gene p=*gene]               ::  direct gene
+        [%name p=*term q=(well)]      ::  named
+        [%tupl p=((list well))]       ::  tuple
+      ==
+    --
+=>  &.
+    ++  x-path  ~+
+      (most (just '/') (star ;~(pose aln cab dot sep)))
+    ::
+    ++  x-mode
+      %+  knee  *mode  |.  ~+
+      ;~  pose
+        ;~  sfix  
+          ;~  pose
+            (cold %atom (just 'a'))
+            (cold %blob (just 'b'))
+            (stag %dlog ;~(pfix (just 'l') x-mode))
+            (stag %dmap ;~(pfix (just 'm') x-mode))
+            (cold %noun (just 'n'))
+            (cold %text (just 't'))
+            (cold %watt (just 'w'))
+          ==
+          hes
+        ==
+        (easy %auto)
+      ==
+    ::
+    ++  x-mine  ~+
+      ;~  plug
+        x-mode
+        ;~  pose
+          (cold %root von)
+          (cold %home ;~(plug dot von))
+          %+  ifix
+            [sig von]
+          ;~  pose
+            (cold %fund (just 'f'))
+            (cold %libd (just 'l'))
+            (cold %resd (just 'r'))
+          ==
+        ==
+        x-path
+      ==
+    ::
+    ++  x-deed  ~+
+      ;~(plug x-sink x-well x-tool)
+    ::
+    ++  x-sink  ~+
+      ;~  pose
+        ;~  pfix  led
+          ;~  pose
+            (stag %disk x-mine)
+            (stag %name ;~(pfix lyc sym))
+            (stag %comd ;~(pfix bar qut))
+          ==
+        ==
+        (easy ~)
+      ==
+    ::
+    ++  x-tool  ~+
+      ;~  pose
+        ;~  plug
+          (star (stag %disk ;~(pfix ket x-path)))
+          ;~  pose
+            (stag %disk ;~(pfix deg x-path))
+            (stag %body ;~(pfix pes vest))
+          ==
+        ==
+        ;~  plug
+          (easy ~)
+          (stag %body vest)
+        ==
+      ==
+    ::
+    ++  x-well
+      %+  knee  *well  |.  ~+
+      ;~  pose
+        ;~  pfix  del
+          ;~  pose
+            (stag %comd ;~(pfix bar qut))
+            (stag %disk x-mine)
+            (stag %tupl (ifix [den ned] (most ace x-well)))
+            (stag %name ;~(plug sym ;~(pfix lyc x-well)))
+            (stag %gene vest)
+          ==
+        ==
+        (easy ~) 
+      ==
+    --
+=+  env=seed
+&.
+++  brig                                            ::  data to gene
+  |=  [mod=*mode dat=*]
+  ^-  *gene 
+  ?-  mod
+    %atom  [%dtsg %% dat]
+  ==
+::
+++  gall
+  |=  txt=@  ^-  *gene
+  (rash txt vest)
+::
+++  reek
+  |=  txt=@  ^-  *deed
+  (rash txt x-deed)
+::
+++  line 
+  |=  txt=@
+  ^-  [p=*tank q=*tank]
+  =+  ded=^-(*deed (rash txt x-deed))
+  :-  [%leaf ~]
+  (show %q ded)
+--

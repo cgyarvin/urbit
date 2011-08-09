@@ -45,27 +45,22 @@ Does Watt actually work?
 
 Let's translate this into English.  How do we decrement the
 subject?  First (line 1), we rename the subject `a`.  Second
-(line 2), we add a variable, `b`, of atom type and value 0.
+(line 2), we add a variable, `b`, an atom with value `0`.
 Third (line 3), we loop.  Fourth, we test if `a` equals `b` plus
 1 (line 4), produce `b` if it does (line 5), repeat the loop with
 `b` set to `b` plus 1 (line 6) if it doesn't.  Obviously, while
-the syntax is unusual, the algorithm is anything but recondite.
-We are calculating `b` minus one by counting up to it.
+the syntax is unusual, the algorithm is anything but deep.  We
+are calculating `b` minus one by counting up from `0.
 
 (Obviously, this is an O(n) algorithm.  Is there a better way?
-There is not.  Do we actually do this in practice?  A variant of
-this exact code is on the first page of the Watt kernel.  So,
-yes.  But on the other hand, no...)
+There is not.  Do we actually do this in practice?  Yes and no.)
 
 Unfortunately we are missing a third of our Rosetta stone.  We
 have decrement in Watt and we have it in English.  How do we
 express this in Nock?  What will the Watt compiler generate from
-the code above?  We seek a formula, 
+the code above?  Let's work through it line by line.
 
-  f
-
-Obviously, Watt has no types, variable names, etc.  So line 1
-is a no-op.
+Nock has no types, variable names, etc.  So line 1 is a no-op.
 
 How do we add a variable (line 2)?  We compute a new subject,
 which is a cell of the present subject and the variable.  With
@@ -75,14 +70,32 @@ Since `0` is a constant, a formula that produces it is
 
   [1 0]
 
-and with the handy `8` operator, we can express `f` neatly as
+To combine `0` with the subject, we compute
+
+  [[0 1] [1 0]]
+
+which, if our subject is 42, gives us
+
+  [42 0]
+
+which we can use as the subject for an inner formula, `g`.
+Composing our new variable with `g`, we have `f` as
+
+  [2 [[0 1] [1 0]] [1 g]]
+
+which seems a little funky for something so simple.  But we
+can simplify it with the composition macro, `7`:
+
+  [7 [[0 1] [1 0]] g]
+
+and still further with the augmentation macro, `8`:
 
   [8 [1 0] g]
 
-For instance, if `s` is 42, the subject for `g` is `[42 0]`.
-Hopefully any rocket scientists in the class are yawning.
+If you refer back to the Nock definition, you'll see that these
+transformations are absolutely invariant.
 
-Okay, great.  But then - we loop?  Does Nock have a loop
+So what's `g`?  We seem to loop.  Does Nock have a loop
 operator?  It most certainly does not.  So what do we do?
 
 We build a noun called a *core* - a construct which is behind any
@@ -101,11 +114,10 @@ formulas).  The head is the *payload* and the tail is the
 
   [pay bat]
 
-Wernher von Braun is still not in town.  To activate a core, pick
-a formula out of the battery, and use the entire core (*not* just
-the payload) as the subject.  
+To activate a core, pick a formula out of the battery, and use
+the entire core (*not* just the payload) as the subject.  
 
-(This formula is inevitably known as a *method* - but note that
+(A core formula is inevitably known as a *method* - but note that
 the parallel to the classic object-oriented paradigm is not
 exact.  The method produces a function of the core, not the core
 and some argument.  Ie, it is more of a functional attribute.)
@@ -130,7 +142,8 @@ subject, and the entire battery (slot `3`).  Hence, `a` is
 
   [2 [0 1] [0 3]]
 
-We could also use the handy `9` macro:
+We could also use the handy `9` macro - which almost seems
+designed for firing methods on cores:
 
   [9 3 [0 1]]
 
@@ -150,7 +163,16 @@ Which would leave us seeking
 
   [8 [1 0] [7 [8 [1 l] [0 1]] [9 3 0 1]]]
 
-except that, we notice, we can collapse these expressions:
+except that we have duplicated the `8` pattern again, since we
+know
+
+  [7 [8 [1 l] [0 1]] [9 3 0 1]]
+
+is equivalent to  
+
+  [8 [1 l] [9 3 0 1]]
+
+so the full value of `f` is
 
   [8 [1 0] [8 [1 l] [9 3 0 1]]]
 
@@ -160,8 +182,8 @@ Its subject is the loop core:
   [pay bat]
 
 where `bat` is just the loop formula, and `pay` is the pair `[a
-b]`, `a` being the input and `b` the counter.  Thus we could also
-write this subject as
+b]`, `a` being the input subject, and `b` the counter.  Thus we
+could also write this subject as
 
   [[a b] l]
 
@@ -245,7 +267,7 @@ or, on one line without superfluous brackets:
 
   [8 [1 0] 8 [1 6 [5 [0 4] 4 0 5] [0 5] 9 3 [[0 4] 4 0 5] 0 3] 9 3 0 1]
 
-which works for at least one case:
+which works for the important special case, 42:
 
   : .*(42 [8 [1 0] 8 [1 6 [5 [0 4] 4 0 5] [0 5] 9 3 [[0 4] 4 0 5] 0 3] 9 3 0 1])
   41

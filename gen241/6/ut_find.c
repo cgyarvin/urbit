@@ -274,7 +274,6 @@
       u2_noun fin = _find_in(wir_r, van, sut, way, cog, u2_nul);
 
       if ( u2_nul == fin ) {
-        u2_err(wir_r, "cog", cog);
         return u2_bl_error(wir_r, "find-none");
       }
       else {

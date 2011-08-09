@@ -94,7 +94,7 @@
       case c3__core: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {
         if ( _2 != now ) {
-          return u2_bl_bail(wir_r, c3__fail);
+          return u2_bl_error(wir_r, "heal-core");
         } else {
           u2_noun ter = _heal_as(wir_r, van, p_sut, qog, lat, ref);
           u2_noun ret = j2_mby(Pt6, core)(wir_r, ter, q_sut);

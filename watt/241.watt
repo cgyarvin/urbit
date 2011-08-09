@@ -1680,8 +1680,8 @@
       [%pmzp p=(gene) q=((map term foot))]
       [%sgbr p=(gene) q=(gene)]
       [%sgdg p=[p=@ q=@] q=(gene)]
-      [%sgdt p=(chop) q=(gene)]
       [%sgdl p=($&(*term [p=*term q=(gene)])) q=(gene)]
+      [%sgdt p=(chop) q=(gene)]
       [%sgdx p=(gene)]
       [%sgkt p=(gene)]
       [%sglc p=(gene) q=(gene)]
@@ -2777,7 +2777,11 @@
         (cell $$(sut p.sut, axe lat) q.sut)
       (cell p.sut $$(sut q.sut, axe lat))
     ::
-        [%core *]   ?>(=(2 now) (core $$(sut p.sut, axe lat) q.sut))
+        [%core *]   
+      ?.(=(2 now) 
+        ~|(%heal-core !!)
+      (core $$(sut p.sut, axe lat) q.sut))
+    ::
         [%fork *]   (fork $(sut p.sut) $(sut q.sut))
         *           $(sut repo)
     ==

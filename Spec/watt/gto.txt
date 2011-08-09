@@ -1,38 +1,14 @@
-  bar   |       
-  bot   '       
-  cab   _       
-  com   ,       
-  cas   ?       
-  dax   #       
-  deg   :       
-  den   [
-  des   {
-  dot   .       
-  del   <
-  hes   $
-  ket   ^
-  lep   (       
-  led   >
-  lyc   =       
-  mit   %       
-  ned   ]
-  nov   \
-  pam   &       
-  pes   +
-  pel   )
-  sed   }
-  sep   -     
-  sig   ~
-  tam   ;       
-  tar   *
-  tec   `
-  tob   "
-  von   /
-  wat   @     
-  zap   !       
-
-  ace  == whitespace, " " or "\n" in any quantity
-
+  ace   space      del  <         pel  ) 
+  bar   |          hes  $         sed  }
+  bot   '          ket  ^         sep  - 
+  cab   _          lep  (         sig  ~
+  com   ,          led  >         tam  ;
+  cas   ?          lyc  =         tar  *
+  dax   #          mit  %         tec  `
+  deg   :          ned  ]         tob  "
+  den   [          nov  \         von  /
+  des   {          pam  &         wat  @
+  dot   .          pes  +         zap  !
 Watt GTO: Gran Tabula Operazioni 
 
 (Copied from watt.watt - recopy if in doubt.)

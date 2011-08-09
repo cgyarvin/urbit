@@ -16,7 +16,7 @@ ENDIAN=little
 
 # Binary directory - not in quotes.
 #
-BIN=run
+BIN=bin
 
 RM=rm -f
 CC=gcc
