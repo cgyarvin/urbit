@@ -1,13 +1,10 @@
-%dtsg  .~  "dotsig"
+%dtwt  .@  "dotwat"
 
 define:
-    [%dtsg p=*term q=*]
+    [%dtwt p=*term q=@]
 
-direct:
-    [%dtsg *]
-  ?:  .?(q.gen)
-    [(nice [%cube q.gen %noun]) [1 q.gen]]
-  [(nice [%cube q.gen %atom p.gen]) [1 q.gen]]
+expand:
+    [%dtwt *]   [%ktps [%dtsg p.gen 0] [%dtsg %% q.gen]]
 
 custom:
     ;~  (bend |=([a=[%dtsg p=*term q=@] b=*] [%dtwt p.a q.a]))

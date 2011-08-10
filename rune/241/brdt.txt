@@ -1,1 +1,7 @@
 %brdt  |.  "bardot"
+
+define:
+    [%brdt p=(gene)]
+
+expand:
+    [%brdt *]  [%pmdt [[%% [& & p.gen]] ~ ~]]

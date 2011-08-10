@@ -1,1 +1,7 @@
 %sgkt  ~^  "sigket"
+
+define:
+    [%sgkt p=(gene)]
+
+expand:
+    [%sgkt *]   [%sgld %keep p.gen]
