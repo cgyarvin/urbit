@@ -1,4 +1,3 @@
-!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -2401,6 +2400,10 @@
       (end 2 4 (mug q.r.q.sut))
     [& ~(ram re (show [%m '#%d:%d'] p.u.voy q.u.voy ~))]
   ::
+  ++  donc
+    =+  tec=(dunk ~)
+    ?>(?=([%palm * ^ ^] tec) i.t.q.tec)
+  ::
   ++  dunk
     |=  paz=*term
     ^-  *tank
@@ -3672,6 +3675,7 @@
         ;~(plug (cold %lyc lyc) wide)
         ;~(plug (cold %deg deg) wide)
         ;~(plug (cold %cab cab) wide)
+        ;~(plug (cold %cab sig) (easy %tmlc %null))
         ;~  plug
           (easy %lep)
           %+  ifix

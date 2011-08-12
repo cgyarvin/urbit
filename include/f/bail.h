@@ -100,6 +100,9 @@
           u2_bi_h(u2_wire wir_r,
                   u2_noun a);
 
+#         define u2_xh(wir_r, a) u2_bi_h(wir_r, a)
+#         define u2_xt(wir_r, a) u2_bi_t(wir_r, a)
+
         /* u2_bi_t():
         **
         **   Return the tail of (a).

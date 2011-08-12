@@ -1,4 +1,4 @@
-/* c/main.c
+/* c/eyre.c
 **
 ** This file is in the public domain.
 */
@@ -100,12 +100,47 @@ u2_flag EyreSmoke;
     static void
     _eyre_print_trac(u2_wire, u2_noun, u2_noun);
 
-uint32_t Trace_w;
+/* _eyre_trac(): print trace, if any; produce nul.
+*/
+static u2_noun                                                    //  direct
+_eyre_trac(u2_wire wir_r)
+{
+  u2_ray kit_r = u2_bl_open(wir_r);
+
+  if ( u2_bl_set(wir_r) ) {
+    u2_bl_done(wir_r, kit_r);
+    fprintf(stderr, "  {trace failed!}\n");
+    return u2_bl_bail(wir_r, c3__fail);
+  }
+  else {
+    u2_noun tax;
+
+    tax = u2_rx(wir_r, u2_wire_tax(wir_r));
+    u2_wire_tax(wir_r) = u2_nul;
+
+    if ( u2_nul == tax ) {
+      fprintf(stderr, "{no trace}\n");
+    } else {
+      fprintf(stderr, "{trace}\n");
+      if ( u2_nul == Ken ) {
+        fprintf(stderr, "{trace: no kernel}\n");
+      }
+      else {
+        _eyre_print_trac(wir_r, Ken, tax);
+      }
+      u2_rz(wir_r, tax);
+    }
+    u2_bl_done(wir_r, kit_r);
+  }
+  u2_bl_bail(wir_r, c3__fail);
+  return u2_nul;
+}
 
 /* _eyre_nock(): control and trace wrapper for interpreter.
 */
 static u2_noun                                                    //  produce
 _eyre_nock(u2_wire wir_r,
+           u2_flag rac,                                           //  direct
            u2_noun bus,                                           //  submit
            u2_noun fol)                                           //  retain
 {
@@ -116,44 +151,17 @@ _eyre_nock(u2_wire wir_r,
   if ( u2_none != pro ) {
     return pro;
   }
-  else {
-    if ( 0 == Trace_w ) {
-      u2_ray kit_r = u2_bl_open(wir_r);
-
-      if ( u2_bl_set(wir_r) ) {
-        u2_bl_done(wir_r, kit_r);
-        fprintf(stderr, "{trace failed!}\n");
-        Trace_w = 0;
-      }
-      else {
-        u2_noun tax;
-   
-        fprintf(stderr, "{trace}\n");
-        tax = u2_rx(wir_r, u2_wire_tax(wir_r));
-        u2_wire_tax(wir_r) = u2_nul;
-
-        if ( u2_nul == Ken ) {
-          fprintf(stderr, "{trace: no kernel}\n");
-        }
-        else {
-          Trace_w = 1;
-          _eyre_print_trac(wir_r, Ken, tax);
-          Trace_w = 0;
-        }
-        u2_rz(wir_r, tax);
-
-        u2_bl_done(wir_r, kit_r);
-      }
-    }
-    u2_bl_bail(wir_r, c3__fail);
-    return u2_none;
+  else if ( u2_yes == rac ) {
+    return _eyre_trac(wir_r);
   }
+  else return u2_bl_bail(wir_r, c3__fail);
 }
 
 /* _eyre_mong(): mong with trace.
 */
 static u2_noun                                                    //  produce
 _eyre_mong(u2_wire wir_r,
+           u2_flag rac,                                           //  direct
            u2_noun gat,                                           //  retain
            u2_noun sam)                                           //  submit
 {
@@ -164,38 +172,82 @@ _eyre_mong(u2_wire wir_r,
   if ( u2_none != pro ) {
     return pro;
   }
-  else {
-    if ( 0 == Trace_w ) {
-      u2_ray kit_r = u2_bl_open(wir_r);
-
-      if ( u2_bl_set(wir_r) ) {
-        u2_bl_done(wir_r, kit_r);
-        fprintf(stderr, "{trace failed!}\n");
-        Trace_w = 0;
-      }
-      else {
-        u2_noun tax;
-       
-        fprintf(stderr, "{trace}\n");
-        tax = u2_rx(wir_r, u2_wire_tax(wir_r));
-        u2_wire_tax(wir_r) = u2_nul;
-
-        if ( u2_nul == Ken ) {
-          fprintf(stderr, "{trace: no kernel}\n");
-        }
-        else {
-          Trace_w = 1;
-          _eyre_print_trac(wir_r, Ken, tax);
-          Trace_w = 0;
-        }
-        u2_rz(wir_r, tax);
-
-        u2_bl_done(wir_r, kit_r);
-      }
-    }
-    u2_bl_bail(wir_r, c3__fail);
-    return u2_none;
+  else if ( u2_yes == rac ) {
+    return _eyre_trac(wir_r);
   }
+  else return u2_bl_bail(wir_r, c3__fail);
+}
+
+/* _eyre_hook(): hook with unitary sample.
+*/
+static u2_noun                                                    //  produce
+_eyre_hook(u2_wire     wir_r,
+           u2_noun     cor,                                       //  retain
+           const c3_c* hoc_c,                                     //  retain
+           u2_noun     sam)                                       //  submit
+{
+  u2_noun gat = u2_bn_hook(wir_r, cor, hoc_c);
+  u2_noun pro;
+
+  pro = _eyre_mong(wir_r, u2_yes, gat, sam);
+  u2_rz(wir_r, gat);
+  return pro;
+}
+
+/* _eyre_hook_cell(): hook with cell sample.
+*/
+static u2_noun                                                    //  produce
+_eyre_hook_cell(u2_wire     wir_r,
+                u2_noun     cor,                                  //  retain
+                const c3_c* hoc_c,                                //  retain
+                u2_noun     sam_2,                                //  submit
+                u2_noun     sam_3)                                //  submit
+{
+  u2_noun gat = u2_bn_hook(wir_r, cor, hoc_c);
+  u2_noun pro;
+
+  pro = _eyre_mong(wir_r, u2_yes, gat, u2_bn_cell(wir_r, sam_2, sam_3));
+  u2_rz(wir_r, gat);
+  return pro;
+}
+
+/* _eyre_hook_trel(): hook with trel sample.
+*/
+static u2_noun                                                    //  produce
+_eyre_hook_trel(u2_wire     wir_r,
+                u2_noun     cor,                                  //  retain
+                const c3_c* hoc_c,                                //  retain
+                u2_noun     sam_2,                                //  submit
+                u2_noun     sam_6,                                //  submit
+                u2_noun     sam_7)                                //  submit
+{
+  u2_noun gat = u2_bn_hook(wir_r, cor, hoc_c);
+  u2_noun pro;
+
+  pro = _eyre_mong
+    (wir_r, u2_yes, gat, u2_bn_trel(wir_r, sam_2, sam_6, sam_7));
+  u2_rz(wir_r, gat);
+  return pro;
+}
+
+/* _eyre_hook_qual(): hook with quadruple sample.
+*/
+static u2_noun                                                    //  produce
+_eyre_hook_qual(u2_wire     wir_r,
+                u2_noun     cor,                                  //  retain
+                const c3_c* hoc_c,                                //  retain
+                u2_noun     sam_2,                                //  submit
+                u2_noun     sam_6,                                //  submit
+                u2_noun     sam_14,                               //  submit
+                u2_noun     sam_15)                               //  submit
+{
+  u2_noun gat = u2_bn_hook(wir_r, cor, hoc_c);
+  u2_noun pro;
+
+  pro = _eyre_mong
+    (wir_r, u2_yes, gat, u2_bn_qual(wir_r, sam_2, sam_6, sam_14, sam_15));
+  u2_rz(wir_r, gat);
+  return pro;
 }
 
 /* _eyre_path_lid(): 
@@ -292,7 +344,7 @@ _eyre_ken_load_soft(u2_wire wir_r,
       c3_c* pot_c = _eyre_path_ken(kno_w);
       u2_noun src = u2_ux_read(wir_r, pot_c, "watt");
 
-      cun = _eyre_nock(wir_r, src, las);
+      cun = _eyre_nock(wir_r, u2_yes, src, las);
 
       u2_bl_done(wir_r, kit_r);
 
@@ -398,8 +450,8 @@ _eyre_app(u2_wire wir_r,
 
     printf("app: loading: %s\n", pot_c);
 
-    noc = _eyre_nock(wir_r, src, ken);
-    cor = _eyre_nock(wir_r, 0, noc);
+    noc = _eyre_nock(wir_r, u2_yes, src, ken);
+    cor = _eyre_nock(wir_r, u2_yes, 0, noc);
 
     u2_rz(wir_r, noc);
     printf("app: %s\n", pot_c);
@@ -414,14 +466,15 @@ _eyre_app(u2_wire wir_r,
 */
 static u2_noun                                                    //  produce
 _eyre_call_1(u2_wire     wir_r,
+             u2_flag     rac,                                     //  direct
              u2_noun     ken,                                     //  retain
              const c3_c* src_c,                                   //  retain
              u2_noun     a)                                       //  retain
 {
   u2_noun src = u2_bn_string(wir_r, src_c);
-  u2_noun noc = _eyre_nock(wir_r, src, ken);
-  u2_noun cor = _eyre_nock(wir_r, 0, noc);
-  u2_noun pro = u2_bn_mong(wir_r, cor, u2_rx(wir_r, a));
+  u2_noun noc = _eyre_nock(wir_r, rac, src, ken);
+  u2_noun cor = _eyre_nock(wir_r, rac, 0, noc);
+  u2_noun pro = _eyre_mong(wir_r, rac, cor, u2_rx(wir_r, a));
 
   u2_rz(wir_r, cor);
   u2_rz(wir_r, noc);
@@ -434,16 +487,17 @@ _eyre_call_1(u2_wire     wir_r,
 */
 static u2_noun                                                    //  produce
 _eyre_call_2(u2_wire     wir_r,
+             u2_flag     rac,                                     //  direct
              u2_noun     ken,                                     //  retain
              const c3_c* src_c,                                   //  retain
              u2_noun     a,                                       //  retain
              u2_noun     b)                                       //  retain
 {
   u2_noun src = u2_bn_string(wir_r, src_c);
-  u2_noun noc = _eyre_nock(wir_r, src, ken);
-  u2_noun cor = _eyre_nock(wir_r, 0, noc);
-  u2_noun pro = _eyre_mong(wir_r, cor, u2_bc(wir_r, u2_rx(wir_r, a),
-                                                    u2_rx(wir_r, b)));
+  u2_noun noc = _eyre_nock(wir_r, rac, src, ken);
+  u2_noun cor = _eyre_nock(wir_r, rac, 0, noc);
+  u2_noun pro = _eyre_mong(wir_r, rac, cor, u2_bc(wir_r, u2_rx(wir_r, a),
+                                                         u2_rx(wir_r, b)));
 
   u2_rz(wir_r, cor);
   u2_rz(wir_r, noc);
@@ -455,6 +509,7 @@ _eyre_call_2(u2_wire     wir_r,
 */
 static u2_noun                                                    //  produce
 _eyre_call_3(u2_wire     wir_r,
+             u2_flag     rac,                                     //  direct
              u2_noun     ken,                                     //  retain
              const c3_c* src_c,                                   //  retain
              u2_noun     a,                                       //  retain
@@ -462,11 +517,11 @@ _eyre_call_3(u2_wire     wir_r,
              u2_noun     c)                                       //  retain
 {
   u2_noun src = u2_bn_string(wir_r, src_c);
-  u2_noun noc = _eyre_nock(wir_r, src, ken);
-  u2_noun cor = _eyre_nock(wir_r, 0, noc);
-  u2_noun pro = _eyre_mong(wir_r, cor, u2_bt(wir_r, u2_rx(wir_r, a),
-                                                    u2_rx(wir_r, b),
-                                                    u2_rx(wir_r, c)));
+  u2_noun noc = _eyre_nock(wir_r, rac, src, ken);
+  u2_noun cor = _eyre_nock(wir_r, rac, 0, noc);
+  u2_noun pro = _eyre_mong(wir_r, rac, cor, u2_bt(wir_r, u2_rx(wir_r, a),
+                                                         u2_rx(wir_r, b),
+                                                         u2_rx(wir_r, c)));
 
   u2_rz(wir_r, cor);
   u2_rz(wir_r, noc);
@@ -497,7 +552,8 @@ _eyre_tank_win(u2_wire wir_r,
   c3_l    edg_l = _eyre_columns();
 
   return _eyre_call_3
-    (wir_r, ken, 
+    (wir_r, u2_no,
+            ken, 
             "|!([a=@ b=@ c=*tank] (~(win re c) [a b]))", 
             tab_l, edg_l, tec);
 }
@@ -512,7 +568,7 @@ _eyre_bill(u2_wire wir_r,
   c3_l    edg_l = _eyre_columns();
 
   return _eyre_call_2
-    (wir_r, ken, "|!([a=@ b=*bill] (~(fly to b) a))", edg_l, bil);
+    (wir_r, u2_no, ken, "|!([a=@ b=*bill] (~(fly to b) a))", edg_l, bil);
 }
 
 /* _eyre_print_tape(): print a tape of txt to FIL_f.
@@ -572,7 +628,7 @@ _eyre_dirt(u2_wire wir_r,
            u2_noun som)                                           //  retain
 {
   u2_noun poq = u2_bc(wir_r, 'q', u2_rx(wir_r, som));
-  u2_noun tec = _eyre_call_1(wir_r, ken, "=>(!% show)", poq);
+  u2_noun tec = _eyre_call_1(wir_r, u2_no, ken, "=>(!% show)", poq);
 
   _eyre_gnaw(wir_r, ken, tab_l, tec);
 
@@ -642,29 +698,15 @@ _eyre_print_mean(u2_wire wir_r,
                  u2_noun ken,                                     //  retain
                  u2_noun mon)                                     //  retain
 {
-  if ( Kno_w == 264 ) {
-    if ( u2_yes == u2_dust(mon) ) {
-      u2_noun ben = u2_nk_nock(wir_r, u2_rx(wir_r, mon), u2_t(mon));
+  if ( u2_yes == u2_dust(mon) ) {
+    u2_noun som = u2_nk_nock(wir_r, u2_rx(wir_r, mon), u2_t(mon));
 
-      if ( u2_none != ben ) {
-        _eyre_print_bean(wir_r, ken, ben);
-        u2_rz(wir_r, ben);
-        return;
-      }
-      else printf("  {mean!}\n");
+    if ( u2_none != som ) {
+      _eyre_gnaw(wir_r, ken, 2, som);
+      u2_rz(wir_r, som);
+      return;
     }
-    printf("  {meno!}\n");
-  } else {
-    if ( u2_yes == u2_dust(mon) ) {
-      u2_noun som = u2_nk_nock(wir_r, u2_rx(wir_r, mon), u2_t(mon));
-
-      if ( u2_none != som ) {
-        _eyre_gnaw(wir_r, ken, 2, som);
-        u2_rz(wir_r, som);
-        return;
-      }
-      else printf("  {mean!}\n");
-    }
+    else printf("  {meaning failed!}\n");
   }
 }
 
@@ -716,7 +758,7 @@ _eyre_line(u2_wire wir_r,
     u2_noun pro;
 
     u2_bx_boot(wir_r);
-    pro = _eyre_mong(wir_r, gat, u2_rx(wir_r, txt));
+    pro = _eyre_mong(wir_r, u2_yes, gat, u2_rx(wir_r, txt));
     u2_bx_show(wir_r);
 
 #if 1
@@ -744,14 +786,14 @@ _eyre_line_proto(u2_wire wir_r,
     u2_bl_done(wir_r, kit_r);
     fprintf(stderr, "{stop}\n");
   } else {
-    u2_noun fol = _eyre_call_1(wir_r, las, "=>(!% make)", txt);
-    u2_noun som = _eyre_nock(wir_r, 0, fol);
+    u2_noun fol = _eyre_call_1(wir_r, u2_yes, las, "=>(!% make)", txt);
+    u2_noun som = _eyre_nock(wir_r, u2_yes, 0, fol);
     u2_noun pro;
    
     u2_bx_boot(wir_r);
     // u2_err(wir_r, "som", som);
     // u2_err(wir_r, "ken", ken);
-    pro = _eyre_nock(wir_r, som, ken);
+    pro = _eyre_nock(wir_r, u2_yes, som, ken);
     u2_err(wir_r, "pro", pro);
     u2_bx_show(wir_r);
 

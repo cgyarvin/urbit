@@ -2,68 +2,81 @@
 ~%    %gunn
     -<-<
   ==
-    %line  line
+    %bind  bind
+    %fire  fire
+    %pour  pour
+    %scan  scan
+    %sell  sell
+    %sing  sing
+    %wash  wash
   ==
 =>  !% 
 =>  &.
-    ++  deed                          ::  command-line action
-      $~  p=(sink)                    ::  data destination
-          q=(well)                    ::  data source
-          r=(tool)                    ::  data transformation
+    ++  deed                             ::  command-line action
+      $~  p=(sink)                       ::  data destination
+          q=(well)                       ::  data source
+          r=(tool)                       ::  data transformation
       ==
-    ++  func                          ::  transformation function
-      $^  [%body p=*gene]             ::  unwrapped code
-          [%disk p=(path)]            ::  %fund path
-          [%gate p=*gene]             ::  predefined gate
+    ++  feed
+      $^  [%need p=(mine)]                ::  request
+          [%have p=*]                    ::  response
       ==
-    ++  lard                          ::  library definition
-      $^  [%disk p=(path)]            ::  %libd path
-          [%gene p=*gene]             ::  resolved gene 
+    ++  func                             ::  transformation function
+      $^  [%body p=*gene]                ::  unwrapped code
+          [%disk p=(path)]               ::  %fund path
+          [%gate p=*gene]                ::  predefined gate
       ==
-    ++  mine                          ::  filesystem mapping
-      $~  p=(mode)                    ::  noun conversion
-          q=(spot)                    ::  search model 
-          r=(path)                    ::  unix path
+    ++  lard                             ::  library definition
+      $^  [%disk p=(path)]               ::  %libd path
+          [%gene p=*gene]                ::  resolved gene 
+      ==
+    ++  mine                             ::  filesystem mapping
+      $~  p=(mode)                       ::  noun conversion
+          q=(spot)                       ::  search model 
+          r=(path)                       ::  unix path
       ==
     ++  mode
-      $&  %*  $*  %atom               ::  file as flat atom
-                  %auto               ::  default
-                  %blob               ::  file as byte length, atom
-                  %dlog               ::  directory as sequence
-                  %dmap               ::  directory as map
-                  %noun               ::  file as noun jam
-                  %text               ::  file as list of list of chars
-                  %watt               ::  watt source as atom
+      $&  %*  $*  %atom                  ::  file as flat atom
+                  %auto                  ::  default
+                  %blob                  ::  file as byte length, atom
+                  %dlog                  ::  directory as sequence
+                  %dmap                  ::  directory as pair list
+                  %noun                  ::  file as noun jam
+                  %text                  ::  file as list of list of chars
+                  %watt                  ::  watt source as atom
               ==
         [%dlog p=(mode)]
         [%dmap p=(mode)]
       ==
-    ++  path  (list tape)             ::  unix path
+    ++  path  (list tape)                ::  unix path
     ++  sink
-      $&  ~                           ::  print to screen
-        [%comd p=''*]                 ::  pipe to unix command
-        [%disk p=(mine)]              ::  write to filesystem
-        [%name p=*term]               ::  add to environment
+      $&  ~                              ::  print to screen with label
+        [%comd p=''*]                    ::  pipe to unix command
+        [%disk p=(mine)]                 ::  write to filesystem
+        [%name p=*term]                  ::  add to environment
+        [%tupl p=((list sink))]          ::  tuple
       ==
-    ++  spot                          ::  filesystem search model
-      $*  %curd                       ::  current directory
-          %fund                       ::  function directory
-          %home                       ::  home directory
-          %libd                       ::  library directory
-          %resd                       ::  resource directory
-          %root                       ::  root path
+    ++  spot                             ::  filesystem search model
+      $*  %curd                          ::  current directory
+          %fund                          ::  function directory
+          %home                          ::  home directory
+          %libd                          ::  library directory
+          %resd                          ::  resource directory
+          %root                          ::  root path
       ==
-    ++  tool                          ::  transformation
-      $~  p=((list lard))             ::  libraries
-          q=(func)                    ::  function
+    ++  tool                             ::  transformation
+      $~  p=((list lard))                ::  libraries
+          q=(func)                       ::  function
       ==
-    ++  well                          ::  data source
-      $&  ~                           ::  null
-        [%comd p=''*]                 ::  pipe from unix command
-        [%disk p=(mine)]              ::  read from filesystem
-        [%gene p=*gene]               ::  direct gene
-        [%name p=*term q=(well)]      ::  named
-        [%tupl p=((list well))]       ::  tuple
+    ++  vase  ~[p=*type q=*]             ::  type-value pair
+    ++  well                             ::  data source
+      $&  ~                              ::  null
+        [%comd p=''*]                    ::  pipe from unix command
+        [%cast p=*gene q=((list well))]  ::  construct and filter
+        [%disk p=(feed)]                 ::  read from filesystem
+        [%gene p=*gene]                  ::  direct gene
+        [%name p=*term q=(well)]         ::  named
+        [%tupl p=((list well))]          ::  tuple
       ==
     --
 =>  &.
@@ -108,13 +121,16 @@
     ++  x-deed  ~+
       ;~(plug x-sink x-well x-tool)
     ::
-    ++  x-sink  ~+
+    ++  x-sink
+      %+  knee  *sink  |.  ~+
       ;~  pose
         ;~  pfix  led
           ;~  pose
             (stag %disk x-mine)
             (stag %name ;~(pfix lyc sym))
             (stag %comd ;~(pfix bar qut))
+            (stag %tupl (ifix [den ned] (most ace x-sink)))
+            (cold ~ sig)
           ==
         ==
         (easy ~)
@@ -141,7 +157,7 @@
         ;~  pfix  del
           ;~  pose
             (stag %comd ;~(pfix bar qut))
-            (stag %disk x-mine)
+            (stag %disk (stag %need x-mine))
             (stag %tupl (ifix [den ned] (most ace x-well)))
             (stag %name ;~(plug sym ;~(pfix lyc x-well)))
             (stag %gene vest)
@@ -152,25 +168,39 @@
     --
 =+  env=seed
 &.
-++  brig                                            ::  data to gene
-  |=  [mod=*mode dat=*]
-  ^-  *gene 
-  ?-  mod
-    %atom  [%dtsg %% dat]
-  ==
+++  bind                                                ::  set a variable
+  |=  [name=*term vax=*vase]  ~|  %bind  ^-  ..bind
+  !!
 ::
-++  gall
-  |=  txt=@  ^-  *gene
-  (rash txt vest)
+++  fire                                                ::  apply function
+  |=  [gat=*vase sam=*vase]  ~|  %fire
+  =+  typ=^-(*type [%cell p.gat p.sam])
+  =+  gen=^-(*gene [%ktsp [~ 2] [~ 3]])
+  =+  gun=(~(mint ut typ) %noun gen)
+  :-  p.gun
+  .*([q.gat q.sam] q.gun) 
 ::
-++  reek
-  |=  txt=@  ^-  *deed
-  (rash txt x-deed)
+++  pour                                                ::  construct source
+  |=  src=*well  ~|  %pour ^-  *vase
+  !!
 ::
-++  line 
-  |=  txt=@
-  ^-  [p=*tank q=*tank]
-  =+  ded=^-(*deed (rash txt x-deed))
-  :-  [%leaf ~]
-  (show %q ded)
+++  scan                                                ::  parse a command
+  |=  cad=''  ~|  %scan  ^-  *deed
+  (rash cad x-deed)
+::
+++  sell
+  |=  [lab=*term vax=*vase]  ~|  %sell  ^-  *tank       ::  render a result
+  =+  dis=~(donc ut p.vax)
+  =+  dat=(~(deal ut p.vax) q.vax)
+  ?:  =(%% lab)
+    [%palm [~ ~ ~ ~] dis dat ~]
+  [%palm [['.' ~] [':' ~] ~ ~] [%leaf (mesc (rip 3 lab))] dis dat ~]
+::
+++  sing                                                ::  assemble function
+  |=  awl=*tool  ~|  %sing  ^-  *vase 
+  !!
+::
+++  wash                                                ::  print tank
+  |=  [[tab=0 edg=80] tac=*tank]  ~|  %wash  ^-  *wall
+  !!
 --
