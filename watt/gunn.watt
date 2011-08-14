@@ -3,19 +3,28 @@
     -<-<
   ==
     %bind  bind
-    %fire  fire
+    %draw  draw
     %pour  pour
     %scan  scan
+    %slam  slam
     %sell  sell
-    %sing  sing
     %wash  wash
   ==
 =>  !% 
 =>  &.
     ++  deed                             ::  command-line action
-      $~  p=(sink)                       ::  data destination
-          q=(well)                       ::  data source
+      $~  p=(vent)                       ::  data destination
+          q=(fuel)                       ::  data source
           r=(tool)                       ::  data transformation
+      ==
+    ++  fuel                             ::  data source
+      $&  ~                              ::  null
+        [%chew p=*gene q=((list fuel))]  ::  construct and filter
+        [%data p=(mode) q=*]             ::  data as produced
+        [%disk p=(mine)]                 ::  read from filesystem
+        [%gene p=*gene]                  ::  direct gene
+        [%many p=((list fuel))]          ::  many
+        [%name p=*term q=(fuel)]         ::  named
       ==
     ++  func                             ::  transformation function
       $^  [%body p=*gene]                ::  unwrapped code
@@ -43,11 +52,11 @@
         [%dnog p=(mode)]                 ::  directory as list of name, file
       ==
     ++  path  (list tape)                ::  unix path
-    ++  sink
+    ++  vent
       $&  ~                              ::  print to screen with label
         [%disk p=(mine)]                 ::  write to filesystem
+        [%many p=((list vent))]          ::  tuple
         [%name p=*term]                  ::  add to environment
-        [%tupl p=((list sink))]          ::  tuple
       ==
     ++  spot                             ::  filesystem search model
       $*  %curd                          ::  current directory
@@ -62,19 +71,25 @@
           q=(func)                       ::  function
       ==
     ++  vase  ~[p=*type q=*]             ::  type-value pair
-    ++  well                             ::  data source
-      $&  ~                              ::  null
-        [%chew p=*gene q=((list well))]  ::  construct and filter
-        [%data p=(mode) q=*]             ::  data as produced
-        [%disk p=(mine)]                 ::  read from filesystem
-        [%gene p=*gene]                  ::  direct gene
-        [%name p=*term q=(well)]         ::  named
-        [%tupl p=((list well))]          ::  tuple
-      ==
     --
 =>  &.
     ++  x-path  ~+
       (most (just '/') (star ;~(pose aln cab dot sep)))
+    ::
+    ++  x-fuel
+      %+  knee  *fuel  |.  ~+
+      ;~  pose
+        ;~  pfix  del
+          ;~  pose
+            ::  (stag %comd ;~(pfix bar qut))
+            (stag %disk x-mine)
+            (stag %many (ifix [den ned] (most ace x-fuel)))
+            (stag %name ;~(plug sym ;~(pfix lyc x-fuel)))
+            (stag %gene vest)
+          ==
+        ==
+        (easy ~) 
+      ==
     ::
     ++  x-mode
       %+  knee  *mode  |.  ~+
@@ -112,22 +127,7 @@
       ==
     ::
     ++  x-deed  ~+
-      ;~(plug x-sink x-well x-tool)
-    ::
-    ++  x-sink
-      %+  knee  *sink  |.  ~+
-      ;~  pose
-        ;~  pfix  led
-          ;~  pose
-            (stag %disk x-mine)
-            (stag %name ;~(pfix lyc sym))
-            ::  (stag %comd ;~(pfix bar qut))
-            (stag %tupl (ifix [den ned] (most ace x-sink)))
-            (cold ~ sig)
-          ==
-        ==
-        (easy ~)
-      ==
+      ;~(plug x-vent x-fuel x-tool)
     ::
     ++  x-tool  ~+
       ;~  pose
@@ -144,34 +144,30 @@
         ==
       ==
     ::
-    ++  x-well
-      %+  knee  *well  |.  ~+
+    ++  x-vent
+      %+  knee  *vent  |.  ~+
       ;~  pose
-        ;~  pfix  del
+        ;~  pfix  led
           ;~  pose
-            ::  (stag %comd ;~(pfix bar qut))
             (stag %disk x-mine)
-            (stag %tupl (ifix [den ned] (most ace x-well)))
-            (stag %name ;~(plug sym ;~(pfix lyc x-well)))
-            (stag %gene vest)
+            (stag %name ;~(pfix lyc sym))
+            ::  (stag %comd ;~(pfix bar qut))
+            (stag %many (ifix [den ned] (most ace x-vent)))
+            (cold ~ sig)
           ==
         ==
-        (easy ~) 
+        (easy ~)
       ==
     --
 =+  env=seed
 &.
-++  bask                                                ::  apply a gene
-  |=  [gol=*type gen=*gene]  ~|  %bask  ^-  *vase
-  =+  gun=(~(mint ut p.env) gol gen)
-  [p.gun .*(q.gun q.env)]
 ::
 ++  bind                                                ::  set a variable
   |=  [nam=*term vax=*vase]  ~|  %bind  ^-  ..bind
   ..bind(env [[%cell p.env [%face nam p.vax]] [q.env q.vax]])
 ::
-++  cook                                                ::  mold from mode
-  |=  mad=*mode  ~|  cook  ^-  *gene
+++  draw                                                ::  mold from mode
+  |=  mad=*mode  ~|  %draw  ^-  *gene
   ?-    mad
       *{%atom %watt}
     [%hssg [[%tmlc %atom] ~] ~]
@@ -191,37 +187,55 @@
       %text
     %wall
   ==
+:: 
+++  pour                                                ::  gene in env
+  |=  gen=*gene  ~|  %pour  ^-  *vase
+  =+  gun=(~(mint ut p.env) %noun gen)
+  [p.gun .*(q.env q.gun)]
 ::
-++  fire                                                ::  call by vase
-  |=  [gat=*vase sam=*vase]  ~|  %fire
-  =+  typ=^-(*type [%cell p.gat p.sam])
-  =+  gen=^-(*gene [%ktsp [~ 2] [~ 3]])
-  =+  gun=(~(mint ut typ) %noun gen)
-  :-  p.gun
-  .*([q.gat q.sam] q.gun) 
-::
-++  pour                                                ::  construct source
-  |=  wul=*well  ~|  %pour  ^-  *vase
-  =-  (bask %noun gen)
-  ^=  gen  |-  ^-  *gene
-  ?-    wul
-      ~
-    [%tmlc %null]
-  ::
-      [%chew *]
-    [%mtdg p.wul $(wul [%tupl q.wul])]
+++  ride                                                ::  execute deed
+  |=  [tul=*tool wul=*fuel]  ~|  %ride  ^-  *vase
+  =+  ^=  gul  |-  ^-  *vase
+      ?-    wul
+          ~
+        [[%atom %n] ~]
+      ::
+          [%chew *]
+        (slam (pour p.wul) $(wul [%many q.wul]))
+      ::
+          [%data *]
+        =+  typ=p:(pour (draw p.wul))
+        ?.  (~(firm ut typ) q.wul)
+          ~|(%ride-data !!)
+        [typ q.wul]
+      ::
+          [%many *]
+        |-  ^-  *vase
+        ?-    p.wul 
+            [* ~]  $$(wul i.p.wul)
+            ^      
+          =+  [tug=$(p.wul t.p.wul) nob=$$(wul i.p.wul)]
+          [[%cell p.tug p.nob] [q.tug q.nob]]
+        ==
+      ::
+          [%name *]
+        =+  pan=$(wul q.wul)
+        [[%face p.wul p.pan] q.pan]
+      ==
+  =+  ^=  hyn  |-  ^-  *vase
+      ?~  p.tul
+        env
+      $(env (pour ?>(?=([%data *] i.p.tul) (rash p.i.p.tul vest))))
+  ?-    q.tul
+      [%body *]
+    =+  ^=  typ  ^-  *type
+        [%core p.gul [%gold p.gul [~ [[%% & & p.q.tul] ~ ~]]]]
+    =+  dev=[typ [q.gul q:(~(mint ut typ) %noun p.q.tul)]]
+    =+  gun=(~(mint ut typ) %noun %%)
+    [p.gun .*(dev q.gun)]
   ::
       [%data *]
-    [%mtdg (cook p.wul) [%dtsg %% q.wul]]
-  ::
-      [%gene *]
-    p.wul
-  ::
-      [%name *]
-    [%ktlc p.wul $(wul q.wul)]
-  ::
-      [%tupl *]
-    [%dgtr (turn p.wul |=(a=*well $$(wul a)))]
+    (slam (pour(env hyn) (rash p.q.tul vest)) gul)
   ==
 ::
 ++  scan                                                ::  parse a command
@@ -236,20 +250,14 @@
     [%palm [~ ~ ~ ~] dis dat ~]
   [%palm [['.' ~] [':' ~] ~ ~] [%leaf (mesc (rip 3 lab))] dis dat ~]
 ::
-++  sing                                                ::  apply function
-  |=  [awl=*tool vax=*vase]  ~|  %sing  ^-  *vase 
-  =+  ^=  lib  |-  ^-  *gene
-      =+  lib=[~ 1]
-      ?~  p.awl
-        lib
-      :+  %lcld
-        ?>(?=([%data *] i.p.awl) (rash p.i.p.awl vest)) 
-      $(p.awl t.p.awl)
-  =+  vyn=(bask %noun lib)
-  ?-    q.awl
-      [%body *]
-    =+  
-  ==
+++  slam                                                ::  vase call
+  |=  [gat=*vase sam=*vase]  ~|  %slam  ^-  *vase
+  =+  :-  ^=  typ  ^-  *type
+          [%cell p.gat p.sam]
+      ^=  gen  ^-  *gene
+      [%mtdg [~ 2] [~ 3]]
+  =+  gun=(~(mint ut typ) %noun gen)
+  [p.gun .*([q.gat q.sam] q.gun)]
 ::
 ++  wash                                                ::  print tank
   |=  [[tab=0 edg=80] tac=*tank]  ~|  %wash  ^-  *wall

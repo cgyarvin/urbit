@@ -1,16 +1,16 @@
 ?>  ?=(@ .)
 %.  .
 =<  make
-=>  241
+=>  240
 =>  
   ::::
   ::::  Tier 0, kernel stub
   ::::
-  ~%    %k.241
+  ~%    %k.240
       ~
     ~
   &.
-  ++  stub  241
+  ++  stub  240
   ++  nat   |=(a=* ?>(?=(@ a) a))
   ++  mud   |=(a=* a)
   ++  bit   |=(a=* ?-(a & &, | |))
@@ -1144,7 +1144,7 @@
     %+  cook
       |=(a=*(list nat) (roll a |=([p=@ q=@] (add p (lsh 5 1 q)))))
     ;~  plug
-      ;~(pose (cold 0 bar) fud fwd fod fad)
+      ;~(pose (cold 0 bar) (fud fwd fod fad)
       (star ;~(pfix ;~(pose dun ;~(plug nov gay von)) fud))
     ==
   ::
@@ -1654,7 +1654,6 @@
       [%ktdl p=(gene) q=(gene)]
       [%ktlc p=*term q=(gene)]
       [%ktld p=(gene) q=(gene)]
-      [%ktps p=(gene) q=(gene)]
       [%ktsg p=(gene)]
       [%ktsp p=(gene) q=(gene)]
       [%lcdl p=(gene) q=(gene)]
@@ -1909,7 +1908,6 @@
           ^       [%dgsp i.p.gen $(p.gen t.p.gen)]
       ==
     ::
-        [%dtwt *]   [%ktps [%dtsg p.gen 0] [%dtsg %% q.gen]]
         [%hsbr *]
       %+  knit(gen ?~(q.gen [%dtsg %n ~] i.q.gen))
         :^    %cssg
@@ -2230,7 +2228,6 @@
       %heal   heal
       %mint   mint
       %nest   nest
-      %odor   odor
       %orth   orth
       %play   play
       %park   park
@@ -2271,12 +2268,23 @@
         [%core *]   [$(sut p.sut) p.r.q.sut]
         [%cube *]   p.sut
         [%face *]   $(sut repo)
-        [%fine *]   $(sut repo)       ::  XX actually refine
+        [%fine *]   =+  yoc=$(sut r.sut)
+                    =+  feg=(bust(sut q.sut) yoc)
+                    ?-  p.sut
+                      %pure  =(yoc feg)
+                      %very  =(& feg)
+                    ==
         [%fork *]   $(sut p.sut)
         [%hold *]   $(sut repo)
         %noun       0
         %void       ~|(%burn-void !!)
     ==
+  ::
+  ++  bust
+    |=  dib=*
+    =+  yam=burn
+    =+  yib=[[-<.yam dib] +.yam]
+    .*(yib q:(mint %noun %%))
   ::
   ++  cull
     ~.  %cull
@@ -2642,26 +2650,38 @@
   ::
   ++  firm
     ~.  %firm
-    |=  [gib=*]
-    ^-  ?
+    |=  dib=*
+    =+  bix=*(set ~[*type *type])
+    |-  ^-  ?
     ?-    sut
-        %void      |
+        [%atom *]  !.?(dib)
+        [%cell *]  &(.?(dib) $(sut p.sut, dib -.dib) $(sut q.sut, dib +.dib))
+        [%core *] 
+      ?&  .?(dib)
+          $(sut p.sut, dib -.dib)
+          =(+.dib ?:(=(~ p.r.q.sut) ~|(%mint-burn !!) p.r.q.sut))
+      ==
+    ::
+        [%cube *]  =(dib p.sut)
+        [%face *]  $(sut q.sut)
+        [%fine *]
+      ?&  $(sut r.sut)
+          =+  feg=(bust(sut q.sut) dib)
+          ?-  p.sut
+            %pure  =(dib feg)
+            %very  =(& feg)
+          ==
+      ==
+    ::
+        [%fork *]  |($(sut p.sut) $(sut q.sut))
+        [%hold *]
+      ?|  (~(has in bix) [sut ref]) 
+          $(bix (~(put in bix) [sut ref]), sut repo))
+      ==
+    ::
         %noun      &
-        [%atom *]  !.?(gib)
-        [%cell *]   
-      ?&(.?(gib) $(sut p.sut, gib -.gib) $(sut q.sut, gib +.gib))
-    ::
-        [%core *]
-      ?:  =(~ p.r.q.sut)
-        ~|(%firm-core !!)
-      ?&(.?(gib) $(sut p.sut, gib -.gib) =(p.r.q.sut +.gib))
-    ::
-        [%cube *]  =(gib p.sut)
-        [%fork *]  ?|($(sut p.sut) $(sut q.sut))
-        [%face *]  $(sut repo)
-        [%fine *]  $(sut repo)      ::  XX actually refine?
-        [%hold *]  $(sut repo)
-    ==
+        %void      |
+    == 
   ::
   ++  fish
     ~.  %fish
@@ -2710,7 +2730,7 @@
     ?-    sut
         [%atom *] 
       ?-    ref
-          [%atom *]   sut       ::  XX flavor logic
+          [%atom *]   ref
           [%cell *]   %void
           *           $(sut ref, ref sut)
       ==
@@ -2880,6 +2900,9 @@
         :-  (nice %noun)
         (boil |.([2 q:$$(gen p.gen, gol %noun) q:$$(gen q.gen, gol %noun)]))
       ::
+          [%dtwt *]
+        [(nice [%atom p.gen]) [1 q.gen]]
+      ::
           [%ktlc *]                                                   ::  ^=
         =+  vat=$(gen q.gen)
         [(face p.gen p.vat) q.vat]
@@ -2904,11 +2927,6 @@
         :^  %csdg  [%dtlc %b %c]                      ::  ?:  =(b c)
           %c                                          ::    c
         [%mtlc [%% ~] [[%b %c] ~]]                    ::  $(b c)
-      ::
-          [%ktps *]                                                   ::  ^+
-        =+  hif=p:(mint(vet |, fab |) [%atom %%] p.gen)
-        :-  (nice [%atom odor(sut hif)])
-        (boil |.(q:$$(gen q.gen, gol [%atom %%])))
       ::
           [%ktsg *]                                                   ::  ^~
         =+  nef=$(gen p.gen)
@@ -3125,24 +3143,6 @@
           *           dext(ref repo(sut ref))
       ==
     --
-  ::
-  ++  odor
-    ~.  %odor
-    |-  ^-  *term
-    ?-    sut
-        [%atom *]                       p.sut
-        [%fork *]
-      =+  [duv=$(sut p.sut) wil=$(sut q.sut)]
-      |-
-      ?:  |(=(%% duv) =(%% wil) !=((end 3 1 duv) (end 3 1 wil)))
-        %%
-      %+  add
-        (end 3 1 duv)
-      (lsh 3 1 $(duv (rsh 3 1 duv), wil (rsh 3 1 wil)))
-    ::
-        [*{%cube %fine %face %hold} *]  $(sut repo)
-        *                               ~|(%odor-less !!)
-    ==
   ::
   ++  orth
     ~.  %orth
@@ -3485,7 +3485,6 @@
               (rune del %ktdl expb)
               (rune led %ktld expb)
               (rune lyc %ktlc expg)
-              (rune pes %ktps expb)
               (rune sep %ktsp expb)
               (rune sig %ktsg expa)
             ==
