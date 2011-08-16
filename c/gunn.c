@@ -17,12 +17,12 @@
 
 /* _eyre_gunn(): execute and print a line.  Produce new core.
 */
-  /* _well_fill(): load disk objects in `wol`.
+  /* _fuel_fill(): load disk objects in `ful`.
   */
   static u2_noun                                                  //  produce
-  _well_fill(u2_wire wir_r,
+  _fuel_fill(u2_wire wir_r,
              u2_noun cor,                                         //  retain
-             u2_noun wol)                                         //  submit
+             u2_noun ful)                                         //  submit
   {
   }
 
@@ -35,46 +35,55 @@
   {
   }
 
-  /* _sink_wash_sell(): sell with optional label.
+  /* _vent_wash_sell(): sell with optional label.
   */
   static void
-  _sink_wash_sell(u2_wire wir_r,
+  _vent_wash_sell(u2_wire wir_r,
                   u2_atom lab,                                    //  retain
                   u2_noun vax)                                    //  retain
   {
     c3_l    col_l = _eyre_columns();
     u2_noun sam;
-    u2_noun sel, wol;
+    u2_noun sel, ful;
 
     sam = u2_bc(wir_r, u2_rx(wir_r, lab), u2_rx(wir_r, vax)); 
     sel = _eyre_hook(wir_r, cor, "sell", sam);
     sam = u2_bc(wir_r, u2_bc(wir_r, 0, col_l), sel);
-    wol = _eyre_hook(wir_r, cor, "wash", sel);
+    ful = _eyre_hook(wir_r, cor, "wash", sel);
 
-    _eyre_print_wall(wir_r, wol);
-    u2_rz(wir_r, wol);
+    _eyre_print_wall(wir_r, ful);
+    u2_rz(wir_r, ful);
   }
 
-  /* _
-  /* _sink_wash(): apply sink.  Produce new core.
+  /* _gunn_vent(): apply vent.  Produce new core.
   */
   static u2_noun                                                  //  produce
-  _sink_wash(u2_wire wir_r,
+  _gunn_vent(u2_wire wir_r,
              u2_noun cor,                                         //  retain
-             u2_noun vax,                                         //  retain
-             u2_noun sic)                                         //  retain
+             u2_noun vet,                                         //  retain
+             u2_noun vax)                                         //  submit
   {
-    if ( u2_nul == sic ) {
-      _sink_wash_sell(wir_r, u2_nul, vax);
-    }
-    else switch ( u2_xh(wir_r, sic) ) {
-    }
-  }
+    u2_noun ret = u2_nul;
 
-      u2_noun tac = _eyre_hook(wir_r, cor, "sell", u2_rx(wir_r, vax));
-      u2_noun wal = 
-        _eyre_hook_cell(wir_r, cor, "wash", u2_bc(wir_r, 0, _eyre_columns), 
-                                  t
+    if ( u2_nul == vet ) {
+      _vent_wash_sell(wir_r, u2_nul, vax);
+      return u2_rx(wir_r, cor);
+    }
+    else switch ( u2_xh(wir_r, vet) ) {
+      case c3__bind:
+      case c3__disk:
+      case c3__many: 
+        if ( 
+        u2_noun hed = _eyre_hook_cell(wir_r, cor, "slot", 2, u2_rx(wir_r, vax));
+        u2_noun tal = _eyre_hook_cell(wir_r, cor, "slot", 3, u2_rx(wir_r, vax));
+
+    }
+      default:
+        u2_err(wir_r, 
+        c3_asser
+    }
+
+    u2_rz(wir_r, vax);
   }
 
 /* _eyre_gunn(): execute and print a line.  Produce new core.
@@ -82,22 +91,22 @@
 static u2_noun                                                    //  produce
 _eyre_gunn(u2_wire wir_r,
            u2_noun cor,                                           //  retain
-           u2_noun txt)                                           //  retain
+           u2_noun txt)                                           //  submit
 {
-  u2_noun con = _eyre_columns();
   u2_noun dyd = _eyre_hook(wir_r, cor, "scan", txt);
-  u2_noun wol, sic, tul;
+  u2_noun ful, vet, tul;
 
-  u2_bi_trel(wir_r, dyd, &wol, &sic, &tul);
-  wol = _well_fill(wir_r, wol);
-  tul = _tool_fill(wir_r, tul); 
+  u2_bi_trel(wir_r, dyd, &ful, &vet, &tul);
+  ful = _gunn_fuel(wir_r, u2_rx(wir_r, ful));
+  tul = _gunn_tool(wir_r, u2_rx(wir_r, tul)); 
   {
-    u2_noun gun = _eyre_hook(wir_r, cor, "pour", wol);
-    u2_noun zen = _eyre_hook(wir_r, cor, "sing", tul);
-    u2_noun von = _eyre_hook_cell(wir_r, cor, "fire", gun, zen);
+    u2_noun von = _eyre_hook_cell(wir_r, cor, "ride", ful, zen);
 
-    _gunn_sink(wir_r, sic, von);
+    return _gunn_vent(wir_r, vet, von);
   }
+}
+
+  u2_rz(wir_r, 
 
   u2_ray kit_r = u2_bl_open(wir_r);
 

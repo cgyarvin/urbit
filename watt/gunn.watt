@@ -5,9 +5,11 @@
     %bind  bind
     %draw  draw
     %pour  pour
+    %ride  ride
     %scan  scan
     %slam  slam
     %sell  sell
+    %slot  slot
     %wash  wash
     %weld  weld
   ==
@@ -55,9 +57,9 @@
     ++  path  (list tape)                ::  unix path
     ++  vent
       $&  ~                              ::  print to screen with label
+        [%bind p=*term]                  ::  add to environment
         [%disk p=(mine)]                 ::  write to filesystem
         [%many p=((list vent))]          ::  tuple
-        [%name p=*term]                  ::  add to environment
       ==
     ++  spot                             ::  filesystem search model
       $*  %actd                          ::  action directory
@@ -155,7 +157,7 @@
         ;~  pfix  led
           ;~  pose
             (stag %disk x-mine)
-            (stag %name ;~(pfix lyc sym))
+            (stag %bind ;~(pfix lyc sym))
             ::  (stag %comd ;~(pfix bar qut))
             (stag %many (ifix [den ned] (most ace x-vent)))
             (cold ~ sig)
@@ -196,8 +198,7 @@
 ++  hunt                                                ::  
   |=  [mad=*mode pat=*path]  ~|  %hunt
   ^-  [p=*mode q=*tape]
-    
-
+  !! 
 :: 
 ++  pour                                                ::  gene in env
   |=  gen=*gene  ~|  %pour  ^-  *vase
@@ -205,33 +206,33 @@
   [p.gun .*(q.env q.gun)]
 ::
 ++  ride                                                ::  execute deed
-  |=  [tul=*tool wul=*fuel]  ~|  %ride  ^-  *vase
+  |=  [tul=*tool ful=*fuel]  ~|  %ride  ^-  *vase
   =+  ^=  gul  |-  ^-  *vase
-      ?-    wul
+      ?-    ful
           ~
         [[%atom %n] ~]
       ::
           [%chew *]
-        (slam (pour p.wul) $(wul [%many q.wul]))
+        (slam (pour p.ful) $(ful [%many q.ful]))
       ::
           [%data *]
-        =+  typ=p:(pour (draw p.wul))
-        ?.  (~(firm ut typ) q.wul)
+        =+  typ=p:(pour (draw p.ful))
+        ?.  (~(firm ut typ) q.ful)
           ~|(%ride-data !!)
-        [typ q.wul]
+        [typ q.ful]
       ::
           [%many *]
         |-  ^-  *vase
-        ?-    p.wul 
-            [* ~]  $$(wul i.p.wul)
+        ?-    p.ful 
+            [* ~]  $$(ful i.p.ful)
             ^      
-          =+  [tug=$(p.wul t.p.wul) nob=$$(wul i.p.wul)]
+          =+  [tug=$(p.ful t.p.ful) nob=$$(ful i.p.ful)]
           [[%cell p.tug p.nob] [q.tug q.nob]]
         ==
       ::
           [%name *]
-        =+  pan=$(wul q.wul)
-        [[%face p.wul p.pan] q.pan]
+        =+  pan=$(ful q.ful)
+        [[%face p.ful p.pan] q.pan]
       ==
   =+  ^=  hyn  |-  ^-  *vase
       ?~  p.tul
@@ -269,6 +270,10 @@
       [%mtdg [~ 2] [~ 3]]
   =+  gun=(~(mint ut typ) %noun gen)
   [p.gun .*([q.gat q.sam] q.gun)]
+::
+++  slot                                                ::  vase division
+  |=  [axe=*axis vax=*vase]
+  (pour(env vax) [~ axe])
 ::
 ++  wash                                                ::  print tank
   |=  [[tab=0 edg=80] tac=*tank]  ~|  %wash  ^-  *wall
