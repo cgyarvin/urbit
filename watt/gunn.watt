@@ -9,6 +9,7 @@
     %slam  slam
     %sell  sell
     %wash  wash
+    %weld  weld
   ==
 =>  !% 
 =>  &.
@@ -59,10 +60,14 @@
         [%name p=*term]                  ::  add to environment
       ==
     ++  spot                             ::  filesystem search model
-      $*  %curd                          ::  current directory
+      $*  %actd                          ::  action directory
+          %boot                          ::  internal boot directory
+          %curd                          ::  current directory
           %fund                          ::  function directory
           %home                          ::  home directory
           %libd                          ::  library directory
+          %netd                          ::  network input directory
+          %outd                          ::  output log directory
           %resd                          ::  resource directory
           %root                          ::  root path
       ==
@@ -187,6 +192,12 @@
       %text
     %wall
   ==
+::
+++  hunt                                                ::  
+  |=  [mad=*mode pat=*path]  ~|  %hunt
+  ^-  [p=*mode q=*tape]
+    
+
 :: 
 ++  pour                                                ::  gene in env
   |=  gen=*gene  ~|  %pour  ^-  *vase

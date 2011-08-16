@@ -283,7 +283,7 @@ _eyre_ken_nuw(c3_w kno_w)
   c3_c*   pot_c = _eyre_path_ken(kno_w);
   u2_flag esh;
 
-  esh = u2_ux_fresh(pot_c, "watt", "noun");
+  esh = u2_ux_fresh(pot_c, "watt", "pile");
   free(pot_c);
   return u2_not(esh);
 }
@@ -300,7 +300,7 @@ _eyre_ken_load_hard(u2_wire wir_r,
   u2_noun paq, cun, ken;
 
   // u2_bx_boot(wir_r);
-  paq = u2_ux_read(wir_r, pot_c, "noun");
+  paq = u2_ux_read(wir_r, pot_c, "pile");
   cun = _eyre_cue(wir_r, paq);
   printf("hard boot: %s: %x\n", pot_c, u2_mug(cun));
   // u2_bx_show(wir_r);
@@ -362,7 +362,7 @@ _eyre_ken_load_soft(u2_wire wir_r,
     u2_noun paq;
 
     paq = _eyre_jam(wir_r, ken);
-    u2_ux_write(wir_r, paq, pot_c, "noun");
+    u2_ux_write(wir_r, paq, pot_c, "pile");
     printf("  {%d bits}\n", u2_met(0, paq));
 
 #if 0
@@ -619,7 +619,7 @@ _eyre_gnaw(u2_wire wir_r,
   u2_rz(wir_r, wal);
 }
 
-/* _eyre_dirt(): print an arbitrary noun as a wall.  Works <= 263.
+/* _eyre_dirt(): print an arbitrary pile as a wall.  Works <= 263.
 */
 static void
 _eyre_dirt(u2_wire wir_r, 
