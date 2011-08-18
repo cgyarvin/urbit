@@ -18,6 +18,8 @@
 #define C3_GLOBAL
 #include "all.h"
 
+#define GUNN
+
 #define EyreFirstKernel 242     //  counts down; max 264; > 259 needs nock7
 u2_flag EyreSmoke;
 
@@ -741,71 +743,6 @@ _eyre_print_trac(u2_wire wir_r,
   }
 }
 
-/* _eyre_line(): execute and print a line.
-*/
-static void
-_eyre_line(u2_wire wir_r,
-           u2_noun ken,                                           //  retain
-           u2_noun cor,                                           //  retain
-           u2_noun txt)                                           //  retain
-{
-  u2_ray kit_r = u2_bl_open(wir_r);
-
-  if ( u2_bl_set(wir_r) ) {
-    u2_bl_done(wir_r, kit_r);
-    fprintf(stderr, "{stop}\n");
-  } else {
-    u2_noun gat = u2_bn_hook(wir_r, cor, "line");
-    u2_noun pro;
-
-    u2_bx_boot(wir_r);
-    pro = _eyre_mong(wir_r, u2_yes, gat, u2_rx(wir_r, txt));
-    u2_bx_show(wir_r);
-
-#if 1
-    _eyre_gnaw(wir_r, ken, 2, u2_h(pro));
-    _eyre_gnaw(wir_r, ken, 0, u2_t(pro));
-#else
-    _eyre_gnaw(wir_r, ken, 0, pro);
-#endif
-
-    u2_bl_done(wir_r, kit_r);
-  }
-}
-
-/* _eyre_line_proto(): parse line with old kernel, execute with new.
-*/
-static void
-_eyre_line_proto(u2_wire wir_r, 
-                 u2_noun las,                                     //  retain
-                 u2_noun ken,                                     //  retain
-                 u2_noun txt)                                     //  retain
-{
-  u2_ray kit_r = u2_bl_open(wir_r);
-
-  if ( u2_bl_set(wir_r) ) {
-    u2_bl_done(wir_r, kit_r);
-    fprintf(stderr, "{stop}\n");
-  } else {
-    u2_noun fol = _eyre_call_1(wir_r, u2_yes, las, "=>(!% make)", txt);
-    u2_noun som = _eyre_nock(wir_r, u2_yes, 0, fol);
-    u2_noun pro;
-   
-    u2_bx_boot(wir_r);
-    // u2_err(wir_r, "som", som);
-    // u2_err(wir_r, "ken", ken);
-    pro = _eyre_nock(wir_r, u2_yes, som, ken);
-    u2_err(wir_r, "pro", pro);
-    u2_bx_show(wir_r);
-
-    // _eyre_dirt(wir_r, las, 0, pro); 
-    u2_rz(wir_r, fol);
-    u2_rz(wir_r, pro);
-
-    u2_bl_done(wir_r, kit_r);
-  }
-}
-
 #if 0
 /* _eyre_test2(): advanced test.
 */
@@ -1038,9 +975,7 @@ _eyre_test2(u2_wire wir_r,
     c3_c* ret_c;
 
     switch ( sot ) {
-      default: u2_err(wir_r, "spot", sot); 
-               u2_bl_bail(wir_r, c3__fail);
-               return 0;
+      default: break;
 
       case c3__actd: {
         return _gunn_unix_run(wir_r, med, "/act", tap);
@@ -1083,6 +1018,9 @@ _eyre_test2(u2_wire wir_r,
         return _gunn_unix_sys(wir_r, med, "/res", tap);
       }
     }
+     u2_err(wir_r, "spot", sot); 
+     u2_bl_bail(wir_r, c3__fail);
+     return 0;
   }
 
   /* _gunn_save_mode(): save to disk by mode.
@@ -1237,6 +1175,12 @@ _eyre_test2(u2_wire wir_r,
     if ( u2_nul == ful ) {
       return u2_nul;
     } else switch ( u2_h(ful) ) {
+      default: {
+        u2_err(wir_r, "fuel", ful);
+        ret = u2_nul; 
+        break;
+      }
+
       case c3__chew: u2_bi_cell(wir_r, u2_t(ful), &p_ful, &q_ful);
       {
         ret = u2_bt(wir_r, c3__chew, u2_rx(wir_r, p_ful), 
@@ -1361,6 +1305,12 @@ _eyre_test2(u2_wire wir_r,
       return u2_rx(wir_r, cor);
     }
     else switch ( (p_vet = u2_xh(wir_r, vet)) ) {
+      default: {
+        u2_err(wir_r, "vent", vet);
+        u2_rz(wir_r, vax);
+        return u2_rx(wir_r, cor);
+      }
+
       case c3__bind: u2_bi_cell(wir_r, u2_t(vet), &p_vet, &q_vet);
       {
         return _eyre_hook_cell(wir_r, cor, "bind", u2_rx(wir_r, p_vet), vax);
@@ -1368,6 +1318,8 @@ _eyre_test2(u2_wire wir_r,
       case c3__disk: p_vet = u2_xt(wir_r, vet);
       {
         _gunn_save(wir_r, cor, u2_rx(wir_r, p_vet), vax);
+
+        u2_rz(wir_r, vax);
         return u2_rx(wir_r, cor);
       }
       case c3__many: p_vet = u2_xt(wir_r, vet);
@@ -1394,6 +1346,7 @@ _eyre_test2(u2_wire wir_r,
           u2_rz(wir_r, roc);
           u2_rz(wir_r, nex);
 
+          u2_rz(wir_r, vax);
           return cor;
         }
       }
@@ -1419,6 +1372,80 @@ _eyre_gunn(u2_wire wir_r,
     return _gunn_vent(wir_r, cor, vet, von);
   }
 }
+
+/* _eyre_line(): execute and print a line.
+*/
+static void
+_eyre_line(u2_wire wir_r,
+           u2_noun ken,                                           //  retain
+           u2_noun cor,                                           //  retain
+           u2_noun txt)                                           //  retain
+{
+  u2_ray kit_r = u2_bl_open(wir_r);
+
+  if ( u2_bl_set(wir_r) ) {
+    u2_bl_done(wir_r, kit_r);
+    fprintf(stderr, "{stop}\n");
+  } else {
+#ifdef GUNN
+    u2_bx_boot(wir_r);
+    _eyre_gunn(wir_r, cor, txt);
+    u2_bx_show(wir_r);
+    u2_bl_done(wir_r, kit_r);
+#else
+    u2_noun gat = u2_bn_hook(wir_r, cor, "line");
+    u2_noun pro;
+
+    u2_bx_boot(wir_r);
+    pro = _eyre_mong(wir_r, u2_yes, gat, u2_rx(wir_r, txt));
+    u2_bx_show(wir_r);
+
+#if 1
+    _eyre_gnaw(wir_r, ken, 2, u2_h(pro));
+    _eyre_gnaw(wir_r, ken, 0, u2_t(pro));
+#else
+    _eyre_gnaw(wir_r, ken, 0, pro);
+#endif
+
+    u2_bl_done(wir_r, kit_r);
+#endif
+  }
+}
+
+/* _eyre_line_proto(): parse line with old kernel, execute with new.
+*/
+static void
+_eyre_line_proto(u2_wire wir_r, 
+                 u2_noun las,                                     //  retain
+                 u2_noun ken,                                     //  retain
+                 u2_noun txt)                                     //  retain
+{
+  u2_ray kit_r = u2_bl_open(wir_r);
+
+  if ( u2_bl_set(wir_r) ) {
+    u2_bl_done(wir_r, kit_r);
+    fprintf(stderr, "{stop}\n");
+  } else {
+    u2_noun fol = _eyre_call_1(wir_r, u2_yes, las, "=>(!% make)", txt);
+    u2_noun som = _eyre_nock(wir_r, u2_yes, 0, fol);
+    u2_noun pro;
+   
+    u2_bx_boot(wir_r);
+    // u2_err(wir_r, "som", som);
+    // u2_err(wir_r, "ken", ken);
+    pro = _eyre_nock(wir_r, u2_yes, som, ken);
+    u2_err(wir_r, "pro", pro);
+    u2_bx_show(wir_r);
+
+    // _eyre_dirt(wir_r, las, 0, pro); 
+    u2_rz(wir_r, fol);
+    u2_rz(wir_r, pro);
+
+    u2_bl_done(wir_r, kit_r);
+  }
+}
+
+
 /* main()::
 */
 c3_i
@@ -1438,7 +1465,11 @@ main(c3_i   argc,
   if ( argc == 1 ) {
     EyreSmoke = u2_no;
     kno_w = EyreFirstKernel;
+#ifdef GUNN
+    lid_c = strdup("gunn");
+#else
     lid_c = strdup("hume");
+#endif
 
     goto proceed;
   }
@@ -1446,8 +1477,12 @@ main(c3_i   argc,
     goto usage;
   }
   if ( 2 == argc ) {
+#ifdef GUNN
+    EyreSmoke = u2_no;
+    lid_c = strdup("gunn");
+#else
     EyreSmoke = u2_yes;
-
+#endif
     if ( kno_w > (EyreFirstKernel - 1) ) {
       goto usage;
     }
@@ -1463,7 +1498,7 @@ main(c3_i   argc,
   }
 
   usage: {
-    fprintf(stderr, "usage: eyre $kernel [$shell]\n");
+    fprintf(stderr, "usage: eyre <$kernel> [$shell]\n");
     fprintf(stderr, "  watt/$kernel.watt\n");
     fprintf(stderr, "    (FirstKernel is %d, kernels count down)\n", 
             EyreFirstKernel);
