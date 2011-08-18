@@ -73,7 +73,7 @@
 
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 89
+  %expect 80
 
   %pure-parser
   %locations
@@ -177,7 +177,7 @@ gene
 wide
   : wide_x
   | wide_x si_cab wide { $$ = _ytrel(c3__dgsp, $1, $3); }
-  | wide_x si_sig { $$ = _yqual(c3__dgsp, $1, c3__tmlc, c3__null); }
+  /* | wide_x si_sig { $$ = _yqual(c3__dgsp, $1, c3__tmlc, c3__null); } */
   ;
 
 wide_x
@@ -419,7 +419,6 @@ wide_c
     wide_norm: di_ketdeg body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_ketdel body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_ketled body_b_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_ketpes body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_ketsig body_a_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_zaplyc body_a_wide    { $$ = _ycell($1, $2); }
@@ -590,7 +589,6 @@ tall
     tall_norm: di_ketdeg w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_ketdel w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_ketled w body_b_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_ketpes w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_ketsig w body_a_tall    { $$ = _ycell($1, $3); }
 
     tall_norm: di_mitbar w body_p_tall    { $$ = _ycell($1, $3); }
@@ -812,7 +810,6 @@ tall
     di_ketdeg: si_ket si_deg  { $$ = c3__ktdg; }
     di_ketdel: si_ket si_del  { $$ = c3__ktdl; }
     di_ketled: si_ket si_led  { $$ = c3__ktld; }
-    di_ketpes: si_ket si_pes  { $$ = c3__ktps; }
     di_ketsig: si_ket si_sig  { $$ = c3__ktsg; }
 
     di_mitlyc: si_mit si_lyc  { $$ = c3__mtlc; }
@@ -966,7 +963,7 @@ tall
         { $$ = _yfon_list(scanner, u2_bc(ywir_r, u2_bc(ywir_r, 1, $1), $2)); }
 
     tok_fpre
-      : tok_bar
+      : si_bar { $$ = 0; }
       | tok_far
       | tok_ff
       | tok_fff

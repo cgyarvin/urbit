@@ -439,6 +439,12 @@
                             u2_noun sut);                         //  retain
 
       u2_noun                                                     //  transfer
+      j2_mcy(Pt6, ut, bust)(u2_wire wir_r,
+                            u2_noun van,                          //  retain
+                            u2_noun sut,                          //  retain
+                            u2_noun dib);                         //  retain
+
+      u2_noun                                                     //  transfer
       j2_mcy(Pt6, ut, cull)(u2_wire wir_r,
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain

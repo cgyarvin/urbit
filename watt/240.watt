@@ -1,3 +1,4 @@
+!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -1144,7 +1145,7 @@
     %+  cook
       |=(a=*(list nat) (roll a |=([p=@ q=@] (add p (lsh 5 1 q)))))
     ;~  plug
-      ;~(pose (cold 0 bar) (fud fwd fod fad)
+      ;~(pose (cold 0 bar) fud fwd fod fad)
       (star ;~(pfix ;~(pose dun ;~(plug nov gay von)) fud))
     ==
   ::
@@ -2269,10 +2270,11 @@
         [%cube *]   p.sut
         [%face *]   $(sut repo)
         [%fine *]   =+  yoc=$(sut r.sut)
+                    |-  ^-  *
                     =+  feg=(bust(sut q.sut) yoc)
                     ?-  p.sut
-                      %pure  =(yoc feg)
-                      %very  =(& feg)
+                      %pure  ?:(=(yoc feg) yoc $(yoc feg))
+                      %very  ?.(=(& feg) ~|(%burn-fine !!) yoc)
                     ==
         [%fork *]   $(sut p.sut)
         [%hold *]   $(sut repo)
@@ -2284,7 +2286,8 @@
     |=  dib=*
     =+  yam=burn
     =+  yib=[[-<.yam dib] +.yam]
-    .*(yib q:(mint %noun %%))
+    =+  hox=q:(mint %noun %%)
+    ~|(%bust-nock .*(yib hox))
   ::
   ++  cull
     ~.  %cull
@@ -2651,7 +2654,7 @@
   ++  firm
     ~.  %firm
     |=  dib=*
-    =+  bix=*(set ~[*type *type])
+    =+  bix=*(set ~[*type *])
     |-  ^-  ?
     ?-    sut
         [%atom *]  !.?(dib)
@@ -2659,7 +2662,7 @@
         [%core *] 
       ?&  .?(dib)
           $(sut p.sut, dib -.dib)
-          =(+.dib ?:(=(~ p.r.q.sut) ~|(%mint-burn !!) p.r.q.sut))
+          =(+.dib ?:(=(~ p.r.q.sut) ~|(%firm-core !!) p.r.q.sut))
       ==
     ::
         [%cube *]  =(dib p.sut)
@@ -2675,8 +2678,8 @@
     ::
         [%fork *]  |($(sut p.sut) $(sut q.sut))
         [%hold *]
-      ?|  (~(has in bix) [sut ref]) 
-          $(bix (~(put in bix) [sut ref]), sut repo))
+      ?|  (~(has in bix) [sut dib]) 
+          $(bix (~(put in bix) [sut dib]), sut repo)
       ==
     ::
         %noun      &

@@ -55,7 +55,7 @@
       {
         if ( u2_yes == u2_dust(ref) ) {
           if ( c3__atom == u2_h(ref) ) {
-            return u2_rx(wir_r, sut);
+            return u2_rx(wir_r, ref);
           }
           else if ( c3__cell == u2_h(ref) ) {
             return c3__void;

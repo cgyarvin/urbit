@@ -89,11 +89,8 @@
   j2_mc(Pt6, ut, burn)(u2_wire wir_r, 
                        u2_noun cor);                              //  retain
 
-  u2_noun                                                         //  transfer
-  j2_mc(Pt6, ut, odor)(u2_wire wir_r, 
-                       u2_noun cor);                              //  retain
-
   extern u2_ho_jet j2_mcj(Pt6, ut, bake)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, bust)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, cull)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, emit)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, find)[];
@@ -121,6 +118,7 @@
   u2_ho_driver 
   j2_mbd(Pt6, ut)[] = {
     { j2_sc(Pt6, ut, bake), j2_mcj(Pt6, ut, bake), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, bust), j2_mcj(Pt6, ut, bust), 0, 0, u2_none },
     { j2_sc(Pt6, ut, cull), j2_mcj(Pt6, ut, cull), 0, 0, u2_none },
     { j2_sc(Pt6, ut, emit), j2_mcj(Pt6, ut, emit), 0, 0, u2_none },
     { j2_sc(Pt6, ut, find), j2_mcj(Pt6, ut, find), 0, 0, u2_none },
@@ -151,7 +149,6 @@
       j2_mc(Pt6, ut, burn), 
       u2_jet_live | u2_jet_memo,  // special performance category
       u2_none, u2_none },
-    { "odor", c3__hevy, j2_mc(Pt6, ut, odor), Tier6_b, u2_none, u2_none },
     { "repo", c3__hevy, j2_mc(Pt6, ut, repo), Tier6_b, u2_none, u2_none },
     { }
   };

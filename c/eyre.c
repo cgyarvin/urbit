@@ -30,6 +30,7 @@ u2_flag EyreSmoke;
   
     /* External drivers.
     */
+      extern u2_ho_driver j2_da(k_240);
       extern u2_ho_driver j2_da(k_241);
       extern u2_ho_driver j2_da(k_242);
 //      extern u2_ho_driver j2_da(k_243);
@@ -58,6 +59,7 @@ u2_flag EyreSmoke;
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       u2_ho_driver *HostDriverBase[] = {
+        &j2_da(k_240),
         &j2_da(k_241),
         &j2_da(k_242),
 //        &j2_da(k_243),
@@ -214,6 +216,7 @@ _eyre_hook_cell(u2_wire     wir_r,
   return pro;
 }
 
+#if 0
 /* _eyre_hook_trel(): hook with trel sample.
 */
 static u2_noun                                                    //  produce
@@ -252,6 +255,7 @@ _eyre_hook_qual(u2_wire     wir_r,
   u2_rz(wir_r, gat);
   return pro;
 }
+#endif
 
 /* _eyre_path_lid(): 
 */
