@@ -30,6 +30,7 @@ u2_flag EyreSmoke;
   
     /* External drivers.
     */
+      extern u2_ho_driver j2_da(k_239);
       extern u2_ho_driver j2_da(k_240);
       extern u2_ho_driver j2_da(k_241);
       extern u2_ho_driver j2_da(k_242);
@@ -59,6 +60,7 @@ u2_flag EyreSmoke;
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       u2_ho_driver *HostDriverBase[] = {
+        &j2_da(k_239),
         &j2_da(k_240),
         &j2_da(k_241),
         &j2_da(k_242),

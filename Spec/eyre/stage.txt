@@ -8,7 +8,7 @@ To stage down from X to Y == (X - 1), 10 steps:
     6. update genY/pit.h and genY/6/ream.y
     7. add genY/ofiles in Makefile
     8. link jets in c/eyre.c
-    9. update FirstKernel in c/eyre.c (if desired); check in FK.noun
+    9. update FirstKernel in c/eyre.c (if desired); check in FK.pile
     10. basic low-grade test of new kernel:
    
       - use smoke on the next kernel (Z == Y - 1): eyre Z
