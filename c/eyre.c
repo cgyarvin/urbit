@@ -20,7 +20,7 @@
 
 // #define GUNN
 
-#define EyreFirstKernel 242     //  counts down; max 264; > 259 needs nock7
+#define EyreFirstKernel 240     //  counts down; max 264; > 259 needs nock7
 u2_flag EyreSmoke;
 
   /**  Global kernel - used only for trace printing.
@@ -32,8 +32,8 @@ u2_flag EyreSmoke;
     */
       extern u2_ho_driver j2_da(k_239);
       extern u2_ho_driver j2_da(k_240);
-      extern u2_ho_driver j2_da(k_241);
-      extern u2_ho_driver j2_da(k_242);
+//      extern u2_ho_driver j2_da(k_241);
+//      extern u2_ho_driver j2_da(k_242);
 //      extern u2_ho_driver j2_da(k_243);
 //      extern u2_ho_driver j2_da(k_244);
 //      extern u2_ho_driver j2_da(k_245);
@@ -62,11 +62,11 @@ u2_flag EyreSmoke;
       u2_ho_driver *HostDriverBase[] = {
         &j2_da(k_239),
         &j2_da(k_240),
-        &j2_da(k_241),
-        &j2_da(k_242),
+//        &j2_da(k_241),
+//        &j2_da(k_242),
 //        &j2_da(k_243),
 //        &j2_da(k_244),
-//         &j2_da(k_245),
+//        &j2_da(k_245),
 //        &j2_da(k_246),
 //        &j2_da(k_247),
 //        &j2_da(k_248),
@@ -91,7 +91,7 @@ u2_flag EyreSmoke;
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt5Y   k_242__a__b__c__d__e
+#   define Pt5Y   k_240__a__b__c__d__e
 
     u2_noun
     j2_mby(Pt5Y, cue)(u2_wire, u2_noun a);

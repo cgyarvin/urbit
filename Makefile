@@ -1077,8 +1077,6 @@ EYRE_OFILES=\
        $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
-       $(J242_OFILES) \
-       $(J241_OFILES) \
        $(J240_OFILES) \
        $(J239_OFILES)
 
