@@ -399,12 +399,7 @@
         u2_rz(wir_r, tom);
         return ret;
       }
-      case c3__dtsg: 
-      if ( u2_no == u2_dust(u2_t(gen))) {
-        u2_err(wir_r, "gen", gen);
-        c3_assert(0);
-      }
-      u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
+      case c3__dtsg: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mint_used(wir_r);
       {
         u2_noun boc = (u2_no == u2_stud(q_gen)) 
@@ -435,6 +430,17 @@
              u2_bt(wir_r, _2, _mint_make(wir_r, van, sut, c3__noun, p_gen),
                               _mint_make(wir_r, van, sut, c3__noun, q_gen)));
         }
+      }
+      case c3__dtwt: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
+      _mint_used(wir_r);
+      {
+        u2_noun typ = u2_bc(wir_r, c3__atom, u2_rx(wir_r, p_gen));
+        u2_noun ret = 
+            u2_bc(wir_r,
+                  _mint_nice(wir_r, van, gol, typ),
+                  u2_bc(wir_r, _1, u2_rx(wir_r, q_gen)));
+
+        return ret;
       }
       case c3__ktlc: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mint_used(wir_r);

@@ -531,17 +531,6 @@
 /***
 ****
 ***/
-  _open_do_pq(dtwt)   //  .@
-  {
-    return
-      u2_bt(wir_r,
-            c3__ktps, 
-            u2_bt(wir_r, c3__dtsg, u2_rx(wir_r, p_gen), _0),
-            u2_bt(wir_r, c3__dtsg, u2_blip, u2_rx(wir_r, q_gen)));
-  }
-/***
-****
-***/
   _open_do_pq(ktdg)   //  ^:
   {
     return 
@@ -1186,8 +1175,6 @@
         _open_pqr (dgps);
         _open_p   (dgtr);
         _open_p   (dgsg);
-
-        _open_pq  (dtwt);
 
         _open_pqr (hslc);
         _open_pqr (hsbr);
