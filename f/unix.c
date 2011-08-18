@@ -139,10 +139,18 @@ u2_ux_read(u2_ray      wir_r,
            const c3_c* paf_c,
            const c3_c* ext_c)
 {
-  c3_w len_w = strlen(paf_c) + 1 + strlen(ext_c);
-  c3_c *nam_c = alloca(len_w + 1);
+  c3_w  len_w;
+  c3_c* nam_c;
 
-  sprintf(nam_c, "%s.%s", paf_c, ext_c);
+  if ( ext_c ) 
+    len_w = strlen(paf_c) + 1 + strlen(ext_c);
+  else len_w = strlen(paf_c);
+  
+  nam_c = alloca(len_w + 1);
+  if ( ext_c ) {
+    sprintf(nam_c, "%s.%s", paf_c, ext_c);
+  } else sprintf(nam_c, "%s", paf_c);
+
   {
     c3_i        fid_i;
     struct stat sat_s;
@@ -176,11 +184,19 @@ u2_weak
 u2_ux_read_deep(u2_wire     wir_r,
                 const c3_c* paf_c,
                 const c3_c* ext_c)
-{
-  c3_w  len_w = strlen(paf_c) + 1 + strlen(ext_c);
-  c3_c* nam_c = alloca(len_w + 1);
+{ 
+  c3_w  len_w;
+  c3_c* nam_c;
 
-  sprintf(nam_c, "%s.%s", paf_c, ext_c);
+  if ( ext_c ) 
+    len_w = strlen(paf_c) + 1 + strlen(ext_c);
+  else len_w = strlen(paf_c);
+  
+  nam_c = alloca(len_w + 1);
+  if ( ext_c ) {
+    sprintf(nam_c, "%s.%s", paf_c, ext_c);
+  } else sprintf(nam_c, "%s", paf_c);
+
   {
     FILE*   fil;
     u2_noun som;
@@ -202,10 +218,18 @@ u2_ux_write(u2_wire     wir_r,
             const c3_c* paf_c,
             const c3_c* ext_c)
 {
-  c3_w  len_w = strlen(paf_c) + 1 + strlen(ext_c);
-  c3_c* nam_c = alloca(len_w + 1);
+  c3_w  len_w;
+  c3_c* nam_c;
 
-  sprintf(nam_c, "%s.%s", paf_c, ext_c);
+  if ( ext_c ) 
+    len_w = strlen(paf_c) + 1 + strlen(ext_c);
+  else len_w = strlen(paf_c);
+  
+  nam_c = alloca(len_w + 1);
+  if ( ext_c ) {
+    sprintf(nam_c, "%s.%s", paf_c, ext_c);
+  } else sprintf(nam_c, "%s", paf_c);
+
   {
     c3_i    fid_i;
     c3_w    fln_w;
@@ -236,10 +260,18 @@ u2_ux_write_deep(u2_wire     wir_r,
                  const c3_c* paf_c,
                  const c3_c* ext_c)
 {
-  c3_w  len_w = strlen(paf_c) + 1 + strlen(ext_c);
-  c3_c* nam_c = alloca(len_w + 1);
+  c3_w  len_w;
+  c3_c* nam_c;
 
-  sprintf(nam_c, "%s.%s", paf_c, ext_c);
+  if ( ext_c ) 
+    len_w = strlen(paf_c) + 1 + strlen(ext_c);
+  else len_w = strlen(paf_c);
+  
+  nam_c = alloca(len_w + 1);
+  if ( ext_c ) {
+    sprintf(nam_c, "%s.%s", paf_c, ext_c);
+  } else sprintf(nam_c, "%s", paf_c);
+
   {
     FILE*   fil;
 

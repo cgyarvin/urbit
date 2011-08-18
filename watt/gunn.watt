@@ -3,7 +3,9 @@
     -<-<
   ==
     %bind  bind
+    %cue   cue
     %draw  draw
+    %jam   jam
     %pour  pour
     %ride  ride
     %scan  scan
@@ -11,7 +13,6 @@
     %sell  sell
     %slot  slot
     %wash  wash
-    %weld  weld
   ==
 =>  !% 
 =>  &.
@@ -47,19 +48,19 @@
       $&  %*  $*  %atom                  ::  file as flat atom
                   %auto                  ::  default
                   %blob                  ::  file as byte length, atom
-                  %noun                  ::  file as noun jam
+                  %pile                  ::  file as noun jam
                   %text                  ::  file as list of list of chars
                   %watt                  ::  watt source as atom
               ==
         [%dlog p=(mode)]                 ::  directory as list of files
-        [%dnog p=(mode)]                 ::  directory as list of name, file
+        [%dmap p=(mode)]                 ::  directory as list of name, file
       ==
     ++  path  (list tape)                ::  unix path
     ++  vent
-      $&  ~                              ::  print to screen with label
+      $&  *term                          ::  print to screen with label
         [%bind p=*term]                  ::  add to environment
-        [%disk p=(mine)]                 ::  write to filesystem
         [%many p=((list vent))]          ::  tuple
+        [%save p=(mine)]                 ::  write to filesystem
       ==
     ++  spot                             ::  filesystem search model
       $*  %actd                          ::  action directory
@@ -67,6 +68,7 @@
           %curd                          ::  current directory
           %fund                          ::  function directory
           %home                          ::  home directory
+          %jetd                          ::  jet directory
           %libd                          ::  library directory
           %netd                          ::  network input directory
           %outd                          ::  output log directory
@@ -106,8 +108,8 @@
             (cold %atom (just 'a'))
             (cold %blob (just 'b'))
             (stag %dlog ;~(pfix (just 'l') x-mode))
-            (stag %dnog ;~(pfix (just 'm') x-mode))
-            (cold %noun (just 'n'))
+            (stag %dmap ;~(pfix (just 'm') x-mode))
+            (cold %pile (just 'p'))
             (cold %text (just 't'))
             (cold %watt (just 'w'))
           ==
@@ -156,7 +158,7 @@
       ;~  pose
         ;~  pfix  led
           ;~  pose
-            (stag %disk x-mine)
+            (stag %save x-mine)
             (stag %bind ;~(pfix lyc sym))
             ::  (stag %comd ;~(pfix bar qut))
             (stag %many (ifix [den ned] (most ace x-vent)))
@@ -174,8 +176,8 @@
   ..bind(env [[%cell p.env [%face nam p.vax]] [q.env q.vax]])
 ::
 ++  draw                                                ::  mold from mode
-  |=  mad=*mode  ~|  %draw  ^-  *gene
-  ?-    mad
+  |=  med=*mode  ~|  %draw  ^-  *gene
+  ?-    med
       *{%atom %watt}
     [%hssg [[%tmlc %atom] ~] ~]
   ::
@@ -183,22 +185,41 @@
     [%hssg [[%ktlc %l [%tmlc %atom]] [%ktlc %d [%tmlc %atom]] ~] ~]
   ::
       [%dlog *]
-    [%mtdg %list $(mad p.mad)]
+    [%mtdg %list $(med p.med)]
   ::
-      [%dnog *]
-    [%mtdg %list [%hssg [[%ktlc %n %tape] [%ktlc %v $(mad p.mad)] ~] ~]]
+      [%dmap *]
+    [%mtdg %list [%hssg [[%ktlc %n %tape] [%ktlc %v $(med p.med)] ~] ~]]
   ::
-      %noun
+      %pile
     [%hssg [[%tmlc %noun] ~] ~]
   ::
       %text
     %wall
   ==
 ::
-++  hunt                                                ::  
-  |=  [mad=*mode pat=*path]  ~|  %hunt
+++  hunt                                                ::  flatten path
+  |=  [med=*mode pat=*path]  ~|  %hunt
   ^-  [p=*mode q=*tape]
-  !! 
+  ?~  pat
+    !!
+  ?~  t.pat
+    =+  vel=i.pat
+    =+  qoy=*tape
+    |-  ^-  [p=*mode q=*tape]
+    ?~  vel
+      [med (flop qoy)]
+    ?:  .=('.' i.vel)
+      =+  loq=(rap 3 t.vel) 
+      :-  ?-    loq
+              *{%dlog %dmap}  
+            ?:(.=(%auto med) (mode [loq %auto]) ?>(.=(-.med loq) med))
+          ::
+              *  ?:(.=(%auto med) (mode loq) ?>(.=(med loq) med))
+          ==
+      (flop qoy)
+    $(vel t.vel, qoy [i.vel qoy])
+  =+  yex=$(pat t.pat)
+  [p.yex (weld i.pat q.yex)]
 :: 
 ++  pour                                                ::  gene in env
   |=  gen=*gene  ~|  %pour  ^-  *vase
@@ -272,7 +293,7 @@
   [p.gun .*([q.gat q.sam] q.gun)]
 ::
 ++  slot                                                ::  vase division
-  |=  [axe=*axis vax=*vase]
+  |=  [axe=*axis vax=*vase]  ~|  %slot  ^-  *vase
   (pour(env vax) [~ axe])
 ::
 ++  wash                                                ::  print tank
