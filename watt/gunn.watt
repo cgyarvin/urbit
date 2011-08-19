@@ -142,7 +142,7 @@
     ++  x-tool  ~+
       ;~  pose
         ;~  plug
-          (star (stag %disk ;~(pfix ket x-path)))
+          (star (stag %disk ;~(pfix bar x-path)))
           ;~  pose
             (stag %disk ;~(pfix deg x-path))
             (stag %body ;~(pfix pes wide:vast))
