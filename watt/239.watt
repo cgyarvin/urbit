@@ -11,7 +11,7 @@
     ~
   &.
   ++  stub  239
-  ++  nat   |=(a=* ?>(?=(@ a) a))
+  ++  nat   |=(a=* ^:(@ a))
   ++  mud   |=(a=* a)
   ++  bit   |=(a=* ?-(a & &, | |))
   --
@@ -1111,7 +1111,7 @@
     |*  fel=rule
     (stir `*(list %{(know *fel)})`~ |*([a=* b=*] [a b]) fel)
   ::
-  ::      Tier 5a/4, parsing: ASCII and utilities
+  ::      tier 5a/4, parsing: ascii and utilities
   ::
   ++  ace  (just ' ')
   ++  alf  ;~(pose low hig)
@@ -1170,7 +1170,7 @@
   ++  gon  ;~(pose ;~(plug nov gay von) (easy ~))
   ++  hex  (bass 16 (most gon hit))
   ++  hes  (just '$')
-  ++  hig  (shim 'A' 'Z')
+  ++  hig  (shim 'a' 'z')
   ++  hit  ;~(pose dit (cook |=(a=*char (sub a 87)) (shim 'a' 'f')))
   ++  ket  (just '^')
   ++  lep  (just '(')
@@ -1188,7 +1188,7 @@
   ++  pes  (just '+')
   ++  poy  ;~(pfix nov ;~(pose nov bot mes))
   ++  qit  ;~(pose (shim 32 38) (shim 40 91) (shim 93 126) poy)
-  ++  qut  (ifix [bot bot] (boss 256 (most gon qit)))
+  ++  qut  (ifix [bot bot] (boss 256 (more gon qit)))
   ++  sed  (just '}')
   ++  sep  (just '-')
   ++  sig  (just '~')
@@ -3343,14 +3343,7 @@
     ==
   --
 ::
-++  vest
-  ~.  %vest
-  |=  tub=*clip
-  ~|  %vest
-  ^-  *(like gene)
-  %.  tub
-  %-  full
-  =<  (ifix [gay gay] tall)
+++  vast
   =+  bug=`?`|
   &.  
   ++  flat
@@ -3711,4 +3704,13 @@
       ?:(bug [%zpcb a b] b)
     zor
   --
+::
+++  vest
+  ~.  %vest
+  |=  tub=*clip
+  ~|  %vest
+  ^-  *(like gene)
+  %.  tub
+  %-  full
+  (ifix [gay gay] tall:vast)
 --

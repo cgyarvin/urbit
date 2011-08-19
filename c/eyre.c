@@ -18,7 +18,7 @@
 #define C3_GLOBAL
 #include "all.h"
 
-// #define GUNN
+#define GUNN
 
 #define EyreFirstKernel 240     //  counts down; max 264; > 259 needs nock7
 u2_flag EyreSmoke;
@@ -1225,9 +1225,11 @@ _eyre_test2(u2_wire wir_r,
   {
     if ( c3__disk == u2_h(fun) ) {
       u2_noun t_fun = u2_t(fun);
-      u2_noun myn = u2_bc(wir_r, c3__watt, u2_rx(wir_r, t_fun));
-      u2_noun ret = u2_bc(wir_r, c3__data, _gunn_load(wir_r, cor, myn));
+      u2_noun myn = u2_bt(wir_r, c3__watt, c3__fund, u2_rx(wir_r, t_fun));
+      u2_noun lod = _gunn_load(wir_r, cor, myn);
+      u2_noun ret = u2_bc(wir_r, c3__data, u2_rx(wir_r, u2_t(lod)));
 
+      u2_rz(wir_r, lod);
       u2_rz(wir_r, myn);
       return ret;
     }
@@ -1248,7 +1250,7 @@ _eyre_test2(u2_wire wir_r,
       u2_noun t_lad = u2_t(lad);
       u2_noun pi_lad;
 
-      switch ( i_lad ) {
+      switch ( u2_h(i_lad) ) {
         default: return u2_bl_bail(wir_r, c3__fail);
 
         case c3__data: {
@@ -1257,11 +1259,13 @@ _eyre_test2(u2_wire wir_r,
         }
         case c3__disk: pi_lad = u2_t(i_lad);
         {
-          u2_noun myn = u2_bc(wir_r, c3__watt, u2_rx(wir_r, pi_lad));
+          u2_noun myn = u2_bt(wir_r, c3__watt, c3__libd, u2_rx(wir_r, pi_lad));
+          u2_noun lod = _gunn_load(wir_r, cor, myn);
           u2_noun ret = u2_bc(wir_r, u2_bc(wir_r, c3__data, 
-                                                  _gunn_load(wir_r, cor, myn)),
+                                                  u2_rx(wir_r, u2_t(lod))),
                                      _gunn_tool_lib(wir_r, cor, t_lad));
 
+          u2_rz(wir_r, lod);
           u2_rz(wir_r, myn);
           return ret;
         }
@@ -1369,6 +1373,7 @@ _eyre_gunn(u2_wire wir_r,
   u2_noun dyd = _eyre_hook(wir_r, cor, "scan", txt);
   u2_noun vet, ful, tul;
 
+  // u2_err(wir_r, "deed", dyd);
   u2_bi_trel(wir_r, dyd, &vet, &ful, &tul);
   ful = _gunn_fuel(wir_r, cor, u2_rx(wir_r, ful));
   tul = _gunn_tool(wir_r, cor, u2_rx(wir_r, tul)); 
