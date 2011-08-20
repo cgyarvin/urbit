@@ -130,27 +130,15 @@
   ::
   ++  list
     |*  a=mud
-    |=  b=*
-    ?-    b
-        ~           ~
-        [i=* t=*]   [i=(a i.b) t=$(b t.b)]
-    ==
+    $=(~ [i=(a) t=((list a))])
   ::
   ++  tree
     |*  a=mud
-    |=  b=*
-    ?-    b
-        ~               ~
-        [n=* l=* r=*]   [n=(a n.b) l=$(b l.b) r=$(b r.b)]
-    ==
+    $=(~ [n=(a) l=((tree a)) r=((tree a))])
   ::
   ++  unit
     |*  a=mud
-    |=  b=*
-    ?-    b
-        ~       ~
-        [~ *]   [~ u=(a +.b)]
-    ==
+    $=(~ [~ u=(a)])
   --
 =>
   ::::
@@ -695,13 +683,6 @@
   ::
   ::  Tier 4 cones
   ::
-  ++  tree
-    |*  a=mud
-    |=  b=*
-    ?-    b
-        ~               ~
-        [n=* l=* r=*]   [n=(a n.b) l=$(b l.b) r=$(b r.b)]
-    ==
   ++  set   |*(a=mud (tree a))
   ++  map   |*([a=mud b=mud] (tree ~[p=(a) q=(b)]))
   --
@@ -3117,7 +3098,7 @@
         ?&(=(p.sut p.ref) =(q.sut q.ref) dext(sut r.sut, ref r.ref))
       ::
           [%fork *]
-        ?.  ?=(*%{[%atom *] %noun [%cell *] [%cube *] [%core *]} ref)
+        ?.  ?=(*%{[%atom *] %noun [%cell *] [%cube *] [%core *] [%fine *]} ref)
           sint
         ?|(dext(sut p.sut) dext(sut q.sut))
       ::

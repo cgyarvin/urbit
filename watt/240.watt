@@ -1916,9 +1916,6 @@
         (mold(gen p.gen) [[~ 5] ~]) 
       r.gen 
     ::
-        [%hssg *]   
-      (knit(gen [%dgtr p.gen]) (mold(gen [%dgtr p.gen]) [[~ 5] ~]) q.gen)
-    ::
         [%hskt *]   
       %+  knit(gen ?~(p.gen [%dtsg %n ~] i.p.gen))
         (lung(gen [%zpzp ~]) [[~ 5] ~] p.gen)
@@ -1951,6 +1948,9 @@
           (pick(gen p.gen) [[~ 5] ~] [%zpzp ~]) 
         (lung(gen [%zpzp ~]) [[~ 5] ~] q.gen)
       r.gen 
+    ::
+        [%hssg *]   
+      (knit(gen [%dgtr p.gen]) (mold(gen [%dgtr p.gen]) [[~ 5] ~]) q.gen)
     :: 
         [%hstr *]
       %+  knit(gen ?~(p.gen [%dtsg %n ~] i.p.gen))

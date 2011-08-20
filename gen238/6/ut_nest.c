@@ -259,6 +259,7 @@
             case c3__cell: 
             case c3__cube:
             case c3__core:
+            case c3__fine:
               break;
           }
 

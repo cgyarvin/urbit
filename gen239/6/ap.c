@@ -1176,7 +1176,14 @@
         _open_p   (dgtr);
         _open_p   (dgsg);
 
-        _open_pqr (hslc);
+        // _open_pqr (hslc);
+          case c3__hslc: \
+            if ( u2_no == u2_as_trel(u2_t(gen), &p_gen, &q_gen, &r_gen) ) { 
+              u2_err(wir_r, "hslc", gen);
+              return u2_bl_bail(wir_r, c3__fail); 
+            } else return _open_in_hslc(wir_r, p_gen, q_gen, r_gen);
+
+
         _open_pqr (hsbr);
         _open_pq  (hskt);
         _open_pq  (hsmt);

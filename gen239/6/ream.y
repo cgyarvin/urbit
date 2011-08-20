@@ -372,7 +372,8 @@ wide_c
               { $$ = _yqual($1, u2_h($2), u2_t($2), u2_nul); }
     wide_norm: di_hessig body_d_wide    { $$ = _ytrel($1, $2, u2_nul); }
     wide_norm: di_hesket body_d_wide    { $$ = _ytrel($1, $2, u2_nul); }
-    wide_norm: di_heslyc body_b_wide    { $$ = _ytrel($1, $2, u2_nul); }
+    wide_norm: di_heslyc body_b_wide    
+              { $$ = _yqual($1, u2_h($2), u2_t($2), u2_nul); }
     wide_norm: di_hesmit body_d_wide    { $$ = _ytrel($1, $2, u2_nul); }
     wide_norm: di_hespam body_i_wide
               { $$ = _yqual($1, u2_h($2), u2_t($2), u2_nul); }
