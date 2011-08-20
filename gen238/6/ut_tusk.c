@@ -30,7 +30,7 @@
 
       if ( u2_yes == u2_stud(i_peh) ) {
         u2_noun cog = i_peh;
-        u2_noun wer = j2_mcy(Pt6, ut, find)(wir_r, van, sut, c3__rite, i_peh);
+        u2_noun wer = j2_mcy(Pt6, ut, fink)(wir_r, van, sut, c3__rite, i_peh);
         u2_noun p_wer, r_wer;
 
         u2_as_trel(wer, &p_wer, 0, &r_wer);

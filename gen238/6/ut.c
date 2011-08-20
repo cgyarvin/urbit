@@ -94,6 +94,7 @@
   extern u2_ho_jet j2_mcj(Pt6, ut, cull)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, emit)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, find)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, fink)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, fire)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, fire)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, firm)[];
@@ -122,6 +123,7 @@
     { j2_sc(Pt6, ut, cull), j2_mcj(Pt6, ut, cull), 0, 0, u2_none },
     { j2_sc(Pt6, ut, emit), j2_mcj(Pt6, ut, emit), 0, 0, u2_none },
     { j2_sc(Pt6, ut, find), j2_mcj(Pt6, ut, find), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, fink), j2_mcj(Pt6, ut, fink), 0, 0, u2_none },
     { j2_sc(Pt6, ut, fire), j2_mcj(Pt6, ut, fire), 0, 0, u2_none },
     { j2_sc(Pt6, ut, firm), j2_mcj(Pt6, ut, firm), 0, 0, u2_none },
     { j2_sc(Pt6, ut, fish), j2_mcj(Pt6, ut, fish), 0, 0, u2_none },

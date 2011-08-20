@@ -2200,6 +2200,7 @@
       %dunk   dunk
       %emit   emit
       %find   find
+      %fink   fink
       %fire   fire
       %firm   firm
       %fish   fish
@@ -2528,12 +2529,6 @@
   ++  find
     ~.  %find
     |=  [way=*{%read %rite} cog=*term]
-    ::  ~~  (dunk 'type')
-    ::  ~~  (show [%c 'feature'] ?:(=(%% cog) '%%' [%a cog]))
-    =-  ?~  hoq
-          ~|(%find-none !!)
-        u.hoq
-    ^=  hoq
     =+  gil=*(set type)
     |-
     ^-  *(unit port)
@@ -2607,6 +2602,14 @@
     ::
         *           ~
     ==
+  ::
+  ++  fink
+    |=  [way=*{%read %rite} cog=*term]
+    ^-  *port
+    ~~  (dunk 'type')
+    ~~  (show [%c 'feature'] ?:(=(%% cog) '%%' [%a cog]))
+    =+  hoq=(find way cog)
+    ?~(hoq ~|(%find-none !!) u.hoq)
   ::
   ++  fire
     ~.  %fire
@@ -3268,7 +3271,7 @@
     ?-    i.hep
         @
       =>  .(sut syp)
-      =+  hud=(find way i.hep)
+      =+  hud=(fink way i.hep)
       [(peg p.zar p.hud) q.hud]
     ::
         [~ *]
@@ -3305,7 +3308,7 @@
       [p.lof [axe q.lof]]
     ?-    i.peh
         @
-      =+  wer=(find %rite i.peh)
+      =+  wer=(fink %rite i.peh)
       ?.  ?=(& -.q.wer)
         ~|('tuck-gate' !!) 
       =+  giv=$(sut p.q.wer, axe (peg axe p.wer), peh t.peh)

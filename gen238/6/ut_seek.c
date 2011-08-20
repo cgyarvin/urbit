@@ -62,7 +62,7 @@
       }
 
       if ( u2_no == u2_dust(i_hep) ) {
-        u2_noun hud = j2_mcy(Pt6, ut, find)(wir_r, van, syp, way, i_hep);
+        u2_noun hud = j2_mcy(Pt6, ut, fink)(wir_r, van, syp, way, i_hep);
         u2_noun p_hud, q_hud;
 
         u2_as_cell(hud, &p_hud, &q_hud);

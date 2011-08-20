@@ -257,34 +257,7 @@
                         u2_noun way,                              //  retain
                         u2_noun cog)                              //  retain
   {
-    u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "type", sut);
-    u2_noun nuc = (u2_blip == cog) 
-      ? j2_mcy(Pt6, ut, shew)
-          (wir_r, van,
-                  u2_bc
-                    (wir_r, u2_bc(wir_r, 'c', u2_bn_string(wir_r, "feature")),
-                            9509))
-      :  j2_mcy(Pt6, ut, shep)
-          (wir_r, van, "feature", 'a', u2_rx(wir_r, cog));
-    u2_noun pro;
-
-    u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
-    u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, nuc));
-    {
-      u2_noun fin = _find_in(wir_r, van, sut, way, cog, u2_nul);
-
-      if ( u2_nul == fin ) {
-        return u2_bl_error(wir_r, "find-none");
-      }
-      else {
-        pro = u2_rx(wir_r, u2_t(fin));
-        u2_rl_lose(wir_r, fin);
-      }
-    }
-    u2_bl_drop(wir_r);
-    u2_bl_drop(wir_r);
-
-    return pro;
+    return _find_in(wir_r, van, sut, way, cog, u2_nul);
   }
 
 /* boilerplate

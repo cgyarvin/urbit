@@ -1169,6 +1169,7 @@ J238_6_OFILES_UT=\
        gen238/6/ut_cull.o \
        gen238/6/ut_emit.o \
        gen238/6/ut_find.o \
+       gen238/6/ut_fink.o \
        gen238/6/ut_fire.o \
        gen238/6/ut_firm.o \
        gen238/6/ut_fish.o \
