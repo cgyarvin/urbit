@@ -1199,13 +1199,140 @@ J238_OFILES=\
        $(J238_6_OFILES_UT) \
        gen238/watt.o
 
+J237_1_OFILES=\
+       gen237/1/add.o \
+       gen237/1/bex.o \
+       gen237/1/dec.o \
+       gen237/1/div.o \
+       gen237/1/gte.o \
+       gen237/1/gth.o \
+       gen237/1/lte.o \
+       gen237/1/lth.o \
+       gen237/1/mod.o \
+       gen237/1/mul.o \
+       gen237/1/sub.o
+
+J237_2_OFILES=\
+       gen237/2/bind.o \
+       gen237/2/clap.o \
+       gen237/2/drop.o \
+       gen237/2/flop.o \
+       gen237/2/lent.o \
+       gen237/2/levy.o \
+       gen237/2/lien.o \
+       gen237/2/need.o \
+       gen237/2/reel.o \
+       gen237/2/roll.o \
+       gen237/2/skim.o \
+       gen237/2/skip.o \
+       gen237/2/slag.o \
+       gen237/2/snag.o \
+       gen237/2/sort.o \
+       gen237/2/turn.o \
+       gen237/2/weld.o
+
+J237_3_OFILES=\
+       gen237/3/can.o \
+       gen237/3/cap.o \
+       gen237/3/cat.o \
+       gen237/3/con.o \
+       gen237/3/cut.o \
+       gen237/3/dor.o \
+       gen237/3/dis.o \
+       gen237/3/end.o \
+       gen237/3/gor.o \
+       gen237/3/hor.o \
+       gen237/3/lsh.o \
+       gen237/3/mas.o \
+       gen237/3/met.o \
+       gen237/3/mix.o \
+       gen237/3/mug.o \
+       gen237/3/peg.o \
+       gen237/3/rap.o \
+       gen237/3/rip.o \
+       gen237/3/rsh.o \
+       gen237/3/vor.o
+
+J237_4_OFILES=\
+       gen237/4/in.o \
+       gen237/4/by.o \
+       gen237/4/in_has.o \
+       gen237/4/in_gas.o \
+       gen237/4/in_put.o \
+       gen237/4/in_tap.o \
+       gen237/4/by_gas.o \
+       gen237/4/by_get.o \
+       gen237/4/by_has.o \
+       gen237/4/by_put.o 
+
+J237_5_OFILES=\
+       gen237/5/cue.o \
+       gen237/5/jam.o \
+       gen237/5/mat.o \
+       gen237/5/rub.o 
+
+J237_6_OFILES=\
+       gen237/6/ap.o \
+       gen237/6/cell.o \
+       gen237/6/comb.o \
+       gen237/6/cons.o \
+       gen237/6/core.o \
+       gen237/6/cube.o \
+       gen237/6/face.o \
+       gen237/6/fine.o \
+       gen237/6/flan.o \
+       gen237/6/flip.o \
+       gen237/6/flor.o \
+       gen237/6/fork.o \
+       gen237/6/hike.o \
+       gen237/6/look.o \
+       gen237/6/ream.o \
+       gen237/6/ut.o
+
+J237_6_OFILES_UT=\
+       gen237/6/ut_bake.o \
+       gen237/6/ut_burn.o \
+       gen237/6/ut_bust.o \
+       gen237/6/ut_cull.o \
+       gen237/6/ut_emit.o \
+       gen237/6/ut_find.o \
+       gen237/6/ut_fink.o \
+       gen237/6/ut_fire.o \
+       gen237/6/ut_firm.o \
+       gen237/6/ut_fish.o \
+       gen237/6/ut_fret.o \
+       gen237/6/ut_fuse.o \
+       gen237/6/ut_gain.o \
+       gen237/6/ut_heal.o \
+       gen237/6/ut_mint.o \
+       gen237/6/ut_orth.o \
+       gen237/6/ut_nest.o \
+       gen237/6/ut_park.o \
+       gen237/6/ut_peek.o \
+       gen237/6/ut_play.o \
+       gen237/6/ut_repo.o \
+       gen237/6/ut_rest.o \
+       gen237/6/ut_seek.o \
+       gen237/6/ut_snap.o \
+       gen237/6/ut_tuck.o
+
+J237_OFILES=\
+       $(J237_1_OFILES) \
+       $(J237_2_OFILES) \
+       $(J237_3_OFILES) \
+       $(J237_4_OFILES) \
+       $(J237_5_OFILES) \
+       $(J237_6_OFILES) \
+       $(J237_6_OFILES_UT) \
+       gen237/watt.o
+
 EYRE_OFILES=\
        c/eyre.o \
        $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
-       $(J239_OFILES) \
-       $(J238_OFILES)
+       $(J238_OFILES) \
+       $(J237_OFILES)
 
 all: $(BIN)/eyre
 
