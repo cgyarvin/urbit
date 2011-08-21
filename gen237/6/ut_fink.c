@@ -31,7 +31,7 @@
       u2_noun fin = j2_mcy(Pt6, ut, find)(wir_r, van, sut, way, cog);
 
       if ( u2_nul == fin ) {
-        return u2_bl_error(wir_r, "fink-none");
+        return u2_bl_error(wir_r, "find-none");
       }
       else {
         pro = u2_rx(wir_r, u2_t(fin));

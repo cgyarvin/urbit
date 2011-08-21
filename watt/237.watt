@@ -683,8 +683,29 @@
   ::
   ::  Tier 4 cones
   ::
-  ++  set   |*(a=mud (tree a))
-  ++  map   |*([a=mud b=mud] (tree ~[p=(a) q=(b)]))
+  ++  apt
+    |=  a=*(tree)
+    ?~  a 
+      & 
+    ?&  ?~(l.a & ?&((vor n.a n.l.a) (hor n.l.a n.a)))
+        ?~(r.a & ?&((vor n.a n.r.a) (hor n.a n.r.a)))
+    ==
+  ::
+  ++  ept
+    |=  a=*(tree ~[p=* q=*])
+    ?~  a 
+      & 
+    ?&  ?~(l.a & ?&((vor p.n.a p.n.l.a) (hor p.n.l.a p.n.a)))
+        ?~(r.a & ?&((vor p.n.a p.n.r.a) (hor p.n.a p.n.r.a)))
+    ==
+  ::
+  ++  set
+    |*  a=mud
+    $=(~ ^<(apt [n=(a) l=((set a)) r=((set a))]))
+  ::
+  ++  map   
+    |*  [a=mud b=mud]
+    $=(~ ^<(ept [n=[p=(a) q=(b)] l=((map a b)) r=((map a b))]))
   --
 =>
   ::::
@@ -717,7 +738,7 @@
     ::
     +-  gas
       ~.  %gas
-      |*  b=*(list)
+      |=  b=`*(list %{?>(?=(^ a) n.a)})`~
       |-  ^-  a
       ?~  b
         a
@@ -740,20 +761,20 @@
       |*  b=*
       |-  ^-  a
       ?~  a
-        [b ~ ~]
+        ^<(apt [b ~ ~])
       ?:  =(b n.a)
         a
       ?:  (hor b n.a)
         =+  c=$(a l.a)
         ?>  ?=(^ c)
         ?:  (vor n.a n.c)
-          [n.a c r.a]
-        [n.c l.c [n.a r.c r.a]]
+          ^<(apt [n.a c r.a])
+        ^<(apt [n.c l.c ^<(apt [n.a r.c r.a])])
       =+  c=$(a r.a)
       ?>  ?=(^ c)
       ?:  (vor n.a n.c)
-        [n.a l.a c] 
-      [n.c [n.a l.a l.c] r.c]
+        ^<(apt [n.a l.a c])
+      ^<(apt [n.c ^<(apt [n.a l.a l.c]) r.c])
     ::
     +-  tap
       ~.  %tap
@@ -815,22 +836,22 @@
       |*  [b=* c=*]
       |-  ^-  a
       ?~  a
-        [[b c] ~ ~]
+        ^<(ept [[b c] ~ ~])
       ?:  =(b p.n.a)
         ?:  =(c q.n.a)
           a
-        [[b c] l.a r.a]
+        ^<(ept [[b c] l.a r.a])
       ?:  (gor b p.n.a)
         =+  d=$(a l.a)
         ?>  ?=(^ d)
         ?:  (vor n.a n.d)
-          [n.a d r.a]
-        [n.d l.d [n.a r.d r.a]]
+          ^<(ept [n.a d r.a])
+        ^<(ept [n.d l.d ^<(ept [n.a r.d r.a])])
       =+  d=$(a r.a)
       ?>  ?=(^ d)
       ?:  (vor n.a n.d)
-        [n.a l.a d] 
-      [n.d [n.a l.a l.d] r.d]
+        ^<(ept [n.a l.a d] )
+      ^<(ept [n.d ^<(ept [n.a l.a l.d]) r.d])
     ::
     +-  tap
       ~.  %tap
@@ -1849,13 +1870,13 @@
     ?-    gen
         @          [%mtlc [gen ~] ~]
         [~ *]      [%mtlc [gen ~] ~]
-        [%brdg *]  [%pmdg p.gen [[%% [& & q.gen]] ~ ~]]
-        [%brdt *]  [%pmdt [[%% [& & p.gen]] ~ ~]]
-        [%brlc *]  [%pmlc p.gen [[%% [& & q.gen]] ~ ~]]
-        [%brmt *]  [%pmmt [[%% [& & p.gen]] ~ ~]]
-        [%brps *]  [%pmps p.gen [[%% [& & q.gen]] ~ ~]]
+        [%brdg *]  [%pmdg p.gen (~(put by *(map term foot)) %% [& & q.gen])]
+        [%brdt *]  [%pmdt (~(put by *(map term foot)) %% [& & p.gen])]
+        [%brlc *]  [%pmlc p.gen (~(put by *(map term foot)) %% [& & q.gen])]
+        [%brmt *]  [%pmmt (~(put by *(map term foot)) %% [& & p.gen])]
+        [%brps *]  [%pmps p.gen (~(put by *(map term foot)) %% [& & q.gen])]
         [%brsp *]  [%lcld [%brdt p.gen] %%]
-        [%brtr *]  [%pmlc p.gen [[%% [& | q.gen]] ~ ~]]
+        [%brtr *]  [%pmlc p.gen (~(put by *(map term foot)) %% [& | q.gen])]
         [%brzp *]  [%lcld [%zpmt ~] [%brlc p.gen q.gen]]
         [%csbr *]
       |- 

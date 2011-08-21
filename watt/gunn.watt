@@ -1,4 +1,3 @@
-!:
 ~%    %gunn
     -<-<
   ==
@@ -271,7 +270,8 @@
       [%body *]
     =+  pay=[p=[%cell p.hyn p.gul] q=[q.hyn q.gul]]
     =+  ^=  typ  ^-  *type
-        [%core p.pay [%gold p.pay [~ [[%% & & p.q.tul] ~ ~]]]]
+        =+  dab=(~(put by *(map term foot)) %% [& & p.q.tul])
+        [%core p.pay [%gold p.pay [~ dab]]]
     =+  cor=[q.pay q:(~(mint ut typ) %noun p.q.tul)]
     =+  gun=(~(mint ut typ) %noun %%)
     ~|  %ride-nock

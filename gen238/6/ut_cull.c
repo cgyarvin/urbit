@@ -17,7 +17,7 @@
                         u2_atom axe,
                         u2_noun ref)                              //  retain
   {
-    u2_noun ret, p_sut, q_sut;
+    u2_noun ret, p_sut, q_sut, r_sut;
 
     if ( _1 == axe ) {
       return j2_mcy(Pt6, ut, fuse)(wir_r, van, sut, ref);
@@ -79,31 +79,30 @@
           }
           break;
         }
-        {
-          u2_noun por = j2_mcy(Pt6, ut, repo)(wir_r, van, sut);
-          u2_noun yot = j2_mcx(Pt6, ut, cull)(wir_r, van, por, axe, ref);
-          
-          if ( u2_yes == u2_sing(por, yot) ) {
-            ret = u2_rx(wir_r, sut); 
-          } else {
-            ret = u2_rx(wir_r, yot);
-          }
-          u2_rl_lose(wir_r, por);
-          u2_rl_lose(wir_r, yot);
-        }
         case c3__face: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
         {
-          u2_noun por = j2_mcy(Pt6, ut, repo)(wir_r, van, sut);
-          u2_noun hic = j2_mcx(Pt6, ut, cull)(wir_r, van, por, axe, ref);
-          u2_noun yot = j2_mby(Pt6, face)(wir_r, p_sut, hic);
+          u2_noun hic = j2_mcx(Pt6, ut, cull)(wir_r, van, q_sut, axe, ref);
 
-          if ( u2_yes == u2_sing(por, yot) ) {
+          if ( u2_yes == u2_sing(hic, q_sut) ) {
             ret = u2_rx(wir_r, sut); 
           } else {
-            ret = u2_rx(wir_r, yot);
+            ret = j2_mby(Pt6, face)(wir_r, p_sut, hic);
           }
-          u2_rl_lose(wir_r, por);
-          u2_rl_lose(wir_r, yot);
+          u2_rl_lose(wir_r, hic);
+
+          break;
+        }
+        case c3__fine: u2_bi_trel(wir_r, u2_t(sut), &p_sut, &q_sut, &r_sut);
+        {
+          u2_noun hic = j2_mcx(Pt6, ut, cull)(wir_r, van, r_sut, axe, ref);
+
+          if ( u2_yes == u2_sing(hic, r_sut) ) {
+            ret = u2_rx(wir_r, sut); 
+          } else {
+            ret = j2_mby(Pt6, fine)(wir_r, p_sut, q_sut, hic);
+          }
+          u2_rl_lose(wir_r, hic);
+
           break;
         }
         case c3__fork: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
