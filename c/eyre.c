@@ -1293,6 +1293,60 @@ _eyre_test2(u2_wire wir_r,
     return ret;
   }
 
+  /* _gunn_show_tank(): display tank at tab.
+  */
+  static void
+  _gunn_show_tank(u2_wire wir_r,
+                  u2_noun cor,                                    //  retain
+                  c3_l    tab_l,
+                  u2_noun tac)                                    //  submit
+  {
+    c3_l    col_l = _eyre_columns();
+    u2_noun wol = _eyre_hook_cell
+      (wir_r, cor, "wash", u2_bc(wir_r, tab_l, col_l), tac);
+
+    _eyre_print_wall(wir_r, wol);
+    u2_rz(wir_r, wol);
+  }
+
+  /* _gunn_show(): display result with optional label.
+  */
+  static void
+  _gunn_show(u2_wire wir_r,
+             u2_noun cor,                                         //  retain
+             u2_noun lab,                                         //  retain
+             u2_noun vax)                                         //  submit
+  {
+    c3_l    tab_l = 0;
+    u2_noun tac;
+
+    if ( u2_blip != lab ) {
+      c3_w  len_w = u2_met(3, lab);
+      c3_y* txt_y = alloca(3+len_w);
+
+      u2_bytes(0, len_w, txt_y, lab);
+      txt_y[len_w] = ':';
+      txt_y[1+len_w] = '\n';
+      txt_y[2+len_w] = 0;
+
+      puts((char *)txt_y);
+      tab_l += 2;
+    }
+#if 1
+    {
+      tac = _eyre_hook(wir_r, cor, "soul", u2_rx(wir_r, u2_xh(wir_r, vax)));
+      tac = _eyre_hook_cell(wir_r, cor, "whip", c3__type, tac);
+
+      _gunn_show_tank(wir_r, cor, tab_l + 2, tac);
+    }
+#endif
+    {
+      tac = _eyre_hook(wir_r, cor, "sell", vax);
+
+      _gunn_show_tank(wir_r, cor, tab_l, tac);
+    }
+  }
+
   /* _gunn_vent(): apply vent.  Produce new core.
   */
   static u2_noun                                                  //  produce
@@ -1304,18 +1358,7 @@ _eyre_test2(u2_wire wir_r,
     u2_noun p_vet, q_vet;
 
     if ( u2_no == u2_dust(vet) ) {
-      c3_l    col_l = _eyre_columns();
-      u2_noun sel, wol;
-
-      sel = _eyre_hook
-        (wir_r, cor, "sell", u2_bc(wir_r, u2_rx(wir_r, vet), 
-                                          u2_rx(wir_r, vax)));
-      wol = _eyre_hook
-        (wir_r, cor, "wash", u2_bc(wir_r, u2_bc(wir_r, 0, col_l), sel));
-
-      _eyre_print_wall(wir_r, wol);
-      u2_rz(wir_r, wol);
-
+      _gunn_show(wir_r, cor, vet, vax);
       return u2_rx(wir_r, cor);
     }
     else switch ( (p_vet = u2_xh(wir_r, vet)) ) {

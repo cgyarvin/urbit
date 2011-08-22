@@ -11,8 +11,10 @@
     %scan  scan
     %slam  slam
     %sell  sell
+    %soul  soul
     %slot  slot
     %wash  wash
+    %whip  whip
   ==
 =>  !% 
 =>  &.
@@ -285,14 +287,13 @@
   |=  cad=''  ~|  %scan  ^-  *deed
   (rash cad x-deed)
 ::
-++  sell
-  |=  [lab=*term vax=*vase]  ~|  %sell  ^-  *tank       ::  render a result
-  ::  =+  dis=~(donc ut p.vax)
-  =+  dat=(~(deal ut p.vax) q.vax)
-  ?:  =(%% lab)
-    ::  [%palm [['=' ~] [':' ~] ~ ~] dis dat ~]
-    dat
-  [%palm [['=' ~] [':' ~] ~ ~] [%leaf (mesc (rip 3 lab))] dat ~]
+++  sell                                                ::  render a value
+  |=  vax=*vase  ~|  %sell  ^-  *tank
+  (~(deal ut p.vax) q.vax)
+::                                                
+++  soul                                                ::  render a type
+  |=  typ=*type  ~|  %sell  ^-  *tank
+  ~(duck ut typ)
 ::
 ++  slam                                                ::  vase call
   |=  [gat=*vase sam=*vase]  ~|  %slam  ^-  *vase
@@ -310,4 +311,12 @@
 ++  wash                                                ::  print tank
   |=  [[tab=0 edg=80] tac=*tank]  ~|  %wash  ^-  *wall
   (~(win re tac) tab edg) 
+::
+++  whip                                                ::  label tank
+  |=  [lab=*term tac=*tank]  ~|  %whip  ^-  *tank
+  ?:  =(%% lab)
+    tac
+  :+  %palm
+    [['.' ~] ['+' ~] ~ ~]
+  [[%leaf (mesc (rip 3 lab))] tac ~]
 --

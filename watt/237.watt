@@ -2413,17 +2413,8 @@
       (end 2 4 (mug q.r.q.sut))
     [& ~(ram re (show [%m '#%d:%d'] p.u.voy q.u.voy ~))]
   ::
-  ++  donc
-    =+  tec=(dunk ~)
-    ?>(?=([%palm * ^ ^] tec) i.t.q.tec)
-  ::
-  ++  dunk
-    |=  paz=*term
+  ++  duck
     ^-  *tank
-    =-  :+  %palm
-          [['.' ~] ['-' ~] ~ ~]
-        [[%leaf (mesc (rip 3 paz))] duc ~]
-    ^=  duc
     =+  ^=  gil
         =+  den=[p=1* q=*(map type nat)]
         =+  vax=*(set type)
@@ -2521,10 +2512,13 @@
       :+  %palm
         [['.' ~] [':' ~] ~ ~]
       [[%leaf ~(ram re yow)] q.vir ~]
-    ::
-        *
-      !!
     ==
+  ::
+  ++  dunk
+    |=  paz=*term  ^-  *tank
+    :+  %palm
+      [['.' ~] ['-' ~] ~ ~]
+    [[%leaf (mesc (rip 3 paz))] duck ~]
   ::
   ++  emit
     ~.  %emit
