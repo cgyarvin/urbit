@@ -57,13 +57,14 @@ them easy to say, others not so much.  So we've renamed them:
     dax   #          mit  %         tec  `
     deg   :          ned  ]         tob  "
     den   [          nov  \         von  /
-    des   {          pam  &         wat  @
+    des   {          pam  &         wut  @
     dot   .          pes  +         zap  !
 
-You just have to memorize these names.  Sorry.
+Yo, ninja, you just have to memorize these names.  Sorry.
 
-ASCII's glyph supply is not the greatest, but we can make all
-the squiggles we need by forming digraphs, or _runes_.  
+But is this at least enough symbols?  Alas, nowhere near.
+ASCII's glyph supply is not the greatest, but we can make all the
+squiggles we need by forming digraphs, or _runes_.  
 
 To pronounce a rune, concatenate the glyph names, stressing the
 first syllable and softening the second vowel into a "schwa."

@@ -1269,7 +1269,8 @@ J237_5_OFILES=\
        gen237/5/cue.o \
        gen237/5/jam.o \
        gen237/5/mat.o \
-       gen237/5/rub.o 
+       gen237/5/rub.o \
+       gen237/5/trip.o
 
 J237_6_OFILES=\
        gen237/6/ap.o \

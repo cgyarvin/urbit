@@ -1,3 +1,4 @@
+!:
 ~%    %gunn
     -<-<
   ==
@@ -81,7 +82,6 @@
       $~  p=((list lard))                ::  libraries
           q=(func)                       ::  function
       ==
-    ++  vase  ~[p=*type q=*]             ::  type-value pair
     --
 =>  &.
     ++  x-path  ~+
@@ -295,15 +295,6 @@
   |=  typ=*type  ~|  %sell  ^-  *tank
   ~(duck ut typ)
 ::
-++  slam                                                ::  vase call
-  |=  [gat=*vase sam=*vase]  ~|  %slam  ^-  *vase
-  =+  :-  ^=  typ  ^-  *type
-          [%cell p.gat p.sam]
-      ^=  gen  ^-  *gene
-      [%mtdg [~ 2] [~ 3]]
-  =+  gun=(~(mint ut typ) %noun gen)
-  [p.gun .*([q.gat q.sam] q.gun)]
-::
 ++  slot                                                ::  vase division
   |=  [axe=*axis vax=*vase]  ~|  %slot  ^-  *vase
   (pour(env vax) [~ axe])
@@ -318,5 +309,5 @@
     tac
   :+  %palm
     [['.' ~] ['+' ~] ~ ~]
-  [[%leaf (mesc (rip 3 lab))] tac ~]
+  [[%leaf (mesc (trip lab))] tac ~]
 --

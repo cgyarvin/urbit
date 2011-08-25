@@ -1,3 +1,4 @@
+!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -864,7 +865,7 @@
   ::
   ::  Tier 5 cones
   ::
-  ++  char  nat
+  ++  char  ~[''*]
   ++  clip  ~[p=(hair) q=(tape)]
   ++  edge  ~[p=(hair) q=((unit ~[p=* q=(clip)]))]
   ++  hair  ~[p=1* q=1*]
@@ -1226,12 +1227,12 @@
   ++  viz  (bass 64 (most gon vit))
   ++  von  (just '/')
   ++  vul  (cold ~ ;~(plug deg deg (star (shim 32 126)) (just 10)))
-  ++  wat  (just '@')
+  ++  wut  (just '@')
   ++  zap  (just '!')
   ::
   ::      Tier 5a/5, parsing: external interface
   ::
-  ++  rash  |*([naf=@ sab=rule] (rasp (rip 3 naf) sab))
+  ++  rash  |*([naf=@ sab=rule] (rasp (trip naf) sab))
   ++  rasp  |*  [los=*tape sab=rule]
             =+  vex=((full sab) [p=*hair q=los])
             ?~  q.vex
@@ -1259,7 +1260,6 @@
       c
     [b $(a (dec a))]
   ::
-  ::
   ++  trim
     |=  [a=@ b=*tape]
     ^-  [p=*tape q=*tape]
@@ -1269,6 +1269,13 @@
       [~ b]
     =+  c=$(a (dec a), b +.b)
     [[-.b p.c] q.c]
+  ::
+  ++  trip
+    ~.  %trip
+    |=  [a=@]  ^-  *tape
+    ?:  =(0 (met 3 a))
+      ~
+    [^:(''* (end 3 1 a)) $(a (rsh 3 1 a))]
   ::
   ::    Tier 5b/1, prettyprinting: processors
   ::
@@ -1386,9 +1393,9 @@
     ::
     ++  rf    `*tape`[?-(a & '&', | '|') ~]
     ++  rn    `*tape`[?>(=(0 a) '~') ~]
-    ++  rt    `*tape`[39 (weld (mesc (rip 3 a)) `*tape`[39 ~])]
+    ++  rt    `*tape`[39 (weld (mesc (trip a)) `*tape`[39 ~])]
     ++  rta   rt
-    ++  rtam  `*tape`['%' (rip 3 a)]
+    ++  rtam  `*tape`['%' (trip a)]
     ++  rub   (rum 2 ['0' 'b' ~] |=(b=@ (add '0' b)))
     ++  rud   (rum 10 ~ |=(b=@ (add '0' b)))
     ++  rum
@@ -1413,12 +1420,12 @@
       ?:  =(0 b)
         ['|' ~]
       ?:  (lte b 1)
-        (rip 3 (fap a))
+        (trip (fap a))
       |-  ^-  *tape
       ?:  =(2 b)
         =+  c=(rsh 3 1 a)
         =+  d=(end 3 1 a)
-        (weld (rip 3 (fap c)) (rip 3 (fyp (mix c d))))
+        (weld (trip (fap c)) (trip (fyp (mix c d))))
       =+  c=(rsh 3 2 a)
       =+  d=(end 3 2 a)
       (weld $$(a c, b (met 3 c)) `*tape`['-' $(a (mix c d), b 2)])
@@ -1441,17 +1448,17 @@
     |=  vem=*
     &-  ^-  *tank
         ?:  ?=(@ vem)
-          [%leaf (mesc (rip 3 vem))]
+          [%leaf (mesc (trip vem))]
         ?-    vem
             [s=~ c=*]         
           [%leaf 39 (weld (mesc (tape +.vem)) `*tape`[39 ~])]
         ::
-            [s=%a c=@]        [%leaf (mesc (rip 3 c.vem))]
+            [s=%a c=@]        [%leaf (mesc (trip c.vem))]
             [s=%b c=*]        (shop c.vem |=(a=@ ~(rub at a)))
             [s=[%c p=@] c=*]
           :+  %palm
             [['.' ~] ['-' ~] ~ ~]
-          [[%leaf (mesc (rip 3 p.s.vem))] $(vem c.vem) ~]
+          [[%leaf (mesc (trip p.s.vem))] $(vem c.vem) ~]
         ::
             [s=%d c=*]        (shop c.vem |=(a=@ ~(rud at a)))
             [s=%k c=*]        (tank c.vem)
@@ -1474,9 +1481,9 @@
         ::
             [s=[%r p=@ q=@ r=@] c=*]
           :+  %rose
-            :*  p=(mesc (rip 3 p.s.vem))
-                q=(mesc (rip 3 q.s.vem))
-                r=(mesc (rip 3 r.s.vem))
+            :*  p=(mesc (trip p.s.vem))
+                q=(mesc (trip q.s.vem))
+                r=(mesc (trip r.s.vem))
             ==
           |-  ^-  *(list tank)
           ?~  c.vem
@@ -1719,6 +1726,7 @@
       [%fork p=(type) q=(type)]
       [%hold p=((list ~[p=(type) q=(gene)]))]
     ==
+  ++  vase  ~[p=(type) q=*]             ::  type-value pair
   --
 ::::
 ::::  Tier 6, Watt in Watt
@@ -2206,6 +2214,15 @@
   ^-  [p=*type q=*]
   ~+
   !;(*type ..seed)
+::
+++  slam
+  |=  [gat=*vase sam=*vase]  ~|  %slam  ^-  *vase
+  =+  :-  ^=  typ  ^-  *type
+          [%cell p.gat p.sam]
+      ^=  gen  ^-  *gene
+      [%mtdg [~ 2] [~ 3]]
+  =+  gun=(~(mint ut typ) %noun gen)
+  [p.gun ~|(%slam-nock .*([q.gat q.sam] q.gun))]
 ::  
 ++  ut
   ~%    %ut
@@ -2338,6 +2355,14 @@
           ==
         ::
             [%cell *]
+          ?:  (nest(sut -:!;(*type *tank)) sut)
+            [%palm [~ ~ ['{' ~] ['}' ~]] (tank lum) ~]
+          ?:  (nest(sut -:!;(*type *tape)) sut)
+            stab
+          ?:  (nest(sut -:!;(*type *wall)) sut)
+            :+  %palm 
+              [['.' ~] ['%' ~] ['<' ~] ['>' ~]]
+            |-(?~(lum ~ [stab(lum -.lum) $(lum +.lum)]))
           :+  %rose 
             [[' ' ~] ['[' ~] [']' ~]]
           |-  ^-  *(list tank)
@@ -2357,12 +2382,11 @@
         ::
             [%cube *]  $(sut repo)
             [%face *]
-          [%palm [['.' ~] ['=' ~] ~ ~] [%leaf (rip 3 p.sut)] $(sut q.sut) ~]
+          [%palm [['.' ~] ['=' ~] ~ ~] [%leaf (trip p.sut)] $(sut q.sut) ~]
         ::
             [%fine *]  $(sut repo)
             [%fork *]  ?.(lose(sut p.sut) $(sut p.sut) $(sut q.sut))
             [%hold *]  $(sut repo)
-        ::
             %noun      $(sut ?:(?=(@ lum) [%atom %%] [%cell %noun %noun]))
             %void      !!
         ==
@@ -2378,6 +2402,9 @@
         %void      &
         *          $(sut repo)
       ==
+    ::
+    ++  stab
+      ^-(*tank [%leaf '"' (weld (mesc (tape lum)) `*tape`['"' ~])])
     --
   ::
   ++  dent
@@ -2414,7 +2441,7 @@
     [& ~(ram re (show [%m '#%d:%d'] p.u.voy q.u.voy ~))]
   ::
   ++  duck
-    ^-  *tank
+    ~|  %duck  ^-  *tank
     =+  ^=  gil
         =+  den=[p=1* q=*(map type nat)]
         =+  vax=*(set type)
@@ -2440,7 +2467,7 @@
     =<  q
     |-  ^-  [p=*(set type) q=*tank]
     ?-    sut
-        [%atom *]  [dex [%leaf ['@' (rip 3 p.sut)]]]
+        [%atom *]  [dex [%leaf ['@' (trip p.sut)]]]
         %noun      [dex (show '*')]
         %void      [dex (show '#')]
         [%cell *] 
@@ -2476,7 +2503,7 @@
       :-  p.vir
       :+  %palm
         [['.' ~] ['=' ~] ~ ~]
-      [[%leaf (rip 3 p.sut)] q.vir ~]
+      [[%leaf (trip p.sut)] q.vir ~]
     ::
         [%fine *]
       =+  vir=$(sut r.sut)
@@ -2518,7 +2545,7 @@
     |=  paz=*term  ^-  *tank
     :+  %palm
       [['.' ~] ['-' ~] ~ ~]
-    [[%leaf (mesc (rip 3 paz))] duck ~]
+    [[%leaf (mesc (trip paz))] duck ~]
   ::
   ++  emit
     ~.  %emit
@@ -3090,7 +3117,15 @@
           %void       sint
           %noun       &
       ::
-          [%atom *]   ?-(ref [%atom *] &, * sint)
+          [%atom *]   
+        ?.  ?=([%atom *] ref)
+          sint
+        |-  ?|  =(%% p.sut) 
+                ?&  =((cut 3 [0 1] p.sut) (cut 3 [0 1] p.ref))
+                    $(p.sut (rsh 3 1 p.sut), p.ref (rsh 3 1 p.ref))
+                ==
+            ==
+      ::
           [%cell *]
         ?.  ?=([%cell *] ref)
           sint
@@ -3411,7 +3446,7 @@
         (cold %flag cas)
         (cold %noun tar)
         (cold %cell ket)
-        (cold %atom wat)
+        (cold %atom wut)
         (cold %null sig)
       ==
     ==
