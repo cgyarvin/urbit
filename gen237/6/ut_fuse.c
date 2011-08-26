@@ -24,6 +24,21 @@
     return ret;
   }
 
+  static u2_flag
+  _fuse_fitz(u2_wire wir_r,
+             u2_atom p_sut,
+             u2_atom p_ref)
+  {
+    c3_w i_w, met_w = u2_met(3, p_sut);
+
+    for ( i_w = 0; i_w < met_w; i_w++ ) {
+      if ( u2_byte(i_w, p_sut) != u2_byte(i_w, p_ref) ) {
+        return u2_no;
+      }
+    }
+    return u2_yes;
+  }
+
   static u2_noun
   _fuse_in(u2_wire wir_r,
            u2_noun van,
@@ -55,7 +70,9 @@
       {
         if ( u2_yes == u2_dust(ref) ) {
           if ( c3__atom == u2_h(ref) ) {
-            return u2_rx(wir_r, ref);
+            if ( u2_yes == _fuse_fitz(wir_r, u2_t(ref), u2_t(sut)) ) {
+              return u2_rx(wir_r, sut);
+            } else return u2_rx(wir_r, ref);
           }
           else if ( c3__cell == u2_h(ref) ) {
             return c3__void;

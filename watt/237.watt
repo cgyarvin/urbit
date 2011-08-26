@@ -2112,6 +2112,14 @@
     [1 p.vur p.sed]
   [vur sed] 
 ::
+++  fitz
+  |=  [yaz=*term wix=*term]
+  ?|  =(%% yaz) 
+      ?&  =((end 3 1 yaz) (end 3 1 wix))
+          $(yaz (rsh 3 1 yaz), wix (rsh 3 1 wix))
+      ==
+  ==
+::
 ++  flan
   ~.  %flan
   |=  [bos=*form nif=*form]
@@ -2758,7 +2766,7 @@
     ?-    sut
         [%atom *] 
       ?-    ref
-          [%atom *]   ref
+          [%atom *]   ?:((fitz p.ref p.sut) sut ref)
           [%cell *]   %void
           *           $(sut ref, ref sut)
       ==
@@ -3120,11 +3128,7 @@
           [%atom *]   
         ?.  ?=([%atom *] ref)
           sint
-        |-  ?|  =(%% p.sut) 
-                ?&  =((cut 3 [0 1] p.sut) (cut 3 [0 1] p.ref))
-                    $(p.sut (rsh 3 1 p.sut), p.ref (rsh 3 1 p.ref))
-                ==
-            ==
+        (fitz p.sut p.ref)
       ::
           [%cell *]
         ?.  ?=([%cell *] ref)
