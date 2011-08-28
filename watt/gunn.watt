@@ -165,9 +165,9 @@
           (stag %bind ;~(pfix lyc sym))
           ::  (stag %comd ;~(pfix bar qut))
           (stag %many (ifix [den ned] (most ace x-vent)))
-          (cold ~ sig)
+          (cold %% sig)
         ==
-        (easy ~)
+        (easy %%)
       ==
     --
 =+  env=seed

@@ -1,19 +1,21 @@
+!:
 ?>  ?=(@ .)
 %.  .
 =<  make
-=>  237
+=>  236
 =>  
   ::::
   ::::  Tier 0, kernel stub
   ::::
-  ~%    %k.237
+  ~%    %k.236
       ~
     ~
   &.
-  ++  stub  237
+  ++  stub  236
   ++  bit   {& |}
   ++  dog   |=(a=* a)
-  ++  num   |=(a=* ^:(@ a))
+  ++  num   |=(a=* ^:(0* a))
+  ++  rat   |=(a=* ^:(@ a))
   --
 =>
   ::::
@@ -34,10 +36,10 @@
   ++  dec
     ~.  %dec
     |=  a=@
-    ^-  @
     ~|  %dec
+    ^-  @
     ?<  =(0 a)
-    =+  b=0*
+    =+  b=@
     |-
     ?:  =(a +(b))
       b
@@ -49,7 +51,7 @@
     ^-  @
     ~|  %div
     ?<  =(0 b)
-    =+  c=0*
+    =+  c=@
     |-
     ?:  (lth a b)
       c
@@ -112,7 +114,7 @@
     ~.  %mul
     |=  [a=@ b=@]
     ^-  @
-    =+  c=0*
+    =+  c=@
     |-
     ?:  =(0 a)
       c
@@ -419,7 +421,7 @@
   ::
   ++  rap
     ~.  %rap
-    |=  [a=*bloq b=*(list num)]
+    |=  [a=*bloq b=*(list rat)]
     ^-  @
     ?~  b
       0
@@ -884,7 +886,7 @@
     ::  [%farm p=[p=(tape) q=(tape) r=(tape)] q=((list (list tank)))]
     ==
   ++  tape  (list char)
-  ++  term  num
+  ++  term  ~[%%*]
   ++  wall  (list tape)
   --
 =>
@@ -992,7 +994,7 @@
     [zac [~ i.q.tub [zac t.q.tub]]]
   ::
   ++  shim
-    |=  zep=[p=*char q=*char]
+    |=  zep=[p=@ q=@]
     |=  tub=*clip
     ^-  *(like char)
     ?~  q.tub
@@ -1076,7 +1078,7 @@
   ++  bass
     |*  [rum=@ tyd=rule]
     %+  cook
-      |=  waq=*tape
+      |=  waq=*(list rat)
       %+  roll
         waq
       =+([p=@ q=@] |.((add p (mul rum q))))
@@ -1085,7 +1087,7 @@
   ++  boss
     |*  [rum=@ tyd=rule]
     %+  cook
-      |=  waq=*tape
+      |=  waq=*(list rat)
       %+  reel
         waq
       =+([p=@ q=@] |.((add p (mul rum q))))
@@ -1167,7 +1169,7 @@
     ;~(plug low low low)
   ::
   ++  gal  ;~(pose (cold 2 del) (cold 3 led))
-  ++  gap  (cold ~ (plus ;~(pose vul (mask [10 32 ~]))))
+  ++  gap  (cold ~ (plus ;~(pose vul (mask [^-(@ 10) ' ' ~]))))
   ++  gay  ;~(pose gap (easy ~))
   ++  gon  ;~(pose ;~(plug nov gay von) (easy ~))
   ++  hex  (bass 16 (most gon hit))
@@ -1196,7 +1198,7 @@
   ++  sig  (just '~')
   ++  sym 
     %+  cook
-      |=(a=*tape (rap 3 a))
+      |=(a=*tape (rap 3 ^-(*(list rat) a)))
     ;~(plug low (star ;~(pose nud low sep)))
   ::
   ++  tam  (just ';')
@@ -1225,7 +1227,7 @@
     ==
   ++  viz  (bass 64 (most gon vit))
   ++  von  (just '/')
-  ++  vul  (cold ~ ;~(plug deg deg (star (shim 32 126)) (just 10)))
+  ++  vul  (cold ~ ;~(plug deg deg (star (shim 32 126)) (just ^-(@ 10))))
   ++  wut  (just '@')
   ++  zap  (just '!')
   ::
@@ -1246,10 +1248,10 @@
     ^-  *tape
     ?~  vib
       ~
-    ?:  =(92 i.vib)
-      [92 92 $(vib t.vib)]
+    ?:  =('\\' i.vib)
+      ['\\' '\\' $(vib t.vib)]
     ?:  ?|((gth i.vib 126) (lth i.vib 32) =(39 i.vib))
-      [92 (weld ~(rux at i.vib) (runt [1 47] $(vib t.vib)))]
+      ['\\' (weld ~(rux at i.vib) (runt [1 47] $(vib t.vib)))]
     [i.vib $(vib t.vib)]
   ::
   ++  runt
@@ -1340,19 +1342,19 @@
         |=  hom=*tape
         ^-  *wall
         ?:  (lte (lent hom) (sub edg tab))
-          [(runt [tab 32] hom) lug]
+          [(runt [tab ' '] hom) lug]
         =>  .(tab (add tab 2), edg (sub edg 2))
         =+  mut=(trim (sub edg tab) hom)
-        :-  (runt [(sub tab 2) 32] [92 47 (weld p.mut `hom`[92 47 ~])])
+        :-  (runt [(sub tab 2) ' '] ['\\' '/' (weld p.mut `hom`['\\' '/' ~])])
         =>  .(hom q.mut)
         |-
         ?~  hom
           :-  %+  runt 
-                [(sub tab 2) 32] 
-              [92 47 (runt [(sub edg tab) 32] [92 47 ~])]
+                [(sub tab 2) ' '] 
+              ['\\' '/' (runt [(sub edg tab) ' '] ['\\' '/' ~])]
           lug
         =>  .(mut (trim (sub edg tab) hom))
-        [(runt [tab 32] p.mut) $(hom q.mut)]
+        [(runt [tab ' '] p.mut) $(hom q.mut)]
       ::
       ++  wig
         |=  hom=*tape
@@ -1366,7 +1368,7 @@
                   |
                 ?|(=(0 wug) ?&(=(' ' i.mir) $(mir t.mir, wug (dec wug))))
           (rig hom)
-        [(runt [tab 32] (weld hom `*tape`[' ' (slag wug i.lug)])) t.lug]
+        [(runt [tab ' '] (weld hom `*tape`[' ' (slag wug i.lug)])) t.lug]
       --
     --
   ::
@@ -1392,7 +1394,7 @@
     ::
     ++  rf    `*tape`[?-(a & '&', | '|') ~]
     ++  rn    `*tape`[?>(=(0 a) '~') ~]
-    ++  rt    `*tape`[39 (weld (mesc (trip a)) `*tape`[39 ~])]
+    ++  rt    `*tape`['\'' (weld (mesc (trip a)) `*tape`['\'' ~])]
     ++  rta   rt
     ++  rtam  `*tape`['%' (trip a)]
     ++  rub   (rum 2 ['0' 'b' ~] |=(b=@ (add '0' b)))
@@ -1450,7 +1452,7 @@
           [%leaf (mesc (trip vem))]
         ?-    vem
             [s=~ c=*]         
-          [%leaf 39 (weld (mesc (tape +.vem)) `*tape`[39 ~])]
+          [%leaf '\'' (weld (mesc (tape +.vem)) `*tape`['\'' ~])]
         ::
             [s=%a c=@]        [%leaf (mesc (trip c.vem))]
             [s=%b c=*]        (shop c.vem |=(a=@ ~(rub at a)))
@@ -1505,7 +1507,7 @@
         (weld (mesc [c ~]) $(i +(i)))
       =+  d=(cut 3 [+(i) 1] fom)
       ?.  .?(gar)
-        [92 35 $(i (add 2 i))]
+        ['\\' '#' $(i (add 2 i))]
       (weld ~(ram re (show d -.gar)) $(i (add 2 i), gar +.gar))
     ::
     ++  shop
