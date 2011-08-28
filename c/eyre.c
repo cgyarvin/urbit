@@ -1448,7 +1448,7 @@ _eyre_line(u2_wire wir_r,
 #ifdef GUNN
     u2_bx_boot(wir_r);
     _eyre_gunn(wir_r, cor, txt);
-    u2_bx_show(wir_r);
+    // u2_bx_show(wir_r);
     u2_bl_done(wir_r, kit_r);
 #else
     u2_noun gat = u2_bn_hook(wir_r, cor, "line");
@@ -1456,7 +1456,7 @@ _eyre_line(u2_wire wir_r,
 
     u2_bx_boot(wir_r);
     pro = _eyre_mong(wir_r, u2_yes, gat, u2_rx(wir_r, txt));
-    u2_bx_show(wir_r);
+    // u2_bx_show(wir_r);
 
 #if 1
     _eyre_gnaw(wir_r, ken, 2, u2_h(pro));

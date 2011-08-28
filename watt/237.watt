@@ -1,4 +1,3 @@
-!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -12,9 +11,9 @@
     ~
   &.
   ++  stub  237
-  ++  nat   |=(a=* ^:(@ a))
-  ++  mud   |=(a=* a)
-  ++  bit   |=(a=* ?-(a & &, | |))
+  ++  bit   {& |}
+  ++  dog   |=(a=* a)
+  ++  num   |=(a=* ^:(@ a))
   --
 =>
   ::::
@@ -130,15 +129,15 @@
   ::  Tier 2 cones
   ::
   ++  list
-    |*  a=mud
+    |*  a=dog
     $=(~ [i=(a) t=((list a))])
   ::
   ++  tree
-    |*  a=mud
+    |*  a=dog
     $=(~ [n=(a) l=((tree a)) r=((tree a))])
   ::
   ++  unit
-    |*  a=mud
+    |*  a=dog
     $=(~ [~ u=(a)])
   --
 =>
@@ -153,7 +152,7 @@
   ::
   ++  bind
     ~.  %bind 
-    |*  [a=*(unit) b=mud]
+    |*  [a=*(unit) b=dog]
     ?~  a
       ~
     [~ u=(b u.a)]
@@ -300,7 +299,7 @@
   ::
   ++  turn
     ~.  %turn
-    |*  [a=*(list) b=mud]
+    |*  [a=*(list) b=dog]
     |-
     ?~  a
       ~
@@ -317,12 +316,12 @@
   ::
   ++  foo
     |=  a=*
-    (sort ((list nat) a) gth)
+    (sort ((list num) a) gth)
   ::
   ::  Tier 3 cones
   ::
-  ++  axis  nat
-  ++  bloq  nat
+  ++  axis  num
+  ++  bloq  num
   --
 =>
   ::::
@@ -420,7 +419,7 @@
   ::
   ++  rap
     ~.  %rap
-    |=  [a=*bloq b=*(list nat)]
+    |=  [a=*bloq b=*(list num)]
     ^-  @
     ?~  b
       0
@@ -429,7 +428,7 @@
   ++  rip
     ~.  %rip
     |=  [a=*bloq b=@]
-    ^-  *(list nat)
+    ^-  *(list num)
     ?:  =(0 b)
       ~
     [(end a 1 b) $(b (rsh a 1 b))]
@@ -701,11 +700,11 @@
     ==
   ::
   ++  set
-    |*  a=mud
+    |*  a=dog
     $=(~ ^<(apt [n=(a) l=((set a)) r=((set a))]))
   ::
   ++  map   
-    |*  [a=mud b=mud]
+    |*  [a=dog b=dog]
     $=(~ ^<(ept [n=[p=(a) q=(b)] l=((map a b)) r=((map a b))]))
   --
 =>
@@ -870,12 +869,12 @@
   ++  edge  ~[p=(hair) q=((unit ~[p=* q=(clip)]))]
   ++  hair  ~[p=1* q=1*]
   ++  know  |*(veq=(edge) ?~(q.veq !! p.u.q.veq))
-  ++  like  |*  a=mud
+  ++  like  |*  a=dog
             |=  b=`*`[(hair) ~]
             :-  p=(hair -.b) 
             q=?~(+.b ~ [~ u=[p=(a +>-.b) q=[p=(hair -.b) q=(tape +.b)]]])
-  ++  pork  mud
-  ++  rock  nat
+  ++  pork  dog
+  ++  rock  num
   ++  rule  |=(p=(clip) `(edge)`[p.p ~ ~ p])
   ++  spot  ~[p=@ q=[p=[p=@ q=@] q=[p=@ q=@]]]
   ++  tank
@@ -885,7 +884,7 @@
     ::  [%farm p=[p=(tape) q=(tape) r=(tape)] q=((list (list tank)))]
     ==
   ++  tape  (list char)
-  ++  term  nat
+  ++  term  num
   ++  wall  (list tape)
   --
 =>
@@ -920,7 +919,7 @@
     [p=p.vex q=[~ u=[p=cus q=q.u.q.vex]]]
   ::
   ++  cook
-    |*  [poq=mud sef=rule]
+    |*  [poq=dog sef=rule]
     |=  tub=*clip
     =+  vex=(sef tub)
     ?~  q.vex
@@ -1118,7 +1117,7 @@
   ::
   ++  ace  (just ' ')
   ++  alf  ;~(pose low hig)
-  ++  aln  ;~(pose low hig num)
+  ++  aln  ;~(pose low hig nud)
   ++  bar  (just '|')
   ++  bet  ;~(pose (cold 2 sep) (cold 3 pes))
   ++  bin  (bass 2 (most gon but))
@@ -1145,7 +1144,7 @@
   ::
   ++  fed
     %+  cook
-      |=(a=*(list nat) (roll a |=([p=@ q=@] (add p (lsh 5 1 q)))))
+      |=(a=*(list num) (roll a |=([p=@ q=@] (add p (lsh 5 1 q)))))
     ;~  plug
       ;~(pose (cold 0 bar) fud fwd fod fad)
       (star ;~(pfix ;~(pose dun ;~(plug nov gay von)) fud))
@@ -1185,7 +1184,7 @@
   ++  ned  (just ']')
   ++  nix  (boss 256 (star ;~(pose aln cab)))
   ++  nov  (just '\\')
-  ++  num  (shim '0' '9')
+  ++  nud  (shim '0' '9')
   ++  pam  (just '&')
   ++  pel  (just ')')
   ++  pes  (just '+')
@@ -1198,7 +1197,7 @@
   ++  sym 
     %+  cook
       |=(a=*tape (rap 3 a))
-    ;~(plug low (star ;~(pose num low sep)))
+    ;~(plug low (star ;~(pose nud low sep)))
   ::
   ++  tam  (just ';')
   ++  tar  (just '*')
@@ -1529,7 +1528,7 @@
     |=  a=@
     ^-  *
     =+  b=0*
-    =+  m=`*(map nat mud)`~
+    =+  m=`*(map num dog)`~
     =<  q
     |-  ^-  [p=@ q=* r=m]
     ?:  =(0 (cut 0 [b 1] a))
@@ -1549,7 +1548,7 @@
     |=  a=*
     ^-  @
     =+  b=0*
-    =+  m=`*(map mud nat)`~
+    =+  m=`*(map dog num)`~
     =<  q
     |-  ^-  [p=@ q=@ r=m] 
     =+  c=(~(get by m) a)
@@ -1897,6 +1896,7 @@
       |-
       ?~(p.gen [%dtsg %f 0] [%csdg i.p.gen $(p.gen t.p.gen) [%dtsg %f 1]])
     ::
+    ::  [%cssg *]   [%csdg [%cslc [%dtwt %% 0] p.gen] q.gen r.gen]
         [%cssp *]
       |-
       ?~  q.gen
@@ -2451,7 +2451,7 @@
   ++  duck
     ~|  %duck  ^-  *tank
     =+  ^=  gil
-        =+  den=[p=1* q=*(map type nat)]
+        =+  den=[p=1* q=*(map type num)]
         =+  vax=*(set type)
         =<  q
         |-  ^-  den
