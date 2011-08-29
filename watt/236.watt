@@ -2102,6 +2102,16 @@
     mal
   [7 mal buz]
 ::
+++  cond
+  ~.  %cond
+  |=  [pex=*form yom=*form woq=*form]
+  ^-  *form
+  ?-  pex
+    [1 0]  yom
+    [1 1]  woq
+    *      [6 pex yom woq]
+  ==
+::
 ++  cons
   ~.  %cons
   |=  [vur=*form sed=*form]
@@ -2319,12 +2329,78 @@
     =+  hox=q:(mint %noun %%)
     ~|(%bust-nock .*(yib hox))
   ::
+  ++  crop
+    ~.  %crop
+    |=  ref=*type
+    =+  bix=*(set ~[*type *type])
+    =<  dext
+    &.
+    ++  dext
+      ^-  *type
+      ?:  |(=(sut ref) =(%noun ref))
+        %void
+      ?:  =(%void ref)
+        sut
+      ?:  (~(has in bix) [sut ref])
+        ~~  (dunk 'type')
+        ~~  (dunk(sut ref) 'over')
+        ~|(%crop-loop !!)
+      =>  .(bix (~(put in bix) [sut ref]))
+      ?-    sut
+          [%atom *] 
+        ?-    ref
+            [%atom *]   %void
+            [%cell *]   sut
+            *           sint
+        ==
+      ::
+          [%cell *]   
+        ?-  ref
+          [%atom *]   sut
+          [%cell *]   :+  %cell
+                        dext(sut p.sut, ref p.ref)
+                      dext(sut q.sut, ref q.ref)
+          *           sint
+        ==
+      ::
+          [%core *]   sut
+          [%cube *]
+        ?:  &(?=([%cube *] ref) =(p.sut p.ref))
+          %void
+        ?-    ref
+            *{[%atom *] [%cell *]}
+          =+  foz=dext(sut q.sut)
+          ?:  (firm(sut foz) p.sut)
+            (cube p.sut foz)
+          %void
+        ::
+            *  sint
+        ==
+      ::
+          [%face *]   (face p.sut dext(sut q.sut))
+          [%fine *]   (fine p.sut q.sut dext(sut r.sut))
+          [%fork *]   (fork dext(sut p.sut) dext(sut q.sut))
+          [%hold *]   (reco |=(a=*type dext(sut a)))
+          %noun       (reco |=(a=*type dext(sut a)))
+          %void       %void
+      ==
+    ::
+    ++  sint
+      ^-  *type
+      ?-    ref
+        *{%atom %cell}  !!
+        [%fork *]       dext(sut dext(ref p.ref), ref q.ref)
+        %void           sut
+        *               dext(ref repo(sut ref))
+      ==
+    --
+  ::
   ++  cull
     ~.  %cull
-    |=  [axe=*axis ref=*type]
+    |=  [pol=? axe=*axis ref=*type]
     ^-  *type
     ?:  =(1 axe)
-      (fuse ref)
+      ?:(pol (fuse ref) (crop ref))
     =+  [now=(cap axe) lat=(mas axe)]
     |-  ^-  *type
     ?-    sut
@@ -2801,6 +2877,7 @@
         %void       %void
     ==
   ::
+  ::
   ++  gain
     ~.  %gain
     |=  [gen=*gene]
@@ -2808,8 +2885,23 @@
     =-  ?:((orth(sut %noun) fiz) %void fiz)   ::  ?? - do we need this?
     ^=  fiz
     ?-    gen
-        [%cslc *]   (cull p:(seek %read ~(rake ap q.gen)) (play p.gen))
+        [%cslc *]   (cull & p:(seek %read ~(rake ap q.gen)) (play p.gen))
+        [%csbr *]   |-(?~(p.gen sut $(p.gen t.p.gen, sut (lose i.p.gen))))
         [%cspm *]   |-(?~(p.gen sut $(p.gen t.p.gen, sut $$(gen i.p.gen))))
+        [%zpcb *]   $(gen q.gen)
+        [%zpdx *]   $(gen p.gen)
+        *           sut
+    ==
+  ::
+  ++  lose  
+    ~.  %lose
+    |=  [gen=*gene]  ^-  *type
+    =-  ?:((orth(sut %noun) fiz) %void fiz)   ::  ?? - do we need this?
+    ^=  fiz
+    ?-    gen
+        [%cslc *]   (cull | p:(seek %read ~(rake ap q.gen)) (play p.gen))
+        [%csbr *]   |-(?~(p.gen sut $(p.gen t.p.gen, sut $$(gen i.p.gen))))
+        [%cspm *]   |-(?~(p.gen sut $(p.gen t.p.gen, sut (gain i.p.gen))))
         [%zpcb *]   $(gen q.gen)
         [%zpdx *]   $(gen p.gen)
         *           sut
@@ -2847,6 +2939,97 @@
         [%fork *]   (fork $(sut p.sut) $(sut q.sut))
         *           $(sut repo)
     ==
+  ::
+  ++  mill
+    ~.  %mill
+    |=  [gol=*type old=*(unit type) gen=*gene]
+    ^-  [p=[p=*type q=*(unit type)] q=*form]
+    =<  $
+    &.
+    ++  boil
+      |=  sel=|%(*form)
+      ^-  *form
+      ?.(fab [0 0] $.sel)
+    ::
+    ++  coke
+      |=  [nug=*form]
+      ?-    nug
+          [0 *]   p.nug
+          [10 *]  $(nug q.nug)
+          *       ~|(%mint-coke !!)
+      ==
+    ::
+    ++  crow
+      |=  [mel=*{%gold %iron %lead %zinc} ruf=*gene dab=*(map term foot)]
+      ^-  [[p=*type q=*(unit type)] q=*form]
+      =+  dan=$$(gen ruf, gol %noun)
+      =+  ^=  dez 
+          ?.  fab 
+            [0 0] 
+          (bake(sut (core p.p.dan [%gold p.p.dan [~ dab]])) dab)
+      :-  :-  (nice (core p.p.dan mel p.p.dan [dez dab]))
+          (bind q.p.dan |=(a=*type (core a [mel a [[0 0] dab]])))
+      (cons q.dan [1 dez])
+    ::
+    ++  nice
+      |=  typ=*type
+      ?.  ?|(!vet (nest(sut gol) typ))
+        ~~  (dunk(sut gol) 'need')
+        ~~  (dunk(sut typ) 'have')
+        ~|('mint-nice' !!)
+      typ
+    ::
+    ++  whip
+      |=  mog=|+([a=? b=*type] [p=*type q=*form])
+      ^-  [p=[p=*type q=*(unit type)] q=*form]
+      =+  voy=(mog vet sut)
+      ?~  old
+        [[p.voy ~] q.voy]
+      =+  yog=(mog | u.old)
+      ?.  =(q.yog q.voy)
+        ~|(%mill-mate !!)
+      [[p.voy [~ p.yog]] q.voy]
+    ::
+    ++  whop
+      |=  voy=[p=*type q=*form]
+      ^-  [p=[p=*type q=*(unit type)] q=*form]
+      ?~  old
+        [[p.voy ~] q.voy]
+      [[p.voy [~ p.voy]] q.voy]
+    ::
+    ++  $
+      ^-  [p=[p=*type q=*(unit type)] q=*form]
+      ?:  =(%void sut)
+        :-  :-  %void
+            ?~  old 
+              ?.(=([%zpzp ~] gen) ~|(%mill-eddy !!) ~)
+            [~ (play(sut u.old) gen)]
+        [0 0] 
+      ?-    gen
+          [%cslc *]                                                   ::  ?=
+        %+  whop
+          (nice flag)
+        (boil |.((fish(sut (play p.gen)) (coke q:$$(gen q.gen, gol %noun)))))
+      ::
+          [%csdg *]                                                   ::  ?:
+        =+  nor=$(gen p.gen, gol flag)
+        =+  ^=  hiq
+            %=  $
+              sut  (gain p.gen)
+              old  (bind old |=(a=*type (gain(sut a) p.gen)))
+              gen  q.gen
+            ==
+        =+  ^=  ran
+            %=  $
+              sut  (lose p.gen)
+              old  (bind old |=(a=*type (lose(sut a) p.gen)))
+              gen  q.gen
+            ==
+        :-  :-  (fork p.p.hiq p.p.ran)
+            ?~(old ~ [~ (fork (need q.p.hiq) (need q.p.ran))])
+        (boil |.((cond q.nor q.hiq q.ran)))
+      ==
+    --
   ::
   ++  mint
     ~.  %mint
@@ -2906,8 +3089,8 @@
           [%cssg *]                                                   ::  ?~
         =+  hec=~(rake ap p.gen)
         =+  axe=p:(seek %read hec)
-        =+  bor=(cull axe [%atom %%])
-        =+  wul=(cull axe [%cell %noun %noun])
+        =+  bor=(cull & axe [%atom %%])
+        =+  wul=(cull & axe [%cell %noun %noun])
         =+  hiq=$(sut ?:(=(%void bor) sut bor), gen q.gen)
         =+  ran=$(sut ?:(=(%void wul) sut wul), gen r.gen)
         :-  (fork p.hiq p.ran)
