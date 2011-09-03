@@ -1715,6 +1715,7 @@
     $~  p=*axis 
         q=($^([& p=(type)] [| p=*axis q=((list ~[p=(type) q=(gate)]))]))
     ==
+  ++  porq  ~[p=*axis q=[p=*{~ *axis} q=((list ~[p=(type) q=(gate)]))]]
   ++  twig  (list knot)
   ++  type
     $&  *{%noun %void}
@@ -2074,6 +2075,27 @@
     |=  [hep=*twig dug=*gene]
     [%csdg [%cslc gen [%mtlc hep ~]] [%mtlc hep ~] dug]
   ::
+  ++  late
+    ~.  %late
+    ?-    gen
+        [%ktdl *]
+      :+  %lcps  [%ktlc %a p.gen]                   ::  =+  a=<p.gen>
+      :+  %lcps  [%ktlc %b [%lcld [~ 2] q.gen]]     ::  =+  b==>(.2 <q.gen>)
+      :+  %csld  [%mtsp %a %b ~]                    ::  ?>  (a b)
+      %b                                            ::  b
+    ::
+        [%ktld *]
+      :+  %lcps  [%ktlc %a p.gen]                   ::  =+  a=<p.gen>
+      :+  %lcps  [%ktlc %b [%lcld [~ 2] q.gen]]     ::  =+  b==>(.2 <q.gen>)
+      :-  %brsp  :+  %ktsp  [%mttr %a]              ::  |-  ^-  *a
+      :+  %lcps  [%ktlc %c [%mtsp %a %b ~]]         ::  =+  c=(a b)
+      :^  %csdg  [%dtlc %b %c]                      ::  ?:  =(b c)
+        %c                                          ::    c
+      [%mtlc [%% ~] [[%b %c] ~]]                    ::  $(b c)
+    ::
+        *          !!
+    ==
+  ::
   ++  rake
     ^-  *twig
     ?-  gen
@@ -2084,6 +2106,14 @@
       [%zpdx *]     rake(gen p.gen)
       *             ~|(%rake-gene !!)
     ==
+  ::
+  ++  very
+    ~.  %very
+    |=  [toz=*gene wev=*gene]
+    :+  %lcps  [%ktlc %a toz]                     ::  =+  a=<toz>
+    :+  %lcps  [%ktlc %b [%lcld [~ 2] wev]]       ::  =+  b==>(.2 <wev>)
+    :+  %csld  [%mtsp %a %b ~]                    ::  ?>  (a b)
+    %b                                            ::  b
   --
 ::
 ++  comb
@@ -2940,97 +2970,6 @@
         *           $(sut repo)
     ==
   ::
-  ++  mill
-    ~.  %mill
-    |=  [gol=*type old=*(unit type) gen=*gene]
-    ^-  [p=[p=*type q=*(unit type)] q=*form]
-    =<  $
-    &.
-    ++  boil
-      |=  sel=|%(*form)
-      ^-  *form
-      ?.(fab [0 0] $.sel)
-    ::
-    ++  coke
-      |=  [nug=*form]
-      ?-    nug
-          [0 *]   p.nug
-          [10 *]  $(nug q.nug)
-          *       ~|(%mint-coke !!)
-      ==
-    ::
-    ++  crow
-      |=  [mel=*{%gold %iron %lead %zinc} ruf=*gene dab=*(map term foot)]
-      ^-  [[p=*type q=*(unit type)] q=*form]
-      =+  dan=$$(gen ruf, gol %noun)
-      =+  ^=  dez 
-          ?.  fab 
-            [0 0] 
-          (bake(sut (core p.p.dan [%gold p.p.dan [~ dab]])) dab)
-      :-  :-  (nice (core p.p.dan mel p.p.dan [dez dab]))
-          (bind q.p.dan |=(a=*type (core a [mel a [[0 0] dab]])))
-      (cons q.dan [1 dez])
-    ::
-    ++  nice
-      |=  typ=*type
-      ?.  ?|(!vet (nest(sut gol) typ))
-        ~~  (dunk(sut gol) 'need')
-        ~~  (dunk(sut typ) 'have')
-        ~|('mint-nice' !!)
-      typ
-    ::
-    ++  whip
-      |=  mog=|+([a=? b=*type] [p=*type q=*form])
-      ^-  [p=[p=*type q=*(unit type)] q=*form]
-      =+  voy=(mog vet sut)
-      ?~  old
-        [[p.voy ~] q.voy]
-      =+  yog=(mog | u.old)
-      ?.  =(q.yog q.voy)
-        ~|(%mill-mate !!)
-      [[p.voy [~ p.yog]] q.voy]
-    ::
-    ++  whop
-      |=  voy=[p=*type q=*form]
-      ^-  [p=[p=*type q=*(unit type)] q=*form]
-      ?~  old
-        [[p.voy ~] q.voy]
-      [[p.voy [~ p.voy]] q.voy]
-    ::
-    ++  $
-      ^-  [p=[p=*type q=*(unit type)] q=*form]
-      ?:  =(%void sut)
-        :-  :-  %void
-            ?~  old 
-              ?.(=([%zpzp ~] gen) ~|(%mill-eddy !!) ~)
-            [~ (play(sut u.old) gen)]
-        [0 0] 
-      ?-    gen
-          [%cslc *]                                                   ::  ?=
-        %+  whop
-          (nice flag)
-        (boil |.((fish(sut (play p.gen)) (coke q:$$(gen q.gen, gol %noun)))))
-      ::
-          [%csdg *]                                                   ::  ?:
-        =+  nor=$(gen p.gen, gol flag)
-        =+  ^=  hiq
-            %=  $
-              sut  (gain p.gen)
-              old  (bind old |=(a=*type (gain(sut a) p.gen)))
-              gen  q.gen
-            ==
-        =+  ^=  ran
-            %=  $
-              sut  (lose p.gen)
-              old  (bind old |=(a=*type (lose(sut a) p.gen)))
-              gen  q.gen
-            ==
-        :-  :-  (fork p.p.hiq p.p.ran)
-            ?~(old ~ [~ (fork (need q.p.hiq) (need q.p.ran))])
-        (boil |.((cond q.nor q.hiq q.ran)))
-      ==
-    --
-  ::
   ++  mint
     ~.  %mint
     |=  [gol=*type gen=*gene]
@@ -3130,25 +3069,12 @@
         [(face p.gen p.vat) q.vat]
       ::
           [%ktdl *]                                                   ::  ^<
-        =-  [(nice (fine %very (play p.gen) p.ryd)) q.ryd]
-        ^=  ryd  =-  $(gen hos, gol %noun)
-        ^=  hos
-        :+  %lcps  [%ktlc %a p.gen]                   ::  =+  a=<p.gen>
-        :+  %lcps  [%ktlc %b [%lcld [~ 2] q.gen]]     ::  =+  b==>(.2 <q.gen>)
-        :+  %csld  [%mtsp %a %b ~]                    ::  ?>  (a b)
-        %b                                            ::  b
+        =+  ryd=$(gen ~(late ap gen), gol %noun)
+        [(nice (fine %very (play p.gen) p.ryd)) q.ryd]
       ::
           [%ktld *]                                                   ::  ^>
-        =-  [(nice (fine %pure (play p.gen) p.ryd)) q.ryd]
-        ^=  ryd  =-  $(gen hos, gol %noun)
-        ^=  hos
-        :+  %lcps  [%ktlc %a p.gen]                   ::  =+  a=<p.gen>
-        :+  %lcps  [%ktlc %b [%lcld [~ 2] q.gen]]     ::  =+  b==>(.2 <q.gen>)
-        :-  %brsp  :+  %ktsp  [%mttr %a]              ::  |-  ^-  *a
-        :+  %lcps  [%ktlc %c [%mtsp %a %b ~]]         ::  =+  c=(a b)
-        :^  %csdg  [%dtlc %b %c]                      ::  ?:  =(b c)
-          %c                                          ::    c
-        [%mtlc [%% ~] [[%b %c] ~]]                    ::  $(b c)
+        =+  ryd=$(gen ~(late ap gen), gol %noun)
+        [(nice (fine %pure (play p.gen) p.ryd)) q.ryd]
       ::
           [%ktsg *]                                                   ::  ^~
         =+  nef=$(gen p.gen)
@@ -3239,6 +3165,11 @@
         $(gen doz)
       ==
     --
+  ::
+  ++  must
+    ~.  %must
+    |=  [yik=? ref=*type]
+    (nest ref)
   ::
   ++  nest
     ~.  %nest
@@ -3533,6 +3464,10 @@
         [%cube *]   $(sut repo)
         [%face *]   [%ktlc p.sut $(sut q.sut)]
         [%fine *]   $(sut repo)
+        [%fork *]   
+      =+  [wen=$(sut p.sut) hiz=$(sut q.sut)]
+      ?.(=(wen hiz) ~|(%snap-fork !!) wen)
+    ::
         [%hold *]   $(sut repo)
         *           gen
     ==
