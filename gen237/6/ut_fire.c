@@ -31,7 +31,8 @@
 
       if ( u2_yes == u2_h(gat) ) {
         if ( (u2_yes == vet) &&
-             (u2_no == j2_mcy(Pt6, ut, nest)(wir_r, van, qq_typ, p_typ)) )
+             (u2_no == j2_mcy(Pt6, ut, nest)
+                (wir_r, van, qq_typ, u2_yes, p_typ)) )
         {
           u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "need", qq_typ);
           u2_noun niz = j2_mcy(Pt6, ut, dunq)(wir_r, van, "have", p_typ);

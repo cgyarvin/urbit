@@ -1,74 +1,18 @@
   ::
-  ++  snub
-    |=  [hep=*twig raf=*(list ~[p=*type q=*gate] gen=*gene)]
-    =+  sug=*(unit gene)
-    ?~  raf
-      ?~(sug gen u.sug)
-    ?:  =(& p.q.i.raf)
-      $(raf t.raf)
-    =+  viq=(snip(sut p.i.raf) gen)
-    $(raf t.raf, sug ?.(?~(sug & =(viq u.sug)) ~|(%snub-mate !!) [~ viq]))
-  ::
-  ++  snip
-    |=  [peh=*twig gen=*gene]
-    ?~  peh
-      gen
-    ?-    i.peh
-        @
-      =+  wer=(fink %rite i.peh)
-      ?.(?=(& -.q.wer) ~|('snip-gate' !!) $(peh t.peh, sut p.q.wer))
-    ::
-        [~ *]
-      =+  vas=(peek %rite p.i.peh)
-      $(peh t.peh, 
-  ==
-      =+  ^=  giv
-          %=    $
-              sut   vas
-              rix   ?~(t.peh (snap(sut vas) rix) rix)
-              axe   (peg axe p.i.peh)
-              peh   t.peh
-          ==
-      [(heal ~ p.i.peh p.giv) q.giv]
-    ==
-
-
-  ++  coke
-    |=  gen=*gene
-    ^-  *axis
-    =+  nug=q:(mint %noun gen)
-    |-  ^-  *
-    ?-  nug
-      [0 *]   p.nug
-      [10 *]  $(nug q.nug)
-      *       ~|(%coke-form !!)
-    ==
-  ::
-  ++  seeq
-    |=  [way=*{%read %rite} hep=*twig]
-    ^-  *porq
-    =+  swq=(seek way hep)
-    ?-  -.q.swq
-      &  [p.swq [~ [[p.q.swq [| ~ 1]] ~]]]
-      |  [p.swq [p.q.swq q.q.swq]]
-    ==
-  ::
   ++  mull
     ~.  %mull
-    |=  [gol=*type nut=*type gen=*gene]
+    |=  [gol=*type dox=*type gen=*gene]
     ^-  ?
     ?.  vet
       &
-    =<  &                                                         :: crash-only
-    =<  $
-    &-  
-    ^-  [p=*type q=*type]
+    =<  &
+    &-  ^-  [p=*type q=*type]
     ?:  =(%void sut)
       ~|(%mull-none !!)
     ?-    gen
         [%cslc *]
       =+  waz=$(gen p.gen)
-      =+  syx=[p=(coke q.gen) q=(coke(sut nut) q.gen)]
+      =+  syx=[p=(coke q.gen) q=(coke(sut dox) q.gen)]
       =+  pov=[p=(fish(sut p.waz) p.syx) q=(fish(sut q.waz) q.syx)]
       ?.  &(=(p.syx q.syx)  =(p.pov q.pov))
         ~|(%mull-bonk-a !!)
@@ -76,20 +20,20 @@
     ::
         [%csdg *]
       =+  nor=$(gen p.gen, gol flag)
-      =+  fex=[p=(gain p.gen) q=(gain(sut nut) p.gen)]
-      =+  wux=[p=(lose p.gen) q=(lose(sut nut) p.gen)]
-      ?:  =(%void p.fex)
-        ?:  =(%void p.wux)
-          [%void %void]
-        ?:  !=(%void q.fex)
-          ~|(%mull-bonk !!)
-        $(sut p.wux, nut q.wux, gen r.gen)
-      ?:  =(%void p.wux)
-        ?:  !=(%void q.wux)
-          ~|(%mull-bonk !!)
-        $(sut p.fex, nut q.fex, gen r.gen)
-      =+  hiq=$(sut p.fex, nut q.fex, gen q.gen)
-      =+  ran=$(sut p.wux, nut q.wux, gen r.gen)
+      =+  ^=  hiq  ^-  [p=*type q=*type]
+          =+  fex=[p=(gain p.gen) q=(gain(sut dox) p.gen)]
+          ?:  =(%void p.fex)
+            [%void (play(sut dox) q.gen)]
+          ?:  =(%void q.fex)
+            ~|(%mull-bonk !!)
+          $(sut p.fex, dox q.fex, gen q.gen)
+      =+  ^=  ran  ^-  [p=*type q=*type]
+          =+  wux=[p=(lose p.gen) q=(lose(sut dox) p.gen)]
+          ?:  =(%void p.wux)
+            [%void (play(sut dox) r.gen)]
+          ?:  =(%void q.wux)
+            ~|(%mull-bonk !!)
+          $(sut p.wux, dox q.wux, gen r.gen)
       [(nice (fork p.hiq p.ran)) (fork q.hiq q.ran)]
     ::
         [%dgsp *]
@@ -116,110 +60,53 @@
     ::
         [%ktsg *]  $(gen p.gen)
         [%ktsp *]
-      =+  hif=[(play p.gen) (play(sut nut) p.gen)]
+      =+  hif=[(play p.gen) (play(sut dox) p.gen)]
       =+($(gen q.gen, gol p.hif) hif)
     ::
         [%lcld *]                               
       =+  lem=$(gen p.gen, gol %noun)
-      $(gen q.gen, sut p.lem, nut q.lem)
+      $(gen q.gen, sut p.lem, dox q.lem)
     ::
         [%mtlc *] 
-      &-  ^-  [p=*type q=*type]
-          =+  lar=(seeq %read p.gen)
-          =+  vug=(seeq(sut nut) %read p.gen)
-          ?.  &(=(p.lar p.vug) =(p.q.lar p.q.vug))
-            ~|(%mull-bonk !!)
-          [(evit 
-          =+  fup=(chew [q.q.lar q.q.vug] q.gen)
-          ?:  =(~ p.q.lar)
-            [(nice -<.p.fup) -<.q.fup]
-          [(nice (fire fup)) (fire(vet |) mew)]
-      ::
-      ++  chew
-        |=  :-  :-  men=*(list ~[p=*type q=*gate])
-                tof=*(list ~[p=*type q=*gate]) 
-            har=*(list ~[p=*gene q=*gene])
-        ^-  [p=*(list ~[p=*type q=*gate]) q=*(list ~[p=*type q=*gate])]
-        ?~  har
-          [men tof]
-        =+  peh=(flop ~(rake ap p.i.har))
-        =-  $(har t.har, men p.zos, tof q.zos)
-        ^=  zos
-        |-  ^-  [p=*(list ~[p=*type q=*gate]) q=*(list ~[p=*type q=*gate])]
-        ?~  men
-          [~ ~]
-        =+  lax=$(men t.men, tof t.tof)
-        =+  taq=(tuck [p
-      ::
-  ::
-  ++  tuck
-    ~.  %tuck
-    |=  [peh=*twig boz=*type rix=*gene]
-    =+  axe=1*
-    |-
-    ^-  [p=*type q=[p=*axis q=*form]]
-    ?~  peh
-      =+  lof=(mint(sut boz) %noun rix)
-      [p.lof [axe q.lof]]
-    ?-    i.peh
-        @
-      =+  wer=(fink %rite i.peh)
-      ?.  ?=(& -.q.wer)
-        ~|('tuck-gate' !!) 
-      =+  giv=$(sut p.q.wer, axe (peg axe p.wer), peh t.peh)
-      [(heal [~ i.peh] p.wer p.giv) q.giv]
+      =+  lar=(foil (seek %read p.gen))
+      =+  vug=(foil (seek(sut dox) %read p.gen))
+      ?.  &(=(p.lar p.vug) =(p.q.lar p.q.vug))
+        ~|(%mull-bonk !!)
+      =+  mew=(swab q.q.lar q.gen)
+      ?.  =(mew (swab q.q.vug q.gen))
+        ~|(%mull-bonk !!)
+      =-  [(nice (fire p.yom)) (fire(vet |) q.yom)]
+      ^=  yom  
+      |-  ^-  [p=*(list ~[p=*type q=*gate]) q=*(list ~[p=*type q=*gate])]
+      ?~  mew
+        [q.q.lar q.q.vug]
+      =+  zil=$$(gen q.i.mew)
+      =+  cuf=(tock p.i.mew p.zil q.q.lar)
+      =+  dof=(tock p.i.mew q.zil q.q.vug)
+      ?.  .=(p.cuf p.dof)
+        ~|(%mull-bonk !!)
+      $(q.q.lar q.cuf, q.q.vug q.dof)
     ::
-        [~ *]
-      =+  vas=(peek %rite p.i.peh)
-      =+  ^=  giv
-          %=    $
-              sut   vas
-              rix   ?~(t.peh (snap(sut vas) rix) rix)
-              axe   (peg axe p.i.peh)
-              peh   t.peh
-          ==
-      [(heal ~ p.i.peh p.giv) q.giv]
+    ::
+    ::
+        [%pmdg *]  (grow %zinc [%dgsp [~ 1] p.gen] q.gen)
+        [%pmdt *]  (grow %gold [~ 1] p.gen)
+        [%pmmt *]  (grow %lead [~ 1] p.gen)
+        [%pmps *]  (grow %iron [%dgsp [~ 1] p.gen] q.gen)
+        [%sgld *]  $(gen q.gen)
+        [%zpcm *]  (play p.gen)
+        [%zpcb *]  ~~((show %o p.gen) $(gen q.gen))  
+        [%zpdx *]  ~#($(gen p.gen))
+        [%zplc *]  %noun
+        [%zpmt ~]  p:seed
+        [%zptm *]  (cell $(gen p.gen) $(gen q.gen))
+        [%zpzp ~]  %void
+        *          =+  doz=~(open ap gen) 
+                   ?:  =(doz gen)
+                     ~~  (show [%c 'gene'] [%q gen])
+                     ~|(%mull-open !!)
+                   $(gen doz)
     ==
-
-    |-  ^-  [p=*(unit ~[p=*axis q=*form]) q=*(list ~[p=*type q=*gate])]
-    ?~  men
-      [~ ~] 
-    =+  lax=$(men t.men)
-    =+  taq=(tuck(sut p.i.men) peh sut q.i.har)
-    :-  ~|('emit-mate' (mate p.lax `p.lax`[~ u=q.taq]))
-    [[p.taq q.i.men] q.lax]
-            !!
-          --
-        ==
-    :: 
-    ++  damp
-      |=  mad=*type
-      [(nice mad) mad]
-    ::
-    ++  boil
-      |=  sel=|%(*form)
-      ^-  *form
-      ?.(fab [0 0] $.sel)
-    ::
-    ++  coke
-      |=  [nug=*form]
-      ?-    nug
-          [0 *]   p.nug
-          [10 *]  $(nug q.nug)
-          *       ~|(%mint-coke !!)
-      ==
-    ::
-    ++  crow
-      |=  [mel=*{%gold %iron %lead %zinc} ruf=*gene dab=*(map term foot)]
-      ^-  [[p=*type q=*(unit type)] q=*form]
-      =+  dan=$$(gen ruf, gol %noun)
-      =+  ^=  dez 
-          ?.  fab 
-            [0 0] 
-          (bake(sut (core p.p.dan [%gold p.p.dan [~ dab]])) dab)
-      :-  :-  (nice (core p.p.dan mel p.p.dan [dez dab]))
-          (bind q.p.dan |=(a=*type (core a [mel a [[0 0] dab]])))
-      (cons q.dan [1 dez])
     ::
     ++  nice
       |=  typ=*type
@@ -229,21 +116,10 @@
         ~|('mint-nice' !!)
       typ
     ::
-    ++  whip
-      |=  mog=|+([a=? b=*type] [p=*type q=*form])
-      ^-  [p=[p=*type q=*(unit type)] q=*form]
-      =+  voy=(mog vet sut)
-      ?~  old
-        [[p.voy ~] q.voy]
-      =+  yog=(mog | u.old)
-      ?.  =(q.yog q.voy)
-        ~|(%mull-mate !!)
-      [[p.voy [~ p.yog]] q.voy]
+    ++  grow
+      |=  [mel=*{%gold %iron %lead %zinc} ruf=*gene dab=*(map term foot)]
+      ^-  *type
+      =+  dan=$(gen ruf)
+      (core dan mel dan [[0 0] dab])
     ::
-    ++  whop
-      |=  voy=[p=*type q=*form]
-      ^-  [p=[p=*type q=*(unit type)] q=*form]
-      ?~  old
-        [[p.voy ~] q.voy]
-      [[p.voy [~ p.voy]] q.voy]
-    ::
+    --

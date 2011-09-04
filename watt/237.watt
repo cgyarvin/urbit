@@ -2364,11 +2364,11 @@
           ==
         ::
             [%cell *]
-          ?:  (nest(sut -:!;(*type *tank)) sut)
+          ?:  (nest(sut -:!;(*type *tank)) | sut)
             [%palm [~ ~ ['{' ~] ['}' ~]] (tank lum) ~]
-          ?:  (nest(sut -:!;(*type *tape)) sut)
+          ?:  (nest(sut -:!;(*type *tape)) | sut)
             stab
-          ?:  (nest(sut -:!;(*type *wall)) sut)
+          ?:  (nest(sut -:!;(*type *wall)) | sut)
             :+  %palm 
               [['.' ~] ['%' ~] ['<' ~] ['>' ~]]
             |-(?~(lum ~ [stab(lum -.lum) $(lum +.lum)]))
@@ -2674,9 +2674,9 @@
       ~|(%fire-core !!)
     =+  dox=[%core q.q.p q.p]
     ?:  p.q
-      ?.  ?|(!vet (nest(sut q.q.p) p.p))
-        ~~  (dunk(sut q.q.p) 'need')
-        ~~  (dunk(sut p.p) 'have')
+      ?.  ?|(!vet (nest(sut q.q.p) & p.p))
+        ::  ~~  (dunk(sut q.q.p) 'need')
+        ::  ~~  (dunk(sut p.p) 'have')
         ~|('fire-dry' !!)
       [dox q.q]
     ?.  ?|(!vet =(p.p q.q.p) (fret(sut p) dox q.q))
@@ -2878,9 +2878,9 @@
     ::
     ++  nice
       |=  typ=*type
-      ?.  ?|(!vet (nest(sut gol) typ))
-        ~~  (dunk(sut gol) 'need')
-        ~~  (dunk(sut typ) 'have')
+      ?.  ?|(!vet (nest(sut gol) & typ))
+        ::  ~~  (dunk(sut gol) 'need')
+        ::  ~~  (dunk(sut typ) 'have')
         ~|('mint-nice' !!)
       typ
     ::
@@ -3057,7 +3057,7 @@
   ::
   ++  nest
     ~.  %nest
-    |=  ref=*type
+    |=  [tel=? ref=*type]
     ^-  ?
     =+  gil=*(set ~[p=*type q=*type])
     =<  dext
@@ -3120,6 +3120,14 @@
     ::
     ++  dext
       ^-  ?
+      =-  ?:  tyn   
+            & 
+          ?:  tel 
+            ~~  (dunk 'need')
+            ~~  (dunk(sut ref) 'have ')
+            ~|(%nest-fail !!)
+          |
+      ^=  tyn
       ?:  =(sut ref)
         &
       ?-  sut
@@ -3158,7 +3166,7 @@
           [%fork *]
         ?.  ?=(*%{[%atom *] %noun [%cell *] [%cube *] [%core *] [%fine *]} ref)
           sint
-        ?|(dext(sut p.sut) dext(sut q.sut))
+        ?|(dext(tel |, sut p.sut) dext(tel |, sut q.sut))
       ::
           [%hold *]
         ?|
@@ -3207,7 +3215,7 @@
         $(bix (~(put in bix) [ref sut]), sut repo)
       ==
     ::
-        %noun       (nest(sut %void) ref)
+        %noun       (nest(sut %void) | ref)
         %void       &
         *           $(sut repo) 
     ==
