@@ -30,6 +30,7 @@ u2_flag EyreSmoke;
   
     /* External drivers.
     */
+      extern u2_ho_driver j2_da(k_235);
       extern u2_ho_driver j2_da(k_236);
       extern u2_ho_driver j2_da(k_237);
       extern u2_ho_driver j2_da(k_238);
@@ -63,6 +64,7 @@ u2_flag EyreSmoke;
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       u2_ho_driver *HostDriverBase[] = {
+        &j2_da(k_235),
         &j2_da(k_236),
         &j2_da(k_237),
         &j2_da(k_238),
@@ -97,7 +99,7 @@ u2_flag EyreSmoke;
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt5Y   k_238__a__b__c__d__e
+#   define Pt5Y   k_236__a__b__c__d__e
 
     u2_noun
     j2_mby(Pt5Y, cue)(u2_wire, u2_noun a);
