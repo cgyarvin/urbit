@@ -34,6 +34,7 @@ u2_flag EyreSmoke;
       extern u2_ho_driver j2_da(k_236);
       extern u2_ho_driver j2_da(k_237);
       extern u2_ho_driver j2_da(k_238);
+
 //      extern u2_ho_driver j2_da(k_239);
 //      extern u2_ho_driver j2_da(k_240);
 //      extern u2_ho_driver j2_da(k_241);
@@ -68,6 +69,7 @@ u2_flag EyreSmoke;
         &j2_da(k_236),
         &j2_da(k_237),
         &j2_da(k_238),
+
 //        &j2_da(k_239),
 //        &j2_da(k_240),
 //        &j2_da(k_241),
@@ -99,7 +101,7 @@ u2_flag EyreSmoke;
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt5Y   k_236__a__b__c__d__e
+#   define Pt5Y   k_238__a__b__c__d__e
 
     u2_noun
     j2_mby(Pt5Y, cue)(u2_wire, u2_noun a);
@@ -1581,10 +1583,12 @@ main(c3_i   argc,
   {
     if ( u2_yes == EyreSmoke ) {
       las = _eyre_ken(wir_r, (kno_w + 1));
-      ken = _eyre_ken_load_soft(wir_r, las, kno_w);
 
       Ken = las;
       Kno_w = (kno_w + 1);
+
+      ken = _eyre_ken_load_soft(wir_r, las, kno_w);
+      //  u2_err(wir_r, "ken", ken);
     }
     else {
       ken = _eyre_ken(wir_r, kno_w);

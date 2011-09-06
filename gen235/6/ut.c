@@ -149,7 +149,8 @@
     { "burn", 
       c3__hevy, 
       j2_mc(Pt6, ut, burn), 
-      u2_jet_live | u2_jet_memo,  // special performance category
+      // u2_jet_live | u2_jet_memo,  // special performance category
+      u2_jet_dead,
       u2_none, u2_none },
     { "repo", c3__hevy, j2_mc(Pt6, ut, repo), Tier6_b, u2_none, u2_none },
     { }

@@ -1,4 +1,3 @@
-!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -1918,7 +1917,7 @@
       |-
       ?~(p.gen [%dtsg %f 0] [%csdg i.p.gen $(p.gen t.p.gen) [%dtsg %f 1]])
     ::
-    ::  [%cssg *]   [%csdg [%cslc [%dtwt %% 0] p.gen] q.gen r.gen]
+        [%cssg *]   [%csdg [%cslc [%dtwt %% 0] p.gen] q.gen r.gen]
         [%cssp *]
       |-
       ?~  q.gen
@@ -3047,7 +3046,7 @@
         [q.q.lar (hike p.lar hej)]
       =+  zil=$$(gen q.i.mew)
       =+  wip=(tock p.i.mew p.zil q.q.lar)
-      $(q.q.lar q.wip, hej [[p.wip q.zil] hej])
+      $(mew t.mew, q.q.lar q.wip, hej [[p.wip q.zil] hej])
     ::
         [%pmdg *]  (grow %zinc [%dgsp [~ 1] p.gen] q.gen)
         [%pmdt *]  (grow %gold [~ 1] p.gen)
@@ -3092,7 +3091,7 @@
         0
       ?>  ?=(^ dab)
       ?>  ?=([& *] q.n.dab)
-      =+  vad=$$(vet ?:(p.p.q.n.dab vet |), gol %noun, gen q.p.q.n.dab)
+      =+  vad=q:$$(vet ?:(p.p.q.n.dab vet |), gol %noun, gen q.p.q.n.dab)
       ?-    dab
           [* ~ ~]   vad
           [* ~ *]   [vad $(dab r.dab)]
@@ -3215,7 +3214,7 @@
       =+  dof=(tock p.i.mew q.zil q.q.vug)
       ?.  .=(p.cuf p.dof)
         ~|(%mull-bonk !!)
-      $(q.q.lar q.cuf, q.q.vug q.dof)
+      $(mew t.mew, q.q.lar q.cuf, q.q.vug q.dof)
     ::
         [%pmdg *]  (grow %zinc [%dgsp [~ 1] p.gen] q.gen)
         [%pmdt *]  (grow %gold [~ 1] p.gen)
@@ -3521,6 +3520,7 @@
                    $(sut (gain p.gen), gen q.gen) 
                  $(sut (lose p.gen), gen r.gen)
       [%dgsp *]  (cell $(gen p.gen) $(gen q.gen))
+      [%dtcs *]  flag
       [%dtlc *]  flag
       [%dtps *]  [%atom %%]
       [%dtsg *]  [%cube q.gen ?:(.?(q.gen) %noun [%atom p.gen])]
@@ -3538,7 +3538,7 @@
                  |-  ^-  *(list ~[p=*type q=*gate])
                  ?~  mew
                    q.q.lar
-                 $(q.q.lar q:(tock p.i.mew $$(gen q.i.mew) q.q.lar))
+                 $(mew t.mew, q.q.lar q:(tock p.i.mew $$(gen q.i.mew) q.q.lar))
       [%pmdg *]  (grow %zinc [%dgsp [~ 1] p.gen] q.gen)
       [%pmdt *]  (grow %gold [~ 1] p.gen)
       [%pmmt *]  (grow %lead [~ 1] p.gen)
@@ -3554,7 +3554,7 @@
       *          =+  doz=~(open ap gen) 
                  ?:  =(doz gen)
                    ~~  (show [%c 'gene'] [%q gen])
-                   ~|(%mint-open !!)
+                   ~|(%play-open !!)
                  $(gen doz)
     ==
     ++  grow

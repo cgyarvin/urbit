@@ -1582,6 +1582,7 @@ J235_OFILES=\
        $(J235_6_OFILES) \
        $(J235_6_OFILES_UT) \
        gen235/watt.o
+
 EYRE_OFILES=\
        c/eyre.o \
        $(C_OFILES) \
