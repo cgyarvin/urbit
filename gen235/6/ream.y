@@ -73,7 +73,7 @@
 
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 80
+  %expect 82
 
   %pure-parser
   %locations
@@ -388,6 +388,7 @@ wide_c
     wide_norm: di_casbar body_d_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_cassig body_c_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_caszap body_a_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_caspes body_m_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_cassep body_h_wide    { $$ = _ycell($1, $2); }
 
     wide_norm: di_lycpes body_b_wide    { $$ = _ycell($1, $2); }
@@ -426,6 +427,7 @@ wide_c
     wide_norm: di_zapcom body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_zapdax body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_zapzap body_l_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_zapvon body_l_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_zapmit body_l_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_zapdeg body_a_wide    { $$ = $2; scanner->bug = u2_no; }
     wide_norm: di_zaptam body_b_wide    { $$ = _ycell($1, $2); }
@@ -481,6 +483,8 @@ wide_c
       { $$ = _ytrel($3, $5, u2_nul); }
     body_l_wide:
       { $$ = u2_nul; }
+    body_m_wide: si_lep g wide w wide w rack_wide si_pel
+      { $$ = _ytrel($3, $5, $7); }
 /*
     body_o_wide: si_lep g wide g si_pel
       { $$ = $3; }
@@ -565,6 +569,7 @@ tall
 
     tall_norm: di_casbar w body_d_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_caslyc w body_b_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_caspes w body_m_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_cassep w body_h_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_casdeg w body_c_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_casdel w body_b_tall    { $$ = _ycell($1, $3); }
@@ -647,6 +652,7 @@ tall
     body_i_tall: gene w bank_tall           { $$ = _ycell($1, $3); }
     body_j_tall: rope w rack_tall           { $$ = _ycell($1, $3); }
     body_k_tall: gene w gene                { $$ = _ytrel($1, $3, u2_nul); }
+    body_m_tall: gene w gene w rack_tall    { $$ = _ytrel($1, $3, $5); }
 /*
     body_o_tall: gene                       { $$ = $1; }
 */
@@ -771,6 +777,7 @@ tall
     di_cassig: si_cas si_sig  { $$ = c3__cssg; }
     di_caszap: si_cas si_zap  { $$ = c3__cszp; }
     di_caslyc: si_cas si_lyc  { $$ = c3__cslc; }
+    di_caspes: si_cas si_pes  { $$ = c3__csps; }
     di_cassep: si_cas si_sep  { $$ = c3__cssp; }
 
     di_hesbar: si_hes si_bar  { $$ = c3__hsbr; }
@@ -853,6 +860,7 @@ tall
     di_zapdax: si_zap si_dax  { $$ = c3__zpdx; }
     di_zapmit: si_zap si_mit  { $$ = c3__zpmt; }
     di_zaptam: si_zap si_tam  { $$ = c3__zptm; }
+    di_zapvon: si_zap si_von  { $$ = c3__zpvn; }
     di_zapzap: si_zap si_zap  { $$ = c3__zpzp; }
     di_zapdeg: si_zap si_deg  { $$ = c3__zpdg; scanner->bug = u2_yes; }
     

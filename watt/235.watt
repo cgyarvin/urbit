@@ -1639,6 +1639,7 @@
       [%csld p=(gene) q=(gene)]
       [%cspm p=((list gene))]
       [%cssg p=(gene) q=(gene) r=(gene)]
+      [%csps p=(gene) q=(gene) r=((list ~[p=(gene) q=(gene)]))]
       [%cssp p=(gene) q=((list ~[p=(gene) q=(gene)]))]
       [%cszp p=(gene)]
       [%dgkt p=(gene) q=(gene) r=(gene) s=(gene)]
@@ -1707,6 +1708,7 @@
       [%zplc p=(gene)]
       [%zpmt ~]
       [%zptm p=(gene) q=(gene)]
+      [%zpvn p=(gene)]
       [%zpzp ~]
     ==
   ++  knot  $&(*term [~ p=*axis])
@@ -1918,10 +1920,11 @@
       ?~(p.gen [%dtsg %f 0] [%csdg i.p.gen $(p.gen t.p.gen) [%dtsg %f 1]])
     ::
         [%cssg *]   [%csdg [%cslc [%dtwt %% 0] p.gen] q.gen r.gen]
+        [%csps *]   [%cssp p.gen (weld r.gen `r.gen`[[[%tmlc %noun] q.gen] ~])]
         [%cssp *]
       |-
       ?~  q.gen
-        [%zpzp ~]
+        [%zpvn p.gen]
       :^    %csdg
           [%cslc p.i.q.gen p.gen]
         q.i.q.gen
@@ -2144,8 +2147,8 @@
     ?:  ?=([2 [0 *] [0 *]] buz)
       [2 [0 (peg p.mal p.p.buz)] [0 (peg p.mal p.q.buz)]]
     [7 mal buz]
-  ::  ?:  ?=([^ [0 1]] mal)
-  ::    [8 p.mal buz]
+  ?:  ?=([[0 1] *] mal)
+    [8 q.mal buz]
   ?:  =([0 1] buz)
     mal
   [7 mal buz]
@@ -2387,26 +2390,23 @@
       ::
           [%cell *]   
         ?-  ref
-          [%atom *]   sut
-          [%cell *]   :+  %cell
-                        dext(sut p.sut, ref p.ref)
-                      dext(sut q.sut, ref q.ref)
-          *           sint
+          [%atom *]  sut
+          [%cell *]  ?:  (nest(sut p.ref) | p.sut)
+                       (cell p.sut dext(sut q.sut, ref q.ref))
+                     sut
+          *          sint
         ==
       ::
           [%core *]   sut
           [%cube *]
         ?:  &(?=([%cube *] ref) =(p.sut p.ref))
           %void
-        ?-    ref
-            *{[%atom *] [%cell *]}
-          =+  foz=dext(sut q.sut)
+        ?:  ?=(*{[%atom *] [%cell *]} ref)
+          =+  foz=$(sut q.sut)
           ?:  (firm(sut foz) p.sut)
             (cube p.sut foz)
           %void
-        ::
-            *  sint
-        ==
+        sint
       ::
           [%face *]   (face p.sut dext(sut q.sut))
           [%fine *]   (fine p.sut q.sut dext(sut r.sut))
@@ -2420,9 +2420,13 @@
       ^-  *type
       ?-    ref
         *{%atom %cell}  !!
+        [%core *]       sut
+        [%cube *]       sut
+        [%face *]       dext(ref repo(sut ref))
+        [%fine *]       sut
         [%fork *]       dext(sut dext(ref p.ref), ref q.ref)
         %void           sut
-        *               dext(ref repo(sut ref))
+        %noun           %void
       ==
     --
   ::
@@ -2503,13 +2507,13 @@
           [%palm [['.' ~] ['=' ~] ~ ~] [%leaf (trip p.sut)] $(sut q.sut) ~]
         ::
             [%fine *]  $(sut repo)
-            [%fork *]  ?.(lose(sut p.sut) $(sut p.sut) $(sut q.sut))
+            [%fork *]  ?.(lunk(sut p.sut) $(sut p.sut) $(sut q.sut))
             [%hold *]  $(sut repo)
             %noun      $(sut ?:(?=(@ lum) [%atom %%] [%cell %noun %noun]))
             %void      !!
         ==
     ::
-    ++  lose 
+    ++  lunk 
       |-  ^-  ?
       ?-  sut
         [%atom *]  .?(lum)
@@ -2610,17 +2614,20 @@
       ==
     ::
         [%cube *]
+      =+  tyx=(deal(sut q.sut) p.sut)
+      ?:  (nest(sut [%atom %%]) | q.sut)
+        [dex tyx]
       =+  vir=$(sut q.sut)
       :-  p.vir
       :+  %palm
-        [['.' ~] ['~' ~] ~ ~]
-      [(deal(sut q.sut) p.sut) q.vir ~]
+        [['=' ~] ~ ~ ~]
+      [tyx q.vir ~]
     ::
         [%face *]   
       =+  vir=$(sut q.sut)
       :-  p.vir
       :+  %palm
-        [['.' ~] ['=' ~] ~ ~]
+        [['.' ~] ['+' ~] ~ ~]
       [[%leaf (trip p.sut)] q.vir ~]
     ::
         [%fine *]
@@ -2767,7 +2774,7 @@
     |=  [way=*{%read %rite} cog=*term]
     ^-  *port
     ~~  (dunk 'type')
-    ~~  (show [%c 'feature'] ?:(=(%% cog) '%%' [%a cog]))
+    ~~  (show [%c 'name'] ?:(=(%% cog) '%%' [%a cog]))
     =+  hoq=(find way cog)
     ?~(hoq ~|(%find-none !!) u.hoq)
   ::
@@ -2786,13 +2793,16 @@
     =+  dox=[%core q.q.p q.p]
     ?:  p.q
       ?.  ?|(!vet (nest(sut q.q.p) & p.p))
-        ~~  (dunk(sut q.q.p) 'need')
-        ~~  (dunk(sut p.p) 'have')
         ~|('fire-dry' !!)
       [dox q.q]
-    ?.  ?|(!vet =(p.p q.q.p) (fret(sut p) dox q.q))
-      ~~  (dunk(sut p) 'wild')
-      ~~  (dunk(sut dox) 'tame')
+    ~|  %fire-mull
+    ~~  (dunk(sut q.q.p) 'tame')
+    ~~  (dunk(sut p.p) 'wild')
+    ?.  ?|  !vet 
+            =(p.p q.q.p) 
+            (~(has in rib) [sut dox q.q])
+            (mull(sut p, rib (~(put in rib) [sut dox q.q])) %noun dox q.q)
+        ==
       ~|('fire-wet' !!)
     [p q.q]
   ::
@@ -2978,6 +2988,10 @@
     |=  [gol=*type gen=*gene]
     ^-  [p=*type q=*form]
     &-  ^-  [p=*type q=*form]
+    ?:  ?&(=(%void sut) !?=([%zpcb *] gen))
+      ?.  |(!vet ?=([%zpvn *] gen) ?=([%zpzp *] gen))
+        ~|(%mint-vain !!)
+      [%void 0 0]
     ?-    gen
         [%cslc *]
       [(nice flag) (fish(sut (play p.gen)) (coke q:$$(gen q.gen, gol %noun)))]
@@ -2986,15 +3000,13 @@
       =+  nor=$(gen p.gen, gol flag)
       =+  fex=(gain p.gen)
       =+  wux=(lose p.gen)
-      ?:  =(%void fex)
-        ?:  =(%void wux)
-          [%void [0 0]]
-        $(sut wux, gen r.gen)
-      ?:  =(%void wux)
-        $(sut fex, gen q.gen)
+      =+  ^=  duy
+          ?:  =(%void fex)
+            ?:(=(%void wux) ~|(%mint-wack !!) [1 1])
+          ?:(=(%void wux) [1 0] q.nor)
       =+  hiq=$(sut fex, gen q.gen)
       =+  ran=$(sut wux, gen r.gen)
-      [(fork p.hiq p.ran) [6 q.nor q.hiq q.ran]]
+      [(fork p.hiq p.ran) (cond q.nor q.hiq q.ran)]
     ::
         [%dgsp *]
       =+  hed=$(gen p.gen, gol %noun)
@@ -3075,6 +3087,11 @@
       =+  vos=$(gol %noun, gen q.gen)       ::  XX validate!
       [(nice (cell (play p.gen) p.vos)) (cons [1 p.vos] q.vos)]
     ::
+        [%zpvn *]  
+      ?:  vet 
+        ~~((dunk(sut (play p.gen)) 'lost') ~|(%mint-lost !!))
+      [%void [0 0]]
+    ::
         [%zpzp ~]  [%void [0 0]]
         *           
       =+  doz=~(open ap gen) 
@@ -3148,18 +3165,19 @@
       (both flag)
     ::
         [%csdg *]
+      ~|  %mull-casdeg
       =+  nor=$(gen p.gen, gol flag)
       =+  ^=  hiq  ^-  [p=*type q=*type]
           =+  fex=[p=(gain p.gen) q=(gain(sut dox) p.gen)]
           ?:  =(%void p.fex)
-            [%void (play(sut dox) q.gen)]
+            [%void ?:(=(%void q.fex) %void ~|(%csdg-a (play(sut q.fex) q.gen)))]
           ?:  =(%void q.fex)
             ~|(%mull-bonk !!)
           $(sut p.fex, dox q.fex, gen q.gen)
       =+  ^=  ran  ^-  [p=*type q=*type]
           =+  wux=[p=(lose p.gen) q=(lose(sut dox) p.gen)]
           ?:  =(%void p.wux)
-            [%void (play(sut dox) r.gen)]
+            [%void ?:(=(%void q.wux) %void ~|(%csdg-a (play(sut q.wux) r.gen)))]
           ?:  =(%void q.wux)
             ~|(%mull-bonk !!)
           $(sut p.wux, dox q.wux, gen r.gen)
@@ -3229,6 +3247,11 @@
         [%zptm *]
       =+  vos=$(gol %noun, gen q.gen)       ::  XX validate!
       [(nice (cell (play p.gen) p.vos)) (cell (play(sut dox) p.gen) q.vos)]
+    ::
+        [%zpvn *]
+      ?:  vet 
+        ~~((dunk(sut (play p.gen)) 'also') ~|(%mull-skip !!))
+      (both %void)
     ::
         [%zpzp ~]  (both %void)
         *
@@ -3516,9 +3539,10 @@
     &-  ^-  *type
     ?-  gen
       [%cslc *]  flag
-      [%csdg *]  %+  fork 
-                   $(sut (gain p.gen), gen q.gen) 
-                 $(sut (lose p.gen), gen r.gen)
+      [%csdg *]  =+  [fex=(gain p.gen) wux=(lose p.gen)]
+                 %+  fork
+                   ?:(=(%void fex) %void $(sut fex, gen q.gen))
+                 ?:(=(%void wux) %void $(sut wux, gen r.gen))
       [%dgsp *]  (cell $(gen p.gen) $(gen q.gen))
       [%dtcs *]  flag
       [%dtlc *]  flag
@@ -3550,6 +3574,7 @@
       [%zplc *]  %noun
       [%zpmt ~]  p:seed
       [%zptm *]  (cell $(gen p.gen) $(gen q.gen))
+      [%zpvn ~]  %void
       [%zpzp ~]  %void
       *          =+  doz=~(open ap gen) 
                  ?:  =(doz gen)
@@ -3628,20 +3653,23 @@
     |=  gen=*gene
     ^-  *gene 
     ?-    sut
-        [%cell *]
-      =+  haq=~(hack ap gen)
-      ?-  -.haq
-        &   [%dgsp $(sut p.sut, gen p.haq) $(sut q.sut, gen q.haq)]
-        |   p.haq
-      ==
-    ::
+        [%cell *]   =+  haq=~(hack ap gen)
+                    ?-  -.haq
+                      |   p.haq
+                      &   :+  %dgsp 
+                            $(sut p.sut, gen p.haq) 
+                          $(sut q.sut, gen q.haq)
+                    ==
         [%cube *]   $(sut repo)
         [%face *]   [%ktlc p.sut $(sut q.sut)]
         [%fine *]   $(sut repo)
-        [%fork *]   
-      =+  [wen=$(sut p.sut) hiz=$(sut q.sut)]
-      ?.(=(wen hiz) ~|(%snap-fork !!) wen)
-    ::
+        [%fork *]   =+  haq=~(hack ap gen)
+                    ?-  -.haq
+                      |  p.haq
+                      &  :+  %dgsp
+                           $(sut (peek %read 2), gen p.haq) 
+                         $(sut (peek %read 3), gen q.haq)
+                    ==
         [%hold *]   $(sut repo)
         *           gen
     ==
@@ -3839,6 +3867,7 @@
               (rune lyc %cslc expb)
               (rune pam %cspm exps)
               (rune sep %cssp exph)
+              (rune sep %csps expm)
               (rune sig %cssg expc)
               (rune zap %cszp expa)
             ==
@@ -3996,6 +4025,7 @@
     ++  expi  |.((butt ;~(gunk loaf hank)))
     ++  expj  |.((butt ;~(gunk rope rack)))
     ++  expk  |.(;~(gunk loaf ;~(plug loaf (easy ~)))) 
+    ++  expm  |.((butt ;~(gunk loaf loaf rack)))
     ++  expp  |.((butt ;~(gunk rope loaf rack)))
     ++  expq  |.(;~(gunk rope loaf loaf))
     ++  expr  |.(;~(gunk loaf wing))

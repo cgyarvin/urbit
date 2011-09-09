@@ -12,4 +12,3 @@
   :-  (~(dunk ut p.man) %type)
   (~(deal ut p.man) .*(q.env q.man))
 --
-
