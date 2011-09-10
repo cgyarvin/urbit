@@ -16,7 +16,7 @@
       return u2_none;
     }
     else {
-      u2_noun p_mal, p_buz, q_buz, pp_buz, pq_buz;
+      u2_noun p_mal, q_mal, p_buz, q_buz, pp_buz, pq_buz;
 
       if ( (u2_yes == u2_as_p(mal, u2_nock_0, &p_mal)) && (_0 != p_mal) ) {
         if ( (u2_yes == u2_as_p(buz, u2_nock_0, &p_buz)) && (_0 != p_buz) ) {
@@ -38,16 +38,14 @@
         else return u2_rt(wir_r, u2_nock_7, u2_rx(wir_r, mal), 
                                                u2_rx(wir_r, buz));
       }
-#if 0
       else if ( (u2_yes == u2_as_bush(mal, &p_mal, &q_mal)) &&
-                (u2_yes == u2_dust(q_mal)) && 
-                (_0 == u2_h(q_mal)) &&
-                (_1 == u2_t(q_mal)) )
+                (u2_yes == u2_dust(p_mal)) && 
+                (_0 == u2_h(p_mal)) &&
+                (_1 == u2_t(p_mal)) )
       {
-        return u2_rt(wir_r, u2_nock_8, u2_rx(wir_r, p_mal), 
-                                          u2_rx(wir_r, buz));
+        return u2_rt(wir_r, u2_nock_8, u2_rx(wir_r, q_mal), 
+                                       u2_rx(wir_r, buz));
       }
-#endif
       else if ( (u2_yes == u2_as_p(buz, u2_nock_0, &p_buz)) &&
                 (u2_yes == u2_sing(_1, p_buz)) )
       {

@@ -1818,6 +1818,7 @@
       -<
     ==
       %hack  hack
+      %late  late
       %mold  mold
       %open  open
       %rake  rake
@@ -2792,18 +2793,16 @@
       ~|(%fire-core !!)
     =+  dox=[%core q.q.p q.p]
     ?:  p.q
-      ?.  ?|(!vet (nest(sut q.q.p) & p.p))
-        ~|('fire-dry' !!)
+      ~|  %fire-dry
+      ?>  ?|(!vet (nest(sut q.q.p) & p.p))
       [dox q.q]
-    ~|  %fire-mull
-    ~~  (dunk(sut q.q.p) 'tame')
-    ~~  (dunk(sut p.p) 'wild')
-    ?.  ?|  !vet 
+    ~|  %fire-wet
+    ~~  (dunk(sut [%cell q.q.p p.p]) %case)
+    ?>  ?|  !vet 
             =(p.p q.q.p) 
             (~(has in rib) [sut dox q.q])
             (mull(sut p, rib (~(put in rib) [sut dox q.q])) %noun dox q.q)
         ==
-      ~|('fire-wet' !!)
     [p q.q]
   ::
   ++  firm
@@ -2994,7 +2993,7 @@
       [%void 0 0]
     ?-    gen
         [%cslc *]
-      [(nice flag) (fish(sut (play p.gen)) (coke q:$$(gen q.gen, gol %noun)))]
+      [(nice flag) (fish(sut (play p.gen)) (coke q:$(gen q.gen, gol %noun)))]
     ::
         [%csdg *]
       =+  nor=$(gen p.gen, gol flag)
@@ -3014,17 +3013,17 @@
       [(nice (cell p.hed p.tal)) (cons q.hed q.tal)]
     ::
         [%dtlc *]
-      [(nice flag) [5 q:$$(gen p.gen, gol %noun) q:$$(gen q.gen, gol %noun)]]
+      [(nice flag) [5 q:$(gen p.gen, gol %noun) q:$(gen q.gen, gol %noun)]]
     ::
-        [%dtcs *]  [(nice flag) [3 q:$$(gen p.gen, gol %noun)]]
-        [%dtps *]  [(nice [%atom %%]) [4 q:$$(gen p.gen, gol [%atom %%])]]
+        [%dtcs *]  [(nice flag) [3 q:$(gen p.gen, gol %noun)]]
+        [%dtps *]  [(nice [%atom %%]) [4 q:$(gen p.gen, gol [%atom %%])]]
         [%dtsg *]
       ?:  .?(q.gen)
         [(nice [%cube q.gen %noun]) [1 q.gen]]
       [(nice [%cube q.gen %atom p.gen]) [1 q.gen]]
     ::
         [%dttr *]
-      [(nice %noun) [2 q:$$(gen p.gen, gol %noun) q:$$(gen q.gen, gol %noun)]]
+      [(nice %noun) [2 q:$(gen p.gen, gol %noun) q:$(gen q.gen, gol %noun)]]
     ::
         [%dtwt *]  [(nice [%atom p.gen]) [1 q.gen]]
         [%ktlc *]  =+(vat=$(gen q.gen) [(face p.gen p.vat) q.vat])
@@ -3041,7 +3040,9 @@
       ~~  (dunk %ktsg)
       [p.nef [1 ~|(%mint-burn .*(burn q.nef))]]
     ::
-        [%ktsp *]  =+(hif=(nice (play p.gen)) [hif q:$$(gen q.gen, gol hif)])
+        [%ktsp *]  
+      =+(hif=(nice (play p.gen)) [hif q:$(gen q.gen, gol hif)])
+    ::
         [%lcld *]
       =+  lem=$(gen p.gen, gol %noun)
       =+  soq=$(sut p.lem, gen q.gen)
@@ -3056,7 +3057,7 @@
       |-  ^-  [p=*(list ~[p=*type q=*gate]) q=*form]
       ?~  mew
         [q.q.lar (hike p.lar hej)]
-      =+  zil=$$(gen q.i.mew)
+      =+  zil=$$(gen q.i.mew, gol %noun)
       =+  wip=(tock p.i.mew p.zil q.q.lar)
       $(mew t.mew, q.q.lar q.wip, hej [[p.wip q.zil] hej])
     ::
@@ -3070,7 +3071,7 @@
       :+  10
         ?-    p.gen
             @   p.gen
-            ^   [p.p.gen q:$$(gen q.p.gen, gol %noun)]
+            ^   [p.p.gen q:$(gen q.p.gen, gol %noun)]
         ==
       q.hum
     ::
@@ -3081,7 +3082,7 @@
       [p.hum [10 [%spot 1 p.gen] q.hum]]
     ::
         [%zpdx *]  ~#($(gen p.gen))
-        [%zplc *]  [(nice %noun) [1 q:$$(vet |, gen p.gen)]]
+        [%zplc *]  [(nice %noun) [1 q:$(vet |, gen p.gen)]]
         [%zpmt ~]  =+(pet=seed [(nice p.pet) [1 q.pet]])
         [%zptm *]
       =+  vos=$(gol %noun, gen q.gen)       ::  XX validate!
@@ -3109,6 +3110,11 @@
       ?>  ?=(^ dab)
       ?>  ?=([& *] q.n.dab)
       =+  vad=q:$$(vet ?:(p.p.q.n.dab vet |), gol %noun, gen q.p.q.n.dab)
+      ?:  =(%wok p.n.dab)
+        ~|  [%vet vet]
+        ~|  [%gen q.p.q.n.dab]
+        ~|  [%vad vad]
+        ~|(%bake-bug !!)
       ?-    dab
           [* ~ ~]   vad
           [* ~ *]   [vad $(dab r.dab)]
@@ -3126,10 +3132,8 @@
     ::
     ++  nice
       |=  typ=*type
-      ?.  ?|(!vet (nest(sut gol) & typ))
-        ~~  (dunk(sut gol) 'need')
-        ~~  (dunk(sut typ) 'have')
-        ~|('mint-nice' !!)
+      ~|  %mint-nice
+      ?>  ?|(!vet (nest(sut gol) & typ))
       typ
     ::
     ++  grow
@@ -3156,7 +3160,7 @@
       ~|(%mull-none !!)
     ?-    gen
         [%cslc *]
-      =+  waz=$(gen p.gen)
+      =+  waz=[p=(play p.gen) q=(play(sut dox) p.gen)]
       =+  ^=  syx  :-  p=(coke q:(mint %noun q.gen)) 
                    q=(coke q:(mint(sut dox) %noun q.gen))
       =+  pov=[p=(fish(sut p.waz) p.syx) q=(fish(sut q.waz) q.syx)]
@@ -3166,6 +3170,8 @@
     ::
         [%csdg *]
       ~|  %mull-casdeg
+      ~~  (dunk(sut (play p.gen)) %giv)
+      ~~  (show %q gen)
       =+  nor=$(gen p.gen, gol flag)
       =+  ^=  hiq  ^-  [p=*type q=*type]
           =+  fex=[p=(gain p.gen) q=(gain(sut dox) p.gen)]
@@ -3188,11 +3194,15 @@
       =+  tal=$(gen q.gen, gol %noun)
       [(nice (cell p.hed p.tal)) (cell q.hed q.tal)]
     ::
-        [%dtlc *]  =+([$(gen p.gen) $(gen q.gen)] (both flag))
-        [%dtcs *]  =+($(gen p.gen) (both flag))
+        [%dtlc *]  
+      =+([$(gen p.gen, gol %noun) $(gen q.gen, gol %noun)] (both flag))
+    ::
+        [%dtcs *]  =+($(gen p.gen, gol %noun) (both flag))
         [%dtps *]  =+($(gen p.gen, gol [%atom %%]) (both [%atom %%]))
-        [%dtsg *]  (both [%cube q.gen ?:(.?(q.gen) [%atom p.gen] %noun)])
-        [%dttr *]  =+([$(gen p.gen) $(gen q.gen)] (both %noun))
+        [%dtsg *]  (both [%cube q.gen ?:(.?(q.gen) %noun [%atom p.gen])])
+        [%dttr *]  
+      =+([$(gen p.gen, gol %noun) $(gen q.gen, gol %noun)] (both %noun))
+    ::
         [%dtwt *]  (both [%atom p.gen])
         [%ktlc *]  
       =+(vat=$(gen q.gen) [(face p.gen p.vat) (face p.gen q.vat)])
@@ -3227,7 +3237,7 @@
       |-  ^-  [p=*(list ~[p=*type q=*gate]) q=*(list ~[p=*type q=*gate])]
       ?~  mew
         [q.q.lar q.q.vug]
-      =+  zil=$$(gen q.i.mew)
+      =+  zil=$$(gen q.i.mew, gol %noun)
       =+  cuf=(tock p.i.mew p.zil q.q.lar)
       =+  dof=(tock p.i.mew q.zil q.q.vug)
       ?.  .=(p.cuf p.dof)
@@ -3276,10 +3286,10 @@
     ::
     ++  nice
       |=  typ=*type
-      ?.  ?|(!vet (nest(sut gol) & typ))
-        ~~  (dunk(sut gol) 'need')
-        ~~  (dunk(sut typ) 'have')
-        ~|('mint-nice' !!)
+      ~~  (dunk(sut gol) 'need')
+      ~~  (dunk(sut typ) 'have')
+      ~|  %mull-nice
+      ?>  ?|(!vet (nest(sut gol) & typ))
       typ
     ::
     ++  grow
@@ -3377,8 +3387,7 @@
       =-  ?:  tyn   
             & 
           ?:  tel 
-            ~~  (dunk 'need')
-            ~~  (dunk(sut ref) 'have')
+            ~~  (dunk(sut [%cell sut ref]) %case)
             ~|(%nest-fail !!)
           |
       ^=  tyn

@@ -213,6 +213,7 @@
 #   define c3__dry    c3_s3('d','r','y')
 #   define c3__dtbn   c3_s4('d','t','b','n')
 #   define c3__dtcs   c3_s4('d','t','c','s')
+#   define c3__dtdt   c3_s4('d','t','d','t')
 #   define c3__dtkt   c3_s4('d','t','k','t')
 #   define c3__dtlc   c3_s4('d','t','l','c')
 #   define c3__dtpd   c3_s4('d','t','p','d')
