@@ -1662,6 +1662,7 @@
       [%hstr p=((list gene)) q=((map term foot))]
       [%ktdg p=(gene) q=(gene)]
       [%ktdl p=(gene) q=(gene)]
+      [%ktdt p=(gene) q=(gene)]
       [%ktlc p=*term q=(gene)]
       [%ktld p=(gene) q=(gene)]
       [%ktsg p=(gene)]
@@ -2101,14 +2102,14 @@
     ~.  %late
     ?-    gen
         [%ktdl *]
-      :+  %lcps  [%ktlc %a p.gen]                   ::  =+  a=<p.gen>
-      :+  %lcps  [%ktlc %b [%lcld [~ 2] q.gen]]     ::  =+  b==>(.2 <q.gen>)
+      :+  %lcps  [%ktlc %a p.gen]                   ::  =+  a=#p.gen
+      :+  %lcps  [%ktlc %b [%lcld [~ 2] q.gen]]     ::  =+  b==>(.2 #q.gen)
       :+  %csld  [%mtsp %a %b ~]                    ::  ?>  (a b)
       %b                                            ::  b
     ::
         [%ktld *]
-      :+  %lcps  [%ktlc %a p.gen]                   ::  =+  a=<p.gen>
-      :+  %lcps  [%ktlc %b [%lcld [~ 2] q.gen]]     ::  =+  b==>(.2 <q.gen>)
+      :+  %lcps  [%ktlc %a p.gen]                   ::  =+  a=#p.gen
+      :+  %lcps  [%ktlc %b [%lcld [~ 2] q.gen]]     ::  =+  b==>(.2 #q.gen)
       :-  %brsp  :+  %ktsp  [%mttr %a]              ::  |-  ^-  *a
       :+  %lcps  [%ktlc %c [%mtsp %a %b ~]]         ::  =+  c=(a b)
       :^  %csdg  [%dtlc %b %c]                      ::  ?:  =(b c)
@@ -2308,7 +2309,6 @@
       %burn   burn
       %cull   cull
       %dunk   dunk
-      %emit   emit
       %find   find
       %fink   fink
       %fire   fire
@@ -2328,7 +2328,6 @@
       %rest   rest
       %seek   seek
       %snap   snap
-      %tuck   tuck
     ==
   =+  :*  fan=*(set ~[*type *gene])
           rib=*(set ~[*type *type *gene])
@@ -2376,11 +2375,6 @@
         %void
       ?:  =(%void ref)
         sut
-      ?:  (~(has in bix) [sut ref])
-        ~~  (dunk 'type')
-        ~~  (dunk(sut ref) 'over')
-        ~|(%crop-loop !!)
-      =>  .(bix (~(put in bix) [sut ref]))
       ?-    sut
           [%atom *] 
         ?-    ref
@@ -2398,12 +2392,16 @@
           *          sint
         ==
       ::
-          [%core *]   sut
+          [%core *]
+        ?:  ?=(*{[%atom *] [%cell *]} ref)
+          sut
+        sint
+      ::
           [%cube *]
         ?:  &(?=([%cube *] ref) =(p.sut p.ref))
           %void
         ?:  ?=(*{[%atom *] [%cell *]} ref)
-          =+  foz=$(sut q.sut)
+          =+  foz=dext(sut q.sut)
           ?:  (firm(sut foz) p.sut)
             (cube p.sut foz)
           %void
@@ -2412,7 +2410,13 @@
           [%face *]   (face p.sut dext(sut q.sut))
           [%fine *]   (fine p.sut q.sut dext(sut r.sut))
           [%fork *]   (fork dext(sut p.sut) dext(sut q.sut))
-          [%hold *]   (reco |=(a=*type dext(sut a)))
+          [%hold *]   
+        ?:  (~(has in bix) [sut ref])
+          ~~  (dunk 'type')
+          ~~  (dunk(sut ref) 'over')
+          ~|(%crop-loop !!)
+        (reco |=(a=*type dext(sut a, bix (~(put in bix) [sut ref]))))
+      ::
           %noun       (reco |=(a=*type dext(sut a)))
           %void       %void
       ==
@@ -2672,27 +2676,6 @@
     :+  %palm
       [['.' ~] ['-' ~] ~ ~]
     [[%leaf (mesc (trip paz))] duck ~]
-  ::
-  ++  emit
-    ~.  %emit
-    |=  :*  axe=*axis 
-            men=*(list ~[p=*type q=*gate])
-            har=*(list ~[p=*gene q=*gene])
-        ==
-    =+  luf=*(list ~[p=*axis q=*form])
-    |-  ^-  [p=*(list ~[p=*type q=*gate]) q=*form]
-    ?~  har
-      [men (hike axe luf)]
-    =+  peh=(flop ~(rake ap p.i.har))
-    =-  $(har t.har, men q.zos, luf [(need p.zos) luf])
-    ^=  zos
-    |-  ^-  [p=*(unit ~[p=*axis q=*form]) q=*(list ~[p=*type q=*gate])]
-    ?~  men
-      [~ ~] 
-    =+  lax=$(men t.men)
-    =+  taq=(tuck(sut p.i.men) peh sut q.i.har)
-    :-  ~|('emit-mate' (mate p.lax `p.lax`[~ u=q.taq]))
-    [[p.taq q.i.men] q.lax]
   ::
   ++  find
     ~.  %find
@@ -3035,6 +3018,7 @@
       =+  ryd=$(gen ~(late ap gen), gol %noun)
       [(nice (fine %pure (play p.gen) p.ryd)) q.ryd]
     ::
+        [%ktdt *]  $(gen (snap(sut (play p.gen)) q.gen))
         [%ktsg *]
       =+  nef=$(gen p.gen)
       ~~  (dunk %ktsg)
@@ -3210,6 +3194,13 @@
         [%ktdl *]
       =+  ryd=$(gen ~(late ap gen), gol %noun)
       [(nice (fine %very (play p.gen) p.ryd)) q.ryd]
+    ::
+        [%ktdt *]
+      =+  wiv=[p=(play p.gen) q=(play(sut dox) p.gen)]
+      =+  zyn=(snap(sut p.wiv) q.gen)
+      ?.  =(zyn (snap(sut q.wiv) q.gen))
+        ~|(%mull-bonk !!)
+      $(gen zyn)
     ::
         [%ktld *]
       =+  ryd=$(gen ~(late ap gen), gol %noun)
@@ -3561,6 +3552,7 @@
       [%dtwt *]  [%atom p.gen]
       [%ktlc *]  (face p.gen $(gen q.gen))
       [%ktdl *]  (fine %very $(gen p.gen) $(gen ~(late ap gen)))
+      [%ktdt *]  $(gen (snap(sut $(gen p.gen)) q.gen))
       [%ktld *]  (fine %pure $(gen p.gen) $(gen ~(late ap gen)))
       [%ktsg *]  $(gen p.gen)
       [%ktsp *]  $(gen p.gen)
@@ -3746,35 +3738,6 @@
     =+  geq=(tack(sut p.i.men) peh mur)
     =+  mox=$(men t.men)
     [(mate p.mox `p.mox`[~ p.geq]) [[q.geq q.i.men] q.mox]]
-  ::
-  ++  tuck
-    ~.  %tuck
-    |=  [peh=*twig boz=*type rix=*gene]
-    =+  axe=1*
-    |-
-    ^-  [p=*type q=[p=*axis q=*form]]
-    ?~  peh
-      =+  lof=(mint(sut boz) %noun rix)
-      [p.lof [axe q.lof]]
-    ?-    i.peh
-        @
-      =+  wer=(fink %rite i.peh)
-      ?.  ?=(& -.q.wer)
-        ~|('tuck-gate' !!) 
-      =+  giv=$(sut p.q.wer, axe (peg axe p.wer), peh t.peh)
-      [(heal [~ i.peh] p.wer p.giv) q.giv]
-    ::
-        [~ *]
-      =+  vas=(peek %rite p.i.peh)
-      =+  ^=  giv
-          %=    $
-              sut   vas
-              rix   ?~(t.peh (snap(sut vas) rix) rix)
-              axe   (peg axe p.i.peh)
-              peh   t.peh
-          ==
-      [(heal ~ p.i.peh p.giv) q.giv]
-    ==
   --
 ::
 ++  vast
@@ -3913,6 +3876,7 @@
             ;~  pose
               (rune deg %ktdg expb)
               (rune del %ktdl expb)
+              (rune dot %ktdt expb)
               (rune led %ktld expb)
               (rune lyc %ktlc expg)
               (rune sep %ktsp expb)

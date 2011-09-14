@@ -400,6 +400,7 @@
 #   define c3__ktdg   c3_s4('k','t','d','g')
 #   define c3__ktdl   c3_s4('k','t','d','l')
 #   define c3__ktdp   c3_s4('k','t','d','p')
+#   define c3__ktdt   c3_s4('k','t','d','t')
 #   define c3__ktlc   c3_s4('k','t','l','c')
 #   define c3__ktld   c3_s4('k','t','l','d')
 #   define c3__ktmt   c3_s4('k','t','m','t')

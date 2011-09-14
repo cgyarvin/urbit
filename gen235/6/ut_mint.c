@@ -31,19 +31,6 @@
       default: return u2_bl_bail(wir_r, c3__fail); 
     }
   }
-  static u2_flag
-  _mint_fab(u2_wire wir_r,
-            u2_noun van)
-  {
-    // u2_flag fab = u2_bn_hook(wir_r, van, "fab");
-    u2_flag fab = u2_frag(j2_ut_van_fab, van);
-
-    switch ( fab ) {
-      case u2_no: 
-      case u2_yes: return fab;
-      default: return u2_bl_bail(wir_r, c3__fail); 
-    }
-  }
 
   static u2_noun
   _mint_make(u2_wire wir_r,
@@ -107,7 +94,7 @@
   }
 
   static u2_noun 
-  _mint_crow(u2_wire wir_r,
+  _mint_grow(u2_wire wir_r,
              u2_noun van,
              u2_noun sut,
              u2_noun gol,
@@ -202,7 +189,7 @@
         u2_noun rex = j2_mcy(Pt6, ap, open)(wir_r, gen);
 
         if ( u2_yes == u2_sing(rex, gen) ) {
-#if 0
+#if 1
           u2_noun zix = j2_mcy(Pt6, ut, shep)
                 (wir_r, van, "gene", 'q', u2_rx(wir_r, gen));
 
@@ -219,27 +206,6 @@
         return ret;
       }
       
-      case c3__lcld: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
-      _mint_used(wir_r);
-      {
-        u2_flag fab = _mint_fab(wir_r, van);
-        u2_noun fid = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, c3__noun, p_gen);
-        u2_noun p_fid = u2_h(fid);
-        u2_noun q_fid = u2_t(fid);
-        u2_noun dov = j2_mcx(Pt6, ut, mint)(wir_r, van, p_fid, gol, q_gen);
-        u2_noun p_dov = u2_h(dov);
-        u2_noun q_dov = u2_t(dov);
-
-        ret = u2_bc
-          (wir_r, u2_rx(wir_r, p_dov),
-                  (u2_no == fab) 
-                    ? u2_bc(wir_r, _0, _0)
-                    : j2_mbc(Pt6, comb)(wir_r, q_fid, q_dov));
-
-        u2_rl_lose(wir_r, fid); 
-        u2_rl_lose(wir_r, dov);
-        return ret;
-      }
       case c3__cslc: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mint_used(wir_r);
       {
@@ -637,7 +603,7 @@
           (wir_r, c3__dgsp, 
                   u2_bc(wir_r, u2_nul, _1),
                   u2_rx(wir_r, p_gen));
-        u2_noun ret = _mint_crow(wir_r, van, sut, gol, c3__zinc, ruf, q_gen);
+        u2_noun ret = _mint_grow(wir_r, van, sut, gol, c3__zinc, ruf, q_gen);
 
         u2_rz(wir_r, ruf);
         return ret;
@@ -647,7 +613,7 @@
       {
         u2_noun ruf = u2_bc(wir_r, u2_nul, _1);
 
-        ret = _mint_crow(wir_r, van, sut, gol, c3__gold, ruf, p_gen);
+        ret = _mint_grow(wir_r, van, sut, gol, c3__gold, ruf, p_gen);
         u2_rz(wir_r, ruf);
 
         return ret;
@@ -657,7 +623,7 @@
       {
         u2_noun ruf = u2_bc(wir_r, u2_nul, _1);
 
-        ret = _mint_crow(wir_r, van, sut, gol, c3__lead, ruf, p_gen);
+        ret = _mint_grow(wir_r, van, sut, gol, c3__lead, ruf, p_gen);
         u2_rz(wir_r, ruf);
 
         return ret;
@@ -669,7 +635,7 @@
           (wir_r, c3__dgsp, 
                   u2_bc(wir_r, u2_nul, _1),
                   u2_rx(wir_r, p_gen));
-        u2_noun ret = _mint_crow(wir_r, van, sut, gol, c3__iron, ruf, q_gen);
+        u2_noun ret = _mint_grow(wir_r, van, sut, gol, c3__iron, ruf, q_gen);
 
         u2_rz(wir_r, ruf);
         return ret;
