@@ -37,7 +37,7 @@
         u2_noun qog   = u2_bc(wir_r, u2_nul, u2_rx(wir_r, i_peh));
         u2_noun ret   = u2_bc
           (wir_r, u2_rx(wir_r, p_gav),
-                  j2_mcy(Pit, ut, heal)(wir_r, van, sut, qog, p_wuf, q_gav));
+                  j2_mcy(Pt6, ut, heal)(wir_r, van, sut, qog, p_wuf, q_gav));
 
         u2_rz(wir_r, qog);
         u2_rz(wir_r, gav);
@@ -56,7 +56,7 @@
         u2_noun q_gav = u2_t(gav);
         u2_noun ret   = u2_bc
           (wir_r, u2_rx(wir_r, p_gav),
-                  j2_mcy(Pit, ut, heal)(wir_r, van, sut, u2_nul, bax, q_gav));
+                  j2_mcy(Pt6, ut, heal)(wir_r, van, sut, u2_nul, bax, q_gav));
         
         u2_rz(wir_r, gav);
         u2_rz(wir_r, nax);

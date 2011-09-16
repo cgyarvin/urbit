@@ -2851,15 +2851,6 @@
       $(sut repo)
     ==
   ::
-  ++  fret
-    ~.  %fret
-    |=  [dox=*type gen=*gene]
-    ^-  ?
-    ?|  (~(has in rib) [sut dox gen])
-        .=  q:(mint(fab &, sut dox, vet |) %noun gen)
-          q:(mint(fab &, rib (~(put in rib) [sut dox gen])) %noun gen)
-    ==
-  ::
   ++  fuse
     ~.  %fuse
     |=  ref=*type
@@ -3035,12 +3026,12 @@
         [%mtlc *]
       =+  lar=(foil (seek %read p.gen))
       =+  mew=(swab q.q.lar q.gen)
-      =-  [(nice (fire p.yom)) ?:(=(0 p.q.lar) q.yom [9 p.q.lar q.yom])]
+      =-  [(nice p.yom) ?:(=(0 p.q.lar) q.yom [9 p.q.lar q.yom])]
       ^=  yom
       =+  hej=*(list ~[p=*axis q=*form])
-      |-  ^-  [p=*(list ~[p=*type q=*gate]) q=*form]
+      |-  ^-  [p=*type q=*form]
       ?~  mew
-        [q.q.lar (hike p.lar hej)]
+        [(fire q.q.lar) (hike p.lar hej)]
       =+  zil=$$(gen q.i.mew, gol %noun)
       =+  wip=(tock p.i.mew p.zil q.q.lar)
       $(mew t.mew, q.q.lar q.wip, hej [[p.wip q.zil] hej])
@@ -3124,8 +3115,6 @@
       |=  [mel=*{%gold %iron %lead %zinc} ruf=*gene dab=*(map term foot)]
       ^-  [p=*type q=*form]
       =+  dan=$$(gen ruf, gol %noun)
-      ?.  fab
-        [(core p.dan mel p.dan [[0 0] dab]) [0 0]]
       =+  toc=(core p.dan [%gold p.dan [~ dab]])
       =+  dez=(bake(sut toc) dab)
       :-  (nice (core p.dan mel p.dan [dez dab]))
@@ -3689,14 +3678,14 @@
   ::
   ++  snub
     ~.  %snub
-    |=  [peh=*twig raf=*(list ~[p=*type q=*gate]) gen=*gene]
+    |=  [peh=*twig men=*(list ~[p=*type q=*gate]) gen=*gene]
     =+  gus=*(unit gene)
     |-  ^-  *gene
-    ?~  raf
+    ?~  men
       ?~(gus gen u.gus)
-    ?:  =(& p.q.i.raf)
-      $(raf t.raf)
-    $(raf t.raf, gus (mate gus `gus`[~ (snip(sut p.i.raf) peh gen)]))
+    ?:  =(& p.q.i.men)
+      $(men t.men)
+    $(men t.men, gus (mate gus `gus`[~ (snip(sut p.i.men) peh gen)]))
   ::
   ++  swab
     ~.  %swab

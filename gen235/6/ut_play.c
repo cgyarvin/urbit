@@ -54,24 +54,26 @@
  
   static u2_noun                                                  //  produce
   _play_edit(u2_wire wir_r,
-             u2_noun sut,                                         //  retain
              u2_noun van,                                         //  retain
+             u2_noun sut,                                         //  retain
              u2_noun mew,                                         //  retain
-             u2_noun lov)                                         //  submit
+             u2_noun rag)                                         //  submit
   {
     while ( 1 ) {
       if ( u2_no == u2_dust(mew) ) {
-        return lov;
+        return rag;
       } else {
         u2_noun i_mew = u2_h(mew);
         u2_noun t_mew = u2_t(mew);
         u2_noun pi_mew = u2_h(i_mew);
         u2_noun qi_mew = u2_t(i_mew);
-        u2_noun laf = _play_in(wir_r, sut, van, qi_mew);
-        u2_noun ruz = j2_mcy(Pit, ut, tock)(wir_r, sut, van, pi_mew, laf, lov);
+        u2_noun laf = _play_in(wir_r, van, sut, qi_mew);
+        u2_noun ruz = j2_mcy(Pt6, ut, tock)(wir_r, van, sut, pi_mew, laf, rag);
         
-        u2_rz(wir_r, lov);
-        lov = ruz;
+        u2_rz(wir_r, rag);
+        rag = u2_rx(wir_r, u2_t(ruz));
+        u2_rz(wir_r, ruz);
+
         mew = t_mew;
       }
     }
