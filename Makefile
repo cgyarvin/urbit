@@ -1540,6 +1540,7 @@ J235_6_OFILES=\
        gen235/6/flan.o \
        gen235/6/flip.o \
        gen235/6/flor.o \
+       gen235/6/foam.o \
        gen235/6/fork.o \
        gen235/6/hike.o \
        gen235/6/look.o \
@@ -1547,23 +1548,23 @@ J235_6_OFILES=\
        gen235/6/ut.o
 
 J235_6_OFILES_UT=\
-       gen235/6/ut_bake.o \
        gen235/6/ut_burn.o \
        gen235/6/ut_bust.o \
+       gen235/6/ut_crop.o \
        gen235/6/ut_cull.o \
-       gen235/6/ut_emit.o \
        gen235/6/ut_find.o \
        gen235/6/ut_fink.o \
        gen235/6/ut_fire.o \
        gen235/6/ut_firm.o \
        gen235/6/ut_fish.o \
-       gen235/6/ut_fret.o \
        gen235/6/ut_fuse.o \
        gen235/6/ut_gain.o \
        gen235/6/ut_heal.o \
+       gen235/6/ut_lose.o \
        gen235/6/ut_mint.o \
-       gen235/6/ut_orth.o \
+       gen235/6/ut_mull.o \
        gen235/6/ut_nest.o \
+       gen235/6/ut_orth.o \
        gen235/6/ut_park.o \
        gen235/6/ut_peek.o \
        gen235/6/ut_play.o \
@@ -1571,7 +1572,10 @@ J235_6_OFILES_UT=\
        gen235/6/ut_rest.o \
        gen235/6/ut_seek.o \
        gen235/6/ut_snap.o \
-       gen235/6/ut_tuck.o
+       gen235/6/ut_swab.o \
+       gen235/6/ut_tack.o \
+       gen235/6/ut_tock.o
+
 
 J235_OFILES=\
        $(J235_1_OFILES) \

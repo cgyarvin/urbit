@@ -26,7 +26,7 @@
       u2_noun geq    = j2_mcy(Pt6, ut, tack)(wir_r, van, pi_men, peh, mur);
       u2_noun p_geq  = u2_h(geq);
       u2_noun q_geq  = u2_t(geq);
-      u2_noun mox    = _tack_in(wir_r, van, sut, peh, mur, t_men);
+      u2_noun mox    = _tock_in(wir_r, van, sut, peh, mur, t_men);
       u2_noun p_mox  = u2_h(mox);
       u2_noun q_mox  = u2_t(mox);
       u2_noun wax, ret;

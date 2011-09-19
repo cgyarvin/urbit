@@ -21,6 +21,21 @@
   }
 
   static u2_noun                                                  //  produce
+  _play_loc(u2_wire wir_r,
+            u2_noun van,                                          //  retain
+            u2_noun loc)                                          //  retain
+  {
+    u2_noun mol = u2_bc(wir_r, 'o', u2_rx(wir_r, loc)); 
+    u2_noun sho = u2_bn_hook(wir_r, van, "show");
+    u2_noun ret = u2_bn_molt(wir_r, sho, u2_cw_sam, mol, 0);
+ 
+    u2_rz(wir_r, mol);
+    u2_rz(wir_r, sho);
+
+    return ret;
+  }
+
+  static u2_noun                                                  //  produce
   _play_foil(u2_wire wir_r,
              u2_noun pok)                                         //  submit
   {
@@ -77,6 +92,24 @@
         mew = t_mew;
       }
     }
+  }
+
+  static u2_noun 
+  _play_grow(u2_wire wir_r,
+             u2_noun van,
+             u2_noun sut,
+             u2_atom mel,
+             u2_noun ruf,
+             u2_noun dab)
+  {
+    u2_noun dan = _play_in(wir_r, van, sut, ruf);
+
+    return j2_mby(Pt6, core)
+        (wir_r, dan,
+                u2_bt(wir_r, u2_rx(wir_r, mel),
+                             u2_rx(wir_r, dan), 
+                             u2_bc(wir_r, u2_bc(wir_r, u2_nul, u2_nul),
+                                          u2_rx(wir_r, dab))));
   }
 
   static u2_noun
@@ -274,20 +307,18 @@
       _play_used(wir_r);
       {
         u2_noun ruf = u2_bc(wir_r, u2_nul, _1);
+        u2_noun ret = _play_grow(wir_r, van, sut, c3__gold, ruf, p_gen);
 
-        ret = _play_grow(wir_r, van, sut, c3__gold, ruf, p_gen);
         u2_rz(wir_r, ruf);
-
         return ret;
       }
       case c3__pmmt: p_gen = u2_t(gen);
       _play_used(wir_r);
       {
         u2_noun ruf = u2_bc(wir_r, u2_nul, _1);
+        u2_noun ret = _play_grow(wir_r, van, sut, c3__lead, ruf, p_gen);
 
-        ret = _play_grow(wir_r, van, sut, c3__lead, ruf, p_gen);
         u2_rz(wir_r, ruf);
-
         return ret;
       }
       case c3__pmps: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
@@ -321,7 +352,7 @@
       {
         u2_noun ret;
 
-        u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, _mint_loc(wir_r, van, p_gen)));
+        u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, _play_loc(wir_r, van, p_gen)));
         {
           ret = _play_in(wir_r, van, sut, q_gen);
         }
@@ -337,7 +368,7 @@
       _play_used(wir_r);
       {
         u2_noun pet = u2_bn_hook(wir_r, van, "seed");
-        u2_noun ret = u2_h(pet);
+        u2_noun ret = u2_rx(wir_r, u2_h(pet));
 
         u2_rz(wir_r, pet);
         return ret;
@@ -354,6 +385,7 @@
 
         return ret;
       }
+      case c3__zpvn:
       case c3__zpzp:
       _play_used(wir_r);
       {

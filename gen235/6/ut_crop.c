@@ -20,7 +20,7 @@
              u2_noun bix)
   {
     u2_noun rep = j2_mcy(Pt6, ut, repo)(wir_r, van, sut);
-    u2_noun ret = _crop_in(wir_r, van, rep, ref, bix);
+    u2_noun ret = _crop_dext(wir_r, van, rep, ref, bix);
 
     if ( u2_yes == u2_sing(ret, rep) ) {
       u2_rz(wir_r, rep);
@@ -53,7 +53,7 @@
     if ( u2_no == u2_dust(sut) ) switch ( sut ) {
       default: return u2_bl_bail(wir_r, c3__fail);
 
-      case c3__noun: return _crop_repo(van, sut, ref, bix);
+      case c3__noun: return _crop_repo(wir_r, van, sut, ref, bix);
       case c3__void: return c3__void;
     }
     else switch ( u2_h(sut) ) {
@@ -80,7 +80,7 @@
           if ( u2_yes == j2_mcy(Pt6, ut, nest)
                               (wir_r, van, p_ref, u2_no, p_sut) ) 
           {
-            u2_noun foz = _nest_dext(wir_r, van, q_sut, q_ref, bix);
+            u2_noun foz = _crop_dext(wir_r, van, q_sut, q_ref, bix);
             u2_noun ret = j2_mby(Pt6, cell)(wir_r, p_sut, foz);
 
             u2_rz(wir_r, foz);
@@ -118,7 +118,7 @@
       case c3__face: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {
         u2_noun foz = _crop_dext(wir_r, van, q_sut, ref, bix);
-        u2_noun ret = j2_mby(Pt6, ut, face)(wir_r, p_sut, foz);
+        u2_noun ret = j2_mby(Pt6, face)(wir_r, p_sut, foz);
 
         u2_rz(wir_r, foz);
         return ret;
@@ -126,7 +126,7 @@
       case c3__fine: u2_bi_trel(wir_r, u2_t(sut), &p_sut, &q_sut, &r_sut);
       {
         u2_noun foz = _crop_dext(wir_r, van, r_sut, ref, bix);
-        u2_noun ret = j2_mby(Pt6, ut, fine)(wir_r, p_sut, q_sut, foz);
+        u2_noun ret = j2_mby(Pt6, fine)(wir_r, p_sut, q_sut, foz);
 
         u2_rz(wir_r, foz);
         return ret;
@@ -135,7 +135,7 @@
       {
         u2_noun dis = _crop_dext(wir_r, van, p_sut, ref, bix);
         u2_noun dat = _crop_dext(wir_r, van, q_sut, ref, bix);
-        u2_noun ret = j2_mby(Pt6, ut, fork)(wir_r, dis, dat);
+        u2_noun ret = j2_mby(Pt6, fork)(wir_r, dis, dat);
 
         u2_rz(wir_r, dis);
         u2_rz(wir_r, dat);

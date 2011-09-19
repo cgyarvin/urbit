@@ -2357,6 +2357,7 @@
     ==
   ::
   ++  bust
+    ~.  %bust
     |=  dib=*
     =+  yam=burn
     =+  yib=[[-<.yam dib] +.yam]
@@ -3085,11 +3086,6 @@
       ?>  ?=(^ dab)
       ?>  ?=([& *] q.n.dab)
       =+  vad=q:$$(vet ?:(p.p.q.n.dab vet |), gol %noun, gen q.p.q.n.dab)
-      ?:  =(%wok p.n.dab)
-        ~|  [%vet vet]
-        ~|  [%gen q.p.q.n.dab]
-        ~|  [%vad vad]
-        ~|(%bake-bug !!)
       ?-    dab
           [* ~ ~]   vad
           [* ~ *]   [vad $(dab r.dab)]
@@ -3138,18 +3134,15 @@
                    q=(coke q:(mint(sut dox) %noun q.gen))
       =+  pov=[p=(fish(sut p.waz) p.syx) q=(fish(sut q.waz) q.syx)]
       ?.  &(=(p.syx q.syx)  =(p.pov q.pov))
-        ~|(%mull-bonk-a !!)
+        ~|(%mull-bonk !!)
       (both flag)
     ::
         [%csdg *]
-      ~|  %mull-casdeg
-      ~~  (dunk(sut (play p.gen)) %giv)
-      ~~  (show %q gen)
       =+  nor=$(gen p.gen, gol flag)
       =+  ^=  hiq  ^-  [p=*type q=*type]
           =+  fex=[p=(gain p.gen) q=(gain(sut dox) p.gen)]
           ?:  =(%void p.fex)
-            [%void ?:(=(%void q.fex) %void ~|(%csdg-a (play(sut q.fex) q.gen)))]
+            [%void ?:(=(%void q.fex) %void (play(sut q.fex) q.gen))]
           ?:  =(%void q.fex)
             ~|(%mull-bonk !!)
           $(sut p.fex, dox q.fex, gen q.gen)
@@ -3170,7 +3163,7 @@
         [%dtlc *]  
       =+([$(gen p.gen, gol %noun) $(gen q.gen, gol %noun)] (both flag))
     ::
-        [%dtcs *]  =+($(gen p.gen, gol %noun) (both flag))
+        [%dtcs *]  =+($(gen p.gen, gol %noun) (both flag))    ::  XX  =|
         [%dtps *]  =+($(gen p.gen, gol [%atom %%]) (both [%atom %%]))
         [%dtsg *]  (both [%cube q.gen ?:(.?(q.gen) %noun [%atom p.gen])])
         [%dttr *]  
@@ -3210,7 +3203,7 @@
       ?.  &(=(p.lar p.vug) =(p.q.lar p.q.vug))
         ~|(%mull-bonk !!)
       =+  mew=(swab q.q.lar q.gen)
-      ?.  =(mew (swab q.q.vug q.gen))
+      ?.  =(mew (swab(sut dox) q.q.vug q.gen))
         ~|(%mull-bonk !!)
       =-  [(nice (fire p.yom)) (fire(vet |) q.yom)]
       ^=  yom  
@@ -3275,17 +3268,17 @@
     ++  grow
       |=  [mel=*{%gold %iron %lead %zinc} ruf=*gene dab=*(map term foot)]
       ^-  [p=*type q=*type]
-      =+  dan=$$(gen ruf)
+      =+  dan=$$(gen ruf, gol %noun)
       =+  ^=  toc  :-  p=(core p.dan [%gold p.dan [~ dab]])
                    q=(core q.dan [%gold q.dan [~ dab]])
       =+  (bake(sut p.toc, dox q.toc) dab)
-      :-  (core p.dan mel p.dan [[0 0] dab])
+      :-  (nice (core p.dan mel p.dan [[0 0] dab]))
       (core q.dan [mel q.dan [[0 0] dab]])
     ::
     ++  bake
       |=  [dab=*(map term foot)]
       ^-  *
-      ?:  |(!vet ?=(~ dab))
+      ?:  ?=(~ dab)
         0
       ?>  ?=(^ dab)
       ?>  ?=([& *] q.n.dab)

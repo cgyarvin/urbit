@@ -49,7 +49,8 @@
       else {
         if ( (u2_yes == vet) &&
              (u2_no == u2_sing(p_typ, qq_typ)) &&
-             (u2_no == j2_mcy(Pt6, ut, fret)(wir_r, van, typ, dox, t_gat)) )
+             (u2_no == j2_mcy(Pt6, ut, mull)
+                          (wir_r, van, typ, c3__noun, dox, t_gat)) )
         {
           u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "wild", typ);
           u2_noun niz = j2_mcy(Pt6, ut, dunq)(wir_r, van, "tame", dox);

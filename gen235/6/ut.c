@@ -89,21 +89,20 @@
   j2_mc(Pt6, ut, burn)(u2_wire wir_r, 
                        u2_noun cor);                              //  retain
 
-  extern u2_ho_jet j2_mcj(Pt6, ut, bake)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, bust)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, crop)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, cull)[];
-  extern u2_ho_jet j2_mcj(Pt6, ut, emit)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, find)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, fink)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, fire)[];
-  extern u2_ho_jet j2_mcj(Pt6, ut, fire)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, firm)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, fish)[];
-  extern u2_ho_jet j2_mcj(Pt6, ut, fret)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, fuse)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, gain)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, heal)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, lose)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, mint)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, mull)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, nest)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, orth)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, park)[];
@@ -112,26 +111,28 @@
   extern u2_ho_jet j2_mcj(Pt6, ut, rest)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, seek)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, snap)[];
-  extern u2_ho_jet j2_mcj(Pt6, ut, tuck)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, swab)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, tack)[];
+  extern u2_ho_jet j2_mcj(Pt6, ut, tock)[];
 
 /* structures
 */
   u2_ho_driver 
   j2_mbd(Pt6, ut)[] = {
-    { j2_sc(Pt6, ut, bake), j2_mcj(Pt6, ut, bake), 0, 0, u2_none },
     { j2_sc(Pt6, ut, bust), j2_mcj(Pt6, ut, bust), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, crop), j2_mcj(Pt6, ut, crop), 0, 0, u2_none },
     { j2_sc(Pt6, ut, cull), j2_mcj(Pt6, ut, cull), 0, 0, u2_none },
-    { j2_sc(Pt6, ut, emit), j2_mcj(Pt6, ut, emit), 0, 0, u2_none },
     { j2_sc(Pt6, ut, find), j2_mcj(Pt6, ut, find), 0, 0, u2_none },
     { j2_sc(Pt6, ut, fink), j2_mcj(Pt6, ut, fink), 0, 0, u2_none },
     { j2_sc(Pt6, ut, fire), j2_mcj(Pt6, ut, fire), 0, 0, u2_none },
     { j2_sc(Pt6, ut, firm), j2_mcj(Pt6, ut, firm), 0, 0, u2_none },
     { j2_sc(Pt6, ut, fish), j2_mcj(Pt6, ut, fish), 0, 0, u2_none },
-    { j2_sc(Pt6, ut, fret), j2_mcj(Pt6, ut, fret), 0, 0, u2_none },
     { j2_sc(Pt6, ut, fuse), j2_mcj(Pt6, ut, fuse), 0, 0, u2_none },
     { j2_sc(Pt6, ut, gain), j2_mcj(Pt6, ut, gain), 0, 0, u2_none },
     { j2_sc(Pt6, ut, heal), j2_mcj(Pt6, ut, heal), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, lose), j2_mcj(Pt6, ut, lose), 0, 0, u2_none },
     { j2_sc(Pt6, ut, mint), j2_mcj(Pt6, ut, mint), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, mull), j2_mcj(Pt6, ut, mull), 0, 0, u2_none },
     { j2_sc(Pt6, ut, nest), j2_mcj(Pt6, ut, nest), 0, 0, u2_none },
     { j2_sc(Pt6, ut, orth), j2_mcj(Pt6, ut, orth), 0, 0, u2_none },
     { j2_sc(Pt6, ut, park), j2_mcj(Pt6, ut, park), 0, 0, u2_none },
@@ -140,7 +141,9 @@
     { j2_sc(Pt6, ut, rest), j2_mcj(Pt6, ut, rest), 0, 0, u2_none },
     { j2_sc(Pt6, ut, seek), j2_mcj(Pt6, ut, seek), 0, 0, u2_none },
     { j2_sc(Pt6, ut, snap), j2_mcj(Pt6, ut, snap), 0, 0, u2_none },
-    { j2_sc(Pt6, ut, tuck), j2_mcj(Pt6, ut, tuck), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, swab), j2_mcj(Pt6, ut, swab), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, tack), j2_mcj(Pt6, ut, tack), 0, 0, u2_none },
+    { j2_sc(Pt6, ut, tock), j2_mcj(Pt6, ut, tock), 0, 0, u2_none },
     { }
   };
 

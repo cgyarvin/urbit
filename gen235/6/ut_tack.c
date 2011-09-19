@@ -6,7 +6,7 @@
 #include "../pit.h"
 
   static u2_noun
-  _tack_in(u2_wire, u2_noun, u2_noun, u2_noun, u2_noun, u2_noun, u2_atom);
+  _tack_in(u2_wire, u2_noun, u2_noun, u2_noun, u2_noun, u2_atom);
 
 
 /* internals
@@ -24,6 +24,7 @@
     } 
     else {
       u2_noun i_peh = u2_h(peh);
+      u2_noun t_peh = u2_t(peh);
 
       if ( u2_yes == u2_stud(i_peh) ) {
         u2_noun pok   = j2_mcy(Pt6, ut, fink)(wir_r, van, sut, c3__rite, i_peh);
@@ -76,7 +77,7 @@
                         u2_noun peh,                              //  retain
                         u2_noun mur)                              //  retain
   {
-    return _tack_in(wir_r, van, sut, peh,  _1);
+    return _tack_in(wir_r, van, sut, peh, mur,_1);
   }
 
 /* boilerplate
