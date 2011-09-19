@@ -7,8 +7,8 @@
 
 /* logic
 */
-  u2_noun 
-  j2_mcx(Pt6, ut, mint)(u2_wire, u2_noun, u2_noun, u2_noun, u2_noun);
+  static u2_noun 
+  _mint_in(u2_wire, u2_noun, u2_noun, u2_noun, u2_noun);
 
   static u2_noun
   _mint_flag(u2_wire wir_r)
@@ -29,6 +29,18 @@
       case u2_no: 
       case u2_yes: return vet;
       default: return u2_bl_bail(wir_r, c3__fail); 
+    }
+  }
+
+  static u2_noun                                                  //  produce
+  _mint_core(u2_wire wir_r, 
+             u2_noun pac,                                         //  submit
+             u2_noun con)                                         //  submit
+  {
+    if ( (c3__void == pac) ) {
+      return c3__void;
+    } else {
+      return u2_bt(wir_r, c3__core, pac, con);
     }
   }
 
@@ -88,13 +100,12 @@
   }
 
   static u2_noun
-  _mint_make(u2_wire wir_r,
+  _mint_corn(u2_wire wir_r,
              u2_noun van,
              u2_noun sut,
-             u2_noun gol,
              u2_noun gen)
   {
-    u2_noun mil = j2_mcy(Pt6, ut, mint)(wir_r, van, sut, gol, gen);
+    u2_noun mil = _mint_in(wir_r, van, sut, c3__noun, gen);
     u2_noun fol = u2_rx(wir_r, u2_t(mil));
 
     u2_rl_lose(wir_r, mil);
@@ -264,17 +275,17 @@
              u2_noun ruf,
              u2_noun dab)
   {
-    u2_noun dan = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, c3__noun, ruf);
+    u2_noun dan = _mint_in(wir_r, van, sut, c3__noun, ruf);
     u2_noun p_dan = u2_h(dan);
     u2_noun q_dan = u2_t(dan);
-    u2_noun toc = j2_mby(Pt6, core)
+    u2_noun toc = _mint_core
       (wir_r, u2_rx(wir_r, p_dan),
               u2_bt(wir_r, c3__gold, 
                            u2_rx(wir_r, p_dan), 
                            u2_bc(wir_r, u2_nul, u2_rx(wir_r, dab))));
     u2_noun dez = _mint_bake(wir_r, van, toc, dab);
     u2_noun zod = u2_bc(wir_r, 1, dez);
-    u2_noun cot = j2_mby(Pt6, core)
+    u2_noun cot = _mint_core
       (wir_r, u2_rx(wir_r, p_dan),
               u2_bt(wir_r, mel, 
                            u2_rx(wir_r, p_dan), 
@@ -309,20 +320,32 @@
 
 # define _mint_used(wir_r)
 
-  u2_noun                                                         //  produce
-  j2_mcx(Pt6, ut, mint)(u2_wire wir_r, 
-                        u2_noun van,                              //  retain
-                        u2_noun sut,                              //  retain
-                        u2_noun gol,
-                        u2_noun gen)                              //  retain
+  static u2_noun                                                  //  produce
+  _mint_in(u2_wire wir_r, 
+           u2_noun van,                                           //  retain
+           u2_noun sut,                                           //  retain
+           u2_noun gol,                                           //  retain
+           u2_noun gen)                                           //  retain
   {
     u2_noun p_gen, q_gen, r_gen;
     u2_noun ret;
 
+    if ( (c3__void == sut) && 
+         ((u2_yes == u2_dust(gen)) && (c3__zpcb != u2_h(gen))) )
+    {
+      if ( (u2_no == _mint_vet(wir_r, van)) &&
+           (c3__zpvn != u2_h(gen)) &&
+           (c3__zpzp != u2_h(gen)) )
+      {
+        return u2_bl_error(wir_r, "mint-vain");
+      }
+      else return u2_bt(wir_r, c3__void, _0, _0);
+    }
+
     if ( u2_no == u2_dust(gen) ) {
       u2_noun rex = j2_mcy(Pt6, ap, open)(wir_r, gen);
 
-      ret = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, gol, rex);
+      ret = _mint_in(wir_r, van, sut, gol, rex);
       u2_rl_lose(wir_r, rex);
 
       return ret;
@@ -343,7 +366,7 @@
           return u2_bl_bail(wir_r, c3__fail);
 #endif
         }
-        ret = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, gol, rex);
+        ret = _mint_in(wir_r, van, sut, gol, rex);
         u2_rl_lose(wir_r, rex);
 
         return ret;
@@ -352,7 +375,7 @@
       case c3__cslc: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mint_used(wir_r);
       {
-        u2_noun vol = _mint_make(wir_r, van, sut, c3__noun, q_gen);
+        u2_noun vol = _mint_corn(wir_r, van, sut, q_gen);
         u2_noun axe = _mint_coke(wir_r, vol);
         u2_noun wam = j2_mcy(Pt6, ut, play)(wir_r, van, sut, p_gen);
 
@@ -361,6 +384,7 @@
            _mint_nice(wir_r, van, gol, _mint_flag(wir_r)),
            j2_mcy(Pt6, ut, fish)(wir_r, van, wam, axe));
 
+        u2_rl_lose(wir_r, axe);
         u2_rl_lose(wir_r, wam);
         return ret;
       }
@@ -368,18 +392,18 @@
       _mint_used(wir_r);
       {
         u2_noun bol = _mint_flag(wir_r);
-        u2_noun nor = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, bol, p_gen);
+        u2_noun nor = _mint_in(wir_r, van, sut, bol, p_gen);
         u2_noun fex = j2_mcy(Pt6, ut, gain)(wir_r, van, sut, p_gen);
         u2_noun wux = j2_mcy(Pt6, ut, lose)(wir_r, van, sut, p_gen);
         u2_noun duy = (c3__void == fex)
                         ? ( (c3__void == wux)
-                             ?  u2_bl_error(wir_r, "mint-wack")
+                             ?  u2_bc(wir_r, _0, _0)
                              :  u2_bc(wir_r, _1, _1) )
                         : ( (c3__void == wux)
-                            ?  u2_bc(wir_r, _1, _1)
+                            ?  u2_bc(wir_r, _1, _0)
                             :  u2_rx(wir_r, u2_t(nor)) );
-        u2_noun hiq = j2_mcx(Pt6, ut, mint)(wir_r, van, fex, gol, q_gen);
-        u2_noun ran = j2_mcx(Pt6, ut, mint)(wir_r, van, wux, gol, r_gen);
+        u2_noun hiq = _mint_in(wir_r, van, fex, gol, q_gen);
+        u2_noun ran = _mint_in(wir_r, van, wux, gol, r_gen);
 
         ret = u2_bc
           (wir_r, j2_mby(Pt6, fork)(wir_r, u2_h(hiq), u2_h(ran)),
@@ -387,20 +411,20 @@
                                     u2_rx(wir_r, u2_t(hiq)),
                                     u2_rx(wir_r, u2_t(ran))));
 
-        u2_rl_lose(wir_r, bol);
-        u2_rl_lose(wir_r, nor);
-        u2_rl_lose(wir_r, fex);
-        u2_rl_lose(wir_r, wux);
-        u2_rl_lose(wir_r, hiq);
         u2_rl_lose(wir_r, ran);
+        u2_rl_lose(wir_r, hiq);
+        u2_rl_lose(wir_r, nor);
+        u2_rl_lose(wir_r, wux);
+        u2_rl_lose(wir_r, fex);
+        u2_rl_lose(wir_r, bol);
 
         return ret;
       }
       case c3__dgsp: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mint_used(wir_r);
       {
-        u2_noun hed = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, c3__noun, p_gen);
-        u2_noun tal = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, c3__noun, q_gen);
+        u2_noun hed = _mint_in(wir_r, van, sut, c3__noun, p_gen);
+        u2_noun tal = _mint_in(wir_r, van, sut, c3__noun, q_gen);
         u2_noun typ = j2_mby(Pt6, cell)(wir_r, u2_h(hed), u2_h(tal));
 
         ret = u2_bc
@@ -421,8 +445,8 @@
         return u2_bc
           (wir_r, 
            typ,
-           u2_bt(wir_r, _5, _mint_make(wir_r, van, sut, c3__noun, p_gen),
-                            _mint_make(wir_r, van, sut, c3__noun, q_gen)));
+           u2_bt(wir_r, _5, _mint_corn(wir_r, van, sut, p_gen),
+                            _mint_corn(wir_r, van, sut, q_gen)));
       }
       case c3__dtcs: p_gen = u2_t(gen);
       _mint_used(wir_r);
@@ -432,21 +456,20 @@
         return u2_bc
           (wir_r, 
            typ,
-           u2_bc(wir_r, _3, _mint_make(wir_r, van, sut, c3__noun, p_gen)));
+           u2_bc(wir_r, _3, _mint_corn(wir_r, van, sut, p_gen)));
       }
       case c3__dtps: p_gen = u2_t(gen);
       _mint_used(wir_r);
       {
         u2_noun tom = u2_bc(wir_r, c3__atom, u2_blip);
-        u2_noun sam = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, tom, p_gen);
+        u2_noun sam = _mint_in(wir_r, van, sut, tom, p_gen);
 
         ret = u2_bc
           (wir_r, 
-           u2_bc(wir_r, c3__atom, u2_blip),
+           _mint_nice(wir_r, van, gol, tom),
            u2_bc(wir_r, _4, u2_rx(wir_r, u2_t(sam))));
         
         u2_rz(wir_r, sam);
-        u2_rz(wir_r, tom);
         return ret;
       }
       case c3__dtsg: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
@@ -467,13 +490,11 @@
       case c3__dttr: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mint_used(wir_r);
       {
-        u2_noun typ = _mint_nice(wir_r, van, gol, c3__noun);
-
         return u2_bc
           (wir_r, 
-           typ,
-           u2_bt(wir_r, _2, _mint_make(wir_r, van, sut, c3__noun, p_gen),
-                            _mint_make(wir_r, van, sut, c3__noun, q_gen)));
+           _mint_nice(wir_r, van, gol, c3__noun),
+           u2_bt(wir_r, _2, _mint_corn(wir_r, van, sut, p_gen),
+                            _mint_corn(wir_r, van, sut, q_gen)));
       }
       case c3__dtwt: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mint_used(wir_r);
@@ -490,7 +511,7 @@
       _mint_used(wir_r);
       {
         u2_noun hoz = j2_mcy(Pt6, ap, late)(wir_r, gen);
-        u2_noun ryd = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, c3__noun, hoz);
+        u2_noun ryd = _mint_in(wir_r, van, sut, c3__noun, hoz);
         u2_noun viz = j2_mcy(Pt6, ut, play)(wir_r, van, sut, p_gen);
         u2_noun fin = j2_mby(Pt6, fine)(wir_r, c3__very, viz, u2_h(ryd));
         u2_noun ret = u2_bc
@@ -502,10 +523,20 @@
 
         return ret;
       }
+      case c3__ktdt: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
+      {
+        u2_noun wit = j2_mcy(Pt6, ut, play)(wir_r, van, sut, p_gen);
+        u2_noun nep = j2_mcy(Pt6, ut, snap)(wir_r, van, sut, q_gen);
+        u2_noun ret = _mint_in(wir_r, van, sut, gol, nep);
+
+        u2_rz(wir_r, nep);
+        u2_rz(wir_r, wit);
+        return ret;
+      }
       case c3__ktlc: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mint_used(wir_r);
       {
-        u2_noun vat = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, gol, q_gen);
+        u2_noun vat = _mint_in(wir_r, van, sut, gol, q_gen);
      
         ret = u2_bc
           (wir_r,
@@ -521,7 +552,7 @@
       _mint_used(wir_r);
       {
         u2_noun hoz = j2_mcy(Pt6, ap, late)(wir_r, gen);
-        u2_noun ryd = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, c3__noun, hoz);
+        u2_noun ryd = _mint_in(wir_r, van, sut, c3__noun, hoz);
         u2_noun viz = j2_mcy(Pt6, ut, play)(wir_r, van, sut, p_gen);
         u2_noun fin = j2_mby(Pt6, fine)(wir_r, c3__pure, viz, u2_h(ryd));
         u2_noun ret = u2_bc
@@ -536,7 +567,7 @@
       case c3__ktsg: p_gen = u2_t(gen);
       _mint_used(wir_r);
       {
-        u2_noun nef = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, gol, p_gen);
+        u2_noun nef = _mint_in(wir_r, van, sut, gol, p_gen);
         u2_noun p_nef = u2_h(nef);
         u2_noun q_nef = u2_t(nef);
         u2_noun cag = j2_mcy(Pt6, ut, burn)(wir_r, van, sut);
@@ -557,7 +588,7 @@
       _mint_used(wir_r);
       {
         u2_noun hif = j2_mcy(Pt6, ut, play)(wir_r, van, sut, p_gen);
-        u2_noun zel = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, hif, p_gen);
+        u2_noun zel = _mint_in(wir_r, van, sut, hif, q_gen);
         u2_noun ret = u2_bc(wir_r, hif, u2_rx(wir_r, u2_t(zel)));
 
         u2_rz(wir_r, zel);
@@ -566,10 +597,10 @@
       case c3__lcld: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mint_used(wir_r);
       {
-        u2_noun fid = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, c3__noun, p_gen);
+        u2_noun fid = _mint_in(wir_r, van, sut, c3__noun, p_gen);
         u2_noun p_fid = u2_h(fid);
         u2_noun q_fid = u2_t(fid);
-        u2_noun dov = j2_mcx(Pt6, ut, mint)(wir_r, van, p_fid, gol, q_gen);
+        u2_noun dov = _mint_in(wir_r, van, p_fid, gol, q_gen);
         u2_noun p_dov = u2_h(dov);
         u2_noun q_dov = u2_t(dov);
 
@@ -655,15 +686,14 @@
       case c3__sgld: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mint_used(wir_r);
       {
-        u2_noun hum = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, gol, q_gen);
+        u2_noun hum = _mint_in(wir_r, van, sut, gol, q_gen);
         u2_noun bez;
       
           if ( u2_yes == u2_stud(p_gen) ) {
             bez = u2_rx(wir_r, p_gen);
           } else {
             bez = u2_bc(wir_r, u2_rx(wir_r, u2_h(p_gen)),
-                               _mint_make
-                                 (wir_r, van, sut, c3__noun, u2_t(p_gen)));
+                               _mint_corn(wir_r, van, sut, u2_t(p_gen)));
           }
           ret = u2_bc(wir_r, 
                       u2_rx(wir_r, u2_h(hum)),
@@ -676,10 +706,9 @@
       _mint_used(wir_r);
       {
         u2_noun von = u2_bn_molt(wir_r, van, j2_ut_van_vet, u2_no, 0);
-        u2_noun sev = _mint_make(wir_r, von, sut, c3__noun, p_gen);
+        u2_noun sev = _mint_corn(wir_r, von, sut, p_gen);
 
         u2_rz(wir_r, von);
-
         return u2_bc(wir_r, c3__noun, u2_bc(wir_r, _1, sev));
       }
       case c3__zpcm: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
@@ -696,7 +725,7 @@
       {
         u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, _mint_loc(wir_r, van, p_gen)));
         {
-          u2_noun hum = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, gol, q_gen);
+          u2_noun hum = _mint_in(wir_r, van, sut, gol, q_gen);
           u2_noun bez = u2_bt(wir_r, c3__spot, _1, u2_rx(wir_r, p_gen));
 
           ret = u2_bc(wir_r, 
@@ -711,7 +740,7 @@
       case c3__zpdx: p_gen = u2_t(gen);
       {
         u2_bx_used(wir_r);
-        return j2_mcx(Pt6, ut, mint)(wir_r, van, sut, gol, p_gen);
+        return _mint_in(wir_r, van, sut, gol, p_gen);
       }
       case c3__zpmt:
       _mint_used(wir_r);
@@ -730,7 +759,7 @@
       case c3__zptm: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mint_used(wir_r);
       {
-        u2_noun vos   = j2_mcx(Pt6, ut, mint)(wir_r, van, sut, c3__noun, q_gen);
+        u2_noun vos   = _mint_in(wir_r, van, sut, c3__noun, q_gen);
         u2_noun zur   = j2_mcy(Pt6, ut, play)(wir_r, van, sut, p_gen);
         u2_noun p_vos = u2_h(vos);
         u2_noun q_vos = u2_t(vos);
@@ -768,6 +797,16 @@
         return u2_bt(wir_r, c3__void, _0, _0);
       }
     }
+  }
+
+  u2_noun                                                         //  produce
+  j2_mcx(Pt6, ut, mint)(u2_wire wir_r, 
+                        u2_noun van,                              //  retain
+                        u2_noun sut,                              //  retain
+                        u2_noun gol,
+                        u2_noun gen)                              //  retain
+  {
+    return _mint_in(wir_r, van, sut, gol, gen);
   }
 
 /* boilerplate

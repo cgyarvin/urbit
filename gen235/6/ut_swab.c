@@ -27,19 +27,20 @@
 
         u2_rz(wir_r, fom);
         u2_rz(wir_r, fic);
+
         return ret;
       } else {
         u2_noun pi_peh = u2_t(i_peh);
         u2_noun vas = j2_mcy(Pt6, ut, peek)(wir_r, van, sut, c3__rite, pi_peh);
-        u2_noun wan = (u2_no == u2_dust(peh))
-                      ? u2_rx(wir_r, gen)
-                      : j2_mcy(Pt6, ut, snap)(wir_r, van, vas, gen);
+        u2_noun wan = (u2_no == u2_dust(t_peh))
+                      ? j2_mcy(Pt6, ut, snap)(wir_r, van, vas, gen)
+                      : u2_rx(wir_r, gen);
         u2_noun ret = _snip(wir_r, van, vas, t_peh, wan);
 
         u2_rz(wir_r, wan);
-        u2_rz(wir_r, ret);
+        u2_rz(wir_r, vas);
 
-        return vas;
+        return ret;
       }
     }
   }

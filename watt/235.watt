@@ -2307,18 +2307,21 @@
       %vet    vet
       %fab    fab
       %burn   burn
+      %bust   bust
       %cull   cull
+      %crop   crop
       %dunk   dunk
       %find   find
       %fink   fink
       %fire   fire
       %firm   firm
       %fish   fish
-      %fret   fret
       %fuse   fuse
       %gain   gain
       %heal   heal
+      %lose   lose
       %mint   mint
+      %mull   mull
       %nest   nest
       %orth   orth
       %play   play
@@ -2328,6 +2331,9 @@
       %rest   rest
       %seek   seek
       %snap   snap
+      %swab   swab
+      %tack   tack
+      %tock   tock
     ==
   =+  :*  fan=*(set ~[*type *gene])
           rib=*(set ~[*type *type *gene])
@@ -2976,7 +2982,7 @@
       =+  wux=(lose p.gen)
       =+  ^=  duy
           ?:  =(%void fex)
-            ?:(=(%void wux) ~|(%mint-wack !!) [1 1])
+            ?:(=(%void wux) [0 0] [1 1])
           ?:(=(%void wux) [1 0] q.nor)
       =+  hiq=$(sut fex, gen q.gen)
       =+  ran=$(sut wux, gen r.gen)
@@ -2987,10 +2993,10 @@
       =+  tal=$(gen q.gen, gol %noun)
       [(nice (cell p.hed p.tal)) (cons q.hed q.tal)]
     ::
+        [%dtcs *]  [(nice flag) [3 q:$(gen p.gen, gol %noun)]]
         [%dtlc *]
       [(nice flag) [5 q:$(gen p.gen, gol %noun) q:$(gen q.gen, gol %noun)]]
     ::
-        [%dtcs *]  [(nice flag) [3 q:$(gen p.gen, gol %noun)]]
         [%dtps *]  [(nice [%atom %%]) [4 q:$(gen p.gen, gol [%atom %%])]]
         [%dtsg *]
       ?:  .?(q.gen)
@@ -3001,16 +3007,16 @@
       [(nice %noun) [2 q:$(gen p.gen, gol %noun) q:$(gen q.gen, gol %noun)]]
     ::
         [%dtwt *]  [(nice [%atom p.gen]) [1 q.gen]]
-        [%ktlc *]  =+(vat=$(gen q.gen) [(face p.gen p.vat) q.vat])
         [%ktdl *]
       =+  ryd=$(gen ~(late ap gen), gol %noun)
       [(nice (fine %very (play p.gen) p.ryd)) q.ryd]
     ::
+        [%ktdt *]  $(gen (snap(sut (play p.gen)) q.gen))
+        [%ktlc *]  =+(vat=$(gen q.gen) [(face p.gen p.vat) q.vat])
         [%ktld *]
       =+  ryd=$(gen ~(late ap gen), gol %noun)
       [(nice (fine %pure (play p.gen) p.ryd)) q.ryd]
     ::
-        [%ktdt *]  $(gen (snap(sut (play p.gen)) q.gen))
         [%ktsg *]
       =+  nef=$(gen p.gen)
       ~~  (dunk %ktsg)
@@ -3020,9 +3026,9 @@
       =+(hif=(nice (play p.gen)) [hif q:$(gen q.gen, gol hif)])
     ::
         [%lcld *]
-      =+  lem=$(gen p.gen, gol %noun)
-      =+  soq=$(sut p.lem, gen q.gen)
-      [p.soq (comb q.lem q.soq)]
+      =+  fid=$(gen p.gen, gol %noun)
+      =+  dov=$(sut p.fid, gen q.gen)
+      [p.dov (comb q.fid q.dov)]
     ::
         [%mtlc *]
       =+  lar=(foil (seek %read p.gen))
@@ -3170,9 +3176,6 @@
       =+([$(gen p.gen, gol %noun) $(gen q.gen, gol %noun)] (both %noun))
     ::
         [%dtwt *]  (both [%atom p.gen])
-        [%ktlc *]  
-      =+(vat=$(gen q.gen) [(face p.gen p.vat) (face p.gen q.vat)])
-    ::
         [%ktdl *]
       =+  ryd=$(gen ~(late ap gen), gol %noun)
       [(nice (fine %very (play p.gen) p.ryd)) q.ryd]
@@ -3183,6 +3186,9 @@
       ?.  =(zyn (snap(sut q.wiv) q.gen))
         ~|(%mull-bonk !!)
       $(gen zyn)
+    ::
+        [%ktlc *]  
+      =+(vat=$(gen q.gen) [(face p.gen p.vat) (face p.gen q.vat)])
     ::
         [%ktld *]
       =+  ryd=$(gen ~(late ap gen), gol %noun)
@@ -3541,11 +3547,12 @@
       [%lcld *]  $(gen q.gen, sut $(gen p.gen))
       [%mtlc *]  =+  lar=(foil (seek %read p.gen))
                  =+  mew=(swab q.q.lar q.gen)
+                 =+  rag=q.q.lar
                  %-  fire
                  |-  ^-  *(list ~[p=*type q=*gate])
                  ?~  mew
-                   q.q.lar
-                 $(mew t.mew, q.q.lar q:(tock p.i.mew $$(gen q.i.mew) q.q.lar))
+                   rag
+                 $(mew t.mew, rag q:(tock p.i.mew $$(gen q.i.mew) rag))
       [%pmdg *]  (grow %zinc [%dgsp [~ 1] p.gen] q.gen)
       [%pmdt *]  (grow %gold [~ 1] p.gen)
       [%pmmt *]  (grow %lead [~ 1] p.gen)

@@ -29,21 +29,18 @@
       u2_noun mox    = _tock_in(wir_r, van, sut, peh, mur, t_men);
       u2_noun p_mox  = u2_h(mox);
       u2_noun q_mox  = u2_t(mox);
-      u2_noun wax, ret;
+      u2_noun ret;
 
-      if ( u2_nul == mox ) {
-        wax = u2_bc(wir_r, u2_nul, u2_rx(wir_r, p_geq));
-      } else {
-        if ( u2_no == u2_sing(u2_t(mox), p_geq) ) {
-          return u2_bl_bail(wir_r, c3__exit);
-        }
-        wax = u2_rx(wir_r, p_mox);
-      }
-      ret = u2_bc(wir_r, u2_bc(wir_r, u2_rx(wir_r, q_geq), 
-                                      u2_rx(wir_r, qi_men)),
-                         u2_rx(wir_r, q_mox));
+      ret = u2_bc(wir_r, 
+                  ( (u2_nul == p_mox) 
+                      ? u2_bc(wir_r, u2_nul, u2_rx(wir_r, p_geq)) 
+                      : (u2_no == u2_sing(p_geq, u2_t(p_mox)))
+                        ? u2_bl_bail(wir_r, c3__exit)
+                        : u2_rx(wir_r, p_mox) ),
+                  u2_bc(wir_r, u2_bc(wir_r, u2_rx(wir_r, q_geq), 
+                                            u2_rx(wir_r, qi_men)),
+                               u2_rx(wir_r, q_mox)));
 
-      u2_rz(wir_r, wax);
       u2_rz(wir_r, mox);
       u2_rz(wir_r, geq);
       return ret;

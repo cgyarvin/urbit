@@ -10,11 +10,11 @@
   u2_noun
   j2_mcx(Pt6, ut, gain)(u2_wire, u2_noun, u2_noun, u2_noun);
 
-  static u2_noun
+  static u2_noun                                                  //  produce
   _gain_cspm(u2_wire wir_r,
-             u2_noun van,
-             u2_noun sut,
-             u2_noun p_gen)
+             u2_noun van,                                         //  retain
+             u2_noun sut,                                         //  retain
+             u2_noun p_gen)                                       //  retain
   {
     if ( u2_no == u2_dust(p_gen) ) {
       return u2_rx(wir_r, sut);
@@ -30,11 +30,11 @@
     }
   }
 
-  static u2_noun
+  static u2_noun                                                  //  produce
   _gain_csbr(u2_wire wir_r,
-             u2_noun van,
-             u2_noun sut,
-             u2_noun p_gen)
+             u2_noun van,                                         //  retain
+             u2_noun sut,                                         //  retain
+             u2_noun p_gen)                                       //  retain
   {
     if ( u2_no == u2_dust(p_gen) ) {
       return u2_rx(wir_r, sut);
@@ -50,11 +50,11 @@
     }
   }
 
-  static u2_noun
+  static u2_noun                                                  //  produce
   _gain_in(u2_wire wir_r, 
-           u2_noun van,
-           u2_noun sut,
-           u2_noun gen)
+           u2_noun van,                                           //  retain
+           u2_noun sut,                                           //  retain
+           u2_noun gen)                                           //  retain
   {
     u2_noun p_gen, q_gen;
 
@@ -74,9 +74,9 @@
           u2_noun ret = j2_mcy(Pt6, ut, cull)
             (wir_r, van, sut, u2_yes, axe, hap);
 
-          u2_rl_lose(wir_r, rac);
-          u2_rl_lose(wir_r, hap);
-          u2_rl_lose(wir_r, guz);
+          u2_rz(wir_r, guz);
+          u2_rz(wir_r, hap);
+          u2_rz(wir_r, rac);
 
           return ret;
         }

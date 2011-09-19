@@ -21,6 +21,18 @@
   }
 
   static u2_noun                                                  //  produce
+  _play_core(u2_wire wir_r, 
+             u2_noun pac,                                         //  submit
+             u2_noun con)                                         //  submit
+  {
+    if ( (c3__void == pac) ) {
+      return c3__void;
+    } else {
+      return u2_bt(wir_r, c3__core, pac, con);
+    }
+  }
+
+  static u2_noun                                                  //  produce
   _play_loc(u2_wire wir_r,
             u2_noun van,                                          //  retain
             u2_noun loc)                                          //  retain
@@ -104,7 +116,7 @@
   {
     u2_noun dan = _play_in(wir_r, van, sut, ruf);
 
-    return j2_mby(Pt6, core)
+    return _play_core
         (wir_r, dan,
                 u2_bt(wir_r, u2_rx(wir_r, mel),
                              u2_rx(wir_r, dan), 
