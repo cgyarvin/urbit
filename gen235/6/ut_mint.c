@@ -939,9 +939,6 @@
     { ".3", c3__hevy, 
         j2_mc(Pt6, ut, mint), 
         Tier6_b_memo,
-        // u2_jet_live | u2_jet_test | u2_jet_memo,
-        // u2_jet_live | u2_jet_memo,
-        // u2_jet_dead | u2_jet_memo,
         u2_none, u2_none,
         j2_mck(Pt6, ut, mint)
     },

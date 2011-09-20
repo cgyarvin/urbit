@@ -1113,7 +1113,7 @@ u2_ho_use(u2_ray     wir_r,
       }
       jet_j->sat_s |= u2_jet_live;
 
-      // fprintf(stderr, "test %s\n", u2_ho_cstring(jet_j->xip));
+      fprintf(stderr, "test %s\n", u2_ho_cstring(jet_j->xip));
 
       u2_bx_used(wir_r);
       u2_ho_test(wir_r, jet_j, cor, sof, pro);

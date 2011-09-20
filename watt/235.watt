@@ -2762,6 +2762,7 @@
     ==
   ::
   ++  fink
+    ~.  %fink
     |=  [way=*{%read %rite} cog=*term]
     ^-  *port
     ~~  (dunk 'type')

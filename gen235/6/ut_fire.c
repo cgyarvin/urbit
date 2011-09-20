@@ -98,6 +98,24 @@
   {
     u2_flag vet = u2_frag(j2_ut_van_vet, van);
 
+    {
+      if ( (u2_yes == u2_dust(hag)) && (u2_nul == u2_t(hag)) ) {
+        u2_noun i_hag = u2_h(hag);
+        u2_noun pi_hag = u2_h(i_hag);
+        u2_noun qi_hag = u2_t(i_hag);
+     
+        if ( (u2_no == u2_h(qi_hag)) ) {
+          u2_noun qqi_hag = u2_t(qi_hag);
+          
+          if ( u2_yes == u2_dust(qqi_hag) &&
+              (u2_nul == u2_h(qqi_hag)) &&
+              (_1 == u2_t(qqi_hag)) ) 
+          {
+            return u2_rx(wir_r, pi_hag);
+          }
+        }
+      }
+    } 
     return u2_bc(wir_r, c3__hold, _fire_in(wir_r, van, vet, hag));
   }
 
