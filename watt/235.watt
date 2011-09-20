@@ -2909,7 +2909,6 @@
     ^=  fiz
     ?-    gen
         [%cslc *]   (cull & p:(seek %read ~(rake ap q.gen)) (play p.gen))
-        [%csbr *]   |-(?~(p.gen sut $(p.gen t.p.gen, sut (lose i.p.gen))))
         [%cspm *]   |-(?~(p.gen sut $(p.gen t.p.gen, sut $$(gen i.p.gen))))
         [%zpcb *]   $(gen q.gen)
         [%zpdx *]   $(gen p.gen)
@@ -2924,7 +2923,6 @@
     ?-    gen
         [%cslc *]   (cull | p:(seek %read ~(rake ap q.gen)) (play p.gen))
         [%csbr *]   |-(?~(p.gen sut $(p.gen t.p.gen, sut $$(gen i.p.gen))))
-        [%cspm *]   |-(?~(p.gen sut $(p.gen t.p.gen, sut (gain i.p.gen))))
         [%zpcb *]   $(gen q.gen)
         [%zpdx *]   $(gen p.gen)
         *           sut

@@ -31,26 +31,6 @@
   }
 
   static u2_noun                                                  //  produce
-  _gain_csbr(u2_wire wir_r,
-             u2_noun van,                                         //  retain
-             u2_noun sut,                                         //  retain
-             u2_noun p_gen)                                       //  retain
-  {
-    if ( u2_no == u2_dust(p_gen) ) {
-      return u2_rx(wir_r, sut);
-    }
-    else {
-      u2_noun ip_gen = u2_h(p_gen);
-      u2_noun tp_gen = u2_t(p_gen);
-      u2_noun lev = j2_mcy(Pt6, ut, lose)(wir_r, van, sut, ip_gen);
-      u2_noun pro = _gain_csbr(wir_r, van, lev, tp_gen);
-
-      u2_rl_lose(wir_r, lev);
-      return pro;
-    }
-  }
-
-  static u2_noun                                                  //  produce
   _gain_in(u2_wire wir_r, 
            u2_noun van,                                           //  retain
            u2_noun sut,                                           //  retain
@@ -80,9 +60,6 @@
 
           return ret;
         }
-      }
-      case c3__csbr: {
-        return _gain_csbr(wir_r, van, sut, u2_t(gen));
       }
       case c3__cspm: {
         return _gain_cspm(wir_r, van, sut, u2_t(gen));
