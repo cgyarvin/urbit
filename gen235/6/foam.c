@@ -34,7 +34,9 @@
       default: return u2_bl_bail(wir_r, c3__fail);
 
       case u2_yes: typ = u2_rx(wir_r, u2_t(q_pok));
+                   break;
       case u2_no: typ = _foam_roll(wir_r, u2_t(u2_t(q_pok)));
+                  break;
     }
     return u2_bc(wir_r, u2_rx(wir_r, p_pok), typ);
   }

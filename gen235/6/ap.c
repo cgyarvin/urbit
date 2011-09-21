@@ -1338,7 +1338,7 @@
     {
       u2_noun p_gen, q_gen;
 
-      if ( u2_yes == u2_dust(gen) ) switch ( gen ) {
+      if ( u2_yes == u2_dust(gen) ) switch ( u2_h(gen) ) {
         case c3__ktdl: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
         { 
           return  

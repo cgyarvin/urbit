@@ -175,8 +175,7 @@
     u2_noun p_ref, q_ref;
 
     switch ( u2_h(ref) ) {
-      case c3__atom: 
-      case c3__cell: return u2_bl_bail(wir_r, c3__fail);
+      default: return u2_bl_bail(wir_r, c3__fail);
 
       case c3__face: u2_bi_cell(wir_r, u2_t(ref), &p_ref, &q_ref);
       {
@@ -190,7 +189,14 @@
         u2_rz(wir_r, hin);
         return ret;
       }
-      default: return u2_rx(wir_r, sut);
+      case c3__hold: p_ref = u2_t(ref);
+      {
+        u2_noun rep = j2_mcy(Pt6, ut, repo)(wir_r, van, ref);
+        u2_noun ret = _crop_dext(wir_r, van, sut, rep, bix);
+
+        u2_rz(wir_r, rep);
+        return ret;
+      }
     }
   }
 

@@ -2099,7 +2099,6 @@
     [%csdg [%cslc gen [%mtlc hep ~]] [%mtlc hep ~] dug]
   ::
   ++  late
-    ~.  %late
     ?-    gen
         [%ktdl *]
       :+  %lcps  [%ktlc %a p.gen]                   ::  =+  a=#p.gen
@@ -2373,11 +2372,14 @@
   ++  crop
     ~.  %crop
     |=  ref=*type
+    ~|  %crop-bug
     =+  bix=*(set ~[*type *type])
     =<  dext
     &.
     ++  dext
       ^-  *type
+      ~~  (dunk 'dext: sut')
+      ~~  (dunk(sut ref) 'dext: ref')
       ?:  |(=(sut ref) =(%noun ref))
         %void
       ?:  =(%void ref)
@@ -2429,16 +2431,17 @@
       ==
     ::
     ++  sint
+      ~~  (dunk 'sint: sut')
+      ~~  (dunk(sut ref) 'sint: ref')
       ^-  *type
       ?-    ref
-        *{%atom %cell}  !!
-        [%core *]       sut
-        [%cube *]       sut
-        [%face *]       dext(ref repo(sut ref))
-        [%fine *]       sut
-        [%fork *]       dext(sut dext(ref p.ref), ref q.ref)
-        %void           sut
-        %noun           %void
+        [%core *]  sut
+        [%cube *]  sut
+        [%face *]  dext(ref repo(sut ref))
+        [%fine *]  sut
+        [%fork *]  dext(sut dext(ref p.ref), ref q.ref)
+        [%hold *]  dext(ref repo(sut ref))
+        *          !!
       ==
     --
   ::

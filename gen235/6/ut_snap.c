@@ -56,6 +56,30 @@
                     j2_mcx(Pt6, ut, snap)(wir_r, van, q_sut, gen));
         }
       }
+      case c3__fork: {
+          u2_noun haq = j2_mcy(Pt6, ap, hack)(wir_r, gen);
+
+          if ( u2_yes == u2_h(haq) ) {
+            u2_noun p_haq, q_haq;
+            u2_noun hed = j2_mcy(Pt6, ut, peek)(wir_r, van, sut, c3__read, 2);
+            u2_noun tal = j2_mcy(Pt6, ut, peek)(wir_r, van, sut, c3__read, 2);
+
+            u2_as_cell(u2_t(haq), &p_haq, &q_haq);
+
+            ret = u2_bt
+              (wir_r, c3__dgsp,
+                     j2_mcx(Pt6, ut, snap)(wir_r, van, hed, p_haq),
+                     j2_mcx(Pt6, ut, snap)(wir_r, van, tal, q_haq));
+
+            u2_rz(wir_r, hed);
+            u2_rz(wir_r, tal);
+          } else {
+            ret = u2_rx(wir_r, u2_t(haq));
+          }
+          u2_rl_lose(wir_r, haq);
+          return ret;
+        }
+
       case c3__fine: 
       case c3__cube:
       case c3__hold: {
