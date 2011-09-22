@@ -27,8 +27,12 @@ _nock_rock(u2_wire wir_r,
     u2_bx_step(wir_r);
 
     if ( LoomStop ) {
-      fprintf(stderr, "{stop}\n");
-      LoomStop = 0;
+      if ( LoomIntr ) {
+        fprintf(stderr, "{interrupt}\n");
+      } else {
+        fprintf(stderr, "{stack overflow}\n");
+      }
+      LoomStop = LoomIntr = 0;
       u2_rl_lose(wir_r, bus);
       return u2_none;
     }

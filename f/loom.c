@@ -10,6 +10,7 @@ static void
 _loom_stop(c3_i sig)
 {
   LoomStop = 1;
+  LoomIntr = 1;
 }
 
 /* u2_boot():

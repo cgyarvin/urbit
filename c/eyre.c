@@ -1449,7 +1449,7 @@ _eyre_line(u2_wire wir_r,
 
   if ( u2_bl_set(wir_r) ) {
     u2_bl_done(wir_r, kit_r);
-    fprintf(stderr, "{stop}\n");
+    fprintf(stderr, "{lose}\n");
   } else {
 #ifdef GUNN
     u2_bx_boot(wir_r);
@@ -1488,7 +1488,7 @@ _eyre_line_proto(u2_wire wir_r,
 
   if ( u2_bl_set(wir_r) ) {
     u2_bl_done(wir_r, kit_r);
-    fprintf(stderr, "{stop}\n");
+    fprintf(stderr, "{lose}\n");
   } else {
     u2_noun fol = _eyre_call_1(wir_r, u2_yes, las, "=>(!% make)", txt);
     u2_noun som = _eyre_nock(wir_r, u2_yes, 0, fol);

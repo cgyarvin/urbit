@@ -167,6 +167,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pt6, ut, gain)[] = {
-    { ".3", c3__hevy, j2_mc(Pt6, ut, gain), Tier6_b, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pt6, ut, gain), Tier6_t, u2_none, u2_none },
     { }
   };

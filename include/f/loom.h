@@ -22,9 +22,11 @@
       /* Stop flag for signal handlers (eg, SIGINT).
       */
         volatile sig_atomic_t LoomStop;
+        volatile sig_atomic_t LoomIntr;
 #   else
       extern uint32_t LoomFrame;
       extern volatile sig_atomic_t LoomStop;
+      extern volatile sig_atomic_t LoomIntr;
 #   endif
 
 #     define   LoomFrameMax  16384

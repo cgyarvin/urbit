@@ -731,167 +731,22 @@ u2_ho_test(u2_wire    wir_r,
       {
         u2_noun gen;
 
-        if ( (u2_no == u2_mean(cor, u2_cv_sam, &gen, 0)) )
-        {
+        if ( (u2_no == u2_mean(cor, u2_cw_sam, &gen, 0)) ) {
           c3_assert(0);
         } else {
           u2_err(wir_r, "gen", gen);
         }
       }
       {
-        u2_noun sut, hag, van;
-
-        if ( (u2_no == u2_mean(cor, u2_cv_sam, &hag, u2_cv_con, &van, 0)) ||
-             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
-        {
-          c3_assert(0);
-        } else {
-          j2_mcy(watt_268, ut, dupt)(wir_r, van, "right", sof);
-          j2_mcy(watt_268, ut, dupt)(wir_r, van, "wrong", had);
-
-          u2_err(wir_r, "hag", hag);
-          // u2_err(wir_r, "right", sof);
-          // u2_err(wir_r, "wrong", had);
-        }
-      }
-   
-      {
         u2_noun sut, ref, van;
 
-        if ( (u2_no == u2_mean(cor, u2_cv_sam, &ref, u2_cv_con, &van, 0)) ||
-             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
-        {
-          c3_assert(0);
-        } else {
-          j2_mcy(watt_268, ut, dupt)(wir_r, van, "sut", sut);
-          j2_mcy(watt_268, ut, dupt)(wir_r, van, "ref", ref);
-
-          u2_err(wir_r, "soft", sof);
-          u2_err(wir_r, "hard", had);
-        }
-      }
-      u2_err(wir_r, "soft", sof);
-      u2_err(wir_r, "hard", had);
-
-      {
-        u2_noun sut, gol, gen, van;
-
-        if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &gol, 
-                                    u2_cv_sam_3, &gen,
-                                    u2_cv_con, &van, 0)) ||
-             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
-        {
-          c3_assert(0);
-        } else {
-          j2_mcy(watt_268, ut, dupt)(wir_r, van, "sut", sut);
-          j2_mcy(watt_268, ut, dupt)(wir_r, van, "gol", gol);
-          u2_err(wir_r, "gen", gen);
-/*
-          j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_sof", u2_h(sof));
-          j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_had", u2_h(had));
-
-          u2_err(wir_r, "t_sof", u2_t(sof));
-          u2_err(wir_r, "t_had", u2_t(had));
-*/
-        }
-      }
-      {
-        u2_noun sut, ref, van;
-
-        if ( (u2_no == u2_mean(cor, u2_cv_sam, &ref, u2_cv_con, &van, 0)) ||
-             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
-        {
-          c3_assert(0);
-        } else {
-          j2_mcy(watt_269, ut, dupt)(wir_r, van, "sut", sut);
-          j2_mcy(watt_269, ut, dupt)(wir_r, van, "ref", ref);
-
-          j2_mcy(watt_269, ut, dupt)(wir_r, van, "sof", sof);
-          j2_mcy(watt_269, ut, dupt)(wir_r, van, "had", had);
-        }
-      }
-      {
-        u2_noun sut, dab, van;
-
-        if ( (u2_no == u2_mean(cor, u2_cv_sam, &dab, u2_cv_con, &van, 0)) ||
-             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
-        {
-          c3_assert(0);
-        } else {
-          j2_mcy(watt_270, ut, dupt)(wir_r, van, "sut", sut);
-        }
-      }
-      {
-        u2_noun sut, gen, van;
-
-        if ( (u2_no == u2_mean(cor, u2_cv_sam, &gen,
-                                    u2_cv_con, &van, 0)) ||
-             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
+        if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &ref, 0)) ||
+             (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
         {
           c3_assert(0);
         } else {
           u2_err(wir_r, "sut", sut);
-          // j2_mcy(watt_271, ut, dupt)(wir_r, van, "sut", sut);
-          u2_err(wir_r, "gen", gen);
-        }
-      }
-      {
-        u2_err(wir_r, "wrong", had);
-        u2_err(wir_r, "right", sof);
-      }
-      {
-        u2_noun sut, ref, van;
-
-        if ( (u2_no == u2_mean(cor, u2_cv_sam, &ref, u2_cv_con, &van, 0)) ||
-             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
-        {
-          c3_assert(0);
-        } else {
-          j2_mcy(watt_271, ut, dupt)(wir_r, van, "sut", sut);
-          j2_mcy(watt_271, ut, dupt)(wir_r, van, "ref", ref);
-        }
-      }
-      {
-        u2_wire wir_r = 0;
-        u2_noun sut, way, hep, van;
-
-        if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &way, 
-                                    u2_cv_sam_3, &hep,
-                                    u2_cv_con, &van, 0)) ||
-             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
-        {
-          c3_assert(0);
-        } else {
-          j2_mcy(watt_271, ut, dupt)(wir_r, van, "sut", sut);
-          u2_err(wir_r, "way", way);
-          u2_err(wir_r, "hep", hep);
-
-          u2_err(wir_r, "p_sof", u2_h(sof));
-          u2_err(wir_r, "p_had", u2_h(had));
-
-          j2_mcy(watt_271, ut, dupt)(wir_r, van, "r_sof", u2_t(u2_t(sof)));
-          j2_mcy(watt_271, ut, dupt)(wir_r, van, "r_had", u2_t(u2_t(had)));
-        }
-      }
-      {
-        u2_noun sut, gol, gen, van;
-
-        if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &gol, 
-                                    u2_cv_sam_3, &gen,
-                                    u2_cv_con, &van, 0)) ||
-             (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
-        {
-          c3_assert(0);
-        } else {
-          j2_mcy(watt_271, ut, dupt)(wir_r, van, "sut", sut);
-          j2_mcy(watt_271, ut, dupt)(wir_r, van, "gol", gol);
-          u2_err(wir_r, "gen", gen);
-
-          j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_sof", u2_h(sof));
-          j2_mcy(watt_271, ut, dupt)(wir_r, van, "h_had", u2_h(had));
-
-          u2_err(wir_r, "t_sof", u2_t(sof));
-          u2_err(wir_r, "t_had", u2_t(had));
+          u2_err(wir_r, "ref", ref);
         }
       }
 #endif

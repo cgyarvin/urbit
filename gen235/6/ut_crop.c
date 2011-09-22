@@ -99,9 +99,12 @@
       }
       case c3__cube: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {
-        if ( (c3__cube == u2_h(ref)) && u2_sing(p_sut, u2_h(u2_t(ref))) ) {
+        if ( (c3__cube == u2_h(ref)) && 
+             (u2_yes == u2_sing(p_sut, u2_h(u2_t(ref)))) )
+        {
           return c3__void;
-        } else if ( (c3__atom == u2_h(ref)) || (c3__cell == u2_h(ref)) ) {
+        } 
+        else if ( (c3__atom == u2_h(ref)) || (c3__cell == u2_h(ref)) ) {
           u2_noun foz = _crop_dext(wir_r, van, q_sut, ref, bix);
           u2_noun ret;
 
@@ -113,7 +116,7 @@
           u2_rz(wir_r, foz);
           return ret;
         }
-        else return _crop_sint(wir_r, van, ref, sut, bix);
+        else return _crop_sint(wir_r, van, sut, ref, bix);
       }
       case c3__face: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {
@@ -177,6 +180,11 @@
     switch ( u2_h(ref) ) {
       default: return u2_bl_bail(wir_r, c3__fail);
 
+      case c3__core:
+      case c3__cube: 
+      case c3__fine: {
+        return u2_rx(wir_r, sut);
+      }
       case c3__face: u2_bi_cell(wir_r, u2_t(ref), &p_ref, &q_ref);
       {
         return _crop_dext(wir_r, van, sut, q_ref, bix);
@@ -319,7 +327,7 @@
   j2_mcj(Pt6, ut, crop)[] = {
     { ".3", c3__hevy, 
         j2_mc(Pt6, ut, crop), 
-        Tier6_b_memo,
+        Tier6_t_memo,
         u2_none, u2_none,
         j2_mck(Pt6, ut, crop)
     },
