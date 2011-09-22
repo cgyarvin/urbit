@@ -876,7 +876,7 @@
             q=?~(+.b ~ [~ u=[p=(a +>-.b) q=[p=(hair -.b) q=(tape +.b)]]])
   ++  pork  dog
   ++  rock  num
-  ++  rule  |=(p=(clip) `(edge)`[p.p ~ ~ p])
+  ++  rule  |=(tub=(clip) `(edge)`[p.tub ~ ~ tub])
   ++  spot  ~[p=@ q=[p=[p=@ q=@] q=[p=@ q=@]]]
   ++  tank
     $^  [%leaf p=(tape)]
@@ -1173,7 +1173,7 @@
   ++  gon  ;~(pose ;~(plug nov gay von) (easy ~))
   ++  hex  (bass 16 (most gon hit))
   ++  hes  (just '$')
-  ++  hig  (shim 'a' 'z')
+  ++  hig  (shim 'A' 'Z')
   ++  hit  ;~(pose dit (cook |=(a=*char (sub a 87)) (shim 'a' 'f')))
   ++  ket  (just '^')
   ++  lep  (just '(')
@@ -1391,7 +1391,7 @@
         rud
       rux
     ::
-    ++  rf    `*tape`[?-(a & '&', | '|') ~]
+    ++  rf    `*tape`[?-(a & '&', | '|', * !!) ~]
     ++  rn    `*tape`[?>(=(0 a) '~') ~]
     ++  rt    `*tape`['\'' (weld (mesc (trip a)) `*tape`['\'' ~])]
     ++  rta   rt
@@ -1491,6 +1491,7 @@
           [$$(vem -.c.vem) $(c.vem +.c.vem)]
         ::
             [s=%z c=*]        $(vem [[%r %% %% %%] c.vem])
+            *                 !!
         ==
     ++  ship
       |=  [fom=@ gar=*]
@@ -1516,6 +1517,7 @@
         [%leaf (vel aug)]
       :+  %rose 
         [[' ' ~] ['[' ~] [']' ~]]
+      =>  .(aug `*`aug)
       |-  ^-  *(list tank)
       ?:  ?=(@ aug)
         [$$ ~]
@@ -2791,7 +2793,7 @@
       ?>  ?|(!vet (nest(sut q.q.p) & p.p))
       [dox q.q]
     ~|  %fire-wet
-    ~~  (dunk(sut [%cell q.q.p p.p]) %case)
+    ::  ~~  (dunk(sut [%cell p.p q.q.p]) %mull)
     ?>  ?|  !vet 
             =(p.p q.q.p) 
             (~(has in rib) [sut dox q.q])
@@ -3142,7 +3144,7 @@
                    q=(coke q:(mint(sut dox) %noun q.gen))
       =+  pov=[p=(fish(sut p.waz) p.syx) q=(fish(sut q.waz) q.syx)]
       ?.  &(=(p.syx q.syx)  =(p.pov q.pov))
-        ~|(%mull-bonk !!)
+        ~|(%mull-bonk-a !!)
       (both flag)
     ::
         [%csdg *]
@@ -3152,14 +3154,14 @@
           ?:  =(%void p.fex)
             [%void ?:(=(%void q.fex) %void (play(sut q.fex) q.gen))]
           ?:  =(%void q.fex)
-            ~|(%mull-bonk !!)
+            ~|(%mull-bonk-b !!)
           $(sut p.fex, dox q.fex, gen q.gen)
       =+  ^=  ran  ^-  [p=*type q=*type]
           =+  wux=[p=(lose p.gen) q=(lose(sut dox) p.gen)]
           ?:  =(%void p.wux)
             [%void ?:(=(%void q.wux) %void ~|(%csdg-a (play(sut q.wux) r.gen)))]
           ?:  =(%void q.wux)
-            ~|(%mull-bonk !!)
+            ~|(%mull-bonk-c !!)
           $(sut p.wux, dox q.wux, gen r.gen)
       [(nice (fork p.hiq p.ran)) (fork q.hiq q.ran)]
     ::
@@ -3186,7 +3188,7 @@
       =+  wiv=[p=(play p.gen) q=(play(sut dox) p.gen)]
       =+  zyn=(snap(sut p.wiv) q.gen)
       ?.  =(zyn (snap(sut q.wiv) q.gen))
-        ~|(%mull-bonk !!)
+        ~|(%mull-bonk-d !!)
       $(gen zyn)
     ::
         [%ktlc *]  
@@ -3209,10 +3211,14 @@
       =+  lar=(foil (seek %read p.gen))
       =+  vug=(foil (seek(sut dox) %read p.gen))
       ?.  &(=(p.lar p.vug) =(p.q.lar p.q.vug))
-        ~|(%mull-bonk !!)
+        ~|(%mull-bonk-e !!)
       =+  mew=(swab q.q.lar q.gen)
       ?.  =(mew (swab(sut dox) q.q.vug q.gen))
-        ~|(%mull-bonk !!)
+        ~~  (show [%c 'mew'] %q mew)
+        ~~  (show [%c 'muw'] %q (swab(sut dox) q.q.vug q.gen))
+        ~~  (dunk %mtlc-sut)
+        ~~  (dunk(sut dox) %mtlc-dox)
+        ~|(%mull-bonk-f !!)
       =-  [(nice (fire p.yom)) (fire(vet |) q.yom)]
       ^=  yom  
       |-  ^-  [p=*(list ~[p=*type q=*gate]) q=*(list ~[p=*type q=*gate])]
@@ -3222,7 +3228,7 @@
       =+  cuf=(tock p.i.mew p.zil q.q.lar)
       =+  dof=(tock p.i.mew q.zil q.q.vug)
       ?.  .=(p.cuf p.dof)
-        ~|(%mull-bonk !!)
+        ~|(%mull-bonk-g !!)
       $(mew t.mew, q.q.lar q.cuf, q.q.vug q.dof)
     ::
         [%pmdg *]  (grow %zinc [%dgsp [~ 1] p.gen] q.gen)

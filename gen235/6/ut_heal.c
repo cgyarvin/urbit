@@ -277,8 +277,11 @@
     {
       return u2_none;
     } else {
-      return u2_rt
-        (wir_r, u2_rx(wir_r, sut), u2_rx(wir_r, axe), u2_rx(wir_r, ref));
+      return u2_rq
+        (wir_r, u2_rx(wir_r, qog),
+                u2_rx(wir_r, sut), 
+                u2_rx(wir_r, axe), 
+                u2_rx(wir_r, ref));
     }
   }
 
@@ -288,7 +291,7 @@
   j2_mcj(Pt6, ut, heal)[] = {
     { ".3", c3__hevy, 
         j2_mc(Pt6, ut, heal), 
-        Tier6_b_memo,
+        Tier6_b,
         u2_none, u2_none,
         j2_mck(Pt6, ut, heal)
     },
