@@ -281,7 +281,7 @@
   j2_mcj(Pt6, ut, fuse)[] = {
     { ".3", c3__hevy, 
         j2_mc(Pt6, ut, fuse), 
-        Tier6_t_memo,
+        Tier6_b_memo,
         u2_none, u2_none,
         j2_mck(Pt6, ut, fuse)
     },
