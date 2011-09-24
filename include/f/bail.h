@@ -169,11 +169,17 @@
 
       /** Tracing.
       **/
-        /* u2_bl_push(): push on meaning stack.
+        /* u2_bl_push(): push on trace stack.
         */
           void
           u2_bl_push(u2_wire wir_r,
                      u2_noun mon);                                //  transfer
+
+        /* u2_bl_mean(): push `[%mean roc]` on trace stack.
+        */
+          void
+          u2_bl_mean(u2_wire wir_r,
+                     u2_noun roc);                                //  transfer
 
         /* u2_bl_error(): simple string error.
         */

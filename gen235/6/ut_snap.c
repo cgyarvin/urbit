@@ -62,7 +62,7 @@
           if ( u2_yes == u2_h(haq) ) {
             u2_noun p_haq, q_haq;
             u2_noun hed = j2_mcy(Pt6, ut, peek)(wir_r, van, sut, c3__read, 2);
-            u2_noun tal = j2_mcy(Pt6, ut, peek)(wir_r, van, sut, c3__read, 2);
+            u2_noun tal = j2_mcy(Pt6, ut, peek)(wir_r, van, sut, c3__read, 3);
 
             u2_as_cell(u2_t(haq), &p_haq, &q_haq);
 
@@ -174,8 +174,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pt6, ut, snap)[] = {
-    { ".3", c3__hevy, j2_mc(Pt6, ut, snap), Tier6_b, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pt6, ut, snap), Tier6_t, u2_none, u2_none },
     { }
   };
-
-

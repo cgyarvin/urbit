@@ -7,6 +7,8 @@
 
 /* internals
 */
+  extern int FOO, BAR;
+
   static u2_noun                                                  //  produce
   _snip(u2_wire wir_r,
         u2_noun van,                                              //  retain
@@ -23,7 +25,7 @@
       if ( u2_no == u2_dust(i_peh) ) {
         u2_noun fic = j2_mcy(Pt6, ut, fink)(wir_r, van, sut, c3__rite, i_peh);
         u2_noun fom = j2_mby(Pt6, foam)(wir_r, fic);
-        u2_noun ret = _snip(wir_r, van, fom, t_peh, gen);
+        u2_noun ret = _snip(wir_r, van, u2_t(fom), t_peh, gen);
 
         u2_rz(wir_r, fom);
         u2_rz(wir_r, fic);
@@ -65,26 +67,20 @@
       u2_noun i_men   = u2_h(men);
       u2_noun t_men   = u2_t(men);
       u2_noun pi_men  = u2_h(i_men);
-      u2_noun qi_men  = u2_t(i_men);
-      u2_noun pqi_men = u2_h(qi_men); 
 
-      if ( u2_yes == pqi_men ) {
-        return _snub(wir_r, van, sut, peh, t_men, gen, gus);
-      } else {
-        u2_noun nip = _snip(wir_r, van, pi_men, peh, gen);
-        u2_noun nar = u2_bc(wir_r, u2_nul, nip);
-        u2_noun ret;
+      u2_noun nip = _snip(wir_r, van, pi_men, peh, gen);
+      u2_noun nar = u2_bc(wir_r, u2_nul, nip);
+      u2_noun ret;
 
-        if ( u2_nul != gus ) {
-          if ( u2_no == u2_sing(nip, u2_t(gus)) ) {
-            return u2_bl_bail(wir_r, c3__exit);
-          }
+      if ( u2_nul != gus ) {
+        if ( u2_no == u2_sing(nip, u2_t(gus)) ) {
+          return u2_bl_bail(wir_r, c3__exit);
         }
-        ret = _snub(wir_r, van, sut, peh, t_men, gen, nar);
-
-        u2_rz(wir_r, nar);
-        return ret;
       }
+      ret = _snub(wir_r, van, sut, peh, t_men, gen, nar);
+
+      u2_rz(wir_r, nar);
+      return ret;
     }
   }
 
@@ -201,6 +197,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pt6, ut, swab)[] = {
-    { ".3", c3__hevy, j2_mc(Pt6, ut, swab), Tier6_b_memo, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pt6, ut, swab), Tier6_t, u2_none, u2_none },
     { }
   };

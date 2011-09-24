@@ -74,6 +74,15 @@ u2_bl_push(u2_wire wir_r,
   else u2_bl_bail(wir_r, c3__fail);
 }
 
+/* u2_bl_mean(): push `[%mean roc]` on trace stack.
+*/
+void
+u2_bl_mean(u2_wire wir_r,
+           u2_noun roc)                                          //  transfer
+{
+  return u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, roc));
+}
+
 /* u2_bl_drop(): drop from meaning stack.
 */
 void

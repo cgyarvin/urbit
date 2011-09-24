@@ -3294,7 +3294,7 @@
         0
       ?>  ?=(^ dab)
       ?>  ?=([& *] q.n.dab)
-      =+  vad=?.(p.p.q.n.dab & $$(gol %noun, gen q.p.q.n.dab))
+      =+  vad=?:(p.p.q.n.dab & $$(gol %noun, gen q.p.q.n.dab))
       ?-    dab
           [* ~ ~]   vad
           [* ~ *]   [vad $(dab r.dab)]
@@ -3689,8 +3689,6 @@
     |-  ^-  *gene
     ?~  men
       ?~(gus gen u.gus)
-    ?:  =(& p.q.i.men)
-      $(men t.men)
     $(men t.men, gus (mate gus `gus`[~ (snip(sut p.i.men) peh gen)]))
   ::
   ++  swab
