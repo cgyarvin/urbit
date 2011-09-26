@@ -2066,10 +2066,12 @@
           ^
         :+  %lcps
           p.gen 
+        =+  yex=`*(list gene)`q.gen
         |-  ^-  *gene
-        ?-  q.gen  
-          [* ~]  [%lcld [~ 2] i.q.gen]
-          [* ^]  [%mtsp [~ 3] [%lcld [~ 2] i.q.gen] $(q.gen t.q.gen) ~]
+        ?-  yex 
+          [* ~]  [%lcld [~ 2] i.yex]
+          [* ^]  [%mtsp [~ 3] [%lcld [~ 2] i.yex] $(yex t.yex) ~]
+          ~      !!
         ==
       ==
     ::
