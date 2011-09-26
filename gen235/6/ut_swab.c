@@ -56,6 +56,9 @@
         u2_noun gen,                                              //  retain
         u2_noun gus)                                              //  retain
   {
+#if 1
+    return u2_rx(wir_r, gen);
+#else
     if ( u2_no == u2_dust(men) ) {
       if ( u2_nul == gus ) {
         return u2_rx(wir_r, gen);
@@ -82,6 +85,7 @@
       u2_rz(wir_r, nar);
       return ret;
     }
+#endif
   }
 
 /* functions
@@ -197,6 +201,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pt6, ut, swab)[] = {
-    { ".3", c3__hevy, j2_mc(Pt6, ut, swab), Tier6_t, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pt6, ut, swab), Tier6_c, u2_none, u2_none },
     { }
   };

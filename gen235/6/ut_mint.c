@@ -526,7 +526,7 @@
       case c3__ktdt: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       {
         u2_noun wit = j2_mcy(Pt6, ut, play)(wir_r, van, sut, p_gen);
-        u2_noun nep = j2_mcy(Pt6, ut, snap)(wir_r, van, sut, q_gen);
+        u2_noun nep = j2_mcy(Pt6, ut, snap)(wir_r, van, wit, q_gen);
         u2_noun ret = _mint_in(wir_r, van, sut, gol, nep);
 
         u2_rz(wir_r, nep);

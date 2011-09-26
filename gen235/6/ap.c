@@ -613,9 +613,11 @@
         return u2_bc
           (wir_r, u2_bc(wir_r, 
                         u2_rx(wir_r, pir_gen),
-                        u2_bt(wir_r, c3__lcld, 
-                                     u2_bc(wir_r, u2_nul, _2),
-                                     u2_rx(wir_r, qir_gen))),
+                        u2_bt(wir_r, c3__ktdt,
+                                     u2_bc(wir_r, u2_nul, 13), 
+                                     u2_bt(wir_r, c3__lcld, 
+                                                  u2_bc(wir_r, u2_nul, _2),
+                                                  u2_rx(wir_r, qir_gen)))),
                   _mtbr_a(wir_r, tr_gen));
       }
     }
@@ -1532,7 +1534,7 @@
   u2_ho_jet 
   j2_mbj(Pt6, ap)[] = {
     { "late", c3__hevy, j2_mc(Pt6, ap, late), Tier6_c, u2_none, u2_none },
-    { "open", c3__hevy, j2_mc(Pt6, ap, open), Tier6_t, u2_none, u2_none },
+    { "open", c3__hevy, j2_mc(Pt6, ap, open), Tier6_c, u2_none, u2_none },
     { "rake", c3__hevy, j2_mc(Pt6, ap, rake), Tier6_c, u2_none, u2_none },
     { "hack", c3__hevy, j2_mc(Pt6, ap, hack), Tier6_c, u2_none, u2_none },
     { }

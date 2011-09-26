@@ -2013,7 +2013,7 @@
         q.gen
       :+  %mtlc
         (weld p.gen `*twig`[[~ 3] ~])
-      (turn r.gen |=([p=*gene q=*gene] [p [%lcld [~ 2] q]]))
+      (turn r.gen |=([p=*gene q=*gene] [p [%ktdt [~ 13] [%lcld [~ 2] q]]]))
     ::
         [%mtdg *]   [%mtsg [%% ~] p.gen q.gen]
         [%mtdt *]   [%mtsp q.gen [p.gen ~]]
@@ -3184,10 +3184,11 @@
     ::
         [%ktdt *]
       =+  wiv=[p=(play p.gen) q=(play(sut dox) p.gen)]
-      =+  zyn=(snap(sut p.wiv) q.gen)
-      ?.  =(zyn (snap(sut q.wiv) q.gen))
-        ~|(%mull-bonk-d !!)
-      $(gen zyn)
+      =+  hef=[p=(snap(sut p.wiv) q.gen) q=(snap(sut q.wiv) q.gen)]
+      ?:  =(p.hef q.hef)
+        $(gen p.hef)
+      =+  zyn=$(gen p.hef)
+      [p.zyn (play(sut dox) q.hef)]
     ::
         [%ktlc *]  
       =+(vat=$(gen q.gen) [(face p.gen p.vat) (face p.gen q.vat)])
@@ -3212,10 +3213,6 @@
         ~|(%mull-bonk-e !!)
       =+  mew=(swab q.q.lar q.gen)
       ?.  =(mew (swab(sut dox) q.q.vug q.gen))
-        ~~  (show [%c 'mew'] %q mew)
-        ~~  (show [%c 'muw'] %q (swab(sut dox) q.q.vug q.gen))
-        ~~  (dunk %mtlc-sut)
-        ~~  (dunk(sut dox) %mtlc-dox)
         ~|(%mull-bonk-f !!)
       =-  [(nice (fire p.yom)) (fire(vet |) q.yom)]
       ^=  yom  
@@ -3294,7 +3291,7 @@
         0
       ?>  ?=(^ dab)
       ?>  ?=([& *] q.n.dab)
-      =+  vad=?:(p.p.q.n.dab & $$(gol %noun, gen q.p.q.n.dab))
+      =+  vad=?.(p.p.q.n.dab & $$(gol %noun, gen q.p.q.n.dab))
       ?-    dab
           [* ~ ~]   vad
           [* ~ *]   [vad $(dab r.dab)]
@@ -3697,7 +3694,7 @@
     ^-  *(list ~[p=*twig q=*gene])
     %+  turn
       har
-    |=([a=*gene b=*gene] =+(c=(flop ~(rake ap a)) [c (snub c men b)]))
+    |=([a=*gene b=*gene] [(flop ~(rake ap a)) b])
   ::
   ++  tack
     ~.  %tack
