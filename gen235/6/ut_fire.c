@@ -7,6 +7,36 @@
 
 /* logic
 */
+  static u2_flag
+  _fire_mull(u2_wire wir_r,
+             u2_noun van,
+             u2_noun sut,
+             u2_noun dox,
+             u2_noun gen)
+  {
+    u2_noun rib = u2_frag(j2_ut_van_rib, van);
+    u2_noun key = u2_bt(wir_r, u2_rx(wir_r, sut),
+                               u2_rx(wir_r, dox),
+                               u2_rx(wir_r, gen));
+    u2_flag ret;
+   
+    if ( u2_yes == j2_mcc(Pt4, in, has)(wir_r, rib, key) ) {
+      ret = u2_yes;
+    }
+    else {
+      u2_noun rob = j2_mcc(Pt4, in, put)(wir_r, rib, key);
+      u2_noun von = u2_bn_molt(wir_r, van, 
+                                      j2_ut_van_rib, rob, 
+                                      0);
+      ret = j2_mcy(Pt6, ut, mull)(wir_r, von, sut, c3__noun, dox, gen);
+
+      u2_rz(wir_r, von);
+      u2_rz(wir_r, rob);
+    }
+    u2_rz(wir_r, key);
+    return ret;
+  }
+
   static u2_noun 
   _fire_each(u2_wire wir_r, 
              u2_noun van,
@@ -49,8 +79,7 @@
       else {
         if ( (u2_yes == vet) &&
              (u2_no == u2_sing(p_typ, qq_typ)) &&
-             (u2_no == j2_mcy(Pt6, ut, mull)
-                          (wir_r, van, typ, c3__noun, dox, t_gat)) )
+             (u2_no == _fire_mull(wir_r, van, typ, dox, t_gat)) )
         {
           u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "wild", typ);
           u2_noun niz = j2_mcy(Pt6, ut, dunq)(wir_r, van, "tame", dox);
