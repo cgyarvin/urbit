@@ -4051,6 +4051,7 @@
             @                [%ktlc ros p.vil]
             [%mtlc [@ ~] ~]  [%ktlc i.p.ros p.vil]
             [%zpcb *]        $(ros q.ros)
+            *                !!
           ==
             %deg  [%lcdl ros p.vil]
             %lep  [%mtlc ~(rake ap ros) p.vil]
