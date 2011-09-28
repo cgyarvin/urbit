@@ -777,7 +777,7 @@
 
         return ret;
       }
-      case c3__zpvn:
+      case c3__zpvn: p_gen = u2_t(gen);
       _mint_used(wir_r);
       {
         if ( u2_yes == _mint_vet(wir_r, van) ) {
