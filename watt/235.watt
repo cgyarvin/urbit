@@ -12,7 +12,7 @@
   &.
   ++  stub  235
   ++  bit   {& |}
-  ++  dog   |=(a=* a)
+  ++  nap   |=(a=* a)
   ++  num   |=(a=* ^:(0* a))
   ++  rat   |=(a=* ^:(@ a))
   --
@@ -130,15 +130,15 @@
   ::  Tier 2 cones
   ::
   ++  list
-    |*  a=dog
+    |*  a=nap
     $=(~ [i=(a) t=((list a))])
   ::
   ++  tree
-    |*  a=dog
+    |*  a=nap
     $=(~ [n=(a) l=((tree a)) r=((tree a))])
   ::
   ++  unit
-    |*  a=dog
+    |*  a=nap
     $=(~ [~ u=(a)])
   --
 =>
@@ -153,7 +153,7 @@
   ::
   ++  bind
     ~.  %bind 
-    |*  [a=*(unit) b=dog]
+    |*  [a=*(unit) b=nap]
     ?~  a
       ~
     [~ u=(b u.a)]
@@ -300,7 +300,7 @@
   ::
   ++  turn
     ~.  %turn
-    |*  [a=*(list) b=dog]
+    |*  [a=*(list) b=nap]
     |-
     ?~  a
       ~
@@ -701,11 +701,11 @@
     ==
   ::
   ++  set
-    |*  a=dog
+    |*  a=nap
     $=(~ ^<(apt [n=(a) l=((set a)) r=((set a))]))
   ::
   ++  map   
-    |*  [a=dog b=dog]
+    |*  [a=nap b=nap]
     $=(~ ^<(ept [n=[p=(a) q=(b)] l=((map a b)) r=((map a b))]))
   --
 =>
@@ -870,11 +870,11 @@
   ++  edge  ~[p=(hair) q=((unit ~[p=* q=(clip)]))]
   ++  hair  ~[p=1* q=1*]
   ++  know  |*(veq=(edge) ?~(q.veq !! p.u.q.veq))
-  ++  like  |*  a=dog
+  ++  like  |*  a=nap
             |=  b=`*`[(hair) ~]
             :-  p=(hair -.b) 
             q=?~(+.b ~ [~ u=[p=(a +>-.b) q=[p=(hair -.b) q=(tape +.b)]]])
-  ++  pork  dog
+  ++  pork  nap
   ++  rock  num
   ++  rule  |=(tub=(clip) `(edge)`[p.tub ~ ~ tub])
   ++  spot  ~[p=@ q=[p=[p=@ q=@] q=[p=@ q=@]]]
@@ -920,7 +920,7 @@
     [p=p.vex q=[~ u=[p=cus q=q.u.q.vex]]]
   ::
   ++  cook
-    |*  [poq=dog sef=rule]
+    |*  [poq=nap sef=rule]
     |=  tub=*clip
     =+  vex=(sef tub)
     ?~  q.vex
@@ -1531,7 +1531,7 @@
     |=  a=@
     ^-  *
     =+  b=0*
-    =+  m=`*(map num dog)`~
+    =+  m=`*(map num nap)`~
     =<  q
     |-  ^-  [p=@ q=* r=m]
     ?:  =(0 (cut 0 [b 1] a))
@@ -1551,7 +1551,7 @@
     |=  a=*
     ^-  @
     =+  b=0*
-    =+  m=`*(map dog num)`~
+    =+  m=`*(map nap num)`~
     =<  q
     |-  ^-  [p=@ q=@ r=m] 
     =+  c=(~(get by m) a)
@@ -4051,6 +4051,7 @@
             @                [%ktlc ros p.vil]
             [%mtlc [@ ~] ~]  [%ktlc i.p.ros p.vil]
             [%zpcb *]        $(ros q.ros)
+            *                !!
           ==
             %deg  [%lcdl ros p.vil]
             %lep  [%mtlc ~(rake ap ros) p.vil]
