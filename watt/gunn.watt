@@ -180,6 +180,9 @@
 ++  draw                                                ::  mold from mode
   |=  med=*mode  ~|  %draw  ^-  *gene
   ?-    med
+      %auto
+    ~|(%draw-auto !!)
+  ::
       *{%atom %watt}
     [%hssg [[%tmlc %atom] ~] ~]
   ::
@@ -245,12 +248,16 @@
           ~|(%ride-data !!)
         [typ q.ful]
       ::
+          [%disk *]
+        ~|(%fuel-disk !!)
+      ::
           [%gene *]
         (pour p.ful)
       ::
           [%many *]
         |-  ^-  *vase
         ?-    p.ful 
+            ~      !!
             [* ~]  $$(ful i.p.ful)
             ^      
           =+  [tug=$(p.ful t.p.ful) nob=$$(ful i.p.ful)]
@@ -278,6 +285,9 @@
     =+  gun=(~(mint ut typ) %noun %%)
     ~|  %ride-nock
     [p.gun .*(cor q.gun)]
+  ::
+      [%disk *]
+    ~|(%tool-disk !!)
   ::
       [%data *]
     (slam (pour(env hyn) (rash p.q.tul vest)) gul)
