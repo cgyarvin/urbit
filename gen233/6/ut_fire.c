@@ -64,12 +64,13 @@
              (u2_no == j2_mcy(Pt6, ut, nest)
                 (wir_r, van, qq_typ, u2_yes, p_typ)) )
         {
+#if 0
           u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "need", qq_typ);
           u2_noun niz = j2_mcy(Pt6, ut, dunq)(wir_r, van, "have", p_typ);
 
-          u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
           u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
-
+          u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
+#endif
           return u2_bl_error(wir_r, "fire-dry");
         }
         else {
@@ -81,12 +82,13 @@
              (u2_no == u2_sing(p_typ, qq_typ)) &&
              (u2_no == _fire_mull(wir_r, van, typ, dox, t_gat)) )
         {
+#if 0
           u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "wild", typ);
           u2_noun niz = j2_mcy(Pt6, ut, dunq)(wir_r, van, "tame", dox);
 
           u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
           u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
-
+#endif
           return u2_bl_error(wir_r, "fire-wet");
         }
         else {

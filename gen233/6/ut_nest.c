@@ -134,46 +134,59 @@
         return u2_no;
       }
       else {
-        u2_noun tus = u2_bt(wir_r, c3__core, 
-                                   u2_rx(wir_r, qq_sut), 
-                                   u2_rx(wir_r, q_sut));
-        u2_noun fer = u2_bt(wir_r, c3__core, 
-                                   u2_rx(wir_r, qq_ref), 
-                                   u2_rx(wir_r, q_ref));
+        u2_noun hud = u2_bc(wir_r, u2_rx(wir_r, sut), u2_rx(wir_r, ref));
 
-        ret = _nest_cram(wir_r, van, tus, tel, fer, qrq_sut, qrq_ref, gil);
-        u2_rz(wir_r, tus);
-        u2_rz(wir_r, fer);
+        if ( (u2_yes == j2_mcc(Pt4, in, has)(wir_r, gil, hud)) ) {
+          u2_rl_lose(wir_r, hud);
 
-        if ( u2_no == ret ) {
-          return u2_no;
-        }
+          return u2_yes;
+        } 
         else {
-          switch ( pq_sut ) {
-            default: return u2_bl_bail(wir_r, c3__fail);
+          u2_noun zoc = j2_mcc(Pt4, in, put)(wir_r, gil, hud);
+          u2_noun tus = u2_bt(wir_r, c3__core, 
+                                     u2_rx(wir_r, qq_sut), 
+                                     u2_rx(wir_r, q_sut));
+          u2_noun fer = u2_bt(wir_r, c3__core, 
+                                     u2_rx(wir_r, qq_ref), 
+                                     u2_rx(wir_r, q_ref));
 
-            case c3__gold: {
-              return u2_and(_nest_dext(wir_r, van, qq_sut, tel, qq_ref, gil),
-                            _nest_dext(wir_r, van, qq_ref, tel, qq_sut, gil));
-            }
-            case c3__iron: {
-              u2_noun s_sam = j2_mcy(Pt6, ut, peek)
-                                      (wir_r, van, qq_sut, c3__rite, _3);
-              u2_noun r_sam = j2_mcy(Pt6, ut, peek)
-                                      (wir_r, van, qq_ref, c3__rite, _3);
+          ret = _nest_cram(wir_r, van, tus, tel, fer, qrq_sut, qrq_ref, zoc);
+          u2_rz(wir_r, fer);
+          u2_rz(wir_r, tus);
+          u2_rz(wir_r, zoc);
+          u2_rz(wir_r, hud);
 
-              return _nest_dext(wir_r, van, r_sam, tel, s_sam, gil);
-            }
-            case c3__lead: {
-              return u2_yes;
-            }
-            case c3__zinc: {
-              u2_noun s_pal = j2_mcy(Pt6, ut, peek)
-                                      (wir_r, van, qq_sut, c3__read, _3);
-              u2_noun r_pal = j2_mcy(Pt6, ut, peek)
-                                      (wir_r, van, qq_ref, c3__read, _3);
+          if ( u2_no == ret ) {
+            return u2_no;
+          }
+          else {
+            switch ( pq_sut ) {
+              default: return u2_bl_bail(wir_r, c3__fail);
 
-              return _nest_dext(wir_r, van, s_pal, tel, r_pal, gil);
+              case c3__gold: {
+                return 
+                  u2_and(_nest_dext(wir_r, van, qq_sut, tel, qq_ref, gil),
+                         _nest_dext(wir_r, van, qq_ref, tel, qq_sut, gil));
+              }
+              case c3__iron: {
+                u2_noun s_sam = j2_mcy(Pt6, ut, peek)
+                                        (wir_r, van, qq_sut, c3__rite, _3);
+                u2_noun r_sam = j2_mcy(Pt6, ut, peek)
+                                        (wir_r, van, qq_ref, c3__rite, _3);
+
+                return _nest_dext(wir_r, van, r_sam, tel, s_sam, gil);
+              }
+              case c3__lead: {
+                return u2_yes;
+              }
+              case c3__zinc: {
+                u2_noun s_pal = j2_mcy(Pt6, ut, peek)
+                                        (wir_r, van, qq_sut, c3__read, _3);
+                u2_noun r_pal = j2_mcy(Pt6, ut, peek)
+                                        (wir_r, van, qq_ref, c3__read, _3);
+
+                return _nest_dext(wir_r, van, s_pal, tel, r_pal, gil);
+              }
             }
           }
         }
@@ -289,7 +302,7 @@
           }
 
           return u2_or(_nest_dext(wir_r, van, p_sut, u2_no, ref, gil),
-                       _nest_dext(wir_r, van, q_sut, u2_no, ref, gil));
+                       _nest_dext(wir_r, van, q_sut, tel, ref, gil));
         }
       } 
       case c3__hold: p_sut = u2_t(sut);
