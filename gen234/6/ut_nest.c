@@ -207,8 +207,8 @@
       case c3__atom: {
         if ( (u2_yes == u2_dust(ref)) && (c3__atom == u2_h(ref)) ) {
           if ( u2_no == _nest_fitz(wir_r, u2_t(sut), u2_t(ref)) ) {
-            u2_err(wir_r, "fitz: need", u2_t(sut));
-            u2_err(wir_r, "fitz: have", u2_t(ref));
+            // u2_err(wir_r, "fitz: need", u2_t(sut));
+            // u2_err(wir_r, "fitz: have", u2_t(ref));
             return u2_no;
           }
           return u2_yes;

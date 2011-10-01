@@ -2567,7 +2567,7 @@
             (show [%m '|%a%x'] p.hab r.hab ~)
           (show [%m '&%d%a%x'] q.hab p.hab r.hab ~)
       ^=  hab  ^-  [p=@ q=@ r=@]
-      :+  ?-(p.q.sut %gold '.', %iron '=', %lead ':', %zinc '%')
+      :+  ?-(p.q.sut %gold '.', %iron '=', %lead '%', %zinc ':')
         |-  ^-  @
         ?-  q.r.q.sut
           ~        0
@@ -2790,10 +2790,11 @@
     =+  dox=[%core q.q.p q.p]
     ?:  p.q
       ~|  %fire-dry
+      ::  ~~  (dunk(sut [%cell q.q.p p.p]) %fire)
       ?>  ?|(!vet (nest(sut q.q.p) & p.p))
       [dox q.q]
     ~|  %fire-wet
-    ::  ~~  (dunk(sut [%cell p.p q.q.p]) %mull)
+    ::  ~~  (dunk(sut [%cell q.q.p p.p]) %mull)
     ?>  ?|  !vet 
             =(p.p q.q.p) 
             (~(has in rib) [sut dox q.q])
@@ -3322,7 +3323,17 @@
         |
       ?&
         ?|(=(p.q.sut p.q.ref) =(%gold p.q.ref))
-        (cram(sut sut(p q.q.sut), ref ref(p q.q.ref)) q.r.q.sut q.r.q.ref)
+      ::
+        ?|  (~(has in gil) [sut ref])
+            %+  %=  cram
+                  gil  (~(put in gil) [sut ref])
+                  sut  sut(p q.q.sut)
+                  ref  ref(p q.q.ref)
+                ==
+              q.r.q.sut
+            q.r.q.ref
+        == 
+      ::
         ?-    p.q.sut
             %gold
           =+  pac=[s=q.q.sut r=q.q.ref]
@@ -3413,7 +3424,7 @@
           [%fork *]
         ?.  ?=(*%{[%atom *] %noun [%cell *] [%cube *] [%core *] [%fine *]} ref)
           sint
-        ?|(dext(tel |, sut p.sut) dext(tel |, sut q.sut))
+        ?|(dext(tel |, sut p.sut) dext(sut q.sut))
       ::
           [%hold *]
         ?|

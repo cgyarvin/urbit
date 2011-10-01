@@ -281,7 +281,7 @@
     =+  ^=  typ  ^-  *type
         =+  dab=(~(put by *(map term foot)) %% [& & p.q.tul])
         [%core p.pay [%gold p.pay [~ dab]]]
-    =+  cor=[q.pay q:(~(mint ut typ) %noun p.q.tul)]
+    =+  ~|(%ride-mint cor=[q.pay q:(~(mint ut typ) %noun p.q.tul)])
     =+  gun=(~(mint ut typ) %noun %%)
     ~|  %ride-nock
     [p.gun .*(cor q.gun)]

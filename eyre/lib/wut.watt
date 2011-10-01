@@ -1,0 +1,137 @@
+!:
+&.
+::
+::      Tier 2y, gear assembly
+::
+++  from
+  |=  [a=0* b=0*]
+  |%
+  ?:  =(a b)
+    ~
+  [i=a t=..$(a +(a))]
+::
+++  gear
+  |*  [a=nap]
+  |=  b=*
+  |%
+  ?~  b
+    ~
+  [i=(a -.b) t=..$(b +.b)]
+::
+++  lone
+  |*  a=*
+  |%
+  [i=a t=~]
+::
+++  none
+  |%(~) 
+::
+++  spin
+  |*  a=*(list)
+  |%
+  ?~  a
+    ~
+  [i=i.a t=..$(a t.a)]
+::
+::      Tier 2z, gear engine: go
+::
+++  go
+  &=  a=((gear))
+  ::
+  +-  bark  (drip ~)
+  +-  bite  (drop ~)
+  +-  drip
+    |=  b=^-(|-(=+(b=(a) ?~(b ~ [i=i.b t=$(a t.b)]))) ~)
+    ^-  b
+    =+  c=(a)
+    ?~  c
+      b
+    [i=i.c t=$(a t.c)]
+  ::
+  +-  drop
+    |=  b=^-(|-(=+(b=(a) ?~(b ~ [i=i.b t=$(a t.b)]))) ~)
+    ^-  b
+    =+  c=(a)
+    ?~  c
+      b
+    $(b [i=i.c t=b], a t.c)
+  ::
+  +-  lent
+    =+  b=0*
+    |-  ^-  0*
+    =+  c=(a)
+    ?~  c
+      b
+    $(b +(b), a t.c)
+  ::
+  +-  mall
+    |*  b=bit
+    |-  ^-  ?
+    =+  c=(a)
+    ?~(c & &((b i.c) $(a t.c)))
+  ::
+  +-  many
+    |*  b=bit
+    |-  ^-  ?
+    =+  c=(a)
+    ?~(c | |((b i.c) $(a t.c)))
+  ::
+  +-  mill
+    |*  b=nap
+    |%
+    =+  c=(a)
+    ?~  c
+      ~
+    [i=(b i.c) t=..$(a t.c)]
+  ::
+  +-  roll
+    |*  b=|=([p=* q=*] q)
+    ^-  q.b
+    =+  c=(a)
+    ?~  c
+      q.b
+    $(q.b (b i.c q.b), a t.c)
+  ::
+  +-  reel
+    |*  b=|=([p=* q=*] q)
+    ^-  q.b
+    =+  c=(a)
+    ?~  c
+      q.b
+    (b i.c $(a t.c))
+  ::
+  +-  snag
+    |=  b=@
+    =+  c=(a)
+    ^-  i.-.c
+    ?~  c
+      ~|(%snag !!) 
+    ?:(=(0 b) i.c $(a t.c, b (dec b)))
+  ::
+  +-  scag
+    |=  b=@
+    =+  c=(a)
+    ?~  c
+      ~|(%snag !!) 
+    ?:(=(0 b) i.c $(a t.c, b (dec b)))
+  ::
+  +-  slag
+    |=  b=@
+    ^-  a
+    ?:  =(0 b)
+      a
+    =+  c=(a)
+    ?~  c
+      ~|(%slag !!) 
+    $(a t.c, b (dec b))
+  ::
+  +-  weld
+    |*  b=((gear))
+    |%  
+    =+  c=(a)
+    ?~  c
+      (b)
+    [i=i.c t=..$(a t.c)]
+  ::
+  --
+--
