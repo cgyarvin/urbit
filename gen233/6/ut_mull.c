@@ -551,7 +551,8 @@
       case c3__ktsp: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mull_used(wir_r);
       {
-        u2_noun p_hif = j2_mcy(Pt6, ut, play)(wir_r, van, sut, p_gen);
+        u2_noun p_hif = _mull_nice
+          (wir_r, van, gol, j2_mcy(Pt6, ut, play)(wir_r, van, sut, p_gen));
         u2_noun q_hif = j2_mcy(Pt6, ut, play)(wir_r, van, dox, p_gen);
 
         u2_noun zel = _mull_in(wir_r, van, sut, p_hif, dox, q_gen);
@@ -876,7 +877,7 @@
   j2_mcj(Pt6, ut, mull)[] = {
     { ".3", c3__hevy, 
         j2_mc(Pt6, ut, mull), 
-        Tier6_b_memo,
+        Tier6_b,
         u2_none, u2_none,
         j2_mck(Pt6, ut, mull)
     },

@@ -23,6 +23,14 @@
   |%
   [i=a t=~]
 ::
+++  meld
+  |*  a=((list %{((gear))}))
+  ?~  a
+    none
+  ?~  t.a
+    i.a
+  (~(weld go i.a) $(a t.a))
+::
 ++  none
   |%(~) 
 ::
@@ -33,13 +41,54 @@
     ~
   [i=i.a t=..$(a t.a)]
 ::
+++  tulp
+  |*  a=*(list)
+  ?~  a
+    ~|(%tulp !!)
+  ?~  t.a
+    i.a
+  [i.a $(a t.a)]
+::
+++  zipp
+  |*  a=*(list %{nap})
+  |=  b=*
+  =<  funk
+  &.
+  +-  funk
+    ?~  a
+      ~
+    [i=(i.a -.b) t=funk(a t.a, b +.b)]
+  --
+::
+++  rack
+  |*  a=*(list %{((gear))})
+  |%
+  =+  ^=  b  =<  $  &.  +-  $  ?~(a ~ [i=(i.a) t=$(a t.a)])  --
+  =-  ?.(f.c ~ [i=g.c t=..$(a h.c)])
+  ^=  c
+  &.  
+  +-  f  ?~(b & ?~(i.b | f(b t.b)))
+  +-  g  ?~(b !!  ?~(i.b !! ?~(t.b i.i.b [i.i.b g(b t.b)])))
+  +-  h  ?~(b ~ ?~(i.b !! [t.i.b h(b t.b)]))
+  --
+::
 ::      Tier 2z, gear engine: go
 ::
 ++  go
   &=  a=((gear))
   ::
   +-  bark  (drip ~)
-  +-  bite  (drop ~)
+  +-  bask  (drop ~)
+  +-  beak
+    |=  b=@
+    ^-  a
+    ?:  =(0 b)
+      ~
+    =+  c=(a)
+    ?~  c
+      ~|(%slag !!) 
+    [i=i.c t=..$(a t.c, b (dec b))]
+  ::
   +-  drip
     |=  b=^-(|-(=+(b=(a) ?~(b ~ [i=i.b t=$(a t.b)]))) ~)
     ^-  b
@@ -115,13 +164,6 @@
     |=  b=@
     =+  c=(a)
     ^-  i.-.c
-    ?~  c
-      ~|(%snag !!) 
-    ?:(=(0 b) i.c $(a t.c, b (dec b)))
-  ::
-  +-  scag
-    |=  b=@
-    =+  c=(a)
     ?~  c
       ~|(%snag !!) 
     ?:(=(0 b) i.c $(a t.c, b (dec b)))

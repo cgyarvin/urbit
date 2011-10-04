@@ -2376,7 +2376,6 @@
   ++  crop
     ~.  %crop
     |=  ref=*type
-    ~|  %crop-bug
     =+  bix=*(set ~[*type *type])
     =<  dext
     &.
@@ -2790,11 +2789,11 @@
     =+  dox=[%core q.q.p q.p]
     ?:  p.q
       ~|  %fire-dry
-      ::  ~~  (dunk(sut [%cell q.q.p p.p]) %fire)
+      ::  ~~  (dunk(sut [%cell q.q.p p.p]) %fire-dry)
       ?>  ?|(!vet (nest(sut q.q.p) & p.p))
       [dox q.q]
     ~|  %fire-wet
-    ::  ~~  (dunk(sut [%cell q.q.p p.p]) %mull)
+    ::  ~~  (dunk(sut [%cell q.q.p p.p]) %fire-wet)
     ?>  ?|  !vet 
             =(p.p q.q.p) 
             (~(has in rib) [sut dox q.q])
@@ -3202,7 +3201,7 @@
     ::
         [%ktsg *]  $(gen p.gen)
         [%ktsp *]
-      =+  hif=[p=(play p.gen) q=(play(sut dox) p.gen)]
+      =+  hif=[p=(nice (play p.gen)) q=(play(sut dox) p.gen)]
       =+($(gen q.gen, gol p.hif) hif)
     ::
         [%lcld *]                               
