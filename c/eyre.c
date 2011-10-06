@@ -273,14 +273,14 @@ _eyre_hook_qual(u2_wire     wir_r,
 }
 #endif
 
-/* _eyre_path_lid(): 
+/* _eyre_path_int(): 
 */
 static c3_c*                                                      //  produce
-_eyre_path_lid(c3_c* lid_c)                                       //  retain
+_eyre_path_int(c3_c* lid_c)                                       //  retain
 {
   c3_c* pot_c = malloc(FILENAME_MAX + 1);
 
-  snprintf(pot_c, FILENAME_MAX, "watt/%s", lid_c);
+  snprintf(pot_c, FILENAME_MAX, "eyre/int/%s", lid_c);
   return pot_c;
 }
 
@@ -292,7 +292,7 @@ _eyre_path_ken(c3_w kno_w)
 {
   c3_c* pot_c = malloc(FILENAME_MAX + 1);
 
-  snprintf(pot_c, FILENAME_MAX, "watt/%d", kno_w);
+  snprintf(pot_c, FILENAME_MAX, "eyre/ken/%d", kno_w);
   return pot_c;
 }
 
@@ -467,17 +467,19 @@ _eyre_app(u2_wire wir_r,
     exit(1);
     return 0;
   } else {
-    c3_c*   pot_c = _eyre_path_lid(lid_c);
+    c3_c*   pot_c = _eyre_path_int(lid_c);
     u2_noun src   = u2_ux_read(wir_r, pot_c, "watt");
     u2_noun noc, cor;
 
     printf("app: loading: %s\n", pot_c);
 
+    u2_bx_boot(wir_r);
     noc = _eyre_nock(wir_r, u2_yes, src, ken);
     cor = _eyre_nock(wir_r, u2_yes, 0, noc);
+    u2_bx_show(wir_r);
 
     u2_rz(wir_r, noc);
-    printf("app: %s\n", pot_c);
+    printf("app: %s, %x\n", pot_c, u2_mug(cor));
     free(pot_c);
 
     u2_bl_done(wir_r, kit_r);
@@ -777,7 +779,7 @@ _eyre_test2(u2_wire wir_r,
     u2_bl_done(wir_r, kit_r);
     fprintf(stderr, "{exit}\n");
   } else {
-    c3_c*   pot_c = _eyre_path_lid(lid_c);
+    c3_c*   pot_c = _eyre_path_int(lid_c);
     u2_noun src   = u2_ux_read(wir_r, pot_c, "watt");
     u2_noun noc, cor, bum, goo;
 

@@ -9,16 +9,17 @@
       typedef struct _u2_loom_benx {
         /* Source position debug stack: 
         **
-        **  *(list &[p=* q=[p=* q=*(list [p=[p=@ q=@] q=[p=@ q=@]])]])
+        **  *(list ~[* [@ @] [@ @]])
         */
         u2_weak zat;  // on shed
 
-        /* Programmer action debug stack:
+        /* Manual context debug stack:
         **
-        **  *(list &*) 
+        **  *(list %{nap}) 
         */
         u2_weak zof;  // on shed
 
+        /* Inter
         /* Interpreter steps.
         */
         c3_d  sap_d;
