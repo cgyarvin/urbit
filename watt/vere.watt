@@ -1,0 +1,259 @@
+:: =>  !%
+::
+::  XX: should be invoked with !%/zoot, but u4 plow jet cannot handle
+::
+=>  plow
+=+  rasp
+=<
+  =+  sul=seed
+  |*
+      vere  .
+  ::
+  ::::  System interface
+  ::::
+  ::          spar: parse vent
+      spar
+    =+  cox=*rock
+    |=
+    ^-  *vent
+    (done %.(`tube`~(. tube (rip 3 cox)) |~(plug bonk skin lewl)))
+  ::::
+  ::          glem: apply well, producing soul
+      glem
+    =+  wol=*well
+    |=
+    ^-  *soul
+    ?-  wol
+    ::
+        [%foam *]
+      =+  vid=(~(mill rose p.sul) p.wol)
+      [p.vid .*(q.sul q.vid)]
+    ::
+        [%kick *]
+      =+  pug=$(wol p.wol)
+      =+  hor=$(wol q.wol)
+      :-  (~(shop rose [%cell p.pug p.hor]) [%mung [%frag 2] [%frag 3]])
+      .*([[q.hor ->.q.pug] +.q.pug] +.q.pug)
+    ::
+        [%sell *]
+      =+  pug=$(wol p.wol)
+      =+  hor=$(wol q.wol)
+      ?>  (~(show rose [%cell p.pug p.hor]) [%cast [%frag 2] [%frag 3]])
+      [p.pug q.hor]
+    ::
+        [%tule *]
+      |-
+      ^-  *soul
+      ?-  p.wol
+          [* ~]   $.-.$(wol i.p.wol)
+      ::
+          ^       
+        =+  piv=$.-.$(wol i.p.wol)
+        =+  lat=$(p.wol t.p.wol)
+        [[%cell p.piv p.lat] [q.piv q.lat]]
+      ==
+    ::
+        [%wood *]
+      =+  von=seed
+      |-
+      ?~  p.wol
+        von
+      ?>  ?=(%gen -.i.p.wol)
+      =+  vid=(~(mill rose p.von) +.i.p.wol)
+      $(von [p.vid .*(q.von q.vid)], p.wol t.p.wol)
+    ==
+  ::::
+  ::          blor: apply sink and soul, producing core and merds
+      blor
+    =+  [syn=*sink mal=*soul]
+    |=
+    ^-  [..vere *(list merd)]
+    ?-  syn
+      %crud   [..vere {[%crud mal]}]
+    ==
+  ::
+  ::::
+  ==
+|*
+::
+::::  Molds and cases
+::::
+::
+    form  term
+    vent  &[p=*knob q=*sink r=*well]
+    soul  &[p=*type q=*]
+    unox  &[p=*<%root %curd %ulib %ubin> q=*(list rock)]
+::::
+::        knob: execution option
+    knob
+  |?
+    ~
+    %dbug                         ::  debug
+    [%slow p=@]                   ::  set optimization threshold
+  ==
+::::
+::        gulp: code source
+    gulp
+  <[%gen *gene] [%sys *unox]>
+::::
+::
+    merd
+  |?
+    [%crud p=*soul]               ::  print soul, crude
+    [%nice p=*soul]               ::  print soul, fancy
+    [%kind p=*soul]               ::  print soul, type only
+    [%save p=*form q=*unox r=*]   ::  write to file by format
+    [%puke p=*form q=*]           ::  write to screen by format
+  ==
+::::
+::        sink: output definition
+    sink
+  |?
+    %crud                         ::  print, raw noun and type
+    %nice                         ::  print, type-sensitive
+    %kind                         ::  print, type only
+    %load                         ::  load as environment
+    [%pose p=*term]               ::  add as variable
+    [%rite p=*term]               ::  modify variable
+    [%dump p=*form q=*unox]       ::  write to file by format
+  ==
+::::
+::        well: computation spec
+    well
+  |?
+    [%data p=*form q=*unox]           ::  extrinsic file, with format
+    [%foam p=*gene]                   ::  gear against environment
+    [%honk p=*gene q=*well]           ::  %flac
+    [%kick p=*well q=*well]           ::  %mung
+    [%sell p=*well q=*well]           ::  %cast
+    [%tule p=*(list well)]            ::  %prex
+    [%wood p=*(list gulp)]            ::  gear against kernel
+  ==
+::
+::::  Scanners
+::::
+::          bonk: scan knob
+    bonk
+  =+  doc=tube
+  |=
+  ^-  *(edge knob)
+  %.  doc
+  |~  pose
+    %+  ifix
+      [dax gap] 
+    |~  pose
+      (stag %slow del)
+      (cold %dbug ask)
+    ==
+  ::
+    (free ~)
+  ==
+::::
+::          nuxo: scan unox path
+    nuxo
+  =+  doc=tube
+  |=
+  ^-  *(edge unox)
+  %.  doc
+  |~  plug 
+    |~(pose (cold %root sol) (free %curd))
+    (most sol |~(pose nix quo))
+  ==
+::::
+::          skin: scan sink
+    skin
+  =+  doc=tube
+  |=
+  ^-  *(edge sink)
+  %.  doc
+  |~  pose
+    %+  ifix
+      [red gap] 
+    |~  pose
+      (cold %crud cab)
+      (cold %nice dig)
+      (cold %kind ask)
+      (stag %pose |~(pfix pod sym))
+      (stag %rite |~(pfix ben sym))
+      (stag %dump |~(pfix pat |~((glue dig) sym nuxo)))
+    ==
+  ::
+    (free %crud)
+  ==
+::::
+::          clew: scan well (core)
+    clew
+  =+  doc=tube
+  |=  
+  ^-  *(edge well)
+  %.  doc
+  |~  pose
+    |~(pfix dig grap)
+    (stag %data |~(pfix der |~((glue dig) sym nuxo)))
+    (stag %tule (ifix [nom mon] (most gap clew)))
+    (stag %foam scry)
+    (stag %sell |~(plug (ifix [tic tic] clew) lewl))
+  ==
+::::
+::          grap: scan wood
+    grap
+  %+  cook
+    =+(*(list gulp) |=([%wood -<]))
+  =+  doc=tube
+  |=
+  ^-  *(edge (list gulp))
+  =+  vad=%.(doc (most sol |~(pose nix quo)))
+  ?-  -.vad
+      |   vad
+      &
+    =+  goz=%.(q.vad dig)
+    ?-  -.goz
+        |   [& [[%sys %ubin p.vad] ~] q.vad]
+        &
+      =+  lem=%.(q.goz dig)
+      ?-  -.lem
+      ::
+          |
+        =+  paq=$(doc q.goz)
+        ?-  -.paq
+          |   [& [[%sys %ulib p.vad] ~] q.goz]
+          &   [& [[%sys %ulib p.vad] p.paq] q.paq]
+        ==
+      ::
+          &
+        =+  vin=%.(q.lem scry)
+        ?-  -.vin
+          |   vin
+          &   [& [[%sys %ulib p.vad] [%gen p.vin] ~] q.vin]
+        ==
+      ==
+    ==
+  ==
+::::
+::          lewl: scan well
+    lewl
+  =+  doc=tube
+  |=
+  ^-  *(edge well)
+  %.  doc
+  |~  %-  comp 
+      =+  [a=* b=*]
+      |:
+      ?~  b
+        a
+      ?-  -.b
+        %kick   [%kick a +.b]
+        %sell   [%sell a +.b]
+      ==
+    clew
+    |~  pose
+      |~  plug
+        |~(pose (cold %sell ask) (cold %kick gap))
+        lewl
+      ==
+      (free ~)
+    ==
+  ==
+::
+::::
+==

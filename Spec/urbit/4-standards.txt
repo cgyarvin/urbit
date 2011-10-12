@@ -1,0 +1,77 @@
+Urbit namespace  (300K)
+C. Guy Yarvin, 1/21/10
+
+
+4. Standardization (a rant)
+
+We now turn to a more practical question.  How do we map
+[path deck] to [file]?  What does this function actually
+look like?  And how can we possibly standardize it?
+
+It should be beyond dispute that standardization is needed.
+In a non-standardized marketplace, when non-standardizable 
+and standardizable products compete, one of the latter will
+win and all of the former will lose.
+
+This *standardization pressure* is of course at its most extreme
+in network environments, where competitors live or die by network
+effect.  Standardizable systems win because someone has to win,
+and because they *can* win.  Therefore, rational actors search
+for the largest bandwagon and get on it.
+
+To create a standardizable anything, there is only one way: if
+anything would be an obstacle to standardization, don't do it.
+One such obstacle is as bad as a thousand.
+
+As someone who has done a fair bit of standards work, I find the
+resulting mentality quite difficult to explain to those who have
+not experienced this awful experience - like Ernst Juenger trying
+to explain World War 1.  
+
+Had Juenger had been a delegate to the WAP Forum, rather than a
+stormtrooper in the Imperial Army, instead of *In
+Stahlgewittern* (In Storms of Steel) he could only have written
+*In Crapgewittern* (In Storms of Crap).  In such storms you keep
+your head down or don't last long.  Not that it is enough to
+survive!  Rather, you must *master* that storm.  Or at least,
+that's your job.  On the other hand, you get to go to Paris.
+
+Urbit has a simple, drastic approach to these storms of crap.
+We must produce a standards-quality result, without the dubious
+assistance of a standards organization, entirely through the
+open-source process.  No crap; no Paris.  Alas.
+
+Basically, Kelvin versioning is what you use when you want to
+standardize without Eurocrats.  If an open-source process is 
+credible enough to get anything to 0K without being obviously
+laughable, it is a credible standard - without any acronyms at
+all.  0K is just a label, and it mean not mean true convergence.
+It can be the result of mere exhaustion, carelessness, etc.  As
+in any release, the system may be truly done, or not done at all.  
+But if it is not done, the failed process is generally obvious.
+Therefore, doing Kelvin versioning right should establish
+credibility - the one and only requirement for standardization.
+
+Knowing this actually saves us time.  It ensures that, for the
+actual structure of the SFN, we need only consider simple and
+timeless designs - because, in the market, these will always
+defeat un-simple and dated designs.
+
+This makes the problem easier.  It prunes the search space.
+However, it requires thinking with a standards mentality.
+Believe me, this is by no means an automatic attribute!
+
+Urbit can be seen as a sort of Internet coup to recover the lost
+throne of Jon Postel.  When Ira Magaziner wrested control of the
+DNS from Jon Postel, a great battle was lost.  Old kings cannot
+be revived, but their battles can always be refought.
+
+I am no Jon Postel.  And note that Urbit is not designed as a
+monarchy - it is an oligarchy, meant to be far stronger and more
+resilient.  There are quite a few differences between me and Jon
+Postel!  But one is that Jon Postel wasn't a royalist.
+
+However, if we wish to walk in the footsteps of Jon Postel, we
+must follow the way of Jon Postel.  This is the way of IETF.
+If you don't know the way of IETF, the RFCs are over there.
+

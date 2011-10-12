@@ -1,0 +1,335 @@
+2: Syntax
+
+As with Nock, we have to start by asking: which Watt?  Like Nock,
+Watt is born to freeze and uses Kelvin versions.  Unlike Nock,
+Watt is a long way from absolute zero.  The current kernel is
+`241`, adequate for polar bears but not superconductors.
+
+Each Watt kernel is compiled by the previous kernel.  For
+instance, kernel 242 is compiled by kernel 241.  To be exact,
+where `s` is `watt/241.watt` (text encoded as an atom, LSB
+first), `f is `watt/242.noun` (encoded with `jam`, which maps an
+arbitrary noun to an atom), and `p` is `watt/241.noun` (encoded
+with `jam`), we know (in pseudocode):
+
+  *(s f) == p
+
+Some kernels will compile themselves - others won't.  Obviously, 
+you can't make an omelet without breaking backward compatibility.
+
+Open the latest Watt kernel - `watt/241.watt`.  Let's look
+at the full, official decrement function (line 36):
+
+    ~.  %dec
+    |=  a=@
+    ^-  @
+    ~|  %dec
+    ?<  =(0 a)
+    =+  b=0*
+    |-
+    ?:  =(a +(b))
+      b
+    $(b +(b))
+
+Whaa?
+
+Any attempt to understand this in terms of any language you
+already know would clearly be mistaken.  In both syntax and
+semantics, learning to program in Watt is learning to program all
+over again.  When we say from scratch, we mean from scratch!
+
+It's actually worse than that - learning Watt is learning to
+_read_ all over again.  Watt is a keyword-free language - any
+alphanumeric text in the program is part of the program.  Where
+other languages have reserved words, Watt has squiggles.
+
+We use so many of these ASCII _glyphs_ that we like to be able
+to read them out loud.  A language is meant to be _said_.  The
+squiggles have conventional names, sort of, some of them, some of
+them easy to say, others not so much.  So we've renamed them:
+ 
+    ace   space      del  <         pel  ) 
+    bar   |          hes  $         sed  }
+    bot   '          ket  ^         sep  - 
+    cab   _          lep  (         sig  ~
+    com   ,          led  >         tam  ;
+    cas   ?          lyc  =         tar  *
+    dax   #          mit  %         tec  `
+    deg   :          ned  ]         tob  "
+    den   [          nov  \         von  /
+    des   {          pam  &         wut  @
+    dot   .          pes  +         zap  !
+
+Yo, ninja, you just have to memorize these names.  Sorry.
+
+But is this at least enough symbols?  Alas, nowhere near.
+ASCII's glyph supply is not the greatest, but we can make all the
+squiggles we need by forming digraphs, or _runes_.  
+
+To pronounce a rune, concatenate the glyph names, stressing the
+first syllable and softening the second vowel into a "schwa."
+Hence, to say `~.`, say "sigdot."  To say `|=`, say "barlyc."
+("lyc" can be pronounced "like" or "lick," but turns into "lec"
+in the suffix position.)
+
+So if we had to read the above decrement, omitting the spaces
+(which only a real purist would pronounce), we'd say: "sigdot mit
+dec barlyc a lyc wat ketsep wat sigbar mit dec casdel lyc lep
+zero a pel lycpes b lyc zero tar barsep casdeg lyc lep a pes lep
+b pel pel b hes lep b pes lep b pel pel."  The authorities would
+then arrive, and drag us out in a big net.
+
+Geeks being solitary by nature, opportunities for reading code
+aloud are limited.  But studies by actual scientists have shown
+that even when we read silently, we activate the motor cortex
+that controls our vocal cords.  Even if we never speak these
+squiggles, they're easier to _think_ if bound to simple sounds.  
+
+(And don't worry if you can't get yourself to say "pes" instead
+of "plus" for `+`, or "tar" instead of "star" for `*` - I have
+this problem myself.  It's much easier to replace "underscore"
+with "cab" or "ampersand" with "pam.")
+
+Watt has almost 90 digraphic runes.  They are easier to organize
+in your head, though, because the choice of glyph is not random.
+The second glyph in a rune means little or nothing, but the first
+defines a rough semantic category.  These categories are:
+
+    |  bar    gates (ie, functions) (ie, one-method cores)
+    ?  cas    conditionals, booleans, tests
+    :  deg    tuples
+    .  dot    nock operators
+    $  hes    factory macros (ie, type definitions) 
+    ^  ket    type conversions
+    =  lyc    compositions
+    %  mit    invocations
+    &  pam    gears (ie, objects) (ie, multi-method cores)
+    ~  sig    hints
+    ;  tam    miscellaneous macros
+    !  zap    special operations
+
+Each rune has its own doc file in the `rune/241` directory.  The
+name of the file is the name of the rune, minus the vowels.
+Thus, `|=` or "barlyc" is defined in `rune/241/brlc.txt`.
+
+Opening this file, we see:
+
+    %brlc  |=  "barlyc"
+
+      define:
+        [%brlc p=(gene) q=(gene)]
+
+      expand:
+        [%brlc *]  [%pmlc p.gen [[%% [& & q.gen]] ~ ~]]
+
+There should be some actual discussion, but there isn't.  Still,
+`brlc.txt` is quite complete as a definition of `|=`.  How?  We
+need to step back a little.
+
+When the Watt parser, `vest`, parses a source file, it generates
+a noun called a `gene`.  If you know what an AST is, a gene is an
+AST node.  If you don't, don't worry about it.
+
+Search the current kernel for `++  gene` - note double space.
+This code is both the type declaration for type `gene`, and
+a function that maps an untyped noun to a typed gene.  In it
+you'll see the above definition,
+
+    [%brlc p=(gene) q=(gene)]
+
+Ie, one kind of gene is a triple whose head is the constant
+`%brlc`, and whose tail is a pair of genes, `p` and `q`.  
+
+We also see the semantics of this rune: it expands to
+
+    [%pmlc p.gen [[%% [& & q.gen]] ~ ~]]
+
+ie, `|=` is a built-in macro.  But back to syntax.
+
+What is `%brlc`?  The atom also known as `1668051554` or
+`0x636c7262`.  Simply a string mapped to an unsigned integer, LSB
+first.  It's easy to see why the vowels got lost - `%barlyc` is
+`109373161628002` or `0x63796c726162`.  On a 32-bit CPU with
+31-bit direct atoms, `%brlc` is direct and `%barlyc` indirect
+(not that the programmer can tell the difference).  But you still
+say "barlyc."
+
+For instance, in the decrement above, we have
+
+    |=  a=@
+    ^-  @
+    ~|  %dec
+    ?<  =(0 a)
+    =+  b=0*
+    |-
+    ?:  =(a +(b))
+      b
+    $(b +(b))
+
+In this `%brlc`, `p` is 
+
+    a=@
+
+and `q` is
+
+    ^-  @
+    ~|  %dec
+    ?<  =(0 a)
+    =+  b=0*
+    |-
+    ?:  =(a +(b))
+      b
+    $(b +(b))
+
+We are starting to see the principles of Watt syntax.  Let's make
+them clear.
+
+First, for any rune, the Watt parser has two kinds of syntax:
+normal and custom.  Most runes, such as `|=`, have only normal
+syntax without custom syntax.  Almost all runes with custom
+syntax also have normal.  Custom can mean anything; normal 
+is rigid and uniform.
+
+All programming languages, but especially functional ones, face
+two difficult syntactic problems.  One is controlling the large
+numbers of terminators that appear in any deeply nested tree
+structure - Lisp is infamous for its piles of right parens.
+These are not a serious usability problem, except inasmuch as you
+consider ugly a usability problem (which I do).  Two, a more
+serious concern, is keeping complex routines from flowing off the
+right margin as tab depth increases.
+
+A glance at the more complex organs of the Watt kernel reveals
+that Watt is relatively untroubled by either of these woes.  But
+why?  One dubious panacea for the terminator problem is the use
+of significant whitespace.  Whitespace in Watt is not
+significant.  (To be exact, the presence or absence of whitespace
+matters, but the quantity never does.)
+
+The answer is that the normal syntax for every rune has two
+forms: "wide" and "tall."  As a functional language, Watt does
+not distinguish between statements and expressions, but normal
+wide syntax is expression-like and tall is statement-like.
+
+For instance, in our example above, 
+
+  ?:  =(a +(b))
+    b
+  $(b +(b))
+
+is a tall normal form.  The equivalent wide form is
+
+  ?:(=(a +(b)) b $(b +(b)))
+
+It's usually best to use the wide form if your gene fits on the
+line, but this is obviously an aesthetic choice.  If your gene
+does not fit your margin (which should always be 80 columns), 
+you have no choice but to go tall.  For reasons that should be
+obvious, a tall gene can contain wide subgenes, but a wide gene
+cannot contain tall subgenes - just as, in procedural languages,
+a statement can contain expressions but not vice versa.
+
+In the wide normal form, the rune is followed immediately (no
+whitespace) by a left paren ("lep"), then the subgenes with a
+single space between them, then a right paren ("pel") as
+terminator.  If the rune was inside the parens rather than a
+prefix, this would be the Lisp syntax.
+
+In the tall normal form, any quantity of whitespace follows the
+rune, and separates the subgenes from each other.  Where is the
+terminator?  There is no terminator - in most cases.
+
+Consider the `?:` rune, "casdeg," `%csdg`.  This is
+
+  [%csdg p=(gene) q=(gene) r=(gene)]
+
+Why should we need a terminator?  We know `%csdg`, whose
+semantics are if-then-else, has three subgenes.  When the parser
+sees `?:` followed by space, it simply parses the next three
+genes and fills the rune with them.
+
+This only works in runes with fixed tuple structure, which
+fortunately is most of them.  A counterexample is `:*`, ie, 
+
+  [%dgtr p=((list gene))]
+
+which is of variable length and needs a terminator.  But we 
+have no dangling parens, but an attractive tall closure:
+
+  :*  %foo
+      %bar 
+      %baz
+      %moo
+  ==
+
+whose equivalent wide normal is
+
+  :*(%foo %bar %baz %moo)
+
+which no one would ever write, preferring the custom
+
+  [%foo %bar %baz %moo]
+
+This leaves only one question: indentation.  Since space is not
+significant (even linebreaks are irrelevant - the newline is just
+another space), the use of whitespace in tall forms is purely a
+matter of style.  Style is very important, however!
+
+The first law of Watt indentation style is that all tall
+indentation is in two-space increments.  (Tabs are illegal.  If
+you pollute a Watt file with ASCII 9, not only will it not parse,
+but thugs in balaclavas will kick down your door and shoot you.
+You laugh!  Try it!)  Single spaces are for wide only.
+
+The second law of Watt indentation is that everything in the
+kernel is good indentation style.  Or at least if it's not, it
+needs to be changed.  The kernel must be lapidary, noble, ideal
+and above all suspicion, like a Doric column.
+
+The third law of Watt indentation is that tall genes should flow
+_down_ and not _across_ - like the decrement example above.  The
+right margin is a precious resource not to be wasted.  It's this
+law, when properly applied, that makes casual readers wonder if
+Watt is a functional language at all.  It doesn't have a program
+counter, but it looks like it does - at least when written right.
+
+In list-structured runes, like the `:*` above, there is no choice
+but to lose right margin.  Fortunately, most runes are tuples,
+and most have limited "fanout" - 1, 2, 3 or at most 4.
+
+Both of our above examples - `|=` and `?:` - use "backstep"
+indentation which takes advantage of this tuple structure.  For
+instance, `|=` has two subgenes, `p` and `q.`  We put `p` on the
+same line as `|=`, set off by two spaces, losing 4 characters of
+margin.  We put `q` _directly below_, losing no margin at all.
+
+It so happens that in almost every actual case of `|=`, `p` (the
+function's argument) is relatively light, whereas `q` (the
+function's body) will be much heavier.  Thus, with this pattern of
+indentation, we lose no margin and our code flows _down_.
+
+We see this even more in `?:`, where the conditional test (which
+is much less likely to be heavy) is first and farthest right,
+followed by the "then" case indented two spaces, followed by the
+"else" case at the same indent as the rune.
+
+Suppose your "else" is relatively light, and your "then" is
+heavy?  You may prefer the `?.` rune, Watt's "unless," which puts
+the else before the then.  Or not.  And in both `?:` and `?.`,
+the test (which of course can be arbitrarily heavy) is first.
+It is not necessary for your code to _always_ flow down and not
+across - just _mostly_.
+
+The conventional principle which backstep indentation sacrifices,
+of course, is the idea that absolute indentation depth should
+correspond to tree depth, loop depth, or some other metric.  Watt
+is so deeply nested that if tab depth matched tree depth, your
+margins on anything interesting would be in the next cube to your
+right.  There is perhaps a case for indenting loops, but we don't
+find we miss this cue at all.
+
+The paucity of terminators also eliminates a lot of redundancy in
+the parser, which can result in relatively exciting syntax
+errors.  Our experience is that this is seldom a big problem,
+because there are terminated tall forms and the cascade stops
+with them.  It is often a small problem, however.

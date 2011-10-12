@@ -1,0 +1,21 @@
+:: =>  !%
+=>  plow
+=+  sul=`[p=*type q=*]`[seed ..watt]
+|*  
+::::
+::
+    spar
+  =+  cox=*text:rasp
+  |=
+  ^-  *gene
+  (scan (rip 3 cox))
+
+::::
+::
+    dril 
+  =+  gen=*gene
+  |=
+  ^-  [p=*type q=*]
+  =+  vid=(%~(mill rose sut p.sul) gen)
+  [p.vid .*(q.sul q.vid)]
+==
