@@ -1,68 +1,100 @@
-/* include/benx.h
+/* include/trac.h
 **
 ** This file is in the public domain.
 */
   /** Data structures.
   **/
-    /* u2_loom_benx: tracing, profiling, debugging
+    /* u2_loom_prof: profile node.
     */
-      typedef struct _u2_loom_benx {
-        /* Source position debug stack: 
-        **
-        **  *(list ~[* [@ @] [@ @]])
+      typedef struct _u2_loom_prof {
+        /* Section name - presumably a terminal.
         */
-        u2_weak zat;  // on shed
+        u2_noun lic;
 
-        /* Manual context debug stack:
-        **
-        **  *(list %{nap}) 
+        /* Number of hits for which this section is final.
         */
-        u2_weak zof;  // on shed
+        c3_w fin_w;
 
-        /* Interpreter steps.
+        /* Child list, if any.
         */
-        c3_d  sap_d;
+        struct _u2_loom_prof *fam_p;
 
-        /* Words copied.
+        /* Next profile in this list.
         */
-        c3_d  cop_d;
+        struct _u2_loom_prof *nex_p;
+      } u2_loom_prof;
 
-        /* Matching comparisons.
+    /* u2_loom_trac: tracing/profiling control structure.
+    */
+      typedef struct _u2_loom_trac {
+        /* Tracing.
         */
-        c3_d  det_d;
+        struct {
+          /* Position stack: *(list %{[& [* [@ @] [@ @]]] [| |.(*tank)}])
+          */
+          u2_noun ryp;
+        } wer; 
 
-        /* Jet activations.
+        /* Profiling.
         */
-        c3_d  jax_d;
+        struct {
+          /* Task stack: *(list term)
+          */
+          u2_noun don;
 
-        /* User-defined activations.
-        */
-        c3_d  use_d;
+          /* Task record.
+          */
+          u2_loom_prof *liv;
 
-        /* Current depth of C stack.
-        */
-        c3_w  wac_w;
+          /* Act count: *(map term num)
+          */
+          u2_noun did;
+        } duz;
 
-        /* Maximum depth of C stack.
+        /* Built-in system acts and counters.
         */
-        c3_w  wax_w;
+        struct {
+          /* Nock reductions.
+          */
+          c3_d hop_d;
 
-        /* Original words in wire.
-        */
-        c3_w lif_w;
+          /* Jet activations.
+          */
+          c3_d jet_d;
 
-        /* Original words in basket.
-        */
-        c3_w bos_w;
+          /* Jet tests.
+          */
+          c3_d tes_d;
 
-        /* Unix time in seconds.
-        */
-        c3_w sec_w;
+          /* Matching comparisons.
+          */
+          c3_d nod_d;
 
-        /* Unix time in microseconds.
-        */
-        c3_w usc_w;
-      } u2_loom_benx;
+          /* Words allocated (current).
+          */
+          c3_w mal_w;
+
+          /* Words allocated (maximum).
+          */
+          c3_w max_w;
+
+          /* Current depth of C stack.
+          */
+          c3_w wad_w;
+
+          /* Maximum depth of C stack.
+          */
+          c3_w wax_w;
+
+          /* Unix time in seconds at analysis instantiation.
+          */
+          c3_w sec_w;
+
+          /* Unix time in microseconds at analysis instantiation.
+          */
+          c3_w usc_w;
+        } sys;
+      };
 
 #define   u2_benx_at(bex_r, wof)        *u2_at(bex_r, u2_loom_benx, wof)
 #define   u2_benx_be(bex_r, ite, wof)   *u2_be(bex_r, u2_loom_benx, ite, wof)
