@@ -1,3 +1,5 @@
 *.o
 generated
 run
+TAGS
+.tags
