@@ -439,9 +439,14 @@ _vere_kernel(struct vere_state*   v,
   }
   else {
     if ( (stat(paq_c, &paq_stat) < 0) ||
+#ifdef U2_OS_linux
+	 (pod_stat.st_mtime > paq_stat.st_mtime)
+#else	 
          (pod_stat.st_mtimespec.tv_sec > paq_stat.st_mtimespec.tv_sec) ||
          ((pod_stat.st_mtimespec.tv_sec == (pod_stat.st_mtimespec.tv_sec)) &&
-          (pod_stat.st_mtimespec.tv_nsec > paq_stat.st_mtimespec.tv_nsec)) )
+          (pod_stat.st_mtimespec.tv_nsec > paq_stat.st_mtimespec.tv_nsec))
+#end
+	 )
     {
       FILE *fil;
       u3_fox src, gen, ker;
@@ -661,9 +666,14 @@ _vere_shell(struct vere_state*  v,
 
     if ( v->new_b ||
          (stat(paq_c, &paq_stat) < 0) ||
+#ifdef U2_OS_linux
+	 (pod_stat.st_mtime > paq_stat.st_mtime)
+#else	 
          (pod_stat.st_mtimespec.tv_sec > paq_stat.st_mtimespec.tv_sec) ||
          ((pod_stat.st_mtimespec.tv_sec == (pod_stat.st_mtimespec.tv_sec)) &&
-          (pod_stat.st_mtimespec.tv_nsec > paq_stat.st_mtimespec.tv_nsec)) )
+          (pod_stat.st_mtimespec.tv_nsec > paq_stat.st_mtimespec.tv_nsec))
+#end
+	 )
     {
       printf("[vere: building shell: %s]\n", pod_c);
       ver = _vere_fire(v, _vere_file(v->x, pod_c));
