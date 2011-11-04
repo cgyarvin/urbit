@@ -18,7 +18,7 @@
 #define C3_GLOBAL
 #include "all.h"
 
-#define GUNN
+// #define GUNN
 
 #define EyreFirstKernel 234     //  counts down; max 264; > 259 needs nock7
 u2_flag EyreSmoke;

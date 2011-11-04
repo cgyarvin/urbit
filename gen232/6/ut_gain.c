@@ -11,7 +11,7 @@
   j2_mcx(Pt6, ut, gain)(u2_wire, u2_noun, u2_noun, u2_noun);
 
   static u2_noun                                                  //  produce
-  _gain_cspm(u2_wire wir_r,
+  _gain_wtpm(u2_wire wir_r,
              u2_noun van,                                         //  retain
              u2_noun sut,                                         //  retain
              u2_noun p_gen)                                       //  retain
@@ -23,7 +23,7 @@
       u2_noun ip_gen = u2_h(p_gen);
       u2_noun tp_gen = u2_t(p_gen);
       u2_noun lev = j2_mcx(Pt6, ut, gain)(wir_r, van, sut, ip_gen);
-      u2_noun pro = _gain_cspm(wir_r, van, lev, tp_gen);
+      u2_noun pro = _gain_wtpm(wir_r, van, lev, tp_gen);
 
       u2_rl_lose(wir_r, lev);
       return pro;
@@ -61,14 +61,14 @@
           return ret;
         }
       }
-      case c3__cspm: {
-        return _gain_cspm(wir_r, van, sut, u2_t(gen));
+      case c3__wtpm: {
+        return _gain_wtpm(wir_r, van, sut, u2_t(gen));
       }
       case c3__zpcb: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       {
         return j2_mcx(Pt6, ut, gain)(wir_r, van, sut, q_gen);
       }
-      case c3__zpdx: p_gen = u2_t(gen);
+      case c3__zphx: p_gen = u2_t(gen);
       {
         return j2_mcx(Pt6, ut, gain)(wir_r, van, sut, p_gen);
       }

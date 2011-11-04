@@ -176,20 +176,20 @@ gene
 
 wide
   : wide_x
-  | wide_x si_cab wide { $$ = _ytrel(c3__dgsp, $1, $3); }
-  /* | wide_x si_sig { $$ = _yqual(c3__dgsp, $1, c3__tmlc, c3__null); } */
+  | wide_x si_cab wide { $$ = _ytrel(c3__clsp, $1, $3); }
+  /* | wide_x si_sig { $$ = _yqual(c3__clsp, $1, c3__smts, c3__null); } */
   ;
 
 wide_x
   : wide_a
   | wide_rope si_deg wide
-    { $$ = _ytrel(c3__lcdl, $1, $3); }
+    { $$ = _ytrel(c3__tsgl, $1, $3); }
   ;
 
 wide_a
   : wide_c
   | tok_term si_lyc wide
-    { $$ = _ytrel(c3__ktlc, $1, $3); }
+    { $$ = _ytrel(c3__ktts, $1, $3); }
   ;
 
 wide_c
@@ -199,14 +199,14 @@ wide_c
   | wide_funk
   | wide_cage
   | wide_call
-  | wide_mtsg
+  | wide_cnsg
   | wide_norm
   | wide_path
   ;
 
     wide_hard
       : hard      { $$ = _ycell(c3__dtsg, $1); }
-      | hard '*'  { $$ = _ycell(c3__dtwt, $1); }
+      | hard '*'  { $$ = _ycell(c3__dtpt, $1); }
       ;
  
       hard 
@@ -232,40 +232,40 @@ wide_c
   
     wide_base
       : si_cas
-        { $$ = _ycell(c3__tmlc, c3__flag); }
+        { $$ = _ycell(c3__smts, c3__flag); }
       | si_tar
-        { $$ = _ycell(c3__tmlc, c3__noun); }
+        { $$ = _ycell(c3__smts, c3__noun); }
       | si_ket
-        { $$ = _ycell(c3__tmlc, c3__cell); }
+        { $$ = _ycell(c3__smts, c3__cell); }
       | si_wat
-        { $$ = _ycell(c3__tmlc, c3__atom); }
+        { $$ = _ycell(c3__smts, c3__atom); }
       | si_sig
-        { $$ = _ycell(c3__tmlc, c3__null); }
+        { $$ = _ycell(c3__smts, c3__null); }
       ;
    
     wide_rope
       : rope            
-        { $$ = _ytrel(c3__mtlc, $1, _0); }
+        { $$ = _ytrel(c3__cnts, $1, _0); }
       ;
     wide_cage
       : si_den g bank_wide g si_ned 
-        { $$ = _ycell(c3__dgtr, $3); }
+        { $$ = _ycell(c3__cltr, $3); }
       ; 
 
     wide_call
       : si_lep g bank_wide g si_pel
-        { $$ = _ycell(c3__mtsp, $3); }
+        { $$ = _ycell(c3__cnms, $3); }
       | si_deg si_lep g bank_wide g si_pel
-        { $$ = _ycell(c3__tmdg, $4); }
+        { $$ = _ycell(c3__smcl, $4); }
       ;
 
-    wide_mtsg
+    wide_cnsg
       : si_sig si_lep rope w gene w bank_wide si_pel
-        { $$ = _yqual(c3__mtsg, $3, $5, _ycell(c3__dgtr, $7)); }
+        { $$ = _yqual(c3__cnsg, $3, $5, _ycell(c3__cltr, $7)); }
  
     wide_path
       : si_von path
-        { $$ = _ycell(c3__dgsg, _yflop(ywir_r, $2)); }
+        { $$ = _ycell(c3__clsg, _yflop(ywir_r, $2)); }
  
     path
       : thin              { $$ = _ycell($1, u2_nul); }
@@ -285,27 +285,27 @@ wide_c
       : si_des g bank_wide g si_sed
         { $$ = _ytrel(c3__hstr, $3, u2_nul); }
       | si_mit si_des g bank_wide g si_sed
-        { $$ = _ytrel(c3__hsmt, $4, u2_nul); }
+        { $$ = _ytrel(c3__hscn, $4, u2_nul); }
       | si_bar si_lep g bank_wide g si_pel
-        { $$ = _ycell(c3__csbr, $4); }
+        { $$ = _ycell(c3__wtbr, $4); }
       | si_pam si_lep g bank_wide g si_pel
-        { $$ = _ycell(c3__cspm, $4); }
+        { $$ = _ycell(c3__wtpm, $4); }
       | rope si_lep rack_wide si_pel
-        { $$ = _ytrel(c3__mtlc, $1, $3); }
+        { $$ = _ytrel(c3__cnts, $1, $3); }
       | si_zap wide
-        { $$ = _ycell(c3__cszp, $2); }
+        { $$ = _ycell(c3__wtzp, $2); }
       | si_com wide 
         { $$ = _ycell(c3__ktsg, $2); }
       | si_sig si_den g bank_wide g si_ned
         { $$ = _ytrel(c3__hssg, $4, u2_nul); }
       | si_tar wide
-        { $$ = _ycell(c3__mttr, $2); }
+        { $$ = _ycell(c3__cntr, $2); }
       | si_tec wide si_tec wide
-        { $$ = _ytrel(c3__ktsp, $2, $4); }
+        { $$ = _ytrel(c3__ktms, $2, $4); }
       | si_lyc si_lep g wide w wide g si_pel
-        { $$ = _ytrel(c3__dtlc, $4, $6); }
+        { $$ = _ytrel(c3__dtts, $4, $6); }
       | si_pes si_lep g wide g si_pel
-        { $$ = _ycell(c3__dtps, $4); }
+        { $$ = _ycell(c3__dtls, $4); }
       ;
 
   /** Hints.
@@ -770,100 +770,100 @@ tall
 
   /** Digraphs (with stem)
   **/
-    di_casdeg: si_cas si_deg  { $$ = c3__csdg; }
+    di_casdeg: si_cas si_deg  { $$ = c3__wtcl; }
     di_casdot: si_cas si_dot  { $$ = c3__csdt; }
-    di_casled: si_cas si_led  { $$ = c3__csld; }
-    di_casdel: si_cas si_del  { $$ = c3__csdl; }
-    di_caspam: si_cas si_pam  { $$ = c3__cspm; }
-    di_casbar: si_cas si_bar  { $$ = c3__csbr; }
-    di_cassig: si_cas si_sig  { $$ = c3__cssg; }
-    di_caszap: si_cas si_zap  { $$ = c3__cszp; }
+    di_casled: si_cas si_led  { $$ = c3__wtgr; }
+    di_casdel: si_cas si_del  { $$ = c3__wtgl; }
+    di_caspam: si_cas si_pam  { $$ = c3__wtpm; }
+    di_casbar: si_cas si_bar  { $$ = c3__wtbr; }
+    di_cassig: si_cas si_sig  { $$ = c3__wtsg; }
+    di_caszap: si_cas si_zap  { $$ = c3__wtzp; }
     di_caslyc: si_cas si_lyc  { $$ = c3__cslc; }
     di_caspes: si_cas si_pes  { $$ = c3__csps; }
     di_cassep: si_cas si_sep  { $$ = c3__cssp; }
 
     di_hesbar: si_hes si_bar  { $$ = c3__hsbr; }
     di_hesket: si_hes si_ket  { $$ = c3__hskt; }
-    di_heslyc: si_hes si_lyc  { $$ = c3__hslc; }
-    di_hesmit: si_hes si_mit  { $$ = c3__hsmt; }
+    di_heslyc: si_hes si_lyc  { $$ = c3__hsts; }
+    di_hesmit: si_hes si_mit  { $$ = c3__hscn; }
     di_hespam: si_hes si_pam  { $$ = c3__hspm; }
     di_hessig: si_hes si_sig  { $$ = c3__hssg; }
     di_hestar: si_hes si_tar  { $$ = c3__hstr; }
 
-    di_barlyc: si_bar si_lyc  { $$ = c3__brlc; }
-    di_barsep: si_bar si_sep  { $$ = c3__brsp; }
-    di_bardeg: si_bar si_deg  { $$ = c3__brdg; }
+    di_barlyc: si_bar si_lyc  { $$ = c3__brts; }
+    di_barsep: si_bar si_sep  { $$ = c3__brms; }
+    di_bardeg: si_bar si_deg  { $$ = c3__brcl; }
     di_bardot: si_bar si_dot  { $$ = c3__brdt; }
-    di_barmit: si_bar si_mit  { $$ = c3__brmt; }
-    di_barpes: si_bar si_pes  { $$ = c3__brps; }
+    di_barmit: si_bar si_mit  { $$ = c3__brcn; }
+    di_barpes: si_bar si_pes  { $$ = c3__brls; }
     di_bartar: si_bar si_tar  { $$ = c3__brtr; }
     di_barzap: si_bar si_zap  { $$ = c3__brzp; }
 
-    di_lycdel: si_lyc si_del  { $$ = c3__lcdl; }
-    di_lycled: si_lyc si_led  { $$ = c3__lcld; }
-    di_lycpes: si_lyc si_pes  { $$ = c3__lcps; }
-    di_lycsep: si_lyc si_sep  { $$ = c3__lcsp; }
+    di_lycdel: si_lyc si_del  { $$ = c3__tsgl; }
+    di_lycled: si_lyc si_led  { $$ = c3__tsgr; }
+    di_lycpes: si_lyc si_pes  { $$ = c3__tsls; }
+    di_lycsep: si_lyc si_sep  { $$ = c3__tsms; }
  
-    di_degtar: si_deg si_tar  { $$ = c3__dgtr; }
-    di_degsig: si_deg si_sig  { $$ = c3__dgsg; }
-    di_degsep: si_deg si_sep  { $$ = c3__dgsp; }
-    di_degpes: si_deg si_pes  { $$ = c3__dgps; }
-    di_degket: si_deg si_ket  { $$ = c3__dgkt; }
+    di_degtar: si_deg si_tar  { $$ = c3__cltr; }
+    di_degsig: si_deg si_sig  { $$ = c3__clsg; }
+    di_degsep: si_deg si_sep  { $$ = c3__clsp; }
+    di_degpes: si_deg si_pes  { $$ = c3__clls; }
+    di_degket: si_deg si_ket  { $$ = c3__clkt; }
 
-    di_dotlyc: si_dot si_lyc  { $$ = c3__dtlc; }
-    di_dotpes: si_dot si_pes  { $$ = c3__dtps; }
-    di_dotcas: si_dot si_cas  { $$ = c3__dtcs; }
+    di_dotlyc: si_dot si_lyc  { $$ = c3__dtts; }
+    di_dotpes: si_dot si_pes  { $$ = c3__dtls; }
+    di_dotcas: si_dot si_cas  { $$ = c3__dtwt; }
     di_dottar: si_dot si_tar  { $$ = c3__dttr; }
    
-    di_ketlyc: si_ket si_lyc  { $$ = c3__ktlc; }
-    di_ketsep: si_ket si_sep  { $$ = c3__ktsp; }
-    di_ketdeg: si_ket si_deg  { $$ = c3__ktdg; }
-    di_ketdel: si_ket si_del  { $$ = c3__ktdl; }
+    di_ketlyc: si_ket si_lyc  { $$ = c3__ktts; }
+    di_ketsep: si_ket si_sep  { $$ = c3__ktms; }
+    di_ketdeg: si_ket si_deg  { $$ = c3__ktcn; }
+    di_ketdel: si_ket si_del  { $$ = c3__ktgl; }
     di_ketdot: si_ket si_dot  { $$ = c3__ktdt; }
-    di_ketled: si_ket si_led  { $$ = c3__ktld; }
+    di_ketled: si_ket si_led  { $$ = c3__ktgr; }
     di_ketsig: si_ket si_sig  { $$ = c3__ktsg; }
 
-    di_mitlyc: si_mit si_lyc  { $$ = c3__mtlc; }
-    di_mittar: si_mit si_tar  { $$ = c3__mttr; }
-    di_mitbar: si_mit si_bar  { $$ = c3__mtbr; }
-    di_mitsig: si_mit si_sig  { $$ = c3__mtsg; }
-    di_mitsep: si_mit si_sep  { $$ = c3__mtsp; }
-    di_mitdeg: si_mit si_deg  { $$ = c3__mtdg; }
+    di_mitlyc: si_mit si_lyc  { $$ = c3__cnts; }
+    di_mittar: si_mit si_tar  { $$ = c3__cntr; }
+    di_mitbar: si_mit si_bar  { $$ = c3__cnbr; }
+    di_mitsig: si_mit si_sig  { $$ = c3__cnsg; }
+    di_mitsep: si_mit si_sep  { $$ = c3__cnms; }
+    di_mitdeg: si_mit si_deg  { $$ = c3__cncl; }
     di_mitdot: si_mit si_dot  { $$ = c3__mtdt; }
-    di_mitpes: si_mit si_pes  { $$ = c3__mtps; }
-    di_mitket: si_mit si_ket  { $$ = c3__mtkt; }
+    di_mitpes: si_mit si_pes  { $$ = c3__cnls; }
+    di_mitket: si_mit si_ket  { $$ = c3__cnkt; }
 
-    di_pamlyc: si_pam si_lyc  { $$ = c3__pmlc; }
-    di_pamsep: si_pam si_sep  { $$ = c3__pmsp; }
-    di_pamdeg: si_pam si_deg  { $$ = c3__pmdg; }
+    di_pamlyc: si_pam si_lyc  { $$ = c3__pmts; }
+    di_pamsep: si_pam si_sep  { $$ = c3__pmms; }
+    di_pamdeg: si_pam si_deg  { $$ = c3__pmcl; }
     di_pamdot: si_pam si_dot  { $$ = c3__pmdt; }
-    di_pammit: si_pam si_mit  { $$ = c3__pmmt; }
-    di_pampes: si_pam si_pes  { $$ = c3__pmps; }
+    di_pammit: si_pam si_mit  { $$ = c3__pmcn; }
+    di_pampes: si_pam si_pes  { $$ = c3__pmls; }
     di_pamzap: si_pam si_zap  { $$ = c3__pmzp; }
 
-    di_tamdeg: si_tam si_deg  { $$ = c3__tmdg; }
-    di_tamsig: si_tam si_sig  { $$ = c3__tmsg; }
+    di_tamdeg: si_tam si_deg  { $$ = c3__smcl; }
+    di_tamsig: si_tam si_sig  { $$ = c3__smsg; }
 
-    di_siglyc: si_sig si_lyc  { $$ = c3__sglc; }
+    di_siglyc: si_sig si_lyc  { $$ = c3__sgts; }
     di_sigbar: si_sig si_bar  { $$ = c3__sgbr; }
-    di_sigsep: si_sig si_sep  { $$ = c3__sgsp; }
-    di_sigdax: si_sig si_dax  { $$ = c3__sgdx; }
-    di_sigdeg: si_sig si_deg  { $$ = c3__sgdg; }
-    di_sigdel: si_sig si_del  { $$ = c3__sgdl; }
+    di_sigsep: si_sig si_sep  { $$ = c3__sgms; }
+    di_sigdax: si_sig si_dax  { $$ = c3__sghx; }
+    di_sigdeg: si_sig si_deg  { $$ = c3__sgcl; }
+    di_sigdel: si_sig si_del  { $$ = c3__sggl; }
     di_sigdot: si_sig si_dot  { $$ = c3__sgdt; }
     di_sigket: si_sig si_ket  { $$ = c3__sgkt; }
-    di_sigled: si_sig si_led  { $$ = c3__sgld; }
-    di_sigmit: si_sig si_mit  { $$ = c3__sgmt; }
-    di_sigpes: si_sig si_pes  { $$ = c3__sgps; }
+    di_sigled: si_sig si_led  { $$ = c3__sggr; }
+    di_sigmit: si_sig si_mit  { $$ = c3__sgcn; }
+    di_sigpes: si_sig si_pes  { $$ = c3__sgls; }
     di_sigpam: si_sig si_pam  { $$ = c3__sgpm; }
     di_sigsig: si_sig si_sig  { $$ = c3__sgsg; }
 
-    di_zaplyc: si_zap si_lyc  { $$ = c3__zplc; }
+    di_zaplyc: si_zap si_lyc  { $$ = c3__zpts; }
     di_zapcom: si_zap si_com  { $$ = c3__zpcm; }
-    di_zapdax: si_zap si_dax  { $$ = c3__zpdx; }
-    di_zapmit: si_zap si_mit  { $$ = c3__zpmt; }
-    di_zaptam: si_zap si_tam  { $$ = c3__zptm; }
-    di_zapvon: si_zap si_von  { $$ = c3__zpvn; }
+    di_zapdax: si_zap si_dax  { $$ = c3__zphx; }
+    di_zapmit: si_zap si_mit  { $$ = c3__zpcn; }
+    di_zaptam: si_zap si_tam  { $$ = c3__zpsm; }
+    di_zapvon: si_zap si_von  { $$ = c3__zpfs; }
     di_zapzap: si_zap si_zap  { $$ = c3__zpzp; }
     di_zapdeg: si_zap si_deg  { $$ = c3__zpdg; scanner->bug = u2_yes; }
     
