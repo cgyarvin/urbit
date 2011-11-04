@@ -1,15 +1,70 @@
- 
-  ace   space      del  <         pel  ) 
-  bar   |          hes  $         sed  }
-  bot   '          ket  ^         sep  - 
-  cab   _          lep  (         sig  ~
-  com   ,          led  >         tam  ;
-  cas   ?          lyc  =         tar  *
-  dax   #          mit  %         tec  `
-  deg   :          ned  ]         tob  "
-  den   [          nov  \         von  /
-  des   {          pam  &         wat  @
-  dot   .          pes  +         zap  !
+new: 
+  bar |
+  bas \
+  cab _
+  cen %
+  col :
+  com ,
+  doc "
+  dot .
+  fas /
+  gal < 
+  gar >
+  hax #
+  hes $
+  kel {
+  ker }
+  ket ^
+  lus +
+  mus - 
+  pal (
+  pam &
+  par )
+  pat @
+  sel [
+  sem ;
+  ser ]
+  sig ~
+  soc '
+  tar *
+  tic `
+  tis =
+  wut ?
+  zap !
+
+old:
+  del  <         
+  pel  ) 
+  bar  |          
+  hes  $         
+  sed  }
+  bot   '          
+  ket  ^         
+  sep  - 
+  cab   _          
+  lep  (         
+  sig  ~
+  com   ,          
+  led  >         
+  tam  ;
+  cas   ?          
+  lyc  =         
+  tar  *
+  dax   #          
+  mit  %         
+  tec  `
+  deg   :          
+  ned  ]         
+  tob  "
+  den   [          
+  nov  \         
+  von  /
+  des   {          
+  pam  &         
+  wat  @
+  dot   .          
+  pes  +         
+  zap  !
 
 Watt GTO: Gran Tabula Operazioni 
 
