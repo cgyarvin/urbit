@@ -372,7 +372,7 @@
         return ret;
       }
       
-      case c3__cslc: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
+      case c3__wtts: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mint_used(wir_r);
       {
         u2_noun vol = _mint_corn(wir_r, van, sut, q_gen);

@@ -153,7 +153,7 @@
     else switch ( u2_h(gen) ) {
       default: goto open;
     
-      case c3__cslc: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
+      case c3__wtts: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _play_used(wir_r);
       {
         return _play_flag(wir_r);

@@ -771,16 +771,16 @@ tall
   /** Digraphs (with stem)
   **/
     di_casdeg: si_cas si_deg  { $$ = c3__wtcl; }
-    di_casdot: si_cas si_dot  { $$ = c3__csdt; }
+    di_casdot: si_cas si_dot  { $$ = c3__wtdt; }
     di_casled: si_cas si_led  { $$ = c3__wtgr; }
     di_casdel: si_cas si_del  { $$ = c3__wtgl; }
     di_caspam: si_cas si_pam  { $$ = c3__wtpm; }
     di_casbar: si_cas si_bar  { $$ = c3__wtbr; }
     di_cassig: si_cas si_sig  { $$ = c3__wtsg; }
     di_caszap: si_cas si_zap  { $$ = c3__wtzp; }
-    di_caslyc: si_cas si_lyc  { $$ = c3__cslc; }
-    di_caspes: si_cas si_pes  { $$ = c3__csps; }
-    di_cassep: si_cas si_sep  { $$ = c3__cssp; }
+    di_caslyc: si_cas si_lyc  { $$ = c3__wtts; }
+    di_caspes: si_cas si_pes  { $$ = c3__wtls; }
+    di_cassep: si_cas si_sep  { $$ = c3__wtms; }
 
     di_hesbar: si_hes si_bar  { $$ = c3__hsbr; }
     di_hesket: si_hes si_ket  { $$ = c3__hskt; }
@@ -829,7 +829,7 @@ tall
     di_mitsig: si_mit si_sig  { $$ = c3__cnsg; }
     di_mitsep: si_mit si_sep  { $$ = c3__cnms; }
     di_mitdeg: si_mit si_deg  { $$ = c3__cncl; }
-    di_mitdot: si_mit si_dot  { $$ = c3__mtdt; }
+    di_mitdot: si_mit si_dot  { $$ = c3__cndt; }
     di_mitpes: si_mit si_pes  { $$ = c3__cnls; }
     di_mitket: si_mit si_ket  { $$ = c3__cnkt; }
 

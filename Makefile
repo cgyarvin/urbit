@@ -2112,6 +2112,138 @@ J231_OFILES=\
        $(J231_6_OFILES_UT) \
        gen231/watt.o
 
+J230_1_OFILES=\
+       gen230/1/add.o \
+       gen230/1/bex.o \
+       gen230/1/dec.o \
+       gen230/1/div.o \
+       gen230/1/gte.o \
+       gen230/1/gth.o \
+       gen230/1/lte.o \
+       gen230/1/lth.o \
+       gen230/1/mod.o \
+       gen230/1/mul.o \
+       gen230/1/sub.o
+
+J230_2_OFILES=\
+       gen230/2/bind.o \
+       gen230/2/clap.o \
+       gen230/2/drop.o \
+       gen230/2/flop.o \
+       gen230/2/lent.o \
+       gen230/2/levy.o \
+       gen230/2/lien.o \
+       gen230/2/need.o \
+       gen230/2/reel.o \
+       gen230/2/roll.o \
+       gen230/2/skim.o \
+       gen230/2/skip.o \
+       gen230/2/slag.o \
+       gen230/2/snag.o \
+       gen230/2/sort.o \
+       gen230/2/turn.o \
+       gen230/2/weld.o
+
+J230_3_OFILES=\
+       gen230/3/can.o \
+       gen230/3/cap.o \
+       gen230/3/cat.o \
+       gen230/3/con.o \
+       gen230/3/cut.o \
+       gen230/3/dor.o \
+       gen230/3/dis.o \
+       gen230/3/end.o \
+       gen230/3/gor.o \
+       gen230/3/hor.o \
+       gen230/3/lsh.o \
+       gen230/3/mas.o \
+       gen230/3/met.o \
+       gen230/3/mix.o \
+       gen230/3/mug.o \
+       gen230/3/peg.o \
+       gen230/3/rap.o \
+       gen230/3/rip.o \
+       gen230/3/rsh.o \
+       gen230/3/vor.o
+
+J230_4_OFILES=\
+       gen230/4/in.o \
+       gen230/4/by.o \
+       gen230/4/in_has.o \
+       gen230/4/in_gas.o \
+       gen230/4/in_put.o \
+       gen230/4/in_tap.o \
+       gen230/4/by_gas.o \
+       gen230/4/by_get.o \
+       gen230/4/by_has.o \
+       gen230/4/by_put.o 
+
+J230_5_OFILES=\
+       gen230/5/cue.o \
+       gen230/5/jam.o \
+       gen230/5/mat.o \
+       gen230/5/rub.o \
+       gen230/5/trip.o
+
+J230_6_OFILES=\
+       gen230/6/ap.o \
+       gen230/6/cell.o \
+       gen230/6/comb.o \
+       gen230/6/cons.o \
+       gen230/6/core.o \
+       gen230/6/cube.o \
+       gen230/6/face.o \
+       gen230/6/fine.o \
+       gen230/6/flan.o \
+       gen230/6/flip.o \
+       gen230/6/flor.o \
+       gen230/6/foam.o \
+       gen230/6/fork.o \
+       gen230/6/hike.o \
+       gen230/6/look.o \
+       gen230/6/ream.o \
+       gen230/6/ut.o
+
+J230_6_OFILES_UT=\
+       gen230/6/ut_burn.o \
+       gen230/6/ut_bust.o \
+       gen230/6/ut_crop.o \
+       gen230/6/ut_cull.o \
+       gen230/6/ut_find.o \
+       gen230/6/ut_fink.o \
+       gen230/6/ut_fire.o \
+       gen230/6/ut_firm.o \
+       gen230/6/ut_fish.o \
+       gen230/6/ut_fuse.o \
+       gen230/6/ut_gain.o \
+       gen230/6/ut_heal.o \
+       gen230/6/ut_lose.o \
+       gen230/6/ut_mint.o \
+       gen230/6/ut_mull.o \
+       gen230/6/ut_nest.o \
+       gen230/6/ut_orth.o \
+       gen230/6/ut_park.o \
+       gen230/6/ut_peek.o \
+       gen230/6/ut_play.o \
+       gen230/6/ut_repo.o \
+       gen230/6/ut_rest.o \
+       gen230/6/ut_seek.o \
+       gen230/6/ut_snap.o \
+       gen230/6/ut_swab.o \
+       gen230/6/ut_tack.o \
+       gen230/6/ut_tock.o
+
+J230_OFILES=\
+       $(J230_1_OFILES) \
+       $(J230_2_OFILES) \
+       $(J230_3_OFILES) \
+       $(J230_4_OFILES) \
+       $(J230_5_OFILES) \
+       $(J230_6_OFILES) \
+       $(J230_6_OFILES_UT) \
+       gen230/watt.o
+
+
 EYRE_OFILES=\
        c/eyre.o \
        $(C_OFILES) \
@@ -2120,7 +2252,8 @@ EYRE_OFILES=\
        $(J234_OFILES) \
        $(J233_OFILES) \
        $(J232_OFILES) \
-       $(J231_OFILES)
+       $(J231_OFILES) \
+       $(J230_OFILES)
 
 all: $(BIN)/eyre
 

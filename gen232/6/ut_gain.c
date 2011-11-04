@@ -43,7 +43,7 @@
     } else switch ( u2_h(gen) ) {
       default: return u2_rx(wir_r, sut);
 
-      case c3__cslc: {
+      case c3__wtts: {
         if ( u2_no == u2_mean(gen, 6, &p_gen, 7, &q_gen, 0) ) {
           return u2_bl_bail(wir_r, c3__fail);
         } else {

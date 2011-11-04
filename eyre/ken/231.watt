@@ -1636,13 +1636,13 @@
       [%wtbr p=((list gene))]
       [%wtcl p=(gene) q=(gene) r=(gene)]
       [%wtgl p=(gene) q=(gene)]
-      [%csdt p=(gene) q=(gene) r=(gene)]
-      [%cslc p=(gene) q=(gene)]
+      [%wtdt p=(gene) q=(gene) r=(gene)]
+      [%wtts p=(gene) q=(gene)]
       [%wtgr p=(gene) q=(gene)]
       [%wtpm p=((list gene))]
       [%wtsg p=(gene) q=(gene) r=(gene)]
-      [%csps p=(gene) q=(gene) r=((list ~[p=(gene) q=(gene)]))]
-      [%cssp p=(gene) q=((list ~[p=(gene) q=(gene)]))]
+      [%wtls p=(gene) q=(gene) r=((list ~[p=(gene) q=(gene)]))]
+      [%wtms p=(gene) q=((list ~[p=(gene) q=(gene)]))]
       [%wtzp p=(gene)]
       [%clkt p=(gene) q=(gene) r=(gene) s=(gene)]
       [%clls p=(gene) q=(gene) r=(gene)]
@@ -1675,7 +1675,7 @@
       [%tsms p=(gene) q=(gene)]
       [%cnbr p=(twig) q=(gene) r=((list ~[p=(gene) q=(gene)]))]
       [%cncl p=(gene) q=(gene)]
-      [%mtdt p=(gene) q=(gene)]
+      [%cndt p=(gene) q=(gene)]
       [%cnkt p=(gene) q=(gene) r=(gene) s=(gene)]
       [%cnts p=(twig) q=((list ~[p=(gene) q=(gene)]))]
       [%cnls p=(gene) q=(gene) r=(gene)]
@@ -1868,7 +1868,7 @@
     ?.  ?=(& -.haq)
       ~|(%lung-hack !!)
     :^    %wtcl
-        [%cslc p.haq [%cnts [[~ 2] hep] ~]]
+        [%wtts p.haq [%cnts [[~ 2] hep] ~]]
       [%clsp [%cnts [[~ 2] hep] ~] (mold(gen q.haq) [[~ 3] hep])]
     $(doy t.doy)
   ::
@@ -1896,7 +1896,7 @@
       =+  bog=~(open ap gen)
       ?.  =(bog gen)
         $(gen bog)
-      [%wtgr [%cslc gen [%cnts hep ~]] [%cnts hep ~]]
+      [%wtgr [%wtts gen [%cnts hep ~]] [%cnts hep ~]]
     ==
   ::
   ++  open
@@ -1917,20 +1917,20 @@
       ?~(p.gen [%dtsg %f 1] [%wtcl i.p.gen [%dtsg %f 0] $(p.gen t.p.gen)])
     ::
         [%wtgl *]   [%wtcl p.gen [%zpzp ~] q.gen]
-        [%csdt *]   [%wtcl p.gen r.gen q.gen]
+        [%wtdt *]   [%wtcl p.gen r.gen q.gen]
         [%wtgr *]   [%wtcl p.gen q.gen [%zpzp ~]]
         [%wtpm *]
       |-
       ?~(p.gen [%dtsg %f 0] [%wtcl i.p.gen $(p.gen t.p.gen) [%dtsg %f 1]])
     ::
-        [%wtsg *]   [%wtcl [%cslc [%dtpt %% 0] p.gen] q.gen r.gen]
-        [%csps *]   [%cssp p.gen (weld r.gen `r.gen`[[[%smts %noun] q.gen] ~])]
-        [%cssp *]
+        [%wtsg *]   [%wtcl [%wtts [%dtpt %% 0] p.gen] q.gen r.gen]
+        [%wtls *]   [%wtms p.gen (weld r.gen `r.gen`[[[%smts %noun] q.gen] ~])]
+        [%wtms *]
       |-
       ?~  q.gen
         [%zpfs p.gen]
       :^    %wtcl
-          [%cslc p.i.q.gen p.gen]
+          [%wtts p.i.q.gen p.gen]
         q.i.q.gen
       $(q.gen t.q.gen)
     ::
@@ -2002,7 +2002,7 @@
       :+  %tsls
         q.gen
       :+  %wtgr 
-        [%cslc [%tsgr [~ 2] p.gen] [~ 3]]
+        [%wtts [%tsgr [~ 2] p.gen] [~ 3]]
       [~ 3]
     ::
         [%tsgl *]  [%tsgr q.gen p.gen]
@@ -2016,7 +2016,7 @@
       (turn r.gen |=([p=*gene q=*gene] [p [%ktdt [~ 13] [%tsgr [~ 2] q]]]))
     ::
         [%cncl *]   [%cnsg [%% ~] p.gen q.gen]
-        [%mtdt *]   [%cnms q.gen [p.gen ~]]
+        [%cndt *]   [%cnms q.gen [p.gen ~]]
         [%cnkt *]   [%cnms p.gen q.gen r.gen s.gen ~]
         [%cnls *]   [%cnms p.gen q.gen r.gen ~]
         [%cnsg *]   [%cnbr p.gen q.gen [[[~ 5] r.gen] ~]]
@@ -2100,7 +2100,7 @@
   ++  pick
     ~.  %pick
     |=  [hep=*twig dug=*gene]
-    [%wtcl [%cslc gen [%cnts hep ~]] [%cnts hep ~] dug]
+    [%wtcl [%wtts gen [%cnts hep ~]] [%cnts hep ~] dug]
   ::
   ++  late
     ?-    gen
@@ -2914,7 +2914,7 @@
     =-  ?:((orth(sut %noun) fiz) %void fiz)   ::  ?? - do we need this?
     ^=  fiz
     ?-    gen
-        [%cslc *]   (cull & p:(seek %read ~(rake ap q.gen)) (play p.gen))
+        [%wtts *]   (cull & p:(seek %read ~(rake ap q.gen)) (play p.gen))
         [%wtpm *]   |-(?~(p.gen sut $(p.gen t.p.gen, sut $$(gen i.p.gen))))
         [%zpcb *]   $(gen q.gen)
         [%zphx *]   $(gen p.gen)
@@ -2927,7 +2927,7 @@
     =-  ?:((orth(sut %noun) fiz) %void fiz)   ::  ?? - do we need this?
     ^=  fiz
     ?-    gen
-        [%cslc *]   (cull | p:(seek %read ~(rake ap q.gen)) (play p.gen))
+        [%wtts *]   (cull | p:(seek %read ~(rake ap q.gen)) (play p.gen))
         [%wtbr *]   |-(?~(p.gen sut $(p.gen t.p.gen, sut $$(gen i.p.gen))))
         [%zpcb *]   $(gen q.gen)
         [%zphx *]   $(gen p.gen)
@@ -2977,7 +2977,7 @@
         ~|(%mint-vain !!)
       [%void 0 0]
     ?-    gen
-        [%cslc *]
+        [%wtts *]
       [(nice flag) (fish(sut (play p.gen)) (coke q:$(gen q.gen, gol %noun)))]
     ::
         [%wtcl *]
@@ -3138,7 +3138,7 @@
     ?:  =(%void sut)
       ~|(%mull-none !!)
     ?-    gen
-        [%cslc *]
+        [%wtts *]
       =+  waz=[p=(play p.gen) q=(play(sut dox) p.gen)]
       =+  ^=  syx  :-  p=(coke q:(mint %noun q.gen)) 
                    q=(coke q:(mint(sut dox) %noun q.gen))
@@ -3541,7 +3541,7 @@
     |=  gen=*gene
     &-  ^-  *type
     ?-  gen
-      [%cslc *]  flag
+      [%wtts *]  flag
       [%wtcl *]  =+  [fex=(gain p.gen) wux=(lose p.gen)]
                  %+  fork
                    ?:(=(%void fex) %void $(sut fex, gen q.gen))
@@ -3836,12 +3836,12 @@
               (rune bar %wtbr exps)
               (rune deg %wtcl expc)
               (rune del %wtgl expb)
-              (rune dot %csdt expc)
+              (rune dot %wtdt expc)
               (rune led %wtgr expb)
-              (rune lyc %cslc expb)
+              (rune lyc %wtts expb)
               (rune pam %wtpm exps)
-              (rune sep %cssp exph)
-              (rune sep %csps expm)
+              (rune sep %wtms exph)
+              (rune sep %wtls expm)
               (rune sig %wtsg expc)
               (rune zap %wtzp expa)
             ==
@@ -3897,7 +3897,7 @@
             ;~  pose
               (rune bar %cnbr expp)
               (rune deg %cncl expb)
-              (rune dot %mtdt expb)
+              (rune dot %cndt expb)
               (rune ket %cnkt expf)
               (rune lyc %cnts expj)
               (rune pes %cnls expc) 
