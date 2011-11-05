@@ -35,7 +35,7 @@
             u2_as_cell(u2_t(haq), &p_haq, &q_haq);
 
             ret = u2_bt
-              (wir_r, c3__clsp,
+              (wir_r, c3__clms,
                      j2_mcx(Pt6, ut, snap)(wir_r, van, p_sut, p_haq),
                      j2_mcx(Pt6, ut, snap)(wir_r, van, q_sut, q_haq));
           } else {
@@ -67,7 +67,7 @@
             u2_as_cell(u2_t(haq), &p_haq, &q_haq);
 
             ret = u2_bt
-              (wir_r, c3__clsp,
+              (wir_r, c3__clms,
                      j2_mcx(Pt6, ut, snap)(wir_r, van, hed, p_haq),
                      j2_mcx(Pt6, ut, snap)(wir_r, van, tal, q_haq));
 

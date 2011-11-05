@@ -176,8 +176,8 @@ gene
 
 wide
   : wide_x
-  | wide_x si_cab wide { $$ = _ytrel(c3__clsp, $1, $3); }
-  /* | wide_x si_sig { $$ = _yqual(c3__clsp, $1, c3__smts, c3__null); } */
+  | wide_x si_cab wide { $$ = _ytrel(c3__clms, $1, $3); }
+  /* | wide_x si_sig { $$ = _yqual(c3__clms, $1, c3__smts, c3__null); } */
   ;
 
 wide_x
@@ -428,7 +428,7 @@ wide_c
     wide_norm: di_zapcom body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_zapdax body_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_zapzap body_l_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_zapvon body_l_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_zapfas body_l_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_zapmit body_l_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_zapdeg body_a_wide    { $$ = $2; scanner->bug = u2_no; }
     wide_norm: di_zaptam body_b_wide    { $$ = _ycell($1, $2); }
@@ -806,7 +806,7 @@ tall
  
     di_degtar: si_deg si_tar  { $$ = c3__cltr; }
     di_degsig: si_deg si_sig  { $$ = c3__clsg; }
-    di_degsep: si_deg si_sep  { $$ = c3__clsp; }
+    di_degsep: si_deg si_sep  { $$ = c3__clms; }
     di_degpes: si_deg si_pes  { $$ = c3__clls; }
     di_degket: si_deg si_ket  { $$ = c3__clkt; }
 
@@ -817,7 +817,7 @@ tall
    
     di_ketlyc: si_ket si_lyc  { $$ = c3__ktts; }
     di_ketsep: si_ket si_sep  { $$ = c3__ktms; }
-    di_ketdeg: si_ket si_deg  { $$ = c3__ktcn; }
+    di_ketdeg: si_ket si_deg  { $$ = c3__ktcl; }
     di_ketdel: si_ket si_del  { $$ = c3__ktgl; }
     di_ketdot: si_ket si_dot  { $$ = c3__ktdt; }
     di_ketled: si_ket si_led  { $$ = c3__ktgr; }
@@ -863,7 +863,7 @@ tall
     di_zapdax: si_zap si_dax  { $$ = c3__zphx; }
     di_zapmit: si_zap si_mit  { $$ = c3__zpcn; }
     di_zaptam: si_zap si_tam  { $$ = c3__zpsm; }
-    di_zapvon: si_zap si_von  { $$ = c3__zpfs; }
+    di_zapfas: si_zap si_von  { $$ = c3__zpfs; }
     di_zapzap: si_zap si_zap  { $$ = c3__zpzp; }
     di_zapdeg: si_zap si_deg  { $$ = c3__zpdg; scanner->bug = u2_yes; }
     

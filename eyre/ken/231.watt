@@ -1647,7 +1647,7 @@
       [%clkt p=(gene) q=(gene) r=(gene) s=(gene)]
       [%clls p=(gene) q=(gene) r=(gene)]
       [%clsg p=((list gene))]
-      [%clsp p=(gene) q=(gene)]
+      [%clms p=(gene) q=(gene)]
       [%cltr p=((list gene))]
       [%dtwt p=(gene)]
       [%dtts p=(gene) q=(gene)]
@@ -1662,7 +1662,7 @@
       [%hscn p=((list gene)) q=((map term foot))]
       [%hspm p=(gene) q=((list gene)) r=((map term foot))]
       [%hstr p=((list gene)) q=((map term foot))]
-      [%ktcn p=(gene) q=(gene)]
+      [%ktcl p=(gene) q=(gene)]
       [%ktgl p=(gene) q=(gene)]
       [%ktdt p=(gene) q=(gene)]
       [%ktts p=*term q=(gene)]
@@ -1839,7 +1839,7 @@
           &   [& [%tsgr p.gen p.pyr] [%tsgr p.gen q.pyr]]
       ==
     ::
-        [%clsp *]   [& p.gen q.gen]
+        [%clms *]   [& p.gen q.gen]
         [%zpcb *] 
       =+  pyr=$(gen q.gen)
       ?-    -.pyr
@@ -1869,7 +1869,7 @@
       ~|(%lung-hack !!)
     :^    %wtcl
         [%wtts p.haq [%cnts [[~ 2] hep] ~]]
-      [%clsp [%cnts [[~ 2] hep] ~] (mold(gen q.haq) [[~ 3] hep])]
+      [%clms [%cnts [[~ 2] hep] ~] (mold(gen q.haq) [[~ 3] hep])]
     $(doy t.doy)
   ::
   ++  mold
@@ -1877,13 +1877,13 @@
     |=  hep=*twig
     ^-  *gene
     ?-    gen
-        [%clsp *]
-      :+  %clsp
+        [%clms *]
+      :+  %clms
         $(gen p.gen, hep [[~ 2] hep])
       $(gen q.gen, hep [[~ 3] hep])
     :: 
         [%ktts *]     [%ktts p.gen $(gen q.gen)]
-        [%ktcn *]     [%ktcn p.gen $(gen q.gen)]
+        [%ktcl *]     [%ktcl p.gen $(gen q.gen)]
         [%ktgl *]     [%ktgl p.gen $(gen q.gen)]
         [%ktgr *]     [%ktgr p.gen $(gen q.gen)]
         [%ktms *]     $(gen p.gen)
@@ -1935,15 +1935,15 @@
       $(q.gen t.q.gen)
     ::
         [%wtzp *]   [%wtcl p.gen [%dtsg %f 1] [%dtsg %f 0]]
-        [%clkt *]   [%clsp p.gen [%clsp q.gen [%clsp r.gen s.gen]]]
-        [%clls *]   [%clsp p.gen [%clsp q.gen r.gen]]
-        [%clsg *]   |-(?~(p.gen [%dtsg %n ~] [%clsp i.p.gen $(p.gen t.p.gen)]))
+        [%clkt *]   [%clms p.gen [%clms q.gen [%clms r.gen s.gen]]]
+        [%clls *]   [%clms p.gen [%clms q.gen r.gen]]
+        [%clsg *]   |-(?~(p.gen [%dtsg %n ~] [%clms i.p.gen $(p.gen t.p.gen)]))
         [%cltr *]
       |-
       ?-    p.gen 
           ~       [%zpzp ~]
           [* ~]   i.p.gen
-          ^       [%clsp i.p.gen $(p.gen t.p.gen)]
+          ^       [%clms i.p.gen $(p.gen t.p.gen)]
       ==
     ::
         [%hsbr *]
@@ -1998,7 +1998,7 @@
         (pick(gen i.p.gen) [[~ 5] ~] $(p.gen t.p.gen))
       q.gen
     ::
-        [%ktcn *]
+        [%ktcl *]
       :+  %tsls
         q.gen
       :+  %wtgr 
@@ -2006,7 +2006,7 @@
       [~ 3]
     ::
         [%tsgl *]  [%tsgr q.gen p.gen]
-        [%tsls *]  [%tsgr [%clsp [~ 1] p.gen] q.gen]
+        [%tsls *]  [%tsgr [%clms [~ 1] p.gen] q.gen]
         [%tsms *]  [%tsls q.gen p.gen]
         [%cnbr *]
       :+  %tsls
@@ -2044,7 +2044,7 @@
         |-  ^-  nob
         ?~  r.gen
           nob
-        [[%clsp [%dtsg %% p.i.r.gen] [%zpts q.i.r.gen]] $(r.gen t.r.gen)]
+        [[%clms [%dtsg %% p.i.r.gen] [%zpts q.i.r.gen]] $(r.gen t.r.gen)]
       s.gen
     ::
         [%sgls *]   [%sggr [%memo %dtsg %% p.gen] q.gen]
@@ -2054,7 +2054,7 @@
       ?-  p.gen
         %atom   [%ktms [%dtls %dtsg %% 0] [%dtsg %% 0]]
         %noun   [%ktms [%dttr [%dtsg %% 0] [%dtsg %% 0]] [%dtsg %% 0]]
-        %cell   [%clsp [%smts %noun] [%smts %noun]]
+        %cell   [%clms [%smts %noun] [%smts %noun]]
         %flag   [%ktms [%dtwt %dtsg %% 0] [%dtsg %% 0]]
         %null   [%dtsg %n ~]
       ==
@@ -2992,7 +2992,7 @@
       =+  ran=$(sut wux, gen r.gen)
       [(fork p.hiq p.ran) (cond duy q.hiq q.ran)]
     ::
-        [%clsp *]
+        [%clms *]
       =+  hed=$(gen p.gen, gol %noun)
       =+  tal=$(gen q.gen, gol %noun)
       [(nice (cell p.hed p.tal)) (cons q.hed q.tal)]
@@ -3047,10 +3047,10 @@
       =+  wip=(tock p.i.mew p.zil q.q.lar)
       $(mew t.mew, q.q.lar q.wip, hej [[p.wip q.zil] hej])
     ::
-        [%pmcl *]  (grow %zinc [%clsp [~ 1] p.gen] q.gen)
+        [%pmcl *]  (grow %zinc [%clms [~ 1] p.gen] q.gen)
         [%pmdt *]  (grow %gold [~ 1] p.gen)
         [%pmcn *]  (grow %lead [~ 1] p.gen)
-        [%pmls *]  (grow %iron [%clsp [~ 1] p.gen] q.gen)
+        [%pmls *]  (grow %iron [%clms [~ 1] p.gen] q.gen)
         [%sggr *]
       =+  hum=$(gen q.gen)
       :-  p.hum
@@ -3165,7 +3165,7 @@
           $(sut p.wux, dox q.wux, gen r.gen)
       [(nice (fork p.hiq p.ran)) (fork q.hiq q.ran)]
     ::
-        [%clsp *]
+        [%clms *]
       =+  hed=$(gen p.gen, gol %noun)
       =+  tal=$(gen q.gen, gol %noun)
       [(nice (cell p.hed p.tal)) (cell q.hed q.tal)]
@@ -3228,10 +3228,10 @@
         ~|(%mull-bonk-g !!)
       $(mew t.mew, q.q.lar q.cuf, q.q.vug q.dof)
     ::
-        [%pmcl *]  (grow %zinc [%clsp [~ 1] p.gen] q.gen)
+        [%pmcl *]  (grow %zinc [%clms [~ 1] p.gen] q.gen)
         [%pmdt *]  (grow %gold [~ 1] p.gen)
         [%pmcn *]  (grow %lead [~ 1] p.gen)
-        [%pmls *]  (grow %iron [%clsp [~ 1] p.gen] q.gen)
+        [%pmls *]  (grow %iron [%clms [~ 1] p.gen] q.gen)
         [%sggr *]  $(gen q.gen)
         [%zpcm *]  [(nice (play p.gen)) (play(sut dox) p.gen)]
         [%zpcb *]  ~~((show %o p.gen) $(gen q.gen))
@@ -3546,7 +3546,7 @@
                  %+  fork
                    ?:(=(%void fex) %void $(sut fex, gen q.gen))
                  ?:(=(%void wux) %void $(sut wux, gen r.gen))
-      [%clsp *]  (cell $(gen p.gen) $(gen q.gen))
+      [%clms *]  (cell $(gen p.gen) $(gen q.gen))
       [%dtwt *]  flag
       [%dtts *]  flag
       [%dtls *]  [%atom %%]
@@ -3568,10 +3568,10 @@
                  ?~  mew
                    rag
                  $(mew t.mew, rag q:(tock p.i.mew $$(gen q.i.mew) rag))
-      [%pmcl *]  (grow %zinc [%clsp [~ 1] p.gen] q.gen)
+      [%pmcl *]  (grow %zinc [%clms [~ 1] p.gen] q.gen)
       [%pmdt *]  (grow %gold [~ 1] p.gen)
       [%pmcn *]  (grow %lead [~ 1] p.gen)
-      [%pmls *]  (grow %iron [%clsp [~ 1] p.gen] q.gen)
+      [%pmls *]  (grow %iron [%clms [~ 1] p.gen] q.gen)
       [%sggr *]  $(gen q.gen)
       [%zpcm *]  (play p.gen)
       [%zpcb *]  ~~((show %o p.gen) $(gen q.gen))  
@@ -3661,7 +3661,7 @@
         [%cell *]   =+  haq=~(hack ap gen)
                     ?-  -.haq
                       |   p.haq
-                      &   :+  %clsp 
+                      &   :+  %clms 
                             $(sut p.sut, gen p.haq) 
                           $(sut q.sut, gen q.haq)
                     ==
@@ -3671,7 +3671,7 @@
         [%fork *]   =+  haq=~(hack ap gen)
                     ?-  -.haq
                       |  p.haq
-                      &  :+  %clsp
+                      &  :+  %clms
                            $(sut (peek %read 2), gen p.haq) 
                          $(sut (peek %read 3), gen q.haq)
                     ==
@@ -3850,7 +3850,7 @@
             ;~  pose
               (rune ket %clkt expf)
               (rune pes %clls expc)
-              (rune sep %clsp expb)
+              (rune sep %clms expb)
               (rune sig %clsg exps)
               (rune tar %cltr exps)
             ==
@@ -3876,7 +3876,7 @@
           ==
           ;~  pfix  ket
             ;~  pose
-              (rune deg %ktcn expb)
+              (rune deg %ktcl expb)
               (rune del %ktgl expb)
               (rune dot %ktdt expb)
               (rune led %ktgr expb)
@@ -4065,7 +4065,7 @@
           ==
             %deg  [%tsgl ros p.vil]
             %lep  [%cnts ~(rake ap ros) p.vil]
-            %cab  [%clsp ros p.vil]
+            %cab  [%clms ros p.vil]
         ==
       flat
       ;~  pose

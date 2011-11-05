@@ -62,7 +62,7 @@
   {
     return u2_bt
       (wir_r, c3__tsgr,
-              u2_bt(wir_r, c3__clsp, 
+              u2_bt(wir_r, c3__clms, 
                            u2_bc(wir_r, u2_nul, _1),
                            u2_rx(wir_r, p_gen)),
               u2_rx(wir_r, q_gen));
@@ -168,7 +168,7 @@
     }
     else if ( u2_yes == u2_sing(c3__cell, p_gen) ) {
       return u2_bt
-        (wir_r, c3__clsp,
+        (wir_r, c3__clms,
               u2_bc(wir_r, c3__smts, c3__noun),
               u2_bc(wir_r, c3__smts, c3__noun));
     }
@@ -238,7 +238,7 @@
            c3__wtcl,
            u2_bt(wir_r, c3__wtts, u2_rx(wir_r, p_haq), u2_rx(wir_r, dog)),
            u2_bt(wir_r, 
-                 c3__clsp,
+                 c3__clms,
                  dog,
                  j2_mcy(Pt6, ap, mold)(wir_r, q_haq, cat)),
            _ap_lung(wir_r, gen, hep, u2_t(doy)));
@@ -528,20 +528,20 @@
   _open_do_pqrs(clkt) //  :^
   {
     return u2_bt
-      (wir_r, c3__clsp,
+      (wir_r, c3__clms,
               u2_rx(wir_r, p_gen),
               u2_bt
-                (wir_r, c3__clsp,
+                (wir_r, c3__clms,
                         u2_rx(wir_r, q_gen),
-                        u2_bt(wir_r, c3__clsp, u2_rx(wir_r, r_gen), 
+                        u2_bt(wir_r, c3__clms, u2_rx(wir_r, r_gen), 
                                                u2_rx(wir_r, s_gen))));
   }
   _open_do_pqr(clls)  //  :+
   {
     return u2_bt
-      (wir_r, c3__clsp,
+      (wir_r, c3__clms,
               u2_rx(wir_r, p_gen),
-              u2_bt(wir_r, c3__clsp, u2_rx(wir_r, q_gen), 
+              u2_bt(wir_r, c3__clms, u2_rx(wir_r, q_gen), 
                                      u2_rx(wir_r, r_gen)));
   }
   _open_do_p(clsg)    //  :~
@@ -553,7 +553,7 @@
       u2_noun ip_gen = u2_h(p_gen);
       u2_noun tp_gen = u2_t(p_gen);
 
-      return u2_bt(wir_r, c3__clsp, 
+      return u2_bt(wir_r, c3__clms, 
                           u2_rx(wir_r, ip_gen), 
                           _open_in_clsg(wir_r, tp_gen));
     }
@@ -571,7 +571,7 @@
         return u2_rx(wir_r, ip_gen);
       } else {
         return u2_bt
-          (wir_r, c3__clsp, u2_rx(wir_r, ip_gen), 
+          (wir_r, c3__clms, u2_rx(wir_r, ip_gen), 
                             _open_in_cltr(wir_r, tp_gen));
       }
     }
@@ -579,7 +579,7 @@
 /***
 ****
 ***/
-  _open_do_pq(ktcn)   //  ^:
+  _open_do_pq(ktcl)   //  ^:
   {
     return 
       u2_bt
@@ -811,7 +811,7 @@
         return u2_bc
           (wir_r, u2_bt
                     (wir_r,
-                     c3__clsp,
+                     c3__clms,
                      u2_bt(wir_r, c3__dtsg, u2_blip, u2_rx(wir_r, pir_gen)),
                      u2_bc(wir_r, c3__zpts, u2_rx(wir_r, qir_gen))),
                   _sgcn_a(wir_r, tr_gen, nob));
@@ -984,7 +984,7 @@
       } else switch ( u2_h(gen) ) {
         default: goto plain;
 
-        case c3__clsp:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
+        case c3__clms:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
                           return u2_bl_bail(wir_r, c3__fail); else
         {
           u2_noun hed = u2_bc(wir_r, u2_bc(wir_r, u2_nul, _2), 
@@ -992,7 +992,7 @@
           u2_noun tal = u2_bc(wir_r, u2_bc(wir_r, u2_nul, _3), 
                                      u2_rx(wir_r, hep));
           u2_noun lag = u2_bt
-            (wir_r, c3__clsp,
+            (wir_r, c3__clms,
                     j2_mcy(Pt6, ap, mold)(wir_r, p_gen, hed),
                     j2_mcy(Pt6, ap, mold)(wir_r, q_gen, tal));
 
@@ -1008,11 +1008,11 @@
                     u2_rx(wir_r, p_gen), 
                     j2_mcy(Pt6, ap, mold)(wir_r, q_gen, hep));
         }
-        case c3__ktcn:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
+        case c3__ktcl:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
                           return u2_bl_bail(wir_r, c3__fail); else
         {
           return u2_bt
-            (wir_r, c3__ktcn, 
+            (wir_r, c3__ktcl, 
                     u2_rx(wir_r, p_gen), 
                     j2_mcy(Pt6, ap, mold)(wir_r, q_gen, hep));
         }
@@ -1211,7 +1211,7 @@
         _open_pq  (wtms);
         _open_pq  (wtgr);
 
-        _open_pq  (ktcn);
+        _open_pq  (ktcl);
 
         _open_pqr (cnbr);
         _open_pq  (cncl);
@@ -1442,7 +1442,7 @@
             return ret;
           }
         }
-        case c3__clsp: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
+        case c3__clms: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
         {
           return u2_bt(wir_r, u2_yes, 
                               u2_rx(wir_r, p_gen),
