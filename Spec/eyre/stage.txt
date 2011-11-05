@@ -15,5 +15,3 @@ To stage down from X to Y == (X - 1), 10 steps:
       - compute with tier 6 jets live in genY/pit.h
       - compute with tier 6 jets dead "
       - compare mugs
-
-

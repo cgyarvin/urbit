@@ -1120,24 +1120,24 @@
   ++  alf  ;~(pose low hig)
   ++  aln  ;~(pose low hig nud)
   ++  bar  (just '|')
-  ++  bet  ;~(pose (cold 2 sep) (cold 3 pes))
+  ++  bet  ;~(pose (cold 2 mus) (cold 3 lus))
   ++  bin  (bass 2 (most gon but))
-  ++  bot  (just '\'')
+  ++  soc  (just '\'')
   ++  but  (cook |=(a=@ (sub a '0')) (shim '0' '1'))
   ++  cab  (just '_')
   ++  com  (just ',')
-  ++  cas  (just '?')
-  ++  dax  (just '#')
-  ++  deg  (just ':')
-  ++  den  (just '[')
-  ++  des  (just '{')
+  ++  wut  (just '?')
+  ++  hax  (just '#')
+  ++  col  (just ':')
+  ++  sel  (just '[')
+  ++  kel  (just '{')
   ++  dot  (just '.')
-  ++  del  (just '<')
+  ++  gal  (just '<')
   ++  dem  (bass 10 (most gon dit))
   ++  dit  (cook |=(a=@ (sub a '0')) (shim '0' '9'))
-  ++  dun  (cold ~ ;~(plug sep sep))
-  ++  duq  (cold ~ ;~(plug lyc sep))
-  ++  duz  (cold ~ ;~(plug lyc lyc))
+  ++  dun  (cold ~ ;~(plug mus mus))
+  ++  duq  (cold ~ ;~(plug tis mus))
+  ++  duz  (cold ~ ;~(plug tis tis))
   ++  fad
     %+  cook
       |=([x=@ y=@ z=@] (far :(mix (lsh 3 2 z) (lsh 3 1 y) x)))
@@ -1148,68 +1148,68 @@
       |=(a=*(list num) (roll a |=([p=@ q=@] (add p (lsh 5 1 q)))))
     ;~  plug
       ;~(pose (cold 0 bar) fud fwd fod fad)
-      (star ;~(pfix ;~(pose dun ;~(plug nov gay von)) fud))
+      (star ;~(pfix ;~(pose dun ;~(plug bas gay fas)) fud))
     ==
   ::
   ++  fod  (cook |=([a=@ b=@] (add (lsh 3 1 a) (mix a b))) ;~(plug fad fyd))
   ++  fud
     %+  cook 
       |=([a=@ b=@] (add (lsh 4 1 a) (mix a b)))
-    ;~(plug fod ;~(pfix sep fod))
+    ;~(plug fod ;~(pfix mus fod))
   ::
   ++  fwd  
     %+  cook 
       |=([a=@ b=@] (add (lsh 4 1 a) (mix a b)))
-    ;~(plug fad ;~(pfix sep fod))
+    ;~(plug fad ;~(pfix mus fod))
   ::
   ++  fyd
     %+  cook
       |=([x=@ y=@ z=@] (fyr :(mix (lsh 3 2 z) (lsh 3 1 y) x)))
     ;~(plug low low low)
   ::
-  ++  gal  ;~(pose (cold 2 del) (cold 3 led))
+  ++  gul  ;~(pose (cold 2 gal) (cold 3 gar))
   ++  gap  (cold ~ (plus ;~(pose vul (mask [^-(@ 10) ' ' ~]))))
   ++  gay  ;~(pose gap (easy ~))
-  ++  gon  ;~(pose ;~(plug nov gay von) (easy ~))
+  ++  gon  ;~(pose ;~(plug bas gay fas) (easy ~))
   ++  hex  (bass 16 (most gon hit))
   ++  hes  (just '$')
   ++  hig  (shim 'A' 'Z')
   ++  hit  ;~(pose dit (cook |=(a=*char (sub a 87)) (shim 'a' 'f')))
   ++  ket  (just '^')
-  ++  lep  (just '(')
-  ++  led  (just '>')
+  ++  pal  (just '(')
+  ++  gar  (just '>')
   ++  low  (shim 'a' 'z')
-  ++  lyc  (just '=')
+  ++  tis  (just '=')
   ++  mes  (cook |=([a=@ b=@] (add (mul 16 a) b)) ;~(plug hit hit))
   ++  mit  (just '%')
-  ++  ned  (just ']')
+  ++  ser  (just ']')
   ++  nix  (boss 256 (star ;~(pose aln cab)))
-  ++  nov  (just '\\')
+  ++  bas  (just '\\')
   ++  nud  (shim '0' '9')
   ++  pam  (just '&')
-  ++  pel  (just ')')
-  ++  pes  (just '+')
-  ++  poy  ;~(pfix nov ;~(pose nov bot mes))
+  ++  par  (just ')')
+  ++  lus  (just '+')
+  ++  poy  ;~(pfix bas ;~(pose bas soc mes))
   ++  qit  ;~(pose (shim 32 38) (shim 40 91) (shim 93 126) poy)
-  ++  qut  (ifix [bot bot] (boss 256 (more gon qit)))
-  ++  sed  (just '}')
-  ++  sep  (just '-')
+  ++  qut  (ifix [soc soc] (boss 256 (more gon qit)))
+  ++  ker  (just '}')
+  ++  mus  (just '-')
   ++  sig  (just '~')
   ++  sym 
     %+  cook
       |=(a=*tape (rap 3 ^-(*(list rat) a)))
-    ;~(plug low (star ;~(pose nud low sep)))
+    ;~(plug low (star ;~(pose nud low mus)))
   ::
-  ++  tam  (just ';')
+  ++  sem  (just ';')
   ++  tar  (just '*')
   ++  tec  (just '`')
-  ++  tob  (just '"')
+  ++  doc  (just '"')
   ++  ven  ;~  (comp |=([a=@ b=@] (peg a b)))
              bet
              =+  hom=`?`|
              |=  tub=*clip
              ^-  *(like axis)
-             =+  vex=?:(hom (bet tub) (gal tub))
+             =+  vex=?:(hom (bet tub) (gul tub))
              ?~  q.vex
                [p.tub [~ 1 tub]] 
              =+  wag=$(p.tub p.vex, hom !hom, tub q.u.q.vex)
@@ -1225,9 +1225,9 @@
       (cold 63* (just '+'))
     ==
   ++  viz  (bass 64 (most gon vit))
-  ++  von  (just '/')
-  ++  vul  (cold ~ ;~(plug deg deg (star (shim 32 126)) (just ^-(@ 10))))
-  ++  wut  (just '@')
+  ++  fas  (just '/')
+  ++  vul  (cold ~ ;~(plug col col (star (shim 32 126)) (just ^-(@ 10))))
+  ++  pat  (just '@')
   ++  zap  (just '!')
   ::
   ::      Tier 5a/5, parsing: external interface
@@ -1626,92 +1626,92 @@
     $&  *term
       [~ p=*axis]
       [%brcl p=(gene) q=(gene)]
-      [%brdt p=(gene)]
-      [%brts p=(gene) q=(gene)]
       [%brcn p=(gene)]
+      [%brdt p=(gene)]
       [%brls p=(gene) q=(gene)]
-      [%brtr p=(gene) q=(gene)]
       [%brms p=(gene)]
+      [%brtr p=(gene) q=(gene)]
+      [%brts p=(gene) q=(gene)]
       [%brzp p=(gene) q=(gene)]
-      [%wtbr p=((list gene))]
-      [%wtcl p=(gene) q=(gene) r=(gene)]
-      [%wtgl p=(gene) q=(gene)]
-      [%wtdt p=(gene) q=(gene) r=(gene)]
-      [%wtts p=(gene) q=(gene)]
-      [%wtgr p=(gene) q=(gene)]
-      [%wtpm p=((list gene))]
-      [%wtsg p=(gene) q=(gene) r=(gene)]
-      [%wtls p=(gene) q=(gene) r=((list ~[p=(gene) q=(gene)]))]
-      [%wtms p=(gene) q=((list ~[p=(gene) q=(gene)]))]
-      [%wtzp p=(gene)]
       [%clkt p=(gene) q=(gene) r=(gene) s=(gene)]
       [%clls p=(gene) q=(gene) r=(gene)]
       [%clsg p=((list gene))]
       [%clsp p=(gene) q=(gene)]
       [%cltr p=((list gene))]
-      [%dtwt p=(gene)]
-      [%dtts p=(gene) q=(gene)]
-      [%dtls p=(gene)]
-      [%dtsg p=*term q=*]
-      [%dttr p=(gene) q=(gene)]
-      [%dtpt p=*term q=@]
-      [%hsbr p=(gene) q=((list gene)) r=((map term foot))]
-      [%hssg p=((list gene)) q=((map term foot))]
-      [%hskt p=((list gene)) q=((map term foot))]
-      [%hsts p=(gene) q=(gene) r=((map term foot))]
-      [%hscn p=((list gene)) q=((map term foot))]
-      [%hspm p=(gene) q=((list gene)) r=((map term foot))]
-      [%hstr p=((list gene)) q=((map term foot))]
-      [%ktcn p=(gene) q=(gene)]
-      [%ktgl p=(gene) q=(gene)]
-      [%ktdt p=(gene) q=(gene)]
-      [%ktts p=*term q=(gene)]
-      [%ktgr p=(gene) q=(gene)]
-      [%ktsg p=(gene)]
-      [%ktms p=(gene) q=(gene)]
-      [%tsgl p=(gene) q=(gene)]
-      [%tsgr p=(gene) q=(gene)]
-      [%tsls p=(gene) q=(gene)]
-      [%tsms p=(gene) q=(gene)]
       [%cnbr p=(twig) q=(gene) r=((list ~[p=(gene) q=(gene)]))]
       [%cncl p=(gene) q=(gene)]
       [%cndt p=(gene) q=(gene)]
       [%cnkt p=(gene) q=(gene) r=(gene) s=(gene)]
-      [%cnts p=(twig) q=((list ~[p=(gene) q=(gene)]))]
       [%cnls p=(gene) q=(gene) r=(gene)]
-      [%cnsg p=(twig) q=(gene) r=(gene)]
       [%cnms p=(gene) q=((list gene))]
+      [%cnsg p=(twig) q=(gene) r=(gene)]
       [%cntr p=(gene)]
-      [%pmts p=(gene) q=((map term foot))]
+      [%cnts p=(twig) q=((list ~[p=(gene) q=(gene)]))]
+      [%dtls p=(gene)]
+      [%dtpt p=*term q=@]
+      [%dtsg p=*term q=*]
+      [%dttr p=(gene) q=(gene)]
+      [%dtts p=(gene) q=(gene)]
+      [%dtwt p=(gene)]
+      [%hsbr p=(gene) q=((list gene)) r=((map term foot))]
+      [%hscn p=((list gene)) q=((map term foot))]
+      [%hskt p=((list gene)) q=((map term foot))]
+      [%hspm p=(gene) q=((list gene)) r=((map term foot))]
+      [%hssg p=((list gene)) q=((map term foot))]
+      [%hstr p=((list gene)) q=((map term foot))]
+      [%hsts p=(gene) q=(gene) r=((map term foot))]
+      [%ktcn p=(gene) q=(gene)]
+      [%ktdt p=(gene) q=(gene)]
+      [%ktgl p=(gene) q=(gene)]
+      [%ktgr p=(gene) q=(gene)]
+      [%ktms p=(gene) q=(gene)]
+      [%ktsg p=(gene)]
+      [%ktts p=*term q=(gene)]
       [%pmcl p=(gene) q=((map term foot))]
-      [%pmdt p=((map term foot))]
       [%pmcn p=((map term foot))]
+      [%pmdt p=((map term foot))]
       [%pmls p=(gene) q=((map term foot))]
       [%pmms p=(gene) q=((map term foot))]
+      [%pmts p=(gene) q=((map term foot))]
       [%pmzp p=(gene) q=((map term foot))]
       [%sgbr p=(gene) q=(gene)]
       [%sgcl p=[p=@ q=@] q=(gene)]
-      [%sggl p=($&(*term [p=*term q=(gene)])) q=(gene)]
+      [%sgcn p=(chop) q=(gene) r=((list ~[p=*term q=(gene)])) s=(gene)]
       [%sgdt p=(chop) q=(gene)]
+      [%sggl p=($&(*term [p=*term q=(gene)])) q=(gene)]
+      [%sggr p=($&(*term [p=*term q=(gene)])) q=(gene)]
       [%sghx p=(gene)]
       [%sgkt p=(gene)]
-      [%sgts p=(gene) q=(gene)]
-      [%sggr p=($&(*term [p=*term q=(gene)])) q=(gene)]
-      [%sgcn p=(chop) q=(gene) r=((list ~[p=*term q=(gene)])) s=(gene)]
-      [%sgpm p=(gene) q=(gene)]
       [%sgls p=@ q=(gene)]
-      [%sgsg p=(gene) q=(gene)]
       [%sgms p=@ q=(gene)]
-      [%smts p=*{%atom %noun %cell %flag %null}]
+      [%sgpm p=(gene) q=(gene)]
+      [%sgsg p=(gene) q=(gene)]
+      [%sgts p=(gene) q=(gene)]
       [%smcl p=(gene) q=((list gene))]
       [%smsg p=(gene) q=((list gene))]
+      [%smts p=*{%atom %noun %cell %flag %null}]
+      [%tsgl p=(gene) q=(gene)]
+      [%tsgr p=(gene) q=(gene)]
+      [%tsls p=(gene) q=(gene)]
+      [%tsms p=(gene) q=(gene)]
+      [%wtbr p=((list gene))]
+      [%wtcl p=(gene) q=(gene) r=(gene)]
+      [%wtdt p=(gene) q=(gene) r=(gene)]
+      [%wtgl p=(gene) q=(gene)]
+      [%wtgr p=(gene) q=(gene)]
+      [%wtls p=(gene) q=(gene) r=((list ~[p=(gene) q=(gene)]))]
+      [%wtms p=(gene) q=((list ~[p=(gene) q=(gene)]))]
+      [%wtpm p=((list gene))]
+      [%wtsg p=(gene) q=(gene) r=(gene)]
+      [%wtts p=(gene) q=(gene)]
+      [%wtzp p=(gene)]
       [%zpcb p=*spot q=(gene)]
       [%zpcm p=(gene) q=(gene)]
-      [%zphx p=(gene)]
-      [%zpts p=(gene)]
       [%zpcn ~]
-      [%zpsm p=(gene) q=(gene)]
       [%zpfs p=(gene)]
+      [%zphx p=(gene)]
+      [%zpsm p=(gene) q=(gene)]
+      [%zpts p=(gene)]
       [%zpzp ~]
     ==
   ++  knot  $&(*term [~ p=*axis])
@@ -3748,8 +3748,8 @@
   ++  flat
     %+  knee  *gene  |.  ~+
     ;~  pose
-      (stag %wtbr ;~(pfix bar (ifix [lep pel] (most ace wide))))
-      (stag %wtpm ;~(pfix pam (ifix [lep pel] (most ace wide))))
+      (stag %wtbr ;~(pfix bar (ifix [pal par] (most ace wide))))
+      (stag %wtpm ;~(pfix pam (ifix [pal par] (most ace wide))))
       ;~  (bend |=([a=[%dtsg p=*term q=@] b=*] [%dtpt p.a q.a]))
         %+  stag
           %dtsg
@@ -3760,19 +3760,19 @@
           (stag %ta qut)
           (stag %f (cold & pam))
           (stag %f (cold | bar))
-          (stag %up ;~(pfix sep fed))
+          (stag %up ;~(pfix mus fed))
           (stag %tam ;~(pfix mit sym))
           (stag %tam (cold %% ;~(plug mit mit)))
         ==
         tar
       == 
     ::
-      (stag %dtts ;~(pfix lyc (ifix [lep pel] ;~((glue ace) wide wide))))
-      (stag %dtls ;~(pfix pes (ifix [lep pel] wide)))
-      (stag %cltr (ifix [den ned] (most ace wide)))
-      (cook |=(a=*(list gene) [%hstr a ~]) (ifix [des sed] (most ace wide)))
-      (stag %cnms (ifix [lep pel] (most ace wide)))
-      (stag %smcl ;~(pfix deg (ifix [lep pel] (most ace wide))))
+      (stag %dtts ;~(pfix tis (ifix [pal par] ;~((glue ace) wide wide))))
+      (stag %dtls ;~(pfix lus (ifix [pal par] wide)))
+      (stag %cltr (ifix [sel ser] (most ace wide)))
+      (cook |=(a=*(list gene) [%hstr a ~]) (ifix [kel ker] (most ace wide)))
+      (stag %cnms (ifix [pal par] (most ace wide)))
+      (stag %smcl ;~(pfix col (ifix [pal par] (most ace wide))))
       (cook |=(a=*twig [%cnts a ~]) rope)
       (stag %wtzp ;~(pfix zap wide))
       (stag %cntr ;~(pfix tar wide))
@@ -3783,35 +3783,35 @@
     ::
       %+  cook 
         |=(a=*(list gene) [%hscn a ~]) 
-      ;~(pfix mit (ifix [des sed] (most ace wide)))
+      ;~(pfix mit (ifix [kel ker] (most ace wide)))
     ::
       %+  cook
         |=(a=*(list gene) [%hssg a ~])
-      ;~(pfix sig (ifix [den ned] (most ace wide)))
+      ;~(pfix sig (ifix [sel ser] (most ace wide)))
     ::
       %+  stag
         %cnsg 
       ;~  pfix 
         sig 
-        (ifix [lep pel] ;~((glue ace) rope wide (stag %cltr (most ace wide))))
+        (ifix [pal par] ;~((glue ace) rope wide (stag %cltr (most ace wide))))
       ==
     ::
       ;~  pfix
-        von
+        fas
         %+  cook
           |=(a=*(list gene) [%clsg (flop a)])
         %+  most
-          von
-        ;~(pose (cook |=(a=*term [%dtsg %tam a]) sym) (ifix [den ned] wide))
+          fas
+        ;~(pose (cook |=(a=*term [%dtsg %tam a]) sym) (ifix [sel ser] wide))
       ==
     ::
       %+  stag
         %smts
       ;~  pose
-        (cold %flag cas)
+        (cold %flag wut)
         (cold %noun tar)
         (cold %cell ket)
-        (cold %atom wut)
+        (cold %atom pat)
         (cold %null sig)
       ==
     ==
@@ -3821,45 +3821,45 @@
     =<  ;~  pose
           ;~  pfix  bar
             ;~  pose
-              (rune lyc %brts expb)
-              (rune deg %brcl expb)
-              (rune sep %brms expa)
+              (rune tis %brts expb)
+              (rune col %brcl expb)
+              (rune mus %brms expa)
               (rune dot %brdt expa)
               (rune mit %brcn expa)
-              (rune pes %brls expb)
+              (rune lus %brls expb)
               (rune tar %brtr expb)
               (rune zap %brzp expb)
             ==
           ==
-          ;~  pfix  cas
+          ;~  pfix  wut
             ;~  pose
               (rune bar %wtbr exps)
-              (rune deg %wtcl expc)
-              (rune del %wtgl expb)
+              (rune col %wtcl expc)
+              (rune gal %wtgl expb)
               (rune dot %wtdt expc)
-              (rune led %wtgr expb)
-              (rune lyc %wtts expb)
+              (rune gar %wtgr expb)
+              (rune tis %wtts expb)
               (rune pam %wtpm exps)
-              (rune sep %wtms exph)
-              (rune sep %wtls expm)
+              (rune mus %wtms exph)
+              (rune mus %wtls expm)
               (rune sig %wtsg expc)
               (rune zap %wtzp expa)
             ==
           ==
-          ;~  pfix  deg
+          ;~  pfix  col
             ;~  pose
               (rune ket %clkt expf)
-              (rune pes %clls expc)
-              (rune sep %clsp expb)
+              (rune lus %clls expc)
+              (rune mus %clsp expb)
               (rune sig %clsg exps)
               (rune tar %cltr exps)
             ==
           ==
           ;~  pfix  dot
             ;~  pose
-              (rune cas %dtwt expa)
-              (rune lyc %dtts expb)
-              (rune pes %dtls expa)
+              (rune wut %dtwt expa)
+              (rune tis %dtts expb)
+              (rune lus %dtls expa)
               (rune tar %dttr expb)
             ==
           ==
@@ -3867,7 +3867,7 @@
             ;~  pose
               (rune bar %hsbr expu)
               (rune ket %hskt expw)
-              (rune lyc %hsts expv)
+              (rune tis %hsts expv)
               (rune mit %hscn expw)
               (rune pam %hspm expu)
               (rune sig %hssg expw)
@@ -3876,77 +3876,77 @@
           ==
           ;~  pfix  ket
             ;~  pose
-              (rune deg %ktcn expb)
-              (rune del %ktgl expb)
+              (rune col %ktcn expb)
+              (rune gal %ktgl expb)
               (rune dot %ktdt expb)
-              (rune led %ktgr expb)
-              (rune lyc %ktts expg)
-              (rune sep %ktms expb)
+              (rune gar %ktgr expb)
+              (rune tis %ktts expg)
+              (rune mus %ktms expb)
               (rune sig %ktsg expa)
             ==
           ==
-          ;~  pfix  lyc
+          ;~  pfix  tis
             ;~  pose
-              (rune sep %tsms expb)
-              (rune del %tsgl expb)
-              (rune led %tsgr expb)
-              (rune pes %tsls expb)
+              (rune mus %tsms expb)
+              (rune gal %tsgl expb)
+              (rune gar %tsgr expb)
+              (rune lus %tsls expb)
             ==
           ==
           ;~  pfix  mit
             ;~  pose
               (rune bar %cnbr expp)
-              (rune deg %cncl expb)
+              (rune col %cncl expb)
               (rune dot %cndt expb)
               (rune ket %cnkt expf)
-              (rune lyc %cnts expj)
-              (rune pes %cnls expc) 
-              (rune sep %cnms expk)
+              (rune tis %cnts expj)
+              (rune lus %cnls expc) 
+              (rune mus %cnms expk)
               (rune sig %cnsg expq)
               (rune tar %cntr expa)
             ==
           ==
           ;~  pfix  pam
             ;~  pose
-              (rune deg %pmcl expr)
+              (rune col %pmcl expr)
               (rune dot %pmdt expe)
-              (rune lyc %pmts expr)
+              (rune tis %pmts expr)
               (rune mit %pmcn expe)
-              (rune pes %pmls expr)
-              (rune sep %pmms expr)
+              (rune lus %pmls expr)
+              (rune mus %pmms expr)
               (rune zap %pmzp expr)
             ==
           ==
           ;~  pfix  sig
             ;~  pose
               (rune bar %sgbr expb)
-              (rune dax %sghx expa)
-              (rune deg %sgcl hina)
-              (rune del %sggl hinb)
+              (rune hax %sghx expa)
+              (rune col %sgcl hina)
+              (rune gal %sggl hinb)
               (rune dot %sgdt hine)
               (rune ket %sgkt expa)
-              (rune led %sggr hinb)
-              (rune lyc %sgts expb)
+              (rune gar %sggr hinb)
+              (rune tis %sgts expb)
               (rune mit %sgcn hind)
-              (rune pes %sgls hinc)
+              (rune lus %sgls hinc)
               (rune pam %sgpm expb)
-              (rune sep %sgms hinc)
+              (rune mus %sgms hinc)
               (rune sig %sgsg expb)
             ==
           ==
-          ;~  pfix  tam
+          ;~  pfix  sem
             ;~  pose
-              (rune deg %smcl expi)
+              (rune col %smcl expi)
               (rune sig %smsg expi)
             ==
           ==
           ;~  pfix  zap
             ;~  pose
-              (rune lyc %zpts expa)
+              ;~(pfix col (toad expz))
               (rune com %zpcm expb)
-              (rune tam %zpsm expb)
-              ;~(pfix deg (toad expz))
-              (rune dax %zphx expa)
+              (rune tis %zpts expa)
+              (rune sem %zpsm expb)
+              (rune hax %zphx expa)
             ==
           ==
         ==
@@ -3972,7 +3972,7 @@
     ::
     ++  toad
       |*  har=expa
-      =+  dur=(ifix [lep pel] $:har(tol |))
+      =+  dur=(ifix [pal par] $:har(tol |))
       ?:(tol ;~(pose ;~(pfix gap $:har(tol &)) dur) dur)
     ::
     ++  rune
@@ -4020,7 +4020,7 @@
           ;~((glue gap) (most gap tall) neck)
     :: 
     ++  expz  |.(loaf(bug &))
-    ++  hina  |.(;~(gunk (ifix [den ned] ;~(gunk dem dem)) loaf))
+    ++  hina  |.(;~(gunk (ifix [sel ser] ;~(gunk dem dem)) loaf))
     ++  hinb  |.(;~(gunk bont loaf))
     ++  hinc  |.(;~(pose ;~(gunk bony loaf) ;~(plug (easy ~) loaf)))
     ++  hind  |.(;~(gunk bonk loaf bonz loaf))
@@ -4028,19 +4028,19 @@
     ++  bonk  
       ;~  pfix  mit
         ;~  pose
-          ;~(plug sym ;~(pfix deg ;~(plug sym ;~(pfix dot ;~(pfix dot dem)))))
-          ;~(plug sym ;~(pfix deg ;~(plug sym ;~(pfix dot dem))))
+          ;~(plug sym ;~(pfix col ;~(plug sym ;~(pfix dot ;~(pfix dot dem)))))
+          ;~(plug sym ;~(pfix col ;~(plug sym ;~(pfix dot dem))))
           ;~(plug sym ;~(pfix dot dem))
           sym
         ==
       ==
     ++  bont  ;~((bend) sym ;~(pfix dot ;~(pose wide ;~(pfix muck loaf))))
-    ++  bony  (cook |=(a=*(list) (lent a)) (plus lyc))
+    ++  bony  (cook |=(a=*(list) (lent a)) (plus tis))
     ++  bonz
       ;~  pose
         (cold ~ sig)
         %+  ifix
-          ?:(tol [p=;~(plug duz gap) q=;~(plug gap duz)] [p=lep q=pel])
+          ?:(tol [p=;~(plug duz gap) q=;~(plug gap duz)] [p=pal q=par])
         (more mash ;~(gunk ;~(pfix mit sym) loaf))
       ==
     --
@@ -4050,33 +4050,33 @@
     ;~  %-  bend
         |=  :-  ros=*gene 
                 ^=  vil  %*
-                  $^  [%lyc p=*gene] 
-                      [%deg p=*gene] 
+                  $^  [%tis p=*gene] 
+                      [%col p=*gene] 
                       [%cab p=*gene]
-                      [%lep p=*(list ~[p=*gene q=*gene])]
+                      [%pal p=*(list ~[p=*gene q=*gene])]
                   ==
         ?-    -.vil
-            %lyc 
+            %tis 
           ?-  ros
             @                [%ktts ros p.vil]
             [%cnts [@ ~] ~]  [%ktts i.p.ros p.vil]
             [%zpcb *]        $(ros q.ros)
             *                !!
           ==
-            %deg  [%tsgl ros p.vil]
-            %lep  [%cnts ~(rake ap ros) p.vil]
+            %col  [%tsgl ros p.vil]
+            %pal  [%cnts ~(rake ap ros) p.vil]
             %cab  [%clsp ros p.vil]
         ==
       flat
       ;~  pose
-        ;~(plug (cold %lyc lyc) wide)
-        ;~(plug (cold %deg deg) wide)
+        ;~(plug (cold %tis tis) wide)
+        ;~(plug (cold %col col) wide)
         ;~(plug (cold %cab cab) wide)
         ;~(plug (cold %cab sig) (easy %smts %null))
         ;~  plug
-          (easy %lep)
+          (easy %pal)
           %+  ifix
-            [lep pel]
+            [pal par]
           (most ;~(plug com ace) ;~((glue ace) wide wide))
         ==
       ==
