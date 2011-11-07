@@ -4,7 +4,23 @@
 */
   /** Data structures.
   **/
-    /* u2_loom_prof: profile node.
+    /* u2_loom_marx: watermark profile.
+    */
+      typedef struct _u2_loom_marx {
+        /* Current count.
+        */
+        c3_w cur_w;
+
+        /* Original count.
+        */
+        c3_w org_w;
+
+        /* Maximum count.
+        */
+        c3_w max_w;
+      } u2_loom_marx;
+
+    /* u2_loom_knot: profile node.
     */
       typedef struct _u2_loom_prof {
         /* Section name - presumably a terminal.
@@ -48,7 +64,7 @@
 
           /* Act count: *(map term num)
           */
-          u2_noun did;
+          u2
         } duz;
 
         /* Built-in system acts and counters.
@@ -70,21 +86,17 @@
           */
           c3_d nod_d;
 
-          /* Words allocated (current).
+          /* C stack record.
           */
-          c3_w mal_w;
+          u2_loom_marx cas_m;
 
-          /* Words allocated (maximum).
+          /* Main memory usage record.
           */
-          c3_w max_w;
+          u2_loom_marx mey_m;
 
-          /* Current depth of C stack.
+          /* Basket memory usage record.
           */
-          c3_w wad_w;
-
-          /* Maximum depth of C stack.
-          */
-          c3_w wax_w;
+          u2_loom_marx bek_m;
 
           /* Unix time in seconds at analysis instantiation.
           */
@@ -102,6 +114,24 @@
 
   /** Functions.
   **/
+    /** Lifecycle.
+    **/
+      /* u2_tx_show(): produce a profile noun to render.  Reset state.
+      */
+        u2_noun                                                   //  produce
+        u2_tx_show(u2_wire wir_r);
+
+      /* u2_tx_boot(): reset state.
+      */
+        void
+        u2_tx_boot(u2_wire wir_r);
+
+    /** Recording.
+    **/
+        /* Record hop, jet, 
+        u2_tx_
+
+    /* 
     /* u2_bx_boot(): reset the performance log.
     */
       void
