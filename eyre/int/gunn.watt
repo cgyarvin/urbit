@@ -1,3 +1,4 @@
+!:
 ~%    %gunn
     -<-<
   ==
@@ -84,19 +85,19 @@
     --
 =>  &.
     ++  x-path  ~+
-      (most (just '/') (star ;~(pose aln cab dot sep)))
+      (most (just '/') (star ;~(pose aln cab dot mus)))
     ::
     ++  x-fuel
       %+  knee  *fuel  |.  ~+
       ;~  pose
         %+  ifix  
-          [del gap]
+          [gal gap]
         ;~  pose
           (stag %gene wide:vast)
           ::  (stag %comd ;~(pfix bar qut))
           (stag %disk x-mine)
-          (stag %many (ifix [den ned] (most ace x-fuel)))
-          (stag %name ;~(plug sym ;~(pfix lyc x-fuel)))
+          (stag %many (ifix [sel ser] (most ace x-fuel)))
+          (stag %name ;~(plug sym ;~(pfix tis x-fuel)))
         ==
         (easy ~) 
       ==
@@ -123,10 +124,10 @@
       ;~  plug
         x-mode
         ;~  pose
-          (cold %root von)
-          (cold %home ;~(plug dot von))
+          (cold %root fas)
+          (cold %home ;~(plug dot fas))
           %+  ifix
-            [sig von]
+            [sig fas]
           ;~  pose
             (cold %fund (just 'f'))
             (cold %libd (just 'l'))
@@ -144,8 +145,8 @@
         ;~  plug
           (star (stag %disk ;~(pfix bar x-path)))
           ;~  pose
-            (stag %disk ;~(pfix deg x-path))
-            (stag %body ;~(pfix pes wide:vast))
+            (stag %disk ;~(pfix col x-path))
+            (stag %body ;~(pfix lus wide:vast))
           ==
         ==
         ;~  plug
@@ -158,12 +159,12 @@
       %+  knee  *vent  |.  ~+
       ;~  pose
         %+  ifix  
-          [led gap]
+          [gar gap]
         ;~  pose
           (stag %save x-mine)
-          (stag %bind ;~(pfix lyc sym))
+          (stag %bind ;~(pfix tis sym))
           ::  (stag %comd ;~(pfix bar qut))
-          (stag %many (ifix [den ned] (most ace x-vent)))
+          (stag %many (ifix [sel ser] (most ace x-vent)))
           (cold %% sig)
         ==
         (easy %%)
@@ -183,19 +184,19 @@
     ~|(%draw-auto !!)
   ::
       *{%atom %watt}
-    [%hssg [[%tmlc %atom] ~] ~]
+    [%hssg [[%smts %atom] ~] ~]
   ::
       %blob
-    [%hssg [[%ktlc %l [%tmlc %atom]] [%ktlc %d [%tmlc %atom]] ~] ~]
+    [%hssg [[%ktts %l [%smts %atom]] [%ktts %d [%smts %atom]] ~] ~]
   ::
       [%dlog *]
-    [%mtdg %list $(med p.med)]
+    [%cncl %list $(med p.med)]
   ::
       [%dmap *]
-    [%mtdg %list [%hssg [[%ktlc %n %tape] [%ktlc %v $(med p.med)] ~] ~]]
+    [%cncl %list [%hssg [[%ktts %n %tape] [%ktts %v $(med p.med)] ~] ~]]
   ::
       %pile
-    [%hssg [[%tmlc %noun] ~] ~]
+    [%hssg [[%smts %noun] ~] ~]
   ::
       %text
     %wall

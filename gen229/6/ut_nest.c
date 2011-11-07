@@ -302,7 +302,7 @@
           }
 
           return u2_or(_nest_dext(wir_r, van, p_sut, u2_no, ref, gil),
-                       _nest_dext(wir_r, van, q_sut, tel, ref, gil));
+                       _nest_dext(wir_r, van, q_sut, u2_no, ref, gil));
         }
       } 
       case c3__hold: p_sut = u2_t(sut);

@@ -3428,7 +3428,7 @@
           [%fork *]
         ?.  ?=(*%{[%atom *] %noun [%cell *] [%cube *] [%core *] [%fine *]} ref)
           sint
-        ?|(dext(tel |, sut p.sut) dext(sut q.sut))
+        ?|(dext(tel |, sut p.sut) dext(tel |, sut q.sut))
       ::
           [%hold *]
         ?|

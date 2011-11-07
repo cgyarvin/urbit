@@ -9,15 +9,15 @@
       typedef struct _u2_loom_marx {
         /* Current count.
         */
-        c3_w cun_w;
+        c3_w cur_w;
 
         /* Original count.
         */
-        c3_w lif_w;
+        c3_w org_w;
 
         /* Maximum count.
         */
-        c3_w myx_w;
+        c3_w max_w;
       } u2_loom_marx;
 
 
