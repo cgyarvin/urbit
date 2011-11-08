@@ -22,7 +22,7 @@
 
     /* u2_loom_knot: profile node.
     */
-      typedef struct _u2_loom_prof {
+      typedef struct _u2_loom_knot {
         /* Section name - presumably a terminal.
         */
         u2_noun lic;
@@ -33,12 +33,12 @@
 
         /* Child list, if any.
         */
-        struct _u2_loom_prof *fam_p;
+        struct _u2_loom_knot *fam_p;
 
-        /* Next profile in this list.
+        /* Next knot in this list.
         */
-        struct _u2_loom_prof *nex_p;
-      } u2_loom_prof;
+        struct _u2_loom_knot *nex_p;
+      } u2_loom_knot;
 
     /* u2_loom_trac: tracing/profiling control structure.
     */
@@ -46,7 +46,7 @@
         /* Tracing.
         */
         struct {
-          /* Position stack: *(list %{[& [* [@ @] [@ @]]] [| |.(*tank)}])
+          /* Position stack: *(list $^([& [* [@ @] [@ @]]] [| |.(*tank)]))
           */
           u2_noun ryp;
         } wer; 
@@ -64,7 +64,7 @@
 
           /* Act count: *(map term num)
           */
-          u2
+          u2_noun cot;
         } duz;
 
         /* Built-in system acts and counters.
@@ -88,14 +88,16 @@
 
           /* C stack record.
           */
-          u2_loom_marx cas_m;
+          c3_ds cas_ds;
 
           /* Main memory usage record.
           */
-          u2_loom_marx mey_m;
+          c3_ds mey_d;
 
           /* Basket memory usage record.
           */
+          c3_ds 
+
           u2_loom_marx bek_m;
 
           /* Unix time in seconds at analysis instantiation.
@@ -117,7 +119,11 @@
     /** Lifecycle.
     **/
       /* u2_tx_show(): produce a profile noun to render.  Reset state.
-      */
+      **
+      ** Type:
+      **  
+      **  
+      */ 
         u2_noun                                                   //  produce
         u2_tx_show(u2_wire wir_r);
 
@@ -128,10 +134,21 @@
 
     /** Recording.
     **/
-        /* Record hop, jet, 
-        u2_tx_
+      /* Record hop, jet, tes, nod.
+      */
+        void u2_tx_did_hop(u2_wire wir_r);
+        void u2_tx_did_jet(u2_wire wir_r);
+        void u2_tx_did_tes(u2_wire wir_r);
+        void u2_tx_did_nod(u2_wire wir_r);
 
-    /* 
+      /* Record signed change in watermarks.
+      */
+        void u2_tx_add_cas(u2_wire wir_r, c3_ws add_ws);
+        void u2_tx_add_mey(u2_wire wir_r, c3_ws add_ws);
+        void u2_tx_add_cas(u2_wire wir_r, c3_ws add_ws);
+
+      /* Record 
+
     /* u2_bx_boot(): reset the performance log.
     */
       void

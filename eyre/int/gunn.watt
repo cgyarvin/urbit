@@ -59,11 +59,18 @@
         [%dmap p=(mode)]                 ::  directory as list of name, file
       ==
     ++  path  (list tape)                ::  unix path
-    ++  vent
-      $&  *term                          ::  print to screen with label
-        [%bind p=*term]                  ::  add to environment
-        [%many p=((list vent))]          ::  tuple
-        [%save p=(mine)]                 ::  write to filesystem
+    ++  shoe                             ::  trace stack layer
+      $^  [& f=[l=@ c=@] t=[l=@ c=@]]    ::  from/to line/column
+          [| |.(*tank)]                  ::  user print closure
+      ==
+    ++  shot                             ::  profile path with count
+      $~  p=@                            ::  sample count
+          q=*(list ~[p=*term q=*shot])   ::  sample cases
+      ==
+    ++  slab                             ::  execution record
+      $~  p=*(list shoe)                 ::  stack trace
+          q=*(map term num)              ::  event counter
+          r=*shot                        ::  
       ==
     ++  spot                             ::  filesystem search model
       $*  %actd                          ::  action directory
@@ -81,6 +88,12 @@
     ++  tool                             ::  transformation
       $~  p=((list lard))                ::  libraries
           q=(func)                       ::  function
+      ==
+    ++  vent
+      $&  *term                          ::  print to screen with label
+        [%bind p=*term]                  ::  add to environment
+        [%many p=((list vent))]          ::  tuple
+        [%save p=(mine)]                 ::  write to filesystem
       ==
     --
 =>  &.
