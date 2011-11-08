@@ -53,7 +53,7 @@
   **/
 #   if defined(U2_OS_linux)
 #     define U2_OS_LoomBase 0x4000000
-
+#     define U2_OS_LoomBits 28            //  ie, 2^28 words == 1GB
 #   elif defined(U2_OS_osx)
 #   ifdef __LP64__
 #     define U2_OS_LoomBase 0x200000000
