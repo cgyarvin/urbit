@@ -19,81 +19,81 @@
   ==
 =>  !% 
 =>  &.
-    ++  deed                             ::  command-line action
-      $~  p=(vent)                       ::  data destination
-          q=(fuel)                       ::  data source
-          r=(tool)                       ::  data transformation
+    ++  deed                              ::  command-line action
+      $~  p=(vent)                        ::  data destination
+          q=(fuel)                        ::  data source
+          r=(tool)                        ::  data transformation
       ==
-    ++  fuel                             ::  data source
-      $&  ~                              ::  null
-        [%chew p=*gene q=((list fuel))]  ::  construct and filter
-        [%data p=(mode) q=*]             ::  data as produced
-        [%disk p=(mine)]                 ::  read from filesystem
-        [%gene p=*gene]                  ::  direct gene
-        [%many p=((list fuel))]          ::  many
-        [%name p=*term q=(fuel)]         ::  named
+    ++  fuel                              ::  data source
+      $&  ~                               ::  null
+        [%chew p=*gene q=((list fuel))]   ::  construct and filter
+        [%data p=(mode) q=*]              ::  data as produced
+        [%disk p=(mine)]                  ::  read from filesystem
+        [%gene p=*gene]                   ::  direct gene
+        [%many p=((list fuel))]           ::  many
+        [%name p=*term q=(fuel)]          ::  named
       ==
-    ++  func                             ::  transformation function
-      $^  [%body p=*gene]                ::  unwrapped code
-          [%data p=@]                    ::  data of mode %watt
-          [%disk p=(path)]               ::  %fund path
+    ++  func                              ::  transformation function
+      $^  [%body p=*gene]                 ::  unwrapped code
+          [%data p=@]                     ::  data of mode %watt
+          [%disk p=(path)]                ::  %fund path
       ==
-    ++  lard                             ::  library definition
-      $^  [%data p=@]                    ::  data of mode %watt
-          [%disk p=(path)]               ::  %libd path
+    ++  lard                              ::  library definition
+      $^  [%data p=@]                     ::  data of mode %watt
+          [%disk p=(path)]                ::  %libd path
       ==
-    ++  mine                             ::  filesystem mapping
-      $~  p=(mode)                       ::  noun conversion
-          q=(spot)                       ::  search model 
-          r=(path)                       ::  unix path
+    ++  mine                              ::  filesystem mapping
+      $~  p=(mode)                        ::  noun conversion
+          q=(spot)                        ::  search model 
+          r=(path)                        ::  unix path
       ==
     ++  mode
-      $&  %*  $*  %atom                  ::  file as flat atom
-                  %auto                  ::  default
-                  %blob                  ::  file as byte length, atom
-                  %pile                  ::  file as noun jam
-                  %text                  ::  file as list of list of chars
-                  %watt                  ::  watt source as atom
+      $&  %*  $*  %atom                   ::  file as flat atom
+                  %auto                   ::  default
+                  %blob                   ::  file as byte length, atom
+                  %pile                   ::  file as noun jam
+                  %text                   ::  file as list of list of chars
+                  %watt                   ::  watt source as atom
               ==
-        [%dlog p=(mode)]                 ::  directory as list of files
-        [%dmap p=(mode)]                 ::  directory as list of name, file
+        [%dlog p=(mode)]                  ::  directory as list of files
+        [%dmap p=(mode)]                  ::  directory as list of name, file
       ==
-    ++  path  (list tape)                ::  unix path
-    ++  shoe                             ::  trace stack layer
-      $^  [& f=[l=@ c=@] t=[l=@ c=@]]    ::  from/to line/column
-          [| |.(*tank)]                  ::  user print closure
+    ++  path  (list tape)                 ::  unix path
+    ++  shoe                              ::  trace stack layer
+      $^  [& f=[l=@ c=@] t=[l=@ c=@]]     ::  from/to line/column
+          [| |.(*tank)]                   ::  user print closure
       ==
-    ++  shot                             ::  profile path with count
-      $~  p=@                            ::  sample count
-          q=*(list ~[p=*term q=*shot])   ::  sample cases
+    ++  shot                              ::  profile path with count
+      $~  p=@                             ::  sample count
+          q=((list ~[p=(term) q=(shot)])) ::  sample cases
       ==
-    ++  slab                             ::  execution record
-      $~  p=*(list shoe)                 ::  stack trace
-          q=*(map term num)              ::  event counter
-          r=*shot                        ::  
+    ++  slab                              ::  execution record
+      $~  p=((list shoe))                 ::  stack trace
+          q=*(map term num)               ::  event counter
+          r=(shot)                        ::  
       ==
-    ++  spot                             ::  filesystem search model
-      $*  %actd                          ::  action directory
-          %boot                          ::  internal boot directory
-          %curd                          ::  current directory
-          %fund                          ::  function directory
-          %home                          ::  home directory
-          %jetd                          ::  jet directory
-          %libd                          ::  library directory
-          %netd                          ::  network input directory
-          %outd                          ::  output log directory
-          %resd                          ::  resource directory
-          %root                          ::  root path
+    ++  spot                              ::  filesystem search model
+      $*  %actd                           ::  action directory
+          %boot                           ::  internal boot directory
+          %curd                           ::  current directory
+          %fund                           ::  function directory
+          %home                           ::  home directory
+          %jetd                           ::  jet directory
+          %libd                           ::  library directory
+          %netd                           ::  network input directory
+          %outd                           ::  output log directory
+          %resd                           ::  resource directory
+          %root                           ::  root path
       ==
-    ++  tool                             ::  transformation
-      $~  p=((list lard))                ::  libraries
-          q=(func)                       ::  function
+    ++  tool                              ::  transformation
+      $~  p=((list lard))                 ::  libraries
+          q=(func)                        ::  function
       ==
     ++  vent
-      $&  *term                          ::  print to screen with label
-        [%bind p=*term]                  ::  add to environment
-        [%many p=((list vent))]          ::  tuple
-        [%save p=(mine)]                 ::  write to filesystem
+      $&  *term                           ::  print to screen with label
+        [%bind p=*term]                   ::  add to environment
+        [%many p=((list vent))]           ::  tuple
+        [%save p=(mine)]                  ::  write to filesystem
       ==
     --
 =>  &.
