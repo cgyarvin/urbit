@@ -60,17 +60,18 @@
       ==
     ++  path  (list tape)                 ::  unix path
     ++  shoe                              ::  trace stack layer
-      $^  [& f=[l=@ c=@] t=[l=@ c=@]]     ::  from/to line/column
-          [| |.(*tank)]                   ::  user print closure
+      $^  [%bean *]                       ::  raw noun
+          [%mean |.(*tank)]               ::  prettyprint trigger
+          [%spot *spot]                   ::  source position
       ==
     ++  shot                              ::  profile path with count
       $~  p=@                             ::  sample count
-          q=((list ~[p=(term) q=(shot)])) ::  sample cases
+          q=((list ~[p=(term) q=(shot)])) ::  sample divisions
       ==
-    ++  slab                              ::  execution record
+    ++  slab                              ::  complete execution record
       $~  p=((list shoe))                 ::  stack trace
           q=*(map term num)               ::  event counter
-          r=(shot)                        ::  
+          r=(shot)                        ::  profile samples
       ==
     ++  spot                              ::  filesystem search model
       $*  %actd                           ::  action directory
@@ -321,6 +322,41 @@
 ++  slot                                                ::  vase division
   |=  [axe=*axis vax=*vase]  ~|  %slot  ^-  *vase
   (pour(env vax) [~ axe])
+::
+++  swat                                                ::  show trace stack
+  |=  wem=*(list shoe)  ~|  %swat  ^-  *tank
+  :+  %rose
+    [[' ' ~] ['[' ~]  [']' ~]]
+  %-  flop
+  %+  turn
+    wem
+  |=  [yos=*shoe]
+  ?-  -.yos
+    %bean  (show %q +.yos)
+    %mean  $:+.yos
+    %spot  (show %o +.yos)
+  == 
+::
+++  swig                                                ::  show event counts
+  |=  hoy=*(map term num)  ~|  %swig  ^-  *tank
+  :+  %rose
+    [[' ' ~] ['{' ~]  ['}' ~]]
+  %+  turn
+    (sort (~(tap by hoy) ~) |=([p=* q=*] (aor -.p -.q)))
+  |=([p=*term q=@] (show [%c p] [%d q]))
+::
+++  swim                                                ::  show run samples
+  |=  toq=(shot)  ~|  %swim  ^-  *tank
+  :+  %rose
+    [[' ' ~] ['<' ~]  ['>' ~]]
+  ?:  =(~ q.toq)
+    [(show %d p.toq) ~]
+  %+  turn
+    q.toq
+  |=  [p=*term q=(shot)]
+  :+  %palm
+    [['.' ~] ['-' ~] ~ ~]
+  [[%leaf (mesc (trip p))] $$(toq q) ~]
 ::
 ++  wash                                                ::  print tank
   |=  [[tab=0 edg=80] tac=*tank]  ~|  %wash  ^-  *wall

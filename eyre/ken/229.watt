@@ -486,6 +486,26 @@
   ::
   ::      Tier 3d, noun orders
   ::
+  ++  aor
+    ~.  %aor
+    |=  [a=* b=*]
+    ^-  ?
+    ?:  =(a b)
+      &
+    ?.  ?=(@ a)
+      ?.  ?=(@ b)
+        ?:  =(-.a -.b)
+          $(a +.a, b +.b)
+        $(a -.a, b -.a)
+      |
+    ?.  ?=(@ b)
+      &
+    |-
+    =+  [c=(end 3 1 a) d=(end 3 1 b)]
+    ?:  =(c d)
+      $(a (rsh 3 1 a), b (rsh 3 1 b)) 
+    (lth c d)
+  :: 
   ++  dor
     ~.  %dor
     |=  [a=* b=*]
