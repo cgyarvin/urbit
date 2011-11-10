@@ -64,9 +64,9 @@
           [%mean |.(*tank)]               ::  prettyprint trigger
           [%spot *spot]                   ::  source position
       ==
-    ++  shot                              ::  profile path with count
-      $~  p=@                             ::  sample count
-          q=((list ~[p=(term) q=(shot)])) ::  sample divisions
+    ++  shot
+      $~  p=@
+          q=((list ~[p=(term) q=`(shot)`[@ ~]]))
       ==
     ++  slab                              ::  complete execution record
       $~  p=((list shoe))                 ::  stack trace

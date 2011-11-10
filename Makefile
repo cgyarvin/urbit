@@ -20,7 +20,8 @@ BIN=bin
 
 RM=rm -f
 CC=gcc
-CLD=gcc -O3 -L/sw/lib
+#CLD=gcc -O3 -L/sw/lib
+CLD=gcc -O3
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
