@@ -32,82 +32,12 @@ u2_flag EyreSmoke;
     */
       extern u2_ho_driver j2_da(k_229);
       extern u2_ho_driver j2_da(k_230);
-//      extern u2_ho_driver j2_da(k_231);
-//      extern u2_ho_driver j2_da(k_232);
-//      extern u2_ho_driver j2_da(k_233);
-//      extern u2_ho_driver j2_da(k_234);
-
-//      extern u2_ho_driver j2_da(k_235);
-//      extern u2_ho_driver j2_da(k_236);
-//      extern u2_ho_driver j2_da(k_237);
-//      extern u2_ho_driver j2_da(k_238);
-//      extern u2_ho_driver j2_da(k_239);
-//      extern u2_ho_driver j2_da(k_240);
-//      extern u2_ho_driver j2_da(k_241);
-//      extern u2_ho_driver j2_da(k_242);
-//      extern u2_ho_driver j2_da(k_243);
-//      extern u2_ho_driver j2_da(k_244);
-//      extern u2_ho_driver j2_da(k_245);
-//      extern u2_ho_driver j2_da(k_246);
-//      extern u2_ho_driver j2_da(k_247);
-//      extern u2_ho_driver j2_da(k_248);
-//      extern u2_ho_driver j2_da(k_249);
-//      extern u2_ho_driver j2_da(k_250);
-//      extern u2_ho_driver j2_da(k_251);
-//      extern u2_ho_driver j2_da(k_252);
-//      extern u2_ho_driver j2_da(k_253);
-//      extern u2_ho_driver j2_da(k_254);
-//      extern u2_ho_driver j2_da(k_255);
-//      extern u2_ho_driver j2_da(k_256);
-//      extern u2_ho_driver j2_da(k_257);
-//      extern u2_ho_driver j2_da(k_258);
-//      extern u2_ho_driver j2_da(k_259);
-//      extern u2_ho_driver j2_da(k_260);
-//      extern u2_ho_driver j2_da(k_261);
-//      extern u2_ho_driver j2_da(k_262);
-//      extern u2_ho_driver j2_da(watt_263);
-//      extern u2_ho_driver j2_da(watt_264);
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       u2_ho_driver *HostDriverBase[] = {
         &j2_da(k_229),
         &j2_da(k_230),
-
-//        &j2_da(k_231),
-//        &j2_da(k_232),
-//        &j2_da(k_233),
-//        &j2_da(k_234),
-//        &j2_da(k_235),
-//        &j2_da(k_236),
-//        &j2_da(k_237),
-//        &j2_da(k_238),
-//        &j2_da(k_239),
-//        &j2_da(k_240),
-//        &j2_da(k_241),
-//        &j2_da(k_242),
-//        &j2_da(k_243),
-//        &j2_da(k_244),
-//        &j2_da(k_245),
-//        &j2_da(k_246),
-//        &j2_da(k_247),
-//        &j2_da(k_248),
-//        &j2_da(k_249),
-//        &j2_da(k_250),
-//        &j2_da(k_251),
-//        &j2_da(k_252),
-//        &j2_da(k_253),
-//        &j2_da(k_254),
-//        &j2_da(k_255),
-//        &j2_da(k_256),
-//        &j2_da(k_257),
-//        &j2_da(k_258),
-//        &j2_da(k_259),
-//        &j2_da(k_260),
-//        &j2_da(k_261),
-//        &j2_da(k_262),
-//        &j2_da(watt_263), 
-//        &j2_da(watt_264), 
         0
       };
 

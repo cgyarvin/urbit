@@ -1,13 +1,5 @@
 !:
 &.
-++  shot
-  |=  `*`[p=@ q=`((list shot))`~]
-  [->- ((list shot) ->+)]
-
-++  shit
-  $~  p=@
-      q=((list ~[p=(term) q=`(shit)`[* ~]]))
-  ==
 ::
 ::      Tier 2y, gear assembly
 ::

@@ -61,12 +61,17 @@
     ++  path  (list tape)                 ::  unix path
     ++  shoe                              ::  trace stack layer
       $^  [%bean *]                       ::  raw noun
+          [%lose *term]                   ::  error message
           [%mean |.(*tank)]               ::  prettyprint trigger
           [%spot *spot]                   ::  source position
       ==
-    ++  shot
-      $~  p=@
-          q=((list ~[p=(term) q=`(shot)`[@ ~]]))
+    ++  shot                              ::  profile sample
+      $~  p=@                             ::  number of samples
+          ^=  q                           ::  subsamples
+          %*  %-  list
+              $~  p=(term)
+                  q=`*shot`[@ ~]
+              ==
       ==
     ++  slab                              ::  complete execution record
       $~  p=((list shoe))                 ::  stack trace
@@ -346,7 +351,7 @@
   |=([p=*term q=@] (show [%c p] [%d q]))
 ::
 ++  swim                                                ::  show run samples
-  |=  toq=(shot)  ~|  %swim  ^-  *tank
+  |=  toq=*shot  ~|  %swim  ^-  *tank
   :+  %rose
     [[' ' ~] ['<' ~]  ['>' ~]]
   ?:  =(~ q.toq)

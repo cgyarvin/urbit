@@ -4,268 +4,185 @@
 */
   /** Data structures.
   **/
-    /* u2_loom_marx: watermark profile.
-    */
-      typedef struct _u2_loom_marx {
-        /* Current count.
-        */
-        c3_w cur_w;
-
-        /* Original count.
-        */
-        c3_w org_w;
-
-        /* Maximum count.
-        */
-        c3_w max_w;
-      } u2_loom_marx;
-
     /* u2_loom_knot: profile node.
     */
       typedef struct _u2_loom_knot {
-        /* Section name - presumably a terminal.
+        /* Task name - 31-byte prefix.
         */
-        u2_noun lic;
+        c3_c lic_c[32];
 
-        /* Number of hits for which this section is final.
+        /* Number of hits in this task.
         */
         c3_w fin_w;
 
-        /* Child list, if any.
+        /* Subtask list, if any.
         */
-        struct _u2_loom_knot *fam_p;
-
-        /* Next knot in this list.
-        */
-        struct _u2_loom_knot *nex_p;
+        struct _u2_loom_knot *fam_k;
+        struct _u2_loom_knot *nex_k;
       } u2_loom_knot;
 
     /* u2_loom_trac: tracing/profiling control structure.
     */
       typedef struct _u2_loom_trac {
+        /* Control.
+        */
+          struct {
+            /* u2_yes iff debugging is on.
+            */
+            u2_flag deb;
+
+            /* u2_yes iff profiling is on.
+            */
+            u2_flag pro;
+          } cor;
+
         /* Tracing.
         */
-        struct {
-          /* Position stack: *(list $^([& [* [@ @] [@ @]]] [| |.(*tank)]))
-          */
-          u2_noun ryp;
-        } wer; 
+          struct {
+            /* Position stack: *(list shoe) 
+            */
+            u2_noun ryp;
+          } wer; 
 
         /* Profiling.
         */
-        struct {
-          /* Task stack: *(list term)
-          */
-          u2_noun don;
+          struct {
+            /* Task stack: *(list term)
+            */
+            u2_noun don;
 
-          /* Task record.
-          */
-          u2_loom_prof *liv;
-
-          /* Act count: *(map term num)
-          */
-          u2_noun cot;
-        } duz;
+            /* Act count: *(map term num)
+            */
+            u2_noun cot;
+          } duz;
 
         /* Built-in system acts and counters.
         */
-        struct {
-          /* Nock reductions.
-          */
-          c3_d hop_d;
+          struct {
+            /* Nock reductions.
+            */
+            c3_d hop_d;
 
-          /* Jet activations.
-          */
-          c3_d jet_d;
+            /* Jet activations.
+            */
+            c3_d jet_d;
 
-          /* Jet tests.
-          */
-          c3_d tes_d;
+            /* Jet tests.
+            */
+            c3_d tes_d;
 
-          /* Matching comparisons.
-          */
-          c3_d nod_d;
+            /* Matching comparisons.
+            */
+            c3_d nod_d;
 
-          /* C stack record.
-          */
-          c3_ds cas_ds;
+            /* C stack record.
+            */
+            c3_ds cas_ds;
 
-          /* Main memory usage record.
-          */
-          c3_ds mey_d;
+            /* Main memory usage record.
+            */
+            c3_ds mey_ds;
 
-          /* Basket memory usage record.
-          */
-          c3_ds 
+            /* Basket memory usage record.
+            */
+            c3_ds bek_ds;
 
-          u2_loom_marx bek_m;
+            /* Unix time in seconds at analysis instantiation.
+            */
+            c3_w sec_w;
 
-          /* Unix time in seconds at analysis instantiation.
-          */
-          c3_w sec_w;
+            /* Unix time in microseconds at analysis instantiation.
+            */
+            c3_w usc_w;
+          } sys;
+      } u2_loom_trac;
 
-          /* Unix time in microseconds at analysis instantiation.
-          */
-          c3_w usc_w;
-        } sys;
-      };
-
-#define   u2_benx_at(bex_r, wof)        *u2_at(bex_r, u2_loom_benx, wof)
-#define   u2_benx_be(bex_r, ite, wof)   *u2_be(bex_r, u2_loom_benx, ite, wof)
-
+#define   u2_trac_at(rac_r, wof)        *u2_at(rac_r, u2_loom_trac, wof)
+#define   u2_trac_be(rac_r, ite, wof)   *u2_be(rac_r, u2_loom_trac, ite, wof)
 
   /** Functions.
   **/
     /** Lifecycle.
     **/
-      /* u2_tx_show(): produce a profile noun to render.  Reset state.
+      /* u2_tx_init(): initialize state.
+      */
+        u2_ray
+        u2_tx_init(u2_ray wir_r);
+
+      /* u2_tx_done(): produce a profile slab to render.  Close tracing.
       **
-      ** Type:
-      **  
-      **  
+      ** type:
       */ 
         u2_noun                                                   //  produce
-        u2_tx_show(u2_wire wir_r);
+        u2_tx_done(u2_ray wir_r);
 
-      /* u2_tx_boot(): reset state.
+      /* u2_tx_open(): open tracing.
       */
         void
-        u2_tx_boot(u2_wire wir_r);
+        u2_tx_open(u2_ray wir_r);
 
-    /** Recording.
+      /* u2_tx_do_*(): set debug/profile flag.  Return old value.
+      */
+        u2_flag u2_tx_do_debug(u2_ray wir_r, u2_flag lag);
+        u2_flag u2_tx_do_profile(u2_ray wir_r, u2_flag lag);
+
+      /* u2_tx_in_*(): get debug/profile flag.
+      */
+        u2_flag u2_tx_in_debug(u2_ray wir_r);
+        u2_flag u2_tx_in_profile(u2_ray wir_r);
+
+    /** Actions.
     **/
-      /* Record hop, jet, tes, nod.
+      /* u2_tx_get_*(): get debug, profile flags.
       */
-        void u2_tx_did_hop(u2_wire wir_r);
-        void u2_tx_did_jet(u2_wire wir_r);
-        void u2_tx_did_tes(u2_wire wir_r);
-        void u2_tx_did_nod(u2_wire wir_r);
-
-      /* Record signed change in watermarks.
+        u2_tx_get_
+      /* u2_tx_did_*(): record system actions.
       */
-        void u2_tx_add_cas(u2_wire wir_r, c3_ws add_ws);
-        void u2_tx_add_mey(u2_wire wir_r, c3_ws add_ws);
-        void u2_tx_add_cas(u2_wire wir_r, c3_ws add_ws);
+        void u2_tx_did_hop(u2_ray wir_r);
+        void u2_tx_did_jet(u2_ray wir_r);
+        void u2_tx_did_tes(u2_ray wir_r);
+        void u2_tx_did_nod(u2_ray wir_r);
 
-      /* Record 
+      /* u2_tx_did_act(): record user actions.
+      */
+        void 
+        u2_tx_did_act(u2_ray  wir_r, 
+                      u2_noun did);                               //  retain
 
-    /* u2_bx_boot(): reset the performance log.
-    */
-      void
-      u2_bx_boot(u2_ray wir_r);
+      /* u2_tx_add_*(): record signed change in watermarks.
+      */
+        void u2_tx_add_cas(u2_ray wir_r, c3_ws add_ws);
+        void u2_tx_add_mey(u2_ray wir_r, c3_ws add_ws);
+        void u2_tx_add_cas(u2_ray wir_r, c3_ws add_ws);
 
-    /* u2_bx_post(): export and reset the performance log.
-    **
-    **  zat: source position stack (on shed)
-    **  zof: programer action stack (on shed)
-    **  sap: number of steps
-    **  cop: number of words copied
-    **  det: number of identical nouns compared
-    **  jax: number of jet activations
-    **  use: number of user counts
-    **  wax: maximum depth of C stack
-    **  viq: words in wire allocated
-    **  zor: words in basket allocated
-    **  ums: number of milliseconds consumed
-    */
-      u2_flag
-      u2_bx_post(u2_ray   wir_r,
-                 u2_noun* zat,
-                 u2_noun* zof, 
-                 c3_d*    sap_d,
-                 c3_d*    cop_d,
-                 c3_d*    det_d,
-                 c3_d*    jax_d,
-                 c3_d*    use_d,
-                 c3_w*    wax_w,
-                 c3_ws*   viq_ws,
-                 c3_ws*   zor_ws,
-                 c3_w*    ums_w);
+    /** Tasks.
+    **/
+      /* u2_tx_task_in(): enter a task for profiling purposes.
+      **
+      ** u2_yes iff the task is not already in the stack.
+      */
+        u2_flag
+        u2_tx_task_in(u2_ray  wir_r, 
+                      u2_noun tak);                               //  retain
 
-    /* u2_bx_spot(): declare source position.
-    */
-      void
-      u2_bx_spot(u2_ray  wir_r,
-                 u2_noun hod);                                    //  transfer
+      /* u2_tx_task_out(): leave a task for profiling purposes.
+      */
+        void
+        u2_tx_task_out(u2_ray  wir_r);
 
-    /* u2_bx_loaf(): print debug wall.
-    */
-      void
-      u2_bx_loaf(u2_ray  wir_r,
-                 u2_noun wal);                                    //  retain
+    /** Direct logging.
+    **/
+      /* u2_tx_log(): log a wall.  Discouraged.
+      */
+        void
+        u2_tx_log(u2_ray  wir_r, 
+                  u2_noun wal);                                   //  retain
 
-    /* u2_bx_bean_ent(), u2_bx_bean_out(): enter and exit execution state.
-    */
-      void
-      u2_bx_bean_ent(u2_ray  wir_r,
-                     u2_noun hod);                                //  transfer
-      void
-      u2_bx_bean_out(u2_ray wir_r);
-
-    /* u2_bx_step(): note interpreter step.
-    */
-      void
-      u2_bx_step(u2_ray wir_r);
-
-    /* u2_bx_copy(): note `cop` copied words.
-    */
-      void 
-      u2_bx_copy(u2_ray wir_r,
-                 c3_w   cop_w);
-
-    /* u2_bx_dent(): note 'det' identicals.
-    */
-      void 
-      u2_bx_dent(u2_ray wir_r,
-                 c3_w   det_w);
-
-    /* u2_bx_shed(): note `wad` allocated/freed words in hangar.
-    */
-      void
-      u2_bx_shed(u2_ray wir_r,
-                 c3_ws  wad_ws); 
-  
-    /* u2_bx_bask(): note `wad` allocated/freed words in basket.
-    */
-      void
-      u2_bx_bask(u2_ray wir_r,
-                 c3_ws  wad_ws);
-
-    /* u2_bx_sink(): go deeper (call) in the C stack.
-    */
-      void
-      u2_bx_sink(u2_ray wir_r);
-
-    /* u2_bx_rise(): go shallower (return) in the C stack.
-    */
-      void 
-      u2_bx_rise(u2_ray wir_r);
-
-    /* u2_bx_used(): report a user count.
-    */
-      void
-      u2_bx_used(u2_ray wir_r);
-
-    /* u2_bx_flew(): report a jet activation.
-    */
-      void
-      u2_bx_flew(u2_ray wir_r);
-
-    /* u2_bx_mark(): update memory watermarks.
-    */
-      void
-      u2_bx_mark(u2_ray wir_r);
-
-    /* u2_bx_show(): print benchmark report and clear structure.
-    */
-      void
-      u2_bx_show(u2_ray wir_r);
-
-    /* u2_bx_warn(): report a warning at file and line.
-    */
-      void
-      u2_bx_warn(u2_ray      wir_r,
-                 const c3_c* fil_c,
-                 c3_w        lyn_w);
-#     define u2_bx_warn_here(wir_r) u2_bx_warn(wir_r, __FILE__, __LINE__)
+      /* u2_tx_warn(): report a warning by internal file and line.
+      */
+        void
+        u2_tx_warn(u2_ray      wir_r,
+                   const c3_c* fil_c,
+                   c3_w        lyn_w);
+#       define u2_tx_warn_here(wir_r) u2_bx_warn(wir_r, __FILE__, __LINE__)
 

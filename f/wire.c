@@ -61,6 +61,13 @@ u2_wr_init(c3_m   hip_m,
     u2_bx_boot(wir_r);
   }
 
+  /* New performance tracking.
+  */
+  {
+    u2_wire_rac_r(wir_r) = 
+    u2_tx_init(wir_r);
+  }
+
   return wir_r;
 }
 
