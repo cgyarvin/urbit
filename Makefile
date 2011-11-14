@@ -51,6 +51,7 @@ F_OFILES=\
        f/cash.o \
        f/host.o \
        f/benx.o \
+       f/trac.o \
        f/bail.o \
        f/bask.o \
        f/dash.o \

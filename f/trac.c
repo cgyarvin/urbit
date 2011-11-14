@@ -8,7 +8,7 @@
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt4Y   k_230__a__b__c__d__e
+#   define Pt4Y   k_230__a__b__c__d
 
     u2_noun
     j2_mcc(Pt4Y, by, has)(u2_wire, u2_noun a, u2_noun b);
@@ -26,7 +26,7 @@
     
     u2_loom_knot  _tx_knots[U2_TRAC_SAMPLE_MAX];
     u2_loom_knot* _tx_top_k;
-    u2_ray        _tx_rac;
+    u2_ray        _tx_rac_r;
     c3_w          _tx_knot_cur;
     c3_t          _tx_on;
 
@@ -87,7 +87,7 @@
     _tx_sample(c3_i x)
     {
       c3_assert(_tx_on == 1);
-      _tx_sample_in(u2_trac_at(rac_r, don));
+      _tx_sample_in(u2_trac_at(_tx_rac_r, duz.don));
     }
 
 /* u2_tx_samp_on(): turn profile sampling on, clear count.
@@ -99,21 +99,22 @@ _tx_samp_on(u2_ray rac_r)
   c3_assert(_tx_knot_cur == 0);
   
   _tx_on = 1;
+  _tx_rac_r = rac_r;
   {
-    strict itimerval itm_v;
+    struct itimerval itm_v;
     struct sigaction sig_s;
 
     sig_s.__sigaction_u.__sa_handler = _tx_sample;
     sig_s.sa_mask = 0;
     sig_s.sa_flags = 0;
 
-    sigaction(SIGVTALARM, &sig_s);
+    sigaction(SIGVTALRM, &sig_s, 0);
 
     itm_v.it_interval.tv_sec = 0;
     itm_v.it_interval.tv_usec = 10;
     itm_v.it_value = itm_v.it_interval;
 
-    setitimer(ITIMER_VIRTUAL, &it, 0);
+    setitimer(ITIMER_VIRTUAL, &itm_v, 0);
   }
 }
 
@@ -124,25 +125,25 @@ _tx_samp_off(u2_ray rac_r)
 {
   c3_assert(_tx_on == 1);
   struct sigaction sig_s;
-  strict itimerval itm_v;
+  struct itimerval itm_v;
 
   itm_v.it_interval.tv_sec = 0;
   itm_v.it_interval.tv_usec = 0;
   itm_v.it_value = itm_v.it_interval;
 
-  setitimer(ITIMER_VIRTUAL, &it, 0);
+  setitimer(ITIMER_VIRTUAL, &itm_v, 0);
 
   sig_s.__sigaction_u.__sa_handler = SIG_DFL;
   sig_s.sa_mask = 0;
   sig_s.sa_flags = 0;
 
-  sigaction(SIGVTALARM, &sig_s);
+  sigaction(SIGVTALRM, &sig_s, 0);
 }
 
 /* _tx_samples_in(): sample list.
 */
 static u2_weak
-_tx_samples_in(u2_wire wir_r, u2_loom_knot *fam_k);
+_tx_samples_in(u2_wire wir_r, u2_loom_knot *fam_k)
 {
   if ( 0 == fam_k ) {
     return u2_nul;
@@ -201,7 +202,7 @@ _tx_events(u2_wire wir_r,
       u2_rz(wir_r, cot); u2_rz(wir_r, str); return u2_none;
     }
     if ( u2_none == (vez = _tx_put(wir_r, cot, str, val)) ) {
-      u2_rz(wir_rz, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
+      u2_rz(wir_r, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
     }
     u2_rz(wir_r, cot);
     cot = vez;
@@ -217,7 +218,7 @@ _tx_events(u2_wire wir_r,
       u2_rz(wir_r, cot); u2_rz(wir_r, str); return u2_none;
     }
     if ( u2_none == (vez = _tx_put(wir_r, cot, str, val)) ) {
-      u2_rz(wir_rz, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
+      u2_rz(wir_r, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
     }
     u2_rz(wir_r, cot);
     cot = vez;
@@ -233,7 +234,7 @@ _tx_events(u2_wire wir_r,
       u2_rz(wir_r, cot); u2_rz(wir_r, str); return u2_none;
     }
     if ( u2_none == (vez = _tx_put(wir_r, cot, str, val)) ) {
-      u2_rz(wir_rz, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
+      u2_rz(wir_r, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
     }
     u2_rz(wir_r, cot);
     cot = vez;
@@ -249,7 +250,7 @@ _tx_events(u2_wire wir_r,
       u2_rz(wir_r, cot); u2_rz(wir_r, str); return u2_none;
     }
     if ( u2_none == (vez = _tx_put(wir_r, cot, str, val)) ) {
-      u2_rz(wir_rz, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
+      u2_rz(wir_r, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
     }
     u2_rz(wir_r, cot);
     cot = vez;
@@ -269,7 +270,7 @@ _tx_events(u2_wire wir_r,
       u2_rz(wir_r, cot); u2_rz(wir_r, str); return u2_none;
     }
     if ( u2_none == (vez = _tx_put(wir_r, cot, str, val)) ) {
-      u2_rz(wir_rz, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
+      u2_rz(wir_r, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
     }
     u2_rz(wir_r, cot);
     cot = vez;
@@ -289,7 +290,7 @@ _tx_events(u2_wire wir_r,
       u2_rz(wir_r, cot); u2_rz(wir_r, str); return u2_none;
     }
     if ( u2_none == (vez = _tx_put(wir_r, cot, str, val)) ) {
-      u2_rz(wir_rz, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
+      u2_rz(wir_r, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
     }
     u2_rz(wir_r, cot);
     cot = vez;
@@ -309,7 +310,7 @@ _tx_events(u2_wire wir_r,
       u2_rz(wir_r, cot); u2_rz(wir_r, str); return u2_none;
     }
     if ( u2_none == (vez = _tx_put(wir_r, cot, str, val)) ) {
-      u2_rz(wir_rz, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
+      u2_rz(wir_r, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
     }
     u2_rz(wir_r, cot);
     cot = vez;
@@ -342,18 +343,17 @@ _tx_events(u2_wire wir_r,
       u2_rz(wir_r, cot); u2_rz(wir_r, str); return u2_none;
     }
     if ( u2_none == (vez = _tx_put(wir_r, cot, str, val)) ) {
-      u2_rz(wir_rz, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
+      u2_rz(wir_r, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
     }
     u2_rz(wir_r, cot);
     cot = vez;
   }
-
   return cot;
 }
 
 /* u2_tx_init(): initialize state.
 */
-void
+u2_ray
 u2_tx_init(u2_wire wir_r)
 {
   u2_ray rac_r = u2_rl_ralloc(wir_r, c3_wiseof(u2_loom_trac));
@@ -375,21 +375,21 @@ u2_tx_open(u2_wire wir_r)
   u2_trac_at(rac_r, duz.don) = u2_nul;
   u2_trac_at(rac_r, duz.cot) = u2_nul;
 
-  u2_trac_be(rac_r, c3_d, hop_d) = 0;
-  u2_trac_be(rac_r, c3_d, jet_d) = 0;
-  u2_trac_be(rac_r, c3_d, tes_d) = 0;
-  u2_trac_be(rac_r, c3_d, nod_d) = 0;
+  u2_trac_be(rac_r, c3_d, sys.hop_d) = 0;
+  u2_trac_be(rac_r, c3_d, sys.jet_d) = 0;
+  u2_trac_be(rac_r, c3_d, sys.tes_d) = 0;
+  u2_trac_be(rac_r, c3_d, sys.nod_d) = 0;
 
-  u2_trac_be(rac_r, c3_ds, cas_ds) = 0;
-  u2_trac_be(rac_r, c3_ds, mey_ds) = 0;
-  u2_trac_be(rac_r, c3_ds, bek_ds) = 0;
+  u2_trac_be(rac_r, c3_ds, sys.cas_ds) = 0;
+  u2_trac_be(rac_r, c3_ds, sys.mey_ds) = 0;
+  u2_trac_be(rac_r, c3_ds, sys.bek_ds) = 0;
 
   {
     struct timeval tv;
 
     gettimeofday(&tv, 0);
-    u2_trac_at(rac_r, sec_w) = tv.tv_sec;
-    u2_trac_at(rac_r, usc_w) = tv.tv_usec;
+    u2_trac_at(rac_r, sys.sec_w) = tv.tv_sec;
+    u2_trac_at(rac_r, sys.usc_w) = tv.tv_usec;
   }
 
   if ( u2_yes == u2_trac_at(rac_r, cor.pro) ) {
@@ -405,8 +405,10 @@ u2_tx_done(u2_wire wir_r)
   u2_ray rac_r = u2_wire_rac_r(wir_r);
   u2_noun p_sab = u2_nul, q_sab = u2_nul, r_sab = u2_nul;
 
+  _tx_samp_off(rac_r);
+
   if ( u2_yes != u2_trac_at(rac_r, cor.deb) ) {
-    p_sab = u2_rx(wir_r, u2_trac_at(wer.ryp));
+    p_sab = u2_rx(wir_r, u2_trac_at(rac_r, wer.ryp));
   }
   if ( u2_yes != u2_trac_at(rac_r, cor.pro) ) {
     q_sab = _tx_events(wir_r, u2_trac_at(rac_r, duz.cot));
@@ -507,36 +509,47 @@ void
 u2_tx_did_act(u2_wire wir_r, 
               u2_noun did)                                        //  retain
 {
-  u2_noun cot = u2_trac_at(rac_r, duz.cot);
+  u2_ray  rac_r = u2_wire_rac_r(wir_r);
+  u2_noun cot   = u2_trac_at(rac_r, duz.cot);
   u2_noun zot;
   u2_noun gox;
 
-  if ( u2_none == (gox = tx_has(wir_r, cot, did)) ) {
+  if ( u2_none == (gox = _tx_has(wir_r, cot, did)) ) {
     zot = _tx_put(wir_r, cot, did, _1);
   } else {
     zot = _tx_put(wir_r, cot, did, u2_rl_vint(wir_r, gox));
   }
-  u2_rz(wir_r, cot);
-  u2_trac_at(rac_r, duz.cot) = zot;
+  if ( u2_none != zot ) {
+    u2_rz(wir_r, cot);
+    u2_trac_at(rac_r, duz.cot) = zot;
+  }
 }
 
-/* u2_tx_add_*(): record signed change in watermarks.
+/* u2_tx_add_cas(): record signed change in C stack watermark.
 */
 void u2_tx_add_cas(u2_wire wir_r, c3_ws add_ws)
 {
   u2_ray rac_r = u2_wire_rac_r(wir_r);
 
-  u2_trac_be(rac_r, c3_ds, sys.
+  u2_trac_be(rac_r, c3_ds, sys.cas_ds) += add_ws;
 }
 
-void u2_tx_add_mey(u2_wire wir_r, c3_ws add_ws);
+/* u2_tx_add_mey(): record signed change in memory watermark.
+*/
+void u2_tx_add_mey(u2_wire wir_r, c3_ws add_ws)
 {
   u2_ray rac_r = u2_wire_rac_r(wir_r);
+
+  u2_trac_be(rac_r, c3_ds, sys.mey_ds) += add_ws;
 }
 
-void u2_tx_add_cas(u2_wire wir_r, c3_ws add_ws);
+/* u2_tx_add_bek(): record signed change in memory watermark.
+*/
+void u2_tx_add_bek(u2_wire wir_r, c3_ws add_ws)
 {
   u2_ray rac_r = u2_wire_rac_r(wir_r);
+
+  u2_trac_be(rac_r, c3_ds, sys.bek_ds) += add_ws;
 }
 
 /* u2_tx_task_in(): enter a task for profiling purposes.
@@ -548,6 +561,32 @@ u2_tx_task_in(u2_wire wir_r,
               u2_noun tak)                                        //  retain
 {
   u2_ray rac_r = u2_wire_rac_r(wir_r);
+  u2_noun don = u2_trac_at(rac_r, duz.don);
+  u2_noun dim;
+
+  /* Test if we're already doing this.
+  */
+  {
+    dim = don;
+
+    while ( don != u2_nul ) {
+      if ( u2_yes == u2_sing(tak, u2_h(don)) ) {
+        return u2_no;
+      }
+      don = u2_t(don);
+    }
+  }
+
+  dim = u2_rc(wir_r, u2_rx(wir_r, tak), u2_rx(wir_r, don));
+  if ( u2_none == dim ) {
+    return u2_no;
+  }
+  else {
+    u2_rz(wir_r, don);
+    u2_trac_at(rac_r, duz.don) = dim;
+
+    return u2_yes;
+  }
 }
 
 /* u2_tx_task_out(): leave a task for profiling purposes.
@@ -555,6 +594,10 @@ u2_tx_task_in(u2_wire wir_r,
 void
 u2_tx_task_out(u2_wire wir_r)
 {
+  u2_ray  rac_r = u2_wire_rac_r(wir_r);
+  u2_noun don = u2_trac_at(rac_r, duz.don);
+
+  c3_assert(u2_nul != don);
 }
 
 /* u2_tx_log(): log a wall.  Discouraged.

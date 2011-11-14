@@ -133,9 +133,6 @@
 
     /** Actions.
     **/
-      /* u2_tx_get_*(): get debug, profile flags.
-      */
-        u2_tx_get_
       /* u2_tx_did_*(): record system actions.
       */
         void u2_tx_did_hop(u2_ray wir_r);

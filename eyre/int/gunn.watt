@@ -338,6 +338,7 @@
   |=  [yos=*shoe]
   ?-  -.yos
     %bean  (show %q +.yos)
+    %lose  (show %t +.yos)
     %mean  $:+.yos
     %spot  (show %o +.yos)
   == 
