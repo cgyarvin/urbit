@@ -25,6 +25,7 @@ _nock_rock(u2_wire wir_r,
 
   while ( 1 ) {
     u2_bx_step(wir_r);
+    u2_tx_did_hop(wir_r);
 
     if ( LoomStop ) {
       if ( LoomIntr ) {
@@ -542,9 +543,6 @@ _nock_sand(u2_wire wir_r,
   u2_noun hib, gal;
 
   while ( 1 ) {
-    u2_bx_mark(wir_r);
-    u2_bx_step(wir_r);
-
     if ( u2_no == u2_as_cell(fol, &hib, &gal) ) {
       return u2_none;
     }

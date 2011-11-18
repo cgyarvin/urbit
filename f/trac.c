@@ -97,9 +97,15 @@ _tx_samp_on(u2_ray rac_r)
 {
   c3_assert(_tx_on == 0);
   c3_assert(_tx_knot_cur == 0);
-  
+ 
   _tx_on = 1;
   _tx_rac_r = rac_r;
+
+  _tx_top_k = _tx_knot_new();
+  _tx_top_k->lic_c[0] = 0;
+  _tx_top_k->fin_w = 0;
+  _tx_top_k->fam_k = _tx_top_k->nex_k = 0;
+
   {
     struct itimerval itm_v;
     struct sigaction sig_s;
@@ -111,7 +117,7 @@ _tx_samp_on(u2_ray rac_r)
     sigaction(SIGVTALRM, &sig_s, 0);
 
     itm_v.it_interval.tv_sec = 0;
-    itm_v.it_interval.tv_usec = 10;
+    itm_v.it_interval.tv_usec = 10000;
     itm_v.it_value = itm_v.it_interval;
 
     setitimer(ITIMER_VIRTUAL, &itm_v, 0);
@@ -126,6 +132,9 @@ _tx_samp_off(u2_ray rac_r)
   c3_assert(_tx_on == 1);
   struct sigaction sig_s;
   struct itimerval itm_v;
+
+  _tx_on = 0;
+  _tx_knot_cur = 0;
 
   itm_v.it_interval.tv_sec = 0;
   itm_v.it_interval.tv_usec = 0;
@@ -335,7 +344,7 @@ _tx_events(u2_wire wir_r,
 
     ums_w = (c3_w) (((new_d - old_d) + 999ULL) / 1000ULL);
 
-    if ( u2_none == (str = u2_rl_string(wir_r, "sys-hops")) ) {
+    if ( u2_none == (str = u2_rl_string(wir_r, "sys-msec")) ) {
       u2_rz(wir_r, cot);
       return u2_none;
     }
@@ -405,19 +414,18 @@ u2_tx_done(u2_wire wir_r)
   u2_ray rac_r = u2_wire_rac_r(wir_r);
   u2_noun p_sab = u2_nul, q_sab = u2_nul, r_sab = u2_nul;
 
-  _tx_samp_off(rac_r);
-
-  if ( u2_yes != u2_trac_at(rac_r, cor.deb) ) {
+  if ( u2_yes == u2_trac_at(rac_r, cor.deb) ) {
     p_sab = u2_rx(wir_r, u2_trac_at(rac_r, wer.ryp));
   }
-  if ( u2_yes != u2_trac_at(rac_r, cor.pro) ) {
+  if ( u2_yes == u2_trac_at(rac_r, cor.pro) ) {
+    _tx_samp_off(rac_r);
+
     q_sab = _tx_events(wir_r, u2_trac_at(rac_r, duz.cot));
     r_sab = _tx_samples(wir_r);
 
     if ( u2_none == q_sab ) q_sab = u2_nul;
     if ( u2_none == r_sab ) r_sab = u2_nul;
   }
-
   u2_rz(wir_r, u2_trac_at(rac_r, wer.ryp));
   u2_rz(wir_r, u2_trac_at(rac_r, duz.don));
   u2_rz(wir_r, u2_trac_at(rac_r, duz.cot));

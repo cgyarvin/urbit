@@ -14,6 +14,9 @@
     %sell  sell
     %soul  soul
     %slot  slot
+    %swat  swat
+    %swig  swig
+    %swim  swim
     %wash  wash
     %whip  whip
   ==
@@ -331,7 +334,7 @@
 ++  swat                                                ::  show trace stack
   |=  wem=*(list shoe)  ~|  %swat  ^-  *tank
   :+  %rose
-    [[' ' ~] ['[' ~]  [']' ~]]
+    [[' ' ~] ['[' ~] [']' ~]]
   %-  flop
   %+  turn
     wem
@@ -346,7 +349,7 @@
 ++  swig                                                ::  show event counts
   |=  hoy=*(map term num)  ~|  %swig  ^-  *tank
   :+  %rose
-    [[' ' ~] ['{' ~]  ['}' ~]]
+    [[' ' ~] ['{' ~] ['}' ~]]
   %+  turn
     (sort (~(tap by hoy) ~) |=([p=* q=*] (aor -.p -.q)))
   |=([p=*term q=@] (show [%c p] [%d q]))
@@ -354,7 +357,7 @@
 ++  swim                                                ::  show run samples
   |=  toq=*shot  ~|  %swim  ^-  *tank
   :+  %rose
-    [[' ' ~] ['<' ~]  ['>' ~]]
+    [[' ' ~] ['<' ~] ['>' ~]]
   ?:  =(~ q.toq)
     [(show %d p.toq) ~]
   %+  turn

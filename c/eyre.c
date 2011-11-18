@@ -19,6 +19,8 @@
 #include "all.h"
 
 #define GUNN
+#define PERF
+#define PERF_REAM
 
 #define EyreFirstKernel 230     //  counts down; max 264; > 259 needs nock7
 u2_flag EyreSmoke;
@@ -387,41 +389,6 @@ _eyre_ken(u2_wire wir_r,
     } else {
       nec_w--;
     }
-  }
-}
-
-/* _eyre_app(): load application core.
-*/
-static u2_noun                                                    //  produce
-_eyre_app(u2_wire wir_r, 
-          u2_noun ken,                                            //  retain
-          c3_c*   lid_c)                                          //  retain
-{
-  u2_ray kit_r = u2_bl_open(wir_r);
-
-  if ( u2_bl_set(wir_r) ) {
-    u2_bl_done(wir_r, kit_r);
-    fprintf(stderr, "{app: exit}\n");
-    exit(1);
-    return 0;
-  } else {
-    c3_c*   pot_c = _eyre_path_int(lid_c);
-    u2_noun src   = u2_ux_read(wir_r, pot_c, "watt");
-    u2_noun noc, cor;
-
-    printf("app: loading: %s\n", pot_c);
-
-    u2_bx_boot(wir_r);
-    noc = _eyre_nock(wir_r, u2_yes, src, ken);
-    cor = _eyre_nock(wir_r, u2_yes, 0, noc);
-    u2_bx_show(wir_r);
-
-    u2_rz(wir_r, noc);
-    printf("app: %s, %x\n", pot_c, u2_mug(cor));
-    free(pot_c);
-
-    u2_bl_done(wir_r, kit_r);
-    return cor;
   }
 }
 
@@ -1259,6 +1226,35 @@ _eyre_test2(u2_wire wir_r,
     u2_rz(wir_r, wol);
   }
 
+  /* _gunn_show_slab(): display slab.
+  */
+  static void
+  _gunn_show_slab(u2_wire wir_r,
+                  u2_noun cor,                                    //  retain
+                  u2_noun sab)                                    //  submit
+  {
+    if ( u2_nul == sab ) {
+      return;
+    } else {
+      u2_noun p_sab, q_sab, r_sab;
+
+      u2_bi_trel(wir_r, sab, &p_sab, &q_sab, &r_sab);
+      if ( u2_nul != p_sab ) {
+        _gunn_show_tank
+          (wir_r, cor, 0, _eyre_hook(wir_r, cor, "swat", u2_rx(wir_r, p_sab)));
+      }
+      if ( u2_nul != q_sab ) {
+        _gunn_show_tank
+          (wir_r, cor, 2, _eyre_hook(wir_r, cor, "swig", u2_rx(wir_r, q_sab)));
+      }
+      if ( u2_nul != r_sab ) {
+        _gunn_show_tank
+          (wir_r, cor, 2, _eyre_hook(wir_r, cor, "swim", u2_rx(wir_r, r_sab)));
+      }
+      u2_rz(wir_r, sab);
+    }
+  }
+
   /* _gunn_show(): display result with optional label.
   */
   static void
@@ -1381,6 +1377,59 @@ _eyre_gunn(u2_wire wir_r,
   }
 }
 
+/* _eyre_app(): load generic application core (assumes gunn).
+*/
+static u2_noun                                                    //  produce
+_eyre_app(u2_wire wir_r, 
+          u2_noun ken,                                            //  retain
+          c3_c*   lid_c)                                          //  retain
+{
+  u2_ray kit_r = u2_bl_open(wir_r);
+
+  if ( u2_bl_set(wir_r) ) {
+    u2_bl_done(wir_r, kit_r);
+    fprintf(stderr, "{app: exit}\n");
+    exit(1);
+    return 0;
+  } else {
+    c3_c*   pot_c = _eyre_path_int(lid_c);
+    u2_noun src   = u2_ux_read(wir_r, pot_c, "watt");
+    u2_noun fom, app, sab;
+
+    printf("app: loading: %s\n", pot_c);
+
+#ifdef PERF
+    u2_bx_boot(wir_r);
+    u2_tx_do_profile(wir_r, u2_yes);
+    {
+      u2_noun gen;
+
+      u2_tx_open(wir_r);
+      gen = _eyre_call_1(wir_r, u2_yes, ken, "ream:!%", src);
+      sab = u2_tx_done(wir_r);
+      u2_tx_do_profile(wir_r, u2_no);
+
+      u2_bx_show(wir_r);
+      fom = _eyre_call_1
+        (wir_r, u2_yes, ken, "|!(a=*gene q:(~(mint ut %noun) %noun a))", gen);
+    }
+#else
+    fom = _eyre_nock(wir_r, u2_yes, src, ken);
+    sab = u2_nul;
+#endif
+    app = _eyre_nock(wir_r, u2_yes, 0, fom);
+
+    u2_rz(wir_r, fom);
+    printf("app: %s, %x\n", pot_c, u2_mug(app));
+    free(pot_c);
+
+    if ( u2_nul != sab ) {
+      _gunn_show_slab(wir_r, app, sab);
+    }
+    return app;
+  }
+}
+
 /* _eyre_line(): execute and print a line.
 */
 static void
@@ -1396,9 +1445,10 @@ _eyre_line(u2_wire wir_r,
     fprintf(stderr, "{lose}\n");
   } else {
 #ifdef GUNN
-    u2_bx_boot(wir_r);
+    // u2_bx_boot(wir_r);
     _eyre_gunn(wir_r, cor, txt);
     // u2_bx_show(wir_r);
+
     u2_bl_done(wir_r, kit_r);
 #else
     u2_noun gat = u2_bn_hook(wir_r, cor, "line");
@@ -1562,4 +1612,3 @@ main(c3_i   argc,
   }
   return 0;
 }
-

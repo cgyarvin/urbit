@@ -330,7 +330,7 @@ u2_ds_look(u2_wire     wir_r,
         u2_noun pet = u2_t(u2_t(xip));
 
         if ( _0 == pet ) {
-          printf("no joy - %s\n", tam_c);
+          // printf("no joy - %s\n", tam_c);
           return u2_none;
         }
         else {

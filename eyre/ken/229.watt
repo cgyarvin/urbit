@@ -295,8 +295,8 @@
     ?~  a
       ~
     %+  weld
-      $(a (skim a.$ |=(c=i.a (b c i.a))))
-    `a.$`[i.a $(a (skim a.$ |=(c=i.a (b i.a c))))]
+      $(a (skim t.a |=(c=i.a (b c i.a))))
+    `t.a`[i.a $(a (skim t.a |=(c=i.a !(b c i.a))))]
   ::
   ++  turn
     ~.  %turn
@@ -496,7 +496,7 @@
       ?.  ?=(@ b)
         ?:  =(-.a -.b)
           $(a +.a, b +.b)
-        $(a -.a, b -.a)
+        $(a -.a, b -.b)
       |
     ?.  ?=(@ b)
       &
@@ -1095,21 +1095,21 @@
   ::      Tier 5a/3, parsing: rule composers
   ::
   ++  bass
-    |*  [rum=@ tyd=rule]
+    |*  [wuc=@ tyd=rule]
     %+  cook
       |=  waq=*(list rat)
       %+  roll
         waq
-      =+([p=@ q=@] |.((add p (mul rum q))))
+      =+([p=@ q=@] |.((add p (mul wuc q))))
     tyd
   ::
   ++  boss
-    |*  [rum=@ tyd=rule]
+    |*  [wuc=@ tyd=rule]
     %+  cook
       |=  waq=*(list rat)
       %+  reel
         waq
-      =+([p=@ q=@] |.((add p (mul rum q))))
+      =+([p=@ q=@] |.((add p (mul wuc q))))
     tyd
   ::
   ++  ifix
@@ -1419,17 +1419,23 @@
     ++  rt    `*tape`['\'' (weld (mesc (trip a)) `*tape`['\'' ~])]
     ++  rta   rt
     ++  rtam  `*tape`['%' (trip a)]
-    ++  rub   (rum 2 ['0' 'b' ~] |=(b=@ (add '0' b)))
+    ++  rub   `*tape`['0' 'b' (rum 2 ~ |=(b=@ (add '0' b)))]
     ++  rud   (rum 10 ~ |=(b=@ (add '0' b)))
     ++  rum
       |=  [b=@ c=*tape d=|+(@ @)]
-      %+  weld
-        c
       ^-  *tape
       ?:  =(0 a)
-        [(d 0) ~]
-      =+  e=*tape
-      |-(?:(=(0 a) e $(a (div a b), e [(d (mod a b)) e])))
+        [(d 0) c]
+      =+  e=0*
+      |-  ^-  *tape
+      ?:  =(0 a) 
+        c
+      =+  f=&(!=(0 e) =(0 (mod e ?:(=(10 b) 3 4))))
+      %=  $
+        a  (div a b)
+        c  [(d (mod a b)) ?:(f [?:(=(10 b) ',' ':') c] c)]
+        e  +(e)
+      ==
     ::
     ++  rup
       =+  b=(met 3 a)
@@ -1454,9 +1460,12 @@
       (weld $$(a c, b (met 3 c)) `*tape`['-' $(a (mix c d), b 2)])
     ::
     ++  ruv
+      ^-  *tape
+      :+  '0'
+        'v'
       %^    rum
           64
-        ['0' 'v' ~]
+        ~
       |=  b=@
       ?:  =(63 b)
         '+'
@@ -1464,7 +1473,7 @@
         '-'
       ?:((lth b 26) (add 65 b) ?:((lth b 52) (add 71 b) (sub b 4)))
     ::
-    ++  rux   (rum 16 ['0' 'x' ~] |=(b=@ (add b ?:((lth b 10) 48 87))))
+    ++  rux   `*tape`['0' 'x' (rum 16 ~ |=(b=@ (add b ?:((lth b 10) 48 87))))]
     --
   ::
   ++  show
