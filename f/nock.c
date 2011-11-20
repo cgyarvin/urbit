@@ -24,8 +24,7 @@ _nock_rock(u2_wire wir_r,
   u2_noun hib, gal;
 
   while ( 1 ) {
-    u2_bx_step(wir_r);
-    u2_tx_did_hop(wir_r);
+    u2_tx_did_hop(wir_r, 1);
 
     if ( LoomStop ) {
       if ( LoomIntr ) {
@@ -45,18 +44,18 @@ _nock_rock(u2_wire wir_r,
     if ( u2_yes == u2_dust(hib) ) {
       u2_weak poz, riv, hux;
 
-      LoomSink; u2_bx_sink(wir_r);
+      LoomSink; u2_tx_sink_cas(wir_r);
       poz = _nock_rock_keep(wir_r, bus, hib);
-      u2_bx_rise(wir_r); LoomRise;
+      u2_tx_rise_cas(wir_r); LoomRise;
 
       if ( u2_none == poz ) {
         u2_rl_lose(wir_r, bus);
         return u2_none;
       }
 
-      LoomSink; u2_bx_sink(wir_r);
+      LoomSink; u2_tx_sink_cas(wir_r);
       riv = _nock_rock(wir_r, bus, gal);
-      u2_bx_rise(wir_r); LoomRise;
+      u2_tx_rise_cas(wir_r); LoomRise;
 
       if ( u2_none == riv ) {
         u2_rl_lose(wir_r, poz);
@@ -110,18 +109,18 @@ _nock_rock(u2_wire wir_r,
           u2_noun paz = u2_t(gal);
           u2_weak sep, dom;
 
-          LoomSink; u2_bx_sink(wir_r);
+          LoomSink; u2_tx_sink_cas(wir_r);
           dom = _nock_rock_keep(wir_r, bus, paz);
-          u2_bx_rise(wir_r); LoomRise;
+          u2_tx_rise_cas(wir_r); LoomRise;
 
           if ( u2_none == dom ) { 
             u2_rl_lose(wir_r, bus);
             return u2_none;
           }
 
-          LoomSink; u2_bx_sink(wir_r);
+          LoomSink; u2_tx_sink_cas(wir_r);
           sep = _nock_rock(wir_r, bus, mis);
-          u2_bx_rise(wir_r); LoomRise;
+          u2_tx_rise_cas(wir_r); LoomRise;
 
           if ( u2_none == sep ) {
             u2_rl_lose(wir_r, dom);
@@ -130,9 +129,9 @@ _nock_rock(u2_wire wir_r,
           if ( u2_no == u2_rl_senior(wir_r, dom) ) {
             u2_weak hoz;
            
-            LoomSink; u2_bx_sink(wir_r);
+            LoomSink; u2_tx_sink_cas(wir_r);
             hoz = _nock_rock(wir_r, sep, dom);
-            u2_bx_rise(wir_r); LoomRise;
+            u2_tx_rise_cas(wir_r); LoomRise;
 
             u2_rl_lose(wir_r, dom);
             return hoz;
@@ -147,9 +146,9 @@ _nock_rock(u2_wire wir_r,
       case u2_nock_3: {
         u2_weak gof, laz;
 
-        LoomSink; u2_bx_sink(wir_r);
+        LoomSink; u2_tx_sink_cas(wir_r);
         gof = _nock_rock(wir_r, bus, gal);
-        u2_bx_rise(wir_r); LoomRise;
+        u2_tx_rise_cas(wir_r); LoomRise;
 
         laz = (gof == u2_none) ? u2_none : u2_dust(gof);
 
@@ -159,9 +158,9 @@ _nock_rock(u2_wire wir_r,
       case u2_nock_4: {
         u2_weak gof, laz;
        
-        LoomSink; u2_bx_sink(wir_r);
+        LoomSink; u2_tx_sink_cas(wir_r);
         gof = _nock_rock(wir_r, bus, gal);
-        u2_bx_rise(wir_r); LoomRise;
+        u2_tx_rise_cas(wir_r); LoomRise;
 
         laz = u2_rl_vint(wir_r, gof);
         return laz;
@@ -174,10 +173,10 @@ _nock_rock(u2_wire wir_r,
         else {
           u2_weak dib, rum, laz;
          
-          LoomSink; u2_bx_sink(wir_r);
+          LoomSink; u2_tx_sink_cas(wir_r);
           dib = _nock_rock_keep(wir_r, bus, u2_h(gal));
           rum = _nock_rock(wir_r, bus, u2_t(gal));
-          u2_bx_rise(wir_r); LoomRise;
+          u2_tx_rise_cas(wir_r); LoomRise;
 
           if ( (u2_none == dib) || (u2_none == rum) ) {
             laz = u2_none;
@@ -201,9 +200,9 @@ _nock_rock(u2_wire wir_r,
         else {
           u2_weak gyl;
          
-          LoomSink; u2_bx_sink(wir_r);
+          LoomSink; u2_tx_sink_cas(wir_r);
           gyl = _nock_rock_keep(wir_r, bus, yor);
-          u2_bx_rise(wir_r); LoomRise;
+          u2_tx_rise_cas(wir_r); LoomRise;
 
           switch ( gyl ) {
             case 0: {
@@ -232,9 +231,9 @@ _nock_rock(u2_wire wir_r,
           u2_noun fas = u2_t(gal);
           u2_noun bod;
 
-          LoomSink; u2_bx_sink(wir_r);
+          LoomSink; u2_tx_sink_cas(wir_r);
           bod = _nock_rock(wir_r, bus, meg);
-          u2_bx_rise(wir_r); LoomRise;
+          u2_tx_rise_cas(wir_r); LoomRise;
 
           if ( u2_none == bod ) {
             return u2_none;
@@ -253,9 +252,9 @@ _nock_rock(u2_wire wir_r,
           u2_noun fas = u2_t(gal);
           u2_noun bod, har;
 
-          LoomSink; u2_bx_sink(wir_r); 
+          LoomSink; u2_tx_sink_cas(wir_r); 
           bod = _nock_rock_keep(wir_r, bus, meg);
-          u2_bx_rise(wir_r); LoomRise;
+          u2_tx_rise_cas(wir_r); LoomRise;
 
           if ( u2_none == bod ) {
             u2_rl_lose(wir_r, bus);
@@ -284,9 +283,9 @@ _nock_rock(u2_wire wir_r,
             return u2_none;
           }
           else {
-            LoomSink; u2_bx_sink(wir_r);
+            LoomSink; u2_tx_sink_cas(wir_r);
             sep = _nock_rock(wir_r, bus, dym);
-            u2_bx_rise(wir_r); LoomRise;
+            u2_tx_rise_cas(wir_r); LoomRise;
 
             if ( u2_none == sep ) {
               return u2_none;
@@ -305,9 +304,9 @@ _nock_rock(u2_wire wir_r,
             if ( u2_no == u2_rl_senior(wir_r, dom) ) {
               u2_rl_gain(wir_r, dom);
 
-              LoomSink; u2_bx_sink(wir_r);
+              LoomSink; u2_tx_sink_cas(wir_r);
               pro = _nock_rock(wir_r, sep, dom);
-              u2_bx_rise(wir_r); LoomRise;
+              u2_tx_rise_cas(wir_r); LoomRise;
 
               u2_rl_lose(wir_r, dom);
               return pro;
@@ -350,9 +349,9 @@ _nock_rock(u2_wire wir_r,
 
               u2_wire_tax(wir_r) = u2_rc(wir_r, tac, tax);
               {
-                LoomSink; u2_bx_sink(wir_r);
+                LoomSink; u2_tx_sink_cas(wir_r);
                 pro = _nock_rock(wir_r, bus, zom);
-                u2_bx_rise(wir_r); LoomRise;
+                u2_tx_rise_cas(wir_r); LoomRise;
               }
 
               if ( pro != u2_none ) {
@@ -367,9 +366,9 @@ _nock_rock(u2_wire wir_r,
 
               u2_wire_tax(wir_r) = u2_rc(wir_r, tac, tax);
               {
-                LoomSink; u2_bx_sink(wir_r);
+                LoomSink; u2_tx_sink_cas(wir_r);
                 pro = _nock_rock(wir_r, bus, zom);
-                u2_bx_rise(wir_r); LoomRise;
+                u2_tx_rise_cas(wir_r); LoomRise;
               }
 
               if ( pro != u2_none ) {
@@ -384,9 +383,9 @@ _nock_rock(u2_wire wir_r,
 
               u2_wire_tax(wir_r) = u2_rc(wir_r, tac, tax);
               {
-                LoomSink; u2_bx_sink(wir_r);
+                LoomSink; u2_tx_sink_cas(wir_r);
                 pro = _nock_rock(wir_r, bus, zom);
-                u2_bx_rise(wir_r); LoomRise;
+                u2_tx_rise_cas(wir_r); LoomRise;
               }
 
               if ( pro != u2_none ) {
@@ -397,7 +396,7 @@ _nock_rock(u2_wire wir_r,
             }
 
             case c3__loaf: {
-              u2_bx_loaf(wir_r, hod);
+              u2_tx_loaf(wir_r, hod);
               u2_rl_lose(wir_r, hod);
               fol = zom; 
               continue;
@@ -411,9 +410,9 @@ _nock_rock(u2_wire wir_r,
             }
 
             case c3__mine: {
-              LoomSink; u2_bx_sink(wir_r);
+              LoomSink; u2_tx_sink_cas(wir_r);
               pro = _nock_rock(wir_r, bus, zom);
-              u2_bx_rise(wir_r); LoomRise; 
+              u2_tx_rise_cas(wir_r); LoomRise; 
 
               if ( u2_none == pro ) {
                 u2_rl_lose(wir_r, hod);
@@ -428,9 +427,9 @@ _nock_rock(u2_wire wir_r,
               }
             }
             case c3__fast: {
-              LoomSink; u2_bx_sink(wir_r);
+              LoomSink; u2_tx_sink_cas(wir_r);
               pro = _nock_rock(wir_r, bus, zom);
-              u2_bx_rise(wir_r); LoomRise; 
+              u2_tx_rise_cas(wir_r); LoomRise; 
 
               if ( u2_none == pro ) {
                 u2_rl_lose(wir_r, hod);
@@ -476,9 +475,9 @@ _nock_rock(u2_wire wir_r,
 
                   return pro;
                 } else {
-                  LoomSink; u2_bx_sink(wir_r);
+                  LoomSink; u2_tx_sink_cas(wir_r);
                   pro = _nock_rock_keep(wir_r, bus, zom);
-                  u2_bx_rise(wir_r); LoomRise;
+                  u2_tx_rise_cas(wir_r); LoomRise;
 
                   if ( u2_none == pro ) {
                     return u2_none;
@@ -499,19 +498,36 @@ _nock_rock(u2_wire wir_r,
             }
 
             case c3__ping: {
-              u2_rl_lose(wir_r, hod);
-              u2_bx_used(wir_r);
+              u2_tx_did_act(wir_r, hod);
+              u2_rz(wir_r, hod);
 
               fol = zom;
               continue;
             }
 
+            case c3__live: {
+              u2_flag qox = u2_tx_task_in(wir_r, hod);
+
+              u2_rz(wir_r, hod);
+              if ( u2_no == qox ) {
+                fol = zom; 
+                continue;
+              } else {
+                LoomSink; u2_tx_sink_cas(wir_r);
+                pro = u2_nk_nock(wir_r, bus, zom);
+                u2_tx_rise_cas(wir_r); LoomRise;
+
+                u2_tx_task_out(wir_r);
+                return pro;
+              }
+            }
+
             case c3__sole: {
               u2_rl_lose(wir_r, hod);
               {
-                LoomSink; u2_bx_sink(wir_r);
+                LoomSink; u2_tx_sink_cas(wir_r);
                 pro = u2_nk_nock(wir_r, bus, zom);
-                u2_bx_rise(wir_r); LoomRise;
+                u2_tx_rise_cas(wir_r); LoomRise;
 
                 if ( u2_none == pro ) {
                   return u2_none;
@@ -852,6 +868,7 @@ u2_nk_soft(u2_wire wir_r,
            u2_noun fol)                                           //  retain
 {
   u2_weak pro;
+  u2_flag bit;
 
 #if 0
   switch ( u2_rail_hip_m(wir_r) ) {
@@ -863,9 +880,9 @@ u2_nk_soft(u2_wire wir_r,
       u2_ray  mat_r = u2_rail_mat_r(wir_r);
       u2_ray  rut_r = u2_rail_rut_r(wir_r);
 
-      LoomSink; u2_bx_sink(wir_r);
+      LoomSink; u2_tx_sink_cas(wir_r);
       pro = _nock_sand(wir_r, cap_r, bus, fol);
-      u2_bx_rise(wir_r); LoomRise;
+      u2_tx_rise_cas(wir_r); LoomRise;
 
       if ( u2_none == pro ) {
         u2_rail_cap_r(wir_r) = cap_r;
@@ -879,18 +896,20 @@ u2_nk_soft(u2_wire wir_r,
       return pro;
     }
     case c3__rock: {
-      LoomSink; u2_bx_sink(wir_r);
+      LoomSink; u2_tx_sink_cas(wir_r);
       pro = _nock_rock(wir_r, bus, fol);
-      u2_bx_rise(wir_r); LoomRise;
+      u2_tx_rise_cas(wir_r); LoomRise;
 
       return pro;
     }
   }
 #else
 
-  LoomSink; u2_bx_sink(wir_r);
+  bit = u2_tx_sys_bit(wir_r, u2_no);
+  LoomSink; u2_tx_sink_cas(wir_r);
   pro = _nock_rock(wir_r, bus, fol);
-  u2_bx_rise(wir_r); LoomRise;
+  u2_tx_rise_cas(wir_r); LoomRise;
+  u2_tx_sys_bit(wir_r, bit);
 
   return pro;
 #endif

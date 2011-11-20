@@ -73,7 +73,7 @@
 
   /* We laugh at your petty shift-reduce conflicts.
   */
-  %expect 82
+  %expect 83
 
   %pure-parser
   %locations
@@ -436,7 +436,7 @@ wide_c
     wide_norm: di_sigbar body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_sigtis body_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_sigmus hint_c_wide    { $$ = _ycell($1, $2); }
-    wide_norm: di_sighax body_a_wide    { $$ = _ycell($1, $2); }
+    wide_norm: di_sighax body_g_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_siggal hint_b_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_sigcol hint_a_wide    { $$ = _ycell($1, $2); }
     wide_norm: di_sigdot hint_e_wide    { $$ = _ycell($1, $2); }
@@ -620,7 +620,8 @@ tall
     tall_norm: di_sigbar w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_sigtis w body_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_sigmus w hint_c_tall    { $$ = _ycell($1, $3); }
-    tall_norm: di_sighax w body_a_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_sighax w body_g_tall    { $$ = _ycell($1, $3); }
+    tall_norm: di_sighes w body_g_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_sigcol w hint_a_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_siggal w hint_b_tall    { $$ = _ycell($1, $3); }
     tall_norm: di_sigdot w hint_e_tall    { $$ = _ycell($1, $3); }
@@ -848,6 +849,7 @@ tall
     di_sigbar: si_sig si_bar  { $$ = c3__sgbr; }
     di_sigmus: si_sig si_mus  { $$ = c3__sgms; }
     di_sighax: si_sig si_hax  { $$ = c3__sghx; }
+    di_sighes: si_sig si_hes  { $$ = c3__sghs; }
     di_sigcol: si_sig si_col  { $$ = c3__sgcl; }
     di_siggal: si_sig si_gal  { $$ = c3__sggl; }
     di_sigdot: si_sig si_dot  { $$ = c3__sgdt; }

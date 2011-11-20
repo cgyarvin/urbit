@@ -972,8 +972,8 @@ u2_ho_use(u2_ray     wir_r,
 
       // fprintf(stderr, "test %s\n", u2_ho_cstring(jet_j->xip));
 
-      u2_bx_used(wir_r);
       u2_ho_test(wir_r, jet_j, cor, sof, pro);
+      u2_tx_did_tes(wir_r, 1);
 
       if ( tax != u2_none ) {
         if ( u2_no == u2_sing(tax, u2_wire_tax(wir_r)) ) {

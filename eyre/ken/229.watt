@@ -1712,7 +1712,8 @@
       [%sgdt p=(chop) q=(gene)]
       [%sggl p=($&(*term [p=*term q=(gene)])) q=(gene)]
       [%sggr p=($&(*term [p=*term q=(gene)])) q=(gene)]
-      [%sghx p=(gene)]
+      [%sghs p=*term q=(gene)]
+      [%sghx p=*term q=(gene)]
       [%sgkt p=(gene)]
       [%sgls p=@ q=(gene)]
       [%sgms p=@ q=(gene)]
@@ -2049,7 +2050,8 @@
         [%sgcl *]   [%sggr [%bank %dtsg %% p.gen] q.gen]
         [%sgdt *]   [%sgcn p.gen [~ 4] ~ q.gen]
         [%sggl *]   [%tsgl [%sggr p.gen [~ 1]] q.gen]
-        [%sghx *]   [%sggr %ping p.gen]
+        [%sghs *]   [%sggr [%live p.gen] q.gen]
+        [%sghx *]   [%sggr [%ping p.gen] q.gen]
         [%sgkt *]   [%sggr %keep p.gen]
         [%sgls *]   [%sggr [%memo %dtsg %% p.gen] q.gen]
         [%sgms *]   [%sggr [%sole %dtsg %% p.gen] q.gen]
@@ -3935,7 +3937,8 @@
               (rune dot %sgdt hine)
               (rune gal %sggl hinb)
               (rune gar %sggr hinb)
-              (rune hax %sghx expa)
+              (rune hes %sghs expg)
+              (rune hax %sghx expg)
               (rune ket %sgkt expa)
               (rune lus %sgls hinc)
               (rune mus %sgms hinc)

@@ -86,8 +86,18 @@
     static void
     _tx_sample(c3_i x)
     {
+      u2_ray rac_r = _tx_rac_r;
+
       c3_assert(_tx_on == 1);
-      _tx_sample_in(u2_trac_at(_tx_rac_r, duz.don));
+
+      if ( u2_yes == u2_trac_at(rac_r, wer.sys) ) {
+        u2_trac_be(rac_r, c3_d, wer.com_d) += 1;
+      } else {
+        u2_trac_be(rac_r, c3_d, wer.erp_d) += 1;
+      }
+      u2_trac_at(rac_r, wer.sys) = u2_yes;
+
+      _tx_sample_in(u2_trac_at(rac_r, duz.don));
     }
 
 /* u2_tx_samp_on(): turn profile sampling on, clear count.
@@ -189,6 +199,32 @@ _tx_d(u2_wire wir_r, c3_d dat_d)
   return u2_rl_words(wir_r, 2, dat_w);
 }
 
+/* _tx_event(): add system counter to user event list.
+*/
+static u2_noun                                                    //  produce
+_tx_event(u2_wire wir_r,
+          c3_c*   str_c,
+          c3_d    val_d,
+          u2_noun cot)                                            //  submit
+{
+  u2_noun vez, val, str;
+
+  if ( 0 == val_d ) {
+    return cot;
+  }
+  if ( u2_none == (str = u2_rl_string(wir_r, str_c)) ) {
+    return cot;
+  }
+  if ( u2_none == (val = _tx_d(wir_r, val_d)) ) {
+    u2_rz(wir_r, str); return cot;
+  }
+  if ( u2_none == (vez = _tx_put(wir_r, cot, str, val)) ) {
+    u2_rz(wir_r, str); u2_rz(wir_r, val); return cot;
+  }
+  u2_rz(wir_r, cot);
+  return vez;
+}
+
 /* u2_tx_events(): produce event list, including counts.
 */
 static u2_noun                                                    //  produce
@@ -196,134 +232,41 @@ _tx_events(u2_wire wir_r,
            u2_noun cot)                                           //  retain
 {
   u2_ray rac_r = u2_wire_rac_r(wir_r);
-  u2_noun str, val, vez;
 
   cot = u2_rx(wir_r, cot);
 
-  /* sys-hops
-  */
-  {
-    if ( u2_none == (str = u2_rl_string(wir_r, "sys-hops")) ) {
-      u2_rz(wir_r, cot);
-      return u2_none;
-    }
-    if ( u2_none == (val = _tx_d(wir_r, u2_trac_be(rac_r, c3_d, sys.hop_d))) ) {
-      u2_rz(wir_r, cot); u2_rz(wir_r, str); return u2_none;
-    }
-    if ( u2_none == (vez = _tx_put(wir_r, cot, str, val)) ) {
-      u2_rz(wir_r, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
-    }
-    u2_rz(wir_r, cot);
-    cot = vez;
-  }
-  /* sys-jets
-  */
-  {
-    if ( u2_none == (str = u2_rl_string(wir_r, "sys-jets")) ) {
-      u2_rz(wir_r, cot);
-      return u2_none;
-    }
-    if ( u2_none == (val = _tx_d(wir_r, u2_trac_be(rac_r, c3_d, sys.jet_d))) ) {
-      u2_rz(wir_r, cot); u2_rz(wir_r, str); return u2_none;
-    }
-    if ( u2_none == (vez = _tx_put(wir_r, cot, str, val)) ) {
-      u2_rz(wir_r, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
-    }
-    u2_rz(wir_r, cot);
-    cot = vez;
-  }
-  /* sys-tests
-  */
-  {
-    if ( u2_none == (str = u2_rl_string(wir_r, "sys-tests")) ) {
-      u2_rz(wir_r, cot);
-      return u2_none;
-    }
-    if ( u2_none == (val = _tx_d(wir_r, u2_trac_be(rac_r, c3_d, sys.tes_d))) ) {
-      u2_rz(wir_r, cot); u2_rz(wir_r, str); return u2_none;
-    }
-    if ( u2_none == (vez = _tx_put(wir_r, cot, str, val)) ) {
-      u2_rz(wir_r, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
-    }
-    u2_rz(wir_r, cot);
-    cot = vez;
-  }
-  /* sys-nods
-  */
-  {
-    if ( u2_none == (str = u2_rl_string(wir_r, "sys-nods")) ) {
-      u2_rz(wir_r, cot);
-      return u2_none;
-    }
-    if ( u2_none == (val = _tx_d(wir_r, u2_trac_be(rac_r, c3_d, sys.nod_d))) ) {
-      u2_rz(wir_r, cot); u2_rz(wir_r, str); return u2_none;
-    }
-    if ( u2_none == (vez = _tx_put(wir_r, cot, str, val)) ) {
-      u2_rz(wir_r, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
-    }
-    u2_rz(wir_r, cot);
-    cot = vez;
-  }
-  /* sys-cstack
-  */
-  {
-    c3_ds cas_ds      = u2_trac_be(rac_r, c3_ds, sys.cas_ds);
-    c3_d cas_d        = (cas_ds < 0ULL) ? -(cas_ds) : cas_ds;
-    const c3_c* str_c = (cas_ds < 0ULL) ? "sys-kcatsc" : "sys-cstack";
+  cot = _tx_event(wir_r, "sys-hops", u2_trac_be(rac_r, c3_d, sys.hop_d), cot);
+  cot = _tx_event(wir_r, "sys-jets", u2_trac_be(rac_r, c3_d, sys.jet_d), cot);
+  cot = _tx_event(wir_r, "sys-tests", u2_trac_be(rac_r, c3_d, sys.tes_d), cot);
+  cot = _tx_event(wir_r, "sys-nods", u2_trac_be(rac_r, c3_d, sys.nod_d), cot);
 
-    if ( u2_none == (str = u2_rl_string(wir_r, str_c)) ) {
-      u2_rz(wir_r, cot);
-      return u2_none;
-    }
-    if ( u2_none == (val = _tx_d(wir_r, cas_d)) ) {
-      u2_rz(wir_r, cot); u2_rz(wir_r, str); return u2_none;
-    }
-    if ( u2_none == (vez = _tx_put(wir_r, cot, str, val)) ) {
-      u2_rz(wir_r, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
-    }
-    u2_rz(wir_r, cot);
-    cot = vez;
-  }
-  /* sys-memory
-  */
-  {
-    c3_ds mey_ds      = u2_trac_be(rac_r, c3_ds, sys.mey_ds);
-    c3_d mey_d        = (mey_ds < 0ULL) ? -(mey_ds) : mey_ds;
-    const c3_c* str_c = (mey_ds < 0ULL) ? "sys-yromem" : "sys-memory";
+  cot = _tx_event(wir_r, "sys-cstack", u2_trac_at(rac_r, sys.cas_x.max_w), cot);
 
-    if ( u2_none == (str = u2_rl_string(wir_r, str_c)) ) {
-      u2_rz(wir_r, cot);
-      return u2_none;
-    }
-    if ( u2_none == (val = _tx_d(wir_r, mey_d)) ) {
-      u2_rz(wir_r, cot); u2_rz(wir_r, str); return u2_none;
-    }
-    if ( u2_none == (vez = _tx_put(wir_r, cot, str, val)) ) {
-      u2_rz(wir_r, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
-    }
-    u2_rz(wir_r, cot);
-    cot = vez;
-  }
-  /* sys-basket
-  */
-  {
-    c3_ds bek_ds      = u2_trac_be(rac_r, c3_ds, sys.bek_ds);
-    c3_d bek_d        = (bek_ds < 0ULL) ? -(bek_ds) : bek_ds;
-    const c3_c* str_c = (bek_ds < 0ULL) ? "sys-teksab" : "sys-basket";
+#if 0
+  cot = _tx_event(wir_r, "sys-memory-used", 
+        u2_trac_be(rac_r, c3_w, sys.men_x.max_w), cot);
+  cot = _tx_event(wir_r, "sys-memory-held",
+        u2_trac_be(rac_r, c3_w, sys.men_x.med_w), cot);
+  cot = _tx_event(wir_r, "sys-basket", 
+        u2_trac_be(rac_r, c3_w, sys.bek_x.max_w), cot);
+#else
+  cot = _tx_event(wir_r, "sys-memory-active", 
+                        4 * (u2_soup_liv_w(u2_rail_rut_r(wir_r)) - 
+                             u2_trac_at(rac_r, sys.lif_w)),
+                        cot);
 
-    if ( u2_none == (str = u2_rl_string(wir_r, str_c)) ) {
-      u2_rz(wir_r, cot);
-      return u2_none;
-    }
-    if ( u2_none == (val = _tx_d(wir_r, bek_d)) ) {
-      u2_rz(wir_r, cot); u2_rz(wir_r, str); return u2_none;
-    }
-    if ( u2_none == (vez = _tx_put(wir_r, cot, str, val)) ) {
-      u2_rz(wir_r, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
-    }
-    u2_rz(wir_r, cot);
-    cot = vez;
-  }
+  cot = _tx_event(wir_r, "sys-memory-basket", 
+                        4 * 
+                        (u2_soup_liv_w(u2_rail_rut_r(u2_wire_bas_r(wir_r))) - 
+                         u2_trac_at(rac_r, sys.bos_w)),
+                        cot);
+
+  cot = _tx_event(wir_r, "samples-hard", 
+                         u2_trac_be(rac_r, c3_d, wer.com_d), cot);
+  cot = _tx_event(wir_r, "samples-soft", 
+                         u2_trac_be(rac_r, c3_d, wer.erp_d), cot);
+#endif
+
   /* sys-time
   */
   {
@@ -343,23 +286,23 @@ _tx_events(u2_wire wir_r,
     new_d += tv.tv_usec;
 
     ums_w = (c3_w) (((new_d - old_d) + 999ULL) / 1000ULL);
-
-    if ( u2_none == (str = u2_rl_string(wir_r, "sys-msec")) ) {
-      u2_rz(wir_r, cot);
-      return u2_none;
-    }
-    if ( u2_none == (val = u2_rl_words(wir_r, 1, &ums_w)) ) {
-      u2_rz(wir_r, cot); u2_rz(wir_r, str); return u2_none;
-    }
-    if ( u2_none == (vez = _tx_put(wir_r, cot, str, val)) ) {
-      u2_rz(wir_r, cot); u2_rz(wir_r, str); u2_rz(wir_r, val); return u2_none;
-    }
-    u2_rz(wir_r, cot);
-    cot = vez;
+    cot = _tx_event(wir_r, "sys-msec", ums_w, cot);
   }
   return cot;
 }
 
+/* u2_tx_sys_bit(): set system bit, returning old value.
+*/
+u2_flag
+u2_tx_sys_bit(u2_ray wir_r, u2_flag val)
+{
+  u2_flag bit = u2_wrac_at(wir_r, wer.sys);
+
+  u2_wrac_at(wir_r, wer.sys) = val;
+  return bit;
+}
+ 
+#       define u2_tx_sys_bit(wir_r, val) (u2_wrac_at(wir_r, wer.sys) = (val))
 /* u2_tx_init(): initialize state.
 */
 u2_ray
@@ -373,7 +316,7 @@ u2_tx_init(u2_wire wir_r)
   return rac_r;
 }
 
-/* u2_tx_open(): open tracing.
+/* u2_tx_open(): open/clear trace state.
 */
 void
 u2_tx_open(u2_wire wir_r)
@@ -381,6 +324,10 @@ u2_tx_open(u2_wire wir_r)
   u2_ray rac_r = u2_wire_rac_r(wir_r);
 
   u2_trac_at(rac_r, wer.ryp) = u2_nul;
+  u2_trac_at(rac_r, wer.sys) = u2_yes;
+  u2_trac_be(rac_r, c3_d, wer.erp_d) = 0;
+  u2_trac_be(rac_r, c3_d, wer.com_d) = 0;
+
   u2_trac_at(rac_r, duz.don) = u2_nul;
   u2_trac_at(rac_r, duz.cot) = u2_nul;
 
@@ -389,9 +336,18 @@ u2_tx_open(u2_wire wir_r)
   u2_trac_be(rac_r, c3_d, sys.tes_d) = 0;
   u2_trac_be(rac_r, c3_d, sys.nod_d) = 0;
 
-  u2_trac_be(rac_r, c3_ds, sys.cas_ds) = 0;
-  u2_trac_be(rac_r, c3_ds, sys.mey_ds) = 0;
-  u2_trac_be(rac_r, c3_ds, sys.bek_ds) = 0;
+  u2_trac_at(rac_r, sys.cas_x.med_w) = 
+  u2_trac_at(rac_r, sys.cas_x.max_w) = 0;
+
+  u2_trac_at(rac_r, sys.men_x.med_w) = 
+  u2_trac_at(rac_r, sys.men_x.max_w) = 0;
+
+  u2_trac_at(rac_r, sys.bek_x.med_w) = 
+  u2_trac_at(rac_r, sys.bek_x.max_w) = 0;
+
+  u2_trac_at(rac_r, sys.lif_w) = u2_soup_liv_w(u2_rail_rut_r(wir_r));
+  u2_trac_at(rac_r, sys.bos_w) = 
+    u2_soup_liv_w(u2_rail_rut_r(u2_wire_bas_r(wir_r)));
 
   {
     struct timeval tv;
@@ -402,7 +358,7 @@ u2_tx_open(u2_wire wir_r)
   }
 
   if ( u2_yes == u2_trac_at(rac_r, cor.pro) ) {
-    _tx_samp_on(wir_r);
+    _tx_samp_on(rac_r);
   }
 }
 
@@ -478,39 +434,6 @@ u2_tx_in_profile(u2_ray wir_r)
   return u2_trac_at(rac_r, cor.pro);
 }
 
-/* u2_tx_did_hop(): record nock engine step.
-*/
-void 
-u2_tx_did_hop(u2_wire wir_r)
-{
-  u2_ray rac_r = u2_wire_rac_r(wir_r);
-
-  u2_trac_be(rac_r, c3_d, sys.hop_d) += 1;
-}
-
-/* u2_tx_did_jet(): record jet invocation.
-*/
-void u2_tx_did_jet(u2_wire wir_r)
-{
-  u2_ray rac_r = u2_wire_rac_r(wir_r);
-
-  u2_trac_be(rac_r, c3_d, sys.jet_d) += 1;
-}
-
-void u2_tx_did_tes(u2_wire wir_r)
-{
-  u2_ray rac_r = u2_wire_rac_r(wir_r);
-
-  u2_trac_be(rac_r, c3_d, sys.jet_d) += 1;
-}
-
-void u2_tx_did_nod(u2_wire wir_r)
-{
-  u2_ray rac_r = u2_wire_rac_r(wir_r);
-
-  u2_trac_be(rac_r, c3_d, sys.jet_d) += 1;
-}
-
 /* u2_tx_did_act(): record user actions.
 */
 void 
@@ -531,33 +454,6 @@ u2_tx_did_act(u2_wire wir_r,
     u2_rz(wir_r, cot);
     u2_trac_at(rac_r, duz.cot) = zot;
   }
-}
-
-/* u2_tx_add_cas(): record signed change in C stack watermark.
-*/
-void u2_tx_add_cas(u2_wire wir_r, c3_ws add_ws)
-{
-  u2_ray rac_r = u2_wire_rac_r(wir_r);
-
-  u2_trac_be(rac_r, c3_ds, sys.cas_ds) += add_ws;
-}
-
-/* u2_tx_add_mey(): record signed change in memory watermark.
-*/
-void u2_tx_add_mey(u2_wire wir_r, c3_ws add_ws)
-{
-  u2_ray rac_r = u2_wire_rac_r(wir_r);
-
-  u2_trac_be(rac_r, c3_ds, sys.mey_ds) += add_ws;
-}
-
-/* u2_tx_add_bek(): record signed change in memory watermark.
-*/
-void u2_tx_add_bek(u2_wire wir_r, c3_ws add_ws)
-{
-  u2_ray rac_r = u2_wire_rac_r(wir_r);
-
-  u2_trac_be(rac_r, c3_ds, sys.bek_ds) += add_ws;
 }
 
 /* u2_tx_task_in(): enter a task for profiling purposes.
@@ -604,15 +500,83 @@ u2_tx_task_out(u2_wire wir_r)
 {
   u2_ray  rac_r = u2_wire_rac_r(wir_r);
   u2_noun don = u2_trac_at(rac_r, duz.don);
+  u2_noun dim;
 
-  c3_assert(u2_nul != don);
+  c3_assert((u2_nul != don) && (u2_yes == u2_dust(don)));
+  dim = u2_t(don);
+  u2_rx(wir_r, dim);
+  u2_rz(wir_r, don);
+  u2_trac_at(rac_r, duz.don) = dim;
 }
 
-/* u2_tx_log(): log a wall.  Discouraged.
+/* _print_tape(): print a byte tape.
+*/
+static void
+_print_tape(u2_noun som,
+            FILE*   fil_F)
+{
+  u2_noun h_som;
+
+  while ( (u2_yes == u2_dust(som)) && ((h_som = u2_h(som)) < 128) ) {
+    putc(h_som, fil_F);
+    som = u2_t(som);
+  }
+}
+
+/* _print_term(): print a terminal.
+*/
+static void
+_print_term(u2_noun som,
+            FILE*   fil_F)
+{
+  if ( u2_yes == u2_stud(som) ) {
+    c3_w len_w = u2_met(3, som);
+    c3_y *som_y = alloca(len_w) + 1;
+
+    u2_bytes(0, len_w, som_y, som);
+    som_y[len_w] = 0;
+    fprintf(fil_F, "%s", (c3_c *)som_y);
+  }
+}
+
+#if 0
+/* _print_space(): print `feq_w` spaces.
+*/
+static void
+_print_space(c3_w  feq_w,
+             FILE* fil_F)
+{
+  while ( feq_w-- ) {
+    putc(' ', fil_F);
+  }
+}
+#endif
+
+/* _print_wall(): print debug wall.
+*/
+static void
+_print_wall(u2_noun wal,
+            FILE* fil_F)
+{
+  while ( u2_yes == u2_dust(wal) ) {
+    _print_tape(u2_h(wal), fil_F);
+    putc('\n', fil_F);
+    wal = u2_t(wal);
+  }
+}
+            
+/* u2_tx_loaf(): print debug loaf.
 */
 void
-u2_tx_log(u2_wire wir_r, 
-          u2_noun wal);                                           //  retain
+u2_tx_loaf(u2_ray  wir_r,
+           u2_noun luf)                                           //  retain
+{
+  if ( u2_yes == u2_dust(luf) ) {
+    _print_term(u2_h(luf), stdout);
+    printf(":\n");
+    _print_wall(u2_t(luf), stdout);
+  }
+}
 
 /* u2_tx_warn(): report a warning by internal file and line.
 */
@@ -621,4 +585,5 @@ u2_tx_warn(u2_ray      wir_r,
            const c3_c* fil_c,
            c3_w        lyn_w)
 {
+  fprintf(stderr, "nock: warn: %s, %d\n", fil_c, lyn_w);
 }

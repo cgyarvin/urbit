@@ -568,7 +568,7 @@ u2_sing(u2_noun a,
     u2_flag sit = _sing_x(a, b);
 
     if ( (u2_yes == sit) && (a != b) ) {
-      u2_bx_dent(0, X);
+      u2_tx_did_nod(0, X);
     }
     if ( FUN && (X > 10) ) {
       // printf("mug %x, X %d\n", u2_mug(a), X);

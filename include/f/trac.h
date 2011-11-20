@@ -4,6 +4,18 @@
 */
   /** Data structures.
   **/
+    /* u2_loom_marx: profile watermark.
+    */
+      struct u2_loom_marx {
+        /* Measure.
+        */
+        c3_w med_w;
+
+        /* Maximum.
+        */
+        c3_w max_w;
+      };
+
     /* u2_loom_knot: profile node.
     */
       typedef struct _u2_loom_knot {
@@ -42,6 +54,18 @@
             /* Position stack: *(list shoe) 
             */
             u2_noun ryp;
+
+            /* Mode bit - u2_yes == C/system, u2_no == interpreted
+            */
+            u2_flag sys;
+
+            /* Number of samples in C code.
+            */
+            c3_d com_d;
+
+            /* Number of samples in interpreted code.
+            */
+            c3_d erp_d;
           } wer; 
 
         /* Profiling.
@@ -77,15 +101,15 @@
 
             /* C stack record.
             */
-            c3_ds cas_ds;
+            struct u2_loom_marx cas_x;
 
             /* Main memory usage record.
             */
-            c3_ds mey_ds;
+            struct u2_loom_marx men_x;
 
             /* Basket memory usage record.
             */
-            c3_ds bek_ds;
+            struct u2_loom_marx bek_x;
 
             /* Unix time in seconds at analysis instantiation.
             */
@@ -94,11 +118,22 @@
             /* Unix time in microseconds at analysis instantiation.
             */
             c3_w usc_w;
+
+            /* Original words in wire.
+            */
+            c3_w lif_w;
+
+            /* Original words in basket.
+            */
+            c3_w bos_w;
           } sys;
       } u2_loom_trac;
 
-#define   u2_trac_at(rac_r, wof)        *u2_at(rac_r, u2_loom_trac, wof)
-#define   u2_trac_be(rac_r, ite, wof)   *u2_be(rac_r, u2_loom_trac, ite, wof)
+#define   u2_trac_at(rac_r, wof)        (*u2_at(rac_r, u2_loom_trac, wof))
+#define   u2_trac_be(rac_r, ite, wof)   (*u2_be(rac_r, u2_loom_trac, ite, wof))
+
+#define   u2_wrac_at(wir_r, wof)      u2_trac_at(u2_wire_rac_r(wir_r), wof)
+#define   u2_wrac_be(wir_r, ite, wof) u2_trac_be(u2_wire_rac_r(wir_r), ite, wof)
 
   /** Functions.
   **/
@@ -135,10 +170,36 @@
     **/
       /* u2_tx_did_*(): record system actions.
       */
-        void u2_tx_did_hop(u2_ray wir_r);
-        void u2_tx_did_jet(u2_ray wir_r);
-        void u2_tx_did_tes(u2_ray wir_r);
-        void u2_tx_did_nod(u2_ray wir_r);
+#       define u2_tx_did(wir_r, wof, det_ws)  \
+            ( u2_wrac_be(wir_r, c3_d, wof) += det_ws )
+
+#       define u2_tx_did_hop(wir_r, det_ws) u2_tx_did(wir_r, sys.hop_d, det_ws)
+#       define u2_tx_did_jet(wir_r, det_ws) u2_tx_did(wir_r, sys.jet_d, det_ws)
+#       define u2_tx_did_tes(wir_r, det_ws) u2_tx_did(wir_r, sys.tes_d, det_ws)
+#       define u2_tx_did_nod(wir_r, det_ws) u2_tx_did(wir_r, sys.nod_d, det_ws)
+
+      /* u2_tx_mex*(): record signed change in watermarks.
+      */
+#       define u2_tx_mex(wir_r, wof, det_ws) \
+          ( ( u2_wrac_at(wir_r, wof.med_w) += det_ws), \
+            ( u2_wrac_at(wir_r, wof.max_w) = \
+                ( u2_wrac_at(wir_r, wof.med_w) > \
+                  u2_wrac_at(wir_r, wof.max_w) ) \
+                ? u2_wrac_at(wir_r, wof.med_w) \
+                : u2_wrac_at(wir_r, wof.max_w) ) )
+
+#       define u2_tx_add_cas(wir_r, det_ws) u2_tx_mex(wir_r, sys.cas_x, det_ws)
+#       define u2_tx_add_men(wir_r, det_ws) u2_tx_mex(wir_r, sys.men_x, det_ws)
+#       define u2_tx_add_bek(wir_r, det_ws) u2_tx_mex(wir_r, sys.bek_x, det_ws)
+
+#       define u2_tx_sink_cas(wir_r) u2_tx_add_cas(wir_r, 1)
+#       define u2_tx_rise_cas(wir_r) u2_tx_add_cas(wir_r, -1)
+
+      /* u2_tx_add_mem(): add memory to rail.  A hack.  Not used.
+      */
+#       define u2_tx_add_mem(ral_r, det_ws) \
+          ( (0 == ral_r) ? u2_tx_add_men(ral_r, det_ws) \
+                         : u2_tx_add_bek(0, det_ws) 
 
       /* u2_tx_did_act(): record user actions.
       */
@@ -146,12 +207,12 @@
         u2_tx_did_act(u2_ray  wir_r, 
                       u2_noun did);                               //  retain
 
-      /* u2_tx_add_*(): record signed change in watermarks.
+      /* u2_tx_sys_bit(): set system bit, returning old value.
       */
-        void u2_tx_add_cas(u2_ray wir_r, c3_ws add_ws);
-        void u2_tx_add_mey(u2_ray wir_r, c3_ws add_ws);
-        void u2_tx_add_cas(u2_ray wir_r, c3_ws add_ws);
-
+        u2_flag
+        u2_tx_sys_bit(u2_ray  wir_r, 
+                      u2_flag val);
+ 
     /** Tasks.
     **/
       /* u2_tx_task_in(): enter a task for profiling purposes.
@@ -169,11 +230,11 @@
 
     /** Direct logging.
     **/
-      /* u2_tx_log(): log a wall.  Discouraged.
+      /* u2_tx_loaf(): direct debug output.
       */
         void
-        u2_tx_log(u2_ray  wir_r, 
-                  u2_noun wal);                                   //  retain
+        u2_tx_loaf(u2_ray  wir_r, 
+                   u2_noun luf);                                   //  retain
 
       /* u2_tx_warn(): report a warning by internal file and line.
       */
