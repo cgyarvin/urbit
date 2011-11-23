@@ -1370,8 +1370,17 @@ _eyre_gunn(u2_wire wir_r,
   ful = _gunn_fuel(wir_r, cor, u2_rx(wir_r, ful));
   tul = _gunn_tool(wir_r, cor, u2_rx(wir_r, tul)); 
   {
-    u2_noun von = _eyre_hook_cell(wir_r, cor, "ride", tul, ful);
+    u2_noun von, sab;
+  
+    u2_tx_do_profile(wir_r, u2_yes);
+    u2_tx_open(wir_r);
+    von = _eyre_hook_cell(wir_r, cor, "ride", tul, ful);
+    sab = u2_tx_done(wir_r);
+    u2_tx_do_profile(wir_r, u2_no);
 
+    if ( u2_nul != sab ) {
+      _gunn_show_slab(wir_r, cor, sab);
+    }
     return _gunn_vent(wir_r, cor, vet, von);
   }
 }

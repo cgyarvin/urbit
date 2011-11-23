@@ -290,9 +290,8 @@ _nock_rock(u2_wire wir_r,
             if ( u2_none == sep ) {
               return u2_none;
             }
+            u2_tx_sys_bit(wir_r, u2_yes);
             if ( u2_none != (xip = u2_ds_find(wir_r, sep)) ) {
-
-              u2_tx_sys_bit(wir_r, u2_yes);
               u2_tx_did_jet(wir_r, 1);
               pro = u2_ho_kick(wir_r, xip, sep, fac);
               u2_tx_sys_bit(wir_r, u2_no);
@@ -300,6 +299,7 @@ _nock_rock(u2_wire wir_r,
               u2_rl_lose(wir_r, sep);
               return pro;
             }
+            else u2_tx_sys_bit(wir_r, u2_no);
 
             if ( u2_none == (dom = u2_frag(fac, sep)) ) {
               u2_rl_lose(wir_r, sep);

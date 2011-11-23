@@ -8,15 +8,16 @@
 
   /**  Jet dependencies.  Minimize these.
   **/
+#   define Pt3Y   k_230__a__b__c
 #   define Pt4Y   k_230__a__b__c__d
 
     u2_noun
-    j2_mcc(Pt4Y, by, has)(u2_wire, u2_noun a, u2_noun b);
+    j2_mbc(Pt3Y, gor)(u2_wire, u2_noun a, u2_noun b);
 
     u2_noun
     j2_mcc(Pt4Y, by, put)(u2_wire, u2_noun a, u2_noun b, u2_noun c);
 
-#   define _tx_has  j2_mcc(Pt4Y, by, has)
+#   define _tx_gor  j2_mbc(Pt3Y, gor)
 #   define _tx_put  j2_mcc(Pt4Y, by, put)
 
 
@@ -436,6 +437,75 @@ u2_tx_in_profile(u2_ray wir_r)
   return u2_trac_at(rac_r, cor.pro);
 }
 
+static u2_flag
+_tx_map_ok(u2_wire wir_r, 
+           u2_noun a)
+{
+  if ( u2_nul == a ) {
+    return u2_yes;
+  } else {
+    u2_noun l_a, n_a, r_a, lr_a;
+    u2_noun pn_a, qn_a;
+
+    u2_as_cell(a, &n_a, &lr_a);
+    u2_as_cell(lr_a, &l_a, &r_a);
+    u2_as_cell(n_a, &pn_a, &qn_a);
+
+    c3_assert(l_a != a);
+    c3_assert(r_a != a);
+
+    _tx_map_ok(wir_r, l_a);
+    _tx_map_ok(wir_r, r_a);
+    return u2_yes;
+  }
+}
+
+
+static u2_noun
+_tx_increment_soft(u2_wire wir_r,
+                   u2_noun a,                                     //  transfer
+                   u2_noun b)                                     //  retain
+{
+  _tx_map_ok(wir_r, a);
+
+  if ( u2_nul == a ) {
+    u2_noun nuu = u2_rt(wir_r, u2_rc(wir_r, u2_rx(wir_r, b), _1),
+                               u2_nul,
+                               u2_nul);
+    if ( u2_none == nuu ) {
+      return u2_nul;
+    }
+    else return nuu;
+  } else {
+    u2_noun l_a, n_a, r_a, lr_a;
+    u2_noun pn_a, qn_a;
+
+    u2_as_cell(a, &n_a, &lr_a);
+    u2_as_cell(lr_a, &l_a, &r_a);
+    u2_as_cell(n_a, &pn_a, &qn_a);
+
+    if ( (u2_yes == u2_sing(b, pn_a)) ) {
+      if ( u2_fly_is_cat(qn_a) && u2_fly_is_cat(qn_a + 1) ) {
+        *u2_at_pom_tel(n_a) = (qn_a + 1);
+      } else {
+        u2_noun nyx = u2_rl_vint(wir_r, qn_a);
+
+        c3_assert(!"heavy increment");
+        u2_rz(wir_r, qn_a);
+        *u2_at_pom_tel(n_a) = nyx;
+      }
+    }
+    else {
+      if ( u2_yes == _tx_gor(wir_r, b, pn_a) ) {
+        *u2_at_pom_hed(lr_a) = _tx_increment_soft(wir_r, l_a, b);
+      } else {
+        *u2_at_pom_tel(lr_a) = _tx_increment_soft(wir_r, r_a, b);
+      }
+    }
+    return a;
+  }
+}
+
 /* u2_tx_did_act(): record user actions.
 */
 void 
@@ -443,18 +513,12 @@ u2_tx_did_act(u2_wire wir_r,
               u2_noun did)                                        //  retain
 {
   u2_ray  rac_r = u2_wire_rac_r(wir_r);
-  u2_noun cot   = u2_trac_at(rac_r, duz.cot);
-  u2_noun zot;
-  u2_noun gox;
 
-  if ( u2_none == (gox = _tx_has(wir_r, cot, did)) ) {
-    zot = _tx_put(wir_r, cot, did, _1);
-  } else {
-    zot = _tx_put(wir_r, cot, did, u2_rl_vint(wir_r, gox));
-  }
-  if ( u2_none != zot ) {
-    u2_rz(wir_r, cot);
-    u2_trac_at(rac_r, duz.cot) = zot;
+  if ( u2_yes == u2_trac_at(rac_r, cor.pro) ) {
+    u2_noun cot   = u2_trac_at(rac_r, duz.cot);
+
+    u2_trac_at(rac_r, duz.cot) = _tx_increment_soft(wir_r, cot, did);
+    _tx_map_ok(wir_r, u2_trac_at(rac_r, duz.cot));
   }
 }
 

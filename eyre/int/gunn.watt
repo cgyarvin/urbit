@@ -348,6 +348,7 @@
 ::
 ++  swig                                                ::  show event counts
   |=  hoy=*(map term num)  ~|  %swig  ^-  *tank
+  ~|  [%swig-hoy hoy]
   :+  %rose
     [[' ' ~] ['{' ~] ['}' ~]]
   %+  turn

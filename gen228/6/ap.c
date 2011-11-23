@@ -789,13 +789,15 @@
   _open_do_pq(sghs)    //  ~$
   {
     return u2_bt(wir_r, c3__sggr, 
-                        u2_bc(wir_r, c3__live, u2_rx(wir_r, p_gen)),
+                        u2_bq(wir_r, c3__live,
+                                     c3__dtsg, u2_blip, u2_rx(wir_r, p_gen)),
                         u2_rx(wir_r, q_gen));
   }
   _open_do_pq(sghx)    //  ~#
   {
     return u2_bt(wir_r, c3__sggr, 
-                        u2_bc(wir_r, c3__ping, u2_rx(wir_r, p_gen)),
+                        u2_bq(wir_r, c3__ping,
+                                     c3__dtsg, u2_blip, u2_rx(wir_r, p_gen)),
                         u2_rx(wir_r, q_gen));
   }
   _open_do_p(sgkt)    //  ~^
