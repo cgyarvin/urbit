@@ -261,10 +261,13 @@ _tx_events(u2_wire wir_r,
                          u2_trac_at(rac_r, sys.bos_w)),
                         cot);
 
-  cot = _tx_event(wir_r, "samples-hard", 
-                         u2_trac_be(rac_r, c3_d, wer.com_d), cot);
-  cot = _tx_event(wir_r, "samples-soft", 
-                         u2_trac_be(rac_r, c3_d, wer.erp_d), cot);
+  {
+    c3_d com_d = u2_trac_be(rac_r, c3_d, wer.com_d);
+    c3_d erp_d = u2_trac_be(rac_r, c3_d, wer.erp_d);
+    c3_d sof_d = (erp_d * 100ULL) / (com_d + erp_d);
+
+    cot = _tx_event(wir_r, "sys-softpercent", sof_d, cot);
+  }
 #endif
 
   /* sys-time
@@ -302,7 +305,6 @@ u2_tx_sys_bit(u2_ray wir_r, u2_flag val)
   return bit;
 }
  
-#       define u2_tx_sys_bit(wir_r, val) (u2_wrac_at(wir_r, wer.sys) = (val))
 /* u2_tx_init(): initialize state.
 */
 u2_ray

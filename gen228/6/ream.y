@@ -8,12 +8,12 @@
 %{
 # include "all.h"
 
-#   define Pt1           k_229__a
-#   define Pt2           k_229__a__b
-#   define Pt3           k_229__a__b__c
-#   define Pt4           k_229__a__b__c__d
-#   define Pt5           k_229__a__b__c__d__e
-#   define Pt6           k_229__a__b__c__d__e__f
+#   define Pt1           k_228__a
+#   define Pt2           k_228__a__b
+#   define Pt3           k_228__a__b__c
+#   define Pt4           k_228__a__b__c__d
+#   define Pt5           k_228__a__b__c__d__e
+#   define Pt6           k_228__a__b__c__d__e__f
 
   /* Everything is a noun - no yacc type declarations!
   */
@@ -69,7 +69,7 @@
   /* With the mighty power of GLR... 
   */
   %glr-parser
-  %name-prefix="y229_"
+  %name-prefix="y228_"
 
   /* We laugh at your petty shift-reduce conflicts.
   */
@@ -1171,7 +1171,7 @@ _scanner_init_clip(struct _u2_scanner *scanner,
       return u2_bl_bail(wir_r, c3__fail);
     }
     else {
-      if ( !y229_parse(&scanner) ) {
+      if ( !y228_parse(&scanner) ) {
         return scanner.scan;
       }
       else {
@@ -1195,7 +1195,7 @@ _scanner_init_clip(struct _u2_scanner *scanner,
       return u2_bc(wir_r, hor, u2_nul);
     }
     else {
-      if ( !y229_parse(&scanner) ) {
+      if ( !y228_parse(&scanner) ) {
         hor = u2_bc(wir_r, scanner.s.xw_line, scanner.s.xw_col);
 
         return u2_bt(wir_r, u2_rx(wir_r, hor), 
@@ -1234,8 +1234,8 @@ _scanner_init_clip(struct _u2_scanner *scanner,
 
 /* structures
 */
-# define Tier6_y  u2_jet_live
-// # define Tier6_y  u2_jet_dead
+// # define Tier6_y  u2_jet_live
+# define Tier6_y  u2_jet_dead
 // # define Tier6_y  (u2_jet_live | u2_jet_test)
 
   u2_ho_jet 
@@ -1261,7 +1261,7 @@ _scanner_init_clip(struct _u2_scanner *scanner,
 /* Trivial scanner.
 */
 int 
-y229_lex(YYSTYPE *lvalp, YYLTYPE *llocp, struct _u2_scanner *scanner)
+y228_lex(YYSTYPE *lvalp, YYLTYPE *llocp, struct _u2_scanner *scanner)
 {
   if ( scanner->s.token ) {
     int token = scanner->s.token;
@@ -1281,7 +1281,7 @@ y229_lex(YYSTYPE *lvalp, YYLTYPE *llocp, struct _u2_scanner *scanner)
         u2_noun b = u2_h(scanner->p.tape);
 
         if ( b > 255 ) {
-          return y229_error(llocp, scanner, "tape error");
+          return y228_error(llocp, scanner, "tape error");
         }
         else {
           xb = b;
@@ -1310,7 +1310,7 @@ y229_lex(YYSTYPE *lvalp, YYLTYPE *llocp, struct _u2_scanner *scanner)
 
 /* Error stub.
 */
-int y229_error(YYLTYPE *llocp, struct _u2_scanner *scanner, char const *msg)
+int y228_error(YYLTYPE *llocp, struct _u2_scanner *scanner, char const *msg)
 {
 #if 0
   printf("%s: (%d:%d - %d:%d)\n", 

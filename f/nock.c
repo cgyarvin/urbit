@@ -291,7 +291,11 @@ _nock_rock(u2_wire wir_r,
               return u2_none;
             }
             if ( u2_none != (xip = u2_ds_find(wir_r, sep)) ) {
+
+              u2_tx_sys_bit(wir_r, u2_yes);
+              u2_tx_did_jet(wir_r, 1);
               pro = u2_ho_kick(wir_r, xip, sep, fac);
+              u2_tx_sys_bit(wir_r, u2_no);
 
               u2_rl_lose(wir_r, sep);
               return pro;
@@ -906,10 +910,13 @@ u2_nk_soft(u2_wire wir_r,
 #else
 
   bit = u2_tx_sys_bit(wir_r, u2_no);
+  c3_assert(bit == u2_yes);
+
   LoomSink; u2_tx_sink_cas(wir_r);
   pro = _nock_rock(wir_r, bus, fol);
   u2_tx_rise_cas(wir_r); LoomRise;
-  u2_tx_sys_bit(wir_r, bit);
+
+  u2_tx_sys_bit(wir_r, u2_yes);
 
   return pro;
 #endif

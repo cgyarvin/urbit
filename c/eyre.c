@@ -32,12 +32,14 @@ u2_flag EyreSmoke;
   
     /* External drivers.
     */
+      extern u2_ho_driver j2_da(k_228);
       extern u2_ho_driver j2_da(k_229);
       extern u2_ho_driver j2_da(k_230);
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       u2_ho_driver *HostDriverBase[] = {
+        &j2_da(k_228),
         &j2_da(k_229),
         &j2_da(k_230),
         0
@@ -266,7 +268,6 @@ _eyre_ken_load_hard(u2_wire wir_r,
   paq = u2_ux_read(wir_r, pot_c, "pile");
   cun = _eyre_cue(wir_r, paq);
   printf("hard boot: %s: %x\n", pot_c, u2_mug(cun));
-  // u2_bx_show(wir_r);
 
   u2_rz(wir_r, paq);
   free(pot_c);
@@ -312,7 +313,6 @@ _eyre_ken_load_soft(u2_wire wir_r,
       u2_bl_done(wir_r, kit_r);
 
       u2_bx_spot(wir_r, u2_nul);
-      u2_bx_show(wir_r);
       printf("{soft boot: %s: %x}\n", pot_c, u2_mug(cun));
       free(pot_c);
     }
@@ -334,7 +334,6 @@ _eyre_ken_load_soft(u2_wire wir_r,
 
       u2_bx_boot(wir_r);
       foo = _eyre_cue(wir_r, paq);
-      u2_bx_show(wir_r);
       u2_rz(wir_r, foo);
     }
 #endif 
@@ -1409,7 +1408,6 @@ _eyre_app(u2_wire wir_r,
       sab = u2_tx_done(wir_r);
       u2_tx_do_profile(wir_r, u2_no);
 
-      u2_bx_show(wir_r);
       fom = _eyre_call_1
         (wir_r, u2_yes, ken, "|!(a=*gene q:(~(mint ut %noun) %noun a))", gen);
     }
@@ -1447,7 +1445,6 @@ _eyre_line(u2_wire wir_r,
 #ifdef GUNN
     // u2_bx_boot(wir_r);
     _eyre_gunn(wir_r, cor, txt);
-    // u2_bx_show(wir_r);
 
     u2_bl_done(wir_r, kit_r);
 #else
@@ -1456,7 +1453,6 @@ _eyre_line(u2_wire wir_r,
 
     u2_bx_boot(wir_r);
     pro = _eyre_mong(wir_r, u2_yes, gat, u2_rx(wir_r, txt));
-    // u2_bx_show(wir_r);
 
 #if 1
     _eyre_gnaw(wir_r, ken, 2, u2_h(pro));
@@ -1493,7 +1489,6 @@ _eyre_line_proto(u2_wire wir_r,
     // u2_err(wir_r, "ken", ken);
     pro = _eyre_nock(wir_r, u2_yes, som, ken);
     u2_err(wir_r, "pro", pro);
-    u2_bx_show(wir_r);
 
     // _eyre_dirt(wir_r, las, 0, pro); 
     u2_rz(wir_r, fol);
