@@ -241,7 +241,7 @@ _tx_events(u2_wire wir_r,
   cot = _tx_event(wir_r, "sys-tests", u2_trac_be(rac_r, c3_d, sys.tes_d), cot);
   cot = _tx_event(wir_r, "sys-nods", u2_trac_be(rac_r, c3_d, sys.nod_d), cot);
 
-  cot = _tx_event(wir_r, "sys-cstack", u2_trac_at(rac_r, sys.cas_x.max_w), cot);
+  cot = _tx_event(wir_r, "sys-stack", u2_trac_at(rac_r, sys.cas_x.max_w), cot);
 
 #if 0
   cot = _tx_event(wir_r, "sys-memory-used", 

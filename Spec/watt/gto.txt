@@ -11,7 +11,7 @@ new:
   gal < 
   gar >
   hax #
-  hes $
+  hus $
   kel {
   ker }
   ket ^

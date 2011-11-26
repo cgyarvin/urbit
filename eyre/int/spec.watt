@@ -1,0 +1,78 @@
+  ++  spec
+    $|  [p=(spec) q=(spec)]                           ::  ordered pair
+      [%bark p=*term q=(spec)]                        ::  name
+      [%base p=*{%atom %noun %cell %flag %null}]      ::  base type
+      [%bush p=(spec) q=(spec)]                       ::  atom/cell
+      [%cane p=*(list spec)]                          ::  or
+      [%fern p=*(list ~[p=(spec) q=(spec)])]          ::  tag rack
+      [%herb p=(spec) q=(spec)]                       ::  pair/tag
+      [%leaf p=*term]                                 ::  general atom
+      [%mark p=*spot q=(spec)]                        ::  debug position
+      [%mold p=*gene]                                 ::  function
+      [%seed p=*gene]                                 ::  example
+      [%wood p=*term q=@]                             ::  constant atom
+    ==
+  ::
+  ++  yo
+    &=  sec=*spec
+    ::
+    ++  bind                                          ::  apply to axis
+      |=  axe=*axis
+      ^-  *gene
+      ?-    sec
+          [^ *]      
+        :+  %tsgr
+          :^    %wtsg
+              [~ axe]
+            [~ 1]
+          [%cnts [[~ 1] ~] [[[~ axe] coin(sec [%base cell])] ~]]
+        [%clms $(axe (peg axe 2), sec p.sec) $(axe (peg axe 3), sec q.sec]
+      ::
+          [%bark *]  [%ktts p.sec $(sec q.sec)]
+          [%bush *]
+        :^    %wtsg 
+            [~ axe]
+          $(sec p.sec)
+        $(sec q.sec)
+      ::
+          [%cane *]  !!
+          [%fern *]  
+        |-  ^-  *gene
+        ?~  
+
+          [%herb *] 
+        :^    %wtsg
+            [~ (peg axe 2)]
+          $(sec p.sec)
+        $(sec q.sec)
+      ::
+          [%leaf *]  
+        :^    %wtsg
+            [~ axe]
+
+          [%mark *]  [%zpcb p.sec $(sec q.sec)]
+          [%mold *]  [%cnms p.sec [~ axe] ~]
+          [%seed *]  p.sec
+          [%wood *]  [%dtsg p.sec q.sec]
+      ==
+    ::
+    ++  coin                                          ::  
+      ^-  *gene
+      ?-    sec
+          [^ *]      [%clms $(sec p.sec) $(sec q.sec)]
+          [%bark *]  [%ktts p.sec $(sec q.sec)]
+          [%bush *]  [%tsgl %% 
+          [%cane *]  !!
+          [%fern *]  !!
+          [%herb *]  !!
+          [%leaf *]  !!
+          [%mark *]  [%zpcb p.sec $(sec q.sec)]
+          [%mold *]  [%tsgl %% p.sec]
+          [%seed *]  p.sec
+          [%wood *]  [%dtsg p.
+      ==
+    ::
+    ++  walk                                          ::  generate function
+      |-  ^-  *gene
+      [%brts coin(sec [%base %noun]) (bind 5)]
+    --
