@@ -128,7 +128,7 @@
       a
     $(a (dec a), b (dec b))
   ::
-  ::  Tier 2 cones
+  ::  Tier 2 specs
   ::
   ++  list
     |*  a=nap
@@ -202,6 +202,17 @@
       b
     $(a t.a, b [i.a b])
   ::
+  ++  homo
+    |*  a=*(list)
+    ^-  =<  $
+        &.
+          +-  $
+            ?:  ?
+              ~
+            [i=(snag 0 a) t=$]
+        --
+    a
+  ::
   ++  lent
     ~.  %lent
     |=  a=*(list)
@@ -270,7 +281,6 @@
   ::  
   ++  slag
     |*  [a=@ b=*(list)]
-    |-  ^-  b
     ?~  b
       ~|('slag-fail' !!)
     ?:  =(0 a)
@@ -280,10 +290,8 @@
   ++  snag
     ~.  %snag
     |*  [a=@ b=*(list)]
-    |-
     ?~  b
       ~|('snag-fail' !!)
-    ^-  i.b
     ?:  =(0 a)
       i.b
     $(b t.b, a (dec a))
@@ -320,7 +328,7 @@
     |=  a=*
     (sort ((list num) a) gth)
   ::
-  ::  Tier 3 cones
+  ::  Tier 3 specs
   ::
   ++  axis  num
   ++  bloq  num
@@ -703,7 +711,7 @@
     =+  b=0*
     |-(?:(=(a (fyp b)) b $(b +(b))))
   ::
-  ::  Tier 4 cones
+  ::  Tier 4 specs
   ::
   ++  apt
     |=  a=*(tree)
@@ -884,7 +892,7 @@
       $(a r.a, b [n.a $(a l.a)])
     --
   ::
-  ::  Tier 5 cones
+  ::  Tier 5 specs
   ::
   ++  char  ~[''*]
   ++  clip  ~[p=(hair) q=(tape)]
@@ -1642,7 +1650,7 @@
     =+  e=(add (bex (dec c)) (cut 0 [d (dec c)] b))
     [(add (add c c) e) (cut 0 [(add d (dec c)) e] b)]
   ::
-  ::  Tier 6 cones
+  ::  Tier 6 specs
   ::
   ++  chop
     $*  lef=*term
@@ -2501,6 +2509,7 @@
     ?:  =(1 axe)
       ?:(pol (fuse ref) (crop ref))
     =+  [now=(cap axe) lat=(mas axe)]
+    =+  vil=*(set type)
     |-  ^-  *type
     ?-    sut
         [%atom *]   %void
@@ -2513,7 +2522,12 @@
         [%cube *]   (reco |=(p=*type $$(sut p)))
         [%face *]   (reco |=(p=*type (face p.sut $$(sut p))))
         [%fine *]   (reco |=(p=*type (fine p.sut q.sut $$(sut p))))
-        [%fork *]   (fork $(sut p.sut) $(sut q.sut))
+        [%fork *]   
+      ?:  (~(has in vil) sut)
+        %void
+      =>  .(vil (~(put in vil) sut)) 
+      (fork $(sut p.sut) $(sut q.sut))
+    ::
         [%hold *]   (reco |=(p=*type $$(sut p)))
         %noun       (reco |=(p=*type $$(sut p)))
         %void       %void
@@ -2776,31 +2790,35 @@
       $(sut repo)
     ::
         [%fork *]
+      ~|  %fork
+      ?:  (~(has in gil) q.sut)
+        $(sut p.sut)
+      ?:  (~(has in gil) p.sut)
+        $(sut q.sut)
       =+  hax=$(sut p.sut)
       =+  yor=$(sut q.sut)
+      ~|  %find-fork
       ?~  hax
         ?~  yor
           ~
-        ~|(%find-fork !!)
+        ?>((nest(sut %void) | (peek(sut p.sut) way p.u.yor)) yor)
       ?~  yor
-        ~|(%find-fork !!)
+        ?>((nest(sut %void) | (peek(sut q.sut) way p.u.hax)) hax)
       ?:  =(hax yor)
         hax
-      ?.  =(p.u.hax p.u.yor)
-        ~|(%find-fork !!)
+      ?>  =(p.u.hax p.u.yor)
       ?-    -.q.u.hax
           &
         ?-    -.q.u.yor
             &  [~ p.u.hax [& (fork p.q.u.hax p.q.u.yor)]]
-            |  ~|(%find-fork !!)
+            |  !!
         ==
       ::
           |
         ?-    -.q.u.yor
-            &  ~|(%find-fork !!)
+            &  !!
             |
-          ?.  =(p.q.u.yor p.q.u.hax)
-            ~|(%find-fork !!)
+          ?>  =(p.q.u.yor p.q.u.hax)
           [~ p.u.hax | p.q.u.hax (weld q.q.u.hax q.q.u.yor)]
         ==
       ==

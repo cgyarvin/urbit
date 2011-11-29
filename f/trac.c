@@ -240,6 +240,8 @@ _tx_events(u2_wire wir_r,
   cot = _tx_event(wir_r, "sys-jets", u2_trac_be(rac_r, c3_d, sys.jet_d), cot);
   cot = _tx_event(wir_r, "sys-tests", u2_trac_be(rac_r, c3_d, sys.tes_d), cot);
   cot = _tx_event(wir_r, "sys-nods", u2_trac_be(rac_r, c3_d, sys.nod_d), cot);
+  cot = _tx_event(wir_r, "sys-finds", u2_trac_be(rac_r, c3_d, sys.fin_d), cot);
+  cot = _tx_event(wir_r, "sys-saves", u2_trac_be(rac_r, c3_d, sys.pod_d), cot);
 
   cot = _tx_event(wir_r, "sys-stack", u2_trac_at(rac_r, sys.cas_x.max_w), cot);
 
@@ -265,9 +267,12 @@ _tx_events(u2_wire wir_r,
   {
     c3_d com_d = u2_trac_be(rac_r, c3_d, wer.com_d);
     c3_d erp_d = u2_trac_be(rac_r, c3_d, wer.erp_d);
-    c3_d sof_d = (erp_d * 100ULL) / (com_d + erp_d);
 
-    cot = _tx_event(wir_r, "sys-softpercent", sof_d, cot);
+    if ( com_d + erp_d ) {
+      c3_d sof_d = (erp_d * 100ULL) / (com_d + erp_d);
+
+      cot = _tx_event(wir_r, "sys-softpercent", sof_d, cot);
+    }
   }
 #endif
 
@@ -338,6 +343,8 @@ u2_tx_open(u2_wire wir_r)
   u2_trac_be(rac_r, c3_d, sys.jet_d) = 0;
   u2_trac_be(rac_r, c3_d, sys.tes_d) = 0;
   u2_trac_be(rac_r, c3_d, sys.nod_d) = 0;
+  u2_trac_be(rac_r, c3_d, sys.fin_d) = 0;
+  u2_trac_be(rac_r, c3_d, sys.pod_d) = 0;
 
   u2_trac_at(rac_r, sys.cas_x.med_w) = 
   u2_trac_at(rac_r, sys.cas_x.max_w) = 0;

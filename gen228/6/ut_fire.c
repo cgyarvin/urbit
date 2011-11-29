@@ -79,7 +79,7 @@
       }
       else {
         if ( (u2_yes == vet) &&
-             (u2_no == u2_sing(p_typ, qq_typ)) &&
+             // (u2_no == u2_sing(p_typ, qq_typ)) &&
              (u2_no == _fire_mull(wir_r, van, typ, dox, t_gat)) )
         {
 #if 0

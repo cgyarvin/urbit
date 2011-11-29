@@ -99,6 +99,14 @@
             */
             c3_d nod_d;
 
+            /* Memoization searches.
+            */
+            c3_d fin_d;
+
+            /* Memoization productions.
+            */
+            c3_d pod_d;
+
             /* C stack record.
             */
             struct u2_loom_marx cas_x;
@@ -177,6 +185,8 @@
 #       define u2_tx_did_jet(wir_r, det_ws) u2_tx_did(wir_r, sys.jet_d, det_ws)
 #       define u2_tx_did_tes(wir_r, det_ws) u2_tx_did(wir_r, sys.tes_d, det_ws)
 #       define u2_tx_did_nod(wir_r, det_ws) u2_tx_did(wir_r, sys.nod_d, det_ws)
+#       define u2_tx_did_fin(wir_r, det_ws) u2_tx_did(wir_r, sys.fin_d, det_ws)
+#       define u2_tx_did_pod(wir_r, det_ws) u2_tx_did(wir_r, sys.pod_d, det_ws)
 
       /* u2_tx_mex*(): record signed change in watermarks.
       */

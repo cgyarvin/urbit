@@ -308,15 +308,6 @@ wide_c
         { $$ = _ycell(c3__dtls, $4); }
       ;
 
-  /** Specs.
-  **/
-    spec
-      :  spec_wide
-      |  spec_tall
-      ;
-
-    spec_wide
-      :
   /** Hints.
   **/
     hint
