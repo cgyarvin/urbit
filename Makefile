@@ -597,7 +597,8 @@ EYRE_OFILES=\
        $(P_OFILES) \
        $(J230_OFILES) \
        $(J229_OFILES) \
-       $(J228_OFILES)
+       $(J228_OFILES) \
+       $(J227_OFILES)
 
 all: $(BIN)/eyre
 
