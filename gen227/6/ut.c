@@ -88,6 +88,13 @@
   u2_noun                                                         //  transfer
   j2_mc(Pt6, ut, burn)(u2_wire wir_r, 
                        u2_noun cor);                              //  retain
+  u2_noun                                                         //  transfer
+  j2_mc(Pt6, ut, moot)(u2_wire wir_r, 
+                       u2_noun cor);                              //  retain
+
+  u2_weak
+  j2_mck(Pt6, ut, moot)(u2_wire wir_r,
+                        u2_noun cor);                             //  retain
 
   extern u2_ho_jet j2_mcj(Pt6, ut, bust)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, crop)[];
@@ -104,7 +111,6 @@
   extern u2_ho_jet j2_mcj(Pt6, ut, mint)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, mull)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, nest)[];
-  extern u2_ho_jet j2_mcj(Pt6, ut, orth)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, park)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, peek)[];
   extern u2_ho_jet j2_mcj(Pt6, ut, play)[];
@@ -134,7 +140,6 @@
     { j2_sc(Pt6, ut, mint), j2_mcj(Pt6, ut, mint), 0, 0, u2_none },
     { j2_sc(Pt6, ut, mull), j2_mcj(Pt6, ut, mull), 0, 0, u2_none },
     { j2_sc(Pt6, ut, nest), j2_mcj(Pt6, ut, nest), 0, 0, u2_none },
-    { j2_sc(Pt6, ut, orth), j2_mcj(Pt6, ut, orth), 0, 0, u2_none },
     { j2_sc(Pt6, ut, park), j2_mcj(Pt6, ut, park), 0, 0, u2_none },
     { j2_sc(Pt6, ut, peek), j2_mcj(Pt6, ut, peek), 0, 0, u2_none },
     { j2_sc(Pt6, ut, play), j2_mcj(Pt6, ut, play), 0, 0, u2_none },
@@ -155,6 +160,13 @@
       // u2_jet_live | u2_jet_memo,  // special performance category
       u2_jet_dead,
       u2_none, u2_none },
+    { "moot", 
+      c3__hevy, 
+      j2_mc(Pt6, ut, moot), 
+      // Tier6_b_memo,
+      u2_jet_live | u2_jet_memo,
+      u2_none, u2_none,
+      j2_mck(Pt6, ut, moot) },
     { "repo", c3__hevy, j2_mc(Pt6, ut, repo), Tier6_b, u2_none, u2_none },
     { }
   };

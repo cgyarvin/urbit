@@ -565,9 +565,9 @@ J227_6_OFILES_UT=\
        gen227/6/ut_heal.o \
        gen227/6/ut_lose.o \
        gen227/6/ut_mint.o \
+       gen227/6/ut_moot.o \
        gen227/6/ut_mull.o \
        gen227/6/ut_nest.o \
-       gen227/6/ut_orth.o \
        gen227/6/ut_park.o \
        gen227/6/ut_peek.o \
        gen227/6/ut_play.o \

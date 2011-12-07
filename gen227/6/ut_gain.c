@@ -80,13 +80,7 @@
                         u2_noun sut,                              //  retain
                         u2_noun gen)                              //  retain
   {
-    u2_noun fiz = _gain_in(wir_r, van, sut, gen);
-
-    if ( u2_yes == j2_mcy(Pt6, ut, orth)(wir_r, van, c3__noun, fiz) ) {
-      u2_rl_lose(wir_r, fiz);
-      return c3__void;
-    }
-    else return fiz;
+    return _gain_in(wir_r, van, sut, gen);
   }
 
 /* boilerplate

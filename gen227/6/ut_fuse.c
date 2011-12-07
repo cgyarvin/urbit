@@ -20,8 +20,17 @@
     u2_noun rep = j2_mcy(Pt6, ut, repo)(wir_r, van, sut);
     u2_noun ret = _fuse_in(wir_r, van, rep, ref, bix);
 
-    u2_rl_lose(wir_r, rep);
-    return ret;
+    if ( u2_yes == u2_sing(ret, rep) ) {
+      if ( c3__void == rep ) {
+        return c3__void;
+      } else {
+        u2_rz(wir_r, rep);
+        return u2_rx(wir_r, sut);
+      }
+    } else {
+      u2_rz(wir_r, rep);
+      return ret;
+    }
   }
 
   static u2_flag

@@ -19,6 +19,8 @@
 #include "all.h"
 
 #define GUNN
+// #define PROBE
+// #define DPROBE
 #define PERF
 #define PERF_REAM
 
@@ -1387,6 +1389,62 @@ _eyre_gunn(u2_wire wir_r,
   }
 }
 
+#ifdef PROBE
+/* _eyre_probe():
+**
+**   Load `kno` from source, using previous `las`; debug with previous `app`.
+*/
+static u2_noun                                                    //  produce
+_eyre_probe(u2_wire wir_r,
+            u2_noun ken,                                          //  retain
+            u2_noun app,                                          //  retain
+            c3_w    kno_w)
+{
+  u2_noun cun, nex;
+
+  if ( u2_no == u2_rl_leap(wir_r, c3__rock) ) {
+    c3_assert(0);
+  }
+  {
+    u2_ray  kit_r = u2_bl_open(wir_r);
+
+    if ( u2_bl_set(wir_r) ) {
+      u2_bl_done(wir_r, kit_r);
+      u2_rl_fall(wir_r);
+      fprintf(stderr, "{no boot, %d}\n", kno_w);
+      exit(1);
+    }
+    else {
+      c3_c* pot_c = _eyre_path_ken(kno_w);
+      u2_noun src = u2_ux_read(wir_r, pot_c, "watt");
+      u2_noun sab;
+
+      printf("{probe booting: %s}\n", pot_c);
+
+      u2_tx_do_profile(wir_r, u2_yes);
+      u2_tx_open(wir_r);
+      cun = _eyre_nock(wir_r, u2_yes, src, ken);
+      sab = u2_tx_done(wir_r);
+      u2_tx_do_profile(wir_r, u2_no);
+
+      if ( u2_nul != sab ) {
+        _gunn_show_slab(wir_r, app, sab);
+      }
+      u2_bl_done(wir_r, kit_r);
+
+      printf("{probe boot: %s: %x}\n", pot_c, u2_mug(cun));
+      free(pot_c);
+    }
+  }
+  u2_rl_fall(wir_r);
+
+  nex = u2_rl_take(u2_wire_bas_r(wir_r), cun);
+  u2_rl_fall(wir_r);
+
+  return nex;
+}
+#endif
+
 /* _eyre_app(): load generic application core (assumes gunn).
 */
 static u2_noun                                                    //  produce
@@ -1414,13 +1472,13 @@ _eyre_app(u2_wire wir_r,
     {
       u2_noun gen;
 
-      u2_tx_open(wir_r);
       gen = _eyre_call_1(wir_r, u2_yes, ken, "ream:!%", src);
-      sab = u2_tx_done(wir_r);
-      u2_tx_do_profile(wir_r, u2_no);
 
+      u2_tx_open(wir_r);
       fom = _eyre_call_1
         (wir_r, u2_yes, ken, "|!(a=*gene q:(~(mint ut %noun) %noun a))", gen);
+      sab = u2_tx_done(wir_r);
+      u2_tx_do_profile(wir_r, u2_no);
     }
 #else
     fom = _eyre_nock(wir_r, u2_yes, src, ken);
@@ -1591,8 +1649,22 @@ main(c3_i   argc,
       //  u2_err(wir_r, "ken", ken);
     }
     else {
+
       ken = _eyre_ken(wir_r, kno_w);
       app = _eyre_app(wir_r, ken, lid_c);
+#ifdef PROBE
+      {
+        u2_noun one;
+#ifdef DPROBE
+        u2_noun two;
+#endif
+        one = _eyre_probe(wir_r, ken, app, (kno_w - 1));
+#ifdef DPROBE
+        two = _eyre_probe(wir_r, one, app, (kno_w - 2));
+#endif
+        exit(0);
+      }
+#endif
     }
   }
 

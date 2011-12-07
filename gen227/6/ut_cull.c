@@ -131,7 +131,10 @@
         u2_noun yot = _cull_in(wir_r, van, pyr, pol, axe, ref, now, lat, vil);
 
         if ( u2_yes == u2_sing(pyr, yot) ) {
-          ret = u2_rx(wir_r, sut); 
+          if ( c3__void == pyr ) {
+            ret = c3__void;
+          }
+          else ret = u2_rx(wir_r, sut); 
         } else {
           ret = u2_rx(wir_r, yot);
         }

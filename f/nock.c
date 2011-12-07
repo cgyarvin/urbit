@@ -542,7 +542,7 @@ _nock_rock(u2_wire wir_r,
                 continue;
               } else {
                 LoomSink; u2_tx_sink_cas(wir_r);
-                pro = u2_nk_nock(wir_r, bus, zom);
+                pro = _nock_rock(wir_r, bus, zom);
                 u2_tx_rise_cas(wir_r); LoomRise;
 
                 u2_tx_task_out(wir_r);
@@ -554,7 +554,7 @@ _nock_rock(u2_wire wir_r,
               u2_rl_lose(wir_r, hod);
               {
                 LoomSink; u2_tx_sink_cas(wir_r);
-                pro = u2_nk_nock(wir_r, bus, zom);
+                pro = _nock_rock(wir_r, bus, zom);
                 u2_tx_rise_cas(wir_r); LoomRise;
 
                 if ( u2_none == pro ) {

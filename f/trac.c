@@ -240,8 +240,11 @@ _tx_events(u2_wire wir_r,
   cot = _tx_event(wir_r, "sys-jets", u2_trac_be(rac_r, c3_d, sys.jet_d), cot);
   cot = _tx_event(wir_r, "sys-tests", u2_trac_be(rac_r, c3_d, sys.tes_d), cot);
   cot = _tx_event(wir_r, "sys-nods", u2_trac_be(rac_r, c3_d, sys.nod_d), cot);
-  cot = _tx_event(wir_r, "sys-finds", u2_trac_be(rac_r, c3_d, sys.fin_d), cot);
-  cot = _tx_event(wir_r, "sys-saves", u2_trac_be(rac_r, c3_d, sys.pod_d), cot);
+
+  cot = _tx_event(wir_r, "sys-cache-finds", 
+                         u2_trac_be(rac_r, c3_d, sys.fin_d), cot);
+  cot = _tx_event(wir_r, "sys-cache-saves", 
+                          u2_trac_be(rac_r, c3_d, sys.pod_d), cot);
 
   cot = _tx_event(wir_r, "sys-stack", u2_trac_at(rac_r, sys.cas_x.max_w), cot);
 
@@ -252,7 +255,6 @@ _tx_events(u2_wire wir_r,
         u2_trac_be(rac_r, c3_w, sys.men_x.med_w), cot);
   cot = _tx_event(wir_r, "sys-basket", 
         u2_trac_be(rac_r, c3_w, sys.bek_x.max_w), cot);
-#else
   cot = _tx_event(wir_r, "sys-memory-active", 
                         4 * (u2_soup_liv_w(u2_rail_rut_r(wir_r)) - 
                              u2_trac_at(rac_r, sys.lif_w)),
@@ -263,7 +265,7 @@ _tx_events(u2_wire wir_r,
                         (u2_soup_liv_w(u2_rail_rut_r(u2_wire_bas_r(wir_r))) - 
                          u2_trac_at(rac_r, sys.bos_w)),
                         cot);
-
+#endif
   {
     c3_d com_d = u2_trac_be(rac_r, c3_d, wer.com_d);
     c3_d erp_d = u2_trac_be(rac_r, c3_d, wer.erp_d);
@@ -274,7 +276,6 @@ _tx_events(u2_wire wir_r,
       cot = _tx_event(wir_r, "sys-softpercent", sof_d, cot);
     }
   }
-#endif
 
   /* sys-time
   */
@@ -546,11 +547,11 @@ u2_tx_task_in(u2_wire wir_r,
   {
     dim = don;
 
-    while ( don != u2_nul ) {
-      if ( u2_yes == u2_sing(tak, u2_h(don)) ) {
+    while ( dim != u2_nul ) {
+      if ( u2_yes == u2_sing(tak, u2_h(dim)) ) {
         return u2_no;
       }
-      don = u2_t(don);
+      dim = u2_t(dim);
     }
   }
 

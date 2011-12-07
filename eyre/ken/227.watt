@@ -730,11 +730,13 @@
   ::
   ++  set
     |*  a=nap
-    $=(~ ^<(apt [n=(a) l=((set a)) r=((set a))]))
+    ::  $=(~ ^<(apt [n=(a) l=((set a)) r=((set a))]))
+    $=(~ [n=(a) l=((set a)) r=((set a))])
   ::
   ++  map   
     |*  [a=nap b=nap]
-    $=(~ ^<(ept [n=[p=(a) q=(b)] l=((map a b)) r=((map a b))]))
+    ::  $=(~ ^<(ept [n=[p=(a) q=(b)] l=((map a b)) r=((map a b))]))
+    $=(~ [n=[p=(a) q=(b)] l=((map a b)) r=((map a b))])
   --
 =>
   ::::
@@ -1033,14 +1035,17 @@
     (next tub)
   ::
   ++  slew
-    |*  leh=*(list ~[p=*char q=*%{rule}])
+    |*  leh=*(list ~[p=*%{@ [@ @]} q=*%{rule}])
     |=  tub=*clip
+    =>  .(leh `(homo leh)`leh)
     ?~  q.tub
       (fail tub)
     |-
     ?~  leh
       (fail tub)
-    ?:  =(p.i.leh i.q.tub)
+    ?:  ?~  p.i.leh
+          =(p.i.leh i.q.tub)
+        ?&((gte i.q.tub -.p.i.leh) (lte i.q.tub +.p.i.leh))
       (q.i.leh [(slip i.q.tub p.tub) t.q.tub])
     $(leh t.leh)
   ::
@@ -2379,9 +2384,9 @@
       %heal   heal
       %lose   lose
       %mint   mint
+      %moot   moot
       %mull   mull
       %nest   nest
-      %orth   orth
       %play   play
       %park   park
       %peek   peek
@@ -2400,6 +2405,7 @@
       ==
   &=  sut=`*type`%noun
   ++  burn
+    ~$  burn
     |-  ^-  *
     ?-    sut
         [%atom *]   0
@@ -2479,8 +2485,6 @@
           [%fork *]   (fork dext(sut p.sut) dext(sut q.sut))
           [%hold *]   
         ?:  (~(has in bix) [sut ref])
-          ~~  (dunk 'type')
-          ~~  (dunk(sut ref) 'over')
           ~|(%crop-loop !!)
         (reco |=(a=*type dext(sut a, bix (~(put in bix) [sut ref]))))
       ::
@@ -2504,6 +2508,7 @@
   ++  cull
     ~.  %cull
     |=  [pol=? axe=*axis ref=*type]
+    ~$  cull
     ^-  *type
     ?:  =(1 axe)
       ?:(pol (fuse ref) (crop ref))
@@ -2869,6 +2874,7 @@
   ++  firm
     ~.  %firm
     |=  dib=*
+    ~$  firm
     =+  bix=*(set ~[*type *])
     |-  ^-  ?
     ?-    sut
@@ -2904,6 +2910,7 @@
   ++  fish
     ~.  %fish
     |=  axe=*axis
+    ~$  fish
     =+  vot=*(set type)
     |-
     ^-  *form
@@ -2962,10 +2969,8 @@
         [%fork *]     (fork $(sut p.sut) $(sut q.sut))
         [%hold *]
       ?:  (~(has in bix) [sut ref])
-        ~~  (dunk 'type')
-        ~~  (dunk(sut ref) 'over')
-        ~|(%fuse-loop !!)
-      $(bix (~(put in bix) [sut ref]), sut repo)
+        ~|(%crop-loop !!)
+      (reco |=(a=*type $$(sut a, bix (~(put in bix) [sut ref]))))
     ::
         %noun       ref
         %void       %void
@@ -2974,10 +2979,7 @@
   ::
   ++  gain
     ~.  %gain
-    |=  [gen=*gene]
-    ^-  *type
-    =-  ?:((orth(sut %noun) fiz) %void fiz)   ::  ?? - do we need this?
-    ^=  fiz
+    |=  [gen=*gene]  ^-  *type
     ?-    gen
         [%wtts *]   (cull & p:(seek %read ~(rake ap q.gen)) (play p.gen))
         [%wtpm *]   |-(?~(p.gen sut $(p.gen t.p.gen, sut $$(gen i.p.gen))))
@@ -2989,8 +2991,6 @@
   ++  lose  
     ~.  %lose
     |=  [gen=*gene]  ^-  *type
-    =-  ?:((orth(sut %noun) fiz) %void fiz)   ::  ?? - do we need this?
-    ^=  fiz
     ?-    gen
         [%wtts *]   (cull | p:(seek %read ~(rake ap q.gen)) (play p.gen))
         [%wtbr *]   |-(?~(p.gen sut $(p.gen t.p.gen, sut $$(gen i.p.gen))))
@@ -3002,6 +3002,7 @@
   ++  heal
     ~.  %heal
     |=  [qog=*(unit term) axe=*axis ref=*type]
+    ~$  heal
     ^-  *type
     ?:  =(1 axe)
       ?~  qog
@@ -3037,6 +3038,7 @@
     |=  [gol=*type gen=*gene]
     ^-  [p=*type q=*form]
     &-  ^-  [p=*type q=*form]
+    ~$  loop
     ?:  ?&(=(%void sut) !?=([%zpcb *] gen))
       ?.  |(!vet ?=([%zpfs *] gen) ?=([%zpzp *] gen))
         ~|(%mint-vain !!)
@@ -3193,6 +3195,22 @@
       (cons q.dan [1 dez])
     --
   ::
+  ++  moot
+    =+  gil=*(set type)
+    |-  ^-  ?
+    ?-  sut
+      [%atom *]  |
+      [%cell *]  |($(sut p.sut) $(sut q.sut))
+      [%core *]  $(sut p.sut)
+      [%cube *]  |
+      [%face *]  $(sut q.sut)
+      [%fine *]  $(sut r.sut)
+      [%fork *]  &($(sut p.sut) $(sut q.sut))
+      [%hold *]  |((~(has in gil) sut) $(gil (~(put in gil) sut), sut repo))
+      %noun      |
+      %void      &
+    ==
+  ::
   ++  mull
     ~.  %mull
     |=  [gol=*type dox=*type gen=*gene]
@@ -3201,6 +3219,7 @@
       &
     =<  &
     &-  ^-  [p=*type q=*type]
+    ~$  loop
     ?:  =(%void sut)
       ~|(%mull-none !!)
     ?-    gen
@@ -3278,7 +3297,7 @@
       =+  ^=  hiq  ^-  [p=*type q=*type]
           =+  fex=[p=(gain p.gen) q=(gain(sut dox) p.gen)]
           ?:  =(%void p.fex)
-            [%void ?:(=(%void q.fex) %void (play(sut q.fex) q.gen))]
+            [%void ?:(=(%void q.fex) %void ~|(%wtcl-z (play(sut q.fex) q.gen)))]
           ?:  =(%void q.fex)
             ~|(%mull-bonk-b !!)
           $(sut p.fex, dox q.fex, gen q.gen)
@@ -3373,6 +3392,7 @@
   ++  nest
     ~.  %nest
     |=  [tel=? ref=*type]
+    ~$  nest
     ^-  ?
     =+  gil=*(set ~[p=*type q=*type])
     =<  dext
@@ -3517,33 +3537,6 @@
       ==
     --
   ::
-  ++  orth
-    ~.  %orth
-    |=  ref=*type
-    ^-  ?
-    =+  bix=*(set ~[*type *type])
-    |-
-    ?-    sut
-        [%atom *]     ?-(ref [%atom *] |, [%cell *] &, * $(sut ref, ref sut))
-        [%cell *]
-      ?:  ?=([%cell *] ref)
-        ?|($(sut p.sut, ref p.ref) $(sut q.sut, ref q.ref))
-      $(sut ref, ref sut)
-    ::
-        [%core *]   $(sut [%cell p.sut %noun])
-        [%cube *]   (firm(sut ref) p.sut)
-        [%fork *]   ?&($(sut p.sut) $(sut q.sut))
-        [%hold *]
-      ?|
-        (~(has in bix) [ref sut])
-        $(bix (~(put in bix) [ref sut]), sut repo)
-      ==
-    ::
-        %noun       (nest(sut %void) | ref)
-        %void       &
-        *           $(sut repo) 
-    ==
-  ::
   ++  park
     ~.  %park
     |=  [way=*{%read %rite} axe=*axis]
@@ -3607,6 +3600,7 @@
     =>  .(vet |)
     |=  gen=*gene
     &-  ^-  *type
+    ~$  loop
     ?-  gen
       [%clms *]  (cell $(gen p.gen) $(gen q.gen))
       [%cnts *]  =+  lar=(foil (seek %read p.gen))
@@ -3667,7 +3661,7 @@
     =+  por=repo
     =+  yot=(fuy por)
     ?:  =(yot por)
-      sut
+      ?:(=(%void por) por sut)
     yot
   ::
   ++  repo
@@ -3700,6 +3694,7 @@
   ++  seek
     ~.  %seek
     |=  [way=*{%read %rite} hep=*twig]
+    ~$  seek
     ^-  *port
     ?~  hep
       [1 & sut]
@@ -3722,6 +3717,7 @@
   ++  snap
     ~.  %snap
     |=  gen=*gene
+    ~$  snap
     ^-  *gene 
     ?-    sut
         [%cell *]   =+  haq=~(hack ap gen)

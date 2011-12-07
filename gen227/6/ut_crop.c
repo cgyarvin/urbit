@@ -23,8 +23,12 @@
     u2_noun ret = _crop_dext(wir_r, van, rep, ref, bix);
 
     if ( u2_yes == u2_sing(ret, rep) ) {
-      u2_rz(wir_r, rep);
-      return u2_rx(wir_r, sut);
+      if ( c3__void == rep ) {
+        return c3__void;
+      } else {
+        u2_rz(wir_r, rep);
+        return u2_rx(wir_r, sut);
+      }
     } else {
       u2_rz(wir_r, rep);
       return ret;

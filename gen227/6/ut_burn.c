@@ -97,7 +97,7 @@
                         u2_noun van,                              //  retain
                         u2_noun sut)                              //  retain
   {
-    u2_ho_jet *jet_j = &j2_mbj(Pt6, ut)[0];
+    u2_ho_jet *jet_j = &j2_mbj(Pt6, ut)[0];   //  total hack
 
     if ( !(jet_j->sat_s & u2_jet_memo) ) {
       return j2_mcx(Pt6, ut, burn)(wir_r, van, sut);
