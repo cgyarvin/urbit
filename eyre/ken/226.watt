@@ -1,3 +1,4 @@
+!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -1034,20 +1035,48 @@
       (fail tub)
     (next tub)
   ::
-  ++  slew
+  ++  stew
     |*  leh=*(list ~[p=*%{@ [@ @]} q=*%{rule}])
-    |=  tub=*clip
     =>  .(leh `(homo leh)`leh)
+    =+  ^=  wor
+        |=  [ort=*%{@ [@ @]} wan=*%{@ [@ @]}]
+        ?~  ort
+          ?~(wan (lth ort wan) (lth ort -.wan))
+        ?~(wan (lth +.ort wan) (lth +.ort -.wan))
+    =+  ^=  hel
+        =+  hel=`*(tree %{i.leh})`~
+        ~|  %hellish
+        |-  ^-  hel
+        ?~  leh
+          ~
+        =+  yal=$(leh t.leh)
+        |-  ^-  hel
+        ?~  yal
+          [i.leh ~ ~]
+        ?:  (wor p.i.leh p.n.yal)
+          =+  nuc=$(yal l.yal)
+          ?>  ?=(^ nuc)
+          ?:  (vor p.n.yal p.n.nuc)
+            [n.yal nuc r.yal]
+          [n.nuc l.nuc [n.yal r.nuc r.yal]]
+        =+  nuc=$(yal r.yal)
+        ?>  ?=(^ nuc)
+        ?:  (vor p.n.yal p.n.nuc)
+          [n.yal l.yal nuc]
+        [n.nuc [n.yal l.yal l.nuc] r.nuc]
+    |=  tub=*clip
     ?~  q.tub
       (fail tub)
     |-
-    ?~  leh
+    ?~  hel
       (fail tub)
-    ?:  ?~  p.i.leh
-          =(p.i.leh i.q.tub)
-        ?&((gte i.q.tub -.p.i.leh) (lte i.q.tub +.p.i.leh))
-      (q.i.leh [(slip i.q.tub p.tub) t.q.tub])
-    $(leh t.leh)
+    ?:  ?~  p.n.hel
+          =(p.n.hel i.q.tub)
+        ?&((gte i.q.tub -.p.n.hel) (lte i.q.tub +.p.n.hel))
+      (q.n.hel [(slip i.q.tub p.tub) t.q.tub])
+    ?:  (wor i.q.tub p.n.hel)
+      $(hel l.hel)
+    $(hel r.hel)
   ::
   ++  stag
     |*  [gob=* sef=rule]
