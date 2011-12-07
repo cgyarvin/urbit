@@ -4,13 +4,13 @@
 */
   /** Driver control strings for each tier.
   **/
-#   define Pt0           k_227
-#   define Pt1           k_227__a
-#   define Pt2           k_227__a__b
-#   define Pt3           k_227__a__b__c
-#   define Pt4           k_227__a__b__c__d
-#   define Pt5           k_227__a__b__c__d__e
-#   define Pt6           k_227__a__b__c__d__e__f
+#   define Pt0           k_226
+#   define Pt1           k_226__a
+#   define Pt2           k_226__a__b
+#   define Pt3           k_226__a__b__c
+#   define Pt4           k_226__a__b__c__d
+#   define Pt5           k_226__a__b__c__d__e
+#   define Pt6           k_226__a__b__c__d__e__f
 
   /** Test codes.
   **/
