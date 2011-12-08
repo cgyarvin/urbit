@@ -1045,7 +1045,6 @@
         ?~(wan (lth +.ort wan) (lth +.ort -.wan))
     =+  ^=  hel
         =+  hel=`*(tree %{i.leh})`~
-        ~|  %hellish
         |-  ^-  hel
         ?~  leh
           ~
@@ -1073,7 +1072,8 @@
     ?:  ?~  p.n.hel
           =(p.n.hel i.q.tub)
         ?&((gte i.q.tub -.p.n.hel) (lte i.q.tub +.p.n.hel))
-      (q.n.hel [(slip i.q.tub p.tub) t.q.tub])
+      ::  (q.n.hel [(slip i.q.tub p.tub) t.q.tub])
+      (q.n.hel tub)
     ?:  (wor i.q.tub p.n.hel)
       $(hel l.hel)
     $(hel r.hel)
