@@ -19,7 +19,7 @@
 #include "all.h"
 
 #define GUNN
-// #define PROBE
+#define PROBE
 // #define DPROBE
 #define PERF
 #define PERF_REAM
@@ -1470,13 +1470,13 @@ _eyre_app(u2_wire wir_r,
     {
       u2_noun gen;
 
-      gen = _eyre_call_1(wir_r, u2_yes, ken, "ream:!%", src);
-
       u2_tx_open(wir_r);
-      fom = _eyre_call_1
-        (wir_r, u2_yes, ken, "|!(a=*gene q:(~(mint ut %noun) %noun a))", gen);
+      gen = _eyre_call_1(wir_r, u2_yes, ken, "ream:!%", src);
       sab = u2_tx_done(wir_r);
       u2_tx_do_profile(wir_r, u2_no);
+
+      fom = _eyre_call_1
+        (wir_r, u2_yes, ken, "|!(a=*gene q:(~(mint ut %noun) %noun a))", gen);
     }
 #else
     fom = _eyre_nock(wir_r, u2_yes, src, ken);

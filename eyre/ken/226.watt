@@ -1,4 +1,3 @@
-!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -1067,6 +1066,7 @@
     ?~  q.tub
       (fail tub)
     |-
+    ~#  stew
     ?~  hel
       (fail tub)
     ?:  ?~  p.n.hel
@@ -3909,138 +3909,150 @@
   ::
   ++  norm
     |=  tol=?
-    =<  ;~  pose
-          ;~  pfix  bar
-            ;~  pose
-              (rune cen %brcn expa)
-              (rune col %brcl expb)
-              (rune dot %brdt expa)
-              (rune lus %brls expb)
-              (rune mus %brms expa)
-              (rune tar %brtr expb)
-              (rune tis %brts expb)
-              (rune zap %brzp expb)
+    =<  %-  stew
+        :~  :-  '|'
+            ;~  pfix  bar
+              %-  stew  :~  
+                ['%' (rune cen %brcn expa)]
+                [':' (rune col %brcl expb)]
+                ['.' (rune dot %brdt expa)]
+                ['+' (rune lus %brls expb)]
+                ['-' (rune mus %brms expa)]
+                ['*' (rune tar %brtr expb)]
+                ['=' (rune tis %brts expb)]
+                ['!' (rune zap %brzp expb)]
+              ==
             ==
-          ==
-          ;~  pfix  cen
-            ;~  pose
-              (rune bar %cnbr expp)
-              (rune col %cncl expb)
-              (rune dot %cndt expb)
-              (rune ket %cnkt expf)
-              (rune lus %cnls expc) 
-              (rune mus %cnms expk)
-              (rune sig %cnsg expq)
-              (rune tis %cnts expj)
-              (rune tar %cntr expa)
+            :-  '%'
+            ;~  pfix  cen
+              %-  stew  :~
+                ['|' (rune bar %cnbr expp)]
+                [':' (rune col %cncl expb)]
+                ['.' (rune dot %cndt expb)]
+                ['^' (rune ket %cnkt expf)]
+                ['+' (rune lus %cnls expc)]
+                ['-' (rune mus %cnms expk)]
+                ['~' (rune sig %cnsg expq)]
+                ['=' (rune tis %cnts expj)]
+                ['*' (rune tar %cntr expa)]
+              ==
             ==
-          ==
-          ;~  pfix  col
-            ;~  pose
-              (rune ket %clkt expf)
-              (rune lus %clls expc)
-              (rune mus %clms expb)
-              (rune sig %clsg exps)
-              (rune tar %cltr exps)
+            :-  ':'
+            ;~  pfix  col
+              %-  stew  :~
+                ['^' (rune ket %clkt expf)]
+                ['+' (rune lus %clls expc)]
+                ['-' (rune mus %clms expb)]
+                ['~' (rune sig %clsg exps)]
+                ['*' (rune tar %cltr exps)]
+              ==
             ==
-          ==
-          ;~  pfix  dot
-            ;~  pose
-              (rune lus %dtls expa)
-              (rune tar %dttr expb)
-              (rune tis %dtts expb)
-              (rune wut %dtwt expa)
+            :-  '.'
+            ;~  pfix  dot
+              %-  stew  :~
+                ['+' (rune lus %dtls expa)]
+                ['*' (rune tar %dttr expb)]
+                ['=' (rune tis %dtts expb)]
+                ['?' (rune wut %dtwt expa)]
+              ==
             ==
-          ==
-          ;~  pfix  hes
-            ;~  pose
-              (rune bar %hsbr expu)
-              (rune cen %hscn expw)
-              (rune ket %hskt expw)
-              (rune pam %hspm expu)
-              (rune sig %hssg expw)
-              (rune tis %hsts expv)
-              (rune tar %hstr expw)
+            :-  '$'
+            ;~  pfix  hes
+              %-  stew  :~
+                ['|' (rune bar %hsbr expu)]
+                ['%' (rune cen %hscn expw)]
+                ['^' (rune ket %hskt expw)]
+                ['&' (rune pam %hspm expu)]
+                ['~' (rune sig %hssg expw)]
+                ['=' (rune tis %hsts expv)]
+                ['*' (rune tar %hstr expw)]
+              ==
             ==
-          ==
-          ;~  pfix  ket
-            ;~  pose
-              (rune col %ktcl expb)
-              (rune dot %ktdt expb)
-              (rune gal %ktgl expb)
-              (rune gar %ktgr expb)
-              (rune mus %ktms expb)
-              (rune sig %ktsg expa)
-              (rune tis %ktts expg)
+            :-  '^'
+            ;~  pfix  ket
+              %-  stew  :~
+                [':' (rune col %ktcl expb)]
+                ['.' (rune dot %ktdt expb)]
+                ['<' (rune gal %ktgl expb)]
+                ['>' (rune gar %ktgr expb)]
+                ['-' (rune mus %ktms expb)]
+                ['~' (rune sig %ktsg expa)]
+                ['=' (rune tis %ktts expg)]
+              ==
             ==
-          ==
-          ;~  pfix  pam
-            ;~  pose
-              (rune cen %pmcn expe)
-              (rune col %pmcl expr)
-              (rune dot %pmdt expe)
-              (rune lus %pmls expr)
-              (rune mus %pmms expr)
-              (rune tis %pmts expr)
-              (rune zap %pmzp expr)
+            :-  '&'
+            ;~  pfix  pam
+              %-  stew  :~
+                ['%' (rune cen %pmcn expe)]
+                [':' (rune col %pmcl expr)]
+                ['.' (rune dot %pmdt expe)]
+                ['+' (rune lus %pmls expr)]
+                ['-' (rune mus %pmms expr)]
+                ['=' (rune tis %pmts expr)]
+                ['!' (rune zap %pmzp expr)]
+              ==
             ==
-          ==
-          ;~  pfix  sig
-            ;~  pose
-              (rune bar %sgbr expb)
-              (rune cen %sgcn hind)
-              (rune col %sgcl hina)
-              (rune dot %sgdt hine)
-              (rune gal %sggl hinb)
-              (rune gar %sggr hinb)
-              (rune hes %sghs expg)
-              (rune hax %sghx expg)
-              (rune ket %sgkt expa)
-              (rune lus %sgls hinc)
-              (rune mus %sgms hinc)
-              (rune pam %sgpm expb)
-              (rune sig %sgsg expb)
-              (rune tis %sgts expb)
+            :-  '~'
+            ;~  pfix  sig
+              %-  stew  :~
+                ['|' (rune bar %sgbr expb)]
+                ['%' (rune cen %sgcn hind)]
+                [':' (rune col %sgcl hina)]
+                ['.' (rune dot %sgdt hine)]
+                ['<' (rune gal %sggl hinb)]
+                ['>' (rune gar %sggr hinb)]
+                ['$' (rune hes %sghs expg)]
+                ['#' (rune hax %sghx expg)]
+                ['^' (rune ket %sgkt expa)]
+                ['+' (rune lus %sgls hinc)]
+                ['-' (rune mus %sgms hinc)]
+                ['&' (rune pam %sgpm expb)]
+                ['~' (rune sig %sgsg expb)]
+                ['=' (rune tis %sgts expb)]
+              ==
             ==
-          ==
-          ;~  pfix  sem
-            ;~  pose
-              (rune col %smcl expi)
-              (rune sig %smsg expi)
+            :-  ';'
+            ;~  pfix  sem
+              %-  stew  :~
+                [':' (rune col %smcl expi)]
+                ['~' (rune sig %smsg expi)]
+              ==
             ==
-          ==
-          ;~  pfix  tis
-            ;~  pose
-              (rune gal %tsgl expb)
-              (rune gar %tsgr expb)
-              (rune lus %tsls expb)
-              (rune mus %tsms expb)
+            :-  '='
+            ;~  pfix  tis
+              %-  stew  :~
+                ['<' (rune gal %tsgl expb)]
+                ['>' (rune gar %tsgr expb)]
+                ['+' (rune lus %tsls expb)]
+                ['-' (rune mus %tsms expb)]
+              ==
             ==
-          ==
-          ;~  pfix  wut
-            ;~  pose
-              (rune bar %wtbr exps)
-              (rune col %wtcl expc)
-              (rune dot %wtdt expc)
-              (rune gal %wtgl expb)
-              (rune gar %wtgr expb)
-              (rune lus %wtls expm)
-              (rune mus %wtms exph)
-              (rune pam %wtpm exps)
-              (rune sig %wtsg expc)
-              (rune tis %wtts expb)
-              (rune zap %wtzp expa)
+            :-  '?'
+            ;~  pfix  wut
+              %-  stew  :~
+                ['|' (rune bar %wtbr exps)]
+                [':' (rune col %wtcl expc)]
+                ['.' (rune dot %wtdt expc)]
+                ['<' (rune gal %wtgl expb)]
+                ['>' (rune gar %wtgr expb)]
+                ['+' (rune lus %wtls expm)]
+                ['-' (rune mus %wtms exph)]
+                ['&' (rune pam %wtpm exps)]
+                ['~' (rune sig %wtsg expc)]
+                ['=' (rune tis %wtts expb)]
+                ['!' (rune zap %wtzp expa)]
+              ==
             ==
-          ==
-          ;~  pfix  zap
-            ;~  pose
-              ;~(pfix col (toad expz))
-              (rune com %zpcm expb)
-              (rune hax %zphx expa)
-              (rune sem %zpsm expb)
-              (rune tis %zpts expa)
+            :-  '!'
+            ;~  pfix  zap
+              %-  stew  :~
+                [':' ;~(pfix col (toad expz))]
+                [',' (rune com %zpcm expb)]
+                ['#' (rune hax %zphx expa)]
+                [';' (rune sem %zpsm expb)]
+                ['=' (rune tis %zpts expa)]
+              ==
             ==
-          ==
         ==
     &.
     ::
