@@ -1015,6 +1015,12 @@
       (fail tub)
     (next tub)
   ::
+  ++  meat
+    |*  sef=|=(* rule)
+    |=  tub=*clip
+    ^-  *(like %{gar})
+    ((sef) tub)
+  ::
   ++  next
     |=  tub=*clip
     ^-  *(like char)
@@ -1063,10 +1069,10 @@
           [n.yal l.yal nuc]
         [n.nuc [n.yal l.yal l.nuc] r.nuc]
     |=  tub=*clip
+    ~#  stew
     ?~  q.tub
       (fail tub)
     |-
-    ~#  stew
     ?~  hel
       (fail tub)
     ?:  ?~  p.n.hel
@@ -1096,6 +1102,21 @@
     =+  wag=$(tub q.u.q.vex)
     ?>  ?=(^ q.wag)
     [(last p.vex p.wag) [~ (raq p.u.q.vex p.u.q.wag) q.u.q.wag]]
+  ::
+  ++  twin
+    |*  [yem=rule doo=rule]
+    |=  tub=*clip
+    =+  [vex=(yem tub) wog=(doo tub)]
+    ?.  =(vex wog)
+      ~|  %twin-damage
+      ?~  q.vex
+        ?~  q.wog
+          !!
+        !!
+      ?~  q.wog
+        !!
+      ~|([[%vex p.u.q.vex] [%wog p.u.q.wog]] !!)
+    vex
   ::
   ::      Tier 5a/2, parsing: bolts
   ::
@@ -2661,7 +2682,7 @@
             (show [%m '|%a%x'] p.hab r.hab ~)
           (show [%m '&%d%a%x'] q.hab p.hab r.hab ~)
       ^=  hab  ^-  [p=@ q=@ r=@]
-      :+  ?-(p.q.sut %gold '.', %iron '=', %lead '%', %zinc ':')
+      :+  ?-(p.q.sut %gold '.', %iron '+', %lead '%', %zinc ':')
         |-  ^-  @
         ?-  q.r.q.sut
           ~        0
@@ -3836,58 +3857,156 @@
 ++  vast
   =+  bug=`?`|
   &.  
-  ++  flat
+  ++  numb
+    |*  qow=rule
+    ;~((bend |=([a=[%dtsg p=*term q=@] b=*] [%dtpt p.a q.a])) qow tar)
+  ::
+  ++  scat
     %+  knee  *gene  |.  ~+
-    ;~  pose
-      (stag %wtbr ;~(pfix bar (ifix [pal par] (most ace wide))))
-      (stag %wtpm ;~(pfix pam (ifix [pal par] (most ace wide))))
-      ;~  (bend |=([a=[%dtsg p=*term q=@] b=*] [%dtpt p.a q.a]))
+    %-  stew  :~  
+      :-  '!'
+        ;~  pose
+          (stag %wtzp ;~(pfix zap wide))
+          (stag %zpzp (cold ~ ;~(plug zap zap)))
+          (stag %zpcn (cold ~ ;~(plug zap cen)))
+        ==
+      :-  '$'
+        (cook |=(a=*twig [%cnts a ~]) rope)
+      :-  '%'
+        ;~  pose
+          %+  cook
+            |=(a=*(list gene) [%hscn a ~]) 
+          ;~(pfix cen (ifix [kel ker] (most ace wide)))
+          (stag %dtsg (stag %tam ;~(pfix cen sym)))
+          (stag %dtsg (stag %tam (cold %% ;~(plug cen cen))))
+        == 
+      :-  '&'
+        ;~  pose
+          (stag %wtpm ;~(pfix pam (ifix [pal par] (most ace wide))))
+          (numb (stag %dtsg (stag %f (cold & pam))))
+        ==
+      :-  '\''
+        (numb (stag %dtsg (stag %ta qut)))
+      :-  '('
+        (stag %cnms (ifix [pal par] (most ace wide))) 
+      :-  '*'
+        ;~  pose
+          (stag %cntr ;~(pfix tar wide))
+          (stag %smts (cold %noun tar))
+        ==
+      :-  '+'
+        ;~  pose
+          (stag %dtls ;~(pfix lus (ifix [pal par] wide)))
+          (cook |=(a=*twig [%cnts a ~]) rope)
+        ==
+      :-  ','
+        (stag %ktsg ;~(pfix com wide))
+      :-  '-'
+        ;~  pose
+          (stag %dtsg (stag %up ;~(pfix mus fed)))
+          (cook |=(a=*twig [%cnts a ~]) rope)
+        ==
+      :-  '.'
+        (cook |=(a=*twig [%cnts a ~]) rope)
+      :-  ['0' '9']
+        %-  numb
         %+  stag
           %dtsg
         ;~  pose
           (stag %ux ;~(pfix (just '0') (just 'x') hex))
           (stag %uv ;~(pfix (just '0') (just 'v') viz))
           (stag %ud dem)
-          (stag %ta qut)
-          (stag %f (cold & pam))
-          (stag %f (cold | bar))
-          (stag %up ;~(pfix mus fed))
-          (stag %tam ;~(pfix cen sym))
-          (stag %tam (cold %% ;~(plug cen cen)))
         ==
-        tar
-      == 
+      :-  ':'
+        (stag %smcl ;~(pfix col (ifix [pal par] (most ace wide))))
+      :-  '='
+        (stag %dtts ;~(pfix tis (ifix [pal par] ;~((glue ace) wide wide))))
+      :-  '?'
+        (stag %smts (cold %flag wut))
+      :-  '@'
+        (stag %smts (cold %atom pat))
+      :-  '['
+        (stag %cltr (ifix [sel ser] (most ace wide)))
+      :-  '^'
+        (stag %smts (cold %cell ket))
+      :-  '`' 
+        (stag %ktms ;~(plug ;~(pfix tec wide) ;~(pfix tec wide)))
+      :-  ['a' 'z']
+        (cook |=(a=*twig [%cnts a ~]) rope)
+      :-  '{'
+        (cook |=(a=*(list gene) [%hstr a ~]) (ifix [kel ker] (most ace wide)))
+      :-  '|'
+        ;~  pose
+          (stag %wtbr ;~(pfix bar (ifix [pal par] (most ace wide))))
+          (numb (stag %dtsg (stag %f (cold | bar))))
+        ==
+      :-  '~'
+        ;~  pose
+          %+  cook
+            |=(a=*(list gene) [%hssg a ~])
+          ;~(pfix sig (ifix [sel ser] (most ace wide)))
+          %+  stag
+            %cnsg 
+          ;~  pfix 
+            sig 
+            %+  ifix
+              [pal par] 
+            ;~((glue ace) rope wide (stag %cltr (most ace wide)))
+          ==
+          (stag %smts (cold %null sig))
+        ==
+    ==
+  ::
+  ++  flat
+    %+  knee  *gene  |.  ~+
+    ;~  pose
+      (stag %wtbr ;~(pfix bar (ifix [pal par] (most ace wide))))  :: |
+      (stag %wtpm ;~(pfix pam (ifix [pal par] (most ace wide))))  :: &
+      %-  numb
+      %+  stag
+        %dtsg
+      ;~  pose
+        (stag %ux ;~(pfix (just '0') (just 'x') hex))     ::  0
+        (stag %uv ;~(pfix (just '0') (just 'v') viz))     ::  0
+        (stag %ud dem)                                    ::  0-9
+        (stag %ta qut)                                    ::  '
+        (stag %f (cold & pam))                            ::  &
+        (stag %f (cold | bar))                            ::  |
+        (stag %up ;~(pfix mus fed))                       ::  -
+        (stag %tam ;~(pfix cen sym))                      ::  %
+        (stag %tam (cold %% ;~(plug cen cen)))            ::  %
+      ==
     ::
-      (stag %dtts ;~(pfix tis (ifix [pal par] ;~((glue ace) wide wide))))
-      (stag %dtls ;~(pfix lus (ifix [pal par] wide)))
-      (stag %cltr (ifix [sel ser] (most ace wide)))
-      (cook |=(a=*(list gene) [%hstr a ~]) (ifix [kel ker] (most ace wide)))
-      (stag %cnms (ifix [pal par] (most ace wide)))
-      (stag %smcl ;~(pfix col (ifix [pal par] (most ace wide))))
-      (cook |=(a=*twig [%cnts a ~]) rope)
-      (stag %wtzp ;~(pfix zap wide))
-      (stag %cntr ;~(pfix tar wide))
-      (stag %ktms ;~(plug ;~(pfix tec wide) ;~(pfix tec wide)))
-      (stag %zpzp (cold ~ ;~(plug zap zap)))
-      (stag %zpcn (cold ~ ;~(plug zap cen)))
-      (stag %ktsg ;~(pfix com wide))
+      (stag %dtts ;~(pfix tis (ifix [pal par] ;~((glue ace) wide wide)))) :: =
+      (stag %dtls ;~(pfix lus (ifix [pal par] wide)))                     :: +
+      (stag %cltr (ifix [sel ser] (most ace wide)))                       :: [
+      (cook |=(a=*(list gene) [%hstr a ~]) (ifix [kel ker] (most ace wide))) ::{
+      (stag %cnms (ifix [pal par] (most ace wide)))                       :: (
+      (stag %smcl ;~(pfix col (ifix [pal par] (most ace wide))))          :: :
+      (cook |=(a=*twig [%cnts a ~]) rope)                           :: funk
+      (stag %wtzp ;~(pfix zap wide))                                :: !
+      (stag %cntr ;~(pfix tar wide))                                ::  *
+      (stag %ktms ;~(plug ;~(pfix tec wide) ;~(pfix tec wide)))     :: `
+      (stag %zpzp (cold ~ ;~(plug zap zap)))                        :: !
+      (stag %zpcn (cold ~ ;~(plug zap cen)))                        :: !
+      (stag %ktsg ;~(pfix com wide))                                :: ,
     ::
-      %+  cook 
+      %+  cook                                                      :: %
         |=(a=*(list gene) [%hscn a ~]) 
       ;~(pfix cen (ifix [kel ker] (most ace wide)))
     ::
-      %+  cook
+      %+  cook                                                      :: ~
         |=(a=*(list gene) [%hssg a ~])
       ;~(pfix sig (ifix [sel ser] (most ace wide)))
     ::
-      %+  stag
+      %+  stag                                                      ::  ~
         %cnsg 
       ;~  pfix 
         sig 
         (ifix [pal par] ;~((glue ace) rope wide (stag %cltr (most ace wide))))
       ==
     ::
-      ;~  pfix
+      ;~  pfix                                                      ::  /
         fas
         %+  cook
           |=(a=*(list gene) [%clsg (flop a)])
@@ -3899,8 +4018,8 @@
       %+  stag
         %smts
       ;~  pose
-        (cold %flag wut)
-        (cold %noun tar)
+        (cold %flag wut)                                            ::  ?
+        (cold %noun tar)                                            ::
         (cold %cell ket)
         (cold %atom pat)
         (cold %null sig)
