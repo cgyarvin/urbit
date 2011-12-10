@@ -910,52 +910,18 @@ u2_nk_soft(u2_wire wir_r,
   u2_weak pro;
   u2_flag bit;
 
-#if 0
-  switch ( u2_rail_hip_m(wir_r) ) {
-    default: c3_assert(0); return u2_none;
-
-    case c3__sand: {
-      u2_ray  cap_r = u2_rail_cap_r(wir_r);
-      u2_ray  hat_r = u2_rail_hat_r(wir_r);
-      u2_ray  mat_r = u2_rail_mat_r(wir_r);
-      u2_ray  rut_r = u2_rail_rut_r(wir_r);
-
-      LoomSink; u2_tx_sink_cas(wir_r);
-      pro = _nock_sand(wir_r, cap_r, bus, fol);
-      u2_tx_rise_cas(wir_r); LoomRise;
-
-      if ( u2_none == pro ) {
-        u2_rail_cap_r(wir_r) = cap_r;
-        u2_rail_hat_r(wir_r) = hat_r;
-        u2_rail_mat_r(wir_r) = mat_r;
-        u2_rail_rut_r(wir_r) = rut_r;
-        u2_rail_hip_m(wir_r) = c3__sand;
-      }
-      u2_rl_lose(wir_r, bus);
-
-      return pro;
-    }
-    case c3__rock: {
-      LoomSink; u2_tx_sink_cas(wir_r);
-      pro = _nock_rock(wir_r, bus, fol);
-      u2_tx_rise_cas(wir_r); LoomRise;
-
-      return pro;
-    }
-  }
-#else
-
   bit = u2_tx_sys_bit(wir_r, u2_no);
   c3_assert(bit == u2_yes);
+  bit = u2_tx_glu_bit(wir_r, u2_yes);
 
   LoomSink; u2_tx_sink_cas(wir_r);
   pro = _nock_rock(wir_r, bus, fol);
   u2_tx_rise_cas(wir_r); LoomRise;
 
   u2_tx_sys_bit(wir_r, u2_yes);
+  u2_tx_glu_bit(wir_r, bit);
 
   return pro;
-#endif
 }
 
 /* u2_nk_nock():

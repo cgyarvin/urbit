@@ -1103,21 +1103,6 @@
     ?>  ?=(^ q.wag)
     [(last p.vex p.wag) [~ (raq p.u.q.vex p.u.q.wag) q.u.q.wag]]
   ::
-  ++  twin
-    |*  [yem=rule doo=rule]
-    |=  tub=*clip
-    =+  [vex=(yem tub) wog=(doo tub)]
-    ?.  =(vex wog)
-      ~|  %twin-damage
-      ?~  q.vex
-        ?~  q.wog
-          !!
-        !!
-      ?~  q.wog
-        !!
-      ~|([[%vex p.u.q.vex] [%wog p.u.q.wog]] !!)
-    vex
-  ::
   ::      Tier 5a/2, parsing: bolts
   ::
   ++  bend
@@ -1140,7 +1125,7 @@
     =+  yit=(sab q.u.q.vex)
     =+  yur=(last p.vex p.yit)
     ?~  q.yit
-      yit
+      [p=yur q=q.yit]
     [p=yur q=[~ u=[p=(raq p.u.q.vex p.u.q.yit) q=q.u.q.yit]]]
   ::
   ++  glue
@@ -3877,8 +3862,8 @@
           %+  cook
             |=(a=*(list gene) [%hscn a ~]) 
           ;~(pfix cen (ifix [kel ker] (most ace wide)))
-          (stag %dtsg (stag %tam ;~(pfix cen sym)))
-          (stag %dtsg (stag %tam (cold %% ;~(plug cen cen))))
+          (numb (stag %dtsg (stag %tam ;~(pfix cen sym))))
+          (numb (stag %dtsg (stag %tam (cold %% ;~(plug cen cen)))))
         == 
       :-  '&'
         ;~  pose
@@ -3955,75 +3940,6 @@
           ==
           (stag %smts (cold %null sig))
         ==
-    ==
-  ::
-  ++  flat
-    %+  knee  *gene  |.  ~+
-    ;~  pose
-      (stag %wtbr ;~(pfix bar (ifix [pal par] (most ace wide))))  :: |
-      (stag %wtpm ;~(pfix pam (ifix [pal par] (most ace wide))))  :: &
-      %-  numb
-      %+  stag
-        %dtsg
-      ;~  pose
-        (stag %ux ;~(pfix (just '0') (just 'x') hex))     ::  0
-        (stag %uv ;~(pfix (just '0') (just 'v') viz))     ::  0
-        (stag %ud dem)                                    ::  0-9
-        (stag %ta qut)                                    ::  '
-        (stag %f (cold & pam))                            ::  &
-        (stag %f (cold | bar))                            ::  |
-        (stag %up ;~(pfix mus fed))                       ::  -
-        (stag %tam ;~(pfix cen sym))                      ::  %
-        (stag %tam (cold %% ;~(plug cen cen)))            ::  %
-      ==
-    ::
-      (stag %dtts ;~(pfix tis (ifix [pal par] ;~((glue ace) wide wide)))) :: =
-      (stag %dtls ;~(pfix lus (ifix [pal par] wide)))                     :: +
-      (stag %cltr (ifix [sel ser] (most ace wide)))                       :: [
-      (cook |=(a=*(list gene) [%hstr a ~]) (ifix [kel ker] (most ace wide))) ::{
-      (stag %cnms (ifix [pal par] (most ace wide)))                       :: (
-      (stag %smcl ;~(pfix col (ifix [pal par] (most ace wide))))          :: :
-      (cook |=(a=*twig [%cnts a ~]) rope)                           :: funk
-      (stag %wtzp ;~(pfix zap wide))                                :: !
-      (stag %cntr ;~(pfix tar wide))                                ::  *
-      (stag %ktms ;~(plug ;~(pfix tec wide) ;~(pfix tec wide)))     :: `
-      (stag %zpzp (cold ~ ;~(plug zap zap)))                        :: !
-      (stag %zpcn (cold ~ ;~(plug zap cen)))                        :: !
-      (stag %ktsg ;~(pfix com wide))                                :: ,
-    ::
-      %+  cook                                                      :: %
-        |=(a=*(list gene) [%hscn a ~]) 
-      ;~(pfix cen (ifix [kel ker] (most ace wide)))
-    ::
-      %+  cook                                                      :: ~
-        |=(a=*(list gene) [%hssg a ~])
-      ;~(pfix sig (ifix [sel ser] (most ace wide)))
-    ::
-      %+  stag                                                      ::  ~
-        %cnsg 
-      ;~  pfix 
-        sig 
-        (ifix [pal par] ;~((glue ace) rope wide (stag %cltr (most ace wide))))
-      ==
-    ::
-      ;~  pfix                                                      ::  /
-        fas
-        %+  cook
-          |=(a=*(list gene) [%clsg (flop a)])
-        %+  most
-          fas
-        ;~(pose (cook |=(a=*term [%dtsg %tam a]) sym) (ifix [sel ser] wide))
-      ==
-    ::
-      %+  stag
-        %smts
-      ;~  pose
-        (cold %flag wut)                                            ::  ?
-        (cold %noun tar)                                            ::
-        (cold %cell ket)
-        (cold %atom pat)
-        (cold %null sig)
-      ==
     ==
   ::
   ++  norm
@@ -4290,7 +4206,7 @@
             %pal  [%cnts ~(rake ap ros) p.vil]
             %cab  [%clms ros p.vil]
         ==
-      flat
+      scat
       ;~  pose
         ;~(plug (cold %tis tis) wide)
         ;~(plug (cold %col col) wide)

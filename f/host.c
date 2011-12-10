@@ -794,8 +794,10 @@ _ho_run(u2_ray      wir_r,
         u2_noun hoc = u2_rx(wir_r, u2_wire_tax(wir_r));
         u2_ray  kit_r = u2_wire_kit_r(wir_r);
         u2_noun ret; 
+        u2_flag glu;
 
         u2_wire_kit_r(wir_r) = 0;
+        glu = 
         ret = jet_j->fun_f(wir_r, cor);
         u2_wire_kit_r(wir_r) = kit_r;
 

@@ -59,9 +59,17 @@
             */
             u2_flag sys;
 
-            /* Number of samples in C code.
+            /* Function bit for sys - u2_yes == overhead, u2_no == function
+            */
+            u2_flag glu;
+
+            /* Number of samples in random C code.
             */
             c3_d com_d;
+
+            /* Number of samples in jet code.
+            */
+            c3_d jet_d;
 
             /* Number of samples in interpreted code.
             */
@@ -222,7 +230,13 @@
         u2_flag
         u2_tx_sys_bit(u2_ray  wir_r, 
                       u2_flag val);
- 
+
+      /* u2_tx_glu_bit(): set glue bit within system bit.
+      */
+        u2_flag
+        u2_tx_glu_bit(u2_ray wir_r, 
+                      u2_flag val);
+
     /** Tasks.
     **/
       /* u2_tx_task_in(): enter a task for profiling purposes.

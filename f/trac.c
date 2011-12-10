@@ -96,7 +96,7 @@
       } else {
         u2_trac_be(rac_r, c3_d, wer.erp_d) += 1;
       }
-      u2_trac_at(rac_r, wer.sys) = u2_yes;
+      // u2_trac_at(rac_r, wer.sys) = u2_yes;
 
       _tx_sample_in(u2_trac_at(rac_r, duz.don));
     }
