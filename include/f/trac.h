@@ -236,7 +236,6 @@
         u2_flag
         u2_tx_glu_bit(u2_ray wir_r, 
                       u2_flag val);
-
     /** Tasks.
     **/
       /* u2_tx_task_in(): enter a task for profiling purposes.

@@ -44,6 +44,16 @@
       b
     $(b +(b))
   ::
+  ++  dum
+    |=  a=@
+    ^-  @
+    ?<  =(0 a)
+    =+  b=@
+    |-
+    ?:  =(a +(b))
+      b
+    $(b +(b))
+  ::
   ++  div
     ~.  %div
     |=  [a=@ b=@]
@@ -936,6 +946,7 @@
             ?:((gth p.zyc p.naz) zyc naz)
   ::
   ++  slip  |=  [weq=*char naz=*hair]
+            ~#  slip
             ^-  *hair
             ?:(=(10 weq) [+(p.naz) 1] [p.naz +(q.naz)])
   ::
@@ -952,6 +963,7 @@
   ++  cook
     |*  [poq=nap sef=rule]
     |=  tub=*clip
+    ~#  cook
     =+  vex=(sef tub)
     ?~  q.vex
       vex
@@ -979,7 +991,9 @@
     [p=p.vex q=[~ u=[p=(hez [%% p.tub p.q.u.q.vex] p.u.q.vex) q=q.u.q.vex]]]
   ::
   ++  just
+    ~.  %just
     |=  daf=*char
+    ~.  %fun
     |=  tub=*clip
     ~#  just
     ^-  *(like char)
@@ -1008,18 +1022,13 @@
   ++  mask
     |=  bud=*(list char)
     |=  tub=*clip
+    ~#  mask
     ^-  *(like char)
     ?~  q.tub
       (fail tub) 
     ?.  (lien bud |=(a=*char =(i.q.tub a)))
       (fail tub)
     (next tub)
-  ::
-  ++  meat
-    |*  sef=|=(* rule)
-    |=  tub=*clip
-    ^-  *(like %{gar})
-    ((sef) tub)
   ::
   ++  next
     |=  tub=*clip

@@ -76,6 +76,8 @@
     extern u2_ho_jet j2_mbj(Pt5, rub)[];
     extern u2_ho_jet j2_mbj(Pt5, trip)[];
 
+    extern u2_ho_driver j2_mbd(Pt5, just)[];
+
   /* tier 6
   */
     extern u2_ho_jet j2_mbj(Pt6, cell)[];
@@ -199,6 +201,7 @@
   _watt_drivers_5[] = {
     { j2_sb(Pt5, cue), j2_mbj(Pt5, cue), 0, 0, u2_none },
     { j2_sb(Pt5, jam), j2_mbj(Pt5, jam), 0, 0, u2_none },
+    { j2_sb(Pt5, just), 0, j2_mbd(Pt5, just), 0, u2_none },
     { j2_sb(Pt5, mat), j2_mbj(Pt5, mat), 0, 0, u2_none },
     { j2_sb(Pt5, rub), j2_mbj(Pt5, rub), 0, 0, u2_none },
     { j2_sb(Pt5, trip), j2_mbj(Pt5, trip), 0, 0, u2_none },

@@ -535,6 +535,7 @@ _ho_explore_dummy(u2_rail     ral_r,
     abort();
   }
   dry_d->cos_c = cos_c;
+  dry_d->sub_d = 0; 
   dry_d->xip = xip;
   if ( !(dry_d->fan_j = malloc(sizeof(u2_ho_jet))) ) {
     abort();
@@ -794,11 +795,11 @@ _ho_run(u2_ray      wir_r,
         u2_noun hoc = u2_rx(wir_r, u2_wire_tax(wir_r));
         u2_ray  kit_r = u2_wire_kit_r(wir_r);
         u2_noun ret; 
-        u2_flag glu;
 
         u2_wire_kit_r(wir_r) = 0;
-        glu = 
+        u2_tx_glu_bit(wir_r, u2_no);
         ret = jet_j->fun_f(wir_r, cor);
+        u2_tx_glu_bit(wir_r, u2_yes);
         u2_wire_kit_r(wir_r) = kit_r;
 
         if ( u2_none == ret ) {
@@ -846,7 +847,9 @@ _ho_run(u2_ray      wir_r,
           ret = u2_none;
         } 
         else {
+          u2_tx_glu_bit(wir_r, u2_no);
           ret = jet_j->fun_f(wir_r, cor);
+          u2_tx_glu_bit(wir_r, u2_yes);
           *tax = u2_none;
 
           c3_assert(u2_wire_tax(wir_r) == u2_kite_tax(u2_wire_kit_r(wir_r)));
@@ -1039,10 +1042,15 @@ u2_ho_kick(u2_ray   wir_r,
   if ( u2_none == (fol = u2_frag(axe, cor)) ) {
     return u2_none;
   }
-  else if ( 0 == (jet_j = _ho_conquer(wir_r, xip, axe)) ) {
-    return u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
-  }
   else {
-    return u2_ho_use(wir_r, jet_j, cor, fol);
+    jet_j = _ho_conquer(wir_r, xip, axe);
+
+    if ( 0 == jet_j ) {
+      // printf("no jet: %s\n", u2_ho_cstring(xip));
+      return u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
+    }
+    else {
+      return u2_ho_use(wir_r, jet_j, cor, fol);
+    }
   }
 }

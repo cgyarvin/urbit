@@ -397,6 +397,7 @@ J226_5_OFILES=\
        gen226/5/cue.o \
        gen226/5/jam.o \
        gen226/5/mat.o \
+       gen226/5/parse.o \
        gen226/5/rub.o \
        gen226/5/trip.o
 

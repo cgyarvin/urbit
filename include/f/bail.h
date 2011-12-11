@@ -37,7 +37,7 @@
         u2_bl_done(u2_wire wir_r,
                    u2_ray jub_r);
 
-      /* u2_bl_set(): wrapper for setjmp().
+      /* u2_bl_set(): wrapper for _setjmp().
       */
 #     if 0
         c3_t
@@ -45,9 +45,9 @@
 #     else
 #       define u2_bl_set(wir_r) \
           ( (c3_l) \
-            setjmp((void *) \
-                    u2_at_cord(u2_kite_buf_r(u2_wire_kit_r(wir_r)), \
-                               c3_wiseof(jmp_buf))) \
+            _setjmp((void *) \
+                     u2_at_cord(u2_kite_buf_r(u2_wire_kit_r(wir_r)), \
+                                c3_wiseof(jmp_buf))) \
           )
 #     endif
            

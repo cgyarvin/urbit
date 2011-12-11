@@ -90,13 +90,17 @@
       u2_ray rac_r = _tx_rac_r;
 
       c3_assert(_tx_on == 1);
+      // printf("sample sys %d\n", u2_trac_at(rac_r, wer.sys));
 
       if ( u2_yes == u2_trac_at(rac_r, wer.sys) ) {
-        u2_trac_be(rac_r, c3_d, wer.com_d) += 1;
+        if ( u2_yes == u2_trac_at(rac_r, wer.glu) ) {
+          u2_trac_be(rac_r, c3_d, wer.com_d) += 1;
+        } else {
+          u2_trac_be(rac_r, c3_d, wer.jet_d) += 1;
+        }
       } else {
         u2_trac_be(rac_r, c3_d, wer.erp_d) += 1;
       }
-      // u2_trac_at(rac_r, wer.sys) = u2_yes;
 
       _tx_sample_in(u2_trac_at(rac_r, duz.don));
     }
@@ -125,13 +129,13 @@ _tx_samp_on(u2_ray rac_r)
     sig_s.sa_mask = 0;
     sig_s.sa_flags = 0;
 
-    sigaction(SIGVTALRM, &sig_s, 0);
+    sigaction(SIGPROF, &sig_s, 0);
 
     itm_v.it_interval.tv_sec = 0;
     itm_v.it_interval.tv_usec = 10000;
     itm_v.it_value = itm_v.it_interval;
 
-    setitimer(ITIMER_VIRTUAL, &itm_v, 0);
+    setitimer(ITIMER_PROF, &itm_v, 0);
   }
 }
 
@@ -151,13 +155,13 @@ _tx_samp_off(u2_ray rac_r)
   itm_v.it_interval.tv_usec = 0;
   itm_v.it_value = itm_v.it_interval;
 
-  setitimer(ITIMER_VIRTUAL, &itm_v, 0);
+  setitimer(ITIMER_PROF, &itm_v, 0);
 
   sig_s.__sigaction_u.__sa_handler = SIG_DFL;
   sig_s.sa_mask = 0;
   sig_s.sa_flags = 0;
 
-  sigaction(SIGVTALRM, &sig_s, 0);
+  sigaction(SIGPROF, &sig_s, 0);
 }
 
 /* _tx_samples_in(): sample list.
@@ -266,16 +270,25 @@ _tx_events(u2_wire wir_r,
                          u2_trac_at(rac_r, sys.bos_w)),
                         cot);
 #endif
+
+#if 1
+  // These numbers are bogus for some bizarre reason - non-random samples???
+  //
   {
     c3_d com_d = u2_trac_be(rac_r, c3_d, wer.com_d);
+    c3_d jet_d = u2_trac_be(rac_r, c3_d, wer.jet_d);
     c3_d erp_d = u2_trac_be(rac_r, c3_d, wer.erp_d);
 
-    if ( com_d + erp_d ) {
-      c3_d sof_d = (erp_d * 100ULL) / (com_d + erp_d);
+    // printf("com_d %llu, jet_d %llu, erp_d %llu\n", com_d, jet_d, erp_d);
+    if ( com_d + erp_d + jet_d ) {
+      c3_d sof_d = (erp_d * 100ULL) / (com_d + erp_d + jet_d);
+      c3_d fun_d = (jet_d * 100ULL) / (com_d + erp_d + jet_d);
 
       cot = _tx_event(wir_r, "sys-softpercent", sof_d, cot);
+      cot = _tx_event(wir_r, "sys-jetpercent", fun_d, cot);
     }
   }
+#endif
 
   /* sys-time
   */
@@ -312,6 +325,17 @@ u2_tx_sys_bit(u2_ray wir_r, u2_flag val)
   return bit;
 }
  
+/* u2_tx_glu_bit(): set glutem bit, returning old value.
+*/
+u2_flag
+u2_tx_glu_bit(u2_ray wir_r, u2_flag val)
+{
+  u2_flag bit = u2_wrac_at(wir_r, wer.glu);
+
+  u2_wrac_at(wir_r, wer.glu) = val;
+  return bit;
+}
+ 
 /* u2_tx_init(): initialize state.
 */
 u2_ray
@@ -334,8 +358,10 @@ u2_tx_open(u2_wire wir_r)
 
   u2_trac_at(rac_r, wer.ryp) = u2_nul;
   u2_trac_at(rac_r, wer.sys) = u2_yes;
+  u2_trac_at(rac_r, wer.glu) = u2_yes;
   u2_trac_be(rac_r, c3_d, wer.erp_d) = 0;
   u2_trac_be(rac_r, c3_d, wer.com_d) = 0;
+  u2_trac_be(rac_r, c3_d, wer.jet_d) = 0;
 
   u2_trac_at(rac_r, duz.don) = u2_nul;
   u2_trac_at(rac_r, duz.cot) = u2_nul;
