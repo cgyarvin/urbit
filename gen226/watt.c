@@ -77,6 +77,7 @@
     extern u2_ho_jet j2_mbj(Pt5, plug)[];
     extern u2_ho_jet j2_mbj(Pt5, pose)[];
     extern u2_ho_jet j2_mbj(Pt5, rub)[];
+    extern u2_ho_jet j2_mbj(Pt5, sfix)[];
     extern u2_ho_jet j2_mbj(Pt5, trip)[];
 
     extern u2_ho_driver j2_mbd(Pt5, bend)[];
@@ -84,6 +85,7 @@
     extern u2_ho_driver j2_mbd(Pt5, comp)[];
     extern u2_ho_driver j2_mbd(Pt5, cook)[];
     extern u2_ho_driver j2_mbd(Pt5, easy)[];
+    extern u2_ho_driver j2_mbd(Pt5, glue)[];
     extern u2_ho_driver j2_mbd(Pt5, here)[];
     extern u2_ho_driver j2_mbd(Pt5, just)[];
     extern u2_ho_driver j2_mbd(Pt5, mask)[];
@@ -219,6 +221,7 @@
     { j2_sb(Pt5, cook), 0, j2_mbd(Pt5, cook), 0, u2_none },
     { j2_sb(Pt5, cue), j2_mbj(Pt5, cue), 0, 0, u2_none },
     { j2_sb(Pt5, easy), 0, j2_mbd(Pt5, easy), 0, u2_none },
+    { j2_sb(Pt5, glue), 0, j2_mbd(Pt5, glue), 0, u2_none },
     { j2_sb(Pt5, here), 0, j2_mbd(Pt5, here), 0, u2_none },
     { j2_sb(Pt5, jam), j2_mbj(Pt5, jam), 0, 0, u2_none },
     { j2_sb(Pt5, just), 0, j2_mbd(Pt5, just), 0, u2_none },
@@ -228,6 +231,7 @@
     { j2_sb(Pt5, plug), j2_mbj(Pt5, plug), 0, 0, u2_none },
     { j2_sb(Pt5, pose), j2_mbj(Pt5, pose), 0, 0, u2_none },
     { j2_sb(Pt5, rub), j2_mbj(Pt5, rub), 0, 0, u2_none },
+    { j2_sb(Pt5, sfix), j2_mbj(Pt5, sfix), 0, 0, u2_none },
     { j2_sb(Pt5, shim), 0, j2_mbd(Pt5, shim), 0, u2_none },
     { j2_sb(Pt5, stag), 0, j2_mbd(Pt5, stag), 0, u2_none },
     { j2_sb(Pt5, stew), 0, j2_mbd(Pt5, stew), 0, u2_none },
