@@ -256,8 +256,8 @@
     { j2_sb(Pt6, fork), j2_mbj(Pt6, fork), 0, 0, u2_none },
     { j2_sb(Pt6, hike), j2_mbj(Pt6, hike), 0, 0, u2_none },
     { j2_sb(Pt6, look), j2_mbj(Pt6, look), 0, 0, u2_none },
-    // { j2_sb(Pt6, ream), j2_mbj(Pt6, ream), 0, 0, u2_none },
-    // { j2_sb(Pt6, vest), j2_mbj(Pt6, vest), 0, 0, u2_none },
+//    { j2_sb(Pt6, ream), j2_mbj(Pt6, ream), 0, 0, u2_none },
+//    { j2_sb(Pt6, vest), j2_mbj(Pt6, vest), 0, 0, u2_none },
 
     { j2_sb(Pt6, ap), j2_mbj(Pt6, ap), j2_mbd(Pt6, ap), 0, u2_none },
     { j2_sb(Pt6, ut), j2_mbj(Pt6, ut), j2_mbd(Pt6, ut), 0, u2_none },

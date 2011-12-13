@@ -19,8 +19,8 @@
 #include "all.h"
 
 #define GUNN
-#define PROBE
-// #define DPROBE
+// #define PROBE    //  probe one stage ahead
+// #define DPROBE   //  probe two stages ahead
 #define PERF
 #define PERF_REAM
 
@@ -34,6 +34,7 @@ u2_flag EyreSmoke;
   
     /* External drivers.
     */
+      extern u2_ho_driver j2_da(k_225);
       extern u2_ho_driver j2_da(k_226);
       extern u2_ho_driver j2_da(k_227);
       extern u2_ho_driver j2_da(k_228);
@@ -41,6 +42,7 @@ u2_flag EyreSmoke;
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       u2_ho_driver *HostDriverBase[] = {
+        &j2_da(k_225),
         &j2_da(k_226),
         &j2_da(k_227),
         &j2_da(k_228),
@@ -1374,11 +1376,11 @@ _eyre_gunn(u2_wire wir_r,
   {
     u2_noun von, sab;
   
-    u2_tx_do_profile(wir_r, u2_yes);
+    // u2_tx_do_profile(wir_r, u2_yes);
     u2_tx_open(wir_r);
     von = _eyre_hook_cell(wir_r, cor, "ride", tul, ful);
     sab = u2_tx_done(wir_r);
-    u2_tx_do_profile(wir_r, u2_no);
+    // u2_tx_do_profile(wir_r, u2_no);
 
     if ( u2_nul != sab ) {
       _gunn_show_slab(wir_r, cor, sab);
@@ -1419,11 +1421,11 @@ _eyre_probe(u2_wire wir_r,
 
       printf("{probe booting: %s}\n", pot_c);
 
-      u2_tx_do_profile(wir_r, u2_yes);
+      // u2_tx_do_profile(wir_r, u2_yes);
       u2_tx_open(wir_r);
       cun = _eyre_nock(wir_r, u2_yes, src, ken);
       sab = u2_tx_done(wir_r);
-      u2_tx_do_profile(wir_r, u2_no);
+      // u2_tx_do_profile(wir_r, u2_no);
 
       if ( u2_nul != sab ) {
         _gunn_show_slab(wir_r, app, sab);
@@ -1466,14 +1468,14 @@ _eyre_app(u2_wire wir_r,
 
 #ifdef PERF
     u2_bx_boot(wir_r);
-    u2_tx_do_profile(wir_r, u2_yes);
+    // u2_tx_do_profile(wir_r, u2_yes);
     {
       u2_noun gen;
 
       u2_tx_open(wir_r);
       gen = _eyre_call_1(wir_r, u2_yes, ken, "ream:!%", src);
       sab = u2_tx_done(wir_r);
-      u2_tx_do_profile(wir_r, u2_no);
+      // u2_tx_do_profile(wir_r, u2_no);
 
       fom = _eyre_call_1
         (wir_r, u2_yes, ken, "|!(a=*gene q:(~(mint ut %noun) %noun a))", gen);
