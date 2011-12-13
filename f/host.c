@@ -1050,6 +1050,7 @@ u2_ho_kick(u2_ray   wir_r,
       return u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
     }
     else {
+      u2_tx_did_jet(wir_r, 1);
       return u2_ho_use(wir_r, jet_j, cor, fol);
     }
   }

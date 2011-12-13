@@ -295,7 +295,20 @@ _nock_rock(u2_wire wir_r,
             u2_tx_sys_bit(wir_r, u2_yes);
 
             if ( u2_none != (xip = u2_ds_find(wir_r, sep)) ) {
-              u2_tx_did_jet(wir_r, 1);
+#if 0
+              {
+                c3_c *cos_c = u2_ho_cstring(xip);
+
+                printf("jet %s\n", cos_c);
+#if 0
+                u2_noun cos = u2_bn_string(wir_r, cos_c);
+                
+                u2_tx_did_act(wir_r, cos);
+                u2_rz(wir_r, cos);
+#endif
+                free(cos_c);
+              }
+#endif
               pro = u2_ho_kick(wir_r, xip, sep, fac);
               u2_tx_sys_bit(wir_r, u2_no);
 
@@ -667,8 +680,17 @@ u2_weak                                                           //  transfer
 u2_nk_kick(u2_wire wir_r,
            u2_weak gat)                                           //  retain
 {
-  return u2_nk_nock
-    (wir_r,
-     u2_rx(wir_r, gat),
-     u2_st(gat));
+  u2_noun xip;
+
+  if ( u2_none != (xip = u2_ds_find(wir_r, gat)) ) {
+    u2_noun pro = u2_ho_kick(wir_r, xip, gat, u2_cv_noc);
+
+    return pro;
+  }
+  else {
+    return u2_nk_nock
+      (wir_r,
+       u2_rx(wir_r, gat),
+       u2_st(gat));
+  }
 }
