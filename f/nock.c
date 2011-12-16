@@ -403,6 +403,11 @@ _nock_rock(u2_wire wir_r,
               u2_noun tax = u2_rx(wir_r, u2_wire_tax(wir_r));
               u2_noun tac = u2_rc(wir_r, c3__spot, hod);
 
+              if ( (u2_no == u2_dust(hod)) || (u2_no == u2_stud(u2_h(hod))) ){
+                u2_err(wir_r, "bad guz", guz);
+                u2_err(wir_r, "bad hod", hod);
+                c3_assert(0);
+              }
               u2_wire_tax(wir_r) = u2_rc(wir_r, tac, tax);
               {
                 LoomSink; u2_tx_sink_cas(wir_r);

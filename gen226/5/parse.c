@@ -478,7 +478,9 @@
       u2_bi_cell(wir_r, uq_vex, &puq_vex, &quq_vex);
       u2_bi_cell(wir_r, quq_vex, &pquq_vex, 0);
       gud = u2_bc(wir_r, 
-                  u2_bc(wir_r, u2_rx(wir_r, p_tub), u2_rx(wir_r, pquq_vex)),
+                  u2_bt(wir_r, u2_nul, 
+                               u2_rx(wir_r, p_tub), 
+                               u2_rx(wir_r, pquq_vex)),
                   u2_rx(wir_r, puq_vex));
 
       wag = u2_bl_good(wir_r, u2_nk_mong(wir_r, hez, gud));
