@@ -434,6 +434,16 @@
       0
     (cat a i.b $(b t.b))
   ::
+  ++  rep
+    ~.  %rep
+    |=  [a=*bloq b=*(list rat)]
+    ^-  @
+    =+  c=0*
+    |-
+    ?~  b
+      0
+    (con (lsh a c (end a 1 i.b)) $(c +(c), b t.b))
+  ::
   ++  rip
     ~.  %rip
     |=  [a=*bloq b=@]
@@ -709,6 +719,207 @@
     ~|  [%fyr a]
     =+  b=0*
     |-(?:(=(a (fyp b)) b $(b +(b))))
+  ::
+  ::      Tier 3g, lite number theory
+  :: 
+  ++  egcd                                              ::  schneier's egcd
+    |=  [a=@ b=@]
+    =+  [c=a d=b]
+    =+  [u=[c=(new:si 0 1) d=0*] v=[c=0* d=(new:si 0 1)]]
+    |-  ^-  [d=@ u=@ v=@]
+    ?:  =(0 d) 
+      [d d.u d.v]
+    ~|  %egcd
+    ?>  ?&  =(c (sum:si (pro:si (new:si & a) c.u) (pro:si (new:si & b) c.v)))
+            =(d (sum:si (pro:si (new:si & a) d.u) (pro:si (new:si & b) d.v)))
+        == 
+    =+  q=(div d c) 
+    =+  r=(new:si & q)
+    %=  $
+      c  (sub d (mul q c))
+      d  c
+      u  [(dif:si d.u (pro:si r c.u)) c.u]
+      v  [(dif:si d.v (pro:si r c.v)) c.v]
+    ==
+  ::
+  ++  shah
+    |=  a=@
+    ^-  @ 
+    !!
+  ::
+  ++  og                                                ::  hash-powered rng
+    &=  a=@
+    ::::
+    ++  rab
+      |=  b=@
+      =+  c=(rad b)
+      ?:((lth 2 c) $(a +(a)) c)
+    ::
+    ++  rad
+      |=  b=@
+      (mod (raw (met 0 b)) b)
+    ::
+    ++  raw
+      |=  b=@
+      %+  can
+        0
+      =+  c=a
+      |-  ^-  *(list ~[@ @])
+      ?:  =(0 b)
+        ~
+      =+  d=(shah c)
+      ?:  (lte b 256)
+        [[b (end 0 b d)] ~]
+      [[256 d] $(c d, b (sub b 256))]
+    ::::
+    --
+  ::
+  ++  pram                                              ::  rabin-miller
+    |=  a=@  ^-  ?
+    ?:  (lte a 2)
+      &
+    ?:  ?|  =(0 (end 0 1 a))
+            =+  b=0*
+            |-  ^-  ?
+            ?:  =(512 b)
+              |
+            ?|(=+(c=+((mul 2 b)) =(a (mul c (div a c)))) $(b +(b)))
+        ==
+      |
+    =+  ^=  b
+        =+  [s=(dec a) t=0*]
+        |-  ^-  [s=@ t=@]
+        ?:  =(0 (end 0 1 s))
+          $(s (rsh 0 1 s), t +(t))
+        [s t]
+    ?>  =((mul s.b (bex t.b)) (dec a))
+    =+  c=0*
+    |-  ^-  ?
+    ?:  =(c 32)
+      &
+    =+  d=(~(rab og a) a)
+    =+  e=(~(exp fo a) s.b d)
+    ?&  ?|  =(1 e)
+            =+  f=0*
+            |-  ^-  ?
+            ?:  =(f (dec t.b))
+              |
+            ?:  =(e (dec a))
+              &
+            $(e (~(pro fo a) e e), f +(f))
+        ==
+        $(c +(c))
+    ==
+  ::
+  ++  fe                                                ::  modulo bloq
+    &=  a=*bloq
+    ++  dif  |=([b=@ c=@] (sit (sub (add out (sit b)) (sit c))))
+    ++  inv  |=(b=@ (sub (dec out) (sit b)))
+    ++  net  |=  b=@  ^-  @
+             =>  .(b (sit b))
+             ?:  (lte a 3)
+               b
+             =+  c=(dec a) 
+             %+  con
+               (lsh c 1 $(a c, b (cut c [0 1] b)))
+             $(a c, b (cut c [1 1] b))
+    ++  out  (bex (bex a))
+    ++  rol  |=  [b=@ c=@]  ^-  @
+             =+  d=(sit c)
+             =+  e=(bex a)
+             =+  f=(mod b e)
+             =+  g=(sub e f)
+             (con (lsh 0 f (end 0 g d)) (rsh 0 g d))
+    ++  ror  |=  [b=@ c=@]  ^-  @
+             =+  d=(sit c)
+             =+  e=(bex a)
+             =+  f=(mod b e)
+             =+  g=(sub e f)
+             (con (rsh 0 f d) (lsh 0 g (end 0 f d)))
+    ++  sum  |=([b=@ c=@] (sit (add b c)))
+    ++  sit  |=(b=@ (end a 1 b))
+    --
+  ::
+  ++  fo                                                ::  modulo prime
+    &=  a=@
+    ++  dif
+      |=  [b=@ c=@]
+      (sit (sub (add a b) c))
+    ::
+    ++  exp
+      |=  [b=@ c=@]
+      ?:  =(0 b)
+        1
+      =+  d=$(b (rsh 0 1 b))
+      =+  e=(pro d d)
+      ?:(=(0 (end 0 1 b)) e (pro a e))
+    ::
+    ++  fra
+      |=  [b=@ c=@]
+      (pro b (inv c))
+    ::
+    ++  inv
+      |=  b=@
+      =+  c=(new:si & a)
+      =+  d=(sit (abs:si u:(egcd b a)))
+      ~|  %inv-fo
+      ?>  =(1 (pro d b))
+      d
+    ::
+    ++  sum
+      |=  [b=@ c=@]
+      (sit (add b c))
+    ::
+    ++  pro
+      |=  [b=@ c=@]
+      (sit (mul b c))
+    ::
+    ++  sit
+      |=  b=@
+      (mod b a)
+    --
+  ::
+  ++  si
+    &.
+    ::::
+    ++  syn  |=(a=@ =(0 (end 0 1 a)))
+    ++  new  |=([a=? b=@] ?:(a (lsh 0 1 b) +((lsh 0 1 (dec b)))))
+    ++  old  |=(a=@ [(syn a) (abs a)])
+    ++  abs  |=(a=@ (add (end 0 1 a) (rsh 0 1 a)))
+    ::::
+    ::::
+    ++  sum
+      |=  [a=@ b=@]
+      =+  [c=(old a) d=(old b)]
+      ?:  -.c
+        ?:  -.d
+          (new & (add +.c +.d))
+        ?:  (gte +.c +.d)
+          (new & (sub +.c +.d))
+        (new | (sub +.d +.c))
+      ?:  -.d
+        ?:  (gte +.c +.d)
+          (new | (sub +.c +.d))
+        (new & (sub +.d +.c))
+      (new | (add +.c +.d))
+    ::
+    ++  dif
+      |=  [a=@ b=@]
+      (sum a (new !(syn b) (abs b)))
+    ::
+    ++  fra
+      |=  [a=@ b=@]
+      (new =(0 (mix (syn a) (syn b))) (div (abs a) (abs b)))
+    ::
+    ++  pro
+      |=  [a=@ b=@]
+      (new =(0 (mix (syn a) (syn b))) (mul (abs a) (abs b)))
+    ::
+    ++  rem
+      |=  [a=@ b=@]
+      (dif a (pro b (fra a b)))
+    ::::
+    --
   ::
   ::  Tier 4 coins
   ::

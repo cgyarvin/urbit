@@ -1,4 +1,4 @@
-/* j/1/bex.c
+/* j/3/bex.c
 **
 ** This file is in the public domain.
 */
@@ -8,7 +8,7 @@
 /* functions
 */
   u2_weak                                                         //  transfer
-  j2_mbc(Pt1, bex)(u2_wire wir_r, 
+  j2_mbc(Pt3, bex)(u2_wire wir_r, 
                    u2_atom a)                                     //  retain
   {
     mpz_t a_mp;
@@ -24,7 +24,7 @@
     }
   }
   u2_weak                                                         //  transfer
-  j2_mb(Pt1, bex)(u2_wire wir_r, 
+  j2_mb(Pt3, bex)(u2_wire wir_r, 
                   u2_noun cor)                                    //  retain
   {
     u2_noun a;
@@ -34,14 +34,14 @@
     {
       return u2_none;
     } else {
-      return j2_mbc(Pt1, bex)(wir_r, a);
+      return j2_mbc(Pt3, bex)(wir_r, a);
     }
   }
 
 /* structures
 */
   u2_ho_jet 
-  j2_mbj(Pt1, bex)[] = { 
-    { ".3", c3__lite, j2_mb(Pt1, bex), Tier1, u2_none, u2_none },
+  j2_mbj(Pt3, bex)[] = { 
+    { ".3", c3__lite, j2_mb(Pt3, bex), Tier1, u2_none, u2_none },
     { }
   };
