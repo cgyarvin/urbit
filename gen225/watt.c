@@ -10,7 +10,6 @@
   /* tier 1
   */
     extern u2_ho_jet j2_mbj(Pt1, add)[];
-    extern u2_ho_jet j2_mbj(Pt1, bex)[];
     extern u2_ho_jet j2_mbj(Pt1, dec)[];
     extern u2_ho_jet j2_mbj(Pt1, div)[];
     extern u2_ho_jet j2_mbj(Pt1, gte)[];
@@ -42,6 +41,7 @@
 
   /* tier 3
   */
+    extern u2_ho_jet j2_mbj(Pt3, bex)[];
     extern u2_ho_jet j2_mbj(Pt3, can)[];
     extern u2_ho_jet j2_mbj(Pt3, cap)[];
     extern u2_ho_jet j2_mbj(Pt3, cat)[];
@@ -78,6 +78,7 @@
     extern u2_ho_jet j2_mbj(Pt5, pose)[];
     extern u2_ho_jet j2_mbj(Pt5, rub)[];
     extern u2_ho_jet j2_mbj(Pt5, sfix)[];
+    extern u2_ho_jet j2_mbj(Pt5, shax)[];
     extern u2_ho_jet j2_mbj(Pt5, trip)[];
 
     extern u2_ho_driver j2_mbd(Pt5, bend)[];
@@ -143,7 +144,6 @@
   static u2_ho_driver 
   _watt_drivers_1[] = {
     { j2_sb(Pt1, add), j2_mbj(Pt1, add), 0, 0, u2_none },
-    { j2_sb(Pt1, bex), j2_mbj(Pt1, bex), 0, 0, u2_none },
     { j2_sb(Pt1, dec), j2_mbj(Pt1, dec), 0, 0, u2_none },
     { j2_sb(Pt1, div), j2_mbj(Pt1, div), 0, 0, u2_none },
     { j2_sb(Pt1, gte), j2_mbj(Pt1, gte), 0, 0, u2_none },
@@ -181,6 +181,7 @@
 
   static u2_ho_driver
   _watt_drivers_3[] = {
+    { j2_sb(Pt3, bex), j2_mbj(Pt3, bex), 0, 0, u2_none },
     { j2_sb(Pt3, can), j2_mbj(Pt3, can), 0, 0, u2_none },
     { j2_sb(Pt3, cap), j2_mbj(Pt3, cap), 0, 0, u2_none },
     { j2_sb(Pt3, cat), j2_mbj(Pt3, cat), 0, 0, u2_none },
@@ -232,6 +233,7 @@
     { j2_sb(Pt5, pose), j2_mbj(Pt5, pose), 0, 0, u2_none },
     { j2_sb(Pt5, rub), j2_mbj(Pt5, rub), 0, 0, u2_none },
     { j2_sb(Pt5, sfix), j2_mbj(Pt5, sfix), 0, 0, u2_none },
+    { j2_sb(Pt5, shax), j2_mbj(Pt5, shax), 0, 0, u2_none },
     { j2_sb(Pt5, shim), 0, j2_mbd(Pt5, shim), 0, u2_none },
     { j2_sb(Pt5, stag), 0, j2_mbd(Pt5, stag), 0, u2_none },
     { j2_sb(Pt5, stew), 0, j2_mbd(Pt5, stew), 0, u2_none },

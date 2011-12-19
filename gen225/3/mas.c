@@ -19,8 +19,8 @@
       return u2_none;
     } 
     else {
-      c = j2_mbc(Pt1, bex)(wir_r, (b_w - 1));
-      d = j2_mbc(Pt1, bex)(wir_r, (b_w - 2));
+      c = j2_mbc(Pt3, bex)(wir_r, (b_w - 1));
+      d = j2_mbc(Pt3, bex)(wir_r, (b_w - 2));
       e = j2_mbc(Pt1, sub)(wir_r, a, c);
       f = j2_mbc(Pt3, con)(wir_r, e, d); 
  

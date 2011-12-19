@@ -39,7 +39,7 @@
     //  Compute e, p, q.
     {
       x = j2_mbc(Pt1, dec)(wir_r, c);
-      y = j2_mbc(Pt1, bex)(wir_r, x);
+      y = j2_mbc(Pt3, bex)(wir_r, x);
       z = j2_mbc(Pt3, cut)(wir_r, _0, d, x, b);
 
       e = j2_mbc(Pt1, add)(wir_r, y, z);

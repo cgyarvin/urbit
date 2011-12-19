@@ -21,7 +21,7 @@
 
       u = j2_mbc(Pt1, dec)(wir_r, c);
       v = j2_mbc(Pt1, add)(wir_r, c, c);
-      w = j2_mbc(Pt1, bex)(wir_r, c);
+      w = j2_mbc(Pt3, bex)(wir_r, c);
       x = j2_mbc(Pt3, end)(wir_r, _0, u, b);
       y = j2_mbc(Pt3, lsh)(wir_r, _0, u, a);
       z = j2_mbc(Pt3, mix)(wir_r, x, y);

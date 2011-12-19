@@ -460,7 +460,6 @@ J226_OFILES=\
 
 J225_1_OFILES=\
        gen225/1/add.o \
-       gen225/1/bex.o \
        gen225/1/dec.o \
        gen225/1/div.o \
        gen225/1/gte.o \
@@ -491,6 +490,7 @@ J225_2_OFILES=\
        gen225/2/weld.o
 
 J225_3_OFILES=\
+       gen225/3/bex.o \
        gen225/3/can.o \
        gen225/3/cap.o \
        gen225/3/cat.o \
@@ -530,6 +530,7 @@ J225_5_OFILES=\
        gen225/5/mat.o \
        gen225/5/parse.o \
        gen225/5/rub.o \
+       gen225/5/shax.o \
        gen225/5/trip.o
 
 J225_6_OFILES=\

@@ -75,9 +75,6 @@
                        u2_atom a,                                 //  retain
                        u2_atom b);                                //  retain
       u2_weak                                                     //  transfer
-      j2_mbc(Pt1, bex)(u2_wire wir_r, 
-                       u2_atom a);                                //  retain
-      u2_weak                                                     //  transfer
       j2_mbc(Pt1, dec)(u2_wire wir_r, 
                        u2_atom a);                                //  retain
       u2_weak                                                     //  transfer
@@ -190,6 +187,10 @@
 
     /** Tier 3.
     **/
+      u2_weak                                                     //  transfer
+      j2_mbc(Pt3, bex)(u2_wire wir_r, 
+                       u2_atom a);                                //  retain
+
       u2_noun                                                     //  transfer
       j2_mbc(Pt3, can)(u2_wire wir_r, 
                        u2_atom a,                                 //  retain
