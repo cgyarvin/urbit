@@ -1,4 +1,3 @@
-!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -726,22 +725,21 @@
   :: 
   ++  egcd                                              ::  schneier's egcd
     |=  [a=@ b=@]
-    =+  [c=a d=b]
-    =+  [u=[c=(new:si 0 1) d=0*] v=[c=0* d=(new:si 0 1)]]
+    =+  si
+    =+  [c=(sun a) d=(sun b)]
+    =+  [u=[c=(sun 1) d=0*] v=[c=0* d=(sun 1)]]
     |-  ^-  [d=@ u=@ v=@]
-    ?:  =(0 d) 
+    ?:  =(0 c) 
       [d d.u d.v]
-    ~|  %egcd
-    ?>  ?&  =(c (sum:si (pro:si (new:si & a) c.u) (pro:si (new:si & b) c.v)))
-            =(d (sum:si (pro:si (new:si & a) d.u) (pro:si (new:si & b) d.v)))
-        == 
-    =+  q=(div d c) 
-    =+  r=(new:si & q)
+    ::  ?>  ?&  =(c (sum (pro (sun a) c.u) (pro (sun b) c.v)))
+    ::          =(d (sum (pro (sun a) d.u) (pro (sun b) d.v)))
+    ::      == 
+    =+  q=(fra d c) 
     %=  $
-      c  (sub d (mul q c))
+      c  (dif d (pro q c))
       d  c
-      u  [(dif:si d.u (pro:si r c.u)) c.u]
-      v  [(dif:si d.v (pro:si r c.v)) c.v]
+      u  [(dif d.u (pro q c.u)) c.u]
+      v  [(dif d.v (pro q c.v)) c.v]
     ==
   ::
   ++  fe                                                ::  modulo bloq
@@ -782,10 +780,10 @@
     ++  exp
       |=  [b=@ c=@]
       ?:  =(0 b)
-        1
+        1*
       =+  d=$(b (rsh 0 1 b))
       =+  e=(pro d d)
-      ?:(=(0 (end 0 1 b)) e (pro a e))
+      ?:(=(0 (end 0 1 b)) e (pro c e))
     ::
     ++  fra
       |=  [b=@ c=@]
@@ -794,9 +792,8 @@
     ++  inv
       |=  b=@
       =+  c=(new:si & a)
-      =+  d=(sit (abs:si u:(egcd b a)))
-      ~|  %inv-fo
-      ?>  =(1 (pro d b))
+      =+  d=(dul:si u:(egcd b a) a)
+      ::  ?>  =(1 (pro d b))
       d
     ::
     ++  sum
@@ -815,14 +812,16 @@
   ++  si
     &.
     ::::
-    ++  syn  |=(a=@ =(0 (end 0 1 a)))
-    ++  new  |=([a=? b=@] ?:(a (lsh 0 1 b) +((lsh 0 1 (dec b)))))
-    ++  old  |=(a=@ [(syn a) (abs a)])
     ++  abs  |=(a=@ (add (end 0 1 a) (rsh 0 1 a)))
+    ++  new  |=([a=? b=@] ?:(a (lsh 0 1 b) ?:(=(0 b) 0 +((lsh 0 1 (dec b))))))
+    ++  old  |=(a=@ [(syn a) (abs a)])
+    ++  sun  |=(a=@ (lsh 0 1 a))
+    ++  syn  |=(a=@ =(0 (end 0 1 a)))
     ::::
     ::::
     ++  sum
       |=  [a=@ b=@]
+      ~|  %si-sum
       =+  [c=(old a) d=(old b)]
       ?:  -.c
         ?:  -.d
@@ -840,16 +839,23 @@
       |=  [a=@ b=@]
       (sum a (new !(syn b) (abs b)))
     ::
+    ++  dul
+      |=  [a=@ b=@]
+      =+  c=(old a)
+      ?:(-.c (mod +.c b) (sub b +.c))
+    ::
     ++  fra
       |=  [a=@ b=@]
       (new =(0 (mix (syn a) (syn b))) (div (abs a) (abs b)))
     ::
     ++  pro
       |=  [a=@ b=@]
+      ~|  %si-pro
       (new =(0 (mix (syn a) (syn b))) (mul (abs a) (abs b)))
     ::
     ++  rem
       |=  [a=@ b=@]
+      ~|  %si-rem
       (dif a (pro b (fra a b)))
     ::::
     --
@@ -1949,7 +1955,8 @@
     ::
     ++  rad
       |=  b=@  ^-  0x0*
-      (mod (raw (met 0 b)) b)
+      =+  c=(raw (met 0 b)) 
+      ?:((lth c b) c $(a +(a)))
     ::
     ++  raw
       |=  b=@  ^-  0x0*
