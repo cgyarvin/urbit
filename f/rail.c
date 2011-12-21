@@ -1953,35 +1953,12 @@ u2_rl_vint(u2_rail ral_r,
       else return vin_w;
     }
     else {
-      c3_w met_w = u2_met(5, a);
-      c3_w end_w = u2_atom_word(a, (met_w - 1));
+      mpz_t a_mp;
 
-      if ( end_w != 0xffffffff ) {
-        u2_ray vin_r = u2_rl_slab(ral_r, met_w);
-        c3_w   i_w;
+      u2_mp(a_mp, a);
+      mpz_add_ui(a_mp, a_mp, 1);
 
-        for ( i_w = 0; i_w < (met_w - 1); i_w++ ) {
-          *u2_at_ray(vin_r + i_w) = u2_atom_word(a, i_w);
-        }
-        *u2_at_ray(vin_r + (met_w - 1)) = (end_w + 1);
-
-        u2_rl_lose(ral_r, a);
-        return u2_rl_mint(ral_r, vin_r, met_w);
-      }
-      else {
-        c3_w   len_w = (met_w + 1);
-        u2_ray vin_r = u2_rl_slab(ral_r, len_w);
-        c3_w   i_w;
-
-        for ( i_w = 0; i_w < (met_w - 1); i_w++ ) {
-          *u2_at_ray(vin_r + i_w) = u2_atom_word(a, i_w);
-        }
-        *u2_at_ray(vin_r + (met_w - 1)) = 0;
-        *u2_at_ray(vin_r + met_w) = 1;
-
-        u2_rl_lose(ral_r, a);
-        return u2_rl_mint(ral_r, vin_r, len_w);
-      }
+      return u2_rl_mp(ral_r, a_mp);
     }
   }
 }

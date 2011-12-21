@@ -1,3 +1,4 @@
+!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -730,7 +731,7 @@
     =+  [u=[c=(sun 1) d=0*] v=[c=0* d=(sun 1)]]
     |-  ^-  [d=@ u=@ v=@]
     ?:  =(0 c) 
-      [d d.u d.v]
+      [(abs d) d.u d.v]
     ::  ?>  ?&  =(c (sum (pro (sun a) c.u) (pro (sun b) c.v)))
     ::          =(d (sum (pro (sun a) d.u) (pro (sun b) d.v)))
     ::      == 
@@ -741,6 +742,10 @@
       u  [(dif d.u (pro q c.u)) c.u]
       v  [(dif d.v (pro q c.v)) c.v]
     ==
+  ::
+  ++  elcm
+    |=  [a=@ b=@]
+    (div (mul a b) d:(egcd a b))
   ::
   ++  fe                                                ::  modulo bloq
     &=  a=*bloq
@@ -791,14 +796,8 @@
     ::
     ++  inv
       |=  b=@
-      =+  c=(new:si & a)
-      =+  d=(dul:si u:(egcd b a) a)
-      ::  ?>  =(1 (pro d b))
-      d
-    ::
-    ++  sum
-      |=  [b=@ c=@]
-      (sit (add b c))
+      =+  c=(dul:si u:(egcd b a) a)
+      c
     ::
     ++  pro
       |=  [b=@ c=@]
@@ -807,6 +806,42 @@
     ++  sit
       |=  b=@
       (mod b a)
+    ::
+    ++  sum
+      |=  [b=@ c=@]
+      (sit (add b c))
+    --
+  ::
+  ++  fu                                                ::  modulo (mul p q)
+    |=  a=[p=@ q=@]
+    =+  b=(~(inv fo p.a) (~(sit fo p.a) q.a))
+    &.
+    ++  dif
+      |=  [c=[@ @] d=[@ @]]
+      [(~(dif fo p.a) -.c -.d) (~(dif fo q.a) +.c +.d)]
+    ::
+    ++  exp
+      |=  [c=@ d=[@ @]]
+      :-  (~(exp fo p.a) (mod c (dec p.a)) -.d) 
+      (~(exp fo q.a) (mod c (dec q.a)) +.d)
+    ::
+    ++  out                                             ::  garner's formula
+      |=  c=[@ @]
+      %+  add
+        +.c
+      (mul q.a (~(pro fo p.a) b (~(dif fo p.a) -.c (~(sit fo p.a) +.c))))
+    ::
+    ++  pro
+      |=  [c=[@ @] d=[@ @]]
+      [(~(pro fo p.a) -.c -.d) (~(pro fo q.a) +.c +.d)]
+    ::
+    ++  sum
+      |=  [c=[@ @] d=[@ @]]
+      [(~(sum fo p.a) -.c -.d) (~(sum fo q.a) +.c +.d)]
+    ::
+    ++  sit
+      |=  c=@
+      [(mod c p.a) (mod c q.a)]
     --
   ::
   ++  si
@@ -1064,9 +1099,11 @@
         [%rose p=[p=(tape) q=(tape) r=(tape)] q=((list tank))]
     ::  [%farm p=[p=(tape) q=(tape) r=(tape)] q=((list (list tank)))]
     ==
+  ++  seal  ~[n=@ e=@]                                  ::  RSA public key
   ++  tape  (list char)
   ++  term  ~[%%*]
   ++  wall  (list tape)
+  ++  wand  ~[h=[p=@ q=@ d=@ t=@] s=(seal)]             ::  RSA private key
   --
 =>
   ::::
@@ -1858,6 +1895,75 @@
   ::
   ::      Tier 5d, cryptography proper
   ::
+  ++  ar                                                ::  RSA encryption
+    &.
+    ::::
+    ++  ring  num                                       ::  public key, n
+    ++  wand  num                                       ::  private key, pq
+    ::::
+    ++  brew                                            ::  generate wand
+      |=  [a=@ b=@]  ^-  (wand)                         ::  [bits seed]
+      =+  c=(rsh 0 1 a)
+      (jam (ramp c b) (ramp c (shax b)))
+    ::
+    ++  chew                                            ::  read with wand, 5
+      |=  [a=(wand) b=@]  ^-  *(unit num)
+      =+  c=(melt 5 a) 
+      ?:  (gte b (mul p.c q.c))
+        ~
+      =+  d=(fu p.c q.c)
+      [~ (out.d (exp.d r.c (sit.d b)))]
+    ::
+    ++  drip                                            ::  private to public
+      |=  a=(wand)  ^-  (ring)
+      =+  b=(heat a)
+      (mul p.b q.b)
+    ::
+    ++  heat                                            ::  separate primes
+      |=  a=(wand)  ^-  [p=@ q=@]
+      =+  b=(cue a)
+      ?>(?=([p=@ q=@] b) b)
+    ::
+    ++  melt                                            ::  activate wand
+      |=  [a=@ b=(wand)]  ^-  [p=@ q=@ r=@]             ::  a=>e, s=>d
+      =+  c=(heat b)
+      :+  p.c
+        q.c
+      (~(inv fo (elcm (dec p.c) (dec q.c))) a)
+    ::
+    ++  sign                                            ::  send with wand, 3
+      |=  [a=(wand) b=@]  ^-  @
+      =+  c=(melt 3 a)
+      ?:  (gte b (mul p.c q.c))
+        ~|(%ar-sign !!) 
+      =+  d=(fu p.c q.c)
+      (out.d (exp.d r.c (sit.d b)))
+    ::
+    ++  seal                                            ::  send with ring, 5
+      |=  [a=(ring) b=@]  ^-  @
+      ?:  (gte b a)
+        ~|(%ar-seal !!)
+      (~(exp fo a) 5 b)
+    ::
+    ++  ramp                                            ::  make r-m prime
+      |=  [a=@ b=@]  ^-  0x0*                           ::  [bits seed]
+      =+  c=@
+      |-
+      ?:  =((mul 100 a) c)
+        ~|(%ar-ramp !!)
+      =+  d=(~(raw og b) a)
+      ?:  &(!=(1 (mod d 5)) !=(1 (mod d 3)) (pram d))
+        d
+      $(b +(b), c (shax c))
+    ::
+    ++  take                                            ::  read with ring, 3
+      |=  [a=(ring) b=@]  ^-  *(unit num)
+      ?:  (gte b a)
+        ~
+      [~ (~(exp fo a) 3 b)]
+    ::::
+    --
+  ::
   ++  shad  |=(ruz=@ (shax (shax ruz)))                 ::  double sha-256
   ++  shax                                              ::  sha-256
     ~.  %shax
@@ -1947,11 +2053,6 @@
   ::
   ++  og                                                ::  shax-powered rng
     &=  a=@
-    ::::
-    ++  rab 
-      |=  b=@  ^-  0x0*
-      =+  c=(rad b)
-      ?:((lth 2 c) $(a +(a)) c)
     ::
     ++  rad
       |=  b=@  ^-  0x0*
@@ -1975,14 +2076,13 @@
   ::
   ++  pram                                              ::  r-m primality
     |=  a=@  ^-  ?
-    ?:  (lte a 2)
-      &
     ?:  ?|  =(0 (end 0 1 a))
-            =+  b=0*
+            =(1 a)
+            =+  b=1*
             |-  ^-  ?
             ?:  =(512 b)
               |
-            ?|(=+(c=+((mul 2 b)) =(a (mul c (div a c)))) $(b +(b)))
+            ?|(=+(c=+((mul 2 b)) &(!=(a c) =(a (mul c (div a c))))) $(b +(b)))
         ==
       |
     =+  ^=  b
@@ -1994,17 +2094,17 @@
     ?>  =((mul s.b (bex t.b)) (dec a))
     =+  c=0*
     |-  ^-  ?
-    ?:  =(c 32)
+    ?:  =(c 64)
       &
-    =+  d=(~(rab og a) a)
+    =+  d=(~(raw og (add c a)) (met 0 a))
     =+  e=(~(exp fo a) s.b d)
     ?&  ?|  =(1 e)
             =+  f=0*
             |-  ^-  ?
-            ?:  =(f (dec t.b))
-              |
             ?:  =(e (dec a))
               &
+            ?:  =(f (dec t.b))
+              |
             $(e (~(pro fo a) e e), f +(f))
         ==
         $(c +(c))
