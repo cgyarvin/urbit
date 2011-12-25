@@ -1093,6 +1093,7 @@ _eyre_test2(u2_wire wir_r,
       (wir_r, _gunn_fuel(wir_r, cor, u2_h(l_ful)),
               _gunn_fuel_list(wir_r, cor, u2_t(l_ful)));
   }
+
   /* _gunn_fuel(): load disk objects in `ful`.
   */
   static u2_noun                                                  //  produce
@@ -1160,12 +1161,12 @@ _eyre_test2(u2_wire wir_r,
     else return u2_rx(wir_r, fun);
   }
 
-  /* _gunn_tool_lib(): load libraries in tool.
+  /* _gunn_tool(): load libraries in tool.
   */
   static u2_noun                                                  //  produce
-  _gunn_tool_lib(u2_wire wir_r,
-                 u2_noun cor,                                     //  retain
-                 u2_noun lad)                                     //  retain
+  _gunn_tool(u2_wire wir_r,
+             u2_noun cor,                                     //  retain
+             u2_noun lad)                                     //  retain
   {
     if ( u2_no == u2_dust(lad) ) {
       return u2_nul;
@@ -1300,33 +1301,37 @@ _eyre_test2(u2_wire wir_r,
   */
   static u2_noun                                                  //  produce
   _gunn_vent(u2_wire wir_r,
-             u2_noun cor,                                         //  retain
-             u2_noun vet,                                         //  retain
+             u2_noun cor,                                         //  submit
+             u2_noun vet,                                         //  submit
              u2_noun vax)                                         //  submit
   {
-    u2_noun p_vet, q_vet;
+    u2_noun p_vet;
 
     if ( u2_no == u2_dust(vet) ) {
       _gunn_show(wir_r, cor, vet, vax);
-      return u2_rx(wir_r, cor);
+      return cor;
     }
     else switch ( (p_vet = u2_xh(wir_r, vet)) ) {
       default: {
         u2_err(wir_r, "vent", vet);
         u2_rz(wir_r, vax);
-        return u2_rx(wir_r, cor);
+        return cor;
       }
 
-      case c3__bind: u2_bi_cell(wir_r, u2_t(vet), &p_vet, &q_vet);
+      case c3__bind: p_vet = u2_xt(wir_r, vet);
       {
-        return _eyre_hook_cell(wir_r, cor, "bind", u2_rx(wir_r, p_vet), vax);
+        u2_noun bid = _eyre_hook_cell
+                        (wir_r, cor, "bind", u2_rx(wir_r, p_vet), vax);
+
+        u2_rz(wir_r, cor);
+        return bid;
       }
       case c3__disk: p_vet = u2_xt(wir_r, vet);
       {
         _gunn_save(wir_r, cor, u2_rx(wir_r, p_vet), vax);
 
         u2_rz(wir_r, vax);
-        return u2_rx(wir_r, cor);
+        return cor;
       }
       case c3__many: p_vet = u2_xt(wir_r, vet);
       {
@@ -1349,7 +1354,6 @@ _eyre_test2(u2_wire wir_r,
           roc = _gunn_vent(wir_r, cor, ip_vet, hed);
           cor = _gunn_vent(wir_r, roc, nex, tal);
 
-          u2_rz(wir_r, roc);
           u2_rz(wir_r, nex);
 
           u2_rz(wir_r, vax);
@@ -1363,14 +1367,18 @@ _eyre_test2(u2_wire wir_r,
 */
 static u2_noun                                                    //  produce
 _eyre_gunn(u2_wire wir_r,
-           u2_noun cor,                                           //  retain
+           u2_noun cor,                                           //  submit
            u2_noun txt)                                           //  submit
 {
   u2_noun dyd = _eyre_hook(wir_r, cor, "scan", txt);
   u2_noun vet, ful, tul;
 
-  // u2_err(wir_r, "deed", dyd);
   u2_bi_trel(wir_r, dyd, &vet, &ful, &tul);
+#if 0
+  u2_err(wir_r, "tool", tul);
+  u2_err(wir_r, "fuel", ful);
+  u2_err(wir_r, "vent", vet);
+#endif
   ful = _gunn_fuel(wir_r, cor, u2_rx(wir_r, ful));
   tul = _gunn_tool(wir_r, cor, u2_rx(wir_r, tul)); 
   {
@@ -1497,41 +1505,26 @@ _eyre_app(u2_wire wir_r,
   }
 }
 
-/* _eyre_line(): execute and print a line.
+/* _eyre_line(): execute and print a line, producing new core.
 */
-static void
+static u2_noun                                                    //  produce
 _eyre_line(u2_wire wir_r,
            u2_noun ken,                                           //  retain
-           u2_noun cor,                                           //  retain
-           u2_noun txt)                                           //  retain
+           u2_noun cor,                                           //  submit
+           u2_noun txt)                                           //  submit
 {
   u2_ray kit_r = u2_bl_open(wir_r);
 
   if ( u2_bl_set(wir_r) ) {
     u2_bl_done(wir_r, kit_r);
     fprintf(stderr, "{lose}\n");
+
+    return cor;
   } else {
-#ifdef GUNN
-    // u2_bx_boot(wir_r);
-    _eyre_gunn(wir_r, cor, txt);
+    cor = _eyre_gunn(wir_r, cor, txt);
 
     u2_bl_done(wir_r, kit_r);
-#else
-    u2_noun gat = u2_bn_hook(wir_r, cor, "line");
-    u2_noun pro;
-
-    u2_bx_boot(wir_r);
-    pro = _eyre_mong(wir_r, u2_yes, gat, u2_rx(wir_r, txt));
-
-#if 1
-    _eyre_gnaw(wir_r, ken, 2, u2_h(pro));
-    _eyre_gnaw(wir_r, ken, 0, u2_t(pro));
-#else
-    _eyre_gnaw(wir_r, ken, 0, pro);
-#endif
-
-    u2_bl_done(wir_r, kit_r);
-#endif
+    return cor;
   }
 }
 
@@ -1682,7 +1675,7 @@ main(c3_i   argc,
       if ( u2_yes == EyreSmoke ) {
         _eyre_line_proto(wir_r, las, ken, lin);
       } else {
-        _eyre_line(wir_r, ken, app, lin);
+        app = _eyre_line(wir_r, ken, app, lin);
       }
       free(lin_c);
       u2_rz(wir_r, lin);

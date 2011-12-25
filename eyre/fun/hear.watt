@@ -6,13 +6,12 @@
         [%note u=0* t=(term)]                           ::  admin note
         [%pass p=(term)]                                ::  passphrase
         [%ring f=(fort) r=(ring)]                       ::  foreign public key
-        [%time t=(date)]                                ::  time event
+        [%time t=(date)]                                ::  moment in time
         [%wand f=(fort) w=(wand)]                       ::  new private key
       ==
-    ::
     ++  hear
       |=  kap=@  ^-  *(list fact)
-      =+  who=*(unit fort)
+      =+  who=*(unit fort)                              ::  packet authority
       =+  key=0
       |-  ^-  *(list fact)
       =+  [mag=(end 3 2 kap) bod=(rsh 3 2 kap)]
@@ -42,7 +41,7 @@
           %cr                                           ::  encrypted
         =+  gut=(cue bod)
         ?>  ?=([@ @] gut)
-        =+  bil=(bill u.who -.gut)                      ::  SERVICE
+        =+  bil=(sark -.gut)                            ::  SERVICE
         ?<  ?=(~ bil)
         =+  cul=(shed b.bil +.gut)
         ?<  ?=(~ cul)
@@ -118,3 +117,4 @@
         [[%wand gut] ~]
       :::: 
       ==
+    ::

@@ -1098,11 +1098,9 @@
         [%rose p=[p=(tape) q=(tape) r=(tape)] q=((list tank))]
     ::  [%farm p=[p=(tape) q=(tape) r=(tape)] q=((list (list tank)))]
     ==
-  ++  seal  ~[n=@ e=@]                                  ::  RSA public key
   ++  tape  (list char)
   ++  term  ~[%%*]
   ++  wall  (list tape)
-  ++  wand  ~[h=[p=@ q=@ d=@ t=@] s=(seal)]             ::  RSA private key
   --
 =>
   ::::
@@ -1905,13 +1903,13 @@
       =+  c=(rsh 0 1 a)
       (jam (ramp c b) (ramp c (shax b)))
     ::
-    ++  chew                                            ::  read with wand, 5
+    ++  chew                                            ::  read with wand, 53
       |=  [a=(wand) b=@]  ^-  *(unit num)
-      =+  c=(melt 5 a) 
+      =+  c=(melt 53 a) 
       ?:  (gte b (mul p.c q.c))
         ~
       =+  d=(fu p.c q.c)
-      [~ (out.d (exp.d r.c (sit.d b)))]
+      (shed 0 (out.d (exp.d r.c (sit.d b))))
     ::
     ++  drip                                            ::  private to public
       |=  a=(wand)  ^-  (ring)
@@ -1930,19 +1928,21 @@
         q.c
       (~(inv fo (elcm (dec p.c) (dec q.c))) a)
     ::
-    ++  sign                                            ::  send with wand, 3
+    ++  sign                                            ::  send with wand, 37
       |=  [a=(wand) b=@]  ^-  @
-      =+  c=(melt 3 a)
+      =>  .(b (shen 0 b))
+      =+  c=(melt 37 a)
       ?:  (gte b (mul p.c q.c))
         ~|(%ar-sign !!) 
       =+  d=(fu p.c q.c)
       (out.d (exp.d r.c (sit.d b)))
     ::
-    ++  seal                                            ::  send with ring, 5
+    ++  seal                                            ::  send with ring, 53
       |=  [a=(ring) b=@]  ^-  @
+      =>  .(b (shen 0 b))
       ?:  (gte b a)
         ~|(%ar-seal !!)
-      (~(exp fo a) 5 b)
+      (~(exp fo a) 53 b)
     ::
     ++  ramp                                            ::  make r-m prime
       |=  [a=@ b=@]  ^-  0x0*                           ::  [bits seed]
@@ -1951,15 +1951,24 @@
       ?:  =((mul 100 a) c)
         ~|(%ar-ramp !!)
       =+  d=(~(raw og b) a)
-      ?:  &(!=(1 (mod d 5)) !=(1 (mod d 3)) (pram d))
+      ?:  &(!=(1 (mod d 53)) !=(1 (mod d 37)) (pram d))
         d
       $(b +(b), c (shax c))
     ::
-    ++  take                                            ::  read with ring, 3
+    ++  take                                            ::  read with ring, 37
       |=  [a=(ring) b=@]  ^-  *(unit num)
       ?:  (gte b a)
         ~
-      [~ (~(exp fo a) 3 b)]
+      (shed 0 (~(exp fo a) 37 b))
+    ::
+    ++  test
+      |=  [a=@ b=@]  ^-  &                              ::  [bits seed]
+      =+  wad=(brew a b)
+      =+  rig=(drip wad)
+      =+  try=[n=(take rig (sign wad b)) l=(chew wad (seal rig b))]
+      ?.  =([[~ b] [~ b]] try)
+        ~|([%ar-test a b n.try l.try ~] !!)
+      &
     ::::
     --
   ::
@@ -2115,7 +2124,7 @@
     ==
   ::
   ++  shed                                              ::  ghetto decrypt
-    |=  [key=@ cep=@]  ^-  *(unit)
+    |=  [key=@ cep=@]  ^-  *(unit num)
     =+  toh=(met 0 cep)
     ?:  (lth toh 257)
       ~
