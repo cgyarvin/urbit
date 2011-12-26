@@ -1161,10 +1161,10 @@ _eyre_test2(u2_wire wir_r,
     else return u2_rx(wir_r, fun);
   }
 
-  /* _gunn_tool(): load libraries in tool.
+  /* _gunn_tool_lib(): load libraries in tool.
   */
   static u2_noun                                                  //  produce
-  _gunn_tool(u2_wire wir_r,
+  _gunn_tool_lib(u2_wire wir_r,
              u2_noun cor,                                     //  retain
              u2_noun lad)                                     //  retain
   {
