@@ -1,16 +1,16 @@
 ?>  ?=(@ .)
 %.  .
 =<  make
-=>  225
+=>  224
 =>  
   ::::
   ::::  Tier 0, kernel stub
   ::::
-  ~%    %k.225
+  ~%    %k.224
       ~
     ~
   &.
-  ++  stub  225
+  ++  stub  224
   ++  bit   {& |}
   ++  nap   |=(a=* a)
   ++  num   |=(a=* ^:(0* a))
@@ -2147,82 +2147,6 @@
         [256 hax]
         [1 1]
     ==
-  ::
-  ::  Tier 5e, event propagation
-  ::
-  ++  blow                                                ::  process facts
-    |=  [fax=((list fact)) cid=disc]
-    =+  rot=cid
-    |-  ^-  cid
-    ?:  =(~ fax)
-      cid
-    =+  ^=  nex
-        |-  ^-  ((list fact))
-        ?~(fax ~ (weld (kick.cid i.fax rot) $(fax t.fax)))
-    =+  ^=  dac
-        |-  ^-  disc
-        ?~  fax
-          cid
-        $(fax t.fax, cid (stab.cid i.fax))
-    $(fax nex, cid dac)
-  ::
-  ++  disc
-    &%  
-    ++  kick                                            ::  propagate event
-      |=  [fat=(fact) rot=.]                            ::  absolute fact
-      ^-  ((list fact))                                 ::  relative fact
-      !!
-    ::
-    ++  lick                                            ::  find fact
-      |=  pat=*                                         ::  relative path
-      ^-  ((unit))
-      !!
-    ::
-    ++  stab                                            ::  record fact
-      |=  fat=(fact)                                    ::  relative fact
-      ^-  disc
-      !!
-    --
-  ::
-  ++  dome
-    |=  hip=((list ~[p=(term) q=(%{disc})]))
-    &%
-    ++  kick 
-      |=  [fat=(fact) rot=disc]
-      ^-  ((list fact))
-      ?~  hip
-        ~
-      =+  ^=  fax
-          %+  turn 
-            (kick.q.i.hip fat rot)
-          |=(a=(fact) [[p.i.hip p.a] q.a])
-      (weld fax $(hip t.hip))
-    ::
-    ++  lick
-      |=  pat=*
-      ?.  ?=(^ pat)
-        ~
-      |-  ^-  ((unit))
-      ?~  hip
-        ~
-      ?:  =(p.i.hip -.pat)
-        (lick.q.i.hip +.pat)
-      $(hip t.hip)
-    ::
-    ++  stab
-      |=  fat=(fact)
-      ^-  disc
-      %-  dome
-      ?.  ?=(^ p.fat)
-        hip
-      |-  ^-  hip
-      ?~  hip
-        ~
-      :-  ?:  =(p.i.hip -.p.fat)
-            [p.i.hip (stab.q.i.hip +.p.fat q.fat)]
-          i.hip
-      $(hip t.hip)
-    --
   ::
   ::  Tier 6 coins
   ::

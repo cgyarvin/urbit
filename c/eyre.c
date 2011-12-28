@@ -24,7 +24,7 @@
 #define PERF
 #define PERF_REAM
 
-#define EyreFirstKernel 228     //  counts down; max 264; > 259 needs nock7
+#define EyreFirstKernel 225     //  counts down; max 264; > 259 needs nock7
 u2_flag EyreSmoke;
 
   /**  Global kernel - used only for trace printing.
@@ -34,24 +34,20 @@ u2_flag EyreSmoke;
   
     /* External drivers.
     */
+      extern u2_ho_driver j2_da(k_224);
       extern u2_ho_driver j2_da(k_225);
-      extern u2_ho_driver j2_da(k_226);
-      extern u2_ho_driver j2_da(k_227);
-      extern u2_ho_driver j2_da(k_228);
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       u2_ho_driver *HostDriverBase[] = {
+        &j2_da(k_224),
         &j2_da(k_225),
-        &j2_da(k_226),
-        &j2_da(k_227),
-        &j2_da(k_228),
         0
       };
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt5Y   k_228__a__b__c__d__e
+#   define Pt5Y   k_225__a__b__c__d__e
 
     u2_noun
     j2_mby(Pt5Y, cue)(u2_wire, u2_noun a);
