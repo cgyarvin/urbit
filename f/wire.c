@@ -21,7 +21,10 @@ u2_wr_init(c3_m   hip_m,
   wir_r = u2_rl_init(hip_m, hat_r, mat_r);
   u2_rail_hat_r(wir_r) += (c3_wiseof(u2_loom_wire) - c3_wiseof(u2_loom_rail));
 
+#if 1
   u2_wire_bas_r(wir_r) = 0;
+#endif
+
   u2_wire_kit_r(wir_r) = 0;
 
   u2_cs_init(u2_wire_des_r(wir_r));
@@ -36,12 +39,11 @@ u2_wr_init(c3_m   hip_m,
   /* Central memoization basket = 1/4 of address space.
   */
   {
-    c3_w   tip_w = (c3_wiseof(u2_loom_bask) - c3_wiseof(u2_loom_rail));
     u2_ray bas_r;
 
-    bas_r = u2_rl_leap_part(wir_r, c3__sand, 1, 4, tip_w);
+    bas_r = u2_rl_leap_part(wir_r, c3__sand, 1, 4, 0);
     u2_wire_bas_r(wir_r) = bas_r;
-    u2_ba_init(wir_r, 0);
+    // u2_ba_init(wir_r, 0);
   }
 #endif
 

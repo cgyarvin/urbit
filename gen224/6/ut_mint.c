@@ -524,6 +524,7 @@
         return ret;
       }
       case c3__ktdt: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
+      _mint_used(wir_r);
       {
         u2_noun wit = j2_mcy(Pt6, ut, play)(wir_r, van, sut, p_gen);
         u2_noun nep = j2_mcy(Pt6, ut, snap)(wir_r, van, wit, q_gen);
@@ -532,6 +533,36 @@
         u2_rz(wir_r, nep);
         u2_rz(wir_r, wit);
         return ret;
+      }
+      case c3__ktbr: p_gen = u2_t(gen);
+      _mint_used(wir_r);
+      {
+        u2_noun ryd = _mint_in(wir_r, van, sut, gol, p_gen);
+        u2_noun tyf = j2_mcy(Pt6, ut, wrap)(wir_r, van, u2_h(ryd), c3__iron);
+        u2_noun pro = u2_bc(wir_r, tyf, u2_rx(wir_r, u2_t(ryd)));
+
+        u2_rz(wir_r, ryd);
+        return pro;
+      }
+      case c3__ktpm: p_gen = u2_t(gen);
+      _mint_used(wir_r);
+      {
+        u2_noun ryd = _mint_in(wir_r, van, sut, gol, p_gen);
+        u2_noun tyf = j2_mcy(Pt6, ut, wrap)(wir_r, van, u2_h(ryd), c3__zinc);
+        u2_noun pro = u2_bc(wir_r, tyf, u2_rx(wir_r, u2_t(ryd)));
+
+        u2_rz(wir_r, ryd);
+        return pro;
+      }
+      case c3__ktwt: p_gen = u2_t(gen);
+      _mint_used(wir_r);
+      {
+        u2_noun ryd = _mint_in(wir_r, van, sut, gol, p_gen);
+        u2_noun tyf = j2_mcy(Pt6, ut, wrap)(wir_r, van, u2_h(ryd), c3__lead);
+        u2_noun pro = u2_bc(wir_r, tyf, u2_rx(wir_r, u2_t(ryd)));
+
+        u2_rz(wir_r, ryd);
+        return pro;
       }
       case c3__ktts: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mint_used(wir_r);

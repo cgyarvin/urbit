@@ -512,6 +512,39 @@
 
         return ret;
       }
+      case c3__ktbr: p_gen = u2_t(gen);
+      _mull_used(wir_r);
+      {
+        u2_noun vat = _mull_in(wir_r, van, sut, gol, dox, p_gen);
+        u2_noun pro = u2_bc
+          (wir_r, j2_mcy(Pt6, ut, wrap)(wir_r, van, u2_h(vat), c3__iron),
+                  j2_mcy(Pt6, ut, wrap)(wir_r, van, u2_t(vat), c3__iron));
+
+        u2_rz(wir_r, vat);
+        return pro;
+      }
+      case c3__ktpm: p_gen = u2_t(gen);
+      _mull_used(wir_r);
+      {
+        u2_noun vat = _mull_in(wir_r, van, sut, gol, dox, p_gen);
+        u2_noun pro = u2_bc
+          (wir_r, j2_mcy(Pt6, ut, wrap)(wir_r, van, u2_h(vat), c3__zinc),
+                  j2_mcy(Pt6, ut, wrap)(wir_r, van, u2_t(vat), c3__zinc));
+
+        u2_rz(wir_r, vat);
+        return pro;
+      }
+      case c3__ktwt: p_gen = u2_t(gen);
+      _mull_used(wir_r);
+      {
+        u2_noun vat = _mull_in(wir_r, van, sut, gol, dox, p_gen);
+        u2_noun pro = u2_bc
+          (wir_r, j2_mcy(Pt6, ut, wrap)(wir_r, van, u2_h(vat), c3__lead),
+                  j2_mcy(Pt6, ut, wrap)(wir_r, van, u2_t(vat), c3__lead));
+
+        u2_rz(wir_r, vat);
+        return pro;
+      }
       case c3__ktts: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mull_used(wir_r);
       {

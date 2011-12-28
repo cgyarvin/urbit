@@ -505,8 +505,11 @@ _nock_rock(u2_wire wir_r,
             case c3__memo: {
               u2_rl_lose(wir_r, hod);
               {
+#if 0
                 pro = u2_ba_find(wir_r, bus, zom);
-
+#else
+                pro = u2_rl_find_cell(wir_r, 0, bus, zom);
+#endif
                 if ( pro != u2_none ) {
                   u2_tx_did_fin(wir_r, 1);
                   u2_rl_lose(wir_r, bus);
@@ -524,19 +527,27 @@ _nock_rock(u2_wire wir_r,
                     u2_noun sav;
                     
                     u2_tx_sys_bit(wir_r, u2_yes);
+#if 0
                     sav = u2_ba_save(wir_r, bus, zom, pro);
+#else
+                    sav = u2_rl_save_cell(wir_r, 0, bus, zom, pro);
+#endif
                     u2_tx_sys_bit(wir_r, u2_no);
 
                     u2_tx_did_pod(wir_r, 1);
                     u2_tx_did_fin(wir_r, 1);
 
                     u2_rl_lose(wir_r, bus);
+#if 0
                     if ( sav != u2_none ) {
                       u2_rl_lose(wir_r, pro);
                       return sav;
                     } else {
                       return pro;
                     }
+#else
+                    return sav;
+#endif
                   }
                 }
               }
@@ -587,7 +598,7 @@ _nock_rock(u2_wire wir_r,
                   u2_noun nuu;
 
                   u2_tx_sys_bit(wir_r, u2_yes);
-                  nuu = u2_ba_sole(wir_r, pro);
+                  nuu = u2_rl_uniq(wir_r, pro);
                   u2_tx_sys_bit(wir_r, u2_no);
 
                   u2_tx_did_fin(wir_r, 1);

@@ -281,7 +281,7 @@ u2_bx_bean_ent(u2_ray  wir_r,
     return;
   } 
   else {
-    u2_noun naz = u2_ba_uniq(wir_r, hod);
+    u2_noun naz = u2_rl_uniq(wir_r, hod);
 
     u2_rl_lose(wir_r, hod);
     if ( u2_none != naz ) { 

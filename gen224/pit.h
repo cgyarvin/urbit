@@ -608,6 +608,11 @@
                             u2_noun men,                          //  retain
                             u2_noun har);                         //  retain
 
+      u2_noun                                                     //  transfer
+      j2_mcy(Pt6, ut, wrap)(u2_wire wir_r,
+                            u2_noun van,                          //  retain
+                            u2_noun sut,                          //  retain
+                            u2_noun yoz);                         //  retain
     /** Direct ut axes.
     **/
 #     define j2_ut_van_fan  18

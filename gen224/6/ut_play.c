@@ -219,6 +219,33 @@
       {
         return u2_bc(wir_r, c3__atom, u2_rx(wir_r, p_gen));
       }
+      case c3__ktbr: p_gen = u2_t(gen);
+      _play_used(wir_r);
+      {
+        u2_noun boc = _play_in(wir_r, van, sut, p_gen);
+        u2_noun pro = j2_mcy(Pt6, ut, wrap)(wir_r, van, boc, c3__iron);
+
+        u2_rz(wir_r, boc);
+        return pro;
+      }
+      case c3__ktpm: p_gen = u2_t(gen);
+      _play_used(wir_r);
+      {
+        u2_noun boc = _play_in(wir_r, van, sut, p_gen);
+        u2_noun pro = j2_mcy(Pt6, ut, wrap)(wir_r, van, boc, c3__zinc);
+
+        u2_rz(wir_r, boc);
+        return pro;
+      }
+      case c3__ktwt: p_gen = u2_t(gen);
+      _play_used(wir_r);
+      {
+        u2_noun boc = _play_in(wir_r, van, sut, p_gen);
+        u2_noun pro = j2_mcy(Pt6, ut, wrap)(wir_r, van, boc, c3__lead);
+
+        u2_rz(wir_r, boc);
+        return pro;
+      }
       case c3__ktts: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _play_used(wir_r);
       {

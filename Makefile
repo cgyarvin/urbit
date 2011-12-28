@@ -53,7 +53,6 @@ F_OFILES=\
        f/benx.o \
        f/trac.o \
        f/bail.o \
-       f/bask.o \
        f/dash.o \
        f/unix.o \
        f/nock.o
@@ -317,7 +316,8 @@ J224_6_OFILES_UT=\
        gen224/6/ut_snap.o \
        gen224/6/ut_swab.o \
        gen224/6/ut_tack.o \
-       gen224/6/ut_tock.o
+       gen224/6/ut_tock.o \
+       gen224/6/ut_wrap.o
 
 J224_OFILES=\
        $(J224_1_OFILES) \

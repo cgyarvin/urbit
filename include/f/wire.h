@@ -6,12 +6,12 @@
   **/
     /** Structures - in loom space.
     **/
-      /* u2_loom_wire: the whole thread.
+      /* u2_loom_wire: one per thread.
       */
         typedef struct _u2_loom_wire {
           u2_loom_rail o;
 
-          /* Basket; u2_loom_bask; senior storage.
+          /* Basket; u2_loom_bask; senior storage (for dashboard).
           */
           u2_ray bas_r;
 
