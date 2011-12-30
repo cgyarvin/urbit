@@ -871,33 +871,7 @@ u2_ho_use(u2_ray     wir_r,
           u2_noun    cor,                                         //  retain
           u2_noun    fol)                                         //  retain
 {
-  u2_noun key=u2_none, pro;
-  c3_m    fun_m = 0;
-
-  if ( // (jet_j->sat_s & u2_jet_live) &&
-       (jet_j->sat_s & u2_jet_memo) 
-       // || ((jet_j->sat_s & u2_jet_live) && (jet_j->sat_s & u2_jet_test))
-     )
-  {
-    if ( jet_j->key_f ) {
-      if ( u2_none == (key = jet_j->key_f(wir_r, cor)) ) {
-        u2_ho_warn_here();
-        return u2_none;
-      }
-      else {
-        fun_m = u2_jet_fun_m(jet_j);
-
-        if ( u2_none != (pro = u2_rl_find(wir_r, fun_m, key)) ) {
-          u2_rz(wir_r, key);
-          return pro;
-        }
-      }
-    } else {
-      if ( u2_none != (pro = u2_rl_find_cell(wir_r, 0, cor, fol)) ) {
-        return u2_rx(wir_r, pro);
-      }
-    }
-  }
+  u2_noun pro;
 
   if ( !(jet_j->sat_s & u2_jet_live) ) {
     pro = u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
@@ -993,27 +967,7 @@ u2_ho_use(u2_ray     wir_r,
       pro = sof;
     }
   }
-
-  if ( // (jet_j->sat_s & u2_jet_live) &&
-       (jet_j->sat_s & u2_jet_memo)
-       // || ((jet_j->sat_s & u2_jet_live) && (jet_j->sat_s & u2_jet_test))
-     )
-  {
-    if ( jet_j->key_f ) {
-      if ( u2_none == pro ) {
-        // printf("no pro: %s\n", u2_ho_cstring(jet_j->xip));
-        return u2_none;
-      }
-      pro = u2_rl_save(wir_r, fun_m, key, pro);
-      u2_rz(wir_r, key);
-
-      return pro;
-    }
-    else {
-      return u2_rl_save_cell(wir_r, 0, cor, fol, pro);
-    }
-  }
-  else return pro;
+  return pro;
 }
 
 /* u2_ho_kick():

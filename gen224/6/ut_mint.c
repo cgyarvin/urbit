@@ -87,13 +87,13 @@
         u2_rz(wir_r, pex); 
         u2_rz(wir_r, woq);
 
-        return u2_rx(wir_r, yom);
+        return yom;
       } 
       else if ( _1 == u2_t(pex) ) {
         u2_rz(wir_r, pex); 
         u2_rz(wir_r, yom);
 
-        return u2_rx(wir_r, woq);
+        return woq;
       }
     }
     return u2_bq(wir_r, _6, pex, yom, woq);
@@ -908,7 +908,7 @@
         return j2_mcx(Pt6, ut, mint)(wir_r, van, sut, gol, gen);
       }
       else {
-        c3_m    fun_m = u2_jet_fun_m(jet_j);
+        c3_m    fun_m = c3__mint;
         u2_noun vrf   = u2_frag(j2_ut_van_vrf, van);
         u2_noun pro   = u2_rl_find_qual(wir_r, fun_m, vrf, sut, gol, gen);
 

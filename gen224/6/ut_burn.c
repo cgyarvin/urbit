@@ -103,7 +103,7 @@
       return j2_mcx(Pt6, ut, burn)(wir_r, van, sut);
     }
     else {
-      c3_m    fun_m = u2_jet_fun_m(jet_j);
+      c3_m    fun_m = c3__burn;
       u2_noun pro   = u2_rl_find(wir_r, fun_m, sut);
 
       if ( u2_none != pro ) {

@@ -241,7 +241,7 @@
         return j2_mcx(Pt6, ut, fuse)(wir_r, van, sut, ref);
       }
       else {
-        c3_m    fun_m = u2_jet_fun_m(jet_j);
+        c3_m    fun_m = c3__fuse;
         u2_noun pro   = u2_rl_find_cell(wir_r, fun_m, sut, ref);
 
         if ( u2_none != pro ) {

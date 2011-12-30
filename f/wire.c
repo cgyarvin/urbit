@@ -101,6 +101,8 @@ u2_wr_ice(u2_ray  wir_r,
 void
 u2_wr_gc(u2_ray wir_r, ...)
 {
+  c3_w rot_w=0, sav_w=0, ovh_w=0, liv_w;
+
   c3_assert(c3__rock == u2_rail_hip_m(wir_r));
 
   /* Mark submitted roots.
@@ -112,7 +114,7 @@ u2_wr_gc(u2_ray wir_r, ...)
     va_start(vap, wir_r);
 
     while ( 0 != (tur = va_arg(vap, u2_noun)) ) {
-      u2_rl_gc_mark_noun(wir_r, tur); 
+      rot_w += u2_rl_gc_mark_noun(wir_r, tur); 
     }
     va_end(vap);
   }
@@ -121,12 +123,19 @@ u2_wr_gc(u2_ray wir_r, ...)
   */
   {
     if ( u2_wire_kit_r(wir_r) ) {
-      u2_rl_gc_mark_ptr(wir_r, u2_wire_kit_r(wir_r));
+      ovh_w += u2_rl_gc_mark_ptr(wir_r, u2_wire_kit_r(wir_r));
     }
-    u2_rl_gc_mark_ptr(wir_r, u2_wire_bex_r(wir_r));
-    u2_rl_gc_mark_ptr(wir_r, u2_wire_rac_r(wir_r));
+    ovh_w += u2_rl_gc_mark_ptr(wir_r, u2_wire_bex_r(wir_r));
+    ovh_w += u2_rl_gc_mark_ptr(wir_r, u2_wire_rac_r(wir_r));
   }
-  u2_rl_gc_mark(wir_r);
+  sav_w += u2_rl_gc_mark(wir_r);
 
-  u2_rl_gc_sweep(wir_r);
+  liv_w = u2_rl_gc_sweep(wir_r);
+
+  c3_assert((rot_w + sav_w + ovh_w) == liv_w);
+
+  printf("gc: %d bytes live (%d root, %d memo)\n", 
+        ((liv_w - ovh_w) * 4),
+        (rot_w * 4),
+        (sav_w * 4));
 }

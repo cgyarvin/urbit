@@ -237,32 +237,32 @@
 
         /* u2_rl_gc_mark_noun():
         **
-        **   Mark a noun for gc.
+        **   Mark a noun for gc.  Return allocated words.
         */
-          void
+          c3_w
           u2_rl_gc_mark_noun(u2_ray  ral_r,
                              u2_noun som);
 
         /* u2_rl_gc_mark_ptr():
         **
-        **   Mark a pointer allocated with ralloc.
+        **   Mark a pointer allocated with ralloc.  Return allocated words.
         */
-          void
+          c3_w
           u2_rl_gc_mark_ptr(u2_ray ral_r,
                             u2_ray ptr_r);
 
         /* u2_rl_gc_mark():
         **
-        **   Mark a rail.
+        **   Mark a rail (mainly memo cache).  Return allocated words.
         */
-          void
+          c3_w
           u2_rl_gc_mark(u2_ray ral_r);
 
         /* u2_rl_gc_sweep(): 
         **
-        **   Sweep memory, freeing unused blocks.
+        **   Sweep memory, freeing unused blocks.  Return live words.
         */
-          void
+          c3_w
           u2_rl_gc_sweep(u2_ray ral_r);
 
         /* u2_rl_malloc():

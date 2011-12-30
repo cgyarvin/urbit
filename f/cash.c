@@ -715,6 +715,8 @@ _cs_save_a(u2_rail ral_r,
           u2_ray tol_r = u2_slot_b_sid_i(lot_r, i_w);
 
           u2_slot_c_emt(tol_r) = u2_slot_emty;
+          u2_slot_b_rag(tol_r) = 0;
+          u2_slot_b_sid(tol_r) = 0;
         }
       }
 
@@ -874,13 +876,15 @@ u2_cs_free(u2_rail ral_r,
 **
 **   Mark traverse of slot.
 */
-void
+c3_w
 u2_cs_mark(u2_ray ral_r,
            u2_ray lot_r)
 {
+  c3_w siz_w = 0;
+
   if ( u2_slot_is_a(lot_r) ) {
-    u2_rl_gc_mark_noun(ral_r, u2_slot_a_sap(lot_r));
-    u2_rl_gc_mark_noun(ral_r, u2_slot_a_pro(lot_r));
+    siz_w += u2_rl_gc_mark_noun(ral_r, u2_slot_a_sap(lot_r));
+    siz_w += u2_rl_gc_mark_noun(ral_r, u2_slot_a_pro(lot_r));
   }
   else if ( u2_slot_is_b(lot_r) ) {
     u2_ray sid_r = u2_slot_b_sid(lot_r);
@@ -889,10 +893,11 @@ u2_cs_mark(u2_ray ral_r,
     for ( i_w = 0; i_w < 16; i_w++ ) {
       u2_ray tol_r = (sid_r + ((i_w) * c3_wiseof(u2_cash_slot_a)));
 
-      u2_cs_lose(ral_r, tol_r);
+      siz_w += u2_cs_mark(ral_r, tol_r);
     }
-    u2_rl_gc_mark_ptr(ral_r, sid_r);
+    siz_w += u2_rl_gc_mark_ptr(ral_r, sid_r);
   }
+  return siz_w;
 }
 
 /* u2_cs_init():
@@ -946,4 +951,3 @@ u2_cs_make(u2_rail ral_r)
     return lot_r;
   }
 }
-

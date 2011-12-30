@@ -123,9 +123,9 @@
 
     /* u2_cs_mark():
     **
-    **   Mark traverse of slot.
+    **   Mark traverse of slot.  Return allocated words.
     */
-      void
+      c3_w
       u2_cs_mark(u2_ray ral_r,
                  u2_ray lot_r);
 

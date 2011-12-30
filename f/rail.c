@@ -572,8 +572,6 @@ _rl_bloq_grab(u2_ray ral_r,
 
 #if 1
 static int xzx=0;
-int BUG=0;
-int anum=0;
 
 /* _rl_bloq_grap()::
 */
@@ -584,22 +582,12 @@ _rl_bloq_grap(u2_ray ral_r,
   u2_ray nov_r;
 
   nov_r = _rl_bloq_grab(ral_r, len_w);
-#if 0
-  anum++;
-  if ( (BUG == 0) && (len_w == 48) ) {
-    // printf("box %x\n", nov_r - 2);
-    printf("len_w %d, num %d\n", len_w, anum);
-    if ( anum > 4354539 ) {
-      c3_assert(0);
-    }
-  }
-#endif
 
 #if 0
-  if ( (nov_r - c3_wiseof(u2_loom_rail_box)) == 0x200070a ) {
+  if ( (nov_r - c3_wiseof(u2_loom_rail_box)) == 0x2002510 ) {
     printf("alloc leak %d - nov_r %x\n", xzx, nov_r);
-    // if ( xzx == 14 ) { c3_assert(0); }
-    if ( xzx == 14 ) { LEAK = 1; LEAKY = nov_r; }
+    // if ( xzx == 0 ) { c3_assert(0); }
+    if ( xzx == 0 ) { LEAK = 1; LEAKY = nov_r; }
     xzx++;
   }
 #endif
@@ -752,10 +740,12 @@ u2_rl_gain(u2_ray  ral_r,
         if ( som_r > rut_r ) {
           u2_ray box_r = (som_r - c3_wiseof(u2_loom_rail_box));
           c3_w   use_w = u2_rail_box_use(box_r);
+
 #if 1
           if ( LEAK && (som_r == LEAKY) ) {
             printf("LEAK: gain %x, use %d\n", som, use_w); 
-            // c3_assert(0);
+            if ( LEAK == 2 ) c3_assert(0);
+            LEAK++;
           }
 #endif
           c3_assert(use_w != 0);
@@ -1355,10 +1345,12 @@ u2_rl_take(u2_ray  ral_r,
 **
 **   Mark a noun for gc.
 */
-void
+c3_w
 u2_rl_gc_mark_noun(u2_ray  ral_r,
                    u2_noun som)
 {
+  c3_w siz_w = 0;
+
 top:
   if ( u2_fly_is_dog(som) ) {
     u2_ray som_r = u2_dog_a(som);
@@ -1382,9 +1374,10 @@ top:
         use_ws = -1;
         use_w = (c3_w) use_ws;
         u2_rail_box_use(box_r) = use_w;
+        siz_w += u2_rail_box_siz(box_r);
 
         if ( u2_dog_is_pom(som) ) {
-          u2_rl_gc_mark_noun(ral_r, u2_h(som));
+          siz_w += u2_rl_gc_mark_noun(ral_r, u2_h(som));
 
           som = u2_t(som);
           goto top;
@@ -1392,13 +1385,14 @@ top:
       }
     }
   }
+  return siz_w;
 }
 
 /* u2_rl_gc_mark_ptr():
 **
-**   Mark a pointer allocated with ralloc.
+**   Mark a pointer allocated with ralloc.  Return allocated words.
 */
-void
+c3_w
 u2_rl_gc_mark_ptr(u2_ray ral_r,
                   u2_ray ptr_r)
 {
@@ -1408,45 +1402,50 @@ u2_rl_gc_mark_ptr(u2_ray ral_r,
        (ptr_r >= u2_rail_rut_r(ral_r)) )
   {
     u2_ray box_r  = (ptr_r - c3_wiseof(u2_loom_rail_box));
-
     c3_w   use_w  = u2_rail_box_use(box_r);
     c3_ws  use_ws = (c3_ws) use_w;
+    c3_w   siz_w  = u2_rail_box_siz(box_r);
 
     c3_assert(use_ws != 0);
 
     if ( use_ws < 0 ) {
       use_ws -= 1;
+      siz_w = 0;
     } else {
       use_ws = -1;
     }
     use_w = (c3_w) use_ws;
     u2_rail_box_use(box_r) = use_w;
+
+    return siz_w;
   }
+  else return 0;
 }
 
 /* u2_rl_gc_mark():
 **
-**   Mark a rail.
+**   Mark a rail.  Return allocated words.
 */
-void
+c3_w
 u2_rl_gc_mark(u2_ray ral_r)
 {
   u2_ray sop_r = u2_rail_rut_r(ral_r);
-    
-  u2_cs_mark(ral_r, u2_soup_lot_r(sop_r));
+  
+  return u2_cs_mark(ral_r, u2_soup_lot_r(sop_r));
 }
 
 /* u2_rl_gc_sweep(): 
 **
-**   Sweep memory, freeing unused blocks.
+**   Sweep memory, freeing unused blocks.  Return live words.
 */
-void
+c3_w
 u2_rl_gc_sweep(u2_ray ral_r)
 {
   u2_ray rut_r = u2_rail_rut_r(ral_r);
   u2_ray hat_r = u2_rail_hat_r(ral_r);
   u2_ray bot_r = (rut_r + c3_wiseof(u2_loom_soup));
   u2_ray box_r = bot_r;
+  c3_w   liv_w = 0;
 
 #if 0
   while ( box_r < hat_r ) {
@@ -1467,7 +1466,6 @@ u2_rl_gc_sweep(u2_ray ral_r)
     if ( use_ws > 0 ) {
       printf("leak: box %x, siz %d, use %d\n", box_r, siz_w, use_w);
       u2_rail_box_use(box_r) = 0;
-      // exit(1);
       // _rl_bloq_free(ral_r, box_r);
     } 
     else if ( use_ws < 0 ) {
@@ -1475,9 +1473,11 @@ u2_rl_gc_sweep(u2_ray ral_r)
       use_ws = (0 - use_ws);
       use_w = (c3_w) use_ws;
       u2_rail_box_use(box_r) = use_w;
+      liv_w += siz_w;
     }
     box_r += siz_w;
   }
+  return liv_w;
 #endif 
 }
 

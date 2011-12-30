@@ -365,7 +365,7 @@
         return j2_mcx(Pt6, ut, find)(wir_r, van, sut, way, cog);
       }
       else {
-        c3_m    fun_m = u2_jet_fun_m(jet_j);
+        c3_m    fun_m = c3__find;
         u2_noun pro   = u2_rl_find_trel(wir_r, fun_m, sut, way, cog);
 
         if ( u2_none != pro ) {

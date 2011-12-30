@@ -164,7 +164,7 @@
         return j2_mcx(Pt6, ut, rest)(wir_r, van, sut, leg);
       }
       else {
-        c3_m    fun_m = u2_jet_fun_m(jet_j);
+        c3_m    fun_m = c3__rest;
         u2_noun pro   = u2_rl_find_cell(wir_r, fun_m, sut, leg);
 
         if ( u2_none != pro ) {

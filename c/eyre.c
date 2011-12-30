@@ -1669,7 +1669,7 @@ main(c3_i   argc,
 
 #if 1
       app = _eyre_app(wir_r, ken, lid_c);
-#if 0
+#if 1
       printf("gc in...\n");
       u2_wr_gc(wir_r, app, 0);
       printf("gc out.\n");
