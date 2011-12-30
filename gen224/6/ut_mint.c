@@ -180,7 +180,7 @@
         u2_noun q_zil = u2_t(zil);
         u2_noun wip = j2_mcy(Pt6, ut, tock)
           (wir_r, van, sut, pi_mew, p_zil, rag);
-         
+ 
         u2_rz(wir_r, rag);
         rag = u2_rx(wir_r, u2_t(wip));
 

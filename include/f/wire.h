@@ -80,6 +80,15 @@
           u2_weak
           u2_wr_ice(u2_ray  wir_r,
                     u2_noun fiz);
+
+        /* u2_wr_gc():
+        **
+        **   Garbage-collect all current storage in a wire, given
+        **   a 0-terminated list of external roots.
+        */
+          void
+          u2_wr_gc(u2_ray wir_r, ...);
+
 #if 0
         /* u2_wr_bench():
         **

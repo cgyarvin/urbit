@@ -4,6 +4,9 @@
 */
 #include "all.h"
 
+int LEAK=0;
+u2_ray LEAKY=0;
+
 /* _rl_feed():
 **
 **   Initialize allocator in `ral`.
@@ -567,7 +570,11 @@ _rl_bloq_grab(u2_ray ral_r,
   else { c3_assert(0); return 0; }
 }
 
-#if 0
+#if 1
+static int xzx=0;
+int BUG=0;
+int anum=0;
+
 /* _rl_bloq_grap()::
 */
 static u2_ray
@@ -576,19 +583,26 @@ _rl_bloq_grap(u2_ray ral_r,
 {
   u2_ray nov_r;
 
-  if ( random() & 1 ) {
-    nov_r = _rl_bloq_grab(ral_r, len_w + (random() % 1023));
-  } else {
-    nov_r = _rl_bloq_grab(ral_r, len_w);
-  }
-  {
-    c3_w i_w;
-
-    for ( i_w = 0; i_w < len_w; i_w++ ) {
-      *u2_at_ray(nov_r + i_w) = 0xdeadpork + i_w;
+  nov_r = _rl_bloq_grab(ral_r, len_w);
+#if 0
+  anum++;
+  if ( (BUG == 0) && (len_w == 48) ) {
+    // printf("box %x\n", nov_r - 2);
+    printf("len_w %d, num %d\n", len_w, anum);
+    if ( anum > 4354539 ) {
+      c3_assert(0);
     }
   }
+#endif
 
+#if 0
+  if ( (nov_r - c3_wiseof(u2_loom_rail_box)) == 0x200070a ) {
+    printf("alloc leak %d - nov_r %x\n", xzx, nov_r);
+    // if ( xzx == 14 ) { c3_assert(0); }
+    if ( xzx == 14 ) { LEAK = 1; LEAKY = nov_r; }
+    xzx++;
+  }
+#endif
   return nov_r;
 }
 #endif
@@ -609,6 +623,20 @@ _rl_bloq_free(u2_ray ral_r,
   c3_assert(u2_rail_hut_use(box_r) == 0);
   c3_assert(u2_ray_a(box_r) == u2_ray_a(rut_r));
   c3_assert(box_r >= rut_r);
+
+  /* Clear the contents of the block, for debugging.
+  */
+  {
+    c3_w   siz_w = u2_rail_box_siz(box_r);
+    u2_ray bod_r;
+    
+    for ( bod_r = (box_r + c3_wiseof(u2_loom_rail_box));
+          (bod_r + 1) < (box_r + siz_w);
+          bod_r++ )
+    {
+      *u2_at_ray(bod_r) = 0xdeadbeef;
+    }
+  }       
 
   _rl_live_grab(ral_r, (-1 * u2_rail_hut_siz(box_r)));
 
@@ -656,7 +684,7 @@ u2_ray
 u2_rl_ralloc(u2_ray ral_r,
              c3_w   siz_w)
 {
-  return _rl_bloq_grab(ral_r, siz_w);
+  return _rl_bloq_grap(ral_r, siz_w);
 }
 
 /* u2_rl_rfree():
@@ -724,9 +752,14 @@ u2_rl_gain(u2_ray  ral_r,
         if ( som_r > rut_r ) {
           u2_ray box_r = (som_r - c3_wiseof(u2_loom_rail_box));
           c3_w   use_w = u2_rail_box_use(box_r);
-
+#if 1
+          if ( LEAK && (som_r == LEAKY) ) {
+            printf("LEAK: gain %x, use %d\n", som, use_w); 
+            // c3_assert(0);
+          }
+#endif
           c3_assert(use_w != 0);
-          if ( use_w != 0xffffffff ) {
+          if ( use_w != 0x7fffffff ) {
             u2_rail_box_use(box_r) = (use_w + 1);
           }
         }
@@ -786,7 +819,40 @@ u2_rl_ok(u2_ray  ral_r,
     }
   }
 }
-          
+
+/* u2_rl_refs():
+**
+**   Return the reference count of (som).  For debugging.
+*/
+c3_w
+u2_rl_refs(u2_ray  ral_r,
+           u2_noun som)
+{
+  if ( u2_fly_is_cat(som) ) {
+    return 1;
+  }
+  else {
+    u2_ray som_r = u2_dog_a(som);
+    u2_ray hat_r = u2_rail_hat_r(ral_r);
+
+    if ( u2_ray_a(som_r) == u2_ray_a(hat_r) ) {
+      c3_m hip_m = u2_rail_hip_m(ral_r);
+
+      if ( c3__rock == hip_m ) {
+        u2_ray rut_r = u2_rail_rut_r(ral_r);
+        
+        if ( som_r >= rut_r ) {
+          u2_ray box_r = (som_r - c3_wiseof(u2_loom_rail_box));
+          c3_w   use_w = u2_rail_box_use(box_r);
+
+          return use_w;
+        }
+      }
+    }
+  }
+  return 1;
+}
+
 /* u2_rl_lose():
 **
 **   Lose a reference to (som).  Free it if refcount == 0.
@@ -814,6 +880,11 @@ top:
           u2_ray box_r = (som_r - c3_wiseof(u2_loom_rail_box));
           c3_w   use_w = u2_rail_box_use(box_r);
 
+          if ( LEAK && (som_r == LEAKY) ) {
+            printf("LEAK %d: lose %x, use %d\n", LEAK, som, use_w); 
+            // if ( 2 == LEAK ) c3_assert(0);
+            // LEAK++;
+          }
           if ( 1 == use_w ) {
             if ( u2_dog_is_pom(som) ) {
               u2_noun h_som = u2_h(som);
@@ -825,13 +896,17 @@ top:
               _rl_bloq_free(ral_r, box_r);
               som = t_som;
               goto top;
+            } 
+            else {
+              u2_rail_box_use(box_r) = 0;
+              _rl_bloq_free(ral_r, box_r);
             }
           }
           else {
             // if ( use_w == 0 ) { u2_err(ral_r, "useless", som); }
 
             c3_assert(use_w != 0);
-            if ( use_w != 0xffffffff ) {
+            if ( use_w != 0x7fffffff ) {
               u2_rail_box_use(box_r) = (use_w - 1);
             }
           }
@@ -1180,7 +1255,7 @@ u2_rl_copy(u2_ray ral_r,
             return u2_none;
           }
 
-          nov_r = _rl_bloq_grab(ral_r, c3_wiseof(u2_loom_cell));
+          nov_r = _rl_bloq_grap(ral_r, c3_wiseof(u2_loom_cell));
           if ( 0 == nov_r ) {
             u2_ho_warn_here();
 
@@ -1201,7 +1276,7 @@ u2_rl_copy(u2_ray ral_r,
         c3_w len_w = *u2_at_pug_len(fiz);
         u2_ray nov_r;
 
-        nov_r = _rl_bloq_grab(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
+        nov_r = _rl_bloq_grap(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
         if ( 0 == nov_r ) {
           u2_ho_warn_here();
 
@@ -1239,7 +1314,8 @@ u2_rl_wash(u2_rail ral_r,
       u2_noun nov = mug_w;
 
       *u2_at_dog_mug(fiz) = *u2_at_dog_mug(nov);
-      // printf("  fixed fiz %x; was %x; now %x\n", fiz, mug_w, *u2_at_dog_mug(fiz));
+      // printf("  fixed fiz %x; was %x; now %x\n", 
+      //                         fiz, mug_w, *u2_at_dog_mug(fiz));
     }
     if ( u2_yes == u2_dust(fiz) ) {
       u2_rl_wash(ral_r, u2_h(fiz));
@@ -1274,6 +1350,136 @@ u2_rl_take(u2_ray  ral_r,
   }
 }
 #endif
+
+/* u2_rl_gc_mark_noun():
+**
+**   Mark a noun for gc.
+*/
+void
+u2_rl_gc_mark_noun(u2_ray  ral_r,
+                   u2_noun som)
+{
+top:
+  if ( u2_fly_is_dog(som) ) {
+    u2_ray som_r = u2_dog_a(som);
+    u2_ray hat_r = u2_rail_hat_r(ral_r);
+
+    if ( (u2_ray_a(som_r) == u2_ray_a(hat_r)) &&
+         (som_r >= u2_rail_rut_r(ral_r)) )
+    {
+      u2_ray box_r  = (som_r - c3_wiseof(u2_loom_rail_box));
+      c3_w   use_w  = u2_rail_box_use(box_r);
+      c3_ws  use_ws = (c3_ws) use_w;
+
+      c3_assert(use_ws != 0);
+
+      if ( use_ws < 0 ) {
+        use_ws -= 1;
+        use_w = (c3_w) use_ws;
+        u2_rail_box_use(box_r) = use_w;
+      }
+      else {
+        use_ws = -1;
+        use_w = (c3_w) use_ws;
+        u2_rail_box_use(box_r) = use_w;
+
+        if ( u2_dog_is_pom(som) ) {
+          u2_rl_gc_mark_noun(ral_r, u2_h(som));
+
+          som = u2_t(som);
+          goto top;
+        }
+      }
+    }
+  }
+}
+
+/* u2_rl_gc_mark_ptr():
+**
+**   Mark a pointer allocated with ralloc.
+*/
+void
+u2_rl_gc_mark_ptr(u2_ray ral_r,
+                  u2_ray ptr_r)
+{
+  u2_ray hat_r = u2_rail_hat_r(ral_r);
+
+  if ( (u2_ray_a(ptr_r) == u2_ray_a(hat_r)) &&
+       (ptr_r >= u2_rail_rut_r(ral_r)) )
+  {
+    u2_ray box_r  = (ptr_r - c3_wiseof(u2_loom_rail_box));
+
+    c3_w   use_w  = u2_rail_box_use(box_r);
+    c3_ws  use_ws = (c3_ws) use_w;
+
+    c3_assert(use_ws != 0);
+
+    if ( use_ws < 0 ) {
+      use_ws -= 1;
+    } else {
+      use_ws = -1;
+    }
+    use_w = (c3_w) use_ws;
+    u2_rail_box_use(box_r) = use_w;
+  }
+}
+
+/* u2_rl_gc_mark():
+**
+**   Mark a rail.
+*/
+void
+u2_rl_gc_mark(u2_ray ral_r)
+{
+  u2_ray sop_r = u2_rail_rut_r(ral_r);
+    
+  u2_cs_mark(ral_r, u2_soup_lot_r(sop_r));
+}
+
+/* u2_rl_gc_sweep(): 
+**
+**   Sweep memory, freeing unused blocks.
+*/
+void
+u2_rl_gc_sweep(u2_ray ral_r)
+{
+  u2_ray rut_r = u2_rail_rut_r(ral_r);
+  u2_ray hat_r = u2_rail_hat_r(ral_r);
+  u2_ray bot_r = (rut_r + c3_wiseof(u2_loom_soup));
+  u2_ray box_r = bot_r;
+
+#if 0
+  while ( box_r < hat_r ) {
+    c3_w siz_w = u2_rail_box_siz(box_r);
+    c3_w use_w = u2_rail_box_use(box_r);
+
+    if ( use_w > 3 ) {
+      printf("box %x, siz %d, use %d\n", box_r, siz_w, use_w);
+    }
+    box_r += siz_w;
+  }
+#else
+  while ( box_r < hat_r ) {
+    c3_w  siz_w  = u2_rail_box_siz(box_r);
+    c3_w  use_w  = u2_rail_box_use(box_r);
+    c3_ws use_ws = (c3_ws) use_w;
+
+    if ( use_ws > 0 ) {
+      printf("leak: box %x, siz %d, use %d\n", box_r, siz_w, use_w);
+      u2_rail_box_use(box_r) = 0;
+      // exit(1);
+      // _rl_bloq_free(ral_r, box_r);
+    } 
+    else if ( use_ws < 0 ) {
+      // printf("live: box %x, siz %d, use %d\n", box_r, siz_w, use_w);
+      use_ws = (0 - use_ws);
+      use_w = (c3_w) use_ws;
+      u2_rail_box_use(box_r) = use_w;
+    }
+    box_r += siz_w;
+  }
+#endif 
+}
 
 #if 0
 /* u2_rl_take():
@@ -1312,7 +1518,7 @@ u2_rl_take(u2_ray  ral_r,
           return u2_none;
         }
 
-        nov_r = _rl_bloq_grab(ral_r, c3_wiseof(u2_loom_cell));
+        nov_r = _rl_bloq_grap(ral_r, c3_wiseof(u2_loom_cell));
         if ( 0 == nov_r ) {
           u2_ho_warn_here();
 
@@ -1335,7 +1541,7 @@ u2_rl_take(u2_ray  ral_r,
       u2_ray nov_r;
       u2_noun nov;
 
-      nov_r = _rl_bloq_grab(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
+      nov_r = _rl_bloq_grap(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
       if ( 0 == nov_r ) {
         u2_ho_warn_here();
 
@@ -1551,7 +1757,7 @@ u2_rl_bytes(u2_ray      ral_r,
       u2_ray nov_r;
       u2_noun nov;
 
-      nov_r = _rl_bloq_grab(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
+      nov_r = _rl_bloq_grap(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
       nov = u2_pug_of(nov_r, 0);
 
       *u2_at_dog_mug(nov) = 0;
@@ -1642,13 +1848,20 @@ u2_rl_cell(u2_ray  ral_r,
     u2_ray nov_r;
     u2_noun nov;
 
-    nov_r = _rl_bloq_grab(ral_r, c3_wiseof(u2_loom_cell));
+    nov_r = _rl_bloq_grap(ral_r, c3_wiseof(u2_loom_cell));
     nov = u2_pom_of(nov_r, 0);
 
     *u2_at_dog_mug(nov) = 0;
     *u2_at_pom_hed(nov) = a;
     *u2_at_pom_tel(nov) = b;
 
+#if 0
+    if ( LEAK && ((u2_fly_is_dog(a) && (u2_dog_a(a) == LEAKY)) ||
+                 (u2_fly_is_dog(b) && (u2_dog_a(b) == LEAKY))) ) {
+      printf("LEAKY %x => %x\n", (LEAKY - 2), (nov_r - 2));
+      LEAKY = nov_r;
+    }
+#endif
     return nov;
   }
 }
@@ -2001,7 +2214,7 @@ u2_rl_words(u2_ray      ral_r,
       u2_ray  nov_r;
       u2_noun nov;
 
-      nov_r = _rl_bloq_grab(ral_r, (a_w + c3_wiseof(u2_loom_atom)));
+      nov_r = _rl_bloq_grap(ral_r, (a_w + c3_wiseof(u2_loom_atom)));
       nov = u2_pug_of(nov_r, 0);
 
       *u2_at_dog_mug(nov) = 0;

@@ -16,7 +16,7 @@
            u2_noun van,                                           //  retain
            u2_noun sut,                                           //  retain
            u2_noun peh,                                           //  retain
-           u2_noun mur,
+           u2_noun mur,                                           //  retain
            u2_atom axe)                                           //  retain
   {
     if ( u2_no == u2_dust(peh) ) {
@@ -77,7 +77,7 @@
                         u2_noun peh,                              //  retain
                         u2_noun mur)                              //  retain
   {
-    return _tack_in(wir_r, van, sut, peh, mur,_1);
+    return _tack_in(wir_r, van, sut, peh, mur, _1);
   }
 
 /* boilerplate

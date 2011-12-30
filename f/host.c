@@ -861,7 +861,6 @@ _ho_run(u2_ray      wir_r,
   }
 }
 
-
 /* u2_ho_use():
 **
 **   Run a jet.
@@ -934,7 +933,6 @@ u2_ho_use(u2_ray     wir_r,
           }
         }
       }
-      return pro;
     }
     else { 
       u2_noun tax = u2_none;
@@ -1002,17 +1000,9 @@ u2_ho_use(u2_ray     wir_r,
      )
   {
     if ( jet_j->key_f ) {
-      static int x;
-
       if ( u2_none == pro ) {
         // printf("no pro: %s\n", u2_ho_cstring(jet_j->xip));
         return u2_none;
-      }
-      if ( !strcmp(jet_j->fcs_c, "moot") ) {
-        x++;
-        if ( !(x % 1000) ) {
-          printf("x %d\n", x);
-        }
       }
       pro = u2_rl_save(wir_r, fun_m, key, pro);
       u2_rz(wir_r, key);

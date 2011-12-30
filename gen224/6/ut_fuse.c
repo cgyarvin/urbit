@@ -25,6 +25,7 @@
         return c3__void;
       } else {
         u2_rz(wir_r, rep);
+        u2_rz(wir_r, ret);
         return u2_rx(wir_r, sut);
       }
     } else {

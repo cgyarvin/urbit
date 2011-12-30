@@ -121,6 +121,14 @@
       u2_cs_free(u2_ray  ral_r,
                  u2_ray  lot_r);                                    //  submit
 
+    /* u2_cs_mark():
+    **
+    **   Mark traverse of slot.
+    */
+      void
+      u2_cs_mark(u2_ray ral_r,
+                 u2_ray lot_r);
+
     /* u2_cs_init():
     **
     **  Initialize slot to empty.
@@ -133,7 +141,7 @@
     **   Release all resources in and under slot (but not slot itself).
     */
       void
-      u2_cs_lose(u2_ray  ral_r,
+      u2_cs_lose(u2_ray ral_r,
                  u2_ray lot_r);                                     //  submit
 
     /* u2_cs_make():

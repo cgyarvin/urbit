@@ -870,6 +870,31 @@ u2_cs_free(u2_rail ral_r,
   u2_rl_rfree(ral_r, lot_r);
 }
 
+/* u2_cs_mark():
+**
+**   Mark traverse of slot.
+*/
+void
+u2_cs_mark(u2_ray ral_r,
+           u2_ray lot_r)
+{
+  if ( u2_slot_is_a(lot_r) ) {
+    u2_rl_gc_mark_noun(ral_r, u2_slot_a_sap(lot_r));
+    u2_rl_gc_mark_noun(ral_r, u2_slot_a_pro(lot_r));
+  }
+  else if ( u2_slot_is_b(lot_r) ) {
+    u2_ray sid_r = u2_slot_b_sid(lot_r);
+    c3_w   i_w;
+
+    for ( i_w = 0; i_w < 16; i_w++ ) {
+      u2_ray tol_r = (sid_r + ((i_w) * c3_wiseof(u2_cash_slot_a)));
+
+      u2_cs_lose(ral_r, tol_r);
+    }
+    u2_rl_gc_mark_ptr(ral_r, sid_r);
+  }
+}
+
 /* u2_cs_init():
 **
 **  Initialize slot to empty.

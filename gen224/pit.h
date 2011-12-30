@@ -37,6 +37,7 @@
 #   define  Tier5_test    (Tier5 | u2_jet_test)
 #   define  Tier6_a_memo  (Tier6_a | u2_jet_memo)
 #   define  Tier6_b_memo  (Tier6_b | u2_jet_memo)
+// #   define  Tier6_b_memo  Tier6_b 
 #   define  Tier6_c_memo  (Tier6_c | u2_jet_memo)
 #   define  Tier6_x_memo  (Tier6_x)
 #   define  Tier6_t_memo  (Tier6_t | u2_jet_memo)

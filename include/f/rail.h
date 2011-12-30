@@ -226,6 +226,7 @@
                           c3_w   num_w,
                           c3_w   dem_w,
                           c3_w   tip_w);
+
         /* u2_rl_lose():
         **
         **   Lose a reference to `som`.  Free it if refcount == 0.
@@ -233,6 +234,36 @@
           void
           u2_rl_lose(u2_ray  ral_r,
                      u2_weak som);                                //  transfer
+
+        /* u2_rl_gc_mark_noun():
+        **
+        **   Mark a noun for gc.
+        */
+          void
+          u2_rl_gc_mark_noun(u2_ray  ral_r,
+                             u2_noun som);
+
+        /* u2_rl_gc_mark_ptr():
+        **
+        **   Mark a pointer allocated with ralloc.
+        */
+          void
+          u2_rl_gc_mark_ptr(u2_ray ral_r,
+                            u2_ray ptr_r);
+
+        /* u2_rl_gc_mark():
+        **
+        **   Mark a rail.
+        */
+          void
+          u2_rl_gc_mark(u2_ray ral_r);
+
+        /* u2_rl_gc_sweep(): 
+        **
+        **   Sweep memory, freeing unused blocks.
+        */
+          void
+          u2_rl_gc_sweep(u2_ray ral_r);
 
         /* u2_rl_malloc():
         **
@@ -316,6 +347,14 @@
           u2_rl_slaq(u2_wire wir_r,
                      c3_g    met_g,
                      c3_w    len_w);
+
+        /* u2_rl_refs():
+        **
+        **   Return the reference count of (som).  For debugging.
+        */
+          c3_w
+          u2_rl_refs(u2_ray  ral_r,
+                     u2_noun som);
 
         /* u2_rl_take():
         **

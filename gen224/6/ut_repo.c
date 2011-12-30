@@ -7,6 +7,8 @@
 
 /* logic
 */
+  extern int LEAK;
+
   u2_noun                                                         //  transfer
   j2_mcy(Pt6, ut, repo)(u2_wire wir_r, 
                         u2_noun van,                              //  retain

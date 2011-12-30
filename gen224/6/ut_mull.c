@@ -343,6 +343,10 @@
         {
           return u2_bl_error(wir_r, "mull-bonk-b");
         }
+        u2_rz(wir_r, p_waz); u2_rz(wir_r, q_waz);
+        u2_rz(wir_r, p_syx); u2_rz(wir_r, q_syx);
+        u2_rz(wir_r, p_pov); u2_rz(wir_r, q_pov);
+
         return _mull_both(wir_r, van, gol, _mull_flag(wir_r));
       }
       case c3__wtcl: u2_bi_trel(wir_r, u2_t(gen), &p_gen, &q_gen, &r_gen);

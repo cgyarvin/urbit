@@ -83,9 +83,11 @@
   j2_mby(Pt5, cue)(u2_wire wir_r, 
                    u2_atom a)                                     //  retain
   {
+#if 0
     if ( 0 == T_r ) {
       T_r = u2_cs_make(wir_r);
     }
+#endif
     {
       u2_noun x = _cue_in(wir_r, a, _0, u2_nul);
       u2_noun y = u2_rx(wir_r, u2_h(u2_t(x)));

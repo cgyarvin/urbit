@@ -21,8 +21,8 @@
 #define GUNN
 // #define PROBE    //  probe one stage ahead
 // #define DPROBE   //  probe two stages ahead
-#define PERF
-#define PERF_REAM
+// #define PERF
+// #define PERF_REAM
 
 #define EyreFirstKernel 225     //  counts down; max 264; > 259 needs nock7
 u2_flag EyreSmoke;
@@ -407,7 +407,6 @@ _eyre_call_1(u2_wire     wir_r,
 
   u2_rz(wir_r, cor);
   u2_rz(wir_r, noc);
-  u2_rz(wir_r, src);
 
   return pro;
 }
@@ -1440,8 +1439,6 @@ _eyre_probe(u2_wire wir_r,
       free(pot_c);
     }
   }
-  u2_rl_fall(wir_r);
-
   nex = u2_rl_take(u2_wire_bas_r(wir_r), cun);
   u2_rl_fall(wir_r);
 
@@ -1478,6 +1475,7 @@ _eyre_app(u2_wire wir_r,
 
       u2_tx_open(wir_r);
       gen = _eyre_call_1(wir_r, u2_yes, ken, "ream:!%", src);
+      u2_rz(wir_r, src);
       sab = u2_tx_done(wir_r);
       // u2_tx_do_profile(wir_r, u2_no);
 
@@ -1500,6 +1498,34 @@ _eyre_app(u2_wire wir_r,
     return app;
   }
 }
+
+#if 1
+/* _eyre_toy(): toy app for gc test.
+*/
+static u2_noun                                                    //  produce
+_eyre_toy(u2_wire wir_r, 
+          u2_noun ken,                                            //  retain
+          c3_c*   toy_c)                                          //  retain
+{
+  u2_ray kit_r = u2_bl_open(wir_r);
+
+  if ( u2_bl_set(wir_r) ) {
+    u2_bl_done(wir_r, kit_r);
+    fprintf(stderr, "{app: exit}\n");
+    exit(1);
+    return 0;
+  } else {
+    u2_noun src   = u2_bn_string(wir_r, toy_c);
+    u2_noun fom;
+
+    printf("toy: loading: %s\n", toy_c);
+
+    fom = _eyre_nock(wir_r, u2_yes, src, ken);
+
+    return fom;
+  }
+}
+#endif
 
 /* _eyre_line(): execute and print a line, producing new core.
 */
@@ -1625,6 +1651,7 @@ main(c3_i   argc,
     fel_c = c3_comd_init();
   }
 
+
   //  Load the kernel(s) and/or shell.
   //
   {
@@ -1638,9 +1665,32 @@ main(c3_i   argc,
       //  u2_err(wir_r, "ken", ken);
     }
     else {
-
       ken = _eyre_ken(wir_r, kno_w);
+
+#if 1
       app = _eyre_app(wir_r, ken, lid_c);
+#if 0
+      printf("gc in...\n");
+      u2_wr_gc(wir_r, app, 0);
+      printf("gc out.\n");
+      exit(1);
+#endif
+#else
+      app = _eyre_toy(wir_r, ken, "%foobar");
+
+      printf("gc in...\n");
+      u2_wr_gc(wir_r, app, 0);
+      printf("gc out.\n");
+
+      {
+        u2_noun foo;
+
+        foo = _eyre_nock(wir_r, u2_no, 0, app);
+        u2_err(wir_r, "foo", foo);
+      }
+      exit(1);
+#endif
+
 #ifdef PROBE
       {
         u2_noun one;

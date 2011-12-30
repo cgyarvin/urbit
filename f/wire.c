@@ -73,19 +73,6 @@ u2_wr_init(c3_m   hip_m,
   return wir_r;
 }
 
-        /* u2_wr_save():
-        **
-        **   Save reactor noun to basket.
-        */
-          u2_noun
-          u2_wr_save(u2_ray wir_r);
-
-        /* u2_wr_nuke():
-        **
-        **   Reinitialize the reactor partition.
-        */
-          u2_noun
-          u2_wr_nuke(u2_ray wir_r);
 
 /* u2_wr_ice(): u2_rl_ice(), with u2_bx_copy().
 */
@@ -104,4 +91,42 @@ u2_wr_ice(u2_ray  wir_r,
     u2_bx_copy(wir_r, cop_w);
   }
   return buz;
+}
+
+/* u2_wr_gc():
+**
+**   Garbage-collect all current storage in a wire, given
+**   a 0-terminated list of external roots.
+*/
+void
+u2_wr_gc(u2_ray wir_r, ...)
+{
+  c3_assert(c3__rock == u2_rail_hip_m(wir_r));
+
+  /* Mark submitted roots.
+  */
+  {
+    va_list vap;
+    u2_noun tur;
+
+    va_start(vap, wir_r);
+
+    while ( 0 != (tur = va_arg(vap, u2_noun)) ) {
+      u2_rl_gc_mark_noun(wir_r, tur); 
+    }
+    va_end(vap);
+  }
+
+  /* Mark wire internals.
+  */
+  {
+    if ( u2_wire_kit_r(wir_r) ) {
+      u2_rl_gc_mark_ptr(wir_r, u2_wire_kit_r(wir_r));
+    }
+    u2_rl_gc_mark_ptr(wir_r, u2_wire_bex_r(wir_r));
+    u2_rl_gc_mark_ptr(wir_r, u2_wire_rac_r(wir_r));
+  }
+  u2_rl_gc_mark(wir_r);
+
+  u2_rl_gc_sweep(wir_r);
 }

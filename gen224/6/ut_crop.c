@@ -27,6 +27,7 @@
         return c3__void;
       } else {
         u2_rz(wir_r, rep);
+        u2_rz(wir_r, ret);
         return u2_rx(wir_r, sut);
       }
     } else {
@@ -172,12 +173,12 @@
     }
   }
 
-  static u2_noun
+  static u2_noun                                                  //  produce
   _crop_sint(u2_wire wir_r,
-             u2_noun van,
-             u2_noun sut,
-             u2_noun ref,
-             u2_noun bix)
+             u2_noun van,                                         //  retain
+             u2_noun sut,                                         //  retain
+             u2_noun ref,                                         //  retain
+             u2_noun bix)                                         //  retain
   {
     u2_noun p_ref, q_ref;
 

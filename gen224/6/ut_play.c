@@ -96,7 +96,8 @@
         u2_noun qi_mew = u2_t(i_mew);
         u2_noun laf = _play_in(wir_r, van, sut, qi_mew);
         u2_noun ruz = j2_mcy(Pt6, ut, tock)(wir_r, van, sut, pi_mew, laf, rag);
-        
+   
+        u2_rz(wir_r, laf);
         u2_rz(wir_r, rag);
         rag = u2_rx(wir_r, u2_t(ruz));
         u2_rz(wir_r, ruz);
@@ -163,12 +164,13 @@
       {
         u2_noun fex = j2_mcy(Pt6, ut, gain)(wir_r, van, sut, p_gen);
         u2_noun wux = j2_mcy(Pt6, ut, lose)(wir_r, van, sut, p_gen);
-        u2_noun ret = j2_mby(Pt6, fork)
-          (wir_r, (fex == c3__void) ? c3__void 
-                                    : _play_in(wir_r, van, fex, q_gen),
-                  (wux == c3__void) ? c3__void 
-                                    : _play_in(wir_r, van, wux, r_gen));
-        
+        u2_noun dez = (fex == c3__void) ? c3__void 
+                                        : _play_in(wir_r, van, fex, q_gen);
+        u2_noun doz = (wux == c3__void) ? c3__void 
+                                        : _play_in(wir_r, van, wux, r_gen);
+        u2_noun ret = j2_mby(Pt6, fork)(wir_r, dez, doz);
+       
+        u2_rz(wir_r, dez); u2_rz(wir_r, doz);
         u2_rz(wir_r, fex); u2_rz(wir_r, wux);
         return ret;
       }

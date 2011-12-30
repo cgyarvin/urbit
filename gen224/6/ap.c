@@ -41,7 +41,7 @@
 
     static u2_noun
     _lone(u2_wire wir_r, u2_noun one)
-      { return u2_bc(wir_r, u2_rx(wir_r, one), u2_nul); }
+      { return u2_bc(wir_r, one, u2_nul); }
  
 /***
 ****
@@ -390,8 +390,11 @@
       if ( u2_no == u2_dust(p_gen) ) {
         return u2_bc(wir_r, c3__zpzp, u2_nul);
       } else {
-        return j2_mcy(Pt6, ap, pick)
-          (wir_r, u2_h(p_gen), riq, _hstr_in(wir_r, riq, u2_t(p_gen)));
+        u2_noun rin = _hstr_in(wir_r, riq, u2_t(p_gen));
+        u2_noun ret = j2_mcy(Pt6, ap, pick)(wir_r, u2_h(p_gen), riq, rin);
+
+        u2_rz(wir_r, rin);
+        return ret;
       }
     }
   _open_do_pq(hstr)   //  _*  pine
