@@ -584,10 +584,10 @@ _rl_bloq_grap(u2_ray ral_r,
   nov_r = _rl_bloq_grab(ral_r, len_w);
 
 #if 0
-  if ( (nov_r - c3_wiseof(u2_loom_rail_box)) == 0x2002510 ) {
+  if ( (nov_r - c3_wiseof(u2_loom_rail_box)) == 0x22793cd ) {
     printf("alloc leak %d - nov_r %x\n", xzx, nov_r);
-    // if ( xzx == 0 ) { c3_assert(0); }
-    if ( xzx == 0 ) { LEAK = 1; LEAKY = nov_r; }
+    if ( xzx == 0 ) { c3_assert(0); }
+    // if ( xzx == 0 ) { LEAK = 1; LEAKY = nov_r; }
     xzx++;
   }
 #endif
@@ -871,7 +871,7 @@ top:
           c3_w   use_w = u2_rail_box_use(box_r);
 
           if ( LEAK && (som_r == LEAKY) ) {
-            printf("LEAK %d: lose %x, use %d\n", LEAK, som, use_w); 
+            printf("LEAK: lose %x, use %d\n", som, use_w); 
             // if ( 2 == LEAK ) c3_assert(0);
             // LEAK++;
           }
@@ -1434,6 +1434,20 @@ u2_rl_gc_mark(u2_ray ral_r)
   return u2_cs_mark(ral_r, u2_soup_lot_r(sop_r));
 }
 
+/* u2_rl_drain():
+**
+**   Clear the memo cache (soup).
+*/
+void
+u2_rl_drain(u2_ray ral_r)
+{
+  if ( c3__rock == u2_rail_hip_m(ral_r) ) {
+    u2_ray sop_r = u2_rail_rut_r(ral_r);
+    
+    u2_cs_lose(ral_r, u2_soup_lot_r(sop_r));
+  }
+}
+
 /* u2_rl_gc_sweep(): 
 **
 **   Sweep memory, freeing unused blocks.  Return live words.
@@ -1446,6 +1460,7 @@ u2_rl_gc_sweep(u2_ray ral_r)
   u2_ray bot_r = (rut_r + c3_wiseof(u2_loom_soup));
   u2_ray box_r = bot_r;
   c3_w   liv_w = 0;
+  c3_w   lek_w = 0;
 
 #if 0
   while ( box_r < hat_r ) {
@@ -1464,9 +1479,10 @@ u2_rl_gc_sweep(u2_ray ral_r)
     c3_ws use_ws = (c3_ws) use_w;
 
     if ( use_ws > 0 ) {
-      printf("leak: box %x, siz %d, use %d\n", box_r, siz_w, use_w);
+      // printf("leak: box %x, siz %d, use %d\n", box_r, siz_w, use_w);
+      lek_w =+ siz_w;
       u2_rail_box_use(box_r) = 0;
-      // _rl_bloq_free(ral_r, box_r);
+      _rl_bloq_free(ral_r, box_r);
     } 
     else if ( use_ws < 0 ) {
       // printf("live: box %x, siz %d, use %d\n", box_r, siz_w, use_w);
@@ -1476,6 +1492,9 @@ u2_rl_gc_sweep(u2_ray ral_r)
       liv_w += siz_w;
     }
     box_r += siz_w;
+  }
+  if ( lek_w ) {
+    fprintf(stderr, "%d bytes leaked\n", (lek_w * 4));
   }
   return liv_w;
 #endif 

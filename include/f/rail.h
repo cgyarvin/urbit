@@ -144,6 +144,13 @@
                      u2_ray hat_r,
                      u2_ray mat_r);
 
+        /* u2_rl_drain():
+        **
+        **   Clear the memo cache (soup).
+        */
+          void
+          u2_rl_drain(u2_ray ral_r);
+
         /* u2_rl_fall():
         **
         **   Reverse the beams backward, restoring the old frame.

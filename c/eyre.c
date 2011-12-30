@@ -1670,10 +1670,8 @@ main(c3_i   argc,
 #if 1
       app = _eyre_app(wir_r, ken, lid_c);
 #if 1
-      printf("gc in...\n");
+      u2_rl_drain(wir_r);
       u2_wr_gc(wir_r, app, 0);
-      printf("gc out.\n");
-      exit(1);
 #endif
 #else
       app = _eyre_toy(wir_r, ken, "%foobar");

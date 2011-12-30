@@ -933,6 +933,8 @@ u2_cs_lose(u2_rail ral_r,
     }
     u2_rl_rfree(ral_r, sid_r);
   }
+  u2_cs_init(lot_r);
+  c3_assert(u2_slot_is_c(lot_r));
 }
 
 /* u2_cs_make():

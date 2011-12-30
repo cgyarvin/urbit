@@ -273,7 +273,7 @@
   {
     u2_noun duq = _frag(wir_r, 5);
     u2_noun doq = _frag(wir_r, 10);
-    u2_noun riq = _lone(wir_r, u2_rx(wir_r, duq));
+    u2_noun riq = _lone(wir_r, duq);
     u2_noun vaq = u2_bc(wir_r, c3__zpzp, u2_nul);
     u2_noun hel = (u2_no == u2_dust(q_gen)) 
                     ? u2_bt(wir_r, c3__dtsg, 'n', u2_nul)
