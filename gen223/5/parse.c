@@ -1074,6 +1074,7 @@
                                     u2_bc(wir_r, u2_rx(wir_r, puq_vex),
                                                  u2_rx(wir_r, puq_wag)))),
                 u2_rx(wir_r, quq_wag));
+      u2_rz(wir_r, wag);
     }
     u2_rz(wir_r, vex);
     return ret;

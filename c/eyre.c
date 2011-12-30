@@ -34,12 +34,14 @@ u2_flag EyreSmoke;
   
     /* External drivers.
     */
+      extern u2_ho_driver j2_da(k_223);
       extern u2_ho_driver j2_da(k_224);
       extern u2_ho_driver j2_da(k_225);
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       u2_ho_driver *HostDriverBase[] = {
+        &j2_da(k_223),
         &j2_da(k_224),
         &j2_da(k_225),
         0
@@ -1669,9 +1671,11 @@ main(c3_i   argc,
 
 #if 1
       app = _eyre_app(wir_r, ken, lid_c);
-#if 1
+#if 0
+      printf("gc in...\n");
       u2_rl_drain(wir_r);
       u2_wr_gc(wir_r, app, 0);
+      printf("gc out.\n");
 #endif
 #else
       app = _eyre_toy(wir_r, ken, "%foobar");
