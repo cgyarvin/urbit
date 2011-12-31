@@ -19,7 +19,13 @@ _rl_feed(u2_ray ral_r)
     u2_ray lot_r = u2_soup_lot_r(sop_r);
 
     u2_rail_hat_r(ral_r) += c3_wiseof(u2_loom_soup);
-    u2_soup_fre_r(sop_r) = 0;
+    {
+      c3_w i_w;
+
+      for ( i_w = 0; i_w < u2_soup_free_no; i_w++ ) {
+        u2_soup_fre_r(sop_r, i_w) = 0;
+      }
+    }
 #ifdef U2_PROFILE_MEMORY
     u2_soup_liv_w(sop_r) = 0;
 #endif
@@ -354,51 +360,6 @@ u2_rl_fall_part(u2_ray ral_r,
   */
 }
 
-#if 0
-/* u2_rl_valid()::
-*/
-void
-u2_rl_valid(u2_ray ral_r)
-{
-  if ( c3__rock == u2_rail_hip_m(ral_r) ) {
-    u2_ray sop_r = u2_rail_rut_r(ral_r);
-    u2_ray fre_r = u2_soup_fre_r(sop_r);
-
-    while ( fre_r ) {
-      if ( u2_ray_a(fre_r) > 1 ) {
-        c3_assert(0);
-      }
-      if ( u2_ray_a(fre_r) != u2_ray_a(u2_rail_hat_r(ral_r)) ) {
-        c3_assert(0);
-      }
-      if ( (fre_r + u2_rail_hut_siz(fre_r)) >= u2_rail_hat_r(ral_r) ) {
-        c3_assert(0);
-      }
-      if ( (0 != u2_rail_hut_pre(fre_r)) ) {
-        if ( u2_ray_a(u2_rail_hut_pre(fre_r)) > 1 ) {
-          {
-            printf("fre %d:%x; pre %d:%x\n",
-                    u2_ray_a(fre_r),
-                    u2_ray_b(fre_r),
-                    u2_ray_a(u2_rail_hut_pre(fre_r)),
-                    u2_ray_b(u2_rail_hut_pre(fre_r)));
-          }
-          c3_assert(0);
-        }
-        c3_assert(fre_r == u2_rail_hut_nex(u2_rail_hut_pre(fre_r)));
-      }
-      if ( (0 != u2_rail_hut_nex(fre_r)) ) {
-        if ( u2_ray_a(u2_rail_hut_nex(fre_r)) > 1 ) {
-          c3_assert(0);
-        }
-        c3_assert(fre_r == u2_rail_hut_pre(u2_rail_hut_nex(fre_r)));
-      }
-      fre_r = u2_rail_hut_nex(fre_r);
-    }
-  }
-}
-#endif
-
 /* _rl_bloq_make():
 **
 **  Install a liquid block at `box_r`, with size `siz_w` and 
@@ -418,36 +379,72 @@ _rl_bloq_make(u2_ray ral_r,
   }
 }
 
+/* _rl_free_select()
+**
+**  Select the correct free list for an object.
+*/
+c3_w
+_rl_free_select(c3_w siz_w)
+{
+#if 1
+  if ( siz_w == 6 ) {
+    return 0;
+  }
+  else return 1;
+#else
+  if ( siz_w == 6 ) {
+    return 0;
+  }
+  else {
+    c3_w i_w = 1;
+
+    while ( 1 ) {
+      if ( i_w == u2_soup_free_no ) {
+        return (i_w - 1);
+      }
+      if ( siz_w < 16 ) {
+        return i_w;
+      }
+      siz_w = (siz_w + 1) >> 1;
+      i_w += 1;
+    }
+  }
+#endif
+}
+
 /* _rl_bloq_attach():
 **
-**  Attach the bloq at `box_r` to the free list.
+**  Attach the bloq at `box_r` to the appropriate free list.
 */
 static void
 _rl_bloq_attach(u2_ray ral_r, 
                 u2_ray box_r)
 {
+  c3_w   siz_w = u2_rail_box_siz(box_r);
+  c3_w   sel_w = _rl_free_select(siz_w); 
   u2_ray sop_r = u2_rail_rut_r(ral_r);
-  u2_ray fre_r = u2_soup_fre_r(sop_r);
+  u2_ray fre_r = u2_soup_fre_r(sop_r, sel_w);
 
   u2_rail_hut_pre(box_r) = 0;
-  u2_rail_hut_nex(box_r) = u2_soup_fre_r(sop_r);
+  u2_rail_hut_nex(box_r) = u2_soup_fre_r(sop_r, sel_w);
 
   if ( 0 != fre_r ) {
     c3_assert(u2_rail_hut_pre(fre_r) == 0);
     u2_rail_hut_pre(fre_r) = box_r;
   }
-
-  u2_soup_fre_r(sop_r) = box_r;
+  u2_soup_fre_r(sop_r, sel_w) = box_r;
 }
 
 /* _rl_bloq_detach():
 **
-**  Unlist the bloq at `box_r` from the free list.
+**  Unlist the bloq at `box_r` from its free list.
 */
 static void
 _rl_bloq_detach(u2_ray ral_r,
                 u2_ray box_r)
 {
+  c3_w   siz_w = u2_rail_box_siz(box_r);
+  c3_w   sel_w = _rl_free_select(siz_w); 
   u2_ray sop_r = u2_rail_rut_r(ral_r);
   u2_ray pre_r = u2_rail_hut_pre(box_r);
   u2_ray nex_r = u2_rail_hut_nex(box_r);
@@ -455,7 +452,7 @@ _rl_bloq_detach(u2_ray ral_r,
   if ( 0 != pre_r ) {
     u2_rail_hut_nex(pre_r) = nex_r;
   } else {
-    u2_soup_fre_r(sop_r) = u2_rail_hut_nex(box_r);
+    u2_soup_fre_r(sop_r, sel_w) = u2_rail_hut_nex(box_r);
   }
 
   if ( 0 != nex_r ) {
@@ -502,9 +499,17 @@ _rl_bloq_grab(u2_ray ral_r,
     }
   }
   else if ( c3__rock == u2_rail_hip_m(ral_r) ) {
-    c3_w   siz_w = (len_w + c3_wiseof(u2_loom_rail_box) + 1);
     u2_ray sop_r = u2_rail_rut_r(ral_r);
-    u2_ray pfr_r = u2_aftr(sop_r, u2_loom_soup, fre_r);
+    c3_w   siz_w = (len_w + c3_wiseof(u2_loom_rail_box) + 1);
+    c3_w   sel_w = _rl_free_select(siz_w);
+    u2_ray pfr_r;
+
+#if 0
+    if ( (sel_w != 0) && (sel_w != u2_soup_free_no - 1) ) {
+      sel_w += 1;
+    }
+#endif
+    pfr_r = u2_aftr(sop_r, u2_loom_soup, fre_r) + sel_w;
 
     while ( 1 ) {
       u2_ray fre_r = *u2_at_ray(pfr_r);
@@ -541,9 +546,18 @@ _rl_bloq_grab(u2_ray ral_r,
           ** from the free list.
           */
           box_r = fre_r;
-          _rl_bloq_detach(ral_r, box_r);
+          {
+            u2_ray pre_r = u2_rail_hut_pre(box_r);
+            u2_ray nex_r = u2_rail_hut_nex(box_r);
 
-          *u2_at_ray(pfr_r) = u2_rail_hut_nex(box_r);
+            c3_assert((0 == pre_r) || 
+                      (u2_at_ray(pfr_r) == &u2_rail_hut_nex(pre_r)));
+            *u2_at_ray(pfr_r) = nex_r;
+            
+            if ( 0 != nex_r ) {
+              u2_rail_hut_pre(nex_r) = pre_r;
+            }
+          }
 
           if ( (siz_w + 6) < u2_rail_hut_siz(box_r) ) {
             /* Split the block.
@@ -570,7 +584,7 @@ _rl_bloq_grab(u2_ray ral_r,
   else { c3_assert(0); return 0; }
 }
 
-#if 1
+#if 0
 static int xzx=0;
 
 /* _rl_bloq_grap()::
@@ -584,9 +598,9 @@ _rl_bloq_grap(u2_ray ral_r,
   nov_r = _rl_bloq_grab(ral_r, len_w);
 
 #if 0
-  if ( (nov_r - c3_wiseof(u2_loom_rail_box)) == 0x22793cd ) {
+  if ( (nov_r - c3_wiseof(u2_loom_rail_box)) == 0x99d5931 ) {
     printf("alloc leak %d - nov_r %x\n", xzx, nov_r);
-    if ( xzx == 0 ) { c3_assert(0); }
+    if ( xzx == 0 ) { u2_bl_error(0, "leakage"); }
     // if ( xzx == 0 ) { LEAK = 1; LEAKY = nov_r; }
     xzx++;
   }
@@ -657,7 +671,7 @@ _rl_bloq_free(u2_ray ral_r,
         _rl_bloq_make(ral_r, box_r, (siz_w + u2_rail_hut_siz(hob_r)), 0);
       }
 
-      /* Add to the free list.
+      /* Add to the appropriate free list.
       */
       _rl_bloq_attach(ral_r, box_r);
     }
@@ -672,7 +686,7 @@ u2_ray
 u2_rl_ralloc(u2_ray ral_r,
              c3_w   siz_w)
 {
-  return _rl_bloq_grap(ral_r, siz_w);
+  return _rl_bloq_grab(ral_r, siz_w);
 }
 
 /* u2_rl_rfree():
@@ -741,10 +755,10 @@ u2_rl_gain(u2_ray  ral_r,
           u2_ray box_r = (som_r - c3_wiseof(u2_loom_rail_box));
           c3_w   use_w = u2_rail_box_use(box_r);
 
-#if 1
+#if 0
           if ( LEAK && (som_r == LEAKY) ) {
             printf("LEAK: gain %x, use %d\n", som, use_w); 
-            if ( LEAK == 2 ) c3_assert(0);
+            // if ( LEAK == 2 ) c3_assert(0);
             LEAK++;
           }
 #endif
@@ -870,11 +884,13 @@ top:
           u2_ray box_r = (som_r - c3_wiseof(u2_loom_rail_box));
           c3_w   use_w = u2_rail_box_use(box_r);
 
+#if 0
           if ( LEAK && (som_r == LEAKY) ) {
             printf("LEAK: lose %x, use %d\n", som, use_w); 
             // if ( 2 == LEAK ) c3_assert(0);
             // LEAK++;
           }
+#endif
           if ( 1 == use_w ) {
             if ( u2_dog_is_pom(som) ) {
               u2_noun h_som = u2_h(som);
@@ -1245,7 +1261,7 @@ u2_rl_copy(u2_ray ral_r,
             return u2_none;
           }
 
-          nov_r = _rl_bloq_grap(ral_r, c3_wiseof(u2_loom_cell));
+          nov_r = _rl_bloq_grab(ral_r, c3_wiseof(u2_loom_cell));
           if ( 0 == nov_r ) {
             u2_ho_warn_here();
 
@@ -1266,7 +1282,7 @@ u2_rl_copy(u2_ray ral_r,
         c3_w len_w = *u2_at_pug_len(fiz);
         u2_ray nov_r;
 
-        nov_r = _rl_bloq_grap(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
+        nov_r = _rl_bloq_grab(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
         if ( 0 == nov_r ) {
           u2_ho_warn_here();
 
@@ -1479,8 +1495,8 @@ u2_rl_gc_sweep(u2_ray ral_r)
     c3_ws use_ws = (c3_ws) use_w;
 
     if ( use_ws > 0 ) {
-      // printf("leak: box %x, siz %d, use %d\n", box_r, siz_w, use_w);
-      lek_w =+ siz_w;
+      printf("leak: box %x, siz %d, use %d\n", box_r, siz_w, use_w);
+      lek_w += siz_w;
       u2_rail_box_use(box_r) = 0;
       _rl_bloq_free(ral_r, box_r);
     } 
@@ -1537,7 +1553,7 @@ u2_rl_take(u2_ray  ral_r,
           return u2_none;
         }
 
-        nov_r = _rl_bloq_grap(ral_r, c3_wiseof(u2_loom_cell));
+        nov_r = _rl_bloq_grab(ral_r, c3_wiseof(u2_loom_cell));
         if ( 0 == nov_r ) {
           u2_ho_warn_here();
 
@@ -1560,7 +1576,7 @@ u2_rl_take(u2_ray  ral_r,
       u2_ray nov_r;
       u2_noun nov;
 
-      nov_r = _rl_bloq_grap(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
+      nov_r = _rl_bloq_grab(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
       if ( 0 == nov_r ) {
         u2_ho_warn_here();
 
@@ -1776,7 +1792,7 @@ u2_rl_bytes(u2_ray      ral_r,
       u2_ray nov_r;
       u2_noun nov;
 
-      nov_r = _rl_bloq_grap(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
+      nov_r = _rl_bloq_grab(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
       nov = u2_pug_of(nov_r, 0);
 
       *u2_at_dog_mug(nov) = 0;
@@ -1867,7 +1883,7 @@ u2_rl_cell(u2_ray  ral_r,
     u2_ray nov_r;
     u2_noun nov;
 
-    nov_r = _rl_bloq_grap(ral_r, c3_wiseof(u2_loom_cell));
+    nov_r = _rl_bloq_grab(ral_r, c3_wiseof(u2_loom_cell));
     nov = u2_pom_of(nov_r, 0);
 
     *u2_at_dog_mug(nov) = 0;
@@ -2233,7 +2249,7 @@ u2_rl_words(u2_ray      ral_r,
       u2_ray  nov_r;
       u2_noun nov;
 
-      nov_r = _rl_bloq_grap(ral_r, (a_w + c3_wiseof(u2_loom_atom)));
+      nov_r = _rl_bloq_grab(ral_r, (a_w + c3_wiseof(u2_loom_atom)));
       nov = u2_pug_of(nov_r, 0);
 
       *u2_at_dog_mug(nov) = 0;

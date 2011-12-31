@@ -26,6 +26,8 @@
              u2_noun con)                                         //  submit
   {
     if ( (c3__void == pac) ) {
+      u2_rz(wir_r, con);
+
       return c3__void;
     } else {
       return u2_bt(wir_r, c3__core, pac, con);

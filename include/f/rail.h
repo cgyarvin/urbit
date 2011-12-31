@@ -50,16 +50,18 @@
 
       /* Soup - a liquid rail allocator.
       */
+#       define u2_soup_free_no 26
+
         typedef struct {
-          u2_ray         fre_r;     // single, doubly-linked free list
-          u2_cash_slot   lot_s;     // modern memo cache
+          u2_ray         fre_r[u2_soup_free_no];    // doubly-linked free lists
+          u2_cash_slot   lot_s;                     // modern memo cache
 #ifdef U2_PROFILE_MEMORY
-          c3_w           liv_w;    // number of memory words live
+          c3_w           liv_w;                     // number of words live
 #endif
         } u2_loom_soup;
-#         define u2_soup_fre_r(sop_r)   *u2_at(sop_r, u2_loom_soup, fre_r)
-#         define u2_soup_lot_r(sop_r)   u2_aftr(sop_r, u2_loom_soup, lot_s)
-#         define u2_soup_liv_w(sop_r)   *u2_at(sop_r, u2_loom_soup, liv_w)
+#         define u2_soup_fre_r(sop_r, x)  *u2_at(sop_r, u2_loom_soup, fre_r[x])
+#         define u2_soup_lot_r(sop_r)     u2_aftr(sop_r, u2_loom_soup, lot_s)
+#         define u2_soup_liv_w(sop_r)     *u2_at(sop_r, u2_loom_soup, liv_w)
 
       /* A noun box, for liquid hats.  Behind pointer, addressed fwd.
       **

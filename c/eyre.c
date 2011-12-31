@@ -311,7 +311,16 @@ _eyre_ken_load_soft(u2_wire wir_r,
       u2_noun src = u2_ux_read(wir_r, pot_c, "watt");
 
       cun = _eyre_nock(wir_r, u2_yes, src, las);
-
+      // u2_rl_drain(wir_r);
+#if 0
+      if ( kno_w == 223 ) {
+        printf("gc in...\n");
+        u2_rl_drain(wir_r);
+        u2_wr_gc(wir_r, cun, 0);
+        printf("gc out.\n");
+        exit(1);
+      }
+#endif
       u2_bl_done(wir_r, kit_r);
 
       u2_bx_spot(wir_r, u2_nul);
@@ -1501,34 +1510,6 @@ _eyre_app(u2_wire wir_r,
   }
 }
 
-#if 1
-/* _eyre_toy(): toy app for gc test.
-*/
-static u2_noun                                                    //  produce
-_eyre_toy(u2_wire wir_r, 
-          u2_noun ken,                                            //  retain
-          c3_c*   toy_c)                                          //  retain
-{
-  u2_ray kit_r = u2_bl_open(wir_r);
-
-  if ( u2_bl_set(wir_r) ) {
-    u2_bl_done(wir_r, kit_r);
-    fprintf(stderr, "{app: exit}\n");
-    exit(1);
-    return 0;
-  } else {
-    u2_noun src   = u2_bn_string(wir_r, toy_c);
-    u2_noun fom;
-
-    printf("toy: loading: %s\n", toy_c);
-
-    fom = _eyre_nock(wir_r, u2_yes, src, ken);
-
-    return fom;
-  }
-}
-#endif
-
 /* _eyre_line(): execute and print a line, producing new core.
 */
 static u2_noun                                                    //  produce
@@ -1668,30 +1649,7 @@ main(c3_i   argc,
     }
     else {
       ken = _eyre_ken(wir_r, kno_w);
-
-#if 1
       app = _eyre_app(wir_r, ken, lid_c);
-#if 0
-      printf("gc in...\n");
-      u2_rl_drain(wir_r);
-      u2_wr_gc(wir_r, app, 0);
-      printf("gc out.\n");
-#endif
-#else
-      app = _eyre_toy(wir_r, ken, "%foobar");
-
-      printf("gc in...\n");
-      u2_wr_gc(wir_r, app, 0);
-      printf("gc out.\n");
-
-      {
-        u2_noun foo;
-
-        foo = _eyre_nock(wir_r, u2_no, 0, app);
-        u2_err(wir_r, "foo", foo);
-      }
-      exit(1);
-#endif
 
 #ifdef PROBE
       {
@@ -1726,7 +1684,6 @@ main(c3_i   argc,
         app = _eyre_line(wir_r, ken, app, lin);
       }
       free(lin_c);
-      u2_rz(wir_r, lin);
     }
   }
   return 0;
