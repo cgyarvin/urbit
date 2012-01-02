@@ -312,15 +312,39 @@ _eyre_ken_load_soft(u2_wire wir_r,
 
       cun = _eyre_nock(wir_r, u2_yes, src, las);
       // u2_rl_drain(wir_r);
-#if 0
+#if 1
       if ( kno_w == 223 ) {
-        printf("gc in...\n");
-        u2_rl_drain(wir_r);
+          printf("dump: a\n");
+          u2_rl_dump(wir_r);
+
         u2_wr_gc(wir_r, cun, 0);
-        printf("gc out.\n");
+
+          printf("\ndump: b\n");
+          u2_rl_dump(wir_r);
+
+        u2_rl_drain(wir_r);
+
+          printf("\ndump: c\n");
+          u2_rl_dump(wir_r);
+
+        u2_wr_gc(wir_r, cun, 0);
+
+          printf("\ndump: d\n");
+          u2_rl_dump(wir_r);
+
+        u2_rz(wir_r, cun);
+
+          printf("\ndump: e\n");
+          u2_rl_dump(wir_r);
+        
+        u2_wr_gc(wir_r, 0);
+
+          printf("\ndump: f\n");
+          u2_rl_dump(wir_r);
+        
         exit(1);
-      }
 #endif
+      }
       u2_bl_done(wir_r, kit_r);
 
       u2_bx_spot(wir_r, u2_nul);

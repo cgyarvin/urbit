@@ -50,7 +50,7 @@
 
       /* Soup - a liquid rail allocator.
       */
-#       define u2_soup_free_no 26
+#       define u2_soup_free_no 28
 
         typedef struct {
           u2_ray         fre_r[u2_soup_free_no];    // doubly-linked free lists
@@ -145,6 +145,13 @@
           u2_rl_init(c3_m   hip_m,
                      u2_ray hat_r,
                      u2_ray mat_r);
+
+        /* u2_rl_dump():
+        **
+        **  Print memory structure for benefit of archeologists.
+        */
+          void
+          u2_rl_dump(u2_ray ral_r);
 
         /* u2_rl_drain():
         **

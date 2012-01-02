@@ -72,6 +72,7 @@
         r = u2_rx(wir_r, m);
 
         u2_rz(wir_r, x);
+        u2_rz(wir_r, d);
       }
       u2_rz(wir_r, l);
       u2_rz(wir_r, c);

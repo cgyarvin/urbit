@@ -134,8 +134,14 @@ u2_wr_gc(u2_ray wir_r, ...)
 
   c3_assert((rot_w + sav_w + ovh_w) == liv_w);
 
-  printf("gc: %d bytes live (%d root, %d memo)\n", 
-        ((liv_w - ovh_w) * 4),
-        (rot_w * 4),
-        (sav_w * 4));
+  printf("gc: %d.%d.%d bytes live (%d.%d.%d root, %d.%d.%d memo)\n", 
+        ((liv_w - ovh_w) * 4) >> 20,
+        (((liv_w - ovh_w) * 4) >> 10) % 1024,
+        ((liv_w - ovh_w) * 4) % 1024,
+        ((rot_w * 4) >> 20),
+        ((rot_w * 4) >> 10) % 1024,
+        ((rot_w * 4) % 1024),
+        ((sav_w * 4) >> 20),
+        ((sav_w * 4) >> 10) % 1024,
+        ((sav_w * 4) % 1024));
 }

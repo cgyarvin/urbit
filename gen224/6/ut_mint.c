@@ -969,7 +969,7 @@
   j2_mcj(Pt6, ut, mint)[] = {
     { ".3", c3__hevy, 
         j2_mc(Pt6, ut, mint), 
-        Tier6_b_memo,
+        Tier6_b,
         u2_none, u2_none,
         j2_mck(Pt6, ut, mint)
     },

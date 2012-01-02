@@ -386,7 +386,7 @@ _rl_bloq_make(u2_ray ral_r,
 c3_w
 _rl_free_select(c3_w siz_w)
 {
-#if 1
+#if 0
   if ( siz_w == 6 ) {
     return 0;
   }
@@ -475,6 +475,71 @@ _rl_bloq_detach(u2_ray ral_r,
 #  define _rl_live_grab(ral_r, wad_ws)
 #endif
 
+/* u2_rl_dump():
+**
+**  Print memory structure for benefit of archeologists.
+*/
+void
+u2_rl_dump(u2_ray ral_r)
+{
+  if ( c3__rock == u2_rail_hip_m(ral_r) ) {
+    u2_ray sop_r = u2_rail_rut_r(ral_r);
+    c3_w i_w;
+    c3_w tot_w;
+    c3_w rag_w;
+   
+    printf("soup dump:\n");
+    tot_w = 0;
+
+    for ( i_w=0; i_w < u2_soup_free_no; i_w++ ) {
+      u2_ray box_r = u2_soup_fre_r(sop_r, i_w);
+      c3_w num_w = 0;
+      c3_w min_w = 0xffffffff;
+      c3_w max_w = 0;
+      c3_w all_w = 0;
+
+      while ( box_r ) {
+        c3_w   siz_w = u2_rail_box_siz(box_r);
+
+        if ( siz_w < min_w ) {
+          min_w = siz_w;
+        } 
+        if ( siz_w > max_w ) {
+          max_w = siz_w;
+        }
+        all_w += siz_w;
+        num_w++;
+        box_r = u2_rail_hut_nex(box_r);
+      }
+      tot_w += all_w;
+
+      if ( num_w != 0 ) {
+        printf("  list %d, num %d, min %d, max %d, kb %d.%d.%d\n",
+                  i_w, num_w, min_w, max_w, 
+                  ((all_w * 4) >> 20),
+                  ((all_w * 4) >> 10) % 1024,
+                  ((all_w * 4) % 1024));
+      }
+    }
+    rag_w = HalfSize -
+           ( u2_ray_b(u2_rail_hat_r(ral_r)) + 
+             u2_ray_b(u2_rail_cap_r(ral_r)));
+    tot_w += rag_w;
+
+    printf("  tail free kb %d.%d.%d\n",
+            ((rag_w * 4) >> 20),
+            ((rag_w * 4) >> 10) % 1024,
+            ((rag_w * 4) % 1024));
+
+    printf("soup: cap %x, hat %x, free %d.%d.%d\n", 
+            u2_ray_b(u2_rail_hat_r(ral_r)),
+            u2_ray_b(u2_rail_cap_r(ral_r)),
+            ((tot_w * 4) >> 20),
+            ((tot_w * 4) >> 10) % 1024,
+            ((tot_w * 4) % 1024));
+  }
+}
+
 /* _rl_bloq_grab():
 **
 **  Allocate `len_w` words of memory on `ral_r`, or return 0.
@@ -498,90 +563,99 @@ _rl_bloq_grab(u2_ray ral_r,
       return box_r;
     }
   }
-  else if ( c3__rock == u2_rail_hip_m(ral_r) ) {
+  else c3_assert(c3__rock == u2_rail_hip_m(ral_r));
+  {
     u2_ray sop_r = u2_rail_rut_r(ral_r);
     c3_w   siz_w = (len_w + c3_wiseof(u2_loom_rail_box) + 1);
     c3_w   sel_w = _rl_free_select(siz_w);
     u2_ray pfr_r;
 
-#if 0
     if ( (sel_w != 0) && (sel_w != u2_soup_free_no - 1) ) {
       sel_w += 1;
     }
-#endif
-    pfr_r = u2_aftr(sop_r, u2_loom_soup, fre_r) + sel_w;
-
     while ( 1 ) {
-      u2_ray fre_r = *u2_at_ray(pfr_r);
-      u2_ray box_r;
+      pfr_r = u2_aftr(sop_r, u2_loom_soup, fre_r) + sel_w;
 
-      if ( 0 == fre_r ) {
-        /* Nothing found in the free list.  Try to allocate on the hat.
-        */
-        if ( u2_no == u2_rl_open(ral_r, siz_w) ) {
-          /* This rail is totally full.
-          */
-          u2_ho_warn_here();
-          //  A bunch of testing is needed to make this actually work.
-          // return 0;    
-          c3_assert(0);
-        }
-        else { 
-          box_r = u2_rail_hat_r(ral_r);
-          u2_rail_hat_r(ral_r) += siz_w;
+      while ( 1 ) {
+        u2_ray fre_r = *u2_at_ray(pfr_r);
+        u2_ray box_r;
 
-          _rl_bloq_make(ral_r, box_r, siz_w, 1);
-          _rl_live_grab(ral_r, siz_w);
+        if ( 0 == fre_r ) {
+          if ( sel_w < u2_soup_free_no ) {
+            sel_w += 1;
+          } else {
+            /* Nothing in top free list.  Chip away at the hat.
+            */
+            if ( u2_no == u2_rl_open(ral_r, siz_w) ) {
+              /* Yo, our rail is totally full.
+              */
+              printf("lose: siz_w: %d\n", siz_w);
+              u2_rl_dump(ral_r);
 
-          return (box_r + c3_wiseof(u2_loom_rail_box));
-        }
-      } else {
-        if ( siz_w > u2_rail_hut_siz(fre_r) ) {
-          /* This free block is too small.  Continue searching.
-          */
-          pfr_r = u2_aftr(fre_r, u2_loom_rail_hut, nex_r);
-        } 
-        else {
-          /* We have found a free block of adequate size.  Remove it
-          ** from the free list.
-          */
-          box_r = fre_r;
-          {
-            u2_ray pre_r = u2_rail_hut_pre(box_r);
-            u2_ray nex_r = u2_rail_hut_nex(box_r);
+              u2_ho_warn_here();
+              //  XX: integrate with integral wire.
+              //
+              //  A bunch of testing is needed to make this actually work.
+              // return 0;    
+              c3_assert(0);
+            }
+            else { 
+              box_r = u2_rail_hat_r(ral_r);
+              u2_rail_hat_r(ral_r) += siz_w;
 
-            c3_assert((0 == pre_r) || 
-                      (u2_at_ray(pfr_r) == &u2_rail_hut_nex(pre_r)));
-            *u2_at_ray(pfr_r) = nex_r;
-            
-            if ( 0 != nex_r ) {
-              u2_rail_hut_pre(nex_r) = pre_r;
+              _rl_bloq_make(ral_r, box_r, siz_w, 1);
+              _rl_live_grab(ral_r, siz_w);
+
+              return (box_r + c3_wiseof(u2_loom_rail_box));
             }
           }
-
-          if ( (siz_w + 6) < u2_rail_hut_siz(box_r) ) {
-            /* Split the block.
+        } else {
+          if ( siz_w > u2_rail_hut_siz(fre_r) ) {
+            /* This free block is too small.  Continue searching.
             */
-            u2_ray end_r = (box_r + siz_w);
-
-            _rl_bloq_make(ral_r, end_r, u2_rail_hut_siz(fre_r) - siz_w, 0);
-            _rl_bloq_attach(ral_r, end_r);
-            _rl_bloq_make(ral_r, box_r, siz_w, 1);
-
-            _rl_live_grab(ral_r, siz_w);
-          }
+            pfr_r = u2_aftr(fre_r, u2_loom_rail_hut, nex_r);
+          } 
           else {
-            c3_assert(u2_rail_box_use(box_r) == 0);
-            u2_rail_box_use(box_r) = 1;
+            /* We have found a free block of adequate size.  Remove it
+            ** from the free list.
+            */
+            box_r = fre_r;
+            {
+              u2_ray pre_r = u2_rail_hut_pre(box_r);
+              u2_ray nex_r = u2_rail_hut_nex(box_r);
 
-            _rl_live_grab(ral_r, u2_rail_hut_siz(box_r));
+              c3_assert((0 == pre_r) || 
+                        (u2_at_ray(pfr_r) == &u2_rail_hut_nex(pre_r)));
+              *u2_at_ray(pfr_r) = nex_r;
+              
+              if ( 0 != nex_r ) {
+                u2_rail_hut_pre(nex_r) = pre_r;
+              }
+            }
+
+            if ( (siz_w + 6) < u2_rail_hut_siz(box_r) ) {
+              /* Split the block.
+              */
+              u2_ray end_r = (box_r + siz_w);
+
+              _rl_bloq_make(ral_r, end_r, u2_rail_hut_siz(fre_r) - siz_w, 0);
+              _rl_bloq_attach(ral_r, end_r);
+              _rl_bloq_make(ral_r, box_r, siz_w, 1);
+
+              _rl_live_grab(ral_r, siz_w);
+            }
+            else {
+              c3_assert(u2_rail_box_use(box_r) == 0);
+              u2_rail_box_use(box_r) = 1;
+
+              _rl_live_grab(ral_r, u2_rail_hut_siz(box_r));
+            }
+            return (box_r + c3_wiseof(u2_loom_rail_box));
           }
-          return (box_r + c3_wiseof(u2_loom_rail_box));
         }
       }
     }
   }
-  else { c3_assert(0); return 0; }
 }
 
 #if 0
@@ -1872,14 +1946,7 @@ u2_rl_cell(u2_ray  ral_r,
     c3_assert(u2_no == u2_rl_junior(ral_r, b));
   }
 
-  if ( u2_no == u2_rl_open(ral_r, c3_wiseof(u2_loom_cell)) ) {
-    u2_rl_lose(ral_r, a);
-    u2_rl_lose(ral_r, b);
-
-    u2_ho_warn_here();
-    return u2_none;
-  }
-  else {
+  {
     u2_ray nov_r;
     u2_noun nov;
 
