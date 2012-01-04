@@ -16,17 +16,24 @@
 #define C3_GLOBAL
 #include "all.h"
 
-  struct vere_system {
-    struct vere_computer *ver[256];
+  struct vere_stage {
+    c3_w    kno_w;                      //  kernel number/index
+    u2_noun ken;                        //  kernel, or 0 for none
+    u2_noun esh;                        //  shell, or 0 for none
   };
 
-  /* vere_computer: a computer image.
-  */
-  struct vere_computer {
-    /* 
-    c3_w    kno_w;
-    u2_noun ken;
-    u2_noun 
+  static struct {
+    u2_wire wir_r;
+    u2_noun pet;                        //  petname of self, atomic
+    u2_noun pat;                        //  unix path to self, atomic
+    u2_noun opt;                        //  unix arguments as map
+    struct vere_stage 
+            ver_v[256];                 //  stages growing downward.
+  } Computer;
+
+
+main(argv, argc)
+
 
 
 #define GUNN
