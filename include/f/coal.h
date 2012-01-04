@@ -597,21 +597,35 @@
 
   /** u2_cf*: import and export to general unix filesystem.
   ***
+  ***   All arguments transferred.
+  ***
   ***   All paths are flat LSB-first strings including extension.
   ***   File modes:
   ***
   ***         c3__atom  LSB-first atom
   ***         c3__file  [length atom] pair
-  ***         c3__line  list of list of chars'
+  ***         c3__line  list of atomic line
   ***
   ***   Directory modes:
   ***
+  ***         c3__seq   sequence, by number - [len list] pair
+  ***         c3__set   set, by hash
+  ***         c3__map   key-value pairs, by hash of key
+  ***         c3__nam   term-value pairs
+  ***
+  ***   Modes nest right, as in `[%map %file]`.
   **/
-    /* u2_cf_save_file(): 
+    /* u2_cf_save(): save `som` as `mod` at `pas`.  Bail on error.
+    */
+      u2_noun
+      u2_cf_save(u2_noun mod, 
+                 u2_noun pas,
+                 u2_noun som);
+
+    /* u2_cf_load_file(): load `mod` at `pas`.  Bail on error.
     */
       u2_weak
-      u2_cf_save(u2_noun pat, 
-    
+      u2_cf_save_
 
   /** u2_cp*: import and export within logical computer.
   ***
@@ -621,8 +635,7 @@
   ***   all argument nouns, and *retain* ownership of argument pointers.
   ***   Callers *produce* a new result which the caller must release.
   **/
-    /* u2_cf_read_global(
-     
+       
   /** u2_cn_*: natural constructors
   **/
     /* u2_cn_inc(): increment an atom.
