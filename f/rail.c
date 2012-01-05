@@ -581,15 +581,17 @@ _rl_bloq_grab(u2_ray ral_r,
         u2_ray box_r;
 
         if ( 0 == fre_r ) {
-          if ( sel_w < u2_soup_free_no ) {
-            sel_w += 1;
-          } else {
+          if ( sel_w < (u2_soup_free_no - 1) ) {
+            sel_w += 1; 
+            break;
+          } 
+          else {
             /* Nothing in top free list.  Chip away at the hat.
             */
             if ( u2_no == u2_rl_open(ral_r, siz_w) ) {
               /* Yo, our rail is totally full.
               */
-              printf("lose: siz_w: %d\n", siz_w);
+              printf("lose: siz_w: %d sel_w: %d\n", siz_w, sel_w);
               u2_rl_dump(ral_r);
 
               u2_ho_warn_here();
