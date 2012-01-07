@@ -312,7 +312,7 @@ _eyre_ken_load_soft(u2_wire wir_r,
 
       cun = _eyre_nock(wir_r, u2_yes, src, las);
       // u2_rl_drain(wir_r);
-#if 1
+#if 0
       if ( kno_w == 223 ) {
           printf("dump: a\n");
           u2_rl_dump(wir_r);
@@ -343,8 +343,8 @@ _eyre_ken_load_soft(u2_wire wir_r,
           u2_rl_dump(wir_r);
         
         exit(1);
-#endif
       }
+#endif
       u2_bl_done(wir_r, kit_r);
 
       u2_bx_spot(wir_r, u2_nul);

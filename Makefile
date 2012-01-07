@@ -49,6 +49,7 @@ F_OFILES=\
        f/wire.o \
        f/chad.o \
        f/cash.o \
+       f/coal.o \
        f/host.o \
        f/benx.o \
        f/trac.o \
@@ -462,8 +463,7 @@ J223_OFILES=\
        $(J223_6_OFILES_UT) \
        gen223/watt.o
 
-EYRE_OFILES=\
-       c/eyre.o \
+BASE_OFILES=\
        $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
@@ -471,11 +471,23 @@ EYRE_OFILES=\
        $(J224_OFILES) \
        $(J223_OFILES)
 
-all: $(BIN)/eyre
+EYRE_OFILES=\
+       c/eyre.o \
+       $(BASE_OFILES)
+
+VERE_OFILES=\
+       c/vere.o \
+       $(BASE_OFILES)
+
+all: $(BIN)/eyre $(BIN)/vere
 
 $(BIN)/eyre: $(EYRE_OFILES)
 	mkdir -p $(BIN)
 	$(CLD) -o $(BIN)/eyre $(EYRE_OFILES) -lgmp -lreadline -ltermcap
+
+$(BIN)/vere: $(VERE_OFILES)
+	mkdir -p $(BIN)
+	$(CLD) -o $(BIN)/vere $(VERE_OFILES) -lgmp -lreadline -ltermcap
 
 tags:
 	ctags -R -f .tags --exclude=root

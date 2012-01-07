@@ -507,13 +507,19 @@
                     c3_w    b_w,
                     c3_w*   c_w,
                     u2_atom d);
+#endif
+
+      /* u2_cr_string(): `a` as malloced C string.
+      */
+        c3_c* 
+        u2_cr_string(u2_atom a);
 
 
   /** u2_c?: managing noun reference counts.
   **/
 #if 1
-#     define u2_ct(som) u2_rx(som)
-#     define u2_cz(som) u2_rz(som)
+#     define u2_ct(som) u2_rx(u2_Wire, som)
+#     define u2_cz(som) u2_rz(u2_Wire, som)
 #     define u2_co(som) u2_rl_senior(u2_Wire)
 #     define u2_cy(som) u2_rl_junior(u2_Wire)
 #else
@@ -532,16 +538,6 @@
     */
       u2_flag
       u2_cu(u2_noun som);
-
-    /* u2_co(): yes iff `som` is senior (need not be counted)
-    */
-      u2_flag
-      u2_co(u2_noun som);
-
-    /* u2_cy(): yes iff `som` is junior (must not be referenced)
-    */
-      u2_flag
-      u2_cy(u2_noun som);
 
 
   /** u2_ci*, u2_cf*: importing and constructing nouns.
@@ -577,12 +573,11 @@
     **   Parse `a` as a list of decimal digits.
     */
       u2_atom
-      u2_ci_decimal(u2_wire wir_r,
-                    u2_noun a);
+      u2_ci_decimal(u2_noun a);
 
     /* u2_ci_heximal():
     **
-    **   On (wir_r), write (lit), a list of digits, as a hexadecimal.
+    **   Parse `a` as a list of hex digits.
     */
       u2_noun
       u2_ci_heximal(u2_noun a);
@@ -615,27 +610,42 @@
   ***
   ***   Modes nest right, as in `[%map %file]`.
   **/
-    /* u2_cf_save(): save `som` as `mod` at `pas`.  Bail on error.
+    /* u2_cf_flat_save(): save `som` as `mod` at `pas`.
     */
-      u2_noun
-      u2_cf_save(u2_noun mod, 
-                 u2_noun pas,
-                 u2_noun som);
+      u2_flag
+      u2_cf_flat_save(u2_noun mod, 
+                      u2_noun pas,
+                      u2_noun som);
 
-    /* u2_cf_load_file(): load `mod` at `pas`.  Bail on error.
+    /* u2_cf_flat_load(): load `mod` at `pas`.  Bail on error.
     */
       u2_weak
-      u2_cf_save_
+      u2_cf_flat_load(u2_noun mod,
+                      u2_noun pas);
 
-  /** u2_cp*: import and export within logical computer.
-  ***
-  ***   All paths are pairs [ext road] where road is outside-in term list.
-  ***
-  ***   Unless otherwise noted, u2_cf callers *transfer* ownership of
-  ***   all argument nouns, and *retain* ownership of argument pointers.
-  ***   Callers *produce* a new result which the caller must release.
-  **/
-       
+    /* u2_cf_flat_date(): date for `pas`.  Unix time * 10^6, or 0.
+    */
+      c3_d
+      u2_cf_flat_date(u2_noun pas);
+
+    /* u2_cf_senc_load(): load/initialize sequence directory at `pas`.
+    */
+      u2_noun
+      u2_cf_senc_load(u2_noun pas);
+
+    /* u2_cf_senc_post(): append atom to `pas`, loaded as `sen`.
+    */
+      u2_noun
+      u2_cf_senc_post(u2_noun pas);
+
+    /* u2_cf_path(): assemble local path with noun thap and ext.
+    */
+      u2_noun
+      u2_cf_path(c3_c* top_c, 
+                 c3_c* ext_c, 
+                 u2_noun tah);
+    
+
   /** u2_cn_*: natural constructors
   **/
     /* u2_cn_inc(): increment an atom.
@@ -660,6 +670,14 @@
       u2_cn_trel(u2_noun a,
                  u2_noun b,
                  u2_noun c);
+
+    /* u2_cn_nock():
+    **
+    **   Nock or bail.
+    */
+      u2_noun
+      u2_cn_nock(u2_noun bus,
+                 u2_noun fol);
 
   /** u2_cs_*: general-purpose internal hash tables 
   **/
@@ -725,8 +743,54 @@
                                        u2_noun,    
                                        u2_noun);   
 
-  /** u2_cw: exporting, saving or publishing nouns.
+  /** u2_cw: exporting, printing, saving or publishing nouns.
   **/
+
+  /** u2_ch: external core activation.
+  **/
+    /* u2_ch_molt():
+    **
+    **   Mutate `som` with a 0-terminated list of axis, noun pairs.
+    **   Axes must be cats (31 bit).
+    */
+      u2_noun
+      u2_ch_molt(u2_noun som,
+                 ...);
+  
+    /* u2_ch_molf():
+    **
+    **   As u2_ch_molt(), with argument pointer.
+    */
+      u2_noun
+      u2_ch_molf(u2_noun som,
+                 va_list vap);
+
+    /* u2_ch_mong(): 
+    **
+    **   Call a function by gate and sample.
+    */
+      u2_noun
+      u2_ch_mong(u2_noun gat,
+                 u2_noun sam);
+
+    /* u2_ch_hook():
+    **
+    **   Execute hook from core.
+    */ 
+      u2_noun
+      u2_ch_hook(u2_noun     cor,
+                 const c3_c* tam_c);
+
+    /* u2_ch_cook():
+    **
+    **   Reverse hook as molt.
+    */
+      u2_noun
+      u2_ch_cook(u2_wire     wir_r,
+                 u2_noun     cor,
+                 const c3_c* tam_c,
+                 u2_noun     som);
+
 
   /** u2_cm: meta, miscellaneous, management and magic.
   **/
@@ -737,22 +801,22 @@
       u2_flag
       u2_cm_boot(void);
 
-    /* u2_cm_open(): enter new opaque bail context, returning old (or 0).
+    /* u2_cm_wind(): enter new opaque bail context, returning old (or 0).
     **
     **   usage:  
-    **        c3_w qop_r = u2_cm_open();
+    **        c3_w qop_w = u2_cm_wind();
     **  
-    **        if ( 0 != u2_cm_trap(wir_r) ) {
-    **          u2_cm_done();
+    **        if ( 0 != u2_cm_trap() ) {
+    **          u2_cm_done(qop_w);
     **          [... exception ...]
     **        }
     **        else {
     **          [... code as normal ...]
-    **          u2_cm_done();
+    **          u2_cm_done(qop_w);
     **        }
     */
       c3_w
-      u2_cm_open();
+      u2_cm_wind();
 
     /* u2_cm_trap(): trap for exceptions.
     */
@@ -773,20 +837,19 @@
       void
       u2_cm_done(c3_w qop_w);
 
-
-    /* u2_cm_leap(): descend into a memory region.
+    /* u2_cm_trip(): descend into a memory region.
     **
     **   Memory allocated in the heap above is senior & frozen.
     */
       void
-      u2_cm_leap();
+      u2_cm_trip();
 
-    /* u2_cm_fall(): ascend out of a memory region.
+    /* u2_cm_prit(): ascend out of a memory region.
     **
     **   Memory allocated in the heap below is junior & volatile.
     */
       void
-      u2_cm_fall();
+      u2_cm_prit();
 
     /* u2_cm_keep(): copy volatile noun `som` to fresh heap.
     */
@@ -798,6 +861,11 @@
       u2_noun
       u2_cm_bury(u2_noun som);
 
+    /* u2_cm_bail(): bail out to the local trap.  Does not return.
+    */
+      u2_noun
+      u2_cm_bail(c3_m how_m);
+
     /* u2_cm_pack(): elide all volatile memory.
     */
       void
@@ -807,6 +875,26 @@
     */
       void
       u2_cm_prof();
+
+    /* u2_cm_push(): push `mon` on trace stack.
+    */
+      void
+      u2_cm_push(u2_noun mon);
+
+    /* u2_cm_mean(): push `[%mean roc]` on trace stack.
+    */
+      void
+      u2_cm_mean(u2_noun roc);
+
+    /* u2_cm_foul():
+    */
+      u2_noun
+      u2_cm_foul(const c3_c* err_c);
+
+    /* u2_cm_drop(): drop from meaning stack.
+    */
+      void
+      u2_cm_drop(u2_wire wir_r);
 
     /* u2_cm_frop(): extract, clear and disable profiler.
     */
@@ -884,8 +972,51 @@
       void
       u2_cm_rfree(u2_ray nov_r);
 
+  /* u2_cp: profiling and debugging.
+  **
+  **   Profiling information is automatically cleared on each 
+  */
+    /* u2_cm_slab(): produce profiling record.
+    */
+      u2_noun
+      u2_cm_slab();
+
   /* u2_ck: kernel and related functions
   */
     /* u2_cka: tier 1 functions
     */
-  
+    /* u2_ckb: tier 2 functions
+    */
+      /* u2_ckb_weld: concatenate lists `a` before `b`.
+      */
+        u2_noun
+        u2_ckb_weld(u2_noun a, u2_noun b);
+
+    /* u2_ckc: tier 3 functions
+    */
+    /* u2_ckd: tier 4 functions
+    */
+      /* u2_ckd_by_get(): map get for key `b` in map `a` with u2_none.
+      */
+        u2_weak
+        u2_ckd_by_get(u2_noun a, u2_noun b);
+ 
+      /* u2_ckd_by_put(): map put for key `b`, value `c` in map `a`.
+      */
+        u2_weak
+        u2_ckd_by_put(u2_noun a, u2_noun b, u2_noun c);
+
+    /* u2_cke: tier 5 functions
+    */
+      /* u2_cke_cue(): expand saved pill.
+      */
+        u2_noun
+        u2_cke_cue(u2_atom a);
+
+      /* u2_cke_jam(): pack noun as atom.
+      */
+        u2_atom
+        u2_cke_jam(u2_noun a);
+
+    /* u2_ckf: tier 6 functions
+    */
