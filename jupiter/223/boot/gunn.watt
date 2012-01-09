@@ -1,4 +1,3 @@
-!:
 ~%    %gunn
     -<-<
   ==
@@ -14,6 +13,7 @@
     %sell  sell
     %soul  soul
     %slot  slot
+    %swan  swan
     %swat  swat
     %swig  swig
     %swim  swim
@@ -331,20 +331,20 @@
   |=  [axe=*axis vax=*vase]  ~|  %slot  ^-  *vase
   (pour(env vax) [~ axe])
 ::
-++  swat                                                ::  show trace stack
-  |=  wem=*(list shoe)  ~|  %swat  ^-  *tank
-  :+  %rose
-    [[' ' ~] ['[' ~] [']' ~]]
-  %-  flop
-  %+  turn
-    wem
-  |=  [yos=*shoe]
+++  swan
+  |=  yos=*shoe
   ?-  -.yos
     %bean  (show %q +.yos)
     %lose  (show %t +.yos)
     %mean  $:+.yos
     %spot  (show %o +.yos)
   == 
+::
+++  swat                                                ::  show trace stack
+  |=  wem=*(list shoe)  ~|  %swat  ^-  *tank
+  :+  %rose
+    [[' ' ~] ['[' ~] [']' ~]]
+  (flop (turn wem |=(yos=*shoe (swan yos))))
 ::
 ++  swig                                                ::  show event counts
   |=  hoy=*(map term num)  ~|  %swig  ^-  *tank

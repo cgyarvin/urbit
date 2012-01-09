@@ -247,12 +247,12 @@ u2_cm_trip()
 #endif
 }
 
-/* u2_cm_prit(): ascend out of a memory region.
+/* u2_cm_chin(): ascend out of a memory region.
 **
 **   Memory allocated in the heap below is junior & volatile.
 */
 void
-u2_cm_prit()
+u2_cm_chin()
 {
 #if 0
   u2_rl_fall(u2_Wire);
@@ -298,12 +298,25 @@ u2_cm_done(c3_w qop_w)
   u2_bl_done(u2_Wire, qop_w);
 }
 
+/* u2_cm_trac(): extract and clear stack trace.
+*/
+u2_noun
+u2_cm_trac()
+{
+  return u2_ct(u2_wire_tax(u2_Wire));
+}
+
 /* u2_cm_bail(): bail out to the local trap.  Does not return.
 */
 u2_noun
-u2_cm_bail(c3_m how_m)
+u2_cm_bail(u2_noun how)
 {
-  return u2_bl_bail(u2_Wire, how_m);
+  u2_wire wir_r = u2_Wire;
+  u2_ray  kit_r = u2_wire_kit_r(wir_r);
+
+  // c3_assert(0);
+  _longjmp((void *)u2_at_cord(u2_kite_buf_r(kit_r), c3_wiseof(jmp_buf)), how);
+  return u2_none;
 }
 
 /* u2_cm_foul():
@@ -321,6 +334,38 @@ u2_cn_cell(u2_noun a,
            u2_noun b)
 {
   return u2_bn_cell(u2_Wire, a, b);
+}
+
+/* u2_cn_trel(): produce the cell `[a b c]`.
+*/
+u2_noun
+u2_cn_trel(u2_noun a,
+           u2_noun b,
+           u2_noun c)
+{
+  return u2_bn_trel(u2_Wire, a, b, c);
+}
+
+/* u2_cn_qual(): produce the cell `[a b c d]`.
+*/
+u2_noun
+u2_cn_qual(u2_noun a,
+           u2_noun b,
+           u2_noun c,
+           u2_noun d)
+{
+  return u2_bn_qual(u2_Wire, a, b, c, d);
+}
+
+/* u2_ckb_flop(): reverse list `a`.
+*/
+u2_noun
+u2_ckb_flop(u2_noun a)
+{
+  u2_noun b = j2_mbc(Pt2, flop)(u2_Wire, a);
+
+  u2_cz(a);
+  return b;
 }
 
 /* u2_ckd_by_get(): map get for key `b` in map `a` with u2_none.

@@ -477,6 +477,7 @@ EYRE_OFILES=\
 
 VERE_OFILES=\
        c/vere.o \
+       c/gunn.o \
        $(BASE_OFILES)
 
 all: $(BIN)/eyre $(BIN)/vere

@@ -844,12 +844,12 @@
       void
       u2_cm_trip();
 
-    /* u2_cm_prit(): ascend out of a memory region.
+    /* u2_cm_chin(): ascend out of a memory region.
     **
     **   Memory allocated in the heap below is junior & volatile.
     */
       void
-      u2_cm_prit();
+      u2_cm_chin();
 
     /* u2_cm_keep(): copy volatile noun `som` to fresh heap.
     */
@@ -862,6 +862,24 @@
       u2_cm_bury(u2_noun som);
 
     /* u2_cm_bail(): bail out to the local trap.  Does not return.
+    ** 
+    **  Bail structure:
+    **
+    **    %exit
+    **    %intr
+    **    %fail
+    **    [%fail p=*term]
+    **    [%need p=*(list path)]
+    **
+    **    c3__exit for normal exit
+    **    c3__fail for abnormal failure 
+    **    c3__intr for manual interrupt
+    **    c3__need for knowledge exception
+    **
+    **  When in doubt, fail.
+    **
+    **  In all cases, the bail receiver must perform a gc to
+    **  clean up the inevitable leakz.
     */
       u2_noun
       u2_cm_bail(c3_m how_m);
@@ -987,10 +1005,15 @@
     */
     /* u2_ckb: tier 2 functions
     */
-      /* u2_ckb_weld: concatenate lists `a` before `b`.
+      /* u2_ckb_weld(): concatenate lists `a` before `b`.
       */
         u2_noun
         u2_ckb_weld(u2_noun a, u2_noun b);
+
+      /* u2_ckb_flop(): reverse list `a`.
+      */
+        u2_noun
+        u2_ckb_flop(u2_noun a);
 
     /* u2_ckc: tier 3 functions
     */

@@ -129,7 +129,7 @@
       a
     $(a (dec a), b (dec b))
   ::
-  ::  Tier 2 coins
+  ::  Tier 2 constructs
   ::
   ++  list
     |*  a=nap
@@ -327,7 +327,7 @@
   ++  foo
     |=  a=*
     (sort ((list num) a) gth)
-  ::::                                                  Tier 3 coins
+  ::::                                                  Tier 3 constructs
   ::::
   ++  axis  num
   ++  bloq  num
@@ -894,7 +894,7 @@
     ::::
     --
   ::
-  ::  Tier 4 coins
+  ::  Tier 4 constructs
   ::
   ++  apt
     |=  a=*(tree)
@@ -1077,7 +1077,7 @@
       $(a r.a, b [n.a $(a l.a)])
     --
   ::
-  ::  Tier 5 coins
+  ::  Tier 5 constructs
   ::
   ++  char  ~[''*]
   ++  clip  ~[p=(hair) q=(tape)]
@@ -2148,7 +2148,7 @@
         [1 1]
     ==
   ::
-  ::  Tier 6 coins
+  ::  Tier 6 constructs
   ::
   ++  chop
     $*  lef=*term
@@ -4489,7 +4489,7 @@
         (stag %ktsg ;~(pfix com wide))
       :-  '-'
         ;~  pose
-          (stag %dtsg (stag %up ;~(pfix mus fed)))
+          (numb (stag %dtsg (stag %up ;~(pfix mus fed))))
           (cook |=(a=*twig [%cnts a ~]) rope)
         ==
       :-  '.'

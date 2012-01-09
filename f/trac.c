@@ -438,7 +438,6 @@ u2_tx_do_debug(u2_ray wir_r, u2_flag lag)
   return old;
 }
 
-
 /* u2_tx_in_debug(): get debug flag.
 */
 u2_flag 
