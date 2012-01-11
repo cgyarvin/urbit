@@ -671,7 +671,7 @@ u2_bn_mong(u2_wire wir_r,
   u2_weak pro = u2_nk_mong(wir_r, gat, sam);
 
   if ( u2_none == pro ) {
-    return u2_bl_bail(wir_r, c3__fail);
+    return u2_bl_bail(wir_r, c3__exit);
   }
   else return pro;
 }

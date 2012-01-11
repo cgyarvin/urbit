@@ -6,7 +6,7 @@
   ::::
   ::::  Tier 0, kernel stub
   ::::
-  ~%    %k.223
+  ~%    %k.223  #
       ~
     ~
   &.
@@ -2954,7 +2954,7 @@
   (rash txt vest)
 ::
 ++  seed
-  ^-  [p=*type q=*]
+  ^-  *vase
   ~+
   !;(*type ..seed)
 ::
@@ -2965,8 +2965,18 @@
       ^=  gen  ^-  *gene
       [%cncl [~ 2] [~ 3]]
   =+  gun=(~(mint ut typ) %noun gen)
-  [p.gun ~|(%slam-nock .*([q.gat q.sam] q.gun))]
-::  
+  [p.gun ~|(%slam .*([q.gat q.sam] q.gun))]
+::
+++  slap
+  |=  [vax=*vase gen=*gene]
+  =+  gun=(~(mint ut p.vax) %noun gen)
+  [p.gun ~|(%slap .*(q.vax q.gun))]
+::
+++  slop
+  |=  [hed=*vase tal=*vase]
+  ^-  *vase
+  [[%cell p.hed p.tal] [q.hed q.tal]]
+::
 ++  ut
   ~%    %ut
       -<-

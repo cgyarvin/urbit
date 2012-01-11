@@ -43,7 +43,7 @@ _eyre_mong(u2_wire wir_r,
     return _eyre_trac(wir_r);
   }
 #endif
-  else return u2_bl_bail(wir_r, c3__fail);
+  else return u2_bl_bail(wir_r, c3__exit);
 }
 
 /* _eyre_hook(): hook with unitary sample.

@@ -199,6 +199,20 @@ u2_cn_nock(u2_noun bus,
   return pro;
 }
 
+/* u2_cn_mong():
+**
+**   Call `(function sample)`.
+*/
+u2_noun
+u2_cn_mong(u2_noun fun,
+           u2_noun sam)
+{
+  u2_noun pro = u2_bn_mong(u2_Wire, fun, sam);
+
+  u2_cz(fun);
+  return pro;
+}
+
 /* u2_ci_string():
 **
 **   u2_ci_bytes(strlen(a_c), (c3_y *)a_c);
@@ -261,13 +275,17 @@ u2_cm_chin()
 
 /* u2_cm_bury(): store fresh or volatile noun `som` to freezer.
 */
-u2_noun
-u2_cm_bury(u2_noun som)
+u2_weak
+u2_cm_bury(u2_weak som)
 {
-  u2_noun pro = u2_rl_take(u2_wire_bas_r(u2_Wire), som);
+  if ( u2_none == som ) {
+    return u2_none;
+  } else {
+    u2_noun pro = u2_rl_take(u2_wire_bas_r(u2_Wire), som);
 
-  u2_cz(som);
-  return pro;
+    u2_cz(som);
+    return pro;
+  }
 }
 
 /* u2_cm_wind(): enter new opaque bail context, returning old (or 0).
@@ -303,7 +321,10 @@ u2_cm_done(c3_w qop_w)
 u2_noun
 u2_cm_trac()
 {
-  return u2_ct(u2_wire_tax(u2_Wire));
+  u2_noun tax = u2_wire_tax(u2_Wire);
+
+  u2_wire_tax(u2_Wire) = u2_nul;
+  return tax;
 }
 
 /* u2_cm_bail(): bail out to the local trap.  Does not return.
@@ -324,6 +345,8 @@ u2_cm_bail(u2_noun how)
 u2_noun
 u2_cm_foul(const c3_c* err_c)
 {
+  fprintf(stderr, "foul: %s\n", err_c);
+
   return u2_bl_error(u2_Wire, err_c); 
 }
 

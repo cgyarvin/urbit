@@ -627,6 +627,7 @@
 #   define c3__pip    c3_s3('p','i','p')
 #   define c3__pipe   c3_s4('p','i','p','e')
 #   define c3__pith   c3_s4('p','i','t','h')
+#   define c3__pitt   c3_s4('p','i','t','t')
 #   define c3__plac   c3_s4('p','l','a','c')
 #   define c3__plam   c3_s4('p','l','a','m')
 #   define c3__plat   c3_s4('p','l','a','t')

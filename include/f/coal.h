@@ -646,7 +646,9 @@
                  u2_noun tah);
     
 
-  /** u2_cn_*: natural constructors
+  /** u2_cn_*: natural constructors.
+  ***
+  ***   All argument nouns are transferred.
   **/
     /* u2_cn_inc(): increment an atom.
     */
@@ -678,6 +680,14 @@
       u2_noun
       u2_cn_nock(u2_noun bus,
                  u2_noun fol);
+
+    /* u2_cn_mong():
+    **
+    **   Call `(function sample)`.
+    */
+      u2_noun
+      u2_cn_mong(u2_noun fun,
+                 u2_noun sam);
 
   /** u2_cs_*: general-purpose internal hash tables 
   **/
@@ -1000,6 +1010,8 @@
       u2_cm_slab();
 
   /* u2_ck: kernel and related functions
+  **
+  **   All nouns cleared unless otherwise stated.
   */
     /* u2_cka: tier 1 functions
     */

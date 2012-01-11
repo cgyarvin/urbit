@@ -47,7 +47,7 @@
       ==
     ++  mine                              ::  filesystem mapping
       $~  p=(mode)                        ::  noun conversion
-          q=(spot)                        ::  search model 
+          q=(snot)                        ::  search model 
           r=(path)                        ::  unix path
       ==
     ++  mode
@@ -81,7 +81,7 @@
           q=*(map term num)               ::  event counter
           r=(shot)                        ::  profile samples
       ==
-    ++  spot                              ::  filesystem search model
+    ++  snot                              ::  filesystem search model
       $*  %actd                           ::  action directory
           %boot                           ::  internal boot directory
           %curd                           ::  current directory
