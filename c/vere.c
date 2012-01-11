@@ -482,11 +482,12 @@ u2_ve_rewind(const c3_c* wit_c)
     u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
 
     if ( c3__live == ver_e->mod_m ) {
-      u2_weak vax = u2_ckd_by_get(u2_ct(ver_e->tul), wit);
+      u2_weak vax = u2_ckd_by_get(u2_ct(ver_e->tul), u2_ct(wit));
 
       if ( u2_none != vax ) {
-        u2_ct(vax);
+        u2_cz(vax);
       }
+      u2_cz(wit);
       return kno_w;
     } else if ( c3__warm == ver_e->mod_m ) {
       u2_ve_tools();
@@ -506,49 +507,20 @@ u2_ve_rewind(const c3_c* wit_c)
   }
 }
 
-/* u2_ve_use(): return latest available version of tool.
-*/
-u2_noun
-u2_ve_use(const c3_c* wit_c)
-{
-  c3_w    kno_w = u2_Host.kno_w;
-  u2_noun wit   = u2_ci_string(wit_c);
-
-  while ( 1 ) {
-    u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
-
-    if ( c3__live == ver_e->mod_m ) {
-      u2_weak vax = u2_ckd_by_get(u2_ct(ver_e->tul), wit);
-
-      if ( u2_none != vax ) {
-        u2_Host.kno_w = kno_w;
-        u2_cz(wit);
-        return vax;
-      }
-    } else if ( c3__warm == ver_e->mod_m ) {
-      u2_ve_tools();
-      continue;
-    } else if ( 0 == ver_e->mod_m ) {
-      u2_ve_stage(u2_yes);
-      continue;
-    }
-
-    u2_Host.kno_w += 1;
-    if ( u2_Host.kno_w > FirstKernel ) {
-      u2_Host.kno_w = kno_w;
-
-      return u2_cm_foul(wit_c);
-    }
-  }
-}
-
 /* u2_ve_hard(): use standard tool gate without type check.
 */
 u2_noun
 u2_ve_hard(const c3_c* wit_c, c3_c* fun_c, u2_noun arg)
 {
-  u2_noun tul = u2_ve_use(wit_c);
-  u2_noun gat, cor;
+  c3_w kno_w = u2_ve_rewind(wit_c);
+
+    c3_w poq_w = u2_cm_wind();
+    u2_noun how;
+
+  {
+    u2_noun wit = u2_ci_string(wit_c);
+    u2_noun tul = u2_ckd_by_get(u2_ct(ver_e->tul), wit);
+    u2_noun gat = 
 
   fprintf(stderr, "hard: %s: tul %x\n", wit_c, u2_mug(tul)); 
   gat = u2_ve_slac(tul, fun_c);
