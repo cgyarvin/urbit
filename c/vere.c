@@ -78,6 +78,7 @@
     u2_noun ken;                        //  stable kernel, or 0 for none
     u2_noun ras;                        //  transition kernel, or 0
     u2_noun tip;                        //  broken sub-kernel, or 0
+    u2_noun tax;                        //  error trace, if any
     u2_noun tul;                        //  toolkit map - [term vase]
     struct {
       u2_noun seed;                     //  kernel vase
@@ -319,8 +320,9 @@ u2_ve_build(u2_noun tah)
       fprintf(stderr, "%d: no %d kernel\n", kno_w, kno_w + 1);
       return u2_cm_foul("make");
     }
-    u2_err(u2_Wire, "building kernel", tah);
+    u2_cm_bean(u2nc(u2_ci_string("vere-boot"), u2_ct(tah)));
     fol = u2_cn_nock(src, u2_ct(ken));
+    u2_cm_drop();
 
     pil = u2_cke_jam(u2_ct(fol));
     u2_ve_save("pill", u2_ct(tah), pil);
@@ -427,6 +429,8 @@ u2_ve_at() { return &u2_Host.ver_e[u2_Host.kno_w]; }
 u2_noun
 u2_ve_seed()
 {
+  c3_assert(0 != u2_ve_at()->toy.seed);
+
   return u2_ct(u2_ve_at()->toy.seed);
 }
 
@@ -435,6 +439,8 @@ u2_ve_seed()
 u2_noun
 u2_ve_slap(u2_noun vax, u2_noun gen)
 {
+  c3_assert(0 != u2_ve_at()->toy.slap);
+
   return u2_cn_mong(u2_ct(u2_ve_at()->toy.slap), u2nc(vax, gen));
 }
 
@@ -443,6 +449,8 @@ u2_ve_slap(u2_noun vax, u2_noun gen)
 u2_noun
 u2_ve_slam(u2_noun gat, u2_noun sam)
 {
+  c3_assert(0 != u2_ve_at()->toy.slam);
+
   return u2_cn_mong(u2_ct(u2_ve_at()->toy.slam), u2nc(gat, sam));
 }
 
@@ -451,6 +459,8 @@ u2_ve_slam(u2_noun gat, u2_noun sam)
 u2_noun
 u2_ve_slop(u2_noun hed, u2_noun tal)
 {
+  c3_assert(0 != u2_ve_at()->toy.slop);
+
   return u2_cn_mong(u2_ct(u2_ve_at()->toy.slop), u2nc(hed, tal));
 }
 
@@ -459,6 +469,8 @@ u2_ve_slop(u2_noun hed, u2_noun tal)
 u2_noun
 u2_ve_ream(u2_noun txt)
 {
+  c3_assert(0 != u2_ve_at()->toy.ream);
+
   return u2_cn_mong(u2_ct(u2_ve_at()->toy.ream), txt);
 }
 
@@ -470,65 +482,25 @@ u2_ve_slac(u2_noun vax, const c3_c* sam_c)
   return u2_ve_slap(vax, u2_ci_string(sam_c));
 }
 
-/* u2_ve_rewind(): wind host back until tool is available.  Return old kno_w.
-*/
-c3_w
-u2_ve_rewind(const c3_c* wit_c)
-{
-  c3_w    kno_w = u2_Host.kno_w;
-  u2_noun wit   = u2_ci_string(wit_c);
-
-  while ( 1 ) {
-    u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
-
-    if ( c3__live == ver_e->mod_m ) {
-      u2_weak vax = u2_ckd_by_get(u2_ct(ver_e->tul), u2_ct(wit));
-
-      if ( u2_none != vax ) {
-        u2_cz(vax);
-      }
-      u2_cz(wit);
-      return kno_w;
-    } else if ( c3__warm == ver_e->mod_m ) {
-      u2_ve_tools();
-      continue;
-    } else if ( 0 == ver_e->mod_m ) {
-      u2_ve_stage(u2_yes);
-      continue;
-    }
-
-    u2_Host.kno_w += 1;
-    if ( u2_Host.kno_w > FirstKernel ) {
-      fprintf(stderr, "  %d: to %d: no tool %s\n", kno_w, FirstKernel, wit_c);
-      u2_Host.kno_w = kno_w;
-
-      return u2_cm_foul(wit_c);
-    }
-  }
-}
-
 /* u2_ve_hard(): use standard tool gate without type check.
 */
 u2_noun
 u2_ve_hard(const c3_c* wit_c, c3_c* fun_c, u2_noun arg)
-{
-  c3_w kno_w = u2_ve_rewind(wit_c);
+{           
+  u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
+  u2_noun  wit   = u2_ci_string(wit_c);
+  u2_weak  tul   = u2_ckd_by_get(u2_ct(ver_e->tul), wit);
 
-    c3_w poq_w = u2_cm_wind();
-    u2_noun how;
-
-  {
-    u2_noun wit = u2_ci_string(wit_c);
-    u2_noun tul = u2_ckd_by_get(u2_ct(ver_e->tul), wit);
-    u2_noun gat = 
-
-  fprintf(stderr, "hard: %s: tul %x\n", wit_c, u2_mug(tul)); 
-  gat = u2_ve_slac(tul, fun_c);
-  fprintf(stderr, "hard: %s: gat %x\n", wit_c, u2_mug(tul)); 
-  cor = u2_ct(u2t(gat));
-
-  u2_cz(gat);
-  return u2_cn_mong(cor, arg);
+  if ( u2_none == tul ) {
+    fprintf(stderr, "hard: %s: %d: no tool\n", wit_c, u2_Host.kno_w);
+    return u2_cm_foul("vere-hard");
+  }
+  else {
+    u2_noun gat = u2_ve_slac(tul, fun_c);
+    u2_noun cor = u2_ct(u2t(gat));
+    
+    return u2_cn_mong(cor, arg);
+  }
 }
 
 /* u2_ve_soft(): use standard tool gate against vase.
@@ -536,10 +508,59 @@ u2_ve_hard(const c3_c* wit_c, c3_c* fun_c, u2_noun arg)
 u2_noun
 u2_ve_soft(const c3_c* wit_c, c3_c* fun_c, u2_noun vos)
 {
-  u2_noun tul = u2_ve_use(wit_c);
-  u2_noun gat = u2_ve_slac(tul, fun_c);
+  u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
+  u2_noun  wit   = u2_ci_string(wit_c);
+  u2_weak  tul   = u2_ckd_by_get(u2_ct(ver_e->tul), wit);
 
-  return u2_ve_slam(gat, vos);
+  if ( u2_none == tul ) {
+    fprintf(stderr, "hard: %s: %d: no tool\n", wit_c, u2_Host.kno_w);
+    return u2_cm_foul("vere-hard");
+  }
+  else {
+    u2_noun gat = u2_ve_slac(tul, fun_c);
+
+    return u2_ve_slam(gat, vos);
+  }
+}
+
+/* u2_ve_sway(): print trace stack.
+*/
+void
+u2_ve_sway(c3_l tab_l, u2_noun tax)
+{
+  while ( u2_yes == u2_cr_du(tax) ) {
+    u2_noun h_tax = u2h(tax);
+    u2_noun t_tax = u2t(tax);
+    c3_w poq_w = u2_cm_wind();
+    u2_noun how;
+
+    if ( 0 != (how = u2_cm_trap()) ) {
+#if 0
+      fprintf(stderr, "resorting to gunn...\n");
+      u2_cm_done(poq_w);
+      {
+        u2_noun gun = u2_ve_gunn();
+
+        u2_ve_flog(gun, u2_cm_trac());
+      }
+#else
+      fprintf(stderr, "  !!--!!\n");
+#endif
+    } 
+    else {
+      c3_l    col_l = u2_ve_dump_columns();
+      u2_noun tac;
+      u2_noun wol;
+
+      tac = u2_ve_hard("pitt", "swan", u2_ct(h_tax));
+      wol = u2_ve_hard("pitt", "wash", u2nc(u2nc(tab_l, col_l), tac));
+
+      u2_ve_dump_wall(wol);
+      u2_cm_done(poq_w);
+    }
+    tax = t_tax;
+  }
+  u2_cz(tax);
 }
 
 /* u2_ve_gunn(): produce a gunn, of any vintage.
@@ -583,6 +604,7 @@ u2_ve_gunn()
   return u2_cm_foul("gunn-fail");
 }
 
+#if 0
 /* u2_ve_flog(): print trace stack, old style.
 */
 void
@@ -611,46 +633,7 @@ u2_ve_flog(u2_noun gun, u2_noun tax)
   u2_cz(gun);
   u2_cz(tax);
 }
-
-/* u2_ve_sway(): print trace stack.
-*/
-void
-u2_ve_sway(c3_l tab_l, u2_noun tax)
-{
-  while ( u2_yes == u2_cr_du(tax) ) {
-    u2_noun h_tax = u2h(tax);
-    u2_noun t_tax = u2t(tax);
-    c3_w poq_w = u2_cm_wind();
-    u2_noun how;
-
-    if ( 0 != (how = u2_cm_trap()) ) {
-      fprintf(stderr, "resorting to gunn...\n");
-      u2_cm_done(poq_w);
-      {
-        u2_noun gun = u2_ve_gunn();
-
-        u2_ve_flog(gun, u2_cm_trac());
-      }
-      // fprintf(stderr, "  !!--!!\n");
-    } 
-    else {
-      c3_l    col_l = u2_ve_dump_columns();
-      u2_noun tac;
-      u2_noun wol;
-
-      fprintf(stderr, "col_l %d\n", col_l);
-      tac   = u2_ve_hard("pitt", "swan", u2_ct(h_tax));
-      fprintf(stderr, "tac");
-      wol   = u2_ve_hard("pitt", "wash", u2nc(u2nc(tab_l, col_l), tac));
-      fprintf(stderr, "wol");
-
-      u2_ve_dump_wall(wol);
-      u2_cm_done(poq_w);
-    }
-    tax = t_tax;
-  }
-  u2_cz(tax);
-}
+#endif
 
 /* u2_ve_wine(): analyze and express error result.
 */
@@ -697,11 +680,12 @@ void
 u2_ve_tool(u2_noun nam)
 {
   u2_steg* ver_e = u2_ve_at();
-  u2_noun  tah   = u2nt(u2_ct(nam), c3__boot, u2_ve_tag(u2_Host.kno_w));
-  u2_weak  src   = u2_ve_file("watt", tah);
-
+  u2_noun  tah   = u2nt(nam, c3__boot, u2_ve_tag(u2_Host.kno_w));
+  u2_weak  src   = u2_ve_file("watt", u2_ct(tah));
+ 
+  u2_cm_bean(u2nc(u2_ci_string("vere-tool"), tah));
   if ( u2_none == src ) {
-    u2_cz(nam);
+    u2_cm_bail(c3__fail);
   }
   else {
     c3_w poq_w;
@@ -725,7 +709,8 @@ u2_ve_tool(u2_noun nam)
       ver_e->tul = u2_ckd_by_put(ver_e->tul, nam, vos);
       u2_cm_done(poq_w);
     }
-  } 
+  }
+  u2_cm_drop();
 }
 
 /* u2_ve_toys(): assemble toys.
@@ -760,6 +745,7 @@ u2_ve_tools()
   }
 }
 
+#if 0
 /* u2_ve_stage(): load current stage to best of ability.  crash-only.
 */
 void
@@ -816,6 +802,7 @@ u2_ve_stage(u2_flag hyr)
     }
   }
 }
+#endif
 
 /* u2_ve_auto(): find the first kernel loaded as a pill.
 */
@@ -888,6 +875,166 @@ u2_ve_line(c3_c* lin_c)
   u2_cm_chin();
 }
 
+/* u2_ve_base(): basic install (loads kernel only).
+*/
+void
+u2_ve_base()
+{
+  u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
+  u2_noun  bot   = u2nc(c3__boot, u2_ve_tag(u2_Host.kno_w));
+
+  c3_assert(0 == u2_Host.ver_e[u2_Host.kno_w].mod_m);
+  {
+    u2_noun ken = u2_cm_bury(u2_ve_build(u2nc(c3__watt, u2_ct(bot))));
+
+    if ( u2_none != ken ) {                             //  stable kernel
+      ver_e->ken = ken;
+      ver_e->mod_m = c3__warm;
+    } 
+    else { 
+      u2_noun ras = u2_cm_bury(u2_ve_build(u2nc(c3__tram, u2_ct(bot))));
+
+      if ( u2_none != ras ) {                           //  transitional kernel
+        ver_e->ras = ras;
+        ver_e->mod_m = c3__cool;
+      }
+      else {
+        u2_noun tip = u2_cm_bury(u2_ve_build(u2nc(c3__test, u2_ct(bot))));
+
+        if ( u2_none != tip ) {                         //  test stub
+          ver_e->tip = tip;
+          ver_e->mod_m = c3__weak;
+        }
+        else {
+          fprintf(stderr, "  %s: %d: no kernel\n", u2_Local, u2_Host.kno_w);
+          u2_cm_foul("vere-none");
+        }
+      }
+    }
+  }
+
+  //  Old gunn - to be deleted.
+  {
+      ver_e->dev.old = u2_ve_oldtool(u2nc(c3__gunn, u2_ct(bot)));
+      if ( ver_e->dev.old ) {
+        ver_e->dev.old = u2_cm_bury(ver_e->dev.old);
+      }
+  }
+  u2_cz(bot);
+}
+
+/* u2_ve_rest(): rest of install.
+*/
+void
+u2_ve_rest()
+{
+  u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
+
+  c3_assert(c3__warm == u2_Host.ver_e[u2_Host.kno_w].mod_m);
+  {
+    ver_e->toy.seed = u2_cm_bury(u2_ve_bone("seed"));
+    ver_e->toy.ream = u2_cm_bury(u2_ve_bone("ream"));
+    ver_e->toy.slam = u2_cm_bury(u2_ve_bone("slam"));
+    ver_e->toy.slap = u2_cm_bury(u2_ve_bone("slap"));
+    ver_e->toy.slop = u2_cm_bury(u2_ve_bone("slop"));
+  }
+  {
+    u2_ve_tool(c3__pitt);
+  }
+  u2_Host.ver_e[u2_Host.kno_w].mod_m = c3__live;
+}
+
+/* u2_ve_full(): full install (base + toys & tools).
+*/
+void
+u2_ve_full()
+{
+  u2_ve_base();
+  u2_ve_rest();
+
+}
+
+/* u2_ve_die(): exit nobly, printing trace.
+*/
+void
+u2_ve_die(u2_noun tax)
+{
+  c3_w    qop_w = u2_cm_wind();
+  u2_noun how;
+
+  if ( 0 != (how = u2_cm_trap()) ) {
+    c3_w taz = u2_cm_trac();
+
+    u2_ct(tax);                         //  deepest error takes precedence
+    u2_cm_done(qop_w);
+    // u2_ve_gc();
+
+    u2_ve_wine(how);
+    u2_ve_die(taz);
+  } 
+  else {
+    if ( FirstKernel == u2_Host.kno_w ) {
+      fprintf(stderr, "%s: %d: epic boot failure (%x)\n", 
+                      u2_Local, FirstKernel, u2_mug(tax));
+      exit(1);
+    }
+    else {
+      u2_Host.kno_w += 1;
+
+      if ( c3__live != u2_Host.ver_e[u2_Host.kno_w].mod_m ) {
+        if ( 0 == u2_Host.ver_e[u2_Host.kno_w].mod_m ) {
+          u2_ve_full();
+        }
+        else if ( c3__warm == u2_Host.ver_e[u2_Host.kno_w].mod_m ) {
+          u2_ve_rest();
+        }
+        else {
+          u2_cm_done(qop_w);
+          u2_ve_die(tax);
+        }
+      }
+      u2_ve_sway(2, tax);
+      u2_cm_done(qop_w);
+    }
+  }
+  fprintf(stderr, "%s: %d: boot failure\n", u2_Local, u2_Host.kno_w);
+  exit(1);
+}
+
+/* u2_ve_start(): boot the kernel from `kfo` to `kto`.  Exit on fail.
+*/
+void
+u2_ve_start(c3_w kfo_w, c3_w kto_w)
+{
+  u2_cm_trip();
+  {
+    c3_w    qop_w = u2_cm_wind();
+    u2_noun how;
+ 
+    if ( 0 != (how = u2_cm_trap()) ) {
+      c3_w tax = u2_cm_trac();
+
+      u2_cm_done(qop_w);
+      // u2_ve_gc();
+
+      u2_ve_wine(how);
+      u2_ve_die(tax);
+    } 
+    else {
+      while ( kfo_w > kto_w ) {
+        u2_Host.kno_w = kfo_w;
+        u2_ve_base();
+        kfo_w--;
+      }
+      u2_Host.kno_w = kto_w;
+      u2_ve_full();
+
+      u2_cm_done(qop_w);
+    }
+  }
+  u2_cm_chin();
+}
+
 c3_i
 main(c3_i   argc,
      c3_c** argv)
@@ -946,47 +1093,11 @@ main(c3_i   argc,
     }
 
     //  Load the system.
+    //
     {
-      c3_w kgo_w = kfo_w;
+      u2_ve_start(kfo_w, kno_w);
 
-      while ( 1 ) {
-        c3_w    poq_w;
-        u2_noun how;
-
-        u2_cm_trip();
-        poq_w = u2_cm_wind();
-
-        if ( 0 != (how = u2_cm_trap()) ) {
-          u2_noun rap = u2_cm_trac();
-
-          u2_cm_done(poq_w);
-          //  gc with rap as root
-          //
-
-          // fprintf(stderr, "%s: %s: %d: fail\n", argv[0], u2_Local, kgo_w);
-          u2_ve_wine(how);
-          u2_ve_sway(2, u2_ckb_flop(rap));
-
-          exit(1);
-        } else {
-          u2_Host.kno_w = kgo_w;
-
-          u2_ve_stage((kgo_w == kno_w) ? u2_yes : u2_no);
-          u2_cm_done(poq_w);
-        }
-        u2_cm_chin();
-
-        if ( kgo_w == kno_w ) {
-          break;
-        } else kgo_w--;
-      }
-
-      if ( kgo_w != kno_w ) {
-        fprintf(stderr, "%s: %s: %d: no boot\n", argv[0], u2_Local, kgo_w);
-        exit(1);
-      } else {
-        fprintf(stderr, "%s: %s: boot %d\n", argv[0], u2_Local, u2_Host.kno_w);
-      }
+      fprintf(stderr, "%s: %s: boot %d\n", argv[0], u2_Local, u2_Host.kno_w);
     }
   }
 

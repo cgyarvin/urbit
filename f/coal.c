@@ -327,6 +327,34 @@ u2_cm_trac()
   return tax;
 }
 
+/* u2_cm_push(): push `mon` on trace stack.
+*/
+void
+u2_cm_push(u2_noun mon)
+{
+  u2_wire_tax(u2_Wire) = u2nc(mon, u2_wire_tax(u2_Wire));
+}
+
+/* u2_cm_bean(): push `[%bean roc]` on trace stack.
+*/
+void
+u2_cm_bean(u2_noun roc)
+{
+  u2_cm_push(u2nc(c3__bean, roc));
+}
+
+/* u2_cm_drop(): drop from meaning stack.
+*/
+void
+u2_cm_drop()
+{
+  u2_noun tax = u2_wire_tax(u2_Wire);
+
+  c3_assert(u2_nul != tax);
+  u2_wire_tax(u2_Wire) = u2_ct(u2t(tax));
+  u2_cz(tax);
+}
+
 /* u2_cm_bail(): bail out to the local trap.  Does not return.
 */
 u2_noun

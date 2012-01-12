@@ -909,10 +909,10 @@
       void
       u2_cm_push(u2_noun mon);
 
-    /* u2_cm_mean(): push `[%mean roc]` on trace stack.
+    /* u2_cm_bean(): push `[%bean roc]` on trace stack.
     */
       void
-      u2_cm_mean(u2_noun roc);
+      u2_cm_bean(u2_noun roc);
 
     /* u2_cm_foul():
     */
@@ -922,7 +922,7 @@
     /* u2_cm_drop(): drop from meaning stack.
     */
       void
-      u2_cm_drop(u2_wire wir_r);
+      u2_cm_drop();
 
     /* u2_cm_frop(): extract, clear and disable profiler.
     */
