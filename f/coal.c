@@ -373,6 +373,7 @@ u2_cm_bail(u2_noun how)
 u2_noun
 u2_cm_foul(const c3_c* err_c)
 {
+  u2_cm_bean(u2_ci_string(err_c));
   fprintf(stderr, "foul: %s\n", err_c);
 
   return u2_bl_error(u2_Wire, err_c); 

@@ -82,6 +82,7 @@
     u2_noun tul;                        //  toolkit map - [term vase]
     struct {
       u2_noun seed;                     //  kernel vase
+      u2_noun what;                     //  platform vase
       u2_noun ream;                     //  text to gene 
       u2_noun slam;                     //  nock gate vase call - [vase vase]
       u2_noun slap;                     //  nock gate vase pipe - [vase gene]
@@ -482,25 +483,33 @@ u2_ve_slac(u2_noun vax, const c3_c* sam_c)
   return u2_ve_slap(vax, u2_ci_string(sam_c));
 }
 
-/* u2_ve_hard(): use standard tool gate without type check.
+/* u2_ve_use(): use specified tool.
 */
-u2_noun
-u2_ve_hard(const c3_c* wit_c, c3_c* fun_c, u2_noun arg)
-{           
+u2_noun 
+u2_ve_use(const c3_c* wit_c)
+{
   u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
   u2_noun  wit   = u2_ci_string(wit_c);
   u2_weak  tul   = u2_ckd_by_get(u2_ct(ver_e->tul), wit);
 
   if ( u2_none == tul ) {
-    fprintf(stderr, "hard: %s: %d: no tool\n", wit_c, u2_Host.kno_w);
-    return u2_cm_foul("vere-hard");
+    u2_cm_bean(u2nc(u2_Host.kno_w, u2_ci_string(wit_c)));
+
+    return u2_cm_foul("vere-tool");
   }
-  else {
-    u2_noun gat = u2_ve_slac(tul, fun_c);
-    u2_noun cor = u2_ct(u2t(gat));
-    
-    return u2_cn_mong(cor, arg);
-  }
+  else return tul;
+}
+
+/* u2_ve_hard(): use standard tool gate without type check.
+*/
+u2_noun
+u2_ve_hard(const c3_c* wit_c, c3_c* fun_c, u2_noun arg)
+{           
+  u2_noun tul = u2_ve_use(wit_c);
+  u2_noun gat = u2_ve_slac(tul, fun_c);
+  u2_noun cor = u2_ct(u2t(gat));
+  
+  return u2_cn_mong(cor, arg);
 }
 
 /* u2_ve_soft(): use standard tool gate against vase.
@@ -508,19 +517,10 @@ u2_ve_hard(const c3_c* wit_c, c3_c* fun_c, u2_noun arg)
 u2_noun
 u2_ve_soft(const c3_c* wit_c, c3_c* fun_c, u2_noun vos)
 {
-  u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
-  u2_noun  wit   = u2_ci_string(wit_c);
-  u2_weak  tul   = u2_ckd_by_get(u2_ct(ver_e->tul), wit);
+  u2_noun tul = u2_ve_use(wit_c);
+  u2_noun gat = u2_ve_slac(tul, fun_c);
 
-  if ( u2_none == tul ) {
-    fprintf(stderr, "hard: %s: %d: no tool\n", wit_c, u2_Host.kno_w);
-    return u2_cm_foul("vere-hard");
-  }
-  else {
-    u2_noun gat = u2_ve_slac(tul, fun_c);
-
-    return u2_ve_slam(gat, vos);
-  }
+  return u2_ve_slam(gat, vos);
 }
 
 /* u2_ve_sway(): print trace stack.
@@ -535,17 +535,7 @@ u2_ve_sway(c3_l tab_l, u2_noun tax)
     u2_noun how;
 
     if ( 0 != (how = u2_cm_trap()) ) {
-#if 0
-      fprintf(stderr, "resorting to gunn...\n");
-      u2_cm_done(poq_w);
-      {
-        u2_noun gun = u2_ve_gunn();
-
-        u2_ve_flog(gun, u2_cm_trac());
-      }
-#else
       fprintf(stderr, "  !!--!!\n");
-#endif
     } 
     else {
       c3_l    col_l = u2_ve_dump_columns();
@@ -604,37 +594,6 @@ u2_ve_gunn()
   return u2_cm_foul("gunn-fail");
 }
 
-#if 0
-/* u2_ve_flog(): print trace stack, old style.
-*/
-void
-u2_ve_flog(u2_noun gun, u2_noun tax)
-{
-  while ( u2_yes == u2_cr_du(tax) ) {
-    u2_noun h_tax = u2h(tax);
-    u2_noun t_tax = u2t(tax);
-    {
-      c3_w poq_w = u2_cm_wind();
-      u2_noun how;
-
-      if ( 0 != (how = u2_cm_trap()) ) {
-        u2_cm_done(poq_w);
-        fprintf(stderr, "  !!--!!\n");
-      } 
-      else {
-        u2_noun tac = u2_ve_gunn_swan(u2_ct(gun), u2_ct(h_tax));
-     
-        u2_ve_gunn_gank(u2_ct(gun), tac);
-        u2_cm_done(poq_w);
-      }
-    }
-    tax = t_tax;
-  }
-  u2_cz(gun);
-  u2_cz(tax);
-}
-#endif
-
 /* u2_ve_wine(): analyze and express error result.
 */
 void
@@ -682,7 +641,7 @@ u2_ve_tool(u2_noun nam)
   u2_steg* ver_e = u2_ve_at();
   u2_noun  tah   = u2nt(nam, c3__boot, u2_ve_tag(u2_Host.kno_w));
   u2_weak  src   = u2_ve_file("watt", u2_ct(tah));
- 
+
   u2_cm_bean(u2nc(u2_ci_string("vere-tool"), tah));
   if ( u2_none == src ) {
     u2_cm_bail(c3__fail);
@@ -703,10 +662,10 @@ u2_ve_tool(u2_noun nam)
     } 
     else {
       u2_noun gen = u2_ve_ream(src);
-      u2_noun syd = u2_ve_seed();
+      u2_noun syd = u2_ct(ver_e->toy.what ? ver_e->toy.what : ver_e->toy.seed);
       u2_noun vos = u2_ve_slap(syd, gen);
 
-      ver_e->tul = u2_ckd_by_put(ver_e->tul, nam, vos);
+      ver_e->tul = u2_ckd_by_put(ver_e->tul, nam, u2_cm_bury(vos));
       u2_cm_done(poq_w);
     }
   }
@@ -744,65 +703,6 @@ u2_ve_tools()
     u2_ve_tool(c3__pitt);
   }
 }
-
-#if 0
-/* u2_ve_stage(): load current stage to best of ability.  crash-only.
-*/
-void
-u2_ve_stage(u2_flag hyr)
-{
-  c3_w     kno_w = u2_Host.kno_w;
-  u2_noun  kna   = u2_ve_tag(kno_w);
-  u2_noun  bot   = u2nc(c3__boot, kna);
-  u2_steg* ver_e = &(u2_Host.ver_e[kno_w]);             //  assumed bzero
-
-  /* Organize the stable kernel / transitional kernel / test tip.
-  */
-  c3_assert(0 == ver_e->mod_m);
-  ver_e->mod_m = c3__cold;
-  {
-    u2_noun ken = u2_ve_build(u2nc(c3__watt, u2_ct(bot)));
-
-    if ( u2_none != ken ) {                             //  stable kernel
-      ver_e->ken = u2_cm_bury(ken);
-      ver_e->mod_m = c3__warm;
-
-      u2_ve_toys();
-      if ( u2_yes == hyr ) {
-        u2_ve_tools();
-
-
-        //  Old.
-        {
-          ver_e->dev.old = u2_ve_oldtool(u2nc(c3__gunn, u2_ct(bot)));
-          if ( ver_e->dev.old ) {
-            ver_e->dev.old = u2_cm_bury(ver_e->dev.old);
-          }
-        }
-      }
-    } 
-    else { 
-      u2_noun ras = u2_ve_build(u2nc(c3__tram, u2_ct(bot)));
-
-      if ( u2_none != ras ) {                           //  transitional kernel
-        ver_e->mod_m = c3__warm;
-        ver_e->ras = u2_cm_bury(ras);
-      }
-      else {
-        u2_noun tip = u2_ve_build(u2nc(c3__test, u2_ct(bot)));
-
-        if ( u2_none != tip ) {                         //  test stub
-          ver_e->tip = u2_cm_bury(tip);
-        }
-        else {
-          fprintf(stderr, "  %s: %d: no kernel\n", u2_Local, kno_w);
-          u2_cm_bail(c3__fail);
-        }
-      }
-    }
-  }
-}
-#endif
 
 /* u2_ve_auto(): find the first kernel loaded as a pill.
 */
@@ -937,6 +837,9 @@ u2_ve_rest()
     ver_e->toy.slam = u2_cm_bury(u2_ve_bone("slam"));
     ver_e->toy.slap = u2_cm_bury(u2_ve_bone("slap"));
     ver_e->toy.slop = u2_cm_bury(u2_ve_bone("slop"));
+
+    u2_ve_tool(c3__what);
+    ver_e->toy.what = u2_ve_use("what");
   }
   {
     u2_ve_tool(c3__pitt);

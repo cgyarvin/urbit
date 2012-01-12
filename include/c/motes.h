@@ -929,6 +929,7 @@
 #   define c3__web    c3_s3('w','e','b')
 #   define c3__werp   c3_s4('w','e','r','p')
 #   define c3__west   c3_s4('w','e','s','t')
+#   define c3__what   c3_s4('w','h','a','t')
 #   define c3__wing   c3_s4('w','i','n','g')
 #   define c3__with   c3_s4('w','i','t','h')
 #   define c3__wnut   c3_s4('w','n','u','t')
