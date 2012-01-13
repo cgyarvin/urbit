@@ -477,6 +477,7 @@ EYRE_OFILES=\
 
 VERE_OFILES=\
        c/vere.o \
+       v/fs.o \
        c/gunn.o \
        $(BASE_OFILES)
 

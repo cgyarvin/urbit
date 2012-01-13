@@ -29,3 +29,7 @@
 #     include "f/nock.h"
 #     include "f/funj.h"
 #     include "f/unix.h"
+
+    /** coal: should replace all of the above
+    **/
+#     include "f/coal.h"

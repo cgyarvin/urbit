@@ -3,7 +3,6 @@
 ** This file is in the public domain.
 */
 #include "all.h"
-#include "f/coal.h"
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <sys/stat.h>

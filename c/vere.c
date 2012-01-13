@@ -15,7 +15,7 @@
 #define U2_GLOBAL
 #define C3_GLOBAL
 #include "all.h"
-#include "f/coal.h"
+#include "v/vere.h"
 
 /**  Legacy fixed jet linkage.  Destroy me please.
 **/
@@ -36,7 +36,7 @@
 
     /* First kernel this executable can boot; default if unspecified.
     */
-#     define FirstKernel   225
+#     define FirstKernel   224
 #     define DefaultKernel 224
 
     /* Temporary dependency on old gunn.
@@ -61,56 +61,6 @@
       void u2_ve_tools();
       void u2_ve_stage();
 
-
-/**  General vere state.  Move to header file.
-***
-***  All nouns are in the basket (permanent storage) and need not be tracked.
-**/
-  /* Server status mode:
-  **
-  **   `%cold`  just waking up
-  **   `%live`  reflexive kernel, toys and tools
-  **   `%warm`  reflexive kernel, no toys or tools
-  **   `%cool`  non-reflexive kernel or test tip
-  */
-  typedef struct {
-    c3_m    mod_m;                      //  load mode, or 0 for none
-    u2_noun ken;                        //  stable kernel, or 0 for none
-    u2_noun ras;                        //  transition kernel, or 0
-    u2_noun tip;                        //  broken sub-kernel, or 0
-    u2_noun tax;                        //  error trace, if any
-    u2_noun tul;                        //  toolkit map - [term vase]
-    struct {
-      u2_noun seed;                     //  kernel vase
-      u2_noun what;                     //  platform vase
-      u2_noun ream;                     //  text to gene 
-      u2_noun slam;                     //  nock gate vase call - [vase vase]
-      u2_noun slap;                     //  nock gate vase pipe - [vase gene]
-      u2_noun slop;                     //  nock gate vase pair - [vase vase]
-    } toy;
-    struct {
-      u2_noun old;                      //  legacy app
-    } dev;
-  } u2_steg;
-
-  typedef struct {
-    u2_wire wir_r;                      //  noun system, 1 per thread
-    c3_c*   fel_c;                      //  readline filename
-    u2_noun pet;                        //  petname of self, atomic
-    u2_noun pat;                        //  unix path to self, atomic
-    u2_noun opt;                        //  unix arguments as map
-    u2_steg ver_e[257];                 //  stages improving downward
-    c3_w    kno_w;                      //  current executing stage
-  } u2_host;                            //  host == computer == process
-
-/**  Globals!
-**/
-  c3_global  u2_host  u2_Host;
-  c3_global  u2_wire  u2_Wire;
-  c3_global  c3_c*    u2_Local;
-  c3_global  c3_c*    u2_System;
-  c3_global  u2_flag  u2_Quiet;
-  c3_global  u2_flag  u2_Debug;
 
 
 /* u2_ve_dump_columns(): return screen column width from OS.
@@ -236,55 +186,6 @@ u2_ve_sysopt(u2_noun opt)                            //  retain
   return u2_yes;
 }
 
-/* u2_ve_load(): load internal file as atom from local or system.
-*/
-static u2_weak
-u2_ve_file(c3_c* ext_c, u2_noun tah)
-{
-  u2_noun pas;
-  u2_weak dat;
-
-  c3_assert(u2_Local);
-  pas = u2_cf_path(u2_Local, ext_c, u2_ct(tah));
-  dat = u2_cf_flat_load(c3__atom, pas);
-
-  if ( (u2_none != dat) || !u2_System ) {
-    u2_cz(tah);
-
-    return dat;
-  } else {
-    return u2_cf_flat_load(c3__atom, u2_cf_path(u2_System, ext_c, tah));
-  }
-}
-
-/* u2_ve_date(): date internal file.
-*/
-static c3_d
-u2_ve_date(c3_c* ext_c, u2_noun tah)
-{
-  u2_noun pas;
-  u2_weak dat;
-
-  pas = u2_cf_path(u2_Local, ext_c, u2_ct(tah));
-  dat = u2_cf_flat_date(pas);
-
-  if ( (0 != dat) || !u2_System ) {
-    u2_cz(tah);
-
-    return dat;
-  } else {
-    return u2_cf_flat_date(u2_cf_path(u2_System, ext_c, tah));
-  }
-}
-
-/* u2_ve_save(): save internal file as atom.
-*/
-static void
-u2_ve_save(c3_c* ext_c, u2_noun tah, u2_noun dat)
-{
-  u2_cf_flat_save(c3__atom, u2_cf_path(u2_Local, ext_c, tah), dat);
-}
-
 /* u2_ve_build(): load and/or build/save kernel `tah`.
 */
 static u2_weak
@@ -293,7 +194,6 @@ u2_ve_build(u2_noun tah)
   c3_w  kno_w = u2_Host.kno_w;
   c3_d  src_d = u2_ve_date("watt", u2_ct(tah));
   c3_d  bin_d = u2_ve_date("pill", u2_ct(tah));
-  c3_c* ext_c;
   u2_noun fol;
 
   if ( !src_d ) {
@@ -308,12 +208,13 @@ u2_ve_build(u2_noun tah)
     else {
       fol = u2_cke_cue(pil);
     }
-    ext_c = "pill";
   } 
   else {
     u2_noun src = u2_ve_file("watt", u2_ct(tah));
     u2_noun ken;
     u2_noun pil;
+
+    u2_cm_push(u2nc(c3__lose, u2_cf_path(".", "watt", u2_ct(tah))));
 
     if ( !(ken = u2_Host.ver_e[kno_w + 1].ken) &&
          !(ken = u2_Host.ver_e[kno_w + 1].ras) )
@@ -321,24 +222,11 @@ u2_ve_build(u2_noun tah)
       fprintf(stderr, "%d: no %d kernel\n", kno_w, kno_w + 1);
       return u2_cm_foul("make");
     }
-    u2_cm_bean(u2nc(u2_ci_string("vere-boot"), u2_ct(tah)));
     fol = u2_cn_nock(src, u2_ct(ken));
     u2_cm_drop();
 
     pil = u2_cke_jam(u2_ct(fol));
     u2_ve_save("pill", u2_ct(tah), pil);
-
-    ext_c = "watt";
-  }
-
-  //  Display our work.
-  {
-    u2_noun pas = u2_cf_path("", ext_c, u2_ct(tah));
-    c3_c*   pas_c = u2_cr_string(pas);
-
-    fprintf(stderr, "  %s: %x\n", pas_c+1, u2_mug(fol));
-    free(pas_c);
-    u2_cz(pas);
   }
 
   u2_cz(tah);
@@ -367,6 +255,7 @@ u2_ve_oldtool(u2_noun tah)
     fol = u2_cn_nock(src, u2_ct(ken));
     cor = u2_cn_nock(0, fol);
 
+#if 0
     {
       u2_noun pas = u2_cf_path("", "watt", u2_ct(tah));
       c3_c*   pas_c = u2_cr_string(pas);
@@ -375,6 +264,7 @@ u2_ve_oldtool(u2_noun tah)
       free(pas_c);
       u2_cz(pas);
     }
+#endif
     return cor;
   }
 }
@@ -495,6 +385,7 @@ u2_ve_use(const c3_c* wit_c)
   if ( u2_none == tul ) {
     u2_cm_bean(u2nc(u2_Host.kno_w, u2_ci_string(wit_c)));
 
+    fprintf(stderr, "no %s, %d\n", wit_c, u2_Host.kno_w);
     return u2_cm_foul("vere-tool");
   }
   else return tul;
@@ -642,51 +533,18 @@ u2_ve_tool(u2_noun nam)
   u2_noun  tah   = u2nt(nam, c3__boot, u2_ve_tag(u2_Host.kno_w));
   u2_weak  src   = u2_ve_file("watt", u2_ct(tah));
 
-  u2_cm_bean(u2nc(u2_ci_string("vere-tool"), tah));
+  u2_cm_push(u2nc(c3__lose, u2_cf_path(".", "watt", tah)));
   if ( u2_none == src ) {
     u2_cm_bail(c3__fail);
   }
   else {
-    c3_w poq_w;
-    u2_noun how;
+    u2_noun gen = u2_ve_ream(src);
+    u2_noun syd = u2_ct(ver_e->toy.what ? ver_e->toy.what : ver_e->toy.seed);
+    u2_noun vos = u2_ve_slap(syd, gen);
 
-    u2_cm_trip();
-    poq_w = u2_cm_wind();
-
-    if ( 0 != (how = u2_cm_trap()) ) {
-      u2_noun rap = u2_cm_trac();
-      u2_cm_done(poq_w);
-
-      u2_ve_wine(how);
-      u2_ve_sway(4, u2_ckb_flop(u2_ct(rap)));
-    } 
-    else {
-      u2_noun gen = u2_ve_ream(src);
-      u2_noun syd = u2_ct(ver_e->toy.what ? ver_e->toy.what : ver_e->toy.seed);
-      u2_noun vos = u2_ve_slap(syd, gen);
-
-      ver_e->tul = u2_ckd_by_put(ver_e->tul, nam, u2_cm_bury(vos));
-      u2_cm_done(poq_w);
-    }
+    ver_e->tul = u2_ckd_by_put(ver_e->tul, nam, u2_cm_bury(vos));
   }
   u2_cm_drop();
-}
-
-/* u2_ve_toys(): assemble toys.
-*/
-void
-u2_ve_toys()
-{
-  u2_steg *ver_e = u2_ve_at();
-
-  // Load toys; bury them in deep storage.
-  {
-    ver_e->toy.seed = u2_cm_bury(u2_ve_bone("seed"));
-    ver_e->toy.ream = u2_cm_bury(u2_ve_bone("ream"));
-    ver_e->toy.slam = u2_cm_bury(u2_ve_bone("slam"));
-    ver_e->toy.slap = u2_cm_bury(u2_ve_bone("slap"));
-    ver_e->toy.slop = u2_cm_bury(u2_ve_bone("slop"));
-  }
 }
 
 /* u2_ve_tools(): assemble tools.
@@ -704,17 +562,28 @@ u2_ve_tools()
   }
 }
 
+/* u2_ve_able(): u2_yes iff kernel `kno` is bootable.
+*/
+u2_flag
+u2_ve_able(c3_w kno_w)
+{
+  u2_noun tah = u2nt(c3__watt, c3__boot, u2_ve_tag(kno_w));
+  c3_d  src_d = u2_ve_date("watt", u2_ct(tah));
+  c3_d  bin_d = u2_ve_date("pill", tah);
+
+  if ( bin_d && (bin_d >= src_d) ) {
+    return u2_yes;
+  }
+  else return u2_no;
+}
+
 /* u2_ve_auto(): find the first kernel loaded as a pill.
 */
 c3_w
 u2_ve_auto(c3_w kno_w)
 {
   while ( kno_w <= FirstKernel ) {
-    u2_noun tah = u2nt(c3__watt, c3__boot, u2_ve_tag(kno_w));
-    c3_d  src_d = u2_ve_date("watt", u2_ct(tah));
-    c3_d  bin_d = u2_ve_date("pill", tah);
-
-    if ( bin_d && (bin_d >= src_d) ) {
+    if ( u2_yes == u2_ve_able(kno_w) ) {
       return kno_w;
     }
     kno_w++;
@@ -876,29 +745,33 @@ u2_ve_die(u2_noun tax)
     u2_ve_die(taz);
   } 
   else {
-    if ( FirstKernel == u2_Host.kno_w ) {
-      fprintf(stderr, "%s: %d: epic boot failure (%x)\n", 
-                      u2_Local, FirstKernel, u2_mug(tax));
-      exit(1);
-    }
-    else {
+    while ( 1 ) {
       u2_Host.kno_w += 1;
 
-      if ( c3__live != u2_Host.ver_e[u2_Host.kno_w].mod_m ) {
-        if ( 0 == u2_Host.ver_e[u2_Host.kno_w].mod_m ) {
-          u2_ve_full();
-        }
-        else if ( c3__warm == u2_Host.ver_e[u2_Host.kno_w].mod_m ) {
-          u2_ve_rest();
-        }
-        else {
-          u2_cm_done(qop_w);
-          u2_ve_die(tax);
-        }
+      if ( u2_Host.kno_w > FirstKernel ) {
+        fprintf(stderr, "%s: %d: epic boot failure (%x)\n", 
+                        u2_Local, FirstKernel, u2_mug(tax));
+        exit(1);
       }
-      u2_ve_sway(2, tax);
-      u2_cm_done(qop_w);
+
+      switch ( u2_Host.ver_e[u2_Host.kno_w].mod_m ) {
+        default: c3_assert(0);
+
+        case 0: {
+          if ( u2_yes == u2_ve_able(u2_Host.kno_w) ) {
+            u2_ve_full();
+            break;
+          } else continue;
+        }
+        case c3__live: { break; }
+        case c3__warm: { u2_ve_rest(); break; }
+        case c3__cool: continue;
+        case c3__weak: continue;
+      }
+      break;
     }
+    u2_ve_sway(2, u2_ckb_flop(tax));
+    u2_cm_done(qop_w);
   }
   fprintf(stderr, "%s: %d: boot failure\n", u2_Local, u2_Host.kno_w);
   exit(1);
@@ -909,6 +782,12 @@ u2_ve_die(u2_noun tax)
 void
 u2_ve_start(c3_w kfo_w, c3_w kto_w)
 {
+  if ( kto_w == kfo_w ) {
+    fprintf(stderr, "%s: at %d\n", u2_Local, kto_w); 
+  } else {
+    fprintf(stderr, "%s: from %d, to %d\n", u2_Local, kfo_w, kto_w); 
+  }
+
   u2_cm_trip();
   {
     c3_w    qop_w = u2_cm_wind();
@@ -936,6 +815,17 @@ u2_ve_start(c3_w kfo_w, c3_w kto_w)
     }
   }
   u2_cm_chin();
+
+  switch ( u2_Host.ver_e[u2_Host.kno_w].mod_m ) {
+    case c3__live:
+      fprintf(stderr, "%s: boot %d\n", argv[0], u2_Local, u2_Host.kno_w);
+      break;
+    case c3__cool:
+      break;
+    case c3__weak:
+      break;
+    }
+  }
 }
 
 c3_i
@@ -986,13 +876,6 @@ main(c3_i   argc,
       } 
       kfo_w = u2_ve_auto(kno_w);
 
-      if ( kno_w == kfo_w ) {
-        fprintf(stderr, "%s: %s: at %d\n", 
-                argv[0], u2_Local, kno_w); 
-      } else {
-        fprintf(stderr, "%s: %s: from %d, to %d\n", 
-                argv[0], u2_Local, kfo_w, kno_w); 
-      }
     }
 
     //  Load the system.
