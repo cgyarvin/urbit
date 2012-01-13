@@ -21,6 +21,7 @@
 **/
     /* External drivers.
     */
+      extern u2_ho_driver j2_da(k_222);
       extern u2_ho_driver j2_da(k_223);
       extern u2_ho_driver j2_da(k_224);
       extern u2_ho_driver j2_da(k_225);
@@ -28,6 +29,7 @@
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       u2_ho_driver *HostDriverBase[] = {
+        &j2_da(k_222),
         &j2_da(k_223),
         &j2_da(k_224),
         &j2_da(k_225),
@@ -249,7 +251,7 @@ u2_ve_oldtool(u2_noun tah)
     u2_noun ken, fol, cor;
 
     if ( !(ken = u2_Host.ver_e[kno_w].ken) ) {
-      fprintf(stderr, "%d: no kernel", kno_w);
+      fprintf(stderr, "%d: no kernel\n", kno_w);
       return u2_cm_foul("make");
     }
     fol = u2_cn_nock(src, u2_ct(ken));
@@ -684,10 +686,12 @@ u2_ve_base()
 
   //  Old gunn - to be deleted.
   {
+    if ( 0 != ver_e->ken ) {
       ver_e->dev.old = u2_ve_oldtool(u2nc(c3__gunn, u2_ct(bot)));
       if ( ver_e->dev.old ) {
         ver_e->dev.old = u2_cm_bury(ver_e->dev.old);
       }
+    }
   }
   u2_cz(bot);
 }
@@ -722,8 +726,9 @@ void
 u2_ve_full()
 {
   u2_ve_base();
-  u2_ve_rest();
-
+  if ( c3__warm == u2_Host.ver_e[u2_Host.kno_w].mod_m ) {
+    u2_ve_rest();
+  }
 }
 
 /* u2_ve_die(): exit nobly, printing trace.
@@ -816,14 +821,20 @@ u2_ve_start(c3_w kfo_w, c3_w kto_w)
   }
   u2_cm_chin();
 
-  switch ( u2_Host.ver_e[u2_Host.kno_w].mod_m ) {
-    case c3__live:
-      fprintf(stderr, "%s: boot %d\n", argv[0], u2_Local, u2_Host.kno_w);
-      break;
-    case c3__cool:
-      break;
-    case c3__weak:
-      break;
+  fprintf(stderr, "%s: boot %d ", u2_Local, u2_Host.kno_w);
+  {
+    u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
+
+    switch ( ver_e->mod_m ) {
+      case c3__live:
+        fprintf(stderr, "(%x)\n", u2_mug(ver_e->ken));
+        break;
+      case c3__cool:
+        fprintf(stderr, "(transitional) (%x)\n", u2_mug(ver_e->ras));
+        break;
+      case c3__weak:
+        fprintf(stderr, "(experimental) (%x)\n", u2_mug(ver_e->tip));
+        break;
     }
   }
 }
