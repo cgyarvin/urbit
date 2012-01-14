@@ -93,6 +93,28 @@ u2_wr_ice(u2_ray  wir_r,
   return buz;
 }
 
+/* u2_wr_mark():
+**
+**   Mark all roots in a wire and return their allocation size.
+*/
+c3_w
+u2_wr_mark(u2_ray wir_r)
+{
+  c3_w siz_w = 0;
+
+  c3_assert(c3__rock == u2_rail_hip_m(wir_r));
+  {
+    if ( u2_wire_kit_r(wir_r) ) {
+      siz_w += u2_rl_gc_mark_ptr(wir_r, u2_wire_kit_r(wir_r));
+    }
+    siz_w += u2_rl_gc_mark_ptr(wir_r, u2_wire_bex_r(wir_r));
+    siz_w += u2_rl_gc_mark_ptr(wir_r, u2_wire_rac_r(wir_r));
+  }
+  siz_w += u2_rl_gc_mark(wir_r);
+
+  return siz_w;
+}
+
 /* u2_wr_gc():
 **
 **   Garbage-collect all current storage in a wire, given

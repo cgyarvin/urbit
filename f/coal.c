@@ -315,6 +315,38 @@ u2_cm_done(c3_w qop_w)
   u2_bl_done(u2_Wire, qop_w);
 }
 
+/* u2_cm_sweep(): return bytes swept.
+*/
+c3_w
+u2_cm_sweep()
+{
+  return u2_rl_gc_sweep(u2_Wire);
+}
+
+/* u2_cm_mark_noun(): mark individual noun.
+*/
+c3_w
+u2_cm_mark_noun(u2_noun som)
+{
+  return u2_rl_gc_mark_noun(u2_Wire, som);
+}
+
+/* u2_cm_mark_ray(): mark a root for gc (do not use again before gc)
+*/
+c3_w
+u2_cm_mark_ray(u2_ray ray_r)
+{
+  return u2_rl_gc_mark_ptr(u2_Wire, ray_r);
+}
+
+/* u2_cm_mark_internal(): mark all coal internals
+*/
+c3_w
+u2_cm_mark_internal()
+{
+  return u2_wr_mark(u2_Wire);
+}
+ 
 /* u2_cm_trac(): extract and clear stack trace.
 */
 u2_noun

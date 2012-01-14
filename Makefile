@@ -610,8 +610,11 @@ EYRE_OFILES=\
        $(BASE_OFILES)
 
 VERE_OFILES=\
-       c/vere.o \
+       v/boot.o \
        v/fs.o \
+       v/main.o \
+       v/console.o \
+       v/system.o \
        c/gunn.o \
        $(BASE_OFILES)
 

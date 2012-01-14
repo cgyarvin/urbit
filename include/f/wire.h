@@ -61,20 +61,6 @@
                      u2_ray hat_r,
                      u2_ray mat_r);
 
-        /* u2_wr_save():
-        **
-        **   Save reactor noun to basket.
-        */
-          u2_noun
-          u2_wr_save(u2_ray wir_r);
-
-        /* u2_wr_nuke():
-        **
-        **   Reinitialize the reactor partition.
-        */
-          u2_noun
-          u2_wr_nuke(u2_ray wir_r);
-
         /* u2_wr_ice(): u2_rl_ice(), with u2_bx_copy().
         */
           u2_weak
@@ -89,24 +75,9 @@
           void
           u2_wr_gc(u2_ray wir_r, ...);
 
-#if 0
-        /* u2_wr_bench():
+        /* u2_wr_mark():
         **
-        **  Save benchmarks with stack depth.
+        **   Mark all roots in a wire and return their allocation size.
         */
-          void
-          u2_wr_bench(u2_ray wir_r,
-                      c3_w   stk_w);
-
-        /* u2_wr_report():
-        **
-        **  Return handy reporting information.
-        */
-          void
-          u2_wr_report(u2_ray wir_r,
-                       c3_w*  cop_w,
-                       c3_w*  stk_w,
-                       c3_w*  wst_w,
-                       c3_w*  est_w);
-#endif
-
+          c3_w
+          u2_wr_mark(u2_ray wir_r);

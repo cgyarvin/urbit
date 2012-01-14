@@ -919,6 +919,26 @@
       u2_noun
       u2_cm_foul(const c3_c* err_c);
 
+    /* u2_cm_sweep(): return bytes swept.
+    */
+      c3_w
+      u2_cm_sweep();
+
+    /* u2_cm_mark_noun(): mark individual noun.
+    */
+      c3_w
+      u2_cm_mark_noun(u2_noun som);
+
+    /* u2_cm_mark_ptr(): mark a root for gc (do not use again before gc)
+    */
+      c3_w
+      u2_cm_mark_ptr(void *ptr);
+
+    /* u2_cm_mark_internal(): mark all coal internals
+    */
+      c3_w
+      u2_cm_mark_internal();
+
     /* u2_cm_drop(): drop from meaning stack.
     */
       void
