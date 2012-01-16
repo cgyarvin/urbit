@@ -31,6 +31,15 @@
 #   define u2nq(a, b, c, d)  u2_cn_qual(a, b, c, d)
 #   define u2ni(a)           u2ic(a, 0)
 
+#   define u2fh(som)         (*u2_at_pom_hed(som))      //  no validity check
+#   define u2ft(som)         (*u2_at_pom_tel(som))      //  no validity check
+
+#   define u2du(som)         (u2_cr_du(som))
+#   define u2ud(som)         (u2_cr_ud(som))
+
+#   define u2k(som)          u2_ct(som)
+#   define u2z(som)          u2_cz(som)
+
 
   /** u2_cx*: crash-only core traversal.  
   ***
@@ -43,7 +52,7 @@
 #if 1
 #     define u2_cx_h(som)        u2_bi_h(u2_Wire, som)
 #     define u2_cx_t(som)        u2_bi_t(u2_Wire, som)
-#     define u2_cx_at(axe, som)  u2_bi_frag(axe, som)
+#     define u2_cx_at(axe, som)  u2_bi_frag(u2_Wire, axe, som)
 #     define u2_cx_cell(a, b, c)  u2_bi_cell(u2_Wire, a, b, c)
 #     define u2_cx_trel(a, b, c, d)  u2_bi_trel(u2_Wire, a, b, c, d)
 #     define u2_cx_qual(a, b, c, d)
@@ -847,6 +856,11 @@
       void
       u2_cm_done(c3_w qop_w);
 
+    /* u2_cm_poll(): poll for interrupts, etc.
+    */
+      void
+      u2_cm_poll();
+   
     /* u2_cm_trip(): descend into a memory region.
     **
     **   Memory allocated in the heap above is senior & frozen.
@@ -919,10 +933,15 @@
       u2_noun
       u2_cm_foul(const c3_c* err_c);
 
-    /* u2_cm_sweep(): return bytes swept.
+    /* u2_cm_sweep(): return bytes leaked; match bytes saved.
     */
       c3_w
-      u2_cm_sweep();
+      u2_cm_sweep(c3_w sav_w);
+
+    /* u2_cm_purge(): purge memo cache.
+    */
+      void
+      u2_cm_purge();
 
     /* u2_cm_mark_noun(): mark individual noun.
     */
@@ -1055,6 +1074,11 @@
       */
         u2_weak
         u2_ckd_by_get(u2_noun a, u2_noun b);
+ 
+      /* u2_ckd_by_got(): map get for key `b` in map `a` with fail.
+      */
+        u2_noun
+        u2_ckd_by_got(u2_noun a, u2_noun b);
  
       /* u2_ckd_by_put(): map put for key `b`, value `c` in map `a`.
       */

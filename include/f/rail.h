@@ -276,10 +276,10 @@
 
         /* u2_rl_gc_sweep(): 
         **
-        **   Sweep memory, freeing unused blocks.  Return live words.
+        **   Sweep memory, freeing unused blocks.  Match live, save leaked.
         */
           c3_w
-          u2_rl_gc_sweep(u2_ray ral_r);
+          u2_rl_gc_sweep(u2_ray ral_r, c3_w sav_w);
 
         /* u2_rl_malloc():
         **

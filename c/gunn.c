@@ -805,6 +805,7 @@ _eyre_gunn(u2_wire wir_r,
     if ( u2_nul != sab ) {
       _gunn_show_slab(wir_r, cor, sab);
     }
+    u2_cz(dyd);
     return _gunn_vent(wir_r, cor, vet, von);
   }
 }

@@ -56,6 +56,7 @@ F_OFILES=\
        f/bail.o \
        f/dash.o \
        f/unix.o \
+       f/onock.o \
        f/nock.o
 
 P_OFILES=\
@@ -605,10 +606,6 @@ BASE_OFILES=\
        $(J223_OFILES) \
        $(J222_OFILES)
 
-EYRE_OFILES=\
-       c/eyre.o \
-       $(BASE_OFILES)
-
 VERE_OFILES=\
        v/boot.o \
        v/fs.o \
@@ -618,11 +615,7 @@ VERE_OFILES=\
        c/gunn.o \
        $(BASE_OFILES)
 
-all: $(BIN)/eyre $(BIN)/vere
-
-$(BIN)/eyre: $(EYRE_OFILES)
-	mkdir -p $(BIN)
-	$(CLD) -o $(BIN)/eyre $(EYRE_OFILES) -lgmp -lreadline -ltermcap
+all: $(BIN)/vere
 
 $(BIN)/vere: $(VERE_OFILES)
 	mkdir -p $(BIN)
@@ -632,4 +625,4 @@ tags:
 	ctags -R -f .tags --exclude=root
 
 clean:
-	 $(RM) $(EYRE_OFILES) $(VERE_OFILES) $(BIN)/vere $(BIN)/eyre
+	 $(RM) $(VERE_OFILES) $(BIN)/vere $(BIN)/eyre

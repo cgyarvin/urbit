@@ -4,709 +4,476 @@
 */
 #include "all.h"
 
-    /** Internal variables.
-    **/
+extern u2_flag u2_Flag_Profile;
 
-/* _nock_rock():
-**
-**    Execute `(nock bus fol)`.  
-**
-**    Caller transfers `bus`, retains `fol`.
-**    Function transfers result, if any.
+/* _nock_sink(), _nock_rise(): stack tracking.
 */
-static u2_weak                                                    //  transfer
-_nock_rock(u2_wire wir_r,
-           u2_noun bus,                                           //  transfer
-           u2_noun fol)                                           //  retain
+static __inline__ void
+_nock_sink()
 {
-# define _nock_rock_keep(wir_r, vid, heb) \
-    _nock_rock(wir_r, u2_rl_gain(wir_r, vid), heb)
-  u2_noun hib, gal;
+#if 0
+  LoomSink; 
+  if ( u2_Flag_Profile ) u2_tx_sink_cas(u2_Wire);
+#endif
+}
+static __inline__ void
+_nock_rise()
+{
+#if 0
+  if ( u2_Flag_Profile ) u2_tx_rise_cas(u2_Wire); 
+  LoomRise;
+#endif
+}
 
-  while ( 1 ) {
-    u2_tx_did_hop(wir_r, 1);
+static u2_noun
+_nock_exit()
+{
+  u2_tx_sys_bit(u2_Wire, u2_yes);
 
-    // c3_assert(u2_wrac_at(wir_r, wer.sys) == u2_no);
+  return u2_cm_bail(c3__exit);
+}
 
-    if ( LoomStop ) {
-      if ( LoomIntr ) {
-        fprintf(stderr, "{interrupt}\n");
-      } else {
-        fprintf(stderr, "{stack overflow}\n");
+/* _nock_hint(): hint with code, data, subject, formula.
+*/
+  static u2_noun _nock_cool(u2_noun, u2_noun);
+static u2_noun 
+_nock_hint(u2_noun zep,
+           u2_noun hod,
+           u2_noun bus,
+           u2_noun nex)
+{
+  u2_noun pro;
+
+  switch ( zep ) {
+    default: u2z(zep); u2z(hod); return _nock_cool(bus, nex);
+
+    case c3__bean: 
+    case c3__mean:
+    case c3__spot: {
+      u2_noun tax = u2k(u2_wire_tax(u2_Wire));
+      u2_noun tac = u2nc(zep, hod);
+
+      u2_wire_tax(u2_Wire) = u2nc(tac, tax);
+      {
+        pro = _nock_cool(bus, nex);
       }
-      LoomStop = LoomIntr = 0;
-      u2_rl_lose(wir_r, bus);
-      return u2_none;
+      u2z(u2_wire_tax(u2_Wire));
+      u2_wire_tax(u2_Wire) = tax;
+      
+      return pro;
     }
 
-    if ( u2_no == u2_as_cell(fol, &hib, &gal) ) {
-      u2_rl_lose(wir_r, bus);
-      return u2_none;
+    case c3__loaf: {
+      u2_tx_sys_bit(u2_Wire, u2_yes);
+      u2_tx_loaf(u2_Wire, hod);
+      u2_tx_sys_bit(u2_Wire, u2_no);
+
+      u2z(hod);
+      return _nock_cool(bus, nex);
     }
-    if ( u2_yes == u2_dust(hib) ) {
-      u2_weak poz, riv, hux;
 
-      LoomSink; u2_tx_sink_cas(wir_r);
-      poz = _nock_rock_keep(wir_r, bus, hib);
-      u2_tx_rise_cas(wir_r); LoomRise;
+    case c3__turd: {
+      u2_tx_sys_bit(u2_Wire, u2_yes);
+      u2_err(u2_Wire, "turd", hod);
+      u2_tx_sys_bit(u2_Wire, u2_no);
 
-      if ( u2_none == poz ) {
-        u2_rl_lose(wir_r, bus);
-        return u2_none;
-      }
+      u2z(hod);
+      return _nock_cool(bus, nex);
+    }
 
-      LoomSink; u2_tx_sink_cas(wir_r);
-      riv = _nock_rock(wir_r, bus, gal);
-      u2_tx_rise_cas(wir_r); LoomRise;
+    case c3__mine: {
+      pro = _nock_cool(bus, nex);
+      
+      u2_tx_sys_bit(u2_Wire, u2_yes);
+      pro = u2_ds_mine(u2_Wire, hod, pro);
+      u2_tx_sys_bit(u2_Wire, u2_no);
+ 
+      u2z(hod);
+      return pro;
+    }
 
-      if ( u2_none == riv ) {
-        u2_rl_lose(wir_r, poz);
-        return u2_none;
-      }
+    case c3__fast: {
+      pro = _nock_cool(bus, nex);
 
-      hux = u2_rl_cell(wir_r, poz, riv);
-      return hux;
-    } 
-    else switch ( hib ) {
-      default: {
-        u2_rl_lose(wir_r, bus);
-        return u2_none;
-      }
-      case u2_nock_0: {
-        if ( u2_no == u2_stud(gal) ) {
-          u2_rl_lose(wir_r, bus);
-          return u2_none;
+      {
+        u2_noun p_hod, q_hod, r_hod;
+
+        /* XX: translate hod to old clue form.
+        */
+        if ( u2_no == u2_as_trel(hod, &p_hod, &q_hod, &r_hod) ) {
+          u2z(hod);
+          return pro;
         }
         else {
-          u2_weak dof = u2_frag(gal, bus);
+          u2_noun xod;
 
-          if ( u2_none == dof ) {
-            u2_rl_lose(wir_r, bus);
-            return u2_none;
+          if ( u2_yes == u2_dust(q_hod) &&
+               (_1 == u2_h(q_hod)) &&
+               (_0 == u2_t(q_hod)) ) {
+            q_hod = 0;
           }
-          else {
-            u2_weak cul;
+          xod = u2_rt(u2_Wire, u2k(q_hod),
+                             u2k(p_hod),
+                             u2k(r_hod));
+          u2z(hod);
+          hod = xod;
+        }
+        u2_tx_sys_bit(u2_Wire, u2_yes);
+        pro = u2_ds_mine(u2_Wire, hod, pro);
+        u2_tx_sys_bit(u2_Wire, u2_no);
+ 
+        u2z(hod);
+        return pro;
+      }
+    }
+
+    case c3__memo: {
+      u2z(hod);
+      {
+        pro = u2_rl_find_cell(u2_Wire, 0, bus, nex);
+
+        if ( pro != u2_none ) {
+          u2_tx_did_fin(u2_Wire, 1);
+          u2z(bus);
+          u2z(nex);
+
+          return pro;
+        } else {
+          pro = _nock_cool(u2k(bus), u2k(nex));
+          {
+            u2_noun sav;
             
-            cul = u2_wr_ice(wir_r, dof);
+            u2_tx_sys_bit(u2_Wire, u2_yes);
+            sav = u2_rl_save_cell(u2_Wire, 0, bus, nex, pro);
+            u2_tx_sys_bit(u2_Wire, u2_no);
 
-            u2_rl_lose(wir_r, bus);
-            return cul;
+            u2_tx_did_pod(u2_Wire, 1);
+            u2_tx_did_fin(u2_Wire, 1);
+
+            u2z(bus); u2z(nex);
+            return sav;
           }
         }
       }
-      case u2_nock_1: {
-        u2_noun sug;
+    }
 
-        u2_rl_lose(wir_r, bus);
+    case c3__ping: {
+      u2_tx_sys_bit(u2_Wire, u2_yes);
+      u2_tx_did_act(u2_Wire, hod);
+      u2_tx_sys_bit(u2_Wire, u2_no);
+      u2z(hod);
 
-        sug = u2_wr_ice(wir_r, gal);
-        return sug;
+      return _nock_cool(bus, nex);
+    }
+
+    case c3__live: {
+      u2_flag qox;
+
+      u2_tx_sys_bit(u2_Wire, u2_yes);
+      qox = u2_tx_task_in(u2_Wire, hod);
+      u2_tx_sys_bit(u2_Wire, u2_no);
+
+      u2z(hod);
+      if ( u2_no == qox ) {
+        return _nock_cool(bus, nex);
+      } else {
+        pro = _nock_cool(bus, nex);
+
+        u2_tx_task_out(u2_Wire);
+        return pro;
       }
-      case u2_nock_2: {
-        if ( u2_no == u2_dust(gal) ) {
-          u2_rl_lose(wir_r, bus);
-          return u2_none;
-        } else {
-          u2_noun mis = u2_h(gal);
-          u2_noun paz = u2_t(gal);
-          u2_weak sep, dom;
+    }
 
-          LoomSink; u2_tx_sink_cas(wir_r);
-          dom = _nock_rock_keep(wir_r, bus, paz);
-          u2_tx_rise_cas(wir_r); LoomRise;
+    case c3__sole: {
+      u2z(hod);
+      {
+        pro = _nock_cool(bus, nex);
 
-          if ( u2_none == dom ) { 
-            u2_rl_lose(wir_r, bus);
-            return u2_none;
-          }
-
-          LoomSink; u2_tx_sink_cas(wir_r);
-          sep = _nock_rock(wir_r, bus, mis);
-          u2_tx_rise_cas(wir_r); LoomRise;
-
-          if ( u2_none == sep ) {
-            u2_rl_lose(wir_r, dom);
-            return u2_none;
-          }
-          if ( u2_no == u2_rl_senior(wir_r, dom) ) {
-            u2_weak hoz;
-           
-            LoomSink; u2_tx_sink_cas(wir_r);
-            hoz = _nock_rock(wir_r, sep, dom);
-            u2_tx_rise_cas(wir_r); LoomRise;
-
-            u2_rl_lose(wir_r, dom);
-            return hoz;
-          }
-          else {
-            bus = sep;
-            fol = dom;
-            continue;
-          }
-        }
-      }
-      case u2_nock_3: {
-        u2_weak gof, laz;
-
-        LoomSink; u2_tx_sink_cas(wir_r);
-        gof = _nock_rock(wir_r, bus, gal);
-        u2_tx_rise_cas(wir_r); LoomRise;
-
-        laz = (gof == u2_none) ? u2_none : u2_dust(gof);
-
-        u2_rl_lose(wir_r, gof);
-        return laz;
-      }
-      case u2_nock_4: {
-        u2_weak gof, laz;
-       
-        LoomSink; u2_tx_sink_cas(wir_r);
-        gof = _nock_rock(wir_r, bus, gal);
-        u2_tx_rise_cas(wir_r); LoomRise;
-
-        laz = u2_rl_vint(wir_r, gof);
-        return laz;
-      }
-      case u2_nock_5: {
-        if ( u2_no == u2_dust(gal) ) {
-          u2_rl_lose(wir_r, bus);
+        if ( u2_none == pro ) {
           return u2_none;
         }
-        else {
-          u2_weak dib, rum, laz;
-         
-          LoomSink; u2_tx_sink_cas(wir_r);
-          dib = _nock_rock_keep(wir_r, bus, u2_h(gal));
-          rum = _nock_rock(wir_r, bus, u2_t(gal));
-          u2_tx_rise_cas(wir_r); LoomRise;
+        else { 
+          u2_noun nuu;
 
-          if ( (u2_none == dib) || (u2_none == rum) ) {
-            laz = u2_none;
+          u2_tx_sys_bit(u2_Wire, u2_yes);
+          nuu = u2_rl_uniq(u2_Wire, pro);
+          u2_tx_sys_bit(u2_Wire, u2_no);
+
+          u2_tx_did_fin(u2_Wire, 1);
+          if ( nuu == pro ) {
+            u2_tx_did_pod(u2_Wire, 1);
           }
-          else {
-            laz = u2_sing(dib, rum);
-          }
-
-          u2_rl_lose(wir_r, dib);
-          u2_rl_lose(wir_r, rum);
-          return laz;
-        }
-      }
-      case u2_nock_6: {
-        u2_weak yor, fli, paw;
-
-        if ( u2_no == u2_as_trel(gal, &yor, &fli, &paw) ) {
-          u2_rl_lose(wir_r, bus);
-          return u2_none;
-        } 
-        else {
-          u2_weak gyl;
-         
-          LoomSink; u2_tx_sink_cas(wir_r);
-          gyl = _nock_rock_keep(wir_r, bus, yor);
-          u2_tx_rise_cas(wir_r); LoomRise;
-
-          switch ( gyl ) {
-            case 0: {
-              fol = fli;
-              continue;
-            }
-            case 1: {
-              fol = paw;
-              continue;
-            }
-            default: {
-              u2_rl_lose(wir_r, gyl);
-              u2_rl_lose(wir_r, bus);
-              return u2_none;
-            }
-          }
-        }
-      }
-      case u2_nock_7: {
-        if ( u2_no == u2_dust(gal) ) {
-          u2_rl_lose(wir_r, bus);
-
-          return u2_none; 
-        } else {
-          u2_noun meg = u2_h(gal);
-          u2_noun fas = u2_t(gal);
-          u2_noun bod;
-
-          LoomSink; u2_tx_sink_cas(wir_r);
-          bod = _nock_rock(wir_r, bus, meg);
-          u2_tx_rise_cas(wir_r); LoomRise;
-
-          if ( u2_none == bod ) {
-            return u2_none;
-          }
-          bus = bod;
-          fol = fas;
-          continue;
-        }
-      }
-      case u2_nock_8: {
-        if ( u2_no == u2_dust(gal) ) {
-          u2_rl_lose(wir_r, bus);
-          return u2_none; 
-        } else {
-          u2_noun meg = u2_h(gal);
-          u2_noun fas = u2_t(gal);
-          u2_noun bod, har;
-
-          LoomSink; u2_tx_sink_cas(wir_r); 
-          bod = _nock_rock_keep(wir_r, bus, meg);
-          u2_tx_rise_cas(wir_r); LoomRise;
-
-          if ( u2_none == bod ) {
-            u2_rl_lose(wir_r, bus);
-            return u2_none;
-          }
-          if ( u2_none == (har = u2_rl_cell(wir_r, bus, bod)) ) {
-            return u2_none;
-          }
-          bus = har;
-          fol = fas;
-          continue;
-        }
-      }
-      case u2_nock_9: {
-        if ( u2_no == u2_dust(gal) ) {
-          u2_rl_lose(wir_r, bus);
-
-          return u2_none; 
-        } else {
-          u2_noun fac = u2_h(gal);
-          u2_noun dym = u2_t(gal);
-          u2_noun sep, dom, pro, xip;
-
-          if ( u2_no == u2_stud(fac) ) {
-            u2_rl_lose(wir_r, bus);
-            return u2_none;
-          }
-          else {
-            LoomSink; u2_tx_sink_cas(wir_r);
-            sep = _nock_rock(wir_r, bus, dym);
-            u2_tx_rise_cas(wir_r); LoomRise;
-
-            if ( u2_none == sep ) {
-              return u2_none;
-            }
-            u2_tx_sys_bit(wir_r, u2_yes);
-
-            if ( u2_none != (xip = u2_ds_find(wir_r, sep)) ) {
-#if 0
-              {
-                c3_c *cos_c = u2_ho_cstring(xip);
-
-                printf("jet %s\n", cos_c);
-#if 0
-                u2_noun cos = u2_bn_string(wir_r, cos_c);
-                
-                u2_tx_did_act(wir_r, cos);
-                u2_rz(wir_r, cos);
-#endif
-                free(cos_c);
-              }
-#endif
-              pro = u2_ho_kick(wir_r, xip, sep, fac);
-              u2_tx_sys_bit(wir_r, u2_no);
-
-              u2_rl_lose(wir_r, sep);
-              return pro;
-            }
-            else {
-              u2_tx_sys_bit(wir_r, u2_no);
-            }
-
-            if ( u2_none == (dom = u2_frag(fac, sep)) ) {
-              u2_rl_lose(wir_r, sep);
-              return u2_none;
-            }
-            if ( u2_no == u2_rl_senior(wir_r, dom) ) {
-              u2_rl_gain(wir_r, dom);
-
-              LoomSink; u2_tx_sink_cas(wir_r);
-              pro = _nock_rock(wir_r, sep, dom);
-              u2_tx_rise_cas(wir_r); LoomRise;
-
-              u2_rl_lose(wir_r, dom);
-              return pro;
-            }
-
-            bus = sep;
-            fol = dom;
-            continue;
-          }
-        }
-      }
-      case u2_nock_10: {
-        if ( u2_no == u2_dust(gal) ) {
-          return u2_none;
-        } else {
-          u2_noun guz = u2_h(gal);
-          u2_noun zom = u2_t(gal);
-          u2_weak zep, hod, pro;
-
-          if ( u2_no == u2_dust(guz) ) {
-            zep = guz;
-            hod = u2_nul;
-          }
-          else {
-            zep = u2_h(guz);
-            hod = _nock_rock_keep(wir_r, bus, u2_t(guz));
-
-            if ( u2_none == hod ) {
-              u2_rl_lose(wir_r, bus);
-              return u2_none;
-            }
-          }
-
-          switch ( zep ) {
-            default: u2_rl_lose(wir_r, hod); fol = zom; continue;
-
-            case c3__bean: {
-              u2_noun tax = u2_rx(wir_r, u2_wire_tax(wir_r));
-              u2_noun tac = u2_rc(wir_r, c3__bean, hod);
-
-              u2_wire_tax(wir_r) = u2_rc(wir_r, tac, tax);
-              {
-                LoomSink; u2_tx_sink_cas(wir_r);
-                pro = _nock_rock(wir_r, bus, zom);
-                u2_tx_rise_cas(wir_r); LoomRise;
-              }
-
-              if ( pro != u2_none ) {
-                u2_rz(wir_r, u2_wire_tax(wir_r));
-                u2_wire_tax(wir_r) = tax;
-              }
-              return pro;
-            }
-            case c3__mean: {
-              u2_noun tax = u2_rx(wir_r, u2_wire_tax(wir_r));
-              u2_noun tac = u2_rc(wir_r, c3__mean, hod);
-
-              u2_wire_tax(wir_r) = u2_rc(wir_r, tac, tax);
-              {
-                LoomSink; u2_tx_sink_cas(wir_r);
-                pro = _nock_rock(wir_r, bus, zom);
-                u2_tx_rise_cas(wir_r); LoomRise;
-              }
-
-              if ( pro != u2_none ) {
-                u2_rz(wir_r, u2_wire_tax(wir_r));
-                u2_wire_tax(wir_r) = tax;
-              }
-              return pro;
-            }
-            case c3__spot: {
-              u2_noun tax = u2_rx(wir_r, u2_wire_tax(wir_r));
-              u2_noun tac = u2_rc(wir_r, c3__spot, hod);
-
-              if ( (u2_no == u2_dust(hod)) || (u2_no == u2_stud(u2_h(hod))) ){
-                u2_err(wir_r, "bad guz", guz);
-                u2_err(wir_r, "bad hod", hod);
-                c3_assert(0);
-              }
-              u2_wire_tax(wir_r) = u2_rc(wir_r, tac, tax);
-              {
-                LoomSink; u2_tx_sink_cas(wir_r);
-                pro = _nock_rock(wir_r, bus, zom);
-                u2_tx_rise_cas(wir_r); LoomRise;
-              }
-
-              if ( pro != u2_none ) {
-                u2_rz(wir_r, u2_wire_tax(wir_r));
-                u2_wire_tax(wir_r) = tax;
-              }
-              return pro;
-            }
-
-            case c3__loaf: {
-              u2_tx_sys_bit(wir_r, u2_yes);
-              u2_tx_loaf(wir_r, hod);
-              u2_tx_sys_bit(wir_r, u2_no);
-
-              u2_rl_lose(wir_r, hod);
-              fol = zom; 
-              continue;
-            }
-
-            case c3__turd: {
-              u2_tx_sys_bit(wir_r, u2_yes);
-              u2_err(wir_r, "turd", hod);
-              u2_tx_sys_bit(wir_r, u2_no);
-
-              u2_rl_lose(wir_r, hod);
-              fol = zom; 
-              continue;
-            }
-
-            case c3__mine: {
-              LoomSink; u2_tx_sink_cas(wir_r);
-              pro = _nock_rock(wir_r, bus, zom);
-              u2_tx_rise_cas(wir_r); LoomRise; 
-
-              if ( u2_none == pro ) {
-                u2_rl_lose(wir_r, hod);
-
-                return u2_none;
-              }
-              else {
-                u2_tx_sys_bit(wir_r, u2_yes);
-                pro = u2_ds_mine(wir_r, hod, pro);
-                u2_tx_sys_bit(wir_r, u2_no);
-         
-                u2_rl_lose(wir_r, hod);
-                return pro;
-              }
-            }
-            case c3__fast: {
-              LoomSink; u2_tx_sink_cas(wir_r);
-              pro = _nock_rock(wir_r, bus, zom);
-              u2_tx_rise_cas(wir_r); LoomRise; 
-
-              if ( u2_none == pro ) {
-                u2_rl_lose(wir_r, hod);
-
-                return u2_none;
-              }
-              else {
-                u2_noun p_hod, q_hod, r_hod;
-
-                /* XX: translate hod to old clue form.
-                */
-                if ( u2_no == u2_as_trel(hod, &p_hod, &q_hod, &r_hod) ) {
-                  u2_rz(wir_r, hod);
-                  return pro;
-                }
-                else {
-                  u2_noun xod;
-
-                  if ( u2_yes == u2_dust(q_hod) &&
-                       (_1 == u2_h(q_hod)) &&
-                       (_0 == u2_t(q_hod)) ) {
-                    q_hod = 0;
-                  }
-                  xod = u2_rt(wir_r, u2_rx(wir_r, q_hod),
-                                     u2_rx(wir_r, p_hod),
-                                     u2_rx(wir_r, r_hod));
-                  u2_rz(wir_r, hod);
-                  hod = xod;
-                }
-                u2_tx_sys_bit(wir_r, u2_yes);
-                pro = u2_ds_mine(wir_r, hod, pro);
-                u2_tx_sys_bit(wir_r, u2_no);
-         
-                u2_rl_lose(wir_r, hod);
-                return pro;
-              }
-            }
-            case c3__memo: {
-              u2_rl_lose(wir_r, hod);
-              {
-#if 0
-                pro = u2_ba_find(wir_r, bus, zom);
-#else
-                pro = u2_rl_find_cell(wir_r, 0, bus, zom);
-#endif
-                if ( pro != u2_none ) {
-                  u2_tx_did_fin(wir_r, 1);
-                  u2_rl_lose(wir_r, bus);
-
-                  return pro;
-                } else {
-                  LoomSink; u2_tx_sink_cas(wir_r);
-                  pro = _nock_rock_keep(wir_r, bus, zom);
-                  u2_tx_rise_cas(wir_r); LoomRise;
-
-                  if ( u2_none == pro ) {
-                    return u2_none;
-                  }
-                  else {
-                    u2_noun sav;
-                    
-                    u2_tx_sys_bit(wir_r, u2_yes);
-#if 0
-                    sav = u2_ba_save(wir_r, bus, zom, pro);
-#else
-                    sav = u2_rl_save_cell(wir_r, 0, bus, zom, pro);
-#endif
-                    u2_tx_sys_bit(wir_r, u2_no);
-
-                    u2_tx_did_pod(wir_r, 1);
-                    u2_tx_did_fin(wir_r, 1);
-
-                    u2_rl_lose(wir_r, bus);
-#if 0
-                    if ( sav != u2_none ) {
-                      u2_rl_lose(wir_r, pro);
-                      return sav;
-                    } else {
-                      return pro;
-                    }
-#else
-                    return sav;
-#endif
-                  }
-                }
-              }
-            }
-
-            case c3__ping: {
-              u2_tx_sys_bit(wir_r, u2_yes);
-              u2_tx_did_act(wir_r, hod);
-              u2_tx_sys_bit(wir_r, u2_no);
-              u2_rz(wir_r, hod);
-
-              fol = zom;
-              continue;
-            }
-
-            case c3__live: {
-              u2_flag qox;
-
-              u2_tx_sys_bit(wir_r, u2_yes);
-              qox = u2_tx_task_in(wir_r, hod);
-              u2_tx_sys_bit(wir_r, u2_no);
-
-              u2_rz(wir_r, hod);
-              if ( u2_no == qox ) {
-                fol = zom; 
-                continue;
-              } else {
-                LoomSink; u2_tx_sink_cas(wir_r);
-                pro = _nock_rock(wir_r, bus, zom);
-                u2_tx_rise_cas(wir_r); LoomRise;
-
-                u2_tx_task_out(wir_r);
-                return pro;
-              }
-            }
-
-            case c3__sole: {
-              u2_rl_lose(wir_r, hod);
-              {
-                LoomSink; u2_tx_sink_cas(wir_r);
-                pro = _nock_rock(wir_r, bus, zom);
-                u2_tx_rise_cas(wir_r); LoomRise;
-
-                if ( u2_none == pro ) {
-                  return u2_none;
-                }
-                else { 
-                  u2_noun nuu;
-
-                  u2_tx_sys_bit(wir_r, u2_yes);
-                  nuu = u2_rl_uniq(wir_r, pro);
-                  u2_tx_sys_bit(wir_r, u2_no);
-
-                  u2_tx_did_fin(wir_r, 1);
-                  if ( nuu == pro ) {
-                    u2_tx_did_pod(wir_r, 1);
-                  }
-                  return pro;
-                }
-              }
-            }
-          }
+          return pro;
         }
       }
     }
   }
 }
 
-/* u2_nk_soft():
-**
-**   Compute `(nock bus fol)`, interpreter first.
+/* _nock_cool(): nock, transferring arguments.
 */
-u2_weak                                                           //  transfer
-u2_nk_soft(u2_wire wir_r,
-           u2_noun bus,                                           //  transfer
-           u2_noun fol)                                           //  retain
+static u2_noun
+_nock_cool(u2_noun bus,
+           u2_noun fol)
+{
+  u2_noun hib, gal;
+
+  _nock_sink();
+
+  while ( 1 ) {
+    u2_cm_poll();
+    u2_tx_did_hop(u2_Wire, 1);
+
+    if ( u2_no == u2du(fol) ) {
+      return _nock_exit();
+    }
+    else { 
+      hib = u2fh(fol);
+      gal = u2ft(fol);
+    }
+
+    if ( u2_yes == u2du(hib) ) {
+      u2_noun poz, riv;
+
+      poz = _nock_cool(u2k(bus), u2k(hib));
+      riv = _nock_cool(bus, u2k(gal));
+
+      u2z(fol);
+      _nock_rise();
+      return u2_cn_cell(poz, riv);
+    }
+    else switch ( hib ) {
+      default: return _nock_exit();
+
+      case 0: {
+        if ( u2_no == u2_cr_ud(gal) ) {
+          return _nock_exit();
+        }
+        else {
+          u2_noun pro = u2k(u2at(gal, bus));
+
+          u2z(bus); u2z(fol);
+          _nock_rise();
+          return pro;
+        }
+      }
+      case 1: {
+        u2_noun pro = u2k(gal);
+
+        u2z(bus); u2z(fol);
+        _nock_rise();
+        return pro;
+      }
+      c3_assert(!"not reached");
+
+      case 2: {
+        if ( u2_no == u2du(gal) ) {
+          return u2_cm_bail(c3__exit);
+        }
+        else {
+          u2_noun nex = _nock_cool(u2k(bus), u2k(u2ft(gal)));
+          u2_noun seb = _nock_cool(bus, u2k(u2fh(gal)));
+
+          u2z(fol);
+          bus = seb;
+          fol = nex;
+          continue;
+        }
+      }
+      c3_assert(!"not reached");
+
+      case 3: {
+        u2_noun gof, pro;
+
+        gof = _nock_cool(bus, u2k(gal));
+        pro = u2du(gof);
+
+        u2z(gof); u2z(fol);
+        _nock_rise();
+        return pro;
+      }
+      c3_assert(!"not reached");
+
+      case 4: {
+        u2_noun gof, pro;
+
+        gof = _nock_cool(bus, u2k(gal));
+        pro = u2_rl_vint(u2_Wire, gof);
+
+        u2z(gof); u2z(fol);
+        _nock_rise();
+        return pro;
+      }
+      c3_assert(!"not reached");
+
+      case 5: {
+        if ( u2_no == u2du(gal) ) {
+          return _nock_exit();
+        }
+        else {
+          u2_noun dib = _nock_cool(u2k(bus), u2k(u2fh(gal)));
+          u2_noun rum = _nock_cool(bus, u2k(u2ft(gal)));
+          u2_noun pro = u2_cr_sing(dib, rum);
+
+          u2z(rum); u2z(dib); u2z(fol);
+          _nock_rise();
+          return pro;
+        }
+      }
+      c3_assert(!"not reached");
+
+      case 6: {
+        u2_noun b_gal, c_gal, d_gal;
+
+        u2_cx_trel(gal, &b_gal, &c_gal, &d_gal);
+        {
+          u2_noun tys = _nock_cool(u2k(bus), u2k(b_gal));
+          u2_noun nex;
+
+          if ( 0 == tys ) {
+            nex = u2k(c_gal);
+          } else if ( 1 == tys ) {
+            nex = u2k(d_gal);
+          } else return _nock_exit();
+
+          u2z(fol);
+          fol = nex;
+          continue;
+        }
+      }
+      c3_assert(!"not reached");
+
+      case 7: {
+        u2_noun b_gal, c_gal;
+      
+        u2_cx_cell(gal, &b_gal, &c_gal);
+        {
+          u2_noun bod = _nock_cool(bus, u2k(b_gal));
+          u2_noun nex = u2k(c_gal);
+
+          u2z(fol);
+          bus = bod;
+          fol = nex;
+          continue;
+        }
+      }
+      c3_assert(!"not reached");
+
+      case 8: {
+        u2_noun b_gal, c_gal;
+      
+        u2_cx_cell(gal, &b_gal, &c_gal);
+        {
+          u2_noun bod = u2nc(bus, _nock_cool(u2k(bus), u2k(b_gal)));
+          u2_noun nex = u2k(c_gal);
+
+          u2z(fol);
+          bus = bod;
+          fol = nex;
+          continue;
+        }
+      }
+      c3_assert(!"not reached");
+
+      case 9: {
+        u2_noun b_gal, c_gal;
+      
+        u2_cx_cell(gal, &b_gal, &c_gal);
+        if ( u2_no == u2ud(b_gal) ) {
+          return _nock_exit();
+        } 
+        else {
+          u2_noun seb = _nock_cool(bus, u2k(c_gal));
+          u2_weak xip;
+
+          u2_tx_sys_bit(u2_Wire, u2_yes);
+          xip = u2_ds_find(u2_Wire, seb);
+
+          if ( u2_none != xip ) {
+            u2_noun pro = u2_ho_kick(u2_Wire, xip, seb, b_gal);
+
+            u2_tx_sys_bit(u2_Wire, u2_no);
+            if ( u2_none == pro ) {
+              return _nock_exit();
+            } 
+            else {
+              u2z(seb); u2z(fol);
+              _nock_rise();
+              return pro;
+            }
+          }
+          else {
+            u2_tx_sys_bit(u2_Wire, u2_no);
+            {
+              u2_noun nex = u2_ct(u2at(b_gal, seb));
+
+              u2z(fol);
+              bus = seb;
+              fol = nex;
+              continue;
+            }
+          }
+        }
+      }
+      c3_assert(!"not reached");
+
+      case 10: {
+        u2_noun p_gal, q_gal;
+      
+        u2_cx_cell(gal, &p_gal, &q_gal);
+        {
+          u2_noun zep, hod, nex, pro;
+
+          if ( u2_yes == u2du(p_gal) ) {
+            u2_noun b_gal = u2fh(p_gal);
+            u2_noun c_gal = u2ft(p_gal);
+            u2_noun d_gal = q_gal;
+
+            zep = u2k(b_gal);
+            hod = _nock_cool(u2k(bus), u2_ct(c_gal));
+            nex = u2_ct(d_gal);
+          } 
+          else {
+            u2_noun b_gal = p_gal;
+            u2_noun c_gal = q_gal;
+
+            zep = u2k(b_gal);
+            hod = u2_nul;
+            nex = u2_ct(c_gal);
+          }
+
+          u2_cz(fol);
+          _nock_sink();
+          pro = _nock_hint(zep, hod, bus, nex);
+          _nock_rise();
+          _nock_rise();
+          return pro; 
+        }
+      }
+      c3_assert(!"not reached");
+    }
+  }
+}
+
+/* u2_cn_nock(): external nock interface. 
+*/
+u2_noun
+u2_cn_nock(u2_noun bus,
+           u2_noun fol)
 {
   u2_weak pro;
   u2_flag bit;
 
-  bit = u2_tx_sys_bit(wir_r, u2_no);
+  bit = u2_tx_sys_bit(u2_Wire, u2_no);
   c3_assert(bit == u2_yes);
-  bit = u2_tx_glu_bit(wir_r, u2_yes);
+  bit = u2_tx_glu_bit(u2_Wire, u2_yes);
 
-  LoomSink; u2_tx_sink_cas(wir_r);
-  pro = _nock_rock(wir_r, bus, fol);
-  u2_tx_rise_cas(wir_r); LoomRise;
+  _nock_sink();
+  pro = _nock_cool(bus, fol);
+  _nock_rise();
 
-  u2_tx_sys_bit(wir_r, u2_yes);
-  u2_tx_glu_bit(wir_r, bit);
+  u2_tx_sys_bit(u2_Wire, u2_yes);
+  u2_tx_glu_bit(u2_Wire, bit);
 
   return pro;
-}
-
-/* u2_nk_nock():
-**
-**   Compute `(nock bus fol)`.
-*/
-u2_weak                                                           //  transfer
-u2_nk_nock(u2_wire wir_r,
-           u2_weak bus,                                           //  transfer
-           u2_weak fol)                                           //  retain
-{
-  if ( u2_none == fol ) {
-    u2_rl_lose(wir_r, bus);
-    return u2_none;
-  }
-  else if ( u2_none == bus ) {
-    return u2_none;
-  }
-  else {
-    return u2_nk_soft(wir_r, bus, fol);
-  }
-}
-
-/* u2_nk_mong():
-**
-**   Call with new convention.
-*/
-u2_weak                                                           //  transfer
-u2_nk_mong(u2_wire wir_r,
-           u2_weak gat,                                           //  retain
-           u2_weak sam)                                           //  transfer
-{
-  u2_noun cor, xip;
-
-  cor = u2_rc
-      (wir_r,
-       u2_rc(wir_r, u2_rx(wir_r, u2_sh(u2_sh(gat))), sam),
-       u2_rx(wir_r, u2_st(gat)));
-
-  if ( u2_none != (xip = u2_ds_find(wir_r, cor)) ) {
-    u2_noun pro = u2_ho_kick(wir_r, xip, cor, u2_cv_noc);
-
-    u2_rz(wir_r, cor);
-    return pro;
-  }
-  else return u2_nk_nock(wir_r, cor, u2_st(gat));
-}
-
-/* u2_nk_kick():
-**
-**   Fire `gat` without changing the sample.
-*/
-u2_weak                                                           //  transfer
-u2_nk_kick(u2_wire wir_r,
-           u2_weak gat)                                           //  retain
-{
-  u2_noun xip;
-
-  if ( u2_none != (xip = u2_ds_find(wir_r, gat)) ) {
-    u2_noun pro = u2_ho_kick(wir_r, xip, gat, u2_cv_noc);
-
-    return pro;
-  }
-  else {
-    return u2_nk_nock
-      (wir_r,
-       u2_rx(wir_r, gat),
-       u2_st(gat));
-  }
 }

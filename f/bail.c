@@ -48,13 +48,16 @@ u2_bl_done(u2_ray wir_r,
 **  In both cases, a mark-and-sweep is necessary (and
 **  not currently performed) to clean up leaks.
 */
+  extern u2_noun u2_Flag_Abort;
 u2_noun
 u2_bl_bail(u2_wire wir_r,
            c3_l    how_l)
 {
   u2_ray kit_r = u2_wire_kit_r(wir_r);
 
-  c3_assert(0);
+  if ( u2_yes == u2_Flag_Abort ) {
+    c3_assert(0);
+  }
   _longjmp((void *)u2_at_cord(u2_kite_buf_r(kit_r), c3_wiseof(jmp_buf)), how_l);
   return u2_none;
 }
@@ -126,7 +129,7 @@ u2_bl_good(u2_ray  wir_r,
            u2_weak som)
 {
   if ( u2_none == som ) {
-    return u2_bl_bail(wir_r, c3__fail);
+    return u2_bl_bail(wir_r, c3__exit);
   }
   else return som;
 }
@@ -138,7 +141,7 @@ u2_bl_flat(u2_ray  wir_r,
            u2_weak som)
 {
   if ( u2_none == som ) {
-    return u2_bl_bail(wir_r, c3__fail);
+    return u2_bl_bail(wir_r, c3__exit);
   }
   else return som;
 }
@@ -151,7 +154,7 @@ u2_noun
 u2_bi_h(u2_ray  wir_r,
         u2_noun a)
 {
-  if ( u2_no == u2_dust(a) ) return u2_bl_bail(wir_r, c3__fail);
+  if ( u2_no == u2_dust(a) ) return u2_bl_bail(wir_r, c3__exit);
 
   return u2_h(a);
 }
@@ -164,7 +167,7 @@ u2_noun
 u2_bi_t(u2_ray  wir_r,
         u2_noun a)
 {
-  if ( u2_no == u2_dust(a) ) return u2_bl_bail(wir_r, c3__fail);
+  if ( u2_no == u2_dust(a) ) return u2_bl_bail(wir_r, c3__exit);
 
   return u2_t(a);
 }
@@ -181,7 +184,7 @@ u2_bi_frag(u2_ray  wir_r,
   u2_weak c = u2_frag(a, b);
 
   if ( u2_none == c ) {
-    return u2_bl_bail(wir_r, c3__fail);
+    return u2_bl_bail(wir_r, c3__exit);
   } else return c;
 }
 
@@ -197,7 +200,7 @@ u2_bi_met(u2_ray  wir_r,
           c3_y    a_y,
           u2_noun b)
 {
-  if ( u2_no == u2_stud(b) ) return u2_bl_bail(wir_r, c3__fail);
+  if ( u2_no == u2_stud(b) ) return u2_bl_bail(wir_r, c3__exit);
 
   return u2_met(a_y, b);
 }
@@ -211,7 +214,7 @@ u2_bi_bit(u2_ray  wir_r,
           c3_w    a_w,
           u2_noun b)
 {
-  if ( u2_no == u2_stud(b) ) return u2_bl_bail(wir_r, c3__fail);
+  if ( u2_no == u2_stud(b) ) return u2_bl_bail(wir_r, c3__exit);
 
   return u2_bit(a_w, b);
 }
@@ -225,7 +228,7 @@ u2_bi_byte(u2_ray  wir_r,
            c3_w    a_w,
            u2_noun b)
 {
-  if ( u2_no == u2_stud(b) ) return u2_bl_bail(wir_r, c3__fail);
+  if ( u2_no == u2_stud(b) ) return u2_bl_bail(wir_r, c3__exit);
 
   return u2_byte(a_w, b);
 }
@@ -241,7 +244,7 @@ u2_bi_bytes(u2_ray  wir_r,
             c3_y*   c_y,
             u2_noun d)
 {
-  if ( u2_no == u2_stud(d) ) u2_bl_bail(wir_r, c3__fail);
+  if ( u2_no == u2_stud(d) ) u2_bl_bail(wir_r, c3__exit);
 
   u2_bytes(a_w, b_w, c_y, d);
 }
@@ -255,7 +258,7 @@ u2_bi_mp(u2_ray  wir_r,
          mpz_t   a_mp,
          u2_noun b)
 {
-  if ( u2_no == u2_stud(b) ) u2_bl_bail(wir_r, c3__fail);
+  if ( u2_no == u2_stud(b) ) u2_bl_bail(wir_r, c3__exit);
 
   u2_mp(a_mp, b);
 }
@@ -269,7 +272,7 @@ u2_bi_word(u2_ray  wir_r,
            c3_w    a_w,
            u2_noun b)
 {
-  if ( u2_no == u2_stud(b) ) return u2_bl_bail(wir_r, c3__fail);
+  if ( u2_no == u2_stud(b) ) return u2_bl_bail(wir_r, c3__exit);
 
   return u2_word(a_w, b);
 }
@@ -285,7 +288,7 @@ u2_bi_words(u2_ray  wir_r,
             c3_w*   c_w,
             u2_noun d)
 {
-  if ( u2_no == u2_stud(d) ) u2_bl_bail(wir_r, c3__fail);
+  if ( u2_no == u2_stud(d) ) u2_bl_bail(wir_r, c3__exit);
 
   u2_words(a_w, b_w, c_w, d);
 }
@@ -889,7 +892,7 @@ u2_bi_cell(u2_wire  wir_r,
            u2_noun* c)
 {
   if ( u2_no == u2_as_cell(a, b, c) ) {
-    u2_bl_bail(wir_r, c3__fail);
+    u2_bl_bail(wir_r, c3__exit);
   }
 }
 
@@ -906,7 +909,7 @@ u2_bi_qual(u2_wire  wir_r,
            u2_noun* e)
 {
   if ( u2_no == u2_as_qual(a, b, c, d, e) ) {
-    u2_bl_bail(wir_r, c3__fail);
+    u2_bl_bail(wir_r, c3__exit);
   }
 }
 
@@ -924,7 +927,7 @@ u2_bi_quil(u2_wire  wir_r,
            u2_noun* f)
 {
   if ( u2_no == u2_as_quil(a, b, c, d, e, f) ) {
-    u2_bl_bail(wir_r, c3__fail);
+    u2_bl_bail(wir_r, c3__exit);
   }
 }
 
@@ -940,7 +943,7 @@ u2_bi_trel(u2_wire  wir_r,
            u2_noun* d)
 {
   if ( u2_no == u2_as_trel(a, b, c, d) ) {
-    u2_bl_bail(wir_r, c3__fail);
+    u2_bl_bail(wir_r, c3__exit);
   }
 }
 

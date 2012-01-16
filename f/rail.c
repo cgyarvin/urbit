@@ -673,14 +673,11 @@ _rl_bloq_grap(u2_ray ral_r,
 
   nov_r = _rl_bloq_grab(ral_r, len_w);
 
-#if 0
-  if ( (nov_r - c3_wiseof(u2_loom_rail_box)) == 0x99d5931 ) {
+  if ( (nov_r - c3_wiseof(u2_loom_rail_box)) == 0xacba24 ) {
     printf("alloc leak %d - nov_r %x\n", xzx, nov_r);
-    if ( xzx == 0 ) { u2_bl_error(0, "leakage"); }
-    // if ( xzx == 0 ) { LEAK = 1; LEAKY = nov_r; }
+    if ( xzx == 4 ) { u2_bl_error(0, "leakage"); }
     xzx++;
   }
-#endif
   return nov_r;
 }
 #endif
@@ -1442,6 +1439,7 @@ u2_rl_gc_mark_noun(u2_ray  ral_r,
                    u2_noun som)
 {
   c3_w siz_w = 0;
+  c3_assert(som != u2_none);
 
 top:
   if ( u2_fly_is_dog(som) ) {
@@ -1454,7 +1452,7 @@ top:
       u2_ray box_r  = (som_r - c3_wiseof(u2_loom_rail_box));
       c3_w   use_w  = u2_rail_box_use(box_r);
       c3_ws  use_ws = (c3_ws) use_w;
-
+ 
       c3_assert(use_ws != 0);
 
       if ( use_ws < 0 ) {
@@ -1542,10 +1540,10 @@ u2_rl_drain(u2_ray ral_r)
 
 /* u2_rl_gc_sweep(): 
 **
-**   Sweep memory, freeing unused blocks.  Return live words.
+**   Sweep memory, freeing unused blocks.  Match live, save leaked.
 */
 c3_w
-u2_rl_gc_sweep(u2_ray ral_r)
+u2_rl_gc_sweep(u2_ray ral_r, c3_w sav_w)
 {
   u2_ray rut_r = u2_rail_rut_r(ral_r);
   u2_ray hat_r = u2_rail_hat_r(ral_r);
@@ -1564,14 +1562,15 @@ u2_rl_gc_sweep(u2_ray ral_r)
     }
     box_r += siz_w;
   }
-#else
+#endif
+
   while ( box_r < hat_r ) {
     c3_w  siz_w  = u2_rail_box_siz(box_r);
     c3_w  use_w  = u2_rail_box_use(box_r);
     c3_ws use_ws = (c3_ws) use_w;
 
     if ( use_ws > 0 ) {
-      printf("leak: box %x, siz %d, use %d\n", box_r, siz_w, use_w);
+      // printf("leak: box %x, siz %d, use %d\n", box_r, siz_w, use_w);
       lek_w += siz_w;
       u2_rail_box_use(box_r) = 0;
       _rl_bloq_free(ral_r, box_r);
@@ -1585,11 +1584,8 @@ u2_rl_gc_sweep(u2_ray ral_r)
     }
     box_r += siz_w;
   }
-  if ( lek_w ) {
-    fprintf(stderr, "%d bytes leaked\n", (lek_w * 4));
-  }
-  return liv_w;
-#endif 
+  c3_assert(liv_w == sav_w);
+  return lek_w;
 }
 
 #if 0

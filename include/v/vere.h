@@ -39,10 +39,11 @@
         c3_c*   fel_c;                      //  readline filename
         u2_noun pet;                        //  petname of self, atomic
         u2_noun pat;                        //  unix path to self, atomic
-        u2_noun opt;                        //  unix arguments as map
+        u2_noun map;                        //  unix arguments as map
         u2_steg ver_e[257];                 //  stages improving downward
         c3_w    kno_w;                      //  current executing stage
       } u2_host;                            //  host == computer == process
+
 
   /** Global variables.
   **/
@@ -50,8 +51,11 @@
     c3_global  u2_wire  u2_Wire;
     c3_global  c3_c*    u2_Local;
     c3_global  c3_c*    u2_System;
-    c3_global  u2_flag  u2_Quiet;
-    c3_global  u2_flag  u2_Debug;
+
+    c3_global  u2_flag  u2_Flag_Abort;
+    c3_global  u2_flag  u2_Flag_Garbage;
+    c3_global  u2_flag  u2_Flag_Profile;
+    c3_global  u2_flag  u2_Flag_Verbose;
 
 #   define u2_ve_at() ( &u2_Host.ver_e[u2_Host.kno_w] )
 

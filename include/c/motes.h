@@ -4,6 +4,7 @@
 */
   /** Definitions.
   **/
+#   define c3__abo    c3_s3('a','b','o')
 #   define c3__actd   c3_s4('a','c','t','d')
 #   define c3__add    c3_s3('a','d','d')
 #   define c3__all    c3_s3('a','l','l')
@@ -321,6 +322,7 @@
 #   define c3__fung   c3_s4('f','u','n','g')
 #   define c3__funk   c3_s4('f','u','n','k')
 #   define c3__fuse   c3_s4('f','u','s','e')
+#   define c3__gab    c3_s3('g','a','b')
 #   define c3__galb   c3_s4('g','a','l','b')
 #   define c3__gald   c3_s4('g','a','l','d')
 #   define c3__game   c3_s4('g','a','m','e')
@@ -672,6 +674,7 @@
 #   define c3__pret   c3_s4('p','r','e','t')
 #   define c3__prex   c3_s4('p','r','e','x')
 #   define c3__pril   c3_s4('p','r','i','l')
+#   define c3__pro    c3_s3('p','r','o')
 #   define c3__prox   c3_s4('p','r','o','x')
 #   define c3__psdg   c3_s4('p','s','d','g')
 #   define c3__puck   c3_s4('p','u','c','k')
@@ -931,6 +934,7 @@
 #   define c3__west   c3_s4('w','e','s','t')
 #   define c3__what   c3_s4('w','h','a','t')
 #   define c3__wing   c3_s4('w','i','n','g')
+#   define c3__wild   c3_s4('w','i','l','d')
 #   define c3__with   c3_s4('w','i','t','h')
 #   define c3__wnut   c3_s4('w','n','u','t')
 #   define c3__wood   c3_s4('w','o','o','d')

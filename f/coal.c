@@ -184,20 +184,6 @@ u2_cf_flat_save(u2_noun mod,
   }
 }
 
-/* u2_cn_nock():
-**
-**   Nock or bail.
-*/
-u2_noun
-u2_cn_nock(u2_noun bus,
-           u2_noun fol)
-{
-  u2_noun pro = u2_bn_nock(u2_Wire, bus, fol);
-
-  u2_cz(bus); u2_cz(fol);
-  return pro;
-}
-
 /* u2_cn_mong():
 **
 **   Call `(function sample)`.
@@ -315,12 +301,39 @@ u2_cm_done(c3_w qop_w)
   u2_bl_done(u2_Wire, qop_w);
 }
 
-/* u2_cm_sweep(): return bytes swept.
+/* u2_cm_poll(): poll for interrupts, etc.
+*/
+void
+u2_cm_poll()
+{
+  if ( LoomStop ) {
+    LoomStop = 0;
+    if ( LoomIntr ) {
+      LoomIntr = 0;
+
+      fprintf(stderr, "{interrupt}\n");
+      u2_cm_bail(c3__intr);
+    } else {
+      fprintf(stderr, "{stack overflow}\n");
+      u2_cm_bail(c3__wild);
+    }
+  }
+}
+ 
+/* u2_cm_sweep(): return bytes leaked; match bytes saved.
 */
 c3_w
-u2_cm_sweep()
+u2_cm_sweep(c3_w sav_w)
 {
-  return u2_rl_gc_sweep(u2_Wire);
+  return u2_rl_gc_sweep(u2_Wire, sav_w);
+}
+
+/* u2_cm_purge(): purge memo cache.
+*/
+void
+u2_cm_purge()
+{
+  u2_rl_drain(u2_Wire);
 }
 
 /* u2_cm_mark_noun(): mark individual noun.
@@ -468,6 +481,19 @@ u2_ckd_by_get(u2_noun a, u2_noun b)
     u2_cz(c);
     return pro;
   }
+}
+
+/* u2_ckd_by_got(): map get for key `b` in map `a` with fail.
+*/
+u2_noun
+u2_ckd_by_got(u2_noun a, u2_noun b)
+{
+  u2_weak c = u2_ckd_by_get(a, b);
+
+  if ( u2_none == c ) {
+    return u2_cm_bail(c3__exit);
+  } 
+  else return c;
 }
 
 /* u2_ckd_by_put(): map put for key `b`, value `c` in map `a`.
