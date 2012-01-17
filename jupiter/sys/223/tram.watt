@@ -3470,7 +3470,6 @@
     ~|  %fire-wet
     ::  ~~  (dunk(sut [%cell q.q.p p.p]) %fire-wet)
     ?>  ?|  !vet 
-            =(p.p q.q.p) 
             (~(has in rib) [sut dox q.q])
             (mull(sut p, rib (~(put in rib) [sut dox q.q])) %noun dox q.q)
         ==

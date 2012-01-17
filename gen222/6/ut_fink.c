@@ -168,7 +168,7 @@
         j2_mc(Pt6, ut, fink), 
         Tier6_b,
         u2_none, u2_none,
-        j2_mck(Pt6, ut, fink)
+        j2_mck(Pt6, ut, fink), c3__fink,
     },
     { }
   };

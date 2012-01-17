@@ -21,7 +21,7 @@
 #   define  Tier5         u2_jet_live
 //#   define  Tier5_b       (u2_jet_live | u2_jet_test | u2_jet_memo)
 #   define  Tier5_b       u2_jet_live
-#   define  Tier6         u2_jet_live
+#   define  Tier6         u2_jet_dead
 #   define  Tier6_a       Tier6
 #   define  Tier6_b       Tier6
 // #   define  Tier6_b       (u2_jet_live | u2_jet_test)

@@ -245,7 +245,7 @@
         j2_mc(Pt6, ut, fish), 
         Tier6_b_memo,
         u2_none, u2_none,
-        j2_mck(Pt6, ut, fish)
+        j2_mck(Pt6, ut, fish), c3__fish
     },
     { }
   };

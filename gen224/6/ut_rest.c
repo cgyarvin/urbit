@@ -216,7 +216,7 @@
         j2_mc(Pt6, ut, rest), 
         Tier6_b_memo,
         u2_none, u2_none,
-        j2_mck(Pt6, ut, rest)
+        j2_mck(Pt6, ut, rest), c3__rest
     },
     { }
   };

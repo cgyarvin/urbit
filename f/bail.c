@@ -30,6 +30,8 @@ void
 u2_bl_done(u2_ray wir_r,
            u2_ray kit_r)
 {
+  c3_assert(kit_r != 0);
+
   u2_rz(wir_r, u2_kite_tax(u2_wire_kit_r(wir_r)));
   u2_rl_rfree(wir_r, u2_wire_kit_r(wir_r));
 
@@ -48,18 +50,11 @@ u2_bl_done(u2_ray wir_r,
 **  In both cases, a mark-and-sweep is necessary (and
 **  not currently performed) to clean up leaks.
 */
-  extern u2_noun u2_Flag_Abort;
 u2_noun
 u2_bl_bail(u2_wire wir_r,
            c3_l    how_l)
 {
-  u2_ray kit_r = u2_wire_kit_r(wir_r);
-
-  if ( u2_yes == u2_Flag_Abort ) {
-    c3_assert(0);
-  }
-  _longjmp((void *)u2_at_cord(u2_kite_buf_r(kit_r), c3_wiseof(jmp_buf)), how_l);
-  return u2_none;
+  return u2_cm_bail(how_l);
 }
 
 /* u2_bl_push(): push on meaning stack.

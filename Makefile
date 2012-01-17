@@ -601,7 +601,6 @@ BASE_OFILES=\
        $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
-       $(J225_OFILES) \
        $(J224_OFILES) \
        $(J223_OFILES) \
        $(J222_OFILES)

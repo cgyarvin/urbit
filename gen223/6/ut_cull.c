@@ -299,7 +299,7 @@
         j2_mc(Pt6, ut, cull), 
         Tier6_b_memo,
         u2_none, u2_none,
-        j2_mck(Pt6, ut, cull)
+        j2_mck(Pt6, ut, cull), c3__cull,
     },
     { }
   };

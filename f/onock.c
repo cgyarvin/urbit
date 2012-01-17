@@ -23,7 +23,6 @@ _nock_rock(u2_wire wir_r,
     _nock_rock(wir_r, u2_rl_gain(wir_r, vid), heb)
   u2_noun hib, gal;
 
-  c3_assert(0);
   while ( 1 ) {
     u2_tx_did_hop(wir_r, 1);
 
@@ -615,6 +614,32 @@ _nock_rock(u2_wire wir_r,
       }
     }
   }
+}
+
+/* u2_nk_nold():
+**
+**   Compute `(nock bus fol)`, interpreter first.
+*/
+u2_weak                                                           //  transfer
+u2_nk_nold(u2_wire wir_r,
+           u2_noun bus,                                           //  transfer
+           u2_noun fol)                                           //  retain
+{
+  u2_weak pro;
+  u2_flag bit;
+
+  bit = u2_tx_sys_bit(wir_r, u2_no);
+  c3_assert(bit == u2_yes);
+  bit = u2_tx_glu_bit(wir_r, u2_yes);
+
+  LoomSink; u2_tx_sink_cas(wir_r);
+  pro = _nock_rock(wir_r, bus, fol);
+  u2_tx_rise_cas(wir_r); LoomRise;
+
+  u2_tx_sys_bit(wir_r, u2_yes);
+  u2_tx_glu_bit(wir_r, bit);
+
+  return pro;
 }
 
 /* u2_nk_soft():

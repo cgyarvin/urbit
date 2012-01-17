@@ -208,7 +208,7 @@
         j2_mc(Pt6, ut, firm), 
         Tier6_b,
         u2_none, u2_none,
-        j2_mck(Pt6, ut, firm)
+        j2_mck(Pt6, ut, firm), c3__firm,
     },
     { }
   };

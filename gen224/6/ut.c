@@ -163,10 +163,9 @@
     { "moot", 
       c3__hevy, 
       j2_mc(Pt6, ut, moot), 
-      // Tier6_b_memo,
       u2_jet_live | u2_jet_memo,
       u2_none, u2_none,
-      j2_mck(Pt6, ut, moot) },
+      j2_mck(Pt6, ut, moot), c3__moot },
     { "repo", c3__hevy, j2_mc(Pt6, ut, repo), Tier6_b, u2_none, u2_none },
     { }
   };

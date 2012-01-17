@@ -25,14 +25,6 @@ _nock_rise()
 #endif
 }
 
-static u2_noun
-_nock_exit()
-{
-  u2_tx_sys_bit(u2_Wire, u2_yes);
-
-  return u2_cm_bail(c3__exit);
-}
-
 /* _nock_hint(): hint with code, data, subject, formula.
 */
   static u2_noun _nock_cool(u2_noun, u2_noun);
@@ -225,7 +217,7 @@ _nock_cool(u2_noun bus,
     u2_tx_did_hop(u2_Wire, 1);
 
     if ( u2_no == u2du(fol) ) {
-      return _nock_exit();
+      return u2_cm_bail(c3__exit);
     }
     else { 
       hib = u2fh(fol);
@@ -243,11 +235,11 @@ _nock_cool(u2_noun bus,
       return u2_cn_cell(poz, riv);
     }
     else switch ( hib ) {
-      default: return _nock_exit();
+      default: return u2_cm_bail(c3__exit);
 
       case 0: {
         if ( u2_no == u2_cr_ud(gal) ) {
-          return _nock_exit();
+          return u2_cm_bail(c3__exit);
         }
         else {
           u2_noun pro = u2k(u2at(gal, bus));
@@ -308,7 +300,7 @@ _nock_cool(u2_noun bus,
 
       case 5: {
         if ( u2_no == u2du(gal) ) {
-          return _nock_exit();
+          return u2_cm_bail(c3__exit);
         }
         else {
           u2_noun dib = _nock_cool(u2k(bus), u2k(u2fh(gal)));
@@ -334,7 +326,7 @@ _nock_cool(u2_noun bus,
             nex = u2k(c_gal);
           } else if ( 1 == tys ) {
             nex = u2k(d_gal);
-          } else return _nock_exit();
+          } else return u2_cm_bail(c3__exit);
 
           u2z(fol);
           fol = nex;
@@ -380,7 +372,7 @@ _nock_cool(u2_noun bus,
       
         u2_cx_cell(gal, &b_gal, &c_gal);
         if ( u2_no == u2ud(b_gal) ) {
-          return _nock_exit();
+          return u2_cm_bail(c3__exit);
         } 
         else {
           u2_noun seb = _nock_cool(bus, u2k(c_gal));
@@ -394,7 +386,7 @@ _nock_cool(u2_noun bus,
 
             u2_tx_sys_bit(u2_Wire, u2_no);
             if ( u2_none == pro ) {
-              return _nock_exit();
+              return u2_cm_bail(c3__exit);
             } 
             else {
               u2z(seb); u2z(fol);
@@ -455,13 +447,31 @@ _nock_cool(u2_noun bus,
   }
 }
 
+/* u2_cn_nold(): nock old engine.
+*/
+u2_noun
+u2_cn_nold(u2_noun bus,
+           u2_noun fol)
+{
+  u2_noun pro = u2_nk_nold(u2_Wire, bus, fol);
+
+  if ( u2_none == pro ) {
+    return u2_cm_bail(c3__exit);
+  }
+  u2z(fol);
+  return pro;
+}
+
 /* u2_cn_nock(): external nock interface. 
 */
 u2_noun
 u2_cn_nock(u2_noun bus,
            u2_noun fol)
 {
-  u2_weak pro;
+#if 0
+  return u2_cn_nold(bus, fol);
+#else
+  u2_noun pro;
   u2_flag bit;
 
   bit = u2_tx_sys_bit(u2_Wire, u2_no);
@@ -476,4 +486,5 @@ u2_cn_nock(u2_noun bus,
   u2_tx_glu_bit(u2_Wire, bit);
 
   return pro;
+#endif
 }

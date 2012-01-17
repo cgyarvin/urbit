@@ -22,6 +22,15 @@
                  u2_weak bus,                                     //  transfer
                  u2_weak fol);                                    //  retain
 
+    /* u2_nk_nold():
+    **
+    **   Really compute `(nock bus fol)`, interpreter first.
+    */
+      u2_weak                                                     //  transfer
+      u2_nk_nold(u2_wire wir_r,
+                 u2_weak bus,                                     //  transfer
+                 u2_weak fol);                                    //  retain
+
     /* u2_nk_mung():
     **
     **   Compute `(nock gat(-< sam) +.gat)` - old calling convention.

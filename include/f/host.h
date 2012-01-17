@@ -179,6 +179,10 @@
         */
         u2_noun (*key_f)(u2_ray wir_r, u2_noun cor);
 
+        /* Memo selector.  Declared, with key function.
+        */
+        c3_m fun_m;
+
         /* Axis in battery.  Computed (declare 0).
         */
         c3_l axe_l;

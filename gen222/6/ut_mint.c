@@ -971,7 +971,7 @@
         j2_mc(Pt6, ut, mint), 
         Tier6_b_memo,
         u2_none, u2_none,
-        j2_mck(Pt6, ut, mint)
+        j2_mck(Pt6, ut, mint), c3__mint,
     },
     { }
   };

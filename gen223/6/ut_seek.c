@@ -215,7 +215,7 @@
         j2_mc(Pt6, ut, seek), 
         Tier6_b_memo,
         u2_none, u2_none,
-        j2_mck(Pt6, ut, seek)
+        j2_mck(Pt6, ut, seek), c3__seek
     },
     { }
   };

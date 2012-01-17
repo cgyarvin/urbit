@@ -766,6 +766,26 @@ u2_ho_test(u2_wire    wir_r,
   }
 }
 
+/* _ho_run(): execute jet, new simplified style.
+*/
+static u2_weak                                                    //  produce
+_ho_run(u2_ray      wir_r,
+        u2_ho_jet*  jet_j,
+        u2_noun     cor)                                          //  retain
+{
+  u2_noun ret;
+
+  u2_tx_glu_bit(wir_r, u2_no);
+  ret = jet_j->fun_f(wir_r, cor);
+  u2_tx_glu_bit(wir_r, u2_yes);
+
+  if ( u2_none == ret ) {
+    return u2_cm_bail(c3__exit);
+  }
+  else return ret;
+}
+
+#if 0
 /* _ho_run(): execute jet, shedding trace if any is available.
 */
 static u2_weak                                                    //  produce
@@ -830,8 +850,11 @@ _ho_run(u2_ray      wir_r,
         u2_ray kit_r = u2_bl_open(wir_r);
         c3_l   how_l;
 
+        if ( 0 == u2_wire_kit_r(u2_Wire) ) {
+          c3_assert(0);
+        }
         if ( (how_l = u2_bl_set(wir_r)) ) {
-          if ( (c3__exit == how_l) || (c3__stop == how_l) ) {
+          if ( (c3__exit == how_l) || (c3__intr == how_l) ) {
             //  The jet promises that its trace calculations are correct.
             //
             *tax = u2_rx(wir_r, u2_wire_tax(wir_r));
@@ -855,15 +878,19 @@ _ho_run(u2_ray      wir_r,
           c3_assert(u2_wire_tax(wir_r) == u2_kite_tax(u2_wire_kit_r(wir_r)));
           u2_bl_done(wir_r, kit_r);
         }
+        if ( 0 == u2_wire_kit_r(u2_Wire) ) {
+          c3_assert(0);
+        }
         return ret;
       }
     }
   }
 }
+#endif
 
 /* u2_ho_use():
 **
-**   Run a jet.
+**   Run a jet.   Equivalence testing now disabled.
 */
 u2_weak                                                           //  produce
 u2_ho_use(u2_ray     wir_r,
@@ -871,45 +898,34 @@ u2_ho_use(u2_ray     wir_r,
           u2_noun    cor,                                         //  retain
           u2_noun    fol)                                         //  retain
 {
-  u2_noun pro;
+  u2_noun pro, key;
 
   if ( !(jet_j->sat_s & u2_jet_live) ) {
-    pro = u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
+    if ( (jet_j->sat_s & u2_jet_memo) &&
+         (u2_none != (key = (jet_j->key_f(wir_r, cor)))) )
+    {
+      u2_noun fun_m = jet_j->fun_m;
+      u2_noun val;
+
+      if ( u2_none != (val = u2_rl_find(wir_r, fun_m, key)) ) {
+        pro = val;
+      }
+      else {
+        pro = u2_cn_nock(u2_rx(wir_r, cor), u2_rx(wir_r, fol));
+
+        pro = u2_rl_save(wir_r, fun_m, key, pro);
+      }
+      u2_rz(wir_r, key);
+    } 
+    else pro = u2_cn_nock(u2_rx(wir_r, cor), u2_rx(wir_r, fol));
   }
   else {
     if ( !(jet_j->sat_s & u2_jet_test) ) {
-      u2_noun tax = u2_none;
-
-      pro = _ho_run(wir_r, jet_j, cor, &tax);
-
-      if ( u2_none == pro ) {
-        if ( u2_none != tax ) {
-          //  Trace in tax is correct.
-          //
-          u2_rz(wir_r, u2_wire_tax(wir_r));
-          u2_wire_tax(wir_r) = tax;
-        } 
-        else {
-          //  Rerun in soft mode to get correct trace.
-          //
-          if ( !LoomStop ) {
-            jet_j->sat_s &= ~u2_jet_live;
-            {
-              c3_c *cos_c = u2_ho_cstring(jet_j->xip);
-
-              // fprintf(stderr, "<<lose: %s>>\n", cos_c);
-              pro = u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
-              // fprintf(stderr, "<<lost: %s>>\n", cos_c);
-              free(cos_c);
-            }
-            jet_j->sat_s |= u2_jet_live;
-            u2_ho_test(wir_r, jet_j, cor, pro, u2_none);
-          }
-        }
-      }
+      pro = _ho_run(wir_r, jet_j, cor);
     }
     else { 
-      u2_noun tax = u2_none;
+      c3_assert(!"equivalence testing is currently disabled");
+#if 0
       u2_noun sof;
 
       jet_j->sat_s &= ~u2_jet_test;
@@ -965,6 +981,7 @@ u2_ho_use(u2_ray     wir_r,
       }
       u2_rz(wir_r, pro);
       pro = sof;
+#endif
     }
   }
   return pro;

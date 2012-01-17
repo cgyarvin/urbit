@@ -293,7 +293,7 @@
         j2_mc(Pt6, ut, fuse), 
         Tier6_b_memo,
         u2_none, u2_none,
-        j2_mck(Pt6, ut, fuse)
+        j2_mck(Pt6, ut, fuse), c3__fuse
     },
     { }
   };

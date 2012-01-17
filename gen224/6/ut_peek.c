@@ -285,7 +285,7 @@
         j2_mc(Pt6, ut, peek), 
         Tier6_b_memo,
         u2_none, u2_none,
-        j2_mck(Pt6, ut, peek)
+        j2_mck(Pt6, ut, peek), c3__peek
     },
     { }
   };

@@ -143,7 +143,7 @@
         j2_mc(Pt6, ut, bust), 
         Tier6_b,
         u2_none, u2_none,
-        j2_mck(Pt6, ut, bust)
+        j2_mck(Pt6, ut, bust), c3__bust
     },
     { }
   };

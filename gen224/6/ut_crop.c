@@ -334,7 +334,7 @@
         j2_mc(Pt6, ut, crop), 
         Tier6_b_memo,
         u2_none, u2_none,
-        j2_mck(Pt6, ut, crop)
+        j2_mck(Pt6, ut, crop), c3__crop
     },
     { }
   };

@@ -293,7 +293,7 @@
         j2_mc(Pt6, ut, heal), 
         Tier6_b,
         u2_none, u2_none,
-        j2_mck(Pt6, ut, heal)
+        j2_mck(Pt6, ut, heal), c3__heal
     },
     { }
   };

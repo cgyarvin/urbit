@@ -7,17 +7,17 @@
 #include <sys/ioctl.h>
 #include <sys/stat.h>
 
-#include "../gen225/pit.h"
+#include "../gen224/pit.h"
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt5Y   k_225__a__b__c__d__e
+#   define Pt5Y   k_224__a__b__c__d__e
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt3Y   k_225__a__b__c
-#   define Pt4Y   k_225__a__b__c__d
-#   define Pt5Y   k_225__a__b__c__d__e
+#   define Pt3Y   k_224__a__b__c
+#   define Pt4Y   k_224__a__b__c__d
+#   define Pt5Y   k_224__a__b__c__d__e
 
     u2_noun j2_mbc(Pt3Y, gor)(u2_wire, u2_noun a, u2_noun b);
     u2_noun j2_mcc(Pt4Y, by, get)(u2_wire, u2_noun a, u2_noun b);
@@ -311,10 +311,10 @@ u2_cm_poll()
     if ( LoomIntr ) {
       LoomIntr = 0;
 
-      fprintf(stderr, "{interrupt}\n");
+      fprintf(stderr, "{poll: interrupt}\n");
       u2_cm_bail(c3__intr);
     } else {
-      fprintf(stderr, "{stack overflow}\n");
+      fprintf(stderr, "{poll: stack overflow}\n");
       u2_cm_bail(c3__wild);
     }
   }
@@ -401,14 +401,17 @@ u2_cm_drop()
 
 /* u2_cm_bail(): bail out to the local trap.  Does not return.
 */
+extern u2_noun u2_Flag_Abort;
 u2_noun
-u2_cm_bail(u2_noun how)
+u2_cm_bail(c3_l    how_l)
 {
-  u2_wire wir_r = u2_Wire;
-  u2_ray  kit_r = u2_wire_kit_r(wir_r);
+  u2_ray kit_r = u2_wire_kit_r(u2_Wire);
 
-  // c3_assert(0);
-  _longjmp((void *)u2_at_cord(u2_kite_buf_r(kit_r), c3_wiseof(jmp_buf)), how);
+  if ( u2_yes == u2_Flag_Abort ) {
+    c3_assert(0);
+  }
+  u2_tx_sys_bit(u2_Wire, u2_yes);
+  _longjmp((void *)u2_at_cord(u2_kite_buf_r(kit_r), c3_wiseof(jmp_buf)), how_l);
   return u2_none;
 }
 
