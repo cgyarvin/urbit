@@ -1079,6 +1079,7 @@
   ::
   ::  Tier 5 constructs
   ::
+  ++  cask  ~[%%*]
   ++  char  ~[''*]
   ++  clip  ~[p=(hair) q=(tape)]
   ++  edge  ~[p=(hair) q=((unit ~[p=* q=(clip)]))]
@@ -2146,6 +2147,22 @@
     :~  [len (mix msg (~(raw og pit) len))]
         [256 hax]
         [1 1]
+    ==
+  ::
+  ::  Tier 5e, PKI and namespace
+  ::
+  ++  span
+    $|  [p=(span) q=(span)]
+      [%file p=*term]
+      [%step p=0*]
+      [%data p=0x0*]
+    ::[%date p=0*]
+    ==
+  ++  fort  ~[-|*]
+  ++  path  (list cask)
+  ++  sign
+    $~  p=(fort)
+        q=(path)
     ==
   ::
   ::  Tier 6 constructs
@@ -4427,7 +4444,7 @@
   --
 ::
 ++  vast
-  =+  bug=`?`|
+  =+  [bug=`?`| syn=*sign]
   &.  
   ++  glam  ~+((glue ace))
   ++  glib  ~+((glue gap))
