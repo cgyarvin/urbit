@@ -13,7 +13,7 @@
                    u2_atom b)                                     //  retain
   {
     if ( !u2_fly_is_cat(a) || (a >= 32) ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__fail);
     }
     else {
       u2_noun pir = u2_nul;
@@ -46,7 +46,7 @@
           u2_ray  sal_r = u2_rl_slab(wir_r, san_w);
 
           if ( 0 == sal_r ) {
-            return u2_none;
+            return u2_bl_bail(wir_r, c3__fail);
           } else {
             c3_w    j_w;
             u2_atom rip;
@@ -72,7 +72,7 @@
          (u2_no == u2_stud(a)) ||
          (u2_no == u2_stud(b)) )
     {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbc(Pt3, rip)(wir_r, a, b);
     }

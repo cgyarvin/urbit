@@ -19,7 +19,7 @@
                    u2_atom a)                                     //  retain
   {
     if ( _0 == a ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } 
     else {
       mpz_t a_mp;
@@ -39,7 +39,7 @@
     if ( (u2_none == (a = u2_frag(u2_cw_sam, cor))) ||
          (u2_no == u2_stud(a)) ) 
     {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbc(Pt1, dec)(wir_r, a);
     }

@@ -19,7 +19,7 @@
 
       if ( (u2_no == u2_as_trel(a, &n_a, &l_a, &r_a)) ) {
         u2_rz(wir_r, b);
-        return u2_none;
+        return u2_bl_bail(wir_r, c3__exit);
       } else {
         return _tap_in
           (wir_r, r_a, 
@@ -43,7 +43,7 @@
     u2_noun a, b;
 
     if ( u2_no == u2_mean(cor, u2_cw_con_sam, &a, u2_cw_sam, &b, 0) ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mcc(Pt4, in, tap)(wir_r, a, b);
     }

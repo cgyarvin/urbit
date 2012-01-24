@@ -14,7 +14,7 @@
     mpz_t a_mp;
 
     if ( !u2_fly_is_cat(a) ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__fail);
     }
     else {
       mpz_init_set_ui(a_mp, 1);
@@ -32,7 +32,7 @@
     if ( (u2_none == (a = u2_frag(u2_cw_sam, cor))) ||
          (u2_no == u2_stud(a)) ) 
     {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbc(Pt3, bex)(wir_r, a);
     }

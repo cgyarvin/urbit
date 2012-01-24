@@ -22,7 +22,7 @@
       if ( (u2_no == u2_as_trel(a, &n_a, &l_a, &r_a)) ||
            (u2_no == u2_as_cell(n_a, &pn_a, &qn_a) ) )
       {
-        return u2_none;
+        return u2_bl_bail(wir_r, c3__exit);
       }
       else {
         if ( (u2_yes == u2_sing(b, pn_a)) ) {
@@ -44,7 +44,7 @@
     u2_noun a, b;
 
     if ( u2_no == u2_mean(cor, u2_cw_con_sam, &a, u2_cw_sam, &b, 0) ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mcc(Pt4, by, has)(wir_r, a, b);
     }

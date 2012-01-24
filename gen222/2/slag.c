@@ -13,20 +13,20 @@
                     u2_noun b)                                    //  retain
   {
     if ( !u2_fly_is_cat(a) ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__fail);
     }
     else {
       c3_w len_w = a;
 
       while ( len_w ) {
         if ( u2_no == u2_dust(b) ) {
-          return u2_none;
+          return u2_bl_bail(wir_r, c3__exit);
         }
         a = u2_t(a);
         len_w--;
       }
       if ( u2_no == u2_dust(b) ) {
-        return u2_none;
+        return u2_bl_bail(wir_r, c3__exit);
       }
       return u2_rx(wir_r, b);
     }
@@ -40,7 +40,7 @@
     if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &a, u2_cw_sam_3, &b, 0)) || 
          (u2_no == u2_stud(a)) ) 
     {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbc(Pt2, slag)(wir_r, a, b);
     }

@@ -642,7 +642,7 @@
     u2_noun vex, sab;
 
     if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &vex, u2_cw_sam_3, &sab, 0)) ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbx(Pt5, pfix)(wir_r, vex, sab);
     }
@@ -704,7 +704,7 @@
     u2_noun vex, sab;
 
     if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &vex, u2_cw_sam_3, &sab, 0)) ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbx(Pt5, plug)(wir_r, vex, sab);
     }
@@ -749,7 +749,7 @@
     u2_noun vex, sab;
 
     if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &vex, u2_cw_sam_3, &sab, 0)) ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbx(Pt5, pose)(wir_r, vex, sab);
     }
@@ -810,7 +810,7 @@
     u2_noun vex, sab;
 
     if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &vex, u2_cw_sam_3, &sab, 0)) ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbx(Pt5, sfix)(wir_r, vex, sab);
     }

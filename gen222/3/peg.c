@@ -41,7 +41,7 @@
          (0 == a) ||
          (0 == b) )
     {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbc(Pt3, peg)(wir_r, a, b);
     }

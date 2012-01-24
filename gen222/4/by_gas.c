@@ -17,20 +17,20 @@
     }
     else {
       if ( u2_no == u2_dust(b) ) {
-        return u2_none;
+        return u2_bl_bail(wir_r, c3__exit);
       } else {
         u2_noun i_b = u2_h(b);
         u2_noun t_b = u2_t(b);
 
         if ( u2_no == u2_dust(i_b) ) {
-          return u2_none;
+          return u2_bl_bail(wir_r, c3__exit);
         } else {
           u2_noun pi_b = u2_h(i_b);
           u2_noun qi_b = u2_t(i_b);
           u2_noun c;
 
           if ( u2_none == (c = j2_mcc(Pt4, by, put)(wir_r, a, pi_b, qi_b)) ) {
-            return u2_none;
+            return u2_bl_bail(wir_r, c3__exit);
           } else {
             u2_noun d = j2_mcc(Pt4, by, gas)(wir_r, c, t_b);
 
@@ -48,7 +48,7 @@
     u2_noun a, b;
 
     if ( u2_no == u2_mean(cor, u2_cw_con_sam, &a, u2_cw_sam, &b, 0) ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mcc(Pt4, by, gas)(wir_r, a, b);
     }

@@ -20,7 +20,7 @@
       else if ( u2_no == u2_dust(a) ) {
         u2_rl_lose(wir_r, b);
 
-        return u2_none;
+        return u2_bl_bail(wir_r, c3__exit);
       }
       else {
         b = u2_rc(wir_r, u2_rx(wir_r, u2_h(a)), b);
@@ -35,7 +35,7 @@
     u2_noun a;
 
     if ( u2_none == (a = u2_frag(u2_cw_sam, cor)) ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbc(Pt2, flop)(wir_r, a);
     }

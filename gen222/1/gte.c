@@ -35,7 +35,7 @@
          (u2_no == u2_stud(a)) ||
          (u2_no == u2_stud(b)) )
     {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbc(Pt1, gte)(wir_r, a, b);
     }

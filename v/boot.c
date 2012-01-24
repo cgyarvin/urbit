@@ -345,7 +345,6 @@ u2_ve_start(c3_w kfo_w, c3_w kto_w)
     u2_noun how;
  
     if ( 0 != (how = u2_cm_trap()) ) {
-      fprintf(stderr, "start trap\n");
       {
         c3_w tax = u2_cm_trac();
 
@@ -441,6 +440,32 @@ u2_ve_mark()
   return siz_w;
 }
 
+/* u2_ve_word(): print a word to stderr.
+*/
+void
+u2_ve_word(c3_w wod_w)
+{
+  u2_flag top = u2_yes;
+
+  if ( wod_w / (1000 * 1000 * 1000) ) {
+    fprintf(stderr, "%u.", wod_w / (1000 * 1000 * 1000));
+    wod_w %= (1000 * 1000 * 1000);
+    top = u2_no;
+  }
+  if ( wod_w / (1000 * 1000) ) {
+    fprintf(stderr, ((top == u2_yes) ? "%u." : "%3.0u."), 
+                     wod_w / (1000 * 1000));
+    wod_w %= (1000 * 1000);
+    top = u2_no;
+  }
+  if ( wod_w / 1000 ) {
+    fprintf(stderr, ((top == u2_yes) ? "%u." : "%3.0u."), wod_w / 1000);
+    wod_w %= 1000;
+    top = u2_no;
+  }
+  fprintf(stderr, ((top == u2_yes) ? "%u" : "%3.0u"), wod_w);
+}
+
 /* u2_ve_grab(): garbage-collect the world, plus roots.
 */
 void
@@ -467,15 +492,10 @@ u2_ve_grab(u2_noun som, ...)
   if ( lec_w || (u2_yes == u2_Flag_Verbose) ) {
     fprintf(stderr, "%s: gc: ", u2_Local);
     if ( lec_w ) {
-      fprintf(stderr, "%d.%d.%d bytes lost; ", 
-            ((lec_w * 4) >> 20),
-            ((lec_w * 4) >> 10) % 1024,
-            ((lec_w * 4) % 1024));
+      u2_ve_word(lec_w);
+      fprintf(stderr, " bytes shed; ");
     }
-    fprintf(stderr, "%d.%d.%d bytes live", 
-          ((siz_w * 4) >> 20),
-          ((siz_w * 4) >> 10) % 1024,
-          ((siz_w * 4) % 1024));
-    fprintf(stderr, "\n");
+    u2_ve_word(siz_w);
+    fprintf(stderr, " bytes live\n");
   }
 }

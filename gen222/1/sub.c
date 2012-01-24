@@ -21,7 +21,7 @@
       mpz_clear(a_mp);
       mpz_clear(b_mp);
 
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     }
     mpz_sub(a_mp, a_mp, b_mp);
     mpz_clear(b_mp);
@@ -38,7 +38,7 @@
          (u2_no == u2_stud(a)) ||
          (u2_no == u2_stud(b)) )
     {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbc(Pt1, sub)(wir_r, a, b);
     }

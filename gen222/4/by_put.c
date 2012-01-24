@@ -27,7 +27,7 @@
       if ( (u2_no == u2_as_trel(a, &n_a, &l_a, &r_a)) ||
            (u2_no == u2_as_cell(n_a, &pn_a, &qn_a)) )
       {
-        return u2_none;
+        return u2_bl_bail(wir_r, c3__exit);
       } 
       else if ( u2_yes == u2_sing(pn_a, b) ) {
         if ( u2_yes == u2_sing(qn_a, c) ) {
@@ -43,58 +43,48 @@
         if ( u2_yes == j2_mbc(Pt3, gor)(wir_r, b, pn_a) ) {
           d = j2_mcc(Pt4, by, put)(wir_r, l_a, b, c);
 
-          if ( u2_none == d ) {
-            return u2_none;
+          if ( u2_yes == j2_mbc(Pt3, vor)(wir_r, pn_a, u2_h(u2_h(d))) ) {
+            return u2_rt(wir_r, u2_rx(wir_r, n_a), 
+                                d, 
+                                u2_rx(wir_r, r_a));
           }
           else {
-            if ( u2_yes == j2_mbc(Pt3, vor)(wir_r, pn_a, u2_h(u2_h(d))) ) {
-              return u2_rt(wir_r, u2_rx(wir_r, n_a), 
-                                  d, 
-                                  u2_rx(wir_r, r_a));
-            }
-            else {
-              u2_as_trel(d, &n_d, &l_d, &r_d);
-              {
-                u2_noun e = u2_rt
-                  (wir_r, u2_rx(wir_r, n_d),
-                          u2_rx(wir_r, l_d),
-                          u2_rt(wir_r,
-                                u2_rx(wir_r, n_a),
-                                u2_rx(wir_r, r_d),
-                                u2_rx(wir_r, r_a)));
+            u2_as_trel(d, &n_d, &l_d, &r_d);
+            {
+              u2_noun e = u2_rt
+                (wir_r, u2_rx(wir_r, n_d),
+                        u2_rx(wir_r, l_d),
+                        u2_rt(wir_r,
+                              u2_rx(wir_r, n_a),
+                              u2_rx(wir_r, r_d),
+                              u2_rx(wir_r, r_a)));
 
-                u2_rl_lose(wir_r, d);
-                return e;
-              }
+              u2_rl_lose(wir_r, d);
+              return e;
             }
           }
         }
         else {
           d = j2_mcc(Pt4, by, put)(wir_r, r_a, b, c);
 
-          if ( u2_none == d ) {
-            return u2_none;
+          if ( u2_yes == j2_mbc(Pt3, vor)(wir_r, pn_a, u2_h(u2_h(d))) ) {
+            return u2_rt(wir_r, u2_rx(wir_r, n_a),
+                                u2_rx(wir_r, l_a), 
+                                d);
           }
           else {
-            if ( u2_yes == j2_mbc(Pt3, vor)(wir_r, pn_a, u2_h(u2_h(d))) ) {
-              return u2_rt(wir_r, u2_rx(wir_r, n_a),
-                                  u2_rx(wir_r, l_a), 
-                                  d);
-            }
-            else {
-              u2_as_trel(d, &n_d, &l_d, &r_d);
-              {
-                u2_noun e = u2_rt
-                  (wir_r, u2_rx(wir_r, n_d),
-                          u2_rt(wir_r,
-                                u2_rx(wir_r, n_a),
-                                u2_rx(wir_r, l_a),
-                                u2_rx(wir_r, l_d)),
-                          u2_rx(wir_r, r_d));
+            u2_as_trel(d, &n_d, &l_d, &r_d);
+            {
+              u2_noun e = u2_rt
+                (wir_r, u2_rx(wir_r, n_d),
+                        u2_rt(wir_r,
+                              u2_rx(wir_r, n_a),
+                              u2_rx(wir_r, l_a),
+                              u2_rx(wir_r, l_d)),
+                        u2_rx(wir_r, r_d));
 
-                u2_rl_lose(wir_r, d);
-                return e;
-              }
+              u2_rl_lose(wir_r, d);
+              return e;
             }
           }
         }
@@ -111,7 +101,7 @@
                                u2_cw_sam_2,   &b, 
                                u2_cw_sam_3,   &c, 0) ) {
                                
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mcc(Pt4, by, put)(wir_r, a, b, c);
     }

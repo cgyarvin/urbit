@@ -22,7 +22,7 @@
       u2_ray sal_r = u2_rl_slab(wir_r, len_w);
 
       if ( 0 == sal_r ) {
-        return u2_none;
+        return u2_bl_bail(wir_r, c3__fail);
       }
       else {
         c3_w i_w;
@@ -46,7 +46,7 @@
          (u2_no == u2_stud(a)) ||
          (u2_no == u2_stud(b)) )
     {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbc(Pt3, mix)(wir_r, a, b);
     }

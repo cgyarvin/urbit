@@ -13,7 +13,7 @@
                    u2_atom b)                                     //  retain
   {
     if ( _0 == b ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       mpz_t a_mp, b_mp;
 
@@ -36,7 +36,7 @@
          (u2_no == u2_stud(a)) ||
          (u2_no == u2_stud(b)) )
     {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbc(Pt1, mod)(wir_r, a, b);
     }

@@ -40,7 +40,7 @@
     if ( (u2_none == (a = u2_frag(u2_cw_sam, cor))) ||
          (u2_no == u2_stud(a)) ) 
     {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbc(Pt5, shax)(wir_r, a);
     }

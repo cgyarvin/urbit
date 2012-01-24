@@ -14,7 +14,7 @@
     c3_w met_w = u2_met(0, a);
 
     if ( met_w < 2 ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     }
     else if ( (1 == u2_bit((met_w - 2), a)) ) {
       return _3;
@@ -31,7 +31,7 @@
     if ( (u2_none == (a = u2_frag(u2_cw_sam, cor))) ||
          (u2_no == u2_stud(a)) )
     {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbc(Pt3, cap)(wir_r, a);
     }

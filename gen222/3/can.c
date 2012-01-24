@@ -13,7 +13,7 @@
                    u2_noun b)                                     //  retain
   {
     if ( !u2_fly_is_cat(a) || (a >= 32) ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__fail);
     }
     else {
       c3_g   a_g = a;
@@ -48,7 +48,7 @@
           return _0;
         }
         if ( 0 == (sal_r = u2_rl_slaq(wir_r, a_g, tot_w)) ) {
-          return u2_none;
+          return u2_bl_bail(wir_r, c3__fail);
         }
       }
 

@@ -16,7 +16,7 @@
       return u2_rx(wir_r, u2_frag(u2_cw_sam_3, b));
     }
     else if ( u2_no == u2_dust(a) ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     }
     else {
       u2_weak gim = u2_rx(wir_r, u2_h(a));
@@ -25,7 +25,7 @@
       u2_weak vel = u2_rl_molt(wir_r, b, u2_cw_sam_3, daz, 0);
 
       if ( u2_none == vel ) {
-        return u2_none;
+        return u2_bl_bail(wir_r, c3__exit);
       } else {
         u2_weak hox = j2_mbc(Pt2, roll)(wir_r, u2_t(a), vel);
 
@@ -41,7 +41,7 @@
     u2_noun a, b;
 
     if ( u2_no == u2_mean(cor, u2_cw_sam_2, &a, u2_cw_sam_3, &b, 0) ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbc(Pt2, roll)(wir_r, a, b);
     }

@@ -13,7 +13,7 @@
                    u2_noun b)                                     //  retain
   {
     if ( !u2_fly_is_cat(a) || (a >= 32) ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     }
     else {
       c3_g   a_g = a;
@@ -33,13 +33,13 @@
             break;
           }
           else if ( u2_no == u2_dust(cab) ) {
-            return u2_none;
+            return u2_bl_bail(wir_r, c3__exit);
           }
           else if ( u2_no == u2_stud(h_cab = u2_h(cab)) ) {
-            return u2_none;
+            return u2_bl_bail(wir_r, c3__exit);
           }
           else if ( (tot_w + (len_w = u2_met(a_g, h_cab))) < tot_w ) {
-            return u2_none;
+            return u2_bl_bail(wir_r, c3__fail);
           }
           tot_w += len_w;
           cab = u2_t(cab); 
@@ -48,7 +48,7 @@
           return _0;
         }
         if ( 0 == (sal_r = u2_rl_slaq(wir_r, a_g, tot_w)) ) {
-          return u2_none;
+          return u2_bl_bail(wir_r, c3__fail);
         }
       }
 
@@ -79,7 +79,7 @@
     if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &a, u2_cw_sam_3, &b, 0)) ||
          (u2_no == u2_stud(a)) ) 
     {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbc(Pt3, rap)(wir_r, a, b);
     }

@@ -107,7 +107,7 @@
     --
 =>  &.
     ++  x-path  ~+
-      (most (just '/') (star ;~(pose aln cab dot mus)))
+      (most (just '/') (star ;~(pose aln cab dot hip)))
     ::
     ++  x-fuel
       %+  knee  *fuel  |.  ~+

@@ -12,7 +12,7 @@
                     u2_noun a)                                    //  retain
   {
     if ( _0 == a ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     }
     else {
       return u2_rx(wir_r, u2_st(a));
@@ -25,7 +25,7 @@
     u2_noun a;
 
     if ( u2_none == (a = u2_frag(u2_cw_sam, cor)) ) {
-      return u2_none;
+      return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbc(Pt2, need)(wir_r, a);
     }
