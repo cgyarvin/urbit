@@ -119,7 +119,7 @@
       a
     $(a (dec a), b (dec b))
   ::
-  ::  Tier 2 constructs
+  ::  Tier 2 consors
   ::
   ++  list
     |*  a=nap
@@ -318,7 +318,7 @@
   ++  foo
     |=  a=*
     (sort ((list num) a) gth)
-  ::::                                                  Tier 3 constructs
+  ::::                                                  Tier 3 consors
   ::::
   ++  axis  num
   ++  bloq  num
@@ -834,7 +834,7 @@
       [(mod c p.a) (mod c q.a)]
     --
   ::
-  ++  si
+  ++  si 
     &.
     ::::
     ++  abs  |=(a=@ (add (end 0 1 a) (rsh 0 1 a)))
@@ -885,12 +885,12 @@
     ::::
     --
   ::
-  ::      Tier 3h, floating point (stub - should be IEEE)
+  ::      Tier 3h, floating point assembly (stub - should be IEEE)
   :: 
-  ++  rylh  |=([syn=? hol=@ fac=@] ~|(%real-stub !!))
-  ++  ryls  |=([syn=? hol=@ fac=@] ~|(%real-stub !!))
-  ++  ryld  |=([syn=? hol=@ fac=@] ~|(%real-stub !!))
-  ++  rylq  |=([syn=? hol=@ fac=@] ~|(%real-stub !!))
+  ++  rylh  |=([syn=? hol=@ fac=@] ~|([%rylh-nyet syn hol fac] !!))
+  ++  ryls  |=([syn=? hol=@ fac=@] ~|([%ryls-nyet syn hol fac] !!))
+  ++  ryld  |=([syn=? hol=@ fac=@] ~|([%ryld-nyet syn hol fac] !!))
+  ++  rylq  |=([syn=? hol=@ fac=@] ~|([%rylq-nyet syn hol fac] !!))
   ::
   ::      Tier 3i, date encode & decode
   :: 
@@ -921,7 +921,7 @@
     ^-  [yer=@ mon=@ day=@ hor=@ min=@ sec=@ msc=@ usc=@]
     !!
   ::
-  ::  Tier 4 constructs
+  ::  Tier 4 consors
   ::
   ++  apt
     |=  a=*(tree)
@@ -1104,7 +1104,7 @@
       $(a r.a, b [n.a $(a l.a)])
     --
   ::
-  ::  Tier 5 constructs
+  ::  Tier 5 consors
   ::
   ++  cask  ~[%%*]
   ++  char  ~[''*]
@@ -1489,63 +1489,17 @@
   ++  wut  (just '?')
   ++  zap  (just '!')
   ::
-  ::      tier 5a/4.5, parsing: character groups, pseudocharacters
+  ::      tier 5a/5, parsing: watty whitespace & termination
   ::
-
+  ++  dog  ;~(plug dot gay)
+  ++  dun  (cold ~ ;~(plug hip hip))
+  ++  duq  (cold ~ ;~(plug tis hip))
+  ++  duz  (cold ~ ;~(plug tis tis))
+  ++  gap  (cold ~ (plus ;~(pose vul (mask [^-(@ 10) ' ' ~]))))
+  ++  gay  ;~(pose gap (easy ~))
+  ++  vul  (cold ~ ;~(plug col col (star (shim 32 126)) (just ^-(@ 10))))
   ::
-  ::      tier 5a/5, parsing: ascii utilities
-  ::
-  ++  ag
-    =+  ^=  y
-        &.
-        ++  dit  (shim '0' '9')
-        ++  hit  (shim 'a' 'f')
-        ++  bid  (bass 10 (stun [2* 2*] sid))
-        ++  bix  (bass 16 (stun [2* 2*] hit))
-        ++  hef  ;~(pose tip hif)
-        ++  hif  (boss 256 ;~(plug tip tiq (easy ~)))
-        
-        ++  sid  (cook |=(a=@ (sub a '0')) dit)
-        ++  six  ;~(pose sid (cook |=(a=@ (sub a 87)) hit))
-        ++  siv  ;~  pose 
-                   (cook |=(a=@ (sub a 65)) hig)
-                   (cook |=(a=@ (sub a 71)) low)
-                   (cook |=(a=@ (add a 4)) nud)
-                   (cold 62* (just '-'))
-                   (cold 63* (just '~'))
-                 ==
-        ++  ted  (bass 10 (stun [1* 3*] sid))
-        ++  tip  (cook |=(a=@ (far a)) til)
-        ++  tiq  (cook |=(a=@ (fyr a)) til)
-        ++  tid  (bass 10 (stun [3* 3*] sid))
-        ++  til  (boss 256 (stun [3* 3*] low))
-        ++  pev  (bass 64 (stun [1* 5*] siv))
-        ++  piv  (bass 64 (stun [5* 5*] siv))
-        ++  qeb  (bass 2 (stun [1* 4*] but))
-        ++  qex  (bass 16 (stun [1* 4*] hit))
-        ++  qib  (bass 2 (stun [4* 4*] but))
-        ++  qix  (bass 16 (stun [4* 4*] hit))
-        ++  qit  ;~(pose (shim 32 38) (shim 40 91) (shim 93 126))
-        ++  voy  ;~(pfix bas ;~(pose bas soq bix))
-        ++  vym  (bass 256 ;~(plug low (star ;~(pose low nud))))
-        ++  vyn  (bass 256 ;~(plug hip vym (easy ~)))
-        --
-    &.
-    ++  bay  (bass 16 ;~(plug qeb.y (star ;~(pfix dog qib.y))))
-    ++  dem  (bass 1000 ;~(plug ted.y (star ;~(pfix dog tid.y))))
-    ++  dum  (bass 10 (star sid.y))
-    ++  hex  (bass 0x10000 ;~(plug qex.y (star ;~(pfix dog qix.y))))
-    ++  fed  (bass 0x10000 ;~(plug hef.y (star ;~(pfix dog hif.y))))
-    ++  fip  (boss 256 ;~(plug tid.y (stun [4* 4*] ;~(pfix dog tid.y))))
-    ++  sym  (cook |=(a=*(list num) (rap 3 a)) ;~(plug vym.y (star vyn.y)))
-    ++  qut  %+  ifix  [soq soq]
-             %+  boss  256
-             %-  star  ;~  pose
-                         ;~(pfix bas ;~(pose bas soq bix.y))
-                         ;~(pose (shim 32 38) (shim 40 91) (shim 93 126))
-                       ==
-    ++  wiz  (boss 0x40000000 ;~(plug pev.y (star ;~(pfix dog piv.y))))
-    --
+  ::      tier 5a/5.x, classic ascii utilities  (XX destroy)
   ::
   ++  alf  ;~(pose low hig)
   ++  aln  ;~(pose low hig nud)
@@ -1554,10 +1508,6 @@
   ++  but  (cook |=(a=@ (sub a '0')) (shim '0' '1'))
   ++  dem  (bass 10 (most gon dit))
   ++  dit  (cook |=(a=@ (sub a '0')) (shim '0' '9'))
-  ++  dog  ;~(plug dot gay)
-  ++  dun  (cold ~ ;~(plug hip hip))
-  ++  duq  (cold ~ ;~(plug tis hip))
-  ++  duz  (cold ~ ;~(plug tis tis))
   ++  fad
     %+  cook
       |=([x=@ y=@ z=@] (far :(mix (lsh 3 2 z) (lsh 3 1 y) x)))
@@ -1588,8 +1538,6 @@
     ;~(plug low low low)
   ::
   ++  gul  ;~(pose (cold 2 gal) (cold 3 gar))
-  ++  gap  (cold ~ (plus ;~(pose vul (mask [^-(@ 10) ' ' ~]))))
-  ++  gay  ;~(pose gap (easy ~))
   ++  gon  ;~(pose ;~(plug bas gay fas) (easy ~))
   ++  hex  (bass 16 (most gon hit))
   ++  hig  (shim 'A' 'Z')
@@ -1626,10 +1574,146 @@
       (cold 62* (just '-'))
       (cold 63* (just '+'))
     ==
-  ++  viz  (bass 64 (most gon vit))
-  ++  vul  (cold ~ ;~(plug col col (star (shim 32 126)) (just ^-(@ 10))))
+  ::  ++  viz  (bass 64 (most gon vit))
   ::
-  ::      Tier 5a/5, parsing: external interface
+  ::      tier 5a/7, parsing: basic atoms
+  ::
+  ++  ab
+    &.
+    ++  bix  (bass 16 (stun [2* 2*] six))
+    ++  hef  ;~(pose tip hif)
+    ++  hif  (boss 256 ;~(plug tip tiq (easy ~)))
+    ++  pev  (bass 64 ;~(plug sev (stun [0* 4*] siv)))
+    ++  pew  (bass 64 ;~(plug sew (stun [0* 4*] siw)))
+    ++  piv  (bass 64 (stun [5* 5*] siv))
+    ++  piw  (bass 64 (stun [5* 5*] siw))
+    ++  qeb  (bass 2 ;~(plug seb (stun [0* 3*] seb)))
+    ++  qex  (bass 16 ;~(plug sex (stun [0* 3*] hit)))
+    ++  qib  (bass 2 (stun [4* 4*] sib))
+    ++  qix  (bass 16 (stun [4* 4*] six))
+    ++  qit  ;~(pose (shim 32 38) (shim 40 91) (shim 93 126))
+    ++  seb  (cold 1 (just '1'))
+    ++  sed  (cook |=(a=@ (sub a '0')) (shim '1' '9'))
+    ++  sev  ;~(pose sed sov)
+    ++  sew  ;~(pose sed sow)
+    ++  sex  ;~(pose sed sox)
+    ++  sib  (cook |=(a=@ (sub a '0')) (shim '0' '1'))
+    ++  sid  (cook |=(a=@ (sub a '0')) (shim '0' '9'))
+    ++  siv  ;~(pose sid sov)
+    ++  siw  ;~(pose sid sow)
+    ++  six  ;~(pose sid sox)
+    ++  sov  (cook |=(a=@ (sub a 87)) (shim 'a' 'w'))
+    ++  sow  ;~  pose
+               (cook |=(a=@ (sub a 87)) (shim 'a' 'z'))
+               (cook |=(a=@ (sub a 28)) (shim 'A' 'Z'))
+               (cold 62* (just '-'))
+               (cold 63* (just '~'))
+             ==
+    ++  sox  (cook |=(a=@ (sub a 87)) (shim 'a' 'f'))
+    ++  ted  (bass 10 ;~(plug sed (stun [0* 2*] sid)))
+    ++  tip  (cook |=(a=@ (far a)) til)
+    ++  tiq  (cook |=(a=@ (fyr a)) til)
+    ++  tid  (bass 10 (stun [3* 3*] sid))
+    ++  til  (boss 256 (stun [3* 3*] low))
+    ++  voy  ;~(pfix bas ;~(pose bas soq bix))
+    ++  vym  (bass 256 ;~(plug low (star ;~(pose low nud))))
+    ++  vyn  (bass 256 ;~(plug hip vym (easy ~)))
+    --
+  ::
+  ++  ag
+    &.
+    ++  bay  (bass 16 ;~(plug qeb:ab (star ;~(pfix dog qib:ab))))
+    ++  bip  (boss 0x10000 (stun [8* 8*] qex:ab))
+    ++  dem  (bass 1000 ;~(plug ted:ab (star ;~(pfix dog tid:ab))))
+    ++  dim  ;~  pose 
+               (cold 0 (just '0')) 
+               (bass 10 ;~(plug sed:ab (star sid:ab)))
+             ==
+    ++  hex  (bass 0x10000 ;~(plug qex:ab (star ;~(pfix dog qix:ab))))
+    ++  fed  (bass 0x10000 ;~(plug hef:ab (star ;~(pfix dog hif:ab))))
+    ++  lip  (boss 256 ;~(plug ted:ab (stun [4* 4*] ;~(pfix dog ted:ab))))
+    ++  sym  (cook |=(a=*(list num) (rap 3 a)) ;~(plug vym:ab (star vyn:ab)))
+    ++  qut  %+  ifix  [soq soq]
+             %+  boss  256
+             %-  star  ;~  pose
+                         ;~(pfix bas ;~(pose bas soq bix:ab))
+                         ;~(pose (shim 32 38) (shim 40 91) (shim 93 126))
+                       ==
+    ++  viz  (boss 0x2000000 ;~(plug pev:ab (star ;~(pfix dog piv:ab))))
+    ++  wiz  (boss 0x40000000 ;~(plug pew:ab (star ;~(pfix dog piw:ab))))
+    --
+  ::
+  ::      Tier 5a/6, parsing: number and span language
+  ::
+  ++  kind  cask
+  ++  mole  ~[p=(kind) q=@]
+  ++  newt
+    $&  ~                                       ::  not used
+      [~ p=(mole)]
+      [%blob p=*]
+      [%over p=((list newt))]
+      [%with p=((list newt))]
+    ==
+  ++  real
+    =+  ^=  vox
+        ;~  plug
+          ;~(pose (cold | hip) (easy &))
+          ;~(plug dim:ag ;~(pose ;~(pfix dot dim:ag) (easy 0)))
+        ==
+    ;~  pose
+      (stag %rh (cook rylh ;~(pfix sig vox)))
+      (stag %rq (cook rylq ;~(pfix ;~(plug dot dot) vox)))
+      (stag %rd (cook ryld ;~(pfix dot vox)))
+      (stag %rs (cook ryls vox))
+    ==
+  ::
+  ++  bask
+    ;~  pose
+      ;~  pfix  (just '0')
+        ;~  pose
+          (stag %ub ;~(pfix (just 'b') bay:ag))
+          (stag %ux ;~(pfix (just 'x') hex:ag))
+          (stag %uv ;~(pfix (just 'v') viz:ag))
+          (stag %uw ;~(pfix (just 'w') wiz:ag))
+        ==
+      ==
+      (stag %ud dem)
+    ==
+  ::
+  ++  sack
+    %+  knee  (newt)  |.  ~+
+    %-  stew  :~
+      :-  ['0' '9']
+        (stag ~ bask)
+      :-  '-'
+        =+  ^=  neg
+            |=  [syn=? mol=(mole)]  ^-  *mole
+            ?>  =('u' (end 3 1 p.mol))
+            [(cat 3 's' (rsh 3 1 p.mol)) (new:si syn q.mol)]
+        %+  stag  ~
+        ;~  pfix  hip
+          ;~  pose
+            (cook |=(a=(mole) (neg | a)) bask)
+            ;~(pfix hip (cook |=(a=(mole) (neg & a)) bask))
+            (stag %up fed)
+          ==
+        ==
+      :-  '.'
+        ;~  pfix  dot
+          %+  stag  ~
+          ;~  pose
+            real
+            (stag %if lip:ag)
+            ;~(pfix dot (stag %is bip:ag))
+          ==
+        ==
+      :-  '~'
+        ;~  pose
+          (easy [~ %n 0])
+        ==
+    ==
+  ::
+  ::      Tier 5a/7, parsing: external interface
   ::
   ++  rash  |*([naf=@ sab=rule] (scan (trip naf) sab))
   ++  scan  |*  [los=*tape sab=rule]
@@ -2272,7 +2356,7 @@
         q=(yard)
     ==
   ::
-  ::  Tier 6 constructs
+  ::  Tier 6 consors
   ::
   ++  chop
     $*  lef=*term
@@ -2511,9 +2595,10 @@
   ++  blah  ^~  [%dtsg %% 0]
   ++  bool  ^~  [%ktms [%dtwt %dtsg %% 0] [%dtsg %% 0]]
   ++  home  |=(gen=*gene ^-(*gene [%tsgr [~ gom] gen]))
+  ++  wipe  |=(gen=*gene [%ktms [%dttr blah blah] gen])
   ::::
   ::::
-  ++  bunt                                              ::  ignore subject
+  ++  bunt
     |-  ^-  *gene
     ?-    sec
         [^ *]
@@ -2522,7 +2607,7 @@
         [%base *]
       ?-  p.sec
         [%atom *]  [%dtpt p.p.sec 0]
-        %noun      =+(bah=blah [%ktms [%dttr bah bah] bah])
+        %noun      (wipe blah)
         %cell      =+(nec=$(sec [%base %noun]) [%clms nec nec])
         %flag      bool
         %null      [%dtsg %n %%]
@@ -2560,42 +2645,68 @@
     ==
   ::
   ++  bust
-    &=  axe=`*axis`1
-    :::: 
-    ++  $
-      ?-    sec
-          [^ *]
-        !!
-      ::
-          [%base *]
-        !!
-      ::
-          [%bark *]
-        !!
-      ::
-          [%bush *]
-        !!
-      :: 
-          [%fern *]
-        !!
-      ::
-          [%herb *]
-        !!
-      ::
-          [%kelp *]
-        !!
-      ::
-          [%leaf *]
-        !!
-      ::
-          [%mold *]
-        !!
-      ::
-          [%weed *] 
-        !!
+    |=  axe=`*axis`1
+    ?-    sec
+        [^ *]
+      =+  sur=|.([%cnts [~ 1] [[~ axe] bunt(sec [%base %cell])]])
+      =+  ^=  nor  |.
+          :+  %clms
+            $(nag -.nag, axe (peg axe 2))
+          $(nag +.nag, axe (peg axe 3))
+      ?-  nag
+        &  [%tsgr [%wtsg [~ axe] [~ 1] $:sur] $:nor(nag [& &])]
+        |  [%tsgr $:sur $:nor(nag [& &])]
+        ^  $:nor
+        *  !!
       ==
-  :::: 
-    --
+    ::
+        [%base *]
+      ?-    p.sec
+          [%atom *] 
+        =+  buv=bunt
+        [%wtsg [~ axe] [%ktms buv [~ axe]] buv]
+      ::
+          %noun
+        (wipe [~ axe])
+      ::
+          %cell   
+        =+  buv=bunt
+        [%wtsg [~ axe] bunt [%ktms buv [~ axe]]]
+      ::
+          %flag
+        :^    %wtcl
+            [%dtts [%dtsg %% |] [~ axe]] 
+          [%dtsg %f |]
+        [%dtsg %f &]
+      ::
+          %null    
+        bunt  
+      ==
+    ::
+        [%bark *]
+      !!
+    ::
+        [%bush *]
+      !!
+    :: 
+        [%fern *]
+      !!
+    ::
+        [%herb *]
+      !!
+    ::
+        [%kelp *]
+      !!
+    ::
+        [%leaf *]
+      !!
+    ::
+        [%mold *]
+      !!
+    ::
+        [%weed *] 
+      !!
+    ==
   -- 
 ::
 ++  ap
@@ -4635,9 +4746,11 @@
           %dtsg
         ;~  pose
           (stag %ux ;~(pfix (just '0') (just 'x') hex))
-          (stag %uv ;~(pfix (just '0') (just 'v') viz))
+          ::  (stag %uv ;~(pfix (just '0') (just 'v') viz))
           (stag %ud dem)
         ==
+      :-  '#'
+        (stag %dtsg (stag %ud ;~(pfix hax dim:ag)))
       :-  ':'
         (stag %smcl ;~(pfix col (ifix [pal par] (most ace wide))))
       :-  '='
@@ -4684,8 +4797,7 @@
     ^-  *(like tile)
     %.  tub
     ~+
-    %-  stew
-    :~
+    %-  stew  :~
       :-  '['
         %+  cook
           |=(a=*(list tile) ?~(a !! ?~(t.a i.a [i.a $(a t.a)])))
@@ -5031,7 +5143,7 @@
         |=(a=*knot [a ~])
       ;~  pose
         sym
-        (cook |=(a=*axis [~ a]) ;~(pose ven ;~(pfix dot dem) (cold 1 dot)))
+        (cook |=(a=*axis [~ a]) ;~(pose ven ;~(pfix dot dim:ag) (cold 1 dot)))
       ==
     ==
   ::
