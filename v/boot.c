@@ -453,17 +453,17 @@ u2_ve_word(c3_w wod_w)
     top = u2_no;
   }
   if ( wod_w / (1000 * 1000) ) {
-    fprintf(stderr, ((top == u2_yes) ? "%u." : "%3.0u."), 
+    fprintf(stderr, ((top == u2_yes) ? "%u." : "%03u."), 
                      wod_w / (1000 * 1000));
     wod_w %= (1000 * 1000);
     top = u2_no;
   }
   if ( wod_w / 1000 ) {
-    fprintf(stderr, ((top == u2_yes) ? "%u." : "%3.0u."), wod_w / 1000);
+    fprintf(stderr, ((top == u2_yes) ? "%u." : "%03u."), wod_w / 1000);
     wod_w %= 1000;
     top = u2_no;
   }
-  fprintf(stderr, ((top == u2_yes) ? "%u" : "%3.0u"), wod_w);
+  fprintf(stderr, ((top == u2_yes) ? "%u" : "%03u"), wod_w);
 }
 
 /* u2_ve_grab(): garbage-collect the world, plus roots.
