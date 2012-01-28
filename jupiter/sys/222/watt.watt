@@ -1,3 +1,4 @@
+!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -1534,11 +1535,11 @@
         %m  (trip p.mol)                   ::  deprecated
         %s  (trip p.mol)
         %%  :-  '~'
-            =+  raw=(trip p.mol)
+            =+  raw=(trip q.mol)
             |-  ^-  *tape
-            =+  res=$(raw t.raw)
             ?~  raw
               ~
+            =+  res=$(raw t.raw)
             ?:  ?|  &((gte i.raw 'a') (lte i.raw 'z'))
                     &((gte i.raw 'A') (lte i.raw 'Z'))
                     &((gte i.raw '0') (lte i.raw '9'))
@@ -1547,7 +1548,9 @@
               [i.raw $(raw t.raw)]
             ?:  ?|(=('.' i.raw) =('~' i.raw))
               [i.raw i.raw res] 
-            (tart [16 2] q.mol |=(a=@ [~(x nel a) ~]))
+            ?:  =(' ' i.raw)
+              ['.' res]
+            ['~' (weld (tart [16 2] i.raw |=(a=@ [~(x nel a) ~])) res)]
       ==
     ::
         %u
@@ -1747,6 +1750,19 @@
       (fail tub) 
     =+  zac=(slip i.q.tub p.tub) 
     [zac [~ i.q.tub [zac t.q.tub]]]
+  ::
+  ++  sear
+    ~.  %sear
+    |*  ^~  [pyq=|=(* *(unit)) sef=rule]
+    ~.  %fun
+    |=  tub=*clip
+    =+  vex=(sef tub)
+    ?~  q.vex
+      vex
+    =+  gey=(pyq p.u.q.vex)
+    ?~  gey
+      [p=p.vex q=~]
+    [p=p.vex q=[~ u=[p=u.gey q=q.u.q.vex]]]
   ::
   ++  shim
     ~.  %shim
@@ -2179,12 +2195,13 @@
   ::
   ::      Tier 5c/6, parsing: number and span language
   ::
-  ++  newt
+  ++  loot
     $&  ~                                       ::  not used
       [~ p=(mole)]
       [%blob p=*]
-      [%over p=((list newt))]
-      [%with p=((list newt))]
+      [%long p=((list loot))]
+      [%over p=((set loot))]
+      [%with p=((map loot loot))]
     ==
   ++  real
     =+  ^=  vox
@@ -2213,7 +2230,7 @@
     ==
   ::
   ++  sack
-    %+  knee  (newt)  |.  ~+
+    %+  knee  (loot)  |.  ~+
     %-  stew  :~
       :-  ['0' '9']
         (stag ~ bask)
@@ -2231,36 +2248,50 @@
         ==
       :-  '.'
         ;~  pfix  dot
-          %+  stag  ~
           ;~  pose
-            real
-            (stag %h fed)
-            (stag %il lip:ag)
-            (stag %ib bip:ag)
+            %+  stag  ~
+            ;~  pose
+              real
+              (stag %h fed)
+              (stag %il lip:ag)
+              (stag %ib bip:ag)
+            ==
+          ::
+            ;~  pfix  dot
+              ;~  pose
+                ;~(pfix dot (cook |=(a=@ [%blob (cue a)]) wiz:ag))
+                %+  cook
+                  |=  [a=*{%long %over} b=((list loot))]
+                  ^-  (loot)
+                  ?-  a
+                    %long  [%long b]
+                    %over  [%over (~(gas in ((set loot))) b)]
+                  ==
+                ;~  plug
+                  ;~(pose (cold %over dot) (easy %long)) 
+                  %+  ifix
+                    [cab ;~(plug cab cab)]
+                  (more cab sack)
+                ==
+              == 
+            ==
           ==
         ==
       :-  '~'
         ;~  pfix  sig
           ;~  pose
             (stag ~ (stag %ta tyq:ag))
+            (cold [~ %ta ~] sig)
             (easy [~ %n 0])
           ==
         ==
     ==
   ::
   ++  spit
-    |=  tew=(newt)
-    ?>  ?=(^ tew)
-    ?-    -.tew
-        ~
-      !!
-        %blob
-      !!
-        %over
-      !!
-        %with
-      !!
-    ==
+    |=  lot=(loot)
+    !!
+  ::
+  ++  sock  (sear |=(a=(loot) ?:(?=(~ -.a) [~ u=+.a] ~)) sack)
   ::
   ::      Tier 5c/7, parsing: external interface
   ::
@@ -4940,12 +4971,12 @@
       :-  '#'
         ;~  pfix  hax
           ;~  pose
-            (stag %dtpt bask)
+            (stag %dtpt sock)
             ;~  pfix  hax
               %+  cook
                 |=  a=*mole
                 [%dtpt %ta (rap 3 (rend a))]
-              bask
+              sock
             ==
           ==
         ==
