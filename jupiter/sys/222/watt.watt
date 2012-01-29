@@ -1,4 +1,3 @@
-!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -1145,6 +1144,13 @@
   ++  cask  ~[%%*]
   ++  char  ~[''*]
   ++  clip  ~[p=(hair) q=(tape)]
+  ++  coin  $^
+              [~ p=(mole)]
+              [%blob p=*]
+              [%long p=((list coin))]
+              [%over p=((set coin))]
+              [%with p=((map coin coin))]
+            ==
   ++  edge  ~[p=(hair) q=((unit ~[p=* q=(clip)]))]
   ++  fact  ~[p=* q=*]
   ++  hair  ~[p=1* q=1*]
@@ -1171,7 +1177,7 @@
   --
 =>
   ::::
-  ::::  Tier 5, packing, printing, parsing, crypto
+  ::::  Tier 5, packing, parsing, formatting, crypto
   ::::
   ~%    %e
       -
@@ -1246,427 +1252,7 @@
     =+  e=(add (bex (dec c)) (cut 0 [d (dec c)] b))
     [(add (add c c) e) (cut 0 [(add d (dec c)) e] b)]
   ::
-  ::    Tier 5b/0, printing: basic text handling
-  ::
-  ++  mesc
-    |=  vib=*tape
-    ^-  *tape
-    ?~  vib
-      ~
-    ?:  =('\\' i.vib)
-      ['\\' '\\' $(vib t.vib)]
-    ?:  ?|((gth i.vib 126) (lth i.vib 32) =(39 i.vib))
-      ['\\' (weld ~(rux at i.vib) (runt [1 47] $(vib t.vib)))]
-    [i.vib $(vib t.vib)]
-  ::
-  ++  runt
-    |=  [[a=@ b=@] c=*tape]
-    ^-  *tape
-    ?:  =(0 a)
-      c
-    [b $(a (dec a))]
-  ::
-  ++  trim
-    |=  [a=@ b=*tape]
-    ^-  [p=*tape q=*tape]
-    ?~  b
-      [~ ~]
-    ?:  =(0 a)
-      [~ b]
-    =+  c=$(a (dec a), b +.b)
-    [[-.b p.c] q.c]
-  ::
-  ++  trip
-    ~.  %trip
-    |=  [a=@]  ^-  *tape
-    ?:  =(0 (met 3 a))
-      ~
-    [^:(''* (end 3 1 a)) $(a (rsh 3 1 a))]
-  ::
-  ::    Tier 5b/1, prettyprinting: processors
-  ::
-  ++  re
-    &=  tac=*tank
-    ++  ram
-      ^-  *tape
-      ?-    -.tac
-          %leaf  p.tac
-          %palm  ram(tac [%rose [p.p.tac (weld q.p.tac r.p.tac) s.p.tac] q.tac])
-          %rose
-        %+  weld
-          q.p.tac
-        |-  ^-  *tape
-        ?~  q.tac
-          r.p.tac
-        =+  voz=$(q.tac t.q.tac)
-        (weld ram(tac i.q.tac) ?~(t.q.tac voz (weld p.p.tac voz)))
-      ==
-    ::
-    ++  win
-      |=  [tab=@ edg=@]
-      =+  lug=`*wall`~
-      &-  |-  ^-  *wall
-          ?-    -.tac
-              %leaf  (rig p.tac)
-              %palm 
-            ?:  fit
-              (rig ram)
-            ?~  q.tac
-              (rig q.p.tac)
-            ?~  t.q.tac
-              (rig(tab (add 2 tab), lug $(tac i.q.tac)) q.p.tac)
-            =>  .(q.tac `*(list tank)`q.tac)
-            =+  lyn=(mul 2 (lent q.tac))
-            =+  ^=  qyr
-                |-  ^-  *wall
-                ?~  q.tac
-                  lug
-                %=  $$
-                  tac i.q.tac
-                  tab (add tab (sub lyn 2))
-                  lug $(q.tac t.q.tac, lyn (sub lyn 2))
-                ==
-            (wig(lug qyr) q.p.tac)
-          ::
-              %rose
-            ?:  fit
-              (rig ram)
-            =+  ^=  gyl
-              |-  ^-  *wall
-              ?~  q.tac
-                ?:(=(%% r.p.tac) lug (rig r.p.tac))
-              $$(tac i.q.tac, lug $(q.tac t.q.tac), tab din)
-            ?:  =(%% q.p.tac)
-              gyl
-            (wig(lug gyl) q.p.tac)
-          ==
-      ::
-      ++  din  (mod (add 2 tab) (mul 2 (div edg 3)))
-      ++  fit  (lte (lent ram) (sub edg tab))
-      ++  rig
-        |=  hom=*tape
-        ^-  *wall
-        ?:  (lte (lent hom) (sub edg tab))
-          [(runt [tab ' '] hom) lug]
-        =>  .(tab (add tab 2), edg (sub edg 2))
-        =+  mut=(trim (sub edg tab) hom)
-        :-  (runt [(sub tab 2) ' '] ['\\' '/' (weld p.mut `hom`['\\' '/' ~])])
-        =>  .(hom q.mut)
-        |-
-        ?~  hom
-          :-  %+  runt 
-                [(sub tab 2) ' '] 
-              ['\\' '/' (runt [(sub edg tab) ' '] ['\\' '/' ~])]
-          lug
-        =>  .(mut (trim (sub edg tab) hom))
-        [(runt [tab ' '] p.mut) $(hom q.mut)]
-      ::
-      ++  wig
-        |=  hom=*tape
-        ^-  *wall
-        ?~  lug
-          (rig hom)
-        =+  lin=(lent hom)
-        =+  wug=:(add 1 tab lin)
-        ?.  =+  mir=i.lug 
-            |-  ?~  mir 
-                  |
-                ?|(=(0 wug) ?&(=(' ' i.mir) $(mir t.mir, wug (dec wug))))
-          (rig hom)
-        [(runt [tab ' '] (weld hom `*tape`[' ' (slag wug i.lug)])) t.lug]
-      --
-    --
-  ::
-  ::    Tier 5b/2, prettyprinting: atom rendering
-  ::
-  ++  at
-    &=  a=@
-    ++  r
-      ?:  ?&  (gte (met 3 a) 2)
-              |-
-              ?:  =(0 a)
-                &
-              =+  vis=(end 3 1 a)
-              ?&  ?|(=('-' vis) ?&((gte vis 'a') (lte vis 'z'))) 
-                  $(a (rsh 3 1 a))
-              ==
-          ==
-        rtam
-      ?:  (lte (met 3 a) 2)
-        rud
-      rux
-    ::
-    ++  rf    `*tape`[?-(a & '&', | '|', * !!) ~]
-    ++  rn    `*tape`[?>(=(0 a) '~') ~]
-    ++  rt    `*tape`['\'' (weld (mesc (trip a)) `*tape`['\'' ~])]
-    ++  rta   rt
-    ++  rtam  `*tape`['%' (trip a)]
-    ++  rub   `*tape`['0' 'b' (rum 2 ~ |=(b=@ (add '0' b)))]
-    ++  rud   (rum 10 ~ |=(b=@ (add '0' b)))
-    ++  rum
-      |=  [b=@ c=*tape d=|+(@ @)]
-      ^-  *tape
-      ?:  =(0 a)
-        [(d 0) c]
-      =+  e=0*
-      |-  ^-  *tape
-      ?:  =(0 a) 
-        c
-      =+  f=&(!=(0 e) =(0 (mod e ?:(=(10 b) 3 4))))
-      %=  $
-        a  (div a b)
-        c  [(d (mod a b)) ?:(f [?:(=(10 b) ',' '-') c] c)]
-        e  +(e)
-      ==
-    ::
-    ++  rup
-      =+  b=(met 3 a)
-      ^-  *tape
-      :-  '-'
-      |-  ^-  *tape
-      ?:  (gth (met 5 a) 1)
-        %+  weld
-          $(a (rsh 5 1 a), b (sub b 4)) 
-        `*tape`['-' '-' $(a (end 5 1 a), b 4)]
-      ?:  =(0 b)
-        ['~' ~]
-      ?:  (lte b 1)
-        (trip (fap a))
-      |-  ^-  *tape
-      ?:  =(2 b)
-        =+  c=(rsh 3 1 a)
-        =+  d=(end 3 1 a)
-        (weld (trip (fap c)) (trip (fyp (mix c d))))
-      =+  c=(rsh 3 2 a)
-      =+  d=(end 3 2 a)
-      (weld $$(a c, b (met 3 c)) `*tape`['-' $(a (mix c d), b 2)])
-    ::
-    ++  ruv
-      ^-  *tape
-      :+  '0'
-        'v'
-      %^    rum
-          64
-        ~
-      |=  b=@
-      ?:  =(63 b)
-        '+'
-      ?:  =(62 b) 
-        '-'
-      ?:((lth b 26) (add 65 b) ?:((lth b 52) (add 71 b) (sub b 4)))
-    ::
-    ++  rux   `*tape`['0' 'x' (rum 16 ~ |=(b=@ (add b ?:((lth b 10) 48 87))))]
-    --
-  ::
-  ++  tent
-    |=  [[bas=@ min=@] [hol=@ rom=*tape] par=|+([? @ *tape] *tape)]
-    ^-  *tape
-    ?:  &(=(0 hol) =(0 min))
-      rom
-    =+  [rad=(mod hol bas) dar=(div hol bas)]
-    $(min ?:(=(0 min) 0 (dec min)), hol dar, rom (par =(0 dar) rad rom))
-  ::
-  ++  tart
-    |=  [[bas=@ gop=@] hol=@ dig=|+(@ *tape)]
-    ^-  *tape
-    %^    tent
-        [|-(?:(=(0 gop) 1 (mul bas $(gop (dec gop))))) 0]
-      [hol ~]
-    |=  [top=? seg=@ res=*tape]
-    %+  weld
-      ?:(top ~ `*tape`['.' ~])
-    %^    tent
-        [bas ?:(top 0 gop)]
-      [seg res]
-    |=([t=? s=@ r=*tape] (weld (dig s) r))
-  ::
-  ++  rend
-    |=  mol=*mole
-    ^-  *tape
-    ~|  %rend
-    ?:  =(0 p.mol)
-      ?:  ?&  (gte (met 3 q.mol) 2)
-              =+  bok=q.mol
-              |-  ^-  ?
-              ?:  =(0 bok)
-                &
-              =+  vis=(end 3 1 bok)
-              ?&  ?|  &((gte vis 'a') (lte vis 'z'))
-                      &(=('-' vis) !=(bok q.mol) !=(bok vis))
-                  ==
-                  $(bok (rsh 3 1 bok))
-              ==
-          ==
-        $(p.mol %tam)
-      ?:  (lte (met 3 q.mol) 2)
-        $(p.mol %ud)
-      $(p.mol %ux)
-    =+  yed=(end 3 1 p.mol)
-    =+  ^=  nel
-        &=  git=@
-        ++  d  (add git '0')
-        ++  x  ?:((gte git 10) (add git 87) d)
-        ++  w  ?:  =(git 63)     '~' 
-               ?:  =(git 62)     '-' 
-               ?:  (gte git 36)  (add git 29)
-               x
-        --
-    ?-    yed
-        %d
-      =+  hay=(cut 3 [1 1] p.mol)
-      !!
-        %f  [?:(=(& q.mol) '&' ?>(=(| q.mol) '|')) ~]
-    ::
-        %h
-      !!
-    ::
-        %n  [?>(=(0 q.mol) '~') ~]
-        %r
-      ~|(%real-nyet !!)
-    ::
-        %s
-      !!
-    ::
-        %t
-      =+  hay=(cut 3 [1 1] p.mol)
-      ?>  =('a' hay)
-      =+  yon=(rsh 3 2 p.mol)
-      ?+  yon  !!
-        %m  (trip p.mol)                   ::  deprecated
-        %s  (trip p.mol)
-        %%  :-  '~'
-            =+  raw=(trip q.mol)
-            |-  ^-  *tape
-            ?~  raw
-              ~
-            =+  res=$(raw t.raw)
-            ?:  ?|  &((gte i.raw 'a') (lte i.raw 'z'))
-                    &((gte i.raw 'A') (lte i.raw 'Z'))
-                    &((gte i.raw '0') (lte i.raw '9'))
-                    =('-' i.raw)
-                ==
-              [i.raw $(raw t.raw)]
-            ?:  ?|(=('.' i.raw) =('~' i.raw))
-              [i.raw i.raw res] 
-            ?:  =(' ' i.raw)
-              ['.' res]
-            ['~' (weld (tart [16 2] i.raw |=(a=@ [~(x nel a) ~])) res)]
-      ==
-    ::
-        %u
-      =+  hay=(cut 3 [1 1] p.mol)
-      =+  pre=`*tape`?:(=(%d hay) ~ ['0' hay ~])
-      %+  weld
-        pre
-      ?:  =(0 q.mol)
-        `*tape`['0' ~]
-      ?+  hay  !!
-        %b  (tart [2 4] q.mol |=(a=@ [~(d nel a) ~]))
-        %d  (tart [10 3] q.mol |=(a=@ [~(d nel a) ~]))
-        %x  (tart [16 4] q.mol |=(a=@ [~(x nel a) ~]))
-        %v  (tart [32 5] q.mol |=(a=@ [~(x nel a) ~]))
-        %w  (tart [64 5] q.mol |=(a=@ [~(w nel a) ~]))
-      ==
-    ::
-        *
-      !!
-    ==
-  ::
-  ::    Tier 5b/3, prettyprinting: general-purpose printing.
-  ::
-  ++  show
-    |=  vem=*
-    &-  ^-  *tank
-        ?:  ?=(@ vem)
-          [%leaf (mesc (trip vem))]
-        ?-    vem
-            [s=~ c=*]         
-          [%leaf '\'' (weld (mesc (tape +.vem)) `*tape`['\'' ~])]
-        ::
-            [s=%a c=@]        [%leaf (mesc (trip c.vem))]
-            [s=%b c=*]        (shop c.vem |=(a=@ ~(rub at a)))
-            [s=[%c p=@] c=*]
-          :+  %palm
-            [['.' ~] ['-' ~] ~ ~]
-          [[%leaf (mesc (trip p.s.vem))] $(vem c.vem) ~]
-        ::
-            [s=%d c=*]        (shop c.vem |=(a=@ ~(rud at a)))
-            [s=%k c=*]        (tank c.vem)
-            [s=%o c=*]        
-          %=    $
-              vem 
-            :-  [%m '%a:<[%d %d].[%d %d]>'] 
-            [-.c.vem +<-.c.vem +<+.c.vem +>-.c.vem +>+.c.vem ~]
-          ==
-        ::
-            [s=%p c=*]        (shop c.vem |=(a=@ ~(rup at a)))
-            [s=%q c=*]        (shop c.vem |=(a=@ ~(r at a)))
-            [s=%r c=*]        $(vem [[%r ' ' '{' '}'] c.vem])
-            [s=%t c=*]        (shop c.vem |=(a=@ ~(rt at a)))
-            [s=%v c=*]        (shop c.vem |=(a=@ ~(ruv at a)))
-            [s=%x c=*]        (shop c.vem |=(a=@ ~(rux at a)))
-            [s=[%m p=@] c=*]  (ship p.s.vem c.vem)
-            [s=[%r p=@] c=*]
-          $(vem [[%r ' ' (cut 3 [0 1] p.s.vem) (cut 3 [1 1] p.s.vem)] c.vem])
-        ::
-            [s=[%r p=@ q=@ r=@] c=*]
-          :+  %rose
-            :*  p=(mesc (trip p.s.vem))
-                q=(mesc (trip q.s.vem))
-                r=(mesc (trip r.s.vem))
-            ==
-          |-  ^-  *(list tank)
-          ?~  c.vem
-            ~
-          [$$(vem -.c.vem) $(c.vem +.c.vem)]
-        ::
-            [s=%z c=*]        $(vem [[%r %% %% %%] c.vem])
-            *                 !!
-        ==
-    ++  ship
-      |=  [fom=@ gar=*]
-      ^-  *tank
-      =+  l=(met 3 fom)
-      =+  i=0*
-      :-  %leaf
-      |-  ^-  *tape
-      ?:  (gte i l)
-        ~
-      =+  c=(cut 3 [i 1] fom)
-      ?.  =(37 c)
-        (weld (mesc [c ~]) $(i +(i)))
-      =+  d=(cut 3 [+(i) 1] fom)
-      ?.  .?(gar)
-        ['\\' '#' $(i (add 2 i))]
-      (weld ~(ram re (show d -.gar)) $(i (add 2 i), gar +.gar))
-    ::
-    ++  shop
-      |=  [aug=* vel=|+(a=@ *tape)]
-      ^-  *tank
-      ?:  ?=(@ aug)
-        [%leaf (vel aug)]
-      :+  %rose 
-        [[' ' ~] ['[' ~] [']' ~]]
-      =>  .(aug `*`aug)
-      |-  ^-  *(list tank)
-      ?:  ?=(@ aug)
-        [$$ ~]
-      [$$(aug -.aug) $(aug +.aug)]
-    --
-  ::
-  ::  Tier 5c/0, parsing: tracing
-  ::
-  ++  last  |=  [zyc=*hair naz=*hair]
-            ^-  *hair
-            ?:  =(p.zyc p.naz)
-              ?:((gth q.zyc q.naz) zyc naz)
-            ?:((gth p.zyc p.naz) zyc naz)
-  ::
-  ++  slip  |=  [weq=*char naz=*hair]
-            ^-  *hair
-            ?:(=(10 weq) [+(p.naz) 1] [p.naz +(q.naz)])
-  ::
-  ::      Tier 5c/1, parsing: custom processing
+  ::      Tier 5b/1, parsing: custom processing
   ::
   ++  cold
     ~.  %cold
@@ -1866,7 +1452,7 @@
       wag
     [p.wag [~ [p.u.q.vex p.u.q.wag] q.u.q.wag]]
   ::
-  ::      Tier 5c/2, parsing: bolts
+  ::      Tier 5b/2, parsing: bolts
   ::
   ++  bend
     ~.  %bend
@@ -1936,7 +1522,7 @@
     =+  yit=(sab q.u.q.vex)
     [p=(last p.vex p.yit) q=?~(q.yit ~ [~ u=[p=p.u.q.vex q=q.u.q.yit]])]
   ::
-  ::      Tier 5c/3, parsing: rule composers
+  ::      Tier 5b/3, parsing: rule composers
   ::
   ++  bass
     |*  ^~  [wuc=@ tyd=rule]
@@ -1978,7 +1564,7 @@
     |*  ^~  fel=rule
     (stir `*(list %{(know *fel)})`~ |*([a=* b=*] [a b]) fel)
   ::
-  ::      tier 5c/4, parsing: ascii characters
+  ::      tier 5b/4, parsing: ascii characters
   ::
   ++  ace  (just ' ')
   ++  bar  (just '|')
@@ -2014,7 +1600,7 @@
   ++  wut  (just '?')
   ++  zap  (just '!')
   ::
-  ::      tier 5c/5, parsing: watty whitespace & termination
+  ::      tier 5b/5, parsing: watty whitespace & termination
   ::
   ++  dog  ;~(plug dot gay)
   ++  dun  (cold ~ ;~(plug hip hip))
@@ -2024,7 +1610,7 @@
   ++  gay  ;~(pose gap (easy ~))
   ++  vul  (cold ~ ;~(plug col col (star (shim 32 126)) (just ^-(@ 10))))
   ::
-  ::      tier 5c/5.x, classic ascii utilities  (XX destroy)
+  ::      tier 5b/5.x, classic ascii utilities  (XX destroy)
   ::
   ++  alf  ;~(pose low hig)
   ++  aln  ;~(pose low hig nud)
@@ -2101,7 +1687,7 @@
     ==
   ::  ++  viz  (bass 64 (most gon vit))
   ::
-  ::      tier 5c/7, parsing: basic atoms
+  ::      tier 5b/7, parsing: basic atoms
   ::
   ++  ab
     &.
@@ -2128,9 +1714,8 @@
                (shim 'A' 'Z')
                (shim '0' '9')
                hip
-               (cold 46 ;~(plug dot dot))
                (cold 32 dot)
-               ;~(pfix sig ;~(pose sig bix))
+               ;~(pfix sig ;~(pose sig dot bix))
              ==
     ++  sid  (cook |=(a=@ (sub a '0')) (shim '0' '9'))
     ++  siv  ;~(pose sid sov)
@@ -2153,6 +1738,234 @@
     ++  vym  (bass 256 ;~(plug low (star ;~(pose low nud))))
     ++  vyn  (bass 256 ;~(plug hip vym (easy ~)))
     --
+  ::
+  ::      Tier 5b/7, parsing: external interface
+  ::
+  ++  rash  |*([naf=@ sab=rule] (scan (trip naf) sab))
+  ++  scan  |*  [los=*tape sab=rule]
+            =+  vex=((full sab) [p=*hair q=los])
+            ?~  q.vex
+              ~~  (show [%m '{%d %d}'] p.p.vex q.p.vex ~)
+              ~|('scan-stop' !!)
+            p.u.q.vex
+  ::
+  ::    Tier 5c/0, formatting: basic text handling
+  ::
+  ++  mesc
+    |=  vib=*tape
+    ^-  *tape
+    ?~  vib
+      ~
+    ?:  =('\\' i.vib)
+      ['\\' '\\' $(vib t.vib)]
+    ?:  ?|((gth i.vib 126) (lth i.vib 32) =(39 i.vib))
+      ['\\' (weld ~(rux at i.vib) (runt [1 47] $(vib t.vib)))]
+    [i.vib $(vib t.vib)]
+  ::
+  ++  runt
+    |=  [[a=@ b=@] c=*tape]
+    ^-  *tape
+    ?:  =(0 a)
+      c
+    [b $(a (dec a))]
+  ::
+  ++  trim
+    |=  [a=@ b=*tape]
+    ^-  [p=*tape q=*tape]
+    ?~  b
+      [~ ~]
+    ?:  =(0 a)
+      [~ b]
+    =+  c=$(a (dec a), b +.b)
+    [[-.b p.c] q.c]
+  ::
+  ++  trip
+    ~.  %trip
+    |=  [a=@]  ^-  *tape
+    ?:  =(0 (met 3 a))
+      ~
+    [^:(''* (end 3 1 a)) $(a (rsh 3 1 a))]
+  ::
+  ::    Tier 5c/1, formatting: span language
+  ::
+
+  ::
+  ::    Tier 5c/2, formatting: layout
+  ::
+  ++  re
+    &=  tac=*tank
+    ++  ram
+      ^-  *tape
+      ?-    -.tac
+          %leaf  p.tac
+          %palm  ram(tac [%rose [p.p.tac (weld q.p.tac r.p.tac) s.p.tac] q.tac])
+          %rose
+        %+  weld
+          q.p.tac
+        |-  ^-  *tape
+        ?~  q.tac
+          r.p.tac
+        =+  voz=$(q.tac t.q.tac)
+        (weld ram(tac i.q.tac) ?~(t.q.tac voz (weld p.p.tac voz)))
+      ==
+    ::
+    ++  win
+      |=  [tab=@ edg=@]
+      =+  lug=`*wall`~
+      &-  |-  ^-  *wall
+          ?-    -.tac
+              %leaf  (rig p.tac)
+              %palm 
+            ?:  fit
+              (rig ram)
+            ?~  q.tac
+              (rig q.p.tac)
+            ?~  t.q.tac
+              (rig(tab (add 2 tab), lug $(tac i.q.tac)) q.p.tac)
+            =>  .(q.tac `*(list tank)`q.tac)
+            =+  lyn=(mul 2 (lent q.tac))
+            =+  ^=  qyr
+                |-  ^-  *wall
+                ?~  q.tac
+                  lug
+                %=  $$
+                  tac i.q.tac
+                  tab (add tab (sub lyn 2))
+                  lug $(q.tac t.q.tac, lyn (sub lyn 2))
+                ==
+            (wig(lug qyr) q.p.tac)
+          ::
+              %rose
+            ?:  fit
+              (rig ram)
+            =+  ^=  gyl
+              |-  ^-  *wall
+              ?~  q.tac
+                ?:(=(%% r.p.tac) lug (rig r.p.tac))
+              $$(tac i.q.tac, lug $(q.tac t.q.tac), tab din)
+            ?:  =(%% q.p.tac)
+              gyl
+            (wig(lug gyl) q.p.tac)
+          ==
+      ::
+      ++  din  (mod (add 2 tab) (mul 2 (div edg 3)))
+      ++  fit  (lte (lent ram) (sub edg tab))
+      ++  rig
+        |=  hom=*tape
+        ^-  *wall
+        ?:  (lte (lent hom) (sub edg tab))
+          [(runt [tab ' '] hom) lug]
+        =>  .(tab (add tab 2), edg (sub edg 2))
+        =+  mut=(trim (sub edg tab) hom)
+        :-  (runt [(sub tab 2) ' '] ['\\' '/' (weld p.mut `hom`['\\' '/' ~])])
+        =>  .(hom q.mut)
+        |-
+        ?~  hom
+          :-  %+  runt 
+                [(sub tab 2) ' '] 
+              ['\\' '/' (runt [(sub edg tab) ' '] ['\\' '/' ~])]
+          lug
+        =>  .(mut (trim (sub edg tab) hom))
+        [(runt [tab ' '] p.mut) $(hom q.mut)]
+      ::
+      ++  wig
+        |=  hom=*tape
+        ^-  *wall
+        ?~  lug
+          (rig hom)
+        =+  lin=(lent hom)
+        =+  wug=:(add 1 tab lin)
+        ?.  =+  mir=i.lug 
+            |-  ?~  mir 
+                  |
+                ?|(=(0 wug) ?&(=(' ' i.mir) $(mir t.mir, wug (dec wug))))
+          (rig hom)
+        [(runt [tab ' '] (weld hom `*tape`[' ' (slag wug i.lug)])) t.lug]
+      --
+    --
+  ::
+  ::    Tier 5c/2X, prettyprinting: OLD atom rendering (deprecated)
+  ::
+  ++  at
+    &=  a=@
+    ++  r
+      ?:  ?&  (gte (met 3 a) 2)
+              |-
+              ?:  =(0 a)
+                &
+              =+  vis=(end 3 1 a)
+              ?&  ?|(=('-' vis) ?&((gte vis 'a') (lte vis 'z'))) 
+                  $(a (rsh 3 1 a))
+              ==
+          ==
+        rtam
+      ?:  (lte (met 3 a) 2)
+        rud
+      rux
+    ::
+    ++  rf    `*tape`[?-(a & '&', | '|', * !!) ~]
+    ++  rn    `*tape`[?>(=(0 a) '~') ~]
+    ++  rt    `*tape`['\'' (weld (mesc (trip a)) `*tape`['\'' ~])]
+    ++  rta   rt
+    ++  rtam  `*tape`['%' (trip a)]
+    ++  rub   `*tape`['0' 'b' (rum 2 ~ |=(b=@ (add '0' b)))]
+    ++  rud   (rum 10 ~ |=(b=@ (add '0' b)))
+    ++  rum
+      |=  [b=@ c=*tape d=|+(@ @)]
+      ^-  *tape
+      ?:  =(0 a)
+        [(d 0) c]
+      =+  e=0*
+      |-  ^-  *tape
+      ?:  =(0 a) 
+        c
+      =+  f=&(!=(0 e) =(0 (mod e ?:(=(10 b) 3 4))))
+      %=  $
+        a  (div a b)
+        c  [(d (mod a b)) ?:(f [?:(=(10 b) ',' '-') c] c)]
+        e  +(e)
+      ==
+    ::
+    ++  rup
+      =+  b=(met 3 a)
+      ^-  *tape
+      :-  '-'
+      |-  ^-  *tape
+      ?:  (gth (met 5 a) 1)
+        %+  weld
+          $(a (rsh 5 1 a), b (sub b 4)) 
+        `*tape`['-' '-' $(a (end 5 1 a), b 4)]
+      ?:  =(0 b)
+        ['~' ~]
+      ?:  (lte b 1)
+        (trip (fap a))
+      |-  ^-  *tape
+      ?:  =(2 b)
+        =+  c=(rsh 3 1 a)
+        =+  d=(end 3 1 a)
+        (weld (trip (fap c)) (trip (fyp (mix c d))))
+      =+  c=(rsh 3 2 a)
+      =+  d=(end 3 2 a)
+      (weld $$(a c, b (met 3 c)) `*tape`['-' $(a (mix c d), b 2)])
+    ::
+    ++  ruv
+      ^-  *tape
+      :+  '0'
+        'v'
+      %^    rum
+          64
+        ~
+      |=  b=@
+      ?:  =(63 b)
+        '+'
+      ?:  =(62 b) 
+        '-'
+      ?:((lth b 26) (add 65 b) ?:((lth b 52) (add 71 b) (sub b 4)))
+    ::
+    ++  rux   `*tape`['0' 'x' (rum 16 ~ |=(b=@ (add b ?:((lth b 10) 48 87))))]
+    --
+  ::
+  ::      Tier 5c/2, parsing: number and span language
   ::
   ++  ag
     &.
@@ -2192,16 +2005,35 @@
                (boss 0x40000000 ;~(plug pew:ab (star ;~(pfix dog piw:ab))))
              ==
     --
-  ::
-  ::      Tier 5c/6, parsing: number and span language
-  ::
-  ++  loot
-    $&  ~                                       ::  not used
-      [~ p=(mole)]
-      [%blob p=*]
-      [%long p=((list loot))]
-      [%over p=((set loot))]
-      [%with p=((map loot loot))]
+  ++  bash
+    =+  ^=  neg
+        |=  [syn=? mol=(mole)]  ^-  *mole
+        ?>  =('u' (end 3 1 p.mol))
+        [(cat 3 's' (rsh 3 1 p.mol)) (new:si syn q.mol)]
+    ;~  pfix  hip
+      ;~  pose
+        (cook |=(a=(mole) (neg | a)) bask)
+        ;~(pfix hip (cook |=(a=(mole) (neg & a)) bask))
+      ==
+    ==
+  ++  bask
+    ;~  pose
+      ;~  pfix  (just '0')
+        ;~  pose
+          (stag %ub ;~(pfix (just 'b') bay:ag))
+          (stag %ux ;~(pfix (just 'x') hex:ag))
+          (stag %uv ;~(pfix (just 'v') viz:ag))
+          (stag %uw ;~(pfix (just 'w') wiz:ag))
+        ==
+      ==
+      (stag %ud dem:ag)
+    ==
+  ++  bast
+    ;~  pose
+      real
+      (stag %h fed:ag)
+      (stag %il lip:ag)
+      (stag %ib bip:ag)
     ==
   ++  real
     =+  ^=  vox
@@ -2215,57 +2047,145 @@
       (stag %rd (cook ryld ;~(pfix dot vox)))
       (stag %rs (cook ryls vox))
     ==
-  ::
-  ++  bask
-    ;~  pose
-      ;~  pfix  (just '0')
-        ;~  pose
-          (stag %ub ;~(pfix (just 'b') bay:ag))
-          (stag %ux ;~(pfix (just 'x') hex:ag))
-          (stag %uv ;~(pfix (just 'v') viz:ag))
-          (stag %uw ;~(pfix (just 'w') wiz:ag))
-        ==
+  ++  rend
+    |=  mol=*mole
+    ^-  *tape
+    ~|  %rend
+    =>  &.
+        ++  ne
+          &=  git=@
+          ++  d  (add git '0')
+          ++  x  ?:((gte git 10) (add git 87) d)
+          ++  w  ?:  =(git 63)     '~' 
+                 ?:  =(git 62)     '-' 
+                 ?:  (gte git 36)  (add git 29)
+                 x
+          --
+        ++  tent
+          |=  [[bas=@ min=@] [hol=@ rom=*tape] par=|+([? @ *tape] *tape)]
+          ^-  *tape
+          ?:  &(=(0 hol) =(0 min))
+            rom
+          =+  [rad=(mod hol bas) dar=(div hol bas)]
+          $(min ?:(=(0 min) 0 (dec min)), hol dar, rom (par =(0 dar) rad rom))
+        ::
+        ++  tart
+          |=  [[bas=@ gop=@] hol=@ dig=|+(@ *tape)]
+          ^-  *tape
+          %^    tent
+              [|-(?:(=(0 gop) 1 (mul bas $(gop (dec gop))))) 0]
+            [hol ~]
+          |=  [top=? seg=@ res=*tape]
+          %+  weld
+            ?:(top ~ `*tape`['.' ~])
+          %^    tent
+              [bas ?:(top 0 gop)]
+            [seg res]
+          |=([t=? s=@ r=*tape] (weld (dig s) r))
+        --
+    ?:  =(0 p.mol)
+      ?:  ?&  (gte (met 3 q.mol) 2)
+              =+  bok=q.mol
+              |-  ^-  ?
+              ?:  =(0 bok)
+                &
+              =+  vis=(end 3 1 bok)
+              ?&  ?|  &((gte vis 'a') (lte vis 'z'))
+                      &(=('-' vis) !=(bok q.mol) !=(bok vis))
+                  ==
+                  $(bok (rsh 3 1 bok))
+              ==
+          ==
+        $(p.mol %tam)
+      ?:  (lte (met 3 q.mol) 2)
+        $(p.mol %ud)
+      $(p.mol %ux)
+    =+  yed=(end 3 1 p.mol)
+    ?-    yed
+        %d
+      =+  hay=(cut 3 [1 1] p.mol)
+      !!
+    ::
+        %f  
+      [?:(=(& q.mol) '&' ?>(=(| q.mol) '|')) ~]
+    ::
+        %h
+      !!
+    ::
+        %j
+      (tart [64 5] q.mol |=(a=@ [~(w ne a) ~]))
+    ::
+        %n  
+      [?>(=(0 q.mol) '~') ~]
+    ::
+        %r
+      ~|(%real-nyet !!)
+    ::
+        %s
+      !!
+    ::
+        %t
+      =+  hay=(cut 3 [1 1] p.mol)
+      ?>  =('a' hay)
+      =+  yon=(rsh 3 2 p.mol)
+      ?:  |(=(%m yon) =(%s yon))
+        (trip q.mol)
+      :-  '~'
+      =+  raw=(trip q.mol)
+      |-  ^-  *tape
+      ?~  raw
+        ~
+      =+  res=$(raw t.raw)
+      ?:  ?|  &((gte i.raw 'a') (lte i.raw 'z'))
+              &((gte i.raw 'A') (lte i.raw 'Z'))
+              &((gte i.raw '0') (lte i.raw '9'))
+              =('-' i.raw)
+          ==
+        [i.raw $(raw t.raw)]
+      ?:  ?|(=('.' i.raw) =('~' i.raw))
+        ['~' i.raw res] 
+      ?:  =(' ' i.raw)
+        ['.' res]
+      ['~' (weld (tart [16 2] i.raw |=(a=@ [~(x ne a) ~])) res)]
+    ::
+        %u
+      =+  hay=(cut 3 [1 1] p.mol)
+      =+  pre=`*tape`?:(=(%d hay) ~ ['0' hay ~])
+      %+  weld
+        pre
+      ?:  =(0 q.mol)
+        `*tape`['0' ~]
+      ?+  hay  !!
+        %b  (tart [2 4] q.mol |=(a=@ [~(d ne a) ~]))
+        %d  (tart [10 3] q.mol |=(a=@ [~(d ne a) ~]))
+        %x  (tart [16 4] q.mol |=(a=@ [~(x ne a) ~]))
+        %v  (tart [32 5] q.mol |=(a=@ [~(x ne a) ~]))
+        %w  (tart [64 5] q.mol |=(a=@ [~(w ne a) ~]))
       ==
-      (stag %ud dem:ag)
+    ::
+        *
+      !!
     ==
-  ::
   ++  sack
-    %+  knee  (loot)  |.  ~+
+    %+  knee  *coin  |.  ~+
     %-  stew  :~
       :-  ['0' '9']
         (stag ~ bask)
       :-  '-'
-        =+  ^=  neg
-            |=  [syn=? mol=(mole)]  ^-  *mole
-            ?>  =('u' (end 3 1 p.mol))
-            [(cat 3 's' (rsh 3 1 p.mol)) (new:si syn q.mol)]
-        %+  stag  ~
-        ;~  pfix  hip
-          ;~  pose
-            (cook |=(a=(mole) (neg | a)) bask)
-            ;~(pfix hip (cook |=(a=(mole) (neg & a)) bask))
-          ==
-        ==
+        (stag ~ bash)
       :-  '.'
         ;~  pfix  dot
           ;~  pose
-            %+  stag  ~
-            ;~  pose
-              real
-              (stag %h fed)
-              (stag %il lip:ag)
-              (stag %ib bip:ag)
-            ==
-          ::
+            (stag ~ bast)
             ;~  pfix  dot
               ;~  pose
                 ;~(pfix dot (cook |=(a=@ [%blob (cue a)]) wiz:ag))
                 %+  cook
-                  |=  [a=*{%long %over} b=((list loot))]
-                  ^-  (loot)
+                  |=  [a=*{%long %over} b=*(list coin)]
+                  ^-  *coin
                   ?-  a
                     %long  [%long b]
-                    %over  [%over (~(gas in ((set loot))) b)]
+                    %over  [%over (~(gas in *(set coin)) b)]
                   ==
                 ;~  plug
                   ;~(pose (cold %over dot) (easy %long)) 
@@ -2286,22 +2206,130 @@
           ==
         ==
     ==
-  ::
+  ++  sock  (sear |=(a=*coin ?:(?=(~ -.a) [~ u=+.a] ~)) sack)
+  ++  spay  |=(lot=*coin (rap 3 (spit lot ~)))
   ++  spit
-    |=  lot=(loot)
-    !!
+    |=  [lot=*coin res=*tape]  ^-  *tape
+    ?-    -.lot
+        ~      (weld (rend p.lot) res)
+        %blob  ['.' '.' '.' (rend [%j (jam p.lot)])]
+        %long
+      :- '.'
+      |-  ^-  *tape
+      ?~   p.lot
+        ['_' '_' res]
+      ['_' $$(lot i.p.lot, res $(p.lot t.p.lot))]
+    ::
+        %over
+      =+  boq=(~(tap in p.lot) *(list coin))
+      :+  '.'  '.'
+      |-  ^-  *tape
+      ?~   boq
+        ['_' '_' res]
+      ['_' $$(lot i.boq, res $(boq t.boq))]
+    ::
+        %with
+      =+  byq=(~(tap by p.lot) *(list ~[p=*coin q=*coin]))
+      :+  '.'  '.'
+      |-  ^-  *tape
+      ?~   byq
+        ['_' '_' '_' res]
+      ['_' '_' $$(lot p.i.byq, res ['_' $$(lot q.i.byq, res $(byq t.byq))])]
+    ==
   ::
-  ++  sock  (sear |=(a=(loot) ?:(?=(~ -.a) [~ u=+.a] ~)) sack)
+  ::    Tier 5c/3, prettyprinting: general-purpose printing.
   ::
-  ::      Tier 5c/7, parsing: external interface
+  ++  show
+    |=  vem=*
+    &-  ^-  *tank
+        ?:  ?=(@ vem)
+          [%leaf (mesc (trip vem))]
+        ?-    vem
+            [s=~ c=*]         
+          [%leaf '\'' (weld (mesc (tape +.vem)) `*tape`['\'' ~])]
+        ::
+            [s=%a c=@]        [%leaf (mesc (trip c.vem))]
+            [s=%b c=*]        (shop c.vem |=(a=@ ~(rub at a)))
+            [s=[%c p=@] c=*]
+          :+  %palm
+            [['.' ~] ['-' ~] ~ ~]
+          [[%leaf (mesc (trip p.s.vem))] $(vem c.vem) ~]
+        ::
+            [s=%d c=*]        (shop c.vem |=(a=@ ~(rud at a)))
+            [s=%k c=*]        (tank c.vem)
+            [s=%o c=*]        
+          %=    $
+              vem 
+            :-  [%m '%a:<[%d %d].[%d %d]>'] 
+            [-.c.vem +<-.c.vem +<+.c.vem +>-.c.vem +>+.c.vem ~]
+          ==
+        ::
+            [s=%p c=*]        (shop c.vem |=(a=@ ~(rup at a)))
+            [s=%q c=*]        (shop c.vem |=(a=@ ~(r at a)))
+            [s=%r c=*]        $(vem [[%r ' ' '{' '}'] c.vem])
+            [s=%t c=*]        (shop c.vem |=(a=@ ~(rt at a)))
+            [s=%v c=*]        (shop c.vem |=(a=@ ~(ruv at a)))
+            [s=%x c=*]        (shop c.vem |=(a=@ ~(rux at a)))
+            [s=[%m p=@] c=*]  (ship p.s.vem c.vem)
+            [s=[%r p=@] c=*]
+          $(vem [[%r ' ' (cut 3 [0 1] p.s.vem) (cut 3 [1 1] p.s.vem)] c.vem])
+        ::
+            [s=[%r p=@ q=@ r=@] c=*]
+          :+  %rose
+            :*  p=(mesc (trip p.s.vem))
+                q=(mesc (trip q.s.vem))
+                r=(mesc (trip r.s.vem))
+            ==
+          |-  ^-  *(list tank)
+          ?~  c.vem
+            ~
+          [$$(vem -.c.vem) $(c.vem +.c.vem)]
+        ::
+            [s=%z c=*]        $(vem [[%r %% %% %%] c.vem])
+            *                 !!
+        ==
+    ++  ship
+      |=  [fom=@ gar=*]
+      ^-  *tank
+      =+  l=(met 3 fom)
+      =+  i=0*
+      :-  %leaf
+      |-  ^-  *tape
+      ?:  (gte i l)
+        ~
+      =+  c=(cut 3 [i 1] fom)
+      ?.  =(37 c)
+        (weld (mesc [c ~]) $(i +(i)))
+      =+  d=(cut 3 [+(i) 1] fom)
+      ?.  .?(gar)
+        ['\\' '#' $(i (add 2 i))]
+      (weld ~(ram re (show d -.gar)) $(i (add 2 i), gar +.gar))
+    ::
+    ++  shop
+      |=  [aug=* vel=|+(a=@ *tape)]
+      ^-  *tank
+      ?:  ?=(@ aug)
+        [%leaf (vel aug)]
+      :+  %rose 
+        [[' ' ~] ['[' ~] [']' ~]]
+      =>  .(aug `*`aug)
+      |-  ^-  *(list tank)
+      ?:  ?=(@ aug)
+        [$$ ~]
+      [$$(aug -.aug) $(aug +.aug)]
+    --
   ::
-  ++  rash  |*([naf=@ sab=rule] (scan (trip naf) sab))
-  ++  scan  |*  [los=*tape sab=rule]
-            =+  vex=((full sab) [p=*hair q=los])
-            ?~  q.vex
-              ~~  (show [%m '{%d %d}'] p.p.vex q.p.vex ~)
-              ~|('scan-stop' !!)
-            p.u.q.vex
+  ::  Tier 5b/0, parsing: tracing
+  ::
+  ++  last  |=  [zyc=*hair naz=*hair]
+            ^-  *hair
+            ?:  =(p.zyc p.naz)
+              ?:((gth q.zyc q.naz) zyc naz)
+            ?:((gth p.zyc p.naz) zyc naz)
+  ::
+  ++  slip  |=  [weq=*char naz=*hair]
+            ^-  *hair
+            ?:(=(10 weq) [+(p.naz) 1] [p.naz +(q.naz)])
   ::
   ::      Tier 5d, cryptography 
   ::
@@ -4924,12 +4952,20 @@
       :-  '$'
         (cook |=(a=*twig [%cnts a ~]) rope)
       :-  '%'
-        ;~  pose
-          %+  cook
-            |=(a=*(list gene) [%hscn a ~]) 
-          ;~(pfix cen (ifix [kel ker] (most ace wide)))
-          (numb (stag %dtsg (stag %tam ;~(pfix cen sym))))
-          (numb (stag %dtsg (stag %tam (cold %% ;~(plug cen cen)))))
+        ;~  pfix  cen
+          ;~  pose
+            %+  cook
+              |=(a=*(list gene) [%hscn a ~]) 
+            (ifix [kel ker] (most ace wide))
+      ::
+            (numb (stag %dtsg (stag %tam sym)))
+            (numb (stag %dtsg (stag %tam (cold %% cen))))
+      ::
+            %+  cook
+              |=  a=*coin
+              [%dtsg %ta (rap 3 (spit a ~))]
+            sack
+          ==
         == 
       :-  '&'
         ;~  pose
@@ -4954,7 +4990,7 @@
         (stag %ktsg ;~(pfix com wide))
       :-  '-'
         ;~  pose
-          (numb (stag %dtsg (stag %up ;~(pfix hip fed))))
+          (numb (stag %dtsg bash))
           (cook |=(a=*twig [%cnts a ~]) rope)
         ==
       :-  '.'
@@ -4963,22 +4999,13 @@
         %-  numb
         %+  stag
           %dtsg
-        ;~  pose
-          (stag %ux ;~(pfix (just '0') (just 'x') hex))
-          ::  (stag %uv ;~(pfix (just '0') (just 'v') viz))
-          (stag %ud dem)
-        ==
+        bask
       :-  '#'
         ;~  pfix  hax
-          ;~  pose
-            (stag %dtpt sock)
-            ;~  pfix  hax
-              %+  cook
-                |=  a=*mole
-                [%dtpt %ta (rap 3 (rend a))]
-              sock
-            ==
-          ==
+          %+  cook
+            |=  a=*coin
+            [%dtpt %ta (rap 3 (spit a ~))]
+          sack
         ==
       :-  ':'
         (stag %smcl ;~(pfix col (ifix [pal par] (most ace wide))))
@@ -5008,6 +5035,7 @@
           %+  cook
             |=(a=*(list gene) [%hssg a ~])
           ;~(pfix sig (ifix [sel ser] (most ace wide)))
+        ::
           %+  stag
             %cnsg 
           ;~  pfix 
@@ -5015,6 +5043,13 @@
             %+  ifix
               [pal par] 
             ;~(glam rope wide (stag %cltr (most ace wide)))
+          ==
+        :: 
+          ;~  pfix  sig
+            ;~  pose
+              (stag %dtpt (stag %ta tyq:ag))
+              (cold [%dtpt %ta ~] sig)
+            ==
           ==
           (stag %smts (cold %null sig))
         ==

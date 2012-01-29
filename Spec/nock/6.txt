@@ -1,12 +1,12 @@
 1 Structures
 
   A noun is an atom or a cell.  An atom is any natural number.  
-  A cell is any ordered pair of nouns.
+  A cell is an ordered pair of nouns.
 
-2 Pseudocode
+2 Reductions
 
-  [a b c]           [a [b c]]
   nock(a)           *a
+  [a b c]           [a [b c]]
  
   ?[a b]            0
   ?a                1
