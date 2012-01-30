@@ -670,6 +670,7 @@
 #   define c3__port   c3_s4('p','o','r','t')
 #   define c3__pose   c3_s4('p','o','s','e')
 #   define c3__post   c3_s4('p','o','s','t')
+#   define c3__pray   c3_s4('p','r','a','y')
 #   define c3__prec   c3_s4('p','r','e','c')
 #   define c3__pret   c3_s4('p','r','e','t')
 #   define c3__prex   c3_s4('p','r','e','x')

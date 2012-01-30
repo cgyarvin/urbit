@@ -35,6 +35,9 @@
           */
           u2_ray rac_r;
 
+          /* Heaven.
+          */
+          u2_ray hev_r;
         } u2_loom_wire;
 
 #         define  u2_wire_bas_r(wir_r)  *u2_at(wir_r, u2_loom_wire, bas_r)
@@ -42,6 +45,7 @@
 #         define  u2_wire_kit_r(wir_r)  *u2_at(wir_r, u2_loom_wire, kit_r)
 #         define  u2_wire_bex_r(wir_r)  *u2_at(wir_r, u2_loom_wire, bex_r)
 #         define  u2_wire_rac_r(wir_r)  *u2_at(wir_r, u2_loom_wire, rac_r)
+#         define  u2_wire_hev_r(wir_r)  *u2_at(wir_r, u2_loom_wire, hev_r)
 
 #         define  u2_wire_tax(wir_r)    *u2_at(wir_r, u2_loom_wire, tax)
 

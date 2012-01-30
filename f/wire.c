@@ -66,8 +66,13 @@ u2_wr_init(c3_m   hip_m,
   /* New performance tracking.
   */
   {
-    u2_wire_rac_r(wir_r) = 
-    u2_tx_init(wir_r);
+    u2_wire_rac_r(wir_r) = u2_tx_init(wir_r);
+  }
+
+  /* Global namespace.
+  */
+  {
+    u2_wire_hev_r(wir_r) = u2_hv_init(wir_r);
   }
 
   return wir_r;
@@ -109,6 +114,9 @@ u2_wr_mark(u2_ray wir_r)
     }
     siz_w += u2_rl_gc_mark_ptr(wir_r, u2_wire_bex_r(wir_r));
     siz_w += u2_rl_gc_mark_ptr(wir_r, u2_wire_rac_r(wir_r));
+
+    siz_w += u2_rl_gc_mark_ptr(wir_r, u2_wire_hev_r(wir_r));
+    u2_hv_mark();
   }
   siz_w += u2_rl_gc_mark(wir_r);
 

@@ -142,6 +142,10 @@
         u2_noun 
         u2_ve_meat(u2_noun vos);
 
+      /* u2_ve_here(): overlay path search.
+      */
+        u2_noun
+        u2_ve_here(u2_noun wis);
 
     /**  Boot logic.
     **/
@@ -159,7 +163,6 @@
       */
         void
         u2_ve_init(c3_w kno_w);
-
 
     /**  Console and command line.  
     **/

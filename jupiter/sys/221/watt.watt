@@ -1,3 +1,4 @@
+!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -956,6 +957,75 @@
       $(nom +(nom), day (add day (damn rey nom)))
     $(rey +(rey), day (add day (dayr rey)))
   ::
+  ::    Tier 3j, nock in nock
+  ::
+  ++  mock
+    ~.  %mock
+    |=  [[sub=* fol=*] sky=|+(* *(unit))]
+    ^-  %*  $^  [& p=*]
+                [| p=*(list)]
+            ==
+    ?~  fol
+      !!
+    ?:  ?=(^ -.fol)
+      =+  [hed=$(fol -.fol) tal=$(fol +.fol)]
+      ?:  ?=(& -.hed)
+        ?:  ?=(& -.tal)
+          [& p.hed p.tal]
+        [| p.tal]
+      ?:  ?=(& -.tal)
+        [| p.hed]
+      [| (weld p.hed p.tal)]
+    ?+    fol  !!
+        [0 b=@]          
+      [& .*(sub [0 b.fol])]
+    ::
+        [1 b=*]          
+      [& b.fol]
+    ::
+        [2 b=^ c=*]      
+      =+  ben=$(fol [b.fol c.fol])
+      ?:  ?=(| -.ben)
+        ben
+      $(sub +<.ben, fol +>.ben)
+    ::
+        [3 b=*]          
+      =+  ben=$(fol b.fol)
+      ?:  ?=(| -.ben)
+        ben
+      [& .?(+.ben)]
+    ::
+        [4 b=*]          
+      =+  ben=$(fol b.fol)
+      ?:  ?=(| -.ben)
+        ben
+      ?>  ?=(@ +.ben)
+      [& .+(+.ben)]
+    ::
+        [5 b=*]          
+      =+  ben=$(fol b.fol)
+      ?:  ?=(| -.ben)
+        ben
+      ?>  ?=(^ +.ben)
+      [& =(+<.ben +>.ben)]
+    ::
+        [6 b=* c=* d=*]  
+      $(fol =>(fol [2 [0 1] 2 [1 c d] [1 0] 2 [1 2 3] [1 0] 4 4 b]))
+    ::
+        [7 b=* c=*]       $(fol =>(fol [2 b 1 c]))
+        [8 b=* c=*]       $(fol =>(fol [7 [[0 1] b] c]))
+        [9 b=* c=*]       $(fol =>(fol [7 c 0 b]))
+        [10 @ c=*]        $(fol =>(fol c))
+        [10 [* c=*] d=*]  $(fol =>(fol [8 c 7 [0 2] d]))
+    ::
+        [11 b=*]
+      =+  ben=$(fol b.fol)
+      ?:  ?=(| -.ben)
+        ben
+      =+  val=(sky +.ben)
+      ?~(val [| +.ben ~] [& u.val])
+    ==
+  ::
   ::  Tier 4 fabs
   ::
   ++  apt
@@ -1689,7 +1759,7 @@
   ::
   ::      tier 5b/7, parsing: basic atoms
   ::
-  ++  ab
+  ++  ab 
     &.
     ++  bix  (bass 16 (stun [2* 2*] six))
     ++  hef  ;~(pose tip hif)
@@ -1969,25 +2039,18 @@
   ::
   ++  ag
     &.
-    ++  bay  ;~  pose
-               (cold 0 (just '0'))
-               (bass 16 ;~(plug qeb:ab (star ;~(pfix dog qib:ab))))
+    ++  ape  |*(fel=rule ;~(pose (cold 0 (just '0')) fel))
+    ++  bay  (ape (bass 16 ;~(plug qeb:ab (star ;~(pfix dog qib:ab)))))
+    ++  bip  (bass 0x1.0000 (stun [8* 8*] (ape qex:ab)))
+    ++  dem  (ape (bass 1.000 ;~(plug ted:ab (star ;~(pfix dog tid:ab)))))
+    ++  dim  (ape (bass 10 ;~(plug sed:ab (star sid:ab))))
+    ++  fed  ;~  pose
+               (cold 0 sig)
+               (bass 0x1.0000 (most dog hif:ab))
              ==
-    ++  bip  (boss 0x1.0000 (stun [8* 8*] qex:ab))
-    ++  dem  ;~  pose
-               (cold 0 (just '0'))
-               (bass 1.000 ;~(plug ted:ab (star ;~(pfix dog tid:ab))))
-             ==
-    ++  dim  ;~  pose 
-               (cold 0 (just '0')) 
-               (bass 10 ;~(plug sed:ab (star sid:ab)))
-             ==
-    ++  fed  (bass 0x1.0000 ;~(plug hef:ab (star ;~(pfix dog hif:ab))))
-    ++  hex  ;~  pose
-               (cold 0 (just '0'))
-               (bass 0x1.0000 ;~(plug qex:ab (star ;~(pfix dog qix:ab))))
-             ==
-    ++  lip  (boss 256 ;~(plug ted:ab (stun [4* 4*] ;~(pfix dog ted:ab))))
+    ++  hex  (ape (bass 0x1.0000 ;~(plug qex:ab (star ;~(pfix dog qix:ab)))))
+    ++  lip  =+  tod=(ape ted:ab) 
+             (bass 256 ;~(plug tod (stun [3* 3*] ;~(pfix dog tod))))
     ++  qut  %+  ifix  [soq soq]
              %+  boss  256
              %-  star  ;~  pose
@@ -1996,15 +2059,10 @@
                        ==
     ++  sym  (cook |=(a=*(list rat) (rap 3 a)) ;~(plug vym:ab (star vyn:ab)))
     ++  tyq  (cook |=(a=*(list rat) (rap 3 a)) (plus siq:ab))
-    ++  viz  ;~  pose
-               (cold 0 (just '0'))
-               (boss 0x200.0000 ;~(plug pev:ab (star ;~(pfix dog piv:ab))))
-             ==
-    ++  wiz  ;~  pose
-               (cold 0 (just '0'))
-               (boss 0x4000.0000 ;~(plug pew:ab (star ;~(pfix dog piw:ab))))
-             ==
+    ++  viz  (ape (bass 0x200.0000 ;~(plug pev:ab (star ;~(pfix dog piv:ab)))))
+    ++  wiz  (ape (bass 0x4000.0000 ;~(plug pew:ab (star ;~(pfix dog piw:ab)))))
     --
+  ::
   ++  bash
     =+  ^=  neg
         |=  [syn=? mol=(mole)]  ^-  *mole
@@ -2016,6 +2074,7 @@
         ;~(pfix hip (cook |=(a=(mole) (neg & a)) bask))
       ==
     ==
+  ::
   ++  bask
     ;~  pose
       ;~  pfix  (just '0')
@@ -2028,13 +2087,15 @@
       ==
       (stag %ud dem:ag)
     ==
+  ::
   ++  bast
     ;~  pose
-      real
-      (stag %h fed:ag)
-      (stag %il lip:ag)
       (stag %ib bip:ag)
+      (stag %il lip:ag)
+      (stag %h fed:ag)
+      real
     ==
+  ::
   ++  real
     =+  ^=  vox
         ;~  plug
@@ -2047,9 +2108,11 @@
       (stag %rd (cook ryld ;~(pfix dot vox)))
       (stag %rs (cook ryls vox))
     ==
+  ::
   ++  rend
     |=  mol=*mole
-    ^-  *tape
+    =+  rex=*tape
+    ^-  rex
     ~|  %rend
     =>  &.
         ++  ne
@@ -2070,17 +2133,28 @@
           $(min ?:(=(0 min) 0 (dec min)), hol dar, rom (par =(0 dar) rad rom))
         ::
         ++  tart
-          |=  [[bas=@ gop=@] hol=@ dig=|+(@ *tape)]
+          |=  [[bax=@ gop=@] hol=@ dig=|+(@ *tape)]
           ^-  *tape
           %^    tent
-              [|-(?:(=(0 gop) 1 (mul bas $(gop (dec gop))))) 0]
+              [|-(?:(=(0 gop) 1 (mul bax $(gop (dec gop))))) 0]
             [hol ~]
           |=  [top=? seg=@ res=*tape]
           %+  weld
             ?:(top ~ `*tape`['.' ~])
           %^    tent
-              [bas ?:(top 0 gop)]
+              [bax ?:(top 0 gop)]
             [seg res]
+          |=([t=? s=@ r=*tape] (weld (dig s) r))
+        ::
+        ++  trot
+          |=  [[buz=@ git=@ dop=@] [hol=@ rom=*tape] dig=|+(@ *tape)]
+          ^-  *tape
+          ?:  =(0 dop)
+            rom
+          :-  '.'
+          %^    tent
+              [git 1]
+            [(cut buz [(dec dop) 1] q.mol) $(dop (dec dop))]
           |=([t=? s=@ r=*tape] (weld (dig s) r))
         --
     ?:  =(0 p.mol)
@@ -2104,13 +2178,30 @@
     ?-    yed
         %d
       =+  hay=(cut 3 [1 1] p.mol)
-      !!
+      ~|(%date-nyet !!)
     ::
         %f  
-      [?:(=(& q.mol) '&' ?>(=(| q.mol) '|')) ~]
+      [?:(=(& q.mol) '&' ?>(=(| q.mol) '|')) rex]
     ::
         %h
-      !!
+      =+  dyz=(met 4 q.mol)
+      ?:  =(0 dyz)
+        ['~' rex]
+      |-  ^-  *tape
+      ?:  =(0 dyz)
+        rex
+      =+  syb=(cut 4 [(dec dyz) 1] q.mol)
+      =+  ^=  hed  %+  weld  
+                     (trip (fap (end 3 1 syb))) 
+                   (trip (fyp (rsh 3 1 syb)))
+      (weld `*tape`['.' hed] $(dyz (dec dyz)))
+    ::
+        %i
+      =+  hay=(cut 3 [1 1] p.mol)
+      ?:  =('l' hay)
+        (trot [3 10 4] [q.mol rex] |=(a=@ [~(d ne a) ~]))
+      ?>  =('b' hay)
+      (trot [4 16 8] [q.mol rex] |=(a=@ [~(x ne a) ~]))
     ::
         %j
       (tart [64 5] q.mol |=(a=@ [~(w ne a) ~]))
@@ -3631,19 +3722,7 @@
         ?-    sut
             [%atom *]
           ?>  ?=(@ lum)
-          :-  %leaf
-          ?-  p.sut
-            %f    ~(rf at lum)
-            %n    ~(rn at lum)
-            %ta   ~(rta at lum)
-            %tam  ~(rtam at lum)
-            %ub   ~(rub at lum)
-            %ud   ~(rud at lum)
-            %up   ~(rup at lum)
-            %uv   ~(ruv at lum)
-            %ux   ~(rux at lum)
-            *     ~(rud at lum)
-          ==
+          [%leaf (rend p.sut lum)]
         ::
             [%cell *]
           ?:  (nest(sut -:!;(*type *tank)) | sut)
@@ -4994,7 +5073,10 @@
           (cook |=(a=*twig [%cnts a ~]) rope)
         ==
       :-  '.'
-        (cook |=(a=*twig [%cnts a ~]) rope)
+        ;~  pose
+          (stag %dtpt ;~(pfix dot bast))
+          (cook |=(a=*twig [%cnts a ~]) rope)
+        ==
       :-  ['0' '9']
         %-  numb
         %+  stag
@@ -5385,7 +5467,7 @@
         ;~(plug (cold %tis tis) wide)
         ;~(plug (cold %col col) wide)
         ;~(plug (cold %cab cab) wide)
-        ;~(plug (cold %cab sig) (easy %smts %null))
+        ::  ;~(plug (cold %cab sig) (easy %smts %null))
         ;~  plug
           (easy %pal)
           %+  ifix

@@ -25,6 +25,36 @@ _nock_rise()
 #endif
 }
 
+/* _nock_pray(): load from namespace.  Crude.
+*/
+static u2_noun
+_nock_pray(u2_noun gof)
+{
+  u2_cm_bean(u2nc(c3__pray, gof));
+  {
+    u2_pryr god_p = u2_hevn_be(u2_pryr, god);
+    u2_noun out;
+
+    if ( 0 == god_p ) {
+      return u2_cm_bail(c3__exit); 
+    }
+    out = god_p(gof);
+    if ( u2_nul == out ) {
+      return u2_cm_bail(c3__exit);
+    }
+    else if ( (u2_no == u2du(gof)) || (u2_nul != u2h(gof)) ) {
+      return u2_cm_bail(c3__fail);
+    }
+    else {
+      u2_noun pro = u2k(u2t(out));
+
+      u2z(out);
+      return pro;
+    }
+  }
+  u2_cm_drop();
+}
+
 /* _nock_hint(): hint with code, data, subject, formula.
 */
   static u2_noun _nock_cool(u2_noun, u2_noun);
@@ -441,6 +471,18 @@ _nock_cool(u2_noun bus,
           _nock_rise();
           return pro; 
         }
+      }
+
+      case 11: {
+        u2_noun gof, pro;
+
+        gof = _nock_cool(bus, u2k(gal));
+        pro = _nock_pray(gof);
+
+        u2z(gof); u2z(fol);
+
+        _nock_rise();
+        return pro;
       }
       c3_assert(!"not reached");
     }

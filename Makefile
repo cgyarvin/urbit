@@ -50,6 +50,7 @@ F_OFILES=\
        f/chad.o \
        f/cash.o \
        f/coal.o \
+       f/hevn.o \
        f/host.o \
        f/benx.o \
        f/trac.o \
