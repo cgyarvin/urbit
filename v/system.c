@@ -96,6 +96,26 @@ u2_ve_slop(u2_noun hed, u2_noun tal)
   return u2_cn_mong(u2_ct(u2_ve_at()->toy.slop), u2nc(hed, tal));
 }
 
+/* u2_ve_sell(): use sell gate. 
+*/
+u2_noun
+u2_ve_sell(u2_noun vax)
+{
+  c3_assert(0 != u2_ve_at()->toy.sell);
+
+  return u2_cn_mong(u2_ct(u2_ve_at()->toy.sell), vax);
+}
+
+/* u2_ve_soul(): use soul gate. 
+*/
+u2_noun
+u2_ve_soul(u2_noun typ)
+{
+  c3_assert(0 != u2_ve_at()->toy.soul);
+
+  return u2_cn_mong(u2_ct(u2_ve_at()->toy.soul), typ);
+}
+
 /* u2_ve_ream(): use ream gate.
 */
 u2_noun
@@ -140,7 +160,8 @@ u2_ve_hard(const c3_c* wit_c, c3_c* fun_c, u2_noun arg)
   u2_noun tul = u2_ve_use(wit_c);
   u2_noun gat = u2_ve_slac(tul, fun_c);
   u2_noun cor = u2_ct(u2t(gat));
-  
+ 
+  u2z(gat);
   return u2_cn_mong(cor, arg);
 }
 

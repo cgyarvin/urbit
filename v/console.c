@@ -39,17 +39,19 @@ u2_ve_dump_columns(void)
 void
 u2_ve_dump_tape(u2_noun tep)
 {
-  while ( u2_nul != tep ) {
+  u2_noun tap = tep;
+
+  while ( u2_nul != tap ) {
     c3_c car_c;
 
-    if ( u2h(tep) >= 127 ) {
+    if ( u2h(tap) >= 127 ) {
       car_c = '?';
-    } else car_c = u2h(tep);
+    } else car_c = u2h(tap);
 
     putchar(car_c);
-    tep = u2t(tep);
+    tap = u2t(tap);
   }
-  u2_cz(tep);
+  u2z(tep);
 }
 
 /* u2_ve_dump_wall(): print a wall of text.
@@ -57,13 +59,26 @@ u2_ve_dump_tape(u2_noun tep)
 void
 u2_ve_dump_wall(u2_noun wol)
 {
-  while ( u2_nul != wol ) {
-    u2_ve_dump_tape(u2_ct(u2h(wol)));
+  u2_noun wal = wol;
+
+  while ( u2_nul != wal ) {
+    u2_ve_dump_tape(u2_ct(u2h(wal)));
     putchar(10);
 
-    wol = u2t(wol);
+    wal = u2t(wal);
   }
-  u2_cz(wol);
+  u2z(wol);
+}
+
+/* u2_ve_tank(): print a tank at `tab`.
+*/
+void
+u2_ve_tank(c3_l tab_l, u2_noun tac)
+{
+  c3_l    col_l = u2_ve_dump_columns();
+  u2_noun wol = u2_ve_hard("pitt", "wash", u2nc(u2nc(tab_l, col_l), tac));
+
+  u2_ve_dump_wall(wol);
 }
 
 /* u2_ve_sway(): print trace stack.
@@ -135,7 +150,24 @@ u2_ve_wine(u2_noun how)
   u2_cz(how);
 }
 
-/* u2_ve_line(): execute a command line, fully protected.
+/* u2_ve_born_line(): execute a command with the born shell, protected.
+*/
+void
+u2_ve_born_line(u2_noun lin)
+{
+  u2_noun cmd = u2_ve_hard("born", "scan", lin);
+  u2_noun gen = u2h(cmd);
+  u2_noun out = u2_ve_slap(u2_ve_seed(), u2k(gen));
+
+  {
+    u2_ve_tank(2, u2_ve_soul(u2k(u2h(out))));
+    u2_ve_tank(0, u2_ve_sell(u2k(out)));
+  }
+  u2z(cmd);
+  u2z(out);
+}
+
+/* u2_ve_line(): execute a command line, unprotected.
 */
 void
 u2_ve_line(c3_c* lin_c)
@@ -144,7 +176,6 @@ u2_ve_line(c3_c* lin_c)
   u2_noun how;
 
   u2_cm_trip();
-  u2_ve_grab(0);
   poq_w = u2_cm_wind();
 
   if ( 0 != (how = u2_cm_trap()) ) {
@@ -156,10 +187,16 @@ u2_ve_line(c3_c* lin_c)
     u2_ve_sway(2, u2_ckb_flop(rap));
   } 
   else {
-    u2_noun cor = u2_ve_gunn();
     u2_noun lin = u2_ci_string(lin_c);
 
-    u2_ve_gunn_line(cor, lin);
+    if ( u2_Host.kno_w <= 221 ) {
+      u2_ve_born_line(lin);
+    } 
+    else {
+      u2_noun cor = u2_ve_gunn();
+      u2_ve_gunn_line(cor, lin);
+    }
+
     u2_cm_done(poq_w);
   }
   u2_cm_purge();

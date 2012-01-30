@@ -124,11 +124,12 @@ u2_cf_flat_load(u2_noun mod,
     c3_c*       fil_c;
     u2_atom     fil;
 
-    fid_i = open(pas_c, O_RDONLY, 0666);
+    fid_i = open(pas_c, O_RDONLY, 0644);
     free(pas_c);
     u2_cz(pas);
 
     if ( (fid_i < 0) || (fstat(fid_i, &sat_s) < 0) ) {
+      perror(pas_c);
       return u2_none;
     }
 
@@ -166,6 +167,7 @@ u2_cf_flat_save(u2_noun mod,
     u2_cz(pas);
 
     if ( fid_i < 0 ) {
+      perror(pas_c);
       u2_cz(som);
       return u2_no;
     }
@@ -408,7 +410,9 @@ u2_cm_bail(c3_l    how_l)
   u2_ray kit_r = u2_wire_kit_r(u2_Wire);
 
   if ( u2_yes == u2_Flag_Abort ) {
-    c3_assert(0);
+    if ( c3__fail == how_l ) {
+      c3_assert(0);
+    }
   }
   u2_tx_sys_bit(u2_Wire, u2_yes);
   _longjmp((void *)u2_at_cord(u2_kite_buf_r(kit_r), c3_wiseof(jmp_buf)), how_l);

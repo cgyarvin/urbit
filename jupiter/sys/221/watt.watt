@@ -3520,6 +3520,10 @@
   ~+
   !;(*type ..seed)
 ::
+++  sell
+  |=  vax=*vase  ^-  *tank
+  (~(deal ut p.vax) q.vax)
+::
 ++  slam
   |=  [gat=*vase sam=*vase]  ~|  %slam  ^-  *vase
   =+  :-  ^=  typ  ^-  *type
@@ -3538,6 +3542,14 @@
   |=  [hed=*vase tal=*vase]
   ^-  *vase
   [[%cell p.hed p.tal] [q.hed q.tal]]
+::                                                
+++  soul
+  |=  typ=*type  ^-  *tank
+  ~(duck ut typ)
+::
+++  slot
+  |=  [axe=*axis vax=*vase]  ^-  *vase
+  (slap vax [~ axe]) 
 ::
 ++  ut
   ~%    %ut

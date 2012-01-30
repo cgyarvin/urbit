@@ -11,8 +11,7 @@
     [%dmap p=(mode)]                  ::  directory as map
   ==
 ++  tube                              ::  filesystem address
-  $^  [%perm p=*(list term)]          ::  permanent internal
-      [%stag p=*(list term)]          ::  staged internal
+  $^  [%here p=*(list cask)]          ::  permanent internal
       [%unix p=*tape]                 ::  external unix path
   ==
 ++  file  ~[p=(mode) q=(tube)]        ::  filesystem key

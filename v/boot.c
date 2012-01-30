@@ -248,11 +248,21 @@ u2_ve_rest()
     ver_e->toy.slap = u2_cm_bury(u2_ve_bone("slap"));
     ver_e->toy.slop = u2_cm_bury(u2_ve_bone("slop"));
 
+    if ( u2_Host.kno_w <= 221 ) {
+      ver_e->toy.sell = u2_cm_bury(u2_ve_bone("sell"));
+      ver_e->toy.soul = u2_cm_bury(u2_ve_bone("soul"));
+      ver_e->toy.slot = u2_cm_bury(u2_ve_bone("slot"));
+    }
+
     u2_ve_tool(c3__what);
     ver_e->toy.what = u2_ve_use("what");
   }
   {
     u2_ve_tool(c3__pitt);
+
+    if ( u2_Host.kno_w <= 221 ) {
+      u2_ve_tool(c3__born);
+    }
   }
   u2_Host.ver_e[u2_Host.kno_w].mod_m = c3__live;
 }

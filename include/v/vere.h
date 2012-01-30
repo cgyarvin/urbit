@@ -23,6 +23,9 @@
           u2_noun seed;                     //  kernel vase
           u2_noun what;                     //  platform vase
           u2_noun ream;                     //  text to gene 
+          u2_noun sell;                     //  vase to tank
+          u2_noun soul;                     //  type to tank
+          u2_noun slot;                     //  vase fragment
           u2_noun slam;                     //  nock vase call - [vase vase]
           u2_noun slap;                     //  nock vase pipe - [vase gene]
           u2_noun slop;                     //  nock vase pair - [vase vase]
@@ -111,6 +114,16 @@
       */
         u2_noun
         u2_ve_slop(u2_noun hed, u2_noun tal);
+
+      /* u2_ve_sell(): use sell gate. 
+      */
+        u2_noun
+        u2_ve_sell(u2_noun vax);
+
+      /* u2_ve_soul(): use soul gate. 
+      */
+        u2_noun
+        u2_ve_soul(u2_noun typ);
 
       /* u2_ve_ream(): use ream gate.
       */
