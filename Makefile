@@ -20,15 +20,15 @@ BIN=bin
 
 RM=rm -f
 CC=gcc
-#CLD=gcc -g -L/sw/lib
-CLD=gcc -g
+#CLD=gcc -O3 -L/sw/lib
+CLD=gcc -O3
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
 INCLUDE=include
 GENERATED=generated
 DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN)
-CFLAGS=-g -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
+CFLAGS=-O3 -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 CWFLAGS=-Wall
 
 .y.o:
@@ -731,14 +731,147 @@ J221_OFILES=\
        $(J221_6_OFILES_UT) \
        gen221/watt.o
 
+J220_1_OFILES=\
+       gen220/1/add.o \
+       gen220/1/dec.o \
+       gen220/1/div.o \
+       gen220/1/gte.o \
+       gen220/1/gth.o \
+       gen220/1/lte.o \
+       gen220/1/lth.o \
+       gen220/1/mod.o \
+       gen220/1/mul.o \
+       gen220/1/sub.o
+
+J220_2_OFILES=\
+       gen220/2/bind.o \
+       gen220/2/clap.o \
+       gen220/2/drop.o \
+       gen220/2/flop.o \
+       gen220/2/lent.o \
+       gen220/2/levy.o \
+       gen220/2/lien.o \
+       gen220/2/need.o \
+       gen220/2/reel.o \
+       gen220/2/roll.o \
+       gen220/2/skim.o \
+       gen220/2/skip.o \
+       gen220/2/slag.o \
+       gen220/2/snag.o \
+       gen220/2/sort.o \
+       gen220/2/turn.o \
+       gen220/2/weld.o
+
+J220_3_OFILES=\
+       gen220/3/bex.o \
+       gen220/3/can.o \
+       gen220/3/cap.o \
+       gen220/3/cat.o \
+       gen220/3/con.o \
+       gen220/3/cut.o \
+       gen220/3/dor.o \
+       gen220/3/dis.o \
+       gen220/3/end.o \
+       gen220/3/gor.o \
+       gen220/3/hor.o \
+       gen220/3/lsh.o \
+       gen220/3/mas.o \
+       gen220/3/met.o \
+       gen220/3/mix.o \
+       gen220/3/mug.o \
+       gen220/3/peg.o \
+       gen220/3/rap.o \
+       gen220/3/rip.o \
+       gen220/3/rsh.o \
+       gen220/3/vor.o
+
+J220_4_OFILES=\
+       gen220/4/in.o \
+       gen220/4/by.o \
+       gen220/4/in_has.o \
+       gen220/4/in_gas.o \
+       gen220/4/in_put.o \
+       gen220/4/in_tap.o \
+       gen220/4/by_gas.o \
+       gen220/4/by_get.o \
+       gen220/4/by_has.o \
+       gen220/4/by_put.o 
+
+J220_5_OFILES=\
+       gen220/5/cue.o \
+       gen220/5/jam.o \
+       gen220/5/mat.o \
+       gen220/5/parse.o \
+       gen220/5/rub.o \
+       gen220/5/shax.o \
+       gen220/5/trip.o
+
+J220_6_OFILES=\
+       gen220/6/ap.o \
+       gen220/6/cell.o \
+       gen220/6/comb.o \
+       gen220/6/cons.o \
+       gen220/6/core.o \
+       gen220/6/cube.o \
+       gen220/6/face.o \
+       gen220/6/fine.o \
+       gen220/6/flan.o \
+       gen220/6/flip.o \
+       gen220/6/flor.o \
+       gen220/6/foam.o \
+       gen220/6/fork.o \
+       gen220/6/hike.o \
+       gen220/6/look.o \
+       gen220/6/ut.o
+
+J220_6_OFILES_UT=\
+       gen220/6/ut_burn.o \
+       gen220/6/ut_bust.o \
+       gen220/6/ut_crop.o \
+       gen220/6/ut_cull.o \
+       gen220/6/ut_find.o \
+       gen220/6/ut_fink.o \
+       gen220/6/ut_fire.o \
+       gen220/6/ut_firm.o \
+       gen220/6/ut_fish.o \
+       gen220/6/ut_fuse.o \
+       gen220/6/ut_gain.o \
+       gen220/6/ut_heal.o \
+       gen220/6/ut_lose.o \
+       gen220/6/ut_mint.o \
+       gen220/6/ut_moot.o \
+       gen220/6/ut_mull.o \
+       gen220/6/ut_nest.o \
+       gen220/6/ut_park.o \
+       gen220/6/ut_peek.o \
+       gen220/6/ut_play.o \
+       gen220/6/ut_repo.o \
+       gen220/6/ut_rest.o \
+       gen220/6/ut_seek.o \
+       gen220/6/ut_snap.o \
+       gen220/6/ut_swab.o \
+       gen220/6/ut_tack.o \
+       gen220/6/ut_tock.o \
+       gen220/6/ut_wrap.o
+
+J220_OFILES=\
+       $(J220_1_OFILES) \
+       $(J220_2_OFILES) \
+       $(J220_3_OFILES) \
+       $(J220_4_OFILES) \
+       $(J220_5_OFILES) \
+       $(J220_6_OFILES) \
+       $(J220_6_OFILES_UT) \
+       gen220/watt.o
+
+
 BASE_OFILES=\
        $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
-       $(J224_OFILES) \
-       $(J223_OFILES) \
        $(J222_OFILES) \
-       $(J221_OFILES)
+       $(J221_OFILES) \
+       $(J220_OFILES)
 
 VERE_OFILES=\
        v/boot.o \

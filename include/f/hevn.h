@@ -22,11 +22,11 @@
         u2_noun lad;
       } u2_loom_hevn;
 
-#define   u2_hevx_at(rac_r, wof)        (*u2_at(rac_r, u2_loom_hevn, wof))
-#define   u2_hevx_be(rac_r, ite, wof)   (*u2_be(rac_r, u2_loom_hevn, ite, wof))
+#define   u2_hevx_at(hev_r, wof)        (*u2_at(hev_r, u2_loom_hevn, wof))
+#define   u2_hevx_be(hev_r, ite, wof)   (*u2_be(hev_r, u2_loom_hevn, ite, wof))
 
-#define   u2_hevn_at(wof)      u2_hevx_at(u2_wire_rac_r(u2_Wire), wof)
-#define   u2_hevn_be(ite, wof) u2_hevx_be(u2_wire_rac_r(u2_Wire), ite, wof)
+#define   u2_hevn_at(wof)      u2_hevx_at(u2_wire_hev_r(u2_Wire), wof)
+#define   u2_hevn_be(ite, wof) u2_hevx_be(u2_wire_hev_r(u2_Wire), ite, wof)
 
   /** Functions.
   **/

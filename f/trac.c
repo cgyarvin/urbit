@@ -8,8 +8,8 @@
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt3Y   k_224__a__b__c
-#   define Pt4Y   k_224__a__b__c__d
+#   define Pt3Y   k_222__a__b__c
+#   define Pt4Y   k_222__a__b__c__d
 
     u2_noun
     j2_mbc(Pt3Y, gor)(u2_wire, u2_noun a, u2_noun b);

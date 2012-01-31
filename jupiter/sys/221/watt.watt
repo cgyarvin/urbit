@@ -1,4 +1,3 @@
-!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -1214,12 +1213,11 @@
   ++  cask  ~[%%*]
   ++  char  ~[''*]
   ++  clip  ~[p=(hair) q=(tape)]
-  ++  coin  $^
-              [~ p=(mole)]
-              [%blob p=*]
-              [%long p=((list coin))]
-              [%over p=((set coin))]
-              [%with p=((map coin coin))]
+  ++  coin  $^  [~ p=(mole)]
+                [%blob p=*]
+                [%long p=((list coin))]
+                [%over p=((set coin))]
+                [%with p=((map coin coin))]
             ==
   ++  edge  ~[p=(hair) q=((unit ~[p=* q=(clip)]))]
   ++  fact  ~[p=* q=*]
@@ -1233,6 +1231,14 @@
   ++  rock  num
   ++  ring  num
   ++  rule  |=(tub=(clip) `(edge)`[p.tub ~ ~ tub])
+  ::  ++  fort  ~[.~*]  :: XX in 220
+  ++  fort  num
+  ++  path
+    $~  p=(fort)
+        q=(yard)
+    ==
+  ++  span  cask
+  ++  spar  (list coin)
   ++  spot  ~[p=@ q=[p=[p=@ q=@] q=[p=@ q=@]]]
   ++  tank
     $^  [%leaf p=(tape)]
@@ -1244,6 +1250,7 @@
   ++  term  ~[%%*]
   ++  wall  (list tape)
   ++  wand  num
+  ++  yard  (list cask)
   --
 =>
   ::::
@@ -1759,55 +1766,6 @@
   ::
   ::      tier 5b/7, parsing: basic atoms
   ::
-  ++  ab 
-    &.
-    ++  bix  (bass 16 (stun [2* 2*] six))
-    ++  hef  ;~(pose tip hif)
-    ++  hif  (boss 256 ;~(plug tip tiq (easy ~)))
-    ++  pev  (bass 64 ;~(plug sev (stun [0* 4*] siv)))
-    ++  pew  (bass 64 ;~(plug sew (stun [0* 4*] siw)))
-    ++  piv  (bass 64 (stun [5* 5*] siv))
-    ++  piw  (bass 64 (stun [5* 5*] siw))
-    ++  qeb  (bass 2 ;~(plug seb (stun [0* 3*] seb)))
-    ++  qex  (bass 16 ;~(plug sex (stun [0* 3*] hit)))
-    ++  qib  (bass 2 (stun [4* 4*] sib))
-    ++  qix  (bass 16 (stun [4* 4*] six))
-    ++  qit  ;~(pose (shim 32 38) (shim 40 91) (shim 93 126))
-    ++  seb  (cold 1 (just '1'))
-    ++  sed  (cook |=(a=@ (sub a '0')) (shim '1' '9'))
-    ++  sev  ;~(pose sed sov)
-    ++  sew  ;~(pose sed sow)
-    ++  sex  ;~(pose sed sox)
-    ++  sib  (cook |=(a=@ (sub a '0')) (shim '0' '1'))
-    ++  siq  ;~  pose
-               (shim 'a' 'z')
-               (shim 'A' 'Z')
-               (shim '0' '9')
-               hip
-               (cold 32 dot)
-               ;~(pfix sig ;~(pose sig dot bix))
-             ==
-    ++  sid  (cook |=(a=@ (sub a '0')) (shim '0' '9'))
-    ++  siv  ;~(pose sid sov)
-    ++  siw  ;~(pose sid sow)
-    ++  six  ;~(pose sid sox)
-    ++  sov  (cook |=(a=@ (sub a 87)) (shim 'a' 'w'))
-    ++  sow  ;~  pose
-               (cook |=(a=@ (sub a 87)) (shim 'a' 'z'))
-               (cook |=(a=@ (sub a 28)) (shim 'A' 'Z'))
-               (cold 62* (just '-'))
-               (cold 63* (just '~'))
-             ==
-    ++  sox  (cook |=(a=@ (sub a 87)) (shim 'a' 'f'))
-    ++  ted  (bass 10 ;~(plug sed (stun [0* 2*] sid)))
-    ++  tip  (cook |=(a=@ (far a)) til)
-    ++  tiq  (cook |=(a=@ (fyr a)) til)
-    ++  tid  (bass 10 (stun [3* 3*] sid))
-    ++  til  (boss 256 (stun [3* 3*] low))
-    ++  voy  ;~(pfix bas ;~(pose bas soq bix))
-    ++  vym  (bass 256 ;~(plug low (star ;~(pose low nud))))
-    ++  vyn  (bass 256 ;~(plug hip vym (easy ~)))
-    --
   ::
   ::      Tier 5b/7, parsing: external interface
   ::
@@ -1856,11 +1814,7 @@
       ~
     [^:(''* (end 3 1 a)) $(a (rsh 3 1 a))]
   ::
-  ::    Tier 5c/1, formatting: span language
-  ::
-
-  ::
-  ::    Tier 5c/2, formatting: layout
+  ::    Tier 5c/1, formatting: layout
   ::
   ++  re
     &=  tac=*tank
@@ -2037,6 +1991,55 @@
   ::
   ::      Tier 5c/2, parsing: number and span language
   ::
+  ++  ab 
+    &.
+    ++  bix  (bass 16 (stun [2* 2*] six))
+    ++  hef  ;~(pose tip hif)
+    ++  hif  (boss 256 ;~(plug tip tiq (easy ~)))
+    ++  pev  (bass 64 ;~(plug sev (stun [0* 4*] siv)))
+    ++  pew  (bass 64 ;~(plug sew (stun [0* 4*] siw)))
+    ++  piv  (bass 64 (stun [5* 5*] siv))
+    ++  piw  (bass 64 (stun [5* 5*] siw))
+    ++  qeb  (bass 2 ;~(plug seb (stun [0* 3*] seb)))
+    ++  qex  (bass 16 ;~(plug sex (stun [0* 3*] hit)))
+    ++  qib  (bass 2 (stun [4* 4*] sib))
+    ++  qix  (bass 16 (stun [4* 4*] six))
+    ++  qit  ;~(pose (shim 32 38) (shim 40 91) (shim 93 126))
+    ++  seb  (cold 1 (just '1'))
+    ++  sed  (cook |=(a=@ (sub a '0')) (shim '1' '9'))
+    ++  sev  ;~(pose sed sov)
+    ++  sew  ;~(pose sed sow)
+    ++  sex  ;~(pose sed sox)
+    ++  sib  (cook |=(a=@ (sub a '0')) (shim '0' '1'))
+    ++  siq  ;~  pose
+               (shim 'a' 'z')
+               (shim 'A' 'Z')
+               (shim '0' '9')
+               hip
+               (cold 32 dot)
+               ;~(pfix sig ;~(pose sig dot bix))
+             ==
+    ++  sid  (cook |=(a=@ (sub a '0')) (shim '0' '9'))
+    ++  siv  ;~(pose sid sov)
+    ++  siw  ;~(pose sid sow)
+    ++  six  ;~(pose sid sox)
+    ++  sov  (cook |=(a=@ (sub a 87)) (shim 'a' 'w'))
+    ++  sow  ;~  pose
+               (cook |=(a=@ (sub a 87)) (shim 'a' 'z'))
+               (cook |=(a=@ (sub a 28)) (shim 'A' 'Z'))
+               (cold 62* (just '-'))
+               (cold 63* (just '~'))
+             ==
+    ++  sox  (cook |=(a=@ (sub a 87)) (shim 'a' 'f'))
+    ++  ted  (bass 10 ;~(plug sed (stun [0* 2*] sid)))
+    ++  tip  (cook |=(a=@ (far a)) til)
+    ++  tiq  (cook |=(a=@ (fyr a)) til)
+    ++  tid  (bass 10 (stun [3* 3*] sid))
+    ++  til  (boss 256 (stun [3* 3*] low))
+    ++  voy  ;~(pfix bas ;~(pose bas soq bix))
+    ++  vym  (bass 256 ;~(plug low (star ;~(pose low nud))))
+    ++  vyn  (bass 256 ;~(plug hip vym (easy ~)))
+    --
   ++  ag
     &.
     ++  ape  |*(fel=rule ;~(pose (cold 0 (just '0')) fel))
@@ -2686,13 +2689,6 @@
       [%list p=*(list span)]
       [%date p=@]
     ==
-  ++  fort  num
-  ++  yard  (list cask)
-  ++  spar  (list span)
-  ++  path
-    $~  p=(fort)
-        q=(yard)
-    ==
   ::
   ::  Tier 6 fabs
   ::
@@ -2722,6 +2718,7 @@
       [8 p=(form) q=(form)]
       [9 p=@ q=(form)]
       [10 p=*$&(@ [p=@ q=(form)]) q=(form)]
+      [11 p=(form)]
     ==
   ++  gate  ~[p=? q=(gene)]
   ++  gene
@@ -2746,6 +2743,7 @@
       [%cnsg p=(twig) q=(gene) r=(gene)]
       [%cntr p=(gene)]
       [%cnts p=(twig) q=((list ~[p=(gene) q=(gene)]))]
+      [%dtkt p=(gene)]
       [%dtls p=(gene)]
       [%dtpt p=*term q=@]
       [%dtsg p=*term q=*]
@@ -4240,6 +4238,7 @@
       =+  wip=(tock p.i.mew p.zil q.q.lar)
       $(mew t.mew, q.q.lar q.wip, hej [[p.wip q.zil] hej])
     ::
+        [%dtkt *]  [(nice %noun) [11 q:$(gen p.gen, gol %noun)]]
         [%dtls *]  [(nice [%atom %%]) [4 q:$(gen p.gen, gol [%atom %%])]]
         [%dtpt *]  [(nice [%atom p.gen]) [1 q.gen]]
         [%dtsg *]
@@ -4426,6 +4425,7 @@
         ~|(%mull-bonk-g !!)
       $(mew t.mew, q.q.lar q.cuf, q.q.vug q.dof)
     ::
+        [%dtkt *]  =+($(gen p.gen, gol %noun) (both %noun))
         [%dtls *]  =+($(gen p.gen, gol [%atom %%]) (both [%atom %%]))
         [%dtpt *]  (both [%atom p.gen])
         [%dtsg *]  (both [%cube q.gen ?:(.?(q.gen) %noun [%atom p.gen])])
@@ -4794,6 +4794,7 @@
                  ?~  mew
                    rag
                  $(mew t.mew, rag q:(tock p.i.mew $$(gen q.i.mew) rag))
+      [%dtkt *]  %noun
       [%dtls *]  [%atom %%]
       [%dtpt *]  [%atom p.gen]
       [%dtsg *]  [%cube q.gen ?:(.?(q.gen) %noun [%atom p.gen])]
@@ -5007,13 +5008,13 @@
     ~|  %vast-prel
     ^-  *gene
     :+  %clms
-      [%dtpt %up p.wer] 
+      [%dtpt %h p.wer] 
     [%cltr (weld suf (turn (slag bac q.wer) |=(a=@ `*gene`[%dtpt %ta a])))]
   ::
   ++  ploc
     |=  [suf=*(list gene)]
     ^-  *gene
-    [%clms [%dtpt %up p.wer] [%cltr suf]]
+    [%clms [%dtpt %h p.wer] [%cltr suf]]
   ::
   ++  prev
     |=  gen=*gene
@@ -5094,13 +5095,6 @@
         %+  stag
           %dtsg
         bask
-      :-  '#'
-        ;~  pfix  hax
-          %+  cook
-            |=  a=*coin
-            [%dtpt %ta (rap 3 (spit a ~))]
-          sack
-        ==
       :-  ':'
         (stag %smcl ;~(pfix col (ifix [pal par] (most ace wide))))
       :-  '='
@@ -5206,18 +5200,19 @@
                 ['*' (rune tar %dttr expb)]
                 ['=' (rune tis %dtts expb)]
                 ['?' (rune wut %dtwt expa)]
+                ['^' (rune ket %dtkt expa)]
               ==
             ==
             :-  '/'
             ;~  pfix  fas
               ;~  pose
-                ;~(pfix fas (tope pata))
-                (cook ploc ;~(pfix col (tope patb)))
+                (tope patf)
+                (cook ploc ;~(pfix col (tope paty)))
                 %+  cook
                   prel
                 ;~  plug
-                  ;~(sfix (cook |=(a=*(list) (lent a)) (star dot)) tis)
-                  (tope patb)
+                  ;~(sfix (cook |=(a=*(list) (lent a)) (star ket)) fas)
+                  (tope paty)
                 ==
               ==
             ==
@@ -5344,7 +5339,7 @@
       ?:(tol ;~(pose ;~(pfix gap $:har(tol &)) dur) dur)
     ::
     ++  tope
-      |*  har=pata
+      |*  har=patf
       =+  dur=$:har(tol |)
       ?:(tol ;~(pose ;~(pfix gap $:har(tol &)) dur) dur)
     ::
@@ -5417,10 +5412,14 @@
           ?:(tol [p=;~(plug duz gap) q=;~(plug gap duz)] [p=pal q=par])
         (more mash ;~(gunk ;~(pfix cen sym) loaf))
       ==
-    ++  nasp  
-      %+  cook
-        |=(a=@ [%dtsg %ta a])
-      ;~(pose sym (cook |=(a=@ `''*`(rap 3 ~(rup at a))) dem))
+    ++  nasp
+      ;~  pose
+        (stag %dtsg (stag %tam sym))
+        %+  cook
+          |=  a=*coin
+          [%dtsg %ta (rap 3 (spit a ~))]
+        sack
+      ==
     ::
     ++  patl
       ?:  tol
@@ -5430,22 +5429,22 @@
         (easy ~)
       ==
     ::
-    ++  pata
+    ++  patf
       |.  %+  cook
             |=([a=*gene b=*(list gene)] [%clms a [%cltr (flop b)]])
           ?:  tol
             ;~  (glue gap)
-              ;~(pose (stag %dtpt (stag %up fed:ag)) tall)
+              ;~(pose ;~(pfix dot (stag %dtpt (stag %h fed:ag))) tall)
               patl
             ==
           ;~  (glue fas)
             ;~  pose
-              (stag %dtsg (stag %up fed:ag)) 
+              ;~(pfix dot (stag %dtpt (stag %h fed:ag)))
               (ifix [sel ser] wide)
             ==
             patl
           ==
-    ++  patb  |.(;~(pfix ?:(tol gap fas) patl))
+    ++  paty  |.(?:(tol ;~(pfix gap patl) patl))
     --
   ::
   ++  ling
