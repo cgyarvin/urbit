@@ -68,7 +68,7 @@
       {
         return j2_mcx(Pt6, ut, lose)(wir_r, van, sut, q_gen);
       }
-      case c3__zphx: p_gen = u2_t(gen);
+      case c3__zphs: p_gen = u2_t(gen);
       {
         return j2_mcx(Pt6, ut, lose)(wir_r, van, sut, p_gen);
       }

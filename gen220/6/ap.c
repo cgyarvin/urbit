@@ -1065,7 +1065,7 @@
                     u2_rx(wir_r, p_gen), 
                     j2_mcy(Pt6, ap, mold)(wir_r, q_gen, hep));
         }
-        case c3__zphx:  p_gen = u2_t(gen);
+        case c3__zphs:  p_gen = u2_t(gen);
         {
           return u2_bc
             (wir_r, c3__zpcb, j2_mcy(Pt6, ap, mold)(wir_r, q_gen, hep));
@@ -1294,7 +1294,7 @@
           }
           else return j2_mcy(Pt6, ap, rake)(wir_r, q_gen);
         }
-        case c3__zphx: { 
+        case c3__zphs: { 
           return j2_mcy(Pt6, ap, rake)(wir_r, u2_t(gen));
         }
       }

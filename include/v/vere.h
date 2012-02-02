@@ -19,6 +19,7 @@
         u2_noun ras;                        //  transition kernel, or 0
         u2_noun tip;                        //  broken sub-kernel, or 0
         u2_noun tul;                        //  toolkit map - [term vase]
+
         struct {
           u2_noun seed;                     //  kernel vase
           u2_noun what;                     //  platform vase
@@ -29,10 +30,20 @@
           u2_noun slam;                     //  nock vase call - [vase vase]
           u2_noun slap;                     //  nock vase pipe - [vase gene]
           u2_noun slop;                     //  nock vase pair - [vase vase]
+          u2_noun spay;                     //  coin to path
         } toy;
+
         struct {
-          u2_noun old;                      //  legacy app
+          u2_noun old;                      //  legacy app (gunn) - pre 221
         } dev;
+
+        struct {
+          struct {                          //  packet pile
+            u2_noun log;                    //  packets
+            u2_noun len;                    //  (lent log)
+            u2_noun sol;                    //  vase of cato core
+          } pyl;
+        } has;
       } u2_steg;
 
     /* u2_host: entire host.
@@ -79,9 +90,13 @@
 
       /* u2_ve_save(): save internal file as atom.
       */
-        void
+        u2_flag
         u2_ve_save(c3_c* ext_c, u2_noun tah, u2_noun dat);
 
+      /* u2_ve_zeus(): prayer to internal file path.  Return unit.
+      */
+        u2_noun
+        u2_ve_zeus(u2_noun hap);
 
     /**  Execution system.
     **/
@@ -130,10 +145,15 @@
         u2_noun
         u2_ve_ream(u2_noun txt);
 
-      /* u2_ve_slac(): slap with C string
+      /* u2_ve_slac(): slap with C string as feature.
       */
         u2_noun
         u2_ve_slac(u2_noun vax, const c3_c* sam_c);
+
+      /* u2_ve_slan(): slap with C string as gene.
+      */
+        u2_noun
+        u2_ve_slan(u2_noun vax, const c3_c* sam_c);
 
       /* u2_ve_use(): use specified tool.
       */

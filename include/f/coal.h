@@ -637,15 +637,10 @@
       c3_d
       u2_cf_flat_date(u2_noun pas);
 
-    /* u2_cf_senc_load(): load/initialize sequence directory at `pas`.
+    /* u2_cf_list(): list all the files in directory `pas`.  List of cask.
     */
-      u2_noun
-      u2_cf_senc_load(u2_noun pas);
-
-    /* u2_cf_senc_post(): append atom to `pas`, loaded as `sen`.
-    */
-      u2_noun
-      u2_cf_senc_post(u2_noun pas);
+      u2_noun 
+      u2_cf_list(u2_noun pas);
 
     /* u2_cf_path(): assemble local path with noun thap and ext.
     */
@@ -681,6 +676,14 @@
       u2_cn_trel(u2_noun a,
                  u2_noun b,
                  u2_noun c);
+
+    /* u2_cn_qual():
+    */
+      u2_noun
+      u2_cn_qual(u2_noun a,
+                 u2_noun b,
+                 u2_noun c,
+                 u2_noun d);
 
     /* u2_cn_nock():
     **
@@ -1050,12 +1053,17 @@
 
   /* u2_ck: kernel and related functions
   **
-  **   All nouns cleared unless otherwise stated.
+  **   All nouns transferred unless otherwise stated.
   */
     /* u2_cka: tier 1 functions
     */
     /* u2_ckb: tier 2 functions
     */
+      /* u2_ckb_lent(): length of a list.
+      */
+        u2_noun
+        u2_ckb_lent(u2_noun a);
+
       /* u2_ckb_weld(): concatenate lists `a` before `b`.
       */
         u2_noun

@@ -6,6 +6,7 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <sys/stat.h>
+#include <dirent.h>
 
 #include "../gen222/pit.h"
 
@@ -49,13 +50,19 @@
       return (pos_w + met_w);
     } 
     else {
-      c3_w met_w = u2_cr_met(3, u2h(hut));
-      c3_w end_w = _cf_path_1(buf_c, pos_w, u2t(hut));
+      c3_w met_w  = u2_cr_met(3, u2h(hut));
+      c3_w end_w  = _cf_path_1(buf_c, pos_w, u2t(hut));
+      u2_noun san = u2h(hut);
 
       if ( buf_c ) buf_c[end_w] = '/';
       end_w++;
 
-      if ( buf_c ) u2_cr_bytes(0, met_w, (c3_y*)(buf_c + end_w), u2h(hut));
+      // little security thing - last ditch
+      //
+      if ( c3_s2('.', '.') == san ) {
+        san = c3_s3('.','.','.');
+      }
+      if ( buf_c ) u2_cr_bytes(0, met_w, (c3_y*)(buf_c + end_w), san);
       end_w += met_w;
 
       return end_w;
@@ -69,7 +76,7 @@ u2_cf_path(c3_c* top_c,
 {
   c3_w    top_w = strlen(top_c);
   c3_w    len_w = _cf_path_1(0, (top_w + 1), tah);
-  c3_c*   buf_c = malloc(len_w + 1 + strlen(ext_c) + 1);
+  c3_c*   buf_c = malloc(len_w + (ext_c ? (1 + strlen(ext_c)) : 0) + 1);
   c3_w    pos_w;
   u2_noun pas;
 
@@ -78,8 +85,13 @@ u2_cf_path(c3_c* top_c,
   buf_c[pos_w++] = '/';
 
   pos_w = _cf_path_1(buf_c, pos_w, tah);
-  buf_c[pos_w++] = '.'; 
-  strcpy(buf_c + pos_w, ext_c);
+
+  if ( ext_c ) {
+    buf_c[pos_w++] = '.'; 
+    strcpy(buf_c + pos_w, ext_c);
+  } else {
+    buf_c[pos_w] = 0;
+  }
 
   pas = u2_ci_string(buf_c);
   free(buf_c);
@@ -145,6 +157,43 @@ u2_cf_flat_load(u2_noun mod,
     free(fil_c);
 
     return fil;
+  }
+}
+
+/* u2_cf_list(): list all the files in directory `pas`.  List of cask.
+*/
+u2_noun 
+u2_cf_list(u2_noun pas)
+{
+  c3_c* pas_c = u2_cr_string(pas);
+
+  u2z(pas);
+  {
+    u2_noun lis = u2_nul;
+    DIR *dir_d = opendir(pas_c);
+
+    if ( !dir_d ) {
+      free(pas_c);
+      return u2_nul;
+    }
+    else {
+      while ( 1 ) {
+        struct dirent ent_n;
+        struct dirent *out_n;
+
+        if ( readdir_r(dir_d, &ent_n, &out_n) != 0 ) {
+          perror(pas_c);
+          return u2_cm_bail(c3__fail);
+        } 
+        else if ( !out_n ) {
+          break;
+        }
+        else lis = u2nc(u2_ci_string(out_n->d_name), lis);
+      }
+
+      free(pas_c);
+      return lis;
+    }
   }
 }
 
@@ -458,6 +507,17 @@ u2_cn_qual(u2_noun a,
            u2_noun d)
 {
   return u2_bn_qual(u2_Wire, a, b, c, d);
+}
+
+/* u2_ckb_lent(): length of list `a`.
+*/
+u2_noun
+u2_ckb_lent(u2_noun a)
+{
+  u2_noun b = j2_mbc(Pt2, lent)(u2_Wire, a);
+
+  u2_cz(a);
+  return b;
 }
 
 /* u2_ckb_flop(): reverse list `a`.

@@ -126,12 +126,20 @@ u2_ve_ream(u2_noun txt)
   return u2_cn_mong(u2_ct(u2_ve_at()->toy.ream), txt);
 }
 
-/* u2_ve_slac(): slap with C string.  highly convenient.
+/* u2_ve_slac(): slap with feature as C string.  highly convenient.
 */
 u2_noun
 u2_ve_slac(u2_noun vax, const c3_c* sam_c)
 {
   return u2_ve_slap(vax, u2_ci_string(sam_c));
+}
+
+/* u2_ve_slan(): slap with gene as C string.
+*/
+u2_noun
+u2_ve_slan(u2_noun vax, const c3_c* sam_c)
+{
+  return u2_ve_slap(vax, u2_ve_ream(u2_ci_string(sam_c)));
 }
 
 /* u2_ve_use(): use specified tool.

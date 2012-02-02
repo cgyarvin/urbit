@@ -254,6 +254,10 @@ u2_ve_rest()
       ver_e->toy.slot = u2_cm_bury(u2_ve_bone("slot"));
     }
 
+    if ( u2_Host.kno_w <= 220 ) {
+      ver_e->toy.spay = u2_cm_bury(u2_ve_bone("spay"));
+    }
+
     u2_ve_tool(c3__what);
     ver_e->toy.what = u2_ve_use("what");
   }
@@ -261,7 +265,7 @@ u2_ve_rest()
     u2_ve_tool(c3__pitt);
 
     if ( u2_Host.kno_w <= 221 ) {
-      u2_ve_tool(c3__born);
+      u2_ve_tool(c3__zuse);
     }
   }
   u2_Host.ver_e[u2_Host.kno_w].mod_m = c3__live;
@@ -336,6 +340,55 @@ u2_ve_die(u2_noun tax)
   exit(1);
 }
 
+#if 0
+/* u2_ve_pile(): load the zuse packet log.  Crude.
+*/
+void
+u2_ve_pile(void)
+{
+  u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
+  u2_noun  tah   = u2nt(u2_ci_string("zuse"), u2_ci_string("log"), u2_nul);
+  u2_noun  all   = u2_ve_fold("atom", u2k(tah));
+  u2_noun  len   = u2_ckb_lent(all);
+
+  ver_e->has.pyl.len = len;
+  {
+    u2_noun log   = u2_nul;
+    c3_l    len_l = len;
+    c3_l    i_l;
+    u2_noun fun = ver_e->toy.spay;
+
+    for ( i_l = 0; i_l < len_l; i_l++ ) {
+      u2_noun man = u2_cn_mong(u2k(fun), u2nt(u2_nul, c3_s2('u','d'), i_l));
+      u2_noun hat = u2nc(man, u2k(tah));
+      u2_noun kap = u2_ve_file("atom", hat);
+
+      log = u2nc(kap, log);
+    }
+    ver_e->has.pyl.log = log;
+  }
+}
+
+/* u2_ve_recv(): receive a packet.  Crude.
+*/
+void
+u2_ve_recv(u2_noun kap)
+{
+  u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
+  u2_noun  fun   = u2_ve_at()->toy.spay;
+  c3_l     len_l = u2_ve_at()->has.pyl.len;
+  {
+    u2_noun man = u2_cn_mong(u2k(fun), u2nt(u2_nul, c3_s2('u','d'), len_l));
+    u2_noun tah = u2nq(man, u2_ci_string("zuse"), u2_ci_string("log"), u2_nul);
+ 
+    if ( u2_no != u2_ve_save("atom", tah, u2k(kap)) ) {
+      ver_e->has.pyl.len += 1;
+      ver_e->has.pyl.log = u2nc(kap, vere->has.pyl.log);
+    }
+  }
+}
+#endif
+
 /* u2_ve_start(): boot the kernel from `kfo` to `kto`.  Exit on fail.
 */
 void
@@ -398,6 +451,19 @@ u2_ve_start(c3_w kfo_w, c3_w kto_w)
       }
     }
   }
+#if 0
+  if ( u2_Host.kno_w <= 220 ) {
+    u2_ve_pile();
+
+    if ( u2_yes == u2_Flag_Verbose ) {
+      u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
+
+      if ( 0 != ver_e->has.pyl.len ) {
+        fprintf(stderr, "pile: %d packets\n", ver_e->has.pyl.len);
+      }
+    }
+  }
+#endif
 }
 
 /* u2_ve_init(): boot the kernel at `kno`.
@@ -441,11 +507,18 @@ u2_ve_mark()
     siz_w += u2_cm_mark_noun(ver_e->toy.seed);
     siz_w += u2_cm_mark_noun(ver_e->toy.what);
     siz_w += u2_cm_mark_noun(ver_e->toy.ream);
+    siz_w += u2_cm_mark_noun(ver_e->toy.sell);
+    siz_w += u2_cm_mark_noun(ver_e->toy.soul);
     siz_w += u2_cm_mark_noun(ver_e->toy.slam);
     siz_w += u2_cm_mark_noun(ver_e->toy.slap);
     siz_w += u2_cm_mark_noun(ver_e->toy.slop);
-   
+    siz_w += u2_cm_mark_noun(ver_e->toy.spay);
+
     siz_w += u2_cm_mark_noun(ver_e->dev.old);
+
+    siz_w += u2_cm_mark_noun(ver_e->has.pyl.log);
+    siz_w += u2_cm_mark_noun(ver_e->has.pyl.len);
+
   }
   return siz_w;
 }

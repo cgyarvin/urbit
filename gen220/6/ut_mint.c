@@ -782,7 +782,7 @@
         u2_bl_drop(wir_r);
         return ret;
       }
-      case c3__zphx: p_gen = u2_t(gen);
+      case c3__zphs: p_gen = u2_t(gen);
       {
         u2_bx_used(wir_r);
         return _mint_in(wir_r, van, sut, gol, p_gen);

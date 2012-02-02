@@ -1,0 +1,34 @@
+!:
+=>  &.                                                  ::  fabs
+    ++  bowl  ^?  &.                                    ::  investigation
+              ++  hear  |=  [wat=*yard how=*blob]       ::  new information
+                        [p=((list fact)) q=^?(..hear)]  ::  results
+              ++  wait  ((list yard))                   ::  barriers
+              --                                        ::  
+    ++  fact  ~[p=*yard q=*blob]                        ::  discovery
+    ++  work  ~[p=((list fact)) q=(%{bowl})]            ::  in progress
+    --                                                  ::
+=+  :*  bam=*(list ~[p=*(list yard) q=*%{bowl}])        ::  initiators
+        hey=*(list fact)                                ::  history
+        dex=*(map yard blob)                            ::  index
+        gan=*(list %{bowl})                             ::  investigations
+    ==
+&.
+++  need
+  |=  [yad=*yard act=|+(*fact [p=*(list fact) q=bowl])]
+  ^-  *work
+  =+  yet=(~(get by dex) yad)
+  ?:  (~(has by dex) yad)
+    (act yad yet)
+  :-  ~
+  ^?  &.
+  ++  hear  
+    |=  [wat=*yard how=*blob]
+    ?:  =(wat yad)
+      (act yad how)
+    [*(list fact) ^?(..hear)]
+  ::
+  ++  wait
+    `*(list yard)`[yad ~] 
+  --
+--

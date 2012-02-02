@@ -30,7 +30,7 @@ _nock_rise()
 static u2_noun
 _nock_pray(u2_noun gof)
 {
-  u2_cm_bean(u2nc(c3__pray, gof));
+  u2_cm_push(u2nc(c3__pray, u2k(gof)));
   {
     u2_pryr god_p = u2_hevn_be(u2_pryr, god);
     u2_noun out;
@@ -42,7 +42,7 @@ _nock_pray(u2_noun gof)
     if ( u2_nul == out ) {
       return u2_cm_bail(c3__exit);
     }
-    else if ( (u2_no == u2du(gof)) || (u2_nul != u2h(gof)) ) {
+    else if ( (u2_no == u2du(out)) || (u2_nul != u2h(out)) ) {
       return u2_cm_bail(c3__fail);
     }
     else {

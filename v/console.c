@@ -93,7 +93,12 @@ u2_ve_sway(c3_l tab_l, u2_noun tax)
     u2_noun how;
 
     if ( 0 != (how = u2_cm_trap()) ) {
+      u2_noun rap = u2_cm_trac();
+
       fprintf(stderr, "  !!--!!\n");
+      u2z(rap);
+
+      u2_err(u2_Wire, "lame", h_tax);
     } 
     else {
       c3_l    col_l = u2_ve_dump_columns();
@@ -150,21 +155,175 @@ u2_ve_wine(u2_noun how)
   u2_cz(how);
 }
 
-/* u2_ve_born_line(): execute a command with the born shell, protected.
+/* u2_ve_zuse_load(): fuel to vase.
+*/
+u2_noun
+u2_ve_zuse_load(u2_noun ful)
+{
+  u2_noun p_ful, q_ful;
+  c3_c*   ext_c;
+  u2_noun dat;
+
+  u2_cx_cell(ful, &p_ful, &q_ful);
+
+  switch ( p_ful ) {
+    default: return u2_cm_bail(c3__fail);
+    case c3__atom: ext_c = "atom"; break;
+    case c3__pill: ext_c = "pill"; break;
+  }
+
+  /* Load raw data.
+  */
+  {
+    u2_noun hat = u2_ve_slap(u2_ve_seed(), u2k(q_ful));
+    u2_noun tah = u2k(u2t(hat));
+
+    u2z(hat);
+    u2_cm_push(u2nc(c3__pray, u2k(tah)));
+    {
+      dat = u2_ve_file(ext_c, tah);
+
+      if ( u2_none == dat ) {
+        return u2_cm_bail(c3__fail);
+      }
+    }
+    u2_cm_drop();
+  }
+
+  /* Assemble as a vase.
+  */
+  {
+    if ( c3__atom == p_ful ) {
+      return u2nc(u2nc(c3__atom, u2_blip), dat);
+    }
+    else {
+      return u2nc(c3__noun, u2_cke_cue(dat));
+    }
+  }
+}
+
+#if 0
+/* u2_ve_zuse_pile(): load the packet log.
+*/
+u2_noun
+u2_ve_zuse_pile(void)
+{
+  u2_noun 
+}
+#endif
+
+/* u2_ve_zuse_save(): vent to output.
 */
 void
-u2_ve_born_line(u2_noun lin)
+u2_ve_zuse_save(u2_noun ven, u2_noun out)
 {
-  u2_noun cmd = u2_ve_hard("born", "scan", lin);
-  u2_noun gen = u2h(cmd);
-  u2_noun out = u2_ve_slap(u2_ve_seed(), u2k(gen));
+  u2_noun p_ven, q_ven;
+  c3_c*   ext_c;
+  u2_noun dat;
 
+  u2_cx_cell(ven, &p_ven, &q_ven);
+
+  switch ( p_ven ) {
+    default: u2_cm_bail(c3__fail);
+    case c3__atom: ext_c = "atom"; break;
+    case c3__pill: ext_c = "pill"; break;
+  }
+
+  /* Convert to data form.
+  */
   {
+    if ( c3__atom == p_ven ) {
+      out = u2_ve_slan(out, "^-(@ .)");
+      dat = u2k(u2t(out));
+    } 
+    else {
+      dat = u2_cke_jam(u2k(u2t(out)));
+    }
+  }
+
+  /* Write.
+  */
+  {
+    u2_noun hat = u2_ve_slap(u2_ve_seed(), u2k(q_ven));
+    u2_noun tah = u2k(u2t(hat));
+
+    u2z(hat);
+    if ( u2_no == u2_ve_save(ext_c, tah, dat) ) {
+      u2_cm_bail(c3__fail);
+    }
+  }
+  u2z(ven);
+  u2z(out);
+}
+
+/* u2_ve_zuse_deed(): execute a zuse deed.
+*/
+void
+u2_ve_zuse_deed(u2_noun ded)
+{
+  u2_noun p_ded, q_ded, r_ded;
+  u2_noun gen, out;
+
+  u2_cx_trel(ded, &p_ded, &q_ded, &r_ded);
+  gen = u2k(p_ded);
+
+  if ( u2_nul == q_ded ) {
+    // inn = u2nc(u2nc(c3__atom, 'n'), 0);
+    out = u2_ve_slap(u2_ve_seed(), gen);
+  }
+  else {
+    u2_noun inn, fun;
+
+    inn = u2_ve_zuse_load(u2k(u2t(q_ded)));
+    fun = u2_ve_slap(u2_ve_seed(), gen);
+    out = u2_ve_slam(fun, inn);
+  }
+
+  if ( u2_nul == r_ded ) {
     u2_ve_tank(2, u2_ve_soul(u2k(u2h(out))));
     u2_ve_tank(0, u2_ve_sell(u2k(out)));
+
+    u2z(out);
   }
-  u2z(cmd);
-  u2z(out);
+  else {
+    u2_ve_zuse_save(u2k(u2t(r_ded)), out);
+  }
+  u2z(ded);
+}
+
+/* u2_ve_zeus(): prayer to internal file path.  Return unit.
+*/
+u2_noun
+u2_ve_zeus(u2_noun hap)
+{
+  if ( (u2_no == u2du(hap)) || (c3_s2('.', '~') != u2h(hap)) ) {
+    u2z(hap);
+    return u2_nul;
+  } 
+  else {
+    u2_noun tah = u2k(u2t(hap));
+    u2_noun dat = u2_ve_file("watt", tah);
+
+    if ( u2_none == dat ) {
+      return u2_nul;
+    } else {
+      return u2nc(u2_nul, dat);
+    }
+  }
+}
+
+/* u2_ve_zuse_line(): execute a command with the zuse shell, protected.
+*/
+void
+u2_ve_zuse_line(u2_noun lin)
+{
+  u2_hevn_be(u2_pryr, god) = u2_ve_zeus;
+  {
+    u2_noun ded = u2_ve_hard("zuse", "scan", lin);
+
+    u2_ve_zuse_deed(ded);
+  }
+  u2_hevn_be(u2_pryr, god) = 0;
 }
 
 /* u2_ve_line(): execute a command line, unprotected.
@@ -190,7 +349,7 @@ u2_ve_line(c3_c* lin_c)
     u2_noun lin = u2_ci_string(lin_c);
 
     if ( u2_Host.kno_w <= 221 ) {
-      u2_ve_born_line(lin);
+      u2_ve_zuse_line(lin);
     } 
     else {
       u2_noun cor = u2_ve_gunn();
