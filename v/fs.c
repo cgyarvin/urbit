@@ -11,6 +11,7 @@
 #include <setjmp.h>
 #include <gmp.h>
 #include <stdint.h>
+#include <ev.h>
 
 #include "all.h"
 #include "f/coal.h"

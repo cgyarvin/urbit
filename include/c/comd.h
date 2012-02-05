@@ -18,4 +18,5 @@
     **   Returns 0 iff the console has exited.
     */
       c3_c*                                                       //  produce
-      c3_comd_line(const c3_c *fel_c);                              //  retain
+      c3_comd_line(const c3_c *fel_c, 
+                   const c3_c *prm_c);                            //  retain

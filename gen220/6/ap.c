@@ -837,6 +837,57 @@
 /***
 ****
 ***/
+    static u2_noun
+    _ap_snig_in(u2_noun gop)
+    {
+      if ( u2_nul == gop ) {
+        return u2nc(c3__smts, c3__null);
+      } else {
+        u2_noun i_gop = u2h(gop);
+        u2_noun t_gop = u2t(gop);
+        u2_noun res = _ap_snig_in(t_gop);
+
+        if ( u2_no == u2du(i_gop) ) {
+          return u2nt(c3__clms,
+                      u2nt(c3__dtpt, c3_s2('t','a'), u2k(i_gop)),
+                      res);
+        }
+        else {
+          u2_noun pi_gop = u2t(i_gop);
+
+          return u2nt
+            (c3__tsls,
+             u2nt(c3__clms, u2k(pi_gop), res),
+             u2nc
+              (c3__brms,
+               u2nq(c3__wtsg,
+                    u2nc(u2_nul, 6),
+                    u2nc(u2_nul, 7),
+                    u2nt(c3__clms,
+                         u2nc(u2_nul, 12),
+                         u2nq(c3__cnts,
+                              u2nc(u2_blip, u2_nul),
+                              u2nc(u2nc(u2_nul, 6), u2nc(u2_nul, 13)),
+                              u2_nul)))));
+        }
+      }
+    }
+    static u2_noun                                                //  produce
+    _ap_snig(u2_noun gop)                                         //  retain
+    {
+      return u2nt
+        (c3__ktms,
+         u2nc
+          (c3__brms,
+           u2nq
+            (c3__wtcl,
+             u2nc(c3__smts, c3__flag),
+             u2nc(c3__smts, c3__null),
+             u2nt(c3__clms, u2nt(c3__dtpt, c3_s2('t','a'), 0), u2_blip))),
+          _ap_snig_in(gop));
+
+    }
+
     static u2_noun                                                //  produce
     _smcl_in(u2_wire wir_r,
              u2_noun q_gen)                                       //  retain
@@ -876,6 +927,10 @@
          u2_rx(wir_r, p_gen),
          _smcl_in(wir_r, q_gen));
     }
+  }
+  _open_do_p(smdq)
+  {
+    return _ap_snig(p_gen);
   }
   _open_do_pq(smsg)   //  ;~
   {
@@ -1220,6 +1275,7 @@
         _open_pq  (sgsg);
 
         _open_pq  (smcl);
+        _open_p   (smdq);
         _open_pq  (smsg);
       }
     }

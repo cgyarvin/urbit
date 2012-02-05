@@ -55,18 +55,14 @@ c3_comd_init(void)
 **   free the line.
 */
 c3_c*                                                             //  produce
-c3_comd_line(const c3_c *fel_c)                                   //  retain
+c3_comd_line(const c3_c *fel_c, const c3_c *prm_c)                //  retain
 {
   while ( 1 ) {
     c3_c *vid_c;
 
-    if ( !(vid_c = readline(": ")) ) {
+    if ( !(vid_c = readline(prm_c)) ) {
       printf("\n");
       return 0;
-    }
-    if ( !*vid_c ) {
-      free(vid_c);
-      continue;
     }
 
     add_history(vid_c);

@@ -11,6 +11,26 @@
 
   /** Data types.
   **/
+    struct _u2_http;
+
+    /* u2_hcon: http connection.
+    */
+      typedef struct _u2_hcon {
+        struct ev_io     wax_w;
+        struct _u2_http *srv_h;
+        struct _u2_hcon *nex_n;
+      } u2_hcon;
+
+    /* u2_http: http server.
+    */
+      typedef struct _u2_http {
+        struct ev_io     wax_w;             //  event handler state
+        c3_w             por_w;             //  running port
+        u2_noun          vox;               //  server core as vase
+        struct _u2_hcon *con_n;             //  connection list
+        struct _u2_http *nex_h;             //  next in list
+      } u2_http;
+
     /* u2_steg: kernel stage.
     */
       typedef struct {
@@ -25,7 +45,7 @@
           u2_noun what;                     //  platform vase
           u2_noun ream;                     //  text to gene 
           u2_noun sell;                     //  vase to tank
-          u2_noun soul;                     //  type to tank
+          u2_noun skol;                     //  type to tank
           u2_noun slot;                     //  vase fragment
           u2_noun slam;                     //  nock vase call - [vase vase]
           u2_noun slap;                     //  nock vase pipe - [vase gene]
@@ -56,6 +76,9 @@
         u2_noun map;                        //  unix arguments as map
         u2_steg ver_e[257];                 //  stages improving downward
         c3_w    kno_w;                      //  current executing stage
+
+        struct ev_loop *lup_v;              //  libev event loop
+        u2_http *htp_h;                     //  http servers, if any
       } u2_host;                            //  host == computer == process
 
 
@@ -135,10 +158,10 @@
         u2_noun
         u2_ve_sell(u2_noun vax);
 
-      /* u2_ve_soul(): use soul gate. 
+      /* u2_ve_skol(): use skol gate. 
       */
         u2_noun
-        u2_ve_soul(u2_noun typ);
+        u2_ve_skol(u2_noun typ);
 
       /* u2_ve_ream(): use ream gate.
       */
@@ -228,3 +251,15 @@
       */
         void
         u2_ve_line(c3_c* lin_c);
+
+    /**  HTTP.
+    **/
+      /* u2_ve_http_mark(): mark http server memory for gc.
+      */
+        c3_w
+        u2_ve_http_mark();
+
+      /* u2_ve_http_start():
+      */
+        u2_flag
+        u2_ve_http_start(u2_noun vox, c3_w por_w);

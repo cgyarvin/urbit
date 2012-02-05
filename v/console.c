@@ -11,6 +11,7 @@
 #include <setjmp.h>
 #include <gmp.h>
 #include <stdint.h>
+#include <ev.h>
 
 #include "all.h"
 #include "v/vere.h"
@@ -280,7 +281,7 @@ u2_ve_zuse_deed(u2_noun ded)
   }
 
   if ( u2_nul == r_ded ) {
-    u2_ve_tank(2, u2_ve_soul(u2k(u2h(out))));
+    u2_ve_tank(2, u2_ve_skol(u2k(u2h(out))));
     u2_ve_tank(0, u2_ve_sell(u2k(out)));
 
     u2z(out);

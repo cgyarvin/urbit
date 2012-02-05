@@ -11,6 +11,7 @@
 #include <setjmp.h>
 #include <gmp.h>
 #include <stdint.h>
+#include <ev.h>
 
 #define U2_GLOBAL
 #define C3_GLOBAL
@@ -41,6 +42,7 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
 {
   u2_noun map = 0;
   c3_w    kno_w = 0;
+  u2_noun hep = u2_nul;
   u2_flag abo = u2_no;
   u2_flag gab = u2_yes;
   u2_flag pro = u2_no;
@@ -48,10 +50,11 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
 
   c3_i ch_i;
 
-  while ( (ch_i = getopt(argc, argv, "k:agpqv")) != -1 ) {
+  while ( (ch_i = getopt(argc, argv, "k:h:agqv")) != -1 ) {
     switch ( ch_i ) {
       case 'a': { abo = u2_yes; break; }
       case 'g': { gab = u2_yes; break; }
+      case 'h': { hep = u2_ci_string(optarg); break; }
       case 'k': {
         c3_w arg_w = atoi(optarg);
 
@@ -77,7 +80,10 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
   map = u2_ckd_by_put(map, c3__gab, gab);
   map = u2_ckd_by_put(map, c3__pro, pro);
   map = u2_ckd_by_put(map, c3__veb, veb);
-  
+ 
+  if ( hep != u2_nul ) {
+    map = u2_ckd_by_put(map, c3__hep, hep); 
+  }
   return map;
 }
 
@@ -117,6 +123,27 @@ u2_ve_sysopt()
   u2_Flag_Garbage = u2_ckd_by_got(u2_ct(map), c3__gab);
   u2_Flag_Profile = u2_ckd_by_got(u2_ct(map), c3__pro);
   u2_Flag_Verbose = u2_ckd_by_got(u2_ct(map), c3__veb);
+}
+
+ev_io stdin_watcher;
+
+static void
+stdin_cb(struct ev_loop *lup_e, struct ev_io *w, int revents)
+{
+  c3_c* lin_c = c3_comd_line(u2_Host.fel_c, "");
+
+  if ( !lin_c ) {
+    ev_io_stop (lup_e, w);
+    ev_unloop (lup_e, EVUNLOOP_ALL);
+  }
+  else if ( !*lin_c ) {
+    free(lin_c);
+  }
+  else {
+    u2_ve_line(lin_c); 
+    free(lin_c);
+  }
+  printf(": "); fflush(stdout);
 }
 
 c3_i
@@ -172,17 +199,41 @@ main(c3_i   argc,
     }
   }
 
-  //  Process commands.  Replace with actual event loop.
-  //
-  while ( 1 ) {
-    c3_c* lin_c = c3_comd_line(u2_Host.fel_c);
+  {
+    u2_noun hep; 
+    
+    if ( u2_none != (hep = u2_ckd_by_get(u2k(u2_Host.map), c3__hep)) ) {
+      struct ev_loop *lup_v = ev_default_loop(0);
 
-    if ( !lin_c ) {
-      break;
+      u2_Host.lup_v = lup_v;
+
+      fprintf(stderr, "http: on port 8080\n");
+      u2_ve_http_start(u2_nul, 8080);
+
+      printf(": "); fflush(stdout);
+      ev_io_init(&stdin_watcher, stdin_cb, 0, EV_READ);
+      ev_io_start(lup_v, &stdin_watcher);
+
+      ev_loop(lup_v, 0);
+
+      return 0;
     }
     else {
-      u2_ve_line(lin_c); 
-      free(lin_c);
+      //  Process commands.  Replace with actual event loop.
+      //
+      while ( 1 ) {
+        c3_c* lin_c = c3_comd_line(u2_Host.fel_c, ": ");
+
+        if ( !lin_c ) {
+          break;
+        }
+        else {
+          if ( *lin_c ) {
+            u2_ve_line(lin_c); 
+          }
+          free(lin_c);
+        }
+      }
     }
   }
   return 0;

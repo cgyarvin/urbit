@@ -11,6 +11,7 @@
 #include <setjmp.h>
 #include <gmp.h>
 #include <stdint.h>
+#include <ev.h>
 
 #include "all.h"
 #include "v/vere.h"
@@ -106,14 +107,14 @@ u2_ve_sell(u2_noun vax)
   return u2_cn_mong(u2_ct(u2_ve_at()->toy.sell), vax);
 }
 
-/* u2_ve_soul(): use soul gate. 
+/* u2_ve_skol(): use skol gate. 
 */
 u2_noun
-u2_ve_soul(u2_noun typ)
+u2_ve_skol(u2_noun typ)
 {
-  c3_assert(0 != u2_ve_at()->toy.soul);
+  c3_assert(0 != u2_ve_at()->toy.skol);
 
-  return u2_cn_mong(u2_ct(u2_ve_at()->toy.soul), typ);
+  return u2_cn_mong(u2_ct(u2_ve_at()->toy.skol), typ);
 }
 
 /* u2_ve_ream(): use ream gate.

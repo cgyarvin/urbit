@@ -11,6 +11,7 @@
 #include <setjmp.h>
 #include <gmp.h>
 #include <stdint.h>
+#include <ev.h>
 
 #include "all.h"
 #include "v/vere.h"
@@ -250,7 +251,11 @@ u2_ve_rest()
 
     if ( u2_Host.kno_w <= 221 ) {
       ver_e->toy.sell = u2_cm_bury(u2_ve_bone("sell"));
-      ver_e->toy.soul = u2_cm_bury(u2_ve_bone("soul"));
+      if ( u2_Host.kno_w == 221 ) {
+        ver_e->toy.skol = u2_cm_bury(u2_ve_bone("soul"));
+      } else {
+        ver_e->toy.skol = u2_cm_bury(u2_ve_bone("skol"));
+      }
       ver_e->toy.slot = u2_cm_bury(u2_ve_bone("slot"));
     }
 
@@ -508,7 +513,7 @@ u2_ve_mark()
     siz_w += u2_cm_mark_noun(ver_e->toy.what);
     siz_w += u2_cm_mark_noun(ver_e->toy.ream);
     siz_w += u2_cm_mark_noun(ver_e->toy.sell);
-    siz_w += u2_cm_mark_noun(ver_e->toy.soul);
+    siz_w += u2_cm_mark_noun(ver_e->toy.skol);
     siz_w += u2_cm_mark_noun(ver_e->toy.slam);
     siz_w += u2_cm_mark_noun(ver_e->toy.slap);
     siz_w += u2_cm_mark_noun(ver_e->toy.slop);
@@ -518,8 +523,9 @@ u2_ve_mark()
 
     siz_w += u2_cm_mark_noun(ver_e->has.pyl.log);
     siz_w += u2_cm_mark_noun(ver_e->has.pyl.len);
-
   }
+  siz_w += u2_ve_http_mark();
+
   return siz_w;
 }
 

@@ -991,14 +991,6 @@
       u2_cm_slaq(c3_g met_g,
                  c3_w len_w);
 
-    /* u2_cm_malloc():
-    **
-    **   Allocate `sib_w` *bytes* of raw C storage.
-    */
-      void*
-      u2_cm_malloc(u2_ray ral_r,
-                   c3_w   sib_w);
-
     /* u2_cm_malt():
     **
     **   Initialize slab `sal` as an atom, self-measured.
@@ -1027,6 +1019,13 @@
     */
       u2_flag
       u2_cm_open(c3_w a_w);
+
+    /* u2_cm_malloc():
+    **
+    **   Allocate `sib_w` *bytes* of raw C storage.
+    */
+      void*
+      u2_cm_malloc(c3_w sib_w);
 
     /* u2_cm_ralloc():
     **

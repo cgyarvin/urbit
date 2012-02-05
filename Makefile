@@ -20,15 +20,14 @@ BIN=bin
 
 RM=rm -f
 CC=gcc
-#CLD=gcc -O3 -L/sw/lib
-CLD=gcc -O3
+CLD=gcc -O3 -L/usr/local/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
 INCLUDE=include
 GENERATED=generated
 DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN)
-CFLAGS=-O3 -I/sw/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
+CFLAGS=-O3 -I/usr/local/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 CWFLAGS=-Wall
 
 .y.o:
@@ -873,20 +872,25 @@ BASE_OFILES=\
        $(J221_OFILES) \
        $(J220_OFILES)
 
+OUT_OFILES=\
+       outside/jhttp/http_parser.o
+
 VERE_OFILES=\
        v/boot.o \
        v/fs.o \
        v/main.o \
        v/console.o \
        v/system.o \
+       v/http.o \
        c/gunn.o \
-       $(BASE_OFILES)
+       $(BASE_OFILES) \
+       $(OUT_OFILES)
 
 all: $(BIN)/vere
 
 $(BIN)/vere: $(VERE_OFILES)
 	mkdir -p $(BIN)
-	$(CLD) -o $(BIN)/vere $(VERE_OFILES) -lgmp -lreadline -ltermcap
+	$(CLD) -o $(BIN)/vere $(VERE_OFILES) -lev -lgmp -lreadline -ltermcap
 
 tags:
 	ctags -R -f .tags --exclude=root
