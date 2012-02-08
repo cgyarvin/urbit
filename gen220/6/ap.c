@@ -1280,6 +1280,58 @@
       }
     }
 
+/* boilerplate
+*/
+#if 0
+    u2_noun                                                         //  transfer
+    j2_mc(Pt6, ut, find)(u2_wire wir_r, 
+                         u2_noun cor)                               //  retain
+    {
+      u2_noun sut, way, cog, van;
+
+      if ( (u2_no == u2_mean(cor, u2_cw_con, &van, 
+                                  u2_cw_sam_2, &way, 
+                                  u2_cw_sam_3, &cog, 
+                                  0)) ||
+           (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
+      {
+        return u2_bl_bail(wir_r, c3__fail);
+      } else {
+        return j2_mcx(Pt6, ut, find)(wir_r, van, sut, way, cog);
+      }
+    }
+
+    u2_weak                                                         //  transfer
+    j2_mci(Pt6, ut, find)(u2_wire wir_r,
+                          u2_noun van,                              //  retain
+                          u2_noun sut,                              //  retain 
+                          u2_noun way,                              //  retain
+                          u2_noun cog)                              //  retain
+    {
+      u2_weak hoc = u2_ds_look(wir_r, van, "find");
+
+      if ( u2_none == hoc ) {
+        c3_assert(!"register find");
+        return u2_none;
+      } else {
+        u2_weak von = u2_rl_molt(wir_r, van, u2_cw_sam, u2_rx(wir_r, sut), 0);
+        u2_weak gat = u2_nk_soft(wir_r, von, hoc);
+        u2_weak cor = u2_rl_molt(wir_r, gat, 
+                                        u2_cw_sam_2, u2_rx(wir_r, way), 
+                                        u2_cw_sam_3, u2_rx(wir_r, cog), 
+                                        0);
+
+        if ( (u2_none == j2_mcj(Pt6, ut, find)[0].xip) ) {
+          u2_noun xip = u2_ds_find(wir_r, cor);
+       
+          c3_assert(u2_none != xip);
+          j2_mcj(Pt6, ut, find)[0].xip = xip;
+        }
+        u2_rl_lose(wir_r, gat);
+        return cor;
+      }
+    }
+#endif
     u2_noun
     j2_mcy(Pt6, ap, open)(u2_wire wir_r,
                           u2_noun gen)
@@ -1569,8 +1621,8 @@
 
   u2_ho_jet 
   j2_mbj(Pt6, ap)[] = {
-    { "late", c3__hevy, j2_mc(Pt6, ap, late), Tier6_c, u2_none, u2_none },
     { "open", c3__hevy, j2_mc(Pt6, ap, open), Tier6_c, u2_none, u2_none },
+    { "late", c3__hevy, j2_mc(Pt6, ap, late), Tier6_c, u2_none, u2_none },
     { "rake", c3__hevy, j2_mc(Pt6, ap, rake), Tier6_c, u2_none, u2_none },
     { "hack", c3__hevy, j2_mc(Pt6, ap, hack), Tier6_c, u2_none, u2_none },
     { }
