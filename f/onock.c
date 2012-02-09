@@ -710,7 +710,7 @@ u2_nk_mong(u2_wire wir_r,
        u2_rx(wir_r, u2_st(gat)));
 
   if ( u2_none != (xip = u2_ds_find(wir_r, cor)) ) {
-    u2_noun pro = u2_ho_kick(wir_r, xip, cor, u2_cv_noc);
+    u2_noun pro = u2_ho_kick(wir_r, xip, cor, u2_cw_noc);
 
     u2_rz(wir_r, cor);
     return pro;
@@ -729,7 +729,7 @@ u2_nk_kick(u2_wire wir_r,
   u2_noun xip;
 
   if ( u2_none != (xip = u2_ds_find(wir_r, gat)) ) {
-    u2_noun pro = u2_ho_kick(wir_r, xip, gat, u2_cv_noc);
+    u2_noun pro = u2_ho_kick(wir_r, xip, gat, u2_cw_noc);
 
     return pro;
   }

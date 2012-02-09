@@ -306,6 +306,7 @@
 
     /* Old (Nock 7) conventional axes for gate call.
     */
+#if 0
 #     define u2_cv_pay      2       //  payload
 #     define u2_cv_sam      4       //  sample
 #       define u2_cv_sam_1  4
@@ -319,11 +320,14 @@
 #     define u2_cv_con_sam  20      //  sample in gate context
 #     define u2_cv_noc      3       //  deprecated
 #     define u2_cv_bat      3       //  battery
+#endif
 
     /* New (Nock 6) conventional axes for gate call.
     */
 #     define u2_cw_pay      2       //  payload
 #     define u2_cw_con      4       //  context
+#     define u2_cw_con_2    8
+#     define u2_cw_con_3    9
 #     define u2_cw_con_sam  17      //  sample in gate context
 #     define u2_cw_sam      5       //  sample
 #       define u2_cw_sam_1  5

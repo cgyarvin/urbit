@@ -137,7 +137,8 @@
 
     if ( u2_no == u2_dust(gen) ) {
       open: {
-        u2_noun rex = j2_mcy(Pt6, ap, open)(wir_r, gen);
+        u2_noun ter = u2_frag(u2_cw_con_2, van);
+        u2_noun rex = j2_mcy(Pt6, ap, open)(wir_r, ter, gen);
         u2_noun ret;
 
         if ( u2_yes == u2_sing(rex, gen) ) {

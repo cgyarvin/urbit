@@ -709,6 +709,8 @@ u2_bn_wait(u2_wire     wir_r,
            u2_noun     sam,                                       //  retain
            const c3_c* tam_c)                                     //  retain
 {
+  c3_assert(!"not implemented"); return 0;
+#if 0
   u2_noun rac = u2_bn_molt(wir_r, cor, u2_cv_sam, sam, 0);
   u2_noun rox = u2_ds_look(wir_r, rac, tam_c);
 
@@ -722,6 +724,7 @@ u2_bn_wait(u2_wire     wir_r,
                     u2_bc(wir_r, 0, 2),
                     rox));
   }
+#endif
 }
 
 /* u2_bn_qual(): 

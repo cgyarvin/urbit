@@ -299,7 +299,8 @@
     u2_noun ret;
 
     if ( u2_no == u2_dust(gen) ) {
-      u2_noun rex = j2_mcy(Pt6, ap, open)(wir_r, gen);
+      u2_noun ter = u2_frag(u2_cw_con_2, van);
+      u2_noun rex = j2_mcy(Pt6, ap, open)(wir_r, ter, gen);
 
       ret = _mull_in(wir_r, van, sut, gol, dox, rex);
       u2_rl_lose(wir_r, rex);
@@ -308,7 +309,8 @@
     } 
     else switch ( u2_h(gen) ) {
       default: {
-        u2_noun rex = j2_mcy(Pt6, ap, open)(wir_r, gen);
+        u2_noun ter = u2_frag(u2_cw_con_2, van);
+        u2_noun rex = j2_mcy(Pt6, ap, open)(wir_r, ter, gen);
 
         if ( u2_yes == u2_sing(rex, gen) ) {
 #if 1

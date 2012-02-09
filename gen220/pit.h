@@ -429,6 +429,7 @@
 
       u2_noun                                                     //  transfer
       j2_mcy(Pt6, ap, open)(u2_wire wir_r,
+                            u2_noun ter,                          //  retain
                             u2_noun gen);                         //  retain
 
       u2_noun                                                     //  transfer
