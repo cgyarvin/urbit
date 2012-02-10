@@ -150,6 +150,10 @@
               u2_bq(wir_r, c3__dtls, c3__dtsg, u2_blip, _0),
               u2_bt(wir_r, c3__dtsg, u2_blip, _0));
     }
+    else if ( (u2_yes == u2_dust(p_gen)) && (c3__atom == u2_h(p_gen)) ) {
+      return u2_bt
+        (wir_r, c3__dtpt, u2_rx(wir_r, u2_t(p_gen)), _0);
+    }
     else if ( u2_yes == u2_sing(c3__noun, p_gen) ) {
       u2_noun dud = u2_bt(wir_r, c3__dtsg, u2_blip, u2_nul);
 
@@ -1597,8 +1601,16 @@
     if ( u2_none != pro ) {
       return pro;
     } else {
-      fprintf(stderr, "mcl: soft?\n");
-      return _ap_open_n(wir_r, ter, gen);
+      u2_ho_jet *jet_j = &j2_mbj(Pt6, ap)[_ap_jet_open];
+      
+      c3_assert(jet_j->sat_s & u2_jet_live);
+      jet_j->sat_s &= ~u2_jet_live;
+      {
+        pro = _ap_open_n(wir_r, ter, gen);
+      }
+      jet_j->sat_s |= u2_jet_live;
+
+      return pro;
     }
   }
  
@@ -1613,7 +1625,7 @@
       return _ap_open_n(wir_r, ter, gen);
     }
     else {
-      if ( !jet_j->sat_s & u2_jet_memo ) {
+      if ( !(jet_j->sat_s & u2_jet_memo) ) {
         return _ap_open_l(wir_r, ter, gen);
       }
       else {

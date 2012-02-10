@@ -563,6 +563,9 @@ u2_flag
 u2_tx_task_in(u2_wire wir_r, 
               u2_noun tak)                                        //  retain
 {
+  //  Temporarily disabled due to bail issues.
+  //
+#if 0
   u2_ray rac_r = u2_wire_rac_r(wir_r);
   u2_noun don = u2_trac_at(rac_r, duz.don);
   u2_noun dim;
@@ -590,6 +593,8 @@ u2_tx_task_in(u2_wire wir_r,
 
     return u2_yes;
   }
+#endif
+  return u2_no;
 }
 
 /* u2_tx_task_out(): leave a task for profiling purposes.
@@ -597,6 +602,9 @@ u2_tx_task_in(u2_wire wir_r,
 void
 u2_tx_task_out(u2_wire wir_r)
 {
+  //  Temporarily disabled due to bail issues.
+  //
+#if 0
   u2_ray  rac_r = u2_wire_rac_r(wir_r);
   u2_noun don = u2_trac_at(rac_r, duz.don);
   u2_noun dim;
@@ -606,6 +614,7 @@ u2_tx_task_out(u2_wire wir_r)
   u2_rx(wir_r, dim);
   u2_rz(wir_r, don);
   u2_trac_at(rac_r, duz.don) = dim;
+#endif
 }
 
 /* _print_tape(): print a byte tape.

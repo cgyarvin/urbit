@@ -11,7 +11,7 @@ extern u2_flag u2_Flag_Profile;
 static __inline__ void
 _nock_sink()
 {
-#if 0
+#if 1
   LoomSink; 
   if ( u2_Flag_Profile ) u2_tx_sink_cas(u2_Wire);
 #endif
@@ -19,7 +19,7 @@ _nock_sink()
 static __inline__ void
 _nock_rise()
 {
-#if 0
+#if 1
   if ( u2_Flag_Profile ) u2_tx_rise_cas(u2_Wire); 
   LoomRise;
 #endif

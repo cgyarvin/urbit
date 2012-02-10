@@ -454,7 +454,7 @@ u2_cm_drop()
 */
 extern u2_noun u2_Flag_Abort;
 u2_noun
-u2_cm_bail(c3_l    how_l)
+u2_cm_bail(c3_l how_l)
 {
   u2_ray kit_r = u2_wire_kit_r(u2_Wire);
 

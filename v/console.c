@@ -99,7 +99,7 @@ u2_ve_sway(c3_l tab_l, u2_noun tax)
       fprintf(stderr, "  !!--!!\n");
       u2z(rap);
 
-      u2_err(u2_Wire, "lame", h_tax);
+      // u2_err(u2_Wire, "lame", u2h(h_tax));
     } 
     else {
       c3_l    col_l = u2_ve_dump_columns();
