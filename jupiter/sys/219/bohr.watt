@@ -1,0 +1,24 @@
+!:
+=>  &.
+    ++  pack  ,@uw
+    ++  tote  ,[sol=soul arm=bone]
+    --
+&=  tet=_tote
+::
+++  hear
+  |=  sap=_pack
+  ^-  [p=_wood q=..hear]
+  =+  did=(work sap)
+  (give (spin [p.did (weld q.did arm.tet)] sol.tet))
+::
+++  give
+  |=  [ham=_meat sol=_soul]
+  ^-  [p=_wood q=..hear]
+  [p.ham ..hear(sol.tet sol, arm.tet q.ham)]
+::
+++  work
+  =+  who=_(unit fort)
+  |=  sap=_pack
+  ^-  _meat
+  !!
+--

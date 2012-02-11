@@ -863,6 +863,139 @@ J220_OFILES=\
        $(J220_6_OFILES_UT) \
        gen220/watt.o
 
+J219_1_OFILES=\
+       gen219/1/add.o \
+       gen219/1/dec.o \
+       gen219/1/div.o \
+       gen219/1/gte.o \
+       gen219/1/gth.o \
+       gen219/1/lte.o \
+       gen219/1/lth.o \
+       gen219/1/mod.o \
+       gen219/1/mul.o \
+       gen219/1/sub.o
+
+J219_2_OFILES=\
+       gen219/2/bind.o \
+       gen219/2/clap.o \
+       gen219/2/drop.o \
+       gen219/2/flop.o \
+       gen219/2/lent.o \
+       gen219/2/levy.o \
+       gen219/2/lien.o \
+       gen219/2/need.o \
+       gen219/2/reel.o \
+       gen219/2/roll.o \
+       gen219/2/skim.o \
+       gen219/2/skip.o \
+       gen219/2/slag.o \
+       gen219/2/snag.o \
+       gen219/2/sort.o \
+       gen219/2/turn.o \
+       gen219/2/weld.o
+
+J219_3_OFILES=\
+       gen219/3/bex.o \
+       gen219/3/can.o \
+       gen219/3/cap.o \
+       gen219/3/cat.o \
+       gen219/3/con.o \
+       gen219/3/cut.o \
+       gen219/3/dor.o \
+       gen219/3/dis.o \
+       gen219/3/end.o \
+       gen219/3/gor.o \
+       gen219/3/hor.o \
+       gen219/3/lsh.o \
+       gen219/3/mas.o \
+       gen219/3/met.o \
+       gen219/3/mix.o \
+       gen219/3/mug.o \
+       gen219/3/peg.o \
+       gen219/3/rap.o \
+       gen219/3/rip.o \
+       gen219/3/rsh.o \
+       gen219/3/vor.o
+
+J219_4_OFILES=\
+       gen219/4/in.o \
+       gen219/4/by.o \
+       gen219/4/in_has.o \
+       gen219/4/in_gas.o \
+       gen219/4/in_put.o \
+       gen219/4/in_tap.o \
+       gen219/4/by_gas.o \
+       gen219/4/by_get.o \
+       gen219/4/by_has.o \
+       gen219/4/by_put.o 
+
+J219_5_OFILES=\
+       gen219/5/cue.o \
+       gen219/5/jam.o \
+       gen219/5/mat.o \
+       gen219/5/parse.o \
+       gen219/5/rub.o \
+       gen219/5/shax.o \
+       gen219/5/trip.o
+
+J219_6_OFILES=\
+       gen219/6/ap.o \
+       gen219/6/cell.o \
+       gen219/6/comb.o \
+       gen219/6/cons.o \
+       gen219/6/core.o \
+       gen219/6/cube.o \
+       gen219/6/face.o \
+       gen219/6/fine.o \
+       gen219/6/flan.o \
+       gen219/6/flip.o \
+       gen219/6/flor.o \
+       gen219/6/foam.o \
+       gen219/6/fork.o \
+       gen219/6/hike.o \
+       gen219/6/look.o \
+       gen219/6/ut.o
+
+J219_6_OFILES_UT=\
+       gen219/6/ut_burn.o \
+       gen219/6/ut_bust.o \
+       gen219/6/ut_crop.o \
+       gen219/6/ut_cull.o \
+       gen219/6/ut_find.o \
+       gen219/6/ut_fink.o \
+       gen219/6/ut_fire.o \
+       gen219/6/ut_firm.o \
+       gen219/6/ut_fish.o \
+       gen219/6/ut_fuse.o \
+       gen219/6/ut_gain.o \
+       gen219/6/ut_heal.o \
+       gen219/6/ut_lose.o \
+       gen219/6/ut_mint.o \
+       gen219/6/ut_moot.o \
+       gen219/6/ut_mull.o \
+       gen219/6/ut_nest.o \
+       gen219/6/ut_park.o \
+       gen219/6/ut_peek.o \
+       gen219/6/ut_play.o \
+       gen219/6/ut_repo.o \
+       gen219/6/ut_rest.o \
+       gen219/6/ut_seek.o \
+       gen219/6/ut_snap.o \
+       gen219/6/ut_swab.o \
+       gen219/6/ut_tack.o \
+       gen219/6/ut_tock.o \
+       gen219/6/ut_wrap.o
+
+J219_OFILES=\
+       $(J219_1_OFILES) \
+       $(J219_2_OFILES) \
+       $(J219_3_OFILES) \
+       $(J219_4_OFILES) \
+       $(J219_5_OFILES) \
+       $(J219_6_OFILES) \
+       $(J219_6_OFILES_UT) \
+       gen219/watt.o
+
 
 BASE_OFILES=\
        $(C_OFILES) \
@@ -870,7 +1003,8 @@ BASE_OFILES=\
        $(P_OFILES) \
        $(J222_OFILES) \
        $(J221_OFILES) \
-       $(J220_OFILES)
+       $(J220_OFILES) \
+       $(J219_OFILES)
 
 OUT_OFILES=\
        outside/jhttp/http_parser.o
