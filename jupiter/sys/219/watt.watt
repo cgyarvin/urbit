@@ -2113,7 +2113,14 @@
     ==
   ::
   ++  pant
-    !!    ::  build a simple atomic path
+    |=  [mad=_(list cask) daf=_(list ,@)]
+    ~|  %pant
+    ^-  _yard
+    ?~  mad
+      ?~(daf ~ !!)
+    ?~  daf
+      !!
+    [(rap 3 (rend i.mad i.daf)) $(mad t.mad, daf t.daf)]
   ++  panz
     !!    ::  build a full spanning-language path
   ::
@@ -2707,6 +2714,10 @@
     ==
   ::
   ::  Tier 5e, event inference
+  ::
+  ++  clot  
+    |=  [dis=_meat dat=_meat] ^-  _meat 
+    [(weld p.dis p.dat) (weld q.dis q.dat)]
   ::
   ++  spin
     |=  [[ash=_wood arm=_bone] sol=_soul]

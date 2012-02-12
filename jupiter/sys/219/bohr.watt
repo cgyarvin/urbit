@@ -20,5 +20,12 @@
   =+  who=_(unit fort)
   |=  sap=_pack
   ^-  _meat
-  !!
+  =+  [mag=(end 3 2 kap) bod=(rsh 3 2 kap)]
+  ~|  [%hear mag]
+  ?-    mag
+      %cr 
+    =+  pay=(,[p=hash q=bill] (cue bod))
+    %-  want
+       
+  ::
 --
