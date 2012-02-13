@@ -1211,6 +1211,7 @@
   ::
   ::  Tier 5 fabs
   ::
+  ++  auth  ,[pri=? dar=fort]
   ++  blob  ~[*]
   ++  bone  (list ,_task)
   ++  bowl  |+(xed=((map yard blob)) [p=((list fact)) q=((list %{bowl}))])

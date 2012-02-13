@@ -1,13 +1,11 @@
 !:
-=>  &.
-    ++  auth  ,[pri=? dar=fort]                         ::  power address
-    ++  pack  ,@uw
-    ++  tote  ,[sol=soul arm=bone]
-    --
-&=  tet=_tote                                           ::  system state
+&=  ^=  tet  #_
+    :*  sol=soul
+        arm=bone
+    ==
 ::                                                      ::
 ++  hear                                                ::
-  |=  sap=_pack                                         ::
+  |=  sap=@uw                                         ::
   ^-  [p=_wood q=..hear]                                ::
   =+  did=(work sap)                                    ::
   (lurn (spin [p.did (weld q.did arm.tet)] sol.tet))    ::
@@ -25,14 +23,14 @@
 ::                                                      ::
 ++  work                                                ::  packet processor
   =+  who=_(unit auth)                                  ::  packet authority
-  |=  sap=_pack                                         ::  packet itself
+  |=  sap=@uw                                           ::  packet itself
   ^-  _meat                                             ::  facts & queries
   =+  [mag=(end 3 2 sap) bod=(rsh 3 2 sap)]             ::  header, body
   ~|  [%work mag]                                       ::  crash-only
   ?+    mag  !!                                         ::
   ::                                                    ::
       %bu                                               ::  packet bundle
-    =+  pay=((hard (list pack)) (cue bod))              ::
+    =+  pay=((hard (list ,@uw)) (cue bod))              ::
     |-  ^-  _meat                                       ::
     ?~(pay [~ ~] (clot $$(sap i.pay) $(pay t.pay)))     ::
   ::                                                    ::
