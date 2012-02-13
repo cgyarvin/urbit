@@ -1212,7 +1212,6 @@
   ::  Tier 5 fabs
   ::
   ++  blob  ~[*]
-  ++  bill  ,@uw
   ++  bone  (list ,_task)
   ++  bowl  |+(xed=((map yard blob)) [p=((list fact)) q=((list %{bowl}))])
   ++  cask  ~[%%*]
@@ -1237,13 +1236,13 @@
             q=?~(+.b ~ [~ u=[p=(a +>-.b) q=[p=(hair -.b) q=(tape +.b)]]])
   ++  meat  ,[p=wood q=bone]
   ++  mole  ~[p=(cask) q=@]
-  ++  rock  num
   ++  ring  num
   ++  rule  |=(tub=(clip) `(edge)`[p.tub ~ ~ tub])
   ++  path  $~  p=(cask)
                 q=(yard)
             ==
   ++  pint  ~[q=[p=[p=@ q=@] q=[p=@ q=@]]]
+  ++  rock  ,@uw
   ++  soul  ,[tic=@ud pan=(map yard blob) tap=_well]
   ++  span  cask
   ++  spar  (list coin)
@@ -2113,11 +2112,11 @@
     ==
   ::
   ++  pant
-    |=  [mad=_(list cask) daf=_(list ,@)]
+    |=  [[mad=_(list cask) daf=_(list ,@)] yad=_yard]
     ~|  %pant
     ^-  _yard
     ?~  mad
-      ?~(daf ~ !!)
+      ?~(daf yad !!)
     ?~  daf
       !!
     [(rap 3 (rend i.mad i.daf)) $(mad t.mad, daf t.daf)]
@@ -2285,6 +2284,7 @@
         *
       !!
     ==
+  ++  rent  |=(mol=*mole ^-(@ta (rap 3 (rend mol))))
   ++  sack
     %+  knee  *coin  |.  ~+
     %-  stew  :~
@@ -2470,7 +2470,7 @@
       (jam (ramp c b) (ramp c (shax b)))
     ::
     ++  chew                                            ::  read with wand, 53
-      |=  [a=(wand) b=@]  ^-  *(unit num)
+      |=  [a=(wand) b=@]  ^-  *(unit ,@)
       =+  c=(melt 53 a) 
       ?:  (gte b (mul p.c q.c))
         ~
@@ -2522,7 +2522,7 @@
       $(b +(b), c (shax c))
     ::
     ++  take                                            ::  read with ring, 37
-      |=  [a=(ring) b=@]  ^-  *(unit num)
+      |=  [a=(ring) b=@]  ^-  *(unit ,@)
       ?:  (gte b a)
         ~
       (shed 0 (~(exp fo a) 37 b))
@@ -2690,7 +2690,7 @@
     ==
   ::
   ++  shed                                              ::  ghetto decrypt
-    |=  [key=@ cep=@]  ^-  *(unit num)
+    |=  [key=@ cep=@]  ^-  *(unit ,@)
     =+  toh=(met 0 cep)
     ?:  (lth toh 257)
       ~
@@ -2719,6 +2719,14 @@
     |=  [dis=_meat dat=_meat] ^-  _meat 
     [(weld p.dis p.dat) (weld q.dis q.dat)]
   ::
+  ++  hard
+    |*  han=|+(* *)
+    |=  fud=*  ^-  (han)
+    ~|  %hard
+    =+  gol=(han fud)
+    ?>  =(gol fud)
+    gol
+  ::
   ++  spin
     |=  [[ash=_wood arm=_bone] sol=_soul]
     =>  .(pan.sol (~(gas by pan.sol) ash))
@@ -2745,7 +2753,7 @@
     |+  sol=*soul  ^-  _meat
     =+  git=(scry bax sol)
     ?~  git
-      [~ [^|(..$) ~]]
+      [~ [^|(..$(sol _soul)) ~]]
     (bot u.git)
   ::
   ++  want
