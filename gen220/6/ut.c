@@ -157,8 +157,9 @@
     { "burn", 
       c3__hevy, 
       j2_mc(Pt6, ut, burn), 
+      Tier6_b,
       // u2_jet_live | u2_jet_memo,  // special performance category
-      u2_jet_dead,
+      // u2_jet_dead,
       u2_none, u2_none },
     { "moot", 
       c3__hevy, 

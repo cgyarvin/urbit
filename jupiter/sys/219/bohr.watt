@@ -5,7 +5,7 @@
     ==
 ::                                                      ::
 ++  hear                                                ::
-  |=  sap=@uw                                         ::
+  |=  sap=@uw                                           ::
   ^-  [p=_wood q=..hear]                                ::
   =+  did=(work sap)                                    ::
   (lurn (spin [p.did (weld q.did arm.tet)] sol.tet))    ::

@@ -529,4 +529,262 @@ u2_cn_nock(u2_noun bus,
 
   return pro;
 #endif
+} 
+
+/* u2_cn_mocq(): fast internal nock interface.
+*/
+u2_noun
+u2_cn_mocq(u2_noun  bus, 
+           u2_noun  fol,
+           u2_flag* pon)
+{
+  u2_noun hib, gal;
+
+  _nock_sink();
+
+  while ( 1 ) {
+    u2_cm_poll();
+    u2_tx_did_hop(u2_Wire, 1);
+
+    if ( u2_no == u2du(fol) ) {
+      return u2_cm_bail(c3__exit);
+    }
+    else { 
+      hib = u2fh(fol);
+      gal = u2ft(fol);
+    }
+
+    if ( u2_yes == u2du(hib) ) {
+      u2_noun poz, riv;
+
+      poz = _nock_cool(u2k(bus), u2k(hib));
+      riv = _nock_cool(bus, u2k(gal));
+
+      u2z(fol);
+      _nock_rise();
+      return u2_cn_cell(poz, riv);
+    }
+    else switch ( hib ) {
+      default: return u2_cm_bail(c3__exit);
+
+      case 0: {
+        if ( u2_no == u2_cr_ud(gal) ) {
+          return u2_cm_bail(c3__exit);
+        }
+        else {
+          u2_noun pro = u2k(u2at(gal, bus));
+
+          u2z(bus); u2z(fol);
+          _nock_rise();
+          return pro;
+        }
+      }
+      case 1: {
+        u2_noun pro = u2k(gal);
+
+        u2z(bus); u2z(fol);
+        _nock_rise();
+        return pro;
+      }
+      c3_assert(!"not reached");
+
+      case 2: {
+        if ( u2_no == u2du(gal) ) {
+          return u2_cm_bail(c3__exit);
+        }
+        else {
+          u2_noun nex = _nock_cool(u2k(bus), u2k(u2ft(gal)));
+          u2_noun seb = _nock_cool(bus, u2k(u2fh(gal)));
+
+          u2z(fol);
+          bus = seb;
+          fol = nex;
+          continue;
+        }
+      }
+      c3_assert(!"not reached");
+
+      case 3: {
+        u2_noun gof, pro;
+
+        gof = _nock_cool(bus, u2k(gal));
+        pro = u2du(gof);
+
+        u2z(gof); u2z(fol);
+        _nock_rise();
+        return pro;
+      }
+      c3_assert(!"not reached");
+
+      case 4: {
+        u2_noun gof, pro;
+
+        gof = _nock_cool(bus, u2k(gal));
+        pro = u2_rl_vint(u2_Wire, gof);
+
+        u2z(gof); u2z(fol);
+        _nock_rise();
+        return pro;
+      }
+      c3_assert(!"not reached");
+
+      case 5: {
+        if ( u2_no == u2du(gal) ) {
+          return u2_cm_bail(c3__exit);
+        }
+        else {
+          u2_noun dib = _nock_cool(u2k(bus), u2k(u2fh(gal)));
+          u2_noun rum = _nock_cool(bus, u2k(u2ft(gal)));
+          u2_noun pro = u2_cr_sing(dib, rum);
+
+          u2z(rum); u2z(dib); u2z(fol);
+          _nock_rise();
+          return pro;
+        }
+      }
+      c3_assert(!"not reached");
+
+      case 6: {
+        u2_noun b_gal, c_gal, d_gal;
+
+        u2_cx_trel(gal, &b_gal, &c_gal, &d_gal);
+        {
+          u2_noun tys = _nock_cool(u2k(bus), u2k(b_gal));
+          u2_noun nex;
+
+          if ( 0 == tys ) {
+            nex = u2k(c_gal);
+          } else if ( 1 == tys ) {
+            nex = u2k(d_gal);
+          } else return u2_cm_bail(c3__exit);
+
+          u2z(fol);
+          fol = nex;
+          continue;
+        }
+      }
+      c3_assert(!"not reached");
+
+      case 7: {
+        u2_noun b_gal, c_gal;
+      
+        u2_cx_cell(gal, &b_gal, &c_gal);
+        {
+          u2_noun bod = _nock_cool(bus, u2k(b_gal));
+          u2_noun nex = u2k(c_gal);
+
+          u2z(fol);
+          bus = bod;
+          fol = nex;
+          continue;
+        }
+      }
+      c3_assert(!"not reached");
+
+      case 8: {
+        u2_noun b_gal, c_gal;
+      
+        u2_cx_cell(gal, &b_gal, &c_gal);
+        {
+          u2_noun bod = u2nc(bus, _nock_cool(u2k(bus), u2k(b_gal)));
+          u2_noun nex = u2k(c_gal);
+
+          u2z(fol);
+          bus = bod;
+          fol = nex;
+          continue;
+        }
+      }
+      c3_assert(!"not reached");
+
+      case 9: {
+        u2_noun b_gal, c_gal;
+      
+        u2_cx_cell(gal, &b_gal, &c_gal);
+        if ( u2_no == u2ud(b_gal) ) {
+          return u2_cm_bail(c3__exit);
+        } 
+        else {
+          u2_noun seb = _nock_cool(bus, u2k(c_gal));
+          u2_weak xip;
+
+          u2_tx_sys_bit(u2_Wire, u2_yes);
+          xip = u2_ds_find(u2_Wire, seb);
+
+          if ( u2_none != xip ) {
+            u2_noun pro = u2_ho_kick(u2_Wire, xip, seb, b_gal);
+
+            u2_tx_sys_bit(u2_Wire, u2_no);
+            if ( u2_none == pro ) {
+              return u2_cm_bail(c3__exit);
+            } 
+            else {
+              u2z(seb); u2z(fol);
+              _nock_rise();
+              return pro;
+            }
+          }
+          else {
+            u2_tx_sys_bit(u2_Wire, u2_no);
+            {
+              u2_noun nex = u2_ct(u2at(b_gal, seb));
+
+              u2z(fol);
+              bus = seb;
+              fol = nex;
+              continue;
+            }
+          }
+        }
+      }
+      c3_assert(!"not reached");
+
+      case 10: {
+        u2_noun p_gal, q_gal;
+      
+        u2_cx_cell(gal, &p_gal, &q_gal);
+        {
+          u2_noun zep, hod, nex, pro;
+
+          if ( u2_yes == u2du(p_gal) ) {
+            u2_noun b_gal = u2fh(p_gal);
+            u2_noun c_gal = u2ft(p_gal);
+            u2_noun d_gal = q_gal;
+
+            zep = u2k(b_gal);
+            hod = _nock_cool(u2k(bus), u2_ct(c_gal));
+            nex = u2_ct(d_gal);
+          } 
+          else {
+            u2_noun b_gal = p_gal;
+            u2_noun c_gal = q_gal;
+
+            zep = u2k(b_gal);
+            hod = u2_nul;
+            nex = u2_ct(c_gal);
+          }
+
+          u2_cz(fol);
+          _nock_sink();
+          pro = _nock_hint(zep, hod, bus, nex);
+          _nock_rise();
+          _nock_rise();
+          return pro; 
+        }
+      }
+
+      case 11: {
+        u2_noun gof, pro;
+
+        gof = _nock_cool(bus, u2k(gal));
+        pro = _nock_pray(gof);
+
+        u2z(gof); u2z(fol);
+
+        _nock_rise();
+        return pro;
+      }
+      c3_assert(!"not reached");
+    }
+  }
 }
