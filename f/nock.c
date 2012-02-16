@@ -531,10 +531,11 @@ u2_cn_nock(u2_noun bus,
 #endif
 } 
 
-/* u2_cn_mocq(): fast internal nock interface.
+#if 0
+/* nock_mocq(): fast internal nock interface.
 */
 u2_noun
-u2_cn_mocq(u2_noun  bus, 
+_nock_mocq(u2_noun  bus, 
            u2_noun  fol,
            u2_flag* pon)
 {
@@ -556,13 +557,35 @@ u2_cn_mocq(u2_noun  bus,
 
     if ( u2_yes == u2du(hib) ) {
       u2_noun poz, riv;
+      u2_flag h_pon = u2_yes, t_pon = u2_yes;
 
-      poz = _nock_cool(u2k(bus), u2k(hib));
-      riv = _nock_cool(bus, u2k(gal));
+      poz = _nock_mocq(u2k(bus), u2k(hib), &h_pon);
+      riv = _nock_mocq(bus, u2k(gal), &t_pon);
 
-      u2z(fol);
-      _nock_rise();
-      return u2_cn_cell(poz, riv);
+      if ( (u2_no == h_pon) || (u2_no == t_pon) ) {
+        u2_noun lal;
+
+        u2z(fol);
+        _nock_rise();
+        *pon = u2_no;
+
+        if ( u2_yes == h_pon ) {
+          u2z(poz);
+          lal = riv;
+        }
+        else if ( u2_yes == t_pon ) {
+          u2z(riv);
+          lal = poz;
+        } else {
+          lal = u2_ckb_weld(poz, riv);
+        }
+        return lal;
+      }
+      else {
+        u2z(fol);
+        _nock_rise();
+        return u2_cn_cell(poz, riv);
+      }
     }
     else switch ( hib ) {
       default: return u2_cm_bail(c3__exit);
@@ -589,17 +612,21 @@ u2_cn_mocq(u2_noun  bus,
       c3_assert(!"not reached");
 
       case 2: {
-        if ( u2_no == u2du(gal) ) {
+        if ( (u2_no == u2du(gal)) || (u2_no == u2du(u2fh(gal))) ) {
           return u2_cm_bail(c3__exit);
         }
         else {
-          u2_noun nex = _nock_cool(u2k(bus), u2k(u2ft(gal)));
-          u2_noun seb = _nock_cool(bus, u2k(u2fh(gal)));
+          u2_noun neb = _nock_mocq(bus, u2k(gal), pon);
 
           u2z(fol);
-          bus = seb;
-          fol = nex;
-          continue;
+
+          if ( u2_no == pon ) {
+            return neb;
+          } else {
+            bus = seb;
+            fol = nex;
+            continue;
+          }
         }
       }
       c3_assert(!"not reached");
@@ -788,3 +815,4 @@ u2_cn_mocq(u2_noun  bus,
     }
   }
 }
+#endif
