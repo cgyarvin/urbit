@@ -1,4 +1,3 @@
-!:
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -1147,7 +1146,7 @@
   ++  barn  (list span)
   ++  blob  ~[*]
   ++  bone  (list ,_task)
-  ++  bowl  |+(xed=((map barn blob)) [p=((list fact)) q=((list %{bowl}))])
+  ++  bowl  |+(xed=((map barn note)) [p=((list fact)) q=((list %{bowl}))])
   ++  cask  ~[%%*]
   ++  char  ~[''*]
   ++  clip  ~[p=(hair) q=(tape)]
@@ -1158,9 +1157,9 @@
                 [%with p=((map coin coin))]
             ==
   ++  edge  ~[p=(hair) q=((unit ~[p=* q=(clip)]))]
-  ++  fact  ,[p=barn q=blob]
+  ++  fact  ,[p=barn q=note]
   ++  fort  ,@h
-  ++  frog  |+([wat=(barn) how=(blob)] [p=((list fact)) q=((list %{bowl}))])
+  ++  frog  |+([wat=(barn) how=(note)] [p=((list fact)) q=((list %{bowl}))])
   ++  hair  ~[p=1* q=1*]
   ++  hash  ,@uv
   ++  know  |*(veq=(edge) ?~(q.veq !! p.u.q.veq))
@@ -1170,9 +1169,7 @@
             q=?~(+.b ~ [~ u=[p=(a +>-.b) q=[p=(hair -.b) q=(tape +.b)]]])
   ++  meat  ,[p=wood q=bone]
   ++  mole  ~[p=(cask) q=@]
-  ++  path  $~  p=(cask)
-                q=(barn)
-            ==
+  ++  note  ,*
   ++  pint  ~[q=[p=[p=@ q=@] q=[p=@ q=@]]]
   ++  ring  num
   ++  rule  |=(tub=(clip) `(edge)`[p.tub ~ ~ tub])
@@ -1182,10 +1179,10 @@
                 [%spot p=_spot]
             ==
   ++  rock  ,@uw
-  ++  soul  ,[tic=@ud pan=(map barn blob) tap=_well]
+  ++  soul  ,[tic=@ud pan=(map barn note) tap=_well]
   ++  span  cask
   ++  spar  (list coin)
-  ++  spot  ~[p=(path) q=(pint)]
+  ++  spot  ~[p=(tray) q=(pint)]
   ++  tank
     $^  [%leaf p=(tape)]
         [%palm p=[p=(tape) q=(tape) r=(tape) s=(tape)] q=((list tank))]
@@ -1199,9 +1196,12 @@
                 [1 p=(list)]
                 [2 p=(list ,[@tam *])]
             ==
+  ++  tray  $~  p=(span)
+                q=(barn)
+            ==
   ++  wall  (list tape)
   ++  wand  num
-  ++  well  |+(_barn _(unit blob))
+  ++  well  |+(_barn _(unit note))
   ++  wood  (list fact)
   ++  xmln  
     ~[t=$&((cask) [(cask) a=((list ~[n=(cask) v=(tape)]))]) c=((list xmln))]
@@ -2690,7 +2690,7 @@
     ?~(git sip ?~(sip git ~|([%scry wat] !!)))
   ::
   ++  wait
-    |=  [bax=_barn bot=|+(_blob _meat)]
+    |=  [bax=_barn bot=|+(_note _meat)]
     ^-  task
     |+  sol=*soul  ^-  _meat
     =+  git=(scry bax sol)
@@ -2699,7 +2699,7 @@
     (bot u.git)
   ::
   ++  want
-    |=  [bax=_barn bot=|+(_blob _meat)]
+    |=  [bax=_barn bot=|+(_note _meat)]
     ^-  _meat
     [~ [(wait bax bot) ~]]
   ::
@@ -2801,6 +2801,7 @@
         [ven=*term pro=*term ver=@ kel=@]
     ==
   ::
+  ++  coat  ,[p=barn q=vase]
   ++  coil
     $~  p=*{%gold %iron %lead %zinc}
         q=(type)
@@ -2942,6 +2943,10 @@
   ++  knot  $&(*term [~ p=*axis])
   ++  line  ~[p=[%leaf p=(odor) q=@] q=(tile)] 
   ++  odor  cask
+  ++  pole
+    #%  [& p=(map span pole)]
+        [| p=vase]
+    ==
   ++  port  
     $~  p=*axis 
         q=($^([& p=(type)] [| p=*axis q=((list ~[p=(type) q=(gate)]))]))
@@ -5238,7 +5243,7 @@
   --
 ::
 ++  vast
-  =+  [bug=`?`| was=*(set path) wer=*path]
+  =+  [bug=`?`| was=*(set tray) wer=*tray]
   &. 
   ++  prel
     |=  [bac=@ fot=*(unit cask) suf=*(list gene)]
@@ -5255,7 +5260,7 @@
     [%clms [%dtpt %ta p.wer] [%clsg suf]]
   ::
   ++  prev
-    |=  gen=*gene  ~|  [%prev gen]  ^-  *path
+    |=  gen=*gene  ~|  [%prev gen]  ^-  *tray
     ?:  ?=([%zpcb *] gen)
       $(gen q.gen)
     ?>  ?=([%clms *] gen)

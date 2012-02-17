@@ -693,12 +693,12 @@
       u2_cn_nock(u2_noun bus,
                  u2_noun fol);
 
-    /* u2_cn_mong():
+    /* u2_cn_mung():
     **
     **   Call `(function sample)`.
     */
       u2_noun
-      u2_cn_mong(u2_noun fun,
+      u2_cn_mung(u2_noun fun,
                  u2_noun sam);
 
   /** u2_cs_*: general-purpose internal hash tables 

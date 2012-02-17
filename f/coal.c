@@ -531,6 +531,18 @@ u2_ckb_flop(u2_noun a)
   return b;
 }
 
+/* u2_ckb_weld(): concatenate lists `a` before `b`.
+*/
+u2_noun
+u2_ckb_weld(u2_noun a, u2_noun b)
+{
+  u2_noun c = j2_mbc(Pt2, weld)(u2_Wire, a, b);
+
+  u2_cz(a); u2_cz(b);
+  return c;
+}
+
+
 /* u2_ckd_by_get(): map get for key `b` in map `a` with u2_none.
 */
 u2_weak

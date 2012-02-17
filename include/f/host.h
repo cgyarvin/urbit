@@ -335,8 +335,17 @@
     **
     **   Apply host nock driver on `xip`, `cor`, `fol`.
     */
-      u2_weak
+      u2_weak                                                     //  produce
       u2_ho_kick(u2_ray   wir_r,
                  u2_noun  xip,                                    //  retain
                  u2_noun  cor,                                    //  retain
                  u2_atom  axe);                                   //  retain
+
+    /* u2_ho_kicq(): as u2_ho_kick(), but mocky.
+    */
+      u2_noun                                                     //  produce
+      u2_ho_kicq(u2_ray   wir_r,
+                 u2_noun  xip,                                    //  retain
+                 u2_noun  cor,                                    //  retain
+                 u2_atom  axe,                                    //  retain
+                 u2_flag  *pon);                                  //  retain

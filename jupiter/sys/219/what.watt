@@ -12,14 +12,14 @@
   ==
 ++  tube                              ::  filesystem address
   $^  [%here p=*(list cask)]          ::  permanent internal
-      [%unix p=*tape]                 ::  external unix path
+      [%unix p=*tape]                 ::  external unix tray
   ==
 ++  file  ~[p=(mode) q=(tube)]        ::  filesystem key
 ++  shoe                              ::  trace stack layer
   $^  [%bean p=*]                     ::  raw noun
       [%lose p=*term]                 ::  error message
       [%mean p=|.(*tank)]             ::  prettyprint trigger
-      [%pray p=*path]                 ::  prayer attempt
+      [%pray p=*tray]                 ::  prayer attempt
       [%spot p=*spot]                 ::  source position
   ==
 --
