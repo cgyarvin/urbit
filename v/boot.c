@@ -581,10 +581,10 @@ u2_ve_grab(u2_noun som, ...)
   if ( lec_w || (u2_yes == u2_Flag_Verbose) ) {
     fprintf(stderr, "%s: gc: ", u2_Local);
     if ( lec_w ) {
-      u2_ve_word(lec_w);
+      u2_ve_word(4 * lec_w);
       fprintf(stderr, " bytes shed; ");
     }
-    u2_ve_word(siz_w);
+    u2_ve_word(4 * siz_w);
     fprintf(stderr, " bytes live\n");
   }
 }

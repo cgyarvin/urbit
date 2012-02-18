@@ -235,12 +235,12 @@ u2_cf_flat_save(u2_noun mod,
   }
 }
 
-/* u2_cn_mong():
+/* u2_cn_mung():
 **
 **   Call `(function sample)`.
 */
 u2_noun
-u2_cn_mong(u2_noun fun,
+u2_cn_mung(u2_noun fun,
            u2_noun sam)
 {
   u2_noun pro = u2_bn_mong(u2_Wire, fun, sam);

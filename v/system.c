@@ -74,7 +74,7 @@ u2_ve_slap(u2_noun vax, u2_noun gen)
 {
   c3_assert(0 != u2_ve_at()->toy.slap);
 
-  return u2_cn_mong(u2_ct(u2_ve_at()->toy.slap), u2nc(vax, gen));
+  return u2_cn_mung(u2_ct(u2_ve_at()->toy.slap), u2nc(vax, gen));
 }
 
 /* u2_ve_slam(): use slam gate. 
@@ -84,7 +84,7 @@ u2_ve_slam(u2_noun gat, u2_noun sam)
 {
   c3_assert(0 != u2_ve_at()->toy.slam);
 
-  return u2_cn_mong(u2_ct(u2_ve_at()->toy.slam), u2nc(gat, sam));
+  return u2_cn_mung(u2_ct(u2_ve_at()->toy.slam), u2nc(gat, sam));
 }
 
 /* u2_ve_slop(): use slop gate. 
@@ -94,7 +94,7 @@ u2_ve_slop(u2_noun hed, u2_noun tal)
 {
   c3_assert(0 != u2_ve_at()->toy.slop);
 
-  return u2_cn_mong(u2_ct(u2_ve_at()->toy.slop), u2nc(hed, tal));
+  return u2_cn_mung(u2_ct(u2_ve_at()->toy.slop), u2nc(hed, tal));
 }
 
 /* u2_ve_sell(): use sell gate. 
@@ -104,7 +104,7 @@ u2_ve_sell(u2_noun vax)
 {
   c3_assert(0 != u2_ve_at()->toy.sell);
 
-  return u2_cn_mong(u2_ct(u2_ve_at()->toy.sell), vax);
+  return u2_cn_mung(u2_ct(u2_ve_at()->toy.sell), vax);
 }
 
 /* u2_ve_skol(): use skol gate. 
@@ -114,7 +114,7 @@ u2_ve_skol(u2_noun typ)
 {
   c3_assert(0 != u2_ve_at()->toy.skol);
 
-  return u2_cn_mong(u2_ct(u2_ve_at()->toy.skol), typ);
+  return u2_cn_mung(u2_ct(u2_ve_at()->toy.skol), typ);
 }
 
 /* u2_ve_ream(): use ream gate.
@@ -124,7 +124,7 @@ u2_ve_ream(u2_noun txt)
 {
   c3_assert(0 != u2_ve_at()->toy.ream);
 
-  return u2_cn_mong(u2_ct(u2_ve_at()->toy.ream), txt);
+  return u2_cn_mung(u2_ct(u2_ve_at()->toy.ream), txt);
 }
 
 /* u2_ve_slac(): slap with feature as C string.  highly convenient.
@@ -171,7 +171,7 @@ u2_ve_hard(const c3_c* wit_c, c3_c* fun_c, u2_noun arg)
   u2_noun cor = u2_ct(u2t(gat));
  
   u2z(gat);
-  return u2_cn_mong(cor, arg);
+  return u2_cn_mung(cor, arg);
 }
 
 /* u2_ve_soft(): use standard tool gate against vase.

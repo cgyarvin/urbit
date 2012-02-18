@@ -701,6 +701,19 @@
       u2_cn_mung(u2_noun fun,
                  u2_noun sam);
 
+    /* u2_cn_mock(): logical virtual nock.
+    */
+      u2_noun
+      u2_cn_mock(u2_noun bus,
+                 u2_noun fol,
+                 u2_noun fly);
+
+    /* u2_cn_moch(): blind mock with empty fly.
+    */
+      u2_noun
+      u2_cn_moch(u2_noun bus,
+                 u2_noun fol);
+   
   /** u2_cs_*: general-purpose internal hash tables 
   **/
 

@@ -4,43 +4,69 @@
 */
 #include "all.h"
 
-extern u2_flag u2_Flag_Profile;
+  /** Forward declarations.
+  **/
+    static u2_noun _nock_cool(u2_noun, u2_noun);
+    static u2_noun _nock_mool(u2_noun, u2_noun, u2_flag*);
 
-/* _nock_pray(): load from namespace.  Crude.
+/* _nock_pray_cool(): load from namespace, in kernel mode.
 */
 static u2_noun
-_nock_pray(u2_noun gof)
+_nock_pray_cool(u2_noun gof)
 {
-  u2_cm_push(u2nc(c3__pray, u2k(gof)));
-  {
-    u2_pryr god_p = u2_hevn_be(u2_pryr, god);
-    u2_noun out;
+  u2_pryr god_p = u2_hevn_be(u2_pryr, god);
+  u2_noun out;
 
-    if ( 0 == god_p ) {
-      return u2_cm_bail(c3__exit); 
-    }
-    out = god_p(gof);
-    if ( u2_nul == out ) {
-      return u2_cm_bail(c3__exit);
-    }
-    else if ( (u2_no == u2du(out)) || (u2_nul != u2h(out)) ) {
-      return u2_cm_bail(c3__fail);
-    }
-    else {
-      u2_noun pro = u2k(u2t(out));
+  // no stairway
+  //
+  c3_assert(u2_nul == u2_hevn_at(lad));
 
-      u2z(out);
-      return pro;
-    }
+  if ( 0 == god_p ) {
+    return u2_cm_bail(c3__exit); 
   }
-  u2_cm_drop();
+  out = god_p(gof);
+  if ( u2_nul == out ) {
+    return u2_cm_bail(c3__exit);
+  }
+  else if ( (u2_no == u2du(out)) || (u2_nul != u2h(out)) ) {
+    return u2_cm_bail(c3__fail);
+  }
+  else {
+    u2_noun pro = u2k(u2t(out));
+
+    u2z(out);
+    return pro;
+  }
+}
+
+/* _nock_pray_mool(): load from namespace, in kernel mode.
+*/
+static u2_noun
+_nock_pray_mool(u2_noun gof, u2_flag *pon)
+{
+  u2_noun lad = u2_hevn_at(lad);
+
+  c3_assert(u2_yes == u2du(lad));
+  {
+    u2_noun i_lad = u2fh(lad);
+    u2_noun t_lad = u2ft(lad);
+    u2_noun pro;
+
+    u2_hevn_at(lad) = t_lad;
+    if ( u2_nul == t_lad ) {
+      pro = _nock_mool(gof, u2k(i_lad), pon);
+    } else {
+      pro = _nock_cool(gof, u2k(i_lad));
+    }
+    c3_assert(t_lad == u2_hevn_at(lad));
+    u2_hevn_at(lad) = lad;
+
+    return pro;
+  }
 }
 
 /* _nock_hint(): hint with code, data, subject, formula.  nock/mock.
 */
-  static u2_noun _nock_cool(u2_noun, u2_noun);
-  static u2_noun _nock_mool(u2_noun, u2_noun, u2_flag*);
-
 static u2_noun                                                    //  produce
 _nock_hint(u2_noun  zep,                                          //  transfer
            u2_noun  hod,                                          //  transfer
@@ -453,7 +479,7 @@ _nock_cool(u2_noun bus,
         u2_noun gof, pro;
 
         gof = _nock_cool(bus, u2k(gal));
-        pro = _nock_pray(gof);
+        pro = _nock_pray_cool(gof);
 
         u2z(gof); u2z(fol);
 
@@ -740,14 +766,13 @@ _nock_mool(u2_noun  bus,
       }
 
       case 11: {
-        u2_noun gof, pro;
+        u2_noun gof;
 
-        gof = _nock_cool(bus, u2k(gal));
-        pro = _nock_pray(gof);
+        gof = _nock_mool(bus, u2k(gal), pon);
+        u2z(fol);
+        if ( u2_no == *pon ) { return gof; }
 
-        u2z(gof); u2z(fol);
-
-        return pro;
+        return _nock_pray_mool(gof, pon);
       }
       c3_assert(!"not reached");
     }
@@ -775,6 +800,7 @@ u2_cn_nock(u2_noun bus,
   return pro;
 } 
 
+#if 0
 /* u2_cn_mung():
 **
 **   Call `(function sample)`.
@@ -797,19 +823,16 @@ u2_cn_mung(u2_noun fun,
   }
   else return u2_cn_nock(cor, fol);
 }
+#endif
 
-/* u2_cn_mock(): logical virtual nock.
+/* _nock_moog(): u2_cn_mock() with fly set.
 */
-u2_noun
-u2_cn_mock(u2_noun bus,
+static u2_noun
+_nock_moog(u2_noun bus,
            u2_noun fol)
 {
-  u2_noun pro, res;
-  u2_flag bit, pon;
-
-  bit = u2_tx_sys_bit(u2_Wire, u2_no);
-  c3_assert(bit == u2_yes);
-  bit = u2_tx_glu_bit(u2_Wire, u2_yes);
+  u2_noun res;
+  u2_flag pon;
 
   pon = u2_yes;
   {
@@ -831,12 +854,45 @@ u2_cn_mock(u2_noun bus,
       res = u2nc(2, rap);
     } 
     else {
-      pro = _nock_mool(bus, fol, &pon);
+      u2_noun pro = _nock_mool(bus, fol, &pon);
+
+      u2_cm_done(poq_w);
 
       if ( u2_no == pon ) {
         res = u2nc(1, pro);
       } else res = u2nc(0, pro);
     }
+  }
+  return res;
+}
+
+/* u2_cn_mock(): logical virtual nock.
+*/
+u2_noun
+u2_cn_mock(u2_noun bus,
+           u2_noun fol,
+           u2_noun fly)
+{
+  u2_noun res;
+  u2_flag bit;
+
+  bit = u2_tx_sys_bit(u2_Wire, u2_no);
+  c3_assert(bit == u2_yes);
+  bit = u2_tx_glu_bit(u2_Wire, u2_yes);
+
+  {
+    u2_noun lad;
+
+    lad = u2_hevn_at(lad);
+    u2_hevn_at(lad) = u2nc(fly, u2k(lad));
+    {
+      res = _nock_moog(bus, fol);
+    }
+    c3_assert(u2_yes == u2du(u2_hevn_at(lad)));
+    c3_assert(lad == u2ft(u2_hevn_at(lad)));
+
+    u2z(u2_hevn_at(lad));
+    u2_hevn_at(lad) = lad;
   }
 
   u2_tx_sys_bit(u2_Wire, u2_yes);
@@ -845,6 +901,17 @@ u2_cn_mock(u2_noun bus,
   return res;
 } 
 
+/* u2_cn_moch(): blind mock with empty fly.
+*/
+u2_noun
+u2_cn_moch(u2_noun bus,
+           u2_noun fol)
+{
+  u2_noun fly = u2nc(u2nc(0, 0), u2nc(1, 0));
+
+  return u2_cn_mock(bus, fol, fly);
+}
+ 
 /*** Deprecated:
 ***/
 

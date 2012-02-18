@@ -4510,8 +4510,8 @@
         [%ktpm *]  =+(vat=$(gen p.gen) [(wrap(sut p.vat) %zinc) q.vat])
         [%ktsg *]
       =+  nef=$(gen p.gen)
-      ~~  (dunk %ktsg)
-      [p.nef [1 ~|(%mint-burn .*(burn q.nef))]]
+      =+  moc=(mock [burn q.nef] |=(* ~))
+      [p.nef ?:(?=(0 -.moc) [1 p.moc] q.nef)]
     ::
         [%ktts *]  =+(vat=$(gen q.gen) [(face p.gen p.vat) q.vat])
         [%ktwt *]  =+(vat=$(gen p.gen) [(wrap(sut p.vat) %lead) q.vat])

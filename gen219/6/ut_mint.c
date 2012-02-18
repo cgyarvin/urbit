@@ -617,16 +617,20 @@
         u2_noun nef = _mint_in(wir_r, van, sut, gol, p_gen);
         u2_noun p_nef = u2_h(nef);
         u2_noun q_nef = u2_t(nef);
-        u2_noun cag = j2_mcy(Pt6, ut, burn)(wir_r, van, sut);
-        u2_noun cod;
+        u2_noun fom;
 
         {
-          cod = u2_nk_nock(wir_r, cag, q_nef);
-          if ( u2_none == cod ) {
-            return u2_bl_error(wir_r, "mint-burn");
+          u2_noun cag = j2_mcy(Pt6, ut, burn)(wir_r, van, sut);
+          u2_noun wim = u2_cn_moch(cag, u2k(q_nef));
+
+          if ( 0 == u2h(wim) ) {
+            fom = u2nc(1, u2k(u2t(wim)));
+          } else {
+            fom = u2k(q_nef);
           }
+          u2z(wim);
         }
-        ret = u2_bc(wir_r, u2_rx(wir_r, p_nef), u2_bc(wir_r, _1, cod));
+        ret = u2_bc(wir_r, u2_rx(wir_r, p_nef), fom);
  
         u2_rz(wir_r, nef);
         return ret;
