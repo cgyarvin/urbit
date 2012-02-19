@@ -281,9 +281,13 @@ u2_ve_rest()
 void
 u2_ve_full()
 {
+  c3_assert(0 != u2_wire_kit_r(u2_Wire));
   u2_ve_base();
+  c3_assert(0 != u2_wire_kit_r(u2_Wire));
   if ( c3__warm == u2_Host.ver_e[u2_Host.kno_w].mod_m ) {
+    c3_assert(0 != u2_wire_kit_r(u2_Wire));
     u2_ve_rest();
+    c3_assert(0 != u2_wire_kit_r(u2_Wire));
   }
 }
 
@@ -323,23 +327,21 @@ u2_ve_retreat()
 void
 u2_ve_die(u2_noun tax)
 {
-  c3_w    qop_w = u2_cm_wind();
-  u2_noun how;
+  u2_noun hoe;
 
-  if ( 0 != (how = u2_cm_trap()) ) {
-    c3_w taz = u2_cm_trac();
+  if ( 0 != (hoe = u2_cm_trap()) ) {
+    u2z(tax);                         //  deepest error takes precedence
+    u2_ve_grab(hoe, 0);
 
-    u2_ct(tax);                         //  deepest error takes precedence
-    u2_cm_done(qop_w);
-    // u2_ve_gc();
+    u2_ve_wine(u2k(u2h(hoe)));
+    u2_ve_die(u2k(u2t(hoe)));
 
-    u2_ve_wine(how);
-    u2_ve_die(taz);
+    u2z(hoe);
   } 
   else {
     u2_ve_retreat();
     u2_ve_sway(2, u2_ckb_flop(tax));
-    u2_cm_done(qop_w);
+    u2_cm_done();
   }
   fprintf(stderr, "%s: %d: boot failure\n", u2_Local, u2_Host.kno_w);
   exit(1);
@@ -409,19 +411,13 @@ u2_ve_start(c3_w kfo_w, c3_w kto_w)
 
   u2_cm_trip();
   {
-    c3_w    qop_w = u2_cm_wind();
-    u2_noun how;
+    u2_noun hoe;
  
-    if ( 0 != (how = u2_cm_trap()) ) {
-      {
-        c3_w tax = u2_cm_trac();
+    if ( 0 != (hoe = u2_cm_trap()) ) {
+      u2_ve_grab(hoe, 0);
 
-        u2_cm_done(qop_w);
-        // u2_ve_gc();
-
-        u2_ve_wine(how);
-        u2_ve_die(tax);
-      }
+      u2_ve_wine(u2k(u2h(hoe)));
+      u2_ve_die(u2k(u2t(hoe)));
     } 
     else {
       while ( kfo_w > kto_w ) {
@@ -430,9 +426,9 @@ u2_ve_start(c3_w kfo_w, c3_w kto_w)
         kfo_w--;
       }
       u2_Host.kno_w = kto_w;
+      c3_assert(0 != u2_wire_kit_r(u2_Wire));
       u2_ve_full();
-
-      u2_cm_done(qop_w);
+      u2_cm_done();
     }
     u2_cm_purge();
   }
@@ -570,6 +566,8 @@ u2_ve_grab(u2_noun som, ...)
     va_start(vap, som);
 
     if ( som != 0 ) {
+      siz_w += u2_cm_mark_noun(som);
+
       while ( 0 != (tur = va_arg(vap, u2_noun)) ) {
         siz_w += u2_cm_mark_noun(tur); 
       }
@@ -587,4 +585,5 @@ u2_ve_grab(u2_noun som, ...)
     u2_ve_word(4 * siz_w);
     fprintf(stderr, " bytes live\n");
   }
+  u2_wire_lan(u2_Wire) = u2_yes;
 }

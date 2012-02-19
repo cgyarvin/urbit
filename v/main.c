@@ -22,18 +22,16 @@
 **/
     /* External drivers.
     */
+      extern u2_ho_driver j2_da(k_218);
       extern u2_ho_driver j2_da(k_219);
       extern u2_ho_driver j2_da(k_220);
-      extern u2_ho_driver j2_da(k_221);
-      extern u2_ho_driver j2_da(k_222);
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       u2_ho_driver *HostDriverBase[] = {
+        &j2_da(k_218),
         &j2_da(k_219),
         &j2_da(k_220),
-        &j2_da(k_221),
-        &j2_da(k_222),
         0
       };
 
@@ -152,7 +150,7 @@ c3_i
 main(c3_i   argc,
      c3_c** argv)
 {
-  c3_w kno_w, qop_w;
+  c3_w kno_w;
 
   //  Instantiate process globals.
   {
@@ -165,9 +163,7 @@ main(c3_i   argc,
 
   //  Set outside bail trap.  Should not be used, but you never know...
   //
-  qop_w = u2_cm_wind();
   if ( 0 != u2_cm_trap() ) {
-    u2_cm_done(qop_w);
     u2_ve_panic(argc, argv);
   }
   else {
@@ -199,6 +195,7 @@ main(c3_i   argc,
     {
       u2_ve_init(kno_w);
     }
+    u2_cm_done();
   }
 
   {

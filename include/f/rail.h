@@ -366,7 +366,7 @@
 
         /* u2_rl_refs():
         **
-        **   Return the reference count of (som).  For debugging.
+        **   Return the reference count of (som).  For debugging, etc.
         */
           c3_w
           u2_rl_refs(u2_ray  ral_r,

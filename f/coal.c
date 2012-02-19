@@ -8,17 +8,17 @@
 #include <sys/stat.h>
 #include <dirent.h>
 
-#include "../gen222/pit.h"
+#include "../gen220/pit.h"
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt5Y   k_222__a__b__c__d__e
+#   define Pt5Y   k_220__a__b__c__d__e
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt3Y   k_222__a__b__c
-#   define Pt4Y   k_222__a__b__c__d
-#   define Pt5Y   k_222__a__b__c__d__e
+#   define Pt3Y   k_220__a__b__c
+#   define Pt4Y   k_220__a__b__c__d
+#   define Pt5Y   k_220__a__b__c__d__e
 
     u2_noun j2_mbc(Pt3Y, gor)(u2_wire, u2_noun a, u2_noun b);
     u2_noun j2_mcc(Pt4Y, by, get)(u2_wire, u2_noun a, u2_noun b);
@@ -324,32 +324,129 @@ u2_cm_bury(u2_weak som)
   }
 }
 
-/* u2_cm_wind(): enter new opaque bail context, returning old (or 0).
-**
-**   usage:  
-**        c3_w qop_w = u2_cm_wind();
-**  
-**        if ( 0 != u2_cm_trap() ) {
-**          u2_cm_done(qop_w);
-**          [... exception ...]
-**        }
-**        else {
-**          [... code as normal ...]
-**          u2_cm_done(qop_w);
-**        }
+/* u2_cm_rind(): open and produce a new jump buffer.
 */
-c3_w
-u2_cm_wind()
+void*
+u2_cm_rind()
 {
-  return u2_bl_open(u2_Wire);
+  u2_ray kit_r = u2_rl_ralloc(u2_Wire, c3_wiseof(u2_loom_kite));
+
+  u2_kite_par_r(kit_r) = u2_wire_kit_r(u2_Wire);
+  u2_wire_kit_r(u2_Wire) = kit_r;
+
+  //  Save the old stack and actions.
+  //
+  u2_kite_tax(kit_r) = u2k(u2_wire_tax(u2_Wire));
+  u2_kite_don(kit_r) = u2k(u2_wrac_at(u2_Wire, duz.don)); 
+
+  return u2_at_cord(u2_kite_buf_r(kit_r), c3_wiseof(jmp_buf));
 }
 
-/* u2_cm_done(): terminate and restore old opaque bail context.
+/* _cm_jack(): steal the trace as of the current kite.
+*/
+static u2_noun
+_cm_jack(u2_noun old, u2_noun nuw)
+{
+  if ( nuw == old ) {
+    if ( nuw != u2_nul ) {
+      if ( 2 != u2_rl_refs(u2_Wire, nuw) ) {
+        printf("nuw %x refs %d\n", nuw, u2_rl_refs(u2_Wire, nuw));
+      }
+      c3_assert(2 == u2_rl_refs(u2_Wire, nuw));
+      u2z(nuw);
+    }
+    return u2_nul;
+  }
+  else {
+    c3_assert(u2_yes == u2du(nuw));
+    c3_assert(1 == u2_rl_refs(u2_Wire, nuw));
+
+    u2ft(nuw) = _cm_jack(old, u2ft(nuw));
+    return nuw;
+  }
+}
+
+/* u2_cm_wail(): produce and reset the local trace, without bailing.
+*/
+u2_noun 
+u2_cm_wail()
+{
+  u2_ray  kit_r = u2_wire_kit_r(u2_Wire);
+  u2_noun old   = u2_kite_tax(u2_wire_kit_r(u2_Wire));
+  u2_noun nuw   = u2_wire_tax(u2_Wire);
+  u2_noun jaq   = _cm_jack(old, nuw);
+  
+  c3_assert(1 == u2_rl_refs(u2_Wire, old));
+  u2_wire_tax(u2_Wire) = old;
+  u2_kite_tax(kit_r) = u2k(old);
+  c3_assert(1 == u2_rl_refs(u2_Wire, jaq));
+
+  return jaq;
+}
+
+/* u2_cm_bail(): bail out to the local trap.  Does not return.
+*/
+  extern u2_noun u2_Flag_Abort;
+u2_noun
+u2_cm_bail(c3_l how_l)
+{
+  u2_ray kit_r = u2_wire_kit_r(u2_Wire);
+
+  if ( u2_yes == u2_Flag_Abort ) {
+    if ( c3__fail == how_l ) {
+      c3_assert(0);
+    }
+  }
+  u2_tx_sys_bit(u2_Wire, u2_yes);
+
+  fprintf(stderr, "bail\n");
+  {
+    u2_noun jaq;
+    jmp_buf buf_f;
+
+    // Reset the old stack trace, pulling off the local top.
+    //
+    jaq = u2_cm_wail();
+
+    // Reset the old action trace.
+    {
+      u2z(u2_wrac_at(u2_Wire, duz.don));
+      u2_wrac_at(u2_Wire, duz.don) = u2_kite_don(kit_r);
+    }
+
+    // Copy out the jump buffer; free the old kite.
+    {
+      memcpy((void *)buf_f,
+             u2_at_cord(u2_kite_buf_r(kit_r), c3_wiseof(jmp_buf)),
+             sizeof(jmp_buf));
+
+      u2_wire_kit_r(u2_Wire) = u2_kite_par_r(kit_r);
+      u2_rl_rfree(u2_Wire, kit_r);
+    }
+    
+    // Longjmp with the how-trace pair.  XX: no workee with 64-bit nouns.
+    //
+    {
+      _longjmp(buf_f, u2nc(how_l, jaq));
+    }
+  }
+  return 0;
+}
+
+/* u2_cm_done(): terminate trap.
 */
 void
-u2_cm_done(c3_w qop_w)
+u2_cm_done()
 {
-  u2_bl_done(u2_Wire, qop_w);
+  u2_ray kit_r = u2_wire_kit_r(u2_Wire);
+
+  c3_assert(kit_r != 0);
+
+  u2z(u2_kite_tax(kit_r));
+  u2z(u2_kite_don(kit_r));
+  u2_wire_kit_r(u2_Wire) = u2_kite_par_r(kit_r);
+
+  u2_rl_rfree(u2_Wire, kit_r);
 }
 
 /* u2_cm_poll(): poll for interrupts, etc.
@@ -448,24 +545,6 @@ u2_cm_drop()
   c3_assert(u2_nul != tax);
   u2_wire_tax(u2_Wire) = u2_ct(u2t(tax));
   u2_cz(tax);
-}
-
-/* u2_cm_bail(): bail out to the local trap.  Does not return.
-*/
-extern u2_noun u2_Flag_Abort;
-u2_noun
-u2_cm_bail(c3_l how_l)
-{
-  u2_ray kit_r = u2_wire_kit_r(u2_Wire);
-
-  if ( u2_yes == u2_Flag_Abort ) {
-    if ( c3__fail == how_l ) {
-      c3_assert(0);
-    }
-  }
-  u2_tx_sys_bit(u2_Wire, u2_yes);
-  _longjmp((void *)u2_at_cord(u2_kite_buf_r(kit_r), c3_wiseof(jmp_buf)), how_l);
-  return u2_none;
 }
 
 /* u2_cm_foul():

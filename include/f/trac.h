@@ -51,7 +51,7 @@
         /* Tracing.
         */
           struct {
-            /* Position stack: *(list shoe) 
+            /* Position stack: *(list shoe)  [XX not used, still wire->tax]
             */
             u2_noun ryp;
 

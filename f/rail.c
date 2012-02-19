@@ -673,11 +673,13 @@ _rl_bloq_grap(u2_ray ral_r,
 
   nov_r = _rl_bloq_grab(ral_r, len_w);
 
+#if 0
   if ( (nov_r - c3_wiseof(u2_loom_rail_box)) == 0xacba24 ) {
     printf("alloc leak %d - nov_r %x\n", xzx, nov_r);
     if ( xzx == 4 ) { u2_bl_error(0, "leakage"); }
     xzx++;
   }
+#endif
   return nov_r;
 }
 #endif
@@ -1571,6 +1573,7 @@ u2_rl_gc_sweep(u2_ray ral_r, c3_w sav_w)
 
     if ( use_ws > 0 ) {
       // printf("leak: box %x, siz %d, use %d\n", box_r, siz_w, use_w);
+
       lek_w += siz_w;
       u2_rail_box_use(box_r) = 0;
       _rl_bloq_free(ral_r, box_r);

@@ -3440,7 +3440,7 @@
       r.gen
     ::
         [%hxbr *]  ~(clam al bore)
-        [%hxcb *]  ~(bunt al bore(gen p.gen))
+        [%hxcb *]  [%ktsg ~(bunt al bore(gen p.gen))]
         [%hxcn *]  ~(clam al bore)
         [%hxkt *]  ~(clam al bore(gen p.gen)) 
         [%hxpm *]  ~(clam al bore)
@@ -5498,7 +5498,7 @@
             :-  '#'
               ;~  pfix  hax
                 %-  stew  :~
-                  ['|' (rune cen %hxbr expb)]
+                  ['|' (rune bar %hxbr expb)]
                   ['_' (rune cab %hxcb expa)]
                   ['%' (rune cen %hxcn exps)]
                   ['^' (rune ket %hxkt expa)]

@@ -4,40 +4,6 @@
 */
 #include "all.h"
 
-/* u2_bl_open(): enter new bail context, returning old.
-*/
-u2_ray
-u2_bl_open(u2_ray wir_r)
-{
-  u2_ray kit_r = u2_wire_kit_r(wir_r);
-
-  u2_wire_kit_r(wir_r) = u2_rl_ralloc(wir_r, c3_wiseof(u2_loom_kite));
-  if ( 0 == u2_wire_kit_r(wir_r) ) {
-    u2_wire_kit_r(wir_r) = kit_r;
-
-    return u2_bl_bail(wir_r, c3__fail);
-  }
-  else {
-    u2_kite_tax(u2_wire_kit_r(wir_r)) = u2_rx(wir_r, u2_wire_tax(wir_r));
-
-    return kit_r;
-  }
-}
-
-/* u2_bl_done(): terminate and restore old bail context.
-*/
-void
-u2_bl_done(u2_ray wir_r,
-           u2_ray kit_r)
-{
-  c3_assert(kit_r != 0);
-
-  u2_rz(wir_r, u2_kite_tax(u2_wire_kit_r(wir_r)));
-  u2_rl_rfree(wir_r, u2_wire_kit_r(wir_r));
-
-  u2_wire_kit_r(wir_r) = kit_r;
-}
-
 /* u2_bl_bail(): bail out.
 **
 **  Bail codes: 

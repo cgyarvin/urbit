@@ -8,6 +8,7 @@ To stage down from X to Y == (X - 1) on vere computer C, steps:
         tram.watt (genetically incompatible with stage X)
         test.watt (barebones testing)
 
+    - rm C/sys/watt.pill
     - git add C/sys/*
     - update stage number in C/sys/Y.watt (3 subs)
 
@@ -19,7 +20,7 @@ To stage down from X to Y == (X - 1) on vere computer C, steps:
     - add genY/ofiles in Makefile 
     - link j2_da drivers in v/main.c
     - (optional) trim old stages
-      - update FirstKernel in include/vere.h
+      - update FirstKernel in include/v/vere.h
       - update Pt* in f/coal.c (5 subs) and f/trac.c (2 subs)
       - remove .o files 
 

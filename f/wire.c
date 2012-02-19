@@ -29,10 +29,11 @@ u2_wr_init(c3_m   hip_m,
 
   u2_cs_init(u2_wire_des_r(wir_r));
 
-  /* Trace stack.
+  /* Trace stack, garbage.
   */
   {
     u2_wire_tax(wir_r) = u2_nul;
+    u2_wire_lan(wir_r) = u2_yes;
   }
 
 #if 1
@@ -109,8 +110,16 @@ u2_wr_mark(u2_ray wir_r)
 
   c3_assert(c3__rock == u2_rail_hip_m(wir_r));
   {
-    if ( u2_wire_kit_r(wir_r) ) {
-      siz_w += u2_rl_gc_mark_ptr(wir_r, u2_wire_kit_r(wir_r));
+    {
+      u2_ray kit_r = u2_wire_kit_r(wir_r);
+
+      while ( kit_r ) {
+        siz_w += u2_rl_gc_mark_ptr(wir_r, u2_wire_kit_r(wir_r));
+        siz_w += u2_rl_gc_mark_noun(wir_r, u2_kite_tax(kit_r));
+        siz_w += u2_rl_gc_mark_noun(wir_r, u2_kite_don(kit_r));
+
+        kit_r = u2_kite_par_r(kit_r);
+      }
     }
     siz_w += u2_rl_gc_mark_ptr(wir_r, u2_wire_bex_r(wir_r));
     siz_w += u2_rl_gc_mark_ptr(wir_r, u2_wire_rac_r(wir_r));

@@ -836,41 +836,31 @@
       u2_flag
       u2_cm_boot(void);
 
-    /* u2_cm_wind(): enter new opaque bail context, returning old (or 0).
-    **
-    **   usage:  
-    **        c3_w qop_w = u2_cm_wind();
-    **  
-    **        if ( 0 != u2_cm_trap() ) {
-    **          u2_cm_done(qop_w);
-    **          [... exception ...]
-    **        }
-    **        else {
-    **          [... code as normal ...]
-    **          u2_cm_done(qop_w);
-    **        }
+    /* u2_cm_rind(): open and produce a new jump buffer.
     */
-      c3_w
-      u2_cm_wind();
+      void*
+      u2_cm_rind();
 
     /* u2_cm_trap(): trap for exceptions.
     */
 #     if 0
-        c3_m
+        u2_noun
         u2_cm_trap();
 #     else
-#       define u2_cm_trap() \
-          ( (c3_l) \
-            _setjmp((void *) \
-                     u2_at_cord(u2_kite_buf_r(u2_wire_kit_r(u2_Wire)), \
-                                c3_wiseof(jmp_buf))) \
-          )
+        //  XX breaks for 64-bit nouns - use a tmp var
+        //
+#       define u2_cm_trap() (u2_noun)(setjmp(u2_cm_rind()))
 #     endif
-   
-    /* u2_cm_done(): terminate and restore old opaque bail context.
+
+    /* u2_cm_done(): terminate trap.
     */
       void
-      u2_cm_done(c3_w qop_w);
+      u2_cm_done();
+
+    /* u2_cm_wail(): retrieve and reset local trace.
+    */
+      u2_noun
+      u2_cm_wail();
 
     /* u2_cm_poll(): poll for interrupts, etc.
     */
@@ -913,13 +903,8 @@
     **
     **    c3__exit for normal exit
     **    c3__fail for abnormal failure 
-    **    c3__intr for manual interrupt
-    **    c3__need for knowledge exception
     **
     **  When in doubt, fail.
-    **
-    **  In all cases, the bail receiver must perform a gc to
-    **  clean up the inevitable leakz.
     */
       u2_noun
       u2_cm_bail(c3_m how_m);
@@ -983,11 +968,6 @@
     */
       u2_noun
       u2_cm_frop();
-
-    /* u2_cm_trac(): extract and clear stack trace.
-    */
-      u2_noun
-      u2_cm_trac();
 
     /* u2_cm_slab():
     **

@@ -11,6 +11,10 @@
         typedef struct _u2_loom_wire {
           u2_loom_rail o;
 
+          /* Clean flag.  u2_no when there may be garbage.
+          */
+          u2_noun lan;
+
           /* Basket; u2_loom_bask; senior storage (for dashboard).
           */
           u2_ray bas_r;
@@ -48,6 +52,7 @@
 #         define  u2_wire_hev_r(wir_r)  *u2_at(wir_r, u2_loom_wire, hev_r)
 
 #         define  u2_wire_tax(wir_r)    *u2_at(wir_r, u2_loom_wire, tax)
+#         define  u2_wire_lan(wir_r)    *u2_at(wir_r, u2_loom_wire, lan)
 
     /** Functions.
     **/

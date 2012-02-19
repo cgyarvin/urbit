@@ -4,10 +4,14 @@
 */
 #include "all.h"
 
+  /** Types.
+  **/
+    typedef u2_atom u2_kode;      /* 0=good, 1=need, 2=exit */
+
   /** Forward declarations.
   **/
     static u2_noun _nock_cool(u2_noun, u2_noun);
-    static u2_noun _nock_mool(u2_noun, u2_noun, u2_flag*);
+    static u2_noun _nock_mool(u2_noun, u2_noun, u2_kode*);
 
 /* _nock_pray_cool(): load from namespace, in kernel mode.
 */
@@ -39,14 +43,15 @@ _nock_pray_cool(u2_noun gof)
   }
 }
 
-/* _nock_pray_mool(): load from namespace, in kernel mode.
+/* _nock_pray_mool(): load from namespace, in virtual mode.
 */
 static u2_noun
-_nock_pray_mool(u2_noun gof, u2_flag *pon)
+_nock_pray_mool(u2_noun gof, u2_kode *pon)
 {
   u2_noun lad = u2_hevn_at(lad);
 
   c3_assert(u2_yes == u2du(lad));
+  c3_assert(0 == *pon);
   {
     u2_noun i_lad = u2fh(lad);
     u2_noun t_lad = u2ft(lad);
@@ -54,14 +59,31 @@ _nock_pray_mool(u2_noun gof, u2_flag *pon)
 
     u2_hevn_at(lad) = t_lad;
     if ( u2_nul == t_lad ) {
-      pro = _nock_mool(gof, u2k(i_lad), pon);
+      pro = _nock_cool(u2k(gof), u2k(i_lad));
     } else {
-      pro = _nock_cool(gof, u2k(i_lad));
+      pro = _nock_mool(u2k(gof), u2k(i_lad), pon);
     }
     c3_assert(t_lad == u2_hevn_at(lad));
     u2_hevn_at(lad) = lad;
 
-    return pro;
+    if ( 0 != *pon ) {
+      u2z(gof);
+
+      return pro;
+    } else {
+      if ( u2_no == u2du(pro) ) {
+        *pon = 1;
+        u2z(pro);
+        return u2nc(gof, u2_nul);
+      }
+      else {
+        u2_noun res = u2k(u2t(pro));
+
+        u2z(gof);
+        u2z(pro);
+        return res;
+      }
+    }
   }
 }
 
@@ -83,16 +105,17 @@ _nock_hint(u2_noun  zep,                                          //  transfer
     case c3__bean: 
     case c3__mean:
     case c3__spot: {
-      u2_noun tax = u2k(u2_wire_tax(u2_Wire));
+      u2_noun tax = u2_wire_tax(u2_Wire);
       u2_noun tac = u2nc(zep, hod);
 
       u2_wire_tax(u2_Wire) = u2nc(tac, tax);
       {
         pro = pon ? _nock_mool(bus, nex, pon) : _nock_cool(bus, nex);
       }
+      tax = u2k(tax);
       u2z(u2_wire_tax(u2_Wire));
       u2_wire_tax(u2_Wire) = tax;
-      
+
       return pro;
     }
 
@@ -495,7 +518,7 @@ _nock_cool(u2_noun bus,
 u2_noun
 _nock_mool(u2_noun  bus, 
            u2_noun  fol,
-           u2_flag* pon)
+           u2_kode* pon)
 {
   u2_noun hib, gal;
 
@@ -506,7 +529,9 @@ _nock_mool(u2_noun  bus,
     u2_tx_did_hop(u2_Wire, 1);
 
     if ( u2_no == u2du(fol) ) {
-      return u2_cm_bail(c3__exit);
+      *pon = 2;
+      u2z(bus); u2z(fol);
+      return u2_cm_wail();
     }
     else { 
       hib = u2fh(fol);
@@ -515,20 +540,23 @@ _nock_mool(u2_noun  bus,
 
     if ( u2_yes == u2du(hib) ) {
       u2_noun poz, riv;
-      u2_flag h_pon = u2_yes, t_pon = u2_yes;
+      u2_kode h_pon = 0, t_pon = 0;
 
       poz = _nock_mool(u2k(bus), u2k(hib), &h_pon);
+      if ( 2 == h_pon ) { *pon = 2; u2z(bus); u2z(fol); return poz; }
+
       riv = _nock_mool(bus, u2k(gal), &t_pon);
       u2z(fol);
+      if ( 2 == t_pon ) { *pon = 2; u2z(poz); return riv; }
 
-      if ( (u2_no == h_pon) || (u2_no == t_pon) ) {
+      if ( (1 == h_pon) || (1 == t_pon) ) {
         u2_noun lal;
 
-        *pon = u2_no;
+        *pon = 1;
 
-        if ( u2_yes == h_pon ) {
+        if ( 0 == h_pon ) {
           u2z(poz); lal = riv;
-        } else if ( u2_yes == t_pon ) {
+        } else if ( 0 == t_pon ) {
           u2z(riv); lal = poz;
         } else {
           lal = u2_ckb_weld(poz, riv);
@@ -538,17 +566,24 @@ _nock_mool(u2_noun  bus,
       return u2_cn_cell(poz, riv);
     }
     else switch ( hib ) {
-      default: return u2_cm_bail(c3__exit);
+      default: *pon = 2; u2z(bus); u2z(fol); return u2_cm_wail();
 
       case 0: {
         if ( u2_no == u2_cr_ud(gal) ) {
-          return u2_cm_bail(c3__exit);
+          *pon = 2; u2z(bus); u2z(fol); return u2_cm_wail();
         }
         else {
-          u2_noun pro = u2k(u2at(gal, bus));
+          u2_weak pro = u2_cr_at(gal, bus);
 
-          u2z(bus); u2z(fol);
-          return pro;
+          if ( u2_none == pro ) {
+            *pon = 2; u2z(bus); u2z(fol); return u2_cm_wail();
+          }
+          else {
+            pro = u2k(pro);
+            u2z(bus); u2z(fol);
+
+            return pro;
+          }
         }
       }
       case 1: {
@@ -561,14 +596,14 @@ _nock_mool(u2_noun  bus,
 
       case 2: {
         if ( (u2_no == u2du(gal)) || (u2_no == u2du(u2fh(gal))) ) {
-          return u2_cm_bail(c3__exit);
+          *pon = 2; u2z(bus); u2z(fol); return u2_cm_wail();
         }
         else {
           u2_noun neb;
           
           neb = _nock_mool(bus, u2k(gal), pon);
           u2z(fol);
-          if ( u2_no == *pon ) { return neb; } 
+          if ( 0 != *pon ) { return neb; } 
 
           bus = u2fh(neb);
           fol = u2ft(neb);
@@ -582,7 +617,7 @@ _nock_mool(u2_noun  bus,
 
         gof = _nock_mool(bus, u2k(gal), pon);
         u2z(fol);
-        if ( u2_no == *pon ) { return gof; }
+        if ( 0 != *pon ) { return gof; }
 
         pro = u2du(gof);
         u2z(gof);
@@ -596,7 +631,7 @@ _nock_mool(u2_noun  bus,
 
         gof = _nock_mool(bus, u2k(gal), pon);
         u2z(fol);
-        if ( u2_no == *pon ) { return gof; }
+        if ( 0 != *pon ) { return gof; }
 
         pro = u2_rl_vint(u2_Wire, gof);
         u2z(gof);
@@ -607,14 +642,14 @@ _nock_mool(u2_noun  bus,
 
       case 5: {
         if ( (u2_no == u2du(gal)) || (u2_no == u2du(u2fh(gal))) ) {
-          return u2_cm_bail(c3__exit);
+          *pon = 2; u2z(bus); u2z(fol); return u2_cm_wail();
         }
         else {
           u2_noun neb, pro;
           
           neb = _nock_mool(bus, u2k(gal), pon);
           u2z(fol);
-          if ( u2_no == *pon ) { return neb; } 
+          if ( 0 != *pon ) { return neb; } 
 
           pro = u2_cr_sing(u2fh(neb), u2ft(neb));
           u2z(neb);
@@ -625,20 +660,28 @@ _nock_mool(u2_noun  bus,
       c3_assert(!"not reached");
 
       case 6: {
-        u2_noun b_gal, c_gal, d_gal;
+        u2_noun b_gal, cd_gal, c_gal, d_gal;
 
-        u2_cx_trel(gal, &b_gal, &c_gal, &d_gal);
-        {
+        if ( u2_no == u2_cr_cell(gal, &b_gal, &cd_gal) ) {
+          *pon = 2; u2z(bus); u2z(fol); return u2_cm_wail();
+        }
+        else {
           u2_noun tys, nex;
           
           tys = _nock_mool(u2k(bus), u2k(b_gal), pon);
-          if ( u2_no == *pon ) { u2z(fol); return tys; }
+          if ( 0 != *pon ) { u2z(fol); return tys; }
+
+          if ( u2_no == u2_cr_cell(cd_gal, &c_gal, &d_gal) ) {
+            *pon = 2; u2z(bus); u2z(fol); return u2_cm_wail();
+          }
 
           if ( 0 == tys ) {
             nex = u2k(c_gal);
           } else if ( 1 == tys ) {
             nex = u2k(d_gal);
-          } else return u2_cm_bail(c3__exit);
+          } else {
+            *pon = 2; u2z(bus); u2z(fol); return u2_cm_wail();
+          }
 
           u2z(fol);
           fol = nex;
@@ -650,13 +693,15 @@ _nock_mool(u2_noun  bus,
       case 7: {
         u2_noun b_gal, c_gal;
       
-        u2_cx_cell(gal, &b_gal, &c_gal);
-        {
+        if ( u2_no == u2_cr_cell(gal, &b_gal, &c_gal) ) {
+          *pon = 2; u2z(bus); u2z(fol); return u2_cm_wail();
+        }
+        else {
           u2_noun bod, nex;
           
           bod = _nock_mool(bus, u2k(b_gal), pon);
-          if ( u2_no == *pon ) { u2z(fol); return bod; }
-          
+          if ( 0 != *pon ) { u2z(fol); return bod; }
+   
           nex = u2k(c_gal);
           u2z(fol);
 
@@ -669,13 +714,15 @@ _nock_mool(u2_noun  bus,
 
       case 8: {
         u2_noun b_gal, c_gal;
-      
-        u2_cx_cell(gal, &b_gal, &c_gal);
-        {
+ 
+        if ( u2_no == u2_cr_cell(gal, &b_gal, &c_gal) ) {
+          *pon = 2; u2z(bus); u2z(fol); return u2_cm_wail();
+        }
+        else {
           u2_noun wib, bod, nex;
 
           wib = _nock_mool(u2k(bus), u2k(b_gal), pon);
-          if ( u2_no == *pon ) { u2z(fol); return wib; }
+          if ( 0 != *pon ) { u2z(bus); u2z(fol); return wib; }
 
           bod = u2nc(bus, wib);
           nex = u2k(c_gal);
@@ -691,9 +738,10 @@ _nock_mool(u2_noun  bus,
       case 9: {
         u2_noun b_gal, c_gal;
       
-        u2_cx_cell(gal, &b_gal, &c_gal);
-        if ( u2_no == u2ud(b_gal) ) {
-          return u2_cm_bail(c3__exit);
+        if ( (u2_no == u2_cr_cell(gal, &b_gal, &c_gal)) ||
+             (u2_no == u2ud(b_gal)) )
+        {
+          *pon = 2; u2z(bus); u2z(fol); return u2_cm_wail();
         } 
         else {
           u2_noun seb;
@@ -701,7 +749,7 @@ _nock_mool(u2_noun  bus,
 
           seb = _nock_mool(bus, u2k(c_gal), pon);
           u2z(fol); 
-          if ( u2_no == *pon ) { return seb; }
+          if ( 0 != *pon ) { return seb; }
 
           u2_tx_sys_bit(u2_Wire, u2_yes);
           xip = u2_ds_find(u2_Wire, seb);
@@ -716,15 +764,18 @@ _nock_mool(u2_noun  bus,
             u2z(seb); 
 
             if ( u2_none == pro ) {
-              return u2_cm_bail(c3__exit);
+              *pon = 2; return u2_cm_wail();
             } 
             else return pro;
           }
           else {
-            u2_noun nex = u2k(u2at(b_gal, seb));
+            u2_noun nex = u2_cr_at(b_gal, seb);
 
+            if ( u2_none == nex ) {
+              *pon = 2; u2z(seb); return u2_cm_wail();
+            }
             bus = seb;
-            fol = nex;
+            fol = u2k(nex);
             continue;
           }
         }
@@ -734,8 +785,10 @@ _nock_mool(u2_noun  bus,
       case 10: {
         u2_noun p_gal, q_gal;
       
-        u2_cx_cell(gal, &p_gal, &q_gal);
-        {
+        if ( u2_no == u2_cr_cell(gal, &p_gal, &q_gal) ) {
+          *pon = 2; u2z(bus); u2z(fol); return u2_cm_wail();
+        }
+        else {
           u2_noun zep, hod, nex;
 
           if ( u2_yes == u2du(p_gal) ) {
@@ -744,7 +797,7 @@ _nock_mool(u2_noun  bus,
             u2_noun d_gal = q_gal;
 
             hod = _nock_mool(u2k(bus), u2_ct(c_gal), pon);
-            if ( u2_no == *pon ) { u2z(fol); return hod; } 
+            if ( 0 != *pon ) { u2z(fol); return hod; } 
 
             zep = u2k(b_gal);
             nex = u2k(d_gal);
@@ -770,7 +823,7 @@ _nock_mool(u2_noun  bus,
 
         gof = _nock_mool(bus, u2k(gal), pon);
         u2z(fol);
-        if ( u2_no == *pon ) { return gof; }
+        if ( 0 != *pon ) { return gof; }
 
         return _nock_pray_mool(gof, pon);
       }
@@ -832,35 +885,29 @@ _nock_moog(u2_noun bus,
            u2_noun fol)
 {
   u2_noun res;
-  u2_flag pon;
+  u2_kode pon;
 
-  pon = u2_yes;
+  pon = 0;
   {
-    c3_w poq_w;
-    u2_noun how;
+    u2_noun hoe;
 
-    u2_cm_trip();
-    poq_w = u2_cm_wind();
+    if ( 0 != (hoe = u2_cm_trap()) ) {
+      if ( u2h(hoe) != c3__exit ) {
+        u2_noun wac = u2k(u2h(hoe));
 
-    if ( 0 != (how = u2_cm_trap()) ) {
-      u2_noun rap = u2_cm_trac();
-      u2_cm_done(poq_w);
-
-      //  gc with rap as root
-      //  trac logic not correct
-      //  lots of mild broken here
-      //
-      c3_assert(c3__exit == how);
-      res = u2nc(2, rap);
-    } 
+        u2z(hoe);
+        return u2_cm_bail(wac);
+      }
+      else {
+        res = u2nc(2, u2k(u2t(hoe)));
+        u2z(hoe);
+      }
+    }
     else {
       u2_noun pro = _nock_mool(bus, fol, &pon);
 
-      u2_cm_done(poq_w);
-
-      if ( u2_no == pon ) {
-        res = u2nc(1, pro);
-      } else res = u2nc(0, pro);
+      u2_cm_done();
+      res = u2nc(pon, pro);
     }
   }
   return res;
