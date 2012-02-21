@@ -72,6 +72,7 @@
   */
     extern u2_ho_jet j2_mbj(Pt5, cue)[];
     extern u2_ho_jet j2_mbj(Pt5, mat)[];
+    extern u2_ho_jet j2_mbj(Pt5, mock)[];
     extern u2_ho_jet j2_mbj(Pt5, jam)[];
     extern u2_ho_jet j2_mbj(Pt5, pfix)[];
     extern u2_ho_jet j2_mbj(Pt5, plug)[];
@@ -228,6 +229,7 @@
     { j2_sb(Pt5, just), 0, j2_mbd(Pt5, just), 0, u2_none },
     { j2_sb(Pt5, mask), 0, j2_mbd(Pt5, mask), 0, u2_none },
     { j2_sb(Pt5, mat), j2_mbj(Pt5, mat), 0, 0, u2_none },
+    { j2_sb(Pt5, mock), j2_mbj(Pt5, mock), 0, 0, u2_none },
     { j2_sb(Pt5, pfix), j2_mbj(Pt5, pfix), 0, 0, u2_none },
     { j2_sb(Pt5, plug), j2_mbj(Pt5, plug), 0, 0, u2_none },
     { j2_sb(Pt5, pose), j2_mbj(Pt5, pose), 0, 0, u2_none },

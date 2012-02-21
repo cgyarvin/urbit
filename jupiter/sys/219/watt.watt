@@ -2721,9 +2721,9 @@
   ::  Tier 5g, nock in nock
   ::
   ++  mock
+    ~.  %mock
     |=  [[sub=* fol=*] sky=|+(* *(unit))]
     =+  tax=_(list ,[@tam *])
-    ~.  %mock
     |-  ^-  _tone
     ?~  fol
       [2 tax]
@@ -2737,7 +2737,7 @@
         1  ?-(-.hed 0 tal, 1 [1 (weld p.hed p.tal)])
         2  tal
       ==
-    ?+    -.fol  [2 tax]
+    ?+    fol  [2 tax]
     ::
         [0 b=@]          
       ?:  =(0 b.fol)  [2 tax]
@@ -2781,7 +2781,7 @@
         [10 [* c=*] d=*]
       =+  ben=$(fol c.fol)
       ?.  ?=(0 -.ben)  ben
-      ?:  ?=(,?(%bean %lose %mean %spot) +<-.fol)
+      ?:  ?=(_?(%bean %lose %mean %spot) +<-.fol)
         $(fol d.fol, tax [[+<-.fol p.ben] tax])
       $(fol d.fol) 
     ::
@@ -2829,7 +2829,9 @@
       [~ p=*axis]
     ::
       [%brcb p=(gene) q=(gene)]
+      [%brcn p=(gene) q=(gene)]
       [%brdt p=(gene)]
+      [%brkt p=(gene) q=(gene)]
       [%brls p=(gene) q=(gene)]
       [%brms p=(gene)]
       [%brtr p=(gene) q=(gene)]
@@ -3354,11 +3356,17 @@
         [~ *]      [%cnts [gen ~] ~]
         [%brcb *]  
       :+  %pmts
-        ~(bunt al bore(gen p.gen)) 
+        [%ktsg ~(bunt al bore(gen p.gen))]
       (~(put by *(map term foot)) %% [& & q.gen])
     ::
+        [%brcn *]  [%ktbr [%brcb p.gen q.gen]]
         [%brdt *]  [%pmdt (~(put by *(map term foot)) %% [& & p.gen])]
         [%brts *]  [%pmts p.gen (~(put by *(map term foot)) %% [& & q.gen])]
+        [%brkt *] 
+      :+  %pmts
+        [%ktsg ~(bunt al bore(gen p.gen))]
+      (~(put by *(map term foot)) %% [& | q.gen])
+    ::
         [%brls *]  [%ktbr [%brts p.gen q.gen]]
         [%brms *]  [%tsgr [%brdt p.gen] %%]
         [%brtr *]  [%pmts p.gen (~(put by *(map term foot)) %% [& | q.gen])]
@@ -5474,7 +5482,10 @@
         :~  :-  '|'
               ;~  pfix  bar
                 %-  stew  :~  
+                  ['_' (rune cab %brcb expb)]
+                  ['%' (rune cen %brcn expb)]
                   ['.' (rune dot %brdt expa)]
+                  ['^' (rune ket %brkt expb)]
                   ['+' (rune lus %brls expb)]
                   ['-' (rune hip %brms expa)]
                   ['*' (rune tar %brtr expb)]
@@ -5619,11 +5630,13 @@
             :-  '?'
               ;~  pfix  wut
                 %-  stew  :~
+                  ['_' (rune cab %wtcb exph)]
                   ['|' (rune bar %wtbr exps)]
                   [':' (rune col %wtcl expc)]
                   ['.' (rune dot %wtdt expc)]
                   ['<' (rune gal %wtgl expb)]
                   ['>' (rune gar %wtgr expb)]
+                  ['#' (rune hax %wthx expb)]
                   ['+' (rune lus %wtls expm)]
                   ['-' (rune hip %wtms exph)]
                   ['&' (rune pam %wtpm exps)]

@@ -13,22 +13,71 @@
   **/
     struct _u2_http;
 
+    /* u2_hhed: http header.
+    */
+      typedef struct _u2_hhed {
+        struct _u2_hhed* nex_u;
+        c3_c*            nam_c;
+        c3_c*            val_c;
+      } u2_hhed;
+
+    /* u2_hbod: http body block.  Also used for responses.
+    */
+      typedef struct _u2_hbod {
+        struct _u2_hbod* nex_u; 
+        c3_w             len_w;
+        c3_y             hun_y[0];
+      } u2_hbod;
+
+    /* u2_hrat: http parser state.
+    */
+      typedef enum {
+        u2_hreq_non,                    
+        u2_hreq_nam,
+        u2_hreq_val
+      } u2_hrat;
+
+    /* u2_hmet: http method.  Matches jhttp encoding.
+    */
+      typedef enum {
+        u2_hmet_delete,
+        u2_hmet_get,
+        u2_hmet_head,
+        u2_hmet_post,
+        u2_hmet_put,
+        u2_hmet_other                       //  ie, unsupported
+      } u2_hmet;
+ 
+    /* u2_hreq: http request.
+    */
+      typedef struct _u2_hreq {
+        u2_hmet  met_e;                     //  method
+        u2_hrat  rat_e;                     //  request state
+        u2_flag  liv;                       //  keepalive
+        c3_c*    url_c;                     //  url
+        u2_hhed* hed_u;                     //  headers 
+        u2_hbod* bod_u;                     //  body parts
+      } u2_hreq;
+
     /* u2_hcon: http connection.
     */
       typedef struct _u2_hcon {
-        struct ev_io     wax_w;
-        struct _u2_http *srv_h;
-        struct _u2_hcon *nex_n;
+        struct ev_io     wax_u;             //  event handler state
+        void*            par_u;             //  struct http_parser *
+        struct _u2_http* srv_u;             //  server below
+        struct _u2_hcon* nex_u;             //  next in server list
+        struct _u2_hreq* req_u;             //  request in process if any
+        struct _u2_hbod* rep_u;             //  head of response queue
+        struct _u2_hbod* per_u;             //  tail of response queue
       } u2_hcon;
 
     /* u2_http: http server.
     */
       typedef struct _u2_http {
-        struct ev_io     wax_w;             //  event handler state
+        struct ev_io     wax_u;             //  event handler state
         c3_w             por_w;             //  running port
-        u2_noun          vox;               //  server core as vase
-        struct _u2_hcon *con_n;             //  connection list
-        struct _u2_http *nex_h;             //  next in list
+        struct _u2_hcon* hon_u;             //  connection list
+        struct _u2_http* nex_u;             //  next in list
       } u2_http;
 
     /* u2_steg: kernel stage.
@@ -77,8 +126,8 @@
         u2_steg ver_e[257];                 //  stages improving downward
         c3_w    kno_w;                      //  current executing stage
 
-        struct ev_loop *lup_v;              //  libev event loop
-        u2_http *htp_h;                     //  http servers, if any
+        struct ev_loop *lup_u;              //  libev event loop
+        u2_http *htp_u;                     //  http servers, if any
       } u2_host;                            //  host == computer == process
 
 
@@ -254,12 +303,7 @@
 
     /**  HTTP.
     **/
-      /* u2_ve_http_mark(): mark http server memory for gc.
-      */
-        c3_w
-        u2_ve_http_mark();
-
       /* u2_ve_http_start():
       */
         u2_flag
-        u2_ve_http_start(u2_noun vox, c3_w por_w);
+        u2_ve_http_start(c3_w por_w);

@@ -520,8 +520,6 @@ u2_ve_mark()
     siz_w += u2_cm_mark_noun(ver_e->has.pyl.log);
     siz_w += u2_cm_mark_noun(ver_e->has.pyl.len);
   }
-  siz_w += u2_ve_http_mark();
-
   return siz_w;
 }
 

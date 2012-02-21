@@ -332,6 +332,8 @@
 #     define u2_cw_sam      5       //  sample
 #       define u2_cw_sam_1  5
 #       define u2_cw_sam_2  10
+#       define u2_cw_sam_4  20
+#       define u2_cw_sam_5  21
 #       define u2_cw_sam_3  11
 #       define u2_cw_sam_6  22 
 #       define u2_cw_sam_12 44

@@ -202,18 +202,18 @@ main(c3_i   argc,
     u2_noun hep; 
     
     if ( u2_none != (hep = u2_ckd_by_get(u2k(u2_Host.map), c3__hep)) ) {
-      struct ev_loop *lup_v = ev_default_loop(0);
+      struct ev_loop *lup_u = ev_default_loop(0);
 
-      u2_Host.lup_v = lup_v;
+      u2_Host.lup_u = lup_u;
 
       fprintf(stderr, "http: on port 8080\n");
-      u2_ve_http_start(u2_nul, 8080);
+      u2_ve_http_start(8080);
 
       printf(": "); fflush(stdout);
       ev_io_init(&stdin_watcher, stdin_cb, 0, EV_READ);
-      ev_io_start(lup_v, &stdin_watcher);
+      ev_io_start(lup_u, &stdin_watcher);
 
-      ev_loop(lup_v, 0);
+      ev_loop(lup_u, 0);
 
       return 0;
     }

@@ -24,3 +24,7 @@ To stage down from X to Y == (X - 1) on vere computer C, steps:
       - update Pt* in f/coal.c (5 subs) and f/trac.c (2 subs)
       - remove .o files 
 
+  Convenient symlinks:
+    - kernel letter L is `@tam`(add 'a' (sub 25 (mod (add 8 Y) 26)))
+    - ln -s C/sys/Y sL
+    - ln -s genY kL

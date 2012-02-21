@@ -268,6 +268,7 @@ J219_5_OFILES=\
        gen219/5/cue.o \
        gen219/5/jam.o \
        gen219/5/mat.o \
+       gen219/5/mock.o \
        gen219/5/parse.o \
        gen219/5/rub.o \
        gen219/5/shax.o \
@@ -401,6 +402,7 @@ J218_5_OFILES=\
        gen218/5/cue.o \
        gen218/5/jam.o \
        gen218/5/mat.o \
+       gen218/5/mock.o \
        gen218/5/parse.o \
        gen218/5/rub.o \
        gen218/5/shax.o \
