@@ -222,6 +222,7 @@ u2_ve_base()
     }
   }
 
+#if 0
   //  Old gunn - to be deleted.
   {
     if ( 0 != ver_e->ken ) {
@@ -231,6 +232,7 @@ u2_ve_base()
       }
     }
   }
+#endif
   u2_cz(bot);
 }
 
