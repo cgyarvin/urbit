@@ -4409,6 +4409,12 @@
     |=  [gen=*gene]  ^-  *type
     ?-    gen
         [%wtts *]   (cull & p:(seek %read ~(rake ap q.gen)) (play p.gen))
+        [%wthx *]
+      %^    cull
+          &
+        p:(seek %read ~(rake ap q.gen)) 
+      (play ~(bunt al ~(bore ap p.gen)))
+    ::
         [%wtpm *]   |-(?~(p.gen sut $(p.gen t.p.gen, sut $$(gen i.p.gen))))
         [%zpcb *]   $(gen q.gen)
         [%zphs *]   $(gen p.gen)
@@ -4454,6 +4460,12 @@
     |=  [gen=*gene]  ^-  *type
     ?-    gen
         [%wtts *]   (cull | p:(seek %read ~(rake ap q.gen)) (play p.gen))
+        [%wthx *]
+      %^    cull
+          |
+        p:(seek %read ~(rake ap q.gen)) 
+      (play ~(bunt al ~(bore ap p.gen)))
+    ::
         [%wtbr *]   |-(?~(p.gen sut $(p.gen t.p.gen, sut $$(gen i.p.gen))))
         [%zpcb *]   $(gen q.gen)
         [%zphs *]   $(gen p.gen)
@@ -5405,7 +5417,7 @@
       :-  '_'
         (stag %hxcb ;~(pfix cab wide))
       :-  '`' 
-        (stag %ktms ;~(plug ;~(pfix tec wide) ;~(pfix tec wide)))
+        (stag %ktls ;~(plug ;~(pfix tec wide) ;~(pfix tec wide)))
       :-  ['a' 'z']
         (cook |=(a=*twig [%cnts a ~]) rope)
       :-  '{'

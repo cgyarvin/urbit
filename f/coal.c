@@ -399,7 +399,7 @@ u2_cm_bail(c3_l how_l)
   }
   u2_tx_sys_bit(u2_Wire, u2_yes);
 
-  // fprintf(stderr, "bail\n");
+  fprintf(stderr, "bail\n");
   {
     u2_noun jaq;
     jmp_buf buf_f;

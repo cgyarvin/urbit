@@ -161,6 +161,10 @@
 */
   u2_ho_jet 
   j2_mcj(Pt6, ut, lose)[] = {
-    { ".3", c3__hevy, j2_mc(Pt6, ut, lose), Tier6_c, u2_none, u2_none },
+    //  Dead for the moment because wtts behavior is wrong & bore is not
+    //  available.
+    //
+    // { ".3", c3__hevy, j2_mc(Pt6, ut, lose), Tier6_c, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pt6, ut, lose), u2_jet_dead, u2_none, u2_none },
     { }
   };

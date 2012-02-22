@@ -660,7 +660,7 @@ _rl_bloq_grab(u2_ray ral_r,
   }
 }
 
-#if 0
+#if 1
 static int xzx=0;
 
 /* _rl_bloq_grap()::
@@ -674,9 +674,9 @@ _rl_bloq_grap(u2_ray ral_r,
   nov_r = _rl_bloq_grab(ral_r, len_w);
 
 #if 0
-  if ( (nov_r - c3_wiseof(u2_loom_rail_box)) == 0xacba24 ) {
+  if ( (nov_r - c3_wiseof(u2_loom_rail_box)) == 0x839b6c ) {
     printf("alloc leak %d - nov_r %x\n", xzx, nov_r);
-    if ( xzx == 4 ) { u2_bl_error(0, "leakage"); }
+    if ( xzx == 6 ) { xzx++; c3_assert(0); }
     xzx++;
   }
 #endif
@@ -761,7 +761,7 @@ u2_ray
 u2_rl_ralloc(u2_ray ral_r,
              c3_w   siz_w)
 {
-  return _rl_bloq_grab(ral_r, siz_w);
+  return _rl_bloq_grap(ral_r, siz_w);
 }
 
 /* u2_rl_rfree():
@@ -1336,7 +1336,7 @@ u2_rl_copy(u2_ray ral_r,
             return u2_none;
           }
 
-          nov_r = _rl_bloq_grab(ral_r, c3_wiseof(u2_loom_cell));
+          nov_r = _rl_bloq_grap(ral_r, c3_wiseof(u2_loom_cell));
           if ( 0 == nov_r ) {
             u2_ho_warn_here();
 
@@ -1357,7 +1357,7 @@ u2_rl_copy(u2_ray ral_r,
         c3_w len_w = *u2_at_pug_len(fiz);
         u2_ray nov_r;
 
-        nov_r = _rl_bloq_grab(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
+        nov_r = _rl_bloq_grap(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
         if ( 0 == nov_r ) {
           u2_ho_warn_here();
 
@@ -1572,7 +1572,8 @@ u2_rl_gc_sweep(u2_ray ral_r, c3_w sav_w)
     c3_ws use_ws = (c3_ws) use_w;
 
     if ( use_ws > 0 ) {
-      // printf("leak: box %x, siz %d, use %d\n", box_r, siz_w, use_w);
+      printf("leak: box %x, siz %d, use %d\n", box_r, siz_w, use_w);
+      // c3_assert(0);
 
       lek_w += siz_w;
       u2_rail_box_use(box_r) = 0;
@@ -1628,7 +1629,7 @@ u2_rl_take(u2_ray  ral_r,
           return u2_none;
         }
 
-        nov_r = _rl_bloq_grab(ral_r, c3_wiseof(u2_loom_cell));
+        nov_r = _rl_bloq_grap(ral_r, c3_wiseof(u2_loom_cell));
         if ( 0 == nov_r ) {
           u2_ho_warn_here();
 
@@ -1651,7 +1652,7 @@ u2_rl_take(u2_ray  ral_r,
       u2_ray nov_r;
       u2_noun nov;
 
-      nov_r = _rl_bloq_grab(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
+      nov_r = _rl_bloq_grap(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
       if ( 0 == nov_r ) {
         u2_ho_warn_here();
 
@@ -1867,7 +1868,7 @@ u2_rl_bytes(u2_ray      ral_r,
       u2_ray nov_r;
       u2_noun nov;
 
-      nov_r = _rl_bloq_grab(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
+      nov_r = _rl_bloq_grap(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
       nov = u2_pug_of(nov_r, 0);
 
       *u2_at_dog_mug(nov) = 0;
@@ -1951,7 +1952,7 @@ u2_rl_cell(u2_ray  ral_r,
     u2_ray nov_r;
     u2_noun nov;
 
-    nov_r = _rl_bloq_grab(ral_r, c3_wiseof(u2_loom_cell));
+    nov_r = _rl_bloq_grap(ral_r, c3_wiseof(u2_loom_cell));
     nov = u2_pom_of(nov_r, 0);
 
     *u2_at_dog_mug(nov) = 0;
@@ -2317,7 +2318,7 @@ u2_rl_words(u2_ray      ral_r,
       u2_ray  nov_r;
       u2_noun nov;
 
-      nov_r = _rl_bloq_grab(ral_r, (a_w + c3_wiseof(u2_loom_atom)));
+      nov_r = _rl_bloq_grap(ral_r, (a_w + c3_wiseof(u2_loom_atom)));
       nov = u2_pug_of(nov_r, 0);
 
       *u2_at_dog_mug(nov) = 0;
