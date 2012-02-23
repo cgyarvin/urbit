@@ -235,6 +235,7 @@ u2_cf_flat_save(u2_noun mod,
   }
 }
 
+#if 0
 /* u2_cn_mung():
 **
 **   Call `(function sample)`.
@@ -248,6 +249,7 @@ u2_cn_mung(u2_noun fun,
   u2_cz(fun);
   return pro;
 }
+#endif
 
 /* u2_ci_string():
 **

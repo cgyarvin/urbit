@@ -1173,10 +1173,10 @@
   ++  spar  (list coin)
   ++  spot  ,[p=tray q=pint]
   ++  tank
-    $^  [%leaf p=(tape)]
-        [%palm p=[p=(tape) q=(tape) r=(tape) s=(tape)] q=((list tank))]
-        [%rose p=[p=(tape) q=(tape) r=(tape)] q=((list tank))]
-    ::  [%farm p=[p=(tape) q=(tape) r=(tape)] q=((list (list tank)))]
+    #%  [%leaf p=tape]
+        [%palm p=[p=tape q=tape r=tape s=tape] q=(list tank)]
+        [%rose p=[p=tape q=tape r=tape] q=(list tank)]
+    ::  [%farm p=[p=tape q=tape r=tape] q=(list (list tank))]
     ==
   ++  task  |%(soul _meat)
   ++  tape  (list char)

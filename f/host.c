@@ -917,7 +917,10 @@ u2_ho_use(u2_ray     wir_r,
       }
       u2_rz(wir_r, key);
     } 
-    else pro = u2_cn_nock(u2_rx(wir_r, cor), u2_rx(wir_r, fol));
+    else {
+      //  printf("use %s\n", u2_ho_cstring(jet_j->xip));
+      pro = u2_cn_nock(u2_rx(wir_r, cor), u2_rx(wir_r, fol));
+    }
   }
   else {
     if ( !(jet_j->sat_s & u2_jet_test) ) {

@@ -605,8 +605,9 @@ _nock_mool(u2_noun  bus,
           u2z(fol);
           if ( 0 != *pon ) { return neb; } 
 
-          bus = u2fh(neb);
-          fol = u2ft(neb);
+          bus = u2k(u2fh(neb));
+          fol = u2k(u2ft(neb));
+          u2z(neb);
           continue;
         }
       }
@@ -669,7 +670,7 @@ _nock_mool(u2_noun  bus,
           u2_noun tys, nex;
           
           tys = _nock_mool(u2k(bus), u2k(b_gal), pon);
-          if ( 0 != *pon ) { u2z(fol); return tys; }
+          if ( 0 != *pon ) { u2z(bus); u2z(fol); return tys; }
 
           if ( u2_no == u2_cr_cell(cd_gal, &c_gal, &d_gal) ) {
             *pon = 2; u2z(bus); u2z(fol); return u2_cm_wail();
@@ -832,28 +833,7 @@ _nock_mool(u2_noun  bus,
   }
 }
 
-/* u2_cn_nock(): external nock interface. 
-*/
-u2_noun
-u2_cn_nock(u2_noun bus,
-           u2_noun fol)
-{
-  u2_noun pro;
-  u2_flag bit;
-
-  bit = u2_tx_sys_bit(u2_Wire, u2_no);
-  c3_assert(bit == u2_yes);
-  bit = u2_tx_glu_bit(u2_Wire, u2_yes);
-
-  pro = _nock_cool(bus, fol);
-
-  u2_tx_sys_bit(u2_Wire, u2_yes);
-  u2_tx_glu_bit(u2_Wire, bit);
-
-  return pro;
-} 
-
-#if 0
+#if 1
 /* u2_cn_mung():
 **
 **   Call `(function sample)`.
@@ -912,6 +892,27 @@ _nock_moog(u2_noun bus,
   }
   return res;
 }
+
+/* u2_cn_nock(): external nock interface. 
+*/
+u2_noun
+u2_cn_nock(u2_noun bus,
+           u2_noun fol)
+{
+  u2_noun pro;
+  u2_flag bit;
+
+  bit = u2_tx_sys_bit(u2_Wire, u2_no);
+  c3_assert(bit == u2_yes);
+  bit = u2_tx_glu_bit(u2_Wire, u2_yes);
+
+  pro = _nock_cool(bus, fol);
+
+  u2_tx_sys_bit(u2_Wire, u2_yes);
+  u2_tx_glu_bit(u2_Wire, bit);
+
+  return pro;
+} 
 
 /* u2_cn_mock(): logical virtual nock.
 */
