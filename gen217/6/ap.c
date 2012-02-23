@@ -1607,6 +1607,8 @@
       jet_j->sat_s &= ~u2_jet_live;
       {
         pro = _ap_open_n(wir_r, ter, gen);
+        // u2_err(wir_r, "gen", gen);
+        // u2_err(wir_r, "pro", pro);
       }
       jet_j->sat_s |= u2_jet_live;
 

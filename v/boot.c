@@ -270,7 +270,6 @@ u2_ve_rest()
   }
   {
     u2_ve_tool(c3__pitt);
-
     if ( u2_Host.kno_w <= 221 ) {
       u2_ve_tool(c3__zuse);
     }

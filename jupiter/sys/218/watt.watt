@@ -1185,9 +1185,7 @@
                 [1 p=(list)]
                 [2 p=(list ,[@tam *])]
             ==
-  ++  tray  $~  p=(span)
-                q=(barn)
-            ==
+  ++  tray  ,[p=span q=barn]
   ++  wall  (list tape)
   ++  wand  ,@
   ++  well  |%(barn _(unit note))
@@ -2851,14 +2849,6 @@
       [%dtts p=gene q=gene]
       [%dtwt p=gene]
     ::
-      [%hsbr p=gene q=(list gene) r=(map term foot)]
-      [%hscn p=(list gene) q=(map term foot)]
-      [%hskt p=(list gene) q=(map term foot)]
-      [%hspm p=gene q=(list gene) r=(map term foot)]
-      [%hssg p=(list gene) q=(map term foot)]
-      [%hstr p=(list gene) q=(map term foot)]
-      [%hsts p=gene q=gene r=(map term foot)]
-    ::
       [%hxbr p=gene q=gene]
       [%hxcb p=gene]
       [%hxcn p=gene q=(list gene)]
@@ -2932,8 +2922,8 @@
       [%zpts p=gene]
       [%zpzp ~]
     ==
-  ++  goop  $&(@ [~ p=*gene])
-  ++  knot  $&(*term [~ p=*axis])
+  ++  goop  #|(@ [~ p=gene])
+  ++  knot  #|(term [~ p=axis])
   ++  line  ,[p=[%leaf p=odor q=@] q=tile] 
   ++  odor  cask
   ++  pole
@@ -3181,12 +3171,12 @@
       ?~  t.p.sec
         :+  %clms
           [%dtsg +.p.i.p.sec] 
-        $$$(axe (peg axe 3), sec q.i.p.sec)
+        $$$(axe (peg axe 3), sec q.i.p.sec, nag &)
       :^    %wtcl
           [%dtts [~ (peg axe 2)] [%dtsg +.p.i.p.sec]]
         :+  %clms
           [%dtsg +.p.i.p.sec] 
-        $$$(axe (peg axe 3), sec q.i.p.sec)
+        $$$(axe (peg axe 3), sec q.i.p.sec, nag &)
       $(i.p.sec i.t.p.sec, t.p.sec t.t.p.sec)
     ::
         [%leaf *]
@@ -3211,7 +3201,6 @@
     ==
       %hack  hack
       %late  late
-      %mold  mold
       %open  open
       %rake  rake
     ==
@@ -3247,7 +3236,7 @@
     [oft eft]
   ::
   ++  hack
-    |-  ^+  $^([& p=*gene q=*gene] [| p=*gene])
+    |-  ^+  #%([& p=gene q=gene] [| p=gene])
     ?_    gen
         [%tsgr *]
       ?.  ?#([~ *] p.gen)
@@ -3279,18 +3268,6 @@
       [%ktms [%hxts %noun] gen]
     (~(put by dab) %% [& & nug])
   ::
-  ++  lung
-    |_  [hep=twig doy=(list gene)]
-    ?~  doy
-      gen
-    =+  haq=hack(gen i.doy)
-    ?.  ?#(& -.haq)
-      ~|(%lung-hack !!)
-    :^    %wtcl
-        [%wtts p.haq [%cnts [[~ 2] hep] ~]]
-      [%clms [%cnts [[~ 2] hep] ~] (mold(gen q.haq) [[~ 3] hep])]
-    $(doy t.doy)
-  ::
   ++  snig
     |_  gop=(list goop)  ^+  gene
     :+  %ktms
@@ -3312,33 +3289,6 @@
         [~ 6]
       [~ 7]
     [%clms [~ 12] [%cnts [%% ~] [[[~ 6] [~ 13]] ~]]]
-  ::
-  ++  mold
-    ~.  %mold
-    |_  hep=twig
-    ^+  gene
-    ?_    gen
-        [%clms *]
-      :+  %clms
-        $(gen p.gen, hep [[~ 2] hep])
-      $(gen q.gen, hep [[~ 3] hep])
-    :: 
-        [%cnts * ~]   [%cnts p.gen [[[~ 5] [%cnts hep ~]] ~]]
-        [%cnms * ~]   [%cnms p.gen [%cnts hep ~] ~]
-        [%cntr *]     [%cnms p.gen [%cnts hep ~] ~]
-        [%ktcl *]     [%ktcl p.gen $(gen q.gen)]
-        [%ktgl *]     [%ktgl p.gen $(gen q.gen)]
-        [%ktgr *]     [%ktgr p.gen $(gen q.gen)]
-        [%ktms *]     $(gen p.gen)
-        [%ktts *]     [%ktts p.gen $(gen q.gen)]
-        [%zpcb *]     [%zpcb p.gen $(gen q.gen)]
-        [%zphs *]     [%zphs $(gen p.gen)]
-        *
-      =+  bog=~(open ap gen)
-      ?.  =(bog gen)
-        $(gen bog)
-      [%wtgr [%wtts gen [%cnts hep ~]] [%cnts hep ~]]
-    ==
   ::
   ++  open
     ^+  gene
@@ -3386,58 +3336,6 @@
         [%cnms *]   ?~(q.gen [%tsgr p.gen %%] [%cncl p.gen [%cltr q.gen]])
         [%cnsg *]   [%cnbr p.gen q.gen [[[~ 5] r.gen] ~]]
         [%cntr *]   [%ktsg [%tsgr p.gen [%cnts [%% ~] ~]]]
-        [%hsbr *]
-      %+  knit(gen ?~(q.gen [%dtsg %n ~] i.q.gen))
-        :^    %wtsg
-            [~ 10]
-          (lung(gen [%zpzp ~]) [[~ 5] ~] q.gen)
-        (mold(gen p.gen) [[~ 5] ~]) 
-      r.gen 
-    ::
-        [%hscn *]
-      %+  knit(gen [%dtsg %n 0])
-        =+  dix=0*
-        |-  ^+  gene
-        ?~  p.gen
-          [%zpzp ~] 
-        :^    %wtcl
-            [%dtts [~ 5] [%dtsg %u dix]]
-          i.p.gen
-        $(p.gen t.p.gen, dix +(dix))
-      q.gen
-    ::
-        [%hskt *]   
-      %+  knit(gen ?~(p.gen [%dtsg %n ~] i.p.gen))
-        (lung(gen [%zpzp ~]) [[~ 5] ~] p.gen)
-      q.gen
-    ::
-        [%hspm *]
-      %+  knit(gen p.gen)
-        :^    %wtsg
-            [~ 5]
-          (pick(gen p.gen) [[~ 5] ~] [%zpzp ~]) 
-        (lung(gen [%zpzp ~]) [[~ 5] ~] q.gen)
-      r.gen 
-    ::
-        [%hssg *]   
-      (knit(gen [%cltr p.gen]) (mold(gen [%cltr p.gen]) [[~ 5] ~]) q.gen)
-    :: 
-        [%hstr *]
-      %+  knit(gen ?~(p.gen [%dtsg %n ~] i.p.gen))
-        |-  ^+  gene
-        ?~  p.gen
-          [%zpzp ~]
-        (pick(gen i.p.gen) [[~ 5] ~] $(p.gen t.p.gen))
-      q.gen
-    :: 
-        [%hsts *]   
-      %+  knit(gen p.gen)
-        :^    %wtsg
-            [~ 5]
-          (pick(gen p.gen) [[~ 5] ~] [%zpzp ~]) 
-        (mold(gen q.gen) [[~ 5] ~])
-      r.gen
-    ::
         [%hxbr *]  ~(clam al bore)
         [%hxcb *]  [%ktsg ~(bunt al bore(gen p.gen))]
         [%hxcn *]  ~(clam al bore)
@@ -4032,7 +3930,7 @@
   ::
   ++  dent
     ?>  ?#([%core *] sut)
-    |-  ^+  $^([& p=*tape] [| p=*tape])
+    |-  ^+  #%([& p=tape] [| p=tape])
     =+  ^=  voy
         |-  ^+  (unit ,[p=@ q=@]) 
         ?:  ?#([%cube @ *] p.sut)
@@ -5322,13 +5220,8 @@
       :-  '%'
         ;~  pfix  cen
           ;~  pose
-            %+  cook
-              |_(a=(list gene) [%hscn a ~]) 
-            (ifix [kel ker] (most ace wide))
-      ::
             (numb (stag %dtsg (stag %tam sym)))
             (numb (stag %dtsg (stag %tam (cold %% cen))))
-      ::
             %+  cook
               |_  a=coin
               [%dtsg %ta (rap 3 (spit a ~))]
@@ -5408,8 +5301,6 @@
         (stag %ktls ;~(plug ;~(pfix tec wide) ;~(pfix tec wide)))
       :-  ['a' 'z']
         (cook |_(a=twig [%cnts a ~]) rope)
-      :-  '{'
-        (cook |_(a=(list gene) [%hstr a ~]) (ifix [kel ker] (most ace wide)))
       :-  '|'
         ;~  pose
           (stag %wtbr ;~(pfix bar (ifix [pal par] (most ace wide))))
@@ -5417,10 +5308,6 @@
         ==
       :-  '~'
         ;~  pose
-          %+  cook
-            |_(a=(list gene) [%hssg a ~])
-          ;~(pfix sig (ifix [sel ser] (most ace wide)))
-        ::
           %+  stag
             %cnsg 
           ;~  pfix 
@@ -5557,18 +5444,6 @@
                       (tope ~(pats spat tol))
                     ==
                   ==
-                ==
-              ==
-            :-  '$'
-              ;~  pfix  hes
-                %-  stew  :~
-                  ['|' (rune bar %hsbr expu)]
-                  ['%' (rune cen %hscn expw)]
-                  ['^' (rune ket %hskt expw)]
-                  ['&' (rune pam %hspm expu)]
-                  ['~' (rune sig %hssg expw)]
-                  ['=' (rune tis %hsts expv)]
-                  ['*' (rune tar %hstr expw)]
                 ==
               ==
             :-  '^'

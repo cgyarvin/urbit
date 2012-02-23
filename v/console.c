@@ -82,6 +82,32 @@ u2_ve_tank(c3_l tab_l, u2_noun tac)
   u2_ve_dump_wall(wol);
 }
 
+/* u2_ve_geto(): ghetto-print failed trace stack.  Will not fail!
+*/
+void
+u2_ve_geto(u2_noun hoe)
+{
+  u2_noun doe = hoe;
+
+  while ( 1 ) {
+    if ( u2_no == u2du(doe) ) {
+      u2z(hoe); return;
+    } else {
+      u2_noun i_doe = u2h(doe);
+      u2_noun t_doe = u2t(doe);
+
+      if ( u2_yes == u2du(i_doe) ) {
+        u2_err(u2_Wire, "h", u2h(i_doe));
+
+        if ( c3__mean != u2h(i_doe) ) {
+          u2_err(u2_Wire, "t", u2t(i_doe));
+        }
+      } 
+      doe = t_doe;
+    }
+  }
+}
+
 /* u2_ve_sway(): print trace stack.
 */
 void
@@ -96,14 +122,23 @@ u2_ve_sway(c3_l tab_l, u2_noun tax)
 
     if ( 0 != (hoe = u2_cm_trap()) ) {
       fprintf(stderr, "  !!--!!\n");
+      u2_err(u2_Wire, "hhoe", u2h(hoe));
+      u2_ve_geto(u2k(u2t(hoe)));
       u2z(hoe);
+      // c3_assert(0);
     } 
     else {
       c3_l    col_l = u2_ve_dump_columns();
       u2_noun tac;
       u2_noun wol;
-
+#if 0
+      u2_err(u2_Wire, "hh_rax", u2h(h_rax));
+      if ( c3__mean != u2h(h_rax) ) {
+        u2_err(u2_Wire, "th_rax", u2t(h_rax));
+      }
+#endif
       tac = u2_ve_hard("pitt", "swan", u2_ct(h_rax));
+      // u2_err(u2_Wire, "tac", tac);
       wol = u2_ve_hard("pitt", "wash", u2nc(u2nc(tab_l, col_l), tac));
 
       u2_ve_dump_wall(wol);

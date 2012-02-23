@@ -1,11 +1,11 @@
 =>  &.
     ++  deed                              ::  command-line action
-      $~  p=*gene 
-          q=(vent)                        ::  data destination
-          r=(fuel)                        ::  data source
-      ==
-    ++  fuel (unit ~[p=*mode q=*gene])
-    ++  vent (unit ~[p=*mode q=*gene])
+      #^  :*  p=gene 
+              q=vent                      ::  data destination
+              r=fuel                      ::  data source
+          ==
+    ++  fuel (unit ,[p=mode q=gene])
+    ++  vent (unit ,[p=mode q=gene])
     --
 =>  &.
     ++  x-deed  ~+

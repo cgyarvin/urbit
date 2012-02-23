@@ -833,7 +833,7 @@ _nock_mool(u2_noun  bus,
   }
 }
 
-#if 1
+#if 0
 /* u2_cn_mung():
 **
 **   Call `(function sample)`.

@@ -3191,12 +3191,12 @@
       ?~  t.p.sec
         :+  %clms
           [%dtsg +.p.i.p.sec] 
-        $$$(axe (peg axe 3), sec q.i.p.sec)
+        $$$(axe (peg axe 3), sec q.i.p.sec, nag &)
       :^    %wtcl
           [%dtts [~ (peg axe 2)] [%dtsg +.p.i.p.sec]]
         :+  %clms
           [%dtsg +.p.i.p.sec] 
-        $$$(axe (peg axe 3), sec q.i.p.sec)
+        $$$(axe (peg axe 3), sec q.i.p.sec, nag &)
       $(i.p.sec i.t.p.sec, t.p.sec t.t.p.sec)
     ::
         [%leaf *]
@@ -3786,7 +3786,7 @@
 ++  slap
   |=  [vax=*vase gen=*gene]
   =+  gun=(~(mint ut p.vax) %noun gen)
-  [p.gun ~|(%slap .*(q.vax q.gun))]
+  [p.gun ~|(%slgp .*(q.vax q.gun))]
 ::
 ++  slop
   |=  [hed=*vase tal=*vase]

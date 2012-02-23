@@ -235,7 +235,7 @@ u2_cf_flat_save(u2_noun mod,
   }
 }
 
-#if 0
+#if 1
 /* u2_cn_mung():
 **
 **   Call `(function sample)`.
@@ -386,6 +386,8 @@ u2_cm_wail()
   return jaq;
 }
 
+static c3_w _num = 0;
+
 /* u2_cm_bail(): bail out to the local trap.  Does not return.
 */
   extern u2_noun u2_Flag_Abort;
@@ -402,6 +404,8 @@ u2_cm_bail(c3_l how_l)
   u2_tx_sys_bit(u2_Wire, u2_yes);
 
   fprintf(stderr, "bail\n");
+  // if ( _num == 0 ) { c3_assert(0); } else _num--;
+
   {
     u2_noun jaq;
     jmp_buf buf_f;
