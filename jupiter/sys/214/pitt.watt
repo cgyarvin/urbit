@@ -1,7 +1,7 @@
-&.  
+|%
 ++  swan
-  |_  yos=shoe  ^+  tank
-  ?_  -.yos
+  |=  yos=shoe  ^-  tank
+  ?-  -.yos
     %bean  (show %q p.yos)
     %lose  (show %t p.yos)
     %mean  $:p.yos
@@ -10,6 +10,6 @@
   == 
 ::
 ++  wash
-  |_  [[tab=@ edg=@] tac=tank]  ^+  wall
+  |=  [[tab=@ edg=@] tac=tank]  ^-  wall
   (~(win re tac) tab edg) 
 --

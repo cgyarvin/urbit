@@ -1,14 +1,14 @@
 !:
-=>  &.
+=>  |%
     ++  deed                              ::  command-line action
-      #^  :*  p=gene 
+      $^  :*  p=gene 
               q=vent                      ::  data destination
               r=fuel                      ::  data source
           ==
     ++  fuel (unit ,[p=mode q=gene])
     ++  vent (unit ,[p=mode q=gene])
     --
-=>  &.
+=>  |%
     ++  x-deed  ~+
       =+  vas=vast
       =+  pay=/.~/sys/[(rent %ud stub)]
@@ -26,7 +26,7 @@
           %+  stag  ~
           ;~  plug
             x-mode
-            (stag %clsg (cook |_(a=(list gene) (flop a)) ~(patl spat:vast |)))
+            (stag %clsg (cook |=(a=(list gene) (flop a)) ~(patl spat:vast |)))
           ==
         ==
       ::
@@ -39,15 +39,15 @@
           %+  stag  ~
           ;~  plug
             x-mode
-            (stag %clsg (cook |_(a=(list gene) (flop a)) ~(patl spat:vast |)))
+            (stag %clsg (cook |=(a=(list gene) (flop a)) ~(patl spat:vast |)))
           ==
         ==
       ::
         (easy ~)
       ==
     --
-&.
+|%
 ++  scan
-  |_  cad=@ta  ~|  %scan  ^+  deed
+  |=  cad=@ta  ~|  %scan  ^-  deed
   (rash cad x-deed)
 --

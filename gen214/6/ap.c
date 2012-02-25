@@ -60,14 +60,6 @@
   static u2_noun _open_in_##stem \
     (u2_wire wir_r, u2_noun p_gen, u2_noun q_gen, u2_noun r_gen, u2_noun s_gen)
 
-    static u2_noun
-    _frag(u2_wire wir_r, u2_noun axe) 
-      { return u2_bc(wir_r, u2_nul, u2_rx(wir_r, axe)); }
-
-    static u2_noun
-    _lone(u2_wire wir_r, u2_noun one)
-      { return u2_bc(wir_r, one, u2_nul); }
- 
 /***
 ****
 ***/
@@ -105,7 +97,7 @@
   _open_do_p(brdt)   //  |.
   {
     return u2_bc
-      (wir_r, c3__pmdt,
+      (wir_r, c3__brcn,
               u2_bt(wir_r,
                     u2_bq(wir_r, u2_blip, u2_yes, u2_yes, u2_rx(wir_r, p_gen)),
                     u2_nul, 
@@ -118,7 +110,7 @@
   {
     if ( u2_yes == u2_sing(c3__atom, p_gen) ) {
       return u2_bt
-        (wir_r, c3__ktcb, 
+        (wir_r, c3__ktls, 
               u2_bq(wir_r, c3__dtls, c3__dtsg, u2_blip, _0),
               u2_bt(wir_r, c3__dtsg, u2_blip, _0));
     }
@@ -130,7 +122,7 @@
       u2_noun dud = u2_bt(wir_r, c3__dtsg, u2_blip, u2_nul);
 
       return u2_bt
-        (wir_r, c3__ktms, 
+        (wir_r, c3__ktls, 
                 u2_bt(wir_r, c3__dttr, 
                              u2_rx(wir_r, dud), 
                              u2_rx(wir_r, dud)),
@@ -144,7 +136,7 @@
     }
     else if ( u2_yes == u2_sing(c3__flag, p_gen) ) {
       return u2_bt
-        (wir_r, c3__ktms,
+        (wir_r, c3__ktls,
               u2_bq(wir_r, c3__dtwt, c3__dtsg, u2_blip, _0),
               u2_bt(wir_r, c3__dtsg, u2_blip, u2_yes));
     }
@@ -195,6 +187,7 @@
               u2_rx(wir_r, q_gen), 
               u2_bc(wir_r, c3__zpzp, u2_nul));
   }
+#if 0
   _open_do_pq(wtms)   //  ?-
   {
     if ( (u2_nul == q_gen) ) {
@@ -216,6 +209,7 @@
          _open_in_wtms(wir_r, p_gen, tq_gen));
     }
   }
+#endif
   _open_do_p(wtpm)    //  ?&
   {
     if ( (u2_nul == p_gen) ) {
@@ -250,7 +244,7 @@
       (wir_r,
        c3__wtcl,
        u2_bt(wir_r,
-             c3__wtts,
+             c3__wtcn,
              u2_bt(wir_r, c3__dtpt, u2_blip, _0),
              u2_rx(wir_r, p_gen)),
        u2_rx(wir_r, q_gen),
@@ -317,24 +311,6 @@
                             _open_in_cltr(wir_r, tp_gen));
       }
     }
-  }
-/***
-****
-***/
-  _open_do_pq(ktcl)   //  ^:
-  {
-    return 
-      u2_bt
-        (wir_r, c3__tsls,
-                u2_rx(wir_r, q_gen),
-                u2_bt(wir_r, c3__wtgr,
-                             u2_bt(wir_r, 
-                                   c3__wtts,
-                                   u2_bt(wir_r, c3__tsgr,
-                                                u2_bc(wir_r, u2_nul, _2),
-                                                u2_rx(wir_r, p_gen)),
-                                   u2_bc(wir_r, u2_nul, _3)),
-                             u2_bc(wir_r, u2_nul, _3)));
   }
 /***
 ****
@@ -447,16 +423,16 @@
 /***
 ****
 ***/
-  _open_do_pq(pmms)   //  &-
+  _open_do_pq(brkt)   //  &-
   {
-    //  [%pmms *]   [%tsgr [%pmdt (~(put by q.gen) %% [& & p.gen])] %%]
+    //  [%brkt *]   [%tsgr [%brcn (~(put by q.gen) %% [& & p.gen])] %%]
     //
     u2_noun diz = u2_bt(wir_r, u2_yes, u2_yes, u2_rx(wir_r, p_gen));
     u2_noun ret = u2_bt
       (wir_r,
        c3__tsgr,
        u2_bc(wir_r,
-             c3__pmdt,
+             c3__brcn,
              j2_mcc(Pt4, by, put)(wir_r, q_gen, u2_blip, diz)),
        u2_blip);
 
@@ -629,7 +605,7 @@
     _ap_snig(u2_noun gop)                                         //  retain
     {
       return u2nt
-        (c3__ktms,
+        (c3__ktls,
          u2nc
           (c3__brms,
            u2nq
@@ -745,179 +721,6 @@
 
 /* functions
 */
-  /** pick
-  **/
-    u2_noun                                                       //  produce
-    j2_mcy(Pt6, ap, pick)(u2_wire wir_r,
-                          u2_noun gen,                            //  retain
-                          u2_noun hep,                            //  retain
-                          u2_noun dug)                            //  retain
-    {
-      return u2_bq
-        (wir_r,
-         c3__wtcl, 
-         u2_bt(wir_r, c3__wtts, 
-                      u2_rx(wir_r, gen), 
-                      u2_bt(wir_r, c3__cnts, u2_rx(wir_r, hep), u2_nul)),
-         u2_bt(wir_r, c3__cnts, u2_rx(wir_r, hep), u2_nul),
-         u2_rx(wir_r, dug));
-    } 
-
-  /** mold
-  **/
-    u2_noun
-    j2_mcy(Pt6, ap, mold)(u2_wire wir_r,
-                          u2_noun gen,
-                          u2_noun hep)
-    {
-      u2_noun p_gen, q_gen;
-
-      if ( u2_no == u2_dust(gen) ) {
-        goto plain;
-      } else switch ( u2_h(gen) ) {
-        default: goto plain;
-
-        case c3__clms:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r, c3__fail); else
-        {
-          u2_noun hed = u2_bc(wir_r, u2_bc(wir_r, u2_nul, _2), 
-                                     u2_rx(wir_r, hep));
-          u2_noun tal = u2_bc(wir_r, u2_bc(wir_r, u2_nul, _3), 
-                                     u2_rx(wir_r, hep));
-          u2_noun lag = u2_bt
-            (wir_r, c3__clms,
-                    j2_mcy(Pt6, ap, mold)(wir_r, p_gen, hed),
-                    j2_mcy(Pt6, ap, mold)(wir_r, q_gen, tal));
-
-          u2_rl_lose(wir_r, hed); 
-          u2_rl_lose(wir_r, tal);
-          return lag;
-        }
-        case c3__ktts:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r, c3__fail); else
-        {
-          return u2_bt
-            (wir_r, c3__ktts, 
-                    u2_rx(wir_r, p_gen), 
-                    j2_mcy(Pt6, ap, mold)(wir_r, q_gen, hep));
-        }
-        case c3__ktcl:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r, c3__fail); else
-        {
-          return u2_bt
-            (wir_r, c3__ktcl, 
-                    u2_rx(wir_r, p_gen), 
-                    j2_mcy(Pt6, ap, mold)(wir_r, q_gen, hep));
-        }
-        case c3__ktgl:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r, c3__fail); else
-        {
-          return u2_bt
-            (wir_r, c3__ktgl, 
-                    u2_rx(wir_r, p_gen), 
-                    j2_mcy(Pt6, ap, mold)(wir_r, q_gen, hep));
-        }
-        case c3__ktms:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r, c3__fail); else
-        {
-          return j2_mcy(Pt6, ap, mold)(wir_r, p_gen, hep);
-        }
-        case c3__ktgr:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r, c3__fail); else
-        {
-          return u2_bt
-            (wir_r, c3__ktgr, 
-                    u2_rx(wir_r, p_gen), 
-                    j2_mcy(Pt6, ap, mold)(wir_r, q_gen, hep));
-        }
-        case c3__cnts:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r, c3__fail); else
-        {
-          if ( u2_nul == q_gen ) {
-            return u2_bt
-              (wir_r, c3__cnts,
-                      u2_rx(wir_r, p_gen),
-                      _lone(wir_r,
-                            u2_bc(wir_r, 
-                                  _frag(wir_r, _5),
-                                  u2_bt(wir_r, c3__cnts, 
-                                               u2_rx(wir_r, hep), 
-                                               u2_nul))));
-          } else {
-            goto plain;
-          }
-        }
-        case c3__cnms:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r, c3__fail); else
-        {
-          if ( u2_nul == q_gen ) {
-            return u2_bq
-              (wir_r, c3__cnms,
-                      u2_rx(wir_r, p_gen),
-                      u2_bt(wir_r, c3__cnts, u2_rx(wir_r, hep), u2_nul),
-                      u2_rx(wir_r, q_gen));
-          } else {
-            goto plain;
-          }
-        }
-        case c3__cntr:  p_gen = u2_t(gen);
-        {
-          return u2_bq
-            (wir_r, c3__cnms,
-                    u2_rx(wir_r, p_gen),
-                    u2_bt(wir_r, c3__cnts, u2_rx(wir_r, hep), u2_nul),
-                    u2_nul);
-        }
-        case c3__zpcb:  if ( u2_no == u2_as_cell(u2_t(gen), &p_gen, &q_gen) )
-                          return u2_bl_bail(wir_r, c3__fail); else
-        {
-          return u2_bt
-            (wir_r, c3__zpcb, 
-                    u2_rx(wir_r, p_gen), 
-                    j2_mcy(Pt6, ap, mold)(wir_r, q_gen, hep));
-        }
-        case c3__zphs:  p_gen = u2_t(gen);
-        {
-          return u2_bc
-            (wir_r, c3__zpcb, j2_mcy(Pt6, ap, mold)(wir_r, q_gen, hep));
-        }
-      }
-
-      plain: {
-        u2_weak bog = _open_in(wir_r, gen);
-        u2_noun gad;
-
-        if ( (u2_none != bog) && (u2_no == u2_sing(bog, gen)) ) {
-          gad = j2_mcy(Pt6, ap, mold)(wir_r, bog, hep);
-        }
-        else {
-          gad = u2_bt
-            (wir_r,
-             c3__wtgr, 
-             u2_bt(wir_r, c3__wtts, 
-                          u2_rx(wir_r, gen), 
-                          u2_bt(wir_r, c3__cnts, u2_rx(wir_r, hep), u2_nul)),
-                   u2_bt(wir_r, c3__cnts, u2_rx(wir_r, hep), u2_nul));
-        }
-        u2_rl_lose(wir_r, bog);
-        return gad;
-      }
-    }
-    u2_noun                                                       //  transfer
-    j2_mc(Pt6, ap, mold)(u2_wire wir_r, 
-                         u2_noun cor)                             //  retain
-    {
-      u2_noun hep, van, gen;
-
-      if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &hep, 0)) ||
-           (u2_none == (gen = u2_frag(u2_cw_sam, van))) ) {
-        return u2_bl_bail(wir_r, c3__fail);
-      } else {
-        return j2_mcy(Pt6, ap, mold)(wir_r, gen, hep);
-      }
-    }
-
-
   /** open
   **/
     static u2_weak 
@@ -987,10 +790,8 @@
         _open_p   (wtpm);
         _open_pqr (wtls);
         _open_pqr (wtsg);
-        _open_pq  (wtms);
+        // _open_pq  (wtms);
         _open_pq  (wtgr);
-
-        _open_pq  (ktcl);
 
         _open_pqr (cnbr);
         _open_pq  (cncl);
@@ -1001,7 +802,7 @@
         _open_p   (cntr);
         _open_pqr (cnsg);
 
-        _open_pq  (pmms);
+        _open_pq  (brkt);
 
         _open_pq  (sgts);
         _open_pq  (sgbr);
@@ -1117,7 +918,7 @@
                       u2_bc(wir_r,
                             c3__brms,
                             u2_bt(wir_r, 
-                                  c3__ktcb, 
+                                  c3__ktls, 
                                   u2_bc(wir_r, c3__cntr, 'a'),
                                   u2_bt(wir_r, 
                                         c3__tsls,
@@ -1376,15 +1177,8 @@
 
 /* structures
 */
-  u2_ho_jet 
-  j2_mcj(Pt6, ap, mold)[] = {
-    { ".3", c3__hevy, j2_mc(Pt6, ap, mold), Tier6_c, u2_none, u2_none },
-    { }
-  };
-
   u2_ho_driver 
   j2_mbd(Pt6, ap)[] = {
-    { j2_sc(Pt6, ap, mold), j2_mcj(Pt6, ap, mold), 0, 0, u2_none },
     { }
   };
 

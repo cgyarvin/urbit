@@ -157,7 +157,7 @@
     else switch ( u2_h(gen) ) {
       default: goto open;
     
-      case c3__wtts: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
+      case c3__wtcn: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _play_used(wir_r);
       {
         return _play_flag(wir_r);
@@ -309,7 +309,7 @@
       {
         return _play_in(wir_r, van, sut, p_gen);
       }
-      case c3__ktms: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
+      case c3__ktls: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _play_used(wir_r);
       {
         return _play_in(wir_r, van, sut, p_gen);
@@ -352,7 +352,7 @@
         u2_rz(wir_r, ruf);
         return ret;
       }
-      case c3__pmdt: p_gen = u2_t(gen);
+      case c3__brcn: p_gen = u2_t(gen);
       _play_used(wir_r);
       {
         u2_noun ruf = u2_bc(wir_r, u2_nul, _1);

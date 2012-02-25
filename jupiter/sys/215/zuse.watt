@@ -1,5 +1,5 @@
 !:
-=>  &.
+=>  |%
     ++  deed                              ::  command-line action
       $^  :*  p=gene 
               q=vent                      ::  data destination
@@ -8,7 +8,7 @@
     ++  fuel (unit ,[p=mode q=gene])
     ++  vent (unit ,[p=mode q=gene])
     --
-=>  &.
+=>  |%
     ++  x-deed  ~+
       =+  vas=vast
       =+  pay=/.~/sys/[(rent %ud stub)]
@@ -46,7 +46,7 @@
         (easy ~)
       ==
     --
-&.
+|%
 ++  scan
   |=  cad=@ta  ~|  %scan  ^-  deed
   (rash cad x-deed)

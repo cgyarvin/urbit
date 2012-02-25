@@ -1009,7 +1009,8 @@ BASE_OFILES=\
        $(P_OFILES) \
        $(J217_OFILES) \
        $(J216_OFILES) \
-       $(J215_OFILES)
+       $(J215_OFILES) \
+       $(J214_OFILES)
 
 OUT_OFILES=\
        outside/jhttp/http_parser.o
