@@ -330,7 +330,7 @@
         return ret;
       }
       
-      case c3__wtts: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
+      case c3__wtcn: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mull_used(wir_r);
       {
         u2_noun p_waz = j2_mcy(Pt6, ut, play)(wir_r, van, sut, p_gen);
@@ -596,7 +596,7 @@
       {
         return _mull_in(wir_r, van, sut, gol, dox, p_gen);
       }
-      case c3__ktms: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
+      case c3__ktcb: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mull_used(wir_r);
       {
         u2_noun p_hif = _mull_nice

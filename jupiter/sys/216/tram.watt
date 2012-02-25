@@ -2859,11 +2859,9 @@
     ::
       [%ktbr p=gene]
       [%ktcb p=gene q=gene]
-      [%ktcl p=gene q=gene]
       [%ktdt p=gene q=gene]
       [%ktgl p=gene q=gene]
       [%ktgr p=gene q=gene]
-      [%ktms p=gene q=gene]
       [%ktls p=gene q=gene]
       [%ktpm p=gene]
       [%ktsg p=gene]
@@ -2910,7 +2908,6 @@
       [%wtls p=gene q=gene r=(list ,[p=gene q=gene])]
       [%wtpm p=(list gene)]
       [%wtsg p=gene q=gene r=gene]
-      [%wtts p=gene q=gene]
       [%wtzp p=gene]
     ::
       [%zpcb p=spot q=gene]
@@ -3330,14 +3327,6 @@
         [%hxpm *]  ~(clam al bore)
         [%hxts *]  ~(bunt al bore)
         [%hxwt *]  ~(clam al bore)
-        [%ktcb *]  [%ktms p.gen q.gen]
-        [%ktcl *]
-      :+  %tsls
-        q.gen
-      :+  %wtgr 
-        [%wtcn [%tsgr [~ 2] p.gen] [~ 3]]
-      [~ 3]
-    ::
         [%ktls *]   [%ktcb ~(bunt al bore(gen p.gen)) q.gen]
         [%pmcb *]   [%tsls [[%hxcb p.gen] [%pmdt q.gen]]]
         [%pmms *]   [%tsgr [%pmdt (~(put by q.gen) %% [& & p.gen])] %%]
@@ -3421,7 +3410,6 @@
       |- 
       ?~(p.gen [%dtsg %f 1] [%wtcl i.p.gen [%dtsg %f 0] $(p.gen t.p.gen)])
     ::
-        [%wtcn *]   [%wtts p.gen q.gen]
         [%wtdt *]   [%wtcl p.gen r.gen q.gen]
         [%wtgl *]   [%wtcl p.gen [%zpzp ~] q.gen]
         [%wtgr *]   [%wtcl p.gen q.gen [%zpzp ~]]
@@ -4280,8 +4268,6 @@
     |_  [way=? gen=gene]  ^+  type
     ?:  ?#([%wtcn *] gen)
       (cull way p:(seek %read ~(rake ap q.gen)) (play p.gen))
-    ?:  ?#([%wtts *] gen)
-      (cull way p:(seek %read ~(rake ap q.gen)) (play p.gen))
     ?:  ?&(way ?#([%wtpm *] gen))
       |-(?~(p.gen sut $(p.gen t.p.gen, sut $$(gen i.p.gen))))
     ?:  ?&(!way ?#([%wtbr *] gen))
@@ -4375,7 +4361,7 @@
       =+  ryd=$(gen ~(late ap gen), gol %noun)
       [(nice (fine %pure (play p.gen) p.ryd)) q.ryd]
     ::
-        [%ktms *]  
+        [%ktcb *]  
       =+(hif=(nice (play p.gen)) [hif q:$(gen q.gen, gol hif)])
     ::
         [%ktpm *]  =+(vat=$(gen p.gen) [(wrap(sut p.vat) %zinc) q.vat])
@@ -4415,7 +4401,7 @@
       =+  ran=$(sut wux, gen r.gen)
       [(fork p.hiq p.ran) (cond duy q.hiq q.ran)]
     ::
-        [%wtts *]
+        [%wtcn *]
       [(nice flag) (fish(sut (play p.gen)) (coke q:$(gen q.gen, gol %noun)))]
     ::
         [%zpcm *]  [(nice (play p.gen)) [1 q.gen]]
@@ -4566,7 +4552,7 @@
       =+  ryd=$(gen ~(late ap gen), gol %noun)
       [(nice (fine %pure (play p.gen) p.ryd)) q.ryd]
     ::
-        [%ktms *]
+        [%ktcb *]
       =+  hif=[p=(nice (play p.gen)) q=(play(sut dox) p.gen)]
       =+($(gen q.gen, gol p.hif) hif)
     ::
@@ -4605,7 +4591,7 @@
           $(sut p.wux, dox q.wux, gen r.gen)
       [(nice (fork p.hiq p.ran)) (fork q.hiq q.ran)]
     ::
-        [%wtts *]
+        [%wtcn *]
       =+  waz=[p=(play p.gen) q=(play(sut dox) p.gen)]
       =+  ^=  syx  :-  p=(coke q:(mint %noun q.gen)) 
                    q=(coke q:(mint(sut dox) %noun q.gen))
@@ -4914,7 +4900,7 @@
       [%ktdt *]  $(gen (snap(sut $(gen p.gen)) q.gen))
       [%ktgl *]  (fine %very $(gen p.gen) $(gen ~(late ap gen)))
       [%ktgr *]  (fine %pure $(gen p.gen) $(gen ~(late ap gen)))
-      [%ktms *]  $(gen p.gen)
+      [%ktcb *]  $(gen p.gen)
       [%ktpm *]  (wrap(sut $(gen p.gen)) %zinc)
       [%ktsg *]  $(gen p.gen)
       [%ktts *]  (face p.gen $(gen q.gen))
@@ -4926,7 +4912,7 @@
                  %+  fork
                    ?:(=(%void fex) %void $(sut fex, gen q.gen))
                  ?:(=(%void wux) %void $(sut wux, gen r.gen))
-      [%wtts *]  flag
+      [%wtcn *]  flag
       [%zpcb *]  ~~((show %o p.gen) $(gen q.gen))  
       [%zpcm *]  (play p.gen)
       [%zpcn ~]  p:seed
@@ -5412,12 +5398,11 @@
               ;~  pfix  ket
                 %-  stew  :~
                   ['|' (rune bar %ktbr expa)]
-                  [':' (rune col %ktcl expb)]
                   ['.' (rune dot %ktdt expb)]
                   ['<' (rune gal %ktgl expb)]
                   ['>' (rune gar %ktgr expb)]
                   ['-' (rune hip %ktls expb)]
-                  ['+' (rune lus %ktms expb)]
+                  ['+' (rune lus %ktcb expb)]
                   ['&' (rune pam %ktpm expa)]
                   ['~' (rune sig %ktsg expa)]
                   ['=' (rune tis %ktts expg)]
