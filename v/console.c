@@ -87,6 +87,9 @@ u2_ve_tank(c3_l tab_l, u2_noun tac)
 void
 u2_ve_geto(u2_noun hoe)
 {
+#if 1
+  u2z(hoe);
+#else
   u2_noun doe = hoe;
 
   while ( 1 ) {
@@ -106,6 +109,7 @@ u2_ve_geto(u2_noun hoe)
       doe = t_doe;
     }
   }
+#endif
 }
 
 /* u2_ve_sway(): print trace stack.
@@ -121,8 +125,10 @@ u2_ve_sway(c3_l tab_l, u2_noun tax)
     u2_noun hoe;
 
     if ( 0 != (hoe = u2_cm_trap()) ) {
-      fprintf(stderr, "  !!--!!\n");
-      u2_err(u2_Wire, "hhoe", u2h(hoe));
+      c3_c *hho_c = u2_cr_string(u2h(hoe));
+      fprintf(stderr, "  !!-%s-!!\n", hho_c);
+
+      free(hho_c);
       u2_ve_geto(u2k(u2t(hoe)));
       u2z(hoe);
       // c3_assert(0);

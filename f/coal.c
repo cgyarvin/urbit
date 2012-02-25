@@ -8,17 +8,17 @@
 #include <sys/stat.h>
 #include <dirent.h>
 
-#include "../gen220/pit.h"
+#include "../gen217/pit.h"
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt5Y   k_220__a__b__c__d__e
+#   define Pt5Y   k_217__a__b__c__d__e
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt3Y   k_220__a__b__c
-#   define Pt4Y   k_220__a__b__c__d
-#   define Pt5Y   k_220__a__b__c__d__e
+#   define Pt3Y   k_217__a__b__c
+#   define Pt4Y   k_217__a__b__c__d
+#   define Pt5Y   k_217__a__b__c__d__e
 
     u2_noun j2_mbc(Pt3Y, gor)(u2_wire, u2_noun a, u2_noun b);
     u2_noun j2_mcc(Pt4Y, by, get)(u2_wire, u2_noun a, u2_noun b);
@@ -403,7 +403,7 @@ u2_cm_bail(c3_l how_l)
   }
   u2_tx_sys_bit(u2_Wire, u2_yes);
 
-  fprintf(stderr, "bail\n");
+  // fprintf(stderr, "bail\n");
   // if ( _num == 0 ) { c3_assert(0); } else _num--;
 
   {

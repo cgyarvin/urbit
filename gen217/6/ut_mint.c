@@ -331,15 +331,17 @@
     u2_noun ret;
 
     if ( (c3__void == sut) && 
-         ((u2_yes == u2_dust(gen)) && (c3__zpcb != u2_h(gen))) )
+         !((u2_yes == u2_dust(gen)) && (c3__zpcb == u2_h(gen))) )
     {
-      if ( (u2_no == _mint_vet(wir_r, van)) &&
-           (c3__zpfs != u2_h(gen)) &&
-           (c3__zpzp != u2_h(gen)) )
+      if ( (u2_no == _mint_vet(wir_r, van))
+           || ((u2_yes == u2_dust(gen)) && 
+               ((c3__zpfs == u2_h(gen)) || (c3__zpzp == u2_h(gen)))) )
       {
+        return u2_bt(wir_r, c3__void, _0, _0);
+      }
+      else {
         return u2_bl_error(wir_r, "mint-vain");
       }
-      else return u2_bt(wir_r, c3__void, _0, _0);
     }
 
     if ( u2_no == u2_dust(gen) ) {

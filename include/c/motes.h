@@ -945,6 +945,7 @@
 #   define c3__wost   c3_s4('w','o','s','t')
 #   define c3__wrap   c3_s4('w','r','a','p')
 #   define c3__wtbr   c3_s4('w','t','b','r')
+#   define c3__wtcb   c3_s4('w','t','c','b')
 #   define c3__wtcl   c3_s4('w','t','c','l')
 #   define c3__wtdt   c3_s4('w','t','d','t')
 #   define c3__wtgl   c3_s4('w','t','g','l')

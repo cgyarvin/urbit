@@ -2869,6 +2869,7 @@
       [%ktts p=term q=gene]
       [%ktwt p=gene]
     ::
+      [%pmcb p=gene q=(map term foot)]
       [%pmdt p=(map term foot)]
       [%pmms p=gene q=(map term foot)]
       [%pmts p=gene q=(map term foot)]
@@ -3351,6 +3352,7 @@
       [~ 3]
     ::
         [%ktls *]   [%ktms ~(bunt al bore(gen p.gen)) q.gen]
+        [%pmcb *]   [%tsls [[%hxcb p.gen] [%pmdt q.gen]]]
         [%pmms *]   [%tsgr [%pmdt (~(put by q.gen) %% [& & p.gen])] %%]
         [%pmts *]   [%tsls p.gen [%pmdt q.gen]]
         [%sgbr *]   [%sggr [%bean p.gen] q.gen]
@@ -5465,6 +5467,7 @@
             :-  '&'
               ;~  pfix  pam
                 %-  stew  :~
+                  ['_' (rune cab %pmcb expr)]
                   ['.' (rune dot %pmdt expe)]
                   ['-' (rune hip %pmms expr)]
                   ['=' (rune tis %pmts expr)]
