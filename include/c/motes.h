@@ -439,6 +439,7 @@
 #   define c3__ktbc   c3_s4('k','t','b','c')
 #   define c3__ktbn   c3_s4('k','t','b','n')
 #   define c3__ktbr   c3_s4('k','t','b','r')
+#   define c3__ktcb   c3_s4('k','t','c','b')
 #   define c3__ktcl   c3_s4('k','t','c','l')
 #   define c3__ktcn   c3_s4('k','t','c','n')
 #   define c3__ktcs   c3_s4('k','t','c','s')
