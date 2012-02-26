@@ -87,7 +87,7 @@ u2_ve_tank(c3_l tab_l, u2_noun tac)
 void
 u2_ve_geto(u2_noun hoe)
 {
-#if 1
+#if 0
   u2z(hoe);
 #else
   u2_noun doe = hoe;

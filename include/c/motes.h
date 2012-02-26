@@ -161,6 +161,7 @@
 #   define c3__cndt   c3_s4('c','n','d','t')
 #   define c3__cnhp   c3_s4('c','n','h','p')
 #   define c3__cnhs   c3_s4('c','n','h','s')
+#   define c3__cnhx   c3_s4('c','n','h','x')
 #   define c3__cnkt   c3_s4('c','n','k','t')
 #   define c3__cnls   c3_s4('c','n','l','s')
 #   define c3__cnms   c3_s4('c','n','m','s')

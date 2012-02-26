@@ -2831,14 +2831,14 @@
       [%clsg p=(list gene)]
       [%cltr p=(list gene)]
     ::
-      [%cnbr p=twig q=gene r=(list >[p=gene q=gene])]
+      [%cnbc p=term]
+      [%cntr p=twig q=gene r=(list >[p=gene q=gene])]
       [%cncl p=gene q=gene]
       [%cndt p=gene q=gene]
       [%cnkt p=gene q=gene r=gene s=gene]
-      [%cnbc p=term]
       [%cnls p=gene q=gene r=gene]
       [%cnhp p=gene q=(list gene)]
-      [%cnpm p=twig]
+      [%cnhx p=twig]
       [%cnsg p=twig q=gene r=gene]
       [%cnts p=twig q=(list >[p=gene q=gene])]
     ::
@@ -3318,7 +3318,7 @@
           ^       [i.p.gen $(p.gen t.p.gen)]
       ==
     ::
-        [%cnbr *]
+        [%cntr *]
       :+  %tsls
         q.gen
       :+  %cnts
@@ -3333,8 +3333,8 @@
         [%cnhp *]   
       ?~(q.gen [%tsgr p.gen [%cnbc %%]] [%cncl p.gen [%cltr q.gen]])
     ::
-        [%cnpm *]  [%cnts p.gen ~]
-        [%cnsg *]  [%cnbr p.gen q.gen [[[~ 5] r.gen] ~]]
+        [%cnhx *]  [%cnts p.gen ~]
+        [%cnsg *]  [%cntr p.gen q.gen [[[~ 5] r.gen] ~]]
         [%kthp *]  [%ktls ~(bunt al bore(gen p.gen)) q.gen]
         [%sgbr *]  [%sggr [%bean p.gen] q.gen]
         [%sgcn *]
@@ -3456,7 +3456,7 @@
     ?-  gen
       [~ *]         [gen ~]
       [%cnbc *]     [p.gen ~]
-      [%cnpm *]     p.gen 
+      [%cnhx *]     p.gen 
       [%cnts * ~]   p.gen
       [%zpcb *]     rake(gen q.gen)
       *             ~|(%rake-gene !!)
@@ -5237,7 +5237,7 @@
       :-  '`' 
         (stag %kthp ;~(plug ;~(pfix tec wide) ;~(pfix tec wide)))
       :-  ['a' 'z']
-        (stag %cnpm rope)
+        (stag %cnhx rope)
       :-  '|'
         ;~  pose
           (stag %wtbr ;~(pfix bar (ifix [pal par] (most ace wide))))
@@ -5321,13 +5321,13 @@
             :-  '%'
               ;~  pfix  cen
                 %-  stew  :~
-                  ['|' (rune bar %cnbr expp)]
                   [':' (rune col %cncl expb)]
                   ['.' (rune dot %cndt expb)]
                   ['^' (rune ket %cnkt expf)]
                   ['+' (rune lus %cnls expc)]
                   ['-' (rune hip %cnhp expk)]
                   ['~' (rune sig %cnsg expq)]
+                  ['*' (rune tar %cntr expp)]
                   ['=' (rune tis %cnts expj)]
                 ==
               ==
@@ -5561,7 +5561,7 @@
         %tis 
       ?-  ros
         [%cnbc @]        [%ktts p.ros p.vil]
-        [%cnpm [@ ~]]    [%ktts i.p.ros p.vil]
+        [%cnhx [@ ~]]    [%ktts i.p.ros p.vil]
         [%cnts [@ ~] ~]  [%ktts i.p.ros p.vil]
         [%zpcb *]        $(ros q.ros)
         *                ~|(ling !!)
