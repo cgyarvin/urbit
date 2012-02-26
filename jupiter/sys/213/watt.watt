@@ -3302,15 +3302,15 @@
         [%brms *]  [%tsgr [%brdt p.gen] [%cnhs %%]]
         [%brtr *]  [%brcb p.gen (~(put by *(map term foot)) %% [& | q.gen])]
         [%brts *]  [%brcb p.gen (~(put by *(map term foot)) %% [& & q.gen])]
-        [%clkt *]  [%clms p.gen [%clms q.gen [%clms r.gen s.gen]]]
-        [%clls *]  [%clms p.gen [%clms q.gen r.gen]]
-        [%clsg *]  |-(?~(p.gen [%dtsg %n ~] [%clms i.p.gen $(p.gen t.p.gen)]))
+        [%clkt *]  [p.gen q.gen r.gen s.gen]
+        [%clls *]  [p.gen q.gen r.gen]
+        [%clsg *]  |-(?~(p.gen [%dtsg %n ~] [i.p.gen $(p.gen t.p.gen)]))
         [%cltr *]
       |-
       ?-    p.gen 
           ~       [%zpzp ~]
           [* ~]   i.p.gen
-          ^       [%clms i.p.gen $(p.gen t.p.gen)]
+          ^       [i.p.gen $(p.gen t.p.gen)]
       ==
     ::
         [%cnbr *]
