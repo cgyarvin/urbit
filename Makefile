@@ -1274,9 +1274,6 @@ BASE_OFILES=\
        $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
-       $(J217_OFILES) \
-       $(J216_OFILES) \
-       $(J215_OFILES) \
        $(J214_OFILES) \
        $(J213_OFILES) \
        $(J212_OFILES)

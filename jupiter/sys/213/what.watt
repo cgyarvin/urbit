@@ -14,7 +14,7 @@
   $%  [%here p=(list cask)]           ::  permanent internal
       [%unix p=tape]                  ::  external unix tray
   ==
-++  file  ,[p=mode q=tube]            ::  filesystem key
+++  file  >[p=mode q=tube]            ::  filesystem key
 ++  shoe                              ::  trace stack layer
   $%  [%bean p=*]                     ::  raw noun
       [%lose p=term]                  ::  error message

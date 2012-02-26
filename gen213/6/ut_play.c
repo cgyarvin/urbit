@@ -154,6 +154,18 @@
         return ret;
       }
     } 
+    else if ( u2_yes == u2_dust(u2_h(gen)) ) {
+      _play_used(wir_r);
+      {
+        u2_noun dis = _play_in(wir_r, van, sut, u2_h(gen));
+        u2_noun dat = _play_in(wir_r, van, sut, u2_t(gen));
+        u2_noun ret = j2_mby(Pt6, cell)(wir_r, dis, dat);
+
+        u2_rz(wir_r, dis);
+        u2_rz(wir_r, dat);
+        return ret;
+      }
+    }
     else switch ( u2_h(gen) ) {
       default: goto open;
     

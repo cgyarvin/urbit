@@ -353,7 +353,24 @@
 
       return ret;
     } 
-    else switch ( u2_h(gen) ) {
+    else if ( u2_yes == u2_dust(u2_h(gen)) ) {
+      _mint_used(wir_r);
+      {
+        u2_noun hed = _mint_in(wir_r, van, sut, c3__noun, u2_h(gen));
+        u2_noun tal = _mint_in(wir_r, van, sut, c3__noun, u2_t(gen));
+        u2_noun typ = j2_mby(Pt6, cell)(wir_r, u2_h(hed), u2_h(tal));
+
+        ret = u2_bc
+          (wir_r,
+           _mint_nice(wir_r, van, gol, typ),
+           j2_mby(Pt6, cons)(wir_r, u2_t(hed), u2_t(tal)));
+
+        u2_rl_lose(wir_r, hed);
+        u2_rl_lose(wir_r, tal);
+
+        return ret;
+      }
+    } else switch ( u2_h(gen) ) {
       default: {
         u2_noun ter = u2_frag(u2_cw_con_2, van);
         u2_noun rex = j2_mcy(Pt6, ap, open)(wir_r, ter, gen);

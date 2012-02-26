@@ -132,7 +132,11 @@ u2_ve_ream(u2_noun txt)
 u2_noun
 u2_ve_slac(u2_noun vax, const c3_c* sam_c)
 {
-  return u2_ve_slap(vax, u2_ci_string(sam_c));
+  if ( u2_Host.kno_w >= 214 ) {
+    return u2_ve_slap(vax, u2_ci_string(sam_c));
+  } else {
+    return u2_ve_slap(vax, u2nc(c3__cnhs, u2_ci_string(sam_c)));
+  }
 }
 
 /* u2_ve_slan(): slap with gene as C string.

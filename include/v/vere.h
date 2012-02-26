@@ -6,8 +6,8 @@
   **/
     /* First kernel this executable can boot.
     */
-#     define FirstKernel   217
-#     define DefaultKernel 217
+#     define FirstKernel   214
+#     define DefaultKernel 214
 
   /** Data types.
   **/

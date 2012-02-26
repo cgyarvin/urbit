@@ -25,9 +25,6 @@
       extern u2_ho_driver j2_da(k_212);
       extern u2_ho_driver j2_da(k_213);
       extern u2_ho_driver j2_da(k_214);
-      extern u2_ho_driver j2_da(k_215);
-      extern u2_ho_driver j2_da(k_216);
-      extern u2_ho_driver j2_da(k_217);
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
@@ -35,9 +32,6 @@
         &j2_da(k_212),
         &j2_da(k_213),
         &j2_da(k_214),
-        &j2_da(k_215),
-        &j2_da(k_216),
-        &j2_da(k_217),
         0
       };
 

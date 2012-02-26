@@ -19,13 +19,15 @@
        u2_bc(wir_r, u2_rx(wir_r, u2_bi_h(wir_r, u2_bi_h(wir_r, yam))),
                     u2_rx(wir_r, dib)),
        u2_rx(wir_r, u2_bi_t(wir_r, yam)));
-    u2_noun wox = j2_mcy(Pt6, ut, mint)(wir_r, van, sut, c3__noun, u2_blip);
+    u2_noun woo = u2_bc(wir_r, c3__cnhs, u2_blip);
+    u2_noun wox = j2_mcy(Pt6, ut, mint)(wir_r, van, sut, c3__noun, woo);
     u2_noun ret = u2_nk_nock(wir_r, yib, u2_t(wox));
 
     if ( u2_none == ret ) {
       return u2_bl_error(wir_r, "bust-nock");
     }
     u2_rz(wir_r, wox);
+    u2_rz(wir_r, woo);
     u2_rz(wir_r, yam);
 
     return ret;
