@@ -417,7 +417,7 @@
 
         return ret;
       }
-      case c3__clms: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
+      case c3__clhp: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mull_used(wir_r);
       {
         u2_noun hed = _mull_in(wir_r, van, sut, c3__noun, dox, p_gen);
@@ -680,7 +680,7 @@
       _mull_used(wir_r);
       {
         u2_noun ruf = u2_bt
-          (wir_r, c3__clms, 
+          (wir_r, c3__clhp, 
                   u2_bc(wir_r, u2_nul, _1),
                   u2_rx(wir_r, p_gen));
         u2_noun ret = _mull_grow
@@ -713,7 +713,7 @@
       _mull_used(wir_r);
       {
         u2_noun ruf = u2_bt
-          (wir_r, c3__clms, 
+          (wir_r, c3__clhp, 
                   u2_bc(wir_r, u2_nul, _1),
                   u2_rx(wir_r, p_gen));
         u2_noun ret = _mull_grow
@@ -747,11 +747,6 @@
         }
         u2_bl_drop(wir_r);
         return ret;
-      }
-      case c3__zphs: p_gen = u2_t(gen);
-      {
-        u2_bx_used(wir_r);
-        return _mull_in(wir_r, van, sut, gol, dox, p_gen);
       }
       case c3__zpts: p_gen = u2_t(gen);
       _mull_used(wir_r);
