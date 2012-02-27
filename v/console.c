@@ -77,7 +77,13 @@ void
 u2_ve_tank(c3_l tab_l, u2_noun tac)
 {
   c3_l    col_l = u2_ve_dump_columns();
-  u2_noun wol = u2_ve_hard("pitt", "wash", u2nc(u2nc(tab_l, col_l), tac));
+  u2_noun wol;
+
+  if ( u2_Host.kno_w > 209 ) {
+    wol = u2_ve_hard("pitt", "wash", u2nc(u2nc(tab_l, col_l), tac));
+  } else {
+    wol = u2_ve_hard("born", "wash", u2nc(u2nc(tab_l, col_l), tac));
+  }
 
   u2_ve_dump_wall(wol);
 }
@@ -143,10 +149,14 @@ u2_ve_sway(c3_l tab_l, u2_noun tax)
         u2_err(u2_Wire, "th_rax", u2t(h_rax));
       }
 #endif
-      tac = u2_ve_hard("pitt", "swan", u2_ct(h_rax));
-      // u2_err(u2_Wire, "tac", tac);
-      wol = u2_ve_hard("pitt", "wash", u2nc(u2nc(tab_l, col_l), tac));
-
+      if ( u2_Host.kno_w > 209 ) {
+        tac = u2_ve_hard("pitt", "swan", u2_ct(h_rax));
+        wol = u2_ve_hard("pitt", "wash", u2nc(u2nc(tab_l, col_l), tac));
+      }
+      else {
+        tac = u2_ve_hard("born", "swan", u2_ct(h_rax));
+        wol = u2_ve_hard("born", "wash", u2nc(u2nc(tab_l, col_l), tac));
+      }
       u2_ve_dump_wall(wol);
       u2_cm_done();
     }
@@ -337,8 +347,13 @@ u2_ve_zuse_line(u2_noun lin)
 {
   u2_hevn_be(u2_pryr, god) = u2_ve_zeus;
   {
-    u2_noun ded = u2_ve_hard("zuse", "scan", lin);
-
+    u2_noun ded;
+   
+    if ( u2_Host.kno_w > 209 ) {
+      ded = u2_ve_hard("zuse", "scan", lin);
+    } else {
+      ded = u2_ve_hard("born", "scan", lin);
+    }
     u2_ve_zuse_deed(ded);
   }
   u2_hevn_be(u2_pryr, god) = 0;

@@ -144,8 +144,14 @@ u2_ve_tool(u2_noun nam)
   }
   else {
     u2_noun gen = u2_ve_ream(src);
-    u2_noun syd = u2_ct(ver_e->toy.what ? ver_e->toy.what : ver_e->toy.seed);
-    u2_noun vos = u2_ve_slap(syd, gen);
+    u2_noun syd, vos;
+   
+    if ( u2_Host.kno_w > 209 ) {
+      syd = u2_ct(ver_e->toy.what ? ver_e->toy.what : ver_e->toy.seed);
+    } else {
+      syd = u2_ct(ver_e->toy.seed);
+    }
+    vos = u2_ve_slap(syd, gen);
 
     ver_e->tul = u2_ckd_by_put(ver_e->tul, nam, u2_cm_bury(vos));
   }
@@ -265,13 +271,20 @@ u2_ve_rest()
       ver_e->toy.spay = u2_cm_bury(u2_ve_bone("spay"));
     }
 
-    u2_ve_tool(c3__what);
-    ver_e->toy.what = u2_ve_use("what");
+    if ( u2_Host.kno_w > 209 ) {
+      u2_ve_tool(c3__what);
+      ver_e->toy.what = u2_ve_use("what");
+    }
+    else ver_e->toy.what = 0;
   }
   {
-    u2_ve_tool(c3__pitt);
-    if ( u2_Host.kno_w <= 221 ) {
-      u2_ve_tool(c3__zuse);
+    if ( u2_Host.kno_w > 209 ) {
+      u2_ve_tool(c3__pitt);
+      if ( u2_Host.kno_w <= 221 ) {
+        u2_ve_tool(c3__zuse);
+      }
+    } else {
+      u2_ve_tool(c3__born);
     }
   }
   u2_Host.ver_e[u2_Host.kno_w].mod_m = c3__live;

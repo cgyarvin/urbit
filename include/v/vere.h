@@ -232,6 +232,11 @@
         u2_noun 
         u2_ve_use(const c3_c* wit_c);
 
+      /* u2_ve_step(): replace standard tool gate with new core.
+      */
+        u2_noun
+        u2_ve_step(const c3_c* wit_c, u2_noun wip);
+
       /* u2_ve_hard(): use standard tool gate without type check.
       */
         u2_noun
