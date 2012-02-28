@@ -32,23 +32,66 @@
     --
 =>  |%
     ++  loon
+      $&  [p=loon q=loon]                 ::  natural pair
       $%  [%% p=gene]                     ::  simple gene
-          [%loc p=mode q=barn]            ::  local file
           [%dig p=loon]                   ::  save a packet
-          [%mit p=loon q=loon]            ::  source to dest
+          [%fit p=mode q=barn]            ::  local file
           [%quo p=vase]                   ::  live data
+          [%run p=loon q=loon]            ::  source to dest
           [%var p=term q=loon]            ::  set a variable
       ==
     ++  boom
-      $&  [p=boom q=boom]                 ::  pair of booms
       $%  [%dat p=barn q=mode r=vase]     ::  save to disk
-          [%see p=tank]                   ::  print to screen
+          [%see p=@ q=tank]               ::  show at tab
       ==
     --
 =>  |%  
     ++  x-goon
       =+  vas=vast
       wide:vas(bug &, wer /.~/sys/[(rent %ud stub)])
+    ::
+    ++  x-loon
+      %+  knee  *loon  |.  ~+
+      ;~  pose
+        (stag %% x-goon)
+        ;~  pfix  col
+          ;~  pose
+            (stag %dig ;~(pfix (just 'd') ;~(pfix ace x-loon)))
+          ::
+            %+  stag
+              %fit
+            ;~  pfix  (just 'f')
+              ;~  plug
+                ;~  pose
+                  (cold %atom (just 'a'))
+                  (cold %blob (just 'b'))
+                  (cold %pill (just 'p'))
+                  (cold %text (just 't'))
+                  (cold %watt (just 'w'))
+                ==
+                ;~  pfix  dot 
+                  (most fas (cook |=(lot=coin (spay lot)) sack:vast))
+                ==
+              ==
+            ==
+          ::
+            %+  stag
+              %run
+            ;~  pfix  (just 'r')
+              ;~(plug x-loon ;~(pfix ace x-loon))
+            ==
+          ::
+            %+  stag
+              %var
+            ;~  pfix  (just 'v')
+              ;~  plug
+                ;~(pfix dot sym)
+                ;~(pfix ace x-loon)
+              ==
+            ==
+          ==
+        ==
+      ==
     --
 =>  |%
     ++  x-deed  ~+

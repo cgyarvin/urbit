@@ -18,21 +18,6 @@
     j2_mcj(Pt6, ut, nest)[];
 
   static u2_flag
-  _nest_fitz(u2_wire wir_r,
-             u2_atom p_sut,
-             u2_atom p_ref)
-  {
-    c3_w i_w, met_w = c3_min(u2_met(3, p_sut), u2_met(3, p_ref));
-
-    for ( i_w = 0; i_w < met_w; i_w++ ) {
-      if ( u2_byte(i_w, p_sut) != u2_byte(i_w, p_ref) ) {
-        return u2_no;
-      }
-    }
-    return u2_yes;
-  }
-
-  static u2_flag
   _nest_cram(u2_wire wir_r,
              u2_noun van,
              u2_noun sut,
@@ -226,7 +211,7 @@
 
       case c3__atom: {
         if ( (u2_yes == u2_dust(ref)) && (c3__atom == u2_h(ref)) ) {
-          if ( u2_no == _nest_fitz(wir_r, u2_t(sut), u2_t(ref)) ) {
+          if ( u2_no == j2_mby(Pt6, fitz)(wir_r, u2_t(sut), u2_t(ref)) ) {
             // u2_err(wir_r, "fitz: need", u2_t(sut));
             // u2_err(wir_r, "fitz: have", u2_t(ref));
             return u2_no;

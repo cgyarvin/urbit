@@ -105,6 +105,7 @@
     extern u2_ho_jet j2_mbj(Pt6, cube)[];
     extern u2_ho_jet j2_mbj(Pt6, face)[];
     extern u2_ho_jet j2_mbj(Pt6, fine)[];
+    extern u2_ho_jet j2_mbj(Pt6, fitz)[];
     extern u2_ho_jet j2_mbj(Pt6, flan)[];
     extern u2_ho_jet j2_mbj(Pt6, flip)[];
     extern u2_ho_jet j2_mbj(Pt6, flor)[];
@@ -254,6 +255,7 @@
     { j2_sb(Pt6, cube), j2_mbj(Pt6, cube), 0, 0, u2_none },
     { j2_sb(Pt6, face), j2_mbj(Pt6, face), 0, 0, u2_none },
     { j2_sb(Pt6, fine), j2_mbj(Pt6, fine), 0, 0, u2_none },
+    { j2_sb(Pt6, fitz), j2_mbj(Pt6, fitz), 0, 0, u2_none },
     { j2_sb(Pt6, flan), j2_mbj(Pt6, flan), 0, 0, u2_none },
     { j2_sb(Pt6, flip), j2_mbj(Pt6, flip), 0, 0, u2_none },
     { j2_sb(Pt6, flor), j2_mbj(Pt6, flor), 0, 0, u2_none },

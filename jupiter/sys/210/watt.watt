@@ -3517,12 +3517,27 @@
   [vur sed] 
 ::
 ++  fitz
+  ~.  %fitz
   |=  [yaz=term wix=term]
-  ?|  =(%% yaz) 
-      =(%% wix)
-      ?&  =((end 3 1 yaz) (end 3 1 wix))
-          $(yaz (rsh 3 1 yaz), wix (rsh 3 1 wix))
+  =+  ^=  fiz
+      |=  mot=@tam  ^-  [p=@ q=@tam]
+      =+  len=(met 3 mot)
+      ?:  =(0 len)
+        [0 %%]
+      =+  tyl=(rsh 3 (dec len) mot)
+      ?:  &((gte tyl 'A') (lte tyl 'Z'))
+        [(sub tyl 64) (end 3 (dec len) mot)]
+      [0 mot]
+  =+  [yoz=(fiz yaz) wux=(fiz wix)]
+  ?&  ?|  =(0 p.yoz)
+          &(!=(0 p.wux) (lte p.wux p.yoz))
       ==
+      |-  ?|  =(%% p.yoz) 
+              =(%% p.wux)
+              ?&  =((end 3 1 p.yoz) (end 3 1 p.wux))
+                  $(p.yoz (rsh 3 1 p.yoz), p.wux (rsh 3 1 p.wux))
+              ==
+          ==
   ==
 ::
 ++  flan
@@ -5200,7 +5215,13 @@
           (stag %bcts (cold %flag wut))
         ==
       :-  '@'
-        (stag %bcts (stag %atom ;~(pfix pat ;~(pose sym (easy @)))))
+        %+  stag  %bcts
+        %+  stag  %atom
+        ;~  pfix  pat
+          %+  cook
+            |=([a=tape b=tape] (rap 3 (weld a b)))
+          ;~(plug (star low) (star hig))
+        ==
       :-  '['
         (stag %cltr (ifix [sel ser] (most ace wide)))
       :-  '>'
@@ -5208,7 +5229,10 @@
       :-  '<'
         (stag %ktsg ;~(pfix gal wide))
       :-  '^'
-        (stag %bcts (cold %cell ket))
+        ;~  pose
+          (stag %cnhx rope)
+          (stag %bcts (cold %cell ket))
+        ==
       :-  '_'
         (stag %bccb ;~(pfix cab wide))
       :-  '`' 
@@ -5242,7 +5266,6 @@
     ==
   ++  spat
     |_  tol=?
-    ::
     ++  patl
       ?:  tol
         (most gap ;~(pose nasp tall))
@@ -5561,12 +5584,12 @@
       dot
     ;~  pose
       (cook |=(a=(list) ?:(=(~ +.a) [%% ~] [%% [~ 2] $(a +.a)])) (plus buc))
+      %+  cook  
+        |=([a=(list) b=term] ?~(a [b ~] [b [~ 2] $(a +.a)]))
+      ;~(plug (star ket) ;~(pose sym (cold %% buc)))
       %+  cook
         |=(a=knot [a ~])
-      ;~  pose
-        sym
-        (cook |=(a=axis [~ a]) ;~(pose ;~(pfix lus dim:ag) ven (cold 1 dot)))
-      ==
+      (cook |=(a=axis [~ a]) ;~(pose ;~(pfix lus dim:ag) ven (cold 1 dot)))
     ==
   ::
   ++  tall  (knee *gene |.(~+((wart ;~(pose (norm &) long)))))

@@ -382,6 +382,11 @@
                         u2_noun lup,                              //  retain
                         u2_noun mar);                             //  retain
 
+      u2_noun                                                     //  transfer
+      j2_mby(Pt6, fitz)(u2_wire wir_r,
+                        u2_noun yaz,                              //  retain
+                        u2_noun wix);                             //  retain
+
       u2_noun                                                     //  produce 
       j2_mby(Pt6, foam)(u2_wire wir_r, 
                         u2_noun pok);                             //  retain

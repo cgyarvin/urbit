@@ -686,6 +686,7 @@ J210_6_OFILES=\
        gen210/6/cube.o \
        gen210/6/face.o \
        gen210/6/fine.o \
+       gen210/6/fitz.o \
        gen210/6/flan.o \
        gen210/6/flip.o \
        gen210/6/flor.o \
@@ -820,6 +821,7 @@ J209_6_OFILES=\
        gen209/6/cube.o \
        gen209/6/face.o \
        gen209/6/fine.o \
+       gen209/6/fitz.o \
        gen209/6/flan.o \
        gen209/6/flip.o \
        gen209/6/flor.o \
