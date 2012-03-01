@@ -1,3 +1,6 @@
+::
+::  Watt kernel 210.  This file is in the public domain.
+::
 ?>  ?=(@ .)
 %.  .
 =<  make
@@ -2217,6 +2220,8 @@
   ++  sack
     %+  knee  *coin  |.  ~+
     %-  stew  :~
+      :-  ['a' 'z']
+        (cook |=(a=@tam [%% %tam a]) sym)
       :-  ['0' '9']
         (stag ~ bask)
       :-  '-'
@@ -2254,7 +2259,20 @@
           ==
         ==
     ==
-  ++  sock  (sear |=(a=coin ?:(?=(~ -.a) [~ +.a] ~)) sack)
+  ++  slay
+    |=  txt=@ta  ^-  (unit coin)
+    =+  vex=((full sack) [[1 1] (trip txt)])
+    ?~  q.vex
+      ~
+    [~ p.+.q.vex]
+  ::
+  ++  smyt
+    |=  bon=barn  ^-  (unit (list coin))
+    ?~  bon
+      ~
+    =+  [myn=(slay -.bon) yan=$(bon +.bon)]
+    ?~(myn ~ ?~(yan ~ [~ +.myn +.yan]))
+  ::
   ++  spay  |=(lot=coin `@ta`(rap 3 (spit lot ~)))
   ++  spit
     |=  [lot=coin res=tape]  ^-  tape
@@ -5121,21 +5139,7 @@
   ::
   ++  glam  ~+((glue ace))
   ++  glib  ~+((glue gap))
-  ++  naso
-    ;~  pfix  dot
-      %+  cook
-        |=(a=mole [%dtpt %ta (spay [~ a])])
-      (stag %h fed:ag)
-    ==
-  ++  nasp
-    ;~  pose
-      (stag %dtpt (stag %tam sym))
-      %+  cook
-        |=  a=coin
-        [%dtpt %ta (rap 3 (spit a ~))]
-      sack
-    ==
-  ::
+  ++  hasp  (cook |=(a=coin [%dtpt %ta (rap 3 (spit a ~))]) sack)
   ++  scat
     %+  knee  *gene  |.  ~+
     %-  stew  :~  
@@ -5259,9 +5263,9 @@
     |.
     %+  stag  %clsg
     ?:  tol
-      (more gap ;~(pose nasp tall))
+      (more gap ;~(pose hasp tall))
     ;~  pose
-      (more fas ;~(pose nasp (ifix [sel ser] wide)))
+      (more fas ;~(pose hasp (ifix [sel ser] wide)))
     ==
   ++  norm
     |=  tol=?
