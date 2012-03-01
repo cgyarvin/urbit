@@ -1171,7 +1171,7 @@
   ++  soul  >[tic=@ud pan=(map barn note) tap=_well]
   ++  span  cask
   ++  spar  (list coin)
-  ++  spot  >[p=tray q=pint]
+  ++  spot  >[p=barn q=pint]
   ++  tank
     $%  [%leaf p=tape]
         [%palm p=[p=tape q=tape r=tape s=tape] q=(list tank)]
@@ -1185,13 +1185,11 @@
                 [1 p=(list)]
                 [2 p=(list >[@tam *])]
             ==
-  ++  tray  >[p=span q=barn]
   ++  wall  (list tape)
   ++  wand  >@
   ++  well  |+(barn *(unit note))
   ++  wood  (list fact)
-  ++  xmln  
-    >[t=$|(cask [cask a=(list >[n=cask v=tape])]) c=(list xmln)]
+  ++  xmln  >[t=$|(cask [cask a=(list >[n=cask v=tape])]) c=(list xmln)]
   --
 =>
   ::::
@@ -1603,9 +1601,9 @@
   ++  ket  (just '^')
   ++  lus  (just '+')
   ++  hip  (just '-')
-  ++  pal  (just '(')
+  ++  pel  (just '(')
   ++  pam  (just '&')
-  ++  par  (just ')')
+  ++  per  (just ')')
   ++  pat  (just '@')
   ++  sel  (just '[')
   ++  sem  (just ';')
@@ -3674,6 +3672,16 @@
   |=  [axe=axis vax=vase]  ^-  vase
   (slap vax [~ axe]) 
 ::
+++  slum
+  |=  [vax=vase wad=(map term vase)]  ^-  vase
+  ?-  wad
+    ~        vax
+    [* ~ ~]  [[%cell p.vax [%face p.n.wad p.q.n.wad]] [q.vax q.q.n.wad]]
+    [* ~ *]  $(wad [n.wad ~ ~], vax $(wad r.wad))
+    [* * ~]  $(wad [n.wad ~ ~], vax $(wad l.wad))
+    [* * *]  $(wad [n.wad ~ r.wad], vax $(wad l.wad))
+  ==
+::
 ++  ut
   ~%    %ut
       -<-
@@ -5081,29 +5089,27 @@
   --
 ::
 ++  vast
-  =+  [bug=`?`| was=*(set tray) wer=*tray]
+  =+  [bug=`?`| was=*(set barn) wer=*barn]
   |% 
-  ++  prel
-    |=  [bac=@ fot=(unit cask) suf=(list gene)]
-    ~|  %vast-prel
-    ^-  gene
-    :-  [%dtpt %ta ?~(fot p.wer +.fot)]
-    :-  %clsg
-    (weld (flop suf) (turn (slag bac q.wer) |=(a=@ `gene`[%dtpt %ta a])))
+  ++  pend
+    |=  [bac=(list) suf=gene]  ^-  gene
+    (pgen (flop (weld (flop (prev suf)) (slag (lent bac) (flop wer)))))
   ::
-  ++  phom
-    |=  [suf=(list gene)]
-    ^-  gene
-    [[%dtpt %ta p.wer] [%clsg suf]]
+  ++  phed
+    |=  [bac=(list) suf=gene]  ^-  gene
+    (pgen (weld (prev suf) (slag (lent bac) (flop wer))))
+  ::
+  ++  pgen
+    |=  bon=barn  ^-  gene
+    :-  %clsg
+    |-(?~(bon ~ [[%dtpt %ta -.bon] $(bon +.bon)]))
   ::
   ++  prev
-    |=  gen=gene  ~|  [%prev gen]  ^-  tray
+    |=  gen=gene  ~|  [%prev gen]  ^-  barn
     ?:  ?=([%zpcb *] gen)
       $(gen q.gen)
-    ?>  ?=([^ *] gen)
-    :-  ?>(?=([%dtpt *] p.gen) q.p.gen)
-    ?>  ?=([%clsg *] q.gen)
-    (turn p.q.gen |=(a=gene ?>(?=([%dtpt *] a) q.a)))
+    ?>  ?=([%clsg *] gen)
+    (turn p.gen |=(a=gene ?>(?=([%dtpt *] a) q.a)))
   ::
   ++  pray
     |=  gen=gene  ~|  %pray  ^-  gene
@@ -5158,13 +5164,13 @@
         == 
       :-  '&'
         ;~  pose
-          (stag %wtpm ;~(pfix pam (ifix [pal par] (most ace wide))))
+          (stag %wtpm ;~(pfix pam (ifix [pel per] (most ace wide))))
           (stag %dtpt (stag %f (cold & pam)))
         ==
       :-  '\''
         (stag %dtpt (stag %ta qut))
       :-  '('
-        (stag %cnhp (ifix [pal par] (most ace wide))) 
+        (stag %cnhp (ifix [pel per] (most ace wide))) 
       :-  '*'
         ;~  pose
           (stag %bctr ;~(pfix tar wide))
@@ -5172,24 +5178,12 @@
         ==
       :-  '+'
         ;~  pose
-          (stag %dtls ;~(pfix lus (ifix [pal par] wide)))
+          (stag %dtls ;~(pfix lus (ifix [pel per] wide)))
           (cook |=(a=twig [%cnts a ~]) rope)
         ==
       :-  '#'
         ;~  pfix  hax
-          %+  cook  pray
-          %+  cook  prel
-          ;~  pose
-            ;~  plug
-              (cook |=(a=(list) (dec (lent a))) (plus tis))
-              (easy ~)
-              $:~(patr spat |)
-            ==
-            ;~  plug
-              (cook |=(a=(list) (dec (lent a))) (plus lus))
-              $:~(pats spat |)
-            ==
-          ==
+          (cook pray wide)
         ==
       :-  '-'
         ;~  pose
@@ -5206,12 +5200,12 @@
           %dtpt
         bask
       :-  ':'
-        (stag %smcl ;~(pfix col (ifix [pal par] (most ace wide))))
+        (stag %smcl ;~(pfix col (ifix [pel per] (most ace wide))))
       :-  '='
-        (stag %dtts ;~(pfix tis (ifix [pal par] ;~(glam wide wide))))
+        (stag %dtts ;~(pfix tis (ifix [pel per] ;~(glam wide wide))))
       :-  '?'
         ;~  pose
-          (stag %bcwt ;~(pfix wut (ifix [pal par] (most ace wide))))
+          (stag %bcwt ;~(pfix wut (ifix [pel per] (most ace wide))))
           (stag %bcts (cold %flag wut))
         ==
       :-  '@'
@@ -5241,54 +5235,34 @@
         (stag %cnhx rope)
       :-  '|'
         ;~  pose
-          (stag %wtbr ;~(pfix bar (ifix [pal par] (most ace wide))))
+          (stag %wtbr ;~(pfix bar (ifix [pel per] (most ace wide))))
           (stag %dtpt (stag %f (cold | bar)))
         ==
       :-  '~'
-        ;~  pose
-          %+  stag
-            %cnsg 
-          ;~  pfix 
-            sig 
+        ;~  pfix  sig
+          ;~  pose
+            (stag %clsg (ifix [sel ser] (most ace wide)))
+          ::
+            %+  stag  %cnsg 
             %+  ifix
-              [pal par] 
+              [pel per] 
             ;~(glam rope wide (stag %cltr (most ace wide)))
+          ::
+            (stag %dtpt (stag %ta tyq:ag))
+            (cold [%dtpt %ta ~] sig)
+            (easy [%bcts %null])
           ==
-        :: 
-          ;~  pfix  sig
-            ;~  pose
-              (stag %dtpt (stag %ta tyq:ag))
-              (cold [%dtpt %ta ~] sig)
-            ==
-          ==
-          (stag %bcts (cold %null sig))
         ==
     ==
-  ++  spat
-    |_  tol=?
-    ++  patl
-      ?:  tol
-        (most gap ;~(pose nasp tall))
-      ;~  pose
-        (most fas ;~(pose nasp (ifix [sel ser] wide)))
-        (easy ~)
-      ==
-    ::
-    ++  pato
-      ;~  pose
-        naso
-        ?:(tol tall (ifix [sel ser] wide))
-      ==
-    ++  patp  ;~((glue ?:(tol gap fas)) pato patl)
-    ++  patq  |.  %+  cook
-                |=([a=gene b=(list gene)] [a [%clsg (flop b)]])
-              patp
-    ++  patr  |.(patl)
-    ++  pats  |.  ;~  (glue ?:(tol gap fas)) 
-                    (stag ~ (cook |=(a=@ (spay [~ %h a])) ;~(pfix dot fed:ag)))
-                    patl
-                  ==
-    --
+  ++  sput
+    |=  tol=?
+    |.
+    %+  stag  %clsg
+    ?:  tol
+      (more gap ;~(pose nasp tall))
+    ;~  pose
+      (more fas ;~(pose nasp (ifix [sel ser] wide)))
+    ==
   ++  norm
     |=  tol=?
     =<  %-  stew
@@ -5354,21 +5328,10 @@
             :-  '/'
               ;~  pfix  fas
                 ;~  pose
-                  (tope ~(patq spat tol))
-                  (cook phom ;~(pfix col (tope ~(patr spat tol))))
-                  %+  cook
-                    prel
-                  ;~  pose
-                    ;~  plug
-                      (cook |=(a=(list) (dec (lent a))) (plus tis))
-                      (easy ~)
-                      (tope ~(patr spat tol))
-                    ==
-                    ;~  plug
-                      (cook |=(a=(list) (dec (lent a))) (plus lus))
-                      (tope ~(pats spat tol))
-                    ==
-                  ==
+                  (tope (sput tol))
+                  (cook pend ;~(plug (easy ~) (tope (sput tol))))
+                  (cook phed ;~(plug (plus tis) (tope (sput tol))))
+                  (cook pend ;~(plug (plus lus) (tope (sput tol))))
                 ==
               ==
             :-  '^'
@@ -5470,11 +5433,11 @@
     ::
     ++  toad
       |*  har=_expa
-      =+  dur=(ifix [pal par] $:har(tol |))
+      =+  dur=(ifix [pel per] $:har(tol |))
       ?:(tol ;~(pose ;~(pfix gap $:har(tol &)) dur) dur)
     ::
     ++  tope
-      |*  har=_~(patr spat tol)
+      |*  har=_(sput tol)
       =+  dur=$:har(tol |)
       ?:(tol ;~(pose ;~(pfix gap $:har(tol &)) dur) dur)
     ::
@@ -5529,7 +5492,7 @@
       ;~  pose
         (cold ~ sig)
         %+  ifix
-          ?:(tol [p=;~(plug duz gap) q=;~(plug gap duz)] [p=pal q=par])
+          ?:(tol [p=;~(plug duz gap) q=;~(plug gap duz)] [p=pel q=per])
         (more mash ;~(gunk ;~(pfix cen sym) loaf))
       ==
     --
@@ -5542,7 +5505,7 @@
               $%  [%tis p=gene] 
                   [%col p=gene] 
                   [%cab p=gene]
-                  [%pal p=(list >[p=gene q=gene])]
+                  [%pel p=(list >[p=gene q=gene])]
               ==
     ?-    -.vil
         %tis 
@@ -5554,7 +5517,7 @@
         *                ~|(ling !!)
       ==
         %col  [%tsgl ros p.vil]
-        %pal  [%cnts ~(rake ap ros) p.vil]
+        %pel  [%cnts ~(rake ap ros) p.vil]
         %cab  [ros p.vil]
     ==
   ::
@@ -5568,9 +5531,9 @@
         ;~(plug (cold %cab cab) wide)
         ::  ;~(plug (cold %cab sig) (easy %bcts %null))
         ;~  plug
-          (easy %pal)
+          (easy %pel)
           %+  ifix
-            [pal par]
+            [pel per]
           (most ;~(plug com ace) ;~(glam wide wide))
         ==
       ==

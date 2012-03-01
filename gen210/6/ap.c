@@ -193,7 +193,7 @@
                                      u2_rx(wir_r, q_gen)),
                         u2_nul);
     u2_noun zal = j2_mbc(Pt2, weld)(wir_r, r_gen, tul);
-    u2_noun ret = u2_bt(wir_r, c3__wtcb, u2_rx(wir_r, p_gen), zal);
+    u2_noun ret = u2_bt(wir_r, c3__wthp, u2_rx(wir_r, p_gen), zal);
 
     u2_rz(wir_r, tul);
     return ret;

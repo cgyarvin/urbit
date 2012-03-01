@@ -11,7 +11,8 @@
 =>  |%
     ++  x-deed  ~+
       =+  vas=vast
-      =+  pay=/.~/sys/[(rent %ud stub)]
+      ::  =+  pay=/.~/sys/[(rent %ud stub)]
+      =+  pay=~
       ;~(plug wide:vas(bug &, wer pay) x-fuel x-vent)
     ::
     ++  x-mode  ~+
@@ -22,27 +23,11 @@
     ::
     ++  x-fuel
       ;~  pose
-        ;~  pfix  ;~(plug gap gal)
-          %+  stag  ~
-          ;~  plug
-            x-mode
-            (stag %clsg (cook |=(a=(list gene) (flop a)) ~(patl spat:vast |)))
-          ==
-        ==
-      ::
         (easy ~)
       ==
     ::
     ++  x-vent
       ;~  pose
-        ;~  pfix  ;~(plug gap gar)
-          %+  stag  ~
-          ;~  plug
-            x-mode
-            (stag %clsg (cook |=(a=(list gene) (flop a)) ~(patl spat:vast |)))
-          ==
-        ==
-      ::
         (easy ~)
       ==
     --

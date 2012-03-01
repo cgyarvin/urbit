@@ -19,29 +19,29 @@
       ==
     ++  tube                              ::  filesystem address
       $%  [%here p=(list cask)]           ::  permanent internal
-          [%unix p=tape]                  ::  external unix tray
+          [%unix p=tape]                  ::  external unix path
       ==
     ++  file  >[p=mode q=tube]            ::  filesystem key
     ++  shoe                              ::  trace stack layer
       $%  [%bean p=*]                     ::  raw noun
           [%lose p=term]                  ::  error message
           [%mean p=_|.(*tank)]            ::  prettyprint trigger
-          [%pray p=tray]                  ::  prayer attempt
+          [%pray p=barn]                  ::  prayer attempt
           [%spot p=spot]                  ::  source position
       ==
     --
 =>  |%
     ++  loon
-      $&  [p=loon q=loon]                 ::  natural pair
       $%  [%% p=gene]                     ::  simple gene
           [%dig p=loon]                   ::  save a packet
           [%fit p=mode q=barn]            ::  local file
           [%quo p=vase]                   ::  live data
-          [%run p=loon q=loon]            ::  source to dest
+          [%ram p=loon q=loon]            ::  source to dest
+          [%typ p=loon]                   ::  show type
           [%var p=term q=loon]            ::  set a variable
       ==
     ++  boom
-      $%  [%dat p=barn q=mode r=vase]     ::  save to disk
+      $%  [%hit p=mode q=barn r=*]        ::  save to disk
           [%see p=@ q=tank]               ::  show at tab
       ==
     --
@@ -76,9 +76,15 @@
             ==
           ::
             %+  stag
-              %run
+              %ram
             ;~  pfix  (just 'r')
               ;~(plug x-loon ;~(pfix ace x-loon))
+            ==
+          ::
+            %+  stag
+              %typ
+            ;~  pfix  (just 't')
+              ;~(pfix ace x-loon)
             ==
           ::
             %+  stag
@@ -89,6 +95,7 @@
                 ;~(pfix ace x-loon)
               ==
             ==
+
           ==
         ==
       ==
@@ -107,48 +114,83 @@
     ::
     ++  x-fuel
       ;~  pose
-        ;~  pfix  ;~(plug gap gal)
-          %+  stag  ~
-          ;~  plug
-            x-mode
-            (stag %clsg (cook |=(a=(list gene) (flop a)) ~(patl spat:vast |)))
-          ==
-        ==
-      ::
         (easy ~)
       ==
     ::
     ++  x-vent
       ;~  pose
-        ;~  pfix  ;~(plug gap gar)
-          %+  stag  ~
-          ;~  plug
-            x-mode
-            (stag %clsg (cook |=(a=(list gene) (flop a)) ~(patl spat:vast |)))
-          ==
-        ==
-      ::
         (easy ~)
       ==
     --
+=+  [tic=@ud log=*(list >@uw)]
 =+  wad=*(map term vase)
-=>  |%
-    ++  scan
-      |=  cad=@ta  ~|  %scan  ^-  deed
-      (rash cad x-deed)
+|%
+++  live
+  |=  lun=loon  ^-  [p=(list boom) q=_..live]
+  ~|  [%live -.lun]
+  =+  vax=seed
+  =<  vile
+  |%
+  ++  evil
+    |-  ^-  vase
+    ?+    -.lun  ~|(%evil !!)
+        %%       (slap vax p.lun)
+        %quo     p.lun
+        %ram     evil(lun q.lun, vax evil(lun p.lun))
+    ==
+  ++  vile
+    |-  ^-  [p=(list boom) q=_..live]
+    ?-    -.lun
+    ::                                            ::  [%% p=gene]
+        %% 
+      :-  [[%see 0 (sell (slap vax p.lun))] ~]
+      ..live
+    ::                                            ::  [%dig p=loon] 
+        %dig                                      ::  XX ram filter type
+      =+  bet=evil(lun p.lun)
+      ?>  ?=(@ q.bet)
+      :-  [[%hit %atom /.~/log/[(rent %ud tic)] q.bet] ~]
+      ..live(tic +(tic), log [q.bet log])
+    ::                                            ::  [%fit p=mode q=barn]
+        %fit
+      :-  [[%hit p.lun q.lun q.vax] ~]
+      ..live
+    ::                                            ::  [%quo p=vase] 
+        %quo
+      ~|(%vile-quo !!)
+    ::                                            ::  [%ram p=loon q=loon]
+        %ram
+      vile(lun q.lun, vax evil(lun p.lun))
     ::
-    ++  swan
-      |=  yos=shoe  ^-  tank
-      ?-  -.yos
-        %bean  (show %q p.yos)
-        %lose  (show %t p.yos)
-        %mean  $:p.yos
-        %pray  (show %h p.yos)
-        %spot  (show %o p.yos)
-      == 
-    ::
-    ++  wash
-      |=  [[tab=@ edg=@] tac=tank]  ^-  wall
-      (~(win re tac) tab edg) 
-    --
-.
+        %typ                                      ::  [%typ p=loon]
+      =+  bet=evil(lun p.lun)
+      :-  [[%see 0 (skol p:bet)] ~]               ::  XX true dry run
+      ..live
+    ::                                            ::  [%var p=term q=loon]
+        %var
+      =+  bet=evil(lun q.lun)
+      [~ ..live(wad (~(put in wad) p.lun bet))]
+    ==
+  --
+++  scan
+  |=  cad=@ta  ~|  %scan  ^-  deed
+  (rash cad x-deed)
+::
+++  slan
+  |=  cad=@ta  ~|  %slan  ^-  loon
+  (rash cad x-loon)
+::
+++  swan
+  |=  yos=shoe  ^-  tank
+  ?-  -.yos
+    %bean  (show %q p.yos)
+    %lose  (show %t p.yos)
+    %mean  $:p.yos
+    %pray  (show %h p.yos)
+    %spot  (show %o p.yos)
+  == 
+::
+++  wash
+  |=  [[tab=@ edg=@] tac=tank]  ^-  wall
+  (~(win re tac) tab edg) 
+--

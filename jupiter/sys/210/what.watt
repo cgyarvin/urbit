@@ -19,7 +19,7 @@
   $%  [%bean p=*]                     ::  raw noun
       [%lose p=term]                  ::  error message
       [%mean p=_|.(*tank)]            ::  prettyprint trigger
-      [%pray p=tray]                  ::  prayer attempt
+      [%pray p=barn]                  ::  prayer attempt
       [%spot p=spot]                  ::  source position
   ==
 --

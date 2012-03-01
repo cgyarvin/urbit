@@ -23,6 +23,29 @@
         void
         u2_ve_gunn_line(u2_noun cor, u2_noun txt);
 
+// #define NEW9
+
+/* u2_ve_zeus(): prayer to internal file path.  Return unit.
+*/
+u2_noun
+u2_ve_zeus(u2_noun hap)
+{
+  if ( (u2_no == u2du(hap)) || (c3_s2('.', '~') != u2h(hap)) ) {
+    u2z(hap);
+    return u2_nul;
+  } 
+  else {
+    u2_noun tah = u2k(u2t(hap));
+    u2_noun dat = u2_ve_file("watt", tah);
+
+    if ( u2_none == dat ) {
+      return u2_nul;
+    } else {
+      return u2nc(u2_nul, dat);
+    }
+  }
+}
+
 /* u2_ve_dump_columns(): return screen column width from OS.
 */
 c3_l
@@ -93,7 +116,7 @@ u2_ve_tank(c3_l tab_l, u2_noun tac)
 void
 u2_ve_geto(u2_noun hoe)
 {
-#if 0
+#if 1
   u2z(hoe);
 #else
   u2_noun doe = hoe;
@@ -319,24 +342,88 @@ u2_ve_zuse_deed(u2_noun ded)
   u2z(ded);
 }
 
-/* u2_ve_zeus(): prayer to internal file path.  Return unit.
+/* u2_ve_zuse_boom_see(): print to screen.
 */
-u2_noun
-u2_ve_zeus(u2_noun hap)
+void
+u2_ve_zuse_boom_see(u2_noun tab, u2_noun tac)
 {
-  if ( (u2_no == u2du(hap)) || (c3_s2('.', '~') != u2h(hap)) ) {
-    u2z(hap);
-    return u2_nul;
-  } 
-  else {
-    u2_noun tah = u2k(u2t(hap));
-    u2_noun dat = u2_ve_file("watt", tah);
+  if ( !u2_fly_is_cat(tab) ) {
+    u2_cm_bail(c3__fail);
+  } else {
+    u2_ve_tank(tab, tac);
+  }
+}
 
-    if ( u2_none == dat ) {
-      return u2_nul;
+/* u2_ve_zuse_boom_dat(): save to disk.
+*/
+void
+u2_ve_zuse_boom_dat(u2_noun tah, u2_noun mod, u2_noun som)
+{
+  u2_err(u2_Wire, "dat: tah", tah);
+  u2_err(u2_Wire, "dat: mod", mod);
+
+  u2z(tah);
+}
+
+/* u2_ve_zuse_boom(): produce zuse outputs.
+*/
+void
+u2_ve_zuse_boom(u2_noun out)
+{
+  u2_noun tou = out;
+
+  while ( 1 ) {
+    if ( u2_nul == tou ) {
+      u2z(out); 
+      return;
     } else {
-      return u2nc(u2_nul, dat);
+      u2_noun i_tou = u2h(tou);
+      u2_noun t_tou = u2t(tou);
+      u2_noun bum = i_tou;
+      u2_noun p_bum, q_bum, r_bum;
+
+      switch ( u2h(bum) ) {
+        case c3__hit: {
+          u2_as_trel(u2t(bum), &p_bum, &q_bum, &r_bum);
+          u2_ve_zuse_boom_dat(u2k(p_bum), u2k(q_bum), u2k(r_bum));
+
+          break;
+        }
+        case c3__see: {
+          u2_as_cell(u2t(bum), &p_bum, &q_bum);
+
+          u2_ve_zuse_boom_see(u2k(p_bum), u2k(q_bum));
+          break;
+        }
+      }
+      tou = t_tou;
     }
+  }
+}
+
+/* u2_ve_zuse_loon_load(): preload a zuse line.
+*/
+u2_noun 
+u2_ve_zuse_loon_load(u2_noun lun)
+{
+  return lun;
+}
+
+/* u2_ve_zuse_loon(): execute a zuse line.
+*/
+void
+u2_ve_zuse_loon(u2_noun lun)
+{
+  lun = u2_ve_zuse_loon_load(lun);
+  {
+    u2_noun res = u2_ve_hard("zuse", "live", lun);
+    u2_noun h_res = u2_h(res);
+    u2_noun t_res = u2_t(res);
+
+    u2_ve_zuse_boom(u2k(h_res));
+    u2_ve_step("zuse", u2k(t_res));
+
+    u2z(res);
   }
 }
 
@@ -351,10 +438,17 @@ u2_ve_zuse_line(u2_noun lin)
    
     if ( u2_Host.kno_w > 209 ) {
       ded = u2_ve_hard("zuse", "scan", lin);
+
+      u2_ve_zuse_deed(ded);
     } else {
+#ifdef NEW9
+      ded = u2_ve_hard("born", "slan", lin);
+      u2_ve_zuse_loon(ded);
+#else
       ded = u2_ve_hard("born", "scan", lin);
+      u2_ve_zuse_deed(ded);
+#endif
     }
-    u2_ve_zuse_deed(ded);
   }
   u2_hevn_be(u2_pryr, god) = 0;
 }
