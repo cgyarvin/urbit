@@ -1,0 +1,279 @@
+!:
+::  System tiles
+::
+=>  |%  ++  fact  >[p=barn q=note]
+        ++  home  >@h
+        ++  lens  |+(barn *(unit note))
+        ++  mitt  $|  ~
+                  $%  [%lens p=_lens]
+                      [%grid p=(map span mitt)]
+                  ==
+        ++  note  >*
+        ++  rock  >@uw
+        ++  task  |+(a=_lens *work)
+        ++  work  >[p=(list fact) q=(list _task)]
+        ++  yard  barn
+    --
+::
+::  General tools
+::
+=>  |%
+    ++  clot  
+      |=  [dis=work dat=work]  ^-  work 
+      [(weld p.dis p.dat) (weld q.dis q.dat)]
+    ::
+    ++  hard
+      |*  han=_|+(* *)
+      |=  fud=*  ^-  han
+      ~|  %hard
+      =+  gol=(han fud)
+      ?>(=(gol fud) gol)
+    ::
+    ++  knap
+      |=  bon=barn  ^-  [p=@uw q=yard]
+      ?<  ?=(~ bon)
+      =+  kap=(need (slay -.bon))
+      ?>  ?=([%% %uw *] kap)
+      [q.p.kap +.bon]
+    ::
+    ++  meld
+      |=  [yon=(list fact) les=_lens]  ^-  _lens
+      =+  nuq=(~(gas by *(map barn note)) yon)
+      |+  lax=barn
+      (mate (~(get by nuq) lax) (les lax))
+    ::
+    ++  mane
+      |=  bon=barn  ^-  [p=@tam q=yard]
+      ?<  ?=(~ bon)
+      =+  man=(need (slay -.bon))
+      ?>  ?=([%% %tam *] man)
+      [q.p.man +.bon]
+    ::
+    ++  root
+      |=  bon=barn  ^-  [p=@h q=yard]
+      ?<  ?=(~ bon)
+      =+  hom=(need (slay -.bon))
+      ?>  ?=([%% %h *] hom)
+      [q.p.hom +.bon]
+    ::
+    ++  spin
+      |=  [wok=work les=_lens]
+      =+  sul=(meld p.wok les)
+      |-  ^-  work
+      =+  ^=  now
+          |-  ^-  work
+          ?~  q.wok
+            [~ ~]
+          (clot (-.q.wok sul) $(q.wok +.q.wok))
+      ?:  &(=(~ p.now) =(q.wok q.now))
+        [p.wok q.now]
+      $(p.wok (weld p.now p.wok), q.wok q.now)
+    ::
+    ++  wait
+      |=  [lax=barn ham=_|+(note *work)]  ^-  _task
+      |+  les=_lens
+      =+  git=(les lax)
+      ?~  git
+        [~ [^|(..$) ~]]
+      (ham +.git)
+    ::
+    ++  want
+      |=  [lax=barn ham=_|+(note *work)]
+      ^-  work
+      [~ [(wait lax ham) ~]]
+    --
+::
+::  Protocol tiles
+::
+=>  |%  
+    ++  brut                                            ::  protocol src
+      $%  [%bu p=(list brut)]                           ::  bundle
+          [%da p=barn q=note]                           ::  end data
+          [%pc p=home q=will]                           ::  credentials
+          [%pg p=home q=brut]                           ::  signed by
+          [%pl p=home q=brut]                           ::  sealed to
+          [%sm p=home q=home r=brut]                    ::  from to what
+          [%sp p=home q=home r=rock]                    ::  register key
+      ==
+    ++  nail  >[p=rock q=(list home)]                   ::  regime core
+    ++  opal                                            ::  signed/sealed data
+      $:  who=home                                      ::  identity
+          ver=@ud                                       ::  regime version 
+          dat=?(@ [@ @])                                ::  direct/indirect
+      ==
+    ++  pipe                                            ::  one-way channel
+      $:  src=home                                      ::  sender
+          ver=@ud                                       ::  regime version
+          dst=home                                      ::  receiver
+          end=time                                      ::  not valid after
+          key=rock                                      ::  shen key
+      ==
+    ++  will  >[p=nail q=?(@ [@ @])]                    ::  regime cert
+    --
+::
+::  Protocol composers
+::
+=>  |%
+    ++  burt
+      |=  [tic=@ud bur=brut]  ^-  (unit rock)
+      ?-    -.bur
+          %bu
+        !!
+      ::
+          %da
+        !!
+      ::
+          %pc
+        !!
+      ::
+          %pg
+        !!
+      ::
+          %pl
+        !! 
+      ::
+          %sm
+        !!
+      ::
+          %sp
+        !!
+      ::
+      ==
+    --
+::
+::  Protocol interpreters
+::
+=>  |%
+    ++  burp
+      =+  :*  wes=*(set home)
+          ==
+      |=  sap=rock  ^-  work
+      =+  [mag=(end 3 2 sap) bod=(rsh 3 2 sap)]
+      ~|  [%work mag]
+      ?+    mag  !! 
+      ::
+          %bu
+        =+  may=((hard (list rock)) (cue bod))
+        |-  ^-  work
+        ?~(may [~ ~] (clot $$(sap -.may) $(may +.may)))
+      ::
+          %da
+        =+  fay=((hard fact) (cue bod))
+        ?>  (~(has in wes) p:(root p.fay))
+        [[fay ~] ~]
+      ::
+          %pc
+        =+  luy=((hard >[p=home q=@ud r=will]) (cue bod))
+        ?<  |(=(0 p.luy) =(0 q.luy))
+        %+  want
+          /.~/reg/[(rent %h p.luy)]/[(rent %ud (dec q.luy))]/nail
+        |=  lob=*
+        =+  bol=((hard nail) lob)
+        ?>  |-(?~(q.bol & &((~(has in wes) -.q.bol) $(q.bol +.q.bol))))
+        :-  =+  bas=(flop /.~/reg/[(rent %h p.luy)]/[(rent %ud q.luy)])
+            :-  [(flop [%nail bas]) p.r.luy]
+            ?~  q.r.luy  ~
+            :-  =+  ^=  rig
+                    ?:  !=(0 +.q.r.luy)
+                      =+  rig=(drip:ar +.q.r.luy)
+                      ?>  |(=(0 -.q.r.luy) =(rig -.q.r.luy))
+                      rig
+                    ?>  !=(0 -.q.r.luy)
+                    -.q.r.luy
+                ?>  =(p.p.r.luy (shaf rig))
+                [(flop [%ring bas]) rig]
+            ?:  !=(0 +.q.r.luy)
+              [[(flop [%wand bas]) +.q.r.luy] ~]
+            ~
+        ~
+      ::
+          %pl
+        =+  pay=((hard opal) (cue bod))
+        %+  want
+          /.~/reg/[(rent %h who.pay)]/[(rent %ud ver.pay)]/ring
+        |=  lob=*
+        =+  bol=((hard >@uw) lob)
+        %=    $
+            sap
+          ?~  dat.pay
+            (need (chew:ar bol dat.pay))
+          (need (shed (need (chew:ar bol -.dat.pay)) +.dat.pay))
+        ==
+      ==
+    --
+::
+::  Boot interface
+::
+|=  $:  pas=tape                                      ::  initial passphrase
+        now=time                                      ::  atomic not sidereal
+        pyl=(list rock)                               ::  packet log
+    ==
+=+  :*  cop=*(map rock pipe)                          ::  universal codebook
+        liv=(list _task)                              ::  process table
+        pub=*(map barn note)                          ::  public facts
+        tic=`@ud`(lent pyl)                           ::  packet counter
+        reg=*(map home (list will))                   ::  regime state
+    ==
+::
+::  Brain
+::
+|%  
+++  steg
+  |=  fac=fact  ^+  ..steg
+  ~~
+++  step
+  |=  sap=rock  ^+  ..step
+  =+  fud=(burp sap)
+  (stet (spin [p.fud (weld q.fud liv)]))
+  (
+++  stet
+  |=  wok=work  ^+  ..stet
+  ?~  p.wok
+    ..step(liv q.wok)
+  $(..step 
+
+  (spin (burp sap) reap)
+  ?~  fud 
+::
+++  reap
+  |=  tay=barn  ^-  (unit)
+  |-  ^-  (unit)
+  =+  yab=(root tay)
+  ?:  =(0 p.yab)
+    =+  man=(mane q.yab)
+    ?+    man   !!
+        %cop
+      !!
+        %reg
+      !!
+    ==
+  =+  got=(~(get by pub) 
+
+  ?<  ?=(~ tay)
+  =+  hom=(need (slay -.tay))
+  =>  .(hom `@h`?>(?=([%% %h *] hom) q.p.hom))
+  ?:  =(0 hom)
+    ~
+  ?.  ?=([%% %h *] -.+.rey)
+    ~
+  =+  [hom=`@h`q.p.-.+.rey yar=+.+.rey]
+  ?:  =(0 hom)   
+    ?+    -.yar  ~
+        [%% %ta %cop]
+      ?.  ?=([[%% %uw *] ~] +.yar)
+        ~
+      =+  nab=(~(get by cop) q.p.-.yar)
+      ?~(nab ~ ?:((gte now end.nab) ~ nab))
+    ==
+  =+  own=(~(get by urb) hom)
+  ?~  own
+    ~
+  ?+    -.yar  ~
+      [%% %ta %as]                                  ::  static metastate
+    !!
+      [%% %ta %at]                                  ::  dynamic metastate
+    !!
+      [%% %ta %on]                                  ::  namestate
+    !!
+  ==
+--

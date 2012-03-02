@@ -184,6 +184,7 @@
   ++  flop
     ~.  %flop
     |*  a=(list)
+    =>  .(a (homo a))
     ^-  _a
     =+  b=`_a`~
     |-
@@ -1134,11 +1135,7 @@
   ::
   ::  Tier 5 tiles
   ::
-  ++  auth  >[pri=? dar=fort]
   ++  barn  (list span)
-  ++  blob  >*
-  ++  bone  (list _task)
-  ++  bowl  |+(xed=(map barn note) [p=*(list fact) q=*(list _bowl)])
   ++  cask  >@ta
   ++  char  >@ta
   ++  clip  >[p=hair q=tape]
@@ -1149,19 +1146,13 @@
                 [%with p=(map coin coin)]
             ==
   ++  edge  >[p=hair q=(unit >[p=* q=clip])]
-  ++  fact  >[p=barn q=note]
-  ++  fort  >@h
-  ++  frog  |+([wat=barn how=note] [p=*(list fact) q=*(list _bowl)])
   ++  hair  >[p=@ud q=@ud]
-  ++  hash  >@uv
   ++  know  |*(veq=edge ?~(q.veq !! p.+.q.veq))
   ++  like  |*  a=_>*
             |=  b=_`*`[(hair) ~]
             :-  p=(hair -.b) 
             q=?~(+.b ~ [~ [p=(a +>-.b) q=[p=(hair -.b) q=(tape +.b)]]])
-  ++  meat  >[p=wood q=bone]
   ++  mole  >[p=cask q=@]
-  ++  note  >*
   ++  pint  >[q=[p=[p=@ q=@] q=[p=@ q=@]]]
   ++  ring  >@
   ++  rule  |=(tub=clip `edge`[p.tub ~ ~ tub])
@@ -1170,8 +1161,6 @@
                 [%mean p=_^?(|.(*tank))]
                 [%spot p=_spot]
             ==
-  ++  rock  >@uw
-  ++  soul  >[tic=@ud pan=(map barn note) tap=_well]
   ++  span  cask
   ++  spar  (list coin)
   ++  spot  >[p=barn q=pint]
@@ -1181,7 +1170,6 @@
         [%rose p=[p=tape q=tape r=tape] q=(list tank)]
     ::  [%farm p=[p=tape q=tape r=tape] q=(list (list tank))]
     ==
-  ++  task  |+(soul *meat)
   ++  tape  (list char)
   ++  term  >@tam
   ++  tone  $%  [0 p=*]
@@ -1190,8 +1178,6 @@
             ==
   ++  wall  (list tape)
   ++  wand  >@
-  ++  well  |+(barn *(unit note))
-  ++  wood  (list fact)
   ++  xmln  >[t=$|(cask [cask a=(list >[n=cask v=tape])]) c=(list xmln)]
   --
 =>
@@ -2656,54 +2642,6 @@
         [256 hax]
         [1 1]
     ==
-  ::
-  ::  Tier 5e, event inference
-  ::
-  ++  clot  
-    |=  [dis=meat dat=meat] ^-  meat 
-    [(weld p.dis p.dat) (weld q.dis q.dat)]
-  ::
-  ++  hard
-    |*  han=_|+(* *)
-    |=  fud=*  ^-  han
-    ~|  %hard
-    =+  gol=(han fud)
-    ?>  =(gol fud)
-    gol
-  ::
-  ++  spin
-    |=  [[ash=wood arm=bone] sol=soul]
-    =>  .(pan.sol (~(gas by pan.sol) ash))
-    |-  ^-  [p=meat q=soul]
-    =+  ^=  now
-        |-  ^-  meat
-        ?~  arm
-          [~ ~]
-        =+  [neu=(-.arm sol) nex=$(arm +.arm)]
-        [(weld p.neu p.nex) (weld q.neu q.nex)]
-    ?:  &(=(~ p.now) =(arm q.now))
-      [[ash q.now] sol]
-    $(ash (weld p.now ash), pan.sol (~(gas by pan.sol) p.now), arm q.now)
-  ::
-  ++  scry
-    |=  [wat=barn sol=soul]
-    =+  git=(~(get by pan.sol) wat)
-    =+  sip=(tap.sol wat)
-    ?~(git sip ?~(sip git ~|([%scry wat] !!)))
-  ::
-  ++  wait
-    |=  [bax=barn bot=_|+(note *meat)]
-    ^-  _task
-    |+  sol=soul  ^-  meat
-    =+  git=(scry bax sol)
-    ?~  git
-      [~ [^|(..$(sol *soul)) ~]]
-    (bot +.git)
-  ::
-  ++  want
-    |=  [bax=barn bot=_|+(note *meat)]
-    ^-  meat
-    [~ [(wait bax bot) ~]]
   ::
   ::  Tier 5f, simple XML
   ::
@@ -5332,10 +5270,10 @@
             :-  '/'
               ;~  pfix  fas
                 ;~  pose
-                  (tope (sput tol))
-                  (cook pend ;~(plug (easy ~) (tope (sput tol))))
+                  (cook pend ;~(plug (cold ~ col) (tope (sput tol))))
                   (cook phed ;~(plug (plus tis) (tope (sput tol))))
                   (cook pend ;~(plug (plus lus) (tope (sput tol))))
+                  (tope (sput tol))
                 ==
               ==
             :-  '^'

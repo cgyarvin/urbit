@@ -35,7 +35,8 @@ u2_ve_zeus(u2_noun hap)
     return u2_nul;
   } 
   else {
-    u2_noun tah = u2k(u2t(hap));
+    u2_noun hat = u2k(u2t(hap));
+    u2_noun tah = u2_ckb_flop(hat);
     u2_noun dat = u2_ve_file("watt", tah);
 
     if ( u2_none == dat ) {
