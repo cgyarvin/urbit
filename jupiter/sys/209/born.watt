@@ -143,7 +143,7 @@
     ?-    -.lun
     ::                                            ::  [%% p=gene]
         %% 
-      :-  [[%see 0 (sell (slap vax p.lun))] ~]
+      :-  [[%see 0 (sell (slap (slum wad vax  p.lun))] ~]
       ..live
     ::                                            ::  [%dig p=loon] 
         %dig                                      ::  XX ram filter type

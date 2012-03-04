@@ -23,7 +23,7 @@
         void
         u2_ve_gunn_line(u2_noun cor, u2_noun txt);
 
-// #define NEW9
+#define NEW9
 
 /* u2_ve_zeus(): prayer to internal file path.  Return unit.
 */
@@ -417,12 +417,13 @@ u2_ve_zuse_loon(u2_noun lun)
 {
   lun = u2_ve_zuse_loon_load(lun);
   {
-    u2_noun res = u2_ve_hard("zuse", "live", lun);
+    u2_noun res = u2_ve_hard("born", "live", lun);
     u2_noun h_res = u2_h(res);
     u2_noun t_res = u2_t(res);
 
+    // u2_err(u2_Wire, "boom", h_res); 
     u2_ve_zuse_boom(u2k(h_res));
-    u2_ve_step("zuse", u2k(t_res));
+    u2_ve_step("born", u2k(t_res));
 
     u2z(res);
   }

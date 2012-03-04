@@ -185,7 +185,7 @@
     ~.  %flop
     |*  a=(list)
     =>  .(a (homo a))
-    ^-  _a
+    ^+  a
     =+  b=`_a`~
     |-
     ?~  a
@@ -234,7 +234,7 @@
   ++  reel
     ~.  %reel
     |*  [a=(list) b=_=+([p=* q=*] |.(q))]
-    |-  ^-  _q.b
+    |-  ^+  q.b
     ?~  a
       q.b
     (b -.a $(a +.a))
@@ -243,7 +243,7 @@
     ~.  %roll
     |*  [a=(list) b=_=+([p=* q=*] |.(q))]
     |-
-    ^-  _q.b
+    ^+  q.b
     ?~  a
       q.b
     $(a +.a, b b(q (b -.a q.b)))
@@ -252,7 +252,7 @@
     ~.  %skim
     |*  [a=(list) b=_|=(p=* .?(p))]
     |-
-    ^-  _a
+    ^+  a
     ?~  a
       ~
     ?:((b -.a) [-.a $(a +.a)] $(a +.a))
@@ -261,14 +261,14 @@
     ~.  %skip
     |*  [a=(list) b=_|=(p=* .?(p))]
     |-
-    ^-  _a
+    ^+  a
     ?~  a
       ~
     ?:((b -.a) $(a +.a) [-.a $(a +.a)])
   ::  
   ++  slag
     |*  [a=@ b=(list)]
-    ^-  _b
+    ^+  b
     ?:  =(0 a)
       b
     ?~  b
@@ -287,13 +287,13 @@
   ++  sort
     ~.  %sort
     |*  [a=(list) b=_|=([p=* q=*] =(p q))]
-    |-
-    ^-  _a
+    =>  .(a (homo a))
+    |-  ^+  a
     ?~  a
       ~
     %+  weld
       $(a (skim +.a |=(c=_-.a (b c -.a))))
-    `_+.a`[-.a $(a (skim +.a |=(c=_-.a !(b c -.a))))]
+    [-.a $(a (skim +.a |=(c=_-.a !(b c -.a))))]
   ::
   ++  turn
     ~.  %turn
@@ -306,8 +306,9 @@
   ++  weld
     ~.  %weld
     |*  [a=(list) b=(list)]
+    =>  .(a (homo a), b (homo b))
     |-
-    ^-  _b
+    ^+  b
     ?~  a
       b
     [-.a $(a +.a)]
@@ -1010,7 +1011,7 @@
     +-  gas
       ~.  %gas
       |=  b=(list _?>(?=(^ a) n.a))
-      |-  ^-  _a
+      |-  ^+  a
       ?~  b
         a
       $(b +.b, a (put -.b))
@@ -1030,7 +1031,7 @@
     +-  put
       ~.  %put
       |*  b=*
-      |-  ^-  _a
+      |-  ^+  a
       ?~  a
         ^<(apt [b ~ ~])
       ?:  =(b n.a)
@@ -1050,7 +1051,7 @@
     +-  tap
       ~.  %tap
       |=  b=(list _?>(?=(^ a) n.a))
-      ^-  _b
+      ^+  b
       ?~  a
         b
       $(a r.a, b [n.a $(a l.a)])
@@ -1080,7 +1081,7 @@
     +-  gas
       ~.  %gas
       |*  b=(list >[p=* q=*])
-      |-  ^-  _a
+      |-  ^+  a
       ?~  b
         a
       $(b +.b, a (put p.-.b q.-.b))
@@ -1105,7 +1106,7 @@
     +-  put
       ~.  %put
       |*  [b=* c=*]
-      |-  ^-  _a
+      |-  ^+  a
       ?~  a
         ^<(ept [[b c] ~ ~])
       ?:  =(b p.n.a)
@@ -1127,7 +1128,7 @@
     +-  tap
       ~.  %tap
       |=  b=(list _?>(?=(^ a) n.a))
-      ^-  _b
+      ^+  b
       ?~  a
         b
       $(a r.a, b [n.a $(a l.a)])
@@ -1388,11 +1389,11 @@
         ?~(wan (lth +.ort wan) (lth +.ort -.wan))
     =+  ^=  hel
         =+  hel=`(tree _-.leh)`~
-        |-  ^-  _hel
+        |-  ^+  hel
         ?~  leh
           ~
         =+  yal=$(leh +.leh)
-        |-  ^-  _hel
+        |-  ^+  hel
         ?~  yal
           [-.leh ~ ~]
         ?:  (wor p.-.leh p.n.yal)
@@ -2472,7 +2473,7 @@
   ++  shaf                                              ::  half sha-256
     |=  ruz=@ 
     =+  haz=(shax ruz)
-    (mix (end 8 1 ruz) (rsh 8 1 ruz))
+    (mix (end 8 1 haz) (rsh 8 1 haz))
   ::
   ++  shax                                              ::  sha-256
     ~.  %shax
@@ -3914,7 +3915,7 @@
         =+  den=[p=1 q=*(map type >@)]
         =+  vax=*(set type)
         =<  q
-        |-  ^-  _den
+        |-  ^+  den
         ?-    sut
             [%cell *]   $(sut q.sut, den $(sut p.sut))
             [%core *]   $(sut p.sut)

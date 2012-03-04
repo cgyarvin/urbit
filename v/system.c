@@ -184,13 +184,16 @@ u2_ve_hard(const c3_c* wit_c, c3_c* fun_c, u2_noun arg)
 
 /* u2_ve_step(): replace standard tool gate with new core.
 */
-u2_noun
+void
 u2_ve_step(const c3_c* wit_c, u2_noun wip)
 {
   u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
   u2_noun  wit   = u2_ci_string(wit_c);
+  u2_noun  old   = u2_ckd_by_get(u2k(ver_e->tul), u2k(wit));
+  u2_noun  wop   = u2nc(u2k(u2h(old)), wip);
 
-  ver_e->tul = u2_ckd_by_put(ver_e->tul, wit, wip);
+  ver_e->tul = u2_ckd_by_put(ver_e->tul, wit, wop);
+  u2z(old);
 }
 
 /* u2_ve_soft(): use standard tool gate against vase.
