@@ -135,7 +135,10 @@ void
 u2_ve_tool(u2_noun nam)
 {
   u2_steg* ver_e = u2_ve_at();
-  u2_noun  tah   = u2nt(nam, u2_ve_tag(u2_Host.kno_w), c3__sys);
+  u2_noun  num   = u2_ve_tag(u2_Host.kno_w);
+  u2_noun  bon   = u2nc(u2_ci_string(".~"), 
+                        u2nq(c3__sys, u2k(num), u2k(nam), u2_nul));
+  u2_noun  tah   = u2nt(nam, num, c3__sys);
   u2_weak  src   = u2_ve_file("watt", u2_ct(tah));
 
   u2_cm_push(u2nc(c3__lose, u2_cf_path(".", "watt", tah)));
@@ -143,9 +146,19 @@ u2_ve_tool(u2_noun nam)
     u2_cm_bail(c3__fail);
   }
   else {
-    u2_noun gen = u2_ve_ream(src);
-    u2_noun syd, vos;
-   
+    u2_noun gen, syd, vos;
+  
+    if ( u2_Host.kno_w > 210 ) {
+      gen = u2_ve_ream(src);
+      u2z(bon);
+    } else {
+      u2_hevn_be(u2_pryr, god) = u2_ve_zeus;
+      {
+        gen = u2_ve_rain(bon, src);
+      }
+      u2_hevn_be(u2_pryr, god) = 0;
+    }
+
     if ( u2_Host.kno_w > 209 ) {
       syd = u2_ct(ver_e->toy.what ? ver_e->toy.what : ver_e->toy.seed);
     } else {
@@ -153,7 +166,8 @@ u2_ve_tool(u2_noun nam)
     }
     vos = u2_ve_slap(syd, gen);
 
-    ver_e->tul = u2_ckd_by_put(ver_e->tul, nam, u2_cm_bury(vos));
+    // ver_e->tul = u2_ckd_by_put(ver_e->tul, nam, u2_cm_bury(vos));
+    ver_e->tul = u2_ckd_by_put(ver_e->tul, nam, vos);
   }
   u2_cm_drop();
 }
@@ -253,6 +267,12 @@ u2_ve_rest()
   {
     ver_e->toy.seed = u2_cm_bury(u2_ve_bone("seed"));
     ver_e->toy.ream = u2_cm_bury(u2_ve_bone("ream"));
+
+    if ( u2_Host.kno_w <= 210 ) {
+      ver_e->toy.rain = u2_cm_bury(u2_ve_bone("rain"));
+    }
+    else ver_e->toy.rain = 0;
+
     ver_e->toy.slam = u2_cm_bury(u2_ve_bone("slam"));
     ver_e->toy.slap = u2_cm_bury(u2_ve_bone("slap"));
     ver_e->toy.slop = u2_cm_bury(u2_ve_bone("slop"));
@@ -284,7 +304,9 @@ u2_ve_rest()
         u2_ve_tool(c3__zuse);
       }
     } else {
+      // printf("loading born...\n");
       u2_ve_tool(c3__born);
+      // printf("loaded born.\n");
     }
   }
   u2_Host.ver_e[u2_Host.kno_w].mod_m = c3__live;
@@ -522,6 +544,7 @@ u2_ve_mark()
     siz_w += u2_cm_mark_noun(ver_e->toy.seed);
     siz_w += u2_cm_mark_noun(ver_e->toy.what);
     siz_w += u2_cm_mark_noun(ver_e->toy.ream);
+    siz_w += u2_cm_mark_noun(ver_e->toy.rain);
     siz_w += u2_cm_mark_noun(ver_e->toy.sell);
     siz_w += u2_cm_mark_noun(ver_e->toy.skol);
     siz_w += u2_cm_mark_noun(ver_e->toy.slam);

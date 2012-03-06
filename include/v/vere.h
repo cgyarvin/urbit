@@ -93,6 +93,7 @@
           u2_noun seed;                     //  kernel vase
           u2_noun what;                     //  platform vase
           u2_noun ream;                     //  text to gene 
+          u2_noun rain;                     //  text, path to gene 
           u2_noun sell;                     //  vase to tank
           u2_noun skol;                     //  type to tank
           u2_noun slot;                     //  vase fragment
@@ -216,6 +217,11 @@
       */
         u2_noun
         u2_ve_ream(u2_noun txt);
+
+      /* u2_ve_rain(): use rain gate.
+      */
+        u2_noun
+        u2_ve_rain(u2_noun bon, u2_noun txt);
 
       /* u2_ve_slac(): slap with C string as feature.
       */

@@ -25,28 +25,6 @@
 
 #define NEW9
 
-/* u2_ve_zeus(): prayer to internal file path.  Return unit.
-*/
-u2_noun
-u2_ve_zeus(u2_noun hap)
-{
-  if ( (u2_no == u2du(hap)) || (c3_s2('.', '~') != u2h(hap)) ) {
-    u2z(hap);
-    return u2_nul;
-  } 
-  else {
-    u2_noun hat = u2k(u2t(hap));
-    u2_noun tah = u2_ckb_flop(hat);
-    u2_noun dat = u2_ve_file("watt", tah);
-
-    if ( u2_none == dat ) {
-      return u2_nul;
-    } else {
-      return u2nc(u2_nul, dat);
-    }
-  }
-}
-
 /* u2_ve_dump_columns(): return screen column width from OS.
 */
 c3_l

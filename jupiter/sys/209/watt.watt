@@ -3588,6 +3588,20 @@
   |=  txt=@
   q:(~(mint ut %noun) %noun (ream txt)) 
 ::
+++  rain
+  |=  [bon=barn txt=@]
+  =+  vaz=vast
+  (scan (trip txt) (full (ifix [gay gay] tall:vaz(wer bon))))
+::
+++  vest
+  ~.  %vest
+  |=  tub=clip
+  ~|  %vest
+  ^-  (like gene)
+  %.  tub
+  %-  full
+  (ifix [gay gay] tall:vast)
+  
 ++  ream  
   |=  txt=@ 
   ^-  gene

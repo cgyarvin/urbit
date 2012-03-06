@@ -1,4 +1,4 @@
-!:
+::
 =>  |%
     ++  deed                              ::  command-line action
       $^  :*  p=gene 
@@ -124,6 +124,7 @@
     --
 =+  [tic=@ud log=*(list >@uw)]
 =+  wad=*(map term vase)
+=+  cot=#/+cato
 |%
 ++  live
   |=  lun=loon  ^-  [p=(list boom) q=_..live]
@@ -143,7 +144,7 @@
     ?-    -.lun
     ::                                            ::  [%% p=gene]
         %% 
-      :-  [[%see 0 (sell (slap (slum wad vax  p.lun))] ~]
+      :-  [[%see 0 (sell (slap (slum vax wad) p.lun))] ~]
       ..live
     ::                                            ::  [%dig p=loon] 
         %dig                                      ::  XX ram filter type
