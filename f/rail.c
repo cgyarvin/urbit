@@ -1397,10 +1397,11 @@ u2_rl_wash(u2_rail ral_r,
       *u2_at_dog_mug(fiz) = *u2_at_dog_mug(nov);
       // printf("  fixed fiz %x; was %x; now %x\n", 
       //                         fiz, mug_w, *u2_at_dog_mug(fiz));
-    }
-    if ( u2_yes == u2_dust(fiz) ) {
-      u2_rl_wash(ral_r, u2_h(fiz));
-      u2_rl_wash(ral_r, u2_t(fiz));
+    
+      if ( u2_yes == u2_dust(fiz) ) {
+        u2_rl_wash(ral_r, u2_h(fiz));
+        u2_rl_wash(ral_r, u2_t(fiz));
+      }
     }
   }
 }

@@ -166,8 +166,8 @@ u2_ve_tool(u2_noun nam)
     }
     vos = u2_ve_slap(syd, gen);
 
-    // ver_e->tul = u2_ckd_by_put(ver_e->tul, nam, u2_cm_bury(vos));
-    ver_e->tul = u2_ckd_by_put(ver_e->tul, nam, vos);
+    ver_e->tul = u2_ckd_by_put(ver_e->tul, nam, u2_cm_bury(vos));
+    // ver_e->tul = u2_ckd_by_put(ver_e->tul, nam, vos);
   }
   u2_cm_drop();
 }

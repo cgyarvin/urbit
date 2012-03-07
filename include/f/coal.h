@@ -891,6 +891,11 @@
       u2_noun
       u2_cm_bury(u2_noun som);
 
+    /* u2_cm_ruby(): store fresh or volatile noun `som` to freezer - debug.
+    */
+      u2_noun
+      u2_cm_ruby(u2_noun som);
+
     /* u2_cm_bail(): bail out to the local trap.  Does not return.
     ** 
     **  Bail structure:
