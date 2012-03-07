@@ -1,4 +1,4 @@
-!:
+::
 ::  Watt kernel 210.  This file is in the public domain.
 ::
 ?>  ?=(@ .)
@@ -4861,7 +4861,7 @@
                  $(mew t.mew, rag q:(tock p.i.mew $$(gen q.i.mew) rag))
       [%dtkt *]  %noun
       [%dtls *]  [%atom %%]
-      [%dtpt *]  ?:(=(%f p.gen) ?>((lth p.gen 1) flag) [%atom p.gen])
+      [%dtpt *]  ?:(=(%f p.gen) ?>((lte q.gen 1) flag) [%atom p.gen])
       [%dtsg *]  [%cube q.gen ?:(.?(q.gen) %noun [%atom p.gen])]
       [%dttr *]  %noun
       [%dtts *]  flag
