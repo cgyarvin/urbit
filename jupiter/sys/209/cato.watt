@@ -32,9 +32,9 @@
     ++  hood
       |=  bon=barn  ^-  [p=@uw q=yard]
       ?<  ?=(~ bon)
-      =+  kap=(need (slay -.bon))
+      =+  kap=(need (slay i.bon))
       ?>  ?=([%% %uw *] kap)
-      [q.p.kap +.bon]
+      [q.p.kap t.bon]
     ::
     ++  meld
       |=  [yon=(list fact) les=_lens]  ^-  _lens
@@ -45,23 +45,23 @@
     ++  mane
       |=  bon=barn  ^-  [p=@tam q=yard]
       ?<  ?=(~ bon)
-      =+  man=(need (slay -.bon))
+      =+  man=(need (slay i.bon))
       ?>  ?=([%% %tam *] man)
-      [q.p.man +.bon]
+      [q.p.man t.bon]
     ::
     ++  numb
       |=  bon=barn  ^-  [p=@ud q=yard]
       ?<  ?=(~ bon)
-      =+  mun=(need (slay -.bon))
+      =+  mun=(need (slay i.bon))
       ?>  ?=([%% %uw *] mun)
-      [q.p.mun +.bon]
+      [q.p.mun t.bon]
     ::
     ++  root
       |=  bon=barn  ^-  [p=@h q=yard]
       ?<  ?=(~ bon)
-      =+  hom=(need (slay -.bon))
+      =+  hom=(need (slay i.bon))
       ?>  ?=([%% %h *] hom)
-      [q.p.hom +.bon]
+      [q.p.hom t.bon]
     ::
     ++  spin
       |=  [wok=work les=_lens]
@@ -71,7 +71,7 @@
           |-  ^-  work
           ?~  q.wok
             [~ ~]
-          (clot (-.q.wok sul) $(q.wok +.q.wok))
+          (clot (i.q.wok sul) $(q.wok t.q.wok))
       ?:  &(=(~ p.now) =(q.wok q.now))
         [p.wok q.now]
       $(p.wok (weld p.now p.wok), q.wok q.now)
@@ -82,7 +82,7 @@
       =+  git=(les lax)
       ?~  git
         [~ [^|(..$) ~]]
-      (ham +.git)
+      (ham u.git)
     ::
     ++  want
       |=  [lax=barn ham=_|+(note *work)]
@@ -134,7 +134,7 @@
           %bu
         =+  may=((hard (list rock)) (cue bod))
         |-  ^-  work
-        ?~(may [~ ~] (clot $$(sap -.may) $(may +.may)))
+        ?~(may [~ ~] (clot $$(sap i.may) $(may t.may)))
       ::
           %da
         =+  fay=((hard fact) (cue bod))
@@ -151,7 +151,7 @@
           /.~/reg/[moe]/[las]/nail
         |=  lob=*
         =+  bol=((hard nail) lob)
-        ?>  |-(?~(q.bol & &((~(has in wes) -.q.bol) $(q.bol +.q.bol))))
+        ?>  |-(?~(q.bol & &((~(has in wes) i.q.bol) $(q.bol t.q.bol))))
         [[[/.~/reg/[moe]/[rev]/nail r.luy] ~] ~]
       ::
           %pg
@@ -251,31 +251,31 @@
     %da  (jam p.yub q.yub)
     %pc  =+  wyl=(bear p.yub)
          ?<  ?=(~ wyl)
-         (jam p.yub +(p.wyl) q.yub)
+         (jam p.yub +(p.u.wyl) q.yub)
     %pg  =+  wyl=(bear p.yub)
          ?<  ?=(~ wyl)
          =+  lox=$(yub q.yub)
-         =+  wan=~(wand ha r.+.wyl)
+         =+  wan=~(wand ha r.u.wyl)
          %^     jam
               p.yub
-            p.+.wyl 
-         ?:  (~(lilt ha r.+.wyl) lox)
+            p.u.wyl 
+         ?:  (~(lilt ha r.u.wyl) lox)
            (sign:ar wan lox)
          =+  yex=(shax lox)
          [(sign:ar wan yex) (shen yex lox)]
     %pl  =+  wyl=(bear p.yub)
          =+  lox=$(yub q.yub)
-         =+  rin=~(ring ha r.+.wyl)
+         =+  rin=~(ring ha r.u.wyl)
          %^    jam
              p.yub
-           p.+.wyl
-         ?:  (~(lilt ha r.+.wyl) lox)
+           p.u.wyl
+         ?:  (~(lilt ha r.u.wyl) lox)
            (seal:ar rin lox)
          =+  yex=(shax lox)
          [(seal:ar rin yex) (shen yex lox)]
     %ps  =+  wyl=(bear p.yub)
          ?<  ?=(~ wyl)
-         (jam p.yub p.+.wyl q.yub)
+         (jam p.yub p.u.wyl q.yub)
     %sm  !!
     %sp  !!
   ==
@@ -295,12 +295,19 @@
     =+  rot=(root q.man)
     =+  ver=(numb q.rot)
     =+  wyl=(bear p.rot)
-    ?:  |(?=(~ wyl) !=(p.wyl p.ver))
+    ?:  |(?=(~ wyl) !=(p.u.wyl p.ver))
       ~
     =+  tes=(mane q.ver)
-    ?+  tes  ~
-      [%ring ~]  ?~(r.wyl ~ ?:(-.r.wyl [~ +.r.wyl] [~ (drip:ar +.r.wyl)]))
-      [%wand ~]  ?~(r.wyl ~ ?:(-.r.wyl ~ [~ +.r.wyl]))
+    ?+    tes  ~
+        [%ring ~]  
+      ?~  r.u.wyl 
+        ~ 
+      ?:(-.r.u.wyl [~ +.r.u.wyl] [~ (drip:ar +.r.u.wyl)])
+    ::
+        [%wand ~]  
+      ?~  r.u.wyl 
+        ~ 
+      ?:(-.r.u.wyl ~ [~ +.r.u.wyl])
     ==
   ==
 :: 
@@ -324,14 +331,14 @@
       =+  tes=(mane q.ver)
       ?+    tes  !!
           [%nail ~]
-        ?>  =(p.ver +(p.wyl))
+        ?>  =(p.ver +(p.u.wyl))
         (~(put by reg) p.rot [p.ver (nail q.fac) ~])
       ::
           [%ring ~]
-        (~(put by reg) p.rot +.wyl(r [%& (ring q.fac)]))
+        (~(put by reg) p.rot u.wyl(r [%& (ring q.fac)]))
       ::
           [%wand ~]
-        (~(put by reg) p.rot +.wyl(r [%| (wand q.fac)]))
+        (~(put by reg) p.rot u.wyl(r [%| (wand q.fac)]))
       ==
     ==
   ==
@@ -345,6 +352,6 @@
   |=  wok=work  ^+  ..stet
   ?~  p.wok
     ..step(liv q.wok)
-  $(p.wok +.p.wok, ..step (steg -.p.wok))
+  $(p.wok t.p.wok, ..step (steg i.p.wok))
 --
 
