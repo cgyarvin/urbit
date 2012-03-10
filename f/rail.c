@@ -753,6 +753,24 @@ _rl_bloq_free(u2_ray ral_r,
   }
 }
 
+/* _rl_sloq_free(): wrapper for _rl_bloq_free(), disabling signals.
+*/
+static void
+_rl_sloq_free(u2_ray ral_r,
+              u2_ray box_r)
+{
+  return _rl_bloq_free(ral_r, box_r);
+}
+
+/* _rl_sloq_grab(): wrapper for _rl_bloq_grab(), disabling signals.
+*/
+static u2_ray
+_rl_sloq_grab(u2_ray ral_r,
+              c3_w   len_w)
+{
+  return _rl_bloq_grab(ral_r, len_w);
+}
+
 /* u2_rl_ralloc():
 **
 **   Allocate `siz_w` words of raw ray storage.

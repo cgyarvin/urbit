@@ -1148,7 +1148,6 @@
             ==
   ++  edge  >[p=hair q=(unit >[p=* q=clip])]
   ++  hair  >[p=@ud q=@ud]
-  ++  know  |*(veq=edge ?~(q.veq !! p.u.q.veq))
   ++  like  |*  a=_>*
             |=  b=_`*`[(hair) ~]
             :-  p=(hair -.b) 
@@ -1179,6 +1178,7 @@
             ==
   ++  wall  (list tape)
   ++  wand  >@
+  ++  wonk  |*(veq=edge ?~(q.veq !! p.u.q.veq))
   ++  xmln  >[t=$|(cask [cask a=(list >[n=cask v=tape])]) c=(list xmln)]
   --
 =>
@@ -1441,7 +1441,7 @@
     |*  [[les=@ mos=@] fel=_rule]
     ~.  %fun
     |=  tub=clip
-    ^-  (like (list _(know (fel))))
+    ^-  (like (list _(wonk (fel))))
     ?:  =(0 mos)
       [p.tub [~ ~ tub]]
     =+  vex=(fel tub)
@@ -1568,7 +1568,7 @@
   ::
   ++  star
     |*  fel=_rule
-    (stir `(list _(know *fel))`~ |*([a=* b=*] [a b]) fel)
+    (stir `(list _(wonk *fel))`~ |*([a=* b=*] [a b]) fel)
   ::
   ::      tier 5b/4, parsing: ascii characters
   ::
@@ -1590,7 +1590,7 @@
   ++  ker  (just '}')
   ++  ket  (just '^')
   ++  lus  (just '+')
-  ++  hip  (just '-')
+  ++  hep  (just '-')
   ++  pel  (just '(')
   ++  pam  (just '&')
   ++  per  (just ')')
@@ -1609,8 +1609,8 @@
   ::      tier 5b/5, parsing: watty whitespace & termination
   ::
   ++  dog  ;~(plug dot gay)
-  ++  dun  (cold ~ ;~(plug hip hip))
-  ++  duq  (cold ~ ;~(plug tis hip))
+  ++  dun  (cold ~ ;~(plug hep hep))
+  ++  duq  (cold ~ ;~(plug tis hep))
   ++  duz  (cold ~ ;~(plug tis tis))
   ++  gap  (cold ~ (plus ;~(pose vul (mask [^-(@ 10) ' ' ~]))))
   ++  gay  ;~(pose gap (easy ~))
@@ -1620,7 +1620,7 @@
   ::
   ++  alf  ;~(pose low hig)
   ++  aln  ;~(pose low hig nud)
-  ++  bet  ;~(pose (cold 2 hip) (cold 3 lus))
+  ++  bet  ;~(pose (cold 2 hep) (cold 3 lus))
   ++  bin  (bass 2 (most gon but))
   ++  but  (cook |=(a=@ (sub a '0')) (shim '0' '1'))
   ++  dem  (bass 10 (most gon dit))
@@ -1642,12 +1642,12 @@
   ++  fud
     %+  cook 
       |=([a=@ b=@] (add (lsh 4 1 a) (mix a b)))
-    ;~(plug fod ;~(pfix hip fod))
+    ;~(plug fod ;~(pfix hep fod))
   ::
   ++  fwd  
     %+  cook 
       |=([a=@ b=@] (add (lsh 4 1 a) (mix a b)))
-    ;~(plug fad ;~(pfix hip fod))
+    ;~(plug fad ;~(pfix hep fod))
   ::
   ++  fyd
     %+  cook
@@ -1669,7 +1669,7 @@
   ++  sym 
     %+  cook
       |=(a=tape (rap 3 ^-((list >@) a)))
-    ;~(plug low (star ;~(pose nud low hip)))
+    ;~(plug low (star ;~(pose nud low hep)))
   ::
   ++  ven  ;~  (comp |=([a=@ b=@] (peg a b)))
              bet
@@ -1944,7 +1944,7 @@
                (shim 'a' 'z')
                (shim 'A' 'Z')
                (shim '0' '9')
-               hip
+               hep
                (cold 32 dot)
                ;~(pfix sig ;~(pose sig dot bix))
              ==
@@ -1967,7 +1967,7 @@
     ++  til  (boss 256 (stun [3 3] low))
     ++  voy  ;~(pfix bas ;~(pose bas soq bix))
     ++  vym  (bass 256 ;~(plug low (star ;~(pose low nud))))
-    ++  vyn  (bass 256 ;~(plug hip vym (easy ~)))
+    ++  vyn  (bass 256 ;~(plug hep vym (easy ~)))
     --
   ++  ag
     |%
@@ -2000,10 +2000,10 @@
         |=  [syn=? mol=mole]  ^-  mole
         ?>  =('u' (end 3 1 p.mol))
         [(cat 3 's' (rsh 3 1 p.mol)) (new:si syn q.mol)]
-    ;~  pfix  hip
+    ;~  pfix  hep
       ;~  pose
         (cook |=(a=mole (neg | a)) bask)
-        ;~(pfix hip (cook |=(a=mole (neg & a)) bask))
+        ;~(pfix hep (cook |=(a=mole (neg & a)) bask))
       ==
     ==
   ::
@@ -2044,7 +2044,7 @@
   ++  real
     =+  ^=  vox
         ;~  plug
-          ;~(pose (cold | hip) (easy &))
+          ;~(pose (cold | hep) (easy &))
           ;~(plug dim:ag ;~(pose ;~(pfix dot dim:ag) (easy 0)))
         ==
     ;~  pose
@@ -2473,7 +2473,7 @@
   ++  shaf                                              ::  half sha-256
     |=  ruz=@ 
     =+  haz=(shax ruz)
-    (mix (end 8 1 haz) (rsh 8 1 haz))
+    (mix (end 7 1 haz) (rsh 7 1 haz))
   ::
   ++  shax                                              ::  sha-256
     ~.  %shax
@@ -4933,24 +4933,24 @@
   ::
   ++  seek
     ~.  %seek
-    |=  [way=?(%read %rite) hep=twig]
+    |=  [way=?(%read %rite) hyp=twig]
     ^-  port
-    ?~  hep
+    ?~  hyp
       [1 %& sut]
-    =+  zar=$(hep t.hep)
+    =+  zar=$(hyp t.hyp)
     =+  ^=  syp
         ?-    -.q.zar
             &  p.q.zar
             |  (fire (turn q.q.zar |=([p=type q=gate] [p [& ~ 1]])))
         ==
-    ?-    i.hep
+    ?-    i.hyp
         @
       =>  .(sut syp)
-      =+  hud=(fink way i.hep)
+      =+  hud=(fink way i.hyp)
       [(peg p.zar p.hud) q.hud]
     ::
         [~ *]
-      [(peg p.zar p.i.hep) %& (peek(sut syp) way p.i.hep)]
+      [(peg p.zar p.i.hyp) %& (peek(sut syp) way p.i.hyp)]
     ==
   ::
   ++  snap
@@ -5224,7 +5224,7 @@
                   ['.' (rune dot %brdt expa)]
                   ['^' (rune ket %brkt expr)]
                   ['*' (rune tar %brtr expb)]
-                  ['-' (rune hip %brhp expa)]
+                  ['-' (rune hep %brhp expa)]
                 ==
               ==
             :-  '%'
@@ -5234,7 +5234,7 @@
                   ['.' (rune dot %cndt expb)]
                   ['^' (rune ket %cnkt expf)]
                   ['+' (rune lus %cnls expc)]
-                  ['-' (rune hip %cnhp expk)]
+                  ['-' (rune hep %cnhp expk)]
                   ['~' (rune sig %cnsg expq)]
                   ['*' (rune tar %cntr expp)]
                   ['=' (rune tis %cnts expj)]
@@ -5258,7 +5258,7 @@
                 %-  stew  :~
                   ['^' (rune ket %clkt expf)]
                   ['+' (rune lus %clls expc)]
-                  ['-' (rune hip %clhp expb)]
+                  ['-' (rune hep %clhp expb)]
                   ['~' (rune sig %clsg exps)]
                   ['*' (rune tar %cltr exps)]
                 ==
@@ -5289,7 +5289,7 @@
                   ['.' (rune dot %ktdt expb)]
                   ['<' (rune gal %ktgl expb)]
                   ['>' (rune gar %ktgr expb)]
-                  ['-' (rune hip %kthp expb)]
+                  ['-' (rune hep %kthp expb)]
                   ['+' (rune lus %ktls expb)]
                   ['&' (rune pam %ktpm expa)]
                   ['~' (rune sig %ktsg expa)]
@@ -5308,7 +5308,7 @@
                   ['<' (rune gal %sggl hinb)]
                   ['>' (rune gar %sggr hinb)]
                   ['#' (rune hax %sghx expg)]
-                  ['-' (rune hip %sghp hinc)]
+                  ['-' (rune hep %sghp hinc)]
                   ['^' (rune ket %sgkt expa)]
                   ['+' (rune lus %sgls hinc)]
                   ['&' (rune pam %sgpm expb)]
@@ -5328,7 +5328,7 @@
                 %-  stew  :~
                   ['<' (rune gal %tsgl expb)]
                   ['>' (rune gar %tsgr expb)]
-                  ['-' (rune hip %tshp expb)]
+                  ['-' (rune hep %tshp expb)]
                   ['+' (rune lus %tsls expb)]
                 ==
               ==
@@ -5340,7 +5340,7 @@
                   ['.' (rune dot %wtdt expc)]
                   ['<' (rune gal %wtgl expb)]
                   ['>' (rune gar %wtgr expb)]
-                  ['-' (rune hip %wthp exph)]
+                  ['-' (rune hep %wthp exph)]
                   ['=' (rune tis %wtts expb)]
                   ['+' (rune lus %wtls expm)]
                   ['&' (rune pam %wtpm exps)]
