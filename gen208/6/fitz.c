@@ -22,7 +22,7 @@
     wix_y = (0 == wix_w) ? 0 : u2_byte((wix_w - 1), wix);
     if ( (wix_y < 'A') || (wix_y > 'Z') ) wix_y = 0;
 
-    if ( yaz_y ) {
+    if ( yaz_y && wix_y ) {
       if ( !wix_y || (wix_y > yaz_y) ) {
         return u2_no;
       }

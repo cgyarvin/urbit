@@ -88,7 +88,7 @@
     --
 =+  [tic=@ud log=*(list >@uw)]
 =+  wad=*(map term vase)
-=+  cot=#/+cato
+::  =+  cot=#/+cato
 |%
 ++  live
   |=  lun=loon  ^-  [p=(list boom) q=_..live]
@@ -138,8 +138,8 @@
     ==
   --
 ::
-++  slan
-  |=  cad=@ta  ~|  %slan  ^-  loon
+++  scan
+  |=  cad=@ta  ~|  %scan  ^-  loon
   (rash cad x-loon)
 ::
 ++  swan

@@ -422,7 +422,11 @@ u2_ve_zuse_line(u2_noun lin)
       u2_ve_zuse_deed(ded);
     } else {
 #ifdef NEW9
-      ded = u2_ve_hard("born", "slan", lin);
+      if ( u2_Host.kno_w > 208 ) {
+        ded = u2_ve_hard("born", "slan", lin);
+      } else {
+        ded = u2_ve_hard("born", "scan", lin);
+      }
       u2_ve_zuse_loon(ded);
 #else
       ded = u2_ve_hard("born", "scan", lin);

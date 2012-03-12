@@ -164,7 +164,7 @@
             sap
           ?~  dat.pay
             (need (take:ar bol dat.pay))
-          (need (shed (need (chew:ar bol -.dat.pay)) +.dat.pay))
+          (need (shed (need (take:ar bol -.dat.pay)) +.dat.pay))
         ==
       ::
           %pl
