@@ -1,31 +1,31 @@
 new: 
   bar |
   bas \
+  buc $
   cab _
   cen %
   col :
   com ,
-  doc "
+  doq "
   dot .
   fas /
   gal < 
   gar >
   hax #
-  hus $
+  hep - 
   kel {
   ker }
   ket ^
   lus +
-  mus - 
-  pal (
+  pel (
   pam &
-  par )
+  per )
   pat @
   sel [
   sem ;
   ser ]
   sig ~
-  soc '
+  soq '
   tar *
   tic `
   tis =
@@ -68,98 +68,117 @@ old:
 
 Watt GTO: Gran Tabula Operazioni 
 
+  |=  %brts  AM  "bartis"  "funk"  declare a function
+
+
+
 (Copied from watt.watt - recopy if in doubt.)
 ::::
 ::  
   ++  gene
-    $&  *term
-      [~ p=*axis]
-      [%brcl p=(gene) q=(gene)]
-      [%brcn p=(gene)]
-      [%brdt p=(gene)]
-      [%brls p=(gene) q=(gene)]
-      [%brms p=(gene)]
-      [%brtr p=(gene) q=(gene)]
-      [%brts p=(gene) q=(gene)]
-      [%brzp p=(gene) q=(gene)]
-      [%clkt p=(gene) q=(gene) r=(gene) s=(gene)]
-      [%clls p=(gene) q=(gene) r=(gene)]
-      [%clsg p=((list gene))]
-      [%clsp p=(gene) q=(gene)]
-      [%cltr p=((list gene))]
-      [%cnbr p=(twig) q=(gene) r=((list ~[p=(gene) q=(gene)]))]
-      [%cncl p=(gene) q=(gene)]
-      [%cndt p=(gene) q=(gene)]
-      [%cnkt p=(gene) q=(gene) r=(gene) s=(gene)]
-      [%cnls p=(gene) q=(gene) r=(gene)]
-      [%cnms p=(gene) q=((list gene))]
-      [%cnsg p=(twig) q=(gene) r=(gene)]
-      [%cntr p=(gene)]
-      [%cnts p=(twig) q=((list ~[p=(gene) q=(gene)]))]
-      [%dtls p=(gene)]
-      [%dtpt p=*term q=@]
-      [%dtsg p=*term q=*]
-      [%dttr p=(gene) q=(gene)]
-      [%dtts p=(gene) q=(gene)]
-      [%dtwt p=(gene)]
-      [%hsbr p=(gene) q=((list gene)) r=((map term foot))]
-      [%hscn p=((list gene)) q=((map term foot))]
-      [%hskt p=((list gene)) q=((map term foot))]
-      [%hspm p=(gene) q=((list gene)) r=((map term foot))]
-      [%hssg p=((list gene)) q=((map term foot))]
-      [%hstr p=((list gene)) q=((map term foot))]
-      [%hsts p=(gene) q=(gene) r=((map term foot))]
-      [%ktcn p=(gene) q=(gene)]
-      [%ktdt p=(gene) q=(gene)]
-      [%ktgl p=(gene) q=(gene)]
-      [%ktgr p=(gene) q=(gene)]
-      [%ktms p=(gene) q=(gene)]
-      [%ktsg p=(gene)]
-      [%ktts p=*term q=(gene)]
-      [%pmcl p=(gene) q=((map term foot))]
-      [%pmcn p=((map term foot))]
-      [%pmdt p=((map term foot))]
-      [%pmls p=(gene) q=((map term foot))]
-      [%pmms p=(gene) q=((map term foot))]
-      [%pmts p=(gene) q=((map term foot))]
-      [%pmzp p=(gene) q=((map term foot))]
-      [%sgbr p=(gene) q=(gene)]
-      [%sgcl p=[p=@ q=@] q=(gene)]
-      [%sgcn p=(chop) q=(gene) r=((list ~[p=*term q=(gene)])) s=(gene)]
-      [%sgdt p=(chop) q=(gene)]
-      [%sggl p=($&(*term [p=*term q=(gene)])) q=(gene)]
-      [%sggr p=($&(*term [p=*term q=(gene)])) q=(gene)]
-      [%sghx p=(gene)]
-      [%sgkt p=(gene)]
-      [%sgls p=@ q=(gene)]
-      [%sgms p=@ q=(gene)]
-      [%sgpm p=(gene) q=(gene)]
-      [%sgsg p=(gene) q=(gene)]
-      [%sgts p=(gene) q=(gene)]
-      [%smcl p=(gene) q=((list gene))]
-      [%smsg p=(gene) q=((list gene))]
-      [%smts p=*{%atom %noun %cell %flag %null}]
-      [%tsgl p=(gene) q=(gene)]
-      [%tsgr p=(gene) q=(gene)]
-      [%tsls p=(gene) q=(gene)]
-      [%tsms p=(gene) q=(gene)]
-      [%wtbr p=((list gene))]
-      [%wtcl p=(gene) q=(gene) r=(gene)]
-      [%wtdt p=(gene) q=(gene) r=(gene)]
-      [%wtgl p=(gene) q=(gene)]
-      [%wtgr p=(gene) q=(gene)]
-      [%wtls p=(gene) q=(gene) r=((list ~[p=(gene) q=(gene)]))]
-      [%wtms p=(gene) q=((list ~[p=(gene) q=(gene)]))]
-      [%wtpm p=((list gene))]
-      [%wtsg p=(gene) q=(gene) r=(gene)]
-      [%wtts p=(gene) q=(gene)]
-      [%wtzp p=(gene)]
-      [%zpcb p=*spot q=(gene)]
-      [%zpcm p=(gene) q=(gene)]
+    $&  [p=gene q=gene]
+    $%
+      [%% p=axis]
+    ::
+      [%brts p=gene q=gene]
+      [%brls p=gene q=gene]
+      [%brdt p=gene]
+      [%brhp p=gene]
+      [%brtr p=gene q=gene]
+    ::
+      [%clkt p=gene q=gene r=gene s=gene]
+      [%clhp p=gene q=gene]
+      [%clls p=gene q=gene r=gene]
+      [%clsg p=(list gene)]
+      [%cltr p=(list gene)]
+    ::
+      [%cntr p=twig q=gene r=(list >[p=gene q=gene])]
+      [%cncl p=gene q=gene]
+      [%cndt p=gene q=gene]
+      [%cnkt p=gene q=gene r=gene s=gene]
+      [%cnbc p=term]
+      [%cnls p=gene q=gene r=gene]
+      [%cnhp p=gene q=(list gene)]
+      [%cnhx p=twig]
+      [%cnsg p=twig q=gene r=gene]
+      [%cnts p=twig q=(list >[p=gene q=gene])]
+    ::
+      [%dtkt p=gene]
+      [%dtls p=gene]
+      [%dtpt p=term q=@]
+      [%dtsg p=term q=*]
+      [%dttr p=gene q=gene]
+      [%dtts p=gene q=gene]
+      [%dtwt p=gene]
+    ::
+      [%bcbr p=gene q=gene]
+      [%bccb p=gene]
+      [%bccl p=(list gene)]
+      [%bccn p=gene q=(list gene)]
+      [%bcgr p=gene]
+      [%bckt p=gene]
+      [%bcpm p=gene q=gene]
+      [%bctr p=gene]
+      [%bcts p=?([%atom odor] %noun %cell %flag %null)]
+      [%bcwt p=gene q=(list gene)]
+    ::
+      [%ktbr p=gene]
+      [%ktls p=gene q=gene]
+      [%ktdt p=gene q=gene]
+      [%ktgl p=gene q=gene]
+      [%ktgr p=gene q=gene]
+      [%kthp p=gene q=gene]
+      [%ktpm p=gene]
+      [%ktsg p=gene]
+      [%ktts p=term q=gene]
+      [%ktwt p=gene]
+    ::
+      [%brcb p=gene q=(map term foot)]
+      [%brcn p=(map term foot)]
+      [%brkt p=gene q=(map term foot)]
+    ::
+      [%sgbr p=gene q=gene]
+      [%sgcl p=[p=@ q=@] q=gene]
+      [%sgcn p=chop q=gene r=(list >[p=term q=gene]) s=gene]
+      [%sgdt p=chop q=gene]
+      [%sggl p=$|(term [p=term q=gene]) q=gene]
+      [%sggr p=$|(term [p=term q=gene]) q=gene]
+      [%sgbc p=term q=gene]
+      [%sghx p=term q=gene]
+      [%sgkt p=gene]
+      [%sgls p=@ q=gene]
+      [%sghp p=@ q=gene]
+      [%sgpm p=gene q=gene]
+      [%sgsg p=gene q=gene]
+      [%sgts p=gene q=gene]
+    ::
+      [%smcl p=gene q=(list gene)]
+      [%smdq p=(list goop)]
+      [%smsg p=gene q=(list gene)]
+    ::
+      [%tsgl p=gene q=gene]
+      [%tsgr p=gene q=gene]
+      [%tsls p=gene q=gene]
+      [%tshp p=gene q=gene]
+    ::
+      [%wtbr p=(list gene)]
+      [%wthp p=gene q=(list >[p=gene q=gene])]
+      [%wtcl p=gene q=gene r=gene]
+      [%wtcn p=gene q=gene]
+      [%wtdt p=gene q=gene r=gene]
+      [%wtts p=gene q=gene]
+      [%wtgl p=gene q=gene]
+      [%wtgr p=gene q=gene]
+      [%wtls p=gene q=gene r=(list >[p=gene q=gene])]
+      [%wtpm p=(list gene)]
+      [%wtsg p=gene q=gene r=gene]
+      [%wtzp p=gene]
+    ::
+      [%zpcb p=spot q=gene]
+      [%zpcm p=gene q=gene]
       [%zpcn ~]
-      [%zpfs p=(gene)]
-      [%zphx p=(gene)]
-      [%zpsm p=(gene) q=(gene)]
-      [%zpts p=(gene)]
+      [%zpfs p=gene]
+      [%zpsm p=gene q=gene]
+      [%zpts p=gene]
       [%zpzp ~]
     ==
