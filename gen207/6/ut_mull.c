@@ -158,13 +158,19 @@
       } 
       else {
         u2_noun qn_dab = u2_t(n_dab);
-        u2_noun pqn_dab = u2_t(qn_dab);   //  XX actual wing support
-        u2_noun ppqn_dab = u2_h(pqn_dab);
-        u2_noun qpqn_dab = u2_t(pqn_dab);
-        u2_noun vad = (u2_yes == ppqn_dab)
-                        ? _mull_in(wir_r, van, sut, c3__noun, dox, qpqn_dab)
-                        : u2_nul;
+        u2_noun vad;
 
+        switch ( u2_h(qn_dab) ) {
+          default: u2_bl_bail(wir_r, c3__exit);
+          case c3__ash: {
+            vad = _mull_in(wir_r, van, sut, c3__noun, dox, u2_t(qn_dab));
+            break;
+          }
+          case c3__elm: {
+            vad = u2_nul;
+            break;
+          }
+        }
         u2_rz(wir_r, vad);
 
         if ( (u2_nul == l_dab) && (u2_nul == r_dab) ) {

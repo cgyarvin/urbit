@@ -54,28 +54,25 @@
         if ( (u2_no == u2_dust(qn_dab)) || (u2_no == u2_dust(qn_hem)) ) {
           return u2_bl_bail(wir_r, c3__fail);
         } 
-        else {
-          if ( u2_h(qn_dab) != u2_h(qn_hem) ) {
-            return u2_no;
-          } else if ( u2_yes == u2_h(qn_dab) ) {
-            u2_noun pqn_dab = u2_t(qn_dab);
-            u2_noun pqn_hem = u2_t(qn_hem);
-            u2_noun qpqn_dab = u2_t(pqn_dab);
-            u2_noun qpqn_hem = u2_t(pqn_hem);
-            u2_noun vis = j2_mcy(Pt6, ut, play)(wir_r, van, sut, qpqn_dab);
-            u2_noun lon = j2_mcy(Pt6, ut, play)(wir_r, van, ref, qpqn_hem);
-            u2_flag ret = _nest_dext(wir_r, van, vis, tel, lon, gil);
-
-            u2_rz(wir_r, vis);
-            u2_rz(wir_r, lon);
-            return ret;
-          } else {
-            if ( u2_nul == u2_t(qn_dab) ) {
-              return u2_yes;
+        else switch ( u2_h(qn_dab) ) {
+          default: return u2_bl_bail(wir_r, c3__exit);
+          case c3__ash: {
+            if ( c3__ash != u2_h(qn_hem) ) {
+              return u2_no;
             } else {
-              return _nest_cram
-                (wir_r, van, sut, tel, ref, u2_t(qn_dab), u2_t(qn_hem), gil);
+              u2_noun pqn_dab = u2_t(qn_dab);
+              u2_noun pqn_hem = u2_t(qn_hem);
+              u2_noun vis = j2_mcy(Pt6, ut, play)(wir_r, van, sut, pqn_dab);
+              u2_noun lon = j2_mcy(Pt6, ut, play)(wir_r, van, ref, pqn_hem);
+              u2_flag ret = _nest_dext(wir_r, van, vis, tel, lon, gil);
+
+              u2_rz(wir_r, vis);
+              u2_rz(wir_r, lon);
+              return ret;
             }
+          }
+          case c3__elm: {
+            return u2_sing(qn_dab, qn_hem);
           }
         }
       }

@@ -21,6 +21,9 @@
     u2_noun j2_mc(Pt6, ap, open)(u2_wire, u2_noun); 
     u2_noun j2_mc(Pt6, ap, hack)(u2_wire, u2_noun); 
 
+    static u2_noun
+    _ap_open_l(u2_wire, u2_noun, u2_noun);
+
     // make sure these match the array below!
     //
 #   define _ap_jet_late  0
@@ -98,7 +101,7 @@
     return u2_bc
       (wir_r, c3__brcn,
               u2_bt(wir_r,
-                    u2_bq(wir_r, u2_blip, u2_yes, u2_yes, u2_rx(wir_r, p_gen)),
+                    u2_bt(wir_r, u2_blip, c3__ash, u2_rx(wir_r, p_gen)),
                     u2_nul, 
                     u2_nul));
   }
@@ -356,7 +359,7 @@
   _open_do_pqr(cnsg)  //  %~
   {
     return u2_bq
-      (wir_r, c3__cnbr,
+      (wir_r, c3__cntr,
               u2_rx(wir_r, p_gen),
               u2_rx(wir_r, q_gen),
               u2_bo(wir_r,
@@ -369,9 +372,9 @@
 ***/
   _open_do_pq(brkt)   //  &-
   {
-    //  [%brkt *]   [%tsgr [%brcn (~(put by q.gen) %% [& & p.gen])] %%]
+    //  [%brkt *]   [%tsgr [%brcn (~(put by q.gen) %% [%ash p.gen])] %%]
     //
-    u2_noun diz = u2_bt(wir_r, u2_yes, u2_yes, u2_rx(wir_r, p_gen));
+    u2_noun diz = u2_bc(wir_r, c3__ash, u2_rx(wir_r, p_gen));
     u2_noun ret = u2_bt
       (wir_r,
        c3__tsgr,
@@ -910,6 +913,7 @@
   **/
     u2_noun                                                       //  transfer
     j2_mcy(Pt6, ap, hack)(u2_wire wir_r, 
+                          u2_noun ter,                            //  retain
                           u2_noun gen)                            //  retain
     {
       u2_noun p_gen, q_gen;
@@ -927,7 +931,7 @@
             return u2_bc(wir_r, u2_no, u2_rx(wir_r, gen));
           }
           else {
-            u2_noun pyr = j2_mcy(Pt6, ap, hack)(wir_r, q_gen);
+            u2_noun pyr = j2_mcy(Pt6, ap, hack)(wir_r, ter, q_gen);
 
             if ( u2_yes == u2_h(pyr) ) {
               ret = u2_bt
@@ -950,15 +954,9 @@
             return ret;
           }
         }
-        case c3__clhp: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
-        {
-          return u2_bt(wir_r, u2_yes, 
-                              u2_rx(wir_r, p_gen),
-                              u2_rx(wir_r, q_gen));
-        }
         case c3__zpcb: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
         {
-          u2_noun pyr = j2_mcy(Pt6, ap, hack)(wir_r, q_gen);
+          u2_noun pyr = j2_mcy(Pt6, ap, hack)(wir_r, ter, q_gen);
 
           if ( u2_yes == u2_h(pyr) ) {
             ret = u2_bt
@@ -984,7 +982,7 @@
       }
 
       {
-        u2_noun voq = _open_in(wir_r, gen);
+        u2_noun voq = _ap_open_l(wir_r, ter, gen);
 
         if ( u2_none == voq ) {
           return u2_bc(wir_r, u2_no, u2_rx(wir_r, gen));
@@ -993,7 +991,7 @@
           return u2_bc(wir_r, u2_no, voq);
         }
         else {
-          ret = j2_mcy(Pt6, ap, hack)(wir_r, voq); 
+          ret = j2_mcy(Pt6, ap, hack)(wir_r, ter, voq); 
 
           u2_rl_lose(wir_r, voq);
           return ret;
@@ -1010,7 +1008,9 @@
       if ( u2_none == (gen = u2_frag(u2_cw_sam, cor)) ) {
         return u2_bl_bail(wir_r, c3__fail);
       } else {
-        return j2_mcy(Pt6, ap, hack)(wir_r, gen);
+        u2_noun ter = u2_frag(u2_cw_con, cor);
+
+        return j2_mcy(Pt6, ap, hack)(wir_r, ter, gen);
       }
     }
 

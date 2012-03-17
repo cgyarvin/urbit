@@ -29,4 +29,3 @@ To stage down from X to Y == (X - 1) on vere computer C, steps:
     - ln -s C/sys/Y sL
     - ln -s genY kL
 
-  :,

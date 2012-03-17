@@ -30,11 +30,10 @@
  
         if ( (u2_nul == l_dab) && (u2_nul == r_dab) ) {
           if ( (u2_yes == u2_dust(qn_dab)) &&
-               (u2_yes == u2_h(qn_dab)) &&
                (u2_yes == u2_sing(cog, pn_dab)) ) {
             return u2_bt(wir_r, u2_nul, 
                                 u2_rx(wir_r, axe), 
-                                u2_rx(wir_r, u2_t(qn_dab)));
+                                u2_rx(wir_r, qn_dab));
           }
           else {
             return u2_nul;
@@ -42,11 +41,10 @@
         }
         else if ( (u2_nul == l_dab) ) {
           if ( (u2_yes == u2_dust(qn_dab)) &&
-               (u2_yes == u2_h(qn_dab)) &&
                (u2_yes == u2_sing(cog, pn_dab)) ) {
             return u2_bt(wir_r, u2_nul, 
                                 j2_mbc(Pt3, peg)(wir_r, axe, _2),
-                                u2_rx(wir_r, u2_t(qn_dab)));
+                                u2_rx(wir_r, qn_dab));
           }
           else {
             if ( u2_yes == j2_mbc(Pt3, gor)(wir_r, cog, pn_dab) ) {
@@ -64,11 +62,10 @@
         }
         else if ( (u2_nul == r_dab) ) {
           if ( (u2_yes == u2_dust(qn_dab)) &&
-               (u2_yes == u2_h(qn_dab)) &&
                (u2_yes == u2_sing(cog, pn_dab)) ) {
             return u2_bt(wir_r, u2_nul, 
                                 j2_mbc(Pt3, peg)(wir_r, axe, _2),
-                                u2_rx(wir_r, u2_t(qn_dab)));
+                                u2_rx(wir_r, qn_dab));
           }
           else {
             if ( u2_yes == j2_mbc(Pt3, gor)(wir_r, cog, pn_dab) ) {
@@ -86,11 +83,10 @@
         }
         else {
           if ( (u2_yes == u2_dust(qn_dab)) &&
-               (u2_yes == u2_h(qn_dab)) &&
                (u2_yes == u2_sing(cog, pn_dab)) ) {
             return u2_bt(wir_r, u2_nul, 
                                 j2_mbc(Pt3, peg)(wir_r, axe, _2),
-                                u2_rx(wir_r, u2_t(qn_dab)));
+                                u2_rx(wir_r, qn_dab));
           }
           else {
             if ( u2_yes == j2_mbc(Pt3, gor)(wir_r, cog, pn_dab) ) {

@@ -108,11 +108,21 @@
             }
           }
           else {
-            u2_noun p_zem, q_zem;
+            u2_noun u_zem = u2_t(zem);
+            u2_noun pu_zem = u2_h(u_zem);
+            u2_noun qu_zem = u2_t(u_zem);
+            u2_noun dur;
             u2_noun mut;
             u2_noun pro;
 
-            u2_mean(zem, 6, &p_zem, 7, &q_zem, 0);
+            if ( c3__ash == u2_h(qu_zem) ) {
+              dur = u2_bc(wir_r, u2_yes, u2_rx(wir_r, u2_t(qu_zem)));
+            } 
+            else if ( c3__elm == u2_h(qu_zem) ) {
+              dur = u2_bc(wir_r, u2_no, u2_rx(wir_r, u2_t(qu_zem)));
+            }
+            else return u2_bl_error(wir_r, "find-door");
+
             mut = u2_bt(wir_r, c3__core,
                                u2_rx(wir_r, p_sut),
                                u2_bt(wir_r, c3__gold,
@@ -124,9 +134,9 @@
                       _1,
                       u2_no,
                       u2_bc
-                        (wir_r, j2_mbc(Pt3, peg)(wir_r, 3, p_zem),
+                        (wir_r, j2_mbc(Pt3, peg)(wir_r, 3, pu_zem),
                                 u2_bc(wir_r, 
-                                      u2_bc(wir_r, mut, u2_rx(wir_r, q_zem)),
+                                      u2_bc(wir_r, mut, dur),
                                       u2_nul)));
             u2_rz(wir_r, zem);
             return pro;

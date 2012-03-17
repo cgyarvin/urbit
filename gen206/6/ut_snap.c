@@ -27,7 +27,8 @@
           return u2_bl_bail(wir_r, c3__fail);
         }
         else {
-          u2_noun haq = j2_mcy(Pt6, ap, hack)(wir_r, gen);
+          u2_noun ter = u2_frag(u2_cw_con_2, van);
+          u2_noun haq = j2_mcy(Pt6, ap, hack)(wir_r, ter, gen);
 
           if ( u2_yes == u2_h(haq) ) {
             u2_noun p_haq, q_haq;
@@ -56,7 +57,8 @@
         }
       }
       case c3__fork: {
-          u2_noun haq = j2_mcy(Pt6, ap, hack)(wir_r, gen);
+          u2_noun ter = u2_frag(u2_cw_con_2, van);
+          u2_noun haq = j2_mcy(Pt6, ap, hack)(wir_r, ter, gen);
 
           if ( u2_yes == u2_h(haq) ) {
             u2_noun p_haq, q_haq;

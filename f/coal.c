@@ -400,6 +400,7 @@ u2_cm_bail(c3_l how_l)
     if ( c3__fail == how_l ) {
       c3_assert(0);
     }
+    c3_assert(0);
   }
   u2_tx_sys_bit(u2_Wire, u2_yes);
 
