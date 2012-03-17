@@ -1141,15 +1141,149 @@ J207_OFILES=\
        $(J207_6_OFILES_UT) \
        gen207/watt.o
 
+J206_1_OFILES=\
+       gen206/1/add.o \
+       gen206/1/dec.o \
+       gen206/1/div.o \
+       gen206/1/gte.o \
+       gen206/1/gth.o \
+       gen206/1/lte.o \
+       gen206/1/lth.o \
+       gen206/1/mod.o \
+       gen206/1/mul.o \
+       gen206/1/sub.o
+
+J206_2_OFILES=\
+       gen206/2/bind.o \
+       gen206/2/clap.o \
+       gen206/2/drop.o \
+       gen206/2/flop.o \
+       gen206/2/lent.o \
+       gen206/2/levy.o \
+       gen206/2/lien.o \
+       gen206/2/need.o \
+       gen206/2/reel.o \
+       gen206/2/roll.o \
+       gen206/2/skim.o \
+       gen206/2/skip.o \
+       gen206/2/slag.o \
+       gen206/2/snag.o \
+       gen206/2/sort.o \
+       gen206/2/turn.o \
+       gen206/2/weld.o
+
+J206_3_OFILES=\
+       gen206/3/bex.o \
+       gen206/3/can.o \
+       gen206/3/cap.o \
+       gen206/3/cat.o \
+       gen206/3/con.o \
+       gen206/3/cut.o \
+       gen206/3/dor.o \
+       gen206/3/dis.o \
+       gen206/3/end.o \
+       gen206/3/gor.o \
+       gen206/3/hor.o \
+       gen206/3/lsh.o \
+       gen206/3/mas.o \
+       gen206/3/met.o \
+       gen206/3/mix.o \
+       gen206/3/mug.o \
+       gen206/3/peg.o \
+       gen206/3/rap.o \
+       gen206/3/rip.o \
+       gen206/3/rsh.o \
+       gen206/3/vor.o
+
+J206_4_OFILES=\
+       gen206/4/in.o \
+       gen206/4/by.o \
+       gen206/4/in_has.o \
+       gen206/4/in_gas.o \
+       gen206/4/in_put.o \
+       gen206/4/in_tap.o \
+       gen206/4/by_gas.o \
+       gen206/4/by_get.o \
+       gen206/4/by_has.o \
+       gen206/4/by_put.o 
+
+J206_5_OFILES=\
+       gen206/5/cue.o \
+       gen206/5/jam.o \
+       gen206/5/mat.o \
+       gen206/5/mock.o \
+       gen206/5/parse.o \
+       gen206/5/rub.o \
+       gen206/5/shax.o \
+       gen206/5/trip.o
+
+J206_6_OFILES=\
+       gen206/6/ap.o \
+       gen206/6/cell.o \
+       gen206/6/comb.o \
+       gen206/6/cons.o \
+       gen206/6/core.o \
+       gen206/6/cube.o \
+       gen206/6/face.o \
+       gen206/6/fine.o \
+       gen206/6/fitz.o \
+       gen206/6/flan.o \
+       gen206/6/flip.o \
+       gen206/6/flor.o \
+       gen206/6/foam.o \
+       gen206/6/fork.o \
+       gen206/6/hike.o \
+       gen206/6/look.o \
+       gen206/6/ut.o
+
+J206_6_OFILES_UT=\
+       gen206/6/ut_burn.o \
+       gen206/6/ut_bust.o \
+       gen206/6/ut_crop.o \
+       gen206/6/ut_cull.o \
+       gen206/6/ut_find.o \
+       gen206/6/ut_fink.o \
+       gen206/6/ut_fire.o \
+       gen206/6/ut_firm.o \
+       gen206/6/ut_fish.o \
+       gen206/6/ut_fuse.o \
+       gen206/6/ut_gain.o \
+       gen206/6/ut_heal.o \
+       gen206/6/ut_lose.o \
+       gen206/6/ut_mint.o \
+       gen206/6/ut_moot.o \
+       gen206/6/ut_mull.o \
+       gen206/6/ut_nest.o \
+       gen206/6/ut_park.o \
+       gen206/6/ut_peek.o \
+       gen206/6/ut_play.o \
+       gen206/6/ut_repo.o \
+       gen206/6/ut_rest.o \
+       gen206/6/ut_seek.o \
+       gen206/6/ut_snap.o \
+       gen206/6/ut_swab.o \
+       gen206/6/ut_tack.o \
+       gen206/6/ut_tock.o \
+       gen206/6/ut_wrap.o
+
+J206_OFILES=\
+       $(J206_1_OFILES) \
+       $(J206_2_OFILES) \
+       $(J206_3_OFILES) \
+       $(J206_4_OFILES) \
+       $(J206_5_OFILES) \
+       $(J206_6_OFILES) \
+       $(J206_6_OFILES_UT) \
+       gen206/watt.o
+
 BASE_OFILES=\
        $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
-       $(J211_OFILES) \
-       $(J210_OFILES) \
        $(J209_OFILES) \
        $(J208_OFILES) \
-       $(J207_OFILES)
+       $(J207_OFILES) \
+       $(J206_OFILES)
 
 OUT_OFILES=\
        outside/jhttp/http_parser.o
