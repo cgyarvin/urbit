@@ -103,7 +103,7 @@
         ==
       ==
     --
-=+  [tic=@ud log=*(list >@uw)]
+=+  [tic=@ud log=*(list ,@uw)]
 =+  vax=seed
 =+  env=*(map term vase)
 ::  =+  cot=#/+cato

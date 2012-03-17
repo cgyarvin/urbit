@@ -2840,7 +2840,7 @@
       [%bccb p=gene]
       [%bccl p=(list gene)]
       [%bccn p=gene q=(list gene)]
-      [%bcgr p=gene]
+      [%bccm p=gene]
       [%bckt p=gene]
       [%bcpm p=gene q=gene]
       [%bctr p=gene]
@@ -2897,7 +2897,6 @@
       [%wtls p=gene q=gene r=(list >[p=gene q=gene])]
       [%wtpm p=(list gene)]
       [%wtpt p=gene q=gene r=gene]
-      [%wtsg p=gene q=gene r=gene]
       [%wtts p=gene q=gene]
       [%wtzp p=gene]
     ::
@@ -3109,7 +3108,7 @@
         ?~  nag
           =+  luz=[%cnts [[~ 1] ~] [[~ axe] bunt(sec [%base %cell])] ~]
           ?:  =(& nag)
-            [%tsgr [%wtsg [~ axe] luz [~ 1]] (noy [& &])]
+            [%tsgr [%wtpt [~ axe] luz [~ 1]] (noy [& &])]
           [%tsgr luz (noy [& &])]
         (noy nag)
     ^-  gene
@@ -3125,7 +3124,7 @@
         =+  buv=bunt
         |-  ^-  gene
         ?~  nag
-          ?:(=(& nag) [%wtsg [~ axe] $(nag |) buv] [%ktls buv [~ axe]])
+          ?:(=(& nag) [%wtpt [~ axe] $(nag |) buv] [%ktls buv [~ axe]])
         buv
       ::
           %noun
@@ -3135,7 +3134,7 @@
         =+  buv=bunt
         |-  ^-  gene
         ?~  nag 
-          ?:(=(& nag) [%wtsg [~ axe] buv $(nag [& &])] buv)
+          ?:(=(& nag) [%wtpt [~ axe] buv $(nag [& &])] buv)
         [%ktls buv [~ axe]]
       ::
           %flag
@@ -3153,7 +3152,7 @@
     ::
         [%bush *]
       ?-  nag
-        &  [%wtsg [~ axe] $(sec p.sec, nag |) $(sec q.sec, nag [& &])]
+        &  [%wtpt [~ axe] $(sec p.sec, nag |) $(sec q.sec, nag [& &])]
         |  $(sec p.sec)
         ^  $(sec q.sec)
         *  !!
@@ -3193,7 +3192,7 @@
       %-  tun  |=  gon=*  =>  .(nag gon)  ^-  gene
       ?~  -.nag
         ?:  =(& -.nag)
-          [%wtsg [~ (peg axe 2)] ^$(sec q.sec) ^$(sec p.sec)]
+          [%wtpt [~ (peg axe 2)] ^$(sec q.sec) ^$(sec p.sec)]
         ^$(sec q.sec)
       ^$(sec p.sec)
     ::
@@ -3286,7 +3285,7 @@
     :+  %tsls
       [p.i.gop res]
     :-  %brhp
-    :^    %wtsg
+    :^    %wtpt
         [~ 6]
       [~ 7]
     [[~ 12] [%cnts [%% ~] [[[~ 6] [~ 13]] ~]]]
@@ -3297,9 +3296,9 @@
         [~ *]      [%cnts [gen ~] ~]
         [%bcbr *]  ~(clam al bore)
         [%bccb *]  ~(clam al bore)
-        [%bccl *]  [%bcgr [%cltr p.gen]]
+        [%bccl *]  [%bccm [%cltr p.gen]]
         [%bccn *]  ~(clam al bore)
-        [%bcgr *]  ~(clam al bore(gen p.gen)) 
+        [%bccm *]  ~(clam al bore(gen p.gen)) 
         [%bckt *]  ~(clam al bore(gen p.gen)) 
         [%bcpm *]  ~(clam al bore)
         [%bctr *]  [%ktsg ~(bunt al bore(gen p.gen))]
@@ -3432,7 +3431,6 @@
       |-
       ?~(p.gen [%dtsg %f 0] [%wtcl i.p.gen $(p.gen t.p.gen) [%dtsg %f 1]])
     ::
-        [%wtsg *]   [%wtcl [%wtcn [%dtpt %% 0] p.gen] q.gen r.gen]
         [%wtpt *]   [%wtcl [%wtcn [%dtpt %% 0] p.gen] q.gen r.gen]
         [%wtzp *]   [%wtcl p.gen [%dtsg %f 1] [%dtsg %f 0]]
         [%zpcb *]   q.gen
@@ -5378,10 +5376,8 @@
         ==
       :-  '['
         (stag %cltr (ifix [sel ser] (most ace wide)))
-      :-  '>'
-        (stag %bcgr ;~(pfix gar wide))
-      :-  '<'
-        (stag %ktsg ;~(pfix gal wide))
+      :-  ','
+        (stag %bccm ;~(pfix com wide))
       :-  '^'
         ;~  pose
           (stag %cnhx rope)
@@ -5460,8 +5456,7 @@
                   ['_' (rune cab %bccb expa)]
                   [':' (rune col %bccl exps)]
                   ['%' (rune cen %bccn exps)]
-                  ['>' (rune gar %bcgr expa)]
-                  ['^' (rune ket %bcgr expa)]
+                  [',' (rune com %bccm expa)]
                   ['&' (rune pam %bcpm expb)]
                   ['?' (rune wut %bcwt exps)]
                 ==
@@ -5559,7 +5554,6 @@
                   ['+' (rune lus %wtls expm)]
                   ['&' (rune pam %wtpm exps)]
                   ['@' (rune pat %wtpt expc)]
-                  ['~' (rune sig %wtsg expc)]
                   ['!' (rune zap %wtzp expa)]
                 ==
               ==
