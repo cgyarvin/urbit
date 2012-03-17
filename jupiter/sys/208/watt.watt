@@ -1,4 +1,4 @@
-!:
+::
 ::  Watt kernel 208.  This file is in the public domain.
 ::
 ?>  ?=(@ .)
@@ -1137,7 +1137,6 @@
   ::  Tier 5 tiles
   ::
   ++  barn  (list span)
-  ++  cask  >@ta
   ++  char  >@ta
   ++  clip  >[p=hair q=tape]
   ++  coin  $%  [%% p=mole]
@@ -1147,6 +1146,7 @@
                 [%with p=(map coin coin)]
             ==
   ++  corn  $|(@ta [~ tape])
+  ++  disc  >@ta
   ++  edge  >[p=hair q=(unit >[p=* q=clip])]
   ++  hair  >[p=@ud q=@ud]
   ++  hemp  (list corn)
@@ -1154,7 +1154,7 @@
             |=  b=_`*`[(hair) ~]
             :-  p=(hair -.b) 
             q=?~(+.b ~ [~ u=[p=(a +>-.b) q=[p=(hair -.b) q=(tape +.b)]]])
-  ++  mole  >[p=cask q=@]
+  ++  mole  >[p=disc q=@]
   ++  pint  >[q=[p=[p=@ q=@] q=[p=@ q=@]]]
   ++  ring  >@
   ++  rule  |=(tub=clip `edge`[p.tub ~ ~ tub])
@@ -1163,7 +1163,7 @@
                 [%mean p=_^?(|.(*tank))]
                 [%spot p=_spot]
             ==
-  ++  span  cask
+  ++  span  disc
   ++  spar  (list coin)
   ++  spot  >[p=barn q=pint]
   ++  tank
@@ -1181,7 +1181,7 @@
   ++  wall  (list tape)
   ++  wand  >@
   ++  wonk  |*(veq=edge ?~(q.veq !! p.u.q.veq))
-  ++  xmln  >[t=$|(cask [cask a=(list >[n=cask v=tape])]) c=(list xmln)]
+  ++  xmln  >[t=$|(disc [disc a=(list >[n=disc v=tape])]) c=(list xmln)]
   --
 =>
   ::::
@@ -2058,7 +2058,7 @@
     ==
   ::
   ++  pant
-    |=  [[mad=(list cask) daf=(list >@)] yad=barn]
+    |=  [[mad=(list disc) daf=(list >@)] yad=barn]
     ~|  %pant
     ^-  barn
     ?~  mad
@@ -2344,8 +2344,8 @@
             [%leaf '#' ~]
           :+  %rose
             [['/' ~] ['/' ~] ~]
-          =+  yol=`(list cask)`[(cask -.c.vem) (flop ((list cask) +.c.vem))]
-          (turn yol |=(a=cask [%leaf (trip a)]))
+          =+  yol=`(list disc)`[(disc -.c.vem) (flop ((list disc) +.c.vem))]
+          (turn yol |=(a=disc [%leaf (trip a)]))
         ::
             [s=%o c=*]        
           %=    $
@@ -2912,7 +2912,7 @@
   ++  goop  $|(@ [~ p=gene])
   ++  knot  $|(term [~ p=axis])
   ++  line  >[p=[%leaf p=odor q=@] q=tile] 
-  ++  odor  cask
+  ++  odor  disc
   ++  pole
     $%  [& p=(map span pole)]
         [| p=vase]
@@ -2950,7 +2950,7 @@
     ==
   ++  vase  >[p=type q=*]                                   ::  type-value pair
   ++  veal
-    $|  ?(%noun %tank %void %wall)
+    $|  ?(%noun %tank %void)
     $%  [%atom p=term]
         [%beam p=veal]
         [%core p=@ud q=@uv r=?(%gold %lead %iron %zinc) s=veal]
@@ -2960,11 +2960,12 @@
         [%hold p=type]
         [%list p=term q=veal]
         [%pick p=(list veal)]
+        [%plot p=(list veal)]
         [%plum p=term q=@]
         [%tree p=term q=veal]
-        [%tupl p=(list veal)]
         [%unit p=term q=veal]
-        [%yarn p=type]
+        [%wool p=term]
+        [%yarn p=term]
     ==
   --
 ::::
@@ -4085,7 +4086,7 @@
           [%atom *]  sut
           [%cell *]
         ^-  veal
-        :+  %tupl
+        :+  %plot
           $(sut p.sut)
         =+  toe=q.sut
         |-  ^-  (list veal)
@@ -4136,7 +4137,7 @@
       ==
     ::
     ++  cust
-      |-  ^-  (unit veal)
+      ^-  (unit veal)
       =+  pet=(cull & 1 [%atom %%])
       =+  wid=(cull | 1 [%atom %%])
       ?:  |(moot(sut pet) moot(sut wid))
@@ -4146,76 +4147,82 @@
       =+  rep=$(sut wid)
       ?~  rep
         ~
-      ?.  ?=([%tupl *] u.rep)
+      ?.  ?=([%plot *] rep)
         ~
-      ?:  ?=([* * ~] p.u.rep)
-        ?:  ?&  ?=([%atom %n] i.p.u.rep)
-                ?=([%face *] i.t.p.u.rep)
-                =(1 (met 3 p.i.t.p.u.rep))
+      ?:  ?=([* * ~] p.rep)
+        ?:  ?&  ?=([%atom %n] i.p.rep)
+                ?=([%face *] i.t.p.rep)
+                =(1 (met 3 p.i.t.p.rep))
             ==
-          [~ %unit p.i.t.p.u.rep q.i.t.p.u.rep]
-        ?:  ?&  ?=([%face *] i.p.u.rep)
-                ?=([%face *] i.t.p.u.rep)
-                =([%hold sut] q.i.t.p.u.rep) 
-                =(1 (met 3 p.i.p.u.rep))
-                =(1 (met 3 p.i.t.p.u.rep))
+          [~ %unit p.i.t.p.rep q.i.t.p.rep]
+        ?:  ?&  ?=([%face *] i.p.rep)
+                ?=([%face *] i.t.p.rep)
+                =([%hold sut] q.i.t.p.rep) 
+                =(1 (met 3 p.i.p.rep))
+                =(1 (met 3 p.i.t.p.rep))
             ==
-          [~ %list (cat 3 p.i.p.u.rep p.i.t.p.u.rep) q.i.p.u.rep]
-        ?:  =([%hold sut] i.t.p.u.rep)
-          [~ %beam i.p.u.rep]
+          [~ %list (cat 3 p.i.p.rep p.i.t.p.rep) q.i.p.rep]
+        ?:  =([%hold sut] i.t.p.rep)
+          [~ %beam i.p.rep]
         ~
-      ?.  ?=([* * * ~] p.u.rep)
+      ?.  ?=([* * * ~] p.rep)
         ~
-      =+  one=i.p.u.rep
-      =+  two=i.t.p.u.rep
-      =+  tri=i.t.t.p.u.rep
-      ?.  ?&  ?=([%face *] i.p.u.rep)
-              ?=([%face *] i.t.p.u.rep)
-              ?=([%face *] i.t.t.p.u.rep)
-              =([%hold sut] q.i.t.p.u.rep) 
-              =([%hold sut] q.i.t.t.p.u.rep) 
-              =(1 (met 3 p.i.p.u.rep))
-              =(1 (met 3 p.i.t.p.u.rep))
-              =(1 (met 3 p.i.t.t.p.u.rep))
+      =+  one=i.p.rep
+      =+  two=i.t.p.rep
+      =+  tri=i.t.t.p.rep
+      ?.  ?&  ?=([%face *] i.p.rep)
+              ?=([%face *] i.t.p.rep)
+              ?=([%face *] i.t.t.p.rep)
+              =([%hold sut] q.i.t.p.rep) 
+              =([%hold sut] q.i.t.t.p.rep) 
+              =(1 (met 3 p.i.p.rep))
+              =(1 (met 3 p.i.t.p.rep))
+              =(1 (met 3 p.i.t.t.p.rep))
           ==
         ~
       :^    ~
           %tree 
-        (cat 3 p.i.p.u.rep (cat 3 p.i.t.p.u.rep p.i.t.t.p.u.rep))
-      q.i.p.u.rep
+        (cat 3 p.i.p.rep (cat 3 p.i.t.p.rep p.i.t.t.p.rep))
+      q.i.p.rep
     ::
     ++  xray
       |=  vel=veal  ^-  veal
-      ?:  =(vel [%beam [%atom 'taD']])
-        %yarn
-      ?:  =(vel [%beam %yarn])
-        %wall 
+      ?:  ?&  ?=([%beam %atom *] vel)
+              =('t' (end 3 1 p.p.vel))
+          ==
+        [%yarn p.p.vel]
+      ?:  ?=([%beam %yarn *] vel)
+        [%wool p.p.vel]
       ?:  .=  vel
           ^-  veal
           :~  %pick
-              :~  %tupl
+              :~  %plot
                 [%plum %tam %leaf]
-                [%face %p %yarn]
+                [%face %p %yarn %ta]
               ==
-              :~  %tupl
+              :~  %plot
                 [%plum %tam %palm]
                 :+  %face
                   %p
-                :~  %tupl
-                    [%face %p %yarn]
-                    [%face %q %yarn]
-                    [%face %r %yarn]
-                    [%face %s %yarn]
+                :~  %plot
+                    [%face %p %yarn %ta]
+                    [%face %q %yarn %ta]
+                    [%face %r %yarn %ta]
+                    [%face %s %yarn %ta]
                 ==
                 :+  %face
                   %q
                 [%list %it [%hold sut]]
               ==
-              :~  %tupl
+              :~  %plot
                 [%plum %tam %rose] 
                 :+  %face
                   %p
-                [%tupl [%face %p %yarn] [%face %q %yarn] [%face %r %yarn] ~]
+                :~  %plot
+                    [%face %p %yarn %ta]
+                    [%face %q %yarn %ta]
+                    [%face %r %yarn %ta]
+                ==
                 [%face %q [%list %it [%hold sut]]]
               ==
           ==

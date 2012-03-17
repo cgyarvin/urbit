@@ -4,7 +4,7 @@
 ?>  ?=(@ .)
 %.  .
 =<  make
-=>  207
+=>  %207
 =>  
   ::::
   ::::  Tier 0, kernel stub
@@ -147,7 +147,7 @@
     |*  [a=(unit) b=_>*]
     ?~  a
       ~
-    [~ (b u.a)]
+    [~ u=(b u.a)]
   ::
   ++  clap
     ~.  %clap
@@ -156,14 +156,14 @@
       b
     ?~  b
       a
-    [~ (c u.a u.b)]
+    [~ u=(c u.a u.b)]
   ::
   ++  drop
     ~.  %drop
     |*  a=(unit)
     ?~  a
       ~
-    [u.a ~]
+    [i=u.a t=~]
   ::
   ++  mate
     |*  [a=(unit) b=(unit)]
@@ -1137,7 +1137,6 @@
   ::  Tier 5 tiles
   ::
   ++  barn  (list span)
-  ++  cask  >@ta
   ++  char  >@ta
   ++  clip  >[p=hair q=tape]
   ++  coin  $%  [%% p=mole]
@@ -1147,6 +1146,7 @@
                 [%with p=(map coin coin)]
             ==
   ++  corn  $|(@ta [~ tape])
+  ++  disc  >@ta
   ++  edge  >[p=hair q=(unit >[p=* q=clip])]
   ++  hair  >[p=@ud q=@ud]
   ++  hemp  (list corn)
@@ -1154,7 +1154,7 @@
             |=  b=_`*`[(hair) ~]
             :-  p=(hair -.b) 
             q=?~(+.b ~ [~ u=[p=(a +>-.b) q=[p=(hair -.b) q=(tape +.b)]]])
-  ++  mole  >[p=cask q=@]
+  ++  mole  >[p=disc q=@]
   ++  pint  >[q=[p=[p=@ q=@] q=[p=@ q=@]]]
   ++  ring  >@
   ++  rule  |=(tub=clip `edge`[p.tub ~ ~ tub])
@@ -1163,7 +1163,7 @@
                 [%mean p=_^?(|.(*tank))]
                 [%spot p=_spot]
             ==
-  ++  span  cask
+  ++  span  disc
   ++  spar  (list coin)
   ++  spot  >[p=barn q=pint]
   ++  tank
@@ -1181,7 +1181,7 @@
   ++  wall  (list tape)
   ++  wand  >@
   ++  wonk  |*(veq=edge ?~(q.veq !! p.u.q.veq))
-  ++  xmln  >[t=$|(cask [cask a=(list >[n=cask v=tape])]) c=(list xmln)]
+  ++  xmln  >[t=$|(disc [disc a=(list >[n=disc v=tape])]) c=(list xmln)]
   --
 =>
   ::::
@@ -2058,7 +2058,7 @@
     ==
   ::
   ++  pant
-    |=  [[mad=(list cask) daf=(list >@)] yad=barn]
+    |=  [[mad=(list disc) daf=(list >@)] yad=barn]
     ~|  %pant
     ^-  barn
     ?~  mad
@@ -2344,8 +2344,8 @@
             [%leaf '#' ~]
           :+  %rose
             [['/' ~] ['/' ~] ~]
-          =+  yol=`(list cask)`[(cask -.c.vem) (flop ((list cask) +.c.vem))]
-          (turn yol |=(a=cask [%leaf (trip a)]))
+          =+  yol=`(list disc)`[(disc -.c.vem) (flop ((list disc) +.c.vem))]
+          (turn yol |=(a=disc [%leaf (trip a)]))
         ::
             [s=%o c=*]        
           %=    $
@@ -2808,6 +2808,7 @@
       [%brdt p=gene]
       [%brhp p=gene]
       [%brtr p=gene q=gene]
+      [%brwt p=gene]
     ::
       [%clkt p=gene q=gene r=gene s=gene]
       [%clhp p=gene q=gene]
@@ -2890,12 +2891,14 @@
       [%wtcl p=gene q=gene r=gene]
       [%wtcn p=gene q=gene]
       [%wtdt p=gene q=gene r=gene]
-      [%wtts p=gene q=gene]
+      [%wtkt p=gene q=gene r=gene]
       [%wtgl p=gene q=gene]
       [%wtgr p=gene q=gene]
       [%wtls p=gene q=gene r=(list >[p=gene q=gene])]
       [%wtpm p=(list gene)]
+      [%wtpt p=gene q=gene r=gene]
       [%wtsg p=gene q=gene r=gene]
+      [%wtts p=gene q=gene]
       [%wtzp p=gene]
     ::
       [%zpcb p=spot q=gene]
@@ -2909,7 +2912,7 @@
   ++  goop  $|(@ [~ p=gene])
   ++  knot  $|(term [~ p=axis])
   ++  line  >[p=[%leaf p=odor q=@] q=tile] 
-  ++  odor  cask
+  ++  odor  disc
   ++  pole
     $%  [& p=(map span pole)]
         [| p=vase]
@@ -2946,6 +2949,24 @@
         [%hold p=(list >[p=type q=gene])]
     ==
   ++  vase  >[p=type q=*]                                   ::  type-value pair
+  ++  veal
+    $|  ?(%noun %tank %void)
+    $%  [%atom p=term]
+        [%beam p=veal]
+        [%core p=@ud q=@uv r=?(%gold %lead %iron %zinc) s=veal]
+        [%corn p=@ud q=@ud]
+        [%face p=term q=veal]
+        [%fine p=?(%pure %very) q=@uv r=veal]
+        [%hold p=type]
+        [%list p=term q=veal]
+        [%pick p=(list veal)]
+        [%plot p=(list veal)]
+        [%plum p=term q=@]
+        [%tree p=term q=veal]
+        [%unit p=term q=veal]
+        [%wool p=term]
+        [%yarn p=term]
+    ==
   --
 ::::
 ::::  Tier 6, Watt in Watt
@@ -3291,6 +3312,7 @@
         [%brhp *]  [%tsgr [%brdt p.gen] [%cnbc %%]]
         [%brtr *]  [%brcb p.gen (~(put by *(map term foot)) %% [%& | q.gen])]
         [%brts *]  [%brcb p.gen (~(put by *(map term foot)) %% [%& & q.gen])]
+        [%brwt *]  [%ktwt %brdt p.gen]
         [%clkt *]  [p.gen q.gen r.gen s.gen]
         [%clls *]  [p.gen q.gen r.gen]
         [%clhp *]  [p.gen q.gen]
@@ -3394,6 +3416,7 @@
         [%wtdt *]   [%wtcl p.gen r.gen q.gen]
         [%wtgl *]   [%wtcl p.gen [%zpzp ~] q.gen]
         [%wtgr *]   [%wtcl p.gen q.gen [%zpzp ~]]
+        [%wtkt *]   [%wtcl [%wtcn [%dtpt %% 0] p.gen] r.gen q.gen]
         [%wtts *]   [%wtcn ~(bunt al bore(gen p.gen)) q.gen]
         [%wthp *]
       |-
@@ -3410,6 +3433,7 @@
       ?~(p.gen [%dtsg %f 0] [%wtcl i.p.gen $(p.gen t.p.gen) [%dtsg %f 1]])
     ::
         [%wtsg *]   [%wtcl [%wtcn [%dtpt %% 0] p.gen] q.gen r.gen]
+        [%wtpt *]   [%wtcl [%wtcn [%dtpt %% 0] p.gen] q.gen r.gen]
         [%wtzp *]   [%wtcl p.gen [%dtsg %f 1] [%dtsg %f 0]]
         [%zpcb *]   q.gen
         *           gen
@@ -4048,6 +4072,163 @@
         [['.' ~] [':' ~] ~ ~]
       [[%leaf ~(ram re yow)] q.vir ~]
     ==
+  ::
+  ++  geld
+    =+  gil=*(set type)
+    |^  ^-  veal
+      %-  xray
+      =+  cus=cust
+      ?.  ?=(~ cus)
+        u.cus
+      ?-    sut
+          %noun      sut
+          %void      sut
+          [%atom *]  sut
+          [%cell *]
+        ^-  veal
+        :+  %plot
+          $(sut p.sut)
+        =+  toe=q.sut
+        |-  ^-  (list veal)
+        ?.  ?=([%cell *] toe)
+          [^$(sut toe) ~]
+        [^$(sut p.toe) $(toe q.toe)]
+      ::
+          [%core *]
+        ^-  veal
+        =+  ^=  ton
+            |-  ^-  @
+            ?-  q.r.q.sut
+              ~        0
+              [* ~ ~]  1
+              [* ~ *]  +($(q.r.q.sut r.q.r.q.sut))
+              [* * ~]  +($(q.r.q.sut l.q.r.q.sut))
+              [* * *]  .+  %+  add
+                             $(q.r.q.sut l.q.r.q.sut) 
+                           $(q.r.q.sut r.q.r.q.sut)
+            ==
+        [%core ton (end 0 15 (mug q.r.q.sut)) p.q.sut $(sut p.sut)]
+      ::
+          [%cube *]
+        ^-  veal
+        ?.  ?=(@ p.sut)
+          $(sut repo)
+        =+  pum=$(sut q.sut)
+        ?>  ?=([%atom *] pum)
+        [%plum p.pum p.sut]
+      ::
+          [%face *]  [%face p.sut $(sut q.sut)]
+          [%fine *]  [%fine p.sut (end 0 15 (mug q.sut)) $(sut r.sut)]
+          [%fork *]
+        ^-  veal
+        :+  %pick
+          $(sut p.sut)
+        =+  toe=q.sut
+        |-  ^-  (list veal)
+        ?.  ?=([%fork *] toe)
+          [^$(sut toe) ~]
+        [^$(sut p.toe) $(toe q.toe)]
+      ::
+          [%hold *]
+        ^-  veal
+        ?:  (~(has in gil) sut)
+          [%hold sut]
+        $(sut repo, gil (~(put in gil) sut))
+      ==
+    ::
+    ++  cust
+      ^-  (unit veal)
+      =+  pet=(cull & 1 [%atom %%])
+      =+  wid=(cull | 1 [%atom %%])
+      ?:  |(moot(sut pet) moot(sut wid))
+        ~
+      ?.  (nest(sut [%atom %n]) | pet)
+        ~
+      =+  rep=$(sut wid)
+      ?~  rep
+        ~
+      ?.  ?=([%plot *] rep)
+        ~
+      ?:  ?=([* * ~] p.rep)
+        ?:  ?&  ?=([%atom %n] i.p.rep)
+                ?=([%face *] i.t.p.rep)
+                =(1 (met 3 p.i.t.p.rep))
+            ==
+          [~ %unit p.i.t.p.rep q.i.t.p.rep]
+        ?:  ?&  ?=([%face *] i.p.rep)
+                ?=([%face *] i.t.p.rep)
+                =([%hold sut] q.i.t.p.rep) 
+                =(1 (met 3 p.i.p.rep))
+                =(1 (met 3 p.i.t.p.rep))
+            ==
+          [~ %list (cat 3 p.i.p.rep p.i.t.p.rep) q.i.p.rep]
+        ?:  =([%hold sut] i.t.p.rep)
+          [~ %beam i.p.rep]
+        ~
+      ?.  ?=([* * * ~] p.rep)
+        ~
+      =+  one=i.p.rep
+      =+  two=i.t.p.rep
+      =+  tri=i.t.t.p.rep
+      ?.  ?&  ?=([%face *] i.p.rep)
+              ?=([%face *] i.t.p.rep)
+              ?=([%face *] i.t.t.p.rep)
+              =([%hold sut] q.i.t.p.rep) 
+              =([%hold sut] q.i.t.t.p.rep) 
+              =(1 (met 3 p.i.p.rep))
+              =(1 (met 3 p.i.t.p.rep))
+              =(1 (met 3 p.i.t.t.p.rep))
+          ==
+        ~
+      :^    ~
+          %tree 
+        (cat 3 p.i.p.rep (cat 3 p.i.t.p.rep p.i.t.t.p.rep))
+      q.i.p.rep
+    ::
+    ++  xray
+      |=  vel=veal  ^-  veal
+      ?:  ?&  ?=([%beam %atom *] vel)
+              =('t' (end 3 1 p.p.vel))
+          ==
+        [%yarn p.p.vel]
+      ?:  ?=([%beam %yarn *] vel)
+        [%wool p.p.vel]
+      ?:  .=  vel
+          ^-  veal
+          :~  %pick
+              :~  %plot
+                [%plum %tam %leaf]
+                [%face %p %yarn %ta]
+              ==
+              :~  %plot
+                [%plum %tam %palm]
+                :+  %face
+                  %p
+                :~  %plot
+                    [%face %p %yarn %ta]
+                    [%face %q %yarn %ta]
+                    [%face %r %yarn %ta]
+                    [%face %s %yarn %ta]
+                ==
+                :+  %face
+                  %q
+                [%list %it [%hold sut]]
+              ==
+              :~  %plot
+                [%plum %tam %rose] 
+                :+  %face
+                  %p
+                :~  %plot
+                    [%face %p %yarn %ta]
+                    [%face %q %yarn %ta]
+                    [%face %r %yarn %ta]
+                ==
+                [%face %q [%list %it [%hold sut]]]
+              ==
+          ==
+        %tank
+      vel
+    --
   ::
   ++  dunk
     |=  paz=term  ^-  tank
@@ -4754,7 +4935,7 @@
       ^=  tyn
       ?:  =(sut ref)
         &
-      ?-  sut
+      ?-    sut
           %void       sint
           %noun       &
       ::
@@ -5256,6 +5437,7 @@
                   ['^' (rune ket %brkt expr)]
                   ['*' (rune tar %brtr expb)]
                   ['-' (rune hep %brhp expa)]
+                  ['?' (rune wut %brwt expa)]
                 ==
               ==
             :-  '%'
@@ -5372,9 +5554,11 @@
                   ['<' (rune gal %wtgl expb)]
                   ['>' (rune gar %wtgr expb)]
                   ['-' (rune hep %wthp exph)]
+                  ['^' (rune ket %wtkt expc)]
                   ['=' (rune tis %wtts expb)]
                   ['+' (rune lus %wtls expm)]
                   ['&' (rune pam %wtpm exps)]
+                  ['@' (rune pat %wtpt expc)]
                   ['~' (rune sig %wtsg expc)]
                   ['!' (rune zap %wtzp expa)]
                 ==
