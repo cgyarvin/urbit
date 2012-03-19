@@ -5448,6 +5448,7 @@
                   [':' (rune col %bccl exps)]
                   ['%' (rune cen %bccn exps)]
                   [',' (rune com %bccm expa)]
+                  ['&' (rune pam %bcpm expb)]
                   ['?' (rune wut %bcwt exps)]
                 ==
               ==
