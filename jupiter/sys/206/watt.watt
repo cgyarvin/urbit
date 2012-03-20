@@ -2785,8 +2785,9 @@
   ++  foot
     $%  [%ash p=gene]
         [%elm p=gene]
+        [%fir p=gene]
         [%oak ~]
-        [%yew p=gene q=(map term foot)]
+        [%yew p=(map term foot)]
     ==
   ++  form
     $&  [p=form q=form]
@@ -2809,6 +2810,7 @@
       [%% p=axis]
     ::
       [%brcb p=gene q=(map term foot)]
+      [%brcl p=gene q=(map term foot)]
       [%brcn p=(map term foot)]
       [%brdt p=gene]
       [%brkt p=gene q=(map term foot)]
@@ -2901,6 +2903,7 @@
       [%wtls p=gene q=gene r=(list ,[p=gene q=gene])]
       [%wtpm p=(list gene)]
       [%wtpt p=gene q=gene r=gene]
+      [%wtsg p=gene q=gene r=gene]
       [%wtts p=gene q=gene]
       [%wtzp p=gene]
     ::
@@ -3436,6 +3439,7 @@
       ?@(p.gen [%dtsg %f 0] [%wtcl i.p.gen $(p.gen t.p.gen) [%dtsg %f 1]])
     ::
         [%wtpt *]   [%wtcl [%wtcn [%dtpt %% 0] p.gen] q.gen r.gen]
+        [%wtsg *]   [%wtcl [%wtts [%bcts %null] p.gen] q.gen r.gen]
         [%wtzp *]   [%wtcl p.gen [%dtsg %f 1] [%dtsg %f 0]]
         [%zpcb *]   q.gen
         *           gen
@@ -4468,6 +4472,90 @@
     |=  gen=gene  ^-  type
     (chip & gen)
   ::
+  ++  hang
+    |=  [dab=(map term foot) rud=(map term foot)]
+    ^-  (map term foot)
+    ~.  %hang
+    =+  goy=(~(tap by rud) ~)
+    =+  waf=dab
+    |-  ^+  dab
+    ?@  goy
+      waf
+    ~|  [%hang-on p.i.goy]
+    =+  yeq=(~(get by dab) p.i.goy)
+    ?<  ?=(~ yeq)
+    ?-    -.u.yeq
+        %ash 
+      ?>  ?=([%ash *] q.i.goy)
+      $(goy t.goy, waf (~(put by waf) p.i.goy q.i.goy))
+    ::
+        ?(%elm %fir)
+      ~|([%hang-elm p.i.goy] !!)
+    ::
+        %oak
+      ?>  ?=([%yew *] q.i.goy)
+      $(goy t.goy, waf (~(put by waf) p.i.goy q.i.goy))
+    ::
+        %yew
+      ?>  ?=([%yew *] q.i.goy)
+      %=    $
+          goy  t.goy
+          waf
+        %+  ~(put by waf)
+          p.i.goy
+        [%yew ^$(dab p.u.yeq, rud p.q.i.goy)]
+      ==
+    == 
+  ::
+  ++  hail
+    |=  [axe=axis dab=(map term foot) waf=(map term foot)]
+    =+  dif=*(list ,[p=axis q=form])
+    |-  ^+  dif
+    ?@  dab
+      ?>(?=(~ waf) dif)
+    =>  %=  .
+          dif  %=  $
+                 dif  $(dab l.dab, waf l.waf, axe (peg axe 2))
+                 dab  r.dab
+                 waf  r.waf
+                 axe  (peg axe 3)
+               ==
+        ==
+    ?>  =(p.n.dab p.n.waf)
+    ?:  =(q.n.dab q.n.waf)
+      dif
+    :-  :-  axe
+        :-  %1 
+        ?+  -.q.n.waf  !! 
+          %ash  q:(mint %noun p.q.n.waf)
+          %yew  (harp p.q.n.waf)
+        ==
+    dif 
+  ::
+  ++  harp
+    |=  dab=(map term foot)
+    ^-  ?(~ ^)
+    ?:  ?=(~ dab)
+      ~
+    =+  ^=  vad
+        ?+  -.q.n.dab  !!
+          %ash  q:(mint %noun p.q.n.dab)
+          %elm  q:(mint(vet |) %noun p.q.n.dab)
+        ==
+    ?-    dab
+        [* ~ ~]   vad
+        [* ~ *]   [vad $(dab r.dab)]
+        [* * ~]   [vad $(dab l.dab)]
+        [* * *]   [vad $(dab l.dab) $(dab r.dab)] 
+    ==
+  ::
+  ++  heir
+    ~.  %heir
+    |=  rud=(map term foot)  ^-  type
+    ?.  ?=([%core *] sut)
+      $(sut repo) 
+    sut(q.r.q (hang q.r.q.sut rud))
+  ::
   ++  lose
     ~.  %lose
     |=  gen=gene  ^-  type
@@ -4636,23 +4724,6 @@
       $(gen doz)
     ==
     ::
-    ++  bake
-      |=  dab=(map term foot)
-      ^-  ?(~ ^)
-      ?:  ?=(~ dab)
-        ~
-      =+  ^=  vad
-          ?+  -.q.n.dab  !!
-            %ash  q:^$(gol %noun, gen p.q.n.dab)
-            %elm  q:^$(gol %noun, gen p.q.n.dab, vet |)
-          ==
-      ?-    dab
-          [* ~ ~]   vad
-          [* ~ *]   [vad $(dab r.dab)]
-          [* * ~]   [vad $(dab l.dab)]
-          [* * *]   [vad $(dab l.dab) $(dab r.dab)] 
-      ==
-    ::
     ++  nice
       |=  typ=type
       ~|  %mint-nice
@@ -4664,7 +4735,7 @@
       ^-  [p=type q=form]
       =+  dan=^$(gen ruf, gol %noun)
       =+  toc=(core p.dan [%gold p.dan [~ dab]])
-      =+  dez=(bake(sut toc) dab)
+      =+  dez=(harp(sut toc) dab)
       :-  (nice (core p.dan mel p.dan [dez dab]))
       (cons q.dan [%1 dez])
     --
@@ -4836,6 +4907,7 @@
     ::
     ++  grow
       |=  [mel=?(%gold %iron %lead %zinc) ruf=gene dab=(map term foot)]
+      ~|  %mull-grow
       ^-  [p=type q=type]
       =+  dan=^$(gen ruf, gol %noun)
       =+  ^=  toc  :-  p=(core p.dan [%gold p.dan [~ dab]])
@@ -5545,6 +5617,7 @@
                   ['+' (rune lus %wtls expm)]
                   ['&' (rune pam %wtpm exps)]
                   ['@' (rune pat %wtpt expc)]
+                  ['~' (rune sig %wtsg expc)]
                   ['!' (rune zap %wtzp expa)]
                 ==
               ==
