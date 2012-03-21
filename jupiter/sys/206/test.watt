@@ -1,4 +1,4 @@
-::
+!:
 ::  Watt kernel 206.  This file is in the public domain.
 ::
 ?>  ?=(@ .)
@@ -2781,7 +2781,6 @@
         q=type
         r=[p=?(~ ^) q=(map term foot)]
     ==
-  ++  door  ,[p=? q=gene]
   ++  foot
     $%  [%ash p=gene]
         [%elm p=gene]
@@ -2925,9 +2924,9 @@
     ==
   ++  port
     $:  p=axis 
-        q=$%([& p=type] [| p=axis q=(list ,[p=type q=door])])
+        q=$%([& p=type] [| p=axis q=(list ,[p=type q=foot])])
     ==
-  ++  prop  ,[p=axis q=[p=?(~ axis) q=(list ,[p=type q=door])]]
+  ++  prop  ,[p=axis q=[p=?(~ axis) q=(list ,[p=type q=foot])]]
   ++  tile
     $&  [p=tile q=tile]                                     ::  ordered pair
     $%  [%base p=?([%atom p=term] %cell %flag %noun %null)] ::  base type
@@ -3030,7 +3029,7 @@
   :-  p.pok
   ?-  -.q.pok
     &  p.q.pok
-    |  (roll q.q.pok =+([p=[p=*type q=*door] q=`type`%void] |.((fork p.p q))))
+    |  (roll q.q.pok =+([p=[p=*type q=*foot] q=`type`%void] |.((fork p.p q))))
   ==
 ::
 ++  foil
@@ -3038,7 +3037,7 @@
   |=  pok=port
   ^-  prop
   ?-  -.q.pok
-    &  [p.pok [~ [[p.q.pok [| ~ 1]] ~]]]
+    &  [p.pok [~ [[p.q.pok [%elm ~ 1]] ~]]]
     |  [p.pok [p.q.pok q.q.pok]]
   ==
 :: 
@@ -4269,12 +4268,7 @@
         ?.  (park way p.u.taf)
           ~|(%find-park !!)
         [~ (peg 2 p.u.taf) q.u.taf]
-      =+  ^=  dur
-          ?+  -.q.u.zem  !!
-            %ash  [%& p.q.u.zem]
-            %elm  [%| p.q.u.zem]
-          ==
-      [~ 1 %| (peg 3 p.u.zem) [[sut(p.q %gold) dur] ~]]
+      [~ 1 %| (peg 3 p.u.zem) [[sut(p.q %gold) q.u.zem] ~]]
     ::
         [%cube *]
       $(sut repo)
@@ -4340,29 +4334,31 @@
   ::
   ++  fire
     ~.  %fire
-    |=  hag=(list ,[p=type q=door])
+    |=  hag=(list ,[p=type q=foot])
     ^-  type
-    ?:  ?=([[* [| ~ 1]] ~] hag)
+    ?:  ?=([[* [%elm ~ 1]] ~] hag)
       p.i.hag
     :-  %hold
     %+  turn
       hag.$
-    |=  [p=type q=door]
+    |=  [p=type q=foot]
     ?.  ?=([%core *] p)
       ~|(%fire-core !!)
     =+  dox=[%core q.q.p q.p]
-    ?:  p.q
-      ~|  %fire-dry
+    ?:  ?=(%ash -.q)
+      ~|  %fire-ash
       ::  ~~  (dunk(sut [%cell q.q.p p.p]) %fire-dry)
       ?>  ?|(!vet (nest(sut q.q.p) & p.p))
-      [dox q.q]
-    ~|  %fire-wet
+      [dox p.q]
+    ~|  [%fire-odd -.q]
+    ?>  ?=(%elm -.q)
+    ~|  %fire-elm
     ::  ~~  (dunk(sut [%cell q.q.p p.p]) %fire-wet)
     ?>  ?|  !vet 
-            (~(has in rib) [sut dox q.q])
-            (mull(sut p, rib (~(put in rib) [sut dox q.q])) %noun dox q.q)
+            (~(has in rib) [sut dox p.q])
+            (mull(sut p, rib (~(put in rib) [sut dox p.q])) %noun dox p.q)
         ==
-    [p q.q]
+    [p p.q]
   ::
   ++  firm
     ~.  %firm
@@ -4783,7 +4779,7 @@
         ~|(%mull-bonk-f !!)
       =-  [(nice (fire p.yom)) (fire(vet |) q.yom)]
       ^=  yom  
-      |-  ^-  [p=(list ,[p=type q=door]) q=(list ,[p=type q=door])]
+      |-  ^-  [p=(list ,[p=type q=foot]) q=(list ,[p=type q=foot])]
       ?@  mew
         [q.q.lar q.q.vug]
       =+  zil=^$(gen q.i.mew, gol %noun)
@@ -5149,7 +5145,7 @@
                  =+  mew=(swab q.q.lar q.gen)
                  =+  rag=q.q.lar
                  %-  fire
-                 |-  ^-  (list ,[p=type q=door])
+                 |-  ^-  (list ,[p=type q=foot])
                  ?@  mew
                    rag
                  $(mew t.mew, rag q:(tock p.i.mew ^$(gen q.i.mew) rag))
@@ -5235,7 +5231,7 @@
     =+  ^=  syp
         ?-    -.q.zar
             &  p.q.zar
-            |  (fire (turn q.q.zar |=([p=type q=door] [p [& ~ 1]])))
+            |  (fire (turn q.q.zar |=([p=type q=foot] [p [%ash ~ 1]])))
         ==
     ?-    i.hyp
         @
@@ -5273,7 +5269,7 @@
   ::
   ++  swab
     ~.  %swab
-    |=  [men=(list ,[p=type q=door]) har=(list ,[p=gene q=gene])]
+    |=  [men=(list ,[p=type q=foot]) har=(list ,[p=gene q=gene])]
     ^-  (list ,[p=twig q=gene])
     %+  turn
       har
@@ -5300,11 +5296,11 @@
   ::
   ++  tock
     ~.  %tock
-    |=  [peh=twig mur=type men=(list ,[p=type q=door])]
-    ^-  [p=axis q=(list ,[p=type q=door])]
+    |=  [peh=twig mur=type men=(list ,[p=type q=foot])]
+    ^-  [p=axis q=(list ,[p=type q=foot])]
     =-  [(need p.wib) q.wib]
     ^=  wib
-    |-  ^-  [p=(unit axis) q=(list ,[p=type q=door])]
+    |-  ^-  [p=(unit axis) q=(list ,[p=type q=foot])]
     ?@  men
       [*(unit axis) ~]
     =+  geq=(tack(sut p.i.men) peh mur)

@@ -59,7 +59,7 @@
       u2_noun dox = u2_bt
         (wir_r, c3__core, u2_rx(wir_r, qq_typ), u2_rx(wir_r, q_typ));
 
-      if ( u2_yes == u2_h(gat) ) {
+      if ( c3__ash == u2_h(gat) ) {
         if ( (u2_yes == vet) &&
              (u2_no == j2_mcy(Pt6, ut, nest)
                 (wir_r, van, qq_typ, u2_yes, p_typ)) )
@@ -78,6 +78,8 @@
         }
       }
       else {
+        c3_assert(c3__elm == u2_h(gat));
+
         if ( (u2_yes == vet) &&
              // (u2_no == u2_sing(p_typ, qq_typ)) &&
              (u2_no == _fire_mull(wir_r, van, typ, dox, t_gat)) )
@@ -135,7 +137,7 @@
         u2_noun pi_hag = u2_h(i_hag);
         u2_noun qi_hag = u2_t(i_hag);
      
-        if ( (u2_no == u2_h(qi_hag)) ) {
+        if ( c3__elm == u2_h(qi_hag) ) {
           u2_noun qqi_hag = u2_t(qi_hag);
           
           if ( u2_yes == u2_dust(qqi_hag) &&

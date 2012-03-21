@@ -61,7 +61,7 @@
                                u2_bc(wir_r,
                                      u2_bc(wir_r, 
                                            u2_rx(wir_r, pq_pok),
-                                           u2_bt(wir_r, u2_no, u2_nul, _1)),
+                                           u2_bt(wir_r, c3__elm, u2_nul, _1)),
                                      u2_nul)));
     }
     else {

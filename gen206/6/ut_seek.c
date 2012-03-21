@@ -19,7 +19,7 @@
 
       return u2_bc
         (wir_r, u2_bc(wir_r, u2_rx(wir_r, u2_h(i_wob)),
-                             u2_bt(wir_r, u2_yes, u2_nul, _1)),
+                             u2_bt(wir_r, c3__ash, u2_nul, _1)),
                 _seek_flat(wir_r, t_wob));
     }
   }

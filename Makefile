@@ -20,14 +20,14 @@ BIN=bin
 
 RM=rm -f
 CC=gcc
-CLD=gcc -O3 -L/usr/local/lib
+CLD=gcc -g -L/usr/local/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
 INCLUDE=include
 GENERATED=generated
 DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN)
-CFLAGS=-O3 -I/usr/local/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
+CFLAGS=-g -I/usr/local/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 CWFLAGS=-Wall
 
 .y.o:
