@@ -16,7 +16,7 @@ To stage down from X to Y == (X - 1) on vere computer C, steps:
 
     - make clean; cp -r genX to genY;
     - git add genY/*.c genY/*.h genY/*/*.c 
-    - update genY/pit.h  (12 subs)
+    - update genY/pit.h  (7 subs)
     - add genY/ofiles in Makefile 
     - link j2_da drivers in v/main.c
     - (optional) trim old stages

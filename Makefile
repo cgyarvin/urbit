@@ -20,14 +20,14 @@ BIN=bin
 
 RM=rm -f
 CC=gcc
-CLD=gcc -g -L/usr/local/lib
+CLD=gcc -O3 -L/usr/local/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
 INCLUDE=include
 GENERATED=generated
 DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN)
-CFLAGS=-g -I/usr/local/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
+CFLAGS=-O3 -I/usr/local/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 CWFLAGS=-Wall
 
 .y.o:
@@ -1276,6 +1276,141 @@ J206_OFILES=\
        $(J206_6_OFILES_UT) \
        gen206/watt.o
 
+J205_1_OFILES=\
+       gen205/1/add.o \
+       gen205/1/dec.o \
+       gen205/1/div.o \
+       gen205/1/gte.o \
+       gen205/1/gth.o \
+       gen205/1/lte.o \
+       gen205/1/lth.o \
+       gen205/1/mod.o \
+       gen205/1/mul.o \
+       gen205/1/sub.o
+
+J205_2_OFILES=\
+       gen205/2/bind.o \
+       gen205/2/clap.o \
+       gen205/2/drop.o \
+       gen205/2/flop.o \
+       gen205/2/lent.o \
+       gen205/2/levy.o \
+       gen205/2/lien.o \
+       gen205/2/need.o \
+       gen205/2/reel.o \
+       gen205/2/roll.o \
+       gen205/2/skim.o \
+       gen205/2/skip.o \
+       gen205/2/slag.o \
+       gen205/2/snag.o \
+       gen205/2/sort.o \
+       gen205/2/turn.o \
+       gen205/2/weld.o
+
+J205_3_OFILES=\
+       gen205/3/bex.o \
+       gen205/3/can.o \
+       gen205/3/cap.o \
+       gen205/3/cat.o \
+       gen205/3/con.o \
+       gen205/3/cut.o \
+       gen205/3/dor.o \
+       gen205/3/dis.o \
+       gen205/3/end.o \
+       gen205/3/gor.o \
+       gen205/3/hor.o \
+       gen205/3/lsh.o \
+       gen205/3/mas.o \
+       gen205/3/met.o \
+       gen205/3/mix.o \
+       gen205/3/mug.o \
+       gen205/3/peg.o \
+       gen205/3/rap.o \
+       gen205/3/rip.o \
+       gen205/3/rsh.o \
+       gen205/3/vor.o
+
+J205_4_OFILES=\
+       gen205/4/in.o \
+       gen205/4/by.o \
+       gen205/4/in_has.o \
+       gen205/4/in_gas.o \
+       gen205/4/in_put.o \
+       gen205/4/in_tap.o \
+       gen205/4/by_gas.o \
+       gen205/4/by_get.o \
+       gen205/4/by_has.o \
+       gen205/4/by_put.o 
+
+J205_5_OFILES=\
+       gen205/5/cue.o \
+       gen205/5/jam.o \
+       gen205/5/mat.o \
+       gen205/5/mock.o \
+       gen205/5/parse.o \
+       gen205/5/rub.o \
+       gen205/5/shax.o \
+       gen205/5/trip.o
+
+J205_6_OFILES=\
+       gen205/6/ap.o \
+       gen205/6/cell.o \
+       gen205/6/comb.o \
+       gen205/6/cons.o \
+       gen205/6/core.o \
+       gen205/6/cube.o \
+       gen205/6/face.o \
+       gen205/6/fine.o \
+       gen205/6/fitz.o \
+       gen205/6/flan.o \
+       gen205/6/flip.o \
+       gen205/6/flor.o \
+       gen205/6/foam.o \
+       gen205/6/fork.o \
+       gen205/6/hike.o \
+       gen205/6/look.o \
+       gen205/6/ut.o
+
+J205_6_OFILES_UT=\
+       gen205/6/ut_burn.o \
+       gen205/6/ut_bust.o \
+       gen205/6/ut_crop.o \
+       gen205/6/ut_cull.o \
+       gen205/6/ut_find.o \
+       gen205/6/ut_fink.o \
+       gen205/6/ut_fire.o \
+       gen205/6/ut_firm.o \
+       gen205/6/ut_fish.o \
+       gen205/6/ut_fuse.o \
+       gen205/6/ut_gain.o \
+       gen205/6/ut_heal.o \
+       gen205/6/ut_lose.o \
+       gen205/6/ut_mint.o \
+       gen205/6/ut_moot.o \
+       gen205/6/ut_mull.o \
+       gen205/6/ut_nest.o \
+       gen205/6/ut_park.o \
+       gen205/6/ut_peek.o \
+       gen205/6/ut_play.o \
+       gen205/6/ut_repo.o \
+       gen205/6/ut_rest.o \
+       gen205/6/ut_seek.o \
+       gen205/6/ut_snap.o \
+       gen205/6/ut_swab.o \
+       gen205/6/ut_tack.o \
+       gen205/6/ut_tock.o \
+       gen205/6/ut_wrap.o
+
+J205_OFILES=\
+       $(J205_1_OFILES) \
+       $(J205_2_OFILES) \
+       $(J205_3_OFILES) \
+       $(J205_4_OFILES) \
+       $(J205_5_OFILES) \
+       $(J205_6_OFILES) \
+       $(J205_6_OFILES_UT) \
+       gen205/watt.o
+
 BASE_OFILES=\
        $(C_OFILES) \
        $(F_OFILES) \
@@ -1283,7 +1418,8 @@ BASE_OFILES=\
        $(J209_OFILES) \
        $(J208_OFILES) \
        $(J207_OFILES) \
-       $(J206_OFILES)
+       $(J206_OFILES) \
+       $(J205_OFILES)
 
 OUT_OFILES=\
        outside/jhttp/http_parser.o
