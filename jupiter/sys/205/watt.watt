@@ -1,4 +1,4 @@
-::
+!:
 ::  Watt kernel 205.  This file is in the public domain.
 ::
 ?>  ?=(@ .)
@@ -2915,7 +2915,7 @@
       [%zpzp ~]
     ==
   ++  goop  $|(@ [~ p=gene])
-  ++  knot  $|(term [~ p=axis])
+  ++  knot  $|(term $%([& p=axis] [| p=@ud q=term]))
   ++  line  ,[p=[%leaf p=odor q=@] q=tile] 
   ++  odor  disc
   ++  pole
@@ -5221,6 +5221,79 @@
       ~
     =+([p=*type q=`type`%void] |.((fork p q)))
   ::
+  ++  silk
+    |=  [syx=term tor=port]
+    ^-  (unit port)
+    ?-    -.q.tor
+        &  ~
+        |
+      =+  ^=  hey  ^-  (list ,[p=axis q=foot])
+          |-  ?~  q.q.tor 
+                ~ 
+              =+  yon=$(q.q.tor t.q.q.tor)
+              ?.  ?=([%yew *] q.i.q.q.tor)
+                yon
+              [(need (look syx p.q.i.q.q.tor)) yon]
+      ?:  =(~ hey)
+        ~
+      ?>  =((lent hey) (lent q.q.tor))
+      =+  ^=  yaw
+          =+  yaw=p.i.hey
+          |-(?~(t.hey yaw ?>(=(p.i.t.hey yaw) $(t.hey t.t.hey))))
+      :-  ~
+      :-  p.tor
+      :+  %| 
+        (peg p.q.tor yaw)
+      |-  ^-  (list ,[p=type q=foot])
+      ?~  q.q.tor
+        ~
+      ?<  ?=(~ hey)
+      [[p.i.q.q.tor q.i.hey] $(q.q.tor t.q.q.tor, hey t.hey)]
+    ==
+  ::
+  ++  sick
+    ~.  %seek
+    |=  [way=?(%read %rite) hyp=twig]
+    ^-  port
+    ?~  hyp
+      [1 %& sut]
+    =>  .(i.hyp ?^(i.hyp i.hyp [%| p=0 q=i.hyp]))
+    =+  zar=$(hyp t.hyp)
+    ~~  (dunk %seek-from)
+    ~~  %-  show  :*
+          [%c %seek-limb]
+          ?-  i.hyp
+            [& *]  [%d p.i.hyp]
+            [| *]  [[%d p.i.hyp] ?:(=(0 q.i.hyp) '%$' [%a q.i.hyp])]
+          ==
+        ==
+    =+  ^=  sic  ^-  (unit port)
+        ?.  &(?=([| *] i.hyp) ?=([| *] q.zar))
+          ~
+        =+  kis=(silk q.i.hyp zar)
+        ?~  kis
+          ~
+        |-  ^-  (unit port)
+        ?:  =(0 p.i.hyp)
+          kis
+        $(p.i.hyp (dec p.i.hyp), kis [~ (need (silk q.i.hyp u.kis))])
+    ?.  ?=(~ sic)
+      u.sic
+    =+  wig=(foam $(hyp t.hyp))
+    =>  .(sut q.wig)
+    ?-    i.hyp
+        [& *]  [(peg p.wig p.i.hyp) %& (peek way p.i.hyp)]
+        [| *] 
+      |-  ^-  port
+      =+  wed=(find way q.i.hyp)
+      ?~  wed
+        ~|(%find-none !!)
+      ?:  =(0 p.i.hyp)
+        [(peg p.wig p.u.wed) q.u.wed]
+      =+  wag=(foam u.wed)
+      $(p.i.hyp (dec p.i.hyp), sut q.wag, p.wig (peg p.wig p.wag))
+    ==
+  ::
   ++  seek
     ~.  %seek
     |=  [way=?(%read %rite) hyp=twig]
@@ -5239,8 +5312,11 @@
       =+  hud=(fink way i.hyp)
       [(peg p.zar p.hud) q.hud]
     ::
-        [~ *]
+        [& *]
       [(peg p.zar p.i.hyp) %& (peek(sut syp) way p.i.hyp)]
+    ::
+        [| *]
+      !!
     ==
   ::
   ++  snap
@@ -5288,10 +5364,13 @@
       =+  gav=$(peh t.peh, sut q.wuf, axe (peg axe p.wuf))
       [p.gav (heal [~ i.peh] p.wuf q.gav)]
     ::
-        [~ *]
+        [& *]
       =+  vas=(peek %rite p.i.peh)
       =+  gav=$(peh t.peh, sut vas, axe (peg axe p.i.peh))
       [p.gav (heal ~ p.i.peh q.gav)]
+    ::
+        [| *]
+      !!
     ==
   ::
   ++  tock
@@ -5367,7 +5446,7 @@
       :-  '%'
         ;~  pfix  cen
           ;~  pose
-            (stag %dtsg (stag %tam ;~(pose sym (cold %% cen))))
+            (stag %dtsg (stag %tam ;~(pose sym (cold %% cen) (cold %% buc))))
             (stag %dtsg (stag %f (cold & pam)))
             (stag %dtsg (stag %f (cold | bar)))
             (stag %dtsg (stag %ta qut))
@@ -5631,6 +5710,7 @@
     |%
     ::
     ++  boon
+      %+  knee  [p=*term q=*foot]  |.  ~+
       ;~  pfix  lus
         ;~  pose
           %+  cook 
@@ -5647,6 +5727,13 @@
             (cold %elm (just '-'))
             ;~(pose (cold %% buc) sym)
             loaf
+          ==
+        ::
+          %+  cook
+            |=([a=%oak b=term] [b a ~])
+          ;~  gunk
+            (cold %oak (just '|'))
+            ;~(pose (cold %% buc) sym) 
           ==
         ==
       ==
@@ -5674,7 +5761,7 @@
     ++  glop  ~+((glue mash))
     ++  gunk  ~+((glue muck))
     ++  butt  |*(zor=_rule ?:(tol ;~(sfix zor ;~(plug gap duz)) zor))
-    ++  fist  |*(zor=_rule ?:(tol ;~(sfix zor ;~(plug gap dun)) zor))
+    ++  fist  |*(zor=_rule ?.(tol fail ;~(sfix zor ;~(plug gap dun))))
     ++  neck  ;~(pose duz ;~(pfix ;~(plug duq gap) wing))
     ++  hank  (most muck loaf)
     ++  loaf  ?:(tol tall wide)
