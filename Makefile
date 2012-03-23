@@ -1363,9 +1363,9 @@ J205_6_OFILES=\
        gen205/6/fine.o \
        gen205/6/fitz.o \
        gen205/6/flan.o \
+       gen205/6/flay.o \
        gen205/6/flip.o \
        gen205/6/flor.o \
-       gen205/6/foam.o \
        gen205/6/fork.o \
        gen205/6/hike.o \
        gen205/6/look.o \

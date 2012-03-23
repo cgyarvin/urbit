@@ -24,7 +24,7 @@
 
       if ( u2_no == u2_dust(i_peh) ) {
         u2_noun fic = j2_mcy(Pt6, ut, fink)(wir_r, van, sut, c3__rite, i_peh);
-        u2_noun fom = j2_mby(Pt6, foam)(wir_r, fic);
+        u2_noun fom = j2_mby(Pt6, flay)(wir_r, fic);
         u2_noun ret = _snip(wir_r, van, u2_t(fom), t_peh, gen);
 
         u2_rz(wir_r, fom);

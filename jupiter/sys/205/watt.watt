@@ -1390,13 +1390,13 @@
           ?@(wan (lth ort wan) (lth ort -.wan))
         ?@(wan (lth +.ort wan) (lth +.ort -.wan))
     =+  ^=  hel
-        =+  hel=`(tree _i.leh)`~
+        =+  hel=`(tree $_(?>(?=(^ leh) i.leh)))`~
         |-  ^+  hel
-        ?@  leh
+        ?~  leh
           ~
         =+  yal=$(leh t.leh)
         |-  ^+  hel
-        ?@  yal
+        ?~  yal
           [i.leh ~ ~]
         ?:  (wor p.i.leh p.n.yal)
           =+  nuc=$(yal l.yal)
@@ -3022,8 +3022,16 @@
   [%fine fuv lup mar]
 ::
 ++  flag  ^-(type [%fork [%cube 0 %atom %f] [%cube 1 %atom %f]])
-++  foam
-  ~.  %foam
+++  fray
+  ~.  %fray
+  |=  pok=port  ^-  [p=axis q=type]
+  ?-  -.q.pok
+    &  [p.pok p.q.pok]
+    |  :-  (peg p.pok 2) 
+       (roll q.q.pok =+([p=[p=*type q=*foot] q=`type`%void] |.((fork p.p q))))
+  ==
+++  flay
+  ~.  %flay
   |=  pok=port
   ^-  [p=axis q=type]
   :-  p.pok
@@ -4323,12 +4331,94 @@
         *           ~
     ==
   ::
+  ++  fino
+    ~.  %find
+    |=  [dep=@ud way=?(%read %rite) cog=term]
+    =+  gil=*(set type)
+    |-  ^-  [p=@ud q=(unit port)]
+    ?+    sut  [dep ~]
+        [%cell *]
+      =+  taf=$(sut q.sut)
+      ?~  q.taf
+        =+  bov=$(dep p.taf, sut p.sut)
+        ?~  q.bov
+          bov
+        [p.bov ~ (peg 2 p.u.q.bov) q.u.q.bov]
+      [p.taf ~ (peg 3 p.u.q.taf) q.u.q.taf]
+    ::
+        [%core *]
+      =+  zem=(look cog q.r.q.sut)
+      =>  ^+(. ?:(=(0 dep) . .(dep (dec dep), zem ~)))
+      ?^  zem
+        [dep ~ 1 [%| (peg 3 p.u.zem) [[sut(p.q %gold) q.u.zem] ~]]]
+      =+  taf=$(sut p.sut)
+      ?~  q.taf
+        taf 
+      ?.  (park way p.u.q.taf)
+        ~|(%find-park !!)
+      [p.taf ~ (peg 2 p.u.q.taf) q.u.q.taf]
+    ::
+        [%cube *]
+      $(sut repo)
+    ::
+        [%face *]
+      ?:  =(cog p.sut)
+        ?.  ?=(0 dep)
+          [(dec dep) ~] 
+        [0 ~ 1 %& q.sut]
+      [dep ~]
+    ::
+        [%fine *]
+      $(sut repo)
+    ::
+        [%fork *]
+      ~|  %fork
+      ?:  (~(has in gil) q.sut)
+        $(sut p.sut)
+      ?:  (~(has in gil) p.sut)
+        $(sut q.sut)
+      =+  [hax=$(sut p.sut) yor=$(sut q.sut)]
+      ~|  %find-fork
+      ?:  =(hax yor)
+        hax
+      ?~  q.hax
+        ?~  q.yor
+          ?>(=(hax yor) hax)
+        ?>  =(0 p.hax)
+        ?>((nest(sut %void) | (peek(sut p.sut) way p.u.q.yor)) yor)
+      ?~  q.yor
+        ?>  =(0 p.yor)
+        ?>((nest(sut %void) | (peek(sut q.sut) way p.u.q.hax)) hax)
+      ?>  =(p.u.q.hax p.u.q.yor)
+      :-   p.u.q.hax
+      ?-    -.q.u.q.hax
+          &
+        ?-    -.q.u.q.yor
+            &  [~ p.u.q.hax %& (fork p.q.u.q.hax p.q.u.q.yor)]
+            |  !!
+        ==
+      ::
+          |
+        ?-    -.q.u.q.yor
+            &  !!
+            |
+          ?>  =(p.q.u.q.yor p.q.u.q.hax)
+          [~ p.u.q.hax %| p.q.u.q.hax (weld q.q.u.q.hax q.q.u.q.yor)]
+        ==
+      ==
+    ::
+        [%hold *]
+      ?:  (~(has in gil) sut)
+        [dep ~]
+      $(gil (~(put in gil) sut), sut repo)
+    ==
+  ::
   ++  fink
     ~.  %fink
     |=  [way=?(%read %rite) cog=term]
     ^-  port
     ~~  (dunk 'type')
-    ~~  (show [%c 'name'] ?:(=(%% cog) '%%' [%a cog]))
+    ~~  (show [%c 'name'] ?:(=(%% cog) '$' [%a cog]))
     =+  hoq=(find way cog)
     ?@(hoq ~|(%find-none !!) u.hoq)
   ::
@@ -5251,49 +5341,6 @@
       [[p.i.q.q.tor q.i.hey] $(q.q.tor t.q.q.tor, hey t.hey)]
     ==
   ::
-  ++  sick
-    ~.  %seek
-    |=  [way=?(%read %rite) hyp=twig]
-    ^-  port
-    ?~  hyp
-      [1 %& sut]
-    =>  .(i.hyp ?^(i.hyp i.hyp [%| p=0 q=i.hyp]))
-    =+  zar=$(hyp t.hyp)
-    ~~  (dunk %seek-from)
-    ~~  %-  show  :*
-          [%c %seek-limb]
-          ?-  i.hyp
-            [& *]  [%d p.i.hyp]
-            [| *]  [[%d p.i.hyp] ?:(=(0 q.i.hyp) '%$' [%a q.i.hyp])]
-          ==
-        ==
-    =+  ^=  sic  ^-  (unit port)
-        ?.  &(?=([| *] i.hyp) ?=([| *] q.zar))
-          ~
-        =+  kis=(silk q.i.hyp zar)
-        ?~  kis
-          ~
-        |-  ^-  (unit port)
-        ?:  =(0 p.i.hyp)
-          kis
-        $(p.i.hyp (dec p.i.hyp), kis [~ (need (silk q.i.hyp u.kis))])
-    ?.  ?=(~ sic)
-      u.sic
-    =+  wig=(foam $(hyp t.hyp))
-    =>  .(sut q.wig)
-    ?-    i.hyp
-        [& *]  [(peg p.wig p.i.hyp) %& (peek way p.i.hyp)]
-        [| *] 
-      |-  ^-  port
-      =+  wed=(find way q.i.hyp)
-      ?~  wed
-        ~|(%find-none !!)
-      ?:  =(0 p.i.hyp)
-        [(peg p.wig p.u.wed) q.u.wed]
-      =+  wag=(foam u.wed)
-      $(p.i.hyp (dec p.i.hyp), sut q.wag, p.wig (peg p.wig p.wag))
-    ==
-  ::
   ++  seek
     ~.  %seek
     |=  [way=?(%read %rite) hyp=twig]
@@ -5317,6 +5364,51 @@
     ::
         [| *]
       !!
+    ==
+  ::
+  ++  sick
+    ~.  %seek
+    |=  [way=?(%read %rite) hyp=twig]
+    ^-  port
+    ?~  hyp
+      [1 %& sut]
+    =>  .(i.hyp ?^(i.hyp i.hyp [%| p=0 q=i.hyp]))
+    =+  zar=$(hyp t.hyp)
+    =+  wig=(flay zar)
+    ~~  (dunk(sut q.wig) %seek-from)
+    ~~  %-  show  :*
+          [%c %seek-limb]
+          ?-  i.hyp
+            [& *]  [%d p.i.hyp]
+            [| *]  [[%d p.i.hyp] ?:(=(0 q.i.hyp) '%$' [%a q.i.hyp])]
+          ==
+        ==
+    =+  ^=  sic  ^-  (unit port)
+        ~|  %seek-soft
+        ?.  &(?=([| *] i.hyp) ?=([| *] q.zar))
+          ~
+        =+  kis=(silk q.i.hyp zar)
+        ?~  kis
+          ~
+        |-  ^-  (unit port)
+        ?:  =(0 p.i.hyp)
+          kis
+        $(p.i.hyp (dec p.i.hyp), kis [~ (need (silk q.i.hyp u.kis))])
+    ?.  ?=(~ sic)
+      u.sic
+    ~|  %seek-hard
+    =>  .(sut q.wig)
+    ?-    i.hyp
+        [& *]  [(peg p.wig p.i.hyp) %& (peek way p.i.hyp)]
+        [| *] 
+      |-  ^-  port
+      =+  wed=(find way q.i.hyp)
+      ?~  wed
+        ~|(%find-none !!)
+      ?:  =(0 p.i.hyp)
+        [(peg p.wig p.u.wed) q.u.wed]
+      =+  wag=(fray u.wed)
+      $(p.i.hyp (dec p.i.hyp), sut q.wag, p.wig (peg p.wig p.wag))
     ==
   ::
   ++  snap
@@ -5360,7 +5452,7 @@
       [axe mur]
     ?-    i.peh
         @
-      =+  wuf=(foam (fink %rite i.peh))
+      =+  wuf=(flay (fink %rite i.peh))
       =+  gav=$(peh t.peh, sut q.wuf, axe (peg axe p.wuf))
       [p.gav (heal [~ i.peh] p.wuf q.gav)]
     ::
@@ -5371,6 +5463,32 @@
     ::
         [| *]
       !!
+    ==
+  ::
+  ++  tacq
+    ~.  %tack
+    |=  [peh=twig mur=type]
+    =+  axe=1
+    |-  ^-  [p=axis q=type]
+    ?~  peh
+      [axe mur]
+    =>  .(i.peh ?^(i.peh i.peh [%| p=0 q=i.peh]))
+    ?-    i.peh
+        [& *]
+      =+  vas=(peek %rite p.i.peh)
+      =+  gav=$(peh t.peh, sut vas, axe (peg axe p.i.peh))
+      [p.gav (heal ~ p.i.peh q.gav)]
+    ::
+        [| *]
+      |-  ^-  [p=axis q=type]
+      =+  vif=(fink %rite q.i.peh)
+      ?:  =(0 p.i.peh)
+        =+  fap=(flay vif)
+        =+  gav=^$(peh t.peh, sut q.fap, axe (peg axe p.fap))
+        [p.gav (heal [~ q.i.peh] p.fap q.gav)]
+      =+  fiz=(fray vif)
+      =+  gav=$(p.i.peh (dec p.i.peh), sut q.fiz, axe (peg axe p.fiz))
+      [p.gav (heal ~ p.fiz q.gav)]
     ==
   ::
   ++  tock

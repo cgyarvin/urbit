@@ -388,7 +388,7 @@
                         u2_noun wix);                             //  retain
 
       u2_noun                                                     //  produce 
-      j2_mby(Pt6, foam)(u2_wire wir_r, 
+      j2_mby(Pt6, flay)(u2_wire wir_r, 
                         u2_noun pok);                             //  retain
 
       u2_noun                                                     //  transfer

@@ -28,7 +28,7 @@
 
       if ( u2_yes == u2_stud(i_peh) ) {
         u2_noun pok   = j2_mcy(Pt6, ut, fink)(wir_r, van, sut, c3__rite, i_peh);
-        u2_noun wuf   = j2_mby(Pt6, foam)(wir_r, pok);
+        u2_noun wuf   = j2_mby(Pt6, flay)(wir_r, pok);
         u2_noun p_wuf = u2_h(wuf);
         u2_noun q_wuf = u2_t(wuf);
         u2_noun nax   = j2_mbc(Pt3, peg)(wir_r, axe, p_wuf); 
