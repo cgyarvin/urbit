@@ -5827,7 +5827,7 @@
       dot
     ;~  pose
       %+  cook  
-        |=([a=(list) b=term] ?@(a [b ~] [b [~ 2] $(a t.a)]))
+        |=([a=(list) b=term] [?~(a b [%| (lent a) b]) ~])
       ;~(plug (star ket) ;~(pose sym (cold %% buc)))
     ::
       %+  cook
