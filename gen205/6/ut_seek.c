@@ -213,7 +213,8 @@
   j2_mcj(Pt6, ut, seek)[] = {
     { ".3", c3__hevy, 
         j2_mc(Pt6, ut, seek), 
-        Tier6_b_memo,
+        (u2_jet_dead | u2_jet_memo),  //  XX  update pls
+        // Tier6_b_memo,
         u2_none, u2_none,
         j2_mck(Pt6, ut, seek), c3__seek
     },

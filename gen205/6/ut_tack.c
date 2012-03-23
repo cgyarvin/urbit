@@ -165,6 +165,9 @@
 */
   u2_ho_jet 
   j2_mcj(Pt6, ut, tack)[] = {
-    { ".3", c3__hevy, j2_mc(Pt6, ut, tack), Tier6_b, u2_none, u2_none },
+    { ".3", c3__hevy, j2_mc(Pt6, ut, tack), 
+      u2_jet_dead, 
+      // Tier6_b, 
+      u2_none, u2_none },
     { }
   };

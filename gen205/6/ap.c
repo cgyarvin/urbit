@@ -201,18 +201,6 @@
     u2_rz(wir_r, tul);
     return ret;
   }
-  _open_do_pqr(wtsg)  //  ?~
-  {
-    return u2_bq
-      (wir_r,
-       c3__wtcl,
-       u2_bt(wir_r,
-             c3__wtcn,
-             u2_bt(wir_r, c3__dtpt, u2_blip, _0),
-             u2_rx(wir_r, p_gen)),
-       u2_rx(wir_r, q_gen),
-       u2_rx(wir_r, r_gen));
-  }
   _open_do_p(wtzp)    //  ?!
   {
     return u2_bq
@@ -736,7 +724,7 @@
         _open_p   (wtbr);
         _open_p   (wtpm);
         _open_pqr (wtls);
-        _open_pqr (wtsg);
+        // _open_pqr (wtsg);
         // _open_pq  (wthp);
         _open_pq  (wtgr);
 

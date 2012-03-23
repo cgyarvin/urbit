@@ -420,7 +420,8 @@
   j2_mcj(Pt6, ut, find)[] = {
     { ".3", c3__hevy, 
         j2_mc(Pt6, ut, find), 
-        Tier6_b_memo,
+        (u2_jet_dead | u2_jet_memo),  //  XX needs complete update 
+  //      Tier6_b_memo,
         u2_none, u2_none,
         j2_mck(Pt6, ut, find), c3__find,
     },
