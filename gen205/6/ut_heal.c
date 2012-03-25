@@ -62,6 +62,7 @@
   _heal_to(u2_wire wir_r,
            u2_noun van,
            u2_noun sut,
+           u2_noun gil,
            u2_noun qog,
            u2_noun ref,
            u2_atom now,
@@ -106,19 +107,35 @@
 
       case c3__fork: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {
-        u2_noun dis = _heal_to(wir_r, van, p_sut, qog, ref, now, lat);
-        u2_noun dat = _heal_to(wir_r, van, q_sut, qog, ref, now, lat);
+        u2_noun dis = _heal_to(wir_r, van, p_sut, gil, qog, ref, now, lat);
+        u2_noun dat = _heal_to(wir_r, van, q_sut, gil, qog, ref, now, lat);
         u2_noun ret = j2_mby(Pt6, fork)(wir_r, dis, dat);
 
         u2_rl_lose(wir_r, dis);
         u2_rl_lose(wir_r, dat);
         return ret;
       }
+
+      case c3__hold: {
+        if ( (u2_yes == j2_mcc(Pt4, in, has)(wir_r, gil, sut)) ) {
+          return c3__void;
+        } 
+        else {
+          u2_noun zoc = j2_mcc(Pt4, in, put)(wir_r, gil, sut);
+          u2_type rep = j2_mcy(Pt6, ut, repo)(wir_r, van, sut);
+          u2_noun ret = _heal_to(wir_r, van, rep, zoc, qog, ref, now, lat);
+
+          u2_rl_lose(wir_r, rep);
+          u2_rl_lose(wir_r, zoc);
+
+          return ret;
+        }
+      }
     }
 
     repo: {
       u2_noun rep = j2_mcy(Pt6, ut, repo)(wir_r, van, sut);
-      u2_noun ret = _heal_to(wir_r, van, rep, qog, ref, now, lat);
+      u2_noun ret = _heal_to(wir_r, van, gil, rep, qog, ref, now, lat);
 
       u2_rz(wir_r, rep);
       return ret;
@@ -141,7 +158,7 @@
     else {
       u2_atom now = j2_mbc(Pt3, cap)(wir_r, axe);
       u2_atom lat = j2_mbc(Pt3, mas)(wir_r, axe);
-      u2_noun ret = _heal_to(wir_r, van, sut, qog, ref, now, lat);
+      u2_noun ret = _heal_to(wir_r, van, sut, u2_nul, qog, ref, now, lat);
 
       u2_rz(wir_r, lat);
       return ret;

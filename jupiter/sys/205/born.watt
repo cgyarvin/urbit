@@ -1,4 +1,4 @@
-!:
+::
 =>  |%
     ++  boom
       $%  [%hit p=mode q=barn r=*]        ::  save to disk
@@ -110,7 +110,6 @@
 |%
 ++  live
   |=  lun=loon  ^-  [p=(list boom) q=_..live]
-  ~|  [%live -.lun]
   =<  vile
   |%
   ++  evil

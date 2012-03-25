@@ -2825,8 +2825,9 @@
       [%clsg p=(list gene)]
       [%cltr p=(list gene)]
     ::
-      [%cntr p=twig q=gene r=(list ,[p=gene q=gene])]
+      [%cncb p=gene q=(list ,[p=gene q=gene])]
       [%cncl p=gene q=gene]
+      [%cntr p=twig q=gene r=(list ,[p=gene q=gene])]
       [%cndt p=gene q=gene]
       [%cnkt p=gene q=gene r=gene s=gene]
       [%cnbc p=term]
@@ -3338,6 +3339,23 @@
           ^       [i.p.gen $(p.gen t.p.gen)]
       ==
     ::
+        [%cnbc *]  [%cnts [p.gen ~] ~]
+        [%cncb *]  
+      :+  %tsls
+        p.gen
+      :+  %cnts
+        `twig`[[~ 3] ~]
+      (turn q.gen |=([p=gene q=gene] [p [%tsgr [~ 2] q]]))
+    ::
+        [%cncl *]  [%cnsg [%% ~] p.gen q.gen]
+        [%cndt *]  [%cnhp q.gen [p.gen ~]]
+        [%cnkt *]  [%cnhp p.gen q.gen r.gen s.gen ~]
+        [%cnls *]  [%cnhp p.gen q.gen r.gen ~]
+        [%cnhp *]   
+      ?@(q.gen [%tsgr p.gen [%cnbc %%]] [%cncl p.gen [%cltr q.gen]])
+    ::
+        [%cnhx *]  [%cnts p.gen ~]
+        [%cnsg *]  [%cntr p.gen q.gen [[[~ 5] r.gen] ~]]
         [%cntr *]
       :+  %tsls
         q.gen
@@ -3345,16 +3363,6 @@
         (weld p.gen `twig`[[~ 3] ~])
       (turn r.gen |=([p=gene q=gene] [p [%ktdt [~ 13] [%tsgr [~ 2] q]]]))
     ::
-        [%cncl *]  [%cnsg [%% ~] p.gen q.gen]
-        [%cndt *]  [%cnhp q.gen [p.gen ~]]
-        [%cnkt *]  [%cnhp p.gen q.gen r.gen s.gen ~]
-        [%cnbc *]  [%cnts [p.gen ~] ~]
-        [%cnls *]  [%cnhp p.gen q.gen r.gen ~]
-        [%cnhp *]   
-      ?@(q.gen [%tsgr p.gen [%cnbc %%]] [%cncl p.gen [%cltr q.gen]])
-    ::
-        [%cnhx *]  [%cnts p.gen ~]
-        [%cnsg *]  [%cntr p.gen q.gen [[[~ 5] r.gen] ~]]
         [%kthp *]  [%ktls ~(bunt al bore(gen p.gen)) q.gen]
         [%sgbr *]  [%sggr [%bean p.gen] q.gen]
         [%sgcn *]
@@ -3602,10 +3610,10 @@
   ~.  %hike
   |=  [axe=axis pac=(list ,[p=axis q=form])]
   ^-  form
-  ?@  pac
+  ?~  pac
     [%0 axe]
   =+  zet=(skim pac.$ |=([p=axis q=form] [=(1 p)]))
-  ?@  zet
+  ?~  zet
     =+  tum=(skim pac.$ |=([p=axis q=form] ?&(!=(1 p) =(2 (cap p)))))
     =+  gam=(skim pac.$ |=([p=axis q=form] ?&(!=(1 p) =(3 (cap p)))))
     %+  cons
@@ -4480,9 +4488,9 @@
     (chip & gen)
   ::
   ++  hang
+    ~.  %hang
     |=  [dab=(map term foot) rud=(map term foot)]
     ^-  (map term foot)
-    ~.  %hang
     =+  goy=(~(tap by rud) ~)
     =+  waf=dab
     |-  ^+  dab
@@ -4515,29 +4523,41 @@
     == 
   ::
   ++  hail
-    |=  [axe=axis dab=(map term foot) waf=(map term foot)]
+    |=  [dab=(map term foot) waf=(map term foot)]
+    =+  axe=1
     =+  dif=*(list ,[p=axis q=form])
     |-  ^+  dif
-    ?@  dab
+    ?~  dab
       ?>(?=(~ waf) dif)
-    =>  %=  .
-          dif  %=  $
-                 dif  $(dab l.dab, waf l.waf, axe (peg axe 2))
-                 dab  r.dab
-                 waf  r.waf
-                 axe  (peg axe 3)
-               ==
+    =+  ^=  goh
+        ?-    dab
+            [* ~ ~]  [p=axe q=dif]
+            [* ~ *]
+          [p=(peg axe 2) q=$(dab r.dab, waf r.waf, axe (peg axe 3))]
+        ::
+            [* * ~]
+          [p=(peg axe 2) q=$(dab l.dab, waf l.waf, axe (peg axe 3))]
+        ::
+            [* * *]
+          :-  p=(peg axe 2)
+          ^=  q
+          %=  $
+            dif  $(dab l.dab, waf l.waf, axe (peg axe 6))
+            dab  r.dab
+            waf  r.waf
+            axe  (peg axe 7)
+          ==
         ==
     ?>  =(p.n.dab p.n.waf)
     ?:  =(q.n.dab q.n.waf)
-      dif
-    :-  :-  axe
+      q.goh
+    :-  :-  p.goh
         :-  %1 
         ?+  -.q.n.waf  !! 
           %ash  q:(mint %noun p.q.n.waf)
           %yew  (harp p.q.n.waf)
         ==
-    dif 
+    q.goh
   ::
   ++  harp
     |=  dab=(map term foot)
@@ -4561,7 +4581,9 @@
     |=  rud=(map term foot)  ^-  type
     ?.  ?=([%core *] sut)
       $(sut repo) 
-    sut(q.r.q (hang q.r.q.sut rud))
+    ?.  |(!vet =(%gold p.q.sut))
+      ~|(%heir-metl !!)
+    sut(q.r.q (hang q.r.q.sut rud), q.q p.sut)    ::  XX handle elm
   ::
   ++  lose
     ~.  %lose
@@ -4596,6 +4618,7 @@
           *           ~|('heal-name' !!)
       ==
     =+  [now=(cap axe) lat=(mas axe)]
+    =+  gil=*(set type) 
     |-  ^-  type
     ?-    sut
         [%atom *]   %void
@@ -4610,6 +4633,9 @@
       (core ^$(sut p.sut, axe lat) q.sut)
     ::
         [%fork *]   (fork $(sut p.sut) $(sut q.sut))
+        [%hold *]   
+      ?:((~(has in gil) sut) %void $(gil (~(put in gil) sut), sut repo))
+    ::
         *           $(sut repo)
     ==
   ::
@@ -4628,6 +4654,23 @@
       =+  hed=$(gen p.gen, gol %noun)
       =+  tal=$(gen q.gen, gol %noun)
       [(nice (cell p.hed p.tal)) (cons q.hed q.tal)]
+    ::
+        [%brcn *]  (grow %gold [~ 1] p.gen)
+        [%brcl *]  
+      ~|  %brcl
+      =+  heq=$(gen p.gen)
+      =+  cow=|-(?:(?=([%core *] p.heq) p.heq $(p.heq repo(sut p.heq))))
+      ?.  |(!vet =(%gold p.q.cow))
+        ~|(%heir-metl !!)
+      =+  vir=(hang q.r.q.cow q.gen)
+      =+  nep=cow(q.r.q vir, q.q p.cow)
+      =+  bop=cow(p q.q.cow)
+      ?>  |(!vet (nest(sut (wrap(sut bop) %zinc)) & (wrap(sut nep) %zinc)))
+      :-  (nice nep)
+      :+  %8
+        q.heq
+      :-  [%0 6]
+      (hike 7 (hail(sut nep) q.r.q.cow vir))
     ::
         [%cnts *]
       =+  lar=(foil (seek %read p.gen))
@@ -4674,7 +4717,6 @@
         [%ktts *]  =+(vat=$(gen q.gen) [(face p.gen p.vat) q.vat])
         [%ktwt *]  =+(vat=$(gen p.gen) [(wrap(sut p.vat) %lead) q.vat])
     ::
-        [%brcn *]  (grow %gold [~ 1] p.gen)
         [%sggr *]
       =+  hum=$(gen q.gen)
       :-  p.hum
@@ -4780,6 +4822,14 @@
       =+  tal=$(gen q.gen, gol %noun)
       [(nice (cell p.hed p.tal)) (cell q.hed q.tal)]
     ::
+        [%brcn *]  (grow %gold [~ 1] p.gen)
+        [%brcl *]
+      =+  gaf=$(gen p.gen, gol %noun)
+      =+  toc=[p=(heir(sut p.gaf) q.gen) q=(heir(sut q.gaf) q.gen)]
+      ?>  (nest(sut (wrap(sut p.gaf) %zinc)) & (wrap(sut p.toc) %zinc))
+      =+  (bake(sut p.toc, dox q.toc) q.gen)
+      [(nice p.toc) q.toc] 
+    ::
         [%cnts *] 
       =+  lar=(foil (seek %read p.gen))
       =+  vug=(foil (seek(sut dox) %read p.gen))
@@ -4845,7 +4895,6 @@
     ::
         [%ktsg *]  $(gen p.gen)
     ::
-        [%brcn *]  (grow %gold [~ 1] p.gen)
         [%sggr *]  $(gen q.gen)
         [%tsgr *]                               
       =+  lem=$(gen p.gen, gol %noun)
@@ -5006,9 +5055,12 @@
                   dext(sut (play p.q.n.dab), ref (play(sut ref) p.q.n.hem))
               ==
                 %elm  =(q.n.dab q.n.hem)
-                %fir  !!
-                %oak  !!
-                %yew  !!
+                %fir  =(q.n.dab q.n.hem)
+                %oak  ?=(?(%oak %yew) -.q.n.hem)
+                %yew  
+              ?&  ?=(%yew -.q.n.hem)
+                  $(dab p.q.n.dab, hem p.q.n.hem)
+              ==
             ==
         ==
       ==
@@ -5151,6 +5203,7 @@
     |=  gen=gene
     ?-  gen
       [^ *]      (cell $(gen p.gen) $(gen q.gen))
+      [%brcl *]  (heir(sut $(gen p.gen)) q.gen)
       [%brcn *]  (core sut %gold sut [[%0 0] p.gen])
       [%cnts *]  =+  lar=(foil (seek %read p.gen))
                  =+  mew=(swab q.q.lar q.gen)
@@ -5358,7 +5411,7 @@
     |=  yoz=?(%lead %iron %zinc)
     ^-  type
     ?-  sut
-      [%core *]  ?.(=(%gold p.q.sut) ~|(%wrap-gold !!) sut(p.q yoz))
+      [%core *]  ?.(=(%gold p.q.sut) ~|(%wrap-metl !!) sut(p.q yoz))
       [%fork *]  (fork $(sut p.sut) $(sut q.sut))
       [%hold *]  $(sut repo)
       *          ~|(%wrap-type !!)
@@ -5428,6 +5481,7 @@
       :-  '&'
         ;~  pose
           (stag %wtpm ;~(pfix pam (ifix [pel per] (most ace wide))))
+          (stag %bccb (stag %ktpm ;~(pfix pam wide)))
           (stag %dtpt (stag %f (cold & pam)))
         ==
       :-  '\''
@@ -5531,13 +5585,14 @@
               ;~  pfix  bar
                 %-  stew  :~  
                   ['_' (rune cab %brcb expr)]
-                  ['=' (rune tis %brts expb)] 
-                  ['+' (rune lus %brls expb)]
                   ['%' (rune cen %brcn expe)]
+                  [':' (rune col %brcl expr)] 
                   ['.' (rune dot %brdt expa)]
-                  ['^' (rune ket %brkt expr)]
-                  ['*' (rune tar %brtr expb)]
                   ['-' (rune hep %brhp expa)]
+                  ['^' (rune ket %brkt expr)]
+                  ['+' (rune lus %brls expb)]
+                  ['*' (rune tar %brtr expb)]
+                  ['=' (rune tis %brts expb)] 
                   ['?' (rune wut %brwt expa)]
                 ==
               ==
@@ -5545,6 +5600,7 @@
               ;~  pfix  cen
                 %-  stew  :~
                   [':' (rune col %cncl expb)]
+                  ['_' (rune cab %cncb exph)]
                   ['.' (rune dot %cndt expb)]
                   ['^' (rune ket %cnkt expf)]
                   ['+' (rune lus %cnls expc)]

@@ -4585,6 +4585,7 @@
           *           ~|('heal-name' !!)
       ==
     =+  [now=(cap axe) lat=(mas axe)]
+    =+  gil=*(set type) 
     |-  ^-  type
     ?-    sut
         [%atom *]   %void
@@ -4599,6 +4600,9 @@
       (core ^$(sut p.sut, axe lat) q.sut)
     ::
         [%fork *]   (fork $(sut p.sut) $(sut q.sut))
+        [%hold *]   
+      ?:((~(has in gil) sut) %void $(gil (~(put in gil) sut), sut repo))
+    ::
         *           $(sut repo)
     ==
   ::
