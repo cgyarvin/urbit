@@ -120,6 +120,15 @@
   ::
   ::  Tier 2 tiles
   ::
+  ++  gear
+    |*  a=_,*
+    $_
+    =+  b=*
+    |?
+    ?@  b
+      ~
+    [i=(a -.b) t=^?(..$(b +.b))]
+  ::
   ++  list
     |*  a=_,*
     $|(~ [i=a t=(list a)])
@@ -3240,6 +3249,7 @@
         [%dtsg *]  [%leaf ?>(?=(@ q.gen) +.gen)]
         [%bcbr *]  [%bush $(gen p.gen) $(gen q.gen)]
         [%bccb *]  [%weed p.gen]
+        [%bccm *]  [%weed gen]
         [%bccn *]  [%kelp burl(gen p.gen) (turn q.gen |=(a=gene burl(gen a)))]
         [%bcpm *]  [%mold $(gen p.gen) $(gen q.gen)]
         [%bcts *]  [%base +.gen]
