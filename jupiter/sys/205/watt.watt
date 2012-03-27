@@ -1,4 +1,4 @@
-::
+!:
 ::  Watt kernel 205.  This file is in the public domain.
 ::
 ?>  ?=(@ .)
@@ -2854,6 +2854,7 @@
       [%dttr p=gene q=gene]
       [%dtts p=gene q=gene]
       [%dtwt p=gene]
+      [%dtzp p=gene]
     ::
       [%bcbr p=gene q=gene]
       [%bccb p=gene]
@@ -2876,6 +2877,8 @@
       [%ktsg p=gene]
       [%ktts p=term q=gene]
       [%ktwt p=gene]
+    ::
+      [%pmcl p=gene q=gene]                                        ::  mill
     ::
       [%sgbr p=gene q=gene]
       [%sgcl p=[p=@ q=@] q=gene]
@@ -3374,6 +3377,24 @@
       (turn r.gen |=([p=gene q=gene] [p [%ktdt [~ 13] [%tsgr [~ 2] q]]]))
     ::
         [%kthp *]  [%ktls ~(bunt al bore(gen p.gen)) q.gen]
+    ::
+        [%pmcl *]
+      ^-  gene
+      :+  %tsgr  [%ktts %v ~ 1]                         ::  =>  v=.
+      :+  %tsls  [%ktts %a %tsgr [%cnbc %v] q.gen]      ::  =+  a==>(v \q.gen)
+      :-  %brwt                                         ::  |?
+      :+  %tsls                                         ::  =+  ^=  b
+        [%ktts %b %tsgl [%cnbc %%] [%cnbc %a]]          ::      $:a
+      :^    %wtsg  [%cnbc %b]                           ::  ?~  b
+        [%bcts %null]                                   ::    ~
+      :-  :+  %tsgr                                     ::  =>  :-  v
+            [[%cnbc %v] [%tsgl [~ 2] [%cnbc %b]]]       ::      -.b
+          p.gen                                         ::  \p.gen
+      :+  %cnts                                         ::  %=    ..$
+        [[~ 1] %% ~]                                    ::    a  +.b 
+      :~  [[%cnbc %a] [%tsgl [~ 3] [%cnbc %b]]]             ::  ==
+      ==
+    ::
         [%sgbr *]  [%sggr [%bean p.gen] q.gen]
         [%sgcn *]
       :+  %sggl
@@ -3474,16 +3495,17 @@
     ^-  gene
     ?-    gen
         [%ktgl *]
-      :+  %tsls  [%ktts %a p.gen]                        ::  =+  a=#p.gen
-      :+  %tsls  [%ktts %b [%tsgr [~ 2] q.gen]]          ::  =+  b==>(.2 #q.gen)
+      :+  %tsls  [%ktts %a p.gen]                        ::  =+  a=\p.gen
+      :+  %tsls  [%ktts %b [%tsgr [~ 2] q.gen]]          ::  =+  b==>(+2 \q.gen)
       :+  %wtgr  [%cnhp [%cnbc %a] [%cnbc %b] ~]         ::  ?>  (a b)
       [%cnbc %b]                                         ::  b
     ::
         [%ktgr *]
       :+  %tsls  [%ktts %a p.gen]                        ::  =+  a=#p.gen
-      :+  %tsls  [%ktts %b [%tsgr [~ 2] q.gen]]          ::  =+  b==>(.2 #q.gen)
+      :+  %tsls  [%ktts %b [%tsgr [~ 2] q.gen]]          ::  =+  b==>(+2 \q.gen)
       :-  %brhp  :+  %ktls  [%bctr [%cnbc %a]]           ::  |- ^- _*a
-      :+  %tsls  [%ktts %c [%cnhp [%cnbc %a] [%cnbc %b] ~]] :: =+c=(a b)
+      :+  %tsls                                          ::  =+  ^=  c
+        [%ktts %c [%cnhp [%cnbc %a] [%cnbc %b] ~]]       ::      (a b)
       :^  %wtcl  [%dtts [%cnbc %b] [%cnbc %c]]           :: ?: =(b c)
         [%cnbc %c]                                       ::    c
       [%cnts [%% ~] [[[%cnbc %b] [%cnbc %c]] ~]]         :: $(b c)
@@ -4706,6 +4728,7 @@
       [(nice flag) [%5 q:$(gen p.gen, gol %noun) q:$(gen q.gen, gol %noun)]]
     ::
         [%dtwt *]  [(nice flag) [%3 q:$(gen p.gen, gol %noun)]]
+        [%dtzp *]  =+(vat=$(gen p.gen) [nuke(sut p.vat) q.vat])
         [%ktbr *]  =+(vat=$(gen p.gen) [(wrap(sut p.vat) %iron) q.vat])
         [%ktdt *]  $(gen (snap(sut (play p.gen)) q.gen))
         [%ktgl *]
@@ -4871,6 +4894,7 @@
       =+([$(gen p.gen, gol %noun) $(gen q.gen, gol %noun)] (both flag))
     ::
         [%dtwt *]  =+($(gen p.gen, gol %noun) (both flag))    ::  XX  =|
+        [%dtzp *]  =+(vat=$(gen p.gen) [nuke(sut p.vat) nuke(sut q.vat)])
         [%ktbr *]  
       =+(vat=$(gen p.gen) [(wrap(sut p.vat) %iron) (wrap(sut q.vat) %iron)])
     ::
@@ -5230,6 +5254,7 @@
       [%dttr *]  %noun
       [%dtts *]  flag
       [%dtwt *]  flag
+      [%dtzp *]  nuke(sut $(gen p.gen))
       [%ktbr *]  (wrap(sut $(gen p.gen)) %iron)
       [%ktdt *]  $(gen (snap(sut $(gen p.gen)) q.gen))
       [%ktgl *]  (fine %very $(gen p.gen) $(gen ~(late ap gen)))
@@ -5375,6 +5400,13 @@
         *           gen
     ==
   ::
+  ++  nuke
+    |-  ^-  type
+    ?+  sut  ~|(%nuke-face !!)
+      [%face *]  q.sut
+      [%fork *]  (fork $(sut p.sut) $(sut q.sut))
+    ==
+  ::
   ++  swab
     ~.  %swab
     |=  [men=(list ,[p=type q=foot]) har=(list ,[p=gene q=gene])]
@@ -5491,7 +5523,7 @@
       :-  '&'
         ;~  pose
           (stag %wtpm ;~(pfix pam (ifix [pel per] (most ace wide))))
-          (stag %bccb (stag %ktpm ;~(pfix pam wide)))
+          ::  (stag %bccb (stag %ktpm ;~(pfix pam wide)))
           (stag %dtpt (stag %f (cold & pam)))
         ==
       :-  '\''
@@ -5650,6 +5682,7 @@
                   ['=' (rune tis %dtts expb)]
                   ['?' (rune wut %dtwt expa)]
                   ['^' (rune ket %dtkt expa)]
+                  ['!' (rune dot %dtzp expa)]
                 ==
               ==
             :-  '/'
