@@ -1,13 +1,14 @@
 ::
-::  Watt kernel 205.  This file is in the public domain.
+::              Watt kernel 205.  This file is in the public domain.
 ::
-?>  ?=(@ .)
-%.  .
+=>  src=.
+?>  ?=(@ src)
+%.  src
 =<  make
 =>  %205
 =>  
   ::::
-  ::::  Tier 0, kernel stub
+  ::::                Tier 0, kernel stub
   ::::
   ~%    %k.205
       ~
@@ -15,12 +16,14 @@
   |%
   ++  stub  205
   --
-=>                                                    ::  Tier 1
+=>
+  ::::
+  ::::                Tier 1, basic math
+  ::::
   ~%    %a
       -
     ~
   |%
-  ::::                                                ::  1a, basic math
   ++  add
     ~.  %add
     |=  [a=@ b=@] 
@@ -118,7 +121,7 @@
       a
     $(a (dec a), b (dec b))
   ::
-  ::  Tier 2 tiles
+  ::                                                    Tier 2 cones
   ::
   ++  gear
     |*  a=_,*
@@ -144,7 +147,7 @@
   --
 =>
   ::::
-  ::::  Tier 2, lists and units
+  ::::                Tier 2, lists and units and gears
   ::::
   ~%    %b
       -
@@ -188,8 +191,9 @@
     ?@  a
       !!
     u.a
-  ::::                                                  Tier 2b, lists
-  ::::
+  ::
+  ::                                                    Tier 2b, lists
+  ::
   ++  flop
     ~.  %flop
     |*  a=(list)
@@ -321,8 +325,74 @@
     ?@  a
       b
     [i.a $(a t.a)]
-  ::::                                                  Tier 3 tiles
-  ::::
+  ::
+  ::                                                    Tier 2c, gears
+  ::
+  ++  from
+    |=  [a=@ b=@]
+    ^-  (gear ,@)
+    =+  c=0
+    |?
+    ?:  =(c b)
+      ~
+    [i=a t=^?(..$(a +(a), c +(c)))]
+  ::
+  ++  long
+    |*  a=(gear)
+    =+  b=0
+    |-  ^-  @
+    =+  c=(a)
+    ?~  c
+      b
+    $(b +(b), a t.c)
+  ::
+  ++  lone  |*(a=* |?([i=a t=none]))
+  ++  mill
+    |*  [a=_,* b=(gear)]
+    |?
+    =+  c=(b)
+    ?~  c
+      ~
+    [i=(a i.c) t=^?(..$(b t.c))]
+  ::
+  ++  none  |?(~) 
+  ++  over
+    |=  [a=@ b=@]
+    ^-  (gear ,@)
+    |?
+    ?:  =(a b)
+      [i=a t=none]
+    [i=a t=^?(..$(a +(a)))]
+  ::
+  ++  pull
+    |*  a=(gear)
+    |=  b=_^+(|-(=+(b=(a) ?~(b ~ [i=i.b t=$(a t.b)]))) ~)
+    ^+  b
+    =+  c=(a)
+    ?~  c
+      b
+    $(b [i.c b], a t.c)
+  ::
+  ++  push
+    |*  a=(gear)
+    |=  b=_^+(|-(=+(b=(a) ?~(b ~ [i=i.b t=$(a t.b)]))) ~)
+    ^+  b
+    =+  c=((pull a) ~)
+    ((pull (spin c)) b)
+  ::
+  ++  spin
+    |*  a=(list)
+    =>  .(a `_(homo a)`a)
+    |?
+    ?~  a
+      ~
+    [i=i.a t=^?(..$(a t.a))]
+  ::
+  ++  spit |*(a=(gear) ((push a) ~))
+  ++  suck |*(a=(gear) ((pull a) ~))
+  ::
+  ::                                                    Tier 3 cones
+  ::
   ++  axis  ,@
   ++  bloq  ,@
   ++  time  ,@mc
@@ -330,7 +400,7 @@
   --
 =>
   ::::
-  ::::  Tier 3, noun surgery
+  ::::                Tier 3, noun surgery
   ::::
   ~%    %c
       -
@@ -453,7 +523,7 @@
     |=  [a=bloq b=@ c=@]
     (div c (bex (mul (bex a) b)))
   ::
-  ::      Tier 3c, bit logic
+  ::                                                    Tier 3c, bit logic
   ::
   ++  con
     ~.  %con
@@ -498,7 +568,7 @@
       d   (add d (lsh 0 c =((end 0 1 a) (end 0 1 b))))
     ==
   ::
-  ::      Tier 3d, noun orders
+  ::                                                    Tier 3d, noun orders
   ::
   ++  aor
     ~.  %aor
@@ -960,7 +1030,7 @@
       $(nom +(nom), day (add day (damn rey nom)))
     $(rey +(rey), day (add day (dayr rey)))
   ::
-  ::  Tier 4 tiles
+  ::  Tier 4 cones
   ::
   ++  apt
     |=  a=(tree)
@@ -1143,7 +1213,7 @@
       $(a r.a, b [n.a $(a l.a)])
     --
   ::
-  ::  Tier 5 tiles
+  ::  Tier 5 cones
   ::
   ++  barn  (list span)
   ++  char  ,@ta
@@ -2774,7 +2844,7 @@
       [%2 tax]
     ==
   ::
-  ::  Tier 6 tiles
+  ::  Tier 6 cones
   ::
   ++  chop
     $?  lef=term
