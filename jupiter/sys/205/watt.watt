@@ -1,4 +1,4 @@
-::
+!:
 ::              Watt kernel 205.  This file is in the public domain.
 ::
 =>  src=.
@@ -10,9 +10,7 @@
   ::::
   ::::                Tier 0, kernel stub
   ::::
-  ~%    %k.205
-      ~
-    ~
+  ~%    %k.205  ~  ~
   |%
   ++  stub  205
   --
@@ -20,9 +18,7 @@
   ::::
   ::::                Tier 1, basic math
   ::::
-  ~%    %a
-      -
-    ~
+  ~%    %a  -  ~
   |%
   ++  add
     ~.  %add
@@ -149,48 +145,48 @@
   ::::
   ::::                Tier 2, lists and units and gears
   ::::
-  ~%    %b
-      -
-    ~
+  ~%    %b  -  ~
   |%
-  ::::                                                  Tier 2a, units
+  ::
+  ::                                                    Tier 2a, units
+  ::
   ++  bind
-    ~.  %bind 
     |*  [a=(unit) b=_,*]
-    ?@  a
+    ?~  a
       ~
     [~ u=(b u.a)]
   ::
   ++  clap
-    ~.  %clap
     |*  [a=(unit) b=(unit) c=_|=(^ ->-)]
-    ?@  a
+    ?~  a
       b
-    ?@  b
+    ?~  b
       a
     [~ u=(c u.a u.b)]
   ::
   ++  drop
-    ~.  %drop
     |*  a=(unit)
-    ?@  a
+    ?~  a
       ~
     [i=u.a t=~]
   ::
   ++  mate
     |*  [a=(unit) b=(unit)]
-    ?@  b
+    ?~  b
       a
-    ?@  a
+    ?~  a
       b
     ?.(=(u.a u.b) ~|('mate' !!) a)
   ::
   ++  need
-    ~.  %need
     |*  a=(unit)
     ?@  a
       !!
     u.a
+  ::
+  ++  some
+    |*  a=*
+    [~ u=a]
   ::
   ::                                                    Tier 2b, lists
   ::
@@ -1217,7 +1213,6 @@
   ::
   ++  barn  (list span)
   ++  char  ,@ta
-  ++  clip  ,[p=hair q=tape]
   ++  coin  $%  [%% p=mole]
                 [%blob p=*]
                 [%long p=(list coin)]
@@ -1226,7 +1221,7 @@
             ==
   ++  corn  $|(@ta [~ tape])
   ++  disc  ,@ta
-  ++  edge  ,[p=hair q=(unit ,[p=* q=clip])]
+  ++  edge  ,[p=hair q=(unit ,[p=* q=pear])]
   ++  hair  ,[p=@ud q=@ud]
   ++  hemp  (list corn)
   ++  like  |*  a=_,*
@@ -1234,9 +1229,10 @@
             :-  p=(hair -.b) 
             q=?@(+.b ~ [~ u=[p=(a +>-.b) q=[p=(hair -.b) q=(tape +.b)]]])
   ++  mole  ,[p=disc q=@]
+  ++  pear  ,[p=hair q=tape]
   ++  pint  ,[q=[p=[p=@ q=@] q=[p=@ q=@]]]
   ++  ring  ,@
-  ++  rule  |=(tub=clip `edge`[p.tub ~ ~ tub])
+  ++  rule  |=(tub=pear `edge`[p.tub ~ ~ tub])
   ++  shoe  $%  [%bean p=*]
                 [%lose p=@tam]
                 [%mean p=_^?(|.(*tank))]
@@ -1356,7 +1352,7 @@
     ~.  %cold
     |*  [cus=* sef=_rule]
     ~.  %fun
-    |=  tub=clip
+    |=  tub=pear
     =+  vex=(sef tub)
     ?@  q.vex
       vex
@@ -1366,7 +1362,7 @@
     ~.  %cook
     |*  [poq=_,* sef=_rule]
     ~.  %fun
-    |=  tub=clip
+    |=  tub=pear
     =+  vex=(sef tub)
     ?@  q.vex
       vex
@@ -1376,14 +1372,14 @@
     ~.  %easy
     |*  huf=*
     ~.  %fun
-    |=  tub=clip
+    |=  tub=pear
     ^-  (like _huf)
     [p=p.tub q=[~ u=[p=huf q=tub]]]
   ::
-  ++  fail  |=(tub=clip [p=p.tub q=~])
+  ++  fail  |=(tub=pear [p=p.tub q=~])
   ++  full
     |*  sef=_rule
-    |=  tub=clip
+    |=  tub=pear
     =+  vex=(sef tub)
     ?@(q.vex vex ?:(=(~ q.q.u.q.vex) vex [p=p.vex q=~]))
   ::
@@ -1391,7 +1387,7 @@
     ~.  %here
     |*  [hez=_|=([a=pint b=*] [a b]) sef=_rule]
     ~.  %fun
-    |=  tub=clip
+    |=  tub=pear
     =+  vex=(sef tub)
     ?@  q.vex
       vex
@@ -1401,7 +1397,7 @@
     ~.  %just
     |=  daf=char
     ~.  %fun
-    |=  tub=clip
+    |=  tub=pear
     ^-  (like char)
     ?@  q.tub
       (fail tub) 
@@ -1411,7 +1407,7 @@
   ::
   ++  knee
     |*  [gar=* sef=_|.(rule)]
-    |=  tub=clip
+    |=  tub=pear
     ^-  (like _gar)
     ((sef) tub)
   ::
@@ -1419,7 +1415,7 @@
     ~.  %mask
     |=  bud=(list char)
     ~.  %fun
-    |=  tub=clip
+    |=  tub=pear
     ^-  (like char)
     ?@  q.tub
       (fail tub) 
@@ -1428,7 +1424,7 @@
     (next tub)
   ::
   ++  next
-    |=  tub=clip
+    |=  tub=pear
     ^-  (like char)
     ?@  q.tub
       (fail tub) 
@@ -1439,7 +1435,7 @@
     ~.  %sear
     |*  [pyq=_|=(* *(unit)) sef=_rule]
     ~.  %fun
-    |=  tub=clip
+    |=  tub=pear
     =+  vex=(sef tub)
     ?@  q.vex
       vex
@@ -1452,7 +1448,7 @@
     ~.  %shim
     |=  zep=[p=@ q=@]
     ~.  %fun
-    |=  tub=clip
+    |=  tub=pear
     ^-  (like char)
     ?@  q.tub
       (fail tub) 
@@ -1464,7 +1460,7 @@
     ~.  %stag
     |*  [gob=* sef=_rule]
     ~.  %fun
-    |=  tub=clip
+    |=  tub=pear
     =+  vex=(sef tub)
     ?@  q.vex
       vex
@@ -1500,7 +1496,7 @@
           [n.yal l.yal nuc]
         [n.nuc [n.yal l.yal l.nuc] r.nuc]
     ~%  %fun  ..^$  ~
-    |=  tub=clip
+    |=  tub=pear
     ?@  q.tub
       (fail tub)
     |-
@@ -1519,7 +1515,7 @@
     ~.  %stir
     |*  [rud=* raq=_|*([a=* b=*] [a b]) fel=_rule]
     ~.  %fun
-    |=  tub=clip 
+    |=  tub=pear 
     ^-  (like _rud)
     =+  vex=(fel tub) 
     ?@  q.vex
@@ -1532,7 +1528,7 @@
     ~.  %stun
     |*  [[les=@ mos=@] fel=_rule]
     ~.  %fun
-    |=  tub=clip
+    |=  tub=pear
     ^-  (like (list _(wonk (fel))))
     ?:  =(0 mos)
       [p.tub [~ ~ tub]]
@@ -1794,7 +1790,7 @@
   ++  ven  ;~  (comp |=([a=@ b=@] (peg a b)))
              bet
              =+  hom=`?`|
-             |=  tub=clip
+             |=  tub=pear
              ^-  (like axis)
              =+  vex=?:(hom (bet tub) (gul tub))
              ?@  q.vex
@@ -2961,10 +2957,15 @@
       [%sgsg p=gene q=gene]
       [%sgts p=gene q=gene]
     ::
+      [%smcb p=gene q=gene]
       [%smcl p=gene q=(list gene)]
+      [%smcm p=gene q=(list gene)]
+      [%smcn p=(list gene)]
+      [%smdt p=gene q=(list gene)]
       [%smdq p=(list goop)]
       [%smgl p=gene q=gene r=gene]
       [%smgr p=gene q=gene r=gene]
+      [%smkt p=gene q=gene]
       [%smhp p=gene q=gene]
       [%smls p=gene q=gene]
       [%smtr p=gene q=gene]
@@ -3502,7 +3503,53 @@
         ==
       ==
     ::
+        [%smcb *]
+      :+  %tsgr  [%ktts %v ~ 1]                         ::  =>  v=.
+      :+  %tsls  [%ktts %a [%tsgr [%cnbc %v] p.gen]]    ::  =+  a==>(v \p.gen)
+      :^    %wtsg  [%cnbc %a]                           ::  ?~  a
+        [%zpzp ~]                                       ::    !!
+      :+  %tsgr                                         ::  =>
+        [[%cnbc %v] [%tsgl [~ 3] [%cnbc %a]]]           ::    [v +.a]
+      q.gen                                             ::  \q.gen
+    ::
+        [%smcm *]
+      =+  nem=etch(gen p.gen)
+      |-  ^-  gene                                      ::  \\  |-  ^-  gene
+      ?~  q.gen                                         ::  \\  ?~  q.gen
+        [%tsgl [%cnbc nem] p.gen]                       ::    =<  [\nem p.gen]
+      :+  %tsls  [%ktts %a i.q.gen]                     ::  =+  a=i.q.gen
+      :^  %wtkt  [%cnbc %a]                             ::  ?^  a
+        [%tsgl [%cnbc nem] [%cnbc %a]]                  ::    =<  [\nem a]
+      $(q.gen t.q.gen)                                  ::  \\  $(p.gen t.p.gen)
+    ::
+        [%smcn *]
+      |-  ^-  gene                                      ::  \\  |-  ^-  gene
+      ?~  p.gen                                         ::  \\  ?~  p.gen
+        [%bcts %null]                                   ::    ~
+      :+  %tsls  [%ktts %a i.p.gen]                     ::  =+  a=i.p.gen
+      :^  %wtkt  [%cnbc %a]                             ::  ?^  a
+        [%cnbc %a]                                      ::    a
+      $(p.gen t.p.gen)                                  ::  \\  $(p.gen t.p.gen)
+    ::
         [%smdq *]  (snig p.gen)
+    ::
+        [%smdt *]
+      :+  %tsgr  [%ktts %v ~ 1]                         ::  =>  v=.
+      :+  %tsls  [%ktts %a [%tsgr [%cnbc %v] p.gen]]    ::  =+  a==>(v \p.gen)
+      |-  ^-  gene                                      ::  \\  |-  ^-  gene
+      ?~  q.gen                                         ::  \\  ?~  q.gen
+        [%cnbc %a]                                      ::    a
+      :^    %wtsg  [%cnbc %a]                           ::  ?~  a
+        [%bcts %null]                                   ::    ~
+      :+  %tsgr                                         ::  =>
+        :+  %cnts  [[~ 1] ~]                            ::    %=    .
+        :~  :-  [%cnbc %a]                              ::        a
+            :+  %tsgr                                   ::      =>
+              [[%cnbc %v] [%tsgl [~ 2] [%cnbc %a]]]     ::        [v -.a]
+            i.q.gen                                     ::      \i.q.gen
+        ==                                              ::    ==
+      $(q.gen t.q.gen)                                  ::  \$(gen t.q.gen)
+    ::
         [%smgl *]
       =+  nem=etch(gen p.gen)
       :+  %tsgr  [%ktts %v ~ 1]                         ::  =>  v=.
@@ -3542,6 +3589,17 @@
       ==                                                ::  ==
     ::
         [%smhp *]  [%smls [%wtzp p.gen] q.gen]
+        [%smkt *]
+      :+  %tsgr  [%ktts %v ~ 1]                         ::  =>  v=.
+      :+  %tsls  [%ktts %a [%tsgr [%cnbc %v] p.gen]]    ::  =+  a==>(v \p.gen)
+      :^    %wtsg  [%cnbc %a]                           ::  ?~  a
+        [%bcts %null]                                   ::    ~
+      :+  %ktdt  [%cnbc %a]                             ::  ^.  a
+      :-  [%bcts %null]                                 ::  :-  ~
+      :+  %tsgr                                         ::  =>
+        [[%cnbc %v] [%tsgl [~ 3] [%cnbc %a]]]           ::    [v +.a]
+      q.gen                                             ::  \q.gen
+    ::
         [%smls *]
       :+  %tsgr  [%ktts %v ~ 1]                         ::  =>  v=.
       :+  %tsls  [%ktts %a %tsgr [%cnbc %v] q.gen]      ::  =+  a==>(v \q.gen)
@@ -3564,7 +3622,7 @@
       :~  [[%cnbc %a] [%tsgl [~ 3] [%cnbc %b]]]         ::    a  +.b
       ==                                                ::  ==
     ::
-        [%smsg *]
+        [%smsg *]                                       ::  older technology :-)
       |-
       ?-  q.gen
           ~       ~|(%open-smsg !!)
@@ -5896,12 +5954,16 @@
             :-  ';'
               ;~  pfix  sem
                 %-  stew  :~
+                  ['|' (rune cab %smcb expb)]
+                  ['%' (rune cen %smcm expi)]
+                  ['%' (rune cen %smcn exps)]
                   [':' (rune col %smcl expi)]
-                  ['~' (rune sig %smsg expi)]
+                  ['.' (rune dot %smdt expi)]
                   ['<' (rune gal %smgl expc)]
                   ['>' (rune gar %smgr expc)]
                   ['-' (rune hep %smhp expb)]
                   ['+' (rune lus %smls expb)]
+                  ['~' (rune sig %smsg expi)]
                   ['*' (rune tar %smtr expb)]
                   ['=' (rune tis %smts expb)]
                   ['?' (rune wut %smwt expb)]
@@ -6118,7 +6180,7 @@
 ::
 ++  vest
   ~.  %vest
-  |=  tub=clip
+  |=  tub=pear
   ~|  %vest
   ^-  (like gene)
   %.  tub
