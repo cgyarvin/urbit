@@ -1,4 +1,4 @@
-!:
+::
 ::              Watt kernel 205.  This file is in the public domain.
 ::
 =>  src=.
@@ -2968,8 +2968,9 @@
       [%smkt p=gene q=gene]
       [%smhp p=gene q=gene]
       [%smls p=gene q=gene]
-      [%smtr p=gene q=gene]
+      [%smpm p=gene q=(list gene)]
       [%smsg p=gene q=(list gene)]
+      [%smtr p=gene q=gene]
       [%smts p=gene q=gene]
       [%smwt p=gene q=gene]
     ::
@@ -3545,10 +3546,38 @@
         :+  %cnts  [[~ 1] ~]                            ::    %=    .
         :~  :-  [%cnbc %a]                              ::        a
             :+  %tsgr                                   ::      =>
-              [[%cnbc %v] [%tsgl [~ 2] [%cnbc %a]]]     ::        [v -.a]
+              [[%cnbc %v] [%tsgl [~ 3] [%cnbc %a]]]     ::        [v +.a]
             i.q.gen                                     ::      \i.q.gen
         ==                                              ::    ==
       $(q.gen t.q.gen)                                  ::  \$(gen t.q.gen)
+    ::
+        [%smpm *]
+      ?~  q.gen
+        [%bcts %null]
+      ?:  =(~ t.q.gen)
+        i.q.gen
+      :+  %tsgr  [%ktts %v ~ 1]                         ::  =>  v=.
+      :+  %tsls  [%ktts %a [%tsgr [%cnbc %v] i.q.gen]]  ::  =+  a==>(v \i.q.gen)
+      :+  %tsgr  [%ktts %w ~ 1]                         ::  =>  w=.
+      |-  ^-  gene                                      ::  \\  |-  ^-  gene
+      ?~  t.q.gen                                       ::  \\  ?~  t.q.gen
+        [%cnbc %a]                                      ::    a
+      :+  %tsls  :+  %ktts %b                           ::  =+  ^=  b
+                 [%tsgr [%cnhx %v %w ~] i.t.q.gen]      ::      =>  v.w
+      :+  %tsgr                                         ::      i.t.q.gen
+        :+  %cnts  [%w ~]                               ::  =>
+        :~  :-  [%cnbc %a]                              ::    %=    w
+            :^    %wtsg  [%cnbc %a]                     ::        a
+              [%cnbc %b]                                ::      ?~  a  b
+            :^    %wtsg  [%cnbc %b]                     ::      ?~  b
+              [%cnbc %a]                                ::        a
+            :+  %tsgr                                   ::      =>  
+              :-  [%cnbc %v]                            ::        :-  v
+              :-  [%tsgl [~ 3] [%cnbc %a]]              ::        :-  +.a
+              [%tsgl [~ 3] [%cnbc %b]]                  ::        +.b
+            i.t.q.gen                                   ::      \i.t.t.q.gen
+        ==                                              ::    ==
+      $(t.q.gen t.t.q.gen)                              ::  
     ::
         [%smgl *]
       =+  nem=etch(gen p.gen)
@@ -5955,7 +5984,7 @@
               ;~  pfix  sem
                 %-  stew  :~
                   ['|' (rune cab %smcb expb)]
-                  ['%' (rune cen %smcm expi)]
+                  [',' (rune com %smcm expi)]
                   ['%' (rune cen %smcn exps)]
                   [':' (rune col %smcl expi)]
                   ['.' (rune dot %smdt expi)]
@@ -5963,6 +5992,7 @@
                   ['>' (rune gar %smgr expc)]
                   ['-' (rune hep %smhp expb)]
                   ['+' (rune lus %smls expb)]
+                  ['&' (rune pam %smpm expi)]
                   ['~' (rune sig %smsg expi)]
                   ['*' (rune tar %smtr expb)]
                   ['=' (rune tis %smts expb)]
