@@ -1,0 +1,248 @@
+                 
+                 
+             t.p.q.caf              [[%plot [%face *] [%face * %stop *] ~] ~]
+             i.t.p.q.caf            [%plot [%face *] [%face * %stop *] ~]
+             p.i.t.p.q.caf          [[%face *] [%face * %stop *] ~]
+             t.p.i.t.p.q.caf        [[%face * %stop *] ~]
+             i.t.p.i.t.p.q.caf      [%face * %stop *]
+             q.i.t.p.i.t.p.q.caf    [%stop *]
+             p.q.i.t.p.i.t.p.q.caf  *
+
+
+             t.p.q.caf              [[%plot [%face *] [%face * %stop *] ~] ~]
+             i.t.p.q.caf            [%plot [%face *] [%face * %stop *] ~]
+             p.i.t.p.q.caf          [[%face *] [%face * %stop *] ~]
+             i.p.i.t.p.q.caf        [%face *]
+             p.i.p.i.t.p.q.caf      
+
+             t.p.q.caf              [[%plot [%face *] [%face * %stop *] ~] ~]
+             i.t.p.q.caf            [%plot [%face *] [%face * %stop *] ~]
+             p.i.t.p.q.caf          [[%face *] [%face * %stop *] ~]
+             t.p.i.t.p.q.caf        [[%face * %stop *] ~]
+             i.t.p.i.t.p.q.caf      [%face * %stop *]
+             p.i.t.p.i.t.p.q.caf    *
+            
+             
+
+  
+  :: 
+  ++  deli 
+    |=  caf=veal  ^-  veal
+    ?.  ?=([%wave *] caf)
+      ?:  ?&  ?=([%pick [%plum %n 0] [%plot [%plum %n 0] [%face *] ~]] caf)
+              =(1 (met 3 p.i.t.p.i.t.p.caf))
+          ==
+        [%unit =<([p q] i.t.p.i.t.p.caf)]
+      caf
+    =>  %=    .
+            caf
+          ?.  ?&  ?=([%pick *] q.caf)
+                  ?=(^ p.q.caf)
+                  =([%plum %n 0] i.p.q.caf)
+              ==
+            caf
+          ?:  ?&  ?=([[%plot * [%stop *] ~] ~] t.p.q.caf)
+                  =(p.caf p.q.i.t.p.q.caf)
+              ==
+            [%beam p.i.t.p.q.caf]
+          ?:  ?&  ?=([[%plot [%face *] [%face * %stop *] ~] ~] t.p.q.caf)
+                  =(p.caf p.q.q.i.t.p.q.caf)
+                  =(1 (met 3 p.p.i.t.p.q.caf))
+                  =(1 (met 3 p.q.i.t.p.q.caf))
+              ==
+            [%list (cat 3 p.p.i.t.p.q.caf p.q.i.t.p.q.caf) q.p.i.t.p.q.caf]
+          caf
+        == 
+    ?.  ?=([%wave *] caf)
+      caf
+    ?:  (meet -:!;(*type *tank))
+      %tank
+    caf
+  ::
+  ++  dole
+    |-  ^-  veal
+    =+  gil=*(set type)
+    =+  dex=*(map type ,@)
+    =<  q
+    |-  ^-  [p=(map type ,@) q=veal]
+    =-  [p.tez (deli q.tez)]
+    ^=  tez  ^-  [p=(map type ,@) q=veal]
+    ?-    sut
+        %noun      [dex sut]
+        %void      [dex sut]
+        [%atom *]  [dex sut]
+        [%cell *]
+      ^-  [p=(map type ,@) q=veal]
+      =+  hin=$(sut p.sut) 
+      =+  yon=$(dex p.hin, sut q.sut)
+      :-  p.yon
+      :-  %plot
+      ?:(?=([%plot *] q.yon) [q.hin p.q.yon] [q.hin q.yon ~])
+    ::
+        [%core *]
+      ^-  [p=(map type ,@) q=veal]
+      =+  yad=$(sut p.sut)
+      :-  p.yad
+      ^-  veal
+      =+  ^=  ton
+          |-  ^-  @
+          ?-  q.r.q.sut
+            ~        0
+            [* ~ ~]  1
+            [* ~ *]  +($(q.r.q.sut r.q.r.q.sut))
+            [* * ~]  +($(q.r.q.sut l.q.r.q.sut))
+            [* * *]  .+  %+  add
+                           $(q.r.q.sut l.q.r.q.sut) 
+                         $(q.r.q.sut r.q.r.q.sut)
+          ==
+      [%core ton (end 0 15 (mug q.r.q.sut)) p.q.sut q.yad]
+    ::
+        [%cube *]
+      ^-  [p=(map type ,@) q=veal]
+      ?.  ?=(@ p.sut)
+        $(sut repo)
+      =+  pum=$(sut q.sut)
+      ?>  ?=([%atom *] q.pum)
+      [p.pum [%plum p.q.pum p.sut]]
+    ::
+        [%face *]  
+      ^-  [p=(map type ,@) q=veal]
+      =+  yad=$(sut q.sut)
+      [p.yad [%face p.sut q.yad]]
+    ::
+        [%fine *]  
+      ^-  [p=(map type ,@) q=veal]
+      =+  yad=$(sut r.sut)
+      [p.yad [%fine p.sut (end 0 15 (mug q.sut)) q.yad]]
+    ::
+        [%fork *]
+      ^-  [p=(map type ,@) q=veal]
+      =+  hin=$(sut p.sut)
+      =+  yon=$(dex p.hin, sut q.sut)
+      :-  p.yon
+      ?:  =(%void q.hin)
+        q.yon
+      ?:  =(%void q.yon)
+        q.hin
+      :-  %pick
+      ?.  ?=([%pick *] q.yon)
+        [q.hin q.yon ~]
+      ?>  ?=(^ p.q.yon)
+      ?:(=(q.hin i.p.q.yon) p.q.yon [q.hin p.q.yon])
+    ::
+        [%hold *]
+      ^-  [p=(map type ,@) q=veal]
+      =+  hey=(~(get by dex) sut)
+      ?^  hey
+        [dex [%stop u.hey]]
+      ?:  (~(has in gil) sut)
+        =+  dyr=~(wyt by dex)
+        [(~(put by dex) sut dyr) [%stop dyr]]
+      =+  rom=$(gil (~(put in gil) sut), sut repo)
+      =+  rey=(~(get by p.rom) sut)
+      ?~  rey
+        rom
+      [p.rom [%wave u.rey q.rom]]
+    ==
+
+
+
+
+
+
+
+    ::
+    ++  cust
+      ^-  (unit veal)
+      =+  pet=(cull & 1 [%atom %%])
+      =+  wid=(cull | 1 [%atom %%])
+      ?:  |(moot(sut pet) moot(sut wid))
+        ~
+      ?.  (nest(sut [%atom %n]) | pet)
+        ~
+      =+  rep=$(sut wid)
+      ?@  rep
+        ~
+      ?.  ?=([%plot *] rep)
+        ~
+      ?:  ?=([* * ~] p.rep)
+        ?:  ?&  ?=([%atom %n] i.p.rep)
+                ?=([%face *] i.t.p.rep)
+                =(1 (met 3 p.i.t.p.rep))
+            ==
+          [~ %unit p.i.t.p.rep q.i.t.p.rep]
+        ?:  ?&  ?=([%face *] i.p.rep)
+                ?=([%face *] i.t.p.rep)
+                =([%hold sut] q.i.t.p.rep) 
+                =(1 (met 3 p.i.p.rep))
+                =(1 (met 3 p.i.t.p.rep))
+            ==
+          [~ %list (cat 3 p.i.p.rep p.i.t.p.rep) q.i.p.rep]
+        ?:  =([%hold sut] i.t.p.rep)
+          [~ %beam i.p.rep]
+        ~
+      ?.  ?=([* * * ~] p.rep)
+        ~
+      =+  one=i.p.rep
+      =+  two=i.t.p.rep
+      =+  tri=i.t.t.p.rep
+      ?.  ?&  ?=([%face *] i.p.rep)
+              ?=([%face *] i.t.p.rep)
+              ?=([%face *] i.t.t.p.rep)
+              =([%hold sut] q.i.t.p.rep) 
+              =([%hold sut] q.i.t.t.p.rep) 
+              =(1 (met 3 p.i.p.rep))
+              =(1 (met 3 p.i.t.p.rep))
+              =(1 (met 3 p.i.t.t.p.rep))
+          ==
+        ~
+      :^    ~
+          %tree 
+        (cat 3 p.i.p.rep (cat 3 p.i.t.p.rep p.i.t.t.p.rep))
+      q.i.p.rep
+    ::
+    ++  xray
+      |=  vel=veal  ^-  veal
+      ?:  ?&  ?=([%beam %atom *] vel)
+              =('t' (end 3 1 p.p.vel))
+          ==
+        [%yarn p.p.vel]
+      ?:  ?=([%beam %yarn *] vel)
+        [%wool p.p.vel]
+      ?:  .=  vel
+          ^-  veal
+          :~  %pick
+              :~  %plot
+                [%plum %tam %leaf]
+                [%face %p %yarn %ta]
+              ==
+              :~  %plot
+                [%plum %tam %palm]
+                :+  %face
+                  %p
+                :~  %plot
+                    [%face %p %yarn %ta]
+                    [%face %q %yarn %ta]
+                    [%face %r %yarn %ta]
+                    [%face %s %yarn %ta]
+                ==
+                :+  %face
+                  %q
+                [%list %it [%hold sut]]
+              ==
+              :~  %plot
+                [%plum %tam %rose] 
+                :+  %face
+                  %p
+                :~  %plot
+                    [%face %p %yarn %ta]
+                    [%face %q %yarn %ta]
+                    [%face %r %yarn %ta]
+                ==
+                [%face %q [%list %it [%hold sut]]]
+              ==
+          ==
+        %tank
+      vel
+    --
+
