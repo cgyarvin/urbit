@@ -4412,7 +4412,6 @@
         rom
       [p.rom [%wave u.rey q.rom]]
     ==
-
   ::
   ++  duck
     ~|  %duck  ^-  tank
