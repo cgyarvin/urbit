@@ -1,4 +1,4 @@
-!:
+::
 ::              Watt kernel 205.  This file is in the public domain.
 ::
 =>  src=.
@@ -3060,10 +3060,10 @@
         [%pick p=(list veal)]
         [%plot p=(list veal)]
         [%plum p=term q=@]
-        [%stop p=@uv] 
+        [%stop p=@ud] 
         [%tree p=term q=veal]
         [%unit p=term q=veal]
-        [%wave p=@uv q=veal]
+        [%wave p=@ud q=veal]
         [%wool p=term]
         [%yarn p=term]
     ==
@@ -4326,6 +4326,229 @@
     ?:  (meet -:!;(*type *tank))
       %tank
     caf
+  :: 
+  ++  dial
+    |=  ham=veal  ^-  tank
+    ?+    ham  !!
+        %noun
+      [%leaf '*' ~]
+    ::
+        %tank
+      [%leaf '#' 't' ~]
+        %void
+    ::
+      [%leaf '#' ~]
+    ::
+        [%atom *]
+      [%leaf '@' (trip p.ham)]
+    ::
+        [%beam *]
+      [%rose [[' ' ~] ['(' ~] [')' ~]] $(ham p.ham) ~]
+    ::
+        [%core *]
+      :+  %palm
+        :+  [' ' ~] 
+          =+  qaz=(rend %uv q.ham)
+          ;:  weld 
+            (rend %ud p.ham) 
+            [?-(r.ham %gold '.', %lead '?', %iron '|', %zinc '&') ~]
+            (rend %uv q.ham)
+          ==
+        [['<' ~] ['>' ~]]
+      [$(ham s.ham) ~]
+    ::
+        [%face *]
+      [%palm [['.' ~] ['=' ~] ~ ~] [%leaf (trip p.ham)] $(ham q.ham) ~]
+    ::
+        [%fine *]
+      :+  %palm
+        [['.' ~] [?-(p.ham %pure '>', %very '<') ~] ~ ~] 
+      [[%leaf (rend %uv q.ham)] $(ham r.ham) ~]
+    ::
+        [%list *]
+      [%rose [[' ' ~] (weld (trip p.ham) '(' ~) [')' ~]] $(ham q.ham) ~]
+    ::
+        [%pick *]
+      :+  %rose
+        [[' ' ~] ['{' ~] ['}' ~]]
+      |-  ^-  (list tank)
+      ?~(p.ham ~ [^$(ham i.p.ham) $(p.ham t.p.ham)])
+    :: 
+        [%plot *]
+      :+  %rose
+        [[' ' ~] ['[' ~] [']' ~]]
+      |-  ^-  (list tank)
+      ?~(p.ham ~ [^$(ham i.p.ham) $(p.ham t.p.ham)])
+    :: 
+        [%plum *]
+      [%leaf '%' (rend p.ham q.ham)]
+    ::
+        [%stop *]
+      [%leaf '$' (rend %ud p.ham)]
+    ::
+        [%tree *]
+      [%rose [[' ' ~] (weld (trip p.ham) '(' ~) [')' ~]] $(ham q.ham) ~]
+    ::
+        [%unit *]
+      [%rose [[' ' ~] (weld (trip p.ham) '(' ~) [')' ~]] $(ham q.ham) ~]
+    ::
+        [%wave *]
+      [%palm [['.' ~] ['^' ~] ~ ~] $(ham q.ham) ~]
+    ==
+  ::
+  ++  dish
+    |=  [ham=veal lum=*]  ^-  tank
+    =+  dal=*(map ,@ veal)
+    %-  need
+    |-  ^-  (unit tank)
+    ~|  %dish
+    ?+    ham  !!
+        %noun
+      %=    $
+          ham
+        ?:  ?=(@ lum)
+          [%atom %%]
+        :-  %plot
+        |-  ^-  (list veal)
+        [%noun ?:(?=(@ +.lum) [[%atom %%] ~] $(lum +.lum))]
+      ==
+    ::
+        %tank
+      =+  cis=(tank lum)
+      ?.(=(lum cis) ~ [~ cis])
+    ::
+        %void
+      ~
+    ::
+        [%atom *]
+      ?.  ?=(@ lum)
+        ~
+      [~ %leaf ?:(=(%% p.ham) (rend [%ud lum]) (rend p.ham lum))]
+    ::
+        [%beam *]
+      =-  ?~(tok ~ [~ %rose [[' ' ~] ['(' ~] [')' ~]] u.tok])
+      ^=  tok
+      |-  ^-  (unit (list tank))
+      ?:  ?=(@ lum)
+        ?.(=(~ lum) ~ [~ ~])
+      =+  [for=^$(ham p.ham, lum -.lum) aft=$(lum +.lum)]
+      ?.  &(?=(^ for) ?=(^ aft))
+        ~
+      [~ u.for u.aft]
+    ::
+        [%core *]
+      =+  wal=$(ham s.ham, lum -.lum)
+      ?~  wal
+        ~
+      :-  ~
+      :+  %palm
+        :+  [' ' ~] 
+          =+  qaz=(rend %uv q.ham)
+          ;:  weld 
+            (rend %ud p.ham) 
+            [?-(r.ham %gold '.', %lead '?', %iron '|', %zinc '&') ~]
+            (rend %uv q.ham)
+          ==
+        [['<' ~] ['>' ~]]
+      [u.wal ~]
+    ::
+        [%face *]
+      =+  wal=$(ham q.ham)
+      ?~  wal
+        ~
+      [~ %palm [['.' ~] ['=' ~] ~ ~] [%leaf (trip p.ham)] u.wal ~]
+    ::
+        [%fine *]
+      $(ham r.ham)
+    ::
+        [%list *]
+      =-  ?~  tok 
+            ~ 
+          [~ %rose [[' ' ~] (weld (trip p.ham) '(' ~) [')' ~]] u.tok]
+      ^=  tok
+      |-  ^-  (unit (list tank))
+      ?:  ?=(@ lum)
+        ?.(=(~ lum) ~ [~ ~])
+      =+  [for=^$(ham q.ham, lum -.lum) aft=$(lum +.lum)]
+      ?.  &(?=(^ for) ?=(^ aft))
+        ~
+      [~ u.for u.aft]
+    ::
+        [%pick *]
+      |-  ^-  (unit tank)
+      ?~  p.ham
+        ~
+      =+  wal=^$(ham i.p.ham)
+      ?~  wal
+        $(p.ham t.p.ham)
+      wal
+    ::
+        [%plot *]
+      =-  ?~  tok 
+            ~ 
+          [~ %rose [[' ' ~] ['[' ~] [']' ~]] u.tok]
+      ^=  tok
+      |-  ^-  (unit (list tank))
+      ?~  p.ham
+        ~
+      ?:  ?=([* ~] p.ham)
+        =+  wal=^$(ham i.p.ham)
+        ?~(wal ~ [~ [u.wal ~]])
+      =+  gim=^$(ham i.p.ham) 
+      ?~  gim
+        ~
+      =+  myd=$(p.ham t.p.ham)
+      ?~  myd
+        ~
+      [~ u.gim u.myd]
+    ::
+        [%plum *]
+      ?.  =(lum q.ham)
+        ~
+      [~ [%leaf (rend p.ham q.ham)]]
+    ::
+        [%stop *]
+      =+  kep=(~(get by dal) p.ham)
+      ?~  kep
+        ~|([%stop-loss p.ham] !!)
+      $(ham u.kep)
+    ::
+        [%tree *]
+      =-  ?~  tok 
+            ~ 
+          [~ %rose [[' ' ~] (weld (trip p.ham) '(' ~) [')' ~]] u.tok]
+      ^=  tok
+      =+  tuk=*(list tank)
+      |-  ^-  (unit (list tank))
+      ?:  =(~ lum)
+        [~ tuk]
+      ?.  ?=([n=* l=* r=*] lum)
+        ~
+      =+  rol=$(lum r.lum)
+      ?~  rol
+        ~
+      =+  tim=^$(ham q.ham, lum n.lum)
+      ?~  tim
+        ~
+      $(lum l.lum, tuk [u.tim u.rol])
+    ::
+        [%unit *]
+      =-  ?~  tok 
+            ~ 
+          [~ %rose [[' ' ~] (weld (trip p.ham) '(' ~) [')' ~]] u.tok ~]
+      ^=  tok  ^-  (unit tank)
+      ?@  lum
+        ?.(=(~ lum) ~ [~ %leaf '~' ~])
+      ?.  =(~ -.lum)
+        ~
+      =+  wal=$(ham q.ham)
+      ?~  wal
+        ~
+      [~ u.wal]
+    ::
+        [%wave *]
+      $(dal (~(put by dal) p.ham q.ham), ham q.ham)
+    ==
   ::
   ++  dole
     |-  ^-  veal
