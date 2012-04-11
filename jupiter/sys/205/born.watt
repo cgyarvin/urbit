@@ -1,4 +1,4 @@
-::
+!:
 =>  |%
     ++  boom
       $%  [%hit p=mode q=barn r=*]        ::  save to disk
@@ -98,7 +98,6 @@
                 ;~(pfix ace x-loon)
               ==
             ==
-
           ==
         ==
       ==
@@ -125,7 +124,11 @@
     ?-    -.lun
     ::                                            ::  [%% p=gene]
         %% 
-      :-  [[%see 0 (sell (slap meat p.lun))] ~]
+      =+  feq=(slap meat p.lun)
+      =+  ham=~(dole ut p.feq)
+      :-  :~  [%see 2 (dial:ut ham)]              ::  verbose
+              [%see 0 (dish:ut ham q.feq)]
+          ==
       ..live
     ::                                            ::  [%dig p=loon] 
         %dig                                      ::  XX ram filter type
@@ -153,7 +156,9 @@
     ::
         %typ                                      ::  [%typ p=loon]
       =+  bet=evil(lun p.lun)
-      :-  [[%see 0 (skol p:bet)] ~]               ::  XX true dry run
+      ~|  %tyq-dole
+      =+  ham=~(dole ut p.bet)
+      :-  [[%see 0 (dial:ut ham)] ~]               ::  XX true dry run
       ..live
     ::                                            ::  [%var p=term q=loon]
         %var
