@@ -4580,6 +4580,24 @@
       :+  %list
         (cat 3 p.i.p.i.t.p.u.may p.i.t.p.i.t.p.u.may)
       q.i.p.i.t.p.u.may
+    ?:  ?&  ?=  :-  :^    %plot
+                      [%face *]
+                    [%face * %stop *] 
+                  [[%face * %stop *] ~]
+                ~
+                t.p.u.may
+            =(p.q.ham p.q.i.t.p.i.t.p.u.may)
+            =(p.q.ham p.q.i.t.t.p.i.t.p.u.may)
+            =(1 (met 3 p.i.p.i.t.p.u.may))
+            =(1 (met 3 p.i.t.p.i.t.p.u.may))
+            =(1 (met 3 p.i.t.t.p.i.t.p.u.may))
+        ==
+      :+  %tree
+        %^    cat
+            3
+          p.i.p.i.t.p.u.may 
+        (cat 3 p.i.t.p.i.t.p.u.may p.i.t.t.p.i.t.p.u.may)
+      q.i.p.i.t.p.u.may
     q.ham
   ::
   ++  dole
