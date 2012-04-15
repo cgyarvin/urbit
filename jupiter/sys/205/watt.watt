@@ -1,4 +1,4 @@
-::
+!:
 ::              Watt kernel 205.  This file is in the public domain.
 ::
 =>  src=.
@@ -3062,7 +3062,7 @@
     ==
   ++  vase  ,[p=type q=*]                                   ::  type-value pair
   ++  veal
-    $|  ?(%noun %tank %void)
+    $|  ?(%noun %tank %void %wool %yarn)
     $%  [%atom p=term]
         [%beam p=veal]
         [%core p=@ud q=@tam r=@ta s=(list veal)]
@@ -3076,8 +3076,6 @@
         [%stop p=@ud] 
         [%tree p=term q=veal]
         [%unit p=term q=veal]
-        [%wool p=term]
-        [%yarn p=term]
     ==
   --
 ::::
@@ -4310,18 +4308,13 @@
     |=  ham=calf
     =+  gid=*(set ,@ud)
     |-  ^-  tank
-    ?+    q.ham  !!
-        %noun
-      [%leaf '*' ~]
-    ::
-        %tank
-      [%leaf '#' 't' ~]
-        %void
-    ::
-      [%leaf '#' ~]
-    ::
-        [%atom *]
-      [%leaf '@' (trip p.q.ham)]
+    ?-    q.ham
+        %noun      [%leaf '*' ~]
+        %tank      [%leaf '*' 't' ~]
+        %void      [%leaf '#' ~]
+        %wool      [%leaf '*' '"' '"' ~]
+        %yarn      [%leaf '"' '"' ~]
+        [%atom *]  [%leaf '@' (trip p.q.ham)]
     ::
         [%beam *]
       [%rose [[' ' ~] ['(' ~] [')' ~]] $(q.ham p.q.ham) ~]
@@ -4398,7 +4391,7 @@
     ~|  %dish
     %-  need
     |-  ^-  (unit tank)
-    ?+    q.ham  ~|([%dish-none q.ham] !!)
+    ?-    q.ham
         %noun
       %=    $
           q.ham
@@ -4412,6 +4405,18 @@
         %tank
       =+  cis=(tank lum)
       ?.(=(lum cis) ~ [~ cis])
+    ::
+        %wool
+      :-  ~
+      :+  %rose
+        [[' ' ~] ['<' '<' ~] ['>' '>' ~]]
+      |-  ^-  (list tank)
+      ?@  lum
+        ?>(?=(~ lum) ~)
+      [(need ^$(q.ham %yarn, lum -.lum)) $(lum +.lum)]
+    ::
+        %yarn
+      [~ %leaf '"' (weld (tape lum) `tape`['"' ~])]
     ::
         %void
       ~
@@ -4551,7 +4556,13 @@
   ::
   ++  doge
     |=  ham=calf
-    ~|  [%doge p.ham q.ham]
+    =-  ?+  woz  woz
+          [%beam [%atom %c]]    %yarn
+          [%beam %yarn]         %wool
+          [%list * [%atom %c]]  %yarn
+          [%list * %yarn]       %wool
+        ==
+    ^=  woz
     ^-  veal
     ?.  ?=([%stop *] q.ham)
       ?:  ?&  ?=  [%pick [%plum %n 0] [%plot [%plum %n 0] [%face *] ~] ~] 
