@@ -1,4 +1,4 @@
-!:
+::
 ::              Watt kernel 205.  This file is in the public domain.
 ::
 =>  src=.
@@ -5180,11 +5180,12 @@
         ref
       |-  ^-  type
       ?-    sut
+          [%core *]   ref
           [%face *]   ?.(=(u.qog p.sut) ~|('heal-name' !!) (face p.sut ref))
           [%fork *]   (fork $(sut p.sut) $(sut q.sut))
           [%fine *]   $(sut repo)
           [%hold *]   $(sut repo)
-          *           ~|('heal-name' !!)
+          *           ~|([%name u.qog] ~~((dunk 'heal-name') !!))
       ==
     =+  [now=(cap axe) lat=(mas axe)]
     =+  gil=*(set type) 
@@ -5946,6 +5947,7 @@
   ++  tack
     ~.  %tack
     |=  [peh=twig mur=type]
+    ~|  [%tack peh]
     =+  axe=1
     |-  ^-  [p=axis q=type]
     ?@  peh
@@ -5960,6 +5962,7 @@
         [| *]
       =+  wuf=(flay (fink p.i.peh %rite q.i.peh))
       =+  gav=$(peh t.peh, sut q.wuf, axe (peg axe p.wuf))
+      ~~  (dunk(sut q.gav) 'bar-tack')
       [p.gav (heal [~ q.i.peh] p.wuf q.gav)]
     ==
   ::
@@ -6460,7 +6463,7 @@
         [%cnhx [@ ~]]    [%ktts i.p.ros p.vil]
         [%cnts [@ ~] ~]  [%ktts i.p.ros p.vil]
         [%zpcb *]        $(ros q.ros)
-        *                ~|(ling !!)
+        *                ~|([%ling-bad ros] !!)
       ==
         %col  [%tsgl ros p.vil]
         %pel  [%cnts ~(rake ap ros) p.vil]

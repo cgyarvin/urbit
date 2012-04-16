@@ -4,16 +4,16 @@
       $%  [%hit p=mode q=barn r=*]        ::  save to disk
           [%see p=@ q=tank]               ::  show at tab
       ==
-    ++  loon
-      $%  [%% p=gene]                     ::  simple gene
-          [%dig p=loon]                   ::  save a packet
+    ++  bolt
+      $%  [%% p=gene]                     ::  context dependent
+          [%dig p=bolt]                   ::  save a packet
           [%fit p=mode q=barn]            ::  local file
           [%les ~]                        ::  pop from state
-          [%mor p=loon]                   ::  push on state
+          [%mor p=bolt]                   ::  push on state
           [%quo p=vase]                   ::  live data
-          [%ram p=loon q=loon]            ::  source to dest
-          [%typ p=loon]                   ::  show type
-          [%var p=term q=loon]            ::  set a variable
+          [%ram p=bolt q=bolt]            ::  source to dest
+          [%typ p=bolt]                   ::  show type
+          [%var p=term q=bolt]            ::  set a variable
           [%zap ~]                        ::  reboot
       ==
     ++  mode                              ::  filesystem access mode
@@ -54,13 +54,13 @@
     ++  x-goon
       wide:vas
     ::
-    ++  x-loon
-      %+  knee  *loon  |.  ~+
+    ++  x-bolt
+      %+  knee  *bolt  |.  ~+
       ;~  pose
         (stag %% x-goon)
         ;~  pfix  col
           ;~  pose
-            (stag %dig ;~(pfix (just 'd') ;~(pfix ace x-loon)))
+            (stag %dig ;~(pfix (just 'd') ;~(pfix ace x-bolt)))
           ::
             %+  stag
               %fit
@@ -79,15 +79,15 @@
               ==
             ==
           ::
-            (stag %mor ;~(pfix (just 'm') ;~(pfix ace x-loon)))
+            (stag %mor ;~(pfix (just 'm') ;~(pfix ace x-bolt)))
             (stag %les (cold ~ (just 'l')))
             (stag %zap (cold ~ (just 'z')))
-            (stag %typ ;~(pfix (just 't') ;~(pfix ace x-loon)))
+            (stag %typ ;~(pfix (just 't') ;~(pfix ace x-bolt)))
           ::
             %+  stag
               %ram
             ;~  pfix  (just 'r')
-              ;~(plug x-loon ;~(pfix ace x-loon))
+              ;~(plug x-bolt ;~(pfix ace x-bolt))
             ==
           ::
             %+  stag
@@ -95,7 +95,7 @@
             ;~  pfix  (just 'v')
               ;~  plug
                 ;~(pfix dot sym)
-                ;~(pfix ace x-loon)
+                ;~(pfix ace x-bolt)
               ==
             ==
 
@@ -109,7 +109,7 @@
 ::  =+  cot=#/+cato
 |%
 ++  live
-  |=  lun=loon  ^-  [p=(list boom) q=_..live]
+  |=  lun=bolt  ^-  [p=(list boom) q=_..live]
   ~|  [%live -.lun]
   =<  vile
   |%
@@ -128,7 +128,7 @@
         %% 
       :-  [[%see 0 (sell (slap meat p.lun))] ~]
       ..live
-    ::                                            ::  [%dig p=loon] 
+    ::                                            ::  [%dig p=bolt] 
         %dig                                      ::  XX ram filter type
       =+  bet=evil(lun p.lun)
       ?>  ?=(@ q.bet)
@@ -148,15 +148,15 @@
     ::                                            ::  [%quo p=vase] 
         %quo
       ~|(%vile-quo !!)
-    ::                                            ::  [%ram p=loon q=loon]
+    ::                                            ::  [%ram p=bolt q=bolt]
         %ram
       vile(lun q.lun, vax evil(lun p.lun))
     ::
-        %typ                                      ::  [%typ p=loon]
+        %typ                                      ::  [%typ p=bolt]
       =+  bet=evil(lun p.lun)
       :-  [[%see 0 (skol p:bet)] ~]               ::  XX true dry run
       ..live
-    ::                                            ::  [%var p=term q=loon]
+    ::                                            ::  [%var p=term q=bolt]
         %var
       =+  bet=evil(lun q.lun)
       [~ ..live(env (~(put in env) p.lun bet))]
@@ -167,6 +167,6 @@
   --
 ::
 ++  scan
-  |=  cad=@ta  ~|  %scan  ^-  loon
-  (rash cad x-loon)
+  |=  cad=@ta  ~|  %scan  ^-  bolt
+  (rash cad x-bolt)
 --

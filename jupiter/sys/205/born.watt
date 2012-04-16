@@ -1,4 +1,4 @@
-!:
+::
 =>  |%
     ++  boom
       $%  [%hit p=mode q=barn r=*]        ::  save to disk
@@ -105,7 +105,7 @@
 =+  [tic=@ud log=*(list ,@uw)]
 =+  vax=seed
 =+  env=*(map term vase)
-::  =+  cot=#/+cato
+::  =+  hyd=#/+hyde
 |%
 ++  live
   |=  lun=loon  ^-  [p=(list boom) q=_..live]
@@ -126,7 +126,7 @@
         %% 
       =+  feq=(slap meat p.lun)
       =+  ham=~(dole ut p.feq)
-      :-  :~  :: [%see 2 (dial:ut ham)]              ::  verbose
+      :-  :~  ::  [%see 2 (dial:ut ham)]              ::  verbose
               [%see 0 (dish:ut ham q.feq)]
           ==
       ..live
