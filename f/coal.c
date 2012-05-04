@@ -285,6 +285,17 @@ u2_ci_bytes(c3_w        a_w,
   return u2_bn_bytes(u2_Wire, a_w, b_y);
 }
 
+/* u2_ci_words():
+**
+**   Construct `a` words from `b`, LSW first, as an atom.
+*/
+u2_atom
+u2_ci_words(c3_w        a_w,
+            const c3_w* b_w)
+{
+  return u2_bn_words(u2_Wire, a_w, b_w);
+}
+
 /* u2_cm_trip(): descend into a memory region.
 **
 **   Memory allocated in the heap above is senior & frozen.

@@ -58,6 +58,40 @@ u2_ve_date(c3_c* ext_c, u2_noun tah)
   }
 }
 
+/* u2_ve_frep(): load [.~ %rep myp {now} hat].
+**
+**   File is either ~ or [nbytes mdate atom].
+*/
+u2_noun
+u2_ve_frep(u2_noun myp, u2_noun hat)
+{
+  //  Total hack - switch to this form exclusively, 
+  //  then revise callers.
+  {
+    c3_c* dex_c = u2_cr_string(myp);
+    u2_noun tah = u2_ckb_flop(hat);
+    u2_weak fat = u2_ve_file(dex_c, u2_ct(tah));
+
+    u2_cz(myp);
+    if ( u2_none == fat ) {
+      u2_cz(tah);
+      free(dex_c);
+      return u2_nul;
+    } else {
+      c3_d wen_d = u2_ve_date(dex_c, tah);
+      c3_w wen_w[2];
+
+      wen_w[0] = (wen_d & 0xffffffffULL);
+      wen_w[1] = (wen_d >> 32ULL);
+
+      free(dex_c);
+      return u2nt(u2_cr_met(3, fat), 
+                  u2_ci_words(2, wen_w),
+                  fat);
+    }
+  }
+}
+
 /* u2_ve_save(): save internal file as atom.
 */
 u2_flag

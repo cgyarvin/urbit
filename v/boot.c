@@ -142,6 +142,7 @@ u2_ve_tool(u2_noun nam)
   u2_weak  src   = u2_ve_file("watt", u2_ct(tah));
 
   u2_cm_push(u2nc(c3__lose, u2_cf_path(".", "watt", tah)));
+
   if ( u2_none == src ) {
     u2_cm_bail(c3__fail);
   }

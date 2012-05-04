@@ -59,6 +59,15 @@
         u2_hbod* bod_u;                     //  body parts
       } u2_hreq;
 
+    /* u2_hrep: simple http response.
+    */
+      typedef struct _u2_hrep {
+        c3_w             sat_w;             //  status
+        c3_c*            msg_c;             //  status-message or null
+        c3_c*            typ_c;             //  content-type
+        struct _u2_hbod* bod_u;             //  body (one part)
+      } u2_hrep;
+
     /* u2_hcon: http connection.
     */
       typedef struct _u2_hcon {
@@ -108,6 +117,11 @@
         } dev;
 
         struct {
+          u2_noun vax;                      //  reck vase
+          c3_c*   who_c;                    //  name prefix
+        } rec;
+
+        struct {
           struct {                          //  packet pile
             u2_noun log;                    //  packets
             u2_noun len;                    //  (lent log)
@@ -127,6 +141,7 @@
         u2_steg ver_e[257];                 //  stages improving downward
         c3_w    kno_w;                      //  current executing stage
 
+        c3_d    now_d;                      //  event tick
         struct ev_loop *lup_u;              //  libev event loop
         u2_http *htp_u;                     //  http servers, if any
       } u2_host;                            //  host == computer == process
@@ -155,6 +170,13 @@
       */
         u2_weak
         u2_ve_file(c3_c* ext_c, u2_noun tah);
+
+      /* u2_ve_frep(): load [.~ %rep myp {now} tah].
+      **
+      **   File is either ~ or [nbytes mdate atom].
+      */
+        u2_noun
+        u2_ve_frep(u2_noun myp, u2_noun tah);
 
       /* u2_ve_date(): date internal file.
       */
@@ -318,3 +340,8 @@
       */
         u2_flag
         u2_ve_http_start(c3_w por_w);
+
+      /* u2_ve_http_sync(): simple synchronous http.
+      */
+        u2_hrep*
+        u2_ve_http_sync(u2_hreq* req_u);

@@ -437,6 +437,86 @@ u2_ve_zuse_line(u2_noun lin)
   u2_hevn_be(u2_pryr, god) = 0;
 }
 
+static u2_noun
+_http_in(u2_hreq* req_u)
+{
+  u2_noun met, hed, que, url, txt;
+
+  switch ( req_u->met_e ) {
+    default: return 0;
+
+    case u2_hmet_get: met = c3__get;
+    case u2_hmet_put: met = c3__put;
+    case u2_hmet_post: met = c3__pos;
+    case u2_hmet_delete: met = c3__del;
+  }
+
+  hed = u2_nul;
+  {
+    u2_hhed* hed_u;
+
+    for ( hed_u = req_u->hed_u; hed_u; hed_u = hed_u->nex_u ) {
+      hed = u2nc(u2nc(u2_ci_string(hed_u->nam_c), 
+                      u2_ci_string(hed_u->val_c)),
+                 hed);
+    }
+  }
+
+  que = u2_nul;   //  XX fixme w/http query parser
+
+  url = u2_ci_string(req_u->url_c);
+
+  txt = u2_nul;   //  XX actually load body if any
+
+  return u2nq(met, hed, que, u2nc(url, txt));
+}
+
+static u2_hrep*
+_http_out(u2_noun rep)
+{
+  u2_noun sat, typ, hed, txt;
+
+  u2_cx_qual(rep, &sat, &typ, &hed, &txt);
+  {
+    u2_hrep* rep_u = malloc(sizeof(u2_hrep));
+
+    rep_u->sat_w = sat;
+    rep_u->msg_c = 0;
+    rep_u->typ_c = u2_cr_string(typ);
+
+    {
+      c3_w len_w     = u2_cr_met(3, txt);
+      u2_hbod *bod_u = malloc(sizeof(u2_hbod) + len_w + 1);
+
+      bod_u->nex_u = 0;
+      bod_u->len_w = len_w;
+      u2_cr_bytes(0, len_w + 1, bod_u->hun_y, txt);
+
+      rep_u->bod_u = bod_u;
+    }
+    return rep_u;
+  }
+}
+
+/* u2_ve_http_sync(): simple synchronous http.
+*/
+u2_hrep*
+u2_ve_http_sync(u2_hreq* req_u)
+{
+  if ( u2_Host.kno_w > 205 ) {
+    return 0;
+  } else {
+    u2_noun raw = _http_in(req_u);
+
+    if ( 0 == raw ) {
+      return 0;
+    }
+    else {
+      return 0;
+    }
+  }
+}
+
 /* u2_ve_line(): execute a command line, unprotected.
 */
 void

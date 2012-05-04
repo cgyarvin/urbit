@@ -50,12 +50,12 @@
   ***    u2_cx functions always bail with c3__exit.
   **/
 #if 1
-#     define u2_cx_h(som)        u2_bi_h(u2_Wire, som)
-#     define u2_cx_t(som)        u2_bi_t(u2_Wire, som)
-#     define u2_cx_at(axe, som)  u2_bi_frag(u2_Wire, axe, som)
-#     define u2_cx_cell(a, b, c)  u2_bi_cell(u2_Wire, a, b, c)
-#     define u2_cx_trel(a, b, c, d)  u2_bi_trel(u2_Wire, a, b, c, d)
-#     define u2_cx_qual(a, b, c, d)
+#     define u2_cx_h(som)               u2_bi_h(u2_Wire, som)
+#     define u2_cx_t(som)               u2_bi_t(u2_Wire, som)
+#     define u2_cx_at(axe, som)         u2_bi_frag(u2_Wire, axe, som)
+#     define u2_cx_cell(a, b, c)        u2_bi_cell(u2_Wire, a, b, c)
+#     define u2_cx_trel(a, b, c, d)     u2_bi_trel(u2_Wire, a, b, c, d)
+#     define u2_cx_qual(a, b, c, d, e)  u2_bi_qual(u2_Wire, a, b, c, d, e)
 #else
     /* u2_cx_h (u2h): head.
     */
@@ -562,6 +562,14 @@
       u2_atom
       u2_ci_bytes(c3_w        a_w,
                   const c3_y* b_y);
+
+    /* u2_ci_words():
+    **
+    **   Construct `a` words from `b`, LSW first, as an atom.
+    */
+      u2_atom
+      u2_ci_words(c3_w        a_w,
+                  const c3_w* b_w);
 
     /* u2_ci_string():
     **

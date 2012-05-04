@@ -1244,6 +1244,8 @@
             :-  p=(hair -.b) 
             q=?@(+.b ~ [~ u=[p=(a +>-.b) q=[p=(hair -.b) q=(tape +.b)]]])
   ++  mole  ,[p=disc q=@]
+  ++  pass  ,@
+  ++  path  (list coin)
   ++  pear  ,[p=hair q=tape]
   ++  pint  ,[p=[p=[p=@ q=@] q=[p=@ q=@]]]
   ++  ring  ,@
@@ -1268,7 +1270,6 @@
                 [2 p=(list ,[@tam *])]
             ==
   ++  wall  (list tape)
-  ++  wand  ,@
   ++  wonk  |*(veq=edge ?@(q.veq !! p.u.q.veq))
   ++  xmln  ,[t=$|(disc [disc a=(list ,[n=disc v=tape])]) c=(list xmln)]
   --
@@ -2517,13 +2518,13 @@
   ::
   ++  ar                                                ::  RSA encryption
     |%
-    ++  brew                                            ::  generate wand
-      |=  [a=@ b=@]  ^-  wand                           ::  [bits seed]
+    ++  brew                                            ::  generate ring
+      |=  [a=@ b=@]  ^-  ring                           ::  [bits seed]
       =+  c=(rsh 0 1 a)
       (jam (ramp c b) (ramp c (shax b)))
     ::
-    ++  chew                                            ::  read with wand, 53
-      |=  [a=wand b=@]  ^-  (unit ,@)
+    ++  chew                                            ::  read with ring, 53
+      |=  [a=ring b=@]  ^-  (unit ,@)
       =+  c=(melt 53 a) 
       ?:  (gte b (mul p.c q.c))
         ~
@@ -2531,24 +2532,24 @@
       (shed 0 (out.d (exp.d r.c (sit.d b))))
     ::
     ++  drip                                            ::  private to public
-      |=  a=wand  ^-  ring
+      |=  a=ring  ^-  pass
       =+  b=(heat a)
       (mul p.b q.b)
     ::
     ++  heat                                            ::  separate primes
-      |=  a=wand  ^-  [p=@ q=@]
+      |=  a=ring  ^-  [p=@ q=@]
       =+  b=(cue a)
       ?>(?=([p=@ q=@] b) b)
     ::
-    ++  melt                                            ::  activate wand
-      |=  [a=@ b=wand]  ^-  [p=@ q=@ r=@]               ::  a=>e, s=>d
+    ++  melt                                            ::  activate ring
+      |=  [a=@ b=ring]  ^-  [p=@ q=@ r=@]               ::  a=>e, s=>d
       =+  c=(heat b)
       :+  p.c
         q.c
       (~(inv fo (elcm (dec p.c) (dec q.c))) a)
     ::
-    ++  sign                                            ::  send with wand, 37
-      |=  [a=wand b=@]  ^-  @
+    ++  sign                                            ::  send with ring, 37
+      |=  [a=ring b=@]  ^-  @
       =>  .(b (shen 0 b))                               ::  scramble RSA input
       =+  c=(melt 37 a)
       ?:  (gte b (mul p.c q.c))
@@ -2556,8 +2557,8 @@
       =+  d=(fu p.c q.c)
       (out.d (exp.d r.c (sit.d b)))
     ::
-    ++  seal                                            ::  send with ring, 53
-      |=  [a=ring b=@]  ^-  @
+    ++  seal                                            ::  send with pass, 53
+      |=  [a=pass b=@]  ^-  @
       =>  .(b (shen 0 b))                               ::  scramble RSA input
       ?:  (gte b a)
         ~|(%ar-seal !!)
@@ -2574,8 +2575,8 @@
         d
       $(b +(b), c (shax c))
     ::
-    ++  take                                            ::  read with ring, 37
-      |=  [a=ring b=@]  ^-  (unit ,@)
+    ++  take                                            ::  read with pass, 37
+      |=  [a=pass b=@]  ^-  (unit ,@)
       ?:  (gte b a)
         ~
       (shed 0 (~(exp fo a) 37 b))

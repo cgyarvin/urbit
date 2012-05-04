@@ -5,14 +5,15 @@
         ++  bone  slim                                    ::  key fingerprint
         ++  code  phat                                    ::  symmetric key
         ++  fact  ,[p=path q=note]                        ::  global fact
-        ++  home  ,@hH                                    ::  global identity
+        ++  farm  ,@hH                                    ::  global identity
         ++  lord  ,@ud                                    ::  regime version
+        ++  mace  slim                                    ::  key generator
         ++  note  ,*                                      ::  key-value value
         ++  path  barn                                    ::  key-value key
         ++  phat  ,@uvI                                   ::  hash vs collision
         ++  rock  ,@uv                                    ::  blind bit data
         ++  slim  ,@uvH                                   ::  hash vs preimage
-        ++  will  (list home)                             ::  guardian list
+        ++  will  (list farm)                             ::  guardian list
     --
 ::
 ::  Specific tiles
@@ -20,50 +21,49 @@
 =>  |%
     ++  card                                          ::  kernel query
       $%  :-  %reg 
-          :+  p=home
+          :+  p=farm
             q=lord
           r=?(%pub %pri %wil)
       ==
-    ++  case                                          ::  per home
+    ++  case                                          ::  per farm
       $:  rev=lord                                    ::  regime version
-          wil=(list home)                             ::  guardians
-          pub=(unit ring)                             ::  public key
+          wil=(list farm)                             ::  guardians
+          pub=(unit pass)                             ::  public key
           pri=(unit soul)                             ::  private state
       ==
     ++  plan                                          ::  packet sources
       $%  [%bu p=(list plan)]                         ::  packet bundle
           [%da p=path q=note]                         ::  data
-          [%pc p=home q=lord r=ring s=will]           ::  certificate
-          [%pg p=home q=lord r=bill]                  ::  signed packet
-          [%pl p=home q=lord r=bill]                  ::  sealed packet
-          [%ps p=home q=lord r=wand]                  ::  private secret
+          [%pc p=farm q=lord r=pass s=will]           ::  certificate
+          [%pg p=farm q=lord r=bill]                  ::  signed packet
+          [%pl p=farm q=lord r=bill]                  ::  sealed packet
+          [%ps p=farm q=lord r=ring]                  ::  private secret
       ==
     ++  rank  ?(%pope %tsar %king %duke %earl %pawn)  ::  key width class
     ++  soul                                          ::  private state
-      $:  wad=wand                                    ::  private key
+      $:  wad=ring                                    ::  private key
       ==
     --
 ::
 ::  State
 ::
 =+  :*  box=*(map path note)                          ::  foreign facts
-        reg=*(map home case)                          ::  regime state
+        reg=*(map farm case)                          ::  regime state
     ==
 ::
 ::  Brain
 ::
 |%
-++  deed  |+(dum=_mind mind)
-++  gift  $%([& p=_deed] [| p=_task])
+++  deed  |+(dum=_mind mind)                          ::  state transition
+++  gift  $%([& p=_deed] [| p=_task])                 ::  inference event
 ++  mind  .                                           ::  live brain
-++  task  |+(a=_mind *work)                           ::  XX shouldnt need %a
-++  work  (list gift)
+++  task  |+(dum=_mind *work)                         ::  suspended inference
+++  work  (list gift)                                 ::  inference product
 ::
 ::
-::
-++  baal  `@`(shax 'Humongous fungus')                ::  false god
+++  baal  `@`(shax 'Humongous fungus')                ::  bogus 
 ++  bear
-  |=  who=home
+  |=  who=farm
   ^-  case
   =+  got=(~(get by reg) who)
   ?.  ?=(~ got)
@@ -83,7 +83,7 @@
     $(doy t.doy) 
   $(..mind (p.i.doy mind), doy t.doy)
 ::
-++  bozo                                              ::  make block
+++  boot                                              ::  make boot block
   |=  god=phat
   %+  can
     7
@@ -94,7 +94,7 @@
       $(who +(who))
 ::
 ++  clan
-  |=  who=home  ^-  rank
+  |=  who=farm  ^-  rank
   =+  wid=(met 3 who)
   ?:  =(0 wid)      %pope
   ?:  =(1 wid)      %tsar
@@ -104,8 +104,8 @@
   ?:  (gte 16 wid)  %pawn
   !!
 ::
-++  dawn                                              ::  register wand
-  |=  [who=home rev=lord wad=wand]
+++  dawn                                              ::  register ring
+  |=  [who=farm rev=lord wad=ring]
   ^+  mind
   =-  ..mind(reg (~(put in reg) who zec))
   ^=  zec  ^-  case
@@ -116,13 +116,13 @@
     caz(pri [~ sol(wad wad)])
   ?>(=(wad.u.pri.caz wad) caz)
 ::
-++  grin                                              ::  register ring
-  |=  [who=home rev=lord rig=ring wil=will]
+++  grin                                              ::  register pass
+  |=  [who=farm rev=lord ris=pass wil=will]
   ^+  mind
   =-  ..mind(reg (~(put in reg) who zec))
   ^=  zec  ^-  case
   =+  caz=(bear who)
-  caz(pub [~ rig], wil wil)
+  caz(pub [~ ris], wil wil)
 ::
 ++  hard
   |*  han=_|+(* *)
@@ -131,7 +131,7 @@
   =+  gol=(han fud)
   ?>(=(gol fud) gol)
 ::
-++  know
+++  know                                              ::  typed query
   |*  ned=card
   ~|  [%know ned]
   ?+    ned  !!
@@ -146,18 +146,18 @@
     ==
   ==
 ::
-++  mars
-  |=  [who=home dol=slim]  ^-  wand
+++  mars                                              ::  make imperial ring
+  |=  [who=farm dol=mace]  ^-  ring
   (brew:ar 1.024 (add who dol))
 ::
 ++  reap                                              ::  decode packet
-  =+  sal=*(set home)                                 ::  multiply signed
+  =+  sal=*(set farm)                                 ::  authentication(s)
   |=  peb=rock  ^-  work
   =+  [mag=(end 3 2 peb) bod=(rsh 3 2 peb)]
   ~|  [%reap mag]
   ?+    mag  !!
   ::
-      %bu
+      %bu                                             ::  packet bundle
     =+  pay=((hard (list rock)) (cue bod))
     |-  ^-  work
     ?~(pay ~ (weld ^$(peb i.pay) $(pay t.pay)))
@@ -175,7 +175,7 @@
     ==
   ::
       %pc
-    =+  pay=((hard ,[p=home q=lord r=ring s=will]) (cue bod))
+    =+  pay=((hard ,[p=farm q=lord r=pass s=will]) (cue bod))
     =+  yep=[[%& |+(dum=_mind =>(.(..mind dum) (grin pay)))] ~]
     ?:  =(0 q.pay) 
       ?>  =((root p.pay) (shax r.pay))
@@ -183,7 +183,7 @@
     :~  :-  %|
       %+  wait
         [%reg p.pay (dec q.pay) %wil]
-      |+  vig=(list home)
+      |+  vig=(list farm)
       |-  ^-  work
       ?~  vig
         yep
@@ -191,25 +191,25 @@
     ==
   ::
       %pg
-    =+  pay=((hard ,[p=home q=lord r=bill]) (cue bod))
+    =+  pay=((hard ,[p=farm q=lord r=bill]) (cue bod))
     :~  :-  %|
       %+  wait
         [%reg p.pay q.pay %pub]
-      |+  rig=ring
+      |+  ris=pass
       %=    ^$
           peb
         ?~  r.pay
-          (need (take:ar rig r.pay))
-        (need (shed (need (take:ar rig -.r.pay)) +.r.pay))
+          (need (take:ar ris r.pay))
+        (need (shed (need (take:ar ris -.r.pay)) +.r.pay))
       ==
     == 
   ::
       %pl
-    =+  pay=((hard ,[p=home q=lord r=bill]) (cue bod))
+    =+  pay=((hard ,[p=farm q=lord r=bill]) (cue bod))
     :~  :-  %|
       %+  wait
         [%reg p.pay q.pay %pri]
-      |+  wad=wand
+      |+  wad=ring
       %=    ^$
           peb
         ?~  r.pay
@@ -219,28 +219,28 @@
     == 
   ::
       %ps
-    =+  pay=((hard ,[p=home q=lord r=wand]) (cue bod))
+    =+  pay=((hard ,[p=farm q=lord r=ring]) (cue bod))
     =+  yep=[[%& |+(dum=_mind =>(.(..mind dum) (dawn pay)))] ~]
     :~  :-  %|
       %+  wait
         [%reg p.pay p.pay %pub]
-      |+  rig=ring
-      ?>  =(rig (drip:ar r.pay))
+      |+  ris=pass
+      ?>  =(ris (drip:ar r.pay))
       yep
     ==
   ==
 ::
 ++  root                                              ::  root key fingerprint
-  |=  who=home
-  =+  nak=(rank who)
+  |=  who=farm
+  =+  nak=(clan who)
   ?+  nak  !!
-    ?(%pope %tsar)  =+(boz=(bozo baal) (cut 7 [who 1] boz))
+    ?(%pope %tsar)  =+(boz=(boot baal) (cut 7 [who 1] boz))
     %pawn           who
   ==
 ::
 ++  spin
   |=  peb=rock  ^+  mind
-  =+  wax=(reap peb)
+  =+  wax=`work`(reap peb)
   |-  ^+  mind 
   ?~  wax
     ..mind 
@@ -253,7 +253,7 @@
 ++  task  |+(a=_mind *work)                           ::  XX shouldnt need name
 ::  ++  then  |=(gun=time ..mind(now gun))
 ++  vice                                              ::  seigneur
-  |=  who=home  ^-  home
+  |=  who=farm  ^-  farm
   =+  nak=(clan who)
   ?+  nak  !!
     %king  (end 3 1 (add (end 3 1 who) (rsh 3 1 who)))
@@ -279,9 +279,8 @@
     $(doy t.doy)
   (weld (p.i.doy ..mind) $(doy t.doy))
 ::
-++  work  (list gift)
 ++  zeus                                              ::  god to initial tsar
-  |=  [who=home god=phat]
+  |=  [who=farm god=phat]
   ?>  (lte who 255)
   =+  dol=(shaf (add god who))                        ::  idol
   (mars who dol)

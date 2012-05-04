@@ -58,11 +58,23 @@ _http_req_free(u2_hreq* req_u)
   }
 }
 
-/* _http_respond(): attach response body.
+/* _http_rep_free(): free http response.
 */
 static void
-_http_respond(u2_hcon *hon_u,
-              u2_hbod *rep_u)
+_http_rep_free(u2_hrep* rep_u)
+{
+  if ( rep_u->bod_u ) free(rep_u->bod_u);
+  if ( rep_u->msg_c ) free(rep_u->msg_c);
+  if ( rep_u->typ_c ) free(rep_u->typ_c);
+
+  free(rep_u);
+}
+
+/* _http_respond_body(): attach response body.
+*/
+static void
+_http_respond_body(u2_hcon *hon_u,
+                   u2_hbod *rep_u)
 {
   if ( !(hon_u->rep_u) ) {
     hon_u->rep_u = rep_u;
@@ -85,7 +97,30 @@ static void
 _http_respond_str(u2_hcon*    hon_u,
                   const c3_c* str_c)
 {
-  _http_respond(hon_u, _http_bod(strlen(str_c), (const c3_y*)str_c));
+  _http_respond_body(hon_u, _http_bod(strlen(str_c), (const c3_y*)str_c));
+}
+
+/* _http_respond(): attach response for transmission.
+*/
+static void
+_http_respond(u2_hcon* hon_u,
+              u2_hrep* rep_u)
+{
+  c3_c buf_c[81];
+
+  sprintf(buf_c, "HTTP/1.1 %d %s\r\n",
+                 rep_u->sat_w,
+                 rep_u->msg_c ? rep_u->msg_c 
+                              : (rep_u->sat_w == 200) ? "OK" : "Fscked");
+  _http_respond_str(hon_u, buf_c);
+
+  sprintf(buf_c, "Content-Type: %s\n", rep_u->typ_c);
+  _http_respond_str(hon_u, buf_c);
+
+  if ( rep_u->bod_u ) {
+    sprintf(buf_c, "Content-Length: %u\r\n", rep_u->bod_u->len_w);
+    _http_respond_body(hon_u, rep_u->bod_u);
+  }
 }
 
 /* _http_conn_dead(): free http connection, close fd.
@@ -285,25 +320,18 @@ _http_message_complete(http_parser* par_u)
 {
   u2_hcon *hon_u = par_u->data;
   u2_hreq *req_u = hon_u->req_u;
+  u2_hrep *rep_u;
 
   _http_req_dump(req_u);
+  rep_u = u2_ve_http_sync(req_u);
+
   _http_req_free(req_u);
   hon_u->req_u = 0;
 
-#if 0
-  {
-    c3_c* htm_c="<html><body>Twinkle, twinkle, little star.</body></html>\r\n";
-    c3_c buf_c[80];
-
-    _http_respond_str(hon_u, "HTTP/1.1 200 OK\r\n");
-    _http_respond_str(hon_u, "Content-Type: text/html\r\n");
-
-    sprintf(buf_c, "Content-Length: %d\r\n", (int)strlen(htm_c));
-    _http_respond_str(hon_u, buf_c);
-    _http_respond_str(hon_u, "\r\n");
-    _http_respond_str(hon_u, htm_c);
+  if ( rep_u ) {
+    _http_respond(hon_u, rep_u);
+    _http_rep_free(rep_u);
   }
-#endif
   return 0;
 }
 
