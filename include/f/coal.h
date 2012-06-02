@@ -571,6 +571,14 @@
       u2_ci_words(c3_w        a_w,
                   const c3_w* b_w);
 
+    /* u2_ci_chubs():
+    **
+    **   Construct `a` double-words from `b`, LSD first, as an atom.
+    */
+      u2_atom
+      u2_ci_chubs(c3_w        a_w,
+                  const c3_d* b_d);
+
     /* u2_ci_string():
     **
     **   u2_ci_bytes(strlen(a_c), (c3_y *)a_c);

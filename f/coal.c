@@ -296,6 +296,30 @@ u2_ci_words(c3_w        a_w,
   return u2_bn_words(u2_Wire, a_w, b_w);
 }
 
+/* u2_ci_chubs():
+**
+**   Construct `a` double-words from `b`, LSD first, as an atom.
+*/
+u2_atom
+u2_ci_chubs(c3_w        a_w,
+            const c3_d* b_d)
+{
+  //  XX considerably suboptimal
+  {
+    c3_w *b_w = malloc(a_w * 8);
+    c3_w i_w;
+    u2_atom p;
+
+    for ( i_w = 0; i_w < a_w; i_w++ ) {
+      b_w[i_w] = b_d[i_w] & 0xffffffffULL;
+      b_w[i_w + 1] = b_d[i_w] >> 32ULL;
+    }
+    p = u2_ci_words((a_w * 2), b_w);
+    free(b_w);
+    return p;
+  }
+}
+
 /* u2_cm_trip(): descend into a memory region.
 **
 **   Memory allocated in the heap above is senior & frozen.

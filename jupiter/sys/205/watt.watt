@@ -970,13 +970,13 @@
       29
     (snag (dec mon) `(list ,@)`[31 28 31 30 31 30 31 31 30 31 30 31 ~])
   ::
-  ++  date
-    |=  [day=@ sec=@ usc=@]  ^-  @
-    (add usc (mul 1.000.000 (add sec (mul 86.400 day))))
-  ::
   ++  dayr  
     |=  yer=@  ^-  @
     ?:(&(=(0 (mod yer 4)) !=(0 (mod yer 100))) 366 365)
+  ::
+  ++  dost
+    |=  [day=@ sec=@ usc=@]  ^-  @
+    (add usc (mul 1.000.000 (add sec (mul 86.400 day))))
   ::
   ++  eyra 
     |=  day=@
@@ -1228,7 +1228,6 @@
   ::
   ::  Tier 5 cones
   ::
-  ++  barn  (list span)
   ++  char  ,@ta
   ++  coin  $%  [%% p=mole]
                 [%blob p=*]
@@ -1245,7 +1244,7 @@
             q=?@(+.b ~ [~ u=[p=(a +>-.b) q=[p=(hair -.b) q=(tape +.b)]]])
   ++  mole  ,[p=disc q=@]
   ++  pass  ,@
-  ++  path  (list coin)
+  ++  path  (list span)
   ++  pear  ,[p=hair q=tape]
   ++  pint  ,[p=[p=[p=@ q=@] q=[p=@ q=@]]]
   ++  ring  ,@
@@ -1256,7 +1255,7 @@
                 [%spot p=_spot]
             ==
   ++  span  disc
-  ++  spot  ,[p=barn q=pint]
+  ++  spot  ,[p=path q=pint]
   ++  tank
     $%  [%leaf p=tape]
         [%palm p=[p=tape q=tape r=tape s=tape] q=(list tank)]
@@ -2160,9 +2159,9 @@
     ==
   ::
   ++  pant
-    |=  [[mad=(list disc) daf=(list ,@)] yad=barn]
+    |=  [[mad=(list disc) daf=(list ,@)] yad=path]
     ~|  %pant
-    ^-  barn
+    ^-  path
     ?@  mad
       ?@(daf yad !!)
     ?@  daf
@@ -2388,7 +2387,7 @@
     [~ p.u.q.vex]
   ::
   ++  smyt
-    |=  bon=barn  ^-  (unit (list coin))
+    |=  bon=path  ^-  (unit (list coin))
     ?@  bon
       ~
     =+  [myn=(slay i.bon) yan=$(bon t.bon)]
@@ -2870,7 +2869,7 @@
         [ven=term pro=term ver=@ kel=@]
     ==
   ::
-  ++  coat  ,[p=barn q=vase]
+  ++  coat  ,[p=path q=vase]
   ++  coil
     $:  p=?(%gold %iron %lead %zinc)
         q=type
@@ -3980,7 +3979,7 @@
   q:(~(mint ut %noun) %noun (ream txt)) 
 ::
 ++  rain
-  |=  [bon=barn txt=@]
+  |=  [bon=path txt=@]
   =+  vaz=vast
   (scan (trip txt) (full (ifix [gay gay] tall:vaz(wer bon))))
 ::
@@ -5993,7 +5992,7 @@
   --
 ::
 ++  vast
-  =+  [bug=`?`| was=*(set barn) wer=*barn]
+  =+  [bug=`?`| was=*(set path) wer=*path]
   |% 
   ++  pend
     |=  [bac=(list) suf=gene]  ^-  gene
@@ -6004,12 +6003,12 @@
     (pgen (weld (prev suf) (slag (lent bac) (flop wer))))
   ::
   ++  pgen
-    |=  bon=barn  ^-  gene
+    |=  bon=path  ^-  gene
     :-  %clsg
     |-(?@(bon ~ [[%dtpt %ta i.bon] $(bon t.bon)]))
   ::
   ++  prev
-    |=  gen=gene  ~|  [%prev gen]  ^-  barn
+    |=  gen=gene  ~|  [%prev gen]  ^-  path
     ?:  ?=([%zpcb *] gen)
       $(gen q.gen)
     ?>  ?=([%clsg *] gen)

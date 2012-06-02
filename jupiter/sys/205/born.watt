@@ -1,13 +1,13 @@
 ::
 =>  |%
     ++  boom
-      $%  [%hit p=mode q=barn r=*]        ::  save to disk
+      $%  [%hit p=mode q=path r=*]        ::  save to disk
           [%see p=@ q=tank]               ::  show at tab
       ==
     ++  loon
       $%  [%% p=gene]                     ::  simple gene
           [%dig p=loon]                   ::  save a packet
-          [%fit p=mode q=barn]            ::  local file
+          [%fit p=mode q=path]            ::  local file
           [%les ~]                        ::  pop from state
           [%mor p=loon]                   ::  push on state
           [%quo p=vase]                   ::  live data
@@ -30,7 +30,7 @@
       $%  [%bean p=*]                     ::  raw noun
           [%lose p=term]                  ::  error message
           [%mean p=_|.(*tank)]            ::  prettyprint trigger
-          [%pray p=barn]                  ::  prayer attempt
+          [%pray p=path]                  ::  prayer attempt
           [%spot p=spot]                  ::  source position
       ==
     --
@@ -136,7 +136,7 @@
       ?>  ?=(@ q.bet)
       :-  [[%hit %atom /.~/log/[(rent %ud tic)] q.bet] ~]
       ..live(tic +(tic), log [q.bet log])
-    ::                                            ::  [%fit p=mode q=barn]
+    ::                                            ::  [%fit p=mode q=path]
         %fit
       :-  [[%hit p.lun q.lun q.vax] ~]
       ..live
