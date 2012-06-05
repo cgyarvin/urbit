@@ -38,12 +38,12 @@
           [%want p=term q=(list path) r=want]           ::  listen: block
       ==
     ++  fact  ,[p=path q=bill]
-    ++  fish  _|+(fact *deed)
+    ++  fish  _|+([path bill] *deed)
     ++  gift  ,*
     ++  lens  _|+(path *brig)
     ++  hunt  _|+([@ path bill] *deed)
     ++  pane  $|(date [p=date q=date])
-    ++  quid  ,[p=root q=(list $|(span _|+(* span)))]
+    ++  quid  ,[p=root q=(list $|(span _|+(span ?)))]
     ++  root  $|(~ [~ p=@])
     ++  sail  $:  ear=(map path ,@)
                   fis=(map term ,[p=? q=quid r=pane s=fish])
@@ -100,7 +100,7 @@
     ^-  lens
     |=  hip=path  ^-  brig
     ?~  hip  [~ ~]
-    ?.  =(%r i.hip)  [~ ~]
+    ?.  =(%y i.hip)  [~ ~]
     (bred hip tar)
   ::
   ++  hark                                          ::  deed by time
@@ -162,9 +162,12 @@
       ?.  yos
         ..hasp
       ..hasp(ear.arc (~(put by ear.arc) paw q.p.u.vec))
-    ?.  &((quiz paw q.q.i.syf) =(q.p.u.vec (trot paw cam)))
+    ?.  =(q.p.u.vec (trot paw cam))
       $(syf t.syf)
-    $(syf t.syf, yos &, vad [(s.q.i.syf q.p.u.vec paw q.mow) vad])
+    =+  rel=(quiz paw q.q.i.syf)
+    ?~  rel
+      $(syf t.syf)
+    $(syf t.syf, yos &, vad [(s.q.i.syf q.p.u.vec u.rel q.mow) vad])
   :: 
   ++  hast                                          ::  deed by name
     |=  mow=fact  ^-  deed
@@ -173,9 +176,10 @@
     |-  ^-  deed
     ?~  syf
       (deem vad)
-    ?.  (quiz p.mow q.q.i.syf)
+    =+  rel=(quiz p.mow q.q.i.syf)
+    ?~  rel
       $(syf t.syf)
-    $(syf t.syf, vad [(s.q.i.syf mow) vad])
+    $(syf t.syf, vad [(s.q.i.syf u.rel q.mow) vad])
   ::
   ++  hear
     |=  [mow=fact cam=lens]
@@ -268,8 +272,14 @@
     =+  yoy=(hear i.nuw cam)
     $(hen [p.yoy hen], ..know q.yoy)
   ::
+  ++  init
+    ^-  [p=deed q=..init]
+    =+  vid=(boot:egg loc) 
+    =>  .(egg q.vid)
+    [p.vid ..init]
+  ::
   ++  quiz
-    |=  [hap=path qid=quid]  ^-  ?
+    |=  [hap=path qid=quid]  ^-  (unit path)
     =+  ^=  pre
         ?~  p.qid  ~
         =+  col=(flop loc)
@@ -283,15 +293,16 @@
         ?~  pre  [~ hap]
         ?~  hap  ~
         ?.(=(i.pre i.hap) ~ $(pre t.pre, hap t.hap))
-    ?~  rel  |
-    |-  ^-  ?
-    ?~  hap  |
-    ?~  q.qid  &
-    ?&  ?@  i.q.qid
+    ?~  rel  ~
+    =+  lor=u.rel
+    |-  ^-  (unit path)
+    ?~  q.qid  rel
+    ?~  lor  ~
+    ?.  ?:  ?=(@ i.q.qid)
           =(i.hap i.q.qid)
-        =(i.hap (i.q.qid i.hap))
-        $(hap t.hap, q.qid t.q.qid)
-    ==
+        (i.q.qid i.hap)
+      ~
+    $(lor t.lor, q.qid t.q.qid)
   ::
   ++  trot                                          ::  first unused index
     |=  [yop=path cam=lens]  ^-  @ud

@@ -5641,7 +5641,8 @@
       =-  ?:  tyn   
             & 
           ?:  tel 
-            ~~  (dunk(sut [%cell sut ref]) %case)
+            ~~  (dunk %need)
+            ~~  (dunk(sut ref) %have)
             ~|(%nest-fail !!)
           |
       ^=  tyn
