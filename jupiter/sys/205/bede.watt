@@ -1,6 +1,5 @@
 ^-  crib
 =>  |%
-    ::  ++  bell  boll                                ::  bede product
     ++  game                                      ::  session state
       $:  nub=vase                                ::  system + libraries
           red=vase                                ::  result log
@@ -19,7 +18,7 @@
     --
 |%
 ++  boot
-  |=  loc=path
+  |=  [now=date loc=path]
   ^-  [p=deed q=crib]
   :-  :-  %hunt 
       :^    %%

@@ -5,7 +5,7 @@
     ++  crib  $_
               ^?  |%
                   ++  boot
-                    |+  loc=path
+                    |+  [now=date loc=path]
                     [p=*deed q=^?(..boot)]
                   :: 
                   ++  peek
@@ -273,8 +273,9 @@
     $(hen [p.yoy hen], ..know q.yoy)
   ::
   ++  init
+    |=  now=date
     ^-  [p=deed q=..init]
-    =+  vid=(boot:egg loc) 
+    =+  vid=(boot:egg now loc)
     =>  .(egg q.vid)
     [p.vid ..init]
   ::
