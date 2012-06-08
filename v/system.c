@@ -179,6 +179,17 @@ u2_ve_use(const c3_c* wit_c)
   else return tul;
 }
 
+/* u2_ve_set(): set specified tool.
+*/
+void
+u2_ve_set(const c3_c* wit_c, u2_noun zam)
+{
+  u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
+  u2_noun  wit   = u2_ci_string(wit_c);
+
+  ver_e->tul = u2_ckd_by_put(ver_e->tul, wit, zam);
+}
+
 /* u2_ve_hard(): use standard tool gate without type check.
 */
 u2_noun
@@ -187,7 +198,7 @@ u2_ve_hard(const c3_c* wit_c, c3_c* fun_c, u2_noun arg)
   u2_noun tul = u2_ve_use(wit_c);
   u2_noun gat = u2_ve_slac(tul, fun_c);
   u2_noun cor = u2_ct(u2t(gat));
- 
+
   u2z(gat);
   return u2_cn_mung(cor, arg);
 }

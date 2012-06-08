@@ -5464,7 +5464,6 @@
       =+(vat=$(gen p.gen) [(wrap(sut p.vat) %lead) (wrap(sut q.vat) %lead)])
     ::
         [%ktsg *]  $(gen p.gen)
-    ::
         [%sggr *]  $(gen q.gen)
         [%tsgr *]                               
       =+  lem=$(gen p.gen, gol %noun)
@@ -5860,6 +5859,7 @@
   ++  silk
     |=  [syx=term tor=port]
     ^-  (unit port)
+    ~|  %silk
     ?-    -.q.tor
         &  ~
         |
@@ -5948,7 +5948,6 @@
   ++  tack
     ~.  %tack
     |=  [peh=twig mur=type]
-    ~|  [%tack peh]
     =+  axe=1
     |-  ^-  [p=axis q=type]
     ?@  peh

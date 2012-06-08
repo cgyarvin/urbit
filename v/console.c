@@ -415,7 +415,7 @@ u2_ve_zuse_line(u2_noun lin)
   u2_hevn_be(u2_pryr, god) = u2_ve_zeus;
   {
     u2_noun ded;
-   
+
     if ( u2_Host.kno_w > 209 ) {
       ded = u2_ve_hard("zuse", "scan", lin);
 
@@ -457,11 +457,56 @@ u2_ve_lunt_boot(void)
 {
   c3_d    now_d = u2_ve_lunt_time();
   u2_atom now   = u2_ci_chubs(1, &now_d);
+  u2_noun who = 1;
+  u2_noun boit;
 
-  
+  printf("booting lunt...\n");
+
+  /* boot installed a factory function
+  */
+  {
+    u2_noun fac = u2_ve_use("lunt");
+    u2_noun who = u2nc(u2nc(c3__atom, 'h'), 1);
+    u2_noun zam = u2_ve_slam(fac, who);
+
+    u2_ve_set("lunt", zam);
+  }
+  bot = u2_ve_hard("lunt", "boot", now); 
+  printf("booted!\n");
+
+  u2z(bot);
 }
 
-  now_d = ((uint
+/* u2_ve_line_boot(): boot the command shell (unprotected).
+*/
+void
+u2_ve_line_boot(void)
+{
+  u2_noun hoe;
+
+  u2_cm_trip();
+  if ( 0 != (hoe = u2_cm_trap()) ) {
+    u2_cm_purge();
+    u2_ve_grab(hoe, 0);
+
+    u2_ve_wine(u2k(u2h(hoe)));
+    u2_ve_sway(2, u2_ckb_flop(u2k(u2t(hoe))));
+    u2z(hoe);
+  } 
+  else {
+    u2_ve_lunt_boot();
+    u2_cm_done();
+  
+    u2_cm_purge();
+    if ( (u2_yes == u2_Flag_Garbage) || (u2_no == u2_wire_lan(u2_Wire)) ) {
+      u2_ve_grab(0);
+    }
+  }
+  u2_cm_chin();
+}
+
+#endif
+
 static u2_noun
 _http_in(u2_hreq* req_u)
 {

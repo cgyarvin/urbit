@@ -200,6 +200,8 @@ main(c3_i   argc,
     //
     {
       u2_ve_init(kno_w);
+ 
+      u2_ve_line_boot();
     }
     u2_cm_done();
   }

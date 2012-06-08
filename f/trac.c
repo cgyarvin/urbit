@@ -631,6 +631,7 @@ _print_tape(u2_noun som,
   }
 }
 
+#if 0
 /* _print_term(): print a terminal.
 */
 static void
@@ -647,7 +648,6 @@ _print_term(u2_noun som,
   }
 }
 
-#if 0
 /* _print_space(): print `feq_w` spaces.
 */
 static void
@@ -658,7 +658,6 @@ _print_space(c3_w  feq_w,
     putc(' ', fil_F);
   }
 }
-#endif
 
 /* _print_wall(): print debug wall.
 */
@@ -672,6 +671,7 @@ _print_wall(u2_noun wal,
     wal = u2_t(wal);
   }
 }
+#endif
             
 /* u2_tx_loaf(): print debug loaf.
 */
@@ -679,10 +679,9 @@ void
 u2_tx_loaf(u2_ray  wir_r,
            u2_noun luf)                                           //  retain
 {
-  if ( u2_yes == u2_dust(luf) ) {
-    _print_term(u2_h(luf), stdout);
-    printf(":\n");
-    _print_wall(u2_t(luf), stdout);
+  extern void u2_ve_tank(c3_l tab_l, u2_noun tac);
+  {
+    u2_ve_tank(0, u2k(luf));
   }
 }
 

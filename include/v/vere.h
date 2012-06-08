@@ -9,7 +9,7 @@
 #     define FirstKernel   209
 #     define DefaultKernel 209
  
-#     define LUNT
+#define LUNT
 
   /** Data types.
   **/
@@ -262,6 +262,11 @@
         u2_noun 
         u2_ve_use(const c3_c* wit_c);
 
+      /* u2_ve_set(): set specified tool.
+      */
+        void
+        u2_ve_set(const c3_c* wit_c, u2_noun zam);
+
       /* u2_ve_step(): replace standard tool gate with new core.
       */
         void
@@ -335,6 +340,11 @@
       */
         void
         u2_ve_line(c3_c* lin_c);
+
+      /* u2_ve_line_boot(): boot the command-line shell.
+      */
+        void
+        u2_ve_line_boot(void);
 
     /**  HTTP.
     **/

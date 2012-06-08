@@ -33,6 +33,7 @@
     ++  yawl  _(hull)
     --
 |=  who=@h
+~&  (show 'lunt: hello, world')
 =+  why=(rent %h who)
 =+  loc=`path`[why ~]
 =+  ^=  pod  ^-  (list ,[p=term q=yawl])
@@ -41,6 +42,8 @@
 |%
 ++  boot
   |=  now=date  ^-  gall
+  ~&  (show 'lunt: boot')
+  ~|  %booty
   (club now *lens |=([nom=@ta yal=yawl] (init:yal now)))
 ::
 ++  club

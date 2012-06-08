@@ -4622,6 +4622,8 @@
       =+  tal=$(gen q.gen, gol %noun)
       [(nice (cell p.hed p.tal)) (cons q.hed q.tal)]
     ::
+        [%brcn *]  (grow %gold [~ 1] p.gen)
+    ::
         [%cnts *]
       =+  lar=(foil (seek %read p.gen))
       =+  mew=(swab q.q.lar q.gen)
@@ -4667,7 +4669,6 @@
         [%ktts *]  =+(vat=$(gen q.gen) [(face p.gen p.vat) q.vat])
         [%ktwt *]  =+(vat=$(gen p.gen) [(wrap(sut p.vat) %lead) q.vat])
     ::
-        [%brcn *]  (grow %gold [~ 1] p.gen)
         [%sggr *]
       =+  hum=$(gen q.gen)
       :-  p.hum
@@ -4773,6 +4774,7 @@
       =+  tal=$(gen q.gen, gol %noun)
       [(nice (cell p.hed p.tal)) (cell q.hed q.tal)]
     ::
+        [%brcn *]  (grow %gold [~ 1] p.gen)
         [%cnts *] 
       =+  lar=(foil (seek %read p.gen))
       =+  vug=(foil (seek(sut dox) %read p.gen))
@@ -4837,8 +4839,6 @@
       =+(vat=$(gen p.gen) [(wrap(sut p.vat) %lead) (wrap(sut q.vat) %lead)])
     ::
         [%ktsg *]  $(gen p.gen)
-    ::
-        [%brcn *]  (grow %gold [~ 1] p.gen)
         [%sggr *]  $(gen q.gen)
         [%tsgr *]                               
       =+  lem=$(gen p.gen, gol %noun)

@@ -311,7 +311,7 @@ u2_ve_rest()
 #ifdef LUNT
       printf("loading lunt...\n");
       u2_ve_tool(c3__lunt);
-      printf("loaded lunt.\n");
+      printf("loaded lunt - booting....\n");
 #endif
     }
   }
