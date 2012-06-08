@@ -437,6 +437,31 @@ u2_ve_zuse_line(u2_noun lin)
   u2_hevn_be(u2_pryr, god) = 0;
 }
 
+#ifdef LUNT
+
+/* u2_ve_lunt_time(): get the lunt time.
+*/
+c3_d
+u2_ve_lunt_time()
+{
+  struct timeval tim_tv;
+
+  gettimeofday(&tim_tv, 0);
+  return (((c3_d) tim_tv.tv_sec) * 1000000ULL) + (c3_d)tim_tv.tv_usec;
+}
+
+/* u2_ve_lunt_boot(): boot the lunt engine.
+*/
+void
+u2_ve_lunt_boot(void)
+{
+  c3_d    now_d = u2_ve_lunt_time();
+  u2_atom now   = u2_ci_chubs(1, &now_d);
+
+  
+}
+
+  now_d = ((uint
 static u2_noun
 _http_in(u2_hreq* req_u)
 {

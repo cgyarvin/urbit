@@ -305,9 +305,14 @@ u2_ve_rest()
         u2_ve_tool(c3__zuse);
       }
     } else {
-      // printf("loading born...\n");
+      printf("loading born...\n");
       u2_ve_tool(c3__born);
-      // printf("loaded born.\n");
+      printf("loaded born.\n");
+#ifdef LUNT
+      printf("loading lunt...\n");
+      u2_ve_tool(c3__lunt);
+      printf("loaded lunt.\n");
+#endif
     }
   }
   u2_Host.ver_e[u2_Host.kno_w].mod_m = c3__live;
