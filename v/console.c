@@ -437,12 +437,12 @@ u2_ve_zuse_line(u2_noun lin)
   u2_hevn_be(u2_pryr, god) = 0;
 }
 
-#ifdef LUNT
+#ifdef RECK
 
-/* u2_ve_lunt_time(): get the lunt time.
+/* u2_ve_reck_time(): get the reck time.
 */
 c3_d
-u2_ve_lunt_time()
+u2_ve_reck_time()
 {
   struct timeval tim_tv;
 
@@ -450,31 +450,89 @@ u2_ve_lunt_time()
   return (((c3_d) tim_tv.tv_sec) * 1000000ULL) + (c3_d)tim_tv.tv_usec;
 }
 
-/* u2_ve_lunt_boot(): boot the lunt engine.
+/* u2_ve_reck_verb(): apply a verb.
 */
 void
-u2_ve_lunt_boot(void)
+u2_ve_reck_verb(u2_noun veb)
 {
-  c3_d    now_d = u2_ve_lunt_time();
-  u2_atom now   = u2_ci_chubs(1, &now_d);
-  u2_noun who = 1;
-  u2_noun boit;
+  u2_noun p_veb, q_veb;
 
-  printf("booting lunt...\n");
+  if ( u2_yes == u2_cr_cell(veb, &p_veb, &q_veb) ) {
+    switch ( p_veb ) {
+      default: u2_err(u2_Wire, "vebo", p_veb); break;
+
+      case c3_s2('y', 'o'): {
+        u2_noun pq_veb, qq_veb;
+
+        if ( u2_yes == u2_cr_cell(q_veb, &pq_veb, &qq_veb) ) {
+          u2_ve_tank(u2k(pq_veb), u2k(qq_veb));
+        }
+      }
+    }
+  }
+  u2z(veb);
+}
+
+/* u2_ve_reck_verbs(): apply a verb list.
+*/
+void
+u2_ve_reck_verbs(u2_noun vyl)
+{
+  if ( u2_no != u2du(vyl) ) {
+    u2_ve_reck_verb(u2k(u2h(vyl)));
+    u2_ve_reck_verbs(u2k(u2t(vyl)));
+    u2z(vyl);
+  }
+}
+
+/* u2_ve_reck_gall(): apply a reck result.
+*/
+void
+u2_ve_reck_gall(u2_noun gax)
+{
+  u2_noun hix, pux;
+
+  hix = u2_ve_slap(u2k(gax), u2nc(c3__cnbc, 'p'));
+  pux = u2_ve_slap(gax, u2nc(c3__cnbc, 'q'));
+
+  u2z(u2k(u2h(hix)));                       //  (list fact)
+  u2_ve_reck_verbs(u2k(u2t(hix)));          //  (list verb)
+  u2z(hix);
+
+  u2_ve_set("reck", u2k(pux));
+
+  u2z(pux);
+}
+
+/* u2_ve_reck_boot(): boot the reck engine.
+*/
+void
+u2_ve_reck_boot(void)
+{
+  c3_d    now_d = u2_ve_reck_time();
+  u2_atom now   = u2_ci_chubs(1, &now_d);
+  u2_noun bot;
+
+  printf("reck: booting...\n");
 
   /* boot installed a factory function
   */
   {
-    u2_noun fac = u2_ve_use("lunt");
+    u2_noun fac = u2_ve_use("reck");
     u2_noun who = u2nc(u2nc(c3__atom, 'h'), 1);
     u2_noun zam = u2_ve_slam(fac, who);
 
-    u2_ve_set("lunt", zam);
+    u2_ve_set("reck", zam);
   }
-  bot = u2_ve_hard("lunt", "boot", now); 
-  printf("booted!\n");
 
-  u2z(bot);
+  /* true boot 
+  */
+  {
+    bot = u2_ve_soft("reck", "boot", u2nc(u2nc(c3__atom, 0), now));
+
+    u2_ve_reck_gall(bot);
+    printf("reck: booted\n");
+  }
 }
 
 /* u2_ve_line_boot(): boot the command shell (unprotected).
@@ -494,7 +552,7 @@ u2_ve_line_boot(void)
     u2z(hoe);
   } 
   else {
-    u2_ve_lunt_boot();
+    u2_ve_reck_boot();
     u2_cm_done();
   
     u2_cm_purge();

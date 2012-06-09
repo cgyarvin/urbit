@@ -308,10 +308,12 @@ u2_ve_rest()
       printf("loading born...\n");
       u2_ve_tool(c3__born);
       printf("loaded born.\n");
-#ifdef LUNT
-      printf("loading lunt...\n");
-      u2_ve_tool(c3__lunt);
-      printf("loaded lunt - booting....\n");
+#ifdef RECK
+      if ( u2_Host.kno_w <= 205 ) {
+        printf("loading reck...\n");
+        u2_ve_tool(c3__reck);
+        printf("loaded reck\n");
+      }
 #endif
     }
   }

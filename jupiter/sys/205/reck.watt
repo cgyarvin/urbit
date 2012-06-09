@@ -33,7 +33,6 @@
     ++  yawl  _(hull)
     --
 |=  who=@h
-~&  (show 'lunt: hello, world')
 =+  why=(rent %h who)
 =+  loc=`path`[why ~]
 =+  ^=  pod  ^-  (list ,[p=term q=yawl])
@@ -42,12 +41,11 @@
 |%
 ++  boot
   |=  now=date  ^-  gall
-  ~&  (show 'lunt: boot')
-  ~|  %booty
   (club now *lens |=([nom=@ta yal=yawl] (init:yal now)))
 ::
 ++  club
   |=  [now=date cam=lens wig=_|+([@ta yawl] [p=*deed q=*yawl])]
+  ~|  %club
   ^-  gall
   =-  ?~  p.p.tob
         tob
@@ -56,12 +54,14 @@
       [[(weld p.p.tob p.p.cyt) (weld q.p.tob q.p.cyt)] q.cyt]
   ^=  tob
   =+  [yom=*gill vap=pod pav=`_pod`~]
+  ~|  %club-loop
   |-  ^-  gall
   ?~  vap
     [[(flop p.yom) (flop q.yom)] ..club(pod (flop pav))]
   =+  wuv=(wig i.vap)
   =+  myx=(kiss:q.wuv now cam p.wuv) 
   %=  $
+    vap    t.vap
     p.yom  (weld p.myx p.yom)
     q.yom  (weld (turn q.myx |=(a=* (verb a))) q.yom)
     pav    [[p.i.vap r.myx] pav]
