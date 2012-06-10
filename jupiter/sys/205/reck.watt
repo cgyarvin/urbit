@@ -18,6 +18,14 @@
         %spot  (show %o p.yos)
       == 
     ::
+    ++  visc
+      |=  typ=type  ^-  tank 
+      (dial:ut ~(dole ut typ))
+    ::
+    ++  vise
+      |=  vax=vase  ^-  tank
+      (dish:ut ~(dole ut p.vax) q.vax)
+    ::
     ++  wash
       |=  [[tab=@ edg=@] tac=tank]  ^-  wall
       (~(win re tac) tab edg) 
@@ -45,7 +53,7 @@
 ::
 ++  club
   |=  [now=date cam=lens wig=_|+([@ta yawl] [p=*deed q=*yawl])]
-  ~|  %club
+  ~|  %reck-club
   ^-  gall
   =-  ?~  p.p.tob
         tob
@@ -68,7 +76,9 @@
   ==
 ::
 ++  flog
-  |=  [now=date vox=verb]  ^-  gall
+  |=  [now=date vox=*]  ^-  gall
+  ~|  %reck-flog
+  =>  .(vox (verb vox))
   ?-    vox
       [%do *]
     %^    club

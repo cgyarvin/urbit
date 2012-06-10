@@ -4388,7 +4388,7 @@
   ::
   ++  dish
     |=  [ham=calf lum=*]  ^-  tank
-    ~|  %dish
+    ~|  [%dish ham]
     %-  need
     |-  ^-  (unit tank)
     ?-    q.ham

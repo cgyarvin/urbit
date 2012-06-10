@@ -16,13 +16,6 @@
 #include "all.h"
 #include "v/vere.h"
 
-    /* Temporary dependency on old gunn.
-    */
-      /* u2_ve_gunn_line(): apply command line.
-      */
-        void
-        u2_ve_gunn_line(u2_noun cor, u2_noun txt);
-
 #define NEW9
 
 /* u2_ve_dump_columns(): return screen column width from OS.
@@ -498,9 +491,17 @@ u2_ve_reck_gall(u2_noun gax)
   u2z(u2k(u2h(hix)));                       //  (list fact)
   u2_ve_reck_verbs(u2k(u2t(hix)));          //  (list verb)
   u2z(hix);
+ 
+#if 0
+  {
+    // u2_noun vis = u2_ve_hard("reck", "visc", u2k(u2h(pux)));
+    u2_noun vis = u2_ve_hard("reck", "vise", u2k(pux));
 
+    u2_ve_tank(4, u2k(vis));
+    u2z(vis);
+  }
+#endif
   u2_ve_set("reck", u2k(pux));
-
   u2z(pux);
 }
 
@@ -511,11 +512,8 @@ u2_ve_reck_boot(void)
 {
   c3_d    now_d = u2_ve_reck_time();
   u2_atom now   = u2_ci_chubs(1, &now_d);
-  u2_noun bot;
 
-  printf("reck: booting...\n");
-
-  /* boot installed a factory function
+  /* create the real reck
   */
   {
     u2_noun fac = u2_ve_use("reck");
@@ -528,11 +526,30 @@ u2_ve_reck_boot(void)
   /* true boot 
   */
   {
-    bot = u2_ve_soft("reck", "boot", u2nc(u2nc(c3__atom, 0), now));
+    u2_noun gax = u2_ve_soft("reck", "boot", u2nc(u2nc(c3__atom, 0), now));
 
-    u2_ve_reck_gall(bot);
-    printf("reck: booted\n");
+    u2_ve_reck_gall(gax);
   }
+}
+
+/* u2_ve_reck_line(): apply a reck line.
+*/
+void
+u2_ve_reck_line(u2_noun lin)
+{
+  u2_hevn_be(u2_pryr, god) = u2_ve_zeus;
+  {
+    c3_d    now_d = u2_ve_reck_time();
+    u2_atom now   = u2_ci_chubs(1, &now_d);
+    u2_noun wen = u2nc(u2nc(c3__atom, 0), now);
+    u2_noun veb = u2nc(c3__noun, u2nt(c3_s2('l','i'), 1, lin));
+    u2_noun sam = u2_ve_slop(wen, veb);
+    u2_noun gax;
+
+    gax = u2_ve_soft("reck", "flog", sam);
+    u2_ve_reck_gall(gax);
+  }
+  u2_hevn_be(u2_pryr, god) = 0;
 }
 
 /* u2_ve_line_boot(): boot the command shell (unprotected).
@@ -664,13 +681,8 @@ u2_ve_line(c3_c* lin_c)
   else {
     u2_noun lin = u2_ci_string(lin_c);
 
-    if ( u2_Host.kno_w <= 221 ) {
-      u2_ve_zuse_line(lin);
-    } 
-    else {
-      u2_noun cor = u2_ve_gunn();
-      u2_ve_gunn_line(cor, lin);
-    }
+    // u2_ve_zuse_line(lin);
+    u2_ve_reck_line(lin);
     u2_cm_done();
   
     u2_cm_purge();
