@@ -26,8 +26,12 @@
       u2_noun i_peh = u2_h(peh);
       u2_noun t_peh = u2_t(peh);
 
-      if ( u2_yes == u2_stud(i_peh) ) {
-        u2_noun pok   = j2_mcy(Pt6, ut, fink)(wir_r, van, sut, c3__rite, i_peh);
+      if ( (u2_yes == u2_stud(i_peh)) || (u2_no == u2_h(i_peh)) ) 
+      {
+        u2_noun pi_peh = (u2_yes == u2_stud(i_peh)) ? 0 : u2_h(u2_t(i_peh));
+        u2_noun qi_peh = (u2_yes == u2_stud(i_peh)) ? i_peh : u2_t(u2_t(i_peh));
+        u2_noun pok   = j2_mcy(Pt6, ut, fink)
+                              (wir_r, van, sut, pi_peh, c3__rite, qi_peh);
         u2_noun wuf   = j2_mby(Pt6, flay)(wir_r, pok);
         u2_noun p_wuf = u2_h(wuf);
         u2_noun q_wuf = u2_t(wuf);
@@ -35,7 +39,7 @@
         u2_noun gav   = _tack_in(wir_r, van, q_wuf, t_peh, mur, nax);
         u2_noun p_gav = u2_h(gav);
         u2_noun q_gav = u2_t(gav);
-        u2_noun qog   = u2_bc(wir_r, u2_nul, u2_rx(wir_r, i_peh));
+        u2_noun qog   = u2_bc(wir_r, u2_nul, u2_rx(wir_r, qi_peh));
         u2_noun ret   = u2_bc
           (wir_r, u2_rx(wir_r, p_gav),
                   j2_mcy(Pt6, ut, heal)(wir_r, van, sut, qog, p_wuf, q_gav));

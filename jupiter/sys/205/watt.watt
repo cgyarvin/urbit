@@ -4844,7 +4844,7 @@
     ::
         [%core *]
       =+  zem=(look cog q.r.q.sut)
-      =>  ^+(. ?:(=(0 dep) . .(dep (dec dep), zem ~)))
+      =>  ^+(. ?:(|(=(~ zem) =(0 dep)) . .(dep (dec dep), zem ~)))
       ?^  zem
         [dep ~ 1 [%| (peg 3 p.u.zem) [[sut(p.q %gold) q.u.zem] ~]]]
       =+  taf=$(sut p.sut)
@@ -4886,7 +4886,7 @@
         ?>  =(0 p.yor)
         ?>((nest(sut %void) | (peek(sut q.sut) way p.u.q.hax)) hax)
       ?>  =(p.u.q.hax p.u.q.yor)
-      :-   p.u.q.hax
+      :-   0
       ?-    -.q.u.q.hax
           &
         ?-    -.q.u.q.yor
@@ -5962,7 +5962,6 @@
         [| *]
       =+  wuf=(flay (fink p.i.peh %rite q.i.peh))
       =+  gav=$(peh t.peh, sut q.wuf, axe (peg axe p.wuf))
-      ~~  (dunk(sut q.gav) 'bar-tack')
       [p.gav (heal [~ q.i.peh] p.wuf q.gav)]
     ==
   ::

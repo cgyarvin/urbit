@@ -7,8 +7,8 @@
 
 /* internals
 */
-  extern int FOO, BAR;
 
+#if 0
   static u2_noun                                                  //  produce
   _snip(u2_wire wir_r,
         u2_noun van,                                              //  retain
@@ -46,6 +46,7 @@
       }
     }
   }
+#endif
 
   static u2_noun                                                  //  produce
   _snub(u2_wire wir_r,

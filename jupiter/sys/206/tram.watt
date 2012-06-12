@@ -5287,15 +5287,15 @@
     ?@  peh
       [axe mur]
     ?-    i.peh
-        @
-      =+  wuf=(foam (fink %rite i.peh))
-      =+  gav=$(peh t.peh, sut q.wuf, axe (peg axe p.wuf))
-      [p.gav (heal [~ i.peh] p.wuf q.gav)]
-    ::
         [~ *]
       =+  vas=(peek %rite p.i.peh)
       =+  gav=$(peh t.peh, sut vas, axe (peg axe p.i.peh))
       [p.gav (heal ~ p.i.peh q.gav)]
+    ::
+        @
+      =+  wuf=(foam (fink %rite i.peh))
+      =+  gav=$(peh t.peh, sut q.wuf, axe (peg axe p.wuf))
+      [p.gav (heal [~ i.peh] p.wuf q.gav)]
     ==
   ::
   ++  tock
