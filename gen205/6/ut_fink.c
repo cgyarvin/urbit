@@ -176,8 +176,7 @@
   j2_mcj(Pt6, ut, fink)[] = {
     { ".3", c3__hevy, 
         j2_mc(Pt6, ut, fink), 
-        u2_jet_dead,    //  XX  test
-        // Tier6_b,
+        Tier6_b,
         u2_none, u2_none,
         j2_mck(Pt6, ut, fink), c3__fink,
     },

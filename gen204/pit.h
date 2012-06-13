@@ -21,7 +21,7 @@
 #   define  Tier5         u2_jet_live
 //#   define  Tier5_b       (u2_jet_live | u2_jet_test | u2_jet_memo)
 #   define  Tier5_b       u2_jet_live
-#   define  Tier6         u2_jet_dead
+#   define  Tier6         u2_jet_live
 #   define  Tier6_a       Tier6
 #   define  Tier6_b       Tier6
 // #   define  Tier6_b       (u2_jet_live | u2_jet_test)
@@ -475,6 +475,7 @@
       j2_mcy(Pt6, ut, find)(u2_wire wir_r,
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
+                            u2_noun dep,                          //  retain
                             u2_noun way,                          //  retain
                             u2_noun cog);                         //  retain
 
@@ -482,6 +483,7 @@
       j2_mcy(Pt6, ut, fink)(u2_wire wir_r,
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
+                            u2_noun dep,                          //  retain
                             u2_noun way,                          //  retain
                             u2_noun cog);                         //  retain
 

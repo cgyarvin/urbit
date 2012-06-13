@@ -177,13 +177,13 @@
         u2_rz(wir_r, wip);
       }
 
-      if ( u2_no == u2_h(i_hyp) ) {
-        u2_noun pi_hyp, qi_hyp, hud;
+      if ( u2_no == u2_h(yip) ) {
+        u2_noun p_yip, q_yip, hud;
 
-        if ( u2_no == u2_as_cell(u2_t(i_hyp), &pi_hyp, &qi_hyp) ) {
+        if ( u2_no == u2_as_cell(u2_t(yip), &p_yip, &q_yip) ) {
           return u2_bl_bail(wir_r, c3__fail);
         }
-        hud = j2_mcy(Pt6, ut, fink)(wir_r, van, syp, pi_hyp, way, qi_hyp);
+        hud = j2_mcy(Pt6, ut, fink)(wir_r, van, syp, p_yip, way, q_yip);
         {
           u2_noun p_hud, q_hud;
 
@@ -195,19 +195,19 @@
         }
       } 
       else {
-        u2_noun hi_hyp = u2_h(i_hyp);
-        u2_noun pi_hyp = u2_t(i_hyp);
+        u2_noun p_yip = u2_t(yip);
 
-        if ( (u2_nul != hi_hyp) || (u2_no == u2_stud(pi_hyp)) ) {
+        if ( u2_no == u2_stud(p_yip) ) {
           return u2_bl_bail(wir_r, c3__fail);
         }
         else {
           ret = u2_bt
-            (wir_r, j2_mbc(Pt3, peg)(wir_r, p_zar, pi_hyp),
+            (wir_r, j2_mbc(Pt3, peg)(wir_r, p_zar, p_yip),
                     u2_yes,
-                    j2_mcy(Pt6, ut, peek)(wir_r, van, syp, way, pi_hyp));
+                    j2_mcy(Pt6, ut, peek)(wir_r, van, syp, way, p_yip));
         }
       }
+      u2_rz(wir_r, yip);
       u2_rz(wir_r, syp);
       u2_rz(wir_r, zar);
       return ret;
@@ -336,8 +336,7 @@
   j2_mcj(Pt6, ut, seek)[] = {
     { ".3", c3__hevy, 
         j2_mc(Pt6, ut, seek), 
-        (u2_jet_dead | u2_jet_memo),  //  XX  update pls
-        // Tier6_b_memo,
+        Tier6_b_memo,
         u2_none, u2_none,
         j2_mck(Pt6, ut, seek), c3__seek
     },

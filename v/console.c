@@ -580,6 +580,15 @@ u2_ve_line_boot(void)
   u2_cm_chin();
 }
 
+#else
+
+/* u2_ve_line_boot(): boot the command shell (unprotected).
+*/
+void
+u2_ve_line_boot(void)
+{
+}
+
 #endif
 
 static u2_noun
@@ -681,8 +690,11 @@ u2_ve_line(c3_c* lin_c)
   else {
     u2_noun lin = u2_ci_string(lin_c);
 
-    // u2_ve_zuse_line(lin);
+#ifdef RECK
     u2_ve_reck_line(lin);
+#else
+    u2_ve_zuse_line(lin);
+#endif
     u2_cm_done();
   
     u2_cm_purge();

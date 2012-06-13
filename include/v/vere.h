@@ -6,10 +6,10 @@
   **/
     /* First kernel this executable can boot.
     */
-#     define FirstKernel   209
-#     define DefaultKernel 209
+#     define FirstKernel   205
+#     define DefaultKernel 205
  
-#define RECK
+// #define RECK
 
   /** Data types.
   **/

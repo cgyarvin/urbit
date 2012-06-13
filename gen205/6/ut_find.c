@@ -22,7 +22,7 @@
       return u2_bc(wir_r, u2_rx(wir_r, dep), u2_nul);
     }
     else switch ( u2_h(sut) ) {
-      default: u2_bc(wir_r, u2_rx(wir_r, dep), u2_nul);
+      default: return u2_bc(wir_r, u2_rx(wir_r, dep), u2_nul);
 
       case c3__cell: {
         if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
@@ -79,7 +79,7 @@
         } else {
           u2_noun zem = j2_mby(Pt6, look)(wir_r, cog, qrq_sut);
 
-          if ( (u2_nul != zem) && (0 == dep) ) {
+          if ( (u2_nul != zem) && (0 != dep) ) {
             u2_noun ped;
 
             ped = j2_mbc(Pt1, dec)(wir_r, dep);
@@ -208,16 +208,16 @@
             u2_mean(q_hax, 6, &puq_hax, 7, &quq_hax, 0);
           }
           if ( u2_nul != q_yor ) {
-            u2_mean(yor, 6, &puq_yor, 7, &quq_yor, 0);
+            u2_mean(q_yor, 6, &puq_yor, 7, &quq_yor, 0);
           }
 
           while ( 1 ) {
             if ( u2_yes == u2_sing(hax, yor) ) {
-              ret = hax; break;
+              ret = u2_rx(wir_r, hax); break;
             }
 
-            if ( u2_nul == quq_hax ) {
-              if ( u2_nul == quq_yor ) {
+            if ( u2_nul == q_hax ) {
+              if ( u2_nul == q_yor ) {
                 return u2_bl_error(wir_r, "find-fork");
               } 
               else {
@@ -229,13 +229,13 @@
                 u2_rz(wir_r, pek);
 
                 if ( u2_yes == nuz ) {
-                  ret = yor; break;
+                  ret = u2_rx(wir_r, yor); break;
                 } 
                 else return u2_bl_error(wir_r, "find-fork");
               }
             }
             else {
-              if ( u2_nul == quq_yor ) {
+              if ( u2_nul == q_yor ) {
                 u2_noun pek = j2_mcy(Pt6, ut, peek)
                   (wir_r, van, q_sut, way, puq_hax);
                 u2_noun nuz = j2_mcy(Pt6, ut, nest)
@@ -244,12 +244,13 @@
                 u2_rz(wir_r, pek);
 
                 if ( u2_yes == nuz ) {
-                  ret = hax; break;
+                  ret = u2_rx(wir_r, hax); break;
                 } 
                 else return u2_bl_error(wir_r, "find-fork");
               }
               else {
                 if ( u2_no == u2_sing(puq_hax, puq_yor) ) {
+                  printf("puq_hax %d, puq_yor %d\n", puq_hax, puq_yor);
                   return u2_bl_error(wir_r, "find-fork");
                 }
 
@@ -269,6 +270,7 @@
                          u2_rx(wir_r, puq_hax),
                          u2_yes,
                          j2_mby(Pt6, fork)(wir_r, pquq_hax, pquq_yor)));
+                    break;
                   }
                 }
                 else {
@@ -295,6 +297,7 @@
                                     (wir_r, u2_rx(wir_r, pquq_hax),
                                             j2_mbc(Pt2, weld)
                                               (wir_r, qquq_hax, qquq_yor))));
+                      break;
                     }
                   }
                 }
@@ -303,7 +306,24 @@
           }
           u2_rz(wir_r, yor);
           u2_rz(wir_r, hax);
+#if 0
+          {
+            u2_noun p_ret = u2_h(ret);
+            u2_noun q_ret = u2_t(ret);
 
+            if ( u2_nul != q_ret ) {
+              u2_noun puq_ret, quq_ret;
+
+              u2_mean(q_ret, 6, &puq_ret, 7, &quq_ret, 0);
+              if ( puq_ret > 65536 || (ret == 0x823d3b04) ) {
+                u2_err(wir_r, "hp_sut", u2_h(p_sut));
+                u2_err(wir_r, "puq_ret", puq_ret);
+                u2_err(wir_r, "p_ret", u2_h(ret));
+                c3_assert(0);
+              }
+            }
+          }
+#endif
           return ret;
         }
       } 
@@ -467,8 +487,7 @@
   j2_mcj(Pt6, ut, find)[] = {
     { ".3", c3__hevy, 
         j2_mc(Pt6, ut, find), 
-        (u2_jet_dead | u2_jet_memo),  //  XX needs test
-  //      Tier6_b_memo,
+        Tier6_b_memo,
         u2_none, u2_none,
         j2_mck(Pt6, ut, find), c3__find,
     },
