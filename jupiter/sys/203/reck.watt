@@ -30,83 +30,189 @@
       |=  [[tab=@ edg=@] tac=tank]  ^-  wall
       (~(win re tac) tab edg) 
     --
-=>  #/+byng
 =>  |%
-    ++  gill  ,[p=(list fact) q=(list verb)]
-    ++  verb
-      $%  [%do p=@ta q=*]                     ::  application command
-          [%li p=@ud q=@ta]                   ::  command line
-          [%yo p=@ud q=tank]                  ::  print at tab
+    ++  beef  ,*                              ::  application event
+    ++  bill  ,[p=date q=*]
+    ++  brig  $,  :-  o=(unit bill) 
+                  v=(map span brig)
+    ++  date  time
+    ++  fact  ,[p=path q=*]
+    ++  kiwi                                  ::  system product
+      $%  [%o p=@ta q=*]                      ::  opaque output by app
+          [%p p=@ud q=@ud r=tank]             ::  print session, tab, etext
+          [%w p=date]                         ::  request wake at date
       ==
-    ++  yawl  _(hull)
+    ++  lamb                                  ::  system event
+      $|  ~                                   ::  wakeup
+      $%  [%d p=(list ,[p=term q=plum])]      ::  direct output
+          [%e p=(list ,[p=term q=pork])]      ::  direct input
+          [%l p=@ud q=@ta]                    ::  command line by session
+      ==
+    ++  lens                                  ::  query interface
+      $_  ^?
+      |%
+      ++  pray  |+([date path] *(unit bill))  ::  special query
+      ++  wish  |+(quay *brig)                ::  general query
+      --
+    ++  pane  $|(date [p=date q=date])        ::  date after/on or before
+    ++  plum                                  ::  process product
+      $%  [%po p=path q=*]                    ::  post to sequence
+          [%pu p=path q=*]                    ::  put in deck
+          [%to p=@ta q=beef]                  ::  pass a command
+          [%yo p=kiwi]                        ::  output
+      ==
+    ++  pork                                  ::  process event
+      $|  ~                                   ::  no-op
+      $%  [%do p=beef]                        ::  direct command
+          [%ti p=date]                        ::  time update
+          [%nu p=fact]                        ::  new fact
+      ==
+    ++  quay                                  ::  complex query
+      $:  fad=?                               ::  forward/reverse
+          wod=(unit pane)                     ::  learned in window
+          fig=(unit ,[p=@ud q=@ud])           ::  subset of sequence 
+          qud=quid                            ::  functional query
+      ==
+    ++  quid  (list $|(span _|+(span ?)))
+    ++  ship                                  ::  process
+      $_  ^?  
+      |%
+      ++  film                                ::  simple query
+        |+  [now=date hip=path]
+        *(unit) 
+      ::
+      ++  step                                ::  assimilate plums
+        |+  [now=date cam=lens poc=pork]
+        [p=*(list plum) q=^?(..step)]
+      --  
     --
 |=  who=@h
 =+  why=(rent %h who)
-=+  loc=`path`[why ~]
-=+  ^=  pod  ^-  (list ,[p=term q=yawl])
-    :~  [%bede (hull loc #/+bede)]
-    ==
-|%
-++  boot
-  |=  now=date  ^-  gall
-  (club now *lens |=([nom=@ta yal=yawl] (init:yal now)))
-::
-++  club
-  |=  [now=date cam=lens wig=_|+([@ta yawl] [p=*deed q=*yawl])]
-  ~|  %reck-club
-  ^-  gall
-  =-  ?~  p.p.tob
-        tob
-      =>  .(..club q.tob)  
-      =+  cyt=$(wig |+([nom=@ta yal=yawl] (know:yal p.p.tob cam)))
-      [[(weld p.p.tob p.p.cyt) (weld q.p.tob q.p.cyt)] q.cyt]
-  ^=  tob
-  =+  [yom=*gill vap=pod pav=`_pod`~]
-  ~|  %club-loop
-  |-  ^-  gall
-  ?~  vap
-    [[(flop p.yom) (flop q.yom)] ..club(pod (flop pav))]
-  =+  wuv=(wig i.vap)
-  =+  myx=(kiss:q.wuv now cam p.wuv) 
-  %=  $
-    vap    t.vap
-    p.yom  (weld p.myx p.yom)
-    q.yom  (weld (turn q.myx |=(a=* (verb a))) q.yom)
-    pav    [[p.i.vap r.myx] pav]
-  ==
-::
-++  flog
-  |=  [now=date vox=*]  ^-  gall
-  ~|  %reck-flog
-  =>  .(vox (verb vox))
-  ?-    vox
-      [%do *]
-    %^    club
+=+  deq=[ear=*(map path ,@) rig=*brig]
+=+  ^=  pod  ^-  (list ,[p=term q=ship])
+    ::  :~  [%bede (hull (weld [why ~] [%bede ~]) #/+bede)]
+    ::  ==
+    ~
+=>  |%                                        ::  internal devices
+    ++  iris
+      ^-  lens
+      |%
+      ++  pray  
+        |=  [now=date hap=path] 
+        ^-  (unit bill)
+        !!
+      ++  wish  
+        |=  qua=quay  
+        ^-  brig
+        !!
+      --
+    ++  post                                  ::  add to sequence
+      |=  [now=date nam=path val=*]
+      ^-  [p=[p=path q=*] q=_..post]
+      !!
+    ++  putt                                  ::  write as state
+      |=  [now=date nam=path val=*]
+      ^-  [p=[p=path q=*] q=_..putt]
+      !!
+    ++  save
+      |=  [now=date pie=(list ,[p=@ta q=plum])]
+      =+  lod=*(list ,[p=path q=*])
+      |-  ^+  [p=lod q=..save]
+      ?~  pie
+        [(flop lod) ..save]
+      ?+    q.i.pie  $(pie t.pie)
+          [%po *]  
+        =+  von=(post now (weld [why ~] [p.i.pie p.q.i.pie]) q.q.i.pie)
+        $(pie t.pie, lod [p.von lod], ..save q.von)
+      ::
+          [%pu *]
+        =+  von=(putt now (weld [why ~] [p.i.pie p.q.i.pie]) q.q.i.pie)
+        $(pie t.pie, lod [p.von lod], ..save q.von)
+      ==
+    ::
+    ++  wick
+      |=  :*  now=date
+              vey=(list pork) 
+              sun=(list ,[p=term q=pork]) 
+          ==
+      ^-  [p=(list kiwi) q=_..wick]
+      %+  work  
         now
-      xray
-    |=  [nom=@ta yal=yawl]
-    ^-  [p=deed q=yawl]
-    [?.(=(p.vox nom) ~ [%feed q.vox]) yal]
-  ::
-      [%li *]
-    $(vox [%do %bede %line p.vox q.vox])
-  ::
-      [%yo *]
-    [[~ ~] ..flog]
+      |=  [now=date cam=lens nam=@ta ski=ship]
+      ^-  [p=(list plum) q=ship]
+      =+  ^=  bam
+          %+  weld
+            vey
+          |-  ^-  (list pork)
+          ?~(sun ~ =+(yec=$(sun t.sun) ?.(=(nam p.i.sun) yec [q.i.sun yec])))
+      =+  yap=*(list (list plum))
+      |-  ^-  [p=(list plum) q=ship]
+      ?~  bam
+        =+  pay=`_yap`(flop yap)
+        :-  |-  ^-  (list plum)
+            ?~  pay
+              ~
+            (weld i.pay $(pay t.pay))
+        ski
+      =+  rez=(step:ski now cam i.bam)
+      $(bam t.bam, yap [p.rez yap], ski q.rez)
+    ::
+    ++  wilt
+      |=  [now=date pie=(list ,[p=term q=plum])]
+      ^-  [p=(list kiwi) q=_..wilt]
+      =+  vad=(save now pie)
+      =>  ^+(. .(..work q.vad))
+      =-  :-  |-  ^-  (list kiwi)
+              ?~  pie
+                p.gow
+              =+  weg=$(pie t.pie)
+              ?.(?=([%yo *] q.i.pie) weg [p.q.i.pie weg])
+          q.gow
+      ^=  gow
+      %^    wick
+          +(now)
+        |-  ^-  (list pork)
+        ?~(p.vad ~ [[%nu i.p.vad] $(p.vad t.p.vad)])
+      |-  ^-  (list ,[p=term q=pork])
+      ?~  pie 
+        ~ 
+      =+  der=$(pie t.pie)
+      ?.(?=([%to *] q.i.pie) der [[p.i.pie [%do p.q.i.pie]] der])
+    ::
+    ++  work
+      |=  :-  now=date 
+          ^=  rap  $_  |+  [now=date cam=lens @ta ski=ship]
+                       [p=*(list plum) q=*ship]
+      ^-  [p=(list kiwi) q=_..work]
+      =+  ^=  pan  ^-  (list ,[p=term q=(list plum) r=ship])
+          %+  turn
+            pod
+          |=  a=[p=term q=ship]
+          [p.a (rap now iris p.a q.a)]
+      =>  ^+(. .(pod (turn pan |=(a=[p=term q=(list plum) r=ship] [p.a r.a]))))
+      %+  wilt
+        now
+      |-  ^-  (list ,[p=term q=plum])
+      ?~  pan
+        ~
+      |-  ^-  (list ,[p=term q=plum])
+      ?~  q.i.pan
+        ^$(pan t.pan)
+      [[p.i.pan i.q.i.pan] $(q.i.pan t.q.i.pan)]
+    --
+|%                                            ::  external interface
+++  flog
+  |=  [now=date lab=lamb]  
+  ^-  [p=(list kiwi) q=_..flog]
+  =+  cro=|=(did=[p=(list kiwi) q=_..work] [p.did ..flog(..work q.did)])
+  ?-    lab
+      ~       (cro (wick now [[%do ~] ~] ~))
+      [%d *]  (cro (wilt now p.lab))
+      [%e *]  (cro (wick now ~ p.lab))
+      [%l *]  $(lab [%e [[%bede [%do %line p.lab q.lab]] ~]])
   ==
-++  gall  ,[p=gill q=_..gall]
-++  xray
-  ^-  lens
-  |=  hap=path  ^-  brig
-  =+  ^=  pos  |-  ^-  (unit path)
-      ?~(hap ~ ?~(loc [~ hap] $(hap t.hap, loc t.loc)))
-  ?:  |(?=(~ pos) ?=(~ u.pos))
-    [~ ~]
-  =+  dop=pod
-  |-  ^-  brig
-  ?~  dop
-    [~ ~]
-  ?:  =(i.u.pos p.i.dop)
-    (film:q.i.dop t.u.pos)
-  $(dop t.dop)
+::
+++  read
+  |=  [now=date hap=path]
+  (pray:iris now hap)
 --

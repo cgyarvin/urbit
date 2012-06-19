@@ -1236,19 +1236,19 @@
                 [%with p=(map coin coin)]
             ==
   ++  disc  ,@ta
-  ++  edge  ,[p=hair q=(unit ,[p=* q=pear])]
+  ++  edge  ,[p=hair q=(unit ,[p=* q=nail])]
   ++  hair  ,[p=@ud q=@ud]
   ++  like  |*  a=_,*
             |=  b=_`*`[(hair) ~]
             :-  p=(hair -.b) 
             q=?@(+.b ~ [~ u=[p=(a +>-.b) q=[p=(hair -.b) q=(tape +.b)]]])
+  ++  nail  ,[p=hair q=tape]
   ++  mole  ,[p=disc q=@]
   ++  pass  ,@
   ++  path  (list span)
-  ++  pear  ,[p=hair q=tape]
   ++  pint  ,[p=[p=[p=@ q=@] q=[p=@ q=@]]]
   ++  ring  ,@
-  ++  rule  |=(tub=pear `edge`[p.tub ~ ~ tub])
+  ++  rule  |=(tub=nail `edge`[p.tub ~ ~ tub])
   ++  shoe  $%  [%bean p=*]
                 [%lose p=@tam]
                 [%mean p=_^?(|.(*tank))]
@@ -1367,7 +1367,7 @@
     ~.  %cold
     |*  [cus=* sef=_rule]
     ~.  %fun
-    |=  tub=pear
+    |=  tub=nail
     =+  vex=(sef tub)
     ?@  q.vex
       vex
@@ -1377,7 +1377,7 @@
     ~.  %cook
     |*  [poq=_,* sef=_rule]
     ~.  %fun
-    |=  tub=pear
+    |=  tub=nail
     =+  vex=(sef tub)
     ?@  q.vex
       vex
@@ -1387,14 +1387,14 @@
     ~.  %easy
     |*  huf=*
     ~.  %fun
-    |=  tub=pear
+    |=  tub=nail
     ^-  (like _huf)
     [p=p.tub q=[~ u=[p=huf q=tub]]]
   ::
-  ++  fail  |=(tub=pear [p=p.tub q=~])
+  ++  fail  |=(tub=nail [p=p.tub q=~])
   ++  full
     |*  sef=_rule
-    |=  tub=pear
+    |=  tub=nail
     =+  vex=(sef tub)
     ?@(q.vex vex ?:(=(~ q.q.u.q.vex) vex [p=p.vex q=~]))
   ::
@@ -1402,7 +1402,7 @@
     ~.  %here
     |*  [hez=_|=([a=pint b=*] [a b]) sef=_rule]
     ~.  %fun
-    |=  tub=pear
+    |=  tub=nail
     =+  vex=(sef tub)
     ?@  q.vex
       vex
@@ -1412,7 +1412,7 @@
     ~.  %just
     |=  daf=char
     ~.  %fun
-    |=  tub=pear
+    |=  tub=nail
     ^-  (like char)
     ?@  q.tub
       (fail tub) 
@@ -1422,7 +1422,7 @@
   ::
   ++  knee
     |*  [gar=* sef=_|.(rule)]
-    |=  tub=pear
+    |=  tub=nail
     ^-  (like _gar)
     ((sef) tub)
   ::
@@ -1430,7 +1430,7 @@
     ~.  %mask
     |=  bud=(list char)
     ~.  %fun
-    |=  tub=pear
+    |=  tub=nail
     ^-  (like char)
     ?@  q.tub
       (fail tub) 
@@ -1439,7 +1439,7 @@
     (next tub)
   ::
   ++  next
-    |=  tub=pear
+    |=  tub=nail
     ^-  (like char)
     ?@  q.tub
       (fail tub) 
@@ -1450,7 +1450,7 @@
     ~.  %sear
     |*  [pyq=_|=(* *(unit)) sef=_rule]
     ~.  %fun
-    |=  tub=pear
+    |=  tub=nail
     =+  vex=(sef tub)
     ?@  q.vex
       vex
@@ -1463,7 +1463,7 @@
     ~.  %shim
     |=  zep=[p=@ q=@]
     ~.  %fun
-    |=  tub=pear
+    |=  tub=nail
     ^-  (like char)
     ?@  q.tub
       (fail tub) 
@@ -1475,7 +1475,7 @@
     ~.  %stag
     |*  [gob=* sef=_rule]
     ~.  %fun
-    |=  tub=pear
+    |=  tub=nail
     =+  vex=(sef tub)
     ?@  q.vex
       vex
@@ -1511,7 +1511,7 @@
           [n.yal l.yal nuc]
         [n.nuc [n.yal l.yal l.nuc] r.nuc]
     ~%  %fun  ..^$  ~
-    |=  tub=pear
+    |=  tub=nail
     ?@  q.tub
       (fail tub)
     |-
@@ -1530,7 +1530,7 @@
     ~.  %stir
     |*  [rud=* raq=_|*([a=* b=*] [a b]) fel=_rule]
     ~.  %fun
-    |=  tub=pear 
+    |=  tub=nail 
     ^-  (like _rud)
     =+  vex=(fel tub) 
     ?@  q.vex
@@ -1543,7 +1543,7 @@
     ~.  %stun
     |*  [[les=@ mos=@] fel=_rule]
     ~.  %fun
-    |=  tub=pear
+    |=  tub=nail
     ^-  (like (list _(wonk (fel))))
     ?:  =(0 mos)
       [p.tub [~ ~ tub]]
@@ -1805,7 +1805,7 @@
   ++  ven  ;~  (comp |=([a=@ b=@] (peg a b)))
              bet
              =+  hom=`?`|
-             |=  tub=pear
+             |=  tub=nail
              ^-  (like axis)
              =+  vex=?:(hom (bet tub) (gul tub))
              ?@  q.vex
@@ -2464,7 +2464,7 @@
             [s=%t c=*]        (shop c.vem |=(a=@ ~(rt at a)))
             [s=%v c=*]        (shop c.vem |=(a=@ ~(ruv at a)))
             [s=%x c=*]        (shop c.vem |=(a=@ ~(rux at a)))
-            [s=[%m p=@] c=*]  (ship p.s.vem c.vem)
+            [s=[%m p=@] c=*]  (shep p.s.vem c.vem)
             [s=[%r p=@] c=*]
           $(vem [[%r ' ' (cut 3 [0 1] p.s.vem) (cut 3 [1 1] p.s.vem)] c.vem])
         ::
@@ -2482,7 +2482,7 @@
             [s=%z c=*]        $(vem [[%r %% %% %%] c.vem])
             *                 !!
         ==
-    ++  ship
+    ++  shep
       |=  [fom=@ gar=*]
       ^-  tank
       =+  l=(met 3 fom)
@@ -2861,7 +2861,7 @@
   ::  Tier 6 cones
   ::
   ++  beer  $|(@ [~ p=gene])
-  ++  calf  ,[p=(map ,@ud veal) q=veal]
+  ++  calf  ,[p=(map ,@ud wine) q=wine]
   ++  chop
     $?  lef=term
         [std=term kel=@]
@@ -3061,21 +3061,21 @@
         [%hold p=(list ,[p=type q=gene])]
     ==
   ++  vase  ,[p=type q=*]                                   ::  type-value pair
-  ++  veal
+  ++  wine
     $|  ?(%noun %tank %void %wool %yarn)
     $%  [%atom p=term]
-        [%beam p=veal]
-        [%core p=@ud q=@tam r=@ta s=(list veal)]
+        [%beam p=wine]
+        [%core p=@ud q=@tam r=@ta s=(list wine)]
         [%corn p=@ud q=@tam r=@ud s=@ud]
-        [%face p=term q=veal]
-        [%fine p=?(%pure %very) q=@uv r=veal]
-        [%list p=term q=veal]
-        [%pick p=(list veal)]
-        [%plot p=(list veal)]
-        [%plum p=term q=@]
+        [%face p=term q=wine]
+        [%fine p=?(%pure %very) q=@uv r=wine]
+        [%list p=term q=wine]
+        [%pear p=term q=@]
+        [%pick p=(list wine)]
+        [%plot p=(list wine)]
         [%stop p=@ud] 
-        [%tree p=term q=veal]
-        [%unit p=term q=veal]
+        [%tree p=term q=wine]
+        [%unit p=term q=wine]
     ==
   --
 ::::
@@ -4369,7 +4369,7 @@
       |-  ^-  (list tank)
       ?~(p.q.ham ~ [^$(q.ham i.p.q.ham) $(p.q.ham t.p.q.ham)])
     :: 
-        [%plum *]
+        [%pear *]
       [%leaf '%' (rend p.q.ham q.q.ham)]
     ::
         [%stop *]
@@ -4398,7 +4398,7 @@
         ?:  ?=(@ lum)
           [%atom %%]
         :-  %plot
-        |-  ^-  (list veal)
+        |-  ^-  (list wine)
         [%noun ?:(?=(@ +.lum) [[%atom %%] ~] $(lum +.lum))]
       ==
     ::
@@ -4508,7 +4508,7 @@
         ~
       [~ u.gim u.myd]
     ::
-        [%plum *]
+        [%pear *]
       ?.  =(lum q.q.ham)
         ~
       =+  fox=(rend p.q.ham q.q.ham)
@@ -4563,9 +4563,9 @@
           [%list * %yarn]       %wool
         ==
     ^=  woz
-    ^-  veal
+    ^-  wine
     ?.  ?=([%stop *] q.ham)
-      ?:  ?&  ?=  [%pick [%plum %n 0] [%plot [%plum %n 0] [%face *] ~] ~] 
+      ?:  ?&  ?=  [%pick [%pear %n 0] [%plot [%pear %n 0] [%face *] ~] ~] 
                 q.ham
               =(1 (met 3 p.i.t.p.i.t.p.q.ham))
           ==
@@ -4576,7 +4576,7 @@
       q.ham
     ?.  ?&  ?=([%pick *] u.may)
             ?=(^ p.u.may)
-            =([%plum %n 0] i.p.u.may)
+            =([%pear %n 0] i.p.u.may)
         ==
       q.ham
     ?:  ?&  ?=([[%plot * [%stop *] ~] ~] t.p.u.may)
@@ -4614,7 +4614,7 @@
   ++  dole
     ^-  calf
     =+  gil=*(set type)
-    =+  dex=[p=*(map type ,@) q=*(map ,@ veal)]
+    =+  dex=[p=*(map type ,@) q=*(map ,@ wine)]
     =+  ^=  nic
         |=  gum=@  ^-  @tam
         %+  can
@@ -4624,10 +4624,10 @@
             [1 (add 'a' (mod (div gum 676) 26))]
         ==
     =<  [q.p q]
-    |-  ^-  [p=[p=(map type ,@) q=(map ,@ veal)] q=veal]
+    |-  ^-  [p=[p=(map type ,@) q=(map ,@ wine)] q=wine]
     =-  [p.tez (doge q.p.tez q.tez)]
     ^=  tez
-    ^-  [p=[p=(map type ,@) q=(map ,@ veal)] q=veal]
+    ^-  [p=[p=(map type ,@) q=(map ,@ wine)] q=wine]
     ?-    sut
         %noun      [dex sut]
         %void      [dex sut]
@@ -4667,7 +4667,7 @@
         [dex [%corn ton (nic (mug sut)) u.voy]]
       =+  yad=$(sut p.sut)
       :-  p.yad
-      ^-  veal
+      ^-  wine
       :^    %core
           ton
         (nic (mug q.r.q.sut))
@@ -4679,7 +4679,7 @@
         $(sut repo)
       =+  pum=$(sut q.sut)
       ?>  ?=([%atom *] q.pum)
-      [p.pum [%plum p.q.pum p.sut]]
+      [p.pum [%pear p.q.pum p.sut]]
     ::
         [%face *]  
       =+  yad=$(sut q.sut)
@@ -6514,7 +6514,7 @@
 ::
 ++  vest
   ~.  %vest
-  |=  tub=pear
+  |=  tub=nail
   ~|  %vest
   ^-  (like gene)
   %.  tub

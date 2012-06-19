@@ -1,7 +1,7 @@
 =>  |%
     ++  bill  ,[p=date q=*]
     ++  brig  ,[o=(unit bill) v=(map span brig)]
-    ++  buck  ,*
+    ++  beef  ,*
     ++  crib  $_
               ^?  |%
                   ++  boot
@@ -13,19 +13,13 @@
                     *brig
                   ::
                   ++  poke
-                    |+  [now=date cam=lens man=buck]
+                    |+  [now=date cam=lens man=beef]
                     [p=*deed q=^?(..poke)]
-                  --
-    ++  crab   ^?  |%
-                  :: 
-                  ++  peek
-                    |+  @
-                    @
                   --
     ++  date  time
     ++  deed                                            ::  hull action
       $|  ~                                             ::  no operation
-      $%  [%feed p=buck]                                ::  typeless input
+      $%  [%feed p=beef]                                ::  typeless input
           [%fish p=term q=quid r=pane s=fish]           ::  listen: set
           [%give p=gift]                                ::  release: output
       ::  [%halt p=term]                                ::  listen: suspend
