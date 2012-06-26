@@ -274,6 +274,13 @@
     ?@  a
       ~
     ?:((b i.a) $(a t.a) [i.a $(a t.a)])
+  ::
+  ++  scag
+    |*  [a=@ b=(list)]
+    ^+  b
+    ?:  |(?=(~ b) =(0 a))
+      ~
+    [i.b $(b t.b, a (dec a)]
   ::  
   ++  slag
     |*  [a=@ b=(list)]
@@ -6374,7 +6381,7 @@
         ==
       ==
     ::
-    ++  wing
+    ++  wisp
       %-  fist
       %+  cook
         |=(a=(list ,[p=term q=foot]) (~(gas by *(map term foot)) a))
@@ -6398,7 +6405,7 @@
     ++  gunk  ~+((glue muck))
     ++  butt  |*(zor=_rule ?:(tol ;~(sfix zor ;~(plug gap duz)) zor))
     ++  fist  |*(zor=_rule ?.(tol fail ;~(sfix zor ;~(plug gap dun))))
-    ++  neck  ;~(pose duz ;~(pfix ;~(plug duq gap) wing))
+    ++  neck  ;~(pose duz ;~(pfix ;~(plug duq gap) wisp))
     ++  hank  (most muck loaf)
     ++  loaf  ?:(tol tall wide)
     ++  mash  ?:(tol gap ;~(plug com ace))
@@ -6408,7 +6415,7 @@
     ++  expb  |.(;~(gunk loaf loaf))
     ++  expc  |.(;~(gunk loaf loaf loaf))
     ++  exps  |.((butt hank))
-    ++  expe  |.(wing)
+    ++  expe  |.(wisp)
     ++  expf  |.(;~(gunk loaf loaf loaf loaf))
     ++  expg  |.(;~(gunk sym loaf))
     ++  exph  |.((butt ;~(gunk loaf rack)))
@@ -6418,7 +6425,7 @@
     ++  expm  |.((butt ;~(gunk loaf loaf rack)))
     ++  expp  |.((butt ;~(gunk rope loaf rack)))
     ++  expq  |.(;~(gunk rope loaf loaf))
-    ++  expr  |.(;~(gunk loaf wing))
+    ++  expr  |.(;~(gunk loaf wisp))
     ++  expz  |.(loaf(bug &))
     ++  hina  |.(;~(gunk (ifix [sel ser] ;~(gunk dem dem)) loaf))
     ++  hinb  |.(;~(gunk bont loaf))

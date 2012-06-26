@@ -1,0 +1,161 @@
+=>  |%
+    ++  bowl                                              ::  live cargo
+      $_  ^?  
+      |%
+      ++  peek  |+(hap=path *unit)                        ::  inspect
+      ++  poke  |+ [now=date cam=lens man=*]              ::  apply
+                [p=*lime q=^?(..poke)]
+      --
+    ++  dome    (map span ,[p=(unit time) q=rail])        ::  query control
+    ++  fish  _|+([a=path b=bill] *lime)                  ::  series effect
+    ++  hunt  _|+([a=@ud b=path c=bill] *lime)            ::  sequence effect
+    ++  lime                                              ::  fuel
+      $|  ~                                               ::  noop
+      $%  [%all p=(list lime)]                            ::  collection
+      ::  [%ban p=span]                                   ::  suspend
+          [%dig p=span q=(list path) r=want]              ::  request
+      ::  [%fly p=span]                                   ::  resume 
+          [%nap p=span q=time r=lime]                     ::  await
+          [%net p=span q=quip r=fish]                     ::  find
+          [%rod p=span q=quip r=sail s=hunt]              ::  sync
+          [%run p=*]                                      ::  command
+          [%say p=plum]                                   ::  action
+      ==
+    ++  rail                                              ::  query
+      $%  [%dig p=wing q=want]                            ::  request
+          [%nap p=time q=lime]                            ::  await
+          [%net p=quip q=fish]                            ::  find
+          [%rod p=quip q=sail r=hunt]                     ::  sync
+      ==
+    ++  sail  (map ,[p=path q=@ud])                       ::  sequence state
+    ++  want  _|+([a=(list ,[p=path q=bill])] *lime)      ::  request effect
+    ++  wing  (map ,[p=path q=(unit bill)])               ::  request state
+    ++  worm  ,[p=(list plum) q=(list lime)]
+    --
+|=  egg=bowl
+^-  ship
+=+  rof=*dome
+=+  hov=*hive
+=>  |%
+    ++  hear
+      |=  [vac=(list fact) baz=(list lime) hov=hive]
+      ^-  [p=(list lime) q=_..hear]
+      =-  [p.rew ..hear(rof q.rew)]
+      ^=  rew
+      |-  ^-  [p=(list lime) q=dome]
+      ?~  rof
+        [baz rof]
+      =+  yem=$(rof l.rof)
+      =+  noy=$(rof r.rof, baz p.yem)
+      =>  ^+(. .(baz p.noy, l.rof q.yem, r.rof q.noy))
+      ?.  ?=(~ p.q.n.rof)
+        [baz rof]
+      =+  sey=(lash q.q.n.rof vac baz hov)
+      [p.sey rof(n q.sey)]
+    ::
+    ++  kick
+      |=  [gas=(list lime) hov=hive]
+      =-  [(flop p.jow) q.jow]
+      ^=  jow
+      =+  baz=[*(list plum)
+      |-  ^-  [p=(list plum) q=(list lime) r=_..kick]
+      ?~  gas
+        ~
+    ::
+    ++  kill
+      |=  [lym=lime baz=[p=(list plum) q=(list lime)] hov=hive]
+      ^-  [p=[p=(list plum) q=(list lime) r=_..kick] 
+      
+    ++  know
+      |=  [gas=(list lime) hov=hive]
+      
+    ++  kiss
+      |=  [hap=fact peq=quip]  ^-  ?
+      ?&  |(?=(~ p.p.peq) (gte p.q.hap u.p.p.peq))
+          |(?=(~ q.p.peq) (lte p.q.hap u.q.p.peq))
+          |-  ^-  ?
+          ?~  q.peq
+            &
+          ?~  hap
+            |
+          ?&  ?@(i.q.peq =(i.q.peq i.hap) (i.q.peq i.hap))
+              $(q.peq t.q.peq, i.hap t.i.hap)
+          ==
+      ==
+    ++  lash
+      |=  [tec=rail vac=(list fact) baz=(list lime) hov=hive]
+      ^-  [p=(list lime) q=[p=(unit time) q=rail]]
+      ?-    tec
+          [%dig *]
+        =-  ?.  p.mig
+              [baz ~ tec(p q.mig)]
+            :+  :-  %-  q.mig 
+                    (turn p.mig |=(a=[p=path q=(unit bill)] (p.a (need q.a))))
+                baz
+              [~ p.hov]
+            tec(p q.mig)
+        ^=  mig  ^-  [p=? q=wing]
+        |-  ^-  [p=? q=wing]
+        ?~  p.tec
+          [& ~]
+        =+  gel=$(p.tec t.p.tec)
+        =-  [&(p.gel ?=(^ q.eyl)) [eyl q.gel]]
+        ^=  eyl  ^-  [p=path q=(unit bill)]
+        ?.  ?=(~ q.i.p.tec)
+          i.p.tec
+        |-  ^-  [p=path q=(unit bill)]
+        ?~  vac
+          i.p.tec
+        ?.(=(p.i.p.tec p.i.vac) $(vac t.vac) [p.i.vac [~ q.i.vac]])
+      ::
+          [%nap *]
+        ?.  (gte p.hov p.tec)
+          [baz ~ tec]
+        [[q.tec baz] [~ p.hov] tec]
+      ::
+          [%net *]
+        :+  |-  ^-  (list lime)
+            ?~  vac
+              baz
+            $(vac t.vac, baz ?.((kiss p.i.vac p.tec) baz [(q.tec i.vac) baz]))
+          ~
+        tec
+      ::
+          [%rod *]
+        =-  [q.woy ~ tec(q p.woy]
+        ^=  woy  
+        |-  ^-  [p=sail q=(list lime)]
+        ?~  vac
+          baz
+        =+  ter=$(vac t.vac)
+        =+  zav=(cork p.i.vac)
+        ?:  |(?=(~ zav) !(kiss q.u.zav p.tec))
+          ter
+        =+  rey=(~(get by q.tec) q.u.zav)
+        =+  bem=?~(rey 1 +(u.rey))
+        ?.  =(bem p.u.zav)
+          baz
+        =>  ^+(. .(baz [(r.tec bem q.u.zav q.i.vac) baz]))
+        =-  [(~(put by q.tec) p.fyq) q.fyq]
+        ^=  fyq
+        |-  ^-  [p=@ud q=(list lime)] 
+        =+  pey=(pray:cam (flop [(rent %ud +(bem)) (flop q.u.zav)]))
+        ?~  pey
+          [bem baz]
+        $(bem +(bem), baz [(r.tec +(bem) q.u.zav u.pey) baz])
+      ==
+    --
+|%  
+++  film  |=(hap=path (peek:egg hap))
+++  step  |=  [poc=pork hov=hive]
+          ^-  [p=(list plum) q=..step]
+          =+  ^=  hez  ^-  [p=(list lime) q=(list fact)]
+              ?-  poc
+                [%do *]  [[[%run p.poc] ~] ~]
+                [%nu *]  [~ [p.poc ~]]
+              ==
+          =+  lim=(hear p.hez q.hez hov)
+          =>  ^+(. .(..hear q.lim))
+          =+  myt=(know (flop p.lim) hov)
+          [(flop p.myt) .(..kick q.myt)]
+--

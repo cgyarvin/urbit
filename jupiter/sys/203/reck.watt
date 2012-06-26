@@ -30,17 +30,14 @@
       |=  [[tab=@ edg=@] tac=tank]  ^-  wall
       (~(win re tac) tab edg) 
     --
+=>  #/+deck
 =>  |%
     ++  beef  ,*                              ::  application event
-    ++  bill  ,[p=date q=*]
-    ++  brig  $,  :-  o=(unit bill) 
-                  v=(map span brig)
-    ++  date  time
-    ++  fact  ,[p=path q=*]
+    ++  hive  ,[p=time q=lens]                ::  system context
     ++  kiwi                                  ::  system product
       $%  [%o p=@ta q=*]                      ::  opaque output by app
           [%p p=@ud q=@ud r=tank]             ::  print session, tab, etext
-          [%w p=date]                         ::  request wake at date
+          [%w p=time]                         ::  request wake at time
       ==
     ++  lamb                                  ::  system event
       $|  ~                                   ::  wakeup
@@ -51,10 +48,10 @@
     ++  lens                                  ::  query interface
       $_  ^?
       |%
-      ++  pray  |+([date path] *(unit bill))  ::  special query
-      ++  wish  |+(quay *brig)                ::  general query
+      ++  pray  |+(path *(unit bill))         ::  specific query
+      ++  hope  |+([quid quiz] *pate)         ::  series query
+      ++  wish  |+([quid quiz] *(list lard))  ::  sequence query
       --
-    ++  pane  $|(date [p=date q=date])        ::  date after/on or before
     ++  plum                                  ::  process product
       $%  [%po p=path q=*]                    ::  post to sequence
           [%pu p=path q=*]                    ::  put in deck
@@ -63,32 +60,25 @@
       ==
     ++  pork                                  ::  process event
       $|  ~                                   ::  no-op
-      $%  [%do p=beef]                        ::  direct command
-          [%ti p=date]                        ::  time update
+      $%  [%do p=*]                           ::  direct command
           [%nu p=fact]                        ::  new fact
       ==
-    ++  quay                                  ::  complex query
-      $:  fad=?                               ::  forward/reverse
-          wod=(unit pane)                     ::  learned in window
-          fig=(unit ,[p=@ud q=@ud])           ::  subset of sequence 
-          qud=quid                            ::  functional query
-      ==
-    ++  quid  (list $|(span _|+(span ?)))
     ++  ship                                  ::  process
       $_  ^?  
       |%
       ++  film                                ::  simple query
-        |+  [now=date hip=path]
+        |+  hap=path
         *(unit) 
       ::
-      ++  step                                ::  assimilate plums
-        |+  [now=date cam=lens poc=pork]
+      ++  step                                ::  assimilate ham
+        |+  [now=time cam=lens poc=pork]
         [p=*(list plum) q=^?(..step)]
       --  
     --
+=>  #/+hull
 |=  who=@h
 =+  why=(rent %h who)
-=+  deq=[ear=*(map path ,@) rig=*brig]
+=+  deq=*deck
 =+  ^=  pod  ^-  (list ,[p=term q=ship])
     ::  :~  [%bede (hull (weld [why ~] [%bede ~]) #/+bede)]
     ::  ==
@@ -98,24 +88,28 @@
       ^-  lens
       |%
       ++  pray  
-        |=  [now=date hap=path] 
+        |=  [hap=path] 
         ^-  (unit bill)
         !!
+      ++  hope
+        |=  [wid=quid qex=quiz]
+        ^-  pate
+        !!
       ++  wish  
-        |=  qua=quay  
-        ^-  brig
+        |=  [wid=quid qex=quiz]
+        ^-  (list lard) 
         !!
       --
     ++  post                                  ::  add to sequence
-      |=  [now=date nam=path val=*]
-      ^-  [p=[p=path q=*] q=_..post]
-      !!
+      |=  [now=time nam=path val=*]
+      ^-  [p=fact q=_..post]
+      =+  yam=(plow:deq 
     ++  putt                                  ::  write as state
-      |=  [now=date nam=path val=*]
-      ^-  [p=[p=path q=*] q=_..putt]
+      |=  [now=time nam=path val=*]
+      ^-  [p=fact q=_..putt]
       !!
     ++  save
-      |=  [now=date pie=(list ,[p=@ta q=plum])]
+      |=  [now=time pie=(list ,[p=@ta q=plum])]
       =+  lod=*(list ,[p=path q=*])
       |-  ^+  [p=lod q=..save]
       ?~  pie
@@ -131,14 +125,14 @@
       ==
     ::
     ++  wick
-      |=  :*  now=date
+      |=  :*  now=time
               vey=(list pork) 
               sun=(list ,[p=term q=pork]) 
           ==
       ^-  [p=(list kiwi) q=_..wick]
       %+  work  
         now
-      |=  [now=date cam=lens nam=@ta ski=ship]
+      |=  [now=time cam=lens nam=@ta ski=ship]
       ^-  [p=(list plum) q=ship]
       =+  ^=  bam
           %+  weld
@@ -158,7 +152,7 @@
       $(bam t.bam, yap [p.rez yap], ski q.rez)
     ::
     ++  wilt
-      |=  [now=date pie=(list ,[p=term q=plum])]
+      |=  [now=time pie=(list ,[p=term q=plum])]
       ^-  [p=(list kiwi) q=_..wilt]
       =+  vad=(save now pie)
       =>  ^+(. .(..work q.vad))
@@ -180,8 +174,8 @@
       ?.(?=([%to *] q.i.pie) der [[p.i.pie [%do p.q.i.pie]] der])
     ::
     ++  work
-      |=  :-  now=date 
-          ^=  rap  $_  |+  [now=date cam=lens @ta ski=ship]
+      |=  :-  now=time 
+          ^=  rap  $_  |+  [now=time cam=lens @ta ski=ship]
                        [p=*(list plum) q=*ship]
       ^-  [p=(list kiwi) q=_..work]
       =+  ^=  pan  ^-  (list ,[p=term q=(list plum) r=ship])
@@ -202,7 +196,7 @@
     --
 |%                                            ::  external interface
 ++  flog
-  |=  [now=date lab=lamb]  
+  |=  [now=time lab=lamb]  
   ^-  [p=(list kiwi) q=_..flog]
   =+  cro=|=(did=[p=(list kiwi) q=_..work] [p.did ..flog(..work q.did)])
   ?-    lab
@@ -213,6 +207,6 @@
   ==
 ::
 ++  read
-  |=  [now=date hap=path]
+  |=  [now=time hap=path]
   (pray:iris now hap)
 --
