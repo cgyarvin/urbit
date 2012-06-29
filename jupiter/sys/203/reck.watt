@@ -33,7 +33,7 @@
 =>  #/+deck
 =>  |%
     ++  beef  ,*                              ::  application event
-    ++  hive  ,[p=time q=lens]                ::  system context
+    ++  hive  ,[p=time q=path r=lens]         ::  identity and context
     ++  kiwi                                  ::  system product
       $%  [%o p=@ta q=*]                      ::  opaque output by app
           [%p p=@ud q=@ud r=tank]             ::  print session, tab, text
@@ -78,11 +78,10 @@
 =>  #/+hull
 |=  who=@h
 =+  why=(rent %h who)
-=+  dek=deck
+=+  dak=deck
 =+  ^=  pod  ^-  (list ,[p=term q=ship])
-    ::  :~  [%bede (hull (weld [why ~] [%bede ~]) #/+bede)]
-    ::  ==
-    ~
+    :~  [%bede (hull #/+bede)]
+    ==
 =>  |%                                        ::  internal devices
     ++  iris
       ^-  lens
@@ -90,7 +89,7 @@
       ++  pray  
         |=  [hap=path] 
         ^-  (unit bill)
-        =+  nev=(mine:dek [~ ~] `quiz`hap)
+        =+  nev=(mine:dak [~ ~] `quiz`hap)
         ?~  nev
           ~
         [~ q.i.nev]
@@ -98,25 +97,25 @@
       ++  hope
         |=  [wid=quid qex=quiz]
         ^-  (list fact)
-        (mine:dek wid qex)
+        (mine:dak wid qex)
       ::
       ++  wish  
         |=  [wid=quid qex=quiz]
         ^-  (list case) 
-        (plow:dek wid qex)
+        (plow:dak wid qex)
       --
     ++  post                                  ::  add to sequence
       |=  [now=time lap=path val=*]
       ^-  [p=fact q=_..post]
-      =+  yam=(post:dek now lap val)
+      =+  yam=(post:dak now lap val)
       :- [(flop `path`[(rent %ud p.yam) (flop lap)]) [now val]]
-      ..post(dek q.yam)
+      ..post(dak q.yam)
     ::
     ++  putt                                  ::  write as state
       |=  [now=time lap=path val=*]
       ^-  [p=fact q=_..putt]
       :-  [lap [now val]]
-      ..putt(dek (putt:dek now lap val))
+      ..putt(dak (putt:dak now lap val))
     ::
     ++  save
       |=  [now=time pie=(list ,[p=@ta q=plum])]
@@ -158,7 +157,7 @@
               ~
             (weld i.pay $(pay t.pay))
         ski
-      =+  rez=(step:ski [now cam] i.bam)
+      =+  rez=(step:ski [now [why nam ~] cam] i.bam)
       $(bam t.bam, yap [p.rez yap], ski q.rez)
     ::
     ++  wilt

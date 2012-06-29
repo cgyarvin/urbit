@@ -1,4 +1,4 @@
-^-  crib
+^-  bowl
 =>  |%
     ++  game                                      ::  session state
       $:  nub=vase                                ::  system + libraries
@@ -19,21 +19,21 @@
 |%
 ++  boot
   |=  [now=date loc=path]
-  ^-  [p=deed q=crib]
-  :-  :-  %more
+  ^-  [p=deed q=bowl]
+  :-  :-  %all
       :~  :-  %hunt 
           :^    %%
               [[~ 0] [%y %pin numb ~]]
             0
           |=  [seq=@ hap=path deb=bill]
-          ^-  deed
+          ^-  lime
           ?.  ?=(@ q.deb)
             ~
           =+  yes=(slay (snag 2 hap))
           ?>  ?=([~ %% %ud *] yes)
-          [%feed %line p.u.yes q.deb]
+          [%run %line p.u.yes q.deb]
       ::
-          [%give %yo 0 (show 'hello, bede.')]
+          [%say %yo %p 0 0(show 'hello, bede.')]
       ==
   ^?(..boot)
 :: 
@@ -42,9 +42,9 @@
   [~ ~]
 ::
 ++  poke
-  |=  [now=date cam=lens man=buck]
+  |=  [hov=hive man=buck]
   ~&  (show 'bede: poke')
-  ^-  [p=deed q=crib]
+  ^-  [p=lime q=bowl]
   ?+    man  !!
       [%line p=sess q=disc]
     =+  ^=  fub  ^-  [p=term q=gene]
@@ -69,7 +69,7 @@
     ?+    p.fub  !!
         %%
       =+  ham=~(dole ut p.wol)
-      :-  [%give [%yo 0 (dish:ut ham q.wol)]]
+      :-  [%say %yo %p 0 0 (dish:ut ham q.wol)]
       %=  ..poke
         sys.pit  %+  ~(put by sys.pit) 
                    p.man 
