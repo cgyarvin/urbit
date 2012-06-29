@@ -36,8 +36,8 @@
     ++  hive  ,[p=time q=lens]                ::  system context
     ++  kiwi                                  ::  system product
       $%  [%o p=@ta q=*]                      ::  opaque output by app
-          [%p p=@ud q=@ud r=tank]             ::  print session, tab, etext
-          [%w p=time]                         ::  request wake at time
+          [%p p=@ud q=@ud r=tank]             ::  print session, tab, text
+          [%w p=time]                         ::  request alarm
       ==
     ++  lamb                                  ::  system event
       $|  ~                                   ::  wakeup
@@ -49,8 +49,8 @@
       $_  ^?
       |%
       ++  pray  |+(path *(unit bill))         ::  specific query
-      ++  hope  |+([quid quiz] *pate)         ::  series query
-      ++  wish  |+([quid quiz] *(list lard))  ::  sequence query
+      ++  hope  |+(quip *(list fact))         ::  series query
+      ++  wish  |+(quip *(list case))         ::  sequence query
       --
     ++  plum                                  ::  process product
       $%  [%po p=path q=*]                    ::  post to sequence
@@ -66,19 +66,19 @@
     ++  ship                                  ::  process
       $_  ^?  
       |%
-      ++  film                                ::  simple query
+      ++  film                                ::  special query
         |+  hap=path
         *(unit) 
       ::
-      ++  step                                ::  assimilate ham
-        |+  [now=time cam=lens poc=pork]
+      ++  step                                ::  operation
+        |+  [hov=hive poc=pork]
         [p=*(list plum) q=^?(..step)]
       --  
     --
 =>  #/+hull
 |=  who=@h
 =+  why=(rent %h who)
-=+  deq=*deck
+=+  dek=deck
 =+  ^=  pod  ^-  (list ,[p=term q=ship])
     ::  :~  [%bede (hull (weld [why ~] [%bede ~]) #/+bede)]
     ::  ==
@@ -90,27 +90,37 @@
       ++  pray  
         |=  [hap=path] 
         ^-  (unit bill)
-        !!
+        =+  nev=(mine:dek [~ ~] `quiz`hap)
+        ?~  nev
+          ~
+        [~ q.i.nev]
+      ::
       ++  hope
         |=  [wid=quid qex=quiz]
-        ^-  pate
-        !!
+        ^-  (list fact)
+        (mine:dek wid qex)
+      ::
       ++  wish  
         |=  [wid=quid qex=quiz]
-        ^-  (list lard) 
-        !!
+        ^-  (list case) 
+        (plow:dek wid qex)
       --
     ++  post                                  ::  add to sequence
-      |=  [now=time nam=path val=*]
+      |=  [now=time lap=path val=*]
       ^-  [p=fact q=_..post]
-      =+  yam=(plow:deq 
+      =+  yam=(post:dek now lap val)
+      :- [(flop `path`[(rent %ud p.yam) (flop lap)]) [now val]]
+      ..post(dek q.yam)
+    ::
     ++  putt                                  ::  write as state
-      |=  [now=time nam=path val=*]
+      |=  [now=time lap=path val=*]
       ^-  [p=fact q=_..putt]
-      !!
+      :-  [lap [now val]]
+      ..putt(dek (putt:dek now lap val))
+    ::
     ++  save
       |=  [now=time pie=(list ,[p=@ta q=plum])]
-      =+  lod=*(list ,[p=path q=*])
+      =+  lod=*(list fact)
       |-  ^+  [p=lod q=..save]
       ?~  pie
         [(flop lod) ..save]
@@ -148,7 +158,7 @@
               ~
             (weld i.pay $(pay t.pay))
         ski
-      =+  rez=(step:ski now cam i.bam)
+      =+  rez=(step:ski [now cam] i.bam)
       $(bam t.bam, yap [p.rez yap], ski q.rez)
     ::
     ++  wilt
@@ -208,5 +218,5 @@
 ::
 ++  read
   |=  [now=time hap=path]
-  (pray:iris now hap)
+  (pray:iris hap)
 --

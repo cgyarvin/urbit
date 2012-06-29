@@ -280,7 +280,7 @@
     ^+  b
     ?:  |(?=(~ b) =(0 a))
       ~
-    [i.b $(b t.b, a (dec a)]
+    [i.b $(b t.b, a (dec a))]
   ::  
   ++  slag
     |*  [a=@ b=(list)]
