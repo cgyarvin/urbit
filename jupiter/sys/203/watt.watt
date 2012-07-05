@@ -6,18 +6,16 @@
 %.  src
 =<  make
 =>  %203
-=>  
-  ::::
+=>  ::
   ::::                Tier 0, kernel stub
-  ::::
+  ::
   ~%    %k.203  ~  ~
   |%
   ++  stub  203
   --
-=>
-  ::::
+=>  ::
   ::::                Tier 1, basic math
-  ::::
+  ::
   ~%    %a  -  ~
   |%
   ++  add
@@ -117,7 +115,7 @@
       a
     $(a (dec a), b (dec b))
   ::
-  ::                                                    Tier 2 cones
+  ::                                                    Tier 2 skins
   ::
   ++  gear
     |*  a=_,*
@@ -394,11 +392,12 @@
   ++  spit |*(a=(gear) ((push a) ~))
   ++  suck |*(a=(gear) ((pull a) ~))
   ::
-  ::                                                    Tier 3 cones
+  ::                                                    Tier 3 skins
   ::
   ++  axis  ,@
   ++  bloq  ,@
-  ++  time  ,@mc
+  ::  ++  time  ,@mc
+  ++  time  ,@ud
   ::::
   --
 =>
@@ -1033,7 +1032,7 @@
       $(nom +(nom), day (add day (damn rey nom)))
     $(rey +(rey), day (add day (dayr rey)))
   ::
-  ::  Tier 4 cones
+  ::  Tier 4 skins
   ::
   ++  apt
     |=  a=(tree)
@@ -1233,7 +1232,7 @@
   ++  swan
     !!
   ::
-  ::  Tier 5 cones
+  ::  Tier 5 skins
   ::
   ++  char  ,@ta
   ++  coin  $%  [%% p=mole]
@@ -2865,7 +2864,7 @@
       [%2 tax]
     ==
   ::
-  ::  Tier 6 cones
+  ::  Tier 6 skins
   ::
   ++  beer  $|(@ [~ p=gene])
   ++  calf  ,[p=(map ,@ud wine) q=wine]

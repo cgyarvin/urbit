@@ -2,6 +2,7 @@
     ++  bowl                                                  ::  cargo
       $_  ^?  
       |%
+      ++  boot  [p=*lime q=^?(.)]
       ++  peek  |+(hap=path *(unit))                          ::  inspect
       ++  poke  |+([hov=hive man=*] [p=*lime q=^?(..poke)])   ::  apply
       --
@@ -11,9 +12,10 @@
     ++  lime                                                  ::  fuel
       $|  ~                                                   ::  noop
       $%  [%all p=(list lime)]                                ::  collection
-      ::  [%ban p=span]                                       ::  suspend
+      ::  [%ban p=span]                                       ::  suspend?
           [%dig p=span q=(list path) r=want]                  ::  request
-      ::  [%fly p=span]                                       ::  resume 
+      ::  [%god p=?(%nuke)]                                   ::  reinstall
+      ::  [%nab p=span]                                       ::  resume?
           [%nap p=span q=time r=lime]                         ::  await
           [%net p=span q=quip r=fish]                         ::  find
           [%rod p=span q=quip r=hunt]                         ::  sync
@@ -229,3 +231,4 @@
             [(flop p.myt) ..step(..kick q.myt)]
   --
 --
+

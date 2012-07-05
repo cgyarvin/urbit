@@ -11,12 +11,6 @@
     :*  new=?
         sys=*(map sess game)
     ==
-=>  |%
-    ++  numb
-      |=  san=span  ^-  ?
-      =+  yes=(slay san)
-      ?=([~ %ud *] yes)
-    --
 |%
 :: 
 ++  peek
