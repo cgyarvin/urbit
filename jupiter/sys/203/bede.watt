@@ -16,7 +16,7 @@
 ++  peek
   |=  hap=path 
   ^-  (unit)
-  !!
+  ~
 ::
 ++  poke
   |=  [hov=hive man=*]
