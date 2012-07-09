@@ -443,37 +443,37 @@ u2_ve_reck_time()
   return (((c3_d) tim_tv.tv_sec) * 1000000ULL) + (c3_d)tim_tv.tv_usec;
 }
 
-/* u2_ve_reck_verb(): apply a verb.
+/* u2_ve_reck_kiwi(): apply reck output.
 */
 void
-u2_ve_reck_verb(u2_noun veb)
+u2_ve_reck_kiwi(u2_noun veb)
 {
-  u2_noun p_veb, q_veb;
+  u2_noun p_veb, q_veb, r_veb;
 
-  if ( u2_yes == u2_cr_cell(veb, &p_veb, &q_veb) ) {
-    switch ( p_veb ) {
-      default: u2_err(u2_Wire, "vebo", p_veb); break;
+  // u2_err(u2_Wire, "kiwi", veb);
 
-      case c3_s2('y', 'o'): {
-        u2_noun pq_veb, qq_veb;
+  if ( u2_no == u2du(veb) ) {
+    u2_err(u2_Wire, "kiwi", veb);
+    u2_cm_bail(c3__fail);
+  } 
+  else switch ( u2h(veb) ) {
+    case 'p': {
+      u2_cx_trel(u2t(veb), &p_veb, &q_veb, &r_veb);
 
-        if ( u2_yes == u2_cr_cell(q_veb, &pq_veb, &qq_veb) ) {
-          u2_ve_tank(u2k(pq_veb), u2k(qq_veb));
-        }
-      }
+      u2_ve_tank(u2k(q_veb), u2k(r_veb));
     }
   }
   u2z(veb);
 }
 
-/* u2_ve_reck_verbs(): apply a verb list.
+/* u2_ve_reck_kiwis(): apply a kiwi list.
 */
 void
-u2_ve_reck_verbs(u2_noun vyl)
+u2_ve_reck_kiwis(u2_noun vyl)
 {
   if ( u2_no != u2du(vyl) ) {
-    u2_ve_reck_verb(u2k(u2h(vyl)));
-    u2_ve_reck_verbs(u2k(u2t(vyl)));
+    u2_ve_reck_kiwi(u2k(u2h(vyl)));
+    u2_ve_reck_kiwis(u2k(u2t(vyl)));
     u2z(vyl);
   }
 }
@@ -488,21 +488,8 @@ u2_ve_reck_gall(u2_noun gax)
   hix = u2_ve_slap(u2k(gax), u2nc(c3__cnbc, 'p'));
   pux = u2_ve_slap(gax, u2nc(c3__cnbc, 'q'));
 
-  u2z(u2k(u2h(hix)));                       //  (list fact)
-  u2_ve_reck_verbs(u2k(u2t(hix)));          //  (list verb)
-  u2z(hix);
- 
-#if 0
-  {
-    // u2_noun vis = u2_ve_hard("reck", "visc", u2k(u2h(pux)));
-    u2_noun vis = u2_ve_hard("reck", "vise", u2k(pux));
-
-    u2_ve_tank(4, u2k(vis));
-    u2z(vis);
-  }
-#endif
-  u2_ve_set("reck", u2k(pux));
-  u2z(pux);
+  u2_ve_reck_kiwis(hix);
+  u2_ve_set("reck", pux);
 }
 
 /* u2_ve_reck_boot(): boot the reck engine.
@@ -511,24 +498,15 @@ void
 u2_ve_reck_boot(void)
 {
   c3_d    now_d = u2_ve_reck_time();
-  u2_atom now   = u2_ci_chubs(1, &now_d);
+  u2_noun now   = u2nc(u2nc(c3__atom, 0), u2_ci_chubs(1, &now_d));
 
   /* create the real reck
   */
   {
     u2_noun fac = u2_ve_use("reck");
-    u2_noun who = u2nc(u2nc(c3__atom, 'h'), 1);
-    u2_noun zam = u2_ve_slam(fac, who);
+    u2_noun zam = u2_ve_slam(fac, now);
 
     u2_ve_set("reck", zam);
-  }
-
-  /* true boot 
-  */
-  {
-    u2_noun gax = u2_ve_soft("reck", "boot", u2nc(u2nc(c3__atom, 0), now));
-
-    u2_ve_reck_gall(gax);
   }
 }
 
@@ -537,16 +515,19 @@ u2_ve_reck_boot(void)
 void
 u2_ve_reck_line(u2_noun lin)
 {
+  static c3_w seq_w = 1;
+
   u2_hevn_be(u2_pryr, god) = u2_ve_zeus;
   {
     c3_d    now_d = u2_ve_reck_time();
     u2_atom now   = u2_ci_chubs(1, &now_d);
     u2_noun wen = u2nc(u2nc(c3__atom, 0), now);
-    u2_noun veb = u2nc(c3__noun, u2nt(c3_s2('l','i'), 1, lin));
-    u2_noun sam = u2_ve_slop(wen, veb);
+    u2_noun tub = u2nc(0, 0);
+    u2_noun lam = u2nc(c3__noun, u2nq('l', tub, seq_w++, lin));
+    u2_noun sam = u2_ve_slop(wen, lam);
     u2_noun gax;
 
-    gax = u2_ve_soft("reck", "flog", sam);
+    gax = u2_ve_soft("reck", "poke", sam);
     u2_ve_reck_gall(gax);
   }
   u2_hevn_be(u2_pryr, god) = 0;

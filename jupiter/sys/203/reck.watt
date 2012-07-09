@@ -30,14 +30,14 @@
             :^    %rod
                 %boaz
               :-  [~ ~]
-              :-  [%mand ~]
+              :-  [%hose ~]
               |=  hap=*  ^-  (unit)
               ?.  ?=([p=span q=span %line ~] hap)
                 ~
               =+  zod=[p=(colt p.hap) q=(colt q.hap)]
               ?.  ?&(?=(^ p.zod) ?=(^ q.zod))
                 ~
-              [~ p.zod q.zod]
+              [~ u.p.zod u.q.zod]
             ^-  hunt
             |=  [seq=@ud muz=* cax=bill]
             ~|  %born-hunt
@@ -49,21 +49,26 @@
             ++  peek  |=([cam=lens hap=path] ~)
             ++  poke  
               |=  [cam=lens man=*] 
-              ~|  %born-poke
               ^-  [p=lime q=bowl]
-              ?.  ?=([%line p=tube q=@ta] man)
+              ~|  %born-poke
+              =+  muv=(move man)
+              ?.  =(muv man)
                 [~ ..poke] 
-              =+  guo=(line p.man q.man)
+              =+  guo=(line p.muv q.muv)
               [p.guo ..poke(..line q.guo)]
             --
         =>  |%
-            ++  game                            ::  session state
+            ++  desk                            ::  session state
               $:  nub=vase                      ::  system + libraries
                   red=vase                      ::  result log
                   ser=vase                      ::  source log
               ==
+            ++  game  (map tube desk)           ::  application state
+            ++  move                            ::  shell command
+              $%  [%line p=tube q=@ta]          ::  line input
+              ==
             --
-        =+  sys=*(map tube game)
+        =+  sys=*game
         |%
         ++  line
           |=  [dub=tube txt=@ta]
@@ -80,7 +85,7 @@
                 ==
               ==
           =+  xac=(~(get by sys) dub)
-          =+  ^=  tuy  ^-  game
+          =+  ^=  tuy  ^-  desk
               ?:  ?=(^ xac)
                 u.xac
               [seed [[%atom %n] ~] [[%atom %n] ~]]
@@ -115,7 +120,7 @@
   ++  poke
     |=  [now=time lam=*]
     =>  .(lam =+(mal=(lamb lam) ?>(=(mal lam) mal)))
-    ^-  [p=(list kiwi) q=_..poke]
+    |-  ^-  [p=(list kiwi) q=_..poke]
     =+  ^=  coz
         |=  did=[p=(list kiwi) q=_..work] 
         [p.did ..poke(..work q.did)]
@@ -123,10 +128,11 @@
         ~       (coz (wick now [[%do ~] ~] ~))
         [%l *]  %=    $
                     lam 
+                  ^-  lamb
                   :-  %o 
-                  :~  :+  %pu
-                        :~  %mand 
-                            (rent %ud p.p.lam) 
+                  :~  :-  %hose 
+                      :+  %pu
+                        :~  (rent %ud p.p.lam) 
                             (rent %ud q.p.lam)
                             %line 
                             (rent %ud q.lam)
@@ -168,7 +174,7 @@
         =+  wys=(~(chit re rig) lap)
         =+  suz=+(dar)
         |-  ^+  ..post
-        ?:  =(~ (~(has by v.wys) (rent %ud suz)))
+        ?:  !(~(has by v.wys) (rent %ud suz))
           ..post(ear (~(put by ear) lap suz))
         $(suz +(suz))
       ::
@@ -287,6 +293,8 @@
   ++  wilt
     |=  [now=time pie=(list ,[p=term q=plum])]
     ^-  [p=(list kiwi) q=_..wilt]
+    ?:  =(~ pie)
+      [~ ..wilt]
     =+  vad=(stow now pie)
     =>  ^+(. .(..work q.vad))
     =-  :-  |-  ^-  (list kiwi)
@@ -509,7 +517,7 @@
           %=  $
             r.i.hur  t.r.i.hur
             p.zey    +(p.zey)
-            q.zey    [(r.lym p.zey p.i.hur q.i.r.i.hur) q.zey]
+            q.zey    [(r.lym p.zey q.i.hur q.i.r.i.hur) q.zey]
           ==
       $(hur t.hur, p.baw q.zey, syl (~(put by syl) p.i.hur p.zey))
     ::
@@ -587,7 +595,7 @@
       =+  bem=?~(rey 1 +(u.rey))
       ?.  =(bem p.u.zav)
         ter
-      =>  ^+(. .(baz [(r.tec bem q.u.zav q.i.vac) baz]))
+      =>  ^+(. .(baz [(r.tec bem u.mey q.i.vac) baz]))
       =-  [(~(put by q.tec) q.u.zav p.fyq) q.fyq]
       ^=  fyq
       |-  ^-  [p=@ud q=(list lime)] 

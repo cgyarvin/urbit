@@ -309,7 +309,7 @@ u2_ve_rest()
       u2_ve_tool(c3__born);
       printf("loaded born.\n");
 #ifdef RECK
-      if ( u2_Host.kno_w <= 205 ) {
+      if ( u2_Host.kno_w <= 203 ) {
         printf("loading reck...\n");
         u2_ve_tool(c3__reck);
         printf("loaded reck\n");
