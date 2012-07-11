@@ -453,22 +453,22 @@
       ?~  p.baw
         [(flop q.baw) ..kick]
       $(p.baw ~, gas (flop p.baw))
-    =+  fel=(kill i.gas baw)
+    =+  fel=(kilt i.gas baw)
     $(gas t.gas, baw p.fel, ..kick q.fel)
   ::
-  ++  kill
+  ++  kilt
     |=  [lym=lime baw=worm]
-    ~|  %kill
-    ^-  [p=worm q=_..kill] 
+    ~|  %kilt
+    ^-  [p=worm q=_..kilt] 
     ?-    lym 
-        ~         [baw ..kill]
+        ~         [baw ..kilt]
     ::
         [%all *]  
-      |-  ^-  [p=worm q=_..kill]
+      |-  ^-  [p=worm q=_..kilt]
       ?~  p.lym
-        [baw ..kill]
+        [baw ..kilt]
       =+  fel=^$(lym i.p.lym)
-      $(p.lym t.p.lym, baw p.fel, ..kill q.fel)
+      $(p.lym t.p.lym, baw p.fel, ..kilt q.fel)
     ::
         [%dig *]
       =+  ^=  mox
@@ -484,31 +484,31 @@
                     |=(a=[p=path q=(unit bill)] [p.a (need q.a)])
                 p.baw
             q.baw
-        ..kill
-      [baw ..kill(rof (~(put by rof) p.lym [~ [%dig q.mox r.lym]]))]
+        ..kilt
+      [baw ..kilt(rof (~(put by rof) p.lym [~ [%dig q.mox r.lym]]))]
     ::
         [%nap *]
       ?:  (gte when:cam q.lym)
-        [[[r.lym p.baw] q.baw] ..kill]
-      [baw ..kill(rof (~(put by rof) p.lym [~ [%nap q.lym r.lym]]))]
+        [[[r.lym p.baw] q.baw] ..kilt]
+      [baw ..kilt(rof (~(put by rof) p.lym [~ [%nap q.lym r.lym]]))]
     ::
         [%net *]
-      ~|  %kill-rod
+      ~|  %kilt-rod
       ?>  =(~ (~(get by rof) p.lym))
       =+  wuh=(hope:cam q.lym)
-      |-  ^-  [p=worm q=_..kill]
+      |-  ^-  [p=worm q=_..kilt]
       ?~  wuh
-        [baw ..kill(rof (~(put by rof) p.lym [~ [%net q.lym r.lym]]))]
+        [baw ..kilt(rof (~(put by rof) p.lym [~ [%net q.lym r.lym]]))]
       $(wuh t.wuh, p.baw [(r.lym i.wuh) p.baw])
     ::
         [%rod *]
-      ~|  %kill-rod
+      ~|  %kilt-rod
       ?>  =(~ (~(get by rof) p.lym))
       =+  hur=`(list case)`(wish:cam q.lym)
       =+  [syl=*sail lax=0]
-      |-  ^-  [p=worm q=_..kill]
+      |-  ^-  [p=worm q=_..kilt]
       ?~  hur
-        [baw ..kill(rof (~(put by rof) p.lym [~ [%rod q.lym syl r.lym]]))]
+        [baw ..kilt(rof (~(put by rof) p.lym [~ [%rod q.lym syl r.lym]]))]
       =+  ^=  zey
           =+  zey=[p=1 q=p.baw]
           |-  ^+  zey
@@ -523,9 +523,9 @@
     ::
         [%run *]
       =+  leb=(poke:egg cam p.lym)
-      [[[p.leb p.baw] q.baw] ..kill(egg q.leb)]
+      [[[p.leb p.baw] q.baw] ..kilt(egg q.leb)]
     ::
-        [%say *]  [[p.baw [p.lym q.baw]] ..kill]
+        [%say *]  [[p.baw [p.lym q.baw]] ..kilt]
     ==
   ++  kiss
     |=  [fet=fact peq=quip]  ^-  (unit)
