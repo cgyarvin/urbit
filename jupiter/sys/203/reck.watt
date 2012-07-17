@@ -165,19 +165,17 @@
                 =-  :-  %all
                     %+  turn 
                       yos 
-                    |=  [p=path q=*]
-                    `lime`[%say %pu [hof q.muz r.muz %m p] q]
+                    |=  [p=@ta q=hapt r=*]
+                    `lime`[%say %pu [hof q.muz r.muz p (flop q)] r]
                 ^=  yos  
                 =+  ram=*hapt
-                =+  waz=*(list ,[p=path q=*])
+                =+  waz=*(list ,[p=@ta q=path r=*])
                 |-  ^+  waz
                 ?-    rad
-                    [& *]  [[(flop ram) p.rad] waz]
+                    [& *]  [[%m ram p.rad] [%d ram q.rad] waz]
                     [| *]
                   =+  dib=(~(tap by q.rad) ~)
-                  :-  :-  (flop ram)
-                      :-  p.rad
-                      (turn dib |=([p=span q=arch] p))
+                  :-  [%m ram p.rad (turn dib |=([p=span q=arch] p))]
                   |-  ^+  waz
                   ?~  dib
                     waz
@@ -283,8 +281,18 @@
               =+  niz=$(p.s.muv t.p.s.muv, taq q.buz)
               [[p.buz p.niz] q.niz]
             ::
-                [%gv *]  [~ taq(rad (~(give cy rad.taq) r.muv p.s.muv q.s.muv))]
-                [%kl *]  [~ taq(rad (~(kill cy rad.taq) r.muv p.s.muv))]
+                [%gv *]  
+              :-  =+  yom=(~(also cy rad.taq) p.s.muv)
+                  =+  old=?:(?=([& *] yom) p.yom 0)
+                  [%say %yo %o %cary %sync old (rent %h p.muv) q.muv p.s.muv]
+              taq(rad (~(give cy rad.taq) r.muv p.s.muv q.s.muv))
+            ::
+                [%kl *]  
+              :-  =+  yom=(~(also cy rad.taq) p.s.muv)
+                  =+  old=?:(?=([& *] yom) p.yom 0)
+                  [%say %yo %o %cary %sync old (rent %h p.muv) q.muv p.s.muv]
+              taq(rad (~(kill cy rad.taq) r.muv p.s.muv))
+            ::
                 [%rl *]
               :-  :-  %say
                   :+  %pu
