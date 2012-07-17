@@ -1,15 +1,26 @@
-!:
+::
 ::              Reck kernel 203.  This file is in the public domain.
 ::
 =>  ::
   ::::          Tier Gy, general geometry
   ::
   |%
+  ++  arch                                          ::  fs node
+    $%  [& clod]                                    ::  ie, file
+        [| dirt]                                    ::  ie, directory
+    ==                                              ::
   ++  bill  ,[p=time q=*]                           ::  time and value
   ++  brig  ,[o=(unit bill) v=(map span brig)]      ::  raw path tree
   ++  case  ,[p=path q=* r=(list ,[p=@ud q=bill])]  ::  sequence report
+  ++  cash  ,[p=path q=* r=(list fact)]             ::  series report
+  ++  clod  ,[p=time q=*]                           ::  mtime content
+  ++  dirt  ,[p=time q=(map span arch)]             ::  mtime listing
   ++  fact  ,[p=path q=bill]                        ::  monotonic binding
   ++  hapt  path                                    ::  reversed path
+  ++  meta                                          ::  path metadata
+    $%  [& p=time]                                  ::  mtime
+        [| p=time q=(list span)]                    ::  mtime dir
+    ==                                              ::
   ++  quay  ,[p=path q=_|+(* *(unit))]              ::  prefix/suffix
   ++  quid  ,[p=(unit time) q=(unit time)]          ::  query window
   ++  quip  ,[p=quid q=quay]                        ::  windowed query
@@ -28,11 +39,11 @@
         |=  [now=time who=span]
         :-  ^-  lime
             :^    %rod
-                %boaz
+                %abel
               :-  [~ ~]
-              :-  [%hose ~]
+              :-  [%hose %line ~]
               |=  hap=*  ^-  (unit)
-              ?.  ?=([p=span q=span %line ~] hap)
+              ?.  ?=([p=span q=span ~] hap)
                 ~
               =+  zod=[p=(colt p.hap) q=(colt q.hap)]
               ?.  ?&(?=(^ p.zod) ?=(^ q.zod))
@@ -107,6 +118,182 @@
             ==
           ==
         --
+          :-  %cary                             ::  %cary, revision control
+        ^-  dock
+        |=  [now=time who=span]
+        %^    hull
+            (iris now)
+          who
+        ^-  bead
+        |=  [now=time who=span]
+        :-  ^-  lime
+            :-  %all
+            :~  :^    %rod
+                    %abel
+                  :-  [~ ~]
+                  :-  [who ~]
+                  |=  hap=*  ^-  (unit)
+                  ?.  ?=([p=span q=span .~ ~] hap)
+                    ~
+                  =+  [rux=(slay p.hap) vys=(slay q.hap)]
+                  ?.  &(?=([~ %% %h *] rux) ?=([~ %% %ta *] vys))
+                    ~
+                  [~ q.p.u.rux q.p.u.vys]
+                ^-  hunt
+                |=  [seq=@ud muz=* cax=bill]  ^-  lime
+                ?>  ?=([p=@h q=@ta] muz)
+                ^-  lime
+                [%run [%& p.muz q.muz p.cax q.cax]]
+            ::
+                :^    %net
+                    %cain
+                  :-  [~ ~]
+                  :-  [who ~]
+                  |=  hap=*  ^-  (unit)
+                  ?.  ?=([p=span q=span r=span %a ~] hap)
+                    ~
+                  =+  [rux=(slay p.hap) vys=(slay q.hap)]
+                  ?.  &(?=([~ %% %h *] rux) ?=([~ %% %ta *] vys))
+                    ~
+                  [~ q.p.u.rux q.p.u.vys r.hap]
+                ^-  fish
+                |=  [sap=path muz=* cax=bill]  ^-  lime
+                ?>  ?=([p=@h q=@ta r=@ta] muz)
+                =+  hof=(rent %h p.muz)
+                =+  rad=(arch q.cax)
+                ?>  =(rad q.cax)
+                =-  :-  %all
+                    %+  turn 
+                      yos 
+                    |=  [p=path q=*]
+                    `lime`[%say %pu [hof q.muz r.muz %m p] q]
+                ^=  yos  
+                =+  ram=*hapt
+                =+  waz=*(list ,[p=path q=*])
+                |-  ^+  waz
+                ?-    rad
+                    [& *]  [[(flop ram) p.rad] waz]
+                    [| *]
+                  =+  dib=(~(tap by q.rad) ~)
+                  :-  :-  (flop ram)
+                      :-  p.rad
+                      (turn dib |=([p=span q=arch] p))
+                  |-  ^+  waz
+                  ?~  dib
+                    waz
+                  ^$(rad q.i.dib, ram [p.i.dib ram])
+                ==
+            ==
+        ^-  bowl
+        =>  ..$
+        =>  |%
+            ++  desk                                      ::  project state
+              $:  seq=@                                   ::  seqno, from 1
+                  wen=time                                ::  date of change
+                  rad=arch                                ::  state now
+              ==
+            ++  game  
+              $:  wod=(map ,@h room)                      ::  complete state
+              ==
+            ++  move
+              $%  [& p=@h q=span r=time s=task]           ::  project change
+                  [| p=@h q=?]                            ::  local on/off
+              ==
+            ++  room
+              $:  our=?                                   ::  local/foreign
+                  dos=(map span desk)                     ::  projects 
+              ==
+            ++  task                                      ::  change
+              $|  ~                                       ::  nop
+              $%  [%ev p=(list task)]                     ::  multi change
+                  [%gv p=path q=*]                        ::  write file
+                  [%kl p=path]                            ::  remove file
+                  [%rl p=span]                            ::  declare label
+              ==
+            --
+        =+  sys=*game
+        |%
+        ++  peek  
+          |=  [cam=lens hap=path]
+          ^-  (unit)
+          ?~  hap  ~
+          =+  hos=(slay i.hap)                          ::  host
+          ?.  &(?=(^ hos) ?=([%% %h *] u.hos))  ~
+          ?~  t.hap  ~ 
+          =+  poj=(slay i.t.hap)                        ::  project
+          ?.  &(?=(^ poj) ?=([%% %ta *] u.poj))  ~
+          ?~  t.t.hap  ~
+          =+  mag=(slay i.t.t.hap)                      ::  revision
+          ?.  &(?=(^ mag) ?=([%% %uv *] u.mag))  ~
+          =+  yar=(~(get by wod.sys) q.p.u.hos)
+          ?~  yar  ~
+          =+  siq=(~(get by dos.u.yar) q.p.u.poj)
+          ?~  siq  ~
+          ?.  ?:  our.u.yar
+                (gte q.p.u.mag wen.u.siq)
+              =(q.p.u.mag wen.u.siq)
+            ~
+          ?~  t.t.t.hap  ~
+          ?+  i.t.t.t.hap  ~
+            %a  [~ rad.u.siq]
+            %d  (~(grab cy rad.u.siq) t.t.t.t.hap)
+            %m  [~ (~(also cy rad.u.siq) t.t.t.t.hap)]
+            %x  ?.(=(q.p.u.mag when:cam) ~ [~ seq.u.siq wen.u.siq])
+          ==
+        ++  poke  
+          |=  [cam=lens man=*] 
+          ^-  [p=lime q=bowl]
+          =+  muv=(move man)
+          ?.  =(muv man)
+            [~ ..poke]
+          ?-    muv
+              [| *]
+            :-  ~
+            =+  lag=(~(get by wod.sys) p.muv)
+            %=    ..poke
+                wod.sys
+              (~(put by wod.sys) p.muv [q.muv ?~(lag ~ dos.u.lag)])
+            ==
+          ::
+              [& *]
+            =+  lag=(~(get by wod.sys) p.muv)
+            =+  tes=`room`?~(lag [| ~] u.lag)
+            =+  lix=(~(get by dos.tes) q.muv)
+            =+  taq=`desk`?~(lix [1 0 [%| 0 ~]] u.lix)
+            =-  :-  p.niz
+                %=    ..poke
+                    wod.sys
+                  %+  ~(put by wod.sys)
+                    p.muv
+                  tes(dos (~(put by dos.tes) q.muv q.niz))
+                ==
+            ^=  niz  ^-  [p=lime q=desk]
+            ?.  (gth r.muv wen.taq)
+              [~ taq]
+            =>  ^+(. .(seq.taq +(seq.taq), wen.taq r.muv))
+            |-  ^-  [p=lime q=desk]
+            ?-    s.muv
+                ~        [~ taq]
+                [%ev *]
+              =-  [[%all p.moy] q.moy]
+              ^=  moy  |-  ^-  [p=(list lime) q=desk]
+              ?~  p.s.muv
+                [~ taq]
+              =+  buz=^$(s.muv i.p.s.muv)
+              =+  niz=$(p.s.muv t.p.s.muv, taq q.buz)
+              [[p.buz p.niz] q.niz]
+            ::
+                [%gv *]  [~ taq(rad (~(give cy rad.taq) r.muv p.s.muv q.s.muv))]
+                [%kl *]  [~ taq(rad (~(kill cy rad.taq) r.muv p.s.muv))]
+                [%rl *]
+              :-  :-  %say
+                  :+  %pu
+                    [(rent %h p.muv) q.muv p.s.muv %a ~]
+                  rad.taq
+              taq
+            ==
+          ==
+        --
       ==
   |=  now=time
   =+  gud=(boot now pay)
@@ -132,9 +319,9 @@
                   :-  %o 
                   :~  :-  %hose 
                       :+  %pu
+                        :-  %line 
                         :~  (rent %ud p.p.lam) 
                             (rent %ud q.p.lam)
-                            %line 
                             (rent %ud q.lam)
                         ==
                       r.lam
@@ -146,13 +333,13 @@
 =<  ::
   ::::          Tier Sm, system mechanics
   ::
-  =+  ^=  daq                                   ::  deck - fact storage
+  =+  ^=  daq                                       ::  deck - fact storage
       =+  [ear=*(map path ,@) rig=*brig]
       |%
       ++  mine                                      ::  series query
         |=  [wid=quid qey=quay]                      
-        ^-  (list fact)
-        (slit wid (tort (dulp (~(hank re rig) qey))))
+        ^-  (list cash)
+        (slit wid (~(hank re rig) qey))
       ::
       ++  plow                                      ::  sequence query
         |=  [wid=quid qey=quay]
@@ -208,7 +395,7 @@
     |%
     ++  hope                                ::  series, permanent
       |=  [wid=quid qey=quay]
-      ^-  (list fact)
+      ^-  (list cash)
       (mine:daq wid qey)
     ::
     ++  peek                                ::  probe, transient
@@ -223,9 +410,9 @@
     ++  pray                                ::  probe, permanent
       |=  [hap=path]  ^-  (unit bill)
       =+  nev=(mine:daq [~ ~] [hap |=(* [~ ~])])
-      ?~  nev
-        ~
-      [~ q.i.nev]
+      ?~  nev  ~
+      ?~  r.i.nev  ~
+      [~ q.i.r.i.nev]
     ::
     ++  when  now
     ++  wish                                ::  sequence, permanent
@@ -355,7 +542,7 @@
     ==
   ++  lens  $_  ^?                          ::  query interface
     |%                                      ::
-    ++  hope  |+(quip *(list fact))         ::  perm, series
+    ++  hope  |+(quip *(list cash))         ::  perm, series
     ++  peek  |+(path *(unit))              ::  trans, request
     ++  pray  |+(path *(unit bill))         ::  perm, request
     ++  when  *time                         ::  
@@ -493,13 +680,19 @@
       [baw ..kilt(rof (~(put by rof) p.lym [~ [%nap q.lym r.lym]]))]
     ::
         [%net *]
-      ~|  %kilt-rod
+      ~|  %kilt-net
       ?>  =(~ (~(get by rof) p.lym))
-      =+  wuh=(hope:cam q.lym)
+      =+  lur=(hope:cam q.lym)
       |-  ^-  [p=worm q=_..kilt]
-      ?~  wuh
+      ?~  lur
         [baw ..kilt(rof (~(put by rof) p.lym [~ [%net q.lym r.lym]]))]
-      $(wuh t.wuh, p.baw [(r.lym i.wuh) p.baw])
+      |-  ^-  [p=worm q=_..kilt]
+      ?~  r.i.lur
+        ^$(lur t.lur)
+      %=  $
+        r.i.lur  t.r.i.lur
+        p.baw [(r.lym p.i.r.i.lur q.i.lur q.i.r.i.lur) p.baw]
+      ==
     ::
         [%rod *]
       ~|  %kilt-rod
@@ -576,7 +769,7 @@
           ?~  vac
             baz
           =+  mey=(kiss i.vac p.tec)
-          $(vac t.vac, baz ?~(mey baz [(q.tec i.vac) baz]))
+          $(vac t.vac, baz ?~(mey baz [(q.tec p.i.vac u.mey q.i.vac) baz]))
         ~
       tec
     ::
@@ -618,8 +811,8 @@
     ++  poke  |+([cam=lens man=*] [p=*lime q=^?(..poke)])   ::  apply
     --                                                      ::
   ++  dome    (map span ,[p=(unit time) q=rail])            ::  queries
-  ++  fish  _|+([a=path b=bill] *lime)                      ::  series act
-  ++  hunt  _|+([a=@ud b=* c=bill] *lime)                   ::  sync act
+  ++  fish  _|+([a=path b=* c=bill] *lime)                  ::  series act
+  ++  hunt  _|+([a=@ud b=* c=bill] *lime)                   ::  sequence act
   ++  lime                                                  ::  fuel
     $|  ~                                                   ::  noop
     $%  [%all p=(list lime)]                                ::  collection
@@ -648,6 +841,70 @@
   ::::
   ::
   |%
+  ++  cy
+    =+  a=*arch
+    |%  
+    ++  also                                          ::  metadata
+      |=  hap=path  ^-  meta
+      ?~  hap
+        ?-  a
+          [& *]  [%& p.a]
+          [| *]  [%| p.a (turn (~(tap by q.a) ~) |=([p=span q=arch] p))]
+        ==
+      ?-  a
+        [& *]  [%| 0 ~]
+        [| *]  =+(gos=(~(get by q.a) i.hap) ?~(gos [%| 0 ~] $(a u.gos)))
+      ==
+    ::
+    ++  give                                          ::  apply
+      |=  [now=time hap=path dat=*]
+      ^-  arch
+      ?~  hap
+        ?:  &(?=(& -.a) =(q.a dat))
+          a
+        [%& now dat]
+      ?-  a
+        [& *]  $(a [%| 0 ~])
+        [| *]  [%| now (~(put by q.a) i.hap $(hap t.hap))]
+      ==
+    ::
+    ++  grab                                          ::  just the data
+      |=  hap=path
+      ^-  (unit)
+      =+  yed=(sift hap)
+      ?.  ?=([& *] yed)
+        ~
+      [~ q.yed]
+    ::
+    ++  kill                                          ::  delete
+      |=  [now=time hap=path]
+      ^-  arch
+      ?~  hap
+        [%| 0 ~]
+      ?-    a
+          [& *]  [%| 0 ~] 
+          [| *]
+        =+  gos=(~(get by q.a) i.hap)
+        ?~  gos
+          a
+        =+  weh=$(a u.gos, hap t.hap)
+        ?:  ?=([| * ~] weh)
+          [%| now (~(del by q.a) i.hap)]
+        [%| now (~(put by q.a) i.hap weh)]
+      ==
+    ::
+    ++  sift                                          ::  select subtree
+      |=  hap=path
+      ^-  arch
+      ?~  hap
+        a
+      ?-    a
+          [& *]  [%| 0 ~]
+          [| *]  
+        =+  gos=(~(get by q.a) i.hap) 
+        ?~(gos [%| 0 ~] $(hap t.hap, a u.gos))
+      ==
+    --
   ++  re
     |_  a=brig
     ++  chit                                          ::  primitive subtree
@@ -695,10 +952,12 @@
     ::
     ++  hank                                            ::  traverse for series
       |=  qey=quay
-      ^-  (list (list fact))
+      ^-  (list cash)
       %+  crab
         qey
       |=  [ram=hapt muz=* reb=brig]
+      :+  (flop ram)
+        muz
       =+  rex=*(list fact)
       |-  ^+  rex
       =+  dib=(~(tap by v.reb) ~)
@@ -751,17 +1010,7 @@
     =+  rok=(colt i.ram)
     ?~(rok ~ [~ u.rok (flop t.ram)])
   ::
-  ++  dulp                                  ::  XX duh use list comps
-    |=  pud=(list (list fact))
-    ^-  (list fact)
-    ?~  pud
-      ~
-    |-  ^-  (list fact)
-    ?~  i.pud
-      ^$(pud t.pud)
-    [i.i.pud $(i.pud t.i.pud)]
-  ::
-  ++  hesh                                  ::  groom raw sequence
+  ++  hesh                                            ::  groom raw sequence
     |=  [wid=quid foy=(list ,[p=@ud q=bill])]
     ^-  (list ,[p=@ud q=bill])
     =>  ^+  .  
@@ -791,16 +1040,22 @@
     ?:((gth p.q.i.foy u.q.wid) ~ [i.foy $(foy t.foy)])
   ::
   ++  slit                                  ::  filter series
-    |=  [wid=quid rex=(list fact)]
-    ^-  (list fact)
-    ?~  rex
+    |=  [wid=quid guz=(list cash)]
+    ^-  (list cash)
+    ?~  guz
       ~
-    =+  xar=$(rex t.rex)
-    ?.  ?&  |(?=(~ p.wid) (gte p.q.i.rex u.p.wid))
-            |(?=(~ q.wid) (lte p.q.i.rex u.q.wid))
-        ==
-      xar
-    [i.rex xar]
+    :-  :+  p.i.guz
+          q.i.guz
+        %-  tort
+        |-  ^-  (list fact)
+        ?~  r.i.guz  ~
+        =+  xar=$(r.i.guz t.r.i.guz)
+        ?.  ?&  |(?=(~ p.wid) (gte p.q.i.r.i.guz u.p.wid))
+                |(?=(~ q.wid) (lte p.q.i.r.i.guz u.q.wid))
+            ==
+          xar
+        [i.r.i.guz xar]
+    $(guz t.guz)
   ::
   ++  tort                                  ::  sort by time
     |=  rex=(list fact)  ^-  (list fact)

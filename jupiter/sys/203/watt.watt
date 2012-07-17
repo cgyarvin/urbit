@@ -1089,6 +1089,21 @@
         |
       ?|((b n.a) $(a l.a) $(a r.a))
     ::
+    +-  del
+      ~.  %del
+      |*  b=*
+      |-  ^+  a
+      ?~  a
+        ~
+      ?.  =(b n.a)
+        ?:((hor b n.a) $(a l.a) $(a r.a))
+      |-  ^+  a
+      ?~  l.a  r.a
+      ?~  r.a  l.a
+      ?:  (vor n.l.a n.r.a)
+        [n.l.a l.l.a $(l.a r.l.a)]
+      [n.r.a $(r.a l.r.a) r.r.a]
+    ::
     +-  gas
       ~.  %gas
       |=  b=(list _?>(?=(^ a) n.a))
@@ -1163,6 +1178,21 @@
       ?@  a
         |
       ?|((b q.n.a) $(a l.a) $(a r.a))
+    ::
+    +-  del
+      ~.  %del
+      |*  b=*
+      |-  ^+  a
+      ?~  a
+        ~
+      ?.  =(b p.n.a)
+        ?:((hor b p.n.a) $(a l.a) $(a r.a))
+      |-  ^-  ?(~ _a)
+      ?~  l.a  r.a
+      ?~  r.a  l.a
+      ?:  (vor p.n.l.a p.n.r.a)
+        [n.l.a l.l.a $(l.a r.l.a)]
+      [n.r.a $(r.a l.r.a) r.r.a]
     ::
     +-  gas
       ~.  %gas

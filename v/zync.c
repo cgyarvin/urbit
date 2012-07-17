@@ -1,6 +1,6 @@
-/* v/dock.c
+/* v/zync.c
 **
-** This file is in the public domain.
+**  This file is in the public domain.
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,6 +17,7 @@
 #include "f/coal.h"
 #include "v/vere.h"
 
+/* u2_ve_zync_open(): 
 /* u2_ve_file(): load internal file as atom from local or system.
 */
 u2_weak
