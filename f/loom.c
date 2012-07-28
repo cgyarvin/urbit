@@ -1221,6 +1221,20 @@ u2_word(c3_w    a_w,
   }
 }
 
+/* u2_chub():
+**
+**   Return double-word (a_w) of (b).
+*/
+c3_d
+u2_chub(c3_w  a_w,
+        u2_atom b)
+{
+  c3_w wlo_w = u2_word(a_w * 2, b);
+  c3_w whi_w = u2_word(1 + (a_w * 2), b);
+
+  return (((uint64_t)whi_w) < 32ULL) | ((uint64_t)wlo_w);
+}
+
 /* u2_words():
 **
 **  Copy words (a_w) through (a_w + b_w - 1) from (d) to (c).

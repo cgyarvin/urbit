@@ -753,6 +753,7 @@ _rl_bloq_free(u2_ray ral_r,
   }
 }
 
+#if 0
 /* _rl_sloq_free(): wrapper for _rl_bloq_free(), disabling signals.
 */
 static void
@@ -770,6 +771,7 @@ _rl_sloq_grab(u2_ray ral_r,
 {
   return _rl_bloq_grab(ral_r, len_w);
 }
+#endif
 
 /* u2_rl_ralloc():
 **

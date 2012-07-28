@@ -873,6 +873,14 @@
           u2_word(c3_w    a_w,
                   u2_atom b);
 
+        /* u2_chub():
+        **
+        **   Return double-word (a_w) of (b).
+        */
+          c3_d
+          u2_chub(c3_w    a_w,
+                  u2_atom b);
+
         /* u2_words():
         **
         **  Copy words (a_w) through (a_w + b_w - 1) from (d) to (c).

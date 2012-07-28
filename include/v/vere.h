@@ -9,7 +9,7 @@
 #     define FirstKernel   205
 #     define DefaultKernel 205
  
-// #define RECK
+#define RECK
 
   /** Data types.
   **/
@@ -132,9 +132,24 @@
         } has;
       } u2_steg;
 
+    /* u2_reck: modern reck structure.
+    */
+      struct _u2_host; 
+      typedef struct {
+        c3_w    kno_w;                    //  kernel stage
+        c3_w    rno_w;                    //  rotor index (always 0)
+
+        c3_d    now_d;                    //  current time
+        u2_noun now;                      //  current time, as noun
+        u2_noun wen;                      //  current time, as text
+
+        u2_noun ken;                      //  kernel formula
+        u2_noun rec;                      //  rotor core
+      } u2_reck;
+      
     /* u2_host: entire host.
     */
-      typedef struct {
+      typedef struct _u2_host {
         u2_wire wir_r;                      //  noun system, 1 per thread
         c3_c*   fel_c;                      //  readline filename
         u2_noun pet;                        //  petname of self, atomic
@@ -146,6 +161,8 @@
         c3_d    now_d;                      //  event tick
         struct ev_loop *lup_u;              //  libev event loop
         u2_http *htp_u;                     //  http servers, if any
+
+        u2_reck rec_u[1];                   //  rotors (hardcoded to 1)
       } u2_host;                            //  host == computer == process
 
 
@@ -194,6 +211,25 @@
       */
         u2_noun
         u2_ve_zeus(u2_noun hap);
+
+    /**  Output.
+    **/
+      /* u2_ve_tank(): print a tank at `tab`.
+      */
+        void
+        u2_ve_tank(c3_l tab_l, u2_noun tac);
+
+    /**  Kernel control.
+    **/
+      /* u2_ve_reck_line(): apply a reck line (protected).
+      */
+        void
+        u2_ve_reck_line(u2_reck* rec_u, u2_noun lin);
+
+      /* u2_ve_reck_boot(): boot the reck engine (unprotected).
+      */
+        void
+        u2_ve_reck_boot(u2_reck* rec_u);
 
     /**  Execution system.
     **/

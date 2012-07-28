@@ -28,10 +28,13 @@
 #   define _coal_jam  j2_mby(Pt5Y, jam)
 
 #   define _coal_gor  j2_mbc(Pt3Y, gor)
-#   define _coal_get  j2_mcc(Pt4Y, by, get)
-#   define _coal_put  j2_mcc(Pt4Y, by, put)
-
-
+#   define _coal_by_gas  j2_mcc(Pt4Y, by, gas)
+#   define _coal_by_get  j2_mcc(Pt4Y, by, get)
+#   define _coal_by_has  j2_mcc(Pt4Y, in, has)
+#   define _coal_by_put  j2_mcc(Pt4Y, by, put)
+#   define _coal_in_gas  j2_mcc(Pt4Y, in, gas)
+#   define _coal_in_has  j2_mcc(Pt4Y, in, has)
+#   define _coal_in_tap  j2_mcc(Pt4Y, in, tap)
 
 
 /* u2_cf_path(): assemble local path with noun thap and ext.
@@ -667,7 +670,7 @@ u2_ckb_weld(u2_noun a, u2_noun b)
 u2_weak
 u2_ckd_by_get(u2_noun a, u2_noun b)
 {
-  u2_noun c = _coal_get(u2_Wire, a, b);
+  u2_noun c = _coal_by_get(u2_Wire, a, b);
 
   u2_cz(a); u2_cz(b);
   if ( u2_no == u2_cr_du(c) ) {
@@ -701,10 +704,82 @@ u2_ckd_by_put(u2_noun a, u2_noun b, u2_noun c)
 {
   // Bizarre asymmetry in old jets.
   //
-  u2_noun pro = _coal_put(u2_Wire, a, b, c);
+  // (Mysterious comment in old glue code.)
+  //
+  u2_noun pro = _coal_by_put(u2_Wire, a, b, c);
 
   u2_cz(a); u2_cz(b); u2_cz(c);
   return pro;
+}
+
+/* u2_ckd_by_gas(): list to map.
+*/
+u2_noun
+u2_ckd_by_gas(u2_noun a, u2_noun b)
+{
+  u2_weak c = _coal_by_gas(u2_Wire, a, b);
+
+  u2_cz(a); u2_cz(b);
+  if ( u2_none == c ) {
+    return u2_cm_bail(c3__exit);
+  } 
+  else return c;
+}
+
+/* u2_ckd_in_gas(): list to map.
+*/
+u2_noun
+u2_ckd_in_gas(u2_noun a, u2_noun b)
+{
+  u2_weak c = _coal_in_gas(u2_Wire, a, b);
+
+  u2_cz(a); u2_cz(b);
+  if ( u2_none == c ) {
+    return u2_cm_bail(c3__exit);
+  } 
+  else return c;
+}
+
+/* u2_ckd_by_has(): test for presence.
+*/
+u2_flag
+u2_ckd_by_has(u2_noun a, u2_noun b)
+{
+  u2_weak c = _coal_by_has(u2_Wire, a, b);
+
+  u2_cz(a); u2_cz(b);
+  if ( u2_none == c ) {
+    return u2_cm_bail(c3__exit);
+  } 
+  else return c;
+}
+
+/* u2_ckd_in_has(): test for presence.
+*/
+u2_flag
+u2_ckd_in_has(u2_noun a, u2_noun b)
+{
+  u2_weak c = _coal_in_has(u2_Wire, a, b);
+
+  u2_cz(a); u2_cz(b);
+  if ( u2_none == c ) {
+    return u2_cm_bail(c3__exit);
+  } 
+  else return c;
+}
+
+/* u2_ckd_in_tap(): map/set convert to list.  (solves by_tap also.)
+*/
+u2_noun
+u2_ckd_in_tap(u2_noun a, u2_noun b)
+{
+  u2_weak c = _coal_in_tap(u2_Wire, a, b);
+
+  u2_cz(a); u2_cz(b);
+  if ( u2_none == c ) {
+    return u2_cm_bail(c3__exit);
+  } 
+  else return c;
 }
 
 /* u2_cke_cue(): expand saved pill.

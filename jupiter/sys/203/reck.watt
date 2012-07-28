@@ -206,7 +206,7 @@
               $%  [%ev p=(list task)]                     ::  multi change
                   [%gv p=path q=*]                        ::  write file
                   [%kl p=path]                            ::  remove file
-                  [%rl p=span]                            ::  declare label
+                  [%rl p=span]                            ::  release label
               ==
             --
         =+  sys=*game
@@ -309,8 +309,12 @@
   =>  `_..boot`q.gud
   |%                                            ::  front door
   ++  peek
-    |=  [now=time hap=path]
-    (pray:(iris now) hap)
+    |=  [now=time hap=path]  ^-  (unit)
+    =+  les=(iris now)
+    =+  def=(pray:les hap)
+    ?~  def
+      (peek:les hap)
+    [~ q.u.def] 
   ::
   ++  poke
     |=  [now=time lam=*]
@@ -337,6 +341,11 @@
                 ==
         [%o *]  (coz (wilt now p.lam))
     ==
+  ::
+  ++  wink
+    |=  [now=time txt=@ta]
+    ^-  vase
+    !!  ::  compute vase from line in kernel context
   --
 =<  ::
   ::::          Tier Sm, system mechanics

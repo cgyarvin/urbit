@@ -77,7 +77,12 @@ u2_ve_tank(c3_l tab_l, u2_noun tac)
   if ( u2_Host.kno_w > 209 ) {
     wol = u2_ve_hard("pitt", "wash", u2nc(u2nc(tab_l, col_l), tac));
   } else {
-    wol = u2_ve_hard("born", "wash", u2nc(u2nc(tab_l, col_l), tac));
+    if ( u2_Host.kno_w > 203 ) {
+      wol = u2_ve_hard("born", "wash", u2nc(u2nc(tab_l, col_l), tac));
+    }
+    else {
+      wol = u2_ve_hard("vane", "wash", u2nc(u2nc(tab_l, col_l), tac));
+    }
   }
 
   u2_ve_dump_wall(wol);
@@ -149,8 +154,14 @@ u2_ve_sway(c3_l tab_l, u2_noun tax)
         wol = u2_ve_hard("pitt", "wash", u2nc(u2nc(tab_l, col_l), tac));
       }
       else {
-        tac = u2_ve_hard("born", "swan", u2_ct(h_rax));
-        wol = u2_ve_hard("born", "wash", u2nc(u2nc(tab_l, col_l), tac));
+        if ( u2_Host.kno_w > 203 ) {
+          tac = u2_ve_hard("born", "swan", u2_ct(h_rax));
+          wol = u2_ve_hard("born", "wash", u2nc(u2nc(tab_l, col_l), tac));
+        }
+        else {
+          tac = u2_ve_hard("vane", "swan", u2_ct(h_rax));
+          wol = u2_ve_hard("vane", "wash", u2nc(u2nc(tab_l, col_l), tac));
+        }
       }
       u2_ve_dump_wall(wol);
       u2_cm_done();
@@ -430,148 +441,6 @@ u2_ve_zuse_line(u2_noun lin)
   u2_hevn_be(u2_pryr, god) = 0;
 }
 
-#ifdef RECK
-
-/* u2_ve_reck_time(): get the reck time.
-*/
-c3_d
-u2_ve_reck_time()
-{
-  struct timeval tim_tv;
-
-  gettimeofday(&tim_tv, 0);
-  return (((c3_d) tim_tv.tv_sec) * 1000000ULL) + (c3_d)tim_tv.tv_usec;
-}
-
-/* u2_ve_reck_kiwi(): apply reck output.
-*/
-void
-u2_ve_reck_kiwi(u2_noun veb)
-{
-  u2_noun p_veb, q_veb, r_veb;
-
-  // u2_err(u2_Wire, "kiwi", veb);
-
-  if ( u2_no == u2du(veb) ) {
-    u2_err(u2_Wire, "kiwi", veb);
-    u2_cm_bail(c3__fail);
-  } 
-  else switch ( u2h(veb) ) {
-    case 'p': {
-      u2_cx_trel(u2t(veb), &p_veb, &q_veb, &r_veb);
-
-      u2_ve_tank(u2k(q_veb), u2k(r_veb));
-    }
-  }
-  u2z(veb);
-}
-
-/* u2_ve_reck_kiwis(): apply a kiwi list.
-*/
-void
-u2_ve_reck_kiwis(u2_noun vyl)
-{
-  if ( u2_no != u2du(vyl) ) {
-    u2_ve_reck_kiwi(u2k(u2h(vyl)));
-    u2_ve_reck_kiwis(u2k(u2t(vyl)));
-    u2z(vyl);
-  }
-}
-
-/* u2_ve_reck_gall(): apply a reck result.
-*/
-void
-u2_ve_reck_gall(u2_noun gax)
-{
-  u2_noun hix, pux;
-
-  hix = u2_ve_slap(u2k(gax), u2nc(c3__cnbc, 'p'));
-  pux = u2_ve_slap(gax, u2nc(c3__cnbc, 'q'));
-
-  u2_ve_reck_kiwis(hix);
-  u2_ve_set("reck", pux);
-}
-
-/* u2_ve_reck_boot(): boot the reck engine.
-*/
-void
-u2_ve_reck_boot(void)
-{
-  c3_d    now_d = u2_ve_reck_time();
-  u2_noun now   = u2nc(u2nc(c3__atom, 0), u2_ci_chubs(1, &now_d));
-
-  /* create the real reck
-  */
-  {
-    u2_noun fac = u2_ve_use("reck");
-    u2_noun zam = u2_ve_slam(fac, now);
-
-    u2_ve_set("reck", zam);
-  }
-}
-
-/* u2_ve_reck_line(): apply a reck line.
-*/
-void
-u2_ve_reck_line(u2_noun lin)
-{
-  static c3_w seq_w = 1;
-
-  u2_hevn_be(u2_pryr, god) = u2_ve_zeus;
-  {
-    c3_d    now_d = u2_ve_reck_time();
-    u2_atom now   = u2_ci_chubs(1, &now_d);
-    u2_noun wen = u2nc(u2nc(c3__atom, 0), now);
-    u2_noun tub = u2nc(0, 0);
-    u2_noun lam = u2nc(c3__noun, u2nq('l', tub, seq_w++, lin));
-    u2_noun sam = u2_ve_slop(wen, lam);
-    u2_noun gax;
-
-    gax = u2_ve_soft("reck", "poke", sam);
-    u2_ve_reck_gall(gax);
-  }
-  u2_hevn_be(u2_pryr, god) = 0;
-}
-
-/* u2_ve_line_boot(): boot the command shell (unprotected).
-*/
-void
-u2_ve_line_boot(void)
-{
-  u2_noun hoe;
-
-  u2_cm_trip();
-  if ( 0 != (hoe = u2_cm_trap()) ) {
-    u2_cm_purge();
-    u2_ve_grab(hoe, 0);
-
-    u2_ve_wine(u2k(u2h(hoe)));
-    u2_ve_sway(2, u2_ckb_flop(u2k(u2t(hoe))));
-    u2z(hoe);
-  } 
-  else {
-    u2_ve_reck_boot();
-    u2_cm_done();
-  
-    u2_cm_purge();
-    if ( (u2_yes == u2_Flag_Garbage) || (u2_no == u2_wire_lan(u2_Wire)) ) {
-      u2_ve_grab(0);
-    }
-  }
-  u2_cm_chin();
-}
-
-#else
-
-/* u2_ve_line_boot(): boot the command shell (unprotected).
-*/
-void
-u2_ve_line_boot(void)
-{
-}
-
-#endif
-
 static u2_noun
 _http_in(u2_hreq* req_u)
 {
@@ -672,7 +541,7 @@ u2_ve_line(c3_c* lin_c)
     u2_noun lin = u2_ci_string(lin_c);
 
 #ifdef RECK
-    u2_ve_reck_line(lin);
+    u2_ve_reck_line(&u2_Host.rec_u[0], lin);
 #else
     u2_ve_zuse_line(lin);
 #endif

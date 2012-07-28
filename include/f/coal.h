@@ -155,6 +155,7 @@
 #       define u2_cr_chop(m, f, w, t, d, s)    u2_chop(m, f, w, t, d, s)
 #       define u2_cr_mp(a_mp, b)               u2_mp(a_mp, b)
 #       define u2_cr_word(a_w, b)              u2_word(a_w, b)
+#       define u2_cr_chub(a_w, b)              u2_chub(a_w, b)
 #       define u2_cr_words(a_w, b_w, c_w, d)   u2_words(a_w, b_w, c_w, d)
 #else
       /* u2_cr_du(): u2_yes iff `a` is cell.
@@ -1105,6 +1106,31 @@
       */
         u2_weak
         u2_ckd_by_put(u2_noun a, u2_noun b, u2_noun c);
+
+      /* u2_ckd_by_has(): test for get.
+      */
+        u2_flag
+        u2_ckd_by_has(u2_noun a, u2_noun b);
+
+      /* u2_ckd_by_gas(): list to map.
+      */
+        u2_noun
+        u2_ckd_by_gas(u2_noun a, u2_noun b);
+
+      /* u2_ckd_in_gas(): list to map.
+      */
+        u2_noun
+        u2_ckd_in_gas(u2_noun a, u2_noun b);
+
+      /* u2_ckd_in_has(): test for presence.
+      */
+        u2_flag
+        u2_ckd_in_has(u2_noun a, u2_noun b);
+
+      /* u2_ckd_in_tap(): map/set convert to list.  (solves by_tap also.)
+      */
+        u2_noun
+        u2_ckd_in_tap(u2_noun a, u2_noun b);
 
     /* u2_cke: tier 5 functions
     */

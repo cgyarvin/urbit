@@ -305,14 +305,27 @@ u2_ve_rest()
         u2_ve_tool(c3__zuse);
       }
     } else {
+#ifndef RECK
       printf("loading born...\n");
       u2_ve_tool(c3__born);
       printf("loaded born.\n");
+#else
+      if ( u2_Host.kno_w > 203 ) {
+        printf("loading born...\n");
+        u2_ve_tool(c3__born);
+        printf("loaded born.\n");
+      }
+#endif
+      if ( u2_Host.kno_w <= 203 ) {
+        printf("loading vane...\n");
+        u2_ve_tool(c3__vane);
+        printf("loaded vane.\n");
+      }
 #ifdef RECK
       if ( u2_Host.kno_w <= 203 ) {
         printf("loading reck...\n");
         u2_ve_tool(c3__reck);
-        printf("loaded reck\n");
+        printf("loaded reck.\n");
       }
 #endif
     }
@@ -528,6 +541,21 @@ u2_ve_init(c3_w kno_w)
   }
 }
 
+/* u2_ve_mark_reck(): mark a reck.
+*/
+static c3_w
+u2_ve_mark_reck(u2_reck* rec_u)
+{
+  c3_w siz_w = 0;
+
+  siz_w += u2_cm_mark_noun(rec_u->now);
+  siz_w += u2_cm_mark_noun(rec_u->wen);
+  siz_w += u2_cm_mark_noun(rec_u->ken);
+  siz_w += u2_cm_mark_noun(rec_u->rec);
+
+  return siz_w;
+}
+
 /* u2_ve_mark(): mark the whole vere system.
 */
 static c3_w
@@ -565,6 +593,8 @@ u2_ve_mark()
     siz_w += u2_cm_mark_noun(ver_e->has.pyl.log);
     siz_w += u2_cm_mark_noun(ver_e->has.pyl.len);
   }
+
+  siz_w += u2_ve_mark_reck(&u2_Host.rec_u[0]);
   return siz_w;
 }
 
