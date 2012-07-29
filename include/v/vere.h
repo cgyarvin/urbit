@@ -7,7 +7,7 @@
     /* First kernel this executable can boot.
     */
 #     define FirstKernel   205
-#     define DefaultKernel 205
+#     define DefaultKernel 202
  
 #define RECK
 

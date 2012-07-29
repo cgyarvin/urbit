@@ -8,8 +8,8 @@ To stage down from X to Y == (X - 1) on vere computer C, steps:
         tram.watt (genetically incompatible with stage X)
         test.watt (barebones testing)
 
-    - rm C/sys/watt.pill
-    - git add C/sys/*
+    - rm C/sys/Y/watt.pill
+    - git add C/sys/Y/*
     - update stage number in C/sys/Y.watt (4 subs)
 
   Ugly jet parts:
