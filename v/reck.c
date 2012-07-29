@@ -119,6 +119,7 @@ _walk_in(const c3_c* dir_c, c3_w len_w)
       pat_c[len_w] = '/';
       strcpy(pat_c + len_w + 1, fil_c);
 
+      printf("path %s\n", pat_c);
       if ( (dot_c = strrchr(fil_c, '.')) ) {
         /*  all files must have extensions
         */
@@ -163,7 +164,7 @@ _walk_in(const c3_c* dir_c, c3_w len_w)
 static u2_noun
 _walk(const c3_c* dir_c)
 {
-  return _walk_in(dir_c, strlen(dir_c));
+  return u2nc(u2_no, _walk_in(dir_c, strlen(dir_c)));
 }
 
 /* _sync_path(): cary path from raw path.
@@ -494,6 +495,9 @@ _sync_live(u2_reck* rec_u, u2_noun rah, u2_noun nod, u2_noun det)
   u2_noun mey = _sync_peek_meta(rec_u, u2_no, u2k(hac));
   u2_flag end;
 
+#if 1
+  u2z(rah); u2z(nod); return det;
+#endif
   //  simpler path for pure checkin
   {
     if ( u2_nul == mey ) {
@@ -703,8 +707,8 @@ _sync_base_m(u2_reck* rec_u, u2_noun map, u2_noun det)
   else {
     u2_noun n_map, pn_map, qn_map, l_map, r_map;
 
-    u2_cr_trel(map, &n_map, &l_map, &r_map);
-    u2_cr_cell(n_map, &pn_map, &qn_map);
+    u2_cx_trel(map, &n_map, &l_map, &r_map);
+    u2_cx_cell(n_map, &pn_map, &qn_map);
 
     det = _sync_base(rec_u, u2k(pn_map), u2k(qn_map), det);
     det = _sync_base_m(rec_u, u2k(l_map), det);
@@ -715,10 +719,10 @@ _sync_base_m(u2_reck* rec_u, u2_noun map, u2_noun det)
   }
 }
 
-/* _reck_save(): traverse filesystem to commit changes -> (list plum)
+/* _reck_sync(): traverse filesystem to commit changes -> (list plum)
 */
 static u2_noun
-_reck_save(u2_reck* rec_u)
+_reck_sync(u2_reck* rec_u)
 {
   c3_c*   pas_c = malloc(strlen(u2_Local) + 1 + 3 + 1);
   u2_noun nod; 
@@ -727,6 +731,7 @@ _reck_save(u2_reck* rec_u)
   strcat(pas_c, "/car");
  
   nod = _walk(pas_c);
+  u2_err(u2_Wire, "nod", nod);
   free(pas_c);
 
   if ( (u2_nul == nod) || (u2_yes == u2h(nod)) ) {
@@ -861,6 +866,16 @@ u2_ve_reck_boot(u2_reck* rec_u)
       rec_u->ken = u2k(u2_Host.ver_e[u2_Host.kno_w].ken);
       u2_ve_set("reck", zam);
     }
+
+    /* initial sync with filesystem
+    */
+#if 0
+    {
+      printf("about to sync\n");
+      _reck_sync(rec_u);
+      printf("synced\n");
+    }
+#endif
     u2_cm_done();
   
     u2_cm_purge();

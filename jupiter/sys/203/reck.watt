@@ -368,13 +368,10 @@
         ^-  [p=@ud q=_..post]
         =+  laz=(~(get by ear) lap)
         =+  dar=?~(laz 1 u.laz)
+        =+  vuz=(flop `path`[(rent %ud dar) (flop lap)])
+        ~&  (sell !;(*type [%post vuz]))
         :-  dar
-        =>  %=    .
-                rig
-              %+  ~(clot re rig)
-                  (flop `path`[(rent %ud dar) (flop lap)]) 
-              [~ now val] 
-            ==
+        =>  .(rig (~(clot re rig) vuz [~ now val]))
         =+  wys=(~(chit re rig) lap)
         =+  suz=+(dar)
         |-  ^+  ..post
@@ -390,6 +387,7 @@
                 =+(gef=(~(get by ear) q.u.yop) =(?~(gef 1 u.gef) p.u.yop))
             ==
           q:(post now q.u.yop val)
+        ~&  (sell !;(*type [%putt lap]))
         ..putt(rig (~(clot re rig) lap [~ now val]))
       --
   =+  pod=*(list ,[p=term q=ship])

@@ -2194,19 +2194,6 @@
       real
     ==
   ::
-  ++  pant
-    |=  [[mad=(list disc) daf=(list ,@)] yad=path]
-    ~|  %pant
-    ^-  path
-    ?@  mad
-      ?@(daf yad !!)
-    ?@  daf
-      !!
-    [(rap 3 (rend i.mad i.daf)) $(mad t.mad, daf t.daf)]
-  ::
-  ++  panz
-    !!    ::  build a full spanning-language path
-  ::
   ++  real
     =+  ^=  vox
         ;~  plug
@@ -2461,7 +2448,7 @@
   ::
   ::    Tier 5c/3, prettyprinting: general-purpose printing.
   ::
-  ++  show                            ::  XX deprecated, use dole
+  ++  show                            ::  XX deprecated, use type
     |=  vem=*
     |^  ^-  tank
         ?:  ?=(@ vem)
@@ -4031,7 +4018,7 @@
 ::
 ++  sell
   |=  vax=vase  ^-  tank
-  (~(deal ut p.vax) q.vax)
+  (dish:ut ~(dole ut p.vax) q.vax)
 ::
 ++  slam
   |=  [gat=vase sam=vase]  ~|  %slam  ^-  vase
@@ -6277,15 +6264,6 @@
                   ['=' (rune tis %dtts expb)]
                   ['?' (rune wut %dtwt expa)]
                   ['^' (rune ket %dtkt expa)]
-                ==
-              ==
-            :-  '/'
-              ;~  pfix  fas
-                ;~  pose
-                  (cook pend ;~(plug (cold ~ col) (tope (sput tol))))
-                  (cook phed ;~(plug (plus tis) (tope (sput tol))))
-                  (cook pend ;~(plug (plus lus) (tope (sput tol))))
-                  (tope (sput tol))
                 ==
               ==
             :-  '^'
