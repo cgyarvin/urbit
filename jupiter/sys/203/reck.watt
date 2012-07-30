@@ -363,20 +363,20 @@
         ^-  (list case)
         (turn (~(honk re rig) qey) |=(a=case [p.a q.a (hesh wid r.a)]))
       ::
-      ++  post                                      ::  extend
+      ++  pile                                      ::  extend
         |=  [now=time lap=path val=*]
-        ^-  [p=@ud q=_..post]
+        ^-  [p=@ud q=_..pile]
         =+  laz=(~(get by ear) lap)
         =+  dar=?~(laz 1 u.laz)
         =+  vuz=(flop `path`[(rent %ud dar) (flop lap)])
-        ~&  (sell !;(*type [%post vuz]))
+        ~&  (sell !;(*type [%pile vuz]))
         :-  dar
         =>  .(rig (~(clot re rig) vuz [~ now val]))
         =+  wys=(~(chit re rig) lap)
         =+  suz=+(dar)
-        |-  ^+  ..post
+        |-  ^+  ..pile
         ?:  !(~(has by v.wys) (rent %ud suz))
-          ..post(ear (~(put by ear) lap suz))
+          ..pile(ear (~(put by ear) lap suz))
         $(suz +(suz))
       ::
       ++  putt                                      ::  define
@@ -386,7 +386,7 @@
         ?:  ?&  ?=(^ yop)
                 =+(gef=(~(get by ear) q.u.yop) =(?~(gef 1 u.gef) p.u.yop))
             ==
-          q:(post now q.u.yop val)
+          q:(pile now q.u.yop val)
         ~&  (sell !;(*type [%putt lap]))
         ..putt(rig (~(clot re rig) lap [~ now val]))
       --
@@ -436,12 +436,12 @@
       (plow:daq wid qey)
     --
   ::
-  ++  post                                  ::  add to sequence
+  ++  pile                                  ::  add to sequence
     |=  [now=time lap=path val=*]
-    ^-  [p=fact q=_..post]
-    =+  yam=(post:daq now lap val)
+    ^-  [p=fact q=_..pile]
+    =+  yam=(pile:daq now lap val)
     :- [(flop `path`[(rent %ud p.yam) (flop lap)]) [now val]]
-    ..post(daq q.yam)
+    ..pile(daq q.yam)
   ::
   ++  putt                                  ::  write as state
     |=  [now=time lap=path val=*]
@@ -456,8 +456,8 @@
     ?~  pie
       [(flop lod) ..stow]
     ?+    q.i.pie  $(pie t.pie)
-        [%po *]  
-      =+  von=(post now [p.i.pie p.q.i.pie] q.q.i.pie)
+        [%pi *]  
+      =+  von=(pile now [p.i.pie p.q.i.pie] q.q.i.pie)
       $(pie t.pie, lod [p.von lod], ..stow q.von)
     ::
         [%pu *]
@@ -564,7 +564,7 @@
     ++  wish  |+(quip *(list case))         ::  sequence query
     --                                      ::
   ++  plum                                  ::  process product
-    $%  [%po p=path q=*]                    ::  post to sequence
+    $%  [%pi p=path q=*]                    ::  append to sequence
         [%pu p=path q=*]                    ::  put in deck
         [%to p=@ta q=beef]                  ::  pass a command
         [%yo p=kiwi]                        ::  output

@@ -1748,6 +1748,7 @@
   ::      tier 5b/5, parsing: watty whitespace & termination
   ::
   ++  dog  ;~(plug dot gay)
+  ++  doh  ;~(plug ;~(plug hep hep) gay)
   ++  dun  (cold ~ ;~(plug hep hep))
   ++  duq  (cold ~ ;~(plug tis hep))
   ++  duz  (cold ~ ;~(plug tis tis))
@@ -1783,35 +1784,6 @@
   ++  but  (cook |=(a=@ (sub a '0')) (shim '0' '1'))
   ++  dem  (bass 10 (most gon dit))
   ++  dit  (cook |=(a=@ (sub a '0')) (shim '0' '9'))
-  ++  fad
-    %+  cook
-      |=([x=@ y=@ z=@] (far :(mix (lsh 3 2 z) (lsh 3 1 y) x)))
-    ;~(plug low low low)
-  ::
-  ++  fed
-    %+  cook
-      |=(a=(list ,@) (roll a |=([p=@ q=@] (add p (lsh 5 1 q)))))
-    ;~  plug
-      ;~(pose (cold 0 bar) fud fwd fod fad)
-      (star ;~(pfix ;~(pose dun ;~(plug bas gay fas)) fud))
-    ==
-  ::
-  ++  fod  (cook |=([a=@ b=@] (add (lsh 3 1 a) (mix a b))) ;~(plug fad fyd))
-  ++  fud
-    %+  cook 
-      |=([a=@ b=@] (add (lsh 4 1 a) (mix a b)))
-    ;~(plug fod ;~(pfix hep fod))
-  ::
-  ++  fwd  
-    %+  cook 
-      |=([a=@ b=@] (add (lsh 4 1 a) (mix a b)))
-    ;~(plug fad ;~(pfix hep fod))
-  ::
-  ++  fyd
-    %+  cook
-      |=([x=@ y=@ z=@] (fyr :(mix (lsh 3 2 z) (lsh 3 1 y) x)))
-    ;~(plug low low low)
-  ::
   ++  gul  ;~(pose (cold 2 gal) (cold 3 gar))
   ++  gon  ;~(pose ;~(plug bas gay fas) (easy ~))
   ++  hex  (bass 16 (most gon hit))
@@ -2089,8 +2061,8 @@
   ++  ab 
     |%
     ++  bix  (bass 16 (stun [2 2] six))
-    ++  hef  ;~(pose tip hif)
     ++  hif  (boss 256 ;~(plug tip tiq (easy ~)))
+    ++  huf  (bass 0x1.0000 ;~(plug hif ;~(pfix hep hif) (easy ~)))
     ++  pev  (bass 64 ;~(plug sev (stun [0 4] siv)))
     ++  pew  (bass 64 ;~(plug sew (stun [0 4] siw)))
     ++  piv  (bass 64 (stun [5 5] siv))
@@ -2144,7 +2116,8 @@
     ++  dim  (ape (bass 10 ;~(plug sed:ab (star sid:ab))))
     ++  fed  ;~  pose
                (cold 0 sig)
-               (bass 0x1.0000 (most dog hif:ab))
+               (bass 0x1.0000.0000 (most doh huf:ab))
+               hif:ab
              ==
     ++  hex  (ape (bass 0x1.0000 ;~(plug qex:ab (star ;~(pfix dog qix:ab)))))
     ++  lip  =+  tod=(ape ted:ab) 
@@ -2168,6 +2141,7 @@
         [(cat 3 's' (rsh 3 1 p.mol)) (new:si syn q.mol)]
     ;~  pfix  hep
       ;~  pose
+        (stag %h fed:ag)
         (cook |=(a=mole (neg | a)) bask)
         ;~(pfix hep (cook |=(a=mole (neg & a)) bask))
       ==
@@ -2396,7 +2370,6 @@
       :-  '~'
         ;~  pfix  sig
           ;~  pose
-            (stag ~ (stag %ta tyq:ag))
             (cold [~ %ta ~] sig)
             (easy [~ %n 0])
           ==
@@ -6178,6 +6151,22 @@
             (easy [%bcts %null])
           ==
         ==
+      :-  '/'
+        ;~  pfix  fas
+          %+  cook
+            |=  [a=gene b=(unit (list gene))] 
+            ?~  b
+              a
+            [a |-(`gene`?~(u.b [%bcts %null] [i.u.b $(u.b t.u.b)]))]
+          ;~  plug
+            hasp
+            ;~  pose
+              (stag ~ (ifix [fas fas] (most fas hasp)))
+              (cold [~ ~] fas)
+              (easy ~)
+            ==
+          ==
+        ==
     ==
   ++  soil
     %+  ifix
@@ -6192,15 +6181,6 @@
         (shim 124 126) 
       ==
       (stag ~ (ifix [kel ker] wide))
-    ==
-  ++  sput
-    |=  tol=?
-    |.
-    %+  stag  %clsg
-    ?:  tol
-      (more gap ;~(pose hasp tall))
-    ;~  pose
-      (more fas ;~(pose hasp (ifix [sel ser] wide)))
     ==
   ++  norm
     |=  tol=?
@@ -6397,11 +6377,6 @@
     ++  toad
       |*  har=_expa
       =+  dur=(ifix [pel per] $:har(tol |))
-      ?:(tol ;~(pose ;~(pfix gap $:har(tol &)) dur) dur)
-    ::
-    ++  tope
-      |*  har=_(sput tol)
-      =+  dur=$:har(tol |)
       ?:(tol ;~(pose ;~(pfix gap $:har(tol &)) dur) dur)
     ::
     ++  rune
