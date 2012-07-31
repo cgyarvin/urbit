@@ -1267,9 +1267,7 @@
   ++  char  ,@ta
   ++  coin  $%  [%% p=mole]
                 [%blob p=*]
-                [%long p=(list coin)]
-                [%over p=(set coin)]
-                [%with p=(map coin coin)]
+                [%many p=(list coin)]
             ==
   ++  disc  ,@ta
   ++  edge  ,[p=hair q=(unit ,[p=* q=nail])]
@@ -2141,7 +2139,6 @@
         [(cat 3 's' (rsh 3 1 p.mol)) (new:si syn q.mol)]
     ;~  pfix  hep
       ;~  pose
-        (stag %h fed:ag)
         (cook |=(a=mole (neg | a)) bask)
         ;~(pfix hep (cook |=(a=mole (neg & a)) bask))
       ==
@@ -2347,24 +2344,7 @@
         ;~  pfix  dot
           ;~  pose
             (stag ~ bast)
-            ;~  pfix  dot
-              ;~  pose
-                ;~(pfix dot (cook |=(a=@ [%blob (cue a)]) wiz:ag))
-                %+  cook
-                  |=  [a=?(%long %over) b=(list coin)]
-                  ^-  coin
-                  ?-  a
-                    %long  [%long b]
-                    %over  [%over (~(gas in *(set coin)) b)]
-                  ==
-                ;~  plug
-                  ;~(pose (cold %over dot) (easy %long)) 
-                  %+  ifix
-                    [cab ;~(plug cab cab)]
-                  (more cab sack)
-                ==
-              == 
-            ==
+            (stag %many (ifix [cab ;~(plug cab cab)] (more cab sack)))
           ==
         ==
       :-  '~'
@@ -2395,28 +2375,12 @@
     ?-    -.lot
         ~      (weld (rend p.lot) res)
         %blob  ['.' '.' '.' (rend [%j (jam p.lot)])]
-        %long
+        %many
       :- '.'
       |-  ^-  tape
       ?@   p.lot
         ['_' '_' res]
       ['_' ^$(lot i.p.lot, res $(p.lot t.p.lot))]
-    ::
-        %over
-      =+  boq=(~(tap in p.lot) *(list coin))
-      :+  '.'  '.'
-      |-  ^-  tape
-      ?@   boq
-        ['_' '_' res]
-      ['_' ^$(lot i.boq, res $(boq t.boq))]
-    ::
-        %with
-      =+  byq=(~(tap by p.lot) *(list ,[p=coin q=coin]))
-      :+  '.'  '.'
-      |-  ^-  tape
-      ?@   byq
-        ['_' '_' '_' res]
-      ['_' '_' ^$(lot p.i.byq, res ['_' ^$(lot q.i.byq, res $(byq t.byq))])]
     ==
   ::
   ::    Tier 5c/3, prettyprinting: general-purpose printing.
@@ -2959,6 +2923,7 @@
       [%ktwt p=gene]
     ::
       [%sgbr p=gene q=gene]
+      [%sgcb p=gene q=gene]
       [%sgcl p=[p=@ q=@] q=gene]
       [%sgcn p=chop q=gene r=(list ,[p=term q=gene]) s=gene]
       [%sgdt p=chop q=gene]
@@ -6266,6 +6231,7 @@
                 %-  stew  :~
                   ['|' (rune bar %sgbr expb)]
                   ['$' (rune buc %sgbc expg)]
+                  ['_' (rune cab %sgcb expb)]
                   ['%' (rune cen %sgcn hind)]
                   [':' (rune col %sgcl hina)]
                   ['.' (rune dot %sgdt hine)]
@@ -6283,7 +6249,7 @@
             :-  ';'
               ;~  pfix  sem
                 %-  stew  :~
-                  ['|' (rune cab %smcb expb)]
+                  ['_' (rune cab %smcb expb)]
                   [',' (rune com %smcm expi)]
                   ['%' (rune cen %smcn exps)]
                   [':' (rune col %smcl expi)]
