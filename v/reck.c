@@ -26,30 +26,128 @@
   **  ::  --
   */
 
+  /*  Urbit time: 128 bits, leap-free.
+  **
+  **  High 64 bits: 0x8000.000c.cea3.5380 + Unix time as of leap 25 (Jul 2012)
+  **  Low 64 bits: 1/2^64 of a second.
+  **
+  **  Seconds per Gregorian 400-block: 12.622.780.800
+  **  400-blocks from 0 to 0AD: 730.692.561
+  **  Years from 0 to 0AD: 292.277.024.400
+  **  Seconds from 0 to 0AD: 9.223.372.029.693.628.800
+  **  Seconds between 0A and Unix epoch: 62.167.564.800  
+  **  Seconds before Unix epoch: 9.223.372.091.861.193.600
+  **  The same, in C hex notation: 0x8000000ccea35380ULL
+  **
+  **  New leap seconds after July 2012 (leap second 25) are ignored.  The
+  **  platform OS will not ignore them, of course, so they must be detected
+  **  and counteracted.  Perhaps this phenomenon will soon meet its doom.
+  **
+  **  * - calculated:
+  **    %+  mul
+  **      86.400                                      ::  seconds in day
+  **    =+  cen=(add 24 (mul 100 365))                ::  days in century
+  **    =+  qua=(add 1 (mul 4 cen))                   ::  days in quad century
+  **    =+  epo=:(add 1 (mul 3 cen) (mul 70 365) 21)  ::  days in 370 years
+  **    (add (mul 4 qua) epo)                         ::  days 0AD to epoch
+  */
+
+/* _time_sec_in(): urbit seconds from unix time.  Adjust for future leap secs!
+*/
+static c3_d
+_time_sec_in(c3_w unx_w)
+{
+  return 0x8000000ccea35380ULL + (c3_d)unx_w;
+}
+
+/* _time_sec_out(): unix time from urbit seconds.  Adjust for future leap secs!
+*/
+static c3_w
+_time_sec_out(c3_d urs_d)
+{
+  c3_d adj_d = (urs_d - 0x8000000ccea35380ULL);
+      
+  if ( adj_d > 0xffffffffULL ) {
+    fprintf(stderr, "Agh! It's 2106! And no one's fixed this shite!\n");
+    exit(1);
+  }
+  return (c3_w)adj_d;
+}
+
+/* _time_fsc_in(): urbit fracto-seconds from unix microseconds.
+*/
+static c3_d
+_time_fsc_in(c3_w usc_w)
+{
+  c3_d usc_d = usc_w; 
+ 
+  return ((usc_d * 65536ULL) / 1000000ULL) << 48ULL;
+}
+
+/* _time_fsc_out: unix microseconds from urbit fracto-seconds.
+*/
+static c3_w
+_time_fsc_out(c3_d ufc_d)
+{
+  return (c3_w) (((ufc_d >> 48ULL) * 1000000ULL) / 65536ULL);
+}
+
 /* _time_in_tv(): urbit time from struct timeval.
 */
-static c3_d
+static u2_atom
 _time_in_tv(struct timeval* tim_tv)
 {
-  return (((c3_d) tim_tv->tv_sec) * 1000000ULL) + (c3_d)tim_tv->tv_usec;
+  c3_w unx_w = tim_tv->tv_sec;
+  c3_w usc_w = tim_tv->tv_usec;
+  c3_d cub_d[2];
+
+  cub_d[0] = _time_fsc_in(usc_w);
+  cub_d[1] = _time_sec_in(unx_w);
+
+  return u2_ci_chubs(2, cub_d);
 }
 
-/* _time_out_tv(): urbit time from struct timeval.
+/* _time_out_tv(): struct timeval from urbit time.
 */
 static void
-_time_out_tv(struct timeval* tim_tv, c3_d tim_d)
+_time_out_tv(struct timeval* tim_tv, u2_noun now)
 {
-  tim_tv->tv_sec = (tim_d / 1000000ULL);
-  tim_tv->tv_usec = (tim_d % 1000000ULL);
+  c3_d ufc_d = u2_cr_chub(0, now);
+  c3_d urs_d = u2_cr_chub(1, now);
+
+  tim_tv->tv_sec = _time_sec_out(urs_d);
+  tim_tv->tv_usec = _time_fsc_out(ufc_d);
+
+  u2z(now);
 }
 
-/* _time_unix(): urbit time from 32-bit unix time.
+/* _time_in_ts(): urbit time from struct timespec
 */
-static c3_d
-_time_unix(c3_w tim_w)
+static u2_atom
+_time_in_ts(struct timespec* tim_ts)
 {
-  return ((c3_d) tim_w) * 1000000ULL;
+  struct timeval tim_tv;
+
+  tim_tv.tv_sec = tim_ts->tv_sec;
+  tim_tv.tv_usec = (tim_ts->tv_nsec / 1000);
+
+  return _time_in_tv(&tim_tv);
 }
+
+#if 0
+/* _time_out_ts(): struct timespecl from urbit time.
+*/
+static void
+_time_out_ts(struct timespec* tim_ts, u2_noun now)
+{
+  struct timeval tim_tv;
+
+  _time_out_tv(&tim_tv, now);
+
+  tim_ts->tv_sec = tim_tv.tv_sec;
+  tim_ts->tv_nsec = (tim_tv.tv_usec * 1000);
+}
+#endif
 
 static u2_noun
 _reck_peek(u2_reck* rec_u, u2_noun hap)
@@ -66,18 +164,11 @@ static void
 _time_set(u2_reck* rec_u)
 {
   struct timeval tim_tv;
-  c3_d           now_d;
 
   gettimeofday(&tim_tv, 0);
-  now_d = _time_in_tv(&tim_tv);
-
-  c3_assert(now_d > rec_u->now_d);    /* leap seconds must die */
-  rec_u->now_d = now_d;
-
-  // printf("time_set %llu\n", now_d);
-
   u2z(rec_u->now);
-  rec_u->now = u2_ci_chubs(1, &now_d);
+  rec_u->now = _time_in_tv(&tim_tv);
+  u2_err(u2_Wire, "now", rec_u->now);
 
   u2z(rec_u->wen);
   rec_u->wen = u2_ve_hard
@@ -130,11 +221,10 @@ _walk_in(const c3_c* dir_c, c3_w len_w)
         nam_c[dot_c - fil_c] = 0;
 
         if ( 0 == stat(pat_c, &buf_b) ) {
-          c3_d    tim_d = _time_unix(buf_b.st_mtime);
-          u2_noun tim   = u2_ci_chubs(1, &tim_d);
-          u2_noun nam   = u2_ci_string(nam_c);
-          u2_noun ext   = u2_ci_string(ext_c);
-          u2_noun get   = u2_ckd_by_get(u2k(map), u2k(nam));
+          u2_noun tim = _time_in_ts(&buf_b.st_mtimespec);
+          u2_noun nam = u2_ci_string(nam_c);
+          u2_noun ext = u2_ci_string(ext_c);
+          u2_noun get = u2_ckd_by_get(u2k(map), u2k(nam));
 
           if ( u2_none == get ) { get = u2_nul; }
          
@@ -240,7 +330,7 @@ _sync_load(c3_c* pas_c)
 /* _sync_save(): save file or bail.
 */
 static void
-_sync_save(c3_c* pas_c, c3_d tim_d, u2_atom pad)
+_sync_save(c3_c* pas_c, u2_noun tim, u2_atom pad)
 {
   c3_i  fid_i = open(pas_c, O_WRONLY | O_CREAT | O_TRUNC, 0666);
   c3_w  fln_w, rit_w;
@@ -268,9 +358,9 @@ _sync_save(c3_c* pas_c, c3_d tim_d, u2_atom pad)
   {
     struct timeval tim_tv[2];
 
-    _time_out_tv(&tim_tv[0], tim_d);
-    _time_out_tv(&tim_tv[1], tim_d);
-    
+    _time_out_tv(&tim_tv[0], u2k(tim));
+    _time_out_tv(&tim_tv[1], tim);
+ 
     utimes(pas_c, tim_tv);
   }
 }
@@ -380,11 +470,11 @@ _sync_make(u2_flag rey, u2_noun hac)
 /* _sync_push(): save unix file (or crash) from cary path, setting time.
 */
 static void
-_sync_push(u2_flag rey, u2_noun hac, c3_d tim_d, u2_noun pad)
+_sync_push(u2_flag rey, u2_noun hac, u2_atom tim, u2_noun pad)
 {
   c3_c* pas_c = _sync_file(rey, hac);
 
-  _sync_save(pas_c, tim_d, pad);
+  _sync_save(pas_c, tim, pad);
   free(pas_c);
 }
 
@@ -466,10 +556,10 @@ _sync_take(u2_reck* rec_u, u2_noun rey, u2_noun rah)
   }
 
   if ( u2_yes == u2h(mey) ) {
-    c3_d    tim_d = u2_cr_chub(0, u2t(mey));
+    u2_noun tim = u2k(u2t(mey));
     u2_noun pad   = _sync_peek_data(rec_u, rey, u2k(hac));
 
-    _sync_push(rey, hac, tim_d, pad);
+    _sync_push(rey, hac, tim, pad);
   } 
   else {
     u2_noun hac = u2_ckb_flop(u2k(rah));

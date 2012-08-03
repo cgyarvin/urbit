@@ -314,8 +314,8 @@ u2_ci_chubs(c3_w        a_w,
     u2_atom p;
 
     for ( i_w = 0; i_w < a_w; i_w++ ) {
-      b_w[i_w] = b_d[i_w] & 0xffffffffULL;
-      b_w[i_w + 1] = b_d[i_w] >> 32ULL;
+      b_w[(2 * i_w)] = b_d[i_w] & 0xffffffffULL;
+      b_w[(2 * i_w) + 1] = b_d[i_w] >> 32ULL;
     }
     p = u2_ci_words((a_w * 2), b_w);
     free(b_w);
@@ -629,6 +629,17 @@ u2_cn_qual(u2_noun a,
            u2_noun d)
 {
   return u2_bn_qual(u2_Wire, a, b, c, d);
+}
+
+/* u2_cka_mul(): a * b.
+*/
+u2_noun
+u2_cka_mul(u2_noun a, u2_noun b)
+{
+  u2_noun c = j2_mbc(Pt1, mul)(u2_Wire, a, b);
+
+  u2_cz(a); u2_cz(b);
+  return c;
 }
 
 /* u2_ckb_lent(): length of list `a`.

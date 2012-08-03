@@ -133,7 +133,7 @@
                   :-  [~ ~]
                   :-  [who ~]
                   |=  hap=*  ^-  (unit)
-                  ?.  ?=([p=span q=span .~ ~] hap)
+                  ?.  ?=([p=span q=span @ ~] hap)
                     ~
                   =+  [rux=(slay p.hap) vys=(slay q.hap)]
                   ?.  &(?=([~ %% %h *] rux) ?=([~ %% %ta *] vys))
@@ -369,7 +369,7 @@
         =+  laz=(~(get by ear) lap)
         =+  dar=?~(laz 1 u.laz)
         =+  vuz=(flop `path`[(rent %ud dar) (flop lap)])
-        ~&  (sell !;(*type [%pile vuz]))
+        ::  ~&  (sell !;(*type [%pile vuz]))
         :-  dar
         =>  .(rig (~(clot re rig) vuz [~ now val]))
         =+  wys=(~(chit re rig) lap)

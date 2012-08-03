@@ -1071,6 +1071,12 @@
   */
     /* u2_cka: tier 1 functions
     */
+        u2_noun
+        u2_cka_add(u2_noun a, u2_noun b);
+
+        u2_noun
+        u2_cka_mul(u2_noun a, u2_noun b);
+
     /* u2_ckb: tier 2 functions
     */
       /* u2_ckb_lent(): length of a list.
@@ -1090,6 +1096,11 @@
 
     /* u2_ckc: tier 3 functions
     */
+      /* u2_ckc_lsh(): left shift.
+      */
+        u2_noun
+        u2_ckc_lsh(u2_noun a, u2_noun b, u2_noun c);
+
     /* u2_ckd: tier 4 functions
     */
       /* u2_ckd_by_get(): map get for key `b` in map `a` with u2_none.

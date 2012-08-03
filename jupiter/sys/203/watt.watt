@@ -115,7 +115,7 @@
       a
     $(a (dec a), b (dec b))
   ::
-  ::                                                    Tier 2 skins
+  ::                                                    Tier 2 molds
   ::
   ++  gear
     |*  a=_,*
@@ -391,13 +391,26 @@
   ::
   ++  spit |*(a=(gear) ((push a) ~))
   ++  suck |*(a=(gear) ((pull a) ~))
-  ::
-  ::                                                    Tier 3 skins
-  ::
+  ::                                                 ::::::::::::::::::
+  ::                                                 :: Tier 3 molds ::
+  ::                                                 ::::::::::::::::::
   ++  axis  ,@
   ++  bloq  ,@
-  ::  ++  time  ,@mc
+  ++  date  ,[a=? y=@ud m=@ud t=trip]                   ::  gregorian
   ++  time  ,@ud
+  ++  trip  ,[d=@ud h=@ud m=@ud s=@ud f=(list ,@ux)]    ::  relative
+  ++  yo
+    |%  ++  cet  (add 24 (mul 100 365))
+        ++  day  (mul 24 hor)
+        ++  era  (add 1 (mul 4 cet))
+        ++  hor  (mul 60 mit)
+        ++  jes  (mul 730.692.561 era)
+        ++  mit  60
+        ++  moh  `(list ,@ud)`[31 28 31 30 31 30 31 31 30 31 30 31 ~]
+        ++  moy  `(list ,@ud)`[31 29 31 30 31 30 31 31 30 31 30 31 ~]
+        ++  qad  (add 1 (mul 4 yer))
+        ++  yer  (mul 365 day)
+    --
   ::::
   --
 =>
@@ -531,7 +544,7 @@
     ~.  %con
     |=  [a=@ b=@]
     =+  [c=0 d=0]
-    |-
+    |-  ^-  @
     ?:  ?&(=(0 a) =(0 b))
       d
     %=  $
@@ -545,7 +558,7 @@
     ~.  %dis
     |=  [a=@ b=@]
     =+  [c=@ d=@]
-    |-
+    |-  ^-  @
     ?:  ?|(=(0 a) =(0 b))
       d
     %=  $
@@ -642,7 +655,7 @@
   ::
   ::      Tier 3e, insecure hashing
   ::
-++  mug
+  ++  mug
     ~.  %mug
     |=  a=*
     ^-  @
@@ -970,69 +983,113 @@
   ::
   ::      Tier 3i, date encode & decode
   :: 
-  ++  damn
-    |=  [yer=@ mon=@]  ^-  @
-    ?:  &(=(2 mon) =(366 (dayr yer)))
-      29
-    (snag (dec mon) `(list ,@)`[31 28 31 30 31 30 31 31 30 31 30 31 ~])
-  ::
-  ++  dayr  
-    |=  yer=@  ^-  @
-    ?:(&(=(0 (mod yer 4)) !=(0 (mod yer 100))) 366 365)
-  ::
-  ++  dost
-    |=  [day=@ sec=@ usc=@]  ^-  @
-    (add usc (mul 1.000.000 (add sec (mul 86.400 day))))
-  ::
-  ++  eyra 
-    |=  day=@
-    =+  yer=0
-    |-  ^-  [y=@ m=@ d=@]
-    =+  dyr=(dayr yer)
-    ?:  (lth day dyr)
-      =+  mon=1
-      |-  ^-  [y=@ m=@ d=@]
-      =+  dym=(damn yer mon)
-      ?:  (lth day dym)
-        [yer mon +(day)]
-      $(mon +(mon), day (sub day dym))
-    $(yer +(yer), day (sub day dyr))
-  ::
-  ++  hour
-    |=  [hor=@ min=@ sec=@]
-    (add sec (mul 60 (add min (mul 60 hor))))
-  ::
-  ++  msec
-    |=  [msc=@ usc=@]
-    (add usc (mul 1.000 msc))
-  ::
-  ++  scem
-    |=  usc=@
-    [m=(div usc 1.000) u=(mod usc 1.000)]
-  ::
-  ++  rohu
-    |=  sec=@
-    [h=(div sec 3.600) m=(div (mod sec 3.600) 60) s=(mod sec 60)]
-  ::
-  ++  tade
-    |=  usc=@  ^-  [d=@ s=@ u=@]
-    :+  d=(div usc 86.400.000.000) 
-      s=(div (mod usc 86.400.000.000) 1.000.000)
-    u=(mod usc 1.000.000)
-  ::
   ++  year
-    |=  [yer=@ mon=@ day=@]
-    =+  rey=0
-    |-  ^-  @
-    ?:  =(rey yer)
-      =+  nom=1
-      |-  ^-  @
-      ?:  =(nom mon)
-        (dec day)
-      $(nom +(nom), day (add day (damn rey nom)))
-    $(rey +(rey), day (add day (dayr rey)))
+    |=  det=date
+    ^-  @d
+    =+  ^=  yer
+        ?:  a.det
+          (add 292.277.024.400 y.det)
+        (sub 292.277.024.400 (dec y.det))
+    =+  day=(yawn yer m.det d.t.det)
+    (yule day h.t.det m.t.det s.t.det f.t.det)
   ::
-  ::  Tier 4 skins
+  ++  yore
+    |=  now=@d
+    ^-  date
+    =+  rip=(yell now)
+    =+  ger=(yall d.rip)
+    =+  ^=  our
+        ?:  (gth y.ger 292.277.024.400)
+          [a=& y=(sub y.ger 292.277.024.400)]
+        [a=| y=+((sub 292.277.024.400 y.ger))]
+    [a.our y.our m.ger d.ger h.rip m.rip s.rip f.rip]
+  ::
+  ++  yell
+    |=  now=@d
+    ^-  trip
+    =+  sec=(rsh 6 1 now)
+    =+  ^=  fan
+        =+  [muc=3 raw=(end 6 1 now)]
+        |-  ^-  (list ,@ux)
+        ?:  =(0 raw)
+          ~
+        [(rsh 4 muc raw) $(raw (end 4 muc raw), muc (dec muc))]
+    =+  day=(div sec day:yo)                                      ::  XX ^~
+    =>  .(sec (mod sec day:yo))
+    =+  hor=(div sec hor:yo)
+    =>  .(sec (mod sec hor:yo))
+    =+  mit=(div sec mit:yo)
+    =>  .(sec (mod sec mit:yo))
+    [day hor mit sec fan]
+  ::
+  ++  yule
+    |=  rip=trip
+    ^-  @d
+    =+  ^=  sec  ;:  add 
+                   (mul d.rip day:yo)
+                   (mul h.rip hor:yo)
+                   (mul m.rip mit:yo)
+                   s.rip
+                 ==
+    =+  ^=  fac  =+  muc=3 
+                 |-  ^-  @
+                 ?~  f.rip
+                   0
+                 (add (lsh 4 muc i.f.rip) $(muc (dec muc), f.rip t.f.rip))
+    (con (lsh 6 1 sec) fac)
+  ::
+  ++  yall
+    |=  day=@ud
+    ^-  [y=@ud m=@ud d=@ud]
+    =+  [era=0 cet=0 lep=?]
+    =>  .(era (div day era:yo), day (mod day era:yo))
+    =>  ^+  .
+        ?:  (lth day +(cet:yo))
+          .(lep &, cet 0)
+        =>  .(lep |, cet 1, day (sub day +(cet:yo)))
+        .(cet (add cet (div day cet:yo)), day (mod day cet:yo))
+    =+  yer=(add (mul 400 era) (mul 100 cet))
+    |-  ^-  [y=@ud m=@ud d=@ud]
+    =+  dis=?:(lep 366 365)
+    ?.  (lth day dis)
+      =+  ner=+(yer)
+      $(yer ner, day (sub day dis), lep =(0 (end 0 2 ner)))
+    |-  ^-  [y=@ud m=@ud d=@ud]
+    =+  [mot=0 cah=?:(lep moy:yo moh:yo)]
+    |-  ^-  [y=@ud m=@ud d=@ud]
+    =+  zis=(snag mot cah)
+    ?:  (lth day zis)
+      [yer +(mot) +(day)]
+    $(mot +(mot), day (sub day zis))
+  ::
+  ++  yawn
+    |=  [yer=@ud mot=@ud day=@ud]
+    ^-  @ud
+    =>  .(mot (dec mot), day (dec day))
+    =>  ^+  .
+        %=    .
+            day
+          =+  cah=?:((yelp yer) moy:yo moh:yo)
+          |-  ^-  @ud
+          ?:  =(0 mot) 
+            day 
+          $(mot (dec mot), cah (slag 1 cah), day (add day (snag 0 cah)))
+        ==
+    |-  ^-  @ud
+    ?.  =(0 (mod yer 4))
+      =+  ney=(dec yer)
+      $(yer ney, day (add day ?:((yelp ney) 366 365)))
+    ?.  =(0 (mod yer 100))
+      $(yer (sub yer 4), day (add day 1.461))
+    ?.  =(0 (mod yer 400))
+      $(yer (sub yer 100), day (add day 36.524))
+    (add day (mul (div yer 400) (add 1 (mul 4 36.524))))
+  ::
+  ++  yelp
+    |=  yer=@ud  ^-  ?
+    &(=(0 (mod yer 4)) |(!=(0 (mod yer 100)) =(0 (mod yer 400))))
+  ::
+  ::  Tier 4 molds
   ::
   ++  apt
     |=  a=(tree)
@@ -1262,7 +1319,7 @@
   ++  swan
     !!
   ::
-  ::  Tier 5 skins
+  ::  Tier 5 molds
   ::
   ++  char  ,@ta
   ++  coin  $%  [%% p=mole]
@@ -2161,7 +2218,7 @@
     ;~  pose
       (stag %ib bip:ag)
       (stag %il lip:ag)
-      (stag %h fed:ag)
+      (stag %f ;~(pose (cold & (just 'y')) (cold | (just 'n'))))
       real
     ==
   ::
@@ -2382,6 +2439,16 @@
         ['_' '_' res]
       ['_' ^$(lot i.p.lot, res $(p.lot t.p.lot))]
     ==
+  ::
+  ++  ufto                            ::  utf-8 to ucs-32
+    |=  a=@c
+    ^-  @t
+    !!
+  ::
+  ++  ufti                            ::  ucs-32 to utf-8
+    |=  a=@t
+    ^-  @c
+    !!
   ::
   ::    Tier 5c/3, prettyprinting: general-purpose printing.
   ::
@@ -2818,7 +2885,7 @@
       [%2 tax]
     ==
   ::
-  ::  Tier 6 skins
+  ::  Tier 6 molds
   ::
   ++  beer  $|(@ [~ p=gene])
   ++  calf  ,[p=(map ,@ud wine) q=wine]
@@ -3005,8 +3072,8 @@
         [%herb p=gene]                                      ::  function
         [%kelp p=[i=line t=(list line)]]                    ::  tag selection
         [%leaf p=term q=@]                                  ::  constant atom
-        [%mold p=tile q=tile]                               ::  pair/tag
     ::  [%moss p=tile q=tile]                               ::  restricted type
+        [%reed p=tile q=tile]                               ::  pair/tag
         [%weed p=gene]                                      ::  example
     ==
   ++  twig  (list knot)
@@ -3173,7 +3240,7 @@
         [%leaf *]
       [%dtsg p.sec q.sec]
     ::
-        [%mold *]
+        [%reed *]
       [%wtcl [%bcts %flag] $(sec p.sec) $(sec q.sec)]
     ::
         [%weed *] 
@@ -3268,7 +3335,7 @@
         [%leaf *]
       [%dtsg p.sec q.sec]
     ::
-        [%mold *]
+        [%reed *]
       %-  tun  |=  gon=*  =>  .(nag gon)  ^-  gene
       ?@  -.nag
         ?:  =(& -.nag)
@@ -3308,7 +3375,7 @@
         [%bccb *]  [%weed p.gen]
         [%bccm *]  [%weed gen]
         [%bccn *]  [%kelp burl(gen p.gen) (turn q.gen |=(a=gene burl(gen a)))]
-        [%bcpm *]  [%mold $(gen p.gen) $(gen q.gen)]
+        [%bcpm *]  [%reed $(gen p.gen) $(gen q.gen)]
         [%bcts *]  [%base +.gen]
         [%bcwt *]  [%fern $(gen p.gen) (turn q.gen |=(a=gene ^$(gen a)))]
         [%ktts *]  [%bark p.gen $(gen q.gen)]

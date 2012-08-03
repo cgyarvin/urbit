@@ -1232,7 +1232,7 @@ u2_chub(c3_w  a_w,
   c3_w wlo_w = u2_word(a_w * 2, b);
   c3_w whi_w = u2_word(1 + (a_w * 2), b);
 
-  return (((uint64_t)whi_w) < 32ULL) | ((uint64_t)wlo_w);
+  return (((uint64_t)whi_w) << 32ULL) | ((uint64_t)wlo_w);
 }
 
 /* u2_words():
