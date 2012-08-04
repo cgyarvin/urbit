@@ -996,9 +996,11 @@
   ++  yore
     |=  now=@d
     ^-  date
+    ~|  %yore
     =+  rip=(yell now)
     =+  ger=(yall d.rip)
     =+  ^=  our
+        ~|  %yore-our
         ?:  (gth y.ger 292.277.024.400)
           [a=& y=(sub y.ger 292.277.024.400)]
         [a=| y=+((sub 292.277.024.400 y.ger))]
@@ -1011,7 +1013,7 @@
     =+  ^=  fan
         =+  [muc=3 raw=(end 6 1 now)]
         |-  ^-  (list ,@ux)
-        ?:  =(0 raw)
+        ?:  |(=(0 raw) =(0 muc))
           ~
         [(rsh 4 muc raw) $(raw (end 4 muc raw), muc (dec muc))]
     =+  day=(div sec day:yo)                                      ::  XX ^~
@@ -2312,7 +2314,7 @@
         %f  
       [?:(=(& q.mol) '&' ?>(=(| q.mol) '|')) rex]
     ::
-        %h
+        %p
       =+  dyz=(met 4 q.mol)
       ?:  =(0 dyz)
         ['.' '~' rex]

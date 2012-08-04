@@ -35,9 +35,9 @@
   **  400-blocks from 0 to 0AD: 730.692.561
   **  Years from 0 to 0AD: 292.277.024.400
   **  Seconds from 0 to 0AD: 9.223.372.029.693.628.800
-  **  Seconds between 0A and Unix epoch: 62.167.564.800  
-  **  Seconds before Unix epoch: 9.223.372.091.861.193.600
-  **  The same, in C hex notation: 0x8000000ccea35380ULL
+  **  Seconds between 0A and Unix epoch: 62.167.219.200
+  **  Seconds before Unix epoch: 9.223.372.091.860.848.000
+  **  The same, in C hex notation: 0x8000000cce9e0d80ULL
   **
   **  New leap seconds after July 2012 (leap second 25) are ignored.  The
   **  platform OS will not ignore them, of course, so they must be detected
@@ -48,7 +48,7 @@
   **      86.400                                      ::  seconds in day
   **    =+  cen=(add 24 (mul 100 365))                ::  days in century
   **    =+  qua=(add 1 (mul 4 cen))                   ::  days in quad century
-  **    =+  epo=:(add 1 (mul 3 cen) (mul 70 365) 21)  ::  days in 370 years
+  **    =+  epo=:(add 1 (mul 3 cen) (mul 70 365) 17)  ::  days in 370 years
   **    (add (mul 4 qua) epo)                         ::  days 0AD to epoch
   */
 
@@ -57,7 +57,7 @@
 static c3_d
 _time_sec_in(c3_w unx_w)
 {
-  return 0x8000000ccea35380ULL + (c3_d)unx_w;
+  return 0x8000000cce9e0d80ULL + (c3_d)unx_w;
 }
 
 /* _time_sec_out(): unix time from urbit seconds.  Adjust for future leap secs!
@@ -65,7 +65,7 @@ _time_sec_in(c3_w unx_w)
 static c3_w
 _time_sec_out(c3_d urs_d)
 {
-  c3_d adj_d = (urs_d - 0x8000000ccea35380ULL);
+  c3_d adj_d = (urs_d - 0x8000000cce9e0d80ULL);
       
   if ( adj_d > 0xffffffffULL ) {
     fprintf(stderr, "Agh! It's 2106! And no one's fixed this shite!\n");
@@ -168,7 +168,6 @@ _time_set(u2_reck* rec_u)
   gettimeofday(&tim_tv, 0);
   u2z(rec_u->now);
   rec_u->now = _time_in_tv(&tim_tv);
-  u2_err(u2_Wire, "now", rec_u->now);
 
   u2z(rec_u->wen);
   rec_u->wen = u2_ve_hard
@@ -955,6 +954,13 @@ u2_ve_reck_boot(u2_reck* rec_u)
       rec_u->rec = u2k(zam);
       rec_u->ken = u2k(u2_Host.ver_e[u2_Host.kno_w].ken);
       u2_ve_set("reck", zam);
+    }
+
+    {
+      c3_c* wen_c = u2_cr_string(rec_u->wen);
+
+      printf("128-bit time: %s\n", wen_c);
+      free(wen_c);
     }
 
     /* initial sync with filesystem
