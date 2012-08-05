@@ -1,8 +1,3 @@
-
-  ++  date  ,[a=? y=@ud m=@ud t=trip]                   ::  gregorian
-  ++  time  ,@ud
-  ++  trip  ,[d=@ud h=@ud m=@ud s=@ud f=(list ,@ux)]    ::  relative
-
 Atoms of the Empire
 
 

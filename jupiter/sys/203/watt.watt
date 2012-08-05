@@ -1939,6 +1939,62 @@
       ~
     [^-(@ta (end 3 1 a)) $(a (rsh 3 1 a))]
   ::
+  ++  teff                            ::  length of first utf8 char
+    |=  a=@t  ^-  @
+    =+  b=(end 3 1 a)
+    ?:  =(0 b)
+      ?>(=(0 a) 0)
+    ?>  |((gte b 32) =(10 b))
+    ?:((lte b 127) 1 ?:((lte b 223) 2 ?:((lth b 239) 3 4)))
+  ::
+  ++  turf                            ::  utf8 to utf32
+    |=  a=@t
+    ^-  @c
+    %+  rap  5
+    |-  ^-  (list ,@c)  
+    =+  b=(teff a)
+    ?:  =(0 b)  ~
+    :-  %+  can  0
+        %+  turn
+          ^-  (list ,[p=@ q=@])
+          ?+  b  !!
+            1  [[0 7] ~]
+            2  [[8 6] [0 5] ~]
+            3  [[16 6] [8 6] [0 4] ~]
+            4  [[24 6] [16 6] [8 6] [0 3] ~]
+          ==
+        |=([p=@ q=@] [q (cut 0 [p q] a)])
+    $(a (rsh 3 b a))
+  ::
+  ++  tuft                            ::  utf32 to utf8
+    |=  a=@c
+    ^-  @t
+    %+  rap  3
+    |-  ^-  (list ,@)
+    ?:  =(0 a)
+      ~
+    =+  b=(end 5 1 a)
+    =+  c=$(a (rsh 5 1 a))
+    ?:  (lth b 0x7f)
+      [b c]
+    ?:  (lth b 0x7ff)
+      :*  (mix 0b1100.0000 (cut 0 [6 5] b))
+          (mix 0b1000.0000 (end 0 6 b))
+          c
+      ==
+    ?:  (lth b 0xffff)
+      :*  (mix 0b1110.0000 (cut 0 [12 4] b))
+          (mix 0b1000.0000 (cut 0 [6 6] b))
+          (mix 0b1000.0000 (end 0 6 b))
+          c
+      ==
+    :*  (mix 0b1111.0000 (cut 0 [18 3] b))
+        (mix 0b1000.0000 (cut 0 [12 6] b))
+        (mix 0b1000.0000 (cut 0 [6 6] b))
+        (mix 0b1000.0000 (end 0 6 b))
+        c
+    ==
+  ::
   ::    Tier 5c/1, formatting: layout
   ::
   ++  re
@@ -2341,14 +2397,14 @@
     =+  yed=(end 3 1 p.mol)
     ?-    yed
         %c
-      [q.mol ~]
+      !!
     ::
         %d
       =+  hay=(cut 3 [1 1] p.mol)
       ~|(%date-nyet !!)
     ::
         %f  
-      [?:(=(& q.mol) '&' ?>(=(| q.mol) '|')) rex]
+      [?:(=(& q.mol) '.y' ?>(=(| q.mol) '.n')) rex]
     ::
         %p
       =+  dyz=(met 4 q.mol)
@@ -2478,16 +2534,6 @@
         ['_' '_' res]
       ['_' ^$(lot i.p.lot, res $(p.lot t.p.lot))]
     ==
-  ::
-  ++  ufto                            ::  utf-8 to ucs-32
-    |=  a=@c
-    ^-  @t
-    !!
-  ::
-  ++  ufti                            ::  ucs-32 to utf-8
-    |=  a=@t
-    ^-  @c
-    !!
   ::
   ::    Tier 5c/3, prettyprinting: general-purpose printing.
   ::
