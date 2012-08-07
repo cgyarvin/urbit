@@ -43,10 +43,10 @@ u2_ve_bone(c3_c *bon_c)
     //  Obviously heavily syntax dependent.
     //  May vary in future by kernel number.
     {
-      c3_c *src_c = alloca(strlen(bon_c) + 4);
+      c3_c *src_c = alloca(strlen(bon_c) + 9);
 
-      strcpy(src_c, bon_c);
-      strcat(src_c, ":!%");
+      strcpy(src_c, "=>  !%  ");
+      strcat(src_c, bon_c);
 
       src = u2_ci_string(src_c);
     }
@@ -115,6 +115,16 @@ u2_ve_skol(u2_noun typ)
   c3_assert(0 != u2_ve_at()->toy.skol);
 
   return u2_cn_mung(u2_ct(u2_ve_at()->toy.skol), typ);
+}
+
+/* u2_ve_scot(): use scot (atom printer).
+*/
+u2_noun
+u2_ve_scot(u2_noun fom, u2_noun dat)
+{
+  c3_assert(0 != u2_ve_at()->toy.scot);
+
+  return u2_cn_mung(u2_ct(u2_ve_at()->toy.scot), u2nc(fom, dat));
 }
 
 /* u2_ve_ream(): use ream gate.

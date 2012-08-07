@@ -170,8 +170,7 @@ _time_set(u2_reck* rec_u)
   rec_u->now = _time_in_tv(&tim_tv);
 
   u2z(rec_u->wen);
-  rec_u->wen = u2_ve_hard
-    ("vane", "rent", u2nc(c3_s2('u','d'), u2k(rec_u->now)));
+  rec_u->wen = u2_ve_scot(c3_s2('u','d'), u2k(rec_u->now));
 }
 
 /* _walk_in(): inner loop of _walk().

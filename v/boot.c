@@ -288,15 +288,16 @@ u2_ve_rest()
       ver_e->toy.slot = u2_cm_bury(u2_ve_bone("slot"));
     }
 
-    if ( u2_Host.kno_w <= 220 ) {
-      ver_e->toy.spay = u2_cm_bury(u2_ve_bone("spay"));
-    }
-
     if ( u2_Host.kno_w > 209 ) {
       u2_ve_tool(c3__what);
       ver_e->toy.what = u2_ve_use("what");
     }
     else ver_e->toy.what = 0;
+
+    if ( u2_Host.kno_w <= 203 ) {
+      ver_e->toy.scot = 
+        u2_cm_bury(u2_ve_bone("|=([a=@ta b=@] ~(rent co ~ a b))"));
+    }
   }
   {
     if ( u2_Host.kno_w > 209 ) {
@@ -403,55 +404,6 @@ u2_ve_die(u2_noun tax)
   fprintf(stderr, "%s: %d: boot failure\n", u2_Local, u2_Host.kno_w);
   exit(1);
 }
-
-#if 0
-/* u2_ve_pile(): load the zuse packet log.  Crude.
-*/
-void
-u2_ve_pile(void)
-{
-  u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
-  u2_noun  tah   = u2nt(u2_ci_string("zuse"), u2_ci_string("log"), u2_nul);
-  u2_noun  all   = u2_ve_fold("atom", u2k(tah));
-  u2_noun  len   = u2_ckb_lent(all);
-
-  ver_e->has.pyl.len = len;
-  {
-    u2_noun log   = u2_nul;
-    c3_l    len_l = len;
-    c3_l    i_l;
-    u2_noun fun = ver_e->toy.spay;
-
-    for ( i_l = 0; i_l < len_l; i_l++ ) {
-      u2_noun man = u2_cn_mong(u2k(fun), u2nt(u2_nul, c3_s2('u','d'), i_l));
-      u2_noun hat = u2nc(man, u2k(tah));
-      u2_noun kap = u2_ve_file("atom", hat);
-
-      log = u2nc(kap, log);
-    }
-    ver_e->has.pyl.log = log;
-  }
-}
-
-/* u2_ve_recv(): receive a packet.  Crude.
-*/
-void
-u2_ve_recv(u2_noun kap)
-{
-  u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
-  u2_noun  fun   = u2_ve_at()->toy.spay;
-  c3_l     len_l = u2_ve_at()->has.pyl.len;
-  {
-    u2_noun man = u2_cn_mong(u2k(fun), u2nt(u2_nul, c3_s2('u','d'), len_l));
-    u2_noun tah = u2nq(man, u2_ci_string("zuse"), u2_ci_string("log"), u2_nul);
- 
-    if ( u2_no != u2_ve_save("atom", tah, u2k(kap)) ) {
-      ver_e->has.pyl.len += 1;
-      ver_e->has.pyl.log = u2nc(kap, vere->has.pyl.log);
-    }
-  }
-}
-#endif
 
 /* u2_ve_start(): boot the kernel from `kfo` to `kto`.  Exit on fail.
 */
@@ -586,7 +538,7 @@ u2_ve_mark()
     siz_w += u2_cm_mark_noun(ver_e->toy.slam);
     siz_w += u2_cm_mark_noun(ver_e->toy.slap);
     siz_w += u2_cm_mark_noun(ver_e->toy.slop);
-    siz_w += u2_cm_mark_noun(ver_e->toy.spay);
+    siz_w += u2_cm_mark_noun(ver_e->toy.scot);
 
     siz_w += u2_cm_mark_noun(ver_e->dev.old);
 

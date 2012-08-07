@@ -136,7 +136,7 @@
                   ?.  ?=([p=span q=span @ ~] hap)
                     ~
                   =+  [rux=(slay p.hap) vys=(slay q.hap)]
-                  ?.  &(?=([~ %% %h *] rux) ?=([~ %% %ta *] vys))
+                  ?.  &(?=([~ %% %p *] rux) ?=([~ %% %ta *] vys))
                     ~
                   [~ q.p.u.rux q.p.u.vys]
                 ^-  hunt
@@ -153,13 +153,13 @@
                   ?.  ?=([p=span q=span r=span %a ~] hap)
                     ~
                   =+  [rux=(slay p.hap) vys=(slay q.hap)]
-                  ?.  &(?=([~ %% %h *] rux) ?=([~ %% %ta *] vys))
+                  ?.  &(?=([~ %% %p *] rux) ?=([~ %% %ta *] vys))
                     ~
                   [~ q.p.u.rux q.p.u.vys r.hap]
                 ^-  fish
                 |=  [sap=path muz=* cax=bill]  ^-  lime
                 ?>  ?=([p=@h q=@ta r=@ta] muz)
-                =+  hof=(rent %h p.muz)
+                =+  hof=~(rent co [~ %p p.muz])
                 =+  rad=(arch q.cax)
                 ?>  =(rad q.cax)
                 =-  :-  %all
@@ -216,7 +216,7 @@
           ^-  (unit)
           ?~  hap  ~
           =+  hos=(slay i.hap)                          ::  host
-          ?.  &(?=(^ hos) ?=([%% %h *] u.hos))  ~
+          ?.  &(?=(^ hos) ?=([%% %p *] u.hos))  ~
           ?~  t.hap  ~ 
           =+  poj=(slay i.t.hap)                        ::  project
           ?.  &(?=(^ poj) ?=([%% %ta *] u.poj))  ~
@@ -284,19 +284,21 @@
                 [%gv *]  
               :-  =+  yom=(~(also cy rad.taq) p.s.muv)
                   =+  old=?:(?=([& *] yom) p.yom 0)
-                  [%say %yo %o %cary %sync old (rent %h p.muv) q.muv p.s.muv]
+                  =+  huu=~(rent co [~ %p p.muv])
+                  [%say %yo %o %cary %sync old huu q.muv p.s.muv]
               taq(rad (~(give cy rad.taq) r.muv p.s.muv q.s.muv))
             ::
                 [%kl *]  
               :-  =+  yom=(~(also cy rad.taq) p.s.muv)
                   =+  old=?:(?=([& *] yom) p.yom 0)
-                  [%say %yo %o %cary %sync old (rent %h p.muv) q.muv p.s.muv]
+                  =+  huu=~(rent co [~ %p p.muv])
+                  [%say %yo %o %cary %sync old huu q.muv p.s.muv]
               taq(rad (~(kill cy rad.taq) r.muv p.s.muv))
             ::
                 [%rl *]
               :-  :-  %say
                   :+  %pu
-                    [(rent %h p.muv) q.muv p.s.muv %a ~]
+                    [~(rent co [~ %p p.muv]) q.muv p.s.muv %a ~]
                   rad.taq
               taq
             ==
@@ -332,9 +334,9 @@
                   :~  :-  %hose 
                       :+  %pu
                         :-  %line 
-                        :~  (rent %ud p.p.lam) 
-                            (rent %ud q.p.lam)
-                            (rent %ud q.lam)
+                        :~  ~(rent co [~ %ud p.p.lam])
+                            ~(rent co [~ %ud q.p.lam])
+                            ~(rent co [~ %ud q.lam])
                         ==
                       r.lam
                   ==
@@ -368,14 +370,14 @@
         ^-  [p=@ud q=_..pile]
         =+  laz=(~(get by ear) lap)
         =+  dar=?~(laz 1 u.laz)
-        =+  vuz=(flop `path`[(rent %ud dar) (flop lap)])
+        =+  vuz=(flop `path`[~(rent co [~ %ud dar]) (flop lap)])
         ::  ~&  (sell !;(*type [%pile vuz]))
         :-  dar
         =>  .(rig (~(clot re rig) vuz [~ now val]))
         =+  wys=(~(chit re rig) lap)
         =+  suz=+(dar)
         |-  ^+  ..pile
-        ?:  !(~(has by v.wys) (rent %ud suz))
+        ?:  !(~(has by v.wys) ~(rent co [~ %ud suz]))
           ..pile(ear (~(put by ear) lap suz))
         $(suz +(suz))
       ::
@@ -440,7 +442,7 @@
     |=  [now=time lap=path val=*]
     ^-  [p=fact q=_..pile]
     =+  yam=(pile:daq now lap val)
-    :- [(flop `path`[(rent %ud p.yam) (flop lap)]) [now val]]
+    :- [(flop `path`[~(rent co [~ %ud p.yam]) (flop lap)]) [now val]]
     ..pile(daq q.yam)
   ::
   ++  putt                                  ::  write as state
@@ -807,7 +809,7 @@
       =-  [(~(put by q.tec) q.u.zav p.fyq) q.fyq]
       ^=  fyq
       |-  ^-  [p=@ud q=(list lime)] 
-      =+  pey=(pray:cam (flop [(rent %ud +(bem)) (flop q.u.zav)]))
+      =+  pey=(pray:cam (flop [~(rent co [~ %ud +(bem)]) (flop q.u.zav)]))
       ?~  pey
         [bem baz]
       $(bem +(bem), baz [(r.tec +(bem) u.mey u.pey) baz])

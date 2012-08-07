@@ -74,7 +74,7 @@
                   (cold %watt (just 'w'))
                 ==
                 ;~  pfix  dot 
-                  (most fas (cook |=(lot=coin (spay lot)) sack:vas))
+                  (most fas (cook |=(lot=coin ~(rent co lot)) sack:vas))
                 ==
               ==
             ==

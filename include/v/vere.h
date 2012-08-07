@@ -111,7 +111,7 @@
           u2_noun slam;                     //  nock vase call - [vase vase]
           u2_noun slap;                     //  nock vase pipe - [vase gene]
           u2_noun slop;                     //  nock vase pair - [vase vase]
-          u2_noun spay;                     //  coin to path
+          u2_noun scot;                     //  coin printer
         } toy;
 
         struct {
@@ -262,6 +262,11 @@
       */
         u2_noun
         u2_ve_slop(u2_noun hed, u2_noun tal);
+
+      /* u2_ve_scot(): use scot (atom printer).
+      */
+        u2_noun
+        u2_ve_scot(u2_noun fom, u2_noun dat);
 
       /* u2_ve_sell(): use sell gate. 
       */
