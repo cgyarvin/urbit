@@ -1,4 +1,4 @@
-::
+!:
 ::              Watt kernel 203.  This file is in the public domain.
 ::
 =>  src=.
@@ -419,10 +419,7 @@
   ::::
   ~%    %c
       -
-    ==
-      %far  far
-      %fyr  fyr
-    ==
+    ~
   |%
   ::      Tier 3a, axes
   ::
@@ -653,7 +650,7 @@
       (dor a b)
     (lth c d)
   ::
-  ::      Tier 3e, insecure hashing
+  ::      Tier 3e, insecure hashing and scrambling
   ::
   ++  mug
     ~.  %mug
@@ -741,65 +738,47 @@
   ::
   ::      Tier 3f, phonetic encoding
   ::
-  ++  fal
-    'bocmarbinwansamlitsighidfidlissogdirwacsabwissib\
-    /rigsoldopmodfoglidhopdardorlorhodfolrintogsilmir\
-    /holpaslacrovlivdalsatlibtabhanticpidtorbolfosdot\
-    /losdilforpilramtirwintadbicdifrocwidbisdasmidlop\
-    /rilnardapmolsanlocnovsitnidtipsicropwitnatpanmin\
-    /ritpodmottamtolsavposnapnopsomfinfonbanporworsip\
-    /ronnorbotwicsocwatdolmagpicdavbidbaltimtasmallig\
-    /sivtagpadsaldivdactansidfabtarmonranniswolmispal\
-    /lasdismaprabtobrollatlonnodnavfignomnibpagsopral\
-    /bilhaddocridmocpacravripfaltodtiltinhapmicfanpat\
-    /taclabmogsimsonpinlomrictapfirhasbosbatpochactid\
-    /havsaplindibhosdabbitbarracparloddosbortochilmac\
-    /tomdigfilfasmithobharmighinradmashalraslagfadtop\
-    /mophabnilnosmilfopfardatnoldinhatnacrisfotribhoc\
-    /nimlarfitwalrapsarnalmoslandondanladdovrivbacpol\
-    /laptalpitnambonrostonfodponsovnocsorlavmatmipfap'
-  ::
-  ++  fyl
-    'lesnecbudwessevpersutletfulpensytdurwepserwylsun\
-    /rypsyxdyrnuphebpeglupdepdysputlughecryttyssydnex\
-    /lunmeplutseppesdelsulpedtemledtulmetwenbynhexfeb\
-    /pyldulhetmevruttylwydtepbesdexsefwycburderneppur\
-    /rysrebdennutsubpetrulsynregtydsupsemwynrecmegnet\
-    /secmulnymtevwebsummutnyxrextebfushepbenmuswyxsym\
-    /selrucdecwexsyrwetdylmynmesdetbetbeltuxtugmyrpel\
-    /syptermebsetdutdegtexsurfeltudnuxruxrenwytnubmed\
-    /lytdusnebrumtynseglyxpunresredfunrevrefmectedrus\
-    /bexlebduxrynnumpyxrygryxfeptyrtustyclegnemfermer\
-    /tenlusnussyltecmexpubrymtucfyllepdebbermughuttun\
-    /bylsudpemdevlurdefbusbeprunmelpexdytbyttyplevmyl\
-    /wedducfurfexnulluclennerlexrupnedlecrydlydfenwel\
-    /nydhusrelrudneshesfetdesretdunlernyrsebhulryllud\
-    /remlysfynwerrycsugnysnyllyndyndemluxfedsedbecmun\
-    /lyrtesmudnytbyrsenwegfyrmurtelreptegpecnelnevfes'
-  ::
-  ++  fap
-    |=  a=@
-    ~|  %fap
-    ?>  (lth a 256)
-    (cut 3 [(mul 3 a) 3] fal) 
-  ::
-  ++  fyp
-    |=  a=@
-    ~|  %fyp
-    ?>  (lth a 256)
-    (cut 3 [(mul 3 a) 3] fyl)
-  ::
-  ++  far
-    |=  a=@
-    ~|  [%far a]
-    =+  b=0
-    |-(?:(=(a (fap b)) b $(b +(b))))
-  ::
-  ++  fyr
-    |=  a=@
-    ~|  [%fyr a]
-    =+  b=0
-    |-(?:(=(a (fyp b)) b $(b +(b))))
+  ++  po
+    =+  :-  ^=  sis
+            'bocmarbinwansamlitsighidfidlissogdirwacsabwissib\
+            /rigsoldopmodfoglidhopdardorlorhodfolrintogsilmir\
+            /holpaslacrovlivdalsatlibtabhanticpidtorbolfosdot\
+            /losdilforpilramtirwintadbicdifrocwidbisdasmidlop\
+            /rilnardapmolsanlocnovsitnidtipsicropwitnatpanmin\
+            /ritpodmottamtolsavposnapnopsomfinfonbanporworsip\
+            /ronnorbotwicsocwatdolmagpicdavbidbaltimtasmallig\
+            /sivtagpadsaldivdactansidfabtarmonranniswolmispal\
+            /lasdismaprabtobrollatlonnodnavfignomnibpagsopral\
+            /bilhaddocridmocpacravripfaltodtiltinhapmicfanpat\
+            /taclabmogsimsonpinlomrictapfirhasbosbatpochactid\
+            /havsaplindibhosdabbitbarracparloddosbortochilmac\
+            /tomdigfilfasmithobharmighinradmashalraslagfadtop\
+            /mophabnilnosmilfopfardatnoldinhatnacrisfotribhoc\
+            /nimlarfitwalrapsarnalmoslandondanladdovrivbacpol\
+            /laptalpitnambonrostonfodponsovnocsorlavmatmipfap'
+        ^=  dex
+        'lesnecbudwessevpersutletfulpensytdurwepserwylsun\
+        /rypsyxdyrnuphebpeglupdepdysputlughecryttyssydnex\
+        /lunmeplutseppesdelsulpedtemledtulmetwenbynhexfeb\
+        /pyldulhetmevruttylwydtepbesdexsefwycburderneppur\
+        /rysrebdennutsubpetrulsynregtydsupsemwynrecmegnet\
+        /secmulnymtevwebsummutnyxrextebfushepbenmuswyxsym\
+        /selrucdecwexsyrwetdylmynmesdetbetbeltuxtugmyrpel\
+        /syptermebsetdutdegtexsurfeltudnuxruxrenwytnubmed\
+        /lytdusnebrumtynseglyxpunresredfunrevrefmectedrus\
+        /bexlebduxrynnumpyxrygryxfeptyrtustyclegnemfermer\
+        /tenlusnussyltecmexpubrymtucfyllepdebbermughuttun\
+        /bylsudpemdevlurdefbusbeprunmelpexdytbyttyplevmyl\
+        /wedducfurfexnulluclennerlexrupnedlecrydlydfenwel\
+        /nydhusrelrudneshesfetdesretdunlernyrsebhulryllud\
+        /remlysfynwerrycsugnysnyllyndyndemluxfedsedbecmun\
+        /lyrtesmudnytbyrsenwegfyrmurtelreptegpecnelnevfes'
+    |%
+    ++  ind  |=(a=@ =+(b=0 |-(?:(=(a (tod b)) b $(b +(b))))))
+    ++  ins  |=(a=@ =+(b=0 |-(?:(=(a (tos b)) b $(b +(b))))))
+    ++  tod  |=(a=@ ?>((lth a 256) (cut 3 [(mul 3 a) 3] dex)))
+    ++  tos  |=(a=@ ?>((lth a 256) (cut 3 [(mul 3 a) 3] sis)))
+    --
   ::
   ::      Tier 3g, lite number theory
   :: 
@@ -1344,7 +1323,7 @@
   ++  ring  ,@
   ++  rule  |=(tub=nail `edge`[p.tub ~ ~ tub])
   ++  shoe  $%  [%bean p=*]
-                [%lose p=@tam]
+                [%lose p=@ta]
                 [%mean p=_^?(|.(*tank))]
                 [%spot p=_spot]
             ==
@@ -1357,10 +1336,10 @@
     ::  [%farm p=[p=tape q=tape r=tape] q=(list (list tank))]
     ==
   ++  tape  (list char)
-  ++  term  ,@tam
+  ++  term  ,@ta
   ++  tone  $%  [0 p=*]
                 [1 p=(list)]
-                [2 p=(list ,[@tam *])]
+                [2 p=(list ,[@ta *])]
             ==
   ++  wall  (list tape)
   ++  wonk  |*(veq=edge ?@(q.veq !! p.u.q.veq))
@@ -2207,12 +2186,12 @@
       ?:  =(0 b)
         ['~' ~]
       ?:  (lte b 1)
-        (trip (fap a))
+        (trip (tos:po a))
       |-  ^-  tape
       ?:  =(2 b)
         =+  c=(rsh 3 1 a)
         =+  d=(end 3 1 a)
-        (weld (trip (fap c)) (trip (fyp (mix c d))))
+        (weld (trip (tod:po c)) (trip (tos:po (mix c d))))
       =+  c=(rsh 3 2 a)
       =+  d=(end 3 2 a)
       (weld ^$(a c, b (met 3 c)) `tape`['-' $(a (mix c d), b 2)])
@@ -2241,6 +2220,9 @@
     ++  bix  (bass 16 (stun [2 2] six))
     ++  hif  (boss 256 ;~(plug tip tiq (easy ~)))
     ++  huf  (bass 0x1.0000 ;~(plug hif ;~(pfix hep hif) (easy ~)))
+    :: ++  huf  %+  cook 
+    ::           |=([a=@ b=@] (mix (lsh 4 1 a) (mix a b))
+    ::         ;~(plug hif ;~(pfix hep hif))
     ++  pev  (bass 64 ;~(plug sev (stun [0 4] siv)))
     ++  pew  (bass 64 ;~(plug sew (stun [0 4] siw)))
     ++  piv  (bass 64 (stun [5 5] siv))
@@ -2277,8 +2259,8 @@
              ==
     ++  sox  (cook |=(a=@ (sub a 87)) (shim 'a' 'f'))
     ++  ted  (bass 10 ;~(plug sed (stun [0 2] sid)))
-    ++  tip  (cook |=(a=@ (far a)) til)
-    ++  tiq  (cook |=(a=@ (fyr a)) til)
+    ++  tip  (cook |=(a=@ (ins:po a)) til)
+    ++  tiq  (cook |=(a=@ (ind:po a)) til)
     ++  tid  (bass 10 (stun [3 3] sid))
     ++  til  (boss 256 (stun [3 3] low))
     ++  voy  ;~(pfix bas ;~(pose bas soq bix))
@@ -2293,9 +2275,10 @@
     ++  dem  (ape (bass 1.000 ;~(plug ted:ab (star ;~(pfix dog tid:ab)))))
     ++  dim  (ape (bass 10 ;~(plug sed:ab (star sid:ab))))
     ++  fed  ;~  pose
-               (cold 0 sig)
+               (cold 0 hep)
                (bass 0x1.0000.0000 (most doh huf:ab))
                hif:ab
+               tip:ab
              ==
     ++  hex  (ape (bass 0x1.0000 ;~(plug qex:ab (star ;~(pfix dog qix:ab)))))
     ++  lip  =+  tod=(ape ted:ab) 
@@ -2311,87 +2294,6 @@
     ++  viz  (ape (bass 0x200.0000 ;~(plug pev:ab (star ;~(pfix dog piv:ab)))))
     ++  wiz  (ape (bass 0x4000.0000 ;~(plug pew:ab (star ;~(pfix dog piw:ab)))))
     --
-  ::
-  ++  bash
-    =+  ^=  neg
-        |=  [syn=? mol=mole]  ^-  mole
-        ?>  =('u' (end 3 1 p.mol))
-        [(cat 3 's' (rsh 3 1 p.mol)) (new:si syn q.mol)]
-    ;~  pfix  hep
-      ;~  pose
-        (cook |=(a=mole (neg | a)) bask)
-        ;~(pfix hep (cook |=(a=mole (neg & a)) bask))
-      ==
-    ==
-  ::
-  ++  bask
-    ;~  pose
-      ;~  pfix  (just '0')
-        ;~  pose
-          (stag %ub ;~(pfix (just 'b') bay:ag))
-          (stag %ux ;~(pfix (just 'x') hex:ag))
-          (stag %uv ;~(pfix (just 'v') viz:ag))
-          (stag %uw ;~(pfix (just 'w') wiz:ag))
-        ==
-      ==
-      (stag %ud dem:ag)
-    ==
-  ::
-  ++  basp
-    ;~  pose
-      %+  cook
-        |=(det=date `mole`[%da (year det)])
-      ;~  plug
-        %+  cook
-          |=([a=@ b=?] [b a])
-        ;~(plug dim:ag ;~(pose (cold | hep) (easy &)))
-        ;~(pfix dot dim:ag)   ::  month
-        ;~(pfix dot dim:ag)   ::  day
-        ;~  pose
-          ;~  pfix
-            ;~(plug dot dot)
-            ;~  plug
-              dim:ag
-              ;~(pfix dot dim:ag)
-              ;~(pfix dot dim:ag)
-              ;~(pose ;~(pfix ;~(plug dot dot) (most dot qix:ab)) (easy ~))
-            ==
-          ==
-          (easy [0 0 0 ~])
-        ==
-      ==
-    ::
-      %+  cook
-        |=(rip=tarp `mole`[%dr (yule rip)])
-      ;~  plug
-        ;~(pose (ifix [(just 'd') dot] dim:ag) (easy 0))
-        ;~(pose (ifix [(just 'h') dot] dim:ag) (easy 0))
-        ;~(pose (ifix [(just 'm') dot] dim:ag) (easy 0))
-        ;~(pose (ifix [(just 's') dot] dim:ag) (easy 0))
-        ;~(pose ;~(pfix ;~(plug dot dot) (most dot qix:ab)) (easy ~))
-      ==
-    ==
-  ::
-  ++  bast
-    ;~  pose
-      (stag %ib bip:ag)
-      (stag %il lip:ag)
-      (stag %f ;~(pose (cold & (just 'y')) (cold | (just 'n'))))
-      real
-    ==
-  ::
-  ++  real
-    =+  ^=  vox
-        ;~  plug
-          ;~(pose (cold | hep) (easy &))
-          ;~(plug dim:ag ;~(pose ;~(pfix dot dim:ag) (easy 0)))
-        ==
-    ;~  pose
-      (stag %rh (cook rylh ;~(pfix sig vox)))
-      (stag %rq (cook rylq ;~(pfix ;~(plug dot dot) vox)))
-      (stag %rd (cook ryld ;~(pfix dot vox)))
-      (stag %rs (cook ryls vox))
-    ==
   ::
   ++  co
     =<  |_  lot=coin
@@ -2414,7 +2316,7 @@
             ?+    hay  (z-co q.p.lot)
                 %a
               =+  yod=(yore q.p.lot)
-              =>  ^+(. .(rex ?~(f.t.yod rex ['.' '.' (s-co f.t.yod)])))
+              =>  ^+(. .(rex ?~(f.t.yod rex ['.' (s-co f.t.yod)])))
               =>  ^+  .
                   %=    .
                       rex
@@ -2431,7 +2333,7 @@
             ::
                 %r
               =+  yug=(yell q.p.lot)
-              =>  ^+(. .(rex ?~(f.yug rex ['.' '.' (s-co f.yug)])))
+              =>  ^+(. .(rex ?~(f.yug rex ['.' (s-co f.yug)])))
               :-  '~'
               ?:  &(=(0 d.yug) =(0 m.yug) =(0 h.yug) =(0 s.yug))
                 ['s' '0' rex]
@@ -2461,8 +2363,8 @@
               rex
             =+  syb=(cut 4 [(dec dyz) 1] q.p.lot)
             =+  ^=  hed  %+  weld  
-                           (trip (fap (end 3 1 syb))) 
-                         (trip (fyp (rsh 3 1 syb)))
+                           (trip (tos:po (end 3 1 syb))) 
+                         (trip (tod:po (rsh 3 1 syb)))
             (weld `tape`['.' hed] $(dyz (dec dyz)))
           ::
               %r
@@ -2501,9 +2403,11 @@
         ::
         ++  s-co
           |=  esc=(list ,@)  ^-  tape
+          ~|  [%so-co esc]
           ?~  esc
             rex
-          =>(.(rex ['.' $(esc t.esc)]) ((x-co 4) i.rex))
+          :-  '.'
+          =>(.(rex $(esc t.esc)) ((x-co 4) i.esc))
       ::
         ++  w-co  |=(min=@ (em-co [64 min] |=([? b=@ c=tape] [~(w ne b) c])))
         ++  x-co  |=(min=@ (em-co [16 min] |=([? b=@ c=tape] [~(x ne b) c])))
@@ -2554,34 +2458,124 @@
     ++  x  ?:((gte tig 10) (add tig 87) d)
     ++  w  ?:(=(tig 63) '~' ?:(=(tig 62) '-' ?:((gte tig 36) (add tig 29) x)))
     --
-  ++  sack
-    %+  knee  *coin  |.  ~+
-    %-  stew  :~
-      :-  ['a' 'z']
-        (cook |=(a=@tam [%% %ta a]) sym)
-      :-  ['0' '9']
-        (stag ~ bask)
-      :-  '-'
-        (stag ~ bash)
-      :-  '.'
-        ;~  pfix  dot
+  ::
+  ++  so
+    |%  
+    ++  bisk
+      ;~  pose
+        ;~  pfix  (just '0')
           ;~  pose
-            (stag ~ bast)
-            (stag %many (ifix [cab ;~(plug cab cab)] (more cab sack)))
+            (stag %ub ;~(pfix (just 'b') bay:ag))
+            (stag %ux ;~(pfix (just 'x') hex:ag))
+            (stag %uv ;~(pfix (just 'v') viz:ag))
+            (stag %uw ;~(pfix (just 'w') wiz:ag))
           ==
         ==
-      :-  '~'
-        ;~  pfix  sig
+        (stag %ud dem:ag)
+      ==
+    ++  crub
+      ;~  pose
+        %+  cook
+          |=(det=date `mole`[%da (year det)])
+        ;~  plug
+          %+  cook
+            |=([a=@ b=?] [b a])
+          ;~(plug dim:ag ;~(pose (cold | hep) (easy &)))
+          ;~(pfix dot dim:ag)   ::  month
+          ;~(pfix dot dim:ag)   ::  day
           ;~  pose
-            (cold [~ %ta ~] sig)
-            (easy [~ %n 0])
-            (stag ~ basp)
+            ;~  pfix
+              ;~(plug dot dot)
+              ;~  plug
+                dim:ag
+                ;~(pfix dot dim:ag)
+                ;~(pfix dot dim:ag)
+                ;~(pose ;~(pfix ;~(plug dot dot) (most dot qix:ab)) (easy ~))
+              ==
+            ==
+            (easy [0 0 0 ~])
           ==
         ==
-    ==
+      ::
+        %+  cook
+          |=  [a=(list ,[p=?(%d %h %m %s) q=@]) b=(list ,@)]
+          =+  rop=`tarp`[0 0 0 0 b]
+          |-  ^-  mole
+          ?~  a
+            [%dr (yule rop)]
+          ?-  p.i.a
+            %d  $(a t.a, d.rop (add q.i.a d.rop))
+            %h  $(a t.a, h.rop (add q.i.a h.rop))
+            %m  $(a t.a, m.rop (add q.i.a m.rop))
+            %s  $(a t.a, s.rop (add q.i.a s.rop))
+          ==
+        ;~  plug
+          %+  most
+            dot
+          ;~  pose 
+            ;~(pfix (just 'd') (stag %d dim:ag))
+            ;~(pfix (just 'h') (stag %h dim:ag))
+            ;~(pfix (just 'm') (stag %m dim:ag))
+            ;~(pfix (just 's') (stag %s dim:ag))
+          ==
+          ;~(pose ;~(pfix ;~(plug dot dot) (most dot qix:ab)) (easy ~))
+        ==
+      ::
+      ==
+    ++  nuck
+      %+  knee  *coin  |.  ~+
+      %-  stew  :~
+        :-  ['a' 'z']  (cook |=(a=@ta [~ %ta a]) sym)
+        :-  ['0' '9']  (stag ~ bisk) 
+        :-  '-'        (stag ~ tash)
+        :-  '.'        ;~(pfix dot perd)
+        :-  '~'        ;~(pfix sig ;~(pose twid (easy [~ %n 0])))
+      ==
+    ++  perd
+      ;~  pose
+        (stag ~ zust)
+        (stag %many (ifix [cab ;~(plug cab cab)] (more cab nuck)))
+      ==
+    ++  royl
+      =+  ^=  vox
+          ;~  plug
+            ;~(pose (cold | hep) (easy &))
+            ;~(plug dim:ag ;~(pose ;~(pfix dot dim:ag) (easy 0)))
+          ==
+      ;~  pose
+        (stag %rh (cook rylh ;~(pfix sig vox)))
+        (stag %rq (cook rylq ;~(pfix ;~(plug dot dot) vox)))
+        (stag %rd (cook ryld ;~(pfix dot vox)))
+        (stag %rs (cook ryls vox))
+      ==
+    ++  tash
+      =+  ^=  neg
+          |=  [syn=? mol=mole]  ^-  mole
+          ?>  =('u' (end 3 1 p.mol))
+          [(cat 3 's' (rsh 3 1 p.mol)) (new:si syn q.mol)]
+      ;~  pfix  hep
+        ;~  pose
+          (cook |=(a=mole (neg | a)) bisk)
+          ;~(pfix hep (cook |=(a=mole (neg & a)) bisk))
+        ==
+      ==
+    ++  twid
+      ;~  pose
+        (cook |=(a=@ [%blob (cue a)]) ;~(pfix (just '0') wiz:ag))
+        (stag ~ crub)
+      ==
+    ::
+    ++  zust
+      ;~  pose
+        (stag %ib bip:ag)
+        (stag %il lip:ag)
+        (stag %f ;~(pose (cold & (just 'y')) (cold | (just 'n'))))
+        royl
+      ==
+    --
   ++  slay
     |=  txt=@ta  ^-  (unit coin)
-    =+  vex=((full sack) [[1 1] (trip txt)])
+    =+  vex=((full nuck:so) [[1 1] (trip txt)])
     ?@  q.vex
       ~
     [~ p.u.q.vex]
@@ -2956,7 +2950,7 @@
   ++  mock
     ~.  %mock
     |=  [[sub=* fol=*] sky=_|+(* *(unit))]
-    =+  tax=*(list ,[@tam *])
+    =+  tax=*(list ,[@ta *])
     |-  ^-  tone
     ?@  fol
       [%2 tax]
@@ -3236,8 +3230,8 @@
     $|  ?(%noun %tank %void %wool %yarn)
     $%  [%atom p=term]
         [%beam p=wine]
-        [%core p=@ud q=@tam r=@ta s=(list wine)]
-        [%corn p=@ud q=@tam r=@ud s=@ud]
+        [%core p=@ud q=@ta r=@ta s=(list wine)]
+        [%corn p=@ud q=@ta r=@ud s=@ud]
         [%face p=term q=wine]
         [%fine p=?(%pure %very) q=@uv r=wine]
         [%list p=term q=wine]
@@ -4035,7 +4029,7 @@
   ~.  %fitz
   |=  [yaz=term wix=term]
   =+  ^=  fiz
-      |=  mot=@tam  ^-  [p=@ q=@tam]
+      |=  mot=@ta  ^-  [p=@ q=@ta]
       =+  len=(met 3 mot)
       ?:  =(0 len)
         [0 %%]
@@ -4789,7 +4783,7 @@
     =+  gil=*(set type)
     =+  dex=[p=*(map type ,@) q=*(map ,@ wine)]
     =+  ^=  nic
-        |=  gum=@  ^-  @tam
+        |=  gum=@  ^-  @ta
         %+  can
           3
         :~  [1 (add 'a' (mod gum 26))]
@@ -6162,6 +6156,20 @@
       *          ~|(%wrap-type !!)
     ==
   --
+  ++  jack
+    |=  rad=?
+    |=  lot=coin  ^-  gene
+    ?-    -.lot
+        ~      ?:(rad [%dtsg p.lot] [%dtpt p.lot])
+    ::
+        %blob  
+      ?:  rad 
+        [%dtsg %% p.lot] 
+      ?@(p.lot [%dtpt %% p.lot] [$(p.lot -.p.lot) $(p.lot +.p.lot)])
+    ::
+        %many  
+      |-(^-(gene ?~(p.lot [%bcts %null] [^$(lot i.p.lot) $(p.lot t.p.lot)])))
+    ==
 ::
 ++  vast
   =+  [bug=`?`| was=*(set path) wer=*path]
@@ -6196,7 +6204,7 @@
   ::
   ++  glam  ~+((glue ace))
   ++  glib  ~+((glue gap))
-  ++  hasp  (cook |=(a=coin [%dtpt %ta ~(rent co a)]) sack)
+  ++  hasp  (cook |=(a=coin [%dtpt %ta ~(rent co a)]) nuck:so)
   ++  scat
     %+  knee  *gene  |.  ~+
     %-  stew  :~  
@@ -6215,12 +6223,7 @@
             (stag %dtsg (stag %f (cold & pam)))
             (stag %dtsg (stag %f (cold | bar)))
             (stag %dtsg (stag %ta qut))
-            (stag %dtsg bask)
-            (stag %dtsg bash)
-            (stag %dtsg bast)
-            ;~  pfix  tar
-              (stag %dtpt (stag %ta ;~(pose sym (cold %% cen))))
-            ==
+            (cook (jack &) nuck:so)
           ==
         == 
       :-  '&'
@@ -6249,18 +6252,16 @@
         ==
       :-  '-'
         ;~  pose
-          (stag %dtpt bash)
+          (stag %dtpt tash:so)
           (cook |=(a=twig [%cnts a ~]) rope)
         ==
       :-  '.'
         ;~  pose
-          (stag %dtpt ;~(pfix dot bast))
+          (stag %dtpt ;~(pfix dot zust:so))
           (cook |=(a=twig [%cnts a ~]) rope)
         ==
       :-  ['0' '9']
-        %+  stag
-          %dtpt
-        bask
+        (stag %dtpt bisk:so)
       :-  ':'
         (stag %smcl ;~(pfix col (ifix [pel per] (most ace wide))))
       :-  '='
@@ -6323,8 +6324,7 @@
               [pel per] 
             ;~(glam rope wide (stag %cltr (most ace wide)))
           ::
-            (stag %dtpt (stag %ta tyq:ag))
-            (cold [%dtpt %ta ~] sig)
+            (cook (jack |) twid:so)
             (easy [%bcts %null])
           ==
         ==

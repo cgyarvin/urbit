@@ -1300,16 +1300,20 @@ u2_chop(c3_g    met_g,
     }
   }
   else {
+    c3_w len_w = (u2_fly_is_cat(src) ? 1 : *u2_at_pug_len(src));
     c3_g hut_g = (met_g - 5);
     c3_w san_w = (1 << hut_g);
     c3_w j_w;
 
     for ( i_w = 0; i_w < wid_w; i_w++ ) {
       c3_w wuf_w = (fum_w + i_w) << hut_g;
-      c3_w wut_w = (tou_w + i_w) << hut_g; 
+      c3_w wut_w = (tou_w + i_w) << hut_g;
 
       for ( j_w = 0; j_w < san_w; j_w++ ) {
-        *u2_at_ray(dst_r + wut_w + j_w) ^= u2_atom_word(src, wuf_w + j_w);
+        *u2_at_ray(dst_r + wut_w + j_w) ^= 
+            ((wuf_w + j_w) >= len_w)
+              ? 0
+              : u2_atom_word(src, wuf_w + j_w);
       }
     }
   }

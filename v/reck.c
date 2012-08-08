@@ -948,18 +948,19 @@ u2_ve_reck_boot(u2_reck* rec_u)
     {
       u2_noun fac = u2_ve_use("reck");
       u2_noun zam = u2_ve_slam(fac, u2nc(u2nc(c3__atom, 0), u2k(rec_u->now)));
-
-    
+ 
       rec_u->rec = u2k(zam);
       rec_u->ken = u2k(u2_Host.ver_e[u2_Host.kno_w].ken);
       u2_ve_set("reck", zam);
     }
 
     {
-      c3_c* wen_c = u2_cr_string(rec_u->wen);
+      u2_noun dyt = u2_ve_scot(c3_s2('d','a'), u2k(rec_u->now));
+      c3_c* dyt_c = u2_cr_string(dyt);
 
-      printf("128-bit time: %s\n", wen_c);
-      free(wen_c);
+      printf("time: %s\n", dyt_c);
+      free(dyt_c);
+      u2z(dyt);
     }
 
     /* initial sync with filesystem
