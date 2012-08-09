@@ -20,8 +20,8 @@ Name   Definition     Example as printed             Comment
                        ~nopgen-durban
                        ~nopgen-durban--picmec-micmac
 ~ %rd  real-double    .~28.4089                       
-~ %rh  real-half      .~.34
-~ %rq  real-quad      .~~17
+~ %rh  real-half      .~~34
+~ %rq  real-quad      .~~~17
 ~ %rs  real-single    .-576.78
 
 ~ %sb  signed 2
@@ -36,8 +36,9 @@ Name   Definition     Example as printed             Comment
 ~ %uv  unsigned 32
 ~ %uw  unsigned 64
 
-~ %t   text            ~~urbit.rocks~21              literal UTF-8
-~ %ta  legible span    ~.under~-score                [a/z 0/9 - . ~ _]
+~ %t   text           ~~urbit.rocks~21               literal UTF-8
+~ %ta  legible span   ~.under~-score                 [a/z 0/9 - . ~ _]
+~ %tas symbolic span  foo-bar-baz                    [a/z -, start a/z]
 
 sack prefix tree, with status (& good, | no good, * postponed)
 

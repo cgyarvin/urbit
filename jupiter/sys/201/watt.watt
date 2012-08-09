@@ -1,5 +1,5 @@
 ::
-::              Watt kernel 202.  This file is in the public domain.
+::              Watt kernel 201.  This file is in the public domain.
 ::
 =>  src=.
 ?>  ?=(@ src)
@@ -1980,6 +1980,31 @@
         c
     ==
   ::
+  ++  wack
+    |=  a=@ta
+    ^-  @ta
+    =+  b=(rip 3 a)
+    %+  rap  3
+    |-  ^-  tape
+    ?~  b
+      ~
+    ?:  =('~' i.b)  ['~' '~' $(b t.b)]
+    ?:  =('_' i.b)  ['~' '-' $(b t.b)]
+    [i.b $(b t.b)]
+  ::
+  ++  wick
+    |=  a=@
+    ^-  @ta
+    =+  b=(rip 3 a)
+    %+  rap  3
+    |-  ^-  tape
+    ?~  b
+      ~
+    ?:  =('~' i.b)
+      ?~  t.b  !!
+      [?:(=('~' i.t.b) '~' ?>(=('-' i.t.b) '_')) $(b t.t.b)]
+    [i.b $(b t.b)]
+  ::
   ++  woad
     |=  a=@ta
     ^-  @t
@@ -2266,6 +2291,9 @@
     ++  tiq  (sear |=(a=@ (ind:po a)) til)
     ++  tid  (bass 10 (stun [3 3] sid))
     ++  til  (boss 256 (stun [3 3] low))
+    ++  urs  %+  cook
+               |=(a=tape (rap 3 ^-((list ,@) a)))
+             (star ;~(pose nud low hig hep dot sig cab)) 
     ++  voy  ;~(pfix bas ;~(pose bas soq bix))
     ++  vym  (bass 256 ;~(plug low (star ;~(pose low nud))))
     ++  vyn  (bass 256 ;~(plug hep vym (easy ~)))
@@ -2546,6 +2574,9 @@
         ==
       ::
         (stag %p fed:ag)
+        ;~(pfix dot (stag %ta (cook wick urs:ab)))
+        ;~(pfix sig (stag %t (cook woad urs:ab)))
+        ;~(pfix hep (stag %c (cook turf (cook woad urs:ab))))
       ==
     ++  nuck
       %+  knee  *coin  |.  ~+
@@ -3152,10 +3183,8 @@
       [%ktwt p=gene]
     ::
       [%sgbr p=gene q=gene]
-      [%sgcb p=gene q=gene]
       [%sgcl p=[p=@ q=@] q=gene]
       [%sgcn p=chop q=gene r=(list ,[p=term q=gene]) s=gene]
-      [%sgdt p=chop q=gene]
       [%sgfs p=chop q=gene]
       [%sggl p=$|(term [p=term q=gene]) q=gene]
       [%sggr p=$|(term [p=term q=gene]) q=gene]
@@ -3164,7 +3193,6 @@
       [%sgkt p=gene]
       [%sgls p=@ q=gene]
       [%sgpm p=gene q=gene]
-      [%sgsg p=gene q=gene]
       [%sgts p=gene q=gene]
       [%sgzp p=gene q=gene]
     ::
@@ -3253,7 +3281,7 @@
     ==
   ++  vase  ,[p=type q=*]                                   ::  type-value pair
   ++  wine
-    $|  ?(%noun %tank %void %wool %yarn)
+    $|  ?(%noun %path %tank %void %wool %yarn)
     $%  [%atom p=term]
         [%beam p=wine]
         [%core p=@ud q=@ta r=@ta s=(list wine)]
@@ -3664,7 +3692,6 @@
       s.gen
     ::
         [%sgcl *]  [%sggr [%bank %dtsg %% p.gen] q.gen]
-        [%sgdt *]  [%sgcn p.gen [~ 4] ~ q.gen]
         [%sgfs *]  [%sgcn p.gen [~ 4] ~ q.gen]
         [%sggl *]  [%tsgl [%sggr p.gen [~ 1]] q.gen]
         [%sgbc *]  [%sggr [%live [%dtsg %% p.gen]] q.gen]
@@ -3672,7 +3699,6 @@
         [%sgkt *]  [%sggr %keep p.gen]
         [%sgls *]  [%sggr [%memo %dtsg %% p.gen] q.gen]
         [%sgpm *]  [%sggr [%loaf p.gen] q.gen]
-        [%sgsg *]  [%sggr [%mean [%brdt p.gen]] q.gen]
         [%sgzp *]  [%sggr [%mean [%brdt p.gen]] q.gen]
         [%sgts *]  [%sggr [%germ p.gen] q.gen]
         [%smcl *]
@@ -4502,6 +4528,7 @@
     |-  ^-  tank
     ?-    q.ham
         %noun      [%leaf '*' ~]
+        %path      [%leaf '/' ~]
         %tank      [%leaf '*' 't' ~]
         %void      [%leaf '#' ~]
         %wool      [%leaf '*' '"' '"' ~]
@@ -4594,6 +4621,16 @@
         [%noun ?:(?=(@ +.lum) [[%atom %%] ~] $(lum +.lum))]
       ==
     ::
+        %path
+      :-  ~
+      :+  %rose
+        [['/' ~] ['/' ~] ['/' ~]]
+      |-  ^-  (list tank)
+      ?@  lum
+        ?>(?=(~ lum) ~)
+      ?>  ?=(@ -.lum) 
+      [[%leaf (rip 3 -.lum)] $(lum +.lum)]
+    ::
         %tank
       =+  cis=(tank lum)
       ?.(=(lum cis) ~ [~ cis])
@@ -4618,7 +4655,10 @@
         ~
       :+  ~
         %leaf 
-      ?:(=(%% p.q.ham) ~(rend co [~ %ud lum]) ~(rend co [~ p.q.ham lum]))
+      ?+  p.q.ham  ~(rend co [~ p.q.ham lum])
+        %%         ~(rend co [~ %ud lum])
+        %tas       ['%' (rip 3 lum)]
+      ==
     ::
         [%beam *]
       =-  ?~(tok ~ [~ %rose [[' ' ~] ['(' ~] [')' ~]] u.tok])
@@ -4751,10 +4791,11 @@
   ++  doge
     |=  ham=calf
     =-  ?+  woz  woz
-          [%beam [%atom %c]]    %yarn
-          [%beam %yarn]         %wool
-          [%list * [%atom %c]]  %yarn
-          [%list * %yarn]       %wool
+          [%beam [%atom %c]]     %yarn
+          [%beam %yarn]          %wool
+          [%list * [%atom %ta]]  %path
+          [%list * [%atom %c]]   %yarn
+          [%list * %yarn]        %wool
         ==
     ^=  woz
     ^-  wine
@@ -6470,10 +6511,8 @@
                 %-  stew  :~
                   ['|' (rune bar %sgbr expb)]
                   ['$' (rune buc %sgbc expg)]
-                  ['_' (rune cab %sgcb expb)]
                   ['%' (rune cen %sgcn hind)]
                   [':' (rune col %sgcl hina)]
-                  ['.' (rune dot %sgdt hine)]
                   ['/' (rune fas %sgfs hine)]
                   ['<' (rune gal %sggl hinb)]
                   ['>' (rune gar %sggr hinb)]
@@ -6481,7 +6520,6 @@
                   ['^' (rune ket %sgkt expa)]
                   ['+' (rune lus %sgls hinc)]
                   ['&' (rune pam %sgpm expb)]
-                  ['~' (rune sig %sgsg expb)]
                   ['!' (rune zap %sgzp expb)]
                   ['=' (rune tis %sgts expb)]
                 ==
