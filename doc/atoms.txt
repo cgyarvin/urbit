@@ -19,9 +19,9 @@ Name   Definition     Example as printed             Comment
                        ~nopgen
                        ~nopgen-durban
                        ~nopgen-durban--picmec-micmac
-~ %rd  real-double    ..28.4089                       
-~ %rh  real-half      .~-34
-~ %rq  real-quad      ...17
+~ %rd  real-double    .~28.4089                       
+~ %rh  real-half      .~.34
+~ %rq  real-quad      .~~17
 ~ %rs  real-single    .-576.78
 
 ~ %sb  signed 2
