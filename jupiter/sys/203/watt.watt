@@ -1,4 +1,4 @@
-!:
+::
 ::              Watt kernel 203.  This file is in the public domain.
 ::
 =>  src=.
@@ -774,8 +774,14 @@
         /remlysfynwerrycsugnysnyllyndyndemluxfedsedbecmun\
         /lyrtesmudnytbyrsenwegfyrmurtelreptegpecnelnevfes'
     |%
-    ++  ind  |=(a=@ =+(b=0 |-(?:(=(a (tod b)) b $(b +(b))))))
-    ++  ins  |=(a=@ =+(b=0 |-(?:(=(a (tos b)) b $(b +(b))))))
+    ++  ind  |=  a=@  
+             =+  b=0
+             |-  ^-  (unit ,@)
+             ?:(=(256 b) ~ ?:(=(a (tod b)) [~ b] $(b +(b))))
+    ++  ins  |=  a=@  
+             =+  b=0
+             |-  ^-  (unit ,@)
+             ?:(=(256 b) ~ ?:(=(a (tos b)) [~ b] $(b +(b))))
     ++  tod  |=(a=@ ?>((lth a 256) (cut 3 [(mul 3 a) 3] dex)))
     ++  tos  |=(a=@ ?>((lth a 256) (cut 3 [(mul 3 a) 3] sis)))
     --
@@ -2220,9 +2226,6 @@
     ++  bix  (bass 16 (stun [2 2] six))
     ++  hif  (boss 256 ;~(plug tip tiq (easy ~)))
     ++  huf  (bass 0x1.0000 ;~(plug hif ;~(pfix hep hif) (easy ~)))
-    :: ++  huf  %+  cook 
-    ::           |=([a=@ b=@] (mix (lsh 4 1 a) (mix a b))
-    ::         ;~(plug hif ;~(pfix hep hif))
     ++  pev  (bass 64 ;~(plug sev (stun [0 4] siv)))
     ++  pew  (bass 64 ;~(plug sew (stun [0 4] siw)))
     ++  piv  (bass 64 (stun [5 5] siv))
@@ -2259,8 +2262,8 @@
              ==
     ++  sox  (cook |=(a=@ (sub a 87)) (shim 'a' 'f'))
     ++  ted  (bass 10 ;~(plug sed (stun [0 2] sid)))
-    ++  tip  (cook |=(a=@ (ins:po a)) til)
-    ++  tiq  (cook |=(a=@ (ind:po a)) til)
+    ++  tip  (sear |=(a=@ (ins:po a)) til)
+    ++  tiq  (sear |=(a=@ (ind:po a)) til)
     ++  tid  (bass 10 (stun [3 3] sid))
     ++  til  (boss 256 (stun [3 3] low))
     ++  voy  ;~(pfix bas ;~(pose bas soq bix))
@@ -2275,10 +2278,9 @@
     ++  dem  (ape (bass 1.000 ;~(plug ted:ab (star ;~(pfix dog tid:ab)))))
     ++  dim  (ape (bass 10 ;~(plug sed:ab (star sid:ab))))
     ++  fed  ;~  pose
-               (cold 0 hep)
                (bass 0x1.0000.0000 (most doh huf:ab))
                hif:ab
-               tip:ab
+               tiq:ab
              ==
     ++  hex  (ape (bass 0x1.0000 ;~(plug qex:ab (star ;~(pfix dog qix:ab)))))
     ++  lip  =+  tod=(ape ted:ab) 
@@ -2336,11 +2338,12 @@
               =>  ^+(. .(rex ?~(f.yug rex ['.' (s-co f.yug)])))
               :-  '~'
               ?:  &(=(0 d.yug) =(0 m.yug) =(0 h.yug) =(0 s.yug))
-                ['s' '0' rex]
-              =>  ^+(. ?:(=(0 s.yug) . .(rex ['s' (a-co s.yug)])))
-              =>  ^+(. ?:(=(0 m.yug) . .(rex ['m' (a-co m.yug)])))
-              =>  ^+(. ?:(=(0 h.yug) . .(rex ['h' (a-co h.yug)])))
-              ?:(=(0 d.yug) rex ['d' (a-co d.yug)])
+                ['.' 's' '0' rex]
+              =>  ^+(. ?:(=(0 s.yug) . .(rex ['.' 's' (a-co s.yug)])))
+              =>  ^+(. ?:(=(0 m.yug) . .(rex ['.' 'm' (a-co m.yug)])))
+              =>  ^+(. ?:(=(0 h.yug) . .(rex ['.' 'h' (a-co h.yug)])))
+              =>  ^+(. ?:(=(0 d.yug) . .(rex ['.' 'd' (a-co d.yug)])))
+              +.rex
             ==
           ::
               %f
@@ -2354,18 +2357,39 @@
               %f  ((ro-co [3 10 4] |=(a=@ ~(d ne a))) q.p.lot)
               %s  ((ro-co [4 16 8] |=(a=@ ~(x ne a))) q.p.lot)
             ==
+          ::
               %p
-            =+  dyz=(met 4 q.p.lot)
-            ?:  =(0 dyz)
-              ['~' '-' rex]
+            =+  dyx=(met 3 q.p.lot)
+            :-  '~'
+            ?:  (lte dyx 1)
+              (weld (trip (tod:po q.p.lot)) rex)
+            ?:  =(2 dyx)
+              ;:  weld 
+                (trip (tos:po (end 3 1 q.p.lot)))
+                (trip (tod:po (rsh 3 1 q.p.lot)))
+                rex
+              ==
+            =+  [dyz=(met 5 q.p.lot) fin=|]
             |-  ^-  tape
             ?:  =(0 dyz)
               rex
-            =+  syb=(cut 4 [(dec dyz) 1] q.p.lot)
-            =+  ^=  hed  %+  weld  
-                           (trip (tos:po (end 3 1 syb))) 
-                         (trip (tod:po (rsh 3 1 syb)))
-            (weld `tape`['.' hed] $(dyz (dec dyz)))
+            %=    $
+                fin      &
+                dyz      (dec dyz)
+                q.p.lot  (rsh 5 1 q.p.lot)
+                rex
+              =+  syb=(end 5 1 q.p.lot)
+              =+  [nim=(end 4 1 syb) dur=(rsh 4 1 syb)]
+              ;:  weld
+                (trip (tos:po (end 3 1 dur)))
+                (trip (tod:po (rsh 3 1 dur)))
+                `tape`['-' ~]
+                (trip (tos:po (end 3 1 nim)))
+                (trip (tod:po (rsh 3 1 nim)))
+                `tape`?:(fin ['-' '-' ~] ~)
+                rex
+              ==
+            ==
           ::
               %r
             ?+  hay  (z-co q.p.lot)
@@ -2521,6 +2545,7 @@
           ;~(pose ;~(pfix ;~(plug dot dot) (most dot qix:ab)) (easy ~))
         ==
       ::
+        (stag %p fed:ag)
       ==
     ++  nuck
       %+  knee  *coin  |.  ~+
