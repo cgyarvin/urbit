@@ -309,6 +309,7 @@
   =+  gud=(boot now pay)
   :-  p.gud
   =>  `_..boot`q.gud
+  ~&  [%hello %world]
   |%                                            ::  front door
   ++  peek
     |=  [now=time hap=path]  ^-  (unit)
@@ -389,7 +390,7 @@
                 =+(gef=(~(get by ear) q.u.yop) =(?~(gef 1 u.gef) p.u.yop))
             ==
           q:(pile now q.u.yop val)
-        ~&  (sell !;(*type [%putt lap]))
+        ::  ~&  [%putt lap]
         ..putt(rig (~(clot re rig) lap [~ now val]))
       --
   =+  pod=*(list ,[p=term q=ship])

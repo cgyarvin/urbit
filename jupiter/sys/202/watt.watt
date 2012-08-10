@@ -1,4 +1,4 @@
-!:
+::
 ::              Watt kernel 202.  This file is in the public domain.
 ::
 =>  src=.
@@ -2251,8 +2251,7 @@
     ++  bix  (bass 16 (stun [2 2] six))
     ++  hif  (boss 256 ;~(plug tip tiq (easy ~)))
     ++  huf  %+  cook  
-               |=  [a=@ b=@] 
-               =+  c=~(zug mu ~(zig mu [a b]))
+               |=([a=@ b=@] ~(zug mu ~(zig mu [a b])))
              ;~(plug hif ;~(pfix hep hif))
     ++  pev  (bass 64 ;~(plug sev (stun [0 4] siv)))
     ++  pew  (bass 64 ;~(plug sew (stun [0 4] siw)))

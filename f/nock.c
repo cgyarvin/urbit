@@ -119,9 +119,9 @@ _nock_hint(u2_noun  zep,                                          //  transfer
       return pro;
     }
 
-    case c3__loaf: {
+    case c3__slog: {
       u2_tx_sys_bit(u2_Wire, u2_yes);
-      u2_tx_loaf(u2_Wire, hod);
+      u2_tx_slog(u2_Wire, hod);
       u2_tx_sys_bit(u2_Wire, u2_no);
 
       u2z(hod);

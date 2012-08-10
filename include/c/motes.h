@@ -820,6 +820,7 @@
 #   define c3__slip   c3_s4('s','l','i','p')
 #   define c3__sliv   c3_s4('s','l','i','v')
 #   define c3__sloc   c3_s4('s','l','o','c')
+#   define c3__slog   c3_s4('s','l','o','g')
 #   define c3__slon   c3_s4('s','l','o','n')
 #   define c3__slop   c3_s4('s','l','o','p')
 #   define c3__slos   c3_s4('s','l','o','s')

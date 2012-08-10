@@ -673,15 +673,24 @@ _print_wall(u2_noun wal,
 }
 #endif
             
-/* u2_tx_loaf(): print debug loaf.
+/* u2_tx_slog(): print debug syslog [0-3 tank] 0=debug 3=alarm
 */
 void
-u2_tx_loaf(u2_ray  wir_r,
+u2_tx_slog(u2_ray  wir_r,
            u2_noun luf)                                           //  retain
 {
   extern void u2_ve_tank(c3_l tab_l, u2_noun tac);
   {
-    u2_ve_tank(0, u2k(luf));
+    if ( u2_yes == u2du(luf) ) {
+      u2_noun pri = u2h(luf);
+
+      switch ( pri ) {
+        case 3: printf(">>> "); break;
+        case 2: printf(">> "); break;
+        case 1: printf("> "); break;
+      }
+      u2_ve_tank(0, u2k(u2t(luf)));
+    }
   }
 }
 

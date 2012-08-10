@@ -253,10 +253,10 @@
 
     /** Direct logging.
     **/
-      /* u2_tx_loaf(): direct debug output.
+      /* u2_tx_slog(): print debug syslog [0-3 tank] 0=debug 3=alarm
       */
         void
-        u2_tx_loaf(u2_ray  wir_r, 
+        u2_tx_slog(u2_ray  wir_r,
                    u2_noun luf);                                   //  retain
 
       /* u2_tx_warn(): report a warning by internal file and line.
