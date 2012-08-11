@@ -482,6 +482,7 @@
 /***
 ****
 ***/
+#if 0
     static u2_noun
     _ap_snig_in(u2_noun gop)
     {
@@ -531,7 +532,7 @@
           _ap_snig_in(gop));
 
     }
-
+#endif
     static u2_noun                                                //  produce
     _smcl_in(u2_wire wir_r,
              u2_noun q_gen)                                       //  retain
@@ -572,10 +573,12 @@
          _smcl_in(wir_r, q_gen));
     }
   }
+#if 0
   _open_do_p(smdq)
   {
     return _ap_snig(p_gen);
   }
+#endif
   _open_do_pq(smsg)   //  ;~
   {
     if ( (u2_nul == q_gen) ) {
@@ -732,7 +735,7 @@
         _open_pq  (sgls);
 
         _open_pq  (smcl);
-        _open_p   (smdq);
+        // _open_p   (smdq);
         _open_pq  (smsg);
       }
     }
