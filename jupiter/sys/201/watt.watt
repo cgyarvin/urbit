@@ -1309,7 +1309,7 @@
   ::
   ::  Tier 5 molds
   ::
-  ++  char  ,@ta
+  ++  char  ,@t
   ++  coin  $%  [%% p=mole]
                 [%blob p=*]
                 [%many p=(list coin)]
@@ -4709,7 +4709,7 @@
         [%list *]
       =-  ?~  tok 
             ~ 
-          [~ %rose [[' ' ~] (weld (trip p.q.ham) '(' ~) [')' ~]] u.tok]
+          [~ %rose [[' ' ~] ['(' ~] [')' ~]] u.tok]
       ^=  tok
       |-  ^-  (unit (list tank))
       ?:  ?=(@ lum)
@@ -4798,10 +4798,10 @@
   ++  doge
     |=  ham=calf
     =-  ?+  woz  woz
-          [%beam [%atom %c]]    %yarn
+          [%beam [%atom %t]]    %yarn
           [%beam %yarn]         %wool
           [%list * [%atom %ta]] %path
-          [%list * [%atom %c]]  %yarn
+          [%list * [%atom %t]]  %yarn
           [%list * %yarn]       %wool
         ==
     ^=  woz
@@ -6387,7 +6387,10 @@
           ==
         ==
       :-  '"'
-        (stag %smdq soil)
+        %+  cook
+          |=  a=(list (list beer))
+          [%smdq |-(?~(a ~ (weld i.a $(a t.a))))]
+        (most dog soil)
       :-  ['a' 'z']
         (stag %cnhx rope)
       :-  '|'
