@@ -903,7 +903,7 @@ u2_cn_nock(u2_noun bus,
   u2_flag bit;
 
   bit = u2_tx_sys_bit(u2_Wire, u2_no);
-  c3_assert(bit == u2_yes);
+  //  c3_assert(bit == u2_yes);
   bit = u2_tx_glu_bit(u2_Wire, u2_yes);
 
   pro = _nock_cool(bus, fol);

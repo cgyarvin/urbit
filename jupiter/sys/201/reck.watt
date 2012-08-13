@@ -1,5 +1,5 @@
-::
-::              Reck kernel 203.  This file is in the public domain.
+!:
+::              Reck kernel 201.  This file is in the public domain.
 ::
 =>  ::
   ::::          Tier Gy, general geometry
@@ -81,7 +81,10 @@
             --
         =+  sys=*game
         |%
-        ++  line
+        ++  lean
+          |=  [dub=tube tun=tune]
+          !!
+        ++  line                                    ::  execute a line
           |=  [dub=tube txt=@ta]
           ~|  %born-line
           ^-  [p=lime q=_..line]
@@ -103,7 +106,9 @@
           =+  dof=(slop red.tuy ser.tuy)
           =+  ^=  vax  ^-  vase
               (slop [[%face %% p.dof] q.dof] nub.tuy)
-          =+  wol=(slap vax q.fob)
+          =+  tun=(slab [vax q.fob] |=(* ~))
+          ::  =+  wol=(slap vax q.fob)
+          =+  wol=`vase`?>(?=([0 *] tun) p.tun)
           ?+    p.fob  !!
               %%
             =+  ham=~(dole ut p.wol)
@@ -372,7 +377,7 @@
         =+  laz=(~(get by ear) lap)
         =+  dar=?~(laz 1 u.laz)
         =+  vuz=(flop `path`[~(rent co [~ %ud dar]) (flop lap)])
-        ::  ~&  (sell !;(*type [%pile vuz]))
+        ~&  [%got `path`vuz]
         :-  dar
         =>  .(rig (~(clot re rig) vuz [~ now val]))
         =+  wys=(~(chit re rig) lap)
@@ -390,7 +395,7 @@
                 =+(gef=(~(get by ear) q.u.yop) =(?~(gef 1 u.gef) p.u.yop))
             ==
           q:(pile now q.u.yop val)
-        ::  ~&  [%putt lap]
+        ~&  [%got `path`lap]
         ..putt(rig (~(clot re rig) lap [~ now val]))
       --
   =+  pod=*(list ,[p=term q=ship])
@@ -551,6 +556,8 @@
   ++  kiwi                                  ::  system product
     $%  [%o p=@ta q=*]                      ::  opaque output by app
         [%p p=tube q=@ud r=tank]            ::  print session, tab, text
+        [%t p=(list)]                       ::  print trace
+        [%x p=(list)]                       ::  print request list
         [%w p=time]                         ::  request alarm
     ==                                      ::
   ++  lamb                                  ::  system event
@@ -810,7 +817,8 @@
       =-  [(~(put by q.tec) q.u.zav p.fyq) q.fyq]
       ^=  fyq
       |-  ^-  [p=@ud q=(list lime)] 
-      =+  pey=(pray:cam (flop [~(rent co [~ %ud +(bem)]) (flop q.u.zav)]))
+      =+  vat=(flop [~(rent co [~ %ud +(bem)]) (flop q.u.zav)])
+      =+  pey=(pray:cam vat)
       ?~  pey
         [bem baz]
       $(bem +(bem), baz [(r.tec +(bem) u.mey u.pey) baz])
@@ -964,7 +972,7 @@
       |-  ^+  rif
       ?~  dib
         rif
-      ?:  =(i.p.qey p.i.dib)
+      ?.  =(i.p.qey p.i.dib)
         $(dib t.dib)
       ^$(p.qey t.p.qey, ram [p.i.dib ram], a q.i.dib, rif $(dib t.dib))
     ::

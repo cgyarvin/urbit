@@ -9,9 +9,11 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <setjmp.h>
+#include <signal.h>
 #include <gmp.h>
 #include <stdint.h>
 #include <ev.h>
+#include <sigsegv.h>
 
 #define U2_GLOBAL
 #define C3_GLOBAL
@@ -129,16 +131,24 @@ u2_ve_sysopt()
   u2_Flag_Verbose = u2_ckd_by_got(u2_ct(map), c3__veb);
 }
 
-ev_io stdin_watcher;
+static jmp_buf Signal_buf;
+#ifndef SIGSTKSZ
+# define SIGSTKSZ 16384
+#endif
+static uint8_t Sigstk[SIGSTKSZ];
+
+volatile enum { sig_none, sig_overflow, sig_interrupt } Sigcause;
+ev_io Stdin_watcher;
+struct ev_loop *Loop_u;
 
 static void
-stdin_cb(struct ev_loop *lup_e, struct ev_io *w, int revents)
+stdin_cb(struct ev_loop *lup_u, struct ev_io *w, int revents)
 {
   c3_c* lin_c = c3_comd_line(u2_Host.fel_c, "");
 
   if ( !lin_c ) {
-    ev_io_stop (lup_e, w);
-    ev_unloop (lup_e, EVUNLOOP_ALL);
+    ev_io_stop (lup_u, w);
+    ev_unloop (lup_u, EVUNLOOP_ALL);
   }
   else if ( !*lin_c ) {
     free(lin_c);
@@ -148,6 +158,26 @@ stdin_cb(struct ev_loop *lup_e, struct ev_io *w, int revents)
     free(lin_c);
   }
   printf(": "); fflush(stdout);
+}
+
+static void
+overflow_handler(int emergency,
+                      stackoverflow_context_t scp)
+{
+  if ( 1 == emergency ) {
+    write(2, "stack emergency\n", strlen("stack emergency" + 2));
+    exit(1);
+  } else {
+    Sigcause = sig_overflow;
+    longjmp(Signal_buf, 1);
+  }
+}
+
+static void
+interrupt_handler(int x)
+{
+  Sigcause = sig_interrupt;
+  longjmp(Signal_buf, 1);
 }
 
 c3_i
@@ -206,26 +236,66 @@ main(c3_i   argc,
     u2_cm_done();
   }
 
+  //  Install signal handlers and set buffers.
+  //
+  //  Note that we use the sigmask-restoring variant.  Essentially, when
+  //  we get a signal, we force the system back into the just-booted state.
+  //  If anything goes wrong during boot (above), it's curtains.
+  {
+    if ( 0 != setjmp(Signal_buf) ) {
+      switch ( Sigcause ) {
+        case sig_overflow: printf("[stack overflow]\n"); break;
+        case sig_interrupt: printf("[interrupt]\n"); break;
+        default: printf("[signal error!]\n"); break;
+      }
+      Sigcause = sig_none;
+
+      signal(SIGINT, SIG_DFL);
+      stackoverflow_deinstall_handler();
+
+      if ( Loop_u ) {
+        ev_loop_destroy(Loop_u);
+        Loop_u = 0;
+      }
+
+      //  Print the trace, do a GC, etc.
+      //
+      //  This is half-assed at present, so we exit.
+      //
+      u2_ve_sway(0, u2k(u2_wire_tax(u2_Wire)));
+
+      exit(1);
+    }
+    if ( -1 == stackoverflow_install_handler
+        (overflow_handler, Sigstk, SIGSTKSZ) )
+    {
+      fprintf(stderr, "overflow_handler: install failed\n");
+      exit(1);
+    }
+    signal(SIGINT, interrupt_handler);
+  }
+
   {
     u2_noun hep; 
-    
+ 
     if ( u2_none != (hep = u2_ckd_by_get(u2k(u2_Host.map), c3__hep)) ) {
       struct ev_loop *lup_u = ev_default_loop(0);
 
-      u2_Host.lup_u = lup_u;
+      u2_Host.lup_u = Loop_u = lup_u;
 
       fprintf(stderr, "http: on port 8080\n");
       u2_ve_http_start(8080);
 
       printf(": "); fflush(stdout);
-      ev_io_init(&stdin_watcher, stdin_cb, 0, EV_READ);
-      ev_io_start(lup_u, &stdin_watcher);
+      ev_io_init(&Stdin_watcher, stdin_cb, 0, EV_READ);
+      ev_io_start(lup_u, &Stdin_watcher);
 
       ev_loop(lup_u, 0);
 
       return 0;
     }
     else {
+      Loop_u = 0;
       //  Process commands.  Replace with actual event loop.
       //
       while ( 1 ) {

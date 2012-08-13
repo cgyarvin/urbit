@@ -24,6 +24,8 @@ CLD=gcc -O3 -L/usr/local/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
+LIBS=-lev -lgmp -lreadline -ltermcap -lsigsegv
+
 INCLUDE=include
 GENERATED=generated
 DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN)
@@ -1980,7 +1982,7 @@ all: $(BIN)/vere
 
 $(BIN)/vere: $(VERE_OFILES)
 	mkdir -p $(BIN)
-	$(CLD) -o $(BIN)/vere $(VERE_OFILES) -lev -lgmp -lreadline -ltermcap
+	$(CLD) -o $(BIN)/vere $(VERE_OFILES) $(LIBS)
 
 tags:
 	ctags -R -f .tags --exclude=root

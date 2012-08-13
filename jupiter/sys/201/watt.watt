@@ -3251,6 +3251,10 @@
         [%reed p=tile q=tile]                               ::  pair/tag
         [%weed p=gene]                                      ::  example
     ==
+  ++  tune  $%  [0 p=vase]
+                [1 p=(list)]
+                [2 p=(list ,[@ta *])]
+            ==
   ++  twig  (list knot)
   ++  type
     $|  ?(%noun %void) 
@@ -4229,6 +4233,14 @@
   =+  gun=(~(mint ut typ) %noun gen)
   [p.gun ~|(%slam .*([q.gat q.sam] q.gun))]
 ::
+++  slab
+  |=  [[vax=vase gen=gene] sky=_|+(* *(unit))]  ^-  tune
+  =+  gun=(~(mint ut p.vax) %noun gen)
+  =+  ton=(mock [q.vax q.gun] sky)
+  ?:  ?=(0 -.ton)
+    [%0 p.gun p.ton]
+  ton
+::
 ++  slap
   |=  [vax=vase gen=gene]  ^-  vase
   =+  gun=(~(mint ut p.vax) %noun gen)
@@ -4783,7 +4795,7 @@
         [%unit *]
       =-  ?~  tok 
             ~ 
-          [~ %rose [[' ' ~] (weld (trip p.q.ham) '(' ~) [')' ~]] u.tok ~]
+          [~ %rose [[' ' ~] ['(' ~] [')' ~]] u.tok ~]
       ^=  tok  ^-  (unit tank)
       ?@  lum
         ?.(=(~ lum) ~ [~ %leaf '~' ~])
@@ -6311,6 +6323,7 @@
           (stag %wtpm ;~(pfix pam (ifix [pel per] (most ace wide))))
           ::  (stag %bccb (stag %ktpm ;~(pfix pam wide)))
           (stag %dtpt (stag %f (cold & pam)))
+          (cook |=(a=twig [%cnts a ~]) rope)
         ==
       :-  '\''
         (stag %dtpt (stag %ta qut))
@@ -6397,6 +6410,7 @@
         ;~  pose
           (stag %wtbr ;~(pfix bar (ifix [pel per] (most ace wide))))
           (stag %dtpt (stag %f (cold | bar)))
+          (cook |=(a=twig [%cnts a ~]) rope)
         ==
       :-  '~'
         ;~  pfix  sig
@@ -6754,7 +6768,15 @@
     ::
       %+  cook
         |=(a=knot [a ~])
-      (cook |=(a=axis [~ a]) ;~(pose ;~(pfix lus dim:ag) ven (cold 1 dot)))
+      %+  cook 
+        |=(a=axis [%& a]) 
+      ;~  pose 
+        ;~(pfix lus dim:ag) 
+        ;~(pfix pam (cook |=(a=@ ?:(=(0 a) 0 (mul 2 +($(a (dec a)))))) dim:ag))
+        ;~(pfix bar (cook |=(a=@ ?:(=(0 a) 1 +((mul 2 $(a (dec a)))))) dim:ag))
+        ven 
+        (cold 1 dot)
+      ==
     ==
   ::
   ++  tall  (knee *gene |.(~+((wart ;~(pose (norm &) long)))))
