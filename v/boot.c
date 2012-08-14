@@ -318,15 +318,15 @@ u2_ve_rest()
       }
 #endif
       if ( u2_Host.kno_w <= 203 ) {
-        printf("loading vane...\n");
+        // printf("loading vane...\n");
         u2_ve_tool(c3__vane);
-        printf("loaded vane.\n");
+        // printf("loaded vane.\n");
       }
-#ifdef RECK
+#if 0
       if ( u2_Host.kno_w <= 203 ) {
-        printf("loading reck...\n");
+        // printf("loading reck...\n");
         u2_ve_tool(c3__reck);
-        printf("loaded reck.\n");
+        // printf("loaded reck.\n");
       }
 #endif
     }

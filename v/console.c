@@ -541,7 +541,7 @@ u2_ve_line(c3_c* lin_c)
     u2_noun lin = u2_ci_string(lin_c);
 
 #ifdef RECK
-    u2_ve_reck_line(&u2_Host.rec_u[0], lin);
+    u2_reck_line(&u2_Host.rec_u[0], lin);
 #else
     u2_ve_zuse_line(lin);
 #endif

@@ -228,15 +228,15 @@
 
     /**  Kernel control.
     **/
-      /* u2_ve_reck_line(): apply a reck line (protected).
+      /* u2_reck_line(): apply a reck line (protected).
       */
         void
-        u2_ve_reck_line(u2_reck* rec_u, u2_noun lin);
+        u2_reck_line(u2_reck* rec_u, u2_noun lin);
 
-      /* u2_ve_reck_boot(): boot the reck engine (unprotected).
+      /* u2_reck_boot(): boot the reck engine (unprotected).
       */
         void
-        u2_ve_reck_boot(u2_reck* rec_u);
+        u2_reck_boot(u2_reck* rec_u);
 
     /**  Execution system.
     **/

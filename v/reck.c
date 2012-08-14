@@ -1077,9 +1077,11 @@ u2_reck_boot(u2_reck* rec_u)
     u2z(hoe);
   } 
   else {
+    printf("loading reck...\n");
     u2_reck_init(rec_u, 
                  u2_Host.kno_w, 
                  u2k(u2_Host.ver_e[u2_Host.kno_w].ken));
+    printf("loaded reck.\n");
 
     /* initial sync with filesystem
     */
