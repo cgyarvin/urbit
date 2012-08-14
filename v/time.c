@@ -1,4 +1,4 @@
-/* v/reck.c
+/* v/time.c
 **
 **  This file is in the public domain.
 */

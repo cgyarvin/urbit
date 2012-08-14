@@ -251,7 +251,26 @@
         void
         u2_time_out_ts(struct timespec* tim_ts, u2_noun now);
 
-    /**  Filesystem.
+
+    /**  Filesystem (new api).
+    **/
+      /* u2_sync_load(): load file or bail.
+      */
+        u2_noun
+        u2_sync_load(c3_c* pas_c);
+
+      /* u2_sync_save(): save file or bail.
+      */
+        void
+        u2_sync_save(c3_c* pas_c, u2_noun tim, u2_atom pad);
+
+      /* u2_sync_reck(): traverse filesystem to commit changes -> lamb
+      */
+        u2_noun
+        u2_sync_reck(u2_reck* rec_u);
+
+
+    /**  Filesystem (old api).
     **/
       /* u2_ve_file(): load internal file as atom from local or system.
       */
@@ -298,6 +317,12 @@
       */
         void
         u2_reck_boot(u2_reck* rec_u);
+
+      /* u2_reck_peek(): query the reck namespace.
+      */
+        u2_noun
+        u2_reck_peek(u2_reck* rec_u, u2_noun hap);
+
 
     /**  Execution system.
     **/

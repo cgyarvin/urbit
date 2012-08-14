@@ -2106,8 +2106,8 @@ VERE_OFILES=\
        v/osystem.o \
        v/time.o \
        v/http.o \
+       v/sync.o \
        v/reck.o \
-       c/gunn.o \
        $(BASE_OFILES) \
        $(OUT_OFILES)
 
