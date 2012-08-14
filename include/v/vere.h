@@ -139,14 +139,21 @@
         c3_w    kno_w;                    //  kernel stage
         c3_w    rno_w;                    //  rotor index (always 0)
 
-        c3_d    now_d;                    //  current time
+        struct {                          //  function gates, use mung
+          u2_noun ream;                   //  ream (parse text -> gene)
+          u2_noun slam;                   //  call ([vase vase] -> vase)
+          u2_noun slap;                   //  layer ([vase gene] -> vase)
+          u2_noun slop;                   //  cell ([vase vase] -> vase)
+        } toy;
+
         u2_noun now;                      //  current time, as noun
         u2_noun wen;                      //  current time, as text
 
         u2_noun ken;                      //  kernel formula
+        u2_noun syd;                      //  kernel seed 
         u2_noun rec;                      //  rotor core
       } u2_reck;
-      
+ 
     /* u2_host: entire host.
     */
       typedef struct _u2_host {

@@ -1,5 +1,5 @@
 !:
-::              Reck kernel 201.  This file is in the public domain.
+::              Reck kernel 200.  This file is in the public domain.
 ::
 =>  ::
   ::::          Tier Gy, general geometry
@@ -145,6 +145,9 @@
               (slop [[%face %% p.dof] q.dof] nub.tuy)
           %-  (lean p.fob dub tuy)
           (slab [(slop [[%face %% p.dof] q.dof] nub.tuy) q.fob] (lick cam))
+        ::
+        ++  lube                                    ::  construct context
+          !!
         --
       ::
           :-  %cary                             ::  %cary, revision control

@@ -135,7 +135,7 @@ _time_in_ts(struct timespec* tim_ts)
 }
 
 #if 0
-/* _time_out_ts(): struct timespecl from urbit time.
+/* _time_out_ts(): struct timespec from urbit time.
 */
 static void
 _time_out_ts(struct timespec* tim_ts, u2_noun now)
@@ -149,19 +149,171 @@ _time_out_ts(struct timespec* tim_ts, u2_noun now)
 }
 #endif
 
+/* _sync_load(): load file or bail.
+*/
 static u2_noun
-_reck_peek(u2_reck* rec_u, u2_noun hap)
+_sync_load(c3_c* pas_c)
 {
-  u2_noun sam = u2_ve_slop(u2nc(u2nc(c3__atom, 0), u2k(rec_u->now)),
-                           u2nc(c3__noun, hap));
+  struct stat buf_b;
+  c3_i        fid_i = open(pas_c, O_RDONLY, 0644);
+  c3_w        fln_w, red_w;
+  c3_y*       pad_y;
 
-  return u2_ve_hard("reck", "peek", sam);
+  if ( (fid_i < 0) || (fstat(fid_i, &buf_b) < 0) ) {
+    perror(pas_c);
+    return u2_cm_bail(c3__fail);
+  }
+  fln_w = buf_b.st_size;
+  pad_y = malloc(buf_b.st_size);
+
+  red_w = read(fid_i, pad_y, fln_w);
+  close(fid_i);
+
+  if ( fln_w != red_w ) {
+    free(pad_y);
+    return u2_cm_bail(c3__fail);
+  }
+  else {
+    u2_noun pad = u2_ci_bytes(fln_w, (c3_y *)pad_y); 
+    free(pad_y);
+
+    return pad;
+  }
 }
 
-/* _time_set(): set the reck time.
+/* _sync_save(): save file or bail.
 */
 static void
-_time_set(u2_reck* rec_u)
+_sync_save(c3_c* pas_c, u2_noun tim, u2_atom pad)
+{
+  c3_i  fid_i = open(pas_c, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+  c3_w  fln_w, rit_w;
+  c3_y* pad_y;
+
+  if ( fid_i < 0 ) {
+    perror(pas_c);
+    u2_cm_bail(c3__fail);
+  }
+
+  fln_w = u2_met(3, pad);
+  pad_y = malloc(fln_w);
+  u2_cr_bytes(0, fln_w, pad_y, pad);
+  u2z(pad);
+
+  rit_w = write(fid_i, pad_y, fln_w);
+  close(fid_i);
+  free(pad_y);
+
+  if ( rit_w != fln_w ) {
+    perror(pas_c);
+    u2_cm_bail(c3__fail);
+  }
+
+  {
+    struct timeval tim_tv[2];
+
+    _time_out_tv(&tim_tv[0], u2k(tim));
+    _time_out_tv(&tim_tv[1], tim);
+ 
+    utimes(pas_c, tim_tv);
+  }
+}
+
+/* _reck_root(): tool from boot.
+*/
+static u2_noun
+_reck_root(const c3_c *txt_c, u2_noun ken)
+{
+  c3_c *ful_c = alloca(7 + strlen(txt_c));
+
+  strcpy(ful_c, "=>  !%  ");
+  strcat(ful_c, txt_c);
+
+  return u2_cn_nock(0, u2_cn_nock(u2_ci_string(ful_c), u2k(ken)));
+}
+
+/* _reck_ream(): ream with toy.
+*/
+static u2_noun
+_reck_ream(u2_reck* rec_u, u2_noun txt)
+{
+  return u2_cn_mung(u2k(rec_u->toy.ream), txt);
+}
+
+/* _reck_slam(): slam with toy.
+*/
+static u2_noun
+_reck_slam(u2_reck* rec_u, u2_noun gat, u2_noun sam)
+{
+  return u2_cn_mung(u2k(rec_u->toy.slam), u2nc(gat, sam));
+}
+
+/* _reck_slap(): slap with toy.
+*/
+static u2_noun
+_reck_slap(u2_reck* rec_u, u2_noun vax, u2_noun gen)
+{
+  return u2_cn_mung(u2k(rec_u->toy.slap), u2nc(vax, gen));
+}
+
+/* _reck_slop(): slop with toy.
+*/
+static u2_noun
+_reck_slop(u2_reck* rec_u, u2_noun hed, u2_noun tal)
+{
+  return u2_cn_mung(u2k(rec_u->toy.slop), u2nc(hed, tal));
+}
+
+/* _reck_hard(): function against vase, producing noun.
+*/
+static u2_noun
+_reck_hard(u2_reck* rec_u, u2_noun vax, const c3_c* txt_c, u2_noun sam)
+{
+  u2_noun gen = _reck_ream(rec_u, u2_ci_string(txt_c));
+  u2_noun gat = _reck_slap(rec_u, vax, gen);
+  u2_noun ret = u2_cn_mung(u2k(u2t(gat)), sam);
+
+  u2z(gat);
+  return ret;
+}
+
+/* _reck_soft(): function against vase, producing vase.
+*/
+static u2_noun
+_reck_soft(u2_reck* rec_u, u2_noun vax, const c3_c* txt_c, u2_noun sam)
+{
+  u2_noun gen = _reck_ream(rec_u, u2_ci_string(txt_c));
+  u2_noun gat = _reck_slap(rec_u, vax, gen);
+
+  return _reck_slam(rec_u, gat, sam);
+}
+
+/* _reck_load(): layer file on vase -> vase.
+*/
+static u2_noun
+_reck_load(u2_reck* rec_u, u2_noun vax, c3_c* pax_c)
+{
+  u2_noun txt = _sync_load(pax_c);
+  u2_noun gen = _reck_ream(rec_u, txt);
+
+  return _reck_slap(rec_u, vax, gen);
+}
+
+/* _reck_load_temp(): _reck_load() for old fs structure.
+*/
+static u2_noun
+_reck_load_temp(u2_reck* rec_u, u2_noun vax, c3_w kno_w, c3_c* pax_c)
+{
+  c3_c ful_c[2048];
+ 
+  sprintf(ful_c, "%s/sys/%d/%s", u2_Local, kno_w, pax_c);
+  return _reck_load(rec_u, vax, ful_c);
+}
+
+/* _reck_time_set(): set the reck time.
+*/
+static void
+_reck_time_set(u2_reck* rec_u)
 {
   struct timeval tim_tv;
 
@@ -170,7 +322,49 @@ _time_set(u2_reck* rec_u)
   rec_u->now = _time_in_tv(&tim_tv);
 
   u2z(rec_u->wen);
-  rec_u->wen = u2_ve_scot(c3_s2('d','a'), u2k(rec_u->now));
+  rec_u->wen = _reck_hard
+    (rec_u, 
+     u2k(rec_u->syd), 
+     "|=([a=@ta b=@] ~(rent co ~ a b))",
+     u2nc(c3_s2('d','a'), u2k(rec_u->now)));
+
+  {
+    c3_c* dyt_c = u2_cr_string(rec_u->wen);
+
+    printf("time: %s\n", dyt_c);
+    free(dyt_c);
+  }
+}
+
+/* u2_reck_init(): load the reck engine, from kernel.
+*/
+void
+u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
+{
+  rec_u->kno_w = kno_w;
+  rec_u->rno_w = 0;
+
+  rec_u->ken = ken;
+  rec_u->syd = _reck_root("seed", u2k(ken));
+
+  rec_u->toy.ream = _reck_root("ream", u2k(ken));
+  rec_u->toy.slam = _reck_root("slam", u2k(ken));
+  rec_u->toy.slap = _reck_root("slap", u2k(ken));
+  rec_u->toy.slop = _reck_root("slop", u2k(ken));
+
+  _reck_time_set(rec_u);
+  {
+    u2_noun cer = _reck_load_temp(rec_u, u2k(rec_u->syd), kno_w, "reck.watt");
+    u2_noun sam = u2nc(u2nc(c3__atom, 0), u2k(rec_u->now));
+
+    rec_u->rec = _reck_slam(rec_u, cer, sam);
+  }
+}
+
+static u2_noun
+_reck_peek(u2_reck* rec_u, u2_noun hap)
+{
+  return _reck_hard(rec_u, u2k(rec_u->rec), "peek", u2nc(u2k(rec_u->now), hap));
 }
 
 /* _walk_in(): inner loop of _walk().
@@ -292,76 +486,6 @@ static u2_noun
 _sync_peek_data(u2_reck* rec_u, u2_flag rey, u2_noun hac)
 {
   return _reck_peek(rec_u, _sync_path(rec_u, rey, 'd', hac));
-}
-
-/* _sync_load(): load file or bail.
-*/
-static u2_noun
-_sync_load(c3_c* pas_c)
-{
-  struct stat buf_b;
-  c3_i        fid_i = open(pas_c, O_RDONLY, 0644);
-  c3_w        fln_w, red_w;
-  c3_y*       pad_y;
-
-  if ( (fid_i < 0) || (fstat(fid_i, &buf_b) < 0) ) {
-    perror(pas_c);
-    return u2_cm_bail(c3__fail);
-  }
-  fln_w = buf_b.st_size;
-  pad_y = malloc(buf_b.st_size);
-
-  red_w = read(fid_i, pad_y, fln_w);
-  close(fid_i);
-
-  if ( fln_w != red_w ) {
-    free(pad_y);
-    return u2_cm_bail(c3__fail);
-  }
-  else {
-    u2_noun pad = u2_ci_bytes(fln_w, (c3_y *)pad_y); 
-    free(pad_y);
-
-    return pad;
-  }
-}
-
-/* _sync_save(): save file or bail.
-*/
-static void
-_sync_save(c3_c* pas_c, u2_noun tim, u2_atom pad)
-{
-  c3_i  fid_i = open(pas_c, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-  c3_w  fln_w, rit_w;
-  c3_y* pad_y;
-
-  if ( fid_i < 0 ) {
-    perror(pas_c);
-    u2_cm_bail(c3__fail);
-  }
-
-  fln_w = u2_met(3, pad);
-  pad_y = malloc(fln_w);
-  u2_cr_bytes(0, fln_w, pad_y, pad);
-  u2z(pad);
-
-  rit_w = write(fid_i, pad_y, fln_w);
-  close(fid_i);
-  free(pad_y);
-
-  if ( rit_w != fln_w ) {
-    perror(pas_c);
-    u2_cm_bail(c3__fail);
-  }
-
-  {
-    struct timeval tim_tv[2];
-
-    _time_out_tv(&tim_tv[0], u2k(tim));
-    _time_out_tv(&tim_tv[1], tim);
- 
-    utimes(pas_c, tim_tv);
-  }
 }
 
 /* _sync_unix(): unix path as by dir/file.ext or dir/subdir protocol.
@@ -894,13 +1018,14 @@ _reck_gall(u2_reck* rec_u, u2_noun gax)
 {
   u2_noun hix, pux;
 
-  hix = u2_ve_slap(u2k(gax), u2nc(c3__cnbc, 'p'));
-  pux = u2_ve_slap(gax, u2nc(c3__cnbc, 'q'));
+  hix = _reck_slap(rec_u, u2k(gax), u2nc(c3__cnbc, 'p'));
+  pux = _reck_slap(rec_u, gax, u2nc(c3__cnbc, 'q'));
 
   _reck_kiwis(rec_u, u2k(u2t(hix)));
   u2z(hix);
 
-  u2_ve_set("reck", pux);
+  u2z(rec_u->rec);
+  rec_u->rec = pux; 
 }
 
 /* _reck_poke(): poke with raw lamb, apply result.
@@ -908,39 +1033,36 @@ _reck_gall(u2_reck* rec_u, u2_noun gax)
 static void
 _reck_poke(u2_reck* rec_u, u2_noun lam)
 {
-  _time_set(rec_u);
   {
-    u2_noun sam   = u2_ve_slop(u2nc(u2nc(c3__atom, 0), u2k(rec_u->now)),
-                               u2nc(c3__noun, lam));
+    u2_noun sam = _reck_slop(rec_u, u2nc(u2nc(c3__atom, 0), u2k(rec_u->now)),
+                                    u2nc(c3__noun, lam));
     u2_noun gax;
 
-    gax = u2_ve_soft("reck", "poke", sam);
+    gax = _reck_soft(rec_u, u2k(rec_u->rec), "poke", sam);
     _reck_gall(rec_u, gax);
   }
 }
 
-/* u2_ve_reck_line(): apply a reck line (protected).
+/* u2_reck_line(): apply a reck line (protected).
 */
 void
-u2_ve_reck_line(u2_reck* rec_u, u2_noun lin)
+u2_reck_line(u2_reck* rec_u, u2_noun lin)
 {
   static c3_w seq_w = 1;
 
-  u2_hevn_be(u2_pryr, god) = u2_ve_zeus;
-  _time_set(rec_u);
+  _reck_time_set(rec_u);
   {
     u2_noun lam = u2nq('l', u2nc(0, 0), seq_w, lin);
 
     _reck_poke(rec_u, lam);
     seq_w++;
   }
-  u2_hevn_be(u2_pryr, god) = 0;
 }
 
-/* u2_ve_reck_boot(): boot the reck engine (unprotected).
+/* u2_reck_boot(): boot the reck engine (unprotected).
 */
 void
-u2_ve_reck_boot(u2_reck* rec_u)
+u2_reck_boot(u2_reck* rec_u)
 {
   u2_noun hoe;
 
@@ -955,36 +1077,16 @@ u2_ve_reck_boot(u2_reck* rec_u)
     u2z(hoe);
   } 
   else {
-    _time_set(rec_u);
-
-    /* create the real reck
-    */
-    {
-      u2_noun fac = u2_ve_use("reck");
-      u2_noun zam = u2_ve_slam(fac, u2nc(u2nc(c3__atom, 0), u2k(rec_u->now)));
- 
-      rec_u->rec = u2k(zam);
-      rec_u->ken = u2k(u2_Host.ver_e[u2_Host.kno_w].ken);
-      u2_ve_set("reck", zam);
-    }
-
-    {
-      u2_noun dyt = u2_ve_scot(c3_s2('d','a'), u2k(rec_u->now));
-      c3_c* dyt_c = u2_cr_string(dyt);
-
-      printf("time: %s\n", dyt_c);
-      free(dyt_c);
-      u2z(dyt);
-    }
+    u2_reck_init(rec_u, 
+                 u2_Host.kno_w, 
+                 u2k(u2_Host.ver_e[u2_Host.kno_w].ken));
 
     /* initial sync with filesystem
     */
     {
       u2_noun lam = _reck_sync(rec_u);
 
-      // u2_err(u2_Wire, "lam", lam);
       _reck_poke(rec_u, lam);
-      // u2z(lam);
     }
 
     u2_cm_done();
