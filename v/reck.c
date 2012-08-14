@@ -170,7 +170,7 @@ _time_set(u2_reck* rec_u)
   rec_u->now = _time_in_tv(&tim_tv);
 
   u2z(rec_u->wen);
-  rec_u->wen = u2_ve_scot(c3_s2('u','d'), u2k(rec_u->now));
+  rec_u->wen = u2_ve_scot(c3_s2('d','a'), u2k(rec_u->now));
 }
 
 /* _walk_in(): inner loop of _walk().
@@ -580,9 +580,6 @@ _sync_take(u2_reck* rec_u, u2_noun rey, u2_noun rah)
 static u2_noun
 _sync_live(u2_reck* rec_u, u2_noun rah, u2_noun nod, u2_noun det)
 {
-#if 0
-  u2z(rah); u2z(nod); return det;
-#else
   u2_noun hac = u2_ckb_flop(u2k(rah));
   u2_noun mey = _sync_peek_meta(rec_u, u2_no, u2k(hac));
   u2_flag end;
@@ -693,7 +690,6 @@ _sync_live(u2_reck* rec_u, u2_noun rah, u2_noun nod, u2_noun det)
   }
   u2z(rah); u2z(hac); u2z(mey);
   return det;
-#endif
 }
 
 /* _sync_form_m():
@@ -868,6 +864,11 @@ _reck_kiwi(u2_reck* rec_u, u2_noun veb)
         u2_cx_trel(u2t(veb), &p_veb, &q_veb, &r_veb);
 
         u2_ve_tank(u2k(q_veb), u2k(r_veb));
+        break;
+      }
+      case 't': {
+        u2_ve_sway(2, u2k(u2t(veb)));
+        break;
       }
     }
   }

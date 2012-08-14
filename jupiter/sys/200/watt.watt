@@ -397,7 +397,7 @@
   ++  axis  ,@
   ++  bloq  ,@
   ++  date  ,[[a=? y=@ud] m=@ud t=tarp]                 ::  gregorian
-  ++  time  ,@ud
+  ++  time  ,@da
   ++  tarp  ,[d=@ud h=@ud m=@ud s=@ud f=(list ,@ux)]    ::  relative
   ++  yo                                                ::  XX constants
     |%  ++  cet  (add 24 (mul 100 365))

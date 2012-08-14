@@ -388,18 +388,22 @@ static u2_noun
 _cm_jack(u2_noun old, u2_noun nuw)
 {
   if ( nuw == old ) {
+    //  Old asserts of slightly dubious provenance.
+    //
     if ( nuw != u2_nul ) {
+#if 0
       if ( 2 != u2_rl_refs(u2_Wire, nuw) ) {
         printf("nuw %x refs %d\n", nuw, u2_rl_refs(u2_Wire, nuw));
       }
       c3_assert(2 == u2_rl_refs(u2_Wire, nuw));
+#endif
       u2z(nuw);
     }
     return u2_nul;
   }
   else {
     c3_assert(u2_yes == u2du(nuw));
-    c3_assert(1 == u2_rl_refs(u2_Wire, nuw));
+    // c3_assert(1 == u2_rl_refs(u2_Wire, nuw));
 
     u2ft(nuw) = _cm_jack(old, u2ft(nuw));
     return nuw;
@@ -416,10 +420,10 @@ u2_cm_wail()
   u2_noun nuw   = u2_wire_tax(u2_Wire);
   u2_noun jaq   = _cm_jack(old, nuw);
   
-  c3_assert(1 == u2_rl_refs(u2_Wire, old));
+  // c3_assert(1 == u2_rl_refs(u2_Wire, old));
   u2_wire_tax(u2_Wire) = old;
   u2_kite_tax(kit_r) = u2k(old);
-  c3_assert(1 == u2_rl_refs(u2_Wire, jaq));
+  // c3_assert(1 == u2_rl_refs(u2_Wire, jaq));
 
   return jaq;
 }

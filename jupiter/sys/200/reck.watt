@@ -65,7 +65,7 @@
               =+  muv=(move man)
               ?.  =(muv man)
                 [~ ..poke] 
-              =+  guo=(line p.muv q.muv)
+              =+  guo=(line p.muv q.muv cam)
               [p.guo ..poke(..line q.guo)]
             --
         =>  |%
@@ -81,11 +81,48 @@
             --
         =+  sys=*game
         |%
-        ++  lean
-          |=  [dub=tube tun=tune]
-          !!
+        ++  lean                                    ::  apply line result
+          |=  [pet=@ta dub=tube tuy=desk]
+          |=  ten=tune
+          ^-  [p=lime q=_..lean]
+          ?-    ten
+              [0 *]
+            ?+    pet  !!
+                %%
+              =+  ham=~(dole ut p.p.ten)
+              :-  [%say %yo %p dub 0 (dish:ut ham q.p.ten)]
+              %=  ..lean
+                sys  %+  ~(put by sys) 
+                       dub
+                     %=  tuy
+                       red  (slop p.ten red.tuy)
+                       ser  (slop [[%atom %ta] ~] ser.tuy)
+                     ==
+              ==
+            ==
+          ::
+              [1 *]
+            :-  :-  %all
+                %+  turn  p.ten
+                |=  mis=*
+                =+  vad=(dish:ut [[~ %path] (path mis)])
+                [%say %yo %p dub 0 [%leaf "[need {~(ram re vad)}]"]]
+            ..lean
+          ::
+              [2 *]
+            [[%say %yo %t p.ten] ..lean]
+          ==
+        ::
+        ++  lick                                    ::  synthetic namespace
+          |=  cam=lens
+          |=  nam=*
+          ^-  (unit)
+          =+  pax=(path nam)
+          ~&  [%lick pax]
+          (peek:cam [%cary pax])
+        :: 
         ++  line                                    ::  execute a line
-          |=  [dub=tube txt=@ta]
+          |=  [dub=tube txt=@ta cam=lens]
           ~|  %born-line
           ^-  [p=lime q=_..line]
           =+  ^=  fob  ^-  [p=term q=gene]
@@ -106,23 +143,10 @@
           =+  dof=(slop red.tuy ser.tuy)
           =+  ^=  vax  ^-  vase
               (slop [[%face %% p.dof] q.dof] nub.tuy)
-          =+  tun=(slab [vax q.fob] |=(* ~))
-          ::  =+  wol=(slap vax q.fob)
-          =+  wol=`vase`?>(?=([0 *] tun) p.tun)
-          ?+    p.fob  !!
-              %%
-            =+  ham=~(dole ut p.wol)
-            :-  [%say %yo %p dub 0 (dish:ut ham q.wol)]
-            %=  ..line
-              sys  %+  ~(put by sys) 
-                     dub
-                   %=  tuy
-                     red  (slop wol red.tuy)
-                     ser  (slop [[%atom %ta] ~] ser.tuy)
-                   ==
-            ==
-          ==
+          %-  (lean p.fob dub tuy)
+          (slab [(slop [[%face %% p.dof] q.dof] nub.tuy) q.fob] (lick cam))
         --
+      ::
           :-  %cary                             ::  %cary, revision control
         ^-  dock
         |=  [now=time who=span]
@@ -219,6 +243,7 @@
         ++  peek  
           |=  [cam=lens hap=path]
           ^-  (unit)
+          ~&  [%cary-peek hap]
           ?~  hap  ~
           =+  hos=(slay i.hap)                          ::  host
           ?.  &(?=(^ hos) ?=([%% %p *] u.hos))  ~
@@ -227,7 +252,7 @@
           ?.  &(?=(^ poj) ?=([%% %ta *] u.poj))  ~
           ?~  t.t.hap  ~
           =+  mag=(slay i.t.t.hap)                      ::  revision
-          ?.  &(?=(^ mag) ?=([%% %uv *] u.mag))  ~
+          ?.  &(?=(^ mag) ?=([%% %da *] u.mag))  ~
           =+  yar=(~(get by wod.sys) q.p.u.hos)
           ?~  yar  ~
           =+  siq=(~(get by dos.u.yar) q.p.u.poj)
@@ -262,7 +287,7 @@
             =+  lag=(~(get by wod.sys) p.muv)
             =+  tes=`room`?~(lag [| ~] u.lag)
             =+  lix=(~(get by dos.tes) q.muv)
-            =+  taq=`desk`?~(lix [1 0 [%| 0 ~]] u.lix)
+            =+  taq=`desk`?~(lix [1 `@da`0 [%| `@da`0 ~]] u.lix)
             =-  :-  p.niz
                 %=    ..poke
                     wod.sys
@@ -364,12 +389,12 @@
       ++  mine                                      ::  series query
         |=  [wid=quid qey=quay]                      
         ^-  (list cash)
-        (slit wid (~(hank re rig) qey))
+        (slit wid (~(hank ra rig) qey))
       ::
       ++  plow                                      ::  sequence query
         |=  [wid=quid qey=quay]
         ^-  (list case)
-        (turn (~(honk re rig) qey) |=(a=case [p.a q.a (hesh wid r.a)]))
+        (turn (~(honk ra rig) qey) |=(a=case [p.a q.a (hesh wid r.a)]))
       ::
       ++  pile                                      ::  extend
         |=  [now=time lap=path val=*]
@@ -379,8 +404,8 @@
         =+  vuz=(flop `path`[~(rent co [~ %ud dar]) (flop lap)])
         ~&  [%got `path`vuz]
         :-  dar
-        =>  .(rig (~(clot re rig) vuz [~ now val]))
-        =+  wys=(~(chit re rig) lap)
+        =>  .(rig (~(clot ra rig) vuz [~ now val]))
+        =+  wys=(~(chit ra rig) lap)
         =+  suz=+(dar)
         |-  ^+  ..pile
         ?:  !(~(has by v.wys) ~(rent co [~ %ud suz]))
@@ -396,7 +421,7 @@
             ==
           q:(pile now q.u.yop val)
         ~&  [%got `path`lap]
-        ..putt(rig (~(clot re rig) lap [~ now val]))
+        ..putt(rig (~(clot ra rig) lap [~ now val]))
       --
   =+  pod=*(list ,[p=term q=ship])
   |%
@@ -570,7 +595,7 @@
     ++  hope  |+(quip *(list cash))         ::  perm, series
     ++  peek  |+(path *(unit))              ::  trans, request
     ++  pray  |+(path *(unit bill))         ::  perm, request
-    ++  when  *time                         ::  
+    ++  when  *time                         ::  current time
     ++  wish  |+(quip *(list case))         ::  sequence query
     --                                      ::
   ++  plum                                  ::  process product
@@ -595,12 +620,6 @@
       [p=*(list plum) q=^?(..poke)]
     --  
   ++  tube  ,[p=@ud q=@ud]                  ::  session identity
-  --
-=<  ::
-  ::::          Tier B, built-in processes
-  ::
-  |%
-  ++  foo  %bar
   --
 =<  ::
   ::::          Tier Qi, request interface
@@ -878,8 +897,8 @@
           [| *]  [%| p.a (turn (~(tap by q.a) ~) |=([p=span q=arch] p))]
         ==
       ?-  a
-        [& *]  [%| 0 ~]
-        [| *]  =+(gos=(~(get by q.a) i.hap) ?~(gos [%| 0 ~] $(a u.gos)))
+        [& *]  [%| `@da`0 ~]
+        [| *]  =+(gos=(~(get by q.a) i.hap) ?~(gos [%| `@da`0 ~] $(a u.gos)))
       ==
     ::
     ++  give                                          ::  apply
@@ -890,7 +909,7 @@
           a
         [%& now dat]
       ?-  a
-        [& *]  $(a [%| 0 ~])
+        [& *]  $(a [%| `@da`0 ~])
         [| *]  [%| now (~(put by q.a) i.hap $(hap t.hap))]
       ==
     ::
@@ -906,9 +925,9 @@
       |=  [now=time hap=path]
       ^-  arch
       ?~  hap
-        [%| 0 ~]
+        [%| `@da`0 ~]
       ?-    a
-          [& *]  [%| 0 ~] 
+          [& *]  [%| `@da`0 ~] 
           [| *]
         =+  gos=(~(get by q.a) i.hap)
         ?~  gos
@@ -925,13 +944,13 @@
       ?~  hap
         a
       ?-    a
-          [& *]  [%| 0 ~]
+          [& *]  [%| `@da`0 ~]
           [| *]  
         =+  gos=(~(get by q.a) i.hap) 
-        ?~(gos [%| 0 ~] $(hap t.hap, a u.gos))
+        ?~(gos [%| `@da`0 ~] $(hap t.hap, a u.gos))
       ==
     --
-  ++  re
+  ++  ra
     |_  a=brig
     ++  chit                                          ::  primitive subtree
       |=  lap=path  ^-  brig
