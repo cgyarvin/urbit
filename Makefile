@@ -2103,7 +2103,8 @@ VERE_OFILES=\
        v/fs.o \
        v/main.o \
        v/console.o \
-       v/system.o \
+       v/osystem.o \
+       v/time.o \
        v/http.o \
        v/reck.o \
        c/gunn.o \
