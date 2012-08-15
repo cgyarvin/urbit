@@ -1,0 +1,120 @@
+::
+::          %born, a shell.   This file is in the public domain.
+::
+:-  %born
+^-  dock
+|=  [now=time who=span]
+%^    hull
+    (iris now)
+  who
+^-  bead
+|=  [now=time who=span]
+:-  ^-  lime
+    :^    %rod
+        %abel
+      :-  [~ ~]
+      :-  [%hose %line ~]
+      |=  hap=*  ^-  (unit)
+      ?.  ?=([p=span q=span ~] hap)
+        ~
+      =+  zod=[p=(colt p.hap) q=(colt q.hap)]
+      ?.  ?&(?=(^ p.zod) ?=(^ q.zod))
+        ~
+      [~ u.p.zod u.q.zod]
+    ^-  hunt
+    |=  [seq=@ud muz=* cax=bill]
+    ?>  ?=(tube muz)
+    [%run %line muz q.cax]
+^-  bowl
+=>  ..$
+=<  |%
+    ++  peek  |=([cam=lens hap=path] ~)
+    ++  poke  
+      |=  [cam=lens man=*] 
+      ^-  [p=lime q=bowl]
+      =+  muv=(move man)
+      ?.  =(muv man)
+        [~ ..poke] 
+      =+  guo=(line p.muv q.muv cam)
+      [p.guo ..poke(..line q.guo)]
+    --
+=>  |%
+    ++  desk                            ::  session state
+      $:  nub=vase                      ::  system + libraries
+          red=vase                      ::  result log
+          ser=vase                      ::  source log
+      ==
+    ++  game  (map tube desk)           ::  application state
+    ++  move                            ::  shell command
+      $%  [%line p=tube q=@ta]          ::  line input
+      ==
+    --
+=+  sys=*game
+|%
+++  lean                                    ::  apply line result
+  |=  [pet=@ta dub=tube tuy=desk]
+  |=  ten=tune
+  ^-  [p=lime q=_..lean]
+  ?-    ten
+      [0 *]
+    ?+    pet  !!
+        %%
+      =+  ham=~(dole ut p.p.ten)
+      :-  [%say %yo %p dub 0 (dish:ut ham q.p.ten)]
+      %=  ..lean
+        sys  %+  ~(put by sys) 
+               dub
+             %=  tuy
+               red  (slop p.ten red.tuy)
+               ser  (slop [[%atom %ta] ~] ser.tuy)
+             ==
+      ==
+    ==
+  ::
+      [1 *]
+    :-  :-  %all
+        %+  turn  p.ten
+        |=  mis=*
+        =+  vad=(dish:ut [[~ %path] (path mis)])
+        [%say %yo %p dub 0 [%leaf "[need {~(ram re vad)}]"]]
+    ..lean
+  ::
+      [2 *]
+    [[%say %yo %t p.ten] ..lean]
+  ==
+::
+++  lick                                    ::  synthetic namespace
+  |=  cam=lens
+  |=  nam=*
+  ^-  (unit)
+  =+  pax=(path nam)
+  ~&  [%lick pax]
+  (peek:cam [%cary pax])
+:: 
+++  line                                    ::  execute a line
+  |=  [dub=tube txt=@ta cam=lens]
+  ^-  [p=lime q=_..line]
+  =+  ^=  fob  ^-  [p=term q=gene]
+      %+  rash
+        txt
+      ;~  pose 
+        (stag %% wide:vast)
+        ;~  plug
+          ;~(pfix col sym)
+          ;~(pfix ace wide:vast)
+        ==
+      ==
+  =+  xac=(~(get by sys) dub)
+  =+  ^=  tuy  ^-  desk
+      ?:  ?=(^ xac)
+        u.xac
+      [seed [[%atom %n] ~] [[%atom %n] ~]]
+  =+  dof=(slop red.tuy ser.tuy)
+  =+  ^=  vax  ^-  vase
+      (slop [[%face %% p.dof] q.dof] nub.tuy)
+  %-  (lean p.fob dub tuy)
+  (slab [(slop [[%face %% p.dof] q.dof] nub.tuy) q.fob] (lick cam))
+::
+++  lube                                    ::  construct context
+  !!
+--

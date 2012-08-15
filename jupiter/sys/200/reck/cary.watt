@@ -1,0 +1,190 @@
+::
+::          %cary, revision control.   This file is in the public domain.
+::
+:-  %cary
+^-  dock
+|=  [now=time who=span]
+%^    hull
+    (iris now)
+  who
+^-  bead
+|=  [now=time who=span]
+:-  ^-  lime
+    :-  %all
+    :~  :^    %rod
+            %abel
+          :-  [~ ~]
+          :-  [who ~]
+          |=  hap=*  ^-  (unit)
+          ?.  ?=([p=span q=span @ ~] hap)
+            ~
+          =+  [rux=(slay p.hap) vys=(slay q.hap)]
+          ?.  &(?=([~ %% %p *] rux) ?=([~ %% %ta *] vys))
+            ~
+          [~ q.p.u.rux q.p.u.vys]
+        ^-  hunt
+        |=  [seq=@ud muz=* cax=bill]  ^-  lime
+        ?>  ?=([p=@h q=@ta] muz)
+        ^-  lime
+        [%run [%& p.muz q.muz p.cax q.cax]]
+    ::
+        :^    %net
+            %cain
+          :-  [~ ~]
+          :-  [who ~]
+          |=  hap=*  ^-  (unit)
+          ?.  ?=([p=span q=span r=span %a ~] hap)
+            ~
+          =+  [rux=(slay p.hap) vys=(slay q.hap)]
+          ?.  &(?=([~ %% %p *] rux) ?=([~ %% %ta *] vys))
+            ~
+          [~ q.p.u.rux q.p.u.vys r.hap]
+        ^-  fish
+        |=  [sap=path muz=* cax=bill]  ^-  lime
+        ?>  ?=([p=@h q=@ta r=@ta] muz)
+        =+  hof=~(rent co [~ %p p.muz])
+        =+  rad=(arch q.cax)
+        ?>  =(rad q.cax)
+        =-  :-  %all
+            %+  turn 
+              yos 
+            |=  [p=@ta q=hapt r=*]
+            `lime`[%say %pu [hof q.muz r.muz p (flop q)] r]
+        ^=  yos  
+        =+  ram=*hapt
+        =+  waz=*(list ,[p=@ta q=path r=*])
+        |-  ^+  waz
+        ?-    rad
+            [& *]  [[%m ram p.rad] [%d ram q.rad] waz]
+            [| *]
+          =+  dib=(~(tap by q.rad) ~)
+          :-  [%m ram p.rad (turn dib |=([p=span q=arch] p))]
+          |-  ^+  waz
+          ?~  dib
+            waz
+          ^$(rad q.i.dib, ram [p.i.dib ram])
+        ==
+    ==
+^-  bowl
+=>  ..$
+=>  |%
+    ++  desk                                      ::  project state
+      $:  seq=@                                   ::  seqno, from 1
+          wen=time                                ::  date of change
+          rad=arch                                ::  state now
+      ==
+    ++  game  
+      $:  wod=(map ,@h room)                      ::  complete state
+      ==
+    ++  move
+      $%  [& p=@h q=span r=time s=task]           ::  project change
+          [| p=@h q=?]                            ::  local on/off
+      ==
+    ++  room
+      $:  our=?                                   ::  local/foreign
+          dos=(map span desk)                     ::  projects 
+      ==
+    ++  task                                      ::  change
+      $|  ~                                       ::  nop
+      $%  [%ev p=(list task)]                     ::  multi change
+          [%gv p=path q=*]                        ::  write file
+          [%kl p=path]                            ::  remove file
+          [%rl p=span]                            ::  release label
+      ==
+    --
+=+  sys=*game
+|%
+++  peek  
+  |=  [cam=lens hap=path]
+  ^-  (unit)
+  ~&  [%cary-peek hap]
+  ?~  hap  ~
+  =+  hos=(slay i.hap)                          ::  host
+  ?.  &(?=(^ hos) ?=([%% %p *] u.hos))  ~
+  ?~  t.hap  ~ 
+  =+  poj=(slay i.t.hap)                        ::  project
+  ?.  &(?=(^ poj) ?=([%% %ta *] u.poj))  ~
+  ?~  t.t.hap  ~
+  =+  mag=(slay i.t.t.hap)                      ::  revision
+  ?.  &(?=(^ mag) ?=([%% %da *] u.mag))  ~
+  =+  yar=(~(get by wod.sys) q.p.u.hos)
+  ?~  yar  ~
+  =+  siq=(~(get by dos.u.yar) q.p.u.poj)
+  ?~  siq  ~
+  ?.  ?:  our.u.yar
+        (gte q.p.u.mag wen.u.siq)
+      =(q.p.u.mag wen.u.siq)
+    ~
+  ?~  t.t.t.hap  ~
+  ?+  i.t.t.t.hap  ~
+    %a  [~ rad.u.siq]
+    %d  (~(grab cy rad.u.siq) t.t.t.t.hap)
+    %m  [~ (~(also cy rad.u.siq) t.t.t.t.hap)]
+    %x  ?.(=(q.p.u.mag when:cam) ~ [~ seq.u.siq wen.u.siq])
+  ==
+++  poke  
+  |=  [cam=lens man=*] 
+  ^-  [p=lime q=bowl]
+  =+  muv=(move man)
+  ?.  =(muv man)
+    [~ ..poke]
+  ?-    muv
+      [| *]
+    :-  ~
+    =+  lag=(~(get by wod.sys) p.muv)
+    %=    ..poke
+        wod.sys
+      (~(put by wod.sys) p.muv [q.muv ?~(lag ~ dos.u.lag)])
+    ==
+  ::
+      [& *]
+    =+  lag=(~(get by wod.sys) p.muv)
+    =+  tes=`room`?~(lag [| ~] u.lag)
+    =+  lix=(~(get by dos.tes) q.muv)
+    =+  taq=`desk`?~(lix [1 `@da`0 [%| `@da`0 ~]] u.lix)
+    =-  :-  p.niz
+        %=    ..poke
+            wod.sys
+          %+  ~(put by wod.sys)
+            p.muv
+          tes(dos (~(put by dos.tes) q.muv q.niz))
+        ==
+    ^=  niz  ^-  [p=lime q=desk]
+    ?.  (gth r.muv wen.taq)
+      [~ taq]
+    =>  ^+(. .(seq.taq +(seq.taq), wen.taq r.muv))
+    |-  ^-  [p=lime q=desk]
+    ?-    s.muv
+        ~        [~ taq]
+        [%ev *]
+      =-  [[%all p.moy] q.moy]
+      ^=  moy  |-  ^-  [p=(list lime) q=desk]
+      ?~  p.s.muv
+        [~ taq]
+      =+  buz=^$(s.muv i.p.s.muv)
+      =+  niz=$(p.s.muv t.p.s.muv, taq q.buz)
+      [[p.buz p.niz] q.niz]
+    ::
+        [%gv *]  
+      :-  =+  yom=(~(also cy rad.taq) p.s.muv)
+          =+  old=?:(?=([& *] yom) p.yom 0)
+          =+  huu=~(rent co [~ %p p.muv])
+          [%say %yo %o %cary %sync old huu q.muv p.s.muv]
+      taq(rad (~(give cy rad.taq) r.muv p.s.muv q.s.muv))
+    ::
+        [%kl *]  
+      :-  =+  yom=(~(also cy rad.taq) p.s.muv)
+          =+  old=?:(?=([& *] yom) p.yom 0)
+          =+  huu=~(rent co [~ %p p.muv])
+          [%say %yo %o %cary %sync old huu q.muv p.s.muv]
+      taq(rad (~(kill cy rad.taq) r.muv p.s.muv))
+    ::
+        [%rl *]
+      :-  :-  %say
+          :+  %pu
+            [~(rent co [~ %p p.muv]) q.muv p.s.muv %a ~]
+          rad.taq
+      taq
+    ==
+  ==
+--

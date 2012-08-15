@@ -139,19 +139,6 @@ u2_reck_peek(u2_reck* rec_u, u2_noun hap)
   return _reck_hard(rec_u, u2k(rec_u->rec), "peek", u2nc(u2k(rec_u->now), hap));
 }
 
-/* _reck_stack(): load the reck stack.
-*/
-u2_noun
-_reck_stack(u2_reck* rec_u)
-{
-  u2_noun vax = u2k(rec_u->syd);
-
-  vax = _reck_load_temp(rec_u, vax, rec_u->kno_w, "reck/a.watt");
-  vax = _reck_load_temp(rec_u, vax, rec_u->kno_w, "reck/b.watt");
-
-  return vax;
-}
-
 /* u2_reck_init(): load the reck engine, from kernel.
 */
 void
@@ -170,10 +157,18 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
 
   _reck_time_set(rec_u);
   {
-    u2_noun fac = _reck_stack(rec_u);
-    u2_noun sam = u2nc(u2nc(c3__atom, 0), u2k(rec_u->now));
+    u2_noun syd = u2k(rec_u->syd);
+    u2_noun uno = _reck_load_temp(rec_u, syd, kno_w, "reck/uno.watt");
+    u2_noun duo = _reck_load_temp(rec_u, uno, kno_w, "reck/duo.watt");
+    u2_noun tre = _reck_load_temp(rec_u, duo, kno_w, "reck/tre.watt");
+    u2_noun bor = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/born.watt");
+    u2_noun car = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/cary.watt");
+    u2_noun qua = _reck_load_temp(rec_u, tre, kno_w, "reck/qua.watt");
+    u2_noun nul = u2nc(u2nt(c3__cube, 0, u2nc(c3__atom, 'n')), 0);
+    u2_noun pay = _reck_slop(rec_u, bor, _reck_slop(rec_u, car, nul));
+    u2_noun now = u2nc(u2nc(c3__atom, c3_s2('d','a')), u2k(rec_u->now));
 
-    rec_u->rec = _reck_slam(rec_u, fac, sam);
+    rec_u->rec = _reck_slam(rec_u, qua, _reck_slop(rec_u, now, pay));
   }
 }
 
