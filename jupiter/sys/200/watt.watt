@@ -1,4 +1,4 @@
-::
+!:
 ::              Watt kernel 200.  This file is in the public domain.
 ::
 =>  src=.
@@ -792,9 +792,9 @@
     |=  [a=@ b=@]
     =+  si
     =+  [c=(sun a) d=(sun b)]
-    =+  [u=[c=(sun 1) d=0] v=[c=0 d=(sun 1)]]
+    =+  [u=[c=(sun 1) d=--0] v=[c=--0 d=(sun 1)]]
     |-  ^-  [d=@ u=@ v=@]
-    ?:  =(0 c) 
+    ?:  =(--0 c) 
       [(abs d) d.u d.v]
     ::  ?>  ?&  =(c (sum (pro (sun a) c.u) (pro (sun b) c.v)))
     ::          =(d (sum (pro (sun a) d.u) (pro (sun b) d.v)))
@@ -908,18 +908,18 @@
       [(mod c p.a) (mod c q.a)]
     --
   ::
-  ++  si 
+  ++  si
     |%
     ::::
-    ++  abs  |=(a=@ (add (end 0 1 a) (rsh 0 1 a)))
-    ++  new  |=([a=? b=@] ?:(a (lsh 0 1 b) ?:(=(0 b) 0 +((lsh 0 1 (dec b))))))
-    ++  old  |=(a=@ [(syn a) (abs a)])
-    ++  sun  |=(a=@ (lsh 0 1 a))
-    ++  syn  |=(a=@ =(0 (end 0 1 a)))
+    ++  abs  |=(a=@s (add (end 0 1 a) (rsh 0 1 a)))
+    ++  new  |=([a=? b=@] `@s`?:(a (mul 2 b) ?:(=(0 b) 0 +((mul 2 (dec b))))))
+    ++  old  |=(a=@s [(syn a) (abs a)])
+    ++  sun  |=(a=@ (mul 2 a))
+    ++  syn  |=(a=@s =(0 (end 0 1 a)))
     ::::
     ::::
     ++  sum
-      |=  [a=@ b=@]
+      |=  [a=@s b=@s]
       ~|  %si-sum
       =+  [c=(old a) d=(old b)]
       ?:  -.c
@@ -935,25 +935,25 @@
       (new | (add +.c +.d))
     ::
     ++  dif
-      |=  [a=@ b=@]
+      |=  [a=@s b=@s]
       (sum a (new !(syn b) (abs b)))
     ::
     ++  dul
-      |=  [a=@ b=@]
+      |=  [a=@s b=@s]
       =+  c=(old a)
       ?:(-.c (mod +.c b) (sub b +.c))
     ::
     ++  fra
-      |=  [a=@ b=@]
+      |=  [a=@s b=@s]
       (new =(0 (mix (syn a) (syn b))) (div (abs a) (abs b)))
     ::
     ++  pro
-      |=  [a=@ b=@]
+      |=  [a=@s b=@s]
       ~|  %si-pro
       (new =(0 (mix (syn a) (syn b))) (mul (abs a) (abs b)))
     ::
     ++  rem
-      |=  [a=@ b=@]
+      |=  [a=@s b=@s]
       ~|  %si-rem
       (dif a (pro b (fra a b)))
     ::::
@@ -2316,6 +2316,7 @@
               ['_' '_' rex]
             ['_' rend(lot i.p.lot, rex $(p.lot t.p.lot))]
           =+  [yed=(end 3 1 p.p.lot) hay=(cut 3 [1 1] p.p.lot)]
+          |-  ^-  tape
           ?+    yed  (z-co q.p.lot)
               %c   ['~' '-' (weld (rip 3 (wood (tuft q.p.lot))) rex)]
               %d
@@ -2412,6 +2413,11 @@
               %v  [['0' 'v' ~] ((ox-co [32 5] |=(a=@ ~(x ne a))) q.p.lot)]
               %w  [['0' 'w' ~] ((ox-co [64 5] |=(a=@ ~(w ne a))) q.p.lot)]
             ==
+          ::
+              %s
+            %+  weld
+              ?:((syn:si q.p.lot) "--" "-")
+            $(yed 'u', q.p.lot (abs:si q.p.lot))
           ::
               %t
             ?:  =('a' hay)
@@ -4234,8 +4240,10 @@
   [p.gun ~|(%slam .*([q.gat q.sam] q.gun))]
 ::
 ++  slab
-  |=  [[vax=vase gen=gene] sky=_|+(* *(unit))]  ^-  tune
+  |=  [not=? [vax=vase gen=gene] sky=_|+(* *(unit))]  ^-  tune
   =+  gun=(~(mint ut p.vax) %noun gen)
+  ?:  not
+    [%0 p.gun ~]
   =+  ton=(mock [q.vax q.gun] sky)
   ?:  ?=(0 -.ton)
     [%0 p.gun p.ton]
@@ -6266,12 +6274,30 @@
   ::
   ++  glam  ~+((glue ace))
   ++  glib  ~+((glue gap))
-  ++  hasp  %+  cook
-              |=(a=coin [%dtpt ?:(?=([~ %tas *] a) %tas %ta) ~(rent co a)]) 
-            nuck:so
+  ++  hasp  ;~  pose
+              %+  cook
+                |=(a=coin [%dtpt ?:(?=([~ %tas *] a) %tas %ta) ~(rent co a)]) 
+              nuck:so
+              (ifix [sel ser] wide)
+            ==
   ++  mota  %+  cook
               |=([a=tape b=tape] (rap 3 (weld a b)))
             ;~(plug (star low) (star hig))
+  ++  road  ;~  pfix  fas
+              %+  cook
+                |=  [a=gene b=(unit (list gene))] 
+                ?~  b
+                  a
+                [a |-(`gene`?~(u.b [%bcts %null] [i.u.b $(u.b t.u.b)]))]
+              ;~  plug
+                hasp
+                ;~  pose
+                  (stag ~ (ifix [fas fas] (most fas hasp)))
+                  (cold [~ ~] fas)
+                  (easy ~)
+                ==
+              ==
+            ==
   ++  scat
     %+  knee  *gene  |.  ~+
     %-  stew  :~  
@@ -6361,6 +6387,7 @@
       :-  '^'
         ;~  pose
           (stag %cnhx rope)
+          (stag %dtkt road)
           (stag %bcts (cold %cell ket))
         ==
       :-  '_'
@@ -6402,21 +6429,7 @@
           ==
         ==
       :-  '/'
-        ;~  pfix  fas
-          %+  cook
-            |=  [a=gene b=(unit (list gene))] 
-            ?~  b
-              a
-            [a |-(`gene`?~(u.b [%bcts %null] [i.u.b $(u.b t.u.b)]))]
-          ;~  plug
-            hasp
-            ;~  pose
-              (stag ~ (ifix [fas fas] (most fas hasp)))
-              (cold [~ ~] fas)
-              (easy ~)
-            ==
-          ==
-        ==
+        road
     ==
   ++  soil
     %+  ifix
@@ -6493,7 +6506,7 @@
                   ['*' (rune tar %dttr expb)]
                   ['=' (rune tis %dtts expb)]
                   ['?' (rune wut %dtwt expa)]
-                  ['^' (rune ket %dtkt expa)]
+                  ['^' (rune ket %dtkt expn)]
                 ==
               ==
             :-  '^'
@@ -6655,6 +6668,7 @@
     ++  expj  |.((butt ;~(gunk rope rack)))
     ++  expk  |.(;~(gunk loaf ;~(plug loaf (easy ~)))) 
     ++  expm  |.((butt ;~(gunk loaf loaf rack)))
+    ++  expn  |.((stag %cltr (butt hank)))
     ++  expp  |.((butt ;~(gunk rope loaf rack)))
     ++  expq  |.(;~(gunk rope loaf loaf))
     ++  expr  |.(;~(gunk loaf wisp))

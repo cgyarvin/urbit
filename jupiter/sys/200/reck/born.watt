@@ -80,6 +80,9 @@
                dub
              tuy(way (~(put by way.tuy) p.p.p.ten [q.p.p.ten q.p.ten]))
       ==
+    ::
+        %type
+      [[%say %yo %p dub 0 (dial:ut ~(dole ut p.p.ten))] ..lean]
     ==
   ::
       [1 *]
@@ -121,7 +124,7 @@
         u.xac
       [!>(..zuul) [[%cube 0 %atom %n] ~] [[%cube 0 %atom %n] ~] ~]
   %-  (lean txt p.fob dub tuy)
-  (slab [(lube [when:cam tuy]) q.fob] (lick cam))
+  (slab =(%type p.fob) [(lube [when:cam tuy]) q.fob] (lick cam))
 ::
 ++  lube                                    ::  construct context
   |=  [now=@da tuy=desk]  ^-  vase

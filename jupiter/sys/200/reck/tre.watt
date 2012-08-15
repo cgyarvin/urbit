@@ -23,7 +23,7 @@
         =+  laz=(~(get by ear) lap)
         =+  dar=?~(laz 1 u.laz)
         =+  vuz=(flop `path`[~(rent co [~ %ud dar]) (flop lap)])
-        ::  ~&  [%got `path`vuz]
+        ~&  [%got `path`vuz]
         :-  dar
         =>  .(rig (~(clot ra rig) vuz [~ now val]))
         =+  wys=(~(chit ra rig) lap)
@@ -41,7 +41,7 @@
                 =+(gef=(~(get by ear) q.u.yop) =(?~(gef 1 u.gef) p.u.yop))
             ==
           q:(pile now q.u.yop val)
-        ::  ~&  [%got `path`lap]
+        ~&  [%got `path`lap]
         ..putt(rig (~(clot ra rig) lap [~ now val]))
       --
   =+  pod=*(list ,[p=term q=ship])
