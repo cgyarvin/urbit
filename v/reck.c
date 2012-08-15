@@ -123,12 +123,6 @@ _reck_time_set(u2_reck* rec_u)
   u2z(rec_u->wen);
   rec_u->wen = _reck_hard
     (rec_u, u2k(rec_u->syd), "|=([a=@] ~(rent co ~ %da a))", u2k(rec_u->now));
-  {
-    c3_c* dyt_c = u2_cr_string(rec_u->wen);
-
-    printf("time: %s\n", dyt_c);
-    free(dyt_c);
-  }
 }
 
 /* u2_reck_peek(): query the reck namespace.
@@ -156,6 +150,12 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
   rec_u->toy.slop = _reck_root("slop", u2k(ken));
 
   _reck_time_set(rec_u);
+  {
+    c3_c* dyt_c = u2_cr_string(rec_u->wen);
+
+    printf("time: %s\n", dyt_c);
+    free(dyt_c);
+  }
   {
     u2_noun syd = u2k(rec_u->syd);
     u2_noun uno = _reck_load_temp(rec_u, syd, kno_w, "reck/uno.watt");
@@ -262,11 +262,11 @@ u2_reck_boot(u2_reck* rec_u)
     u2z(hoe);
   } 
   else {
-    printf("loading reck...\n");
+    // printf("loading reck...\n");
     u2_reck_init(rec_u, 
                  u2_Host.kno_w, 
                  u2k(u2_Host.ver_e[u2_Host.kno_w].ken));
-    printf("loaded reck.\n");
+    // printf("loaded reck.\n");
 
     /* initial sync with filesystem
     */

@@ -997,12 +997,13 @@
     ^-  tarp
     =+  sec=(rsh 6 1 now)
     =+  ^=  fan
-        =+  [muc=3 raw=(end 6 1 now)]
+        =+  [muc=4 raw=(end 6 1 now)]
         |-  ^-  (list ,@ux)
         ?:  |(=(0 raw) =(0 muc))
           ~
-        [(rsh 4 muc raw) $(raw (end 4 muc raw), muc (dec muc))]
-    =+  day=(div sec day:yo)                                      ::  XX ^~
+        =>  .(muc (dec muc))
+        [(cut 4 [muc 1] raw) $(raw (end 4 muc raw))]
+    =+  day=(div sec day:yo)                              ::  XX constant pls
     =>  .(sec (mod sec day:yo))
     =+  hor=(div sec hor:yo)
     =>  .(sec (mod sec hor:yo))
@@ -6320,10 +6321,10 @@
         == 
       :-  '&'
         ;~  pose
+          (cook |=(a=twig [%cnts a ~]) rope)
           (stag %wtpm ;~(pfix pam (ifix [pel per] (most ace wide))))
           ::  (stag %bccb (stag %ktpm ;~(pfix pam wide)))
           (stag %dtpt (stag %f (cold & pam)))
-          (cook |=(a=twig [%cnts a ~]) rope)
         ==
       :-  '\''
         (stag %dtpt (stag %ta qut))
@@ -6408,9 +6409,9 @@
         (stag %cnhx rope)
       :-  '|'
         ;~  pose
+          (cook |=(a=twig [%cnts a ~]) rope)
           (stag %wtbr ;~(pfix bar (ifix [pel per] (most ace wide))))
           (stag %dtpt (stag %f (cold | bar)))
-          (cook |=(a=twig [%cnts a ~]) rope)
         ==
       :-  '~'
         ;~  pfix  sig
@@ -6721,7 +6722,7 @@
             ^=  vil
               $%  [%tis p=gene] 
                   [%col p=gene] 
-                  [%bas p=gene]
+                  [%ket p=gene]
                   [%pel p=(list ,[p=gene q=gene])]
               ==
     ?-    -.vil
@@ -6735,7 +6736,7 @@
       ==
         %col  [%tsgl ros p.vil]
         %pel  [%cnts ~(rake ap ros) p.vil]
-        %bas  [ros p.vil]
+        %ket  [ros p.vil]
     ==
   ::
   ++  long
@@ -6745,7 +6746,7 @@
       ;~  pose
         ;~(plug (cold %tis tis) wide)
         ;~(plug (cold %col col) wide)
-        ;~(plug (cold %bas bas) wide)
+        ;~(plug (cold %ket ket) wide)
         ;~  plug
           (easy %pel)
           %+  ifix
