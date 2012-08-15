@@ -158,7 +158,8 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
   }
   {
     u2_noun syd = u2k(rec_u->syd);
-    u2_noun uno = _reck_load_temp(rec_u, syd, kno_w, "reck/uno.watt");
+    u2_noun zil = _reck_load_temp(rec_u, syd, kno_w, "reck/zil.watt");
+    u2_noun uno = _reck_load_temp(rec_u, zil, kno_w, "reck/uno.watt");
     u2_noun duo = _reck_load_temp(rec_u, uno, kno_w, "reck/duo.watt");
     u2_noun tre = _reck_load_temp(rec_u, duo, kno_w, "reck/tre.watt");
     u2_noun bor = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/born.watt");

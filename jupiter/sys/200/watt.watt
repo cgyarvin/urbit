@@ -3272,7 +3272,6 @@
   ++  wine
     $|  ?(%noun %path %tank %void %wool %yarn)
     $%  [%atom p=term]
-        [%beam p=wine]
         [%core p=@ud q=@ta r=@ta s=(list wine)]
         [%corn p=@ud q=@ta r=@ud s=@ud]
         [%face p=term q=wine]
@@ -4552,10 +4551,6 @@
         %wool      [%leaf '*' '"' '"' ~]
         %yarn      [%leaf '"' '"' ~]
         [%atom *]  [%leaf '@' (trip p.q.ham)]
-    ::
-        [%beam *]
-      [%rose [[' ' ~] ['(' ~] [')' ~]] $(q.ham p.q.ham) ~]
-    ::
         [%core *]
       =+  waz=~(rend co [~ %uv q.q.ham])
       :+  %palm
@@ -4678,17 +4673,6 @@
       ?:  =(%tas p.q.ham)  ['%' (rip 3 lum)]
       ~(rend co [~ p.q.ham lum])
     ::
-        [%beam *]
-      =-  ?~(tok ~ [~ %rose [[' ' ~] ['(' ~] [')' ~]] u.tok])
-      ^=  tok
-      |-  ^-  (unit (list tank))
-      ?:  ?=(@ lum)
-        ?.(=(~ lum) ~ [~ ~])
-      =+  [for=^$(q.ham p.q.ham, lum -.lum) aft=$(lum +.lum)]
-      ?.  &(?=(^ for) ?=(^ aft))
-        ~
-      [~ u.for u.aft]
-    ::
         [%corn *]
       ?.  ?=(^ lum)
         ~
@@ -4722,7 +4706,7 @@
         [%list *]
       =-  ?~  tok 
             ~ 
-          [~ %rose [[' ' ~] ['(' ~] [')' ~]] u.tok]
+          [~ %rose [[' ' ~] ['~' '[' ~] [']' ~]] u.tok]
       ^=  tok
       |-  ^-  (unit (list tank))
       ?:  ?=(@ lum)
@@ -4777,7 +4761,7 @@
         [%tree *]
       =-  ?~  tok 
             ~ 
-          [~ %rose [[' ' ~] (weld (trip p.q.ham) '(' ~) [')' ~]] u.tok]
+          [~ %rose [[' ' ~] (weld (trip p.q.ham) '{' ~) ['}' ~]] u.tok]
       ^=  tok
       =+  tuk=*(list tank)
       |-  ^-  (unit (list tank))
@@ -4794,10 +4778,6 @@
       $(lum l.lum, tuk [u.tim u.rol])
     ::
         [%unit *]
-      =-  ?~  tok 
-            ~ 
-          [~ %rose [[' ' ~] ['(' ~] [')' ~]] u.tok ~]
-      ^=  tok  ^-  (unit tank)
       ?@  lum
         ?.(=(~ lum) ~ [~ %leaf '~' ~])
       ?.  =(~ -.lum)
@@ -4805,14 +4785,12 @@
       =+  wal=$(q.ham q.q.ham)
       ?~  wal
         ~
-      [~ u.wal]
+      [~ %rose [[' ' ~] ['[' ~] [']' ~]] [%leaf '~' ~] u.wal ~]
     ==
   ::
   ++  doge
     |=  ham=calf
     =-  ?+  woz  woz
-          [%beam [%atom %t]]    %yarn
-          [%beam %yarn]         %wool
           [%list * [%atom %ta]] %path
           [%list * [%atom %t]]  %yarn
           [%list * %yarn]       %wool
@@ -4834,10 +4812,6 @@
             =([%pear %n 0] i.p.u.may)
         ==
       q.ham
-    ?:  ?&  ?=([[%plot * [%stop *] ~] ~] t.p.u.may)
-            =(p.q.ham p.i.t.p.i.t.p.u.may)
-        ==
-      [%beam i.p.i.t.p.u.may]
     ?:  ?&  ?=([[%plot [%face *] [%face * %stop *] ~] ~] t.p.u.may)
             =(p.q.ham p.q.i.t.p.i.t.p.u.may)
             =(1 (met 3 p.i.p.i.t.p.u.may))

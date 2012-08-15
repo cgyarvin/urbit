@@ -119,7 +119,7 @@
   =+  ^=  tuy  ^-  desk
       ?:  ?=(^ xac)
         u.xac
-      [seed [[%cube 0 %atom %n] ~] [[%cube 0 %atom %n] ~] ~]
+      [!>(..zuul) [[%cube 0 %atom %n] ~] [[%cube 0 %atom %n] ~] ~]
   %-  (lean txt p.fob dub tuy)
   (slab [(lube [when:cam tuy]) q.fob] (lick cam))
 ::
