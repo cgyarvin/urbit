@@ -103,7 +103,9 @@
   ^-  (unit)
   =+  pax=(path nam)
   ~&  [%lick pax]
-  (peek:cam [%cary pax])
+  =+  voy=(peek:cam [%cary pax])
+  ~&  [%licked voy]
+  voy
 :: 
 ++  line                                    ::  execute a line
   |=  [dub=tube txt=@t cam=lens]

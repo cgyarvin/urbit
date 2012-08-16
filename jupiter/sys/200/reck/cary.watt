@@ -1,4 +1,4 @@
-::
+!:
 ::          %cary, revision control.   This file is in the public domain.
 ::
 :-  %cary
@@ -24,7 +24,7 @@
           [~ q.p.u.rux q.p.u.vys]
         ^-  hunt
         |=  [seq=@ud muz=* cax=bill]  ^-  lime
-        ?>  ?=([p=@h q=@ta] muz)
+        ?>  ?=([p=@p q=@ta] muz)
         ^-  lime
         [%run [%& p.muz q.muz p.cax q.cax]]
     ::
@@ -41,7 +41,7 @@
           [~ q.p.u.rux q.p.u.vys r.hap]
         ^-  fish
         |=  [sap=path muz=* cax=bill]  ^-  lime
-        ?>  ?=([p=@h q=@ta r=@ta] muz)
+        ?>  ?=([p=@p q=@ta r=@ta] muz)
         =+  hof=~(rent co [~ %p p.muz])
         =+  rad=(arch q.cax)
         ?>  =(rad q.cax)
@@ -74,11 +74,11 @@
           rad=arch                                ::  state now
       ==
     ++  game  
-      $:  wod=(map ,@h room)                      ::  complete state
+      $:  wod=(map ,@p room)                      ::  complete state
       ==
     ++  move
-      $%  [& p=@h q=span r=time s=task]           ::  project change
-          [| p=@h q=?]                            ::  local on/off
+      $%  [& p=@p q=span r=time s=task]           ::  project change
+          [| p=@p q=?]                            ::  local on/off
       ==
     ++  room
       $:  our=?                                   ::  local/foreign
@@ -97,12 +97,14 @@
 ++  peek  
   |=  [cam=lens hap=path]
   ^-  (unit)
-  ~&  [%cary-peek hap]
   ?~  hap  ~
   =+  hos=(slay i.hap)                          ::  host
   ?.  &(?=(^ hos) ?=([%% %p *] u.hos))  ~
-  ?~  t.hap  ~ 
+  ?~  t.hap  ~
+  ~&  [%cary-slay i.t.hap]
   =+  poj=(slay i.t.hap)                        ::  project
+  ~&  %cary-slain
+  ~&  [%cary-slain `*`poj]
   ?.  &(?=(^ poj) ?=([%% %ta *] u.poj))  ~
   ?~  t.t.hap  ~
   =+  mag=(slay i.t.t.hap)                      ::  revision

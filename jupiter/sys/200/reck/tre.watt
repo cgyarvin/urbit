@@ -72,9 +72,9 @@
       |-  ^-  (unit)
       ?~  pod
         ~
-      ?.  =(i.t.hap p.i.pod)
+      ?.  =(i.hap p.i.pod)
         $(pod t.pod)
-      (peek:q.i.pod ..peek t.t.hap)
+      (peek:q.i.pod ..peek t.hap)
     ::
     ++  pray                                ::  probe, permanent
       |=  [hap=path]  ^-  (unit bill)

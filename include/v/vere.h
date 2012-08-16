@@ -140,7 +140,8 @@
         c3_w    rno_w;                    //  rotor index (always 0)
 
         struct {                          //  function gates, use mung
-          u2_noun ream;                   //  ream (parse text -> gene)
+          u2_noun rain;                   //  parse path, text -> gene
+          u2_noun ream;                   //  parse text -> gene
           u2_noun slam;                   //  call ([vase vase] -> vase)
           u2_noun slap;                   //  layer ([vase gene] -> vase)
           u2_noun slop;                   //  cell ([vase vase] -> vase)

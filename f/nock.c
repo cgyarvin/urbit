@@ -12,6 +12,7 @@
   **/
     static u2_noun _nock_cool(u2_noun, u2_noun);
     static u2_noun _nock_mool(u2_noun, u2_noun, u2_kode*);
+    static u2_noun _nock_molg(u2_noun, u2_noun, u2_kode*);
 
 /* _nock_pray_cool(): load from namespace, in kernel mode.
 */
@@ -56,32 +57,42 @@ _nock_pray_mool(u2_noun gof, u2_kode *pon)
     u2_noun i_lad = u2fh(lad);
     u2_noun t_lad = u2ft(lad);
     u2_noun pro;
+    u2_noun hoe;
 
     u2_hevn_at(lad) = t_lad;
-    if ( u2_nul == t_lad ) {
-      pro = _nock_cool(u2k(gof), u2k(i_lad));
-    } else {
-      pro = _nock_mool(u2k(gof), u2k(i_lad), pon);
+    if ( 0 != (hoe = u2_cm_trap()) ) {
+      u2_cm_done();
+
+      return u2_cm_bail(u2k(u2h(hoe)));
     }
-    c3_assert(t_lad == u2_hevn_at(lad));
-    u2_hevn_at(lad) = lad;
-
-    if ( 0 != *pon ) {
-      u2z(gof);
-
-      return pro;
-    } else {
-      if ( u2_no == u2du(pro) ) {
-        *pon = 1;
-        u2z(pro);
-        return u2nc(gof, u2_nul);
+    else {
+      if ( u2_nul == t_lad ) {
+        pro = u2_cn_mung(u2k(i_lad), u2k(gof));
+      } else {
+        pro = _nock_molg(u2k(i_lad), u2k(gof), pon);
       }
-      else {
-        u2_noun res = u2k(u2t(pro));
+      u2_cm_done();
 
+      c3_assert(t_lad == u2_hevn_at(lad));
+      u2_hevn_at(lad) = lad;
+
+      if ( 0 != *pon ) {
         u2z(gof);
-        u2z(pro);
-        return res;
+
+        return pro;
+      } else {
+        if ( u2_no == u2du(pro) ) {
+          *pon = 1;
+          u2z(pro);
+          return u2nc(gof, u2_nul);
+        }
+        else {
+          u2_noun res = u2k(u2t(pro));
+
+          u2z(gof);
+          u2z(pro);
+          return res;
+        }
       }
     }
   }
@@ -513,7 +524,7 @@ _nock_cool(u2_noun bus,
   }
 }
 
-/* nock_mool(): fast internal mock interface.
+/* nock_mool(): fast internal mock interface.  Arguments transferred.
 */
 u2_noun
 _nock_mool(u2_noun  bus, 
@@ -833,30 +844,27 @@ _nock_mool(u2_noun  bus,
   }
 }
 
-#if 0
-/* u2_cn_mung():
-**
-**   Call `(function sample)`.
+/* nock_molg(): function call (mung) with kode.  Arguments transferred.
 */
-u2_noun
-u2_cn_mung(u2_noun fun,
-           u2_noun sam)
+static u2_noun
+_nock_molg(u2_noun  gat, 
+           u2_noun  sam,
+           u2_kode* pon)
 {
-  u2_noun cor, xip, fol;
-
-  fol = u2k(u2t(fun));
-  cor = u2nc(u2nc(u2k(u2h(u2h(fun))), sam), u2k(fol));
-  u2z(fun);
-
-  if ( u2_none != (xip = u2_ds_find(u2_Wire, cor)) ) {
-    u2_noun pro = u2_ho_kick(u2_Wire, xip, cor, u2_cw_noc);
-
-    u2z(fol); u2z(cor);
-    return pro;
+  if ( (u2_no == u2du(gat)) || (u2_no == u2du(u2h(gat))) ) {
+    *pon = 2; return u2_cm_wail();
   }
-  else return u2_cn_nock(cor, fol);
+  else {
+    u2_noun cor, fol;
+
+    cor = u2nc(u2nc(u2k(u2h(u2h(gat))), sam), u2k(u2t(gat)));
+    fol = u2k(u2t(gat));
+    u2z(gat);
+
+    //  XX  try to chip with u2_ds_find?  but a rare case...
+    return _nock_mool(cor, fol, pon);
+  }
 }
-#endif
 
 /* _nock_moog(): u2_cn_mock() with fly set.
 */
@@ -936,7 +944,6 @@ u2_cn_mock(u2_noun bus,
     {
       res = _nock_moog(bus, fol);
     }
-    c3_assert(u2_yes == u2du(u2_hevn_at(lad)));
     c3_assert(lad == u2ft(u2_hevn_at(lad)));
 
     u2z(u2_hevn_at(lad));

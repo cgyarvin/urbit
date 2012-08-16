@@ -1020,11 +1020,12 @@
                    (mul m.rip mit:yo)
                    s.rip
                  ==
-    =+  ^=  fac  =+  muc=3 
+    =+  ^=  fac  =+  muc=4
                  |-  ^-  @
                  ?~  f.rip
                    0
-                 (add (lsh 4 muc i.f.rip) $(muc (dec muc), f.rip t.f.rip))
+                 =>  .(muc (dec muc))
+                 (add (lsh 4 muc i.f.rip) $(f.rip t.f.rip))
     (con (lsh 6 1 sec) fac)
   ::
   ++  yall
@@ -4790,7 +4791,7 @@
         ?.(=(~ lum) ~ [~ %leaf '~' ~])
       ?.  =(~ -.lum)
         ~
-      =+  wal=$(q.ham q.q.ham)
+      =+  wal=$(q.ham q.q.ham, lum +.lum)
       ?~  wal
         ~
       [~ %rose [[' ' ~] ['[' ~] [']' ~]] [%leaf '~' ~] u.wal ~]
@@ -6275,10 +6276,10 @@
   ++  glam  ~+((glue ace))
   ++  glib  ~+((glue gap))
   ++  hasp  ;~  pose
+              (ifix [sel ser] wide)
               %+  cook
                 |=(a=coin [%dtpt ?:(?=([~ %tas *] a) %tas %ta) ~(rent co a)]) 
               nuck:so
-              (ifix [sel ser] wide)
             ==
   ++  mota  %+  cook
               |=([a=tape b=tape] (rap 3 (weld a b)))
@@ -6386,8 +6387,8 @@
         (stag %bccm ;~(pfix com wide))
       :-  '^'
         ;~  pose
+          ;~(pfix ket (stag %dtkt road))
           (stag %cnhx rope)
-          (stag %dtkt road)
           (stag %bcts (cold %cell ket))
         ==
       :-  '_'

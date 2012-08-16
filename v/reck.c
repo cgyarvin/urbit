@@ -39,6 +39,14 @@ _reck_ream(u2_reck* rec_u, u2_noun txt)
   return u2_cn_mung(u2k(rec_u->toy.ream), txt);
 }
 
+/* _reck_rain(): rain with toy.
+*/
+static u2_noun
+_reck_rain(u2_reck* rec_u, u2_noun bon, u2_noun txt)
+{
+  return u2_cn_mung(u2k(rec_u->toy.rain), u2nc(bon, txt));
+}
+
 /* _reck_slam(): slam with toy.
 */
 static u2_noun
@@ -87,13 +95,39 @@ _reck_soft(u2_reck* rec_u, u2_noun vax, const c3_c* txt_c, u2_noun sam)
   return _reck_slam(rec_u, gat, sam);
 }
 
+/* _reck_spat(): noun path from c, kind of a hack.
+*/
+static u2_noun 
+_reck_spat(c3_c* pax_c)
+{
+  if ( !*pax_c ) {
+    return u2_nul;
+  } else {
+    c3_c* ash_c = strchr(pax_c, '/');
+
+    if ( !ash_c ) {
+      return u2nc(u2_ci_string(pax_c), u2_nul);
+    } 
+    else {
+      u2_noun pan;
+
+      *ash_c = 0;
+      pan = u2_ci_string(pax_c);
+      *ash_c = '/';
+      
+      return u2nc(pan, _reck_spat(ash_c + 1));
+    }
+  }
+}
+
 /* _reck_load(): layer file on vase -> vase.
 */
 static u2_noun
 _reck_load(u2_reck* rec_u, u2_noun vax, c3_c* pax_c)
 {
   u2_noun txt = u2_sync_load(pax_c);
-  u2_noun gen = _reck_ream(rec_u, txt);
+  u2_noun gen = _reck_rain
+    (rec_u, _reck_spat(pax_c + strlen(u2_Local) + 1), txt);
 
   return _reck_slap(rec_u, vax, gen);
 }
@@ -144,6 +178,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
   rec_u->ken = ken;
   rec_u->syd = _reck_root("seed", u2k(ken));
 
+  rec_u->toy.rain = _reck_root("rain", u2k(ken));
   rec_u->toy.ream = _reck_root("ream", u2k(ken));
   rec_u->toy.slam = _reck_root("slam", u2k(ken));
   rec_u->toy.slap = _reck_root("slap", u2k(ken));

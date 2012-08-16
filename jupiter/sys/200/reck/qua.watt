@@ -11,11 +11,7 @@
   |%                                            ::  front door
   ++  peek
     |=  [now=time hap=path]  ^-  (unit)
-    =+  les=(iris now)
-    =+  def=(pray:les hap)
-    ?~  def
-      (peek:les hap)
-    [~ q.u.def] 
+    (peek:(iris now) hap)
   ::
   ++  poke
     |=  [now=time lam=*]
