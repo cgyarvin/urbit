@@ -317,8 +317,14 @@ u2_reck_boot(u2_reck* rec_u)
     {
       u2_noun lam = u2nc
         ('o',
-         u2nc(c3__cary,
-              
+         u2nc(u2nc(c3__cary,
+                   u2nt(c3_s2('p','i'),
+                        u2nc(u2_ci_string("~nopbur-lossud"), u2_nul),
+                        u2_yes)),
+              u2_nul));
+
+      _reck_poke(rec_u, lam);
+    } 
 
     u2_cm_done();
   

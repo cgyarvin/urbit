@@ -102,9 +102,7 @@
   |=  nam=*
   ^-  (unit)
   =+  pax=(path nam)
-  ~&  [%lick pax]
   =+  voy=(peek:cam [%cary pax])
-  ~&  [%licked voy]
   voy
 :: 
 ++  line                                    ::  execute a line
