@@ -177,69 +177,24 @@ _walk(const c3_c* dir_c)
   return u2nc(u2_no, _walk_in(dir_c, strlen(dir_c)));
 }
 
-/* _sync_path(): cary path from raw path.
-*/
-static u2_noun
-_sync_path(u2_reck* rec_u, u2_flag rey, c3_c how_c, u2_noun hap)
-{
-  u2_noun baz, bok, ven, lim;
-  u2_noun cay;
-
-  if ( u2_yes == rey ) {
-    u2_cx_qual(hap, &baz, &bok, &ven, &lim);
-    u2k(baz); u2k(bok); u2k(ven); u2k(lim);
-  } else {
-    u2_cx_trel(hap, &baz, &bok, &lim);
-    u2k(baz); u2k(bok); u2k(lim);
-    ven = u2k(rec_u->wen);
-  }
-
-  cay = u2nq(c3__cary, baz, bok, u2nt(ven, how_c, lim));
-  u2z(hap);
-  return cay;
-}
-
 /* _sync_peek_meta(): (unit meta) for cary-path.
 */
 static u2_noun
-_sync_peek_meta(u2_reck* rec_u, u2_flag rey, u2_noun hac)
+_sync_peek_meta(u2_reck* rec_u, u2_noun pos, u2_noun bok, u2_noun ram)
 {
-  u2_noun pah = _sync_path(rec_u, rey, 'm', hac);
+  u2_noun mar = u2_ckb_flop(ram);
 
-  return u2_reck_peek(rec_u, pah);
-}
-
-/* _sync_peek_data(): (unit @) for cary-path.
-*/
-static u2_noun
-_sync_peek_data(u2_reck* rec_u, u2_flag rey, u2_noun hac)
-{
-  return u2_reck_peek(rec_u, _sync_path(rec_u, rey, 'd', hac));
+  return u2_reck_peek
+    (rec_u, u2nq(c3__cary, pos, bok, u2nt(u2k(rec_u->wen), 'm', mar)));
 }
 
 /* _sync_unix(): unix path as by dir/file.ext or dir/subdir protocol.
 */
 static c3_c*
-_sync_unix(u2_flag dir, u2_flag rey, u2_noun hac)
+_sync_unix(u2_flag dir, u2_noun hac)
 {
-  u2_noun baz, bok, rev, lim;
   c3_w len_w;
   c3_c *pas_c;
-
-  //  normalize
-  {
-    u2_noun nor;
-
-    if ( u2_no == rey ) {
-      u2_cx_trel(hac, &baz, &bok, &lim);
-      nor = u2nq(u2k(baz), u2k(bok), 'e', u2k(lim));
-    } else {
-      u2_cx_qual(hac, &baz, &bok, &rev, &lim);
-      nor = u2nq(u2k(baz), u2k(bok), 'r', u2nc(u2k(rev), u2k(lim)));
-    }
-    u2z(hac);
-    hac = nor;
-  }
 
   //  measure
   //
@@ -280,77 +235,41 @@ _sync_unix(u2_flag dir, u2_flag rey, u2_noun hac)
   return pas_c;
 }
 
-/* _sync_file(): from path to C file.ext style path.
-*/
-static c3_c*
-_sync_file(u2_flag rey, u2_noun hac)
-{
-  return _sync_unix(u2_no, rey, hac);
-}
-
-/* _sync_dire(): from path to C directory style path.
-*/
-static c3_c*
-_sync_dire(u2_flag rey, u2_noun hac)
-{
-  return _sync_unix(u2_yes, rey, hac);
-}
-
-/* _sync_flat(): load unix file (or crash) from cary path.
+/* _sync_norm_e(): construct editing path as noun.
 */
 static u2_noun
-_sync_flat(u2_flag rey, u2_noun hac)
+_sync_norm_e(u2_noun pos, u2_noun bok, u2_noun ram)
 {
-  c3_c*   pas_c = _sync_file(rey, hac);
-  u2_noun pad   = u2_sync_load(pas_c);
-
-  free(pas_c);
-  return pad;
+  return u2nq(pos, bok, 'e', u2_ckb_flop(ram));
 }
 
-/* _sync_make(): make sure directory is there.
+/* _sync_unix_data(): editing data from path.
 */
-static void
-_sync_make(u2_flag rey, u2_noun hac)
+static u2_noun
+_sync_unix_data(u2_noun pos, u2_noun bok, u2_noun ram)
 {
-  c3_c* pas_c = _sync_file(rey, hac);
+  u2_noun hac   = _sync_norm_e(pos, bok, ram);
+  c3_c*   pax_c = _sync_unix(u2_no, hac);
+  u2_noun dat   = u2_sync_load(pax_c);
 
-  mkdir(pas_c, 0777);
-  free(pas_c);
+  free(pax_c);
+  return dat;
 }
-
-/* _sync_push(): save unix file (or crash) from cary path, setting time.
-*/
-static void
-_sync_push(u2_flag rey, u2_noun hac, u2_atom tim, u2_noun pad)
-{
-  c3_c* pas_c = _sync_file(rey, hac);
-
-  u2_sync_save(pas_c, tim, pad);
-  free(pas_c);
-}
-
-/* _sync_lose(): delete unix file.
-*/
-static void
-_sync_lose(u2_flag rey, u2_noun hac)
-{
-  c3_c* pas_c = _sync_file(rey, hac);
-
-  unlink(pas_c);
-  free(pas_c);
-}
-
-/* _sync_give_m(): _sync_give() in map.
-*/
-static u2_noun _sync_give(u2_reck*, u2_noun, u2_noun, u2_noun);
 
 static u2_noun
-_sync_give_m(u2_reck* rec_u, u2_noun rah, u2_noun map, u2_noun det)
+_sync_give(u2_reck*, u2_noun, u2_noun, u2_noun, u2_noun, u2_noun);
+
+static u2_noun
+_sync_give_m(u2_reck* rec_u, 
+             u2_noun pos, 
+             u2_noun bok, 
+             u2_noun ram, 
+             u2_noun map,
+             u2_noun muv)
 {
   if ( u2_nul == map ) {
-    u2z(rah);
-    return det;
+    u2z(pos); u2z(bok); u2z(ram);
+    return muv;
   }
   else {
     u2_noun n_map, pn_map, qn_map, l_map, r_map;
@@ -358,76 +277,58 @@ _sync_give_m(u2_reck* rec_u, u2_noun rah, u2_noun map, u2_noun det)
     u2_cr_trel(map, &n_map, &l_map, &r_map);
     u2_cr_cell(n_map, &pn_map, &qn_map);
 
-    det = _sync_give_m(rec_u, u2k(rah), u2k(l_map), det);
-    det = _sync_give_m(rec_u, u2k(rah), u2k(r_map), det);
-    det = _sync_give(rec_u, u2nc(u2k(pn_map), rah), u2k(qn_map), det);
+    muv = _sync_give_m(rec_u, u2k(pos), u2k(bok), u2k(ram), u2k(l_map), muv);
+    muv = _sync_give_m(rec_u, u2k(pos), u2k(bok), u2k(ram), u2k(r_map), muv);
+    muv = _sync_give(rec_u, pos, bok, u2nc(u2k(pn_map), ram), u2k(qn_map), muv);
 
     u2z(map);
-    return det;
+    return muv;
   }
 }
 
 /* _sync_give(): pure checkin (memory data does not exist).
 */
 static u2_noun
-_sync_give(u2_reck* rec_u, u2_noun rah, u2_noun nod, u2_noun det)
+_sync_give(u2_reck* rec_u, 
+           u2_noun pos, 
+           u2_noun bok, 
+           u2_noun ram, 
+           u2_noun nod,
+           u2_noun muv)
 {
   if ( u2_yes == u2h(nod) ) {
-    u2_noun hac = u2_ckb_flop(rah);
-    u2_noun pad = _sync_flat(u2_no, u2k(hac));
+    u2_noun pad = _sync_unix_data(pos, bok, u2k(ram));
 
-    det = u2nc(u2nc(c3_s2('p','i'),
-                    u2nt(hac, c3_s2('g', 'v'), pad)),
-               det);
-    u2z(nod);
-    return det;
-  }
-  else {
-    u2_noun map = u2k(u2t(nod));
-
-    det = _sync_give_m(rec_u, rah, map, det);
-    u2z(nod);
-    return det;
-  }
-}
-
-/* _sync_take(): pure checkout (fs data does not exist).
-*/
-static void
-_sync_take(u2_reck* rec_u, u2_noun rey, u2_noun rah)
-{
-  u2_noun hac = u2_ckb_flop(rah);
-  u2_noun mey = _sync_peek_meta(rec_u, u2_no, u2k(hac));
-
-  if ( u2_nul == mey ) {
-    u2_cm_bail(c3__fail);
-  } else {
-    u2_noun yem = u2k(u2t(mey));
-
-    u2z(mey); mey = yem;
-  }
-
-  if ( u2_yes == u2h(mey) ) {
-    u2_noun tim = u2k(u2t(mey));
-    u2_noun pad   = _sync_peek_data(rec_u, rey, u2k(hac));
-
-    _sync_push(rey, hac, tim, pad);
+    muv = u2nc(u2nt(c3_s2('g','v'), u2_ckb_flop(ram), pad), muv);
   } 
   else {
-    u2_noun hac = u2_ckb_flop(u2k(rah));
-    u2_noun n;
+    muv = _sync_give_m(rec_u, pos, bok, ram, u2k(u2t(nod)), muv);
+  }
+  u2z(nod);
+  return muv;
+}
 
-    _sync_make(rey, hac);
+/* _sync_edit(): sync in editable directory.
+*/
+static u2_noun
+_sync_edit(u2_reck* rec_u, 
+           u2_noun  pos,              //  post
+           u2_noun  bok,              //  book
+           u2_noun  ram,              //  reverse path in book
+           u2_noun  nod,              //  stat node from _walk_in()
+           u2_noun  muv)              //  change list
+{
+  u2_noun mey = _sync_peek_meta(rec_u, u2k(pos), u2k(bok), u2k(ram));
 
-    for ( n=u2t(mey); u2_nul != n; n=u2t(n) ) {
-      u2_noun i = u2h(n);   //  span
-
-      _sync_take(rec_u, rey, u2nc(u2k(i), u2k(rah)));
-    }
-    u2z(rah);
+  if ( u2_nul == mey ) {
+    return _sync_give(rec_u, pos, bok, ram, nod, muv);
+  }
+  else {
+    c3_assert(!"other crap");
   }
 }
 
+#if 0
 /* _sync_live(): sync in editable directory.
 */
 static u2_noun
@@ -544,52 +445,61 @@ _sync_live(u2_reck* rec_u, u2_noun rah, u2_noun nod, u2_noun det)
   u2z(rah); u2z(hac); u2z(mey);
   return det;
 }
+#endif
 
-/* _sync_form_m():
+/* _sync_edit_m():
 */
 static u2_noun
-_sync_form_m(u2_reck* rec_u, u2_noun baz, u2_noun bok, u2_noun map, u2_noun det)
+_sync_edit_m(u2_reck* rec_u, u2_noun pos, u2_noun bok, u2_noun map, u2_noun det)
 {
   if ( u2_nul == map ) {
-    u2z(baz); u2z(bok);
+    u2z(pos); u2z(bok);
     return det;
   }
   else {
     u2_noun n_map, pn_map, qn_map, l_map, r_map;
-    u2_noun rah;
+    u2_noun muv;
 
     u2_cr_trel(map, &n_map, &l_map, &r_map);
     u2_cr_cell(n_map, &pn_map, &qn_map);
 
     if ( ('e' != pn_map) ) {
-      u2z(map); u2z(baz); u2z(bok);
+      u2z(map); u2z(pos); u2z(bok);
 
-      return det;               //  XX version checkout not yet supported
+      return det;
     }
-   
-    rah = u2nt(bok, baz, u2_nul);
-
-    det = _sync_form_m(rec_u, u2k(baz), u2k(bok), u2k(l_map), det);
-    det = _sync_form_m(rec_u, u2k(baz), u2k(bok), u2k(r_map), det);
-    det = _sync_live(rec_u, rah, u2k(qn_map), det);
-
+    det = _sync_edit_m(rec_u, u2k(pos), u2k(bok), u2k(l_map), det);
+    det = _sync_edit_m(rec_u, u2k(pos), u2k(bok), u2k(r_map), det);
+  
+    muv = _sync_edit(rec_u, u2k(pos), u2k(bok), u2_nul, u2k(qn_map), u2_nul);
     u2z(map);
+
+    if ( u2_nul == muv ) {
+      u2z(pos); u2z(bok);
+    } 
+    else {
+      det = u2nc
+        (u2nt(c3_s2('p', 'i'),
+              u2nt(pos, bok, u2_nul),
+              muv),
+         det);
+    }
     return det;
   }
 }
 
-/* _sync_book(): sync `nod` as a project change to `baz`, `bok`.
+/* _sync_book(): sync `nod` as a project change to `pos`, `bok`.
 */
 static u2_noun
-_sync_book(u2_reck* rec_u, u2_noun baz, u2_noun bok, u2_noun nod, u2_noun det)
+_sync_book(u2_reck* rec_u, u2_noun pos, u2_noun bok, u2_noun nod, u2_noun det)
 {
   if ( u2_yes == u2h(nod) ) {
     //  XX  user error
-    u2z(nod); u2z(bok); u2z(baz);
+    u2z(nod); u2z(bok); u2z(pos);
     return det;
   }
   else {
-    det = _sync_form_m(rec_u, baz, bok, u2k(u2t(nod)), det);
+    det = _sync_edit_m(rec_u, pos, bok, u2k(u2t(nod)), det);
     u2z(nod);
 
     return det;
@@ -599,10 +509,10 @@ _sync_book(u2_reck* rec_u, u2_noun baz, u2_noun bok, u2_noun nod, u2_noun det)
 /* _sync_book_m(): sync `map` to a change list `det`.
 */
 static u2_noun
-_sync_book_m(u2_reck* rec_u, u2_noun baz, u2_noun map, u2_noun det)
+_sync_book_m(u2_reck* rec_u, u2_noun pos, u2_noun map, u2_noun det)
 {
   if ( u2_nul == map ) {
-    u2z(baz);
+    u2z(pos);
     return det;
   }
   else {
@@ -611,36 +521,36 @@ _sync_book_m(u2_reck* rec_u, u2_noun baz, u2_noun map, u2_noun det)
     u2_cr_trel(map, &n_map, &l_map, &r_map);
     u2_cr_cell(n_map, &pn_map, &qn_map);
 
-    det = _sync_book_m(rec_u, u2k(baz), u2k(l_map), det);
-    det = _sync_book_m(rec_u, u2k(baz), u2k(r_map), det);
-    det = _sync_book(rec_u, baz, u2k(pn_map), u2k(qn_map), det);
+    det = _sync_book_m(rec_u, u2k(pos), u2k(l_map), det);
+    det = _sync_book_m(rec_u, u2k(pos), u2k(r_map), det);
+    det = _sync_book(rec_u, pos, u2k(pn_map), u2k(qn_map), det);
 
     u2z(map);
     return det;
   }
 }
 
-/* _sync_base(): sync `nod` as a base change.
+/* _sync_post(): sync `nod` as a base change.
 */
 static u2_noun
-_sync_base(u2_reck* rec_u, u2_noun baz, u2_noun nod, u2_noun det)
+_sync_post(u2_reck* rec_u, u2_noun pos, u2_noun nod, u2_noun det)
 {
   if ( (u2_nul == nod) || (u2_yes == u2h(nod)) ) {
-    u2z(baz);
+    u2z(pos);
     u2z(nod);
     return det;
   }
   else {
-    det = _sync_book_m(rec_u, baz, u2k(u2t(nod)), det);
+    det = _sync_book_m(rec_u, pos, u2k(u2t(nod)), det);
     u2z(nod);
     return det;
   }
 }
 
-/* _sync_base_m(): sync `map` to a change list `det`.
+/* _sync_post_m(): sync `map` to a change list `det`.
 */
 static u2_noun
-_sync_base_m(u2_reck* rec_u, u2_noun map, u2_noun det)
+_sync_post_m(u2_reck* rec_u, u2_noun map, u2_noun det)
 {
   if ( u2_nul == map ) {
     return det;
@@ -651,9 +561,9 @@ _sync_base_m(u2_reck* rec_u, u2_noun map, u2_noun det)
     u2_cx_trel(map, &n_map, &l_map, &r_map);
     u2_cx_cell(n_map, &pn_map, &qn_map);
 
-    det = _sync_base(rec_u, u2k(pn_map), u2k(qn_map), det);
-    det = _sync_base_m(rec_u, u2k(l_map), det);
-    det = _sync_base_m(rec_u, u2k(r_map), det);
+    det = _sync_post(rec_u, u2k(pn_map), u2k(qn_map), det);
+    det = _sync_post_m(rec_u, u2k(l_map), det);
+    det = _sync_post_m(rec_u, u2k(r_map), det);
 
     u2z(map);
     return det;
@@ -682,7 +592,7 @@ u2_sync_reck(u2_reck* rec_u)
     u2_noun det = u2_nul;
     u2_noun map = u2t(nod);
     
-    det = _sync_base_m(rec_u, u2k(map), det);
+    det = _sync_post_m(rec_u, u2k(map), det);
     u2z(nod);
 
     {

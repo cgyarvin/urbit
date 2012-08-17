@@ -312,6 +312,14 @@ u2_reck_boot(u2_reck* rec_u)
       _reck_poke(rec_u, lam);
     }
 
+    /* hack - hardcode a local.
+    */
+    {
+      u2_noun lam = u2nc
+        ('o',
+         u2nc(c3__cary,
+              
+
     u2_cm_done();
   
     u2_cm_purge();

@@ -16,10 +16,10 @@
           :-  [~ ~]
           :-  [who ~]
           |=  hap=*  ^-  (unit)
-          ?.  ?=([p=span q=span @ ~] hap)
+          ?.  ?=([p=@ta q=@ta ~] hap)
             ~
           =+  [rux=(slay p.hap) vys=(slay q.hap)]
-          ?.  &(?=([~ %% %p *] rux) ?=([~ %% %ta *] vys))
+          ?.  &(?=([~ %% %p *] rux) ?=([~ %% %tas *] vys))
             ~
           [~ q.p.u.rux q.p.u.vys]
         ^-  hunt
@@ -36,7 +36,7 @@
           ?.  ?=([p=span q=span r=span %a ~] hap)
             ~
           =+  [rux=(slay p.hap) vys=(slay q.hap)]
-          ?.  &(?=([~ %% %p *] rux) ?=([~ %% %ta *] vys))
+          ?.  &(?=([~ %% %p *] rux) ?=([~ %% %tas *] vys))
             ~
           [~ q.p.u.rux q.p.u.vys r.hap]
         ^-  fish
@@ -77,7 +77,7 @@
       $:  wod=(map ,@p room)                      ::  complete state
       ==
     ++  move
-      $%  [& p=@p q=span r=time s=task]           ::  project change
+      $%  [& p=@p q=@tas r=time s=(list task)]    ::  project changeset
           [| p=@p q=?]                            ::  local on/off
       ==
     ++  room
@@ -85,11 +85,9 @@
           dos=(map span desk)                     ::  projects 
       ==
     ++  task                                      ::  change
-      $|  ~                                       ::  nop
-      $%  [%ev p=(list task)]                     ::  multi change
-          [%gv p=path q=*]                        ::  write file
-          [%kl p=path]                            ::  remove file
-          [%rl p=span]                            ::  release label
+      $%  [%gv p=path q=*]                        ::  write file
+      ::  [%kl p=path]                            ::  remove file
+          [%rl p=@tas]                            ::  release to label
       ==
     --
 =+  sys=*game
@@ -101,11 +99,8 @@
   =+  hos=(slay i.hap)                          ::  host
   ?.  &(?=(^ hos) ?=([%% %p *] u.hos))  ~
   ?~  t.hap  ~
-  ~&  [%cary-slay i.t.hap]
   =+  poj=(slay i.t.hap)                        ::  project
-  ~&  %cary-slain
-  ~&  [%cary-slain `*`poj]
-  ?.  &(?=(^ poj) ?=([%% %ta *] u.poj))  ~
+  ?.  &(?=(^ poj) ?=([%% %tas *] u.poj))  ~
   ?~  t.t.hap  ~
   =+  mag=(slay i.t.t.hap)                      ::  revision
   ?.  &(?=(^ mag) ?=([%% %da *] u.mag))  ~
@@ -128,6 +123,7 @@
   |=  [cam=lens man=*] 
   ^-  [p=lime q=bowl]
   =+  muv=(move man)
+  ~&  [%cary-poke muv]
   ?.  =(muv man)
     [~ ..poke]
   ?-    muv
@@ -152,41 +148,24 @@
           tes(dos (~(put by dos.tes) q.muv q.niz))
         ==
     ^=  niz  ^-  [p=lime q=desk]
-    ?.  (gth r.muv wen.taq)
-      [~ taq]
-    =>  ^+(. .(seq.taq +(seq.taq), wen.taq r.muv))
-    |-  ^-  [p=lime q=desk]
-    ?-    s.muv
-        ~        [~ taq]
-        [%ev *]
-      =-  [[%all p.moy] q.moy]
-      ^=  moy  |-  ^-  [p=(list lime) q=desk]
-      ?~  p.s.muv
-        [~ taq]
-      =+  buz=^$(s.muv i.p.s.muv)
-      =+  niz=$(p.s.muv t.p.s.muv, taq q.buz)
-      [[p.buz p.niz] q.niz]
-    ::
+    =-  [[%all p.wux] [+(seq.taq) ?>((gth r.muv wen.taq) r.muv) q.wux]]
+    ^=  wux
+    |-  ^-  [p=(list lime) q=arch]
+    ?~  s.muv
+      [~ rad.taq] 
+    =+  har=$(s.muv t.s.muv)
+    ?-    i.s.muv
         [%gv *]  
-      :-  =+  yom=(~(also cy rad.taq) p.s.muv)
+      :-  =+  yom=(~(also cy q.har) p.i.s.muv)
           =+  old=?:(?=([& *] yom) p.yom 0)
           =+  huu=~(rent co [~ %p p.muv])
-          [%say %yo %o %cary %sync old huu q.muv p.s.muv]
-      taq(rad (~(give cy rad.taq) r.muv p.s.muv q.s.muv))
-    ::
-        [%kl *]  
-      :-  =+  yom=(~(also cy rad.taq) p.s.muv)
-          =+  old=?:(?=([& *] yom) p.yom 0)
-          =+  huu=~(rent co [~ %p p.muv])
-          [%say %yo %o %cary %sync old huu q.muv p.s.muv]
-      taq(rad (~(kill cy rad.taq) r.muv p.s.muv))
+          [[%say %yo %o %cary %sync old huu q.muv p.i.s.muv] p.har]
+      (~(give cy q.har) r.muv p.i.s.muv q.i.s.muv)
     ::
         [%rl *]
-      :-  :-  %say
-          :+  %pu
-            [~(rent co [~ %p p.muv]) q.muv p.s.muv %a ~]
-          rad.taq
-      taq
+      :-  :-  [%say [%pu [~(rent co [~ %p p.muv]) q.muv p.i.s.muv %a ~] q.har]]
+          p.har
+      q.har
     ==
   ==
 --

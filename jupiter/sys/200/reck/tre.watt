@@ -1,4 +1,4 @@
-::
+!:
 ::          %reck layer 3.  This file is in the public domain.
 ::
 =>  ::
@@ -62,13 +62,16 @@
   ++  iris                                  ::  top-level namespace
     |=  now=time  ^-  lens
     |%
-    ++  hope                                ::  series, permanent
+    ++  hope                                ::  series, deck
       |=  [wid=quid qey=quay]
       ^-  (list cash)
       (mine:daq wid qey)
     ::
-    ++  peek                                ::  probe, transient
+    ++  peek                                ::  probe, deck and pod
       |=  hap=path  ^-  (unit)
+      =+  roy=(pray hap)
+      ?^  roy
+        [~ q.u.roy]
       |-  ^-  (unit)
       ?~  pod
         ~
@@ -76,7 +79,7 @@
         $(pod t.pod)
       (peek:q.i.pod ..peek t.hap)
     ::
-    ++  pray                                ::  probe, permanent
+    ++  pray                                ::  probe, deck
       |=  [hap=path]  ^-  (unit bill)
       =+  nev=(mine:daq [~ ~] [hap |=(* [~ ~])])
       ?~  nev  ~
@@ -84,7 +87,7 @@
       [~ q.i.r.i.nev]
     ::
     ++  when  now
-    ++  wish                                ::  sequence, permanent
+    ++  wish                                ::  sequence, deck
       |=  [wid=quid qey=quay]
       ^-  (list case) 
       (plow:daq wid qey)

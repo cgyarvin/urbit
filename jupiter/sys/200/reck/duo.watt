@@ -1,4 +1,4 @@
-::
+!:
 ::          %reck layer 2.  This file is in the public domain.
 ::
 =>  ::
@@ -162,12 +162,14 @@
             |(?=(~ q.p.peq) (lte p.q.fet u.q.p.peq))
         ==
       ~
-    |-  ^-  (unit)
-    ?~  p.q.peq
-      |-  ^-  (unit)
-      =+  zyr=(q.q.peq p.fet)
-      ?~(zyr ?~(p.fet ~ $(p.fet t.p.fet)) zyr)
-    ?~(p.fet ~ $(p.q.peq t.p.q.peq, p.fet t.p.fet))
+    =+  ^=  hoj
+        |-  ^-  (unit path)
+        ?~  p.q.peq
+          [~ p.fet]
+        ?:  |(?=(~ p.fet) !=(i.p.q.peq i.p.fet))
+          ~
+        $(p.q.peq t.p.q.peq, p.fet t.p.fet)
+    ?~(hoj ~ (q.q.peq u.hoj))
   ::
   ++  lash
     |=  [tec=rail vac=(list fact) baz=(list lime)]
