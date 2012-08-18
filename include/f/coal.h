@@ -1077,6 +1077,9 @@
         u2_noun
         u2_cka_mul(u2_noun a, u2_noun b);
 
+        u2_flag
+        u2_cka_lte(u2_noun a, u2_noun b);
+
     /* u2_ckb: tier 2 functions
     */
       /* u2_ckb_lent(): length of a list.

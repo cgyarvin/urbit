@@ -646,6 +646,17 @@ u2_cka_mul(u2_noun a, u2_noun b)
   return c;
 }
 
+/* u2_cka_lte(): a * b.
+*/
+u2_noun
+u2_cka_lte(u2_noun a, u2_noun b)
+{
+  u2_noun c = j2_mbc(Pt1, lte)(u2_Wire, a, b);
+
+  u2_cz(a); u2_cz(b);
+  return c;
+}
+
 /* u2_ckb_lent(): length of list `a`.
 */
 u2_noun

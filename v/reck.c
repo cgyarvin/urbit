@@ -172,6 +172,7 @@ u2_reck_peek(u2_reck* rec_u, u2_noun hap)
 void
 u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
 {
+  memset(rec_u, 0, sizeof(*rec_u));
   rec_u->kno_w = kno_w;
   rec_u->rno_w = 0;
 
@@ -325,7 +326,6 @@ u2_reck_boot(u2_reck* rec_u)
 
       _reck_poke(rec_u, lam);
     } 
-
     u2_cm_done();
   
     u2_cm_purge();
@@ -344,6 +344,13 @@ u2_reck_line(u2_reck* rec_u, u2_noun lin)
   static c3_w seq_w = 1;
 
   _reck_time_set(rec_u);
+
+  {
+    u2_noun lam = u2_sync_reck(rec_u);
+
+    _reck_poke(rec_u, lam);
+  }
+
   {
     u2_noun lam = u2nq('l', u2nc(0, 0), seq_w, lin);
 

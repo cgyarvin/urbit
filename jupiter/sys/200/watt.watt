@@ -1319,6 +1319,7 @@
   ++  disc  ,@ta
   ++  edge  ,[p=hair q=(unit ,[p=* q=nail])]
   ++  hair  ,[p=@ud q=@ud]
+  ++  hapt  (list ,@ta)
   ++  like  |*  a=_,*
             |=  b=_`*`[(hair) ~]
             :-  p=(hair -.b) 
@@ -2806,6 +2807,12 @@
     |=  ruz=@ 
     =+  haz=(shax ruz)
     (mix (end 7 1 haz) (rsh 7 1 haz))
+  ::
+  ++  sham                                              ::  noun hash
+    |=  yux=*  ^-  @uvI  ^-  @
+    ?@  yux
+      (shax yux)
+    (mix (dec (lsh 8 1 1)) (jam yux))
   ::
   ++  shax                                              ::  sha-256
     ~/  %shax

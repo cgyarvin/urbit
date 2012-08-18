@@ -16,7 +16,6 @@
   ++  clod  ,[p=time q=*]                           ::  mtime content
   ++  dirt  ,[p=time q=(map span arch)]             ::  mtime listing
   ++  fact  ,[p=path q=bill]                        ::  monotonic binding
-  ++  hapt  path                                    ::  reversed path
   ++  meta                                          ::  path metadata
     $%  [& p=time]                                  ::  mtime
         [| p=time q=(list span)]                    ::  mtime dir
@@ -41,7 +40,10 @@
         ==
       ?-  a
         [& *]  [%| `@da`0 ~]
-        [| *]  =+(gos=(~(get by q.a) i.hap) ?~(gos [%| `@da`0 ~] $(a u.gos)))
+        [| *]  =+  gos=(~(get by q.a) i.hap) 
+               ?~  gos  
+                 [%| `@da`0 ~]
+               $(hap t.hap, a u.gos)
       ==
     ::
     ++  give                                          ::  apply

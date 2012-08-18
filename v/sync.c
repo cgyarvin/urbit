@@ -1,4 +1,4 @@
-/* v/reck.c
+/* v/sync.c
 **
 **  This file is in the public domain.
 */
@@ -319,75 +319,45 @@ _sync_edit(u2_reck* rec_u,
            u2_noun  muv)              //  change list
 {
   u2_noun mey = _sync_peek_meta(rec_u, u2k(pos), u2k(bok), u2k(ram));
+  u2_noun end;
 
   if ( u2_nul == mey ) {
     return _sync_give(rec_u, pos, bok, ram, nod, muv);
-  }
-  else {
-    c3_assert(!"other crap");
-  }
-}
+  } else {
+    u2_noun yem = u2k(u2t(mey));
 
-#if 0
-/* _sync_live(): sync in editable directory.
-*/
-static u2_noun
-_sync_live(u2_reck* rec_u, u2_noun rah, u2_noun nod, u2_noun det)
-{
-  u2_noun hac = u2_ckb_flop(u2k(rah));
-  u2_noun mey = _sync_peek_meta(rec_u, u2_no, u2k(hac));
-  u2_flag end;
-
-  //  simpler path for pure checkin
-  {
-    if ( u2_nul == mey ) {
-      u2z(hac);
-      return _sync_give(rec_u, rah, nod, det);
-    }
-    else {
-      u2_noun yem = u2k(u2t(mey));
-
-      u2z(mey); mey = yem;
-    }
+    u2z(mey); mey = yem;
   }
 
   //  dir/file must match, please don't fsck this up for now
   {
     if ( u2h(nod) != u2h(mey) ) {
-      //  XX  error
+      //  XX  proper error reporting
       printf("yo, sync mismatch\n");
-      u2z(rah); u2z(hac); u2z(mey);
-      return det;
+      goto done;
     }
     else end = u2h(nod);
   }
 
   if ( u2_yes == end ) {
-    c3_d nod_d = u2_cr_chub(0, u2t(nod));
-    c3_d mey_d = u2_cr_chub(0, u2t(mey));
-    
-    if ( nod_d == mey_d ) {                             //  already in sync
-      u2z(hac);
+    if ( u2_yes == u2_sing(u2t(nod), u2t(mey)) ) {
+      goto done;
     }
-    else if ( nod_d > mey_d ) {                         //  unix file is newer
-      u2_noun pad = _sync_flat(u2_no, u2k(hac));
+    else if ( u2_yes == u2_cka_lte(u2k(u2t(mey)), u2k(u2t(nod))) ) {
+      u2_noun pad = _sync_unix_data(u2k(pos), u2k(bok), u2k(ram));
 
-      det = u2nc(u2nc(c3_s2('p','o'),
-                      u2nt(hac, c3_s2('g', 'v'), pad)),
-                 det);
+      u2_err(u2_Wire, "mey", u2t(mey));
+      u2_err(u2_Wire, "nod", u2t(nod));
+
+      muv = u2nc(u2nt(c3_s2('g','v'), u2_ckb_flop(u2k(ram)), pad), muv);
     }
-    else {                                              //   cary is newer
-      u2_noun pad = _sync_peek_data(rec_u, u2_no, u2k(hac));
-        
-      if ( u2_nul == pad ) {
-        printf("%s missing & obsolete!\n", _sync_file(u2_no, u2k(hac))); 
-      } else {
-        printf("%s is obsolete!\n", _sync_file(u2_no, u2k(hac)));
+    else {
+      printf("yo, reverse update\n");
 
-        _sync_push(u2_no, u2k(hac), mey_d, u2k(u2t(pad)));
-        u2z(pad);
-      }
-      u2z(hac);
+      u2_err(u2_Wire, "mey time", u2t(mey));
+      u2_err(u2_Wire, "nod time", u2t(nod));
+
+      goto done;
     }
   }
   else {
@@ -398,20 +368,24 @@ _sync_live(u2_reck* rec_u, u2_noun rah, u2_noun nod, u2_noun det)
       u2_noun sil = u2k(u2t(u2t(mey)));
       u2_noun dun = u2k(u2t(nod));
 
-      u2z(mey); u2k(nod);
+      u2z(mey); u2z(nod);
       mey = sil;
       nod = dun;
     }
 
     //  we also be wanting a map - and a unix list
     // 
-    yip = u2_ckd_in_tap(u2k(u2t(nod)), u2_nul);
-    wam = u2_ckd_in_gas(u2k(mey), u2_nul);
+    yip = u2_ckd_in_tap(u2k(nod), u2_nul);
+    wam = u2_ckd_in_gas(u2_nul, u2k(mey));
 
     //  yip == (list ,[span node]) of unix files
     //  nod == map of unix files
     //  wam == set of cary files
     //  mey == (list span) of cary files
+
+    printf("iterating at %s\n", 
+          _sync_unix(u2_yes, _sync_norm_e(u2k(pos), u2k(bok), u2k(ram))));
+    u2_err(u2_Wire, "mey", mey);
 
     //  iterate by unix files
     //
@@ -419,16 +393,25 @@ _sync_live(u2_reck* rec_u, u2_noun rah, u2_noun nod, u2_noun det)
       u2_noun i = u2h(n);   //  [span node]
 
       if ( u2_no == u2_ckd_in_has(u2k(wam), u2k(u2h(i))) ) {
-        det = _sync_give
-          (rec_u, u2nc(u2k(u2h(i)), u2k(rah)), u2k(u2t(i)), det);
+        muv = _sync_give
+          (rec_u, u2k(pos), 
+                  u2k(bok),
+                  u2nc(u2k(u2h(i)), u2k(ram)), 
+                  u2k(u2t(i)),
+                  muv);
       } else {
-        det = _sync_live
-          (rec_u, u2nc(u2k(u2h(i)), u2k(rah)), u2k(u2t(i)), det);
+        muv = _sync_edit
+          (rec_u, u2k(pos), 
+                  u2k(bok),
+                  u2nc(u2k(u2h(i)), u2k(ram)), 
+                  u2k(u2t(i)),
+                  muv);
       }
     }
 
     //  iterate by cary files - should not be needed (but is).
     //
+#if 0
     for ( n=mey; u2_nul != n; n=u2t(n) ) {
       u2_noun i = u2h(n);
 
@@ -439,13 +422,15 @@ _sync_live(u2_reck* rec_u, u2_noun rah, u2_noun nod, u2_noun det)
         _sync_take(rec_u, u2_no, u2nc(u2k(i), u2k(rah)));
       }
     }
+#endif
     u2z(yip);
     u2z(wam);
   }
-  u2z(rah); u2z(hac); u2z(mey);
-  return det;
+
+done:
+  u2z(pos); u2z(bok); u2z(ram); u2z(nod); u2z(mey);
+  return muv;
 }
-#endif
 
 /* _sync_edit_m():
 */

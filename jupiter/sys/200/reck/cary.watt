@@ -108,6 +108,7 @@
 ++  peek  
   |=  [cam=lens hap=path]
   ^-  (unit)
+  ~&  [%mota %hap `path`hap]
   ?~  hap  ~
   =+  hos=(slay i.hap)                          ::  host
   ?.  &(?=(^ hos) ?=([%% %p *] u.hos))  ~
@@ -129,7 +130,12 @@
   ?+  i.t.t.t.hap  ~
     %a  [~ rad.u.siq]
     %d  (~(grab cy rad.u.siq) t.t.t.t.hap)
-    %m  [~ (~(also cy rad.u.siq) t.t.t.t.hap)]
+    %m  =+  out=[~ (~(also cy rad.u.siq) t.t.t.t.hap)]
+        ~&  [%meta %hap `path`hap]
+        ~&  [%meta %tttthap t.t.t.t.hap]
+        ~&  [%meta %out out]
+        ~&  [%meta %rad rad.u.siq]
+        out
     %x  ?.(=(q.p.u.mag when:cam) ~ [~ seq.u.siq wen.u.siq])
   ==
 ++  poke  

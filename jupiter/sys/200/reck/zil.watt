@@ -1,7 +1,112 @@
-::
+!:
 ::          %reck layer 0.  This file is in the public domain.
 ::
 |%
 ++  zuul
   !!
+++  troy
+  =>  |%                                            ::
+      ++  arch                                      ::  fs node
+        $%  [& clod]                                ::  ie, file
+            [| dirt]                                ::  ie, directory
+        ==                                          ::
+      ++  clod  ,[p=@da q=@uvI r=*]                 ::  mtime hash content
+      ++  dirt  ,[p=@da q=(map ,@ta arch)]          ::  mtime tree
+      ++  nope  ^~(^-(arch [%| @ ~]))               ::  empty node
+      ++  meta                                      ::  path metadata
+        $%  [& p=@da q=@uvI]                        ::  mtime hash
+            [| p=@da q=(list ,@ta)]                 ::  mtime dir
+        ==                                          ::
+      ++  ukaz                                      ::  change (pl ukazy)
+        $:  p=path                                  ::  change site
+            ^=  q                                   ::  change content
+            $%  [%del p=@uvI]                       ::  delete old-hash
+                [%set p=@uvI q=@uvI r=*]            ::  new-hash old-hash data
+            ==                                      ::
+        ==                                          ::
+      ++  umaz  ,[p=(list ukaz) q=(list ukaz)]      ::  car change, bus change
+      ++  uwed  |=  [a=umaz b=umaz]  ^-  umaz       ::  weld dual change
+                [(weld p.a p.b) (weld q.a q.b)]     ::
+      --                                            ::
+  |%
+  ++  cy
+    =+  car=*arch
+    |%  
+    ++  also                                        ::  metadata
+      |=  pax=path  ^-  meta
+      =>  .(car (sift pax))
+      ?-  -.car
+        &  [%& p.car q.car]
+        |  [%| p.car (turn (~(tap by q.car) ~) |=([p=@ta *] p))]
+      ==
+    ::
+    ++  duel                                        ::  compute changes
+      |=  bus=arch  
+      =+  ram=*hapt
+      =+  maz=*umaz
+      |-  ^-  umaz
+      ?:  =(car bus)
+        maz
+      =+  pax=(flop ram)
+      ?:  ?=(& -.car)
+        ?.  ?=(& -.bus)  
+          =+  zam=$(maz [q.maz p.maz], bus car, car bus)
+          [q.zam p.zam]
+        ?:  =(q.car q.bus)
+          maz
+        ?:  (gte p.car p.bus)
+          [p.maz [[pax %set q.car q.bus r.car] q.maz]]
+        [[[pax %set q.bus q.car r.bus] p.maz] q.maz]
+      ?.  ?=(| -.bus)
+        ?:  (gte p.car p.bus)
+          =>  .(maz $(bus nope))
+          [p.maz [[pax %del q.bus] q.maz]]
+        :-  :+  [pax %del @]
+              [pax %set q.bus @ r.bus]
+            p.maz
+        q.maz
+      =+  ryc=(~(tap by q.car) ~)
+      =+  seb=(~(tap by q.bus) ~)
+      !!
+    ::
+    ++  sift                                         ::  select subtree
+      |=  pax=path
+      ^-  arch
+      ?~  pax
+        car
+      ?-    car
+          [& *]  nope
+          [| *]  
+        =+  gos=(~(get by q.car) i.pax) 
+        ?~(gos nope $(pax t.pax, car u.gos))
+      ==
+    ::
+    ++  wear                                         ::  apply ukaz
+      |=  [now=@da kuz=ukaz]
+      ^-  arch
+      ?~  p.kuz
+        =+  hux=?:(?=(& -.car) q.car 0)
+        ?-  -.q.kuz
+          %del  ?>(=(hux p.q.kuz) nope)
+          %set  ?>(=(hux q.q.kuz) [%& now p.q.kuz r.q.kuz])
+        ==
+      ?>  ?=(| -.car)
+      =+  yit=(~(get by q.car) i.p.kuz)
+      =+  dan=$(p.kuz t.p.kuz, car ?~(yit nope u.yit))
+      ?:  =(nope dan)
+        ?~  yit 
+          car 
+        =+(hon=(~(del by q.car) i.p.kuz) ?~(hon nope [%| now hon]))
+      ?~  yit 
+        [%| now [[i.p.kuz dan] ~ ~]] 
+      ?:  =(dan u.yit)
+        car
+      =+(hon=(~(put by q.car) i.p.kuz dan) [%| now hon])
+    ::
+    ++  work                                         ::  apply ukazy
+      |=  [now=@da kuz=(list ukaz)]
+      ^-  arch
+      ?~(kuz car $(car (wear now i.kuz), kuz t.kuz))
+    --
+  --
 --
