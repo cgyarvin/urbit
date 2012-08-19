@@ -5,7 +5,7 @@
 ++  zuul
   !!
 ++  troy
-  =>  |%                                            ::
+  =>  |%
       ++  arch                                      ::  fs node
         $%  [& clod]                                ::  ie, file
             [| dirt]                                ::  ie, directory
@@ -27,7 +27,8 @@
       ++  umaz  ,[p=(list ukaz) q=(list ukaz)]      ::  car change, bus change
       ++  uwed  |=  [a=umaz b=umaz]  ^-  umaz       ::  weld dual change
                 [(weld p.a p.b) (weld q.a q.b)]     ::
-      --                                            ::
+      ++  uzag  |=(a=umaz ^-(umaz [q.a p.a]))       ::  reverse dual change
+      --
   |%
   ++  cy
     =+  car=*arch
@@ -50,24 +51,35 @@
       =+  pax=(flop ram)
       ?:  ?=(& -.car)
         ?.  ?=(& -.bus)  
-          =+  zam=$(maz [q.maz p.maz], bus car, car bus)
-          [q.zam p.zam]
+          (uzag $(maz (uzag maz), bus car, car bus))
         ?:  =(q.car q.bus)
           maz
-        ?:  (gte p.car p.bus)
+        ?:  (gth p.car p.bus)
           [p.maz [[pax %set q.car q.bus r.car] q.maz]]
         [[[pax %set q.bus q.car r.bus] p.maz] q.maz]
       ?.  ?=(| -.bus)
-        ?:  (gte p.car p.bus)
+        ?:  (gth p.car p.bus)
           =>  .(maz $(bus nope))
           [p.maz [[pax %del q.bus] q.maz]]
         :-  :+  [pax %del @]
               [pax %set q.bus @ r.bus]
             p.maz
         q.maz
-      =+  ryc=(~(tap by q.car) ~)
-      =+  seb=(~(tap by q.bus) ~)
-      !!
+      =-  $:pox(maz (uzag $:pox(maz (uzag maz), car bus, bus car)))
+      ^=  pox
+      |.
+      =+  lay=(gth p.car p.bus)
+      =+  war=(~(tap by q.car) ~)
+      |-  ^-  umaz
+      ?~  war
+        maz
+      =>  .(maz $(war t.war))
+      =+  loo=(~(get by q.bus) p.i.war)
+      %=  ^^$
+        ram  [p.i.war ram]
+        car  q.i.war 
+        bus  ?~(loo [%| ?:(lay @ p.bus) ~] u.loo)
+      ==
     ::
     ++  sift                                         ::  select subtree
       |=  pax=path
