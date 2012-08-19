@@ -71,17 +71,25 @@ _reck_slop(u2_reck* rec_u, u2_noun hed, u2_noun tal)
   return u2_cn_mung(u2k(rec_u->toy.slop), u2nc(hed, tal));
 }
 
+/* _reck_gate(): nock gate from vase and text.
+*/
+static u2_noun
+_reck_gate(u2_reck* rec_u, u2_noun vax, const c3_c* txt_c)
+{
+  u2_noun gen = _reck_ream(rec_u, u2_ci_string(txt_c));
+  u2_noun vag = _reck_slap(rec_u, vax, gen);
+  u2_noun gat = u2k(u2t(vag));
+
+  u2z(vag); 
+  return gat;
+}
+
 /* _reck_hard(): function against vase, producing noun.
 */
 static u2_noun
 _reck_hard(u2_reck* rec_u, u2_noun vax, const c3_c* txt_c, u2_noun sam)
 {
-  u2_noun gen = _reck_ream(rec_u, u2_ci_string(txt_c));
-  u2_noun gat = _reck_slap(rec_u, vax, gen);
-  u2_noun ret = u2_cn_mung(u2k(u2t(gat)), sam);
-
-  u2z(gat);
-  return ret;
+  return u2_cn_mung(_reck_gate(rec_u, vax, txt_c), sam);
 }
 
 /* _reck_soft(): function against vase, producing vase.
@@ -181,6 +189,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
 
   rec_u->toy.rain = _reck_root("rain", u2k(ken));
   rec_u->toy.ream = _reck_root("ream", u2k(ken));
+  rec_u->toy.sham = _reck_root("sham", u2k(ken));
   rec_u->toy.slam = _reck_root("slam", u2k(ken));
   rec_u->toy.slap = _reck_root("slap", u2k(ken));
   rec_u->toy.slop = _reck_root("slop", u2k(ken));
@@ -193,17 +202,27 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     free(dyt_c);
   }
   {
-    u2_noun syd = u2k(rec_u->syd);
-    u2_noun zil = _reck_load_temp(rec_u, syd, kno_w, "reck/zil.watt");
-    u2_noun uno = _reck_load_temp(rec_u, zil, kno_w, "reck/uno.watt");
-    u2_noun duo = _reck_load_temp(rec_u, uno, kno_w, "reck/duo.watt");
-    u2_noun tre = _reck_load_temp(rec_u, duo, kno_w, "reck/tre.watt");
-    u2_noun bor = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/born.watt");
-    u2_noun car = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/cary.watt");
-    u2_noun qua = _reck_load_temp(rec_u, tre, kno_w, "reck/qua.watt");
-    u2_noun nul = u2nc(u2nt(c3__cube, 0, u2nc(c3__atom, 'n')), 0);
-    u2_noun pay = _reck_slop(rec_u, bor, _reck_slop(rec_u, car, nul));
-    u2_noun now = u2nc(u2nc(c3__atom, c3_s2('d','a')), u2k(rec_u->now));
+    u2_noun syd, zil, uno, duo, tre, bor, car, qua, nul, pay, now;
+
+    syd = u2k(rec_u->syd);
+
+    zil = _reck_load_temp(rec_u, syd, kno_w, "reck/zil.watt");
+    uno = _reck_load_temp(rec_u, zil, kno_w, "reck/uno.watt");
+    duo = _reck_load_temp(rec_u, uno, kno_w, "reck/duo.watt");
+    tre = _reck_load_temp(rec_u, duo, kno_w, "reck/tre.watt");
+
+    bor = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/born.watt");
+    car = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/cary.watt");
+
+    rec_u->toy.arch = _reck_gate(rec_u, u2k(car), "arch");
+    rec_u->toy.duel = 
+      _reck_gate(rec_u, u2k(car), "|=([a=arch b=arch] (~(duel cy a) b))");
+
+    qua = _reck_load_temp(rec_u, tre, kno_w, "reck/qua.watt");
+
+    nul = u2nc(u2nt(c3__cube, 0, u2nc(c3__atom, 'n')), 0);
+    pay = _reck_slop(rec_u, bor, _reck_slop(rec_u, car, nul));
+    now = u2nc(u2nc(c3__atom, c3_s2('d','a')), u2k(rec_u->now));
 
     rec_u->rec = _reck_slam(rec_u, qua, _reck_slop(rec_u, now, pay));
   }
@@ -305,6 +324,7 @@ u2_reck_boot(u2_reck* rec_u)
                  u2k(u2_Host.ver_e[u2_Host.kno_w].ken));
     // printf("loaded reck.\n");
 
+#if 0
     /* initial sync with filesystem
     */
     {
@@ -312,6 +332,7 @@ u2_reck_boot(u2_reck* rec_u)
 
       _reck_poke(rec_u, lam);
     }
+#endif
 
     /* hack - hardcode a local.
     */
@@ -344,13 +365,13 @@ u2_reck_line(u2_reck* rec_u, u2_noun lin)
   static c3_w seq_w = 1;
 
   _reck_time_set(rec_u);
-
+#if 0
   {
     u2_noun lam = u2_sync_reck(rec_u);
 
     _reck_poke(rec_u, lam);
   }
-
+#endif
   {
     u2_noun lam = u2nq('l', u2nc(0, 0), seq_w, lin);
 

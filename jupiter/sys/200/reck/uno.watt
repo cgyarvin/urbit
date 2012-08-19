@@ -5,21 +5,11 @@
   ::::          Tier Gy, general geometry
   ::
   |%
-  ++  arch                                          ::  fs node
-    $%  [& clod]                                    ::  ie, file
-        [| dirt]                                    ::  ie, directory
-    ==                                              ::
   ++  bill  ,[p=time q=*]                           ::  time and value
   ++  brig  ,[o=(unit bill) v=(map span brig)]      ::  raw path tree
   ++  case  ,[p=path q=* r=(list ,[p=@ud q=bill])]  ::  sequence report
   ++  cash  ,[p=path q=* r=(list fact)]             ::  series report
-  ++  clod  ,[p=time q=*]                           ::  mtime content
-  ++  dirt  ,[p=time q=(map span arch)]             ::  mtime listing
   ++  fact  ,[p=path q=bill]                        ::  monotonic binding
-  ++  meta                                          ::  path metadata
-    $%  [& p=time]                                  ::  mtime
-        [| p=time q=(list span)]                    ::  mtime dir
-    ==                                              ::
   ++  quay  ,[p=path q=_|+(* *(unit))]              ::  prefix/suffix
   ++  quid  ,[p=(unit time) q=(unit time)]          ::  query window
   ++  quip  ,[p=quid q=quay]                        ::  windowed query
@@ -28,73 +18,6 @@
   ::::
   ::
   |%
-  ++  cy
-    =+  a=*arch
-    |%  
-    ++  also                                          ::  metadata
-      |=  hap=path  ^-  meta
-      ?~  hap
-        ?-  a
-          [& *]  [%& p.a]
-          [| *]  [%| p.a (turn (~(tap by q.a) ~) |=([p=span q=arch] p))]
-        ==
-      ?-  a
-        [& *]  [%| `@da`0 ~]
-        [| *]  =+  gos=(~(get by q.a) i.hap) 
-               ?~  gos  
-                 [%| `@da`0 ~]
-               $(hap t.hap, a u.gos)
-      ==
-    ::
-    ++  give                                          ::  apply
-      |=  [now=time hap=path dat=*]
-      ^-  arch
-      ?~  hap
-        ?:  &(?=(& -.a) =(q.a dat))
-          a
-        [%& now dat]
-      ?-  a
-        [& *]  $(a [%| `@da`0 ~])
-        [| *]  [%| now (~(put by q.a) i.hap $(hap t.hap))]
-      ==
-    ::
-    ++  grab                                          ::  just the data
-      |=  hap=path
-      ^-  (unit)
-      =+  yed=(sift hap)
-      ?.  ?=([& *] yed)
-        ~
-      [~ q.yed]
-    ::
-    ++  kill                                          ::  delete
-      |=  [now=time hap=path]
-      ^-  arch
-      ?~  hap
-        [%| `@da`0 ~]
-      ?-    a
-          [& *]  [%| `@da`0 ~] 
-          [| *]
-        =+  gos=(~(get by q.a) i.hap)
-        ?~  gos
-          a
-        =+  weh=$(a u.gos, hap t.hap)
-        ?:  ?=([| * ~] weh)
-          [%| now (~(del by q.a) i.hap)]
-        [%| now (~(put by q.a) i.hap weh)]
-      ==
-    ::
-    ++  sift                                          ::  select subtree
-      |=  hap=path
-      ^-  arch
-      ?~  hap
-        a
-      ?-    a
-          [& *]  [%| `@da`0 ~]
-          [| *]  
-        =+  gos=(~(get by q.a) i.hap) 
-        ?~(gos [%| `@da`0 ~] $(hap t.hap, a u.gos))
-      ==
-    --
   ++  ra
     |_  a=brig
     ++  chit                                          ::  primitive subtree

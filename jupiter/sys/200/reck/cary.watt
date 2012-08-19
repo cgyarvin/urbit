@@ -2,7 +2,145 @@
 ::          %cary, revision control.   This file is in the public domain.
 ::
 :-  %cary
-^-  dock
+=>  |%
+    ++  arch                                      ::  fs node
+      $%  [& clod]                                ::  ie, file
+          [| dirt]                                ::  ie, directory
+      ==                                          ::
+    ++  clod  ,[p=@da q=@uvI r=*]                 ::  mtime hash content
+    ++  dirt  ,[p=@da q=(map ,@ta arch)]          ::  mtime tree
+    ++  nope  ^~(^-(arch [%| @ ~]))               ::  empty node
+    ++  meta                                      ::  path metadata
+      $%  [& p=@da q=@uvI]                        ::  mtime hash
+          [| p=@da q=(list ,@ta)]                 ::  mtime dir
+      ==                                          ::
+    ++  ukaz                                      ::  change (plural ukazy)
+      $:  p=path                                  ::  change site
+          ^=  q                                   ::  change content
+          $%  [%del p=@uvI]                       ::  delete old-hash
+              [%set p=@uvI q=@uvI r=*]            ::  new-hash old-hash data
+          ==                                      ::
+      ==                                          ::
+    ++  umaz  ,[p=(list ukaz) q=(list ukaz)]      ::  dual change
+    ++  uwed  |=  [a=umaz b=umaz]  ^-  umaz       ::  weld dual change
+              [(weld p.a p.b) (weld q.a q.b)]     ::
+    ++  uzag  |=(a=umaz ^-(umaz [q.a p.a]))       ::  reverse dual change
+    --
+=>  |%
+    ++  desk                                      ::  project state
+      $:  seq=@                                   ::  seqno, from 1
+          wen=time                                ::  date of change
+          rad=arch                                ::  state now
+      ==
+    ++  game  
+      $:  wod=(map ,@p room)                      ::  complete state
+      ==
+    ++  move
+      $%  [& p=@p q=@tas r=time s=task]           ::  project action
+          [| p=@p q=?]                            ::  local on/off
+      ==
+    ++  room
+      $:  our=?                                   ::  local/foreign
+          dos=(map span desk)                     ::  projects 
+      ==
+    ++  task                                      ::  action
+      $%  [%do p=(list ukaz)]                     ::  edit tree
+          [%re p=@tas]                            ::  release to label
+      ::  [%ti p=arch]                            ::  learn foreign release
+      ==
+    --
+=>  |%
+    ++  cy
+      =+  car=*arch
+      |%  
+      ++  also                                        ::  metadata
+        |=  pax=path  ^-  meta
+        =>  .(car (sift pax))
+        ?-  -.car
+          &  [%& p.car q.car]
+          |  [%| p.car (turn (~(tap by q.car) ~) |=([p=@ta *] p))]
+        ==
+      ::
+      ++  duel                                        ::  compute changes
+        |=  bus=arch  
+        =+  ram=*hapt
+        =+  maz=*umaz
+        |-  ^-  umaz
+        ?:  =(car bus)
+          maz
+        =+  pax=(flop ram)
+        ?:  ?=(& -.car)
+          ?.  ?=(& -.bus)  
+            (uzag $(maz (uzag maz), bus car, car bus))
+          ?:  =(q.car q.bus)
+            maz
+          ?:  (gth p.car p.bus)
+            [p.maz [[pax %set q.car q.bus r.car] q.maz]]
+          [[[pax %set q.bus q.car r.bus] p.maz] q.maz]
+        ?.  ?=(| -.bus)
+          ?:  (gth p.car p.bus)
+            =>  .(maz $(bus nope))
+            [p.maz [[pax %del q.bus] q.maz]]
+          :-  :+  [pax %del @]
+                [pax %set q.bus @ r.bus]
+              p.maz
+          q.maz
+        =-  $:pox(maz (uzag $:pox(maz (uzag maz), car bus, bus car)))
+        ^=  pox
+        |.
+        =+  lay=(gth p.car p.bus)
+        =+  war=(~(tap by q.car) ~)
+        |-  ^-  umaz
+        ?~  war
+          maz
+        =>  .(maz $(war t.war))
+        =+  loo=(~(get by q.bus) p.i.war)
+        %=  ^^$
+          ram  [p.i.war ram]
+          car  q.i.war 
+          bus  ?~(loo [%| ?:(lay @ p.bus) ~] u.loo)
+        ==
+      ::
+      ++  sift                                         ::  select subtree
+        |=  pax=path
+        ^-  arch
+        ?~  pax
+          car
+        ?-    car
+            [& *]  nope
+            [| *]  
+          =+  gos=(~(get by q.car) i.pax) 
+          ?~(gos nope $(pax t.pax, car u.gos))
+        ==
+      ::
+      ++  wear                                         ::  apply ukaz
+        |=  [now=@da kuz=ukaz]
+        ^-  arch
+        ?~  p.kuz
+          =+  hux=?:(?=(& -.car) q.car 0)
+          ?-  -.q.kuz
+            %del  ?>(=(hux p.q.kuz) nope)
+            %set  ?>(=(hux q.q.kuz) [%& now p.q.kuz r.q.kuz])
+          ==
+        ?>  ?=(| -.car)
+        =+  yit=(~(get by q.car) i.p.kuz)
+        =+  dan=$(p.kuz t.p.kuz, car ?~(yit nope u.yit))
+        ?:  =(nope dan)
+          ?~  yit 
+            car 
+          =+(hon=(~(del by q.car) i.p.kuz) ?~(hon nope [%| now hon]))
+        ?~  yit 
+          [%| now [[i.p.kuz dan] ~ ~]] 
+        ?:  =(dan u.yit)
+          car
+        =+(hon=(~(put by q.car) i.p.kuz dan) [%| now hon])
+      ::
+      ++  work                                         ::  apply ukazy
+        |=  [now=@da kuz=(list ukaz)]
+        ^-  arch
+        ?~(kuz car $(car (wear now i.kuz), kuz t.kuz))
+      --
+    --
 |=  [now=time who=span]
 %^    hull
     (iris now)
@@ -40,69 +178,9 @@
         |=  [seq=@ud muz=* cax=bill]  ^-  lime
         ?>  ?=(@p muz)
         [%run [%| muz q.cax]]
-    ::
-        :^    %net
-            %cain
-          :-  [~ ~]
-          :-  [who ~]
-          |=  hap=*  ^-  (unit)
-          ?.  ?=([p=span q=span r=span %a ~] hap)
-            ~
-          =+  [rux=(slay p.hap) vys=(slay q.hap)]
-          ?.  &(?=([~ %% %p *] rux) ?=([~ %% %tas *] vys))
-            ~
-          [~ q.p.u.rux q.p.u.vys r.hap]
-        ^-  fish
-        |=  [sap=path muz=* cax=bill]  ^-  lime
-        ?>  ?=([p=@p q=@ta r=@ta] muz)
-        =+  hof=~(rent co [~ %p p.muz])
-        =+  rad=(arch q.cax)
-        ?>  =(rad q.cax)
-        =-  :-  %all
-            %+  turn 
-              yos 
-            |=  [p=@ta q=hapt r=*]
-            `lime`[%say %pu [hof q.muz r.muz p (flop q)] r]
-        ^=  yos  
-        =+  ram=*hapt
-        =+  waz=*(list ,[p=@ta q=path r=*])
-        |-  ^+  waz
-        ?-    rad
-            [& *]  [[%m ram p.rad] [%d ram q.rad] waz]
-            [| *]
-          =+  dib=(~(tap by q.rad) ~)
-          :-  [%m ram p.rad (turn dib |=([p=span q=arch] p))]
-          |-  ^+  waz
-          ?~  dib
-            waz
-          ^$(rad q.i.dib, ram [p.i.dib ram])
-        ==
     ==
 ^-  bowl
 =>  ..$
-=>  |%
-    ++  desk                                      ::  project state
-      $:  seq=@                                   ::  seqno, from 1
-          wen=time                                ::  date of change
-          rad=arch                                ::  state now
-      ==
-    ++  game  
-      $:  wod=(map ,@p room)                      ::  complete state
-      ==
-    ++  move
-      $%  [& p=@p q=@tas r=time s=(list task)]    ::  project changeset
-          [| p=@p q=?]                            ::  local on/off
-      ==
-    ++  room
-      $:  our=?                                   ::  local/foreign
-          dos=(map span desk)                     ::  projects 
-      ==
-    ++  task                                      ::  change
-      $%  [%gv p=path q=*]                        ::  write file
-      ::  [%kl p=path]                            ::  remove file
-          [%rl p=@tas]                            ::  release to label
-      ==
-    --
 =+  sys=*game
 |%
 ++  peek  
@@ -110,13 +188,13 @@
   ^-  (unit)
   ~&  [%mota %hap `path`hap]
   ?~  hap  ~
-  =+  hos=(slay i.hap)                          ::  host
+  =+  hos=(slay i.hap)
   ?.  &(?=(^ hos) ?=([%% %p *] u.hos))  ~
   ?~  t.hap  ~
-  =+  poj=(slay i.t.hap)                        ::  project
+  =+  poj=(slay i.t.hap)
   ?.  &(?=(^ poj) ?=([%% %tas *] u.poj))  ~
   ?~  t.t.hap  ~
-  =+  mag=(slay i.t.t.hap)                      ::  revision
+  =+  mag=(slay i.t.t.hap)
   ?.  &(?=(^ mag) ?=([%% %da *] u.mag))  ~
   =+  yar=(~(get by wod.sys) q.p.u.hos)
   ?~  yar  ~
@@ -129,7 +207,8 @@
   ?~  t.t.t.hap  ~
   ?+  i.t.t.t.hap  ~
     %a  [~ rad.u.siq]
-    %d  (~(grab cy rad.u.siq) t.t.t.t.hap)
+    %d  =+  der=(~(sift cy rad.u.siq) t.t.t.t.hap)
+        ?.(?=(& -.der) ~ [~ r.der])
     %m  =+  out=[~ (~(also cy rad.u.siq) t.t.t.t.hap)]
         ~&  [%meta %hap `path`hap]
         ~&  [%meta %tttthap t.t.t.t.hap]
@@ -167,24 +246,11 @@
           tes(dos (~(put by dos.tes) q.muv q.niz))
         ==
     ^=  niz  ^-  [p=lime q=desk]
-    =-  [[%all p.wux] [+(seq.taq) ?>((gth r.muv wen.taq) r.muv) q.wux]]
-    ^=  wux
-    |-  ^-  [p=(list lime) q=arch]
-    ?~  s.muv
-      [~ rad.taq] 
-    =+  har=$(s.muv t.s.muv)
-    ?-    i.s.muv
-        [%gv *]  
-      :-  =+  yom=(~(also cy q.har) p.i.s.muv)
-          =+  old=?:(?=([& *] yom) p.yom 0)
-          =+  huu=~(rent co [~ %p p.muv])
-          [[%say %yo %o %cary %sync old huu q.muv p.i.s.muv] p.har]
-      (~(give cy q.har) r.muv p.i.s.muv q.i.s.muv)
-    ::
-        [%rl *]
-      :-  :-  [%say [%pu [~(rent co [~ %p p.muv]) q.muv p.i.s.muv %a ~] q.har]]
-          p.har
-      q.har
+    =-  [p.wux [+(seq.taq) ?>((gth r.muv wen.taq) r.muv) q.wux]]
+    ^=  wux  ^-  [p=lime q=arch]
+    ?-  s.muv
+      [%do *]  [~ (~(work cy rad.taq) r.muv p.s.muv)]
+      [%re *]  !!
     ==
   ==
 --
