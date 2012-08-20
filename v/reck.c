@@ -133,7 +133,7 @@ _reck_spat(c3_c* pax_c)
 static u2_noun
 _reck_load(u2_reck* rec_u, u2_noun vax, c3_c* pax_c)
 {
-  u2_noun txt = u2_sync_load(pax_c);
+  u2_noun txt = u2_walk_load(pax_c);
   u2_noun gen = _reck_rain
     (rec_u, _reck_spat(pax_c + strlen(u2_Local) + 1), txt);
 
@@ -214,7 +214,6 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     bor = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/born.watt");
     car = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/cary.watt");
 
-    rec_u->toy.arch = _reck_gate(rec_u, u2k(car), "arch");
     rec_u->toy.duel = 
       _reck_gate(rec_u, u2k(car), "|=([a=arch b=arch] (~(duel cy a) b))");
 
@@ -324,7 +323,7 @@ u2_reck_boot(u2_reck* rec_u)
                  u2k(u2_Host.ver_e[u2_Host.kno_w].ken));
     // printf("loaded reck.\n");
 
-#if 0
+#if 1
     /* initial sync with filesystem
     */
     {
@@ -365,7 +364,7 @@ u2_reck_line(u2_reck* rec_u, u2_noun lin)
   static c3_w seq_w = 1;
 
   _reck_time_set(rec_u);
-#if 0
+#if 1
   {
     u2_noun lam = u2_sync_reck(rec_u);
 

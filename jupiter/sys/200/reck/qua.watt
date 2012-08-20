@@ -11,13 +11,11 @@
   |%                                            ::  front door
   ++  peek
     |=  [now=time hap=path]  ^-  (unit)
-    ~&  [%qua-peek hap]
     (peek:(iris now) hap)
   ::
   ++  poke
     |=  [now=time lam=*]
     =>  .(lam =+(mal=(lamb lam) ?>(=(mal lam) mal)))
-    ~&  [%qua-poke lam]
     |-  ^-  [p=(list kiwi) q=_..poke]
     =+  ^=  coz
         |=  did=[p=(list kiwi) q=_..work] 

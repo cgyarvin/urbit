@@ -81,9 +81,8 @@
           ?:  (gth p.car p.bus)
             =>  .(maz $(bus nope))
             [p.maz [[pax %del q.bus] q.maz]]
-          :-  :+  [pax %del @]
-                [pax %set q.bus @ r.bus]
-              p.maz
+          :-  =+  wob=[[pax %set q.bus @ r.bus] p.maz]
+              ?:(=(nope car) wob [[pax %del @] wob])
           q.maz
         =-  $:pox(maz (uzag $:pox(maz (uzag maz), car bus, bus car)))
         ^=  pox
@@ -186,7 +185,6 @@
 ++  peek  
   |=  [cam=lens hap=path]
   ^-  (unit)
-  ~&  [%mota %hap `path`hap]
   ?~  hap  ~
   =+  hos=(slay i.hap)
   ?.  &(?=(^ hos) ?=([%% %p *] u.hos))  ~

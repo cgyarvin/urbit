@@ -140,7 +140,6 @@
         c3_w    rno_w;                    //  rotor index (always 0)
 
         struct {                          //  function gates, use mung
-          u2_noun arch;                   //  arch normalize, temporary
           u2_noun duel;                   //  compare resource trees
           u2_noun rain;                   //  parse path, text -> gene
           u2_noun ream;                   //  parse text -> gene
@@ -258,21 +257,25 @@
 
     /**  Filesystem (new api).
     **/
-      /* u2_sync_load(): load file or bail.
+      /* u2_walk_load(): load file or bail.
       */
         u2_noun
-        u2_sync_load(c3_c* pas_c);
+        u2_walk_load(c3_c* pas_c);
 
-      /* u2_sync_save(): save file or bail.
+      /* u2_walk_save(): save file or bail.
       */
         void
-        u2_sync_save(c3_c* pas_c, u2_noun tim, u2_atom pad);
+        u2_walk_save(c3_c* pas_c, u2_noun tim, u2_atom pad);
 
-      /* u2_sync_reck(): traverse filesystem to commit changes -> lamb
+      /* u2_sync_reck(): traverse filesystem for changes -> lamb
       */
         u2_noun
         u2_sync_reck(u2_reck* rec_u);
 
+      /* u2_walk(): traverse `dir_c` to produce an arch, updating `old`.
+      */
+        u2_noun
+        u2_walk(u2_reck* rec_u, const c3_c* dir_c, u2_noun old);
 
     /**  Filesystem (old api).
     **/

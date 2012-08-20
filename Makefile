@@ -2107,6 +2107,7 @@ VERE_OFILES=\
        v/time.o \
        v/http.o \
        v/sync.o \
+       v/walk.o \
        v/reck.o \
        $(BASE_OFILES) \
        $(OUT_OFILES)

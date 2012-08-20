@@ -503,7 +503,6 @@ u2_ve_mark_reck(u2_reck* rec_u)
   siz_w += u2_cm_mark_noun(rec_u->now);
   siz_w += u2_cm_mark_noun(rec_u->wen);
 
-  siz_w += u2_cm_mark_noun(rec_u->toy.arch);
   siz_w += u2_cm_mark_noun(rec_u->toy.duel);
   siz_w += u2_cm_mark_noun(rec_u->toy.rain);
   siz_w += u2_cm_mark_noun(rec_u->toy.ream);
