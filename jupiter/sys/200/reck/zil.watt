@@ -4,4 +4,58 @@
 |%
 ++  zuul
   !!
+::
+++  zeex
+  |=  dug=(map ,@ ,@)  ^-  @ux
+  %+  can
+    3
+  =+  rug=0
+  |-  ^-  (list ,[@ @])
+  ?:  =(256 rug)
+    ~
+  [[1 (need (~(get by dug) rug))] $(rug +(rug))]
+::
+++  zenx
+  |=  dug=(map ,@ ,@)  ^-  @ux
+  %+  can
+    3
+  =+  rug=1
+  |-  ^-  (list ,[@ @])
+  ?:  =(256 rug)
+    ~
+  [[1 (need (~(get by dug) rug))] $(rug +(rug))]
+::
+++  zoog
+  ^-  [p=@ux q=@ux]
+  =+  rug=0
+  =+  gin=*(map ,@ ,@)
+  =+  nig=*(map ,@ ,@)
+  |-  ^-  [p=@ux q=@ux]
+  ?:  =(256 rug)
+    [(zeex gin) (zeex nig)]
+  =+  ^=  fuc
+      =+  gay=(mul rug 1.047)
+      |-  ^-  @
+      =+  yeg=(~(rad og gay) 256)
+      ?:  (~(has by nig) yeg)
+        $(gay +(gay))
+      yeg
+  $(rug +(rug), gin (~(put by gin) rug fuc), nig (~(put by nig) fuc rug))
+::
+++  zong
+  ^-  [p=@ux q=@ux]
+  =+  rug=1
+  =+  gin=*(map ,@ ,@)
+  =+  nig=*(map ,@ ,@)
+  |-  ^-  [p=@ux q=@ux]
+  ?:  =(256 rug)
+    [(zenx gin) (zenx nig)]
+  =+  ^=  fuc
+      =+  gay=(mul rug 865)
+      |-  ^-  @
+      =+  yeg=(~(rad og gay) 256)
+      ?:  |(=(0 yeg) (~(has by nig) yeg))
+        $(gay +(gay))
+      yeg
+  $(rug +(rug), gin (~(put by gin) rug fuc), nig (~(put by nig) fuc rug))
 --

@@ -216,18 +216,18 @@
       ^=  woy  
       |-  ^-  [p=sail q=(list lime)]
       ?~  vac
-        [*sail baz]
+        [q.tec baz]
       =+  ter=$(vac t.vac)
       =+  zav=(cork p.i.vac)
       =+  mey=(kiss [q.u.zav q.i.vac] p.tec)
       ?:  |(?=(~ zav) ?=(~ mey))
         ter
-      =+  rey=(~(get by q.tec) q.u.zav)
+      =+  rey=(~(get by p.ter) q.u.zav)
       =+  bem=?~(rey 1 +(u.rey))
       ?.  =(bem p.u.zav)
         ter
       =>  ^+(. .(baz [(r.tec bem u.mey q.i.vac) baz]))
-      =-  [(~(put by q.tec) q.u.zav p.fyq) q.fyq]
+      =-  [(~(put by p.ter) q.u.zav p.fyq) q.fyq]
       ^=  fyq
       |-  ^-  [p=@ud q=(list lime)] 
       =+  vat=(flop [~(rent co [~ %ud +(bem)]) (flop q.u.zav)])

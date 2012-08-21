@@ -84,20 +84,50 @@
           :-  =+  wob=[[pax %set q.bus @ r.bus] p.maz]
               ?:(=(nope car) wob [[pax %del @] wob])
           q.maz
-        =-  $:pox(maz (uzag $:pox(maz (uzag maz), car bus, bus car)))
-        ^=  pox
-        |.
         =+  lay=(gth p.car p.bus)
-        =+  war=(~(tap by q.car) ~)
+        =+  ryc=(~(tap by q.car) ~)
+        =+  seb=(~(tap by q.bus) ~)
+        =+  noy=(skip ryc |=([p=@ta q=arch] (~(has by q.bus) p)))
+        =+  syr=(skip seb |=([p=@ta q=arch] (~(has by q.car) p)))
+        =+  yel=(skim ryc |=([p=@ta q=arch] (~(has by q.bus) p)))
+        =>  %=    .
+                maz
+              |-  ^-  umaz
+              ?~  yel
+                maz
+              %=  $
+                yel  t.yel 
+                maz  %=  ^$
+                       ram  [p.i.yel ram]
+                       car  q.i.yel
+                       bus  (need (~(get by q.bus) p.i.yel))
+                     ==
+              ==
+            ==
+        =>  %=    .
+                maz
+              |-  ^-  umaz
+              ?~  noy
+                maz
+              %=  $
+                noy  t.noy
+                maz  %=  ^$
+                         ram  [p.i.noy ram]
+                         car  q.i.noy
+                         bus  [%| ?:(lay @ p.bus) ~]
+                     ==
+              ==
+            ==
         |-  ^-  umaz
-        ?~  war
+        ?~  syr
           maz
-        =>  .(maz $(war t.war))
-        =+  loo=(~(get by q.bus) p.i.war)
-        %=  ^^$
-          ram  [p.i.war ram]
-          car  q.i.war 
-          bus  ?~(loo [%| ?:(lay @ p.bus) ~] u.loo)
+        %=  $
+          syr  t.syr
+          maz  %=  ^$
+                   ram  [p.i.syr ram]
+                   car  [%| ?.(lay @ p.car) ~]
+                   bus  q.i.syr
+               ==
         ==
       ::
       ++  sift                                         ::  select subtree
@@ -219,7 +249,6 @@
   |=  [cam=lens man=*] 
   ^-  [p=lime q=bowl]
   =+  muv=(move man)
-  ~&  [%cary-poke muv]
   ?.  =(muv man)
     [~ ..poke]
   ?-    muv
