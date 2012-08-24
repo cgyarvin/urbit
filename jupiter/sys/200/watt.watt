@@ -1079,6 +1079,19 @@
     |=  yer=@ud  ^-  ?
     &(=(0 (mod yer 4)) |(!=(0 (mod yer 100)) =(0 (mod yer 400))))
   ::
+  ::      Tier 3j, macro candidates
+  :: 
+  ++  hard
+    |*  han=_|+(* *)
+    |=  fud=*  ^-  han
+    ~|  %hard
+    =+  gol=(han fud)
+    ?>(=(gol fud) gol)
+  ::
+  ++  pipe
+    |*  led=(list _|+(* *))
+    !!                          ::  fix for nock 5
+  ::
   ::  Tier 4 molds
   ::
   ++  apt
@@ -2882,11 +2895,9 @@
       (~(exp fo a) 53 b)
     ::
     ++  ramp                                            ::  make r-m prime
-      |=  [a=@ b=@]  ^-  @ux                            ::  [bits seed]
+      |=  [a=@ b=@]                                     ::  [bits seed]
       =+  c=@
-      |-
-      ?:  =((mul 100 a) c)
-        ~|(%ar-ramp !!)
+      |-  ^-  @ux
       =+  d=(~(raw og b) a)
       ?:  &(!=(1 (mod d 53)) !=(1 (mod d 37)) (pram d))
         d
@@ -3064,6 +3075,63 @@
         ==
         $(c +(c))
     ==
+  ++  ar                                                ::  RSA encryption
+    |%
+    ++  brew                                            ::  generate ring
+      |=  [a=@ b=@]  ^-  ring                           ::  [bits seed]
+      =+  c=(rsh 0 1 a)
+      (jam (ramp c b) (ramp c (shax b)))
+    ::
+    ++  chew                                            ::  read with ring, 53
+      |=  [a=ring b=@]  ^-  (unit ,@)
+      =+  c=(melt 53 a) 
+      =+  d=(fu p.c q.c)
+      =+  e=((hard ,[p=@ q=@]) (cue b))
+      (shed (out.d (exp.d r.c (sit.d p.e))) q.e)
+    ::
+    ++  drip                                            ::  private to public
+      |=  a=ring  ^-  pass
+      =+  b=(heat a)
+      (mul p.b q.b)
+    ::
+    ++  heat                                            ::  separate primes
+      |=  a=ring  ^-  [p=@ q=@]
+      =+  b=(cue a)
+      ?>(?=([p=@ q=@] b) b)
+    ::
+    ++  melt                                            ::  activate ring
+      |=  [a=@ b=ring]  ^-  [p=@ q=@ r=@]               ::  a=>e, s=>d
+      =+  c=(heat b)
+      :+  p.c
+        q.c
+      (~(inv fo (elcm (dec p.c) (dec q.c))) a)
+    ::
+    ++  sign                                            ::  send with ring, 37
+      |=  [a=ring b=@]  ^-  @
+      =+  c=(melt 37 a)
+      =+  d=(fu p.c q.c)
+      =+  e=(shax (add 37 (shax b)))
+      (jam (out.d (exp.d r.c (sit.d e))) (shen e b))
+    ::
+    ++  seal                                            ::  send with pass, 53
+      |=  [a=pass b=@]  ^-  @
+      =+  c=(shax (add 53 (shax b)))
+      (jam (~(exp fo a) 53 c) (shen c b))
+    ::
+    ++  ramp                                            ::  make r-m prime
+      |=  [a=@ b=@]                                     ::  [bits seed]
+      =+  c=@
+      |-  ^-  @ux
+      =+  d=(~(raw og b) a)
+      ?:  &(!=(1 (mod d 53)) !=(1 (mod d 37)) (pram d))
+        d
+      $(b +(b), c (shax c))
+    ::
+    ++  take                                            ::  read with pass, 37
+      |=  [a=pass b=@]  ^-  (unit ,@)
+      =+  c=((hard ,[p=@ q=@]) (cue b))
+      (shed (~(exp fo a) 37 p.c) q.c)
+    --
   ::
   ++  shed                                              ::  ghetto decrypt
     |=  [key=@ cep=@]  ^-  (unit ,@)
@@ -3686,6 +3754,7 @@
     =+  haq=hack
     ?>  ?=([& *] haq)
     =+  [oft=bore(gen p.haq) eft=bore(gen q.haq)]
+    ~|  %burl-head
     ?>  ?=([%leaf *] oft)
     [oft eft]
   ::

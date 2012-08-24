@@ -1,7 +1,7 @@
 !:
-::          %born, a shell.   This file is in the public domain.
+::          %hero, an http server.   This file is in the public domain.
 ::
-:-  %born
+:-  %hero
 ^-  dock
 |=  [now=time wha=@ta]
 %^    hull
@@ -39,13 +39,28 @@
       [p.guo ..poke(..line q.guo)]
     --
 =>  |%
-    ++  desk                            ::  session state
-      $:  nub=vase                      ::  system + libraries
+    ++  desk                            ::  server, per post
+      $:  who=@p                        ::  server identity
+          use=(map ,@ta user)           ::  users
+      ==
+    ++  user
+      $:  who=@p                        ::  64-bit user
+          liv=(map tube talk)
+      ==
+
+    ++  talk 
+      nub=vase                      ::  system + libraries
           red=vase                      ::  result log
           ser=vase                      ::  source log
           way=(map ,@ta vase)           ::  environment variables 
       ==
-    ++  game  (map tube desk)           ::  application state
+    ++  game  
+      $:  ipo=?                         ::  0 or insecure port (8.080)
+          spo=?                         ::  0 or secure port (8.443)
+          sev=(map ,@p desk)            ::  servers
+      ==
+           
+    (map tube desk)           ::  application state
     ++  move                            ::  shell command
       $%  [%line p=tube q=@ta]          ::  line input
       ==

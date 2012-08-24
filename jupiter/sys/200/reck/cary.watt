@@ -41,7 +41,7 @@
       ==
     ++  room
       $:  our=?                                   ::  local/foreign
-          dos=(map span desk)                     ::  projects 
+          dos=(map ,@ta desk)                     ::  projects 
       ==
     ++  task                                      ::  action
       $%  [%do p=(list ukaz)]                     ::  edit tree
@@ -170,18 +170,18 @@
         ?~(kuz car $(car (wear now i.kuz), kuz t.kuz))
       --
     --
-|=  [now=time who=span]
+|=  [now=time wha=@ta]
 %^    hull
     (iris now)
-  who
+  wha
 ^-  bead
-|=  [now=time who=span]
+|=  [now=time wha=@ta]
 :-  ^-  lime
     :-  %all
     :~  :^    %rod
             %abel
           :-  [~ ~]
-          :-  [who ~]
+          :-  [wha ~]
           |=  hap=*  ^-  (unit)
           ?.  ?=([p=@ta q=@ta ~] hap)
             ~
@@ -197,7 +197,7 @@
         :^    %rod
             %boaz
           :-  [~ ~]
-          :-  [who ~]
+          :-  [wha ~]
           |=  hap=*  ^-  (unit)
           ?.  ?=([p=@ta ~] hap)
             ~

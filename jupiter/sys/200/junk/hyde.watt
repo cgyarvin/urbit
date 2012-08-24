@@ -124,13 +124,6 @@
   =+  caz=(bear who)
   caz(pub [~ ris], wil wil)
 ::
-++  hard
-  |*  han=_|+(* *)
-  |=  fud=*  ^-  han
-  ~|  %hard
-  =+  gol=(han fud)
-  ?>(=(gol fud) gol)
-::
 ++  know                                              ::  typed query
   |*  ned=card
   ~|  [%know ned]

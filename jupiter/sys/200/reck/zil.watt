@@ -4,58 +4,229 @@
 |%
 ++  zuul
   !!
-::
-++  zeex
-  |=  dug=(map ,@ ,@)  ^-  @ux
-  %+  can
-    3
-  =+  rug=0
-  |-  ^-  (list ,[@ @])
-  ?:  =(256 rug)
-    ~
-  [[1 (need (~(get by dug) rug))] $(rug +(rug))]
-::
-++  zenx
-  |=  dug=(map ,@ ,@)  ^-  @ux
-  %+  can
-    3
-  =+  rug=1
-  |-  ^-  (list ,[@ @])
-  ?:  =(256 rug)
-    ~
-  [[1 (need (~(get by dug) rug))] $(rug +(rug))]
-::
-++  zoog
-  ^-  [p=@ux q=@ux]
-  =+  rug=0
-  =+  gin=*(map ,@ ,@)
-  =+  nig=*(map ,@ ,@)
-  |-  ^-  [p=@ux q=@ux]
-  ?:  =(256 rug)
-    [(zeex gin) (zeex nig)]
-  =+  ^=  fuc
-      =+  gay=(mul rug 1.047)
-      |-  ^-  @
-      =+  yeg=(~(rad og gay) 256)
-      ?:  (~(has by nig) yeg)
-        $(gay +(gay))
-      yeg
-  $(rug +(rug), gin (~(put by gin) rug fuc), nig (~(put by nig) fuc rug))
-::
-++  zong
-  ^-  [p=@ux q=@ux]
-  =+  rug=1
-  =+  gin=*(map ,@ ,@)
-  =+  nig=*(map ,@ ,@)
-  |-  ^-  [p=@ux q=@ux]
-  ?:  =(256 rug)
-    [(zenx gin) (zenx nig)]
-  =+  ^=  fuc
-      =+  gay=(mul rug 865)
-      |-  ^-  @
-      =+  yeg=(~(rad og gay) 256)
-      ?:  |(=(0 yeg) (~(has by nig) yeg))
-        $(gay +(gay))
-      yeg
-  $(rug +(rug), gin (~(put by gin) rug fuc), nig (~(put by nig) fuc rug))
+++  hy
+  =>  |%
+      ++  base  ,@p                                       ::  node identity
+      ++  code  ,@uvI                                     ::  symmetric key
+      ++  land  ,[p=regn q=base]                          ::  regime
+      ++  hand  ,@uvI                                     ::  hash of code
+      ++  pack  ,@uv                                      ::  packet
+      ++  regn  ,@ud                                      ::  regime number
+      ++  sock  ,[key=code too=base fro=base]             ::  logical socket
+      ++  salt  ,@uv                                      ::  entropy
+      --
+  =>  |%
+      ++  deed
+        $%  :*  %%                                        ::  result
+                paq=pack                                  ::
+            ==                                            ::
+            :*  %his                                      ::  need foreign regn
+                who=base                                  ::
+                how=_|+(ren=regn *deed)                   ::
+            ==                                            ::
+            :*  %mor                                      ::  deed chain
+                fir=deed                                  ::
+                how=_|+(paq=pack *deed)                   ::
+            ==                                            ::
+            :*  %our                                      ::  need home regn
+                who=base                                  ::
+                how=_|+(ren=regn *deed)                   ::
+            ==                                            ::
+            :*  %pri                                      ::  need private key
+                who=land                                  ::
+                how=_|+(pri=ring *deed)                   ::
+            ==                                            ::
+            :*  %pub                                      ::  need public key
+                who=land                                  ::
+                how=_|+(pub=pass *deed)                   ::
+            ==                                            ::
+            :*  %sal                                      ::  need salt
+                how=_|+(sal=salt *deed)                   ::
+            ==                                            ::
+            :*  %sym                                      ::  need code
+                [fro=land too=land]                       ::
+                how=_|+(key=code *deed)                   ::
+            ==                                            ::
+        ==
+      ++  gift
+        $%  :*  %%                                        ::  result
+                nut=note                                  ::  
+            ==                                            ::
+            :*  %his                                      ::  need foreign regn
+                who=base                                  ::
+                how=_|+(ren=regn *gift)                   ::
+            ==                                            ::
+            :*  %mor                                      ::  gift chain
+                fir=gift                                  ::
+                how=_|+(nut=note *gift)                   ::
+            ==                                            ::
+            :*  %our                                      ::  need home regn
+                who=base                                  ::
+                how=_|+(ren=regn *gift)                   ::
+            ==                                            ::
+            :*  %pri                                      ::  need private key
+                who=land                                  ::
+                how=_|+(pri=ring *gift)                   ::
+            ==                                            ::
+            :*  %pub                                      ::  need public key
+                who=land                                  ::
+                how=_|+(pub=pass *gift)                   ::
+            ==                                            ::
+            :*  %sym                                      ::  need code
+                paw=hand                                  ::
+                how=_|+(soq=sock *gift)                   ::
+            ==                                            ::
+        ==
+      ++  note                                            ::  message source
+        $%  :*  %bu                                       ::  bundle
+                all=(list note)                           ::
+            ==                                            ::
+            :*  %pe                                       ::  public (sealed)
+                too=base                                  ::
+                pay=note                                  ::
+            ==                                            ::
+            :*  %pg                                       ::  public (signed)
+                fro=base                                  ::
+                pay=note                                  ::
+            ==                                            ::
+            :*  %sc                                       ::  symmetric
+                fro=base                                  ::
+                too=base                                  ::
+                pay=note                                  ::
+            ==                                            ::
+            :*  %za                                       ::  data
+                pax=path                                  ::
+                hut=*                                     ::
+            ==                                            ::
+        ==
+      --
+  |%
+  ++  boil                                                ::  decode packet
+    =+  ^=  mor
+        |=  [git=gift how=_|+(nut=note *gift)]  ^-  gift
+        ?~(-.git (how nut.git) [%mor git how])
+    =+  was=|=(cyp=@ (rsh 5 8 cyp))
+    |=  paq=pack
+    ^-  gift
+    =+  [mag=(end 3 2 paq) bod=(rsh 3 2 paq)]
+    ?+    mag  !!
+        %bu
+      =+  msg=((hard (list pack)) (cue bod)) 
+      =+  luy=*(list note)
+      |-  ^-  gift
+      ?~  msg
+        [%% %bu (flop luy)]
+      %+  mor
+        ^$(paq i.msg)
+      |=(nut=note ^$(msg t.msg, luy [nut luy]))
+    ::
+        %pe
+      =+  msg=((hard ,[too=@p cyp=@]) (cue bod))
+      :+  %our
+        too.msg
+      |=  our=regn
+      :+  %pri
+        [our too.msg]
+      |=  pri=ring
+      %+  mor
+        ^^$(paq (was (need (chew:ar pri cyp.msg))))
+      |=(nut=note [~ %pe too.msg nut])
+    ::
+        %pg
+      =+  msg=((hard ,[fro=@p cyp=@]) (cue bod))
+      :+  %his
+        fro.msg
+      |=  his=regn
+      :+  %pub
+        [his fro.msg]
+      |=  pub=pass
+      %+  mor
+        ^^$(paq (was (need (take:ar pub cyp.msg))))
+      |=(nut=note [~ %pg fro.msg nut])
+    ::
+        %sc
+      =+  msg=((hard ,[paw=@uvI cyp=@]) (cue bod))
+      :+  %sym 
+        paw.msg
+      |=  soq=sock
+      %+  mor
+        ^$(paq (was (need (shed key.soq cyp.msg))))
+      |=(nut=note [~ %sc fro.soq too.soq nut])
+    ::
+        %za
+      =+  msg=((hard ,[pax=path hut=*]) (cue bod))
+      [~ %za pax.msg hut.msg]
+    == 
+  ::
+  ++  cure                                                ::  encode packet(s)
+    =+  ^=  mor
+        |=  [dyd=deed how=_|+(paq=pack *deed)]  ^-  deed
+        ?~(-.dyd (how paq.dyd) [%mor dyd how])
+    =+  ^=  box
+        |=  [tag=@tas bod=@]
+        (can 3 [2 tag] [(met 3 bod) bod] ~)
+    =+  ^=  sea
+        |=  [sal=@ bod=@]
+        (can 5 [8 sal] [(met 5 bod) bod] ~)
+    |=  lan=note
+    ^-  deed
+    ?-    -.lan
+        %bu
+      =+  pez=*(list pack)
+      |-  ^-  deed
+      ?~  all.lan
+        [~ (box %bu (jam (flop pez)))]
+      %+  mor
+        ^$(lan i.all.lan)
+      |=(paq=pack ^$(all.lan t.all.lan, pez [paq pez]))
+    ::
+        %pe
+      :+  %his
+        too.lan
+      |=  his=regn
+      :+  %pub
+        [his too.lan]
+      |=  pub=pass
+      :-  %sal
+      |=  sal=salt
+      %+  mor
+        ^^^$(lan pay.lan) 
+      |=  paq=pack
+      [~ (box %pe (jam too.lan (seal:ar pub (sea sal paq))))]
+    ::
+        %pg
+      :+  %our
+        fro.lan
+      |=  our=regn
+      :+  %pri
+        [our fro.lan] 
+      |=  pri=ring
+      :-  %sal
+      |=  sal=salt
+      %+  mor
+        ^^^$(lan pay.lan)
+      |=  paq=pack
+      [~ (box %pg (jam fro.lan (sign:ar pri (sea sal paq))))]
+    ::
+        %sc
+      :+  %our
+        fro.lan
+      |=  our=regn
+      :+  %his
+        too.lan
+      |=  his=regn
+      :+  %sym
+        [[our fro.lan] [his too.lan]]
+      |=  key=code
+      :-  %sal
+      |=  sal=salt
+      %+  mor
+        ^^^^$(lan pay.lan)
+      |=  paq=pack
+      [~ (box %sc (jam (shax key) (shed key (sea sal paq))))]
+    ::
+        %za
+      [~ (box %za (jam pax.lan hut.lan))]
+    ==
+  --
 --

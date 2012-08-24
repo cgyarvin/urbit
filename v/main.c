@@ -223,9 +223,7 @@ main(c3_i   argc,
     {
       u2_ve_init(kno_w);
 
-#ifdef RECK
       u2_reck_boot(&u2_Host.rec_u[0]);
-#endif
     }
     u2_cm_done();
   }
