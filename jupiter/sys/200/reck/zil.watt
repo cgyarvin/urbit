@@ -6,110 +6,66 @@
   !!
 ++  hy
   =>  |%
-      ++  base  ,@p                                       ::  node identity
+      ++  base  ,@p                                       ::  host identity
       ++  code  ,@uvI                                     ::  symmetric key
-      ++  land  ,[p=regn q=base]                          ::  regime
       ++  lane  $%  [%if p=@ud q=@if]                     ::  IPv4 port/addr
                     [%is p=@ud q=@is]                     ::  IPv6 port/addr
                 ==                                        ::  
+      ++  link  ,[p=code q=sock]                          ::  connection
       ++  hand  ,@uvI                                     ::  hash of code
       ++  pack  ,@uv                                      ::  packet
-      ++  regn  ,@ud                                      ::  regime number
-      ++  sock  ,[key=code fro=base too=base]             ::  logical socket
-      ++  spat  ,[fro=land too=land]                      ::  regime socket
+      ++  post  ,[p=path q=*]                             ::  statement
+      ++  sock  ,[p=base q=base]                          ::  from to
       ++  salt  ,@uv                                      ::  entropy
       ++  taxi  ,[p=lane q=pack]                          ::  routed packet
       --
   =>  |%
       ++  deed                                            ::  output task
-        $%  [%% paq=pack]                                 ::  final result
-            [%his who=base how=_|+(ren=regn *deed)]       ::  get foreign regn
-            [%mor fir=deed how=_|+(paq=pack *deed)]       ::  task chain
-            [%our who=base how=_|+(ren=regn *deed)]       ::  get home regn
-            [%pri who=land how=_|+(pri=ring *deed)]       ::  get private key
-            [%pub who=land how=_|+(pub=pass *deed)]       ::  get public key
-            [%sal how=_|+(sal=salt *deed)]                ::  get entropy
-            [%sym saz=spat how=_|+(pub=pass *deed)]       ::  get symmetric key
+        $%  [%% way=lane paq=pack]                        ::  final result
+            [%pri p=base q=_|+(pri=ring *deed)]           ::  get private key
+            [%pub p=base q=_|+(pub=pass *deed)]           ::  get public key
+            [%sal p=_|+(sal=salt *deed)]                  ::  get entropy
+            [%sym p=sock q=_|+(pub=pass *deed)]           ::  get symmetric key
+            [%way p=base q=_|+(way=lane *deed)]           ::  get route
         ==
       ++  gift                                            ::  input task
-        $%  [%% nut=note]                                 ::  final result
-            [%his who=base how=_|+(ren=regn *gift)]       ::  get foreign regn
-            [%mor fir=gift how=_|+(nut=note *gift)]       ::  task chain
-            [%our who=base how=_|+(ren=regn *gift)]       ::  get home regn
-            [%pri who=land how=_|+(pri=ring *gift)]       ::  get private key
-            [%pub who=land how=_|+(pub=pass *gift)]       ::  get public key
-            [%sym paw=hand how=_|+(soq=sock *gift)]       ::  get symmetric key
+        $%  [%% p=base q=(list post)]                     ::  final result
+            [%pri p=base q=_|+(pri=ring *gift)]           ::  get private key
+            [%pub p=base q=_|+(pub=pass *gift)]           ::  get public key
+            [%sym p=hand q=_|+(lyn=link *gift)]           ::  get symmetric key
         ==
       ++  note                                            ::  message source
-        $%  [%bu all=(list note)]                         ::  bundle
-            [%pe too=base pay=note]                       ::  public (sealed)
-            [%pg fro=base pay=note]                       ::  public (signed)
-            [%sc fro=base too=base pay=note]              ::  symmetric
-            [%za pax=path hut=*]                          ::  data
+        $%  [& p=sock q=(list post)]                      ::  asymmetric
+            [| p=sock q=(list post)]                      ::  symmetric
         ==
       --
   |%
   ++  boil                                                ::  decode packet
-    =+  ^=  mor
-        |=  [git=gift how=_|+(nut=note *gift)]  ^-  gift
-        ?~(-.git (how nut.git) [%mor git how])
     =+  was=|=(cyp=@ (rsh 5 8 cyp))
     |=  paq=pack
     ^-  gift
     =+  [mag=(end 3 2 paq) bod=(rsh 3 2 paq)]
     ?+    mag  !!
-        %bu
-      =+  msg=((hard (list pack)) (cue bod)) 
-      =+  luy=*(list note)
-      |-  ^-  gift
-      ?~  msg
-        [%% %bu (flop luy)]
-      %+  mor
-        ^$(paq i.msg)
-      |=(nut=note ^$(msg t.msg, luy [nut luy]))
-    ::
-        %pe
-      =+  msg=((hard ,[too=@p cyp=@]) (cue bod))
-      :+  %our
-        too.msg
-      |=  our=regn
+        %pc
+      =+  msg=((hard ,[p=@p q=@]) (cue bod))
       :+  %pri
-        [our too.msg]
+        p.msg
       |=  pri=ring
-      %+  mor
-        ^^$(paq (was (need (chew:ar pri cyp.msg))))
-      |=(nut=note [~ %pe too.msg nut])
-    ::
-        %pg
-      =+  msg=((hard ,[fro=@p cyp=@]) (cue bod))
-      :+  %his
-        fro.msg
-      |=  his=regn
+      =+  god=((hard ,[p=@p q=@]) (cue (need (chew:ar pri q.msg))))
       :+  %pub
-        [his fro.msg]
+        p.god
       |=  pub=pass
-      %+  mor
-        ^^$(paq (was (need (take:ar pub cyp.msg))))
-      |=(nut=note [~ %pg fro.msg nut])
+      [%% p.god ((hard (list post)) (cue (was (need (take:ar pub q.god)))))]
     ::
         %sc
-      =+  msg=((hard ,[paw=@uvI cyp=@]) (cue bod))
+      =+  msg=((hard ,[p=@uvI q=@]) (cue bod))
       :+  %sym 
-        paw.msg
-      |=  soq=sock
-      %+  mor
-        ^$(paq (was (need (shed key.soq cyp.msg))))
-      |=(nut=note [~ %sc fro.soq too.soq nut])
-    ::
-        %za
-      =+  msg=((hard ,[pax=path hut=*]) (cue bod))
-      [~ %za pax.msg hut.msg]
+        p.msg
+      |=  lyn=link
+      [%% p.q.lyn ((hard (list post)) (cue (was (need (shed p.lyn q.msg)))))]
     == 
   ::
   ++  cure                                                ::  encode packet
-    =+  ^=  mor
-        |=  [dyd=deed how=_|+(paq=pack *deed)]  ^-  deed
-        ?~(-.dyd (how paq.dyd) [%mor dyd how])
     =+  ^=  box
         |=  [tag=@tas bod=@]
         (can 3 [2 tag] [(met 3 bod) bod] ~)
@@ -119,62 +75,38 @@
     |=  lan=note
     ^-  deed
     ?-    -.lan
-        %bu
-      =+  pez=*(list pack)
-      |-  ^-  deed
-      ?~  all.lan
-        [~ (box %bu (jam (flop pez)))]
-      %+  mor
-        ^$(lan i.all.lan)
-      |=(paq=pack ^$(all.lan t.all.lan, pez [paq pez]))
-    ::
-        %pe
-      :+  %his
-        too.lan
-      |=  his=regn
-      :+  %pub
-        [his too.lan]
-      |=  pub=pass
-      :-  %sal
-      |=  sal=salt
-      %+  mor
-        ^^^$(lan pay.lan) 
-      |=  paq=pack
-      [~ (box %pe (jam too.lan (seal:ar pub (sea sal paq))))]
-    ::
-        %pg
-      :+  %our
-        fro.lan
-      |=  our=regn
+        &
       :+  %pri
-        [our fro.lan] 
+        p.p.lan 
       |=  pri=ring
+      :+  %pub
+        q.p.lan
+      |=  pub=pass
+      :+  %way
+        q.p.lan
+      |=  way=lane
       :-  %sal
       |=  sal=salt
-      %+  mor
-        ^^^$(lan pay.lan)
-      |=  paq=pack
-      [~ (box %pg (jam fro.lan (sign:ar pri (sea sal paq))))]
+      :+  %%
+        way
+      %+  box
+        %pc
+      %+  jam
+        q.p.lan
+      (seal:ar pub (jam p.p.lan (sign:ar pri (sea sal (jam q.lan)))))
     ::
-        %sc
-      :+  %our
-        fro.lan
-      |=  our=regn
-      :+  %his
-        too.lan
-      |=  his=regn
+        |
       :+  %sym
-        [[our fro.lan] [his too.lan]]
+        p.lan
       |=  key=code
+      :+  %way
+        q.p.lan
+      |=  way=lane
       :-  %sal
       |=  sal=salt
-      %+  mor
-        ^^^^$(lan pay.lan)
-      |=  paq=pack
-      [~ (box %sc (jam (shax key) (shed key (sea sal paq))))]
-    ::
-        %za
-      [~ (box %za (jam pax.lan hut.lan))]
+      :+  %%
+        way
+      (box %sc (jam (shax key) (shed key (sea sal (jam q.lan)))))
     ==
   --
 --
