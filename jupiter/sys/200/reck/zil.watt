@@ -9,95 +9,43 @@
       ++  base  ,@p                                       ::  node identity
       ++  code  ,@uvI                                     ::  symmetric key
       ++  land  ,[p=regn q=base]                          ::  regime
+      ++  lane  $%  [%if p=@ud q=@if]                     ::  IPv4 port/addr
+                    [%is p=@ud q=@is]                     ::  IPv6 port/addr
+                ==                                        ::  
       ++  hand  ,@uvI                                     ::  hash of code
       ++  pack  ,@uv                                      ::  packet
       ++  regn  ,@ud                                      ::  regime number
-      ++  sock  ,[key=code too=base fro=base]             ::  logical socket
+      ++  sock  ,[key=code fro=base too=base]             ::  logical socket
+      ++  spat  ,[fro=land too=land]                      ::  regime socket
       ++  salt  ,@uv                                      ::  entropy
+      ++  taxi  ,[p=lane q=pack]                          ::  routed packet
       --
   =>  |%
-      ++  deed
-        $%  :*  %%                                        ::  result
-                paq=pack                                  ::
-            ==                                            ::
-            :*  %his                                      ::  need foreign regn
-                who=base                                  ::
-                how=_|+(ren=regn *deed)                   ::
-            ==                                            ::
-            :*  %mor                                      ::  deed chain
-                fir=deed                                  ::
-                how=_|+(paq=pack *deed)                   ::
-            ==                                            ::
-            :*  %our                                      ::  need home regn
-                who=base                                  ::
-                how=_|+(ren=regn *deed)                   ::
-            ==                                            ::
-            :*  %pri                                      ::  need private key
-                who=land                                  ::
-                how=_|+(pri=ring *deed)                   ::
-            ==                                            ::
-            :*  %pub                                      ::  need public key
-                who=land                                  ::
-                how=_|+(pub=pass *deed)                   ::
-            ==                                            ::
-            :*  %sal                                      ::  need salt
-                how=_|+(sal=salt *deed)                   ::
-            ==                                            ::
-            :*  %sym                                      ::  need code
-                [fro=land too=land]                       ::
-                how=_|+(key=code *deed)                   ::
-            ==                                            ::
+      ++  deed                                            ::  output task
+        $%  [%% paq=pack]                                 ::  final result
+            [%his who=base how=_|+(ren=regn *deed)]       ::  get foreign regn
+            [%mor fir=deed how=_|+(paq=pack *deed)]       ::  task chain
+            [%our who=base how=_|+(ren=regn *deed)]       ::  get home regn
+            [%pri who=land how=_|+(pri=ring *deed)]       ::  get private key
+            [%pub who=land how=_|+(pub=pass *deed)]       ::  get public key
+            [%sal how=_|+(sal=salt *deed)]                ::  get entropy
+            [%sym saz=spat how=_|+(pub=pass *deed)]       ::  get symmetric key
         ==
-      ++  gift
-        $%  :*  %%                                        ::  result
-                nut=note                                  ::  
-            ==                                            ::
-            :*  %his                                      ::  need foreign regn
-                who=base                                  ::
-                how=_|+(ren=regn *gift)                   ::
-            ==                                            ::
-            :*  %mor                                      ::  gift chain
-                fir=gift                                  ::
-                how=_|+(nut=note *gift)                   ::
-            ==                                            ::
-            :*  %our                                      ::  need home regn
-                who=base                                  ::
-                how=_|+(ren=regn *gift)                   ::
-            ==                                            ::
-            :*  %pri                                      ::  need private key
-                who=land                                  ::
-                how=_|+(pri=ring *gift)                   ::
-            ==                                            ::
-            :*  %pub                                      ::  need public key
-                who=land                                  ::
-                how=_|+(pub=pass *gift)                   ::
-            ==                                            ::
-            :*  %sym                                      ::  need code
-                paw=hand                                  ::
-                how=_|+(soq=sock *gift)                   ::
-            ==                                            ::
+      ++  gift                                            ::  input task
+        $%  [%% nut=note]                                 ::  final result
+            [%his who=base how=_|+(ren=regn *gift)]       ::  get foreign regn
+            [%mor fir=gift how=_|+(nut=note *gift)]       ::  task chain
+            [%our who=base how=_|+(ren=regn *gift)]       ::  get home regn
+            [%pri who=land how=_|+(pri=ring *gift)]       ::  get private key
+            [%pub who=land how=_|+(pub=pass *gift)]       ::  get public key
+            [%sym paw=hand how=_|+(soq=sock *gift)]       ::  get symmetric key
         ==
       ++  note                                            ::  message source
-        $%  :*  %bu                                       ::  bundle
-                all=(list note)                           ::
-            ==                                            ::
-            :*  %pe                                       ::  public (sealed)
-                too=base                                  ::
-                pay=note                                  ::
-            ==                                            ::
-            :*  %pg                                       ::  public (signed)
-                fro=base                                  ::
-                pay=note                                  ::
-            ==                                            ::
-            :*  %sc                                       ::  symmetric
-                fro=base                                  ::
-                too=base                                  ::
-                pay=note                                  ::
-            ==                                            ::
-            :*  %za                                       ::  data
-                pax=path                                  ::
-                hut=*                                     ::
-            ==                                            ::
+        $%  [%bu all=(list note)]                         ::  bundle
+            [%pe too=base pay=note]                       ::  public (sealed)
+            [%pg fro=base pay=note]                       ::  public (signed)
+            [%sc fro=base too=base pay=note]              ::  symmetric
+            [%za pax=path hut=*]                          ::  data
         ==
       --
   |%
@@ -158,7 +106,7 @@
       [~ %za pax.msg hut.msg]
     == 
   ::
-  ++  cure                                                ::  encode packet(s)
+  ++  cure                                                ::  encode packet
     =+  ^=  mor
         |=  [dyd=deed how=_|+(paq=pack *deed)]  ^-  deed
         ?~(-.dyd (how paq.dyd) [%mor dyd how])

@@ -1,10 +1,8 @@
 !:
-::          %bach, network and identity.   This file is in the public domain.
+::          %bach, network interpreter.   This file is in the public domain.
 ::
-:-  %bach
+:-  %born
 ^-  dock
-=>  |%
-    ++
 |=  [now=time wha=@ta]
 %^    hull
     (iris now)
@@ -13,15 +11,14 @@
 |=  [now=time wha=@ta]
 :-  ^-  lime
     :~  %all
-      :^    %rod                                  ::  packet input
+      :^    %rod
           %abel
-        :-  [~ ~]
-        :-  [%hose %pack ~]
-        |=  hap=*  ^-  (unit)
-        [~ ~]
+        [[~ ~] /hose/pack/ |=(* [~ ~])]
       ^-  hunt
       |=  [seq=@ud muz=* cax=bill]
-      [%run %pack p.cax q.cax]
+      ?>  ?=(tube muz)
+      [%run %pack cax]
+    ==
 ^-  bowl
 =>  ..$
 =<  |%
@@ -36,21 +33,33 @@
       [p.guo ..poke(..line q.guo)]
     --
 =>  |%
-    ++  desk                            ::  
-      $:
+    ++  dude                                  ::  foreign state
+      $:  ren=regn                            ::  regime number
+          pub=pass                            ::  public key
+
       ==
-    ++  game
-      $:  sol=mind
-    ++  mind
-      $:  nob=(map @p desk)             ::  noble identities
-      ::  wil=(map @p deer)             ::  wild identities
+    ++  home                                  ::  domestic state
+      $:  ren=regn                            ::  regime number
+          pri=ring                            ::  private key
       ==
-    ++  move                            ::  shell command
-      $%  [%pack p=@da q=@]             ::  
+    ++  game                                  ::  application state
+      $:  our=(map base home)                 ::  domestic state
+          his=(map base dude)                 ::  foreign state
+          inn=(list deed)                     ::  pending inputs
+          out=(list gift)                     ::  pending outputs
+      ==
+    ++  move                                  ::  input
+      $%  [%pack p=@da q=pack]                ::  time packet
+      ==
+    ++  plan
+      $:  [p=@da q=gift]                      ::  expiration work
       ==
     --
 =+  sys=*game
 |%
+++  
+
+
 ++  lean                                    ::  apply line result
   |=  [txt=@t pet=@ta dub=tube tuy=desk]
   |=  ten=tune
