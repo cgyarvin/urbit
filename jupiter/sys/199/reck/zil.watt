@@ -1,0 +1,112 @@
+!:
+::          %reck layer 0.  This file is in the public domain.
+::
+|%
+++  zuul
+  !!
+++  hy
+  =>  |%
+      ++  base  ,@p                                       ::  host identity
+      ++  code  ,@uvI                                     ::  symmetric key
+      ++  lane  $%  [%if p=@ud q=@if]                     ::  IPv4 port/addr
+                    [%is p=@ud q=@is]                     ::  IPv6 port/addr
+                ==                                        ::  
+      ++  link  ,[p=code q=sock]                          ::  connection
+      ++  hand  ,@uvI                                     ::  hash of code
+      ++  pack  ,@uv                                      ::  packet
+      ++  post  ,[p=path q=*]                             ::  statement
+      ++  sock  ,[p=base q=base]                          ::  from to
+      ++  salt  ,@uv                                      ::  entropy
+      ++  taxi  ,[p=lane q=pack]                          ::  routed packet
+      --
+  =>  |%
+      ++  deed                                            ::  output task
+        $%  [%% way=lane paq=pack]                        ::  final result
+            [%pri p=base q=_|+(pri=ring *deed)]           ::  get private key
+            [%pub p=base q=_|+(pub=pass *deed)]           ::  get public key
+            [%sal p=_|+(sal=salt *deed)]                  ::  get entropy
+            [%sym p=sock q=_|+(pub=pass *deed)]           ::  get symmetric key
+            [%way p=base q=_|+(way=lane *deed)]           ::  get route
+        ==
+      ++  gift                                            ::  input task
+        $%  [%% p=base q=(list post)]                     ::  final result
+            [%pri p=base q=_|+(pri=ring *gift)]           ::  get private key
+            [%pub p=base q=_|+(pub=pass *gift)]           ::  get public key
+            [%sym p=hand q=_|+(lyn=link *gift)]           ::  get symmetric key
+        ==
+      ++  note                                            ::  message source
+        $%  [& p=sock q=(list post)]                      ::  asymmetric
+            [| p=sock q=(list post)]                      ::  symmetric
+        ==
+      --
+  |%
+  ++  boil                                                ::  decode packet
+    =+  was=|=(cyp=@ (rsh 5 8 cyp))
+    |=  paq=pack
+    ^-  gift
+    =+  [mag=(end 3 2 paq) bod=(rsh 3 2 paq)]
+    ?+    mag  !!
+        %pc
+      =+  msg=((hard ,[p=@p q=@]) (cue bod))
+      :+  %pri
+        p.msg
+      |=  pri=ring
+      =+  god=((hard ,[p=@p q=@]) (cue (need (chew:ar pri q.msg))))
+      :+  %pub
+        p.god
+      |=  pub=pass
+      [%% p.god ((hard (list post)) (cue (was (need (take:ar pub q.god)))))]
+    ::
+        %sc
+      =+  msg=((hard ,[p=@uvI q=@]) (cue bod))
+      :+  %sym 
+        p.msg
+      |=  lyn=link
+      [%% p.q.lyn ((hard (list post)) (cue (was (need (shed p.lyn q.msg)))))]
+    == 
+  ::
+  ++  cure                                                ::  encode packet
+    =+  ^=  box
+        |=  [tag=@tas bod=@]
+        (can 3 [2 tag] [(met 3 bod) bod] ~)
+    =+  ^=  sea
+        |=  [sal=@ bod=@]
+        (can 5 [8 sal] [(met 5 bod) bod] ~)
+    |=  lan=note
+    ^-  deed
+    ?-    -.lan
+        &
+      :+  %pri
+        p.p.lan 
+      |=  pri=ring
+      :+  %pub
+        q.p.lan
+      |=  pub=pass
+      :+  %way
+        q.p.lan
+      |=  way=lane
+      :-  %sal
+      |=  sal=salt
+      :+  %%
+        way
+      %+  box
+        %pc
+      %+  jam
+        q.p.lan
+      (seal:ar pub (jam p.p.lan (sign:ar pri (sea sal (jam q.lan)))))
+    ::
+        |
+      :+  %sym
+        p.lan
+      |=  key=code
+      :+  %way
+        q.p.lan
+      |=  way=lane
+      :-  %sal
+      |=  sal=salt
+      :+  %%
+        way
+      (box %sc (jam (shax key) (shed key (sea sal (jam q.lan)))))
+    ==
+  --
+--

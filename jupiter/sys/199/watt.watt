@@ -1,17 +1,17 @@
 ::
-::              Watt kernel 200.  This file is in the public domain.
+::              Watt kernel 199.  This file is in the public domain.
 ::
 =>  src=.
 ?>  ?=(@ src)
 %.  src
 =<  make
-=>  %200
+=>  %199
 =>  ::
   ::::                Tier 0, kernel stub
   ::
-  ~%  %k.200  ~  ~
+  ~%  %k.199  ~  ~
   |%
-  ++  stub  200
+  ++  stub  199
   --
 =>  ::
   ::::                Tier 1, basic math
@@ -3909,7 +3909,7 @@
       :^  %wtkt  [%cnbc %a]                             ::  ?^  a
         [%tsgl [%cnbc nem] [%cnbc %a]]                  ::  =<  [{nem} a]
       $(q.gen t.q.gen)                                  ::
-    ::
+    ::                                                  ::
         [%smcn *]                                       ::                  ;%
       |-  ^-  gene                                      ::
       ?~  p.gen                                         ::

@@ -1,5 +1,5 @@
 !:
-::          %bach, network interpreter.   This file is in the public domain.
+::          %born, a shell.   This file is in the public domain.
 ::
 :-  %born
 ^-  dock
@@ -10,15 +10,21 @@
 ^-  bead
 |=  [now=time wha=@ta]
 :-  ^-  lime
-    :~  %all
-      :^    %rod
-          %abel
-        [[~ ~] /hose/pack/ |=(* [~ ~])]
-      ^-  hunt
-      |=  [seq=@ud muz=* cax=bill]
-      ?>  ?=(tube muz)
-      [%run %pack cax]
-    ==
+    :^    %rod
+        %abel
+      :-  [~ ~]
+      :-  [%hose %line ~]
+      |=  hap=*  ^-  (unit)
+      ?.  ?=([p=@ta q=@ta ~] hap)
+        ~
+      =+  zod=[p=(colt p.hap) q=(colt q.hap)]
+      ?.  ?&(?=(^ p.zod) ?=(^ q.zod))
+        ~
+      [~ u.p.zod u.q.zod]
+    ^-  hunt
+    |=  [seq=@ud muz=* cax=bill]
+    ?>  ?=(tube muz)
+    [%run %line muz q.cax]
 ^-  bowl
 =>  ..$
 =<  |%
@@ -33,32 +39,19 @@
       [p.guo ..poke(..line q.guo)]
     --
 =>  |%
-    ++  dude                                  ::  foreign state
-      $:  ren=regn                            ::  regime number
-          pub=pass                            ::  public key
+    ++  desk                            ::  session state
+      $:  nub=vase                      ::  system + libraries
+          red=vase                      ::  result log
+          ser=vase                      ::  source log
+          way=(map ,@ta vase)           ::  environment variables 
       ==
-    ++  home                                  ::  domestic state
-      $:  ren=regn                            ::  regime number
-          pri=ring                            ::  private key
-      ==
-    ++  game                                  ::  application state
-      $:  our=(map base home)                 ::  domestic state
-          his=(map base dude)                 ::  foreign state
-          inn=(list deed)                     ::  pending inputs
-          out=(list gift)                     ::  pending outputs
-      ==
-    ++  move                                  ::  input
-      $%  [%pack p=@da q=pack]                ::  time packet
-      ==
-    ++  plan
-      $:  [p=@da q=gift]                      ::  expiration work
+    ++  game  (map tube desk)           ::  application state
+    ++  move                            ::  shell command
+      $%  [%line p=tube q=@ta]          ::  line input
       ==
     --
 =+  sys=*game
 |%
-++  
-
-
 ++  lean                                    ::  apply line result
   |=  [txt=@t pet=@ta dub=tube tuy=desk]
   |=  ten=tune
