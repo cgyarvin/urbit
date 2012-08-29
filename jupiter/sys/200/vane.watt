@@ -1,5 +1,5 @@
 ::
-::              Vane for kernel 203.  This file is in the public domain.
+::              Vane for kernel <= 203.  This file is in the public domain.
 ::
 =>  |%
     ++  shoe                              ::  trace stack layer

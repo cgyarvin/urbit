@@ -2846,78 +2846,6 @@
             df4d.225e.2d56.7fd6.1395.a3f8.c582
       (cut 3 [a 1] b)
     --
-  ++  ar                                                ::  RSA encryption
-    |%
-    ++  brew                                            ::  generate ring
-      |=  [a=@ b=@]  ^-  ring                           ::  [bits seed]
-      =+  c=(rsh 0 1 a)
-      (jam (ramp c b) (ramp c (shax b)))
-    ::
-    ++  chew                                            ::  read with ring, 53
-      |=  [a=ring b=@]  ^-  (unit ,@)
-      =+  c=(melt 53 a) 
-      ?:  (gte b (mul p.c q.c))
-        ~
-      =+  d=(fu p.c q.c)
-      (shed 0 (out.d (exp.d r.c (sit.d b))))
-    ::
-    ++  drip                                            ::  private to public
-      |=  a=ring  ^-  pass
-      =+  b=(heat a)
-      (mul p.b q.b)
-    ::
-    ++  heat                                            ::  separate primes
-      |=  a=ring  ^-  [p=@ q=@]
-      =+  b=(cue a)
-      ?>(?=([p=@ q=@] b) b)
-    ::
-    ++  melt                                            ::  activate ring
-      |=  [a=@ b=ring]  ^-  [p=@ q=@ r=@]               ::  a=>e, s=>d
-      =+  c=(heat b)
-      :+  p.c
-        q.c
-      (~(inv fo (elcm (dec p.c) (dec q.c))) a)
-    ::
-    ++  sign                                            ::  send with ring, 37
-      |=  [a=ring b=@]  ^-  @
-      =>  .(b (shen 0 b))                               ::  scramble RSA input
-      =+  c=(melt 37 a)
-      ?:  (gte b (mul p.c q.c))
-        ~|(%ar-sign !!) 
-      =+  d=(fu p.c q.c)
-      (out.d (exp.d r.c (sit.d b)))
-    ::
-    ++  seal                                            ::  send with pass, 53
-      |=  [a=pass b=@]  ^-  @
-      =>  .(b (shen 0 b))                               ::  scramble RSA input
-      ?:  (gte b a)
-        ~|(%ar-seal !!)
-      (~(exp fo a) 53 b)
-    ::
-    ++  ramp                                            ::  make r-m prime
-      |=  [a=@ b=@]                                     ::  [bits seed]
-      =+  c=@
-      |-  ^-  @ux
-      =+  d=(~(raw og b) a)
-      ?:  &(!=(1 (mod d 53)) !=(1 (mod d 37)) (pram d))
-        d
-      $(b +(b), c (shax c))
-    ::
-    ++  take                                            ::  read with pass, 37
-      |=  [a=pass b=@]  ^-  (unit ,@)
-      ?:  (gte b a)
-        ~
-      (shed 0 (~(exp fo a) 37 b))
-    ::
-    ++  test
-      |=  [a=@ b=@]  ^-  &                              ::  [bits seed]
-      =+  wad=(brew a b)
-      =+  rig=(drip wad)
-      =+  try=[n=(take rig (sign wad b)) l=(chew wad (seal rig b))]
-      ?.  =([[~ b] [~ b]] try)
-        ~|([%ar-test a b n.try l.try ~] !!)
-      %&
-    --
   ::
   ++  shad  |=(ruz=@ (shax (shax ruz)))                 ::  double sha-256
   ++  shaf                                              ::  half sha-256
@@ -2933,7 +2861,7 @@
   ::
   ++  shax                                              ::  sha-256
     ~/  %shax
-    |=  ruz=@  ^-  @ux
+    |=  ruz=@  ^-  @
     ~|  %sha
     =+  [few==>(fe .(a 5)) wac=|=([a=@ b=@] (cut 5 [a 1] b))]
     =+  [sum=sum.few ror=ror.few net=net.few inv=inv.few]
@@ -3521,14 +3449,6 @@
   [%fine fuv lup mar]
 ::
 ++  flag  ^-(type [%fork [%cube 0 %atom %f] [%cube 1 %atom %f]])
-++  fray
-  ~/  %fray
-  |=  pok=port  ^-  [p=axis q=type]
-  ?-  -.q.pok
-    &  [p.pok p.q.pok]
-    |  :-  (peg p.pok 2) 
-       (roll q.q.pok =+([p=[p=*type q=*foot] q=`type`%void] |.((fork p.p q))))
-  ==
 ++  flay
   ~/  %flay
   |=  pok=port

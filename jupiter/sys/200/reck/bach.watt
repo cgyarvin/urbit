@@ -1,7 +1,7 @@
 !:
 ::          %bach, network interpreter.   This file is in the public domain.
 ::
-:-  %born
+:-  %bach
 ^-  dock
 |=  [now=time wha=@ta]
 %^    hull
@@ -33,115 +33,29 @@
       [p.guo ..poke(..line q.guo)]
     --
 =>  |%
-    ++  dude                                  ::  foreign state
-      $:  ren=regn                            ::  regime number
-          pub=pass                            ::  public key
+    ++  dude                                      ::  foreign state
+      $:  ren=regn                                ::  regime number
+          pub=pass                                ::  public key
       ==
-    ++  home                                  ::  domestic state
-      $:  ren=regn                            ::  regime number
-          pri=ring                            ::  private key
+    ++  home                                      ::  domestic state
+      $:  ren=regn                                ::  regime number
+          pri=ring                                ::  private key
       ==
-    ++  game                                  ::  application state
-      $:  our=(map base home)                 ::  domestic state
-          his=(map base dude)                 ::  foreign state
-          inn=(list deed)                     ::  pending inputs
-          out=(list gift)                     ::  pending outputs
+    ++  game                                      ::  application state
+      $:  our=(map base home)                     ::  domestic state
+          his=(map base dude)                     ::  foreign state
+          inn=(list deed)                         ::  pending inputs
+          out=(list gift)                         ::  pending outputs
       ==
-    ++  move                                  ::  input
-      $%  [%pack p=@da q=pack]                ::  time packet
-      ==
-    ++  plan
-      $:  [p=@da q=gift]                      ::  expiration work
+    ++  move                                      ::  input
+      $%  [%pack p=@da q=pack]                    ::  learn packet
+          [%pass p=base q=mark r=@da s=pass]      ::  learn public key
+          [%road p=base q=mark r=@ud s=lane]      ::  learn route
+          [%ring p=base q=@ud r=ring]             ::  learn private key
+          [%link p=base q=base r=@da s=code]      ::  learn symmetric link
+          [%want p=base q=
       ==
     --
 =+  sys=*game
 |%
-++  
-
-
-++  lean                                    ::  apply line result
-  |=  [txt=@t pet=@ta dub=tube tuy=desk]
-  |=  ten=tune
-  ^-  [p=lime q=_..lean]
-  ?-    ten
-      [0 *]
-    ?+    pet  [[%say %yo %p dub 0 [%leaf "<unknown command>"]] ..lean]
-        %%
-      =+  ham=~(dole ut p.p.ten)
-      :-  [%say %yo %p dub 0 (dish:ut ham q.p.ten)]
-      %=  ..lean
-        sys  %+  ~(put by sys) 
-               dub
-             %=  tuy
-               red  (slop p.ten red.tuy)
-               ser  (slop [[%atom %t] txt] ser.tuy)
-             ==
-      ==
-    ::
-        %set
-      ?.  ?=([%face *] p.p.ten)
-        [[%say %yo %p dub 0 [%leaf "<usage: \":set name=value\">"]] ..lean]
-      :-  ~
-      %=  ..lean
-        sys  %+  ~(put by sys) 
-               dub
-             tuy(way (~(put by way.tuy) p.p.p.ten [q.p.p.ten q.p.ten]))
-      ==
-    ::
-        %type
-      [[%say %yo %p dub 0 (dial:ut ~(dole ut p.p.ten))] ..lean]
-    ==
-  ::
-      [1 *]
-    :-  :-  %all
-        %+  turn  p.ten
-        |=  mis=*
-        =+  vad=(dish:ut [[~ %path] (path mis)])
-        [%say %yo %p dub 0 [%leaf "[need {~(ram re vad)}]"]]
-    ..lean
-  ::
-      [2 *]
-    [[%say %yo %t p.ten] ..lean]
-  ==
-::
-++  lick                                    ::  synthetic namespace
-  |=  cam=lens
-  |=  nam=*
-  ^-  (unit)
-  =+  pax=(path nam)
-  =+  voy=(peek:cam [%cary pax])
-  voy
-:: 
-++  line                                    ::  execute a line
-  |=  [dub=tube txt=@t cam=lens]
-  ^-  [p=lime q=_..line]
-  =+  ^=  fob  ^-  [p=term q=gene]
-      %+  rash
-        txt
-      ;~  pose 
-        (stag %% wide:vast)
-        ;~  plug
-          ;~(pfix col sym)
-          ;~(pfix ace wide:vast)
-        ==
-      ==
-  =+  xac=(~(get by sys) dub)
-  =+  ^=  tuy  ^-  desk
-      ?:  ?=(^ xac)
-        u.xac
-      [!>(..zuul) [[%cube 0 %atom %n] ~] [[%cube 0 %atom %n] ~] ~]
-  %-  (lean txt p.fob dub tuy)
-  (slab =(%type p.fob) [(lube [when:cam tuy]) q.fob] (lick cam))
-::
-++  lube                                    ::  construct context
-  |=  [now=@da tuy=desk]  ^-  vase
-  =+  yad=~(rent co [~ %da now])
-  ::  ~&  [%what `@ud`now yad]
-  %+  slop
-    [[%atom %ta] ~(rent co [~ %da now])]
-  %+  slop
-    %+  slop
-      [[%face %$ p.ser.tuy] q.ser.tuy]
-    [[%face %$ p.red.tuy] q.red.tuy]
-  (slum nub.tuy way.tuy)
 --

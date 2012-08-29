@@ -7,106 +7,215 @@
 ++  hy
   =>  |%
       ++  base  ,@p                                       ::  host identity
+      ++  bond  (list post)                               ::  atomic statement
       ++  code  ,@uvI                                     ::  symmetric key
-      ++  lane  $%  [%if p=@ud q=@if]                     ::  IPv4 port/addr
-                    [%is p=@ud q=@is]                     ::  IPv6 port/addr
-                ==                                        ::  
-      ++  link  ,[p=code q=sock]                          ::  connection
+      ++  flap  ,@uvI                                     ::  fragment name
+      ++  hair  $%  [& p=@]                               ::  logical datagram
+                    [| p=@ud q=(list hair)]               ::  \ log13 atom
+                ==                                        ::  \ width/13 frags
+      ++  gram  ,@uv                                      ::  physical datagram
       ++  hand  ,@uvI                                     ::  hash of code
-      ++  pack  ,@uv                                      ::  packet
+      ++  lint  (list pack)                               ::  fragment array
+      ++  lane  $%  [%if p=@ud q=@if]                     ::  packet route
+                    [%is p=@ud q=@is]                     ::  \ IPv4 UDP/addr
+                ==                                        ::  \ IPv6 UDP/addr
+      ++  link  ,[p=code q=sock]                          ::  connection
+      ++  mark  @ud                                       ::  regime number
+      ++  pack  ,@uvO                                     ::  packet
       ++  post  ,[p=path q=*]                             ::  statement
       ++  sock  ,[p=base q=base]                          ::  from to
       ++  salt  ,@uv                                      ::  entropy
       ++  taxi  ,[p=lane q=pack]                          ::  routed packet
+      ++  weft  (list flap)                               ::  fragment probe
       --
   =>  |%
       ++  deed                                            ::  output task
-        $%  [%% way=lane paq=pack]                        ::  final result
+        $%  [%% pyz=(list pack)]                          ::  semantic result
             [%pri p=base q=_|+(pri=ring *deed)]           ::  get private key
             [%pub p=base q=_|+(pub=pass *deed)]           ::  get public key
-            [%sal p=_|+(sal=salt *deed)]                  ::  get entropy
-            [%sym p=sock q=_|+(pub=pass *deed)]           ::  get symmetric key
-            [%way p=base q=_|+(way=lane *deed)]           ::  get route
+            [%sal p=salt q=_|+(sal=salt *deed)]           ::  get entropy
+            [%sym p=sock q=_|+(key=code *deed)]           ::  get symmetric key
+            [%way p=base q=_|+(who=base *deed)]           ::  get route
         ==
       ++  gift                                            ::  input task
-        $%  [%% p=base q=(list post)]                     ::  final result
+        $%  [%% p=base q=bond]                            ::  semantic result
+            [%fly p=weft q=_|+(hud=lint *gift)]           ::  get fragments
+            [%fog p=flap q=pack]                          ::  got fragment
             [%pri p=base q=_|+(pri=ring *gift)]           ::  get private key
             [%pub p=base q=_|+(pub=pass *gift)]           ::  get public key
             [%sym p=hand q=_|+(lyn=link *gift)]           ::  get symmetric key
         ==
       ++  note                                            ::  message source
-        $%  [& p=sock q=(list post)]                      ::  asymmetric
-            [| p=sock q=(list post)]                      ::  symmetric
+        $%  [%a p=sock q=bond]                     ::  full, asymmetric
+            [%o p=sock q=bond]                     ::  open, asymmetric
+            [%s p=sock q=bond]                     ::  symmetric
+        ==
+      --
+  =>  |%
+      ++  darn                                            ::  hair to gram
+        |=  war=hair
+        ^-  gram
+        ?-    -.war
+            &  p.war
+            |
+          %+  can
+            (add 13 p.war)
+          (turn q.war |=(a=hair [1 ^$(war a)]))
+        ==
+      ::
+      ++  fold                                            ::  posts to gram
+        |=  say=bond  ^-  gram
+        (cat 3 %j (jam say))
+      ::
+      ++  fray                                            ::  gram to hair
+        |=  lod=gram  ^-  hair
+        =+  dul=(met 13 lod)
+        ?:  (lte dul 1)
+          [%& lod]
+        =+  wid=(met 0 dul)
+        =+  cyt=?:((lte wid 5) [p=wid q=0] [p=5 q=(sub wid 5)])
+        :+  %|
+          q.cyt
+        (turn (rip (add 13 q.cyt) lod) |=(a=@ ^$(lod a)))
+      ::
+      ++  toss                                            ::  gram to posts
+        |=  lod=gram  ^-  bond
+        =+  [mag=(end 3 1 lod) bod=(rsh 3 1 lod)]
+        ?>(=(%j mag) ((hard bond) (cue bod)))
+      ::
+      ++  warp                                            ::  hair/key to packs
+        |=  [key=code war=hair]
+        =+  wap=*(list pack)
+        |-  ^-  [p=flap q=(list pack)]
+        ?-    -.war
+            &  =+(vof=(cat 3 %f (shen key p.war)) [(shax vof) vof ~])
+            |
+          =+  ^=  zod
+              =+  hey=+(key)
+              |-  ^-  [p=(list flap) q=(list pack)]
+              ?~  q.war
+                [~ wap]
+              =+  fid=$(hey +(hey), q.war t.q.war)
+              =+  hiz=^$(key (shax hey), war i.q.war, wap q.fid)
+              [[p.hiz p.fid] q.hiz]
+          =+  vof=(cat 3 %g (shen key (jam p.war (rap 8 p.zod))))
+          [(shax vof) vof q.zod] 
         ==
       --
   |%
-  ++  boil                                                ::  decode packet
-    =+  was=|=(cyp=@ (rsh 5 8 cyp))
-    |=  paq=pack
-    ^-  gift
-    =+  [mag=(end 3 2 paq) bod=(rsh 3 2 paq)]
+  ++  boil
+    =>  |%
+        ++  mend
+          |=  [[key=code rag=flap] duz=_|+(hair *gift)]  
+          ^-  gift
+          :+  %fly  [rag ~]
+          |=  hud=lint            
+          ?>  ?=([@ ~] hud)
+          =+  [mag=(end 3 1 i.hud) bod=(rsh 3 1 i.hud)]
+          =+  pay=(need (shed key bod))
+          ?+    mag  !!
+              %f  (duz [%& pay])
+              %g
+            =+  wyg=((hard ,[p=@ud q=@]) (cue pay))
+            =+  fet=`weft`(rip 8 q.wyg)
+            :+  %fly  fet
+            |=  hud=lint
+            =+  hey=+(key)
+            =+  haz=*(list hair)
+            |-  ^-  gift
+            ?~  fet
+              (duz [%| p.wyg (flop haz)]) 
+            %=    ^^^$
+                key  (shax hey)
+                rag  i.fet
+                duz
+              |=  war=hair
+              ^$(fet t.fet, haz [war haz], hey +(hey))
+            ==
+          ==
+        ++  mesh
+          |=  [[key=code rag=flap] def=_|+(bond *gift)]  
+          ^-  gift
+          (mend [key rag] |=(war=hair (def (toss (darn war)))))
+        ::
+        ++  meth
+          |=  [fug=? who=base cag=@]
+          ^-  gift
+          ?:  fug
+            [%% who (toss q:((hard ,[p=salt q=gram]) (cue cag)))]
+          %+  mesh
+            ((hard ,[p=code q=flap]) (cue cag))
+          |=(say=bond [%% who say])
+        --
+    |=  paq=pack  ^-  gift
+    =+  [mag=(end 3 1 paq) bod=(rsh 3 1 paq)]
     ?+    mag  !!
-        %pc
-      =+  msg=((hard ,[p=@p q=@]) (cue bod))
-      :+  %pri
-        p.msg
+        ?(%a %b)
+      =+  hun=((hard ,[p=base q=@]) (cue bod))
+      :+  %pri  p.hun
       |=  pri=ring
-      =+  god=((hard ,[p=@p q=@]) (cue (need (chew:ar pri q.msg))))
-      :+  %pub
-        p.god
+      =+  qyr=((hard ,[p=base q=@]) (cue (need (chew:ar pri q.hun))))
+      :+  %pub  p.qyr
       |=  pub=pass
-      [%% p.god ((hard (list post)) (cue (was (need (take:ar pub q.god)))))]
+      (meth =(%a mag) p.qyr (need (take:ar pub q.qyr)))
     ::
-        %sc
-      =+  msg=((hard ,[p=@uvI q=@]) (cue bod))
-      :+  %sym 
-        p.msg
+        ?(%f %g)
+      [%fog (shax paq) paq]
+    ::
+        ?(%o %p)
+      =+  qyr=((hard ,[p=base q=@]) (cue bod))
+      :+  %pub  p.qyr
+      |=  pub=pass
+      (meth =(%o mag) p.qyr (need (take:ar pub q.qyr)))
+    ::
+        ?(%s %t)
+      =+  [man=(end 8 1 bod) cry=(rsh 8 1 bod)]
+      :+  %sym  man
       |=  lyn=link
-      [%% p.q.lyn ((hard (list post)) (cue (was (need (shed p.lyn q.msg)))))]
-    == 
-  ::
-  ++  cure                                                ::  encode packet
-    =+  ^=  box
-        |=  [tag=@tas bod=@]
-        (can 3 [2 tag] [(met 3 bod) bod] ~)
-    =+  ^=  sea
-        |=  [sal=@ bod=@]
-        (can 5 [8 sal] [(met 5 bod) bod] ~)
+      ?:  =(%s mag)
+        [%% p.q.lyn (toss (need (shed p.lyn cry)))]
+      =+  rag=(need (shed p.lyn cry))
+      (mesh [p.lyn rag] |=(say=bond [%% p.q.lyn say]))
+    ==
+  ++  cure                                                ::  note to deed
+    =>  |%
+        ++  mush
+          |=  fod=[p=@tasD q=@tasD]
+          |=  [say=bond enc=_|+(@ @)]  ^-  deed
+          =+  pay=(fold say)
+          :+  %sal  pay  |=  sal=salt
+          =+  war=(fray pay)
+          ?:  ?=(& -.war)
+            [%% (cat 3 p.fod (enc (jam sal p.war))) ~]
+          =+  key=(shax (mix q.fod sal))
+          =+  paw=(warp key war)
+          [%% (cat 3 q.fod (enc (jam key p.paw))) q.paw]
+        --
     |=  lan=note
     ^-  deed
     ?-    -.lan
-        &
-      :+  %pri
-        p.p.lan 
-      |=  pri=ring
-      :+  %pub
-        q.p.lan
-      |=  pub=pass
-      :+  %way
-        q.p.lan
-      |=  way=lane
-      :-  %sal
-      |=  sal=salt
-      :+  %%
-        way
-      %+  box
-        %pc
-      %+  jam
-        q.p.lan
-      (seal:ar pub (jam p.p.lan (sign:ar pri (sea sal (jam q.lan)))))
+        %a                                                ::  public, sealed
+      :+  %pri  p.p.lan  |=  pri=ring
+      :+  %pub  q.p.lan  |=  pub=pass
+      %+  (mush [%a %b])
+        q.lan
+      |+(cle=@ (jam q.p.lan (seal:ar pub (jam p.p.lan (sign:ar pri cle)))))
     ::
-        |
-      :+  %sym
-        p.lan
+        %o 
+      :+  %pri  p.p.lan  |=  pri=ring
+      %+  (mush [%o %p])
+        q.lan
+      |+(cle=@ (jam p.p.lan (sign:ar pri cle)))
+    ::
+        %s
+      :+  %sym  p.lan
       |=  key=code
-      :+  %way
-        q.p.lan
-      |=  way=lane
-      :-  %sal
-      |=  sal=salt
-      :+  %%
-        way
-      (box %sc (jam (shax key) (shed key (sea sal (jam q.lan)))))
+      =+  man=(shax key)
+      =+  war=(fray (fold q.lan))
+      ?:  ?=(& -.war)
+        [%% (cat 3 %s (cat 8 man (shen key p.war))) ~]
+      =+  paw=(warp key war)
+      [%% (cat 3 %t (cat 8 man p.paw)) q.paw]
     ==
   --
 --
