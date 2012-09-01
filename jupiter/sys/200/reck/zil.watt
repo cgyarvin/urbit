@@ -15,22 +15,22 @@
                 ==                                        ::  \ width/13 frags
       ++  gram  ,@uv                                      ::  physical datagram
       ++  hand  ,@uvI                                     ::  hash of code
-      ++  lint  (list pack)                               ::  fragment array
-      ++  lane  $%  [%if p=@ud q=@if]                     ::  packet route
+      ++  lint  (list rock)                               ::  fragment array
+      ++  lane  $%  [%if p=@ud q=@if]                     ::  rocket route
                     [%is p=@ud q=@is]                     ::  \ IPv4 UDP/addr
                 ==                                        ::  \ IPv6 UDP/addr
       ++  link  ,[p=code q=sock]                          ::  connection
       ++  mark  @ud                                       ::  regime number
-      ++  pack  ,@uvO                                     ::  packet
       ++  post  ,[p=path q=*]                             ::  statement
+      ++  rock  ,@uvO                                     ::  rocket
       ++  sock  ,[p=base q=base]                          ::  from to
       ++  salt  ,@uv                                      ::  entropy
-      ++  taxi  ,[p=lane q=pack]                          ::  routed packet
+      ++  taxi  ,[p=lane q=rock]                          ::  routed rocket
       ++  weft  (list flap)                               ::  fragment probe
       --
   =>  |%
       ++  deed                                            ::  output task
-        $%  [%% pyz=(list pack)]                          ::  semantic result
+        $%  [%% pyz=(list rock)]                          ::  semantic result
             [%pri p=base q=_|+(pri=ring *deed)]           ::  get private key
             [%pub p=base q=_|+(pub=pass *deed)]           ::  get public key
             [%sal p=salt q=_|+(sal=salt *deed)]           ::  get entropy
@@ -40,7 +40,7 @@
       ++  gift                                            ::  input task
         $%  [%% p=base q=bond]                            ::  semantic result
             [%fly p=weft q=_|+(hud=lint *gift)]           ::  get fragments
-            [%fog p=flap q=pack]                          ::  got fragment
+            [%fog p=flap q=rock]                          ::  got fragment
             [%pri p=base q=_|+(pri=ring *gift)]           ::  get private key
             [%pub p=base q=_|+(pub=pass *gift)]           ::  get public key
             [%sym p=hand q=_|+(lyn=link *gift)]           ::  get symmetric key
@@ -83,16 +83,16 @@
         =+  [mag=(end 3 1 lod) bod=(rsh 3 1 lod)]
         ?>(=(%j mag) ((hard bond) (cue bod)))
       ::
-      ++  warp                                            ::  hair/key to packs
+      ++  warp                                            ::  hair/key to rocks
         |=  [key=code war=hair]
-        =+  wap=*(list pack)
-        |-  ^-  [p=flap q=(list pack)]
+        =+  wap=*(list rock)
+        |-  ^-  [p=flap q=(list rock)]
         ?-    -.war
             &  =+(vof=(cat 3 %f (shen key p.war)) [(shax vof) vof ~])
             |
           =+  ^=  zod
               =+  hey=+(key)
-              |-  ^-  [p=(list flap) q=(list pack)]
+              |-  ^-  [p=(list flap) q=(list rock)]
               ?~  q.war
                 [~ wap]
               =+  fid=$(hey +(hey), q.war t.q.war)
@@ -147,7 +147,7 @@
             ((hard ,[p=code q=flap]) (cue cag))
           |=(say=bond [%% who say])
         --
-    |=  paq=pack  ^-  gift
+    |=  paq=rock  ^-  gift
     =+  [mag=(end 3 1 paq) bod=(rsh 3 1 paq)]
     ?+    mag  !!
         ?(%a %b)

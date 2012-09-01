@@ -338,7 +338,7 @@ u2_reck_boot(u2_reck* rec_u)
     {
       u2_noun lam = u2nc
         ('o',
-         u2nc(u2nc(c3__cary,
+         u2nc(u2nc(c3__car,
                    u2nt(c3_s2('p','i'),
                         u2nc(u2_ci_string("~ligbud-barnel"), u2_nul),
                         u2_yes)),

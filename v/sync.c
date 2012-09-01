@@ -18,13 +18,13 @@
 #include "f/coal.h"
 #include "v/vere.h"
 
-/* _sync_peek_arch(): (unit meta) for cary-path.
+/* _sync_peek_arch(): (unit meta) for car-path.
 */
 static u2_noun
 _sync_peek_arch(u2_reck* rec_u, u2_noun pos, u2_noun bok)
 {
   return u2_reck_peek
-    (rec_u, u2nq(c3__cary, pos, bok, u2nt(u2k(rec_u->wen), 'a', u2_nul)));
+    (rec_u, u2nq(c3__car, pos, bok, u2nt(u2k(rec_u->wen), 'a', u2_nul)));
 }
 
 #if 0
@@ -131,7 +131,7 @@ _sync_edit(u2_reck* rec_u,
 
   if ( u2_nul != u2h(dul) ) {
     det = u2nc
-          (u2nc(c3__cary, 
+          (u2nc(c3__car, 
                 u2nt(c3_s2('p','i'),
                      u2nt(pos, bok, u2_nul),
                      u2nc(c3_s2('d','o'), u2k(u2h(dul))))),

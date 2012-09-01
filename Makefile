@@ -24,7 +24,7 @@ CLD=gcc -O3 -L/usr/local/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
-LIBS=-lev -lgmp -lreadline -ltermcap -lsigsegv
+LIBS=-lev -lgmp -lreadline -ltecla -ltermcap -lsigsegv
 
 INCLUDE=include
 GENERATED=generated

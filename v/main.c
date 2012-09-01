@@ -14,6 +14,7 @@
 #include <stdint.h>
 #include <ev.h>
 #include <sigsegv.h>
+#include <libtecla.h>
 
 #define U2_GLOBAL
 #define C3_GLOBAL
@@ -137,19 +138,38 @@ volatile enum { sig_none, sig_overflow, sig_interrupt } Sigcause;
 ev_io Stdin_watcher;
 struct ev_loop *Loop_u;
 
+static GetLine *Tecla;
+
 static void
 stdin_cb(struct ev_loop *lup_u, struct ev_io *w, int revents)
 {
-  c3_c* lin_c = c3_comd_line(u2_Host.fel_c, "");
+  c3_c* lin_c = gl_get_line(Tecla, ": ", 0, -1);
 
   if ( !lin_c ) {
-    ev_io_stop (lup_u, w);
-    ev_unloop (lup_u, EVUNLOOP_ALL);
-  }
-  else if ( !*lin_c ) {
-    free(lin_c);
+    if ( GLR_BLOCKED != gl_return_status(Tecla) ) {
+      fprintf(stderr, "stdin_cb: abort\n");
+      ev_io_stop (lup_u, w);
+      ev_unloop (lup_u, EVUNLOOP_ALL);
+    }
+    else { 
+      fprintf(stderr, "stdin_cb: blocked\n");
+      return;
+    }
   }
   else {
+    c3_w  len_w = strlen(lin_c);
+    c3_c* out_c = malloc(len_w);
+
+    strncpy(out_c, lin_c, (len_w - 1));
+    out_c[len_w] = 0;
+
+    if ( !*out_c ) {
+      printf(": "); fflush(stdout);
+    }
+
+  else if ( !*lin_c ) {
+    return;
+  }
     u2_ve_line(lin_c); 
     free(lin_c);
   }
@@ -269,6 +289,7 @@ main(c3_i   argc,
     signal(SIGINT, interrupt_handler);
   }
 
+#if 0
   {
     u2_noun hep; 
  
@@ -307,5 +328,24 @@ main(c3_i   argc,
       }
     }
   }
-  return 0;
+#else
+  Tecla = new_GetLine(16384, 4096);
+  gl_io_mode(Tecla, GL_SERVER_MODE);
+  {
+    struct ev_loop *lup_u = ev_default_loop(0);
+
+    u2_Host.lup_u = Loop_u = lup_u;
+
+    fprintf(stderr, "http: on port 8080\n");
+    u2_ve_http_start(8080);
+
+    printf(": "); fflush(stdout);
+    ev_io_init(&Stdin_watcher, stdin_cb, 0, EV_READ);
+    ev_io_start(lup_u, &Stdin_watcher);
+
+    ev_loop(lup_u, 0);
+
+    return 0;
+  }
+#endif
 }

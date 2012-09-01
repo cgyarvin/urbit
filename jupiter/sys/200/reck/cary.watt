@@ -1,7 +1,7 @@
 !:
-::          %cary, revision control.   This file is in the public domain.
+::          %car, revision control.   This file is in the public domain.
 ::
-:-  %cary
+:-  %car
 =>  |%
     ++  arch                                      ::  fs node
       $%  [& clod]                                ::  ie, file

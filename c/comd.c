@@ -10,8 +10,11 @@
 #include <setjmp.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <libtecla.h>
 
 #include "all.h"
+
+static GetLine *Gl;
 
 /* c3_comd_init(): 
 **
@@ -20,6 +23,10 @@
 c3_c*                                                             //  produce
 c3_comd_init(void)
 {
+#if 1
+  Gl = new_GetLine(8192, 2048);
+  return 0;
+#else
   /* gib: home directory
   ** fel: history pathname
   */
@@ -45,6 +52,7 @@ c3_comd_init(void)
   read_history(fel_c);
 
   return fel_c;
+#endif
 }
 
 /* c3_comd_line():
@@ -57,6 +65,19 @@ c3_comd_init(void)
 c3_c*                                                             //  produce
 c3_comd_line(const c3_c *fel_c, const c3_c *prm_c)                //  retain
 {
+#if 1
+  c3_c *vid_c;
+
+  if ( !(vid_c = gl_get_line(Gl, prm_c, 0, -1)) ) {
+    printf("\n");
+    return 0;
+  }
+  if ( '\n' == vid_c[strlen(vid_c) - 1] ) {
+    vid_c[strlen(vid_c) - 1] = 0;
+  }
+  return strdup(vid_c);
+
+#else
   while ( 1 ) {
     c3_c *vid_c;
 
@@ -72,4 +93,5 @@ c3_comd_line(const c3_c *fel_c, const c3_c *prm_c)                //  retain
     }
     return vid_c;
   }
+#endif
 }

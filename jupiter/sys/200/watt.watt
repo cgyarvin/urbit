@@ -1088,10 +1088,6 @@
     =+  gol=(han fud)
     ?>(=(gol fud) gol)
   ::
-  ++  pipe
-    |*  led=(list _|+(* *))
-    !!                          ::  fix for nock 5
-  ::
   ::  Tier 4 molds
   ::
   ++  apt
@@ -2241,9 +2237,9 @@
     ++  huf  %+  cook  
                |=([a=@ b=@] (wred:un ~(zug mu ~(zag mu [a b]))))
              ;~(plug hif ;~(pfix hep hif))
-    ++  pev  (bass 64 ;~(plug sev (stun [0 4] siv)))
+    ++  pev  (bass 32 ;~(plug sev (stun [0 4] siv)))
     ++  pew  (bass 64 ;~(plug sew (stun [0 4] siw)))
-    ++  piv  (bass 64 (stun [5 5] siv))
+    ++  piv  (bass 32 (stun [5 5] siv))
     ++  piw  (bass 64 (stun [5 5] siw))
     ++  qeb  (bass 2 ;~(plug seb (stun [0 3] sib)))
     ++  qex  (bass 16 ;~(plug sex (stun [0 3] hit)))
@@ -2268,10 +2264,10 @@
     ++  siv  ;~(pose sid sov)
     ++  siw  ;~(pose sid sow)
     ++  six  ;~(pose sid sox)
-    ++  sov  (cook |=(a=@ (sub a 87)) (shim 'a' 'w'))
+    ++  sov  (cook |=(a=@ (sub a 87)) (shim 'a' 'v'))
     ++  sow  ;~  pose
                (cook |=(a=@ (sub a 87)) (shim 'a' 'z'))
-               (cook |=(a=@ (sub a 28)) (shim 'A' 'Z'))
+               (cook |=(a=@ (sub a 29)) (shim 'A' 'Z'))
                (cold 62 (just '-'))
                (cold 63 (just '~'))
              ==
@@ -6727,7 +6723,7 @@
       ==
     ::
     ++  wisp
-      %-  fist
+      %-  ulna
       %+  cook
         |=(a=(list ,[p=term q=foot]) (~(gas by *(map term foot)) a))
       (most muck boon)
@@ -6744,7 +6740,7 @@
     ++  glop  ~+((glue mash))
     ++  gunk  ~+((glue muck))
     ++  butt  |*(zor=_rule ?:(tol ;~(sfix zor ;~(plug gap duz)) zor))
-    ++  fist  |*(zor=_rule ?.(tol fail ;~(sfix zor ;~(plug gap dun))))
+    ++  ulna  |*(zor=_rule ?.(tol fail ;~(sfix zor ;~(plug gap dun))))
     ++  neck  ;~(pose duz ;~(pfix ;~(plug duq gap) wisp))
     ++  hank  (most muck loaf)
     ++  loaf  ?:(tol tall wide)
