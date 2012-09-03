@@ -17,14 +17,10 @@
       |=  hap=*  ^-  (unit)
       ?.  ?=([p=@ta q=@ta ~] hap)
         ~
-      =+  zod=[p=(colt p.hap) q=(colt q.hap)]
-      ?.  ?&(?=(^ p.zod) ?=(^ q.zod))
-        ~
-      [~ u.p.zod u.q.zod]
+      [~ (need (clan %ud p.hap)) (need (clan %ud q.hap))]
     ^-  hunt
     |=  [seq=@ud muz=* cax=bill]
-    ?>  ?=(tube muz)
-    [%run %line muz q.cax]
+    [%run %line ((hard tube) muz) q.cax]
 ^-  bowl
 =>  ..$
 =<  |%

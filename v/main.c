@@ -165,15 +165,15 @@ stdin_cb(struct ev_loop *lup_u, struct ev_io *w, int revents)
 
     if ( !*out_c ) {
       printf(": "); fflush(stdout);
+      free(out_c);
+      return;
     }
-
-  else if ( !*lin_c ) {
-    return;
+    else {
+      u2_ve_line(out_c); 
+      free(out_c);
+      printf(": "); fflush(stdout);
+    }
   }
-    u2_ve_line(lin_c); 
-    free(lin_c);
-  }
-  printf(": "); fflush(stdout);
 }
 
 static void
@@ -289,7 +289,7 @@ main(c3_i   argc,
     signal(SIGINT, interrupt_handler);
   }
 
-#if 0
+#if 1
   {
     u2_noun hep; 
  

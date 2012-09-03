@@ -284,20 +284,6 @@
         u2_rz(wir_r, boc);
         return ret;
       }
-      case c3__ktgl: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
-      _play_used(wir_r);
-      {
-        u2_noun hoz = j2_mcy(Pt6, ap, late)(wir_r, gen);
-        u2_noun ryd = _play_in(wir_r, van, sut, hoz);
-        u2_noun boc = _play_in(wir_r, van, sut, p_gen);
-        u2_noun ret = j2_mby(Pt6, fine)(wir_r, c3__very, boc, ryd);
-
-        u2_rz(wir_r, boc);
-        u2_rz(wir_r, ryd);
-        u2_rz(wir_r, hoz);
-
-        return ret;
-      }
       case c3__ktdt: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _play_used(wir_r);
       {
@@ -307,20 +293,6 @@
 
         u2_rz(wir_r, boc);
         u2_rz(wir_r, hef);
-        return ret;
-      }
-      case c3__ktgr: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
-      _play_used(wir_r);
-      {
-        u2_noun hoz = j2_mcy(Pt6, ap, late)(wir_r, gen);
-        u2_noun ryd = _play_in(wir_r, van, sut, hoz);
-        u2_noun boc = _play_in(wir_r, van, sut, p_gen);
-        u2_noun ret = j2_mby(Pt6, fine)(wir_r, c3__pure, boc, ryd);
-
-        u2_rz(wir_r, boc);
-        u2_rz(wir_r, ryd);
-        u2_rz(wir_r, hoz);
-
         return ret;
       }
       case c3__ktsg: p_gen = u2_t(gen);
