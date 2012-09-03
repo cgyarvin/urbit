@@ -1106,13 +1106,17 @@
         ?@(r.a & ?&((vor p.n.a p.n.r.a) (hor p.n.a p.n.r.a)))
     ==
   ::
-  ++  set
-    |*  a=_,*
-    $|(~ [n=a l=(set a) r=(set a)])
-  ::
   ++  map   
     |*  [a=_,* b=_,*]
     $|(~ [n=[p=a q=b] l=(map a b) r=(map a b)])
+  ::
+  ++  que
+    |*  a=_,* 
+    $|(~ [n=a l=(que a) r=(que a)])
+  ::
+  ++  set
+    |*  a=_,*
+    $|(~ [n=a l=(set a) r=(set a)])
   --
 =>
   ::::
@@ -1309,7 +1313,46 @@
       ?~(a 0 +((add $(a l.a) $(a r.a))))
     --
   ::
-  ::      Tier 4c, casual construction
+  ::      Tier 4c, queues
+  ::
+  ++  to
+    |_  a=(que)
+    +-  gas
+      |=  b=(list _?>(?=(^ a) n.a))
+      |-  ^+  a
+      ?~(b a $(b t.b, a (put i.b)))
+    ::
+    +-  get
+      |-  ^+  [p=?>(?=(^ a) n.a) q=a]
+      ?~  a
+        !!
+      ?~  r.a
+        [n.a l.a]
+      =+  b=$(a r.a)
+      :-  p.b
+      ?:  |(?=(~ q.b) (vor n.a n.q.b))
+        [n.a l.a q.b]
+      [n.q.b [n.a l.a l.q.b] r.q.b]
+    ::
+    +-  put
+      |*  b=*
+      |-  ^+  a
+      ?~  a
+        [b ~ ~]
+      =+  c=$(a l.a)
+      ?:  (vor n.a n.c)
+        [n.a c r.a]
+      [n.c l.c [n.a r.c r.a]]
+    ::
+    +-  tap
+      |=  b=(list _?>(?=(^ a) n.a))
+      ^+  b
+      ?~  a
+        b
+      $(a r.a, b [n.a $(a l.a)])
+    --
+  ::
+  ::      Tier 4d, casual construction
   ::
   ++  hawk
     !!
