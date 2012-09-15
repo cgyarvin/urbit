@@ -1773,19 +1773,15 @@ u2_rl_mint(u2_rail ral_r,
 
     if ( dif_w >= 6 ) {
       u2_ray box_r = nov_r - c3_wiseof(u2_loom_rail_box);
-      c3_w   siz_w = *u2_at_ray(box_r) - dif_w;
-
-      /* Split off a new free block at the end.  Resize this one.
-      */
       u2_ray end_r = (nov_r + c3_wiseof(u2_loom_atom) + len_w + 1);
+      c3_w   asz_w = (end_r - box_r);
+      c3_w   bsz_w = *u2_at_ray(box_r) - asz_w;
 
-      _rl_bloq_make(ral_r, end_r, dif_w, 0);
+      _rl_bloq_make(ral_r, end_r, bsz_w, 0);
       _rl_bloq_attach(ral_r, end_r);
 
-      *u2_at_ray(box_r) = siz_w;
-      *u2_at_ray(box_r + siz_w - 1) = siz_w;
-
-      c3_assert(end_r == (box_r + siz_w));
+      *u2_at_ray(box_r) = asz_w;
+      *u2_at_ray(box_r + asz_w - 1) = asz_w;
     }
     *u2_at_pug_len(nov) = len_w;
   }

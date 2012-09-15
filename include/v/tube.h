@@ -1,15 +1,16 @@
-/* include/v/vere.h
+/* include/v/tube.h
 **
 ** This file is in the public domain.
 */
-  /** Quasi-tunable parameters.
+
+  /** Tubes - event-driven I/O with type specific queues.
   **/
-    /* First kernel this executable can boot.
-    */
-#     define FirstKernel   201
-#     define DefaultKernel 200
- 
-#define RECK
+
+    typedef struct _u2_tube {
+      struct ev_io  wax_u;                //  event handler state
+      c3_w          tid_w;                //  tube index
+      struct 
+
 
   /** Data types.
   **/

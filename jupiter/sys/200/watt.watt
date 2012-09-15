@@ -1,4 +1,4 @@
-::
+!:
 ::              Watt kernel 200.  This file is in the public domain.
 ::
 =>  src=.
@@ -650,7 +650,7 @@
       (dor a b)
     (lth c d)
   ::
-  ::      Tier 3e, insecure hashing and scrambling
+  ::      Tier 3e, insecure hashing
   ::
   ++  mug
     ~/  %mug
@@ -788,29 +788,6 @@
   ::
   ::      Tier 3g, lite number theory
   :: 
-  ++  egcd                                              ::  schneier's egcd
-    |=  [a=@ b=@]
-    =+  si
-    =+  [c=(sun a) d=(sun b)]
-    =+  [u=[c=(sun 1) d=--0] v=[c=--0 d=(sun 1)]]
-    |-  ^-  [d=@ u=@ v=@]
-    ?:  =(--0 c) 
-      [(abs d) d.u d.v]
-    ::  ?>  ?&  =(c (sum (pro (sun a) c.u) (pro (sun b) c.v)))
-    ::          =(d (sum (pro (sun a) d.u) (pro (sun b) d.v)))
-    ::      == 
-    =+  q=(fra d c) 
-    %=  $
-      c  (dif d (pro q c))
-      d  c
-      u  [(dif d.u (pro q c.u)) c.u]
-      v  [(dif d.v (pro q c.v)) c.v]
-    ==
-  ::
-  ++  elcm
-    |=  [a=@ b=@]
-    (div (mul a b) d:(egcd a b))
-  ::
   ++  fe                                                ::  modulo bloq
     |_  a=bloq
     ++  dif  |=([b=@ c=@] (sit (sub (add out (sit b)) (sit c))))
@@ -956,8 +933,26 @@
       |=  [a=@s b=@s]
       ~|  %si-rem
       (dif a (pro b (fra a b)))
-    ::::
     --
+  ::
+  ++  egcd                                              ::  schneier's egcd
+    |=  [a=@ b=@]
+    =+  si
+    =+  [c=(sun a) d=(sun b)]
+    =+  [u=[c=(sun 1) d=--0] v=[c=--0 d=(sun 1)]]
+    |-  ^-  [d=@ u=@ v=@]
+    ?:  =(--0 c) 
+      [(abs d) d.u d.v]
+    ::  ?>  ?&  =(c (sum (pro (sun a) c.u) (pro (sun b) c.v)))
+    ::          =(d (sum (pro (sun a) d.u) (pro (sun b) d.v)))
+    ::      == 
+    =+  q=(fra d c) 
+    %=  $
+      c  (dif d (pro q c))
+      d  c
+      u  [(dif d.u (pro q c.u)) c.u]
+      v  [(dif d.v (pro q c.v)) c.v]
+    ==
   ::
   ::      Tier 3h, floating point encoding (stub - should be IEEE)
   :: 
@@ -1087,6 +1082,12 @@
     ~|  %hard
     =+  gol=(han fud)
     ?>(=(gol fud) gol)
+  ::
+  ++  soft
+    |*  han=_|+(* *)
+    |=  fud=*  ^-  (unit han)
+    =+  gol=(han fud)
+    ?.(=(gol fud) ~ [~ gol])
   ::
   ::  Tier 4 molds
   ::
@@ -1899,9 +1900,6 @@
       (cold 62 (just '-'))
       (cold 63 (just '+'))
     ==
-  ::
-  ::      tier 5b/7, parsing: basic atoms
-  ::
   ::
   ::      Tier 5b/7, parsing: external interface
   ::
@@ -2887,8 +2885,8 @@
   ::
   ++  shad  |=(ruz=@ (shax (shax ruz)))                 ::  double sha-256
   ++  shaf                                              ::  half sha-256
-    |=  ruz=@ 
-    =+  haz=(shax ruz)
+    |=  [sal=@ ruz=@]
+    =+  haz=(shas sal ruz)
     (mix (end 7 1 haz) (rsh 7 1 haz))
   ::
   ++  sham                                              ::  noun hash
@@ -2896,6 +2894,14 @@
     ?@  yux
       (shax yux)
     (mix (dec (lsh 8 1 1)) (jam yux))
+  ::
+  ++  shas                                              ::  salted hash
+    |=  [sal=@ ruz=@] 
+    (shax (mix sal (shax ruz)))
+  ::
+  ++  shaw                                              ::  hash to nbits
+    |=  [sal=@ len=@ ruz=@]
+    (~(raw og (shas sal (mix len ruz))) len)
   ::
   ++  shax                                              ::  sha-256
     ~/  %shax
@@ -2986,20 +2992,20 @@
   ++  og                                                ::  shax-powered rng
     |_  a=@
     ::
-    ++  rad
-      |=  b=@  ^-  @ux
+    ++  rad                                             ::  random in range
+      |=  b=@  ^-  @
       =+  c=(raw (met 0 b)) 
       ?:((lth c b) c $(a +(a)))
     ::
-    ++  raw
-      |=  b=@  ^-  @ux
+    ++  raw                                             ::  random bits
+      |=  b=@  ^-  @
       %+  can
         0
-      =+  c=(shax (mix b a))
+      =+  c=(shas %og-a (mix b a))
       |-  ^-  (list ,[@ @])
       ?:  =(0 b)
         ~
-      =+  d=(shax (mix b (mix a c)))
+      =+  d=(shas %og-b (mix b (mix a c)))
       ?:  (lte b 256)
         [[b (end 0 b d)] ~]
       [[256 d] $(c d, b (sub b 256))]
@@ -3041,87 +3047,17 @@
         ==
         $(c +(c))
     ==
-  ++  ar                                                ::  RSA encryption
-    |%
-    ++  brew                                            ::  generate ring
-      |=  [a=@ b=@]  ^-  ring                           ::  [bits seed]
-      =+  c=(rsh 0 1 a)
-      (jam (ramp c b) (ramp c (shax b)))
-    ::
-    ++  chew                                            ::  read with ring, 53
-      |=  [a=ring b=@]  ^-  (unit ,@)
-      =+  c=(melt 53 a) 
-      =+  d=(fu p.c q.c)
-      =+  e=((hard ,[p=@ q=@]) (cue b))
-      (shed (out.d (exp.d r.c (sit.d p.e))) q.e)
-    ::
-    ++  drip                                            ::  private to public
-      |=  a=ring  ^-  pass
-      =+  b=(heat a)
-      (mul p.b q.b)
-    ::
-    ++  heat                                            ::  separate primes
-      |=  a=ring  ^-  [p=@ q=@]
-      =+  b=(cue a)
-      ?>(?=([p=@ q=@] b) b)
-    ::
-    ++  melt                                            ::  activate ring
-      |=  [a=@ b=ring]  ^-  [p=@ q=@ r=@]               ::  a=>e, s=>d
-      =+  c=(heat b)
-      :+  p.c
-        q.c
-      (~(inv fo (elcm (dec p.c) (dec q.c))) a)
-    ::
-    ++  sign                                            ::  send with ring, 37
-      |=  [a=ring b=@]  ^-  @
-      =+  c=(melt 37 a)
-      =+  d=(fu p.c q.c)
-      =+  e=(shax (add 37 (shax b)))
-      (jam (out.d (exp.d r.c (sit.d e))) (shen e b))
-    ::
-    ++  seal                                            ::  send with pass, 53
-      |=  [a=pass b=@]  ^-  @
-      =+  c=(shax (add 53 (shax b)))
-      (jam (~(exp fo a) 53 c) (shen c b))
-    ::
-    ++  ramp                                            ::  make r-m prime
-      |=  [a=@ b=@]                                     ::  [bits seed]
-      =+  c=@
-      |-  ^-  @ux
-      =+  d=(~(raw og b) a)
-      ?:  &(!=(1 (mod d 53)) !=(1 (mod d 37)) (pram d))
-        d
-      $(b +(b), c (shax c))
-    ::
-    ++  take                                            ::  read with pass, 37
-      |=  [a=pass b=@]  ^-  (unit ,@)
-      =+  c=((hard ,[p=@ q=@]) (cue b))
-      (shed (~(exp fo a) 37 p.c) q.c)
-    --
-  ::
-  ++  shed                                              ::  ghetto decrypt
-    |=  [key=@ cep=@]  ^-  (unit ,@)
-    =+  toh=(met 0 cep)
-    ?:  (lth toh 257)
-      ~
-    =+  len=(sub toh 257)
-    =+  hax=(cut 0 [len 256] cep)
-    =+  pit=(shax (mix hax key))
-    =+  msg=(mix (~(raw og pit) len) (end 0 len cep))
-    ?.  =(hax (shax (mix key (shax (mix len msg)))))
-      ~
-    [~ msg]
-  ::
-  ++  shen                                              ::  ghetto encrypt
-    |=  [key=@ msg=@]  ^-  @ux
-    =+  len=(met 0 msg)
-    =+  hax=(shax (mix key (shax (mix len msg))))
-    =+  pit=(shax (mix hax key))
-    %+  can  0
-    :~  [len (mix msg (~(raw og pit) len))]
-        [256 hax]
-        [1 1]
-    ==
+  ++  ramp                                            ::  make r-m prime
+    |=  [a=@ b=(list ,@) c=@]  ^-  @ux                ::  [bits snags seed]
+    =>  .(c (shas %ramp c))
+    =+  d=@
+    |-
+    ?:  =((mul 100 a) d)
+      ~|(%ar-ramp !!)
+    =+  e=(~(raw og c) a)
+    ?:  &(|-(?~(b & &(!=(1 (mod e i.b)) $(b +.b)))) (pram e))
+      e
+    $(c +(c), d (shax d))
   ::
   ::  Tier 5f, simple XML
   ::
@@ -3380,10 +3316,6 @@
   ++  knot  $|(term $%([& p=axis] [| p=@ud q=term]))
   ++  line  ,[p=[%leaf p=odor q=@] q=tile] 
   ++  odor  disc
-  ++  pole
-    $%  [& p=(map span pole)]
-        [| p=vase]
-    ==
   ++  port
     $:  p=axis 
         q=$%([& p=type] [| p=axis q=(list ,[p=type q=foot])])

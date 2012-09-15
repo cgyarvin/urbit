@@ -202,7 +202,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     free(dyt_c);
   }
   {
-    u2_noun syd, zil, uno, duo, tre, bor, car, qua, nul, pay, now;
+    u2_noun syd, zil, uno, duo, tre, bor, car, zun, qua, nul, pay, now;
 
     syd = u2k(rec_u->syd);
 
@@ -213,6 +213,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
 
     bor = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/born.watt");
     car = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/cary.watt");
+    zun = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/zuse.watt");
 
     rec_u->toy.duel = 
       _reck_gate(rec_u, u2k(car), "|=([a=arch b=arch] (~(duel cy a) b))");
@@ -220,7 +221,11 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     qua = _reck_load_temp(rec_u, tre, kno_w, "reck/qua.watt");
 
     nul = u2nc(u2nt(c3__cube, 0, u2nc(c3__atom, 'n')), 0);
-    pay = _reck_slop(rec_u, bor, _reck_slop(rec_u, car, nul));
+    pay = _reck_slop(rec_u, 
+                     bor, 
+                     _reck_slop(rec_u, 
+                                car,
+                                _reck_slop(rec_u, zun, nul)));
     now = u2nc(u2nc(c3__atom, c3_s2('d','a')), u2k(rec_u->now));
 
     rec_u->rec = _reck_slam(rec_u, qua, _reck_slop(rec_u, now, pay));

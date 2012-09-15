@@ -143,7 +143,9 @@ static GetLine *Tecla;
 static void
 stdin_cb(struct ev_loop *lup_u, struct ev_io *w, int revents)
 {
-  c3_c* lin_c = gl_get_line(Tecla, ": ", 0, -1);
+  c3_c* lin_c;
+  
+  lin_c = gl_get_line(Tecla, ": ", 0, -1);
 
   if ( !lin_c ) {
     if ( GLR_BLOCKED != gl_return_status(Tecla) ) {
@@ -152,7 +154,7 @@ stdin_cb(struct ev_loop *lup_u, struct ev_io *w, int revents)
       ev_unloop (lup_u, EVUNLOOP_ALL);
     }
     else { 
-      fprintf(stderr, "stdin_cb: blocked\n");
+      // fprintf(stderr, "stdin_cb: blocked\n");
       return;
     }
   }
@@ -161,17 +163,22 @@ stdin_cb(struct ev_loop *lup_u, struct ev_io *w, int revents)
     c3_c* out_c = malloc(len_w);
 
     strncpy(out_c, lin_c, (len_w - 1));
-    out_c[len_w] = 0;
+    out_c[len_w - 1] = 0;
 
     if ( !*out_c ) {
-      printf(": "); fflush(stdout);
+      // printf(": "); fflush(stdout);
       free(out_c);
       return;
     }
     else {
+      gl_normal_io(Tecla);
       u2_ve_line(out_c); 
       free(out_c);
-      printf(": "); fflush(stdout);
+
+      gl_raw_io(Tecla);
+      gl_get_line(Tecla, ": ", 0, -1);
+
+      // printf(": "); fflush(stdout);
     }
   }
 }
@@ -289,46 +296,6 @@ main(c3_i   argc,
     signal(SIGINT, interrupt_handler);
   }
 
-#if 1
-  {
-    u2_noun hep; 
- 
-    if ( u2_none != (hep = u2_ckd_by_get(u2k(u2_Host.map), c3__hep)) ) {
-      struct ev_loop *lup_u = ev_default_loop(0);
-
-      u2_Host.lup_u = Loop_u = lup_u;
-
-      fprintf(stderr, "http: on port 8080\n");
-      u2_ve_http_start(8080);
-
-      printf(": "); fflush(stdout);
-      ev_io_init(&Stdin_watcher, stdin_cb, 0, EV_READ);
-      ev_io_start(lup_u, &Stdin_watcher);
-
-      ev_loop(lup_u, 0);
-
-      return 0;
-    }
-    else {
-      Loop_u = 0;
-      //  Process commands.  Replace with actual event loop.
-      //
-      while ( 1 ) {
-        c3_c* lin_c = c3_comd_line(u2_Host.fel_c, ": ");
-
-        if ( !lin_c ) {
-          break;
-        }
-        else {
-          if ( *lin_c ) {
-            u2_ve_line(lin_c); 
-          }
-          free(lin_c);
-        }
-      }
-    }
-  }
-#else
   Tecla = new_GetLine(16384, 4096);
   gl_io_mode(Tecla, GL_SERVER_MODE);
   {
@@ -336,16 +303,21 @@ main(c3_i   argc,
 
     u2_Host.lup_u = Loop_u = lup_u;
 
-    fprintf(stderr, "http: on port 8080\n");
+    // fprintf(stderr, "http: on port 8080\n");
     u2_ve_http_start(8080);
 
-    printf(": "); fflush(stdout);
     ev_io_init(&Stdin_watcher, stdin_cb, 0, EV_READ);
     ev_io_start(lup_u, &Stdin_watcher);
 
+    {
+      c3_c* lin_c;
+    
+      lin_c = gl_get_line(Tecla, ": ", 0, -1);
+      c3_assert(!lin_c && (GLR_BLOCKED == gl_return_status(Tecla)));
+    }
     ev_loop(lup_u, 0);
-
-    return 0;
   }
-#endif
+  gl_io_mode(Tecla, GL_NORMAL_MODE);
+
+  return 0;
 }
