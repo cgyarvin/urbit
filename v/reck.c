@@ -189,7 +189,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
 
   rec_u->toy.rain = _reck_root("rain", u2k(ken));
   rec_u->toy.ream = _reck_root("ream", u2k(ken));
-  rec_u->toy.sham = _reck_root("sham", u2k(ken));
+  // rec_u->toy.sham = _reck_root("sham", u2k(ken));
   rec_u->toy.slam = _reck_root("slam", u2k(ken));
   rec_u->toy.slap = _reck_root("slap", u2k(ken));
   rec_u->toy.slop = _reck_root("slop", u2k(ken));
@@ -207,6 +207,9 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     syd = u2k(rec_u->syd);
 
     zil = _reck_load_temp(rec_u, syd, kno_w, "reck/zil.watt");
+
+    rec_u->toy.sham = _reck_gate(rec_u, u2k(zil), "sham");
+
     uno = _reck_load_temp(rec_u, zil, kno_w, "reck/uno.watt");
     duo = _reck_load_temp(rec_u, uno, kno_w, "reck/duo.watt");
     tre = _reck_load_temp(rec_u, duo, kno_w, "reck/tre.watt");

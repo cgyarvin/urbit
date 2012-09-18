@@ -103,7 +103,12 @@ static void
 _sync_take(u2_reck* rec_u,
            u2_noun  uzy)
 {
-  printf("UZY!\n");
+  u2_noun pax = u2h(uzy);
+  u2_noun act = u2t(uzy);
+
+  printf("sync_take\n");
+  {
+  }
   u2z(uzy);
 }
 
