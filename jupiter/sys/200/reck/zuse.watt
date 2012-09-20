@@ -63,8 +63,8 @@
           [%pack p=lane q=lane r=rock]                  ::  accept a packet
           [%wise p=sock q=bond]                         ::  accept a statement
           [%note p=sock q=bath r=bond]                  ::  hi-level statement
-          [%mess p=plan q=gram]                         ::  mid-level receive
-          [%give p=lane q=bath r=plan s=gram]           ::  mid-level send
+          [%mess p=skin q=gram]                         ::  mid-level receive
+          [%give p=lane q=bath r=skin s=gram]           ::  mid-level send
           [%over p=? q=bath]                            ::  &=succeed |=fail
           [%muss p=well q=hair]                         ::  resolve a message
           [%wake p=@da]                                 ::  time has passed
