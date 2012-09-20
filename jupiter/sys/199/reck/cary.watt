@@ -1,7 +1,7 @@
 !:
-::          %cary, revision control.   This file is in the public domain.
+::          %car, revision control.   This file is in the public domain.
 ::
-:-  %cary
+:-  %car
 =>  |%
     ++  arch                                      ::  fs node
       $%  [& clod]                                ::  ie, file
@@ -142,7 +142,7 @@
           ?~(gos nope $(pax t.pax, car u.gos))
         ==
       ::
-      ++  wear                                         ::  apply ukaz
+      ++  wane                                         ::  apply ukaz
         |=  [now=@da kuz=ukaz]
         ^-  arch
         ?~  p.kuz
@@ -167,7 +167,7 @@
       ++  work                                         ::  apply ukazy
         |=  [now=@da kuz=(list ukaz)]
         ^-  arch
-        ?~(kuz car $(car (wear now i.kuz), kuz t.kuz))
+        ?~(kuz car $(car (wane now i.kuz), kuz t.kuz))
       --
     --
 |=  [now=time wha=@ta]

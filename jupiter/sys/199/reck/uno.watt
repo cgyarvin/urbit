@@ -107,12 +107,17 @@
       [[u.yop u.o.q.i.dib] hoc]
     --
   :: 
-  ++  colt                                            ::  try decimal span
-    |=  san=span  ^-  (unit ,@ud)
+  ++  clan                                            ::  try atomic span
+    |=  [mex=@tas san=span]
+    ^-  (unit ,@)
     =+  vec=(slay san)
-    ?.  &(?=(^ vec) ?=([%% %ud *] u.vec))
+    ?.  &(?=(^ vec) ?=([%% *] u.vec) =(mex p.p.u.vec))
       ~
     [~ q.p.u.vec]
+  ::
+  ++  colt                                            ::  try decimal span
+    |=  san=span  ^-  (unit ,@ud)
+    (clan %ud san)
   ::
   ++  cork                                            ::  try decimal end 
     |=  lap=path

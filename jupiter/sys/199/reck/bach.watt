@@ -1,7 +1,7 @@
 !:
-::          %bach, network interpreter.   This file is in the public domain.
+::          %baq, network interpreter.   This file is in the public domain.
 ::
-:-  %born
+:-  %baq
 ^-  dock
 |=  [now=time wha=@ta]
 %^    hull
@@ -11,13 +11,20 @@
 |=  [now=time wha=@ta]
 :-  ^-  lime
     :~  %all
-      :^    %rod
+      :^    %rod                                        ::  hear packets
           %abel
         [[~ ~] /hose/pack/ |=(* [~ ~])]
       ^-  hunt
       |=  [seq=@ud muz=* cax=bill]
       ?>  ?=(tube muz)
       [%run %pack cax]
+    ::
+      :^    %rod                                        ::  hear requests
+          %boaz
+        [[~ ~] ~ |=(hap=* ?.(?=([@muz %to %bach %re ~] ~ [~ i.hap])))]
+      ^-  fish
+      |=  [seq=@ud muz=* cax=bill] 
+      [%run %want ((hard ,[app=@tas wop=pole]) [muz q.cax])]
     ==
 ^-  bowl
 =>  ..$
@@ -29,119 +36,139 @@
       =+  muv=(move man)
       ?.  =(muv man)
         [~ ..poke] 
-      =+  guo=(line p.muv q.muv cam)
-      [p.guo ..poke(..line q.guo)]
+      =+  guo=(love cam muv)
+      [p.guo ..poke(..love q.guo)]
     --
 =>  |%
-    ++  dude                                  ::  foreign state
-      $:  ren=regn                            ::  regime number
-          pub=pass                            ::  public key
+    ++  belt  ,[p=lane q=flow r=(list bird)]            ::  route control 
+    ++  bird  ,[p=@da q=rock]                           ::  sent package
+    ++  flow  ,[p=@da q=@ud]                            ::  rtt and window
+    ++  frog  ,[p=hand q=(map flap bird) q=(list rock)] ::  live message
+
+    ++  bong                                            ::  sending state
+      $:  way=lane                                      ::  network route
+          rtt=@da                                       ::  roundtrip time
+          win=@ud                                       ::  win size, bytes
+          masg=
+          liv=(list ,[p=@da q=hand r=rock])             ::  packets in flight
+          rez=(list rock)                               ::  packets unsent
       ==
-    ++  home                                  ::  domestic state
-      $:  ren=regn                            ::  regime number
-          pri=ring                            ::  private key
+    ++  qu   
+    
+
+    ++  dode  ,[p=base q=(list path)]                   ::  do dependency
+    ++  doin  sock                                      ::  do introduction
+    ++  dore  ,[p=sock q=path]                          ::  do request
+    ++  dost  ,[p=sock q=bond]                          ::  do statement
+
+    ++  lode                                            ::  live dependency
+      $:  app=@ta                                       ::  dependent app
+          end=@da                                       ::  sell by
+          out=@ud                                       ::  outstanding reqs
+          dol=dode                                      ::  do 
       ==
-    ++  game                                  ::  application state
-      $:  our=(map base home)                 ::  domestic state
-          his=(map base dude)                 ::  foreign state
-          inn=(list deed)                     ::  pending inputs
-          out=(list gift)                     ::  pending outputs
+
+    ++  loin                                            ::  live introduction
+      $:  app=@ta                                       ::  dependent app
+          end=@da                                       ::  sell by
+          dol=doin
       ==
-    ++  move                                  ::  input
-      $%  [%pack p=@da q=pack]                ::  time packet
+
+    ++  lost                                            ::  live statement
+      $:  man=handle
       ==
-    ++  plan
-      $:  [p=@da q=gift]                      ::  expiration work
+
+    lost
+      $:  app
+    ++  loin  
+      $:
+      sock                                      ::  live introduction
+    ++  lore                                            ::  live request
+    ++  lost
+
+
+
+    ++  bird                                            ::  message in flight
+      $:  gar=(list rock)                               ::  unacked rocks
+          
+    ==
+    ++  barn                                            ::  statement source
+      $:  
+    ++  door                                            ::  network operation
+      $:  man=hand                                      ::  operator handle
+          job=(list path)                               ::  global requests
+      ==
+    ++  host
+      $:  pub=pass                                      ::  public key
+          pri=ring                                      ::  private key
+          pal=(map base pipe)                           ::  friends
+      ==
+    ++  pipe                                            ::  foreign connection
+      $:  fun=@da                                       ::  fresh until
+          key=code                                      ::  key or 0
+          new=hand                                      ::  intro handle
+          pub=pass                                      ::  public key
+          way=lane                                      ::  network route
+      ==   
+    ++  pole                                            ::  request command
+      $:  man=hand                                      ::  opaque handle
+          toy=(unit ,[p=@da q=(list path)])             ::  atomic query
+      ==
+    ++  tear                                            ::  
+      
+    ++  dude                                            ::  foreign state
+      $:  ren=regn                                      ::  regime number
+          pub=pass                                      ::  public key
+      ==
+    ++  home                                            ::  domestic state
+      $:  ren=regn                                      ::  regime number
+          pri=ring                                      ::  private key
+      ==
+    
+    ++  game                                            ::  application state
+      $:  hos=(map base host)                           ::  domestic state
+          hop=(list bell)                               ::  meta-operations
+          inn=(list deed)                               ::  pending inputs
+          out=(list gift)                               ::  pending outputs
+          act=(map way belt)                            ::  output routes
+      ==
+    ++  move                                            ::  event/action
+      $:  [%adge p=base q=hand]                         ::  acknowledged
+          [%pack p=@da q=rock]                          ::  interpret packet
+          [%send p=lane q=rock]                         ::  transmit packet
+
+          [%mail p=hand q=@da r=note]                   ::  transmit statement
+          [%pass p=base q=mark r=@da s=pass]            ::  learn public key
+          [%road p=base q=@ud s=lane]                   ::  learn route
+          [%ring p=base q=@ud r=ring]                   ::  learn private key
+          [%link p=base q=base r=@da s=code]            ::  learn symmetric key
+
+          [%quiz 
+          [%want p=@tas q=pole]                         ::  dependency
+        ==
+      ::
+          :-  %movb                                     ::  A-layer event
+        $%  :-  %hiyb                                   ::  A+ surface
+          $%  [%hear p=@da q=rock]                      ::  (in) hear packet
+              [%
+          ==
+        $%  :-  %lowa                                   ::  A-/B+ surface
+          $%  [%mail p=hand q=@da q=note]               ::  handle timeout msg
+              [%link 
+          ==
+      ==
+              
+              
+              [%read p=@da q=rock]                      ::
+
+          [%know p=base q=hand]                         ::  ack statement
+          [%pack p=@da q=pack]                          ::  learn packet
+          [%want p=@tas q=pole]                         ::  learn request
       ==
     --
 =+  sys=*game
 |%
-++  
+++  love
+  |=  [cam=lens muv=move]
 
-
-++  lean                                    ::  apply line result
-  |=  [txt=@t pet=@ta dub=tube tuy=desk]
-  |=  ten=tune
-  ^-  [p=lime q=_..lean]
-  ?-    ten
-      [0 *]
-    ?+    pet  [[%say %yo %p dub 0 [%leaf "<unknown command>"]] ..lean]
-        %%
-      =+  ham=~(dole ut p.p.ten)
-      :-  [%say %yo %p dub 0 (dish:ut ham q.p.ten)]
-      %=  ..lean
-        sys  %+  ~(put by sys) 
-               dub
-             %=  tuy
-               red  (slop p.ten red.tuy)
-               ser  (slop [[%atom %t] txt] ser.tuy)
-             ==
-      ==
-    ::
-        %set
-      ?.  ?=([%face *] p.p.ten)
-        [[%say %yo %p dub 0 [%leaf "<usage: \":set name=value\">"]] ..lean]
-      :-  ~
-      %=  ..lean
-        sys  %+  ~(put by sys) 
-               dub
-             tuy(way (~(put by way.tuy) p.p.p.ten [q.p.p.ten q.p.ten]))
-      ==
-    ::
-        %type
-      [[%say %yo %p dub 0 (dial:ut ~(dole ut p.p.ten))] ..lean]
-    ==
-  ::
-      [1 *]
-    :-  :-  %all
-        %+  turn  p.ten
-        |=  mis=*
-        =+  vad=(dish:ut [[~ %path] (path mis)])
-        [%say %yo %p dub 0 [%leaf "[need {~(ram re vad)}]"]]
-    ..lean
-  ::
-      [2 *]
-    [[%say %yo %t p.ten] ..lean]
-  ==
-::
-++  lick                                    ::  synthetic namespace
-  |=  cam=lens
-  |=  nam=*
-  ^-  (unit)
-  =+  pax=(path nam)
-  =+  voy=(peek:cam [%cary pax])
-  voy
-:: 
-++  line                                    ::  execute a line
-  |=  [dub=tube txt=@t cam=lens]
-  ^-  [p=lime q=_..line]
-  =+  ^=  fob  ^-  [p=term q=gene]
-      %+  rash
-        txt
-      ;~  pose 
-        (stag %% wide:vast)
-        ;~  plug
-          ;~(pfix col sym)
-          ;~(pfix ace wide:vast)
-        ==
-      ==
-  =+  xac=(~(get by sys) dub)
-  =+  ^=  tuy  ^-  desk
-      ?:  ?=(^ xac)
-        u.xac
-      [!>(..zuul) [[%cube 0 %atom %n] ~] [[%cube 0 %atom %n] ~] ~]
-  %-  (lean txt p.fob dub tuy)
-  (slab =(%type p.fob) [(lube [when:cam tuy]) q.fob] (lick cam))
-::
-++  lube                                    ::  construct context
-  |=  [now=@da tuy=desk]  ^-  vase
-  =+  yad=~(rent co [~ %da now])
-  ::  ~&  [%what `@ud`now yad]
-  %+  slop
-    [[%atom %ta] ~(rent co [~ %da now])]
-  %+  slop
-    %+  slop
-      [[%face %$ p.ser.tuy] q.ser.tuy]
-    [[%face %$ p.red.tuy] q.red.tuy]
-  (slum nub.tuy way.tuy)
 --
