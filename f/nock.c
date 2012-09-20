@@ -423,7 +423,8 @@ _nock_cool(u2_noun bus,
 
       case 8: {
         u2_noun b_gal, c_gal;
-      
+     
+        c3_assert(!"got 8 (nock)!");
         u2_cx_cell(gal, &b_gal, &c_gal);
         {
           u2_noun bod = u2nc(bus, _nock_cool(u2k(bus), u2k(b_gal)));
@@ -726,7 +727,8 @@ _nock_mool(u2_noun  bus,
 
       case 8: {
         u2_noun b_gal, c_gal;
- 
+
+        c3_assert(!"got 8 (mock)!");
         if ( u2_no == u2_cr_cell(gal, &b_gal, &c_gal) ) {
           *pon = 2; u2z(bus); u2z(fol); return u2_cm_wail();
         }

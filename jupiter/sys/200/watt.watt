@@ -3910,10 +3910,15 @@
       [%2 [%0 (peg p.mal p.p.buz)] [%0 (peg p.mal p.q.buz)]]
     [%7 mal buz]
   ?:  ?=([[0 1] *] mal)
-    [%8 q.mal buz]
+    (cosh q.mal buz)
   ?:  =([0 1] buz)
     mal
   [%7 mal buz]
+::
+++  cosh
+  |=  [faw=fuel pyz=fuel]
+  :: [%8 faw pyz]
+  [%7 [[%0 1] faw] pyz]
 ::
 ++  cond
   ~/  %cond
@@ -5282,7 +5287,7 @@
       =+  bop=cow(p q.q.cow)
       ?>  |(!vet (nest(sut (wrap(sut bop) %zinc)) & (wrap(sut nep) %zinc)))
       :-  (nice nep)
-      :+  %8
+      %+  cosh
         q.heq
       :-  [%0 6]
       (hike 7 (hail(sut nep) q.r.q.cow vir))

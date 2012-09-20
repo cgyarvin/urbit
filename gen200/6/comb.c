@@ -38,6 +38,7 @@
         else return u2_rt(wir_r, u2_nock_7, u2_rx(wir_r, mal), 
                                                u2_rx(wir_r, buz));
       }
+#if 0
       else if ( (u2_yes == u2_as_bush(mal, &p_mal, &q_mal)) &&
                 (u2_yes == u2_dust(p_mal)) && 
                 (_0 == u2_h(p_mal)) &&
@@ -46,6 +47,7 @@
         return u2_rt(wir_r, u2_nock_8, u2_rx(wir_r, q_mal), 
                                        u2_rx(wir_r, buz));
       }
+#endif
       else if ( (u2_yes == u2_as_p(buz, u2_nock_0, &p_buz)) &&
                 (u2_yes == u2_sing(_1, p_buz)) )
       {
