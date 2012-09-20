@@ -252,7 +252,9 @@ main(c3_i   argc,
     {
       u2_ve_init(kno_w);
 
-      u2_reck_boot(&u2_Host.rec_u[0]);
+      if ( 0 != u2_Host.ver_e[kno_w].ken ) {
+        u2_reck_boot(&u2_Host.rec_u[0]);
+      }
     }
     u2_cm_done();
   }
@@ -294,6 +296,31 @@ main(c3_i   argc,
       exit(1);
     }
     signal(SIGINT, interrupt_handler);
+  }
+
+  if ( 0 != u2_Host.ver_e[kno_w].tip ) {
+    // Special stupid-loop for experimental mode.
+    //
+    while ( 1 ) {
+      c3_w num_w;
+      u2_noun res;
+
+      printf("! ");
+      scanf("%ud", &num_w);
+      if ( 0 == num_w ) {
+        exit(0);
+      }
+      else {
+        res = u2_nk_nock(u2_Wire, num_w, u2k(u2_Host.ver_e[kno_w].tip));
+        u2_err(u2_Wire, "result", res);
+        u2z(res);
+      }
+    }
+  }
+
+  if ( 0 == u2_Host.ver_e[kno_w].ken ) {
+    fprintf(stderr, "no command line in transitional mode\n");
+    exit(1);
   }
 
   Tecla = new_GetLine(16384, 4096);
