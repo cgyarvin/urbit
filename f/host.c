@@ -676,7 +676,15 @@ _ho_conquer(u2_rail ral_r,
     }
   }
 }
- 
+
+#ifdef NOCK6
+#define _ho_con u2_cw_con
+#define _ho_sam u2_cw_sam
+#else
+#define _ho_con u2_cv_con
+#define _ho_sam u2_cv_sam
+#endif
+
 /* u2_ho_test():
 **
 **   Report result of jet test.  `had` is native; `sof` is nock.
@@ -713,27 +721,27 @@ u2_ho_test(u2_wire    wir_r,
 
       u2_err(wir_r, "right", sof);
       u2_err(wir_r, "wrong", had);
+
+      //  For detailed debugging, activate/extend this junkheap as needed.
+      //
+      c3_assert(0);
+#if 0
      
       {
         u2_noun gen;
 
-        if ( (u2_no == u2_mean(cor, u2_cw_sam, &gen, 0)) ) {
+        if ( (u2_no == u2_mean(cor, _ho_sam, &gen, 0)) ) {
           c3_assert(0);
         } else {
           u2_err(wir_r, "gen", gen);
         }
       }
 
-      //  For detailed debugging, activate/extend this junkheap as needed.
-      //
-      c3_assert(0);
-#if 0
-
       {
         u2_noun sut, gen, van;
 
-        if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &gen, 0)) ||
-             (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
+        if ( (u2_no == u2_mean(cor, _ho_con, &van, _ho_sam, &gen, 0)) ||
+             (u2_none == (sut = u2_frag(_ho_sam, van))) )
         {
           c3_assert(0);
         } else {
@@ -744,8 +752,8 @@ u2_ho_test(u2_wire    wir_r,
       {
         u2_noun sut, ref, van;
 
-        if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &ref, 0)) ||
-             (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
+        if ( (u2_no == u2_mean(cor, _ho_con, &van, _ho_sam, &ref, 0)) ||
+             (u2_none == (sut = u2_frag(_ho_sam, van))) )
         {
           c3_assert(0);
         } else {

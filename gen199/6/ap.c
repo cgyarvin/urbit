@@ -575,7 +575,6 @@
   {
     return _ap_snig(p_gen);
   }
-#endif
   _open_do_pq(smsg)   //  ;~
   {
     if ( (u2_nul == q_gen) ) {
@@ -633,6 +632,7 @@
       }
     }
   }
+#endif
 
 /* functions
 */
@@ -733,7 +733,7 @@
 
         _open_pq  (smcl);
         // _open_p   (smdq);
-        _open_pq  (smsg);
+        // _open_pq  (smsg);
       }
     }
 

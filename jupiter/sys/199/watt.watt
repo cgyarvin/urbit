@@ -3770,12 +3770,14 @@
       ==                                                ::  ==
     ::
         [%smsg *]                                       ::                  ;~ 
-      |-  ^-  gene                                      ::
-      ?-  q.gen                                         ::
-          ~       ~|(%open-smsg !!)                     ::
-          [* ~]   i.q.gen                               ::
-          ^                                             ::
+      |-  ^-  gene
+      ?-  q.gen
+          ~       ~|(%open-smsg !!)
+          ^
         :+  %tsgr  [%ktts %v ~ 1]                       ::  =>  v=.
+        |-  ^-  gene                                    ::
+        ?:  ?=(~ t.q.gen)                               ::
+          [%tsgr [%cnbc %v] i.q.gen]                    ::  =>(v {i.q.gen})
         :+  %tsls  [%ktts %a $(q.gen t.q.gen)]          ::  =+  ^=  a
         :+  %tsls                                       ::    {$(q.gen t.q.gen)}
           [%ktts %b [%tsgr [%cnbc %v] i.q.gen]]         ::  =+  ^=  b
@@ -3882,14 +3884,6 @@
       [%zpcb *]     rake(gen q.gen)
       *             ~|(%rake-gene !!)
     ==
-  ::
-  ++  very
-    ~/  %very
-    |=  [toz=gene wev=gene]
-    :+  %tsls  [%ktts %a toz]                     ::  =+  a=<toz>
-    :+  %tsls  [%ktts %b [%tsgr [~ 2] wev]]       ::  =+  b==>(.2 <wev>)
-    :+  %wtgr  [%cnhp %a %b ~]                    ::  ?>  (a b)
-    %b                                            ::  b
   --
 ::
 ++  coke

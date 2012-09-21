@@ -1,0 +1,127 @@
+!:
+::              Watt kernel 197.  This file is in the public domain.
+::
+=>  src=.
+?>  ?=(@ src)
+%.  src
+=<  dec
+=>  %197
+=>  ::
+  ::::                Tier 0, kernel stub
+  ::
+  ~%  %k.197  ~  ~
+  |%
+  ++  stub  197
+  --
+=>  ::
+  ::::                Tier 1, basic math
+  ::
+  ~%  %a  +  ~
+  |%
+  ++  add
+    ~/  %add
+    |=  [a=@ b=@] 
+    ^-  @
+    ?:  =(0 a)
+      b
+    $(a (dec a), b +(b))
+  ::
+  ++  dec
+    ~/  %dec
+    |=  a=@
+    ~|  %dec
+    ^-  @
+    ?<  =(0 a)
+    =+  b=@
+    |-
+    ?:  =(a +(b))
+      b
+    $(b +(b))
+  ::
+  ++  div
+    ~/  %div
+    |=  [a=@ b=@]
+    ^-  @
+    ~|  %div
+    ?<  =(0 b)
+    =+  c=@
+    |-
+    ?:  (lth a b)
+      c
+    $(a (sub a b), c +(c))
+  ::
+  ++  gte
+    ~/  %gte
+    |=  [a=@ b=@]
+    ^-  ?
+    !(lth a b)
+  ::
+  ++  gth
+    ~/  %gth
+    |=  [a=@ b=@]
+    ^-  ?
+    !(lte a b)
+  ::
+  ++  lte
+    ~/  %lte
+    |=  [a=@ b=@]
+    |(=(a b) (lth a b))
+  ::
+  ++  lth
+    ~/  %lth
+    |=  [a=@ b=@]
+    ^-  ?
+    &(!=(a b) |-(|(=(0 a) &(!=(0 b) $(a (dec a), b (dec b))))))
+  ::
+  ++  max
+    ~/  %max
+    |=  [a=@ b=@]
+    ^-  @
+    ?:  (gth a b)
+      a
+    b
+  ::
+  ++  min
+    ~/  %min
+    |=  [a=@ b=@]
+    ^-  @
+    ?:  (lth a b)
+      a
+    b
+  ::
+  ++  mod
+    ~/  %mod
+    |=  [a=@ b=@]
+    ^-  @
+    ?<  =(0 b)
+    (sub a (mul b (div a b)))
+  ::
+  ++  mul
+    ~/  %mul
+    |=  [a=@ b=@]
+    ^-  @
+    =+  c=@
+    |-
+    ?:  =(0 a)
+      c
+    $(a (dec a), c (add b c))
+  ::
+  ++  sub
+    ~/  %sub
+    |=  [a=@ b=@]
+    ~|  sub
+    ^-  @
+    ?:  =(0 b)
+      a
+    $(a (dec a), b (dec b))
+  ::
+  ::                                                    Tier 2 molds
+  ::
+  ++  gear
+    |*  a=_,*
+    $_
+    =+  b=*
+    a
+  ::::
+  --
+.

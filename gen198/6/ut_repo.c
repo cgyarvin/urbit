@@ -31,7 +31,7 @@
         if ( u2_no == u2_as_cell(u2_t(sut), &p_sut, &q_sut) ) {
           return u2_bl_bail(wir_r, c3__fail);
         } else {
-          return u2_bt(wir_r, c3__cell, u2_rx(wir_r, p_sut), c3__noun);
+          return u2_bt(wir_r, c3__cell, c3__noun, u2_rx(wir_r, p_sut));
         }
       }
       case c3__cube: {

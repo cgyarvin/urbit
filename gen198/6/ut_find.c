@@ -28,13 +28,13 @@
         if ( (u2_no == u2_as_trel(sut, 0, &p_sut, &q_sut)) ) {
           return u2_bl_bail(wir_r, c3__fail);
         } else {
-          u2_noun taf = _find_in(wir_r, van, q_sut, dep, way, cog, gil);
+          u2_noun taf = _find_in(wir_r, van, p_sut, dep, way, cog, gil);
           u2_noun p_taf = u2_h(taf);
           u2_noun q_taf = u2_t(taf);
           u2_noun ret;
 
           if ( u2_nul == q_taf ) {
-            u2_noun bov = _find_in(wir_r, van, p_sut, p_taf, way, cog, gil);
+            u2_noun bov = _find_in(wir_r, van, q_sut, p_taf, way, cog, gil);
             u2_noun p_bov = u2_h(bov);
             u2_noun q_bov = u2_t(bov);
 
@@ -48,7 +48,7 @@
               ret = u2_bq
                 (wir_r, u2_rx(wir_r, p_bov),
                         u2_nul,
-                        j2_mbc(Pt3, peg)(wir_r, 2, puq_bov),
+                        j2_mbc(Pt3, peg)(wir_r, 3, puq_bov),
                         u2_rx(wir_r, quq_bov));
             }
             u2_rl_lose(wir_r, bov);
@@ -60,7 +60,7 @@
             ret = u2_bq
               (wir_r, u2_rx(wir_r, p_taf),
                       u2_nul,
-                      j2_mbc(Pt3, peg)(wir_r, 3, puq_taf),
+                      j2_mbc(Pt3, peg)(wir_r, 2, puq_taf),
                       u2_rx(wir_r, quq_taf));
           }
           u2_rl_lose(wir_r, taf);
@@ -120,7 +120,7 @@
                 pro = u2_bq
                   (wir_r, u2_rx(wir_r, p_taf),
                           u2_nul,
-                          j2_mbc(Pt3, peg)(wir_r, 2, puq_taf),
+                          j2_mbc(Pt3, peg)(wir_r, 3, puq_taf),
                           u2_rx(wir_r, quq_taf));
 
                 u2_rl_lose(wir_r, taf);
@@ -149,7 +149,7 @@
                      _1,
                      u2_no,
                      u2_bc
-                       (wir_r, j2_mbc(Pt3, peg)(wir_r, 3, pu_zem),
+                       (wir_r, j2_mbc(Pt3, peg)(wir_r, 2, pu_zem),
                                u2_bc(wir_r, 
                                      u2_bc(wir_r, mut, u2_rx(wir_r, qu_zem)),
                                      u2_nul))));

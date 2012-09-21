@@ -4,6 +4,14 @@
 */
 #include "all.h"
 
+#ifdef NOCK6
+#  define _ds_pay(cor)  u2_h(cor)
+#  define _ds_bat(cor)  u2_t(cor)
+#else
+#  define _ds_pay(cor)  u2_t(cor)
+#  define _ds_bat(cor)  u2_h(cor)
+#endif
+
 /* _ds_mate(): u2_yes iff `xip` binds to `cor`.
 */
 static u2_flag
@@ -27,7 +35,8 @@ _ds_mate(u2_noun xip,                                             //  retain
       return u2_no;
     }
   } 
-  return u2_sing(bat, u2_t(cor));
+
+  return u2_sing(bat, _ds_bat(cor));
 }
 
 /* _ds_scan(): linear search for matching chip.
@@ -57,7 +66,7 @@ u2_ds_find(u2_wire wir_r,
     return u2_none;
   } else {
     u2_rail bas_r = u2_wire_bas_r(wir_r);
-    u2_noun pug = u2_cs_find(bas_r, u2_wire_des_r(wir_r), 0, u2_t(cor));
+    u2_noun pug = u2_cs_find(bas_r, u2_wire_des_r(wir_r), 0, _ds_bat(cor));
 
     if ( u2_none == pug ) {
       return u2_none;
@@ -164,7 +173,7 @@ _ds_chip(u2_wire wir_r,
     /* battery: bat
     */
     {
-      if ( u2_none == (bat = u2_rx(bas_r, u2_t(cor))) ) {
+      if ( u2_none == (bat = u2_rx(bas_r, _ds_bat(cor))) ) {
         u2_ho_warn_here();
         u2_rz(bas_r, dac); return u2_none;
       }
@@ -179,7 +188,7 @@ _ds_chip(u2_wire wir_r,
       // want duplicates, which compare slowly.
       //
       if ( u2_nul == pug ) {
-        bat = u2_rx(bas_r, u2_t(cor));
+        bat = u2_rx(bas_r, _ds_bat(cor));
       }
       else {
         u2_noun i_pug = u2_h(pug);
@@ -245,8 +254,8 @@ u2_ds_mine(u2_wire wir_r,
   if ( u2_no == u2_dust(cor) ) {
     return cor;
   } else {
-    u2_noun pay = u2_h(cor);
-    u2_noun bat = u2_t(cor);
+    u2_noun pay = _ds_pay(cor);
+    u2_noun bat = _ds_bat(cor);
     u2_noun pug = u2_cs_find(bas_r, u2_wire_des_r(wir_r), 0, bat);
     u2_noun xip, bat_xip;
     u2_noun gop;

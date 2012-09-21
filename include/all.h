@@ -14,6 +14,9 @@
 #     include "c/motes.h"
 #     include "c/comd.h"
 
+#define NOCK6
+#undef NOCK5
+
     /** u2: the new interpreter.
     **/
 #     include "f/loom.h"

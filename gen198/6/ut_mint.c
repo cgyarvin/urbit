@@ -303,7 +303,7 @@
     u2_noun ret = u2_bc
       (wir_r, 
        _mint_nice(wir_r, van, gol, cot),
-       j2_mby(Pt6, cons)(wir_r, q_dan, zod));
+       j2_mby(Pt6, cons)(wir_r, zod, q_dan));
 
     u2_rz(wir_r, zod);
     u2_rz(wir_r, toc);

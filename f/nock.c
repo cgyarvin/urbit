@@ -424,7 +424,7 @@ _nock_cool(u2_noun bus,
       case 8: {
         u2_noun b_gal, c_gal;
      
-        c3_assert(!"got 8 (nock)!");
+        // c3_assert(!"got 8 (nock)!");
         u2_cx_cell(gal, &b_gal, &c_gal);
         {
           u2_noun bod = u2nc(bus, _nock_cool(u2k(bus), u2k(b_gal)));
@@ -728,7 +728,7 @@ _nock_mool(u2_noun  bus,
       case 8: {
         u2_noun b_gal, c_gal;
 
-        c3_assert(!"got 8 (mock)!");
+        // c3_assert(!"got 8 (mock)!");
         if ( u2_no == u2_cr_cell(gal, &b_gal, &c_gal) ) {
           *pon = 2; u2z(bus); u2z(fol); return u2_cm_wail();
         }
@@ -853,6 +853,7 @@ _nock_molg(u2_noun  gat,
            u2_noun  sam,
            u2_kode* pon)
 {
+#ifdef NOCK6
   if ( (u2_no == u2du(gat)) || (u2_no == u2du(u2h(gat))) ) {
     *pon = 2; return u2_cm_wail();
   }
@@ -866,6 +867,21 @@ _nock_molg(u2_noun  gat,
     //  XX  try to chip with u2_ds_find?  but a rare case...
     return _nock_mool(cor, fol, pon);
   }
+#else
+  if ( (u2_no == u2du(gat)) || (u2_no == u2du(u2t(gat))) ) {
+    *pon = 2; return u2_cm_wail();
+  }
+  else {
+    u2_noun cor, fol;
+
+    cor = u2nc(u2k(u2h(gat)), u2nc(sam, u2k(u2t(u2t(gat)))));
+    fol = u2k(u2h(gat));
+    u2z(gat);
+
+    //  XX  try to chip with u2_ds_find?  but a rare case...
+    return _nock_mool(cor, fol, pon);
+  }
+#endif
 }
 
 /* _nock_moog(): u2_cn_mock() with fly set.
@@ -1016,15 +1032,26 @@ u2_nk_kick(u2_wire wir_r,
   u2_noun xip;
 
   if ( u2_none != (xip = u2_ds_find(wir_r, gat)) ) {
+#ifdef NOCK6
     u2_noun pro = u2_ho_kick(wir_r, xip, gat, u2_cw_noc);
+#else
+    u2_noun pro = u2_ho_kick(wir_r, xip, gat, u2_cv_noc);
+#endif
 
     return pro;
   }
   else {
+#ifdef NOCK6
     return u2_nk_nock
       (wir_r,
        u2_rx(wir_r, gat),
        u2_st(gat));
+#else
+    return u2_nk_nock
+      (wir_r,
+       u2_rx(wir_r, gat),
+       u2_sh(gat));
+#endif
   }
 }
 
@@ -1039,16 +1066,31 @@ u2_nk_mong(u2_wire wir_r,
 {
   u2_noun cor, xip;
 
+#ifdef NOCK6
   cor = u2_rc
       (wir_r,
        u2_rc(wir_r, u2_rx(wir_r, u2_sh(u2_sh(gat))), sam),
        u2_rx(wir_r, u2_st(gat)));
+#else
+  cor = u2_rc
+      (wir_r,
+       u2_rx(wir_r, u2_sh(gat)),
+       u2_rc(wir_r, sam, u2_rx(wir_r, u2_st(u2_st(gat)))));
+#endif
 
   if ( u2_none != (xip = u2_ds_find(wir_r, cor)) ) {
+#ifdef NOCK6
     u2_noun pro = u2_ho_kick(wir_r, xip, cor, u2_cw_noc);
+#else
+    u2_noun pro = u2_ho_kick(wir_r, xip, cor, u2_cv_noc);
+#endif
 
     u2_rz(wir_r, cor);
     return pro;
   }
+#ifdef NOCK6
   else return u2_nk_nock(wir_r, cor, u2_st(gat));
+#else
+  else return u2_nk_nock(wir_r, cor, u2_sh(gat));
+#endif
 }
