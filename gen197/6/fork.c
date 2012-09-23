@@ -41,6 +41,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pt6, fork)[] = {
-    { ".3", c3__hevy, j2_mb(Pt6, fork), Tier6_a, u2_none, u2_none },
+    { ".2", c3__hevy, j2_mb(Pt6, fork), Tier6_a, u2_none, u2_none },
     { }
   };

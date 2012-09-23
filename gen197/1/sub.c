@@ -48,6 +48,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pt1, sub)[] = {
-    { ".3", c3__lite, j2_mb(Pt1, sub), u2_jet_live, u2_none, u2_none },
+    { ".2", c3__lite, j2_mb(Pt1, sub), u2_jet_live, u2_none, u2_none },
     { }
   };

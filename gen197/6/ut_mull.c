@@ -900,7 +900,7 @@
 
   u2_ho_jet 
   j2_mcj(Pt6, ut, mull)[] = {
-    { ".3", c3__hevy, 
+    { ".2", c3__hevy, 
         j2_mc(Pt6, ut, mull), 
         Tier6_b,
         u2_none, u2_none,

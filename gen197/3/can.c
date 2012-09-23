@@ -90,6 +90,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pt3, can)[] = {
-    { ".3", c3__hevy, j2_mb(Pt3, can), Tier3, u2_none, u2_none },
+    { ".2", c3__hevy, j2_mb(Pt3, can), Tier3, u2_none, u2_none },
     { }
   };

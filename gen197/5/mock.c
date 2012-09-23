@@ -27,6 +27,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pt5, mock)[] = { 
-    { ".3", c3__lite, j2_mb(Pt5, mock), Tier5, u2_none, u2_none },
+    { ".2", c3__lite, j2_mb(Pt5, mock), Tier5, u2_none, u2_none },
     { }
   };

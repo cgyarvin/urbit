@@ -212,7 +212,7 @@
 */
   u2_ho_jet 
   j2_mcj(Pt6, ut, rest)[] = {
-    { ".3", c3__hevy, 
+    { ".2", c3__hevy, 
         j2_mc(Pt6, ut, rest), 
         Tier6_b_memo,
         u2_none, u2_none,

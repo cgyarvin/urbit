@@ -56,6 +56,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pt5, mat)[] = {
-    { ".3", c3__hevy, j2_mb(Pt5, mat), Tier3, u2_none, u2_none },
+    { ".2", c3__hevy, j2_mb(Pt5, mat), Tier3, u2_none, u2_none },
     { }
   };

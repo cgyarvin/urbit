@@ -51,6 +51,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pt4, in, gas)[] = {
-    { ".3", c3__lite, j2_mc(Pt4, in, gas), Tier4, u2_none, u2_none },
+    { ".2", c3__lite, j2_mc(Pt4, in, gas), Tier4, u2_none, u2_none },
     { }
   };

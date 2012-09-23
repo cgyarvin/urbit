@@ -174,7 +174,7 @@
 */
   u2_ho_jet 
   j2_mcj(Pt6, ut, fink)[] = {
-    { ".3", c3__hevy, 
+    { ".2", c3__hevy, 
         j2_mc(Pt6, ut, fink), 
         Tier6_b,
         u2_none, u2_none,

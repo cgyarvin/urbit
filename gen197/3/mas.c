@@ -50,6 +50,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pt3, mas)[] = {
-    { ".3", c3__lite, j2_mb(Pt3, mas), Tier3, u2_none, u2_none },
+    { ".2", c3__lite, j2_mb(Pt3, mas), Tier3, u2_none, u2_none },
     { }
   };

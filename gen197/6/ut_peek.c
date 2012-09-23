@@ -69,7 +69,7 @@
           u2_atom tip = j2_mbc(Pt3, cap)(wir_r, axe);
           u2_atom tap = j2_mbc(Pt3, mas)(wir_r, axe);
 
-          if ( _2 == tip ) {
+          if ( _3 == tip ) {
             if ( u2_no == j2_mcy(Pt6, ut, park)(wir_r, van, sut, way, tap) ) 
             {
               u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "type", sut);
@@ -281,7 +281,7 @@
 */
   u2_ho_jet 
   j2_mcj(Pt6, ut, peek)[] = {
-    { ".3", c3__hevy, 
+    { ".2", c3__hevy, 
         j2_mc(Pt6, ut, peek), 
         Tier6_b_memo,
         u2_none, u2_none,

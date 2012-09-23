@@ -45,6 +45,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pt2, flop)[] = {
-    { ".3", c3__lite, j2_mb(Pt2, flop), Tier2, u2_none, u2_none },
+    { ".2", c3__lite, j2_mb(Pt2, flop), Tier2, u2_none, u2_none },
     { }
   };

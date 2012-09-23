@@ -97,6 +97,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pt4, in, put)[] = {
-    { ".3", c3__lite, j2_mc(Pt4, in, put), Tier4, u2_none, u2_none },
+    { ".2", c3__lite, j2_mc(Pt4, in, put), Tier4, u2_none, u2_none },
     { }
   };

@@ -50,6 +50,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pt2, snag)[] = {
-    { ".3", c3__lite, j2_mb(Pt2, snag), Tier2, u2_none, u2_none },
+    { ".2", c3__lite, j2_mb(Pt2, snag), Tier2, u2_none, u2_none },
     { }
   };

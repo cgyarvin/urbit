@@ -57,6 +57,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pt3, con)[] = {
-    { ".3", c3__lite, j2_mb(Pt3, con), Tier3, u2_none, u2_none },
+    { ".2", c3__lite, j2_mb(Pt3, con), Tier3, u2_none, u2_none },
     { }
   };

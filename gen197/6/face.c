@@ -35,6 +35,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pt6, face)[] = {
-    { ".3", c3__hevy, j2_mb(Pt6, face), Tier6_a, u2_none, u2_none },
+    { ".2", c3__hevy, j2_mb(Pt6, face), Tier6_a, u2_none, u2_none },
     { }
   };

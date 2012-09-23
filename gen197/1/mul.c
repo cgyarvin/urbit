@@ -42,7 +42,7 @@
 */
   u2_ho_jet 
   j2_mbj(Pt1, mul)[] = {
-    { ".3", c3__lite, j2_mb(Pt1, mul), u2_jet_live, u2_none, u2_none },
+    { ".2", c3__lite, j2_mb(Pt1, mul), u2_jet_live, u2_none, u2_none },
     { }
   };
 

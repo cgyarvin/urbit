@@ -33,6 +33,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pt2, sort)[] = {
-    { ".3", c3__lite, u2_jet_dead, Tier2, u2_none, u2_none },
+    { ".2", c3__lite, u2_jet_dead, Tier2, u2_none, u2_none },
     { }
   };
