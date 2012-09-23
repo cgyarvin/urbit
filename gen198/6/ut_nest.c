@@ -152,9 +152,9 @@
               }
               case c3__iron: {
                 u2_noun s_sam = j2_mcy(Pt6, ut, peek)
-                                        (wir_r, van, qq_sut, c3__rite, _3);
+                                        (wir_r, van, qq_sut, c3__rite, _2);
                 u2_noun r_sam = j2_mcy(Pt6, ut, peek)
-                                        (wir_r, van, qq_ref, c3__rite, _3);
+                                        (wir_r, van, qq_ref, c3__rite, _2);
                 u2_flag ret = _nest_dext(wir_r, van, r_sam, tel, s_sam, gil);
 
                 u2_rz(wir_r, r_sam);
@@ -166,9 +166,9 @@
               }
               case c3__zinc: {
                 u2_noun s_pal = j2_mcy(Pt6, ut, peek)
-                                        (wir_r, van, qq_sut, c3__read, _3);
+                                        (wir_r, van, qq_sut, c3__read, _2);
                 u2_noun r_pal = j2_mcy(Pt6, ut, peek)
-                                        (wir_r, van, qq_ref, c3__read, _3);
+                                        (wir_r, van, qq_ref, c3__read, _2);
                 u2_flag ret = _nest_dext(wir_r, van, s_pal, tel, r_pal, gil);
 
                 u2_rz(wir_r, r_pal);

@@ -786,7 +786,7 @@
     {
       u2_noun gen;
 
-      if ( u2_none == (gen = u2_frag(u2_cv_sam, cor)) ) {
+      if ( u2_none == (gen = u2_frag(u2_cw_sam, cor)) ) {
         return u2_bl_bail(wir_r, c3__fail);
       } else {
         return j2_mcy(Pt6, ap, rake)(wir_r, gen);
@@ -889,10 +889,10 @@
     {
       u2_noun gen;
 
-      if ( u2_none == (gen = u2_frag(u2_cv_sam, cor)) ) {
+      if ( u2_none == (gen = u2_frag(u2_cw_sam, cor)) ) {
         return u2_bl_bail(wir_r, c3__fail);
       } else {
-        u2_noun ter = u2_frag(u2_cv_con, cor);
+        u2_noun ter = u2_frag(u2_cw_con, cor);
 
         return j2_mcy(Pt6, ap, hack)(wir_r, ter, gen);
       }
@@ -912,7 +912,7 @@
     } else {
       u2_noun gat = u2_nk_soft(wir_r, u2_rx(wir_r, ter), hoc);
       u2_noun cor = u2_rl_molt(wir_r, gat,
-                                      u2_cv_sam, u2_rx(wir_r, gen),
+                                      u2_cw_sam, u2_rx(wir_r, gen),
                                       0);
 
       u2_rz(wir_r, hoc);
@@ -1000,10 +1000,10 @@
   {
     u2_noun gen;
 
-    if ( u2_none == (gen = u2_frag(u2_cv_sam, cor)) ) {
+    if ( u2_none == (gen = u2_frag(u2_cw_sam, cor)) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
-      u2_noun ter = u2_frag(u2_cv_con, cor);
+      u2_noun ter = u2_frag(u2_cw_con, cor);
 
       return j2_mcy(Pt6, ap, open)(wir_r, ter, gen);
     }

@@ -38,8 +38,8 @@
                      u2_bi_cell(wir_r, rq_sut, &prq_sut, &qrq_sut);
       {
         return u2_bc
-          (wir_r, j2_mcy(Pt6, ut, burn)(wir_r, van, p_sut),
-                  u2_rx(wir_r, prq_sut));
+          (wir_r, u2_rx(wir_r, prq_sut),
+                  j2_mcy(Pt6, ut, burn)(wir_r, van, p_sut));
       }
       case c3__cube: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {

@@ -3313,7 +3313,7 @@
         [%weed *] 
       (home p.sec)
     ==
-  ++  clam  ^-(gene [%brts [%bcts %noun] (whip(gom 4) 5)])
+  ++  clam  ^-(gene [%brts [%bcts %noun] (whip(gom 7) 6)])
   ++  whip
     |=  axe=axis
     =+  ^=  tun
@@ -3378,10 +3378,10 @@
         ^$(sec i.p.sec)
       :+  %tsls
         ^$(sec i.p.sec)
-      =>  .(axe (peg 2 axe), gom (peg 2 gom))
+      =>  .(axe (peg 3 axe), gom (peg 3 gom))
       :^    %wtcl
-          [%dtts [~ axe] [~ 3]]
-        [~ 3]
+          [%dtts [~ axe] [~ 2]]
+        [~ 2]
       $(i.p.sec i.t.p.sec, t.p.sec t.t.p.sec)
     ::
         [%herb *]
@@ -3411,7 +3411,10 @@
       ^$(sec p.sec)
     ::
         [%weed *] 
-      (home p.sec)
+      =+  hom=(home p.sec)
+      ~|  [%weed-made hom]
+      hom 
+      :: (home p.sec)
     ==
   -- 
 ::
@@ -4178,7 +4181,7 @@
     ?-    sut
         [%atom *]   0
         [%cell *]   [$(sut p.sut) $(sut q.sut)]
-        [%core *]   [$(sut p.sut) p.r.q.sut]
+        [%core *]   [p.r.q.sut $(sut p.sut)]
         [%cube *]   p.sut
         [%face *]   $(sut repo)
         [%fork *]   $(sut p.sut)
@@ -4280,7 +4283,7 @@
         (cell ^$(axe lat, sut p.sut) q.sut)
       (cell p.sut ^$(axe lat, sut q.sut))
     ::
-        [%core *]   ?.(=(2 now) sut (core ^$(axe lat, sut p.sut) q.sut))
+        [%core *]   ?.(=(3 now) sut (core ^$(axe lat, sut p.sut) q.sut))
         [%cube *]   (reco |=(p=type ^$(sut p)))
         [%face *]   (reco |=(p=type (face p.sut ^$(sut p))))
         [%fork *]   
@@ -5627,12 +5630,12 @@
           ==
         ::
             %iron
-          =+  sam=[s=(peek(sut q.q.sut) %rite 3) r=(peek(sut q.q.ref) %rite 3)]
+          =+  sam=[s=(peek(sut q.q.sut) %rite 2) r=(peek(sut q.q.ref) %rite 2)]
           dext(sut r.sam, ref s.sam)
         ::
             %lead  &
             %zinc
-          =+  pal=[s=(peek(sut q.q.sut) %read 3) r=(peek(sut q.q.ref) %read 3)]
+          =+  pal=[s=(peek(sut q.q.sut) %read 2) r=(peek(sut q.q.ref) %read 2)]
           dext(sut s.pal, ref r.pal)
         ==
       ==
@@ -5746,13 +5749,13 @@
             %gold   &
             %iron   | 
             %lead   |
-            %zinc   =(3 (cap axe))
+            %zinc   =(2 (cap axe))
         ==
       ::
           %rite
         ?-    p.q.sut
             %gold   &
-            %iron   =(3 (cap axe))
+            %iron   =(2 (cap axe))
             %lead   |
             %zinc   | 
         ==
@@ -5772,7 +5775,7 @@
         [%atom *]   %void
         [%cell *]   ?:(=(2 now) ^$(sut p.sut, axe lat) ^$(sut q.sut, axe lat))
         [%core *]   
-      ?:  =(2 now) 
+      ?:  =(3 now) 
         ?.  (park way lat)
           ~!  (dunk 'type')
           ~!  (show [%c 'axis'] [%d axe])

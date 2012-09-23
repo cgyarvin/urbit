@@ -66,7 +66,7 @@
       }
       case c3__core: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {
-        if ( _2 != now ) {
+        if ( _3 != now ) {
           ret = u2_rx(wir_r, sut);
         } else {
           u2_noun hub = j2_mcx(Pt6, ut, cull)

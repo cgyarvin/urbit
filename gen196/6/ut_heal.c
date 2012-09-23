@@ -94,7 +94,7 @@
 
       case c3__core: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {
-        if ( _2 != now ) {
+        if ( _3 != now ) {
           return u2_bl_error(wir_r, "heal-core");
         } else {
           u2_noun ter = _heal_as(wir_r, van, p_sut, qog, lat, ref);
@@ -189,13 +189,13 @@
   {
     u2_noun van, sut, qog, axe, ref;
 
-    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &qog, 
-                                u2_cv_sam_6, &axe,
-                                u2_cv_sam_7, &ref,
-                                u2_cv_con, &van, 
+    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, 
+                                u2_cw_sam_2, &qog, 
+                                u2_cw_sam_6, &axe,
+                                u2_cw_sam_7, &ref,
                                 0)) ||
          (u2_no == u2_stud(axe)) ||
-         (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
+         (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
@@ -217,11 +217,11 @@
       c3_assert(!"register heal");
       return u2_none;
     } else {
-      u2_weak von = u2_rl_molt(wir_r, van, u2_cv_sam, u2_rx(wir_r, sut), 0);
+      u2_weak von = u2_rl_molt(wir_r, van, u2_cw_sam, u2_rx(wir_r, sut), 0);
       u2_weak gat = u2_nk_soft(wir_r, von, hoc);
-      u2_weak cor = u2_rl_molt(wir_r, gat, u2_cv_sam_2, u2_rx(wir_r, qog), 
-                                           u2_cv_sam_6, u2_rx(wir_r, axe),
-                                           u2_cv_sam_7, u2_rx(wir_r, ref),
+      u2_weak cor = u2_rl_molt(wir_r, gat, u2_cw_sam_2, u2_rx(wir_r, qog), 
+                                           u2_cw_sam_6, u2_rx(wir_r, axe),
+                                           u2_cw_sam_7, u2_rx(wir_r, ref),
                                            0);
 
       if ( (u2_none == j2_mcj(Pt6, ut, heal)[0].xip) ) {
@@ -285,12 +285,12 @@
   {
     u2_noun sut, qog, axe, ref, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &qog, 
-                                u2_cv_sam_6, &axe,
-                                u2_cv_sam_7, &ref,
-                                u2_cv_con, &van, 
+    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, 
+                                u2_cw_sam_2, &qog, 
+                                u2_cw_sam_6, &axe,
+                                u2_cw_sam_7, &ref,
                                 0)) ||
-         (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
+         (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
     {
       return u2_none;
     } else {

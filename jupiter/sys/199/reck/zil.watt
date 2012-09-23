@@ -402,11 +402,9 @@
 =>  |%
     ++  ball  ,@uw                                      ::  statement payload
     ++  base  ,@p                                       ::  host identity
-    ++  bath  ,[p=@ta q=hand]                           ::  host note id
     ++  bird  ,[p=@da q=rock]                           ::  packet in flight
     ++  bond  (list post)                               ::  atomic statement
     ++  code  ,@uvI                                     ::  symmetric key
-    ++  cape  ?(0 1 2 3 4 5)                            ::  ack status
     ++  cask                                            ::  symmetric record
               $:  yed=(unit ,[p=hand q=code])           ::  outbound
                   heg=(map hand code)                   ::  proposed 
@@ -419,12 +417,8 @@
                   fer=road                              ::  inferred conn from
                   caq=cask                              ::  symmetric key state
               ==                                        ::
+    ++  drat  ?(0 1 2)                                  ::  NAT none/good/bad
     ++  flap  ,@uvI                                     ::  fragment name
-    ++  flow                                            ::  packet connection
-              $:  liz=@da                               ::  last receipt
-                  rtt=@dr                               ::  round trip time
-                  rat=@ud                               ::  rtt bytes/sec
-              ==                                        ::
     ++  gram  ,@uw                                      ::  physical datagram
     ++  hair                                            ::  logical datagram
               $%  [& p=@]                               ::  log13 atom
@@ -435,30 +429,19 @@
     ::  jack
     ++  lint  (list rock)                               ::  fragment array
     ++  lane                                            ::  packet route
-              $%  [%if p=@ud q=@if]                     ::  IPv4 UDP/addr
-                  [%is p=@ud q=@is]                     ::  IPv6 UDP/addr
+              $%  [%if p=drat q=@ud r=@if]              ::  IPv4 NAT/UDP/addr
+                  [%is p=drat q=@ud r=@is]              ::  IPv6 NAT/UDP/addr
               ==                                        ::
     ++  link  ,[p=code q=sock]                          ::  connection
     ++  mace  (list ,[p=mark q=ring])                   ::  secret history
     ++  mark  ,@ud                                      ::  regime number
-    ++  mitt                                            ::  incoming message
-              $:  zep=@da                               ::  last active
-                  dyq=well                              ::  note identity
-                  vuf=flap                              ::  content fragment
-                  gux=code                              ::  content key
-              ==                                        ::
     ++  post  ,[p=path q=*]                             ::  statement
-    ++  putt                                            ::  outgoing message
-              $:  wiz=@da                               ::  next activation
-                  cha=bath                              ::  event identity
-                  wyv=(gear rock)                       ::  packet generator
-              ==                                        ::
     ++  rank  ?(%czar %king %duke %earl %pawn)          ::  base width class
     ++  road                                            ::  secured oneway route
               $:  exp=@da                               ::  expiration date
                   lue=(unit lane)                       ::  route to friend
                   lew=will                              ::  will of friend
-              ==
+              ==                                        ::
     ++  rock  ,@uvO                                     ::  packet
     ++  safe                                            ::  domestic host
               $:  loc=(unit lane)                       ::  packet route
@@ -483,7 +466,6 @@
               ==
     ++  wand  (list ,[p=mark q=ac])                     ::  mace in action
     ++  weft  (list flap)                               ::  fragment probe
-    ++  well  ,@uvH                                     ::  network note id
     ++  will  (list deed)                               ::  certificate
     --
 =>  |%
@@ -567,6 +549,15 @@
           |=  [now=@da]
           ^+  ..tim
           !!
+        ::
+        ++  way
+          |=  her=base
+          |=  her=base
+          =+  tae=(lord her)
+          ?.  (~(has in urb.ton.fox) tae)
+            ?<(=(tae her) $(her tae))
+          (need lue:wod:nob:(myx:(need (~(us go ton.fox) tae)) her))
+        
         --
       ++  ha                                            ::  adopt new license
         |=  [our=base mec=mace wil=will] 
@@ -597,6 +588,11 @@
         =+  goh=(~(get by urb.ton) our)
         ?~  goh  ~
         [~ ~(. as [our u.goh])]
+      ::
+      ++  wa                                            ::  route packet
+        |=  [yer=base pac=rock]
+        ^-  (list taxi)
+        !!
       --
     ::::
     ::
@@ -748,50 +744,63 @@
        nj6eg.bmlm6
     --
 =>  |%                                                  ::  fort top level
-    ++  beak  ,@uvH                                     ::  bait ID, 128 bits
+    ++  band  ,@uvH                                     ::  network packet id
     ++  bait  ,[p=rind q=dove]                          ::  fragment target
-    ++  bone  ,[p=sock q=@da r=(list post)]             ::  discovery
+    ++  bone                                            ::  fort output
+              $%  [%beer p=base]                        ::  gained ownership
+                  [%coke p=cape q=soap]                 ::  message conclusion
+                  [%milk p=sock q=@da r=bond]           ::  network discovery
+                  [%sake p=lane q=rock]                 ::  please send packet
+                  [%wine p=base]                        ::  lost ownership
+              ==                                        ::
+    ++  cape                                            ::  end-to-end result
+              $?  %dead                                 ::  prob undelivered
+                  %good                                 ::  delivered
+                  %weak                                 ::  rejected
+              ==                                        ::
     ++  cake  ,[p=gage q=base r=rind s=@]               ::  top level packet
     ++  dove  ,[p=@ud q=@ud r=(map ,@ud (unit ,@))]     ::  width-13 count data
+    ++  flow                                            ::  packet connection
+              $:  liz=@da                               ::  last receipt
+                  rtt=@dr                               ::  round trip time
+                  rat=@ud                               ::  rtt bytes/sec
+              ==                                        ::
     ++  fort                                            ::  formal state
               $:  ton=town                              ::  security
                   vig=(map base sink)                   ::  incoming per serv
                   von=(map base oven)                   ::  outgoing per serv
               ==                                        ::
-    ++  gage  ,@udC                                     ::  indirection
+    ++  gage  ,@udC                                     ::  fragment gage
     ++  limb  ?(%back %bond %buck %carp %lump %neck)    ::  content stem
     ++  meal                                            ::  payload
-              $%  [%back p=base q=cape r=@uvH]          ::  acknowledgment
+              $%  [%back p=base q=cape r=band]          ::  acknowledgment
                   [%bond p=base q=(list post)]          ::  statement
                   [%buck p=base q=will r=mace]          ::  license
                   [%carp p=flap q=@]                    ::  leaf fragment
                   [%lump p=@]                           ::  wrapped packet
-                  [%neck p=lane]                        ::  self-route
-              ==
-    ++  oven
-              $:  par=(set putt)
-              ==
+                  [%neck p=base q=lane]                 ::  self-route
+              ==                                        ::
+    ++  note  ,[p=soap q=sock r=meal]                   ::  output source
+    ++  oven                                            ::  outgoing per serv
+              $:  dow=(map base flow)                   ::  default flows
+                  par=(map soap putt)                   ::  messages in process
+              ==                                        ::
+    ++  putt                                            ::  outgoing message
+              $:  fow=flow                              ::  connection metrics
+                  wyv=(gear rock)                       ::  packet generator
+              ==                                        ::
     ++  rind  ,[p=skin q=limb]                          ::  format 
     ++  skin  ?(%none %open %fast %full)                ::  encoding stem
-    ++  slaw  ,[p=(list bone) q=(list taxi)]            ::  network product
+    ++  slaw  (list bone)                               ::  reflected product
     ++  sink                                            ::  incoming per server
-              $:  duc=(map flap beak)                   ::  fragment to action
-                  nes=(map beak (list bait))            ::  fragment actions
-              ==
+              $:  duc=(map flap band)                   ::  fragment to action
+                  nes=(map band (list bait))            ::  fragment actions
+              ==                                        ::
+    ++  soap  ,*                                        ::  opaque msg identity
     --
 =>  |%
-    ++  fold                                            ::  posts to gram
-      |=  say=bond  ^-  gram
-      (cat 3 %j (jam say))
-    ::
-    ++  toss                                            ::  gram to posts
-      |=  lod=gram  ^-  bond
-      =+  [mag=(end 3 1 lod) bod=(rsh 3 1 lod)]
-      ?>(=(%j mag) ((hard bond) (cue bod)))
-    --
-=>  |%                                                  ::  protocol
-    ++  bite                                            ::  top level decode
-      |=  pac=@  ^-  cake
+    ++  bite                                            ::  packet to cake
+      |=  pac=rock  ^-  cake
       =+  [mag=(end 5 1 pac) bod=(rsh 5 1 pac)]
       =+  :*  chk=(end 0 17 mag) 
               dit=(cut 0 [17 3] mag)
@@ -806,71 +815,130 @@
         (snag mal [%back %bond %buck %carp %lump ~])
       (rsh 3 wix bod)
     ::
-    ++  chew
-      |=  [now=@da ack=well]
-      |=  [bax=base rym=rind msg=@ fox=fort]
-      ^-  [p=slaw q=fort]
-      =+  [who=*(unit base) yek=*(unit code)]
-      =+  gus=(need (~(us go ton.fox) bax))
-      =+  vif=`sink`=+(vif=(~(get by vig.fox) bax) ?~(vif *sink u.vif))
-      =+  wof=`oven`=+(wof=(~(get by von.fox) bax) ?~(wof *oven u.wof))
-      =+  [lub=*(list bone) yow=*(list taxi)]
-      =<  mane
-      |%
-      ++  bran
-        |-  ^-  .
-        ?-    p.rym
-            %none
-          ?-    q.rym
-              %back
-            !!
-          ::
-              %bond
-            !!
-          ::
-              %buck
-            !!
-          ::
-              %carp
-            !!
-          ::
-              %lump
-            ((gnaw now) msg fox) 
-          ::
-              %neck
-            !!
-          ==
-        ::
-            %fast
-          =+  [mag=`hand`(end 7 1 msg) bod=(rsh 7 1 msg)]
-          =+  yoq=(gub:gus mag) 
-          =>  ^+(. .(gus q.yoq))
-          ?>  ?=(^ p.yoq)
-          %=  $
-            p.rym  %none
-            who    [~ p.u.p.yoq]
-            msg    (dy:q:sen:gus q.u.p.yoq msg)
-          ==
-        ::
-            %full                                 ::  signed and sealed
-          =+  mex=((hard ,[p=mark q=@]) (cue msg))
-          !!
-        ::
-            %open
-          =+  ^=  mex
-              %.  (cue msg)
-              (hard ,[p=[p=base q=mark] q=(unit lane) r=will s=bond])
-          !!
-        ==
+    ++  hork                                            ::  cake to packet
+      |=  kec=cake  ^-  rock
+      !!
+    ::
+    ++  fold                                            ::  posts to gram
+      |=  say=bond  ^-  gram
+      (cat 3 %j (jam say))
+    ::
+    ++  toss                                            ::  gram to posts
+      |=  lod=gram  ^-  bond
+      =+  [mag=(end 3 1 lod) bod=(rsh 3 1 lod)]
+      ?>(=(%j mag) ((hard bond) (cue bod)))
+    --
+=>  |%                                                  ::  protocol engine
+    ++  am
+      |_  fox=fort
+      ++  chew                                          ::  process datagram
+        |=  [now=@da bad=band]
+        |=  [bax=base rym=rind msg=gram]
+        ^-  [p=(list bone) q=fort]
+        !!
       ::
-      ++  mane
+      ++  gnaw                                          ::  process packet
+        |=  now=@da 
+        |=  pac=rock
+        ^-  [p=(list bone) q=fort]
+        !!
+      ::
+      ++  hark                                          ::  next act before
+        |=  now=@da
+        ^-  @da
+        !!
+      ::
+      ++  reap                                          ::  extract until
+        |=  now=@da
+        ^-  [p=(list bone) q=fort]
+        !!
+      ::
+      ++  wait                                          ::  await fragments
+        |=  [now=@da ack=band]
+        |=  [bax=@p rym=rind [kas=@ cub=@] fox=fort]
+        ^-  fort
+        !!
+      ::
+      ++  wash                                          ::  send messages
+        |=  now=@da
+        |=  noy=(list note)
+        ^-  [p=(list bone) q=fort]
+        !!
+      ::
+      ++  wish                                          ::  send message
+        |=  now=@da
+        |=  [sup=soap soq=sock ham=meal]
+        ^-  [p=(list bone) q=fort]
+        !!
+      -- 
+=>  |%                                                  ::  protocol engine
+    ++  am
+      |_  fox=fort
+      ++  chew
+        |=  [now=@da ack=band]
+        |=  [bax=base rym=rind msg=@]
         ^-  [p=slaw q=fort]
-        :-  [(flop lub) (flop yow)]
-        %=  fox
-          ton  (~(su go ton.fox) gus)
-          vig  (~(put by vig.fox) bax vif)
-          von  (~(put by von.fox) bax wof)
-        ==
+        =+  [who=*(unit base) yek=*(unit code)]
+        =+  gus=(need (~(us go ton.fox) bax))
+        =+  vif=`sink`=+(vif=(~(get by vig.fox) bax) ?~(vif *sink u.vif))
+        =+  wof=`oven`=+(wof=(~(get by von.fox) bax) ?~(wof *oven u.wof))
+        =+  [lub=*(list bone) yow=*(list taxi)]
+        =<  mane
+        |%
+        ++  bran
+          |-  ^-  .
+          ?-    p.rym
+              %none
+            ?-    q.rym
+                %back
+              !!
+            ::
+                %bond
+              !!
+            ::
+                %buck
+              !!
+            ::
+                %carp
+              !!
+            ::
+                %lump
+              ((gnaw now) msg fox) 
+            ::
+                %neck
+              !!
+            ==
+          ::
+              %fast
+            =+  [mag=`hand`(end 7 1 msg) bod=(rsh 7 1 msg)]
+            =+  yoq=(gub:gus mag) 
+            =>  ^+(. .(gus q.yoq))
+            ?>  ?=(^ p.yoq)
+            %=  $
+              p.rym  %none
+              who    [~ p.u.p.yoq]
+              msg    (dy:q:sen:gus q.u.p.yoq msg)
+            ==
+          ::
+              %full                                 ::  signed and sealed
+            =+  mex=((hard ,[p=mark q=@]) (cue msg))
+            !!
+          ::
+              %open
+            =+  ^=  mex
+                %.  (cue msg)
+                (hard ,[p=[p=base q=mark] q=(unit lane) r=will s=bond])
+            !!
+          ==
+        ++  mane
+          ^-  [p=slaw q=fort]
+          :-  [(flop lub) (flop yow)]
+          %=  fox
+            ton  (~(su go ton.fox) gus)
+            vig  (~(put by vig.fox) bax vif)
+            von  (~(put by von.fox) bax wof)
+          ==
+        --
       -- 
     ::
     ++  gnaw
@@ -893,11 +961,6 @@
     ::
     ++  spit
       |=  kec=cake  ^-  @
-      !!
-    ++  wait
-      |=  [now=@da ack=well]
-      |=  [bax=@p rym=rind [kas=@ cub=@] fox=fort]
-      ^-  fort
       !!
     ::
     ++  wack                                                ::  compose ack
