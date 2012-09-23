@@ -24,7 +24,7 @@
   {
     u2_noun a;
 
-    if ( u2_none == (a = u2_frag(u2_cw_sam, cor)) ) {
+    if ( u2_none == (a = u2_frag(u2_cv_sam, cor)) ) {
       return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbc(Pt2, need)(wir_r, a);

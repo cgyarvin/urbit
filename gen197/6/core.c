@@ -24,7 +24,7 @@
   {
     u2_noun pac, con;
 
-    if ( u2_no == u2_mean(cor, u2_cw_sam_2, &pac, u2_cw_sam_3, &con, 0) ) {
+    if ( u2_no == u2_mean(cor, u2_cv_sam_2, &pac, u2_cv_sam_3, &con, 0) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mby(Pt6, core)(wir_r, pac, con);

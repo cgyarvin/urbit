@@ -152,9 +152,9 @@
               }
               case c3__iron: {
                 u2_noun s_sam = j2_mcy(Pt6, ut, peek)
-                                        (wir_r, van, qq_sut, c3__rite, _2);
+                                        (wir_r, van, qq_sut, c3__rite, _3);
                 u2_noun r_sam = j2_mcy(Pt6, ut, peek)
-                                        (wir_r, van, qq_ref, c3__rite, _2);
+                                        (wir_r, van, qq_ref, c3__rite, _3);
                 u2_flag ret = _nest_dext(wir_r, van, r_sam, tel, s_sam, gil);
 
                 u2_rz(wir_r, r_sam);
@@ -166,9 +166,9 @@
               }
               case c3__zinc: {
                 u2_noun s_pal = j2_mcy(Pt6, ut, peek)
-                                        (wir_r, van, qq_sut, c3__read, _2);
+                                        (wir_r, van, qq_sut, c3__read, _3);
                 u2_noun r_pal = j2_mcy(Pt6, ut, peek)
-                                        (wir_r, van, qq_ref, c3__read, _2);
+                                        (wir_r, van, qq_ref, c3__read, _3);
                 u2_flag ret = _nest_dext(wir_r, van, s_pal, tel, r_pal, gil);
 
                 u2_rz(wir_r, r_pal);
@@ -482,11 +482,12 @@
   {
     u2_noun sut, tel, ref, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, 
-                                u2_cw_sam_2, &tel, 
-                                u2_cw_sam_3, &ref, 0)) ||
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &tel, 
+                                u2_cv_sam_3, &ref, 
+                                u2_cv_con, &van, 
+                                0)) ||
          (u2_no == u2_stud(tel)) || (tel > 1) ||
-         (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
+         (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
@@ -507,10 +508,10 @@
       c3_assert(!"register nest");
       return u2_none;
     } else {
-      u2_weak von = u2_rl_molt(wir_r, van, u2_cw_sam, u2_rx(wir_r, sut), 0);
+      u2_weak von = u2_rl_molt(wir_r, van, u2_cv_sam, u2_rx(wir_r, sut), 0);
       u2_weak gat = u2_nk_soft(wir_r, von, hoc);
-      u2_weak cor = u2_rl_molt(wir_r, gat, u2_cw_sam_2, tel,
-                                           u2_cw_sam_3, u2_rx(wir_r, ref), 0);
+      u2_weak cor = u2_rl_molt(wir_r, gat, u2_cv_sam_2, tel,
+                                           u2_cv_sam_3, u2_rx(wir_r, ref), 0);
 
       if ( (u2_none == j2_mcj(Pt6, ut, nest)[0].xip) ) {
         u2_noun xip = u2_ds_find(wir_r, cor);
@@ -557,8 +558,8 @@
   {
     u2_noun sut, ref, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam_3, &ref, 0)) ||
-         (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_3, &ref, u2_cv_con, &van, &ref, 0)) ||
+         (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
       return u2_none;
     } else {

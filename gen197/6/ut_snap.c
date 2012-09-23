@@ -27,7 +27,7 @@
           return u2_bl_bail(wir_r, c3__fail);
         }
         else {
-          u2_noun ter = u2_frag(u2_cw_con_2, van);
+          u2_noun ter = u2_frag(u2_cv_con_2, van);
           u2_noun haq = j2_mcy(Pt6, ap, hack)(wir_r, ter, gen);
 
           if ( u2_yes == u2_h(haq) ) {
@@ -57,7 +57,7 @@
         }
       }
       case c3__fork: {
-          u2_noun ter = u2_frag(u2_cw_con_2, van);
+          u2_noun ter = u2_frag(u2_cv_con_2, van);
           u2_noun haq = j2_mcy(Pt6, ap, hack)(wir_r, ter, gen);
 
           if ( u2_yes == u2_h(haq) ) {
@@ -107,8 +107,8 @@
   {
     u2_noun van, sut, gen;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &gen, 0)) ||
-         (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
+    if ( (u2_no == u2_mean(cor, u2_cv_sam, &gen, u2_cv_con, &van, 0)) ||
+         (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
@@ -128,9 +128,9 @@
       c3_assert(!"register snap");
       return u2_none;
     } else {
-      u2_weak von = u2_rl_molt(wir_r, van, u2_cw_sam, u2_rx(wir_r, sut), 0);
+      u2_weak von = u2_rl_molt(wir_r, van, u2_cv_sam, u2_rx(wir_r, sut), 0);
       u2_weak gat = u2_nk_soft(wir_r, von, hoc);
-      u2_weak cor = u2_rl_molt(wir_r, gat, u2_cw_sam, u2_rx(wir_r, gen), 0);
+      u2_weak cor = u2_rl_molt(wir_r, gat, u2_cv_sam, u2_rx(wir_r, gen), 0);
 
       if ( (u2_none == j2_mcj(Pt6, ut, snap)[0].xip) ) {
         u2_noun xip = u2_ds_find(wir_r, cor);

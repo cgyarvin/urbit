@@ -445,7 +445,7 @@ _ho_abstract(u2_noun xip,                                         //  retain
     sscanf(fcs_c+1, "%llu", &axe_d);
     if ( axe_d >> 32ULL || 
          ((1 << 31) & (axe_l = (c3_w)axe_d)) || 
-         (axe_l < 3) )
+         (axe_l < 2) )
     {
       u2_ho_warn_here();
       return 0;

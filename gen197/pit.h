@@ -4,13 +4,13 @@
 */
   /** Driver control strings for each tier.
   **/
-#   define Pt0           k_198
-#   define Pt1           k_198__a
-#   define Pt2           k_198__a__b
-#   define Pt3           k_198__a__b__c
-#   define Pt4           k_198__a__b__c__d
-#   define Pt5           k_198__a__b__c__d__e
-#   define Pt6           k_198__a__b__c__d__e__f
+#   define Pt0           k_197
+#   define Pt1           k_197__a
+#   define Pt2           k_197__a__b
+#   define Pt3           k_197__a__b__c
+#   define Pt4           k_197__a__b__c__d
+#   define Pt5           k_197__a__b__c__d__e
+#   define Pt6           k_197__a__b__c__d__e__f
 
   /** Test codes.
   **/
@@ -21,7 +21,7 @@
 #   define  Tier5         u2_jet_live
 //#   define  Tier5_b       (u2_jet_live | u2_jet_test | u2_jet_memo)
 #   define  Tier5_b       u2_jet_live
-#   define  Tier6         u2_jet_dead
+#   define  Tier6         u2_jet_live
 #   define  Tier6_a       Tier6
 #   define  Tier6_b       Tier6
 // #   define  Tier6_b       (u2_jet_live | u2_jet_test)

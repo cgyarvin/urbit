@@ -13,7 +13,7 @@
                     u2_noun b)                                    //  retain
   {
     if ( _0 == a ) {
-      return u2_rx(wir_r, u2_frag(u2_cw_sam_3, b));
+      return u2_rx(wir_r, u2_frag(u2_cv_sam_3, b));
     }
     else if ( u2_no == u2_dust(a) ) {
       return u2_bl_bail(wir_r, c3__exit);
@@ -31,7 +31,7 @@
   {
     u2_noun a, b;
 
-    if ( u2_no == u2_mean(cor, u2_cw_sam_2, &a, u2_cw_sam_3, &b, 0) ) {
+    if ( u2_no == u2_mean(cor, u2_cv_sam_2, &a, u2_cv_sam_3, &b, 0) ) {
       return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbc(Pt2, reel)(wir_r, a, b);

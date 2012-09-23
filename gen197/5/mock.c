@@ -11,9 +11,9 @@
   {
     u2_noun bus, fol, fly;
 
-    if ( u2_no == u2_mean(cor, u2_cw_sam_4, &bus, 
-                               u2_cw_sam_5, &fol, 
-                               u2_cw_sam_3, &fly,
+    if ( u2_no == u2_mean(cor, u2_cv_sam_4, &bus, 
+                               u2_cv_sam_5, &fol, 
+                               u2_cv_sam_3, &fly,
                                0) )
     {
       return u2_bl_bail(wir_r, c3__exit);

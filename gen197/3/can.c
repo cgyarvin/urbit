@@ -77,7 +77,7 @@
   {
     u2_noun a, b;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &a, u2_cw_sam_3, &b, 0)) ||
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &a, u2_cv_sam_3, &b, 0)) ||
          (u2_no == u2_stud(a)) ) 
     {
       return u2_bl_bail(wir_r, c3__fail);

@@ -51,7 +51,7 @@
   {
     u2_noun mol = u2_bc(wir_r, 'o', u2_rx(wir_r, loc)); 
     u2_noun sho = u2_bn_hook(wir_r, van, "show");
-    u2_noun ret = u2_bn_molt(wir_r, sho, u2_cw_sam, mol, 0);
+    u2_noun ret = u2_bn_molt(wir_r, sho, u2_cv_sam, mol, 0);
  
     u2_rz(wir_r, mol);
     u2_rz(wir_r, sho);
@@ -305,7 +305,7 @@
     u2_noun ret;
 
     if ( u2_no == u2_dust(gen) ) {
-      u2_noun ter = u2_frag(u2_cw_con_2, van);
+      u2_noun ter = u2_frag(u2_cv_con_2, van);
       u2_noun rex = j2_mcy(Pt6, ap, open)(wir_r, ter, gen);
 
       ret = _mull_in(wir_r, van, sut, gol, dox, rex);
@@ -330,7 +330,7 @@
     }
     else switch ( u2_h(gen) ) {
       default: {
-        u2_noun ter = u2_frag(u2_cw_con_2, van);
+        u2_noun ter = u2_frag(u2_cv_con_2, van);
         u2_noun rex = j2_mcy(Pt6, ap, open)(wir_r, ter, gen);
 
         if ( u2_yes == u2_sing(rex, gen) ) {
@@ -783,12 +783,12 @@
   {
     u2_noun sut, gol, dox, gen, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, 
-                                u2_cw_sam_2, &gol, 
-                                u2_cw_sam_6, &dox, 
-                                u2_cw_sam_7, &gen,
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &gol, 
+                                u2_cv_sam_6, &dox, 
+                                u2_cv_sam_7, &gen,
+                                u2_cv_con, &van, 
                                 0)) ||
-         (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
+         (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
@@ -810,12 +810,12 @@
       c3_assert(!"register mull");
       return u2_none;
     } else {
-      u2_weak von = u2_rl_molt(wir_r, van, u2_cw_sam, u2_rx(wir_r, sut), 0);
+      u2_weak von = u2_rl_molt(wir_r, van, u2_cv_sam, u2_rx(wir_r, sut), 0);
       u2_weak gat = u2_nk_soft(wir_r, von, hoc);
       u2_weak cor = u2_rl_molt(wir_r, gat, 
-                                      u2_cw_sam_2, u2_rx(wir_r, gol), 
-                                      u2_cw_sam_6, u2_rx(wir_r, dox), 
-                                      u2_cw_sam_7, u2_rx(wir_r, gen), 
+                                      u2_cv_sam_2, u2_rx(wir_r, gol), 
+                                      u2_cv_sam_6, u2_rx(wir_r, dox), 
+                                      u2_cv_sam_7, u2_rx(wir_r, gen), 
                                       0);
 
       if ( (u2_none == j2_mcj(Pt6, ut, mull)[0].xip) ) {
@@ -881,12 +881,12 @@
   {
     u2_noun sut, gol, dox, gen, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, 
-                                u2_cw_sam_2, &gol, 
-                                u2_cw_sam_6, &dox,
-                                u2_cw_sam_7, &gen,
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &gol, 
+                                u2_cv_sam_6, &dox,
+                                u2_cv_sam_7, &gen,
+                                u2_cv_con, &van, 
                                 0)) ||
-         (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
+         (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
       return u2_none;
     } else {

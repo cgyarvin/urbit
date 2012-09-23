@@ -123,7 +123,7 @@
   {
     u2_noun sut;
 
-    if ( u2_none == (sut = u2_frag(u2_cw_sam, cor)) ) {
+    if ( u2_none == (sut = u2_frag(u2_cv_sam, cor)) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcy(Pt6, ut, moot)(wir_r, cor, sut);
@@ -136,7 +136,7 @@
   {
     u2_noun sut;
 
-    if ( (u2_none == (sut = u2_frag(u2_cw_sam, cor))) ) {
+    if ( (u2_none == (sut = u2_frag(u2_cv_sam, cor))) ) {
       return u2_none;
     } else {
       return u2_rx(wir_r, sut);

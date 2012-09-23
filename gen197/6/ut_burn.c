@@ -38,8 +38,8 @@
                      u2_bi_cell(wir_r, rq_sut, &prq_sut, &qrq_sut);
       {
         return u2_bc
-          (wir_r, u2_rx(wir_r, prq_sut),
-                  j2_mcy(Pt6, ut, burn)(wir_r, van, p_sut));
+          (wir_r, j2_mcy(Pt6, ut, burn)(wir_r, van, p_sut),
+                  u2_rx(wir_r, prq_sut));
       }
       case c3__cube: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {
@@ -123,7 +123,7 @@
   {
     u2_noun sut;
 
-    if ( u2_none == (sut = u2_frag(u2_cw_sam, cor)) ) {
+    if ( u2_none == (sut = u2_frag(u2_cv_sam, cor)) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcy(Pt6, ut, burn)(wir_r, cor, sut);

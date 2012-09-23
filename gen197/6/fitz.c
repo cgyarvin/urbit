@@ -60,7 +60,7 @@
   {
     u2_noun yaz, wix;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &yaz, u2_cw_sam_3, &wix, 0)) ||
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &yaz, u2_cv_sam_3, &wix, 0)) ||
          (u2_no == u2ud(yaz)) ||
          (u2_no == u2ud(wix)) )
     {

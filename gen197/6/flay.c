@@ -47,7 +47,7 @@
   {
     u2_noun pok;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam, &pok, 0)) ||
+    if ( (u2_no == u2_mean(cor, u2_cv_sam, &pok, 0)) ||
          (u2_no == u2_dust(pok)) ) { 
       return u2_bl_bail(wir_r, c3__fail);
     } else {

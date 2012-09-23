@@ -1,17 +1,17 @@
-!:
-::              Watt kernel 197.  This file is in the public domain.
+::
+::              Watt kernel 196.  This file is in the public domain.
 ::
 =>  src=.
 ?>  ?=(@ src)
 %.  src
 =<  make
-=>  %197
+=>  %196
 =>  ::
   ::::                Tier 0, kernel stub
   ::
-  ~%  %k.197  ~  ~
+  ~%  %k.196  ~  ~
   |%
-  ++  stub  197
+  ++  stub  196
   --
 =>  ::
   ::::                Tier 1, basic math
@@ -143,7 +143,7 @@
   ::::
   ::::                Tier 2, lists and units and gears
   ::::
-  ~%    %b  +  ~
+  ~%  %b  +  ~
   |%
   ::
   ::                                                    Tier 2a, units
@@ -155,7 +155,7 @@
     [~ u=(b u.a)]
   ::
   ++  clap
-    |*  [a=(unit) b=(unit) c=_|=(^ ->-)]
+    |*  [a=(unit) b=(unit) c=_|=(^ +<-)]
     ?~  a
       b
     ?~  b
@@ -417,9 +417,7 @@
   ::::
   ::::                Tier 3, noun surgery
   ::::
-  ~%    %c
-      +
-    ~
+  ~%  %c  +  ~
   |%
   ::      Tier 3a, axes
   ::
@@ -1008,9 +1006,7 @@
   ::::
   ::::  Tier 4, containers
   ::::
-  ~%    %d
-      +
-    ~
+  ~%  %d  +  ~
   |%
   ::      Tier 4a, sets
   ::
@@ -1295,9 +1291,7 @@
   ::::
   ::::  Tier 5, packing, parsing, formatting, crypto, virtualization
   ::::
-  ~%    %e
-      +
-    ~
+  ~%  %e  +  ~
   |%
   ::
   ::      Tier 5a, packing
@@ -3313,7 +3307,7 @@
         [%weed *] 
       (home p.sec)
     ==
-  ++  clam  ^-(gene [%brts [%bcts %noun] (whip(gom 4) 5)])
+  ++  clam  ^-(gene [%brts [%bcts %noun] (whip(gom 7) 6)])
   ++  whip
     |=  axe=axis
     =+  ^=  tun
@@ -3378,10 +3372,10 @@
         ^$(sec i.p.sec)
       :+  %tsls
         ^$(sec i.p.sec)
-      =>  .(axe (peg 2 axe), gom (peg 2 gom))
+      =>  .(axe (peg 3 axe), gom (peg 3 gom))
       :^    %wtcl
-          [%dtts [~ axe] [~ 3]]
-        [~ 3]
+          [%dtts [~ axe] [~ 2]]
+        [~ 2]
       $(i.p.sec i.t.p.sec, t.p.sec t.t.p.sec)
     ::
         [%herb *]
@@ -3411,7 +3405,10 @@
       ^$(sec p.sec)
     ::
         [%weed *] 
-      (home p.sec)
+      =+  hom=(home p.sec)
+      ~|  [%weed-made hom]
+      hom 
+      :: (home p.sec)
     ==
   -- 
 ::
@@ -3928,11 +3925,11 @@
   ~/  %cons
   |=  [vur=fuel sed=fuel]
   ^-  fuel
-  ?:  ?=([[0 *] [0 *]] ->)
+  ?:  ?=([[0 *] [0 *]] +<)
     ?:  ?&(=(+(p.vur) p.sed) =((div p.vur 2) (div p.sed 2)))
       [%0 (div p.vur 2)]
     [vur sed]
-  ?:  ?=([[1 *] [1 *]] ->)
+  ?:  ?=([[1 *] [1 *]] +<)
     [%1 p.vur p.sed]
   [vur sed] 
 ::
@@ -4178,7 +4175,7 @@
     ?-    sut
         [%atom *]   0
         [%cell *]   [$(sut p.sut) $(sut q.sut)]
-        [%core *]   [$(sut p.sut) p.r.q.sut]
+        [%core *]   [p.r.q.sut $(sut p.sut)]
         [%cube *]   p.sut
         [%face *]   $(sut repo)
         [%fork *]   $(sut p.sut)
@@ -4280,7 +4277,7 @@
         (cell ^$(axe lat, sut p.sut) q.sut)
       (cell p.sut ^$(axe lat, sut q.sut))
     ::
-        [%core *]   ?.(=(2 now) sut (core ^$(axe lat, sut p.sut) q.sut))
+        [%core *]   ?.(=(3 now) sut (core ^$(axe lat, sut p.sut) q.sut))
         [%cube *]   (reco |=(p=type ^$(sut p)))
         [%face *]   (reco |=(p=type (face p.sut ^$(sut p))))
         [%fork *]   
@@ -5242,7 +5239,7 @@
       (cell p.sut ^$(sut q.sut, axe lat))
     ::
         [%core *]   
-      ?.  =(2 now) 
+      ?.  =(3 now) 
         ~|(%heal-core !!)
       (core ^$(sut p.sut, axe lat) q.sut)
     ::
@@ -5746,13 +5743,13 @@
             %gold   &
             %iron   | 
             %lead   |
-            %zinc   =(3 (cap axe))
+            %zinc   =(2 (cap axe))
         ==
       ::
           %rite
         ?-    p.q.sut
             %gold   &
-            %iron   =(3 (cap axe))
+            %iron   =(2 (cap axe))
             %lead   |
             %zinc   | 
         ==
@@ -5772,7 +5769,7 @@
         [%atom *]   %void
         [%cell *]   ?:(=(2 now) ^$(sut p.sut, axe lat) ^$(sut q.sut, axe lat))
         [%core *]   
-      ?:  =(2 now) 
+      ?:  =(3 now) 
         ?.  (park way lat)
           ~!  (dunk 'type')
           ~!  (show [%c 'axis'] [%d axe])

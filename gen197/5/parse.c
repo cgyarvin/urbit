@@ -139,10 +139,10 @@
   {
     u2_noun van, raq, vex, sab;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, 
-                                u2_cw_sam_2, &vex,
-                                u2_cw_sam_3, &sab, 0)) ||
-         (u2_none == (raq = u2_frag(u2_cw_sam, van))) )
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &vex,
+                                u2_cv_sam_3, &sab,
+                                u2_cv_con, &van, 0)) ||
+         (u2_none == (raq = u2_frag(u2_cv_sam, van))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
@@ -193,8 +193,8 @@
   {
     u2_noun van, cus, sef, tub;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &tub, 0)) ||
-         (u2_no == u2_mean(van, u2_cw_sam_2, &cus, u2_cw_sam_3, &sef, 0)) )
+    if ( (u2_no == u2_mean(cor, u2_cv_sam, &tub, u2_cv_con, &van, 0)) ||
+         (u2_no == u2_mean(van, u2_cv_sam_2, &cus, u2_cv_sam_3, &sef, 0)) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
@@ -247,8 +247,8 @@
   {
     u2_noun van, poq, sef, tub;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &tub, 0)) ||
-         (u2_no == u2_mean(van, u2_cw_sam_2, &poq, u2_cw_sam_3, &sef, 0)) )
+    if ( (u2_no == u2_mean(cor, u2_cv_sam, &tub, u2_cv_con, &van, 0)) ||
+         (u2_no == u2_mean(van, u2_cv_sam_2, &poq, u2_cv_sam_3, &sef, 0)) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
@@ -316,10 +316,10 @@
   {
     u2_noun van, raq, vex, sab;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, 
-                                u2_cw_sam_2, &vex,
-                                u2_cw_sam_3, &sab, 0)) ||
-         (u2_none == (raq = u2_frag(u2_cw_sam, van))) )
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &vex,
+                                u2_cv_sam_3, &sab,
+                                u2_cv_con, &van, 0)) ||
+         (u2_none == (raq = u2_frag(u2_cv_sam, van))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
@@ -353,8 +353,8 @@
   {
     u2_noun van, huf, tub;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &tub, 0)) ||
-         (u2_none == (huf = u2_frag(u2_cw_sam, van))) )
+    if ( (u2_no == u2_mean(cor, u2_cv_sam, &tub, u2_cv_con, &van, 0)) ||
+         (u2_none == (huf = u2_frag(u2_cv_sam, van))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
@@ -435,10 +435,10 @@
   {
     u2_noun van, bus, vex, sab;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, 
-                                u2_cw_sam_2, &vex,
-                                u2_cw_sam_3, &sab, 0)) ||
-         (u2_none == (bus = u2_frag(u2_cw_sam, van))) )
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &vex,
+                                u2_cv_sam_3, &sab,
+                                u2_cv_con, &van, 0)) ||
+         (u2_none == (bus = u2_frag(u2_cv_sam, van))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
@@ -499,8 +499,8 @@
   {
     u2_noun van, hez, sef, tub;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &tub, 0)) ||
-         (u2_no == u2_mean(van, u2_cw_sam_2, &hez, u2_cw_sam_3, &sef, 0)) )
+    if ( (u2_no == u2_mean(cor, u2_cv_sam, &tub, u2_cv_con, &van, 0)) ||
+         (u2_no == u2_mean(van, u2_cv_sam_2, &hez, u2_cv_sam_3, &sef, 0)) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
@@ -542,8 +542,8 @@
   {
     u2_noun van, daf, tub;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &tub, 0)) ||
-         (u2_none == (daf = u2_frag(u2_cw_sam, van))) )
+    if ( (u2_no == u2_mean(cor, u2_cv_sam, &tub, u2_cv_con, &van, 0)) ||
+         (u2_none == (daf = u2_frag(u2_cv_sam, van))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
@@ -588,8 +588,8 @@
   {
     u2_noun van, bud, tub;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &tub, 0)) ||
-         (u2_none == (bud = u2_frag(u2_cw_sam, van))) )
+    if ( (u2_no == u2_mean(cor, u2_cv_sam, &tub, u2_cv_con, &van, 0)) ||
+         (u2_none == (bud = u2_frag(u2_cv_sam, van))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
@@ -640,7 +640,7 @@
   {
     u2_noun vex, sab;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &vex, u2_cw_sam_3, &sab, 0)) ) {
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &vex, u2_cv_sam_3, &sab, 0)) ) {
       return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbx(Pt5, pfix)(wir_r, vex, sab);
@@ -702,7 +702,7 @@
   {
     u2_noun vex, sab;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &vex, u2_cw_sam_3, &sab, 0)) ) {
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &vex, u2_cv_sam_3, &sab, 0)) ) {
       return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbx(Pt5, plug)(wir_r, vex, sab);
@@ -747,7 +747,7 @@
   {
     u2_noun vex, sab;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &vex, u2_cw_sam_3, &sab, 0)) ) {
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &vex, u2_cv_sam_3, &sab, 0)) ) {
       return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbx(Pt5, pose)(wir_r, vex, sab);
@@ -808,7 +808,7 @@
   {
     u2_noun vex, sab;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &vex, u2_cw_sam_3, &sab, 0)) ) {
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &vex, u2_cv_sam_3, &sab, 0)) ) {
       return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mbx(Pt5, sfix)(wir_r, vex, sab);
@@ -859,8 +859,8 @@
   {
     u2_noun van, zep, tub;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &tub, 0)) ||
-         (u2_none == (zep = u2_frag(u2_cw_sam, van))) )
+    if ( (u2_no == u2_mean(cor, u2_cv_sam, &tub, u2_cv_con, &van, 0)) ||
+         (u2_none == (zep = u2_frag(u2_cv_sam, van))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
@@ -913,8 +913,8 @@
   {
     u2_noun van, gob, sef, tub;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &tub, 0)) ||
-         (u2_no == u2_mean(van, u2_cw_sam_2, &gob, u2_cw_sam_3, &sef, 0)) )
+    if ( (u2_no == u2_mean(cor, u2_cv_sam, &tub, u2_cv_con, &van, 0)) ||
+         (u2_no == u2_mean(van, u2_cv_sam_2, &gob, u2_cv_sam_3, &sef, 0)) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
@@ -1015,7 +1015,7 @@
   {
     u2_noun con, hel, tub;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &con, u2_cw_sam, &tub, 0)) ||
+    if ( (u2_no == u2_mean(cor, u2_cv_sam, &tub, u2_cv_con, &con, 0)) ||
          (u2_none == (hel = u2_frag(3, con))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
@@ -1085,10 +1085,10 @@
   {
     u2_noun van, rud, raq, fel, tub;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &tub, 0)) ||
-         (u2_no == u2_mean(van, u2_cw_sam_2, &rud, 
-                                u2_cw_sam_6, &raq, 
-                                u2_cw_sam_7, &fel, 
+    if ( (u2_no == u2_mean(cor, u2_cv_sam, &tub, u2_cv_con, &van, 0)) ||
+         (u2_no == u2_mean(van, u2_cv_sam_2, &rud, 
+                                u2_cv_sam_6, &raq, 
+                                u2_cv_sam_7, &fel, 
                                 0)) )
     {
       return u2_bl_bail(wir_r, c3__fail);
