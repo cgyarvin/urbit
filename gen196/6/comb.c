@@ -63,7 +63,7 @@
   {
     u2_noun mal, buz;
 
-    if ( u2_no == u2_mean(cor, u2_cw_sam_2, &mal, u2_cw_sam_3, &buz, 0) ) {
+    if ( u2_no == u2_mean(cor, u2_cv_sam_2, &mal, u2_cv_sam_3, &buz, 0) ) {
       return u2_none;
     } else {
       return j2_mbc(Pt6, comb)(wir_r, mal, buz);
@@ -74,6 +74,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pt6, comb)[] = {
-    { ".3", c3__lite, j2_mb(Pt6, comb), Tier6_a, u2_none, u2_none },
+    { ".2", c3__lite, j2_mb(Pt6, comb), Tier6_a, u2_none, u2_none },
     { }
   };

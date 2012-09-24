@@ -119,6 +119,15 @@ _nock_hint(u2_noun  zep,                                          //  transfer
       u2_noun tax = u2_wire_tax(u2_Wire);
       u2_noun tac = u2nc(zep, hod);
 
+      if ( c3__spot == zep ) { 
+#if 0
+        printf("spot %d/%d : %d/%d\n",
+               u2h(u2h(u2t(hod))),
+               u2t(u2h(u2t(hod))),
+               u2h(u2t(u2t(hod))),
+               u2t(u2t(u2t(hod))));
+#endif
+      }
       u2_wire_tax(u2_Wire) = u2nc(tac, tax);
       {
         pro = pon ? _nock_mool(bus, nex, pon) : _nock_cool(bus, nex);

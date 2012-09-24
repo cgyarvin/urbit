@@ -46,9 +46,9 @@
   {
     u2_noun a, b, c;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &a, 
-                                u2_cw_sam_6, &b, 
-                                u2_cw_sam_7, &c, 0)) ||
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &a, 
+                                u2_cv_sam_6, &b, 
+                                u2_cv_sam_7, &c, 0)) ||
          (u2_no == u2_stud(a)) ||
          (u2_no == u2_stud(b)) ||
          (u2_no == u2_stud(c)) )
@@ -63,6 +63,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pt3, rsh)[] = {
-    { ".3", c3__lite, j2_mb(Pt3, rsh), Tier3, u2_none, u2_none },
+    { ".2", c3__lite, j2_mb(Pt3, rsh), Tier3, u2_none, u2_none },
     { }
   };

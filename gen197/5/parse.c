@@ -1016,7 +1016,7 @@
     u2_noun con, hel, tub;
 
     if ( (u2_no == u2_mean(cor, u2_cv_sam, &tub, u2_cv_con, &con, 0)) ||
-         (u2_none == (hel = u2_frag(3, con))) )
+         (u2_none == (hel = u2_frag(2, con))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {

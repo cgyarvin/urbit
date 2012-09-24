@@ -137,7 +137,7 @@
 
     if ( u2_no == u2_dust(gen) ) {
       open: {
-        u2_noun ter = u2_frag(u2_cv_con_2, van);
+        u2_noun ter = u2_frag(u2_cv_con_3, van);
         u2_noun rex = j2_mcy(Pt6, ap, open)(wir_r, ter, gen);
         u2_noun ret;
 
@@ -504,7 +504,7 @@
       u2_noun cor, fol, pro;
 
       cor = j2_mci(Pt6, ut, play)(wir_r, van, sut, gen);
-      fol = u2_t(cor);
+      fol = u2_h(cor);
 
       pro = u2_ho_use(wir_r, jet_j, cor, fol);
       if ( u2_none == pro ) return u2_bl_bail(wir_r, c3__fail);

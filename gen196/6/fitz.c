@@ -60,7 +60,7 @@
   {
     u2_noun yaz, wix;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_sam_2, &yaz, u2_cw_sam_3, &wix, 0)) ||
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &yaz, u2_cv_sam_3, &wix, 0)) ||
          (u2_no == u2ud(yaz)) ||
          (u2_no == u2ud(wix)) )
     {
@@ -74,6 +74,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pt6, fitz)[] = {
-    { ".3", c3__hevy, j2_mb(Pt6, fitz), Tier6_a, u2_none, u2_none },
+    { ".2", c3__hevy, j2_mb(Pt6, fitz), Tier6_a, u2_none, u2_none },
     { }
   };

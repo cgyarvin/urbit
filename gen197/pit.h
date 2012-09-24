@@ -624,11 +624,11 @@
                             u2_noun yoz);                         //  retain
     /** Direct ut axes.
     **/
-#     define j2_ut_van_fan  18
-#     define j2_ut_van_rib  38
-#     define j2_ut_van_vrf  39
-#     define j2_ut_van_vet  78
-#     define j2_ut_van_fab  79
+#     define j2_ut_van_fan  28
+#     define j2_ut_van_rib  58
+#     define j2_ut_van_vrf  59
+#     define j2_ut_van_vet  118
+#     define j2_ut_van_fab  119
 
     /** Debugging hacks.
     **/

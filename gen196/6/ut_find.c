@@ -368,12 +368,12 @@
   {
     u2_noun sut, dep, way, cog, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, 
-                                u2_cw_sam_2, &dep, 
-                                u2_cw_sam_6, &way, 
-                                u2_cw_sam_7, &cog, 
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &dep, 
+                                u2_cv_sam_6, &way, 
+                                u2_cv_sam_7, &cog, 
+                                u2_cv_con, &van, 
                                 0)) ||
-         (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
+         (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
@@ -395,12 +395,12 @@
       c3_assert(!"register find");
       return u2_none;
     } else {
-      u2_weak von = u2_rl_molt(wir_r, van, u2_cw_sam, u2_rx(wir_r, sut), 0);
+      u2_weak von = u2_rl_molt(wir_r, van, u2_cv_sam, u2_rx(wir_r, sut), 0);
       u2_weak gat = u2_nk_soft(wir_r, von, hoc);
       u2_weak cor = u2_rl_molt(wir_r, gat, 
-                                      u2_cw_sam_2, u2_rx(wir_r, dep), 
-                                      u2_cw_sam_6, u2_rx(wir_r, way), 
-                                      u2_cw_sam_7, u2_rx(wir_r, cog), 
+                                      u2_cv_sam_2, u2_rx(wir_r, dep), 
+                                      u2_cv_sam_6, u2_rx(wir_r, way), 
+                                      u2_cv_sam_7, u2_rx(wir_r, cog), 
                                       0);
 
       if ( (u2_none == j2_mcj(Pt6, ut, find)[0].xip) ) {
@@ -446,7 +446,7 @@
       u2_noun cor, fol, pro;
 
       cor = j2_mci(Pt6, ut, find)(wir_r, van, sut, dep, way, cog);
-      fol = u2_t(cor);
+      fol = u2_h(cor);
 
       pro = u2_ho_use(wir_r, jet_j, cor, fol);
       if ( u2_none == pro ) return u2_bl_bail(wir_r, c3__fail);
@@ -464,12 +464,12 @@
   {
     u2_noun sut, dep, way, cog, van;
 
-    if ( (u2_no == u2_mean(cor, u2_cw_con, &van, 
-                                u2_cw_sam_2, &dep, 
-                                u2_cw_sam_6, &way, 
-                                u2_cw_sam_7, &cog, 
+    if ( (u2_no == u2_mean(cor, u2_cv_sam_2, &dep, 
+                                u2_cv_sam_6, &way, 
+                                u2_cv_sam_7, &cog, 
+                                u2_cv_con, &van, 
                                 0)) ||
-         (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
+         (u2_none == (sut = u2_frag(u2_cv_sam, van))) )
     {
       return u2_none;
     } else {
@@ -485,7 +485,7 @@
 */
   u2_ho_jet 
   j2_mcj(Pt6, ut, find)[] = {
-    { ".3", c3__hevy, 
+    { ".2", c3__hevy, 
         j2_mc(Pt6, ut, find), 
         Tier6_b_memo,
         u2_none, u2_none,

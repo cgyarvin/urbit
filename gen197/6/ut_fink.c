@@ -33,6 +33,7 @@
       u2_noun fin = u2_t(hoq);
 
       if ( u2_nul == fin ) {
+        u2_err(wir_r, "cog", cog);
         return u2_bl_error(wir_r, "find-none");
       }
       else {
@@ -135,7 +136,7 @@
       u2_noun cor, fol, pro;
 
       cor = j2_mci(Pt6, ut, fink)(wir_r, van, sut, dep, way, cog);
-      fol = u2_t(cor);
+      fol = u2_h(cor);
 
       pro = u2_ho_use(wir_r, jet_j, cor, fol);
       if ( u2_none == pro ) return u2_bl_bail(wir_r, c3__fail);

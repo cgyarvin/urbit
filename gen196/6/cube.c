@@ -24,7 +24,7 @@
   {
     u2_noun dil, goq;
 
-    if ( u2_no == u2_mean(cor, u2_cw_sam_2, &dil, u2_cw_sam_3, &goq, 0) ) {
+    if ( u2_no == u2_mean(cor, u2_cv_sam_2, &dil, u2_cv_sam_3, &goq, 0) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mby(Pt6, cube)(wir_r, dil, goq);
@@ -35,6 +35,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pt6, cube)[] = {
-    { ".3", c3__hevy, j2_mb(Pt6, cube), Tier6_a, u2_none, u2_none },
+    { ".2", c3__hevy, j2_mb(Pt6, cube), Tier6_a, u2_none, u2_none },
     { }
   };

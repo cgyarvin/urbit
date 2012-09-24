@@ -24,7 +24,7 @@
   {
     u2_noun a;
 
-    if ( u2_none == (a = u2_frag(u2_cw_sam, cor)) ) {
+    if ( u2_none == (a = u2_frag(u2_cv_sam, cor)) ) {
       return u2_none;
     } else {
       return j2_mbc(Pt2, drop)(wir_r, a);
@@ -35,7 +35,7 @@
 */
   u2_ho_jet 
   j2_mbj(Pt2, drop)[] = {
-    { ".3", c3__lite, j2_mb(Pt2, drop), Tier2, u2_none, u2_none },
+    { ".2", c3__lite, j2_mb(Pt2, drop), Tier2, u2_none, u2_none },
     { }
   };
 

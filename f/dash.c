@@ -271,6 +271,7 @@ u2_ds_mine(u2_wire wir_r,
       } else {
         bat_xip = u2_h(u2_t(xip));
 
+        {c3_c* xip_c=u2_ho_cstring(xip); printf("%s\n", xip_c); free(xip_c);}
         gop = u2_cs_save(bas_r, u2_wire_des_r(wir_r), 0, bat_xip, gop);
         u2_rz(bas_r, gop);
       }

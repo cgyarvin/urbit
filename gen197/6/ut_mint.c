@@ -354,7 +354,7 @@
     }
 
     if ( u2_no == u2_dust(gen) ) {
-      u2_noun ter = u2_frag(u2_cv_con_2, van);
+      u2_noun ter = u2_frag(u2_cv_con_3, van);
       u2_noun rex = j2_mcy(Pt6, ap, open)(wir_r, ter, gen);
 
       ret = _mint_in(wir_r, van, sut, gol, rex);
@@ -381,7 +381,7 @@
       }
     } else switch ( u2_h(gen) ) {
       default: {
-        u2_noun ter = u2_frag(u2_cv_con_2, van);
+        u2_noun ter = u2_frag(u2_cv_con_3, van);
         u2_noun rex = j2_mcy(Pt6, ap, open)(wir_r, ter, gen);
 
         if ( u2_yes == u2_sing(rex, gen) ) {
@@ -937,7 +937,7 @@
       u2_noun cor, fol, pro;
 
       cor = j2_mci(Pt6, ut, mint)(wir_r, van, sut, gol, gen);
-      fol = u2_t(cor);
+      fol = u2_h(cor);
 
       pro = u2_ho_use(wir_r, jet_j, cor, fol);
       if ( u2_none == pro ) return u2_bl_bail(wir_r, c3__fail);

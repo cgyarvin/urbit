@@ -13,7 +13,7 @@
   {
     u2_noun sam;
 
-    if ( u2_none == (sam = u2_frag(u2_cw_sam, cor)) ) {
+    if ( u2_none == (sam = u2_frag(u2_cv_sam, cor)) ) {
       return u2_bl_bail(wir_r, c3__exit);
     } else {
       return u2_mug(sam);
@@ -24,6 +24,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pt3, mug)[] = { 
-    { ".3", c3__lite, j2_mb(Pt3, mug), Tier3, u2_none, u2_none },
+    { ".2", c3__lite, j2_mb(Pt3, mug), Tier3, u2_none, u2_none },
     { }
   };

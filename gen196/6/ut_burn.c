@@ -49,31 +49,6 @@
       {
         return j2_mcy(Pt6, ut, burn)(wir_r, van, q_sut);
       }
-      case c3__fine: u2_bi_trel(wir_r, u2_t(sut), &p_sut, &q_sut, &r_sut);
-      {
-        u2_noun yoc = j2_mcy(Pt6, ut, burn)(wir_r, van, r_sut);
-
-        while ( 1 ) {
-          u2_noun feg = j2_mcy(Pt6, ut, bust)(wir_r, van, q_sut, yoc);
-          
-          if ( p_sut == c3__pure ) {
-            if ( u2_yes == u2_sing(yoc, feg) ) {
-              u2_rz(wir_r, feg);
-              return yoc;
-            } else {
-              u2_rz(wir_r, yoc);
-              yoc = feg;
-              continue;
-            }
-          } 
-          else if ( p_sut == c3__very ) {
-            if ( u2_yes == feg ) {
-              return yoc;
-            } else return u2_bl_error(wir_r, "burn-fine");
-          }
-          else return u2_bl_bail(wir_r, c3__fail);
-        }
-      }
       case c3__fork: u2_bi_cell(wir_r, u2_t(sut), &p_sut, &q_sut);
       {
         return j2_mcy(Pt6, ut, burn)(wir_r, van, p_sut);
@@ -123,7 +98,7 @@
   {
     u2_noun sut;
 
-    if ( u2_none == (sut = u2_frag(u2_cw_sam, cor)) ) {
+    if ( u2_none == (sut = u2_frag(u2_cv_sam, cor)) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mcy(Pt6, ut, burn)(wir_r, cor, sut);

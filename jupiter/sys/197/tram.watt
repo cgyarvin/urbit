@@ -4134,7 +4134,6 @@
       %vet    vet
       %fab    fab
       %burn   burn
-      %bust   bust
       %cull   cull
       %crop   crop
       %dunk   dunk
@@ -4183,14 +4182,6 @@
         %noun       0
         %void       ~|(%burn-void !!)
     ==
-  ::
-  ++  bust
-    ~/  %bust
-    |=  dib=*
-    =+  yam=burn
-    =+  yib=[[-<.yam dib] +.yam]
-    =+  hox=q:(mint %noun [%cnbc %%])
-    ~|(%bust-nock .*(yib hox))
   ::
   ++  crop
     ~/  %crop
@@ -5624,12 +5615,12 @@
           ==
         ::
             %iron
-          =+  sam=[s=(peek(sut q.q.sut) %rite 3) r=(peek(sut q.q.ref) %rite 3)]
+          =+  sam=[s=(peek(sut q.q.sut) %rite 2) r=(peek(sut q.q.ref) %rite 2)]
           dext(sut r.sam, ref s.sam)
         ::
             %lead  &
             %zinc
-          =+  pal=[s=(peek(sut q.q.sut) %read 3) r=(peek(sut q.q.ref) %read 3)]
+          =+  pal=[s=(peek(sut q.q.sut) %read 2) r=(peek(sut q.q.ref) %read 2)]
           dext(sut s.pal, ref r.pal)
         ==
       ==

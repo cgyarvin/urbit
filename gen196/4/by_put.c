@@ -97,10 +97,9 @@
   {
     u2_noun a, b, c;
 
-    if ( u2_no == u2_mean(cor, u2_cw_con_sam, &a, 
-                               u2_cw_sam_2,   &b, 
-                               u2_cw_sam_3,   &c, 0) ) {
-                               
+    if ( u2_no == u2_mean(cor, u2_cv_sam_2,   &b,
+                               u2_cv_sam_3,   &c,
+                               u2_cv_con_sam, &a, 0) ) {
       return u2_bl_bail(wir_r, c3__exit);
     } else {
       return j2_mcc(Pt4, by, put)(wir_r, a, b, c);
@@ -111,6 +110,6 @@
 */
   u2_ho_jet 
   j2_mcj(Pt4, by, put)[] = {
-    { ".3", c3__lite, j2_mc(Pt4, by, put), Tier4, u2_none, u2_none },
+    { ".2", c3__lite, j2_mc(Pt4, by, put), Tier4, u2_none, u2_none },
     { }
   };

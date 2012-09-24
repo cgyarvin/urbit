@@ -750,7 +750,7 @@
               $%  [%beer p=base]                        ::  gained ownership
                   [%coke p=cape q=soap]                 ::  message conclusion
                   [%milk p=sock q=@da r=bond]           ::  network discovery
-                  [%sake p=lane q=rock]                 ::  please send packet
+                  [%sake p=sock q=meal]                 ::  one-way message
                   [%wine p=base]                        ::  lost ownership
               ==                                        ::
     ++  cape                                            ::  end-to-end result
@@ -815,27 +815,71 @@
         (snag mal [%back %bond %buck %carp %lump ~])
       (rsh 3 wix bod)
     ::
-    ++  hork                                            ::  cake to packet
-      |=  kec=cake  ^-  rock
-      !!
-    ::
-    ++  fold                                            ::  posts to gram
-      |=  say=bond  ^-  gram
-      (cat 3 %j (jam say))
-    ::
-    ++  toss                                            ::  gram to posts
-      |=  lod=gram  ^-  bond
-      =+  [mag=(end 3 1 lod) bod=(rsh 3 1 lod)]
-      ?>(=(%j mag) ((hard bond) (cue bod)))
-    --
-=>  |%                                                  ::  protocol engine
-    ++  am
-      |_  fox=fort
-      ++  chew                                          ::  process datagram
+    ++  chew                                          ::  process datagram
         |=  [now=@da bad=band]
         |=  [bax=base rym=rind msg=gram]
         ^-  [p=(list bone) q=fort]
-        !!
+        =+  [who=*(unit base) yek=*(unit code)]
+        =+  gus=(need (~(us go ton.fox) bax))
+        =+  vif=`sink`=+(vif=(~(get by vig.fox) bax) ?~(vif *sink u.vif))
+        =+  wof=`oven`=+(wof=(~(get by von.fox) bax) ?~(wof *oven u.wof))
+        =+  [lub=*(list bone) yow=*(list taxi)]
+        =<  mane
+        |%
+        ++  bran
+          |-  ^-  .
+          ?-    p.rym
+              %none
+            ?-    q.rym
+                %back
+              !!
+            ::
+                %bond
+              !!
+            ::
+                %buck
+              !!
+            ::
+                %carp
+              !!
+            ::
+                %lump
+              ((gnaw now) msg fox) 
+            ::
+                %neck
+              !!
+            ==
+          ::
+              %fast
+            =+  [mag=`hand`(end 7 1 msg) bod=(rsh 7 1 msg)]
+            =+  yoq=(gub:gus mag) 
+            =>  ^+(. .(gus q.yoq))
+            ?>  ?=(^ p.yoq)
+            %=  $
+              p.rym  %none
+              who    [~ p.u.p.yoq]
+              msg    (dy:q:sen:gus q.u.p.yoq msg)
+            ==
+          ::
+              %full                                 ::  signed and sealed
+            =+  mex=((hard ,[p=mark q=@]) (cue msg))
+            !!
+          ::
+              %open
+            =+  ^=  mex
+                %.  (cue msg)
+                (hard ,[p=[p=base q=mark] q=(unit lane) r=will s=bond])
+            !!
+          ==
+        ++  mane
+          ^-  [p=slaw q=fort]
+          :-  [(flop lub) (flop yow)]
+          %=  fox
+            ton  (~(su go ton.fox) gus)
+            vig  (~(put by vig.fox) bax vif)
+            von  (~(put by von.fox) bax wof)
+          ==
+        --
       ::
       ++  gnaw                                          ::  process packet
         |=  now=@da 

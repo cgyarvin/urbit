@@ -19,7 +19,7 @@
   {
     u2_noun a;
 
-    if ( (u2_none == (a = u2_frag(u2_cw_sam, cor))) ) {
+    if ( (u2_none == (a = u2_frag(u2_cv_sam, cor))) ) {
       return u2_bl_bail(wir_r, c3__fail);
     } else {
       return j2_mby(Pt5, trip)(wir_r, a);
@@ -30,6 +30,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pt5, trip)[] = {
-    { ".3", c3__hevy, j2_mb(Pt5, trip), Tier3, u2_none, u2_none },
+    { ".2", c3__hevy, j2_mb(Pt5, trip), Tier3, u2_none, u2_none },
     { }
   };

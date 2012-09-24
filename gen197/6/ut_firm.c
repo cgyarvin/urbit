@@ -173,7 +173,7 @@
       u2_noun cor, fol, pro;
 
       cor = j2_mci(Pt6, ut, firm)(wir_r, van, sut, dib);
-      fol = u2_t(cor);
+      fol = u2_h(cor);
 
       pro = u2_ho_use(wir_r, jet_j, cor, fol);
       if ( u2_none == pro ) return u2_bl_bail(wir_r, c3__fail);
