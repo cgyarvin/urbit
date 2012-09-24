@@ -43,7 +43,8 @@
       [p.guo ..poke(sys q.guo)]
     --
 =>  |%
-    ++  game
+    ++  bath  ,[p=@ta q=@uvH]                           ::  request app/id
+    ++  game                                            ::
       $:  wiz=@da                                       ::  next wakeup time
           sal=@                                         ::  entropy
           ton=town                                      ::  urbit state
@@ -66,7 +67,7 @@
           [%mess p=skin q=gram]                         ::  mid-level receive
           [%give p=lane q=bath r=skin s=gram]           ::  mid-level send
           [%over p=? q=bath]                            ::  &=succeed |=fail
-          [%muss p=well q=hair]                         ::  resolve a message
+          [%muss p=flap q=hair]                         ::  resolve a message
           [%wake p=@da]                                 ::  time has passed
       ==
     --
