@@ -2632,9 +2632,6 @@ BASE_OFILES=\
        $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
-       $(J200_OFILES) \
-       $(J199_OFILES) \
-       $(J198_OFILES) \
        $(J197_OFILES) \
        $(J196_OFILES)
 

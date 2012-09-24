@@ -119,15 +119,15 @@ _nock_hint(u2_noun  zep,                                          //  transfer
       u2_noun tax = u2_wire_tax(u2_Wire);
       u2_noun tac = u2nc(zep, hod);
 
-      if ( c3__spot == zep ) { 
 #if 0
+      if ( c3__spot == zep ) { 
         printf("spot %d/%d : %d/%d\n",
                u2h(u2h(u2t(hod))),
                u2t(u2h(u2t(hod))),
                u2h(u2t(u2t(hod))),
                u2t(u2t(u2t(hod))));
-#endif
       }
+#endif
       u2_wire_tax(u2_Wire) = u2nc(tac, tax);
       {
         pro = pon ? _nock_mool(bus, nex, pon) : _nock_cool(bus, nex);
@@ -436,7 +436,7 @@ _nock_cool(u2_noun bus,
         // c3_assert(!"got 8 (nock)!");
         u2_cx_cell(gal, &b_gal, &c_gal);
         {
-          u2_noun bod = u2nc(bus, _nock_cool(u2k(bus), u2k(b_gal)));
+          u2_noun bod = u2nc(_nock_cool(u2k(bus), u2k(b_gal)), bus);
           u2_noun nex = u2k(c_gal);
 
           u2z(fol);
@@ -747,7 +747,7 @@ _nock_mool(u2_noun  bus,
           wib = _nock_mool(u2k(bus), u2k(b_gal), pon);
           if ( 0 != *pon ) { u2z(bus); u2z(fol); return wib; }
 
-          bod = u2nc(bus, wib);
+          bod = u2nc(wib, bus);
           nex = u2k(c_gal);
           u2z(fol);
 
@@ -862,21 +862,6 @@ _nock_molg(u2_noun  gat,
            u2_noun  sam,
            u2_kode* pon)
 {
-#ifdef NOCK6
-  if ( (u2_no == u2du(gat)) || (u2_no == u2du(u2h(gat))) ) {
-    *pon = 2; return u2_cm_wail();
-  }
-  else {
-    u2_noun cor, fol;
-
-    cor = u2nc(u2nc(u2k(u2h(u2h(gat))), sam), u2k(u2t(gat)));
-    fol = u2k(u2t(gat));
-    u2z(gat);
-
-    //  XX  try to chip with u2_ds_find?  but a rare case...
-    return _nock_mool(cor, fol, pon);
-  }
-#else
   if ( (u2_no == u2du(gat)) || (u2_no == u2du(u2t(gat))) ) {
     *pon = 2; return u2_cm_wail();
   }
@@ -890,7 +875,6 @@ _nock_molg(u2_noun  gat,
     //  XX  try to chip with u2_ds_find?  but a rare case...
     return _nock_mool(cor, fol, pon);
   }
-#endif
 }
 
 /* _nock_moog(): u2_cn_mock() with fly set.
@@ -1041,26 +1025,15 @@ u2_nk_kick(u2_wire wir_r,
   u2_noun xip;
 
   if ( u2_none != (xip = u2_ds_find(wir_r, gat)) ) {
-#ifdef NOCK6
-    u2_noun pro = u2_ho_kick(wir_r, xip, gat, u2_cw_noc);
-#else
     u2_noun pro = u2_ho_kick(wir_r, xip, gat, u2_cv_noc);
-#endif
 
     return pro;
   }
   else {
-#ifdef NOCK6
-    return u2_nk_nock
-      (wir_r,
-       u2_rx(wir_r, gat),
-       u2_st(gat));
-#else
     return u2_nk_nock
       (wir_r,
        u2_rx(wir_r, gat),
        u2_sh(gat));
-#endif
   }
 }
 
@@ -1075,31 +1048,16 @@ u2_nk_mong(u2_wire wir_r,
 {
   u2_noun cor, xip;
 
-#ifdef NOCK6
-  cor = u2_rc
-      (wir_r,
-       u2_rc(wir_r, u2_rx(wir_r, u2_sh(u2_sh(gat))), sam),
-       u2_rx(wir_r, u2_st(gat)));
-#else
   cor = u2_rc
       (wir_r,
        u2_rx(wir_r, u2_sh(gat)),
        u2_rc(wir_r, sam, u2_rx(wir_r, u2_st(u2_st(gat)))));
-#endif
 
   if ( u2_none != (xip = u2_ds_find(wir_r, cor)) ) {
-#ifdef NOCK6
-    u2_noun pro = u2_ho_kick(wir_r, xip, cor, u2_cw_noc);
-#else
     u2_noun pro = u2_ho_kick(wir_r, xip, cor, u2_cv_noc);
-#endif
 
     u2_rz(wir_r, cor);
     return pro;
   }
-#ifdef NOCK6
-  else return u2_nk_nock(wir_r, cor, u2_st(gat));
-#else
   else return u2_nk_nock(wir_r, cor, u2_sh(gat));
-#endif
 }
