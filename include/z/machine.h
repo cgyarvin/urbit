@@ -17,61 +17,9 @@
 */
   /** Data types.
   **/
-    struct u3_z_core;
+    struct u3_zeno;
 
-    /* u3_zj_code:
-    **
-    **   Jet codes.
-    */
-      enum u3_zj_code {
-#       define _zj_wet(name, source, priority) u3_zj_code_##name,
-#       define _zj_dry(name, source, priority) u3_zj_code_##name,
-#         include "z/jets.h"
-#       undef _zj_wet 
-#       undef _zj_dry
-        u3_zj_code_none
-      };
-
-    /* u3_zj_jet: 
-    **
-    **   Live jet structure.
-    */
-      struct u3_zj_jet {
-        /* rid  : mung / short hash of axe
-        ** van  : static argument
-        ** axe  : formula
-        ** mug  : short hash of formula
-        ** pas  : C function to call - argument, cob (dynamic argument)
-        ** w_pri: priority
-        ** nex  : next in hash-search sequence
-        */
-        u3_fox           van;
-        u3_fox           axe;
-        u3_w             w_mug;
-        u3_fox           (*fn_pas)(struct u3_z_core *, u3_fox);
-        u3_w             w_pry;
-        struct u3_zj_jet *jet_nex;
-      };
-
-    /* u3_zj_map:
-    **
-    **   Live map structure.
-    */
-      struct u3_zj_map {
-        /* rid: hash of key
-        ** key: ie, name
-        ** toy: ie, value
-        ** hin: lower-hashed keys
-        ** yon: higher-hashed keys
-        */
-        u3_fox           rid;
-        u3_fox           key; 
-        u3_fox           toy;
-        struct u3_zj_map *map_hin;
-        struct u3_zj_map *map_yon;
-      };
-
-    /* u3_z_core, z: 
+    /* u3_zeno, z: 
     **
     **   The zeno core.
     **
@@ -88,10 +36,10 @@
     **      jato    accelerated execution
     **      sith    tracing and debugging infrastructure
     */
-      struct u3_z_core {
+      struct u3_zeno {
         /** Layer: loom.
         **/
-          struct u3_l_core l;
+          struct u3_loom l;
 
         /** Layer: nock.
         ***
@@ -101,16 +49,12 @@
           struct {
             /* lab: agenda stack
             */
-            u3_ray ray_lab;
-          } n;
+            u3_ray lab_ray;
 
-        /** Layer: watt.  Subject.
-        **/
-          struct {
-            /* tef: subject [type noun]
+            /* bas: basket stack
             */
-            u3_fox tef;
-          } q;
+            u3_ray bas_ray;
+          } n;
 
         /** Layer: jato.  Built-in performance assistance.
         **/
@@ -121,14 +65,10 @@
             */
             jmp_buf          jmp_lum;
             struct u3_zj_jet *jet_rod;
-            u3_w             w_opt;
+            c3_w             w_opt;
           } j;
-    
-        /** Layer: sith.  Tracing and debugging.
-        **/
       };
-      typedef struct u3_z_core *u3_z;
-
+      typedef struct u3_zeno *u3_z;
 
     /* u3_z_bench: performance statistics.
     */
@@ -140,9 +80,9 @@
         ** maz: west watermark (max)
         ** buc: east watermark (max)
         */
-        u3_d d_ruy;
-        u3_w w_cop;
-        u3_w w_vil, w_tew, w_maz, w_buc;
+        c3_d ruy_d;
+        c3_w cop_w;
+        c3_w vil_w, tew_w, maz_w, buc_w;
       };
 
 
@@ -154,7 +94,7 @@
     **   Return 0 if malloc fails.  Free with free().
     */
       u3_z
-      u3_z_new(u3_y y_a);
+      u3_z_new(c3_y y_a);
 
     /* u3_z_do():
     **
@@ -173,8 +113,23 @@
     **   If z_bench is nonzero, set benchmark data.
     */
       u3_fox
-      u3_z_run(u3_z z,
-               u3_fox            *a,
-               u3_fox            b,
-               u3_fox            c,
-               struct u3_z_bench *d);
+      u3_z_run(u3_z               z,
+               u3_fox*            a,
+               u3_fox             b,
+               u3_fox             c,
+               struct u3_z_bench* d);
+    
+    /* u3_z_reset():
+    **
+    **   Reset a failed core 
+    */
+    /* uz_z_mung():
+    **
+    **   As uz_z_run(), but [b] is gate and [c] is sample.
+    */
+      u3_fox
+      u3_z_mung(u3_z              z,
+                u3_fox            *a,
+                u3_fox            b,
+                u3_fox            c,
+                struct u3_z_bench *d);

@@ -1,0 +1,31 @@
+To stage down from X to Y == (X - 1) on vere computer C, steps:
+
+  Clean watt parts:
+
+    - cp -r C/sys/X C/sys/Y
+    - select kernel name in Y:
+        watt.watt (regular)
+        tram.watt (genetically incompatible with stage X)
+        test.watt (barebones testing)
+
+    - rm C/sys/Y/watt.pill
+    - git add C/sys/Y/watt.*
+    - git add C/sys/Y/reck/*.watt
+    - update stage number in C/sys/Y.watt (4 subs)
+
+  Ugly jet parts:
+
+    - make clean; cp -r genX to genY;
+    - git add genY/*.c genY/*.h genY/*/*.c 
+    - update genY/pit.h  (7 subs)
+    - add genY/ofiles in Makefile 
+    - link j2_da drivers in v/main.c
+    - (optional) trim old stages
+      - update FirstKernel in include/v/vere.h
+      - update Pt* in f/coal.c (5 subs) and f/trac.c (2 subs)
+      - remove .o files from Makefile
+
+  Convenient symlinks:
+    - kernel letter L is `@ta`(add 'a' (sub 25 (mod (add 8 Y) 26)))
+    - ln -s C/sys/Y sL
+    - ln -s genY kL

@@ -4,6 +4,7 @@
 */
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <gmp.h>
 #include "all.h"
 #include "z/public.h"
 
@@ -62,7 +63,7 @@ uz_l_except(uz_machine mac,
 uz_noun
 uz_x_exit(uz_machine mac)
 {
-  longjmp(mac->env, u3_cm_exit);
+  longjmp(mac->env, c3__exit);
 }
 
 /* uz_x_tank():
@@ -74,7 +75,7 @@ uz_x_tank(uz_machine mac)
 {
   printf("tank!\n");
   abort();
-  longjmp(mac->env, u3_cm_tank);
+  longjmp(mac->env, c3__tank);
 }
 
 /* uz_x_trip():
@@ -84,7 +85,7 @@ uz_x_tank(uz_machine mac)
 uz_noun
 uz_x_trip(uz_machine mac)
 {
-  longjmp(mac->env, u3_cm_trip);
+  longjmp(mac->env, c3__trip);
 }
 
 /* uz_x_stub():
@@ -96,7 +97,7 @@ uz_x_stub(uz_machine mac)
 {
   printf("stub!\n");
   abort();
-  longjmp(mac->env, u3_cm_stub);
+  longjmp(mac->env, c3__stub);
 }
 
 /* uz_k_nock():
@@ -111,9 +112,9 @@ uz_k_nock(uz_machine mac,
           uz_noun    sub,
           uz_noun    fol)
 {
-  u3_l_rat dez = u3_ln_nock(mac->zen, sub, fol);
+  u3_rat dez = u3_ln_nock(mac->zen, sub, fol);
 
-  if ( dez == u3_l_none ) {
+  if ( dez == u3_none ) {
     return uz_x_exit(mac);
   }
   else return dez;
@@ -196,6 +197,17 @@ uz_k_bytes(uz_machine mac,
   return u3_ln_bytes(mac->zen, len, mem);
 }
 
+/* uz_k_mp():
+**
+**   Create an atom from a GMP integer.  Free the GMP.
+*/
+uz_noun
+uz_k_mp(uz_machine mac,
+        mpz_t      amp)
+{
+  return u3_ln_mp(mac->zen, amp);
+}
+
 /* uz_k_file():
 **
 **  Load the Unix file [unx] as an atom.
@@ -245,7 +257,7 @@ uint8_t
 uz_n_tap(uz_machine mac,
          uz_noun    a)
 {
-  return !u3_lr_tap(mac->zen, a);
+  return !u3_lr_dust(mac->zen, a);
 }
 
 /* uz_n_eq():
@@ -257,7 +269,7 @@ uz_n_eq(uz_machine mac,
         uz_noun    a,
         uz_noun    b)
 {
-  return !u3_lr_eq(mac->zen, a, b);
+  return !u3_lr_sing(mac->zen, a, b);
 }
 
 /* uz_n_mug():
@@ -393,6 +405,33 @@ uz_c_pqr(uz_machine mac,
   return !u3_lr_pqr(mac->zen, a, b, c, d, e);
 }
 
+/* uz_a_mp():
+**
+**   Copy [b] into (a).
+*/
+void
+uz_a_mp(uz_machine mac,
+        mpz_t      a,
+        uz_noun    b)
+{
+  u3_lr_mp(mac->zen, a, b);
+}
+
+/* uz_a_bin(): 
+**
+**   Return the size of [b] in bits, rounded up to
+**   (1 << a). 
+**
+**   For example, (a == 3) returns the size in bytes.
+*/
+uint32_t
+uz_a_bin(uz_machine mac,
+         uint8_t    a,
+         uz_noun    b)
+{
+  return u3_lr_bin(mac->zen, a, b);
+}
+
 /* uz_a_word():
 **
 **   Return word (a) of [b].
@@ -477,9 +516,9 @@ _uz_g_run_gene(uz_machine mac,
   switch ( res ) {
     case 0: return uz_k_cell(mac, uz_ch(mac, cam), val);
 
-    case u3_cm_exit: return uz_x_exit(mac);
-    case u3_cm_trip: return uz_x_trip(mac);
-    case u3_cm_tank: return uz_x_tank(mac);
+    case c3__exit: return uz_x_exit(mac);
+    case c3__trip: return uz_x_trip(mac);
+    case c3__tank: return uz_x_tank(mac);
 
     default: return uz_x_trip(mac);
   }
@@ -627,7 +666,8 @@ uz_t_full(uz_machine mac,
           uz_noun    typ,
           uz_noun    gen)
 {
-  u3_rat rat = u3_b_full(mac->zen, typ, gen);
+  u3_mote how;
+  u3_rat  rat = u3_b_mill(mac->zen, typ, gen, &how);
 
   if ( u3_none == rat ) {
     return uz_x_exit(mac);
@@ -644,7 +684,8 @@ uz_t_make(uz_machine mac,
           uz_noun    typ,
           uz_noun    gen)
 {
-  u3_rat rat = u3_b_full(mac->zen, typ, gen);
+  u3_mote how;
+  u3_rat  rat = u3_b_mill(mac->zen, typ, gen, &how);
 
   if ( u3_none == rat ) {
     return uz_x_exit(mac);
@@ -671,9 +712,9 @@ uz_noun
 uz_t_watt(uz_machine mac,
           uz_noun    src)
 {
-  u3_rat rat = u3_b_watt(mac->zen, src);
+  u3_rat rat = u3_b_read(mac->zen, src);
 
-  if ( u3_l_none == rat ) {
+  if ( u3_none == rat ) {
     return uz_x_exit(mac);
   }
   else return rat;
@@ -691,7 +732,7 @@ uz_t_vere(uz_machine mac,
 {
   u3_rat rat = u3_b_vere(mac->zen, src);
 
-  if ( u3_l_none == rat ) {
+  if ( u3_none == rat ) {
     return uz_x_exit(mac);
   }
   else return rat;
@@ -709,7 +750,7 @@ uz_t_hume(uz_machine mac,
 {
   u3_rat rat = u3_b_hume(mac->zen, src);
 
-  if ( u3_l_none == rat ) {
+  if ( u3_none == rat ) {
     return uz_x_exit(mac);
   }
   else return rat;
@@ -844,15 +885,15 @@ uz_line(uz_machine      machine,
   if ( u3_none == wug ) {
     return uz_fail;
   }
-  jop = u3_b_watt(&z->l, wug);
+  jop = u3_b_read(&z->l, wug);
 
   if ( u3_none == jop ) {
     return uz_exit;
   }
   else {
 #if 0
-    u3_fox vad = u3_ln_cell(z, u3_cm_cube, 0);
-    u3_rat neb = u3_b_full(&z->l, jop, vad);
+    u3_fox vad = u3_ln_cell(z, c3__cube, 0);
+    u3_rat neb = u3_b_mill(&z->l, jop, vad);
 
     if ( u3_none == neb ) {
       return u3_none;
@@ -869,8 +910,8 @@ uz_line(uz_machine      machine,
         default: u3_assert(0); return uz_fail;
 
         case 0:          return uz_good;
-        case u3_cm_exit: return uz_exit;
-        case u3_cm_fail: return uz_fail;
+        case c3__exit: return uz_exit;
+        case c3__fail: return uz_fail;
       }
       return 0;
     }
@@ -880,7 +921,7 @@ uz_line(uz_machine      machine,
     */
     u3_fox zul = u3_h(z, z->q.tef);
     u3_fox heg = u3_t(z, z->q.tef);
-    u3_rat bir = u3_b_full(&z->l, jop, zul);
+    u3_rat bir = u3_b_mill(&z->l, jop, zul);
 
     if ( u3_none == bir ) {
       return u3_none;
@@ -897,15 +938,15 @@ uz_line(uz_machine      machine,
       switch ( gix ) {
         default: u3_assert(0); return uz_fail;
 
-        case u3_cm_exit: return uz_exit;
-        case u3_cm_fail: return uz_fail;
+        case c3__exit: return uz_exit;
+        case c3__fail: return uz_fail;
         case 0: {
 #if 0
             u3_fox            vug;
             vug = u3_ln_nock(z, heg, muc);
             u3_b_print(&z->l, "pure", vug);
             printf("zeno:\n");
-          if ( u3_yes == u3_lr_eq(z, vug, *product) ) {
+          if ( u3_yes == u3_lr_sing(z, vug, *product) ) {
             printf("<good>\n");
           } else printf("<bad>\n");
 #endif

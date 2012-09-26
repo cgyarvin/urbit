@@ -6,18 +6,31 @@
   **/
     /* Canonical integers.
     */
-      typedef uint64_t u3_c_d;
-      typedef int64_t u3_c_ds;
-      typedef uint32_t u3_c_w;
-      typedef int32_t u3_c_ws;
-      typedef uint16_t u3_c_s;
-      typedef int16_t u3_c_ss;
-      typedef uint8_t u3_c_y;
-      typedef int8_t u3_c_ys;
-      typedef uint8_t u3_c_b;   // bit
+      typedef uint64_t c3_d;
+      typedef int64_t c3_ds;
+      typedef uint32_t c3_w;
+      typedef int32_t c3_ws;
+      typedef uint16_t c3_s;
+      typedef int16_t c3_ss;
+      typedef uint8_t c3_y;   // byte
+      typedef int8_t c3_ys;   // signed byte
+      typedef uint8_t c3_b;   // bit
 
-    /* Deprecated integers.  Uncomment if used.
+      typedef uint8_t c3_t;   // boolean
+      typedef uint8_t c3_g;   // 32-bit log - 0-31 bits
+      typedef uint32_t c3_l;  // little; 31-bit unsigned integer
+      typedef uint32_t c3_m;  // mote; also c3_l; LSB first a-z 4-char string.
+
+    /* C true and false; boolean logic
     */
-      typedef char u3_c_c;      // does not match int8_t or uint8_t
-      typedef int  u3_c_i;      // int - really bad 
-      // typedef u3_w u3_c_p;   // pointer-length int - uncomment if needed 
+#     define c3_true  1
+#     define c3_false 0
+#     define c3_and(x, y)   ((x) && (y))
+#     define c3_or(x, y)    ((x) || (y))
+
+    /* Deprecated integers. 
+    */
+      typedef char      c3_c;      // does not match int8_t or uint8_t
+      typedef int       c3_i;      // int - really bad 
+      typedef uintptr_t c3_p;      // pointer-length uint - really really bad
+      typedef intptr_t c3_ps;      // pointer-length int - really really bad

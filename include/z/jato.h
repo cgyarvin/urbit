@@ -4,54 +4,85 @@
 */
   /** Data structures.
   **/
-    /* zj_spec: 
+    /* u3_zj_code:
     **
-    **   A spec specification.  Used at load time and not again.
+    **   Jet codes.
     */
-      struct u3_zj_spec {
-        /* src: watt source for gate (eg, "add").
-        ** pry: priority group, 0-16.
-        ** pas: jet function, or 0.
-        */
-        const u3_c_c *c_src;
-        u3_c_y       y_pry;
-        u3_fox       (*fn_pas)(u3_z, u3_fox);
+      enum u3_zj_code {
+#       define _zj_wet(nam, mug) u3_zj_code_##nam,
+#       define _zj_dry(nam, mug) u3_zj_code_##nam,
+#         include "z/jets.h"
+#       undef _zj_wet 
+#       undef _zj_dry
+        u3_zj_code_none
       };
 
+    /* zj_def:
+    **
+    **   A jet definition.  Populated by installation.
+    */
+      struct u3_zj_def {
+        /* Name of the jet.
+        */
+        const c3_c *nam;
+
+        /* Battery mug - if 0, not known.
+        */
+        c3_w mug;
+
+        /* Fun, or null.
+        */
+        u3_fox (*pas)(u3_z, u3_fox);
+
+        /* Priority, as derived.
+        */
+        uint32_t pri;
+
+        /* Battery, as installed.
+        */
+        u3_fox bat;
+
+        /* Context, as installed.
+        */
+        u3_fox con;
+
+        /* Next, in linear (XX) search list.
+        */
+        struct u3_zj_def *nex;
+      };
 
   /** Functions.
   **/
-    /** Upcalls from zeno.
+    /** Called from main engine.
     **/
-      /* u3_zj_boot(): 
+      /* u3_zj_load():
       **
-      **   Initialize the jet system.
-      **
-      **   opt: optimization level (0-15)
+      **   Load jet by prop and battery.
       */
-        u3_flag
-        u3_zj_boot(u3_z z,
-                   u3_y y_opt);
+        void
+        u3_zj_load(u3_z   z,
+                   u3_fox pup,
+                   u3_fox bat);
 
       /* u3_zj_look():
       **
-      **   Look for a jet match - gate, [[cob van] axe].
+      **   Look for a jet match - gate, [[sam con] bat].
       */
         enum u3_zj_code 
         u3_zj_look(u3_z   z,
-                   u3_fox axe);
+                   u3_fox bat);
 
-      /* u3_zj_axe():
+      /* u3_zj_bat():
       **
-      **   Return the axe formula for a jet.
+      **   Return the bat formula for a jet.
       */
         u3_fox
-        u3_zj_axe(u3_z            z,
+        u3_zj_bat(u3_z            z,
                   enum u3_zj_code code_sax);
 
       /* u3_zj_fire():
       **
-      **   Fire a jet - fig, [[cob van].hub axe].
+      **   Fire a jet - subject, [[sam con] bat].
       **
       **   Set *pod and/or return error condition:
       **
@@ -63,14 +94,21 @@
         u3_mote
         u3_zj_fire(u3_z            z,
                    u3_fox          *pod,
-                   enum u3_zj_code code_sax,
-                   u3_fox          fig);
+                   enum u3_zj_code sax,
+                   u3_fox          sub);
 
 
     /** C environment for jet programmers.  Ideally pleasurable.
     ***
     *** Jet programmers may use lr functions, but not lm or ln.
+    *** Replace with appropriate zc.
     **/
+      /** Macros.
+      **/
+#       define u3_zh(z, n)      u3_zc_use(z, u3_lr_h(z, n))
+#       define u3_zt(z, n)      u3_zc_use(z, u3_lr_t(z, n))
+#       define u3_zf(z, a, n)   u3_zc_use(z, u3_lr_twig(z, a, n))
+
       /** Administrative and miscellaneous.
       **/
         /* u3_zc_malloc():
@@ -80,7 +118,7 @@
         */
           void *
           u3_zc_malloc(u3_z z,
-                       u3_w w_led);
+                       c3_w w_led);
 
         /* u3_zc_depart():
         **
@@ -124,6 +162,13 @@
           u3_zc_tank(u3_z    z,
                      u3_mote gaz);
 
+        /* u3_zc_use():
+        **
+        **   Exit iff (rat) is none.
+        */
+          u3_fox
+          u3_zc_use(u3_z   z,
+                    u3_rat rat);
 
       /** Jet and interpreter activation.
       **/
@@ -134,7 +179,7 @@
           u3_fox
           u3_zc_fire(u3_z            z,
                      enum u3_zj_code code_sax,
-                     u3_fox          cob);
+                     u3_fox          sam);
 
         /* u3_zc_nock():
         **
@@ -175,8 +220,8 @@
         */
           u3_fox
           u3_zc_bytes(u3_z       z,
-                      u3_w       w_a,
-                      const u3_y *y_b);
+                      c3_w       w_a,
+                      const c3_y *y_b);
 
         /* u3_zc_string():
         **
@@ -184,7 +229,7 @@
         */
           u3_fox
           u3_zc_string(u3_z       z,
-                       const u3_c *c_a);
+                       const c3_c *c_a);
 
         /* u3_zc_cell(): 
         **
@@ -219,5 +264,5 @@
         */
           u3_fox
           u3_zc_words(u3_z       z,
-                      u3_w       w_a,
-                      const u3_w *w_b);
+                      c3_w       w_a,
+                      const c3_w *w_b);

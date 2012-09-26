@@ -1,162 +1,184 @@
+new: 
+  bar |
+  bas \
+  buc $
+  cab _
+  cen %
+  col :
+  com ,
+  doq "
+  dot .
+  fas /
+  gal < 
+  gar >
+  hax #
+  hep - 
+  kel {
+  ker }
+  ket ^
+  lus +
+  pel (
+  pam &
+  per )
+  pat @
+  sel [
+  sem ;
+  ser ]
+  sig ~
+  soq '
+  tar *
+  tic `
+  tis =
+  wut ?
+  zap !
+
+old:
+  del  <   gal
+  pel  )   par
+  bar  |   bar
+  hes  $   hes
+  sed  }   ker
+  bot   '  soc
+  ket  ^   ket
+  sep  -   mus
+  cab   _  cab
+  lep  (   pal
+  sig  ~   sig
+  com   ,  com
+  led  >   gar
+  tam  ;   sem
+  cas   ?  wut
+  lyc  =   tis
+  tar  *   tar
+  dax   #  hax
+  mit  %   cen
+  tec  `   tic
+  deg   :  col
+  ned  ]   ser
+  tob  "   doc
+  den   [  sel
+  nov  \   bas
+  von  /   fas
+  des   {  kel
+  pam  &   pam
+  wat  @   pat
+  dot   .  dot      
+  pes  +   lus
+  zap  !   zap
+
 Watt GTO: Gran Tabula Operazioni 
 
-(Copied from watt.watt - any discrepancies favor watt.watt.)
+  |=  %brts  AM  "bartis"  "funk"  declare a function
 
-Gene - AST
-      gene
-    |?
+
+
+(Copied from watt.watt - recopy if in doubt.)
+::::
+::  
+  ++  gene
+    $&  [p=gene q=gene]
+    $%
+      [%% p=axis]
     ::
-      [%bean p=*<%atom %blur %cell %flag %null>]
-      [%bone p=*]
-      [%frag p=*axis]
-      [%pane p=*term]
+      [%brts p=gene q=gene]
+      [%brls p=gene q=gene]
+      [%brdt p=gene]
+      [%brhp p=gene]
+      [%brtr p=gene q=gene]
     ::
-      [%chan p=*bank]                             ::  ?&  askamp
-      [%dorn p=*bank]                             ::  ?|  askbar
-      [%feng p=*gene q=*gene r=*gene]             ::  ?~  asksig
-      [%grel p=*gene q=*rack]                     ::  ?-  asknub
-      [%gram p=*gene q=*gene]                     ::  ?>  askred
-      [%lort p=*gene q=*gene r=*gene]             ::  ?.  askdot
-      [%marg p=*gene q=*gene]                     ::  ?<  askder
-      [%plin p=*gene q=*gene]                     ::  ?=  askben
-      [%moze p=*gene q=*bank]                     ::  ?*  askras
-      [%trol p=*gene q=*gene r=*gene]             ::  ?:  askdig
-      [%vern p=*gene]                             ::  ?!  askhop
+      [%clkt p=gene q=gene r=gene s=gene]
+      [%clhp p=gene q=gene]
+      [%clls p=gene q=gene r=gene]
+      [%clsg p=(list gene)]
+      [%cltr p=(list gene)]
     ::
-      [%fron p=*gene q=*gene r=*bank]             ::  |@  barpat
-      [%lonk p=*gene q=*bank]                     ::  |~  barsig
-      [%lome p=*gene]                             ::  |=  barben
-      [%pank p=*menu]                             ::  |*  barras
-      [%rond p=*bank]                             ::  |?  barask
-      [%sunt p=*gene]                             ::  |:  bardig
-      [%tash p=*menu]                             ::  |%  barmit
-      [%vamp p=*gene]                             ::  |-  barnub
+      [%cntr p=twig q=gene r=(list >[p=gene q=gene])]
+      [%cncl p=gene q=gene]
+      [%cndt p=gene q=gene]
+      [%cnkt p=gene q=gene r=gene s=gene]
+      [%cnbc p=term]
+      [%cnls p=gene q=gene r=gene]
+      [%cnhp p=gene q=(list gene)]
+      [%cnhx p=twig]
+      [%cnsg p=twig q=gene r=gene]
+      [%cnts p=twig q=(list >[p=gene q=gene])]
     ::
-      [%claf p=*gene q=*gene]                     ::  =<  bender
-      [%flac p=*gene q=*gene]                     ::  =>  benred
-      [%gant p=*gene q=*gene]                     ::  =+  benpod
-      [%tang p=*gene q=*gene]                     ::  =-  bennub
+      [%dtkt p=gene]
+      [%dtls p=gene]
+      [%dtpt p=term q=@]
+      [%dtsg p=term q=*]
+      [%dttr p=gene q=gene]
+      [%dtts p=gene q=gene]
+      [%dtwt p=gene]
     ::
-      [%prex p=*bank]                             ::  :*  digras
-      [%slax p=*bank]                             ::  :~  digsig
-      [%quax p=*gene q=*gene r=*gene s=*gene]     ::  :^  dighat
-      [%trex p=*gene q=*gene r=*gene]             ::  :+  digpod
-      [%twix p=*gene q=*gene]                     ::  :-  dignub
+      [%bcbr p=gene q=gene]
+      [%bccb p=gene]
+      [%bccl p=(list gene)]
+      [%bccn p=gene q=(list gene)]
+      [%bcgr p=gene]
+      [%bckt p=gene]
+      [%bcpm p=gene q=gene]
+      [%bctr p=gene]
+      [%bcts p=?([%atom odor] %noun %cell %flag %null)]
+      [%bcwt p=gene q=(list gene)]
     ::
-      [%dust p=*gene]                             ::  .?  dotask
-      [%sail p=*gene q=*gene]                     ::  .*  dotras
-      [%sing p=*gene q=*gene]                     ::  .=  dotben
-      [%vint p=*gene]                             ::  .^  dothat
+      [%ktbr p=gene]
+      [%ktls p=gene q=gene]
+      [%ktdt p=gene q=gene]
+      [%ktgl p=gene q=gene]
+      [%ktgr p=gene q=gene]
+      [%kthp p=gene q=gene]
+      [%ktpm p=gene]
+      [%ktsg p=gene]
+      [%ktts p=term q=gene]
+      [%ktwt p=gene]
     ::
-      [%bran p=*term q=*gene]                     ::  ^=  hatben
-      [%cast p=*gene q=*gene]                     ::  ^-  hatnub
-      [%grit p=*gene]                             ::  ^@  hatpat
-      [%mave p=*gene]                             ::  ^*  hatras
-      [%pock p=*gene q=*gene]                     ::  ^+  hatdig
-      [%stil p=*gene q=*gene]                     ::  ^:  hatpod
-      [%velt p=*gene q=*gene]                     ::  ^%  hatmit
-      [%wost p=*gene]                             ::  ^~  hatsig
+      [%brcb p=gene q=(map term foot)]
+      [%brcn p=(map term foot)]
+      [%brkt p=gene q=(map term foot)]
     ::
-      [%fist p=*gene]                             ::  ;+  lompod
-      [%mast p=*gene]                             ::  ;-  lomnub
+      [%sgbr p=gene q=gene]
+      [%sgcl p=[p=@ q=@] q=gene]
+      [%sgcn p=chop q=gene r=(list >[p=term q=gene]) s=gene]
+      [%sgdt p=chop q=gene]
+      [%sggl p=$|(term [p=term q=gene]) q=gene]
+      [%sggr p=$|(term [p=term q=gene]) q=gene]
+      [%sgbc p=term q=gene]
+      [%sghx p=term q=gene]
+      [%sgkt p=gene]
+      [%sgls p=@ q=gene]
+      [%sghp p=@ q=gene]
+      [%sgpm p=gene q=gene]
+      [%sgsg p=gene q=gene]
+      [%sgts p=gene q=gene]
     ::
-      [%bong p=*gene q=*gene r=*gene]             ::  %+  mitpod
-      [%frit p=*gene q=*gene]                     ::  %_  mitcab
-      [%gnam p=*gene q=*gene]                     ::  %.  mitdot
-      [%mack p=*rope q=*rack]                     ::  %=  mitben
-      [%mong p=*bank]                             ::  %-  mitnub  
-      [%teck p=*gene]                             ::  %*  mitras
-      [%tong p=*gene q=*gene r=*gene s=*gene]     ::  %^  mithat
+      [%smcl p=gene q=(list gene)]
+      [%smdq p=(list goop)]
+      [%smsg p=gene q=(list gene)]
     ::
-      [%zalt p=*gene]                             ::  !:  hopdig
-      [%zemp p=*spot q=*gene]
-      [%zike ~]                                   ::  !!  hopven
-      [%zoot ~]                                   ::  !%  hopmit
-      [%zole p=*gene]                             ::  !`  hoptic
-      [%zush p=*gene]                             ::  !#  hopdax
+      [%tsgl p=gene q=gene]
+      [%tsgr p=gene q=gene]
+      [%tsls p=gene q=gene]
+      [%tshp p=gene q=gene]
+    ::
+      [%wtbr p=(list gene)]
+      [%wthp p=gene q=(list >[p=gene q=gene])]
+      [%wtcl p=gene q=gene r=gene]
+      [%wtcn p=gene q=gene]
+      [%wtdt p=gene q=gene r=gene]
+      [%wtts p=gene q=gene]
+      [%wtgl p=gene q=gene]
+      [%wtgr p=gene q=gene]
+      [%wtls p=gene q=gene r=(list >[p=gene q=gene])]
+      [%wtpm p=(list gene)]
+      [%wtsg p=gene q=gene r=gene]
+      [%wtzp p=gene]
+    ::
+      [%zpcb p=spot q=gene]
+      [%zpcm p=gene q=gene]
+      [%zpcn ~]
+      [%zpfs p=gene]
+      [%zpsm p=gene q=gene]
+      [%zpts p=gene]
+      [%zpzp ~]
     ==
-Misc
-  ::
-    axis  &@
-    bank  (list gene)
-    cord  *<^+(@ *term) [%frag p=*axis] [%pith p=*term] [%port p=*term]>
-    door  &[p=*axis q=*type r=*gene]
-    home  (list term)
-    menu  (list &[p=*term q=*gene])
-    plan  &[p=*axis q=*(unit door) r=*type]
-    rack  (list &[p=*gene p=*gene])
-    rope  (list cord)
-    spec  *<[%none ~] [%leaf p=*term q=*gene] [p=^+(^ *spec) q=*spec]>
-    spot  &[p=[p=@ q=@] [[p=@ q=@]]
-  ::
-
-Nock formula
-  ::
-  ::::::::
-  ::
-      tool
-    |?
-      [%0 p=@]
-      [%1 p=*]
-      [%2 p=*tool q=*tool r=*tool]
-      [%3 p=*tool q=*tool]
-      [%4 p=*tool]
-      [%5 p=*tool]
-      [%6 p=*tool q=*tool]
-      [p=^%(^ *tool) q=*tool]
-    ==
-
-Tack: change to data
-  ::
-  ::::::::
-  ::
-      tack
-    |?
-      ~ 
-      [%leaf p=*type] 
-      [%name p=*term q=*tack] 
-      [%pair p=*tack q=*tack]
-    ==
-
-Type
-  ::
-  ::::::::
-  ::
-      type
-    |?
-      %blur
-      %blot
-      %atom
-      [%cell p=*type q=*type]
-      [%core p=*type q=*<[%mono p=*spec] [%poly p=*type q=*spec]>]
-      [%cube p=*]
-      [%face p=*term q=*type]
-      [%fork p=*type q=*type]
-      [%fuse p=*type q=*type]
-      [%hold p=*type q=*gene]
-    ==
-  ::
-
-Axes
---
-  be - 2  to + 3  ga < 2  lu > 3 
-
-  -+<>  "betogalu"  .21
-
-Signs (ven = repeat)
---
-  amp   &       der   <       nub   -     tic   `
-  ask   ?       dot   .       pat   @     tep   "
-  bar   |       dus   }       pel   )
-  ben   =       hat   ^       pod   +
-  buc   $       hop   !       ras   *
-  bup   '       lom   ;       red   >
-  cab   _       lep   (       sac   \
-  com   ,       mit   %       sol   /
-  dax   #       mon   ]       sud   {
-  dig   :       nom   [       sig   ~
-
-  ace  == " "
-  lit  == "\n"
-  bosh == "::"
-

@@ -4,16 +4,16 @@
 **
 ** Prefixes:
 **
-**   u3_zn  (zeno internal - nolo; the nolo interpreter)
+**   u3_zn  (zeno internal - zeno; the zeno interpreter)
 **
 ** Description:
 **
-**   Agent structures for nolo.
+**   Agent structures for zeno.
 **
-**   nolo is a double-stack machine inside the clam.  It has one
+**   zeno is a double-stack machine inside the loom.  It has one
 **   register, (lab), which is a stack of agents to execute.
 **
-**   In general, a nolo agent pops itself off (cap), allocates its 
+**   In general, a zeno agent pops itself off (cap), allocates its 
 **   result on (hat), and pushes a pointer to it on (cap).
 **
 **   More precisely, the final effect of every agent, unless it errs
@@ -21,7 +21,7 @@
 **
 **     - set (lab) to (poq) - the next agent
 **     - set (cap) to (lid)
-**     - push a result noun, [gus], on z->l.ray_cap
+**     - push a result noun, [gus], on z->l.cap_ray
 **
 **   Some agents do this in one step; others apply a sequence.
 **
@@ -34,23 +34,18 @@
     **
     **   Reference a forge field.
     */
-#     define _zn_forge(z, agent, type, field) \
-        u3_l_at_ray(&z->l, \
-                    ((agent) + \
-                     ( ((u3_w *)&((struct u3_zn_forge_##type *)0)->field) - \
-                       ((u3_w *)0) ) \
-                    ) \
-                   )
+#     define _zn_forge(z, agent, kind, field) \
+        u3_to(&z->l, agent, struct u3_zn_forge_##kind, field)
 
     /* _zn_anvil():
     **
     **   Reference an anvil field.
     */
 #     define _zn_anvil(z, agent, type, field) \
-        u3_l_at_ray(&z->l, \
+        u3_at_ray(&z->l, \
                     ((agent) + \
-                     ( ((u3_w *)&((struct u3_zn_anvil_##type *)0)->field) - \
-                       ((u3_w *)0) ) \
+                     ( ((c3_w *)&((struct u3_zn_anvil_##type *)0)->field) - \
+                       ((c3_w *)0) ) \
                     ) \
                    )
 
@@ -59,15 +54,15 @@
     **   Push a forged agent on (cap).
     */
 #     define _zn_push_forge(z, type) \
-        ( (z->l.ray_cap += u3_wiseof(struct u3_zn_forge_##type)) - \
-          u3_wiseof(struct u3_zn_forge_##type) )
+        ( (z->l.cap_ray += c3_wiseof(struct u3_zn_forge_##type)) - \
+          c3_wiseof(struct u3_zn_forge_##type) )
 
     /* _zn_push_word()
     **
     **   Push a word on (cap).
     */
 #     define _zn_push_word(z, word) \
-        ( (*u3_l_at_ray(&z->l, z->l.ray_cap) = (word)), z->l.ray_cap++ )
+        ( (*u3_at_ray(&z->l, z->l.cap_ray) = (word)), z->l.cap_ray++ )
 
 
   /** Data types.
@@ -76,7 +71,7 @@
     **/
       /* u3_zn_operator:
       **
-      **  Operators.  Motes, will be enums.
+      **  Operators.  Motes now, will be enums.
       */
         typedef u3_mote u3_zn_oper;
 
@@ -89,9 +84,9 @@
           ** poq: next agent
           ** lid: cap at termination.
           */
-          u3_zn_oper oper_ger;
-          u3_ray     ray_poq;
-          u3_ray     ray_lid;
+          u3_zn_oper ger_op;
+          u3_ray     poq_ray;
+          u3_ray     lid_ray;
         };
       
       /* u3_zn_retreat:
@@ -103,20 +98,41 @@
           /* mat: saved mat.
           ** lip: base of buffer.
           */
-          u3_ray ray_mat;
-          u3_ray ray_lip;
+          u3_ray mat_ray;
+          u3_ray lip_ray;
         };
 
+      /* u3_zn_mane:
+      **
+      **    Structures for mane memory management.
+      */
+        struct u3_zn_mane {
+          /* Free lists per word count, 2^28 down to 2^4.
+          */
+          u3_ray lib_ray[25];
+        };
+        struct u3_zn_mane_bloc {
+          /* Bit 0
+          */
+          c3_w wor_w;
+
+          /* Next bloc in free list.
+          */
+          u3_ray nex_ray;
+        };
 
     /** Forge and anvil structures, with opcodes:
     ***
+    ***   bask
     ***   cons
-    ***   cook
+    ***   nock
     ***   fine
     ***   drop
+    ***   hint
     ***   goto
-    ***   link
-    ***   pick
+    ***   flac
+    ***   gant
+    ***   trol
     ***   root  [inc, tap, eq]
     ***   tail
     **/
@@ -129,6 +145,35 @@
         };
         struct u3_zn_anvil_any {
           struct u3_zn_forge_any f;
+        };
+
+      /* bask:
+      **
+      **   Memory basket.  Capacity is between agent and cap,
+      **   ie between forge and anvil, meaning anvil structure 
+      **   cannot be used explicitly.
+      */
+        struct u3_zn_forge_bask {
+          struct u3_zn_control c;
+          struct {
+            /* Number of words in basket, counting agent.
+            */
+            c3_w wor_w;
+
+            /* Parent basket, or 0.
+            */
+            u3_ray par_ray;
+
+            /* Manual memory allocator.
+            */
+            struct u3_zn_mane m;
+          } s;
+        };
+        struct u3_zn_anvil_bask {
+          struct u3_zn_forge_bask f;
+          struct {
+            u3_fox gus;
+          } d;
         };
 
       /* cons:
@@ -149,22 +194,22 @@
           } d;
         };
 
-      /* cook: 
+      /* nock: 
       ** 
       **   Compute a static formula on a static noun.
       */
-        struct u3_zn_forge_cook {
+        struct u3_zn_forge_nock {
           struct u3_zn_control c;
           struct {
-            /* lan: subject.
+            /* bus: subject.
             ** sef: formula.
             */
-            u3_fox lan;
+            u3_fox bus;
             u3_fox sef;
           } s;
         };
-        struct u3_zn_anvil_cook {
-          struct u3_zn_forge_cook f;
+        struct u3_zn_anvil_nock {
+          struct u3_zn_forge_nock f;
         };
 
       /* drop:
@@ -210,7 +255,7 @@
           struct {
             /* sax: jet code.
             */
-            u3_w w_sax;
+            c3_w sax_w;
           } s;
         };
         struct u3_zn_anvil_jet {
@@ -222,11 +267,11 @@
           } d;
         };
 
-      /* link:
+      /* flac:
       **
       **   Compute a static formula on a dynamic noun.
       */
-        struct u3_zn_forge_link {
+        struct u3_zn_forge_flac {
           struct u3_zn_control c;
           struct u3_zn_retreat r;
           struct {
@@ -235,10 +280,58 @@
             u3_fox dep;
           } s;
         };
-        struct u3_zn_anvil_link {
-          struct u3_zn_forge_link f;
+        struct u3_zn_anvil_flac {
+          struct u3_zn_forge_flac f;
           struct {
             /* gus: subject.
+            */
+            u3_fox gus;
+          } d;
+        };
+
+      /* gant:
+      **
+      **   Compute a static formula on a dynamic noun, consed with subject.
+      */
+        struct u3_zn_forge_gant {
+          struct u3_zn_control c;
+          struct u3_zn_retreat r;
+          struct {
+            /* bus: original subject.
+            ** dep: static formula.
+            */
+            u3_fox bus;
+            u3_fox dep;
+          } s;
+        };
+        struct u3_zn_anvil_gant {
+          struct u3_zn_forge_gant f;
+          struct {
+            /* gus: subject.
+            */
+            u3_fox gus;
+          } d;
+        };
+
+      /* hint:
+      **
+      **   Compute a static formula on a dynamic noun.
+      */
+        struct u3_zn_forge_hint {
+          struct u3_zn_control c;
+          struct u3_zn_retreat r;
+          struct {
+            /* bus: original subject.
+            ** dep: static formula.
+            */
+            u3_fox bus;
+            u3_fox dep;
+          } s;
+        };
+        struct u3_zn_anvil_hint {
+          struct u3_zn_forge_hint f;
+          struct {
+            /* gus: computed hint.
             */
             u3_fox gus;
           } d;
@@ -266,25 +359,25 @@
           } d;
         };
 
-      /* pick: 
+      /* trol: 
       **
       **   Branch.
       */
-        struct u3_zn_forge_pick {
+        struct u3_zn_forge_trol {
           struct u3_zn_control c;
           struct u3_zn_retreat r;
           struct {
-            /* lan: subject.
+            /* bus: subject.
             ** feg: then formula
             ** paf: else formula
             */
-            u3_fox lan;
+            u3_fox bus;
             u3_fox feg;
             u3_fox paf;
           } s;
         };
-        struct u3_zn_anvil_pick {
-          struct u3_zn_forge_pick f;
+        struct u3_zn_anvil_trol {
+          struct u3_zn_forge_trol f;
           struct {
             /* gus: condition value
             */
@@ -317,11 +410,11 @@
           struct u3_zn_control c;
           struct u3_zn_retreat r;
           struct {
-            /* lan: subject
-            ** fus: formula
+            /* bus: subject
+            ** fel: formula
             */
-            u3_fox lan;
-            u3_fox fus;
+            u3_fox bus;
+            u3_fox fel;
           } s;
         };
         struct u3_zn_anvil_tail {
