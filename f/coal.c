@@ -118,9 +118,12 @@ u2_cf_flat_date(u2_noun pas)
     return 0;
   } else {
     free(pas_c);
-
+#if defined(U2_OS_linux)
+    return ( ((c3_d)pas_s.st_mtime) );
+#elif defined(U2_OS_osx)
     return ( ((c3_d)pas_s.st_mtimespec.tv_sec) +
              ((c3_d)(pas_s.st_mtimespec.tv_nsec / 1000)) );
+#endif
   }
 }
 

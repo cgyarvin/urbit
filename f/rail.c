@@ -371,7 +371,7 @@ _rl_bloq_make(u2_ray ral_r,
               c3_w   siz_w,
               c3_w   use_w)
 {
-  c3_assert(siz_w >= 6);
+  c3_assert(siz_w >= 5);
   {
     *u2_at_ray(box_r) = siz_w;
     *u2_at_ray(box_r + 1) = use_w;

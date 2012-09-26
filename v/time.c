@@ -104,6 +104,21 @@ u2_time_in_ts(struct timespec* tim_ts)
   return u2_time_in_tv(&tim_tv);
 }
 
+#if defined(U2_OS_linux)
+/* u2_time_t_in_ts(): urbit time from time_t.
+*/
+u2_atom
+u2_time_t_in_ts(time_t tim)
+{
+  struct timeval tim_tv;
+
+  tim_tv.tv_sec = tim;
+  tim_tv.tv_usec = 0;
+
+  return u2_time_in_tv(&tim_tv);
+}
+#endif // defined(U2_OS_linux)
+
 /* u2_time_out_ts(): struct timespec from urbit time.
 */
 void
