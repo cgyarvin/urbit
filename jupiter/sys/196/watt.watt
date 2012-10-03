@@ -1,6 +1,82 @@
+::::
+::              Sten stage 196 (reflexive).  
+::              This file is in the public domain.
 ::
-::              Watt kernel 196.  This file is in the public domain.
+::    A noun is an atom or a cell.  An atom is any natural number.  
+::    A cell is an ordered pair of nouns.
 ::
+::    Noun A is this file, sten.sten, encoded as an atom, LSB first.
+::    Noun B is the accompanying (jam) file, sten.pill, encoded
+::    as an atom LSB first and expanded with (cue).  Noun C is
+::    the cell [A B].
+::
+::    A is marked above with a stage number (X) and a constraint,
+::    either "reflexive" (normal) or "transitional" (used only 
+::    for language changes).  Stage numbers count down; at stage
+::    0, A is (supposedly) final.
+::
+::    If the current stage X is "reflexive", N(C) equals B, where
+::    N (nock) is the * reduction in the pseudocode below:
+::    
+::        nock(a)           *a
+::        [a b c]           [a [b c]]
+::      
+::        ?[a b]            0
+::        ?a                1
+::        +a                1 + a
+::        =[a a]            0
+::        =[a b]            1
+::      
+::        /[1 a]            a
+::        /[2 a b]          a
+::        /[3 a b]          b
+::        /[(a + a) b]      /[2 /[a b]]
+::        /[(a + a + 1) b]  /[3 /[a b]]
+::      
+::        *[a [b c] d]      [*[a b c] *[a d]]
+::      
+::        *[a 0 b]          /[b a]
+::        *[a 1 b]          b
+::        *[a 2 b c]        *[*[a b] *[a c]]
+::        *[a 3 b]          ?*[a b]
+::        *[a 4 b]          +*[a b]
+::        *[a 5 b]          =*[a b]
+::      
+::        *[a 6 b c d]      *[a 2 [0 1] 2 [1 c d] [1 0] 2 [1 2 3] [1 0] 4 4 b]
+::        *[a 7 b c]        *[a 2 b 1 c]
+::        *[a 8 b c]        *[a 7 [[7 [0 1] b] 0 1] c]
+::        *[a 9 b c]        *[a 7 c 0 b]
+::        *[a 10 b c]       *[a c]
+::        *[a 10 [b c] d]   *[a 8 c 7 [0 2] d]
+::      
+::        +[a b]            +[a b]
+::        =a                =a
+::        /a                /a
+::        *a                *a
+::
+::    Ie, the pair [A B] is a self-compiling compiler against N.
+::
+::    This self-compiling compiler defines its own language, Sten.
+::    (The Nock definition above is pseudocode; the Sten kernel below 
+::    is code.)  Sten is a pure, strict, higher-order typed functional 
+::    language, not all that much like either Lisp or Haskell/OCaml.
+::    Its relationship to Nock is much like that of C to assembler.
+::
+::    If stage X is "transitional," the compiler compiles not itself
+::    but its successor stage Y=X-1.  Thus, N(A_Y B_X) equals B_Y.
+::    (Of course this constraint holds also for reflexive stages.)
+::    Sten may thus change arbitrarily across stages, though ideally
+::    of course it won't.
+::
+::    Nock above is the complete interpreter and semantically closed.
+::    This small definition is designed to be permanently frozen.
+::    All errors yield bottom, ie, do not terminate.  A naive 
+::    implementation is obviously not efficient.  If deployment
+::    were no concern, however, instructions 6-10 could be elided.
+::
+::    (One fun exercise: write a decrement formula, not using 7-10.
+::    More fun is to also eschew 6.)
+::::
 =>  src=.
 ?>  ?=(@ src)
 %.  src
@@ -29,7 +105,7 @@
   ++  dec
     ~/  %dec
     |=  a=@
-    ~|  %dec
+    ~|  'decrement zero'
     ^-  @
     ?<  =(0 a)
     =+  b=@
@@ -42,7 +118,7 @@
     ~/  %div
     |=  [a=@ b=@]
     ^-  @
-    ~|  %div
+    ~|  'divide by zero'
     ?<  =(0 b)
     =+  c=@
     |-
@@ -109,7 +185,7 @@
   ++  sub
     ~/  %sub
     |=  [a=@ b=@]
-    ~|  sub
+    ~|  'subtract underflow'
     ^-  @
     ?:  =(0 b)
       a
@@ -994,9 +1070,9 @@
     |*  [a=_,* b=_,*]
     $|(~ [n=[p=a q=b] l=(map a b) r=(map a b)])
   ::
-  ++  que
+  ++  qeu
     |*  a=_,* 
-    $|(~ [n=a l=(que a) r=(que a)])
+    $|(~ [n=a l=(qeu a) r=(qeu a)])
   ::
   ++  set
     |*  a=_,*
@@ -1198,7 +1274,7 @@
   ::      Tier 4c, queues
   ::
   ++  to
-    |_  a=(que)
+    |_  a=(qeu)
     +-  gas
       |=  b=(list _?>(?=(^ a) n.a))
       |-  ^+  a
@@ -1722,7 +1798,7 @@
   ++  wut  (just '?')
   ++  zap  (just '!')
   ::
-  ::      tier 5b/5, parsing: watty whitespace & termination
+  ::      tier 5b/5, parsing: stenny whitespace & termination
   ::
   ++  dog  ;~(plug dot gay)
   ++  doh  ;~(plug ;~(plug hep hep) gay)
@@ -2544,8 +2620,8 @@
     ::
     ++  zust
       ;~  pose
-        (stag %ib bip:ag)
-        (stag %il lip:ag)
+        (stag %is bip:ag)
+        (stag %if lip:ag)
         (stag %f ;~(pose (cold & (just 'y')) (cold | (just 'n'))))
         royl
       ==
@@ -3184,7 +3260,7 @@
     ==
   --
 ::::
-::::  Tier 6, Watt in Watt
+::::  Tier 6, Sten in Sten
 ::::
 ~%    %f
     +

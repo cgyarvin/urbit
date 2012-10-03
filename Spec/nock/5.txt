@@ -4,7 +4,6 @@
   A cell is an ordered pair of nouns.
 
 2 Reductions
-
   nock(a)           *a
   [a b c]           [a [b c]]
 
@@ -40,3 +39,4 @@
   =a                =a
   /a                /a
   *a                *a
+
