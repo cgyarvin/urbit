@@ -887,9 +887,68 @@
 =>  |%
     ++  pq                                              ::  packet queue
       |_  quo=(qeu ,[p=@ud q=bird])
-      ++  torv                                          ::  append to queue
-        |=  [num=@ud rob=bird]
-        ^+  quo
+      ++  busc                                          ::  find by number
+        |=  num=@ud
+        ^-  (unit bird)
+        !!   
+      ::
+      ++  glan                                          ::  delete by number
+        |=  num=@ud
+        ^+  ..glan
+        !!
+      ::
+      ++  gost                                          ::  insert in queue
+        |=  [num=@ud gom=soap mup=@ud pac=rock]
+        ^+  ..gost
+        %_    . 
+            quo 
+          %+  ~(put to quo) 
+            num 
+          `bird`[gom mup & @da @da pac]
+        ==
+      ::
+      ++  harv                                          ::  harvest at time
+        |=  [now=@da rtt=@dr]                           ::  current / roundtrip
+        =+  ^=  rub                                     ::  harvest data
+            :*  p=&                                     ::  window nice
+                q=`@da`(add ~d1 now)                    ::  next active
+                r=*(list rock)                          ::  send packets
+                s=*(list soap)                          ::  kill msgs
+            ==
+        ^+  [p=rub q=..harv]
+        =<  [[p.rub q.rub (flop r.rub) (flop s.rub)] ..harv]
+        |-  ^+  ..$
+        ?~  quo  ..$
+        =>  =+  sir=$(quo l.quo)
+            ..$(rub rub.sir, l.quo quo.sir)
+        =>  ^+  ..$
+            ?:  =(0 sez.q.n.quo)
+              =+  den=(add now (div (mul 3 rtt) 2))  
+              %_  ..$
+                q.rub        den
+                r.rub        [pac.q.n.quo r.rub]
+                sez.q.n.quo  now
+                ded.q.n.quo  den
+              ==
+            ?.  (lth ded.q.n.quo now)
+              ..$
+            =+  dif=(sub ded.q.n.quo sez.q.n.quo)
+            ?:  (gth dif ~m1)
+              ..$(s.rub [gom.q.n.quo s.rub])
+            =+  den=(add now (mul 2 dif))
+            %_  ..$
+              p.rub        |
+              q.rub        den
+              r.rub        [pac.q.n.quo r.rub]
+              sez.q.n.quo  now
+              ded.q.n.quo  den
+            == 
+        =+  ryz=$(quo r.quo)
+        ..$(rub rub.ryz, r.quo quo.ryz)
+      ::
+      ++  rast                                          ::  delete by msg id
+        |=  gom=soap
+        ^+  ..rast
         !!
       --
     --
@@ -914,7 +973,7 @@
               ?~(bah *bath u.bah)
           |%
           ::::
-          ++  cool                                      ::  update window
+          ++  cool                                      ::  refill window
             |-  ^+  ..cool
             ?.  (gth wid.foy.bah yed.foy.bah)
               ..cool
@@ -941,7 +1000,7 @@
                 maz.bah  (~(put to maz.bah) gom)
             ==
           ::
-          ++  pock                                      ::  queue a bird
+          ++  pock                                      ::  queue a packet
             |-  ^+  ..pock
             ?:  =(~ maz.bah)
               ..pock
@@ -949,8 +1008,7 @@
             =>  ^+(. .(maz.bah q.zem))
             =+  dyp=(need (~(get by par.bah) p.zem))
             ?>  ?=(^ wyv.dyp)
-            ^+  ..pock
-            %=    ..pock
+            %_    ..pock
                 wen.bah      now
                 yed.foy.bah  +(yed.foy.bah)
                 q.ski.bah    +(q.ski.bah)
@@ -978,24 +1036,6 @@
                   [nic wen rin ~]
                 =+  tam=$(sea.bah l.sea.bah)
                 =>  ^+(. .(nic p.tam, wen q.tam, rin r.tam))
-                =>  ^+  .
-                    ?:  =(0 sez.q.n.sea.bah)
-                      %=  .
-                        rin              [pac.q.n.sea.bah rin]
-                        org.q.n.sea.bah  &
-                        sez.q.n.sea.bah  now
-                        ded.q.n.sea.bah  (add now (div (mul 3 rtt.foy.bah) 2))
-                      == 
-                    ?:  (lth ded.q.n.sea.bah now)
-                      %=    .
-                          nic              |
-                          rin              [pac.q.n.sea.bah rin]
-                          org.q.n.sea.bah  |
-                          sez.q.n.sea.bah  now
-                          ded.q.n.sea.bah  
-                        (add now (mul 2 (sub ded.q.n.sea.bah sez.q.n.sea.bah)))
-                      == 
-                    .
                 =+  wyq=$(sea.bah r.sea.bah)
                 [p.wyq q.wyq r.wyq [n.sea.bah s.tam s.wyq]]
             %=    ..tick
@@ -1011,6 +1051,7 @@
           ++  tusk                                      ::  ack by sequence
             |=  [kay=cape num=@ud cot=@dr]
             ^+  ..tusk
+            =+  rob=(need (~(busc pq sea.bah) num))
             ?-    kay
                 %dead
               !!

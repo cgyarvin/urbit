@@ -12,7 +12,7 @@
                         u2_noun van,                              //  retain
                         u2_noun sut)                              //  retain
   {
-    u2_noun p_sut, q_sut, r_sut, pq_sut, qq_sut, rq_sut, prq_sut, qrq_sut;
+    u2_noun p_sut, q_sut, pq_sut, qq_sut, rq_sut, prq_sut, qrq_sut;
 
     if ( u2_no == u2_dust(sut) ) switch ( sut ) {
       default: return u2_bl_bail(wir_r, c3__fail);

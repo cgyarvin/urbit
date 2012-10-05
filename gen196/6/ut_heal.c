@@ -135,7 +135,7 @@
 
     repo: {
       u2_noun rep = j2_mcy(Pt6, ut, repo)(wir_r, van, sut);
-      u2_noun ret = _heal_to(wir_r, van, gil, rep, qog, ref, now, lat);
+      u2_noun ret = _heal_to(wir_r, van, rep, gil, qog, ref, now, lat);
 
       u2_rz(wir_r, rep);
       return ret;

@@ -1,4 +1,4 @@
-::::
+::
 ::              Sten stage 196 (reflexive).  
 ::              This file is in the public domain.
 ::
@@ -1291,6 +1291,15 @@
       ?:  |(?=(~ q.b) (vor n.a n.q.b))
         [n.a l.a q.b]
       [n.q.b [n.a l.a l.q.b] r.q.b]
+    ::
+    +-  nap
+      |-  ^+  a
+      ?~  a  ~
+      ?~  r.a  l.a
+      ?~  l.a  r.a
+      ?:  (vor n.l.a n.r.a)
+        [n.l.a l.l.a $(l.a r.l.a)]
+      [n.r.a $(r.a l.r.a) r.r.a]
     ::
     +-  put
       |*  b=*
@@ -3106,14 +3115,15 @@
       [%clsg p=(list gene)]
       [%cltr p=(list gene)]
     ::
-      [%cncl p=gene q=gene]
-      [%cntr p=twig q=gene r=(list ,[p=gene q=gene])]
-      [%cndt p=gene q=gene]
-      [%cnkt p=gene q=gene r=gene s=gene]
       [%cnbc p=term]
-      [%cnls p=gene q=gene r=gene]
+      [%cncb p=twig q=(list ,[p=gene q=gene])]
+      [%cncl p=gene q=gene]
+      [%cndt p=gene q=gene]
       [%cnhp p=gene q=(list gene)]
       [%cnhx p=twig]
+      [%cntr p=twig q=gene r=(list ,[p=gene q=gene])]
+      [%cnkt p=gene q=gene r=gene s=gene]
+      [%cnls p=gene q=gene r=gene]
       [%cnsg p=twig q=gene r=gene]
       [%cnts p=twig q=(list ,[p=gene q=gene])]
     ::
@@ -3600,6 +3610,7 @@
       ==
     ::
         [%cnbc *]  [%cnts [p.gen ~] ~]
+        [%cncb *]  [%ktls [%cnhx p.gen] %cnts p.gen q.gen]
         [%cncl *]  [%cnsg [%% ~] p.gen q.gen]
         [%cndt *]  [%cnhp q.gen [p.gen ~]]
         [%cnkt *]  [%cnhp p.gen q.gen r.gen s.gen ~]
@@ -5917,7 +5928,7 @@
       [%face *]   q.sut
       [%hold *]   (rest p.sut)
       %noun       [%fork [%atom %%] [%cell %noun %noun]]
-      *           ~|(%repo-flat !!)
+      *           ~|(%repo-fltt !!)
     ==
   ::
   ++  rest
@@ -6307,6 +6318,7 @@
             :-  '%'
               ;~  pfix  cen
                 %-  stew  :~
+                  ['_' (rune cab %cncb expj)]
                   [':' (rune col %cncl expb)]
                   ['.' (rune dot %cndt expb)]
                   ['^' (rune ket %cnkt expf)]

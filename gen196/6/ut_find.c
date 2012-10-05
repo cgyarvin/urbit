@@ -250,7 +250,6 @@
               }
               else {
                 if ( u2_no == u2_sing(puq_hax, puq_yor) ) {
-                  printf("puq_hax %d, puq_yor %d\n", puq_hax, puq_yor);
                   return u2_bl_error(wir_r, "find-fork");
                 }
 
