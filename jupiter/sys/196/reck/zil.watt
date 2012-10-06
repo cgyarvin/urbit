@@ -781,20 +781,19 @@
     ++  band  ,@uvH                                     ::  network message id
     ++  bait  ,[p=rind q=@ud r=dove]                    ::  fmt nrecvd spec
     ++  bath                                            ::  outgoing per client
-              $:  wen=@da                               ::  next activation
-                  ski=snow                              ::  sequence state
+              $:  ski=snow                              ::  sequence state
                   foy=flow                              ::  flow statistics
                   par=(map soap putt)                   ::  message by id
                   maz=(qeu soap)                        ::  round-robin next
                   air=(map flap ,@ud)                   ::  unacked by content
-                  sea=(qeu ,[p=@ud q=bird])             ::  unacked by sequence
+                  sea=tray                              ::  packet pump
               ==
     ++  bird                                            ::  packet in flight
               $:  gom=soap                              ::  message identity
-                  num=@ud                               ::  pktno in msg
+                  mup=@ud                               ::  pktno in msg
                   org=?                                 ::  original tx?
-                  sez=@da                               ::  date sent
-                  ded=@da                               ::  expiration date
+                  tim=@dr                               ::  logical timer
+                  ded=@da                               ::  next expire
                   pac=rock                              ::  packet data
               ==                                        ::
     ++  boon                                            ::  fort output
@@ -845,6 +844,7 @@
               ==                                        ::
     ++  snow  ,[p=@ud q=@ud r=(set ,@ud)]               ::  window exceptions
     ++  soap  ,*                                        ::  opaque msg identity
+    ++  tray  ,[p=@da q=(qeu ,[p=@ud q=bird])]          ::  packet pump
     --
 =>  |%
     ++  bite                                            ::  packet to cake
@@ -872,7 +872,7 @@
       ^-  flow
       !!
     ::
-    ++  echo                                            ::  measure rtt
+    ++  echo                                            ::  measured rtt
       |=  [rtt=@ foy=flow]  ^-  flow
       !!
     ::
@@ -883,28 +883,58 @@
     ++  slow                                            ::  throttle back
       |=  foy=flow  ^-  flow
       !!
+    ::
+    --
+=>  |%                                                  ::  selective ack
+    ++  suck
+      |=  [num=@ud ski=snow]
+      ^-  [p=(list ,@ud) q=snow]
+      ?>  (lte num q.ski)
+      ?:  =(num p.ski)
+        =>  .(p.ski +(p.ski))
+        |-  ?:  =(q.ski p.ski)
+              [~ ski]
+            ?.  (~(has in r.ski) p.ski)
+              [~ ski]
+            $(p.ski +(p.ski), r.ski (~(del in r.ski) p.ski))
+      ?>  (gth num p.ski)
+      =>  .(r.ski (~(put in r.ski) num), num (dec num))
+      =+  wop=*(list ,@ud)
+      |-  ?:  (lth num p.ski)
+            [(flop wop) ski]
+          $(num (dec num), wop [num wop])
+    ::
+    ++  toss  |=(ski=snow ^-(snow ski(q +(q.ski))))
     --
 =>  |%
-    ++  pq                                              ::  packet queue
-      |_  quo=(qeu ,[p=@ud q=bird])
+    ++  pe                                              ::  packet queue
+      |_  tea=tray
       ++  busc                                          ::  find by number
         |=  num=@ud
         ^-  (unit bird)
-        !!   
+        ?~  q.tea  ~
+        ?:  =(num p.n.q.tea)
+          [~ q.n.q.tea]
+        ?:((gth num p.n.q.tea) $(q.tea l.q.tea) $(q.tea r.q.tea))
       ::
       ++  glan                                          ::  delete by number
         |=  num=@ud
         ^+  ..glan
-        !!
+        ?:  =(~ q.tea)  
+          ..glan
+        ?:  =(num p.n.q.tea)
+          %_(..glan q.tea ~(nap to q.tea))
+        ?:((gth num p.n.q.tea) $(q.tea l.q.tea) $(q.tea r.q.tea))
       ::
       ++  gost                                          ::  insert in queue
-        |=  [num=@ud gom=soap mup=@ud pac=rock]
+        |=  [now=@da num=@ud gom=soap mup=@ud pac=rock]
         ^+  ..gost
         %_    . 
-            quo 
-          %+  ~(put to quo) 
+            p.tea  now
+            q.tea 
+          %+  ~(put to q.tea) 
             num 
-          `bird`[gom mup & @da @da pac]
+          `bird`[gom mup & @dr @da pac]
         ==
       ::
       ++  harv                                          ::  harvest at time
@@ -918,38 +948,61 @@
         ^+  [p=rub q=..harv]
         =<  [[p.rub q.rub (flop r.rub) (flop s.rub)] ..harv]
         |-  ^+  ..$
-        ?~  quo  ..$
-        =>  =+  sir=$(quo l.quo)
-            ..$(rub rub.sir, l.quo quo.sir)
+        ?~  q.tea  ..$
+        =>  =+  sir=$(q.tea l.q.tea)
+            ..$(rub rub.sir, l.q.tea q.tea.sir)
         =>  ^+  ..$
-            ?:  =(0 sez.q.n.quo)
-              =+  den=(add now (div (mul 3 rtt) 2))  
+            ?:  =(0 tim.q.n.q.tea)
+              =+  ryt=(div (mul 3 rtt) 2)
+              =+  den=(add ryt now)
               %_  ..$
-                q.rub        den
-                r.rub        [pac.q.n.quo r.rub]
-                sez.q.n.quo  now
-                ded.q.n.quo  den
+                q.rub          den
+                r.rub          [pac.q.n.q.tea r.rub]
+                tim.q.n.q.tea  ryt
+                ded.q.n.q.tea  den
               ==
-            ?.  (lth ded.q.n.quo now)
+            ?.  (lth ded.q.n.q.tea now)
               ..$
-            =+  dif=(sub ded.q.n.quo sez.q.n.quo)
-            ?:  (gth dif ~m1)
-              ..$(s.rub [gom.q.n.quo s.rub])
-            =+  den=(add now (mul 2 dif))
+            ?:  (gth tim.q.n.q.tea ~m1)
+              ..$(s.rub [gom.q.n.q.tea s.rub])
+            =+  ryt=(mul 2 tim.q.n.q.tea)
+            =+  den=(add ryt now)
             %_  ..$
-              p.rub        |
-              q.rub        den
-              r.rub        [pac.q.n.quo r.rub]
-              sez.q.n.quo  now
-              ded.q.n.quo  den
+              p.rub          |
+              q.rub          den
+              r.rub          [pac.q.n.q.tea r.rub]
+              tim.q.n.q.tea  ryt
+              ded.q.n.q.tea  den
             == 
-        =+  ryz=$(quo r.quo)
-        ..$(rub rub.ryz, r.quo quo.ryz)
+        =+  ryz=$(q.tea r.q.tea)
+        ..$(rub rub.ryz, r.q.tea q.tea.ryz)
+      ::
+      ++  namp                                          ::  timeout/resend
+        |=  [now=@da num=@ud]
+        %_    ..namp
+            p.tea  now
+            q.tea
+          |-  ^+  q.tea
+          ?:  =(~ q.tea)
+            q.tea
+          =>  %_(. l.q.tea $(q.tea l.q.tea), r.q.tea $(q.tea r.q.tea))
+          ?.  =(num p.n.q.tea)
+            q.tea
+          q.tea(ded.q.n now)
+        ==
       ::
       ++  rast                                          ::  delete by msg id
         |=  gom=soap
-        ^+  ..rast
-        !!
+        %_    ..rast
+            q.tea
+          |-  ^+  q.tea
+          ?:  =(~ q.tea)
+            q.tea
+          =>  %_(. l.q.tea $(q.tea l.q.tea), r.q.tea $(q.tea r.q.tea))
+          ?:  =(gom gom.q.n.q.tea)
+            ~(nap to q.tea)
+          q.tea
+        ==
       --
     --
 =>  |%
@@ -982,22 +1035,23 @@
           ++  grok                                      ::  resolve engine
             ^+  ..ac
             %=  ..ac
-              wen.fox  (min wen.bah wen.fox)
+              wen.fox  (min p.sea.bah wen.fox)
               sow.fox  (~(put by sow.fox) [our.gus her] bah)
             ==
+          ::
           ++  kill                                      ::  kill message
             |=  gom=soap
             ^+  ..kill
             !!
           ::
-          ++  mail                                      ::  prepare packets
+          ++  mail                                      ::  insert message
             |=  [gom=soap saq=? wyv=(list rock)]
             ^+  ..mail
             ?<  ?=(~ wyv)
             %=    ..mail
-                wen.bah  now
-                par.bah  (~(put by par.bah) gom [*snow saq wyv])
-                maz.bah  (~(put to maz.bah) gom)
+                p.sea.bah  now
+                par.bah    (~(put by par.bah) gom [*snow saq wyv])
+                maz.bah    (~(put to maz.bah) gom)
             ==
           ::
           ++  pock                                      ::  queue a packet
@@ -1006,12 +1060,11 @@
               ..pock
             =+  zem=~(get to maz.bah)
             =>  ^+(. .(maz.bah q.zem))
-            =+  dyp=(need (~(get by par.bah) p.zem))
+            =+  dyp=`putt`(need (~(get by par.bah) p.zem))
             ?>  ?=(^ wyv.dyp)
             %_    ..pock
-                wen.bah      now
                 yed.foy.bah  +(yed.foy.bah)
-                q.ski.bah    +(q.ski.bah)
+                ski.bah      (toss ski.bah)
                 maz.bah      (~(put to maz.bah) p.zem)
                 air.bah      
               (~(put by air.bah) (shaf %flap i.wyv.dyp) q.ski.bah)
@@ -1019,55 +1072,65 @@
                 par.bah 
               %+  ~(put by par.bah)
                 p.zem
-              dyp(wyv t.wyv.dyp, q.ski +(q.ski.dyp))
+              dyp(wyv t.wyv.dyp, ski (toss ski.dyp))
             ::
                 sea.bah      
-              %+  ~(put to sea.bah)
-                q.ski.bah
-              `bird`[p.zem q.ski.dyp & @da @da i.wyv.dyp]
-            ==
-          ::
-          ++  tick                                       ::  process time
-            ^+  ..tick
-            =+  ^=  mar
-                =+  [nic=? wen=wen.fox rin=*(list rock)]
-                |-  ^-  [p=? q=@da r=(list rock) s=_sea.bah]
-                ?~  sea.bah
-                  [nic wen rin ~]
-                =+  tam=$(sea.bah l.sea.bah)
-                =>  ^+(. .(nic p.tam, wen q.tam, rin r.tam))
-                =+  wyq=$(sea.bah r.sea.bah)
-                [p.wyq q.wyq r.wyq [n.sea.bah s.tam s.wyq]]
-            %=    ..tick
-                sea.bah  s.mar
-                foy.bah  ?:(p.mar foy.bah (slow foy.bah))
-                bin
-              ?~  r.mar
-                bin
-              =+  lyn=(hey:gus her)
-              (weld (turn (flop r.mar) |=(pac=rock [%ouzo lyn pac])) bin)
-            ==
-          ::
-          ++  tusk                                      ::  ack by sequence
-            |=  [kay=cape num=@ud cot=@dr]
-            ^+  ..tusk
-            =+  rob=(need (~(busc pq sea.bah) num))
-            ?-    kay
-                %dead
-              !!
-                %good
-              !!
-                %weak
-              !!
+              tea:(~(gost pe sea.bah) now q.ski.bah p.zem q.ski.dyp i.wyv.dyp)
             ==
           ::
           ++  tuck                                      ::  ack by hash
-            |=  [kay=cape fap=flap cot=@dr]
+            |=  [saq=? kay=cape fap=flap cot=@dr]
             ^+  ..tuck
-            =>  ^+(. .(..tuck (tusk kay (need (~(get by air.bah) fap)) cot)))
+            =>  %_(. ..tuck (tusk saq kay (need (~(get by air.bah) fap)) cot))
             ?.  =(%good kay)
               ..tuck
             ..tuck(air.bah (~(del by air.bah) fap))
+          ::
+          ++  tusk                                      ::  ack by sequence
+            |=  [saq=? kay=cape num=@ud cot=@dr]
+            ^+  ..tusk
+            ?-    kay
+                %dead  
+              %_  ..tusk
+                sea.bah  tea:(~(namp pe sea.bah) now num)
+                foy.bah  (slow foy.bah)
+              ==
+            ::
+                %good
+              =+  suz=(suck num ski.bah)
+              =>  %_    .
+                      sea.bah
+                    |-  ^+  sea.bah
+                    ?~  p.suz  sea.bah
+                    %=    $
+                        p.suz    t.p.suz
+                        sea.bah  tea:(~(namp pe sea.bah) now i.p.suz)
+                    ==
+                  ==
+              =+  rob=(need (~(busc pe sea.bah) num))
+              =+  dyp=`putt`(need (~(get by par.bah) gom.rob))
+              =>  %_(. ski.dyp q:(suck mup.rob ski.dyp))
+              %_    ..tusk
+                  bin
+                ?.  &(=(~ wyv.dyp) =(p.ski.dyp q.ski.dyp)) 
+                  bin 
+                [[%coke %good gom.rob] bin]
+              ::
+                  ski.bah  q.suz
+                  sea.bah  tea:(~(glan pe sea.bah) num)
+                  foy.bah
+                ?^  p.suz
+                  (slow foy.bah)
+                ?.  org.rob
+                  foy.bah
+                (echo (sub (sub now (sub ded.rob tim.rob)) cot) foy.bah)
+              ==
+            ::
+                %weak 
+              =+  gom=gom:(need (~(busc pe sea.bah) num))
+              =>  %_(. bin [[%coke %weak gom] bin])
+              (kill gom)
+            ==
           --
         ::::
         ::
@@ -1186,11 +1249,6 @@
           =+  bad=(shaf %band dam)
           =>  .(nes.vif (~(put by nes.vif) bad [(add now ~d1) rym 0 p.pay ~]))
           (dine | @p [%carp 0 bad q.pay])
-        ::
-        ++  wake                                        ::  activate flow
-          |=  her=base
-          ^+  ..wake
-          !!
         --
       ::
       ++  gnaw                                          ::  process packet
@@ -1203,21 +1261,51 @@
           |  [[[%ouzo p.how pac] ~] fox]
         ==
       ::
-      ++  hark                                          ::  next act before
-        |=  now=@da
-        ^-  @da
-        !!
+      ++  hast                                          ::  roll per socket
+        |=  [now=@da soq=sock bah=bath]
+        ^-  [p=(list (list ,[p=@da q=boon])) q=bath]
+        =+  lyn=`lane`(hey:(need (~(us go ton.fox) p.soq)) q.soq)
+        =+  peq=(~(harv pe sea.bah) now rtt.foy.bah)
+        :-  =+  [fux=now mey=*(list ,[p=@da q=boon])]
+            :~  =+  mey=*(list ,[p=@da q=boon])
+                |-  ^-  (list ,[p=@da q=boon])
+                ?~  r.p.peq  mey
+                %=    $
+                    r.p.peq  t.r.p.peq
+                    fux      (add 0x1.0000.0000 fux) 
+                    mey      [[fux %ouzo lyn i.r.p.peq] mey]
+                ==
+            ::
+                |-  ^-  (list ,[p=@da q=boon])
+                ?~  s.p.peq  mey
+                %=    $
+                    s.p.peq  t.s.p.peq
+                    fux      (add 0x1.0000.0000 fux) 
+                    mey      [[fux %coke %dead i.s.p.peq] mey]
+                ==
+            ==
+        bah(foy ?~(r.p.peq foy.bah (slow foy.bah)), sea tea:q.peq)
       ::
-      ++  reap                                          ::  extract until
+      ++  hark                                          ::  roll clock
         |=  now=@da
         ^-  [p=(list boon) q=fort]
-        !!
-      ::
-      ++  wash                                          ::  send messages
-        |=  now=@da
-        |=  noy=(list note)
-        ^-  [p=(list boon) q=fort]
-        !!
+        =+  yal=(~(tap by sow.fox) ~)
+        =+  tol=*(list (list ,[p=@da q=boon]))
+        |-  ^-  [p=(list boon) q=fort]
+        ?~  yal
+          :-  %+  turn
+                %+  sort
+                  |-  ^-  (list ,[p=@da q=boon])
+                  ?~(tol ~ (weld i.tol $(tol t.tol)))
+                |=([a=[p=@da q=boon] b=[p=@da q=boon]] (lth p.a p.b))
+              |=([p=@da q=boon] q)
+          fox
+        =+  qet=(hast now p.i.yal q.i.yal)
+        %=  $
+          tol      p.qet
+          sow.fox  (~(put by sow.fox) p.i.yal q.qet)
+          wen.fox  ?:((lth p.sea.q.qet wen.fox) p.sea.q.qet wen.fox)
+        ==
       ::
       ++  wish                                          ::  send message
         |=  now=@da

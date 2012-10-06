@@ -1113,7 +1113,7 @@
         ~
       ?.  =(b n.a)
         ?:((hor b n.a) $(a l.a) $(a r.a))
-      |-  ^+  a
+      |-  ^-  ?(~ _a)
       ?~  l.a  r.a
       ?~  r.a  l.a
       ?:  (vor n.l.a n.r.a)
