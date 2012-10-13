@@ -3109,6 +3109,7 @@
       [%brts p=gene q=gene]
       [%brwt p=gene]
     ::
+      [%clcb p=gene q=gene]
       [%clkt p=gene q=gene r=gene s=gene]
       [%clhp p=gene q=gene]
       [%clls p=gene q=gene r=gene]
@@ -3116,16 +3117,16 @@
       [%cltr p=(list gene)]
     ::
       [%cnbc p=term]
-      [%cncb p=twig q=(list ,[p=gene q=gene])]
+      [%cncb p=wing q=(list ,[p=gene q=gene])]
       [%cncl p=gene q=gene]
       [%cndt p=gene q=gene]
       [%cnhp p=gene q=(list gene)]
-      [%cnhx p=twig]
-      [%cntr p=twig q=gene r=(list ,[p=gene q=gene])]
+      [%cnhx p=wing]
+      [%cntr p=wing q=gene r=(list ,[p=gene q=gene])]
       [%cnkt p=gene q=gene r=gene s=gene]
       [%cnls p=gene q=gene r=gene]
-      [%cnsg p=twig q=gene r=gene]
-      [%cnts p=twig q=(list ,[p=gene q=gene])]
+      [%cnsg p=wing q=gene r=gene]
+      [%cnts p=wing q=(list ,[p=gene q=gene])]
     ::
       [%dtkt p=gene]
       [%dtdq p=(list $|(@ta [~ p=gene]))]
@@ -3216,7 +3217,7 @@
       [%zpts p=gene]
       [%zpzp ~]
     ==
-  ++  knot  $|(term $%([& p=axis] [| p=@ud q=term]))
+  ++  limb  $|(term $%([& p=axis] [| p=@ud q=term]))
   ++  line  ,[p=[%leaf p=odor q=@] q=tile] 
   ++  odor  disc
   ++  port
@@ -3242,7 +3243,7 @@
                 [1 p=(list)]
                 [2 p=(list ,[@ta *])]
             ==
-  ++  twig  (list knot)
+  ++  wing  (list limb)
   ++  type
     $|  ?(%noun %void) 
     $%  [%atom p=term]
@@ -3514,6 +3515,7 @@
     ?-    gen
         [^ *]      [$(gen p.gen) $(gen q.gen)]
         [%clls *]  $(gen open)
+        [%clcb *]  $(gen open)
         [%clhp *]  $(gen open)
         [%clkt *]  $(gen open)
         [%cltr *]  $(gen open)
@@ -3599,6 +3601,7 @@
         [%brwt *]  [%ktwt %brdt p.gen]
         [%clkt *]  [p.gen q.gen r.gen s.gen]
         [%clls *]  [p.gen q.gen r.gen]
+        [%clcb *]  [q.gen p.gen]
         [%clhp *]  [p.gen q.gen]
         [%clsg *]  |-(?@(p.gen [%dtsg %n ~] [i.p.gen $(p.gen t.p.gen)]))
         [%cltr *]
@@ -3624,7 +3627,7 @@
       :+  %tsls
         q.gen
       :+  %cnts
-        (weld p.gen `twig`[[~ 2] ~])
+        (weld p.gen `wing`[[~ 2] ~])
       (turn r.gen |=([p=gene q=gene] [p [%ktdt [~ 10] [%tsgr [~ 3] q]]]))
     ::
         [%kthp *]  [%ktls ~(bunt al bore(gen p.gen)) q.gen]
@@ -3959,7 +3962,7 @@
     ==
   ::
   ++  rake
-    ^-  twig
+    ^-  wing
     ?-  gen
       [~ *]         [gen ~]
       [%cnbc *]     [p.gen ~]
@@ -5979,7 +5982,7 @@
   ::
   ++  seek
     ~/  %seek
-    |=  [way=?(%read %rite) hyp=twig]
+    |=  [way=?(%read %rite) hyp=wing]
     ^-  port
     ?@  hyp
       [1 %& sut]
@@ -6029,14 +6032,14 @@
   ++  swab
     ~/  %swab
     |=  [men=(list ,[p=type q=foot]) har=(list ,[p=gene q=gene])]
-    ^-  (list ,[p=twig q=gene])
+    ^-  (list ,[p=wing q=gene])
     %+  turn
       har
     |=([a=gene b=gene] [(flop ~(rake ap a)) b])
   ::
   ++  tack
     ~/  %tack
-    |=  [peh=twig mur=type]
+    |=  [peh=wing mur=type]
     =+  axe=1
     |-  ^-  [p=axis q=type]
     ?@  peh
@@ -6056,7 +6059,7 @@
   ::
   ++  tock
     ~/  %tock
-    |=  [peh=twig mur=type men=(list ,[p=type q=foot])]
+    |=  [peh=wing mur=type men=(list ,[p=type q=foot])]
     ^-  [p=axis q=(list ,[p=type q=foot])]
     =-  [(need p.wib) q.wib]
     ^=  wib
@@ -6078,7 +6081,7 @@
       *          ~|(%wrap-type !!)
     ==
   --
-  ++  jack
+  ++  jock
     |=  rad=?
     |=  lot=coin  ^-  gene
     ?-    -.lot
@@ -6160,7 +6163,7 @@
           (stag %zpcn (cold ~ ;~(plug zap cen)))
         ==
       :-  '$'
-        (cook |=(a=twig [%cnts a ~]) rope)
+        (cook |=(a=wing [%cnts a ~]) rope)
       :-  '%'
         ;~  pfix  cen
           ;~  pose
@@ -6168,12 +6171,12 @@
             (stag %dtsg (stag %f (cold & pam)))
             (stag %dtsg (stag %f (cold | bar)))
             (stag %dtsg (stag %ta qut))
-            (cook (jack &) nuck:so)
+            (cook (jock &) nuck:so)
           ==
         == 
       :-  '&'
         ;~  pose
-          (cook |=(a=twig [%cnts a ~]) rope)
+          (cook |=(a=wing [%cnts a ~]) rope)
           (stag %wtpm ;~(pfix pam (ifix [pel per] (most ace wide))))
           ::  (stag %bccb (stag %ktpm ;~(pfix pam wide)))
           (stag %dtpt (stag %f (cold & pam)))
@@ -6190,7 +6193,7 @@
       :-  '+'
         ;~  pose
           (stag %dtls ;~(pfix lus (ifix [pel per] wide)))
-          (cook |=(a=twig [%cnts a ~]) rope)
+          (cook |=(a=wing [%cnts a ~]) rope)
         ==
       :-  '#'
         ;~  pfix  hax
@@ -6199,12 +6202,12 @@
       :-  '-'
         ;~  pose
           (stag %dtpt tash:so)
-          (cook |=(a=twig [%cnts a ~]) rope)
+          (cook |=(a=wing [%cnts a ~]) rope)
         ==
       :-  '.'
         ;~  pose
           (stag %dtpt ;~(pfix dot zust:so))
-          (cook |=(a=twig [%cnts a ~]) rope)
+          (cook |=(a=wing [%cnts a ~]) rope)
         ==
       :-  ['0' '9']
         (stag %dtpt bisk:so)
@@ -6262,7 +6265,7 @@
         (stag %cnhx rope)
       :-  '|'
         ;~  pose
-          (cook |=(a=twig [%cnts a ~]) rope)
+          (cook |=(a=wing [%cnts a ~]) rope)
           (stag %wtbr ;~(pfix bar (ifix [pel per] (most ace wide))))
           (stag %dtpt (stag %f (cold | bar)))
         ==
@@ -6276,7 +6279,7 @@
               [pel per] 
             ;~(glam rope wide (stag %cltr (most ace wide)))
           ::
-            (cook (jack |) twid:so)
+            (cook (jock |) twid:so)
             (easy [%bcts %null])
           ==
         ==
@@ -6344,6 +6347,7 @@
             :-  ':'
               ;~  pfix  col
                 %-  stew  :~
+                  ['_' (rune cab %clcb expb)]
                   ['^' (rune ket %clkt expf)]
                   ['+' (rune lus %clls expc)]
                   ['-' (rune hep %clhp expb)]
@@ -6596,9 +6600,9 @@
   ::
   ++  rope
     %+  knee
-      *twig
+      *wing
     |.  ~+
-    %+  (slug `twig`~ |=([a=twig b=twig] (weld a b)))
+    %+  (slug `wing`~ |=([a=wing b=wing] (weld a b)))
       dot
     ;~  pose
       %+  cook  
@@ -6606,7 +6610,7 @@
       ;~(plug (star ket) ;~(pose sym (cold %% buc)))
     ::
       %+  cook
-        |=(a=knot [a ~])
+        |=(a=limb [a ~])
       %+  cook 
         |=(a=axis [%& a]) 
       ;~  pose 

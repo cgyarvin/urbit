@@ -30,14 +30,14 @@
         [%say p=plum]                                       ::  action
     ==                                                      ::
   ++  rail                                                  ::  query
-    $%  [%dig p=wing q=want]                                ::  request
+    $%  [%dig p=bole q=want]                                ::  request
         [%nap p=time q=lime]                                ::  await
         [%net p=quip q=fish]                                ::  find
         [%rod p=quip q=sail r=hunt]                         ::  sync
     ==                                                      ::
   ++  sail  (map path ,@ud)                                 ::  sync state
   ++  want  _|+([a=(list ,[p=path q=bill])] *lime)          ::  request effect
-  ++  wing  (list ,[p=path q=(unit bill)])                  ::  request state
+  ++  bole  (list ,[p=path q=(unit bill)])                  ::  request state
   ++  worm  ,[p=(list lime) q=(list plum)]                  ::  work
   --
 =>  ::
@@ -183,8 +183,8 @@
               baz
             [~ when:cam]
           tec(p q.mig)
-      ^=  mig  ^-  [p=? q=wing]
-      |-  ^-  [p=? q=wing]
+      ^=  mig
+      |-  ^-  [p=? q=bole]
       ?~  p.tec
         [& ~]
       =+  gel=$(p.tec t.p.tec)

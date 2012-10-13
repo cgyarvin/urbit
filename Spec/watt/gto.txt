@@ -2,7 +2,7 @@ new:
   bar |
   bas \
   buc $
-  cab _
+  cab _     ::  XX dun
   cen %
   col :
   com ,
@@ -20,7 +20,7 @@ new:
   pel (
   pam &
   per )
-  pat @
+  pat @     ::  XX mat
   sel [
   sem ;
   ser ]
