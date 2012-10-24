@@ -26,14 +26,15 @@
                     lam 
                   ^-  lamb
                   :-  %o 
-                  :~  :-  %hose 
+                  :~  :-  %echo
                       :+  %pu
-                        :-  %line 
-                        :~  ~(rent co [~ %ud p.p.lam])
+                        :-  %e
+                        :~  ~(rent co [~ %p p.p.lam])
                             ~(rent co [~ %ud q.p.lam])
+                            %gold
                             ~(rent co [~ %ud q.lam])
                         ==
-                      r.lam
+                      [%line r.lam]
                   ==
                 ==
         [%o *]  (coz (wilt now p.lam))

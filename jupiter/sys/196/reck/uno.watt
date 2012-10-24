@@ -186,51 +186,48 @@
   ::::          Tier Sg, system geometry
   ::
   |%
-  ++  beef  ,*                              ::  application command
-  ++  dock  $_                              ::
-    |+  [now=time who=@ta]                  ::  ship producer
-        [p=*(list plum) q=*ship]            ::
-  ++  kiwi                                  ::  system product
-    $%  [%o p=@ta q=*]                      ::  opaque output by app
-        [%p p=tube q=@ud r=tank]            ::  print session, tab, text
-        [%t p=(list)]                       ::  print trace
-        [%x p=(list)]                       ::  print request list
-        [%w p=time]                         ::  request alarm
-    ==                                      ::
-  ++  lamb                                  ::  system event
-    $|  ~                                   ::  wakeup
-    $%  [%l p=[p=@ud q=@ud] q=@ud r=@ta]    ::  command line by session
-        [%o p=(list ,[p=term q=plum])]      ::  synthetic output
-    ==
-  ++  lens  $_  ^?                          ::  query interface
-    |%                                      ::
-    ++  hope  |+(quip *(list cash))         ::  perm, series
-    ++  peek  |+(path *(unit))              ::  trans, request
-    ++  pray  |+(path *(unit bill))         ::  perm, request
-    ++  when  *time                         ::  current time
-    ++  wish  |+(quip *(list case))         ::  sequence query
-    --                                      ::
-  ++  plum                                  ::  process product
-    $%  [%pi p=path q=*]                    ::  append to sequence
-        [%pu p=path q=*]                    ::  put in deck
-        [%to p=@ta q=beef]                  ::  pass a command
-        [%yo p=kiwi]                        ::  output
-    ==                                      ::
-  ++  pork                                  ::  process event
-    $|  ~                                   ::  no-op
-    $%  [%do p=*]                           ::  direct command
-        [%nu p=fact]                        ::  new fact
-    ==                                      ::
-  ++  ship  $_  ^?                          ::  process
-    |%
-    ++  peek                                ::  transient query
-      |+  [cam=lens hap=path]
-      *(unit) 
-    ::
-    ++  poke                                ::  operation
-      |+  [cam=lens poc=pork]
-      [p=*(list plum) q=^?(..poke)]
-    --  
-  ++  tube  ,[p=@ud q=@ud]                  ::  session identity
+  ++  beef  ,*                                          ::  application command
+  ++  dock  $_                                          ::
+            |+  [now=time who=@ta]                      ::  ship factory
+            [p=*(list plum) q=*ship]                    ::
+  ++  kiwi                                              ::  system product
+    $%  [%o p=@ta q=*]                                  ::  special output 
+        [%p p=tube q=@ud r=tank]                        ::  print to console
+        [%t p=(list)]                                   ::  print trace
+        [%x p=(list)]                                   ::  print request list
+        [%w p=time]                                     ::  request alarm
+    ==                                                  ::
+  ++  lamb                                              ::  system event
+    $|  ~                                               ::  wakeup
+    $%  [%l p=[p=@ud q=@ud] q=@ud r=@ta]                ::  command line 
+        [%o p=(list ,[p=term q=plum])]                  ::  synthetic output
+    ==                                                  ::
+  ++  lens  $_  ^?                                      ::  query interface
+    |%                                                  ::
+    ++  hope  |+(quip *(list cash))                     ::  perm, series
+    ++  peek  |+(path *(unit))                          ::  trans, request
+    ++  pray  |+(path *(unit bill))                     ::  perm, request
+    ++  when  *time                                     ::  current time
+    ++  wish  |+(quip *(list case))                     ::  sequence query
+    --                                                  ::
+  ++  plum                                              ::  process product
+    $%  [%pi p=path q=*]                                ::  append to sequence
+        [%pu p=path q=*]                                ::  put in deck
+        [%to p=@ta q=beef]                              ::  pass a command
+        [%yo p=kiwi]                                    ::  output
+    ==                                                  ::
+  ++  pork                                              ::  process event
+    $|  ~                                               ::  no-op
+    $%  [%do p=*]                                       ::  direct command
+        [%nu p=fact]                                    ::  new fact
+    ==                                                  ::
+  ++  ship  $_  ^?                                      ::  process
+    |%                                                  ::
+    ++  peek  |+([cam=lens hap=path] *(unit))           ::  transient query
+    ++  poke                                            ::  apply effect
+      |+  [cam=lens poc=pork]                           ::
+      [p=*(list plum) q=^?(..poke)]                     ::
+    --                                                  ::
+  ++  tube  ,[p=?(%gold %iron %lead) q=@ud r=@ta]       ::  session identity
   --
 .

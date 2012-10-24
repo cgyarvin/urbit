@@ -208,7 +208,7 @@
         ?>  ?=(@p muz)
         [%run [%| muz q.cax]]
     ==
-^-  bowl
+^-  vane
 =>  ..$
 =+  sys=*game
 |%
@@ -238,16 +238,12 @@
     %d  =+  der=(~(sift cy rad.u.siq) t.t.t.t.hap)
         ?.(?=(& -.der) ~ [~ r.der])
     %m  =+  out=[~ (~(also cy rad.u.siq) t.t.t.t.hap)]
-        ~&  [%meta %hap `path`hap]
-        ~&  [%meta %tttthap t.t.t.t.hap]
-        ~&  [%meta %out out]
-        ~&  [%meta %rad rad.u.siq]
         out
     %x  ?.(=(q.p.u.mag when:cam) ~ [~ seq.u.siq wen.u.siq])
   ==
 ++  poke  
   |=  [cam=lens man=*] 
-  ^-  [p=lime q=bowl]
+  ^-  [p=lime q=vane]
   =+  muv=(move man)
   ?.  =(muv man)
     [~ ..poke]

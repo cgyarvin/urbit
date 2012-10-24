@@ -6,8 +6,8 @@
   ::
   |%
   ++  bead  $_  |+  [now=time who=span]                     ::  app generator
-                [p=*lime q=*bowl]                           ::
-  ++  bowl                                                  ::  cargo
+                [p=*lime q=*vane]                           ::
+  ++  vane                                                  ::  cargo
     $_  ^?                                                  ::
     |%                                                      ::
     ++  peek  |+([cam=lens hap=path] *(unit))               ::  inspect
@@ -43,7 +43,7 @@
 =>  ::
   ::::          Tier Qm, request mechanics
   ::
-  =+  [cam=*lens rof=*dome egg=*bowl]
+  =+  [cam=*lens rof=*dome egg=*vane]
   |%
   ++  hear
     |=  [baz=(list lime) vac=(list fact)]
@@ -219,8 +219,10 @@
         [q.tec baz]
       =+  ter=$(vac t.vac)
       =+  zav=(cork p.i.vac)
+      ?~  zav
+        ter
       =+  mey=(kiss [q.u.zav q.i.vac] p.tec)
-      ?:  |(?=(~ zav) ?=(~ mey))
+      ?~  mey
         ter
       =+  rey=(~(get by p.ter) q.u.zav)
       =+  bem=?~(rey 1 +(u.rey))

@@ -164,7 +164,7 @@
         q.gow
     ^=  gow
     %^    wick
-        +(now)
+        (add now (bex 48))
       |-  ^-  (list pork)
       ?~(p.vad ~ [[%nu i.p.vad] $(p.vad t.p.vad)])
     |-  ^-  (list ,[p=term q=pork])

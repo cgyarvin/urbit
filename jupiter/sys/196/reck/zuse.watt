@@ -1,7 +1,7 @@
 !:
-::          zuse (zus), packet interpreter.   This file is in the public domain.
+::          zuse (zin), packet interpreter.   This file is in the public domain.
 ::
-:-  %zus
+:-  %zin
 ^-  dock
 |=  [now=time wha=@ta]
 %^    hull
@@ -30,7 +30,7 @@
       |=  [yon=path muz=* cax=bill] 
       [%run %want muz q.cax]
     ==
-^-  bowl
+^-  vane
 =>  ..$
 =<  |%
     ++  peek  |=([cam=lens hap=path] ~)

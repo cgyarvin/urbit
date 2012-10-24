@@ -1,7 +1,7 @@
 !:
 ::          %born, a shell.   This file is in the public domain.
 ::
-:-  %born
+:-  %byn
 ^-  dock
 |=  [now=time wha=@ta]
 %^    hull
@@ -98,7 +98,7 @@
   |=  nam=*
   ^-  (unit)
   =+  pax=(path nam)
-  =+  voy=(peek:cam [%cary pax])
+  =+  voy=(peek:cam [%cay pax])
   voy
 :: 
 ++  line                                    ::  execute a line

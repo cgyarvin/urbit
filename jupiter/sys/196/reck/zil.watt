@@ -121,6 +121,10 @@
     =+  haz=(shas sal ruz)
     (mix (end 7 1 haz) (rsh 7 1 haz))
   ::
+  ++  shak                                              ::  XX shd be PBKDF
+    |=  [who=@p wud=@]
+    (shas (mix %shak who) wud)
+  ::
   ++  sham                                              ::  noun hash
     |=  yux=*  ^-  @uvI  ^-  @
     ?@  yux
@@ -403,6 +407,7 @@
                   heg=(map hand code)                   ::  proposed 
                   qim=(map hand code)                   ::  inbound
               ==                                        ::
+    ++  chum  ,@uvI                                     ::  hashed password
     ++  corp  ,[p=@t q=@t r=@tas]                       ::  name reg country
     ++  deed  ,[p=@ q=step]                             ::  signature, stage
     ++  door                                            ::  foreign contact
@@ -1545,6 +1550,28 @@
           (jam p.cay (seal:pu:r.cay p.fuy (guf p.fuy)))
         --                                              ::  (wish)
       --                                                ::  (am)
+    --
+=>  |%
+    ++  ovum
+      $%  [%bbye ~]                                     ::  log out
+          [%dire p=@tas q=dram]                         ::  apply directory
+          [%file p=@tas q=@]                            ::  apply atomic file
+          [%graf p=(list ,@ta)]                         ::  multiline command 
+          [%helo p=@p q=@dr r=chum]                     ::  name age password
+          [%line p=@ta]                                 ::  command line
+          [%puck p=@]                                   ::  apply packet
+          [%word p=chum]                                ::  set password
+      ==
+    ++  soma
+      $%
+          [%drop p=@]                                   ::  transmit packet
+          [%hear p=@]                                   ::  receive packet
+          [%load p=@tas q=path]                         ::  request atomic file
+          [%loam p=@tas q=path]                         ::  request directory
+          [%pour p=path q=dram]                         ::  write directory
+          [%save p=path q=@]                            ::  write atomic file
+          [%tell p=?(0 1 2 3) q=(list tank)]            ::  report to human
+      == 
     --
 |%
 ::

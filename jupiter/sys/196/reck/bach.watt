@@ -26,13 +26,13 @@
       |=  [seq=@ud muz=* cax=bill] 
       [%run %want ((hard ,[app=@tas wop=pole]) [muz q.cax])]
     ==
-^-  bowl
+^-  vane
 =>  ..$
 =<  |%
     ++  peek  |=([cam=lens hap=path] ~)
     ++  poke  
       |=  [cam=lens man=*] 
-      ^-  [p=lime q=bowl]
+      ^-  [p=lime q=vane]
       =+  muv=(move man)
       ?.  =(muv man)
         [~ ..poke] 

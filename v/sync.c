@@ -18,13 +18,13 @@
 #include "f/coal.h"
 #include "v/vere.h"
 
-/* _sync_peek_arch(): (unit meta) for car-path.
+/* _sync_peek_arch(): (unit meta) for cay-path.
 */
 static u2_noun
 _sync_peek_arch(u2_reck* rec_u, u2_noun pos, u2_noun bok)
 {
   return u2_reck_peek
-    (rec_u, u2nq(c3__car, pos, bok, u2nt(u2k(rec_u->wen), 'a', u2_nul)));
+    (rec_u, u2nq(c3__cay, pos, bok, u2nt(u2k(rec_u->wen), 'a', u2_nul)));
 }
 
 #if 0
@@ -52,7 +52,7 @@ _sync_unix(u2_flag dir, u2_noun hac)
   //
   pas_c = malloc(len_w + 1);
   strcpy(pas_c, u2_Local);
-  strcat(pas_c, "/car");
+  strcat(pas_c, "/cay");
   {
     u2_noun wiz   = hac;
     c3_c*   waq_c = (pas_c + strlen(pas_c));
@@ -121,22 +121,22 @@ _sync_edit(u2_reck* rec_u,
            u2_noun  nod,              //  arch
            u2_noun  det)              //  change list
 {
-  u2_noun car = _sync_peek_arch(rec_u, u2k(pos), u2k(bok));
+  u2_noun cay = _sync_peek_arch(rec_u, u2k(pos), u2k(bok));
   u2_noun dul;
 
-  if ( u2_nul == car ) {
-    car = u2nt(u2_no, 0, u2_nul);
+  if ( u2_nul == cay ) {
+    cay = u2nt(u2_no, 0, u2_nul);
   } else {
-    u2_noun rac = u2k(u2t(car));
+    u2_noun rac = u2k(u2t(cay));
 
-    u2z(car); car = rac;
+    u2z(cay); cay = rac;
   }
 
-  dul = u2_cn_mung(u2k(rec_u->toy.duel), u2nc(u2k(car), u2k(nod)));
+  dul = u2_cn_mung(u2k(rec_u->toy.duel), u2nc(u2k(cay), u2k(nod)));
 
   if ( u2_nul != u2h(dul) ) {
     det = u2nc
-          (u2nc(c3__car, 
+          (u2nc(c3__cay, 
                 u2nt(c3_s2('p','i'),
                      u2nt(pos, bok, u2_nul),
                      u2nc(c3_s2('d','o'), u2k(u2h(dul))))),
@@ -267,7 +267,7 @@ u2_sync_reck(u2_reck* rec_u)
   u2_noun nod; 
 
   strcpy(pas_c, u2_Local);
-  strcat(pas_c, "/car");
+  strcat(pas_c, "/cay");
  
   nod = u2_walk(rec_u, pas_c, 0);
   free(pas_c);

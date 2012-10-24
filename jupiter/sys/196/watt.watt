@@ -1,12 +1,12 @@
 ::
-::              Sten stage 196 (reflexive).  
+::              Hoon stage 196 (reflexive).  
 ::              This file is in the public domain.
 ::
 ::    A noun is an atom or a cell.  An atom is any natural number.  
 ::    A cell is an ordered pair of nouns.
 ::
-::    Noun A is this file, sten.sten, encoded as an atom, LSB first.
-::    Noun B is the accompanying (jam) file, sten.pill, encoded
+::    Noun A is this file, hoon.hoon, encoded as an atom, LSB first.
+::    Noun B is the accompanying (jam) file, hoon.pill, encoded
 ::    as an atom LSB first and expanded with (cue).  Noun C is
 ::    the cell [A B].
 ::
@@ -56,23 +56,25 @@
 ::
 ::    Ie, the pair [A B] is a self-compiling compiler against N.
 ::
-::    This self-compiling compiler defines its own language, Sten.
-::    (The Nock definition above is pseudocode; the Sten kernel below 
-::    is code.)  Sten is a pure, strict, higher-order typed functional 
-::    language, not all that much like either Lisp or Haskell/OCaml.
+::    This self-compiling compiler defines its own language, Hoon.
+::    (The Nock definition above is pseudocode; the Hoon kernel below 
+::    is code.)  Hoon is a pure, strict, higher-order typed functional 
+::    language, not particularly like either Lisp or Haskell/OCaml.
 ::    Its relationship to Nock is much like that of C to assembler.
 ::
 ::    If stage X is "transitional," the compiler compiles not itself
 ::    but its successor stage Y=X-1.  Thus, N(A_Y B_X) equals B_Y.
 ::    (Of course this constraint holds also for reflexive stages.)
-::    Sten may thus change arbitrarily across stages, though ideally
-::    of course it won't.
+::
+::    Hoon may thus change arbitrarily across stages, though ideally
+::    of course it won't.  Every numbered stage of Hoon is a logically 
+::    different language.  When in doubt, say "Hoon {X}."
 ::
 ::    Nock above is the complete interpreter and semantically closed.
 ::    This small definition is designed to be permanently frozen.
-::    All errors yield bottom, ie, do not terminate.  A naive 
-::    implementation is obviously not efficient.  If deployment
-::    were no concern, however, instructions 6-10 could be elided.
+::    All errors yield bottom, ie, do not terminate.  A naive Nock
+::    implementation is obviously not efficient.  If application
+::    were no concern, however, instructions 6-10 could be removed.
 ::
 ::    (One fun exercise: write a decrement formula, not using 7-10.
 ::    More fun is to also eschew 6.)
@@ -1335,6 +1337,9 @@
                 [%many p=(list coin)]
             ==
   ++  disc  ,@ta
+  ++  dram  $%  [| p=(map ,@tas dram)]
+                [& p=@ud q=@]
+            ==
   ++  edge  ,[p=hair q=(unit ,[p=* q=nail])]
   ++  hair  ,[p=@ud q=@ud]
   ++  hapt  (list ,@ta)
@@ -1807,7 +1812,7 @@
   ++  wut  (just '?')
   ++  zap  (just '!')
   ::
-  ::      tier 5b/5, parsing: stenny whitespace & termination
+  ::      tier 5b/5, parsing: hoony whitespace & termination
   ::
   ++  dog  ;~(plug dot gay)
   ++  doh  ;~(plug ;~(plug hep hep) gay)
@@ -1894,6 +1899,11 @@
     ?:  =(0 a)
       c
     [b $(a (dec a))]
+  ::
+  ++  sane                            ::  XX atom type sanity check/normalize
+    |=  a=@ta 
+    |=  b=@  ^-  @
+    b
   ::
   ++  trim
     |=  [a=@ b=tape]
@@ -3188,8 +3198,11 @@
       [%smts p=gene q=gene]
       [%smwt p=gene q=gene]
     ::
+      [%tscl p=(list ,[p=gene q=gene]) q=gene]
+      [%tsdt p=gene q=gene r=gene]
       [%tsgl p=gene q=gene]
       [%tsgr p=gene q=gene]
+      [%tskt p=gene q=gene r=gene]
       [%tsls p=gene q=gene]
       [%tshp p=gene q=gene]
     ::
@@ -3271,7 +3284,7 @@
     ==
   --
 ::::
-::::  Tier 6, Sten in Sten
+::::  Tier 6, Hoon in Hoon
 ::::
 ~%    %f
     +
@@ -3576,6 +3589,10 @@
         [%| gen]
       $(gen voq)
     ==
+  ::
+  ++  hock
+    ^-  [p=gene q=gene]
+    =+(haq=hack ?.(?=(& -.haq) ~|(%hock-gene !!) +.haq))
   ::
   ++  open
     ^-  gene
@@ -3927,6 +3944,19 @@
           ==                                            ::    ==
       ==                                                ::  ==
     ::
+        [%tscl *]  [%tsgr [%cncb [[~ 1] ~] p.gen] q.gen]
+        [%tsdt *]  [%tsgr [%cncb [[~ 1] ~] [[p.gen q.gen] ~]] r.gen]
+        [%tskt *]                                       ::                  =^
+      =+  cog=rusk(gen p.gen)
+      =+  hic=hock(gen q.gen)
+      :+  %tsgr  [%ktts %v ~ 1]                         ::  =>  v=.
+      :+  %tsls  [%ktts %a %tsgr [%cnbc %v] q.hic]      ::  =+  a==>(v \q.hic)
+      :^  %tsdt  p.hic [%tsgl [~ 3] [%cnbc %a]]         ::  =.  p.hic  +.a
+      :+  %tsgr  :-  :+  %ktts  cog                     ::  =>  ^=  cog
+                     [%tsgl [~ 2] [%cnbc %a]]           ::      :-  -.a
+                 [%cnbc %v]                             ::      v
+      r.gen                                             ::  r.gen
+    ::
         [%tsgl *]  [%tsgr q.gen p.gen]
         [%tsls *]  [%tsgr [p.gen [~ 1]] q.gen]
         [%tshp *]  [%tsls q.gen p.gen]
@@ -3971,6 +4001,12 @@
       [%zpcb *]     rake(gen q.gen)
       *             ~|(%rake-gene !!)
     ==
+  ++  rusk
+    ^-  term
+    =+  wig=rake
+    ?.  ?=([@ ~] wig)
+      ~|(%rusk-gene !!)
+    i.wig
   --
 ::
 ++  coke
@@ -6418,6 +6454,9 @@
             :-  '='
               ;~  pfix  tis
                 %-  stew  :~
+                  ['.' (rune dot %tsdt expc)]
+                  ['^' (rune ket %tskt expc)]
+                  [':' (rune col %tscl expl)]
                   ['<' (rune gal %tsgl expb)]
                   ['>' (rune gar %tsgr expb)]
                   ['-' (rune hep %tshp expb)]
@@ -6514,6 +6553,7 @@
     ++  expb  |.(;~(gunk loaf loaf))
     ++  expc  |.(;~(gunk loaf loaf loaf))
     ++  exps  |.((butt hank))
+    ++  expl  |.(;~(gunk (butt rack) loaf))
     ++  expe  |.(wisp)
     ++  expf  |.(;~(gunk loaf loaf loaf loaf))
     ++  expg  |.(;~(gunk sym loaf))
