@@ -1364,7 +1364,7 @@
     $%  [%leaf p=tape]
         [%palm p=[p=tape q=tape r=tape s=tape] q=(list tank)]
         [%rose p=[p=tape q=tape r=tape] q=(list tank)]
-    ::  [%farm p=[p=tape q=tape r=tape] q=(list (list tank))]
+    ::  [%grid p=[p=tape q=tape r=tape] q=(list (list tank))]
     ==
   ++  tape  (list char)
   ++  term  ,@ta

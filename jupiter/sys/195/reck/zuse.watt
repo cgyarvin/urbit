@@ -48,7 +48,7 @@
       $:  wiz=@da                                       ::  next wakeup time
           sal=@                                         ::  entropy
           ton=town                                      ::  urbit state
-          pal=(map base flow)                           ::  routing state
+          pal=(map plot flow)                           ::  routing state
           feq=(map hand ,[p=@da q=sock])                ::  key labels
       ==
     ++  move                                            ::  state change
@@ -59,7 +59,7 @@
           [%meet p=sock]                                ::  get route
           [%newt p=band q=hair]                         ::  fragment decoded
           [%send p=lane q=lane r=rock]                  ::  dispatch a packet
-          [%ride p=base q=mace r=will]                  ::  take ownership
+          [%ride p=plot q=mace r=will]                  ::  take ownership
           [%pack p=lane q=lane r=rock]                  ::  accept a packet
           [%wise p=sock q=bond]                         ::  accept a statement
           [%note p=sock q=bath r=bond]                  ::  hi-level statement

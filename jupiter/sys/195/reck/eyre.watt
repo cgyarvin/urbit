@@ -1,7 +1,7 @@
 !:
-::          %born, a shell.   This file is in the public domain.
+::          %echo, a shell.   This file is in the public domain.
 ::
-:-  %born
+:-  %echo
 ^-  dock
 |=  [now=time wha=@ta]
 %^    hull
@@ -14,11 +14,9 @@
     :~  :^    %rod
             %abel
           :-  [~ ~]
-          :-  [%echo %e ~]
+          :-  [%hose ~]
           |=  hap=*  ^-  (unit)
           ?.  ?=([p=@ta q=@ta r=@ta ~] hap)
-            ~
-          :-  ~
           :+  (?(%gold %iron %lead) r.hap)
             (need (clan %ud q.hap))
           ((sane %ta) p.hap)
@@ -77,7 +75,7 @@
           [%word p=chum]                                ::  set password
       ==                                                ::
     ++  rain                                            ::  reactions produced
-      $%  [%crap p=(list)]                              ::  error trace
+      $%  [%cart p=(list)]                              ::  error trace
           [%drop p=@]                                   ::  transmit packet
           [%hear p=@]                                   ::  receive packet
           [%load p=@tas q=path]                         ::  request directory
@@ -163,7 +161,7 @@
                    por    [[%tell %3 [%leaf "<need {~(ram re vad)}>"]] por]
                  ==
                ==
-        [2 *]  (chug [%crap p.ten])
+        [2 *]  (chug [%cart p.ten])
     ==
   ::
   ++  chug  |=(ran=rain %_(+> por [ran por]))
