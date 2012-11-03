@@ -40,7 +40,7 @@
         u2_rl_lose(wir_r, hoq);
       }
     }
-    u2_bl_drop(wir_r);
+    // u2_bl_drop(wir_r);
     u2_bl_drop(wir_r);
 
     return pro;
