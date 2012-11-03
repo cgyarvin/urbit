@@ -2250,6 +2250,7 @@
     ++  huf  %+  cook  
                |=([a=@ b=@] (wred:un ~(zug mu ~(zag mu [a b]))))
              ;~(plug hif ;~(pfix hep hif))
+    ++  hyf  (bass 0x1.0000.0000 ;~(plug huf ;~(pfix hep huf) (easy ~)))
     ++  pev  (bass 32 ;~(plug sev (stun [0 4] siv)))
     ++  pew  (bass 64 ;~(plug sew (stun [0 4] siw)))
     ++  piv  (bass 32 (stun [5 5] siv))
@@ -2306,7 +2307,8 @@
     ++  dim  (ape (bass 10 ;~(plug sed:ab (star sid:ab))))
     ++  dum  (bass 10 (plus sid:ab))
     ++  fed  ;~  pose
-               (bass 0x1.0000.0000 (most doh huf:ab))
+               (bass 0x1.0000.0000.0000.0000 (most doh hyf:ab))
+               huf:ab
                hif:ab
                tiq:ab
              ==
@@ -2415,7 +2417,7 @@
                 `tape`['-' ~]
                 (trip (tos:po (end 3 1 q.cog)))
                 (trip (tod:po (rsh 3 1 q.cog)))
-                `tape`?:(fin ['-' '-' ~] ~)
+                `tape`?:(fin ['-' ?:(=(1 (end 0 1 dyz)) ~ ['-' ~])] ~)
                 rex
               ==
             ==
@@ -4310,8 +4312,9 @@
     |%
     ++  dext
       ^-  type
-      ~!  (dunk 'dext: sut')
-      ~!  (dunk(sut ref) 'dext: ref')
+      ~|  %crop-dext
+      ::  ~!  (dunk 'dext: sut')
+      ::  ~!  (dunk(sut ref) 'dext: ref')
       ?:  |(=(sut ref) =(%noun ref))
         %void
       ?:  =(%void ref)
@@ -4851,8 +4854,8 @@
     ~/  %fink
     |=  [dep=@ud way=?(%read %rite) cog=term]
     ^-  port
-    ~!  (dunk 'type')
-    ~!  (show [%c 'name'] ?:(=(%% cog) '$' [%a cog]))
+    ::  ~!  (dunk 'type')
+    ~!  (show [%c 'find-limb'] ?:(=(%% cog) '$' [%a cog]))
     =+  hoq=(find dep way cog)
     ?~  q.hoq
       ~|(%find-none !!)
@@ -5111,7 +5114,7 @@
           [%face *]   ?.(=(u.qog p.sut) ~|('heal-name' !!) (face p.sut ref))
           [%fork *]   (fork $(sut p.sut) $(sut q.sut))
           [%hold *]   $(sut repo)
-          *           ~|([%name u.qog] ~!((dunk 'heal-name') !!))
+          *           ~|([%name u.qog] ~|('heal-name' !!))
       ==
     =+  [now=(cap axe) lat=(mas axe)]
     =+  gil=*(set type) 
@@ -5245,7 +5248,8 @@
         [%zpcn ~]  =+(pet=seed [(nice p.pet) [%1 q.pet]])
         [%zpfs *]  
       ?:  vet 
-        ~!((dunk(sut (play p.gen)) 'lost') ~|(%mint-lost !!))
+        ~!  (dunk(sut (play p.gen)) 'lost') 
+        ~|(%mint-lost !!)
       [%void [%0 0]]
     ::
         [%zpsm *]
@@ -5411,7 +5415,8 @@
         [%zpcn ~]  =+(pet=seed [(nice p.pet) p.pet])
         [%zpfs *]
       ?:  vet 
-        ~!((dunk(sut (play p.gen)) 'also') ~|(%mull-skip !!))
+        ::  ~!  (dunk(sut (play p.gen)) 'also') 
+        ~|(%mull-skip !!)
       (both %void)
     ::
         [%zpts *]  (both %noun)
@@ -5434,8 +5439,8 @@
     ::
     ++  nice
       |=  typ=type
-      ~!  (dunk(sut gol) 'need')
-      ~!  (dunk(sut typ) 'have')
+      ::  ~!  (dunk(sut gol) 'need')
+      ::  ~!  (dunk(sut typ) 'have')
       ~|  %mull-nice
       ?>  ?|(!vet (nest(sut gol) & typ))
       typ
@@ -5550,8 +5555,8 @@
       =-  ?:  tyn   
             & 
           ?:  tel 
-            ~!  (dunk %need)
-            ~!  (dunk(sut ref) %have)
+            ::  ~!  (dunk %need)
+            ::  ~!  (dunk(sut ref) %have)
             ~|(%nest-fail !!)
           |
       ^=  tyn
@@ -5656,7 +5661,7 @@
         [%core *]   
       ?:  =(3 now) 
         ?.  (park way lat)
-          ~!  (dunk 'type')
+          ::  ~!  (dunk 'type')
           ~!  (show [%c 'axis'] [%d axe])
           ~|(%peek-park !!)
         ^$(sut p.sut, axe lat) 

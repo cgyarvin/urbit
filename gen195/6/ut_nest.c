@@ -331,11 +331,11 @@
     if ( (u2_yes == tyn) || (u2_no == tel) ) {
       return tyn;
     } else {
-      u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "need", sut);
-      u2_noun niz = j2_mcy(Pt6, ut, dunq)(wir_r, van, "have", ref);
+      // u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "need", sut);
+      // u2_noun niz = j2_mcy(Pt6, ut, dunq)(wir_r, van, "have", ref);
 
-      u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
-      u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
+      // u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
+      // u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
 
       return u2_bl_error(wir_r, "nest-fail");
     }

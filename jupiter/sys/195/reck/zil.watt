@@ -1580,7 +1580,7 @@
     --
 =>  |%
     ++  berg                                            ::  repl/shell
-      |=  [whu=(unit plot) yam=_|+(* *(unit))]          ::  identity, namespace
+      |=  [who=plot yam=_|+(* *(unit))]                 ::  identity, namespace
       =+  nub=`vase`!>(+>)                              ::  system + libraries
       =+  hit=[p=0 q=*(list tape)]                      ::  source history
       =+  sur=[p=0 q=*(qeu vase)]                       ::  result history
@@ -1645,7 +1645,7 @@
         ?+    -.fav  [~ +>]
             %boot
           :-  [[%tell %0 %leaf "<reboot {lice}>"] prom ~]
-          (berg whu yam)
+          (berg who yam)
         ::
             %comd
           =+  pet=(rip 3 p.fav)
@@ -1669,9 +1669,7 @@
       ::
       ++  lice                                          ::  name of shell
         ^-  tape
-        ?~  whu
-          "~~"
-        ~(rend co [~ %p u.whu])
+        ~(rend co [~ %p who])
       ::
       ++  lewd                                          ::  type by name
         |=  txt=@t
@@ -1692,11 +1690,9 @@
               [[%atom %da] now]
             [[%atom %ta] ~(rent co [~ %da now])]
           ::
-            ?~  whu
-              [[%atom %n] ~]
             %+  slop
-              [[%atom %p] u.whu]
-            [[%atom %ta] ~(rent co [~ %p u.whu])]
+              [[%atom %p] who]
+            [[%atom %ta] ~(rent co [~ %p who])]
           ::
             [(lewd '(list ,@)') q.hit]
           ==

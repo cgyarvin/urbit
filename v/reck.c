@@ -229,7 +229,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     free(dyt_c);
   }
   {
-    u2_noun syd, zil, uno, duo, tre, ber, cay, zin, qua, nul, pay, now;
+    u2_noun syd, zil, uno, duo, tre, bac, ber, cay, zin, qua, nul, pay, now;
 
     syd = u2k(rec_u->syd);
 
@@ -244,6 +244,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     ber = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/born.watt");
     cay = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/cary.watt");
     zin = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/zuse.watt");
+    bac = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/bach.watt");
 
     rec_u->toy.duel = 
       _reck_gate(rec_u, u2k(cay), "|=([a=arch b=arch] (~(duel cy a) b))");

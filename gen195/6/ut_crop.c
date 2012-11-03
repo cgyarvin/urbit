@@ -154,11 +154,13 @@
         u2_noun hud = u2_bc(wir_r, u2_rx(wir_r, sut), u2_rx(wir_r, ref));
 
         if ( u2_yes == j2_mcc(Pt4, in, has)(wir_r, bix, hud) ) {
-          u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "type", sut);
-          u2_noun niz = j2_mcy(Pt6, ut, dunq)(wir_r, van, "over", ref);
+#         if 0
+            u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "type", sut);
+            u2_noun niz = j2_mcy(Pt6, ut, dunq)(wir_r, van, "over", ref);
 
-          u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
-          u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
+            u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
+            u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
+#         endif
 
           return u2_bl_error(wir_r, "crop-loop");
         } else {

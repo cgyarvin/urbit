@@ -228,6 +228,7 @@
       |+  [cam=lens poc=pork]                           ::
       [p=*(list plum) q=^?(..poke)]                     ::
     --                                                  ::
+  ++  tuba  ,[p=?(%gold %iron %lead) q=path]            ::  session id (nu) 
   ++  tube  ,[p=?(%gold %iron %lead) q=@ud r=@ta]       ::  session identity
   --
 .

@@ -121,11 +121,11 @@
     if ( (u2_yes == _mint_vet(wir_r, van)) &&
          (u2_no == j2_mcy(Pt6, ut, nest)(wir_r, van, gol, u2_yes, typ)) ) 
     {
-      u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "need", gol);
-      u2_noun niz = j2_mcy(Pt6, ut, dunq)(wir_r, van, "have", typ);
+      // u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "need", gol);
+      // u2_noun niz = j2_mcy(Pt6, ut, dunq)(wir_r, van, "have", typ);
 
-      u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
-      u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
+      // u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
+      // u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
 
       return u2_bl_error(wir_r, "mint-nice");
     }
