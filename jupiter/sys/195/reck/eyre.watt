@@ -16,13 +16,15 @@
           :-  [~ ~]
           :-  [%unix %term ~]
           |=  hap=*  ^-  (unit)
-          ?>  ?=([p=@ta ~] hap)
-          [~ %gold 
+          ?>  ?=([p=@ta q=@ta ~] hap)
           :+  ~  %gold
-          [%unix %term ~(rent co ~ %ud (need (clan %ud p.hap))) ~]
+          :~  %unix
+              %term
+              ~(rent co ~ %p (need (clan %p p.hap)))
+              ~(rent co ~ %ud (need (clan %ud q.hap)))
           ==
         |=  [seq=@ud muz=* cax=bill] 
-        [%run %pine muz q.cax]
+        [%run %pine -.muz +.muz q.cax]
     ::
         :^    %rod
             %boaz
@@ -39,7 +41,7 @@
 =>  |%
     ++  game
       $:  gem=(map plot chum)                           ::  hashed passcodes
-          liv=(map plot (list tube))                    ::  live sessions
+          liv=(map plot (list path))                    ::  live sessions
           rev=(map path plot)                           ::  identities
       == 
     ++  move                                            ::  application event
@@ -54,5 +56,19 @@
   |=  [cam=lens man=*] 
   ^-  [p=lime q=vane]
   =+  muv=((hard move) man)
-  !!
+  ?-    -.muv
+      %pine
+    =+  ^=  yex  ^-  [p=plot q=game]
+        =+  vep=(~(get by rev.sys) q.muv)
+        ?^  vep  [u.vep sys]
+        =+  bog=(shaf %bogus when:cam)
+        [bog sys(rev (~(put by rev.sys) q.muv bog))]
+    :-  [%say %pi [%pine ~(rent co ~ %p p.yex) ~] [q.muv r.muv]]
+    +>.$(sys q.yex)
+  ::
+      %pout
+    ?>  ?=([%tell *] r.muv)
+    :-  [%say %yo %p *tube 0 q.r.muv]
+    +>.$
+  ==
 --

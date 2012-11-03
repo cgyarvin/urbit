@@ -1555,10 +1555,10 @@
     ++  card                                            ::  command
       $%  [%bbye ~]                                     ::  log out
           [%boot p=@]                                   ::  reset soft state
-          [%comd p=@t]                                  ::  source line
           [%dire p=@tas q=dram]                         ::  apply directory
           [%file p=@tas q=@]                            ::  apply atomic file
           [%helo ~]                                     ::  ready to prompt
+          [%line p=@t]                                  ::  source line
           [%logn p=@p q=@dr r=chum]                     ::  name lease password
           [%peck p=@]                                   ::  apply packet
           [%word p=chum]                                ::  set password
@@ -1647,14 +1647,6 @@
           :-  [[%tell %0 %leaf "<reboot {lice}>"] prom ~]
           (berg who yam)
         ::
-            %comd
-          =+  pet=(rip 3 p.fav)
-          =>  .(p.hit +(p.hit), q.hit [pet q.hit])
-          =+  vex=(clam pet)
-          ?:  |(?=(~ q.vex) !=(~ q.q.u.q.vex))
-            [[[%tell %3 %leaf "<syntax error>"] ~] +>.$]
-          (chad now p.u.q.vex)
-        ::
             %dire
           :-  ~
           %_(+> way (~(put by way) p.fav [(lewd 'dram') q.fav]))
@@ -1665,6 +1657,14 @@
         ::
             %helo
           [[prom ~] +>]
+        ::
+            %line
+          =+  pet=(rip 3 p.fav)
+          =>  .(p.hit +(p.hit), q.hit [pet q.hit])
+          =+  vex=(clam pet)
+          ?:  |(?=(~ q.vex) !=(~ q.q.u.q.vex))
+            [[[%tell %3 %leaf "<syntax error>"] ~] +>.$]
+          (chad now p.u.q.vex)
         ==
       ::
       ++  lice                                          ::  name of shell
@@ -1682,6 +1682,11 @@
         ?.((~(nest ut (lewd txt)) | p.vax) ~ [~ q.vax])
       ::
       ++  lube                                          ::  make subject
+        |=  now=@da
+        ^-  vase
+        nub
+      ::
+      ++  lubb                                          ::  make subject
         |=  now=@da
         ^-  vase
         ;:  slop

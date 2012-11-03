@@ -26,12 +26,11 @@
                     lam 
                   ^-  lamb
                   :-  %o 
-                  :~  :-  %echo
+                  :~  :-  %unix
                       :+  %pu
-                        :-  %e
+                        :-  %term
                         :~  ~(rent co [~ %p p.p.lam])
                             ~(rent co [~ %ud q.p.lam])
-                            %gold
                             ~(rent co [~ %ud q.lam])
                         ==
                       [%line r.lam]
