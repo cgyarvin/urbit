@@ -43,7 +43,8 @@
       [p.guo ..poke(sys q.guo)]
     --
 =>  |%
-    ++  game
+    ++  bath  ,[p=@ta q=@uvH]                           ::  request by identity
+    ++  game                                            ::  application state
       $:  wiz=@da                                       ::  next wakeup time
           sal=@                                         ::  entropy
           ton=town                                      ::  urbit state

@@ -2634,12 +2634,148 @@ J196_OFILES=\
        $(J196_6_OFILES_UT) \
        gen196/watt.o
 
+J195_1_OFILES=\
+       gen195/1/add.o \
+       gen195/1/dec.o \
+       gen195/1/div.o \
+       gen195/1/gte.o \
+       gen195/1/gth.o \
+       gen195/1/lte.o \
+       gen195/1/lth.o \
+       gen195/1/mod.o \
+       gen195/1/mul.o \
+       gen195/1/sub.o
+
+J195_2_OFILES=\
+       gen195/2/bind.o \
+       gen195/2/clap.o \
+       gen195/2/drop.o \
+       gen195/2/flop.o \
+       gen195/2/lent.o \
+       gen195/2/levy.o \
+       gen195/2/lien.o \
+       gen195/2/need.o \
+       gen195/2/reel.o \
+       gen195/2/roll.o \
+       gen195/2/skim.o \
+       gen195/2/skip.o \
+       gen195/2/slag.o \
+       gen195/2/snag.o \
+       gen195/2/sort.o \
+       gen195/2/turn.o \
+       gen195/2/weld.o
+
+J195_3_OFILES=\
+       gen195/3/bex.o \
+       gen195/3/can.o \
+       gen195/3/cap.o \
+       gen195/3/cat.o \
+       gen195/3/con.o \
+       gen195/3/cut.o \
+       gen195/3/dor.o \
+       gen195/3/dis.o \
+       gen195/3/end.o \
+       gen195/3/gor.o \
+       gen195/3/hor.o \
+       gen195/3/lsh.o \
+       gen195/3/mas.o \
+       gen195/3/met.o \
+       gen195/3/mix.o \
+       gen195/3/mug.o \
+       gen195/3/peg.o \
+       gen195/3/rap.o \
+       gen195/3/rip.o \
+       gen195/3/rsh.o \
+       gen195/3/vor.o
+
+J195_4_OFILES=\
+       gen195/4/in.o \
+       gen195/4/by.o \
+       gen195/4/in_has.o \
+       gen195/4/in_gas.o \
+       gen195/4/in_put.o \
+       gen195/4/in_tap.o \
+       gen195/4/by_gas.o \
+       gen195/4/by_get.o \
+       gen195/4/by_has.o \
+       gen195/4/by_put.o 
+
+J195_5_OFILES=\
+       gen195/5/cue.o \
+       gen195/5/jam.o \
+       gen195/5/mat.o \
+       gen195/5/mock.o \
+       gen195/5/parse.o \
+       gen195/5/rub.o \
+       gen195/5/shax.o \
+       gen195/5/trip.o
+
+J195_6_OFILES=\
+       gen195/6/ap.o \
+       gen195/6/cell.o \
+       gen195/6/comb.o \
+       gen195/6/cons.o \
+       gen195/6/core.o \
+       gen195/6/cube.o \
+       gen195/6/face.o \
+       gen195/6/fine.o \
+       gen195/6/fitz.o \
+       gen195/6/flan.o \
+       gen195/6/flay.o \
+       gen195/6/flip.o \
+       gen195/6/flor.o \
+       gen195/6/fork.o \
+       gen195/6/hike.o \
+       gen195/6/look.o \
+       gen195/6/ut.o
+
+J195_6_OFILES_UT=\
+       gen195/6/ut_burn.o \
+       gen195/6/ut_bust.o \
+       gen195/6/ut_crop.o \
+       gen195/6/ut_cull.o \
+       gen195/6/ut_find.o \
+       gen195/6/ut_fink.o \
+       gen195/6/ut_fire.o \
+       gen195/6/ut_firm.o \
+       gen195/6/ut_fish.o \
+       gen195/6/ut_fuse.o \
+       gen195/6/ut_gain.o \
+       gen195/6/ut_heal.o \
+       gen195/6/ut_lose.o \
+       gen195/6/ut_mint.o \
+       gen195/6/ut_moot.o \
+       gen195/6/ut_mull.o \
+       gen195/6/ut_nest.o \
+       gen195/6/ut_park.o \
+       gen195/6/ut_peek.o \
+       gen195/6/ut_play.o \
+       gen195/6/ut_repo.o \
+       gen195/6/ut_rest.o \
+       gen195/6/ut_seek.o \
+       gen195/6/ut_snap.o \
+       gen195/6/ut_swab.o \
+       gen195/6/ut_tack.o \
+       gen195/6/ut_tock.o \
+       gen195/6/ut_wrap.o
+
+J195_OFILES=\
+       $(J195_1_OFILES) \
+       $(J195_2_OFILES) \
+       $(J195_3_OFILES) \
+       $(J195_4_OFILES) \
+       $(J195_5_OFILES) \
+       $(J195_6_OFILES) \
+       $(J195_6_OFILES_UT) \
+       gen195/watt.o
+
 BASE_OFILES=\
        $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
        $(J197_OFILES) \
-       $(J196_OFILES)
+       $(J196_OFILES) \
+       $(J195_OFILES)
 
 OUT_OFILES=\
        outside/jhttp/http_parser.o

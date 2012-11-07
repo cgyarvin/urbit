@@ -442,8 +442,8 @@ u2_cm_bail(c3_l how_l)
   u2_ray kit_r = u2_wire_kit_r(u2_Wire);
 
   if ( u2_yes == u2_Flag_Abort ) {
-    // if ( c3__fail == how_l ) { c3_assert(0); }
-    c3_assert(0);
+    if ( c3__fail == how_l ) { c3_assert(0); }
+    // c3_assert(0);
   }
   u2_tx_sys_bit(u2_Wire, u2_yes);
 
@@ -636,6 +636,17 @@ u2_cn_qual(u2_noun a,
            u2_noun d)
 {
   return u2_bn_qual(u2_Wire, a, b, c, d);
+}
+
+/* u2_cka_add(): a + b.
+*/
+u2_noun
+u2_cka_add(u2_noun a, u2_noun b)
+{
+  u2_noun c = j2_mbc(Pt1, add)(u2_Wire, a, b);
+
+  u2_cz(a); u2_cz(b);
+  return c;
 }
 
 /* u2_cka_mul(): a * b.

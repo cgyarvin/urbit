@@ -283,6 +283,11 @@
         u2_noun
         u2_walk(u2_reck* rec_u, const c3_c* dir_c, u2_noun old);
 
+      /* u2_path(): C unix path in computer for file or directory. 
+      */
+        c3_c*
+        u2_path(u2_flag fyl, u2_noun pax);
+
     /**  Filesystem (old api).
     **/
       /* u2_ve_file(): load internal file as atom from local or system.

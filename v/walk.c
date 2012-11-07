@@ -216,3 +216,49 @@ u2_walk(u2_reck* rec_u, const c3_c* dir_c, u2_noun old)
     }
   }
 }
+
+/* u2_path(): C unix path in computer for file or directory. 
+*/
+c3_c*
+u2_path(u2_flag fyl, u2_noun pax)
+{
+  c3_w len_w;
+  c3_c *pas_c;
+
+  //  measure
+  //
+  len_w = strlen(u2_Local);
+  {
+    u2_noun wiz = pax;
+
+    while ( u2_nul != wiz ) {
+      len_w += (1 + u2_cr_met(3, u2h(wiz)));
+      wiz = u2t(wiz);
+    }
+  }
+
+  //  cut
+  //
+  pas_c = malloc(len_w + 1);
+  strcpy(pas_c, u2_Local);
+  {
+    u2_noun wiz   = pax;
+    c3_c*   waq_c = (pas_c + strlen(pas_c));
+
+    while ( u2_nul != wiz ) {
+      c3_w tis_w = u2_cr_met(3, u2h(wiz));
+
+      if ( (u2_yes == fyl) && (u2_nul == u2t(wiz)) ) {
+        *waq_c++ = '.';
+      } else *waq_c++ = '/';
+
+      u2_cr_bytes(0, tis_w, (c3_y*)waq_c, u2h(wiz));
+      waq_c += tis_w;
+
+      wiz = u2t(wiz);
+    }
+    *waq_c = 0;
+  }
+  u2z(pax);
+  return pas_c;
+}

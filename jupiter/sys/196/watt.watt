@@ -1,6 +1,84 @@
 ::
-::              Watt kernel 196.  This file is in the public domain.
+::              Hoon stage 196 (reflexive).  
+::              This file is in the public domain.
 ::
+::    A noun is an atom or a cell.  An atom is any natural number.  
+::    A cell is an ordered pair of nouns.
+::
+::    Noun A is this file, hoon.hoon, encoded as an atom, LSB first.
+::    Noun B is the accompanying (jam) file, hoon.pill, encoded
+::    as an atom LSB first and expanded with (cue).  Noun C is
+::    the cell [A B].
+::
+::    A is marked above with a stage number (X) and a constraint,
+::    either "reflexive" (normal) or "transitional" (used only 
+::    for language changes).  Stage numbers count down; at stage
+::    0, A is (supposedly) final.
+::
+::    If the current stage X is "reflexive", N(C) equals B, where
+::    N (nock) is the * reduction in the pseudocode below:
+::    
+::        nock(a)           *a
+::        [a b c]           [a [b c]]
+::      
+::        ?[a b]            0
+::        ?a                1
+::        +a                1 + a
+::        =[a a]            0
+::        =[a b]            1
+::      
+::        /[1 a]            a
+::        /[2 a b]          a
+::        /[3 a b]          b
+::        /[(a + a) b]      /[2 /[a b]]
+::        /[(a + a + 1) b]  /[3 /[a b]]
+::      
+::        *[a [b c] d]      [*[a b c] *[a d]]
+::      
+::        *[a 0 b]          /[b a]
+::        *[a 1 b]          b
+::        *[a 2 b c]        *[*[a b] *[a c]]
+::        *[a 3 b]          ?*[a b]
+::        *[a 4 b]          +*[a b]
+::        *[a 5 b]          =*[a b]
+::      
+::        *[a 6 b c d]      *[a 2 [0 1] 2 [1 c d] [1 0] 2 [1 2 3] [1 0] 4 4 b]
+::        *[a 7 b c]        *[a 2 b 1 c]
+::        *[a 8 b c]        *[a 7 [[7 [0 1] b] 0 1] c]
+::        *[a 9 b c]        *[a 7 c 0 b]
+::        *[a 10 b c]       *[a c]
+::        *[a 10 [b c] d]   *[a 8 c 7 [0 2] d]
+::      
+::        +[a b]            +[a b]
+::        =a                =a
+::        /a                /a
+::        *a                *a
+::
+::    Ie, the pair [A B] is a self-compiling compiler against N.
+::
+::    This self-compiling compiler defines its own language, Hoon.
+::    (The Nock definition above is pseudocode; the Hoon kernel below 
+::    is code.)  Hoon is a pure, strict, higher-order typed functional 
+::    language, not particularly like either Lisp or Haskell/OCaml.
+::    Its relationship to Nock is much like that of C to assembler.
+::
+::    If stage X is "transitional," the compiler compiles not itself
+::    but its successor stage Y=X-1.  Thus, N(A_Y B_X) equals B_Y.
+::    (Of course this constraint holds also for reflexive stages.)
+::
+::    Hoon may thus change arbitrarily across stages, though ideally
+::    of course it won't.  Every numbered stage of Hoon is a logically 
+::    different language.  When in doubt, say "Hoon {X}."
+::
+::    Nock above is the complete interpreter and semantically closed.
+::    This small definition is designed to be permanently frozen.
+::    All errors yield bottom, ie, do not terminate.  A naive Nock
+::    implementation is obviously not efficient.  If application
+::    were no concern, however, instructions 6-10 could be removed.
+::
+::    (One fun exercise: write a decrement formula, not using 7-10.
+::    More fun is to also eschew 6.)
+::::
 =>  src=.
 ?>  ?=(@ src)
 %.  src
@@ -29,7 +107,7 @@
   ++  dec
     ~/  %dec
     |=  a=@
-    ~|  %dec
+    ~|  'decrement zero'
     ^-  @
     ?<  =(0 a)
     =+  b=@
@@ -42,7 +120,7 @@
     ~/  %div
     |=  [a=@ b=@]
     ^-  @
-    ~|  %div
+    ~|  'divide by zero'
     ?<  =(0 b)
     =+  c=@
     |-
@@ -109,7 +187,7 @@
   ++  sub
     ~/  %sub
     |=  [a=@ b=@]
-    ~|  sub
+    ~|  'subtract underflow'
     ^-  @
     ?:  =(0 b)
       a
@@ -994,9 +1072,9 @@
     |*  [a=_,* b=_,*]
     $|(~ [n=[p=a q=b] l=(map a b) r=(map a b)])
   ::
-  ++  que
+  ++  qeu
     |*  a=_,* 
-    $|(~ [n=a l=(que a) r=(que a)])
+    $|(~ [n=a l=(qeu a) r=(qeu a)])
   ::
   ++  set
     |*  a=_,*
@@ -1037,7 +1115,7 @@
         ~
       ?.  =(b n.a)
         ?:((hor b n.a) $(a l.a) $(a r.a))
-      |-  ^+  a
+      |-  ^-  ?(~ _a)
       ?~  l.a  r.a
       ?~  r.a  l.a
       ?:  (vor n.l.a n.r.a)
@@ -1198,7 +1276,7 @@
   ::      Tier 4c, queues
   ::
   ++  to
-    |_  a=(que)
+    |_  a=(qeu)
     +-  gas
       |=  b=(list _?>(?=(^ a) n.a))
       |-  ^+  a
@@ -1215,6 +1293,15 @@
       ?:  |(?=(~ q.b) (vor n.a n.q.b))
         [n.a l.a q.b]
       [n.q.b [n.a l.a l.q.b] r.q.b]
+    ::
+    +-  nap
+      |-  ^+  a
+      ?~  a  ~
+      ?~  r.a  l.a
+      ?~  l.a  r.a
+      ?:  (vor n.l.a n.r.a)
+        [n.l.a l.l.a $(l.a r.l.a)]
+      [n.r.a $(r.a l.r.a) r.r.a]
     ::
     +-  put
       |*  b=*
@@ -1250,6 +1337,9 @@
                 [%many p=(list coin)]
             ==
   ++  disc  ,@ta
+  ++  dram  $%  [| p=(map ,@tas dram)]
+                [& p=@ud q=@]
+            ==
   ++  edge  ,[p=hair q=(unit ,[p=* q=nail])]
   ++  hair  ,[p=@ud q=@ud]
   ++  hapt  (list ,@ta)
@@ -1722,7 +1812,7 @@
   ++  wut  (just '?')
   ++  zap  (just '!')
   ::
-  ::      tier 5b/5, parsing: watty whitespace & termination
+  ::      tier 5b/5, parsing: hoony whitespace & termination
   ::
   ++  dog  ;~(plug dot gay)
   ++  doh  ;~(plug ;~(plug hep hep) gay)
@@ -1809,6 +1899,11 @@
     ?:  =(0 a)
       c
     [b $(a (dec a))]
+  ::
+  ++  sane                            ::  XX atom type sanity check/normalize
+    |=  a=@ta 
+    |=  b=@  ^-  @
+    b
   ::
   ++  trim
     |=  [a=@ b=tape]
@@ -2544,8 +2639,8 @@
     ::
     ++  zust
       ;~  pose
-        (stag %ib bip:ag)
-        (stag %il lip:ag)
+        (stag %is bip:ag)
+        (stag %if lip:ag)
         (stag %f ;~(pose (cold & (just 'y')) (cold | (just 'n'))))
         royl
       ==
@@ -3024,22 +3119,24 @@
       [%brts p=gene q=gene]
       [%brwt p=gene]
     ::
+      [%clcb p=gene q=gene]
       [%clkt p=gene q=gene r=gene s=gene]
       [%clhp p=gene q=gene]
       [%clls p=gene q=gene r=gene]
       [%clsg p=(list gene)]
       [%cltr p=(list gene)]
     ::
-      [%cncl p=gene q=gene]
-      [%cntr p=twig q=gene r=(list ,[p=gene q=gene])]
-      [%cndt p=gene q=gene]
-      [%cnkt p=gene q=gene r=gene s=gene]
       [%cnbc p=term]
-      [%cnls p=gene q=gene r=gene]
+      [%cncb p=wing q=(list ,[p=gene q=gene])]
+      [%cncl p=gene q=gene]
+      [%cndt p=gene q=gene]
       [%cnhp p=gene q=(list gene)]
-      [%cnhx p=twig]
-      [%cnsg p=twig q=gene r=gene]
-      [%cnts p=twig q=(list ,[p=gene q=gene])]
+      [%cnhx p=wing]
+      [%cntr p=wing q=gene r=(list ,[p=gene q=gene])]
+      [%cnkt p=gene q=gene r=gene s=gene]
+      [%cnls p=gene q=gene r=gene]
+      [%cnsg p=wing q=gene r=gene]
+      [%cnts p=wing q=(list ,[p=gene q=gene])]
     ::
       [%dtkt p=gene]
       [%dtdq p=(list $|(@ta [~ p=gene]))]
@@ -3101,8 +3198,11 @@
       [%smts p=gene q=gene]
       [%smwt p=gene q=gene]
     ::
+      [%tscl p=(list ,[p=gene q=gene]) q=gene]
+      [%tsdt p=gene q=gene r=gene]
       [%tsgl p=gene q=gene]
       [%tsgr p=gene q=gene]
+      [%tskt p=gene q=gene r=gene]
       [%tsls p=gene q=gene]
       [%tshp p=gene q=gene]
     ::
@@ -3130,7 +3230,7 @@
       [%zpts p=gene]
       [%zpzp ~]
     ==
-  ++  knot  $|(term $%([& p=axis] [| p=@ud q=term]))
+  ++  limb  $|(term $%([& p=axis] [| p=@ud q=term]))
   ++  line  ,[p=[%leaf p=odor q=@] q=tile] 
   ++  odor  disc
   ++  port
@@ -3156,7 +3256,7 @@
                 [1 p=(list)]
                 [2 p=(list ,[@ta *])]
             ==
-  ++  twig  (list knot)
+  ++  wing  (list limb)
   ++  type
     $|  ?(%noun %void) 
     $%  [%atom p=term]
@@ -3184,7 +3284,7 @@
     ==
   --
 ::::
-::::  Tier 6, Watt in Watt
+::::  Tier 6, Hoon in Hoon
 ::::
 ~%    %f
     +
@@ -3428,6 +3528,7 @@
     ?-    gen
         [^ *]      [$(gen p.gen) $(gen q.gen)]
         [%clls *]  $(gen open)
+        [%clcb *]  $(gen open)
         [%clhp *]  $(gen open)
         [%clkt *]  $(gen open)
         [%cltr *]  $(gen open)
@@ -3489,6 +3590,10 @@
       $(gen voq)
     ==
   ::
+  ++  hock
+    ^-  [p=gene q=gene]
+    =+(haq=hack ?.(?=(& -.haq) ~|(%hock-gene !!) +.haq))
+  ::
   ++  open
     ^-  gene
     ?-    gen
@@ -3513,6 +3618,7 @@
         [%brwt *]  [%ktwt %brdt p.gen]
         [%clkt *]  [p.gen q.gen r.gen s.gen]
         [%clls *]  [p.gen q.gen r.gen]
+        [%clcb *]  [q.gen p.gen]
         [%clhp *]  [p.gen q.gen]
         [%clsg *]  |-(?@(p.gen [%dtsg %n ~] [i.p.gen $(p.gen t.p.gen)]))
         [%cltr *]
@@ -3524,6 +3630,7 @@
       ==
     ::
         [%cnbc *]  [%cnts [p.gen ~] ~]
+        [%cncb *]  [%ktls [%cnhx p.gen] %cnts p.gen q.gen]
         [%cncl *]  [%cnsg [%% ~] p.gen q.gen]
         [%cndt *]  [%cnhp q.gen [p.gen ~]]
         [%cnkt *]  [%cnhp p.gen q.gen r.gen s.gen ~]
@@ -3537,7 +3644,7 @@
       :+  %tsls
         q.gen
       :+  %cnts
-        (weld p.gen `twig`[[~ 2] ~])
+        (weld p.gen `wing`[[~ 2] ~])
       (turn r.gen |=([p=gene q=gene] [p [%ktdt [~ 10] [%tsgr [~ 3] q]]]))
     ::
         [%kthp *]  [%ktls ~(bunt al bore(gen p.gen)) q.gen]
@@ -3837,6 +3944,19 @@
           ==                                            ::    ==
       ==                                                ::  ==
     ::
+        [%tscl *]  [%tsgr [%cncb [[~ 1] ~] p.gen] q.gen]
+        [%tsdt *]  [%tsgr [%cncb [[~ 1] ~] [[p.gen q.gen] ~]] r.gen]
+        [%tskt *]                                       ::                  =^
+      =+  cog=rusk(gen p.gen)
+      =+  hic=hock(gen q.gen)
+      :+  %tsgr  [%ktts %v ~ 1]                         ::  =>  v=.
+      :+  %tsls  [%ktts %a %tsgr [%cnbc %v] q.hic]      ::  =+  a==>(v \q.hic)
+      :^  %tsdt  p.hic [%tsgl [~ 3] [%cnbc %a]]         ::  =.  p.hic  +.a
+      :+  %tsgr  :-  :+  %ktts  cog                     ::  =>  ^=  cog
+                     [%tsgl [~ 2] [%cnbc %a]]           ::      :-  -.a
+                 [%cnbc %v]                             ::      v
+      r.gen                                             ::  r.gen
+    ::
         [%tsgl *]  [%tsgr q.gen p.gen]
         [%tsls *]  [%tsgr [p.gen [~ 1]] q.gen]
         [%tshp *]  [%tsls q.gen p.gen]
@@ -3872,7 +3992,7 @@
     ==
   ::
   ++  rake
-    ^-  twig
+    ^-  wing
     ?-  gen
       [~ *]         [gen ~]
       [%cnbc *]     [p.gen ~]
@@ -3881,6 +4001,12 @@
       [%zpcb *]     rake(gen q.gen)
       *             ~|(%rake-gene !!)
     ==
+  ++  rusk
+    ^-  term
+    =+  wig=rake
+    ?.  ?=([@ ~] wig)
+      ~|(%rusk-gene !!)
+    i.wig
   --
 ::
 ++  coke
@@ -5841,7 +5967,7 @@
       [%face *]   q.sut
       [%hold *]   (rest p.sut)
       %noun       [%fork [%atom %%] [%cell %noun %noun]]
-      *           ~|(%repo-flat !!)
+      *           ~|(%repo-fltt !!)
     ==
   ::
   ++  rest
@@ -5892,7 +6018,7 @@
   ::
   ++  seek
     ~/  %seek
-    |=  [way=?(%read %rite) hyp=twig]
+    |=  [way=?(%read %rite) hyp=wing]
     ^-  port
     ?@  hyp
       [1 %& sut]
@@ -5942,14 +6068,14 @@
   ++  swab
     ~/  %swab
     |=  [men=(list ,[p=type q=foot]) har=(list ,[p=gene q=gene])]
-    ^-  (list ,[p=twig q=gene])
+    ^-  (list ,[p=wing q=gene])
     %+  turn
       har
     |=([a=gene b=gene] [(flop ~(rake ap a)) b])
   ::
   ++  tack
     ~/  %tack
-    |=  [peh=twig mur=type]
+    |=  [peh=wing mur=type]
     =+  axe=1
     |-  ^-  [p=axis q=type]
     ?@  peh
@@ -5969,7 +6095,7 @@
   ::
   ++  tock
     ~/  %tock
-    |=  [peh=twig mur=type men=(list ,[p=type q=foot])]
+    |=  [peh=wing mur=type men=(list ,[p=type q=foot])]
     ^-  [p=axis q=(list ,[p=type q=foot])]
     =-  [(need p.wib) q.wib]
     ^=  wib
@@ -5991,7 +6117,7 @@
       *          ~|(%wrap-type !!)
     ==
   --
-  ++  jack
+  ++  jock
     |=  rad=?
     |=  lot=coin  ^-  gene
     ?-    -.lot
@@ -6073,7 +6199,7 @@
           (stag %zpcn (cold ~ ;~(plug zap cen)))
         ==
       :-  '$'
-        (cook |=(a=twig [%cnts a ~]) rope)
+        (cook |=(a=wing [%cnts a ~]) rope)
       :-  '%'
         ;~  pfix  cen
           ;~  pose
@@ -6081,12 +6207,12 @@
             (stag %dtsg (stag %f (cold & pam)))
             (stag %dtsg (stag %f (cold | bar)))
             (stag %dtsg (stag %ta qut))
-            (cook (jack &) nuck:so)
+            (cook (jock &) nuck:so)
           ==
         == 
       :-  '&'
         ;~  pose
-          (cook |=(a=twig [%cnts a ~]) rope)
+          (cook |=(a=wing [%cnts a ~]) rope)
           (stag %wtpm ;~(pfix pam (ifix [pel per] (most ace wide))))
           ::  (stag %bccb (stag %ktpm ;~(pfix pam wide)))
           (stag %dtpt (stag %f (cold & pam)))
@@ -6103,7 +6229,7 @@
       :-  '+'
         ;~  pose
           (stag %dtls ;~(pfix lus (ifix [pel per] wide)))
-          (cook |=(a=twig [%cnts a ~]) rope)
+          (cook |=(a=wing [%cnts a ~]) rope)
         ==
       :-  '#'
         ;~  pfix  hax
@@ -6112,12 +6238,12 @@
       :-  '-'
         ;~  pose
           (stag %dtpt tash:so)
-          (cook |=(a=twig [%cnts a ~]) rope)
+          (cook |=(a=wing [%cnts a ~]) rope)
         ==
       :-  '.'
         ;~  pose
           (stag %dtpt ;~(pfix dot zust:so))
-          (cook |=(a=twig [%cnts a ~]) rope)
+          (cook |=(a=wing [%cnts a ~]) rope)
         ==
       :-  ['0' '9']
         (stag %dtpt bisk:so)
@@ -6175,7 +6301,7 @@
         (stag %cnhx rope)
       :-  '|'
         ;~  pose
-          (cook |=(a=twig [%cnts a ~]) rope)
+          (cook |=(a=wing [%cnts a ~]) rope)
           (stag %wtbr ;~(pfix bar (ifix [pel per] (most ace wide))))
           (stag %dtpt (stag %f (cold | bar)))
         ==
@@ -6189,7 +6315,7 @@
               [pel per] 
             ;~(glam rope wide (stag %cltr (most ace wide)))
           ::
-            (cook (jack |) twid:so)
+            (cook (jock |) twid:so)
             (easy [%bcts %null])
           ==
         ==
@@ -6231,6 +6357,7 @@
             :-  '%'
               ;~  pfix  cen
                 %-  stew  :~
+                  ['_' (rune cab %cncb expj)]
                   [':' (rune col %cncl expb)]
                   ['.' (rune dot %cndt expb)]
                   ['^' (rune ket %cnkt expf)]
@@ -6256,6 +6383,7 @@
             :-  ':'
               ;~  pfix  col
                 %-  stew  :~
+                  ['_' (rune cab %clcb expb)]
                   ['^' (rune ket %clkt expf)]
                   ['+' (rune lus %clls expc)]
                   ['-' (rune hep %clhp expb)]
@@ -6326,6 +6454,9 @@
             :-  '='
               ;~  pfix  tis
                 %-  stew  :~
+                  ['.' (rune dot %tsdt expc)]
+                  ['^' (rune ket %tskt expc)]
+                  [':' (rune col %tscl expl)]
                   ['<' (rune gal %tsgl expb)]
                   ['>' (rune gar %tsgr expb)]
                   ['-' (rune hep %tshp expb)]
@@ -6422,6 +6553,7 @@
     ++  expb  |.(;~(gunk loaf loaf))
     ++  expc  |.(;~(gunk loaf loaf loaf))
     ++  exps  |.((butt hank))
+    ++  expl  |.(;~(gunk (butt rack) loaf))
     ++  expe  |.(wisp)
     ++  expf  |.(;~(gunk loaf loaf loaf loaf))
     ++  expg  |.(;~(gunk sym loaf))
@@ -6508,9 +6640,9 @@
   ::
   ++  rope
     %+  knee
-      *twig
+      *wing
     |.  ~+
-    %+  (slug `twig`~ |=([a=twig b=twig] (weld a b)))
+    %+  (slug `wing`~ |=([a=wing b=wing] (weld a b)))
       dot
     ;~  pose
       %+  cook  
@@ -6518,7 +6650,7 @@
       ;~(plug (star ket) ;~(pose sym (cold %% buc)))
     ::
       %+  cook
-        |=(a=knot [a ~])
+        |=(a=limb [a ~])
       %+  cook 
         |=(a=axis [%& a]) 
       ;~  pose 

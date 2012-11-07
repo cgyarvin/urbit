@@ -1,7 +1,7 @@
 !:
-::          zuse (zus), packet interpreter.   This file is in the public domain.
+::          zuse (zin), packet interpreter.   This file is in the public domain.
 ::
-:-  %zus
+:-  %zin
 ^-  dock
 |=  [now=time wha=@ta]
 %^    hull
@@ -30,7 +30,7 @@
       |=  [yon=path muz=* cax=bill] 
       [%run %want muz q.cax]
     ==
-^-  bowl
+^-  vane
 =>  ..$
 =<  |%
     ++  peek  |=([cam=lens hap=path] ~)
@@ -43,21 +43,21 @@
       [p.guo ..poke(sys q.guo)]
     --
 =>  |%
-    ++  game
+    ++  bath  ,[p=@ta q=@uvH]                           ::  request app/id
+    ++  game                                            ::
       $:  wiz=@da                                       ::  next wakeup time
           sal=@                                         ::  entropy
           ton=town                                      ::  urbit state
           pal=(map base flow)                           ::  routing state
           feq=(map hand ,[p=@da q=sock])                ::  key labels
-          yaw=(map flap sink)                           ::  fragment pyramid
       ==
     ++  move                                            ::  state change
-      $%  [%back p=?(0 1 2 3 4 5) q=flap]               ::  ack or nack
-          [%frog p=flap q=rock]                         ::  fragment received
+      $%  [%back p=?(0 1 2 3 4 5) q=band]               ::  ack or nack
+          [%frog p=band q=rock]                         ::  fragment received
           [%junk p=@]                                   ::  entropy
           [%made p=sock q=lane]                         ::  got route
           [%meet p=sock]                                ::  get route
-          [%newt p=flap q=hair]                         ::  fragment decoded
+          [%newt p=band q=hair]                         ::  fragment decoded
           [%send p=lane q=lane r=rock]                  ::  dispatch a packet
           [%ride p=base q=mace r=will]                  ::  take ownership
           [%pack p=lane q=lane r=rock]                  ::  accept a packet
@@ -66,7 +66,7 @@
           [%mess p=skin q=gram]                         ::  mid-level receive
           [%give p=lane q=bath r=skin s=gram]           ::  mid-level send
           [%over p=? q=bath]                            ::  &=succeed |=fail
-          [%muss p=well q=hair]                         ::  resolve a message
+          [%muss p=band q=hair]                         ::  resolve a message
           [%wake p=@da]                                 ::  time has passed
       ==
     --
