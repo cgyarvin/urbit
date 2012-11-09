@@ -1,0 +1,43 @@
+!:
+::          %arvo, a protocol.   This file is in the public domain.
+::
+:-  %arvo
+^-  dock
+|=  [now=time wha=@ta]
+%^    hull
+    (iris now)
+  wha
+^-  bead
+|=  [now=time wha=@ta]
+:-  ^-  lime
+    :-  %all
+    :~  :^    %rod
+            %abel
+          :-  [~ ~]
+          :-  [%unix %pack ~]
+          |=  hap=*  ^-  (unit)
+          ?.(=(~ hap) ~ [~ ~])
+        |=([seq=@ud muz=* cax=bill] [%run q.cax])
+    ==
+^-  vane
+=>  ..$
+=>  |%
+    ++  game                                            ::  system state 
+      $:  fox=fort
+      ==
+    --
+=+  sys=*game
+|%
+++  peek  |=([cam=lens hap=path] ~)
+++  poke  
+  |=  [cam=lens man=*] 
+  ^-  [p=lime q=vane]
+  =+  pac=((hard rock) man)
+  =+  dey=(~(gnaw am [when:cam fox.sys]) pac)
+  :-  :-  %all
+      %+  turn
+        p.dey
+      |=  bun=boon  ^-  lime
+      [%say %pi [%pose ~] bun]
+  +>.$(fox.sys q.dey)
+--

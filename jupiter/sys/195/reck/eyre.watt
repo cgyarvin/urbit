@@ -67,8 +67,7 @@
     +>.$(sys q.yex)
   ::
       %pout
-    ?>  ?=([%tell *] r.muv)
-    :-  [%say %yo %p *tube 0 q.r.muv]
+    :-  [%say %yo %g r.muv]
     +>.$
   ==
 --

@@ -230,7 +230,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
   }
   {
     u2_noun syd, zil, uno, duo, tre;
-    u2_noun bac, ber, cay, qua, nul, pay, eyr, now;
+    u2_noun bac, cay, qua, nul, pay, eyr, arv, now;
 
     syd = u2k(rec_u->syd);
 
@@ -242,10 +242,10 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     duo = _reck_load_temp(rec_u, uno, kno_w, "reck/duo.watt");
     tre = _reck_load_temp(rec_u, duo, kno_w, "reck/tre.watt");
 
-    ber = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/born.watt");
+    arv = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/arvo.watt");
+    bac = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/bach.watt");
     cay = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/cary.watt");
     eyr = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/eyre.watt");
-    bac = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/bach.watt");
 
     rec_u->toy.duel = 
       _reck_gate(rec_u, u2k(cay), "|=([a=arch b=arch] (~(duel cy a) b))");
@@ -255,7 +255,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     nul = u2nc(u2nt(c3__cube, 0, u2nc(c3__atom, 'n')), 0);
     pay = _reck_slop
       (rec_u, 
-       ber, 
+       arv, 
        _reck_slop
         (rec_u, 
          cay,
@@ -287,6 +287,69 @@ _reck_kiwi(u2_reck* rec_u, u2_noun veb)
     }
     case 't': {
       u2_ve_sway(2, u2k(u2t(veb)));
+      break;
+    }
+    case 'g': {
+      p_veb = u2t(veb);
+      {
+        u2_noun pay = p_veb;
+        u2_noun p_pay, q_pay;
+        
+        switch ( u2h(pay) ) {
+          default: 
+          {
+            u2_err(u2_Wire, "unsupported", u2h(pay));
+          } break;
+
+          case c3__crap: p_pay = u2t(pay);
+          {
+            u2_ve_sway(2, u2k(p_pay));
+            printf("<crap>\n");
+          } break;
+
+          case c3__tell: u2_cx_cell(u2t(pay), &p_pay, &q_pay);
+          {
+            switch ( p_pay ) {
+              case 0: u2_ve_tank(2, u2k(q_pay)); break;
+              case 1: u2_ve_tank(0, u2k(q_pay)); break;
+              case 2: u2_ve_tank(1, u2k(q_pay)); break;
+              case 3: u2_ve_tank(3, u2k(q_pay)); break;
+            }
+          } break;
+
+          case c3__load: u2_cx_cell(u2t(pay), &p_pay, &q_pay);
+          {
+            u2_noun pax   = u2nc(c3__get, u2k(q_pay));
+            c3_c*   pax_c = u2_path(u2_yes, pax);
+            u2_noun pad   = u2_walk_load(pax_c);
+            u2_noun cad   = u2nt(c3__file, u2k(p_pay), pad);
+
+            free(pax_c);
+
+            lab = u2nc
+              (u2nt('o', 
+                    u2nc
+                      (c3__unix,
+                       u2nt(c3_s2('p','i'),
+                            u2nq(c3__term,
+                                 c3_s4('~','l','e','s'),
+                                 '0',
+                                 u2_nul),
+                            cad)),
+                    u2_nul),
+              lab);
+          } break;
+
+          case c3__save: u2_cx_cell(u2t(pay), &p_pay, &q_pay);
+          {
+            u2_noun pax = u2nc(c3__put, u2k(p_pay));
+            c3_c*   pax_c = u2_path(u2_yes, pax);
+
+            u2_walk_save(pax_c, 0, u2k(q_pay));
+            free(pax_c);
+          } break;
+        }
+      }
       break;
     }
     case 'o': {
@@ -470,9 +533,8 @@ u2_reck_boot(u2_reck* rec_u)
 void
 u2_reck_line(u2_reck* rec_u, u2_noun lin)
 {
-  static c3_w seq_w = 1;
-
   _reck_time_set(rec_u);
+
 #if 1
   {
     u2_noun lam = u2_sync_reck(rec_u);
@@ -480,10 +542,19 @@ u2_reck_line(u2_reck* rec_u, u2_noun lin)
     _reck_poke(rec_u, lam);
   }
 #endif
-  {
-    u2_noun lam = u2nq('l', u2nc(0, 0), seq_w, lin);
 
+  {
+    u2_noun lam = u2nt('o', 
+                        u2nc
+                          (c3__unix,
+                           u2nt(c3_s2('p','i'),
+                                u2nq(c3__term,
+                                     c3_s4('~','l','e','s'),
+                                     '0',
+                                     u2_nul),
+                                u2nc(c3__line, lin))),
+                        u2_nul);
+      
     _reck_poke(rec_u, lam);
-    seq_w++;
   }
 }
