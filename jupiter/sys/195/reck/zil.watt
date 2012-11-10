@@ -863,7 +863,12 @@
       ++  ha                                            ::  adopt new license
         |=  [our=plot mac=mace wil=will] 
         ^-  town
-        ?>  &(!=(~ mac) ?=(^ wil) =(our q.p.q.i.wil) (real mac wil))
+        ?>  ?&  !=(~ mac) 
+                ?=(^ wil) 
+                =(our r.p.q.i.wil) 
+                =(wil (grip wil ~))
+                (real mac wil)
+            ==
         %_    ton
             urb
           %+  ~(put by urb.ton)
@@ -966,6 +971,7 @@
     ++  meal                                            ::  payloot
               $%  [%back p=cape q=flap r=@dr]           ::  acknowledgment
                   [%bond p=plot q=(list post)]          ::  statement
+                  [%buck p=mace q=will]                 ::  license
                   [%carp p=@ud q=@band r=@]             ::  leaf fragment
                   [%ping ~]                             ::  no-op
               ==                                        ::
@@ -999,6 +1005,7 @@
               wix=(bex +((cut 0 [25 2] mag)))
               tay=(cut 0 [27 5] mag)
           ==
+      ~&  [%bite-yax [%yax (cut 0 [25 2] mag)] [%wix wix]]
       ?>  =(chk (end 0 24 (mug bod)))
       :^    `@p`(end 3 wix bod)
           =(0 dit)
@@ -1008,8 +1015,9 @@
     ++  spit                                            ::  cake to packet
       |=  kec=cake  ^-  @
       =+  wim=(met 3 p.kec)
-      =+  yax=?:((lte 2 wim) 0 ?:((lte 4 wim) 1 ?:((lte 8 wim) 2 3)))
+      =+  yax=?:((lte wim 2) 0 ?:((lte wim 4) 1 ?:((lte wim 8) 2 3)))
       =+  wix=(bex +(yax))
+      ~&  [%spit-yax [%yax yax] [%wix wix]]
       =+  bod=(mix p.kec (lsh 3 wix s.kec))
       =+  tay=?-(r.kec %none 0, %open 1, %fast 2, %full 3)
       %+  mix
@@ -1278,6 +1286,7 @@
         ::
         ++  chew
           |=  [sin=skin msg=@]
+          ~&  [%chew sin]
           ^+  +>
           =+  ^=  leq
               |=  key=code  ^-  [p=plot q=_..chew]
@@ -1330,6 +1339,10 @@
           ::
               %bond
             (emit [%milk [our.gus him] now q.fud])
+          ::
+              %buck
+            =>  %_(. ..dine (emit [%beer him]))
+            %_(..dine ton.fox (~(ha go ton.fox) him p.fud q.fud))
           ::
               %carp
             =+  neb=`[p=@da q=bait]`(need (~(get by nys.weg) q.fud))
@@ -1395,6 +1408,22 @@
           (dine | @p [%carp 0 bad q.pay])
         --                                              ::  (lo)
       ::
+      ++  come                                          ::  instantiate pawn
+        |=  [bur=@ ges=@t]
+        ^-  [p=plot q=fort]
+        =+  rig=sec:ex:(brew 1.024 bur)
+        =+  loy=(wear rig)
+        =+  our=`@p`fig:ex:loy
+        =+  syp=`step`[`bran`[0 ~ our] [%pawn ges] pub:ex:loy]
+        :-  our
+        %_    fox
+            ton
+          %^    ~(ha go ton.fox)
+              our
+            `mace`[[0 rig] ~]
+          `will`[[(sign:se:loy *code (shaf %self (sham syp))) syp] ~]
+        ==
+      ::
       ++  gnaw                                          ::  process packet
         |=  pac=rock
         ^-  [p=(list boon) q=fort]
@@ -1404,12 +1433,6 @@
           &  grok:(blow:(lo [p.how (shaf %band pac)]) q.kec r.kec s.kec)
           |  [[[%ouzo p.how pac] ~] fox]
         ==
-      ::
-      ++  have
-        |=  [our=plot mac=mace lew=will]
-        ^-  [p=(list boon) q=fort]
-        :-  [[%beer our] ~]
-        %_(fox ton (~(ha go ton.fox) our mac lew))
       ::
       ++  hast                                          ::  roll per socket
         |=  [soq=sock bah=bath]

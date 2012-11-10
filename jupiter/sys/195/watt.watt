@@ -1,4 +1,4 @@
-!:
+::
 ::              Hoon stage 195 (reflexive).  
 ::              This file is in the public domain.
 ::
@@ -62,9 +62,8 @@
 ::    If its correctness assertion is true, the stage [A_X B_X]
 ::    is the complete and unambiguous definition of a language,
 ::    Hoon X.  Hoon can change arbitrarily across stages, though
-::    ideally it won't.  
-::
-::    This file is A_195 ("Hoon 195"), written in Hoon 196.
+::    ideally it won't.  This file is A_195 ("Hoon 195"), written 
+::    in Hoon 196.
 ::     
 ::    Hoon is a pure, strict, higher-order typed functional 
 ::    language in no particular family.  Its relationship to

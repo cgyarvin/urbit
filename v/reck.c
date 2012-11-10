@@ -303,8 +303,8 @@ _reck_kiwi(u2_reck* rec_u, u2_noun veb)
 
           case c3__crap: p_pay = u2t(pay);
           {
-            u2_ve_sway(2, u2k(p_pay));
-            printf("<crap>\n");
+            u2_ve_sway(2, u2_ckb_flop(u2k(p_pay)));
+            printf("<exit>\n");
           } break;
 
           case c3__tell: u2_cx_cell(u2t(pay), &p_pay, &q_pay);
