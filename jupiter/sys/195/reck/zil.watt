@@ -1,4 +1,4 @@
-!:
+::
 ::          %zil, encryption and protocol.  This file is in the public domain.
 ::
 =>
@@ -464,11 +464,11 @@
               ==                                        ::
     ++  wand  (list ,[p=mark q=ac])                     ::  mace in action
     ++  what                                            ::  logical identity
-              $%  [%crew p=corp]                        ::  evil corporation
+              $%  [%corp p=corp]                        ::  business
+                  [%crew p=corp]                        ::  family
                   [%dept p=corp]                        ::  government agency
                   [%dude p=whom]                        ::  male individual
-                  [%fair p=corp]                        ::  nonprofit community
-                  [%gang p=corp]                        ::  family
+                  [%fair p=corp]                        ::  voluntary community
                   [%girl p=whom]                        ::  female individual
                   [%holy p=corp]                        ::  religious community
                   [%punk p=whom]                        ::  fictitious person
@@ -1421,7 +1421,7 @@
           %^    ~(ha go ton.fox)
               our
             `mace`[[0 rig] ~]
-          `will`[[(sign:se:loy *code (shaf %self (sham syp))) syp] ~]
+          `will`[[(sign:se:loy @ (shaf %self (sham syp))) syp] ~]
         ==
       ::
       ++  gnaw                                          ::  process packet
@@ -1433,6 +1433,22 @@
           &  grok:(blow:(lo [p.how (shaf %band pac)]) q.kec r.kec s.kec)
           |  [[[%ouzo p.how pac] ~] fox]
         ==
+      ::
+      ++  goat                                          ::  mint cash-rock
+        |=  [[our=@p its=@p] [wid=@ bur=@] gec=gcos]
+        ^-  rock
+        ?>  &(=((clan our) -.gec) !=(%czar -.gec) !=(%pawn -.gec))
+        =+  rul=(lord our)
+        =+  gus=(need (~(us go ton.fox) rul))
+        =+  old=sen:gus
+        =+  loy=(brew wid bur)
+        =+  syp=`step`[`bran`[0 [~ p.old] our] gec pub:ex:loy]
+        =+  ded=`deed`[(sign:se:q.old @ (shaf %meld (sham syp))) syp]
+        =+  mac=`mace`[[0 sec:ex:loy] ~]
+        =+  lew=`will`[ded law.saf.gus]
+        =+  buq=`buck`[mac lew]
+        =+  kec=`cake`[its & %none (jam `[p=plot q=tray]`[our ~ [%buck buq]])]
+        (spit kec)
       ::
       ++  hast                                          ::  roll per socket
         |=  [soq=sock bah=bath]

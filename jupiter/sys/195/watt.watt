@@ -54,20 +54,26 @@
 ::
 ::    Ie, the pair [A B] defines a self-compiling compiler against 
 ::    this axiomatic, Turing-complete non-lambda automaton, "Nock."
-::    NB: the pseudocode above is just pseudocode, not Hoon.
+::
+::    (NB: the pseudocode rules above are just pseudocode, not Hoon.
+::    To see a (slightly enhanced) Nock in Hoon, search "++  mock".
+::    Since Hoon is defined in Nock, defining Nock in Hoon cannnot
+::    render the Nock definition any more precise.)
 ::
 ::    (If X is "transitional," *[A_Y B_X] yields B_Y for Y=X-1.
-::    This constraint holds also for reflexive stages.)
+::    Of course reflexive stages are also compiled by the parent.)
 ::
-::    If its correctness assertion is true, the stage [A_X B_X]
+::    If this correctness assertion is true, the stage [A_X B_X]
 ::    is the complete and unambiguous definition of a language,
 ::    Hoon X.  Hoon can change arbitrarily across stages, though
 ::    ideally it won't.  This file is A_195 ("Hoon 195"), written 
 ::    in Hoon 196.
 ::     
 ::    Hoon is a pure, strict, higher-order typed functional 
-::    language in no particular family.  Its relationship to
-::    Nock is much like that of C to assembler.
+::    language in no particular family.  It does not use the
+::    lambda calculus or category theory.  Its relationship to
+::    Nock is much like that of C to assembler, not always
+::    trivial but always as trivial as possible.
 ::
 ::    Nock above is the complete interpreter and semantically closed.
 ::    This small definition is designed to be permanently frozen.
@@ -833,7 +839,7 @@
             /laptalpitnambonrostonfodponsovnocsorlavmatmipfap'
         ^=  dex
         'lesnecbudwessevpersutletfulpensytdurwepserwylsun\
-        /rypsyxdyrnuphebpeglupdepdysputlughecryttyssydnex\
+        /rypsyxdyrnuphebpeglupdepdysputlughecryttyvsydnex\
         /lunmeplutseppesdelsulpedtemledtulmetwenbynhexfeb\
         /pyldulhetmevruttylwydtepbesdexsefwycburderneppur\
         /rysrebdennutsubpetrulsynregtydsupsemwynrecmegnet\
