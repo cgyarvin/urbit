@@ -17,14 +17,14 @@
           :-  [%unix %term ~]
           |=  hap=*  ^-  (unit)
           ?>  ?=([p=@ta q=@ta ~] hap)
-          :+  ~  %gold
+          :-  ~
           :~  %unix
               %term
               ~(rent co ~ %p (need (clan %p p.hap)))
               ~(rent co ~ %ud (need (clan %ud q.hap)))
           ==
         |=  [seq=@ud muz=* cax=bill] 
-        [%run %pine -.muz +.muz q.cax]
+        [%run %inpb muz q.cax]
     ::
         :^    %rod
             %boaz
@@ -55,7 +55,7 @@
       == 
     ++  move                                            ::  application event
       $%  [%pack p=rock]                                ::  packet input
-          [%pine p=?(%gold %iron %lead) q=path r=card]  ::  card input
+          [%inpb p=path q=card-b]                       ::  card input
           [%pout p=plot q=(unit path) r=gift]           ::  gift output
       ==
     --
@@ -71,13 +71,13 @@
     :-  [%say %pi [%arvo ~] [%pack p.muv]]
     +>.$
   ::
-      %pine
+      %inpb
     =+  ^=  yex  ^-  [p=plot q=game]
         =+  vep=(~(get by rev.sys) q.muv)
         ?^  vep  [u.vep sys]
         =+  bog=(shaf %bogus when:cam)
-        [bog sys(rev (~(put by rev.sys) q.muv bog))]
-    :-  [%say %pi [%bach ~(rent co ~ %p p.yex) ~] [q.muv r.muv]]
+        [bog sys(rev (~(put by rev.sys) p.muv bog))]
+    :-  [%say %pi [%bach ~(rent co ~ %p p.yex) ~] [p.muv q.muv]]
     +>.$(sys q.yex)
   ::
       %pout

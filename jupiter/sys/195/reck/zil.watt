@@ -429,6 +429,7 @@
                   [| p=@ud q=(list hair)]               ::  width/13 frags  
               ==                                        ::
     ++  hand  ,@uvH                                     ::  hash of code
+    ++  lice  ,[p=plot q=buck]                          ::  full license
     ++  lint  (list rock)                               ::  fragment array
     ++  lane                                            ::  packet route
               $%  [%if p=@ud q=@if]                     ::  IP4/public UDP/addr
@@ -981,6 +982,11 @@
                   nys=(map band ,[p=@da q=bait])        ::  incoming
                   wab=(map plot bath)                   ::  outgoing by client
               ==                                        ::
+    ++  plea                                            ::  network command
+              $%  [%cash p=@p q=buck]                   ::  civil license
+                  [%make p=@t q=@]                      ::  wild license
+                  [%rock p=rock]                        ::  hear a packet
+              ==                                        ::
     ++  putt                                            ::  outgoing message
               $:  ski=snow                              ::  sequence acked/sent
                   saq=?                                 ::  secure ack required
@@ -1409,7 +1415,7 @@
         --                                              ::  (lo)
       ::
       ++  come                                          ::  instantiate pawn
-        |=  [bur=@ ges=@t]
+        |=  [ges=@t bur=@]
         ^-  [p=plot q=fort]
         =+  rig=sec:ex:(brew 1.024 bur)
         =+  loy=(wear rig)
@@ -1434,11 +1440,14 @@
           |  [[[%ouzo p.how pac] ~] fox]
         ==
       ::
-      ++  have
-        |=  [our=plot buq=buck]
+      ++  glow
+        |=  pey=plea
         ^-  [p=(list boon) q=fort]
-        :-  [[%beer our] ~] 
-        fox(ton (~(ha go ton.fox) our buq))
+        ?-  -.pey
+          %cash  (have p.pey q.pey)
+          %make  =+(vun=(come p.pey q.pey) [[[%beer p.vun] ~] q.vun])
+          %rock  (gnaw p.pey)
+        ==
       ::
       ++  goat                                          ::  mint middle class
         |=  [[our=@p its=@p] [wid=@ bur=@] gec=gcos]
@@ -1478,6 +1487,12 @@
                 ==
             ==
         bah(foy ?~(r.p.peq foy.bah (slow foy.bah)), sea tea:q.peq)
+      ::
+      ++  have                                          ::  acquire license
+        |=  [our=plot buq=buck]
+        ^-  [p=(list boon) q=fort]
+        :-  [[%beer our] ~] 
+        fox(ton (~(ha go ton.fox) our buq))
       ::
       ++  haze                                          ::  roll per oven
         |=  [our=plot pov=oven]
@@ -1609,7 +1624,15 @@
       --                                                ::  (am)
     --
 =>  |%
-    ++  card                                            ::  command
+    ++  card  ?(card-a card-b)
+    ++  gift  ?(gift-a gift-b)
+    ++  card-a                                          ::  network command 
+      $%  [%cash p=@p q=buck]                           ::  civil license
+          [%make p=@t q=@]                              ::  wild license
+          [%rock p=rock]                                ::  hear a packet
+      ==                                                ::
+    ++  gift-a  boon                                    ::  network reaction
+    ++  card-b                                          ::  shell action
       $%  [%bbye ~]                                     ::  log out
           [%boot p=@]                                   ::  reset soft state
           [%dire p=@tas q=dram]                         ::  apply directory
@@ -1621,9 +1644,9 @@
           [%peck p=@]                                   ::  apply packet
           [%word p=chum]                                ::  set password
       ==                                                ::
-    ++  gift                                            ::  command reaction
+    ++  gift-b                                          ::  shell reaction
       $%  [%crap p=(list)]                              ::  error with trace
-          [%feed p=card]                                ::  feed back card
+          [%feed p=card-b]                              ::  feed back card
           [%hear p=@]                                   ::  receive packet
           [%load p=@tas q=path]                         ::  request atomic file
           [%loot p=@tas q=path]                         ::  request directory
@@ -1636,7 +1659,7 @@
           [%tell p=?(0 1 2 3) q=tank]                   ::  report to human
           [%text p=(list ,@t)]                          ::  raw text lines
           [%tory p=(list ,@t)]                          ::  history dump
-      == 
+      ==
     --
 =>  |%
     ++  bich
@@ -1731,11 +1754,11 @@
         %_(+> p.hit +(p.hit), q.hit [pet q.hit])
       ::
       ++  knap                                          ::  apply event
-        |=  [now=@da fav=card]
+        |=  [now=@da fav=card-b]
         ^-  [p=(list gift) q=_+>]
         ?+    -.fav  [~ +>]
             %boot
-          :-  [[%tell %0 %leaf "<reboot {lice}>"] prom ~]
+          :-  [[%tell %0 %leaf "<reboot {lich}>"] prom ~]
           (berg who yam)
         ::
             %dire
@@ -1758,7 +1781,7 @@
           (chad now p.u.q.vex)
         ==
       ::
-      ++  lice                                          ::  name of shell
+      ++  lich                                          ::  name of shell
         ^-  tape
         ~(rend co [~ %p who])
       ::
@@ -1811,7 +1834,7 @@
       ::
       ++  prom                                          ::  normal prompt
         ^-  gift
-        [%prop & (rap 3 (weld lice ": "))]
+        [%prop & (rap 3 (weld lich ": "))]
       ::
       ++  stay                                          ::  add to results
         |=  vax=vase

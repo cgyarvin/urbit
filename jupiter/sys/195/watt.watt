@@ -10,11 +10,10 @@
 ::    as an atom LSB first and expanded with (cue).
 ::
 ::    A is marked above with a stage number (X) and a constraint,
-::    either "reflexive" (normal) or "transitional" (for language
+::    either "reflexive" (normally) or "transitional" (for language
 ::    changes).  Stage numbers count down to 0, ie, frozen.
 ::
-::    If the current stage X is "reflexive", we assert that
-::    *[A_X B_X] yields B_X by the reductions below:
+::    Consider this Turing-complete non-lambda automaton, "Nock":
 ::    
 ::        Nock(a)           *a
 ::        [a b c]           [a [b c]]
@@ -52,30 +51,25 @@
 ::        /a                /a
 ::        *a                *a
 ::
-::    Ie, the pair [A B] defines a self-compiling compiler against 
-::    this axiomatic, Turing-complete non-lambda automaton, "Nock."
-::
-::    (NB: the pseudocode rules above are just pseudocode, not Hoon.
+::    (NB: these pseudocode reductions are just pseudocode, not Hoon.
 ::    To see a (slightly enhanced) Nock in Hoon, search "++  mock".
 ::    Since Hoon is defined in Nock, defining Nock in Hoon cannnot
 ::    render the Nock definition any more precise.)
 ::
-::    (If X is "transitional," *[A_Y B_X] yields B_Y for Y=X-1.
-::    Of course reflexive stages are also compiled by the parent.)
+::    In a reflexive stage X, we assert, *[A_X B_X] gives B_X.
+::    Ie, hoon.hoon is a self-compiling compiler against Nock.
 ::
-::    If this correctness assertion is true, the stage [A_X B_X]
-::    is the complete and unambiguous definition of a language,
-::    Hoon X.  Hoon can change arbitrarily across stages, though
-::    ideally it won't.  This file is A_195 ("Hoon 195"), written 
-::    in Hoon 196.
-::     
+::    In any stage X, reflexive or transitional, where Y=X-1,
+::    *[A_Y B_X] yields B_X.  Ie, the current version of Hoon
+::    was written in the previous version of Hoon.
+::
 ::    Hoon is a pure, strict, higher-order typed functional 
 ::    language in no particular family.  It does not use the
 ::    lambda calculus or category theory.  Its relationship to
 ::    Nock is much like that of C to assembler, not always
-::    trivial but always as trivial as possible.
+::    trivial, always as trivial as possible. 
 ::
-::    Nock above is the complete interpreter and semantically closed.
+::    Nock is the complete interpreter and semantically isolated.
 ::    This small definition is designed to be permanently frozen.
 ::    All errors yield bottom, ie, do not terminate.  A naive Nock
 ::    implementation is obviously not efficient.  Don't be naive.

@@ -27,7 +27,7 @@
     ++  game                                            ::  system state 
       $:  maw=(map plot _*berg)
       ==
-    ++  move  ,[p=plot q=path r=card]                   ::  external action
+    ++  move  ,[p=plot q=path r=card-b]                 ::  external action
     --
 =+  sys=*game
 |%

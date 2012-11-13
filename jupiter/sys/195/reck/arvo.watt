@@ -25,7 +25,17 @@
     ++  game                                            ::  system state 
       $:  fox=fort
       ==
-    ++  move  plea
+    ++  move                                            ::  general action
+      $:  whu=(unit plot)                               ::  owner 
+          why=path                                      ::  cause
+          zep=plea                                      ::  content
+      ==
+    ++  moze                                            ::  general result
+      $:  whu=(unit plot)                               ::  owner
+          why=path                                      ::  cause
+          zep=plan                                      ::  content
+      ==
+    ++  plan  boon
     ++  plea
       $%  [%cash p=@p q=buck]                           ::  civil license
           [%make p=@t q=@]                              ::  wild license
@@ -34,13 +44,13 @@
     --
 =>  |%
     ++  luft
-      |=  byn=(list boon)
+      |=  [whu=(unit plot) why=path byn=(list boon)]
       ^-  lime
       :-  %all
       %+  turn
         byn
       |=  bun=boon  ^-  lime
-      [%say %pi [%pout ~] bun]
+      [%say %pi [%eyre ~] [whu why bun]]
     --
 =+  sys=*game
 |%
@@ -50,17 +60,17 @@
   ^-  [p=lime q=vane]
   =+  now=when:cam
   =+  muv=((hard move) man)
-  ?-    -.muv 
+  ?-    -.zep.muv 
       %cash
-    =+  vun=(~(have am [now fox.sys]) p.muv q.muv)
-    [(luft p.vun) +>.$(fox.sys q.vun)]
+    =+  vun=(~(have am [now fox.sys]) p.zep.muv q.zep.muv)
+    [(luft whu.muv why.muv p.vun) +>.$(fox.sys q.vun)]
   ::
       %make
-    =+  vun=(~(come am [now fox.sys]) p.muv q.muv)
-    [(luft [[%beer p.vun] ~]) +>.$(fox.sys q.vun)]
+    =+  vun=(~(come am [now fox.sys]) p.zep.muv q.zep.muv)
+    [(luft whu.muv why.muv [[%beer p.vun] ~]) +>.$(fox.sys q.vun)]
   ::
       %rock
-    =+  vun=(~(gnaw am [now fox.sys]) p.muv)
-    [(luft p.vun) +>.$(fox.sys q.vun)]
+    =+  vun=(~(gnaw am [now fox.sys]) p.zep.muv)
+    [(luft whu.muv why.muv p.vun) +>.$(fox.sys q.vun)]
   ==
 --
