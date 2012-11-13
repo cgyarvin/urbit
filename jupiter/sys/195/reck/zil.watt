@@ -1,4 +1,4 @@
-::
+!:
 ::          %zil, encryption and protocol.  This file is in the public domain.
 ::
 =>
@@ -1434,9 +1434,15 @@
           |  [[[%ouzo p.how pac] ~] fox]
         ==
       ::
-      ++  goat                                          ::  mint cash-rock
+      ++  have
+        |=  [our=plot buq=buck]
+        ^-  [p=(list boon) q=fort]
+        :-  [[%beer our] ~] 
+        fox(ton (~(ha go ton.fox) our buq))
+      ::
+      ++  goat                                          ::  mint middle class
         |=  [[our=@p its=@p] [wid=@ bur=@] gec=gcos]
-        ^-  rock
+        ^-  buck
         ?>  &(=((clan our) -.gec) !=(%czar -.gec) !=(%pawn -.gec))
         =+  rul=(lord our)
         =+  gus=(need (~(us go ton.fox) rul))
@@ -1446,9 +1452,7 @@
         =+  ded=`deed`[(sign:se:q.old @ (shaf %meld (sham syp))) syp]
         =+  mac=`mace`[[0 sec:ex:loy] ~]
         =+  lew=`will`[ded law.saf.gus]
-        =+  buq=`buck`[mac lew]
-        =+  kec=`cake`[its & %none (jam `[p=plot q=tray]`[our ~ [%buck buq]])]
-        (spit kec)
+        `buck`[mac lew]
       ::
       ++  hast                                          ::  roll per socket
         |=  [soq=sock bah=bath]
@@ -1611,6 +1615,7 @@
           [%dire p=@tas q=dram]                         ::  apply directory
           [%file p=@tas q=@]                            ::  apply atomic file
           [%helo ~]                                     ::  ready to prompt
+          [%init p=@p]                                  ::  initialize safe
           [%line p=@t]                                  ::  source line
           [%logn p=@p q=@dr r=chum]                     ::  name lease password
           [%peck p=@]                                   ::  apply packet
@@ -1627,6 +1632,7 @@
           [%save p=path q=@]                            ::  write atomic file
           [%send p=@]                                   ::  transmit packet
           [%sync ~]                                     ::  reset soft state
+          [%task p=@tas q=*]                            ::  application task
           [%tell p=?(0 1 2 3) q=tank]                   ::  report to human
           [%text p=(list ,@t)]                          ::  raw text lines
           [%tory p=(list ,@t)]                          ::  history dump

@@ -14,7 +14,7 @@
     :~  :^    %rod
             %abel
           :-  [~ ~]
-          :-  [%unix %pack ~]
+          :-  [%eyre %arvo ~]
           |=  hap=*  ^-  (unit)
           ?.(=(~ hap) ~ [~ ~])
         |=([seq=@ud muz=* cax=bill] [%run q.cax])
@@ -25,6 +25,22 @@
     ++  game                                            ::  system state 
       $:  fox=fort
       ==
+    ++  move  plea
+    ++  plea
+      $%  [%cash p=@p q=buck]                           ::  civil license
+          [%make p=@t q=@]                              ::  wild license
+          [%rock p=rock]                                ::  hear a packet
+      ==
+    --
+=>  |%
+    ++  luft
+      |=  byn=(list boon)
+      ^-  lime
+      :-  %all
+      %+  turn
+        byn
+      |=  bun=boon  ^-  lime
+      [%say %pi [%pout ~] bun]
     --
 =+  sys=*game
 |%
@@ -32,12 +48,19 @@
 ++  poke  
   |=  [cam=lens man=*] 
   ^-  [p=lime q=vane]
-  =+  pac=((hard rock) man)
-  =+  dey=(~(gnaw am [when:cam fox.sys]) pac)
-  :-  :-  %all
-      %+  turn
-        p.dey
-      |=  bun=boon  ^-  lime
-      [%say %pi [%pose ~] bun]
-  +>.$(fox.sys q.dey)
+  =+  now=when:cam
+  =+  muv=((hard move) man)
+  ?-    -.muv 
+      %cash
+    =+  vun=(~(have am [now fox.sys]) p.muv q.muv)
+    [(luft p.vun) +>.$(fox.sys q.vun)]
+  ::
+      %make
+    =+  vun=(~(come am [now fox.sys]) p.muv q.muv)
+    [(luft [[%beer p.vun] ~]) +>.$(fox.sys q.vun)]
+  ::
+      %rock
+    =+  vun=(~(gnaw am [now fox.sys]) p.muv)
+    [(luft p.vun) +>.$(fox.sys q.vun)]
+  ==
 --
