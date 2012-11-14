@@ -968,8 +968,9 @@
               $:  wen=@da                               ::  next wakeup
                   ton=town                              ::  security
                   zac=(map plot oven)                   ::  flows by server
-              ==
-    ++  meal                                            ::  payloot
+              ==                                        ::
+    ++  hook  path                                      ::  request origin
+    ++  meal                                            ::  payload
               $%  [%back p=cape q=flap r=@dr]           ::  acknowledgment
                   [%bond p=plot q=(list post)]          ::  statement
                   [%buck p=mace q=will]                 ::  license
