@@ -51,17 +51,17 @@
 ::        /a                /a
 ::        *a                *a
 ::
+::    In a reflexive stage X, we assert, *[A_X B_X] gives B_X.
+::    Ie, hoon.hoon is a self-compiling compiler against Nock.
+::
 ::    (NB: these pseudocode reductions are just pseudocode, not Hoon.
 ::    To see a (slightly enhanced) Nock in Hoon, search "++  mock".
 ::    Since Hoon is defined in Nock, defining Nock in Hoon cannnot
 ::    render the Nock definition any more precise.)
 ::
-::    In a reflexive stage X, we assert, *[A_X B_X] gives B_X.
-::    Ie, hoon.hoon is a self-compiling compiler against Nock.
-::
 ::    In any stage X, reflexive or transitional, where Y=X-1,
 ::    *[A_Y B_X] yields B_X.  Ie, the current version of Hoon
-::    was written in the previous version of Hoon.
+::    is written in the previous version of Hoon.
 ::
 ::    Hoon is a pure, strict, higher-order typed functional 
 ::    language in no particular family.  It does not use the
@@ -3203,7 +3203,7 @@
       [%tsdt p=gene q=gene r=gene]
       [%tsgl p=gene q=gene]
       [%tsgr p=gene q=gene]
-      [%tskt p=gene q=gene r=gene]
+      [%tskt p=gene q=gene r=gene s=gene]
       [%tsls p=gene q=gene]
       [%tshp p=gene q=gene]
     ::
@@ -3590,10 +3590,6 @@
       $(gen voq)
     ==
   ::
-  ++  hock
-    ^-  [p=gene q=gene]
-    =+(haq=hack ?.(?=(& -.haq) ~|(%hock-gene !!) +.haq))
-  ::
   ++  open
     ^-  gene
     ?-    gen
@@ -3944,18 +3940,22 @@
           ==                                            ::    ==
       ==                                                ::  ==
     ::
-        [%tscl *]  [%tsgr [%cncb [[~ 1] ~] p.gen] q.gen]
-        [%tsdt *]  [%tsgr [%cncb [[~ 1] ~] [[p.gen q.gen] ~]] r.gen]
+        [%tscl *]  
+      [%tsgr [%cncb [[~ 1] ~] p.gen] q.gen]
+    ::
+        [%tsdt *]  
+      [%tsgr [%cncb [[~ 1] ~] [[p.gen q.gen] ~]] r.gen]
+    ::
         [%tskt *]                                       ::                  =^
-      =+  cog=rusk(gen p.gen)
-      =+  hic=hock(gen q.gen)
+      =+  cog=rusk(gen p.gen)                           ::
+      =+  wuy=`gene`[%cnhx (weld rake(gen q.gen) `wing`[%v ~])]  ::
       :+  %tsgr  [%ktts %v ~ 1]                         ::  =>  v=.
-      :+  %tsls  [%ktts %a %tsgr [%cnbc %v] q.hic]      ::  =+  a==>(v \q.hic)
-      :^  %tsdt  p.hic [%tsgl [~ 3] [%cnbc %a]]         ::  =.  p.hic  +.a
-      :+  %tsgr  :-  :+  %ktts  cog                     ::  =>  ^=  cog
-                     [%tsgl [~ 2] [%cnbc %a]]           ::      :-  -.a
+      :+  %tsls  [%ktts %a %tsgr [%cnbc %v] r.gen]      ::  =+  a==>(v \r.gen)
+      :^  %tsdt  wuy [%tsgl [~ 3] [%cnbc %a]]           ::  =.  \wuy  +.a
+      :+  %tsgr  :-  :+  %ktts  cog                     ::  =>  :-  ^=  \cog
+                     [%tsgl [~ 2] [%cnbc %a]]           ::          -.a
                  [%cnbc %v]                             ::      v
-      r.gen                                             ::  r.gen
+      s.gen                                             ::  s.gen
     ::
         [%tsgl *]  [%tsgr q.gen p.gen]
         [%tsls *]  [%tsgr [p.gen [~ 1]] q.gen]
@@ -6235,7 +6235,7 @@
               ;~  pfix  tis
                 %-  stew  :~
                   ['.' (rune dot %tsdt expc)]
-                  ['^' (rune ket %tskt expc)]
+                  ['^' (rune ket %tskt expd)]
                   [':' (rune col %tscl expl)]
                   ['<' (rune gal %tsgl expb)]
                   ['>' (rune gar %tsgr expb)]
@@ -6332,6 +6332,7 @@
     ++  expa  |.(loaf)
     ++  expb  |.(;~(gunk loaf loaf))
     ++  expc  |.(;~(gunk loaf loaf loaf))
+    ++  expd  |.(;~(gunk loaf loaf loaf loaf))
     ++  exps  |.((butt hank))
     ++  expl  |.(;~(gunk (butt rack) loaf))
     ++  expe  |.(wisp)

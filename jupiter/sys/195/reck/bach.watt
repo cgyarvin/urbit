@@ -27,7 +27,7 @@
     ++  game                                            ::  system state 
       $:  maw=(map plot _*berg)
       ==
-    ++  move  ,[p=plot q=path r=card-b]                 ::  external action
+    ++  move  ,[p=plot q=path r=bone]                   ::  external action
     --
 =+  sys=*game
 |%
@@ -46,7 +46,7 @@
   =+  yub=(knap:beg when:cam r.muv)
   :-  :-  %all
       %+  turn  p.yub
-      |=  gif=gift
+      |=  gif=bone
       `lime`[%say %pi [%pout yem ~] [[~ q.muv] gif]]
   +>.$(maw.sys (~(put by maw.sys) p.muv q.yub))
 --

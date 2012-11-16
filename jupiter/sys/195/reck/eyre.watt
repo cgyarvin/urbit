@@ -24,7 +24,7 @@
               ~(rent co ~ %ud (need (clan %ud q.hap)))
           ==
         |=  [seq=@ud muz=* cax=bill] 
-        [%run %i %b muz q.cax]
+        [%run ~ muz q.cax]
     ::
         :^    %rod
             %boaz
@@ -33,7 +33,7 @@
           |=  hap=*  ^-  (unit)
           [~ ~]
         |=  [seq=@ud muz=* cax=bill] 
-        [%run %i %a q.cax]
+        [%run ~ ~ q.cax]
     ::
         :^    %rod
             %cain
@@ -43,7 +43,7 @@
           ?>  ?=([p=@ta ~] hap)
           [~ (need (clan %p p.hap))]
         |=  [seq=@ud muz=* cax=bill]
-        [%run %o %b muz q.cax]
+        [%run [~ muz] q.cax]
     ==
 ^-  vane
 =>  ..$
@@ -53,54 +53,56 @@
           liv=(map plot (list path))                    ::  live sessions
           rev=(map path plot)                           ::  identities
       == 
-    ++  move                                            ::  application event
-      $%  :-  %i
-            ^=  p
-            $%  [%a p=card-a]
-                [%b p=path q=card-b]
-            ==
-          :-  %o
-            ^=  p
-            $%  [%a p=gift-a]
-                [%b p=@p q=(unit path) r=gift-b]
-            ==
-      ==
+    ++  move  ,[p=(unit plot) q=path r=bone]            ::  application event
     --
 =+  sys=*game
+=<  |%
+    ++  peek  |=([cam=lens hap=path] ~)
+    ++  poke  
+      |=  [cam=lens man=*] 
+      ^-  [p=lime q=vane]
+      =+  muv=((hard move) man)
+      =+  zef=(hoot cam muv)
+      [p.zef +>.$(sys q.zef)]
+    --
 |%
-++  peek  |=([cam=lens hap=path] ~)
-++  poke  
-  |=  [cam=lens man=*] 
-  ^-  [p=lime q=vane]
-  =+  muv=((hard move) man)
-  ?-    -.muv
-      %i
-    ?-    -.p.muv
-        %a
-      !!
-    ::
-        %b
-      =+  ^=  yex  ^-  [p=plot q=game]
-          =+  vep=(~(get by rev.sys) q.p.muv)
-          ?^  vep  [u.vep sys]
-          =+  bog=(shaf %bogus when:cam)
-          [bog sys(rev (~(put by rev.sys) p.p.muv bog))]
-      :-  [%say %pi [%bach ~(rent co ~ %p p.yex) ~] [p.p.muv q.p.muv]]
-      +>.$(sys q.yex)
-    ==
-  ::
-      %o
-    ?-    -.p.muv
-        %a
-      !!
-    ::
-        %b
-      :-  ?+  -.r.p.muv
-            [%say %yo %g r.p.muv]
-            %hear  [%say %pi [%arvo ~] p.p.muv]
-            %task  [%say %pi [%task p.r.p.muv ~] q.r.p.muv]
-          ==
-      +>.$
-    ==
+++  hoot
+  |=  [cam=lens muv=move]
+  ^-  [p=lime q=game]
+  =^  who  sys
+      ?^  p.muv
+        [u.p.muv sys]
+      =+  vep=(~(get by rev.sys) q.muv)
+      ?^  vep  [u.vep sys]
+      =+  bog=(shaf %bogus when:cam)
+      [bog sys(rev (~(put by rev.sys) q.muv bog))]
+  ?-    -.r.muv
+      %bbye  !!
+      %boot  !!
+      %cash  !!
+      %crap  !!
+      %dire  !!
+      %feed  !!
+      %file  !!
+      %hear  !!
+      %helo  !!
+      %init  !!
+      %line  [[%say %pi [%bach ~(rent co ~ %p who) ~] [q.muv r.muv]] sys]
+      %load  !!
+      %logn  !!
+      %loot  !!
+      %make  !!
+      %peck  !!
+      %pour  !!
+      %prop  !!
+      %rock  !!
+      %save  !!
+      %send  !!
+      %sync  !!
+      %task  !!
+      %tell  [[%say %yo %g r.muv] sys]
+      %text  !!
+      %tory  !! 
+      %word  !!
   ==
 --

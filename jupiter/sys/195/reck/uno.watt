@@ -191,7 +191,7 @@
             |+  [now=time who=@ta]                      ::  ship factory
             [p=*(list plum) q=*ship]                    ::
   ++  kiwi                                              ::  system product
-    $%  [%g p=gift]                                     ::  standard poison
+    $%  [%g p=bone]                                     ::  standard poison
         [%o p=@ta q=*]                                  ::  special output 
         [%p p=tube q=@ud r=tank]                        ::  print to console
         [%t p=(list)]                                   ::  print trace
