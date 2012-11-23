@@ -198,6 +198,7 @@
     ++  es  |+(a=@ @)                                   ::  step key to next
     ++  ex  ^?                                          ::  export
       |%  ++  fig  @uvH                                 ::  fingerprint
+          ++  pac  @uvG                                 ::  default passcode
           ++  pub  *pass                                ::  public key
           ++  sec  *ring                                ::  private key
       --                                                ::
@@ -274,6 +275,7 @@
     ++  es  |+(a=@ (shas %anex a))
     ++  ex  ^?
       |%  ++  fig  ^-  @uvH  (shaf %afig mos)
+          ++  pac  ^-  @uvG  (end 6 1 (shaf %acod sec))
           ++  pub  ^-  pass  (cat 3 'a' mos)
           ++  sec  ^-  ring  ?~(pon !! (cat 3 'A' (jam p.u.pon q.u.pon)))
       --
@@ -1652,8 +1654,10 @@
           [%tell p=?(0 1 2 3) q=tank]                   ::  report to human
           [%text p=(list ,@t)]                          ::  raw text lines
           [%tory p=(list ,@t)]                          ::  history dump
+          [%unix p=bone]                                ::  feed back to unix
           [%word p=chum]                                ::  set password
       ==
+    ++  caul  (list path)
     --
 =>  |%
     ++  bich

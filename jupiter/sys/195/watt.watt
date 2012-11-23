@@ -6,10 +6,10 @@
 ::    A cell is an ordered pair of nouns.
 ::
 ::    Noun A is this file, hoon.hoon, encoded as an atom, LSB first.
-::    Noun B is the accompanying (jam) file, hoon.pill, encoded
-::    as an atom LSB first and expanded with (cue).
+::    Noun B is the accompanying binary file, hoon.pill, encoded
+::    as an atom LSB first and unpacked with (cue).
 ::
-::    A is marked above with a stage number (X) and a constraint,
+::    A is marked above with a stage number (X=195) and a constraint,
 ::    either "reflexive" (normally) or "transitional" (for language
 ::    changes).  Stage numbers count down to 0, ie, frozen.
 ::
@@ -31,7 +31,6 @@
 ::        /[(a + a + 1) b]  /[3 /[a b]]
 ::      
 ::        *[a [b c] d]      [*[a b c] *[a d]]
-::      
 ::        *[a 0 b]          /[b a]
 ::        *[a 1 b]          b
 ::        *[a 2 b c]        *[*[a b] *[a c]]
@@ -51,32 +50,36 @@
 ::        /a                /a
 ::        *a                *a
 ::
-::    In a reflexive stage X, we assert, *[A_X B_X] gives B_X.
+::    In a reflexive stage X, we assert, *[A_X B_X] yields B_X.
 ::    Ie, hoon.hoon is a self-compiling compiler against Nock.
 ::
-::    (NB: these pseudocode reductions are just pseudocode, not Hoon.
-::    To see a (slightly enhanced) Nock in Hoon, search "++  mock".
-::    Since Hoon is defined in Nock, defining Nock in Hoon cannnot
-::    render the Nock definition any more precise.)
-::
 ::    In any stage X, reflexive or transitional, where Y=X-1,
-::    *[A_Y B_X] yields B_X.  Ie, the current version of Hoon
-::    is written in the previous version of Hoon.
+::    *[A_Y B_X] yields B_X.  Ie, the current stage of Hoon
+::    is written in the previous stage of Hoon.
 ::
 ::    Hoon is a pure, strict, higher-order typed functional 
 ::    language in no particular family.  It does not use the
-::    lambda calculus or category theory.  Its relationship to
-::    Nock is much like that of C to assembler, not always
+::    lambda calculus or PL/category theory.  Hoon's mapping
+::    to Nock is like that of C to assembler - not always
 ::    trivial, always as trivial as possible. 
 ::
 ::    Nock is the complete interpreter and semantically isolated.
 ::    This small definition is designed to be permanently frozen.
 ::    All errors yield bottom, ie, do not terminate.  A naive Nock
 ::    implementation is obviously not efficient.  Don't be naive.
-::    Operators 6-10 are macros and add no expressive power.
+::    Operators 6-10 are macros and add no formal power.
 ::
-::    (One fun exercise: write a decrement formula, not using 7-10.
-::    More fun is to also eschew 6.)
+::    (NB: the Nock definition above is just pseudocode, not Hoon.
+::    To see a (mildly enhanced) Nock in Hoon, search "++  mock".
+::    But Hoon is defined in Nock; stating Nock in Hoon, though
+::    otherwise useful, cannot enhance the precision of Nock.)
+::
+::    What is Hoon good for?  Now, nothing.  Ideally, whatever.
+::    But mostly, functional system software.  "++  zuse" is a
+::    small, largely useless functional operating system.
+::
+::    One fun exercise: decrement an atom in Nock, not using 7-10.
+::    More fun is to also eschew 6.
 ::::
 =>  src=.
 ?>  ?=(@ src)
@@ -106,7 +109,7 @@
   ++  dec
     ~/  %dec
     |=  a=@
-    ~|  'decrement-zero'
+    ~|  'dec'
     ^-  @
     ?<  =(0 a)
     =+  b=@
@@ -119,7 +122,7 @@
     ~/  %div
     |=  [a=@ b=@]
     ^-  @
-    ~|  'divide-by-zero'
+    ~|  'div'
     ?<  =(0 b)
     =+  c=@
     |-
@@ -186,7 +189,7 @@
   ++  sub
     ~/  %sub
     |=  [a=@ b=@]
-    ~|  'subtract underflow'
+    ~|  'sub'
     ^-  @
     ?:  =(0 b)
       a

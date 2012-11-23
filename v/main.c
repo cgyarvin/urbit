@@ -253,7 +253,11 @@ main(c3_i   argc,
       u2_ve_init(kno_w);
 
       if ( 0 != u2_Host.ver_e[kno_w].ken ) {
+#if 0
         u2_reck_boot(&u2_Host.rec_u[0]);
+#else
+        u2_neck_boot(&u2_Host.rec_u[0]);
+#endif
       }
     }
     u2_cm_done();
@@ -322,6 +326,8 @@ main(c3_i   argc,
     fprintf(stderr, "no command line in transitional mode\n");
     exit(1);
   }
+
+  u2_ve_launch();
 
   Tecla = new_GetLine(16384, 4096);
   gl_io_mode(Tecla, GL_SERVER_MODE);

@@ -330,6 +330,21 @@
         void
         u2_reck_boot(u2_reck* rec_u);
 
+      /* u2_neck_line(): apply a neck line (protected).
+      */
+        void
+        u2_neck_line(u2_reck* rec_u, u2_noun lin);
+
+      /* u2_neck_boot(): boot the neck engine (unprotected).
+      */
+        void
+        u2_neck_boot(u2_reck* rec_u);
+
+      /* u2_neck_launch(): launch the neck engine (protected).
+      */
+        void
+        u2_neck_launch(u2_reck* rec_u);
+
       /* u2_reck_peek(): query the reck namespace.
       */
         u2_noun
@@ -491,6 +506,11 @@
       */
         void
         u2_ve_line_boot(void);
+
+      /* u2_ve_launch(): call neck launch fn.
+      */
+        void
+        u2_ve_launch(void);
 
     /**  HTTP.
     **/

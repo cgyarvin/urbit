@@ -231,9 +231,32 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
   {
     u2_noun syd, zil, uno, duo, tre;
     u2_noun bac, cay, qua, nul, pay, eyr, arv, now;
+    u2_noun zen, yen, xan, wol, vay;
 
     syd = u2k(rec_u->syd);
 
+#if 1
+    printf("loading new structure...\n");
+    {
+      printf("zen:\n");
+      zen = _reck_load_temp(rec_u, u2k(syd), kno_w, "reck/zen.watt");
+
+      printf("yen:\n");
+      yen = _reck_load_temp(rec_u, zen, kno_w, "reck/yen.watt");
+
+      printf("xan:\n");
+      xan = _reck_load_temp(rec_u, yen, kno_w, "reck/xan.watt");
+
+      printf("wol:\n");
+      wol = _reck_load_temp(rec_u, xan, kno_w, "reck/wol.watt");
+
+      printf("vay:\n");
+      vay = _reck_load_temp(rec_u, wol, kno_w, "reck/vay.watt");
+    }
+    printf("loaded new structure.\n");
+    u2z(vay);
+#endif
+ 
     zil = _reck_load_temp(rec_u, syd, kno_w, "reck/zil.watt");
 
     rec_u->toy.sham = _reck_gate(rec_u, u2k(zil), "sham");
@@ -242,6 +265,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     duo = _reck_load_temp(rec_u, uno, kno_w, "reck/duo.watt");
     tre = _reck_load_temp(rec_u, duo, kno_w, "reck/tre.watt");
 
+    
     arv = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/arvo.watt");
     bac = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/bach.watt");
     cay = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/cary.watt");
@@ -558,3 +582,7 @@ u2_reck_line(u2_reck* rec_u, u2_noun lin)
     _reck_poke(rec_u, lam);
   }
 }
+
+/* u2_reck_new_boot(): boot the new reck engine (unprotected).
+*/
+

@@ -1,0 +1,149 @@
+!:
+::          %vay, main loop.   This file is in the public domain.
+::
+=<  |%
+    ++  peek  
+      |=  [now=@da hap=path]
+      ^-  (unit)
+      !!
+    ++  poke  
+      |=  [now=@da ovo=*]
+      =>  .(ovo ((hard ovum) ovo))
+      ^-  [p=(list ovum) q=_+>]
+      =^  zef  sys
+        (~(howl is now) ~ [[%eyre ~] p.ovo ~] q.ovo)
+      [zef +>.$]
+    --
+=>  |%
+    ++  game
+      $:  ^=  arvo
+        $:  gel=_*alga                                      ::  network and PKI
+        ==
+          ^=  bach
+        $:  maw=(map plot _*berg)                           ::  shells
+        ==
+          ^=  eyre                                          ::  i/o
+        $:  gem=(map plot chum)                             ::  hashed passcodes
+            liv=(map plot (list caul))                      ::  live sessions
+            rev=(map caul plot)                             ::  identities
+        ==
+      == 
+    --
+=+  sys=*game
+|%
+++  is
+  |_  now=@da 
+  ++  si
+    |%  
+    ++  arv
+      |=  [pex=path mov=move]
+      ^-  [(list move) game]
+      =+  yub=(knap:gel.arvo.sys now r.mov)
+      :-  (turn p.yub |=(a=card [p.mov q.mov a]))
+      sys(gel.arvo q.yub)
+    ::
+    ++  bac
+      |=  [pex=path mov=move]
+      ^-  [(list move) game]
+      ?>  ?=(^ p.mov)
+      =+  ^=  beg  ^+  *berg
+          =+  beg=(~(get by maw.bach.sys) p.mov)
+          ?^  beg  u.beg
+          (berg u.p.mov |=(* *(unit)))
+      =+  yub=(knap:beg now r.mov)
+      :-  (turn p.yub |=(a=card [p.mov q.mov a]))
+      sys(maw.bach (~(put by maw.bach.sys) u.p.mov q.yub))
+    --
+  ::
+  ++  grit                                                  ::  cause privilege
+    |=  cul=caul
+    ^-  ?(%gold %iron %lead)
+    ?~  cul
+      %lead
+    ?~  t.cul
+      ?:  ?=([%gold *] i.cul)  %gold
+      ?:  ?=([%iron *] i.cul)  %iron
+      %lead
+    $(cul t.cul)
+  ::
+  ++  gulf                                                  ::  match password
+    |=  [our=plot cof=chum]
+    ^-  ?
+    =+  fup=(~(get by gem.eyre.sys) our)
+    ?^  fup
+      =(cof u.fup)
+    =+  gys=(~(us go ton.fox.gel.arvo.sys) our)
+    ?&(?=(^ gys) =(cof (shak our pac:ex:q:sen:u.gys)))
+  ::
+  ++  howl                                                  ::  master resolve
+    |=  mov=move
+    =+  [mor=`(list move)`[mov ~] out=`(list ovum)`~]
+    |-  ^-  [p=(list ovum) q=game]
+    ?~  mor
+      [(flop out) sys]
+    =>  %_(. mov i.mor)
+    ?>  ?=(^ q.mov)           ::  at least one path
+    ?>  ?=(^ i.q.mov)         ::  at least prefix
+    =+  pex=t.i.q.mov
+    ?+    i.i.q.mov  !!
+        %arvo
+      =^  fez  sys
+        (arv:si pex [p.mov t.q.mov r.mov])
+      $(mor (weld fez t.mor))
+    ::
+        %bach
+      =^  fez  sys
+        (bac:si pex [p.mov t.q.mov r.mov])
+      $(mor (weld fez t.mor))
+    ::
+        %eyre
+      =.  p.mov  ?^(p.mov p.mov (~(get by rev.eyre.sys) t.q.mov))
+      =+  rer=|=(a=@tas ^$(mor [[p.mov [[a ~] q.mov] r.mov] t.mor]))
+      =+  giv=|.(^$(mor t.mor, out [[i.t.q.mov r.mov] out]))
+      =+  ^=  liv
+          |=  a=plot 
+          ^$(mor t.mor, rev.eyre.sys (~(put by rev.eyre.sys) t.q.mov a))
+      ?.  ?|  ?=(^ p.mov) 
+              ?=(?(%cash %crap %hear %logn %make %tell) -.r.mov)
+          ==
+        ~&([%eyre-illegal mov] !!)
+      ?-    -.r.mov
+          %bbye  !!
+          %boot  !!
+          %cash  (rer %arvo)
+          %crap  (giv)
+          %dire  (rer %bach)
+          %file  (rer %bach)
+          %hear  (rer %arvo)
+          %helo  !!
+          %init  !!
+          %junk  (rer %arvo)
+          %line  (rer %bach)
+          %load  (giv) 
+          %logn 
+        ?>  !=(%lead (grit t.q.mov))
+        ?>  (gulf p.r.mov q.r.mov)
+        (liv p.r.mov)
+      ::
+          %logp
+        ?>  =(%gold (grit t.q.mov))
+        (liv p.r.mov)
+      ::
+          %loot  (giv)
+          %make  (rer %arvo)
+          %pace  !!
+          %pour  (giv)
+          %prop  (giv)
+          %pump  !!
+          %save  (giv)
+          %send  (giv)
+          %sync  !!
+          %task  !!
+          %tell  (giv) 
+          %text  (giv)
+          %tory  !!
+          %word  !!
+      ==
+    ==
+  --
+--
