@@ -256,7 +256,7 @@ main(c3_i   argc,
 #if 0
         u2_reck_boot(&u2_Host.rec_u[0]);
 #else
-        u2_neck_boot(&u2_Host.rec_u[0]);
+        u2_reck_boot(&u2_Host.rec_u[0]);
 #endif
       }
     }
@@ -328,6 +328,7 @@ main(c3_i   argc,
   }
 
   u2_ve_launch();
+  u2_ve_sync();
 
   Tecla = new_GetLine(16384, 4096);
   gl_io_mode(Tecla, GL_SERVER_MODE);

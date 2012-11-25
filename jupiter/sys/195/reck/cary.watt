@@ -1,6 +1,7 @@
 !:
 ::          %car, revision control.   This file is in the public domain.
 ::
+
 :-  %car
 =>  |%
     ++  arch                                      ::  fs node
@@ -10,10 +11,6 @@
     ++  clod  ,[p=@da q=@uvI r=*]                 ::  mtime hash content
     ++  dirt  ,[p=@da q=(map ,@ta arch)]          ::  mtime tree
     ++  nope  ^~(^-(arch [%| @ ~]))               ::  empty node
-    ++  meta                                      ::  path metadata
-      $%  [& p=@da q=@uvI]                        ::  mtime hash
-          [| p=@da q=(list ,@ta)]                 ::  mtime dir
-      ==                                          ::
     ++  ukaz                                      ::  change (plural ukazy)
       $:  p=path                                  ::  change site
           ^=  q                                   ::  change content
@@ -27,11 +24,6 @@
     ++  uzag  |=(a=umaz ^-(umaz [q.a p.a]))       ::  reverse dual change
     --
 =>  |%
-    ++  desk                                      ::  project state
-      $:  seq=@                                   ::  seqno, from 1
-          wen=time                                ::  date of change
-          rad=arch                                ::  state now
-      ==
     ++  game  
       $:  wod=(map ,@p room)                      ::  complete state
       ==

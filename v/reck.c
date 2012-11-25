@@ -217,6 +217,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
   rec_u->toy.rain = _reck_root("rain", u2k(ken));
   rec_u->toy.ream = _reck_root("ream", u2k(ken));
   // rec_u->toy.sham = _reck_root("sham", u2k(ken));
+  rec_u->toy.slay = _reck_root("slay", u2k(ken));
   rec_u->toy.slam = _reck_root("slam", u2k(ken));
   rec_u->toy.slap = _reck_root("slap", u2k(ken));
   rec_u->toy.slop = _reck_root("slop", u2k(ken));
@@ -229,270 +230,121 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     free(dyt_c);
   }
   {
-    u2_noun syd, zil, uno, duo, tre;
-    u2_noun bac, cay, qua, nul, pay, eyr, arv, now;
-    u2_noun zen, yen, xan, wol, vay;
+    u2_noun syd, zen, yen, xan, wol, ray, vay;
 
     syd = u2k(rec_u->syd);
 
-#if 1
-    printf("loading new structure...\n");
     {
-      printf("zen:\n");
+      // printf("zen:\n");
       zen = _reck_load_temp(rec_u, u2k(syd), kno_w, "reck/zen.watt");
 
-      printf("yen:\n");
+      rec_u->toy.sham = _reck_gate(rec_u, u2k(zen), "sham");
+
       yen = _reck_load_temp(rec_u, zen, kno_w, "reck/yen.watt");
-
-      printf("xan:\n");
       xan = _reck_load_temp(rec_u, yen, kno_w, "reck/xan.watt");
-
-      printf("wol:\n");
       wol = _reck_load_temp(rec_u, xan, kno_w, "reck/wol.watt");
+      ray = _reck_load_temp(rec_u, wol, kno_w, "reck/ray.watt");
 
-      printf("vay:\n");
-      vay = _reck_load_temp(rec_u, wol, kno_w, "reck/vay.watt");
+      rec_u->toy.duel = 
+        _reck_gate(rec_u, u2k(ray), "|=([a=arch b=arch] (~(duel cy a) b))");
+
+      vay = _reck_load_temp(rec_u, ray, kno_w, "reck/vay.watt");
     }
-    printf("loaded new structure.\n");
-    u2z(vay);
-#endif
- 
-    zil = _reck_load_temp(rec_u, syd, kno_w, "reck/zil.watt");
-
-    rec_u->toy.sham = _reck_gate(rec_u, u2k(zil), "sham");
-
-    uno = _reck_load_temp(rec_u, zil, kno_w, "reck/uno.watt");
-    duo = _reck_load_temp(rec_u, uno, kno_w, "reck/duo.watt");
-    tre = _reck_load_temp(rec_u, duo, kno_w, "reck/tre.watt");
-
-    
-    arv = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/arvo.watt");
-    bac = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/bach.watt");
-    cay = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/cary.watt");
-    eyr = _reck_load_temp(rec_u, u2k(tre), kno_w, "reck/eyre.watt");
-
-    rec_u->toy.duel = 
-      _reck_gate(rec_u, u2k(cay), "|=([a=arch b=arch] (~(duel cy a) b))");
-
-    qua = _reck_load_temp(rec_u, tre, kno_w, "reck/qua.watt");
-
-    nul = u2nc(u2nt(c3__cube, 0, u2nc(c3__atom, 'n')), 0);
-    pay = _reck_slop
-      (rec_u, 
-       arv, 
-       _reck_slop
-        (rec_u, 
-         cay,
-         _reck_slop
-          (rec_u, 
-           eyr, 
-           _reck_slop(rec_u, bac, nul))));
-
-    now = u2nc(u2nc(c3__atom, c3_s2('d','a')), u2k(rec_u->now));
-
-    rec_u->rec = _reck_slam(rec_u, qua, _reck_slop(rec_u, now, pay));
+    rec_u->rec = vay;
   }
 }
 
-/* _reck_kiwi(): apply reck output; produce (list lamb)
+/* _reck_kick(): apply an output ovum.
 */
-u2_noun 
-_reck_kiwi(u2_reck* rec_u, u2_noun veb)
+static void
+_reck_kick(u2_reck* rec_u, u2_noun ovo)
 {
-  u2_noun p_veb, q_veb, r_veb;
-  u2_noun lab = u2_nul;
+  u2_noun pay = u2t(ovo);
+  u2_noun p_pay, q_pay;
 
-  switch ( u2h(veb) ) {
-    case 'p': {
-      u2_cx_trel(u2t(veb), &p_veb, &q_veb, &r_veb);
+  switch ( u2h(pay) ) {
+    default: 
+    {
+      u2_err(u2_Wire, "unsupported", u2h(pay));
+    } break;
 
-      u2_ve_tank(u2k(q_veb), u2k(r_veb));
-      break;
-    }
-    case 't': {
-      u2_ve_sway(2, u2k(u2t(veb)));
-      break;
-    }
-    case 'g': {
-      p_veb = u2t(veb);
-      {
-        u2_noun pay = p_veb;
-        u2_noun p_pay, q_pay;
-        
-        switch ( u2h(pay) ) {
-          default: 
-          {
-            u2_err(u2_Wire, "unsupported", u2h(pay));
-          } break;
+    case c3__crap: p_pay = u2t(pay);
+    {
+      u2_ve_sway(2, u2_ckb_flop(u2k(p_pay)));
+      printf("<exit>\n");
+    } break;
 
-          case c3__crap: p_pay = u2t(pay);
-          {
-            u2_ve_sway(2, u2_ckb_flop(u2k(p_pay)));
-            printf("<exit>\n");
-          } break;
-
-          case c3__tell: u2_cx_cell(u2t(pay), &p_pay, &q_pay);
-          {
-            switch ( p_pay ) {
-              case 0: u2_ve_tank(2, u2k(q_pay)); break;
-              case 1: u2_ve_tank(0, u2k(q_pay)); break;
-              case 2: u2_ve_tank(1, u2k(q_pay)); break;
-              case 3: u2_ve_tank(3, u2k(q_pay)); break;
-            }
-          } break;
-
-          case c3__load: u2_cx_cell(u2t(pay), &p_pay, &q_pay);
-          {
-            u2_noun pax   = u2nc(c3__get, u2k(q_pay));
-            c3_c*   pax_c = u2_path(u2_yes, pax);
-            u2_noun pad   = u2_walk_load(pax_c);
-            u2_noun cad   = u2nt(c3__file, u2k(p_pay), pad);
-
-            free(pax_c);
-
-            lab = u2nc
-              (u2nt('o', 
-                    u2nc
-                      (c3__unix,
-                       u2nt(c3_s2('p','i'),
-                            u2nq(c3__term,
-                                 c3_s4('~','l','e','s'),
-                                 '0',
-                                 u2_nul),
-                            cad)),
-                    u2_nul),
-              lab);
-          } break;
-
-          case c3__save: u2_cx_cell(u2t(pay), &p_pay, &q_pay);
-          {
-            u2_noun pax = u2nc(c3__put, u2k(p_pay));
-            c3_c*   pax_c = u2_path(u2_yes, pax);
-
-            u2_walk_save(pax_c, 0, u2k(q_pay));
-            free(pax_c);
-          } break;
-        }
+    case c3__tell: u2_cx_cell(u2t(pay), &p_pay, &q_pay);
+    {
+      switch ( p_pay ) {
+        case 0: u2_ve_tank(2, u2k(q_pay)); break;
+        case 1: u2_ve_tank(0, u2k(q_pay)); break;
+        case 2: u2_ve_tank(1, u2k(q_pay)); break;
+        case 3: u2_ve_tank(3, u2k(q_pay)); break;
       }
-      break;
-    }
-    case 'o': {
-      u2_cx_cell(u2t(veb), &p_veb, &q_veb);
-
-      switch ( p_veb ) {
-        //  $:  p=tube
-        //      ^=  q
-        //      $%  [%i p=@tas q=path]          ::  load from get/
-        //          [%o p=path q=*]             ::  save to put/
-        //      ==
-        //  ==
-        case c3__ber: {
-          u2_noun tub = u2k(u2h(q_veb));
-          u2_noun pay = u2k(u2t(q_veb));
-
-          switch ( u2h(pay) ) {
-            default: break;
-
-            case 'i': {
-              u2_noun var=u2k(u2h(u2t(pay)));
-              u2_noun pax=u2k(u2t(u2t(pay)));
-              u2_noun pad;
-              c3_c*   pax_c;
-
-              pax = u2nc(c3_s3('g','e','t'), pax);
-              pax_c = u2_path(u2_yes, pax);
-
-              pad = u2nc(var, u2_walk_load(pax_c));
-              free(pax_c);
-
-              lab = u2nc
-                (u2nt('o',
-                      u2nc
-                        (c3__echo, 
-                         u2nt(c3_s2('p', 'i'),
-                              u2nq(c3__load,
-                                   _reck_coin_ud(rec_u, u2k(u2h(tub))),
-                                   _reck_coin_ud(rec_u, u2k(u2t(tub))),
-                                   u2_nul),
-                              pad)),
-                      u2_nul),
-                 lab);
-              break;
-            } 
-          }
-        }
-      }
-      break;
-    }
+    } break;
   }
-  u2z(veb);
-  return lab;
+  u2z(ovo);
 }
 
-/* _reck_kiwis(): apply a kiwi list; produce (list lamb).
+/* _reck_poke(): insert an input ovum.
 */
-static u2_noun
-_reck_kiwis(u2_reck *rec_u, u2_noun vyl, u2_noun bal)
+static void
+_reck_poke(u2_reck* rec_u, u2_noun ovo)
 {
-  if ( u2_no != u2du(vyl) ) {
-    u2_noun lab = _reck_kiwi(rec_u, u2k(u2h(vyl)));
-
-    bal = u2_ckb_weld(lab, bal);
-    bal = _reck_kiwis(rec_u, u2k(u2t(vyl)), bal);
-
-    u2z(vyl);
-  }
-  return bal;
-}
-
-/* _reck_gall(): apply a reck result; produce (list lamb).
-*/
-static u2_noun
-_reck_gall(u2_reck* rec_u, u2_noun gax)
-{
-  u2_noun hix, pux, bal;
+  u2_noun sam = _reck_slop(rec_u, u2nc(u2nc(c3__atom, 0), u2k(rec_u->now)),
+                                  u2nc(c3__noun, ovo));
+  u2_noun gax = _reck_soft(rec_u, u2k(rec_u->rec), "poke", sam);
+  u2_noun hix, pux;
 
   hix = _reck_slap(rec_u, u2k(gax), u2nc(c3__cnbc, 'p'));
   pux = _reck_slap(rec_u, gax, u2nc(c3__cnbc, 'q'));
 
-  bal = _reck_kiwis(rec_u, u2k(u2t(hix)), u2_nul);
-  u2z(hix);
-
   u2z(rec_u->rec);
   rec_u->rec = pux; 
 
-  return bal;
+  {
+    u2_noun hux = u2t(hix);
+
+    while ( u2_nul != hux ) {
+      _reck_kick(rec_u, u2k(u2h(hux)));
+      hux = u2t(hux);
+    }
+  }
+  u2z(hix);
 }
 
-/* _reck_prod(): poke with raw lamb, produce more lambs.
-*/
-static u2_noun 
-_reck_prod(u2_reck* rec_u, u2_noun lam)
-{
-  u2_noun sam = _reck_slop(rec_u, u2nc(u2nc(c3__atom, 0), u2k(rec_u->now)),
-                                  u2nc(c3__noun, lam));
-  u2_noun gax = gax = _reck_soft(rec_u, u2k(rec_u->rec), "poke", sam);
-
-  return _reck_gall(rec_u, gax);
-}
-
-/* _reck_poke(): apply lamb cycle.
+/* _reck_pook(): multiple poke.
 */
 static void
-_reck_poke(u2_reck* rec_u, u2_noun lam)
+_reck_pook(u2_reck* rec_u, u2_noun ova)
 {
-  u2_noun bal = _reck_prod(rec_u, lam);
+  u2_noun ovi = ova;
 
-  _reck_time_bump(rec_u);
+  while ( u2_nul != ovi ) {
+    _reck_poke(rec_u, u2k(u2h(ovi)));
+    ovi = u2t(ovi);
+  } 
+  u2z(ova);
+}
 
-  while ( u2_nul != bal ) {
-    u2_noun buz = u2k(u2h(bal));
-    u2_noun waq = u2k(u2t(bal));
+/* _reck_launch_toy(): launch a new reck engine, with toy parms.
+*/
+static void
+_reck_launch_toy(u2_reck* rec_u, u2_noun pax)
+{
+  _reck_poke
+    (rec_u, 
+//     u2nc(pax, u2nq(c3__make, c3_s4('z','u','s','e'), 256, u2k(rec_u->now))));
+     u2nc(pax, u2nq(c3__make, c3_s4('z','u','s','e'), 256, 0)));
+}
 
-    u2z(bal);
-    _reck_prod(rec_u, buz);
-    bal = waq;
-  }
+/* u2_reck_sync(): poll and apply sync events (protected).
+*/
+void
+u2_reck_sync(u2_reck* rec_u)
+{
+  _reck_pook(rec_u, u2_sync_reck(rec_u));
 }
 
 /* u2_reck_boot(): boot the reck engine (unprotected).
@@ -513,35 +365,10 @@ u2_reck_boot(u2_reck* rec_u)
     u2z(hoe);
   } 
   else {
-    // printf("loading reck...\n");
     u2_reck_init(rec_u, 
                  u2_Host.kno_w, 
                  u2k(u2_Host.ver_e[u2_Host.kno_w].ken));
-    // printf("loaded reck.\n");
 
-#if 1
-    /* initial sync with filesystem
-    */
-    {
-      u2_noun lam = u2_sync_reck(rec_u);
-
-      _reck_poke(rec_u, lam);
-    }
-#endif
-
-    /* hack - hardcode a local.
-    */
-    {
-      u2_noun lam = u2nc
-        ('o',
-         u2nc(u2nc(c3__cay,
-                   u2nt(c3_s2('p','i'),
-                        u2nc(u2_ci_string("~ligbud-barnel"), u2_nul),
-                        u2_yes)),
-              u2_nul));
-
-      _reck_poke(rec_u, lam);
-    } 
     u2_cm_done();
   
     u2_cm_purge();
@@ -552,37 +379,22 @@ u2_reck_boot(u2_reck* rec_u)
   u2_cm_chin();
 }
 
+/* u2_reck_launch(): launch the reck engine (protected).
+*/
+void
+u2_reck_launch(u2_reck* rec_u)
+{
+  u2_noun pax = u2nq(c3__gold, c3__term, '0', u2_nul);
+  _reck_launch_toy(rec_u, pax);
+}
+
 /* u2_reck_line(): apply a reck line (protected).
 */
 void
 u2_reck_line(u2_reck* rec_u, u2_noun lin)
 {
+  u2_noun pax = u2nq(c3__gold, c3__term, '0', u2_nul);
+
   _reck_time_set(rec_u);
-
-#if 1
-  {
-    u2_noun lam = u2_sync_reck(rec_u);
-
-    _reck_poke(rec_u, lam);
-  }
-#endif
-
-  {
-    u2_noun lam = u2nt('o', 
-                        u2nc
-                          (c3__unix,
-                           u2nt(c3_s2('p','i'),
-                                u2nq(c3__term,
-                                     c3_s4('~','l','e','s'),
-                                     '0',
-                                     u2_nul),
-                                u2nc(c3__line, lin))),
-                        u2_nul);
-      
-    _reck_poke(rec_u, lam);
-  }
+  _reck_poke(rec_u, u2nc(pax, u2nc(c3__line, lin)));
 }
-
-/* u2_reck_new_boot(): boot the new reck engine (unprotected).
-*/
-

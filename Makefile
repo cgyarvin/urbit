@@ -2785,7 +2785,6 @@ VERE_OFILES=\
        v/sync.o \
        v/walk.o \
        v/reck.o \
-       v/neck.o \
        $(BASE_OFILES) \
        $(OUT_OFILES)
 

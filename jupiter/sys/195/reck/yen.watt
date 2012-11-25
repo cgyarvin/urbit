@@ -2,6 +2,10 @@
 ::          %yen, zuse archetypes.   This file is in the public domain.
 ::
 |%
+++  arch                                                ::  fs node
+          $%  [& clod]                                  ::  ie, file
+              [| dirt]                                  ::  ie, directory
+          ==                                            ::
 ++  ball  ,@uw                                          ::  statement payload
 ++  band  ,@uvH                                         ::  network message id
 ++  bait  ,[p=skin q=@ud r=dove]                        ::  fmt nrecvd spec
@@ -45,10 +49,11 @@
               [%cash p=@p q=buck]                       ::  civil license
               [%crap p=(list)]                          ::  error with trace
               [%dire p=@tas q=dram]                     ::  apply directory
+              [%edit p=@p q=@tas r=(list ukaz)]         ::  commit edits
               [%file p=@tas q=@]                        ::  apply atomic file
               [%hear p=@]                               ::  receive packet
               [%helo ~]                                 ::  ready to prompt
-              [%init p=@p]                              ::  initialize safe
+              [%init p=@p]                              ::  initialize revs
               [%junk p=@]                               ::  entropy
               [%line p=@t]                              ::  source line
               [%load p=@tas q=path]                     ::  request atomic file
@@ -62,6 +67,7 @@
               [%pump ~]                                 ::  produce packets
               [%save p=path q=@]                        ::  write atomic file
               [%send p=@]                               ::  transmit packet
+              [%ship p=@tas q=@tas]                     ::  label release
               [%sync ~]                                 ::  reset soft state
               [%task p=@tas q=*]                        ::  application task
               [%tell p=?(0 1 2 3) q=tank]               ::  report to human
@@ -74,11 +80,18 @@
               heg=(map hand code)                       ::  proposed 
               qim=(map hand code)                       ::  inbound
           ==                                            ::
+++  clod  ,[p=@da q=@uvI r=*]                           ::  mtime hash content
 ++  code  ,@uvI                                         ::  symmetric key
 ++  corp  ,[p=@t q=@t r=@tas]                           ::  name auth country
 ++  caul  (list path)                                   ::  causal history
 ++  chum  ,@uvI                                         ::  hashed passcode
 ++  deed  ,[p=@ q=step]                                 ::  signature, stage
+++  desk                                                ::  project state
+          $:  seq=@                                     ::  seqno, from 1
+              wen=time                                  ::  date of change
+              rad=arch                                  ::  state at this seq
+          ==                                            ::
+++  dirt  ,[p=@da q=(map ,@ta arch)]                    ::  mtime tree
 ++  door                                                ::  foreign contact
           $:  wod=road                                  ::  connection to
               fer=road                                  ::  inferred conn from
@@ -117,7 +130,7 @@
               [%is p=@ud q=@is]                         ::  IP6/public UDP/addr
           ==                                            ::
 ++  link  ,[p=code q=sock]                              ::  connection
-++  mace  (list ,[p=mark q=ring])                       ::  secret history
+++  mace  (list ,[p=mark q=ring])                       ::  private secrets
 ++  mark  ,@ud                                          ::  regime number
 ++  meal                                                ::  payload
           $%  [%back p=cape q=flap r=@dr]               ::  acknowledgment
@@ -126,8 +139,13 @@
               [%carp p=@ud q=@band r=@]                 ::  leaf fragment
               [%ping ~]                                 ::  no-op
           ==                                            ::
+++  meta                                                ::  path metadata
+          $%  [& p=@da q=@uvI]                          ::  mtime hash
+              [| p=@da q=(list ,@ta)]                   ::  mtime dir
+          ==                                            ::
 ++  move  ,[p=(unit plot) q=caul r=card]                ::  internal event
 ++  name  ,[p=@t q=(unit ,[p=? q=@t]) r=@t]             ::  first mid/nick last
+++  nope  ^~(^-(arch [%| @ ~]))                         ::  empty node
 ++  note  ,[p=soap q=sock r=meal]                       ::  output source
 ++  oven                                                ::  flow by server
           $:  wen=@da                                   ::  next activation
@@ -148,6 +166,11 @@
           $:  exp=@da                                   ::  expiration date
               lun=(unit lane)                           ::  route to friend
               lew=will                                  ::  will of friend
+          ==                                            ::
+++  roof  (map ,@p room)                                ::  revision control
+++  room                                                ::  author by flag
+          $:  own=?                                     ::  local/foreign
+              dos=(map ,@ta desk)                       ::  projects 
           ==                                            ::
 ++  rock  ,@uvO                                         ::  packet
 ++  safe                                                ::  domestic host
@@ -174,6 +197,14 @@
               any=@                                     ::  entropy
               urb=(map plot safe)                       ::  all keys and routes
           ==                                            ::
+++  ukaz                                                ::  change (pl ukazy)
+          $:  p=path                                    ::  change site
+              ^=  q                                     ::  change content
+              $%  [%del p=@uvI]                         ::  delete old-hash
+                  [%set p=@uvI q=@uvI r=*]              ::  new old data
+              ==                                        ::
+          ==                                            ::
+++  umaz  ,[p=(list ukaz) q=(list ukaz)]                ::  dual change
 ++  wand  (list ,[p=mark q=ac])                         ::  mace in action
 ++  what                                                ::  logical identity
           $%  [%corp p=corp]                            ::  business

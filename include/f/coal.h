@@ -1087,7 +1087,7 @@
         u2_noun
         u2_ckb_lent(u2_noun a);
 
-      /* u2_ckb_weld(): concatenate lists `a` before `b`.
+      /* u2_ckb_weld(): concatenate list `a` before `b`.
       */
         u2_noun
         u2_ckb_weld(u2_noun a, u2_noun b);

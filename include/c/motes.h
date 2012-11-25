@@ -866,6 +866,7 @@
 #   define c3__sunt   c3_s4('s','u','n','t')
 #   define c3__sure   c3_s4('s','u','r','e')
 #   define c3__sym    c3_s3('s','y','m')
+#   define c3__sync   c3_s4('s','y','n','c')
 #   define c3__sys    c3_s3('s','y','s')
 #   define c3__tab    c3_s3('t','a','b')
 #   define c3__tack   c3_s4('t','a','c','k')

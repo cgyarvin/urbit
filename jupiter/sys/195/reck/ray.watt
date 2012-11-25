@@ -1,0 +1,197 @@
+!:
+::          %ray, the shell.  This file is in the public domain.
+::
+=>  |%
+    ++  cy
+      =+  car=*arch
+      |%  
+      ++  also                                        ::  metadata
+        |=  pax=path  ^-  meta
+        =>  .(car (sift pax))
+        ?-  -.car
+          &  [%& p.car q.car]
+          |  [%| p.car (turn (~(tap by q.car) ~) |=([p=@ta *] p))]
+        ==
+      ::
+      ++  duel                                        ::  compute changes
+        |=  bus=arch  
+        =+  ram=*hapt
+        =+  maz=*umaz
+        |-  ^-  umaz
+        ?:  =(car bus)
+          maz
+        =+  pax=(flop ram)
+        ?:  ?=(& -.car)
+          ?.  ?=(& -.bus)  
+            (uzag $(maz (uzag maz), bus car, car bus))
+          ?:  =(q.car q.bus)
+            maz
+          ?:  (gth p.car p.bus)
+            [p.maz [[pax %set q.car q.bus r.car] q.maz]]
+          [[[pax %set q.bus q.car r.bus] p.maz] q.maz]
+        ?.  ?=(| -.bus)
+          ?:  (gth p.car p.bus)
+            =>  .(maz $(bus nope))
+            [p.maz [[pax %del q.bus] q.maz]]
+          :-  =+  wob=[[pax %set q.bus @ r.bus] p.maz]
+              ?:(=(nope car) wob [[pax %del @] wob])
+          q.maz
+        =+  lay=(gth p.car p.bus)
+        =+  ryc=(~(tap by q.car) ~)
+        =+  seb=(~(tap by q.bus) ~)
+        =+  noy=(skip ryc |=([p=@ta q=arch] (~(has by q.bus) p)))
+        =+  syr=(skip seb |=([p=@ta q=arch] (~(has by q.car) p)))
+        =+  yel=(skim ryc |=([p=@ta q=arch] (~(has by q.bus) p)))
+        =>  %=    .
+                maz
+              |-  ^-  umaz
+              ?~  yel
+                maz
+              %=  $
+                yel  t.yel 
+                maz  %=  ^$
+                       ram  [p.i.yel ram]
+                       car  q.i.yel
+                       bus  (need (~(get by q.bus) p.i.yel))
+                     ==
+              ==
+            ==
+        =>  %=    .
+                maz
+              |-  ^-  umaz
+              ?~  noy
+                maz
+              %=  $
+                noy  t.noy
+                maz  %=  ^$
+                         ram  [p.i.noy ram]
+                         car  q.i.noy
+                         bus  [%| ?:(lay @ p.bus) ~]
+                     ==
+              ==
+            ==
+        |-  ^-  umaz
+        ?~  syr
+          maz
+        %=  $
+          syr  t.syr
+          maz  %=  ^$
+                   ram  [p.i.syr ram]
+                   car  [%| ?.(lay @ p.car) ~]
+                   bus  q.i.syr
+               ==
+        ==
+      ::
+      ++  sift                                         ::  select subtree
+        |=  pax=path
+        ^-  arch
+        ?~  pax
+          car
+        ?-    car
+            [& *]  nope
+            [| *]  
+          =+  gos=(~(get by q.car) i.pax) 
+          ?~(gos nope $(pax t.pax, car u.gos))
+        ==
+      ::
+      ++  wane                                         ::  apply ukaz
+        |=  [now=@da kuz=ukaz]
+        ^-  arch
+        ?~  p.kuz
+          =+  hux=?:(?=(& -.car) q.car 0)
+          ?-  -.q.kuz
+            %del  ?>(=(hux p.q.kuz) nope)
+            %set  ?>(=(hux q.q.kuz) [%& now p.q.kuz r.q.kuz])
+          ==
+        ?>  ?=(| -.car)
+        =+  yit=(~(get by q.car) i.p.kuz)
+        =+  dan=$(p.kuz t.p.kuz, car ?~(yit nope u.yit))
+        ?:  =(nope dan)
+          ?~  yit 
+            car 
+          =+(hon=(~(del by q.car) i.p.kuz) ?~(hon nope [%| now hon]))
+        ?~  yit 
+          [%| now [[i.p.kuz dan] ~ ~]] 
+        ?:  =(dan u.yit)
+          car
+        =+(hon=(~(put by q.car) i.p.kuz dan) [%| now hon])
+      ::
+      ++  work                                         ::  apply ukazy
+        |=  [now=@da kuz=(list ukaz)]
+        ^-  arch
+        ?~(kuz car $(car (wane now i.kuz), kuz t.kuz))
+      --
+    ++  uwed                                           ::  weld dual change
+      |=  [a=umaz b=umaz]  ^-  umaz
+      [(weld p.a p.b) (weld q.a q.b)]     
+    ++  uzag                                           ::  reverse dual change
+      |=(a=umaz ^-(umaz [q.a p.a]))
+    --
+|%
+++  clay                                                ::  revision control
+  =+  rof=*roof
+  |%
+  ++  drip
+    |=  [now=@da who=plot fav=card]
+    ^-  [p=(list card) q=_+>]
+    ?+    -.fav  !! 
+        %edit
+      ~&  [%edit who]
+      =+  yar=(need (~(get by rof) who))
+      ?>  own.yar
+      =+  lix=(~(get by dos.yar) q.fav)
+      =+  taq=`desk`?^(lix u.lix [1 `@da`0 [%| `@da`0 ~]])
+      :-  ~
+      %_    +>.$
+          rof
+        %+  ~(put by rof)
+          who
+        %_    yar
+            dos
+          %+  ~(put by dos.yar)
+            q.fav
+          %_    taq
+              rad
+            (~(work cy rad.taq) now r.fav)
+          ==
+        ==
+      ==
+    ::
+        %init
+      :-  [[%tell %0 %leaf "clay: home room for {~(rend co ~ %p who)}."] ~]
+      +>.$(rof (~(put by rof) who `room`[& ~]))
+    ::
+        %ship
+      !!
+    ==
+  ++  scry
+    |=  [now=@da hap=path]
+    ^-  (unit)
+    ?~  hap  ~
+    =+  hos=(slay i.hap)
+    ?.  &(?=(^ hos) ?=([%% %p *] u.hos))  ~
+    ?~  t.hap  ~
+    =+  poj=(slay i.t.hap)
+    ?.  &(?=(^ poj) ?=([%% %tas *] u.poj))  ~
+    ?~  t.t.hap  ~
+    =+  mag=(slay i.t.t.hap)
+    ?.  &(?=(^ mag) ?=([%% %da *] u.mag))  ~
+    =+  yar=(~(get by rof) q.p.u.hos)
+    ?~  yar  ~
+    =+  siq=(~(get by dos.u.yar) q.p.u.poj)
+    ?~  siq  ~
+    ?.  ?:  own.u.yar
+          (gte q.p.u.mag wen.u.siq)
+        =(q.p.u.mag wen.u.siq)
+      ~
+    ?~  t.t.t.hap  ~
+    ?+  i.t.t.t.hap  ~
+      %a  [~ rad.u.siq]
+      %d  =+  der=(~(sift cy rad.u.siq) t.t.t.t.hap)
+          ?.(?=(& -.der) ~ [~ r.der])
+      %m  =+  out=[~ (~(also cy rad.u.siq) t.t.t.t.hap)]
+          out
+      %x  ?.(=(q.p.u.mag now) ~ [~ seq.u.siq wen.u.siq])
+    ==
+  --
+--

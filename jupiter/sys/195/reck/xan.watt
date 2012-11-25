@@ -1073,6 +1073,7 @@
       :-  :~  [%tell %1 [%leaf "welcome, {~(rend co [~ %p p.bon])}!"]]
               [%tell %1 [%leaf "passcode: {~(rend co [~ %p q.bon])}"]]
               [%logn p.bon (shak p.bon q.bon)]
+              [%init p.bon]
           ==
       +>
     ::
@@ -1110,5 +1111,20 @@
     =^  toe  +>.^$
       (clop now i.p.fuy)
     $(p.fuy t.p.fuy, out (weld (flop toe) out))
+  ::
+  ++  scry
+    |=  [now=@da hap=path]
+    ^-  (unit)
+    ?~  hap  ~
+    =+  hos=(slay i.hap)
+    ?.  &(?=(^ hos) ?=([%% %da *] u.hos))  ~
+    ?.  =(q.p.u.hos now)  ~
+    ?~  t.hap  ~
+    =+  viy=(slay i.t.hap) 
+    ?.  &(?=(^ viy) ?=([%% %p *] u.viy))  ~
+    ?~  t.t.hap  ~
+    ?+    i.t.t.hap  ~
+        %a  [~ (~(has in urb.ton.fox) q.p.u.viy)]
+    ==
   --
 --

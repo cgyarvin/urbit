@@ -143,10 +143,11 @@
           u2_noun duel;                   //  compare resource trees
           u2_noun rain;                   //  parse path, text -> gene
           u2_noun ream;                   //  parse text -> gene
-          u2_noun sham;                   //  SHA-256 
+          u2_noun sham;                   //  SHA-256 on noun
           u2_noun slam;                   //  call ([vase vase] -> vase)
           u2_noun slap;                   //  layer ([vase gene] -> vase)
           u2_noun slop;                   //  cell ([vase vase] -> vase)
+          u2_noun slay;                   //  text to coin
         } toy;
 
         u2_noun now;                      //  current time, as noun
@@ -330,25 +331,20 @@
         void
         u2_reck_boot(u2_reck* rec_u);
 
-      /* u2_neck_line(): apply a neck line (protected).
+      /* u2_reck_launch(): launch the reck engine (protected).
       */
         void
-        u2_neck_line(u2_reck* rec_u, u2_noun lin);
+        u2_reck_launch(u2_reck* rec_u);
 
-      /* u2_neck_boot(): boot the neck engine (unprotected).
-      */
-        void
-        u2_neck_boot(u2_reck* rec_u);
-
-      /* u2_neck_launch(): launch the neck engine (protected).
-      */
-        void
-        u2_neck_launch(u2_reck* rec_u);
-
-      /* u2_reck_peek(): query the reck namespace.
+      /* u2_reck_peek(): query the reck namespace (protected).
       */
         u2_noun
         u2_reck_peek(u2_reck* rec_u, u2_noun hap);
+
+      /* u2_reck_sync(): poll and apply sync events (protected).
+      */
+        void
+        u2_reck_sync(u2_reck* rec_u);
 
 
     /**  Execution system.
@@ -511,6 +507,12 @@
       */
         void
         u2_ve_launch(void);
+
+      /* u2_ve_sync(): filesystem sync, unprotected.
+      */
+        void
+        u2_ve_sync(void);
+
 
     /**  HTTP.
     **/

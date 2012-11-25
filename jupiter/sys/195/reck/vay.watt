@@ -5,10 +5,12 @@
     ++  peek  
       |=  [now=@da hap=path]
       ^-  (unit)
-      !!
+      (~(beck is now) hap)
+    ::
     ++  poke  
       |=  [now=@da ovo=*]
       =>  .(ovo ((hard ovum) ovo))
+      ::  ~&  [%ovum ovo]
       ^-  [p=(list ovum) q=_+>]
       =^  zef  sys
         (~(howl is now) ~ [[%eyre ~] p.ovo ~] q.ovo)
@@ -16,11 +18,14 @@
     --
 =>  |%
     ++  game
-      $:  ^=  arvo
-        $:  gel=_*alga                                      ::  network and PKI
+      $:  ^=  arvo                                          ::  network and PKI
+        $:  gel=_*alga
         ==
-          ^=  bach
-        $:  maw=(map plot _*berg)                           ::  shells
+          ^=  bach                                          ::  shell
+        $:  maw=(map plot _*berg)
+        ==
+          ^=  cary                                          ::  filesystem
+        $:  duw=_clay
         ==
           ^=  eyre                                          ::  i/o
         $:  gem=(map plot chum)                             ::  hashed passcodes
@@ -53,7 +58,37 @@
       =+  yub=(knap:beg now r.mov)
       :-  (turn p.yub |=(a=card [p.mov q.mov a]))
       sys(maw.bach (~(put by maw.bach.sys) u.p.mov q.yub))
+    ::
+    ++  car
+      |=  [pex=path mov=move]
+      ^-  [(list move) game]
+      ?>  ?=(^ p.mov)
+      =+  yub=(drip:duw.cary.sys now u.p.mov r.mov)
+      :-  (turn p.yub |=(a=card [p.mov q.mov a]))
+      sys(duw.cary q.yub)
     --
+  ::
+  ++  auth                                                  ::  match password
+    |=  [our=plot cof=chum]
+    ^-  ?
+    =+  fup=(~(get by gem.eyre.sys) our)
+    ?^  fup
+      =(cof u.fup)
+    =+  gys=(~(us go ton.fox.gel.arvo.sys) our)
+    ?&(?=(^ gys) =(cof (shak our pac:ex:q:sen:u.gys)))
+  ::
+  ++  beck
+    |=  hap=path
+    ^-  (unit)
+    ?~  hap
+      ~
+    ?+    i.hap  ~
+        %a  (scry:gel.arvo.sys now t.hap)
+        %b  ~
+        %c  (scry:duw.cary.sys now t.hap)
+        %d  ~
+        %e  ~
+    ==
   ::
   ++  grit                                                  ::  cause privilege
     |=  cul=caul
@@ -65,15 +100,6 @@
       ?:  ?=([%iron *] i.cul)  %iron
       %lead
     $(cul t.cul)
-  ::
-  ++  gulf                                                  ::  match password
-    |=  [our=plot cof=chum]
-    ^-  ?
-    =+  fup=(~(get by gem.eyre.sys) our)
-    ?^  fup
-      =(cof u.fup)
-    =+  gys=(~(us go ton.fox.gel.arvo.sys) our)
-    ?&(?=(^ gys) =(cof (shak our pac:ex:q:sen:u.gys)))
   ::
   ++  howl                                                  ::  master resolve
     |=  mov=move
@@ -96,15 +122,21 @@
         (bac:si pex [p.mov t.q.mov r.mov])
       $(mor (weld fez t.mor))
     ::
+        %cary
+      =^  fez  sys
+        (car:si pex [p.mov t.q.mov r.mov])
+      $(mor (weld fez t.mor))
+    ::
         %eyre
       =.  p.mov  ?^(p.mov p.mov (~(get by rev.eyre.sys) t.q.mov))
       =+  rer=|=(a=@tas ^$(mor [[p.mov [[a ~] q.mov] r.mov] t.mor]))
       =+  giv=|.(^$(mor t.mor, out [[i.t.q.mov r.mov] out]))
+      =+  mel=(grit t.q.mov)
       =+  ^=  liv
           |=  a=plot 
           ^$(mor t.mor, rev.eyre.sys (~(put by rev.eyre.sys) t.q.mov a))
       ?.  ?|  ?=(^ p.mov) 
-              ?=(?(%cash %crap %hear %logn %make %tell) -.r.mov)
+              ?=(?(%cash %crap %edit %hear %logn %make %tell) -.r.mov)
           ==
         ~&([%eyre-illegal mov] !!)
       ?-    -.r.mov
@@ -113,20 +145,31 @@
           %cash  (rer %arvo)
           %crap  (giv)
           %dire  (rer %bach)
+          %edit
+        %=    $
+            mor
+          :_  t.mor
+          :+  ?^  p.mov  
+                ?>(=(u.p.mov p.r.mov) p.mov)
+              ?>(=(%gold mel) [~ p.r.mov])
+            [[%cary ~] q.mov]
+          r.mov
+        ==
+      ::
           %file  (rer %bach)
           %hear  (rer %arvo)
           %helo  !!
-          %init  !!
+          %init  (rer %cary)
           %junk  (rer %arvo)
           %line  (rer %bach)
           %load  (giv) 
           %logn 
-        ?>  !=(%lead (grit t.q.mov))
-        ?>  (gulf p.r.mov q.r.mov)
+        ?>  !=(%lead mel)
+        ?>  (auth p.r.mov q.r.mov)
         (liv p.r.mov)
       ::
           %logp
-        ?>  =(%gold (grit t.q.mov))
+        ?>  =(%gold mel)
         (liv p.r.mov)
       ::
           %loot  (giv)
@@ -137,6 +180,7 @@
           %pump  !!
           %save  (giv)
           %send  (giv)
+          %ship  (rer %cary)
           %sync  !!
           %task  !!
           %tell  (giv) 
