@@ -7,7 +7,7 @@
 ::
 ::    Noun A is this file, hoon.hoon, encoded as an atom, LSB first.
 ::    Noun B is the accompanying binary file, hoon.pill, encoded
-::    as an atom LSB first and unpacked with (cue).
+::    as an atom LSB first and unpacked with "++  cue".
 ::
 ::    A is marked above with a stage number (X=195) and a constraint,
 ::    either "reflexive" (normally) or "transitional" (for language
@@ -4192,6 +4192,7 @@
 ::
 ++  sell
   |=  vax=vase  ^-  tank
+  ~|  %sell
   (dish:ut ~(dole ut p.vax) q.vax)
 ::
 ++  pave
@@ -4677,6 +4678,10 @@
         (cat 3 p.i.t.p.i.t.p.u.may p.i.t.t.p.i.t.p.u.may)
       q.i.p.i.t.p.u.may
     q.ham
+  ::
+  ++  dool
+    ~|  %dool
+    dole
   ::
   ++  dole
     ^-  calf

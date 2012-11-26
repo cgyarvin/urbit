@@ -42,6 +42,9 @@ _sync_peek_home(u2_reck* rec_u, u2_noun pos)
   else {
     u2_flag cep = u2t(pec);
 
+    if ( u2_no == cep ) {
+      printf("rejected!\n");
+    }
     u2z(pec);
     return cep;
   }

@@ -5,6 +5,9 @@
     ++  peek  
       |=  [now=@da hap=path]
       ^-  (unit)
+      ~|  %peek-a
+      =+  bar=ut
+      ~|  %peek-b
       (~(beck is now) hap)
     ::
     ++  poke  
@@ -35,6 +38,8 @@
       == 
     --
 =+  sys=*game
+=.  gel.arvo.sys  $:alga
+=.  duw.cary.sys  clay
 |%
 ++  is
   |_  now=@da 
@@ -80,6 +85,7 @@
   ++  beck
     |=  hap=path
     ^-  (unit)
+    =+  bur=ut
     ?~  hap
       ~
     ?+    i.hap  ~
