@@ -3242,6 +3242,7 @@
         q=$%([& p=type] [| p=axis q=(list ,[p=type q=foot])])
     ==
   ++  prop  ,[p=axis q=[p=?(~ axis) q=(list ,[p=type q=foot])]]
+  ++  reef  ,[p=[p=? q=@ud] q=@ud]
   ++  tile
     $&  [p=tile q=tile]                                     ::  ordered pair
     $%  [%base p=?([%atom p=term] %cell %flag %noun %null)] ::  base type
@@ -5962,21 +5963,43 @@
   ++  mota  %+  cook
               |=([a=tape b=tape] (rap 3 (weld a b)))
             ;~(plug (star low) (star hig))
-  ++  road  ;~  pfix  fas
-              %+  cook
-                |=  [a=gene b=(unit (list gene))] 
-                ?~  b
-                  a
-                [a |-(`gene`?~(u.b [%bcts %null] [i.u.b $(u.b t.u.b)]))]
-              ;~  plug
-                hasp
-                ;~  pose
-                  (stag ~ (ifix [fas fas] (most fas hasp)))
-                  (cold [~ ~] fas)
-                  (easy ~)
-                ==
-              ==
-            ==
+  ++  road
+    ;~  pfix  fas
+      %+  cook
+        |=  [a=reef b=(list gene)]
+        =-  |-(`gene`?~(alg [%bcts %null] [i.alg $(alg t.alg)]))
+        ^=  alg  ^-  (list gene)
+        =+  rew=`path`(flop wer)
+        =+  pot=`path`(flop (scag q.a rew))
+        =+  gaw=`path`(slag q.a rew)
+        =+  pre=`path`?:(p.p.a (scag q.p.a (flop gaw)) (flop (slag q.p.a gaw)))
+        =+  lop=|=(a=path `(list gene)`(turn a |=(b=@ta [%dtpt %ta b])))
+        (weld (lop pre) ?~(pot b (weld b (lop pot))))
+      ;~  plug
+        ;~  plug
+          ;~  pose
+            (cold [%| 0] lus)
+            (cook |=(a=(list) [%| (lent a)]) (plus tis))
+            (cook |=(a=(list) [%& (lent a)]) (star tar))
+          ==
+          (cook |=(a=(list) (lent a)) (star buc))
+        ==
+        %+  cook
+          |=  [a=gene b=(unit (list gene))] 
+          ^-  (list gene)
+          ?~  b
+            [a ~]
+          [a u.b]
+        ;~  plug
+          hasp
+          ;~  pose
+            (stag ~ (ifix [fas fas] (most fas hasp)))
+            (cold [~ ~] fas)
+            (easy ~)
+          ==
+        ==
+      == 
+    ==
   ++  scat
     %+  knee  *gene  |.  ~+
     %-  stew  :~  

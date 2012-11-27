@@ -3,17 +3,22 @@
 ::
 |%
 ++  berg                                            ::  repl/shell
-  |=  [who=plot yam=_|+(* *(unit))]                 ::  identity, namespace
+  |=  who=plot                                      ::  per identity
   =+  nub=`vase`!>(+>)                              ::  system + libraries
   =+  hit=[p=0 q=*(list tape)]                      ::  source history
   =+  sur=[p=0 q=*(qeu vase)]                       ::  result history
   =+  haf=[p=0 q=*tape]                             ::  partial input
+  =+  ^=  vez                                       ::  local parser
+      %*    .  vast 
+          wer 
+        `path`[~(rent co ~ %p who) %c %hoon ~]
+      ==
   =+  way=*(map ,@ta vase)                          ::  environment
-  |%
+  |_  [now=@da yam=_|+(* *(unit))]
   ++  chad                                          ::  apply command
-    |=  [now=@da pez=(unit ,@ta) gen=gene]
+    |=  [pez=(unit ,@ta) gen=gene]
     ^-  [p=(list card) q=_+>]
-    =+  ten=(slab =([~ %how] pez) [(lube now) gen] yam)
+    =+  ten=(slab =([~ %how] pez) [lube gen] yam)
     ?-    -.ten
       %0  (chaw pez p.ten)
       %1  ~|(%chad-one !!)
@@ -53,9 +58,9 @@
       (cold [[~ %helo] [%dtsg %% 0]] vul)
       ;~  plug
         (stag ~ ;~(pfix col sym))
-        ;~(pfix ace (stag %cltr (most ace wide:vast)))
+        ;~(pfix ace (stag %cltr (most ace wide:vez)))
       ==
-      (stag ~ vest)
+      (stag ~ wide:vez)
     ==
   ::
   ++  hist                                          ::  add to sources
@@ -63,12 +68,12 @@
     %_(+> p.hit +(p.hit), q.hit [pet q.hit])
   ::
   ++  knap                                          ::  apply event
-    |=  [now=@da fav=card]
+    |=  fav=card
     ^-  [p=(list card) q=_+>]
     ?+    -.fav  [~ +>]
         %boot
       :-  [[%tell %0 %leaf "<reboot {lich}>"] prom ~]
-      (berg who yam)
+      (berg who)
     ::
         %dire
       :-  ~
@@ -87,7 +92,7 @@
       =+  vex=(clam pet)
       ?:  |(?=(~ q.vex) !=(~ q.q.u.q.vex))
         [[[%tell %3 %leaf "<syntax error>"] ~] +>.$]
-      (chad now p.u.q.vex)
+      (chad p.u.q.vex)
     ==
   ::
   ++  lich                                          ::  name of shell
@@ -97,7 +102,7 @@
   ++  lewd                                          ::  type by name
     |=  txt=@t
     ^-  type
-    (~(play ut p.nub) (rash txt wide:vast))
+    (~(play ut p.nub) (rash txt wide:vez))
   ::
   ++  love                                          ::  ^+ by name
     |=  [txt=@t vax=vase]
@@ -105,7 +110,6 @@
     ?.((~(nest ut (lewd txt)) | p.vax) ~ [~ q.vax])
   ::
   ++  lube                                          ::  make subject
-    |=  now=@da
     ^-  vase
     ;:  slop
       ;:  slop
