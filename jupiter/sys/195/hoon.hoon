@@ -3095,7 +3095,6 @@
   ++  foot
     $%  [%ash p=gene]
         [%elm p=gene]
-        [%fir p=gene]
         [%oak ~]
         [%yew p=(map term foot)]
     ==
@@ -5034,7 +5033,7 @@
       ?>  ?=([%ash *] q.i.goy)
       $(goy t.goy, waf (~(put by waf) p.i.goy q.i.goy))
     ::
-        ?(%elm %fir)
+        %elm
       ~|([%hang-elm p.i.goy] !!)
     ::
         %oak
@@ -5571,7 +5570,6 @@
                   dext(sut (play p.q.n.dab), ref (play(sut ref) p.q.n.hem))
               ==
                 %elm  =(q.n.dab q.n.hem)
-                %fir  =(q.n.dab q.n.hem)
                 %oak  ?=(?(%oak %yew) -.q.n.hem)
                 %yew  
               ?&  ?=(%yew -.q.n.hem)

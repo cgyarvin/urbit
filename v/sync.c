@@ -243,9 +243,13 @@ _sync_book_m(u2_reck* rec_u, u2_noun own, u2_noun pos, u2_noun map, u2_noun ova)
     ova = _sync_book_m(rec_u, u2k(own), u2k(pos), u2k(r_map), ova);
     det = _sync_edit(rec_u, pos, u2k(bok), u2k(qn_map), u2_nul);
 
-    ova = u2nc(u2nc(u2nt(c3__gold, c3__sync, u2_nul),
-                    u2nq(c3__edit, own, u2k(bok), det)),
-               ova);
+    if ( u2_nul != det ) {
+      ova = u2nc(u2nc(u2nt(c3__gold, c3__sync, u2_nul),
+                      u2nq(c3__edit, own, u2k(bok), det)),
+                 ova);
+    } else {
+      u2z(own);
+    }
     u2z(map);
     return ova;
   }

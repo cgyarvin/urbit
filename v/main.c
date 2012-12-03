@@ -25,16 +25,14 @@
 **/
     /* External drivers.
     */
+      extern u2_ho_driver j2_da(k_194);
       extern u2_ho_driver j2_da(k_195);
-      extern u2_ho_driver j2_da(k_196);
-      extern u2_ho_driver j2_da(k_197);
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       u2_ho_driver *HostDriverBase[] = {
+        &j2_da(k_194),
         &j2_da(k_195),
-        &j2_da(k_196),
-        &j2_da(k_197),
         0
       };
 

@@ -20,7 +20,7 @@ BIN=bin
 
 RM=rm -f
 CC=gcc
-CLD=gcc -g -L/usr/local/lib
+CLD=gcc -O3 -L/usr/local/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
@@ -29,7 +29,7 @@ LIBS=-lev -lgmp -lreadline -ltecla -ltermcap -lsigsegv
 INCLUDE=include
 GENERATED=generated
 DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN)
-CFLAGS=-g -I/usr/local/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
+CFLAGS=-O3 -I/usr/local/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 CWFLAGS=-Wall
 
 .y.o:
@@ -2763,13 +2763,147 @@ J195_OFILES=\
        $(J195_6_OFILES_UT) \
        gen195/watt.o
 
+J194_1_OFILES=\
+       gen194/1/add.o \
+       gen194/1/dec.o \
+       gen194/1/div.o \
+       gen194/1/gte.o \
+       gen194/1/gth.o \
+       gen194/1/lte.o \
+       gen194/1/lth.o \
+       gen194/1/mod.o \
+       gen194/1/mul.o \
+       gen194/1/sub.o
+
+J194_2_OFILES=\
+       gen194/2/bind.o \
+       gen194/2/clap.o \
+       gen194/2/drop.o \
+       gen194/2/flop.o \
+       gen194/2/lent.o \
+       gen194/2/levy.o \
+       gen194/2/lien.o \
+       gen194/2/need.o \
+       gen194/2/reel.o \
+       gen194/2/roll.o \
+       gen194/2/skim.o \
+       gen194/2/skip.o \
+       gen194/2/slag.o \
+       gen194/2/snag.o \
+       gen194/2/sort.o \
+       gen194/2/turn.o \
+       gen194/2/weld.o
+
+J194_3_OFILES=\
+       gen194/3/bex.o \
+       gen194/3/can.o \
+       gen194/3/cap.o \
+       gen194/3/cat.o \
+       gen194/3/con.o \
+       gen194/3/cut.o \
+       gen194/3/dor.o \
+       gen194/3/dis.o \
+       gen194/3/end.o \
+       gen194/3/gor.o \
+       gen194/3/hor.o \
+       gen194/3/lsh.o \
+       gen194/3/mas.o \
+       gen194/3/met.o \
+       gen194/3/mix.o \
+       gen194/3/mug.o \
+       gen194/3/peg.o \
+       gen194/3/rap.o \
+       gen194/3/rip.o \
+       gen194/3/rsh.o \
+       gen194/3/vor.o
+
+J194_4_OFILES=\
+       gen194/4/in.o \
+       gen194/4/by.o \
+       gen194/4/in_has.o \
+       gen194/4/in_gas.o \
+       gen194/4/in_put.o \
+       gen194/4/in_tap.o \
+       gen194/4/by_gas.o \
+       gen194/4/by_get.o \
+       gen194/4/by_has.o \
+       gen194/4/by_put.o 
+
+J194_5_OFILES=\
+       gen194/5/cue.o \
+       gen194/5/jam.o \
+       gen194/5/mat.o \
+       gen194/5/mock.o \
+       gen194/5/parse.o \
+       gen194/5/rub.o \
+       gen194/5/shax.o \
+       gen194/5/trip.o
+
+J194_6_OFILES=\
+       gen194/6/ap.o \
+       gen194/6/cell.o \
+       gen194/6/comb.o \
+       gen194/6/cons.o \
+       gen194/6/core.o \
+       gen194/6/cube.o \
+       gen194/6/face.o \
+       gen194/6/fine.o \
+       gen194/6/fitz.o \
+       gen194/6/flan.o \
+       gen194/6/flay.o \
+       gen194/6/flip.o \
+       gen194/6/flor.o \
+       gen194/6/fork.o \
+       gen194/6/hike.o \
+       gen194/6/look.o \
+       gen194/6/ut.o
+
+J194_6_OFILES_UT=\
+       gen194/6/ut_burn.o \
+       gen194/6/ut_bust.o \
+       gen194/6/ut_crop.o \
+       gen194/6/ut_cull.o \
+       gen194/6/ut_find.o \
+       gen194/6/ut_fink.o \
+       gen194/6/ut_fire.o \
+       gen194/6/ut_firm.o \
+       gen194/6/ut_fish.o \
+       gen194/6/ut_fuse.o \
+       gen194/6/ut_gain.o \
+       gen194/6/ut_heal.o \
+       gen194/6/ut_lose.o \
+       gen194/6/ut_mint.o \
+       gen194/6/ut_moot.o \
+       gen194/6/ut_mull.o \
+       gen194/6/ut_nest.o \
+       gen194/6/ut_park.o \
+       gen194/6/ut_peek.o \
+       gen194/6/ut_play.o \
+       gen194/6/ut_repo.o \
+       gen194/6/ut_rest.o \
+       gen194/6/ut_seek.o \
+       gen194/6/ut_snap.o \
+       gen194/6/ut_swab.o \
+       gen194/6/ut_tack.o \
+       gen194/6/ut_tock.o \
+       gen194/6/ut_wrap.o
+
+J194_OFILES=\
+       $(J194_1_OFILES) \
+       $(J194_2_OFILES) \
+       $(J194_3_OFILES) \
+       $(J194_4_OFILES) \
+       $(J194_5_OFILES) \
+       $(J194_6_OFILES) \
+       $(J194_6_OFILES_UT) \
+       gen194/watt.o
+
 BASE_OFILES=\
        $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
-       $(J197_OFILES) \
-       $(J196_OFILES) \
-       $(J195_OFILES)
+       $(J195_OFILES) \
+       $(J194_OFILES)
 
 OUT_OFILES=\
        outside/jhttp/http_parser.o

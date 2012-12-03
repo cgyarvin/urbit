@@ -430,6 +430,7 @@
 #   define c3__home   c3_s4('h','o','m','e')
 #   define c3__homp   c3_s4('h','o','m','p')
 #   define c3__hook   c3_s4('h','o','o','k')
+#   define c3__hoon   c3_s4('h','o','o','n')
 #   define c3__hosc   c3_s4('h','o','s','c')
 #   define c3__hose   c3_s4('h','o','s','e')
 #   define c3__howl   c3_s4('h','o','w','l')
