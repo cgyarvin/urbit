@@ -14,40 +14,10 @@
     static u2_noun _nock_mool(u2_noun, u2_noun, u2_kode*);
     static u2_noun _nock_molg(u2_noun, u2_noun, u2_kode*);
 
-/* _nock_pray_cool(): load from namespace, in kernel mode.
-*/
-static u2_noun
-_nock_pray_cool(u2_noun gof)
-{
-  u2_pryr god_p = u2_hevn_be(u2_pryr, god);
-  u2_noun out;
-
-  // no stairway
-  //
-  c3_assert(u2_nul == u2_hevn_at(lad));
-
-  if ( 0 == god_p ) {
-    return u2_cm_bail(c3__exit); 
-  }
-  out = god_p(gof);
-  if ( u2_nul == out ) {
-    return u2_cm_bail(c3__exit);
-  }
-  else if ( (u2_no == u2du(out)) || (u2_nul != u2h(out)) ) {
-    return u2_cm_bail(c3__fail);
-  }
-  else {
-    u2_noun pro = u2k(u2t(out));
-
-    u2z(out);
-    return pro;
-  }
-}
-
 /* _nock_pray_mool(): load from namespace, in virtual mode.
 */
 static u2_noun
-_nock_pray_mool(u2_noun gof, u2_kode *pon)
+_nock_pray_mool(u2_noun gof, u2_kode *pon)                        //  transfer
 {
   u2_noun lad = u2_hevn_at(lad);
 
@@ -98,6 +68,37 @@ _nock_pray_mool(u2_noun gof, u2_kode *pon)
   }
 }
 
+/* _nock_pray_cool(): load from namespace, in kernel mode.
+*/
+static u2_noun
+_nock_pray_cool(u2_noun gof)                                      //  transfer
+{
+  //  This should just exit - but for various reasons, all historical,
+  //  we could be actually mocking here.  Therefore we have to respect
+  //  the mock if it exists.
+  //
+  u2_noun lad = u2_hevn_at(lad);
+
+  if ( u2_nul == lad ) {
+    return u2_cm_bowl(u2nc(c3__need, u2nc(gof, u2_nul)));
+  }
+  else {
+    u2_kode pon = 0;
+    u2_noun mog = _nock_pray_mool(gof, &pon);
+
+    if ( 0 == pon ) {
+      return mog;
+    } 
+    else if ( 1 == pon ) {
+      return u2_cm_bowl(u2nc(c3__need, mog));
+    }
+    else if ( 2 == pon ) {
+      return u2_cm_bowl(u2nc(c3__exit, mog));
+    }
+    else { c3_assert(0); return 0; }
+  }
+}
+
 /* _nock_hint(): hint with code, data, subject, formula.  nock/mock.
 */
 static u2_noun                                                    //  produce
@@ -105,7 +106,7 @@ _nock_hint(u2_noun  zep,                                          //  transfer
            u2_noun  hod,                                          //  transfer
            u2_noun  bus,                                          //  transfer
            u2_noun  nex,                                          //  transfer
-           u2_flag* pon)
+           u2_bean* pon)
 {
   u2_noun pro;
 
@@ -113,6 +114,7 @@ _nock_hint(u2_noun  zep,                                          //  transfer
     default: u2z(zep); u2z(hod); 
              return pon ? _nock_mool(bus, nex, pon) : _nock_cool(bus, nex);
 
+    case c3__yelp: 
     case c3__bean: 
     case c3__mean:
     case c3__spot: {
@@ -246,7 +248,7 @@ _nock_hint(u2_noun  zep,                                          //  transfer
     }
 
     case c3__live: {
-      u2_flag qox;
+      u2_bean qox;
 
       u2_tx_sys_bit(u2_Wire, u2_yes);
       qox = u2_tx_task_in(u2_Wire, hod);
@@ -525,8 +527,7 @@ _nock_cool(u2_noun bus,
         gof = _nock_cool(bus, u2k(gal));
         pro = _nock_pray_cool(gof);
 
-        u2z(gof); u2z(fol);
-
+        u2z(fol);
         return pro;
       }
       c3_assert(!"not reached");
@@ -891,15 +892,19 @@ _nock_moog(u2_noun bus,
     u2_noun hoe;
 
     if ( 0 != (hoe = u2_cm_trap()) ) {
-      if ( u2h(hoe) != c3__exit ) {
+      if ( u2h(hoe) == c3__exit ) {
+        res = u2nc(2, u2k(u2t(hoe)));
+        u2z(hoe);
+      } 
+      else if ( u2h(hoe) == c3__need ) {
+        res = u2nc(1, u2k(u2t(hoe)));
+        u2z(hoe);
+      } 
+      else {
         u2_noun wac = u2k(u2h(hoe));
 
         u2z(hoe);
         return u2_cm_bail(wac);
-      }
-      else {
-        res = u2nc(2, u2k(u2t(hoe)));
-        u2z(hoe);
       }
     }
     else {
@@ -919,7 +924,7 @@ u2_cn_nock(u2_noun bus,
            u2_noun fol)
 {
   u2_noun pro;
-  u2_flag bit;
+  u2_bean bit;
 
   bit = u2_tx_sys_bit(u2_Wire, u2_no);
   //  c3_assert(bit == u2_yes);
@@ -941,7 +946,7 @@ u2_cn_mock(u2_noun bus,
            u2_noun fly)
 {
   u2_noun res;
-  u2_flag bit;
+  u2_bean bit;
 
   bit = u2_tx_sys_bit(u2_Wire, u2_no);
   c3_assert(bit == u2_yes);

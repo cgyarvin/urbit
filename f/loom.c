@@ -84,7 +84,7 @@ u2_boot(void)
     return cut_t ? cut_w : i_w;
   }
 
-  static u2_flag
+  static u2_bean
   _mean_extract(u2_noun            som,
                 c3_w               len_w,
                 struct _mean_pair* prs_m)
@@ -109,7 +109,7 @@ u2_boot(void)
     }
   }
 
-u2_flag
+u2_bean
 u2_mean(u2_noun som,
         ...)
 {
@@ -465,7 +465,7 @@ u2_mug_qual(u2_noun a,
 **
 **   Yes iff (a) and (b) are the same noun.
 */
-static u2_flag
+static u2_bean
 _sing_x(u2_noun a,
         u2_noun b)
 {
@@ -556,7 +556,7 @@ _weight(u2_noun n)
 **
 **   Yes iff (a) and (b) are the same noun.
 */
-u2_flag
+u2_bean
 u2_sing(u2_noun a,
         u2_noun b)
 {
@@ -565,7 +565,7 @@ u2_sing(u2_noun a,
 #else
   X=0;
   {
-    u2_flag sit = _sing_x(a, b);
+    u2_bean sit = _sing_x(a, b);
 
     if ( (u2_yes == sit) && (a != b) ) {
       u2_tx_did_nod(0, X);
@@ -580,7 +580,7 @@ u2_sing(u2_noun a,
 #endif
 }
 
-u2_flag
+u2_bean
 u2_fing(u2_noun a, 
         u2_noun b)
 {
@@ -591,7 +591,7 @@ u2_fing(u2_noun a,
 **
 **   Yes iff `[p q]` and `b` are the same noun.
 */
-u2_flag
+u2_bean
 u2_sing_cell(u2_noun p,
              u2_noun q,
              u2_noun b)
@@ -600,7 +600,7 @@ u2_sing_cell(u2_noun p,
                 u2_and(u2_sing(p, u2_h(b)), 
                        u2_sing(q, u2_t(b))));
 }
-u2_flag
+u2_bean
 u2_fing_cell(u2_noun p,
              u2_noun q,
              u2_noun b)
@@ -614,7 +614,7 @@ u2_fing_cell(u2_noun p,
 **
 **   Yes iff `[p q]` and `b` are the same noun.
 */
-u2_flag
+u2_bean
 u2_sing_mixt(const c3_c* p_c,
              u2_noun     q,
              u2_noun     b)
@@ -623,7 +623,7 @@ u2_sing_mixt(const c3_c* p_c,
                 u2_and(u2_sing_c(p_c, u2_h(b)), 
                        u2_sing(q, u2_t(b))));
 }
-u2_flag
+u2_bean
 u2_fing_mixt(const c3_c* p_c,
              u2_noun     q,
              u2_noun     b)
@@ -637,7 +637,7 @@ u2_fing_mixt(const c3_c* p_c,
 **
 **   Yes iff `[p q r]` and `b` are the same noun.
 */
-u2_flag
+u2_bean
 u2_sing_trel(u2_noun p,
              u2_noun q,
              u2_noun r,
@@ -647,7 +647,7 @@ u2_sing_trel(u2_noun p,
                 u2_and(u2_sing(p, u2_h(b)), 
                        u2_sing_cell(q, r, u2_t(b))));
 }
-u2_flag
+u2_bean
 u2_fing_trel(u2_noun p,
              u2_noun q,
              u2_noun r,
@@ -662,7 +662,7 @@ u2_fing_trel(u2_noun p,
 **
 **   Yes iff `[p q r]` and `b` are the same noun.
 */
-u2_flag
+u2_bean
 u2_sing_qual(u2_noun p,
              u2_noun q,
              u2_noun r,
@@ -673,7 +673,7 @@ u2_sing_qual(u2_noun p,
                 u2_and(u2_sing(p, u2_h(b)), 
                        u2_sing_trel(q, r, s, u2_t(b))));
 }
-u2_flag
+u2_bean
 u2_fing_qual(u2_noun p,
              u2_noun q,
              u2_noun r,
@@ -755,7 +755,7 @@ u2_nord(u2_noun a,
 **
 **   Yes iff (b) is the same noun as the C string a_c.
 */
-u2_flag
+u2_bean
 u2_sing_c(const c3_c* a_c,
           u2_noun     b)
 {
@@ -781,7 +781,7 @@ u2_sing_c(const c3_c* a_c,
 **
 **   Factor [a] as a bush [b.[p q] c].
 */
-u2_flag
+u2_bean
 u2_as_bush(u2_noun  a,
            u2_noun* b,
            u2_noun* c)
@@ -807,7 +807,7 @@ u2_as_bush(u2_noun  a,
 **
 **   Factor (a) as a cell (b c).
 */
-u2_flag
+u2_bean
 u2_as_cell(u2_noun  a,
            u2_noun* b,
            u2_noun* c)
@@ -828,7 +828,7 @@ u2_as_cell(u2_noun  a,
 **
 **   Factor (a) as a hext (b c d e f g)
 */
-u2_flag
+u2_bean
 u2_as_hext(u2_noun  a,
            u2_noun* b,
            u2_noun* c,
@@ -850,7 +850,7 @@ u2_as_hext(u2_noun  a,
 **
 **   & [0] if [a] is of the form [b *c].
 */
-u2_flag
+u2_bean
 u2_as_p(u2_noun  a,
         u2_noun  b,
         u2_noun* c)
@@ -870,7 +870,7 @@ u2_as_p(u2_noun  a,
 **
 **   & [0] if [a] is of the form [b *c d].
 */
-u2_flag
+u2_bean
 u2_as_pq(u2_noun  a,
          u2_noun  b,
          u2_noun* c,
@@ -890,7 +890,7 @@ u2_as_pq(u2_noun  a,
 **
 **   & [0] if [a] is of the form [b *c *d *e].
 */
-u2_flag
+u2_bean
 u2_as_pqr(u2_noun  a,
           u2_noun  b,
           u2_noun* c,
@@ -911,7 +911,7 @@ u2_as_pqr(u2_noun  a,
 **
 **   & [0] if [a] is of the form [b *c *d *e *f].
 */
-u2_flag
+u2_bean
 u2_as_pqrs(u2_noun  a,
            u2_noun  b,
            u2_noun* c,
@@ -933,7 +933,7 @@ u2_as_pqrs(u2_noun  a,
 **
 **   Factor (a) as a qual (b c d e).
 */
-u2_flag
+u2_bean
 u2_as_qual(u2_noun  a,
            u2_noun* b,
            u2_noun* c,
@@ -953,7 +953,7 @@ u2_as_qual(u2_noun  a,
 **
 **   Factor (a) as a quil (b c d e f).
 */
-u2_flag
+u2_bean
 u2_as_quil(u2_noun  a,
            u2_noun* b,
            u2_noun* c,
@@ -974,7 +974,7 @@ u2_as_quil(u2_noun  a,
 **
 **   Factor (a) as a trel (b c d).
 */
-u2_flag
+u2_bean
 u2_as_trel(u2_noun a,
            u2_noun *b,
            u2_noun *c,

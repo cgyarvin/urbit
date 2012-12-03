@@ -9,19 +9,19 @@
 */
   /* forward
   */
-    static u2_flag
-    _nest_sint(u2_wire, u2_noun, u2_noun, u2_flag, u2_noun, u2_noun);
-    static u2_flag
-    _nest_dext(u2_wire, u2_noun, u2_noun, u2_flag, u2_noun, u2_noun);
+    static u2_bean
+    _nest_sint(u2_wire, u2_noun, u2_noun, u2_bean, u2_noun, u2_noun);
+    static u2_bean
+    _nest_dext(u2_wire, u2_noun, u2_noun, u2_bean, u2_noun, u2_noun);
 
     u2_ho_jet 
     j2_mcj(Pt6, ut, nest)[];
 
-  static u2_flag
+  static u2_bean
   _nest_cram(u2_wire wir_r,
              u2_noun van,
              u2_noun sut,
-             u2_flag tel,
+             u2_bean tel,
              u2_noun ref,
              u2_noun dab,
              u2_noun hem, 
@@ -64,7 +64,7 @@
               u2_noun pqn_hem = u2_t(qn_hem);
               u2_noun vis = j2_mcy(Pt6, ut, play)(wir_r, van, sut, pqn_dab);
               u2_noun lon = j2_mcy(Pt6, ut, play)(wir_r, van, ref, pqn_hem);
-              u2_flag ret = _nest_dext(wir_r, van, vis, tel, lon, gil);
+              u2_bean ret = _nest_dext(wir_r, van, vis, tel, lon, gil);
 
               u2_rz(wir_r, vis);
               u2_rz(wir_r, lon);
@@ -79,11 +79,11 @@
     }
   }
  
-  static u2_flag
+  static u2_bean
   _nest_cong(u2_wire wir_r,
              u2_noun van,
              u2_noun sut,
-             u2_flag tel,
+             u2_bean tel,
              u2_noun ref,
              u2_noun gil)
   {
@@ -91,7 +91,7 @@
     u2_noun pq_sut, qq_sut, rq_sut;
     u2_noun pq_ref, qq_ref, rq_ref;
     u2_noun prq_sut, qrq_sut, prq_ref, qrq_ref;
-    u2_flag ret;
+    u2_bean ret;
 
     u2_bi_trel(wir_r, sut, 0, &p_sut, &q_sut);
     u2_bi_trel(wir_r, ref, 0, &p_ref, &q_ref);
@@ -155,7 +155,7 @@
                                         (wir_r, van, qq_sut, c3__rite, _2);
                 u2_noun r_sam = j2_mcy(Pt6, ut, peek)
                                         (wir_r, van, qq_ref, c3__rite, _2);
-                u2_flag ret = _nest_dext(wir_r, van, r_sam, tel, s_sam, gil);
+                u2_bean ret = _nest_dext(wir_r, van, r_sam, tel, s_sam, gil);
 
                 u2_rz(wir_r, r_sam);
                 u2_rz(wir_r, s_sam);
@@ -169,7 +169,7 @@
                                         (wir_r, van, qq_sut, c3__read, _2);
                 u2_noun r_pal = j2_mcy(Pt6, ut, peek)
                                         (wir_r, van, qq_ref, c3__read, _2);
-                u2_flag ret = _nest_dext(wir_r, van, s_pal, tel, r_pal, gil);
+                u2_bean ret = _nest_dext(wir_r, van, s_pal, tel, r_pal, gil);
 
                 u2_rz(wir_r, r_pal);
                 u2_rz(wir_r, s_pal);
@@ -183,11 +183,11 @@
     }
   }
 
-  static u2_flag
+  static u2_bean
   _nest_dext_in(u2_wire wir_r,
                 u2_noun van,
                 u2_noun sut,
-                u2_flag tel,
+                u2_bean tel,
                 u2_noun ref,
                 u2_noun gil)
   {
@@ -306,7 +306,7 @@
         } else {
           u2_noun zoc = j2_mcc(Pt4, in, put)(wir_r, gil, hud);
           u2_type fop = j2_mcy(Pt6, ut, rest)(wir_r, van, sut, p_sut);
-          u2_flag hiv = _nest_dext(wir_r, van, fop, tel, ref, zoc);
+          u2_bean hiv = _nest_dext(wir_r, van, fop, tel, ref, zoc);
 
           u2_rl_lose(wir_r, hud);
           u2_rl_lose(wir_r, fop);
@@ -318,15 +318,15 @@
     }
   }
 
-  static u2_flag
+  static u2_bean
   _nest_dext_to(u2_wire wir_r,
                 u2_noun van,
                 u2_noun sut,
-                u2_flag tel,
+                u2_bean tel,
                 u2_noun ref,
                 u2_noun gil)
   {
-    u2_flag tyn = _nest_dext_in(wir_r, van, sut, tel, ref, gil);
+    u2_bean tyn = _nest_dext_in(wir_r, van, sut, tel, ref, gil);
 
     if ( (u2_yes == tyn) || (u2_no == tel) ) {
       return tyn;
@@ -341,11 +341,11 @@
     }
   }
 
-  static u2_flag
+  static u2_bean
   _nest_dext(u2_wire wir_r,
              u2_noun van,
              u2_noun sut,
-             u2_flag tel,
+             u2_bean tel,
              u2_noun ref,
              u2_noun gil)
   {
@@ -374,11 +374,11 @@
     }
   }
 
-  static u2_flag
+  static u2_bean
   _nest_sint(u2_wire wir_r,
              u2_noun van,
              u2_noun sut, 
-             u2_flag tel,
+             u2_bean tel,
              u2_noun ref,
              u2_noun gil)
   {
@@ -401,7 +401,7 @@
         case c3__cell: return u2_no;
         case c3__core: {
           u2_type gam = j2_mcy(Pt6, ut, repo)(wir_r, van, ref);
-          u2_flag hiv = _nest_dext(wir_r, van, sut, tel, gam, gil);
+          u2_bean hiv = _nest_dext(wir_r, van, sut, tel, gam, gil);
 
           u2_rl_lose(wir_r, gam);
           return hiv;
@@ -449,7 +449,7 @@
               u2_type gam = j2_mcy(Pt6, ut, repo)(wir_r, van, ref);
 
               {
-                u2_flag hiv = _nest_dext(wir_r, van, sut, tel, gam, zoc);
+                u2_bean hiv = _nest_dext(wir_r, van, sut, tel, gam, zoc);
 
                 u2_rl_lose(wir_r, hud);
                 u2_rl_lose(wir_r, gam);
@@ -464,11 +464,11 @@
     }
   }
   
-  u2_flag                                                         //  transfer
+  u2_bean                                                         //  transfer
   j2_mcx(Pt6, ut, nest)(u2_wire wir_r, 
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
-                        u2_flag tel,                              //  retain
+                        u2_bean tel,                              //  retain
                         u2_noun ref)                              //  retain
   {
     return _nest_dext(wir_r, van, sut, tel, ref, u2_nul);
@@ -499,7 +499,7 @@
   j2_mci(Pt6, ut, nest)(u2_wire wir_r,
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain 
-                        u2_flag tel,                              //  retain
+                        u2_bean tel,                              //  retain
                         u2_noun ref)                              //  retain
   {
     u2_weak hoc = u2_ds_look(wir_r, van, "nest");
@@ -528,7 +528,7 @@
   j2_mcy(Pt6, ut, nest)(u2_wire wir_r,
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
-                        u2_flag tel,                              //  retain
+                        u2_bean tel,                              //  retain
                         u2_noun ref)                              //  retain
   {
     u2_ho_jet *jet_j = &j2_mcj(Pt6, ut, nest)[0];

@@ -1026,7 +1026,36 @@ u2_ho_kicq(u2_ray   wir_r,
            u2_noun  xip,                                          //  retain
            u2_noun  cor,                                          //  retain
            u2_atom  axe,                                          //  retain
-           u2_flag  *pon)                                         //  retain
+           u2_bean  *pon)                                         //  retain
 {
-  return u2_ho_kick(wir_r, xip, cor, axe);
+  u2_noun hoe;
+
+  if ( 0 != (hoe = u2_cm_trap()) ) {
+    u2_noun pro;
+
+    if ( u2h(hoe) == c3__exit ) {
+      pro = u2k(u2t(hoe));
+
+      *pon = 2;
+      u2z(hoe);
+      return pro;
+    } 
+    else if ( u2h(hoe) == c3__need ) {
+      pro = u2k(u2t(hoe));
+
+      *pon = 1;
+      u2z(hoe);
+      return pro;
+    } 
+    else {
+      c3_assert(0);
+      return u2_cm_bowl(hoe);
+    }
+  }
+  else {
+    u2_noun pro = u2_ho_kick(wir_r, xip, cor, axe);
+
+    u2_cm_done();
+    return pro;
+  }
 }

@@ -279,8 +279,8 @@ _reck_kick(u2_reck* rec_u, u2_noun ovo)
       switch ( p_pay ) {
         case 0: u2_ve_tank(2, u2k(q_pay)); break;
         case 1: u2_ve_tank(0, u2k(q_pay)); break;
-        case 2: u2_ve_tank(1, u2k(q_pay)); break;
-        case 3: u2_ve_tank(3, u2k(q_pay)); break;
+        case 2: u2_ve_tank(6, u2k(q_pay)); break;
+        case 3: u2_ve_tank(4, u2k(q_pay)); break;
       }
     } break;
   }

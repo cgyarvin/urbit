@@ -383,8 +383,8 @@ static void
 _http_conn_cb(struct ev_loop *lup_u, struct ev_io* wax_u, int revents)
 {
   u2_hcon *hon_u = (void *)wax_u;
-  u2_flag inn    = (revents & EV_READ) ? u2_yes : u2_no;
-  u2_flag out    = (revents & EV_WRITE) ? u2_yes : u2_no;
+  u2_bean inn    = (revents & EV_READ) ? u2_yes : u2_no;
+  u2_bean out    = (revents & EV_WRITE) ? u2_yes : u2_no;
 
   if ( u2_yes == inn ) {
     http_parser* par_u = hon_u->par_u;
@@ -498,7 +498,7 @@ _http_list_cb(struct ev_loop *lup_u, struct ev_io* wax_u, int revents)
   }
 }
 
-u2_flag
+u2_bean
 u2_ve_http_start(c3_w por_w)
 {
   c3_i fid_i;

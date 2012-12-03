@@ -3,27 +3,35 @@
 ::
 |%
 ++  berg                                            ::  repl/shell
-  |=  who=plot                                      ::  per identity
+  |=  who=flag                                      ::  per identity
   =+  nub=`vase`!>(+>)                              ::  system + libraries
   =+  hit=[p=0 q=*(list tape)]                      ::  source history
   =+  sur=[p=0 q=*(qeu vase)]                       ::  result history
   =+  haf=[p=0 q=*tape]                             ::  partial input
-  =+  ^=  vez                                       ::  local parser
-      %*    .  vast 
-          wer 
-        `path`[~(rent co ~ %p who) %c %hoon ~]
-      ==
+  =+  hox=~(rent co ~ %p who)                       ::  identity string
   =+  way=*(map ,@ta vase)                          ::  environment
-  |_  [now=@da yam=_|+(* *(unit))]
+  |_  [now=@da sky=_|+(* *(unit))]
+  ++  cath                                          ::  default path
+    ^-  path
+    [hox ~(rent co ~ %da now) %cx (hoof stub) ~]
+  ::
   ++  chad                                          ::  apply command
     |=  [pez=(unit ,@ta) gen=gene]
     ^-  [p=(list card) q=_+>]
-    =+  ten=(slab =([~ %how] pez) [lube gen] yam)
-    ?-    -.ten
+    =+  ten=(slab =([~ %how] pez) [lube gen] sky)
+    ?-  -.ten
       %0  (chaw pez p.ten)
-      %1  ~|(%chad-one !!)
+      %1  [(chaf p.ten) +>.$]
       %2  [[[%crap p.ten] ~] +>.$]
     ==
+  ::
+  ++  chaf                                          ::  missing error
+    |=  lap=(list)
+    ^-  (list card)
+    :-  [%tell %3 %leaf "<not found>"]
+    %+  turn
+      lap
+    |=(a=* [%tell %2 (dish:ut [~ %path] (path a))])
   ::
   ++  chaw                                          ::  apply result
     |=  [pez=(unit ,@ta) vax=vase]
@@ -50,10 +58,8 @@
       [[%tell %3 [%leaf "<invalid command>"]] ~]
     [((hard card) u.dax) ~]
   :: 
-  ++  clam                                          ::  parse tape
-    |=  pet=tape
-    ^-  (like ,[p=(unit ,@ta) q=gene])
-    %.  [[1 1] pet]
+  ++  clam                                          ::  parse rule
+    =+  vez=(vang | cath)
     ;~  pose 
       (cold [[~ %helo] [%dtsg %% 0]] vul)
       ;~  plug
@@ -62,6 +68,25 @@
       ==
       (stag ~ wide:vez)
     ==
+  ::
+  ++  clog                                          ::  parse virtually
+    |*  sef=_rule
+    |=  pet=tape
+    ^-  ?(tone [3 p=tape])
+    =+  ten=(mung [|=(a=tape ((full sef) [[1 1] a])) pet] sky)
+    ?.  ?=(%0 -.ten)
+      ten
+    =+  duf=((hard edge) p.ten)
+    ?^  q.duf
+      [%0 p.u.q.duf]
+    =+  ^=  end  |-  ^-  hair
+        ?~  pet  [1 1]
+        =+  har=$(pet t.pet)
+        ?.(=(10 i.pet) [+(p.har) q.har] [p.har +(q.har)])
+    ?:  =(end p.duf)
+      [%3 pet] 
+    =+  rux=~(rend co %many [%% %ud p.p.duf] [%% %ud q.p.duf] ~)
+    [%2 [%lean `tank`[%leaf "<syntax error at {rux}>"]] ~]
   ::
   ++  hist                                          ::  add to sources
     |=  pet=tape  ^+  +>
@@ -89,10 +114,13 @@
         %line
       =+  pet=(rip 3 p.fav)
       =>  .(p.hit +(p.hit), q.hit [pet q.hit])
-      =+  vex=(clam pet)
-      ?:  |(?=(~ q.vex) !=(~ q.q.u.q.vex))
-        [[[%tell %3 %leaf "<syntax error>"] ~] +>.$]
-      (chad p.u.q.vex)
+      =+  cug=((clog clam) pet)
+      ?-  -.cug
+        %0  (chad ((hard ,[p=(unit ,@ta) q=gene]) p.cug))
+        %1  [(chaf p.cug) +>.$]
+        %2  [[[%crap p.cug] ~] +>.$]
+        %3  [[[%tell %3 %leaf "<syntax line>"] ~] +>.$]
+      ==
     ==
   ::
   ++  lich                                          ::  name of shell
@@ -102,7 +130,7 @@
   ++  lewd                                          ::  type by name
     |=  txt=@t
     ^-  type
-    (~(play ut p.nub) (rash txt wide:vez))
+    (~(play ut p.nub) (rash txt wide:vast))
   ::
   ++  love                                          ::  ^+ by name
     |=  [txt=@t vax=vase]

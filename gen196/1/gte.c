@@ -13,7 +13,7 @@
                    u2_atom b)                                     //  retain
   {
     mpz_t   a_mp, b_mp;
-    u2_flag cmp;
+    u2_bean cmp;
 
     u2_mp(a_mp, a);
     u2_mp(b_mp, b);

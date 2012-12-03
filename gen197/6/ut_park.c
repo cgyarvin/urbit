@@ -7,7 +7,7 @@
 
 /* logic
 */
-  u2_flag                                                         //  transfer
+  u2_bean                                                         //  transfer
   j2_mcx(Pt6, ut, park)(u2_wire wir_r, 
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
@@ -79,7 +79,7 @@
     }
   }
 
-  u2_flag
+  u2_bean
   j2_mci(Pt6, ut, park)(u2_wire wir_r,
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain 

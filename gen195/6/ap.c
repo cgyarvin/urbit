@@ -385,7 +385,7 @@
   {
     return u2_bt
       (wir_r, c3__sggr,
-              u2_bc(wir_r, c3__bean, u2_rx(wir_r, p_gen)),
+              u2_bc(wir_r, c3__yelp, u2_rx(wir_r, p_gen)),
               u2_rx(wir_r, q_gen));
   }
   _open_do_pq(sgcl)   //  ~:
@@ -522,7 +522,7 @@
           (c3__brhp,
            u2nq
             (c3__wtcl,
-             u2nc(c3__bcts, c3__flag),
+             u2nc(c3__bcts, c3__bean),
              u2nc(c3__bcts, c3__null),
              u2nc(u2nt(c3__dtpt, c3_s2('t','a'), 0),
                        u2nc(c3__cnbc, u2_blip)))),

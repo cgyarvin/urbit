@@ -160,12 +160,12 @@
 #else
       /* u2_cr_du(): u2_yes iff `a` is cell.
       */
-        u2_flag
+        u2_bean
         u2_cr_du(u2_noun a);
 
       /* u2_cr_ud(): u2_no iff `a` is cell.
       */
-        u2_flag
+        u2_bean
         u2_cr_ud(u2_noun a);
 
       /* u2_cr_at(): fragment `a` of `b`, or none.
@@ -179,7 +179,7 @@
       **   Attempt to deconstruct `a` by axis, noun pairs; 0 terminates.
       **   Axes must be sorted in tree order.
       */
-        u2_flag
+        u2_bean
         u2_cr_mean(u2_noun a,
                    ...);
 
@@ -246,7 +246,7 @@
       **   Yes iff (a) and (b) are the same copy of the same noun.
       **   (Ie, by pointer equality - u2_cr_sing with false negatives.)
       */
-        u2_flag
+        u2_bean
         u2_cr_fing(u2_noun a,
                    u2_noun b);
 
@@ -254,7 +254,7 @@
       **
       **   Yes iff (b) is the same copy of the same noun as the C string [a].
       */
-        u2_flag
+        u2_bean
         u2_cr_fing_c(const c3_c* a_c,
                      u2_noun     b);
 
@@ -262,7 +262,7 @@
       **
       **   Yes iff `[p q]` and `b` are the same copy of the same noun.
       */
-        u2_flag
+        u2_bean
         u2_cr_fing_cell(u2_noun p,
                         u2_noun q,
                         u2_noun b);
@@ -271,7 +271,7 @@
       **
       **   Yes iff `[p q]` and `b` are the same copy of the same noun.
       */
-        u2_flag
+        u2_bean
         u2_cr_fing_mixt(const c3_c* p_c,
                         u2_noun     q,
                         u2_noun     b);
@@ -280,7 +280,7 @@
       **
       **   Yes iff `[p q r]` and `b` are the same copy of the same noun.
       */
-        u2_flag
+        u2_bean
         u2_cr_fing_trel(u2_noun p,
                         u2_noun q,
                         u2_noun r,
@@ -290,7 +290,7 @@
       **
       **   Yes iff `[p q r s]` and `b` are the same copy of the same noun.
       */
-        u2_flag
+        u2_bean
         u2_cr_fing_qual(u2_noun p,
                         u2_noun q,
                         u2_noun r,
@@ -301,7 +301,7 @@
       **
       **   Yes iff (a) and (b) are the same noun.
       */
-        u2_flag
+        u2_bean
         u2_cr_sing(u2_noun a,
                    u2_noun b);
 
@@ -309,7 +309,7 @@
       **
       **   Yes iff (b) is the same noun as the C string [a].
       */
-        u2_flag
+        u2_bean
         u2_cr_sing_c(const c3_c* a_c,
                      u2_noun     b);
 
@@ -317,7 +317,7 @@
       **
       **   Yes iff `[p q]` and `b` are the same noun.
       */
-        u2_flag
+        u2_bean
         u2_cr_sing_cell(u2_noun p,
                         u2_noun q,
                         u2_noun b);
@@ -326,7 +326,7 @@
       **
       **   Yes iff `[p q]` and `b` are the same noun.
       */
-        u2_flag
+        u2_bean
         u2_cr_sing_mixt(const c3_c* p_c,
                         u2_noun     q,
                         u2_noun     b);
@@ -335,7 +335,7 @@
       **
       **   Yes iff `[p q r]` and `b` are the same noun.
       */
-        u2_flag
+        u2_bean
         u2_cr_sing_trel(u2_noun p,
                         u2_noun q,
                         u2_noun r,
@@ -345,7 +345,7 @@
       **
       **   Yes iff `[p q r s]` and `b` are the same noun.
       */
-        u2_flag
+        u2_bean
         u2_cr_sing_qual(u2_noun p,
                         u2_noun q,
                         u2_noun r,
@@ -364,7 +364,7 @@
       **
       **   Divide `a` as a mold `[b.[p q] c]`.
       */
-        u2_flag
+        u2_bean
         u2_cr_mold(u2_noun  a,
                    u2_noun* b,
                    u2_noun* c);
@@ -373,7 +373,7 @@
       **
       **   Divide `a` as a cell `[b c]`.
       */
-        u2_flag
+        u2_bean
         u2_cr_cell(u2_noun  a,
                    u2_noun* b,
                    u2_noun* c);
@@ -382,7 +382,7 @@
       **
       **   Divide `a` as a trel `[b c]`.
       */
-        u2_flag
+        u2_bean
         u2_cr_trel(u2_noun  a,
                    u2_noun* b,
                    u2_noun* c,
@@ -392,7 +392,7 @@
       **
       **   Divide (a) as a qual (b c d e).
       */
-        u2_flag
+        u2_bean
         u2_cr_qual(u2_noun  a,
                    u2_noun* b,
                    u2_noun* c,
@@ -403,7 +403,7 @@
       **
       **   & [0] if [a] is of the form [b *c].
       */
-        u2_flag
+        u2_bean
         u2_cr_p(u2_noun  a,
                 u2_noun  b,
                 u2_noun* c);
@@ -412,7 +412,7 @@
       **
       **   & [0] if [a] is of the form [b *c d].
       */
-        u2_flag
+        u2_bean
         u2_cr_pq(u2_noun  a,
                  u2_noun  b,
                  u2_noun* c,
@@ -422,7 +422,7 @@
       **
       **   & [0] if [a] is of the form [b *c *d *e].
       */
-        u2_flag
+        u2_bean
         u2_cr_pqr(u2_noun  a,
                   u2_noun  b,
                   u2_noun* c,
@@ -433,7 +433,7 @@
       **
       **   & [0] if [a] is of the form [b *c *d *e *f].
       */
-        u2_flag
+        u2_bean
         u2_cr_pqrs(u2_noun  a,
                    u2_noun  b,
                    u2_noun* c,
@@ -546,7 +546,7 @@
 #endif
     /* u2_cu(): yes iff `som` is mutable where transferred (refcount 1).
     */
-      u2_flag
+      u2_bean
       u2_cu(u2_noun som);
 
 
@@ -638,7 +638,7 @@
   **/
     /* u2_cf_flat_save(): save `som` as `mod` at `pas`.
     */
-      u2_flag
+      u2_bean
       u2_cf_flat_save(u2_noun mod, 
                       u2_noun pas,
                       u2_noun som);
@@ -850,7 +850,7 @@
     **
     **   Return u2_no on failure.
     */
-      u2_flag
+      u2_bean
       u2_cm_boot(void);
 
     /* u2_cm_rind(): open and produce a new jump buffer.
@@ -930,6 +930,11 @@
     */
       u2_noun
       u2_cm_bail(c3_m how_m);
+
+    /* u2_cm_bowl(): bail out with preset report.
+    */
+      u2_noun
+      u2_cm_bowl(u2_noun how);                                    //  transfer
 
     /* u2_cm_pack(): elide all volatile memory.
     */
@@ -1032,7 +1037,7 @@
     **
     **   Yes iff [a] more words remain in the pad.
     */
-      u2_flag
+      u2_bean
       u2_cm_open(c3_w a_w);
 
     /* u2_cm_malloc():
@@ -1077,7 +1082,7 @@
         u2_noun
         u2_cka_mul(u2_noun a, u2_noun b);
 
-        u2_flag
+        u2_bean
         u2_cka_lte(u2_noun a, u2_noun b);
 
     /* u2_ckb: tier 2 functions
@@ -1123,7 +1128,7 @@
 
       /* u2_ckd_by_has(): test for get.
       */
-        u2_flag
+        u2_bean
         u2_ckd_by_has(u2_noun a, u2_noun b);
 
       /* u2_ckd_by_gas(): list to map.
@@ -1138,7 +1143,7 @@
 
       /* u2_ckd_in_has(): test for presence.
       */
-        u2_flag
+        u2_bean
         u2_ckd_in_has(u2_noun a, u2_noun b);
 
       /* u2_ckd_in_tap(): map/set convert to list.  (solves by_tap also.)

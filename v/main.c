@@ -46,10 +46,10 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
   u2_noun map = 0;
   c3_w    kno_w = 0;
   u2_noun hep = u2_nul;
-  u2_flag abo = u2_no;
-  u2_flag gab = u2_no;
-  u2_flag pro = u2_no;
-  u2_flag veb = u2_no;
+  u2_bean abo = u2_no;
+  u2_bean gab = u2_no;
+  u2_bean pro = u2_no;
+  u2_bean veb = u2_no;
 
   c3_i ch_i;
 

@@ -55,7 +55,7 @@
       typedef struct _u2_hreq {
         u2_hmet  met_e;                     //  method
         u2_hrat  rat_e;                     //  request state
-        u2_flag  liv;                       //  keepalive
+        u2_bean  liv;                       //  keepalive
         c3_c*    url_c;                     //  url
         u2_hhed* hed_u;                     //  headers 
         u2_hbod* bod_u;                     //  body parts
@@ -184,10 +184,10 @@
     c3_global  c3_c*    u2_Local;
     c3_global  c3_c*    u2_System;
 
-    c3_global  u2_flag  u2_Flag_Abort;
-    c3_global  u2_flag  u2_Flag_Garbage;
-    c3_global  u2_flag  u2_Flag_Profile;
-    c3_global  u2_flag  u2_Flag_Verbose;
+    c3_global  u2_bean  u2_Flag_Abort;
+    c3_global  u2_bean  u2_Flag_Garbage;
+    c3_global  u2_bean  u2_Flag_Profile;
+    c3_global  u2_bean  u2_Flag_Verbose;
 
 #   define u2_ve_at() ( &u2_Host.ver_e[u2_Host.kno_w] )
 
@@ -281,7 +281,7 @@
       /* u2_path(): C unix path in computer for file or directory. 
       */
         c3_c*
-        u2_path(u2_flag fyl, u2_noun pax);
+        u2_path(u2_bean fyl, u2_noun pax);
 
     /**  Filesystem (old api).
     **/
@@ -304,7 +304,7 @@
 
       /* u2_ve_save(): save internal file as atom.
       */
-        u2_flag
+        u2_bean
         u2_ve_save(c3_c* ext_c, u2_noun tah, u2_noun dat);
 
       /* u2_ve_zeus(): prayer to internal file path.  Return unit.
@@ -518,7 +518,7 @@
     **/
       /* u2_ve_http_start():
       */
-        u2_flag
+        u2_bean
         u2_ve_http_start(c3_w por_w);
 
       /* u2_ve_http_sync(): simple synchronous http.

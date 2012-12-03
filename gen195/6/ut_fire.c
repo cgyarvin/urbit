@@ -7,7 +7,7 @@
 
 /* logic
 */
-  static u2_flag
+  static u2_bean
   _fire_mull(u2_wire wir_r,
              u2_noun van,
              u2_noun sut,
@@ -18,7 +18,7 @@
     u2_noun key = u2_bt(wir_r, u2_rx(wir_r, sut),
                                u2_rx(wir_r, dox),
                                u2_rx(wir_r, gen));
-    u2_flag ret;
+    u2_bean ret;
    
     if ( u2_yes == j2_mcc(Pt4, in, has)(wir_r, rib, key) ) {
       ret = u2_yes;
@@ -129,7 +129,7 @@
                         u2_noun sut,                              //  retain
                         u2_noun hag)                              //  retain
   {
-    u2_flag vet = u2_frag(j2_ut_van_vet, van);
+    u2_bean vet = u2_frag(j2_ut_van_vet, van);
 
     {
       if ( (u2_yes == u2_dust(hag)) && (u2_nul == u2_t(hag)) ) {

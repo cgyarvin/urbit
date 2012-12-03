@@ -201,7 +201,7 @@ u2_ch_find_mixt(u2_ray      cad_r,
 
 /* _ch_save(): as u2_ch_save(), with mug and offset, and iced nouns.
 */
-static u2_flag
+static u2_bean
 _ch_save(u2_ray  ral_r,
          u2_ray  cad_r,
          u2_noun nim,

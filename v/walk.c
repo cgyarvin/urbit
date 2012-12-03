@@ -220,7 +220,7 @@ u2_walk(u2_reck* rec_u, const c3_c* dir_c, u2_noun old)
 /* u2_path(): C unix path in computer for file or directory. 
 */
 c3_c*
-u2_path(u2_flag fyl, u2_noun pax)
+u2_path(u2_bean fyl, u2_noun pax)
 {
   c3_w len_w;
   c3_c *pas_c;

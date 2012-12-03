@@ -11,19 +11,19 @@
   _mint_in(u2_wire, u2_noun, u2_noun, u2_noun, u2_noun);
 
   static u2_noun
-  _mint_flag(u2_wire wir_r)
+  _mint_bean(u2_wire wir_r)
   {
     return u2_bt(wir_r, c3__fork, 
                         u2_bq(wir_r, c3__cube, _0, c3__atom, 'f'),
                         u2_bq(wir_r, c3__cube, _1, c3__atom, 'f'));
   }
 
-  static u2_flag
+  static u2_bean
   _mint_vet(u2_wire wir_r, 
             u2_noun van)
   {
-    // u2_flag vet = u2_bn_hook(wir_r, van, "vet");
-    u2_flag vet = u2_frag(j2_ut_van_vet, van);
+    // u2_bean vet = u2_bn_hook(wir_r, van, "vet");
+    u2_bean vet = u2_frag(j2_ut_van_vet, van);
 
     switch ( vet ) {
       case u2_no: 
@@ -200,7 +200,7 @@
   _mint_brew(u2_wire wir_r,
              u2_noun van,
              u2_noun sut,
-             u2_flag tov,
+             u2_bean tov,
              u2_noun gen)
   {
     u2_noun von;
@@ -411,7 +411,7 @@
 
         ret = u2_bc
           (wir_r,
-           _mint_nice(wir_r, van, gol, _mint_flag(wir_r)),
+           _mint_nice(wir_r, van, gol, _mint_bean(wir_r)),
            j2_mcy(Pt6, ut, fish)(wir_r, van, wam, axe));
 
         u2_rl_lose(wir_r, axe);
@@ -421,7 +421,7 @@
       case c3__wtcl: u2_bi_trel(wir_r, u2_t(gen), &p_gen, &q_gen, &r_gen);
       _mint_used(wir_r);
       {
-        u2_noun bol = _mint_flag(wir_r);
+        u2_noun bol = _mint_bean(wir_r);
         u2_noun nor = _mint_in(wir_r, van, sut, bol, p_gen);
         u2_noun fex = j2_mcy(Pt6, ut, gain)(wir_r, van, sut, p_gen);
         u2_noun wux = j2_mcy(Pt6, ut, lose)(wir_r, van, sut, p_gen);
@@ -470,7 +470,7 @@
       case c3__dtts: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mint_used(wir_r);
       {
-        u2_noun typ = _mint_nice(wir_r, van, gol, _mint_flag(wir_r));
+        u2_noun typ = _mint_nice(wir_r, van, gol, _mint_bean(wir_r));
 
         return u2_bc
           (wir_r, 
@@ -481,7 +481,7 @@
       case c3__dtwt: p_gen = u2_t(gen);
       _mint_used(wir_r);
       {
-        u2_noun typ = _mint_nice(wir_r, van, gol, _mint_flag(wir_r));
+        u2_noun typ = _mint_nice(wir_r, van, gol, _mint_bean(wir_r));
 
         return u2_bc
           (wir_r, 

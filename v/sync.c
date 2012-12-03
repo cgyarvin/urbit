@@ -19,28 +19,38 @@
 #include "v/vere.h"
 
 
-/* _sync_peek_arch(): (unit meta) for cay-path.
+/* _sync_peek_arch(): (unit arch) for cay-path.
 */
 static u2_noun
 _sync_peek_arch(u2_reck* rec_u, u2_noun pos, u2_noun bok)
 {
   return u2_reck_peek
-    (rec_u, u2nq('c', pos, bok, u2nt(u2k(rec_u->wen), 'a', u2_nul)));
+    (rec_u, u2nt(pos,
+                 u2k(pos),
+                 u2nq(u2k(rec_u->wen),
+                          c3_s2('c','z'),
+                          bok,
+                          u2_nul)));
 }
 
 /* _sync_peek_home(): test if we even hold a plot.
 */
-static u2_flag
+static u2_bean
 _sync_peek_home(u2_reck* rec_u, u2_noun pos)
 {
   u2_noun pec = u2_reck_peek
-    (rec_u, u2nq('a', u2k(rec_u->wen), pos, u2nc('a', u2_nul)));
+    (rec_u, u2nt(pos,
+                 u2k(pos),
+                 u2nq(u2k(rec_u->wen),
+                          'a',
+                          c3__mark,
+                          u2_nul)));
 
   if ( u2_no == u2du(pec) ) {
     c3_assert(!"peek_home is hosed\n");
   }
   else {
-    u2_flag cep = u2t(pec);
+    u2_bean cep = u2t(pec);
 
     if ( u2_no == cep ) {
       printf("rejected!\n");
@@ -54,7 +64,7 @@ _sync_peek_home(u2_reck* rec_u, u2_noun pos)
 /* _sync_unix(): unix path as by dir/file.ext or dir/subdir protocol.
 */
 static c3_c*
-_sync_unix(u2_flag dir, u2_noun hac)
+_sync_unix(u2_bean dir, u2_noun hac)
 {
   c3_w len_w;
   c3_c *pas_c;
@@ -166,6 +176,7 @@ _sync_edit(u2_reck* rec_u,
   return det;
 }
 
+#if 0
 /* _sync_edit_m():
 */
 static u2_noun
@@ -208,6 +219,7 @@ _sync_book(u2_reck* rec_u, u2_noun pos, u2_noun bok, u2_noun nod)
     return det;
   }
 }
+#endif
 
 /* _sync_book_m(): sync `map` to a change list `det`.
 */
@@ -229,7 +241,7 @@ _sync_book_m(u2_reck* rec_u, u2_noun own, u2_noun pos, u2_noun map, u2_noun ova)
 
     ova = _sync_book_m(rec_u, u2k(own), u2k(pos), u2k(l_map), ova);
     ova = _sync_book_m(rec_u, u2k(own), u2k(pos), u2k(r_map), ova);
-    det = _sync_book(rec_u, pos, u2k(bok), u2k(qn_map));
+    det = _sync_edit(rec_u, pos, u2k(bok), u2k(qn_map), u2_nul);
 
     ova = u2nc(u2nc(u2nt(c3__gold, c3__sync, u2_nul),
                     u2nq(c3__edit, own, u2k(bok), det)),

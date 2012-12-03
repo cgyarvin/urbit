@@ -13,8 +13,7 @@
 **
 **  When in doubt, fail.
 **
-**  In both cases, a mark-and-sweep is necessary (and
-**  not currently performed) to clean up leaks.
+**  In both cases, a gc is necessary to clean up leaks.
 */
 u2_noun
 u2_bl_bail(u2_wire wir_r,

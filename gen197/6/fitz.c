@@ -7,7 +7,7 @@
 
 /* functions
 */
-  static u2_flag 
+  static u2_bean 
   _fitz_fiz(u2_wire wir_r, 
             u2_noun yaz, 
             u2_noun wix)

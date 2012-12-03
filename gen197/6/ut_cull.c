@@ -8,13 +8,13 @@
 /* logic
 */
   u2_noun
-  j2_mcx(Pt6, ut, cull)(u2_wire, u2_noun, u2_noun, u2_flag, u2_atom, u2_noun);
+  j2_mcx(Pt6, ut, cull)(u2_wire, u2_noun, u2_noun, u2_bean, u2_atom, u2_noun);
 
   static u2_noun 
   _cull_in(u2_wire wir_r, 
            u2_noun van,                                           //  retain
            u2_noun sut,                                           //  retain
-           u2_flag pol,                                           //  retain
+           u2_bean pol,                                           //  retain
            u2_atom axe,                                           //  retain
            u2_noun ref,                                           //  retain
            u2_noun now,                                           //  retain
@@ -151,7 +151,7 @@
   j2_mcx(Pt6, ut, cull)(u2_wire wir_r, 
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
-                        u2_flag pol,                              //  retain
+                        u2_bean pol,                              //  retain
                         u2_atom axe,                              //  retain
                         u2_noun ref)                              //  retain
   {
@@ -197,7 +197,7 @@
   j2_mci(Pt6, ut, cull)(u2_wire wir_r,
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain 
-                        u2_flag pol,                              //  retain
+                        u2_bean pol,                              //  retain
                         u2_atom axe,                              //  retain
                         u2_noun ref)                              //  retain
   {
@@ -230,7 +230,7 @@
   j2_mcy(Pt6, ut, cull)(u2_wire wir_r,
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain
-                        u2_flag pol,                              //  retain
+                        u2_bean pol,                              //  retain
                         u2_noun axe,                              //  retain
                         u2_noun ref)                              //  retain
   {

@@ -175,7 +175,7 @@ u2_ve_tool(u2_noun nam)
 
 /* u2_ve_able(): u2_yes iff kernel `kno` is bootable as `nam`.
 */
-u2_flag
+u2_bean
 u2_ve_able(c3_w kno_w, c3_m nam_w)
 {
   u2_noun tah = u2nt(nam_w, u2_ve_tag(kno_w), c3__sys);
@@ -565,7 +565,7 @@ u2_ve_mark()
 void
 u2_ve_word(c3_w wod_w)
 {
-  u2_flag top = u2_yes;
+  u2_bean top = u2_yes;
 
   if ( wod_w / (1000 * 1000 * 1000) ) {
     fprintf(stderr, "%u.", wod_w / (1000 * 1000 * 1000));

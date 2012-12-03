@@ -8,9 +8,9 @@
 /* logic
 */
   extern u2_ho_jet j2_mbj(Pt6, ut)[];
-  static u2_flag _moot_in(u2_wire, u2_noun, u2_noun, u2_noun);
+  static u2_bean _moot_in(u2_wire, u2_noun, u2_noun, u2_noun);
 
-  static u2_flag
+  static u2_bean
   _moot_to(u2_wire wir_r,
            u2_noun van,
            u2_noun sut,
@@ -36,7 +36,7 @@
     }
   }
 
-  static u2_flag
+  static u2_bean
   _moot_in(u2_wire wir_r,
            u2_noun van,
            u2_noun sut,

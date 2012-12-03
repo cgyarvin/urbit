@@ -69,7 +69,7 @@
     return fub;
   }
 
-  static u2_flag
+  static u2_bean
   _rest_hit_fan(u2_wire wir_r,
                 u2_noun fan,                                      //  retain
                 u2_noun leg)                                      //  retain

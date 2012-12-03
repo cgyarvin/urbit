@@ -1005,6 +1005,7 @@
 #   define c3__wtzp   c3_s4('w','t','z','p')
 #   define c3__yew    c3_s3('y','a','w')
 #   define c3__yell   c3_s4('y','e','l','l')
+#   define c3__yelp   c3_s4('y','e','l','p')
 #   define c3__zact   c3_s4('z','a','c','t')
 #   define c3__zalt   c3_s4('z','a','l','t')
 #   define c3__zarb   c3_s4('z','a','r','b')

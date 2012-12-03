@@ -5,10 +5,10 @@
     ++  peek  
       |=  [now=@da hap=path]
       ^-  (unit)
-      ~|  %peek-a
-      =+  bar=ut
-      ~|  %peek-b
-      (~(beck is now) hap)
+      ?~  hap  ~
+      =+  fod=(slay i.hap)
+      ?.  ?=([%% ~ %p @] fod)  ~
+      (~(beck is now) q.p.u.fod t.hap)
     ::
     ++  poke  
       |=  [now=@da ovo=*]
@@ -25,15 +25,15 @@
         $:  gel=_*alga
         ==
           ^=  bach                                          ::  shell
-        $:  maw=(map plot _*berg)
+        $:  maw=(map flag _*berg)
         ==
           ^=  cary                                          ::  filesystem
         $:  duw=_clay
         ==
           ^=  eyre                                          ::  i/o
-        $:  gem=(map plot chum)                             ::  hashed passcodes
-            liv=(map plot (list caul))                      ::  live sessions
-            rev=(map caul plot)                             ::  identities
+        $:  gem=(map flag chum)                             ::  hashed passcodes
+            liv=(map flag (list caul))                      ::  live sessions
+            rev=(map caul flag)                             ::  identities
         ==
       == 
     --
@@ -57,9 +57,9 @@
       ^-  [(list move) game]
       ?>  ?=(^ p.mov)
       =+  ^=  beg  ^+  *berg
-          =+  beg=(~(get by maw.bach.sys) p.mov)
+          =+  beg=(~(get by maw.bach.sys) u.p.mov)
           ?^(beg u.beg (berg u.p.mov))
-      =+  yub=(~(knap beg [now |=(* *(unit))]) r.mov)
+      =+  yub=(~(knap beg [now |=(a=* (beck u.p.mov (path a)))]) r.mov)
       :-  (turn p.yub |=(a=card [p.mov q.mov a]))
       sys(maw.bach (~(put by maw.bach.sys) u.p.mov q.yub))
     ::
@@ -73,7 +73,7 @@
     --
   ::
   ++  auth                                                  ::  match password
-    |=  [our=plot cof=chum]
+    |=  [our=flag cof=chum]
     ^-  ?
     =+  fup=(~(get by gem.eyre.sys) our)
     ?^  fup
@@ -81,18 +81,35 @@
     =+  gys=(~(us go ton.fox.gel.arvo.sys) our)
     ?&(?=(^ gys) =(cof (shak our pac:ex:q:sen:u.gys)))
   ::
-  ++  beck
-    |=  hap=path
+  ++  beck                                                  ::  namespace
+    |=  [our=flag hap=path]
     ^-  (unit)
-    =+  bur=ut
-    ?~  hap
-      ~
-    ?+    i.hap  ~
-        %a  (scry:gel.arvo.sys now t.hap)
-        %b  ~
-        %c  (scry:duw.cary.sys now t.hap)
-        %d  ~
-        %e  ~
+    ::  ~&  [%beck our hap]
+    ?.  ?=([@ @ @ *] hap)  ~
+    =+  :*  fal=(slay i.hap) 
+            ved=(slay i.t.hap) 
+            hyr=(slay i.t.t.hap)
+            tyl=t.t.t.hap
+        ==
+    ?.  ?=([~ %% %p @] fal)  ~
+    ?.  ?=([~ %% %tas @] hyr)  ~
+    =+  [pef=(end 3 1 q.p.u.hyr) rem=(rsh 3 1 q.p.u.hyr)]
+    ?+    pef  ~
+        %a                                                  ::  arvo
+      ?.  =(0 rem)  ~
+      ?+    ved  ~
+          [~ %% %ud @]                                      ::  permanent
+        (perm:gel.arvo.sys our q.p.u.fal q.p.u.ved tyl)
+      ::
+          [~ %% %da @]                                      ::  transient
+        ?.  =(now q.p.u.ved)  ~
+        (temp:gel.arvo.sys our q.p.u.fal tyl)
+      ==
+    ::
+        %c                                                  ::  cary
+      ?.  ?=(?(%z %y %x %w) rem)  ~
+      ?.  ?=([~ %% ?(%ud %da %tas) @] ved)  ~
+      (scry:duw.cary.sys rem our u.ved tyl)
     ==
   ::
   ++  grit                                                  ::  cause privilege
@@ -106,7 +123,7 @@
       %lead
     $(cul t.cul)
   ::
-  ++  howl                                                  ::  master resolve
+  ++  howl                                                  ::  handle event 
     |=  mov=move
     =+  [mor=`(list move)`[mov ~] out=`(list ovum)`~]
     |-  ^-  [p=(list ovum) q=game]
@@ -138,7 +155,7 @@
       =+  giv=|.(^$(mor t.mor, out [[i.t.q.mov r.mov] out]))
       =+  mel=(grit t.q.mov)
       =+  ^=  liv
-          |=  a=plot 
+          |=  a=flag 
           ^$(mor t.mor, rev.eyre.sys (~(put by rev.eyre.sys) t.q.mov a))
       ?.  ?|  ?=(^ p.mov) 
               ?=(?(%cash %crap %edit %hear %logn %make %tell) -.r.mov)

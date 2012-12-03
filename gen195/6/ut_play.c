@@ -13,7 +13,7 @@
   _play_in(u2_wire, u2_noun, u2_noun, u2_noun);
 
   static u2_noun                                                  //  produce
-  _play_flag(u2_wire wir_r)
+  _play_bean(u2_wire wir_r)
   {
     return u2_bt(wir_r, c3__fork, 
                         u2_bq(wir_r, c3__cube, _0, c3__atom, 'f'),
@@ -172,7 +172,7 @@
       case c3__wtcn: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _play_used(wir_r);
       {
-        return _play_flag(wir_r);
+        return _play_bean(wir_r);
       }
       case c3__wtcl: u2_bi_trel(wir_r, u2_t(gen), &p_gen, &q_gen, &r_gen);
       _play_used(wir_r);
@@ -208,12 +208,12 @@
       case c3__dtwt: p_gen = u2_t(gen);
       _play_used(wir_r);
       {
-        return _play_flag(wir_r);
+        return _play_bean(wir_r);
       }
       case c3__dtts: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _play_used(wir_r);
       {
-        return _play_flag(wir_r);
+        return _play_bean(wir_r);
       }
       case c3__dtls: p_gen = u2_t(gen);
       _play_used(wir_r);
@@ -243,7 +243,7 @@
           if ( (q_gen > 1) ) {
             return u2_cm_bail(c3__exit);
           } else {
-            return _play_flag(wir_r);
+            return _play_bean(wir_r);
           }
         }
         else return u2_bc(wir_r, c3__atom, u2_rx(wir_r, p_gen));

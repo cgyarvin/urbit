@@ -929,7 +929,7 @@
 
 /* stew
 */
-  static u2_flag
+  static u2_bean
   _stew_wor(u2_wire wir_r,
             u2_noun ort,
             u2_noun wan)
