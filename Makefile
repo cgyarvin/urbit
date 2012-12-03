@@ -2810,6 +2810,7 @@ J194_3_OFILES=\
        gen194/3/mas.o \
        gen194/3/met.o \
        gen194/3/mix.o \
+       gen194/3/mog.o \
        gen194/3/mug.o \
        gen194/3/peg.o \
        gen194/3/rap.o \

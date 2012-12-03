@@ -486,6 +486,63 @@
           u2_mean(u2_noun a,
                   ...);
 
+        /* u2_mog():
+        **
+        **   Compute and/or recall the mog (31-bit hash) of (a).
+        */
+          c3_w
+          u2_mog(u2_noun a);
+      
+        /* u2_mog_string():
+        **
+        **   Compute the mog of `a`, LSB first.
+        */
+          c3_w
+          u2_mog_string(const c3_c *a_c);
+
+        /* u2_mog_words():
+        **
+        **   Compute the mog of `buf`, `len`, LSW first.
+        */
+          c3_w
+          u2_mog_words(const c3_w *buf_w,
+                       c3_w        len_w);
+
+        /* u2_mog_cell():
+        **
+        **   Compute the mog of `[a b]`.
+        */
+          c3_w
+          u2_mog_cell(u2_noun a,
+                      u2_noun b);
+
+        /* u2_mog_trel():
+        **
+        **   Compute the mog of `[a b c]`.
+        */
+          c3_w
+          u2_mog_trel(u2_noun a,
+                      u2_noun b,
+                      u2_noun c);
+
+        /* u2_mog_qual():
+        **
+        **   Compute the mog of `[a b c d]`.
+        */
+          c3_w
+          u2_mog_qual(u2_noun a,
+                      u2_noun b,
+                      u2_noun c,
+                      u2_noun d);
+
+        /* u2_mog_both():
+        **
+        **   Join two mogs.
+        */
+          c3_w
+          u2_mog_both(c3_w a_w,
+                      c3_w b_w);
+
         /* u2_mug():
         **
         **   Compute and/or recall the mug (31-bit hash) of (a).

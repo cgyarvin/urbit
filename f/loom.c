@@ -214,6 +214,273 @@ u2_frag(u2_atom a,
   }
 }
 
+/* u2_mog():
+**
+**   Compute and/or recall the mog (31-bit FNV1a hash) of (a).
+*/
+static __inline__ c3_w
+_mog_fnv(c3_w has_w)
+{
+  return (has_w * ((c3_w)16777619));
+}
+
+static __inline__ c3_w
+_mog_out(c3_w has_w)
+{
+  return (has_w >> 31) ^ (has_w & 0x7fffffff);
+}
+
+static __inline__ c3_w
+_mog_both(c3_w lef_w, c3_w rit_w)
+{
+  c3_w bot_w = _mog_fnv(lef_w ^ _mog_fnv(rit_w));
+  c3_w out_w = _mog_out(bot_w);
+
+  if ( 0 != out_w ) { 
+    return out_w;
+  }
+  else {
+    return _mog_both(lef_w, ++rit_w);
+  }
+}
+
+c3_w
+u2_mog_both(c3_w lef_w, c3_w rit_w)
+{
+  return _mog_both(lef_w, rit_w);
+}
+
+static __inline__ c3_w
+_mog_bytes_in(c3_w off_w, c3_w nby_w, c3_y* byt_y)
+{
+  c3_w i_w;
+
+  for ( i_w = 0; i_w < nby_w; i_w++ ) {
+    off_w = _mog_fnv(off_w ^ byt_y[i_w]);
+  }
+  return off_w;
+}
+
+static c3_w
+_mog_bytes(c3_w off_w, c3_w nby_w, c3_y* byt_y)
+{
+  c3_w has_w = _mog_bytes_in(off_w, nby_w, byt_y);
+  c3_w out_w = _mog_out(has_w);
+
+  if ( 0 != out_w ) { 
+    return out_w;
+  }
+  else {
+    return _mog_bytes(++off_w, nby_w, byt_y);
+  }
+}
+
+static __inline__ c3_w
+_mog_words_in_buf(c3_w off_w, c3_w nwd_w, u2_noun veb)
+{
+  if ( 0 == nwd_w ) {
+    return off_w;
+  } else {
+    c3_w i_w, x_w;
+
+    for ( i_w = 0; i_w < (nwd_w - 1); i_w++ ) {
+      x_w = *u2_at_pug_buf(veb, i_w);
+      {
+        c3_y a_y = (x_w & 0xff);
+        c3_y b_y = ((x_w >> 8) & 0xff);
+        c3_y c_y = ((x_w >> 16) & 0xff);
+        c3_y d_y = ((x_w >> 24) & 0xff);
+
+        off_w = _mog_fnv(off_w ^ a_y);
+        off_w = _mog_fnv(off_w ^ b_y);
+        off_w = _mog_fnv(off_w ^ c_y);
+        off_w = _mog_fnv(off_w ^ d_y);
+      }
+    }
+    x_w = *u2_at_pug_buf(veb, (nwd_w - 1));
+
+    if ( x_w ) {
+      off_w = _mog_fnv(off_w ^ (x_w & 0xff));
+      x_w >>= 8;
+
+      if ( x_w ) {
+        off_w = _mog_fnv(off_w ^ (x_w & 0xff));
+        x_w >>= 8;
+
+        if ( x_w ) {
+          off_w = _mog_fnv(off_w ^ (x_w & 0xff));
+          x_w >>= 8;
+
+          if ( x_w ) {
+            off_w = _mog_fnv(off_w ^ (x_w & 0xff));
+          }
+        }
+      }
+    }
+  }
+  return off_w;
+}
+
+static __inline__ c3_w
+_mog_words_in(c3_w off_w, c3_w nwd_w, const c3_w* wod_w)
+{
+  if ( 0 == nwd_w ) {
+    return off_w;
+  } else {
+    c3_w i_w, x_w;
+
+    for ( i_w = 0; i_w < (nwd_w - 1); i_w++ ) {
+      x_w = wod_w[i_w];
+      {
+        c3_y a_y = (x_w & 0xff);
+        c3_y b_y = ((x_w >> 8) & 0xff);
+        c3_y c_y = ((x_w >> 16) & 0xff);
+        c3_y d_y = ((x_w >> 24) & 0xff);
+
+        off_w = _mog_fnv(off_w ^ a_y);
+        off_w = _mog_fnv(off_w ^ b_y);
+        off_w = _mog_fnv(off_w ^ c_y);
+        off_w = _mog_fnv(off_w ^ d_y);
+      }
+    }
+    x_w = wod_w[nwd_w - 1];
+
+    if ( x_w ) {
+      off_w = _mog_fnv(off_w ^ (x_w & 0xff));
+      x_w >>= 8;
+
+      if ( x_w ) {
+        off_w = _mog_fnv(off_w ^ (x_w & 0xff));
+        x_w >>= 8;
+
+        if ( x_w ) {
+          off_w = _mog_fnv(off_w ^ (x_w & 0xff));
+          x_w >>= 8;
+
+          if ( x_w ) {
+            off_w = _mog_fnv(off_w ^ (x_w & 0xff));
+          }
+        }
+      }
+    }
+  }
+  return off_w;
+}
+
+static c3_w
+_mog_words(c3_w off_w, c3_w nwd_w, const c3_w* wod_w)
+{
+  c3_w has_w = _mog_words_in(off_w, nwd_w, wod_w);
+  c3_w out_w = _mog_out(has_w);
+
+  if ( 0 != out_w ) { 
+    return out_w;
+  }
+  else {
+    return _mog_words(++off_w, nwd_w, wod_w);
+  }
+}
+
+static c3_w
+_mog_words_buf(c3_w off_w, c3_w nwd_w, u2_noun veb)
+{
+  c3_w has_w = _mog_words_in_buf(off_w, nwd_w, veb);
+  c3_w out_w = _mog_out(has_w);
+
+  if ( 0 != out_w ) { 
+    return out_w;
+  }
+  else {
+    return _mog_words_buf(++off_w, nwd_w, veb);
+  }
+}
+
+c3_w
+u2_mog(u2_noun veb)
+{
+  c3_assert(u2_none != veb);
+
+  if ( u2_fly_is_cat(veb) ) {
+    c3_w x_w = veb;
+
+    return _mog_words(2166136261, (veb ? 1 : 0), &x_w);
+  } else {
+    if ( u2_dog_is_pom(veb) ) {
+      u2_noun hed = *u2_at_pom_hed(veb);
+      u2_noun tel = *u2_at_pom_tel(veb);
+
+      return u2_mog_cell(hed, tel);
+    }
+    else {
+      c3_w len_w = *u2_at_pug_len(veb);
+
+      return _mog_words_buf(2166136261, len_w, veb);
+    }
+  }
+}
+
+/* u2_mog_words():
+**
+**   Compute the mog of `buf`, `len`, LSW first.
+*/
+c3_w
+u2_mog_words(const c3_w *buf_w,
+             c3_w        len_w)
+{
+  return _mog_words(2166136261, len_w, buf_w);
+}
+
+/* u2_mog_string():
+**
+**   Compute the mog of `a`, LSB first.
+*/
+c3_w
+u2_mog_string(const c3_c *a_c)
+{
+  return _mog_bytes(2166136261, strlen(a_c), (c3_y *)a_c);
+}
+
+/* u2_mog_cell():
+**
+**   Compute the mog of the cell `[hed tel]`.
+*/
+c3_w
+u2_mog_cell(u2_noun hed,
+            u2_noun tel)
+{
+  c3_w   lus_w = u2_mog(hed);
+  c3_w   biq_w = u2_mog(tel);
+
+  return u2_mog_both(lus_w, biq_w);
+}
+
+/* u2_mog_trel():
+**
+**   Compute the mog of `[a b c]`.
+*/
+c3_w
+u2_mog_trel(u2_noun a,
+            u2_noun b,
+            u2_noun c)
+{
+  return u2_mog_both(u2_mog(a), u2_mog_both(u2_mog(b), u2_mog(c)));
+}
+
+/* u2_mog_qual():
+**
+**   Compute the mog of `[a b c d]`.
+*/
+c3_w
+u2_mog_qual(u2_noun a,
+            u2_noun b,
+            u2_noun c,
+            u2_noun d)
+{
+  return u2_mog_both(u2_mog(a), 
+                     u2_mog_both(u2_mog(b), 
+                                 u2_mog_both(u2_mog(c), u2_mog(d))));
+}
+
 /* u2_mug():
 **
 **   Compute and/or recall the mug (31-bit hash) of (a).
@@ -455,6 +722,8 @@ u2_mug_qual(u2_noun a,
                      u2_mug_both(u2_mug(b), 
                                  u2_mug_both(u2_mug(c), u2_mug(d))));
 }
+
+
 
 #ifdef U2_PROFILE
   c3_w X;   // XX not thread-safe

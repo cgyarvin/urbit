@@ -730,7 +730,36 @@
   ::
   ::      Tier 3e, insecure hashing
   ::
-  ++  mug
+  ++  fnv  |=(a=@ (end 5 1 (mul 16.777.619 a)))
+  ++  mst
+    |=  a=@
+    ?:  =(0 a)
+      0
+    =+  b=(mog a)
+    $(a (dec a))
+  ::
+  ++  mog                                               ::  31bit nonzero FNV1a
+    ~/  %mog
+    |=  a=*
+    ?^  a
+      =+  b=[p=$(a -.a) q=$(a +.a)]
+      |-  ^-  @
+      =+  c=(fnv (mix p.b (fnv q.b)))
+      =+  d=(mix (rsh 0 31 c) (end 0 31 c))
+      ?.  =(0 c)  c
+      $(q.b +(q.b))
+    =+  b=2.166.136.261
+    |-  ^-  @
+    =+  c=b
+    =+  [d=0 e=(met 3 a)]
+    |-  ^-  @
+    ?:  =(d e)
+      =+  f=(mix (rsh 0 31 c) (end 0 31 c))
+      ?.  =(0 f)  f
+      ^$(b +(b))
+    $(c (fnv (mix c (cut 3 [d 1] a))), d +(d))
+  ::
+  ++  mug                                               ::  obsolete
     ~/  %mug
     |=  a=*
     ^-  @
