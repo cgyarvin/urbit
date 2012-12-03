@@ -618,13 +618,9 @@
         u2_noun pq_vug = u2_h(q_vug);
         u2_noun qq_vug = u2_t(q_vug);
         u2_noun zoz = u2_and(u2_sing(p_lar, p_vug), u2_sing(pq_lar, pq_vug))
-                        ? u2_bl_error(wir_r, "mull-bonk-f")
+                        ? u2_bl_error(wir_r, "mull-bonk-e")
                         : 0;
-        u2_noun mew = j2_mcy(Pt6, ut, swab)(wir_r, van, sut, qq_lar, q_gen);
-        u2_noun muw = j2_mcy(Pt6, ut, swab)(wir_r, van, dox, qq_vug, q_gen);
-        u2_noun qoq = u2_sing(mew, muw)
-                        ? u2_bl_error(wir_r, "mull-bonk-g")
-                        : 0;
+        u2_noun mew = j2_mcy(Pt6, ut, swab)(wir_r, van, sut, q_gen);
         u2_noun yom = _mull_edit
           (wir_r, van, sut, dox, mew, u2_rx(wir_r, qq_lar), 
                                       u2_rx(wir_r, qq_vug));
@@ -632,11 +628,10 @@
         u2_noun p_ret = j2_mcy(Pt6, ut, fire)(wir_r, van, sut, u2_h(yom));
         u2_noun q_ret = j2_mcy(Pt6, ut, fire)(wir_r, von, sut, u2_t(yom));
 
-        qoq = qoq; zoz = zoz;
+        zoz = zoz;
 
         u2_rz(wir_r, von);
         u2_rz(wir_r, yom);
-        u2_rz(wir_r, muw);
         u2_rz(wir_r, mew);
         u2_rz(wir_r, vug);
         u2_rz(wir_r, lar);

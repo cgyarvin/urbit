@@ -668,7 +668,7 @@
         u2_noun q_lar = u2_t(lar);
         u2_noun pq_lar = u2_h(q_lar);
         u2_noun qq_lar = u2_t(q_lar);
-        u2_noun mew = j2_mcy(Pt6, ut, swab)(wir_r, van, sut, qq_lar, q_gen);
+        u2_noun mew = j2_mcy(Pt6, ut, swab)(wir_r, van, sut, q_gen);
         u2_noun yom = _mint_edit
           (wir_r, van, sut, mew, p_lar, u2_rx(wir_r, qq_lar), u2_nul);
         u2_noun p_yom = u2_h(yom);

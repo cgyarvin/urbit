@@ -321,7 +321,7 @@
         u2_noun lar = _play_foil(wir_r, sec);
         u2_noun q_lar = u2_t(lar);
         u2_noun qq_lar = u2_t(q_lar);
-        u2_noun mew = j2_mcy(Pt6, ut, swab)(wir_r, van, sut, qq_lar, q_gen);
+        u2_noun mew = j2_mcy(Pt6, ut, swab)(wir_r, van, sut, q_gen);
         u2_noun rag = _play_edit(wir_r, van, sut, mew, u2_rx(wir_r, qq_lar));
         u2_noun ret = j2_mcy(Pt6, ut, fire)(wir_r, van, sut, rag);
 

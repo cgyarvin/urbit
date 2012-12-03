@@ -3085,7 +3085,12 @@
         [ven=term pro=term kel=@]
         [ven=term pro=term ver=@ kel=@]
     ==
-  ::
+  ++  claw
+    $%  [%ash p=gene]
+        [%elm p=gene]
+        [%oak ~]
+        [%yew p=(map term claw)]
+    ==
   ++  coat  ,[p=path q=vase]
   ++  coil
     $:  p=?(%gold %iron %lead %zinc)
@@ -5203,7 +5208,7 @@
     ::
         [%cnts *]
       =+  lar=(foil (seek %read p.gen))
-      =+  mew=(swab q.q.lar q.gen)
+      =+  mew=(swab q.gen)
       =-  [(nice p.yom) ?:(=(0 p.q.lar) q.yom [%9 p.q.lar q.yom])]
       ^=  yom
       =+  hej=*(list ,[p=axis q=fuel])
@@ -5357,9 +5362,7 @@
       =+  vug=(foil (seek(sut dox) %read p.gen))
       ?.  &(=(p.lar p.vug) =(p.q.lar p.q.vug))
         ~|(%mull-bonk-e !!)
-      =+  mew=(swab q.q.lar q.gen)
-      ?.  =(mew (swab(sut dox) q.q.vug q.gen))
-        ~|(%mull-bonk-f !!)
+      =+  mew=(swab q.gen)
       =-  [(nice (fire p.yom)) (fire(vet |) q.yom)]
       ^=  yom  
       |-  ^-  [p=(list ,[p=type q=foot]) q=(list ,[p=type q=foot])]
@@ -5369,7 +5372,7 @@
       =+  cuf=(tock p.i.mew p.zil q.q.lar)
       =+  dof=(tock p.i.mew q.zil q.q.vug)
       ?.  .=(p.cuf p.dof)
-        ~|(%mull-bonk-g !!)
+        ~|(%mull-bonk-f !!)
       $(mew t.mew, q.q.lar q.cuf, q.q.vug q.dof)
     ::
         [%dtkt *]  =+($(gen p.gen, gol %noun) (both %noun))
@@ -5502,7 +5505,6 @@
           [* * ~]   [vad $(dab l.dab)]
           [* * *]   [vad $(dab l.dab) $(dab r.dab)] 
       ==
-    ::
     --
   ::
   ++  meet  |=(ref=type &((nest | ref) (nest(sut ref) | sut)))
@@ -5716,7 +5718,7 @@
       [%brcl *]  (heir(sut $(gen p.gen)) q.gen)
       [%brcn *]  (core sut %gold sut [[%0 0] p.gen])
       [%cnts *]  =+  lar=(foil (seek %read p.gen))
-                 =+  mew=(swab q.q.lar q.gen)
+                 =+  mew=(swab q.gen)
                  =+  rag=q.q.lar
                  %-  fire
                  |-  ^-  (list ,[p=type q=foot])
@@ -5874,7 +5876,7 @@
   ::
   ++  swab
     ~/  %swab
-    |=  [men=(list ,[p=type q=foot]) har=(list ,[p=gene q=gene])]
+    |=  har=(list ,[p=gene q=gene])
     ^-  (list ,[p=wing q=gene])
     %+  turn
       har
