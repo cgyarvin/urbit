@@ -12,8 +12,8 @@
                    u2_atom a,                                     //  retain
                    u2_atom b)                                     //  retain
   {
-    c3_w c_w = u2_mug(u2_mug(a));
-    c3_w d_w = u2_mug(u2_mug(b));
+    c3_w c_w = u2_mog(u2_mog(a));
+    c3_w d_w = u2_mog(u2_mog(b));
 
     if ( c_w == d_w ) {
       return j2_mbc(Pt3, dor)(wir_r, a, b);

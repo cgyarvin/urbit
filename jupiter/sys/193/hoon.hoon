@@ -1,5 +1,5 @@
 ::
-::              Hoon stage 194 (reflexive).  
+::              Hoon stage 193 (transitional).  
 ::              This file is in the public domain.
 ::
 ::    A noun is an atom or a cell.  An atom is any natural number
@@ -9,7 +9,7 @@
 ::    Noun B is the accompanying binary file, hoon.pill, encoded
 ::    as an atom LSB first, then unpacked with "++  cue".
 ::
-::    A is marked above with a stage number (X=194) and a constraint,
+::    A is marked above with a stage number (X=193) and a constraint,
 ::    either "reflexive" (normally) or "transitional" (for language
 ::    changes).  Stage numbers count down to 0, ie, frozen.
 ::
@@ -55,7 +55,7 @@
 ::
 ::    In any stage X, reflexive or transitional, where Y=X-1,
 ::    *[A_Y B_X] yields B_X.  Ie, the current stage of Hoon
-::    is written in the previous stage of Hoon.
+::    is defined in the previous stage of Hoon.
 ::
 ::    Hoon is a pure, strict, higher-order typed functional 
 ::    language in no particular family.  It does not reference
@@ -85,13 +85,13 @@
 ?>  ?=(@ src)
 %.  src
 =<  make
-=>  %194
+=>  %193
 =>  ::
   ::::                Tier 0, kernel stub
   ::
-  ~%  %k.194  ~  ~
+  ~%  %k.193  ~  ~
   |%
-  ++  stub  194
+  ++  stub  193
   --
 =>  ::
   ::::                Tier 1, basic math
@@ -700,7 +700,7 @@
     ~/  %gor
     |=  [a=* b=*]
     ^-  ?
-    =+  [c=(mug a) d=(mug b)]
+    =+  [c=(mog a) d=(mog b)]
     ?:  =(c d)
       (dor a b)
     (lth c d)
@@ -723,7 +723,7 @@
     ~/  %vor
     |=  [a=* b=*]
     ^-  ?
-    =+  [c=(mug (mug a)) d=(mug (mug b))]
+    =+  [c=(mog (mog a)) d=(mog (mog b))]
     ?:  =(c d)
       (dor a b)
     (lth c d)
@@ -758,90 +758,6 @@
       ?.  =(0 f)  f
       ^$(b +(b))
     $(c (fnv (mix c (cut 3 [d 1] a))), d +(d))
-  ::
-  ++  mug                                               ::  obsolete
-    ~/  %mug
-    |=  a=*
-    ^-  @
-    |^  ?.  ?=(@ a)
-          =+  [b=$(a -.a) c=$(a +.a)]
-          =+  d=(mix b (add (end 5 1 (lsh 3 1 c)) (rsh 3 3 c)))
-          |-
-          =+  e=(dis 0x7fff.ffff (chum d))
-          ?:  =(0 e)
-            $(d +(d))
-          e
-        =+  b=0x18d0.a625
-        |-
-        =+  c=(met 5 a)
-        =+  d=0
-        =+  e=b
-        |-
-        ?:  =(d c)
-          =+  f=(dis 0x7fff.ffff e)
-          ?:  =(0 f)
-            ^$(b +(b))
-          f
-        $(d +(d), e (chum (mix e (cut 5 [d 1] a))))
-    ::
-    ++  chum
-      |=  b=@
-      =-  (end 5 1 c)
-      ^=  c
-      (dice 3 (dice 2 (dice 1 (dice 0 b))))
-    ::
-    ++  dice
-      |=  [b=@ c=@]
-      (mix c (sbox (cut 3 [b 1] c))) 
-    ::
-    ++  sbox
-      |=  b=@
-      =-  (cut 5 [b 1] c)
-      ^=  c
-      0x45bd.2fb7.eec3.57b8.2ae2.9f22.bb41.2e03.0844.5336.52ca.46d8.
-        76d6.80b9.b9e0.6f14.6f8b.9c36.a53e.f834.e353.3b5b.c5cd.423e.
-        0cfd.4d14.1292.4b1a.3e77.ee18.1804.e2a5.75d9.c4e1.6d4b.9a3e.
-        5d56.c751.12ad.4163.b9df.9e63.fbfb.dac7.5446.4f51.4b72.be7f.
-        180d.4405.1b45.6773.5fb5.1d73.2d47.74c2.3815.85e2.0209.e49e.
-        52c0.256a.6dea.c45d.3f55.045c.40b9.2e52.5242.aa7a.a473.37b1.
-        bc81.6aba.4bbb.0ecf.f82c.b4ad.0bc9.9c47.78a5.c74c.9182.f20d.
-        7b94.1dc3.ff30.7dd2.fc36.ca9d.0c32.efad.b1c3.8ca7.b799.e1be.
-        fd0d.bfee.9887.957d.7018.6f9e.3132.5eca.48f0.ac44.c7eb.6480.
-        ab1f.9401.167c.f21d.dce5.b8fa.121c.9f64.e95e.acb5.c50d.ca03.
-        8b29.fd75.875f.1bb9.261c.8938.3bf7.94dc.e439.5998.1b06.df20.
-        19c1.1553.eefb.db16.5444.7c57.f54a.4761.bdf1.3b8c.8850.2921.
-        7255.3aee.c63a.1157.03a1.f284.f5b5.9c3c.9692.3c87.e2c0.936d.
-        4f11.2d16.0f4c.5845.1055.a07d.d82a.fef8.72fb.1b49.0fa5.4e14.
-        637d.01f5.7fe8.9a8b.0617.eda8.4354.f3e7.712f.6316.9036.b901.
-        111a.1094.70c7.8bcc.2832.9ab3.fdf0.04ca.2026.a870.85ac.98d2.
-        3f52.439e.e030.c8ed.a758.9924.05af.69ed.566d.d09c.4237.062e.
-        e9fc.60eb.c415.321c.ac4f.c47f.b265.b0ee.95cd.c493.3beb.6b4d.
-        e777.884a.370f.9e65.6a52.c674.62dc.97c6.e5d5.238e.b631.5b6a.
-        c845.a9e2.026c.78ab.13be.ec00.b3ed.287a.a01e.bf2b.b5c0.da93.
-        deee.dce8.3e5e.c58d.e833.50f0.e6ff.e2fb.a376.5510.37f4.2e48.
-        474c.90cf.78ee.a53d.d10f.aca2.a941.7956.7c60.0063.1418.7d04.
-        faff.dd23.4484.4992.61f4.a52d.a234.566b.a46b.9dd7.1a9d.0bd3.
-        cf3e.4033.b3bc.ada3.00f3.ef4e.7367.a5f9.5e24.070c.1b97.3827.
-        5dcd.3652.95b1.eb1f.0358.57a4.c090.c33b.5eba.8280.475d.8534.
-        7fb4.4be7.3bff.c889.dbaf.1fa2.9483.28b1.56a8.a01c.6717.fa39.
-        4c41.d2c6.b327.5702.5163.4e92.51a5.73dd.d3ea.1b9d.be74.ea0b.
-        9093.fa5f.d2e1.d0d1.8a1f.d93a.8f1d.0a6e.b7a9.e735.deb0.aa12.
-        48d7.6271.e808.ec02.8e49.8a90.8353.9726.86c7.973e.4433.7e55.
-        81f4.f7ca.3052.b642.873b.540e.68d8.efa2.1849.4012.decc.1486.
-        2907.9afa.b81a.7b1d.63dd.42a0.3cab.1b6f.713f.ffa2.0883.5b42.
-        6dd6.f5f8.65a1.4a04.5eab.8eac.2fe5.b7f9.bbc9.6404.f593.e52b.
-        b207.8d1a.f192.cbcd.c5e1.02b2.9187.837c.bddd.8a18.5caf.8a56.
-        3b7a.a391.88fd.1802.1e45.8e1d.5f60.6388.513c.e98d.aed1.093b.
-        ae87.124c.f537.ea14.0f4b.b673.cfbe.ae41.123e.5e9f.e140.77a2.
-        40ac.d8dc.103b.81cf.683f.a466.9b9e.2cec.2317.1ec6.2ba1.6060.
-        d3bf.abae.dd68.fcd2.f60e.e7be.f44c.697e.7990.bd4e.3ce8.3919.
-        bc45.7a9d.5022.a039.a158.b454.8072.2ba6.8765.2d85.e2dd.ee5a.
-        5c43.205e.c62f.6816.4c68.0e34.151f.4b17.9570.fa83.eb9f.040e.
-        22b9.bd9c.d156.e14b.3a30.bdd8.f00f.c9e2.62bc.fdef.da49.52df.
-        0c10.0eda.ccff.ce0a.1994.625d.b0cd.88c6.766f.f6ec.7c8f.831a.
-        7824.fff6.dee5.b579.9926.7e88.f882.0121.6220.ecc5.f40f.7a8d.
-        fe8c.511a.a9af.cd63.ba9c.d382.3525.98d8
-    --
   ::
   ::      Tier 3f, phonetic encoding
   ::
@@ -4782,7 +4698,7 @@
         ==
       %^  cat  3
         ?-(p.q.sut %gold '.', %iron '|', %lead '?', %zinc '&')
-      =+  gum=(mug q.r.q.sut)
+      =+  gum=(mog q.r.q.sut)
       %+  can  3
       :~  [1 (add 'a' (mod gum 26))]
           [1 (add 'a' (mod (div gum 26) 26))]

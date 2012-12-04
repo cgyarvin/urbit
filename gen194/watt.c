@@ -200,7 +200,6 @@
     { j2_sb(Pt3, met), j2_mbj(Pt3, met), 0, 0, u2_none },
     { j2_sb(Pt3, mix), j2_mbj(Pt3, mix), 0, 0, u2_none },
     { j2_sb(Pt3, mog), j2_mbj(Pt3, mog), 0, 0, u2_none },
-    { j2_sb(Pt3, mug), j2_mbj(Pt3, mug), 0, 0, u2_none },
     { j2_sb(Pt3, peg), j2_mbj(Pt3, peg), 0, 0, u2_none },
     { j2_sb(Pt3, rap), j2_mbj(Pt3, rap), 0, 0, u2_none },
     { j2_sb(Pt3, rip), j2_mbj(Pt3, rip), 0, 0, u2_none },

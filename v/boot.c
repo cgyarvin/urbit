@@ -450,13 +450,13 @@ u2_ve_start(c3_w kfo_w, c3_w kto_w)
 
       switch ( ver_e->mod_m ) {
         case c3__live:
-          fprintf(stderr, "(%x)\n", u2_mug(ver_e->ken));
+          fprintf(stderr, "(%x)\n", u2_mog(ver_e->ken));
           break;
         case c3__cool:
-          fprintf(stderr, "(transitional) (%x)\n", u2_mug(ver_e->ras));
+          fprintf(stderr, "(transitional) (%x)\n", u2_mog(ver_e->ras));
           break;
         case c3__weak:
-          fprintf(stderr, "(experimental) (%x)\n", u2_mug(ver_e->tip));
+          fprintf(stderr, "(experimental) (%x)\n", u2_mog(ver_e->tip));
           break;
       }
     }
