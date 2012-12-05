@@ -1,6 +1,17 @@
 !:
-::          %wol, the shell.  This file is in the public domain.
+::          %bede, the shell.  This file is in the public domain.
 ::
+=>  |%
+    ++  echo                                        ::  trivial echo app
+      |=  veg=(list gene)
+      !!
+    ++  live                                        ::  parse line
+      |=  pwd=path
+      =+  vez=(vang & pwd)
+      ;~  pose
+        (cold [[~ %helo] [%dtsg %% 0]] vul)
+      ==
+    --
 |%
 ++  berg                                            ::  repl/shell
   |=  who=flag                                      ::  per identity
@@ -28,22 +39,22 @@
   ++  chaf                                          ::  missing error
     |=  lap=(list)
     ^-  (list card)
-    :-  [%tell %3 %leaf "<not found>"]
+    :-  [%warn %2 %leaf "<not found>"]
     %+  turn
       lap
-    |=(a=* [%tell %2 (dish:ut [~ %path] (path a))])
+    |=(a=* [%warn %1 (dish:ut [~ %path] (path a))])
   ::
   ++  chaw                                          ::  apply result
     |=  [pez=(unit ,@ta) vax=vase]
     ^-  [p=(list card) q=_+>]
     ?~  pez
       =+  ham=~(dole ut p.vax)
-      :-  :~  ::  [%tell %0 (dial:ut ham)]
-              [%tell %1 (dish:ut ham q.vax)]
+      :-  :~  ::  [%warn %0 (dial:ut ham)]
+              [%talk (dish:ut ham q.vax)]
           ==
       (stay vax)
     ?:  =(%how u.pez)
-      :_(+> [[%tell %1 (dial:ut ~(dole ut p.vax))] ~])
+      :_(+> [[%talk (dial:ut ~(dole ut p.vax))] ~])
     ?:  =(%set u.pez) 
       ?.  (~(nest ut [%cell %noun %noun]) | p.vax)
         [none +>.$]
@@ -55,7 +66,7 @@
     =+  zup=[[%cell [%cube u.pez [%atom %tas]] p.vax] [u.pez q.vax]]
     =+  dax=(love '*card' zup)
     ?~  dax
-      [[%tell %3 [%leaf "<invalid command>"]] ~]
+      [[%warn %2 [%leaf "<invalid command>"]] ~]
     [((hard card) u.dax) ~]
   :: 
   ++  clam                                          ::  parse rule
@@ -97,7 +108,7 @@
     ^-  [p=(list card) q=_+>]
     ?+    -.fav  [~ +>]
         %boot
-      :-  [[%tell %0 %leaf "<reboot {lich}>"] prom ~]
+      :-  [[%warn %0 %leaf "<reboot {lich}>"] prom ~]
       (berg who)
     ::
         %dire
@@ -119,7 +130,7 @@
         %0  (chad ((hard ,[p=(unit ,@ta) q=gene]) p.cug))
         %1  [(chaf p.cug) +>.$]
         %2  [[[%crap p.cug] ~] +>.$]
-        %3  [[[%tell %3 %leaf "<syntax line>"] ~] +>.$]
+        %3  [[[%warn %2 %leaf "<syntax line>"] ~] +>.$]
       ==
     ==
   ::
@@ -171,7 +182,7 @@
   ::
   ++  none                                          ::  standard failure
     ^-  (list card)
-    [[%tell %3 [%leaf "<invalid command>"]] ~]
+    [[%warn %2 [%leaf "<invalid command>"]] ~]
   ::
   ++  prom                                          ::  normal prompt
     ^-  card

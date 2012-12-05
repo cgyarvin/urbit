@@ -1,5 +1,5 @@
 !:
-::          %yen, zuse archetypes.   This file is in the public domain.
+::          %hyde, zuse archetypes.   This file is in the public domain.
 ::
 |%
 ++  arch                                                ::  fs node
@@ -35,6 +35,10 @@
               [%sack p=sock q=cape r=band]              ::  send ack
               [%wine p=flag]                            ::  lost ownership
           ==                                            ::
+++  bowl                                                ::  standard product
+          $:  p=(list card)                             ::  output
+              q=(unit ,[p=(list ,[p=* q=plea]) q=task]) ::  continuation
+          ==                                            :: 
 ++  bran  ,[p=mark q=(unit mark) r=flag]                ::  version parent id
 ++  buck  ,[p=mace q=will]                              ::  all security data
 ++  cake  ,[p=flag q=? r=skin s=@]                      ::  top level packet
@@ -69,10 +73,10 @@
               [%send p=@]                               ::  transmit packet
               [%ship p=@tas q=@tas]                     ::  label release
               [%sync ~]                                 ::  reset soft state
-              [%task p=@tas q=*]                        ::  application task
-              [%tell p=?(0 1 2 3) q=tank]               ::  report to human
+              [%talk p=tank]                            ::  show on console
               [%text p=(list ,@t)]                      ::  raw text lines
               [%tory p=(list ,@t)]                      ::  history dump
+              [%warn p=?(0 1 2 3) q=tank]               ::  report to human
               [%word p=chum]                            ::  set password
           ==                                            ::
 ++  cask                                                ::  symmetric record
@@ -118,6 +122,12 @@
               [%king p=@t]                              ::  16-bit flag
               [%pawn p=@t]                              ::  128-bit flag
           ==                                            ::
+++  gift                                                ::  app response
+          $%  [%easy p=path q=(unit)]                   ::  simple result
+              [%funk p=path q=(unit)]                   ::  complex result
+              [%lame p=@tas q=@p r=path s=*]            ::  legacy request
+              [%wake p=@da]                             ::  alarm
+          == 
 ++  gram  ,@uw                                          ::  physical datagram
 ++  hand  ,@uvH                                         ::  hash of code
 ++  hook  path                                          ::  request origin
@@ -152,6 +162,18 @@
               wab=(map flag bath)                       ::  outgoing by client
           ==                                            ::
 ++  ovum  ,[p=path q=card]                              ::  external event
+++  plan  ,[p=path q=plea]                              ::  traceable request
+++  plea                                                ::  app request
+          $%  [%easy p=path]                            ::  simple query
+              [%funk p=path q=|+(* *(unit))]            ::  complex query
+              [%lame p=@tas q=path]                     ::  legacy accept
+              [%scan p=? q=@t]                          
+              [%wake p=@da]                             ::  alarm
+          ==                                            ::
+++  task  $_  ^?                                        ::  process
+          |%  ++  peek  |+(path *(unit))                ::  read in present
+              ++  poke  |+(gift *bowl)                  ::  handle event
+          --                                            ::
 ++  post  ,[p=path q=*]                                 ::  statement
 ++  putt                                                ::  outgoing message
           $:  ski=snow                                  ::  sequence acked/sent
@@ -207,10 +229,10 @@
 ++  what                                                ::  logical identity
           $%  [%crew p=corp]                            ::  business
               [%dept p=corp]                            ::  govt/education
-              [%dude p=whom]                            ::  male individual
+              [%dood p=whom]                            ::  male individual
               [%fair p=corp]                            ::  nonprofit
               [%home p=corp]                            ::  family
-              [%girl p=whom]                            ::  female individual
+              [%gril p=whom]                            ::  female individual
               [%holy p=corp]                            ::  church
               [%punk p=@t]                              ::  fictitious id
           ==                                            ::

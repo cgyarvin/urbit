@@ -974,6 +974,7 @@
 #   define c3__wail   c3_s4('w','a','i','l')
 #   define c3__wamp   c3_s4('w','a','m','p')
 #   define c3__warm   c3_s4('w','a','r','m')
+#   define c3__warn   c3_s4('w','a','r','n')
 #   define c3__warx   c3_s4('w','a','r','x')
 #   define c3__wash   c3_s4('w','a','s','h')
 #   define c3__watt   c3_s4('w','a','t','t')

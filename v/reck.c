@@ -242,7 +242,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
 
       yen = _reck_load_temp(rec_u, zen, kno_w, "reck/hyde.hoon");
       xan = _reck_load_temp(rec_u, yen, kno_w, "reck/arvo.hoon");
-      wol = _reck_load_temp(rec_u, xan, kno_w, "reck/bach.hoon");
+      wol = _reck_load_temp(rec_u, xan, kno_w, "reck/bede.hoon");
       ray = _reck_load_temp(rec_u, wol, kno_w, "reck/cary.hoon");
 
       rec_u->toy.duel = 
@@ -274,13 +274,17 @@ _reck_kick(u2_reck* rec_u, u2_noun ovo)
       printf("<exit>\n");
     } break;
 
-    case c3__tell: u2_cx_cell(u2t(pay), &p_pay, &q_pay);
+    case c3__talk: p_pay = u2t(pay);
+    {
+      u2_ve_tank(2, u2k(p_pay));
+    } break;
+
+    case c3__warn: u2_cx_cell(u2t(pay), &p_pay, &q_pay);
     {
       switch ( p_pay ) {
         case 0: u2_ve_tank(2, u2k(q_pay)); break;
-        case 1: u2_ve_tank(0, u2k(q_pay)); break;
+        case 1: u2_ve_tank(4, u2k(q_pay)); break;
         case 2: u2_ve_tank(6, u2k(q_pay)); break;
-        case 3: u2_ve_tank(4, u2k(q_pay)); break;
       }
     } break;
   }

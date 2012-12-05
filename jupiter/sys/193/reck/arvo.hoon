@@ -1093,8 +1093,8 @@
     ^-  [(list card) _+>]
     ?-    -.bon
         %beer
-      :-  :~  [%tell %1 [%leaf "welcome, {~(rend co [~ %p p.bon])}!"]]
-              [%tell %1 [%leaf "passcode: {~(rend co [~ %p q.bon])}"]]
+      :-  :~  [%talk %leaf "welcome, {~(rend co [~ %p p.bon])}!"]
+              [%talk %leaf "passcode: {~(rend co [~ %p q.bon])}"]
               [%logn p.bon (shak p.bon q.bon)]
               [%init p.bon]
           ==

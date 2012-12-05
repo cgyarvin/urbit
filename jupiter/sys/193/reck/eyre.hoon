@@ -158,7 +158,7 @@
           |=  a=flag 
           ^$(mor t.mor, rev.eyre.sys (~(put by rev.eyre.sys) t.q.mov a))
       ?.  ?|  ?=(^ p.mov) 
-              ?=(?(%cash %crap %edit %hear %logn %make %tell) -.r.mov)
+              ?=(?(%cash %crap %edit %hear %logn %make %talk %warn) -.r.mov)
           ==
         ~&([%eyre-illegal mov] !!)
       ?-    -.r.mov
@@ -204,10 +204,10 @@
           %send  (giv)
           %ship  (rer %cary)
           %sync  !!
-          %task  !!
-          %tell  (giv) 
+          %talk  (giv) 
           %text  (giv)
           %tory  !!
+          %warn  (giv) 
           %word  !!
       ==
     ==
