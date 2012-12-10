@@ -1,5 +1,5 @@
 !:
-::          %hyde, zuse archetypes.   This file is in the public domain.
+::          %hyde, zuse models.   This file is in the public domain.
 ::
 |%
 ++  arch                                                ::  fs node
@@ -37,7 +37,7 @@
           ==                                            ::
 ++  bowl                                                ::  standard product
           $:  p=(list card)                             ::  output
-              q=(unit ,[p=(list ,[p=* q=plea]) q=task]) ::  continuation
+              q=(unit ,[p=(list plan) q=task])          ::  continuation
           ==                                            :: 
 ++  bran  ,[p=mark q=(unit mark) r=flag]                ::  version parent id
 ++  buck  ,[p=mace q=will]                              ::  all security data
@@ -76,7 +76,7 @@
               [%talk p=tank]                            ::  show on console
               [%text p=(list ,@t)]                      ::  raw text lines
               [%tory p=(list ,@t)]                      ::  history dump
-              [%warn p=?(0 1 2 3) q=tank]               ::  report to human
+              [%warn p=?(0 1 2) q=tank]                 ::  report to human
               [%word p=chum]                            ::  set password
           ==                                            ::
 ++  cask                                                ::  symmetric record
@@ -167,13 +167,9 @@
           $%  [%easy p=path]                            ::  simple query
               [%funk p=path q=|+(* *(unit))]            ::  complex query
               [%lame p=@tas q=path]                     ::  legacy accept
-              [%scan p=? q=@t]                          
+              [%scan p=? q=@t]                          ::  line prompt      
               [%wake p=@da]                             ::  alarm
           ==                                            ::
-++  task  $_  ^?                                        ::  process
-          |%  ++  peek  |+(path *(unit))                ::  read in present
-              ++  poke  |+(gift *bowl)                  ::  handle event
-          --                                            ::
 ++  post  ,[p=path q=*]                                 ::  statement
 ++  putt                                                ::  outgoing message
           $:  ski=snow                                  ::  sequence acked/sent
@@ -210,6 +206,10 @@
 ++  soap  ,*                                            ::  opaque msg identity
 ++  sock  ,[p=flag q=flag]                              ::  from to
 ++  step  ,[p=bran q=gcos r=pass]                       ::  identity stage
+++  task  $_  ^?                                        ::  process
+          |%  ++  peek  |+(path *(unit))                ::  read in present
+              ++  poke  |+([path gift] *bowl)           ::  handle event
+          --                                            ::
 ++  taxi  ,[p=lane q=rock]                              ::  routed packet
 ++  tray  ,[p=(unit lane) q=meal]                       ::  routed payload
 ++  town                                                ::  all security state

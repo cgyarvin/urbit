@@ -1,5 +1,5 @@
 ::
-::              Hoon stage 193 (transitional).  
+::              Hoon stage 193 (reflexive).  
 ::              This file is in the public domain.
 ::
 ::    A noun is an atom or a cell.  An atom is any natural number
@@ -1267,13 +1267,6 @@
         b
       $(a r.a, b [n.a $(a l.a)])
     --
-  ::
-  ::      Tier 4d, casual construction
-  ::
-  ++  hawk
-    !!
-  ++  swan
-    !!
   ::
   ::  Tier 5 molds
   ::
@@ -2594,6 +2587,7 @@
         royl
       ==
     --
+  ++  cost  |=([fom=@tas val=@] ~(rent co ~ fom val))
   ++  slay
     |=  txt=@ta  ^-  (unit coin)
     =+  vex=((full nuck:so) [[1 1] (trip txt)])
@@ -3191,7 +3185,7 @@
       [%zpzp ~]
     ==
   ++  limb  $|(term $%([& p=axis] [| p=@ud q=term]))
-  ++  line  ,[p=[%leaf p=odor q=@] q=tile] 
+  ++  line  ,[p=[%leaf p=odor q=@] q=mode] 
   ++  odor  disc
   ++  port
     $:  p=axis 
@@ -3199,18 +3193,18 @@
     ==
   ++  prop  ,[p=axis q=[p=?(~ axis) q=(list ,[p=type q=foot])]]
   ++  reef  ,[p=[p=? q=@ud] q=@ud]
-  ++  tile
-    $&  [p=tile q=tile]                                     ::  ordered pair
+  ++  mode
+    $&  [p=mode q=mode]                                     ::  ordered pair
     $%  [%base p=?([%atom p=term] %cell %bean %noun %null)] ::  base type
-        [%bark p=term q=tile]                               ::  name
-        [%bush p=tile q=tile]                               ::  atom/cell
+        [%bark p=term q=mode]                               ::  name
+        [%bush p=mode q=mode]                               ::  atom/cell
     ::  %cane
-        [%fern p=[i=tile t=(list tile)]]                    ::  plain selection
+        [%fern p=[i=mode t=(list mode)]]                    ::  plain selection
         [%herb p=gene]                                      ::  function
         [%kelp p=[i=line t=(list line)]]                    ::  tag selection
         [%leaf p=term q=@]                                  ::  constant atom
-    ::  [%moss p=tile q=tile]                               ::  restricted type
-        [%reed p=tile q=tile]                               ::  pair/tag
+    ::  [%moss p=mode q=mode]                               ::  restricted type
+        [%reed p=mode q=mode]                               ::  pair/tag
         [%weed p=gene]                                      ::  example
     ==
   ++  tune  $%  [0 p=vase]
@@ -3317,7 +3311,7 @@
 ::
 ++  al 
   =+  [nag=`*`& gom=`axis`1]
-  |_  sec=tile
+  |_  sec=mode
   ::::
   ++  blah  ^~  [%dtsg %% 0]
   ++  home  |=(gen=gene ^-(gene ?:(=(1 gom) gen [%tsgr [~ gom] gen])))
@@ -3484,7 +3478,7 @@
   |_  gen=gene
   ++  bore
     ~|  %bore
-    |-  ^-  tile
+    |-  ^-  mode
     ?-    gen
         [^ *]      [$(gen p.gen) $(gen q.gen)]
         [%clls *]  $(gen open)
@@ -5928,10 +5922,10 @@
         |=  [a=reef b=(list gene)]
         =-  |-(`gene`?~(alg [%bcts %null] [i.alg $(alg t.alg)]))
         ^=  alg  ^-  (list gene)
-        =+  rew=`path`(flop wer)
-        =+  pot=`path`(flop (scag q.a rew))
-        =+  gaw=`path`(slag q.a rew)
-        =+  pre=`path`?:(p.p.a (scag q.p.a (flop gaw)) (flop (slag q.p.a gaw)))
+        =+  rew=(flop wer)
+        =+  pot=(flop (scag q.a rew))
+        =+  gaw=(slag q.a rew)
+        =+  pre=?:(p.p.a (scag q.p.a (flop gaw)) (flop (slag q.p.a gaw)))
         =+  lop=|=(a=path `(list gene)`(turn a |=(b=@ta [%dtpt %ta b])))
         (weld (lop pre) ?~(pot b (weld b (lop pot))))
       ;~  plug

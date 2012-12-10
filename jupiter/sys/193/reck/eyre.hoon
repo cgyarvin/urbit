@@ -59,7 +59,7 @@
       =+  ^=  beg  ^+  *berg
           =+  beg=(~(get by maw.bach.sys) u.p.mov)
           ?^(beg u.beg (berg u.p.mov))
-      =+  yub=(~(knap beg [now |=(a=* (beck u.p.mov (path a)))]) r.mov)
+      =+  yub=(knap:(beg now |=(a=* (beck u.p.mov (path a)))) r.mov)
       :-  (turn p.yub |=(a=card [p.mov q.mov a]))
       sys(maw.bach (~(put by maw.bach.sys) u.p.mov q.yub))
     ::
