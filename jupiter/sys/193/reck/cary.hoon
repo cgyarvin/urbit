@@ -143,12 +143,20 @@
     ^-  [p=(list card) q=_+>]
     ?+    -.fav  !! 
         %edit
-      ::  ~&  [%edit who fav]
+      ?>  =(who p.fav)
       =+  yar=(need (~(get by rof) who))
       ?>  own.yar
       =+  lix=(~(get by dos.yar) q.fav)
       =+  saq=`desk`?^(lix u.lix [~ 0 ~])
-      :-  ~
+      :-  =+  one=~(rend co ~ %p who)
+          =+  two=~(rend co ~ %ud let.saq)
+          =+  tre=(rip 3 q.fav)
+          %+  turn
+            r.fav
+          |=  uke=ukaz  ^-  card
+          =+  qua=~(ram re (dish:ut [~ %path] p.uke))
+          =+  qui=:_(~ ?-(-.q.uke %del '-', %set ?:(=(0 q.q.uke) '*' '+')))
+          [%talk %leaf "{qui} {one}/{two}/cx/{tre}{qua}"]
       %_    +>.$
           rof
         %+  ~(put by rof)

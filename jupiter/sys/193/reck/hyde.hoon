@@ -25,6 +25,14 @@
               ded=@da                                   ::  next expire
               pac=rock                                  ::  packet data
           ==                                            ::
+++  boar                                                ::  process at system
+          $%  [%& p=(list slip) q=*]                    ::  waiting (system)
+              [%| p=(list path) q=lark]                 ::  pending process
+          ==                                            ::
+++  boat                                                ::  process at user
+          $%  [%& p=(list slip) q=task]                 ::  waiting (user)
+              [%| p=(list path) q=lark]                 ::  pending 
+          ==                                            ::
 ++  bond  (list post)                                   ::  atomic statement
 ++  boon                                                ::  fort output
           $%  [%beer p=flag q=@uvG]                     ::  gained ownership
@@ -35,10 +43,7 @@
               [%sack p=sock q=cape r=band]              ::  send ack
               [%wine p=flag]                            ::  lost ownership
           ==                                            ::
-++  bowl                                                ::  standard product
-          $:  p=(list card)                             ::  output
-              q=(unit ,[p=(list plan) q=task])          ::  continuation
-          ==                                            :: 
+++  bowl  ,[p=(list card) q=(unit boat)]                ::  standard product
 ++  bran  ,[p=mark q=(unit mark) r=flag]                ::  version parent id
 ++  buck  ,[p=mace q=will]                              ::  all security data
 ++  cake  ,[p=flag q=? r=skin s=@]                      ::  top level packet
@@ -85,11 +90,20 @@
               qim=(map hand code)                       ::  inbound
           ==                                            ::
 ++  clod  ,[p=@da q=@uvI r=*]                           ::  mtime hash content
-++  club  ?(tone [3 p=@ta])
 ++  code  ,@uvI                                         ::  symmetric key
+++  conf  ,[p=(set ,@tas) q=(map ,@tas ,*)]             ::  bits and options
 ++  corp  ,[p=@t q=@t r=@tas]                           ::  name auth country
 ++  caul  (list path)                                   ::  causal history
 ++  chum  ,@uvI                                         ::  hashed passcode
+++  crow                                                ::  shell expression
+          $%  [%f p=path]                               ::  file by path
+              [%c p=crow q=(list crow)]                 ::  function call
+              [%g p=(list path) q=gene]                 ::  gene w/libs
+              [%l p=(list crow)]                        ::  list
+              [%p p=(list crow)]                        ::  tuple
+              ::  [%m p=(list crow)]                    ::  map?
+              ::  [%s p=(list crow)]                    ::  set?
+          ==                                            ::
 ++  deed  ,[p=@ q=step]                                 ::  signature, stage
 ++  desk                                                ::  project state
           $:  lab=(map ,@tas ,@ud)                      ::  labels
@@ -122,15 +136,26 @@
               [%king p=@t]                              ::  16-bit flag
               [%pawn p=@t]                              ::  128-bit flag
           ==                                            ::
-++  gift                                                ::  app response
-          $%  [%easy p=path q=(unit)]                   ::  simple result
-              [%funk p=path q=(unit)]                   ::  complex result
-              [%lame p=@tas q=@p r=path s=*]            ::  legacy request
-              [%wake p=@da]                             ::  alarm
-          == 
+++  goal                                                ::  app request
+          $%  [%ez p=path]                              ::  simple query
+              [%fu p=path q=|+(* *(unit))]              ::  complex query
+              [%la p=@tas q=path]                       ::  legacy accept
+              [%up p=? q=@t]                            ::  user prompt      
+              [%wa p=@da]                               ::  alarm
+          ==                                            ::
 ++  gram  ,@uw                                          ::  physical datagram
 ++  hand  ,@uvH                                         ::  hash of code
+++  have  $:                                            ::  process state
+              p=@ud                                     ::  process counter
+              q=(map ,@ud boar)                         ::  process table
+          ==                                            ::
 ++  hook  path                                          ::  request origin
+++  lark                                                ::  parsed command
+          $%  [%cd p=path]                              ::  change directory
+              [%eh p=crow]                              ::  print and record
+              [%go p=path q=crow]                       ::  run application
+              [%no p=crow]                              ::  type only
+          ==                                            ::
 ++  lens  ?(%z %y %x %w)                                ::  repository view
 ++  lice  ,[p=flag q=buck]                              ::  full license
 ++  lint  (list rock)                                   ::  fragment array
@@ -155,21 +180,20 @@
 ++  move  ,[p=(unit flag) q=caul r=card]                ::  internal event
 ++  name  ,[p=@t q=(unit ,[p=? q=@t]) r=@t]             ::  first mid/nick last
 ++  nope  ^~(^-(arch [%| @ ~]))                         ::  empty node
-++  note  ,[p=soap q=sock r=meal]                       ::  output source
+++  note                                                ::  app response
+          $%  [%ez p=path q=(unit)]                     ::  simple result
+              [%fu p=path q=(unit)]                     ::  complex result
+              [%la p=@tas q=@p r=path s=*]              ::  legacy request
+              [%up p=@t]                                ::  prompt response
+              [%wa p=@da]                               ::  alarm
+          ==                                            ::
 ++  oven                                                ::  flow by server
           $:  wen=@da                                   ::  next activation
               nys=(map band ,[p=@da q=bait])            ::  incoming
               wab=(map flag bath)                       ::  outgoing by client
           ==                                            ::
 ++  ovum  ,[p=path q=card]                              ::  external event
-++  plan  ,[p=path q=plea]                              ::  traceable request
-++  plea                                                ::  app request
-          $%  [%easy p=path]                            ::  simple query
-              [%funk p=path q=|+(* *(unit))]            ::  complex query
-              [%lame p=@tas q=path]                     ::  legacy accept
-              [%scan p=? q=@t]                          ::  line prompt      
-              [%wake p=@da]                             ::  alarm
-          ==                                            ::
+++  plea  ,[p=@ud q=[p=? q=@t]]                         ::  live prompt
 ++  post  ,[p=path q=*]                                 ::  statement
 ++  putt                                                ::  outgoing message
           $:  ski=snow                                  ::  sequence acked/sent
@@ -202,13 +226,14 @@
           $:  nes=(map band ,[p=@da q=bait])            ::  fragment actions
           ==                                            ::
 ++  skin  ?(%none %open %fast %full)                    ::  encoding stem
+++  slip  ,[p=path q=goal]                              ::  traceable request
 ++  snow  ,[p=@ud q=@ud r=(set ,@ud)]                   ::  window exceptions
 ++  soap  ,*                                            ::  opaque msg identity
 ++  sock  ,[p=flag q=flag]                              ::  from to
 ++  step  ,[p=bran q=gcos r=pass]                       ::  identity stage
-++  task  $_  ^?                                        ::  process
+++  task  $_  ^?                                        ::  process core
           |%  ++  peek  |+(path *(unit))                ::  read in present
-              ++  poke  |+([path gift] *bowl)           ::  handle event
+              ++  poke  |+([@da path note] *bowl)       ::  handle event
           --                                            ::
 ++  taxi  ,[p=lane q=rock]                              ::  routed packet
 ++  tray  ,[p=(unit lane) q=meal]                       ::  routed payload

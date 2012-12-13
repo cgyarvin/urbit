@@ -195,7 +195,7 @@
       a
     $(a (dec a), b (dec b))
   ::
-  ::                                                    Tier 2 molds
+  ::                                                    Tier 2 models
   ::
   ++  gear
     |*  a=_,*
@@ -471,9 +471,9 @@
   ::
   ++  spit |*(a=(gear) ((push a) ~))
   ++  suck |*(a=(gear) ((pull a) ~))
-  ::                                                 ::::::::::::::::::
-  ::                                                 :: Tier 3 molds ::
-  ::                                                 ::::::::::::::::::
+  ::
+  ::                                                    Tier 3 models
+  ::
   ++  axis  ,@
   ++  bloq  ,@
   ++  date  ,[[a=? y=@ud] m=@ud t=tarp]                 ::  gregorian
@@ -997,7 +997,7 @@
     =+  gol=(han fud)
     ?.(=(gol fud) ~ [~ gol])
   ::
-  ::  Tier 4 molds
+  ::  Tier 4 models
   ::
   ++  apt
     |=  a=(tree)
@@ -1268,7 +1268,7 @@
       $(a r.a, b [n.a $(a l.a)])
     --
   ::
-  ::  Tier 5 molds
+  ::  Tier 5 models
   ::
   ++  cert  (list ,@)
   ++  char  ,@t
@@ -1400,7 +1400,7 @@
               ?:((gth q.zyc q.naz) zyc naz)
             ?:((gth p.zyc p.naz) zyc naz)
   ::
-  ++  slip  |=  [weq=char naz=hair]
+  ++  lust  |=  [weq=char naz=hair]
             ^-  hair
             ?:(=(10 weq) [+(p.naz) 1] [p.naz +(q.naz)])
   ::
@@ -1486,7 +1486,7 @@
     ^-  (like char)
     ?@  q.tub
       (fail tub) 
-    =+  zac=(slip i.q.tub p.tub) 
+    =+  zac=(lust i.q.tub p.tub) 
     [zac [~ i.q.tub [zac t.q.tub]]]
   ::
   ++  sear
@@ -1563,7 +1563,7 @@
     ?:  ?@  p.n.hel
           =(p.n.hel i.q.tub)
         ?&((gte i.q.tub -.p.n.hel) (lte i.q.tub +.p.n.hel))
-      ::  (q.n.hel [(slip i.q.tub p.tub) t.q.tub])
+      ::  (q.n.hel [(lust i.q.tub p.tub) t.q.tub])
       (q.n.hel tub)
     ?:  (wor i.q.tub p.n.hel)
       $(hel l.hel)
@@ -3014,7 +3014,7 @@
       [%2 ~]
     (mock [[-.gat [sam +>.gat]] -.gat] sky)
   ::
-  ::  Tier 6 molds
+  ::  Tier 6 models
   ::
   ++  beer  $|(@ [~ p=gene])
   ++  calf  ,[p=(map ,@ud wine) q=wine]
@@ -4201,7 +4201,7 @@
   ~(duck ut typ)
 ::
 ++  slot
-  |=  [axe=axis vax=vase]  ^-  vase
+  |=  [axe=@ vax=vase]  ^-  vase
   (slap vax [~ axe]) 
 ::
 ++  slum
@@ -4259,6 +4259,7 @@
   =+  sut=`type`%noun
   |%
   ++  burn
+    =+  gil=*(set type)
     |-  ^-  *
     ?-    sut
         [%atom *]   0
@@ -4267,7 +4268,10 @@
         [%cube *]   p.sut
         [%face *]   $(sut repo)
         [%fork *]   $(sut p.sut)
-        [%hold *]   $(sut repo)
+        [%hold *]   ?:  (~(has in gil) sut) 
+                      ~!  (dunk %type)
+                      ~|(%burn-loop !!)
+                    $(sut repo, gil (~(put in gil) sut))
         %noun       0
         %void       ~|(%burn-void !!)
     ==
