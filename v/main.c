@@ -138,12 +138,37 @@ struct ev_loop *Loop_u;
 
 static GetLine *Tecla;
 
+static c3_c*
+_get_line()
+{
+  u2_noun pot = u2_reck_peek
+                    (&u2_Host.rec_u[0], 
+                     u2nt(c3__eyre, 
+                          c3__prod,
+                          u2nq(c3__gold, c3__term, '0', u2_nul)));
+  c3_c* pot_c;
+  c3_c* out_c;
+
+  if ( u2_nul == pot ) {
+    pot_c = strdup(": ");
+  } else {
+    pot_c = u2_cr_string(u2t(u2t(pot)));
+  }
+
+  out_c = gl_get_line(Tecla, pot_c, 0, -1);
+
+  u2z(pot);
+  free(pot_c);
+
+  return out_c;
+}
+
 static void
 stdin_cb(struct ev_loop *lup_u, struct ev_io *w, int revents)
 {
   c3_c* lin_c;
   
-  lin_c = gl_get_line(Tecla, ": ", 0, -1);
+  lin_c = _get_line();
 
   if ( !lin_c ) {
     if ( GLR_BLOCKED != gl_return_status(Tecla) ) {
@@ -174,7 +199,7 @@ stdin_cb(struct ev_loop *lup_u, struct ev_io *w, int revents)
       free(out_c);
 
       gl_raw_io(Tecla);
-      gl_get_line(Tecla, ": ", 0, -1);
+      _get_line();
 
       // printf(": "); fflush(stdout);
     }
@@ -344,7 +369,7 @@ main(c3_i   argc,
     {
       c3_c* lin_c;
     
-      lin_c = gl_get_line(Tecla, ": ", 0, -1);
+      lin_c = _get_line();
       c3_assert(!lin_c && (GLR_BLOCKED == gl_return_status(Tecla)));
     }
     ev_loop(lup_u, 0);

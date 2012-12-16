@@ -214,6 +214,8 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
   rec_u->ken = ken;
   rec_u->syd = _reck_root("seed", u2k(ken));
 
+  rec_u->pug = 0;
+
   rec_u->toy.rain = _reck_root("rain", u2k(ken));
   rec_u->toy.ream = _reck_root("ream", u2k(ken));
   // rec_u->toy.sham = _reck_root("sham", u2k(ken));

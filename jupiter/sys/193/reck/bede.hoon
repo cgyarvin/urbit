@@ -3,7 +3,7 @@
 ::
 |%                                                      ::
 ++  berg                                                ::  repl/shell
-  |=  who=flag                                          ::  per identity
+  |=  who=lord                                          ::  per identity
   =+  :*  nub=`vase`!>(+>)                              ::  system + libraries
           hub=(hoof stub)                               ::  stage extension
           hit=[p=0 q=*(list tape)]                      ::  source history
@@ -11,7 +11,7 @@
           hox=(cost %p who)                             ::  identity string
           cwd=*path                                     ::  working directory
           way=*(map ,@ta vase)                          ::  variables
-          lif=*have                                     ::  processes
+          lif=*dock                                     ::  processes
           lom=*(map path plea)                          ::  prompt by console
       ==
   |=  [now=@da sky=_|+(* *(unit))] 
@@ -73,7 +73,7 @@
         htap
         ;~  plug
           %+  cook
-            |=(a=flag ~(rent co ~ %p a))
+            |=(a=lord ~(rent co ~ %p a))
           ;~(pose ;~(pfix sig fed:ag) (easy who))
         ::
           %+  cook
@@ -151,101 +151,145 @@
   ++  fapp                                              ::  launch app
     |=  [pax=path arg=crow]
     ^-  vase
-    =+  oun=(slap nub (doul [%f pax]))    ::  XX delaminate
+    =+  oun=(slap nub (doul [%f pax]))    ::  XX condense
     =+  tib=(slap nub (doul arg))
     =+  yem=:(slop [[%atom %p] who] [[%atom %da] now] [(lewd '*path') pax])
     =+  wuy=(slam oun yem)
     =+  gyd=(slam wuy [(lewd '*conf') [~ ~]])
     (slam gyd tib)
   ::
-  ++  feat                                              ::  vux is a vase
-    |=  [axe=axis vux=*]
-    ^-  *                                               ::  also a vase
+  ++  feat                                              ::  slice weak vase
+    |=  [axe=axis vux=*]  ^-  *
     q:(slam (lege %slot) (slop [[%atom %%] axe] [(lewd '*vase') vux]))
   ::
   ++  feck
-    |=  [ton=tone kal=lark fun=_|+(* [p=*(list card) q=..^$])]
-    ^-  [p=(list card) q=_..^$]
+    |=  [ton=tone kal=lark fun=_|+(* [p=*(list card) q=*(unit boar)])]
+    ^-  [p=(list card) q=(unit boar)]
     ?-  -.ton
       %0  (fun p.ton)
-      %1  =+  yap=((hard (list path)) p.ton)
-          :-  ^-  (list card)
-              :-  [%warn %2 %leaf "<awaiting as {~(rend co ~ %ud p.lif)}>"]
-              %+  turn
-                yap
-              |=(a=path [%warn %1 (dish:ut [~ %path] a)])
-          ..^$(p.lif +(p.lif), q.lif (~(put by q.lif) p.lif [%| yap kal]))
-      %2  [[[%crap p.ton] ~] ..^$]
+      %1  [~ [~ %| ((hard (list path)) p.ton) kal]]
+      %2  [[[%crap p.ton] ~] ~]
+    ==
+  ::
+  ++  fedo                                              ::  postprocess slips
+    |=  [hen=caul ask=(list slip)]
+    ^-  [p=(list slip) q=(list move)]
+    =+  [aks=*(list slip) pir=*(list move)]
+    |-  ^-  [p=(list slip) q=(list move)]
+    ?~  ask  
+      [aks pir]
+    ?-    -.q.i.ask
+        %ez             ::    XX we may already have it - sky?
+      %=  $
+        ask  t.ask 
+        aks  [i.ask aks]
+        pir  [[[~ who] hen [%talk %leaf "? {(dart:ut p.i.ask)}"]] pir]
+      ==
+    ::
+        %fu
+      !!
+    ::
+        %la
+      !!
+    ::
+        %up
+      %=  $
+        ask  t.ask 
+        aks  [i.ask aks]
+        pir  :_  pir
+             :+  [~ who] 
+               [[%eyre %bede (cost %ud p.lif) p.i.ask] hen]
+             [%prop p.q.i.ask]
+      ==
+    ::
+        %wa
+      !!
+    ==
+  ::
+  ++  feer
+    |=  bor=boar
+    ^-  _..^$
+    ..^$(p.lif +(p.lif), q.lif (~(put by q.lif) p.lif bor))
+  ::
+  ++  feez                                              ::  process boar
+    |=  hen=caul 
+    |=  [out=(list card) tow=(unit boar)]
+    =+  oum=`(list move)`(turn out |=(a=card [[~ who] hen a]))
+    ^-  [p=(list move) q=_..^^$]
+    ?~  tow
+      [oum ..^^$]
+    ?-  -.u.tow
+      &  =+  fek=(fedo hen p.u.tow)
+         [(weld q.fek oum) (feer u.tow(p p.fek))]
+      |  =+  fek=(fedo hen (turn p.u.tow |=(a=path [~ [%ez a]])))
+         [(weld q.fek oum) (feer u.tow)]
     ==
   ::
   ++  felp                                              ::  apply lark
-    |=  kal=lark
-    ^-  [p=(list card) q=_..^$]
+    |=  [hen=caul kal=lark]
+    ^-  [p=(list move) q=_..^$]
     ?-    -.kal
         %cd
       [~ ..^$(cwd p.kal)]
     ::
         %eh
+      %-  (feez hen)
       %^    feck 
           (mung [echo p.kal] sky) 
         kal 
       |=  poc=*
-      ^-  [p=(list card) q=_..^^$]
-      [[[%talk ((hard tank) poc)] ~] ..^^$]
+      ^-  [p=(list card) q=(unit boar)]
+      [[[%talk ((hard tank) poc)] ~] ~]
     ::
         %go
+      %-  (feez hen)
       %^    feck 
           (mung [fapp [p.kal q.kal]] sky) 
         kal
       |=  poc=*
-      ^-  [p=(list card) q=_..^^$]
+      ^-  [p=(list card) q=(unit boar)]
       :-  ((hard (list card)) +:(feat 2 poc))
       =+  doy=(feat 3 poc)
-      ?~  +.doy
-        ..^^$
-      %=    ..^^$
-          p.lif  +(p.lif)
-          q.lif
-        %+  ~(put by q.lif)
-          p.lif
-        ?+  +>-.doy  !!
-          &  [%& ((hard (list slip)) +>+<.doy) (feat 31 doy)]
-          |  [%| ((hard (list path)) +>+<.doy) ((hard lark) +>+>.doy)]
-        ==
+      ?~  +.doy  ~
+      :-  ~
+      ?+  +>-.doy  !!
+        &  [%& ((hard (list slip)) +>+<.doy) (feat 31 doy)]
+        |  [%| ((hard (list path)) +>+<.doy) ((hard lark) +>+>.doy)]
       ==
     ::  
         %no
       !!
     ==
   ::
-  ++  flim                                              ::  apply line
-    |=  pet=tape
-    ^-  [p=(list card) q=_..^$]
-    =>  .(p.hit +(p.hit), q.hit [pet q.hit])
-    =+  zif=((full kral:lo) [1 1] pet)
+  ++  flam                                              ::  line default
+    |=  [hen=caul fet=tape]
+    ^-  [p=(list move) q=_..^$]
+    =>  .(p.hit +(p.hit), q.hit [fet q.hit])
+    =+  zif=((full kral:lo) [1 1] fet)
     ?~  q.zif
       :_  ..^$
       =+  duf=[p=~(rend co ~ %ud p.p.zif) q=~(rend co ~ %ud q.p.zif)]
-      [[%warn %2 %leaf "<syntax error at [{p.duf} {q.duf}]>"] ~]
-    (felp p.u.q.zif)
+      :~  :+  [~ who]  hen 
+          [%warn %2 %leaf "<syntax error at [{p.duf} {q.duf}]>"]
+      ==
+    (felp hen p.u.q.zif)
   ::
-  ++  knap                                              ::  apply event
-    |=  fav=card
-    ^-  [p=(list card) q=_..^$]
+  ++  flim                                              ::  line to shell
+    |=  [pex=path hen=caul fet=tape]
+    ^-  [p=(list move) q=_..^$]
+    ?~  pex
+      (flam hen fet)
+    =+  yex=(slay i.pex)
+    ?>  ?=([~ %% %ud @] yex)
+    =+  bog=`boar`(need (~(get by q.lif) q.p.u.yex))
+    !! 
+  ::
+  ++  leap                                              ::  dispatch bad card
+    |=  [pex=path hen=caul fav=card]
+    ^-  [p=(list move) q=_..^$]
     ?+    -.fav  [~ ..^$]
-        %dire
-      :-  ~
-      %_(..^$ way (~(put by way) p.fav [(lewd '*dram') q.fav]))
-    ::
-        %file
-      :-  ~
-      %_(..^$ way (~(put by way) p.fav [[%atom %%] q.fav]))
-    ::
-        %helo
-      [[prom ~] ..^$]
-    ::
         %line
-      (flim (rip 3 p.fav))
+      (flim pex hen (rip 3 p.fav))
     ==
   ::
   ++  lege                                              ::  gene by name
@@ -298,10 +342,6 @@
   ++  none                                              ::  standard failure
     ^-  (list card)
     [[%warn %2 [%leaf "<invalid command>"]] ~]
-  ::
-  ++  prom                                              ::  normal prompt
-    ^-  card
-    [%prop & (rap 3 (weld (rip 3 hox) ": "))]
   ::
   ++  stay                                              ::  add to results
     |=  vax=vase

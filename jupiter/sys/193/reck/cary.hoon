@@ -132,14 +132,14 @@
   =+  rof=*roof
   |%
   ++  blip
-    |=  [who=flag por=@tas]
+    |=  [who=lord por=@tas]
     ^-  (unit desk)
     =+  yar=(~(get by rof) who)
     ?~  yar  ~
     (~(get by dos.u.yar) por)
   ::
   ++  drip
-    |=  [now=@da who=flag fav=card]
+    |=  [now=@da who=lord fav=card]
     ^-  [p=(list card) q=_+>]
     ?+    -.fav  !! 
         %edit
@@ -224,7 +224,7 @@
       $(lot [%% %ud u.lov])
     ==
   ++  scry
-    |=  [ren=lens who=flag lot=coin tyl=path]
+    |=  [ren=lens who=lord lot=coin tyl=path]
     ::  ~&  [%scry ren who lot tyl]
     ^-  (unit)
     ?~  tyl  ~

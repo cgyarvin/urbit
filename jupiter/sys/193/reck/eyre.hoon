@@ -7,8 +7,10 @@
       ^-  (unit)
       ?~  hap  ~
       =+  fod=(slay i.hap)
-      ?.  ?=([%% ~ %p @] fod)  ~
-      (~(beck is now) q.p.u.fod t.hap)
+      ?:  ?=([%% ~ %p @] fod)
+        (~(beck is now) q.p.u.fod t.hap)
+      ?.  ?=([%% ~ %tas @] fod)  ~
+      (~(dear is now) q.p.u.fod t.hap)
     ::
     ++  poke  
       |=  [now=@da ovo=*]
@@ -24,16 +26,17 @@
       $:  ^=  arvo                                          ::  network and PKI
         $:  gel=_*alga
         ==
-          ^=  bach                                          ::  shell
-        $:  maw=(map flag _*berg)
+          ^=  bede                                          ::  shell
+        $:  maw=(map lord _*berg)
         ==
           ^=  cary                                          ::  filesystem
         $:  duw=_clay
         ==
           ^=  eyre                                          ::  i/o
-        $:  gem=(map flag chum)                             ::  hashed passcodes
-            liv=(map flag (list caul))                      ::  live sessions
-            rev=(map caul flag)                             ::  identities
+        $:  gem=(map lord chum)                             ::  hashed passcodes
+            liv=(map lord (list caul))                      ::  live sessions
+            rev=(map caul lord)                             ::  identities
+            sak=(map lord (list ,[p=caul q=prod]))          ::  prompt stacks
         ==
       == 
     --
@@ -52,16 +55,16 @@
       :-  (turn p.yub |=(a=card [p.mov q.mov a]))
       sys(gel.arvo q.yub)
     ::
-    ++  bac
+    ++  bed
       |=  [pex=path mov=move]
       ^-  [(list move) game]
       ?>  ?=(^ p.mov)
       =+  ^=  beg  ^+  *berg
-          =+  beg=(~(get by maw.bach.sys) u.p.mov)
+          =+  beg=(~(get by maw.bede.sys) u.p.mov)
           ?^(beg u.beg (berg u.p.mov))
-      =+  yub=(knap:(beg now |=(a=* (beck u.p.mov (path a)))) r.mov)
-      :-  (turn p.yub |=(a=card [p.mov q.mov a]))
-      sys(maw.bach (~(put by maw.bach.sys) u.p.mov q.yub))
+      =+  yub=(leap:(beg now |=(a=* (beck u.p.mov (path a)))) pex q.mov r.mov)
+      :-  p.yub
+      sys(maw.bede (~(put by maw.bede.sys) u.p.mov q.yub))
     ::
     ++  car
       |=  [pex=path mov=move]
@@ -70,10 +73,11 @@
       =+  yub=(drip:duw.cary.sys now u.p.mov r.mov)
       :-  (turn p.yub |=(a=card [p.mov q.mov a]))
       sys(duw.cary q.yub)
+    ::
     --
   ::
   ++  auth                                                  ::  match password
-    |=  [our=flag cof=chum]
+    |=  [our=lord cof=chum]
     ^-  ?
     =+  fup=(~(get by gem.eyre.sys) our)
     ?^  fup
@@ -82,7 +86,7 @@
     ?&(?=(^ gys) =(cof (shak our pac:ex:q:sen:u.gys)))
   ::
   ++  beck                                                  ::  namespace
-    |=  [our=flag hap=path]
+    |=  [our=lord hap=path]
     ^-  (unit)
     ::  ~&  [%beck our hap]
     ?.  ?=([@ @ @ *] hap)  ~
@@ -98,10 +102,10 @@
         %a                                                  ::  arvo
       ?.  =(0 rem)  ~
       ?+    ved  ~
-          [~ %% %ud @]                                      ::  permanent
+          [~ %% %ud @]
         (perm:gel.arvo.sys our q.p.u.fal q.p.u.ved tyl)
       ::
-          [~ %% %da @]                                      ::  transient
+          [~ %% %da @]
         ?.  =(now q.p.u.ved)  ~
         (temp:gel.arvo.sys our q.p.u.fal tyl)
       ==
@@ -110,6 +114,23 @@
       ?.  ?=(?(%z %y %x %w) rem)  ~
       ?.  ?=([~ %% ?(%ud %da %tas) @] ved)  ~
       (scry:duw.cary.sys rem our u.ved tyl)
+    ==
+  ::
+  ++  dear                                                  ::  global vision
+    |=  [mol=@tas hap=path]
+    ^-  (unit)
+    ?+    mol  ~
+        %eyre
+      ?+    hap  ~
+          [%prod *]  ^-  (unit ,[p=prom q=@tas])
+        =+  yup=(~(get by rev.eyre.sys) `caul`[t.hap ~])
+        ?~  yup
+          [~ & '# ']
+        =+  zib=(~(get by sak.eyre.sys) u.yup)
+        ?:  |(?=(~ zib) ?=(~ u.zib))
+          [~ [& (rap 3 "{~(rend co ~ %p u.yup)}: ")]]
+        [~ p.q.i.u.zib (rap 3 q.q.i.u.zib)]
+      ==
     ==
   ::
   ++  grit                                                  ::  cause privilege
@@ -139,9 +160,9 @@
         (arv:si pex [p.mov t.q.mov r.mov])
       $(mor (weld fez t.mor))
     ::
-        %bach
+        %bede
       =^  fez  sys
-        (bac:si pex [p.mov t.q.mov r.mov])
+        (bed:si pex [p.mov t.q.mov r.mov])
       $(mor (weld fez t.mor))
     ::
         %cary
@@ -154,8 +175,8 @@
       =+  rer=|=(a=@tas ^$(mor [[p.mov [[a ~] q.mov] r.mov] t.mor]))
       =+  giv=|.(^$(mor t.mor, out [[i.t.q.mov r.mov] out]))
       =+  mel=(grit t.q.mov)
-      =+  ^=  liv
-          |=  a=flag 
+      =+  ^=  lov
+          |=  a=lord 
           ^$(mor t.mor, rev.eyre.sys (~(put by rev.eyre.sys) t.q.mov a))
       ?.  ?|  ?=(^ p.mov) 
               ?=(?(%cash %crap %edit %hear %logn %make %talk %warn) -.r.mov)
@@ -166,7 +187,7 @@
           %boot  !!
           %cash  (rer %arvo)
           %crap  (giv)
-          %dire  (rer %bach)
+          %dire  (rer %bede)
           %edit
         %=    $
             mor
@@ -178,27 +199,43 @@
           r.mov
         ==
       ::
-          %file  (rer %bach)
+          %file  (rer %bede)
           %hear  (rer %arvo)
           %helo  !!
           %init  (rer %cary)
           %junk  (rer %arvo)
-          %line  (rer %bach)
+          %line
+        ?>  ?=(^ p.mov)
+        =+  veh=(~(get by sak.eyre.sys) u.p.mov)
+        ?:  |(?=(~ veh) ?=(~ u.veh))
+          (rer %bede)
+        %=    $
+            mor           [[p.mov p.i.u.veh r.mov] t.mor]
+            sak.eyre.sys
+          ?~  t.u.veh
+            (~(del by sak.eyre.sys) u.p.mov)
+          (~(put by sak.eyre.sys) u.p.mov t.u.veh)
+        ==
+      ::
           %load  (giv) 
           %logn 
         ?>  !=(%lead mel)
         ?>  (auth p.r.mov q.r.mov)
-        (liv p.r.mov)
+        (lov p.r.mov)
       ::
           %logp
         ?>  =(%gold mel)
-        (liv p.r.mov)
+        ~&  [%logp p.r.mov]
+        (lov p.r.mov)
       ::
           %loot  (giv)
           %make  (rer %arvo)
+          %mine  (rer %bede)
           %pace  !!
           %pour  (giv)
-          %prop  (giv)
+          %prop 
+        !!
+      ::
           %pump  !!
           %save  (giv)
           %send  (giv)

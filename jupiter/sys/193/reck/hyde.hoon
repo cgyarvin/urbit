@@ -35,18 +35,18 @@
           ==                                            ::
 ++  bond  (list post)                                   ::  atomic statement
 ++  boon                                                ::  fort output
-          $%  [%beer p=flag q=@uvG]                     ::  gained ownership
+          $%  [%beer p=lord q=@uvG]                     ::  gained ownership
               [%coke p=cape q=soap]                     ::  message conclusion
               [%mead p=rock]                            ::  accept packet
               [%milk p=sock q=@da r=bond]               ::  learn bindings
               [%ouzo p=lane q=rock]                     ::  transmit packet
               [%sack p=sock q=cape r=band]              ::  send ack
-              [%wine p=flag]                            ::  lost ownership
+              [%wine p=lord]                            ::  lost ownership
           ==                                            ::
 ++  bowl  ,[p=(list card) q=(unit boat)]                ::  standard product
-++  bran  ,[p=mark q=(unit mark) r=flag]                ::  version parent id
+++  bran  ,[p=mark q=(unit mark) r=lord]                ::  version parent id
 ++  buck  ,[p=mace q=will]                              ::  all security data
-++  cake  ,[p=flag q=? r=skin s=@]                      ::  top level packet
+++  cake  ,[p=lord q=? r=skin s=@]                      ::  top level packet
 ++  cape                                                ::  end-to-end result
           $?  %dead                                     ::  maybe undelivered
               %good                                     ::  delivered
@@ -70,9 +70,10 @@
               [%logp p=@p]                              ::  privileged login
               [%loot p=@tas q=path]                     ::  request directory
               [%make p=@t q=@ud r=@]                    ::  wild license
+              [%mine p=@ud q=@t]                        ::  query matched line
               [%pace p=@ud]                             ::  compute background
               [%pour p=path q=dram]                     ::  write directory
-              [%prop p=? q=@t]                          ::  visible, prompt
+              [%prop p=prod]                            ::  prompt
               [%pump ~]                                 ::  produce packets
               [%save p=path q=@]                        ::  write atomic file
               [%send p=@]                               ::  transmit packet
@@ -111,13 +112,17 @@
               hit=(list ,[p=@da q=ukaz r=arch])         ::  history
           ==                                            ::
 ++  dirt  ,[p=@da q=(map ,@ta arch)]                    ::  mtime tree
+++  dock  $:                                            ::  process state
+              p=@ud                                     ::  process counter
+              q=(map ,@ud boar)                         ::  process table
+          ==                                            ::
 ++  door                                                ::  foreign contact
           $:  wod=road                                  ::  connection to
               fer=road                                  ::  inferred conn from
               caq=cask                                  ::  symmetric key state
           ==                                            ::
 ++  dove  ,[p=@ud q=(map ,@ud (unit ,@))]               ::  count 13-blocks
-++  flag  ,@p                                           ::  host identity
+++  lord  ,@p                                           ::  host identity
 ++  flap  ,@uvH                                         ::  network packet id
 ++  flow                                                ::  packet connection
           $:  rtt=@dr                                   ::  official rtt
@@ -127,28 +132,24 @@
 ++  fort                                                ::  formal state
           $:  wen=@da                                   ::  next wakeup
               ton=town                                  ::  security
-              zac=(map flag oven)                       ::  flows by server
+              zac=(map lord oven)                       ::  flows by server
           ==                                            ::
 ++  gcos                                                ::  id description
-          $%  [%czar p=@t]                              ::  8-bit flag
-              [%duke p=what]                            ::  32-bit flag
-              [%jack p=what]                            ::  64-bit flag
-              [%king p=@t]                              ::  16-bit flag
-              [%pawn p=@t]                              ::  128-bit flag
+          $%  [%czar p=@t]                              ::  8-bit lord
+              [%duke p=what]                            ::  32-bit lord
+              [%jack p=what]                            ::  64-bit lord
+              [%king p=@t]                              ::  16-bit lord
+              [%pawn p=@t]                              ::  128-bit lord
           ==                                            ::
 ++  goal                                                ::  app request
           $%  [%ez p=path]                              ::  simple query
               [%fu p=path q=|+(* *(unit))]              ::  complex query
               [%la p=@tas q=path]                       ::  legacy accept
-              [%up p=? q=@t]                            ::  user prompt      
+              [%up p=prod]                              ::  user prompt      
               [%wa p=@da]                               ::  alarm
           ==                                            ::
 ++  gram  ,@uw                                          ::  physical datagram
 ++  hand  ,@uvH                                         ::  hash of code
-++  have  $:                                            ::  process state
-              p=@ud                                     ::  process counter
-              q=(map ,@ud boar)                         ::  process table
-          ==                                            ::
 ++  hook  path                                          ::  request origin
 ++  lark                                                ::  parsed command
           $%  [%cd p=path]                              ::  change directory
@@ -157,7 +158,7 @@
               [%no p=crow]                              ::  type only
           ==                                            ::
 ++  lens  ?(%z %y %x %w)                                ::  repository view
-++  lice  ,[p=flag q=buck]                              ::  full license
+++  lice  ,[p=lord q=buck]                              ::  full license
 ++  lint  (list rock)                                   ::  fragment array
 ++  lane                                                ::  packet route
           $%  [%if p=@ud q=@if]                         ::  IP4/public UDP/addr
@@ -168,7 +169,7 @@
 ++  mark  ,@ud                                          ::  regime number
 ++  meal                                                ::  payload
           $%  [%back p=cape q=flap r=@dr]               ::  acknowledgment
-              [%bond p=flag q=(list post)]              ::  statement
+              [%bond p=lord q=(list post)]              ::  statement
               [%buck p=mace q=will]                     ::  license
               [%carp p=@ud q=@band r=@]                 ::  leaf fragment
               [%ping ~]                                 ::  no-op
@@ -177,7 +178,7 @@
           $%  [& p=@da q=@uvI]                          ::  mtime hash
               [| p=@da q=(list ,@ta)]                   ::  mtime dir
           ==                                            ::
-++  move  ,[p=(unit flag) q=caul r=card]                ::  internal event
+++  move  ,[p=(unit lord) q=caul r=card]                ::  internal event
 ++  name  ,[p=@t q=(unit ,[p=? q=@t]) r=@t]             ::  first mid/nick last
 ++  nope  ^~(^-(arch [%| @ ~]))                         ::  empty node
 ++  note                                                ::  app response
@@ -190,25 +191,27 @@
 ++  oven                                                ::  flow by server
           $:  wen=@da                                   ::  next activation
               nys=(map band ,[p=@da q=bait])            ::  incoming
-              wab=(map flag bath)                       ::  outgoing by client
+              wab=(map lord bath)                       ::  outgoing by client
           ==                                            ::
 ++  ovum  ,[p=path q=card]                              ::  external event
 ++  plea  ,[p=@ud q=[p=? q=@t]]                         ::  live prompt
 ++  post  ,[p=path q=*]                                 ::  statement
+++  prod  ,[p=prom q=tape]                              ::  format, prompt
+++  prom  ,?                                            ::  format type
 ++  putt                                                ::  outgoing message
           $:  ski=snow                                  ::  sequence acked/sent
               saq=?                                     ::  secure ack required
               ryn=(unit lane)                           ::  implied mirror lane
               wyv=(list rock)                           ::  packet list XX gear
           ==                                            ::
-++  rank  ?(%czar %king %duke %jack %pawn)              ::  flag width class
+++  rank  ?(%czar %king %duke %jack %pawn)              ::  lord width class
 ++  road                                                ::  secured oneway route
           $:  exp=@da                                   ::  expiration date
               lun=(unit lane)                           ::  route to friend
               lew=will                                  ::  will of friend
           ==                                            ::
 ++  roof  (map ,@p room)                                ::  revision control
-++  room                                                ::  author by flag
+++  room                                                ::  author by lord
           $:  own=?                                     ::  local/foreign
               dos=(map ,@ta desk)                       ::  projects 
           ==                                            ::
@@ -217,8 +220,8 @@
           $:  loc=(unit lane)                           ::  packet route
               val=wand                                  ::  private keys
               law=will                                  ::  server will
-              seh=(map hand ,[p=flag q=@da])            ::  key cache
-              hoc=(map flag door)                       ::  friends & relations
+              seh=(map hand ,[p=lord q=@da])            ::  key cache
+              hoc=(map lord door)                       ::  friends & relations
           ==                                            ::
 ++  salt  ,@uv                                          ::  entropy
 ++  shed  ,[p=@da q=(qeu ,[p=@ud q=bird])]              ::  packet pump
@@ -229,10 +232,10 @@
 ++  slip  ,[p=path q=goal]                              ::  traceable request
 ++  snow  ,[p=@ud q=@ud r=(set ,@ud)]                   ::  window exceptions
 ++  soap  ,*                                            ::  opaque msg identity
-++  sock  ,[p=flag q=flag]                              ::  from to
+++  sock  ,[p=lord q=lord]                              ::  from to
 ++  step  ,[p=bran q=gcos r=pass]                       ::  identity stage
 ++  task  $_  ^?                                        ::  process core
-          |%  ++  peek  |+(path *(unit))                ::  read in present
+          |%  ++  peek  |+([@da path] *(unit))          ::  read in present
               ++  poke  |+([@da path note] *bowl)       ::  handle event
           --                                            ::
 ++  taxi  ,[p=lane q=rock]                              ::  routed packet
@@ -240,7 +243,7 @@
 ++  town                                                ::  all security state
           $:  lit=@ud                                   ::  imperial modulus
               any=@                                     ::  entropy
-              urb=(map flag safe)                       ::  all keys and routes
+              urb=(map lord safe)                       ::  all keys and routes
           ==                                            ::
 ++  ukaz                                                ::  change (pl ukazy)
           $:  p=path                                    ::  change site

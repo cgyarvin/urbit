@@ -4376,6 +4376,8 @@
         %void       %void
     ==
   ::
+  ++  dank  |=(pax=path ^-(tank (dish [~ %path] pax)))
+  ++  dart  |=(pax=path ^-(tape ~(ram re (dank pax))))
   ++  deal  |=(lum=* (dish dole lum))
   ++  dial
     |=  ham=calf

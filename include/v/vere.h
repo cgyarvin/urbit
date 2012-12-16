@@ -153,9 +153,12 @@
         u2_noun now;                      //  current time, as noun
         u2_noun wen;                      //  current time, as text
 
+        u2_noun pug;                      //  prompt state
+
         u2_noun ken;                      //  kernel formula
         u2_noun syd;                      //  kernel seed 
         u2_noun rec;                      //  rotor core
+
       } u2_reck;
  
     /* u2_host: entire host.
