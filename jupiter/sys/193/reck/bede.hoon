@@ -4,9 +4,22 @@
 |%                                                      ::
 ++  berg                                                ::  repl/shell
   |=  who=lord                                          ::  per identity
-  =+  :*  nub=`vase`!>(+>)                              ::  system + libraries
+  =+  nub=`vase`!>(+>)                                  ::  system + libraries
+  =+  :*  ^=  gen                                       ::  chestnut genes
+            :*  sot=(slap nub (vice 'slot'))            ::
+            ==                                          ::
+          ^=  typ                                       ::  chestnut types
+            =+  pal=~(play ut p.nub)                    ::
+            :*  cof=(pal (vice '*conf'))                ::
+                gee=(pal (vice '*gene'))                ::
+                liz=(pal (vice '*(list ,@)'))           ::
+                pah=(pal (vice '*path'))                ::
+                tak=(pal (vice '*task'))                ::
+                vas=(pal (vice '*vase'))                ::
+            ==                                          ::
           hub=(hoof stub)                               ::  stage extension
-          hit=[p=0 q=*(list tape)]                      ::  source history
+      ==
+  =+  :*  hit=[p=0 q=*(list tape)]                      ::  source history
           sur=[p=0 q=*(qeu vase)]                       ::  result history
           hox=(cost %p who)                             ::  identity string
           cwd=*path                                     ::  working directory
@@ -153,14 +166,14 @@
     ^-  vase
     =+  oun=(slap nub (doul [%f pax]))    ::  XX condense
     =+  tib=(slap nub (doul arg))
-    =+  yem=:(slop [[%atom %p] who] [[%atom %da] now] [(lewd '*path') pax])
+    =+  yem=:(slop [[%atom %p] who] [[%atom %da] now] [pah.typ pax])
     =+  wuy=(slam oun yem)
-    =+  gyd=(slam wuy [(lewd '*conf') [~ ~]])
+    =+  gyd=(slam wuy [cof.typ [~ ~]])
     (slam gyd tib)
   ::
   ++  feat                                              ::  slice weak vase
     |=  [axe=axis vux=*]  ^-  *
-    q:(slam (lege %slot) (slop [[%atom %%] axe] [(lewd '*vase') vux]))
+    q:(slam sot.gen (slop [[%atom %%] axe] [vas.typ vux]))
   ::
   ++  feck
     |=  [ton=tone kal=lark fun=_|+(* [p=*(list card) q=*(unit boar)])]
@@ -284,28 +297,13 @@
     =+  bog=`boar`(need (~(get by q.lif) q.p.u.yex))
     !! 
   ::
-  ++  leap                                              ::  dispatch bad card
+  ++  leap                                              ::  dispatch event
     |=  [pex=path hen=caul fav=card]
     ^-  [p=(list move) q=_..^$]
     ?+    -.fav  [~ ..^$]
         %line
       (flim pex hen (rip 3 p.fav))
     ==
-  ::
-  ++  lege                                              ::  gene by name
-    |=  txt=@t
-    ^-  vase
-    (slap nub (rash txt wide:vast))
-  ::
-  ++  lewd                                              ::  type by name
-    |=  txt=@t
-    ^-  type
-    (~(play ut p.nub) (rash txt wide:vast))
-  ::
-  ++  love                                              ::  ^+ by name
-    |=  [txt=@t vax=vase]
-    ^-  (unit)
-    ?.((~(nest ut (lewd txt)) | p.vax) ~ [~ q.vax])
   ::
   ++  lube                                              ::  make subject
     ^-  vase
@@ -319,7 +317,7 @@
           [[%atom %p] who]
         [[%atom %ta] ~(rent co [~ %p who])]
       ::
-        [(lewd '*(list ,@)') q.hit]
+        [liz.typ q.hit]
       ==
     ::
       =+  voy=(~(tap to q.sur) ~)

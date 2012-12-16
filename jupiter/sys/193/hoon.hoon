@@ -6438,4 +6438,9 @@
   %.  tub
   %-  full
   (ifix [gay gay] tall:vast)
+::
+++  vice
+  |=  txt=@ta
+  ^-  gene
+  (rash txt wide:vast)
 --

@@ -155,7 +155,7 @@
             r.fav
           |=  uke=ukaz  ^-  card
           =+  qua=~(ram re (dish:ut [~ %path] p.uke))
-          =+  qui=:_(~ ?-(-.q.uke %del '-', %set ?:(=(0 q.q.uke) '*' '+')))
+          =+  qui=:_(~ ?-(-.q.uke %del '-', %set ?:(=(0 q.q.uke) '+' ':')))
           [%talk %leaf "{qui} {one}/{two}/cx/{tre}{qua}"]
       %_    +>.$
           rof
