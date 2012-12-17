@@ -234,7 +234,16 @@
           %pace  !!
           %pour  (giv)
           %prop 
-        !!
+        ?>  ?=(^ p.mov)
+        ?>  ?=(^ t.q.mov)
+        =+  veh=(~(get by sak.eyre.sys) u.p.mov)
+        %=    $
+            mor  t.mor
+            sak.eyre.sys 
+          %+  ~(put by sak.eyre.sys)
+            u.p.mov
+          [[t.q.mov p.r.mov] ?~(veh ~ u.veh)]
+        ==
       ::
           %pump  !!
           %save  (giv)

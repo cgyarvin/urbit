@@ -17,6 +17,7 @@
               air=(map flap ,@ud)                       ::  unacked by content
               sea=shed                                  ::  packet pump
           ==                                            ::
+++  beef  ,[p=(list card) q=(list slip) r=(unit boar)]  ::  raw product
 ++  bird                                                ::  packet in flight
           $:  gom=soap                                  ::  message identity
               mup=@ud                                   ::  pktno in msg
@@ -28,16 +29,12 @@
 ++  boar                                                ::  process at system
           $%  :*  %&                                    ::  waiting (system)
                   p=(list path)                         ::  blocked on
-                  q=(list slip)                         ::  queries
-                  r=(qeu ,[p=path q=note])              ::  pending events
-                  s=*                                   ::  userspace task
+                  q=(qeu ,[p=path q=note])              ::  pending events
+                  r=worm                                ::  userspace task
               ==                                        ::
               [%| p=(list path) q=lark]                 ::  pending process
           ==                                            ::
-++  boat                                                ::  process at user
-          $%  [%& p=(list slip) q=task]                 ::  waiting (user)
-              [%| p=(list path) q=lark]                 ::  pending 
-          ==                                            ::
+++  boat  ,[(list slip) task]                           ::  user stage
 ++  bond  (list post)                                   ::  atomic statement
 ++  boon                                                ::  fort output
           $%  [%beer p=lord q=@uvG]                     ::  gained ownership
@@ -239,10 +236,7 @@
 ++  soap  ,*                                            ::  opaque msg identity
 ++  sock  ,[p=lord q=lord]                              ::  from to
 ++  step  ,[p=bran q=gcos r=pass]                       ::  identity stage
-++  task  $_  ^?                                        ::  process core
-          |%  ++  peek  |+([@da path] *(unit))          ::  read in present
-              ++  poke  |+([@da path note] *bowl)       ::  handle event
-          --                                            ::
+++  task  _|+([@da path note] *bowl)                    ::  process core
 ++  taxi  ,[p=lane q=rock]                              ::  routed packet
 ++  tray  ,[p=(unit lane) q=meal]                       ::  routed payload
 ++  town                                                ::  all security state
@@ -271,4 +265,5 @@
           ==                                            ::
 ++  whom  ,[p=@ud q=@t r=@tas s=name]                   ::  yob/state/nation/me
 ++  will  (list deed)                                   ::  certificate
+++  worm  ,*                                            ::  vase of task
 --
