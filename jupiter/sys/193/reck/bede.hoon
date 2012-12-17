@@ -14,11 +14,12 @@
                 gee=(pal (vice '*gene'))                ::
                 liz=(pal (vice '*(list ,@)'))           ::
                 pah=(pal (vice '*path'))                ::
+                noq=(pal (vice '*note'))                ::
                 tak=(pal (vice '*task'))                ::
                 vas=(pal (vice '*vase'))                ::
             ==                                          ::
           hub=(hoof stub)                               ::  stage extension
-      ==
+      ==                                                ::
   =+  :*  hit=[p=0 q=*(list tape)]                      ::  source history
           sur=[p=0 q=*(qeu vase)]                       ::  result history
           hox=(cost %p who)                             ::  identity string
@@ -124,7 +125,7 @@
       ==
     --
   ::
-  ++  doul                                              ::  crow to gene
+  ++  doul                                              ::  crow to gene (user)
     |=  woc=crow
     ^-  gene
     ?-    -.woc
@@ -155,13 +156,20 @@
       [^$(woc i.p.woc) $(p.woc t.p.woc)]
     ==
   ::
-  ++  echo                                              ::  echo
+  ++  echo                                              ::  echo (user)
     |=  woc=crow
     ^-  tank
     =+  vax=(slap nub (doul woc))
     (dish:ut ~(dole ut p.vax) q.vax) 
   ::
-  ++  fapp                                              ::  launch app
+  ++  fane                                              ::  deliver note (user)
+    |=  [pux=path nog=note tas=vase]
+    ^-  vase
+    =+  pok=(slap tas [%cnbc %poke])
+    =+  gym=:(slop [[%atom %da] now] [pah.typ pux] [noq.typ nog])
+    (slam pok gym)
+  ::
+  ++  fapp                                              ::  launch app (user)
     |=  [pax=path arg=crow]
     ^-  vase
     =+  oun=(slap nub (doul [%f pax]))    ::  XX condense
@@ -175,54 +183,48 @@
     |=  [axe=axis vux=*]  ^-  *
     q:(slam sot.gen (slop [[%atom %%] axe] [vas.typ vux]))
   ::
-  ++  feck
-    |=  [ton=tone kal=lark fun=_|+(* [p=*(list card) q=*(unit boar)])]
+  ++  feck                                              ::  process mockage
+    |=  :*  ton=tone 
+            fob=_|+((list path) [p=*(list card) q=*(unit boar)])
+            fut=_|+(* [p=*(list card) q=*(unit boar)])
+        ==
     ^-  [p=(list card) q=(unit boar)]
     ?-  -.ton
-      %0  (fun p.ton)
-      %1  [~ [~ %| ((hard (list path)) p.ton) kal]]
+      %0  (fut p.ton)
+      %1  (fob ((list path) p.ton))
       %2  [[[%crap p.ton] ~] ~]
     ==
   ::
-  ++  fedo                                              ::  postprocess slips
-    |=  [hen=caul ask=(list slip)]
-    ^-  [p=(list slip) q=(list move)]
-    =+  [aks=*(list slip) pir=*(list move)]
-    |-  ^-  [p=(list slip) q=(list move)]
+  ++  fedo                                              ::  slip requests
+    |=  [hen=caul gon=(list path) ask=(list slip)]
+    |-  ^-  (list move)
     ?~  ask  
-      [aks pir]
+      ~
+    =+  pir=$(ask t.ask)
     ?-    -.q.i.ask
-        %ez             ::    XX we may already have it - sky?
-      %=  $
-        ask  t.ask 
-        aks  [i.ask aks]
-        pir  [[[~ who] hen [%talk %leaf "? {(dart:ut p.i.ask)}"]] pir]
-      ==
-    ::
-        %fu
-      !!
-    ::
-        %la
-      !!
-    ::
-        %up
-      %=  $
-        ask  t.ask 
-        aks  [i.ask aks]
-        pir  :_  pir
+        %ez  !!
+        %fu  !!
+        %la  !!
+        %up  :_  pir
              :+  [~ who] 
                [[%eyre %bede (cost %ud p.lif) p.i.ask] hen]
              [%prop p.q.i.ask]
-      ==
     ::
         %wa
       !!
     ==
   ::
-  ++  feer
-    |=  bor=boar
-    ^-  _..^$
-    ..^$(p.lif +(p.lif), q.lif (~(put by q.lif) p.lif bor))
+  ++  feeb                                              ::  vase-bowl to boar
+    |=  poc=*
+    ^-  [p=(list card) q=(unit boar)]
+    :-  ((hard (list card)) +:(feat 2 poc))
+    =+  doy=(feat 3 poc)
+    ?~  +.doy  ~
+    :-  ~
+    ?+  +>-.doy  !!
+      &  [%& ~ ((hard (list slip)) +>+<.doy) ~ (feat 31 doy)]
+      |  [%| ((hard (list path)) +>+<.doy) ((hard lark) +>+>.doy)]
+    ==
   ::
   ++  feez                                              ::  process boar
     |=  hen=caul 
@@ -231,12 +233,8 @@
     ^-  [p=(list move) q=_..^^$]
     ?~  tow
       [oum ..^^$]
-    ?-  -.u.tow
-      &  =+  fek=(fedo hen p.u.tow)
-         [(weld q.fek oum) (feer u.tow(p p.fek))]
-      |  =+  fek=(fedo hen (turn p.u.tow |=(a=path [~ [%ez a]])))
-         [(weld q.fek oum) (feer u.tow)]
-    ==
+    :_  ..^^$(p.lif +(p.lif), q.lif (~(put by q.lif) p.lif u.tow))
+    (weld ?-(-.u.tow & (fedo hen p.u.tow q.u.tow), | (fedo hen p.u.tow ~)) oum)
   ::
   ++  felp                                              ::  apply lark
     |=  [hen=caul kal=lark]
@@ -249,7 +247,7 @@
       %-  (feez hen)
       %^    feck 
           (mung [echo p.kal] sky) 
-        kal 
+        |=(a=(list path) [~ [~ %| a kal]])
       |=  poc=*
       ^-  [p=(list card) q=(unit boar)]
       [[[%talk ((hard tank) poc)] ~] ~]
@@ -258,17 +256,8 @@
       %-  (feez hen)
       %^    feck 
           (mung [fapp [p.kal q.kal]] sky) 
-        kal
-      |=  poc=*
-      ^-  [p=(list card) q=(unit boar)]
-      :-  ((hard (list card)) +:(feat 2 poc))
-      =+  doy=(feat 3 poc)
-      ?~  +.doy  ~
-      :-  ~
-      ?+  +>-.doy  !!
-        &  [%& ((hard (list slip)) +>+<.doy) (feat 31 doy)]
-        |  [%| ((hard (list path)) +>+<.doy) ((hard lark) +>+>.doy)]
-      ==
+        |=(a=(list path) [~ [~ %| a kal]])
+      feeb
     ::  
         %no
       !!
@@ -295,7 +284,13 @@
     =+  yex=(slay i.pex)
     ?>  ?=([~ %% %ud @] yex)
     =+  bog=`boar`(need (~(get by q.lif) q.p.u.yex))
-    !! 
+    =+  nob=`note`[%up (rap 3 fet)]
+    ?>  ?=(& -.bog)
+    %-  (feez hen)
+    %^    feck
+        (mung [fane [t.pex nob s.bog]] sky)
+      |=(a=(list path) [~ ~ %& a ~ (~(put to r.bog) t.pex nob) s.bog])
+    feeb
   ::
   ++  leap                                              ::  dispatch event
     |=  [pex=path hen=caul fav=card]

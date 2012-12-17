@@ -26,7 +26,12 @@
               pac=rock                                  ::  packet data
           ==                                            ::
 ++  boar                                                ::  process at system
-          $%  [%& p=(list slip) q=*]                    ::  waiting (system)
+          $%  :*  %&                                    ::  waiting (system)
+                  p=(list path)                         ::  blocked on
+                  q=(list slip)                         ::  queries
+                  r=(qeu ,[p=path q=note])              ::  pending events
+                  s=*                                   ::  userspace task
+              ==                                        ::
               [%| p=(list path) q=lark]                 ::  pending process
           ==                                            ::
 ++  boat                                                ::  process at user
@@ -257,10 +262,10 @@
 ++  what                                                ::  logical identity
           $%  [%crew p=corp]                            ::  business
               [%dept p=corp]                            ::  govt/education
-              [%dood p=whom]                            ::  male individual
+              [%dude p=whom]                            ::  male individual
               [%fair p=corp]                            ::  nonprofit
               [%home p=corp]                            ::  family
-              [%gril p=whom]                            ::  female individual
+              [%girl p=whom]                            ::  female individual
               [%holy p=corp]                            ::  church
               [%punk p=@t]                              ::  fictitious id
           ==                                            ::

@@ -58,8 +58,8 @@
 ::    is defined in the previous stage of Hoon.
 ::
 ::    Hoon is a pure, strict, higher-order typed functional 
-::    language in no particular family.  It does not reference
-::    lambda calculus or PL/category theory.  Hoon's mapping
+::    language in no particular family.  It does not use the
+::    lambda calculus or formal logic.  Hoon's mapping
 ::    to Nock is like that of C to assembler - not always
 ::    trivial, always as trivial as possible. 
 ::

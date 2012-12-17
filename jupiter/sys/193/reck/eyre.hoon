@@ -128,7 +128,7 @@
           [~ & '# ']
         =+  zib=(~(get by sak.eyre.sys) u.yup)
         ?:  |(?=(~ zib) ?=(~ u.zib))
-          [~ [& (rap 3 "{~(rend co ~ %p u.yup)}: ")]]
+          [~ [& (rap 3 "{~(rend co ~ %p u.yup)}> ")]]
         [~ p.q.i.u.zib (rap 3 q.q.i.u.zib)]
       ==
     ==
