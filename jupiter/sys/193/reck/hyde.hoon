@@ -146,13 +146,19 @@
 ++  goal                                                ::  app request
           $%  [%ez p=path]                              ::  simple query
               [%fu p=path q=|+(* *(unit))]              ::  complex query
-              [%la p=@tas q=path]                       ::  legacy accept
+              [%la p=@tas q=(set ,@t) r=(list ,@t)]     ::  legacy accept
               [%up p=prod]                              ::  user prompt      
               [%wa p=@da]                               ::  alarm
           ==                                            ::
 ++  gram  ,@uw                                          ::  physical datagram
 ++  hand  ,@uvH                                         ::  hash of code
 ++  hook  path                                          ::  request origin
+++  httq                                                ::  raw http request
+          $:  med=?(%get %post %put)                    ::  method
+              url=@t                                    ::  unparsed url
+              hed=(list ,[p=@t q=@t])                   ::  headers
+              bod=octs                                  ::  body
+          ==                                            ::
 ++  lark                                                ::  parsed command
           $%  [%cd p=path]                              ::  change directory
               [%eh p=crow]                              ::  print and record
@@ -190,6 +196,7 @@
               [%up p=@t]                                ::  prompt response
               [%wa p=@da]                               ::  alarm
           ==                                            ::
+++  octs  ,[p=@ud q=@]                                  ::  octet-stream
 ++  oven                                                ::  flow by server
           $:  wen=@da                                   ::  next activation
               nys=(map band ,[p=@da q=bait])            ::  incoming

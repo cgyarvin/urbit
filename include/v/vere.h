@@ -329,6 +329,11 @@
         void
         u2_reck_line(u2_reck* rec_u, u2_noun lin);
 
+      /* u2_reck_http(): hear http request.
+      */
+        void
+        u2_reck_http(u2_hreq* req_u);
+
       /* u2_reck_boot(): boot the reck engine (unprotected).
       */
         void

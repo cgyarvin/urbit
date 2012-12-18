@@ -404,6 +404,20 @@ u2_reck_launch(u2_reck* rec_u)
   _reck_launch_toy(rec_u, pax);
 }
 
+/* _http_request_noun(): translate http request into noun.
+*/
+static void
+_http_request_noun(u2_reck* rec_u)
+{
+}
+
+/* u2_reck_http(): receive http event.
+*/
+void
+u2_reck_http(u2_hreq* req_u)
+{
+}
+
 /* u2_reck_line(): apply a reck line (protected).
 */
 void

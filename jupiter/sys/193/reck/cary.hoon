@@ -105,16 +105,17 @@
           ==
         ?>  ?=(| -.car)
         =+  yit=(~(get by q.car) i.p.kuz)
-        =+  dan=$(p.kuz t.p.kuz, car ?~(yit nope u.yit))
+        ?~  yit
+          =+  dan=$(p.kuz t.p.kuz, car nope)
+          ?:  =(nope dan)
+            car
+          [%| now (~(put by q.car) i.p.kuz dan)]
+        =+  dan=$(p.kuz t.p.kuz, car u.yit)
         ?:  =(nope dan)
-          ?~  yit 
-            car 
-          =+(hon=(~(del by q.car) i.p.kuz) ?~(hon nope [%| now hon]))
-        ?~  yit 
-          [%| now [[i.p.kuz dan] ~ ~]] 
-        ?:  =(dan u.yit)
+          [%| now (~(del by q.car) i.p.kuz)]
+        ?:  =(u.yit dan)
           car
-        =+(hon=(~(put by q.car) i.p.kuz dan) [%| now hon])
+        [%| now (~(put by q.car) i.p.kuz dan)]
       ::
       ++  work                                          ::  apply ukazy
         |=  [now=@da kuz=(list ukaz)]

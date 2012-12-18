@@ -1,12 +1,6 @@
-|=  *                                                   ::  ignore environment
-|=  *                                                   ::  ignore options
+|=  [who=lord est=time pax=path]
+|=  [bis=(set ,@tas) opt=(map ,@tas ,*)]
 |=  [planet=@ta ~]
-:-  :~  [%talk %leaf "hello, {(rip 3 planet)}."]
-    ==
-:-  ~
-:-  [[~ [%up %& "tennis, anyone? "]] ~]
-|=  [now=@da pax=path nut=note]
-?>  ?=(%up -.nut)
-:-  :~  [%talk %leaf "goodbye, '{(rip 3 p.nut)}'."]
+:-  :~  [%talk %leaf "goodbye, {(rip 3 planet)}."]
     ==
 ~

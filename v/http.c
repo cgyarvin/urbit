@@ -323,7 +323,8 @@ _http_message_complete(http_parser* par_u)
   u2_hrep *rep_u;
 
   _http_req_dump(req_u);
-  rep_u = u2_ve_http_sync(req_u);
+  // rep_u = u2_ve_http_sync(req_u);
+  u2_reck_http(req_u);
 
   _http_req_free(req_u);
   hon_u->req_u = 0;
@@ -413,7 +414,7 @@ _http_conn_cb(struct ev_loop *lup_u, struct ev_io* wax_u, int revents)
         _http_conn_dead(hon_u);
       }
       if ( siz_i == 0 ) {
-        fprintf(stderr, "EOF on fd %d\n", wax_u->fd);
+        // fprintf(stderr, "EOF on fd %d\n", wax_u->fd);
         _http_conn_dead(hon_u);
       }
     }
@@ -492,7 +493,7 @@ _http_list_cb(struct ev_loop *lup_u, struct ev_io* wax_u, int revents)
       perror("http: fcntl");
     }
     else {
-      fprintf(stderr, "http: new connection %d\n", fid_i);
+      //  fprintf(stderr, "http: new connection %d\n", fid_i);
       _http_conn_new(srv_u, fid_i);
     }
   }
