@@ -1,12 +1,16 @@
 !:
 ::          %bede, the shell.  This file is in the public domain.
 ::
-|%                                                      ::
+|%
 ++  berg                                                ::  repl/shell
   |=  who=lord                                          ::  per identity
   =+  nub=`vase`!>(+>)                                  ::  system + libraries
-  =+  :*  ^=  gen                                       ::  chestnut genes
+  =+  :*  ^=  vax                                       ::  chestnut vases
             :*  sot=(slap nub (vice 'slot'))            ::
+            ==
+          ^=  gen                                       ::  chestnut genes
+            :*  yom=(vice '*(set ,@tas)')               ::
+                zim=(vice '*(map ,@tas ,*)')            ::
             ==                                          ::
           ^=  typ                                       ::  chestnut types
             =+  pal=~(play ut p.nub)                    ::
@@ -57,7 +61,23 @@
         ==
       ==
     ::
-    ++  kral
+    ++  ipto                                            ::  lights
+      %+  knee  *(list ,@tas)  |.  ~+
+      %+  cook
+        |=  a=(list (list ,@tas))  ^-  (list ,@tas)
+        ?~(a ~ (weld i.a $(a t.a)))
+      %+  most
+        ;~(plug com ace)
+      ;~  pose
+        (cook |=(a=@ [a ~]) sym)
+        (cook |=(a=@ (rip 3 a)) ;~(pfix lus sym))
+      ==
+    ::
+    ++  ipty                                            ::  notices
+      %+  knee  *(list ,[p=@tas q=crow])  |.  ~+
+      (most ace ;~(plug sym ;~(pfix fas worc)))
+    ::
+    ++  kral                                            ::  parse lark
       ;~  pose
         ;~  pfix  col
           ;~  pose
@@ -73,7 +93,18 @@
               %go
             ;~  plug
               (thap %app)
-              ;~(pfix gap (stag %l (most ace worc)))
+              ;~  pose 
+                %+  ifix  [kel ker]
+                ;~  pose
+                  ;~  plug
+                    ipto
+                    ;~(pose ;~(pfix ;~(plug sem ace) ipty) (easy ~))
+                  ==
+                  (stag ~ ipty)
+                ==
+                (easy [~ ~])
+              ==
+              (stag %l (star ;~(pfix ace worc)))
             ==
           ==
         ==
@@ -156,6 +187,16 @@
       [^$(woc i.p.woc) $(p.woc t.p.woc)]
     ==
   ::
+  ++  dive                                              ::  opts to gene (user)
+    |=  cux=cone
+    ^-  gene
+    :-  :+  %cncl
+          `gene`[%cnsg `wing`[%gas ~] `gene`[%cnbc %in] `gene`yom.gen]
+        [%clsg (turn p.cux |=(a=@ [%dtpt %tas a]))]
+    :+  %cncl
+      [%cnsg [%gas ~] [%cnbc %by] zim.gen]
+    [%clsg (turn q.cux |=([p=@tas q=crow] [[%dtpt %tas p] (doul q)]))]
+  ::
   ++  echo                                              ::  echo (user)
     |=  woc=crow
     ^-  tank
@@ -169,21 +210,19 @@
     (slam tas gym)
   ::
   ++  fapp                                              ::  launch app (user)
-    |=  [pax=path arg=crow]
+    |=  [pax=path cux=cone arg=crow]
     ^-  vase
-    ::  ~&  [%fapp pax]
     =+  deh=(doul [%f pax])
-    ::  ~&  [%gene deh]
-    =+  oun=(slap nub (doul [%f pax]))    ::  XX condense
+    =+  oun=(slap nub deh)    ::  XX condense
     =+  tib=(slap nub (doul arg))
     =+  yem=:(slop [[%atom %p] who] [[%atom %da] now] [pah.typ pax])
     =+  wuy=(slam oun yem)
-    =+  gyd=(slam wuy [cof.typ [~ ~]])
+    =+  gyd=(slam wuy (slap nub (dive cux)))
     (slam gyd tib)
   ::
   ++  feat                                              ::  slice weak vase
     |=  [axe=axis vux=*]  ^-  *
-    q:(slam sot.gen (slop [[%atom %%] axe] [vas.typ vux]))
+    q:(slam sot.vax (slop [[%atom %%] axe] [vas.typ vux]))
   ::
   ++  feck                                              ::  process mockage
     |=  [ton=tone fob=_|+((list path) *beef) fut=_|+(* *beef)]
@@ -240,7 +279,7 @@
     ?-  -.kal
       %cd  [~ ..^$(cwd p.kal)]
       %eh  ((feez hen) (feck (mung [echo p.kal] sky) wan hak))
-      %go  ((feez hen) (feck (mung [fapp [p.kal q.kal]] sky) wan feeb))
+      %go  ((feez hen) (feck (mung [fapp [p.kal q.kal r.kal]] sky) wan feeb))
       %no  !!
     ==
   ::
@@ -248,7 +287,7 @@
     |=  [hen=caul fet=tape]
     ^-  [p=(list move) q=_..^$]
     =>  .(p.hit +(p.hit), q.hit [fet q.hit])
-    =+  zif=((full kral:lo) [1 1] fet)
+    =+  zif=((full (ifix [gay gay] kral:lo)) [1 1] fet)
     ?~  q.zif
       :_  ..^$
       =+  duf=[p=~(rend co ~ %ud p.p.zif) q=~(rend co ~ %ud q.p.zif)]

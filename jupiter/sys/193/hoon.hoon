@@ -1162,6 +1162,7 @@
     +-  gas
       ~/  %gas
       |*  b=(list ,[p=* q=*])
+      =>  .(b `(list _?>(?=(^ a) n.a))`b)
       |-  ^+  a
       ?@  b
         a
@@ -1267,6 +1268,21 @@
         b
       $(a r.a, b [n.a $(a l.a)])
     --
+  ::
+  ::      Tier 4d, casual containers
+  ::
+  ++  mo
+    |*  a=(list)
+    =>  .(a `_(homo a)`a)
+    =>  .(a `(list ,[p=_-<.a q=_->.a])`a)
+    =+  b=*(map _?>(?=(^ a) p.i.a) _?>(?=(^ a) q.i.a))
+    (~(gas by b) a)
+  ::
+  ++  sa
+    |*  a=(list)
+    =>  .(a `_(homo a)`a)
+    =+  b=*(set _?>(?=(^ a) i.a))
+    (~(gas in b) a)
   ::
   ::  Tier 5 models
   ::
@@ -5934,17 +5950,20 @@
         =+  pre=?:(p.p.a (scag q.p.a (flop gaw)) (flop (slag q.p.a gaw)))
         =+  lop=|=(a=path `(list gene)`(turn a |=(b=@ta [%dtpt %ta b])))
         (weld (lop pre) ?~(pot b (weld b (lop pot))))
-      ;~  plug
+      ;~  pose
         ;~  plug
-          ;~  pose
-            (cold [%| 0] lus)
-            (cook |=(a=(list) [%| (lent a)]) (plus tis))
-            (cook |=(a=(list) [%& (lent a)]) (star tar))
+          ;~  plug
+            ;~  pose
+              (cold [%| 0] lus)
+              (cook |=(a=(list) [%| (lent a)]) (plus tis))
+              (cook |=(a=(list) [%& (lent a)]) (star tar))
+            ==
+            (cook |=(a=(list) (lent a)) (star buc))
           ==
-          (cook |=(a=(list) (lent a)) (star buc))
-        ==
-        ;~(sfix (more fas hasp) fas)
-      == 
+          ;~(sfix (more fas hasp) fas)
+        == 
+        (easy [[[%| 0] 0] ~])
+      ==
     ==
   ++  scat
     %+  knee  *gene  |.  ~+
@@ -6055,7 +6074,10 @@
           [%smdq |-(?~(a ~ (weld i.a $(a t.a))))]
         (most dog soil)
       :-  ['a' 'z']
-        (stag %cnhx rope)
+        %+  sear
+          |=  [a=wing b=(unit gene)]  ^-  (unit gene)
+          ?~(b [~ %cnhx a] ?.(?=([@ ~] a) ~ [~ [%dtpt %tas i.a] u.b]))
+        ;~(plug rope ;~(pose (stag ~ ;~(pfix fas wide)) (easy ~)))
       :-  '|'
         ;~  pose
           (cook |=(a=wing [%cnts a ~]) rope)

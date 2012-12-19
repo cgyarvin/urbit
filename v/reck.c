@@ -414,7 +414,7 @@ _http_request_noun(u2_reck* rec_u)
 /* u2_reck_http(): receive http event.
 */
 void
-u2_reck_http(u2_hreq* req_u)
+u2_reck_http(u2_reck* rec_u, u2_hreq* req_u)
 {
 }
 
