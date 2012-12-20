@@ -53,38 +53,50 @@
     /* u2_hreq: http request.
     */
       typedef struct _u2_hreq {
-        u2_hmet  met_e;                     //  method
-        u2_hrat  rat_e;                     //  request state
-        u2_bean  liv;                       //  keepalive
-        c3_c*    url_c;                     //  url
-        u2_hhed* hed_u;                     //  headers 
-        u2_hbod* bod_u;                     //  body parts
+        struct _u2_hcon* hon_u;             //  connection
+        c3_w             seq_w;             //  sequence within connection
+        u2_hmet          met_e;             //  method
+        u2_hrat          rat_e;             //  parser state
+        void*            par_u;             //  struct http_parser *
+        c3_c*            url_c;             //  url
+        u2_bean          liv;               //  keepalive
+        u2_bean          end;               //  all responses added
+        u2_hhed*         hed_u;             //  headers 
+        u2_hbod*         bod_u;             //  body parts
+        struct _u2_hreq* nex_u;             //  next in request queue
+        u2_hbod*         rub_u;             //  exit of write queue
+        u2_hbod*         bur_u;             //  entry of write queue
       } u2_hreq;
 
     /* u2_hrep: simple http response.
     */
       typedef struct _u2_hrep {
+        c3_w             sev_w;             //  server number
+        c3_w             coq_w;             //  connection number
+        c3_w             seq_w;             //  request number
         c3_w             sat_w;             //  status
-        c3_c*            msg_c;             //  status-message or null
-        c3_c*            typ_c;             //  content-type
-        struct _u2_hbod* bod_u;             //  body (one part)
+        u2_hhed*         hed_u;             //  headers
+        u2_hbod*         bod_u;             //  body (one part)
       } u2_hrep;
 
     /* u2_hcon: http connection.
     */
       typedef struct _u2_hcon {
+        c3_w             coq_w;             //  connection number
+        c3_w             seq_w;             //  next request number
         struct ev_io     wax_u;             //  event handler state
-        void*            par_u;             //  struct http_parser *
-        struct _u2_http* srv_u;             //  server below
-        struct _u2_hcon* nex_u;             //  next in server list
-        struct _u2_hreq* req_u;             //  request in process if any
-        struct _u2_hbod* rep_u;             //  head of response queue
-        struct _u2_hbod* per_u;             //  tail of response queue
+        struct _u2_http* htp_u;             //  backlink to server 
+        struct _u2_hcon* nex_u;             //  next in server's list
+        struct _u2_hreq* ruc_u;             //  request under construction
+        struct _u2_hreq* req_u;             //  exit of request queue
+        struct _u2_hreq* qer_u;             //  entry of request queue
       } u2_hcon;
 
     /* u2_http: http server.
     */
       typedef struct _u2_http {
+        c3_w             sev_w;             //  server number - mostly unique
+        c3_w             coq_w;             //  next connection number
         struct ev_io     wax_u;             //  event handler state
         c3_w             por_w;             //  running port
         struct _u2_hcon* hon_u;             //  connection list
@@ -332,7 +344,7 @@
       /* u2_reck_http(): hear http request.
       */
         void
-        u2_reck_http(u2_hreq* req_u);
+        u2_reck_http(u2_reck* rec_u, u2_hreq* req_u);
 
       /* u2_reck_boot(): boot the reck engine (unprotected).
       */
@@ -529,7 +541,12 @@
         u2_bean
         u2_ve_http_start(c3_w por_w);
 
-      /* u2_ve_http_sync(): simple synchronous http.
+      /* u2_ve_http_request(): dispatch http request, returning null if async.
       */
         u2_hrep*
-        u2_ve_http_sync(u2_hreq* req_u);
+        u2_ve_http_request(u2_hreq* req_u);
+
+      /* u2_ve_http_respond(): transmit http response.
+      */
+        void
+        u2_ve_http_respond(u2_hrep* rep_u);

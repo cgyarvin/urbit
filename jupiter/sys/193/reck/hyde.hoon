@@ -283,11 +283,11 @@
 ++  what                                                ::  logical identity
           $%  [%crew p=corp]                            ::  business
               [%dept p=corp]                            ::  govt/education
-              [%dude p=whom]                            ::  male individual
               [%fair p=corp]                            ::  nonprofit
               [%home p=corp]                            ::  family
-              [%girl p=whom]                            ::  female individual
-              [%holy p=corp]                            ::  church
+              [%holy p=corp]                            ::  religious
+              [%lady p=whom]                            ::  female individual
+              [%lord p=whom]                            ::  male individual
               [%punk p=@t]                              ::  fictitious id
           ==                                            ::
 ++  whom  ,[p=@ud q=@t r=@tas s=name]                   ::  yob/state/nation/me

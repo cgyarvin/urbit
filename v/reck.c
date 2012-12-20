@@ -411,6 +411,9 @@ _http_request_noun(u2_reck* rec_u)
 {
 }
 
+/* _http_noun_response(): translate noun into http response.
+*/
+
 /* u2_reck_http(): receive http event.
 */
 void
