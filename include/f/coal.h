@@ -1151,6 +1151,8 @@
         u2_noun
         u2_ckd_in_tap(u2_noun a, u2_noun b);
 
+#define u2_ckd_by_tap(a, b) u2_ckd_in_tap(a, b)
+
     /* u2_cke: tier 5 functions
     */
       /* u2_cke_cue(): expand saved pill.

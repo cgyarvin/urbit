@@ -2603,7 +2603,7 @@
         royl
       ==
     --
-  ++  cost  |=([fom=@tas val=@] ~(rent co ~ fom val))
+  ++  scot  |=(mol=mole ~(rent co %% mol))
   ++  slay
     |=  txt=@ta  ^-  (unit coin)
     =+  vex=((full nuck:so) [[1 1] (trip txt)])

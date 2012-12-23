@@ -1156,6 +1156,12 @@
       (rick mar our law.saf.u.gys)
     ~
   ::
+  ++  rand
+    |=  [lem=@ ent=*]
+    ^-  [p=@uvI q=_+>]
+    =+  yan=(mix (sham ent) any.ton.fox)
+    [(~(raw og yan) lem) +>.$(any.ton.fox (shax yan))]
+  ::
   ++  temp
     |=  [our=lord his=lord tyl=path]
     ::  ~&  [%temp our his tyl]

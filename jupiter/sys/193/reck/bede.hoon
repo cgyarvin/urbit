@@ -26,14 +26,14 @@
       ==                                                ::
   =+  :*  hit=[p=0 q=*(list tape)]                      ::  source history
           sur=[p=0 q=*(qeu vase)]                       ::  result history
-          hox=(cost %p who)                             ::  identity string
+          hox=(scot %p who)                             ::  identity string
           cwd=*path                                     ::  working directory
           way=*(map ,@ta vase)                          ::  variables
           lif=*dock                                     ::  processes
           lom=*(map path plea)                          ::  prompt by console
       ==
   |=  [now=@da sky=_|+(* *(unit))] 
-  =+  wen=(cost %da now)
+  =+  wen=(scot %da now)
   =+  wer=`path`[hox wen %cx (weld cwd [hub ~])]
   =+  rew=(flop wer)
   =+  vez=(vang & wer)
@@ -234,7 +234,7 @@
     ==
   ::
   ++  fedo                                              ::  slip requests
-    |=  [hen=caul gon=(list path) ask=(list slip)]
+    |=  [hen=tube gon=(list path) ask=(list slip)]
     |-  ^-  (list move)
     ?~  ask  
       ~
@@ -245,7 +245,7 @@
         %la  !!
         %up  :_  pir
              :+  [~ who] 
-               [[%eyre ~] [%bede (cost %ud p.lif) p.i.ask] hen]
+               [[%eyre ~] [%bede (scot %ud p.lif) p.i.ask] hen]
              [%prop p.q.i.ask]
     ::
         %wa
@@ -262,7 +262,7 @@
     [~ %& ~ ~ (feat 7 doy)]
   ::
   ++  feez                                              ::  process boar
-    |=  hen=caul 
+    |=  hen=tube 
     |=  bof=beef
     ^-  [p=(list move) q=_..^^$]
     :-  %+  weld
@@ -272,7 +272,7 @@
     ..^^$(p.lif +(p.lif), q.lif (~(put by q.lif) p.lif u.r.bof))
   ::
   ++  felp                                              ::  apply lark
-    |=  [hen=caul kal=lark]
+    |=  [hen=tube kal=lark]
     ^-  [p=(list move) q=_..^$]
     =+  wan=|=(a=(list path) `beef`[~ ~ ~ %| a kal])
     =+  hak=|=(a=* `beef`[[[%talk ((hard tank) a)] ~] ~ ~])
@@ -284,7 +284,7 @@
     ==
   ::
   ++  flam                                              ::  line default
-    |=  [hen=caul fet=tape]
+    |=  [hen=tube fet=tape]
     ^-  [p=(list move) q=_..^$]
     =>  .(p.hit +(p.hit), q.hit [fet q.hit])
     =+  zif=((full (ifix [gay gay] kral:lo)) [1 1] fet)
@@ -297,7 +297,7 @@
     (felp hen p.u.q.zif)
   ::
   ++  flim                                              ::  line to shell
-    |=  [pex=path hen=caul fet=tape]
+    |=  [pex=path hen=tube fet=tape]
     ^-  [p=(list move) q=_..^$]
     ?~  pex
       (flam hen fet)
@@ -313,7 +313,7 @@
     feeb
   ::
   ++  leap                                              ::  dispatch event
-    |=  [pex=path hen=caul fav=card]
+    |=  [pex=path hen=tube fav=card]
     ^-  [p=(list move) q=_..^$]
     ?+    -.fav  [~ ..^$]
         %line

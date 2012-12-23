@@ -47,7 +47,7 @@
           ==                                            ::
 ++  bowl  ,[p=(list card) q=(unit boat)]                ::  standard product
 ++  bran  ,[p=mark q=(unit mark) r=lord]                ::  version parent id
-++  brow  ,[p=@da q=%tas]                               ::  browser version
+++  brow  ,[p=@da q=@tas]                               ::  browser version
 ++  buck  ,[p=mace q=will]                              ::  all security data
 ++  cake  ,[p=lord q=? r=skin s=@]                      ::  top level packet
 ++  cape                                                ::  end-to-end result
@@ -78,11 +78,14 @@
               [%pour p=path q=dram]                     ::  write directory
               [%prop p=prod]                            ::  prompt
               [%pump ~]                                 ::  produce packets
+              [%resp p=httr]                            ::  http response
               [%save p=path q=@]                        ::  write atomic file
               [%send p=@]                               ::  transmit packet
               [%ship p=@tas q=@tas]                     ::  label release
               [%sync ~]                                 ::  reset soft state
               [%talk p=tank]                            ::  show on console
+              [%thin p=httq]                            ::  insecure http req
+              [%this p=httq]                            ::  secure http req
               [%text p=(list ,@t)]                      ::  raw text lines
               [%tory p=(list ,@t)]                      ::  history dump
               [%warn p=?(0 1 2) q=tank]                 ::  report to human
@@ -98,9 +101,8 @@
 ++  cone  ,[p=(list ,@tas) q=(list ,[p=@tas q=crow])]   ::  bits and options
 ++  conf  ,[p=(set ,@tas) q=(map ,@tas ,*)]             ::  bits and options
 ++  corp  ,[p=@t q=@t r=@tas]                           ::  name auth country
-++  caul  (list path)                                   ::  causal history
 ++  chum  ,@uvI                                         ::  hashed passcode
-++  cred  (map ,@tas ,@ta)                              ::  client credentials
+++  cred  ,[p=logo q=(map ,@tas ,[p=@da q=@ta])]        ::  client credentials
 ++  crow                                                ::  shell expression
           $%  [%f p=path]                               ::  file by path
               [%c p=crow q=(list crow)]                 ::  function call
@@ -156,25 +158,30 @@
           ==                                            ::
 ++  gram  ,@uw                                          ::  physical datagram
 ++  hand  ,@uvH                                         ::  hash of code
+++  hate  ,[p=purl q=cred s=brow r=moth]                ::  cooked request
 ++  hook  path                                          ::  request origin
 ++  httq                                                ::  raw http request
-          $:  med=?(%get %post %put)                    ::  method
+          $:  med=?(%get %post)                         ::  method
               url=@t                                    ::  unparsed url
-              hed=(map ,@t ,@t)                         ::  headers
+              hed=(list ,[p=@t q=@t])                   ::  headers
               bod=octs                                  ::  body
           ==                                            ::
 ++  httr                                                ::  raw http response
           $:  sas=@ud                                   ::  status
-              hed=(map ,@t ,@t)                         ::  raw headers
+              hed=(list ,[p=@t q=@t])                   ::  raw headers
               bod=octs                                  ::  body
           ==                                            ::
-++  hitq  ,[p=purl q=cred s=brow r=meth]                ::  cooked request
-++  hitr  (unit ,[p=@ud q=mime])                        ::  cooked response
-++  meth                                                ::  http operation
-          $|  %get                                      ::  
-          $%  [%post p=(map ,@ta ,@t)]                  ::  
-              [%put p=mime]                             ::
+++  math                                                ::  semiparsed headers
+          $:  cuy=(unit mype)                           ::  content-type
+              cuz=(list ,[p=@t q=@t])                   ::  cookies
+              raz=(map ,@t ,@t)                         ::  other headers
           ==                                            ::
+++  meth                                                ::  http method
+          $|  %get                                      ::  the classic get
+          $%  [%post p=(map ,@ta ,@t)]                  ::  stylish post
+              [%put p=mime]                             ::  gentleman's put
+          ==                                            ::
+++  moth  ,[p=meth q=math]                              ::  http operation
 ++  lark                                                ::  parsed command
           $%  [%cd p=path]                              ::  change directory
               [%eh p=crow]                              ::  print and record
@@ -189,6 +196,8 @@
               [%is p=@ud q=@is]                         ::  IP6/public UDP/addr
           ==                                            ::
 ++  link  ,[p=code q=sock]                              ::  connection
+++  logo  ,@uvI                                         ::  session identity
+++  love  (unit ,[p=@ud q=mime])                        ::  cooked response
 ++  mace  (list ,[p=mark q=ring])                       ::  private secrets
 ++  mark  ,@ud                                          ::  regime number
 ++  meal                                                ::  payload
@@ -202,8 +211,9 @@
           $%  [& p=@da q=@uvI]                          ::  mtime hash
               [| p=@da q=(list ,@ta)]                   ::  mtime dir
           ==                                            ::
-++  mime  ,[p=(list ,@ta) q=@ud r=@]                    ::  mime object
-++  move  ,[p=(unit lord) q=caul r=card]                ::  internal event
+++  mime  ,[p=mype q=@ud r=@]                           ::  mime object
+++  move  ,[p=(unit lord) q=tube r=card]                ::  internal event
+++  mype  (list ,@ta)                                   ::  mime type
 ++  name  ,[p=@t q=(unit ,[p=? q=@t]) r=@t]             ::  first mid/nick last
 ++  nope  ^~(^-(arch [%| @ ~]))                         ::  empty node
 ++  note                                                ::  app response
@@ -224,7 +234,7 @@
 ++  post  ,[p=path q=*]                                 ::  statement
 ++  prod  ,[p=prom q=tape]                              ::  format, prompt
 ++  prom  ,?                                            ::  format type
-++  purl  ,[p=csrf q=sand r=path s=quay]                ::  parsed url
+++  purl  ,[dns=sand sap=(list ,@t) qua=quay]           ::  parsed url
 ++  putt                                                ::  outgoing message
           $:  ski=snow                                  ::  sequence acked/sent
               saq=?                                     ::  secure ack required
@@ -271,6 +281,7 @@
               any=@                                     ::  entropy
               urb=(map lord safe)                       ::  all keys and routes
           ==                                            ::
+++  tube  (list path)                                   ::  causal history
 ++  ukaz                                                ::  change (pl ukazy)
           $:  p=path                                    ::  change site
               ^=  q                                     ::  change content

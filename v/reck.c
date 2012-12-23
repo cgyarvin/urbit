@@ -223,6 +223,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
   rec_u->toy.slam = _reck_root("slam", u2k(ken));
   rec_u->toy.slap = _reck_root("slap", u2k(ken));
   rec_u->toy.slop = _reck_root("slop", u2k(ken));
+  rec_u->toy.scot = _reck_root("scot", u2k(ken));
 
   _reck_time_set(rec_u);
   {
@@ -404,21 +405,20 @@ u2_reck_launch(u2_reck* rec_u)
   _reck_launch_toy(rec_u, pax);
 }
 
-/* _http_request_noun(): translate http request into noun.
-*/
-static void
-_http_request_noun(u2_reck* rec_u)
-{
-}
-
-/* _http_noun_response(): translate noun into http response.
-*/
-
-/* u2_reck_http(): receive http event.
+/* u2_reck_http_request(): hear http request on channel.
 */
 void
-u2_reck_http(u2_reck* rec_u, u2_hreq* req_u)
+u2_reck_http_request(u2_reck* rec_u, u2_noun pox, u2_noun req)
 {
+  u2z(pox); u2z(req);
+}
+
+/* u2_reck_http_respond(): apply http response.
+*/
+void
+u2_reck_http_respond(u2_reck* rec_u, u2_noun pox, u2_noun rep)
+{
+  u2z(pox); u2z(rep);
 }
 
 /* u2_reck_line(): apply a reck line (protected).

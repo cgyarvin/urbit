@@ -54,7 +54,7 @@
     */
       typedef struct _u2_hreq {
         struct _u2_hcon* hon_u;             //  connection
-        c3_w             seq_w;             //  sequence within connection
+        c3_w             seq_l;             //  sequence within connection
         u2_hmet          met_e;             //  method
         u2_hrat          rat_e;             //  parser state
         void*            par_u;             //  struct http_parser *
@@ -71,10 +71,10 @@
     /* u2_hrep: simple http response.
     */
       typedef struct _u2_hrep {
-        c3_w             sev_w;             //  server number
-        c3_w             coq_w;             //  connection number
-        c3_w             seq_w;             //  request number
-        c3_w             sat_w;             //  status
+        c3_w             sev_l;             //  server number
+        c3_w             coq_l;             //  connection number
+        c3_w             seq_l;             //  request number
+        c3_w             sas_w;             //  status
         u2_hhed*         hed_u;             //  headers
         u2_hbod*         bod_u;             //  body (one part)
       } u2_hrep;
@@ -82,8 +82,8 @@
     /* u2_hcon: http connection.
     */
       typedef struct _u2_hcon {
-        c3_w             coq_w;             //  connection number
-        c3_w             seq_w;             //  next request number
+        c3_w             coq_l;             //  connection number
+        c3_w             seq_l;             //  next request number
         struct ev_io     wax_u;             //  event handler state
         struct _u2_http* htp_u;             //  backlink to server 
         struct _u2_hcon* nex_u;             //  next in server's list
@@ -95,8 +95,8 @@
     /* u2_http: http server.
     */
       typedef struct _u2_http {
-        c3_w             sev_w;             //  server number - mostly unique
-        c3_w             coq_w;             //  next connection number
+        c3_w             sev_l;             //  server number - mostly unique
+        c3_w             coq_l;             //  next connection number
         struct ev_io     wax_u;             //  event handler state
         c3_w             por_w;             //  running port
         struct _u2_hcon* hon_u;             //  connection list
@@ -160,6 +160,7 @@
           u2_noun slap;                   //  layer ([vase gene] -> vase)
           u2_noun slop;                   //  cell ([vase vase] -> vase)
           u2_noun slay;                   //  text to coin
+          u2_noun scot;                   //  mole to text
         } toy;
 
         u2_noun now;                      //  current time, as noun
@@ -341,10 +342,15 @@
         void
         u2_reck_line(u2_reck* rec_u, u2_noun lin);
 
-      /* u2_reck_http(): hear http request.
+      /* u2_reck_http_request(): hear http request on channel.
       */
         void
-        u2_reck_http(u2_reck* rec_u, u2_hreq* req_u);
+        u2_reck_http_request(u2_reck* rec_u, u2_noun pox, u2_noun req);
+
+      /* u2_reck_http_respond(): apply http response.
+      */
+        void
+        u2_reck_http_respond(u2_reck* rec_u, u2_noun pox, u2_noun rep);
 
       /* u2_reck_boot(): boot the reck engine (unprotected).
       */
@@ -536,7 +542,7 @@
 
     /**  HTTP.
     **/
-      /* u2_ve_http_start():
+      /* u2_ve_http_start(): start on port.
       */
         u2_bean
         u2_ve_http_start(c3_w por_w);
@@ -546,7 +552,7 @@
         u2_hrep*
         u2_ve_http_request(u2_hreq* req_u);
 
-      /* u2_ve_http_respond(): transmit http response.
+      /* u2_ve_http_respond(): queue response.  Transfer `pox`, `rep`.
       */
         void
-        u2_ve_http_respond(u2_hrep* rep_u);
+        u2_ve_http_respond(u2_noun pox, u2_noun rep);

@@ -34,9 +34,11 @@
         ==
           ^=  eyre                                          ::  i/o
         $:  gem=(map lord chum)                             ::  hashed passcodes
-            liv=(map lord (list caul))                      ::  live sessions
-            rev=(map caul lord)                             ::  identities
-            sak=(map lord (list ,[p=caul q=prod]))          ::  prompt stacks
+            liv=(map lord (list tube))                      ::  live consoles
+            rev=(map tube lord)                             ::  identities
+            sak=(map lord (list ,[p=tube q=prod]))          ::  prompt stacks
+            tuh=(map tube logo)                             ::  http sessions
+            tyv=(map logo cred)                             ::  credentials
         ==
       == 
     --
@@ -123,7 +125,7 @@
         %eyre
       ?+    hap  ~
           [%prod *]  ^-  (unit ,[p=prom q=@tas])
-        =+  yup=(~(get by rev.eyre.sys) `caul`[t.hap ~])
+        =+  yup=(~(get by rev.eyre.sys) `tube`[t.hap ~])
         ?~  yup
           [~ & '# ']
         =+  zib=(~(get by sak.eyre.sys) u.yup)
@@ -134,7 +136,7 @@
     ==
   ::
   ++  grit                                                  ::  cause privilege
-    |=  cul=caul
+    |=  cul=tube
     ^-  ?(%gold %iron %lead)
     ?~  cul
       %lead
@@ -143,6 +145,28 @@
       ?:  ?=([%iron *] i.cul)  %iron
       %lead
     $(cul t.cul)
+  ::
+  ++  gump                                                  ::  cook htreq
+    |=  [sec=? pol=tube req=httq]
+    ^-  [p=hate q=game]
+    =^  yan  sys  (rand 128 now pol req)    ::  XX real session logic
+    :_  sys 
+    ^-  hate
+    :^    `purl`!!
+        `cred`[`logo`yan ~]
+      `brow`[~2000.1.1 %unknown]
+    ^-  moth
+    :-  `meth`%get
+    ^-  math
+    :+  `(unit mype)`~
+      `(list ,[p=@t q=@t])`~
+    `(map ,@t ,@t)`~
+  ::
+  ++  hesh                                                  ::  dispatch httr
+    |=  [sec=? pol=tube req=httq]
+    ^-  [p=(list move) q=game]
+    =^  gup  sys  (gump sec pol req)
+    !! 
   ::
   ++  howl                                                  ::  handle event 
     |=  mov=move
@@ -229,6 +253,7 @@
         (lov p.r.mov)
       ::
           %loot  (giv)
+          %love   !!
           %make  (rer %arvo)
           %mine  (rer %bede)
           %pace  !!
@@ -246,9 +271,12 @@
         ==
       ::
           %pump  !!
+          %resp  !!
           %save  (giv)
           %send  (giv)
           %ship  (rer %cary)
+          %thin  !!
+          %this  !!
           %sync  !!
           %talk  (giv) 
           %text  (giv)
@@ -258,4 +286,10 @@
       ==
     ==
   --
+  ::
+  ++  rand
+    |=  [wid=@ ent=*]
+    ^-  [p=@ q=game]
+    =+  guh=(rand:gel.arvo.sys wid ent)
+    [p.guh sys(gel.arvo q.guh)]
 --

@@ -484,7 +484,7 @@ _http_out(u2_noun rep)
   {
     u2_hrep* rep_u = malloc(sizeof(u2_hrep));
 
-    rep_u->sat_w = sat;
+    rep_u->sas_w = sat;
     //  rep_u->msg_c = 0;
     //  rep_u->typ_c = u2_cr_string(typ);
 
