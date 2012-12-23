@@ -32,6 +32,9 @@
           ^=  cary                                          ::  filesystem
         $:  duw=_clay
         ==
+          ^=  dill                                          ::  http server
+        $:  lyd=_lidl
+        ==
           ^=  eyre                                          ::  i/o
         $:  gem=(map lord chum)                             ::  hashed passcodes
             liv=(map lord (list tube))                      ::  live consoles
@@ -45,6 +48,7 @@
 =+  sys=*game
 =.  gel.arvo.sys  $:alga
 =.  duw.cary.sys  clay
+=.  lyd.dill.sys  lidl
 |%
 ++  is
   |_  now=@da 
@@ -76,6 +80,12 @@
       :-  (turn p.yub |=(a=card [p.mov q.mov a]))
       sys(duw.cary q.yub)
     ::
+    ++  dyl
+      |=  [pex=path mov=move]
+      ^-  [(list move) game]
+      =^  yub  lyd.dill.sys  
+        (~(leap lyd.dill.sys now (shax now)) mov)
+      [p.yub sys]
     --
   ::
   ++  auth                                                  ::  match password
@@ -146,28 +156,6 @@
       %lead
     $(cul t.cul)
   ::
-  ++  gump                                                  ::  cook htreq
-    |=  [sec=? pol=tube req=httq]
-    ^-  [p=hate q=game]
-    =^  yan  sys  (rand 128 now pol req)    ::  XX real session logic
-    :_  sys 
-    ^-  hate
-    :^    `purl`!!
-        `cred`[`logo`yan ~]
-      `brow`[~2000.1.1 %unknown]
-    ^-  moth
-    :-  `meth`%get
-    ^-  math
-    :+  `(unit mype)`~
-      `(list ,[p=@t q=@t])`~
-    `(map ,@t ,@t)`~
-  ::
-  ++  hesh                                                  ::  dispatch httr
-    |=  [sec=? pol=tube req=httq]
-    ^-  [p=(list move) q=game]
-    =^  gup  sys  (gump sec pol req)
-    !! 
-  ::
   ++  howl                                                  ::  handle event 
     |=  mov=move
     =+  [mor=`(list move)`[mov ~] out=`(list ovum)`~]
@@ -192,6 +180,11 @@
         %cary
       =^  fez  sys
         (car:si pex [p.mov t.q.mov r.mov])
+      $(mor (weld fez t.mor))
+    ::
+        %dill
+      =^  fez  sys
+        (dyl:si pex [p.mov t.q.mov r.mov])
       $(mor (weld fez t.mor))
     ::
         %eyre

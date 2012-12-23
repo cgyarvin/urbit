@@ -245,7 +245,7 @@
         %la  !!
         %up  :_  pir
              :+  [~ who] 
-               [[%eyre ~] [%bede (scot %ud p.lif) p.i.ask] hen]
+               [[%zuse ~] [%bede (scot %ud p.lif) p.i.ask] hen]
              [%prop p.q.i.ask]
     ::
         %wa

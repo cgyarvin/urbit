@@ -143,7 +143,7 @@ _get_line()
 {
   u2_noun pot = u2_reck_peek
                     (&u2_Host.rec_u[0], 
-                     u2nt(c3__eyre, 
+                     u2nt(c3__zuse, 
                           c3__prod,
                           u2nq(c3__gold, c3__term, '0', u2_nul)));
   c3_c* pot_c;

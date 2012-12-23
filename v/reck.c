@@ -233,33 +233,36 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     free(dyt_c);
   }
   {
-    u2_noun syd, zen, yen, xan, wol, ray, vay;
+    u2_noun syd, zen, yen, xan, wol, ray, dyl, vay;
 
     syd = u2k(rec_u->syd);
 
     {
-      // printf("ford:\n");
+      printf("ford:\n");
       zen = _reck_load_temp(rec_u, u2k(syd), kno_w, "reck/ford.hoon");
 
       rec_u->toy.sham = _reck_gate(rec_u, u2k(zen), "sham");
 
-      // printf("hyde:\n");
+      printf("hyde:\n");
       yen = _reck_load_temp(rec_u, zen, kno_w, "reck/hyde.hoon");
 
-      // printf("arvo:\n");
+      printf("arvo:\n");
       xan = _reck_load_temp(rec_u, yen, kno_w, "reck/arvo.hoon");
 
-      // printf("bede:\n");
+      printf("bede:\n");
       wol = _reck_load_temp(rec_u, xan, kno_w, "reck/bede.hoon");
 
-      // printf("cary:\n");
+      printf("cary:\n");
       ray = _reck_load_temp(rec_u, wol, kno_w, "reck/cary.hoon");
 
       rec_u->toy.duel = 
         _reck_gate(rec_u, u2k(ray), "|=([a=arch b=arch] (~(duel cy a) b))");
 
-      // printf("eyre:\n");
-      vay = _reck_load_temp(rec_u, ray, kno_w, "reck/eyre.hoon");
+      printf("dill:\n");
+      dyl = _reck_load_temp(rec_u, ray, kno_w, "reck/dill.hoon");
+
+      printf("eyre:\n");
+      vay = _reck_load_temp(rec_u, dyl, kno_w, "reck/eyre.hoon");
     }
     rec_u->rec = vay;
   }
