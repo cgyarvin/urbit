@@ -82,9 +82,9 @@
     /* u2_hcon: http connection.
     */
       typedef struct _u2_hcon {
+        struct ev_io     wax_u;             //  event handler state
         c3_w             coq_l;             //  connection number
         c3_w             seq_l;             //  next request number
-        struct ev_io     wax_u;             //  event handler state
         struct _u2_http* htp_u;             //  backlink to server 
         struct _u2_hcon* nex_u;             //  next in server's list
         struct _u2_hreq* ruc_u;             //  request under construction
@@ -95,9 +95,9 @@
     /* u2_http: http server.
     */
       typedef struct _u2_http {
+        struct ev_io     wax_u;             //  event handler state
         c3_w             sev_l;             //  server number - mostly unique
         c3_w             coq_l;             //  next connection number
-        struct ev_io     wax_u;             //  event handler state
         c3_w             por_w;             //  running port
         struct _u2_hcon* hon_u;             //  connection list
         struct _u2_http* nex_u;             //  next in list
@@ -345,7 +345,10 @@
       /* u2_reck_http_request(): hear http request on channel.
       */
         void
-        u2_reck_http_request(u2_reck* rec_u, u2_noun pox, u2_noun req);
+        u2_reck_http_request(u2_reck* rec_u, 
+                             u2_bean  sec,
+                             u2_noun  pox, 
+                             u2_noun  req);
 
       /* u2_reck_http_respond(): apply http response.
       */

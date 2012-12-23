@@ -24,6 +24,11 @@
   ++  hesh                                                  ::  cook htreq
     |=  [sec=? pol=tube req=httq]
     ^-  [p=(list move) q=_+>]
+    ~&  [%hesh sec pol]
+    ~&  [%hesh-req-med med.req]
+    ~&  [%hesh-req-url url.req]
+    ~&  [%hesh-req-hed hed.req]
+    ~&  [%hesh-req-bod bod.req]
     !!
   ::
   ++  leap

@@ -15,6 +15,7 @@
 #include <netinet/in.h>
 #include <ev.h>
 #include <errno.h>
+#include <libtecla.h>
 
 #include "../outside/jhttp/http_parser.h"   // Joyent HTTP
 #include "all.h"
@@ -213,7 +214,6 @@ _http_conn_dead(u2_hcon *hon_u)
         }
         else pre_u = pre_u->nex_u;
       }
-      c3_assert(!"zombie connection");
     }
   }
 
@@ -227,6 +227,7 @@ _http_conn_dead(u2_hcon *hon_u)
   free(hon_u);
 }
 
+#if 0
 /* _http_req_dump(): dump complete http request.
 */
 static void
@@ -255,6 +256,7 @@ _http_req_dump(u2_hreq* req_u)
     printf("body: %d bytes\r\n", bod_w);
   }
 }
+#endif
 
 /* _http_message_begin(): jhttp callback
 */
@@ -385,7 +387,7 @@ _http_message_complete(http_parser* par_u)
 
   c3_assert(req_u == hon_u->ruc_u);
   hon_u->ruc_u = 0;
-  _http_req_dump(req_u);
+  // _http_req_dump(req_u);
 
   // Queue request for response control.
   {
@@ -569,6 +571,7 @@ _http_conn_flush(u2_hcon* hon_u)
   }
 }
 
+extern GetLine *Tecla;
 /* _http_conn_cb(): libev callback for http connections.
 */
 static void
@@ -578,12 +581,14 @@ _http_conn_cb(struct ev_loop *lup_u, struct ev_io* wax_u, int revents)
   u2_bean inn    = (revents & EV_READ) ? u2_yes : u2_no;
   u2_bean out    = (revents & EV_WRITE) ? u2_yes : u2_no;
 
+  gl_normal_io(Tecla);
   if ( u2_yes == inn ) {
     _http_conn_suck(hon_u);
   }
   if ( u2_yes == out ) {
     _http_conn_flush(hon_u);
   }
+  gl_raw_io(Tecla);
 }
 
 /* _http_conn_new(): create and install new http connection with fd.
@@ -665,7 +670,7 @@ _http_list_cb(struct ev_loop *lup_u, struct ev_io* wax_u, int revents)
       perror("http: fcntl");
     }
     else {
-      fprintf(stderr, "http: new connection %d\r\n", fid_i);
+      // fprintf(stderr, "http: new connection %d\r\n", fid_i);
       _http_conn_new(htp_u, fid_i);
     }
   }
@@ -716,6 +721,7 @@ _http_list_to_heds(u2_noun lix)
   return hed_u;
 }
 
+#if 0
 /* _http_map_to_heds(): http header noun to C.
 */
 static u2_hhed*
@@ -731,6 +737,7 @@ _http_heds_to_map(u2_hhed* hed_u)
 {
   return u2_ckd_by_gas(u2_nul, _http_heds_to_list(hed_u));
 }
+#endif
 
 /* _http_bods_to_octs: translate body into octet-stream noun.
 */
@@ -817,8 +824,9 @@ _http_request_to_noun(u2_hreq* req_u)
     case u2_hmet_post: { med = c3__post; break; }
   } 
   url = u2_ci_string(req_u->url_c);
-  hed = _http_heds_to_map(req_u->hed_u);
-  bod = _http_bods_to_octs(req_u->bod_u);
+  hed = _http_heds_to_list(req_u->hed_u);
+  bod = req_u->bod_u ? u2nc(u2_nul, _http_bods_to_octs(req_u->bod_u))
+                     : u2_nul;
 
   return u2nq(med, url, hed, bod);
 }
@@ -878,8 +886,8 @@ _http_noun_to_response(u2_noun pox, u2_noun rep)
     rep_u->seq_l = (c3_l)_http_slay_mole(c3_s2('u','d'), u2k(r_pox));
 
     rep_u->sas_w = p_rep;
-    rep_u->hed_u = _http_map_to_heds(u2k(q_rep));
-    rep_u->bod_u = _http_octs_to_bod(u2k(r_rep));
+    rep_u->hed_u = _http_list_to_heds(u2k(q_rep));
+    rep_u->bod_u = (u2_nul == r_rep) ? 0 : _http_octs_to_bod(u2k(u2t(r_rep)));
 
     u2z(pox); u2z(rep); return rep_u;
   }
@@ -895,7 +903,7 @@ u2_ve_http_request(u2_hreq* req_u)
                                   req_u->hon_u->coq_l,
                                   req_u->seq_l); 
 
-  u2_reck_http_request(&u2_Host.rec_u[0], pox, req);
+  u2_reck_http_request(&u2_Host.rec_u[0], u2_yes, pox, req);
   return 0;
 }
 

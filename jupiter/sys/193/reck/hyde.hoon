@@ -164,12 +164,12 @@
           $:  med=?(%get %post)                         ::  method
               url=@t                                    ::  unparsed url
               hed=(list ,[p=@t q=@t])                   ::  headers
-              bod=octs                                  ::  body
+              bod=(unit octs)                           ::  body
           ==                                            ::
 ++  httr                                                ::  raw http response
           $:  sas=@ud                                   ::  status
               hed=(list ,[p=@t q=@t])                   ::  raw headers
-              bod=octs                                  ::  body
+              bod=(unit octs)                           ::  body
           ==                                            ::
 ++  math                                                ::  semiparsed headers
           $:  cuy=(unit mype)                           ::  content-type

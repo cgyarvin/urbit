@@ -238,30 +238,30 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     syd = u2k(rec_u->syd);
 
     {
-      printf("ford:\n");
+      // printf("ford:\n");
       zen = _reck_load_temp(rec_u, u2k(syd), kno_w, "reck/ford.hoon");
 
       rec_u->toy.sham = _reck_gate(rec_u, u2k(zen), "sham");
 
-      printf("hyde:\n");
+      // printf("hyde:\n");
       yen = _reck_load_temp(rec_u, zen, kno_w, "reck/hyde.hoon");
 
-      printf("arvo:\n");
+      // printf("arvo:\n");
       xan = _reck_load_temp(rec_u, yen, kno_w, "reck/arvo.hoon");
 
-      printf("bede:\n");
+      // printf("bede:\n");
       wol = _reck_load_temp(rec_u, xan, kno_w, "reck/bede.hoon");
 
-      printf("cary:\n");
+      // printf("cary:\n");
       ray = _reck_load_temp(rec_u, wol, kno_w, "reck/cary.hoon");
 
       rec_u->toy.duel = 
         _reck_gate(rec_u, u2k(ray), "|=([a=arch b=arch] (~(duel cy a) b))");
 
-      printf("dill:\n");
+      // printf("dill:\n");
       dyl = _reck_load_temp(rec_u, ray, kno_w, "reck/dill.hoon");
 
-      printf("eyre:\n");
+      // printf("eyre:\n");
       vay = _reck_load_temp(rec_u, dyl, kno_w, "reck/eyre.hoon");
     }
     rec_u->rec = vay;
@@ -408,12 +408,32 @@ u2_reck_launch(u2_reck* rec_u)
   _reck_launch_toy(rec_u, pax);
 }
 
-/* u2_reck_http_request(): hear http request on channel.
+/* u2_reck_http_request(): hear http request on channel (unprotected).
 */
 void
-u2_reck_http_request(u2_reck* rec_u, u2_noun pox, u2_noun req)
+u2_reck_http_request(u2_reck* rec_u, u2_bean sec, u2_noun pox, u2_noun req)
 {
-  u2z(pox); u2z(req);
+  u2_noun hoe;
+
+  u2_cm_trip();
+  if ( 0 != (hoe = u2_cm_trap()) ) {
+    u2_cm_purge();
+    u2_ve_grab(hoe, 0);
+
+    u2_ve_wine(u2k(u2h(hoe)));
+    u2_ve_sway(2, u2_ckb_flop(u2k(u2t(hoe))));
+    u2z(hoe);
+  } 
+  else {
+    _reck_poke(rec_u, u2nt(pox, (sec == u2_yes) ? c3__this : c3__thin, req));
+    u2_cm_done();
+  
+    u2_cm_purge();
+    if ( (u2_yes == u2_Flag_Garbage) || (u2_no == u2_wire_lan(u2_Wire)) ) {
+      u2_ve_grab(0);
+    }
+  }
+  u2_cm_chin();
 }
 
 /* u2_reck_http_respond(): apply http response.

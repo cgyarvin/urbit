@@ -509,6 +509,8 @@ u2_ve_mark_reck(u2_reck* rec_u)
   siz_w += u2_cm_mark_noun(rec_u->toy.sham);
   siz_w += u2_cm_mark_noun(rec_u->toy.slam);
   siz_w += u2_cm_mark_noun(rec_u->toy.slap);
+  siz_w += u2_cm_mark_noun(rec_u->toy.slay);
+  siz_w += u2_cm_mark_noun(rec_u->toy.scot);
   siz_w += u2_cm_mark_noun(rec_u->toy.slop);
 
   siz_w += u2_cm_mark_noun(rec_u->ken);

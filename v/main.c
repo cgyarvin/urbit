@@ -136,7 +136,7 @@ volatile enum { sig_none, sig_overflow, sig_interrupt } Sigcause;
 ev_io Stdin_watcher;
 struct ev_loop *Loop_u;
 
-static GetLine *Tecla;
+GetLine *Tecla;
 
 static c3_c*
 _get_line()
