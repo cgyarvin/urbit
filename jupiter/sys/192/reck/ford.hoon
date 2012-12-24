@@ -398,4 +398,23 @@
       ~|(%test-fail-sign !!)
     msg
   --  
+=>  
+  |%
+  ::
+  ::  Tier 5f, simple XML
+  ::
+  ++  xmle
+    |=  tep=tape
+    ?@  tep
+      ~
+    =+  pet=$(tep t.tep)
+    ?-  i.tep 
+      34  ['&' 'q' 'u' 'o' 't' pet]
+      38  ['&' 'a' 'm' 'p' pet]
+      39  ['&' 'a' 'p' 'o' 's' pet]
+      60  ['&' 'l' 't' pet]
+      62  ['&' 'g' 't' pet]
+      * [i.tep pet]
+    ==
+  --
 .

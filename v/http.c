@@ -192,7 +192,7 @@ _http_respond_request(u2_hreq* req_u,
 static void
 _http_conn_dead(u2_hcon *hon_u)
 {
-  fprintf(stderr, "http: %d: writing DEAD\r\n", hon_u->wax_u.fd);
+  // fprintf(stderr, "http: %d: writing DEAD\r\n", hon_u->wax_u.fd);
 
   ev_io_stop(u2_Host.lup_u, &hon_u->wax_u);
   close(hon_u->wax_u.fd);
@@ -504,7 +504,7 @@ _http_conn_suck(u2_hcon* hon_u)
       _http_conn_dead(hon_u);
     }
     if ( siz_i == 0 ) {
-      fprintf(stderr, "EOF on fd %d\r\n", hon_u->wax_u.fd);
+      // fprintf(stderr, "EOF on fd %d\r\n", hon_u->wax_u.fd);
       _http_conn_dead(hon_u);
     }
   }
@@ -964,11 +964,24 @@ u2_ve_http_start(c3_w por_w)
 
     add_k.sin_family = AF_INET;
     add_k.sin_addr.s_addr = INADDR_ANY;
-    add_k.sin_port = htons(por_w);
 
-    if ( bind(fid_i, (struct sockaddr *)&add_k, sizeof(add_k)) < 0 ) {
-      perror("http: bind");
-      return u2_no;
+    /*  Try ascending ports.
+    */
+    while ( 1 ) {
+      add_k.sin_port = htons(por_w);
+
+      if ( bind(fid_i, (struct sockaddr *)&add_k, sizeof(add_k)) < 0 ) {
+        if ( EADDRINUSE == errno ) {
+          por_w++; 
+          continue;
+        }
+        else {
+          perror("http: bind");
+          return u2_no;
+        }
+      }
+      fprintf(stderr, "http: live on %d\n", por_w);
+      break;
     }
     if ( listen(fid_i, 3) < 0 ) {
       perror("http: listen");

@@ -32,7 +32,7 @@
           lif=*dock                                     ::  processes
           lom=*(map path plea)                          ::  prompt by console
       ==
-  |=  [now=@da sky=_|+(* *(unit))] 
+  |=  [now=@da eny=@ sky=_|+(* *(unit))] 
   =+  wen=(scot %da now)
   =+  wer=`path`[hox wen %cx (weld cwd [hub ~])]
   =+  rew=(flop wer)
@@ -225,7 +225,10 @@
     q:(slam sot.vax (slop [[%atom %%] axe] [vas.typ vux]))
   ::
   ++  feck                                              ::  process mockage
-    |=  [ton=tone fob=_|+((list path) *beef) fut=_|+(* *beef)]
+    |=  :*  ton=tone 
+            fob=_|+((list path) *beef) 
+            fut=_|+(* *beef)
+        ==
     ^-  beef
     ?-  -.ton
       %0  (fut p.ton)
@@ -245,14 +248,23 @@
         %la  !!
         %up  :_  pir
              :+  [~ who] 
-               [[%zuse ~] [%bede (scot %ud p.lif) p.i.ask] hen]
+               [[%eyre ~] [%bede (scot %ud p.lif) p.i.ask] hen]
              [%prop p.q.i.ask]
     ::
         %wa
       !!
     ==
   ::
-  ++  feeb                                              ::  vase-bowl to boar
+  ++  fear                                              ::  feed a bear
+    |=  [fav=card ber=bear]
+    :_  q.ber
+    %-  ~(gas by *(map path goal))                            ::  XX weak
+    %+  turn
+      (~(tap by p.ber) ~)
+    |=  [a=path b=goal]
+    [a b]                   ::  XX not done 
+  ::
+  ++  feeb                                              ::  vase-bowl to beef
     |=  poc=*
     ^-  [p=(list card) q=(list slip) r=(unit boar)]
     :-  ((hard (list card)) +:(feat 2 poc))
@@ -261,15 +273,56 @@
     :-  ((hard (list slip)) +>-.doy)
     [~ %& ~ ~ (feat 7 doy)]
   ::
-  ++  feez                                              ::  process boar
-    |=  hen=tube 
+  ++  feed                                              ::  feed teh bears
+    |=  fav=card
+    ^-  _..^$
+    %=    ..^$
+        q.lif
+      %-  ~(gas by *(map ,@ud bear))                            ::  XX weak
+      %+  turn
+        (~(tap by q.lif) ~)
+      |=([a=@ud b=bear] [p=a q=(fear fav b)])
+    ==
+  ::
+  ++  feel                                              ::  query moves
+    |=  [hen=tube loz=(map path goal)]
+    |=  ask=(list slip)
+    ^-  (list move)
+    ?~  ask  
+      ~
+    =+  pir=$(ask t.ask)
+    ?-    -.q.i.ask
+        %ez  !!
+        %fu  !!
+        %la  !!
+        %up  :_  pir
+             :+  [~ who] 
+               [[%eyre ~] [%bede (scot %ud p.lif) p.i.ask] hen]
+             [%prop p.q.i.ask]
+        %wa  !!
+    ==
+  ::
+  ++  feet                                              ::  process boar
+    |=  [hen=tube loz=(map path goal)]
     |=  bof=beef
     ^-  [p=(list move) q=_..^^$]
-    :-  %+  weld
-          (turn p.bof |=(a=card [[~ who] hen a]))
-        (fedo hen ?~(r.bof ~ p.u.r.bof) q.bof)
-    ?~  r.bof  ..^^$
-    ..^^$(p.lif +(p.lif), q.lif (~(put by q.lif) p.lif u.r.bof))
+    =+  lop=(turn p.bof |=(a=card [[~ who] hen a])) 
+    ?~  r.bof  [lop ..^^$]
+    =+  fey=((feud hen loz) q.bof u.r.bof)
+    [(weld lop p.fey) q.fey]
+  ::
+  ++  feud                                              ::  bear must serve
+    |=  [hen=tube loz=(map path goal)]
+    |=  [ask=(list slip) bor=boar]
+    ^-  [p=(list move) q=_..^^$]
+    :-  ((feel hen loz) ask)
+    %=    ..^^$
+        lif
+      :-  +(p.lif) 
+      %+  ~(put by q.lif)
+        p.lif
+      [(~(gas by *(map path goal)) ask) bor]
+    ==
   ::
   ++  felp                                              ::  apply lark
     |=  [hen=tube kal=lark]
@@ -278,8 +331,8 @@
     =+  hak=|=(a=* `beef`[[[%talk ((hard tank) a)] ~] ~ ~])
     ?-  -.kal
       %cd  [~ ..^$(cwd p.kal)]
-      %eh  ((feez hen) (feck (mung [echo p.kal] sky) wan hak))
-      %go  ((feez hen) (feck (mung [fapp [p.kal q.kal r.kal]] sky) wan feeb))
+      %eh  ((feet hen ~) (feck (mung [echo p.kal] sky) wan hak))
+      %go  ((feet hen ~) (feck (mung [fapp [p.kal q.kal r.kal]] sky) wan feeb))
       %no  !!
     ==
   ::
@@ -303,13 +356,14 @@
       (flam hen fet)
     =+  yex=(slay i.pex)
     ?>  ?=([~ %% %ud @] yex)
-    =+  bog=`boar`(need (~(get by q.lif) q.p.u.yex))
+    =+  byr=(need (~(get by q.lif) q.p.u.yex))
+    =.  q.lif  (~(del by q.lif) q.p.u.yex)
     =+  nob=`note`[%up (rap 3 fet)]
-    ?>  ?=(& -.bog)
-    %-  (feez hen)
+    ?>  ?=(& -.q.byr)
+    %-  (feet hen p.byr)
     %^    feck
-        (mung [fane [t.pex nob r.bog]] sky)
-      |=(a=(list path) [~ ~ ~ %& a (~(put to q.bog) t.pex nob) r.bog])
+        (mung [fane [t.pex nob r.q.byr]] sky)
+      |=(a=(list path) [~ ~ ~ %& a (~(put to q.q.byr) t.pex nob) r.q.byr])
     feeb
   ::
   ++  leap                                              ::  dispatch event

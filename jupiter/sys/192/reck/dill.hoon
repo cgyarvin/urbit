@@ -17,7 +17,7 @@
     ^-  moth
     :-  `meth`%get
     ^-  math
-    :+  `(unit mype)`~
+    :+  `(unit mime)`~
       `(list ,[p=@t q=@t])`~
     `(map ,@t ,@t)`~
   ::

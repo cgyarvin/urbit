@@ -17,6 +17,7 @@
               air=(map flap ,@ud)                       ::  unacked by content
               sea=shed                                  ::  packet pump
           ==                                            ::
+++  bear  ,[p=(map path goal) q=boar]                   ::  process with slips
 ++  beef  ,[p=(list card) q=(list slip) r=(unit boar)]  ::  raw product
 ++  bird                                                ::  packet in flight
           $:  gom=soap                                  ::  message identity
@@ -76,7 +77,9 @@
               [%mine p=@ud q=@t]                        ::  query matched line
               [%pace p=@ud]                             ::  compute background
               [%pour p=path q=dram]                     ::  write directory
-              [%prop p=prod]                            ::  prompt
+              [%prof ~]                                 ::  cancel prompt
+              [%pron p=prod]                            ::  change prompt
+              [%prop p=prod]                            ::  add prompt
               [%pump ~]                                 ::  produce packets
               [%resp p=httr]                            ::  http response
               [%save p=path q=@]                        ::  write atomic file
@@ -122,7 +125,7 @@
 ++  dirt  ,[p=@da q=(map ,@ta arch)]                    ::  mtime tree
 ++  dock  $:                                            ::  process state
               p=@ud                                     ::  process counter
-              q=(map ,@ud boar)                         ::  process table
+              q=(map ,@ud bear)                         ::  process table
           ==                                            ::
 ++  door                                                ::  foreign contact
           $:  wod=road                                  ::  connection to
@@ -172,14 +175,14 @@
               bod=(unit octs)                           ::  body
           ==                                            ::
 ++  math                                                ::  semiparsed headers
-          $:  cuy=(unit mype)                           ::  content-type
+          $:  cuy=(unit mime)                           ::  content-type
               cuz=(list ,[p=@t q=@t])                   ::  cookies
               raz=(map ,@t ,@t)                         ::  other headers
           ==                                            ::
 ++  meth                                                ::  http method
           $|  %get                                      ::  the classic get
-          $%  [%post p=(map ,@ta ,@t)]                  ::  stylish post
-              [%put p=mime]                             ::  gentleman's put
+          $%  [%pot p=(map ,@ta ,@t)]                   ::  stylish post
+              [%put p=octs]                             ::  gentleman's put
           ==                                            ::
 ++  moth  ,[p=meth q=math]                              ::  http operation
 ++  lark                                                ::  parsed command
@@ -197,7 +200,7 @@
           ==                                            ::
 ++  link  ,[p=code q=sock]                              ::  connection
 ++  logo  ,@uvI                                         ::  session identity
-++  love  (unit ,[p=@ud q=mime])                        ::  cooked response
+++  love  ,[p=@ud q=math r=(unit octs)]                 ::  cooked response
 ++  mace  (list ,[p=mark q=ring])                       ::  private secrets
 ++  mark  ,@ud                                          ::  regime number
 ++  meal                                                ::  payload
@@ -211,9 +214,8 @@
           $%  [& p=@da q=@uvI]                          ::  mtime hash
               [| p=@da q=(list ,@ta)]                   ::  mtime dir
           ==                                            ::
-++  mime  ,[p=mype q=@ud r=@]                           ::  mime object
 ++  move  ,[p=(unit lord) q=tube r=card]                ::  internal event
-++  mype  (list ,@ta)                                   ::  mime type
+++  mime  (list ,@ta)                                   ::  mime type
 ++  name  ,[p=@t q=(unit ,[p=? q=@t]) r=@t]             ::  first mid/nick last
 ++  nope  ^~(^-(arch [%| @ ~]))                         ::  empty node
 ++  note                                                ::  app response
@@ -304,4 +306,7 @@
 ++  whom  ,[p=@ud q=@t r=@tas s=name]                   ::  yob/state/nation/me
 ++  will  (list deed)                                   ::  certificate
 ++  worm  ,*                                            ::  vase of task
+++  marx  $|(@tas [@tas a=(map ,@tas tape)])            ::  XML tag
+++  manx  ,[t=marx c=(list mane)]                       ::  XML node
+++  mane  $%([& n=marx] [| e=tape])                     ::  XML element
 --

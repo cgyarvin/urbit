@@ -68,7 +68,11 @@
       =+  ^=  beg  ^+  *berg
           =+  beg=(~(get by maw.bede.sys) u.p.mov)
           ?^(beg u.beg (berg u.p.mov))
-      =+  yub=(leap:(beg now |=(a=* (beck u.p.mov (path a)))) pex q.mov r.mov)
+      =+  ^=    yub
+          %^    leap:(beg now (shax now) |=(a=* (beck u.p.mov (path a))))
+              pex 
+            q.mov 
+          r.mov
       :-  p.yub
       sys(maw.bede (~(put by maw.bede.sys) u.p.mov q.yub))
     ::
@@ -166,7 +170,7 @@
     ?>  ?=(^ q.mov)           ::  at least one path
     ?>  ?=(^ i.q.mov)         ::  at least prefix
     =+  pex=t.i.q.mov
-    ?+    i.i.q.mov  !!
+    ?+    i.i.q.mov  ~&([%howl-no i.i.q.mov] !!)
         %arvo
       =^  fez  sys
         (arv:si pex [p.mov t.q.mov r.mov])
@@ -195,10 +199,6 @@
       =+  ^=  lov
           |=  a=lord 
           ^$(mor t.mor, rev.eyre.sys (~(put by rev.eyre.sys) t.q.mov a))
-      ?.  ?|  ?=(^ p.mov) 
-              ?=(?(%cash %crap %edit %hear %logn %make %talk %warn) -.r.mov)
-          ==
-        ~&([%eyre-illegal mov] !!)
       ?-    -.r.mov
           %bbye  !!
           %boot  !!
@@ -251,7 +251,22 @@
           %mine  (rer %bede)
           %pace  !!
           %pour  (giv)
-          %prop 
+          %prof                                         ::  disable prompt
+        ?>  ?=(^ p.mov)
+        ?>  ?=(^ t.q.mov)
+        =+  veh=(~(get by sak.eyre.sys) u.p.mov)
+        %=    $
+            mor  t.mor
+            sak.eyre.sys 
+          ?~  veh  sak.eyre.sys
+          %+  ~(put by sak.eyre.sys)
+            u.p.mov
+          (skip u.veh |=([p=tube q=prod] =(p t.q.mov)))
+        ==
+      ::
+          %pron  !!
+      ::
+          %prop
         ?>  ?=(^ p.mov)
         ?>  ?=(^ t.q.mov)
         =+  veh=(~(get by sak.eyre.sys) u.p.mov)
@@ -268,8 +283,8 @@
           %save  (giv)
           %send  (giv)
           %ship  (rer %cary)
-          %thin  !!
-          %this  !!
+          %thin  (rer %dill)
+          %this  (rer %dill)
           %sync  !!
           %talk  (giv) 
           %text  (giv)

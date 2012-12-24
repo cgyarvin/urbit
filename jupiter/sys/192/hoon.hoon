@@ -1333,7 +1333,6 @@
             ==
   ++  wall  (list tape)
   ++  wonk  |*(veq=edge ?@(q.veq !! p.u.q.veq))
-  ++  xmln  ,[t=$|(disc [disc a=(list ,[n=disc v=tape])]) c=(list xmln)]
   --
 =>
   ::::
@@ -2931,22 +2930,6 @@
     =+  p=(mix (dis e f) (dis (inv e) g))                              ::  ch
     =+  q=:(sum h o p (wac j kbx) (wac j wox))                         ::  t1
     $(j +(j), a (sum q n), b a, c b, d c, e (sum d q), f e, g f, h g)
-  ::
-  ::  Tier 5f, simple XML
-  ::
-  ++  xmle
-    |=  tep=tape
-    ?@  tep
-      ~
-    =+  pet=$(tep t.tep)
-    ?-  i.tep 
-      34  ['&' 'q' 'u' 'o' 't' pet]
-      38  ['&' 'a' 'm' 'p' pet]
-      39  ['&' 'a' 'p' 'o' 's' pet]
-      60  ['&' 'l' 't' pet]
-      62  ['&' 'g' 't' pet]
-      * [i.tep pet]
-    ==
   ::
   ::  Tier 5g, nock in nock
   ::
