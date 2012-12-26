@@ -145,7 +145,7 @@ _walk_in(u2_reck* rec_u, const c3_c* dir_c, c3_w len_w)
       c3_w   lef_w = len_w + 1 + strlen(fil_c);
       c3_c*  pat_c = malloc(lef_w + 1);
       struct stat buf_b;
-   
+  
       strcpy(pat_c, dir_c);
       pat_c[len_w] = '/';
       strcpy(pat_c + len_w + 1, fil_c);
@@ -189,8 +189,8 @@ _walk_in(u2_reck* rec_u, const c3_c* dir_c, c3_w len_w)
           }
           else u2z(tim);
         }
+        free(pat_c);
       }
-      free(pat_c);
     }
   }
   return map;

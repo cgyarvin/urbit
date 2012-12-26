@@ -293,6 +293,15 @@ _reck_kick(u2_reck* rec_u, u2_noun ovo)
       u2_ve_tank(0, u2k(p_pay));
     } break;
 
+    case c3__save: u2_cx_cell(u2t(pay), &p_pay, &q_pay);
+    {
+      u2_noun pax = u2nc(c3__put, u2k(p_pay));
+      c3_c*   pax_c = u2_path(u2_yes, pax);
+ 
+      u2_walk_save(pax_c, 0, u2k(q_pay));
+      free(pax_c);
+    } break;
+ 
     case c3__warn: u2_cx_cell(u2t(pay), &p_pay, &q_pay);
     {
       switch ( p_pay ) {

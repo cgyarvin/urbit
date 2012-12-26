@@ -1,5 +1,5 @@
 !:
-::          %vay, main loop.   This file is in the public domain.
+::          %eyre, main loop.   This file is in the public domain.
 ::
 =<  |%
     ++  peek  

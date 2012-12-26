@@ -7,12 +7,11 @@
           tyv=(map logo cred)                           ::  credentials
       ==
   |_  [now=@da eny=@]
-  ++  gump                                                  ::  cook htreq
+  ++  gump                                              ::  cook htreq
     |=  [sec=? pol=tube req=httq]
-    =+  yan=(shaf %http eny)  ::  XX real session logic pls
     ^-  hate
     :^    `purl`!!
-        `cred`[`logo`yan ~]
+        `cred`[`logo`@ ~]
       `brow`[~2000.1.1 %unknown]
     ^-  moth
     :-  `meth`%get

@@ -236,25 +236,6 @@
       %2  [[[%crap p.ton] ~] ~ ~]
     ==
   ::
-  ++  fedo                                              ::  slip requests
-    |=  [hen=tube gon=(list path) ask=(list slip)]
-    |-  ^-  (list move)
-    ?~  ask  
-      ~
-    =+  pir=$(ask t.ask)
-    ?-    -.q.i.ask
-        %ez  !!
-        %fu  !!
-        %la  !!
-        %up  :_  pir
-             :+  [~ who] 
-               [[%eyre ~] [%bede (scot %ud p.lif) p.i.ask] hen]
-             [%prop p.q.i.ask]
-    ::
-        %wa
-      !!
-    ==
-  ::
   ++  fear                                              ::  feed a bear
     |=  [fav=card ber=bear]
     :_  q.ber

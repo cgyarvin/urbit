@@ -3113,6 +3113,9 @@
       [%bcts p=?([%atom odor] %noun %cell %bean %null)]
       [%bcwt p=gene q=(list gene)]
     ::
+      [%hxgl p=(list gene)]
+      [%hxgr p=(list gene)]
+    ::
       [%ktbr p=gene]
       [%ktls p=gene q=gene]
       [%ktdt p=gene q=gene]
@@ -3597,6 +3600,9 @@
       :+  %cnts
         (weld p.gen `wing`[[~ 2] ~])
       (turn r.gen |=([p=gene q=gene] [p [%ktdt [~ 10] [%tsgr [~ 3] q]]]))
+    ::
+        [%hxgl *]  [%cnhp [%cnbc %pave] [%zpgr p.gen] ~]
+        [%hxgr *]  [%cnhp [%cnbc %sell] [%zpgr p.gen] ~]
     ::
         [%kthp *]  [%ktls ~(bunt al bore(gen p.gen)) q.gen]
         [%sgbr *]  [%sggr [%yelp p.gen] q.gen]
@@ -6085,6 +6091,10 @@
         ==
       :-  '/'
         road
+      :-  '<'
+        (ifix [gal gar] (stag %hxgl (most ace wide)))
+      :-  '>'
+        (ifix [gar gal] (stag %hxgr (most ace wide)))
     ==
   ++  soil
     %+  ifix
@@ -6163,6 +6173,13 @@
                   ['=' (rune tis %dtts expb)]
                   ['?' (rune wut %dtwt expa)]
                   ['^' (rune ket %dtkt expn)]
+                ==
+              ==
+            :-  '#'
+              ;~  pfix  hax
+                %-  stew  :~
+                  ['<' (rune gal %hxgl exps)]
+                  ['>' (rune gar %hxgr exps)]
                 ==
               ==
             :-  '^'
