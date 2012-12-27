@@ -143,7 +143,7 @@ GetLine *Tecla;
 static c3_c*
 _get_line()
 {
-  u2_noun pot = u2_reck_peek
+  u2_noun pot = u2_reck_prick
                     (&u2_Host.rec_u[0], 
                      u2nt(c3__eyre, 
                           c3__prod,
@@ -151,6 +151,10 @@ _get_line()
   c3_c* pot_c;
   c3_c* out_c;
 
+  if ( u2_none == pot ) {
+    gl_normal_io(Tecla);
+    exit(1);
+  }
   if ( u2_nul == pot ) {
     pot_c = strdup(": ");
   } else {

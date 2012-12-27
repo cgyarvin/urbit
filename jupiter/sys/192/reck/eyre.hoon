@@ -142,10 +142,11 @@
         =+  yup=(~(get by rev.eyre.sys) `tube`[t.hap ~])
         ?~  yup
           [~ & '# ']
-        =+  zib=(~(get by sak.eyre.sys) u.yup)
-        ?:  |(?=(~ zib) ?=(~ u.zib))
-          [~ [& (rap 3 "{~(rend co ~ %p u.yup)}> ")]]
-        [~ p.q.i.u.zib (rap 3 q.q.i.u.zib)]
+        =+  byg=(~(get by maw.bede.sys) u.yup)
+        ?~  byg
+          [~ & (cat 3 ~(rent co ~ %p u.yup) '> ')]
+        =+  pro=prot:(u.byg now (shax now) |=(a=* (beck u.yup (path a))))
+        [~ p.pro (rap 3 q.pro)]
       ==
     ==
   ::
@@ -251,33 +252,6 @@
           %mine  (rer %bede)
           %pace  !!
           %pour  (giv)
-          %prof                                         ::  disable prompt
-        ?>  ?=(^ p.mov)
-        ?>  ?=(^ t.q.mov)
-        =+  veh=(~(get by sak.eyre.sys) u.p.mov)
-        %=    $
-            mor  t.mor
-            sak.eyre.sys 
-          ?~  veh  sak.eyre.sys
-          %+  ~(put by sak.eyre.sys)
-            u.p.mov
-          (skip u.veh |=([p=tube q=prod] =(p t.q.mov)))
-        ==
-      ::
-          %pron  !!
-      ::
-          %prop
-        ?>  ?=(^ p.mov)
-        ?>  ?=(^ t.q.mov)
-        =+  veh=(~(get by sak.eyre.sys) u.p.mov)
-        %=    $
-            mor  t.mor
-            sak.eyre.sys 
-          %+  ~(put by sak.eyre.sys)
-            u.p.mov
-          [[t.q.mov p.r.mov] ?~(veh ~ u.veh)]
-        ==
-      ::
           %pump  !!
           %resp  !!
           %save  (giv)

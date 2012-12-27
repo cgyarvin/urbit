@@ -194,7 +194,7 @@ _reck_time_bump(u2_reck* rec_u)
   rec_u->now = u2_cka_add(rec_u->now, u2_ci_chubs(1, &bum_d));
 }
 
-/* u2_reck_peek(): query the reck namespace.
+/* u2_reck_peek(): query the reck namespace (protected).
 */
 u2_noun
 u2_reck_peek(u2_reck* rec_u, u2_noun hap)
@@ -465,4 +465,34 @@ u2_reck_line(u2_reck* rec_u, u2_noun lin)
   _reck_time_set(rec_u);
 
   _reck_poke(rec_u, u2nc(pax, u2nc(c3__line, lin)));
+}
+
+/* u2_reck_prick(): query the reck namespace (unprotected).
+*/
+u2_noun
+u2_reck_prick(u2_reck* rec_u, u2_noun hap)
+{
+  u2_noun hoe;
+  u2_noun que;
+
+  if ( 0 != (hoe = u2_cm_trap()) ) {
+    u2_cm_purge();
+    u2_ve_grab(hoe, 0);
+
+    u2_ve_wine(u2k(u2h(hoe)));
+    u2_ve_sway(2, u2_ckb_flop(u2k(u2t(hoe))));
+    u2z(hoe);
+
+    return u2_none;
+  } 
+  else {
+    que = u2_reck_peek(rec_u, hap);
+    u2_cm_done();
+  
+    u2_cm_purge();
+    if ( (u2_yes == u2_Flag_Garbage) || (u2_no == u2_wire_lan(u2_Wire)) ) {
+      u2_ve_grab(0);
+    }
+  }
+  return que;
 }

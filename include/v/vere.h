@@ -370,6 +370,11 @@
         u2_noun
         u2_reck_peek(u2_reck* rec_u, u2_noun hap);
 
+      /* u2_reck_prick(): query the reck namespace (unprotected).
+      */
+        u2_noun
+        u2_reck_prick(u2_reck* rec_u, u2_noun hap);
+
       /* u2_reck_sync(): poll and apply sync events (protected).
       */
         void

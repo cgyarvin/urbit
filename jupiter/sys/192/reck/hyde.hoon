@@ -77,9 +77,6 @@
               [%mine p=@ud q=@t]                        ::  query matched line
               [%pace p=@ud]                             ::  compute background
               [%pour p=path q=dram]                     ::  write directory
-              [%prof ~]                                 ::  cancel prompt
-              [%pron p=prod]                            ::  change prompt
-              [%prop p=prod]                            ::  add prompt
               [%pump ~]                                 ::  produce packets
               [%resp p=httr]                            ::  http response
               [%save p=path q=@]                        ::  write atomic file
