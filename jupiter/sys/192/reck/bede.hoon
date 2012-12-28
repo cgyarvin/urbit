@@ -7,7 +7,7 @@
   =+  nub=`vase`!>(+>)                                  ::  system + libraries
   =+  :*  ^=  vax                                       ::  chestnut vases
             :*  sot=(slap nub (vice 'slot'))            ::
-            ==
+            ==                                          ::
           ^=  gen                                       ::  chestnut genes
             :*  yom=(vice '*(set ,@tas)')               ::
                 zim=(vice '*(map ,@tas ,*)')            ::
@@ -39,6 +39,82 @@
   =+  rew=(flop wer)
   =+  vez=(vang & wer)
   |%
+  ++  do                                                ::  userspace code
+    |%
+    ++  dive                                            ::  opts to gene
+      |=  cux=cone
+      ^-  gene
+      :-  :+  %cncl
+            [%cnsg [%gas ~] [%cnbc %in] yom.gen]
+          [%clsg (turn p.cux |=(a=@ [%dtpt %tas a]))]
+      :+  %cncl
+        [%cnsg [%gas ~] [%cnbc %by] zim.gen]
+      :-  %clsg
+      %+  turn  q.cux
+      |=([p=@tas q=crow] [[%dtpt %tas p] (doul q)])
+    ::
+    ++  doul                                            ::  crow to gene
+      |=  woc=crow
+      ^-  gene
+      ?-    -.woc
+          %c
+        [%cnhp $(woc p.woc) $(woc [%p q.woc]) ~]
+      ::
+          %f
+        %+  scan  (trip ((hard ,@) .^(p.woc)))
+        (full (ifix [gay gay] tall:vez))
+      ::
+          %g
+        |-  ^-  gene
+        ?~  p.woc
+          q.woc
+        [%tsgr ^$(woc [%f i.p.woc]) $(p.woc t.p.woc)]
+      ::
+          %l
+        |-  ^-  gene
+        ?~  p.woc
+          [%bcts %null]
+        [^$(woc i.p.woc) $(p.woc t.p.woc)]
+      ::
+          %p
+        |-  ^-  gene
+        ?~  p.woc  !!
+        ?~  t.p.woc
+          ^$(woc i.p.woc)
+        [^$(woc i.p.woc) $(p.woc t.p.woc)]
+      ==
+    ::
+    ++  echo                                            ::  echo argument
+      |=  [yun=vase woc=crow]
+      ^-  tank
+      =+  vax=(slap yun (doul woc))
+      (dish:ut ~(dole ut p.vax) q.vax) 
+    ::
+    ++  fane                                            ::  deliver note 
+      |=  [pux=path nog=note tas=vase]
+      ^-  vase
+      %+  slam  tas
+      ;:  slop
+        [[%atom %da] now] 
+        [pah.typ pux] 
+        [noq.typ nog]
+      ==
+    ::
+    ++  fapp                                            ::  launch app
+      |=  [yun=vase pax=path cux=cone arg=crow]
+      ^-  vase
+      %+  slam
+        %+  slam
+          %+  slam
+            (slap nub (doul [%f pax]))
+          ;:  slop 
+            [[%atom %p] who] 
+            [[%atom %da] now] 
+            [pah.typ pax]
+          ==
+        (slap yun (dive cux))
+      (slap yun (doul arg))
+    --
   ++  lo                                                ::  command parsers
     |%
     ++  htap 
@@ -156,192 +232,123 @@
         (stag %g (stag ~ wide:vez))
       ==
     --
-  ::
-  ++  doul                                              ::  crow to gene (user)
-    |=  woc=crow
-    ^-  gene
-    ?-    -.woc
-        %c
-      [%cnhp $(woc p.woc) $(woc [%p q.woc]) ~]
-    ::
-        %f
-      =+  txt=((hard ,@) .^(p.woc))
-      (scan (trip txt) (full (ifix [gay gay] tall:vez)))
-    ::
-        %g
-      |-  ^-  gene
-      ?~  p.woc
-        q.woc
-      [%tsgr ^$(woc [%f i.p.woc]) $(p.woc t.p.woc)]
-    ::
-        %l
-      |-  ^-  gene
-      ?~  p.woc
-        [%bcts %null]
-      [^$(woc i.p.woc) $(p.woc t.p.woc)]
-    ::
-        %p
-      |-  ^-  gene
-      ?~  p.woc  !!
-      ?~  t.p.woc
-        ^$(woc i.p.woc)
-      [^$(woc i.p.woc) $(p.woc t.p.woc)]
-    ==
-  ::
-  ++  dive                                              ::  opts to gene (user)
-    |=  cux=cone
-    ^-  gene
-    :-  :+  %cncl
-          `gene`[%cnsg `wing`[%gas ~] `gene`[%cnbc %in] `gene`yom.gen]
-        [%clsg (turn p.cux |=(a=@ [%dtpt %tas a]))]
-    :+  %cncl
-      [%cnsg [%gas ~] [%cnbc %by] zim.gen]
-    [%clsg (turn q.cux |=([p=@tas q=crow] [[%dtpt %tas p] (doul q)]))]
-  ::
-  ++  echo                                              ::  echo (user)
-    |=  woc=crow
-    ^-  tank
-    =+  vax=(slap nub (doul woc))
-    (dish:ut ~(dole ut p.vax) q.vax) 
-  ::
-  ++  fane                                              ::  deliver note (user)
-    |=  [pux=path nog=note tas=vase]
-    ^-  vase
-    =+  gym=:(slop [[%atom %da] now] [pah.typ pux] [noq.typ nog])
-    (slam tas gym)
-  ::
-  ++  fapp                                              ::  launch app (user)
-    |=  [pax=path cux=cone arg=crow]
-    ^-  vase
-    =+  deh=(doul [%f pax])
-    =+  oun=(slap nub deh)    ::  XX condense
-    =+  tib=(slap nub (doul arg))
-    =+  yem=:(slop [[%atom %p] who] [[%atom %da] now] [pah.typ pax])
-    =+  wuy=(slam oun yem)
-    =+  gyd=(slam wuy (slap nub (dive cux)))
-    (slam gyd tib)
-  ::
-  ++  fear                                              ::  feed a bear
-    |=  [pux=path fav=card ber=bear]
-    ^-  bear
-    :_  q.ber
-    =+  fug=(~(get by p.ber) pux)
-    ?~  fug  p.ber
-    ?+    -.u.fug  p.ber
-        %up
-      (~(del by p.ber) pux)
-    ==
-  ::
-  ++  feat                                              ::  slice weak vase
-    |=  [axe=axis vux=*]  ^-  *
-    q:(slam sot.vax (slop [[%atom %%] axe] [vas.typ vux]))
-  ::
-  ++  feck                                              ::  process mockage
-    |=  :*  ton=tone 
-            fob=_|+((list path) *beef) 
-            fut=_|+(* *beef)
-        ==
-    ^-  beef
-    ?-  -.ton
-      %0  (fut p.ton)
-      %1  (fob ((list path) p.ton))
-      %2  [[[%crap p.ton] ~] ~ ~]
-    ==
-  ::
-  ++  feeb                                              ::  vase-bowl to beef
-    |=  poc=*
-    ^-  [p=(list card) q=(list slip) r=(unit boar)]
-    :-  ((hard (list card)) +:(feat 2 poc))
-    =+  doy=(feat 3 poc)
-    ?~  +.doy  [~ ~]
-    :-  ((hard (list slip)) +>-.doy)
-    [~ %& ~ ~ (feat 7 doy)]
-  ::
-  ++  feet                                              ::  process boar
-    |=  [hen=tube loz=(map path goal)]
-    |=  bof=beef
-    ^-  [p=(list move) q=_..^^$]
-    =+  lop=(turn p.bof |=(a=card [[~ who] hen a])) 
-    ?~  r.bof  [lop ..^^$]
-    =+  fey=((feud hen loz) q.bof u.r.bof)
-    [(weld lop p.fey) q.fey]
-  ::
-  ++  feud                                              ::  process slips
-    |=  [hen=tube loz=(map path goal)]
-    |=  [ask=(list slip) bor=boar]
-    ^-  [p=(list move) q=_..^^$]
-    =+  kam=(~(gas by *(map path goal)) ask)
-    =+  zal=(~(tap by loz) ~)
-    =+  hix=p.lif
-    =:  p.lif  +(p.lif)
-        q.lif  (~(put by q.lif) hix [kam bor])
-        ==
-    =^  zin  ..^^$
-        |-  ^-  [(list move) _..^^^$]
-        ?~  ask
-          [~ ..^^^$]
-        =^  niz  ..^^^$
-          $(ask t.ask)
-        ?+    -.q.i.ask  [niz ..^^^$]
-            %up
-          :-  niz
-          ?:  (~(has by loz) p.i.ask)  ..^^^$
-          ..^^^$(pak [[hix p.i.ask] pak])
-        ==
-    |-  ^-  [p=(list move) q=_..^^^$]
-    ?~  zal
-      [zin ..^^^$]
-    =^  lus  ..^^^$
-      $(zal t.zal)
-    ?:  (~(has by kam) p.i.zal)
-      [lus ..^^^$] 
-    :-  lus
-    ?+    -.q.i.zal  ..^^^$
-        %up
-      ..^^^$(pak (skip pak |=([a=@ud b=path] =(b `path`p.i.zal))))
-    ==
-  ::
-  ++  felp                                              ::  apply lark
-    |=  [hen=tube kal=lark]
-    ^-  [p=(list move) q=_..^$]
-    =+  wan=|=(a=(list path) `beef`[~ ~ ~ %| a kal])
-    =+  hak=|=(a=* `beef`[[[%talk ((hard tank) a)] ~] ~ ~])
-    ?-  -.kal
-      %cd  [~ ..^$(cwd p.kal)]
-      %eh  ((feet hen ~) (feck (mung [echo p.kal] sky) wan hak))
-      %go  ((feet hen ~) (feck (mung [fapp [p.kal q.kal r.kal]] sky) wan feeb))
-      %no  !!
-    ==
-  ::
-  ++  flam                                              ::  line default
-    |=  [hen=tube fet=tape]
-    ^-  [p=(list move) q=_..^$]
-    =>  .(p.hit +(p.hit), q.hit [fet q.hit])
-    =+  zif=((full (ifix [gay gay] kral:lo)) [1 1] fet)
-    ?~  q.zif
-      :_  ..^$
-      =+  duf=[p=~(rend co ~ %ud p.p.zif) q=~(rend co ~ %ud q.p.zif)]
-      :~  :+  [~ who]  hen 
-          [%warn %2 %leaf "<syntax error at [{p.duf} {q.duf}]>"]
+  ++  ma                                                ::  process context
+    |_  [hen=tube loz=(map path goal)]
+    ++  fear                                            ::  update query state
+      |=  [pux=path fav=card]
+      ^-  _+>
+      =+  fug=(~(get by loz) pux)
+      ?~  fug  +>.$
+      ?+    -.u.fug  +>.$
+          %up
+        +>.$(loz (~(del by loz) pux))
       ==
-    (felp hen p.u.q.zif)
-  ::
-  ++  flim                                              ::  line to shell
-    |=  [pex=path hen=tube fet=tape]
-    ^-  [p=(list move) q=_..^$]
-    ?~  pex
-      (flam hen fet)
-    =+  yex=(slay i.pex)
-    ?>  ?=([~ %% %ud @] yex)
-    =+  byr=(need (~(get by q.lif) q.p.u.yex))
-    =.  q.lif  (~(del by q.lif) q.p.u.yex)
-    =+  nob=`note`[%up (rap 3 fet)]
-    ?>  ?=(& -.q.byr)
-    %-  (feet hen p.byr)
-    %^    feck
-        (mung [fane [t.pex nob r.q.byr]] sky)
-      |=(a=(list path) [~ ~ ~ %& a (~(put to q.q.byr) t.pex nob) r.q.byr])
-    feeb
+    ::
+    ++  feat                                            ::  slice weak vase
+      |=  [axe=axis vux=*]  ^-  *
+      =<  q
+      %+  slam  sot.vax
+      (slop [[%atom %%] axe] [vas.typ vux])
+    ::
+    ++  feck                                            ::  process mockage
+      |=  :*  ton=tone 
+              fob=_|+((list path) *beef) 
+              fut=_|+(* *beef)
+          ==
+      ^-  beef
+      ?-  -.ton
+        %0  (fut p.ton)
+        %1  (fob ((list path) p.ton))
+        %2  [[[%crap p.ton] ~] ~ ~]
+      ==
+    ::
+    ++  feeb                                            ::  soft bowl to beef
+      |=  poc=*
+      ^-  [p=(list card) q=(list slip) r=(unit boar)]
+      :-  ((hard (list card)) +:(feat 2 poc))
+      =+  doy=(feat 3 poc)
+      ?~  +.doy  [~ ~]
+      :-  ((hard (list slip)) +>-.doy)
+      [~ %& ~ ~ (feat 7 doy)]
+    ::
+    ++  feet                                            ::  apply result
+      |=  bof=beef
+      ^-  [p=(list move) q=_..^$]
+      =+  lop=(turn p.bof |=(a=card [[~ who] hen a])) 
+      ?~  r.bof  [lop ..^$]
+      =+  fey=(feud q.bof u.r.bof)
+      [(weld lop p.fey) q.fey]
+    ::
+    ++  felp                                            ::  apply command
+      |=  kal=lark
+      ^-  [p=(list move) q=_..^$]
+      =+  wan=|=(a=(list path) [~ ~ ~ %| a kal])
+      =+  hak=|=(a=* [[[%talk ((hard tank) a)] ~] ~ ~])
+      ?-  -.kal
+        %cd  [~ ..^$(cwd p.kal)]
+        %eh  (feet (feck (mung [echo:do lube +.kal] sky) wan hak))
+        %go  (feet (feck (mung [fapp:do lube +.kal] sky) wan feeb))
+        %no  !!
+      ==
+    ::
+    ++  feud                                            ::  process slips
+      |=  [ask=(list slip) bor=boar]
+      ^-  [p=(list move) q=_..^$]
+      =+  kam=(~(gas by *(map path goal)) ask)
+      =+  zal=(~(tap by loz) ~)
+      =+  hix=p.lif
+      =:  p.lif  +(p.lif)
+          q.lif  (~(put by q.lif) hix [kam bor])
+          ==
+      =^  zin  ..^$
+          |-  ^-  [(list move) _..^^$]
+          ?~  ask
+            [~ ..^^$]
+          =^  niz  ..^^$
+            $(ask t.ask)
+          ?+    -.q.i.ask  [niz ..^^$]
+              %up
+            :-  niz
+            ?:  (~(has by loz) p.i.ask)  ..^^$
+            ..^^$(pak [[hix p.i.ask] pak])
+          ==
+      |-  ^-  [p=(list move) q=_..^^$]
+      ?~  zal
+        [zin ..^^$]
+      =^  lus  ..^^$
+        $(zal t.zal)
+      ?:  (~(has by kam) p.i.zal)
+        [lus ..^^$] 
+      :-  lus
+      ?+    -.q.i.zal  ..^^$
+          %up
+        ..^^$(pak (skip pak |=([a=@ud b=path] =(b `path`p.i.zal))))
+      ==
+    ::
+    ++  flam                                            ::  deliver line
+      |=  fet=tape
+      ^-  [p=(list move) q=_..^$]
+      =>  .(p.hit +(p.hit), q.hit [fet q.hit])
+      =+  zif=((full (ifix [gay gay] kral:lo)) [1 1] fet)
+      ?~  q.zif
+        :_  ..^$
+        =+  duf=[p=~(rend co ~ %ud p.p.zif) q=~(rend co ~ %ud q.p.zif)]
+        :~  :+  [~ who]  hen 
+            [%warn %2 %leaf "<syntax error at [{p.duf} {q.duf}]>"]
+        ==
+      (felp p.u.q.zif)
+    ::
+    ++  fone                                            ::  deliver note
+      |=  [pux=path nob=note bor=boar]
+      ^-  [p=(list move) q=_..^$]
+      ?>  ?=(& -.bor)
+      %-  feet
+      %^    feck
+          (mung [fane:do [pux nob r.bor]] sky)
+        |=  a=(list path) 
+        [~ ~ ~ %& a (~(put to q.bor) pux nob) r.bor]
+      feeb
+    --
   ::
   ++  leap                                              ::  dispatch event
     |=  [pex=path hen=tube fav=card]
@@ -350,20 +357,15 @@
         %line
       =+  fet=(rip 3 p.fav)
       ?~  pak
-        (flam hen fet)
-      =+  pux=q.i.pak
-      =+  byr=(fear pux fav (need (~(get by q.lif) p.i.pak)))
+        (~(flam ma [hen ~]) fet)
+      =+  [nix=p.i.pak pux=q.i.pak]
       =>  .(pak t.pak)
-      =+  nob=`note`[%up p.fav]
-      ?>  ?=(& -.q.byr)
-      %-  (feet hen p.byr)
-      %^    feck
-          (mung [fane [pux nob r.q.byr]] sky)
-        |=(a=(list path) [~ ~ ~ %& a (~(put to q.q.byr) pux nob) r.q.byr])
-      feeb
+      =+  byr=(need (~(get by q.lif) nix))
+      =+  pey=(~(fear ma [hen p.byr]) pux fav)
+      (fone:pey pux [%up p.fav] q.byr)
     ==
   ::
-  ++  lube                                              ::  make subject
+  ++  lube                                              ::  define subject
     ^-  vase
     ;:  slop
       ;:  slop

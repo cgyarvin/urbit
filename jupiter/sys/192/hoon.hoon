@@ -1289,7 +1289,7 @@
   ::  Tier 5 models
   ::
   ++  cert  (list ,@)
-  ++  char  ,@t
+  ++  char  ,@tD
   ++  coin  $%  [%% p=mole]
                 [%blob p=*]
                 [%many p=(list coin)]
@@ -1784,6 +1784,7 @@
   ::
   ++  alf  ;~(pose low hig)
   ++  aln  ;~(pose low hig nud)
+  ++  alp  ;~(pose low hig nud hep)
   ++  bet  ;~(pose (cold 2 hep) (cold 3 lus))
   ++  bin  (bass 2 (most gon but))
   ++  but  (cook |=(a=@ (sub a '0')) (shim '0' '1'))
@@ -1793,7 +1794,11 @@
   ++  gon  ;~(pose ;~(plug bas gay fas) (easy ~))
   ++  hex  (bass 16 (most gon hit))
   ++  hig  (shim 'A' 'Z')
-  ++  hit  ;~(pose dit (cook |=(a=char (sub a 87)) (shim 'a' 'f')))
+  ++  hit  ;~  pose 
+             dit 
+             (cook |=(a=char (sub a 87)) (shim 'a' 'f'))
+             (cook |=(a=char (sub a 65)) (shim 'A' 'F'))
+           ==
   ++  low  (shim 'a' 'z')
   ++  mes  (cook |=([a=@ b=@] (add (mul 16 a) b)) ;~(plug hit hit))
   ++  nix  (boss 256 (star ;~(pose aln cab)))
@@ -1830,6 +1835,9 @@
   ::      Tier 5b/7, parsing: external interface
   ::
   ++  rash  |*([naf=@ sab=_rule] (scan (trip naf) sab))
+  ++  rush  |*  [naf=@ sab=_rule]
+            =+  vex=((full sab) [[1 1] (trip naf)])
+            ?~(q.vex ~ [~ u=p.u.q.vex])
   ++  scan  |*  [los=tape sab=_rule]
             =+  vex=((full sab) [[1 1] los])
             ?@  q.vex
@@ -1839,6 +1847,12 @@
   ::
   ::    Tier 5c/0, formatting: basic text handling
   ::
+  ++  cass                                              ::  case-insensitive
+    |=  vib=tape
+    %+  rap  3
+    (turn vib |=(a=@ ?.(&((gte a 'A') (lte a 'Z')) a (add 32 a))))
+  ::
+  ++  crip  |=(a=tape `@t`(rap 3 a))
   ++  mesc
     |=  vib=tape
     ^-  tape
@@ -4607,9 +4621,9 @@
   ++  doge
     |=  ham=calf
     =-  ?+  woz  woz
-          [%list * [%atom %ta]] %path
-          [%list * [%atom %t]]  %yarn
-          [%list * %yarn]       %wool
+          [%list * [%atom 'ta']]  %path
+          [%list * [%atom 'tD']]  %yarn
+          [%list * %yarn]         %wool
         ==
     ^=  woz
     ^-  wine

@@ -130,7 +130,7 @@
               caq=cask                                  ::  symmetric key state
           ==                                            ::
 ++  dove  ,[p=@ud q=(map ,@ud (unit ,@))]               ::  count 13-blocks
-++  lord  ,@p                                           ::  host identity
+++  lord  ,@p                                           ::  identity
 ++  flap  ,@uvH                                         ::  network packet id
 ++  flow                                                ::  packet connection
           $:  rtt=@dr                                   ::  official rtt
@@ -158,30 +158,23 @@
           ==                                            ::
 ++  gram  ,@uw                                          ::  physical datagram
 ++  hand  ,@uvH                                         ::  hash of code
-++  hate  ,[p=purl q=cred s=brow r=moth]                ::  cooked request
+++  hate  ,[p=purl q=cred r=brow s=moth]                ::  cooked request
 ++  hook  path                                          ::  request origin
+++  host  $:                                            ::  http host
+              p=(unit ,@ud)                             ::  port
+              q=$%([& p=(list ,@t)] [| p=@if])          ::  dns reversed / ip
+          ==                                            ::
 ++  httq                                                ::  raw http request
-          $:  med=?(%get %post)                         ::  method
-              url=@t                                    ::  unparsed url
-              hed=(list ,[p=@t q=@t])                   ::  headers
-              bod=(unit octs)                           ::  body
+          $:  p=?(%get %post)                           ::  method
+              q=@t                                      ::  unparsed url
+              r=(list ,[p=@t q=@t])                     ::  headers
+              s=(unit octs)                             ::  body
           ==                                            ::
 ++  httr                                                ::  raw http response
           $:  sas=@ud                                   ::  status
               hed=(list ,[p=@t q=@t])                   ::  raw headers
               bod=(unit octs)                           ::  body
           ==                                            ::
-++  math                                                ::  semiparsed headers
-          $:  cuy=(unit mime)                           ::  content-type
-              cuz=(list ,[p=@t q=@t])                   ::  cookies
-              raz=(map ,@t ,@t)                         ::  other headers
-          ==                                            ::
-++  meth                                                ::  http method
-          $|  %get                                      ::  the classic get
-          $%  [%pot p=(map ,@ta ,@t)]                   ::  stylish post
-              [%put p=octs]                             ::  gentleman's put
-          ==                                            ::
-++  moth  ,[p=meth q=math]                              ::  http operation
 ++  lark                                                ::  parsed command
           $%  [%cd p=path]                              ::  change directory
               [%eh p=crow]                              ::  print and record
@@ -200,6 +193,7 @@
 ++  love  ,[p=@ud q=math r=(unit octs)]                 ::  cooked response
 ++  mace  (list ,[p=mark q=ring])                       ::  private secrets
 ++  mark  ,@ud                                          ::  regime number
+++  math  (map ,@t (list ,@t))                          ::  semiparsed headers
 ++  meal                                                ::  payload
           $%  [%back p=cape q=flap r=@dr]               ::  acknowledgment
               [%bond p=lord q=(list post)]              ::  statement
@@ -211,6 +205,8 @@
           $%  [& p=@da q=@uvI]                          ::  mtime hash
               [| p=@da q=(list ,@ta)]                   ::  mtime dir
           ==                                            ::
+++  meth  ?(%get %post)                                 ::  http method
+++  moth  ,[p=meth q=math r=*]                          ::  http operation
 ++  move  ,[p=(unit lord) q=tube r=card]                ::  internal event
 ++  mime  (list ,@ta)                                   ::  mime type
 ++  name  ,[p=@t q=(unit ,[p=? q=@t]) r=@t]             ::  first mid/nick last
@@ -233,14 +229,18 @@
 ++  post  ,[p=path q=*]                                 ::  statement
 ++  prod  ,[p=prom q=tape]                              ::  format, prompt
 ++  prom  ,?                                            ::  format type
-++  purl  ,[dns=sand sap=(list ,@t) qua=quay]           ::  parsed url
+++  purl  ,[p=host q=(list ,@ta) r=quay]                ::  parsed url
 ++  putt                                                ::  outgoing message
           $:  ski=snow                                  ::  sequence acked/sent
               saq=?                                     ::  secure ack required
               ryn=(unit lane)                           ::  implied mirror lane
               wyv=(list rock)                           ::  packet list XX gear
           ==                                            ::
-++  quay  (map ,@ta ,@t)                                ::  parsed url query
+++  quay  (map ,@t ,@t)                                 ::  parsed url query
+++  quri                                                ::  request-uri
+          $%  [& p=purl]                                ::  absolute
+              [| p=(list ,@t) q=quay]                   ::  relative
+          ==                                            ::
 ++  rank  ?(%czar %king %duke %jack %pawn)              ::  lord width class
 ++  road                                                ::  secured oneway route
           $:  exp=@da                                   ::  expiration date
@@ -261,7 +261,6 @@
               hoc=(map lord door)                       ::  friends & relations
           ==                                            ::
 ++  salt  ,@uv                                          ::  entropy
-++  sand  (list ,@t)                                    ::  ['org' 'urbit' ~]
 ++  shed  ,[p=@da q=(qeu ,[p=@ud q=bird])]              ::  packet pump
 ++  sink                                                ::  incoming per server
           $:  nes=(map band ,[p=@da q=bait])            ::  fragment actions
