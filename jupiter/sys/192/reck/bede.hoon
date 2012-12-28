@@ -234,23 +234,24 @@
     --
   ++  ma                                                ::  process context
     |_  [hen=tube loz=(map path goal)]
-    ++  fear                                            ::  update query state
+    ++  bust                                            ::  slice soft vase
+      |=  [axe=axis vux=*]  ^-  *
+      =<  q
+      %+  slam  sot.vax
+      (slop [[%atom %%] axe] [vas.typ vux])
+    ::
+    ++  coax                                            ::  update query state
       |=  [pux=path fav=card]
       ^-  _+>
       =+  fug=(~(get by loz) pux)
       ?~  fug  +>.$
       ?+    -.u.fug  +>.$
           %up
+        ?>  =(%line -.fav)
         +>.$(loz (~(del by loz) pux))
       ==
     ::
-    ++  feat                                            ::  slice weak vase
-      |=  [axe=axis vux=*]  ^-  *
-      =<  q
-      %+  slam  sot.vax
-      (slop [[%atom %%] axe] [vas.typ vux])
-    ::
-    ++  feck                                            ::  process mockage
+    ++  doth                                            ::  process mockage
       |=  :*  ton=tone 
               fob=_|+((list path) *beef) 
               fut=_|+(* *beef)
@@ -262,36 +263,41 @@
         %2  [[[%crap p.ton] ~] ~ ~]
       ==
     ::
-    ++  feeb                                            ::  soft bowl to beef
+    ++  fret                                            ::  soft bowl to beef
       |=  poc=*
-      ^-  [p=(list card) q=(list slip) r=(unit boar)]
-      :-  ((hard (list card)) +:(feat 2 poc))
-      =+  doy=(feat 3 poc)
+      ^-  beef
+      :-  ((hard (list card)) +:(bust 2 poc))
+      =+  doy=(bust 3 poc)
       ?~  +.doy  [~ ~]
       :-  ((hard (list slip)) +>-.doy)
-      [~ %& ~ ~ (feat 7 doy)]
+      [~ %& ~ ~ (bust 7 doy)]
     ::
-    ++  feet                                            ::  apply result
-      |=  bof=beef
+    ++  gaff                                            ::  change a slip
+      |=  [hix=@ud sip=slip niz=(list move)]
       ^-  [p=(list move) q=_..^$]
-      =+  lop=(turn p.bof |=(a=card [[~ who] hen a])) 
-      ?~  r.bof  [lop ..^$]
-      =+  fey=(feud q.bof u.r.bof)
-      [(weld lop p.fey) q.fey]
+      [niz ..^$]
     ::
-    ++  felp                                            ::  apply command
-      |=  kal=lark
+    ++  geld                                            ::  remove a slip
+      |=  [hix=@ud sip=slip niz=(list move)]
       ^-  [p=(list move) q=_..^$]
-      =+  wan=|=(a=(list path) [~ ~ ~ %| a kal])
-      =+  hak=|=(a=* [[[%talk ((hard tank) a)] ~] ~ ~])
-      ?-  -.kal
-        %cd  [~ ..^$(cwd p.kal)]
-        %eh  (feet (feck (mung [echo:do lube +.kal] sky) wan hak))
-        %go  (feet (feck (mung [fapp:do lube +.kal] sky) wan feeb))
-        %no  !!
+      ?+    -.q.sip  [~ ..^$]
+          %up
+        :-  niz
+        %=    ..^$
+            pak 
+          (skip pak |=([a=@ud b=path] =(b p.sip)))
+        ==
       ==
     ::
-    ++  feud                                            ::  process slips
+    ++  germ                                            ::  add a slip
+      |=  [hix=@ud sip=slip niz=(list move)]
+      ^-  [p=(list move) q=_..^$]
+      ?+    -.q.sip  [~ ..^$]
+          %up
+        [niz ..^$(pak [[hix p.sip] pak])]
+      ==
+    ::
+    ++  gird                                            ::  process slips
       |=  [ask=(list slip) bor=boar]
       ^-  [p=(list move) q=_..^$]
       =+  kam=(~(gas by *(map path goal)) ask)
@@ -306,26 +312,53 @@
             [~ ..^^$]
           =^  niz  ..^^$
             $(ask t.ask)
-          ?+    -.q.i.ask  [niz ..^^$]
-              %up
-            :-  niz
-            ?:  (~(has by loz) p.i.ask)  ..^^$
-            ..^^$(pak [[hix p.i.ask] pak])
-          ==
+          =+  tuq=(~(get by loz) p.i.ask)
+          ?~  tuq
+            (germ hix i.ask niz)
+          ?:  =(u.tuq q.i.ask)
+            [niz ..^^$]
+          (gaff hix i.ask niz) 
       |-  ^-  [p=(list move) q=_..^^$]
       ?~  zal
         [zin ..^^$]
       =^  lus  ..^^$
         $(zal t.zal)
       ?:  (~(has by kam) p.i.zal)
-        [lus ..^^$] 
-      :-  lus
-      ?+    -.q.i.zal  ..^^$
-          %up
-        ..^^$(pak (skip pak |=([a=@ud b=path] =(b `path`p.i.zal))))
+        [lus ..^^$]
+      (geld hix i.zal lus)
+    ::
+    ++  haul                                            ::  apply result
+      |=  bof=beef
+      ^-  [p=(list move) q=_..^$]
+      =+  lop=(turn p.bof |=(a=card [[~ who] hen a])) 
+      ?~  r.bof  [lop ..^$]
+      =+  fey=(gird q.bof u.r.bof)
+      [(weld lop p.fey) q.fey]
+    ::
+    ++  jerk                                            ::  deliver note
+      |=  [pux=path nob=note bor=boar]
+      ^-  [p=(list move) q=_..^$]
+      ?>  ?=(& -.bor)
+      %-  haul
+      %^    doth
+          (mung [fane:do [pux nob r.bor]] sky)
+        |=  a=(list path) 
+        [~ ~ ~ %& a (~(put to q.bor) pux nob) r.bor]
+      fret
+    ::
+    ++  loft                                            ::  apply command
+      |=  kal=lark
+      ^-  [p=(list move) q=_..^$]
+      =+  wan=|=(a=(list path) [~ ~ ~ %| a kal])
+      =+  hak=|=(a=* [[[%talk ((hard tank) a)] ~] ~ ~])
+      ?-  -.kal
+        %cd  [~ ..^$(cwd p.kal)]
+        %eh  (haul (doth (mung [echo:do lube +.kal] sky) wan hak))
+        %go  (haul (doth (mung [fapp:do lube +.kal] sky) wan fret))
+        %no  !!
       ==
     ::
-    ++  flam                                            ::  deliver line
+    ++  mete                                            ::  deliver line
       |=  fet=tape
       ^-  [p=(list move) q=_..^$]
       =>  .(p.hit +(p.hit), q.hit [fet q.hit])
@@ -336,18 +369,7 @@
         :~  :+  [~ who]  hen 
             [%warn %2 %leaf "<syntax error at [{p.duf} {q.duf}]>"]
         ==
-      (felp p.u.q.zif)
-    ::
-    ++  fone                                            ::  deliver note
-      |=  [pux=path nob=note bor=boar]
-      ^-  [p=(list move) q=_..^$]
-      ?>  ?=(& -.bor)
-      %-  feet
-      %^    feck
-          (mung [fane:do [pux nob r.bor]] sky)
-        |=  a=(list path) 
-        [~ ~ ~ %& a (~(put to q.bor) pux nob) r.bor]
-      feeb
+      (loft p.u.q.zif)
     --
   ::
   ++  leap                                              ::  dispatch event
@@ -357,12 +379,12 @@
         %line
       =+  fet=(rip 3 p.fav)
       ?~  pak
-        (~(flam ma [hen ~]) fet)
+        (~(mete ma [hen ~]) fet)
       =+  [nix=p.i.pak pux=q.i.pak]
       =>  .(pak t.pak)
       =+  byr=(need (~(get by q.lif) nix))
-      =+  pey=(~(fear ma [hen p.byr]) pux fav)
-      (fone:pey pux [%up p.fav] q.byr)
+      =+  pey=(~(coax ma [hen p.byr]) pux fav)
+      (jerk:pey pux [%up p.fav] q.byr)
     ==
   ::
   ++  lube                                              ::  define subject
@@ -396,10 +418,6 @@
         [* ^ ^]  :(slop $(r.way ~, l.way ~) $(way l.way) $(way r.way))
       ==
     ==
-  ::
-  ++  none                                              ::  standard failure
-    ^-  (list card)
-    [[%warn %2 [%leaf "<invalid command>"]] ~]
   ::
   ++  prot                                              ::  current prompt
     ^-  prod
