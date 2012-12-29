@@ -1294,7 +1294,6 @@
                 [%blob p=*]
                 [%many p=(list coin)]
             ==
-  ++  disc  ,@ta
   ++  dram  $%  [| p=(map ,@tas dram)]
                 [& p=@ud q=@]
             ==
@@ -1306,7 +1305,7 @@
             :-  p=(hair -.b) 
             q=?@(+.b ~ [~ u=[p=(a +>-.b) q=[p=(hair -.b) q=(tape +.b)]]])
   ++  nail  ,[p=hair q=tape]
-  ++  mole  ,[p=disc q=@]
+  ++  mole  ,[p=@ta q=@]
   ++  pass  ,@
   ++  path  (list span)
   ++  pint  ,[p=[p=[p=@ q=@] q=[p=@ q=@]]]
@@ -1317,7 +1316,7 @@
                 [%mean p=_^?(|.(*tank))]
                 [%spot p=_spot]
             ==
-  ++  span  disc
+  ++  span  ,@ta
   ++  spot  ,[p=path q=pint]
   ++  tank
     $%  [%leaf p=tape]
@@ -2658,8 +2657,8 @@
             [%leaf '#' ~]
           :+  %rose
             [['/' ~] ['/' ~] ~]
-          =+  yol=`(list disc)`[(disc -.c.vem) (flop ((list disc) +.c.vem))]
-          (turn yol |=(a=disc [%leaf (trip a)]))
+          =+  yol=`(list ,@ta)`[(,@ta -.c.vem) (flop ((list ,@ta) +.c.vem))]
+          (turn yol |=(a=@ta [%leaf (trip a)]))
         ::
             [s=%o c=*]        
           %=    $
@@ -3204,7 +3203,7 @@
     ==
   ++  limb  $|(term $%([& p=axis] [| p=@ud q=term]))
   ++  line  ,[p=[%leaf p=odor q=@] q=mode] 
-  ++  odor  disc
+  ++  odor  ,@ta
   ++  port
     $:  p=axis 
         q=$%([& p=type] [| p=axis q=(list ,[p=type q=foot])])
@@ -4669,10 +4668,6 @@
         (cat 3 p.i.t.p.i.t.p.u.may p.i.t.t.p.i.t.p.u.may)
       q.i.p.i.t.p.u.may
     q.ham
-  ::
-  ++  dool
-    ~|  %dool
-    dole
   ::
   ++  dole
     ^-  calf

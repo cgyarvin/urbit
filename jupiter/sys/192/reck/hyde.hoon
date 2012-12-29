@@ -2,6 +2,33 @@
 ::          %hyde, zuse models.   This file is in the public domain.
 ::
 |%
+++  acro                                                ::  asym cryptosuite
+          $_  ^?  |%                                    ::  opaque object
+          ++  de  |+([a=@ b=@] *(unit ,@))              ::  symmetric de, soft
+          ++  dy  |+([a=@ b=@] @)                       ::  symmetric de, hard
+          ++  en  |+([a=@ b=@] @)                       ::  symmetric en
+          ++  es  |+(a=@ @)                             ::  step key to next
+          ++  ex  ^?                                    ::  export
+            |%  ++  fig  @uvH                           ::  fingerprint
+                ++  pac  @uvG                           ::  default passcode
+                ++  pub  *pass                          ::  public key
+                ++  sec  *ring                          ::  private key
+            --                                          ::
+          ++  mx  @                                     ::  max direct bytes
+          ++  nu  ^?                                    ::  reconstructors
+            |%  ++  pit  |=([a=@ b=@] ^?(..nu))         ::  from [width seed]
+                ++  nol  |=(a=@ ^?(..nu))               ::  from naked ring
+                ++  com  |=(a=@ ^?(..nu))               ::  from naked pass
+            --                                          ::
+          ++  pu  ^?                                    ::  public-key acts
+            |%  ++  seal  |=([a=@ b=@] @)               ::  encrypt
+                ++  sure  |=([a=@ b=@] *(unit ,@))      ::  authenticate
+            --                                          ::
+          ++  se  ^?                                    ::  secret-key acts
+            |%  ++  sign  |=([a=@ b=@] @)               ::  certify
+                ++  tear  |=(a=@ *(unit ,[p=@ q=@]))    ::  accept
+            --                                          ::
+          --                                            ::
 ++  arch                                                ::  fs node
           $%  [& clod]                                  ::  ie, file
               [| dirt]                                  ::  ie, directory
@@ -58,6 +85,7 @@
           ==                                            ::
 ++  card                                                ::  action
           $%  [%bbye ~]                                 ::  log out
+              [%bind p=lord q=host]                     ::  bind http server
               [%boot p=@]                               ::  reset soft state
               [%cash p=@p q=buck]                       ::  civil license
               [%crap p=(list)]                          ::  error with trace
@@ -78,14 +106,16 @@
               [%pace p=@ud]                             ::  compute background
               [%pour p=path q=dram]                     ::  write directory
               [%pump ~]                                 ::  produce packets
-              [%resp p=httr]                            ::  http response
               [%save p=path q=@]                        ::  write atomic file
               [%send p=@]                               ::  transmit packet
               [%ship p=@tas q=@tas]                     ::  label release
               [%sync ~]                                 ::  reset soft state
               [%talk p=tank]                            ::  show on console
-              [%thin p=httq]                            ::  insecure http req
-              [%this p=httq]                            ::  secure http req
+              [%that p=love]                            ::  cooked htresp
+              [%thee p=hate]                            ::  cooked htreq
+              [%thin p=httq]                            ::  insecure raw htreq
+              [%this p=httq]                            ::  secure raw htreq
+              [%thou p=httr]                            ::  raw http response
               [%text p=(list ,@t)]                      ::  raw text lines
               [%tory p=(list ,@t)]                      ::  history dump
               [%warn p=?(0 1 2) q=tank]                 ::  report to human
@@ -152,34 +182,28 @@
 ++  goal                                                ::  app request
           $%  [%ez p=path]                              ::  simple query
               [%fu p=path q=|+(* *(unit))]              ::  complex query
-              [%la p=@tas q=(set ,@t) r=(list ,@t)]     ::  legacy accept
+              [%ht p=rout]                              ::  http server
               [%up p=prod]                              ::  user prompt      
               [%wa p=@da]                               ::  alarm
           ==                                            ::
 ++  gram  ,@uw                                          ::  physical datagram
 ++  hand  ,@uvH                                         ::  hash of code
-++  hate  ,[p=purl q=cred r=brow s=moth]                ::  cooked request
+++  hate  ,[p=purl q=cred r=moth]                       ::  cooked request
 ++  hook  path                                          ::  request origin
-++  host  $:                                            ::  http host
-              p=(unit ,@ud)                             ::  port
-              q=$%([& p=(list ,@t)] [| p=@if])          ::  dns reversed / ip
-          ==                                            ::
+++  hort  ,[p=(unit ,@ud) q=host]                       ::  http port/host
+++  host  $%([& p=(list ,@t)] [| p=@if])                ::  http host
 ++  httq                                                ::  raw http request
           $:  p=?(%get %post)                           ::  method
               q=@t                                      ::  unparsed url
               r=(list ,[p=@t q=@t])                     ::  headers
               s=(unit octs)                             ::  body
           ==                                            ::
-++  httr                                                ::  raw http response
-          $:  sas=@ud                                   ::  status
-              hed=(list ,[p=@t q=@t])                   ::  raw headers
-              bod=(unit octs)                           ::  body
-          ==                                            ::
+++  httr  ,[p=@ud q=math r=(unit octs)]                 ::  raw http response   
 ++  lark                                                ::  parsed command
           $%  [%cd p=path]                              ::  change directory
               [%eh p=crow]                              ::  print and record
               [%go p=path q=cone r=crow]                ::  run application
-              [%no p=crow]                              ::  type only
+              [%to p=crow]                              ::  type only
           ==                                            ::
 ++  lens  ?(%z %y %x %w)                                ::  repository view
 ++  lice  ,[p=lord q=buck]                              ::  full license
@@ -190,9 +214,18 @@
           ==                                            ::
 ++  link  ,[p=code q=sock]                              ::  connection
 ++  logo  ,@uvI                                         ::  session identity
-++  love  ,[p=@ud q=math r=(unit octs)]                 ::  cooked response
+++  love  $%                                            ::  http response
+              [%cst p=@t]                               ::  css text
+              [%hmt p=@t]                               ::  html text
+              [%hmx p=manx]                             ::  html node
+              [%raw p=httr]                             ::  raw http response
+          ==                                            ::
 ++  mace  (list ,[p=mark q=ring])                       ::  private secrets
+++  mane  $|(@tas [@tas @tas])                          ::  XML name/space
+++  manx  ,[t=marx c=(list manx)]                       ::  XML node
 ++  mark  ,@ud                                          ::  regime number
+++  mart  (list ,[n=mane v=tape])                       ::  XML attributes
+++  marx  $|(@tas [mane a=mart])                        ::  XML tag
 ++  math  (map ,@t (list ,@t))                          ::  semiparsed headers
 ++  meal                                                ::  payload
           $%  [%back p=cape q=flap r=@dr]               ::  acknowledgment
@@ -214,8 +247,8 @@
 ++  note                                                ::  app response
           $%  [%ez p=path q=(unit)]                     ::  simple result
               [%fu p=path q=(unit)]                     ::  complex result
-              [%la p=@tas q=@p r=path s=*]              ::  legacy request
               [%up p=@t]                                ::  prompt response
+              [%sv p=hate]                              ::  legacy request
               [%wa p=@da]                               ::  alarm
           ==                                            ::
 ++  octs  ,[p=@ud q=@]                                  ::  octet-stream
@@ -229,7 +262,7 @@
 ++  post  ,[p=path q=*]                                 ::  statement
 ++  prod  ,[p=prom q=tape]                              ::  format, prompt
 ++  prom  ,?                                            ::  format type
-++  purl  ,[p=host q=(list ,@ta) r=quay]                ::  parsed url
+++  purl  ,[p=hort q=(list ,@ta) r=quay]                ::  parsed url
 ++  putt                                                ::  outgoing message
           $:  ski=snow                                  ::  sequence acked/sent
               saq=?                                     ::  secure ack required
@@ -253,6 +286,12 @@
               dos=(map ,@ta desk)                       ::  projects 
           ==                                            ::
 ++  rock  ,@uvO                                         ::  packet
+++  rout                                                ::  http route
+          $:  hom=host                                  ::  host served
+              fix=(list ,@t)                            ::  initial path
+              dip=(list path)                           ::  discipline stack
+              cor=*                                     ::  discipline core
+          ==                                            ::
 ++  safe                                                ::  domestic host
           $:  loc=(unit lane)                           ::  packet route
               val=wand                                  ::  private keys
@@ -288,7 +327,7 @@
               ==                                        ::
           ==                                            ::
 ++  umaz  ,[p=(list ukaz) q=(list ukaz)]                ::  dual change
-++  wand  (list ,[p=mark q=ac])                         ::  mace in action
+++  wand  (list ,[p=mark q=acro])                       ::  mace in action
 ++  what                                                ::  logical identity
           $%  [%crew p=corp]                            ::  business
               [%dept p=corp]                            ::  govt/education
@@ -302,7 +341,4 @@
 ++  whom  ,[p=@ud q=@t r=@tas s=name]                   ::  yob/state/nation/me
 ++  will  (list deed)                                   ::  certificate
 ++  worm  ,*                                            ::  vase of task
-++  marx  $|(@tas [@tas a=(map ,@tas tape)])            ::  XML tag
-++  manx  ,[t=marx c=(list mane)]                       ::  XML node
-++  mane  $%([& n=marx] [| e=tape])                     ::  XML element
 --

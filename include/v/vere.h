@@ -165,6 +165,7 @@
 
         u2_noun now;                      //  current time, as noun
         u2_noun wen;                      //  current time, as text
+        u2_noun own;                      //  owner list
 
         u2_noun pug;                      //  prompt state
 

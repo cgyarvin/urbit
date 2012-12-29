@@ -255,7 +255,7 @@
           |_  [her=lord nob=door]
           ::::
           ++  cley                                      ::  client crypto
-            ^-  [p=mark q=gcos r=ac]
+            ^-  [p=mark q=gcos r=acro]
             ?~  lew.wod.nob  !!
             :+  p.p.q.i.lew.wod.nob 
               q.q.i.lew.wod.nob 
@@ -354,18 +354,18 @@
           ..ren   ::  XX  not needed rite now
         ::
         ++  sen                                         ::  current crypto
-          ^-  [p=mark q=ac]
+          ^-  [p=mark q=acro]
           ?~(val.saf !! i.val.saf)
         ::
         ++  sev                                         ::  crypto by mark
           |=  mar=mark
-          ^-  [p=? q=ac]
+          ^-  [p=? q=acro]
           ?~  val.saf  !!
           ?:  =(mar p.i.val.saf)
             [& q.i.val.saf]
           ?>  (lth mar p.i.val.saf)
           :-  |
-          |-  ^-  ac
+          |-  ^-  acro
           ?:  =(mar p.i.t.val.saf) 
             q.i.t.val.saf 
           $(t.val.saf t.t.val.saf)
@@ -388,7 +388,7 @@
         ::
         ++  wag                                         ::  install will
           |=  [her=lord law=will]
-          ^-  [p=[p=mark q=ac] q=_+>]
+          ^-  [p=[p=mark q=acro] q=_+>]
           =+  hiz=(grip law (yew her))
           =+  lyr=%*(. (myx her) lew.wod.nob hiz)
           =+  cay=cley:lyr

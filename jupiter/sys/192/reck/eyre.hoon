@@ -32,23 +32,17 @@
           ^=  cary                                          ::  filesystem
         $:  duw=_clay
         ==
-          ^=  dill                                          ::  http server
-        $:  lyd=_lidl
-        ==
           ^=  eyre                                          ::  i/o
         $:  gem=(map lord chum)                             ::  hashed passcodes
             liv=(map lord (list tube))                      ::  live consoles
             rev=(map tube lord)                             ::  identities
-            sak=(map lord (list ,[p=tube q=prod]))          ::  prompt stacks
-            tuh=(map tube logo)                             ::  http sessions
-            tyv=(map logo cred)                             ::  credentials
+            seh=(list ,[p=host q=lord])                     ::  http owners
         ==
       == 
     --
 =+  sys=*game
 =.  gel.arvo.sys  $:alga
 =.  duw.cary.sys  clay
-=.  lyd.dill.sys  lidl
 |%
 ++  is
   |_  now=@da 
@@ -83,13 +77,6 @@
       =+  yub=(drip:duw.cary.sys now u.p.mov r.mov)
       :-  (turn p.yub |=(a=card [p.mov q.mov a]))
       sys(duw.cary q.yub)
-    ::
-    ++  dyl
-      |=  [pex=path mov=move]
-      ^-  [(list move) game]
-      =^  yub  lyd.dill.sys  
-        (~(leap lyd.dill.sys now (shax now)) mov)
-      [p.yub sys]
     --
   ::
   ++  auth                                                  ::  match password
@@ -161,6 +148,27 @@
       %lead
     $(cul t.cul)
   ::
+  ++  hone                                                  ::  host match
+    |=  [fro=host too=host]  ^-  ?
+    ?-    -.fro
+        |  =(too fro)
+        &
+      ?&  ?=(& -.too)
+          |-  ^-  ?
+          ?~  p.too  &
+          ?~  p.fro  |
+          ?:  !=(i.p.too i.p.fro)  |
+          $(p.too t.p.too, p.fro t.p.fro)
+      ==
+    ==
+  ::
+  ++  hope                                                  ::  lord from host
+    |=  hom=host
+    =+  seh=seh.eyre.sys
+    |-  ^-  (unit lord)
+    ?~  seh  ~
+    ?:((hone hom p.i.seh) [~ q.i.seh] $(seh t.seh))
+  ::
   ++  howl                                                  ::  handle event 
     |=  mov=move
     =+  [mor=`(list move)`[mov ~] out=`(list ovum)`~]
@@ -187,11 +195,6 @@
         (car:si pex [p.mov t.q.mov r.mov])
       $(mor (weld fez t.mor))
     ::
-        %dill
-      =^  fez  sys
-        (dyl:si pex [p.mov t.q.mov r.mov])
-      $(mor (weld fez t.mor))
-    ::
         %eyre
       =.  p.mov  ?^(p.mov p.mov (~(get by rev.eyre.sys) t.q.mov))
       =+  rer=|=(a=@tas ^$(mor [[p.mov [[a ~] q.mov] r.mov] t.mor]))
@@ -202,6 +205,20 @@
           ^$(mor t.mor, rev.eyre.sys (~(put by rev.eyre.sys) t.q.mov a))
       ?-    -.r.mov
           %bbye  !!
+          %bind
+        ?>  =(%gold mel)
+        %=    $
+            mor  t.mor
+            seh.eyre.sys
+          :-  [q.r.mov p.r.mov]
+          (skip seh.eyre.sys |=([a=host b=lord] (hone q.r.mov a)))
+        ::
+            out
+          :_  out
+          :-  i.t.q.mov
+          [%talk %leaf "http: serving {<p.r.mov>} on {<q.r.mov>}"]
+        ==
+      ::
           %boot  !!
           %cash  (rer %arvo)
           %crap  (giv)
@@ -220,21 +237,14 @@
           %file  (rer %bede)
           %hear  (rer %arvo)
           %helo  !!
-          %init  (rer %cary)
-          %junk  (rer %arvo)
-          %line
-        ?>  ?=(^ p.mov)
-        =+  veh=(~(get by sak.eyre.sys) u.p.mov)
-        ?:  |(?=(~ veh) ?=(~ u.veh))
-          (rer %bede)
-        %=    $
-            mor           [[p.mov p.i.u.veh r.mov] t.mor]
-            sak.eyre.sys
-          ?~  t.u.veh
-            (~(del by sak.eyre.sys) u.p.mov)
-          (~(put by sak.eyre.sys) u.p.mov t.u.veh)
+          %init  
+        %=  $
+          out  [[i.t.q.mov r.mov] out]
+          mor  [[p.mov [[%cary ~] q.mov] r.mov] t.mor]
         ==
       ::
+          %junk  (rer %arvo)
+          %line  (rer %bede)
           %load  (giv) 
           %logn 
         ?>  !=(%lead mel)
@@ -253,25 +263,28 @@
           %pace  !!
           %pour  (giv)
           %pump  !!
-          %resp  !!
           %save  (giv)
           %send  (giv)
           %ship  (rer %cary)
-          %thin  (rer %dill)
-          %this  (rer %dill)
+          ?(%thin %this)
+        =+  heq=(thin =(%this -.r.mov) p.r.mov)
+        ~&  [%thin-heq heq]
+        =+  whu=(hope q.p.p.heq)
+        ~&  [%thin-whu whu]
+        ?~  whu
+          $(mor t.mor, out [[i.t.q.mov [%thou 404 ~ ~]] out])
+        $(mor [[whu [[%bede ~] q.mov] [%thee heq]] t.mor])
+      ::
           %sync  !!
           %talk  (giv) 
           %text  (giv)
+          %that  !!
+          %thee  (rer %bede)
+          %thou  !!
           %tory  !!
           %warn  (giv) 
           %word  !!
       ==
     ==
   --
-  ::
-  ++  rand
-    |=  [wid=@ ent=*]
-    ^-  [p=@ q=game]
-    =+  guh=(rand:gel.arvo.sys wid ent)
-    [p.guh sys(gel.arvo q.guh)]
 --

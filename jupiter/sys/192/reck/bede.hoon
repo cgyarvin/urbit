@@ -90,6 +90,11 @@
       =+  vax=(slap yun (doul woc))
       (dish:ut ~(dole ut p.vax) q.vax) 
     ::
+    ++  ecto                                            ::  type only
+      |=  [yun=vase woc=crow]
+      ^-  tank
+      (dial:ut ~(dole ut (~(play ut p.yun) (doul woc))))
+    ::
     ++  fane                                            ::  deliver note 
       |=  [pux=path nog=note tas=vase]
       ^-  vase
@@ -162,8 +167,8 @@
               (stag %cd htap)
             ==
           ::
-            ;~  pfix  ;~(plug (just 'n') (just 'o') gap)
-              (stag %no (stag %p (most ace worc)))
+            ;~  pfix  ;~(plug (just 't') (just 'o') gap)
+              (stag %to (stag %p (most ace worc)))
             ==
           ::
             %+  stag
@@ -355,7 +360,7 @@
         %cd  [~ ..^$(cwd p.kal)]
         %eh  (haul (doth (mung [echo:do lube +.kal] sky) wan hak))
         %go  (haul (doth (mung [fapp:do lube +.kal] sky) wan fret))
-        %no  !!
+        %to  (haul (doth (mung [ecto:do lube +.kal] sky) wan hak))
       ==
     ::
     ++  mete                                            ::  deliver line

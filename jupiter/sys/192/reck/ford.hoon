@@ -1,4 +1,4 @@
-::
+!:
 ::          %ford, encryption and misc libs.  This file is in the public domain.
 ::
 =>
@@ -190,37 +190,10 @@
   --
 =>
   |%
-  ++  ac  $_                                            ::  asym cryptosuite
-    ^?  |%                                              ::  opaque object
-    ++  de  |+([a=@ b=@] *(unit ,@))                    ::  symmetric de, soft
-    ++  dy  |+([a=@ b=@] @)                             ::  symmetric de, hard
-    ++  en  |+([a=@ b=@] @)                             ::  symmetric en
-    ++  es  |+(a=@ @)                                   ::  step key to next
-    ++  ex  ^?                                          ::  export
-      |%  ++  fig  @uvH                                 ::  fingerprint
-          ++  pac  @uvG                                 ::  default passcode
-          ++  pub  *pass                                ::  public key
-          ++  sec  *ring                                ::  private key
-      --                                                ::
-    ++  mx  @                                           ::  max direct bytes
-    ++  nu  ^?                                          ::  reconstructors
-      |%  ++  pit  |=([a=@ b=@] ^?(..nu))               ::  from [width seed]
-          ++  nol  |=(a=@ ^?(..nu))                     ::  from naked ring
-          ++  com  |=(a=@ ^?(..nu))                     ::  from naked pass
-      --                                                ::
-    ++  pu  ^?                                          ::  public-key acts
-      |%  ++  seal  |=([a=@ b=@] @)                     ::  encrypt
-          ++  sure  |=([a=@ b=@] *(unit ,@))            ::  authenticate
-      --                                                ::
-    ++  se  ^?                                          ::  secret-key acts
-      |%  ++  sign  |=([a=@ b=@] @)                     ::  certify
-          ++  tear  |=(a=@ *(unit ,[p=@ q=@]))          ::  accept
-      --
-    --
   ::::
   ::
   ++  crya                                              ::  cryptosuite A (RSA)
-    ^-  ac
+    ^-  acro
     =+  [mos=@ pon=*(unit ,[p=@ q=@ r=[p=@ q=@] s=_*fu])]
     =>  |%
         ++  dap                                         ::  OEAP decode
@@ -365,19 +338,19 @@
     --
   ++  brew                                              ::  create keypair
     |=  [a=@ b=@]                                       ::  width seed
-    ^-  ac
+    ^-  acro
     (pit:nu:crya a b)
   ::
   ++  hail                                              ::  activate public key
     |=  a=pass
-    ^-  ac
+    ^-  acro
     =+  [mag=(end 3 1 a) bod=(rsh 3 1 a)]
     ?>  =('a' mag)
     (com:nu:crya bod)
   ::
   ++  wear                                              ::  activate secret key
     |=  a=ring
-    ^-  ac
+    ^-  acro
     =+  [mag=(end 3 1 a) bod=(rsh 3 1 a)]
     ?>  =('A' mag)
     (nol:nu:crya bod)
@@ -400,21 +373,161 @@
   --  
 =>  
   |%
-  ::
-  ::  Tier 5f, simple XML
-  ::
-  ++  xmle
-    |=  tep=tape
-    ?@  tep
-      ~
-    =+  pet=$(tep t.tep)
-    ?-  i.tep 
-      34  ['&' 'q' 'u' 'o' 't' pet]
-      38  ['&' 'a' 'm' 'p' pet]
-      39  ['&' 'a' 'p' 'o' 's' pet]
-      60  ['&' 'l' 't' pet]
-      62  ['&' 'g' 't' pet]
-      * [i.tep pet]
+  ++  xmla                                              ::  attributes to tape
+    |=  [tat=mart rez=tape]
+    ^-  tape
+    ?~  tat  rez
+    %=    $
+      tat  t.tat
+      rez  :(weld (xmln n.i.tat) "=\"" (xmle v.i.tat ['"' rez]))
     ==
+  ::
+  ++  xmle                                              ::  escape for xml
+    |=  [tex=tape rez=tape]
+    =+  xet=`tape`(flop tex)
+    |-  ^-  tape
+    ?~  xet  rez
+    %=    $
+      xet  t.xet
+      rez  ?-  i.xet
+             34  ['&' 'q' 'u' 'o' 't' ';' rez]
+             38  ['&' 'a' 'm' 'p' ';' rez]
+             39  ['&' 'a' 'p' 'o' 's' ';' rez]
+             60  ['&' 'l' 't' ';' rez]
+             62  ['&' 'g' 't' ';' rez]
+             *   [i.xet rez]
+           ==
+    ==
+  ::
+  ++  xmln                                              ::  name to tape
+    |=  man=mane  ^-  tape
+    ?@  man  (trip man) 
+    (weld (trip -.man) [':' (trip +.man)])
+  ::
+  ++  xmll                                              ::  nodes to tape
+    |=  [lix=(list manx) rez=tape]
+    =+  xil=(flop lix)
+    |-  ^-  tape
+    ?~  xil  rez
+    $(xil t.xil, rez (xmlt i.xil rez))
+  ::
+  ++  xmlt                                              ::  node to tape
+    |=  [mex=manx rez=tape]
+    ^-  tape
+    ?:  ?=([%% [[%% *] ~]] t.mex)
+      (xmle v.i.a.t.mex rez)
+    =+  man=`mane`?@(t.mex t.mex -.t.mex)
+    =+  tam=(xmln man)
+    =+  end=:(weld "</" tam ">" rez)
+    =+  bod=['>' (xmll c.mex :(weld "</" tam ">" rez))]
+    =+  att=`mart`?@(t.mex ~ a.t.mex)
+    :-  '<'
+    %+  weld  tam
+    ?~(att bod [' ' (xmla att bod)])
+  --
+=>
+  |%
+  ++  epur                                              ::  url/header parser
+    |%
+    ++  apat  ;~(pfix fas (more fas smeg))              ::  2396 abs_path
+    ++  auri
+      ;~  pfix  ;~(plug scem col fas fas)
+        ;~(plug thor apat yque)
+      == 
+    ++  bite                                            ::  cookies (ours)
+      (most sem ;~(plug nuck:so ;~(pfix sem nuck:so))) 
+    ++  dlab                                            ::  2396 domainlabel
+      %+  sear
+        |=  a=@ta
+        ?.(=('-' (rsh 3 a (dec (met 3 a)))) [~ u=a] ~)
+      %+  cook  cass
+      ;~(plug aln (star alp))
+    ::
+    ++  fque  (cook crip (plus pold))                   ::  normal query field
+    ++  pcar  ;~(pose pure pesc psub col pat)           ::  2396 path char
+    ++  pesc  ;~(pfix cen mes)                          ::  2396 escaped
+    ++  pold  (cold ' ' (just '+'))                     ::  old space code
+    ++  pque  ;~(pose pcar fas wut)                     ::  3986 query char
+    ++  pquo  ;~(pose pure pesc pold)                   ::  normal query char
+    ++  pure  ;~(pose aln hep dot cab sig)              ::  2396 unreserved
+    ++  psub  ;~  pose                                  ::  3986 sub-delims
+                zap  buc  pam  soq  pel  per 
+                tar  lus  com  sem  tis
+              ==
+    ++  scem                                            ::  2396 scheme
+      %+  cook  cass
+      ;~(plug alf (star ;~(pose aln lus hep dot)))
+    ::
+    ++  smeg  (cook crip (plus pcar))                   ::  2396 segment
+    ++  thor                                            ::  2396 host/port
+      %+  cook  |*(a=[* *] [+.a -.a])
+      ;~  plug
+        thos
+        ;~(pose (stag ~ ;~(pfix col dim:ag)) (easy ~))
+      ==
+    ++  thos                                            ::  2396 host, no local
+      ;~  plug
+        ;~  pose
+          %+  stag  %&
+          %+  sear                                      ::  LL parser weak here
+            |=  a=(list ,@t)
+            =+  b=(flop a)
+            ?>  ?=(^ b)
+            =+  c=(end 3 1 i.b)
+            ?.(&((gte c 'a') (lte c 'z')) ~ [~ u=b])
+          (most dot dlab)
+        ::
+          %+  stag  %|
+          =+  tod=(ape:ag ted:ab) 
+          %+  bass  256
+          ;~(plug tod (stun [3 3] ;~(pfix dot tod)))
+        ==
+      ==
+    ++  yque                                            ::  query ending
+      ;~  pose
+        ;~(pfix wut yquy)
+        (easy ~)
+      ==
+    ++  yquy                                            ::  query
+      %+  cook
+        |=  a=(list ,[p=@t q=@t])
+        (~(gas by *(map ,@t ,@t)) a)
+      ;~  pose                                          ::  proper query
+        %+  more
+          ;~(pose pam sem)
+        ;~(plug fque ;~(pfix wut fque))
+      ::
+        %+  cook                                        ::  funky query
+          |=(a=tape [[%% (crip a)] ~])
+        (star pque)
+      ==
+    ++  zest                                            ::  2616 request-uri
+      ;~  pose
+        (stag %& auri)
+        (stag %| ;~(plug apat yque))
+      ==
+    --
+  ++  ergo                                              ::  eat headers
+    |=  hed=(list ,[p=@t q=@t])
+    =+  mah=*math
+    |-  ^-  math
+    ?~  hed  mah
+    =+  cus=(cass (rip 3 p.i.hed))
+    =+  zeb=(~(get by mah) cus)
+    $(hed t.hed, mah (~(put by mah) cus ?~(zeb [q.i.hed ~] [q.i.hed u.zeb])))
+  ::
+  ++  thin                            
+    |=  [sec=? req=httq]
+    ^-  hate
+    =+  ryp=`quri`(rash q.req zest:epur)
+    =+  mah=(ergo r.req)
+    =+  ^=  pul  ^-  purl
+        ?-  -.ryp
+          &  p.ryp
+          |  =+  hot=(~(get by mah) %host)
+             ?>  ?=([~ @ ~] hot)
+             [(rash i.u.hot thor:epur) p.ryp q.ryp]
+        ==
+    [pul *cred [p.req mah ~]]
   --
 .

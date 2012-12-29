@@ -121,7 +121,6 @@
     |=  mov=move
     ^-  [p=(list move) q=_+>]
     ?+    -.r.mov  [~ +>]
-        %resp  !!
         %this  (hesh & q.mov p.r.mov)
         %thin  (hesh | q.mov p.r.mov)
     ==

@@ -215,6 +215,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
   rec_u->syd = _reck_root("seed", u2k(ken));
 
   rec_u->pug = 0;
+  rec_u->own = 0;
 
   rec_u->toy.rain = _reck_root("rain", u2k(ken));
   rec_u->toy.ream = _reck_root("ream", u2k(ken));
@@ -238,16 +239,16 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     syd = u2k(rec_u->syd);
 
     {
+      // printf("hyde:\n");
+      yen = _reck_load_temp(rec_u, u2k(syd), kno_w, "reck/hyde.hoon");
+
       // printf("ford:\n");
-      zen = _reck_load_temp(rec_u, u2k(syd), kno_w, "reck/ford.hoon");
+      zen = _reck_load_temp(rec_u, yen, kno_w, "reck/ford.hoon");
 
       rec_u->toy.sham = _reck_gate(rec_u, u2k(zen), "sham");
 
-      // printf("hyde:\n");
-      yen = _reck_load_temp(rec_u, zen, kno_w, "reck/hyde.hoon");
-
       // printf("arvo:\n");
-      xan = _reck_load_temp(rec_u, yen, kno_w, "reck/arvo.hoon");
+      xan = _reck_load_temp(rec_u, zen, kno_w, "reck/arvo.hoon");
 
       // printf("bede:\n");
       wol = _reck_load_temp(rec_u, xan, kno_w, "reck/bede.hoon");
@@ -258,11 +259,8 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
       rec_u->toy.duel = 
         _reck_gate(rec_u, u2k(ray), "|=([a=arch b=arch] (~(duel cy a) b))");
 
-      // printf("dill:\n");
-      dyl = _reck_load_temp(rec_u, ray, kno_w, "reck/dill.hoon");
-
       // printf("eyre:\n");
-      vay = _reck_load_temp(rec_u, dyl, kno_w, "reck/eyre.hoon");
+      vay = _reck_load_temp(rec_u, ray, kno_w, "reck/eyre.hoon");
     }
     rec_u->rec = vay;
   }
@@ -301,7 +299,13 @@ _reck_kick(u2_reck* rec_u, u2_noun ovo)
       u2_walk_save(pax_c, 0, u2k(q_pay));
       free(pax_c);
     } break;
- 
+
+    case c3__init: p_pay = u2t(pay);
+    {
+      rec_u->own = u2nc(u2k(p_pay), rec_u->own);
+      break;
+    }
+
     case c3__warn: u2_cx_cell(u2t(pay), &p_pay, &q_pay);
     {
       switch ( p_pay ) {
@@ -363,7 +367,20 @@ _reck_launch_toy(u2_reck* rec_u, u2_noun pax)
   _reck_poke
     (rec_u, 
 //     u2nc(pax, u2nq(c3__make, c3_s4('z','u','s','e'), 256, u2k(rec_u->now))));
-     u2nc(pax, u2nq(c3__make, c3_s4('z','u','s','e'), 256, 0)));
+     u2nc(u2k(pax), u2nq(c3__make, c3_s4('z','u','s','e'), 256, 0)));
+
+  if ( u2_nul == rec_u->own ) {
+    u2z(pax);
+    fprintf(stderr, "make failed?\n"); 
+  }
+  else {
+    _reck_poke
+      (rec_u,
+       u2nc(pax, 
+            u2nt(c3__bind,
+                 u2k(u2h(rec_u->own)),
+                 u2nc(u2_yes, u2_nul))));
+  }
 }
 
 /* u2_reck_sync(): poll and apply sync events (protected).
