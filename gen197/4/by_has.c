@@ -7,7 +7,7 @@
 
 /* functions
 */
-  u2_flag 
+  u2_bean 
   j2_mcc(Pt4, by, has)(u2_wire wir_r, 
                        u2_noun a,                                 //  retain
                        u2_noun b)                                 //  retain

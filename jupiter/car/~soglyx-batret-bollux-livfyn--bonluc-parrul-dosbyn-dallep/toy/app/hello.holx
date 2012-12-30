@@ -1,0 +1,6 @@
+|=  [who=lord est=time pax=path]
+|=  [bis=(set ,@tas) opt=(map ,@tas ,*)]
+|=  [planet=@ta ~]
+:-  :~  [%talk %leaf "hello, {(rip 3 planet)}."]
+    ==
+~

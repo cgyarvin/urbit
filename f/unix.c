@@ -11,7 +11,7 @@
 
 /* _unix_term(): u2_yes iff `tat` should be printed as a term.
 */
-static u2_flag
+static u2_bean
 _unix_term(u2_atom tat)
 {
   c3_w met_w = u2_met(3, tat);
@@ -212,7 +212,7 @@ u2_ux_read_deep(u2_wire     wir_r,
 
 /* u2_ux_write(): write a path/extension as an atom.
 */
-u2_flag
+u2_bean
 u2_ux_write(u2_wire     wir_r,
             u2_atom     som,
             const c3_c* paf_c,
@@ -254,7 +254,7 @@ u2_ux_write(u2_wire     wir_r,
 
 /* u2_ux_write_deep(): write a path/extension as a generic noun.
 */
-u2_flag
+u2_bean
 u2_ux_write_deep(u2_wire     wir_r,
                  u2_noun     som,
                  const c3_c* paf_c,
@@ -287,7 +287,7 @@ u2_ux_write_deep(u2_wire     wir_r,
 
 /* u2_ux_fresh(): true iff `oxt` is as fresh as `ext`.
 */
-u2_flag
+u2_bean
 u2_ux_fresh(const c3_c* paf_c,
             const c3_c* ext_c,
             const c3_c* oxt_c)

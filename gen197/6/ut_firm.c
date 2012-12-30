@@ -69,7 +69,7 @@
           return u2_no;
         } else {
           u2_noun feg = j2_mcy(Pt6, ut, bust)(wir_r, van, q_sut, dib);
-          u2_flag ret;
+          u2_bean ret;
 
           switch ( p_sut ) {
             default: return u2_bl_bail(wir_r, c3__fail); 

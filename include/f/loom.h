@@ -19,7 +19,7 @@
       ** (Ideally, do not use deep C stack at all.)
       */
         uint32_t LoomFrame;
-      /* Stop flag for signal handlers (eg, SIGINT).
+      /* Stop bean for signal handlers (eg, SIGINT).
       */
         volatile sig_atomic_t LoomStop;
         volatile sig_atomic_t LoomIntr;
@@ -93,13 +93,13 @@
       ** Not referenced as such, since in ray space.
       */
         typedef struct _u2_loom_atom {
-          c3_w mug_w;
+          c3_w mog_w;
           c3_w len_w;
           c3_w buf_w[0];
         } u2_loom_atom;
 
         typedef struct _u2_loom_cell {
-          c3_w   mug_w;
+          c3_w   mog_w;
           u2_ray hed_r;
           u2_ray tel_r;
         } u2_loom_cell;
@@ -216,7 +216,7 @@
 
     /*** Noun structure access.
     ***/
-#     define u2_at_dog_mug(a)   u2_at_ray(u2_dog_a(a))
+#     define u2_at_dog_mog(a)   u2_at_ray(u2_dog_a(a))
 
 #     define u2_at_pom_hed(a)   u2_at_ray((1 + u2_pom_a(a)))
 #     define u2_at_pom_tel(a)   u2_at_ray((2 + u2_pom_a(a)))
@@ -392,11 +392,11 @@
     */
       typedef u2_noun u2_cell;
 
-    /* u2_flag:
+    /* u2_bean:
     **
     **   A Martian boolean (0 = yes, 1 = no).
     */
-      typedef u2_noun u2_flag;
+      typedef u2_noun u2_bean;
 
     /* u2_axis:
     **
@@ -430,13 +430,13 @@
 
     /* u2_pool:
     **
-    **   A set, stored as binary treap by mug.
+    **   A set, stored as binary treap by mog.
     */
       typedef u2_noun u2_pool;
 
     /* u2_book:
     **
-    **   An associative array, stored as binary treap by mug.
+    **   An associative array, stored as binary treap by mog.
     */
       typedef u2_noun u2_book;
 
@@ -462,7 +462,7 @@
         **   Yes iff (a) is a cell.
         */
 #if 0
-          u2_flag
+          u2_bean
           u2_dust(u2_noun a)
 #else 
 #         define u2_dust(a) \
@@ -482,65 +482,65 @@
         **   Attempt to deconstruct `a` by axis, noun pairs; 0 terminates.
         **   Axes must be sorted in tree order.
         */
-          u2_flag
+          u2_bean
           u2_mean(u2_noun a,
                   ...);
 
-        /* u2_mug():
+        /* u2_mog():
         **
-        **   Compute and/or recall the mug (31-bit hash) of (a).
+        **   Compute and/or recall the mog (31-bit hash) of (a).
         */
           c3_w
-          u2_mug(u2_noun a);
+          u2_mog(u2_noun a);
       
-        /* u2_mug_string():
+        /* u2_mog_string():
         **
-        **   Compute the mug of `a`, LSB first.
+        **   Compute the mog of `a`, LSB first.
         */
           c3_w
-          u2_mug_string(const c3_c *a_c);
+          u2_mog_string(const c3_c *a_c);
 
-        /* u2_mug_words():
+        /* u2_mog_words():
         **
-        **   Compute the mug of `buf`, `len`, LSW first.
+        **   Compute the mog of `buf`, `len`, LSW first.
         */
           c3_w
-          u2_mug_words(const c3_w *buf_w,
+          u2_mog_words(const c3_w *buf_w,
                        c3_w        len_w);
 
-        /* u2_mug_cell():
+        /* u2_mog_cell():
         **
-        **   Compute the mug of `[a b]`.
+        **   Compute the mog of `[a b]`.
         */
           c3_w
-          u2_mug_cell(u2_noun a,
+          u2_mog_cell(u2_noun a,
                       u2_noun b);
 
-        /* u2_mug_trel():
+        /* u2_mog_trel():
         **
-        **   Compute the mug of `[a b c]`.
+        **   Compute the mog of `[a b c]`.
         */
           c3_w
-          u2_mug_trel(u2_noun a,
+          u2_mog_trel(u2_noun a,
                       u2_noun b,
                       u2_noun c);
 
-        /* u2_mug_qual():
+        /* u2_mog_qual():
         **
-        **   Compute the mug of `[a b c d]`.
+        **   Compute the mog of `[a b c d]`.
         */
           c3_w
-          u2_mug_qual(u2_noun a,
+          u2_mog_qual(u2_noun a,
                       u2_noun b,
                       u2_noun c,
                       u2_noun d);
 
-        /* u2_mug_both():
+        /* u2_mog_both():
         **
-        **   Join two mugs.
+        **   Join two mogs.
         */
           c3_w
-          u2_mug_both(c3_w a_w,
+          u2_mog_both(c3_w a_w,
                       c3_w b_w);
 
         /* u2_fing():
@@ -548,7 +548,7 @@
         **   Yes iff (a) and (b) are the same copy of the same noun.
         **   (Ie, by pointer equality - u2_sing with false negatives.)
         */
-          u2_flag
+          u2_bean
           u2_fing(u2_noun a,
                   u2_noun b);
 
@@ -556,7 +556,7 @@
         **
         **   Yes iff (b) is the same copy of the same noun as the C string [a].
         */
-          u2_flag
+          u2_bean
           u2_fing_c(const c3_c* a_c,
                     u2_noun     b);
 
@@ -564,7 +564,7 @@
         **
         **   Yes iff `[p q]` and `b` are the same copy of the same noun.
         */
-          u2_flag
+          u2_bean
           u2_fing_cell(u2_noun p,
                        u2_noun q,
                        u2_noun b);
@@ -573,7 +573,7 @@
         **
         **   Yes iff `[p q]` and `b` are the same copy of the same noun.
         */
-          u2_flag
+          u2_bean
           u2_fing_mixt(const c3_c* p_c,
                        u2_noun     q,
                        u2_noun     b);
@@ -582,7 +582,7 @@
         **
         **   Yes iff `[p q r]` and `b` are the same copy of the same noun.
         */
-          u2_flag
+          u2_bean
           u2_fing_trel(u2_noun p,
                        u2_noun q,
                        u2_noun r,
@@ -592,7 +592,7 @@
         **
         **   Yes iff `[p q r s]` and `b` are the same copy of the same noun.
         */
-          u2_flag
+          u2_bean
           u2_fing_qual(u2_noun p,
                        u2_noun q,
                        u2_noun r,
@@ -603,7 +603,7 @@
         **
         **   Yes iff (a) and (b) are the same noun.
         */
-          u2_flag
+          u2_bean
           u2_sing(u2_noun a,
                   u2_noun b);
 
@@ -611,7 +611,7 @@
         **
         **   Yes iff (b) is the same noun as the C string [a].
         */
-          u2_flag
+          u2_bean
           u2_sing_c(const c3_c* a_c,
                     u2_noun     b);
 
@@ -619,7 +619,7 @@
         **
         **   Yes iff `[p q]` and `b` are the same noun.
         */
-          u2_flag
+          u2_bean
           u2_sing_cell(u2_noun p,
                        u2_noun q,
                        u2_noun b);
@@ -628,7 +628,7 @@
         **
         **   Yes iff `[p q]` and `b` are the same noun.
         */
-          u2_flag
+          u2_bean
           u2_sing_mixt(const c3_c* p_c,
                        u2_noun     q,
                        u2_noun     b);
@@ -637,7 +637,7 @@
         **
         **   Yes iff `[p q r]` and `b` are the same noun.
         */
-          u2_flag
+          u2_bean
           u2_sing_trel(u2_noun p,
                        u2_noun q,
                        u2_noun r,
@@ -647,7 +647,7 @@
         **
         **   Yes iff `[p q r s]` and `b` are the same noun.
         */
-          u2_flag
+          u2_bean
           u2_sing_qual(u2_noun p,
                        u2_noun q,
                        u2_noun r,
@@ -667,7 +667,7 @@
         **   Yes iff (a) is an atom.
         */
 #if 0
-          u2_flag
+          u2_bean
           u2_stud(u2_noun a)
 #else 
 #         define u2_stud(a) \
@@ -680,7 +680,7 @@
         **
         **   Factor [a] as a bush [b.[p q] c].
         */
-          u2_flag
+          u2_bean
           u2_as_bush(u2_noun  a,
                      u2_noun* b,
                      u2_noun* c);
@@ -689,7 +689,7 @@
         **
         **   Factor (a) as a cell (b c).
         */
-          u2_flag
+          u2_bean
           u2_as_cell(u2_noun  a,
                      u2_noun* b,
                      u2_noun* c);
@@ -698,7 +698,7 @@
         **
         **   Factor (a) as a hext (b c d e f g)
         */
-          u2_flag
+          u2_bean
           u2_as_hext(u2_noun  a,
                      u2_noun* b,
                      u2_noun* c,
@@ -711,7 +711,7 @@
         **
         **   & [0] if [a] is of the form [b *c].
         */
-          u2_flag
+          u2_bean
           u2_as_p(u2_noun  a,
                   u2_noun  b,
                   u2_noun* c);
@@ -720,7 +720,7 @@
         **
         **   & [0] if [a] is of the form [b *c d].
         */
-          u2_flag
+          u2_bean
           u2_as_pq(u2_noun  a,
                    u2_noun  b,
                    u2_noun* c,
@@ -730,7 +730,7 @@
         **
         **   & [0] if [a] is of the form [b *c *d *e].
         */
-          u2_flag
+          u2_bean
           u2_as_pqr(u2_noun  a,
                     u2_noun  b,
                     u2_noun* c,
@@ -741,7 +741,7 @@
         **
         **   & [0] if [a] is of the form [b *c *d *e *f].
         */
-          u2_flag
+          u2_bean
           u2_as_pqrs(u2_noun  a,
                      u2_noun  b,
                      u2_noun* c,
@@ -753,7 +753,7 @@
         **
         **   Factor (a) as a qual (b c d e).
         */
-          u2_flag
+          u2_bean
           u2_as_qual(u2_noun  a,
                      u2_noun* b,
                      u2_noun* c,
@@ -764,7 +764,7 @@
         **
         **   Factor (a) as a quil (b c d e f).
         */
-          u2_flag
+          u2_bean
           u2_as_quil(u2_noun  a,
                      u2_noun* b,
                      u2_noun* c,
@@ -776,7 +776,7 @@
         **
         **   Factor (a) as a trel (b c d).
         */
-          u2_flag
+          u2_bean
           u2_as_trel(u2_noun a,
                      u2_noun *b,
                      u2_noun *c,

@@ -1,7 +1,7 @@
 !:
-::          %echo, a shell.   This file is in the public domain.
+::          %eyre, security manager.   This file is in the public domain.
 ::
-:-  %echo
+:-  %eyre
 ^-  dock
 |=  [now=time wha=@ta]
 %^    hull
@@ -14,200 +14,165 @@
     :~  :^    %rod
             %abel
           :-  [~ ~]
-          :-  [%hose ~]
+          :-  [%unix %term ~]
           |=  hap=*  ^-  (unit)
-          ?.  ?=([p=@ta q=@ta r=@ta ~] hap)
-          :+  (?(%gold %iron %lead) r.hap)
-            (need (clan %ud q.hap))
-          ((sane %ta) p.hap)
-        ^-  hunt
+          ?>  ?=([p=@ta q=@ta ~] hap)
+          :-  ~
+          :~  %unix
+              %term
+              ~(rent co ~ %p (need (clan %p p.hap)))
+              ~(rent co ~ %ud (need (clan %ud q.hap)))
+          ==
+        |=  [seq=@ud muz=* cax=bill] 
+        [%run ~ [muz ~] q.cax]
+    ::
+        :^    %rod
+            %boaz
+          :-  [~ ~]
+          :-  [%unix %pack ~]
+          |=  hap=*  ^-  (unit)
+          [~ ~]
+        |=  [seq=@ud muz=* cax=bill] 
+        [%run ~ ~ q.cax]
+    ::
+        :^    %rod
+            %cain
+          :-  [~ ~]
+          :-  [%bach %pout ~]
+          |=  hap=*  ^-  (unit)
+          ?>  ?=([p=@ta ~] hap)
+          [~ (need (clan %p p.hap))]
         |=  [seq=@ud muz=* cax=bill]
-        [%run ((hard tube) muz) q.cax]
+        [%run [~ muz] q.cax]
     ==
 ^-  vane
 =>  ..$
+=>  |%
+    ++  game
+      $:  gem=(map plot chum)                           ::  hashed passcodes
+          liv=(map plot (list path))                    ::  live sessions
+          rev=(map caul plot)                           ::  identities
+          maw=(map plot _*berg)                         ::  shells
+      == 
+    ++  move  ,[p=(unit plot) q=caul r=bone]            ::  application event
+    --
+=+  sys=*game
 =<  |%
     ++  peek  |=([cam=lens hap=path] ~)
     ++  poke  
       |=  [cam=lens man=*] 
       ^-  [p=lime q=vane]
-      =+  muv=((hard move) man)
-      =+  guf=abet:(warp:(chez p.muv cam) q.muv)
-      :-  :-  %all
-          ^-  (list lime)
-          %+  turn
-            p.guf
-          |=  ran=rain
-          ?>  ?=([%tell *] ran)
-          [%say %yo %p p.muv 0 q.ran]       ::  XX  improve
-      +>.$(..chez q.guf)
+      =+  mov=((hard move) man)
+      =+  zef=(~(howl go when:cam) mov)
+      [p.zef +>.$(sys q.zef)]
     --
-=>  |%
-    ++  desk                                            ::  session state
-      $:  air=(list tube)                               ::  active tubes
-          nub=vase                                      ::  system + libraries
-          red=vase                                      ::  product log
-          ser=vase                                      ::  source log
-          way=(map ,@ta vase)                           ::  environment 
-      ==                                                ::
-    ++  dusk                                            ::  default session
-      ^-  desk                                          ::  
-      :*  air=~                                         ::  not attached
-          nub=!>(..zuul)                                ::  default core
-          red=[[%cube 0 %atom %n] ~]                    ::  no product history
-          ser=[[%cube 0 %atom %n] ~]                    ::  no source history
-          way=~                                         ::  no variables
-      ==                                                ::
-    ++  game                                            ::  active state
-      $:  lap=(map tube plot)                           ::  tubes identified
-          war=(map plot desk)                           ::  consoles by user
-          sod=(map tube desk)                           ::  anon consoles
-          vat=(map plot chum)                           ::  passwords
-      ==                                                ::
-    ++  move  ,[p=tube q=pear]                          ::  application event
-    ++  pear                                            ::  events processed
-      $%  [%bbye ~]                                     ::  log out
-          [%dire p=@tas q=dram]                         ::  loaded directory
-          [%file p=@tas q=@]                            ::  loaded atomic file
-          [%graf p=(list ,@ta)]                         ::  multiline command 
-          [%helo p=@p q=@dr r=chum]                     ::  name age password
-          [%line p=@t]                                  ::  command line
-          [%word p=chum]                                ::  set password
-      ==                                                ::
-    ++  rain                                            ::  reactions produced
-      $%  [%cart p=(list)]                              ::  error trace
-          [%drop p=@]                                   ::  transmit packet
-          [%hear p=@]                                   ::  receive packet
-          [%load p=@tas q=path]                         ::  request directory
-          [%loaf p=@tas q=path]                         ::  request atomic file
-          [%pour p=path q=dram]                         ::  write directory
-          [%save p=path q=@]                            ::  write atomic file
-          [%tell p=?(0 1 2 3) q=tank]                   ::  report to human
-      == 
-    --
-=+  sys=*game
 |%
-++  chez
-  |=  [dub=tube cam=lens]
-  =+  who=(~(get by lap.sys) dub)
-  =+  ^=  tuy  ^-  desk
-      ?~  who  
-        =+  dez=(~(get by sod.sys) dub)
-        ?~(dez dusk u.dez)
-      (need (~(get by war.sys) u.who))
-  =+  por=*(list rain)
-  |%
-  ++  abet  
-    ^-  [p=(list rain) q=_..chez]
-    :-  (flop por)
-    ?~  who
-      ..chez(sod.sys (~(put by sod.sys) dub tuy))
-    ..chez(war.sys (~(put by war.sys) u.who tuy))
-  ::
-  ++  chow
-    |=  [pez=(unit ,@ta) vax=vase]
-    ^+  +>
-    ?+    pez  !!
-        ~
-      =+  ham=~(dole ut p.vax)
-      %_  +>.$
-        por  :-  [%tell %1 (dish:ut ham q.vax)]
-             ::  [%tell %0 (dial:ut ham)]
-             por
-        tuy  tuy(red (slop vax red.tuy))
-      ==
+++  go
+  |_  now=@da 
+  ++  hoot
+    |=  mov=move
+    ^-  [[p=(list move) q=lime] q=game]
+    =^  who  sys
+        ?^  p.mov
+          [u.p.mov sys]
+        =+  vep=(~(get by rev.sys) q.mov)
+        ?^  vep  [u.vep sys]
+        =+  bog=(shaf %bogus when:cam)
+        [bog sys(rev (~(put by rev.sys) q.mov bog))]
+    ?-    -.r.mov
+        %bbye  
+      !!
     ::
-        [~ %load]
-      =+  hup=((soft path) q.vax)
-      %-  chug
-      ?.  &(?=([%face *] p.vax) ?=(^ hup))
-        [%tell %3 [%leaf "<usage: name=path>"]]
-      [%load p.p.vax u.hup]
+        %boot  
+      !!
     ::
-        [~ %loaf]
-      =+  hup=((soft path) q.vax)
-      %-  chug
-      ?.  &(?=([%face *] p.vax) ?=(^ hup))
-        [%tell %3 [%leaf "<usage: name=path>"]]
-      [%loaf p.p.vax u.hup]
+        %cash  
+      !!
     ::
-        [~ %pour]
-      =+  yef=((soft ,[p=path q=dram]) [q:(slot 2 vax) q:(slot 3 vax)])
-      %-  chug
-      ?~(yef [%tell %3 [%leaf "<usage: [path dram]>"]] [%pour u.yef])
+        %crap  
+      !!
     ::
-        [~ %save]
-      =+  yef=((soft ,[p=path q=@]) [q:(slot 2 vax) q:(slot 3 vax)])
-      %-  chug
-      ?~(yef [%tell %3 [%leaf "<usage: [path @]>"]] [%save u.yef])
+        %dire  
+      !!
     ::
-        [~ %type]  
-      (chug [%tell %0 (dial:ut ~(dole ut p.vax))])
+        %feed  
+      !!
+    ::
+        %file  
+      !!
+    ::
+        %hear  
+      !!
+    ::
+        %helo  
+      !!
+    ::
+        %init  
+      !!
+    ::
+        %line  
+      [[~ [%say %pi [%bach ~(rent co ~ %p who) ~] [q.mov r.mov]]] sys]
+    ::
+        %load  
+      !!
+    ::
+        %logn  
+      !!
+    ::
+        %loot  
+      !!
+    ::
+        %make  
+      !!
+    ::
+        %peck  
+      !!
+    ::
+        %pour  
+      !!
+    ::
+        %prop  
+      !!
+    ::
+        %rock  
+      !!
+    ::
+        %save  
+      !!
+    ::
+        %send  
+      !!
+    ::
+        %sync  
+      !!
+    ::
+        %task  
+      !!
+    ::
+        %tell  
+      ?>  ?=([%unix *] 
+      [[~ [%say %yo %g r.mov]] sys]
+    ::
+        %text  
+      !!
+    ::
+        %tory  
+      !!
+    ::
+        %unix
+      [[~ [%say 
+    ::
+        %word  
+      !!
     ==
-  ::
-  ++  chub
-    |=  [pez=(unit ,@ta) ten=tune]
-    ^+  +>
-    ?-    ten
-        [0 *]  (chow pez p.ten)
-        [1 *]  %_    +>
-                   por
-                 |-  ^-  (list rain)
-                 ?~  p.ten
-                   por
-                 =+  vad=(dish:ut [[~ %path] (path i.p.ten)])
-                 %=  $
-                   p.ten  t.p.ten
-                   por    [[%tell %3 [%leaf "<need {~(ram re vad)}>"]] por]
-                 ==
-               ==
-        [2 *]  (chug [%cart p.ten])
-    ==
-  ::
-  ++  chug  |=(ran=rain %_(+> por [ran por]))
-  ++  line                                    ::  execute a line
-    |=  txt=@t
-    ^+  +>
-    =+  ^=  fob  ^-  [p=(unit term) q=gene]
-        %+  rash
-          txt
-        ;~  pose 
-          (stag ~ (stag %cltr (most ace wide:vast)))
-          ;~  plug
-            (stag ~ ;~(pfix col sym))
-            ;~(pfix ace (stag %cltr (most ace wide:vast)))
-          ==
-        ==
-    %+  chub
-      p.fob
-    (slab =(%type p.fob) [(lube when:cam) q.fob] (lick cam))
-  ::
-  ++  lick                                    ::  synthetic namespace
-    |=  cam=lens
-    |=  nam=*
-    ^-  (unit)
-    =+  pax=(path nam)
-    =+  voy=(peek:cam [%cary pax])
-    voy
-  ::
-  ++  lube                                    ::  construct context
-    |=  now=@da  ^-  vase
-    =+  yad=~(rent co [~ %da now])
-    ::  ~&  [%what `@ud`now yad]
-    %+  slop
-      [[%atom %ta] ~(rent co [~ %da now])]
-    %+  slop
-      %+  slop
-        [[%face %$ p.ser.tuy] q.ser.tuy]
-      [[%face %$ p.red.tuy] q.red.tuy]
-    (slum nub.tuy way.tuy)
-  ::
-  ++  warp
-    |=  per=pear
-    ^+  +>
-    ?+    per  !!
-        [%line *]
-      (line p.per)
-    ==
-  --
+::
+++  howl
+  |=  [cam=lens mov=move]
+  =+  [yow=`(list move)`[mov ~] fiz=*(list lime)]
+  |-  ^-  [p=lime q=game]
+  ?~  yow
+    [[%all (flop fiz)] sys]
+  =^  wid  sys
+    (hoot cam i.yow)
+  $(yow (weld p.wid t.yow), fiz [q.wid fiz])
 --

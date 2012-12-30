@@ -22,7 +22,7 @@ _ord_tag_simple(u2_noun tag_l, u2_noun tag_r)
 
 /* _ord_hog_prior():
 **
-**    Return 1 iff (hog_l hog_r) are in correct priority order (meta-mug).
+**    Return 1 iff (hog_l hog_r) are in correct priority order (meta-mog).
 **
 **    Trip iff (hog_l hog_r) are equal.
 */
@@ -31,8 +31,8 @@ _ord_hog_prior(u2_noun hog_l, u2_noun hog_r)
 {
   u2_noun tag_l = u2_h(hog_l);
   u2_noun tag_r = u2_h(hog_r);
-  c3_w nib_l = u2_mug(u2_mug(tag_l));
-  c3_w nib_r = u2_mug(u2_mug(tag_r));
+  c3_w nib_l = u2_mog(u2_mog(tag_l));
+  c3_w nib_r = u2_mog(u2_mog(tag_r));
 
   if ( nib_l == nib_r ) {
     return _ord_tag_simple(tag_l, tag_r);
@@ -42,7 +42,7 @@ _ord_hog_prior(u2_noun hog_l, u2_noun hog_r)
 
 /* _ord_hog_tree():
 **
-**    Return 1 iff (hog_l hog_r) are in correct tree order (mug).
+**    Return 1 iff (hog_l hog_r) are in correct tree order (mog).
 **
 **    Stop iff (hog_l hog_r) are equal.
 */
@@ -51,13 +51,13 @@ _ord_hog_tree(u2_noun hog_l, u2_noun hog_r)
 {
   u2_noun tag_l = u2_h(hog_l);
   u2_noun tag_r = u2_h(hog_r);
-  c3_w mug_l = u2_mug(tag_l);
-  c3_w mug_r = u2_mug(tag_r);
+  c3_w mog_l = u2_mog(tag_l);
+  c3_w mog_r = u2_mog(tag_r);
 
-  if ( mug_l == mug_r ) {
+  if ( mog_l == mog_r ) {
     return _ord_tag_simple(tag_l, tag_r);
   }
-  else return (mug_l < mug_r);
+  else return (mog_l < mog_r);
 }
 
 /* u2_fj_book_is():
@@ -114,7 +114,7 @@ u2_fj_book_in(u2_noun tag_in,
     return 0;
   }
   else {
-    c3_w mug_in = u2_mug(tag_in);
+    c3_w mog_in = u2_mog(tag_in);
 
     while ( 1 ) {
       if ( (u2_nul == book) ) {
@@ -129,16 +129,16 @@ u2_fj_book_in(u2_noun tag_in,
         u2_as_trel(book, &hog, &book_l, &book_r);
         u2_as_cell(hog, &tag, &dog);
         {
-          c3_w mug = u2_mug(tag);
+          c3_w mog = u2_mog(tag);
 
-          if ( mug_in == mug ) {
+          if ( mog_in == mog ) {
             if ( u2_yes == u2_sing(tag_in, tag) ) {
               return 1;
             }
             else book = _ord_tag_simple(tag_in, tag) ? book_l : book_r;
           }
           else {
-            book = (mug_in < mug) ? book_l : book_r;
+            book = (mog_in < mog) ? book_l : book_r;
           }
         }
       }
@@ -158,7 +158,7 @@ u2_fj_book_get(u2_noun tag_get,
     return u2_none;
   }
   else {
-    c3_w mug_get = u2_mug(tag_get);
+    c3_w mog_get = u2_mog(tag_get);
 
     while ( 1 ) {
       if ( (u2_nul == book) ) {
@@ -173,16 +173,16 @@ u2_fj_book_get(u2_noun tag_get,
         u2_as_trel(book, &hog, &book_l, &book_r);
         u2_as_cell(hog, &tag, &dog);
         {
-          c3_w mug = u2_mug(tag);
+          c3_w mog = u2_mog(tag);
 
-          if ( mug_get == mug ) {
+          if ( mog_get == mog ) {
             if ( u2_yes == u2_sing(tag_get, tag) ) {
               return dog;
             }
             else book = _ord_tag_simple(tag_get, tag) ? book_l : book_r;
           }
           else {
-            book = (mug_get < mug) ? book_l : book_r;
+            book = (mog_get < mog) ? book_l : book_r;
           }
         }
       }
@@ -240,13 +240,13 @@ _book_fix_r(u2_ray  wir_r,
   }
 }
 
-/* _book_add_mug(): as u2_fj_book_add(), with mug of tag.
+/* _book_add_mog(): as u2_fj_book_add(), with mog of tag.
 */
 static u2_book
-_book_add_mug(u2_ray  wir_r,
+_book_add_mog(u2_ray  wir_r,
               u2_noun tag_add,
               u2_noun dog_add,
-              c3_w    mug_add,
+              c3_w    mog_add,
               u2_book book)
 {
   if ( (u2_nul == book) ) {
@@ -261,9 +261,9 @@ _book_add_mug(u2_ray  wir_r,
     u2_as_trel(book, &hog, &book_l, &book_r);
     u2_as_cell(hog, &tag, &dog);
     {
-      c3_w mug = u2_mug(tag);
+      c3_w mog = u2_mog(tag);
 
-      if ( mug_add == mug ) {
+      if ( mog_add == mog ) {
         if ( u2_yes == u2_sing(tag_add, tag) ) {
           if ( u2_yes == u2_sing(dog_add, dog) ) {
             return book;
@@ -281,10 +281,10 @@ _book_add_mug(u2_ray  wir_r,
         }
       }
       else {
-        if ( mug_add < mug ) {
+        if ( mog_add < mog ) {
           left: {
-            u2_book book_l_add = _book_add_mug
-              (wir_r, tag_add, dog_add, mug_add, book_l);
+            u2_book book_l_add = _book_add_mog
+              (wir_r, tag_add, dog_add, mog_add, book_l);
 
             if ( book_l_add == book_l ) {
               return book;
@@ -293,8 +293,8 @@ _book_add_mug(u2_ray  wir_r,
           }
         } else {
           right: {
-            u2_book book_r_add = _book_add_mug
-              (wir_r, tag_add, dog_add, mug_add, book_r);
+            u2_book book_r_add = _book_add_mog
+              (wir_r, tag_add, dog_add, mog_add, book_r);
 
             if ( book_r_add == book_r ) {
               return book;
@@ -318,7 +318,7 @@ u2_fj_book_add(u2_ray  wir_r,
                u2_noun dog_add,
                u2_book book)
 {
-  return _book_add_mug(wir_r, tag_add, dog_add, u2_mug(tag_add), book);
+  return _book_add_mog(wir_r, tag_add, dog_add, u2_mog(tag_add), book);
 }
 
 /* u2_fj_book_add_list():

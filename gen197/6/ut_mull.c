@@ -10,12 +10,12 @@
   static u2_noun
   _mull_in(u2_wire, u2_noun, u2_noun, u2_noun, u2_noun, u2_noun);
 
-  static u2_flag
+  static u2_bean
   _mull_vet(u2_wire wir_r, 
             u2_noun van)
   {
-    // u2_flag vet = u2_bn_hook(wir_r, van, "vet");
-    u2_flag vet = u2_frag(j2_ut_van_vet, van);
+    // u2_bean vet = u2_bn_hook(wir_r, van, "vet");
+    u2_bean vet = u2_frag(j2_ut_van_vet, van);
 
     switch ( vet ) {
       case u2_no: 
@@ -754,7 +754,7 @@
     }
   }
   
-  u2_flag                                                         //  transfer
+  u2_bean                                                         //  transfer
   j2_mcx(Pt6, ut, mull)(u2_wire wir_r, 
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain

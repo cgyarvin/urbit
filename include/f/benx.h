@@ -89,7 +89,7 @@
     **  zor: words in basket allocated
     **  ums: number of milliseconds consumed
     */
-      u2_flag
+      u2_bean
       u2_bx_post(u2_ray   wir_r,
                  u2_noun* zat,
                  u2_noun* zof, 

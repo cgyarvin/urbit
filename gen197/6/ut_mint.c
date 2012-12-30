@@ -18,12 +18,12 @@
                         u2_bq(wir_r, c3__cube, _1, c3__atom, 'f'));
   }
 
-  static u2_flag
+  static u2_bean
   _mint_vet(u2_wire wir_r, 
             u2_noun van)
   {
-    // u2_flag vet = u2_bn_hook(wir_r, van, "vet");
-    u2_flag vet = u2_frag(j2_ut_van_vet, van);
+    // u2_bean vet = u2_bn_hook(wir_r, van, "vet");
+    u2_bean vet = u2_frag(j2_ut_van_vet, van);
 
     switch ( vet ) {
       case u2_no: 
@@ -200,7 +200,7 @@
   _mint_brew(u2_wire wir_r,
              u2_noun van,
              u2_noun sut,
-             u2_flag tov,
+             u2_bean tov,
              u2_noun gen)
   {
     u2_noun von;

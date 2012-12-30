@@ -22,7 +22,7 @@ static u2_weak
 u2_ve_build(u2_noun tah)
 {
   c3_w  kno_w = u2_Host.kno_w;
-  c3_d  src_d = u2_ve_date("watt", u2_ct(tah));
+  c3_d  src_d = u2_ve_date("hoon", u2_ct(tah));
   c3_d  bin_d = u2_ve_date("pill", u2_ct(tah));
   u2_noun fol;
 
@@ -42,11 +42,11 @@ u2_ve_build(u2_noun tah)
     }
   } 
   else {
-    u2_noun src = u2_ve_file("watt", u2_ct(tah));
+    u2_noun src = u2_ve_file("hoon", u2_ct(tah));
     u2_noun ken;
     u2_noun pil;
 
-    u2_cm_push(u2nc(c3__lose, u2_cf_path(".", "watt", u2_ct(tah))));
+    u2_cm_push(u2nc(c3__lose, u2_cf_path(".", "hoon", u2_ct(tah))));
 
     if ( !(ken = u2_Host.ver_e[kno_w + 1].ken) &&
          !(ken = u2_Host.ver_e[kno_w + 1].ras) )
@@ -70,7 +70,7 @@ static u2_noun
 u2_ve_oldtool(u2_noun tah)
 {
   c3_w    kno_w = u2_Host.kno_w;
-  u2_weak src = u2_ve_file("watt", tah);
+  u2_weak src = u2_ve_file("hoon", tah);
 
   if ( u2_none == src ) {
     return 0;
@@ -139,9 +139,9 @@ u2_ve_tool(u2_noun nam)
   u2_noun  bon   = u2nc(u2_ci_string(".~"), 
                         u2nq(c3__sys, u2k(num), u2k(nam), u2_nul));
   u2_noun  tah   = u2nt(nam, num, c3__sys);
-  u2_weak  src   = u2_ve_file("watt", u2_ct(tah));
+  u2_weak  src   = u2_ve_file("hoon", u2_ct(tah));
 
-  u2_cm_push(u2nc(c3__lose, u2_cf_path(".", "watt", tah)));
+  u2_cm_push(u2nc(c3__lose, u2_cf_path(".", "hoon", tah)));
 
   if ( u2_none == src ) {
     u2_cm_bail(c3__fail);
@@ -175,11 +175,11 @@ u2_ve_tool(u2_noun nam)
 
 /* u2_ve_able(): u2_yes iff kernel `kno` is bootable as `nam`.
 */
-u2_flag
+u2_bean
 u2_ve_able(c3_w kno_w, c3_m nam_w)
 {
   u2_noun tah = u2nt(nam_w, u2_ve_tag(kno_w), c3__sys);
-  c3_d  src_d = u2_ve_date("watt", u2_ct(tah));
+  c3_d  src_d = u2_ve_date("hoon", u2_ct(tah));
   c3_d  bin_d = u2_ve_date("pill", tah);
 
   if ( bin_d && (bin_d >= src_d) ) {
@@ -194,13 +194,13 @@ c3_w
 u2_ve_auto(c3_w kno_w)
 {
   while ( kno_w <= FirstKernel ) {
-    if ( (u2_yes == u2_ve_able(kno_w, c3__watt)) || 
+    if ( (u2_yes == u2_ve_able(kno_w, c3__hoon)) || 
          (u2_yes == u2_ve_able(kno_w, c3__tram)) ) {
       return kno_w;
     }
     kno_w++;
   }
-  fprintf(stderr, "%s: %d: no sys/watt.pill (max %d)\n", 
+  fprintf(stderr, "%s: %d: no sys/hoon.pill (max %d)\n", 
                   u2_Local, kno_w, FirstKernel);
   exit(1);
 }
@@ -215,7 +215,7 @@ u2_ve_base()
 
   c3_assert(0 == u2_Host.ver_e[u2_Host.kno_w].mod_m);
   {
-    u2_noun ken = u2_cm_bury(u2_ve_build(u2nc(c3__watt, u2_ct(bot))));
+    u2_noun ken = u2_cm_bury(u2_ve_build(u2nc(c3__hoon, u2_ct(bot))));
 
     if ( u2_none != ken ) {                             //  stable kernel
       ver_e->ken = ken;
@@ -366,7 +366,7 @@ u2_ve_retreat()
       default: c3_assert(0);
 
       case 0: {
-        if ( u2_yes == u2_ve_able(u2_Host.kno_w, c3__watt) ) {
+        if ( u2_yes == u2_ve_able(u2_Host.kno_w, c3__hoon) ) {
           u2_ve_full();
           break;
         } else continue;
@@ -450,13 +450,13 @@ u2_ve_start(c3_w kfo_w, c3_w kto_w)
 
       switch ( ver_e->mod_m ) {
         case c3__live:
-          fprintf(stderr, "(%x)\n", u2_mug(ver_e->ken));
+          fprintf(stderr, "(%x)\n", u2_mog(ver_e->ken));
           break;
         case c3__cool:
-          fprintf(stderr, "(transitional) (%x)\n", u2_mug(ver_e->ras));
+          fprintf(stderr, "(transitional) (%x)\n", u2_mog(ver_e->ras));
           break;
         case c3__weak:
-          fprintf(stderr, "(experimental) (%x)\n", u2_mug(ver_e->tip));
+          fprintf(stderr, "(experimental) (%x)\n", u2_mog(ver_e->tip));
           break;
       }
     }
@@ -509,6 +509,8 @@ u2_ve_mark_reck(u2_reck* rec_u)
   siz_w += u2_cm_mark_noun(rec_u->toy.sham);
   siz_w += u2_cm_mark_noun(rec_u->toy.slam);
   siz_w += u2_cm_mark_noun(rec_u->toy.slap);
+  siz_w += u2_cm_mark_noun(rec_u->toy.slay);
+  siz_w += u2_cm_mark_noun(rec_u->toy.scot);
   siz_w += u2_cm_mark_noun(rec_u->toy.slop);
 
   siz_w += u2_cm_mark_noun(rec_u->ken);
@@ -565,7 +567,7 @@ u2_ve_mark()
 void
 u2_ve_word(c3_w wod_w)
 {
-  u2_flag top = u2_yes;
+  u2_bean top = u2_yes;
 
   if ( wod_w / (1000 * 1000 * 1000) ) {
     fprintf(stderr, "%u.", wod_w / (1000 * 1000 * 1000));

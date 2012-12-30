@@ -29,7 +29,7 @@ u2_weak
 u2_ch_find(u2_ray  cad_r,
            u2_noun nam)
 {
-  c3_w mug_w = u2_mug(nam);
+  c3_w mog_w = u2_mog(nam);
   c3_w off_w = 0;
 
   while ( 1 ) {
@@ -50,7 +50,7 @@ u2_ch_find(u2_ray  cad_r,
       return u2_none;
     }
     else {
-      c3_w    fat_w = (mug_w >> off_w) & 15;
+      c3_w    fat_w = (mog_w >> off_w) & 15;
       u2_ray  per_r = (cad_r + (c3_wiseof(u2_loom_pear) * fat_w));
       u2_noun nom = *u2_at(per_r, u2_loom_pear, nam);
 
@@ -84,7 +84,7 @@ u2_ch_find_cell(u2_ray  cad_r,
                 u2_noun hed,
                 u2_noun tal)
 {
-  c3_w mug_w = u2_mug_cell(hed, tal);
+  c3_w mog_w = u2_mog_cell(hed, tal);
   c3_w off_w = 0;
 
   while ( 1 ) {
@@ -110,7 +110,7 @@ u2_ch_find_cell(u2_ray  cad_r,
       return u2_none;
     }
     else {
-      c3_w    fat_w = (mug_w >> off_w) & 15;
+      c3_w    fat_w = (mog_w >> off_w) & 15;
       u2_ray  per_r = (cad_r + (c3_wiseof(u2_loom_pear )* fat_w));
       u2_noun nom = *u2_at(per_r, u2_loom_pear, nam);
 
@@ -146,7 +146,7 @@ u2_ch_find_mixt(u2_ray      cad_r,
                 const c3_c* hed_c,
                 u2_noun     tal)
 {
-  c3_w mug_w = u2_mug_both(u2_mug_string(hed_c), u2_mug(tal));
+  c3_w mog_w = u2_mog_both(u2_mog_string(hed_c), u2_mog(tal));
   c3_w off_w = 0;
 
   while ( 1 ) {
@@ -172,7 +172,7 @@ u2_ch_find_mixt(u2_ray      cad_r,
       return u2_none;
     }
     else {
-      c3_w    fat_w = (mug_w >> off_w) & 15;
+      c3_w    fat_w = (mog_w >> off_w) & 15;
       u2_ray  per_r = (cad_r + (c3_wiseof(u2_loom_pear )* fat_w));
       u2_noun nom = *u2_at(per_r, u2_loom_pear, nam);
 
@@ -199,14 +199,14 @@ u2_ch_find_mixt(u2_ray      cad_r,
   }
 }
 
-/* _ch_save(): as u2_ch_save(), with mug and offset, and iced nouns.
+/* _ch_save(): as u2_ch_save(), with mog and offset, and iced nouns.
 */
-static u2_flag
+static u2_bean
 _ch_save(u2_ray  ral_r,
          u2_ray  cad_r,
          u2_noun nim,
          u2_noun vil,
-         c3_w    mug_w,
+         c3_w    mog_w,
          c3_w    off_w)
 {
   while ( 1 ) {
@@ -216,7 +216,7 @@ _ch_save(u2_ray  ral_r,
       */
       c3_w i_w;
 
-      // printf("conflict: %x\n", mug_w);
+      // printf("conflict: %x\n", mog_w);
       for ( i_w = 0; i_w < 16; i_w++ ) {
         u2_ray  per_r = (cad_r + (c3_wiseof(u2_loom_pear) * i_w));
         u2_noun nom = *u2_at(per_r, u2_loom_pear, nam);
@@ -233,7 +233,7 @@ _ch_save(u2_ray  ral_r,
       return u2_no;
     }
     else {
-      c3_w    fat_w = (mug_w >> off_w) & 15;
+      c3_w    fat_w = (mog_w >> off_w) & 15;
       u2_ray  per_r = (cad_r + (c3_wiseof(u2_loom_pear) * fat_w));
       u2_noun nom = *u2_at(per_r, u2_loom_pear, nam);
 
@@ -259,11 +259,11 @@ _ch_save(u2_ray  ral_r,
         }
         u2_ch_init(osh_r);
 
-        if ( u2_no == _ch_save(ral_r, osh_r, nom, vol, u2_mug(nom), 4+off_w) ) {
+        if ( u2_no == _ch_save(ral_r, osh_r, nom, vol, u2_mog(nom), 4+off_w) ) {
           u2_rl_rfree(ral_r, osh_r);
           return u2_no;
         }
-        if ( u2_no == _ch_save(ral_r, osh_r, nim, vil, mug_w, 4+off_w) ) {
+        if ( u2_no == _ch_save(ral_r, osh_r, nim, vil, mog_w, 4+off_w) ) {
           u2_rl_rfree(ral_r, osh_r);
           return u2_no;
         }
@@ -297,7 +297,7 @@ u2_ch_save(u2_ray  ral_r,
     u2_rl_lose(ral_r, nim);
     return u2_none;
   }
-  if ( u2_no == _ch_save(ral_r, cad_r, nim, vil, u2_mug(nim), 0) ) {
+  if ( u2_no == _ch_save(ral_r, cad_r, nim, vil, u2_mog(nim), 0) ) {
     u2_rl_lose(ral_r, nim);
     u2_rl_lose(ral_r, vil);
     return u2_none;
@@ -330,7 +330,7 @@ u2_ch_save_cell(u2_ray  ral_r,
     u2_rl_lose(ral_r, nim);
     return u2_none;
   }
-  if ( u2_no == _ch_save(ral_r, cad_r, nim, vil, u2_mug(nim), 0) ) {
+  if ( u2_no == _ch_save(ral_r, cad_r, nim, vil, u2_mog(nim), 0) ) {
     u2_rl_lose(ral_r, nim);
     u2_rl_lose(ral_r, vil);
     return u2_none;
@@ -363,7 +363,7 @@ u2_ch_save_mixt(u2_ray      ral_r,
     u2_rl_lose(ral_r, nim);
     return u2_none;
   }
-  if ( u2_no == _ch_save(ral_r, cad_r, nim, vil, u2_mug(nim), 0) ) {
+  if ( u2_no == _ch_save(ral_r, cad_r, nim, vil, u2_mog(nim), 0) ) {
     u2_rl_lose(ral_r, nim);
     u2_rl_lose(ral_r, vil);
     return u2_none;

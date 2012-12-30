@@ -82,7 +82,7 @@ u2_rl_boot(c3_m hip_m)
 **
 **   Reverse the beams forward.
 */
-u2_flag
+u2_bean
 u2_rl_leap(u2_ray ral_r,
            c3_m   hop_m)
 {
@@ -1038,7 +1038,7 @@ top:
 **   Yes iff `som` is senior in `ral` - ie, does not
 **   require reference counting.
 */
-u2_flag
+u2_bean
 u2_rl_senior(u2_ray  ral_r,
              u2_noun som)
 {
@@ -1070,7 +1070,7 @@ u2_rl_senior(u2_ray  ral_r,
 **   Yes iff `som` is junior in `ral` - ie, must be copied
 **   to be referenced on the hat.
 */
-u2_flag
+u2_bean
 u2_rl_junior(u2_ray  ral_r,
              u2_noun som)
 {
@@ -1111,7 +1111,7 @@ u2_rl_flog(u2_ray ral_r)
 **
 **   Yes iff [a] more words remain in the pad.
 */
-u2_flag
+u2_bean
 u2_rl_open(u2_ray ral_r,
            c3_w   a_w)
 {
@@ -1127,7 +1127,7 @@ u2_rl_open(u2_ray ral_r,
 **   Yes iff [lef] does not point to any word >= [net]
 **   and < [bat].
 */
-u2_flag
+u2_bean
 u2_rl_clear(u2_noun lef,
             u2_ray  net_r,
             u2_ray  bat_r)
@@ -1321,7 +1321,7 @@ u2_rl_copy(u2_ray ral_r,
     return fiz;
   }
   else {
-    c3_w mug_w = *u2_at_dog_mug(fiz);
+    c3_w mug_w = *u2_at_dog_mog(fiz);
 
     /* Borrow mug slot to record new destination, if it doesn't already.
     */
@@ -1366,7 +1366,7 @@ u2_rl_copy(u2_ray ral_r,
           }
           nov = u2_pom_of(nov_r, 0);
 
-          *u2_at_dog_mug(nov) = mug_w;
+          *u2_at_dog_mog(nov) = mug_w;
           *u2_at_pom_hed(nov) = hed;
           *u2_at_pom_tel(nov) = tel;
    
@@ -1385,7 +1385,7 @@ u2_rl_copy(u2_ray ral_r,
         }
         nov = u2_pug_of(nov_r, 0);
 
-        *u2_at_dog_mug(nov) = mug_w;
+        *u2_at_dog_mog(nov) = mug_w;
         *u2_at_pug_len(nov) = len_w;
         {
           c3_w i_w;
@@ -1398,7 +1398,7 @@ u2_rl_copy(u2_ray ral_r,
       }
       // printf("  wiped fiz %x; was %x; now %x\n", fiz, mug_w, nov);
 
-      *u2_at_dog_mug(fiz) = nov;
+      *u2_at_dog_mog(fiz) = nov;
       return nov;
     }
   }
@@ -1409,14 +1409,14 @@ u2_rl_wash(u2_rail ral_r,
            u2_dog  fiz)                                            //  retain
 {
   if ( u2_yes == u2_rl_junior(ral_r, fiz) ) {
-    c3_w mug_w = *u2_at_dog_mug(fiz);
+    c3_w mug_w = *u2_at_dog_mog(fiz);
 
     if ( mug_w >> 31 ) {
       u2_noun nov = mug_w;
 
-      *u2_at_dog_mug(fiz) = *u2_at_dog_mug(nov);
+      *u2_at_dog_mog(fiz) = *u2_at_dog_mog(nov);
       // printf("  fixed fiz %x; was %x; now %x\n", 
-      //                         fiz, mug_w, *u2_at_dog_mug(fiz));
+      //                         fiz, mug_w, *u2_at_dog_mog(fiz));
     
       if ( u2_yes == u2_dust(fiz) ) {
         u2_rl_wash(ral_r, u2_h(fiz));
@@ -1660,7 +1660,7 @@ u2_rl_take(u2_ray  ral_r,
         }
         nov = u2_pom_of(nov_r, 0);
 
-        *u2_at_dog_mug(nov) = *u2_at_dog_mug(fiz);
+        *u2_at_dog_mog(nov) = *u2_at_dog_mog(fiz);
         *u2_at_pom_hed(nov) = hed;
         *u2_at_pom_tel(nov) = tel;
  
@@ -1682,7 +1682,7 @@ u2_rl_take(u2_ray  ral_r,
 
       nov = u2_pug_of(nov_r, 0);
 
-      *u2_at_dog_mug(nov) = 0;
+      *u2_at_dog_mog(nov) = 0;
       *u2_at_pug_len(nov) = len_w;
       {
         c3_w i_w;
@@ -1709,7 +1709,7 @@ u2_rl_slab(u2_rail ral_r,
   u2_ray  nov_r = u2_rl_ralloc(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
   u2_atom nov   = u2_pug_of(nov_r, 0);
 
-  *u2_at_dog_mug(nov) = 0;
+  *u2_at_dog_mog(nov) = 0;
   *u2_at_pug_len(nov) = len_w;
 
   /* Clear teh slab.
@@ -1888,7 +1888,7 @@ u2_rl_bytes(u2_ray      ral_r,
       nov_r = _rl_bloq_grab(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
       nov = u2_pug_of(nov_r, 0);
 
-      *u2_at_dog_mug(nov) = 0;
+      *u2_at_dog_mog(nov) = 0;
       *u2_at_pug_len(nov) = len_w;
 
       /* Clear the words.
@@ -1972,7 +1972,7 @@ u2_rl_cell(u2_ray  ral_r,
     nov_r = _rl_bloq_grab(ral_r, c3_wiseof(u2_loom_cell));
     nov = u2_pom_of(nov_r, 0);
 
-    *u2_at_dog_mug(nov) = 0;
+    *u2_at_dog_mog(nov) = 0;
     *u2_at_pom_hed(nov) = a;
     *u2_at_pom_tel(nov) = b;
 
@@ -2338,7 +2338,7 @@ u2_rl_words(u2_ray      ral_r,
       nov_r = _rl_bloq_grab(ral_r, (a_w + c3_wiseof(u2_loom_atom)));
       nov = u2_pug_of(nov_r, 0);
 
-      *u2_at_dog_mug(nov) = 0;
+      *u2_at_dog_mog(nov) = 0;
       *u2_at_pug_len(nov) = a_w;
 
       /* Fill the words.

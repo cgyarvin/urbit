@@ -6,7 +6,7 @@
 
 /* _ds_mate(): u2_yes iff `xip` binds to `cor`.
 */
-static u2_flag
+static u2_bean
 _ds_mate(u2_noun xip,                                             //  retain
          u2_noun cor)                                             //  retain
 {
@@ -69,7 +69,7 @@ u2_ds_find(u2_wire wir_r,
 
 /* _ds_good_cop()::
 */
-static u2_flag
+static u2_bean
 _ds_good_cop(u2_noun cop)
 {
   c3_w i_w = 0;
@@ -89,7 +89,7 @@ _ds_good_cop(u2_noun cop)
 
 /* _ds_good_bud()::
 */
-static u2_flag
+static u2_bean
 _ds_good_bud(u2_noun bud)
 {
   u2_noun p_bud, q_bud;
@@ -114,7 +114,7 @@ _ds_good_bud(u2_noun bud)
 
 /* _ds_good_pic()::
 */
-static u2_flag
+static u2_bean
 _ds_good_pic(u2_noun pic)
 {
   if ( u2_nul == pic ) {

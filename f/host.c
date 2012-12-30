@@ -58,7 +58,7 @@ static void*
 _ho_cash_find(u2_ho_cash *cas_s,
               u2_noun    som)
 {
-  c3_w mug_w = u2_mug(som);
+  c3_w mog_w = u2_mog(som);
   c3_w off_w = 0;
 
   while ( 1 ) {
@@ -76,7 +76,7 @@ _ho_cash_find(u2_ho_cash *cas_s,
       return 0;
     }
     else {
-      c3_w        fat_w = (mug_w >> off_w) & 15;
+      c3_w        fat_w = (mog_w >> off_w) & 15;
       u2_ho_pear* per_p = &cas_s->dol_p[fat_w];
       u2_noun     tag   = per_p->tag;
 
@@ -98,13 +98,13 @@ _ho_cash_find(u2_ho_cash *cas_s,
   }
 }
 
-/* _cs_save(): as _ho_cash_save(), with mug and offset.
+/* _cs_save(): as _ho_cash_save(), with mog and offset.
 */
 static void
 _cs_save(u2_ho_cash* cas_s,
          u2_noun     som,
          void*       ptr_v,
-         c3_w        mug_w,
+         c3_w        mog_w,
          c3_w        off_w)
 {
   while ( 1 ) {
@@ -131,7 +131,7 @@ _cs_save(u2_ho_cash* cas_s,
       return;
     }
     else {
-      c3_w        fat_w = (mug_w >> off_w) & 15;
+      c3_w        fat_w = (mog_w >> off_w) & 15;
       u2_ho_pear* per_p = &cas_s->dol_p[fat_w];
       u2_noun     tag   = per_p->tag;
 
@@ -157,8 +157,8 @@ _cs_save(u2_ho_cash* cas_s,
         }
         _cs_init(cax_s);
 
-        _cs_save(cax_s, tag, qtr_v, u2_mug(tag), 4+off_w);
-        _cs_save(cax_s, som, ptr_v, mug_w, 4+off_w);
+        _cs_save(cax_s, tag, qtr_v, u2_mog(tag), 4+off_w);
+        _cs_save(cax_s, som, ptr_v, mog_w, 4+off_w);
 
         per_p->tag = u2_none;
         per_p->ptr_v = cax_s;
@@ -176,7 +176,7 @@ _ho_cash_save(u2_ho_cash *cas_s,
               u2_noun    som,
               void*      ptr_v)
 {
-  _cs_save(cas_s, som, ptr_v, u2_mug(som), 0);
+  _cs_save(cas_s, som, ptr_v, u2_mog(som), 0);
 }
 
 /* _ho_mop_decimal(): measure/print decimal number.
@@ -703,7 +703,7 @@ u2_ho_test(u2_wire    wir_r,
     return;
   } else {
     c3_c*       cos_c = u2_ho_cstring(jet_j->xip);
-    c3_w        mug_w = u2_mug(cor);
+    c3_w        mog_w = u2_mog(cor);
     const c3_c* msg_c;
 
     if ( u2_none == had ) {
@@ -769,7 +769,7 @@ u2_ho_test(u2_wire    wir_r,
     }
 
     if ( strcmp("nice", msg_c) ) {
-      fprintf(stderr, "%s: %8x: %s\n", msg_c, mug_w, cos_c);
+      fprintf(stderr, "%s: %8x: %s\n", msg_c, mog_w, cos_c);
     }
     free(cos_c);
   }
@@ -1026,7 +1026,36 @@ u2_ho_kicq(u2_ray   wir_r,
            u2_noun  xip,                                          //  retain
            u2_noun  cor,                                          //  retain
            u2_atom  axe,                                          //  retain
-           u2_flag  *pon)                                         //  retain
+           u2_bean  *pon)                                         //  retain
 {
-  return u2_ho_kick(wir_r, xip, cor, axe);
+  u2_noun hoe;
+
+  if ( 0 != (hoe = u2_cm_trap()) ) {
+    u2_noun pro;
+
+    if ( u2h(hoe) == c3__exit ) {
+      pro = u2k(u2t(hoe));
+
+      *pon = 2;
+      u2z(hoe);
+      return pro;
+    } 
+    else if ( u2h(hoe) == c3__need ) {
+      pro = u2k(u2t(hoe));
+
+      *pon = 1;
+      u2z(hoe);
+      return pro;
+    } 
+    else {
+      c3_assert(0);
+      return u2_cm_bowl(hoe);
+    }
+  }
+  else {
+    u2_noun pro = u2_ho_kick(wir_r, xip, cor, axe);
+
+    u2_cm_done();
+    return pro;
+  }
 }

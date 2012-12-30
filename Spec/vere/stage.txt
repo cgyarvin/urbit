@@ -1,17 +1,17 @@
 To stage down from X to Y == (X - 1) on vere computer C, steps:
 
-  Clean watt parts:
+  Clean hoon parts:
 
     - cp -r C/sys/X C/sys/Y
     - select kernel name in Y:
-        watt.watt (regular)
-        tram.watt (genetically incompatible with stage X)
-        test.watt (barebones testing)
+        hoon.hoon (regular)
+        tram.hoon (genetically incompatible with stage X)
+        test.hoon (barebones testing)
 
-    - rm C/sys/Y/watt.pill
-    - git add C/sys/Y/watt.*
-    - git add C/sys/Y/reck/*.watt
-    - update stage number in C/sys/Y.watt (4 subs)
+    - rm C/sys/Y/hoon.pill
+    - git add C/sys/Y/hoon.*
+    - git add C/sys/Y/reck/*.hoon
+    - update stage number in C/sys/Y.hoon
 
   Ugly jet parts:
 

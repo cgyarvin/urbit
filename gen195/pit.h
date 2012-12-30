@@ -303,7 +303,7 @@
                            u2_noun a,                             //  retain
                            u2_noun b);                            //  retain
 
-      u2_flag 
+      u2_bean 
       j2_mcc(Pt4, in, has)(u2_wire wir_r, 
                            u2_noun a,                             //  retain
                            u2_noun b);                            //  retain
@@ -467,7 +467,7 @@
       j2_mcy(Pt6, ut, cull)(u2_wire wir_r,
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
-                            u2_flag pol,                          //  retain
+                            u2_bean pol,                          //  retain
                             u2_atom axe,                          //  retain
                             u2_noun ref);                         //  retain
 
@@ -538,14 +538,14 @@
                             u2_noun dox,                          //  retain
                             u2_noun gen);                         //  retain
 
-      u2_flag                                                     //  transfer
+      u2_bean                                                     //  transfer
       j2_mcy(Pt6, ut, nest)(u2_wire wir_r, 
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain
-                            u2_flag tel,                          //  retain
+                            u2_bean tel,                          //  retain
                             u2_noun ref);                         //  retain
 
-      u2_flag                                                     //  transfer
+      u2_bean                                                     //  transfer
       j2_mcy(Pt6, ut, orth)(u2_wire wir_r, 
                             u2_noun van,                          //  retain
                             u2_noun sut,                          //  retain

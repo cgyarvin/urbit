@@ -191,7 +191,8 @@
             |+  [now=time who=@ta]                      ::  ship factory
             [p=*(list plum) q=*ship]                    ::
   ++  kiwi                                              ::  system product
-    $%  [%o p=@ta q=*]                                  ::  special output 
+    $%  [%g p=bone]                                     ::  standard poison
+        [%o p=@ta q=*]                                  ::  special output 
         [%p p=tube q=@ud r=tank]                        ::  print to console
         [%t p=(list)]                                   ::  print trace
         [%x p=(list)]                                   ::  print request list
@@ -228,6 +229,7 @@
       |+  [cam=lens poc=pork]                           ::
       [p=*(list plum) q=^?(..poke)]                     ::
     --                                                  ::
+  ++  tuba  ,[p=?(%gold %iron %lead) q=path]            ::  session id (nu) 
   ++  tube  ,[p=?(%gold %iron %lead) q=@ud r=@ta]       ::  session identity
   --
 .

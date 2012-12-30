@@ -1,5 +1,5 @@
 !:
-::          %arvo, encryption and protocol.  This file is in the public domain.
+::          %zil, encryption and protocol.  This file is in the public domain.
 ::
 =>
   |%
@@ -198,6 +198,7 @@
     ++  es  |+(a=@ @)                                   ::  step key to next
     ++  ex  ^?                                          ::  export
       |%  ++  fig  @uvH                                 ::  fingerprint
+          ++  pac  @uvG                                 ::  default passcode
           ++  pub  *pass                                ::  public key
           ++  sec  *ring                                ::  private key
       --                                                ::
@@ -274,6 +275,7 @@
     ++  es  |+(a=@ (shas %anex a))
     ++  ex  ^?
       |%  ++  fig  ^-  @uvH  (shaf %afig mos)
+          ++  pac  ^-  @uvG  (end 6 1 (shaf %acod sec))
           ++  pub  ^-  pass  (cat 3 'a' mos)
           ++  sec  ^-  ring  ?~(pon !! (cat 3 'A' (jam p.u.pon q.u.pon)))
       --
@@ -397,10 +399,11 @@
     msg
   --  
 =>  |%
-    ++  ball  ,@uw                                      ::  statement payload
+    ++  ball  ,@uw                                      ::  statement payloot
     ++  plot  ,@p                                       ::  host identity
     ++  bond  (list post)                               ::  atomic statement
     ++  bran  ,[p=mark q=(unit mark) r=plot]            ::  version parent id
+    ++  buck  ,[p=mace q=will]                          ::  all security data
     ++  code  ,@uvI                                     ::  symmetric key
     ++  cask                                            ::  symmetric record
               $:  yed=(unit ,[p=hand q=code])           ::  outbound
@@ -428,6 +431,7 @@
                   [| p=@ud q=(list hair)]               ::  width/13 frags  
               ==                                        ::
     ++  hand  ,@uvH                                     ::  hash of code
+    ++  lice  ,[p=plot q=buck]                          ::  full license
     ++  lint  (list rock)                               ::  fragment array
     ++  lane                                            ::  packet route
               $%  [%if p=@ud q=@if]                     ::  IP4/public UDP/addr
@@ -463,11 +467,11 @@
               ==                                        ::
     ++  wand  (list ,[p=mark q=ac])                     ::  mace in action
     ++  what                                            ::  logical identity
-              $%  [%crew p=corp]                        ::  evil corporation
+              $%  [%corp p=corp]                        ::  business
+                  [%crew p=corp]                        ::  family
                   [%dept p=corp]                        ::  government agency
                   [%dude p=whom]                        ::  male individual
-                  [%fair p=corp]                        ::  nonprofit community
-                  [%gang p=corp]                        ::  family
+                  [%fair p=corp]                        ::  voluntary community
                   [%girl p=whom]                        ::  female individual
                   [%holy p=corp]                        ::  religious community
                   [%punk p=whom]                        ::  fictitious person
@@ -527,7 +531,7 @@
     ++  melt                                            ::  proper connect
       |=  [new=deed old=deed]
       ^-  ?
-      =+  rac=(rank r.p.q.new)
+      =+  rac=(clan r.p.q.new)
       ?&  ?~  q.p.q.new
             ?&  =(r.p.q.old r.p.q.new) 
                 &(!=(%jack rac) =(p.p.q.old (dec p.p.q.new)))
@@ -553,12 +557,12 @@
     ++  pier                                            ::  initial deed
       |=  wed=deed
       ^-  &
-      ?>  =+  rac=(rank r.p.q.wed)
+      ?>  =+  rac=(clan r.p.q.wed)
           =+  loy=(hail r.q.wed)
-          ?&  =(0 p.p.q.wed)
-              =(fig:ex:loy ?+(rac !! %czar (zeno r.p.q.wed), %pawn r.p.q.wed))
-              =((shaf %self (sham q.wed)) (need (sure:pu:loy *code p.wed)))
-          ==
+          ?>  =(0 p.p.q.wed)
+          ?>  =(fig:ex:loy ?+(rac !! %czar (zeno r.p.q.wed), %pawn r.p.q.wed))
+          ?>  =((shaf %self (sham q.wed)) (need (sure:pu:loy *code p.wed)))
+          %&
       %&
     ::
     ++  real
@@ -862,7 +866,12 @@
       ++  ha                                            ::  adopt new license
         |=  [our=plot mac=mace wil=will] 
         ^-  town
-        ?>  &(!=(~ mac) ?=(^ wil) =(our q.p.q.i.wil) (real mac wil))
+        ?>  ?&  !=(~ mac) 
+                ?=(^ wil) 
+                =(our r.p.q.i.wil) 
+                =(wil (grip wil ~))
+                (real mac wil)
+            ==
         %_    ton
             urb
           %+  ~(put by urb.ton)
@@ -937,6 +946,7 @@
     ++  boon                                            ::  fort output
               $%  [%beer p=plot]                        ::  gained ownership
                   [%coke p=cape q=soap]                 ::  message conclusion
+                  [%mead p=rock]                        ::  accept packet
                   [%milk p=sock q=@da r=bond]           ::  learn bindings
                   [%ouzo p=lane q=rock]                 ::  transmit packet
                   [%port p=sock]                        ::  ping
@@ -960,8 +970,8 @@
               $:  wen=@da                               ::  next wakeup
                   ton=town                              ::  security
                   zac=(map plot oven)                   ::  flows by server
-                  vig=(map plot sink)                   ::  (deprecated)
-              ==
+              ==                                        ::
+    ++  hook  path                                      ::  request origin
     ++  meal                                            ::  payload
               $%  [%back p=cape q=flap r=@dr]           ::  acknowledgment
                   [%bond p=plot q=(list post)]          ::  statement
@@ -974,6 +984,11 @@
               $:  wen=@da                               ::  next activation
                   nys=(map band ,[p=@da q=bait])        ::  incoming
                   wab=(map plot bath)                   ::  outgoing by client
+              ==                                        ::
+    ++  plea                                            ::  network command
+              $%  [%cash p=@p q=buck]                   ::  civil license
+                  [%make p=@t q=@]                      ::  wild license
+                  [%rock p=rock]                        ::  hear a packet
               ==                                        ::
     ++  putt                                            ::  outgoing message
               $:  ski=snow                              ::  sequence acked/sent
@@ -999,6 +1014,7 @@
               wix=(bex +((cut 0 [25 2] mag)))
               tay=(cut 0 [27 5] mag)
           ==
+      ~&  [%bite-yax [%yax (cut 0 [25 2] mag)] [%wix wix]]
       ?>  =(chk (end 0 24 (mug bod)))
       :^    `@p`(end 3 wix bod)
           =(0 dit)
@@ -1007,7 +1023,20 @@
     ::
     ++  spit                                            ::  cake to packet
       |=  kec=cake  ^-  @
-      !!
+      =+  wim=(met 3 p.kec)
+      =+  yax=?:((lte wim 2) 0 ?:((lte wim 4) 1 ?:((lte wim 8) 2 3)))
+      =+  wix=(bex +(yax))
+      ~&  [%spit-yax [%yax yax] [%wix wix]]
+      =+  bod=(mix p.kec (lsh 3 wix s.kec))
+      =+  tay=?-(r.kec %none 0, %open 1, %fast 2, %full 3)
+      %+  mix
+        %+  can  0
+        :~  [24 (mug bod)]
+            [1 q.kec]
+            [2 yax]
+            [5 tay]
+        ==
+      (lsh 5 1 bod)
     --
 =>  |%                                                  ::  congestion control
     ++  baby                                            ::  new flow
@@ -1266,6 +1295,7 @@
         ::
         ++  chew
           |=  [sin=skin msg=@]
+          ~&  [%chew sin]
           ^+  +>
           =+  ^=  leq
               |=  key=code  ^-  [p=plot q=_..chew]
@@ -1320,8 +1350,8 @@
             (emit [%milk [our.gus him] now q.fud])
           ::
               %buck
-            =>  .(..dine (emit [%beer him]))
-            ..dine(ton.fox (~(ha go ton.fox) him p.fud q.fud))
+            =>  %_(. ..dine (emit [%beer him]))
+            %_(..dine ton.fox (~(ha go ton.fox) him p.fud q.fud))
           ::
               %carp
             =+  neb=`[p=@da q=bait]`(need (~(get by nys.weg) q.fud))
@@ -1387,6 +1417,22 @@
           (dine | @p [%carp 0 bad q.pay])
         --                                              ::  (lo)
       ::
+      ++  come                                          ::  instantiate pawn
+        |=  [ges=@t bur=@]
+        ^-  [p=plot q=fort]
+        =+  rig=sec:ex:(brew 1.024 bur)
+        =+  loy=(wear rig)
+        =+  our=`@p`fig:ex:loy
+        =+  syp=`step`[`bran`[0 ~ our] [%pawn ges] pub:ex:loy]
+        :-  our
+        %_    fox
+            ton
+          %^    ~(ha go ton.fox)
+              our
+            `mace`[[0 rig] ~]
+          `will`[[(sign:se:loy @ (shaf %self (sham syp))) syp] ~]
+        ==
+      ::
       ++  gnaw                                          ::  process packet
         |=  pac=rock
         ^-  [p=(list boon) q=fort]
@@ -1396,6 +1442,29 @@
           &  grok:(blow:(lo [p.how (shaf %band pac)]) q.kec r.kec s.kec)
           |  [[[%ouzo p.how pac] ~] fox]
         ==
+      ::
+      ++  glow
+        |=  pey=plea
+        ^-  [p=(list boon) q=fort]
+        ?-  -.pey
+          %cash  (have p.pey q.pey)
+          %make  =+(vun=(come p.pey q.pey) [[[%beer p.vun] ~] q.vun])
+          %rock  (gnaw p.pey)
+        ==
+      ::
+      ++  goat                                          ::  mint middle class
+        |=  [[our=@p its=@p] [wid=@ bur=@] gec=gcos]
+        ^-  buck
+        ?>  &(=((clan our) -.gec) !=(%czar -.gec) !=(%pawn -.gec))
+        =+  rul=(lord our)
+        =+  gus=(need (~(us go ton.fox) rul))
+        =+  old=sen:gus
+        =+  loy=(brew wid bur)
+        =+  syp=`step`[`bran`[0 [~ p.old] our] gec pub:ex:loy]
+        =+  ded=`deed`[(sign:se:q.old @ (shaf %meld (sham syp))) syp]
+        =+  mac=`mace`[[0 sec:ex:loy] ~]
+        =+  lew=`will`[ded law.saf.gus]
+        `buck`[mac lew]
       ::
       ++  hast                                          ::  roll per socket
         |=  [soq=sock bah=bath]
@@ -1421,6 +1490,12 @@
                 ==
             ==
         bah(foy ?~(r.p.peq foy.bah (slow foy.bah)), sea tea:q.peq)
+      ::
+      ++  have                                          ::  acquire license
+        |=  [our=plot buq=buck]
+        ^-  [p=(list boon) q=fort]
+        :-  [[%beer our] ~] 
+        fox(ton (~(ha go ton.fox) our buq))
       ::
       ++  haze                                          ::  roll per oven
         |=  [our=plot pov=oven]
@@ -1552,35 +1627,72 @@
       --                                                ::  (am)
     --
 =>  |%
-    ++  card                                            ::  command
+    ++  bone                                            ::  action
       $%  [%bbye ~]                                     ::  log out
           [%boot p=@]                                   ::  reset soft state
-          [%comd p=@t]                                  ::  source line
+          [%cash p=@p q=buck]                           ::  civil license
+          [%crap p=(list)]                              ::  error with trace
           [%dire p=@tas q=dram]                         ::  apply directory
+          [%feed p=bone]                                ::  feed back card
           [%file p=@tas q=@]                            ::  apply atomic file
-          [%helo ~]                                     ::  ready to prompt
-          [%logn p=@p q=@dr r=chum]                     ::  name lease password
-          [%peck p=@]                                   ::  apply packet
-          [%word p=chum]                                ::  set password
-      ==                                                ::
-    ++  gift                                            ::  command reaction
-      $%  [%crap p=(list)]                              ::  error with trace
-          [%feed p=card]                                ::  feed back card
           [%hear p=@]                                   ::  receive packet
-          [%load p=@tas q=path]                         ::  request directory
-          [%loaf p=@tas q=path]                         ::  request atomic file
+          [%helo ~]                                     ::  ready to prompt
+          [%init p=@p]                                  ::  initialize safe
+          [%line p=@t]                                  ::  source line
+          [%load p=@tas q=path]                         ::  request atomic file
+          [%logn p=@p q=@dr r=chum]                     ::  name lease password
+          [%loot p=@tas q=path]                         ::  request directory
+          [%make p=@t q=@]                              ::  wild license
+          [%peck p=@]                                   ::  apply packet
           [%pour p=path q=dram]                         ::  write directory
           [%prop p=? q=@t]                              ::  visible, prompt
+          [%rock p=rock]                                ::  hear a packet
           [%save p=path q=@]                            ::  write atomic file
           [%send p=@]                                   ::  transmit packet
+          [%sync ~]                                     ::  reset soft state
+          [%task p=@tas q=*]                            ::  application task
           [%tell p=?(0 1 2 3) q=tank]                   ::  report to human
-          [%text p=(list ,@t)]                          ::  lines to console
-          [%wack ~]                                     ::  reset soft state
-      == 
+          [%text p=(list ,@t)]                          ::  raw text lines
+          [%tory p=(list ,@t)]                          ::  history dump
+          [%unix p=bone]                                ::  feed back to unix
+          [%word p=chum]                                ::  set password
+      ==
+    ++  caul  (list path)
+    --
+=>  |%
+    ++  bich
+      |=  urb=@
+      ^-  @uv
+      =+  bur=+((shax urb))
+      =+  mur=*(list ring)
+      =+  inx=0
+      |-  ^-  @uv
+      ~&  [%inx inx]
+      ?:  =(256 inx)
+        (rap 7 (flop (turn mur |=(rig=ring fig:ex:(wear rig)))))
+      $(inx +(inx), bur +(bur), mur [sec:ex:(brew 2.048 bur) mur])
+    ::
+    ++  bico
+      |=  [inx=@ urb=@]
+      ^-  ring
+      =+  bur=:(add 1 inx (shax urb))
+      =+  rig=sec:ex:(brew 2.048 bur)
+      ?>  =((zeno inx) fig:ex:(wear rig))
+      rig
+    ::
+    ++  buco
+      |=  [inx=@ urb=@ gec=gcos]
+      ^-  buck
+      =+  rig=(bico inx urb)
+      =+  loy=(wear rig)
+      =+  pas=pub:ex:loy
+      =+  syp=`step`[`bran`[0 ~ inx] gec pas]
+      :-  `mace`[[0 rig] ~]
+      `will`[[(sign:se:loy *code (shaf %self (sham syp))) syp] ~]
     --
 =>  |%
     ++  berg                                            ::  repl/shell
-      |=  [whu=(unit plot) yam=_|+(* *(unit))]          ::  identity, namespace
+      |=  [who=plot yam=_|+(* *(unit))]                 ::  identity, namespace
       =+  nub=`vase`!>(+>)                              ::  system + libraries
       =+  hit=[p=0 q=*(list tape)]                      ::  source history
       =+  sur=[p=0 q=*(qeu vase)]                       ::  result history
@@ -1589,7 +1701,7 @@
       |%
       ++  chad                                          ::  apply command
         |=  [now=@da pez=(unit ,@ta) gen=gene]
-        ^-  [p=(list gift) q=_+>]
+        ^-  [p=(list bone) q=_+>]
         =+  ten=(slab =([~ %how] pez) [(lube now) gen] yam)
         ?-    -.ten
           %0  (chaw pez p.ten)
@@ -1599,7 +1711,7 @@
       ::
       ++  chaw                                          ::  apply result
         |=  [pez=(unit ,@ta) vax=vase]
-        ^-  [p=(list gift) q=_+>]
+        ^-  [p=(list bone) q=_+>]
         ?~  pez
           =+  ham=~(dole ut p.vax)
           :-  :~  ::  [%tell %0 (dial:ut ham)]
@@ -1617,10 +1729,10 @@
           [~ +>.$(way (~(put by way) (,@tas u.var) (slot 3 vax)))]
         :_  +>.$
         =+  zup=[[%cell [%cube u.pez [%atom %tas]] p.vax] [u.pez q.vax]]
-        =+  dax=(love 'gift' zup)
+        =+  dax=(love '*bone' zup)
         ?~  dax
           [[%tell %3 [%leaf "<invalid command>"]] ~]
-        [((hard gift) u.dax) ~]
+        [((hard bone) u.dax) ~]
       :: 
       ++  clam                                          ::  parse tape
         |=  pet=tape
@@ -1640,20 +1752,12 @@
         %_(+> p.hit +(p.hit), q.hit [pet q.hit])
       ::
       ++  knap                                          ::  apply event
-        |=  [now=@da fav=card]
-        ^-  [p=(list gift) q=_+>]
+        |=  [now=@da fav=bone]
+        ^-  [p=(list bone) q=_+>]
         ?+    -.fav  [~ +>]
             %boot
-          :-  [[%tell %0 %leaf "<reboot {lice}>"] prom ~]
-          (berg whu yam)
-        ::
-            %comd
-          =+  pet=(rip 3 p.fav)
-          =>  .(p.hit +(p.hit), q.hit [pet q.hit])
-          =+  vex=(clam pet)
-          ?:  |(?=(~ q.vex) !=(~ q.q.u.q.vex))
-            [[[%tell %3 %leaf "<syntax error>"] ~] +>.$]
-          (chad now p.u.q.vex)
+          :-  [[%tell %0 %leaf "<reboot {lich}>"] prom ~]
+          (berg who yam)
         ::
             %dire
           :-  ~
@@ -1665,20 +1769,26 @@
         ::
             %helo
           [[prom ~] +>]
+        ::
+            %line
+          =+  pet=(rip 3 p.fav)
+          =>  .(p.hit +(p.hit), q.hit [pet q.hit])
+          =+  vex=(clam pet)
+          ?:  |(?=(~ q.vex) !=(~ q.q.u.q.vex))
+            [[[%tell %3 %leaf "<syntax error>"] ~] +>.$]
+          (chad now p.u.q.vex)
         ==
       ::
-      ++  lice                                          ::  name of shell
+      ++  lich                                          ::  name of shell
         ^-  tape
-        ?~  whu
-          "~~"
-        ~(rend co [~ %p u.whu])
+        ~(rend co [~ %p who])
       ::
       ++  lewd                                          ::  type by name
         |=  txt=@t
         ^-  type
         (~(play ut p.nub) (rash txt wide:vast))
       ::
-      ++  love                                          ::  cast by name
+      ++  love                                          ::  ^+ by name
         |=  [txt=@t vax=vase]
         ^-  (unit)
         ?.((~(nest ut (lewd txt)) | p.vax) ~ [~ q.vax])
@@ -1692,13 +1802,11 @@
               [[%atom %da] now]
             [[%atom %ta] ~(rent co [~ %da now])]
           ::
-            ?~  whu
-              [[%atom %n] ~]
             %+  slop
-              [[%atom %p] u.whu]
-            [[%atom %ta] ~(rent co [~ %p u.whu])]
+              [[%atom %p] who]
+            [[%atom %ta] ~(rent co [~ %p who])]
           ::
-            [(lewd '(list ,@)') q.hit]
+            [(lewd '*(list ,@)') q.hit]
           ==
         ::
           =+  voy=(~(tap to q.sur) ~)
@@ -1711,20 +1819,20 @@
           :_  nub
           |-  ^-  vase
           ?+  way  !!     ::  XX some inference weirdness here?
-            [* ~ ~]  [[%face p.n.way p.q.n.way] q.n.way]
+            [* ~ ~]  [[%face p.n.way p.q.n.way] q.q.n.way]
             [* ~ ^]  (slop $(r.way ~) $(way r.way))
             [* ^ ~]  (slop $(l.way ~) $(way l.way))
             [* ^ ^]  :(slop $(r.way ~, l.way ~) $(way l.way) $(way r.way))
           ==
-        ==  
+        ==
       ::
       ++  none                                          ::  standard failure
-        ^-  (list gift)
+        ^-  (list bone)
         [[%tell %3 [%leaf "<invalid command>"]] ~]
       ::
       ++  prom                                          ::  normal prompt
-        ^-  gift
-        [%prop & (rap 3 (weld lice ": "))]
+        ^-  bone
+        [%prop & (rap 3 (weld lich ": "))]
       ::
       ++  stay                                          ::  add to results
         |=  vax=vase

@@ -484,9 +484,9 @@ _http_out(u2_noun rep)
   {
     u2_hrep* rep_u = malloc(sizeof(u2_hrep));
 
-    rep_u->sat_w = sat;
-    rep_u->msg_c = 0;
-    rep_u->typ_c = u2_cr_string(typ);
+    rep_u->sas_w = sat;
+    //  rep_u->msg_c = 0;
+    //  rep_u->typ_c = u2_cr_string(typ);
 
     {
       c3_w len_w     = u2_cr_met(3, txt);
@@ -519,6 +519,64 @@ u2_ve_http_sync(u2_hreq* req_u)
       return 0;
     }
   }
+}
+
+/* u2_ve_launch(): call reck launch fn.
+*/
+void
+u2_ve_launch(void)
+{
+  u2_noun hoe;
+
+  u2_cm_trip();
+  if ( 0 != (hoe = u2_cm_trap()) ) {
+    u2_cm_purge();
+    u2_ve_grab(hoe, 0);
+
+    u2_ve_wine(u2k(u2h(hoe)));
+    u2_ve_sway(2, u2_ckb_flop(u2k(u2t(hoe))));
+    u2z(hoe);
+  } 
+  else {
+    u2_reck_launch(&u2_Host.rec_u[0]);
+  
+    u2_cm_done();
+  
+    u2_cm_purge();
+    if ( (u2_yes == u2_Flag_Garbage) || (u2_no == u2_wire_lan(u2_Wire)) ) {
+      u2_ve_grab(0);
+    }
+  }
+  u2_cm_chin();
+}
+
+/* u2_ve_sync(): filesystem sync, unprotected.
+*/
+void
+u2_ve_sync(void)
+{
+  u2_noun hoe;
+
+  u2_cm_trip();
+  if ( 0 != (hoe = u2_cm_trap()) ) {
+    u2_cm_purge();
+    u2_ve_grab(hoe, 0);
+
+    u2_ve_wine(u2k(u2h(hoe)));
+    u2_ve_sway(2, u2_ckb_flop(u2k(u2t(hoe))));
+    u2z(hoe);
+  } 
+  else {
+    u2_reck_sync(&u2_Host.rec_u[0]);
+  
+    u2_cm_done();
+  
+    u2_cm_purge();
+    if ( (u2_yes == u2_Flag_Garbage) || (u2_no == u2_wire_lan(u2_Wire)) ) {
+      u2_ve_grab(0);
+    }
+  }
+  u2_cm_chin();
 }
 
 /* u2_ve_line(): execute a command line, unprotected.

@@ -25,16 +25,16 @@
 **/
     /* External drivers.
     */
-      extern u2_ho_driver j2_da(k_195);
-      extern u2_ho_driver j2_da(k_196);
-      extern u2_ho_driver j2_da(k_197);
+      extern u2_ho_driver j2_da(k_192);
+      extern u2_ho_driver j2_da(k_193);
+      extern u2_ho_driver j2_da(k_194);
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       u2_ho_driver *HostDriverBase[] = {
-        &j2_da(k_195),
-        &j2_da(k_196),
-        &j2_da(k_197),
+        &j2_da(k_192),
+        &j2_da(k_193),
+        &j2_da(k_194),
         0
       };
 
@@ -46,10 +46,10 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
   u2_noun map = 0;
   c3_w    kno_w = 0;
   u2_noun hep = u2_nul;
-  u2_flag abo = u2_no;
-  u2_flag gab = u2_no;
-  u2_flag pro = u2_no;
-  u2_flag veb = u2_no;
+  u2_bean abo = u2_no;
+  u2_bean gab = u2_no;
+  u2_bean pro = u2_no;
+  u2_bean veb = u2_no;
 
   c3_i ch_i;
 
@@ -138,14 +138,43 @@ volatile enum { sig_none, sig_overflow, sig_interrupt } Sigcause;
 ev_io Stdin_watcher;
 struct ev_loop *Loop_u;
 
-static GetLine *Tecla;
+GetLine *Tecla;
+
+static c3_c*
+_get_line()
+{
+  u2_noun pot = u2_reck_prick
+                    (&u2_Host.rec_u[0], 
+                     u2nt(c3__eyre, 
+                          c3__prod,
+                          u2nq(c3__gold, c3__term, '0', u2_nul)));
+  c3_c* pot_c;
+  c3_c* out_c;
+
+  if ( u2_none == pot ) {
+    gl_normal_io(Tecla);
+    exit(1);
+  }
+  if ( u2_nul == pot ) {
+    pot_c = strdup(": ");
+  } else {
+    pot_c = u2_cr_string(u2t(u2t(pot)));
+  }
+
+  out_c = gl_get_line(Tecla, pot_c, 0, -1);
+
+  u2z(pot);
+  free(pot_c);
+
+  return out_c;
+}
 
 static void
 stdin_cb(struct ev_loop *lup_u, struct ev_io *w, int revents)
 {
   c3_c* lin_c;
   
-  lin_c = gl_get_line(Tecla, ": ", 0, -1);
+  lin_c = _get_line();
 
   if ( !lin_c ) {
     if ( GLR_BLOCKED != gl_return_status(Tecla) ) {
@@ -176,7 +205,7 @@ stdin_cb(struct ev_loop *lup_u, struct ev_io *w, int revents)
       free(out_c);
 
       gl_raw_io(Tecla);
-      gl_get_line(Tecla, ": ", 0, -1);
+      _get_line();
 
       // printf(": "); fflush(stdout);
     }
@@ -253,7 +282,11 @@ main(c3_i   argc,
       u2_ve_init(kno_w);
 
       if ( 0 != u2_Host.ver_e[kno_w].ken ) {
+#if 0
         u2_reck_boot(&u2_Host.rec_u[0]);
+#else
+        u2_reck_boot(&u2_Host.rec_u[0]);
+#endif
       }
     }
     u2_cm_done();
@@ -323,6 +356,9 @@ main(c3_i   argc,
     exit(1);
   }
 
+  u2_ve_launch();
+  u2_ve_sync();
+
   Tecla = new_GetLine(16384, 4096);
   gl_io_mode(Tecla, GL_SERVER_MODE);
   {
@@ -339,7 +375,7 @@ main(c3_i   argc,
     {
       c3_c* lin_c;
     
-      lin_c = gl_get_line(Tecla, ": ", 0, -1);
+      lin_c = _get_line();
       c3_assert(!lin_c && (GLR_BLOCKED == gl_return_status(Tecla)));
     }
     ev_loop(lup_u, 0);

@@ -11,7 +11,7 @@
         typedef struct _u2_loom_wire {
           u2_loom_rail o;
 
-          /* Clean flag.  u2_no when there may be garbage.
+          /* Clean bean.  u2_no when there may be garbage.
           */
           u2_noun lan;
 

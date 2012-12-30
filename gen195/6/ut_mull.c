@@ -10,12 +10,12 @@
   static u2_noun
   _mull_in(u2_wire, u2_noun, u2_noun, u2_noun, u2_noun, u2_noun);
 
-  static u2_flag
+  static u2_bean
   _mull_vet(u2_wire wir_r, 
             u2_noun van)
   {
-    // u2_flag vet = u2_bn_hook(wir_r, van, "vet");
-    u2_flag vet = u2_frag(j2_ut_van_vet, van);
+    // u2_bean vet = u2_bn_hook(wir_r, van, "vet");
+    u2_bean vet = u2_frag(j2_ut_van_vet, van);
 
     switch ( vet ) {
       case u2_no: 
@@ -37,7 +37,7 @@
   }
 
   static u2_noun
-  _mull_flag(u2_wire wir_r)
+  _mull_bean(u2_wire wir_r)
   {
     return u2_bt(wir_r, c3__fork, 
                         u2_bq(wir_r, c3__cube, _0, c3__atom, 'f'),
@@ -131,11 +131,11 @@
              u2_noun typ)                                         //  submit
   {
     if ( u2_no == j2_mcy(Pt6, ut, nest)(wir_r, van, gol, u2_yes, typ) ) {
-      u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "need", gol);
-      u2_noun niz = j2_mcy(Pt6, ut, dunq)(wir_r, van, "have", typ);
+      // u2_noun dun = j2_mcy(Pt6, ut, dunq)(wir_r, van, "need", gol);
+      // u2_noun niz = j2_mcy(Pt6, ut, dunq)(wir_r, van, "have", typ);
 
-      u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
-      u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
+      // u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
+      // u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
 
       return u2_bl_error(wir_r, "mull-nice");
     }
@@ -370,12 +370,12 @@
         u2_rz(wir_r, p_syx); u2_rz(wir_r, q_syx);
         u2_rz(wir_r, p_pov); u2_rz(wir_r, q_pov);
 
-        return _mull_both(wir_r, van, gol, _mull_flag(wir_r));
+        return _mull_both(wir_r, van, gol, _mull_bean(wir_r));
       }
       case c3__wtcl: u2_bi_trel(wir_r, u2_t(gen), &p_gen, &q_gen, &r_gen);
       _mull_used(wir_r);
       {
-        u2_noun bol = _mull_flag(wir_r);
+        u2_noun bol = _mull_bean(wir_r);
         u2_noun nor = _mull_in(wir_r, van, sut, bol, dox, p_gen);
         u2_noun p_fex = j2_mcy(Pt6, ut, gain)(wir_r, van, sut, p_gen);
         u2_noun q_fex = j2_mcy(Pt6, ut, gain)(wir_r, van, dox, p_gen);
@@ -446,7 +446,7 @@
         u2_rz(wir_r, hed);
         u2_rz(wir_r, tal);
 
-        return _mull_both(wir_r, van, gol, _mull_flag(wir_r));
+        return _mull_both(wir_r, van, gol, _mull_bean(wir_r));
       }
       case c3__dtwt: p_gen = u2_t(gen);
       _mull_used(wir_r);
@@ -454,7 +454,7 @@
         u2_noun vay = _mull_in(wir_r, van, sut, c3__noun, dox, p_gen);
         
         u2_rz(wir_r, vay);
-        return _mull_both(wir_r, van, gol, _mull_flag(wir_r));
+        return _mull_both(wir_r, van, gol, _mull_bean(wir_r));
       }
       case c3__dtkt: p_gen = u2_t(gen);
       _mull_used(wir_r);
@@ -754,7 +754,7 @@
     }
   }
   
-  u2_flag                                                         //  transfer
+  u2_bean                                                         //  transfer
   j2_mcx(Pt6, ut, mull)(u2_wire wir_r, 
                         u2_noun van,                              //  retain
                         u2_noun sut,                              //  retain

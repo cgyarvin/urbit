@@ -8,17 +8,17 @@
 #include <sys/stat.h>
 #include <dirent.h>
 
-#include "../gen197/pit.h"
+#include "../gen194/pit.h"
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt5Y   k_197__a__b__c__d__e
+#   define Pt5Y   k_194__a__b__c__d__e
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt3Y   k_197__a__b__c
-#   define Pt4Y   k_197__a__b__c__d
-#   define Pt5Y   k_197__a__b__c__d__e
+#   define Pt3Y   k_194__a__b__c
+#   define Pt4Y   k_194__a__b__c__d
+#   define Pt5Y   k_194__a__b__c__d__e
 
     u2_noun j2_mbc(Pt3Y, gor)(u2_wire, u2_noun a, u2_noun b);
     u2_noun j2_mcc(Pt4Y, by, get)(u2_wire, u2_noun a, u2_noun b);
@@ -205,7 +205,7 @@ u2_cf_list(u2_noun pas)
 
 /* u2_cf_flat_save(): save `som` as `mod` at `pas`. 
 */
-u2_flag
+u2_bean
 u2_cf_flat_save(u2_noun mod, 
                 u2_noun pas,
                 u2_noun som)
@@ -478,6 +478,49 @@ u2_cm_bail(c3_l how_l)
     //
     {
       _longjmp(buf_f, u2nc(how_l, jaq));
+    }
+  }
+  return 0;
+}
+
+/* u2_cm_bowl(): bail out with preset report.
+*/
+u2_noun
+u2_cm_bowl(u2_noun how)
+{
+  u2_ray kit_r = u2_wire_kit_r(u2_Wire);
+
+  u2_tx_sys_bit(u2_Wire, u2_yes);
+
+  {
+    u2_noun jaq;
+    jmp_buf buf_f;
+
+    // Reset the old stack trace, pulling off the local top.
+    //
+    jaq = u2_cm_wail();
+
+    // Reset the old action trace.
+    {
+      u2z(u2_wrac_at(u2_Wire, duz.don));
+      u2_wrac_at(u2_Wire, duz.don) = u2_kite_don(kit_r);
+    }
+
+    // Copy out the jump buffer; free the old kite.
+    {
+      memcpy((void *)buf_f,
+             u2_at_cord(u2_kite_buf_r(kit_r), c3_wiseof(jmp_buf)),
+             sizeof(jmp_buf));
+
+      u2_wire_kit_r(u2_Wire) = u2_kite_par_r(kit_r);
+      u2_rl_rfree(u2_Wire, kit_r);
+    }
+    
+    // Longjmp with the how-trace pair.  XX: no workee with 64-bit nouns.
+    //
+    {
+      u2z(jaq);
+      _longjmp(buf_f, how);
     }
   }
   return 0;
@@ -782,7 +825,7 @@ u2_ckd_in_gas(u2_noun a, u2_noun b)
 
 /* u2_ckd_by_has(): test for presence.
 */
-u2_flag
+u2_bean
 u2_ckd_by_has(u2_noun a, u2_noun b)
 {
   u2_weak c = _coal_by_has(u2_Wire, a, b);
@@ -796,7 +839,7 @@ u2_ckd_by_has(u2_noun a, u2_noun b)
 
 /* u2_ckd_in_has(): test for presence.
 */
-u2_flag
+u2_bean
 u2_ckd_in_has(u2_noun a, u2_noun b)
 {
   u2_weak c = _coal_in_has(u2_Wire, a, b);

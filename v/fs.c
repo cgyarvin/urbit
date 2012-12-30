@@ -94,7 +94,7 @@ u2_ve_frep(u2_noun myp, u2_noun hat)
 
 /* u2_ve_save(): save internal file as atom.
 */
-u2_flag
+u2_bean
 u2_ve_save(c3_c* ext_c, u2_noun tah, u2_noun dat)
 {
   return u2_cf_flat_save(c3__atom, u2_cf_path(u2_Local, ext_c, tah), dat);

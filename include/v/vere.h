@@ -6,8 +6,8 @@
   **/
     /* First kernel this executable can boot.
     */
-#     define FirstKernel   197
-#     define DefaultKernel 197
+#     define FirstKernel   194
+#     define DefaultKernel 194
  
 #define RECK
 
@@ -53,39 +53,51 @@
     /* u2_hreq: http request.
     */
       typedef struct _u2_hreq {
-        u2_hmet  met_e;                     //  method
-        u2_hrat  rat_e;                     //  request state
-        u2_flag  liv;                       //  keepalive
-        c3_c*    url_c;                     //  url
-        u2_hhed* hed_u;                     //  headers 
-        u2_hbod* bod_u;                     //  body parts
+        struct _u2_hcon* hon_u;             //  connection
+        c3_w             seq_l;             //  sequence within connection
+        u2_hmet          met_e;             //  method
+        u2_hrat          rat_e;             //  parser state
+        void*            par_u;             //  struct http_parser *
+        c3_c*            url_c;             //  url
+        u2_bean          liv;               //  keepalive
+        u2_bean          end;               //  all responses added
+        u2_hhed*         hed_u;             //  headers 
+        u2_hbod*         bod_u;             //  body parts
+        struct _u2_hreq* nex_u;             //  next in request queue
+        u2_hbod*         rub_u;             //  exit of write queue
+        u2_hbod*         bur_u;             //  entry of write queue
       } u2_hreq;
 
     /* u2_hrep: simple http response.
     */
       typedef struct _u2_hrep {
-        c3_w             sat_w;             //  status
-        c3_c*            msg_c;             //  status-message or null
-        c3_c*            typ_c;             //  content-type
-        struct _u2_hbod* bod_u;             //  body (one part)
+        c3_w             sev_l;             //  server number
+        c3_w             coq_l;             //  connection number
+        c3_w             seq_l;             //  request number
+        c3_w             sas_w;             //  status
+        u2_hhed*         hed_u;             //  headers
+        u2_hbod*         bod_u;             //  body (one part)
       } u2_hrep;
 
     /* u2_hcon: http connection.
     */
       typedef struct _u2_hcon {
         struct ev_io     wax_u;             //  event handler state
-        void*            par_u;             //  struct http_parser *
-        struct _u2_http* srv_u;             //  server below
-        struct _u2_hcon* nex_u;             //  next in server list
-        struct _u2_hreq* req_u;             //  request in process if any
-        struct _u2_hbod* rep_u;             //  head of response queue
-        struct _u2_hbod* per_u;             //  tail of response queue
+        c3_w             coq_l;             //  connection number
+        c3_w             seq_l;             //  next request number
+        struct _u2_http* htp_u;             //  backlink to server 
+        struct _u2_hcon* nex_u;             //  next in server's list
+        struct _u2_hreq* ruc_u;             //  request under construction
+        struct _u2_hreq* req_u;             //  exit of request queue
+        struct _u2_hreq* qer_u;             //  entry of request queue
       } u2_hcon;
 
     /* u2_http: http server.
     */
       typedef struct _u2_http {
         struct ev_io     wax_u;             //  event handler state
+        c3_w             sev_l;             //  server number - mostly unique
+        c3_w             coq_l;             //  next connection number
         c3_w             por_w;             //  running port
         struct _u2_hcon* hon_u;             //  connection list
         struct _u2_http* nex_u;             //  next in list
@@ -143,18 +155,24 @@
           u2_noun duel;                   //  compare resource trees
           u2_noun rain;                   //  parse path, text -> gene
           u2_noun ream;                   //  parse text -> gene
-          u2_noun sham;                   //  SHA-256 
+          u2_noun sham;                   //  SHA-256 on noun
           u2_noun slam;                   //  call ([vase vase] -> vase)
           u2_noun slap;                   //  layer ([vase gene] -> vase)
           u2_noun slop;                   //  cell ([vase vase] -> vase)
+          u2_noun slay;                   //  text to coin
+          u2_noun scot;                   //  mole to text
         } toy;
 
         u2_noun now;                      //  current time, as noun
         u2_noun wen;                      //  current time, as text
+        u2_noun own;                      //  owner list
+
+        u2_noun pug;                      //  prompt state
 
         u2_noun ken;                      //  kernel formula
         u2_noun syd;                      //  kernel seed 
         u2_noun rec;                      //  rotor core
+
       } u2_reck;
  
     /* u2_host: entire host.
@@ -183,10 +201,10 @@
     c3_global  c3_c*    u2_Local;
     c3_global  c3_c*    u2_System;
 
-    c3_global  u2_flag  u2_Flag_Abort;
-    c3_global  u2_flag  u2_Flag_Garbage;
-    c3_global  u2_flag  u2_Flag_Profile;
-    c3_global  u2_flag  u2_Flag_Verbose;
+    c3_global  u2_bean  u2_Flag_Abort;
+    c3_global  u2_bean  u2_Flag_Garbage;
+    c3_global  u2_bean  u2_Flag_Profile;
+    c3_global  u2_bean  u2_Flag_Verbose;
 
 #   define u2_ve_at() ( &u2_Host.ver_e[u2_Host.kno_w] )
 
@@ -286,7 +304,7 @@
       /* u2_path(): C unix path in computer for file or directory. 
       */
         c3_c*
-        u2_path(u2_flag fyl, u2_noun pax);
+        u2_path(u2_bean fyl, u2_noun pax);
 
     /**  Filesystem (old api).
     **/
@@ -309,7 +327,7 @@
 
       /* u2_ve_save(): save internal file as atom.
       */
-        u2_flag
+        u2_bean
         u2_ve_save(c3_c* ext_c, u2_noun tah, u2_noun dat);
 
       /* u2_ve_zeus(): prayer to internal file path.  Return unit.
@@ -331,15 +349,43 @@
         void
         u2_reck_line(u2_reck* rec_u, u2_noun lin);
 
+      /* u2_reck_http_request(): hear http request on channel.
+      */
+        void
+        u2_reck_http_request(u2_reck* rec_u, 
+                             u2_bean  sec,
+                             u2_noun  pox, 
+                             u2_noun  req);
+
+      /* u2_reck_http_respond(): apply http response.
+      */
+        void
+        u2_reck_http_respond(u2_reck* rec_u, u2_noun pox, u2_noun rep);
+
       /* u2_reck_boot(): boot the reck engine (unprotected).
       */
         void
         u2_reck_boot(u2_reck* rec_u);
 
-      /* u2_reck_peek(): query the reck namespace.
+      /* u2_reck_launch(): launch the reck engine (protected).
+      */
+        void
+        u2_reck_launch(u2_reck* rec_u);
+
+      /* u2_reck_peek(): query the reck namespace (protected).
       */
         u2_noun
         u2_reck_peek(u2_reck* rec_u, u2_noun hap);
+
+      /* u2_reck_prick(): query the reck namespace (unprotected).
+      */
+        u2_noun
+        u2_reck_prick(u2_reck* rec_u, u2_noun hap);
+
+      /* u2_reck_sync(): poll and apply sync events (protected).
+      */
+        void
+        u2_reck_sync(u2_reck* rec_u);
 
 
     /**  Execution system.
@@ -498,14 +544,30 @@
         void
         u2_ve_line_boot(void);
 
+      /* u2_ve_launch(): call neck launch fn.
+      */
+        void
+        u2_ve_launch(void);
+
+      /* u2_ve_sync(): filesystem sync, unprotected.
+      */
+        void
+        u2_ve_sync(void);
+
+
     /**  HTTP.
     **/
-      /* u2_ve_http_start():
+      /* u2_ve_http_start(): start on port.
       */
-        u2_flag
+        u2_bean
         u2_ve_http_start(c3_w por_w);
 
-      /* u2_ve_http_sync(): simple synchronous http.
+      /* u2_ve_http_request(): dispatch http request, returning null if async.
       */
         u2_hrep*
-        u2_ve_http_sync(u2_hreq* req_u);
+        u2_ve_http_request(u2_hreq* req_u);
+
+      /* u2_ve_http_respond(): queue response.  Transfer `pox`, `rep`.
+      */
+        void
+        u2_ve_http_respond(u2_noun pox, u2_noun rep);
