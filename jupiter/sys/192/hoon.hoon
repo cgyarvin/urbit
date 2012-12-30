@@ -3107,7 +3107,6 @@
       [%cnts p=wing q=(list ,[p=gene q=gene])]
     ::
       [%dtkt p=gene]
-      [%dtdq p=(list $|(@ta [~ p=gene]))]
       [%dtls p=gene]
       [%dtpt p=term q=@]
       [%dtsg p=term q=*]
@@ -3162,6 +3161,7 @@
       [%smgr p=gene q=gene r=gene]
       [%smkt p=gene q=gene]
       [%smhp p=gene q=gene]
+      [%smhx p=(list beer)]
       [%smls p=gene q=gene]
       [%smpm p=gene q=(list gene)]
       [%smsg p=gene q=(list gene)]
@@ -3701,14 +3701,15 @@
         :^    %wtcl                                     ::  ?:  
             [%bcts %bean]                               ::  ?
           [%bcts %null]                                 ::  ~
-        [[%ktts %i [%dtpt %t @]] [%ktts %t [%cnbc %%]]] ::  [i=~~ t=$]
+        :-  [%ktts %i [%dtpt 'tD' @]]                   ::  :-  i=~~
+        [%ktts %t [%cnbc %%]]                           ::  t=$
       |-  ^-  gene                                      ::
       ?~  p.gen                                         ::
         [%bcts %null]                                   ::  ~
       =+  res=$(p.gen t.p.gen)                          ::
       ^-  gene                                          ::
       ?@  i.p.gen                                       ::
-        [[%dtpt %t i.p.gen] res]                        ::  [~~{i.p.gen} {res}]
+        [[%dtpt 'tD' i.p.gen] res]                      ::  [~~{i.p.gen} {res}]
       :+  %tsls                                         ::
         :-  :+  %ktts                                   ::  ^=
               %a                                        ::  a
@@ -3742,6 +3743,28 @@
             i.q.gen                                     ::
         ==                                              ::  ==
       $(q.gen t.q.gen)                                  ::
+    ::
+        [%smhx *]                                       ::                  ;#
+      =+  cah=*(list ,@)                                ::
+      =+  ^=  cda                                       ::
+          |=  a=(list ,@)                               ::
+          :-  :-  [%dtpt %ta %%]                        ::
+              :-  :-  [%dtpt %ta %%]                    ::
+                  [%smdq a]                             ::
+              [%bcts %null]                             ::
+          [%bcts %null]                                 ::
+      |-  ^-  gene                                      ::
+      ?~  p.gen                                         ::
+        ?~  cah                                         ::
+          [%bcts %null]                                 ::
+        [(cda (flop cah)) [%bcts %null]]                ::
+      ?@  i.p.gen                                       ::
+        $(p.gen t.p.gen, cah [i.p.gen cah])             ::
+      ?~  cah                                           ::
+        [p.i.p.gen $(p.gen t.p.gen)]                    ::
+      :+  (cda (flop cah))                              ::
+        p.i.p.gen                                       ::
+      $(p.gen t.p.gen, cah ~)                           ::
     ::
         [%smpm *]                                       ::                  ;&
       ?~  q.gen                                         ::
@@ -6014,6 +6037,11 @@
       :-  '-'
         ;~  pose
           (stag %dtpt tash:so)
+          %+  cook
+            |=  a=(list (list beer))
+            [%smhx |-(?~(a ~ (weld i.a $(a t.a))))]
+          (most dog ;~(pfix hep soil))
+        ::
           (cook |=(a=wing [%cnts a ~]) rope)
         ==
       :-  '.'
