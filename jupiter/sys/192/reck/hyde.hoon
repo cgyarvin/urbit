@@ -83,7 +83,7 @@
               %good                                     ::  delivered
               %weak                                     ::  rejected
           ==                                            ::
-++  card                                                ::  action
+++  card                                                ::  event
           $%  [%bbye ~]                                 ::  log out
               [%bind p=lord q=host]                     ::  bind http server
               [%boot p=@]                               ::  reset soft state
@@ -160,7 +160,6 @@
               caq=cask                                  ::  symmetric key state
           ==                                            ::
 ++  dove  ,[p=@ud q=(map ,@ud (unit ,@))]               ::  count 13-blocks
-++  lord  ,@p                                           ::  identity
 ++  flap  ,@uvH                                         ::  network packet id
 ++  flow                                                ::  packet connection
           $:  rtt=@dr                                   ::  official rtt
@@ -198,7 +197,7 @@
               r=(list ,[p=@t q=@t])                     ::  headers
               s=(unit octs)                             ::  body
           ==                                            ::
-++  httr  ,[p=@ud q=math r=(unit octs)]                 ::  raw http response   
+++  httr  ,[p=@ud q=mess r=(unit octs)]                 ::  raw http response   
 ++  lark                                                ::  parsed command
           $%  [%cd p=path]                              ::  change directory
               [%eh p=crow]                              ::  print and record
@@ -214,6 +213,7 @@
           ==                                            ::
 ++  link  ,[p=code q=sock]                              ::  connection
 ++  logo  ,@uvI                                         ::  session identity
+++  lord  ,@p                                           ::  identity
 ++  love  $%                                            ::  http response
               [%cst p=@t]                               ::  css text
               [%hmt p=@t]                               ::  html text
@@ -234,6 +234,7 @@
               [%carp p=@ud q=@band r=@]                 ::  leaf fragment
               [%ping ~]                                 ::  no-op
           ==                                            ::
+++  mess  (list ,[p=@t q=@t])                           ::  raw http headers
 ++  meta                                                ::  path metadata
           $%  [& p=@da q=@uvI]                          ::  mtime hash
               [| p=@da q=(list ,@ta)]                   ::  mtime dir

@@ -390,6 +390,22 @@
       =+  byr=(need (~(get by q.lif) nix))
       =+  pey=(~(coax ma [hen p.byr]) pux fav)
       (jerk:pey pux [%up p.fav] q.byr)
+    ::
+        %thee
+      :_  ..^$
+      :_  ~
+      ^-  move
+      :+  [~ who]
+        hen
+      ^-  card
+      :-  %that
+      :-  %hmx
+      ^-  manx
+      :~  %html
+        :~  %body
+          `manx`[`marx`[%% [[%% "hello, world"] ~]] ~]
+        ==
+      ==
     ==
   ::
   ++  lube                                              ::  define subject

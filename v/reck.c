@@ -234,7 +234,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     free(dyt_c);
   }
   {
-    u2_noun syd, zen, yen, xan, wol, ray, dyl, vay;
+    u2_noun syd, zen, yen, xan, wol, ray, vay;
 
     syd = u2k(rec_u->syd);
 
@@ -286,11 +286,22 @@ _reck_kick(u2_reck* rec_u, u2_noun ovo)
       printf("<exit>\n");
     } break;
 
+    case c3__init: p_pay = u2t(pay);
+    {
+      rec_u->own = u2nc(u2k(p_pay), rec_u->own);
+      break;
+    }
+
     case c3__talk: p_pay = u2t(pay);
     {
       u2_ve_tank(0, u2k(p_pay));
     } break;
 
+    case c3__thou: p_pay = u2t(pay);
+    {
+      u2_ve_http_respond(u2k(u2h(ovo)), u2k(p_pay));
+      break;
+    }
     case c3__save: u2_cx_cell(u2t(pay), &p_pay, &q_pay);
     {
       u2_noun pax = u2nc(c3__put, u2k(p_pay));
@@ -299,13 +310,6 @@ _reck_kick(u2_reck* rec_u, u2_noun ovo)
       u2_walk_save(pax_c, 0, u2k(q_pay));
       free(pax_c);
     } break;
-
-    case c3__init: p_pay = u2t(pay);
-    {
-      rec_u->own = u2nc(u2k(p_pay), rec_u->own);
-      break;
-    }
-
     case c3__warn: u2_cx_cell(u2t(pay), &p_pay, &q_pay);
     {
       switch ( p_pay ) {

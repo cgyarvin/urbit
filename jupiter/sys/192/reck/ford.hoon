@@ -373,6 +373,11 @@
   --  
 =>  
   |%
+  ++  tact                                              ::  tape to octstream
+    |=  tep=tape  ^-  octs
+    =+  buf=(rap 3 tep)
+    [(met 3 buf) buf]
+  ::
   ++  xmla                                              ::  attributes to tape
     |=  [tat=mart rez=tape]
     ^-  tape

@@ -268,9 +268,7 @@
           %ship  (rer %cary)
           ?(%thin %this)
         =+  heq=(thin =(%this -.r.mov) p.r.mov)
-        ~&  [%thin-heq heq]
         =+  whu=(hope q.p.p.heq)
-        ~&  [%thin-whu whu]
         ?~  whu
           $(mor t.mor, out [[i.t.q.mov [%thou 404 ~ ~]] out])
         $(mor [[whu [[%bede ~] q.mov] [%thee heq]] t.mor])
@@ -278,7 +276,20 @@
           %sync  !!
           %talk  (giv) 
           %text  (giv)
-          %that  !!
+          %that
+        ?+    -.p.r.mov  !!
+            %hmx
+          %=    $
+              mor  t.mor
+              out  :-  :-  i.t.q.mov
+                       :-  %thou 
+                       ^-  httr
+                       :+  200 
+                         ~[content-type/'text/html']
+                       [~ (tact (xmlt p.p.r.mov ~))]
+                   out
+          ==
+        ==
           %thee  (rer %bede)
           %thou  !!
           %tory  !!

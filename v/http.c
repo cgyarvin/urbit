@@ -125,14 +125,20 @@ _http_respond_body(u2_hreq *req_u,
     //  if this is the next request to be responded to,
     //  tell the event layer we are ready to write
     //
-    if ( req_u == req_u->hon_u->ruc_u ) {
+    if ( req_u == req_u->hon_u->req_u ) {
       u2_hcon* hon_u = req_u->hon_u;
 
-      fprintf(stderr, "http: %d: writing ON\r\n", hon_u->wax_u.fd);
+      // fprintf(stderr, "http: %d: writing ON\r\n", hon_u->wax_u.fd);
 
       ev_io_stop(u2_Host.lup_u, &hon_u->wax_u);
       ev_io_set(&hon_u->wax_u, hon_u->wax_u.fd, (EV_READ | EV_WRITE));
       ev_io_start(u2_Host.lup_u, &hon_u->wax_u);
+    } 
+    else {
+      u2_hcon* hon_u = req_u->hon_u;
+
+      fprintf(stderr, "http: %d: out of order\r\n", hon_u->wax_u.fd);
+      fprintf(stderr, "req_u %p, ruc_u %p\r\n", req_u, req_u->hon_u->ruc_u);
     }
   }
   else {
@@ -178,9 +184,10 @@ _http_respond_request(u2_hreq* req_u,
   _http_respond_headers(req_u, rep_u->hed_u);
 
   if ( rep_u->bod_u ) {
-    sprintf(buf_c, "Content-Length: %u\r\n", rep_u->bod_u->len_w);
+    sprintf(buf_c, "content-length: %u\r\n", rep_u->bod_u->len_w);
     _http_respond_str(req_u, buf_c);
 
+    _http_respond_str(req_u, "\r\n");
     _http_respond_body(req_u, rep_u->bod_u);
   }
   c3_assert(u2_no == req_u->end);
@@ -398,7 +405,6 @@ _http_message_complete(http_parser* par_u)
     }
     else {
       hon_u->qer_u->nex_u = req_u;
-      hon_u->req_u = req_u;
     } 
   }
 
@@ -515,55 +521,58 @@ _http_conn_suck(u2_hcon* hon_u)
 static void
 _http_conn_flush(u2_hcon* hon_u)
 {
-  while ( 1 ) {
+  while ( hon_u->req_u ) {
     u2_hreq* req_u = hon_u->req_u;
+    u2_hbod* rub_u = req_u->rub_u;
 
-    if ( !req_u ) {
-      goto stop;
-    } else {
-      u2_hbod* rub_u = req_u->rub_u;
-
-      while ( 1 ) {
-        if ( 0 == rub_u ) {
-          if ( u2_yes == req_u->end ) {
-            hon_u->req_u = req_u->nex_u;
-
-            _http_req_free(req_u);
-            break;
-          }
-          else {
-            //  We have not yet finished adding responses to this
-            //  current request - so, we cannot write.
-            //
-            goto stop;
-          }
+    if ( 0 == rub_u ) {
+      if ( u2_yes == req_u->end ) {
+        hon_u->req_u = req_u->nex_u;
+        if ( 0 == hon_u->req_u ) {
+          c3_assert(req_u == hon_u->qer_u);
+          hon_u->qer_u = 0;
         }
-        else {
-          c3_i siz_i;
+        _http_req_free(req_u);
+        continue;
+      }
+      else {
+        //  We have not yet finished adding responses to this
+        //  current request - so, we cannot start writing the next.
+        //
+        goto stop;
+      }
+    }
+    else {
+      c3_i siz_i;
 
-          if ( (siz_i = send(hon_u->wax_u.fd, rub_u->hun_y, 2, 0)) < 0 ) {
-            if ( EAGAIN == errno ) {
-              return;
-            } else {
-              perror("http: send");
-              _http_conn_dead(hon_u);
-            }
-          }
-          if ( siz_i < rub_u->len_w ) {
-            _http_clip(rub_u, siz_i);
-            return;
-          }
-          else {
-            req_u->rub_u = req_u->rub_u->nex_u;
-            free(rub_u);
-          }
+      if ( (siz_i = send(hon_u->wax_u.fd, 
+                         rub_u->hun_y, 
+                         rub_u->len_w, 0)) < 0 ) {
+        if ( EAGAIN == errno ) {
+          return;
+        } else {
+          perror("http: send");
+          _http_conn_dead(hon_u);
         }
+      }
+      if ( siz_i < rub_u->len_w ) {
+        _http_clip(rub_u, siz_i);
+        return;
+      }
+      else {
+        req_u->rub_u = req_u->rub_u->nex_u;
+        if ( 0 == req_u->rub_u ) {
+          c3_assert(rub_u == req_u->bur_u);
+          req_u->bur_u = 0;
+        }
+        
+        free(rub_u);
       }
     }
   }
 
   stop: {
-    fprintf(stderr, "http: %d: writing OFF\r\n", hon_u->wax_u.fd);
+    // fprintf(stderr, "http: %d: writing OFF\r\n", hon_u->wax_u.fd);
 
     ev_io_stop(u2_Host.lup_u, &hon_u->wax_u);
     ev_io_set(&hon_u->wax_u, hon_u->wax_u.fd, EV_READ);
@@ -705,7 +714,7 @@ _http_list_to_heds(u2_noun lix)
     else {
       u2_noun  i_lix = u2h(lix);
       u2_noun  pi_lix = u2h(i_lix);
-      u2_noun  qi_lix = u2h(i_lix);
+      u2_noun  qi_lix = u2t(i_lix);
       u2_noun  t_lix = u2t(lix);
       u2_hhed* nex_u = malloc(sizeof(u2_hhed));
 
@@ -852,7 +861,7 @@ _http_slay_mole(u2_noun fot, u2_noun san)
     return 0;
   }
   else {
-    c3_d say_d = u2_cr_chub(0, q_uco);
+    c3_d say_d = u2_cr_chub(0, s_uco);
 
     u2z(uco);
     return say_d;
