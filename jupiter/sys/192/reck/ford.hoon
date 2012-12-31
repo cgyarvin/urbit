@@ -432,9 +432,25 @@
   --
 =>
   |%
+  ++  deft                                              ::  path massage
+    |=  rax=(list ,@t)
+    |-  ^-  pork
+    ?~  rax
+      [~ ~]
+    ?~  t.rax
+      =+  den=(trip i.rax)
+      =+  vex=((full ;~(plug sym ;~(pfix dot sym))) [[1 1] (trip i.rax)])
+      ?~  q.vex
+        [~ [~(rent co %% %t i.rax) ~]]
+      [[~ +.p.u.q.vex] [-.p.u.q.vex ~]]
+    =+  pok=$(rax t.rax)
+    :-  p.pok
+    :_  q.pok
+    ?:(((sane %tas) i.rax) i.rax ~(rent co %% %t i.rax))
+  ::
   ++  epur                                              ::  url/header parser
     |%
-    ++  apat  ;~(pfix fas (more fas smeg))              ::  2396 abs_path
+    ++  apat  (cook deft ;~(pfix fas (more fas smeg)))  ::  2396 abs_path
     ++  auri
       ;~  pfix  ;~(plug scem col fas fas)
         ;~(plug thor apat yque)

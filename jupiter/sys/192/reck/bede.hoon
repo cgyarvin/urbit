@@ -62,7 +62,7 @@
       ::
           %f
         %+  scan  (trip ((hard ,@) .^(p.woc)))
-        (full (ifix [gay gay] tall:vez))
+        (full (ifix [gay gay] tall:vez(wer p.woc)))
       ::
           %g
         |-  ^-  gene
@@ -115,6 +115,7 @@
           ;:  slop 
             [[%atom %p] who] 
             [[%atom %da] now] 
+            [[%atom %%] (shax :(mix eny now (shax p.lif)))]
             [pah.typ pax]
           ==
         (slap yun (dive cux))
@@ -392,20 +393,14 @@
       (jerk:pey pux [%up p.fav] q.byr)
     ::
         %thee
+      ::  ~&  [%thee p.fav]
       :_  ..^$
       :_  ~
-      ^-  move
       :+  [~ who]
         hen
-      ^-  card
       :-  %that
       :-  %hmx
-      ^-  manx
-      :~  %html
-        :~  %body
-          `manx`[`marx`[%% [[%% "hello, world"] ~]] ~]
-        ==
-      ==
+      html/~[body/-"hello, {a/~[href/"http://www.google.com"] -"Google"}."]
     ==
   ::
   ++  lube                                              ::  define subject

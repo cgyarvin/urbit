@@ -1872,8 +1872,30 @@
   ::
   ++  sane                            ::  XX atom type sanity check/normalize
     |=  a=@ta 
-    |=  b=@  ^-  @
-    b
+    |=  b=@  ^-  ?
+    ?.  =(%t (end 3 1 a))
+      ~|(%sane-stub !!)
+    =+  [inx=0 len=(met 3 b)]
+    ?:  =(%tas a)
+      |-  ^-  ?
+      ?:  =(inx len)  &
+      =+  cur=(cut 3 [inx 1] b)
+      ?&  ?|  &((gte cur 'a') (lte cur 'z'))
+              &(=('-' cur) !=(0 inx) !=(len inx))
+          ==
+          $(inx +(inx))
+      ==
+    ?:  =(%ta a)
+      |-  ^-  ?
+      ?:  =(inx len)  &
+      =+  cur=(cut 3 [inx 1] b)
+      ?&  ?|  &((gte cur 'a') (lte cur 'z')) 
+              &((gte cur 'A') (lte cur 'Z')) 
+              |(=('-' cur) =('~' cur) =('_' cur) =('.' cur))
+          ==
+          $(inx +(inx))
+      ==
+    ~|(%sane-stub !!)
   ::
   ++  trim
     |=  [a=@ b=tape]
@@ -5961,6 +5983,12 @@
     =+  txt=(,@ta .^(rev))
     (rash txt (ifix [gay gay] tall(was (~(put in was) rev), wer rev)))
   ::
+  ++  prey
+    |=  gun=(list gene)  ^-  gene
+    ?~  gun    [~ 1]
+    ?~  t.gun  (pray i.gun)
+    [%tsgr (pray i.gun) $(gun t.gun)]
+  ::
   ++  road
     ;~  pfix  fas
       %+  cook
@@ -6145,7 +6173,7 @@
         (shim 93 122)
         (shim 124 126) 
       ==
-      (stag ~ (ifix [kel ker] wide))
+      (stag ~ (ifix [kel ker] (stag %cltr (most ace wide))))
     ==
   ++  norm
     |=  tol=?
@@ -6304,7 +6332,7 @@
                 %-  stew  :~
                   [':' ;~(pfix col (toad expz))]
                   [',' (rune com %zpcm expb)]
-                  ['#' ;~(pfix hax (cook pray (toad expa)))]
+                  ['#' ;~(pfix hax (cook prey (toad exps)))]
                   [';' (rune sem %zpsm expb)]
                   ['>' (rune gar %zpgr exps)]
                   ['=' (rune tis %zpts expa)]

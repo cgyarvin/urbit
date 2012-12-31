@@ -222,8 +222,9 @@
           ==                                            ::
 ++  mace  (list ,[p=mark q=ring])                       ::  private secrets
 ++  mane  $|(@tas [@tas @tas])                          ::  XML name/space
-++  manx  ,[t=marx c=(list manx)]                       ::  XML node
+++  manx  ,[t=marx c=marl]                              ::  XML node
 ++  mark  ,@ud                                          ::  regime number
+++  marl  (list manx)                                   ::  XML node list
 ++  mart  (list ,[n=mane v=tape])                       ::  XML attributes
 ++  marx  $|(@tas [mane a=mart])                        ::  XML tag
 ++  math  (map ,@t (list ,@t))                          ::  semiparsed headers
@@ -248,8 +249,8 @@
 ++  note                                                ::  app response
           $%  [%ez p=path q=(unit)]                     ::  simple result
               [%fu p=path q=(unit)]                     ::  complex result
+              [%ht p=hate]                              ::  legacy request
               [%up p=@t]                                ::  prompt response
-              [%sv p=hate]                              ::  legacy request
               [%wa p=@da]                               ::  alarm
           ==                                            ::
 ++  octs  ,[p=@ud q=@]                                  ::  octet-stream
@@ -260,10 +261,11 @@
           ==                                            ::
 ++  ovum  ,[p=path q=card]                              ::  external event
 ++  plea  ,[p=@ud q=[p=? q=@t]]                         ::  live prompt
+++  pork  ,[p=(unit ,@ta) q=path]                       ::  fully parsed url
 ++  post  ,[p=path q=*]                                 ::  statement
 ++  prod  ,[p=prom q=tape]                              ::  format, prompt
 ++  prom  ,?                                            ::  format type
-++  purl  ,[p=hort q=(list ,@ta) r=quay]                ::  parsed url
+++  purl  ,[p=hort q=pork r=quay]                       ::  parsed url
 ++  putt                                                ::  outgoing message
           $:  ski=snow                                  ::  sequence acked/sent
               saq=?                                     ::  secure ack required
@@ -273,7 +275,7 @@
 ++  quay  (map ,@t ,@t)                                 ::  parsed url query
 ++  quri                                                ::  request-uri
           $%  [& p=purl]                                ::  absolute
-              [| p=(list ,@t) q=quay]                   ::  relative
+              [| p=pork q=quay]                         ::  relative
           ==                                            ::
 ++  rank  ?(%czar %king %duke %jack %pawn)              ::  lord width class
 ++  road                                                ::  secured oneway route
