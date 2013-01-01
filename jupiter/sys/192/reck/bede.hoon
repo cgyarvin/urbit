@@ -239,7 +239,7 @@
       ==
     --
   ++  ma                                                ::  process context
-    |_  [hen=tube loz=(map path goal)]
+    |_  [pid=(unit ,@ud) hen=vein loz=(map path goal)]
     ++  bust                                            ::  slice soft vase
       |=  [axe=axis vux=*]  ^-  *
       =<  q
@@ -257,7 +257,7 @@
         +>.$(loz (~(del by loz) pux))
       ==
     ::
-    ++  doth                                            ::  process mockage
+    ++  doth                                            ::  run at user level
       |=  :*  ton=tone 
               fob=_|+((list path) *beef) 
               fut=_|+(* *beef)
@@ -269,7 +269,7 @@
         %2  [[[%crap p.ton] ~] ~ ~]
       ==
     ::
-    ++  fret                                            ::  soft bowl to beef
+    ++  fret                                            ::  accept user product
       |=  poc=*
       ^-  beef
       :-  ((hard (list card)) +:(bust 2 poc))
@@ -308,9 +308,9 @@
       ^-  [p=(list move) q=_..^$]
       =+  kam=(~(gas by *(map path goal)) ask)
       =+  zal=(~(tap by loz) ~)
-      =+  hix=p.lif
-      =:  p.lif  +(p.lif)
-          q.lif  (~(put by q.lif) hix [kam bor])
+      =+  syd=?~(pid [p=p.lif q=+(p.lif)] [p=u.pid q=p.lif])
+      =:  p.lif  q.syd
+          q.lif  (~(put by q.lif) p.syd [kam bor])
           ==
       =^  zin  ..^$
           |-  ^-  [(list move) _..^^$]
@@ -320,10 +320,10 @@
             $(ask t.ask)
           =+  tuq=(~(get by loz) p.i.ask)
           ?~  tuq
-            (germ hix i.ask niz)
+            (germ p.syd i.ask niz)
           ?:  =(u.tuq q.i.ask)
             [niz ..^^$]
-          (gaff hix i.ask niz) 
+          (gaff p.syd i.ask niz) 
       |-  ^-  [p=(list move) q=_..^^$]
       ?~  zal
         [zin ..^^$]
@@ -331,7 +331,7 @@
         $(zal t.zal)
       ?:  (~(has by kam) p.i.zal)
         [lus ..^^$]
-      (geld hix i.zal lus)
+      (geld p.syd i.zal lus)
     ::
     ++  haul                                            ::  apply result
       |=  bof=beef
@@ -379,17 +379,17 @@
     --
   ::
   ++  leap                                              ::  dispatch event
-    |=  [pex=path hen=tube fav=card]
+    |=  [pex=path hen=vein fav=card]
     ^-  [p=(list move) q=_..^$]
     ?+    -.fav  [~ ..^$]
         %line
       =+  fet=(rip 3 p.fav)
       ?~  pak
-        (~(mete ma [hen ~]) fet)
+        (~(mete ma [~ hen ~]) fet)
       =+  [nix=p.i.pak pux=q.i.pak]
-      =>  .(pak t.pak)
       =+  byr=(need (~(get by q.lif) nix))
-      =+  pey=(~(coax ma [hen p.byr]) pux fav)
+      =>  .(pak t.pak, q.lif (~(del by q.lif) nix))
+      =+  pey=(~(coax ma [[~ nix] hen p.byr]) pux fav)
       (jerk:pey pux [%up p.fav] q.byr)
     ::
         %thee

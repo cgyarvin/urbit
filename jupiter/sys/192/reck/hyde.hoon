@@ -242,7 +242,7 @@
           ==                                            ::
 ++  meth  ?(%get %post)                                 ::  http method
 ++  moth  ,[p=meth q=math r=*]                          ::  http operation
-++  move  ,[p=(unit lord) q=tube r=card]                ::  internal event
+++  move  ,[p=(unit lord) q=vein r=card]                ::  internal event
 ++  mime  (list ,@ta)                                   ::  mime type
 ++  name  ,[p=@t q=(unit ,[p=? q=@t]) r=@t]             ::  first mid/nick last
 ++  nope  ^~(^-(arch [%| @ ~]))                         ::  empty node
@@ -290,10 +290,8 @@
           ==                                            ::
 ++  rock  ,@uvO                                         ::  packet
 ++  rout                                                ::  http route
-          $:  hom=host                                  ::  host served
-              fix=(list ,@t)                            ::  initial path
-              dip=(list path)                           ::  discipline stack
-              cor=*                                     ::  discipline core
+          $:  hom=(list host)                           ::  hosts served
+              fix=(list path)                           ::  prefixes served
           ==                                            ::
 ++  safe                                                ::  domestic host
           $:  loc=(unit lane)                           ::  packet route
@@ -321,7 +319,7 @@
               any=@                                     ::  entropy
               urb=(map lord safe)                       ::  all keys and routes
           ==                                            ::
-++  tube  (list path)                                   ::  causal history
+++  vein  (list path)                                   ::  causal history
 ++  ukaz                                                ::  change (pl ukazy)
           $:  p=path                                    ::  change site
               ^=  q                                     ::  change content

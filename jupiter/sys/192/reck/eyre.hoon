@@ -34,8 +34,8 @@
         ==
           ^=  eyre                                          ::  i/o
         $:  gem=(map lord chum)                             ::  hashed passcodes
-            liv=(map lord (list tube))                      ::  live consoles
-            rev=(map tube lord)                             ::  identities
+            liv=(map lord (list vein))                      ::  live consoles
+            rev=(map vein lord)                             ::  identities
             seh=(list ,[p=host q=lord])                     ::  http owners
         ==
       == 
@@ -126,7 +126,7 @@
         %eyre
       ?+    hap  ~
           [%prod *]  ^-  (unit ,[p=prom q=@tas])
-        =+  yup=(~(get by rev.eyre.sys) `tube`[t.hap ~])
+        =+  yup=(~(get by rev.eyre.sys) `vein`[t.hap ~])
         ?~  yup
           [~ & '# ']
         =+  byg=(~(get by maw.bede.sys) u.yup)
@@ -138,7 +138,7 @@
     ==
   ::
   ++  grit                                                  ::  cause privilege
-    |=  cul=tube
+    |=  cul=vein
     ^-  ?(%gold %iron %lead)
     ?~  cul
       %lead
