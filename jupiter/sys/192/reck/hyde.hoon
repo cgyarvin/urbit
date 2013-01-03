@@ -45,7 +45,6 @@
               sea=shed                                  ::  packet pump
           ==                                            ::
 ++  bear  ,[p=(map path goal) q=boar]                   ::  process with slips
-++  beef  ,[p=(list card) q=(list slip) r=(unit boar)]  ::  raw product
 ++  bird                                                ::  packet in flight
           $:  gom=soap                                  ::  message identity
               mup=@ud                                   ::  pktno in msg
@@ -127,6 +126,7 @@
               qim=(map hand code)                       ::  inbound
           ==                                            ::
 ++  clod  ,[p=@da q=@uvI r=*]                           ::  mtime hash content
+++  coal  ,*                                            ::  untyped vase
 ++  code  ,@uvI                                         ::  symmetric key
 ++  cone  ,[p=(list ,@tas) q=(list ,[p=@tas q=crow])]   ::  bits and options
 ++  conf  ,[p=(set ,@tas) q=(map ,@tas ,*)]             ::  bits and options

@@ -240,6 +240,11 @@
     --
   ++  ma                                                ::  process context
     |_  [pid=(unit ,@ud) hen=vein loz=(map path goal)]
+    ++  beef                                            ::  raw product
+              $:  p=(list card)                         ::  actions
+                  q=(list slip)                         ::  requests
+                  r=(unit boar)                         ::  state
+              ==                                        ::
     ++  bust                                            ::  slice soft vase
       |=  [axe=axis vux=*]  ^-  *
       =<  q
@@ -277,11 +282,6 @@
       ?~  +.doy  [~ ~]
       :-  ((hard (list slip)) +>-.doy)
       [~ %& ~ ~ (bust 7 doy)]
-    ::
-    ++  gaff                                            ::  change a slip
-      |=  [hix=@ud sip=slip niz=(list move)]
-      ^-  [p=(list move) q=_..^$]
-      [niz ..^$]
     ::
     ++  geld                                            ::  remove a slip
       |=  [hix=@ud sip=slip niz=(list move)]
@@ -323,7 +323,7 @@
             (germ p.syd i.ask niz)
           ?:  =(u.tuq q.i.ask)
             [niz ..^^$]
-          (gaff p.syd i.ask niz) 
+          (goad p.syd i.ask niz) 
       |-  ^-  [p=(list move) q=_..^^$]
       ?~  zal
         [zin ..^^$]
@@ -332,6 +332,11 @@
       ?:  (~(has by kam) p.i.zal)
         [lus ..^^$]
       (geld p.syd i.zal lus)
+    ::
+    ++  goad                                            ::  change a slip
+      |=  [hix=@ud sip=slip niz=(list move)]
+      ^-  [p=(list move) q=_..^$]
+      [niz ..^$]
     ::
     ++  haul                                            ::  apply result
       |=  bof=beef
