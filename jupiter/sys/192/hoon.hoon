@@ -1200,12 +1200,12 @@
       ?:  (gor b p.n.a)
         =+  d=$(a l.a)
         ?>  ?=(^ d)
-        ?:  (vor n.a n.d)
+        ?:  (vor p.n.a p.n.d)
           [n.a d r.a]
         [n.d l.d [n.a r.d r.a]]
       =+  d=$(a r.a)
       ?>  ?=(^ d)
-      ?:  (vor n.a n.d)
+      ?:  (vor p.n.a p.n.d)
         [n.a l.a d]
       [n.d [n.a l.a l.d] r.d]
     ::

@@ -432,6 +432,78 @@
   --
 =>
   |%
+  ++  bag                                               ::  map of stacks
+    |*  [a=_,* b=_,*]
+    $|  ~ 
+    $:  n=[p=a q=(list b)]
+        l=(bag a b)
+        r=(bag a b)
+    ==
+  ::
+  ++  on
+    |_  a=(bag)
+    +-  ayl                                             ::  alter left
+      |=  b=_a
+      ^+  a
+      ?~  b  [n.a ~ r.a]
+      ?:  (vor p.n.a p.n.b)
+        [n.a b r.a]
+      [n.b l.b [n.a r.b r.a]]
+    ::
+    +-  ayr                                             ::  alter right
+      |=  b=_a
+      ?~  b  [n.a l.a ~]
+      ?:  (vor p.n.a p.n.b)
+        [n.a l.a b]
+      [n.b [n.a l.a l.b] r.b]
+    ::
+    +-  get                                             ::  extract stack
+      |=  b=_nam
+      ^+  sac
+      ?~  a  ~
+      ?:  =(b p.n.a)  q.n.a
+      ?:((gor b p.n.a) $(a l.a) $(a r.a))
+    ::
+    +-  nam  ?>(?=(^ a) p.n.a)
+    +-  pop                                             ::  pop
+      |=  b=_nam
+      ^-  [(unit ,_val) _a]
+      ?~  a  [~ ~]
+      ?:  =(b p.n.a)
+        ?>  ?=(^ q.n.a)
+        [[~ i.q.n.a] [[b t.q.n.a] l.a r.a]]
+      ?:  (gor b p.n.a)
+        =+  new=$(a l.a)
+        [-.new (ayl +.new)]
+      =+  new=$(a r.a)
+      [-.new (ayr +.new)]
+    ::
+    +-  put                                             ::  install stack
+      |=  [b=_nam c=_val]
+      ^+  a
+      ?~  a  [[b [c ~]] ~ ~]
+      ?:  =(b p.n.a)
+        [[b [c q.n.a]] l.a r.a]
+      ?:  (gor b p.n.a)
+        (ayl $(a l.a))
+      (ayr $(a r.a))
+    ::
+    +-  psh                                             ::  push
+      |=  [b=_nam c=_val]
+      ^+  a
+      ?~  a  [[b [c ~]] ~ ~]
+      ?:  =(b p.n.a)
+        [[b [c q.n.a]] l.a r.a]
+      ?:  (gor b p.n.a)
+        (ayl $(a l.a))
+      (ayr $(a r.a))
+    ::
+    +-  sac  ?>(?=(^ a) q.n.a)
+    +-  val  ?>(?=(^ a) ?>(?=(^ q.n.a) i.q.n.a))
+    -- 
+  --
+=>
+  |%
   ++  deft                                              ::  path massage
     |=  rax=(list ,@t)
     |-  ^-  pork
