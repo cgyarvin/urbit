@@ -89,6 +89,7 @@
               [%cash p=@p q=buck]                       ::  civil license
               [%crap p=(list)]                          ::  error with trace
               [%dire p=@tas q=dram]                     ::  apply directory
+              [%dump p=(list ,@t)]                      ::  raw text lines
               [%edit p=@p q=@tas r=(list ukaz)]         ::  commit edits
               [%file p=@tas q=@]                        ::  apply atomic file
               [%hear p=@]                               ::  receive packet
@@ -110,12 +111,12 @@
               [%ship p=@tas q=@tas]                     ::  label release
               [%sync ~]                                 ::  reset soft state
               [%talk p=tank]                            ::  show on console
+              [%text p=tape]                            ::  talk leaf
               [%that p=love]                            ::  cooked htresp
               [%thee p=hate]                            ::  cooked htreq
               [%thin p=httq]                            ::  insecure raw htreq
               [%this p=httq]                            ::  secure raw htreq
               [%thou p=httr]                            ::  raw http response
-              [%text p=(list ,@t)]                      ::  raw text lines
               [%tory p=(list ,@t)]                      ::  history dump
               [%warn p=?(0 1 2) q=tank]                 ::  report to human
               [%word p=chum]                            ::  set password

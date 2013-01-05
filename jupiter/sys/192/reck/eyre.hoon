@@ -197,6 +197,7 @@
     ::
         %eyre
       =.  p.mov  ?^(p.mov p.mov (~(get by rev.eyre.sys) t.q.mov))
+      =+  red=|=(a=card ^$(mor [[p.mov q.mov a] t.mor]))
       =+  rer=|=(a=@tas ^$(mor [[p.mov [[a ~] q.mov] r.mov] t.mor]))
       =+  giv=|.(^$(mor t.mor, out [[i.t.q.mov r.mov] out]))
       =+  mel=(grit t.q.mov)
@@ -223,6 +224,7 @@
           %cash  (rer %arvo)
           %crap  (giv)
           %dire  (rer %bede)
+          %dump  (giv)
           %edit
         %=    $
             mor
@@ -275,7 +277,7 @@
       ::
           %sync  !!
           %talk  (giv) 
-          %text  (giv)
+          %text  (red [%talk %leaf p.r.mov])
           %that
         ?+    -.p.r.mov  !!
             %hmx

@@ -299,7 +299,7 @@
             |=  key=code
             ^+  ..wasc
             =+  had=(shaf %hand key)
-            %_    +>
+            %_    ..wasc
                 yed.caq.nob  [~ had key]
                 qim.caq.nob  (~(put by qim.caq.nob) had key)
             ==
@@ -564,7 +564,7 @@
       ++  gost                                          ::  insert in queue
         |=  [now=@da num=@ud gom=soap mup=@ud pac=rock]
         ^+  ..gost
-        %_    . 
+        %_    ..gost
             p.tea  now
             q.tea 
           %+  ~(put to q.tea) 
@@ -672,7 +672,7 @@
       ++  kill                                          ::  kill message
         |=  gom=soap
         ^+  ..kill
-        %_    .
+        %_    ..kill
             bin      [[%coke %weak gom] bin]
             sea.bah  tea:(~(rast pe sea.bah) gom)
         ==
