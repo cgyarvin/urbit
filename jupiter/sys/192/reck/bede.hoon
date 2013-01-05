@@ -238,8 +238,7 @@
         (stag %g (stag ~ wide:vez))
       ==
     --
-::::::: insert ride 
-:::::::
+  ::
   ++  ride                                              ::  process context
     |=  $:  pid=@ud                                     ::  process identity
             hen=vein                                    ::  current vein
@@ -406,157 +405,6 @@
       ?>  ?=(^ bor)
       ..^$(q.lif (~(put by q.lif) pid [loz u.bor]))
     --
-::::::: inserted ride 
-:::::::
-::
-::::::: delete ma
-:::::::
-  ++  ma                                                :: MA  process context
-    |_  [pid=(unit ,@ud) hen=vein loz=(map path goal)]
-    ++  beef                                            :: MA  raw product
-              $:  p=(list card)                         :: MA  actions
-                  q=(list slip)                         :: MA  requests
-                  r=(unit boar)                         :: MA  state
-              ==                                        ::
-    ++  bust                                            :: MA  slice soft vase
-      |=  [axe=axis vux=*]  ^-  *
-      =<  q
-      %+  slam  sot.vax
-      (slop [[%atom %%] axe] [vas.typ vux])
-    ::
-    ++  coax                                            :: MA  update query
-      |=  [pux=path fav=card]
-      ^-  _+>
-      =+  fug=(~(get by loz) pux)
-      ?~  fug  +>.$
-      ?+    -.u.fug  +>.$
-          %up
-        ?>  =(%line -.fav)
-        +>.$(loz (~(del by loz) pux))
-      ==
-    ::
-    ++  doth                                            :: MA  at user level
-      |=  :*  ton=tone 
-              fob=_|+((list path) *beef) 
-              fut=_|+(* *beef)
-          ==
-      ^-  beef
-      ?-  -.ton
-        %0  (fut p.ton)
-        %1  (fob ((list path) p.ton))
-        %2  [[[%crap p.ton] ~] ~ ~]
-      ==
-    ::
-    ++  fret                                            :: MA  user product
-      |=  poc=*
-      ^-  beef
-      :-  ((hard (list card)) +:(bust 2 poc))
-      =+  doy=(bust 3 poc)
-      ?~  +.doy  [~ ~]
-      :-  ((hard (list slip)) +>-.doy)
-      [~ %& ~ ~ (bust 7 doy)]
-    ::
-    ++  geld                                            :: MA  remove a slip
-      |=  [hix=@ud sip=slip niz=(list move)]
-      ^-  [p=(list move) q=_..^$]
-      ?+    -.q.sip  [~ ..^$]
-          %up
-        :-  niz
-        %=    ..^$
-            pak 
-          (skip pak |=([a=@ud b=path] =(b p.sip)))
-        ==
-      ==
-    ::
-    ++  gorm                                            :: MA  add a slip
-      |=  [hix=@ud sip=slip niz=(list move)]
-      ^-  [p=(list move) q=_..^$]
-      ?+    -.q.sip  [~ ..^$]
-          %up
-        [niz ..^$(pak [[hix p.sip] pak])]
-      ==
-    ::
-    ++  gird                                            :: MA  process slips
-      |=  [ask=(list slip) bor=boar]
-      ^-  [p=(list move) q=_..^$]
-      =+  kam=(~(gas by *(map path goal)) ask)
-      =+  zal=(~(tap by loz) ~)
-      =+  syd=?~(pid [p=p.lif q=+(p.lif)] [p=u.pid q=p.lif])
-      =:  p.lif  q.syd
-          q.lif  (~(put by q.lif) p.syd [kam bor])
-          ==
-      =^  zin  ..^$
-          |-  ^-  [(list move) _..^^$]
-          ?~  ask
-            [~ ..^^$]
-          =^  niz  ..^^$
-            $(ask t.ask)
-          =+  tuq=(~(get by loz) p.i.ask)
-          ?~  tuq
-            (gorm p.syd i.ask niz)
-          ?:  =(u.tuq q.i.ask)
-            [niz ..^^$]
-          (goad p.syd i.ask niz) 
-      |-  ^-  [p=(list move) q=_..^^$]
-      ?~  zal
-        [zin ..^^$]
-      =^  lus  ..^^$
-        $(zal t.zal)
-      ?:  (~(has by kam) p.i.zal)
-        [lus ..^^$]
-      (geld p.syd i.zal lus)
-    ::
-    ++  goad                                            :: MA  change a slip
-      |=  [hix=@ud sip=slip niz=(list move)]
-      ^-  [p=(list move) q=_..^$]
-      [niz ..^$]
-    ::
-    ++  haul                                            :: MA  apply result
-      |=  bof=beef
-      ^-  [p=(list move) q=_..^$]
-      =+  lop=(turn p.bof |=(a=card [[~ who] hen a])) 
-      ?~  r.bof  [lop ..^$]
-      =+  fey=(gird q.bof u.r.bof)
-      [(weld lop p.fey) q.fey]
-    ::
-    ++  jerk                                            :: MA  deliver note
-      |=  [pux=path nob=note bor=boar]
-      ^-  [p=(list move) q=_..^$]
-      ?>  ?=(& -.bor)
-      %-  haul
-      %^    doth
-          (mung [fane:do [pux nob r.bor]] sky)
-        |=  a=(list path) 
-        [~ ~ ~ %& a (~(put to q.bor) pux nob) r.bor]
-      fret
-    ::
-    ++  loft                                            :: MA  apply command
-      |=  kal=lark
-      ^-  [p=(list move) q=_..^$]
-      =+  wan=|=(a=(list path) [~ ~ ~ %| a kal])
-      =+  hak=|=(a=* [[[%talk ((hard tank) a)] ~] ~ ~])
-      ?-  -.kal
-        %cd  [~ ..^$(cwd p.kal)]
-        %eh  (haul (doth (mung [echo:do lube +.kal] sky) wan hak))
-        %go  (haul (doth (mung [fapp:do lube +.kal] sky) wan fret))
-        %to  (haul (doth (mung [ecto:do lube +.kal] sky) wan hak))
-      ==
-    ::
-    ++  mete                                            :: MA  deliver line
-      |=  fet=tape
-      ^-  [p=(list move) q=_..^$]
-      =>  .(p.hit +(p.hit), q.hit [fet q.hit])
-      =+  zif=((full (ifix [gay gay] kral:lo)) [1 1] fet)
-      ?~  q.zif
-        :_  ..^$
-        =+  duf=[p=~(rend co ~ %ud p.p.zif) q=~(rend co ~ %ud q.p.zif)]
-        :~  :+  [~ who]  hen 
-            [%warn %2 %leaf "<syntax error at [{p.duf} {q.duf}]>"]
-        ==
-      (loft p.u.q.zif)
-    --
-::::::: undeleted ma
-:::::::
   ::
   ++  leap                                              ::  dispatch event
     |=  [pex=path hen=vein fav=card]
@@ -572,7 +420,9 @@
       =<  nave
       ^+  *ride
       ?~  pak
-        (mete:(ride p.lif hen ~ ~) fet)
+        =+  pid=p.lif
+        =.  p.lif  +(p.lif) 
+        (mete:(ride pid hen ~ ~) fet)
       =+  [pid=p.i.pak pux=q.i.pak]
       =>  .(pak t.pak)
       =+  byr=(need (~(get by q.lif) pid))
