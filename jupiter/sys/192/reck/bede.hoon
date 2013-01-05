@@ -395,16 +395,16 @@
       ^+  +>  !!
     ::
     ++  nave                                            ::  resolve
-      ^-  [(list move) _..$]
+      ^-  [(list move) _..^$]
       :-  duz
       ?:  =(~ loz)
         =+  lid=(dec p.lif)
-        %=   ..$
+        %=   ..^$
           p.lif  ?:(=(lid pid) lid p.lif)
           q.lif (~(del by q.lif) pid)
         ==
       ?>  ?=(^ bor)
-      ..$(q.lif (~(put by q.lif) pid [loz u.bor]))
+      ..^$(q.lif (~(put by q.lif) pid [loz u.bor]))
     --
 ::::::: inserted ride 
 :::::::
@@ -561,27 +561,38 @@
   ++  leap                                              ::  dispatch event
     |=  [pex=path hen=vein fav=card]
     ^-  [p=(list move) q=_..^$]
-    ?+    -.fav  [~ ..^$]
-        %line
-      =+  fet=(rip 3 p.fav)
+    =<  ?+  -.fav  [~ ..^$]
+          %line  (gill (trip p.fav))
+          %thee  (heat p.fav)
+        ==
+    |%
+    ++  gill                                            ::  dispatch line
+      |=  fet=tape
+      ^-  [p=(list move) q=_..^^$]
+      =<  nave
+      ^+  *ride
       ?~  pak
-        (~(mete ma [~ hen ~]) fet)
-      =+  [nix=p.i.pak pux=q.i.pak]
-      =+  byr=(need (~(get by q.lif) nix))
-      =>  .(pak t.pak, q.lif (~(del by q.lif) nix))
-      =+  pey=(~(coax ma [[~ nix] hen p.byr]) pux fav)
-      (jerk:pey pux [%up p.fav] q.byr)
-    ::
-        %thee
-      ::  ~&  [%thee p.fav]
-      :_  ..^$
+        (mete:(ride p.lif hen ~ ~) fet)
+      =+  [pid=p.i.pak pux=q.i.pak]
+      =>  .(pak t.pak)
+      =+  byr=(need (~(get by q.lif) pid))
+      %.  [pux [%up (rap 3 fet)]]
+      =<  jerk
+      %.  [pux fav]
+      =<  coax
+      (ride pid hen p.byr [~ q.byr])
+    :: 
+    ++  heat                                            ::  dispatch http req
+      |=  het=hate
+      ~&  [%thee het]
+      :_  ..^^$
       :_  ~
       :+  [~ who]
         hen
       :-  %that
       :-  %hmx
       html/~[body/-"hello, {a/~[href/"http://www.google.com"] -"Google"}."]
-    ==
+    --
   ::
   ++  lube                                              ::  define subject
     ^-  vase
