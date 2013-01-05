@@ -1187,6 +1187,12 @@
       |*  b=*
       !=(~ (get b))
     ::
+    +-  mar
+      |*  [b=_?>(?=(^ a) p.n.a) c=(unit _?>(?=(^ a) q.n.a))]
+      ?~  c
+        (del b)
+      (put b u.c)
+    ::
     +-  put
       ~/  %put
       |*  [b=* c=*]

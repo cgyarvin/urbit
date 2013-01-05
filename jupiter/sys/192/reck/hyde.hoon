@@ -151,8 +151,8 @@
           ==                                            ::
 ++  dirt  ,[p=@da q=(map ,@ta arch)]                    ::  mtime tree
 ++  dock  $:                                            ::  process state
-              p=@ud                                     ::  process counter
-              q=(map ,@ud bear)                         ::  process table
+              p=tick                                    ::  process counter
+              q=(map tick bear)                         ::  process table
           ==                                            ::
 ++  door                                                ::  foreign contact
           $:  wod=road                                  ::  connection to
@@ -289,10 +289,7 @@
               dos=(map ,@ta desk)                       ::  projects 
           ==                                            ::
 ++  rock  ,@uvO                                         ::  packet
-++  rout                                                ::  http route
-          $:  hom=(list host)                           ::  hosts served
-              fix=(list path)                           ::  prefixes served
-          ==                                            ::
+++  rout  ,[p=(list host) q=(list path)]                ::  http route
 ++  safe                                                ::  domestic host
           $:  loc=(unit lane)                           ::  packet route
               val=wand                                  ::  private keys
@@ -313,6 +310,7 @@
 ++  step  ,[p=bran q=gcos r=pass]                       ::  identity stage
 ++  task  _|+([@da path note] *bowl)                    ::  process core
 ++  taxi  ,[p=lane q=rock]                              ::  routed packet
+++  tick  ,@ud                                          ::  process id
 ++  tray  ,[p=(unit lane) q=meal]                       ::  routed payload
 ++  town                                                ::  all security state
           $:  lit=@ud                                   ::  imperial modulus

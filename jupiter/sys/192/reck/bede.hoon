@@ -31,7 +31,7 @@
           way=*(map ,@ta vase)                          ::  variables
           pak=*(list ,[p=@ud q=path])                   ::  prompt stack
           lif=*dock                                     ::  processes
-          lom=*(map path plea)                          ::  prompt by console
+          rob=*(map tick ,[p=path q=rout])              ::  routes by pid
       ==
   |=  [now=@da eny=@ sky=_|+(* *(unit))] 
   =+  wen=(scot %da now)
@@ -240,7 +240,7 @@
     --
   ::
   ++  ride                                              ::  process context
-    |=  $:  pid=@ud                                     ::  process identity
+    |=  $:  pid=tick                                    ::  process identity
             hen=vein                                    ::  current vein
             loz=(map path goal)                         ::  request state
             bor=(unit boar)                             ::  execution state
@@ -354,7 +354,7 @@
       ^+  +>
       ?>  ?=(^ bor)
       ?>  ?=(& -.u.bor)
-      ?>  ?=(~ p.u.bor)   ::  XX 
+      ?>  ?=(~ p.u.bor)   ::  XX actually handle blocks
       %-  haul
       %^    doth
           (mung [fane:do [pux nob r.u.bor]] sky)
@@ -434,6 +434,18 @@
     :: 
     ++  heat                                            ::  dispatch http req
       |=  het=hate
+      ^-  [p=(list move) q=_..^^$]
+      =+  pud=(lout p.het)
+      ?~  pud
+        [[[[~ who] hen %that [%raw 404 ~ ~]] ~] ..^^$]
+      =+  byr=(need (~(get by q.lif) p.u.pud))
+      =<  nave
+      %.  [q.u.pud [%ht het]]
+      =<  jerk
+      (ride p.u.pud hen p.byr [~ q.byr])
+    :: 
+    ++  hoot                                            ::  smoke test server
+      |=  het=hate
       ~&  [%thee het]
       :_  ..^^$
       :_  ~
@@ -443,6 +455,31 @@
       :-  %hmx
       html/~[body/-"hello, {a/~[href/"http://www.google.com"] -"Google"}."]
     --
+  ::
+  ++  loot                                              ::  match route
+    |=  [rut=rout uri=purl]
+    ^-  ?
+    ?&  |-  ^-  ?
+        ?~  p.rut  |
+        =(i.p.rut `host`q.p.uri)
+    ::
+        |-  ^-  ?
+        ?~  q.rut  |
+        |-  ^-  ?
+        ?~  i.q.rut  & 
+        ?:  |(?=(~ q.q.uri) !=(i.i.q.rut i.q.q.uri))
+          ^$(q.rut t.q.rut)
+        $(i.q.rut t.i.q.rut, q.q.uri t.q.q.uri)
+    ==
+  ::
+  ++  lout                                              ::  request to process
+    |=  uri=purl
+    =+  rug=(~(tap by rob) ~)   ::  XX linear search, awful
+    |-  ^-  (unit ,[p=tick q=path])
+    ?~  rug  ~
+    ?:  (loot q.q.i.rug uri)
+      [~ p.i.rug p.q.i.rug]
+    $(rug t.rug)
   ::
   ++  lube                                              ::  define subject
     ^-  vase
