@@ -181,6 +181,7 @@ _http_respond_request(u2_hreq* req_u,
                  (rep_u->sas_w == 200) ? "OK" : "Hosed");
   _http_respond_str(req_u, buf_c);
 
+  // printf("attached response status %d\n", rep_u->sas_w);
   _http_respond_headers(req_u, rep_u->hed_u);
 
   if ( rep_u->bod_u ) {
@@ -189,7 +190,14 @@ _http_respond_request(u2_hreq* req_u,
 
     _http_respond_str(req_u, "\r\n");
     _http_respond_body(req_u, rep_u->bod_u);
+  } else {
+    //  Why is this necessary?  Why can't we send a naked error?
+    //
+    _http_respond_str(req_u, "\r\n");
+    sprintf(buf_c, "HTTP error %d.\r\n", rep_u->sas_w);
+    _http_respond_str(req_u, buf_c);
   }
+
   c3_assert(u2_no == req_u->end);
   req_u->end = u2_yes;
 }

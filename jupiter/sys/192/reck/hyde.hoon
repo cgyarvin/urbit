@@ -216,9 +216,8 @@
 ++  logo  ,@uvI                                         ::  session identity
 ++  lord  ,@p                                           ::  identity
 ++  love  $%                                            ::  http response
-              [%cst p=@t]                               ::  css text
-              [%hmt p=@t]                               ::  html text
-              [%hmx p=manx]                             ::  html node
+              [%ham p=manx]                             ::  html node
+              [%mid p=mime q=octs]                      ::  mime-typed data
               [%raw p=httr]                             ::  raw http response
           ==                                            ::
 ++  mace  (list ,[p=mark q=ring])                       ::  private secrets

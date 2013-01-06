@@ -280,7 +280,7 @@
           %text  (red [%talk %leaf p.r.mov])
           %that
         ?+    -.p.r.mov  !!
-            %hmx
+            %ham
           %=    $
               mor  t.mor
               out  :-  :-  i.t.q.mov
@@ -289,6 +289,14 @@
                        :+  200 
                          ~[content-type/'text/html']
                        [~ (tact (xmlt p.p.r.mov ~))]
+                   out
+          ==
+        ::
+            %raw
+          %=    $
+              mor  t.mor
+              out  :-  :-  i.t.q.mov
+                       [%thou p.p.r.mov]
                    out
           ==
         ==

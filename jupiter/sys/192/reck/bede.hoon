@@ -301,17 +301,19 @@
     ++  geld                                            ::  abandon a slip
       |=  sip=slip
       ^+  +>
-      ?+    -.q.sip  +>
-          %up
-        +>(pak (skip pak |=([a=@ud b=path] =(b p.sip))))
+      ?+  -.q.sip  
+             +>
+        %ht  +>(rob (~(del by rob) pid))
+        %up  +>(pak (skip pak |=([a=@ud b=path] =(b p.sip))))
       ==
     ::
     ++  germ                                            ::  add a slip
       |=  sip=slip
       ^+  +>
-      ?+    -.q.sip  +>
-          %up
-        +>(pak [[pid p.sip] pak])
+      ?+  -.q.sip  
+             +>
+        %ht  +>(rob (~(put by rob) pid [p.sip p.q.sip]))
+        %up  +>(pak [[pid p.sip] pak])
       ==
     ::
     ++  gird                                            ::  process slips
@@ -335,7 +337,12 @@
     ::
     ++  goad                                            ::  modify a slip
       |=  sip=slip                                      
-      +>
+      ^+  +>
+      ?+  -.q.sip  
+             +>
+        %ht  (germ sip)
+        %up  !!   ::  this should actually work
+      ==
     ::
     ++  haul                                            ::  apply a result
       |=  bof=beef
@@ -434,10 +441,18 @@
     :: 
     ++  heat                                            ::  dispatch http req
       |=  het=hate
+      ::  ~&  [%heat het]
       ^-  [p=(list move) q=_..^^$]
       =+  pud=(lout p.het)
       ?~  pud
-        [[[[~ who] hen %that [%raw 404 ~ ~]] ~] ..^^$]
+        :_  ..^^$
+        :~  :+  [~ who]
+              hen
+            :-  %that
+            :-  %raw
+            :: html/~[body/-"hello, {a/~[href/"http://www.google.com"] -"Go"}."]
+            [404 ~ ~]
+        ==
       =+  byr=(need (~(get by q.lif) p.u.pud))
       =<  nave
       %.  [q.u.pud [%ht het]]
@@ -452,7 +467,7 @@
       :+  [~ who]
         hen
       :-  %that
-      :-  %hmx
+      :-  %ham
       html/~[body/-"hello, {a/~[href/"http://www.google.com"] -"Google"}."]
     --
   ::
