@@ -1,29 +1,14 @@
-|=  [who=lord est=time eny=@uw was=path]
 |=  *
-|=  ~
-=+  neighbor="neighbor"
+|=  *
+|=  [neighbor=tape ~]
 ^-  bowl
 =<  (prompt "hello, {neighbor}." ~)
 |%  ++  prompt
       |=  [messages=(list tape)]
       ^-  bowl
-      :-  :~  [%text "http, with {<was>};"]
-              [%text "      from {<who>};"]
-              [%text "      over {<eny>};"]
-              [%text "      upon {<est>}."]
-          ==
+      :-  (turn messages |=(a=tape [%talk %leaf a]))
       :-  ~
-      :-  :~  :-  ~
-              ^-  goal
-              :-  %ht
-              ^-  rout
-              :-  ^-  (list host)
-                  :~  [%& /localhost/]
-                      [%| .127.0.0.1]
-                  ==
-              ^-  (list path)
-              :~  //
-              ==
+      :-  :~  [~ [%up %& "tennis, {neighbor}? "]]
           ==
       learn
     ::

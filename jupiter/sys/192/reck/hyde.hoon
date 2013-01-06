@@ -96,6 +96,7 @@
               [%helo ~]                                 ::  ready to prompt
               [%init p=@p]                              ::  initialize revs
               [%junk p=@]                               ::  entropy
+              [%kill p=@ud]                             ::  kill a process
               [%line p=@t]                              ::  source line
               [%load p=@tas q=path]                     ::  request atomic file
               [%logn p=@p q=chum]                       ::  name hashed-pass
@@ -103,6 +104,7 @@
               [%loot p=@tas q=path]                     ::  request directory
               [%make p=@t q=@ud r=@]                    ::  wild license
               [%mine p=@ud q=@t]                        ::  query matched line
+              [%nuke p=~]                               ::  kill all processes
               [%pace p=@ud]                             ::  compute background
               [%pour p=path q=dram]                     ::  write directory
               [%pump ~]                                 ::  produce packets
@@ -203,6 +205,9 @@
           $%  [%cd p=path]                              ::  change directory
               [%eh p=crow]                              ::  print and record
               [%go p=path q=cone r=crow]                ::  run application
+              [%kl p=tick]                              ::  kill a process
+              [%nk ~]                                   ::  kill all processes
+              [%ps ~]                                   ::  list processes
               [%to p=crow]                              ::  type only
           ==                                            ::
 ++  lens  ?(%z %y %x %w)                                ::  repository view

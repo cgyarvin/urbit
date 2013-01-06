@@ -172,6 +172,13 @@
               (stag %to (stag %p (most ace worc)))
             ==
           ::
+            ;~  pfix  ;~(plug (just 'k') (just 'l') gap)
+              (stag %kl (cook |=(a=mole ?>(?=(%ud p.a) q.a)) bisk:so))
+            ==
+          ::
+            (cold [%nk ~] ;~(plug (just 'n') (just 'k')))
+            (cold [%ps ~] ;~(plug (just 'p') (just 's')))
+          ::
             %+  stag
               %go
             ;~  plug
@@ -283,6 +290,20 @@
         %2  [[[%crap p.ton] ~] ~ ~]
       ==
     ::
+    ++  emit                                            ::  return a card
+      |=  fav=card
+      +>(duz [[[~ who] hen fav] duz])
+    ::
+    ++  emir                                            ::  return cards
+      |=  veq=(list card)
+      +>(duz (weld (turn veq |=(a=card [[~ who] hen a])) duz))
+    ::
+    ++  ergo
+      |=  gez=(list path)
+      ^-  beef
+      :_  [~ ~]
+      (turn gez |=(a=path [%text "? {~(ram re (dish:ut [~ %path] a))}"]))
+    ::
     ++  fret                                            ::  process coal
       |=  poc=coal
       ^-  beef
@@ -295,8 +316,10 @@
     ++  gaff                                            ::  kill the process 
       ^+  .
       =+  ask=(~(tap by loz) *(list slip))
-      |-  ^+  +>.$
-      ?~(ask +> $(ask t.ask, +> (geld i.ask)))
+      |-  ^+  ..gaff
+      ?~  ask
+        ..gaff(loz ~)
+      $(ask t.ask, ..gaff (geld i.ask))
     ::
     ++  geld                                            ::  abandon a slip
       |=  sip=slip
@@ -365,8 +388,7 @@
       %-  haul
       %^    doth
           (mung [fane:do [pux nob r.u.bor]] sky)
-        |=  a=(list path) 
-        [~ ~ ~ %& a (~(put to q.u.bor) pux nob) r.u.bor]
+        ergo
       fret
     ::
     ++  loft                                            ::  execute command
@@ -376,9 +398,12 @@
       =+  hak=|=(a=* [[[%talk ((hard tank) a)] ~] ~ ~])
       ?-    -.kal
           %cd  +>.$(cwd p.kal)
-          %eh  (haul (doth (mung [echo:do lube +.kal] sky) wan hak))
-          %go  (haul (doth (mung [fapp:do lube +.kal] sky) wan fret))
-          %to  (haul (doth (mung [ecto:do lube +.kal] sky) wan hak))
+          %eh  (haul (doth (mung [echo:do lube +.kal] sky) ergo hak))
+          %go  (haul (doth (mung [fapp:do lube +.kal] sky) ergo fret))
+          %kl  (emit `card`[%kill p.kal])
+          %nk  (emit [%nuke ~])
+          %ps  (emir view)
+          %to  (haul (doth (mung [ecto:do lube +.kal] sky) ergo hak))
       ==
     ::
     ++  mete                                            ::  deliver line
@@ -396,27 +421,30 @@
         [%warn %2 %leaf "<syntax error at [{p.duf} {q.duf}]>"]
       ==
     ::
-    ++  mile  
-      |=  het=hate                                      ::  serve http
-      ^+  +>  !!
-    ::
     ++  nave                                            ::  resolve
       ^-  [(list move) _..^$]
-      :-  duz
+      =+  tid=~(rend co ~ %ud pid)
       ?:  =(~ loz)
-        =+  lid=(dec p.lif)
-        %=   ..^$
-          p.lif  ?:(=(lid pid) lid p.lif)
-          q.lif (~(del by q.lif) pid)
-        ==
+        =.  p.lif  ?:(=(pid (dec p.lif)) (dec p.lif) p.lif)
+        ?.  (~(has by q.lif) pid)
+          [duz ..^$]
+        =.  ..nave  (emit %text (weld "/ %" tid))
+        [duz ..^$(q.lif (~(del by q.lif) pid))]
       ?>  ?=(^ bor)
-      ..^$(q.lif (~(put by q.lif) pid [loz u.bor]))
+      =>  %=    .
+              ..nave
+            (emit %text (weld ?:((~(has by q.lif) pid) "= %" "^ %") tid))
+          ==
+      [duz ..^$(q.lif (~(put by q.lif) pid [loz u.bor]))]
+    ::
     --
   ::
   ++  leap                                              ::  dispatch event
     |=  [pex=path hen=vein fav=card]
     ^-  [p=(list move) q=_..^$]
     =<  ?+  -.fav  [~ ..^$]
+          %kill  (kill p.fav)
+          %nuke  nuke
           %line  (gill (trip p.fav))
           %thee  (heat p.fav)
         ==
@@ -450,8 +478,7 @@
               hen
             :-  %that
             :-  %raw
-            :: html/~[body/-"hello, {a/~[href/"http://www.google.com"] -"Go"}."]
-            [404 ~ ~]
+            [404 ~ [~ (tact "http error 404")]]
         ==
       =+  byr=(need (~(get by q.lif) p.u.pud))
       =<  nave
@@ -469,6 +496,24 @@
       :-  %that
       :-  %ham
       html/~[body/-"hello, {a/~[href/"http://www.google.com"] -"Google"}."]
+    ::
+    ++  kill                                            ::  kill a process
+      |=  pid=tick
+      ^-  [p=(list move) q=_..^^$]
+      =+  byr=(need (~(get by q.lif) pid))
+      =<  nave
+      =<  gaff
+      (ride pid hen p.byr [~ q.byr])
+    ::
+    ++  nuke                                            ::  kill all processes
+      =+  fen=(~(tap by q.lif) ~)
+      |-  ^-  [(list move) _..^^$]
+      ?~  fen
+        [~ ..^^$]
+      =^  mor  ..^^$  $(fen t.fen)
+      =+  les=(kill p.i.fen)
+      [(weld p.les mor) q.les]
+    ::
     --
   ::
   ++  loot                                              ::  match route
@@ -544,5 +589,12 @@
         [16 (~(put to q:~(get to q.sur)) vax)]
       [+(p.sur) (~(put to q.sur) vax)]
     ==
+  ++  view                                              ::  render processes
+    =+  fen=(~(tap by q.lif) ~)
+    |-  ^-  (list card)
+    ?~  fen  ~
+    :_  $(fen t.fen)
+    =+  cyv=[p.i.fen (~(tap by p.q.i.fen) ~)]
+    [%talk >cyv<]
   --
 --

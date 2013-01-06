@@ -246,6 +246,7 @@
         ==
       ::
           %junk  (rer %arvo)
+          %kill  (rer %bede)
           %line  (rer %bede)
           %load  (giv) 
           %logn 
@@ -262,6 +263,7 @@
           %love   !!
           %make  (rer %arvo)
           %mine  (rer %bede)
+          %nuke  (rer %bede)
           %pace  !!
           %pour  (giv)
           %pump  !!
