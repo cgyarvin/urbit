@@ -378,6 +378,10 @@
     =+  buf=(rap 3 tep)
     [(met 3 buf) buf]
   ::
+  ++  txml                                              ::  string to xml
+    |=  tep=tape  ^-  manx
+    [[%% [%% tep] ~] ~]
+  ::
   ++  xmla                                              ::  attributes to tape
     |=  [tat=mart rez=tape]
     ^-  tape

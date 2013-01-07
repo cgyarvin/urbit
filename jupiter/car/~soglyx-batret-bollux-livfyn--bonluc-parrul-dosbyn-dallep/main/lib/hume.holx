@@ -1,20 +1,47 @@
 ::
-::  models for the hume http framework
+::  models and functions for the hume http framework
 ::
-|% 
-++  cron  ?(%day %hour %minute %second)                 ::  wake frequency
-++  gift                                                ::  web event 
-          $%  [%cron p=cron]                            ::  wakeup
-              [%form p=purl q=quay]                     ::  posted form
-              [%post p=purl q=mime q=octs]              ::  non-form post
-              [%putt p=purl q=(list lump)]              ::  put
-              [%user p=user]                            ::  user event
-          ==                                            ::
-++  lamp  $_                                            ::  simple web app
-          |+  [@da gift]                                ::  time, event
-              :-  p=*(list card)                        ::  act
-              q=*(unit ,[p=(list slip) q=lamp])         ::  request/continue
-          ==                                            ::
-++  lump  ,[p=path q=mime r=octs]                       ::
-++  user  ?(%born %came %died %left)                    ::  user event
+=>  
+  |%                                                      ::  models
+  ++  cron  ?(%day %hour %minute %none %second)           ::  wake frequency
+  ++  gift                                                ::  web event 
+            $%  [%cron p=cron]                            ::  wakeup
+                [%form p=purl q=quay]                     ::  posted form
+                [%post p=purl q=mime q=octs]              ::  non-form post
+                [%putt p=purl q=(list lump)]              ::  put
+                [%user p=user]                            ::  user event
+            ==                                            ::
+  ++  lamp  $_                                            ::  simple web app
+            |+  [@da gift]                                ::  time, event
+            :-  p=*(list card)                            ::  act
+            q=*(unit ,[p=(list slip) q=lamp])             ::  request/continue
+  ++  lump  ,[p=path q=mime r=octs]                       ::
+  ++  rush  vase                                          ::  vase of lamp
+  ++  user  ?(%born %came %died %left)                    ::  user event
+  --
+|%                                                        ::  functions
+++  lunt                                                  ::  web framework
+  |=  :*  rut=rout                                        ::  route(s) to
+          ped=cron                                        ::  wake frequency
+          suf=csrf                                        ::  csrf control
+          ras=rush                                        ::  server state
+      == 
+  ^-  bowl
+  =+  ^=  hup  ^-  (list slip)
+      :~  [// [%ht rut]]
+      ==
+  :-  *(list card)
+  :-  ~
+  :-  hup 
+  |=  [now=@da pax=path nut=note]
+  ^-  bowl
+  :_  [~ hup ..$]
+  ?+    -.nut  ~
+      %ht
+    ::  ~&  [%request-is p.nut]
+    :_  ~
+    :+  %that
+      %ham
+    html/~[body/-"the time is {(txml <now>)}"]
+  ==
 --

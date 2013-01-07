@@ -145,7 +145,7 @@
               ::  [%m p=(list crow)]                    ::  map?
               ::  [%s p=(list crow)]                    ::  set?
           ==                                            ::
-++  csrf  ,@ta                                          ::  CSRF string
+++  csrf  ,@uvH                                         ::  CSRF secret
 ++  deed  ,[p=@ q=step]                                 ::  signature, stage
 ++  desk                                                ::  project state
           $:  lab=(map ,@tas ,@ud)                      ::  labels
