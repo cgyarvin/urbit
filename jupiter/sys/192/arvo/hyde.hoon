@@ -1,5 +1,5 @@
 !:
-::          %hyde, zuse models.   This file is in the public domain.
+::          %hyde, arvo models.   This file is in the public domain.
 ::
 |%
 ++  acro                                                ::  asym cryptosuite
@@ -45,6 +45,7 @@
               sea=shed                                  ::  packet pump
           ==                                            ::
 ++  bear  ,[p=(map path goal) q=boar]                   ::  process with slips
+++  bell  path                                          ::  process label
 ++  bird                                                ::  packet in flight
           $:  gom=soap                                  ::  message identity
               mup=@ud                                   ::  pktno in msg
@@ -184,7 +185,7 @@
 ++  goal                                                ::  app request
           $%  [%ez p=path]                              ::  simple query
               [%fu p=path q=|+(* *(unit))]              ::  complex query
-              [%ht p=rout]                              ::  http server
+              [%ht p=(list root)]                       ::  http server
               [%up p=prod]                              ::  user prompt      
               [%wa p=@da]                               ::  alarm
           ==                                            ::
@@ -254,7 +255,7 @@
 ++  note                                                ::  app response
           $%  [%ez p=path q=(unit)]                     ::  simple result
               [%fu p=path q=(unit)]                     ::  complex result
-              [%ht p=hate]                              ::  legacy request
+              [%ht p=seam q=hate]                       ::  http request
               [%up p=@t]                                ::  prompt response
               [%wa p=@da]                               ::  alarm
           ==                                            ::
@@ -265,6 +266,7 @@
               wab=(map lord bath)                       ::  outgoing by client
           ==                                            ::
 ++  ovum  ,[p=path q=card]                              ::  external event
+++  pact  path                                          ::  routed path
 ++  plea  ,[p=@ud q=[p=? q=@t]]                         ::  live prompt
 ++  pork  ,[p=(unit ,@ta) q=path]                       ::  fully parsed url
 ++  post  ,[p=path q=*]                                 ::  statement
@@ -294,6 +296,7 @@
               dos=(map ,@ta desk)                       ::  projects 
           ==                                            ::
 ++  rock  ,@uvO                                         ::  packet
+++  root  ,[p=(list host) q=path r=@ta s=path]          ::  http route
 ++  rout  ,[p=(list host) q=(list path)]                ::  http route
 ++  safe                                                ::  domestic host
           $:  loc=(unit lane)                           ::  packet route
@@ -303,12 +306,13 @@
               hoc=(map lord door)                       ::  friends & relations
           ==                                            ::
 ++  salt  ,@uv                                          ::  entropy
+++  seam  ,[p=@ta q=pact]                               ::  service route
 ++  shed  ,[p=@da q=(qeu ,[p=@ud q=bird])]              ::  packet pump
 ++  sink                                                ::  incoming per server
           $:  nes=(map band ,[p=@da q=bait])            ::  fragment actions
           ==                                            ::
 ++  skin  ?(%none %open %fast %full)                    ::  encoding stem
-++  slip  ,[p=path q=goal]                              ::  traceable request
+++  slip  ,[p=bell q=goal]                              ::  traceable request
 ++  snow  ,[p=@ud q=@ud r=(set ,@ud)]                   ::  window exceptions
 ++  soap  ,*                                            ::  opaque msg identity
 ++  sock  ,[p=lord q=lord]                              ::  from to

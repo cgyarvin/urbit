@@ -53,13 +53,11 @@
 ::    In a reflexive stage X, we assert, *[A_X B_X] yields B_X.
 ::    Ie, hoon.hoon is a self-compiling compiler against Nock.
 ::
-::    In any stage X, reflexive or transitional, where Y=X-1,
-::    *[A_Y B_X] yields B_X.  Ie, the current stage of Hoon
-::    is defined in the previous stage of Hoon.  Each stage is
-::    a different language with no compatibility constraint,
-::    though stability of course remains desirable.
+::    In any stage X, reflexive or transitional, where Y=X+1,
+::    *[A_X B_Y] defines B_X.  Ie, the current stage of Hoon
+::    is written in the previous stage of Hoon.
 ::
-::    Hoon is a pure, strict, higher-order typed functional 
+::    Hoon is a pure, strict, higher-order-typed functional 
 ::    language in no particular family.  It does not use the
 ::    lambda calculus or formal logic.  Hoon's mapping
 ::    to Nock is like that of C to assembler - not always
@@ -73,12 +71,11 @@
 ::
 ::    (NB: the Nock definition above is just pseudocode, not Hoon.
 ::    To see a (mildly enhanced) Nock in Hoon, search "++  mock".
-::    But Hoon is defined in Nock; stating Nock in Hoon, though
-::    otherwise useful, cannot enhance the precision of Nock.)
+::    But Hoon is defined in Nock; stating Nock in Hoon cannot
+::    enhance the precision of Nock.)
 ::
 ::    What is Hoon good for?  Now, nothing.  Ideally, whatever.
-::    But mostly, functional system software.  "++  zuse" is a
-::    small, largely useless functional operating system.
+::    But mostly, functional system software.
 ::
 ::    One fun exercise: decrement an atom in Nock, not using 7-10.
 ::    More fun is to also eschew 6.

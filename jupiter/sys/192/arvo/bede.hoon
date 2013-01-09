@@ -326,7 +326,7 @@
       ^+  +>
       ?+  -.q.sip  
              +>
-        %ht  +>(rob (~(del by rob) pid))
+        ::  %ht  +>(rob (~(del by rob) pid))
         %up  +>(pak (skip pak |=([a=@ud b=path] =(b p.sip))))
       ==
     ::
@@ -335,7 +335,7 @@
       ^+  +>
       ?+  -.q.sip  
              +>
-        %ht  +>(rob (~(put by rob) pid [p.sip p.q.sip]))
+        ::  %ht  +>(rob (~(put by rob) pid [p.sip p.q.sip]))
         %up  +>(pak [[pid p.sip] pak])
       ==
     ::
@@ -469,10 +469,9 @@
     :: 
     ++  heat                                            ::  dispatch http req
       |=  het=hate
-      ::  ~&  [%heat het]
       ^-  [p=(list move) q=_..^^$]
-      =+  pud=(lout p.het)
-      ?~  pud
+      =+  sud=(lout p.het)
+      ?~  sud
         :_  ..^^$
         :~  :+  [~ who]
               hen
@@ -480,11 +479,11 @@
             :-  %raw
             [404 ~ [~ (tact "http error 404")]]
         ==
-      =+  byr=(need (~(get by q.lif) p.u.pud))
+      =+  byr=(need (~(get by q.lif) p.u.sud))
       =<  nave
-      %.  [q.u.pud [%ht het]]
+      %.  [q.u.sud [%ht r.u.sud het]]
       =<  jerk
-      (ride p.u.pud hen p.byr [~ q.byr])
+      (ride p.u.sud hen p.byr [~ q.byr])
     :: 
     ++  hoot                                            ::  smoke test server
       |=  het=hate
@@ -517,29 +516,36 @@
     --
   ::
   ++  loot                                              ::  match route
-    |=  [rut=rout uri=purl]
-    ^-  ?
-    ?&  |-  ^-  ?
+    |=  [uri=purl rut=root]
+    ^-  (unit seam)
+    ?.  |-  ^-  ?
         ?~  p.rut  |
         =(i.p.rut `host`q.p.uri)
-    ::
-        |-  ^-  ?
-        ?~  q.rut  |
-        |-  ^-  ?
-        ?~  i.q.rut  & 
-        ?:  |(?=(~ q.q.uri) !=(i.i.q.rut i.q.q.uri))
-          ^$(q.rut t.q.rut)
-        $(i.q.rut t.i.q.rut, q.q.uri t.q.q.uri)
-    ==
+      ~
+    |-  ^-  (unit seam)
+    ?~  q.rut
+      [~ r.rut (weld s.rut q.q.uri)]
+    ?:  |(?=(~ q.q.uri) !=(i.q.rut i.q.q.uri))
+      ~
+    $(q.rut t.q.rut)
   ::
   ++  lout                                              ::  request to process
-    |=  uri=purl
-    =+  rug=(~(tap by rob) ~)   ::  XX linear search, awful
-    |-  ^-  (unit ,[p=tick q=path])
-    ?~  rug  ~
-    ?:  (loot q.q.i.rug uri)
-      [~ p.i.rug p.q.i.rug]
-    $(rug t.rug)
+    |=  uri=purl                                        ::  XX slow/stupid
+    ^-  (unit ,[p=tick q=path r=seam])
+    =+  fen=`(list ,[p=tick q=bear])`(~(tap by q.lif) ~)
+    |-  ^-  (unit ,[p=tick q=path r=seam])
+    ?~  fen  ~
+    =+  ask=`(list slip)`(~(tap by p.q.i.fen) ~)
+    |-  ^-  (unit ,[p=tick q=path r=seam])
+    ?~  ask  ^$(fen t.fen)
+    ?.  ?=([%ht *] q.i.ask)
+      $(ask t.ask)
+    |-  ^-  (unit ,[p=tick q=path r=seam])
+    ?~  p.q.i.ask  ^$(ask t.ask)
+    =+  sem=(loot uri i.p.q.i.ask)
+    ?~  sem  
+      $(p.q.i.ask t.p.q.i.ask)
+    [~ p.i.fen p.i.ask u.sem]
   ::
   ++  lube                                              ::  define subject
     ^-  vase

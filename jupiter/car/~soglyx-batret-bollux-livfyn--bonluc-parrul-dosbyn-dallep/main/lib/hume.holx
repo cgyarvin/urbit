@@ -1,4 +1,4 @@
-::
+!:
 ::  models and functions for the hume http framework
 ::
 =>  
@@ -6,24 +6,44 @@
   ++  cron  ?(%day %hour %minute %none %second)           ::  wake frequency
   ++  gift                                                ::  web event 
             $%  [%cron p=cron]                            ::  wakeup
-                [%form p=purl q=quay]                     ::  posted form
-                [%post p=purl q=mime q=octs]              ::  non-form post
-                [%putt p=purl q=(list lump)]              ::  put
+                [%form p=pact q=quay]                     ::  posted form
+                [%note p=path q=note]                     ::  extrinsic note
+                [%post p=pact q=mime q=octs]              ::  non-form post
+                [%putt p=pact q=(list lump)]              ::  put
                 [%user p=user]                            ::  user event
             ==                                            ::
-  ++  lamp  $_                                            ::  simple web app
-            |+  [@da gift]                                ::  time, event
-            :-  p=*(list card)                            ::  act
-            q=*(unit ,[p=(list slip) q=lamp])             ::  request/continue
+  ++  lamp                                                ::  simple web app
+            $_  ^?  |%                                    ::  opaque object
+            ++  give                                      ::  serve
+              |=  [now=@da fig=gift]                      ::  time, request
+              :-  p=*(list card)                          ::  act
+              q=*(unit ,[p=(list slip) q=lamp])           ::  request/continue
+            ::                                            ::
+            ++  miss                                      ::  redirect?
+              |=  [pac=pact ced=cred]                     ::  test and apply
+              ^-  (unit purl)                             ::
+              ~                                           ::
+            --                                            ::
+  ++  lung  $_                                            ::  entity generator
+            |+  :*  who=lord                              ::  owner
+                    app=@ta                               ::  application
+                    pac=pact                              ::  routed path
+                ==
+            *love
   ++  lump  ,[p=path q=mime r=octs]                       ::
   ++  rush  vase                                          ::  vase of lamp
   ++  user  ?(%born %came %died %left)                    ::  user event
-  --
+  ++  toke                                                ::  event response
+            $:  p=(list card)                             ::  actions
+                q=(unit ,[p=(list slip) q=lamp])          ::  requests
+            ==                                            ::
+  --                                                      ::
 |%                                                        ::  functions
 ++  lunt                                                  ::  web framework
-  |=  :*  rut=rout                                        ::  route(s) to
+  |=  :*  :+  who=lord                                    ::  owner
+            suf=csrf                                      ::  csrf control
           ped=cron                                        ::  wake frequency
-          suf=csrf                                        ::  csrf control
+          rut=(list root)                                 ::  routes to
           ras=rush                                        ::  server state
       == 
   ^-  bowl
@@ -35,13 +55,83 @@
   :-  hup 
   |=  [now=@da pax=path nut=note]
   ^-  bowl
-  :_  [~ hup ..$]
-  ?+    -.nut  ~
-      %ht
-    ::  ~&  [%request-is p.nut]
-    :_  ~
-    :+  %that
-      %ham
-    html/~[body/-"the time is {(txml <now>)}"]
-  ==
+  =+  [saw=*(list card) ask=*(list slip)]
+  =<  wist
+  |%
+  ++  send                                                ::  dispatch event
+    |=  bax=gift
+    ^+  +>
+    =+  sam=!>(bax)
+    =+  gat=(slap ras [%cnbc %give])
+    =+  pro=(slam gat sam)
+    =+  [wax=(slot 2 pro) hin=(slot 3 pro)]
+    =.  saw  (weld ((hard (list card)) q.wax) saw)
+    ?:  =(~ q.hin)
+      +>.$
+    =+  [vis=(slot 6 hin) lym=(slot 7 hin)]
+    =+  ^=  gin  ^-  (list slip)
+        %+  turn  ((hard (list slip)) q.vis)
+        |=(a=path [%lunt a])
+    %=  +>.$
+      ask    (weld ((hard (list slip)) q.vis) ask)
+      q.ras  q.lym
+    ==
+  ::
+  ++  pass                                                ::  try redirect
+    |=  [pac=pact ced=cred] 
+    ^-  (unit purl)
+    =+  sam=!>(pac ced)
+    =+  gat=(slap ras [%cnbc %miss])
+    =+  pro=(slam gat sam)
+    ?:  =(~ q.pro)  ~
+    =+  vur=(slot 3 pro)
+    [~ ((hard purl) q.vur)] 
+  ::
+  ++  wist
+    ^-  bowl
+    :_  [~ hup ..$]
+    ?+    -.nut  ~
+        %ht
+      ~&  [%request-is q.nut]
+      :_  ~
+      :+  %that
+        %ham
+      html/~[body/-"the time is {(txml <now>)}"]
+    ==
+  --
+::
+++  roil
+  |=  [who=lord now=@da buk=@ta]
+  |=  [ext=(unit ,@ta) pac=pact ras=rush]
+  ^-  (unit love)
+  =+  cap=(flop pac)
+  =+  hub=(hoof stub)
+  =+  ryt=`path`[~(rent co ~ %da now) ~(rent co ~ %p who) ~]
+  =<  veen
+  |%
+  ++  drem
+    |=  [ext=@ta ras=rush tyc=path tox=path]
+    ^-  (unit love)
+    =+  rog=((hard meta) .^((flop `path`[ext tyc])))
+    ?:  ?=([& *] rog)
+      =+  dat=((hard clod) .^(flop `path`[ext tox]))
+      ?>  ?=(@ r.dat)
+      !!
+    =+  mog=((hard meta) .^((flop `path`[hub tyc])))
+    !!
+  ++  dunt
+    |=  [ras=rush tyc=path tox=path]
+    ^-  (unit love)
+    (drem %html ras tyc tox)
+  ::
+  ++  veen
+    =+  tyc=(weld cap `path`[%web buk %cy ryt])
+    =+  tox=(weld cap `path`[%web buk %cx ryt])
+    |-  ^-  (unit love)
+    ?~  tyc  ~
+    ?~  tox  !!
+    =+  rab=?~(ext (dunt ras tyc tox) (drem u.ext ras tyc tox))
+    ?^  rab  rab
+    $(tyc t.tyc, tox t.tox)
+  --
 --
