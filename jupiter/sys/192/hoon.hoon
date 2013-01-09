@@ -1187,6 +1187,12 @@
       |*  b=*
       !=(~ (get b))
     ::
+    +-  mar
+      |*  [b=_?>(?=(^ a) p.n.a) c=(unit _?>(?=(^ a) q.n.a))]
+      ?~  c
+        (del b)
+      (put b u.c)
+    ::
     +-  put
       ~/  %put
       |*  [b=* c=*]
@@ -1200,12 +1206,12 @@
       ?:  (gor b p.n.a)
         =+  d=$(a l.a)
         ?>  ?=(^ d)
-        ?:  (vor n.a n.d)
+        ?:  (vor p.n.a p.n.d)
           [n.a d r.a]
         [n.d l.d [n.a r.d r.a]]
       =+  d=$(a r.a)
       ?>  ?=(^ d)
-      ?:  (vor n.a n.d)
+      ?:  (vor p.n.a p.n.d)
         [n.a l.a d]
       [n.d [n.a l.a l.d] r.d]
     ::
@@ -1872,8 +1878,30 @@
   ::
   ++  sane                            ::  XX atom type sanity check/normalize
     |=  a=@ta 
-    |=  b=@  ^-  @
-    b
+    |=  b=@  ^-  ?
+    ?.  =(%t (end 3 1 a))
+      ~|(%sane-stub !!)
+    =+  [inx=0 len=(met 3 b)]
+    ?:  =(%tas a)
+      |-  ^-  ?
+      ?:  =(inx len)  &
+      =+  cur=(cut 3 [inx 1] b)
+      ?&  ?|  &((gte cur 'a') (lte cur 'z'))
+              &(=('-' cur) !=(0 inx) !=(len inx))
+          ==
+          $(inx +(inx))
+      ==
+    ?:  =(%ta a)
+      |-  ^-  ?
+      ?:  =(inx len)  &
+      =+  cur=(cut 3 [inx 1] b)
+      ?&  ?|  &((gte cur 'a') (lte cur 'z')) 
+              &((gte cur 'A') (lte cur 'Z')) 
+              |(=('-' cur) =('~' cur) =('_' cur) =('.' cur))
+          ==
+          $(inx +(inx))
+      ==
+    ~|(%sane-stub !!)
   ::
   ++  trim
     |=  [a=@ b=tape]
@@ -3107,7 +3135,6 @@
       [%cnts p=wing q=(list ,[p=gene q=gene])]
     ::
       [%dtkt p=gene]
-      [%dtdq p=(list $|(@ta [~ p=gene]))]
       [%dtls p=gene]
       [%dtpt p=term q=@]
       [%dtsg p=term q=*]
@@ -3162,6 +3189,7 @@
       [%smgr p=gene q=gene r=gene]
       [%smkt p=gene q=gene]
       [%smhp p=gene q=gene]
+      [%smhx p=(list beer)]
       [%smls p=gene q=gene]
       [%smpm p=gene q=(list gene)]
       [%smsg p=gene q=(list gene)]
@@ -3701,14 +3729,15 @@
         :^    %wtcl                                     ::  ?:  
             [%bcts %bean]                               ::  ?
           [%bcts %null]                                 ::  ~
-        [[%ktts %i [%dtpt %t @]] [%ktts %t [%cnbc %%]]] ::  [i=~~ t=$]
+        :-  [%ktts %i [%dtpt 'tD' @]]                   ::  :-  i=~~
+        [%ktts %t [%cnbc %%]]                           ::  t=$
       |-  ^-  gene                                      ::
       ?~  p.gen                                         ::
         [%bcts %null]                                   ::  ~
       =+  res=$(p.gen t.p.gen)                          ::
       ^-  gene                                          ::
       ?@  i.p.gen                                       ::
-        [[%dtpt %t i.p.gen] res]                        ::  [~~{i.p.gen} {res}]
+        [[%dtpt 'tD' i.p.gen] res]                      ::  [~~{i.p.gen} {res}]
       :+  %tsls                                         ::
         :-  :+  %ktts                                   ::  ^=
               %a                                        ::  a
@@ -3742,6 +3771,28 @@
             i.q.gen                                     ::
         ==                                              ::  ==
       $(q.gen t.q.gen)                                  ::
+    ::
+        [%smhx *]                                       ::                  ;#
+      =+  cah=*(list ,@)                                ::
+      =+  ^=  cda                                       ::
+          |=  a=(list ,@)                               ::
+          :-  :-  [%dtpt %ta %%]                        ::
+              :-  :-  [%dtpt %ta %%]                    ::
+                  [%smdq a]                             ::
+              [%bcts %null]                             ::
+          [%bcts %null]                                 ::
+      |-  ^-  gene                                      ::
+      ?~  p.gen                                         ::
+        ?~  cah                                         ::
+          [%bcts %null]                                 ::
+        [(cda (flop cah)) [%bcts %null]]                ::
+      ?@  i.p.gen                                       ::
+        $(p.gen t.p.gen, cah [i.p.gen cah])             ::
+      ?~  cah                                           ::
+        [p.i.p.gen $(p.gen t.p.gen)]                    ::
+      :+  (cda (flop cah))                              ::
+        p.i.p.gen                                       ::
+      $(p.gen t.p.gen, cah ~)                           ::
     ::
         [%smpm *]                                       ::                  ;&
       ?~  q.gen                                         ::
@@ -5938,6 +5989,12 @@
     =+  txt=(,@ta .^(rev))
     (rash txt (ifix [gay gay] tall(was (~(put in was) rev), wer rev)))
   ::
+  ++  prey
+    |=  gun=(list gene)  ^-  gene
+    ?~  gun    [~ 1]
+    ?~  t.gun  (pray i.gun)
+    [%tsgr (pray i.gun) $(gun t.gun)]
+  ::
   ++  road
     ;~  pfix  fas
       %+  cook
@@ -6014,6 +6071,11 @@
       :-  '-'
         ;~  pose
           (stag %dtpt tash:so)
+          %+  cook
+            |=  a=(list (list beer))
+            [%smhx |-(?~(a ~ (weld i.a $(a t.a))))]
+          (most dog ;~(pfix hep soil))
+        ::
           (cook |=(a=wing [%cnts a ~]) rope)
         ==
       :-  '.'
@@ -6117,7 +6179,7 @@
         (shim 93 122)
         (shim 124 126) 
       ==
-      (stag ~ (ifix [kel ker] wide))
+      (stag ~ (ifix [kel ker] (stag %cltr (most ace wide))))
     ==
   ++  norm
     |=  tol=?
@@ -6276,7 +6338,7 @@
                 %-  stew  :~
                   [':' ;~(pfix col (toad expz))]
                   [',' (rune com %zpcm expb)]
-                  ['#' ;~(pfix hax (cook pray (toad expa)))]
+                  ['#' ;~(pfix hax (cook prey (toad exps)))]
                   [';' (rune sem %zpsm expb)]
                   ['>' (rune gar %zpgr exps)]
                   ['=' (rune tis %zpts expa)]

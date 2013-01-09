@@ -634,7 +634,8 @@
       case c3__ktls: u2_bi_cell(wir_r, u2_t(gen), &p_gen, &q_gen);
       _mint_used(wir_r);
       {
-        u2_noun hif = j2_mcy(Pt6, ut, play)(wir_r, van, sut, p_gen);
+        u2_noun huz = j2_mcy(Pt6, ut, play)(wir_r, van, sut, p_gen);
+        u2_noun hif = _mint_nice(wir_r, van, gol, huz);
         u2_noun zel = _mint_in(wir_r, van, sut, hif, q_gen);
         u2_noun ret = u2_bc(wir_r, hif, u2_rx(wir_r, u2_t(zel)));
 

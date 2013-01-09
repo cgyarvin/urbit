@@ -34,8 +34,8 @@
         ==
           ^=  eyre                                          ::  i/o
         $:  gem=(map lord chum)                             ::  hashed passcodes
-            liv=(map lord (list tube))                      ::  live consoles
-            rev=(map tube lord)                             ::  identities
+            liv=(map lord (list vein))                      ::  live consoles
+            rev=(map vein lord)                             ::  identities
             seh=(list ,[p=host q=lord])                     ::  http owners
         ==
       == 
@@ -126,7 +126,7 @@
         %eyre
       ?+    hap  ~
           [%prod *]  ^-  (unit ,[p=prom q=@tas])
-        =+  yup=(~(get by rev.eyre.sys) `tube`[t.hap ~])
+        =+  yup=(~(get by rev.eyre.sys) `vein`[t.hap ~])
         ?~  yup
           [~ & '# ']
         =+  byg=(~(get by maw.bede.sys) u.yup)
@@ -138,7 +138,7 @@
     ==
   ::
   ++  grit                                                  ::  cause privilege
-    |=  cul=tube
+    |=  cul=vein
     ^-  ?(%gold %iron %lead)
     ?~  cul
       %lead
@@ -197,6 +197,7 @@
     ::
         %eyre
       =.  p.mov  ?^(p.mov p.mov (~(get by rev.eyre.sys) t.q.mov))
+      =+  red=|=(a=card ^$(mor [[p.mov q.mov a] t.mor]))
       =+  rer=|=(a=@tas ^$(mor [[p.mov [[a ~] q.mov] r.mov] t.mor]))
       =+  giv=|.(^$(mor t.mor, out [[i.t.q.mov r.mov] out]))
       =+  mel=(grit t.q.mov)
@@ -223,6 +224,7 @@
           %cash  (rer %arvo)
           %crap  (giv)
           %dire  (rer %bede)
+          %dump  (giv)
           %edit
         %=    $
             mor
@@ -244,6 +246,7 @@
         ==
       ::
           %junk  (rer %arvo)
+          %kill  (rer %bede)
           %line  (rer %bede)
           %load  (giv) 
           %logn 
@@ -260,6 +263,7 @@
           %love   !!
           %make  (rer %arvo)
           %mine  (rer %bede)
+          %nuke  (rer %bede)
           %pace  !!
           %pour  (giv)
           %pump  !!
@@ -275,10 +279,10 @@
       ::
           %sync  !!
           %talk  (giv) 
-          %text  (giv)
+          %text  (red [%talk %leaf p.r.mov])
           %that
         ?+    -.p.r.mov  !!
-            %hmx
+            %ham
           %=    $
               mor  t.mor
               out  :-  :-  i.t.q.mov
@@ -287,6 +291,14 @@
                        :+  200 
                          ~[content-type/'text/html']
                        [~ (tact (xmlt p.p.r.mov ~))]
+                   out
+          ==
+        ::
+            %raw
+          %=    $
+              mor  t.mor
+              out  :-  :-  i.t.q.mov
+                       [%thou p.p.r.mov]
                    out
           ==
         ==
