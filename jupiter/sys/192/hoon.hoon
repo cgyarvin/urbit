@@ -6059,6 +6059,17 @@
       :-  '+'
         ;~  pose
           (stag %dtls ;~(pfix lus (ifix [pel per] wide)))
+        ::
+          %+  cook
+            |=  a=(list (list beer))
+            :_  [%bcts %null]
+            :_  [%bcts %null]
+            :-  [%dtpt %ta %%]
+            :_  [%bcts %null]
+            :-  [%dtpt %ta %%]
+            [%smdq |-(?~(a ~ (weld i.a $(a t.a))))]
+          (most dog ;~(pfix lus soil))
+        ::
           (cook |=(a=wing [%cnts a ~]) rope)
         ==
       :-  '#'
@@ -6068,6 +6079,7 @@
       :-  '-'
         ;~  pose
           (stag %dtpt tash:so)
+        ::
           %+  cook
             |=  a=(list (list beer))
             [%smhx |-(?~(a ~ (weld i.a $(a t.a))))]

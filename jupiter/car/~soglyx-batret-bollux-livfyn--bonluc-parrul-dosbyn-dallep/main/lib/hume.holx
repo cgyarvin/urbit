@@ -28,9 +28,9 @@
             |+  :*  who=lord                              ::  owner
                     app=@ta                               ::  application
                     pac=pact                              ::  routed path
-                ==
-            *love
-  ++  lump  ,[p=path q=mime r=octs]                       ::
+                ==                                        ::
+            *love                                         ::
+  ++  lump  ,[p=path q=mime r=octs]                       ::  submitted data
   ++  rush  vase                                          ::  vase of lamp
   ++  user  ?(%born %came %died %left)                    ::  user event
   ++  toke                                                ::  event response
@@ -56,7 +56,7 @@
   |=  [now=@da pax=path nut=note]
   ^-  bowl
   =+  [saw=*(list card) ask=*(list slip)]
-  =<  wist
+  =<  zing:wist
   |%
   ++  send                                                ::  dispatch event
     |=  bax=gift
@@ -71,7 +71,7 @@
     =+  [vis=(slot 6 hin) lym=(slot 7 hin)]
     =+  ^=  gin  ^-  (list slip)
         %+  turn  ((hard (list slip)) q.vis)
-        |=(a=path [%lunt a])
+        |=(a=slip [[%lunt p.a] q.a])
     %=  +>.$
       ask    (weld ((hard (list slip)) q.vis) ask)
       q.ras  q.lym
@@ -87,17 +87,23 @@
     =+  vur=(slot 3 pro)
     [~ ((hard purl) q.vur)] 
   ::
-  ++  wist
-    ^-  bowl
-    :_  [~ hup ..$]
-    ?+    -.nut  ~
-        %ht
-      ~&  [%request-is q.nut]
-      :_  ~
+  ++  wist                                                ::  handle note
+    ^+  .
+    ?.  ?=(%ht -.nut)
+      ?>  ?=([%lunt *] pax)
+      (send [%note t.pax nut])
+    ::  ~&  [%request-is q.nut]
+    %=    .
+        saw
+      :_  saw
       :+  %that
         %ham
-      html/~[body/-"the time is {(txml <now>)}"]
+      html/~[body/+"the time is {<now>}"]
     ==
+  ::
+  ++  zing                                                ::  resolve
+    ^-  bowl
+    [saw [~ (weld ask hup) ..$]]
   --
 ::
 ++  roil
@@ -107,30 +113,34 @@
   =+  cap=(flop pac)
   =+  hub=(hoof stub)
   =+  ryt=`path`[~(rent co ~ %da now) ~(rent co ~ %p who) ~]
+  =+  tyc=(weld cap `path`[%web buk %cy ryt])
+  =+  tox=(weld cap `path`[%web buk %cx ryt])
   =<  veen
   |%
   ++  drem
-    |=  [ext=@ta ras=rush tyc=path tox=path]
+    |=  axt=@ta
     ^-  (unit love)
-    =+  rog=((hard meta) .^((flop `path`[ext tyc])))
+    =+  rog=((hard meta) .^((flop `path`[axt tyc])))
     ?:  ?=([& *] rog)
-      =+  dat=((hard clod) .^(flop `path`[ext tox]))
+      =+  wer=(flop `path`[axt tox])
+      =+  dat=((hard clod) .^(wer))
       ?>  ?=(@ r.dat)
-      !!
+      =+  vez=(vang & wer)
+      =+  gen=(scan (trip r.dat) (full (ifix [gay gay] tall:vez)))
+      =+  gat=(slap ras gen)
+      =+  sam=!>[who now]
+      =+  
     =+  mog=((hard meta) .^((flop `path`[hub tyc])))
     !!
   ++  dunt
-    |=  [ras=rush tyc=path tox=path]
     ^-  (unit love)
-    (drem %html ras tyc tox)
+    (drem %html)
   ::
   ++  veen
-    =+  tyc=(weld cap `path`[%web buk %cy ryt])
-    =+  tox=(weld cap `path`[%web buk %cx ryt])
     |-  ^-  (unit love)
     ?~  tyc  ~
     ?~  tox  !!
-    =+  rab=?~(ext (dunt ras tyc tox) (drem u.ext ras tyc tox))
+    =+  rab=?~(ext dunt (drem u.ext))
     ?^  rab  rab
     $(tyc t.tyc, tox t.tox)
   --

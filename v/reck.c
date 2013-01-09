@@ -445,6 +445,8 @@ u2_reck_http_request(u2_reck* rec_u, u2_bean sec, u2_noun pox, u2_noun req)
 {
   u2_noun hoe;
 
+  _reck_time_set(rec_u);
+
   u2_cm_trip();
   if ( 0 != (hoe = u2_cm_trap()) ) {
     u2_cm_purge();
