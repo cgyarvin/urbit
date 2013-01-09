@@ -373,6 +373,15 @@
   --  
 =>  
   |%
+  ++  moon                                              ::  mime type to text
+    |=  myn=mime
+    %+  rap
+      3
+    |-  ^-  tape
+    ?~  myn  ~
+    ?~  t.myn  (trip i.myn)
+    (weld (trip i.myn) ['/' $(myn t.myn)])
+  ::
   ++  tact                                              ::  tape to octstream
     |=  tep=tape  ^-  octs
     =+  buf=(rap 3 tep)

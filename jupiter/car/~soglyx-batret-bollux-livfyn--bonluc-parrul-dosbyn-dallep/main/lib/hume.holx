@@ -93,6 +93,20 @@
       ?>  ?=([%lunt *] pax)
       (send [%note t.pax nut])
     ::  ~&  [%request-is q.nut]
+    =+  sek=((roil who now p.p.nut) p.q.p.q.nut q.p.nut ras)
+    =+  ^=  rep
+        :-  %that
+        ?~  sek
+          [%raw [404 ~ [~ (tact "http error 404 at {<now>}")]]]
+        u.sek
+    ..wist(saw [rep saw])
+  ::
+  ++  wost                                                ::  handle note
+    ^+  .
+    ?.  ?=(%ht -.nut)
+      ?>  ?=([%lunt *] pax)
+      (send [%note t.pax nut])
+    ::  ~&  [%request-is q.nut]
     %=    .
         saw
       :_  saw
@@ -122,23 +136,36 @@
     ^-  (unit love)
     =+  rog=((hard meta) .^((flop `path`[axt tyc])))
     ?:  ?=([& *] rog)
-      =+  wer=(flop `path`[axt tox])
-      =+  dat=((hard clod) .^(wer))
-      ?>  ?=(@ r.dat)
-      =+  vez=(vang & wer)
-      =+  gen=(scan (trip r.dat) (full (ifix [gay gay] tall:vez)))
-      =+  gat=(slap ras gen)
-      =+  sam=!>[who now]
-      =+  
+      =+  dat=((hard ,@) .^((flop `path`[axt tox])))
+      :-  ~
+      :+  %mid
+        ?+  axt  [%application %octet-stream ~]
+          %html  [%text %html ~]
+          %txt   [%text %plain ~]
+          %css   [%text %css ~]
+          %js    [%text %javascript ~]
+        ==
+      [(met 3 dat) dat]
     =+  mog=((hard meta) .^((flop `path`[hub tyc])))
-    !!
+    ?.  ?=([& *] mog)  ~
+    =+  wer=(flop `path`[hub tox])
+    =+  dat=((hard ,@) .^(wer))
+    =+  vez=(vang & wer)
+    =+  gen=(scan (trip dat) (full (ifix [gay gay] tall:vez)))
+    =+  cox=(slop [[%face %app p.ras] q.ras] !>(..lunt))
+    =+  gat=(slap cox gen)
+    =+  sam=!>([who now])   ::  XX not right
+    =+  pro=(slam gat sam)
+    [~ ((hard love) q.pro)]
+  ::
   ++  dunt
     ^-  (unit love)
     (drem %html)
   ::
   ++  veen
     |-  ^-  (unit love)
-    ?~  tyc  ~
+    ?:  =(tyc [buk %cy ryt])  ~
+    ?~  tyc  !!
     ?~  tox  !!
     =+  rab=?~(ext dunt (drem u.ext))
     ?^  rab  rab

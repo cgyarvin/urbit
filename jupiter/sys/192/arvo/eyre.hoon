@@ -281,7 +281,19 @@
           %talk  (giv) 
           %text  (red [%talk %leaf p.r.mov])
           %that
-        ?+    -.p.r.mov  !!
+        ?-    -.p.r.mov 
+            %mid
+          %=    $
+              mor  t.mor
+              out  :-  :-  i.t.q.mov
+                       :-  %thou 
+                       ^-  httr
+                       :+  200 
+                         ~[content-type/(moon p.p.r.mov)]
+                       [~ q.p.r.mov]
+                   out
+          ==
+        ::
             %ham
           %=    $
               mor  t.mor
@@ -302,6 +314,7 @@
                    out
           ==
         ==
+      ::
           %thee  (rer %bede)
           %thou  !!
           %tory  !!

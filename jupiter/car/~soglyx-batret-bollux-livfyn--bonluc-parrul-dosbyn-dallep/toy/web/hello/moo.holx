@@ -1,0 +1,3 @@
+|=  [who=@p now=@da]
+:-  %ham
+html/~[body/+"urbit: {neighbor.app} ready to serve at {<now>}"]

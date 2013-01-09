@@ -5,14 +5,6 @@
     ++  cy
       =+  car=*arch
       |%  
-      ++  also                                          ::  metadata
-        |=  pax=path  ^-  meta
-        =>  .(car (sift pax))
-        ?-  -.car
-          &  [%& p.car q.car]
-          |  [%| p.car (turn (~(tap by q.car) ~) |=([p=@ta *] p))]
-        ==
-      ::
       ++  duel                                          ::  changes to sync
         |=  bus=arch  
         =+  ram=*hapt
@@ -249,7 +241,11 @@
     =+  rad=(~(sift cy u.rud) t.tyl)
     ?-  ren
       %x  ?.(?=(& -.rad) ~ [~ r.rad])
-      %y  [~ ~(also cy rad)]
+      %y  :-  ~
+          ?-  -.rad
+            &  [%& p.rad q.rad]
+            |  [%| p.rad (turn (~(tap by q.rad) ~) |=([p=@ta *] p))]
+          ==
       %z  [~ rad]
     ==
   --
