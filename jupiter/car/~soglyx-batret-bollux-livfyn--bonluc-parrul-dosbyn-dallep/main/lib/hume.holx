@@ -101,20 +101,6 @@
         u.sek
     ..wist(saw [rep saw])
   ::
-  ++  wost                                                ::  handle note
-    ^+  .
-    ?.  ?=(%ht -.nut)
-      ?>  ?=([%lunt *] pax)
-      (send [%note t.pax nut])
-    ::  ~&  [%request-is q.nut]
-    %=    .
-        saw
-      :_  saw
-      :+  %that
-        %ham
-      html/~[body/+"the time is {<now>}"]
-    ==
-  ::
   ++  zing                                                ::  resolve
     ^-  bowl
     [saw [~ (weld ask hup) ..$]]
@@ -124,6 +110,7 @@
   |=  [who=lord now=@da buk=@ta]
   |=  [ext=(unit ,@ta) pac=pact ras=rush]
   ^-  (unit love)
+  ~&  [%roil ext pac]
   =+  cap=(flop pac)
   =+  hub=(hoof stub)
   =+  ryt=`path`[~(rent co ~ %da now) ~(rent co ~ %p who) ~]

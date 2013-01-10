@@ -484,17 +484,6 @@
       %.  [q.u.sud [%ht r.u.sud het]]
       =<  jerk
       (ride p.u.sud hen p.byr [~ q.byr])
-    :: 
-    ++  hoot                                            ::  smoke test server
-      |=  het=hate
-      ~&  [%thee het]
-      :_  ..^^$
-      :_  ~
-      :+  [~ who]
-        hen
-      :-  %that
-      :-  %ham
-      html/~[body/-"hello, {a/~[href/"http://www.google.com"] -"Google"}."]
     ::
     ++  kill                                            ::  kill a process
       |=  pid=tick

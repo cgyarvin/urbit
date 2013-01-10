@@ -193,6 +193,7 @@
 ++  hand  ,@uvH                                         ::  hash of code
 ++  hate  ,[p=purl q=cred r=moth]                       ::  cooked request
 ++  hook  path                                          ::  request origin
+++  hart  ,[p=? q=(unit ,@ud) r=host]                   ::  http sec/port/host
 ++  hort  ,[p=(unit ,@ud) q=host]                       ::  http port/host
 ++  host  $%([& p=(list ,@t)] [| p=@if])                ::  http host
 ++  httq                                                ::  raw http request
@@ -306,6 +307,19 @@
               hoc=(map lord door)                       ::  friends & relations
           ==                                            ::
 ++  salt  ,@uv                                          ::  entropy
+++  scab                                                ::  fab context, inner
+          $:  p=@tas                                    ::  language code
+              q=pact                                    ::  internal route
+              r=scar                                    ::  url generator
+              s=csrf                                    ::  content key
+          ==                                            ::
+++  scad  ,[p=@da q=@uw r=cred]                         ::  fab context, outer
+++  scar                                                ::  url regenerator
+          $:  p=hart                                    ::  scheme/host
+              q=path                                    ::  trunk
+              s=(unit ,@ta)                             ::  extension
+              r=path                                    ::  detour
+          ==                                            ::
 ++  seam  ,[p=@ta q=pact]                               ::  service route
 ++  shed  ,[p=@da q=(qeu ,[p=@ud q=bird])]              ::  packet pump
 ++  sink                                                ::  incoming per server

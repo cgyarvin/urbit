@@ -517,17 +517,20 @@
   --
 =>
   |%
-  ++  deft                                              ::  path massage
+  ++  deft                                              ::  import url path
     |=  rax=(list ,@t)
     |-  ^-  pork
     ?~  rax
       [~ ~]
     ?~  t.rax
       =+  den=(trip i.rax)
-      =+  vex=((full ;~(plug sym ;~(pfix dot sym))) [[1 1] (trip i.rax)])
+      =+  ^=  vex
+        %-  %-  full
+            ;~(plug sym ;~(pose (stag ~ ;~(pfix dot sym)) (easy ~)))
+        [[1 1] (trip i.rax)]
       ?~  q.vex
         [~ [~(rent co %% %t i.rax) ~]]
-      [[~ +.p.u.q.vex] [-.p.u.q.vex ~]]
+      [+.p.u.q.vex [-.p.u.q.vex ~]]
     =+  pok=$(rax t.rax)
     :-  p.pok
     :_  q.pok
