@@ -152,8 +152,7 @@
     =+  dat=((hard ,@) .^(wer))
     =+  vez=(vang & wer)
     =+  gen=(scan (trip dat) (full (ifix [gay gay] tall:vez)))
-    =+  cox=(slop [[%face %app p.ras] q.ras] !>(..lunt))
-    =+  gat=(slap cox gen)
+    =+  gat=(slap ras gen)
     =+  sam=!>([who now])   ::  XX not right
     =+  pro=(slam gat sam)
     [~ ((hard love) q.pro)]
