@@ -1,3 +1,4 @@
-|=  [who=@p now=@da]
+|=  mad=[who=@p now=@da eny=@uw ced=cred]
+|=  zab=[sec=oryx quy=quay sud=scud]
 :-  %ham
-html/~[body/+"urbit: {neighbor} ready to serve at {<now>}"]
+html/~[body/+"urbit: {neighbor} ready to serve at {<now.mad>}"]

@@ -24,26 +24,15 @@
               ^-  (unit purl)                             ::
               ~                                           ::
             --                                            ::
-  ++  lung  $_                                            ::  entity generator
-            |+  :*  who=lord                              ::  owner
-                    app=@ta                               ::  application
-                    pac=pact                              ::  routed path
-                ==                                        ::
-            *love                                         ::
   ++  lump  ,[p=path q=mime r=octs]                       ::  submitted data
   ++  rush  vase                                          ::  vase of lamp
   ++  user  ?(%born %came %died %left)                    ::  user event
-  ++  toke                                                ::  event response
-            $:  p=(list card)                             ::  actions
-                q=(unit ,[p=(list slip) q=lamp])          ::  requests
-            ==                                            ::
   --                                                      ::
 |%                                                        ::  functions
 ++  lunt                                                  ::  web framework
-  |=  :*  :+  who=lord                                    ::  owner
-            suf=csrf                                      ::  csrf control
+  |=  :*  who=lord                                        ::  owner
           ped=cron                                        ::  wake frequency
-          rut=(list root)                                 ::  routes to
+          rut=(list rout)                                 ::  routes to
           ras=rush                                        ::  server state
       == 
   ^-  bowl
@@ -92,8 +81,7 @@
     ?.  ?=(%ht -.nut)
       ?>  ?=([%lunt *] pax)
       (send [%note t.pax nut])
-    ::  ~&  [%request-is q.nut]
-    =+  sek=((roil who now p.p.nut) p.q.p.q.nut q.p.nut ras)
+    =+  sek=(roil [who now (shax (mix p.p.nut now)) q.nut] p.nut ras)
     =+  ^=  rep
         :-  %that
         ?~  sek
@@ -107,15 +95,15 @@
   --
 ::
 ++  roil
-  |=  [who=lord now=@da buk=@ta]
-  |=  [ext=(unit ,@ta) pac=pact ras=rush]
+  |=  [mad=scad zab=scab ras=rush]
   ^-  (unit love)
-  ~&  [%roil ext pac]
-  =+  cap=(flop pac)
+  =+  cag=`path`(flop p.r.zab)
+  ?>  ?=(^ cag)
+  =+  buk=i.cag
   =+  hub=(hoof stub)
-  =+  ryt=`path`[~(rent co ~ %da now) ~(rent co ~ %p who) ~]
-  =+  tyc=(weld cap `path`[%web buk %cy ryt])
-  =+  tox=(weld cap `path`[%web buk %cx ryt])
+  =+  ryt=[~(rent co ~ %da q.mad) ~(rent co ~ %p p.mad) ~]
+  =+  tyc=(weld (flop t.cag) `path`[%web buk %cy ryt])
+  =+  tox=(weld (flop t.cag) `path`[%web buk %cx ryt])
   =<  veen
   |%
   ++  drem
@@ -139,9 +127,7 @@
     =+  dat=((hard ,@) .^(wer))
     =+  vez=(vang & wer)
     =+  gen=(scan (trip dat) (full (ifix [gay gay] tall:vez)))
-    =+  gat=(slap ras gen)
-    =+  sam=!>([who now])   ::  XX not right
-    =+  pro=(slam gat sam)
+    =+  pro=(slam (slam (slap ras gen) !>(mad)) !>(zab))
     [~ ((hard love) q.pro)]
   ::
   ++  dunt
@@ -153,7 +139,7 @@
     ?:  =(tyc [buk %cy ryt])  ~
     ?~  tyc  !!
     ?~  tox  !!
-    =+  rab=?~(ext dunt (drem u.ext))
+    =+  rab=?~(r.q.r.zab dunt (drem u.r.q.r.zab))
     ?^  rab  rab
     $(tyc t.tyc, tox t.tox)
   --

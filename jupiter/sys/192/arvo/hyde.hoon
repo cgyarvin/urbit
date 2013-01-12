@@ -146,7 +146,6 @@
               ::  [%m p=(list crow)]                    ::  map?
               ::  [%s p=(list crow)]                    ::  set?
           ==                                            ::
-++  csrf  ,@uvH                                         ::  CSRF secret
 ++  deed  ,[p=@ q=step]                                 ::  signature, stage
 ++  desk                                                ::  project state
           $:  lab=(map ,@tas ,@ud)                      ::  labels
@@ -185,7 +184,7 @@
 ++  goal                                                ::  app request
           $%  [%ez p=path]                              ::  simple query
               [%fu p=path q=|+(* *(unit))]              ::  complex query
-              [%ht p=(list root)]                       ::  http server
+              [%ht p=(list rout)]                       ::  http server
               [%up p=prod]                              ::  user prompt      
               [%wa p=@da]                               ::  alarm
           ==                                            ::
@@ -256,11 +255,12 @@
 ++  note                                                ::  app response
           $%  [%ez p=path q=(unit)]                     ::  simple result
               [%fu p=path q=(unit)]                     ::  complex result
-              [%ht p=seam q=hate]                       ::  http request
+              [%ht p=scab q=cred r=moth]                ::  http request
               [%up p=@t]                                ::  prompt response
               [%wa p=@da]                               ::  alarm
           ==                                            ::
 ++  octs  ,[p=@ud q=@]                                  ::  octet-stream
+++  oryx  ,@uvH                                         ::  CSRF secret
 ++  oven                                                ::  flow by server
           $:  wen=@da                                   ::  next activation
               nys=(map band ,[p=@da q=bait])            ::  incoming
@@ -273,7 +273,7 @@
 ++  post  ,[p=path q=*]                                 ::  statement
 ++  prod  ,[p=prom q=tape]                              ::  format, prompt
 ++  prom  ,?                                            ::  format type
-++  purl  ,[p=hort q=pork r=quay]                       ::  parsed url
+++  purl  ,[p=hart q=pork r=quay]                       ::  parsed url
 ++  putt                                                ::  outgoing message
           $:  ski=snow                                  ::  sequence acked/sent
               saq=?                                     ::  secure ack required
@@ -297,8 +297,8 @@
               dos=(map ,@ta desk)                       ::  projects 
           ==                                            ::
 ++  rock  ,@uvO                                         ::  packet
-++  root  ,[p=(list host) q=path r=@ta s=path]          ::  http route
-++  rout  ,[p=(list host) q=(list path)]                ::  http route
+++  root  ,[p=(list host) q=path r=@ta s=path]          ::  http route (old)
+++  rout  ,[p=(list host) q=path r=oryx s=path]         ::  http route (new)
 ++  safe                                                ::  domestic host
           $:  loc=(unit lane)                           ::  packet route
               val=wand                                  ::  private keys
@@ -307,20 +307,20 @@
               hoc=(map lord door)                       ::  friends & relations
           ==                                            ::
 ++  salt  ,@uv                                          ::  entropy
-++  scab                                                ::  fab context, inner
-          $:  p=@tas                                    ::  language code
-              q=pact                                    ::  internal route
-              r=scar                                    ::  url generator
-              s=csrf                                    ::  content key
+++  scab                                                ::  logical request 
+          $:  p=oryx                                    ::  server secret
+              q=quay                                    ::  query
+              r=scud                                    ::  url regenerator
           ==                                            ::
-++  scad  ,[p=@da q=@uw r=cred]                         ::  fab context, outer
-++  scar                                                ::  url regenerator
+++  scad  ,[p=@p q=@da r=@uw s=cred]                    ::  fab context, outer
+++  scar                                                ::  logical url
           $:  p=hart                                    ::  scheme/host
               q=path                                    ::  trunk
-              s=(unit ,@ta)                             ::  extension
-              r=path                                    ::  detour
+              r=(unit ,@ta)                             ::  extension
+              s=path                                    ::  detour
           ==                                            ::
-++  seam  ,[p=@ta q=pact]                               ::  service route
+++  scud  ,[p=pact q=scar]                              ::  full dispatch
+++  seam  ,[p=@ta q=pact r=scar]                        ::  service route
 ++  shed  ,[p=@da q=(qeu ,[p=@ud q=bird])]              ::  packet pump
 ++  sink                                                ::  incoming per server
           $:  nes=(map band ,[p=@da q=bait])            ::  fragment actions

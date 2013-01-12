@@ -12,15 +12,17 @@
 =-  [(weld hey p.qoy) q.qoy]
 ^=  qoy
 =+  suf=@
-%^  lunt  [who suf %none]
-  :~  :*  :~  [%& /localhost/]
-              [%| .127.0.0.1]
-          ==
-          /hello/
-          %toy
-          //
-      ==
-  ==
+%^    lunt  
+    who 
+  %none
+:-  :~  :*  :~  [%& /localhost/]
+                [%| .127.0.0.1]
+            ==
+            /hello/
+            suf
+            /toy/
+        ==
+    ==
 ^-  vase  
 !>
   |%

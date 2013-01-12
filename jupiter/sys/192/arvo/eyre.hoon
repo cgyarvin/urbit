@@ -272,7 +272,7 @@
           %ship  (rer %cary)
           ?(%thin %this)
         =+  heq=(thin =(%this -.r.mov) p.r.mov)
-        =+  whu=(hope q.p.p.heq)
+        =+  whu=(hope r.p.p.heq)
         ?~  whu
           $(mor t.mor, out [[i.t.q.mov [%thou 404 ~ ~]] out])
         $(mor [[whu [[%bede ~] q.mov] [%thee heq]] t.mor])

@@ -540,8 +540,16 @@
     |%
     ++  apat  (cook deft ;~(pfix fas (more fas smeg)))  ::  2396 abs_path
     ++  auri
-      ;~  pfix  ;~(plug scem col fas fas)
-        ;~(plug thor apat yque)
+      ;~  plug
+        ;~  plug
+          %+  sear
+            |=  a=@t 
+            ^-  (unit ,?)
+            ?+(a ~ %http [~ %|], %https [~ %&])
+          ;~(sfix scem ;~(plug col fas fas))
+          thor
+        ==
+        ;~(plug apat yque)
       == 
     ++  bite                                            ::  cookies (ours)
       (most sem ;~(plug nuck:so ;~(pfix sem nuck:so))) 
@@ -612,7 +620,7 @@
       ==
     ++  zest                                            ::  2616 request-uri
       ;~  pose
-        (stag %& auri)
+        (stag %& (cook |=(a=purl a) auri))
         (stag %| ;~(plug apat yque))
       ==
     --
@@ -632,10 +640,10 @@
     =+  mah=(ergo r.req)
     =+  ^=  pul  ^-  purl
         ?-  -.ryp
-          &  p.ryp
+          &  ?>(=(sec p.p.p.ryp) p.ryp)
           |  =+  hot=(~(get by mah) %host)
              ?>  ?=([~ @ ~] hot)
-             [(rash i.u.hot thor:epur) p.ryp q.ryp]
+             [[sec (rash i.u.hot thor:epur)] p.ryp q.ryp]
         ==
     [pul *cred [p.req mah ~]]
   --

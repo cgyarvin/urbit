@@ -31,7 +31,6 @@
           way=*(map ,@ta vase)                          ::  variables
           pak=*(list ,[p=@ud q=path])                   ::  prompt stack
           lif=*dock                                     ::  processes
-          rob=*(map tick ,[p=path q=rout])              ::  routes by pid
       ==
   |=  [now=@da eny=@ sky=_|+(* *(unit))] 
   =+  wen=(scot %da now)
@@ -326,7 +325,6 @@
       ^+  +>
       ?+  -.q.sip  
              +>
-        ::  %ht  +>(rob (~(del by rob) pid))
         %up  +>(pak (skip pak |=([a=@ud b=path] =(b p.sip))))
       ==
     ::
@@ -335,7 +333,6 @@
       ^+  +>
       ?+  -.q.sip  
              +>
-        ::  %ht  +>(rob (~(put by rob) pid [p.sip p.q.sip]))
         %up  +>(pak [[pid p.sip] pak])
       ==
     ::
@@ -481,7 +478,7 @@
         ==
       =+  byr=(need (~(get by q.lif) p.u.sud))
       =<  nave
-      %.  [q.u.sud [%ht r.u.sud het]]
+      %.  [q.u.sud [%ht r.u.sud q.het r.het]]
       =<  jerk
       (ride p.u.sud hen p.byr [~ q.byr])
     ::
@@ -501,40 +498,42 @@
       =^  mor  ..^^$  $(fen t.fen)
       =+  les=(kill p.i.fen)
       [(weld p.les mor) q.les]
-    ::
     --
   ::
   ++  loot                                              ::  match route
-    |=  [uri=purl rut=root]
-    ^-  (unit seam)
+    |=  [uri=purl rut=rout]
+    ^-  (unit scud)
     ?.  |-  ^-  ?
         ?~  p.rut  |
-        =(i.p.rut `host`q.p.uri)
+        =(i.p.rut `host`r.p.uri)
       ~
-    |-  ^-  (unit seam)
+    =+  tac=*path
+    |-  ^-  (unit scud)
     ?~  q.rut
-      [~ r.rut (weld s.rut q.q.uri)]
+      :-  ~
+      :-  :(weld (flop q.q.uri) tac s.rut)
+      `scar`[p.uri (flop tac) p.q.uri s.rut]
     ?:  |(?=(~ q.q.uri) !=(i.q.rut i.q.q.uri))
       ~
-    $(q.rut t.q.rut)
+    $(q.rut t.q.rut, q.q.uri t.q.q.uri, tac [i.q.rut tac])
   ::
   ++  lout                                              ::  request to process
-    |=  uri=purl                                        ::  XX slow/stupid
-    ^-  (unit ,[p=tick q=path r=seam])
+    |=  uri=purl                                        ::  XX map iterator
+    ^-  (unit ,[p=tick q=path r=scab])
     =+  fen=`(list ,[p=tick q=bear])`(~(tap by q.lif) ~)
-    |-  ^-  (unit ,[p=tick q=path r=seam])
+    |-  ^-  (unit ,[p=tick q=path r=scab])
     ?~  fen  ~
     =+  ask=`(list slip)`(~(tap by p.q.i.fen) ~)
-    |-  ^-  (unit ,[p=tick q=path r=seam])
+    |-  ^-  (unit ,[p=tick q=path r=scab])
     ?~  ask  ^$(fen t.fen)
     ?.  ?=([%ht *] q.i.ask)
       $(ask t.ask)
-    |-  ^-  (unit ,[p=tick q=path r=seam])
+    |-  ^-  (unit ,[p=tick q=path r=scab])
     ?~  p.q.i.ask  ^$(ask t.ask)
     =+  sem=(loot uri i.p.q.i.ask)
     ?~  sem  
       $(p.q.i.ask t.p.q.i.ask)
-    [~ p.i.fen p.i.ask u.sem]
+    [~ p.i.fen p.i.ask `scab`[`oryx`r.i.p.q.i.ask r.uri u.sem]]
   ::
   ++  lube                                              ::  define subject
     ^-  vase
