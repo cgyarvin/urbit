@@ -560,7 +560,7 @@
       %+  cook  cass
       ;~(plug aln (star alp))
     ::
-    ++  fque  (cook crip (plus pold))                   ::  normal query field
+    ++  fque  (cook crip (plus pquo))                   ::  normal query field
     ++  pcar  ;~(pose pure pesc psub col pat)           ::  2396 path char
     ++  pesc  ;~(pfix cen mes)                          ::  2396 escaped
     ++  pold  (cold ' ' (just '+'))                     ::  old space code
@@ -612,7 +612,7 @@
       ;~  pose                                          ::  proper query
         %+  more
           ;~(pose pam sem)
-        ;~(plug fque ;~(pfix wut fque))
+        ;~(plug fque ;~(pfix tis fque))
       ::
         %+  cook                                        ::  funky query
           |=(a=tape [[%% (crip a)] ~])
@@ -636,6 +636,7 @@
   ++  thin                            
     |=  [sec=? req=httq]
     ^-  hate
+    ~&  [%thin-quri (trip q.req)]
     =+  ryp=`quri`(rash q.req zest:epur)
     =+  mah=(ergo r.req)
     =+  ^=  pul  ^-  purl
