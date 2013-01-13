@@ -636,7 +636,7 @@
   ++  thin                            
     |=  [sec=? req=httq]
     ^-  hate
-    ~&  [%thin-quri (trip q.req)]
+    ::  ~&  [%thin-quri (trip q.req)]
     =+  ryp=`quri`(rash q.req zest:epur)
     =+  mah=(ergo r.req)
     =+  ^=  pul  ^-  purl

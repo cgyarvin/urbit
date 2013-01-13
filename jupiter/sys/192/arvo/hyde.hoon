@@ -231,8 +231,9 @@
 ++  manx  ,[t=marx c=marl]                              ::  XML node
 ++  mark  ,@ud                                          ::  regime number
 ++  marl  (list manx)                                   ::  XML node list
+++  mars  ,[t=[n=%% a=[i=[n=%% v=tape] t=~]] c=~]       ::  XML cdata
 ++  mart  (list ,[n=mane v=tape])                       ::  XML attributes
-++  marx  $|(@tas [mane a=mart])                        ::  XML tag
+++  marx  $|(@tas [n=mane a=mart])                      ::  XML tag
 ++  math  (map ,@t (list ,@t))                          ::  semiparsed headers
 ++  meal                                                ::  payload
           $%  [%back p=cape q=flap r=@dr]               ::  acknowledgment
