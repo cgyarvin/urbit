@@ -1,4 +1,4 @@
-::
+!:
 ::              Hoon stage 192 (reflexive).  
 ::              This file is in the public domain.
 ::
@@ -3120,6 +3120,7 @@
       [%clls p=gene q=gene r=gene]
       [%clsg p=(list gene)]
       [%cltr p=(list gene)]
+      [%clzp p=(list gene)]
     ::
       [%cnbc p=term]
       [%cncb p=wing q=(list ,[p=gene q=gene])]
@@ -3590,6 +3591,14 @@
       $(gen voq)
     ==
   ::
+  ++  jone
+    ^-  (list gene)
+    ?:  ?=([%clzp *] gen)
+      p.gen
+    ?:  ?=([%zpcb * [%clzp *]] gen)
+      p.q.gen 
+    [gen ~]
+  ::
   ++  open
     ^-  gene
     ?-    gen
@@ -3618,15 +3627,27 @@
         [%clcb *]  [q.gen p.gen]
         [%clcn *]  [[%clsg p.gen] [%bcts %null]]
         [%clhp *]  [p.gen q.gen]
-        [%clsg *]  |-(?@(p.gen [%dtsg %n ~] [i.p.gen $(p.gen t.p.gen)]))
-        [%cltr *]
-      |-
-      ?-    p.gen 
-          ~       [%zpzp ~]
-          [* ~]   i.p.gen
-          ^       [i.p.gen $(p.gen t.p.gen)]
-      ==
+        [%clsg *]  
+      |-  ^-  gene 
+      ?~  p.gen 
+        [%dtsg %n ~] 
+      =+  mow=jone(gen i.p.gen)
+      ?:  =(mow [i.p.gen ~])
+        [i.p.gen $(p.gen t.p.gen)]
+      $(p.gen (weld mow t.p.gen))
     ::
+        [%cltr *]
+      |-  ^-  gene
+      ?~  p.gen
+        [%zpzp ~]
+      =+  mow=jone(gen i.p.gen)
+      ?:  =(mow [i.p.gen ~])
+        ?~  t.p.gen
+          i.p.gen
+        [i.p.gen $(p.gen t.p.gen)]
+      $(p.gen (weld mow t.p.gen))
+    ::
+        [%clzp *]  open(gen [%clsg p.gen])
         [%cnbc *]  [%cnts [p.gen ~] ~]
         [%cncb *]  [%ktls [%cnhx p.gen] %cnts p.gen q.gen]
         [%cncl *]  [%cnsg [%% ~] p.gen q.gen]
@@ -6097,7 +6118,7 @@
         ::
           %+  cook
             |=  a=(list (list beer))
-            [%clsg (phax a)]
+            [%clzp (phax a)]
             ::  [%smhx |-(?~(a ~ (weld i.a $(a t.a))))]
           (most dog ;~(pfix hep soil))
         ::
