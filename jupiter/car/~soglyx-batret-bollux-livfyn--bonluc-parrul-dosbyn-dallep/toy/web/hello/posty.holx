@@ -4,7 +4,7 @@
 :-  %ham
 :~  %html
   :~  %body
-    div/+"urbit: {neighbor} ready at {<now.mad>}."
+    div/~"urbit: {neighbor} ready at {<now.mad>}."
     :-  ~[%form action/"query.html" method/"get"]
     -"message: {[~[%input type/"text" name/"msg"] ~]}"
   ==

@@ -5,5 +5,5 @@
 :-  %ham
 :~  %html
   :-  %body
-  +"urbit: {neighbor} got query {<quy.zab>}."
+  ~"urbit: {neighbor} got query {<quy.zab>}."
 ==

@@ -507,6 +507,7 @@ _http_conn_suck(u2_hcon* hon_u)
       } else {
         perror("http: recv");
         _http_conn_dead(hon_u);
+        return;
       }
     }
     if ( siz_i != http_parser_execute(hon_u->ruc_u->par_u, 
