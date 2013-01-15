@@ -50,7 +50,7 @@
   ++  send                                                ::  dispatch event
     |=  bax=gift
     ^+  +>
-    =+  sam=!>(bax)
+    =+  sam=!>(now bax)
     =+  gat=(slap ras [%cnbc %give])
     =+  pro=(slam gat sam)
     =+  [wax=(slot 2 pro) hin=(slot 3 pro)]
@@ -76,18 +76,40 @@
     =+  vur=(slot 3 pro)
     [~ ((hard purl) q.vur)] 
   ::
-  ++  wist                                                ::  handle note
-    ^+  .
-    ?.  ?=(%ht -.nut)
-      ?>  ?=([%lunt *] pax)
-      (send [%note t.pax nut])
-    =+  sek=(roil [who now (shax (mix p.p.nut now)) q.nut] p.nut ras)
+  ++  post                                                ::  handle post
+    |=  [zab=scab ced=cred mot=moth]
+    ^+  +>
+    ?>  ?=(^ r.mot)
+    =+  cot=(need (~(get by q.mot) %content-type))
+    =+  ^=  guz  ^-  (unit quay)
+        ?.  =(cot ~['application/x-www-form-urlencoded'])  ~
+        =+  vex=((full yquy:epur) [1 1] (trip q.u.r.mot))
+        ?~  q.vex  ~
+        [~ p.u.q.vex]
+    %-  send
+    ?~  guz
+      [%post p.r.zab /application/octet-stream/ u.r.mot]  ::  XX parse cot
+    [%form p.r.zab u.guz]
+  ::
+  ++  went                                                ::  handle http
+    |=  [zab=scab ced=cred mot=moth]
+    ^+  +>
+    =+  sek=(roil [who now (shax (mix p.zab now)) ced] zab ras)
     =+  ^=  rep
         :-  %that
         ?~  sek
           [%raw [404 ~ [~ (tact "http error 404 at {<now>}")]]]
         u.sek
-    ..wist(saw [rep saw])
+    +>.$(saw [rep saw])
+  ::
+  ++  wist                                                ::  handle note
+    ^+  .
+    ?.  ?=(%ht -.nut)
+      ?>  ?=([%lunt *] pax)
+      (send [%note t.pax nut])
+    =>  ?:(=(%post p.r.nut) (post +.nut) .)
+    ?>  ?=(%ht -.nut)
+    (went p.nut q.nut r.nut)
   ::
   ++  zing                                                ::  resolve
     ^-  bowl

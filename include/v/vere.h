@@ -147,9 +147,18 @@
     /* u2_reck: modern reck structure.
     */
       struct _u2_host; 
+      struct _u2_cart;
       typedef struct {
         c3_w    kno_w;                    //  kernel stage
         c3_w    rno_w;                    //  rotor index (always 0)
+
+        struct {
+          struct _u2_cart* egg_u;                 //  exit of ovum queue
+          struct _u2_cart* geg_u;                 //  entry of ovum queue
+        } ova;
+
+        u2_hbod*         rub_u;             //  exit of write queue
+        u2_hbod*         bur_u;             //  entry of write queue
 
         struct {                          //  function gates, use mung
           u2_noun duel;                   //  compare resource trees
@@ -175,6 +184,18 @@
 
       } u2_reck;
  
+    /* u2_cart: ovum carton.
+    */
+      typedef struct _u2_cart {
+        u2_noun egg;                      //  ovum itself
+        void (*clr_f)                     //  ovum processing failed
+            (u2_reck *rec_u,                    //  system
+             u2_noun,                     //  egg itself
+             u2_noun,                     //  failure mode
+             u2_noun);                    //  trace if any
+        struct _u2_cart* nex_u;                   //  next in queue
+      } u2_cart;
+
     /* u2_host: entire host.
     */
       typedef struct _u2_host {

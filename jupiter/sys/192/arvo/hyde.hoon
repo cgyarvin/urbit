@@ -248,7 +248,7 @@
               [| p=@da q=(list ,@ta)]                   ::  mtime dir
           ==                                            ::
 ++  meth  ?(%get %post)                                 ::  http method
-++  moth  ,[p=meth q=math r=*]                          ::  http operation
+++  moth  ,[p=meth q=math r=(unit octs)]                ::  http operation
 ++  move  ,[p=(unit lord) q=vein r=card]                ::  internal event
 ++  mime  (list ,@ta)                                   ::  mime type
 ++  name  ,[p=@t q=(unit ,[p=? q=@t]) r=@t]             ::  first mid/nick last

@@ -1,4 +1,4 @@
-!:
+::
 ::              Hoon stage 192 (reflexive).  
 ::              This file is in the public domain.
 ::
@@ -6184,7 +6184,7 @@
       :-  ['a' 'z']
         %+  sear
           |=  [a=wing b=(unit gene)]  ^-  (unit gene)
-          ?~(b [~ %cnhx a] ?.(?=([@ ~] a) ~ [~ [%dtpt %tas i.a] u.b]))
+          ?~(b [~ %cnhx a] ?.(?=([@ ~] a) ~ [~ [%dtsg %tas i.a] u.b]))
         ;~(plug rope ;~(pose (stag ~ ;~(pfix fas wide)) (easy ~)))
       :-  '|'
         ;~  pose

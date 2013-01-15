@@ -646,6 +646,6 @@
              ?>  ?=([~ @ ~] hot)
              [[sec (rash i.u.hot thor:epur)] p.ryp q.ryp]
         ==
-    [pul *cred [p.req mah ~]]
+    [pul *cred [p.req mah s.req]]
   --
 .

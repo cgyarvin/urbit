@@ -21,6 +21,8 @@
 #include "all.h"
 #include "v/vere.h"
 
+extern GetLine *Tecla;
+
 /* _http_bod(): create a data buffer.
 */
 static u2_hbod*
@@ -382,14 +384,17 @@ _http_headers_complete(http_parser* par_u)
 static c3_i
 _http_body(http_parser* par_u, const c3_c* buf_c, size_t siz_i)
 {
-  u2_hcon *hon_u = par_u->data;
-  u2_hreq *req_u = hon_u->req_u;
-  u2_hbod* bod_u = _http_bod(siz_i, (const c3_y*)buf_c);
+  {
+    u2_hreq *req_u = par_u->data;
+    u2_hbod* bod_u; 
+  
+    bod_u = _http_bod(siz_i, (const c3_y*)buf_c);
 
-  bod_u->nex_u = req_u->bod_u;
-  req_u->bod_u = bod_u;
- 
-  return 0;
+    bod_u->nex_u = req_u->bod_u;
+    req_u->bod_u = bod_u;
+   
+    return 0;
+  }
 }
 
 /* _http_message_complete(): jhttp callback
@@ -488,10 +493,12 @@ _http_clip(u2_hbod* bod_u, c3_i siz_i)
   }
 }
 
-/* _http_conn_suck(): suck down all available input on connection.
+/* _http_conn_drain(): suck down all available input on connection.
+**
+** Return u2_yes iff we would like more input.
 */
-static void
-_http_conn_suck(u2_hcon* hon_u)
+static u2_bean
+_http_conn_drain(u2_hcon* hon_u)
 {
   if ( !hon_u->ruc_u ) {
     hon_u->ruc_u = _http_req_new(hon_u);
@@ -503,11 +510,11 @@ _http_conn_suck(u2_hcon* hon_u)
 
     if ( (siz_i = recv(hon_u->wax_u.fd, buf_y, len_w, 0)) < 0 ) {
       if ( EAGAIN == errno ) {
-        return;
+        return u2_yes;
       } else {
         perror("http: recv");
         _http_conn_dead(hon_u);
-        return;
+        return u2_no;
       }
     }
     if ( siz_i != http_parser_execute(hon_u->ruc_u->par_u, 
@@ -517,17 +524,22 @@ _http_conn_suck(u2_hcon* hon_u)
     {
       fprintf(stderr, "http: parse error\r\n");
       _http_conn_dead(hon_u);
+      return u2_no;
     }
     if ( siz_i == 0 ) {
       // fprintf(stderr, "EOF on fd %d\r\n", hon_u->wax_u.fd);
       _http_conn_dead(hon_u);
+      return u2_no;
     }
   }
+  return u2_yes;
 }
 
 /* _http_conn_flush(): flush all available output on connection.
+**
+** u2_yes iff we have more output to send.
 */
-static void
+static u2_bean
 _http_conn_flush(u2_hcon* hon_u)
 {
   while ( hon_u->req_u ) {
@@ -558,7 +570,7 @@ _http_conn_flush(u2_hcon* hon_u)
                          rub_u->hun_y, 
                          rub_u->len_w, 0)) < 0 ) {
         if ( EAGAIN == errno ) {
-          return;
+          return u2_yes;
         } else {
           perror("http: send");
           _http_conn_dead(hon_u);
@@ -566,7 +578,7 @@ _http_conn_flush(u2_hcon* hon_u)
       }
       if ( siz_i < rub_u->len_w ) {
         _http_clip(rub_u, siz_i);
-        return;
+        return u2_yes;
       }
       else {
         req_u->rub_u = req_u->rub_u->nex_u;
@@ -586,14 +598,17 @@ _http_conn_flush(u2_hcon* hon_u)
     ev_io_stop(u2_Host.lup_u, &hon_u->wax_u);
     ev_io_set(&hon_u->wax_u, hon_u->wax_u.fd, EV_READ);
     ev_io_start(u2_Host.lup_u, &hon_u->wax_u);
+
+    return u2_no;
   }
 }
 
-extern GetLine *Tecla;
-/* _http_conn_cb(): libev callback for http connections.
+/* u2_lo_call_http_conn(): callback for http connections.
 */
-static void
-_http_conn_cb(struct ev_loop *lup_u, struct ev_io* wax_u, int revents)
+void
+u2_lo_call_http_conn(struct ev_loop *lup_u, 
+                     struct ev_io* wax_u, 
+                     c3_i revents)
 {
   u2_hcon *hon_u = (void *)wax_u;
   u2_bean inn    = (revents & EV_READ) ? u2_yes : u2_no;
@@ -601,7 +616,7 @@ _http_conn_cb(struct ev_loop *lup_u, struct ev_io* wax_u, int revents)
 
   gl_normal_io(Tecla);
   if ( u2_yes == inn ) {
-    _http_conn_suck(hon_u);
+    _http_conn_drain(hon_u);
   }
   if ( u2_yes == out ) {
     _http_conn_flush(hon_u);
@@ -609,18 +624,43 @@ _http_conn_cb(struct ev_loop *lup_u, struct ev_io* wax_u, int revents)
   gl_raw_io(Tecla);
 }
 
-/* _http_conn_new(): create and install new http connection with fd.
+/* u2_io_fuck_http_conn(): flush output connection for http.
+**
+** u2_yes iff we have more output to send.
 */
-static void
-_http_conn_new(u2_http *htp_u, c3_i fid_i)
+u2_bean
+u2_io_fuck_http_conn(struct ev_io* wax_u)
+{
+  return _http_conn_flush((u2_hcon*)(void *)wax_u);
+}
+
+/* u2_io_suck_http_conn(): drain input connection for http.
+**
+** u2_yes iff we are ready to keep reading.
+*/
+u2_bean
+u2_io_suck_http_conn(struct ev_io* wax_u)
+{
+  return _http_conn_drain((u2_hcon*)(void *)wax_u);
+}
+
+/* u2_io_exit_http_conn(): terminate http connection.
+*/
+void
+u2_io_exit_http_conn(struct ev_io* wax_u)
+{
+  _http_conn_dead((u2_hcon*)(void *)wax_u);
+}
+
+/* u2_io_init_http_conn(): create http connection.
+*/
+u2_hcon* 
+u2_io_init_http_conn(u2_http *htp_u, c3_i fid_i)
 {
   u2_hcon *hon_u = malloc(sizeof(*hon_u));
 
   hon_u->coq_l = htp_u->coq_l++;
   hon_u->seq_l = 1;
-
-  ev_io_init(&hon_u->wax_u, _http_conn_cb, fid_i, EV_READ);
-  ev_io_start(u2_Host.lup_u, &hon_u->wax_u);
 
   hon_u->ruc_u = 0;
   hon_u->req_u = 0;
@@ -629,6 +669,33 @@ _http_conn_new(u2_http *htp_u, c3_i fid_i)
   hon_u->htp_u = htp_u;
   hon_u->nex_u = htp_u->hon_u;
   htp_u->hon_u = hon_u;
+
+  return hon_u;
+}
+
+/* u2_lo_init_http_conn(): create http connection.
+*/
+u2_hcon* 
+u2_lo_init_http_conn(u2_http *htp_u, c3_i fid_i)
+{
+  u2_hcon* hon_u;
+
+  hon_u = u2_io_init_http_conn(htp_u, fid_i);
+
+  ev_io_init(&hon_u->wax_u, u2_lo_call_http_conn, fid_i, EV_READ);
+  ev_io_start(u2_Host.lup_u, &hon_u->wax_u);
+
+  return hon_u;
+}
+
+/* u2_lo_wake_http_conn(): wake http connection for writing.
+*/
+void
+u2_lo_wake_http_conn(u2_hcon* hon_u)
+{
+  ev_io_stop(u2_Host.lup_u, &hon_u->wax_u);
+  ev_io_set(&hon_u->wax_u, hon_u->wax_u.fd, (EV_READ | EV_WRITE));
+  ev_io_start(u2_Host.lup_u, &hon_u->wax_u);
 }
 
 /* _http_req_find(): find http request by sequence.
@@ -689,7 +756,7 @@ _http_list_cb(struct ev_loop *lup_u, struct ev_io* wax_u, int revents)
     }
     else {
       // fprintf(stderr, "http: new connection %d\r\n", fid_i);
-      _http_conn_new(htp_u, fid_i);
+      u2_lo_init_http_conn(htp_u, fid_i);
     }
   }
 }
@@ -787,7 +854,7 @@ _http_bods_to_octs(u2_hbod* bod_u)
   }
   cos = u2_ci_bytes(len_w, buf_y);
   free(buf_y);
-  return cos;
+  return u2nc(len_w, cos);
 }
 
 /* _http_octs_to_bod(): translate octet-stream noun into body.
@@ -843,8 +910,7 @@ _http_request_to_noun(u2_hreq* req_u)
   } 
   url = u2_ci_string(req_u->url_c);
   hed = _http_heds_to_list(req_u->hed_u);
-  bod = req_u->bod_u ? u2nc(u2_nul, _http_bods_to_octs(req_u->bod_u))
-                     : u2_nul;
+  bod = req_u->bod_u ? u2nc(u2_nul, _http_bods_to_octs(req_u->bod_u)) : u2_nul;
 
   return u2nq(med, url, hed, bod);
 }
