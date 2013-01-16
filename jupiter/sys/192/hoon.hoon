@@ -6,8 +6,8 @@
 ::    (ie, unsigned integer).  A cell is an ordered pair of nouns.
 ::
 ::    Noun A is this file, hoon.hoon, encoded as an atom, LSB first.
-::    Noun B is the accompanying binary file, hoon.pill, encoded
-::    as an atom LSB first, then unpacked with "++  cue".
+::    Noun B is the accompanying bytestream file, hoon.pill, encoded
+::    as an atom LSB first, then unpacked with the ++cue function.
 ::
 ::    A is marked above with a stage number (X=192) and a constraint,
 ::    either "reflexive" (normally) or "transitional" (for language
@@ -53,13 +53,11 @@
 ::    In a reflexive stage X, we assert, *[A_X B_X] yields B_X.
 ::    Ie, hoon.hoon is a self-compiling compiler against Nock.
 ::
-::    In any stage X, reflexive or transitional, where Y=X-1,
-::    *[A_Y B_X] yields B_X.  Ie, the current stage of Hoon
-::    is defined in the previous stage of Hoon.  Each stage is
-::    a different language with no compatibility constraint,
-::    though stability of course remains desirable.
+::    In any stage X, reflexive or transitional, where Y=X+1,
+::    *[A_X B_Y] defines B_X.  Ie, the current stage of Hoon
+::    is written in the previous stage of Hoon.
 ::
-::    Hoon is a pure, strict, higher-order typed functional 
+::    Hoon is a pure, strict, higher-order-typed functional 
 ::    language in no particular family.  It does not use the
 ::    lambda calculus or formal logic.  Hoon's mapping
 ::    to Nock is like that of C to assembler - not always
@@ -72,13 +70,12 @@
 ::    Operators 6-10 are macros and add no formal power.
 ::
 ::    (NB: the Nock definition above is just pseudocode, not Hoon.
-::    To see a (mildly enhanced) Nock in Hoon, search "++  mock".
-::    But Hoon is defined in Nock; stating Nock in Hoon, though
-::    otherwise useful, cannot enhance the precision of Nock.)
+::    To see a (mildly enhanced) Nock in Hoon, see ++mock.  But
+::    Hoon is defined in Nock; stating Nock in Hoon cannot enhance
+::    the precision of Nock.)
 ::
 ::    What is Hoon good for?  Now, nothing.  Ideally, whatever.
-::    But mostly, functional system software.  "++  zuse" is a
-::    small, largely useless functional operating system.
+::    But mostly, functional system software.
 ::
 ::    One fun exercise: decrement an atom in Nock, not using 7-10.
 ::    More fun is to also eschew 6.
@@ -3116,11 +3113,14 @@
       [%brwt p=gene]
     ::
       [%clcb p=gene q=gene]
+      [%clcn p=(list gene)]
+      [%clfs p=gene]
       [%clkt p=gene q=gene r=gene s=gene]
       [%clhp p=gene q=gene]
       [%clls p=gene q=gene r=gene]
       [%clsg p=(list gene)]
       [%cltr p=(list gene)]
+      [%clzp p=(list gene)]
     ::
       [%cnbc p=term]
       [%cncb p=wing q=(list ,[p=gene q=gene])]
@@ -3527,6 +3527,8 @@
     ?-    gen
         [^ *]      [$(gen p.gen) $(gen q.gen)]
         [%clls *]  $(gen open)
+        [%clfs *]  $(gen open)
+        [%clcn *]  $(gen open)
         [%clcb *]  $(gen open)
         [%clhp *]  $(gen open)
         [%clkt *]  $(gen open)
@@ -3589,6 +3591,14 @@
       $(gen voq)
     ==
   ::
+  ++  jone
+    ^-  (list gene)
+    ?:  ?=([%clzp *] gen)
+      p.gen
+    ?:  ?=([%zpcb * [%clzp *]] gen)
+      p.q.gen 
+    [gen ~]
+  ::
   ++  open
     ^-  gene
     ?-    gen
@@ -3612,18 +3622,32 @@
         [%brts *]  [%brcb p.gen (~(put by *(map term foot)) %% [%ash q.gen])]
         [%brwt *]  [%ktwt %brdt p.gen]
         [%clkt *]  [p.gen q.gen r.gen s.gen]
+        [%clfs *]  =+(zoy=[%dtsg %ta %%] [%clsg [zoy [%clsg [zoy p.gen] ~]] ~])
         [%clls *]  [p.gen q.gen r.gen]
         [%clcb *]  [q.gen p.gen]
+        [%clcn *]  [[%clsg p.gen] [%bcts %null]]
         [%clhp *]  [p.gen q.gen]
-        [%clsg *]  |-(?@(p.gen [%dtsg %n ~] [i.p.gen $(p.gen t.p.gen)]))
-        [%cltr *]
-      |-
-      ?-    p.gen 
-          ~       [%zpzp ~]
-          [* ~]   i.p.gen
-          ^       [i.p.gen $(p.gen t.p.gen)]
-      ==
+        [%clsg *]  
+      |-  ^-  gene 
+      ?~  p.gen 
+        [%dtsg %n ~] 
+      =+  mow=jone(gen i.p.gen)
+      ?:  =(mow [i.p.gen ~])
+        [i.p.gen $(p.gen t.p.gen)]
+      $(p.gen (weld mow t.p.gen))
     ::
+        [%cltr *]
+      |-  ^-  gene
+      ?~  p.gen
+        [%zpzp ~]
+      =+  mow=jone(gen i.p.gen)
+      ?:  =(mow [i.p.gen ~])
+        ?~  t.p.gen
+          i.p.gen
+        [i.p.gen $(p.gen t.p.gen)]
+      $(p.gen (weld mow t.p.gen))
+    ::
+        [%clzp *]  open(gen [%clsg p.gen])
         [%cnbc *]  [%cnts [p.gen ~] ~]
         [%cncb *]  [%ktls [%cnhx p.gen] %cnts p.gen q.gen]
         [%cncl *]  [%cnsg [%% ~] p.gen q.gen]
@@ -5995,6 +6019,18 @@
     ?~  t.gun  (pray i.gun)
     [%tsgr (pray i.gun) $(gun t.gun)]
   ::
+  ++  phax
+    |=  ruw=(list (list beer))
+    =+  [yun=*(list gene) cah=*(list ,@)]
+    =+  wod=|=([a=tape b=(list gene)] ^+(b ?~(a b [[%clfs %smdq (flop a)] b])))
+    |-  ^+  yun
+    ?~  ruw 
+      (flop (wod cah yun))
+    ?~  i.ruw  $(ruw t.ruw)
+    ?@  i.i.ruw
+      $(i.ruw t.i.ruw, cah [i.i.ruw cah])
+    $(i.ruw t.i.ruw, cah ~, yun [p.i.i.ruw (wod cah yun)])
+  ::
   ++  road
     ;~  pfix  fas
       %+  cook
@@ -6040,6 +6076,7 @@
             (stag %dtsg (stag %f (cold & pam)))
             (stag %dtsg (stag %f (cold | bar)))
             (stag %dtsg (stag %ta qut))
+            (stag %clcn (ifix [sel ser] (most ace wide)))
             (cook (jock &) nuck:so)
           ==
         == 
@@ -6062,6 +6099,13 @@
       :-  '+'
         ;~  pose
           (stag %dtls ;~(pfix lus (ifix [pel per] wide)))
+        ::
+          %+  cook
+            |=  a=(list (list beer))
+            :-  %clfs
+            [%smdq |-(?~(a ~ (weld i.a $(a t.a))))]
+          (most dog ;~(pfix lus soil))
+        ::
           (cook |=(a=wing [%cnts a ~]) rope)
         ==
       :-  '#'
@@ -6071,9 +6115,11 @@
       :-  '-'
         ;~  pose
           (stag %dtpt tash:so)
+        ::
           %+  cook
             |=  a=(list (list beer))
-            [%smhx |-(?~(a ~ (weld i.a $(a t.a))))]
+            [%clzp (phax a)]
+            ::  [%smhx |-(?~(a ~ (weld i.a $(a t.a))))]
           (most dog ;~(pfix hep soil))
         ::
           (cook |=(a=wing [%cnts a ~]) rope)
@@ -6138,7 +6184,7 @@
       :-  ['a' 'z']
         %+  sear
           |=  [a=wing b=(unit gene)]  ^-  (unit gene)
-          ?~(b [~ %cnhx a] ?.(?=([@ ~] a) ~ [~ [%dtpt %tas i.a] u.b]))
+          ?~(b [~ %cnhx a] ?.(?=([@ ~] a) ~ [~ [%dtsg %tas i.a] u.b]))
         ;~(plug rope ;~(pose (stag ~ ;~(pfix fas wide)) (easy ~)))
       :-  '|'
         ;~  pose
@@ -6147,17 +6193,26 @@
           (stag %dtpt (stag %f (cold | bar)))
         ==
       :-  '~'
-        ;~  pfix  sig
-          ;~  pose
-            (stag %clsg (ifix [sel ser] (most ace wide)))
-          ::
-            %+  stag  %cnsg 
-            %+  ifix
-              [pel per] 
-            ;~(glam rope wide (stag %cltr (most ace wide)))
-          ::
-            (cook (jock |) twid:so)
-            (easy [%bcts %null])
+        ;~  pose
+          %+  cook
+            |=  a=(list (list beer))
+            :_  [%bcts %null]
+            :-  %clfs
+            [%smdq |-(?~(a ~ (weld i.a $(a t.a))))]
+          (most dog ;~(pfix sig soil))
+        ::
+          ;~  pfix  sig
+            ;~  pose
+              (stag %clsg (ifix [sel ser] (most ace wide)))
+            ::
+              %+  stag  %cnsg 
+              %+  ifix
+                [pel per] 
+              ;~(glam rope wide (stag %cltr (most ace wide)))
+            ::
+              (cook (jock |) twid:so)
+              (easy [%bcts %null])
+            ==
           ==
         ==
       :-  '/'
@@ -6229,6 +6284,8 @@
               ;~  pfix  col
                 %-  stew  :~
                   ['_' (rune cab %clcb expb)]
+                  ['~' (rune cen %clcn exps)]
+                  ['/' (rune fas %clfs expa)]
                   ['^' (rune ket %clkt expf)]
                   ['+' (rune lus %clls expc)]
                   ['-' (rune hep %clhp expb)]

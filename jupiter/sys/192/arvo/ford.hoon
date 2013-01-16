@@ -373,6 +373,15 @@
   --  
 =>  
   |%
+  ++  moon                                              ::  mime type to text
+    |=  myn=mime
+    %+  rap
+      3
+    |-  ^-  tape
+    ?~  myn  ~
+    ?~  t.myn  (trip i.myn)
+    (weld (trip i.myn) ['/' $(myn t.myn)])
+  ::
   ++  tact                                              ::  tape to octstream
     |=  tep=tape  ^-  octs
     =+  buf=(rap 3 tep)
@@ -508,17 +517,20 @@
   --
 =>
   |%
-  ++  deft                                              ::  path massage
+  ++  deft                                              ::  import url path
     |=  rax=(list ,@t)
     |-  ^-  pork
     ?~  rax
       [~ ~]
     ?~  t.rax
       =+  den=(trip i.rax)
-      =+  vex=((full ;~(plug sym ;~(pfix dot sym))) [[1 1] (trip i.rax)])
+      =+  ^=  vex
+        %-  %-  full
+            ;~(plug sym ;~(pose (stag ~ ;~(pfix dot sym)) (easy ~)))
+        [[1 1] (trip i.rax)]
       ?~  q.vex
         [~ [~(rent co %% %t i.rax) ~]]
-      [[~ +.p.u.q.vex] [-.p.u.q.vex ~]]
+      [+.p.u.q.vex [-.p.u.q.vex ~]]
     =+  pok=$(rax t.rax)
     :-  p.pok
     :_  q.pok
@@ -528,8 +540,16 @@
     |%
     ++  apat  (cook deft ;~(pfix fas (more fas smeg)))  ::  2396 abs_path
     ++  auri
-      ;~  pfix  ;~(plug scem col fas fas)
-        ;~(plug thor apat yque)
+      ;~  plug
+        ;~  plug
+          %+  sear
+            |=  a=@t 
+            ^-  (unit ,?)
+            ?+(a ~ %http [~ %|], %https [~ %&])
+          ;~(sfix scem ;~(plug col fas fas))
+          thor
+        ==
+        ;~(plug apat yque)
       == 
     ++  bite                                            ::  cookies (ours)
       (most sem ;~(plug nuck:so ;~(pfix sem nuck:so))) 
@@ -540,7 +560,7 @@
       %+  cook  cass
       ;~(plug aln (star alp))
     ::
-    ++  fque  (cook crip (plus pold))                   ::  normal query field
+    ++  fque  (cook crip (plus pquo))                   ::  normal query field
     ++  pcar  ;~(pose pure pesc psub col pat)           ::  2396 path char
     ++  pesc  ;~(pfix cen mes)                          ::  2396 escaped
     ++  pold  (cold ' ' (just '+'))                     ::  old space code
@@ -592,7 +612,7 @@
       ;~  pose                                          ::  proper query
         %+  more
           ;~(pose pam sem)
-        ;~(plug fque ;~(pfix wut fque))
+        ;~(plug fque ;~(pfix tis fque))
       ::
         %+  cook                                        ::  funky query
           |=(a=tape [[%% (crip a)] ~])
@@ -600,7 +620,7 @@
       ==
     ++  zest                                            ::  2616 request-uri
       ;~  pose
-        (stag %& auri)
+        (stag %& (cook |=(a=purl a) auri))
         (stag %| ;~(plug apat yque))
       ==
     --
@@ -616,15 +636,16 @@
   ++  thin                            
     |=  [sec=? req=httq]
     ^-  hate
+    ::  ~&  [%thin-quri (trip q.req)]
     =+  ryp=`quri`(rash q.req zest:epur)
     =+  mah=(ergo r.req)
     =+  ^=  pul  ^-  purl
         ?-  -.ryp
-          &  p.ryp
+          &  ?>(=(sec p.p.p.ryp) p.ryp)
           |  =+  hot=(~(get by mah) %host)
              ?>  ?=([~ @ ~] hot)
-             [(rash i.u.hot thor:epur) p.ryp q.ryp]
+             [[sec (rash i.u.hot thor:epur)] p.ryp q.ryp]
         ==
-    [pul *cred [p.req mah ~]]
+    [pul *cred [p.req mah s.req]]
   --
 .

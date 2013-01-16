@@ -1,5 +1,5 @@
 !:
-::          %hyde, zuse models.   This file is in the public domain.
+::          %hyde, arvo models.   This file is in the public domain.
 ::
 |%
 ++  acro                                                ::  asym cryptosuite
@@ -45,6 +45,7 @@
               sea=shed                                  ::  packet pump
           ==                                            ::
 ++  bear  ,[p=(map path goal) q=boar]                   ::  process with slips
+++  bell  path                                          ::  process label
 ++  bird                                                ::  packet in flight
           $:  gom=soap                                  ::  message identity
               mup=@ud                                   ::  pktno in msg
@@ -145,7 +146,6 @@
               ::  [%m p=(list crow)]                    ::  map?
               ::  [%s p=(list crow)]                    ::  set?
           ==                                            ::
-++  csrf  ,@uvH                                         ::  CSRF secret
 ++  deed  ,[p=@ q=step]                                 ::  signature, stage
 ++  desk                                                ::  project state
           $:  lab=(map ,@tas ,@ud)                      ::  labels
@@ -184,7 +184,7 @@
 ++  goal                                                ::  app request
           $%  [%ez p=path]                              ::  simple query
               [%fu p=path q=|+(* *(unit))]              ::  complex query
-              [%ht p=rout]                              ::  http server
+              [%ht p=(list rout)]                       ::  http server
               [%up p=prod]                              ::  user prompt      
               [%wa p=@da]                               ::  alarm
           ==                                            ::
@@ -192,6 +192,7 @@
 ++  hand  ,@uvH                                         ::  hash of code
 ++  hate  ,[p=purl q=cred r=moth]                       ::  cooked request
 ++  hook  path                                          ::  request origin
+++  hart  ,[p=? q=(unit ,@ud) r=host]                   ::  http sec/port/host
 ++  hort  ,[p=(unit ,@ud) q=host]                       ::  http port/host
 ++  host  $%([& p=(list ,@t)] [| p=@if])                ::  http host
 ++  httq                                                ::  raw http request
@@ -230,8 +231,9 @@
 ++  manx  ,[t=marx c=marl]                              ::  XML node
 ++  mark  ,@ud                                          ::  regime number
 ++  marl  (list manx)                                   ::  XML node list
+++  mars  ,[t=[n=%% a=[i=[n=%% v=tape] t=~]] c=~]       ::  XML cdata
 ++  mart  (list ,[n=mane v=tape])                       ::  XML attributes
-++  marx  $|(@tas [mane a=mart])                        ::  XML tag
+++  marx  $|(@tas [n=mane a=mart])                      ::  XML tag
 ++  math  (map ,@t (list ,@t))                          ::  semiparsed headers
 ++  meal                                                ::  payload
           $%  [%back p=cape q=flap r=@dr]               ::  acknowledgment
@@ -246,7 +248,7 @@
               [| p=@da q=(list ,@ta)]                   ::  mtime dir
           ==                                            ::
 ++  meth  ?(%get %post)                                 ::  http method
-++  moth  ,[p=meth q=math r=*]                          ::  http operation
+++  moth  ,[p=meth q=math r=(unit octs)]                ::  http operation
 ++  move  ,[p=(unit lord) q=vein r=card]                ::  internal event
 ++  mime  (list ,@ta)                                   ::  mime type
 ++  name  ,[p=@t q=(unit ,[p=? q=@t]) r=@t]             ::  first mid/nick last
@@ -254,23 +256,25 @@
 ++  note                                                ::  app response
           $%  [%ez p=path q=(unit)]                     ::  simple result
               [%fu p=path q=(unit)]                     ::  complex result
-              [%ht p=hate]                              ::  legacy request
+              [%ht p=scab q=cred r=moth]                ::  http request
               [%up p=@t]                                ::  prompt response
               [%wa p=@da]                               ::  alarm
           ==                                            ::
 ++  octs  ,[p=@ud q=@]                                  ::  octet-stream
+++  oryx  ,@uvH                                         ::  CSRF secret
 ++  oven                                                ::  flow by server
           $:  wen=@da                                   ::  next activation
               nys=(map band ,[p=@da q=bait])            ::  incoming
               wab=(map lord bath)                       ::  outgoing by client
           ==                                            ::
 ++  ovum  ,[p=path q=card]                              ::  external event
+++  pact  path                                          ::  routed path
 ++  plea  ,[p=@ud q=[p=? q=@t]]                         ::  live prompt
 ++  pork  ,[p=(unit ,@ta) q=path]                       ::  fully parsed url
 ++  post  ,[p=path q=*]                                 ::  statement
 ++  prod  ,[p=prom q=tape]                              ::  format, prompt
 ++  prom  ,?                                            ::  format type
-++  purl  ,[p=hort q=pork r=quay]                       ::  parsed url
+++  purl  ,[p=hart q=pork r=quay]                       ::  parsed url
 ++  putt                                                ::  outgoing message
           $:  ski=snow                                  ::  sequence acked/sent
               saq=?                                     ::  secure ack required
@@ -294,7 +298,8 @@
               dos=(map ,@ta desk)                       ::  projects 
           ==                                            ::
 ++  rock  ,@uvO                                         ::  packet
-++  rout  ,[p=(list host) q=(list path)]                ::  http route
+++  root  ,[p=(list host) q=path r=@ta s=path]          ::  http route (old)
+++  rout  ,[p=(list host) q=path r=oryx s=path]         ::  http route (new)
 ++  safe                                                ::  domestic host
           $:  loc=(unit lane)                           ::  packet route
               val=wand                                  ::  private keys
@@ -303,12 +308,26 @@
               hoc=(map lord door)                       ::  friends & relations
           ==                                            ::
 ++  salt  ,@uv                                          ::  entropy
+++  scab                                                ::  logical request 
+          $:  p=oryx                                    ::  server secret
+              q=quay                                    ::  query
+              r=scud                                    ::  url regenerator
+          ==                                            ::
+++  scad  ,[p=@p q=@da r=@uw s=cred]                    ::  fab context, outer
+++  scar                                                ::  logical url
+          $:  p=hart                                    ::  scheme/host
+              q=path                                    ::  trunk
+              r=(unit ,@ta)                             ::  extension
+              s=path                                    ::  detour
+          ==                                            ::
+++  scud  ,[p=pact q=scar]                              ::  full dispatch
+++  seam  ,[p=@ta q=pact r=scar]                        ::  service route
 ++  shed  ,[p=@da q=(qeu ,[p=@ud q=bird])]              ::  packet pump
 ++  sink                                                ::  incoming per server
           $:  nes=(map band ,[p=@da q=bait])            ::  fragment actions
           ==                                            ::
 ++  skin  ?(%none %open %fast %full)                    ::  encoding stem
-++  slip  ,[p=path q=goal]                              ::  traceable request
+++  slip  ,[p=bell q=goal]                              ::  traceable request
 ++  snow  ,[p=@ud q=@ud r=(set ,@ud)]                   ::  window exceptions
 ++  soap  ,*                                            ::  opaque msg identity
 ++  sock  ,[p=lord q=lord]                              ::  from to

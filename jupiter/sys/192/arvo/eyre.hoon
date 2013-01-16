@@ -272,7 +272,7 @@
           %ship  (rer %cary)
           ?(%thin %this)
         =+  heq=(thin =(%this -.r.mov) p.r.mov)
-        =+  whu=(hope q.p.p.heq)
+        =+  whu=(hope r.p.p.heq)
         ?~  whu
           $(mor t.mor, out [[i.t.q.mov [%thou 404 ~ ~]] out])
         $(mor [[whu [[%bede ~] q.mov] [%thee heq]] t.mor])
@@ -281,7 +281,19 @@
           %talk  (giv) 
           %text  (red [%talk %leaf p.r.mov])
           %that
-        ?+    -.p.r.mov  !!
+        ?-    -.p.r.mov 
+            %mid
+          %=    $
+              mor  t.mor
+              out  :-  :-  i.t.q.mov
+                       :-  %thou 
+                       ^-  httr
+                       :+  200 
+                         ~[content-type/(moon p.p.r.mov)]
+                       [~ q.p.r.mov]
+                   out
+          ==
+        ::
             %ham
           %=    $
               mor  t.mor
@@ -302,6 +314,7 @@
                    out
           ==
         ==
+      ::
           %thee  (rer %bede)
           %thou  !!
           %tory  !!

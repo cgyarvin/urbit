@@ -640,8 +640,8 @@
 
         _open_pqrs(clkt);
         _open_pqr (clls);
-        _open_p   (cltr);
-        _open_p   (clsg);
+        // _open_p   (cltr);
+        // _open_p   (clsg);
 
         _open_pqr (wtdt);
         _open_pq  (wtgl);
