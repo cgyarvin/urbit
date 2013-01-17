@@ -169,10 +169,10 @@ _reck_load_temp(u2_reck* rec_u, u2_noun vax, c3_w kno_w, c3_c* pax_c)
   return _reck_load(rec_u, vax, ful_c);
 }
 
-/* _reck_time_set(): set the reck time.
+/* u2_reck_time(): set the reck time.
 */
-static void
-_reck_time_set(u2_reck* rec_u)
+void
+u2_reck_time(u2_reck* rec_u)
 {
   struct timeval tim_tv;
 
@@ -226,7 +226,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
   rec_u->toy.slop = _reck_root("slop", u2k(ken));
   rec_u->toy.scot = _reck_root("scot", u2k(ken));
 
-  _reck_time_set(rec_u);
+  u2_reck_time(rec_u);
   {
     c3_c* dyt_c = u2_cr_string(rec_u->wen);
 
@@ -445,7 +445,7 @@ u2_reck_http_request(u2_reck* rec_u, u2_bean sec, u2_noun pox, u2_noun req)
 {
   u2_noun hoe;
 
-  _reck_time_set(rec_u);
+  u2_reck_time(rec_u);
 
   u2_cm_trip();
   if ( 0 != (hoe = u2_cm_trap()) ) {
@@ -483,9 +483,9 @@ u2_reck_line(u2_reck* rec_u, u2_noun lin)
 {
   u2_noun pax = u2nq(c3__gold, c3__term, '0', u2_nul);
 
-  _reck_time_set(rec_u);
+  u2_reck_time(rec_u);
   u2_reck_sync(rec_u);
-  _reck_time_set(rec_u);
+  u2_reck_time(rec_u);
 
   _reck_poke(rec_u, u2nc(pax, u2nc(c3__line, lin)));
 }

@@ -83,6 +83,8 @@
     */
       typedef struct _u2_hcon {
         struct ev_io     wax_u;             //  event handler state
+        u2_bean          nuw;               //  if true, needs init
+        u2_bean          ded;               //  if true, needs cleanup
         c3_w             coq_l;             //  connection number
         c3_w             seq_l;             //  next request number
         struct _u2_http* htp_u;             //  backlink to server 
@@ -96,12 +98,28 @@
     */
       typedef struct _u2_http {
         struct ev_io     wax_u;             //  event handler state
+        u2_bean          nuw;               //  if true, needs init
+        u2_bean          ded;               //  if true, needs cleanup
         c3_w             sev_l;             //  server number - mostly unique
         c3_w             coq_l;             //  next connection number
         c3_w             por_w;             //  running port
         struct _u2_hcon* hon_u;             //  connection list
         struct _u2_http* nex_u;             //  next in list
       } u2_http;
+
+    /* u2_donk: i/o state update function.
+    */
+      typedef void (*u2_donk)
+        (struct ev_loop* lup_u,
+         struct ev_io*   wax_u, 
+         u2_bean         inn,
+         u2_bean         out);
+
+    /* u2_togl: i/o state on or off.
+    */
+      typedef void (*u2_togl)
+        (struct ev_loop* lup_u,
+         struct ev_io*   wax_u);
 
     /* u2_steg: kernel stage.
     */
@@ -156,9 +174,6 @@
           struct _u2_cart* egg_u;                 //  exit of ovum queue
           struct _u2_cart* geg_u;                 //  entry of ovum queue
         } ova;
-
-        u2_hbod*         rub_u;             //  exit of write queue
-        u2_hbod*         bur_u;             //  entry of write queue
 
         struct {                          //  function gates, use mung
           u2_noun duel;                   //  compare resource trees
@@ -402,6 +417,10 @@
         void
         u2_reck_sync(u2_reck* rec_u);
 
+      /* u2_reck_time(): set the reck time.
+      */
+        void
+        u2_reck_time(u2_reck* rec_u);
 
     /**  Execution system.
     **/
