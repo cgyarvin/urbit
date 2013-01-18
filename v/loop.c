@@ -45,6 +45,7 @@ static void _lo_cons(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i);
     c3_c* pot_c;
     c3_c* out_c;
 
+    // fprintf(stderr, "get_line\n");
     if ( u2_none == pot ) {
       gl_normal_io(Tecla);
       exit(1);
@@ -67,6 +68,7 @@ static void _lo_cons(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i);
   u2_cons_io_init(u2_reck*        rec_u,
                   struct ev_loop* lup_u)
   {
+    // fprintf(stderr, "cons_io_init\n");
     ev_io_init(&Stdin_watcher, _lo_cons, 0, EV_READ);
     ev_io_start(lup_u, &Stdin_watcher);
 
@@ -82,6 +84,7 @@ static void _lo_cons(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i);
   u2_cons_io_poll(u2_reck*        rec_u,
                   struct ev_loop* lup_u)
   {
+    // fprintf(stderr, "cons_io_poll\n");
     if ( u2_yes == Ded ) {
       fprintf(stderr, "\nconsole: stop\n");
       ev_unloop(lup_u, EVUNLOOP_ALL);
@@ -89,10 +92,23 @@ static void _lo_cons(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i);
   }
 
   void
+  u2_cons_io_spin(u2_reck*        rec_u,
+                  struct ev_loop* lup_u)
+  {
+    // fprintf(stderr, "cons_io_spin\n");
+    // ev_io_start(lup_u, &Stdin_watcher);
+    gl_raw_io(Tecla);
+  }
+
+  void
   u2_cons_io_stop(u2_reck*        rec_u,
                   struct ev_loop* lup_u)
   {
-    ev_io_stop(lup_u, &Stdin_watcher);
+    // fprintf(stderr, "cons_io_stop\n");
+    //
+    // XX: Tecla doesn't like being stopped properly.
+    //
+    // ev_io_stop(lup_u, &Stdin_watcher);
     gl_normal_io(Tecla);
   }
 
@@ -135,14 +151,6 @@ static void _lo_cons(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i);
         // printf(": "); fflush(stdout);
       }
     }
-  }
-
-  void
-  u2_cons_io_spin(u2_reck*        rec_u,
-                  struct ev_loop* lup_u)
-  {
-    ev_io_start(lup_u, &Stdin_watcher);
-    gl_raw_io(Tecla);
   }
 
   void 
@@ -202,6 +210,20 @@ _lo_spin(u2_reck*        rec_u,
   u2_cons_io_spin(rec_u, lup_u);
 }
 
+/* _lo_how(): print how.
+*/
+static const c3_c* 
+_lo_how(u2_noun how)
+{
+  switch ( how ) {
+    default: c3_assert(0); break;
+
+    case c3__cons: return "cons";
+    case c3__htcn: return "http-conn";
+    case c3__htls: return "http-lisn";
+  }
+}
+
 /* _lo_suck(): process input on a socket.
 */
 static void
@@ -247,14 +269,24 @@ u2_lo_call(u2_reck*        rec_u,
   u2_bean out = (revents & EV_WRITE) ? u2_yes : u2_no;
 
   _lo_stop(rec_u, lup_u);
+
+#if 0
+  {
+    fprintf(stderr, "call %s inn %s out %s\n", 
+        _lo_how(how),
+        (inn == u2_yes) ? "yes" : "no",
+        (out == u2_yes) ? "yes" : "no");
+  }
+#endif
+
   {
     //  update time
     //
-    u2_reck_time(rec_u);
+    // u2_reck_time(rec_u);
 
     //  sync with filesystem (ugh)
     //
-    u2_reck_sync(rec_u);
+    // u2_reck_sync(rec_u);
 
     //  process input on this socket
     //
@@ -264,10 +296,11 @@ u2_lo_call(u2_reck*        rec_u,
 
     //  process output on this socket
     //
+#if 0
     if ( u2_yes == out ) {
       _lo_fuck(rec_u, wax_u, how);
     }
-
+#endif
     //  process actions
     //
     u2_reck_work(rec_u);
@@ -319,7 +352,7 @@ void
 u2_lo_loop(u2_reck* rec_u)
 {
   _launch_cons(rec_u);
-  _launch_http(rec_u, 8080);
+//  _launch_http(rec_u, 8080);
   {
     struct ev_loop *lup_u = ev_default_loop(0);
 

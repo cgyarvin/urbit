@@ -107,6 +107,12 @@
         struct _u2_http* nex_u;             //  next in list
       } u2_http;
 
+    /* u2_utty: unix tty.
+    */
+      typedef struct _u2_utty {
+        struct ev_io     wax_u;
+      } u2_utty;
+
     /* u2_donk: i/o state update function.
     */
       typedef void (*u2_donk)

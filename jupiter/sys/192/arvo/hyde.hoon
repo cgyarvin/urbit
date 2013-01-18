@@ -54,6 +54,19 @@
               ded=@da                                   ::  next expire
               pac=rock                                  ::  packet data
           ==                                            ::
+++  bleb                                                ::  raw console input
+          $%  [%aro p=?(%u %d %l %r)]                   ::  arrow key
+              [%bac ~]                                  ::  backspace
+              [%ret ~]                                  ::  return
+              [%txt p=@c]                               ::  utf32 character
+              [%win p=@ud q=@ud]                        ::  window size change
+          ==                                            ::  
+++  blit                                                ::  raw console output
+          $%  [%del p=@ud]                              ::  delete cur line
+              [%hop p=@ud]                              ::  set horiz cursor
+              [%lin p=(list ,@c)]                       ::  set cur line
+              [%mor ~]                                  ::  newline
+          ==                                            ::
 ++  boar                                                ::  process at system
           $%  :*  %&                                    ::  waiting (system)
                   p=(list path)                         ::  blocked on

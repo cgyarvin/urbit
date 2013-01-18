@@ -320,6 +320,7 @@ main(c3_i   argc,
       //
       u2_ve_sway(0, u2k(u2_wire_tax(u2_Wire)));
 
+      gl_io_mode(Tecla, GL_NORMAL_MODE);
       exit(1);
     }
     if ( -1 == stackoverflow_install_handler
@@ -353,12 +354,15 @@ main(c3_i   argc,
 
   if ( 0 == u2_Host.ver_e[kno_w].ken ) {
     fprintf(stderr, "no command line in transitional mode\n");
-    exit(1);
+    exit(0);
   }
 
   u2_ve_launch();
   u2_ve_sync();
 
+#if 0
+  u2_lo_loop(&u2_Host.rec_u[0]);
+#else
   Tecla = new_GetLine(16384, 4096);
   gl_io_mode(Tecla, GL_SERVER_MODE);
   {
@@ -381,6 +385,6 @@ main(c3_i   argc,
     ev_loop(lup_u, 0);
   }
   gl_io_mode(Tecla, GL_NORMAL_MODE);
-
+#endif
   return 0;
 }
