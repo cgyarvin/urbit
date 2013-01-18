@@ -7,4 +7,20 @@
     1  1
     *  (add 37 $(num (dec num)))
   ==
+::
+++  func1
+  |=  [a=@ b=@]
+  (add a b)
+::
+++  func2
+  |=  [a=@ b=@]
+  (sub a b)
+::
+++  func3
+  |=  [a=@ b=@]
+  (mul a b)
+::
+++  main-func
+  |=  [a=@ b=@ c=@]
+  (func3 (func1 a b) (func2 b c))
 --
