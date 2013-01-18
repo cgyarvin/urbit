@@ -10,7 +10,7 @@
     |-  ^-  marl
     ?~  messages  ~
     :_  $(messages t.messages)
-    ~[%li +"message: {(trip i.messages)}"]
+    ~[%li +"someone said: {(trip i.messages)}"]
   ::
     :~  ~[%form action/"fun" method/"post"]
       -"message: {%[%input type/"text" name/"msg"]}"

@@ -25,8 +25,6 @@
 ** _lo_htcn(): callback for http connections.
 ** _lo_cons(): callback for main console.
 */
-static void _lo_htls(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i);
-static void _lo_htcn(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i);
 static void _lo_cons(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i);
 
 
@@ -154,203 +152,6 @@ static void _lo_cons(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i);
     gl_io_mode(Tecla, GL_NORMAL_MODE);
   }
 
-/* u2_http_io_init(): initialize http I/O.
-*/
-void 
-u2_http_io_init(u2_reck*        rec_u,
-                struct ev_loop* lup_u)
-{
-}
-
-/* u2_http_io_exit(): terminate http I/O.
-*/
-void 
-u2_http_io_exit(u2_reck*        rec_u,
-                struct ev_loop* lup_u)
-{
-}
-
-/* u2_http_io_spin(): start http server(s).
-*/
-void
-u2_http_io_spin(u2_reck*        rec_u,
-                struct ev_loop* lup_u)
-{
-  u2_http* htp_u;
-
-  for ( htp_u = u2_Host.htp_u; htp_u; htp_u = htp_u->nex_u) {
-    u2_hcon* hon_u;
-
-    if ( (u2_yes == htp_u->nuw) || (u2_yes == htp_u->ded) ) {
-      continue; 
-    } else {
-      ev_io_start(lup_u, &htp_u->wax_u);
-    }
-
-    for ( hon_u = htp_u->hon_u; hon_u; hon_u = hon_u->nex_u ) {
-      if ( (u2_yes == htp_u->nuw) || (u2_yes == htp_u->ded) ) {
-        continue; 
-      } else {
-        ev_io_start(lup_u, &hon_u->wax_u);
-      }
-    }
-  }
-}
-
-/* u2_http_io_stop(): stop http servers.
-*/
-void
-u2_http_io_stop(u2_reck*        rec_u,
-                struct ev_loop* lup_u)
-{
-  u2_http* htp_u;
-
-  for ( htp_u = u2_Host.htp_u; htp_u; htp_u = htp_u->nex_u) {
-    u2_hcon* hon_u;
-
-    if ( (u2_yes == htp_u->nuw) || (u2_yes == htp_u->ded) ) {
-      continue; 
-    } else {
-      ev_io_stop(lup_u, &htp_u->wax_u);
-    }
-
-    for ( hon_u = htp_u->hon_u; hon_u; hon_u = hon_u->nex_u ) {
-      if ( (u2_yes == htp_u->nuw) || (u2_yes == htp_u->ded) ) {
-        continue; 
-      } else {
-        ev_io_stop(lup_u, &hon_u->wax_u);
-      }
-    }
-  }
-}
-
-/* u2_http_io_poll(): update http IO state.
-*/
-void
-u2_http_io_poll(u2_reck*        rec_u,
-                struct ev_loop* lup_u)
-{
-  u2_http** hyp_u;
-
-  for ( hyp_u = &(u2_Host.htp_u); *hyp_u; hyp_u = &((*hyp_u)->nex_u) ) {
-    u2_http* htp_u = *hyp_u;
-
-    if ( u2_yes == htp_u->nuw ) {
-      c3_i fid_i;
-
-      /* Open, bind and listen on the socket.
-      */
-      {
-        struct sockaddr_in add_k;
-
-        if ( (fid_i = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
-          perror("http: socket");
-          continue;
-        }
-
-        add_k.sin_family = AF_INET;
-        add_k.sin_addr.s_addr = INADDR_ANY;
-
-        /*  Try ascending ports.
-        */
-        while ( 1 ) {
-          add_k.sin_port = htons(htp_u->por_w);
-
-          if ( bind(fid_i, (struct sockaddr *)&add_k, sizeof(add_k)) < 0 ) {
-            if ( EADDRINUSE == errno ) {
-              htp_u->por_w++; 
-              continue;
-            }
-            else {
-              perror("http: bind");
-              break;
-            }
-          }
-          fprintf(stderr, "http: live on %d\n", htp_u->por_w);
-          break;
-        }
-        if ( listen(fid_i, 3) < 0 ) {
-          perror("http: listen");
-          continue;
-        }
-      }
-  
-      /* Create and activate the server structures.
-      */
-      {
-        {
-          struct timeval tp;
-
-          gettimeofday(&tp, 0);
-          htp_u->sev_l = 0x7fffffff & (((c3_w) tp.tv_sec) ^ (getpid() << 16));
-        }
-        htp_u->coq_l = 1;
-
-        htp_u->nuw = u2_no;
-        htp_u->ded = u2_no;
-
-        htp_u->hon_u = 0;
-        htp_u->nex_u = 0;
-
-        ev_io_init(&htp_u->wax_u, _lo_htls, fid_i, EV_READ);
-
-        htp_u->nex_u = u2_Host.htp_u;
-        u2_Host.htp_u = htp_u;
-      }
-    }
-    else if ( u2_yes == htp_u->ded ) { 
-      c3_assert(!"dead");   //  don't need this right now
-    }
-    else {
-      u2_hcon** hyn_u;
-
-      hyn_u = &(htp_u->hon_u); 
-      while ( *hyn_u ) { 
-        u2_hcon* hon_u = *hyn_u;
-
-        if ( u2_yes == hon_u->nuw ) {
-          ev_io_init(&hon_u->wax_u, _lo_htcn, hon_u->wax_u.fd, EV_READ);
-
-          hon_u->coq_l = htp_u->coq_l++;
-          hon_u->seq_l = 1;
-
-          hon_u->nuw = u2_no;
-          hon_u->ded = u2_no;
-
-          hon_u->ruc_u = 0;
-          hon_u->req_u = 0;
-          hon_u->qer_u = 0;
-        }
-        else if ( u2_yes == hon_u->ded ) {
-          close(hon_u->wax_u.fd);
-
-          while ( 0 != hon_u->req_u ) {
-            u2_hreq* req_u = hon_u->req_u;
-            u2_hreq* nex_u = req_u->nex_u;
-
-            _http_req_free(req_u);
-            hon_u->req_u = nex_u;
-          }
-
-          *hyn_u = hon_u->nex_u;
-          free(hon_u);
-          continue;
-        }
-        else {
-          c3_i ver_i = 0;
-
-          ver_i |= EV_READ;   //  no constraint on reading right now
-          if ( hon_u->req_u && hon_u->req_u->rub_u ) {
-            ver_i |= EV_WRITE;
-          }
-          ev_io_set(&hon_u->wax_u, hon_u->wax_u.fd, ver_i);
-        }
-        hyn_u = &(hon_u->nex_u);
-      }
-    }
-  }
-}
-
 /* _lo_init(): initialize I/O across the process.
 */
 static void
@@ -427,20 +228,20 @@ _lo_fuck(u2_reck*      rec_u,
   switch ( how ) {
     default: c3_assert(0); break;
 
-    case c3__cons: u2_cons_io_fuck(rec_u, wax_u); break;
+    case c3__cons: c3_assert(0); break; // u2_cons_io_fuck(rec_u, wax_u); break;
     case c3__htcn: u2_http_io_fuck_conn(rec_u, wax_u); break;
-    case c3__htls: u2_http_io_fuck_lisn(rec_u, wax_u); break;
+    case c3__htls: c3_assert(0); break;
   }
 }
 
-/* _lo_call(): central callback.
+/* u2_lo_call(): central callback.
 */
-static void
-_lo_call(u2_reck*        rec_u,
-         struct ev_loop* lup_u,
-         struct ev_io*   wax_u,
-         u2_noun         how,
-         c3_i            revents)
+void
+u2_lo_call(u2_reck*        rec_u,
+           struct ev_loop* lup_u,
+           struct ev_io*   wax_u,
+           u2_noun         how,
+           c3_i            revents)
 {
   u2_bean inn = (revents & EV_READ) ? u2_yes : u2_no;
   u2_bean out = (revents & EV_WRITE) ? u2_yes : u2_no;
@@ -476,12 +277,8 @@ _lo_call(u2_reck*        rec_u,
   _lo_spin(rec_u, lup_u);
 }
 
-static void _lo_htls(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i)
-  { _lo_call(&u2_Host.rec_u[0], lup_u, wax_u, c3__htls, rev_i); }
-static void _lo_htcn(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i)
-  { _lo_call(&u2_Host.rec_u[0], lup_u, wax_u, c3__htcn, rev_i); }
 static void _lo_cons(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i)
-  { _lo_call(&u2_Host.rec_u[0], lup_u, wax_u, c3__cons, rev_i); }
+  { u2_lo_call(&u2_Host.rec_u[0], lup_u, wax_u, c3__cons, rev_i); }
 
 
 static void
@@ -518,6 +315,7 @@ _launch_http(u2_reck* rec_u, c3_w por_w)
 
 /* u2_lo_loop(): enter main event loop.
 */
+void
 u2_lo_loop(u2_reck* rec_u)
 {
   _launch_cons(rec_u);
@@ -529,5 +327,4 @@ u2_lo_loop(u2_reck* rec_u)
     ev_loop(lup_u, 0);
     _lo_exit(rec_u, lup_u);
   }
-  return 0;
 }

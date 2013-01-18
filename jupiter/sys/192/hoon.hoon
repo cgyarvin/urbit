@@ -3230,7 +3230,7 @@
       [%zpzp ~]
     ==
   ++  limb  $|(term $%([& p=axis] [| p=@ud q=term]))
-  ++  line  ,[p=[%leaf p=odor q=@] q=mode] 
+  ++  line  ,[p=[%leaf p=odor q=@] q=tile] 
   ++  odor  ,@ta
   ++  port
     $:  p=axis 
@@ -3238,18 +3238,18 @@
     ==
   ++  prop  ,[p=axis q=[p=?(~ axis) q=(list ,[p=type q=foot])]]
   ++  reef  ,[p=[p=? q=@ud] q=@ud]
-  ++  mode
-    $&  [p=mode q=mode]                                     ::  ordered pair
+  ++  tile
+    $&  [p=tile q=tile]                                     ::  ordered pair
     $%  [%base p=?([%atom p=term] %cell %bean %noun %null)] ::  base type
-        [%bark p=term q=mode]                               ::  name
-        [%bush p=mode q=mode]                               ::  atom/cell
+        [%bark p=term q=tile]                               ::  name
+        [%bush p=tile q=tile]                               ::  atom/cell
     ::  %cane
-        [%fern p=[i=mode t=(list mode)]]                    ::  plain selection
+        [%fern p=[i=tile t=(list tile)]]                    ::  plain selection
         [%herb p=gene]                                      ::  function
         [%kelp p=[i=line t=(list line)]]                    ::  tag selection
         [%leaf p=term q=@]                                  ::  constant atom
-    ::  [%moss p=mode q=mode]                               ::  restricted type
-        [%reed p=mode q=mode]                               ::  pair/tag
+    ::  [%moss p=tile q=tile]                               ::  restricted type
+        [%reed p=tile q=tile]                               ::  pair/tag
         [%weed p=gene]                                      ::  example
     ==
   ++  tune  $%  [0 p=vase]
@@ -3356,7 +3356,7 @@
 ::
 ++  al 
   =+  [nag=`*`& gom=`axis`1]
-  |_  sec=mode
+  |_  sec=tile
   ::::
   ++  blah  ^~  [%dtsg %% 0]
   ++  home  |=(gen=gene ^-(gene ?:(=(1 gom) gen [%tsgr [~ gom] gen])))
@@ -3523,7 +3523,7 @@
   |_  gen=gene
   ++  bore
     ~|  %bore
-    |-  ^-  mode
+    |-  ^-  tile
     ?-    gen
         [^ *]      [$(gen p.gen) $(gen q.gen)]
         [%clls *]  $(gen open)

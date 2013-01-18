@@ -519,3 +519,11 @@ u2_reck_prick(u2_reck* rec_u, u2_noun hap)
   }
   return que;
 }
+
+/* u2_reck_work(): flush ova.
+*/
+void
+u2_reck_work(u2_reck* rec_u)
+{
+}
+

@@ -372,6 +372,7 @@
         void
         u2_ve_tank(c3_l tab_l, u2_noun tac);
 
+
     /**  Kernel control.
     **/
       /* u2_reck_line(): apply a reck line (protected).
@@ -421,6 +422,11 @@
       */
         void
         u2_reck_time(u2_reck* rec_u);
+      
+      /* u2_reck_work(): flush ova.
+      */
+        void
+        u2_reck_work(u2_reck* rec_u);
 
     /**  Execution system.
     **/
@@ -589,7 +595,7 @@
         u2_ve_sync(void);
 
 
-    /**  HTTP.
+    /**  HTTP, old style.
     **/
       /* u2_ve_http_start(): start on port.
       */
@@ -605,3 +611,71 @@
       */
         void
         u2_ve_http_respond(u2_noun pox, u2_noun rep);
+
+
+    /**  Main loop, new style.
+    **/
+      /* u2_lo_call(): central callback.
+      */
+        void
+        u2_lo_call(u2_reck*        rec_u,
+                   struct ev_loop* lup_u,
+                   struct ev_io*   wax_u,
+                   u2_noun         how,
+                   c3_i            revents);
+
+      /* u2_lo_loop(): enter main event loop.
+      */
+        void
+        u2_lo_loop(u2_reck* rec_u);
+
+
+    /**  HTTP, new style.
+    **/
+      /* u2_http_io_init(): initialize http I/O.
+      */
+        void 
+        u2_http_io_init(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_http_io_exit(): terminate http I/O.
+      */
+        void 
+        u2_http_io_exit(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_http_io_spin(): start http server(s).
+      */
+        void
+        u2_http_io_spin(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_http_io_stop(): stop http servers.
+      */
+        void
+        u2_http_io_stop(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_http_io_poll(): update http IO state.
+      */
+        void
+        u2_http_io_poll(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_http_io_fuck_conn(): output event on connection socket.
+      */
+        void
+        u2_http_io_fuck_conn(u2_reck*      rec_u,
+                             struct ev_io* wax_u);
+
+      /* u2_http_io_suck_lisn(): input event on listen socket.
+      */
+        void
+        u2_http_io_suck_lisn(u2_reck*      rec_u,
+                             struct ev_io* wax_u);
+
+      /* u2_http_io_suck_conn(): input event on connection socket.
+      */
+        void
+        u2_http_io_suck_conn(u2_reck*      rec_u,
+                             struct ev_io* wax_u);
