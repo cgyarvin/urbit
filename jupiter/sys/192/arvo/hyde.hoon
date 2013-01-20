@@ -62,10 +62,19 @@
               [%win p=@ud q=@ud]                        ::  window size change
           ==                                            ::  
 ++  blit                                                ::  raw console output
-          $%  [%del p=@ud]                              ::  delete cur line
-              [%hop p=@ud]                              ::  set horiz cursor
-              [%lin p=(list ,@c)]                       ::  set cur line
+          $%  [%bel ~]                                  ::  make a noise
+              [%hop p=@ud]                              ::  cursor left/right
+              [%lin p=tape]                             ::  set current line
               [%mor ~]                                  ::  newline
+          ==                                            ::
+++  blot                                                ::  input state
+          $:  p=@ud                                     ::  visual cursor
+              q=@ud                                     ::  logical cursor
+              r=tape                                    ::  current line
+          ==                                            ::
+++  blur                                                ::  console state
+          $:  p=blot                                    ::  input state
+              q=(list ,[p=@ud q=vase])                  ::  prompt stack
           ==                                            ::
 ++  boar                                                ::  process at system
           $%  :*  %&                                    ::  waiting (system)

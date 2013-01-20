@@ -21,7 +21,7 @@
       mpz_clear(a_mp);
       mpz_clear(b_mp);
 
-      return u2_bl_bail(wir_r, c3__exit);
+      return u2_bl_error(wir_r, "subtract-underflow");
     }
     mpz_sub(a_mp, a_mp, b_mp);
     mpz_clear(b_mp);

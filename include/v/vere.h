@@ -2,6 +2,8 @@
 **
 ** This file is in the public domain.
 */
+  void TermTest(void);    //  entirely temporary!
+
   /** Quasi-tunable parameters.
   **/
     /* First kernel this executable can boot.
@@ -107,25 +109,25 @@
         struct _u2_http* nex_u;             //  next in list
       } u2_http;
 
+    /* u2_ubuf: unix tty i/o buffer.
+    */
+      typedef struct _u2_ubuf {
+        struct _u2_ubuf* nex_u; 
+        c3_w             len_w;
+        c3_y             hun_y[0];          //  bytes to send
+      } u2_ubuf;
+
     /* u2_utty: unix tty.
     */
       typedef struct _u2_utty {
-        struct ev_io     wax_u;
+        struct ev_io wax_u;                 //  event handler state
+        u2_ubuf*     out_u;                 //  exit of output queue
+        u2_ubuf*     tou_u;                 //  entry of output queue
+        c3_w         cus_w;                 //  current cursor position
+        c3_w         len_w;                 //  current line length
+        c3_y         esc_y[4];              //  escape code buffer
+        c3_w         les_w;                 //  escape length
       } u2_utty;
-
-    /* u2_donk: i/o state update function.
-    */
-      typedef void (*u2_donk)
-        (struct ev_loop* lup_u,
-         struct ev_io*   wax_u, 
-         u2_bean         inn,
-         u2_bean         out);
-
-    /* u2_togl: i/o state on or off.
-    */
-      typedef void (*u2_togl)
-        (struct ev_loop* lup_u,
-         struct ev_io*   wax_u);
 
     /* u2_steg: kernel stage.
     */

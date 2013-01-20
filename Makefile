@@ -625,6 +625,7 @@ VERE_OFILES=\
        v/console.o \
        v/osystem.o \
        v/time.o \
+       v/term.o \
        v/http.o \
        v/loop.o \
        v/sync.o \

@@ -283,7 +283,7 @@ _reck_kick(u2_reck* rec_u, u2_noun ovo)
     case c3__crap: p_pay = u2t(pay);
     {
       u2_ve_sway(2, u2_ckb_flop(u2k(p_pay)));
-      printf("<exit>\n");
+      printf("<<<exit>>>\n");
     } break;
 
     case c3__init: p_pay = u2t(pay);

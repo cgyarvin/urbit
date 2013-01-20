@@ -296,7 +296,7 @@ u2_lo_call(u2_reck*        rec_u,
 
     //  process output on this socket
     //
-#if 0
+#if 1
     if ( u2_yes == out ) {
       _lo_fuck(rec_u, wax_u, how);
     }

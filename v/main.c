@@ -247,6 +247,9 @@ main(c3_i   argc,
     u2_Wire = u2_Host.wir_r;
   }
 
+#if 0
+  TermTest();
+#endif
   //  Set outside bail trap.  Should not be used, but you never know...
   //
   if ( 0 != u2_cm_trap() ) {
@@ -282,11 +285,7 @@ main(c3_i   argc,
       u2_ve_init(kno_w);
 
       if ( 0 != u2_Host.ver_e[kno_w].ken ) {
-#if 0
         u2_reck_boot(&u2_Host.rec_u[0]);
-#else
-        u2_reck_boot(&u2_Host.rec_u[0]);
-#endif
       }
     }
     u2_cm_done();

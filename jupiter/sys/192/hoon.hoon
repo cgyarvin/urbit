@@ -108,7 +108,7 @@
   ++  dec
     ~/  %dec
     |=  a=@
-    ~|  'dec'
+    ~|  %decrement-underflow
     ^-  @
     ?<  =(0 a)
     =+  b=@
@@ -188,7 +188,7 @@
   ++  sub
     ~/  %sub
     |=  [a=@ b=@]
-    ~|  'sub'
+    ~|  %subtract-underflow
     ^-  @
     ?:  =(0 b)
       a

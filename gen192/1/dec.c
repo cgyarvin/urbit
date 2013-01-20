@@ -19,6 +19,7 @@
                    u2_atom a)                                     //  retain
   {
     if ( _0 == a ) {
+      return u2_bl_error(wir_r, "decrement-underflow");
       return u2_bl_bail(wir_r, c3__exit);
     } 
     else {
