@@ -3081,26 +3081,12 @@
         [%oak ~]
         [%yew p=(map term foot)]
     ==
-  ++  fuel
-    $&  [p=fuel q=fuel]
-    $%  [0 p=@]
-        [1 p=*]
-        [2 p=fuel q=fuel]
-        [3 p=fuel]
-        [4 p=fuel]
-        [5 p=fuel q=fuel]
-        [6 p=fuel q=fuel r=fuel]
-        [7 p=fuel q=fuel]
-        [8 p=fuel q=fuel]
-        [9 p=@ q=fuel]
-        [10 p=?(@ [p=@ q=fuel]) q=fuel]
-        [11 p=fuel]
-    ==
   ++  gene
     $&  [p=gene q=gene]
     $%
       [%% p=axis]
     ::
+      [%brbr p=gene q=gene]
       [%brcb p=gene q=(map term foot)]
       [%brcl p=gene q=(map term foot)]
       [%brcn p=(map term foot)]
@@ -3197,6 +3183,7 @@
       [%smts p=gene q=gene]
       [%smwt p=gene q=gene]
     ::
+      [%tsbr p=gene q=gene]
       [%tscl p=(list ,[p=gene q=gene]) q=gene]
       [%tsdt p=gene q=gene r=gene]
       [%tsgl p=gene q=gene]
@@ -3251,6 +3238,21 @@
     ::  [%moss p=tile q=tile]                               ::  restricted type
         [%reed p=tile q=tile]                               ::  pair/tag
         [%weed p=gene]                                      ::  example
+    ==
+  ++  tool
+    $&  [p=tool q=tool]
+    $%  [0 p=@]
+        [1 p=*]
+        [2 p=tool q=tool]
+        [3 p=tool]
+        [4 p=tool]
+        [5 p=tool q=tool]
+        [6 p=tool q=tool r=tool]
+        [7 p=tool q=tool]
+        [8 p=tool q=tool]
+        [9 p=@ q=tool]
+        [10 p=?(@ [p=@ q=tool]) q=tool]
+        [11 p=tool]
     ==
   ++  tune  $%  [0 p=vase]
                 [1 p=(list)]
@@ -3613,6 +3615,7 @@
         [%bctr *]  [%ktsg ~(bunt al bore(gen p.gen))]
         [%bcts *]  ~(bunt al bore)
         [%bcwt *]  ~(clam al bore)
+        [%brbr *]  [%bccb [%brls p.gen ~(bunt al bore(gen q.gen))]]
         [%brcb *]  [%tsls [[%bctr p.gen] [%brcn q.gen]]]
         [%brdt *]  [%brcn (~(put by *(map term foot)) %% [%ash p.gen])]
         [%brkt *]  [%tsgr [%brcn (~(put by q.gen) %% [%ash p.gen])] [%cnbc %%]]
@@ -3989,6 +3992,9 @@
           ==                                            ::    ==
       ==                                                ::  ==
     ::
+        [%tsbr *]
+      [%tsls ~(bunt al bore(gen p.gen)) q.gen]
+    ::
         [%tscl *]  
       [%tsgr [%cncb [[~ 1] ~] p.gen] q.gen]
     ::
@@ -4059,7 +4065,7 @@
   --
 ::
 ++  coke
-  |=  nug=fuel
+  |=  nug=tool
   ?-    nug
       [0 *]   p.nug
       [10 *]  $(nug q.nug)
@@ -4067,8 +4073,8 @@
   ==
 ++  comb
   ~/  %comb
-  |=  [mal=fuel buz=fuel]
-  ^-  fuel
+  |=  [mal=tool buz=tool]
+  ^-  tool
   ?:  ?&(?=([0 *] mal) !=(0 p.mal))
     ?:  ?&(?=([0 *] buz) !=(0 p.buz)) 
       [%0 (peg p.mal p.buz)]
@@ -4083,8 +4089,8 @@
 ::
 ++  cond
   ~/  %cond
-  |=  [pex=fuel yom=fuel woq=fuel]
-  ^-  fuel
+  |=  [pex=tool yom=tool woq=tool]
+  ^-  tool
   ?-  pex
     [1 0]  yom
     [1 1]  woq
@@ -4093,8 +4099,8 @@
 ::
 ++  cons
   ~/  %cons
-  |=  [vur=fuel sed=fuel]
-  ^-  fuel
+  |=  [vur=tool sed=tool]
+  ^-  tool
   ?:  ?=([[0 *] [0 *]] +<)
     ?:  ?&(=(+(p.vur) p.sed) =((div p.vur 2) (div p.sed 2)))
       [%0 (div p.vur 2)]
@@ -4130,8 +4136,8 @@
 ::
 ++  flan
   ~/  %flan
-  |=  [bos=fuel nif=fuel]
-  ^-  fuel
+  |=  [bos=tool nif=tool]
+  ^-  tool
   ?-    bos
       [1 1]   bos
       [1 0]   nif
@@ -4145,13 +4151,13 @@
 ::
 ++  flip
   ~/  %flip
-  |=  [dyr=fuel]
+  |=  [dyr=tool]
   [%6 dyr [%1 1] [%1 0]]
 ::
 ++  flor
   ~/  %flor
-  |=  [bos=fuel nif=fuel]
-  ^-  fuel
+  |=  [bos=tool nif=tool]
+  ^-  tool
   ?-  bos
       [1 1]   nif
       [1 0]   bos
@@ -4165,22 +4171,22 @@
 ::
 ++  hike 
   ~/  %hike
-  |=  [axe=axis pac=(list ,[p=axis q=fuel])]
-  ^-  fuel
+  |=  [axe=axis pac=(list ,[p=axis q=tool])]
+  ^-  tool
   ?~  pac
     [%0 axe]
-  =+  zet=(skim pac.$ |=([p=axis q=fuel] [=(1 p)]))
+  =+  zet=(skim pac.$ |=([p=axis q=tool] [=(1 p)]))
   ?~  zet
-    =+  tum=(skim pac.$ |=([p=axis q=fuel] ?&(!=(1 p) =(2 (cap p)))))
-    =+  gam=(skim pac.$ |=([p=axis q=fuel] ?&(!=(1 p) =(3 (cap p)))))
+    =+  tum=(skim pac.$ |=([p=axis q=tool] ?&(!=(1 p) =(2 (cap p)))))
+    =+  gam=(skim pac.$ |=([p=axis q=tool] ?&(!=(1 p) =(3 (cap p)))))
     %+  cons
       %=  $
         axe (peg axe 2)
-        pac (turn tum |=([p=axis q=fuel] [(mas p) q]))
+        pac (turn tum |=([p=axis q=tool] [(mas p) q]))
       ==
     %=  $
       axe (peg axe 3)
-      pac (turn gam |=([p=axis q=fuel] [(mas p) q]))
+      pac (turn gam |=([p=axis q=tool] [(mas p) q]))
     ==
   ?>(?=([* ~] zet) q.i.zet)
 ::
@@ -4991,7 +4997,7 @@
     |=  axe=axis
     =+  vot=*(set type)
     |-
-    ^-  fuel
+    ^-  tool
     ?-  sut
         [%atom *]   (flip [%3 %0 axe])
         %void       [%1 1]
@@ -5095,7 +5101,7 @@
   ++  hail
     |=  [dab=(map term foot) waf=(map term foot)]
     =+  axe=1
-    =+  dif=*(list ,[p=axis q=fuel])
+    =+  dif=*(list ,[p=axis q=tool])
     |-  ^+  dif
     ?~  dab
       ?>(?=(~ waf) dif)
@@ -5212,8 +5218,8 @@
   ++  mint
     ~/  %mint
     |=  [gol=type gen=gene]
-    ^-  [p=type q=fuel]
-    |^  ^-  [p=type q=fuel]
+    ^-  [p=type q=tool]
+    |^  ^-  [p=type q=tool]
     ?:  ?&(=(%void sut) !?=([%zpcb *] gen))
       ?.  |(!vet ?=([%zpfs *] gen) ?=([%zpzp *] gen))
         ~|(%mint-vain !!)
@@ -5247,8 +5253,8 @@
       =+  mew=(swab q.gen)
       =-  [(nice p.yom) ?:(=(0 p.q.lar) q.yom [%9 p.q.lar q.yom])]
       ^=  yom
-      =+  hej=*(list ,[p=axis q=fuel])
-      |-  ^-  [p=type q=fuel]
+      =+  hej=*(list ,[p=axis q=tool])
+      |-  ^-  [p=type q=tool]
       ?@  mew
         [(fire q.q.lar) (hike p.lar hej)]
       =+  zil=^$(gen q.i.mew, gol %noun)
@@ -5345,7 +5351,7 @@
     ::
     ++  grow
       |=  [mel=?(%gold %iron %lead %zinc) ruf=gene dab=(map term foot)]
-      ^-  [p=type q=fuel]
+      ^-  [p=type q=tool]
       =+  dan=^$(gen ruf, gol %noun)
       =+  toc=(core p.dan [%gold p.dan [~ dab]])
       =+  dez=(harp(sut toc) dab)
@@ -6242,6 +6248,7 @@
         :~  :-  '|'
               ;~  pfix  bar
                 %-  stew  :~  
+                  ['|' (rune bar %brbr expb)]
                   ['_' (rune cab %brcb expr)]
                   ['%' (rune cen %brcn expe)]
                   [':' (rune col %brcl expr)] 
@@ -6363,6 +6370,7 @@
             :-  '='
               ;~  pfix  tis
                 %-  stew  :~
+                  ['|' (rune bar %tsbr expb)]
                   ['.' (rune dot %tsdt expc)]
                   ['^' (rune ket %tskt expd)]
                   [':' (rune col %tscl expl)]

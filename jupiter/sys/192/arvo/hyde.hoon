@@ -55,27 +55,34 @@
               pac=rock                                  ::  packet data
           ==                                            ::
 ++  bleb                                                ::  raw console input
-          $%  [%aro p=?(%u %d %l %r)]                   ::  arrow key
-              [%bac ~]                                  ::  backspace
+          $%  [%aro p=?(%d %l %r %u)]                   ::  arrow key
+              [%bac ~]                                  ::  true backspace
+              [%ctl p=@ud]                              ::  control
+              [%del ~]                                  ::  true delete 
               [%ret ~]                                  ::  return
               [%txt p=@c]                               ::  utf32 character
-              [%win p=@ud q=@ud]                        ::  window size change
+              [%win p=@ud q=@ud]                        ::  set window size
           ==                                            ::  
+++  bled                                                ::  terminal control
+          $:  lou=?                                     ::  line is prompt
+              cus=@ud                                   ::  logical cursor
+              pom=@ud                                   ::  
+              len=@ud                                   ::  length of edit
+              pox=tape                                  ::  prompt text
+          ==                                            ::
 ++  blit                                                ::  raw console output
           $%  [%bel ~]                                  ::  make a noise
-              [%hop p=@ud]                              ::  cursor left/right
+              [%hop p=? q=@ud]                          ::  cursor right=yes
               [%lin p=tape]                             ::  set current line
               [%mor ~]                                  ::  newline
           ==                                            ::
-++  blot                                                ::  input state
-          $:  p=@ud                                     ::  visual cursor
-              q=@ud                                     ::  logical cursor
-              r=tape                                    ::  current line
+++  blot                                                ::  terminal mirror
+          $:  p=@ud                                     ::  terminal cursor
+              q=@ud                                     ::  line length
+              r=@ud                                     ::  screen width
+              s=tape                                    ::  line text
           ==                                            ::
-++  blur                                                ::  console state
-          $:  p=blot                                    ::  input state
-              q=(list ,[p=@ud q=vase])                  ::  prompt stack
-          ==                                            ::
+++  blur  ,[p=blot q=(unit bled)]                       ::  console state
 ++  boar                                                ::  process at system
           $%  :*  %&                                    ::  waiting (system)
                   p=(list path)                         ::  blocked on
@@ -108,6 +115,8 @@
 ++  card                                                ::  event
           $%  [%bbye ~]                                 ::  log out
               [%bind p=lord q=host]                     ::  bind http server
+              [%bleb p=bleb]                            ::  terminal input
+              [%blit p=(list blit)]                     ::  terminal output
               [%boot p=@]                               ::  reset soft state
               [%cash p=@p q=buck]                       ::  civil license
               [%crap p=(list)]                          ::  error with trace
@@ -123,6 +132,7 @@
               [%line p=@t]                              ::  source line
               [%load p=@tas q=path]                     ::  request atomic file
               [%logn p=@p q=chum]                       ::  name hashed-pass
+              [%logo ~]                                 ::  logout
               [%logp p=@p]                              ::  privileged login
               [%loot p=@tas q=path]                     ::  request directory
               [%make p=@t q=@ud r=@]                    ::  wild license
@@ -136,6 +146,7 @@
               [%ship p=@tas q=@tas]                     ::  label release
               [%sync ~]                                 ::  reset soft state
               [%talk p=tank]                            ::  show on console
+              [%tell p=(list ,@t)]                      ::  dump lines
               [%text p=tape]                            ::  talk leaf
               [%that p=love]                            ::  cooked htresp
               [%thee p=hate]                            ::  cooked htreq
@@ -143,7 +154,7 @@
               [%this p=httq]                            ::  secure raw htreq
               [%thou p=httr]                            ::  raw http response
               [%tory p=(list ,@t)]                      ::  history dump
-              [%warn p=?(0 1 2) q=tank]                 ::  report to human
+              [%warn p=? q=tank]                        ::  error or debug msg
               [%word p=chum]                            ::  set password
           ==                                            ::
 ++  cask                                                ::  symmetric record
@@ -213,6 +224,7 @@
 ++  gram  ,@uw                                          ::  physical datagram
 ++  hand  ,@uvH                                         ::  hash of code
 ++  hate  ,[p=purl q=cred r=moth]                       ::  cooked request
+++  hist  ,[p=@ud q=@ud r=(list tape)]                  ::  current depth texts
 ++  hook  path                                          ::  request origin
 ++  hart  ,[p=? q=(unit ,@ud) r=host]                   ::  http sec/port/host
 ++  hort  ,[p=(unit ,@ud) q=host]                       ::  http port/host
@@ -386,4 +398,5 @@
 ++  whom  ,[p=@ud q=@t r=@tas s=name]                   ::  yob/state/nation/me
 ++  will  (list deed)                                   ::  certificate
 ++  worm  ,*                                            ::  vase of task
+++  yard  ,[p=? q=(list lord) r=blur s=(map path hist)] ::  terminal state
 --

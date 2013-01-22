@@ -415,7 +415,7 @@
           duz
         :_  duz
         :+  [~ who]  hen 
-        [%warn %2 %leaf "<syntax error at [{p.duf} {q.duf}]>"]
+        [%warn | %leaf "<syntax error at [{p.duf} {q.duf}]>"]
       ==
     ::
     ++  nave                                            ::  resolve

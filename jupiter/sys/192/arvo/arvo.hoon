@@ -1,5 +1,5 @@
 !:
-::          %xan, networking.  This file is in the public domain.
+::          %arvo, networking.  This file is in the public domain.
 ::
 =>  |%
     ++  clan                                            ::  lord to rank

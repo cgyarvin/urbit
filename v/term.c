@@ -58,41 +58,41 @@ struct {
   } inn;
 } State;
 
-  void 
-  u2_term_io_init(u2_reck*        rec_u,
-                  struct ev_loop* lup_u)
-  {
-  }
+void 
+u2_term_io_init(u2_reck*        rec_u,
+                struct ev_loop* lup_u)
+{
+}
 
-  void
-  u2_term_io_poll(u2_reck*        rec_u,
-                  struct ev_loop* lup_u)
-  {
-  }
+void
+u2_term_io_poll(u2_reck*        rec_u,
+                struct ev_loop* lup_u)
+{
+}
 
-  void
-  u2_term_io_spin(u2_reck*        rec_u,
-                  struct ev_loop* lup_u)
-  {
-  }
+void
+u2_term_io_spin(u2_reck*        rec_u,
+                struct ev_loop* lup_u)
+{
+}
 
-  void
-  u2_term_io_stop(u2_reck*        rec_u,
-                  struct ev_loop* lup_u)
-  {
-  }
+void
+u2_term_io_stop(u2_reck*        rec_u,
+                struct ev_loop* lup_u)
+{
+}
 
-  void
-  u2_term_io_suck(u2_reck*      rec_u,
-                  struct ev_io* wax_u)
-  {
-  }
+void
+u2_term_io_suck(u2_reck*      rec_u,
+                struct ev_io* wax_u)
+{
+}
 
-  void 
-  u2_term_io_exit(u2_reck*        rec_u,
-                  struct ev_loop* lup_u)
-  {
-  }
+void 
+u2_term_io_exit(u2_reck*        rec_u,
+                struct ev_loop* lup_u)
+{
+}
 
 static void
 _term_write_str(c3_i fid_i, const c3_c* str_c)

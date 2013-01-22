@@ -234,7 +234,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     free(dyt_c);
   }
   {
-    u2_noun syd, zen, yen, xan, wol, ray, vay;
+    u2_noun syd, zen, yen, xan, wol, ray, dyl, vay;
 
     syd = u2k(rec_u->syd);
 
@@ -259,8 +259,11 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
       rec_u->toy.duel = 
         _reck_gate(rec_u, u2k(ray), "|=([a=arch b=arch] (~(duel cy a) b))");
 
+      // printf("dill:\n");
+      dyl = _reck_load_temp(rec_u, ray, kno_w, "arvo/dill.hoon");
+
       // printf("eyre:\n");
-      vay = _reck_load_temp(rec_u, ray, kno_w, "arvo/eyre.hoon");
+      vay = _reck_load_temp(rec_u, dyl, kno_w, "arvo/eyre.hoon");
     }
     rec_u->rec = vay;
   }

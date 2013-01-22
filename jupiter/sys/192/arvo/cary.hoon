@@ -1,5 +1,5 @@
-!:
-::          %ray, revision control.  This file is in the public domain.
+::
+::          %cary, revision control.  This file is in the public domain.
 ::
 =>  |%
     ++  cy

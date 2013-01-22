@@ -1,4 +1,4 @@
-!:
+::
 ::          %eyre, main loop.   This file is in the public domain.
 ::
 =<  |%
@@ -23,15 +23,10 @@
     --
 =>  |%
     ++  game
-      $:  ^=  arvo                                          ::  network and PKI
-        $:  gel=_*alga
-        ==
-          ^=  bede                                          ::  shell
-        $:  maw=(map lord _*berg)
-        ==
-          ^=  cary                                          ::  filesystem
-        $:  duw=_clay
-        ==
+      $:  rav=_*alga                                        ::  PKI and net
+          deb=(map lord _*berg)                             ::  shell
+          yac=_clay                                         ::  filesystem
+      ::  lyd=_dill                                         ::  terminal
           ^=  eyre                                          ::  i/o
         $:  gem=(map lord chum)                             ::  hashed passcodes
             liv=(map lord (list vein))                      ::  live consoles
@@ -41,8 +36,8 @@
       == 
     --
 =+  sys=*game
-=.  gel.arvo.sys  $:alga
-=.  duw.cary.sys  clay
+=.  rav.sys  $:alga
+=.  yac.sys  clay
 |%
 ++  is
   |_  now=@da 
@@ -51,16 +46,16 @@
     ++  arv
       |=  [pex=path mov=move]
       ^-  [(list move) game]
-      =+  yub=(knap:gel.arvo.sys now r.mov)
+      =+  yub=(knap:rav.sys now r.mov)
       :-  (turn p.yub |=(a=card [p.mov q.mov a]))
-      sys(gel.arvo q.yub)
+      sys(rav q.yub)
     ::
     ++  bed
       |=  [pex=path mov=move]
       ^-  [(list move) game]
       ?>  ?=(^ p.mov)
       =+  ^=  beg  ^+  *berg
-          =+  beg=(~(get by maw.bede.sys) u.p.mov)
+          =+  beg=(~(get by deb.sys) u.p.mov)
           ?^(beg u.beg (berg u.p.mov))
       =+  ^=    yub
           %^    leap:(beg now (shax now) |=(a=* (beck u.p.mov (path a))))
@@ -68,15 +63,15 @@
             q.mov 
           r.mov
       :-  p.yub
-      sys(maw.bede (~(put by maw.bede.sys) u.p.mov q.yub))
+      sys(deb (~(put by deb.sys) u.p.mov q.yub))
     ::
     ++  car
       |=  [pex=path mov=move]
       ^-  [(list move) game]
       ?>  ?=(^ p.mov)
-      =+  yub=(drip:duw.cary.sys now u.p.mov r.mov)
+      =+  yub=(drip:yac.sys now u.p.mov r.mov)
       :-  (turn p.yub |=(a=card [p.mov q.mov a]))
-      sys(duw.cary q.yub)
+      sys(yac q.yub)
     --
   ::
   ++  auth                                                  ::  match password
@@ -85,7 +80,7 @@
     =+  fup=(~(get by gem.eyre.sys) our)
     ?^  fup
       =(cof u.fup)
-    =+  gys=(~(us go ton.fox.gel.arvo.sys) our)
+    =+  gys=(~(us go ton.fox.rav.sys) our)
     ?&(?=(^ gys) =(cof (shak our pac:ex:q:sen:u.gys)))
   ::
   ++  beck                                                  ::  namespace
@@ -106,17 +101,17 @@
       ?.  =(0 rem)  ~
       ?+    ved  ~
           [~ %% %ud @]
-        (perm:gel.arvo.sys our q.p.u.fal q.p.u.ved tyl)
+        (perm:rav.sys our q.p.u.fal q.p.u.ved tyl)
       ::
           [~ %% %da @]
         ?.  =(now q.p.u.ved)  ~
-        (temp:gel.arvo.sys our q.p.u.fal tyl)
+        (temp:rav.sys our q.p.u.fal tyl)
       ==
     ::
         %c                                                  ::  cary
       ?.  ?=(?(%z %y %x %w) rem)  ~
       ?.  ?=([~ %% ?(%ud %da %tas) @] ved)  ~
-      (scry:duw.cary.sys rem our u.ved tyl)
+      (scry:yac.sys rem our u.ved tyl)
     ==
   ::
   ++  dear                                                  ::  global vision
@@ -129,7 +124,7 @@
         =+  yup=(~(get by rev.eyre.sys) `vein`[t.hap ~])
         ?~  yup
           [~ & '# ']
-        =+  byg=(~(get by maw.bede.sys) u.yup)
+        =+  byg=(~(get by deb.sys) u.yup)
         ?~  byg
           [~ & (cat 3 ~(rent co ~ %p u.yup) '> ')]
         =+  pro=prot:(u.byg now (shax now) |=(a=* (beck u.yup (path a))))
@@ -220,6 +215,8 @@
           [%talk %leaf "http: serving {<p.r.mov>} on {<q.r.mov>}"]
         ==
       ::
+          %bleb  !!
+          %blit  (giv)
           %boot  !!
           %cash  (rer %arvo)
           %crap  (giv)
@@ -254,13 +251,14 @@
         ?>  (auth p.r.mov q.r.mov)
         (lov p.r.mov)
       ::
+          %logo  (rer %dill)
           %logp
         ?>  =(%gold mel)
         ~&  [%logp p.r.mov]
         (lov p.r.mov)
       ::
           %loot  (giv)
-          %love   !!
+          %love  !!
           %make  (rer %arvo)
           %mine  (rer %bede)
           %nuke  (rer %bede)
@@ -279,6 +277,7 @@
       ::
           %sync  !!
           %talk  (giv) 
+          %tell  !!
           %text  (red [%talk %leaf p.r.mov])
           %that
         ?-    -.p.r.mov 

@@ -232,7 +232,8 @@
 
         c3_d    now_d;                      //  event tick
         struct ev_loop *lup_u;              //  libev event loop
-        u2_http *htp_u;                     //  http servers, if any
+        u2_http* htp_u;                     //  http servers
+        u2_utty* uty_u;                     //  terminal servers
 
         u2_reck rec_u[1];                   //  rotors (hardcoded to 1)
       } u2_host;                            //  host == computer == process
