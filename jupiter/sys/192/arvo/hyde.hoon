@@ -60,19 +60,19 @@
               [%ctl p=@ud]                              ::  control
               [%del ~]                                  ::  true delete 
               [%ret ~]                                  ::  return
-              [%txt p=@c]                               ::  utf32 character
+              [%txt p=(list @c)]                        ::  utf32 character
               [%win p=@ud q=@ud]                        ::  set window size
           ==                                            ::  
 ++  bled                                                ::  terminal control
           $:  lou=?                                     ::  line is prompt
               cus=@ud                                   ::  logical cursor
-              pom=@ud                                   ::  
+              pom=@ud                                   ::  length of prompt
               len=@ud                                   ::  length of edit
               pox=tape                                  ::  prompt text
           ==                                            ::
 ++  blit                                                ::  raw console output
           $%  [%bel ~]                                  ::  make a noise
-              [%hop p=? q=@ud]                          ::  cursor right=yes
+              [%hop p=@ud]                              ::  set cursor position
               [%lin p=tape]                             ::  set current line
               [%mor ~]                                  ::  newline
           ==                                            ::

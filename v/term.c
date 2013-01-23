@@ -15,7 +15,6 @@
 #include <netinet/in.h>
 #include <ev.h>
 #include <errno.h>
-
 #include <curses.h>
 #include <termios.h>
 #include <term.h>
@@ -26,355 +25,444 @@
 struct termios Oldattr;
 struct termios Newattr;
 
-struct {
-  struct {
-    const c3_c* kcuu1_c;      //  key_up 
-    const c3_c* kcud1_c;      //  key_down
-    const c3_c* kcub1_c;      //  key_back
-    const c3_c* kcuf1_c;      //  key_forward
-    const c3_c* kbs_c;        //  backspace
-  } inn;
-  struct {
-    const c3_c* el_c;         //  clr_bol clear to beginning of line
-    const c3_c* el1_c;        //  clr_eol clear to end of lin
-    const c3_c* bel_c;        //  bel sound bell
-    const c3_c* cub1_c;       //  parm_left
-    const c3_c* cuf1_c;       //  parm_right
-    const c3_c* cub_c;        //  parm_left_cursor #num
-    const c3_c* cuf_c;        //  parm_right_cursor #num 
-  } out;
-} Terminfo;
-
-struct {
-  struct {
-    c3_y* lin_y;    // current line
-    c3_w  len_w;    // length of current line
-    c3_w  cus_w;    // cursor position
-  } out;
-
-  struct {
-    c3_y esc_y[4];  // escape code buffer
-    c3_w esc_w;     // escape length
-  } inn;
-} State;
+static void _lo_term(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i)
+  { u2_lo_call(&u2_Host.rec_u[0], lup_u, wax_u, c3__term, rev_i); }
 
 void 
-u2_term_io_init(u2_reck*        rec_u,
-                struct ev_loop* lup_u)
+u2_term_io_init(u2_reck* rec_u)
 {
+  u2_utty* uty_u = malloc(sizeof(u2_utty));
+  c3_i     fid_i = 1;                         //  stdin/stdout
+
+  //  Initialize event processing.
+  //
+  {
+    ev_io_init(&uty_u->wax_u, _lo_term, fid_i, 0);
+  }
+
+  //  Configure horrible stateful terminfo api.
+  //
+  {
+    if ( 0 != setupterm(0, 2, 0) ) {
+      c3_assert(!"init-setupterm");
+    }
+  }
+
+  //  Load terminfo strings.
+  //
+  {
+#   define _utfo(way, nam) \
+    { \
+      uty_u->ufo_u.way.nam##_y = (const c3_y *) tigetstr(#nam); \
+      c3_assert(uty_u->ufo_u.way.nam##_y); \
+    }
+    _utfo(inn, kcuu1);
+    _utfo(inn, kcud1);
+    _utfo(inn, kcub1);
+    _utfo(inn, kcuf1);
+
+    _utfo(out, el);
+    _utfo(out, el1);
+    _utfo(out, bel);
+    _utfo(out, cub1);
+    _utfo(out, cuf1);
+    _utfo(out, cub);
+    _utfo(out, cuf);
+  }
+
+  //  Load old terminal state to restore.
+  //
+  {
+    if ( 0 != tcgetattr(fid_i, &uty_u->bak_u) ) {
+      c3_assert(!"init-tcgetattr");
+    }
+    if ( -1 == fcntl(fid_i, F_GETFL, &uty_u->cug_i) ) {
+      c3_assert(!"init-fcntl");
+    }
+    uty_u->nob_i = uty_u->cug_i | O_NONBLOCK;   // O_NDELAY on older unix
+  }
+
+  //  Construct raw termios configuration.
+  //
+  {
+    uty_u->raw_u = uty_u->bak_u;
+
+    uty_u->raw_u.c_lflag &= ~(ECHO | ECHONL | ICANON | IEXTEN);
+    uty_u->raw_u.c_iflag &= ~(ICRNL | INPCK | ISTRIP);
+    uty_u->raw_u.c_cflag &= ~(CSIZE | PARENB);
+    uty_u->raw_u.c_cflag |= CS8;
+    uty_u->raw_u.c_oflag &= ~(OPOST);
+    uty_u->raw_u.c_cc[VMIN] = 0;
+    uty_u->raw_u.c_cc[VTIME] = 0;
+  } 
+
+  //  Initialize mirror and accumulator state.
+  //
+  {
+    uty_u->tat_u.mir.lin_y = (c3_y*)strdup("");
+    uty_u->tat_u.mir.len_w = 0;
+    uty_u->tat_u.mir.cus_w = 0;
+
+    uty_u->tat_u.acc.len_w = 0;
+  }
+
+  //  This is terminal 1, with an empty queue, linked in host.
+  //
+  {
+    uty_u->tid_l = 1;
+    uty_u->pax = u2nq(c3__gold, c3__term, '1', u2_nul); 
+    uty_u->out_u = 0;
+    uty_u->tou_u = 0;
+
+    uty_u->nex_u = u2_Host.uty_u;
+    u2_Host.uty_u = uty_u;
+  }
 }
 
 void
 u2_term_io_poll(u2_reck*        rec_u,
                 struct ev_loop* lup_u)
 {
+  u2_utty* uty_u;
+
+  for ( uty_u = u2_Host.uty_u; uty_u; uty_u = uty_u->nex_u ) {
+    c3_i ver_i;
+
+    ver_i |= EV_READ;   //  no constraint on reading right now
+    if ( uty_u->out_u ) {
+      ver_i |= EV_WRITE;
+    }
+    ev_io_set(&uty_u->wax_u, uty_u->wax_u.fd, ver_i);
+  }
 }
 
 void
 u2_term_io_spin(u2_reck*        rec_u,
                 struct ev_loop* lup_u)
 {
+  u2_utty* uty_u;
+
+  for ( uty_u = u2_Host.uty_u; uty_u; uty_u = uty_u->nex_u ) {
+    c3_i ver_i;
+
+    ver_i |= EV_READ;   //  no constraint on reading right now
+    if ( uty_u->out_u ) {
+      ver_i |= EV_WRITE;
+    }
+    ev_io_set(&uty_u->wax_u, uty_u->wax_u.fd, ver_i);
+
+    if ( 0 != tcsetattr(uty_u->wax_u.fd, TCSADRAIN, &uty_u->raw_u) ) {
+      c3_assert(!"spin-tcsetattr");
+    }
+    if ( -1 == fcntl(uty_u->wax_u.fd, F_SETFL, uty_u->nob_i) ) {
+      c3_assert(!"spin-fcntl");
+    }
+  }
 }
 
 void
 u2_term_io_stop(u2_reck*        rec_u,
                 struct ev_loop* lup_u)
 {
-}
+  u2_utty* uty_u;
 
-void
-u2_term_io_suck(u2_reck*      rec_u,
-                struct ev_io* wax_u)
-{
-}
+  for ( uty_u = u2_Host.uty_u; uty_u; uty_u = uty_u->nex_u ) {
+    ev_io_stop(u2_Host.lup_u, &uty_u->wax_u);
 
-void 
-u2_term_io_exit(u2_reck*        rec_u,
-                struct ev_loop* lup_u)
-{
-}
-
-static void
-_term_write_str(c3_i fid_i, const c3_c* str_c)
-{
-  c3_w len_w = strlen(str_c);
-
-  if ( len_w != write(fid_i, str_c, strlen(str_c)) ) {
-    c3_assert(!"write");
+    if ( 0 != tcsetattr(uty_u->wax_u.fd, TCSADRAIN, &uty_u->bak_u) ) {
+      c3_assert(!"stop-tcsetattr");
+    }
+    if ( -1 == fcntl(uty_u->wax_u.fd, F_SETFL, uty_u->cug_i) ) {
+      c3_assert(!"stop-fcntl");
+    }
   }
 }
 
+/* _term_it_clip(): remove sent bytes from buffer.
+**
+** XX unify with ubuf in http.c
+*/
 static void
-_term_write_strnum(c3_i fid_i, const c3_c* str_c, c3_w num_w)
+_term_it_clip(u2_ubuf* buf_u, c3_i siz_i)
+{
+  if ( siz_i ) {
+    c3_assert(siz_i < buf_u->len_w);
+    {
+      c3_w res_w = (buf_u->len_w - siz_i);
+
+      memmove(buf_u->hun_y, (buf_u->hun_y + siz_i), res_w);
+      buf_u->len_w = res_w;
+    }
+  }
+}
+
+/* _term_it_buf(): create a data buffer.
+*/
+static u2_ubuf*
+_term_it_buf(c3_w len_w, const c3_y* hun_y)
+{
+  u2_ubuf* buf_u = malloc(len_w + sizeof(*buf_u));
+
+  buf_u->len_w = len_w;
+  memcpy(buf_u->hun_y, hun_y, len_w);
+  
+  buf_u->nex_u = 0;
+  return buf_u;
+}
+
+/* _term_it_queue_buf(): queue buffer, transferring pointer.
+*/
+static void
+_term_it_queue_buf(u2_utty* uty_u,
+                   u2_ubuf* buf_u)
+{
+  if ( !uty_u->tou_u ) {
+    uty_u->out_u = uty_u->tou_u = buf_u;
+  }
+  else {
+    uty_u->tou_u->nex_u = buf_u;
+    uty_u->tou_u = buf_u;
+  }
+}
+
+/* _term_it_queue_bytes(): queue bytes, retaining pointer.
+*/
+static void
+_term_it_queue_bytes(u2_utty*    uty_u,
+                     c3_w        len_w,
+                     const c3_y* hun_y)
+{
+  _term_it_queue_buf(uty_u, _term_it_buf(len_w, hun_y));
+}
+
+/* _term_it_queue_txt(): queue null-terminated string, retaining pointer.
+*/
+static void
+_term_it_queue_txt(u2_utty*    uty_u,
+                   const c3_y* hun_y)
+{
+  _term_it_queue_bytes(uty_u, strlen((const c3_c*)hun_y), hun_y);
+}
+
+/* _term_it_queue_str(): queue null-terminated string, retaining pointer.
+*/
+static void
+_term_it_queue_str(u2_utty*    uty_u,
+                   const c3_c* str_c)
+{
+  _term_it_queue_txt(uty_u, (const c3_y*) str_c);
+}
+
+/* _term_it_queue_strnum(): queue string with terminal parameter, retaining.
+*/
+static void
+_term_it_queue_strnum(u2_utty* uty_u, const c3_c* str_c, c3_w num_w)
 {
   c3_c buf_c[16];
 
   sprintf(buf_c, "#%ud", num_w);   //  XX slow
-  _term_write_str(fid_i, str_c);
-  _term_write_str(fid_i, buf_c);
+  _term_it_queue_str(uty_u, str_c);
+  _term_it_queue_str(uty_u, buf_c);
 }
 
+/* _term_it_show_text(): show ordinary text, retaining.
+*/
 static void
-_term_bail_bad(const char* msg)
+_term_it_show_text(u2_utty* uty_u, c3_y* txt_y)
 {
-  printf("bail: bad %s\r\n", msg);
-  exit(1);
+  _term_it_queue_str(uty_u, (c3_c*)txt_y);
+  uty_u->tat_u.mir.cus_w += strlen((c3_c*)txt_y);
 }
 
+/* _term_it_show_clear(): clear to the beginning of the current line.
+*/
 static void
-_term_exit(c3_i fid_i)
+_term_it_show_clear(u2_utty* uty_u)
 {
-  while ( 0 != tcsetattr(fid_i, TCSADRAIN, &Oldattr) ) {
-    if ( errno != EINTR ) {
-      _term_bail_bad("tcsetattr");
-    }
-  }
+  _term_it_queue_str(uty_u, "\r");
+  _term_it_queue_txt(uty_u, uty_u->ufo_u.out.el1_y);
+  uty_u->tat_u.mir.cus_w = 0;
 }
 
+/* _term_it_show_cursor(): set current line, transferring pointer.
+*/
 static void
-_term_exit_bad(c3_i fid_i, const char* msg)
+_term_it_show_cursor(u2_utty* uty_u, c3_w cur_w)
 {
-  printf("exit: bad %s\r\n", msg);
-  _term_exit(fid_i);
-  exit(1);
-}
-
-static void
-_term_exit_good(c3_i fid_i)
-{
-  printf("exit: good\r\n");
-  _term_exit(fid_i);
-  exit(0);
-}
-
-static void
-_term_beep(c3_i fid_i)
-{
-  putchar(7);
-  fflush(stdout);
-}
-
-static void
-_term_text(c3_i fid_i, c3_y* txt_y)
-{
-  _term_write_str(fid_i, (c3_c*)txt_y);
-  State.out.cus_w += strlen((c3_c*)txt_y);
-}
-
-static void
-_term_cursor_right(c3_i fid_i)
-{
-  _term_write_str(fid_i, Terminfo.out.cuf1_c);
-}
-
-static void
-_term_cursor_left(c3_i fid_i)
-{
-  _term_write_str(fid_i, Terminfo.out.cub1_c);
-}
-
-static void
-_term_clear(c3_i fid_i)
-{
-  _term_write_str(fid_i, "\r");
-  _term_write_str(fid_i, Terminfo.out.el1_c);
-  State.out.cus_w = 0;
-}
-
-static void
-_term_set_line(c3_i fid_i, c3_y* lin_y)   // transfer lin_y
-{
-  _term_clear(fid_i);
-  _term_text(fid_i, lin_y);
-
-  free(State.out.lin_y);
-  State.out.lin_y = lin_y;
-  State.out.len_w = strlen((c3_c*)lin_y);
-}
-
-static void
-_term_set_cursor(c3_i fid_i, c3_w cur_w)
-{
-  if ( cur_w < State.out.cus_w ) {
-    c3_w dif_w = (State.out.cus_w - cur_w);
+  if ( cur_w < uty_u->tat_u.mir.cus_w ) {
+    c3_w dif_w = (uty_u->tat_u.mir.cus_w - cur_w);
 
     while ( dif_w-- ) {
-      _term_write_str(fid_i, Terminfo.out.cub1_c);
+      _term_it_queue_txt(uty_u, uty_u->ufo_u.out.cub1_y);
     }
   }
-  else if ( cur_w > State.out.cus_w ) {
-    c3_w dif_w = (cur_w - State.out.cus_w);
+  else if ( cur_w > uty_u->tat_u.mir.cus_w ) {
+    c3_w dif_w = (cur_w - uty_u->tat_u.mir.cus_w);
 
     while ( dif_w-- ) {
-      _term_write_str(fid_i, Terminfo.out.cuf1_c);
+      _term_it_queue_txt(uty_u, uty_u->ufo_u.out.cuf1_y);
     }
   }
-  State.out.cus_w = cur_w;
+  uty_u->tat_u.mir.cus_w = cur_w;
 }
 
+/* _term_it_show_line(): set current line, transferring pointer.
+*/
 static void
-_term_byte_regular(c3_i fid_i, c3_y byt_y)
+_term_it_show_line(u2_utty* uty_u, c3_y* lin_y)
 {
-  c3_w  len_w = State.out.len_w;
-  c3_w  cus_w = State.out.cus_w;
-  c3_y* lin_y = State.out.lin_y;
-  c3_y* nuw_y = malloc(len_w + 2);
+  _term_it_show_clear(uty_u);
+  _term_it_show_text(uty_u, lin_y);
 
-  if ( cus_w > 0 ) {
-    memcpy(nuw_y, lin_y, State.out.cus_w);
-  }
-  nuw_y[cus_w] = byt_y;
-  if ( cus_w < len_w ) {
-    memcpy(nuw_y + cus_w + 1, lin_y + cus_w, (len_w - cus_w));
-  }
-  nuw_y[len_w + 1] = 0;
-
-  _term_set_line(fid_i, nuw_y);
-  _term_set_cursor(fid_i, cus_w + 1);
-
-  //  printf("regular byte %x\r\n", byt_y);
-  //  fflush(stdout);
+  free(uty_u->tat_u.mir.lin_y);
+  uty_u->tat_u.mir.lin_y = lin_y;
+  uty_u->tat_u.mir.len_w = strlen((c3_c*)lin_y);
 }
 
+/* _term_it_show_more(): new current line.
+*/
 static void
-_term_arrow_left(c3_i fid_i)
+_term_it_show_more(u2_utty* uty_u)
 {
-  if ( 0 == State.out.cus_w ) {
-    _term_write_str(fid_i, Terminfo.out.bel_c);
-  } else {
-    _term_set_cursor(fid_i, State.out.cus_w - 1);
-  }
+  _term_it_queue_str(uty_u, "\r\n");
+  uty_u->tat_u.mir.cus_w = 0;
 }
 
+/* _term_io_suck_char(): process a single character.
+*/
 static void
-_term_arrow_right(c3_i fid_i)
+_term_io_suck_char(u2_reck* rec_u,
+                   u2_utty* uty_u,
+                   c3_y     cay_y)
 {
-  if ( (State.out.len_w - 1) == State.out.cus_w ) {
-    _term_write_str(fid_i, Terminfo.out.bel_c);
-  } else {
-    _term_set_cursor(fid_i, State.out.cus_w + 1);
-  }
-}
 
-static void
-_term_byte(c3_i fid_i, c3_y byt_y)
-{
-  switch ( State.inn.esc_w ) {
-    case 0: {
-      if ( 0x1b != byt_y ) {
-        _term_byte_regular(fid_i, byt_y);
-      } else {
-        State.inn.esc_w = 1;
-        State.inn.esc_y[0] = 0x1b;
-      }
-      break;
+  if ( 0 == uty_u->tat_u.acc.len_w ) {
+    if ( (cay_y >= 32) && (cay_y < 127) ) {
+      u2_reck_plan(rec_u, 
+                   u2k(uty_u->pax), 
+                   u2nq(c3__bleb, c3__txt, cay_y, u2_nul));
     }
-    case 1: {
-      if ( 0x5b != byt_y ) {
-        _term_beep(fid_i);
-        State.inn.esc_w = 0;
-      }
-      else {
-        State.inn.esc_w = 2;
-        State.inn.esc_y[1] = 0x5b;
-      }
-      break;
+    else if ( cay_y == 13 ) {
+      u2_reck_plan(rec_u, u2k(uty_u->pax), u2nt(c3__bleb, c3__mor, u2_nul));
     }
-    case 2: {
-      switch ( byt_y ) {
-        default: _term_beep(fid_i); break;
-        case 0x43: _term_arrow_right(fid_i); break; 
-        case 0x44: _term_arrow_left(fid_i); break; 
-      }
-      State.inn.esc_w = 0;
-      break;
+    else {
+      _term_it_queue_txt(uty_u, uty_u->ufo_u.out.bel_y);
     }
   }
+  else {
+    _term_it_queue_txt(uty_u, uty_u->ufo_u.out.bel_y);
+  }
 }
 
-static void
-_term_init(c3_i fid_i)
+/* u2_term_io_suck(): read terminal bytes.
+*/
+void
+u2_term_io_suck(u2_reck*      rec_u,
+                struct ev_io* wax_u)
 {
-  if ( OK != setupterm(0, 2, 0) ) {
-    _term_bail_bad("init-setupterm");
-  }
-  if ( 0 != tcgetattr(fid_i, &Oldattr)) {
-    _term_bail_bad("init-tcgetattr");
-  }
-  Newattr = Oldattr;
-
-  Newattr.c_lflag &= ~(ECHO | ECHONL | ICANON | IEXTEN);
-  Newattr.c_iflag &= ~(ICRNL | INPCK | ISTRIP);
-  Newattr.c_cflag &= ~(CSIZE | PARENB);
-  Newattr.c_cflag |= CS8;
-  Newattr.c_oflag &= ~(OPOST);
-  Newattr.c_cc[VMIN] = 1;   //  0
-  Newattr.c_cc[VTIME] = 0;
-
-  if ( 0 != tcsetattr(fid_i, TCSADRAIN, &Newattr) ) {
-    _term_bail_bad("init-tcsetattr");
-  }
-
-  State.out.lin_y = (c3_y*)strdup("");
-  State.out.len_w = 0;
-  State.out.cus_w = 0;
-
-  State.inn.esc_w = 0;
-
-  Terminfo.inn.kcuu1_c = tigetstr("kcuu1");
-  Terminfo.inn.kcud1_c = tigetstr("kcud1");
-  Terminfo.inn.kcub1_c = tigetstr("kcub1");
-  Terminfo.inn.kcuf1_c = tigetstr("kcuf1");
-
-  Terminfo.out.el_c = tigetstr("el");
-  Terminfo.out.el1_c = tigetstr("el1");
-  Terminfo.out.bel_c = tigetstr("bel");
-  Terminfo.out.cub1_c = tigetstr("cub1");
-  Terminfo.out.cuf1_c = tigetstr("cuf1");
-  Terminfo.out.cub_c = tigetstr("cub");
-  Terminfo.out.cuf_c = tigetstr("cuf");
-
-  c3_assert(Terminfo.inn.kcuu1_c);
-  c3_assert(Terminfo.inn.kcud1_c);
-  c3_assert(Terminfo.inn.kcub1_c);
-  c3_assert(Terminfo.inn.kcuf1_c);
-
-  c3_assert(Terminfo.out.el_c);
-  c3_assert(Terminfo.out.el1_c);
-  c3_assert(Terminfo.out.bel_c);
-  c3_assert(Terminfo.out.cub1_c);
-  c3_assert(Terminfo.out.cuf1_c);
-  c3_assert(Terminfo.out.cub_c);
-  c3_assert(Terminfo.out.cuf_c);
-}
-
-void 
-TermTest(void)
-{
-#if 1
+  u2_utty* uty_u = (u2_utty*)(void*)wax_u;
   {
-    _term_init(2);
-    
     while ( 1 ) {
-      int siz;
-      c3_y c_y = 0;
+      c3_y buf_y[4096];
+      c3_i siz_i, i;
 
-      siz = read(1, &c_y, 1);
-      if ( siz == 0 ) {
-        _term_exit_good(2);
-      }
-      else if ( siz == -1 ) {
-        perror("read");
-        _term_exit_bad(2, "read");
-      }
-      else {
-        if ( 'Z' == c_y ) {
+      if ( (siz_i = read(uty_u->wax_u.fd, buf_y, 4096)) < 0) {
+        if ( EAGAIN == errno ) {
           break;
+        } else {
+          c3_assert(!"term: read");
         }
-        else _term_byte(2, c_y);
+      }
+      for ( i=0; i < siz_i; i++ ) {
+        _term_io_suck_char(rec_u, uty_u, buf_y[i]);
+      }
+      if ( 4096 != siz_i ) {
+        break;
       }
     }
   }
-  _term_exit_good(2);
-#endif
+}
+
+/* u2_term_io_fuck(): write terminal bytes.
+*/
+void
+u2_term_io_fuck(u2_reck*      rec_u,
+                struct ev_io* wax_u)
+{
+  u2_utty* uty_u = (u2_utty*)(void*)wax_u;
+  {
+    while ( uty_u->out_u ) {
+      u2_ubuf* out_u = uty_u->out_u;
+      c3_i     siz_i;
+
+      if ( (siz_i = write(uty_u->wax_u.fd, 
+                          uty_u->out_u->hun_y, 
+                          uty_u->out_u->len_w)) < 0 ) {
+        if ( EAGAIN == errno ) {
+          break;
+        } else {
+          c3_assert(!"term: write");
+        }
+      }
+      if ( siz_i < out_u->len_w ) {
+        _term_it_clip(out_u, siz_i);
+        break;
+      }
+      else {
+        uty_u->out_u = uty_u->out_u->nex_u;
+        if ( 0 == uty_u->out_u ) {
+          c3_assert(out_u == uty_u->tou_u);
+          uty_u->tou_u = 0;
+        }
+        free(out_u);
+      }
+    }
+  }
+}
+
+/* u2_term_io_exit(): clean up terminal.
+*/
+void 
+u2_term_io_exit(u2_reck*        rec_u,
+                struct ev_loop* lup_u)
+{
+  u2_utty* uty_u;
+
+  for ( uty_u = u2_Host.uty_u; uty_u; uty_u = uty_u->nex_u ) {
+    tcsetattr(uty_u->wax_u.fd, TCSADRAIN, &uty_u->bak_u);
+  }
+}
+
+/* u2_term_at_send():
+*/
+void
+u2_term_at_send(u2_reck* rec_u,
+                c3_l     tid_l,
+                u2_noun  blt)
+{
+  u2_utty* uty_u;
+
+  for ( uty_u = u2_Host.uty_u; uty_u; uty_u = uty_u->nex_u ) {
+    if ( tid_l == uty_u->tid_l ) {
+      switch ( u2h(blt) ) {
+        default: c3_assert(!"term: bad blit"); return;
+        case c3__bel: {
+          _term_it_queue_txt(uty_u, uty_u->ufo_u.out.bel_y);
+        } break;
+        case c3__hop: {
+          _term_it_show_cursor(uty_u, u2t(blt)); 
+        } break;
+        case c3__lin: {
+          c3_y* lin_y = u2_cr_tape(u2k(u2t(blt)));
+
+          _term_it_show_line(uty_u, lin_y);
+        } break;
+        case c3__mor: {
+          _term_it_show_more(uty_u);
+        } break;
+      }
+      return;
+    }
+  }
+  c3_assert(!"term: bad terminal id");
 }

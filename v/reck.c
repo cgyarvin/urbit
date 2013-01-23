@@ -13,6 +13,9 @@
 #include <dirent.h>
 #include <stdint.h>
 #include <ev.h>
+#include <curses.h>
+#include <termios.h>
+#include <term.h>
 
 #include "all.h"
 #include "f/coal.h"
@@ -530,3 +533,11 @@ u2_reck_work(u2_reck* rec_u)
 {
 }
 
+/* u2_reck_plan(): queue ovum (external).
+*/
+void
+u2_reck_plan(u2_reck* rec_u,
+             u2_noun  pax,
+             u2_noun  ovo)
+{
+}

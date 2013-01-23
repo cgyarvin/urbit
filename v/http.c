@@ -15,6 +15,9 @@
 #include <netinet/in.h>
 #include <ev.h>
 #include <errno.h>
+#include <curses.h>
+#include <termios.h>
+#include <term.h>
 #include <libtecla.h>
 
 #include "../outside/jhttp/http_parser.h"   // Joyent HTTP
@@ -1074,6 +1077,7 @@ u2_ve_http_start(c3_w por_w)
   return u2_yes;
 }
 
+
 /********************* new http system
 */
 
@@ -1085,16 +1089,33 @@ static void _ht_htcn(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i)
 /* u2_http_io_init(): initialize http I/O.
 */
 void 
-u2_http_io_init(u2_reck*        rec_u,
-                struct ev_loop* lup_u)
+u2_http_io_init(u2_reck* rec_u)
 {
+  u2_http *htp_u = malloc(sizeof(*htp_u));
+
+  {
+    struct timeval tp;
+
+    gettimeofday(&tp, 0);
+    htp_u->sev_l = 0x7fffffff & (((c3_w) tp.tv_sec) ^ (getpid() << 16));
+  }
+  htp_u->coq_l = 1;
+  htp_u->por_w = 8080;
+
+  htp_u->nuw = u2_yes;
+  htp_u->ded = u2_no;
+
+  htp_u->hon_u = 0;
+  htp_u->nex_u = 0;
+
+  htp_u->nex_u = u2_Host.htp_u;
+  u2_Host.htp_u = htp_u;
 }
 
 /* u2_http_io_exit(): terminate http I/O.
 */
 void 
-u2_http_io_exit(u2_reck*        rec_u,
-                struct ev_loop* lup_u)
+u2_http_io_exit(u2_reck* rec_u)
 {
 }
 

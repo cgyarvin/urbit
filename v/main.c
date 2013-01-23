@@ -15,6 +15,9 @@
 #include <ev.h>
 #include <sigsegv.h>
 #include <libtecla.h>
+#include <curses.h>
+#include <termios.h>
+#include <term.h>
 
 #define U2_GLOBAL
 #define C3_GLOBAL

@@ -117,16 +117,57 @@
         c3_y             hun_y[0];          //  bytes to send
       } u2_ubuf;
 
+    /* u2_utat: unix terminal state.
+    */
+      typedef struct {
+        struct {
+          c3_y* lin_y;                      // current line
+          c3_w  len_w;                      // length of current line
+          c3_w  cus_w;                      // cursor position
+        } mir;
+
+        struct {
+          c3_y syp_y[32];                   // special code buffer
+          c3_w len_w;                       // special code length
+        } acc;
+      } u2_utat;
+
+    /* u2_utfo: unix terminfo strings.
+    */
+      typedef struct {
+        struct {
+          const c3_y* kcuu1_y;              //  key_up 
+          const c3_y* kcud1_y;              //  key_down
+          const c3_y* kcub1_y;              //  key_back
+          const c3_y* kcuf1_y;              //  key_forward
+          const c3_y* kbs_y;                //  backspace
+        } inn;
+        struct {
+          const c3_y* el_y;                 //  clr_bol clear to beginning 
+          const c3_y* el1_y;                //  clr_eol clear to end
+          const c3_y* bel_y;                //  bel sound bell
+          const c3_y* cub1_y;               //  parm_left
+          const c3_y* cuf1_y;               //  parm_right
+          const c3_y* cub_y;                //  parm_left_cursor #num
+          const c3_y* cuf_y;                //  parm_right_cursor #num 
+        } out;
+      } u2_utfo;
+
     /* u2_utty: unix tty.
     */
       typedef struct _u2_utty {
-        struct ev_io wax_u;                 //  event handler state
-        u2_ubuf*     out_u;                 //  exit of output queue
-        u2_ubuf*     tou_u;                 //  entry of output queue
-        c3_w         cus_w;                 //  current cursor position
-        c3_w         len_w;                 //  current line length
-        c3_y         esc_y[4];              //  escape code buffer
-        c3_w         les_w;                 //  escape length
+        struct ev_io     wax_u;             //  event handler state
+        struct termios   bak_u;             //  cooked terminal state
+        struct termios   raw_u;             //  raw terminal state
+        c3_i             cug_i;             //  blocking fcntl flags
+        c3_i             nob_i;             //  nonblocking fcntl flags
+        c3_w             tid_l;             //  terminal identity number
+        u2_noun          pax;               //  terminal identity path
+        u2_utfo          ufo_u;             //  terminfo strings
+        u2_utat          tat_u;             //  control state
+        u2_ubuf*         out_u;             //  exit of output queue
+        u2_ubuf*         tou_u;             //  entry of output queue
+        struct _u2_utty* nex_u;             //  next in host list
       } u2_utty;
 
     /* u2_steg: kernel stage.
@@ -212,11 +253,11 @@
       typedef struct _u2_cart {
         u2_noun egg;                      //  ovum itself
         void (*clr_f)                     //  ovum processing failed
-            (u2_reck *rec_u,                    //  system
+            (u2_reck *rec_u,              //  system
              u2_noun,                     //  egg itself
              u2_noun,                     //  failure mode
              u2_noun);                    //  trace if any
-        struct _u2_cart* nex_u;                   //  next in queue
+        struct _u2_cart* nex_u;           //  next in queue
       } u2_cart;
 
     /* u2_host: entire host.
@@ -431,8 +472,15 @@
       */
         void
         u2_reck_time(u2_reck* rec_u);
-      
-      /* u2_reck_work(): flush ova.
+     
+      /* u2_reck_plan(): queue ovum (external).
+      */
+        void
+        u2_reck_plan(u2_reck* rec_u,
+                     u2_noun  pax,
+                     u2_noun  ovo);
+
+      /* u2_reck_work(): flush ova (unprotected).
       */
         void
         u2_reck_work(u2_reck* rec_u);
@@ -644,14 +692,12 @@
       /* u2_http_io_init(): initialize http I/O.
       */
         void 
-        u2_http_io_init(u2_reck*        rec_u,
-                        struct ev_loop* lup_u);
+        u2_http_io_init(u2_reck* rec_u);
 
       /* u2_http_io_exit(): terminate http I/O.
       */
         void 
-        u2_http_io_exit(u2_reck*        rec_u,
-                        struct ev_loop* lup_u);
+        u2_http_io_exit(u2_reck* rec_u);
 
       /* u2_http_io_spin(): start http server(s).
       */

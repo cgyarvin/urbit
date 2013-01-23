@@ -519,10 +519,16 @@
                     u2_atom d);
 #endif
 
-      /* u2_cr_string(): `a` as malloced C string.
+      /* u2_cr_string(): `a`, a text atom, as malloced C string.
       */
         c3_c* 
         u2_cr_string(u2_atom a);
+
+      /* u2_cr_tape(): `a`, a list of bytes, as malloced C string.
+      */
+        c3_y* 
+        u2_cr_tape(u2_noun a);
+
 
 
   /** u2_c?: managing noun reference counts.

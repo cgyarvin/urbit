@@ -277,6 +277,28 @@ u2_cr_string(u2_atom a)
   return str_c;
 }
 
+/* u2_cr_tape(): `a`, a list of bytes, as malloced C string.
+*/
+c3_y* 
+u2_cr_tape(u2_noun a)
+{
+  u2_noun b;
+  c3_w    i_w;
+  c3_y    *a_y;
+
+  for ( i_w = 0, b=a; u2_yes == u2du(b); i_w++, b=u2t(b) )
+    ;
+  a_y = malloc(i_w + 1);
+
+  for ( i_w = 0, b=a; u2_yes == u2du(b); i_w++, b=u2t(b) ) {
+    a_y[i_w] = u2h(b);
+  }
+  a_y[i_w] = 0;
+
+  u2z(a);
+  return a_y;
+}
+
 /* u2_ci_bytes():
 **
 **   Construct `a` bytes from `b`, LSB first, as an atom.

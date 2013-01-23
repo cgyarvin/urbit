@@ -12,6 +12,9 @@
 #include <gmp.h>
 #include <stdint.h>
 #include <ev.h>
+#include <curses.h>
+#include <termios.h>
+#include <term.h>
 
 #include "all.h"
 #include "v/vere.h"
@@ -328,12 +331,12 @@ u2_ve_zuse_deed(u2_noun ded)
 /* u2_ve_zuse_boom_see(): print to screen.
 */
 void
-u2_ve_zuse_boom_see(u2_noun tab, u2_noun tac)
+u2_ve_zuse_boom_see(u2_noun tub, u2_noun tac)
 {
-  if ( !u2_fly_is_cat(tab) ) {
+  if ( !u2_fly_is_cat(tub) ) {
     u2_cm_bail(c3__fail);
   } else {
-    u2_ve_tank(tab, tac);
+    u2_ve_tank(tub, tac);
   }
 }
 

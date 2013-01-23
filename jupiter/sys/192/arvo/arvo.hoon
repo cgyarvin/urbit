@@ -30,7 +30,7 @@
         ?>((meld i.wet i.law) [i.wet law])
       ?>(?=(^ t.law) $(law t.law))
     ::
-    ++  sein                                            ::  default landsein
+    ++  sein                                            ::  default seigneur
       |=  who=lord  ^-  lord
       =+  mir=(clan who)
       ?-  mir

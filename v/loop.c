@@ -15,6 +15,9 @@
 #include <netinet/in.h>
 #include <ev.h>
 #include <errno.h>
+#include <curses.h>
+#include <termios.h>
+#include <term.h>
 
 #include <libtecla.h>
 
@@ -65,12 +68,10 @@ static void _lo_cons(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i);
   }
 
   void 
-  u2_cons_io_init(u2_reck*        rec_u,
-                  struct ev_loop* lup_u)
+  u2_cons_io_init(u2_reck* rec_u)
   {
     // fprintf(stderr, "cons_io_init\n");
     ev_io_init(&Stdin_watcher, _lo_cons, 0, EV_READ);
-    ev_io_start(lup_u, &Stdin_watcher);
 
     {
       c3_c* lin_c;
@@ -154,8 +155,7 @@ static void _lo_cons(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i);
   }
 
   void 
-  u2_cons_io_exit(u2_reck*        rec_u,
-                  struct ev_loop* lup_u)
+  u2_cons_io_exit(u2_reck* rec_u)
   {
     gl_io_mode(Tecla, GL_NORMAL_MODE);
   }
@@ -163,21 +163,19 @@ static void _lo_cons(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i);
 /* _lo_init(): initialize I/O across the process.
 */
 static void
-_lo_init(u2_reck*        rec_u,
-         struct ev_loop* lup_u)
+_lo_init(u2_reck* rec_u)
 {
-  u2_cons_io_init(rec_u, lup_u);
-  u2_http_io_init(rec_u, lup_u);
+  u2_cons_io_init(rec_u);
+  u2_http_io_init(rec_u);
 }
 
 /* _lo_exit(): terminate I/O across the process.
 */
 static void
-_lo_exit(u2_reck*        rec_u,
-         struct ev_loop* lup_u)
+_lo_exit(u2_reck* rec_u)
 {
-  u2_cons_io_exit(rec_u, lup_u);
-  u2_http_io_exit(rec_u, lup_u);
+  u2_cons_io_exit(rec_u);
+  u2_http_io_exit(rec_u);
 }
 
 /* _lo_stop(): stop event I/O across the process.
@@ -314,36 +312,12 @@ static void _lo_cons(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i)
   { u2_lo_call(&u2_Host.rec_u[0], lup_u, wax_u, c3__cons, rev_i); }
 
 
-static void
-_launch_cons(u2_reck* rec_u)
+/* u2_lo_bail(): clean up all event state.
+*/
+void
+u2_lo_bail(u2_reck* rec_u)
 {
-  Tecla = new_GetLine(16384, 4096);
-  gl_io_mode(Tecla, GL_SERVER_MODE);
-}
-
-static void 
-_launch_http(u2_reck* rec_u, c3_w por_w)
-{
-  u2_http *htp_u = malloc(sizeof(*htp_u));
-
-  {
-    struct timeval tp;
-
-    gettimeofday(&tp, 0);
-    htp_u->sev_l = 0x7fffffff & (((c3_w) tp.tv_sec) ^ (getpid() << 16));
-  }
-  htp_u->coq_l = 1;
-  htp_u->por_w = por_w;
-
-  htp_u->nuw = u2_yes;
-  htp_u->ded = u2_no;
-
-  htp_u->hon_u = 0;
-  htp_u->nex_u = 0;
-  htp_u->por_w = por_w;
-
-  htp_u->nex_u = u2_Host.htp_u;
-  u2_Host.htp_u = htp_u;
+  _lo_exit(rec_u);
 }
 
 /* u2_lo_loop(): enter main event loop.
@@ -351,13 +325,15 @@ _launch_http(u2_reck* rec_u, c3_w por_w)
 void
 u2_lo_loop(u2_reck* rec_u)
 {
-  _launch_cons(rec_u);
-//  _launch_http(rec_u, 8080);
+  _lo_init(rec_u);
   {
     struct ev_loop *lup_u = ev_default_loop(0);
 
-    _lo_init(rec_u, lup_u);
+    _lo_poll(rec_u, lup_u);
+    _lo_spin(rec_u, lup_u);
+
     ev_loop(lup_u, 0);
-    _lo_exit(rec_u, lup_u);
+
+    _lo_exit(rec_u);
   }
 }
