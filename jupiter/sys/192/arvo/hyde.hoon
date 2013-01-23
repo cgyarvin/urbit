@@ -60,7 +60,7 @@
               [%ctl p=@ud]                              ::  control
               [%del ~]                                  ::  true delete 
               [%ret ~]                                  ::  return
-              [%txt p=(list @c)]                        ::  utf32 character
+              [%txt p=(list ,@c)]                       ::  utf32 character
               [%win p=@ud q=@ud]                        ::  set window size
           ==                                            ::  
 ++  bled                                                ::  terminal control
