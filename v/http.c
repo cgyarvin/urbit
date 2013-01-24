@@ -1104,6 +1104,8 @@ u2_http_io_init(u2_reck* rec_u)
 
   htp_u->nuw = u2_yes;
   htp_u->ded = u2_no;
+ 
+  fprintf(stderr, "http_io_init\r\n");
 
   htp_u->hon_u = 0;
   htp_u->nex_u = 0;
@@ -1242,13 +1244,10 @@ u2_http_io_poll(u2_reck*        rec_u,
         htp_u->nex_u = 0;
 
         ev_io_init(&htp_u->wax_u, _ht_htls, fid_i, EV_READ);
-
-        htp_u->nex_u = u2_Host.htp_u;
-        u2_Host.htp_u = htp_u;
       }
     }
     else if ( u2_yes == htp_u->ded ) { 
-      c3_assert(!"dead");   //  don't need this right now
+      c3_assert(!"dead");   //  don't need this right now, but delete
     }
     else {
       u2_hcon** hyn_u;
@@ -1256,6 +1255,9 @@ u2_http_io_poll(u2_reck*        rec_u,
       hyn_u = &(htp_u->hon_u); 
       while ( *hyn_u ) { 
         u2_hcon* hon_u = *hyn_u;
+
+        fprintf(stderr, "http_io_poll: hon_u %p\r\n", hon_u);
+        fflush(stdout);
 
         if ( u2_yes == hon_u->nuw ) {
           ev_io_init(&hon_u->wax_u, _ht_htcn, hon_u->wax_u.fd, EV_READ);

@@ -302,9 +302,9 @@ main(c3_i   argc,
   {
     if ( 0 != setjmp(Signal_buf) ) {
       switch ( Sigcause ) {
-        case sig_overflow: printf("[stack overflow]\n"); break;
-        case sig_interrupt: printf("[interrupt]\n"); break;
-        default: printf("[signal error!]\n"); break;
+        case sig_overflow: printf("[stack overflow]]\r\n"); break;
+        case sig_interrupt: printf("[interrupt]\r\n"); break;
+        default: printf("[signal error!]\r\n"); break;
       }
       Sigcause = sig_none;
 
@@ -322,7 +322,9 @@ main(c3_i   argc,
       //
       u2_ve_sway(0, u2k(u2_wire_tax(u2_Wire)));
 
-      gl_io_mode(Tecla, GL_NORMAL_MODE);
+      u2_lo_bail(&u2_Host.rec_u[0]);
+
+      // gl_io_mode(Tecla, GL_NORMAL_MODE);
       exit(1);
     }
     if ( -1 == stackoverflow_install_handler
@@ -359,7 +361,10 @@ main(c3_i   argc,
     exit(0);
   }
 
-  u2_ve_launch();
+  if ( u2_no == u2_reck_launch(&u2_Host.rec_u[0]) ) {
+    fprintf(stderr, "launch failed - exiting\n");
+    exit(1);
+  }
   u2_ve_sync();
 
 #if 0

@@ -220,8 +220,8 @@
         c3_w    rno_w;                    //  rotor index (always 0)
 
         struct {
-          struct _u2_cart* egg_u;                 //  exit of ovum queue
-          struct _u2_cart* geg_u;                 //  entry of ovum queue
+          struct _u2_cart* egg_u;         //  exit of ovum queue
+          struct _u2_cart* geg_u;         //  entry of ovum queue
         } ova;
 
         struct {                          //  function gates, use mung
@@ -448,9 +448,9 @@
         void
         u2_reck_boot(u2_reck* rec_u);
 
-      /* u2_reck_launch(): launch the reck engine (protected).
+      /* u2_reck_launch(): launch the reck engine (unprotected).
       */
-        void
+        u2_bean
         u2_reck_launch(u2_reck* rec_u);
 
       /* u2_reck_peek(): query the reck namespace (protected).
@@ -478,7 +478,7 @@
         void
         u2_reck_plan(u2_reck* rec_u,
                      u2_noun  pax,
-                     u2_noun  ovo);
+                     u2_noun  fav);
 
       /* u2_reck_work(): flush ova (unprotected).
       */
@@ -685,6 +685,60 @@
       */
         void
         u2_lo_loop(u2_reck* rec_u);
+
+      /* u2_lo_bail(): clean up all event state.
+      */
+        void
+        u2_lo_bail(u2_reck* rec_u);
+
+    /**  Terminal, new style.
+    **/
+      /* u2_term_ef_send(): send effect to to terminal.
+      */
+        void
+        u2_term_ef_send(u2_reck* rec_u,
+                        c3_l     tid_l,
+                        u2_noun  blt);
+
+      /* u2_term_io_init(): initialize terminal I/O.
+      */
+        void 
+        u2_term_io_init(u2_reck* rec_u);
+
+      /* u2_term_io_exit(): terminate terminal I/O.
+      */
+        void 
+        u2_term_io_exit(u2_reck* rec_u);
+
+      /* u2_term_io_spin(): start terminal server(s).
+      */
+        void
+        u2_term_io_spin(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_term_io_stop(): stop terminal servers.
+      */
+        void
+        u2_term_io_stop(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_term_io_poll(): update terminal IO state.
+      */
+        void
+        u2_term_io_poll(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_term_io_suck(): read terminal bytes.
+      */
+        void
+        u2_term_io_suck(u2_reck*      rec_u,
+                        struct ev_io* wax_u);
+
+      /* u2_term_io_fuck(): write terminal bytes.
+      */
+        void
+        u2_term_io_fuck(u2_reck*      rec_u,
+                        struct ev_io* wax_u);
 
 
     /**  HTTP, new style.

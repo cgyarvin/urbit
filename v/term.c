@@ -126,7 +126,7 @@ u2_term_io_poll(u2_reck*        rec_u,
   u2_utty* uty_u;
 
   for ( uty_u = u2_Host.uty_u; uty_u; uty_u = uty_u->nex_u ) {
-    c3_i ver_i;
+    c3_i ver_i = 0;
 
     ver_i |= EV_READ;   //  no constraint on reading right now
     if ( uty_u->out_u ) {
@@ -143,13 +143,7 @@ u2_term_io_spin(u2_reck*        rec_u,
   u2_utty* uty_u;
 
   for ( uty_u = u2_Host.uty_u; uty_u; uty_u = uty_u->nex_u ) {
-    c3_i ver_i;
-
-    ver_i |= EV_READ;   //  no constraint on reading right now
-    if ( uty_u->out_u ) {
-      ver_i |= EV_WRITE;
-    }
-    ev_io_set(&uty_u->wax_u, uty_u->wax_u.fd, ver_i);
+    ev_io_start(lup_u, &uty_u->wax_u);
 
     if ( 0 != tcsetattr(uty_u->wax_u.fd, TCSADRAIN, &uty_u->raw_u) ) {
       c3_assert(!"spin-tcsetattr");
@@ -167,7 +161,7 @@ u2_term_io_stop(u2_reck*        rec_u,
   u2_utty* uty_u;
 
   for ( uty_u = u2_Host.uty_u; uty_u; uty_u = uty_u->nex_u ) {
-    ev_io_stop(u2_Host.lup_u, &uty_u->wax_u);
+    ev_io_stop(lup_u, &uty_u->wax_u);
 
     if ( 0 != tcsetattr(uty_u->wax_u.fd, TCSADRAIN, &uty_u->bak_u) ) {
       c3_assert(!"stop-tcsetattr");
@@ -343,7 +337,7 @@ _term_io_suck_char(u2_reck* rec_u,
                    u2nq(c3__bleb, c3__txt, cay_y, u2_nul));
     }
     else if ( cay_y == 13 ) {
-      u2_reck_plan(rec_u, u2k(uty_u->pax), u2nt(c3__bleb, c3__mor, u2_nul));
+      u2_reck_plan(rec_u, u2k(uty_u->pax), u2nt(c3__bleb, c3__ret, u2_nul));
     }
     else {
       _term_it_queue_txt(uty_u, uty_u->ufo_u.out.bel_y);
@@ -361,6 +355,7 @@ u2_term_io_suck(u2_reck*      rec_u,
                 struct ev_io* wax_u)
 {
   u2_utty* uty_u = (u2_utty*)(void*)wax_u;
+
   {
     while ( 1 ) {
       c3_y buf_y[4096];
@@ -390,6 +385,7 @@ u2_term_io_fuck(u2_reck*      rec_u,
                 struct ev_io* wax_u)
 {
   u2_utty* uty_u = (u2_utty*)(void*)wax_u;
+
   {
     while ( uty_u->out_u ) {
       u2_ubuf* out_u = uty_u->out_u;
@@ -423,8 +419,7 @@ u2_term_io_fuck(u2_reck*      rec_u,
 /* u2_term_io_exit(): clean up terminal.
 */
 void 
-u2_term_io_exit(u2_reck*        rec_u,
-                struct ev_loop* lup_u)
+u2_term_io_exit(u2_reck* rec_u)
 {
   u2_utty* uty_u;
 
@@ -433,7 +428,7 @@ u2_term_io_exit(u2_reck*        rec_u,
   }
 }
 
-/* u2_term_at_send():
+/* u2_term_at_send(): send blit to terminal.
 */
 void
 u2_term_at_send(u2_reck* rec_u,

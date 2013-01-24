@@ -60,15 +60,16 @@
               [%ctl p=@ud]                              ::  control
               [%del ~]                                  ::  true delete 
               [%ret ~]                                  ::  return
-              [%txt p=(list ,@c)]                       ::  utf32 character
+              [%txt p=(list ,@c)]                       ::  utf32 characters
               [%win p=@ud q=@ud]                        ::  set window size
           ==                                            ::  
 ++  bled                                                ::  terminal control
-          $:  lou=?                                     ::  line is prompt
+          $:  lou=?                                     ::  line is output
               cus=@ud                                   ::  logical cursor
               pom=@ud                                   ::  length of prompt
-              len=@ud                                   ::  length of edit
+              len=@ud                                   ::  length of buffer
               pox=tape                                  ::  prompt text
+              wyt=tape                                  ::  buffer text 
           ==                                            ::
 ++  blit                                                ::  raw console output
           $%  [%bel ~]                                  ::  make a noise
@@ -80,9 +81,8 @@
           $:  p=@ud                                     ::  terminal cursor
               q=@ud                                     ::  line length
               r=@ud                                     ::  screen width
-              s=tape                                    ::  line text
           ==                                            ::
-++  blur  ,[p=blot q=(unit bled)]                       ::  console state
+++  blur  ,[p=blot q=bled]                              ::  console state
 ++  boar                                                ::  process at system
           $%  :*  %&                                    ::  waiting (system)
                   p=(list path)                         ::  blocked on

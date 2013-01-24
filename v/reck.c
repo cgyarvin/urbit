@@ -382,6 +382,7 @@ _reck_launch_toy(u2_reck* rec_u, u2_noun pax)
   if ( u2_nul == rec_u->own ) {
     u2z(pax);
     fprintf(stderr, "make failed?\n"); 
+    u2_cm_bail(c3__exit);
   }
   else {
     _reck_poke
@@ -435,13 +436,41 @@ u2_reck_boot(u2_reck* rec_u)
   u2_cm_chin();
 }
 
-/* u2_reck_launch(): launch the reck engine (protected).
+/* u2_reck_launch(): call reck launch fn (unprotected).
 */
-void
+u2_bean
 u2_reck_launch(u2_reck* rec_u)
 {
-  u2_noun pax = u2nq(c3__gold, c3__term, '0', u2_nul);
-  _reck_launch_toy(rec_u, pax);
+  u2_noun hoe;
+  u2_noun gud;
+
+  u2_cm_trip();
+  if ( 0 != (hoe = u2_cm_trap()) ) {
+    u2_cm_purge();
+    u2_ve_grab(hoe, 0);
+
+    u2_ve_wine(u2k(u2h(hoe)));
+    u2_ve_sway(2, u2_ckb_flop(u2k(u2t(hoe))));
+    u2z(hoe);
+
+    gud = u2_no;
+  } 
+  else {
+    {
+      u2_noun pax = u2nq(c3__gold, c3__term, '0', u2_nul);
+      _reck_launch_toy(rec_u, pax);
+    }
+    u2_cm_done();
+  
+    u2_cm_purge();
+    if ( (u2_yes == u2_Flag_Garbage) || (u2_no == u2_wire_lan(u2_Wire)) ) {
+      u2_ve_grab(0);
+    }
+
+    gud = u2_yes;
+  }
+  u2_cm_chin();
+  return gud;
 }
 
 /* u2_reck_http_request(): hear http request on channel (unprotected).
@@ -526,11 +555,75 @@ u2_reck_prick(u2_reck* rec_u, u2_noun hap)
   return que;
 }
 
-/* u2_reck_work(): flush ova.
+/* u2_reck_poke(): insert an input ovum (protected).
+*/
+void
+u2_reck_poke(u2_reck* rec_u, u2_noun ovo)
+{
+  u2_noun hoe;
+
+  if ( 0 != (hoe = u2_cm_trap()) ) {
+    u2_cm_purge();
+    u2_ve_grab(hoe, 0);
+
+    u2_ve_wine(u2k(u2h(hoe)));
+    u2_ve_sway(2, u2_ckb_flop(u2k(u2t(hoe))));
+    u2z(hoe);
+
+    //  trigger fail
+    u2_lo_bail(rec_u);
+    exit(1);
+  } 
+  else {
+    {
+      u2_noun sam = _reck_slop(rec_u, u2nc(u2nc(c3__atom, 0), 
+                                           u2k(rec_u->now)),
+                                      u2nc(c3__noun, ovo));
+      u2_noun gax = _reck_soft(rec_u, u2k(rec_u->rec), "poke", sam);
+      u2_noun hix, pux;
+
+      hix = _reck_slap(rec_u, u2k(gax), u2nc(c3__cnbc, 'p'));
+      pux = _reck_slap(rec_u, gax, u2nc(c3__cnbc, 'q'));
+
+      u2z(rec_u->rec);
+      rec_u->rec = pux; 
+
+      {
+        u2_noun hux = u2t(hix);
+
+        while ( u2_nul != hux ) {
+          _reck_kick(rec_u, u2k(u2h(hux)));
+          hux = u2t(hux);
+        }
+      }
+      u2z(hix);
+    }
+    u2_cm_done();
+  
+    u2_cm_purge();
+    if ( (u2_yes == u2_Flag_Garbage) || (u2_no == u2_wire_lan(u2_Wire)) ) {
+      u2_ve_grab(0);
+    }
+  }
+}
+
+/* u2_reck_work(): flush ova (unprotected).
 */
 void
 u2_reck_work(u2_reck* rec_u)
 {
+  while ( rec_u->ova.egg_u ) {
+    u2_cart* egg_u = rec_u->ova.egg_u;
+
+    u2_reck_poke(rec_u, egg_u->egg);
+
+    rec_u->ova.egg_u = egg_u->nex_u;
+    if ( 0 == rec_u->ova.egg_u ) {
+      c3_assert(egg_u == rec_u->ova.geg_u);
+      rec_u->ova.geg_u = 0;
+    }
+    free(egg_u);
+  }
 }
 
 /* u2_reck_plan(): queue ovum (external).
@@ -538,6 +631,22 @@ u2_reck_work(u2_reck* rec_u)
 void
 u2_reck_plan(u2_reck* rec_u,
              u2_noun  pax,
-             u2_noun  ovo)
+             u2_noun  fav)
 {
+  u2_cart* egg_u = malloc(sizeof(u2_cart));
+
+  egg_u->egg = u2nc(pax, fav);
+  egg_u->clr_f = 0;
+  egg_u->nex_u = 0;
+
+  if ( !rec_u->ova.egg_u ) {
+    c3_assert(0 == rec_u->ova.geg_u);
+
+    rec_u->ova.egg_u = rec_u->ova.geg_u = egg_u;
+  } else {
+    c3_assert(0 == rec_u->ova.geg_u->nex_u);
+
+    rec_u->ova.geg_u->nex_u = egg_u;
+    rec_u->ova.geg_u = egg_u;
+  }
 }

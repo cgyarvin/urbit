@@ -12,90 +12,114 @@
     !!
   ::
   ++  poke                                              ::  process move
-    |=  [who=(unit lord) pax=path hen=vein fav=card]
+    |=  [whu=(unit lord) pax=path hen=vein fav=card]
+    ~&  [%dill-poke fav]
     ^-  [p=(list move) q=_..^$]
     =^  yar  +> 
       ^-  [yard _+>]
       =+  yur=(~(get by wib) hen)
       ?~  yur
-        =+  yer=`yard`[& ?~(who ~ [u.who ~]) *blur *(map path hist)]
+        =+  ^=  yer  ^-  yard
+            :*  &
+                ?~(whu ~ [u.whu ~])
+                *blur
+                *(map path hist)
+            ==
         [yer +>.$(wib (~(put by wib) hen yer))]
       [u.yur +>.$]
-    =.  who  ?~(q.yar ~ [~ i.q.yar])
-    ?>  ?=(^ who)                                       ::  no login prompt yet
-    =<  =^  mos  yar  leap
-        [mos ..^$(wib (~(put by wib) hen yar))]
+    =.  whu  ?~(q.yar ~ [~ i.q.yar])
+    =|  mos=(list move) 
+    =<  yerk:leap
     |%
-    ++  back                                            ::  backspace
-      ^-  [p=(list blit) q=bled]
+    ++  back                                            ::  edit backspace
+      ^+  +>
       !!
+    ::
+    ++  curb                                            ::  send blits
+      |=  wab=(list blit)
+      +>(mos [[~ hen [%blit wab]] mos])
+    ::
+    ++  edit                                            ::  apply edit
+      |=  nud=bled
+      !!  
+    ::
+    ++  furl                                            ::  stop editing
+      ^+  .
+      !!
+    :: 
+    ++  grit                                            ::  source privilege
+      |-  ^-  ?(%gold %iron %lead)
+      ?~  hen
+        %lead
+      ?~  t.hen
+        ?:  ?=([%gold *] i.hen)  %gold
+        ?:  ?=([%iron *] i.hen)  %iron
+        %lead
+      $(hen t.hen)
     ::
     ++  haro                                            ::  horizontal arrow
       |=  ryt=?
-      ^-  [p=(list blit) q=bled]
+      ^+  +>
       !!
     ::
     ++  leap                                            ::  dispatch event
-      |-  ^-  [p=(list move) q=yard]
-      ?+  -.fav  [~ yar]
-        %bleb  (lick p.fav)
-        %logo  [~ yar(q ?>(?=(^ q.yar) t.q.yar))]
-        %logp  [~ yar(q [p.fav q.yar])]
-        %text  $(fav [%talk %leaf p.fav])
-        %talk  (talk p.fav)
-        %warn  (warn p.fav q.fav)
-      ==
-    ::
-    ++  lick
-      |=  beb=bleb
-      ^-  [p=(list move) q=yard]
-      ?~  q.r.yar
-        [[`move`[~ hen ~[%blit [%bel ~]]] ~] yar]
-      %-  push
-      ^-  [p=(list blit) q=bled]
-      ?-    -.beb
-          %aro
-        ?-  p.beb
-          %d  (varo &)
-          %l  (haro |)
-          %r  (haro &)
-          %u  (varo |)
+      |-  ^+  +
+      ?+    -.fav  +
+          %bleb
+        ?~  q.yar
+          (curb [[%bel ~] ~])
+        ?-    -.p.fav
+            %aro
+          ?-  p.p.fav
+            %d  (varo &)
+            %l  (haro |)
+            %r  (haro &)
+            %u  (varo |)
+          ==
+        ::
+            %bac  !!
+        ::
+            %ctl  !!
+        ::
+            %del  !!
+        ::
+            %ret  !!
+        ::
+            %txt  !!
+        ::
+            %win  !!
         ==
       ::
-          %bac  !!
-      ::
-          %ctl  !!
-      ::
-          %del  !!
-      ::
-          %ret  !!
-      ::
-          %txt  !!
-      ::
-          %win  !!
+          %logo  +(yar yar(q ?~(q.yar !! t.q.yar)))
+          %logp  +(yar yar(q ?>(=(%gold grit) [p.fav q.yar])))
+          %logn  +(yar yar(q [p.fav q.yar]))            ::  XX fake
+          %text  $(fav [%talk %leaf p.fav])
+          %talk  (talk p.fav)
+          %warn  (warn p.fav q.fav)
       ==
     ::
-    ++  push                                            ::  apply change
-      |=  [byz=(list blit) wum=bled]
-      ^-  [p=(list move) q=yard]
-      ?~  q.r.yar
-        !!
+    ++  prim
+      ^-  bled
       !!
     ::
-    ++  talk
+    ++  talk                                            ::  show output
       |=  tac=tank
-      ^-  [p=(list move) q=yard]
+      ^+  +>
       !!
     ::
-    ++  varo                                            ::  vertical arrow
+    ++  varo                                            ::  v-arrow edit
       |=  dow=?
-      ^-  [p=(list blit) q=bled]
+      ^+  +>  
       !! 
     ::
-    ++  warn
+    ++  warn                                            ::  show diagnostic
       |=  [veb=? tac=tank] 
-      ^-  [p=(list move) q=yard]
+      ^+  +>
       !!
+    ::
+    ++  yerk                                            ::  complete core
+      ^-  [p=(list move) q=_..^$]
+      [mos ..^$(wib (~(put by wib) hen yar))]
     --
   --
 --
