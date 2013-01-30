@@ -191,7 +191,6 @@ u2_lo_loop(u2_reck* rec_u)
     _lo_exit(rec_u);
     exit(1);
   }
-  u2_ve_sync();
 
   {
     struct ev_loop *lup_u = ev_default_loop(0);

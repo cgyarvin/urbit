@@ -149,10 +149,19 @@
         ::
             %del  beep                                  ::  delete
         ::
+            %met  beep                                  ::  meta
+        ::
             %ret                                        ::  return
           =+  jab=(rap 3 but.u.q.r.yar)
           ?:  =(%% jab)
-            $(q.r.yar ~, mos [[~ hen [%bbye ~]] mos])
+            %=    +.$
+                q.r.yar  ~
+                mos
+              :*  [~ hen [%bbye ~]]
+                  [~ hen [%blit [%mor ~] ~]]
+                  mos
+              ==
+            ==
           %=    +.$
               q.r.yar  ~
               s.yar

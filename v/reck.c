@@ -288,7 +288,7 @@ _reck_kick(u2_reck* rec_u, u2_noun ovo)
 
     case c3__bbye: 
     {
-      // u2_reck_sync(rec_u);
+      u2_reck_sync(rec_u);
       u2_reck_plan(rec_u, u2k(u2h(ovo)), u2nc(c3__helo, u2_nul));
 
       break;

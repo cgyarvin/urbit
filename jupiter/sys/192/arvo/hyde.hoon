@@ -72,14 +72,16 @@
 ++  bleb                                                ::  raw console input
           $%  [%aro p=?(%d %l %r %u)]                   ::  arrow key
               [%bac ~]                                  ::  true backspace
-              [%ctl p=@ud]                              ::  control
+              [%ctl p=@ud]                              ::  control-key
               [%del ~]                                  ::  true delete 
+              [%met p=@ud]                              ::  meta-key 
               [%ret ~]                                  ::  return
               [%txt p=tape]                             ::  text
           ==                                            ::  
 ++  blew  ,[p=@ud q=@ud]                                ::  columns rows
 ++  blit                                                ::  raw console output
           $%  [%bel ~]                                  ::  make a noise
+              [%clr ~]                                  ::  clear the screen
               [%hop p=@ud]                              ::  set cursor position
               [%lin p=tape]                             ::  set current line
               [%mor ~]                                  ::  newline

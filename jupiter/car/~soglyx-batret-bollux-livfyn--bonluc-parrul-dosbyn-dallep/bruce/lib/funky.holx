@@ -32,7 +32,7 @@
       (add prev result)
     $(count (dec count), prev result, result (add result prev))
   ==
-::
+:: 
 ++  tort
   |=  lim=(list ,@)
   ?:  =(~ lim)
