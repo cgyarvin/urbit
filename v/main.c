@@ -361,15 +361,15 @@ main(c3_i   argc,
     exit(0);
   }
 
+#if 1
+  u2_lo_loop(&u2_Host.rec_u[0]);
+#else
   if ( u2_no == u2_reck_launch(&u2_Host.rec_u[0]) ) {
     fprintf(stderr, "launch failed - exiting\n");
     exit(1);
   }
   u2_ve_sync();
 
-#if 0
-  u2_lo_loop(&u2_Host.rec_u[0]);
-#else
   Tecla = new_GetLine(16384, 4096);
   gl_io_mode(Tecla, GL_SERVER_MODE);
   {

@@ -144,7 +144,7 @@ u2_lo_call(u2_reck*        rec_u,
   {
     //  update time
     //
-    // u2_reck_time(rec_u);
+    u2_reck_time(rec_u);
 
     //  sync with filesystem (ugh)
     //
@@ -158,15 +158,13 @@ u2_lo_call(u2_reck*        rec_u,
 
     //  process output on this socket
     //
-#if 1
     if ( u2_yes == out ) {
       _lo_fuck(rec_u, wax_u, how);
     }
-#endif
+
     //  process actions
     //
     u2_reck_work(rec_u);
-   
   }
   _lo_poll(rec_u, lup_u);
   _lo_spin(rec_u, lup_u);
@@ -187,9 +185,16 @@ void
 u2_lo_loop(u2_reck* rec_u)
 {
   _lo_init(rec_u);
+
+  if ( u2_no == u2_reck_launch(rec_u) ) {
+    fprintf(stderr, "launch failed - exiting\r\n");
+    _lo_exit(rec_u);
+    exit(1);
+  }
+  u2_ve_sync();
+
   {
     struct ev_loop *lup_u = ev_default_loop(0);
-
 
     _lo_poll(rec_u, lup_u);
     _lo_spin(rec_u, lup_u);

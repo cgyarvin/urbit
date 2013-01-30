@@ -30,7 +30,7 @@
   --                                                      ::
 |%                                                        ::  functions
 ++  lunt                                                  ::  web framework
-  |=  :*  who=lord                                        ::  owner
+  |=  :*  who=flag                                        ::  owner
           ped=cron                                        ::  wake frequency
           rut=(list rout)                                 ::  routes to
           ras=rush                                        ::  server state

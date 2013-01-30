@@ -127,7 +127,7 @@
         } mir;
 
         struct {
-          c3_y syp_y[32];                   // special code buffer
+          c3_y syp_y[33];                   // special code buffer
           c3_w len_w;                       // special code length
         } acc;
       } u2_utat;
@@ -136,11 +136,11 @@
     */
       typedef struct {
         struct {
-          const c3_y* kcuu1_y;              //  key_up 
-          const c3_y* kcud1_y;              //  key_down
+          const c3_y* kcuu1_y;              //  key_up
+          const c3_y* kcud1_y;              //  key_down    
           const c3_y* kcub1_y;              //  key_back
           const c3_y* kcuf1_y;              //  key_forward
-          const c3_y* kbs_y;                //  backspace
+          c3_w        max_w;                //  maximum input sequence length
         } inn;
         struct {
           const c3_y* el_y;                 //  clr_bol clear to beginning 
@@ -480,6 +480,11 @@
                      u2_noun  pax,
                      u2_noun  fav);
 
+      /* u2_reck_plow(): queue ovum list in order (external).
+      */
+        void
+        u2_reck_plow(u2_reck* rec_u, u2_noun ova);
+
       /* u2_reck_work(): flush ova (unprotected).
       */
         void
@@ -693,13 +698,13 @@
 
     /**  Terminal, new style.
     **/
-      /* u2_term_ef_send(): send effect to to terminal.
+      /* u2_term_ef_blit(): send %blit effect to to terminal.
       */
         void
-        u2_term_ef_send(u2_reck* rec_u,
-                        c3_l     tid_l,
+        u2_term_ef_blit(u2_reck* rec_u,
+                        u2_noun  pox,
                         u2_noun  blt);
-
+  
       /* u2_term_io_init(): initialize terminal I/O.
       */
         void 

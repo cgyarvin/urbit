@@ -365,7 +365,7 @@
     ?:  =(0 a)
       b
     ?@  b
-      ~|('slag-fail' !!)
+      ~
     $(b t.b, a (dec a))
   ::
   ++  snag

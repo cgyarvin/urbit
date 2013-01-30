@@ -1,4 +1,4 @@
-::
+!:
 ::          %eyre, main loop.   This file is in the public domain.
 ::
 =<  |%
@@ -14,6 +14,9 @@
     ::
     ++  poke  
       |=  [now=@da ovo=*]
+      ?:  !=(ovo (ovum ovo))
+        ~&  [%bad-egg ovo]
+        !!
       =>  .(ovo ((hard ovum) ovo))
       ::  ~&  [%ovum ovo]
       ^-  [p=(list ovum) q=_+>]
@@ -24,18 +27,19 @@
 =>  |%
     ++  game
       $:  rav=_*alga                                        ::  PKI and net
-          deb=(map lord _*berg)                             ::  shell
+          deb=(map flag _*berg)                             ::  shell
           yac=_clay                                         ::  filesystem
-      ::  lyd=_dill                                         ::  terminal
+          lyd=_dill                                         ::  terminal
           ^=  eyre                                          ::  i/o
-        $:  gem=(map lord chum)                             ::  hashed passcodes
-            liv=(map lord (list vein))                      ::  live consoles
-            rev=(map vein lord)                             ::  identities
-            seh=(list ,[p=host q=lord])                     ::  http owners
+        $:  gem=(map flag chum)                             ::  hashed passcodes
+            liv=(map flag (list vein))                      ::  live consoles
+            rev=(map vein flag)                             ::  identities
+            seh=(list ,[p=host q=flag])                     ::  http owners
         ==
       == 
     --
 =+  sys=*game
+=.  lyd.sys  dill
 =.  rav.sys  $:alga
 =.  yac.sys  clay
 |%
@@ -72,10 +76,17 @@
       =+  yub=(drip:yac.sys now u.p.mov r.mov)
       :-  (turn p.yub |=(a=card [p.mov q.mov a]))
       sys(yac q.yub)
+    ::
+    ++  dyl
+      |=  [pex=path mov=move]
+      ^-  [(list move) game]
+      =+  yub=(poke:(lyd.sys now (shax now) |=(a=* !!)) p.mov pex q.mov r.mov)
+      :-  p.yub
+      sys(lyd q.yub)
     --
   ::
   ++  auth                                                  ::  match password
-    |=  [our=lord cof=chum]
+    |=  [our=flag cof=chum]
     ^-  ?
     =+  fup=(~(get by gem.eyre.sys) our)
     ?^  fup
@@ -84,7 +95,7 @@
     ?&(?=(^ gys) =(cof (shak our pac:ex:q:sen:u.gys)))
   ::
   ++  beck                                                  ::  namespace
-    |=  [our=lord hap=path]
+    |=  [our=flag hap=path]
     ^-  (unit)
     ::  ~&  [%beck our hap]
     ?.  ?=([@ @ @ *] hap)  ~
@@ -116,6 +127,7 @@
   ::
   ++  dear                                                  ::  global vision
     |=  [mol=@tas hap=path]
+    ~&  [%dear mol hap]
     ^-  (unit)
     ?+    mol  ~
         %eyre
@@ -157,10 +169,10 @@
       ==
     ==
   ::
-  ++  hope                                                  ::  lord from host
+  ++  hope                                                  ::  flag from host
     |=  hom=host
     =+  seh=seh.eyre.sys
-    |-  ^-  (unit lord)
+    |-  ^-  (unit flag)
     ?~  seh  ~
     ?:((hone hom p.i.seh) [~ q.i.seh] $(seh t.seh))
   ::
@@ -190,6 +202,11 @@
         (car:si pex [p.mov t.q.mov r.mov])
       $(mor (weld fez t.mor))
     ::
+        %dill
+      =^  fez  sys
+        (dyl:si pex [p.mov t.q.mov r.mov])
+      $(mor (weld fez t.mor))
+    ::
         %eyre
       =.  p.mov  ?^(p.mov p.mov (~(get by rev.eyre.sys) t.q.mov))
       =+  red=|=(a=card ^$(mor [[p.mov q.mov a] t.mor]))
@@ -197,17 +214,17 @@
       =+  giv=|.(^$(mor t.mor, out [[i.t.q.mov r.mov] out]))
       =+  mel=(grit t.q.mov)
       =+  ^=  lov
-          |=  a=lord 
+          |=  a=flag 
           ^$(mor t.mor, rev.eyre.sys (~(put by rev.eyre.sys) t.q.mov a))
       ?-    -.r.mov
-          %bbye  !!
+          %bbye  (giv)
           %bind
         ?>  =(%gold mel)
         %=    $
             mor  t.mor
             seh.eyre.sys
           :-  [q.r.mov p.r.mov]
-          (skip seh.eyre.sys |=([a=host b=lord] (hone q.r.mov a)))
+          (skip seh.eyre.sys |=([a=host b=flag] (hone q.r.mov a)))
         ::
             out
           :_  out
@@ -215,8 +232,9 @@
           [%talk %leaf "http: serving {<p.r.mov>} on {<q.r.mov>}"]
         ==
       ::
-          %bleb  !!
+          %bleb  (rer %dill)
           %blit  (giv)
+          %blew  (rer %dill) 
           %boot  !!
           %cash  (rer %arvo)
           %crap  (giv)
@@ -235,32 +253,29 @@
       ::
           %file  (rer %bede)
           %hear  (rer %arvo)
-          %helo  !!
+          %helo  (rer %dill)
           %init  
         %=  $
           out  [[i.t.q.mov r.mov] out]
-          mor  [[p.mov [[%cary ~] q.mov] r.mov] t.mor]
+          mor  [[[~ p.r.mov] [[%cary ~] q.mov] r.mov] t.mor]
         ==
       ::
           %junk  (rer %arvo)
           %kill  (rer %bede)
           %line  (rer %bede)
           %load  (giv) 
-          %logn 
-        ?>  !=(%lead mel)
-        ?>  (auth p.r.mov q.r.mov)
-        (lov p.r.mov)
-      ::
+          %logn  (rer %dill)
           %logo  (rer %dill)
-          %logp
-        ?>  =(%gold mel)
-        ~&  [%logp p.r.mov]
-        (lov p.r.mov)
-      ::
+          %logp  (rer %dill)
           %loot  (giv)
           %love  !!
           %make  (rer %arvo)
           %mine  (rer %bede)
+          %note
+        ?:  =(t.q.mov [/gold/sync/ ~])
+          $(mor [[p.mov [[%eyre ~] /gold/term/1/ ~] r.mov] t.mor])
+        (rer %dill)
+      ::
           %nuke  (rer %bede)
           %pace  !!
           %pour  (giv)
@@ -276,7 +291,7 @@
         $(mor [[whu [[%bede ~] q.mov] [%thee heq]] t.mor])
       ::
           %sync  !!
-          %talk  (giv) 
+          %talk  (rer %dill) 
           %tell  !!
           %text  (red [%talk %leaf p.r.mov])
           %that
@@ -317,7 +332,7 @@
           %thee  (rer %bede)
           %thou  !!
           %tory  !!
-          %warn  (giv) 
+          %warn  (rer %dill)
           %word  !!
       ==
     ==

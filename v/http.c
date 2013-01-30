@@ -126,25 +126,6 @@ _http_respond_body(u2_hreq *req_u,
 {
   if ( !(req_u->rub_u) ) {
     req_u->rub_u = req_u->bur_u = rub_u;
-
-    //  if this is the next request to be responded to,
-    //  tell the event layer we are ready to write
-    //
-    if ( req_u == req_u->hon_u->req_u ) {
-      u2_hcon* hon_u = req_u->hon_u;
-
-      // fprintf(stderr, "http: %d: writing ON\r\n", hon_u->wax_u.fd);
-
-      ev_io_stop(u2_Host.lup_u, &hon_u->wax_u);
-      ev_io_set(&hon_u->wax_u, hon_u->wax_u.fd, (EV_READ | EV_WRITE));
-      ev_io_start(u2_Host.lup_u, &hon_u->wax_u);
-    } 
-    else {
-      u2_hcon* hon_u = req_u->hon_u;
-
-      fprintf(stderr, "http: %d: out of order\r\n", hon_u->wax_u.fd);
-      fprintf(stderr, "req_u %p, ruc_u %p\r\n", req_u, req_u->hon_u->ruc_u);
-    }
   }
   else {
     req_u->bur_u->nex_u = rub_u;
@@ -661,7 +642,7 @@ u2_lo_init_http_conn(u2_http *htp_u, c3_i fid_i)
   hon_u = _http_conn_new(htp_u, fid_i);
 
   ev_io_init(&hon_u->wax_u, u2_lo_call_http_conn, fid_i, EV_READ);
-  ev_io_start(u2_Host.lup_u, &hon_u->wax_u);
+  // ev_io_start(u2_Host.lup_u, &hon_u->wax_u);
 
   return hon_u;
 }
@@ -1042,7 +1023,7 @@ u2_ve_http_start(c3_w por_w)
           return u2_no;
         }
       }
-      fprintf(stderr, "http: live on %d\n", por_w);
+      fprintf(stderr, "http: live on %d\r\n", por_w);
       break;
     }
     if ( listen(fid_i, 3) < 0 ) {
@@ -1217,7 +1198,7 @@ u2_http_io_poll(u2_reck*        rec_u,
               break;
             }
           }
-          fprintf(stderr, "http: live on %d\n", htp_u->por_w);
+          fprintf(stderr, "http: live on %d\r\n", htp_u->por_w);
           break;
         }
         if ( listen(fid_i, 3) < 0 ) {
@@ -1256,7 +1237,7 @@ u2_http_io_poll(u2_reck*        rec_u,
       while ( *hyn_u ) { 
         u2_hcon* hon_u = *hyn_u;
 
-        fprintf(stderr, "http_io_poll: hon_u %p\r\n", hon_u);
+        // fprintf(stderr, "http_io_poll: hon_u %p\r\n", hon_u);
         fflush(stdout);
 
         if ( u2_yes == hon_u->nuw ) {
@@ -1382,8 +1363,9 @@ u2_http_io_suck_lisn(u2_reck*      rec_u,
       perror("http: fcntl");
     }
     else {
-      // fprintf(stderr, "http: new connection %d\r\n", fid_i);
-      u2_lo_init_http_conn(htp_u, fid_i);
+      u2_hcon* hon_u = _http_conn_new(htp_u, fid_i);
+
+      ev_io_init(&hon_u->wax_u, u2_lo_call_http_conn, fid_i, EV_READ);
     }
   }
 }

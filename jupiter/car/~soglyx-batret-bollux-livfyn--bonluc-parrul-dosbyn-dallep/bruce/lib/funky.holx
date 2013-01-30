@@ -44,7 +44,7 @@
   ?~  min
     $(lim t.lim, min [~ i.lim])
   ?:  (lte i.lim u.min)
-    $(lim t.lim, min [~ i.lim], mor [u.min mor])
+    $(lim t.lim, min [~ i.lim])
   $(lim t.lim, mor [i.lim mor])
 ::
 ++  func1

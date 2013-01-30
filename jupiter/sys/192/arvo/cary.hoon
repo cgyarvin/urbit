@@ -1,4 +1,4 @@
-::
+!:
 ::          %cary, revision control.  This file is in the public domain.
 ::
 =>  |%
@@ -89,11 +89,17 @@
       ++  wane                                          ::  apply ukaz
         |=  [now=@da kuz=ukaz]
         ^-  arch
+        ::  ~&  [%wane-ukaz p.kuz `@tas`-.q.kuz]
+        |-  ^-  arch
         ?~  p.kuz
           =+  hux=?:(?=(& -.car) q.car 0)
           ?-  -.q.kuz
             %del  ?>(=(hux p.q.kuz) nope)
-            %set  ?>(=(hux q.q.kuz) [%& now p.q.kuz r.q.kuz])
+            %set  ?.  =(hux q.q.kuz)
+                    ~&  [%miss-hux hux]
+                    ~&  [%miss-uke kuz]
+                    !!
+                  ?>(=(hux q.q.kuz) [%& now p.q.kuz r.q.kuz])
           ==
         ?>  ?=(| -.car)
         =+  yit=(~(get by q.car) i.p.kuz)
@@ -125,14 +131,14 @@
   =+  rof=*roof
   |%
   ++  blip
-    |=  [who=lord por=@tas]
+    |=  [who=flag por=@tas]
     ^-  (unit desk)
     =+  yar=(~(get by rof) who)
     ?~  yar  ~
     (~(get by dos.u.yar) por)
   ::
   ++  drip
-    |=  [now=@da who=lord fav=card]
+    |=  [now=@da who=flag fav=card]
     ^-  [p=(list card) q=_+>]
     ?+    -.fav  !! 
         %edit
@@ -148,8 +154,8 @@
             r.fav
           |=  uke=ukaz  ^-  card
           =+  qua=~(ram re (dish:ut [~ %path] p.uke))
-          =+  qui=:_(~ ?-(-.q.uke %del '-', %set ?:(=(0 q.q.uke) '+' ':')))
-          [%talk %leaf "{qui} {one}/{two}/cx/{tre}{qua}"]
+          =+  qui=?-(-.q.uke %del '-', %set ?:(=(0 q.q.uke) '+' ':'))
+          [%note qui %leaf "{one}/{two}/cx/{tre}{qua}"]
       %_    +>.$
           rof
         %+  ~(put by rof)
@@ -217,7 +223,7 @@
       $(lot [%% %ud u.lov])
     ==
   ++  scry
-    |=  [ren=lens who=lord lot=coin tyl=path]
+    |=  [ren=lens who=flag lot=coin tyl=path]
     ::  ~&  [%scry ren who lot tyl]
     ^-  (unit)
     ?~  tyl  ~

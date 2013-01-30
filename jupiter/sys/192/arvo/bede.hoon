@@ -3,7 +3,7 @@
 ::
 |%
 ++  berg                                                ::  repl/shell
-  |=  who=lord                                          ::  per identity
+  |=  who=flag                                          ::  per identity
   =+  nub=`vase`!>(+>)                                  ::  system + libraries
   =+  :*  ^=  vax                                       ::  chestnut vases
             :*  sot=(slap nub (vice 'slot'))            ::
@@ -207,7 +207,7 @@
         htap
         ;~  plug
           %+  cook
-            |=(a=lord ~(rent co ~ %p a))
+            |=(a=flag ~(rent co ~ %p a))
           ;~(pose ;~(pfix sig fed:ag) (easy who))
         ::
           %+  cook
@@ -415,7 +415,7 @@
           duz
         :_  duz
         :+  [~ who]  hen 
-        [%warn | %leaf "<syntax error at [{p.duf} {q.duf}]>"]
+        [%warn "<syntax error at [{p.duf} {q.duf}]>"]
       ==
     ::
     ++  nave                                            ::  resolve

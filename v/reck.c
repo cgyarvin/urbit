@@ -286,6 +286,18 @@ _reck_kick(u2_reck* rec_u, u2_noun ovo)
       u2_err(u2_Wire, "unsupported", u2h(pay));
     } break;
 
+    case c3__bbye: 
+    {
+      // u2_reck_sync(rec_u);
+      u2_reck_plan(rec_u, u2k(u2h(ovo)), u2nc(c3__helo, u2_nul));
+
+      break;
+    } 
+    case c3__blit: p_pay = u2t(pay);
+    {
+      u2_term_ef_blit(rec_u, u2k(u2h(ovo)), u2k(p_pay));
+      break;
+    }
     case c3__crap: p_pay = u2t(pay);
     {
       u2_ve_sway(2, u2_ckb_flop(u2k(p_pay)));
@@ -355,25 +367,13 @@ _reck_poke(u2_reck* rec_u, u2_noun ovo)
   u2z(hix);
 }
 
-/* _reck_pook(): multiple poke.
-*/
-static void
-_reck_pook(u2_reck* rec_u, u2_noun ova)
-{
-  u2_noun ovi = ova;
-
-  while ( u2_nul != ovi ) {
-    _reck_poke(rec_u, u2k(u2h(ovi)));
-    ovi = u2t(ovi);
-  } 
-  u2z(ova);
-}
-
 /* _reck_launch_toy(): launch a new reck engine, with toy parms.
 */
 static void
 _reck_launch_toy(u2_reck* rec_u, u2_noun pax)
 {
+  //  This is our ONLY remaining off-queue poke.
+  //
   _reck_poke
     (rec_u, 
 //     u2nc(pax, u2nq(c3__make, c3_s4('z','u','s','e'), 256, u2k(rec_u->now))));
@@ -399,7 +399,7 @@ _reck_launch_toy(u2_reck* rec_u, u2_noun pax)
 void
 u2_reck_sync(u2_reck* rec_u)
 {
-  _reck_pook(rec_u, u2_sync_reck(rec_u));
+  u2_reck_plow(rec_u, u2_sync_reck(rec_u));
 }
 
 /* u2_reck_boot(): boot the reck engine (unprotected).
@@ -457,7 +457,7 @@ u2_reck_launch(u2_reck* rec_u)
   } 
   else {
     {
-      u2_noun pax = u2nq(c3__gold, c3__term, '0', u2_nul);
+      u2_noun pax = u2nq(c3__gold, c3__term, '1', u2_nul);
       _reck_launch_toy(rec_u, pax);
     }
     u2_cm_done();
@@ -478,37 +478,7 @@ u2_reck_launch(u2_reck* rec_u)
 void
 u2_reck_http_request(u2_reck* rec_u, u2_bean sec, u2_noun pox, u2_noun req)
 {
-  u2_noun hoe;
-
-  u2_reck_time(rec_u);
-
-  u2_cm_trip();
-  if ( 0 != (hoe = u2_cm_trap()) ) {
-    u2_cm_purge();
-    u2_ve_grab(hoe, 0);
-
-    u2_ve_wine(u2k(u2h(hoe)));
-    u2_ve_sway(2, u2_ckb_flop(u2k(u2t(hoe))));
-    u2z(hoe);
-  } 
-  else {
-    _reck_poke(rec_u, u2nt(pox, (sec == u2_yes) ? c3__this : c3__thin, req));
-    u2_cm_done();
-  
-    u2_cm_purge();
-    if ( (u2_yes == u2_Flag_Garbage) || (u2_no == u2_wire_lan(u2_Wire)) ) {
-      u2_ve_grab(0);
-    }
-  }
-  u2_cm_chin();
-}
-
-/* u2_reck_http_respond(): apply http response.
-*/
-void
-u2_reck_http_respond(u2_reck* rec_u, u2_noun pox, u2_noun rep)
-{
-  u2z(pox); u2z(rep);
+  u2_reck_plan(rec_u, pox, u2nc((sec == u2_yes) ? c3__this : c3__thin, req));
 }
 
 /* u2_reck_line(): apply a reck line (protected).
@@ -555,10 +525,10 @@ u2_reck_prick(u2_reck* rec_u, u2_noun hap)
   return que;
 }
 
-/* u2_reck_poke(): insert an input ovum (protected).
+/* _reck_pork(): insert an input ovum (unprotected).
 */
-void
-u2_reck_poke(u2_reck* rec_u, u2_noun ovo)
+static void
+_reck_pork(u2_reck* rec_u, u2_noun ovo)
 {
   u2_noun hoe;
 
@@ -615,7 +585,7 @@ u2_reck_work(u2_reck* rec_u)
   while ( rec_u->ova.egg_u ) {
     u2_cart* egg_u = rec_u->ova.egg_u;
 
-    u2_reck_poke(rec_u, egg_u->egg);
+    _reck_pork(rec_u, egg_u->egg);
 
     rec_u->ova.egg_u = egg_u->nex_u;
     if ( 0 == rec_u->ova.egg_u ) {
@@ -649,4 +619,20 @@ u2_reck_plan(u2_reck* rec_u,
     rec_u->ova.geg_u->nex_u = egg_u;
     rec_u->ova.geg_u = egg_u;
   }
+}
+
+/* u2_reck_plow(): queue multiple ova (external).
+*/
+void
+u2_reck_plow(u2_reck* rec_u, u2_noun ova)
+{
+  u2_noun ovi = ova;
+
+  while ( u2_nul != ovi ) {
+    u2_noun ovo=u2h(ovi);
+
+    u2_reck_plan(rec_u, u2k(u2h(ovo)), u2k(u2t(ovo)));
+    ovi = u2t(ovi);
+  } 
+  u2z(ova);
 }

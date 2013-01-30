@@ -62,6 +62,7 @@ u2_ve_dump_wall(u2_noun wol)
 
   while ( u2_nul != wal ) {
     u2_ve_dump_tape(u2_ct(u2h(wal)));
+    putchar(13);
     putchar(10);
 
     wal = u2t(wal);

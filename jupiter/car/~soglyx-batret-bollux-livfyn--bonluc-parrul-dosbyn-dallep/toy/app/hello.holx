@@ -1,4 +1,4 @@
-|=  [who=lord est=time eny=@ hom=path]
+|=  [who=flag est=time eny=@ hom=path]
 |=  [bis=(set ,@tas) opt=(map ,@tas ,*)]
 |=  [planet=@ta ~]
 :-  :~  [%talk %leaf "hello, {(rip 3 planet)}."]
