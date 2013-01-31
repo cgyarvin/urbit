@@ -117,7 +117,7 @@
               %weak                                     ::  rejected
           ==                                            ::
 ++  card                                                ::  event
-          $%  [%bbye ~]                                 ::  log out
+          $%  [%bbye ~]                                 ::  end prompt
               [%bind p=flag q=host]                     ::  bind http server
               [%bleb p=bleb]                            ::  terminal input
               [%blew p=blew]                            ::  terminal config
@@ -128,6 +128,7 @@
               [%dire p=@tas q=dram]                     ::  apply directory
               [%dump p=(list ,@t)]                      ::  raw text lines
               [%edit p=@p q=@tas r=(list ukaz)]         ::  commit edits
+              [%exit ~]                                 ::  logical exit
               [%file p=@tas q=@]                        ::  apply atomic file
               [%hear p=@]                               ::  receive packet
               [%helo ~]                                 ::  trigger prompt

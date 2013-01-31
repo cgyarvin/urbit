@@ -305,13 +305,16 @@ _reck_kick(u2_reck* rec_u, u2_noun ovo)
       u2_ve_sway(2, u2_ckb_flop(u2k(p_pay)));
       printf("<<<exit>>>\n");
     } break;
-
+    case c3__exit:
+    {
+      u2_lo_bail(rec_u);
+      exit(0);
+    } break;
     case c3__init: p_pay = u2t(pay);
     {
       rec_u->own = u2nc(u2k(p_pay), rec_u->own);
       break;
     }
-
     case c3__talk: p_pay = u2t(pay);
     {
       u2_ve_tank(0, u2k(p_pay));

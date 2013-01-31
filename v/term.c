@@ -66,6 +66,7 @@ u2_term_io_init(u2_reck* rec_u)
     _utfo(inn, kcub1);
     _utfo(inn, kcuf1);
 
+    _utfo(out, clear);
     _utfo(out, el);
     _utfo(out, el1);
     _utfo(out, bel);
@@ -314,6 +315,7 @@ _term_it_queue_str(u2_utty*    uty_u,
   _term_it_queue_txt(uty_u, (const c3_y*) str_c);
 }
 
+#if 0
 /* _term_it_queue_strnum(): queue string with terminal parameter, retaining.
 */
 static void
@@ -325,6 +327,7 @@ _term_it_queue_strnum(u2_utty* uty_u, const c3_c* str_c, c3_w num_w)
   _term_it_queue_str(uty_u, str_c);
   _term_it_queue_str(uty_u, buf_c);
 }
+#endif
 
 /* _term_it_show_wide(): show wide text, retaining.
 */
@@ -349,6 +352,15 @@ _term_it_show_clear(u2_utty* uty_u)
 {
   _term_it_queue_str(uty_u, "\r");
   _term_it_queue_txt(uty_u, uty_u->ufo_u.out.el_y);
+  uty_u->tat_u.mir.cus_w = 0;
+}
+
+/* _term_it_show_blank(): blank the screen.
+*/
+static void
+_term_it_show_blank(u2_utty* uty_u)
+{
+  _term_it_queue_txt(uty_u, uty_u->ufo_u.out.clear_y);
   uty_u->tat_u.mir.cus_w = 0;
 }
 
@@ -487,7 +499,7 @@ _term_io_suck_char(u2_reck* rec_u,
       _term_io_bleb(rec_u, uty_u, u2nc(c3__ret, u2_nul));
     }
     else if ( cay_y <= 26 ) {
-      _term_io_bleb(rec_u, uty_u, u2nc(c3__ctl, cay_y));
+      _term_io_bleb(rec_u, uty_u, u2nc(c3__ctl, ('a' + (cay_y - 1))));
     }
     else if ( 27 == cay_y ) {
       tat_u->esc.ape = u2_yes;
@@ -584,9 +596,13 @@ _term_ef_blit(u2_reck* rec_u,
               u2_noun  blt)
 {
   switch ( u2h(blt) ) {
-    default: c3_assert(!"term: bad blit"); return;
+    default: break;
     case c3__bel: {
       _term_it_queue_txt(uty_u, uty_u->ufo_u.out.bel_y);
+    } break;
+    case c3__clr: {
+      _term_it_show_blank(uty_u);
+      _term_it_refresh_line(rec_u, uty_u);
     } break;
     case c3__hop: {
       _term_it_show_cursor(uty_u, u2t(blt)); 

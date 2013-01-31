@@ -135,7 +135,22 @@
             (slag bus.u.q.r.yar but.u.q.r.yar)
           ==
         ::
-            %ctl  beep                                  ::  control
+            %ctl                                        ::  control
+          ?+    p.p.fav
+              beep
+              'a'  (edit u.q.r.yar(bus 0))
+              'b'  $(fav [%bleb %aro %l])
+              'd'  ?:  ?&  =(0 bul.u.q.r.yar)
+                           =(0 bus.u.q.r.yar)
+                       ==
+                     $(fav [%logo ~])
+                   $(fav [%bleb %del ~])
+              'e'  (edit u.q.r.yar(bus bul.u.q.r.yar))
+              'f'  $(fav [%bleb %aro %r])
+              'l'  +.$(mos :_(mos [~ hen %blit [[%clr ~] ~]])) 
+              'n'  $(fav [%bleb %aro %d])
+              'p'  $(fav [%bleb %aro %u])
+          ==
         ::
             %del  beep                                  ::  delete
         ::
@@ -205,7 +220,8 @@
       ::
           %logo                                         ::  logout
         =.  mos  :_(mos [~ hen [%bbye ~]])
-        ?~  q.yar  +.$
+        ?:  |(?=(~ q.yar) ?=(~ t.q.yar))
+          +.$(mos [[~ hen [%exit ~]] mos])
         %=  $
           fav    =+  mas=~(rend co ~ %p u.whu)
                  [%warn "bye, {mas}"]

@@ -163,6 +163,7 @@
 #   define c3__clms   c3_s4('c','l','m','s')
 #   define c3__clsg   c3_s4('c','l','s','g')
 #   define c3__clsp   c3_s4('c','l','s','p')
+#   define c3__clr    c3_s3('c','l','r')
 #   define c3__cltr   c3_s4('c','l','t','r')
 #   define c3__cnbc   c3_s4('c','n','b','c')
 #   define c3__cnbr   c3_s4('c','n','b','r')

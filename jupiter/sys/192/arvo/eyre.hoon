@@ -251,6 +251,7 @@
           r.mov
         ==
       ::
+          %exit  (giv)
           %file  (rer %bede)
           %hear  (rer %ames)
           %helo  (rer %dill)

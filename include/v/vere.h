@@ -149,6 +149,7 @@
           c3_w        max_w;                //  maximum input sequence length
         } inn;
         struct {
+          const c3_y* clear_y;              //  clear_screen
           const c3_y* el_y;                 //  clr_bol clear to beginning 
           const c3_y* el1_y;                //  clr_eol clear to end
           const c3_y* bel_y;                //  bel sound bell
