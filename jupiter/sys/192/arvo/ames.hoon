@@ -1,5 +1,5 @@
 !:
-::          %arvo, networking.  This file is in the public domain.
+::          %ames, networking.  This file is in the public domain.
 ::
 =>  |%
     ++  clan                                            ::  flag to rank

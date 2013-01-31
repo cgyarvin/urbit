@@ -60,6 +60,7 @@ u2_ve_dump_wall(u2_noun wol)
 {
   u2_noun wal = wol;
 
+  u2_term_io_hija();
   while ( u2_nul != wal ) {
     u2_ve_dump_tape(u2_ct(u2h(wal)));
     putchar(13);
@@ -67,6 +68,7 @@ u2_ve_dump_wall(u2_noun wol)
 
     wal = u2t(wal);
   }
+  u2_term_io_loja(0);
   u2z(wol);
 }
 

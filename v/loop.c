@@ -134,10 +134,10 @@ u2_lo_call(u2_reck*        rec_u,
 
 #if 0
   {
-    fprintf(stderr, "call %s inn %s out %s\n", 
-        _lo_how(how),
-        (inn == u2_yes) ? "yes" : "no",
-        (out == u2_yes) ? "yes" : "no");
+    uL(fprintf(uH, "call %s inn %s out %s\n", 
+                      _lo_how(how), 
+                      (inn == u2_yes) ? "yes" : "no", 
+                      (out == u2_yes) ? "yes" : "no"));
   }
 #endif
 

@@ -108,7 +108,7 @@
     ?.  ?=([~ %% %tas @] hyr)  ~
     =+  [pef=(end 3 1 q.p.u.hyr) rem=(rsh 3 1 q.p.u.hyr)]
     ?+    pef  ~
-        %a                                                  ::  arvo
+        %a                                                  ::  ames
       ?.  =(0 rem)  ~
       ?+    ved  ~
           [~ %% %ud @]
@@ -187,7 +187,7 @@
     ?>  ?=(^ i.q.mov)         ::  at least prefix
     =+  pex=t.i.q.mov
     ?+    i.i.q.mov  ~&([%howl-no i.i.q.mov] !!)
-        %arvo
+        %ames
       =^  fez  sys
         (arv:si pex [p.mov t.q.mov r.mov])
       $(mor (weld fez t.mor))
@@ -236,7 +236,7 @@
           %blit  (giv)
           %blew  (rer %dill) 
           %boot  !!
-          %cash  (rer %arvo)
+          %cash  (rer %ames)
           %crap  (giv)
           %dire  (rer %bede)
           %dump  (giv)
@@ -252,7 +252,7 @@
         ==
       ::
           %file  (rer %bede)
-          %hear  (rer %arvo)
+          %hear  (rer %ames)
           %helo  (rer %dill)
           %init  
         %=  $
@@ -260,7 +260,7 @@
           mor  [[[~ p.r.mov] [[%cary ~] q.mov] r.mov] t.mor]
         ==
       ::
-          %junk  (rer %arvo)
+          %junk  (rer %ames)
           %kill  (rer %bede)
           %line  (rer %bede)
           %load  (giv) 
@@ -269,7 +269,7 @@
           %logp  (rer %dill)
           %loot  (giv)
           %love  !!
-          %make  (rer %arvo)
+          %make  (rer %ames)
           %mine  (rer %bede)
           %note
         ?:  =(t.q.mov [/gold/sync/ ~])

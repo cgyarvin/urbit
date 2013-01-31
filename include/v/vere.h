@@ -745,6 +745,23 @@
         u2_term_io_fuck(u2_reck*      rec_u,
                         struct ev_io* wax_u);
 
+      /* u2_term_io_hija(): hijack console for cooked print.
+      */
+        FILE*
+        u2_term_io_hija(void);
+
+      /* u2_term_io_loja(): release console from cooked print.
+      */
+        void
+        u2_term_io_loja(int x);
+
+      /* uL, uH: wrap hijack/lojack around fprintf.
+      **
+      **  uL(fprintf(uH, ...));
+      */
+#       define uH    u2_term_io_hija()
+#       define uL(x) u2_term_io_loja(x)
+
 
     /**  HTTP, new style.
     **/

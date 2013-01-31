@@ -171,10 +171,10 @@ u2_term_io_init(u2_reck* rec_u)
   //
   {
     if ( 0 != tcsetattr(uty_u->wax_u.fd, TCSADRAIN, &uty_u->raw_u) ) {
-      c3_assert(!"spin-tcsetattr");
+      c3_assert(!"init-tcsetattr");
     }
     if ( -1 == fcntl(uty_u->wax_u.fd, F_SETFL, uty_u->nob_i) ) {
-      c3_assert(!"spin-fcntl");
+      c3_assert(!"init-fcntl");
     }
   }
 }
@@ -418,7 +418,7 @@ _term_io_suck_char(u2_reck* rec_u,
     }
     else {
       if ( cay_y <= 26 ) {
-        _term_io_bleb(rec_u, uty_u, u2nt(c3__ctl, cay_y, u2_nul));
+        _term_io_bleb(rec_u, uty_u, u2nc(c3__ctl, cay_y));
       } else {
         _term_it_queue_txt(uty_u, uty_u->ufo_u.out.bel_y);
       }
@@ -596,6 +596,21 @@ _term_ud(u2_noun txt, c3_l* tid_l)
   }
 }
 
+/* _term_main(): return main or console terminal.
+*/
+static u2_utty*
+_term_main()
+{
+  u2_utty* uty_u;
+
+  for ( uty_u = u2_Host.uty_u; uty_u; uty_u = uty_u->nex_u ) {
+    if ( uty_u->wax_u.fd <= 2 ) {
+      return uty_u;
+    }
+  }
+  return u2_Host.uty_u;
+}
+
 /* u2_term_ef_blit(): send %blit effect to to terminal.
 */
 void
@@ -615,24 +630,61 @@ u2_term_ef_blit(u2_reck* rec_u,
        (u2_nul == s_pox) )
   { } 
   else {
-    if ( 0 == u2_Host.uty_u ) {
-      //  Discard console if no terminal.
-      //
-      u2z(pox); u2z(blt); return;
-    } else {
-      u2_utty* uty_u;
-
-      for ( uty_u = u2_Host.uty_u; uty_u; uty_u = uty_u->nex_u ) {
-        if ( uty_u->wax_u.fd <= 2 ) {
-          tid_l = uty_u->tid_l;
-          break;
-        }
-      }
-      if ( !uty_u ) {
-        tid_l = u2_Host.uty_u->tid_l;
-      }
-    }
+    tid_l = _term_main()->tid_l;
   }
 
   return _term_ef_blits(rec_u, tid_l, blt);
 } 
+
+/* u2_term_io_hija(): hijack console for fprintf, returning FILE*.
+*/
+FILE*
+u2_term_io_hija(void)
+{
+  u2_utty* uty_u = _term_main();
+
+  c3_assert(uty_u);
+  if ( uty_u->wax_u.fd > 2 ) {
+    //  We *should* in fact, produce some kind of fake FILE* for
+    //  non-console terminals.  If we use this interface enough...
+    //
+    c3_assert(0);    
+  }
+  else {
+    if ( 0 != tcsetattr(uty_u->wax_u.fd, TCSADRAIN, &uty_u->bak_u) ) {
+      c3_assert(!"hija-tcsetattr");
+    }
+    if ( -1 == fcntl(uty_u->wax_u.fd, F_SETFL, uty_u->cug_i) ) {
+      c3_assert(!"hija-fcntl");
+    }
+    write(uty_u->wax_u.fd, "\r", 1);
+    write(uty_u->wax_u.fd, uty_u->ufo_u.out.el_y,
+                           strlen((c3_c*) uty_u->ufo_u.out.el_y));
+    return stdout;
+  }
+}
+
+/* u2_term_io_loja(): release console from fprintf.
+*/
+void
+u2_term_io_loja(int x)
+{
+  u2_utty* uty_u = _term_main();
+
+  c3_assert(uty_u);
+  if ( uty_u->wax_u.fd > 2 ) {
+    //  We *should* in fact, produce some kind of fake FILE* for
+    //  non-console terminals.  If we use this interface enough...
+    //
+    c3_assert(0);    
+  }
+  else {
+    if ( 0 != tcsetattr(uty_u->wax_u.fd, TCSADRAIN, &uty_u->raw_u) ) {
+      c3_assert(!"loja-tcsetattr");
+    }
+    if ( -1 == fcntl(uty_u->wax_u.fd, F_SETFL, uty_u->nob_i) ) {
+      c3_assert(!"loja-fcntl");
+    }
+    _term_it_show_line(uty_u, (c3_y*)strdup((c3_c*)uty_u->tat_u.mir.lin_y));
+  }
+}

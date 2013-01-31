@@ -1086,8 +1086,6 @@ u2_http_io_init(u2_reck* rec_u)
   htp_u->nuw = u2_yes;
   htp_u->ded = u2_no;
  
-  fprintf(stderr, "http_io_init\r\n");
-
   htp_u->hon_u = 0;
   htp_u->nex_u = 0;
 

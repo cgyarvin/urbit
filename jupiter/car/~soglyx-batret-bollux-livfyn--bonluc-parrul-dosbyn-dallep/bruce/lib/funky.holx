@@ -10,7 +10,7 @@
     *  (add $(num (dec num)) $(num (dec (dec num))))
   ==
 
-++ fib-func
+++  fib-func
   |= [num=@ count=@ prev=@ result=@]
   ~& [%fib-func num count result]
   ?- count

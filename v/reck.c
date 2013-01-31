@@ -250,8 +250,8 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
 
       rec_u->toy.sham = _reck_gate(rec_u, u2k(zen), "sham");
 
-      // printf("arvo:\n");
-      xan = _reck_load_temp(rec_u, zen, kno_w, "arvo/arvo.hoon");
+      // printf("ames:\n");
+      xan = _reck_load_temp(rec_u, zen, kno_w, "arvo/ames.hoon");
 
       // printf("bede:\n");
       wol = _reck_load_temp(rec_u, xan, kno_w, "arvo/bede.hoon");
