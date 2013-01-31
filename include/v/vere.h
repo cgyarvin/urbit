@@ -121,15 +121,21 @@
     */
       typedef struct {
         struct {
-          c3_y* lin_y;                      // current line
+          c3_w* lin_w;                      // current line (utf32)
           c3_w  len_w;                      // length of current line
           c3_w  cus_w;                      // cursor position
         } mir;
 
+        struct {                            // escape code control
+          u2_bean ape;                      // escape received 
+          u2_bean bra;                      // bracket or O received
+        } esc;
+
         struct {
-          c3_y syp_y[33];                   // special code buffer
-          c3_w len_w;                       // special code length
-        } acc;
+          c3_y syb_y[5];                    // utf8 code buffer
+          c3_w len_w;                       // present length
+          c3_w wid_w;                       // total width
+        } fut;
       } u2_utat;
 
     /* u2_utfo: unix terminfo strings.
@@ -234,6 +240,8 @@
           u2_noun slop;                   //  cell ([vase vase] -> vase)
           u2_noun slay;                   //  text to coin
           u2_noun scot;                   //  mole to text
+          u2_noun turf;                   //  utf8 to utf32
+          u2_noun tuft;                   //  utf32 to utf8
         } toy;
 
         u2_noun now;                      //  current time, as noun

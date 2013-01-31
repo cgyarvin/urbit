@@ -582,6 +582,7 @@
 #   define c3__memo   c3_s4('m','e','m','o')
 #   define c3__menu   c3_s4('m','e','n','u')
 #   define c3__mesh   c3_s4('m','e','s','h')
+#   define c3__met    c3_s3('m','e','t')
 #   define c3__meta   c3_s4('m','e','t','a')
 #   define c3__mill   c3_s4('m','i','l','l')
 #   define c3__mine   c3_s4('m','i','n','e')

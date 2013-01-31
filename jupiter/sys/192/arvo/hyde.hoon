@@ -47,12 +47,12 @@
 ++  bead                                                ::  terminal control
           $:  $:  bul=@ud                               ::  buffer length
                   bus=@ud                               ::  cursor in buffer
-                  but=tape                              ::  buffer text 
+                  but=(list ,@c)                        ::  buffer text 
                   buy=?(%code %lark %text %word)        ::  input style
               ==                                        ::
               $:  hiz=@ud                               ::  history depth
                   hux=path                              ::  history path
-                  hym=(map ,@ud tape)                   ::  history overlay
+                  hym=(map ,@ud (list ,@c))             ::  history overlay
                   hyt=hist                              ::  history object
               ==                                        ::
               $:  pol=@ud                               ::  length of prompt
@@ -76,14 +76,14 @@
               [%del ~]                                  ::  true delete 
               [%met p=@ud]                              ::  meta-key 
               [%ret ~]                                  ::  return
-              [%txt p=tape]                             ::  text
+              [%txt p=(list ,@c)]                       ::  utf32 text
           ==                                            ::  
 ++  blew  ,[p=@ud q=@ud]                                ::  columns rows
 ++  blit                                                ::  raw console output
           $%  [%bel ~]                                  ::  make a noise
               [%clr ~]                                  ::  clear the screen
               [%hop p=@ud]                              ::  set cursor position
-              [%lin p=tape]                             ::  set current line
+              [%lin p=(list ,@c)]                       ::  set current line
               [%mor ~]                                  ::  newline
           ==                                            ::
 ++  blur  ,[p=@ud q=(unit bead)]                        ::  columns, prompt

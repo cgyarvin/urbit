@@ -2,7 +2,7 @@
 ::          %dill, terminal handling.  This file is in the public domain.
 ::
 |%                                                      
-++  dill                                                ::  revision control
+++  dill                                                ::  terminal handling
   =|  wib=(map vein yard)                               ::  state by terminal
   |=  [now=@da eny=@ sky=||(* (unit))]                  ::  current invocation
   |%                                                    ::  poke/peek pattern
@@ -44,7 +44,7 @@
       =.  q.r.yar  [~ bed]
       %-  curb
       :~  [%hop (add pol.bed bus.bed)]
-          [%lin (weld pot.bed but.bed)]
+          [%lin (weld `(list ,@)`pot.bed but.bed)]
       ==
     ::
     ++  fume                                            ::  print tank, prefix
@@ -65,17 +65,17 @@
         %-  flop
         |-  ^-  (list blit)
         ?~  wol  ~
-        [[%lin i.wol] [%mor ~] $(wol t.wol)]
+        [[%lin (tuba i.wol)] [%mor ~] $(wol t.wol)]
       ?~  q.r.yar  +>
       (edit(q.r.yar ~) u.q.r.yar)
     ::
     ++  gore                                            ::  move in history
       |=  hup=@ud
       ^+  +>
-      =+  ^=  but  ^-  tape
+      =+  ^=  but  ^-  (list ,@c)
           =+  byt=(~(get by hym.u.q.r.yar) hup)
           ?^  byt  u.byt
-          (rip 3 (snag hup q.hyt.u.q.r.yar))
+          (tuba (rip 3 (snag hup q.hyt.u.q.r.yar)))
       =+  bul=(lent but)
       %-  edit
       %=  u.q.r.yar
@@ -88,16 +88,6 @@
         but  but
       ==
     :: 
-    ++  grit                                            ::  source privilege
-      |-  ^-  ?(%gold %iron %lead)
-      ?~  hen
-        %lead
-      ?~  t.hen
-        ?:  ?=([%gold *] i.hen)  %gold
-        ?:  ?=([%iron *] i.hen)  %iron
-        %lead
-      $(hen t.hen)
-    ::
     ++  leap                                            ::  terminal event
       |-  ^+  +
       ?+    -.fav  !!
@@ -152,7 +142,7 @@
             %met  beep                                  ::  meta
         ::
             %ret                                        ::  return
-          =+  jab=(rap 3 but.u.q.r.yar)
+          =+  jab=(rap 3 (tufa but.u.q.r.yar))
           ?:  =(%% jab)
             %=    +.$
                 q.r.yar  ~
@@ -223,11 +213,11 @@
         ==
       ::
           %logp                                         ::  trusted login
-        ?>  =(%gold grit)
+        ?>  =(%gold (adit hen))
         %=  $
-          fav   =+  mas=~(rend co ~ %p p.fav)
-                [%warn "hi, {mas}"]
-          q.yar  ?>(=(%gold grit) [p.fav q.yar])
+          fav    =+  mas=~(rend co ~ %p p.fav)
+                 [%warn "hi, {mas}"]
+          q.yar  [p.fav q.yar]
           mos    :_(mos [~ hen [%bbye ~]])
         ==
       ::

@@ -1923,7 +1923,7 @@
     ?:  =(0 b)
       ?>(=(0 a) 0)
     ?>  |((gte b 32) =(10 b))
-    ?:((lte b 127) 1 ?:((lte b 223) 2 ?:((lth b 239) 3 4)))
+    ?:((lte b 127) 1 ?:((lte b 223) 2 ?:((lte b 239) 3 4)))
   ::
   ++  turf                            ::  utf8 to utf32
     |=  a=@t
@@ -1943,6 +1943,17 @@
           ==
         |=([p=@ q=@] [q (cut 0 [p q] a)])
     $(a (rsh 3 b a))
+  ::
+  ++  tuba                            ::  utf8 tape to utf32 list
+    |=  a=tape
+    ^-  (list ,@c)
+    (rip 5 (turf (rap 3 a)))          ::  XX horrible
+  ::
+  ++  tufa                            ::  utf32 list to utf8 tape
+    |=  a=(list ,@c)
+    ^-  tape
+    ?~  a  ""
+    (weld (rip 3 (tuft i.a)) $(a t.a))
   ::
   ++  tuft                            ::  utf32 to utf8
     |=  a=@c
@@ -2255,7 +2266,7 @@
     ++  qex  (bass 16 ;~(plug sex (stun [0 3] hit)))
     ++  qib  (bass 2 (stun [4 4] sib))
     ++  qix  (bass 16 (stun [4 4] six))
-    ++  qit  ;~(pose (shim 32 38) (shim 40 91) (shim 93 126))
+    ++  qit  ;~(pose (shim 32 38) (shim 40 91) (shim 93 126) (shim 128 255))
     ++  seb  (cold 1 (just '1'))
     ++  sed  (cook |=(a=@ (sub a '0')) (shim '1' '9'))
     ++  sev  ;~(pose sed sov)
@@ -6239,6 +6250,7 @@
         (shim 35 91)
         (shim 93 122)
         (shim 124 126) 
+        (shim 128 255)
       ==
       (stag ~ (ifix [kel ker] (stag %cltr (most ace wide))))
     ==
