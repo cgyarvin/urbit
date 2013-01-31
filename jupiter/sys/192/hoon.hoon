@@ -1806,7 +1806,7 @@
   ++  nix  (boss 256 (star ;~(pose aln cab)))
   ++  nud  (shim '0' '9')
   ++  poy  ;~(pfix bas ;~(pose bas soq mes))
-  ++  qit  ;~(pose (shim 32 38) (shim 40 91) (shim 93 126) poy)
+  ++  qit  ;~(pose (shim 32 38) (shim 40 91) (shim 93 126) (shim 128 255) poy)
   ++  qut  (ifix [soq soq] (boss 256 (more gon qit)))
   ++  sym 
     %+  cook
@@ -2266,7 +2266,6 @@
     ++  qex  (bass 16 ;~(plug sex (stun [0 3] hit)))
     ++  qib  (bass 2 (stun [4 4] sib))
     ++  qix  (bass 16 (stun [4 4] six))
-    ++  qit  ;~(pose (shim 32 38) (shim 40 91) (shim 93 126) (shim 128 255))
     ++  seb  (cold 1 (just '1'))
     ++  sed  (cook |=(a=@ (sub a '0')) (shim '1' '9'))
     ++  sev  ;~(pose sed sov)
