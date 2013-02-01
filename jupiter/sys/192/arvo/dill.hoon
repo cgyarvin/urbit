@@ -156,6 +156,8 @@
                     ==
                   $(fav [%logo ~])
                 $(fav [%bleb %del ~])
+            %e  (edit u.q.r.yar(bus bul.u.q.r.yar))
+            %f  $(fav [%bleb %aro %r])
             %k  ?:  =(bul.u.q.r.yar bus.u.q.r.yar)
                   beep
                 =>  .(+.$ (kill (slag bus.u.q.r.yar but.u.q.r.yar)))
@@ -164,8 +166,6 @@
                   bul  bus.u.q.r.yar
                   but  (scag bus.u.q.r.yar but.u.q.r.yar)
                 ==
-            %e  (edit u.q.r.yar(bus bul.u.q.r.yar))
-            %f  $(fav [%bleb %aro %r])
             %l  +.$(mos :_(mos [~ hen %blit [[%clr ~] ~]])) 
             %n  $(fav [%bleb %aro %d])
             %p  $(fav [%bleb %aro %u])
@@ -200,19 +200,13 @@
               beep
               %y  
             ?:  =(0 p.r.r.yar)
-              ~&  %yp-bad-a
               beep
             =+  dol=(snag q.r.r.yar r.r.r.yar)
             =+  leo=(lent dol)
             ?.  (gte bus.u.q.r.yar leo)
-              ~&  %yp-bad-b
               beep
             =+  pey=(sub bus.u.q.r.yar leo)
             ?.  =(dol (swag [pey leo] but.u.q.r.yar))
-              ~&  %yp-bad-c
-              ~&  [%leo-pey leo pey]
-              ~&  [%dol `(list ,@)`dol]
-              ~&  [%swa `(list ,@)`(swag [leo pey] but.u.q.r.yar)]
               beep
             =.  q.r.r.yar  ?:(=(p.r.r.yar +(q.r.r.yar)) 0 +(q.r.r.yar))
             =+  ney=(snag q.r.r.yar r.r.r.yar)
