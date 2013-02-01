@@ -388,6 +388,10 @@
       $(a (skim t.a |=(c=_i.a (b c i.a))))
     [i.a $(a (skim t.a |=(c=_i.a !(b c i.a))))]
   ::
+  ++  swag
+    |*  [[a=@ b=@] c=(list)]
+    (scag b (slag a c))
+  ::
   ++  turn
     ~/  %turn
     |*  [a=(list) b=_,*]

@@ -22,7 +22,7 @@
         =+  ^=  yer  ^-  yard
             :*  &
                 ?~(whu ~ [u.whu ~])
-                `blur`[80 ~]
+                [80 ~ *blot]
                 *(map ,[p=flag q=path] hist)
             ==
         [yer +>.$(wib (~(put by wib) hen yer))]
@@ -87,6 +87,17 @@
         bul  (lent but)
         but  but
       ==
+    ::
+    ++  kill                                            ::  add to kill ring
+      |=  txt=(list ,@c)
+      ^+  +>
+      =>  ?.  =(16 p.r.r.yar)  .
+          .(p.r.r.yar 15, r.r.r.yar (scag 15 r.r.r.yar))
+      %=  +>
+        p.r.r.yar  +(p.r.r.yar)
+        q.r.r.yar  0
+        r.r.r.yar  [txt r.r.r.yar]
+      ==
     :: 
     ++  leap                                            ::  terminal event
       |-  ^+  +
@@ -136,25 +147,87 @@
           ==
         ::
             %ctl                                        ::  control
-          ?+    p.p.fav
-              beep
-              'a'  (edit u.q.r.yar(bus 0))
-              'b'  $(fav [%bleb %aro %l])
-              'd'  ?:  ?&  =(0 bul.u.q.r.yar)
-                           =(0 bus.u.q.r.yar)
-                       ==
-                     $(fav [%logo ~])
-                   $(fav [%bleb %del ~])
-              'e'  (edit u.q.r.yar(bus bul.u.q.r.yar))
-              'f'  $(fav [%bleb %aro %r])
-              'l'  +.$(mos :_(mos [~ hen %blit [[%clr ~] ~]])) 
-              'n'  $(fav [%bleb %aro %d])
-              'p'  $(fav [%bleb %aro %u])
+          ?+  p.p.fav
+            beep
+            %a  (edit u.q.r.yar(bus 0))
+            %b  $(fav [%bleb %aro %l])
+            %d  ?:  ?&  =(0 bul.u.q.r.yar)
+                        =(0 bus.u.q.r.yar)
+                    ==
+                  $(fav [%logo ~])
+                $(fav [%bleb %del ~])
+            %k  ?:  =(bul.u.q.r.yar bus.u.q.r.yar)
+                  beep
+                =>  .(+.$ (kill (slag bus.u.q.r.yar but.u.q.r.yar)))
+                %-  edit
+                %=  u.q.r.yar
+                  bul  bus.u.q.r.yar
+                  but  (scag bus.u.q.r.yar but.u.q.r.yar)
+                ==
+            %e  (edit u.q.r.yar(bus bul.u.q.r.yar))
+            %f  $(fav [%bleb %aro %r])
+            %l  +.$(mos :_(mos [~ hen %blit [[%clr ~] ~]])) 
+            %n  $(fav [%bleb %aro %d])
+            %p  $(fav [%bleb %aro %u])
+            %u  ?:  =(0 bus.u.q.r.yar)
+                  beep
+                =>  .(+.$ (kill (scag bus.u.q.r.yar but.u.q.r.yar)))
+                %-  edit
+                %=  u.q.r.yar
+                  bus  0
+                  bul  (sub bul.u.q.r.yar bus.u.q.r.yar)
+                  but  (slag bus.u.q.r.yar but.u.q.r.yar)
+                ==
+            %y  ?:  =(0 p.r.r.yar)
+                  beep
+                $(fav [%bleb %txt (snag q.r.r.yar r.r.r.yar)])
           ==
         ::
-            %del  beep                                  ::  delete
+            %del                                        ::  delete
+          ?:  =(bul.u.q.r.yar bus.u.q.r.yar)
+            beep
+          %-  edit
+          %=    u.q.r.yar
+              bul  (dec bul.u.q.r.yar)
+              but  
+            %+  weld 
+              (scag bus.u.q.r.yar but.u.q.r.yar)
+            (slag +(bus.u.q.r.yar) but.u.q.r.yar)
+          ==
         ::
-            %met  beep                                  ::  meta
+            %met                                        ::  meta
+          ?+    p.p.fav
+              beep
+              %y  
+            ?:  =(0 p.r.r.yar)
+              ~&  %yp-bad-a
+              beep
+            =+  dol=(snag q.r.r.yar r.r.r.yar)
+            =+  leo=(lent dol)
+            ?.  (gte bus.u.q.r.yar leo)
+              ~&  %yp-bad-b
+              beep
+            =+  pey=(sub bus.u.q.r.yar leo)
+            ?.  =(dol (swag [pey leo] but.u.q.r.yar))
+              ~&  %yp-bad-c
+              ~&  [%leo-pey leo pey]
+              ~&  [%dol `(list ,@)`dol]
+              ~&  [%swa `(list ,@)`(swag [leo pey] but.u.q.r.yar)]
+              beep
+            =.  q.r.r.yar  ?:(=(p.r.r.yar +(q.r.r.yar)) 0 +(q.r.r.yar))
+            =+  ney=(snag q.r.r.yar r.r.r.yar)
+            =+  lye=(lent ney)
+            %-  edit
+            %=  u.q.r.yar
+              bus  (sub (add bus.u.q.r.yar lye) leo)
+              bul  (sub (add bul.u.q.r.yar lye) leo)
+              but  %+  weld
+                     (scag pey but.u.q.r.yar)
+                   %+  weld
+                     `(list ,@c)`ney                ::  XX weird fuse-loop
+                   (slag bus.u.q.r.yar but.u.q.r.yar)
+            ==
+          ==
         ::
             %ret                                        ::  return
           =+  jab=(rap 3 (tufa but.u.q.r.yar))

@@ -307,7 +307,7 @@ _reck_kick(u2_reck* rec_u, u2_noun ovo)
     } break;
     case c3__exit:
     {
-      u2_lo_bail(rec_u);
+      fprintf(uH, "<goodbye>\n");
       exit(0);
     } break;
     case c3__init: p_pay = u2t(pay);

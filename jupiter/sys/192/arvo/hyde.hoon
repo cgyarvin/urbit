@@ -86,7 +86,12 @@
               [%lin p=(list ,@c)]                       ::  set current line
               [%mor ~]                                  ::  newline
           ==                                            ::
-++  blur  ,[p=@ud q=(unit bead)]                        ::  columns, prompt
+++  blot                                                ::  kill ring
+          $:  p=@ud                                     ::  length
+              q=@ud                                     ::  depth
+              r=(list (list ,@c))                       ::  kills
+          ==                                            ::
+++  blur  ,[p=@ud q=(unit bead) r=blot]                 ::  columns, prompt
 ++  boar                                                ::  process at system
           $%  :*  %&                                    ::  waiting (system)
                   p=(list path)                         ::  blocked on
