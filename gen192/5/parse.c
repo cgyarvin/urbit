@@ -84,6 +84,66 @@
     }
   }
 
+#if 1
+/* bend
+*/
+  u2_noun                                                         //  produce
+  j2_mcx(Pt5, bend, fun)(u2_wire wir_r,
+                         u2_noun raq,                             //  retain
+                         u2_noun vex,                             //  retain
+                         u2_noun sab)                             //  retain
+  {
+    u2_noun p_vex, q_vex;
+
+    u2_bi_cell(wir_r, vex, &p_vex, &q_vex);
+    if ( u2_no == u2_dust(q_vex) ) {
+      return u2_rx(wir_r, vex);
+    } else {
+      u2_noun uq_vex = u2_t(q_vex);
+      u2_noun puq_vex, quq_vex;
+      u2_noun yit, yur;
+      u2_noun p_yit, q_yit;
+      u2_noun ret;
+
+      u2_bi_cell(wir_r, uq_vex, &puq_vex, &quq_vex);
+      yit = u2_bl_good(wir_r, u2_nk_mong(wir_r, sab, u2_rx(wir_r, quq_vex)));
+      
+      u2_bi_cell(wir_r, yit, &p_yit, &q_yit);
+      yur = _last(wir_r, p_vex, p_yit);
+
+      if ( u2_no == u2_dust(q_yit) ) {
+        ret = u2_bc(wir_r, yur, u2_rx(wir_r, q_vex));
+      } 
+      else {
+        u2_noun uq_yit = u2_t(q_yit);
+        u2_noun puq_yit, quq_yit;
+        u2_noun vux;
+         
+        u2_bi_cell(wir_r, uq_yit, &puq_yit, &quq_yit);
+
+        vux = u2_bl_good
+                    (wir_r, 
+                     u2_nk_mong
+                       (wir_r, raq, 
+                               u2_bc(wir_r, u2_rx(wir_r, puq_vex),
+                                            u2_rx(wir_r, puq_yit))));
+        if ( u2_nul == vux ) {
+          ret = u2_bc(wir_r, yur, u2_rx(wir_r, q_vex));
+        }
+        else {
+          ret = u2_bq(wir_r, yur,
+                             u2_nul,
+                             u2k(u2t(vux)),
+                             u2_rx(wir_r, quq_yit));
+          u2z(vux);
+        }
+      }
+      u2_rz(wir_r, yit);
+      return ret;
+    }
+  }
+#else
+
 /* bend
 */
   u2_noun                                                         //  produce
@@ -132,6 +192,7 @@
       return ret;
     }
   }
+#endif
 
   u2_noun                                                         //  produce
   j2_mc(Pt5, bend, fun)(u2_wire wir_r, 

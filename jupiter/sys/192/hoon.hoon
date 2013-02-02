@@ -1,4 +1,4 @@
-::
+!:
 ::              Hoon stage 192 (reflexive).  
 ::              This file is in the public domain.
 ::
@@ -1631,7 +1631,7 @@
   ::
   ++  bend
     ~/  %bend
-    |*  raq=_|*([a=* b=*] [a b])
+    |*  raq=_|*([a=* b=*] [~ u=[a b]])
     ~/  %fun
     |*  [vex=edge sab=_rule]
     ?@  q.vex
@@ -1640,7 +1640,10 @@
     =+  yur=(last p.vex p.yit)
     ?@  q.yit
       [p=yur q=q.vex]
-    [p=yur q=[~ u=[p=(raq p.u.q.vex p.u.q.yit) q=q.u.q.yit]]]
+    =+  vux=(raq p.u.q.vex p.u.q.yit)
+    ?~  vux
+      [p=yur q=q.vex]
+    [p=yur q=[~ u=[p=u.vux q=q.u.q.yit]]]
   ::
   ++  comp
     ~/  %comp
@@ -6530,7 +6533,7 @@
       ==
     --
   ::
-  ++  ling
+  ++  lung
     ~+
     %-  bend
     |=  :-  ros=gene 
@@ -6540,23 +6543,24 @@
                   [%ket p=gene]
                   [%pel p=(list ,[p=gene q=gene])]
               ==
+    ^-  (unit gene)
     ?-    -.vil
         %tis 
       ?-  ros
-        [%cnbc @]        [%ktts p.ros p.vil]
-        [%cnhx [@ ~]]    [%ktts i.p.ros p.vil]
-        [%cnts [@ ~] ~]  [%ktts i.p.ros p.vil]
+        [%cnbc @]        [~ %ktts p.ros p.vil]
+        [%cnhx [@ ~]]    [~ %ktts i.p.ros p.vil]
+        [%cnts [@ ~] ~]  [~ %ktts i.p.ros p.vil]
         [%zpcb *]        $(ros q.ros)
-        *                ~|([%ling-bad ros] !!)
+        *                ~
       ==
-        %col  [%tsgl ros p.vil]
-        %pel  [%cnts ~(rake ap ros) p.vil]
-        %ket  [ros p.vil]
+        %col  [~ %tsgl ros p.vil]
+        %pel  [~ %cnts ~(rake ap ros) p.vil]
+        %ket  [~ ros p.vil]
     ==
   ::
   ++  long
     %+  knee  *gene  |.  ~+
-    ;~  ling
+    ;~  lung
       scat
       ;~  pose
         ;~(plug (cold %tis tis) wide)
