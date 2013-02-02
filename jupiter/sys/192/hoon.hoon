@@ -1,4 +1,4 @@
-!:
+::
 ::              Hoon stage 192 (reflexive).  
 ::              This file is in the public domain.
 ::
@@ -4318,6 +4318,7 @@
   |=  typ=type  ^-  tank
   ~(duck ut typ)
 ::
+++  spat  |=(pax=path (rap 3 ~(ram re (dish:ut [~ %path] pax))))
 ++  slot
   |=  [axe=@ vax=vase]  ^-  vase
   (slap vax [~ axe]) 
