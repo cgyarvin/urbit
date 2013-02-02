@@ -31,12 +31,9 @@
       :_  ..^$
       :_  ~
       =+  heq=(thin =(%this -.fav) p.fav)
-      =+  ^=  whu  ^-  (unit @p)
-          |=  hom=host
-          =+  seh=seh
-          |-  ^-  (unit ,[p=flag q=path r=vein])
+      =+  ^=  whu  |-  ^-  (unit ,@p)
           ?~  seh  ~
-          ?:  (hone r.p.p.q.heq p.i.seh) 
+          ?:  (hone r.p.p.heq p.i.seh) 
             [~ q.i.seh] 
           $(seh t.seh)
       ?~  whu

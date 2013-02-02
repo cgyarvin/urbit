@@ -241,6 +241,7 @@
           u2_noun slop;                   //  cell ([vase vase] -> vase)
           u2_noun slay;                   //  text to coin
           u2_noun scot;                   //  mole to text
+          u2_noun spat;                   //  path to text
           u2_noun turf;                   //  utf8 to utf32
           u2_noun tuft;                   //  utf32 to utf8
         } toy;
@@ -666,24 +667,6 @@
         u2_ve_sync(void);
 
 
-    /**  HTTP, old style.
-    **/
-      /* u2_ve_http_start(): start on port.
-      */
-        u2_bean
-        u2_ve_http_start(c3_w por_w);
-
-      /* u2_ve_http_request(): dispatch http request, returning null if async.
-      */
-        u2_hrep*
-        u2_ve_http_request(u2_hreq* req_u);
-
-      /* u2_ve_http_respond(): queue response.  Transfer `pox`, `rep`.
-      */
-        void
-        u2_ve_http_respond(u2_noun pox, u2_noun rep);
-
-
     /**  Main loop, new style.
     **/
       /* u2_lo_call(): central callback.
@@ -711,7 +694,7 @@
       */
         void
         u2_term_ef_blit(u2_reck* rec_u,
-                        u2_noun  pox,
+                        c3_l     tid_l,
                         u2_noun  blt);
   
       /* u2_term_io_init(): initialize terminal I/O.
@@ -774,6 +757,15 @@
 
     /**  HTTP, new style.
     **/
+      /* u2_http_ef_thou(): send %thou effect to http. 
+      */
+        void
+        u2_http_ef_thou(u2_reck* rec_u,
+                        c3_l     sev_l,
+                        c3_l     coq_l,
+                        c3_l     seq_l,
+                        u2_noun  rep);
+
       /* u2_http_io_init(): initialize http I/O.
       */
         void 

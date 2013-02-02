@@ -42,6 +42,14 @@ _reck_ream(u2_reck* rec_u, u2_noun txt)
   return u2_cn_mung(u2k(rec_u->toy.ream), txt);
 }
 
+/* _reck_spat(): spat with toy.
+*/
+static u2_noun
+_reck_spat(u2_reck* rec_u, u2_noun pox)
+{
+  return u2_cn_mung(u2k(rec_u->toy.spat), pox);
+}
+
 /* _reck_rain(): rain with toy.
 */
 static u2_noun
@@ -124,10 +132,10 @@ _reck_soft(u2_reck* rec_u, u2_noun vax, const c3_c* txt_c, u2_noun sam)
   return _reck_slam(rec_u, gat, sam);
 }
 
-/* _reck_spat(): noun path from c, kind of a hack.
+/* _reck_spoo(): noun path from c, kind of a hack.
 */
 static u2_noun 
-_reck_spat(c3_c* pax_c)
+_reck_spoo(c3_c* pax_c)
 {
   if ( !*pax_c ) {
     return u2_nul;
@@ -144,7 +152,7 @@ _reck_spat(c3_c* pax_c)
       pan = u2_ci_string(pax_c);
       *ash_c = '/';
       
-      return u2nc(pan, _reck_spat(ash_c + 1));
+      return u2nc(pan, _reck_spoo(ash_c + 1));
     }
   }
 }
@@ -156,7 +164,7 @@ _reck_load(u2_reck* rec_u, u2_noun vax, c3_c* pax_c)
 {
   u2_noun txt = u2_walk_load(pax_c);
   u2_noun gen = _reck_rain
-    (rec_u, _reck_spat(pax_c + strlen(u2_Local) + 1), txt);
+    (rec_u, _reck_spoo(pax_c + strlen(u2_Local) + 1), txt);
 
   return _reck_slap(rec_u, vax, gen);
 }
@@ -187,6 +195,7 @@ u2_reck_time(u2_reck* rec_u)
   rec_u->wen = _reck_coin_da(rec_u, u2k(rec_u->now));
 }
 
+#if 0
 /* _reck_time_bump(): advance the reck time by a small increment.
 */
 static void
@@ -196,6 +205,7 @@ _reck_time_bump(u2_reck* rec_u)
 
   rec_u->now = u2_cka_add(rec_u->now, u2_ci_chubs(1, &bum_d));
 }
+#endif
 
 /* u2_reck_peek(): query the reck namespace (protected).
 */
@@ -222,12 +232,12 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
 
   rec_u->toy.rain = _reck_root("rain", u2k(ken));
   rec_u->toy.ream = _reck_root("ream", u2k(ken));
-  // rec_u->toy.sham = _reck_root("sham", u2k(ken));
   rec_u->toy.slay = _reck_root("slay", u2k(ken));
   rec_u->toy.slam = _reck_root("slam", u2k(ken));
   rec_u->toy.slap = _reck_root("slap", u2k(ken));
   rec_u->toy.slop = _reck_root("slop", u2k(ken));
   rec_u->toy.scot = _reck_root("scot", u2k(ken));
+  rec_u->toy.spat = _reck_root("spat", u2k(ken));
   rec_u->toy.turf = _reck_root("turf", u2k(ken));
   rec_u->toy.tuft = _reck_root("tuft", u2k(ken));
 
@@ -274,18 +284,290 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
   }
 }
 
-/* _reck_kick(): apply an output ovum.
+/* _reck_mole(): parse simple atomic mole.
+*/
+static u2_bean 
+_reck_mole(u2_reck* rec_u,
+                u2_noun  fot,
+                u2_noun  san,
+                c3_d*    ato_d)
+{
+  u2_noun uco = u2_cn_mung(u2k(rec_u->toy.slay), san);
+  u2_noun p_uco, q_uco, r_uco, s_uco;
+
+  if ( (u2_no == u2_cr_qual(uco, &p_uco, &q_uco, &r_uco, &s_uco)) ||
+       (0 != p_uco) ||
+       (0 != q_uco) ||
+       (u2_no == u2_sing(fot, r_uco)) )
+  {
+    uL(fprintf(uH, "strange mole\n"));
+
+    u2z(fot); u2z(uco); return u2_no;
+  }
+  else {
+    *ato_d = u2_cr_chub(0, s_uco);
+
+    u2z(fot); u2z(uco); return u2_yes;
+  }
+}
+
+/* _reck_lily(): parse little atom.
+*/
+static u2_bean
+_reck_lily(u2_reck* rec_u, u2_noun fot, u2_noun txt, c3_l* tid_l) 
+{
+  c3_d ato_d;
+
+  if ( u2_no == _reck_mole(rec_u, fot, txt, &ato_d) ) {
+    return u2_no;
+  } else {
+    if ( ato_d >= 0x80000000ULL ) {
+      return u2_no;
+    } else {
+      *tid_l = (c3_l) ato_d;
+
+      return u2_yes;
+    }
+  }
+}
+
+/* _reck_kick_term(): apply terminal outputs.
+*/
+static u2_bean
+_reck_kick_term(u2_reck* rec_u, u2_noun pox, c3_l tid_l, u2_noun fav)
+{
+  u2_noun p_fav;
+
+  if ( u2_no == u2du(fav) ) {
+    u2z(pox); u2z(fav); return u2_no;
+  }
+  else switch ( u2h(fav) ) {
+    default: u2z(pox); u2z(fav); return u2_no;
+    case c3__bbye: 
+    {
+      u2_reck_sync(rec_u);
+      u2_reck_plan(rec_u, pox, u2nc(c3__helo, u2_nul));
+
+      u2z(fav); return u2_yes;
+    } break; 
+     
+    case c3__blit: p_fav = u2t(fav);
+    {
+      u2_term_ef_blit(rec_u, tid_l, u2k(p_fav));
+
+      u2z(pox); u2z(fav); return u2_yes;
+    } break;
+
+    case c3__crap: p_fav = u2t(fav);
+    {
+      u2_ve_sway(2, u2_ckb_flop(u2k(p_fav)));
+      uL(fprintf(uH, "<<<crap>>>\n"));
+
+      u2z(pox); u2z(fav); return u2_yes;
+    } break;
+
+    case c3__init: p_fav = u2t(fav);
+    {
+      rec_u->own = u2nc(u2k(p_fav), rec_u->own);
+      u2z(pox); u2z(fav); return u2_yes;
+    } break;
+  }
+  c3_assert(!"not reached"); return 0;
+}
+
+/* _reck_kick_boot(): apply boot outputs.
+*/
+static u2_bean
+_reck_kick_boot(u2_reck* rec_u, u2_noun pox, u2_noun fav)
+{
+  u2_noun p_fav;
+
+  if ( u2_no == u2du(fav) ) {
+    u2z(pox); u2z(fav); return u2_no;
+  } 
+  else switch ( u2h(fav) ) {
+    default: u2z(pox); u2z(fav); return u2_no;
+ 
+    case c3__bbye: 
+    case c3__blit: {
+      u2_noun pux = u2nq(c3__gold, c3__term, '1', u2_nul);
+
+      uL(fprintf(uH, "_kick_boot: terminal %s\n", u2_cr_string(u2h(fav)))); 
+
+      u2z(pox);
+      return _reck_kick_term(rec_u, pux, 1, fav);
+    } break;
+
+    case c3__init: p_fav = u2t(fav);
+    {
+      rec_u->own = u2nc(u2k(p_fav), rec_u->own);
+
+      u2z(pox); u2z(fav); return u2_yes;
+    } break;
+  }
+  c3_assert(!"not reached"); return 0;
+}
+
+/* _reck_kick_http(): apply http effects.
+*/
+static u2_bean
+_reck_kick_http(u2_reck* rec_u, 
+                u2_noun  pox,
+                c3_l     sev_l,
+                c3_l     coq_l,
+                c3_l     seq_l,
+                u2_noun  fav)
+{
+  u2_noun p_fav;
+
+  if ( u2_no == u2du(fav) ) {
+    u2z(pox); u2z(fav); return u2_no;
+  } 
+  else switch ( u2h(fav) ) {
+    default: u2z(pox); u2z(fav); return u2_no;
+ 
+    case c3__thou: p_fav = u2t(fav);
+    {
+      u2_http_ef_thou(rec_u, sev_l, coq_l, seq_l, u2k(p_fav));
+
+      return u2_yes;
+    } break;
+  }
+  c3_assert(!"not reached"); return u2_no;
+}
+
+/* _reck_kick_sync(): apply boot outputs.
+*/
+static u2_bean
+_reck_kick_sync(u2_reck* rec_u, u2_noun pox, u2_noun fav)
+{
+  u2z(pox); u2z(fav); return u2_no;
+}
+
+/* _reck_kick_spec(): apply an effect, by path.
+*/
+static u2_bean
+_reck_kick_spec(u2_reck* rec_u, u2_noun pox, u2_noun fav)
+{
+  u2_noun i_pox, t_pox;
+    
+  if ( (u2_no == u2_cr_cell(pox, &i_pox, &t_pox)) ||
+       ((i_pox != c3__gold) && (i_pox != c3__iron) && (i_pox != c3__lead)) )
+  {
+    u2z(pox); u2z(fav); return u2_no;
+  } else {
+    u2_noun it_pox, tt_pox;
+
+    if ( (u2_no == u2_cr_cell(t_pox, &it_pox, &tt_pox)) ) {
+      u2z(pox); u2z(fav); return u2_no;
+    }
+    else switch ( it_pox ) {
+      default: return u2_no;
+
+      case c3__boot: {
+        if ( (u2_nul != tt_pox) ) {
+          u2z(pox); u2z(fav); return u2_no;
+        }
+        else { 
+          return _reck_kick_boot(rec_u, pox, fav);
+        }
+      } break;
+
+      case c3__http: {
+        u2_noun pud = tt_pox;
+        u2_noun p_pud, q_pud, r_pud, s_pud;
+        c3_l    sev_l, coq_l, seq_l;
+
+        if ( (u2_no == u2_cr_qual(pud, &p_pud, &q_pud, &r_pud, &s_pud)) ||
+             (u2_nul != s_pud) ||
+             (u2_no == _reck_lily(rec_u, c3__ux, u2k(p_pud), &sev_l)) ||
+             (u2_no == _reck_lily(rec_u, c3__ud, u2k(q_pud), &coq_l)) ||
+             (u2_no == _reck_lily(rec_u, c3__ud, u2k(r_pud), &seq_l)) )
+        {
+          u2z(pox); u2z(fav); return u2_no;
+        }
+        else {
+          return _reck_kick_http(rec_u, pox, sev_l, coq_l, seq_l, fav);
+        }
+      } break;
+
+      case c3__sync: {
+        if ( (u2_nul != tt_pox) ) {
+          u2z(pox); u2z(fav); return u2_no;
+        }
+        else { 
+          return _reck_kick_sync(rec_u, pox, fav);
+        }
+      } break;
+
+      case c3__term: {
+        u2_noun pud = tt_pox;
+        u2_noun p_pud, q_pud;
+        c3_l    tid_l;
+
+        if ( (u2_no == u2_cr_cell(pud, &p_pud, &q_pud)) ||
+             (u2_nul != q_pud) ||
+             (u2_no == _reck_lily(rec_u, c3__ud, u2k(p_pud), &tid_l)) )
+        {
+          u2z(pox); u2z(fav); return u2_no;
+        } else {
+          return _reck_kick_term(rec_u, pox, tid_l, fav);
+        }
+      } break;
+    }
+  }
+  c3_assert(!"not reached");
+  return u2_no;
+}
+
+/* _reck_kick_norm(): non path-specific effect handling.
+*/
+static u2_bean
+_reck_kick_norm(u2_reck* rec_u, u2_noun pox, u2_noun fav)
+{
+  if ( u2_no == u2du(fav) ) {
+    u2z(pox); u2z(fav); return u2_no;
+  } 
+  else switch ( u2h(fav) ) {
+    default: u2z(pox); u2z(fav); return u2_no;
+ 
+    case c3__exit:
+    {
+      uL(fprintf(uH, "<<<goodbye>>>\n"));
+      u2_lo_bail(rec_u);
+
+      u2z(pox); u2z(fav); return u2_yes;
+    } break;
+  }
+  c3_assert(!"not reached"); return u2_no;
+  u2z(pox); u2z(fav); return u2_no;
+}
+
+/* _reck_kick(): handle effect.
 */
 static void
 _reck_kick(u2_reck* rec_u, u2_noun ovo)
 {
-  u2_noun pay = u2t(ovo);
-  u2_noun p_pay, q_pay;
+  if ( (u2_no == _reck_kick_spec(rec_u, u2k(u2h(ovo)), u2k(u2t(ovo)))) &&
+       (u2_no == _reck_kick_norm(rec_u, u2k(u2h(ovo)), u2k(u2t(ovo)))) )
+  {
+    u2_noun tox = _reck_spat(rec_u, u2k(u2h(ovo)));
 
-  switch ( u2h(pay) ) {
+    uL(fprintf(uH, "kick: lost %s from %s\n", 
+                   u2_cr_string(u2h(u2t(ovo))),
+                   u2_cr_string(tox)));
+    u2z(tox);
+  }
+  u2z(ovo);
+}
+
+#if 0
+  u2_noun p_fav, q_fav;
+
+  switch ( u2h(fav) ) {
     default: 
     {
-      u2_err(u2_Wire, "unsupported", u2h(pay));
+      u2_err(u2_Wire, "unsupported", u2h(fav));
     } break;
 
     case c3__bbye: 
@@ -295,55 +577,59 @@ _reck_kick(u2_reck* rec_u, u2_noun ovo)
 
       break;
     } 
-    case c3__blit: p_pay = u2t(pay);
+    case c3__blit: p_fav = u2t(fav);
     {
-      u2_term_ef_blit(rec_u, u2k(u2h(ovo)), u2k(p_pay));
+      u2_term_ef_blit(rec_u, 1, u2k(p_fav));
       break;
     }
-    case c3__crap: p_pay = u2t(pay);
+    case c3__crap: p_fav = u2t(fav);
     {
-      u2_ve_sway(2, u2_ckb_flop(u2k(p_pay)));
+      u2_ve_sway(2, u2_ckb_flop(u2k(p_fav)));
       printf("<<<exit>>>\n");
     } break;
+
     case c3__exit:
     {
       fprintf(uH, "<goodbye>\n");
       exit(0);
     } break;
-    case c3__init: p_pay = u2t(pay);
+
+    case c3__init: p_fav = u2t(fav);
     {
-      rec_u->own = u2nc(u2k(p_pay), rec_u->own);
+      rec_u->own = u2nc(u2k(p_fav), rec_u->own);
       break;
     }
-    case c3__talk: p_pay = u2t(pay);
+    case c3__talk: p_fav = u2t(fav);
     {
-      u2_ve_tank(0, u2k(p_pay));
+      u2_ve_tank(0, u2k(p_fav));
     } break;
 
-    case c3__thou: p_pay = u2t(pay);
+    case c3__thou: p_fav = u2t(fav);
     {
-      u2_ve_http_respond(u2k(u2h(ovo)), u2k(p_pay));
+      u2_ve_http_respond(u2k(u2h(ovo)), u2k(p_fav));
       break;
     }
-    case c3__save: u2_cx_cell(u2t(pay), &p_pay, &q_pay);
+    case c3__save: u2_cx_cell(u2t(fav), &p_fav, &q_fav);
     {
-      u2_noun pax = u2nc(c3__put, u2k(p_pay));
+      u2_noun pax = u2nc(c3__put, u2k(p_fav));
       c3_c*   pax_c = u2_path(u2_yes, pax);
  
-      u2_walk_save(pax_c, 0, u2k(q_pay));
+      u2_walk_save(pax_c, 0, u2k(q_fav));
       free(pax_c);
     } break;
-    case c3__warn: u2_cx_cell(u2t(pay), &p_pay, &q_pay);
+    case c3__warn: u2_cx_cell(u2t(fav), &p_fav, &q_fav);
     {
-      switch ( p_pay ) {
-        case 0: u2_ve_tank(2, u2k(q_pay)); break;
-        case 1: u2_ve_tank(4, u2k(q_pay)); break;
-        case 2: u2_ve_tank(6, u2k(q_pay)); break;
+      switch ( p_fav ) {
+        case 0: u2_ve_tank(2, u2k(q_fav)); break;
+        case 1: u2_ve_tank(4, u2k(q_fav)); break;
+        case 2: u2_ve_tank(6, u2k(q_fav)); break;
       }
     } break;
   }
-  u2z(ovo);
+  c3_assert(!"not reached");
+  return u2_no;
 }
+#endif
 
 /* _reck_poke(): insert an input ovum.
 */
@@ -463,6 +749,8 @@ u2_reck_launch(u2_reck* rec_u)
   else {
     {
       u2_noun pax = u2nq(c3__gold, c3__term, '1', u2_nul);
+      // u2_noun pax = u2nt(c3__gold, c3__boot, u2_nul);
+
       _reck_launch_toy(rec_u, pax);
     }
     u2_cm_done();

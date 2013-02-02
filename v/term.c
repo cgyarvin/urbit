@@ -198,6 +198,7 @@ u2_term_io_exit(u2_reck* rec_u)
     if ( -1 == fcntl(uty_u->wax_u.fd, F_SETFL, uty_u->cug_i) ) {
       c3_assert(!"exit-fcntl");
     }
+    write(uty_u->wax_u.fd, "\r\n", 2);
   }
 }
 
@@ -685,28 +686,21 @@ _term_main()
   return u2_Host.uty_u;
 }
 
-/* u2_term_ef_blit(): send %blit effect to to terminal.
+/* u2_term_ef_blit(): send %blit effect to specific terminal.
 */
 void
 u2_term_ef_blit(u2_reck* rec_u,
-                u2_noun  pox,
+                c3_l     tid_l,
                 u2_noun  blt)
 {
-  u2_noun p_pox, q_pox, r_pox, s_pox;
-  c3_l    tid_l;
+  if ( 0 == tid_l ) {
+    u2_utty* uty_u = _term_main();
 
-  //  Is blit from a terminal?  Perfect.
-  //
-  if ( (u2_yes == u2_cr_qual(pox, &p_pox, &q_pox, &r_pox, &s_pox)) &&
-       ((c3__gold == p_pox) || (c3__iron == p_pox)) &&
-       (c3__term == q_pox) &&
-       (u2_yes == _term_ud(u2k(r_pox), &tid_l)) &&
-       (u2_nul == s_pox) )
-  { } 
-  else {
+    if ( 0 == uty_u ) {
+      u2z(blt); return;
+    }
     tid_l = _term_main()->tid_l;
   }
-
   return _term_ef_blits(rec_u, tid_l, blt);
 } 
 

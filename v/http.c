@@ -18,13 +18,12 @@
 #include <curses.h>
 #include <termios.h>
 #include <term.h>
-#include <libtecla.h>
 
 #include "../outside/jhttp/http_parser.h"   // Joyent HTTP
 #include "all.h"
 #include "v/vere.h"
 
-extern GetLine *Tecla;
+static u2_hrep* _http_request(u2_hreq* req_u);
 
 /* _http_bod(): create a data buffer.
 */
@@ -408,7 +407,7 @@ _http_message_complete(http_parser* par_u)
   // Dispatch event request, respond synchronously if offered.
   //
   {
-    u2_hrep* rep_u = u2_ve_http_request(req_u);
+    u2_hrep* rep_u = _http_request(req_u);
 
     if ( rep_u ) {
       _http_respond_request(req_u, rep_u);
@@ -598,14 +597,12 @@ u2_lo_call_http_conn(struct ev_loop *lup_u,
   u2_bean inn    = (revents & EV_READ) ? u2_yes : u2_no;
   u2_bean out    = (revents & EV_WRITE) ? u2_yes : u2_no;
 
-  gl_normal_io(Tecla);
   if ( u2_yes == inn ) {
     _http_conn_drain(hon_u);
   }
   if ( u2_yes == out ) {
     _http_conn_flush(hon_u);
   }
-  gl_raw_io(Tecla);
 }
 
 /* _http_conn_new(): create http connection.
@@ -849,10 +846,14 @@ _http_pox_to_noun(c3_w sev_l, c3_w coq_l, c3_w seq_l)
 {
   u2_reck* rec_u = &u2_Host.rec_u[0];
 
-  return u2nq(u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3_s2('u','x'), sev_l)),
-              u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3_s2('u','d'), coq_l)),
-              u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3_s2('u','d'), seq_l)),
-              u2_nul);
+  return 
+    u2nt(
+      c3__iron,
+      c3__http,
+      u2nq(u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3_s2('u','x'), sev_l)),
+                u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3_s2('u','d'), coq_l)),
+                u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3_s2('u','d'), seq_l)),
+                u2_nul));
 }
 
 /* _http_request_to_noun(): translate http request into noun, or u2_none.
@@ -902,6 +903,31 @@ _http_slay_mole(u2_noun fot, u2_noun san)
   }
 }
 
+/* _http_new_response(): create http response structure.
+*/
+static u2_hrep*
+_http_new_response(c3_l sev_l, c3_l coq_l, c3_l seq_l, u2_noun rep)
+{
+  u2_noun p_rep, q_rep, r_rep;
+
+  if ( u2_no == u2_cr_trel(rep, &p_rep, &q_rep, &r_rep) ) {
+    uL(fprintf(uH, "strange response\n"));
+    return 0;
+  }
+  else {
+    u2_hrep* rep_u = malloc(sizeof(u2_hrep));
+
+    rep_u->sev_l = sev_l;
+    rep_u->coq_l = coq_l;
+    rep_u->seq_l = seq_l;
+
+    rep_u->sas_w = p_rep;
+    rep_u->hed_u = _http_list_to_heds(u2k(q_rep));
+    rep_u->bod_u = (u2_nul == r_rep) ? 0 : _http_octs_to_bod(u2k(u2t(r_rep)));
+
+    u2z(rep); return rep_u;
+  }
+}
 /* _http_noun_to_response(): translate path/noun into http response.
 */
 static u2_hrep*
@@ -936,10 +962,10 @@ _http_noun_to_response(u2_noun pox, u2_noun rep)
   }
 }
 
-/* u2_ve_http_request(): dispatch http request, returning null if async.
+/* _http_request(): dispatch http request, returning null if async.
 */
 u2_hrep*
-u2_ve_http_request(u2_hreq* req_u)
+_http_request(u2_hreq* req_u)
 {
   u2_noun req = _http_request_to_noun(req_u);
   u2_noun pox = _http_pox_to_noun(req_u->hon_u->htp_u->sev_l,
@@ -986,6 +1012,24 @@ u2_ve_http_respond(u2_noun pox, u2_noun rep)
 
   if ( !rep_u ) {
     fprintf(stderr, "http: response dropped\r\n");
+  }
+  else _http_respond(rep_u);
+}
+
+
+/* u2_http_ef_thou(): send %thou effect to http. 
+*/
+void
+u2_http_ef_thou(u2_reck* rec_u,
+                c3_l     sev_l,
+                c3_l     coq_l,
+                c3_l     seq_l,
+                u2_noun  rep)
+{
+  u2_hrep* rep_u = _http_new_response(sev_l, coq_l, seq_l, rep);
+
+  if ( !rep_u ) {
+    uL(fprintf(uH, "http: response dropped\r\n"));
   }
   else _http_respond(rep_u);
 }

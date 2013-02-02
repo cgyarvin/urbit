@@ -20,16 +20,16 @@ BIN=bin
 
 RM=rm -f
 CC=gcc
-CLD=gcc -O3 -L/usr/local/lib
+CLD=gcc -g -L/usr/local/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
-LIBS=-lev -lgmp -lreadline -ltecla -ltermcap -lsigsegv
+LIBS=-lev -lgmp -lreadline -ltermcap -lsigsegv
 
 INCLUDE=include
 GENERATED=generated
 DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN)
-CFLAGS=-O3 -I/usr/local/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
+CFLAGS=-g -I/usr/local/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 CWFLAGS=-Wall
 
 .y.o:
@@ -40,9 +40,6 @@ CWFLAGS=-Wall
 
 .c.o:
 	 $(CC) -c $(CWFLAGS) $(CFLAGS) -o $@ $<
-
-C_OFILES=\
-       c/comd.o
 
 F_OFILES=\
        f/rail.o \
@@ -608,7 +605,6 @@ J192_OFILES=\
        gen192/watt.o
 
 BASE_OFILES=\
-       $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
        $(J194_OFILES) \

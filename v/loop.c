@@ -177,6 +177,8 @@ u2_lo_bail(u2_reck* rec_u)
 {
   fflush(stdout);
   _lo_exit(rec_u);
+
+  exit(0);
 }
 
 /* u2_lo_loop(): enter main event loop.
