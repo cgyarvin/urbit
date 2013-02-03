@@ -664,8 +664,8 @@
   --
 =>
   |%
-  ++  adit                                              ::  vein privilege
-    |=  hen=vein
+  ++  adit                                              ::  hose privilege
+    |=  hen=hose
     ^-  ?(%gold %iron %lead)
     ?~  hen
       %lead

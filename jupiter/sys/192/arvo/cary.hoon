@@ -223,7 +223,7 @@
       $(lot [%% %ud u.lov])
     ==
   ++  scry
-    |=  [ren=lens who=flag lot=coin tyl=path]
+    |=  [ren=@tasD who=flag lot=coin tyl=path]
     ::  ~&  [%scry ren who lot tyl]
     ^-  (unit)
     ?~  tyl  ~
@@ -245,7 +245,8 @@
     =+  rud=(mine own.u.yar lot u.siq)
     ?~  rud  ~
     =+  rad=(~(sift cy u.rud) t.tyl)
-    ?-  ren
+    ?+  ren  ~
+      %w  ~
       %x  ?.(?=(& -.rad) ~ [~ r.rad])
       %y  :-  ~
           ?-  -.rad

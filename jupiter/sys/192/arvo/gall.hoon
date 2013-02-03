@@ -10,7 +10,7 @@
   ^?  |%                                                ::
   ++  peek  |=(path `(unit)`~)                          ::  enquire
   ++  poke                                              ::  apply
-    |=  [whu=(unit flag) pax=path hen=vein fav=card]
+    |=  [whu=(unit flag) pax=path hen=hose fav=card]
     ^-  [p=(list move) q=vane]
     ?+    -.fav  !!
         %bind                                           ::  register server

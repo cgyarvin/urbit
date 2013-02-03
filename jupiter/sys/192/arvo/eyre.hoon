@@ -28,8 +28,8 @@
           lyd=vane                                          ::  terminal
           ^=  eyre                                          ::  i/o
         $:  gem=(map flag chum)                             ::  hashed passcodes
-            liv=(map flag (list vein))                      ::  live consoles
-            rev=(map vein flag)                             ::  identities
+            liv=(map flag (list hose))                      ::  live consoles
+            rev=(map hose flag)                             ::  identities
             seh=(list ,[p=host q=flag])                     ::  http owners
         ==
       == 
@@ -113,7 +113,7 @@
     ==
   ::
   ++  grit                                                  ::  cause privilege
-    |=  cul=vein
+    |=  cul=hose
     ^-  ?(%gold %iron %lead)
     ?~  cul
       %lead

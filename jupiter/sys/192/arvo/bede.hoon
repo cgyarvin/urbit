@@ -251,7 +251,7 @@
   ::
   ++  ride                                              ::  process context
     |=  $:  pid=tick                                    ::  process identity
-            hen=vein                                    ::  current vein
+            hen=hose                                    ::  current hose
             loz=(map path goal)                         ::  request state
             bor=(unit boar)                             ::  execution state
         ==                                              ::
@@ -441,7 +441,7 @@
     --
   ::
   ++  leap                                              ::  dispatch event
-    |=  [pex=path hen=vein fav=card]
+    |=  [pex=path hen=hose fav=card]
     ^-  [p=(list move) q=_..^$]
     =<  ?+  -.fav  [~ ..^$]
           %kill  (kill p.fav)

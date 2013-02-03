@@ -240,6 +240,7 @@
 ++  hook  path                                          ::  request origin
 ++  hart  ,[p=? q=(unit ,@ud) r=host]                   ::  http sec/port/host
 ++  hort  ,[p=(unit ,@ud) q=host]                       ::  http port/host
+++  hose  (list path)                                   ::  causal history
 ++  host  $%([& p=(list ,@t)] [| p=@if])                ::  http host
 ++  httq                                                ::  raw http request
           $:  p=?(%get %post)                           ::  method
@@ -295,7 +296,7 @@
           ==                                            ::
 ++  meth  ?(%get %post)                                 ::  http method
 ++  moth  ,[p=meth q=math r=(unit octs)]                ::  http operation
-++  move  ,[p=(unit flag) q=vein r=card]                ::  internal event
+++  move  ,[p=(unit flag) q=hose r=card]                ::  internal event
 ++  mime  (list ,@ta)                                   ::  mime type
 ++  name  ,[p=@t q=(unit ,[p=? q=@t]) r=@t]             ::  first mid/nick last
 ++  nope  ^~(^-(arch [%| @ ~]))                         ::  empty node
@@ -387,7 +388,6 @@
               any=@                                     ::  entropy
               urb=(map flag safe)                       ::  all keys and routes
           ==                                            ::
-++  vein  (list path)                                   ::  causal history
 ++  ukaz                                                ::  change (pl ukazy)
           $:  p=path                                    ::  change site
               ^=  q                                     ::  change content
@@ -402,7 +402,7 @@
               ++  peek  |=(pax=path *(unit))            ::  enquire
               ++  poke  |=  $:  whu=(unit flag)         ::  apply
                                 pax=path                ::
-                                hen=vein                :: 
+                                hen=hose                :: 
                                 fav=card                ::
                             ==                          ::
                         [p=*(list move) q=*vane]        ::
