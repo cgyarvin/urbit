@@ -34,7 +34,7 @@
       ==
   |=  [now=@da eny=@ sky=_|+(* *(unit))] 
   =+  wen=(scot %da now)
-  =+  wer=`path`[hox wen %cx (weld cwd [hub ~])]
+  =+  wer=`path`[%cx wen hox (weld cwd [hub ~])]
   =+  rew=(flop wer)
   =+  vez=(vang & wer)
   |%
@@ -205,6 +205,10 @@
       |=  rol=@ta
       ;~  pose
         htap
+        %+  cook                                        ::  XX bletcherous
+          |=  a=path  ^-  path
+          ?>  ?=([@ @ @ *] a)
+          [i.t.t.a i.t.a i.a t.t.t.a]
         ;~  plug
           %+  cook
             |=(a=flag ~(rent co ~ %p a))

@@ -6,11 +6,7 @@
       |=  [now=@da hap=path]
       ^-  (unit)
       ?~  hap  ~
-      =+  fod=(slay i.hap)
-      ?:  ?=([%% ~ %p @] fod)
-        (~(beck is now) q.p.u.fod t.hap)
-      ?.  ?=([%% ~ %tas @] fod)  ~
-      (~(dear is now) q.p.u.fod t.hap)
+      (~(buck is now) hap)
     ::
     ++  poke  
       |=  [now=@da ovo=*]
@@ -62,7 +58,7 @@
           =+  beg=(~(get by deb.sys) u.p.mov)
           ?^(beg u.beg (berg u.p.mov))
       =+  ^=    yub
-          %^    leap:(beg now (shax now) |=(a=* (beck u.p.mov (path a))))
+          %^    leap:(beg now (shax now) |=(a=* (buck (path a))))
               pex 
             q.mov 
           r.mov
@@ -85,27 +81,18 @@
       sys(lyd q.yub)
     --
   ::
-  ++  auth                                                  ::  match password
-    |=  [our=flag cof=chum]
-    ^-  ?
-    =+  fup=(~(get by gem.eyre.sys) our)
-    ?^  fup
-      =(cof u.fup)
-    =+  gys=(~(us go ton.fox.rav.sys) our)
-    ?&(?=(^ gys) =(cof (shak our pac:ex:q:sen:u.gys)))
-  ::
-  ++  beck                                                  ::  namespace
-    |=  [our=flag hap=path]
+  ++  buck
+    |=  hap=path
     ^-  (unit)
-    ::  ~&  [%beck our hap]
     ?.  ?=([@ @ @ *] hap)  ~
-    =+  :*  fal=(slay i.hap) 
+    =+  :*  hyr=(slay i.hap) 
             ved=(slay i.t.hap) 
-            hyr=(slay i.t.t.hap)
+            fal=(slay i.t.t.hap)
             tyl=t.t.t.hap
         ==
-    ?.  ?=([~ %% %p @] fal)  ~
     ?.  ?=([~ %% %tas @] hyr)  ~
+    ?.  ?=([~ %% %p @] fal)  ~
+    =+  our=`@p`q.p.u.fal
     =+  [pef=(end 3 1 q.p.u.hyr) rem=(rsh 3 1 q.p.u.hyr)]
     ?+    pef  ~
         %a                                                  ::  ames
@@ -123,25 +110,6 @@
       ?.  ?=(?(%z %y %x %w) rem)  ~
       ?.  ?=([~ %% ?(%ud %da %tas) @] ved)  ~
       (scry:yac.sys rem our u.ved tyl)
-    ==
-  ::
-  ++  dear                                                  ::  global vision
-    |=  [mol=@tas hap=path]
-    ~&  [%dear mol hap]
-    ^-  (unit)
-    ?+    mol  ~
-        %eyre
-      ?+    hap  ~
-          [%prod *]  ^-  (unit ,[p=prom q=@tas])
-        =+  yup=(~(get by rev.eyre.sys) `vein`[t.hap ~])
-        ?~  yup
-          [~ & '# ']
-        =+  byg=(~(get by deb.sys) u.yup)
-        ?~  byg
-          [~ & (cat 3 ~(rent co ~ %p u.yup) '> ')]
-        =+  pro=prot:(u.byg now (shax now) |=(a=* (beck u.yup (path a))))
-        [~ p.pro (rap 3 q.pro)]
-      ==
     ==
   ::
   ++  grit                                                  ::  cause privilege

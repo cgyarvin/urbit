@@ -147,15 +147,15 @@
       ?>  own.yar
       =+  lix=(~(get by dos.yar) q.fav)
       =+  saq=`desk`?^(lix u.lix [~ 0 ~])
-      :-  =+  one=~(rend co ~ %p who)
-          =+  two=~(rend co ~ %ud let.saq)
+      :-  =+  one=~(rend co ~ %ud let.saq)
+          =+  two=~(rend co ~ %p who)
           =+  tre=(rip 3 q.fav)
           %+  turn
             r.fav
           |=  uke=ukaz  ^-  card
           =+  qua=~(ram re (dish:ut [~ %path] p.uke))
           =+  qui=?-(-.q.uke %del '-', %set ?:(=(0 q.q.uke) '+' ':'))
-          [%note qui %leaf "{one}/{two}/cx/{tre}{qua}"]
+          [%note qui %leaf "/cx/{one}/{two}/{tre}{qua}"]
       %_    +>.$
           rof
         %+  ~(put by rof)
