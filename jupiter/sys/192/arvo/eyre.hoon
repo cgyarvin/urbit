@@ -29,7 +29,7 @@
       $:  rav=_*alga                                        ::  PKI and net
           deb=(map flag _*berg)                             ::  shell
           yac=_clay                                         ::  filesystem
-          lyd=_dill                                         ::  terminal
+          lyd=vane                                          ::  terminal
           ^=  eyre                                          ::  i/o
         $:  gem=(map flag chum)                             ::  hashed passcodes
             liv=(map flag (list vein))                      ::  live consoles

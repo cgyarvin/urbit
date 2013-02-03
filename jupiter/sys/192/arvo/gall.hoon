@@ -3,14 +3,15 @@
 ::
 |%                                                      
 ++  gall                                                ::  http system
+  ^-  vane
   =|  $:  seh=(list ,[p=host q=flag])                   ::  http servers
       ==
   |=  [now=@da eny=@ sky=||(* (unit))]                  ::  activate
-  |%                                                    ::
+  ^?  |%                                                ::
   ++  peek  |=(path `(unit)`~)                          ::  enquire
   ++  poke                                              ::  apply
     |=  [whu=(unit flag) pax=path hen=vein fav=card]
-    ^-  [p=(list move) q=_..^$]
+    ^-  [p=(list move) q=vane]
     ?+    -.fav  !!
         %bind                                           ::  register server
       ?>  =(%gold (adit hen))
@@ -21,6 +22,7 @@
           ==
       =+  giy=~(rend co ~ %p p.fav)
       :-  [[~ hen [%warn "http: serving {nom} as {giy}"]] ~]
+      ^|
       %=    ..^$
           seh
         :-  [q.fav p.fav]
@@ -28,7 +30,7 @@
       ==
     ::
         ?(%thin %this)                                  ::  process request
-      :_  ..^$
+      :_  ^|(..^$)
       :_  ~
       =+  heq=(thin =(%this -.fav) p.fav)
       =+  ^=  whu  |-  ^-  (unit ,@p)

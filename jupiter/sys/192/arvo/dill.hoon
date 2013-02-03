@@ -5,7 +5,7 @@
 ++  dill                                                ::  terminal handling
   =|  wib=(map vein yard)                               ::  state by terminal
   |=  [now=@da eny=@ sky=||(* (unit))]                  ::  current invocation
-  |%                                                    ::  poke/peek pattern
+  ^?  |%                                                ::  poke/peek pattern
   ++  peek
     |=  pax=path
     ^-  (unit)
@@ -13,7 +13,7 @@
   ::
   ++  poke                                              ::  process move
     |=  [whu=(unit flag) pax=path hen=vein fav=card]
-    ^-  [p=(list move) q=_..^$]
+    ^-  [p=(list move) q=vane]
     ::  =>  ^+(. ?:(?=([%bleb %txt *] fav) . ~&([%dill-poke fav hen] .)))
     =^  yar  +> 
       ^-  [yard _+>]

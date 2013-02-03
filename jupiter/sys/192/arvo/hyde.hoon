@@ -396,6 +396,17 @@
               ==                                        ::
           ==                                            ::
 ++  umaz  ,[p=(list ukaz) q=(list ukaz)]                ::  dual change
+++  vane  $_                                            ::  kernel module
+          |+  [now=@da eny=@ sky=||(* (unit))]          ::  activate
+          ^?  |%                                        ::
+              ++  peek  |=(pax=path *(unit))            ::  enquire
+              ++  poke  |=  $:  whu=(unit flag)         ::  apply
+                                pax=path                ::
+                                hen=vein                :: 
+                                fav=card                ::
+                            ==                          ::
+                        [p=*(list move) q=*vane]        ::
+              --                                        ::
 ++  wand  (list ,[p=mark q=acro])                       ::  mace in action
 ++  what                                                ::  logical identity
           $%  [%crew p=corp]                            ::  business
