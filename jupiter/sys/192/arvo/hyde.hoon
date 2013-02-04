@@ -357,7 +357,7 @@
           ==                                            ::
 ++  salt  ,@uv                                          ::  entropy
 ++  scab                                                ::  logical request 
-          $:  p=oryx                                    ::  server secret
+          $:  p=oryx                                    ::  CSRF secret
               q=quay                                    ::  query
               r=scud                                    ::  url regenerator
           ==                                            ::

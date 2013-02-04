@@ -123,9 +123,10 @@
   ?>  ?=(^ cag)
   =+  buk=i.cag
   =+  hub=(hoof stub)
-  =+  ryt=[~(rent co ~ %da q.mad) ~(rent co ~ %p p.mad) ~]
-  =+  tyc=(weld (flop t.cag) `path`[%web buk %cy ryt])
-  =+  tox=(weld (flop t.cag) `path`[%web buk %cx ryt])
+  =+  ven=~(rent co ~ %da q.mad)
+  =+  god=~(rent co ~ %p p.mad)
+  =+  tyc=(weld (flop t.cag) `path`[%web buk god ven %cy ~])
+  =+  tox=(weld (flop t.cag) `path`[%web buk god ven %cx ~])
   =<  veen
   |%
   ++  drem
@@ -158,7 +159,7 @@
   ::
   ++  veen
     |-  ^-  (unit love)
-    ?:  =(tyc [buk %cy ryt])  ~
+    ?:  =(tyc [buk god ven %cy])  ~
     ?~  tyc  !!
     ?~  tox  !!
     =+  rab=?~(r.q.r.zab dunt (drem u.r.q.r.zab))
