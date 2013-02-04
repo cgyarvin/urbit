@@ -3,14 +3,15 @@
 ::
 |%                                                      
 ++  gall                                                ::  http system
-  ^-  vane
-  =|  $:  seh=(list ,[p=host q=flag])                   ::  http servers
-      ==
+  ^-  vane                                              ::  kernel instrument
+  =|                                                    ::  instrument state
+      $:  seh=(list ,[p=host q=flag])                   ::  host permissions
+      ==                                                ::
   |=  [now=@da eny=@ sky=||(* (unit))]                  ::  activate
-  ^?  |%                                                ::
-  ++  peek  |=(path `(unit)`~)                          ::  enquire
-  ++  poke                                              ::  apply
-    |=  [whu=(unit flag) pax=path hen=hose fav=card]
+  ^?                                                    ::  opaque core
+  |%                                                    ::
+  ++  beat                                              ::  process move
+    |=  [whu=(unit flag) pax=tire hen=hose fav=card]
     ^-  [p=(list move) q=vane]
     ?+    -.fav  !!
         %bind                                           ::  register server
@@ -42,5 +43,10 @@
         [~ hen [%thou 404 ~ ~]]
       [whu [[%bede ~] hen] [%thee heq]]
     ==
+  ::
+  ++  scry
+    |=  [ren=@tas who=flag lot=coin tyl=path]
+    ^-  (unit)
+    !!
   --
 --

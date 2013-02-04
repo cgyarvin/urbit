@@ -240,7 +240,7 @@
 ++  hook  path                                          ::  request origin
 ++  hart  ,[p=? q=(unit ,@ud) r=host]                   ::  http sec/port/host
 ++  hort  ,[p=(unit ,@ud) q=host]                       ::  http port/host
-++  hose  (list path)                                   ::  causal history
+++  hose  (list tire)                                   ::  causal history
 ++  host  $%([& p=(list ,@t)] [| p=@if])                ::  http host
 ++  httq                                                ::  raw http request
           $:  p=?(%get %post)                           ::  method
@@ -334,6 +334,7 @@
               [| p=pork q=quay]                         ::  relative
           ==                                            ::
 ++  rank  ?(%czar %king %duke %jack %pawn)              ::  flag width class
+++  rink  path                                          ::  prompt path
 ++  road                                                ::  secured oneway route
           $:  exp=@da                                   ::  expiration date
               lun=(unit lane)                           ::  route to friend
@@ -382,6 +383,7 @@
 ++  task  _|+([@da path note] *bowl)                    ::  process core
 ++  taxi  ,[p=lane q=rock]                              ::  routed packet
 ++  tick  ,@ud                                          ::  process id
+++  tire  path                                          ::  event pretext
 ++  tray  ,[p=(unit lane) q=meal]                       ::  routed payload
 ++  town                                                ::  all security state
           $:  lit=@ud                                   ::  imperial modulus
@@ -396,27 +398,35 @@
               ==                                        ::
           ==                                            ::
 ++  umaz  ,[p=(list ukaz) q=(list ukaz)]                ::  dual change
-++  vane  $_                                            ::  kernel module
+++  vane  $_                                            ::  kernel actor
           |+  [now=@da eny=@ sky=||(* (unit))]          ::  activate
           ^?  |%                                        ::
-              ++  peek  |=(pax=path *(unit))            ::  enquire
-              ++  poke  |=  $:  whu=(unit flag)         ::  apply
-                                pax=path                ::
-                                hen=hose                :: 
-                                fav=card                ::
+              ++  beat                                  ::  update
+                        |=  $:  whu=(unit flag)         ::  calling identity
+                                pax=tire                ::  pretext
+                                hen=hose                ::  pedigree
+                                fav=card                ::  event
                             ==                          ::
-                        [p=*(list move) q=*vane]        ::
+                        :-  p=*(list move)              ::  actions
+                        q=*vane                         ::  consequence
+              ++  scry                                  ::  inspect
+                        |=  $:  ren=@tas                ::  mode
+                                who=flag                ::  identity
+                                lot=coin                ::  version
+                                tyl=path                ::  location
+                            ==                          ::
+                        *(unit)                         ::  record
               --                                        ::
 ++  wand  (list ,[p=mark q=acro])                       ::  mace in action
 ++  what                                                ::  logical identity
           $%  [%crew p=corp]                            ::  business
-              [%dept p=corp]                            ::  govt/education
+              [%dept p=corp]                            ::  agency
               [%fair p=corp]                            ::  nonprofit
               [%home p=corp]                            ::  family
               [%holy p=corp]                            ::  religious
               [%lady p=whom]                            ::  female individual
-              [%flag p=whom]                            ::  male individual
-              [%punk p=@t]                              ::  fictitious id
+              [%lord p=whom]                            ::  male individual
+              [%punk p=@t]                              ::  opaque identity
           ==                                            ::
 ++  whom  ,[p=@ud q=@t r=@tas s=name]                   ::  yob/state/nation/me
 ++  will  (list deed)                                   ::  certificate
@@ -425,6 +435,6 @@
           $:  p=?                                       ::  verbose 
               q=(list flag)                             ::  owner stack
               r=blur                                    ::  display state
-              s=(map ,[p=flag q=path] hist)             ::  history
+              s=(map ,[p=flag q=rink] hist)             ::  history
           ==                                            ::
 --                                                      ::

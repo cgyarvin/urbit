@@ -1,6 +1,33 @@
 !:
 ::          %bede, the shell.  This file is in the public domain.
 ::
+=<
+  |%
+  ++  bede                                              ::  terminal handling
+    ^-  vane                                            ::  kernel instrument
+    =|                                                  ::  system state
+        $:  deb=(map flag _*berg)                       ::  state by terminal
+        ==                                              ::
+    |=  [now=@da eny=@ sky=||(* (unit))]                ::  current invocation
+    ^?                                                  ::  opaque core
+    |%                                                  ::  poke/peek pattern
+    ++  beat                                            ::  process move
+      |=  [whu=(unit flag) tea=tire hen=hose fav=card]
+      ^-  [p=(list move) q=vane]
+      ?>  ?=(^ whu)
+      =+  ^=  beg  ^+  *berg
+          =+  beg=(~(get by deb) u.whu)
+          ?^(beg u.beg (berg u.whu))
+      =+  yub=(leap:(beg now (shax now) sky) tea hen fav)
+      :-  p.yub
+      ..^$(deb (~(put by deb) u.whu q.yub))
+    ::
+    ++  scry
+      |=  [ren=@tas who=flag lot=coin tyl=path]
+      ^-  (unit)
+      ~
+    --
+  --
 |%
 ++  berg                                                ::  repl/shell
   |=  who=flag                                          ::  per identity

@@ -1081,12 +1081,36 @@
     --                                                  ::  (wish)
   --                                                    ::  (am)
 ::
-++  alga
-  |=  any=@
-  =+  fox=*fort
-  =.  any.ton.fox  (shax any)
-  =+  mel=(map ,@p (map ,@p (map path ,[p=time q=*])))  ::  state
-  =+  doy=(map ,* card)                                 ::  ack map
+++  ames                                                ::  terminal handling
+  ^-  vane                                              ::  kernel instrument
+  =|                                                    ::  instrument state
+      $:  fox=fort                                      ::  network state
+      ==                                                ::
+  |=  [now=@da eny=@ sky=||(* (unit))]                  ::  current invocation
+  ^?                                                    ::  opaque core
+  =<
+    |%                                                  ::  poke/peek pattern
+    ++  beat                                            ::  process move
+      |=  [whu=(unit flag) tea=tire hen=hose fav=card]
+      ^-  [p=(list move) q=vane]
+      =^  duy  ..knap
+        (knap fav)
+      :-  (turn duy |=(a=card [whu hen a]))
+      ..^$
+    ::
+    ++  scry
+      |=  [ren=@tas who=flag lot=coin tyl=path]
+      ^-  (unit)
+      ?.  =(0 ren)  ~
+      ?+    lot  ~
+          [%% %ud @]
+        (perm who who q.p.lot tyl)
+      ::
+          [%% %da @]
+        ?.  =(now q.p.lot)  ~
+        (temp who who tyl)
+      ==
+    --
   |%
   ++  clop
     |=  [now=@da bon=boon]
@@ -1109,8 +1133,8 @@
     ==
   ::
   ++  knap
-    |=  [now=@da fav=card]
-    ^-  [p=(list card) q=_+>]
+    |=  fav=card
+    ^-  [(list card) _+>]
     =+  ^=  fuy  ^-  [p=(list boon) q=fort]
         ?+    -.fav  !!
             %cash

@@ -22,9 +22,9 @@
     --
 =>  |%
     ++  game
-      $:  rav=_*alga                                        ::  PKI and net
-          deb=(map flag _*berg)                             ::  shell
-          yac=_clay                                         ::  filesystem
+      $:  rav=vane                                          ::  PKI and net
+          dyb=vane                                          ::  shell
+          yac=vane                                          ::  filesystem
           lyd=vane                                          ::  terminal
           ^=  eyre                                          ::  i/o
         $:  gem=(map flag chum)                             ::  hashed passcodes
@@ -35,52 +35,45 @@
       == 
     --
 =+  sys=*game
+=.  dyb.sys  bede
 =.  lyd.sys  dill
-=.  rav.sys  $:alga
-=.  yac.sys  clay
+=.  rav.sys  ames
+=.  yac.sys  cary
 |%
 ++  is
   |_  now=@da 
   ++  si
     |%  
     ++  arv
-      |=  [pex=path mov=move]
+      |=  [pex=tire mov=move]
       ^-  [(list move) game]
-      =+  yub=(knap:rav.sys now r.mov)
-      :-  (turn p.yub |=(a=card [p.mov q.mov a]))
+      =+  yub=(beat:(rav.sys now (shax now) beck) p.mov pex q.mov r.mov)
+      :-  p.yub
       sys(rav q.yub)
     ::
     ++  bed
-      |=  [pex=path mov=move]
+      |=  [pex=tire mov=move]
       ^-  [(list move) game]
-      ?>  ?=(^ p.mov)
-      =+  ^=  beg  ^+  *berg
-          =+  beg=(~(get by deb.sys) u.p.mov)
-          ?^(beg u.beg (berg u.p.mov))
-      =+  ^=    yub
-          %^    leap:(beg now (shax now) |=(a=* (buck (path a))))
-              pex 
-            q.mov 
-          r.mov
+      =+  yub=(beat:(dyb.sys now (shax now) beck) p.mov pex q.mov r.mov)
       :-  p.yub
-      sys(deb (~(put by deb.sys) u.p.mov q.yub))
+      sys(dyb q.yub)
     ::
     ++  car
-      |=  [pex=path mov=move]
+      |=  [pex=tire mov=move]
       ^-  [(list move) game]
-      ?>  ?=(^ p.mov)
-      =+  yub=(drip:yac.sys now u.p.mov r.mov)
-      :-  (turn p.yub |=(a=card [p.mov q.mov a]))
+      =+  yub=(beat:(yac.sys now (shax now) beck) p.mov pex q.mov r.mov)
+      :-  p.yub
       sys(yac q.yub)
     ::
     ++  dyl
-      |=  [pex=path mov=move]
+      |=  [pex=tire mov=move]
       ^-  [(list move) game]
-      =+  yub=(poke:(lyd.sys now (shax now) |=(a=* !!)) p.mov pex q.mov r.mov)
+      =+  yub=(beat:(lyd.sys now (shax now) beck) p.mov pex q.mov r.mov)
       :-  p.yub
       sys(lyd q.yub)
     --
   ::
+  ++  beck  |=(a=* (buck (path a)))
   ++  buck
     |=  hap=path
     ^-  (unit)
@@ -95,21 +88,8 @@
     =+  our=`@p`q.p.u.fal
     =+  [pef=(end 3 1 q.p.u.hyr) rem=(rsh 3 1 q.p.u.hyr)]
     ?+    pef  ~
-        %a                                                  ::  ames
-      ?.  =(0 rem)  ~
-      ?+    ved  ~
-          [~ %% %ud @]
-        (perm:rav.sys our q.p.u.fal q.p.u.ved tyl)
-      ::
-          [~ %% %da @]
-        ?.  =(now q.p.u.ved)  ~
-        (temp:rav.sys our q.p.u.fal tyl)
-      ==
-    ::
-        %c                                                  ::  cary
-      ?.  ?=(?(%z %y %x %w) rem)  ~
-      ?.  ?=([~ %% ?(%ud %da %tas) @] ved)  ~
-      (scry:yac.sys rem our u.ved tyl)
+        %a  (scry:(rav.sys now (shax now) beck) rem our u.ved tyl)
+        %c  (scry:(yac.sys now (shax now) beck) rem our u.ved tyl)
     ==
   ::
   ++  grit                                                  ::  cause privilege

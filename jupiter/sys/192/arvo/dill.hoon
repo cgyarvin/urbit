@@ -1,18 +1,17 @@
 !:
 ::          %dill, terminal handling.  This file is in the public domain.
 ::
-|%                                                      
+|%
 ++  dill                                                ::  terminal handling
-  =|  wib=(map hose yard)                               ::  state by terminal
+  ^-  vane                                              ::  kernel instrument
+  =|                                                    ::  system state
+      $:  wib=(map hose yard)                           ::  state by terminal
+      ==                                                ::
   |=  [now=@da eny=@ sky=||(* (unit))]                  ::  current invocation
-  ^?  |%                                                ::  poke/peek pattern
-  ++  peek
-    |=  pax=path
-    ^-  (unit)
-    !!
-  ::
-  ++  poke                                              ::  process move
-    |=  [whu=(unit flag) pax=path hen=hose fav=card]
+  ^?                                                    ::  opaque core
+  |%                                                    ::  poke/peek pattern
+  ++  beat                                              ::  process move
+    |=  [whu=(unit flag) pax=tire hen=hose fav=card]
     ^-  [p=(list move) q=vane]
     ::  =>  ^+(. ?:(?=([%bleb %txt *] fav) . ~&([%dill-poke fav hen] .)))
     =^  yar  +> 
@@ -23,7 +22,7 @@
             :*  &
                 ?~(whu ~ [u.whu ~])
                 [80 ~ *blot]
-                *(map ,[p=flag q=path] hist)
+                *(map ,[p=flag q=rink] hist)
             ==
         [yer +>.$(wib (~(put by wib) hen yer))]
       [u.yur +>.$]
@@ -323,5 +322,10 @@
       ::  ~&  [%yerk-moves mos]
       [(flop mos) ..^$(wib (~(put by wib) hen yar))]
     --
+  ::
+  ++  scry
+    |=  [ren=@tas who=flag lot=coin tyl=path]
+    ^-  (unit)
+    ~
   --
 --
