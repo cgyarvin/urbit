@@ -1099,16 +1099,16 @@
       ..^$
     ::
     ++  scry
-      |=  [ren=@tas who=flag lot=coin tyl=path]
+      |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
       ^-  (unit)
       ?.  =(0 ren)  ~
       ?+    lot  ~
           [%% %ud @]
-        (perm who who q.p.lot tyl)
+        (perm our his q.p.lot tyl)
       ::
           [%% %da @]
         ?.  =(now q.p.lot)  ~
-        (temp who who tyl)
+        (temp our his tyl)
       ==
     --
   |%

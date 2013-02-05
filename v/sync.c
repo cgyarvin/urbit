@@ -28,7 +28,8 @@ static u2_noun
 _sync_peek_arch(u2_reck* rec_u, u2_noun pos, u2_noun bok)
 {
   return u2_reck_prick
-    (rec_u, u2nc(c3_s2('c','z'),
+    (rec_u, u2k(rec_u->own),
+                 u2nc(c3_s2('c','z'),
                  u2nq(u2k(rec_u->wen),
                           pos, 
                           bok,
@@ -41,7 +42,8 @@ static u2_bean
 _sync_peek_home(u2_reck* rec_u, u2_noun pos)
 {
   u2_noun pec = u2_reck_prick
-    (rec_u, u2nc('a',
+    (rec_u, u2k(rec_u->own),
+            u2nc('a',
                  u2nq(u2k(rec_u->wen),
                           pos,
                           c3__mark,

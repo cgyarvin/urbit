@@ -324,7 +324,7 @@
     --
   ::
   ++  scry
-    |=  [ren=@tas who=flag lot=coin tyl=path]
+    |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
     ^-  (unit)
     ~
   --

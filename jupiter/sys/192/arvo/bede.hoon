@@ -23,7 +23,7 @@
       ..^$(deb (~(put by deb) u.whu q.yub))
     ::
     ++  scry
-      |=  [ren=@tas who=flag lot=coin tyl=path]
+      |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
       ^-  (unit)
       ~
     --
@@ -199,7 +199,7 @@
             ==
           ::
             ;~  pfix  ;~(plug (just 'k') (just 'l') gap)
-              (stag %kl (cook |=(a=mole ?>(?=(%ud p.a) q.a)) bisk:so))
+              (stag %kl (cook |=(a=dime ?>(?=(%ud p.a) q.a)) bisk:so))
             ==
           ::
             (cold [%nk ~] ;~(plug (just 'n') (just 'k')))

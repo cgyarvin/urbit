@@ -1297,7 +1297,7 @@
   ::
   ++  cert  (list ,@)
   ++  char  ,@tD
-  ++  coin  $%  [%% p=mole]
+  ++  coin  $%  [%% p=dime]
                 [%blob p=*]
                 [%many p=(list coin)]
             ==
@@ -1312,7 +1312,7 @@
             :-  p=(hair -.b) 
             q=?@(+.b ~ [~ u=[p=(a +>-.b) q=[p=(hair -.b) q=(tape +.b)]]])
   ++  nail  ,[p=hair q=tape]
-  ++  mole  ,[p=@ta q=@]
+  ++  dime  ,[p=@ta q=@]
   ++  pass  ,@
   ++  path  (list span)
   ++  pint  ,[p=[p=[p=@ q=@] q=[p=@ q=@]]]
@@ -2558,7 +2558,7 @@
     ++  crub
       ;~  pose
         %+  cook
-          |=(det=date `mole`[%da (year det)])
+          |=(det=date `dime`[%da (year det)])
         ;~  plug
           %+  cook
             |=([a=@ b=?] [b a])
@@ -2582,7 +2582,7 @@
         %+  cook
           |=  [a=(list ,[p=?(%d %h %m %s) q=@]) b=(list ,@)]
           =+  rop=`tarp`[0 0 0 0 b]
-          |-  ^-  mole
+          |-  ^-  dime
           ?~  a
             [%dr (yule rop)]
           ?-  p.i.a
@@ -2636,13 +2636,13 @@
       ==
     ++  tash
       =+  ^=  neg
-          |=  [syn=? mol=mole]  ^-  mole
+          |=  [syn=? mol=dime]  ^-  dime
           ?>  =('u' (end 3 1 p.mol))
           [(cat 3 's' (rsh 3 1 p.mol)) (new:si syn q.mol)]
       ;~  pfix  hep
         ;~  pose
-          (cook |=(a=mole (neg | a)) bisk)
-          ;~(pfix hep (cook |=(a=mole (neg & a)) bisk))
+          (cook |=(a=dime (neg | a)) bisk)
+          ;~(pfix hep (cook |=(a=dime (neg & a)) bisk))
         ==
       ==
     ++  twid
@@ -2659,7 +2659,7 @@
         royl
       ==
     --
-  ++  scot  |=(mol=mole ~(rent co %% mol))
+  ++  scot  |=(mol=dime ~(rent co %% mol))
   ++  slay
     |=  txt=@ta  ^-  (unit coin)
     =+  vex=((full nuck:so) [[1 1] (trip txt)])

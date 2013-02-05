@@ -210,9 +210,11 @@ _reck_time_bump(u2_reck* rec_u)
 /* u2_reck_peek(): query the reck namespace (protected).
 */
 u2_noun
-u2_reck_peek(u2_reck* rec_u, u2_noun hap)
+u2_reck_peek(u2_reck* rec_u, u2_noun our, u2_noun hap)
 {
-  return _reck_hard(rec_u, u2k(rec_u->rec), "peek", u2nc(u2k(rec_u->now), hap));
+  u2_noun sam = u2nt(our, u2k(rec_u->now), hap);
+
+  return _reck_hard(rec_u, u2k(rec_u->rec), "peek", sam);
 }
 
 /* u2_reck_init(): load the reck engine, from kernel.
@@ -794,7 +796,7 @@ u2_reck_line(u2_reck* rec_u, u2_noun lin)
 /* u2_reck_prick(): query the reck namespace (unprotected).
 */
 u2_noun
-u2_reck_prick(u2_reck* rec_u, u2_noun hap)
+u2_reck_prick(u2_reck* rec_u, u2_noun our, u2_noun hap)
 {
   u2_noun hoe;
   u2_noun que;
@@ -810,7 +812,7 @@ u2_reck_prick(u2_reck* rec_u, u2_noun hap)
     return u2_none;
   } 
   else {
-    que = u2_reck_peek(rec_u, hap);
+    que = u2_reck_peek(rec_u, our, hap);
     u2_cm_done();
   
     u2_cm_purge();

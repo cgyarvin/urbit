@@ -4,8 +4,7 @@
 |%                                                      
 ++  gall                                                ::  http system
   ^-  vane                                              ::  kernel instrument
-  =|                                                    ::  instrument state
-      $:  seh=(list ,[p=host q=flag])                   ::  host permissions
+  =|  $:  seh=(list ,[p=host q=flag])                   ::  host permissions
       ==                                                ::
   |=  [now=@da eny=@ sky=||(* (unit))]                  ::  activate
   ^?                                                    ::  opaque core
@@ -30,8 +29,8 @@
         (skip seh |=([a=host b=flag] (hone q.fav a)))
       ==
     ::
-        ?(%thin %this)                                  ::  process request
-      :_  ^|(..^$)
+        ?(%thin %this)                                  ::  http request
+      :_  ..^$
       :_  ~
       =+  heq=(thin =(%this -.fav) p.fav)
       =+  ^=  whu  |-  ^-  (unit ,@p)
@@ -42,11 +41,23 @@
       ?~  whu
         [~ hen [%thou 404 ~ ~]]
       [whu [[%bede ~] hen] [%thee heq]]
+    ::
+        %that                                           ::  http response
+      :_  ..^$
+      :_  ~
+      :+  ~  hen
+      :-  %thou
+      ^-  httr
+      ?-  -.p.fav
+        %mid  [200 ~[content-type/(moon p.p.fav)] [~ q.p.fav]]
+        %ham  [200 ~[content-type/'text/html'] [~ (tact (xmlt p.p.fav ~))]]
+        %raw  p.p.fav
+      ==
     ==
   ::
   ++  scry
-    |=  [ren=@tas who=flag lot=coin tyl=path]
+    |=  [our=flag ren=@tas who=flag lot=coin tyl=path]
     ^-  (unit)
-    !!
+    ~
   --
 --

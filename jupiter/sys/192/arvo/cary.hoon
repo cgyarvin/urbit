@@ -198,13 +198,14 @@
       ==
     ==
   ++  scry                                              ::  inspect
-    |=  [ren=@tas who=flag lot=coin tyl=path]
+    |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
     ::  ~&  [%scry ren who lot tyl]
     ^-  (unit)
     ?~  tyl  ~
+    ?>  =(our his)                                      ::  XX temporary
     =+  poj=(slay i.tyl)
     ?.  ?=([~ %% %tas *] poj)  ~
-    =+  yar=(~(get by rof) who)
+    =+  yar=(~(get by rof) his)
     ?~  yar  ~
     =+  siq=`(unit desk)`(~(get by dos.u.yar) q.p.u.poj)
     ?~  siq  ~

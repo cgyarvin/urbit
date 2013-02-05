@@ -410,8 +410,9 @@
                         :-  p=*(list move)              ::  actions
                         q=*vane                         ::  consequence
               ++  scry                                  ::  inspect
-                        |=  $:  ren=@tas                ::  mode
-                                who=flag                ::  identity
+                        |=  $:  our=flag                ::  observer
+                                ren=@tas                ::  mode
+                                his=flag                ::  target
                                 lot=coin                ::  version
                                 tyl=path                ::  location
                             ==                          ::
