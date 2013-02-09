@@ -251,7 +251,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     free(dyt_c);
   }
   {
-    u2_noun syd, zen, yen, xan, wol, ray, dyl, gul, zus, vay;
+    u2_noun syd, zen, yen, xan, wol, ray, dyl, yer, vay;
 
     syd = u2k(rec_u->syd);
 
@@ -279,19 +279,11 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
       // printf("dill:\n");
       dyl = _reck_load_temp(rec_u, ray, kno_w, "arvo/dill.hoon");
 
-      // printf("gall:\n");
-      gul = _reck_load_temp(rec_u, dyl, kno_w, "arvo/gall.hoon");
-#if 0
-      // printf("zuse:\n");
-      zus = _reck_load_temp(rec_u, u2k(gul), kno_w, "arvo/zuse.hoon");
-      u2z(zus);
-
       // printf("eyre:\n");
-      vay = _reck_load_temp(rec_u, gul, kno_w, "arvo/eyre.hoon");
-#else
+      yer = _reck_load_temp(rec_u, dyl, kno_w, "arvo/eyre.hoon");
+
       // printf("zuse:\n");
-      vay = _reck_load_temp(rec_u, gul, kno_w, "arvo/zuse.hoon");
-#endif 
+      vay = _reck_load_temp(rec_u, yer, kno_w, "arvo/zuse.hoon");
     }
     rec_u->rec = vay;
   }

@@ -30,7 +30,7 @@
         b/bede
         c/cary
         d/dill
-        g/gall
+        e/eyre
     ==
 |%
 ++  is                                                  ::  operate in time
@@ -65,7 +65,7 @@
     ?+  -.fav                                           ::  on event kind
       ~&([%goad-fav -.fav] !!)                          ::  XX temporary
       %bbye  ~                                          ::  reset prompt
-      %bind  [~ %g]                                     ::  publish http
+      %bind  [~ %e]                                     ::  publish http
       %belt  [~ %d]                                     ::  terminal input
       %blew  [~ %d]                                     ::  terminal config
       %blit  ~                                          ::  terminal output
@@ -84,10 +84,10 @@
       %nuke  [~ %b]                                     ::  kill all processes
       %talk  [~ %d]                                     ::  show on console
       %text  [~ %d]                                     ::  talk leaf
-      %that  [~ %g]                                     ::  htresponse, cooked
-      %thee  [~ %g]                                     ::  htrequest, cooked
-      %thin  [~ %g]                                     ::  htrequest, insecure
-      %this  [~ %g]                                     ::  htrequest, secure
+      %that  [~ %e]                                     ::  htresponse, cooked
+      %thee  [~ %e]                                     ::  htrequest, cooked
+      %thin  [~ %e]                                     ::  htrequest, insecure
+      %this  [~ %e]                                     ::  htrequest, secure
       %thou  ~                                          ::  htresponse, raw
       %warn  [~ %d]                                     ::  system message
     ==

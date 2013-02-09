@@ -1,8 +1,8 @@
 !:
-::          %gall, http.  This file is in the public domain.
+::          %eyre, http.  This file is in the public domain.
 ::
 |%                                                      
-++  gall                                                ::  http system
+++  eyre                                                ::  http system
   ^-  vane                                              ::  kernel instrument
   =|  $:  seh=(list ,[p=host q=flag])                   ::  host permissions
       ==                                                ::
@@ -42,7 +42,7 @@
           $(seh t.seh)
       ?~  whu
         [~ hen [%thou 404 ~ ~]]
-      [whu [/b/ /g/ hen] [%thee heq]]
+      [whu [/b/ /e/ hen] [%thee heq]]
     ::
         %that                                           ::  http response
       :_  ..^$
