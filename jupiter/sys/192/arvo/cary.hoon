@@ -140,6 +140,10 @@
     ^-  [p=(list move) q=vane]
     ?+    -.fav  !! 
         %edit
+      =.  whu  
+          ?^  whu  whu
+          ?.  =(%gold (adit hen))  ~
+          [~ p.fav] 
       ?>  =(u.whu p.fav)
       =+  yar=(need (~(get by rof) u.whu))
       ?>  own.yar
@@ -174,7 +178,7 @@
         ==
       ==
     ::
-        %init
+        %keep
       ::  [[%tell %0 %leaf "cary: home for {~(rend co ~ %p u.whu)}"] ~]
       [~ ..^$(rof (~(put by rof) u.whu `room`[& ~]))]
     ::

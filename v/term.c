@@ -423,14 +423,14 @@ _term_it_show_more(u2_utty* uty_u)
   uty_u->tat_u.mir.cus_w = 0;
 }
 
-/* _term_io_bleb(): send bleb.
+/* _term_io_belt(): send belt.
 */
 static void
-_term_io_bleb(u2_reck* rec_u,
+_term_io_belt(u2_reck* rec_u,
               u2_utty* uty_u,
               u2_noun  blb)
 {
-  u2_reck_plan(rec_u, u2k(uty_u->pax), u2nc(c3__bleb, blb));
+  u2_reck_plan(rec_u, u2k(uty_u->pax), u2nc(c3__belt, blb));
 }
 
 /* _term_io_suck_char(): process a single character.
@@ -451,17 +451,17 @@ _term_io_suck_char(u2_reck* rec_u,
           _term_it_queue_txt(uty_u, uty_u->ufo_u.out.bel_y);
           break;
         }
-        case 'A': _term_io_bleb(rec_u, uty_u, u2nc(c3__aro, 'u')); break;
-        case 'B': _term_io_bleb(rec_u, uty_u, u2nc(c3__aro, 'd')); break;
-        case 'C': _term_io_bleb(rec_u, uty_u, u2nc(c3__aro, 'r')); break;
-        case 'D': _term_io_bleb(rec_u, uty_u, u2nc(c3__aro, 'l')); break;
+        case 'A': _term_io_belt(rec_u, uty_u, u2nc(c3__aro, 'u')); break;
+        case 'B': _term_io_belt(rec_u, uty_u, u2nc(c3__aro, 'd')); break;
+        case 'C': _term_io_belt(rec_u, uty_u, u2nc(c3__aro, 'r')); break;
+        case 'D': _term_io_belt(rec_u, uty_u, u2nc(c3__aro, 'l')); break;
       }
       tat_u->esc.ape = tat_u->esc.bra = u2_no;
     }
     else {
       if ( (cay_y >= 'a') && (cay_y <= 'z') ) {
         tat_u->esc.ape = u2_no;
-        _term_io_bleb(rec_u, uty_u, u2nc(c3__met, cay_y));
+        _term_io_belt(rec_u, uty_u, u2nc(c3__met, cay_y));
       }
       else if ( ('[' == cay_y) || ('O' == cay_y) ) {
         tat_u->esc.bra = u2_yes;
@@ -486,27 +486,27 @@ _term_io_suck_char(u2_reck* rec_u,
       // uL(fprintf(uH, "muck-utf32 %x\n", tat_u->fut.len_w));
 
       tat_u->fut.len_w = tat_u->fut.wid_w = 0;
-      _term_io_bleb(rec_u, uty_u, u2nt(c3__txt, wug, u2_nul));
+      _term_io_belt(rec_u, uty_u, u2nt(c3__txt, wug, u2_nul));
     }
   }
   else {
     if ( (cay_y >= 32) && (cay_y < 127) ) {
-      _term_io_bleb(rec_u, uty_u, u2nt(c3__txt, cay_y, u2_nul));
+      _term_io_belt(rec_u, uty_u, u2nt(c3__txt, cay_y, u2_nul));
     }
     else if ( 0 == cay_y ) {
       _term_it_queue_txt(uty_u, uty_u->ufo_u.out.bel_y);
     }
     else if ( 13 == cay_y ) {
-      _term_io_bleb(rec_u, uty_u, u2nc(c3__ret, u2_nul));
+      _term_io_belt(rec_u, uty_u, u2nc(c3__ret, u2_nul));
     }
     else if ( cay_y <= 26 ) {
-      _term_io_bleb(rec_u, uty_u, u2nc(c3__ctl, ('a' + (cay_y - 1))));
+      _term_io_belt(rec_u, uty_u, u2nc(c3__ctl, ('a' + (cay_y - 1))));
     }
     else if ( 27 == cay_y ) {
       tat_u->esc.ape = u2_yes;
     }
     else if ( 127 == cay_y ) {
-      _term_io_bleb(rec_u, uty_u, u2nc(c3__bac, u2_nul));
+      _term_io_belt(rec_u, uty_u, u2nc(c3__bac, u2_nul));
     }
     else if ( cay_y >= 128 ) {
       tat_u->fut.len_w = 1;

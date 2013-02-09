@@ -470,7 +470,7 @@
   ++  leap                                              ::  dispatch event
     |=  [pex=path hen=hose fav=card]
     ^-  [p=(list move) q=_..^$]
-    =<  ?+  -.fav  [~ ..^$]
+    =<  ?+  -.fav  [[[[~ who] hen fav] ~] ..^$]
           %kill  (kill p.fav)
           %nuke  nuke
           %line  (gill (trip p.fav))

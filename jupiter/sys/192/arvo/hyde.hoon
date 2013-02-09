@@ -69,7 +69,7 @@
               ded=@da                                   ::  next expire
               pac=rock                                  ::  packet data
           ==                                            ::
-++  bleb                                                ::  raw console input
+++  belt                                                ::  raw console input
           $%  [%aro p=?(%d %l %r %u)]                   ::  arrow key
               [%bac ~]                                  ::  true backspace
               [%ctl p=@ud]                              ::  control-key
@@ -122,12 +122,12 @@
               %weak                                     ::  rejected
           ==                                            ::
 ++  card                                                ::  event
-          $%  [%bbye ~]                                 ::  end prompt
+          $%  [%bbye ~]                                 ::  reset prompt
               [%bind p=flag q=host]                     ::  bind http server
-              [%bleb p=bleb]                            ::  terminal input
+              [%belt p=belt]                            ::  terminal input
               [%blew p=blew]                            ::  terminal config
               [%blit p=(list blit)]                     ::  terminal output
-              [%boot p=@]                               ::  reset soft state
+              [%boot p=card]                            ::  reset soft state
               [%cash p=@p q=buck]                       ::  civil license
               [%crap p=(list)]                          ::  error with trace
               [%dire p=@tas q=dram]                     ::  apply directory
@@ -135,10 +135,12 @@
               [%edit p=@p q=@tas r=(list ukaz)]         ::  commit edits
               [%exit ~]                                 ::  logical exit
               [%file p=@tas q=@]                        ::  apply atomic file
+              [%fail p=tape]                            ::  report failure
               [%hear p=@]                               ::  receive packet
               [%helo ~]                                 ::  trigger prompt
-              [%init p=@p]                              ::  initialize revs
+              [%init p=@p]                              ::  report install
               [%junk p=@]                               ::  entropy
+              [%keep p=@p]                              ::  establish master
               [%kill p=@ud]                             ::  kill a process
               [%line p=@t]                              ::  source line
               [%load p=@tas q=path]                     ::  request atomic file
@@ -314,7 +316,7 @@
               nys=(map band ,[p=@da q=bait])            ::  incoming
               wab=(map flag bath)                       ::  outgoing by client
           ==                                            ::
-++  ovum  ,[p=path q=card]                              ::  external event
+++  ovum  ,[p=tire q=card]                              ::  external event
 ++  pact  path                                          ::  routed path
 ++  plea  ,[p=@ud q=[p=? q=@t]]                         ::  live prompt
 ++  pork  ,[p=(unit ,@ta) q=path]                       ::  fully parsed url

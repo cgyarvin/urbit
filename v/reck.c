@@ -251,7 +251,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     free(dyt_c);
   }
   {
-    u2_noun syd, zen, yen, xan, wol, ray, dyl, gul, vay;
+    u2_noun syd, zen, yen, xan, wol, ray, dyl, gul, zus, vay;
 
     syd = u2k(rec_u->syd);
 
@@ -281,9 +281,17 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
 
       // printf("gall:\n");
       gul = _reck_load_temp(rec_u, dyl, kno_w, "arvo/gall.hoon");
+#if 0
+      // printf("zuse:\n");
+      zus = _reck_load_temp(rec_u, u2k(gul), kno_w, "arvo/zuse.hoon");
+      u2z(zus);
 
       // printf("eyre:\n");
       vay = _reck_load_temp(rec_u, gul, kno_w, "arvo/eyre.hoon");
+#else
+      // printf("zuse:\n");
+      vay = _reck_load_temp(rec_u, gul, kno_w, "arvo/zuse.hoon");
+#endif 
     }
     rec_u->rec = vay;
   }
@@ -380,39 +388,6 @@ _reck_kick_term(u2_reck* rec_u, u2_noun pox, c3_l tid_l, u2_noun fav)
   c3_assert(!"not reached"); return 0;
 }
 
-/* _reck_kick_boot(): apply boot outputs.
-*/
-static u2_bean
-_reck_kick_boot(u2_reck* rec_u, u2_noun pox, u2_noun fav)
-{
-  u2_noun p_fav;
-
-  if ( u2_no == u2du(fav) ) {
-    u2z(pox); u2z(fav); return u2_no;
-  } 
-  else switch ( u2h(fav) ) {
-    default: u2z(pox); u2z(fav); return u2_no;
- 
-    case c3__bbye: 
-    case c3__blit: {
-      u2_noun pux = u2nq(c3__gold, c3__term, '1', u2_nul);
-
-      uL(fprintf(uH, "_kick_boot: terminal %s\n", u2_cr_string(u2h(fav)))); 
-
-      u2z(pox);
-      return _reck_kick_term(rec_u, pux, 1, fav);
-    } break;
-
-    case c3__init: p_fav = u2t(fav);
-    {
-      rec_u->own = u2nc(u2k(p_fav), rec_u->own);
-
-      u2z(pox); u2z(fav); return u2_yes;
-    } break;
-  }
-  c3_assert(!"not reached"); return 0;
-}
-
 /* _reck_kick_http(): apply http effects.
 */
 static u2_bean
@@ -468,15 +443,6 @@ _reck_kick_spec(u2_reck* rec_u, u2_noun pox, u2_noun fav)
     }
     else switch ( it_pox ) {
       default: return u2_no;
-
-      case c3__boot: {
-        if ( (u2_nul != tt_pox) ) {
-          u2z(pox); u2z(fav); return u2_no;
-        }
-        else { 
-          return _reck_kick_boot(rec_u, pox, fav);
-        }
-      } break;
 
       case c3__http: {
         u2_noun pud = tt_pox;
@@ -558,9 +524,14 @@ _reck_kick(u2_reck* rec_u, u2_noun ovo)
   {
     u2_noun tox = _reck_spat(rec_u, u2k(u2h(ovo)));
 
-    uL(fprintf(uH, "kick: lost %s from %s\n", 
-                   u2_cr_string(u2h(u2t(ovo))),
-                   u2_cr_string(tox)));
+    if ( (c3__warn != u2h(u2t(ovo))) &&
+         (c3__text != u2h(u2t(ovo))) &&
+         (c3__note != u2h(u2t(ovo))) )
+    {
+      uL(fprintf(uH, "kick: lost %%%s on %s\n", 
+                     u2_cr_string(u2h(u2t(ovo))),
+                     u2_cr_string(tox)));
+    }
     u2z(tox);
   }
   u2z(ovo);
@@ -673,7 +644,8 @@ _reck_launch_toy(u2_reck* rec_u, u2_noun pax)
   _reck_poke
     (rec_u, 
 //     u2nc(pax, u2nq(c3__make, c3_s4('z','u','s','e'), 256, u2k(rec_u->now))));
-     u2nc(u2k(pax), u2nq(c3__make, c3_s4('z','u','s','e'), 256, 0)));
+//     u2nc(u2k(pax), u2nq(c3__make, c3_s4('z','u','s','e'), 256, 0)));
+     u2nt(u2k(pax), c3__boot, u2nq(c3__make, c3_s4('z','u','s','e'), 256, 0)));
 
   if ( u2_nul == rec_u->own ) {
     u2z(pax);
@@ -776,6 +748,7 @@ u2_reck_launch(u2_reck* rec_u)
 void
 u2_reck_http_request(u2_reck* rec_u, u2_bean sec, u2_noun pox, u2_noun req)
 {
+  // uL(fprintf(uH, "http: request\n"));
   u2_reck_plan(rec_u, pox, u2nc((sec == u2_yes) ? c3__this : c3__thin, req));
 }
 

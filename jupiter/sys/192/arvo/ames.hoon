@@ -1094,9 +1094,8 @@
       |=  [whu=(unit flag) tea=tire hen=hose fav=card]
       ^-  [p=(list move) q=vane]
       =^  duy  ..knap
-        (knap fav)
-      :-  (turn duy |=(a=card [whu hen a]))
-      ..^$
+        (knap hen fav)
+      [duy ..^$]
     ::
     ++  scry
       |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
@@ -1113,14 +1112,14 @@
     --
   |%
   ++  clop
-    |=  [now=@da bon=boon]
-    ^-  [(list card) _+>]
+    |=  [now=@da hen=hose bon=boon]
+    ^-  [(list move) _+>]
     ?-    -.bon
         %beer
-      :-  :~  [%talk %leaf "welcome, {~(rend co [~ %p p.bon])}!"]
-              [%talk %leaf "passcode: {~(rend co [~ %p q.bon])}"]
-              [%logn p.bon (shak p.bon q.bon)]
-              [%init p.bon]
+      :-  :~  [[~ p.bon] [[%c ~] hen] [%keep p.bon]]
+              [[~ p.bon] hen [%init p.bon]]
+              [[~ p.bon] hen [%warn "welcome, {~(rend co [~ %p p.bon])}!"]]
+              [[~ p.bon] hen [%warn "passcode: {~(rend co [~ %p q.bon])}"]]
           ==
       +>
     ::
@@ -1133,8 +1132,8 @@
     ==
   ::
   ++  knap
-    |=  fav=card
-    ^-  [(list card) _+>]
+    |=  [hen=hose fav=card]
+    ^-  [(list move) _+>]
     =+  ^=  fuy  ^-  [p=(list boon) q=fort]
         ?+    -.fav  !!
             %cash
@@ -1151,12 +1150,12 @@
           [[[%beer p.vun] ~] q.vun]
         ==
     =>  %_(. fox q.fuy)
-    =+  out=*(list card)
-    |-  ^-  [p=(list card) q=_+>.^$]
+    =|  out=(list move)
+    |-  ^-  [p=(list move) q=_+>.^$]
     ?~  p.fuy
       [(flop out) +>.^$]
     =^  toe  +>.^$
-      (clop now i.p.fuy)
+      (clop now hen i.p.fuy)
     $(p.fuy t.p.fuy, out (weld (flop toe) out))
   ::
   ++  perm

@@ -382,8 +382,7 @@
     |*  [a=(list) b=_|=([p=* q=*] =(p q))]
     =>  .(a (homo a))
     |-  ^+  a
-    ?@  a
-      ~
+    ?~  a  ~
     %+  weld
       $(a (skim t.a |=(c=_i.a (b c i.a))))
     [i.a $(a (skim t.a |=(c=_i.a !(b c i.a))))]

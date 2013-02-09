@@ -12,7 +12,9 @@
   ++  beat                                              ::  process move
     |=  [whu=(unit flag) pax=tire hen=hose fav=card]
     ^-  [p=(list move) q=vane]
-    ?+    -.fav  !!
+    ?+    -.fav
+      [[[whu hen fav] ~] ..^$]
+    ::
         %bind                                           ::  register server
       ?>  =(%gold (adit hen))
       =+  ^=  nom  ^-  tape
@@ -40,7 +42,7 @@
           $(seh t.seh)
       ?~  whu
         [~ hen [%thou 404 ~ ~]]
-      [whu [[%bede ~] hen] [%thee heq]]
+      [whu [/b/ /g/ hen] [%thee heq]]
     ::
         %that                                           ::  http response
       :_  ..^$

@@ -11,9 +11,16 @@
   ^?                                                    ::  opaque core
   |%                                                    ::  poke/peek pattern
   ++  beat                                              ::  process move
-    |=  [whu=(unit flag) pax=tire hen=hose fav=card]
+    |=  [whu=(unit flag) tea=tire hen=hose fav=card]
     ^-  [p=(list move) q=vane]
-    ::  =>  ^+(. ?:(?=([%bleb %txt *] fav) . ~&([%dill-poke fav hen] .)))
+    =.  hen
+      ?.  ?=([[@ ~] ~] hen)  hen                        ::  blank
+      =+  yip=(~(tap by wib) ~)
+      |-  ^-  hose
+      ?~(yip ~ p.i.yip)                                 ::  XX stub
+    ?~  hen
+      ~&  [%dill-lost whu fav]
+      [~ ..^$]
     =^  yar  +> 
       ^-  [yard _+>]
       =+  yur=(~(get by wib) hen)
@@ -100,8 +107,10 @@
     :: 
     ++  leap                                            ::  terminal event
       |-  ^+  +
-      ?+    -.fav  !!
-          %bleb                                         ::  terminal input
+      ?+    -.fav
+        +(mos :_(mos [whu hen fav]))
+      ::
+          %belt                                         ::  terminal input
         ?:  ?|  ?=(~ whu)
                 ?=(~ q.r.yar)
             ==
@@ -149,14 +158,14 @@
           ?+  p.p.fav
             beep
             %a  (edit u.q.r.yar(bus 0))
-            %b  $(fav [%bleb %aro %l])
+            %b  $(fav [%belt %aro %l])
             %d  ?:  ?&  =(0 bul.u.q.r.yar)
                         =(0 bus.u.q.r.yar)
                     ==
                   $(fav [%logo ~])
-                $(fav [%bleb %del ~])
+                $(fav [%belt %del ~])
             %e  (edit u.q.r.yar(bus bul.u.q.r.yar))
-            %f  $(fav [%bleb %aro %r])
+            %f  $(fav [%belt %aro %r])
             %k  ?:  =(bul.u.q.r.yar bus.u.q.r.yar)
                   beep
                 =>  .(+.$ (kill (slag bus.u.q.r.yar but.u.q.r.yar)))
@@ -166,8 +175,8 @@
                   but  (scag bus.u.q.r.yar but.u.q.r.yar)
                 ==
             %l  +.$(mos :_(mos [~ hen %blit [[%clr ~] ~]])) 
-            %n  $(fav [%bleb %aro %d])
-            %p  $(fav [%bleb %aro %u])
+            %n  $(fav [%belt %aro %d])
+            %p  $(fav [%belt %aro %u])
             %u  ?:  =(0 bus.u.q.r.yar)
                   beep
                 =>  .(+.$ (kill (scag bus.u.q.r.yar but.u.q.r.yar)))
@@ -179,7 +188,7 @@
                 ==
             %y  ?:  =(0 p.r.r.yar)
                   beep
-                $(fav [%bleb %txt (snag q.r.r.yar r.r.r.yar)])
+                $(fav [%belt %txt (snag q.r.r.yar r.r.r.yar)])
           ==
         ::
             %del                                        ::  delete
@@ -242,7 +251,7 @@
           ::
               mos
             :*  [~ hen [%bbye ~]]
-                [whu [[%bede ~] hen] [%line jab]]
+                [whu [[%b ~] [%d ~] hen] [%line jab]]
                 [~ hen [%blit [[%mor ~] ~]]]
                 mos
             ==
@@ -264,6 +273,12 @@
         ==
       ::
           %blew   +.$(p.r.yar p.p.fav)                  ::  window size
+          %boot
+        %=    +.$
+            mos
+          :_(mos [whu [[%a ~] [%d tea] hen] p.fav])
+        ==
+      ::
           %helo                                         ::  trigger prompt
         ?^  q.r.yar
           (edit(q.r.yar ~) u.q.r.yar)
@@ -283,32 +298,23 @@
             pot  pot
             pol  2
         ==
+      ::  
+          %init
+        %=  +.$
+          mos    :+  [whu [/d/ hen] [%helo ~]] 
+                   [~ hen fav]
+                 mos
+          q.yar  [p.fav q.yar]
+        ==
       ::
           %logo                                         ::  logout
         =.  mos  :_(mos [~ hen [%bbye ~]])
         ?:  |(?=(~ q.yar) ?=(~ t.q.yar))
           +.$(mos [[~ hen [%exit ~]] mos])
-        %=  $
+        %=  +.$
           fav    =+  mas=~(rend co ~ %p u.whu)
                  [%warn "bye, {mas}"]
           q.yar  t.q.yar
-        ==
-      ::
-          %logp                                         ::  trusted login
-        ?>  =(%gold (adit hen))
-        %=  $
-          fav    =+  mas=~(rend co ~ %p p.fav)
-                 [%warn "hi, {mas}"]
-          q.yar  [p.fav q.yar]
-          mos    :_(mos [~ hen [%bbye ~]])
-        ==
-      ::
-          %logn                                         ::  login by passcode
-        %=  $
-          fav   =+  mas=~(rend co ~ %p p.fav)
-                [%warn "welcome, {mas}"]
-          q.yar  [p.fav q.yar]                          ::  XX unvalidated!
-          mos    :_(mos [~ hen [%bbye ~]])
         ==
       ::
           %note  ?.(p.yar +.$ (fume p.fav q.fav))       ::  debug message

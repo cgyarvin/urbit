@@ -23,17 +23,26 @@
 
 
 /* _sync_peek_arch(): (unit arch) for cay-path.
+**
+**  XX: Both this and sync_peek_home() are lame.
 */
 static u2_noun
 _sync_peek_arch(u2_reck* rec_u, u2_noun pos, u2_noun bok)
 {
-  return u2_reck_prick
-    (rec_u, u2k(rec_u->own),
-                 u2nc(c3_s2('c','z'),
-                 u2nq(u2k(rec_u->wen),
-                          pos, 
-                          bok,
-                          u2_nul)));
+  if ( u2_nul == rec_u->own ) {
+    u2z(pos); u2z(bok);
+    
+    return u2_nul;
+  }
+  else {
+    return u2_reck_prick
+      (rec_u, u2k(u2h(rec_u->own)),
+                   u2nc(c3_s2('c','z'),
+                   u2nq(u2k(rec_u->wen),
+                            pos, 
+                            bok,
+                            u2_nul)));
+  }
 }
 
 /* _sync_peek_home(): test if we even hold a plot.
@@ -41,25 +50,31 @@ _sync_peek_arch(u2_reck* rec_u, u2_noun pos, u2_noun bok)
 static u2_bean
 _sync_peek_home(u2_reck* rec_u, u2_noun pos)
 {
-  u2_noun pec = u2_reck_prick
-    (rec_u, u2k(rec_u->own),
-            u2nc('a',
-                 u2nq(u2k(rec_u->wen),
-                          pos,
-                          c3__mark,
-                          u2_nul)));
-
-  if ( u2_no == u2du(pec) ) {
-    c3_assert(!"peek_home is hosed\n");
+  if ( u2_nul == rec_u->own ) {
+    u2z(pos);
+    return u2_nul;
   }
   else {
-    u2_bean cep = u2t(pec);
+    u2_noun pec = u2_reck_prick
+      (rec_u, u2k(u2h(rec_u->own)),
+              u2nc('a',
+                   u2nq(u2k(rec_u->wen),
+                            pos,
+                            c3__mark,
+                            u2_nul)));
 
-    if ( u2_no == cep ) {
-      printf("rejected!\n");
+    if ( u2_no == u2du(pec) ) {
+      c3_assert(!"peek_home is hosed\n");
     }
-    u2z(pec);
-    return cep;
+    else {
+      u2_bean cep = u2t(pec);
+
+      if ( u2_no == cep ) {
+        printf("rejected!\n");
+      }
+      u2z(pec);
+      return cep;
+    }
   }
 }
 
