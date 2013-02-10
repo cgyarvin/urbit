@@ -14,7 +14,9 @@
 #include <stdint.h>
 #include <ev.h>
 #include <sigsegv.h>
-#include <libtecla.h>
+#include <curses.h>
+#include <termios.h>
+#include <term.h>
 
 #define U2_GLOBAL
 #define C3_GLOBAL
@@ -135,82 +137,6 @@ static jmp_buf Signal_buf;
 static uint8_t Sigstk[SIGSTKSZ];
 
 volatile enum { sig_none, sig_overflow, sig_interrupt } Sigcause;
-ev_io Stdin_watcher;
-struct ev_loop *Loop_u;
-
-GetLine *Tecla;
-
-static c3_c*
-_get_line()
-{
-  u2_noun pot = u2_reck_prick
-                    (&u2_Host.rec_u[0], 
-                     u2nt(c3__eyre, 
-                          c3__prod,
-                          u2nq(c3__gold, c3__term, '0', u2_nul)));
-  c3_c* pot_c;
-  c3_c* out_c;
-
-  if ( u2_none == pot ) {
-    gl_normal_io(Tecla);
-    exit(1);
-  }
-  if ( u2_nul == pot ) {
-    pot_c = strdup(": ");
-  } else {
-    pot_c = u2_cr_string(u2t(u2t(pot)));
-  }
-
-  out_c = gl_get_line(Tecla, pot_c, 0, -1);
-
-  u2z(pot);
-  free(pot_c);
-
-  return out_c;
-}
-
-static void
-stdin_cb(struct ev_loop *lup_u, struct ev_io *w, int revents)
-{
-  c3_c* lin_c;
-  
-  lin_c = _get_line();
-
-  if ( !lin_c ) {
-    if ( GLR_BLOCKED != gl_return_status(Tecla) ) {
-      fprintf(stderr, "stdin_cb: abort\n");
-      ev_io_stop (lup_u, w);
-      ev_unloop (lup_u, EVUNLOOP_ALL);
-    }
-    else { 
-      // fprintf(stderr, "stdin_cb: blocked\n");
-      return;
-    }
-  }
-  else {
-    c3_w  len_w = strlen(lin_c);
-    c3_c* out_c = malloc(len_w);
-
-    strncpy(out_c, lin_c, (len_w - 1));
-    out_c[len_w - 1] = 0;
-
-    if ( !*out_c ) {
-      // printf(": "); fflush(stdout);
-      free(out_c);
-      return;
-    }
-    else {
-      gl_normal_io(Tecla);
-      u2_ve_line(out_c); 
-      free(out_c);
-
-      gl_raw_io(Tecla);
-      _get_line();
-
-      // printf(": "); fflush(stdout);
-    }
-  }
-}
 
 static void
 overflow_handler(int emergency,
@@ -243,10 +169,12 @@ main(c3_i   argc,
     u2_boot();
 
     u2_Host.wir_r = u2_wr_init(c3__rock, u2_ray_of(0, 0), u2_ray_of(1, 0));
-    u2_Host.fel_c = c3_comd_init();
     u2_Wire = u2_Host.wir_r;
   }
 
+#if 0
+  TermTest();
+#endif
   //  Set outside bail trap.  Should not be used, but you never know...
   //
   if ( 0 != u2_cm_trap() ) {
@@ -282,11 +210,7 @@ main(c3_i   argc,
       u2_ve_init(kno_w);
 
       if ( 0 != u2_Host.ver_e[kno_w].ken ) {
-#if 0
         u2_reck_boot(&u2_Host.rec_u[0]);
-#else
-        u2_reck_boot(&u2_Host.rec_u[0]);
-#endif
       }
     }
     u2_cm_done();
@@ -300,25 +224,22 @@ main(c3_i   argc,
   {
     if ( 0 != setjmp(Signal_buf) ) {
       switch ( Sigcause ) {
-        case sig_overflow: printf("[stack overflow]\n"); break;
-        case sig_interrupt: printf("[interrupt]\n"); break;
-        default: printf("[signal error!]\n"); break;
+        case sig_overflow: printf("[stack overflow]]\r\n"); break;
+        case sig_interrupt: printf("[interrupt]\r\n"); break;
+        default: printf("[signal error!]\r\n"); break;
       }
       Sigcause = sig_none;
 
       signal(SIGINT, SIG_DFL);
       stackoverflow_deinstall_handler();
 
-      if ( Loop_u ) {
-        ev_loop_destroy(Loop_u);
-        Loop_u = 0;
-      }
-
       //  Print the trace, do a GC, etc.
       //
       //  This is half-assed at present, so we exit.
       //
       u2_ve_sway(0, u2k(u2_wire_tax(u2_Wire)));
+
+      u2_lo_bail(&u2_Host.rec_u[0]);
 
       exit(1);
     }
@@ -353,34 +274,9 @@ main(c3_i   argc,
 
   if ( 0 == u2_Host.ver_e[kno_w].ken ) {
     fprintf(stderr, "no command line in transitional mode\n");
-    exit(1);
+    exit(0);
   }
 
-  u2_ve_launch();
-  u2_ve_sync();
-
-  Tecla = new_GetLine(16384, 4096);
-  gl_io_mode(Tecla, GL_SERVER_MODE);
-  {
-    struct ev_loop *lup_u = ev_default_loop(0);
-
-    u2_Host.lup_u = Loop_u = lup_u;
-
-    // fprintf(stderr, "http: on port 8080\n");
-    u2_ve_http_start(8080);
-
-    ev_io_init(&Stdin_watcher, stdin_cb, 0, EV_READ);
-    ev_io_start(lup_u, &Stdin_watcher);
-
-    {
-      c3_c* lin_c;
-    
-      lin_c = _get_line();
-      c3_assert(!lin_c && (GLR_BLOCKED == gl_return_status(Tecla)));
-    }
-    ev_loop(lup_u, 0);
-  }
-  gl_io_mode(Tecla, GL_NORMAL_MODE);
-
+  u2_lo_loop(&u2_Host.rec_u[0]);
   return 0;
 }

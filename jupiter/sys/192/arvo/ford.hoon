@@ -633,7 +633,21 @@
     =+  zeb=(~(get by mah) cus)
     $(hed t.hed, mah (~(put by mah) cus ?~(zeb [q.i.hed ~] [q.i.hed u.zeb])))
   ::
-  ++  thin                            
+  ++  hone                                              ::  host match
+    |=  [fro=host too=host]  ^-  ?
+    ?-    -.fro
+        |  =(too fro)
+        &
+      ?&  ?=(& -.too)
+          |-  ^-  ?
+          ?~  p.too  &
+          ?~  p.fro  |
+          ?:  !=(i.p.too i.p.fro)  |
+          $(p.too t.p.too, p.fro t.p.fro)
+      ==
+    ==
+  ::
+  ++  thin                                              ::  parse headers
     |=  [sec=? req=httq]
     ^-  hate
     ::  ~&  [%thin-quri (trip q.req)]
@@ -647,5 +661,18 @@
              [[sec (rash i.u.hot thor:epur)] p.ryp q.ryp]
         ==
     [pul *cred [p.req mah s.req]]
+  --
+=>
+  |%
+  ++  adit                                              ::  hose privilege
+    |=  hen=hose
+    ^-  ?(%gold %iron %lead)
+    ?~  hen
+      %lead
+    ?~  t.hen
+      ?:  ?=([%gold *] i.hen)  %gold
+      ?:  ?=([%iron *] i.hen)  %iron
+      %lead
+    $(hen t.hen)
   --
 .

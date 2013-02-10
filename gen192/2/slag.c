@@ -20,13 +20,10 @@
 
       while ( len_w ) {
         if ( u2_no == u2_dust(b) ) {
-          return u2_bl_bail(wir_r, c3__exit);
+          return u2_nul;
         }
-        a = u2_t(a);
+        b = u2_t(b);
         len_w--;
-      }
-      if ( u2_no == u2_dust(b) ) {
-        return u2_bl_bail(wir_r, c3__exit);
       }
       return u2_rx(wir_r, b);
     }

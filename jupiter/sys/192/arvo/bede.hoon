@@ -1,9 +1,36 @@
 !:
 ::          %bede, the shell.  This file is in the public domain.
 ::
+=<
+  |%
+  ++  bede                                              ::  terminal handling
+    ^-  vane                                            ::  kernel instrument
+    =|                                                  ::  system state
+        $:  deb=(map flag _*berg)                       ::  state by terminal
+        ==                                              ::
+    |=  [now=@da eny=@ sky=||(* (unit))]                ::  current invocation
+    ^?                                                  ::  opaque core
+    |%                                                  ::  poke/peek pattern
+    ++  beat                                            ::  process move
+      |=  [whu=(unit flag) tea=tire hen=hose fav=card]
+      ^-  [p=(list move) q=vane]
+      ?>  ?=(^ whu)
+      =+  ^=  beg  ^+  *berg
+          =+  beg=(~(get by deb) u.whu)
+          ?^(beg u.beg (berg u.whu))
+      =+  yub=(leap:(beg now (shax now) sky) tea hen fav)
+      :-  p.yub
+      ..^$(deb (~(put by deb) u.whu q.yub))
+    ::
+    ++  scry
+      |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
+      ^-  (unit)
+      ~
+    --
+  --
 |%
 ++  berg                                                ::  repl/shell
-  |=  who=lord                                          ::  per identity
+  |=  who=flag                                          ::  per identity
   =+  nub=`vase`!>(+>)                                  ::  system + libraries
   =+  :*  ^=  vax                                       ::  chestnut vases
             :*  sot=(slap nub (vice 'slot'))            ::
@@ -34,7 +61,7 @@
       ==
   |=  [now=@da eny=@ sky=_|+(* *(unit))] 
   =+  wen=(scot %da now)
-  =+  wer=`path`[hox wen %cx (weld cwd [hub ~])]
+  =+  wer=`path`[%cx wen hox (weld cwd [hub ~])]
   =+  rew=(flop wer)
   =+  vez=(vang & wer)
   |%
@@ -172,7 +199,7 @@
             ==
           ::
             ;~  pfix  ;~(plug (just 'k') (just 'l') gap)
-              (stag %kl (cook |=(a=mole ?>(?=(%ud p.a) q.a)) bisk:so))
+              (stag %kl (cook |=(a=dime ?>(?=(%ud p.a) q.a)) bisk:so))
             ==
           ::
             (cold [%nk ~] ;~(plug (just 'n') (just 'k')))
@@ -205,9 +232,13 @@
       |=  rol=@ta
       ;~  pose
         htap
+        %+  cook                                        ::  XX bletcherous
+          |=  a=path  ^-  path
+          ?>  ?=([@ @ @ *] a)
+          [i.t.t.a i.t.a i.a t.t.t.a]
         ;~  plug
           %+  cook
-            |=(a=lord ~(rent co ~ %p a))
+            |=(a=flag ~(rent co ~ %p a))
           ;~(pose ;~(pfix sig fed:ag) (easy who))
         ::
           %+  cook
@@ -247,7 +278,7 @@
   ::
   ++  ride                                              ::  process context
     |=  $:  pid=tick                                    ::  process identity
-            hen=vein                                    ::  current vein
+            hen=hose                                    ::  current hose
             loz=(map path goal)                         ::  request state
             bor=(unit boar)                             ::  execution state
         ==                                              ::
@@ -415,7 +446,7 @@
           duz
         :_  duz
         :+  [~ who]  hen 
-        [%warn %2 %leaf "<syntax error at [{p.duf} {q.duf}]>"]
+        [%warn "<syntax error at [{p.duf} {q.duf}]>"]
       ==
     ::
     ++  nave                                            ::  resolve
@@ -437,9 +468,9 @@
     --
   ::
   ++  leap                                              ::  dispatch event
-    |=  [pex=path hen=vein fav=card]
+    |=  [pex=path hen=hose fav=card]
     ^-  [p=(list move) q=_..^$]
-    =<  ?+  -.fav  [~ ..^$]
+    =<  ?+  -.fav  [[[[~ who] hen fav] ~] ..^$]
           %kill  (kill p.fav)
           %nuke  nuke
           %line  (gill (trip p.fav))

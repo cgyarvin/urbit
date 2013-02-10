@@ -15,13 +15,15 @@
 #include <netinet/in.h>
 #include <ev.h>
 #include <errno.h>
-#include <libtecla.h>
+#include <curses.h>
+#include <termios.h>
+#include <term.h>
 
 #include "../outside/jhttp/http_parser.h"   // Joyent HTTP
 #include "all.h"
 #include "v/vere.h"
 
-extern GetLine *Tecla;
+static u2_hrep* _http_request(u2_hreq* req_u);
 
 /* _http_bod(): create a data buffer.
 */
@@ -123,25 +125,6 @@ _http_respond_body(u2_hreq *req_u,
 {
   if ( !(req_u->rub_u) ) {
     req_u->rub_u = req_u->bur_u = rub_u;
-
-    //  if this is the next request to be responded to,
-    //  tell the event layer we are ready to write
-    //
-    if ( req_u == req_u->hon_u->req_u ) {
-      u2_hcon* hon_u = req_u->hon_u;
-
-      // fprintf(stderr, "http: %d: writing ON\r\n", hon_u->wax_u.fd);
-
-      ev_io_stop(u2_Host.lup_u, &hon_u->wax_u);
-      ev_io_set(&hon_u->wax_u, hon_u->wax_u.fd, (EV_READ | EV_WRITE));
-      ev_io_start(u2_Host.lup_u, &hon_u->wax_u);
-    } 
-    else {
-      u2_hcon* hon_u = req_u->hon_u;
-
-      fprintf(stderr, "http: %d: out of order\r\n", hon_u->wax_u.fd);
-      fprintf(stderr, "req_u %p, ruc_u %p\r\n", req_u, req_u->hon_u->ruc_u);
-    }
   }
   else {
     req_u->bur_u->nex_u = rub_u;
@@ -424,7 +407,7 @@ _http_message_complete(http_parser* par_u)
   // Dispatch event request, respond synchronously if offered.
   //
   {
-    u2_hrep* rep_u = u2_ve_http_request(req_u);
+    u2_hrep* rep_u = _http_request(req_u);
 
     if ( rep_u ) {
       _http_respond_request(req_u, rep_u);
@@ -614,53 +597,26 @@ u2_lo_call_http_conn(struct ev_loop *lup_u,
   u2_bean inn    = (revents & EV_READ) ? u2_yes : u2_no;
   u2_bean out    = (revents & EV_WRITE) ? u2_yes : u2_no;
 
-  gl_normal_io(Tecla);
   if ( u2_yes == inn ) {
     _http_conn_drain(hon_u);
   }
   if ( u2_yes == out ) {
     _http_conn_flush(hon_u);
   }
-  gl_raw_io(Tecla);
 }
 
-/* u2_io_fuck_http_conn(): flush output connection for http.
-**
-** u2_yes iff we have more output to send.
+/* _http_conn_new(): create http connection.
 */
-u2_bean
-u2_io_fuck_http_conn(struct ev_io* wax_u)
-{
-  return _http_conn_flush((u2_hcon*)(void *)wax_u);
-}
-
-/* u2_io_suck_http_conn(): drain input connection for http.
-**
-** u2_yes iff we are ready to keep reading.
-*/
-u2_bean
-u2_io_suck_http_conn(struct ev_io* wax_u)
-{
-  return _http_conn_drain((u2_hcon*)(void *)wax_u);
-}
-
-/* u2_io_exit_http_conn(): terminate http connection.
-*/
-void
-u2_io_exit_http_conn(struct ev_io* wax_u)
-{
-  _http_conn_dead((u2_hcon*)(void *)wax_u);
-}
-
-/* u2_io_init_http_conn(): create http connection.
-*/
-u2_hcon* 
-u2_io_init_http_conn(u2_http *htp_u, c3_i fid_i)
+static u2_hcon* 
+_http_conn_new(u2_http *htp_u, c3_i fid_i)
 {
   u2_hcon *hon_u = malloc(sizeof(*hon_u));
 
   hon_u->coq_l = htp_u->coq_l++;
   hon_u->seq_l = 1;
+
+  hon_u->nuw = u2_yes;
+  hon_u->ded = u2_no;
 
   hon_u->ruc_u = 0;
   hon_u->req_u = 0;
@@ -675,22 +631,22 @@ u2_io_init_http_conn(u2_http *htp_u, c3_i fid_i)
 
 /* u2_lo_init_http_conn(): create http connection.
 */
-u2_hcon* 
+static u2_hcon* 
 u2_lo_init_http_conn(u2_http *htp_u, c3_i fid_i)
 {
   u2_hcon* hon_u;
 
-  hon_u = u2_io_init_http_conn(htp_u, fid_i);
+  hon_u = _http_conn_new(htp_u, fid_i);
 
   ev_io_init(&hon_u->wax_u, u2_lo_call_http_conn, fid_i, EV_READ);
-  ev_io_start(u2_Host.lup_u, &hon_u->wax_u);
+  // ev_io_start(u2_Host.lup_u, &hon_u->wax_u);
 
   return hon_u;
 }
 
 /* u2_lo_wake_http_conn(): wake http connection for writing.
 */
-void
+static void
 u2_lo_wake_http_conn(u2_hcon* hon_u)
 {
   ev_io_stop(u2_Host.lup_u, &hon_u->wax_u);
@@ -890,10 +846,14 @@ _http_pox_to_noun(c3_w sev_l, c3_w coq_l, c3_w seq_l)
 {
   u2_reck* rec_u = &u2_Host.rec_u[0];
 
-  return u2nq(u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3_s2('u','x'), sev_l)),
-              u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3_s2('u','d'), coq_l)),
-              u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3_s2('u','d'), seq_l)),
-              u2_nul);
+  return 
+    u2nt(
+      c3__iron,
+      c3__http,
+      u2nq(u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3_s2('u','x'), sev_l)),
+                u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3_s2('u','d'), coq_l)),
+                u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3_s2('u','d'), seq_l)),
+                u2_nul));
 }
 
 /* _http_request_to_noun(): translate http request into noun, or u2_none.
@@ -943,6 +903,31 @@ _http_slay_mole(u2_noun fot, u2_noun san)
   }
 }
 
+/* _http_new_response(): create http response structure.
+*/
+static u2_hrep*
+_http_new_response(c3_l sev_l, c3_l coq_l, c3_l seq_l, u2_noun rep)
+{
+  u2_noun p_rep, q_rep, r_rep;
+
+  if ( u2_no == u2_cr_trel(rep, &p_rep, &q_rep, &r_rep) ) {
+    uL(fprintf(uH, "strange response\n"));
+    return 0;
+  }
+  else {
+    u2_hrep* rep_u = malloc(sizeof(u2_hrep));
+
+    rep_u->sev_l = sev_l;
+    rep_u->coq_l = coq_l;
+    rep_u->seq_l = seq_l;
+
+    rep_u->sas_w = p_rep;
+    rep_u->hed_u = _http_list_to_heds(u2k(q_rep));
+    rep_u->bod_u = (u2_nul == r_rep) ? 0 : _http_octs_to_bod(u2k(u2t(r_rep)));
+
+    u2z(rep); return rep_u;
+  }
+}
 /* _http_noun_to_response(): translate path/noun into http response.
 */
 static u2_hrep*
@@ -977,10 +962,10 @@ _http_noun_to_response(u2_noun pox, u2_noun rep)
   }
 }
 
-/* u2_ve_http_request(): dispatch http request, returning null if async.
+/* _http_request(): dispatch http request, returning null if async.
 */
 u2_hrep*
-u2_ve_http_request(u2_hreq* req_u)
+_http_request(u2_hreq* req_u)
 {
   u2_noun req = _http_request_to_noun(req_u);
   u2_noun pox = _http_pox_to_noun(req_u->hon_u->htp_u->sev_l,
@@ -1031,6 +1016,24 @@ u2_ve_http_respond(u2_noun pox, u2_noun rep)
   else _http_respond(rep_u);
 }
 
+
+/* u2_http_ef_thou(): send %thou effect to http. 
+*/
+void
+u2_http_ef_thou(u2_reck* rec_u,
+                c3_l     sev_l,
+                c3_l     coq_l,
+                c3_l     seq_l,
+                u2_noun  rep)
+{
+  u2_hrep* rep_u = _http_new_response(sev_l, coq_l, seq_l, rep);
+
+  if ( !rep_u ) {
+    uL(fprintf(uH, "http: response dropped\r\n"));
+  }
+  else _http_respond(rep_u);
+}
+
 u2_bean
 u2_ve_http_start(c3_w por_w)
 {
@@ -1064,7 +1067,7 @@ u2_ve_http_start(c3_w por_w)
           return u2_no;
         }
       }
-      fprintf(stderr, "http: live on %d\n", por_w);
+      fprintf(stderr, "http: live on %d\r\n", por_w);
       break;
     }
     if ( listen(fid_i, 3) < 0 ) {
@@ -1097,4 +1100,354 @@ u2_ve_http_start(c3_w por_w)
     u2_Host.htp_u = htp_u;
   }
   return u2_yes;
+}
+
+
+/********************* new http system
+*/
+
+static void _ht_htls(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i)
+  { u2_lo_call(&u2_Host.rec_u[0], lup_u, wax_u, c3__htls, rev_i); }
+static void _ht_htcn(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i)
+  { u2_lo_call(&u2_Host.rec_u[0], lup_u, wax_u, c3__htcn, rev_i); }
+
+/* u2_http_io_init(): initialize http I/O.
+*/
+void 
+u2_http_io_init(u2_reck* rec_u)
+{
+  u2_http *htp_u = malloc(sizeof(*htp_u));
+
+  {
+    struct timeval tp;
+
+    gettimeofday(&tp, 0);
+    htp_u->sev_l = 0x7fffffff & (((c3_w) tp.tv_sec) ^ (getpid() << 16));
+  }
+  htp_u->coq_l = 1;
+  htp_u->por_w = 8080;
+
+  htp_u->nuw = u2_yes;
+  htp_u->ded = u2_no;
+ 
+  htp_u->hon_u = 0;
+  htp_u->nex_u = 0;
+
+  htp_u->nex_u = u2_Host.htp_u;
+  u2_Host.htp_u = htp_u;
+}
+
+/* u2_http_io_exit(): terminate http I/O.
+*/
+void 
+u2_http_io_exit(u2_reck* rec_u)
+{
+}
+
+/* u2_http_io_spin(): start http server(s).
+*/
+void
+u2_http_io_spin(u2_reck*        rec_u,
+                struct ev_loop* lup_u)
+{
+  u2_http* htp_u;
+
+  for ( htp_u = u2_Host.htp_u; htp_u; htp_u = htp_u->nex_u) {
+    u2_hcon* hon_u;
+
+    if ( (u2_yes == htp_u->nuw) || (u2_yes == htp_u->ded) ) {
+      continue; 
+    } else {
+      ev_io_start(lup_u, &htp_u->wax_u);
+    }
+
+    for ( hon_u = htp_u->hon_u; hon_u; hon_u = hon_u->nex_u ) {
+      if ( (u2_yes == htp_u->nuw) || (u2_yes == htp_u->ded) ) {
+        continue; 
+      } else {
+        ev_io_start(lup_u, &hon_u->wax_u);
+      }
+    }
+  }
+}
+
+/* u2_http_io_stop(): stop http servers.
+*/
+void
+u2_http_io_stop(u2_reck*        rec_u,
+                struct ev_loop* lup_u)
+{
+  u2_http* htp_u;
+
+  for ( htp_u = u2_Host.htp_u; htp_u; htp_u = htp_u->nex_u) {
+    u2_hcon* hon_u;
+
+    if ( (u2_yes == htp_u->nuw) || (u2_yes == htp_u->ded) ) {
+      continue; 
+    } else {
+      ev_io_stop(lup_u, &htp_u->wax_u);
+    }
+
+    for ( hon_u = htp_u->hon_u; hon_u; hon_u = hon_u->nex_u ) {
+      if ( (u2_yes == htp_u->nuw) || (u2_yes == htp_u->ded) ) {
+        continue; 
+      } else {
+        ev_io_stop(lup_u, &hon_u->wax_u);
+      }
+    }
+  }
+}
+
+/* u2_http_io_poll(): update http IO state.
+*/
+void
+u2_http_io_poll(u2_reck*        rec_u,
+                struct ev_loop* lup_u)
+{
+  u2_http** hyp_u;
+
+  for ( hyp_u = &(u2_Host.htp_u); *hyp_u; hyp_u = &((*hyp_u)->nex_u) ) {
+    u2_http* htp_u = *hyp_u;
+
+    if ( u2_yes == htp_u->nuw ) {
+      c3_i fid_i;
+
+      /* Open, bind and listen on the socket.
+      */
+      {
+        struct sockaddr_in add_k;
+
+        if ( (fid_i = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
+          perror("http: socket");
+          continue;
+        }
+
+        add_k.sin_family = AF_INET;
+        add_k.sin_addr.s_addr = INADDR_ANY;
+
+        /*  Try ascending ports.
+        */
+        while ( 1 ) {
+          add_k.sin_port = htons(htp_u->por_w);
+
+          if ( bind(fid_i, (struct sockaddr *)&add_k, sizeof(add_k)) < 0 ) {
+            if ( EADDRINUSE == errno ) {
+              htp_u->por_w++; 
+              continue;
+            }
+            else {
+              perror("http: bind");
+              break;
+            }
+          }
+          fprintf(stderr, "http: live on %d\r\n", htp_u->por_w);
+          break;
+        }
+        if ( listen(fid_i, 3) < 0 ) {
+          perror("http: listen");
+          continue;
+        }
+      }
+  
+      /* Create and activate the server structures.
+      */
+      {
+        {
+          struct timeval tp;
+
+          gettimeofday(&tp, 0);
+          htp_u->sev_l = 0x7fffffff & (((c3_w) tp.tv_sec) ^ (getpid() << 16));
+        }
+        htp_u->coq_l = 1;
+
+        htp_u->nuw = u2_no;
+        htp_u->ded = u2_no;
+
+        htp_u->hon_u = 0;
+        htp_u->nex_u = 0;
+
+        ev_io_init(&htp_u->wax_u, _ht_htls, fid_i, EV_READ);
+      }
+    }
+    else if ( u2_yes == htp_u->ded ) { 
+      c3_assert(!"dead");   //  don't need this right now, but delete
+    }
+    else {
+      u2_hcon** hyn_u;
+
+      hyn_u = &(htp_u->hon_u); 
+      while ( *hyn_u ) { 
+        u2_hcon* hon_u = *hyn_u;
+
+        // fprintf(stderr, "http_io_poll: hon_u %p\r\n", hon_u);
+        fflush(stdout);
+
+        if ( u2_yes == hon_u->nuw ) {
+          ev_io_init(&hon_u->wax_u, _ht_htcn, hon_u->wax_u.fd, EV_READ);
+
+          hon_u->coq_l = htp_u->coq_l++;
+          hon_u->seq_l = 1;
+
+          hon_u->nuw = u2_no;
+          hon_u->ded = u2_no;
+
+          hon_u->ruc_u = 0;
+          hon_u->req_u = 0;
+          hon_u->qer_u = 0;
+        }
+        else if ( u2_yes == hon_u->ded ) {
+          close(hon_u->wax_u.fd);
+
+          while ( 0 != hon_u->req_u ) {
+            u2_hreq* req_u = hon_u->req_u;
+            u2_hreq* nex_u = req_u->nex_u;
+
+            _http_req_free(req_u);
+            hon_u->req_u = nex_u;
+          }
+
+          *hyn_u = hon_u->nex_u;
+          free(hon_u);
+          continue;
+        }
+        else {
+          c3_i ver_i = 0;
+
+          ver_i |= EV_READ;   //  no constraint on reading right now
+          if ( hon_u->req_u && hon_u->req_u->rub_u ) {
+            ver_i |= EV_WRITE;
+          }
+          ev_io_set(&hon_u->wax_u, hon_u->wax_u.fd, ver_i);
+        }
+        hyn_u = &(hon_u->nex_u);
+      }
+    }
+  }
+}
+
+/* u2_http_io_fuck_conn(): output event on connection socket.
+*/
+void
+u2_http_io_fuck_conn(u2_reck*      rec_u,
+                     struct ev_io* wax_u)
+{
+  u2_hcon* hon_u=(u2_hcon*)(void*)wax_u;
+
+  while ( hon_u->req_u ) {
+    u2_hreq* req_u = hon_u->req_u;
+    u2_hbod* rub_u = req_u->rub_u;
+
+    if ( 0 == rub_u ) {
+      if ( u2_yes == req_u->end ) {
+        hon_u->req_u = req_u->nex_u;
+        if ( 0 == hon_u->req_u ) {
+          c3_assert(req_u == hon_u->qer_u);
+          hon_u->qer_u = 0;
+        }
+        _http_req_free(req_u);
+        continue;
+      }
+      else {
+        //  We have not yet finished adding responses to this
+        //  current request - so, we cannot start writing the next.
+        //
+        return;
+      }
+    }
+    else {
+      c3_i siz_i;
+
+      if ( (siz_i = send(hon_u->wax_u.fd, 
+                         rub_u->hun_y, 
+                         rub_u->len_w, 0)) < 0 ) {
+        if ( EAGAIN == errno ) {
+          return;
+        } else {
+          perror("http: send");
+          hon_u->ded = u2_yes;
+        }
+      }
+      if ( siz_i < rub_u->len_w ) {
+        _http_clip(rub_u, siz_i);
+        return;
+      }
+      else {
+        req_u->rub_u = req_u->rub_u->nex_u;
+        if ( 0 == req_u->rub_u ) {
+          c3_assert(rub_u == req_u->bur_u);
+          req_u->bur_u = 0;
+        }
+        
+        free(rub_u);
+      }
+    }
+  }
+}
+
+/* u2_http_io_suck_lisn(): input event on listen socket.
+*/
+void
+u2_http_io_suck_lisn(u2_reck*      rec_u,
+                     struct ev_io* wax_u)
+{
+  u2_http *htp_u = (void *)wax_u;
+
+  {
+    socklen_t          len_o = sizeof(struct sockaddr_in);
+    struct sockaddr_in add_k;
+    c3_i               fid_i;
+
+    fid_i = accept(wax_u->fd, (struct sockaddr *)&add_k, &len_o);
+    if ( fid_i < 0 ) {
+      perror("http: accept");
+    }
+    else if ( fcntl(fid_i, F_SETFD, O_NONBLOCK) < 0 ) {
+      perror("http: fcntl");
+    }
+    else {
+      u2_hcon* hon_u = _http_conn_new(htp_u, fid_i);
+
+      ev_io_init(&hon_u->wax_u, u2_lo_call_http_conn, fid_i, EV_READ);
+    }
+  }
+}
+
+/* u2_http_io_suck_conn(): input event on connection socket.
+*/
+void
+u2_http_io_suck_conn(u2_reck*      rec_u,
+                     struct ev_io* wax_u)
+{
+  u2_hcon* hon_u = (u2_hcon*)(void*)wax_u;
+
+  if ( !hon_u->ruc_u ) {
+    hon_u->ruc_u = _http_req_new(hon_u);
+  }
+  {
+    c3_w len_w = (80 * 1024);
+    c3_i siz_i;
+    c3_y buf_y[len_w];
+
+    if ( (siz_i = recv(hon_u->wax_u.fd, buf_y, len_w, 0)) < 0 ) {
+      if ( EAGAIN == errno ) {
+        return;
+      } else {
+        perror("http: recv");
+        hon_u->ded = u2_yes;
+        return;
+      }
+    }
+    if ( siz_i != http_parser_execute(hon_u->ruc_u->par_u, 
+                                      &_http_settings, 
+                                      (c3_c*)buf_y, 
+                                      siz_i) )
+    {
+      fprintf(stderr, "http: parse error\r\n");
+      hon_u->ded = u2_yes;
+    }
+    else if ( siz_i == 0 ) {
+      // fprintf(stderr, "EOF on fd %d\r\n", hon_u->wax_u.fd);
+      hon_u->ded = u2_yes;
+    }
+  }
 }

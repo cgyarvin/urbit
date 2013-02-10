@@ -12,6 +12,9 @@
 #include <gmp.h>
 #include <stdint.h>
 #include <ev.h>
+#include <curses.h>
+#include <termios.h>
+#include <term.h>
 
 #include "all.h"
 #include "v/vere.h"
@@ -57,12 +60,15 @@ u2_ve_dump_wall(u2_noun wol)
 {
   u2_noun wal = wol;
 
+  u2_term_io_hija();
   while ( u2_nul != wal ) {
     u2_ve_dump_tape(u2_ct(u2h(wal)));
+    putchar(13);
     putchar(10);
 
     wal = u2t(wal);
   }
+  u2_term_io_loja(0);
   u2z(wol);
 }
 
@@ -328,12 +334,12 @@ u2_ve_zuse_deed(u2_noun ded)
 /* u2_ve_zuse_boom_see(): print to screen.
 */
 void
-u2_ve_zuse_boom_see(u2_noun tab, u2_noun tac)
+u2_ve_zuse_boom_see(u2_noun tub, u2_noun tac)
 {
-  if ( !u2_fly_is_cat(tab) ) {
+  if ( !u2_fly_is_cat(tub) ) {
     u2_cm_bail(c3__fail);
   } else {
-    u2_ve_tank(tab, tac);
+    u2_ve_tank(tub, tac);
   }
 }
 
@@ -475,33 +481,6 @@ _http_in(u2_hreq* req_u)
   return u2nq(met, hed, que, u2nc(url, txt));
 }
 
-static u2_hrep*
-_http_out(u2_noun rep)
-{
-  u2_noun sat, typ, hed, txt;
-
-  u2_cx_qual(rep, &sat, &typ, &hed, &txt);
-  {
-    u2_hrep* rep_u = malloc(sizeof(u2_hrep));
-
-    rep_u->sas_w = sat;
-    //  rep_u->msg_c = 0;
-    //  rep_u->typ_c = u2_cr_string(typ);
-
-    {
-      c3_w len_w     = u2_cr_met(3, txt);
-      u2_hbod *bod_u = malloc(sizeof(u2_hbod) + len_w + 1);
-
-      bod_u->nex_u = 0;
-      bod_u->len_w = len_w;
-      u2_cr_bytes(0, len_w + 1, bod_u->hun_y, txt);
-
-      rep_u->bod_u = bod_u;
-    }
-    return rep_u;
-  }
-}
-
 /* u2_ve_http_sync(): simple synchronous http.
 */
 u2_hrep*
@@ -579,36 +558,3 @@ u2_ve_sync(void)
   u2_cm_chin();
 }
 
-/* u2_ve_line(): execute a command line, unprotected.
-*/
-void
-u2_ve_line(c3_c* lin_c)
-{
-  u2_noun hoe;
-
-  u2_cm_trip();
-  if ( 0 != (hoe = u2_cm_trap()) ) {
-    u2_cm_purge();
-    u2_ve_grab(hoe, 0);
-
-    u2_ve_wine(u2k(u2h(hoe)));
-    u2_ve_sway(2, u2_ckb_flop(u2k(u2t(hoe))));
-    u2z(hoe);
-  } 
-  else {
-    u2_noun lin = u2_ci_string(lin_c);
-
-#ifdef RECK
-    u2_reck_line(&u2_Host.rec_u[0], lin);
-#else
-    u2_ve_zuse_line(lin);
-#endif
-    u2_cm_done();
-  
-    u2_cm_purge();
-    if ( (u2_yes == u2_Flag_Garbage) || (u2_no == u2_wire_lan(u2_Wire)) ) {
-      u2_ve_grab(0);
-    }
-  }
-  u2_cm_chin();
-}

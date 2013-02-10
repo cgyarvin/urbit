@@ -25,6 +25,7 @@ YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
 LIBS=-lev -lgmp -lreadline -ltecla -ltermcap -lsigsegv
+
 INCLUDE=include
 GENERATED=generated
 DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN)
@@ -46,9 +47,6 @@ CWFLAGS=-Wall
 
 .c.o:
 	 $(CC) -c $(CWFLAGS) $(CFLAGS) -o $@ $<
-
-C_OFILES=\
-       c/comd.o
 
 F_OFILES=\
        f/rail.o \
@@ -614,7 +612,6 @@ J192_OFILES=\
        gen192/watt.o
 
 BASE_OFILES=\
-       $(C_OFILES) \
        $(F_OFILES) \
        $(P_OFILES) \
        $(J194_OFILES) \
@@ -631,7 +628,9 @@ VERE_OFILES=\
        v/console.o \
        v/osystem.o \
        v/time.o \
+       v/term.o \
        v/http.o \
+       v/loop.o \
        v/sync.o \
        v/walk.o \
        v/reck.o \

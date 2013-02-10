@@ -12,6 +12,9 @@
 #include <gmp.h>
 #include <stdint.h>
 #include <ev.h>
+#include <curses.h>
+#include <termios.h>
+#include <term.h>
 
 #include "all.h"
 #include "v/vere.h"
@@ -512,6 +515,9 @@ u2_ve_mark_reck(u2_reck* rec_u)
   siz_w += u2_cm_mark_noun(rec_u->toy.slay);
   siz_w += u2_cm_mark_noun(rec_u->toy.scot);
   siz_w += u2_cm_mark_noun(rec_u->toy.slop);
+  siz_w += u2_cm_mark_noun(rec_u->toy.spat);
+  siz_w += u2_cm_mark_noun(rec_u->toy.turf);
+  siz_w += u2_cm_mark_noun(rec_u->toy.tuft);
 
   siz_w += u2_cm_mark_noun(rec_u->ken);
   siz_w += u2_cm_mark_noun(rec_u->syd);
@@ -570,22 +576,22 @@ u2_ve_word(c3_w wod_w)
   u2_bean top = u2_yes;
 
   if ( wod_w / (1000 * 1000 * 1000) ) {
-    fprintf(stderr, "%u.", wod_w / (1000 * 1000 * 1000));
+    uL(fprintf(uH, "%u.", wod_w / (1000 * 1000 * 1000)));
     wod_w %= (1000 * 1000 * 1000);
     top = u2_no;
   }
   if ( wod_w / (1000 * 1000) ) {
-    fprintf(stderr, ((top == u2_yes) ? "%u." : "%03u."), 
-                     wod_w / (1000 * 1000));
+    uL(fprintf(uH, ((top == u2_yes) ? "%u." : "%03u."), 
+                     wod_w / (1000 * 1000)));
     wod_w %= (1000 * 1000);
     top = u2_no;
   }
   if ( wod_w / 1000 ) {
-    fprintf(stderr, ((top == u2_yes) ? "%u." : "%03u."), wod_w / 1000);
+    uL(fprintf(uH, ((top == u2_yes) ? "%u." : "%03u."), wod_w / 1000));
     wod_w %= 1000;
     top = u2_no;
   }
-  fprintf(stderr, ((top == u2_yes) ? "%u" : "%03u"), wod_w);
+  uL(fprintf(uH, ((top == u2_yes) ? "%u" : "%03u"), wod_w));
 }
 
 /* u2_ve_grab(): garbage-collect the world, plus roots.
@@ -614,13 +620,13 @@ u2_ve_grab(u2_noun som, ...)
   lec_w = u2_cm_sweep(siz_w);
 
   if ( lec_w || (u2_yes == u2_Flag_Verbose) ) {
-    fprintf(stderr, "%s: gc: ", u2_Local);
+    uL(fprintf(uH, "%s: gc: ", u2_Local));
     if ( lec_w ) {
       u2_ve_word(4 * lec_w);
-      fprintf(stderr, " bytes shed; ");
+      uL(fprintf(uH, " bytes shed; "));
     }
     u2_ve_word(4 * siz_w);
-    fprintf(stderr, " bytes live\n");
+    uL(fprintf(uH, " bytes live\n"));
   }
   u2_wire_lan(u2_Wire) = u2_yes;
 }
