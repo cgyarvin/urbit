@@ -70,7 +70,7 @@
     /* u2_cx_at (u2at): fragment.
     */
       u2_noun
-      u2_cx_at(u2_noun som);
+      u2_cx_at(u2_noun axe, u2_noun som);
 
     /* u2_cx_cell():
     **

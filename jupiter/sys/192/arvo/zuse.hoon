@@ -1,6 +1,13 @@
 !:
 ::          %zuse, main loop.   This file is in the public domain.
 ::
+=<  =+  ^=  duc                                         ::  nock entrance
+        |=  cud=*  ^-  *
+        ?:  =(0 cud)
+          ..peek
+        ?>(?=(@ cud) (make cud))
+    ^-  *
+    [8 [1 duc] [9 2 [[0 4] [[0 3] [0 11]]]]]
 =<  |%
     ++  peek                                            ::  external inspect
       |=  *

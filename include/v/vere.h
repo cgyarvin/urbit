@@ -254,8 +254,7 @@
 
         u2_noun ken;                      //  kernel formula
         u2_noun syd;                      //  kernel seed 
-        u2_noun rec;                      //  rotor core
-
+        u2_noun roc;                      //  rotor core
       } u2_reck;
  
     /* u2_cart: ovum carton.
