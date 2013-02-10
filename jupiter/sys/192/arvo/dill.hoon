@@ -226,7 +226,7 @@
               but  %+  weld
                      (scag pey but.u.q.r.yar)
                    %+  weld
-                     `(list ,@c)`ney                ::  XX weird fuse-loop
+                     `(list ,@c)`ney                    ::  XX weird fuse-loop
                    (slag bus.u.q.r.yar but.u.q.r.yar)
             ==
           ==
@@ -237,7 +237,8 @@
             %=    +.$
                 q.r.yar  ~
                 mos
-              :*  [~ hen [%bbye ~]]
+              :*  [~ [/d/ hen] [%helo ~]]
+                  [~ hen [%bbye ~]]
                   [~ hen [%blit [%mor ~] ~]]
                   mos
               ==
@@ -250,8 +251,9 @@
             [p.hyt.u.q.r.yar [jab +.q.hyt.u.q.r.yar]]
           ::
               mos
-            :*  [~ hen [%bbye ~]]
-                [whu [[%b ~] [%d ~] hen] [%line jab]]
+            :*  [~ [/d/ hen] [%helo ~]]
+                [~ hen [%bbye ~]]
+                [whu [/b/ /d/ hen] [%line jab]]
                 [~ hen [%blit [[%mor ~] ~]]]
                 mos
             ==

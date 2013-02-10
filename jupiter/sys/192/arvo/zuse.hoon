@@ -119,11 +119,9 @@
         ova  [[i.q.i.mor r.i.mor] ova]
         mor  ?~  gyd
                t.mor
-             :: ~&  [%bonk p.i.mor `path`i.q.i.mor r.i.mor]
              :_(t.mor [p.i.mor [[u.gyd ~] [i.i.q.i.mor ~] ~] r.i.mor])
       == 
     ?>  ?=(^ i.q.i.mor)
-    ::  ~&  [%ride p.i.mor `(list path)`q.i.mor r.i.mor]
     =-  $(mor (weld p.nyx t.mor), fan q.nyx)
     ^=  nyx
     |-  ^-  [p=(list move) q=_fan]

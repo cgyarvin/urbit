@@ -467,6 +467,11 @@
         u2_noun
         u2_reck_peek(u2_reck* rec_u, u2_noun our, u2_noun hap);
 
+      /* u2_reck_poke(): insert and apply an input ovum (protected).
+      */
+        void
+        u2_reck_poke(u2_reck* rec_u, u2_noun ovo);
+
       /* u2_reck_prick(): query the reck namespace (unprotected).
       */
         u2_noun

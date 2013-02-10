@@ -384,7 +384,7 @@ _reck_kick_term(u2_reck* rec_u, u2_noun pox, c3_l tid_l, u2_noun fav)
     case c3__bbye: 
     {
       u2_reck_sync(rec_u);
-      u2_reck_plan(rec_u, pox, u2nc(c3__helo, u2_nul));
+      // u2_reck_plan(rec_u, pox, u2nc(c3__helo, u2_nul));
 
       u2z(fav); return u2_yes;
     } break; 
@@ -562,80 +562,10 @@ _reck_kick(u2_reck* rec_u, u2_noun ovo)
   u2z(ovo);
 }
 
-#if 0
-  u2_noun p_fav, q_fav;
-
-  switch ( u2h(fav) ) {
-    default: 
-    {
-      u2_err(u2_Wire, "unsupported", u2h(fav));
-    } break;
-
-    case c3__bbye: 
-    {
-      u2_reck_sync(rec_u);
-      u2_reck_plan(rec_u, u2k(u2h(ovo)), u2nc(c3__helo, u2_nul));
-
-      break;
-    } 
-    case c3__blit: p_fav = u2t(fav);
-    {
-      u2_term_ef_blit(rec_u, 1, u2k(p_fav));
-      break;
-    }
-    case c3__crap: p_fav = u2t(fav);
-    {
-      u2_ve_sway(2, u2_ckb_flop(u2k(p_fav)));
-      printf("<<<exit>>>\n");
-    } break;
-
-    case c3__exit:
-    {
-      fprintf(uH, "<goodbye>\n");
-      exit(0);
-    } break;
-
-    case c3__init: p_fav = u2t(fav);
-    {
-      rec_u->own = u2nc(u2k(p_fav), rec_u->own);
-      break;
-    }
-    case c3__talk: p_fav = u2t(fav);
-    {
-      u2_ve_tank(0, u2k(p_fav));
-    } break;
-
-    case c3__thou: p_fav = u2t(fav);
-    {
-      u2_ve_http_respond(u2k(u2h(ovo)), u2k(p_fav));
-      break;
-    }
-    case c3__save: u2_cx_cell(u2t(fav), &p_fav, &q_fav);
-    {
-      u2_noun pax = u2nc(c3__put, u2k(p_fav));
-      c3_c*   pax_c = u2_path(u2_yes, pax);
- 
-      u2_walk_save(pax_c, 0, u2k(q_fav));
-      free(pax_c);
-    } break;
-    case c3__warn: u2_cx_cell(u2t(fav), &p_fav, &q_fav);
-    {
-      switch ( p_fav ) {
-        case 0: u2_ve_tank(2, u2k(q_fav)); break;
-        case 1: u2_ve_tank(4, u2k(q_fav)); break;
-        case 2: u2_ve_tank(6, u2k(q_fav)); break;
-      }
-    } break;
-  }
-  c3_assert(!"not reached");
-  return u2_no;
-}
-#endif
-
-/* _reck_poke(): insert an input ovum.
+/* u2_reck_poke(): insert and apply an input ovum (protected).
 */
-static void
-_reck_poke(u2_reck* rec_u, u2_noun ovo)
+void
+u2_reck_poke(u2_reck* rec_u, u2_noun ovo)
 {
   u2_noun gax = _reck_nock_poke(rec_u, ovo);
   u2_noun hix = u2k(u2h(gax));
@@ -663,7 +593,7 @@ _reck_launch_toy(u2_reck* rec_u, u2_noun pax)
 {
   //  This is our ONLY remaining off-queue poke.
   //
-  _reck_poke
+  u2_reck_poke
     (rec_u, 
      u2nt(u2k(pax), c3__boot, u2nq(c3__make, c3_s4('z','u','s','e'), 256, 0)));
 
@@ -673,7 +603,7 @@ _reck_launch_toy(u2_reck* rec_u, u2_noun pax)
     u2_cm_bail(c3__exit);
   }
   else {
-    _reck_poke
+    u2_reck_poke
       (rec_u,
        u2nc(pax, 
             u2nt(c3__bind,
@@ -822,7 +752,7 @@ _reck_pork(u2_reck* rec_u, u2_noun ovo)
     exit(1);
   } 
   else {
-    _reck_poke(rec_u, ovo);
+    u2_reck_poke(rec_u, ovo);
     u2_cm_done();
   
     u2_cm_purge();
@@ -841,6 +771,7 @@ u2_reck_work(u2_reck* rec_u)
     u2_cart* egg_u = rec_u->ova.egg_u;
 
     _reck_pork(rec_u, egg_u->egg);
+    c3_assert(rec_u->ova.egg_u == egg_u);
 
     rec_u->ova.egg_u = egg_u->nex_u;
     if ( 0 == rec_u->ova.egg_u ) {
