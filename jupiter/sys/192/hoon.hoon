@@ -1805,7 +1805,7 @@
   ++  hit  ;~  pose 
              dit 
              (cook |=(a=char (sub a 87)) (shim 'a' 'f'))
-             (cook |=(a=char (sub a 65)) (shim 'A' 'F'))
+             (cook |=(a=char (sub a 55)) (shim 'A' 'F'))
            ==
   ++  low  (shim 'a' 'z')
   ++  mes  (cook |=([a=@ b=@] (add (mul 16 a) b)) ;~(plug hit hit))
