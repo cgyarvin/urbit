@@ -21,6 +21,40 @@
 #include "f/coal.h"
 #include "v/vere.h"
 
+
+/* _reck_nock_poke(): call poke through hardcoded interface.
+*/
+static u2_noun
+_reck_nock_poke(u2_reck* rec_u, u2_noun ovo)
+{
+  u2_noun fun = u2_cn_nock(u2k(rec_u->roc), u2k(u2_cx_at(10, rec_u->roc)));
+  u2_noun sam = u2nc(u2k(rec_u->now), ovo);
+
+  return u2_cn_mung(fun, sam);
+}
+
+/* _reck_nock_peek(): call peek through hardcoded interface.
+*/
+static u2_noun
+_reck_nock_peek(u2_reck* rec_u, u2_noun our, u2_noun hap)
+{
+  u2_noun fun = u2_cn_nock(u2k(rec_u->roc), u2k(u2_cx_at(11, rec_u->roc)));
+  u2_noun sam = u2nt(our, u2k(rec_u->now), hap);
+
+  return u2_cn_mung(fun, sam);
+}
+
+/* _reck_nock_wish(): call wish through hardcoded interface.
+*/
+static u2_noun
+_reck_nock_wish(u2_reck* rec_u, u2_noun our, u2_noun ovo)
+{
+  u2_noun fun = u2_cn_nock(u2k(rec_u->roc), u2k(u2_cx_at(5, rec_u->roc)));
+  u2_noun sam = u2nc(u2k(rec_u->now), ovo);
+
+  return u2_cn_mung(fun, sam);
+}
+
 /* _reck_root(): tool from boot.
 */
 static u2_noun
@@ -212,9 +246,7 @@ _reck_time_bump(u2_reck* rec_u)
 u2_noun
 u2_reck_peek(u2_reck* rec_u, u2_noun our, u2_noun hap)
 {
-  u2_noun sam = u2nt(our, u2k(rec_u->now), hap);
-
-  return _reck_hard(rec_u, u2k(rec_u->rec), "peek", sam);
+  return _reck_nock_peek(rec_u, our, hap);
 }
 
 /* u2_reck_init(): load the reck engine, from kernel.
@@ -285,7 +317,8 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
       // printf("zuse:\n");
       vay = _reck_load_temp(rec_u, yer, kno_w, "arvo/zuse.hoon");
     }
-    rec_u->rec = vay;
+    rec_u->roc = u2_cn_nock(0, u2k(u2t(vay)));
+    u2z(vay);
   }
 }
 
@@ -351,7 +384,7 @@ _reck_kick_term(u2_reck* rec_u, u2_noun pox, c3_l tid_l, u2_noun fav)
     case c3__bbye: 
     {
       u2_reck_sync(rec_u);
-      u2_reck_plan(rec_u, pox, u2nc(c3__helo, u2_nul));
+      // u2_reck_plan(rec_u, pox, u2nc(c3__helo, u2_nul));
 
       u2z(fav); return u2_yes;
     } break; 
@@ -529,94 +562,21 @@ _reck_kick(u2_reck* rec_u, u2_noun ovo)
   u2z(ovo);
 }
 
-#if 0
-  u2_noun p_fav, q_fav;
-
-  switch ( u2h(fav) ) {
-    default: 
-    {
-      u2_err(u2_Wire, "unsupported", u2h(fav));
-    } break;
-
-    case c3__bbye: 
-    {
-      u2_reck_sync(rec_u);
-      u2_reck_plan(rec_u, u2k(u2h(ovo)), u2nc(c3__helo, u2_nul));
-
-      break;
-    } 
-    case c3__blit: p_fav = u2t(fav);
-    {
-      u2_term_ef_blit(rec_u, 1, u2k(p_fav));
-      break;
-    }
-    case c3__crap: p_fav = u2t(fav);
-    {
-      u2_ve_sway(2, u2_ckb_flop(u2k(p_fav)));
-      printf("<<<exit>>>\n");
-    } break;
-
-    case c3__exit:
-    {
-      fprintf(uH, "<goodbye>\n");
-      exit(0);
-    } break;
-
-    case c3__init: p_fav = u2t(fav);
-    {
-      rec_u->own = u2nc(u2k(p_fav), rec_u->own);
-      break;
-    }
-    case c3__talk: p_fav = u2t(fav);
-    {
-      u2_ve_tank(0, u2k(p_fav));
-    } break;
-
-    case c3__thou: p_fav = u2t(fav);
-    {
-      u2_ve_http_respond(u2k(u2h(ovo)), u2k(p_fav));
-      break;
-    }
-    case c3__save: u2_cx_cell(u2t(fav), &p_fav, &q_fav);
-    {
-      u2_noun pax = u2nc(c3__put, u2k(p_fav));
-      c3_c*   pax_c = u2_path(u2_yes, pax);
- 
-      u2_walk_save(pax_c, 0, u2k(q_fav));
-      free(pax_c);
-    } break;
-    case c3__warn: u2_cx_cell(u2t(fav), &p_fav, &q_fav);
-    {
-      switch ( p_fav ) {
-        case 0: u2_ve_tank(2, u2k(q_fav)); break;
-        case 1: u2_ve_tank(4, u2k(q_fav)); break;
-        case 2: u2_ve_tank(6, u2k(q_fav)); break;
-      }
-    } break;
-  }
-  c3_assert(!"not reached");
-  return u2_no;
-}
-#endif
-
-/* _reck_poke(): insert an input ovum.
+/* u2_reck_poke(): insert and apply an input ovum (protected).
 */
-static void
-_reck_poke(u2_reck* rec_u, u2_noun ovo)
+void
+u2_reck_poke(u2_reck* rec_u, u2_noun ovo)
 {
-  u2_noun sam = _reck_slop(rec_u, u2nc(u2nc(c3__atom, 0), u2k(rec_u->now)),
-                                  u2nc(c3__noun, ovo));
-  u2_noun gax = _reck_soft(rec_u, u2k(rec_u->rec), "poke", sam);
-  u2_noun hix, pux;
+  u2_noun gax = _reck_nock_poke(rec_u, ovo);
+  u2_noun hix = u2k(u2h(gax));
+  u2_noun pux = u2k(u2t(gax));
 
-  hix = _reck_slap(rec_u, u2k(gax), u2nc(c3__cnbc, 'p'));
-  pux = _reck_slap(rec_u, gax, u2nc(c3__cnbc, 'q'));
+  u2z(rec_u->roc);
+  rec_u->roc = pux; 
 
-  u2z(rec_u->rec);
-  rec_u->rec = pux; 
-
+  u2z(gax);
   {
-    u2_noun hux = u2t(hix);
+    u2_noun hux = hix;
 
     while ( u2_nul != hux ) {
       _reck_kick(rec_u, u2k(u2h(hux)));
@@ -633,10 +593,8 @@ _reck_launch_toy(u2_reck* rec_u, u2_noun pax)
 {
   //  This is our ONLY remaining off-queue poke.
   //
-  _reck_poke
+  u2_reck_poke
     (rec_u, 
-//     u2nc(pax, u2nq(c3__make, c3_s4('z','u','s','e'), 256, u2k(rec_u->now))));
-//     u2nc(u2k(pax), u2nq(c3__make, c3_s4('z','u','s','e'), 256, 0)));
      u2nt(u2k(pax), c3__boot, u2nq(c3__make, c3_s4('z','u','s','e'), 256, 0)));
 
   if ( u2_nul == rec_u->own ) {
@@ -645,7 +603,7 @@ _reck_launch_toy(u2_reck* rec_u, u2_noun pax)
     u2_cm_bail(c3__exit);
   }
   else {
-    _reck_poke
+    u2_reck_poke
       (rec_u,
        u2nc(pax, 
             u2nt(c3__bind,
@@ -744,20 +702,6 @@ u2_reck_http_request(u2_reck* rec_u, u2_bean sec, u2_noun pox, u2_noun req)
   u2_reck_plan(rec_u, pox, u2nc((sec == u2_yes) ? c3__this : c3__thin, req));
 }
 
-/* u2_reck_line(): apply a reck line (protected).
-*/
-void
-u2_reck_line(u2_reck* rec_u, u2_noun lin)
-{
-  u2_noun pax = u2nq(c3__gold, c3__term, '0', u2_nul);
-
-  u2_reck_time(rec_u);
-  u2_reck_sync(rec_u);
-  u2_reck_time(rec_u);
-
-  _reck_poke(rec_u, u2nc(pax, u2nc(c3__line, lin)));
-}
-
 /* u2_reck_prick(): query the reck namespace (unprotected).
 */
 u2_noun
@@ -808,29 +752,7 @@ _reck_pork(u2_reck* rec_u, u2_noun ovo)
     exit(1);
   } 
   else {
-    {
-      u2_noun sam = _reck_slop(rec_u, u2nc(u2nc(c3__atom, 0), 
-                                           u2k(rec_u->now)),
-                                      u2nc(c3__noun, ovo));
-      u2_noun gax = _reck_soft(rec_u, u2k(rec_u->rec), "poke", sam);
-      u2_noun hix, pux;
-
-      hix = _reck_slap(rec_u, u2k(gax), u2nc(c3__cnbc, 'p'));
-      pux = _reck_slap(rec_u, gax, u2nc(c3__cnbc, 'q'));
-
-      u2z(rec_u->rec);
-      rec_u->rec = pux; 
-
-      {
-        u2_noun hux = u2t(hix);
-
-        while ( u2_nul != hux ) {
-          _reck_kick(rec_u, u2k(u2h(hux)));
-          hux = u2t(hux);
-        }
-      }
-      u2z(hix);
-    }
+    u2_reck_poke(rec_u, ovo);
     u2_cm_done();
   
     u2_cm_purge();
@@ -849,6 +771,7 @@ u2_reck_work(u2_reck* rec_u)
     u2_cart* egg_u = rec_u->ova.egg_u;
 
     _reck_pork(rec_u, egg_u->egg);
+    c3_assert(rec_u->ova.egg_u == egg_u);
 
     rec_u->ova.egg_u = egg_u->nex_u;
     if ( 0 == rec_u->ova.egg_u ) {

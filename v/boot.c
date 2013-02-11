@@ -521,7 +521,7 @@ u2_ve_mark_reck(u2_reck* rec_u)
 
   siz_w += u2_cm_mark_noun(rec_u->ken);
   siz_w += u2_cm_mark_noun(rec_u->syd);
-  siz_w += u2_cm_mark_noun(rec_u->rec);
+  siz_w += u2_cm_mark_noun(rec_u->roc);
 
   return siz_w;
 }
