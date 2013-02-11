@@ -397,7 +397,11 @@
     ?~  tat  rez
     %=    $
       tat  t.tat
-      rez  :(weld (xmln n.i.tat) "=\"" (xmle v.i.tat ['"' rez]))
+      rez  ;:  weld
+             (xmln n.i.tat)
+             "=\""
+             (xmle v.i.tat '"' ?~(t.tat rez [' ' rez]))
+           ==
     ==
   ::
   ++  xmle                                              ::  escape for xml
