@@ -500,35 +500,6 @@ u2_ve_http_sync(u2_hreq* req_u)
   }
 }
 
-/* u2_ve_launch(): call reck launch fn.
-*/
-void
-u2_ve_launch(void)
-{
-  u2_noun hoe;
-
-  u2_cm_trip();
-  if ( 0 != (hoe = u2_cm_trap()) ) {
-    u2_cm_purge();
-    u2_ve_grab(hoe, 0);
-
-    u2_ve_wine(u2k(u2h(hoe)));
-    u2_ve_sway(2, u2_ckb_flop(u2k(u2t(hoe))));
-    u2z(hoe);
-  } 
-  else {
-    u2_reck_launch(&u2_Host.rec_u[0]);
-  
-    u2_cm_done();
-  
-    u2_cm_purge();
-    if ( (u2_yes == u2_Flag_Garbage) || (u2_no == u2_wire_lan(u2_Wire)) ) {
-      u2_ve_grab(0);
-    }
-  }
-  u2_cm_chin();
-}
-
 /* u2_ve_sync(): filesystem sync, unprotected.
 */
 void

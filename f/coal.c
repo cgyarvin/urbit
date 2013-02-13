@@ -24,8 +24,10 @@
     u2_noun j2_mcc(Pt4Y, by, get)(u2_wire, u2_noun a, u2_noun b);
     u2_noun j2_mcc(Pt4Y, by, put)(u2_wire, u2_noun a, u2_noun b, u2_noun c);
     u2_noun j2_mby(Pt5Y, jam)(u2_wire, u2_noun a);
+    u2_noun j2_mby(Pt5Y, trip)(u2_wire, u2_noun a);
 
 #   define _coal_jam  j2_mby(Pt5Y, jam)
+#   define _coal_trip j2_mby(Pt5Y, trip)
 
 #   define _coal_gor  j2_mbc(Pt3Y, gor)
 #   define _coal_by_gas  j2_mcc(Pt4Y, by, gas)
@@ -975,6 +977,17 @@ u2_atom
 u2_cke_jam(u2_noun a)
 {
   u2_atom b = _coal_jam(u2_Wire, a);
+
+  u2_cz(a);
+  return b;
+}
+
+/* u2_cke_trip(): atom to tape.
+*/
+u2_atom
+u2_cke_trip(u2_noun a)
+{
+  u2_atom b = _coal_trip(u2_Wire, a);
 
   u2_cz(a);
   return b;

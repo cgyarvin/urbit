@@ -152,7 +152,7 @@ u2_term_io_init(u2_reck* rec_u)
   //
   {
     uty_u->tid_l = 1;
-    uty_u->pax = u2nq(c3__gold, c3__term, '1', u2_nul); 
+    uty_u->pax = u2nc(c3__gold, u2nq(c3__term, u2k(rec_u->sen), '1', u2_nul));
     uty_u->out_u = 0;
     uty_u->tou_u = 0;
 
@@ -653,22 +653,6 @@ _term_ef_blits(u2_reck* rec_u,
   }
   u2z(bls);
   c3_assert(!"term: bad terminal id");
-}
-
-static u2_bean
-_term_ud(u2_noun txt, c3_l* tid_l)
-{
-  if ( u2_no == u2ud(txt) ) {
-    return u2_no;
-  } else {
-    c3_c* tid_c = u2_cr_string(txt);
-
-    u2z(txt);
-    return 
-        ( (1 == sscanf(tid_c, "%ud", tid_l)) && !(0x80000000 & *tid_l) )
-      ? u2_yes
-      : u2_no;
-  }
 }
 
 /* _term_main(): return main or console terminal.

@@ -73,7 +73,6 @@
     /* u2_hrep: simple http response.
     */
       typedef struct _u2_hrep {
-        c3_w             sev_l;             //  server number
         c3_w             coq_l;             //  connection number
         c3_w             seq_l;             //  request number
         c3_w             sas_w;             //  status
@@ -102,7 +101,7 @@
         struct ev_io     wax_u;             //  event handler state
         u2_bean          nuw;               //  if true, needs init
         u2_bean          ded;               //  if true, needs cleanup
-        c3_w             sev_l;             //  server number - mostly unique
+        c3_w             sev_l;             //  server number
         c3_w             coq_l;             //  next connection number
         c3_w             por_w;             //  running port
         struct _u2_hcon* hon_u;             //  connection list
@@ -248,6 +247,8 @@
 
         u2_noun now;                      //  current time, as noun
         u2_noun wen;                      //  current time, as text
+        u2_noun sev_l;                    //  instance number
+        u2_noun sen;                      //  instance string
         u2_noun own;                      //  owner list
 
         u2_noun pug;                      //  prompt state
@@ -288,6 +289,9 @@
         u2_reck rec_u[1];                   //  rotors (hardcoded to 1)
       } u2_host;                            //  host == computer == process
 
+    /* u2_funk: standard system function.
+    */
+      typedef u2_noun (*u2_funk)(u2_reck* rec_u, u2_noun);
 
   /** Global variables.
   **/
@@ -469,13 +473,18 @@
 
       /* u2_reck_poke(): insert and apply an input ovum (protected).
       */
-        void
+        u2_noun
         u2_reck_poke(u2_reck* rec_u, u2_noun ovo);
 
       /* u2_reck_prick(): query the reck namespace (unprotected).
       */
         u2_noun
         u2_reck_prick(u2_reck* rec_u, u2_noun our, u2_noun hap);
+
+      /* u2_reck_kick(): handle effect.
+      */
+        void
+        u2_reck_kick(u2_reck* rec_u, u2_noun ovo);
 
       /* u2_reck_sync(): poll and apply sync events (protected).
       */
@@ -765,7 +774,6 @@
       */
         void
         u2_http_ef_thou(u2_reck* rec_u,
-                        c3_l     sev_l,
                         c3_l     coq_l,
                         c3_l     seq_l,
                         u2_noun  rep);

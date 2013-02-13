@@ -428,7 +428,6 @@ u2_mog(u2_noun veb)
       *u2_at_dog_mog(veb) = mog_w;
       return mog_w;
     }
-
   }
 }
 

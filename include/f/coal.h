@@ -1171,5 +1171,10 @@
         u2_atom
         u2_cke_jam(u2_noun a);
 
+      /* u2_cke_trip: atom to tape.
+      */
+        u2_noun
+        u2_cke_trip(u2_noun a);
+
     /* u2_ckf: tier 6 functions
     */

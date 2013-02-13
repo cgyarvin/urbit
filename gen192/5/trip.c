@@ -15,7 +15,7 @@
   }
   u2_noun                                                         //  transfer
   j2_mb(Pt5, trip)(u2_wire wir_r, 
-                  u2_noun cor)                                    //  retain
+                   u2_noun cor)                                    //  retain
   {
     u2_noun a;
 
