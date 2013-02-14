@@ -1116,10 +1116,8 @@
     ^-  [(list move) _+>]
     ?-    -.bon
         %beer
-      :-  :~  [[~ p.bon] [[%c ~] hen] [%keep p.bon]]
+      :-  :~  [[~ p.bon] [/c/ hen] [%keep p.bon]]
               [[~ p.bon] hen [%init p.bon]]
-              [[~ p.bon] hen [%warn "welcome, {~(rend co [~ %p p.bon])}!"]]
-              [[~ p.bon] hen [%warn "passcode: {~(rend co [~ %p q.bon])}"]]
           ==
       +>
     ::

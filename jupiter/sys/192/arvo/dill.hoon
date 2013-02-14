@@ -4,8 +4,7 @@
 |%
 ++  dill                                                ::  terminal handling
   ^-  vane                                              ::  kernel instrument
-  =|                                                    ::  system state
-      $:  wib=(map hose yard)                           ::  state by terminal
+  =|  $:  wib=(map hose yard)                           ::  terminal by channel
       ==                                                ::
   |=  [now=@da eny=@ sky=||(* (unit))]                  ::  current invocation
   ^?                                                    ::  opaque core
@@ -13,26 +12,41 @@
   ++  beat                                              ::  process move
     |=  [whu=(unit flag) tea=tire hen=hose fav=card]
     ^-  [p=(list move) q=vane]
-    =.  hen
-      ?.  ?=([[@ ~] ~] hen)  hen                        ::  blank
-      =+  yip=(~(tap by wib) ~)
-      |-  ^-  hose
-      ?~(yip ~ p.i.yip)                                 ::  XX stub
-    ?~  hen
-      ~&  [%dill-lost whu fav]
-      [~ ..^$]
-    =^  yar  +> 
-      ^-  [yard _+>]
-      =+  yur=(~(get by wib) hen)
-      ?~  yur
-        =+  ^=  yer  ^-  yard
-            :*  &
-                ?~(whu ~ [u.whu ~])
-                [80 ~ *blot]
-                *(map ,[p=flag q=rink] hist)
-            ==
-        [yer +>.$(wib (~(put by wib) hen yer))]
-      [u.yur +>.$]
+    =+  yar=(~(get by wib) hen)
+    ?~  yar
+      ?+    -.fav  
+        ~&([%dill-lost whu tea hen fav] [~ ..^$])
+      ::
+          %boot                                         ::  start terminal
+        :_  ..^$
+        ^-  (list move)
+        :-  [whu [[%a ~] [%d tea] hen] p.fav]
+        (turn q.fav |=(a=card [whu [/d/ hen] a]))
+      ::
+          %flog                                         ::  log to terminal
+        :_  ..^$
+        %-  turn
+        :_  |=(a=hose [whu [/d/ a] p.fav])
+        ^-  (list hose)
+        =+  mel=(adit hen)
+        =+  gum=`(list ,[p=hose q=yard])`(~(tap by wib) ~)
+        |-  ^-  (list hose)    
+        ?~  gum  ~
+        %-  weld
+        :_  $(gum t.gum)
+        ?.  ?~  whu  =(%gold mel)
+            |-  ?~  q.q.i.gum  | 
+                ?|  =(u.whu i.q.q.i.gum) 
+                    $(q.q.i.gum t.q.q.i.gum)
+                ==
+          ~
+        [p.i.gum ~]
+      ::
+          %init                                         ::  create terminal
+        :-  [[[~ p.fav] hen [%init p.fav]] ~]
+        ..^$(wib (~(put by wib) hen [& [p.fav ~] *blur ~]))
+      ==
+    =>  .(yar u.yar) 
     =.  whu  ?~(q.yar ~ [~ i.q.yar])
     =|  mos=(list move)
     =<  yerk:leap
@@ -279,6 +293,14 @@
         %=    +.$
             mos
           :_(mos [whu [[%a ~] [%d tea] hen] p.fav])
+        ==
+      ::
+          %hail
+        ?>  ?=(^ whu)
+        %=    +.$ 
+            mos
+          :_  mos 
+          [whu [/d/ hen] [%warn "welcome, {~(rend co [~ %p u.whu])}!"]]
         ==
       ::
           %helo                                         ::  trigger prompt

@@ -23,7 +23,7 @@
             |  ~(rend co ~ %if p.q.fav)
           ==
       =+  giy=~(rend co ~ %p p.fav)
-      :-  [[~ hen [%warn "http: serving {nom} as {giy}"]] ~]
+      :-  [[~ [/d/ hen] [%flog %warn "http: serving {nom} as {giy}"]] ~]
       ^|
       %=    ..^$
           seh

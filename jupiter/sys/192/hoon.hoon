@@ -4285,13 +4285,13 @@
   (rap 3 (pave vax))
 ::
 ++  slam
-  |=  [gat=vase sam=vase]  ~|  %slam  ^-  vase
+  |=  [gat=vase sam=vase]  ^-  vase
   =+  :-  ^=  typ  ^-  type
           [%cell p.gat p.sam]
       ^=  gen  ^-  gene
       [%cncl [~ 2] [~ 3]]
   =+  gun=(~(mint ut typ) %noun gen)
-  [p.gun ~|(%slam .*([q.gat q.sam] q.gun))]
+  [p.gun .*([q.gat q.sam] q.gun)]
 ::
 ++  slab
   |=  [not=? [vax=vase gen=gene] sky=_|+(* *(unit))]  ^-  tune
@@ -4306,7 +4306,7 @@
 ++  slap
   |=  [vax=vase gen=gene]  ^-  vase
   =+  gun=(~(mint ut p.vax) %noun gen)
-  [p.gun ~|(%slap .*(q.vax q.gun))]
+  [p.gun .*(q.vax q.gun)]
 ::
 ++  slop
   |=  [hed=vase tal=vase]

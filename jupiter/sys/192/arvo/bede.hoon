@@ -328,6 +328,10 @@
       |=  veq=(list card)
       +>(duz (weld (turn veq |=(a=card [[~ who] hen a])) duz))
     ::
+    ++  envy                                            ::  advance a card
+      |=  [dst=tire fav=card]
+      +>(duz [[[~ who] [dst hen] fav] duz])
+    ::
     ++  ergo
       |=  gez=(list path)
       ^-  beef
@@ -456,12 +460,14 @@
         =.  p.lif  ?:(=(pid (dec p.lif)) (dec p.lif) p.lif)
         ?.  (~(has by q.lif) pid)
           [duz ..^$]
-        =.  ..nave  (emit %text (weld "/ %" tid))
+        =.  ..nave  (envy /d/ %flog %text (weld "/ %" tid))
         [duz ..^$(q.lif (~(del by q.lif) pid))]
       ?>  ?=(^ bor)
       =>  %=    .
               ..nave
-            (emit %text (weld ?:((~(has by q.lif) pid) "= %" "^ %") tid))
+            %+  envy
+              /d/
+            [%flog %text (weld ?:((~(has by q.lif) pid) "= %" "^ %") tid)]
           ==
       [duz ..^$(q.lif (~(put by q.lif) pid [loz u.bor]))]
     ::

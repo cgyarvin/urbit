@@ -4,4 +4,4 @@
 |=  [arg=@ ~]
 :_  ~
 :_  ~
-[%text <(fib arg)>]
+[%text <(fibonacci arg)>]

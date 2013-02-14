@@ -196,6 +196,7 @@ _walk_in(u2_reck* rec_u, const c3_c* dir_c, c3_w len_w)
       }
     }
   }
+  closedir(dir_d);
   return map;
 }
 

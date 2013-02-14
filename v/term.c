@@ -160,17 +160,14 @@ u2_term_io_init(u2_reck* rec_u)
     u2_Host.uty_u = uty_u;
   }
 
+#if 0
   //  Tell the terminal how big it is.
   //
   {
-    struct winsize siz_u;
-
-    if ( 0 == ioctl(uty_u->wax_u.fd, TIOCGWINSZ, &siz_u) ) {
-      u2_reck_plan
-        (rec_u, u2k(uty_u->pax), 
-                u2nt(c3__blew, siz_u.ws_col, siz_u.ws_row));
-    }
+    u2_reck_plan
+      (rec_u, u2k(uty_u->pax), u2nc(c3__blew, u2_term_ef_blew(rec_u, 1)));
   }
+#endif
 
   //  Start raw input.
   //
@@ -589,6 +586,54 @@ u2_term_io_fuck(u2_reck*      rec_u,
   }
 }
 
+/* _term_main(): return main or console terminal.
+*/
+static u2_utty*
+_term_main()
+{
+  u2_utty* uty_u;
+
+  for ( uty_u = u2_Host.uty_u; uty_u; uty_u = uty_u->nex_u ) {
+    if ( uty_u->wax_u.fd <= 2 ) {
+      return uty_u;
+    }
+  }
+  return u2_Host.uty_u;
+}
+
+/* _term_ef_get(): terminal by id.
+*/
+static u2_utty*
+_term_ef_get(u2_reck* rec_u,
+             c3_l     tid_l)
+{
+  if ( 0 != tid_l ) {
+    u2_utty* uty_u;
+
+    for ( uty_u = u2_Host.uty_u; uty_u; uty_u = uty_u->nex_u ) {
+      if ( tid_l == uty_u->tid_l ) {
+        return uty_u;
+      }
+    }
+  }
+  return _term_main();
+}
+
+/* u2_term_ef_blew(): return window size [columns rows].
+*/
+u2_noun
+u2_term_ef_blew(u2_reck* rec_u, c3_l tid_l)
+{
+  u2_utty*       uty_u = _term_ef_get(rec_u, tid_l);
+  struct winsize siz_u;
+
+  if ( 0 == ioctl(uty_u->wax_u.fd, TIOCGWINSZ, &siz_u) ) {
+    return u2nc(siz_u.ws_col, siz_u.ws_row);
+  } else {
+    return u2nc(80, 24);
+  }
+}
+              
 /* _term_ef_blit(): send blit to terminal.
 */
 static void
@@ -630,62 +675,28 @@ _term_ef_blit(u2_reck* rec_u,
   return;
 }
 
-/* _term_ef_blits(): send blit list to terminal.
-*/
-static void
-_term_ef_blits(u2_reck* rec_u,
-               c3_l     tid_l,
-               u2_noun  bls)
-{
-  u2_utty* uty_u;
-
-  for ( uty_u = u2_Host.uty_u; uty_u; uty_u = uty_u->nex_u ) {
-    if ( tid_l == uty_u->tid_l ) {
-      u2_noun bis = bls;
-
-      while ( u2_yes == u2du(bis) ) {
-        _term_ef_blit(rec_u, uty_u, u2k(u2h(bis)));
-        bis = u2t(bis);
-      }
-      u2z(bls);
-      return;
-    }
-  }
-  u2z(bls);
-  c3_assert(!"term: bad terminal id");
-}
-
-/* _term_main(): return main or console terminal.
-*/
-static u2_utty*
-_term_main()
-{
-  u2_utty* uty_u;
-
-  for ( uty_u = u2_Host.uty_u; uty_u; uty_u = uty_u->nex_u ) {
-    if ( uty_u->wax_u.fd <= 2 ) {
-      return uty_u;
-    }
-  }
-  return u2_Host.uty_u;
-}
-
-/* u2_term_ef_blit(): send %blit effect to specific terminal.
+/* u2_term_ef_blit(): send %blit list to specific terminal.
 */
 void
 u2_term_ef_blit(u2_reck* rec_u,
                 c3_l     tid_l,
-                u2_noun  blt)
+                u2_noun  bls)
 {
-  if ( 0 == tid_l ) {
-    u2_utty* uty_u = _term_main();
+  u2_utty* uty_u = _term_ef_get(rec_u, tid_l);
 
-    if ( 0 == uty_u ) {
-      u2z(blt); return;
-    }
-    tid_l = _term_main()->tid_l;
+  if ( 0 == uty_u ) {
+    u2z(bls); return;
   }
-  return _term_ef_blits(rec_u, tid_l, blt);
+
+  {
+    u2_noun bis = bls;
+
+    while ( u2_yes == u2du(bis) ) {
+      _term_ef_blit(rec_u, uty_u, u2k(u2h(bis)));
+      bis = u2t(bis);
+    }
+    u2z(bls);
+  }
 } 
 
 /* u2_term_io_hija(): hijack console for fprintf, returning FILE*.

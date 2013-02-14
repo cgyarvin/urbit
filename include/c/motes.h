@@ -415,6 +415,7 @@
 #   define c3__gund   c3_s4('g','u','n','d')
 #   define c3__gunn   c3_s4('g','u','n','n')
 #   define c3__hack   c3_s4('h','a','c','k')
+#   define c3__hail   c3_s4('h','a','i','l')
 #   define c3__hair   c3_s4('h','a','i','r')
 #   define c3__hake   c3_s4('h','a','k','e')
 #   define c3__halc   c3_s4('h','a','l','c')

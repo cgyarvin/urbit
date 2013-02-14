@@ -703,6 +703,12 @@
 
     /**  Terminal, new style.
     **/
+      /* u2_term_ef_blew(): return window size [columns rows].
+      */
+        u2_noun
+        u2_term_ef_blew(u2_reck* rec_u,
+                        c3_l     tid_l);
+                  
       /* u2_term_ef_blit(): send %blit effect to to terminal.
       */
         void
@@ -750,6 +756,7 @@
         u2_term_io_fuck(u2_reck*      rec_u,
                         struct ev_io* wax_u);
 
+        
       /* u2_term_io_hija(): hijack console for cooked print.
       */
         FILE*

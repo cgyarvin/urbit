@@ -55,6 +55,7 @@
     } 
   }
 
+#if 0
   static u2_noun                                                  //  retain
   _seek_silk_yaw(u2_noun wir_r,
                  u2_noun hey)                                     //  retain
@@ -120,6 +121,7 @@
     u2_rz(wir_r, hey);
     return ret;
   }
+#endif
 
   u2_noun                                                         //  transfer
   j2_mcx(Pt6, ut, seek)(u2_wire wir_r, 

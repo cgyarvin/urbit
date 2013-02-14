@@ -127,7 +127,7 @@
               [%belt p=belt]                            ::  terminal input
               [%blew p=blew]                            ::  terminal config
               [%blit p=(list blit)]                     ::  terminal output
-              [%boot p=card]                            ::  reset soft state
+              [%boot p=card q=(list card)]              ::  start terminal
               [%cash p=@p q=buck]                       ::  civil license
               [%crap p=(list)]                          ::  error with trace
               [%dire p=@tas q=dram]                     ::  apply directory
@@ -136,9 +136,11 @@
               [%exit ~]                                 ::  logical exit
               [%file p=@tas q=@]                        ::  apply atomic file
               [%fail p=tape]                            ::  report failure
+              [%hail ~]                                 ::  welcome user
               [%hear p=@]                               ::  receive packet
               [%helo ~]                                 ::  trigger prompt
               [%init p=@p]                              ::  report install
+              [%flog p=card]                            ::  log to terminal
               [%junk p=@]                               ::  entropy
               [%keep p=@p]                              ::  establish master
               [%kill p=@ud]                             ::  kill a process

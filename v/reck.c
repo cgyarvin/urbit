@@ -498,24 +498,37 @@ _reck_kick_spec(u2_reck* rec_u, u2_noun pox, u2_noun fav)
 
       case c3__http: {
         u2_noun pud = tt_pox;
-        u2_noun p_pud, q_pud, r_pud, s_pud;
+        u2_noun p_pud, t_pud, tt_pud, q_pud, r_pud, s_pud;
         c3_l    coq_l, seq_l;
 
-        if ( (u2_no == u2_cr_qual(pud, &p_pud, &q_pud, &r_pud, &s_pud)) ||
-             (u2_nul != s_pud) ||
-             (u2_no == u2_sing(rec_u->sen, p_pud)) ||
-             (u2_no == _reck_lily(rec_u, c3__ud, u2k(q_pud), &coq_l)) ||
-             (u2_no == _reck_lily(rec_u, c3__ud, u2k(r_pud), &seq_l)) )
+        if ( (u2_no == u2_cr_cell(pud, &p_pud, &t_pud)) ||
+             (u2_no == u2_sing(rec_u->sen, p_pud)) )
         {
-          uL(fprintf(uH, "http: bad tire - path %s\n",
-                u2_cr_string(_reck_spat(rec_u, u2k(pud)))));
-          uL(fprintf(uH, "http: sen %s\n", u2_cr_string(rec_u->sen)));
-          uL(fprintf(uH, "http: p_pud %s\n", u2_cr_string(p_pud)));
           u2z(pox); u2z(fav); return u2_no;
         }
-        else {
-          return _reck_kick_http(rec_u, pox, coq_l, seq_l, fav);
+
+        if ( u2_nul == t_pud ) {
+          coq_l = seq_l = 0;
         }
+        else {
+          if ( (u2_no == u2_cr_cell(t_pud, &q_pud, &tt_pud)) ||
+               (u2_no == _reck_lily(rec_u, c3__ud, u2k(q_pud), &coq_l)) )
+          {
+            u2z(pox); u2z(fav); return u2_no;
+          }
+
+          if ( u2_nul == tt_pud ) {
+            seq_l = 0;
+          } else {
+            if ( (u2_no == u2_cr_cell(tt_pud, &r_pud, &s_pud)) ||
+                 (u2_nul != s_pud) ||
+                 (u2_no == _reck_lily(rec_u, c3__ud, u2k(r_pud), &seq_l)) )
+            {
+              u2z(pox); u2z(fav); return u2_no;
+            }
+          }
+        }
+        return _reck_kick_http(rec_u, pox, coq_l, seq_l, fav);
       } break;
 
       case c3__sync: {
@@ -582,9 +595,11 @@ u2_reck_kick(u2_reck* rec_u, u2_noun ovo)
   {
     u2_noun tox = _reck_spat(rec_u, u2k(u2h(ovo)));
 
+#if 0
     if ( (c3__warn != u2h(u2t(ovo))) &&
          (c3__text != u2h(u2t(ovo))) &&
          (c3__note != u2h(u2t(ovo))) )
+#endif
     {
       uL(fprintf(uH, "kick: lost %%%s on %s\n", 
                      u2_cr_string(u2h(u2t(ovo))),

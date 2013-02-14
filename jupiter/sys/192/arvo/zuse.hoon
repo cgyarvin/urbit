@@ -66,44 +66,16 @@
     %-  scry:(q.i.fan now (shax now) ..^$)
     [u.owr rem his u.ved tyl]
   ::
-  ++  goad                                              ::  route event
-    |=  fav=card                                        ::  accept, event
-    ^-  (unit ,@tas)                                    ::  produce, route
-    ?+  -.fav                                           ::  on event kind
-      ~&([%goad-fav -.fav] !!)                          ::  XX temporary
-      %bbye  ~                                          ::  reset prompt
-      %bind  [~ %e]                                     ::  publish http
-      %belt  [~ %d]                                     ::  terminal input
-      %blew  [~ %d]                                     ::  terminal config
-      %blit  ~                                          ::  terminal output
-      %boot  [~ %d]                                     ::  terminal boot
-      %crap  ~                                          ::  error trace
-      %edit  [~ %c]                                     ::  edit filesystem
-      %exit  ~                                          ::  abstract exit
-      %fail  ~                                          ::  report failure
-      %helo  [~ %d]                                     ::  trigger prompt
-      %init  ~                                          ::  install master
-      %kill  [~ %b]                                     ::  kill a process
-      %line  [~ %b]                                     ::  command line
-      %logn  [~ %d]                                     ::  login
-      %make  [~ %d]                                     ::  wild invite
-      %note  [~ %d]                                     ::  debug message
-      %nuke  [~ %b]                                     ::  kill all processes
-      %talk  [~ %d]                                     ::  show on console
-      %text  [~ %d]                                     ::  talk leaf
-      %that  [~ %e]                                     ::  htresponse, cooked
-      %thee  [~ %e]                                     ::  htrequest, cooked
-      %thin  [~ %e]                                     ::  htrequest, insecure
-      %this  [~ %e]                                     ::  htrequest, secure
-      %thou  ~                                          ::  htresponse, raw
-      %warn  [~ %d]                                     ::  system message
-    ==
-  ::
   ++  hurl                                              ::  start loop
     |=  ovo=ovum
     ^-  [p=(list ovum) q=(list ,[p=@tas q=vane])]
-    %-  kick
-    [[~ [[(need (goad q.ovo)) ~] p.ovo ~] q.ovo] ~]
+    =+  ^=  des  ^-  @tas
+        ?+  p.ovo  !!
+          [@ %sync *]  %c
+          [@ %term *]  %d
+          [@ %http *]  %e
+        ==
+    (kick [[~ [[des ~] p.ovo ~] q.ovo] ~])
   ::
   ++  kick                                              ::  complete loop
     |=  mor=(list move)
@@ -113,14 +85,7 @@
       [(flop ova) fan]
     ?>  ?=(^ q.i.mor)
     ?~  t.q.i.mor
-      =+  gyd=(goad r.i.mor)
-      ?>  ?=(^ i.q.i.mor)
-      %=  $
-        ova  [[i.q.i.mor r.i.mor] ova]
-        mor  ?~  gyd
-               t.mor
-             :_(t.mor [p.i.mor [[u.gyd ~] [i.i.q.i.mor ~] ~] r.i.mor])
-      == 
+      $(mor t.mor, ova [[i.q.i.mor r.i.mor] ova])
     ?>  ?=(^ i.q.i.mor)
     =-  $(mor (weld p.nyx t.mor), fan q.nyx)
     ^=  nyx

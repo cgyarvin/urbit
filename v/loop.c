@@ -160,7 +160,6 @@ _lo_wall(u2_reck* rec_u, u2_noun wol)
   while ( u2_nul != wal ) {
     _lo_tape(rec_u, fil_u, u2k(u2h(wal)));
 
-    u2_ve_dump_tape(u2_ct(u2h(wal)));
     putc(13, fil_u);
     putc(10, fil_u);
 
@@ -201,8 +200,9 @@ _lo_sway(u2_reck* rec_u, u2_noun tax, u2_noun tac)
     u2_noun hoe;
 
     if ( 0 != (hoe = u2_cm_trap()) ) {
+      uL(fprintf(uH, "crash in sway\n"));
       u2_cm_purge();
-      u2_ve_grab(hoe, 0);
+      u2_ve_grab(hoe, tax, tac, 0);
 
       //  After crashing in print attempt, discard secondary trace.
       //
@@ -316,11 +316,18 @@ _lo_punk(u2_reck* rec_u, u2_noun ovo)
   u2_noun gon = _lo_soft(rec_u, u2_reck_poke, u2k(ovo));
 
   if ( u2_no == u2h(gon) ) {
+#if 0
     u2_noun dud = u2t(gon);
 
     while ( u2_nul != dud ) {
       u2_reck_plan(rec_u, u2k(u2h(ovo)), u2nt(c3__note, '!', u2k(u2h(dud))));
+      dud = u2t(dud);
     }
+#else
+    uL(fprintf(uH, "punk failed\n"));
+    _lo_punt(rec_u, 2, u2k(u2t(gon)));
+    uL(fprintf(uH, "punk punted\n"));
+#endif
   }
   else {
     u2_noun gax = u2t(gon);
@@ -347,8 +354,7 @@ _lo_work(u2_reck* rec_u)
 {
   while ( rec_u->ova.egg_u ) {
     u2_cart* egg_u = rec_u->ova.egg_u;
-
-    _lo_punk(rec_u, egg_u->egg);
+    u2_noun  egg = egg_u->egg;
 
     rec_u->ova.egg_u = egg_u->nex_u;
     if ( 0 == rec_u->ova.egg_u ) {
@@ -356,6 +362,8 @@ _lo_work(u2_reck* rec_u)
       rec_u->ova.geg_u = 0;
     }
     free(egg_u);
+
+    _lo_punk(rec_u, egg);
   }
 }
 
@@ -414,7 +422,14 @@ _lo_make(u2_reck* rec_u)
 {
   u2_noun pax = u2nc(c3__gold, u2nq(c3__term, u2k(rec_u->sen), '1', u2_nul));
 
-  u2_reck_plan(rec_u, pax, u2nc(c3__boot, u2nq(c3__make, c3__zuse, 256, 0)));
+  u2_reck_plan
+    (rec_u, pax, 
+            u2nt(c3__boot, 
+                 u2nq(c3__make, c3__zuse, 256, 0),
+                 u2nq(u2nc(c3__blew, u2_term_ef_blew(rec_u, 1)), 
+                      u2nc(c3__hail, u2_nul),
+                      u2nc(c3__helo, u2_nul),
+                      u2_nul)));
 }
 
 /* _lo_boot(): configure after install.
@@ -422,7 +437,9 @@ _lo_make(u2_reck* rec_u)
 static void
 _lo_boot(u2_reck* rec_u)
 {
-  u2_noun pax = u2nc(c3__gold, u2nq(c3__term, u2k(rec_u->sen), '1', u2_nul));
+  u2_noun pax = u2nq(c3__gold, c3__http, u2k(rec_u->sen), u2_nul);
+
+  c3_assert(u2_nul != rec_u->own);
 
   u2_reck_plan
     (rec_u, pax, u2nt(c3__bind, u2k(u2h(rec_u->own)), u2nc(u2_yes, u2_nul)));
@@ -436,9 +453,6 @@ void
 u2_lo_loop(u2_reck* rec_u)
 {
   _lo_init(rec_u);
-  c3_assert(u2_nul == rec_u->own);
-
-  c3_assert(u2_nul == rec_u->own);
 
   uL(fprintf(uH, "loop: about to make\n"));
   _lo_make(rec_u);

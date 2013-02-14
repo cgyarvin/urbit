@@ -157,7 +157,7 @@
           |=  uke=ukaz  ^-  move
           =+  qua=~(ram re (dish:ut [~ %path] p.uke))
           =+  qui=?-(-.q.uke %del '-', %set ?:(=(0 q.q.uke) '+' ':'))
-          [whu hen %note qui %leaf "/cx/{one}/{two}/{tre}{qua}"]
+          [whu [/d/ hen] %flog %note qui %leaf "/cx/{one}/{two}/{tre}{qua}"]
       %_    ..^$
           rof
         %+  ~(put by rof)
