@@ -432,8 +432,8 @@
           %cd  +>.$(cwd p.kal)
           %eh  (haul (doth (mung [echo:do lube +.kal] sky) ergo hak))
           %go  (haul (doth (mung [fapp:do lube +.kal] sky) ergo fret))
-          %kl  (emit `card`[%kill p.kal])
-          %nk  (emit [%nuke ~])
+          %kl  (envy /b/ [%kill p.kal])
+          %nk  (envy /b/ [%nuke ~])
           %ps  (emir view)
           %to  (haul (doth (mung [ecto:do lube +.kal] sky) ergo hak))
       ==
