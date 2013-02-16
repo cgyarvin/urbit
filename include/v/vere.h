@@ -168,7 +168,6 @@
         c3_i             cug_i;             //  blocking fcntl flags
         c3_i             nob_i;             //  nonblocking fcntl flags
         c3_w             tid_l;             //  terminal identity number
-        u2_noun          pax;               //  terminal identity path
         u2_utfo          ufo_u;             //  terminfo strings
         u2_utat          tat_u;             //  control state
         u2_ubuf*         out_u;             //  exit of output queue

@@ -462,6 +462,7 @@
 #   define c3__htls   c3_s4('h','t','l','s')
 #   define c3__http   c3_s4('h','t','t','p')
 #   define c3__hume   c3_s4('h','u','m','e')
+#   define c3__hunk   c3_s4('h','u','n','k')
 #   define c3__ic     c3_s2('i','c')
 #   define c3__ice    c3_s3('i','c','e')
 #   define c3__if     c3_s2('i','f')

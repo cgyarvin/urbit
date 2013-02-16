@@ -19,6 +19,7 @@
     ++  poke                                            ::  external apply
       |=  *
       ^-  [p=(list ovum) q=_+>]
+      ::  ~&  [%zuse-poke +<]
       =>  .(+< ((hard ,[now=@da ovo=ovum]) +<))
       =^  zef  fan
         (~(hurl is now) ovo)

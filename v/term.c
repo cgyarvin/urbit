@@ -152,7 +152,6 @@ u2_term_io_init(u2_reck* rec_u)
   //
   {
     uty_u->tid_l = 1;
-    uty_u->pax = u2nc(c3__gold, u2nq(c3__term, u2k(rec_u->sen), '1', u2_nul));
     uty_u->out_u = 0;
     uty_u->tou_u = 0;
 
@@ -427,7 +426,10 @@ _term_io_belt(u2_reck* rec_u,
               u2_utty* uty_u,
               u2_noun  blb)
 {
-  u2_reck_plan(rec_u, u2k(uty_u->pax), u2nc(c3__belt, blb));
+  u2_noun tid = u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3__ud, uty_u->tid_l));
+  u2_noun pax = u2nc(c3__gold, u2nq(c3__term, u2k(rec_u->sen), tid, u2_nul));
+
+  u2_reck_plan(rec_u, pax, u2nc(c3__belt, blb));
 }
 
 /* _term_io_suck_char(): process a single character.
