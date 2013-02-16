@@ -242,6 +242,8 @@
           u2_noun spat;                   //  path to text
           u2_noun turf;                   //  utf8 to utf32
           u2_noun tuft;                   //  utf32 to utf8
+          u2_noun mook;                   //  trace conversion
+          u2_noun wash;                   //  tank window printer
         } toy;
 
         u2_noun now;                      //  current time, as noun
@@ -249,8 +251,6 @@
         u2_noun sev_l;                    //  instance number
         u2_noun sen;                      //  instance string
         u2_noun own;                      //  owner list
-
-        u2_noun pug;                      //  prompt state
 
         u2_noun ken;                      //  kernel formula
         u2_noun syd;                      //  kernel seed 

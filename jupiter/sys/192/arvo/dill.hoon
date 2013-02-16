@@ -295,6 +295,11 @@
           :_(mos [whu [[%a ~] [%d tea] hen] p.fav])
         ==
       ::
+          %crud                                         ::  error trace
+        |-  ^+  +.^$
+        ?~  p.fav  +.^$
+       (fume:$(p.fav t.p.fav) '!' i.p.fav)
+      ::
           %hail
         ?>  ?=(^ whu)
         %=    +.$ 

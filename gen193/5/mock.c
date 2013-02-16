@@ -19,7 +19,7 @@
       return u2_bl_bail(wir_r, c3__exit);
     }
     else {
-      return u2_cn_mock(u2k(bus), u2k(fol), u2k(fly));
+      return u2_cn_mink(u2k(bus), u2k(fol), u2k(fly));
     }
   }
 

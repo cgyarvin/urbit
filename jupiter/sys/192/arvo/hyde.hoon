@@ -129,7 +129,7 @@
               [%blit p=(list blit)]                     ::  terminal output
               [%boot p=card q=(list card)]              ::  start terminal
               [%cash p=@p q=buck]                       ::  civil license
-              [%crap p=(list)]                          ::  error with trace
+              [%crud p=(list tank)]                     ::  error with trace
               [%dire p=@tas q=dram]                     ::  apply directory
               [%dump p=(list ,@t)]                      ::  raw text lines
               [%edit p=@p q=@tas r=(list ukaz)]         ::  commit edits
@@ -350,7 +350,6 @@
               dos=(map ,@ta desk)                       ::  projects 
           ==                                            ::
 ++  rock  ,@uvO                                         ::  packet
-++  root  ,[p=(list host) q=path r=@ta s=path]          ::  http route (old)
 ++  rout  ,[p=(list host) q=path r=oryx s=path]         ::  http route (new)
 ++  safe                                                ::  domestic host
           $:  loc=(unit lane)                           ::  packet route

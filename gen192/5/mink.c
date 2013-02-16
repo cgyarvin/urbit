@@ -1,4 +1,4 @@
-/* j/5/mock.c
+/* j/5/mink.c
 **
 ** This file is in the public domain.
 */
@@ -6,7 +6,7 @@
 #include "../pit.h"
 
   u2_weak                                                         //  produce
-  j2_mb(Pt5, mock)(u2_wire wir_r, 
+  j2_mb(Pt5, mink)(u2_wire wir_r, 
                    u2_noun cor)                                   //  retain
   {
     u2_noun bus, fol, fly;
@@ -19,14 +19,14 @@
       return u2_bl_bail(wir_r, c3__exit);
     }
     else {
-      return u2_cn_mock(u2k(bus), u2k(fol), u2k(fly));
+      return u2_cn_mink(u2k(bus), u2k(fol), u2k(fly));
     }
   }
 
 /* structures
 */
   u2_ho_jet 
-  j2_mbj(Pt5, mock)[] = { 
-    { ".2", c3__lite, j2_mb(Pt5, mock), Tier5, u2_none, u2_none },
+  j2_mbj(Pt5, mink)[] = { 
+    { ".2", c3__lite, j2_mb(Pt5, mink), Tier5, u2_none, u2_none },
     { }
   };

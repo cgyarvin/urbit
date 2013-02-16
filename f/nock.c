@@ -74,8 +74,8 @@ static u2_noun
 _nock_pray_cool(u2_noun gof)                                      //  transfer
 {
   //  This should just exit - but for various reasons, all historical,
-  //  we could be actually mocking here.  Therefore we have to respect
-  //  the mock if it exists.
+  //  we could be actually minking here.  Therefore we have to respect
+  //  the mink if it exists.
   //
   u2_noun lad = u2_hevn_at(lad);
 
@@ -99,7 +99,7 @@ _nock_pray_cool(u2_noun gof)                                      //  transfer
   }
 }
 
-/* _nock_hint(): hint with code, data, subject, formula.  nock/mock.
+/* _nock_hint(): hint with code, data, subject, formula.  nock/mink.
 */
 static u2_noun                                                    //  produce
 _nock_hint(u2_noun  zep,                                          //  transfer
@@ -535,7 +535,7 @@ _nock_cool(u2_noun bus,
   }
 }
 
-/* nock_mool(): fast internal mock interface.  Arguments transferred.
+/* nock_mool(): fast internal mink interface.  Arguments transferred.
 */
 u2_noun
 _nock_mool(u2_noun  bus, 
@@ -738,7 +738,7 @@ _nock_mool(u2_noun  bus,
       case 8: {
         u2_noun b_gal, c_gal;
 
-        // c3_assert(!"got 8 (mock)!");
+        // c3_assert(!"got 8 (mink)!");
         if ( u2_no == u2_cr_cell(gal, &b_gal, &c_gal) ) {
           *pon = 2; u2z(bus); u2z(fol); return u2_cm_wail();
         }
@@ -878,7 +878,7 @@ _nock_molg(u2_noun  gat,
   }
 }
 
-/* _nock_moog(): u2_cn_mock() with fly set.
+/* _nock_moog(): u2_cn_mink() with fly set.
 */
 static u2_noun
 _nock_moog(u2_noun bus,
@@ -940,10 +940,10 @@ u2_cn_nock(u2_noun bus,
   return pro;
 } 
 
-/* u2_cn_mock(): logical virtual nock.
+/* u2_cn_mink(): logical virtual nock.
 */
 u2_noun
-u2_cn_mock(u2_noun bus,
+u2_cn_mink(u2_noun bus,
            u2_noun fol,
            u2_noun fly)
 {
@@ -974,7 +974,7 @@ u2_cn_mock(u2_noun bus,
   return res;
 } 
 
-/* u2_cn_moch(): blind mock with empty fly.
+/* u2_cn_moch(): blind mink with empty fly.
 */
 u2_noun
 u2_cn_moch(u2_noun bus,
@@ -982,7 +982,7 @@ u2_cn_moch(u2_noun bus,
 {
   u2_noun fly = u2nc(u2nc(0, 0), u2nc(1, 0));
 
-  return u2_cn_mock(bus, fol, fly);
+  return u2_cn_mink(bus, fol, fly);
 }
  
 /*** Deprecated:

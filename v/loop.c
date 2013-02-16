@@ -180,66 +180,17 @@ _lo_punt(u2_reck* rec_u, c3_l tab_l, u2_noun tac)
   //  We are calling nock here, but hopefully need no protection.
   //
   while ( u2_yes == u2_cr_du(cat) ) {
-    u2_noun wol = u2_ve_hard
-      ("vane", "wash", u2nc(u2nc(tab_l, col_l), u2k(u2h(cat))));
-    
+    u2_noun wol = u2_cn_mung(u2k(rec_u->toy.wash), 
+                             u2nc(u2nc(tab_l, col_l), u2k(u2h(cat))));
     _lo_wall(rec_u, wol);
     cat = u2t(cat);
   }
   u2z(tac);
 }
 
-/* _lo_sway(): trace stack to tank list.
-*/
-static u2_noun
-_lo_sway(u2_reck* rec_u, u2_noun tax, u2_noun tac)
-{
-  u2_noun rax = tax;
-
-  while ( u2_yes == u2_cr_du(rax) ) {
-    u2_noun hoe;
-
-    if ( 0 != (hoe = u2_cm_trap()) ) {
-      uL(fprintf(uH, "crash in sway\n"));
-      u2_cm_purge();
-      u2_ve_grab(hoe, tax, tac, 0);
-
-      //  After crashing in print attempt, discard secondary trace.
-      //
-      tac = u2nc(u2nc(c3__leaf, 
-                      u2nq('!', '!', ' ', u2_cke_trip(u2k(u2h(hoe))))),
-                  tac);
-      u2z(hoe);
-    }
-    else {
-      u2_noun tud = u2_ve_hard("vane", "swan", u2k(u2h(rax)));
-
-      u2_cm_done(); 
-      tac = u2nc(tud, tac);
-    }
-    rax = u2t(rax);
-  }
-  u2z(tax);
-  return u2_ckb_flop(tac);
-}
-
-/* _lo_reap(): convert raw error output to tank list.
-*/
-static u2_noun
-_lo_reap(u2_reck* rec_u, u2_noun hoe)
-{
-  if ( (u2_no == u2du(hoe)) ) {
-    return u2_nul;
-  }
-  else {
-    return _lo_sway
-      (rec_u,
-       u2_ckb_flop(u2k(u2t(hoe))),
-       u2nc(u2nc(c3__leaf, u2_cke_trip(u2k(u2h(hoe)))), u2_nul));
-  }
-}
-
-/* _lo_soft(): standard soft wrapper.  Produces [& result] or [| errors].
+/* _lo_soft(): standard soft wrapper.  
+**
+**  Produces [%% result] or [%error (list tank)].
 */
 static u2_noun
 _lo_soft(u2_reck* rec_u, u2_funk fun_f, u2_noun arg)
@@ -248,17 +199,23 @@ _lo_soft(u2_reck* rec_u, u2_funk fun_f, u2_noun arg)
 
   // u2_cm_trip();
   if ( 0 != (hoe = u2_cm_trap()) ) {
-    u2_cm_purge();
-    u2_ve_grab(hoe, 0);
+    u2_noun mok;
 
-    rop = u2nc(u2_no, _lo_reap(rec_u, hoe));
+    u2_cm_purge();
+    u2_ve_grab(hoe, arg, 0);
+
+    mok = u2_cn_mung(u2k(rec_u->toy.mook), u2nc(2, u2_ckb_flop(u2k(u2t(hoe)))));
+    rop = u2nc(u2k(u2h(hoe)), u2k(u2t(mok)));
+
+    u2z(hoe);
+    u2z(mok);
   } 
   else {
     u2_noun pro = fun_f(rec_u, arg);
     u2_cm_done();
   
     u2_cm_purge();
-    rop = u2nc(u2_yes, pro);
+    rop = u2nc(u2_blip, pro);
   }
   pro = rop;
   // u2_cm_chin();
@@ -273,21 +230,17 @@ _lo_soft(u2_reck* rec_u, u2_funk fun_f, u2_noun arg)
 static u2_noun
 _lo_hard(u2_reck* rec_u, u2_funk fun_f, u2_noun arg)
 {
-  u2_noun hoe;
+  u2_noun pro = _lo_soft(rec_u, fun_f, arg);
 
-  if ( 0 != (hoe = u2_cm_trap()) ) {
-    u2_cm_purge();
-    u2_ve_grab(hoe, 0);
+  if ( u2_blip == u2h(pro) ) {
+    u2_noun poo = u2k(u2t(pro));
 
-    _lo_punt(rec_u, 2, _lo_reap(rec_u, hoe));
-    c3_assert(0);
+    u2z(pro); return poo;
   } 
   else {
-    u2_noun pro = fun_f(rec_u, arg);
-    u2_cm_done();
-  
-    u2_cm_purge();
-    return pro;
+    _lo_punt(rec_u, 2, u2k(u2t(pro)));
+    u2z(pro);
+    c3_assert(0);
   }
 }
 
@@ -308,6 +261,36 @@ _lo_mung(u2_reck* rec_u, u2_noun gat, u2_noun sam)
   return _lo_hard(rec_u, _lo_mung_in, gam);
 }
 
+/* _lo_save(): log an ovum at the present time.  sync; sync; sync.
+*/
+static void
+_lo_save(u2_reck* rec_u, u2_noun ovo)
+{
+}
+
+/* _lo_sing(): replay ovum from the past, time already set.
+*/
+static void
+_lo_sing(u2_reck* rec_u, u2_noun ovo)
+{
+  u2_noun gon = _lo_soft(rec_u, u2_reck_poke, u2k(ovo));
+
+  if ( u2_blip != u2h(gon) ) {
+    uL(fprintf(uH, "sing: ovum failed!\n"));
+    _lo_punt(rec_u, 2, u2k(u2t(gon)));
+    c3_assert(0);
+  }
+  else {
+    //  Discard effects and continue result.
+    //
+    u2_noun gax = u2t(gon);
+  
+    u2z(rec_u->roc);
+    rec_u->roc = u2k(u2t(gax));
+  }
+  u2z(gon);
+}
+
 /* _lo_punk(): insert and apply an input ovum (unprotected).
 */
 static void
@@ -315,21 +298,30 @@ _lo_punk(u2_reck* rec_u, u2_noun ovo)
 {
   u2_noun gon = _lo_soft(rec_u, u2_reck_poke, u2k(ovo));
 
-  if ( u2_no == u2h(gon) ) {
-#if 0
-    u2_noun dud = u2t(gon);
+  if ( u2_blip != u2h(gon) ) {
+    u2_noun bov = u2nc(u2k(u2h(ovo)), u2nc(c3__crud, u2k(u2t(gon))));
 
-    while ( u2_nul != dud ) {
-      u2_reck_plan(rec_u, u2k(u2h(ovo)), u2nt(c3__note, '!', u2k(u2h(dud))));
-      dud = u2t(dud);
+    u2z(ovo); ovo = bov;
+    u2z(gon); gon = _lo_soft(rec_u, u2_reck_poke, u2k(ovo));
+
+    if ( u2_blip != u2h(gon) ) {
+      u2_noun bov = u2nc(u2k(u2h(ovo)), 
+                         u2nc(c3__warn, u2_ci_tape("crude crash!")));
+
+      u2z(ovo); ovo = bov;
+      u2z(gon); gon = _lo_soft(rec_u, u2_reck_poke, u2k(ovo));
+
+      if ( u2_blip != u2h(gon) ) {
+        uL(fprintf(uH, "crude: all efforts failed!\n"));
+
+        u2z(gon); u2z(ovo);
+        return;
+      }
     }
-#else
-    uL(fprintf(uH, "punk failed\n"));
-    _lo_punt(rec_u, 2, u2k(u2t(gon)));
-    uL(fprintf(uH, "punk punted\n"));
-#endif
   }
-  else {
+
+  //  Whatever worked, apply the effects and then save it.
+  {
     u2_noun gax = u2t(gon);
   
     u2z(rec_u->roc);
@@ -343,7 +335,10 @@ _lo_punk(u2_reck* rec_u, u2_noun ovo)
         hux = u2t(hux);
       }
     }
+
+    _lo_save(rec_u, u2k(ovo));
   }
+  u2z(ovo);
   u2z(gon);
 }
 
@@ -454,13 +449,13 @@ u2_lo_loop(u2_reck* rec_u)
 {
   _lo_init(rec_u);
 
-  uL(fprintf(uH, "loop: about to make\n"));
+  // uL(fprintf(uH, "loop: about to make\n"));
   _lo_make(rec_u);
 
-  uL(fprintf(uH, "loop: about to work\n"));
+  // uL(fprintf(uH, "loop: about to work\n"));
   _lo_work(rec_u);
 
-  uL(fprintf(uH, "loop: about to boot\n"));
+  // uL(fprintf(uH, "loop: about to boot\n"));
   _lo_boot(rec_u);
 
   {

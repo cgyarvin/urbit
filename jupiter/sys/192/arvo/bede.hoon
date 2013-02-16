@@ -308,8 +308,8 @@
         +>.$(loz (~(del by loz) pux))
       ==
     ::
-    ++  doth                                            ::  virtualize
-      |=  :*  ton=tone
+    ++  dost                                            ::  virtualize
+      |=  :*  ton=toon
               fob=_|+((list path) *beef)
               fut=_|+(coal *beef)
           ==
@@ -317,7 +317,7 @@
       ?-  -.ton
         %0  (fut p.ton)
         %1  (fob ((list path) p.ton))
-        %2  [[[%crap p.ton] ~] ~ ~]
+        %2  [[[%crud p.ton] ~] ~ ~]
       ==
     ::
     ++  emit                                            ::  return a card
@@ -418,8 +418,8 @@
       ?>  ?=(& -.u.bor)
       ?>  ?=(~ p.u.bor)   ::  XX actually handle blocks
       %-  haul
-      %^    doth
-          (mung [fane:do [pux nob r.u.bor]] sky)
+      %^    dost
+          (mong [fane:do [pux nob r.u.bor]] sky)
         ergo
       fret
     ::
@@ -430,12 +430,13 @@
       =+  hak=|=(a=* [[[%talk ((hard tank) a)] ~] ~ ~])
       ?-    -.kal
           %cd  +>.$(cwd p.kal)
-          %eh  (haul (doth (mung [echo:do lube +.kal] sky) ergo hak))
-          %go  (haul (doth (mung [fapp:do lube +.kal] sky) ergo fret))
+          %eh  (haul (dost (mong [echo:do lube +.kal] sky) ergo hak))
+          %go  (haul (dost (mong [fapp:do lube +.kal] sky) ergo fret))
           %kl  (envy /b/ [%kill p.kal])
-          %nk  (envy /b/ [%nuke ~])
+          ::  %nk  (envy /b/ [%nuke ~])
+          %nk  =+(sad=(dec 0) (envy /b/ [%nuke ~]))
           %ps  (emir view)
-          %to  (haul (doth (mung [ecto:do lube +.kal] sky) ergo hak))
+          %to  (haul (dost (mong [ecto:do lube +.kal] sky) ergo hak))
       ==
     ::
     ++  mete                                            ::  deliver line

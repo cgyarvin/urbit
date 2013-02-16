@@ -539,7 +539,7 @@ J192_5_OFILES=\
        gen192/5/cue.o \
        gen192/5/jam.o \
        gen192/5/mat.o \
-       gen192/5/mock.o \
+       gen192/5/mink.o \
        gen192/5/parse.o \
        gen192/5/rub.o \
        gen192/5/shax.o \

@@ -285,11 +285,14 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
   rec_u->kno_w = kno_w;
   rec_u->rno_w = 0;
 
+  rec_u->own = 0;
+  rec_u->now = 0;
+  rec_u->wen = 0;
+  rec_u->sen = 0;
+
   rec_u->ken = ken;
   rec_u->syd = _reck_root("seed", u2k(ken));
-
-  rec_u->pug = 0;
-  rec_u->own = 0;
+  rec_u->roc = 0;
 
   rec_u->toy.rain = _reck_root("rain", u2k(ken));
   rec_u->toy.ream = _reck_root("ream", u2k(ken));
@@ -301,6 +304,8 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
   rec_u->toy.spat = _reck_root("spat", u2k(ken));
   rec_u->toy.turf = _reck_root("turf", u2k(ken));
   rec_u->toy.tuft = _reck_root("tuft", u2k(ken));
+  rec_u->toy.wash = _reck_root("wash", u2k(ken));
+  rec_u->toy.mook = _reck_root("mook", u2k(ken));
 
   u2_reck_time(rec_u);
   u2_reck_numb(rec_u);
@@ -420,14 +425,6 @@ _reck_kick_term(u2_reck* rec_u, u2_noun pox, c3_l tid_l, u2_noun fav)
     case c3__blit: p_fav = u2t(fav);
     {
       u2_term_ef_blit(rec_u, tid_l, u2k(p_fav));
-
-      u2z(pox); u2z(fav); return u2_yes;
-    } break;
-
-    case c3__crap: p_fav = u2t(fav);
-    {
-      u2_ve_sway(2, u2_ckb_flop(u2k(p_fav)));
-      uL(fprintf(uH, "<<<crap>>>\n"));
 
       u2z(pox); u2z(fav); return u2_yes;
     } break;

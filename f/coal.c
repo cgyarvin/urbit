@@ -265,7 +265,17 @@ u2_ci_string(const c3_c* a_c)
 {
   return u2_bn_string(u2_Wire, a_c);
 }
- 
+
+/* u2_ci_tape(): from a C string, to a list of bytes.
+*/
+u2_atom
+u2_ci_tape(const c3_c* txt_c)
+{
+  if ( !*txt_c ) {
+    return u2_nul;
+  } else return u2nc(*txt_c, u2_ci_tape(txt_c + 1));
+}
+
 /* u2_cr_string(): `a` as malloced C string.
 */
 c3_c* 

@@ -593,6 +593,11 @@
       u2_atom
       u2_ci_string(const c3_c* a_c);
 
+    /* u2_ci_tape(): from a C string, to a list of bytes.
+    */
+      u2_atom
+      u2_ci_tape(const c3_c* txt_c);
+
     /* u2_ci_duck():
     **
     **   Create an atomic string from a list of bytes.
@@ -724,14 +729,14 @@
       u2_cn_mung(u2_noun fun,
                  u2_noun sam);
 
-    /* u2_cn_mock(): logical virtual nock.
+    /* u2_cn_mink(): logical virtual nock.
     */
       u2_noun
-      u2_cn_mock(u2_noun bus,
+      u2_cn_mink(u2_noun bus,
                  u2_noun fol,
                  u2_noun fly);
 
-    /* u2_cn_moch(): blind mock with empty fly.
+    /* u2_cn_moch(): blind mink with empty fly.
     */
       u2_noun
       u2_cn_moch(u2_noun bus,

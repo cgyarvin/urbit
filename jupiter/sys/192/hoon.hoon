@@ -70,7 +70,7 @@
 ::    Operators 6-10 are macros and add no formal power.
 ::
 ::    (NB: the Nock definition above is just pseudocode, not Hoon.
-::    To see a (mildly enhanced) Nock in Hoon, see ++mock.  But
+::    To see a (mildly enhanced) Nock in Hoon, see ++mink.  But
 ::    Hoon is defined in Nock; stating Nock in Hoon cannot enhance
 ::    the precision of Nock.)
 ::
@@ -1314,13 +1314,13 @@
   ++  dime  ,[p=@ta q=@]
   ++  pass  ,@
   ++  path  (list span)
-  ++  pint  ,[p=[p=[p=@ q=@] q=[p=@ q=@]]]
+  ++  pint  ,[p=[p=@ q=@] q=[p=@ q=@]]
   ++  ring  ,@
   ++  rule  |=(tub=nail `edge`[p.tub ~ ~ tub])
-  ++  shoe  $%  [%yelp p=*]
-                [%lose p=@ta]
-                [%mean p=_^?(|.(*tank))]
-                [%spot p=_spot]
+  ++  shoe  $%  [%hunk p=tank]
+                [%lose p=term]
+                [%mean p=*]
+                [%spot p=spot]
             ==
   ++  span  ,@ta
   ++  spot  ,[p=path q=pint]
@@ -1335,6 +1335,10 @@
   ++  tone  $%  [0 p=*]
                 [1 p=(list)]
                 [2 p=(list ,[@ta *])]
+            ==
+  ++  toon  $%  [0 p=*]
+                [1 p=(list)]
+                [2 p=(list tank)]
             ==
   ++  wall  (list tape)
   ++  wonk  |*(veq=edge ?@(q.veq !! p.u.q.veq))
@@ -2667,11 +2671,10 @@
     [~ p.u.q.vex]
   ::
   ++  smyt
-    |=  bon=path  ^-  (unit (list coin))
-    ?@  bon
-      ~
-    =+  [myn=(slay i.bon) yan=$(bon t.bon)]
-    ?@(myn ~ ?@(yan ~ [~ u.myn u.yan]))
+    |=  bon=path  ^-  tank
+    :+  %rose  [['/' ~] ['/' ~] ['/' ~]]
+    |-  ^-  (list tank)
+    (turn bon |=(a=@ [%leaf (rip 3 a)]))
   ::
   ::    Tier 5c/3, prettyprinting: general-purpose printing.
   ::
@@ -2987,8 +2990,14 @@
   ::
   ::  Tier 5g, nock in nock
   ::
-  ++  mock
-    ~/  %mock
+  ++  mack
+    |=  [sub=* fol=*]
+    ^-  (unit)
+    =+  ton=(mink [sub fol] |=(* ~))
+    ?.(?=([0 *] ton) ~ [~ p.ton])
+  ::
+  ++  mink
+    ~/  %mink
     |=  [[sub=* fol=*] sky=_|+(* *(unit))]
     =+  tax=*(list ,[@ta *])
     |-  ^-  tone
@@ -3048,7 +3057,7 @@
         [10 [* c=*] d=*]
       =+  ben=$(fol c.fol)
       ?.  ?=(0 -.ben)  ben
-      ?:  ?=(?(%yelp %lose %mean %spot) +<-.fol)
+      ?:  ?=(?(%hunk %lose %mean %spot) +<-.fol)
         $(fol d.fol, tax [[+<-.fol p.ben] tax])
       $(fol d.fol) 
     ::
@@ -3062,12 +3071,54 @@
       [%2 tax]
     ==
   ::
+  ++  mock
+    |=  [[sub=* fol=*] sky=_|+(* *(unit))]
+    (mook (mink [sub fol] sky))
+  ::
+  ++  mook
+    |=  ton=tone
+    ^-  toon
+    ?.  ?=([2 *] ton)  ton
+    :-  %2
+    |-  ^-  (list tank)
+    ?~  p.ton  ~
+    =+  rex=$(p.ton t.p.ton)
+    ?+    -.i.p.ton  rex
+        %hunk  [(tank +.i.p.ton) rex]
+        %lose  [[%leaf (rip 3 (,@ +.i.p.ton))] rex]
+        %mean  :_  rex
+               =+  mac=(mack +.i.p.ton +<.i.p.ton)
+                   ?~(mac [%leaf "####"] (tank u.mac))
+        %spot  :_  rex
+               =+  sot=(spot +.i.p.ton)
+               :-  %leaf
+               ;:  weld
+                 ~(ram re (smyt p.sot))
+                 ":<["
+                 ~(rend co ~ %ud p.p.q.sot)
+                 " "
+                 ~(rend co ~ %ud q.p.q.sot)
+                 "].["
+                 ~(rend co ~ %ud p.q.q.sot)
+                 " "
+                 ~(rend co ~ %ud q.q.q.sot)
+                 "]>"
+               ==
+    ==
+  ::
+  ++  mong
+    |=  [[gat=* sam=*] sky=_|+(* *(unit))]
+    ^-  toon
+    ?.  &(?=(^ gat) ?=(^ +.gat))
+      [%2 ~]
+    (mock [[-.gat [sam +>.gat]] -.gat] sky)
+  ::
   ++  mung
     |=  [[gat=* sam=*] sky=_|+(* *(unit))]
     ^-  tone
     ?.  &(?=(^ gat) ?=(^ +.gat))
       [%2 ~]
-    (mock [[-.gat [sam +>.gat]] -.gat] sky)
+    (mink [[-.gat [sam +>.gat]] -.gat] sky)
   ::
   ::  Tier 6 models
   ::
@@ -3689,7 +3740,7 @@
         [%hxgr *]  [%cnhp [%cnbc %sell] [%zpgr p.gen] ~]
     ::
         [%kthp *]  [%ktls ~(bunt al bore(gen p.gen)) q.gen]
-        [%sgbr *]  [%sggr [%yelp p.gen] q.gen]
+        [%sgbr *]  [%sggr [%lose p.gen] q.gen]
         [%sgcn *]
       :+  %sggl
         :-  %fast
@@ -4293,16 +4344,6 @@
   =+  gun=(~(mint ut typ) %noun gen)
   [p.gun .*([q.gat q.sam] q.gun)]
 ::
-++  slab
-  |=  [not=? [vax=vase gen=gene] sky=_|+(* *(unit))]  ^-  tune
-  =+  gun=(~(mint ut p.vax) %noun gen)
-  ?:  not
-    [%0 p.gun ~]
-  =+  ton=(mock [q.vax q.gun] sky)
-  ?:  ?=(0 -.ton)
-    [%0 p.gun p.ton]
-  ton
-::
 ++  slap
   |=  [vax=vase gen=gene]  ^-  vase
   =+  gun=(~(mint ut p.vax) %noun gen)
@@ -4331,6 +4372,10 @@
     [* * ~]  $(wad [n.wad ~ ~], vax $(wad l.wad))
     [* * *]  $(wad [n.wad ~ r.wad], vax $(wad l.wad))
   ==
+::
+++  wash
+  |=  [[tab=@ edg=@] tac=tank]  ^-  wall
+  (~(win re tac) tab edg) 
 ::
 ++  ut
   ~%    %ut
@@ -5297,7 +5342,7 @@
         [%ktpm *]  =+(vat=$(gen p.gen) [(wrap(sut p.vat) %zinc) q.vat])
         [%ktsg *]
       =+  nef=$(gen p.gen)
-      =+  moc=(mock [burn q.nef] |=(* ~))
+      =+  moc=(mink [burn q.nef] |=(* ~))
       [p.nef ?:(?=(0 -.moc) [%1 p.moc] q.nef)]
     ::
         [%ktts *]  =+(vat=$(gen q.gen) [(face p.gen p.vat) q.vat])
