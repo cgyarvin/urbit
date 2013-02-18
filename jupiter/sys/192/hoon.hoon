@@ -702,7 +702,7 @@
     ~/  %gor
     |=  [a=* b=*]
     ^-  ?
-    =+  [c=(mog a) d=(mog b)]
+    =+  [c=(mug a) d=(mug b)]
     ?:  =(c d)
       (dor a b)
     (lth c d)
@@ -725,7 +725,7 @@
     ~/  %vor
     |=  [a=* b=*]
     ^-  ?
-    =+  [c=(mog (mog a)) d=(mog (mog b))]
+    =+  [c=(mug (mug a)) d=(mug (mug b))]
     ?:  =(c d)
       (dor a b)
     (lth c d)
@@ -737,11 +737,11 @@
     |=  a=@
     ?:  =(0 a)
       0
-    =+  b=(mog a)
+    =+  b=(mug a)
     $(a (dec a))
   ::
-  ++  mog                                               ::  31bit nonzero FNV1a
-    ~/  %mog
+  ++  mug                                               ::  31bit nonzero FNV1a
+    ~/  %mug
     |=  a=*
     ?^  a
       =+  b=[p=$(a -.a) q=$(a +.a)]
@@ -4857,7 +4857,7 @@
         ==
       %^  cat  3
         ?-(p.q.sut %gold '.', %iron '|', %lead '?', %zinc '&')
-      =+  gum=(mog q.r.q.sut)
+      =+  gum=(mug q.r.q.sut)
       %+  can  3
       :~  [1 (add 'a' (mod gum 26))]
           [1 (add 'a' (mod (div gum 26) 26))]

@@ -127,7 +127,7 @@
               [%belt p=belt]                            ::  terminal input
               [%blew p=blew]                            ::  terminal config
               [%blit p=(list blit)]                     ::  terminal output
-              [%boot p=card q=(list card)]              ::  start terminal
+              [%boot p=card]                            ::  christen terminal
               [%cash p=@p q=buck]                       ::  civil license
               [%crud p=(list tank)]                     ::  error with trace
               [%dire p=@tas q=dram]                     ::  apply directory
@@ -140,6 +140,7 @@
               [%hear p=@]                               ::  receive packet
               [%helo ~]                                 ::  trigger prompt
               [%init p=@p]                              ::  report install
+              [%inuk p=@p]                              
               [%flog p=card]                            ::  log to terminal
               [%junk p=@]                               ::  entropy
               [%keep p=@p]                              ::  establish master

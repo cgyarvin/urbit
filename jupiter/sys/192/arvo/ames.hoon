@@ -479,7 +479,7 @@
               tay=(cut 0 [27 5] mag)
           ==
       ~&  [%bite-yax [%yax (cut 0 [25 2] mag)] [%wix wix]]
-      ?>  =(chk (end 0 24 (mog bod)))
+      ?>  =(chk (end 0 24 (mug bod)))
       :^    `@p`(end 3 wix bod)
           =(0 dit)
         (snag tay [%none %open %fast %full ~])
@@ -495,7 +495,7 @@
       =+  tay=?-(r.kec %none 0, %open 1, %fast 2, %full 3)
       %+  mix
         %+  can  0
-        :~  [24 (mog bod)]
+        :~  [24 (mug bod)]
             [1 q.kec]
             [2 yax]
             [5 tay]
@@ -979,7 +979,7 @@
               |-  ^-  (list ,[p=@da q=boon])
               ?~(tol ~ (weld i.tol $(tol t.tol)))
             |=  [a=[p=@da q=boon] b=[p=@da q=boon]]
-            ?.(=(p.a p.b) (lth p.a p.b) (lth (mog q.a) (mog q.b)))
+            ?.(=(p.a p.b) (lth p.a p.b) (lth (mug q.a) (mug q.b)))
           |=([p=@da q=boon] q)
       fox
     =+  qet=(haze i.yus)

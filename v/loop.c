@@ -266,6 +266,57 @@ _lo_mung(u2_reck* rec_u, u2_noun gat, u2_noun sam)
 static void
 _lo_save(u2_reck* rec_u, u2_noun ovo)
 {
+  u2_noun  ron = u2_cke_jam(u2nc(u2k(rec_u->now), ovo));
+  u2_ulog* lug_u = &u2_Host.lug_u;
+  c3_w     len_w = u2_cr_met(5, ron);
+  c3_w     tar_w = (lug_u->len_w + len_w);
+  c3_w*    img_w;
+  u2_ular  lar_u;
+
+  lar_u.mug_w = u2_mug(ron);
+  lar_u.ent_w = lug_u->ent_w++;
+  lar_u.len_w = len_w;
+
+  //  XX: this is not in any way, shape or form a proper 2PC!
+  //
+  if ( -1 == lseek(lug_u->fid_i, 4 * tar_w, SEEK_SET) ) {
+    perror("lseek");
+    uL(fprintf(uH, "lo_save: seek failed\n"));
+    c3_assert(0);
+  }
+  if ( sizeof(lar_u) != write(lug_u->fid_i, &lar_u, sizeof(lar_u)) ) {
+    perror("write");
+    uL(fprintf(uH, "lo_save: write failed\n"));
+    c3_assert(0);
+  }
+  if ( -1 == lseek(lug_u->fid_i, 4 * lug_u->len_w, SEEK_SET) ) {
+    perror("lseek");
+    uL(fprintf(uH, "lo_save: seek failed\n"));
+    c3_assert(0);
+  }
+#if 0 
+  uL(fprintf(uH, "log: write: at %d, %d: lar ent %d, len %d, mug %x\n", 
+                  lug_u->len_w,
+                  tar_w,
+                  lar_u.ent_w,
+                  lar_u.len_w,
+                  lar_u.mug_w));
+#endif
+  img_w = malloc(4 * len_w);
+  u2_cr_words(0, len_w, img_w, ron);
+
+  if ( (4 * len_w) != write(lug_u->fid_i, img_w, (4 * len_w)) ) {
+    perror("lseek");
+    uL(fprintf(uH, "lo_save: write failed\n"));
+    c3_assert(0);
+  }
+  lug_u->len_w += (lar_u.len_w + c3_wiseof(lar_u));
+  free(img_w);
+
+  // Sync.  Or, what goes by sync.
+  {
+    fsync(lug_u->fid_i);    //  fsync is useless, F_FULLFSYNC too slow
+  }
 }
 
 /* _lo_sing(): replay ovum from the past, time already set.
@@ -281,14 +332,28 @@ _lo_sing(u2_reck* rec_u, u2_noun ovo)
     c3_assert(0);
   }
   else {
-    //  Discard effects and continue result.
+    //  Discard (most) effects and continue result.
     //
     u2_noun gax = u2t(gon);
-  
+ 
+    {
+      u2_noun hux = u2h(gax);
+
+      while ( u2_nul != hux ) {
+        u2_noun ovo = u2h(hux);
+        u2_noun fav = u2t(ovo);
+
+        if ( (c3__init == u2h(fav)) || (c3__inuk == u2h(fav)) ) {
+          rec_u->own = u2nc(u2k(u2t(fav)), rec_u->own);
+        }
+        hux = u2t(hux);
+      }
+    }
     u2z(rec_u->roc);
     rec_u->roc = u2k(u2t(gax));
   }
   u2z(gon);
+  u2z(ovo);
 }
 
 /* _lo_punk(): insert and apply an input ovum (unprotected).
@@ -296,8 +361,14 @@ _lo_sing(u2_reck* rec_u, u2_noun ovo)
 static void
 _lo_punk(u2_reck* rec_u, u2_noun ovo)
 {
-  u2_noun gon = _lo_soft(rec_u, u2_reck_poke, u2k(ovo));
+  u2_noun gon;
+ 
+  //  Try to execute the event.
+  //
+  gon = _lo_soft(rec_u, u2_reck_poke, u2k(ovo));
 
+  //  Yo, did we fail?  Do something else that works.
+  //
   if ( u2_blip != u2h(gon) ) {
     u2_noun bov = u2nc(u2k(u2h(ovo)), u2nc(c3__crud, u2k(u2t(gon))));
 
@@ -312,7 +383,7 @@ _lo_punk(u2_reck* rec_u, u2_noun ovo)
       u2z(gon); gon = _lo_soft(rec_u, u2_reck_poke, u2k(ovo));
 
       if ( u2_blip != u2h(gon) ) {
-        uL(fprintf(uH, "crude: all efforts failed!\n"));
+        uL(fprintf(uH, "crude: all delivery failed!\n"));
 
         u2z(gon); u2z(ovo);
         return;
@@ -320,7 +391,12 @@ _lo_punk(u2_reck* rec_u, u2_noun ovo)
     }
   }
 
-  //  Whatever worked, apply the effects and then save it.
+  //  Whatever worked, save it.  (XX - should be concurrent with execute.)
+  {
+    _lo_save(rec_u, u2k(ovo));
+  }
+
+  //  And then apply it.
   {
     u2_noun gax = u2t(gon);
   
@@ -335,8 +411,6 @@ _lo_punk(u2_reck* rec_u, u2_noun ovo)
         hux = u2t(hux);
       }
     }
-
-    _lo_save(rec_u, u2k(ovo));
   }
   u2z(ovo);
   u2z(gon);
@@ -410,53 +484,305 @@ u2_lo_call(u2_reck*        rec_u,
   _lo_spin(rec_u, lup_u);
 }
 
-/* _lo_make(): post initial ova.  XX, add command-line arguments.
+/* _lo_zest(): create a new, empty record.
 */
 static void
-_lo_make(u2_reck* rec_u)
+_lo_zest(u2_reck* rec_u)
 {
-  u2_noun pax = u2nc(c3__gold, u2nq(c3__term, u2k(rec_u->sen), '1', u2_nul));
+  struct stat buf_b;
+  c3_i        fid_i;
+  c3_c        ful_c[2048];
 
-  u2_reck_plan
-    (rec_u, pax, 
-            u2nt(c3__boot, 
-                 u2nq(c3__make, c3__zuse, 256, 0),
-                 u2nq(u2nc(c3__blew, u2_term_ef_blew(rec_u, 1)), 
-                      u2nc(c3__hail, u2_nul),
-                      u2nc(c3__helo, u2_nul),
-                      u2_nul)));
+  //  Open the fscking file.
+  {
+    sprintf(ful_c, "%s/vet.hlog", u2_Local);
+
+    if ( ((fid_i = open(ful_c, O_CREAT | O_WRONLY | O_EXCL, 0600)) < 0) || 
+         (fstat(fid_i, &buf_b) < 0) ) 
+    {
+      uL(fprintf(uH, "can't create record (%s)\n", ful_c));
+      u2_lo_bail(rec_u);
+    }
+    u2_Host.lug_u.fid_i = fid_i;
+  }
+
+  //  Write the stupid header.  This will probably fail.
+  {
+    u2_uled led_u;
+
+    led_u.mag_l = u2_mug('a');
+    if ( sizeof(led_u) != write(fid_i, &led_u, sizeof(led_u)) ) {
+      uL(fprintf(uH, "can't write record (%s)\n", ful_c));
+    }
+
+    u2_Host.lug_u.len_w = c3_wiseof(led_u);
+    u2_Host.lug_u.ent_w = 0;
+  }
 }
 
-/* _lo_boot(): configure after install.
+/* _lo_rand(): fill a 256-bit (8-word) buffer.
 */
 static void
-_lo_boot(u2_reck* rec_u)
+_lo_rand(u2_reck* rec_u, c3_w* rad_w)
 {
-  u2_noun pax = u2nq(c3__gold, c3__http, u2k(rec_u->sen), u2_nul);
+  c3_i fid_i = open("/dev/random", O_RDONLY);
 
-  c3_assert(u2_nul != rec_u->own);
-
-  u2_reck_plan
-    (rec_u, pax, u2nt(c3__bind, u2k(u2h(rec_u->own)), u2nc(u2_yes, u2_nul)));
-
-  u2_reck_sync(rec_u);
+  if ( 32 != read(fid_i, (c3_y*) rad_w, 32) ) {
+    c3_assert(!"lo_rand");
+  }
+  close(fid_i);
 }
 
-/* u2_lo_loop(): enter main event loop.
+/* _lo_make(): post initial ova.
+*/
+static void
+_lo_make(u2_reck* rec_u, c3_l biz_l)
+{
+  u2_noun ten;
+
+  //  Initialize empty record.
+  //
+  _lo_zest(rec_u);
+
+  //  Get some host entropy.
+  //
+  {
+    c3_w rad_w[8];
+
+    _lo_rand(rec_u, rad_w);
+    ten = u2_ci_words(8, rad_w);
+  }
+
+  //  Authenticate and initialize terminal.
+  {
+    u2_noun pax = u2nc(c3__gold, u2nq(c3__term, u2k(rec_u->sen), '1', u2_nul));
+
+    u2_reck_plan(rec_u, u2k(pax), 
+                        u2nc(c3__boot, u2nq(c3__make, c3__zuse, 256, 0)));
+
+    u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, u2_term_ef_blew(rec_u, 1)));
+    u2_reck_plan(rec_u, u2k(pax), u2nc(c3__hail, u2_nul));
+    u2z(pax);
+
+   // u2nq(c3__make, c3__zuse, biz_l, ten),
+  }
+
+  _lo_work(rec_u);
+
+  //  We should actually have a master now.
+  {
+    if ( u2_nul == rec_u->own ) {
+      uL(fprintf(uH, "boot did not install a master!\n"));
+      u2_lo_bail(rec_u);
+    }
+  }
+
+  //  Simple default configuration for http server.
+  {
+    u2_noun pax = u2nq(c3__gold, c3__http, u2k(rec_u->sen), u2_nul);
+
+    u2_reck_plan
+      (rec_u, pax, u2nt(c3__bind, 
+                        u2k(u2h(rec_u->own)), 
+                        u2nc(u2_yes, u2_nul)));
+  }
+}
+
+/* _lo_join(): begin with invitation.
+*/
+static void
+_lo_join(u2_reck* rec_u, u2_atom vit)
+{
+}
+
+/* _lo_rest(): restore from record, or exit.
+*/
+static void
+_lo_rest(u2_reck* rec_u)
+{
+  struct stat buf_b;
+  c3_i        fid_i;
+  c3_c        ful_c[2048];
+  u2_noun     roe = u2_nul;
+
+  //  Open the fscking file.  Does it even exist?
+  {
+    sprintf(ful_c, "%s/vet.hlog", u2_Local);
+
+    if ( ((fid_i = open(ful_c, O_RDWR)) < 0) || 
+         (fstat(fid_i, &buf_b) < 0) ) 
+    {
+      uL(fprintf(uH, "rest: can't open record (%s) - creating.\n", ful_c));
+      // u2_lo_bail(rec_u);
+      //  XX totally wrong, but will hold you. :-)
+      _lo_make(rec_u, 8);
+      return;
+    }
+    u2_Host.lug_u.fid_i = fid_i;
+    u2_Host.lug_u.len_w = ((buf_b.st_size + 3) >> 2);
+  }
+
+  //  Check the fscking header.  It's probably corrupt.
+  {
+    u2_uled led_u;
+
+    if ( sizeof(led_u) != read(u2_Host.lug_u.fid_i, &led_u, sizeof(led_u)) ) {
+      uL(fprintf(uH, "record (%s) is corrupt (a)\n", ful_c));
+      u2_lo_bail(rec_u);
+    }
+
+    if ( u2_mug('a') != led_u.mag_l ) {
+      uL(fprintf(uH, "record (%s) is corrupt (b)\n", ful_c));
+      u2_lo_bail(rec_u);
+    }
+  }
+
+  //  Read in the fscking events.  These are probably corrupt as well.
+  {
+    c3_w    end_w, ent_w;
+
+    end_w = u2_Host.lug_u.len_w;
+    ent_w = 0;
+
+    if ( -1 == lseek(fid_i, 4 * end_w, SEEK_SET) ) {
+      uL(fprintf(uH, "record (%s) is corrupt (c)\n", ful_c));
+      u2_lo_bail(rec_u);
+    }
+
+    while ( end_w != c3_wiseof(u2_uled) ) {
+      c3_w    tar_w = (end_w - c3_wiseof(u2_ular));
+      u2_ular lar_u;
+      c3_w*   img_w;
+      u2_noun ron;
+
+      // hL(fprintf(uH, "rest: reading event at %d\n", end_w));
+
+      if ( -1 == lseek(fid_i, 4 * tar_w, SEEK_SET) ) {
+        uL(fprintf(uH, "record (%s) is corrupt (d)\n", ful_c));
+        u2_lo_bail(rec_u);
+      }
+      if ( sizeof(u2_ular) != read(fid_i, &lar_u, sizeof(u2_ular)) ) {
+        uL(fprintf(uH, "record (%s) is corrupt (e)\n", ful_c));
+        u2_lo_bail(rec_u);
+      }
+#if 0
+      uL(fprintf(uH, "log: read: at %d, %d: lar ent %d, len %d, mug %x\n", 
+                      (tar_w - lar_u.len_w),
+                      tar_w,
+                      lar_u.ent_w,
+                      lar_u.len_w,
+                      lar_u.mug_w));
+#endif
+      img_w = malloc(4 * lar_u.len_w);
+
+      if ( end_w == u2_Host.lug_u.len_w ) {
+        ent_w = u2_Host.lug_u.ent_w = lar_u.ent_w;
+      } else {
+        if ( lar_u.ent_w != (ent_w - 1) ) {
+          uL(fprintf(uH, "record (%s) is corrupt (f)\n", ful_c));
+          u2_lo_bail(rec_u);
+        }
+        ent_w -= 1;
+      }
+      end_w = (tar_w - lar_u.len_w);
+
+      if ( -1 == lseek(fid_i, 4 * end_w, SEEK_SET) ) {
+        uL(fprintf(uH, "record (%s) is corrupt (g)\n", ful_c));
+        u2_lo_bail(rec_u);
+      }
+      if ( (4 * lar_u.len_w) != read(fid_i, img_w, (4 * lar_u.len_w)) ) {
+        uL(fprintf(uH, "record (%s) is corrupt (h)\n", ful_c));
+        u2_lo_bail(rec_u);
+      }
+
+      ron = u2_ci_words(lar_u.len_w, img_w);
+      free(img_w);
+
+      if ( u2_mug(ron) != lar_u.mug_w ) {
+        uL(fprintf(uH, "record (%s) is corrupt (i)\n", ful_c));
+        u2_lo_bail(rec_u);
+      }
+      roe = u2nc(u2_cke_cue(ron), roe);
+    }
+    
+    if ( 0 != ent_w ) {
+      uL(fprintf(uH, "record (%s) is corrupt (j)\n", ful_c));
+      u2_lo_bail(rec_u);
+    }
+    u2_Host.lug_u.ent_w += 1;
+  }
+
+  //  Execute the fscking things.  This is pretty much certain to crash.
+  fprintf(uH, "---------------- playback starting----------------\n");
+  {
+    u2_noun rou = roe;
+    c3_w    xno_w;
+
+    xno_w = 0;
+    while ( u2_nul != roe ) {
+      u2_noun i_roe = u2h(roe);
+      u2_noun t_roe = u2t(roe);
+      u2_noun now = u2h(i_roe);
+      u2_noun ovo = u2t(i_roe);
+
+      u2_reck_wind(rec_u, u2k(now));
+      _lo_sing(rec_u, u2k(ovo));
+
+      fputc('.', stderr);
+      // uL(fprintf(uH, "playback: sing: %d\n", xno_w));
+
+      roe = t_roe;
+      xno_w++;
+    }
+    u2z(rou);
+  }
+
+  //  If you see this error, your record is totally fscking broken!
+  //  Which probably serves you right.  Please consult a consultant.
+  {
+    if ( u2_nul == rec_u->own ) {
+      uL(fprintf(uH, "record did not install a master!\n"));
+      u2_lo_bail(rec_u);
+    }
+  }
+  uL(fprintf(stderr, "\n---------------- playback complete----------------\n"));
+ 
+  //  Hey, fscker!  It worked.  Say hello to your new terminal.
+  {
+    u2_noun pax = u2nc(c3__gold, u2nq(c3__term, u2k(rec_u->sen), '1', u2_nul));
+
+    u2_reck_plan(rec_u, u2k(pax), u2nc(c3__init, u2k(u2h(rec_u->own))));
+    u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, u2_term_ef_blew(rec_u, 1)));
+    u2_reck_plan(rec_u, u2k(pax), u2nc(c3__hail, u2_nul));
+
+    u2z(pax);
+  }
+}
+
+/* u2_lo_loop(): begin main event loop.
 */
 void
-u2_lo_loop(u2_reck* rec_u)
+u2_lo_loop(u2_reck* rec_u, u2_noun meh)
 {
   _lo_init(rec_u);
 
-  // uL(fprintf(uH, "loop: about to make\n"));
-  _lo_make(rec_u);
+  if ( u2_nul == meh ) {
+    _lo_rest(rec_u);
+  }
+  else {
+    switch ( u2h(meh) ) {
+      default: c3_assert(0);
 
-  // uL(fprintf(uH, "loop: about to work\n"));
-  _lo_work(rec_u);
+      case c3__make: {
+        c3_l biz_l = u2t(meh);
 
-  // uL(fprintf(uH, "loop: about to boot\n"));
-  _lo_boot(rec_u);
+        u2z(meh);
+        _lo_make(rec_u, biz_l);
+      } break;
+    }
+  }
+
+  u2_reck_sync(rec_u);
 
   {
     struct ev_loop *lup_u = ev_default_loop(0);

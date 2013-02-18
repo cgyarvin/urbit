@@ -120,22 +120,44 @@
     */
       typedef struct {
         struct {
-          c3_w* lin_w;                      // current line (utf32)
+          c3_w* lin_w;                      //  current line (utf32)
           c3_w  len_w;                      // length of current line
-          c3_w  cus_w;                      // cursor position
+          c3_w  cus_w;                      //  cursor position
         } mir;
 
-        struct {                            // escape code control
-          u2_bean ape;                      // escape received 
-          u2_bean bra;                      // bracket or O received
+        struct {                            //  escape code control
+          u2_bean ape;                      //  escape received 
+          u2_bean bra;                      //  bracket or O received
         } esc;
 
         struct {
-          c3_y syb_y[5];                    // utf8 code buffer
-          c3_w len_w;                       // present length
-          c3_w wid_w;                       // total width
+          c3_y syb_y[5];                    //  utf8 code buffer
+          c3_w len_w;                       //  present length
+          c3_w wid_w;                       //  total width
         } fut;
       } u2_utat;
+
+    /* u2_uled: event log header.
+    */
+      typedef struct {
+        c3_l mag_l;                         //  mug of log format, 'a', 'b'...
+      } u2_uled;
+
+    /* u2_ular: event log trailer.
+    */
+      typedef struct {
+        c3_w ent_w;                         //  event sequence number
+        c3_w len_w;                         //  word length of this event
+        c3_w mug_w;                         //  mug of noun
+      } u2_ular;
+
+    /* u2_ulog: unix event log.
+    */
+      typedef struct {
+        c3_i fid_i;                         //  file descriptor
+        c3_w ent_w;                         //  event sequence number
+        c3_w len_w;                         //  length in words
+      } u2_ulog;
 
     /* u2_utfo: unix terminfo strings.
     */
@@ -256,6 +278,7 @@
         u2_noun syd;                      //  kernel seed 
         u2_noun roc;                      //  rotor core
       } u2_reck;
+
  
     /* u2_cart: ovum carton.
     */
@@ -284,6 +307,7 @@
         struct ev_loop *lup_u;              //  libev event loop
         u2_http* htp_u;                     //  http servers
         u2_utty* uty_u;                     //  terminal servers
+        u2_ulog  lug_u;                     //  event log
 
         u2_reck rec_u[1];                   //  rotors (hardcoded to 1)
       } u2_host;                            //  host == computer == process
@@ -377,6 +401,11 @@
       */
         u2_noun
         u2_walk_load(c3_c* pas_c);
+
+      /* u2_walk_safe(): load file or 0.
+      */
+        u2_noun
+        u2_walk_safe(c3_c* pas_c);
 
       /* u2_walk_save(): save file or bail.
       */
@@ -495,6 +524,11 @@
         void
         u2_reck_time(u2_reck* rec_u);
      
+      /* u2_reck_wind(): set the reck time artificially.
+      */
+        void
+        u2_reck_wind(u2_reck* rec_u, u2_noun now);
+
       /* u2_reck_plan(): queue ovum (external).
       */
         void
@@ -690,10 +724,10 @@
                    u2_noun         how,
                    c3_i            revents);
 
-      /* u2_lo_loop(): enter main event loop.
+      /* u2_lo_loop(): enter main event loop with boot model.
       */
         void
-        u2_lo_loop(u2_reck* rec_u);
+        u2_lo_loop(u2_reck* rec_u, u2_noun meh);
 
       /* u2_lo_bail(): clean up all event state.
       */

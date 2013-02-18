@@ -18,10 +18,7 @@
         ~&([%dill-lost whu tea hen fav] [~ ..^$])
       ::
           %boot                                         ::  start terminal
-        :_  ..^$
-        ^-  (list move)
-        :-  [whu [[%a ~] [%d tea] hen] p.fav]
-        (turn q.fav |=(a=card [whu [/d/ hen] a]))
+        [[[whu [[%a ~] [%d tea] hen] p.fav] ~] ..^$]
       ::
           %flog                                         ::  log to terminal
         :_  ..^$
@@ -43,7 +40,7 @@
         [p.i.gum ~]
       ::
           %init                                         ::  create terminal
-        :-  [[[~ p.fav] hen [%init p.fav]] ~]
+        :-  [[whu hen [%init p.fav]] ~]
         ..^$(wib (~(put by wib) hen [& [p.fav ~] *blur ~]))
       ==
     =>  .(yar u.yar) 
@@ -304,8 +301,9 @@
         ?>  ?=(^ whu)
         %=    +.$ 
             mos
-          :_  mos 
-          [whu [/d/ hen] [%warn "welcome, {~(rend co [~ %p u.whu])}!"]]
+          :~  [whu [/d/ hen] [%warn "welcome, {~(rend co [~ %p u.whu])}!"]]
+              [whu [/d/ hen] [%helo ~]]
+          ==
         ==
       ::
           %helo                                         ::  trigger prompt
@@ -329,6 +327,7 @@
         ==
       ::  
           %init
+        ~&  %dill-inuk
         %=  +.$
           mos    :+  [whu [/d/ hen] [%helo ~]] 
                    [~ hen fav]

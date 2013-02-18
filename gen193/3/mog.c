@@ -16,7 +16,7 @@
     if ( u2_none == (sam = u2_frag(u2_cv_sam, cor)) ) {
       return u2_bl_bail(wir_r, c3__exit);
     } else {
-      return u2_mog(sam);
+      return u2_mug(sam);
     }
   }
 

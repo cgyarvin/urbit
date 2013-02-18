@@ -93,13 +93,13 @@
       ** Not referenced as such, since in ray space.
       */
         typedef struct _u2_loom_atom {
-          c3_w mog_w;
+          c3_w mug_w;
           c3_w len_w;
           c3_w buf_w[0];
         } u2_loom_atom;
 
         typedef struct _u2_loom_cell {
-          c3_w   mog_w;
+          c3_w   mug_w;
           u2_ray hed_r;
           u2_ray tel_r;
         } u2_loom_cell;
@@ -216,7 +216,7 @@
 
     /*** Noun structure access.
     ***/
-#     define u2_at_dog_mog(a)   u2_at_ray(u2_dog_a(a))
+#     define u2_at_dog_mug(a)   u2_at_ray(u2_dog_a(a))
 
 #     define u2_at_pom_hed(a)   u2_at_ray((1 + u2_pom_a(a)))
 #     define u2_at_pom_tel(a)   u2_at_ray((2 + u2_pom_a(a)))
@@ -430,13 +430,13 @@
 
     /* u2_pool:
     **
-    **   A set, stored as binary treap by mog.
+    **   A set, stored as binary treap by mug.
     */
       typedef u2_noun u2_pool;
 
     /* u2_book:
     **
-    **   An associative array, stored as binary treap by mog.
+    **   An associative array, stored as binary treap by mug.
     */
       typedef u2_noun u2_book;
 
@@ -486,61 +486,61 @@
           u2_mean(u2_noun a,
                   ...);
 
-        /* u2_mog():
+        /* u2_mug():
         **
-        **   Compute and/or recall the mog (31-bit hash) of (a).
+        **   Compute and/or recall the mug (31-bit hash) of (a).
         */
           c3_w
-          u2_mog(u2_noun a);
+          u2_mug(u2_noun a);
       
-        /* u2_mog_string():
+        /* u2_mug_string():
         **
-        **   Compute the mog of `a`, LSB first.
+        **   Compute the mug of `a`, LSB first.
         */
           c3_w
-          u2_mog_string(const c3_c *a_c);
+          u2_mug_string(const c3_c *a_c);
 
-        /* u2_mog_words():
+        /* u2_mug_words():
         **
-        **   Compute the mog of `buf`, `len`, LSW first.
+        **   Compute the mug of `buf`, `len`, LSW first.
         */
           c3_w
-          u2_mog_words(const c3_w *buf_w,
+          u2_mug_words(const c3_w *buf_w,
                        c3_w        len_w);
 
-        /* u2_mog_cell():
+        /* u2_mug_cell():
         **
-        **   Compute the mog of `[a b]`.
+        **   Compute the mug of `[a b]`.
         */
           c3_w
-          u2_mog_cell(u2_noun a,
+          u2_mug_cell(u2_noun a,
                       u2_noun b);
 
-        /* u2_mog_trel():
+        /* u2_mug_trel():
         **
-        **   Compute the mog of `[a b c]`.
+        **   Compute the mug of `[a b c]`.
         */
           c3_w
-          u2_mog_trel(u2_noun a,
+          u2_mug_trel(u2_noun a,
                       u2_noun b,
                       u2_noun c);
 
-        /* u2_mog_qual():
+        /* u2_mug_qual():
         **
-        **   Compute the mog of `[a b c d]`.
+        **   Compute the mug of `[a b c d]`.
         */
           c3_w
-          u2_mog_qual(u2_noun a,
+          u2_mug_qual(u2_noun a,
                       u2_noun b,
                       u2_noun c,
                       u2_noun d);
 
-        /* u2_mog_both():
+        /* u2_mug_both():
         **
-        **   Join two mogs.
+        **   Join two mugs.
         */
           c3_w
-          u2_mog_both(c3_w a_w,
+          u2_mug_both(c3_w a_w,
                       c3_w b_w);
 
         /* u2_fing():

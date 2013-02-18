@@ -21,7 +21,6 @@
 #include "f/coal.h"
 #include "v/vere.h"
 
-
 /* _reck_nock_poke(): call poke through hardcoded interface.
 */
 static u2_noun
@@ -240,6 +239,18 @@ u2_reck_time(u2_reck* rec_u)
   rec_u->wen = _reck_coin_da(rec_u, u2k(rec_u->now));
 }
 
+/* u2_reck_wind(): set the reck time artificially.
+*/
+void
+u2_reck_wind(u2_reck* rec_u, u2_noun now)
+{
+  u2z(rec_u->now);
+  rec_u->now = now;
+
+  u2z(rec_u->wen);
+  rec_u->wen = _reck_coin_da(rec_u, u2k(rec_u->now));
+}
+
 /* u2_reck_numb(): set the instance number.
 */
 void
@@ -250,8 +261,8 @@ u2_reck_numb(u2_reck* rec_u)
   gettimeofday(&tp, 0);
   rec_u->sev_l = 0x7fffffff & 
                  ( ((c3_w) tp.tv_sec) ^
-                   u2_mog(0x7fffffff & ((c3_w) tp.tv_usec)) ^
-                   u2_mog(getpid()));
+                   u2_mug(0x7fffffff & ((c3_w) tp.tv_usec)) ^
+                   u2_mug(getpid()));
                  
   rec_u->sen = _reck_coin_uv(rec_u, rec_u->sev_l);
 }
@@ -547,7 +558,7 @@ _reck_kick_spec(u2_reck* rec_u, u2_noun pox, u2_noun fav)
              (u2_no == u2_sing(rec_u->sen, p_pud)) ||
              (u2_no == _reck_lily(rec_u, c3__ud, u2k(q_pud), &tid_l)) )
         {
-          uL(fprintf(uH, "term: bad tire\n"));
+          //  uL(fprintf(uH, "term: bad tire\n"));
           u2z(pox); u2z(fav); return u2_no;
         } else {
           return _reck_kick_term(rec_u, pox, tid_l, fav);
@@ -597,11 +608,13 @@ u2_reck_kick(u2_reck* rec_u, u2_noun ovo)
          (c3__text != u2h(u2t(ovo))) &&
          (c3__note != u2h(u2t(ovo))) )
 #endif
+#if 0
     {
       uL(fprintf(uH, "kick: lost %%%s on %s\n", 
                      u2_cr_string(u2h(u2t(ovo))),
                      u2_cr_string(tox)));
     }
+#endif
     u2z(tox);
   }
   u2z(ovo);

@@ -453,13 +453,13 @@ u2_ve_start(c3_w kfo_w, c3_w kto_w)
 
       switch ( ver_e->mod_m ) {
         case c3__live:
-          fprintf(stderr, "(%x)\n", u2_mog(ver_e->ken));
+          fprintf(stderr, "(%x)\n", u2_mug(ver_e->ken));
           break;
         case c3__cool:
-          fprintf(stderr, "(transitional) (%x)\n", u2_mog(ver_e->ras));
+          fprintf(stderr, "(transitional) (%x)\n", u2_mug(ver_e->ras));
           break;
         case c3__weak:
-          fprintf(stderr, "(experimental) (%x)\n", u2_mog(ver_e->tip));
+          fprintf(stderr, "(experimental) (%x)\n", u2_mug(ver_e->tip));
           break;
       }
     }
@@ -527,6 +527,13 @@ u2_ve_mark_reck(u2_reck* rec_u)
   siz_w += u2_cm_mark_noun(rec_u->syd);
   siz_w += u2_cm_mark_noun(rec_u->roc);
 
+  {
+    u2_cart* egg_u;
+
+    for ( egg_u = rec_u->ova.egg_u; egg_u; egg_u = egg_u->nex_u ) {
+      siz_w += u2_cm_mark_noun(egg_u->egg);
+    }
+  }
   return siz_w;
 }
 

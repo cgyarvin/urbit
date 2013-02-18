@@ -203,7 +203,6 @@
     ==
   ++  scry                                              ::  inspect
     |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
-    ::  ~&  [%scry ren who lot tyl]
     ^-  (unit)
     ?~  tyl  ~
     ?>  =(our his)                                      ::  XX temporary

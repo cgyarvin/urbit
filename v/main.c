@@ -48,6 +48,7 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
   u2_noun map = 0;
   c3_w    kno_w = 0;
   u2_noun hep = u2_nul;
+  u2_noun meh = u2_nul;
   u2_bean abo = u2_no;
   u2_bean gab = u2_no;
   u2_bean pro = u2_no;
@@ -55,11 +56,10 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
 
   c3_i ch_i;
 
-  while ( (ch_i = getopt(argc, argv, "k:h:agqv")) != -1 ) {
+  while ( (ch_i = getopt(argc, argv, "k:n:agqv")) != -1 ) {
     switch ( ch_i ) {
       case 'a': { abo = u2_yes; break; }
       case 'g': { gab = u2_yes; break; }
-      case 'h': { hep = u2_ci_string(optarg); break; }
       case 'k': {
         c3_w arg_w = atoi(optarg);
 
@@ -67,6 +67,17 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
           kno_w = arg_w;
         }
         else return u2_none;
+        break;
+      }
+      case 'n': {
+        c3_w biz_w;
+
+        if ( 1 == sscanf(optarg, "%u", &biz_w) ) {
+          meh = u2nc(c3__make, biz_w);
+        }
+        else {
+          meh = u2nc(c3__have, u2_ci_string(optarg));
+        }
         break;
       }
       case 'q': { veb = u2_no; break; }
@@ -80,6 +91,7 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
     return u2_none;
   }
   map = u2_ckd_by_put(map, c3__cpu, u2_ci_string(argv[optind]));
+  map = u2_ckd_by_put(map, c3__meh, meh);
   map = u2_ckd_by_put(map, c3__kno, kno_w);
   map = u2_ckd_by_put(map, c3__abo, abo);
   map = u2_ckd_by_put(map, c3__gab, gab);
@@ -277,6 +289,8 @@ main(c3_i   argc,
     exit(0);
   }
 
-  u2_lo_loop(&u2_Host.rec_u[0]);
+  u2_lo_loop(&u2_Host.rec_u[0],
+             u2_ckd_by_get(u2k(u2_Host.map), c3__meh));
+
   return 0;
 }

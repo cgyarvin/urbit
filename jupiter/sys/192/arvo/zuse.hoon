@@ -1,7 +1,7 @@
 !:
 ::          %zuse, main loop.   This file is in the public domain.
 ::
-=<  =+  ^=  duc                                         ::  nock entrance
+=<  =+  ^=  duc                                         ::  external entrance
         |=  cud=*  ^-  *
         ?:  =(0 cud)
           ..peek
@@ -13,14 +13,15 @@
       |=  *
       ^-  (unit)
       =>  .(+< ((hard ,[our=@p now=@da hap=path]) +<))
+      ::  ~&  [%zuse-peek hap]
       ?~  hap  ~
       ((~(beck is now) [~ our]) hap)
     ::
     ++  poke                                            ::  external apply
       |=  *
       ^-  [p=(list ovum) q=_+>]
-      ::  ~&  [%zuse-poke +<]
       =>  .(+< ((hard ,[now=@da ovo=ovum]) +<))
+      ::  ~&  [%zuse-poke ovo]
       =^  zef  fan
         (~(hurl is now) ovo)
       [zef +>.$]
@@ -84,6 +85,7 @@
     |-  ^-  [p=(list ovum) q=(list ,[p=@tas q=vane])]
     ?~  mor
       [(flop ova) fan]
+    ::  ~&  [%kick-move -.r.i.mor]
     ?>  ?=(^ q.i.mor)
     ?~  t.q.i.mor
       $(mor t.mor, ova [[i.q.i.mor r.i.mor] ova])

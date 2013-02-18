@@ -45,6 +45,38 @@ _walk_ok(u2_reck* rec_u, u2_noun nod)
 }
 #endif
 
+/* u2_walk_safe(): load file or 0.
+*/
+u2_noun
+u2_walk_safe(c3_c* pas_c)
+{
+  struct stat buf_b;
+  c3_i        fid_i = open(pas_c, O_RDONLY, 0644);
+  c3_w        fln_w, red_w;
+  c3_y*       pad_y;
+
+  if ( (fid_i < 0) || (fstat(fid_i, &buf_b) < 0) ) {
+    perror(pas_c);
+    return 0;
+  }
+  fln_w = buf_b.st_size;
+  pad_y = malloc(buf_b.st_size);
+
+  red_w = read(fid_i, pad_y, fln_w);
+  close(fid_i);
+
+  if ( fln_w != red_w ) {
+    free(pad_y);
+    return 0;
+  }
+  else {
+    u2_noun pad = u2_ci_bytes(fln_w, (c3_y *)pad_y); 
+    free(pad_y);
+
+    return pad;
+  }
+}
+
 /* u2_walk_load(): load file or bail.
 */
 u2_noun

@@ -32,6 +32,7 @@ _sync_peek_arch(u2_reck* rec_u, u2_noun pos, u2_noun bok)
   if ( u2_nul == rec_u->own ) {
     u2z(pos); u2z(bok);
     
+    // uL(fprintf(uH, "sync: no owner\n"));
     return u2_nul;
   }
   else {
@@ -52,6 +53,7 @@ _sync_peek_home(u2_reck* rec_u, u2_noun pos)
 {
   if ( u2_nul == rec_u->own ) {
     u2z(pos);
+    // uL(fprintf(uH, "sync: no owner\n"));
     return u2_nul;
   }
   else {

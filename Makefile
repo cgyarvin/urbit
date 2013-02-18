@@ -20,7 +20,7 @@ BIN=bin
 
 RM=rm -f
 CC=gcc
-CLD=gcc -O3 -L/usr/local/lib
+CLD=gcc -g -L/usr/local/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
@@ -29,7 +29,7 @@ LIBS=-lev -lgmp -lreadline -ltermcap -lsigsegv
 INCLUDE=include
 GENERATED=generated
 DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN)
-CFLAGS=-O3 -I/usr/local/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
+CFLAGS=-g -I/usr/local/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 CWFLAGS=-Wall
 
 .y.o:
@@ -516,7 +516,7 @@ J192_3_OFILES=\
        gen192/3/mas.o \
        gen192/3/met.o \
        gen192/3/mix.o \
-       gen192/3/mog.o \
+       gen192/3/mug.o \
        gen192/3/peg.o \
        gen192/3/rap.o \
        gen192/3/rip.o \

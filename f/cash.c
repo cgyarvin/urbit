@@ -478,7 +478,7 @@ u2_cs_find(u2_rail ral_r,
            c3_m    sel_m,
            u2_noun sam)                                           //  retain
 {
-  c3_w key_w = u2_mog(sel_m) ^ u2_mog(sam);
+  c3_w key_w = u2_mug(sel_m) ^ u2_mug(sam);
 
   return _cs_find_1(ral_r, lot_r, key_w, 0, sel_m, sam);
 }
@@ -494,7 +494,7 @@ u2_cs_find_cell(u2_rail ral_r,
                 u2_noun a,                                        //  retain
                 u2_noun b)                                        //  retain
 {
-  c3_w key_w = u2_mog(sel_m) ^ u2_mog_cell(a, b);
+  c3_w key_w = u2_mug(sel_m) ^ u2_mug_cell(a, b);
 
   return _cs_find_2(ral_r, lot_r, key_w, 0, sel_m, a, b);
 }
@@ -510,8 +510,8 @@ u2_cs_find_mixt(u2_rail     ral_r,
                 const c3_c* a_c,                            //  retain
                 u2_noun     b)                              //  retain
 {
-  c3_w mog_w = u2_mog_both(u2_mog_string(a_c), u2_mog(b));
-  c3_w key_w = u2_mog(sel_m) ^ mog_w;
+  c3_w mug_w = u2_mug_both(u2_mug_string(a_c), u2_mug(b));
+  c3_w key_w = u2_mug(sel_m) ^ mug_w;
 
   return _cs_find_2m(ral_r, lot_r, key_w, 0, sel_m, a_c, b);
 }
@@ -528,7 +528,7 @@ u2_cs_find_trel(u2_rail ral_r,
                 u2_noun b,                                        //  retain
                 u2_noun c)                                        //  retain
 {
-  c3_w key_w = u2_mog(sel_m) ^ u2_mog_trel(a, b, c);
+  c3_w key_w = u2_mug(sel_m) ^ u2_mug_trel(a, b, c);
 
   return _cs_find_3(ral_r, lot_r, key_w, 0, sel_m, a, b, c);
 }
@@ -546,7 +546,7 @@ u2_cs_find_qual(u2_rail ral_r,
                 u2_noun c,                                        //  retain
                 u2_noun d)                                        //  retain
 {
-  c3_w key_w = u2_mog(sel_m) ^ u2_mog_qual(a, b, c, d);
+  c3_w key_w = u2_mug(sel_m) ^ u2_mug_qual(a, b, c, d);
 
   return _cs_find_4(ral_r, lot_r, key_w, 0, sel_m, a, b, c, d);
 }
@@ -598,7 +598,7 @@ _cs_more_b(u2_rail ral_r,
       c3_m    sel_m = u2_slot_a_sel(tol_r);
       u2_noun sap   = u2_slot_a_sap(tol_r);
       u2_noun pro   = u2_slot_a_pro(tol_r);
-      c3_w    key_w = u2_mog(sel_m) ^ u2_mog(u2_h(sap));
+      c3_w    key_w = u2_mug(sel_m) ^ u2_mug(u2_h(sap));
 
       _cs_save_b(ral_r, lot_r, key_w, sif_w, sel_m, sap, pro);
 
@@ -701,7 +701,7 @@ _cs_save_a(u2_rail ral_r,
       c3_m lus_m  = u2_slot_a_sel(lot_r);
       u2_noun pes = u2_slot_a_sap(lot_r);
       u2_noun rop = u2_slot_a_pro(lot_r);
-      c3_w yek_w  = u2_mog(lus_m) ^ u2_mog(u2_h(pes));
+      c3_w yek_w  = u2_mug(lus_m) ^ u2_mug(u2_h(pes));
       u2_bean ave;
 
       u2_slot_b_gun(lot_r) = u2_slot_gunk_coll;
@@ -768,7 +768,7 @@ u2_cs_save(u2_rail ral_r,
            u2_noun sam,                                           //  retain
            u2_noun pro)                                           //  transfer
 {
-  c3_w key_w = u2_mog(sel_m) ^ u2_mog(sam);
+  c3_w key_w = u2_mug(sel_m) ^ u2_mug(sam);
   c3_w sif_w = 0;
   u2_noun sap = u2_rc(ral_r, u2_rx(ral_r, sam), u2_nul);
 
