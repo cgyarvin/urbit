@@ -18,9 +18,13 @@ ENDIAN=little
 #
 BIN=bin
 
+# Library directory - from whence resources are now loaded.
+#
+LIB=$(PWD)/lib
+
 RM=rm -f
 CC=gcc
-CLD=gcc -g -L/usr/local/lib
+CLD=gcc -O3 -L/usr/local/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
@@ -28,8 +32,9 @@ LIBS=-lev -lgmp -lreadline -ltermcap -lsigsegv
 
 INCLUDE=include
 GENERATED=generated
-DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN)
-CFLAGS=-g -I/usr/local/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
+DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN) -D U2_LIB=\"$(LIB)\"
+
+CFLAGS=-O3 -I/usr/local/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 CWFLAGS=-Wall
 
 .y.o:

@@ -140,8 +140,8 @@ u2_ve_tool(u2_noun nam)
   u2_steg* ver_e = u2_ve_at();
   u2_noun  num   = u2_ve_tag(u2_Host.kno_w);
   u2_noun  bon   = u2nc(u2_ci_string(".~"), 
-                        u2nq(c3__sys, u2k(num), u2k(nam), u2_nul));
-  u2_noun  tah   = u2nt(nam, num, c3__sys);
+                        u2nt(u2k(num), u2k(nam), u2_nul));
+  u2_noun  tah   = u2nc(nam, num);
   u2_weak  src   = u2_ve_file("hoon", u2_ct(tah));
 
   u2_cm_push(u2nc(c3__lose, u2_cf_path(".", "hoon", tah)));
@@ -181,7 +181,7 @@ u2_ve_tool(u2_noun nam)
 u2_bean
 u2_ve_able(c3_w kno_w, c3_m nam_w)
 {
-  u2_noun tah = u2nt(nam_w, u2_ve_tag(kno_w), c3__sys);
+  u2_noun tah = u2nc(nam_w, u2_ve_tag(kno_w));
   c3_d  src_d = u2_ve_date("hoon", u2_ct(tah));
   c3_d  bin_d = u2_ve_date("pill", tah);
 
@@ -214,7 +214,7 @@ void
 u2_ve_base()
 {
   u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
-  u2_noun  bot   = u2nc(u2_ve_tag(u2_Host.kno_w), c3__sys);
+  u2_noun  bot   = u2_ve_tag(u2_Host.kno_w);
 
   c3_assert(0 == u2_Host.ver_e[u2_Host.kno_w].mod_m);
   {
@@ -507,6 +507,9 @@ u2_ve_mark_reck(u2_reck* rec_u)
   siz_w += u2_cm_mark_noun(rec_u->wen);
   siz_w += u2_cm_mark_noun(rec_u->sen);
   siz_w += u2_cm_mark_noun(rec_u->own);
+  siz_w += u2_cm_mark_noun(rec_u->our);
+  siz_w += u2_cm_mark_noun(rec_u->pod);
+  siz_w += u2_cm_mark_noun(rec_u->roe);
 
   siz_w += u2_cm_mark_noun(rec_u->toy.duel);
   siz_w += u2_cm_mark_noun(rec_u->toy.rain);

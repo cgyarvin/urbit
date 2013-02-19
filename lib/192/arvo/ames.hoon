@@ -1100,6 +1100,7 @@
     ++  scry
       |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
       ^-  (unit)
+      ::  ~&  [%scry-ames our/our ren/ren his/his lot/lot tyl/tyl]
       ?.  =(0 ren)  ~
       ?+    lot  ~
           [%% %ud @]
@@ -1144,7 +1145,7 @@
           [~ fox(any.ton (shax (mix any.ton.fox p.fav)))]
         ::
             %make
-          =+  vun=(~(come am [now fox]) p.fav q.fav r.fav)
+          =+  vun=(~(come am [now fox]) p.fav (bex q.fav) r.fav)
           [[[%beer p.vun] ~] q.vun]
         ==
     =>  %_(. fox q.fuy)

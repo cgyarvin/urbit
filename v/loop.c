@@ -261,18 +261,18 @@ _lo_mung(u2_reck* rec_u, u2_noun gat, u2_noun sam)
   return _lo_hard(rec_u, _lo_mung_in, gam);
 }
 
-/* _lo_save(): log an ovum at the present time.  sync; sync; sync.
+/* _lo_pack(): save an ovum at the present time.  sync; sync; sync.
 */
 static void
-_lo_save(u2_reck* rec_u, u2_noun ovo)
+_lo_pack(u2_reck* rec_u, u2_noun ron)
 {
-  u2_noun  ron = u2_cke_jam(u2nc(u2k(rec_u->now), ovo));
   u2_ulog* lug_u = &u2_Host.lug_u;
   c3_w     len_w = u2_cr_met(5, ron);
   c3_w     tar_w = (lug_u->len_w + len_w);
   c3_w*    img_w;
   u2_ular  lar_u;
 
+  lar_u.syn_w = u2_mug(tar_w);
   lar_u.mug_w = u2_mug(ron);
   lar_u.ent_w = lug_u->ent_w++;
   lar_u.len_w = len_w;
@@ -316,6 +316,20 @@ _lo_save(u2_reck* rec_u, u2_noun ovo)
   // Sync.  Or, what goes by sync.
   {
     fsync(lug_u->fid_i);    //  fsync is useless, F_FULLFSYNC too slow
+  }
+}
+
+/* _lo_save(): log an ovum at the present time.
+*/
+static void
+_lo_save(u2_reck* rec_u, u2_noun ovo)
+{
+  u2_noun ron = u2_cke_jam(u2nc(u2k(rec_u->now), ovo));
+
+  if ( rec_u->dir_c ) {
+    _lo_pack(rec_u, ron);
+  } else {
+    rec_u->roe = u2nc(ron, rec_u->roe);
   }
 }
 
@@ -370,6 +384,7 @@ _lo_punk(u2_reck* rec_u, u2_noun ovo)
   //  Yo, did we fail?  Do something else that works.
   //
   if ( u2_blip != u2h(gon) ) {
+#if 0
     u2_noun bov = u2nc(u2k(u2h(ovo)), u2nc(c3__crud, u2k(u2t(gon))));
 
     u2z(ovo); ovo = bov;
@@ -389,6 +404,10 @@ _lo_punk(u2_reck* rec_u, u2_noun ovo)
         return;
       }
     }
+#else
+    _lo_punt(rec_u, 2, u2k(u2t(gon)));
+    return;
+#endif
   }
 
   //  Whatever worked, save it.  (XX - should be concurrent with execute.)
@@ -484,6 +503,81 @@ u2_lo_call(u2_reck*        rec_u,
   _lo_spin(rec_u, lup_u);
 }
 
+/* _lo_home(): create ship directory.
+*/
+static void
+_lo_home(u2_reck* rec_u)
+{
+  c3_c    ful_c[2048];
+  u2_noun who;
+
+  //  Set pathname and create main directory.
+  {
+    rec_u->dir_c = u2_cr_string(rec_u->pod);
+    rec_u->dir_c += 1;
+    if ( strlen(rec_u->dir_c) > 29 ) {
+      rec_u->dir_c[29] = 0;
+    }
+    uL(fprintf(uH, "home: %s\n", rec_u->dir_c));
+    u2z(who);
+  }
+
+  //  Create subdirectories.
+  //
+  {
+    if ( 0 != mkdir(rec_u->dir_c, 0700) ) {
+      perror(rec_u->dir_c);
+      u2_lo_bail(rec_u);
+    }
+
+    sprintf(ful_c, "%s/sin", rec_u->dir_c);
+    if ( 0 != mkdir(ful_c, 0700) ) {
+      perror(ful_c);
+      u2_lo_bail(rec_u);
+    }
+
+    sprintf(ful_c, "%s/get", rec_u->dir_c);
+    if ( 0 != mkdir(ful_c, 0700) ) {
+      perror(ful_c);
+      u2_lo_bail(rec_u);
+    }
+
+    sprintf(ful_c, "%s/put", rec_u->dir_c);
+    if ( 0 != mkdir(ful_c, 0700) ) {
+      perror(ful_c);
+      u2_lo_bail(rec_u);
+    }
+  }
+
+  //  Copy default content.
+  //
+  {
+    sprintf(ful_c, "cp -r %s/%d/main %s/sin", 
+                   U2_LIB, rec_u->kno_w, rec_u->dir_c);
+    uL(fprintf(uH, "home: %s\n", ful_c));
+    if ( 0 != system(ful_c) ) {
+      uL(fprintf(uH, "home: could not copy?\n"));
+      u2_lo_bail(rec_u);
+    }
+
+    sprintf(ful_c, "cp -r %s/%d/test %s/sin", 
+                   U2_LIB, rec_u->kno_w, rec_u->dir_c);
+    uL(fprintf(uH, "home: %s\n", ful_c));
+    if ( 0 != system(ful_c) ) {
+      uL(fprintf(uH, "home: could not copy?\n"));
+      u2_lo_bail(rec_u);
+    }
+
+    sprintf(ful_c, "cp -r %s/%d/toy %s/sin", 
+                   U2_LIB, rec_u->kno_w, rec_u->dir_c);
+    uL(fprintf(uH, "home: %s\n", ful_c));
+    if ( 0 != system(ful_c) ) {
+      uL(fprintf(uH, "home: could not copy?\n"));
+      u2_lo_bail(rec_u);
+    }
+  }
+}
+
 /* _lo_zest(): create a new, empty record.
 */
 static void
@@ -493,9 +587,13 @@ _lo_zest(u2_reck* rec_u)
   c3_i        fid_i;
   c3_c        ful_c[2048];
 
-  //  Open the fscking file.
+  //  Create the ship directory.
+  //
+  _lo_home(rec_u);
+  
+  //  Create the record file.
   {
-    sprintf(ful_c, "%s/vet.hlog", u2_Local);
+    sprintf(ful_c, "%s/egz.hope", rec_u->dir_c);
 
     if ( ((fid_i = open(ful_c, O_CREAT | O_WRONLY | O_EXCL, 0600)) < 0) || 
          (fstat(fid_i, &buf_b) < 0) ) 
@@ -506,17 +604,34 @@ _lo_zest(u2_reck* rec_u)
     u2_Host.lug_u.fid_i = fid_i;
   }
 
-  //  Write the stupid header.  This will probably fail.
+  //  Write the header.
   {
     u2_uled led_u;
 
-    led_u.mag_l = u2_mug('a');
+    led_u.mag_l = u2_mug('c');
+    led_u.kno_w = rec_u->kno_w;
+
     if ( sizeof(led_u) != write(fid_i, &led_u, sizeof(led_u)) ) {
       uL(fprintf(uH, "can't write record (%s)\n", ful_c));
+      u2_lo_bail(rec_u);
     }
 
     u2_Host.lug_u.len_w = c3_wiseof(led_u);
     u2_Host.lug_u.ent_w = 0;
+  }
+
+  //  Save the boot events.
+  {
+    u2_noun nor = u2_ckb_flop(rec_u->roe);
+
+    rec_u->roe = nor;
+
+    while ( u2_nul != nor ) {
+      _lo_pack(rec_u, u2k(u2h(nor)));
+      nor = u2t(nor);
+    }
+    u2z(rec_u->roe);
+    rec_u->roe = 0;
   }
 }
 
@@ -533,16 +648,12 @@ _lo_rand(u2_reck* rec_u, c3_w* rad_w)
   close(fid_i);
 }
 
-/* _lo_make(): post initial ova.
+/* _lo_make(): boot from scratch.
 */
 static void
 _lo_make(u2_reck* rec_u, c3_l biz_l)
 {
   u2_noun ten;
-
-  //  Initialize empty record.
-  //
-  _lo_zest(rec_u);
 
   //  Get some host entropy.
   //
@@ -558,13 +669,11 @@ _lo_make(u2_reck* rec_u, c3_l biz_l)
     u2_noun pax = u2nc(c3__gold, u2nq(c3__term, u2k(rec_u->sen), '1', u2_nul));
 
     u2_reck_plan(rec_u, u2k(pax), 
-                        u2nc(c3__boot, u2nq(c3__make, c3__zuse, 256, 0)));
+                        u2nc(c3__boot, u2nq(c3__make, c3__zuse, biz_l, ten)));
 
     u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, u2_term_ef_blew(rec_u, 1)));
     u2_reck_plan(rec_u, u2k(pax), u2nc(c3__hail, u2_nul));
     u2z(pax);
-
-   // u2nq(c3__make, c3__zuse, biz_l, ten),
   }
 
   _lo_work(rec_u);
@@ -574,6 +683,12 @@ _lo_make(u2_reck* rec_u, c3_l biz_l)
     if ( u2_nul == rec_u->own ) {
       uL(fprintf(uH, "boot did not install a master!\n"));
       u2_lo_bail(rec_u);
+    }
+    else {
+      rec_u->our = u2k(u2h(rec_u->own));
+      rec_u->pod = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', u2k(rec_u->our)));
+
+      _lo_zest(rec_u);
     }
   }
 
@@ -588,34 +703,32 @@ _lo_make(u2_reck* rec_u, c3_l biz_l)
   }
 }
 
-/* _lo_join(): begin with invitation.
-*/
-static void
-_lo_join(u2_reck* rec_u, u2_atom vit)
-{
-}
-
 /* _lo_rest(): restore from record, or exit.
 */
 static void
-_lo_rest(u2_reck* rec_u)
+_lo_rest(u2_reck* rec_u, u2_noun cpu)
 {
   struct stat buf_b;
   c3_i        fid_i;
   c3_c        ful_c[2048];
   u2_noun     roe = u2_nul;
 
+  //  Who the fsck are we today?
+  {
+    rec_u->dir_c = u2_cr_string(cpu);
+    u2z(cpu);
+  }
+
   //  Open the fscking file.  Does it even exist?
   {
-    sprintf(ful_c, "%s/vet.hlog", u2_Local);
+    sprintf(ful_c, "%s/egz.hope", rec_u->dir_c);
 
     if ( ((fid_i = open(ful_c, O_RDWR)) < 0) || 
          (fstat(fid_i, &buf_b) < 0) ) 
     {
-      uL(fprintf(uH, "rest: can't open record (%s) - creating.\n", ful_c));
-      // u2_lo_bail(rec_u);
-      //  XX totally wrong, but will hold you. :-)
-      _lo_make(rec_u, 8);
+      uL(fprintf(uH, "rest: can't open record (%s)\n", ful_c));
+      u2_lo_bail(rec_u);
+
       return;
     }
     u2_Host.lug_u.fid_i = fid_i;
@@ -631,15 +744,21 @@ _lo_rest(u2_reck* rec_u)
       u2_lo_bail(rec_u);
     }
 
-    if ( u2_mug('a') != led_u.mag_l ) {
+    if ( u2_mug('c') != led_u.mag_l ) {
       uL(fprintf(uH, "record (%s) is corrupt (b)\n", ful_c));
       u2_lo_bail(rec_u);
+    }
+
+    if ( led_u.kno_w != rec_u->kno_w ) {
+      uL(fprintf(uH, "rest: kernel mismatch (running %d, record %d)\n",
+                     led_u.kno_w,
+                     rec_u->kno_w));
     }
   }
 
   //  Read in the fscking events.  These are probably corrupt as well.
   {
-    c3_w    end_w, ent_w;
+    c3_w end_w, ent_w;
 
     end_w = u2_Host.lug_u.len_w;
     ent_w = 0;
@@ -665,6 +784,12 @@ _lo_rest(u2_reck* rec_u)
         uL(fprintf(uH, "record (%s) is corrupt (e)\n", ful_c));
         u2_lo_bail(rec_u);
       }
+
+      if ( lar_u.syn_w != u2_mug(tar_w) ) {
+        uL(fprintf(uH, "record (%s) is corrupt (f)\n", ful_c));
+        u2_lo_bail(rec_u);
+      }
+
 #if 0
       uL(fprintf(uH, "log: read: at %d, %d: lar ent %d, len %d, mug %x\n", 
                       (tar_w - lar_u.len_w),
@@ -679,7 +804,7 @@ _lo_rest(u2_reck* rec_u)
         ent_w = u2_Host.lug_u.ent_w = lar_u.ent_w;
       } else {
         if ( lar_u.ent_w != (ent_w - 1) ) {
-          uL(fprintf(uH, "record (%s) is corrupt (f)\n", ful_c));
+          uL(fprintf(uH, "record (%s) is corrupt (g)\n", ful_c));
           u2_lo_bail(rec_u);
         }
         ent_w -= 1;
@@ -687,11 +812,11 @@ _lo_rest(u2_reck* rec_u)
       end_w = (tar_w - lar_u.len_w);
 
       if ( -1 == lseek(fid_i, 4 * end_w, SEEK_SET) ) {
-        uL(fprintf(uH, "record (%s) is corrupt (g)\n", ful_c));
+        uL(fprintf(uH, "record (%s) is corrupt (h)\n", ful_c));
         u2_lo_bail(rec_u);
       }
       if ( (4 * lar_u.len_w) != read(fid_i, img_w, (4 * lar_u.len_w)) ) {
-        uL(fprintf(uH, "record (%s) is corrupt (h)\n", ful_c));
+        uL(fprintf(uH, "record (%s) is corrupt (i)\n", ful_c));
         u2_lo_bail(rec_u);
       }
 
@@ -699,14 +824,14 @@ _lo_rest(u2_reck* rec_u)
       free(img_w);
 
       if ( u2_mug(ron) != lar_u.mug_w ) {
-        uL(fprintf(uH, "record (%s) is corrupt (i)\n", ful_c));
+        uL(fprintf(uH, "record (%s) is corrupt (j)\n", ful_c));
         u2_lo_bail(rec_u);
       }
       roe = u2nc(u2_cke_cue(ron), roe);
     }
     
     if ( 0 != ent_w ) {
-      uL(fprintf(uH, "record (%s) is corrupt (j)\n", ful_c));
+      uL(fprintf(uH, "record (%s) is corrupt (k)\n", ful_c));
       u2_lo_bail(rec_u);
     }
     u2_Host.lug_u.ent_w += 1;
@@ -736,6 +861,7 @@ _lo_rest(u2_reck* rec_u)
     }
     u2z(rou);
   }
+  uL(fprintf(stderr, "\n---------------- playback complete----------------\n"));
 
   //  If you see this error, your record is totally fscking broken!
   //  Which probably serves you right.  Please consult a consultant.
@@ -744,8 +870,30 @@ _lo_rest(u2_reck* rec_u)
       uL(fprintf(uH, "record did not install a master!\n"));
       u2_lo_bail(rec_u);
     }
+    rec_u->our = u2k(u2h(rec_u->own));
+    rec_u->pod = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', u2k(rec_u->our)));
   }
-  uL(fprintf(stderr, "\n---------------- playback complete----------------\n"));
+
+  //  Now, who the fsck are you?  No, really.
+  { 
+    u2_noun who;
+    c3_c*   fil_c;
+    c3_c*   who_c;
+
+    if ( (fil_c = strrchr(rec_u->dir_c, '/')) ) {
+      fil_c++;
+    } else fil_c = rec_u->dir_c;
+
+    who = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', u2k(rec_u->our)));
+    who_c = u2_cr_string(who);
+    u2z(who);
+
+    if ( strncmp(fil_c, who_c + 1, strlen(fil_c)) ) {
+      uL(fprintf(uH, "record master (%s) does not match filename!\n", who_c));
+      u2_lo_bail(rec_u);
+    }
+    free(who_c);
+  }
  
   //  Hey, fscker!  It worked.  Say hello to your new terminal.
   {
@@ -762,12 +910,14 @@ _lo_rest(u2_reck* rec_u)
 /* u2_lo_loop(): begin main event loop.
 */
 void
-u2_lo_loop(u2_reck* rec_u, u2_noun meh)
+u2_lo_loop(u2_reck* rec_u, u2_noun cpu, u2_noun meh)
 {
   _lo_init(rec_u);
 
+  c3_assert((u2_nul == cpu) ^ (u2_nul == meh));
+
   if ( u2_nul == meh ) {
-    _lo_rest(rec_u);
+    _lo_rest(rec_u, cpu);
   }
   else {
     switch ( u2h(meh) ) {

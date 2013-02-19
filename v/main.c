@@ -75,9 +75,6 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
         if ( 1 == sscanf(optarg, "%u", &biz_w) ) {
           meh = u2nc(c3__make, biz_w);
         }
-        else {
-          meh = u2nc(c3__have, u2_ci_string(optarg));
-        }
         break;
       }
       case 'q': { veb = u2_no; break; }
@@ -87,10 +84,15 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
       }
     }
   }
-  if ( argc != (optind + 1) ) {
-    return u2_none;
+
+  if ( argc == optind ) {
+    map = u2_ckd_by_put(map, c3__cpu, 0);
   }
-  map = u2_ckd_by_put(map, c3__cpu, u2_ci_string(argv[optind]));
+  else if ( argc == (optind + 1) ) {
+    map = u2_ckd_by_put(map, c3__cpu, u2_ci_string(argv[optind]));
+  }
+  else return u2_none;
+
   map = u2_ckd_by_put(map, c3__meh, meh);
   map = u2_ckd_by_put(map, c3__kno, kno_w);
   map = u2_ckd_by_put(map, c3__abo, abo);
@@ -135,6 +137,7 @@ u2_ve_sysopt()
     u2_Local = u2_cr_string(cpu);
     u2_cz(cpu);
   }
+  u2_System = U2_LIB;
 
   u2_Flag_Abort = u2_ckd_by_got(u2_ct(map), c3__abo);
   u2_Flag_Garbage = u2_ckd_by_got(u2_ct(map), c3__gab);
@@ -289,8 +292,16 @@ main(c3_i   argc,
     exit(0);
   }
 
-  u2_lo_loop(&u2_Host.rec_u[0],
-             u2_ckd_by_get(u2k(u2_Host.map), c3__meh));
+  {
+    u2_noun cpu = u2_ckd_by_get(u2k(u2_Host.map), c3__cpu);
+    u2_noun meh = u2_ckd_by_get(u2k(u2_Host.map), c3__meh);
 
+    if ( !((u2_nul == cpu) ^ (u2_nul == meh)) ) {
+      fprintf(stderr, "must load an existing ship or create one\n");
+      exit(1);
+    }
+
+    u2_lo_loop(&u2_Host.rec_u[0], cpu, meh);
+  }
   return 0;
 }

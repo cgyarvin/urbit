@@ -141,11 +141,13 @@
     */
       typedef struct {
         c3_l mag_l;                         //  mug of log format, 'a', 'b'...
+        c3_w kno_w;                         //  kernel number validated with
       } u2_uled;
 
     /* u2_ular: event log trailer.
     */
       typedef struct {
+        c3_w syn_w;                         //  must equal mug of address
         c3_w ent_w;                         //  event sequence number
         c3_w len_w;                         //  word length of this event
         c3_w mug_w;                         //  mug of noun
@@ -273,6 +275,11 @@
         u2_noun sev_l;                    //  instance number
         u2_noun sen;                      //  instance string
         u2_noun own;                      //  owner list
+
+        c3_c* dir_c;                      //  full path to ship
+        u2_noun our;                      //  main owner
+        u2_noun pod;                      //  owner as string
+        u2_noun roe;                      //  temporary unsaved events
 
         u2_noun ken;                      //  kernel formula
         u2_noun syd;                      //  kernel seed 
@@ -724,10 +731,10 @@
                    u2_noun         how,
                    c3_i            revents);
 
-      /* u2_lo_loop(): enter main event loop with boot model.
+      /* u2_lo_loop(): enter main event loop.
       */
         void
-        u2_lo_loop(u2_reck* rec_u, u2_noun meh);
+        u2_lo_loop(u2_reck* rec_u, u2_noun cpu, u2_noun meh);
 
       /* u2_lo_bail(): clean up all event state.
       */

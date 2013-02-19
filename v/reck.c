@@ -220,7 +220,7 @@ _reck_load_temp(u2_reck* rec_u, u2_noun vax, c3_w kno_w, c3_c* pax_c)
 {
   c3_c ful_c[2048];
  
-  sprintf(ful_c, "%s/sys/%d/%s", u2_Local, kno_w, pax_c);
+  sprintf(ful_c, "%s/%d/%s", u2_System, kno_w, pax_c);
   return _reck_load(rec_u, vax, ful_c);
 }
 
@@ -300,6 +300,11 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
   rec_u->now = 0;
   rec_u->wen = 0;
   rec_u->sen = 0;
+  rec_u->our = 0;
+  rec_u->pod = 0;
+  rec_u->roe = 0;
+
+  rec_u->dir_c = 0;
 
   rec_u->ken = ken;
   rec_u->syd = _reck_root("seed", u2k(ken));

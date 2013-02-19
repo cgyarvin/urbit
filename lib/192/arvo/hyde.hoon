@@ -140,7 +140,6 @@
               [%hear p=@]                               ::  receive packet
               [%helo ~]                                 ::  trigger prompt
               [%init p=@p]                              ::  report install
-              [%inuk p=@p]                              
               [%flog p=card]                            ::  log to terminal
               [%junk p=@]                               ::  entropy
               [%keep p=@p]                              ::  establish master
