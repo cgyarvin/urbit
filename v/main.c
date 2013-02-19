@@ -89,6 +89,14 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
     map = u2_ckd_by_put(map, c3__cpu, 0);
   }
   else if ( argc == (optind + 1) ) {
+    //  Trim trailing slash if any.
+    {
+      c3_c* ash_c;
+
+      if ( (ash_c = strrchr(argv[optind], '/')) && (ash_c[1] == 0) ) {
+        *ash_c = 0;
+      }
+    }
     map = u2_ckd_by_put(map, c3__cpu, u2_ci_string(argv[optind]));
   }
   else return u2_none;

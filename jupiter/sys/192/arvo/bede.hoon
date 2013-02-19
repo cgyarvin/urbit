@@ -433,7 +433,8 @@
           %eh  (haul (dost (mong [echo:do lube +.kal] sky) ergo hak))
           %go  (haul (dost (mong [fapp:do lube +.kal] sky) ergo fret))
           %kl  (envy /b/ [%kill p.kal])
-          %nk  (envy /b/ [%nuke ~])
+          ::  %nk  (envy /b/ [%nuke ~])
+          %nk  =+(sad=(dec 0) (envy /b/ [%nuke ~]))
           %ps  (emir view)
           %to  (haul (dost (mong [ecto:do lube +.kal] sky) ergo hak))
       ==

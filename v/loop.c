@@ -384,7 +384,7 @@ _lo_punk(u2_reck* rec_u, u2_noun ovo)
   //  Yo, did we fail?  Do something else that works.
   //
   if ( u2_blip != u2h(gon) ) {
-#if 0
+#if 1
     u2_noun bov = u2nc(u2k(u2h(ovo)), u2nc(c3__crud, u2k(u2t(gon))));
 
     u2z(ovo); ovo = bov;
