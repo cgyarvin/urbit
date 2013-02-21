@@ -8,7 +8,7 @@
       ^-  bowl
       :-  (turn messages |=(a=tape [%talk %leaf a]))
       :-  ~
-      :-  :~  [~ [%up %& "tennis, {neighbor}? "]]
+      :-  :~  [~ [%up %text "tennis, {neighbor}? "]]
           ==
       learn
     ::

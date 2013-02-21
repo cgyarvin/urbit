@@ -69,7 +69,12 @@
       =.  q.r.yar  [~ bed]
       %-  curb
       :~  [%hop (add pol.bed bus.bed)]
-          [%lin (weld `(list ,@)`pot.bed but.bed)]
+          :-  %lin
+          %+  weld  pot.bed
+          ?-  buy.bed
+            %text  but.bed
+            %pass  `(list ,@)`(runt [(lent but.bed) '*'] ~)
+          ==
       ==
     ::
     ++  fume                                            ::  print tank, prefix
@@ -321,13 +326,13 @@
         %-  edit
         =|  bed=bead
         =+  pom=(sky [%b (scot da/now) (scot p/u.whu) %p ~])
-        =+  poy=?~(pom `prod`[& "# "] (prod u.pom))
+        =+  poy=?~(pom `prod`[%text "# "] (prod u.pom))
         =+  hux=//
         =+  ^=  hyt  ^-  hist
             =+  hyt=(~(get by s.yar) [u.whu hux])
             ?~(hyt *hist u.hyt)
         %=    bed
-            buy  ?:(p.poy %text %pass)
+            buy  p.poy
             hux  hux
             hiz  0
             hyt  [+(p.hyt) [%% q.hyt]]

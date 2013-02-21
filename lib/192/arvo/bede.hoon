@@ -611,7 +611,7 @@
   ++  prot                                              ::  current prompt
     ^-  prod
     ?~  pak 
-      [& (rip 3 (cat 3 hox '> '))]
+      [%text (rip 3 (cat 3 hox '> '))]
     =+  byr=(need (~(get by q.lif) p.i.pak))
     =+  gol=(need (~(get by p.byr) q.i.pak))
     ?>(?=(%up -.gol) p.gol)

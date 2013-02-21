@@ -48,7 +48,7 @@
           $:  $:  bul=@ud                               ::  buffer length
                   bus=@ud                               ::  cursor in buffer
                   but=(list ,@c)                        ::  buffer text 
-                  buy=?(%text %pass)                    ::  input style
+                  buy=prom                              ::  input style
               ==                                        ::
               $:  hiz=@ud                               ::  history depth
                   hux=path                              ::  history path
@@ -326,7 +326,7 @@
 ++  pork  ,[p=(unit ,@ta) q=path]                       ::  fully parsed url
 ++  post  ,[p=path q=*]                                 ::  statement
 ++  prod  ,[p=prom q=tape]                              ::  format, prompt
-++  prom  ,?                                            ::  format type
+++  prom  ?(%text %pass)                                ::  format type
 ++  purl  ,[p=hart q=pork r=quay]                       ::  parsed url
 ++  putt                                                ::  outgoing message
           $:  ski=snow                                  ::  sequence acked/sent
