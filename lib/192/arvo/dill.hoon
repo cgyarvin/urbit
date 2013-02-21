@@ -40,11 +40,18 @@
         [p.i.gum ~]
       ::
           %init                                         ::  create terminal
-        :-  [[whu hen [%init p.fav]] ~]
+        :-  :~  [whu hen [%init p.fav]]
+                [[~ p.fav] [/b/ hen] [%noop ~]]
+            ==
         ..^$(wib (~(put by wib) hen [& [p.fav ~] *blur ~]))
       ==
     =>  .(yar u.yar) 
-    =.  whu  ?~(q.yar ~ [~ i.q.yar])
+    ?:  &(?=(~ whu) ?=(^ q.yar))
+      :_  ..^$
+      :_  ~
+      :+  [~ i.q.yar]
+        [/d/ hen]
+      fav
     =|  mos=(list move)
     =<  yerk:leap
     |%
@@ -312,18 +319,20 @@
         ?>  ?=(^ whu)
         %-  edit
         =|  bed=bead
-        =+  pot="> "                                    ::  XX temporary
+        =+  pom=(sky [%b (scot da/now) (scot p/u.whu) %p ~])
+        ::  ~&  [%prompt whu pom]
+        =+  poy=?~(pom `prod`[& "# "] (prod u.pom))
         =+  hux=//
         =+  ^=  hyt  ^-  hist
             =+  hyt=(~(get by s.yar) [u.whu hux])
             ?~(hyt *hist u.hyt)
         %=    bed
-            buy  %lark
+            buy  ?:(p.poy %text %pass)
             hux  hux
             hiz  0
             hyt  [+(p.hyt) [%% q.hyt]]
-            pot  pot
-            pol  2
+            pot  q.poy
+            pol  (lent q.poy)
         ==
       ::  
           %init

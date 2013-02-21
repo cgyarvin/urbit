@@ -85,21 +85,22 @@
     |-  ^-  [p=(list ovum) q=(list ,[p=@tas q=vane])]
     ?~  mor
       [(flop ova) fan]
-    ::  ~&  [%kick-move -.r.i.mor]
+    ::  ~&  [%kick-move q.i.mor -.r.i.mor]
     ?>  ?=(^ q.i.mor)
     ?~  t.q.i.mor
       $(mor t.mor, ova [[i.q.i.mor r.i.mor] ova])
     ?>  ?=(^ i.q.i.mor)
     =-  $(mor (weld p.nyx t.mor), fan q.nyx)
     ^=  nyx
+    =+  naf=fan
     |-  ^-  [p=(list move) q=_fan]
-    ?~  fan  [~ ~]
-    ?.  =(i.i.q.i.mor p.i.fan)
-      =+  tuh=$(fan t.fan)
-      [p.tuh [i.fan q.tuh]]
+    ?~  naf  [~ ~]
+    ?.  =(i.i.q.i.mor p.i.naf)
+      =+  tuh=$(naf t.naf)
+      [p.tuh [i.naf q.tuh]]
     =+  ^=  yub
-        %-  beat:(q.i.fan now (shax now) (beck p.i.mor))
+        %-  beat:(q.i.naf now (shax now) (beck p.i.mor))
         [p.i.mor t.i.q.i.mor t.q.i.mor r.i.mor]
-    [p.yub [[p.i.fan q.yub] t.fan]]
+    [p.yub [[p.i.naf q.yub] t.naf]]
   --
 --

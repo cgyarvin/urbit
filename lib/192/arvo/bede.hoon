@@ -5,8 +5,7 @@
   |%
   ++  bede                                              ::  terminal handling
     ^-  vane                                            ::  kernel instrument
-    =|                                                  ::  system state
-        $:  deb=(map flag _*berg)                       ::  state by terminal
+    =|  $:  deb=(map ,[p=@ud q=flag] _*berg)            ::  state by terminal
         ==                                              ::
     |=  [now=@da eny=@ sky=||(* (unit))]                ::  current invocation
     ^?                                                  ::  opaque core
@@ -18,14 +17,18 @@
       =+  ^=  beg  ^+  *berg
           =+  beg=(~(get by deb) u.whu)
           ?^(beg u.beg (berg u.whu))
-      =+  yub=(leap:(beg now (shax now) sky) tea hen fav)
+      =+  yub=(leap:(beg now eny sky) tea hen fav)
       :-  p.yub
       ..^$(deb (~(put by deb) u.whu q.yub))
     ::
     ++  scry
       |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
       ^-  (unit)
-      ~
+      ?.  =(our his)  ~
+      ?.  &(=([%p ~] tyl) =([%% %da now] lot)) ~
+      =+  beg=(~(get by deb) our)
+      ?~  beg  ~
+      [~ prot:(u.beg now eny |=(* *(unit)))]
     --
   --
 |%

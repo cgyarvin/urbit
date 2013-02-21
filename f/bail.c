@@ -65,7 +65,7 @@ u2_noun
 u2_bl_error(u2_wire     wir_r,
             const c3_c* err_c)                                    //  retain
 {
-  u2_bl_push(wir_r, u2_bc(wir_r, c3__bean, u2_bn_string(wir_r, err_c)));
+  u2_bl_push(wir_r, u2_bc(wir_r, c3__lose, u2_bn_string(wir_r, err_c)));
 
   return u2_bl_bail(wir_r, c3__exit);
 }

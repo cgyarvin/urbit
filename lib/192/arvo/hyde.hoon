@@ -48,7 +48,7 @@
           $:  $:  bul=@ud                               ::  buffer length
                   bus=@ud                               ::  cursor in buffer
                   but=(list ,@c)                        ::  buffer text 
-                  buy=?(%code %lark %text %word)        ::  input style
+                  buy=?(%text %pass)                    ::  input style
               ==                                        ::
               $:  hiz=@ud                               ::  history depth
                   hux=path                              ::  history path
@@ -152,6 +152,7 @@
               [%loot p=@tas q=path]                     ::  request directory
               [%make p=@t q=@ud r=@]                    ::  wild license
               [%mine p=@ud q=@t]                        ::  query matched line
+              [%noop ~]                                 ::  no operation
               [%note p=@tD q=tank]                      ::  debug message 
               [%nuke p=~]                               ::  kill all processes
               [%pace p=@ud]                             ::  compute background

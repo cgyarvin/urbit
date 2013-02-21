@@ -745,7 +745,7 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu)
     }
 
     if ( u2_mug('c') != led_u.mag_l ) {
-      uL(fprintf(uH, "record (%s) is corrupt (b)\n", ful_c));
+      uL(fprintf(uH, "record (%s) is obsolete (or corrupt)\n", ful_c));
       u2_lo_bail(rec_u);
     }
 

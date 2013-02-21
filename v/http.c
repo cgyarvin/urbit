@@ -1029,7 +1029,7 @@ u2_http_io_poll(u2_reck*        rec_u,
               break;
             }
           }
-          fprintf(stderr, "http: live on %d\r\n", htp_u->por_w);
+          uL(fprintf(uH, "http: live on %d\r\n", htp_u->por_w));
           break;
         }
         if ( listen(fid_i, 3) < 0 ) {
