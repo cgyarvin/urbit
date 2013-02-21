@@ -771,7 +771,7 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu)
       c3_c* old_c = u2_cr_string(old);
       c3_c* nuu_c = u2_cr_string(nuu);
 
-      uL(fprintf(uH, "rest: old process %s, new process %s\n", old_c, nuu_c));
+      uL(fprintf(uH, "rest: old %s, new %s\n", old_c, nuu_c));
       free(old_c); free(nuu_c);
 
       u2z(old); u2z(nuu);

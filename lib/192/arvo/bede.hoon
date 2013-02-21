@@ -481,6 +481,7 @@
     ^-  [p=(list move) q=_..^$]
     =<  ?+  -.fav  [[[[~ who] hen fav] ~] ..^$]
           %kill  (kill p.fav)
+          %noop  [~ ..^$]
           %nuke  nuke
           %line  (gill (trip p.fav))
           %thee  (heat p.fav)
