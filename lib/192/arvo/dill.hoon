@@ -53,6 +53,7 @@
         [/d/ hen]
       fav
     =|  mos=(list move)
+    =+  wip=|
     =<  yerk:leap
     |%
     ++  beep  (curb [[%bel ~] ~])                       ::  send beep
@@ -320,7 +321,6 @@
         %-  edit
         =|  bed=bead
         =+  pom=(sky [%b (scot da/now) (scot p/u.whu) %p ~])
-        ::  ~&  [%prompt whu pom]
         =+  poy=?~(pom `prod`[& "# "] (prod u.pom))
         =+  hux=//
         =+  ^=  hyt  ^-  hist
@@ -358,12 +358,13 @@
           %text  $(fav [%talk %leaf p.fav])             ::  simple message
           %talk  (furl (~(win re p.fav) 0 p.r.yar))     ::  program output
           %warn  (fume '~' [%leaf p.fav])               ::  system message
+          %wipe  +.$(wip &)
       ==
     ::
     ++  yerk                                            ::  complete core
       ^-  [p=(list move) q=_..^$]
-      ::  ~&  [%yerk-moves mos]
-      [(flop mos) ..^$(wib (~(put by wib) hen yar))]
+      :-  (flop mos)
+      ..^$(wib ?.(wip (~(put by wib) hen yar) (~(del by wib) hen)))
     --
   ::
   ++  scry

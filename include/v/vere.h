@@ -142,6 +142,8 @@
       typedef struct {
         c3_l mag_l;                         //  mug of log format, 'a', 'b'...
         c3_w kno_w;                         //  kernel number validated with
+        c3_l sev_l;                         //  host process identity
+        c3_l tno_l;                         //  terminal count in host
       } u2_uled;
 
     /* u2_ular: event log trailer.
@@ -743,19 +745,26 @@
 
     /**  Terminal, new style.
     **/
-      /* u2_term_ef_blew(): return window size [columns rows].
+      /* u2_term_ef_boil(): initial effects for restored server.
       */
-        u2_noun
-        u2_term_ef_blew(u2_reck* rec_u,
-                        c3_l     tid_l);
-                  
+        void
+        u2_term_ef_boil(u2_reck* rec_u,
+                        c3_l     old_l,
+                        c3_l     ono_l);
+
+      /* u2_term_ef_bake(): initial effects for new server.
+      */
+        void
+        u2_term_ef_bake(u2_reck* rec_u,
+                        u2_noun  fav);
+
       /* u2_term_ef_blit(): send %blit effect to to terminal.
       */
         void
         u2_term_ef_blit(u2_reck* rec_u,
                         c3_l     tid_l,
                         u2_noun  blt);
-  
+
       /* u2_term_io_init(): initialize terminal I/O.
       */
         void 
@@ -824,6 +833,11 @@
                         c3_l     coq_l,
                         c3_l     seq_l,
                         u2_noun  rep);
+
+      /* u2_http_ef_bake(): create new http server.
+      */
+        void
+        u2_http_ef_bake(u2_reck* rec_u);
 
       /* u2_http_io_init(): initialize http I/O.
       */

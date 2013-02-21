@@ -621,10 +621,10 @@ _term_ef_get(u2_reck* rec_u,
   return _term_main();
 }
 
-/* u2_term_ef_blew(): return window size [columns rows].
+/* _term_ef_blew(): return window size [columns rows].
 */
 u2_noun
-u2_term_ef_blew(u2_reck* rec_u, c3_l tid_l)
+_term_ef_blew(u2_reck* rec_u, c3_l tid_l)
 {
   u2_utty*       uty_u = _term_ef_get(rec_u, tid_l);
   struct winsize siz_u;
@@ -636,6 +636,52 @@ u2_term_ef_blew(u2_reck* rec_u, c3_l tid_l)
   }
 }
               
+/* u2_term_ef_boil(): initial effects for loaded servers.
+*/
+void
+u2_term_ef_boil(u2_reck* rec_u,
+                c3_l     old_l,
+                c3_l     ono_l)
+{
+  if ( ono_l ) {
+    u2_noun oan = u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3__uv, old_l));
+    u2_noun tid_l;
+
+    for ( tid_l = 1; tid_l <= ono_l; tid_l++ ) {
+      u2_noun tin = u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3__ud, tid_l));
+      u2_noun pax = u2nc(c3__gold, u2nq(c3__term, u2k(oan), tin, u2_nul));
+     
+      u2_reck_plan(rec_u, pax, u2nc(c3__wipe, u2_nul));
+    }
+    u2z(oan);
+  }
+
+  {
+    u2_noun pax = u2nc(c3__gold, u2nq(c3__term, u2k(rec_u->sen), '1', u2_nul));
+
+    u2_reck_plan(rec_u, u2k(pax), u2nc(c3__init, u2k(u2h(rec_u->own))));
+    u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, _term_ef_blew(rec_u, 1)));
+    u2_reck_plan(rec_u, u2k(pax), u2nc(c3__hail, u2_nul));
+
+    u2z(pax);
+  }
+}
+
+/* u2_term_ef_bake(): initial effects for new terminal.
+*/
+void
+u2_term_ef_bake(u2_reck* rec_u,
+                u2_noun  fav)
+{
+  u2_noun pax = u2nc(c3__gold, u2nq(c3__term, u2k(rec_u->sen), '1', u2_nul));
+
+  u2_reck_plan(rec_u, u2k(pax), u2nc(c3__boot, fav));
+  u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, _term_ef_blew(rec_u, 1)));
+  u2_reck_plan(rec_u, u2k(pax), u2nc(c3__hail, u2_nul));
+
+  u2z(pax);
+}
+
 /* _term_ef_blit(): send blit to terminal.
 */
 static void

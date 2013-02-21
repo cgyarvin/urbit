@@ -613,7 +613,7 @@ u2_reck_kick(u2_reck* rec_u, u2_noun ovo)
          (c3__text != u2h(u2t(ovo))) &&
          (c3__note != u2h(u2t(ovo))) )
 #endif
-#if 0
+#if 1
     {
       uL(fprintf(uH, "kick: lost %%%s on %s\n", 
                      u2_cr_string(u2h(u2t(ovo))),

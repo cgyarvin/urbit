@@ -585,7 +585,7 @@ _lo_zest(u2_reck* rec_u)
 {
   struct stat buf_b;
   c3_i        fid_i;
-  c3_c        ful_c[2048];
+  c3_c        ful_c[8192];
 
   //  Create the ship directory.
   //
@@ -608,8 +608,10 @@ _lo_zest(u2_reck* rec_u)
   {
     u2_uled led_u;
 
-    led_u.mag_l = u2_mug('c');
+    led_u.mag_l = u2_mug('d');
     led_u.kno_w = rec_u->kno_w;
+    led_u.sev_l = rec_u->sev_l;
+    led_u.tno_l = 1;
 
     if ( sizeof(led_u) != write(fid_i, &led_u, sizeof(led_u)) ) {
       uL(fprintf(uH, "can't write record (%s)\n", ful_c));
@@ -633,6 +635,19 @@ _lo_zest(u2_reck* rec_u)
     u2z(rec_u->roe);
     rec_u->roe = 0;
   }
+
+#if 0
+  //  Copy the egz into ham, which will not be changed.
+  {
+    sprintf(ful_c, "rm -f %s/ham.hope; cp %s/egz.hope %s/ham.hope",
+                   rec_u->dir_c, rec_u->dir_c, rec_u->dir_c);
+
+    if ( 0 != system(ful_c) ) {
+      uL(fprintf(uH, "zest: could not save ham\n"));
+      u2_lo_bail(rec_u);
+    }
+  }
+#endif
 }
 
 /* _lo_rand(): fill a 256-bit (8-word) buffer.
@@ -665,20 +680,15 @@ _lo_make(u2_reck* rec_u, c3_l biz_l)
   }
 
   //  Authenticate and initialize terminal.
-  {
-    u2_noun pax = u2nc(c3__gold, u2nq(c3__term, u2k(rec_u->sen), '1', u2_nul));
+  //
+  u2_term_ef_bake(rec_u, u2nq(c3__make, c3__zuse, biz_l, ten));
 
-    u2_reck_plan(rec_u, u2k(pax), 
-                        u2nc(c3__boot, u2nq(c3__make, c3__zuse, biz_l, ten)));
-
-    u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, u2_term_ef_blew(rec_u, 1)));
-    u2_reck_plan(rec_u, u2k(pax), u2nc(c3__hail, u2_nul));
-    u2z(pax);
-  }
-
+  //  Work through start sequence.
+  //
   _lo_work(rec_u);
 
   //  We should actually have a master now.
+  //
   {
     if ( u2_nul == rec_u->own ) {
       uL(fprintf(uH, "boot did not install a master!\n"));
@@ -687,20 +697,16 @@ _lo_make(u2_reck* rec_u, c3_l biz_l)
     else {
       rec_u->our = u2k(u2h(rec_u->own));
       rec_u->pod = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', u2k(rec_u->our)));
-
-      _lo_zest(rec_u);
     }
   }
 
-  //  Simple default configuration for http server.
-  {
-    u2_noun pax = u2nq(c3__gold, c3__http, u2k(rec_u->sen), u2_nul);
+  //  Create the ship directory.
+  //
+  _lo_zest(rec_u);
 
-    u2_reck_plan
-      (rec_u, pax, u2nt(c3__bind, 
-                        u2k(u2h(rec_u->own)), 
-                        u2nc(u2_yes, u2_nul)));
-  }
+  //  Configure the http server.
+  //
+  u2_http_ef_bake(rec_u);
 }
 
 /* _lo_rest(): restore from record, or exit.
@@ -712,6 +718,7 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu)
   c3_i        fid_i;
   c3_c        ful_c[2048];
   u2_noun     roe = u2_nul;
+  u2_noun     sev_l, tno_l;
 
   //  Who the fsck are we today?
   {
@@ -739,21 +746,37 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu)
   {
     u2_uled led_u;
 
-    if ( sizeof(led_u) != read(u2_Host.lug_u.fid_i, &led_u, sizeof(led_u)) ) {
+    if ( sizeof(led_u) != read(fid_i, &led_u, sizeof(led_u)) ) {
       uL(fprintf(uH, "record (%s) is corrupt (a)\n", ful_c));
       u2_lo_bail(rec_u);
     }
 
-    if ( u2_mug('c') != led_u.mag_l ) {
+    if ( u2_mug('d') != led_u.mag_l ) {
       uL(fprintf(uH, "record (%s) is obsolete (or corrupt)\n", ful_c));
       u2_lo_bail(rec_u);
     }
 
     if ( led_u.kno_w != rec_u->kno_w ) {
-      uL(fprintf(uH, "rest: kernel mismatch (running %d, record %d)\n",
+      uL(fprintf(uH, "rest: translating events (old %d, now %d)\n",
                      led_u.kno_w,
                      rec_u->kno_w));
     }
+    sev_l = led_u.sev_l;
+    tno_l = led_u.tno_l;
+
+    {
+      u2_noun old = u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3__uv, sev_l));
+      u2_noun nuu = u2_cn_mung(u2k(rec_u->toy.scot), 
+                               u2nc(c3__uv, rec_u->sev_l));
+      c3_c* old_c = u2_cr_string(old);
+      c3_c* nuu_c = u2_cr_string(nuu);
+
+      uL(fprintf(uH, "rest: old process %s, new process %s\n", old_c, nuu_c));
+      free(old_c); free(nuu_c);
+
+      u2z(old); u2z(nuu);
+    }
+    c3_assert(sev_l != rec_u->sev_l);   //  1 in 2 billion, just retry
   }
 
   //  Read in the fscking events.  These are probably corrupt as well.
@@ -894,16 +917,27 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu)
     }
     free(who_c);
   }
- 
-  //  Hey, fscker!  It worked.  Say hello to your new terminal.
+
+  //  Rewrite the header.  Will probably corrupt the record.
+  { 
+    u2_uled led_u;
+
+    led_u.mag_l = u2_mug('d');
+    led_u.sev_l = rec_u->sev_l;
+    led_u.kno_w = rec_u->kno_w;         //  may need actual translation!
+    led_u.tno_l = 1;
+    
+    if ( (-1 == lseek(fid_i, 0, SEEK_SET)) ||
+         (sizeof(led_u) != write(fid_i, &led_u, sizeof(led_u))) )
+    {
+      uL(fprintf(uH, "record (%s) failed to rewrite\n", ful_c));
+      u2_lo_bail(rec_u);
+    }
+  }
+
+  //  Hey, fscker!  It worked.  Stroke it till it bleeds.
   {
-    u2_noun pax = u2nc(c3__gold, u2nq(c3__term, u2k(rec_u->sen), '1', u2_nul));
-
-    u2_reck_plan(rec_u, u2k(pax), u2nc(c3__init, u2k(u2h(rec_u->own))));
-    u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, u2_term_ef_blew(rec_u, 1)));
-    u2_reck_plan(rec_u, u2k(pax), u2nc(c3__hail, u2_nul));
-
-    u2z(pax);
+    u2_term_ef_boil(rec_u, sev_l, tno_l);
   }
 }
 

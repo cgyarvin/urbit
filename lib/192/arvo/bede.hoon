@@ -5,7 +5,7 @@
   |%
   ++  bede                                              ::  terminal handling
     ^-  vane                                            ::  kernel instrument
-    =|  $:  deb=(map ,[p=@ud q=flag] _*berg)            ::  state by terminal
+    =|  $:  deb=(map flag _*berg)                       ::  state by terminal
         ==                                              ::
     |=  [now=@da eny=@ sky=||(* (unit))]                ::  current invocation
     ^?                                                  ::  opaque core

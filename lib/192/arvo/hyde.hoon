@@ -172,6 +172,7 @@
               [%thou p=httr]                            ::  raw http response
               [%tory p=(list ,@t)]                      ::  history dump
               [%warn p=tape]                            ::  system message
+              [%wipe ~]                                 ::  clean up hose
               [%word p=chum]                            ::  set password
           ==                                            ::
 ++  cask                                                ::  symmetric record

@@ -169,18 +169,19 @@ _http_respond_request(u2_hreq* req_u,
   // printf("attached response status %d\n", rep_u->sas_w);
   _http_respond_headers(req_u, rep_u->hed_u);
 
-  if ( rep_u->bod_u ) {
+  //  Why is this necessary?  Why can't we send a naked error?  Waah.
+  //
+  if ( !rep_u->bod_u ) {
+    sprintf(buf_c, "HTTP error %d.\r\n", rep_u->sas_w);
+    rep_u->bod_u = _http_bod(strlen(buf_c), (c3_y*) buf_c);
+  }
+
+  {
     sprintf(buf_c, "content-length: %u\r\n", rep_u->bod_u->len_w);
     _http_respond_str(req_u, buf_c);
 
     _http_respond_str(req_u, "\r\n");
     _http_respond_body(req_u, rep_u->bod_u);
-  } else {
-    //  Why is this necessary?  Why can't we send a naked error?
-    //
-    _http_respond_str(req_u, "\r\n");
-    sprintf(buf_c, "HTTP error %d.\r\n", rep_u->sas_w);
-    _http_respond_str(req_u, buf_c);
   }
 
   c3_assert(u2_no == req_u->end);
@@ -872,14 +873,22 @@ _http_respond(u2_hrep* rep_u)
   u2_hreq* req_u;
 
   if ( !(hon_u = _http_conn_find(htp_u, rep_u->coq_l)) ) {
-    fprintf(stderr, "http: connection not found: %d\r\n", rep_u->coq_l);
+    uL(fprintf(uH, "http: connection not found: %d\r\n", rep_u->coq_l));
     return;
   }
   if ( !(req_u = _http_req_find(hon_u, rep_u->seq_l)) ) {
-    fprintf(stderr, "http: request not found: %d\r\n", rep_u->seq_l);
+    uL(fprintf(uH, "http: request not found: %d\r\n", rep_u->seq_l));
     return;
   }
   _http_respond_request(req_u, rep_u);
+}
+
+void
+u2_http_ef_bake(u2_reck* rec_u)
+{
+  u2_noun pax = u2nq(c3__gold, c3__http, u2k(rec_u->sen), u2_nul);
+
+  u2_reck_plan(rec_u, pax, u2nq(c3__bind, u2k(rec_u->our), u2_yes, u2_nul));
 }
 
 /* u2_http_ef_thou(): send %thou effect to http. 
@@ -1117,12 +1126,16 @@ u2_http_io_fuck_conn(u2_reck*      rec_u,
 {
   u2_hcon* hon_u=(u2_hcon*)(void*)wax_u;
 
+  // uL(fprintf(uH, "http: fuck\n"));
+
   while ( hon_u->req_u ) {
     u2_hreq* req_u = hon_u->req_u;
     u2_hbod* rub_u = req_u->rub_u;
 
     if ( 0 == rub_u ) {
       if ( u2_yes == req_u->end ) {
+        // uL(fprintf(uH, "request closed\n"));
+
         hon_u->req_u = req_u->nex_u;
         if ( 0 == hon_u->req_u ) {
           c3_assert(req_u == hon_u->qer_u);
@@ -1151,6 +1164,17 @@ u2_http_io_fuck_conn(u2_reck*      rec_u,
           hon_u->ded = u2_yes;
         }
       }
+#if 0
+      uL(fprintf(uH, "wrote %d bytes\n", siz_i));
+      {
+        c3_c* buf_c = alloca(rub_u->len_w + 1);
+
+        strncpy(buf_c, (c3_c*)rub_u->hun_y, rub_u->len_w);
+        buf_c[rub_u->len_w] = 0;
+
+        uL(fprintf(uH, "wrote %s\n", buf_c));
+      }
+#endif
       if ( siz_i < rub_u->len_w ) {
         _http_clip(rub_u, siz_i);
         return;
