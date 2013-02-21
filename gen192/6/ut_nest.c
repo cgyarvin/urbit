@@ -337,7 +337,7 @@
       // u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, dun));
       // u2_bl_push(wir_r, u2_bc(wir_r, c3__mean, niz));
 
-      return u2_bl_error(wir_r, "nest-fail");
+      return u2_bl_error(wir_r, "type-fail");
     }
   }
 

@@ -5692,7 +5692,7 @@
           ?:  tel 
             ::  ~!  (dunk %need)
             ::  ~!  (dunk(sut ref) %have)
-            ~|(%nest-fail !!)
+            ~|(%type-fail !!)
           |
       ^=  tyn
       ?:  =(sut ref)
