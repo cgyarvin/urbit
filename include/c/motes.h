@@ -792,6 +792,7 @@
 #   define c3__same   c3_s4('s','a','m','e')
 #   define c3__sand   c3_s4('s','a','n','d')
 #   define c3__sard   c3_s4('s','a','r','d')
+#   define c3__sav    c3_s3('s','a','v')
 #   define c3__save   c3_s4('s','a','v','e')
 #   define c3__scam   c3_s4('s','c','a','m')
 #   define c3__scan   c3_s4('s','c','a','n')

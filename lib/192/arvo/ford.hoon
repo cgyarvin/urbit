@@ -1,4 +1,4 @@
-!:
+::
 ::          %ford, encryption and misc libs.  This file is in the public domain.
 ::
 =>

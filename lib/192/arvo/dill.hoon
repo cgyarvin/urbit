@@ -270,6 +270,8 @@
           %=    +.$
               q.r.yar  ~
               s.yar
+            ?:  =(%pass buy.u.q.r.yar)
+              s.yar 
             %+  ~(put by s.yar)
               [u.whu hux.u.q.r.yar]
             [p.hyt.u.q.r.yar [jab +.q.hyt.u.q.r.yar]]
@@ -339,15 +341,6 @@
             pot  q.poy
             pol  (lent q.poy)
         ==
-      ::  
-          %init
-        ~&  %dill-inuk
-        %=  +.$
-          mos    :+  [whu [/d/ hen] [%helo ~]] 
-                   [~ hen fav]
-                 mos
-          q.yar  [p.fav q.yar]
-        ==
       ::
           %logo                                         ::  logout
         =.  mos  :_(mos [~ hen [%bbye ~]])
@@ -360,6 +353,11 @@
         ==
       ::
           %note  ?.(p.yar +.$ (fume p.fav q.fav))       ::  debug message
+          %save                                         ::  write a file
+        %=  +.$
+          mos  :_(mos [whu hen `card`[%blit [%sav p.fav q.fav] ~]])
+        ==
+      ::
           %text  $(fav [%talk %leaf p.fav])             ::  simple message
           %talk  (furl (~(win re p.fav) 0 p.r.yar))     ::  program output
           %warn  (fume '~' [%leaf p.fav])               ::  system message

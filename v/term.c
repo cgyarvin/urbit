@@ -419,6 +419,66 @@ _term_it_show_more(u2_utty* uty_u)
   uty_u->tat_u.mir.cus_w = 0;
 }
 
+/* _term_it_path(): path for console file.
+*/
+static c3_c*
+_term_it_path(u2_reck* rec_u, u2_bean fyl, u2_noun pax)
+{
+  c3_w len_w;
+  c3_c *pas_c;
+
+  //  measure
+  //
+  len_w = strlen(rec_u->dir_c);
+  {
+    u2_noun wiz = pax;
+
+    while ( u2_nul != wiz ) {
+      len_w += (1 + u2_cr_met(3, u2h(wiz)));
+      wiz = u2t(wiz);
+    }
+  }
+
+  //  cut
+  //
+  pas_c = malloc(len_w + 1);
+  strcpy(pas_c, rec_u->dir_c);
+  {
+    u2_noun wiz   = pax;
+    c3_c*   waq_c = (pas_c + strlen(pas_c));
+
+    while ( u2_nul != wiz ) {
+      c3_w tis_w = u2_cr_met(3, u2h(wiz));
+
+      if ( (u2_yes == fyl) && (u2_nul == u2t(wiz)) ) {
+        *waq_c++ = '.';
+      } else *waq_c++ = '/';
+
+      u2_cr_bytes(0, tis_w, (c3_y*)waq_c, u2h(wiz));
+      waq_c += tis_w;
+
+      wiz = u2t(wiz);
+    }
+    *waq_c = 0;
+  }
+  u2z(pax);
+  return pas_c;
+}
+
+/* _term_it_save(): save file by path.
+*/
+static void
+_term_it_save(u2_reck* rec_u, u2_noun pax, u2_noun pad)
+{
+  c3_c* pax_c;
+
+  pax = u2nc(c3__put, pax);
+  pax_c = _term_it_path(rec_u, u2_yes, pax);
+
+  u2_walk_save(pax_c, 0, pad);
+  free(pax_c);
+}
+
 /* _term_io_belt(): send belt.
 */
 static void
@@ -693,14 +753,17 @@ _term_ef_blit(u2_reck* rec_u,
     default: break;
     case c3__bel: {
       _term_it_queue_txt(uty_u, uty_u->ufo_u.out.bel_y);
-    } break;
+    } break; 
+
     case c3__clr: {
       _term_it_show_blank(uty_u);
       _term_it_refresh_line(rec_u, uty_u);
     } break;
+
     case c3__hop: {
       _term_it_show_cursor(uty_u, u2t(blt)); 
     } break;
+
     case c3__lin: {
       u2_noun lin = u2t(blt);
       c3_w    len_w = u2_ckb_lent(u2k(lin));
@@ -715,8 +778,13 @@ _term_ef_blit(u2_reck* rec_u,
       }
       _term_it_show_line(rec_u, uty_u, len_w, lin_w);
     } break;
+
     case c3__mor: {
       _term_it_show_more(uty_u);
+    } break;
+
+    case c3__sav: {
+      _term_it_save(rec_u, u2k(u2h(u2t(blt))), u2k(u2t(u2t(blt)))); 
     } break;
   }
   u2z(blt);

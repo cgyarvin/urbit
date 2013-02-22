@@ -118,130 +118,137 @@
     ::
     ++  zeno                                            ::  imperial keyprint
       |=  zar=@pD
-      ^-  @uvH
-      %^    cut 
-          7 
-        [zar 1]
-      0v2i1f.o8f3m.b3pb3.m2mhe.gh1p7.uli50.9ac6e.cf6iq.nkot2.9hb9b.taobq.
-       u0plo.njocn.c9g52.cab47.d2h9m.fivm2.q5cts.it1on.2akfm.7io1a.8u8nu.
-       p40f4.uqc5f.hpvsv.34kth.sr3j9.rkto4.8fddi.k9mmg.n184j.rd6gl.qib0f.
-       imuvo.g5862.39si7.kgmt3.7u8bn.ka7vg.oho5m.kal0d.f4lm0.qonos.2832k.
-       3t0oj.nrdqo.d62di.demo2.1c6bc.bbpsu.s87dg.n0idr.5rrf3.ecd75.v8q0f.
-       sfu55.f3ac7.kpfd5.lp7e2.roqfi.5ro0i.cuk1h.q52gh.d3lk8.94lc0.t2e8v.
-       iscp2.koqec.r5naa.49f6v.o5c6b.sj1hp.13kv6.rl47r.8i9kh.rsi3h.cfmfg.
-       ocb7i.k0ogk.v2ug9.a4ah8.5u8qo.dfjna.2knqv.2errk.cmqjv.s4eug.j95p8.
-       74ah9.me4ko.ffvpd.g69e2.gbqs3.paps9.8m3na.1ij3m.f7kg9.cnukp.nmpku.
-       p0dhf.ru29a.hr7ed.d6avb.eprug.80jb6.qgv65.bp4vg.ffbkj.parns.kbl53.
-       5m3iv.iv39o.4ahi8.agkq7.pq05l.e66na.41t01.q5fij.ja48q.lha1f.56den.
-       84fh6.f3fh5.q70c6.qgf72.mi7gq.d13s5.421bj.u40iv.vm9g5.kruki.0bj0k.
-       9c2hi.o17pf.k8i7k.vqcv9.c5kc5.s76ap.4gg34.gi2c1.rm1jn.qfp82.41n9n.
-       qno05.rul69.nigbd.fi1qj.05cmu.saev5.s1hdm.dds0m.9rjq2.cgfna.pta0k.
-       lbtcv.p2ebi.um9l6.0pmgq.ae480.4mt89.77m13.fbq22.qkj55.m2l5q.k7e3b.
-       hc2m5.guduc.4f7l9.79v2q.5hk8a.dfuh8.huno7.laspt.dce6u.m50ng.aqn5b.
-       f1vdm.k910j.onu0a.a78f5.o9r4b.cs80b.02p95.2pohv.oletg.gm31g.vs0rt.
-       k3mgm.2c9kq.jrs1l.3fof9.l0aa3.seaij.oeafs.p9n1f.31ve7.ab5u6.ti8c1.
-       vhuf2.80q45.5hl5g.9n6m5.5afr7.q5vl0.aic2a.b2a4o.dda6g.tfu8l.nmko1.
-       4ifrt.jcnd9.7te49.o5via.r4ttu.uit8t.k48iv.5gqf8.0p906.rijpq.q1r1d.
-       1k3b9.v7p9j.eo6dk.s3nmf.bfkr5.h940l.ccdh6.v82d6.ouaj0.aivhs.kmg13.
-       qepbl.ns28h.8bapb.p8h8j.87j3s.lfu9d.8um44.0tlkn.lrb70.nqlrj.pd7l0.
-       feom7.88u7u.r9kdb.8lg8u.ra9n4.qk176.u829f.cpq89.650o9.2uk0v.5vq6p.
-       lun69.js0hl.7a0nm.7kuku.u25ee.0popf.78904.1vasg.l5ced.drdnn.0u84d.
-       cotq5.u37od.lqned.33blp.eipsn.hv268.qtavc.mt40e.oohqc.0fiie.6caqa.
-       p7lv3.0jonh.n1clt.hc386.emog7.30jeq.evq6o.l0k21.mp9c1.g31bu.np5k5.
-       p7v5k.d31vg.9ecm8.avh0o.spfv4.0igpo.hp63a.fcs58.mmnr3.tana1.8b2mu.
-       1l8ab.560oq.km9om.jiftk.15st8.t8m0a.ipam8.qnac7.kv01u.c3gjk.i3771.
-       p1mml.u33tf.rkls0.mqodj.c4h37.kvn1p.3gsun.quouu.5217b.3neg8.pvchk.
-       2gjtg.psmm1.ret6g.v1f58.1v9mu.uteh4.a8vse.4ciu7.88mf7.4q5in.nd9f3.
-       99a2m.ch49i.3tg57.auvh5.fpa9i.ghhd6.a1lbd.k4qji.ur956.otbs9.u02ku.
-       3c6lo.jcka1.b7ba1.2lo9v.1euef.eudnt.unv1i.30qi4.bhk65.vgk3f.vpao9.
-       t9lrf.tb63o.p1p7v.pq8jv.mh1uv.p9c2i.rqeq9.hkm6d.n917q.gumuo.3nbge.
-       080a5.ctigb.cko5m.brpf1.l6kf8.2qgmu.aosv6.anfmg.gtpka.hjevh.50lcr.
-       lqs51.ou3jr.0aon9.o4gpd.q193g.vra8o.oddfc.hcpui.n06a5.9h432.i4ar7.
-       k3af6.uqopi.v9dur.a7e20.qfbgd.buq82.7191b.6728c.ni47f.2ffd8.0a07h.
-       j6v0u.t24c3.19444.n9kci.e287q.fisv9.amijk.6nabd.luqhh.ninu4.gg046.
-       kr0e2.ck64u.h6rls.99qbr.objcf.v14du.tmu5k.io5sl.uk6qj.hd61t.fpupg.
-       64v21.6bn6c.p6gvs.1tr6u.gnqhn.45qjt.94vsc.2alul.lrl6t.n96g1.clb13.
-       q2b8k.ondm2.9d5au.n59qa.hokov.mucdu.nocr8.j59mo.u2rf1.6k08t.1pj7a.
-       6v865.3qil2.13q7r.iek59.vugae.bnh69.rktb5.ek340.5tj9f.7tgi0.l52g0.
-       jp03q.g01b0.m1vt3.765h2.e3nt8.euo76.1e2i1.f0ot1.d3uj3.5n0ll.lj7tr.
-       p9tq8.qa0hs.m689e.3nmpk.jb86b.4ak2p.0pkc2.49emo.gvigp.1kveh.l7787.
-       uit37.bhvu6.rk5i7.r6l85.uejuj.9pfls.64kco.qd86i.604vq.18ked.skq91.
-       f9sn3.dn3hc.3km7h.r7uhr.cnbm3.2os38.hqe4l.qigmq.hd3fm.l9n9f.okf6b.
-       dfosh.g3uoi.9nqc8.i9o3j.odhfg.8iqj9.ukmo1.k2qvk.4rhsg.g7j4h.g0nrt.
-       c4dln.pah8p.h7dg7.u6ejk.ldlm5.sa110.ka9pg.36ffc.9plm4.0qs6k.sgiq3.
-       sg3a3.5d0id.mfhrj.fiiud.uu0qc.c8nnv.odcil.5dk2g.snmmd.9f1fg.1njm5.
-       1rbdk.70cl1.nqdrp.os17b.m1b3v.q0mud.r8oon.fo9h4.jkju7.u7q58.sevpp.
-       t0f60.tjpmc.p573i.lknoc.umthj.skvop.ndr30.97doa.b8phq.pe3hb.ucijv.
-       h3nbd.j9ptf.9p0u3.thk3r.2ljua.moqns.ss9p4.fe3nf.98iv5.4a0qb.jus4u.
-       tbbgm.9k4gi.323hr.fvpkc.9s5a3.t0qrh.jv50i.mjs7o.48mj7.msfoi.bv0hr.
-       26nk7.m551u.48ujv.225nt.u8mgk.bh8mv.45dfv.ouau4.d6qp7.01hj8.rn3sb.
-       q61vl.v47ub.4hmfg.pbt3f.00nvm.a74eh.0r3vh.9ctm7.4vmqe.vlc05.7oof6.
-       tphlo.8h6s4.v5oj5.sgj05.ftf7g.98508.tkoqe.c1ps0.iteq3.vbk5k.51rka.
-       vrps6.u3mou.qe73r.0qc4l.v9t1l.1th3u.f3c88.548mv.7mnu5.2j463.grk1m.
-       033jl.5goj8.9ru1e.cjrhp.mnbnc.mfsr3.j28lq.21lo9.nad85.5ed87.j8mss.
-       dkkd3.chv14.ssav4.78i5a.rh787.59jsa.l3fuq.m5opn.hnpdd.3taod.sak8b.
-       i3918.qeg9m.jp0e2.6cci1.28rap.35oas.ik8f3.j9vl6.j86mc.omlbu.rcg8o.
-       n9qv6.0jjl8.e8sua.9n9n1.26k9e.uso90.alpd4.gvbj0.q4h5s.depk8.csu2e.
-       3h8r9.tmpis.4qigv.n80pu.2iptl.b5a89.ocdd2.9kj8o.df5sc.o19pu.butnl.
-       tj8c5.0llkt.m5a9j.g8h3q.0h4go.kaa3c.mj32k.va73a.jpn6r.8e0lr.e8ve5.
-       8ku8a.s8m7v.7f2js.sc4g4.8m2ra.6mpju.9l4h4.l8sjm.pg0dk.fvcjg.8veeg.
-       2b906.mp4uo.rfmn6.qu842.vmn94.qssgc.o97gu.o9p15.0bv79.q76n7.63950.
-       93acd.0tetr.tim58.4u7pb.a569k.aglmm.udftf.s80b5.poftj.5d072.6itts.
-       fhatt.f8699.n3don.09vd1.kb2ds.qjlu5.ca392.76u12.sjv25.rms26.mhfro.
-       l8soh.jkfs7.iqj43.01mdn.tajbb.p8f4v.7fuc6.8bjrk.09uou.3ioq4.l8mnh.
-       d3u38.u4qro.35h0g.pcmfi.54s0m.i5846.jia8d.ui1q6.jgs3c.egjbk.7hjg6.
-       lfbrj.l9ain.83e3b.a94da.afv54.kmsj6.0bb2k.2gb2g.svcpn.gst8t.lsfpb.
-       kncrp.7t8f8.nun72.rlqep.at7cp.4v1i6.06tm5.q0b0u.ik7u0.tkael.altoe.
-       5nmcd.bi5lp.h4dsf.anhdi.aouid.al2rp.h1vu9.snk5q.maktq.1khhg.49ieb.
-       tj6dr.rlr03.i2p2c.80srs.uc2pt.mumr5.ssesp.ajua4.t3ug9.qsuea.lsv2r.
-       tli3v.mkc2j.3lfla.ridcq.g8sa0.0h3cn.un304.4actv.s1soh.d8if2.h7i1s.
-       962hr.capvc.nn9ql.ji7ab.jqnf9.kcbqh.f7cdc.a6dib.e0n2v.0h2cr.lbgcq.
-       o8621.ici78.f63vr.innc7.oak4l.bifdi.er1gr.5rng9.ku8ec.b8057.ot0v1.
-       0bcut.nbeu6.30tnu.8t6nm.eoi0f.aa8v0.so16p.v3s3g.17c17.8b33u.9204h.
-       47e82.7fdvs.97al0.rvf3p.g5898.1r4g0.5sa8h.lto8i.k6jmp.1ba8t.233rl.
-       qdm9i.q2oun.uu25l.3h4jh.g5pg6.pju8o.uapdr.ibc1u.vm1he.eloov.1tj0j.
-       8lacq.88li3.sv3ol.9162v.n4g0p.r854m.nfoqs.8bl8a.702io.k50on.j6g73.
-       ib5o2.kdp9p.rlk17.ht6e6.n8177.t46ih.fs12o.349s4.2jk85.6ap6h.ql0sv.
-       ske4g.4bbff.dlebf.5itih.1rvjh.opm64.73skm.8aa1b.psqvl.e8pjq.4et0p.
-       i3vpn.clkne.r26qm.lqadj.o54o9.jkdr9.g8nia.8th9t.0nfih.gln8h.4v1c6.
-       s6fih.j62dk.efj4o.ncgs5.2mets.s7q68.g5mms.fo5m1.lp6vj.khvku.ht6p7.
-       l7435.ucgin.h36te.b8qj4.etc8e.decre.tqtme.1cnfu.oig80.5hubk.ba946.
-       vgdka.50111.uqa5e.7dmad.g5ihl.bfru5.cmsut.58ei6.hdicf.qu9l3.ug950.
-       154sv.jdat8.es3ks.9f9mc.pnvoi.urmgt.l2te5.4ref7.jfkih.bbdg7.9j4d2.
-       2luv2.o4q5r.k8a5t.i4rf0.6rq58.vlpuf.bnhvc.9ueqd.3nb9q.ri7jb.fq6ko.
-       s10ij.ndnda.9tpie.1aoh2.umjhl.4ferf.ofut7.8nvlr.ek3cv.0ir8f.mhvd1.
-       21sv9.6su3u.kruos.mh7ig.jpa61.a9ntj.i2lak.j9pri.v1oro.d6q2j.gu339.
-       rret9.hpmrl.rqbn8.25un7.oi92h.2p78v.obd3h.nlkdo.c1kpi.lp23k.l8i1f.
-       qtl7j.8f582.i66ei.c3dgo.plgbq.afmcb.ov7no.1s15c.956lo.15vip.hk1ol.
-       l853h.p481g.n471n.r2g12.nuk9a.ivfto.09dtk.2a2en.gmi10.el9cv.3i05v.
-       hbir3.ut8eo.fr0ar.cjjio.rto4k.dk0f2.7dnv5.q96oc.qm4kn.5bgkh.i1jbt.
-       gjn6g.kei00.ac2h5.266bq.0l1mc.0odep.3mcji.ru97r.r5to8.hmp6l.bdlri.
-       rje6e.5o74l.960n1.up0hi.5rvv3.j8e56.eajnj.mfpeq.vr820.5jot8.a3a0h.
-       m3vdv.hpqas.j8t9h.h6opl.0du61.c47n1.v8cm6.t2h7p.bggol.p6iun.t54ol.
-       snp38.n93sk.4gvf4.do2ru.vh94a.fmj4s.adm0g.4p6dr.tjphq.3tsv5.fas80.
-       po9ri.pbc4a.l72il.gm4ba.stnai.lor6r.7ocv7.910pa.96o24.9qi9j.gjbhb.
-       iqipj.h68t7.6s2dl.91lsc.n01k6.ce8dv.9v936.hne43.ueapt.usb14.5v49e.
-       br3vs.malnf.hkopo.11qd1.iapks.b3dfc.b40ac.fu4pf.jjl1f.pliqq.515ea.
-       6otn8.a20j8.pe8bq.0q186.loq12.em0h9.p6v4t.nvdej.cjabj.g6j5c.07d8j.
-       g751i.ab5n8.3hbdl.gvpko.9bcjf.1ilf1.eppj9.85q6q.c8ggf.7ddg3.cmh7k.
-       kgmvs.1fg21.l1ig3.fhcls.q240c.2975k.h2gme.bql1u.lm52n.40mdf.8ud10.
-       8dmrk.ljujh.qh0k9.8k1pf.obomh.2ddpf.9mh9g.m1m33.h9plm.79jtp.q4jlq.
-       nhi0t.ruu1a.8qvtt.e55jj.05cn0.ompje.voqqc.bndna.47o49.v2oih.5sqen.
-       tohlk.e0kpg.ki3jl.ckomt.kbffp.f2mm2.sjrmb.ilejc.0k2da.tju5l.4r681.
-       702hc.dhq7s.rb9od.ngqvl.1npp5.d19iu.3ber1.s49q7.9r1gj.kfif8.ofmtg.
-       3iktq.tc5th.022as.vsfvm.tst48.hpnjp.k8c6d.t4u6a.ealql.j5gu4.v7gd5.
-       qrolf.sro7e.ac5p9.flprh.00ep2.09fdi.ed6hf.tg3vp.jj8bd.mg9gk.o83b3.
-       1u6u7.hls27.ji1fj.rptfq.scjdm.14l0j.jgvqg.g8q0m.jccan.6a0iv.qickd.
-       0to72.sbujm.oi150.6dgjg.fagn8.eeqgm.0g4tm.i6083.trr14.6ibuq.pe3ss.
-       mvpo1.lrg1i.341ea.vmn1d.hd22b.6b0au.5nr99.ed7nu.lnknl.gt6ia.a4rcd.
-       2f7q1.nhui7.kn8la.2k2lf.5mg4b.7gq5p.9ptna.02fhk.0lr57.em495.v29gh.
-       idq5o.pcvch.aq45i.3mdil.spqp5.surh7.oqk0n.mv1n0.ib4tm.4g6gc.9jlkj.
-       7bvij.ci0ma.4roqq.je13a.s71li.jiscq.fbdgv.m73nq.284gq.q6vkl.noqtr.
-       n0oub.vafgc.anjf2.cpvaa.244fq.j95hu.r818c.2dgsu.25oih.ngeiv.60iff.
-       svd9l.n6j8a.edofe.mguro.ulmhh.q8iuv.bjrim.c9f4l.g2i3n.qmcsn.q0hni.
-       gkpsq.dl1im.l2mek.8p6qj.8nki4.7m5kl.bm92c.cqst8.h8b5r.2high.md8g9.
-       d25fm.crl53.8mnlu.68ib6.d9f0p.hmriv.hmp3a.tbhcl.8mmfu.sthuc.9fs26.
-       nj6eg.bmlm6
+      ^-  @uvH  ^-  @
+      %+  snag  zar
+      :~  0w2V.Ukriv.il3Pn.O97RL.WCBiz  0w3b.RFqBh.ZtHLt.xH0uW.nl4r8  ::   0
+          0wk.S3gGl.p916u.nGq03.aIfFC   0w3e.ZmmHK.sn8Jk.UbI0q.jBfE~  ::   2
+          0w11.NMecf.pgInp.98mpL.IEXxl  0w3M.werni.0PO7m.Xr6o6.sorS5  ::   4
+          0ww.eFqOj.~Gd68.cwPXl.5~di2   0w5.UEzYe.f7GeR.Xz4NZ.94t3J   ::   6
+          0w3C.vOPG3.dBYPE.WB-JW.pJsut  0w3Z.9SG~g.--p65.ZpYR3.YAPOp  ::   8
+          0w1o.oyJ9k.FIgRG.-5DUc.nS2qV  0w1X.rBVYe.eK-Bc.IFT9k.QU70h  ::   10
+          0w1n.2RT3k.9uJIw.JJDE7.d~Kr4  0w10.Mvu1S.Twd0R.r5Fgu.zS3P2  ::   12
+          0w3O.Y9keb.6KJLZ.3k9rM.1gHfH  0w3n.FmDcG.MLl9-.1R2qr.9CDen  ::   14
+          0ws.ivj46.Ka644.zfgyb.i1Jwl   0w1m.KZhaY.~eSMm.m6aUZ.ByLM7  ::   16
+          0wD.-jkYG.QYHTh.aKUR0.TgjYn   0wI.lXRB~.Yy0TT.6EYMu.4FE72   ::   18
+          0w1o.~RlQ2.cHVpw.a9AqL.v5KvC  0w1C.A4a8V.sGFex.fllup.sRyLn  ::   20
+          0wb.IrqZl.GPTc8.xqhHO.3r37l   0w2V.2PTy0.beXoe.elV~F.V1UNp  ::   22
+          0wb.xbIcB.SZ7Y3.oeh~K.w2dZN   0w3j.Auhah.XDQSJ.6g~ZN.JNfYD  ::   24
+          0wC.LNa1e.mSrRP.xAGYb.ldDcV   0w3h.kmiYW.WU0yJ.fpNhq.MDYfB  ::   26
+          0w1L.wvqac.Ej79I.-f2hj.yyiua  0w3S.tipUz.pZEpn.AsOTf.C6kVC  ::   28
+          0w1E.s5FLM.qiA80.zIVax.jcuV9  0w3d.dwYLo.QSdkf.4PgIQ.85b62  ::   30
+          0w3.v5AQq.r9Q0D.TdUpC.pZnX3   0w21.Rhkns.CxXSM.9vwhi.b69ou  ::   32
+          0wd.cN1sl.S6PsD.gcCu7.qItJG   0w3t.RPGNR.mQ8e0.9uiL8.ktckX  ::   34
+          0w2h.MJrJz.M2mZQ.qSmo2.o6Kqz  0wU.8sWaG.sxRhN.h6NhF.ZrnfR   ::   36
+          0wO.j6rVO.5Nw0J.pCtKx.7Gqjc   0w17.uR4G4.WtINT.tHKlF.cv1sR  ::   38
+          0w3D.umDEW.Di9XE.7dj34.RYHP0  0wa.pjSrD.boWNd.WSSTU.N55uA   ::   40
+          0w1K.LUMK3.87Kel.sb9w2.axwVA  0w3V.M4cEO.n2-7O.nMUKK.4fE8U  ::   42
+          0w2I.K7SX2.EBhEv.I1v9w.fovv9  0wHOKUK.uV7SA.-soQM.Y1O-n     ::   44
+          0w1v.cIuC3.yyEcN.iNI2q.wSkxY  0w2s.BDWY7.0I8lb.R97eG.yY9zL  ::   46
+          0w1-.aE~uR.C9lnL.MsDYg.80uJC  0wJ.eUvME.BR6mB.fJIlu.5KAv9   ::   48
+          0w3c.1u83d.irTLJ.wre0x.sjxAe  0w3p.nG0oH.fDMXg.od3IO.dmsIP  ::   50
+          0w3g.H9h3H.94x6x.E6Zye.GqS6x  0w2m.lZJg1.PIJHJ.eAiJ6.jx83v  ::   52
+          0wE.kUFKH.Yqo0O.WY6qn.5~JR9   0w2t.XQ8xb.v2VpG.B4yXa.Rpjqw  ::   54
+          0w3V.piQ56.iLCrb.ltgoD.ItsXA  0w3I.y56E4.b2XzH.1Brza.K64hV  ::   56
+          0wd.Iiw-K.EfcJ-.-X245.boOBr   0w2C.K083C.4dVA8.d-L-I.sXavI  ::   58
+          0w2C.D1ul2.c1PKX.I5cL0.n3dxr  0wV.Ng~R9.SKLqw.RMpxP.dblOY   ::   60
+          0w2.HlTvo.V0D1L.p9W0j.aFU6k   0w1f.S1~BH.27Zih.7WiEh.pJEON  ::   62
+          0w1R.3turY.40u9P.1QMXG.FVJ~e  0w2t.pyk~d.ZNWDs.f7gp-.qahoH  ::   64
+          0wd.UASH0.QQ0mT.zFjag.gVv-J   0w34.uu9hS.Nuyp0.9O5GU.IqOPn  ::   66
+          0w3G.V1d4~.Zcz2l.WRfRY.Gbqdn  0w2w.Hmqa7.p1ftE.s9mN4.34in8  ::   68
+          0wK.CfMeO.vGDN2.L2OUd.DNv60   0wZ.SuM9F.WlyCQ.FwwAh.51TFp   ::   70
+          0w2W.sGPo4.beqSQ.XqsQf.ngpFw  0w2j.BxZY4.q5ueN.DYB-W.M4kK5  ::   72
+          0wm.7syof.RdI~X.L5DUP.zItuq   0wk.CpyEj.HtQtS.UKg9E.IKoZO   ::   74
+          0w2y.EARAL.Pjrps.uAkP5.4NyvD  0wp.CsyQp.QMUm3.X-V1J.p4V4p   ::   76
+          0w20.VAE8a.VACSh.IUktB.2DS9S  0w3B.hfjzy.D2ugI.o6nvB.dt6~N  ::   78
+          0wb.c-Et2.ENdTt.FyLuO.rXpAF   0w2k.fHAYb.mPp6G.Miboj.aDzEo  ::   80
+          0w3z.fhF6D.-4LXN.-P0BA.zDyZ6  0w9.ZZsl8.-aDxl.MWNZQ.n5JDG   ::   82
+          0w2g.KbM4g.D4sa1.sbtDS.NUtIe  0wP.JoKfb.h2YhC.oXbtT.rabng   ::   84
+          0w35.CHhpO.rszL-.leHOv.cx4WJ  0wy.ENViE.b9RMU.XYJe3.ebjB6   ::   86
+          0w1Q.nTf4s.WPehk.UZi6Q.hGCDD  0w3L.eoarl.IzBcW.iHoFk.DdTPs  ::   88
+          0w1r.8r6xk.zbByY.HZpKt.TkJSs  0w3.MVsxE.-cBYq.0xiNk.uZoqv   ::   90
+          0w1z.C9-kZ.RZHRF.eV1Bt.Ra4al  0wI.y-xHW.bI~ul.RRfRZ.BHRCU   ::   92
+          0wT.ZJe~e.xpTw3.WSItm.fm1ot   0we.t4i0L.jy95S.yKr6w.K1Dn4   ::   94
+          0w3x.zRFNc.CX9C0.s-3Eh.h3eLp  0w26.6yAPi.bY3ua.jaDs6.1CNTS  ::   96
+          0wn.XBNFm.12O3M.55VOX.VBO0I   0w1J.paHT2.IJZqT.e545s.SNWAo  ::   98
+          0w3-.k~kTY.t4tHP.PG5RK.Y5X-C  0w3z.w7HU2.lvfLd.2Za49.Kgxht  ::   100
+          0w33.DgYKm.i4iL5.4aDjB.sEk3o  0w20.Ll6pC.-mc2A.qehvg.oNeHh  ::   102
+          0w3r.0nO~M.hBmIU.Q3XOm.hA2Rj  0wj.WldTu.Bu4rr.Ltu7-.zpJRX   ::   104
+          0w3A.35FxJ.DGjY5.G3LHQ.LfJVT  0wv.ya8fC.PxL9-.vvw4m.y1nl9   ::   106
+          0w1C.j6o82.Nwvgn.a4iyX.s96A5  0w2f.7Oh0W.qntLx.DJMZ~.GzDu2  ::   108
+          0w2-.qx1ZS.mKo4m.NKC1U.6ovnn  0w2w.xmQFS.Z17mh.7jn~D.3tL90  ::   110
+          0wa.~IdIm.OLZ8a.pCesI.JRjWh   0w3F.iSBJt.5YTlS.sVD04.5oTsr  ::   112
+          0w1O.Umuco.Vd5gL.CiRGE.zSzCC  0w1M.RQl-y.JoZyn.Dt-ah.3yogE  ::   114
+          0w3s.63zzz.inepf.VFWBM.Sc7LT  0w3k.zh3Xi.os9gg.VBo6W.XUUUx  ::   116
+          0w2k.etCDk.P~CX6.0-Ypj.Ee0Ru  0w2Z.n-HK9.uOlO~.1YFBn.EUm23  ::   118
+          0w3e.NGtk~.ShP70.DHWZF.yY8oO  0w3x.jncKF.u2U~6.7C1Xv.z8EOE  ::   120
+          0w3Y.szv84.pyB8s.N1uuN.6hy-o  0w2R.7jkGe.cbf1h.Q3wfY.GCzqn  ::   122
+          0wz.fGDgR.dMHKH.bgGM8.1F5Ku   0w2m.yvbNA.uj~Wu.zXhF3.qzspX  ::   124
+          0w1t.NLG6L.AVQx0.idqAu.92c5Y  0w3j.-zbod.BTNxc.XHnZ6.i~cyL  ::   126
+          0wf.TkUIq.M3oEf.V7pzm.oUeac   0wJ.2V7RM.A8mAB.OBPyw.fZkca   ::   128
+          0w2o.uL5F3.kYcAL.ywJyr.MBrS6  0w3c.FS1eN.nZCE4.bCHKi.VOWrF  ::   130
+          0w20.1pmNL.NUOS-.uvM9I.AC7xS  0w3H.zw20k.wo~9g.ZqENo.4gwia  ::   132
+          0w1v.FSEaZ.JJszn.CtXLW.0BOWC  0w23.~C4lg.423lP.bAvqX.YaCat  ::   134
+          0w1t.ILS-H.zkh4N.r5cgj.0iObH  0w3R.UykuY.~xkF1.pp7Ul.I~KPN  ::   136
+          0w2H.BG1yW.Ho~bf.bxngT.WJyRN  0wd.zLMtU.Qgdhq.4xhFI.BYvSo   ::   138
+          0w2D.CCH3~.yU~dF.dOLZ~.i8Yxb  0wG.AcblY.ivT2j.w~SXO.GpbGj   ::   140
+          0w3~.Y4wSo.zN3rd.RDM-M.dNYaO  0w2H.z5te6.XIJBr.3CRwR.Dqqbo  ::   142
+          0w2p.Fqgvz.-FmKe.ELwI~.rsZTJ  0w2U.6sons.uHcqX.gMaNi.il4kf  ::   144
+          0w1D.SfglL.7vzYV.kZu2c.qVIPx  0w3o.IESE6.l66Cr.jMHnD.TJgDi  ::   146
+          0w1i.RZjrt.Kb3Dz.7I6Q6.jBFJP  0wA.o0Cfe.7CaMB.Gs2VR.aFjCZ   ::   148
+          0w2R.YjhaR.Sgk-2.74Fyb.wA99Y  0w1X.TI8BA.T3Ieb.hqE1c.M1w6u  ::   150
+          0wR.-Ky5I.5DuxO.TYfwI.wbSNy   0w36.0SrNB.EE9XH.U~T0E.xaitz  ::   152
+          0wW.315-W.vJknR.zUPYm.3-lq4   0w1m.TSem9.FDN5Y.mZt7K.lwcnE  ::   154
+          0w2L.yKxX9.HxMoP.WKcgm.Bp7Wo  0w1z.I33gJ.BuwGo.ctZXR.UHGC6  ::   156
+          0w2n.S-41-.FbR1Z.2l5Bx.VrQZw  0w7.D2RQ0.EIfuG.rTtnH.JO48c   ::   158
+          0w-.7reJB.XblQ9.Uw3jn.FlrdI   0w3A.Kuuqa.F1YS6.ZB-rZ.iy~u2  ::   160
+          0wS.ac1h4.nEPk9.eKY0y.m5KrG   0w1U.SR9hP.2ZboY.f1Ok1.ZX-k8  ::   162
+          0wS.xdF7L.qeeTC.CGR2-.XqAEe   0w2d.uJ7s5.35XBG.-CymZ.FlEUm  ::   164
+          0w2.CTr0J.b7dBt.A691l.7SYjf   0w1z.vVcZg.N1HHx.K6S06.UNvAu  ::   166
+          0w1N.zku7K.rCTvt.qGc-9.2yn7o  0w3v.fdfMA.4LSuz.Iho3N.SCThs  ::   168
+          0w2B.AyDxf.iFTJL.hoBzC.-bqJW  0w2v.VvLDG.lZSSi.16LC3.E0Quo  ::   170
+          0wZ.uHZHu.KADkF.iWll2.czGKn   0wiAW3Q.GlHxG.qeiLC.QKp6H     ::   172
+          0w-.UMmQ~.BeOjS.XM7nL.NrE1f   0w21.z1Kzt.OcFHY.QBj6L.Vu92D  ::   174
+          0w1v.IwRhA.q81J-.MoCSn.LWM38  0w3A.2dbPP.OB0uf.4gWLs.SS4y7  ::   176
+          0w3u.9SGmq.pALil.Ejas4.732GE  0w1.MYJ7V.Gt0kN.4dT9e.H1Dju   ::   178
+          0w2O.Uj9-P.4uC5Z.Yyzsh.F4agE  0w1h.65CUK.X7Jy1.JWqGs.7mdrd  ::   180
+          0w2-.kWBUe.6KTs2.LMlz1.j43i0  0wc.FHziM.aePml.ieBk5.8eqwJ   ::   182
+          0wT.l6eWX.7O5YM.4jVPQ.MxS7q   0w2b.ZTRY4.2hS3d.jIQDz.ohax9  ::   184
+          0w2W.BCV~i.J6nRC.GYmYd.PE-3f  0w2M.r~1pF.yxaLG.0X7mY.kbcmZ  ::   186
+          0w2H.Jy0dD.5~CGJ.vVl5N.NCqrd  0w2X.mU92M.4KHUY.QsQIm.cZnH0  ::   188
+          0w3T.kQ3xd.ZA6mG.fp~5u.Y7SGb  0wP.w3qQ1.Jq7~A.KlqX0.FBN-K   ::   190
+          0wL.KZjjX.q004~.moBSf.Tm813   0w28.LmGk-.LIXge.UmRjM.MOSKJ  ::   192
+          0w3Y.~TnrK.dMQIE.jcUgQ.jtMlK  0wf.cQJXb.UeQuG.fKnOW.Mvupe   ::   194
+          0w32.6z295.XJdLf.LfxB-.AU74n  0w1F.eex0C.AgBjk.OzQRd.Nzdao  ::   196
+          0w1c.gYKzt.d3BmF.ws0fc.xKAqB  0w3F.2~y3d.8bmnf.aeJd4.VDON3  ::   198
+          0wl.cN7Y6.Bv-T6.mR3gX.WJd6Y   0w1W.YXaDF.NGQui.iJ4NL.e1~aS  ::   200
+          0w3d.JGFz~.NZ9~p.IYTg4.aHw-J  0ww.g8MDD.0USjz.-MUWm.Eq5N7   ::   202
+          0w2M.VsXXs.IuE7N.j8NAT.lAtDt  0w9.p2bJR.NFhHv.PD-k9.x7cJv   ::   204
+          0w1k.zeayz.UvqJZ.2K5sO.DX7lY  0w2V.9rGs-.1ifoK.Jektk.9ib-b  ::   206
+          0wW.wtK6L.ubZX1.t3ek~.LVpGp   0w3F.pwdM5.n8QLh.HUIK9.pIFJG  ::   208
+          0w3M.VPExl.OdHHu.sC3Qh.3HzX7  0wz.Tu73b.TaxVx.RWhYq.MMlwO   ::   210
+          0wc.J6h75.wVCg9.ndTr5.-C0Hr   0w3n.Hib~g.RSETH.7BW0T.5cWBj  ::   212
+          0w1O.FnYF0.clcSF.hoMmH.lihCJ  0w1R.wLpDE.7Ku3X.v8B4T.F33Jk  ::   214
+          0w1A.u1Xy6.9cJC5.D4WS0.jdfZI  0wR.9r54a.FlL2b.LBvp6.9iTaR   ::   216
+          0w2g.tYi3K.f7lTi.FTneM.7gUQp  0wa.JJx2p.4mPll.EVLww.yXRjd   ::   218
+          0w1B.JRxYo.eQguP.8m3iV.MeSvO  0w2C.KbwGk.TxQFn.x302i.~CV0r  ::   220
+          0w1q.n~9Wx.QD6bR.ZtJSG.vk72y  0wj.3bYhB.X49YD.lSIYp.QUah9   ::   222
+          0wD.zFbw2.M1eKo.b~woh.AHW2J   0w22.JsU2i.QEd0L.U1ypz.FKh-e  ::   224
+          0wP.yNjBd.9hoR0.LftGu.R3D0B   0w3h.hFb1J.fRqvi.p0Vf0.r39xP  ::   226
+          0w3Z.f8ATL.NCgDB.6yR-l.b2do-  0w1g.K9vME.LaoAw.x9C0k.1Ie2X  ::   228
+          0w36.DzGry.G1qRx.Z~K05.NgM1j  0w3F.1a~Zh.FKBXa.35Rd0.839r0  ::   230
+          0w2C.Kcrd5.7vixd.Tjsws.JzYdW  0wC.XI5BG.HI3Ta.d8roK.dUfKi   ::   232
+          0w2c.c16ta.IVqWo.Hf~6p.6AlCG  0wT.yguKp.T0GRt.GPMz6.SXDio   ::   234
+          0wn.1Fg-g.j542C.kKwZl.Vs91r   0w2.AfT1v.Q4WBg.8SuCi.w~Czr   ::   236
+          0wB.0fRem.N9o9~.rXxsM.gQ0Pe   0w13.6aZYQ.plf47.aW~6z.tEnZr  ::   238
+          0w1k.f31i2.8U3CQ.eidrC.e70b6  0w-.D5Jq2.cQ7m1.asl~k.PU6D6   ::   240
+          0w20.3GvjZ.6gC6~.rXPfO.HHJUv  0wJ.i2eXe.7ps3d.4MZoT.EVWSu   ::   242
+          0w2j.~TQ26.iSUMC.eIetC.q8Qud  0w4.GdF~3.mSosY.~OUIv.ZIWMb   ::   244
+          0w2H.15yaC.SRQS3.d4aST.9fHaq  0w1D.vw71j.TuvRV.EZ24I.j5Ozr  ::   246
+          0wa.jyzsm.fCIsM.t~fBq.3ETAS   0w1X.-QDve.PeZbP.yiTNj.dRZXc  ::   248
+          0w3G.i0gNT.aTiZg.YSElf.~Mu4n  0wP.vP9Q2.TmwJW.wTm7~.optmq   ::   250
+          0wR.0WQu-.u8Zcv.ZJgXt.SIWYa   0wm.K7GpT.N5-C~.gca6d.FLwHE   ::   252
+          0wE.X8Ijk.07160.u3a7e.rkxlw   0w3L.crn06.cqLpb.c6-N3.FeY6S  ::   254
+      ==
     --
 =>  |%
     ::::

@@ -85,6 +85,7 @@
               [%hop p=@ud]                              ::  set cursor position
               [%lin p=(list ,@c)]                       ::  set current line
               [%mor ~]                                  ::  newline
+              [%sav p=path q=@]                         ::  save to file
           ==                                            ::
 ++  blot                                                ::  kill ring
           $:  p=@ud                                     ::  length
