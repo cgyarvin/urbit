@@ -666,22 +666,11 @@ _lo_rand(u2_reck* rec_u, c3_w* rad_w)
 /* _lo_make(): boot from scratch.
 */
 static void
-_lo_make(u2_reck* rec_u, c3_l biz_l)
+_lo_make(u2_reck* rec_u, u2_noun fav)
 {
-  u2_noun ten;
-
-  //  Get some host entropy.
-  //
-  {
-    c3_w rad_w[8];
-
-    _lo_rand(rec_u, rad_w);
-    ten = u2_ci_words(8, rad_w);
-  }
-
   //  Authenticate and initialize terminal.
   //
-  u2_term_ef_bake(rec_u, u2nq(c3__make, c3__zuse, biz_l, ten));
+  u2_term_ef_bake(rec_u, fav);
 
   //  Work through start sequence.
   //
@@ -957,11 +946,28 @@ u2_lo_loop(u2_reck* rec_u, u2_noun cpu, u2_noun meh)
     switch ( u2h(meh) ) {
       default: c3_assert(0);
 
+      case c3__have: {
+        u2_noun pac = u2t(meh);
+        u2_noun fav = u2nc(c3__cash, u2_cke_cue(u2k(pac)));
+
+        _lo_make(rec_u, fav);
+      } break;
+
       case c3__make: {
-        c3_l biz_l = u2t(meh);
+        c3_l    biz_l = u2t(meh);
+        u2_noun ten;
+
+        //  Get some host entropy.
+        //
+        {
+          c3_w rad_w[8];
+
+          _lo_rand(rec_u, rad_w);
+          ten = u2_ci_words(8, rad_w);
+        }
 
         u2z(meh);
-        _lo_make(rec_u, biz_l);
+        _lo_make(rec_u, u2nq(c3__make, c3__zuse, biz_l, ten));
       } break;
     }
   }

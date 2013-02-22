@@ -305,7 +305,7 @@
 ++  moth  ,[p=meth q=math r=(unit octs)]                ::  http operation
 ++  move  ,[p=(unit flag) q=hose r=card]                ::  internal event
 ++  mime  (list ,@ta)                                   ::  mime type
-++  name  ,[p=@t q=(unit ,[p=? q=@t]) r=@t]             ::  first mid/nick last
+++  name  ,[p=@t q=(unit ,@t) r=(unit ,@t) s=@t]        ::  first mid/nick last
 ++  nope  ^~(^-(arch [%| @ ~]))                         ::  empty node
 ++  note                                                ::  app response
           $%  [%ez p=path q=(unit)]                     ::  simple result

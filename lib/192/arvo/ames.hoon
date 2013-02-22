@@ -418,12 +418,11 @@
       ++  ha                                            ::  adopt new license
         |=  [our=flag mac=mace wil=will] 
         ^-  town
-        ?>  ?&  !=(~ mac) 
-                ?=(^ wil) 
-                =(our r.p.q.i.wil) 
-                =(wil (grip wil ~))
-                (real mac wil)
-            ==
+        ?>  !=(~ mac) 
+        ?>  ?=(^ wil) 
+        ?>  =(our r.p.q.i.wil) 
+        ?>  =(wil (grip wil ~))
+        ?>  (real mac wil)
         %_    ton
             urb
           %+  ~(put by urb.ton)

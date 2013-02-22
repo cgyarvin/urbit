@@ -132,6 +132,7 @@
 #   define c3__carp   c3_s4('c','a','r','p')
 #   define c3__cary   c3_s4('c','a','r','y')
 #   define c3__case   c3_s4('c','a','s','e')
+#   define c3__cash   c3_s4('c','a','s','h')
 #   define c3__cast   c3_s4('c','a','s','t')
 #   define c3__cat    c3_s3('c','a','t')
 #   define c3__cato   c3_s4('c','a','t','o')

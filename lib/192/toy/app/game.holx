@@ -1,18 +1,8 @@
 =>  !#(/===$main/lib/hume/)
 |=  [who=flag est=time eny=@uw was=path]
 |=  *
-|=  ~
+|=  [neighbor=tape ~]
 ^-  bowl
-=+  ^=  hey  ^-  (list card)
-    :~  [%text "game, from {<who>};"]
-        [%text "      over {<eny>};"]
-        [%text "      upon {<est>};"]
-        [%text "      with {<was>}."]
-    ==
-=-  [(weld hey p.qoy) q.qoy]
-^=  qoy
-=+  suf=(shas %game eny)
-=+  neighbor="Elvis"
 =+  messages=*(list ,@t)
 %^    lunt  
     who 
@@ -21,7 +11,7 @@
                 [%| .127.0.0.1]
             ==
             /game/
-            suf
+            (shas %game eny)
             /toy/
         ==
     ==

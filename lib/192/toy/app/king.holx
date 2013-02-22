@@ -1,0 +1,38 @@
+|=  [who=flag est=time eny=@uw was=path]
+|=  *
+|=  [kig=@p ~]
+^-  bowl
+?>  &(=(2 (met 3 kig)) =(who (end 3 1 kig)))
+:-  :~  [%text "crowning king {<kig>} ({<`@ud`kig>}, mark 0)"]
+    ==
+:-  ~
+:-  :~  [~ [%up %pass "entropy: "]]
+    ==
+|=  [now=@da pax=path nut=note]
+^-  bowl
+?>  ?=(%up -.nut)
+=+  tey=(shax p.nut)
+=+  buc=(buck .^(%a '0' (scot %p who) %buck ~))
+?>  ?=(^ p.buc)
+=+  orc=p.i.p.buc
+=+  rig=q.i.p.buc
+=+  rud=(wear rig)
+:-  :~  [%text "entropy check: {<`@p`(mug tey)>}"]
+    ==
+:-  ~
+:-  :~  [~ [%up %text "name: "]]
+    ==
+|=  [now=@da pax=path nut=note]
+^-  bowl
+?>  ?=(%up -.nut)
+=+  bur=(shax (mix (sham buc) tey))
+=+  loy=(brew 2.048 bur)
+=+  mac=`mace`[[0 sec:ex:loy] ~]
+=+  syp=`step`[`bran`[0 [~ orc] kig] [%king p.nut] pub:ex:loy]
+=+  ded=`deed`[(sign:se:rud @ (shaf %meld (sham syp))) syp]
+=+  wil=`will`[ded q.buc]
+=+  nuv=(rsh 3 1 ~(rent co %% %p kig))
+:-  :~  [%text "made {<kig>}, {(rip 3 p.nut)}."]
+        [%save [nuv %atom ~] (jam kig mac wil)]
+    ==
+~

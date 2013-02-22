@@ -56,7 +56,7 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
 
   c3_i ch_i;
 
-  while ( (ch_i = getopt(argc, argv, "k:n:agqv")) != -1 ) {
+  while ( (ch_i = getopt(argc, argv, "k:n:i:agqv")) != -1 ) {
     switch ( ch_i ) {
       case 'a': { abo = u2_yes; break; }
       case 'g': { gab = u2_yes; break; }
@@ -77,6 +77,12 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
         }
         break;
       }
+      case 'i': {
+        u2_noun vit = u2_walk_load(optarg);
+
+        meh = u2nc(c3__have, vit);
+      } break;
+
       case 'q': { veb = u2_no; break; }
       case 'v': { veb = u2_yes; break; }
       case '?': default: {
