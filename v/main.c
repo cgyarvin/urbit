@@ -46,17 +46,18 @@ static u2_weak
 u2_ve_getopt(c3_i argc, c3_c** argv)
 {
   u2_noun map = 0;
-  c3_w    kno_w = 0;
+  c3_w    kno_w = DefaultKernel;
   u2_noun hep = u2_nul;
   u2_noun meh = u2_nul;
   u2_bean abo = u2_no;
   u2_bean gab = u2_no;
   u2_bean pro = u2_no;
-  u2_bean veb = u2_no;
+  u2_bean veb = u2_yes;
+  u2_bean rez = u2_no;
 
   c3_i ch_i;
 
-  while ( (ch_i = getopt(argc, argv, "k:n:i:agqv")) != -1 ) {
+  while ( (ch_i = getopt(argc, argv, "k:n:i:lagqvR")) != -1 ) {
     switch ( ch_i ) {
       case 'a': { abo = u2_yes; break; }
       case 'g': { gab = u2_yes; break; }
@@ -85,6 +86,7 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
 
       case 'q': { veb = u2_no; break; }
       case 'v': { veb = u2_yes; break; }
+      case 'R': { rez = u2_yes; break; }
       case '?': default: {
         return u2_none;
       }
@@ -103,6 +105,20 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
         *ash_c = 0;
       }
     }
+
+    if ( u2_yes == rez ) {
+      c3_c yes[2];
+
+      yes[1] = 0;
+      printf("really forget all events in %s? (y/N) ", argv[optind]);
+      scanf("%1s", yes);
+
+      if ( yes[0] != 'y' ) {
+        printf("okay, we won't do that!\n");
+        exit(1);
+      }
+      else printf("%s will be reset.\n", argv[optind]);
+    }
     map = u2_ckd_by_put(map, c3__cpu, u2_ci_string(argv[optind]));
   }
   else return u2_none;
@@ -113,6 +129,7 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
   map = u2_ckd_by_put(map, c3__gab, gab);
   map = u2_ckd_by_put(map, c3__pro, pro);
   map = u2_ckd_by_put(map, c3__veb, veb);
+  map = u2_ckd_by_put(map, c3__rez, rez);
  
   if ( hep != u2_nul ) {
     map = u2_ckd_by_put(map, c3__hep, hep); 
@@ -309,13 +326,14 @@ main(c3_i   argc,
   {
     u2_noun cpu = u2_ckd_by_get(u2k(u2_Host.map), c3__cpu);
     u2_noun meh = u2_ckd_by_get(u2k(u2_Host.map), c3__meh);
+    u2_noun rez = u2_ckd_by_get(u2k(u2_Host.map), c3__rez);
 
     if ( !((u2_nul == cpu) ^ (u2_nul == meh)) ) {
       fprintf(stderr, "must load an existing ship or create one\n");
       exit(1);
     }
 
-    u2_lo_loop(&u2_Host.rec_u[0], cpu, meh);
+    u2_lo_loop(&u2_Host.rec_u[0], cpu, meh, rez);
   }
   return 0;
 }

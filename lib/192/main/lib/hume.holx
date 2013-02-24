@@ -1,5 +1,5 @@
 !:
-::  models and functions for the hume http framework
+::  application standard library
 ::
 =>  
   |%                                                      ::  models
@@ -115,6 +115,24 @@
     ^-  bowl
     [saw [~ (weld ask hup) ..$]]
   --
+::
+++  polo                                                  ::  prompt
+  |=  [sel=path pim=prom pro=tape use=tape]
+  |*  [rul=_rule woo=||(* bowl)]
+  ^-  bowl 
+  =.  sel  [%polo sel]
+  :+  ~  ~
+  :-  :~  [sel [%up pim pro]]
+      ==
+  |=  [now=@da pax=path nut=note]
+  ^-  bowl
+  ?>  &(=(pax sel) ?=(%up -.nut))
+  =+  rey=(rush p.nut rul)
+  ?~  rey
+    :-  [[%text use] ~]
+    :-  ~
+    [[[sel [%up pim pro]] ~] ..$]
+  (woo u.rey)
 ::
 ++  roil
   |=  [mad=scad zab=scab ras=rush]

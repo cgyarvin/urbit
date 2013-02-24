@@ -1467,6 +1467,11 @@
     =+  vex=(sef tub)
     ?@(q.vex vex ?:(=(~ q.q.u.q.vex) vex [p=p.vex q=~]))
   ::
+  ++  funk
+    |*  [pre=tape sef=_rule]
+    |=  tub=nail
+    (sef p.tub (weld pre q.tub))
+  ::
   ++  here
     ~/  %here
     |*  [hez=_|=([a=pint b=*] [a b]) sef=_rule]
@@ -1477,7 +1482,18 @@
       vex
     [p=p.vex q=[~ u=[p=(hez [p.tub p.q.u.q.vex] p.u.q.vex) q=q.u.q.vex]]]
   ::
-  ++  just
+  ++  jest
+    |=  daf=@t
+    |=  tub=nail
+    =+  fad=daf
+    |-  ^-  (like ,@t)
+    ?:  =(0 daf)
+      [p=p.tub q=[~ u=[p=fad q=tub]]]
+    ?:  |(?=(~ q.tub) !=((end 3 1 daf) i.q.tub))
+      (fail tub)
+    $(p.tub (lust i.q.tub p.tub), q.tub t.q.tub, daf (rsh 3 1 daf))
+  ::
+  ++  just                                              ::  XX redundant, jest
     ~/  %just
     |=  daf=char
     ~/  %fun

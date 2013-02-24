@@ -243,6 +243,7 @@ u2_walk(u2_reck* rec_u, const c3_c* dir_c, u2_noun old)
     struct stat buf_b;
 
     if ( 0 != stat(dir_c, &buf_b) ) {
+      uL(fprintf(uH, "can't stat %s\n", dir_c));
       // return u2_cm_bail(c3__fail);
       c3_assert(0);
     }

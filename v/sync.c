@@ -234,11 +234,12 @@ _sync_book_m(u2_reck* rec_u, u2_noun our, u2_noun pod, u2_noun map, u2_noun ova)
   if ( u2_nul == map ) {
     u2z(our);
     u2z(pod);
+
     return ova;
   }
   else {
     u2_noun n_map, pn_map, qn_map, l_map, r_map;
-    u2_noun bok, det;
+    u2_noun bok;
 
     u2_cr_trel(map, &n_map, &l_map, &r_map);
     u2_cr_cell(n_map, &pn_map, &qn_map);
@@ -246,15 +247,21 @@ _sync_book_m(u2_reck* rec_u, u2_noun our, u2_noun pod, u2_noun map, u2_noun ova)
 
     ova = _sync_book_m(rec_u, u2k(our), u2k(pod), u2k(l_map), ova);
     ova = _sync_book_m(rec_u, u2k(our), u2k(pod), u2k(r_map), ova);
-    det = _sync_edit(rec_u, pod, u2k(bok), u2k(qn_map), u2_nul);
 
-    if ( u2_nul != det ) {
-      u2_noun fav = u2nq(c3__edit, our, u2k(bok), det);
-
-      ova = u2nc(u2nc(u2nq(c3__gold, c3__sync, u2k(rec_u->sen), u2_nul), fav),
-                 ova);
-    } else {
+    if ( (u2_yes == u2h(qn_map)) || ('~' == u2_cr_byte(0, bok)) ) {
       u2z(our);
+    } 
+    else { 
+      u2_noun det = _sync_edit(rec_u, pod, u2k(bok), u2k(qn_map), u2_nul);
+
+      if ( u2_nul != det ) {
+        u2_noun fav = u2nq(c3__edit, our, u2k(bok), det);
+
+        ova = u2nc(u2nc(u2nq(c3__gold, c3__sync, u2k(rec_u->sen), u2_nul), fav),
+                   ova);
+      } else {
+        u2z(our);
+      }
     }
     u2z(map);
     return ova;
@@ -282,6 +289,7 @@ _sync_post(u2_reck* rec_u, u2_noun our, u2_noun pod, u2_noun nod, u2_noun ova)
   }
 }
 
+#if 0
 /* _sync_post_m(): sync `map` to a change list `ova`.
 */
 static u2_noun
@@ -323,6 +331,7 @@ _sync_post_m(u2_reck* rec_u, u2_noun map, u2_noun ova)
     return ova;
   }
 }
+#endif
 
 /* u2_sync_reck(): traverse filesystem for changes -> (list ovum)
 */
@@ -333,7 +342,6 @@ u2_sync_reck(u2_reck* rec_u)
   u2_noun nod; 
 
   strcpy(pas_c, rec_u->dir_c);
-  strcat(pas_c, "/sin");
  
   nod = u2_walk(rec_u, pas_c, 0);
   free(pas_c);

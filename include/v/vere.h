@@ -142,6 +142,7 @@
       typedef struct {
         c3_l mag_l;                         //  mug of log format, 'a', 'b'...
         c3_w kno_w;                         //  kernel number validated with
+        c3_l key_l;                         //  mug of crypto key, or 0
         c3_l sev_l;                         //  host process identity
         c3_l tno_l;                         //  terminal count in host
       } u2_uled;
@@ -282,6 +283,7 @@
         u2_noun our;                      //  main owner
         u2_noun pod;                      //  owner as string
         u2_noun roe;                      //  temporary unsaved events
+        u2_noun key;                      //  log key, or 0
 
         u2_noun ken;                      //  kernel formula
         u2_noun syd;                      //  kernel seed 
@@ -736,7 +738,10 @@
       /* u2_lo_loop(): enter main event loop.
       */
         void
-        u2_lo_loop(u2_reck* rec_u, u2_noun cpu, u2_noun meh);
+        u2_lo_loop(u2_reck* rec_u, 
+                   u2_noun cpu, 
+                   u2_noun meh,
+                   u2_bean rez);
 
       /* u2_lo_bail(): clean up all event state.
       */

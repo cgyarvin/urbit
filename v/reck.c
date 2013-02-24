@@ -303,6 +303,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
   rec_u->our = 0;
   rec_u->pod = 0;
   rec_u->roe = 0;
+  rec_u->key = 0;
 
   rec_u->dir_c = 0;
 

@@ -770,6 +770,7 @@
 #   define c3__rasp   c3_s4('r','a','s','p')
 #   define c3__raw    c3_s3('r','a','w')
 #   define c3__ret    c3_s3('r','e','t')
+#   define c3__rez    c3_s3('r','e','z')
 #   define c3__read   c3_s4('r','e','a','d')
 #   define c3__reck   c3_s4('r','e','c','k')
 #   define c3__reef   c3_s4('r','e','e','f')

@@ -117,6 +117,7 @@ u2_term_io_init(u2_reck* rec_u)
     if ( -1 == fcntl(fid_i, F_GETFL, &uty_u->cug_i) ) {
       c3_assert(!"init-fcntl");
     }
+    uty_u->cug_i &= ~O_NONBLOCK;                // could fix?
     uty_u->nob_i = uty_u->cug_i | O_NONBLOCK;   // O_NDELAY on older unix
   }
 

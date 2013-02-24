@@ -513,11 +513,19 @@ _lo_home(u2_reck* rec_u)
 
   //  Set pathname and create main directory.
   {
-    rec_u->dir_c = u2_cr_string(rec_u->pod);
-    rec_u->dir_c += 1;
-    if ( strlen(rec_u->dir_c) > 29 ) {
-      rec_u->dir_c[29] = 0;
+    c3_c* pod_c = u2_cr_string(rec_u->pod);
+    c3_c* dir_c;
+
+    pod_c = u2_cr_string(rec_u->pod);
+    if ( strlen(pod_c) > 30 ) {
+      pod_c[30] = 0;
     }
+    dir_c = malloc(4 + (strlen(pod_c) - 1) + 1);
+    sprintf(dir_c, "hub/%s", pod_c + 1);
+
+    rec_u->dir_c = dir_c;
+    free(pod_c);
+
     uL(fprintf(uH, "home: %s\n", rec_u->dir_c));
     u2z(who);
   }
@@ -525,24 +533,20 @@ _lo_home(u2_reck* rec_u)
   //  Create subdirectories.
   //
   {
+    mkdir("hub", 0700);
+
     if ( 0 != mkdir(rec_u->dir_c, 0700) ) {
       perror(rec_u->dir_c);
       u2_lo_bail(rec_u);
     }
 
-    sprintf(ful_c, "%s/sin", rec_u->dir_c);
+    sprintf(ful_c, "%s/~get", rec_u->dir_c);
     if ( 0 != mkdir(ful_c, 0700) ) {
       perror(ful_c);
       u2_lo_bail(rec_u);
     }
 
-    sprintf(ful_c, "%s/get", rec_u->dir_c);
-    if ( 0 != mkdir(ful_c, 0700) ) {
-      perror(ful_c);
-      u2_lo_bail(rec_u);
-    }
-
-    sprintf(ful_c, "%s/put", rec_u->dir_c);
+    sprintf(ful_c, "%s/~put", rec_u->dir_c);
     if ( 0 != mkdir(ful_c, 0700) ) {
       perror(ful_c);
       u2_lo_bail(rec_u);
@@ -552,7 +556,7 @@ _lo_home(u2_reck* rec_u)
   //  Copy default content.
   //
   {
-    sprintf(ful_c, "cp -r %s/%d/main %s/sin", 
+    sprintf(ful_c, "cp -r %s/%d/main %s", 
                    U2_LIB, rec_u->kno_w, rec_u->dir_c);
     uL(fprintf(uH, "home: %s\n", ful_c));
     if ( 0 != system(ful_c) ) {
@@ -560,7 +564,7 @@ _lo_home(u2_reck* rec_u)
       u2_lo_bail(rec_u);
     }
 
-    sprintf(ful_c, "cp -r %s/%d/test %s/sin", 
+    sprintf(ful_c, "cp -r %s/%d/test %s", 
                    U2_LIB, rec_u->kno_w, rec_u->dir_c);
     uL(fprintf(uH, "home: %s\n", ful_c));
     if ( 0 != system(ful_c) ) {
@@ -568,7 +572,7 @@ _lo_home(u2_reck* rec_u)
       u2_lo_bail(rec_u);
     }
 
-    sprintf(ful_c, "cp -r %s/%d/toy %s/sin", 
+    sprintf(ful_c, "cp -r %s/%d/toy %s", 
                    U2_LIB, rec_u->kno_w, rec_u->dir_c);
     uL(fprintf(uH, "home: %s\n", ful_c));
     if ( 0 != system(ful_c) ) {
@@ -593,7 +597,7 @@ _lo_zest(u2_reck* rec_u)
   
   //  Create the record file.
   {
-    sprintf(ful_c, "%s/egz.hope", rec_u->dir_c);
+    sprintf(ful_c, "%s/~egz.hope", rec_u->dir_c);
 
     if ( ((fid_i = open(ful_c, O_CREAT | O_WRONLY | O_EXCL, 0600)) < 0) || 
          (fstat(fid_i, &buf_b) < 0) ) 
@@ -636,10 +640,10 @@ _lo_zest(u2_reck* rec_u)
     rec_u->roe = 0;
   }
 
-#if 0
-  //  Copy the egz into ham, which will not be changed.
+#if 1
+  //  Copy the egz into ham, the factory default.
   {
-    sprintf(ful_c, "rm -f %s/ham.hope; cp %s/egz.hope %s/ham.hope",
+    sprintf(ful_c, "rm -f %s/~ham.hope; cp %s/~egz.hope %s/~ham.hope",
                    rec_u->dir_c, rec_u->dir_c, rec_u->dir_c);
 
     if ( 0 != system(ful_c) ) {
@@ -689,19 +693,25 @@ _lo_make(u2_reck* rec_u, u2_noun fav)
     }
   }
 
+  //  Configure the http server.
+  //
+  {
+    u2_http_ef_bake(rec_u);
+  }
+
+  //  Work some more.
+  //
+  _lo_work(rec_u);
+
   //  Create the ship directory.
   //
   _lo_zest(rec_u);
-
-  //  Configure the http server.
-  //
-  u2_http_ef_bake(rec_u);
 }
 
 /* _lo_rest(): restore from record, or exit.
 */
 static void
-_lo_rest(u2_reck* rec_u, u2_noun cpu)
+_lo_rest(u2_reck* rec_u, u2_noun cpu, u2_noun rez)
 {
   struct stat buf_b;
   c3_i        fid_i;
@@ -715,9 +725,22 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu)
     u2z(cpu);
   }
 
+  //  Maybe we should delete all your fscking data.
+  {
+    if ( u2_yes == rez ) {
+      sprintf(ful_c, "rm -f %s/~egz.hope; cp %s/~ham.hope %s/~egz.hope",
+                     rec_u->dir_c, rec_u->dir_c, rec_u->dir_c);
+
+      if ( 0 != system(ful_c) ) {
+        uL(fprintf(uH, "rest: could not reset to factory!\n"));
+        u2_lo_bail(rec_u);
+      }
+    }
+  }
+
   //  Open the fscking file.  Does it even exist?
   {
-    sprintf(ful_c, "%s/egz.hope", rec_u->dir_c);
+    sprintf(ful_c, "%s/~egz.hope", rec_u->dir_c);
 
     if ( ((fid_i = open(ful_c, O_RDWR)) < 0) || 
          (fstat(fid_i, &buf_b) < 0) ) 
@@ -740,7 +763,7 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu)
       u2_lo_bail(rec_u);
     }
 
-    if ( u2_mug('d') != led_u.mag_l ) {
+    if ( u2_mug('e') != led_u.mag_l ) {
       uL(fprintf(uH, "record (%s) is obsolete (or corrupt)\n", ful_c));
       u2_lo_bail(rec_u);
     }
@@ -933,14 +956,14 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu)
 /* u2_lo_loop(): begin main event loop.
 */
 void
-u2_lo_loop(u2_reck* rec_u, u2_noun cpu, u2_noun meh)
+u2_lo_loop(u2_reck* rec_u, u2_noun cpu, u2_noun meh, u2_noun rez)
 {
   _lo_init(rec_u);
 
   c3_assert((u2_nul == cpu) ^ (u2_nul == meh));
 
   if ( u2_nul == meh ) {
-    _lo_rest(rec_u, cpu);
+    _lo_rest(rec_u, cpu, rez);
   }
   else {
     switch ( u2h(meh) ) {
