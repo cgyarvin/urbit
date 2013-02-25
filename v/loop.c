@@ -128,6 +128,7 @@ u2_lo_bail(u2_reck* rec_u)
 
   exit(1);
 }
+int c3_cooked() { _lo_exit(&u2_Host.rec_u[0]); return 0; }
 
 /* _lo_tape(): dump a tape, old style.  Don't do this.
 */
@@ -267,10 +268,16 @@ static void
 _lo_pack(u2_reck* rec_u, u2_noun ron)
 {
   u2_ulog* lug_u = &u2_Host.lug_u;
-  c3_w     len_w = u2_cr_met(5, ron);
-  c3_w     tar_w = (lug_u->len_w + len_w);
+  c3_w     len_w, tar_w;
   c3_w*    img_w;
   u2_ular  lar_u;
+
+  if ( rec_u->key ) {
+    ron = u2_cn_mung(u2k(rec_u->toy.shen), u2nc(u2k(rec_u->key), ron));
+  }
+
+  len_w = u2_cr_met(5, ron);
+  tar_w = (lug_u->len_w + len_w);
 
   lar_u.syn_w = u2_mug(tar_w);
   lar_u.mug_w = u2_mug(ron);
@@ -582,6 +589,171 @@ _lo_home(u2_reck* rec_u)
   }
 }
 
+/* _lo_cask(): ask for a passcode.
+*/
+static u2_noun
+_lo_cask(u2_reck* rec_u, c3_c* dir_c, u2_bean nun)
+{
+  c3_c*   paw_c = malloc(59);
+  size_t  byt_t = 58;
+  u2_noun key;
+
+  uH;
+  while ( 1 ) {
+    printf("passcode for %s%s? ~", dir_c, (u2_yes == nun) ? " [none]" : "");
+    byt_t = getline(&paw_c, &byt_t, stdin);
+
+    if ( byt_t < 0 ) {
+      printf("getline: could not read??\n");
+      u2_lo_bail(rec_u);
+    }
+    else if ( byt_t == 1 ) {
+      c3_assert(paw_c[0] == '\n');
+
+      if ( u2_yes == nun ) {
+        key = 0; break;
+      }
+      else {
+        continue;
+      }
+    }
+    else {
+      c3_c* say_c = malloc(byt_t + 2);
+      u2_noun say; 
+
+      say_c[0] = '~';
+      strcpy(say_c + 1, paw_c);
+      say_c[byt_t] = 0;
+
+      say = u2_cn_mung(u2k(rec_u->toy.slay), u2_ci_string(say_c));
+      if ( (u2_nul == say) || 
+           (u2_blip != u2h(u2t(say))) ||
+           ('p' != u2h(u2t(u2t(say)))) )
+      {
+        printf("invalid passcode\n");
+        continue;
+      }
+      key = u2k(u2t(u2t(u2t(say))));
+
+      u2z(say);
+      break;
+    }
+  }
+  uL(0);
+  return key;
+}
+
+/* _lo_bask(): ask a yes or no question.
+*/
+static u2_bean
+_lo_bask(c3_c* pop_c, u2_bean may)
+{
+  u2_bean yam;
+
+  uH;
+  {
+    c3_c y_c[2];
+
+    printf("%s %s? ", pop_c, (u2_yes == may) ? "[Y/n]" : "[y/N]");
+    scanf("%1s", y_c);
+    
+    if ( u2_yes == may ) {
+      yam = ((y_c[0] != 'n') && y_c[0] != 'N') ? u2_yes : u2_no;
+    }
+    else {
+      yam = ((y_c[0] != 'y') && y_c[0] != 'Y') ? u2_no : u2_yes;
+    }
+  }
+  uL(0);
+  return yam;
+}
+
+/* _lo_rand(): fill a 256-bit (8-word) buffer.
+*/
+static void
+_lo_rand(u2_reck* rec_u, c3_w* rad_w)
+{
+  c3_i fid_i = open("/dev/random", O_RDONLY);
+
+  if ( 32 != read(fid_i, (c3_y*) rad_w, 32) ) {
+    c3_assert(!"lo_rand");
+  }
+  close(fid_i);
+}
+
+/* _lo_fast(): offer to save passcode by mug in home directory.
+*/
+static void
+_lo_fast(u2_reck* rec_u, u2_noun key)
+{
+  c3_c    ful_c[2048];
+  c3_c*   hom_c = getenv("HOME");
+  c3_l    mug_l = u2_mug(key);
+  u2_noun gum   = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', mug_l));
+  c3_c*   gum_c = u2_cr_string(gum);
+  u2_noun yek = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', key));
+  c3_c*   yek_c = u2_cr_string(yek);
+
+  sprintf(ful_c, "save passcode as %s/.urbit/%s.txt", hom_c, gum_c);
+  if ( u2_no == _lo_bask(ful_c, u2_no) ) {
+    uL(fprintf(uH, "passcode: %s.  remember it or write it down!\n", yek_c));
+  }
+  else {
+    c3_i fid_i;
+
+    sprintf(ful_c, "%s/.urbit", hom_c);
+    mkdir(ful_c, 0700);
+
+    sprintf(ful_c, "%s/.urbit/%s.txt", hom_c, gum_c);
+    if ( (fid_i = open(ful_c, O_CREAT | O_TRUNC | O_WRONLY, 0600)) < 0 ) {
+      uL(fprintf(uH, "fast: could not save %s\n", ful_c));
+      u2_lo_bail(rec_u);
+    }
+    write(fid_i, yek_c, strlen(yek_c));
+    close(fid_i);
+  }
+  free(gum_c);
+  u2z(gum);
+
+  free(yek_c);
+  u2z(yek);
+}
+
+/* _lo_staf(): try to load passcode by mug from home directory.
+*/
+static u2_noun
+_lo_staf(u2_reck* rec_u, c3_l mug_l)
+{
+  c3_c    ful_c[2048];
+  c3_c*   hom_c = getenv("HOME");
+  u2_noun gum   = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', mug_l));
+  c3_c*   gum_c = u2_cr_string(gum);
+  u2_noun txt;
+
+  sprintf(ful_c, "%s/.urbit/%s.txt", hom_c, gum_c);
+  txt = u2_walk_safe(ful_c);
+
+  if ( 0 == txt ) {
+    return 0;
+  }
+  else {
+    u2_noun say = u2_cn_mung(u2k(rec_u->toy.slay), txt);
+    u2_noun key;
+
+    if ( (u2_nul == say) || 
+         (u2_blip != u2h(u2t(say))) ||
+         ('p' != u2h(u2t(u2t(say)))) ) 
+    {
+      uL(fprintf(uH, "staf: %s is corrupt\n", ful_c));
+      u2_lo_bail(rec_u);
+    }
+    key = u2k(u2t(u2t(u2t(say))));
+
+    u2z(say);
+    return key;
+  }
+}
+
 /* _lo_zest(): create a new, empty record.
 */
 static void
@@ -608,12 +780,44 @@ _lo_zest(u2_reck* rec_u)
     u2_Host.lug_u.fid_i = fid_i;
   }
 
+  //  See if the user wants to use a passcode.
+  //
+  {
+    rec_u->key = _lo_cask(rec_u, rec_u->dir_c, u2_yes);
+
+    if ( 0 == rec_u->key ) {
+      if ( u2_no == _lo_bask("generate a random passcode", u2_yes) ) {
+        uL(fprintf(uH, "events in %s will be saved in the clear.\n", 
+                        rec_u->dir_c));
+        rec_u->key = 0;
+      }
+      else {
+        c3_w    rad_w[8];
+
+        _lo_rand(rec_u, rad_w);
+        rec_u->key = u2_ci_words(2, rad_w);
+      }
+    } 
+
+    if ( 0 != rec_u->key ) {
+      _lo_fast(rec_u, u2k(rec_u->key));
+    }
+  }
+
   //  Write the header.
   {
     u2_uled led_u;
 
-    led_u.mag_l = u2_mug('d');
+    led_u.mag_l = u2_mug('e');
     led_u.kno_w = rec_u->kno_w;
+
+    if ( 0 == rec_u->key ) {
+      led_u.key_l = 0; 
+    } else {
+      led_u.key_l = u2_mug(rec_u->key);
+
+      c3_assert(!(led_u.key_l >> 31));
+    }
     led_u.sev_l = rec_u->sev_l;
     led_u.tno_l = 1;
 
@@ -654,19 +858,6 @@ _lo_zest(u2_reck* rec_u)
 #endif
 }
 
-/* _lo_rand(): fill a 256-bit (8-word) buffer.
-*/
-static void
-_lo_rand(u2_reck* rec_u, c3_w* rad_w)
-{
-  c3_i fid_i = open("/dev/random", O_RDONLY);
-
-  if ( 32 != read(fid_i, (c3_y*) rad_w, 32) ) {
-    c3_assert(!"lo_rand");
-  }
-  close(fid_i);
-}
-
 /* _lo_make(): boot from scratch.
 */
 static void
@@ -693,7 +884,7 @@ _lo_make(u2_reck* rec_u, u2_noun fav)
     }
   }
 
-  //  Configure the http server.
+  //  Further server configuration.
   //
   {
     u2_http_ef_bake(rec_u);
@@ -717,7 +908,7 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu, u2_noun rez)
   c3_i        fid_i;
   c3_c        ful_c[2048];
   u2_noun     roe = u2_nul;
-  u2_noun     sev_l, tno_l;
+  u2_noun     sev_l, tno_l, key_l;
 
   //  Who the fsck are we today?
   {
@@ -769,11 +960,14 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu, u2_noun rez)
     }
 
     if ( led_u.kno_w != rec_u->kno_w ) {
+      //  XX perhaps we should actually do something here
+      //
       uL(fprintf(uH, "rest: translating events (old %d, now %d)\n",
                      led_u.kno_w,
                      rec_u->kno_w));
     }
     sev_l = led_u.sev_l;
+    key_l = led_u.key_l;
     tno_l = led_u.tno_l;
 
     {
@@ -789,6 +983,26 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu, u2_noun rez)
       u2z(old); u2z(nuu);
     }
     c3_assert(sev_l != rec_u->sev_l);   //  1 in 2 billion, just retry
+  }
+
+  //  Oh, and let's hope you didn't forget the fscking passcode.
+  {
+    if ( 0 != key_l ) {
+      rec_u->key = _lo_staf(rec_u, key_l);
+
+      while ( 0 == rec_u->key ) {
+        rec_u->key = _lo_cask(rec_u, rec_u->dir_c, u2_no);
+
+        if ( u2_mug(rec_u->key) != key_l ) {
+          uL(fprintf(uH, "incorrect passcode\n"));
+          u2z(rec_u->key);
+          rec_u->key = 0;
+          continue;
+        }
+        _lo_fast(rec_u, u2k(rec_u->key));
+        break;
+      } 
+    }
   }
 
   //  Read in the fscking events.  These are probably corrupt as well.
@@ -862,6 +1076,20 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu, u2_noun rez)
         uL(fprintf(uH, "record (%s) is corrupt (j)\n", ful_c));
         u2_lo_bail(rec_u);
       }
+
+      if ( rec_u->key ) {
+        u2_noun dep;
+
+        dep = u2_cn_mung(u2k(rec_u->toy.shed), u2nc(u2k(rec_u->key), ron));
+        if ( u2_no == u2du(dep) ) {
+          uL(fprintf(uH, "record (%s) is corrupt (k)\n", ful_c));
+          u2_lo_bail(rec_u);
+        } 
+        else {
+          ron = u2k(u2t(dep));
+          u2z(dep);
+        }
+      }
       roe = u2nc(u2_cke_cue(ron), roe);
     }
     
@@ -934,11 +1162,12 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu, u2_noun rez)
   { 
     u2_uled led_u;
 
-    led_u.mag_l = u2_mug('d');
+    led_u.mag_l = u2_mug('e');
     led_u.sev_l = rec_u->sev_l;
+    led_u.key_l = rec_u->key ? u2_mug(rec_u->key) : 0;
     led_u.kno_w = rec_u->kno_w;         //  may need actual translation!
     led_u.tno_l = 1;
-    
+   
     if ( (-1 == lseek(fid_i, 0, SEEK_SET)) ||
          (sizeof(led_u) != write(fid_i, &led_u, sizeof(led_u))) )
     {

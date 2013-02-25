@@ -260,8 +260,10 @@
           u2_noun duel;                   //  compare resource trees
           u2_noun rain;                   //  parse path, text -> gene
           u2_noun ream;                   //  parse text -> gene
-          u2_noun sham;                   //  SHA-256 on noun
           u2_noun slam;                   //  call ([vase vase] -> vase)
+          u2_noun sham;                   //  SHA-256 on noun
+          u2_noun shed;                   //  ghetto decrypt
+          u2_noun shen;                   //  ghetto encrypt
           u2_noun slap;                   //  layer ([vase gene] -> vase)
           u2_noun slop;                   //  cell ([vase vase] -> vase)
           u2_noun slay;                   //  text to coin

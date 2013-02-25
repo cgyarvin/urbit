@@ -345,6 +345,8 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
       zen = _reck_load_temp(rec_u, yen, kno_w, "arvo/ford.hoon");
 
       rec_u->toy.sham = _reck_gate(rec_u, u2k(zen), "sham");
+      rec_u->toy.shen = _reck_gate(rec_u, u2k(zen), "en:crya");
+      rec_u->toy.shed = _reck_gate(rec_u, u2k(zen), "de:crya");
 
       // printf("ames:\n");
       xan = _reck_load_temp(rec_u, zen, kno_w, "arvo/ames.hoon");

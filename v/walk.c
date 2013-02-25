@@ -56,7 +56,7 @@ u2_walk_safe(c3_c* pas_c)
   c3_y*       pad_y;
 
   if ( (fid_i < 0) || (fstat(fid_i, &buf_b) < 0) ) {
-    perror(pas_c);
+    // perror(pas_c);
     return 0;
   }
   fln_w = buf_b.st_size;
