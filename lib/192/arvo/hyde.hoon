@@ -113,7 +113,7 @@
               [%wine p=flag]                            ::  lost ownership
           ==                                            ::
 ++  bowl  ,[p=(list card) q=(unit boat)]                ::  standard product
-++  bran  ,[p=mark q=(unit mark) r=flag]                ::  version parent id
+++  bran  ,[p=mark q=(unit mark) r=flag s=@da]          ::  our parent us now
 ++  brow  ,[p=@da q=@tas]                               ::  browser version
 ++  buck  ,[p=mace q=will]                              ::  all security data
 ++  cake  ,[p=flag q=? r=skin s=@]                      ::  top level packet
@@ -186,7 +186,7 @@
 ++  code  ,@uvI                                         ::  symmetric key
 ++  cone  ,[p=(list ,@tas) q=(list ,[p=@tas q=crow])]   ::  bits and options
 ++  conf  ,[p=(set ,@tas) q=(map ,@tas ,*)]             ::  bits and options
-++  corp  ,[p=@t q=@t r=@tas]                           ::  name auth country
+++  corp  ,[p=@t q=@t r=@tas]                           ::  name auth issuer
 ++  chum  ,@uvI                                         ::  hashed passcode
 ++  cred  ,[p=logo q=(map ,@tas ,[p=@da q=@ta])]        ::  client credentials
 ++  crow                                                ::  shell expression
@@ -435,7 +435,7 @@
               [%lord p=whom]                            ::  male individual
               [%punk p=@t]                              ::  opaque identity
           ==                                            ::
-++  whom  ,[p=@ud q=@t r=@tas s=name]                   ::  yob/state/nation/me
+++  whom  ,[p=@ud r=@tas s=name]                        ::  year/govt/id
 ++  will  (list deed)                                   ::  certificate
 ++  worm  ,*                                            ::  vase of task
 ++  yard                                                ::  terminal state

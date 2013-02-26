@@ -473,7 +473,7 @@ _term_it_save(u2_reck* rec_u, u2_noun pax, u2_noun pad)
 {
   c3_c* pax_c;
 
-  pax = u2nc(c3__put, pax);
+  pax = u2nc(c3_s4('~','p','u','t'), pax);
   pax_c = _term_it_path(rec_u, u2_yes, pax);
 
   u2_walk_save(pax_c, 0, pad);
@@ -831,10 +831,16 @@ u2_term_io_hija(void)
       c3_assert(0);    
     }
     else {
-      if ( 0 != tcsetattr(uty_u->wax_u.fd, TCSADRAIN, &uty_u->bak_u) ) {
+      if ( 0 != tcsetattr(1, TCSADRAIN, &uty_u->bak_u) ) {
         c3_assert(!"hija-tcsetattr");
       }
-      if ( -1 == fcntl(uty_u->wax_u.fd, F_SETFL, uty_u->cug_i) ) {
+      if ( -1 == fcntl(1, F_SETFL, uty_u->cug_i) ) {
+        c3_assert(!"hija-fcntl");
+      }
+      if ( 0 != tcsetattr(0, TCSADRAIN, &uty_u->bak_u) ) {
+        c3_assert(!"hija-tcsetattr");
+      }
+      if ( -1 == fcntl(0, F_SETFL, uty_u->cug_i) ) {
         c3_assert(!"hija-fcntl");
       }
       write(uty_u->wax_u.fd, "\r", 1);
@@ -861,10 +867,16 @@ u2_term_io_loja(int x)
       c3_assert(0);    
     }
     else {
-      if ( 0 != tcsetattr(uty_u->wax_u.fd, TCSADRAIN, &uty_u->raw_u) ) {
+      if ( 0 != tcsetattr(1, TCSADRAIN, &uty_u->raw_u) ) {
         c3_assert(!"loja-tcsetattr");
       }
-      if ( -1 == fcntl(uty_u->wax_u.fd, F_SETFL, uty_u->nob_i) ) {
+      if ( -1 == fcntl(1, F_SETFL, uty_u->nob_i) ) {
+        c3_assert(!"loja-fcntl");
+      }
+      if ( 0 != tcsetattr(0, TCSADRAIN, &uty_u->raw_u) ) {
+        c3_assert(!"loja-tcsetattr");
+      }
+      if ( -1 == fcntl(0, F_SETFL, uty_u->nob_i) ) {
         c3_assert(!"loja-fcntl");
       }
       _term_it_refresh_line(&u2_Host.rec_u[0], uty_u);

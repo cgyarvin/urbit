@@ -893,7 +893,7 @@
     =+  loy=(brew wid bur)
     =+  rig=sec:ex:loy
     =+  our=`@p`fig:ex:loy
-    =+  syp=`step`[`bran`[0 ~ our] [%pawn ges] pub:ex:loy]
+    =+  syp=`step`[`bran`[0 ~ our now] [%pawn ges] pub:ex:loy]
     :-  [our pac:ex:loy]
     %_    fox
         ton
@@ -921,7 +921,7 @@
     =+  gus=(need (~(us go ton.fox) rul))
     =+  old=sen:gus
     =+  loy=(brew wid bur)
-    =+  syp=`step`[`bran`[0 [~ p.old] our] gec pub:ex:loy]
+    =+  syp=`step`[`bran`[0 [~ p.old] our now] gec pub:ex:loy]
     =+  ded=`deed`[(sign:se:q.old @ (shaf %meld (sham syp))) syp]
     =+  mac=`mace`[[0 sec:ex:loy] ~]
     =+  lew=`will`[ded law.saf.gus]

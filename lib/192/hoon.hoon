@@ -58,8 +58,8 @@
 ::    is written in the previous stage of Hoon.
 ::
 ::    Hoon is a pure, strict, higher-order-typed functional 
-::    language in no particular family.  It does not use the
-::    lambda calculus or formal logic.  Hoon's mapping
+::    language in no particular family.  It does not refer to
+::    the lambda calculus or formal logic.  Hoon's mapping
 ::    to Nock is like that of C to assembler - not always
 ::    trivial, always as trivial as possible. 
 ::
@@ -67,11 +67,11 @@
 ::    This small definition is designed to be permanently frozen.
 ::    All errors yield bottom, ie, do not terminate.  A naive Nock
 ::    implementation is obviously not efficient.  Don't be naive.
-::    Operators 6-10 are macros and add no formal power.
+::    Operators 6-10 are just macros and add no formal power.
 ::
 ::    (NB: the Nock definition above is just pseudocode, not Hoon.
 ::    To see a (mildly enhanced) Nock in Hoon, see ++mink.  But
-::    Hoon is defined in Nock; stating Nock in Hoon cannot enhance
+::    Hoon is defined in Nock; stating Nock in Hoon cannot tighten
 ::    the precision of Nock.)
 ::
 ::    What is Hoon good for?  Now, nothing.  Ideally, whatever.
@@ -481,17 +481,17 @@
   ++  date  ,[[a=? y=@ud] m=@ud t=tarp]                 ::  gregorian
   ++  time  ,@da
   ++  tarp  ,[d=@ud h=@ud m=@ud s=@ud f=(list ,@ux)]    ::  relative
-  ++  yo                                                ::  XX constants
-    |%  ++  cet  (add 24 (mul 100 365))
-        ++  day  (mul 24 hor)
-        ++  era  (add 1 (mul 4 cet))
-        ++  hor  (mul 60 mit)
-        ++  jes  (mul 730.692.561 era)
+  ++  yo                                                ::  XX automate fold
+    |%  ++  cet  36.524                 ::  (add 24 (mul 100 365))
+        ++  day  86.400                 ::  (mul 24 hor)
+        ++  era  146.097                ::  (add 1 (mul 4 cet))
+        ++  hor  3.600                  ::  (mul 60 mit)
+        ++  jes  106.751.991.084.417    ::  (mul 730.692.561 era)
         ++  mit  60
         ++  moh  `(list ,@ud)`[31 28 31 30 31 30 31 31 30 31 30 31 ~]
         ++  moy  `(list ,@ud)`[31 29 31 30 31 30 31 31 30 31 30 31 ~]
-        ++  qad  (add 1 (mul 4 yer))
-        ++  yer  (mul 365 day)
+        ++  qad  126.144.001            ::  (add 1 (mul 4 yer))
+        ++  yer  31.536.000             ::  (mul 365 day)
     --
   ::::
   --

@@ -463,15 +463,15 @@
         =.  p.lif  ?:(=(pid (dec p.lif)) (dec p.lif) p.lif)
         ?.  (~(has by q.lif) pid)
           [duz ..^$]
-        =.  ..nave  (envy /d/ %flog %text (weld "/ %" tid))
+::      =.  ..nave  (envy /d/ %flog %text (weld "/ %" tid))
         [duz ..^$(q.lif (~(del by q.lif) pid))]
       ?>  ?=(^ bor)
-      =>  %=    .
-              ..nave
-            %+  envy
-              /d/
-            [%flog %text (weld ?:((~(has by q.lif) pid) "= %" "^ %") tid)]
-          ==
+::    =>  %=    .
+::            ..nave
+::          %+  envy
+::            /d/
+::          [%flog %text (weld ?:((~(has by q.lif) pid) "= %" "^ %") tid)]
+::        ==
       [duz ..^$(q.lif (~(put by q.lif) pid [loz u.bor]))]
     ::
     --

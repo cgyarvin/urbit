@@ -594,22 +594,18 @@ _lo_home(u2_reck* rec_u)
 static u2_noun
 _lo_cask(u2_reck* rec_u, c3_c* dir_c, u2_bean nun)
 {
-  c3_c*   paw_c = malloc(59);
-  size_t  byt_t = 58;
+  c3_c   paw_c[60];
   u2_noun key;
 
   uH;
   while ( 1 ) {
     printf("passcode for %s%s? ~", dir_c, (u2_yes == nun) ? " [none]" : "");
-    byt_t = getline(&paw_c, &byt_t, stdin);
 
-    if ( byt_t < 0 ) {
-      printf("getline: could not read??\n");
-      u2_lo_bail(rec_u);
-    }
-    else if ( byt_t == 1 ) {
-      c3_assert(paw_c[0] == '\n');
+    paw_c[0] = 0;
+    fpurge(stdin);
+    fgets(paw_c, 59, stdin);
 
+    if ( 0 == paw_c[0] ) {
       if ( u2_yes == nun ) {
         key = 0; break;
       }
@@ -618,12 +614,12 @@ _lo_cask(u2_reck* rec_u, c3_c* dir_c, u2_bean nun)
       }
     }
     else {
-      c3_c* say_c = malloc(byt_t + 2);
+      c3_c* say_c = malloc(strlen(paw_c) + 2);
       u2_noun say; 
 
       say_c[0] = '~';
-      strcpy(say_c + 1, paw_c);
-      say_c[byt_t] = 0;
+      say_c[1] = 0;
+      strncat(say_c, paw_c, strlen(paw_c) - 1);
 
       say = u2_cn_mung(u2k(rec_u->toy.slay), u2_ci_string(say_c));
       if ( (u2_nul == say) || 
@@ -651,17 +647,20 @@ _lo_bask(c3_c* pop_c, u2_bean may)
   u2_bean yam;
 
   uH;
-  {
-    c3_c y_c[2];
+  while ( 1 ) {
+    c3_c ans_c[3];
 
-    printf("%s %s? ", pop_c, (u2_yes == may) ? "[Y/n]" : "[y/N]");
-    scanf("%1s", y_c);
-    
-    if ( u2_yes == may ) {
-      yam = ((y_c[0] != 'n') && y_c[0] != 'N') ? u2_yes : u2_no;
-    }
-    else {
-      yam = ((y_c[0] != 'y') && y_c[0] != 'Y') ? u2_no : u2_yes;
+    printf("%s [y/n]? ", pop_c);
+    ans_c[0] = 0;
+
+    fpurge(stdin);
+    fgets(ans_c, 2, stdin);
+   
+    if ( (ans_c[0] != 'y') && (ans_c[0] != 'n') ) {
+      continue;
+    } else {
+      yam = (ans_c[0] != 'n') ? u2_yes : u2_no;
+      break;
     }
   }
   uL(0);
@@ -696,7 +695,7 @@ _lo_fast(u2_reck* rec_u, u2_noun key)
 
   sprintf(ful_c, "save passcode as %s/.urbit/%s.txt", hom_c, gum_c);
   if ( u2_no == _lo_bask(ful_c, u2_no) ) {
-    uL(fprintf(uH, "passcode: %s.  remember it or write it down!\n", yek_c));
+    uL(fprintf(uH, "passcode: %s.   write it down!\n", yek_c));
   }
   else {
     c3_i fid_i;

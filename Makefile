@@ -62,12 +62,12 @@ F_OFILES=\
        f/unix.o \
        f/nock.o
 
-P_OFILES=\
-       p/book.o \
-       p/list.o \
-       p/pool.o \
-       p/prep.o \
-       p/saur.o
+Q_OFILES=\
+       q/book.o \
+       q/list.o \
+       q/pool.o \
+       q/prep.o \
+       q/saur.o
 
 J195_1_OFILES=\
        gen195/1/add.o \
@@ -611,7 +611,7 @@ J192_OFILES=\
 
 BASE_OFILES=\
        $(F_OFILES) \
-       $(P_OFILES) \
+       $(Q_OFILES) \
        $(J194_OFILES) \
        $(J193_OFILES) \
        $(J192_OFILES)
