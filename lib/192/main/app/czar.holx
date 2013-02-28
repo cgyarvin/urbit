@@ -20,7 +20,7 @@
 |=  bur=@
 =+  loy=(brew 2.048 bur)
 %+  pomp  "...generated 2048-bit RSA keypair for {<zar>}."
-%+  (polo %text "identity: " "usage: text")
+%+  (polo %text "identity: " ~)
   (boss 256 (more gon qit))
 |=  leg=@t
 =+  mac=[[0 sec:ex:loy] ~]

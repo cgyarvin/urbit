@@ -160,15 +160,6 @@ u2_term_io_init(u2_reck* rec_u)
     u2_Host.uty_u = uty_u;
   }
 
-#if 0
-  //  Tell the terminal how big it is.
-  //
-  {
-    u2_reck_plan
-      (rec_u, u2k(uty_u->pax), u2nc(c3__blew, u2_term_ef_blew(rec_u, 1)));
-  }
-#endif
-
   //  Start raw input.
   //
   {
@@ -690,11 +681,19 @@ _term_ef_blew(u2_reck* rec_u, c3_l tid_l)
   u2_utty*       uty_u = _term_ef_get(rec_u, tid_l);
   struct winsize siz_u;
 
+#if 0
   if ( 0 == ioctl(uty_u->wax_u.fd, TIOCGWINSZ, &siz_u) ) {
     return u2nc(siz_u.ws_col, siz_u.ws_row);
   } else {
     return u2nc(80, 24);
   }
+#else
+  if ( 0 == ioctl(1, TIOCGWINSZ, &siz_u) ) {
+    return u2nc(siz_u.ws_col, siz_u.ws_row);
+  } else {
+    return u2nc(80, 24);
+  }
+#endif
 }
               
 /* u2_term_ef_boil(): initial effects for loaded servers.

@@ -24,6 +24,8 @@
 #include "all.h"
 #include "v/vere.h"
 
+#define AMES
+
 /* _lo_init(): initialize I/O across the process.
 */
 static void
@@ -31,6 +33,7 @@ _lo_init(u2_reck* rec_u)
 {
   u2_term_io_init(rec_u);
   u2_http_io_init(rec_u);
+  u2_ames_io_init(rec_u);
 }
 
 /* _lo_exit(): terminate I/O across the process.
@@ -38,6 +41,9 @@ _lo_init(u2_reck* rec_u)
 static void
 _lo_exit(u2_reck* rec_u)
 {
+#ifdef AMES
+  u2_ames_io_exit(rec_u);
+#endif
   u2_term_io_exit(rec_u);
   u2_http_io_exit(rec_u);
 }
@@ -48,6 +54,9 @@ static void
 _lo_stop(u2_reck*        rec_u,
          struct ev_loop* lup_u)
 {
+#ifdef AMES
+  u2_ames_io_stop(rec_u, lup_u);
+#endif
   u2_http_io_stop(rec_u, lup_u);
   u2_term_io_stop(rec_u, lup_u);
 }
@@ -58,6 +67,9 @@ static void
 _lo_poll(u2_reck*        rec_u,
          struct ev_loop* lup_u)
 {
+#ifdef AMES
+  u2_ames_io_stop(rec_u, lup_u);
+#endif
   u2_http_io_poll(rec_u, lup_u);
   u2_term_io_poll(rec_u, lup_u);
 }
@@ -68,6 +80,9 @@ static void
 _lo_spin(u2_reck*        rec_u,
          struct ev_loop* lup_u)
 {
+#ifdef AMES
+  u2_ames_io_spin(rec_u, lup_u);
+#endif
   u2_http_io_spin(rec_u, lup_u);
   u2_term_io_spin(rec_u, lup_u);
 }
@@ -80,6 +95,7 @@ _lo_how(u2_noun how)
   switch ( how ) {
     default: c3_assert(0); break;
 
+    case c3__ames: return "ames";
     case c3__term: return "cons";
     case c3__htcn: return "http-conn";
     case c3__htls: return "http-lisn";
@@ -96,6 +112,7 @@ _lo_suck(u2_reck*      rec_u,
   switch ( how ) {
     default: c3_assert(0); break;
 
+    case c3__ames: u2_ames_io_suck(rec_u, wax_u); break;
     case c3__term: u2_term_io_suck(rec_u, wax_u); break;
     case c3__htcn: u2_http_io_suck_conn(rec_u, wax_u); break;
     case c3__htls: u2_http_io_suck_lisn(rec_u, wax_u); break;
@@ -112,6 +129,7 @@ _lo_fuck(u2_reck*      rec_u,
   switch ( how ) {
     default: c3_assert(0); break;
 
+    case c3__ames: u2_ames_io_fuck(rec_u, wax_u); break;
     case c3__term: u2_term_io_fuck(rec_u, wax_u); break;
     case c3__htcn: u2_http_io_fuck_conn(rec_u, wax_u); break;
     case c3__htls: c3_assert(0); break;
@@ -605,7 +623,7 @@ _lo_cask(u2_reck* rec_u, c3_c* dir_c, u2_bean nun)
     fpurge(stdin);
     fgets(paw_c, 59, stdin);
 
-    if ( 0 == paw_c[0] ) {
+    if ( '\n' == paw_c[0] ) {
       if ( u2_yes == nun ) {
         key = 0; break;
       }
@@ -1175,7 +1193,7 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu, u2_noun rez)
     }
   }
 
-  //  Hey, fscker!  It worked.  Stroke it till it bleeds.
+  //  Hey, fscker!  It worked.
   {
     u2_term_ef_boil(rec_u, sev_l, tno_l);
   }
@@ -1186,8 +1204,6 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu, u2_noun rez)
 void
 u2_lo_loop(u2_reck* rec_u, u2_noun cpu, u2_noun meh, u2_noun rez)
 {
-  _lo_init(rec_u);
-
   c3_assert((u2_nul == cpu) ^ (u2_nul == meh));
 
   if ( u2_nul == meh ) {
@@ -1222,9 +1238,9 @@ u2_lo_loop(u2_reck* rec_u, u2_noun cpu, u2_noun meh, u2_noun rez)
       } break;
     }
   }
-
   u2_reck_sync(rec_u);
 
+  _lo_init(rec_u);
   {
     struct ev_loop *lup_u = ev_default_loop(0);
 

@@ -620,6 +620,7 @@ OUT_OFILES=\
        outside/jhttp/http_parser.o
 
 VERE_OFILES=\
+       v/ames.o \
        v/boot.o \
        v/fs.o \
        v/main.o \
