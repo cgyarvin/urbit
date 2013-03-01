@@ -108,6 +108,26 @@
         struct _u2_http* nex_u;             //  next in list
       } u2_http;
 
+    /* u2_apac: ames packet, coming or going.
+    */
+      typedef struct _u2_apac {
+        struct _u2_apac* nex_u;             //  next in queue
+        c3_w             pip_w;             //  IPv4 address, to
+        c3_s             por_s;             //  IPv4 port, to
+        c3_w             len_w;             //  length in bytes
+        c3_y             hun_y[0];          //  data
+      } u2_apac;
+
+    /* u2_ames: ames networking.
+    */
+      typedef struct _u2_ames {             //  packet network state
+        struct ev_io wax_u;                 //  event handler state
+        c3_w         pip_w;                 //  public IPv4 address
+        c3_s         por_s;                 //  public IPv4 port
+        u2_apac*     out_u;                 //  exit of output queue
+        u2_apac*     tou_u;                 //  entry of output queue
+      } u2_ames;
+
     /* u2_ubuf: unix tty i/o buffer.
     */
       typedef struct _u2_ubuf {
@@ -321,6 +341,7 @@
         u2_http* htp_u;                     //  http servers
         u2_utty* uty_u;                     //  terminal servers
         u2_ulog  lug_u;                     //  event log
+        u2_ames  sam_u;                     //  packet interface
 
         u2_reck rec_u[1];                   //  rotors (hardcoded to 1)
       } u2_host;                            //  host == computer == process
@@ -829,6 +850,56 @@
       */
 #       define uH    u2_term_io_hija()
 #       define uL(x) u2_term_io_loja(x)
+
+
+    /**  Ames, packet networking.
+    **/
+      /* u2_ames_ef_send(): send packet to network.
+      */
+        void
+        u2_ames_ef_send(u2_reck* rec_u,
+                        u2_noun  lan,
+                        u2_noun  pac);
+
+      /* u2_ames_io_init(): initialize ames I/O.
+      */
+        void 
+        u2_ames_io_init(u2_reck* rec_u);
+
+      /* u2_ames_io_exit(): terminate ames I/O.
+      */
+        void 
+        u2_ames_io_exit(u2_reck* rec_u);
+
+      /* u2_ames_io_spin(): start ames server(s).
+      */
+        void
+        u2_ames_io_spin(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_ames_io_stop(): stop ames servers.
+      */
+        void
+        u2_ames_io_stop(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_ames_io_poll(): update ames IO state.
+      */
+        void
+        u2_ames_io_poll(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_ames_io_fuck(): output event on connection socket.
+      */
+        void
+        u2_ames_io_fuck(u2_reck*      rec_u,
+                        struct ev_io* wax_u);
+
+      /* u2_ames_io_suck(): input event on listen socket.
+      */
+        void
+        u2_ames_io_suck(u2_reck*      rec_u,
+                        struct ev_io* wax_u);
 
 
     /**  HTTP, new style.

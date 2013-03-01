@@ -73,6 +73,7 @@
     ^-  [p=(list ovum) q=(list ,[p=@tas q=vane])]
     =+  ^=  des  ^-  @tas
         ?+  p.ovo  !!
+          [@ %ames *]  %a
           [@ %sync *]  %c
           [@ %term *]  %d
           [@ %http *]  %e

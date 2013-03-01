@@ -1019,7 +1019,18 @@ u2_http_io_poll(u2_reck*        rec_u,
           perror("http: socket");
           continue;
         }
+        {
+          c3_i opt_i = 1;
 
+          if ( -1 == setsockopt(fid_i, SOL_SOCKET, SO_REUSEADDR, 
+                &opt_i, sizeof opt_i) )
+          {
+            perror("http: setsockopt");
+            continue;
+          }
+        }
+
+        memset(&add_k, 0, sizeof(add_k));
         add_k.sin_family = AF_INET;
         add_k.sin_addr.s_addr = INADDR_ANY;
 

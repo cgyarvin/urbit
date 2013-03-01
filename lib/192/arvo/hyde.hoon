@@ -140,11 +140,13 @@
               [%hail ~]                                 ::  welcome user
               [%hear p=@]                               ::  receive packet
               [%helo ~]                                 ::  trigger prompt
+              [%home p=flag q=lane]                     ::  bind home address
               [%init p=@p]                              ::  report install
               [%flog p=card]                            ::  log to terminal
               [%junk p=@]                               ::  entropy
               [%keep p=@p]                              ::  establish master
               [%kill p=@ud]                             ::  kill a process
+              [%lane p=lane]                            ::  set public route
               [%line p=@t]                              ::  source line
               [%load p=@tas q=path]                     ::  request atomic file
               [%logn p=@p q=chum]                       ::  name hashed-pass
@@ -160,7 +162,7 @@
               [%pour p=path q=dram]                     ::  write directory
               [%pump ~]                                 ::  produce packets
               [%save p=path q=@]                        ::  write atomic file
-              [%send p=@]                               ::  transmit packet
+              [%send p=lane q=@]                        ::  transmit packet
               [%ship p=@tas q=@tas]                     ::  label release
               [%sync ~]                                 ::  reset soft state
               [%talk p=tank]                            ::  show on console
