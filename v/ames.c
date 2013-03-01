@@ -33,18 +33,25 @@ u2_ames_ef_send(u2_reck* rec_u,
                 u2_noun  pac)
 {
   u2_ames* sam_u = &u2_Host.sam_u;
-  c3_w     pip_w = u2_cr_word(0, u2h(u2t(lan)));
-  c3_s     por_s = (c3_s)u2_cr_word(0, u2t(u2t(lan)));
+  c3_s     por_s = (c3_s)u2_cr_word(0, u2h(u2t(lan)));
+  c3_w     pip_w = u2_cr_word(0, u2t(u2t(lan)));
   c3_w     len_w = u2_cr_met(3, pac);
 
   {
     u2_apac* pac_u = malloc(sizeof(u2_apac) + len_w);
 
     u2_cr_bytes(0, len_w, pac_u->hun_y, pac);
+    pac_u->nex_u = 0;
+    pac_u->len_w = len_w;
     pac_u->pip_w = pip_w;
     pac_u->por_s = por_s;
 
-    sam_u->tou_u->nex_u = pac_u;
+    if ( sam_u->tou_u ) {
+      sam_u->tou_u->nex_u = pac_u;
+    } else {
+      c3_assert(!sam_u->out_u);
+      sam_u->out_u = pac_u;
+    }
     sam_u->tou_u = pac_u;
   }
 }
@@ -84,7 +91,7 @@ u2_ames_io_init(u2_reck* rec_u)
       memset(&add_k, 0, sizeof(add_k));
       add_k.sin_family = AF_INET;
       add_k.sin_addr.s_addr = htonl(INADDR_ANY);
-      add_k.sin_port = 0;
+      add_k.sin_port = htons(por_s);
 
       if ( bind(fid_i, (struct sockaddr *)&add_k, sizeof(add_k)) < 0 ) {
         if ( EADDRINUSE == errno ) {
@@ -188,10 +195,17 @@ u2_ames_io_fuck(u2_reck*      rec_u,
     else {
       struct sockaddr_in add_k;
 
+      if ( 1 == (pac_u->pip_w >> 8) ) {
+        pac_u->por_s = 13337 + (pac_u->pip_w & 0xff);
+        pac_u->pip_w = 0x7f000001;
+      }
+
       memset(&add_k, 0, sizeof(add_k));
       add_k.sin_family = AF_INET;
       add_k.sin_addr.s_addr = htonl(pac_u->pip_w);
       add_k.sin_port = htons(pac_u->por_s);
+
+      uL(fprintf(uH, "sendto %x %d\n", pac_u->pip_w, pac_u->por_s));
 
       if ( pac_u->len_w != sendto(sam_u->wax_u.fd,
                                   pac_u->hun_y,
@@ -201,19 +215,18 @@ u2_ames_io_fuck(u2_reck*      rec_u,
                                   sizeof(add_k)) )
       {
         if ( EAGAIN != errno ) {
-          uL(fprintf(uH, "ames: error %d\n", errno));
+          uL(fprintf(uH, "send: to %x:%d; error %s\n", 
+                pac_u->pip_w, pac_u->por_s, strerror(errno)));
         }
-        return;
       } 
-      else {
-        sam_u->out_u = sam_u->out_u->nex_u;
 
-        if ( 0 == sam_u->out_u ) {
-          c3_assert(pac_u == sam_u->tou_u);
-          sam_u->tou_u = 0;
-        }
-        free(pac_u);
+      sam_u->out_u = sam_u->out_u->nex_u;
+
+      if ( 0 == sam_u->out_u ) {
+        c3_assert(pac_u == sam_u->tou_u);
+        sam_u->tou_u = 0;
       }
+      free(pac_u);
     }
   }
 }
@@ -227,7 +240,7 @@ u2_ames_io_suck(u2_reck*      rec_u,
   c3_y     buf_y[65536];
   c3_ws    len_ws;
 
-  while ( 1 ) {
+//  while ( 1 ) {
     if ( -1 == (len_ws = recv(wax_u->fd, buf_y, 16384, MSG_WAITALL)) ) {
       if ( EAGAIN != errno ) {
         uL(fprintf(uH, "ames: error %d\n", errno));
@@ -236,7 +249,8 @@ u2_ames_io_suck(u2_reck*      rec_u,
     }
     u2_reck_plan
       (rec_u,
-       u2nt(c3__lead, c3__ames, u2_nul),
+       u2nt(c3__gold, c3__ames, u2_nul),    //  XX no!
+       // u2nt(c3__lead, c3__ames, u2_nul),
        u2nc(c3__hear, u2_ci_bytes((c3_w)len_ws, buf_y)));
-  }
+ // }
 }

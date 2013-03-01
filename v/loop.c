@@ -19,8 +19,6 @@
 #include <termios.h>
 #include <term.h>
 
-#include <libtecla.h>
-
 #include "all.h"
 #include "v/vere.h"
 
@@ -31,9 +29,9 @@
 static void
 _lo_init(u2_reck* rec_u)
 {
+  u2_ames_io_init(rec_u);
   u2_term_io_init(rec_u);
   u2_http_io_init(rec_u);
-  u2_ames_io_init(rec_u);
 }
 
 /* _lo_exit(): terminate I/O across the process.
@@ -41,9 +39,7 @@ _lo_init(u2_reck* rec_u)
 static void
 _lo_exit(u2_reck* rec_u)
 {
-#ifdef AMES
   u2_ames_io_exit(rec_u);
-#endif
   u2_term_io_exit(rec_u);
   u2_http_io_exit(rec_u);
 }
@@ -54,9 +50,7 @@ static void
 _lo_stop(u2_reck*        rec_u,
          struct ev_loop* lup_u)
 {
-#ifdef AMES
   u2_ames_io_stop(rec_u, lup_u);
-#endif
   u2_http_io_stop(rec_u, lup_u);
   u2_term_io_stop(rec_u, lup_u);
 }
@@ -67,9 +61,7 @@ static void
 _lo_poll(u2_reck*        rec_u,
          struct ev_loop* lup_u)
 {
-#ifdef AMES
-  u2_ames_io_stop(rec_u, lup_u);
-#endif
+  u2_ames_io_poll(rec_u, lup_u);
   u2_http_io_poll(rec_u, lup_u);
   u2_term_io_poll(rec_u, lup_u);
 }
@@ -80,9 +72,7 @@ static void
 _lo_spin(u2_reck*        rec_u,
          struct ev_loop* lup_u)
 {
-#ifdef AMES
   u2_ames_io_spin(rec_u, lup_u);
-#endif
   u2_http_io_spin(rec_u, lup_u);
   u2_term_io_spin(rec_u, lup_u);
 }
@@ -534,7 +524,6 @@ static void
 _lo_home(u2_reck* rec_u)
 {
   c3_c    ful_c[2048];
-  u2_noun who;
 
   //  Set pathname and create main directory.
   {
@@ -552,7 +541,6 @@ _lo_home(u2_reck* rec_u)
     free(pod_c);
 
     uL(fprintf(uH, "home: %s\n", rec_u->dir_c));
-    u2z(who);
   }
 
   //  Create subdirectories.

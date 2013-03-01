@@ -525,7 +525,6 @@
     ++  slow                                            ::  throttle back
       |=  foy=flow  ^-  flow
       foy(wid ?:(=(1 wid.foy) 1 (div wid.foy 2)))
-    ::
     --
 =>  |%                                                  ::  selective ack
     ++  suck
@@ -660,14 +659,15 @@
     |%                                                  
     ++  ad                                              ::    ad:lo:am
       |=  her=flag                                      ::  delivery engine
-      =+  ^=  bah
-          =+  bah=(~(get by wab.weg) our.gus) 
-          ?~(bah *bath u.bah)
+      =+  ^=  bah  ^- bath
+          =+  bah=(~(get by wab.weg) her) 
+          ?^(bah u.bah %*(. *bath foy baby))
       |%
       ::::
       ++  cool                                          ::    cool:ad:lo:am
+        ~&  [%cool-maz maz.bah]
         |-  ^+  ..cool                                  ::  refill window
-        ?.  (gth wid.foy.bah yed.foy.bah)
+        ?.  &(?=(^ maz.bah) (gth wid.foy.bah yed.foy.bah))
           ..cool
         $(..cool pock)
       ::
@@ -697,7 +697,9 @@
         %_    ..pock
             yed.foy.bah  +(yed.foy.bah)
             ski.bah      (toss ski.bah)
-            maz.bah      (~(put to maz.bah) p.zem)
+            maz.bah      
+          ?~(t.wyv.dyp maz.bah (~(put to maz.bah) p.zem))
+        ::
             air.bah      
           (~(put by air.bah) (shaf %flap i.wyv.dyp) q.ski.bah)
         ::
@@ -1005,7 +1007,7 @@
     ^-  [p=(list boon) q=fort]
     =+  sug=`_as:go`(need (~(us go ton.fox) p.soq))
     =.  fox  (wish soq sup ham)
-    =^  bin  fox  grok:wake:(lo sug *flap)
+    =^  bin  fox  grok:(wake:(lo sug *flap) q.soq)
     =^  byn  fox  hark
     [(weld `(list boon)`bin `(list boon)`byn) fox]
   ::
@@ -1017,7 +1019,7 @@
     =+  diz=`_lax:as:go`(myx:sug q.soq)
     =+  ^=  bah  ^-  bath
         =+  bah=(~(get by wab.yem) q.soq)
-        ?~(bah *bath u.bah)
+        ?^(bah u.bah %*(. *bath foy baby)) 
     =+  ^=  lun  ^-  (unit lane)
         ?.  &(?=(^ loc.saf.sug) !=(loc.saf.sug lun.fer.nob.diz))
           ~
@@ -1131,7 +1133,7 @@
     --
   |%
   ++  clop
-    |=  [now=@da hen=hose bon=boon]
+    |=  [whu=(unit flag) now=@da hen=hose bon=boon]
     ^-  [(list move) _+>]
     ?-    -.bon
         %beer
@@ -1143,7 +1145,7 @@
         %coke  !!
         %mead  !!
         %milk  !!
-        %ouzo  ~&(%clop-ouzo !!)
+        %ouzo  [[[whu hen [%send p.bon q.bon]] ~] +>.$]
         %sack  !!
         %wine  !!
     ==
@@ -1185,7 +1187,7 @@
     ?~  p.fuy
       [(flop out) +>.^$]
     =^  toe  +>.^$
-      (clop now hen i.p.fuy)
+      (clop whu now hen i.p.fuy)
     $(p.fuy t.p.fuy, out (weld (flop toe) out))
   ::
   ++  perm

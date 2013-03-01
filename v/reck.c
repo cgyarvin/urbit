@@ -505,7 +505,7 @@ _reck_kick_ames(u2_reck* rec_u, u2_noun pox, u2_noun fav)
       u2_noun lan = u2k(u2h(u2t(fav)));
       u2_noun pac = u2k(u2t(u2t(fav)));
 
-      u2_ames_ef_send(rec_u, pac, lan);
+      u2_ames_ef_send(rec_u, lan, pac);
       u2z(pox); u2z(fav); return u2_yes;
     } break;
   }

@@ -68,7 +68,7 @@ u2_term_io_init(u2_reck* rec_u)
 
     _utfo(out, clear);
     _utfo(out, el);
-    _utfo(out, el1);
+    // _utfo(out, el1);
     _utfo(out, bel);
     _utfo(out, cub1);
     _utfo(out, cuf1);
@@ -678,10 +678,10 @@ _term_ef_get(u2_reck* rec_u,
 u2_noun
 _term_ef_blew(u2_reck* rec_u, c3_l tid_l)
 {
-  u2_utty*       uty_u = _term_ef_get(rec_u, tid_l);
   struct winsize siz_u;
-
 #if 0
+  u2_utty*       uty_u = _term_ef_get(rec_u, tid_l);
+
   if ( 0 == ioctl(uty_u->wax_u.fd, TIOCGWINSZ, &siz_u) ) {
     return u2nc(siz_u.ws_col, siz_u.ws_row);
   } else {
