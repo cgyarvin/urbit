@@ -205,7 +205,7 @@ u2_ames_io_fuck(u2_reck*      rec_u,
       add_k.sin_addr.s_addr = htonl(pac_u->pip_w);
       add_k.sin_port = htons(pac_u->por_s);
 
-      uL(fprintf(uH, "sendto %x %d\n", pac_u->pip_w, pac_u->por_s));
+      // uL(fprintf(uH, "sendto %x %d\n", pac_u->pip_w, pac_u->por_s));
 
       if ( pac_u->len_w != sendto(sam_u->wax_u.fd,
                                   pac_u->hun_y,

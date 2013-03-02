@@ -34,7 +34,6 @@
               [| dirt]                                  ::  ie, directory
           ==                                            ::
 ++  ball  ,@uw                                          ::  statement payload
-++  band  ,@uvH                                         ::  network message id
 ++  bait  ,[p=skin q=@ud r=dove]                        ::  fmt nrecvd spec
 ++  bath                                                ::  outgoing per client
           $:  ski=snow                                  ::  sequence state
@@ -109,7 +108,7 @@
               [%mead p=rock]                            ::  accept packet
               [%milk p=sock q=@da r=bond]               ::  learn bindings
               [%ouzo p=lane q=rock]                     ::  transmit packet
-              [%sack p=sock q=cape r=band]              ::  send ack
+              [%sack p=sock q=cape r=flap]              ::  send ack
               [%wine p=flag]                            ::  lost ownership
           ==                                            ::
 ++  bowl  ,[p=(list card) q=(unit boat)]                ::  standard product
@@ -295,7 +294,7 @@
           $%  [%back p=cape q=flap r=@dr]               ::  acknowledgment
               [%bond p=flag q=(list post)]              ::  statement
               [%buck p=mace q=will]                     ::  license
-              [%carp p=@ud q=band r=@]                 ::  leaf fragment
+              [%carp p=@ud q=flap r=@]                  ::  leaf fragment
               [%ping ~]                                 ::  no-op
           ==                                            ::
 ++  mess  (list ,[p=@t q=@t])                           ::  raw http headers
@@ -320,7 +319,7 @@
 ++  oryx  ,@uvH                                         ::  CSRF secret
 ++  oven                                                ::  flow by server
           $:  wen=@da                                   ::  next activation
-              nys=(map band ,[p=@da q=bait])            ::  incoming
+              nys=(map flap ,[p=@da q=bait])            ::  incoming
               wab=(map flag bath)                       ::  outgoing by client
           ==                                            ::
 ++  ovum  ,[p=tire q=card]                              ::  external event
@@ -380,7 +379,7 @@
 ++  seam  ,[p=@ta q=pact r=scar]                        ::  service route
 ++  shed  ,[p=@da q=(qeu ,[p=@ud q=bird])]              ::  packet pump
 ++  sink                                                ::  incoming per server
-          $:  nes=(map band ,[p=@da q=bait])            ::  fragment actions
+          $:  nes=(map flap ,[p=@da q=bait])            ::  fragment actions
           ==                                            ::
 ++  skin  ?(%none %open %fast %full)                    ::  encoding stem
 ++  slip  ,[p=bell q=goal]                              ::  traceable request

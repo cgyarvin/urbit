@@ -401,6 +401,7 @@
           =+  hiz=(grip law (yew her))
           =+  lyr=%*(. (myx her) lew.wod.nob hiz)
           =+  cay=cley:lyr
+          ~&  [%wag-mark her p.cay]
           [[p.cay r.cay] (nux lyr)]
         ::
         ++  way                                         ::  internal routing
@@ -811,6 +812,7 @@
     ::
     ++  chow                                            ::    chow:lo:am 
       |=  [sec=? him=flag fey=tray]                     ::  interpret tray
+      ~&  [%chow sec him fey]
       =.  gus 
           ?.  &(sec ?=(^ p.fey))  gus 
           (pyl:gus him u.p.fey)
@@ -831,22 +833,24 @@
         %_(..dine ton.fox (~(ha go ton.fox) him p.fud q.fud))
       ::
           %carp
-        ~&  [%dine-band `@p`(mug q.fud)]
+        ~&  [%dine-flap `@p`(mug q.fud)]
         =+  neb=`[p=@da q=bait]`(need (~(get by nys.weg) q.fud))
         ?>  (lth p.fud p.r.q.neb)
         =+  doy=`(unit ,@)`(~(get by q.r.q.neb) p.fud)
         ?^  doy
           ..dine
-        ~&  [%carp-haz `@p`(mug q.fud) p.fud]
         =>  ^+  .   %=  .
               q.r.q.neb  (~(put by q.r.q.neb) p.fud r.fud)
               q.q.neb    +(q.q.neb)
             ==
-        ?:  =(q.q.neb q.r.q.neb)
+        ~&  [%carp-haz `@p`(mug q.fud) p.fud q.q.neb p.r.q.neb]
+        ?:  =(q.q.neb p.r.q.neb)
           (gaff p.q.neb r.q.neb)
-        ..dine
+        ..dine(nys.weg (~(put by nys.weg) q.fud neb))
       ::
-          %ping  ..dine
+          %ping  
+        ~&  [%ping sec him fud]
+        ..dine
       ==
     ::
     ++  emit                                            ::    emit:lo:am
@@ -856,6 +860,7 @@
     ::
     ++  gaff                                            ::    gaff:lo:am 
       |=  [sin=skin duv=dove]                           ::  assemble fragments
+      ~&  %gaff
       ^+  ..gaff
       %+  chew
         sin
@@ -866,7 +871,7 @@
       $(nix +(nix), rax [(need (~(get by q.duv) nix)) rax])
     ::
     ++  grub                                            ::    grub:lo:am
-      |=  dun=band                                      ::  clean up msg
+      |=  dun=flap                                      ::  clean up msg
       ^+  ..grub
       ..grub
     ::
@@ -893,7 +898,7 @@
       ~&  [%wait sin]
       ^+  ..wait
       =+  pay=((hard ,[p=@ud q=@]) (cue msg))
-      ~&  [%wait-band p.pay `@p`(mug dam)]
+      ~&  [%wait-flap p.pay `@p`(mug dam)]
       =>  .(nys.weg (~(put by nys.weg) dam [(add now ~d1) sin 0 p.pay ~]))
       (dine | @p [%carp 0 dam q.pay])
     ::
@@ -923,11 +928,11 @@
     |=  pac=rock                                        ::  process packet
     ^-  [p=(list boon) q=fort]
     =+  kec=(bite pac)
-    ~&  [%gnaw-rock `@p`(mug pac)]
-    ~&  [%gnaw-cake p.kec q.kec r.kec (mug s.kec)]
+    ::  ~&  [%gnaw-rock `@p`(mug pac)]
+    ::  ~&  [%gnaw-cake p.kec q.kec r.kec (mug s.kec)]
     =+  how=(~(yo go ton.fox) p.kec)
     ?-  -.how
-      &  grok:(blow:(lo [p.how (shaf %band pac)]) q.kec r.kec s.kec)
+      &  grok:(blow:(lo [p.how (shaf %flap pac)]) q.kec r.kec s.kec)
       |  [[[%ouzo p.how pac] ~] fox]
     ==
   ::
@@ -1062,15 +1067,12 @@
       =+  ruv=(rip 13 q.p.wip) 
       ?>  ?=(^ ruv)
       =+  may=(spit q.soq | p.p.wip (jam wit i.ruv))
-      =+  bad=(shaf %band may)
-      ~&  [%weft-band `@p`(mug bad)]
+      =+  bad=(shaf %flap may)
       =+  inx=1
-      ~&  [%weft-rock 0 `@p`(mug may)]
       :-  may
       |-  ^-  (list rock)
       ?~  t.ruv  ~
       =+  vie=(spit q.soq & wasp(lun ~, ham [%carp inx bad i.t.ruv]))
-      ~&  [%weft-rock inx `@p`(mug vie)]
       :-  vie
       $(t.ruv t.t.ruv, inx +(inx))
     ::
