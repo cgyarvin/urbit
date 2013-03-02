@@ -216,7 +216,7 @@
               fer=road                                  ::  inferred conn from
               caq=cask                                  ::  symmetric key state
           ==                                            ::
-++  dove  ,[p=@ud q=(map ,@ud (unit ,@))]               ::  count 13-blocks
+++  dove  ,[p=@ud q=(map ,@ud ,@)]                      ::  count 13-blocks
 ++  flap  ,@uvH                                         ::  network packet id
 ++  flow                                                ::  packet connection
           $:  rtt=@dr                                   ::  official rtt
@@ -295,7 +295,7 @@
           $%  [%back p=cape q=flap r=@dr]               ::  acknowledgment
               [%bond p=flag q=(list post)]              ::  statement
               [%buck p=mace q=will]                     ::  license
-              [%carp p=@ud q=@band r=@]                 ::  leaf fragment
+              [%carp p=@ud q=band r=@]                 ::  leaf fragment
               [%ping ~]                                 ::  no-op
           ==                                            ::
 ++  mess  (list ,[p=@t q=@t])                           ::  raw http headers

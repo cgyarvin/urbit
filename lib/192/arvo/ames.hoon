@@ -486,7 +486,6 @@
               wix=(bex +((cut 0 [25 2] mag)))
               tay=(cut 0 [27 5] mag)
           ==
-      ~&  [%bite-yax [%yax (cut 0 [25 2] mag)] [%wix wix]]
       ?>  =(chk (end 0 24 (mug bod)))
       :^    `@p`(end 3 wix bod)
           =(0 dit)
@@ -495,6 +494,7 @@
     ::
     ++  spit                                            ::  cake to packet
       |=  kec=cake  ^-  @
+      ~&  [%spit-cake p.kec q.kec r.kec (mug s.kec)]
       =+  wim=(met 3 p.kec)
       =+  yax=?:((lte wim 2) 0 ?:((lte wim 4) 1 ?:((lte wim 8) 2 3)))
       =+  wix=(bex +(yax))
@@ -586,12 +586,12 @@
                 r=*(list rock)                          ::  send packets
                 s=*(list soap)                          ::  kill msgs
             ==
-        ^+  [p=rub q=..harv]
-        =<  [[p.rub q.rub (flop r.rub) (flop s.rub)] ..harv]
+        =<  [p=rub q=..harv]
         |-  ^+  ..$
         ?~  q.tea  ..$
         =>  =+  sir=$(q.tea l.q.tea)
             ..$(rub rub.sir, l.q.tea q.tea.sir)
+        ~&  [%harv-n `@p`(mug pac.q.n.q.tea)]
         =>  ^+  ..$
             ?:  =(0 tim.q.n.q.tea)
               =+  ryt=(div (mul 3 rtt) 2)
@@ -665,7 +665,6 @@
       |%
       ::::
       ++  cool                                          ::    cool:ad:lo:am
-        ~&  [%cool-maz maz.bah]
         |-  ^+  ..cool                                  ::  refill window
         ?.  &(?=(^ maz.bah) (gth wid.foy.bah yed.foy.bah))
           ..cool
@@ -709,6 +708,7 @@
           dyp(wyv t.wyv.dyp, ski (toss ski.dyp))
         ::
             sea.bah      
+          ~&  [%pock `@p`[(mug i.wyv.dyp)]]
           tea:(~(gost pe sea.bah) now q.ski.bah p.zem q.ski.dyp i.wyv.dyp)
         ==
       ::
@@ -831,12 +831,15 @@
         %_(..dine ton.fox (~(ha go ton.fox) him p.fud q.fud))
       ::
           %carp
+        ~&  [%dine-band `@p`(mug q.fud)]
         =+  neb=`[p=@da q=bait]`(need (~(get by nys.weg) q.fud))
-        =+  doy=`(unit ,@)`(need (~(get by q.r.q.neb) p.fud))
-        ?~  doy
+        ?>  (lth p.fud p.r.q.neb)
+        =+  doy=`(unit ,@)`(~(get by q.r.q.neb) p.fud)
+        ?^  doy
           ..dine
+        ~&  [%carp-haz `@p`(mug q.fud) p.fud]
         =>  ^+  .   %=  .
-              q.r.q.neb  (~(put by q.r.q.neb) p.fud [~ r.fud])
+              q.r.q.neb  (~(put by q.r.q.neb) p.fud r.fud)
               q.q.neb    +(q.q.neb)
             ==
         ?:  =(q.q.neb q.r.q.neb)
@@ -860,7 +863,7 @@
       |-  ^-  @
       ?:  =(p.duv nix)
         (can 13 (turn (flop rax) |=(a=@ [1 a])))
-      $(nix +(nix), rax [(need (need (~(get by q.duv) nix))) rax])
+      $(nix +(nix), rax [(need (~(get by q.duv) nix)) rax])
     ::
     ++  grub                                            ::    grub:lo:am
       |=  dun=band                                      ::  clean up msg
@@ -887,11 +890,12 @@
     ::
     ++  wait                                            ::    wait:lo:am
       |=  [sin=skin msg=@]                              ::  receive indirect
+      ~&  [%wait sin]
       ^+  ..wait
       =+  pay=((hard ,[p=@ud q=@]) (cue msg))
-      =+  bad=(shaf %band dam)
-      =>  .(nys.weg (~(put by nys.weg) bad [(add now ~d1) sin 0 p.pay ~]))
-      (dine | @p [%carp 0 bad q.pay])
+      ~&  [%wait-band p.pay `@p`(mug dam)]
+      =>  .(nys.weg (~(put by nys.weg) dam [(add now ~d1) sin 0 p.pay ~]))
+      (dine | @p [%carp 0 dam q.pay])
     ::
     ++  wake                                            ::    wake:lo:am
       |=  her=flag                                      ::  initiate flow
@@ -919,6 +923,8 @@
     |=  pac=rock                                        ::  process packet
     ^-  [p=(list boon) q=fort]
     =+  kec=(bite pac)
+    ~&  [%gnaw-rock `@p`(mug pac)]
+    ~&  [%gnaw-cake p.kec q.kec r.kec (mug s.kec)]
     =+  how=(~(yo go ton.fox) p.kec)
     ?-  -.how
       &  grok:(blow:(lo [p.how (shaf %band pac)]) q.kec r.kec s.kec)
@@ -934,9 +940,10 @@
         :~  =+  mey=*(list ,[p=@da q=boon])
             |-  ^-  (list ,[p=@da q=boon])
             ?~  r.p.peq  mey
+            ~&  [%hast-mey `@p`(mug i.r.p.peq)]
             %=    $
                 r.p.peq  t.r.p.peq
-                    ::  fux      (add 0x1.0000.0000 fux) 
+                fux      (add 0x1.0000.0000 fux) 
                 mey      [[fux %ouzo lyn i.r.p.peq] mey]
             ==
         ::
@@ -944,7 +951,7 @@
             ?~  s.p.peq  mey
             %=    $
                 s.p.peq  t.s.p.peq
-                    ::  fux      (add 0x1.0000.0000 fux) 
+                fux      (add 0x1.0000.0000 fux) 
                 mey      [[fux %coke %dead i.s.p.peq] mey]
             ==
         ==
@@ -1056,11 +1063,15 @@
       ?>  ?=(^ ruv)
       =+  may=(spit q.soq | p.p.wip (jam wit i.ruv))
       =+  bad=(shaf %band may)
+      ~&  [%weft-band `@p`(mug bad)]
       =+  inx=1
+      ~&  [%weft-rock 0 `@p`(mug may)]
       :-  may
       |-  ^-  (list rock)
       ?~  t.ruv  ~
-      :-  (spit q.soq & wasp(lun ~, ham [%carp inx bad i.t.ruv]))
+      =+  vie=(spit q.soq & wasp(lun ~, ham [%carp inx bad i.t.ruv]))
+      ~&  [%weft-rock inx `@p`(mug vie)]
+      :-  vie
       $(t.ruv t.t.ruv, inx +(inx))
     ::
     ++  went                                            ::  spool
@@ -1145,7 +1156,8 @@
         %coke  !!
         %mead  !!
         %milk  !!
-        %ouzo  [[[whu hen [%send p.bon q.bon]] ~] +>.$]
+        %ouzo  ~&  [%clop-ouzo `@p`(mug q.bon)]
+               [[[whu hen [%send p.bon q.bon]] ~] +>.$]
         %sack  !!
         %wine  !!
     ==
