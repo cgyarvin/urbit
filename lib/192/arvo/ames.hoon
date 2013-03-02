@@ -482,17 +482,16 @@
     ++  bite                                            ::  packet to cake
       |=  pac=rock  ^-  cake
       =+  [mag=(end 5 1 pac) bod=(rsh 5 1 pac)]
-      =+  :*  chk=(end 0 22 mag) 
-              dit=(cut 0 [22 1] mag)
-              wix=(bex +((cut 0 [23 2] mag)))
-              vix=(bex +((cut 0 [25 2] mag)))
-              tay=(cut 0 [27 5] mag)
+      =+  :*  vez=(end 0 3 mag)                         ::  protocol version
+              chk=(cut 0 [3 19] mag)                    ::  checksum
+              dit=(cut 0 [22 1] mag)                    ::  if 0, unfragmented
+              wix=(bex +((cut 0 [23 2] mag)))           ::  width of receiver
+              vix=(bex +((cut 0 [25 2] mag)))           ::  width of sender
+              tay=(cut 0 [27 5] mag)                    ::  message type
           ==
-      ?>  =(chk (end 0 22 (mug bod)))
-      :^    =+  too=`@p`(end 3 wix bod)
-            =+  fro=`@p`(cut 3 [wix vix] bod)
-            ?>  =(too fro)
-            too
+      ?>  =(0 vez)
+      ?>  =(chk (end 0 19 (mug bod)))
+      :^    [(end 3 wix bod) (cut 3 [wix vix] bod)]
           =(0 dit)
         (snag tay [%none %open %fast %full ~])
       (rsh 3 (add wix vix) bod)
@@ -500,18 +499,18 @@
     ++  spit                                            ::  cake to packet
       |=  kec=cake  ^-  @
       ~&  [%spit-cake p.kec q.kec r.kec (mug s.kec)]
-      =+  fro=p.kec
-      =+  wim=(met 3 p.kec)
-      =+  dum=(met 3 fro)
+      =+  wim=(met 3 p.p.kec)
+      =+  dum=(met 3 q.p.kec)
       =+  yax=?:((lte wim 2) 0 ?:((lte wim 4) 1 ?:((lte wim 8) 2 3)))
       =+  qax=?:((lte dum 2) 0 ?:((lte dum 4) 1 ?:((lte dum 8) 2 3)))
       =+  wix=(bex +(yax))
       =+  vix=(bex +(qax))
-      =+  bod=:(mix p.kec (lsh 3 wix fro) (lsh 3 (add wix vix) s.kec))
+      =+  bod=:(mix p.p.kec (lsh 3 wix q.p.kec) (lsh 3 (add wix vix) s.kec))
       =+  tay=?-(r.kec %none 0, %open 1, %fast 2, %full 3)
       %+  mix
         %+  can  0
-        :~  [22 (mug bod)]
+        :~  [3 0]
+            [19 (mug bod)]
             [1 q.kec]
             [2 yax]
             [2 qax]
@@ -821,7 +820,6 @@
     ::
     ++  chow                                            ::    chow:lo:am 
       |=  [sec=? him=flag fey=tray]                     ::  interpret tray
-      ~&  [%chow sec him fey]
       =.  gus 
           ?.  &(sec ?=(^ p.fey))  gus 
           (pyl:gus him u.p.fey)
@@ -939,7 +937,7 @@
     =+  kec=(bite pac)
     ::  ~&  [%gnaw-rock `@p`(mug pac)]
     ::  ~&  [%gnaw-cake p.kec q.kec r.kec (mug s.kec)]
-    =+  how=(~(yo go ton.fox) p.kec)
+    =+  how=(~(yo go ton.fox) p.p.kec)
     ?-  -.how
       &  grok:(blow:(lo [p.how (shaf %flap pac)]) q.kec r.kec s.kec)
       |  [[[%ouzo p.how pac] ~] fox]
@@ -1072,16 +1070,16 @@
       =+  wit=(met 13 q.p.wip)
       ?<  =(0 wit)
       ?:  =(1 wit)
-        [(spit q.soq & p.p.wip q.p.wip) ~]
+        [(spit [q.soq p.soq] & p.p.wip q.p.wip) ~]
       =+  ruv=(rip 13 q.p.wip) 
       ?>  ?=(^ ruv)
-      =+  may=(spit q.soq | p.p.wip (jam wit i.ruv))
+      =+  may=(spit [q.soq p.soq] | p.p.wip (jam wit i.ruv))
       =+  bad=(shaf %flap may)
       =+  inx=1
       :-  may
       |-  ^-  (list rock)
       ?~  t.ruv  ~
-      =+  vie=(spit q.soq & wasp(lun ~, ham [%carp inx bad i.t.ruv]))
+      =+  vie=(spit [q.soq p.soq] & wasp(lun ~, ham [%carp inx bad i.t.ruv]))
       :-  vie
       $(t.ruv t.t.ruv, inx +(inx))
     ::
