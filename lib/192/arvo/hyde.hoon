@@ -115,7 +115,7 @@
 ++  bran  ,[p=mark q=(unit mark) r=flag s=@da]          ::  our parent us now
 ++  brow  ,[p=@da q=@tas]                               ::  browser version
 ++  buck  ,[p=mace q=will]                              ::  all security data
-++  cake  ,[p=flag q=? r=skin s=@]                      ::  top level packet
+++  cake  ,[p=sock q=? r=skin s=@]                      ::  top level packet
 ++  cape                                                ::  end-to-end result
           $?  %dead                                     ::  maybe undelivered
               %good                                     ::  delivered

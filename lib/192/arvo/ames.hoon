@@ -482,30 +482,39 @@
     ++  bite                                            ::  packet to cake
       |=  pac=rock  ^-  cake
       =+  [mag=(end 5 1 pac) bod=(rsh 5 1 pac)]
-      =+  :*  chk=(end 0 24 mag) 
-              dit=(cut 0 [24 1] mag)
-              wix=(bex +((cut 0 [25 2] mag)))
+      =+  :*  chk=(end 0 22 mag) 
+              dit=(cut 0 [22 1] mag)
+              wix=(bex +((cut 0 [23 2] mag)))
+              vix=(bex +((cut 0 [25 2] mag)))
               tay=(cut 0 [27 5] mag)
           ==
-      ?>  =(chk (end 0 24 (mug bod)))
-      :^    `@p`(end 3 wix bod)
+      ?>  =(chk (end 0 22 (mug bod)))
+      :^    =+  too=`@p`(end 3 wix bod)
+            =+  fro=`@p`(cut 3 [wix vix] bod)
+            ?>  =(too fro)
+            too
           =(0 dit)
         (snag tay [%none %open %fast %full ~])
-      (rsh 3 wix bod)
+      (rsh 3 (add wix vix) bod)
     ::
     ++  spit                                            ::  cake to packet
       |=  kec=cake  ^-  @
       ~&  [%spit-cake p.kec q.kec r.kec (mug s.kec)]
+      =+  fro=p.kec
       =+  wim=(met 3 p.kec)
+      =+  dum=(met 3 fro)
       =+  yax=?:((lte wim 2) 0 ?:((lte wim 4) 1 ?:((lte wim 8) 2 3)))
+      =+  qax=?:((lte dum 2) 0 ?:((lte dum 4) 1 ?:((lte dum 8) 2 3)))
       =+  wix=(bex +(yax))
-      =+  bod=(mix p.kec (lsh 3 wix s.kec))
+      =+  vix=(bex +(qax))
+      =+  bod=:(mix p.kec (lsh 3 wix fro) (lsh 3 (add wix vix) s.kec))
       =+  tay=?-(r.kec %none 0, %open 1, %fast 2, %full 3)
       %+  mix
         %+  can  0
-        :~  [24 (mug bod)]
+        :~  [22 (mug bod)]
             [1 q.kec]
             [2 yax]
+            [2 qax]
             [5 tay]
         ==
       (lsh 5 1 bod)
