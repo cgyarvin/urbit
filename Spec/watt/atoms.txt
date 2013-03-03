@@ -32,7 +32,7 @@ Name   Definition     Example as printed             Comment
 
 ~ %ub  unsigned 2
 ~ %ud  unsigned 10 
-~ %uh  unsigned 16 
+~ %ux  unsigned 16 
 ~ %uv  unsigned 32
 ~ %uw  unsigned 64
 
