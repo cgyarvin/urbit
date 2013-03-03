@@ -237,20 +237,42 @@ void
 u2_ames_io_suck(u2_reck*      rec_u,
                 struct ev_io* wax_u)
 {
-  c3_y     buf_y[65536];
-  c3_ws    len_ws;
+  c3_y               buf_y[65536];
+  c3_ws              len_ws;
+  struct sockaddr_in add_k;
+  socklen_t          add_t;
+  c3_s               por_s;
+  c3_w               pip_w;
 
 //  while ( 1 ) {
-    if ( -1 == (len_ws = recv(wax_u->fd, buf_y, 16384, MSG_WAITALL)) ) {
+
+    add_t = sizeof(struct sockaddr_in);
+    if ( -1 == (len_ws = recvfrom(wax_u->fd, 
+                                  buf_y, 
+                                  65536, 
+                                  MSG_WAITALL,
+                                  (struct sockaddr *)&add_k,
+                                  &add_t)) )
+    {
       if ( EAGAIN != errno ) {
         uL(fprintf(uH, "ames: error %d\n", errno));
       }
       return;
     }
+    // por_s = ntohs(add_k.sin_port);
+    // pip_w = ntohl(add_k.sin_addr.s_addr);
+
+    por_s = ntohs(add_k.sin_port);         //??
+    pip_w = ntohl(add_k.sin_addr.s_addr);  //??
+
+    uL(fprintf(stderr, "por_s %d, pip_w %x\n", por_s, pip_w));
+
     u2_reck_plan
       (rec_u,
        u2nt(c3__gold, c3__ames, u2_nul),    //  XX no!
        // u2nt(c3__lead, c3__ames, u2_nul),
-       u2nc(c3__hear, u2_ci_bytes((c3_w)len_ws, buf_y)));
+       u2nt(c3__hear, 
+            u2nt(c3__if, por_s, u2_ci_words(1, &pip_w)),
+            u2_ci_bytes((c3_w)len_ws, buf_y)));
  // }
 }
