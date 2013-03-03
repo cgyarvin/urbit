@@ -108,7 +108,6 @@
               [%mead p=rock]                            ::  accept packet
               [%milk p=sock q=@da r=bond]               ::  learn bindings
               [%ouzo p=lane q=rock]                     ::  transmit packet
-              [%sack p=sock q=cape r=flap]              ::  send ack
               [%wine p=flag]                            ::  lost ownership
           ==                                            ::
 ++  bowl  ,[p=(list card) q=(unit boat)]                ::  standard product

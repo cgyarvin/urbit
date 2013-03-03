@@ -874,7 +874,10 @@
       |=  fey=tray                                      ::  interpret tray
       =.  gus 
           ?.  &(aut ?=(^ p.fey))  gus 
-          (pyl:gus her u.p.fey)
+          ?>  ?&  |(=(0 p.u.p.fey) =(p.ryn p.u.p.fey))
+                  =(q.ryn q.u.p.fey)
+              ==
+          (pyl:gus her ryn)
       (dine q.fey)
     ::
     ++  dine                                            ::    dine:lo:am
@@ -975,16 +978,9 @@
            %-  =<  blow
               (lo p.how q.p.kec ryn | (shaf %flap pac))
            [q.kec r.kec s.kec]
-         =^  guy  fox
-           (gack pac)
-         [(weld p.muy p.guy) fox]
+         [muy fox]
       |  [[[%ouzo p.how pac] ~] fox]
     ==
-  ::
-  ++  gack                                              ::    gack:am
-    |=  pac=rock                                        ::  acknowledge packet
-    ^-  [p=(list boon) q=fort]
-    [~ fox]
   ::
   ++  hast                                              ::    hast:am
     |=  [soq=sock bah=bath]                             ::  roll per socket
@@ -1062,6 +1058,15 @@
     ^-  fort
     =+  gus=(need (~(us go ton.fox) our))
     fox(ton (~(su go ton.fox) (fix:gus lyn)))
+  ::
+  ++  wack                                              ::    wack:am
+    |=  [soq=sock ryn=lane ham=meal]                    ::  direct send
+    ^-  [p=(list boon) q=fort]
+    =+  sug=(need (~(us go ton.fox) p.soq))
+    =+  diz=(myx:sug q.soq)
+    =^  rox  diz  (zuul:diz now ham)
+    :-  (turn p.rox |=(pac=rock [%ouzo ryn pac]))
+    fox(ton (~(su go ton.fox) (nux:sug diz)))
   ::
   ++  wash                                              ::    wash:am
     |=  [soq=sock sup=soap ham=meal]                    ::  dispatch and send
@@ -1141,7 +1146,6 @@
         %milk  !!
         %ouzo  ~&  [%send `@p`(mug q.bon)]
                [[[whu hen [%send p.bon q.bon]] ~] +>.$]
-        %sack  !!
         %wine  !!
     ==
   ::

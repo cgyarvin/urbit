@@ -265,7 +265,7 @@ u2_ames_io_suck(u2_reck*      rec_u,
     por_s = ntohs(add_k.sin_port);         //??
     pip_w = ntohl(add_k.sin_addr.s_addr);  //??
 
-    uL(fprintf(stderr, "por_s %d, pip_w %x\n", por_s, pip_w));
+    // uL(fprintf(stderr, "por_s %d, pip_w %x\n", por_s, pip_w));
 
     u2_reck_plan
       (rec_u,
