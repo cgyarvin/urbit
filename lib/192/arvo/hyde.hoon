@@ -332,8 +332,6 @@
 ++  purl  ,[p=hart q=pork r=quay]                       ::  parsed url
 ++  putt                                                ::  outgoing message
           $:  ski=snow                                  ::  sequence acked/sent
-              saq=?                                     ::  secure ack required
-              ryn=(unit lane)                           ::  implied mirror lane
               wyv=(list rock)                           ::  packet list XX gear
           ==                                            ::
 ++  quay  (map ,@t ,@t)                                 ::  parsed url query
