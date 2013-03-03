@@ -903,9 +903,9 @@
     ==
   ::
   ++  gnaw                                              ::    gnaw:am
-    |=  pac=rock                                        ::  process packet
+    |=  [lyn=lane pac=rock]                             ::  process packet
     ^-  [p=(list boon) q=fort]
-    ~&  [%hear `@p`(mug pac)]
+    ~&  [%hear lyn `@p`(mug pac)]
     =+  kec=(bite pac)
     =+  how=(~(yo go ton.fox) p.p.kec)
     ?-  -.how
@@ -1161,7 +1161,7 @@
           [%ping ~]
         ::
             %hear
-          (~(gnaw am [now fox]) p.fav)
+          (~(gnaw am [now fox]) p.fav q.fav)
         ::
             %junk
           [~ fox(any.ton (shax (mix any.ton.fox p.fav)))]

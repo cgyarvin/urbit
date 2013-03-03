@@ -137,7 +137,7 @@
               [%file p=@tas q=@]                        ::  apply atomic file
               [%fail p=tape]                            ::  report failure
               [%hail ~]                                 ::  welcome user
-              [%hear p=@]                               ::  receive packet
+              [%hear p=lane q=@]                        ::  receive packet
               [%helo ~]                                 ::  trigger prompt
               [%home p=flag q=lane]                     ::  bind home address
               [%init p=@p]                              ::  report install
