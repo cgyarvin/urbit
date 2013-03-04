@@ -141,7 +141,7 @@
       typedef struct {
         struct {
           c3_w* lin_w;                      //  current line (utf32)
-          c3_w  len_w;                      // length of current line
+          c3_w  len_w;                      //  length of current line
           c3_w  cus_w;                      //  cursor position
         } mir;
 
@@ -205,6 +205,22 @@
           const c3_y* cuf_y;                //  parm_right_cursor #num 
         } out;
       } u2_utfo;
+
+#if 0
+    /* u2_uwen: unix alarm.
+    */
+      typedef struct _u2_uwen {
+        c3_y* pax_y;                        //  printed path
+        c3_d  wen_d[2];                     //  timer expire
+      };
+
+    /* u2_utim: unix timer control.
+    */
+      typedef struct _u2_utim {
+        struct ev_timer wat_u;              //  libev timer control
+        u2_uwen*        wen_u;              //  timers in ascending order
+      };
+#endif
 
     /* u2_utty: unix tty.
     */
@@ -289,6 +305,7 @@
           u2_noun slay;                   //  text to coin
           u2_noun scot;                   //  mole to text
           u2_noun spat;                   //  path to text
+          u2_noun stab;                   //  text to path
           u2_noun turf;                   //  utf8 to utf32
           u2_noun tuft;                   //  utf32 to utf8
           u2_noun mook;                   //  trace conversion

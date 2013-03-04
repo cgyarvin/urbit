@@ -590,6 +590,7 @@
 =>  |%                                                  ::  selective ack
     ++  suck
       |=  [num=@ud ski=snow]
+      ~&  [%suck num ski]
       ^-  [p=(list ,@ud) q=snow]
       ?>  (lte num q.ski)
       ?:  =(num p.ski)
@@ -775,14 +776,10 @@
     ++  tuck                                            ::    tuck:ad:am
       |=  [kay=cape fap=flap cot=@dr]                   ::  ack by hash
       ^+  ..tuck
-      ~&  [%tuck `@p`(mug fap) fap air.bah]
       =>  %_(. ..tuck (tusk kay (need (~(get by air.bah) fap)) cot))
       ?.  =(%good kay)
         ..tuck
-      ~&  [%tuck-in air.bah]
-      =.  ..tuck  ..tuck(air.bah (~(del by air.bah) fap))
-      ~&  [%tuck-out air.bah]
-      ..tuck
+      ..tuck(air.bah (~(del by air.bah) fap))
     ::
     ++  tusk                                            ::    tusk:ad:am
       |=  [kay=cape num=@ud cot=@dr]                    ::  ack by sequence
@@ -795,7 +792,9 @@
         ==
       ::
           %good
+        ~&  [%tusk-ski-bah ski.bah]
         =+  suz=(suck num ski.bah)
+        ~&  [%tusk-ski-suz suz] 
         =>  %_    .
                 sea.bah
               |-  ^+  sea.bah
@@ -1122,6 +1121,11 @@
       =^  duy  ..knap
         (knap whu hen fav)
       [duy ..^$]
+    ::
+    ++  doze
+      |=  hen=hose
+      ^-  (unit ,[p=@da q=move])
+      ~
     ::
     ++  scry
       |=  [our=flag ren=@tas his=flag lot=coin tyl=path]

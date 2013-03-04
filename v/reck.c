@@ -319,6 +319,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
   rec_u->toy.slop = _reck_root("slop", u2k(ken));
   rec_u->toy.scot = _reck_root("scot", u2k(ken));
   rec_u->toy.spat = _reck_root("spat", u2k(ken));
+  rec_u->toy.stab = _reck_root("stab", u2k(ken));
   rec_u->toy.turf = _reck_root("turf", u2k(ken));
   rec_u->toy.tuft = _reck_root("tuft", u2k(ken));
   rec_u->toy.wash = _reck_root("wash", u2k(ken));

@@ -57,6 +57,11 @@
       ==
     ==
   ::
+  ++  doze
+    |=  hen=hose
+    ^-  (unit ,[p=@da q=move])
+    ~
+  ::
   ++  scry
     |=  [our=flag ren=@tas who=flag lot=coin tyl=path]
     ^-  (unit)

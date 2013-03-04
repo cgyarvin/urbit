@@ -21,6 +21,11 @@
       :-  p.yub
       ..^$(deb (~(put by deb) u.whu q.yub))
     ::
+    ++  doze
+      |=  hen=hose
+      ^-  (unit ,[p=@da q=move])
+      ~
+    ::
     ++  scry
       |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
       ^-  (unit)

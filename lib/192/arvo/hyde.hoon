@@ -172,6 +172,8 @@
               [%this p=httq]                            ::  secure raw htreq
               [%thou p=httr]                            ::  raw http response
               [%tory p=(list ,@t)]                      ::  history dump
+              [%wait p=@da q=path]                      ::  timer wait
+              [%wake p=@da q=path]                      ::  timer activate
               [%warn p=tape]                            ::  system message
               [%wipe ~]                                 ::  clean up hose
               [%word p=chum]                            ::  set password
@@ -408,11 +410,14 @@
               ++  beat                                  ::  update
                         |=  $:  whu=(unit flag)         ::  calling identity
                                 pax=tire                ::  pretext
-                                hen=hose                ::  pedigree
+                                hen=hose                ::  channel
                                 fav=card                ::  event
                             ==                          ::
                         :-  p=*(list move)              ::  actions
                         q=*vane                         ::  consequence
+              ++  doze                                  ::  next wakeup
+                        |=  hen=hose                    ::  channel
+                        *(unit ,[p=@da q=move])         ::  actions at time
               ++  scry                                  ::  inspect
                         |=  $:  our=flag                ::  observer
                                 ren=@tas                ::  mode

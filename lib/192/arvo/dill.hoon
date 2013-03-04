@@ -370,6 +370,11 @@
       ..^$(wib ?.(wip (~(put by wib) hen yar) (~(del by wib) hen)))
     --
   ::
+  ++  doze
+    |=  hen=hose
+    ^-  (unit ,[p=@da q=move])
+    ~
+  ::
   ++  scry
     |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
     ^-  (unit)

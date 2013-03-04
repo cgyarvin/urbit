@@ -4393,6 +4393,10 @@
     [* * *]  $(wad [n.wad ~ r.wad], vax $(wad l.wad))
   ==
 ::
+++  stab
+  |=  zep=@ta  ^-  path
+  (need (rush zep ;~(pfix fas ;~(sfix (more fas urs:ab) fas))))
+::
 ++  wash
   |=  [[tab=@ edg=@] tac=tank]  ^-  wall
   (~(win re tac) tab edg) 
