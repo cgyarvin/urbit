@@ -4378,7 +4378,8 @@
   |=  typ=type  ^-  tank
   ~(duck ut typ)
 ::
-++  spat  |=(pax=path (rap 3 ~(ram re (dish:ut [~ %path] pax))))
+++  spat  |=(pax=path (rap 3 (spud pax)))
+++  spud  |=(pax=path ~(ram re (dish:ut [~ %path] pax)))
 ++  slot
   |=  [axe=@ vax=vase]  ^-  vase
   (slap vax [~ axe]) 

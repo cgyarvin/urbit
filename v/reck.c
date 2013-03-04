@@ -48,7 +48,7 @@ _reck_nock_peek(u2_reck* rec_u, u2_noun our, u2_noun hap)
 static u2_noun
 _reck_nock_wish(u2_reck* rec_u, u2_noun our, u2_noun ovo)
 {
-  u2_noun fun = u2_cn_nock(u2k(rec_u->roc), u2k(u2_cx_at(5, rec_u->roc)));
+  u2_noun fun = u2_cn_nock(u2k(rec_u->roc), u2k(u2_cx_at(4, rec_u->roc)));
   u2_noun sam = u2nc(u2k(rec_u->now), ovo);
 
   return u2_cn_mung(fun, sam);

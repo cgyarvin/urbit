@@ -265,6 +265,7 @@
               [%kl p=tick]                              ::  kill a process
               [%nk ~]                                   ::  kill all processes
               [%ps ~]                                   ::  list processes
+              [%so p=@tas q=crow]                       ::  set variable
               [%to p=crow]                              ::  type only
           ==                                            ::
 ++  lens  ?(%z %y %x %w)                                ::  repository view

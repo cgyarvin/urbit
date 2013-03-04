@@ -792,9 +792,7 @@
         ==
       ::
           %good
-        ~&  [%tusk-ski-bah ski.bah]
         =+  suz=(suck num ski.bah)
-        ~&  [%tusk-ski-suz suz] 
         =>  %_    .
                 sea.bah
               |-  ^+  sea.bah

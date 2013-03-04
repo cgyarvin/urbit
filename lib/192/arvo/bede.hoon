@@ -63,7 +63,7 @@
           sur=[p=0 q=*(qeu vase)]                       ::  result history
           hox=(scot %p who)                             ::  identity string
           cwd=*path                                     ::  working directory
-          way=*(map ,@ta vase)                          ::  variables
+          way=*(map ,@tas vase)                         ::  variables
           pak=*(list ,[p=@ud q=path])                   ::  prompt stack
           lif=*dock                                     ::  processes
       ==
@@ -210,6 +210,14 @@
               (stag %kl (cook |=(a=dime ?>(?=(%ud p.a) q.a)) bisk:so))
             ==
           ::
+            ;~  pfix  ;~(plug (jest 'so') gap)
+              %+  stag  %so
+              ;~  plug  
+                sym
+                ;~(pfix gap (stag %p (most ace worc)))
+              ==
+            ==
+          ::
             (cold [%nk ~] ;~(plug (just 'n') (just 'k')))
             (cold [%ps ~] ;~(plug (just 'p') (just 's')))
           ::
@@ -340,7 +348,7 @@
       |=  [dst=tire fav=card]
       +>(duz [[[~ who] [dst hen] fav] duz])
     ::
-    ++  ergo
+    ++  ergo                                            ::  request stub
       |=  gez=(list path)
       ^-  beef
       :_  [~ ~]
@@ -419,12 +427,26 @@
       =.  bor  r.bof
       (gird q.bof)
     ::
+    ++  hock                                            ::  set a variable
+      |=  [nam=@tas woc=crow]
+      ^+  +>
+      =+  gen=(doul:do woc)                             ::  XX usercode in kern
+      =+  yun=lube
+      =+  heq=(~(mint ut p.yun) %noun gen)              ::  XX type in kernel
+      =+  ton=(mock [q.yun q.heq] sky)                  ::  XX for speed only
+      ?-  -.ton                                         ::  XX but shd cache
+        %0  =.  way  (~(put by way) nam [p.heq p.ton])
+            (emit %note '.' %leaf (trip nam))
+        %1  (emit %crud (turn p.ton |=(a=* [%leaf (spud (path a))])))
+        %2  (emit %crud p.ton)
+      ==
+    ::
     ++  jerk                                            ::  deliver note
       |=  [pux=path nob=note]
       ^+  +>
       ?>  ?=(^ bor)
       ?>  ?=(& -.u.bor)
-      ?>  ?=(~ p.u.bor)   ::  XX actually handle blocks
+      ?>  ?=(~ p.u.bor)                                 ::  XX actually block
       %-  haul
       %^    dost
           (mong [fane:do [pux nob r.u.bor]] sky)
@@ -443,6 +465,7 @@
           %kl  (envy /b/ [%kill p.kal])
           %nk  (envy /b/ [%nuke ~])
           %ps  (emir view)
+          %so  (hock p.kal q.kal)
           %to  (haul (dost (mong [ecto:do lube +.kal] sky) ergo hak))
       ==
     ::
