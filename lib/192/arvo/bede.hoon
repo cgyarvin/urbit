@@ -71,7 +71,7 @@
   =+  wen=(scot %da now)
   =+  wer=`path`[%cx wen hox (weld cwd [hub ~])]
   =+  rew=(flop wer)
-  =+  vez=(vang & wer)
+  =+  vez=(vang | wer)
   |%
   ++  do                                                ::  userspace code
     |%

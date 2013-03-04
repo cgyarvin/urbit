@@ -9,6 +9,11 @@
     ^-  *
     [8 [1 duc] [9 2 [[0 4] [[0 3] [0 11]]]]]
 =<  |%
+    ++  keep                                            ::  wakeup delay
+      |=  *  ^-  @da
+      =>  .(+< ((hard ,now=@da) +<))
+      now
+    ::
     ++  peek                                            ::  external inspect
       |=  *
       ^-  (unit)
