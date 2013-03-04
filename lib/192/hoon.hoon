@@ -1063,7 +1063,9 @@
       ?~  a
         ~
       ?.  =(b n.a)
-        ?:((hor b n.a) $(a l.a) $(a r.a))
+        ?:  (hor b n.a) 
+          [n.a $(a l.a) r.a] 
+        [n.a l.a $(a r.a)]
       |-  ^-  ?(~ _a)
       ?~  l.a  r.a
       ?~  r.a  l.a
@@ -1153,7 +1155,9 @@
       ?~  a
         ~
       ?.  =(b p.n.a)
-        ?:((hor b p.n.a) $(a l.a) $(a r.a))
+        ?:  (hor b p.n.a) 
+          [n.a $(a l.a) r.a] 
+        [n.a l.a $(a r.a)]
       |-  ^-  ?(~ _a)
       ?~  l.a  r.a
       ?~  r.a  l.a
