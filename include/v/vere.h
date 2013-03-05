@@ -121,11 +121,13 @@
     /* u2_ames: ames networking.
     */
       typedef struct _u2_ames {             //  packet network state
-        struct ev_io wax_u;                 //  event handler state
-        c3_w         pip_w;                 //  public IPv4 address
-        c3_s         por_s;                 //  public IPv4 port
-        u2_apac*     out_u;                 //  exit of output queue
-        u2_apac*     tou_u;                 //  entry of output queue
+        struct ev_io    wax_u;              //  event handler state
+        struct ev_timer tim_u;              //  network timer
+        u2_bean         alm;                //  alarm on
+        c3_w            pip_w;              //  public IPv4 address
+        c3_s            por_s;              //  public IPv4 port
+        u2_apac*        out_u;              //  exit of output queue
+        u2_apac*        tou_u;              //  entry of output queue
       } u2_ames;
 
     /* u2_ubuf: unix tty i/o buffer.
@@ -550,6 +552,11 @@
         u2_noun
         u2_reck_peek(u2_reck* rec_u, u2_noun our, u2_noun hap);
 
+      /* u2_reck_keep(): measure timer.
+      */
+        u2_noun 
+        u2_reck_keep(u2_reck* rec_u, u2_noun hap);
+
       /* u2_reck_poke(): insert and apply an input ovum (protected).
       */
         u2_noun
@@ -771,7 +778,7 @@
         void
         u2_lo_call(u2_reck*        rec_u,
                    struct ev_loop* lup_u,
-                   struct ev_io*   wax_u,
+                   void*           wev_u,
                    u2_noun         how,
                    c3_i            revents);
 
@@ -918,6 +925,11 @@
         u2_ames_io_suck(u2_reck*      rec_u,
                         struct ev_io* wax_u);
 
+      /* u2_ames_io_time(): time event on ames channel.
+      */
+        void
+        u2_ames_io_time(u2_reck*         rec_u,
+                        struct ev_timer* tim_u);
 
     /**  HTTP, new style.
     **/

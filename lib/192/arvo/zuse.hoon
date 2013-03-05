@@ -10,9 +10,9 @@
     [8 [1 duc] [9 2 [[0 4] [[0 3] [0 11]]]]]
 =<  |%
     ++  keep                                            ::  wakeup delay
-      |=  *  ^-  @da
-      =>  .(+< ((hard ,now=@da) +<))
-      now
+      |=  *  ^-  (unit ,@da)
+      =>  .(+< ((hard ,[now=@da hap=path]) +<))
+      (~(doos is now) hap)
     ::
     ++  peek                                            ::  external inspect
       |=  *
@@ -73,16 +73,30 @@
     %-  scry:(q.i.fan now (shax now) ..^$)
     [u.owr rem his u.ved tyl]
   ::
+  ++  dink                                              ::  vane by char
+    |=  din=@tas  ^-  vane
+    ?~(fan !! ?:(=(din p.i.fan) q.i.fan $(fan t.fan)))
+  ::
+  ++  dint                                              ::  name to vane
+    |=  hap=path  ^-  @tas
+    ?+  hap  !!
+      [@ %ames *]  %a
+      [@ %sync *]  %c
+      [@ %term *]  %d
+      [@ %http *]  %e
+    ==
+  ::
+  ++  doos
+    |=  hap=path
+    ^-  (unit ,@da)
+    =+  van=`vane`(dink (dint hap))
+    =+  vug=(van now 0 (beck ~))
+    (doze:vug [hap ~])
+  ::
   ++  hurl                                              ::  start loop
     |=  ovo=ovum
     ^-  [p=(list ovum) q=(list ,[p=@tas q=vane])]
-    =+  ^=  des  ^-  @tas
-        ?+  p.ovo  !!
-          [@ %ames *]  %a
-          [@ %sync *]  %c
-          [@ %term *]  %d
-          [@ %http *]  %e
-        ==
+    =+  des=(dint p.ovo)
     (kick [[~ [[des ~] p.ovo ~] q.ovo] ~])
   ::
   ++  kick                                              ::  complete loop

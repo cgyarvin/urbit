@@ -720,7 +720,7 @@
         ?^(bah u.bah %*(. *bath foy baby))            
     |%
     ++  cool                                            ::    cool:ad:am
-      |-  ^+  ..cool                                    ::  refill window
+      |-  ^+  ..cool                                    ::  fill window
       ?.  &(?=(^ maz.bah) (gth wid.foy.bah yed.foy.bah))
         ..cool
       $(..cool pock)
@@ -1122,8 +1122,9 @@
     ::
     ++  doze
       |=  hen=hose
-      ^-  (unit ,[p=@da q=move])
-      ~
+      ^-  (unit ,@da)
+      ::  ~&  [%ames-doze ?:(=(0 wen.fox) ~ [~ wen.fox])]
+      ?:(=(0 wen.fox) ~ [~ wen.fox])
     ::
     ++  scry
       |=  [our=flag ren=@tas his=flag lot=coin tyl=path]

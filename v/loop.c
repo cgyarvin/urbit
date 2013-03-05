@@ -92,6 +92,20 @@ _lo_how(u2_noun how)
   }
 }
 
+/* _lo_time(): process timer on a socket.
+*/
+static void
+_lo_time(u2_reck*         rec_u,
+         struct ev_timer* tim_u,
+         u2_noun          how)
+{
+  switch ( how ) {
+    default: c3_assert(0); break;
+
+    case c3__ames: u2_ames_io_time(rec_u, tim_u); break;
+  }
+} 
+
 /* _lo_suck(): process input on a socket.
 */
 static void
@@ -475,21 +489,23 @@ _lo_work(u2_reck* rec_u)
 void
 u2_lo_call(u2_reck*        rec_u,
            struct ev_loop* lup_u,
-           struct ev_io*   wax_u,
+           void*           wev_u,
            u2_noun         how,
            c3_i            revents)
 {
   u2_bean inn = (revents & EV_READ) ? u2_yes : u2_no;
   u2_bean out = (revents & EV_WRITE) ? u2_yes : u2_no;
+  u2_bean tim = (revents & EV_TIMEOUT) ? u2_yes : u2_no;
 
   _lo_stop(rec_u, lup_u);
 
 #if 0
   {
-    uL(fprintf(uH, "call %s inn %s out %s\n", 
+    uL(fprintf(uH, "call %s inn %s out %s tim %s\n", 
                       _lo_how(how), 
                       (inn == u2_yes) ? "yes" : "no", 
-                      (out == u2_yes) ? "yes" : "no"));
+                      (out == u2_yes) ? "yes" : "no",
+                      (tim == u2_yes) ? "yes" : "no"));
   }
 #endif
 
@@ -501,18 +517,26 @@ u2_lo_call(u2_reck*        rec_u,
     //  process input on this socket
     //
     if ( u2_yes == inn ){
-      _lo_suck(rec_u, wax_u, how);
+      _lo_suck(rec_u, wev_u, how);
     }
 
     //  process output on this socket
     //
     if ( u2_yes == out ) {
-      _lo_fuck(rec_u, wax_u, how);
+      _lo_fuck(rec_u, wev_u, how);
+    }
+
+    if ( u2_yes == tim ) {
+      _lo_time(rec_u, wev_u, how);
     }
 
     //  process actions
     //
     _lo_work(rec_u);
+
+    //  update time
+    //
+    u2_reck_time(rec_u);
   }
   _lo_poll(rec_u, lup_u);
   _lo_spin(rec_u, lup_u);

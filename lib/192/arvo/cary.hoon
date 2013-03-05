@@ -204,7 +204,7 @@
   ::
   ++  doze
     |=  hen=hose
-    ^-  (unit ,[p=@da q=move])
+    ^-  (unit ,@da)
     ~
   ++  scry                                              ::  inspect
     |=  [our=flag ren=@tas his=flag lot=coin tyl=path]

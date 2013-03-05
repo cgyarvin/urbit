@@ -23,7 +23,7 @@
     ::
     ++  doze
       |=  hen=hose
-      ^-  (unit ,[p=@da q=move])
+      ^-  (unit ,@da)
       ~
     ::
     ++  scry

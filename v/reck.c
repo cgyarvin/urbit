@@ -24,14 +24,13 @@
 /* _reck_nock_keep(): call keep through hardcoded interface.
 */
 static u2_noun
-_reck_nock_keep(u2_reck* rec_u, u2_noun our, u2_noun hap)
+_reck_nock_keep(u2_reck* rec_u, u2_noun hap)
 {
   u2_noun fun = u2_cn_nock(u2k(rec_u->roc), u2k(u2_cx_at(4, rec_u->roc)));
-  u2_noun sam = u2nt(our, u2k(rec_u->now), hap);
+  u2_noun sam = u2nc(u2k(rec_u->now), hap);
 
   return u2_cn_mung(fun, sam);
 }
-
 
 /* _reck_nock_poke(): call poke through hardcoded interface.
 */
@@ -297,6 +296,14 @@ u2_noun
 u2_reck_peek(u2_reck* rec_u, u2_noun our, u2_noun hap)
 {
   return _reck_nock_peek(rec_u, our, hap);
+}
+
+/* u2_reck_keep(): measure timer.
+*/
+u2_noun 
+u2_reck_keep(u2_reck* rec_u, u2_noun hap)
+{
+  return _reck_nock_keep(rec_u, hap);
 }
 
 /* u2_reck_init(): load the reck engine, from kernel.

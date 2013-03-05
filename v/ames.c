@@ -25,6 +25,10 @@
 static void _lo_ames(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i)
   { u2_lo_call(&u2_Host.rec_u[0], lup_u, wax_u, c3__ames, rev_i); }
 
+static void _lo_amat(struct ev_loop *lup_u, struct ev_timer* tim_u, c3_i rev_i)
+  { u2_lo_call(&u2_Host.rec_u[0], lup_u, tim_u, c3__ames, rev_i); }
+
+
 /* u2_ames_ef_send(): send packet to network.
 */
 void
@@ -127,6 +131,12 @@ u2_ames_io_init(u2_reck* rec_u)
 
       u2_reck_plan(rec_u, pax, fav);
     }
+
+    //  Timer too.
+    {
+      ev_timer_init(&sam_u->tim_u, _lo_amat, 10000.0, 0.);
+      sam_u->alm = u2_no;
+    }
   }
 }
 
@@ -149,6 +159,9 @@ u2_ames_io_spin(u2_reck*        rec_u,
   u2_ames* sam_u = &u2_Host.sam_u;
 
   ev_io_start(lup_u, &sam_u->wax_u);
+  if ( u2_yes == sam_u->alm ) {
+    ev_timer_start(lup_u, &sam_u->tim_u);
+  }
 }
 
 /* u2_ames_io_stop(): stop ames servers.
@@ -160,6 +173,10 @@ u2_ames_io_stop(u2_reck*        rec_u,
   u2_ames* sam_u = &u2_Host.sam_u;
 
   ev_io_stop(lup_u, &sam_u->wax_u);
+
+  if ( u2_yes == sam_u->alm ) {
+    ev_timer_stop(lup_u, &sam_u->tim_u);
+  }
 }
 
 /* u2_ames_io_poll(): update ames IO state.
@@ -176,6 +193,34 @@ u2_ames_io_poll(u2_reck*        rec_u,
     ver_i |= EV_WRITE;
   }
   ev_io_set(&sam_u->wax_u, sam_u->wax_u.fd, ver_i);
+
+  {
+    u2_noun wen = u2_reck_keep(rec_u, u2nt(c3__gold, c3__ames, u2_nul));
+    
+    if ( (u2_nul != wen) && (u2_yes == u2du(u2t(wen))) ) {
+      mpz_t now_mp, wen_mp;
+      double now_g, wen_g;
+      double sec_g = (((double)(1ULL << 32ULL)) * ((double)(1ULL << 32ULL)));
+      double gap_g;
+
+      u2_cr_mp(now_mp, rec_u->now);
+      u2_cr_mp(wen_mp, u2t(wen));
+
+      now_g = mpz_get_d(now_mp) / sec_g;
+      wen_g = mpz_get_d(now_mp) / sec_g;
+
+      gap_g = (wen_g > now_g) ? (wen_g - now_g) : 0.0;
+
+      uL(fprintf(uH, "ames: wait: %g\n", gap_g));
+
+      sam_u->alm = u2_yes;
+      c3_assert(0);
+      ev_timer_set(&sam_u->tim_u, gap_g, 0.);
+    }
+    else {
+      sam_u->alm = u2_no;
+    }
+  }
 }
 
 /* u2_ames_io_fuck(): output event on connection socket.
@@ -229,6 +274,19 @@ u2_ames_io_fuck(u2_reck*      rec_u,
       free(pac_u);
     }
   }
+}
+
+/* u2_ames_io_time(): time event on ames channel.
+*/
+void
+u2_ames_io_time(u2_reck*         rec_u,
+                struct ev_timer* tim_u)
+{
+  u2_reck_plan
+    (rec_u,
+     u2nt(c3__gold, c3__ames, u2_nul),    //  XX no!
+     // u2nt(c3__lead, c3__ames, u2_nul),
+     u2nc(c3__wake, u2_nul));
 }
 
 /* u2_ames_io_suck(): input event on listen socket.
