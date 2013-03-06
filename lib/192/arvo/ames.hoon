@@ -611,31 +611,39 @@
     --
 =>  |%
     ++  pe                                              ::  packet queue
-      |_  tea=shed
+      |_  sea=shed
       ++  busc                                          ::    busc:pe
         |=  num=@ud                                     ::  find by number
         ^-  (unit bird)
-        ?~  q.tea  ~
-        ?:  =(num p.n.q.tea)
-          [~ q.n.q.tea]
-        ?:((gth num p.n.q.tea) $(q.tea l.q.tea) $(q.tea r.q.tea))
+        ?~  sea  ~
+        ?:  =(num p.n.sea)
+          [~ q.n.sea]
+        ?:((gth num p.n.sea) $(sea l.sea) $(sea r.sea))
+      ::
+      ++  doze                                          ::    doze:pe
+        =|  nex=(unit ,@da)
+        |-  ^+  nex
+        ?~  sea  nex
+        =.  nex  $(sea l.sea)
+        =.  nex  $(sea r.sea)
+        ?.  |(?=(~ nex) (lth ded.q.n.sea u.nex))  nex
+        [~ ded.q.n.sea]
       ::
       ++  glan                                          ::    glan:pe
         |=  num=@ud                                     ::  delete by number
         ^+  ..glan
-        ?:  =(~ q.tea)  
+        ?:  =(~ sea)  
           ..glan
-        ?:  =(num p.n.q.tea)
-          %_(..glan q.tea ~(nap to q.tea))
-        ?:((gth num p.n.q.tea) $(q.tea l.q.tea) $(q.tea r.q.tea))
+        ?:  =(num p.n.sea)
+          %_(..glan sea ~(nap to sea))
+        ?:((gth num p.n.sea) $(sea l.sea) $(sea r.sea))
       ::
       ++  gost                                          ::    gost:pe
         |=  [now=@da num=@ud gom=soap mup=@ud pac=rock] ::  insert in queue
         ^+  ..gost
         %_    ..gost
-            p.tea  now
-            q.tea 
-          %+  ~(put to q.tea) 
+            sea 
+          %+  ~(put to sea) 
             num 
           `bird`[gom mup & @dr @da pac]
         ==
@@ -650,60 +658,59 @@
             ==
         =<  [p=rub q=..harv]
         |-  ^+  ..$
-        ?~  q.tea  ..$
-        =>  =+  sir=$(q.tea l.q.tea)
-            ..$(rub rub.sir, l.q.tea q.tea.sir)
+        ?~  sea  ..$
+        =>  =+  sir=$(sea l.sea)
+            ..$(rub rub.sir, l.sea sea.sir)
         =>  ^+  ..$
-            ?:  =(0 tim.q.n.q.tea)
+            ?:  =(0 tim.q.n.sea)
               =+  ryt=(div (mul 3 rtt) 2)
               =+  den=(add ryt now)
               %_  ..$
                 q.rub          den
-                r.rub          [pac.q.n.q.tea r.rub]
-                tim.q.n.q.tea  ryt
-                ded.q.n.q.tea  den
+                r.rub          [pac.q.n.sea r.rub]
+                tim.q.n.sea  ryt
+                ded.q.n.sea  den
               ==
-            ?.  (lth ded.q.n.q.tea now)
+            ?.  (lth ded.q.n.sea now)
               ..$
-            ?:  (gth tim.q.n.q.tea ~m1)
-              ..$(s.rub [gom.q.n.q.tea s.rub])
-            =+  ryt=(mul 2 tim.q.n.q.tea)
+            ?:  (gth tim.q.n.sea ~m1)
+              ..$(s.rub [gom.q.n.sea s.rub])
+            =+  ryt=(mul 2 tim.q.n.sea)
             =+  den=(add ryt now)
             %_  ..$
               p.rub          |
               q.rub          den
-              r.rub          [pac.q.n.q.tea r.rub]
-              tim.q.n.q.tea  ryt
-              ded.q.n.q.tea  den
+              r.rub          [pac.q.n.sea r.rub]
+              tim.q.n.sea  ryt
+              ded.q.n.sea  den
             == 
-        =+  ryz=$(q.tea r.q.tea)
-        ..$(rub rub.ryz, r.q.tea q.tea.ryz)
+        =+  ryz=$(sea r.sea)
+        ..$(rub rub.ryz, r.sea sea.ryz)
       ::
       ++  namp                                          ::    namp:pe
         |=  [now=@da num=@ud]                           ::  timeout/resend
         %_    ..namp
-            p.tea  now
-            q.tea
-          |-  ^+  q.tea
-          ?:  =(~ q.tea)
-            q.tea
-          =>  %_(. l.q.tea $(q.tea l.q.tea), r.q.tea $(q.tea r.q.tea))
-          ?.  =(num p.n.q.tea)
-            q.tea
-          q.tea(ded.q.n now)
+            sea
+          |-  ^+  sea
+          ?:  =(~ sea)
+            sea
+          =>  %_(. l.sea $(sea l.sea), r.sea $(sea r.sea))
+          ?.  =(num p.n.sea)
+            sea
+          sea(ded.q.n now)
         ==
       ::
       ++  rast                                          ::    rast:pe
         |=  gom=soap                                    ::  delete by msg id
         %_    ..rast
-            q.tea
-          |-  ^+  q.tea
-          ?:  =(~ q.tea)
-            q.tea
-          =>  %_(. l.q.tea $(q.tea l.q.tea), r.q.tea $(q.tea r.q.tea))
-          ?:  =(gom gom.q.n.q.tea)
-            ~(nap to q.tea)
-          q.tea
+            sea
+          |-  ^+  sea
+          ?:  =(~ sea)
+            sea
+          =>  %_(. l.sea $(sea l.sea), r.sea $(sea r.sea))
+          ?:  =(gom gom.q.n.sea)
+            ~(nap to sea)
+          sea
         ==
       --
     --
@@ -728,22 +735,14 @@
     ++  corn                                            ::    corn:ad:am
       ^-  [p=(list boon) q=fort]                        ::  resolve ad:am
       :-  bin
-      %=    fox
-          zac  
-        %+  ~(put by zac.fox)
-          our
-        %=   weg
-          wen  (min p.sea.bah wen.weg)
-          wab  (~(put by wab.weg) her bah)
-        == 
-      ==
+      fox(zac (~(put by zac.fox) our weg(wab (~(put by wab.weg) her bah))))
     ::
     ++  kill                                            ::    kill:ad:am
       |=  gom=soap                                      ::  kill message
       ^+  ..kill
       %_    ..kill
           bin      [[%coke %weak gom] bin]
-          sea.bah  tea:(~(rast pe sea.bah) gom)
+          sea.bah  sea:(~(rast pe sea.bah) gom)
       ==
     ::
     ++  pock                                            ::    pock:ad:am
@@ -770,7 +769,7 @@
         dyp(wyv t.wyv.dyp, ski (toss ski.dyp))
       ::
           sea.bah      
-        tea:(~(gost pe sea.bah) now q.ski.bah p.zem q.ski.dyp i.wyv.dyp)
+        sea:(~(gost pe sea.bah) now q.ski.bah p.zem q.ski.dyp i.wyv.dyp)
       ==
     ::
     ++  tuck                                            ::    tuck:ad:am
@@ -787,7 +786,7 @@
       ?-    kay
           %dead  
         %_  ..tusk
-          sea.bah  tea:(~(namp pe sea.bah) now num)
+          sea.bah  sea:(~(namp pe sea.bah) now num)
           foy.bah  (slow foy.bah)
         ==
       ::
@@ -799,7 +798,7 @@
               ?~  p.suz  sea.bah
               %=    $
                   p.suz    t.p.suz
-                  sea.bah  tea:(~(namp pe sea.bah) now i.p.suz)
+                  sea.bah  sea:(~(namp pe sea.bah) now i.p.suz)
               ==
             ==
         =+  rob=(need (~(busc pe sea.bah) num))
@@ -809,7 +808,7 @@
         %_    ..tusk
             bin      ?.(fin bin [[%coke %good gom.rob] bin])
             ski.bah  q.suz
-            sea.bah  tea:(~(glan pe sea.bah) num)
+            sea.bah  sea:(~(glan pe sea.bah) num)
             par.bah  (~(put by par.bah) gom.rob dyp)
             foy.bah
           ?^  p.suz
@@ -914,17 +913,17 @@
         %_(..dine ton.fox (~(ha go ton.fox) her p.fud q.fud))
       ::
           %carp
-        =+  neb=`[p=@da q=bait]`(need (~(get by nys.weg) q.fud))
-        ?>  (lth p.fud p.r.q.neb)
-        =+  doy=`(unit ,@)`(~(get by q.r.q.neb) p.fud)
+        =+  neb=(need (~(get by nys.weg) q.fud))
+        ?>  (lth p.fud p.r.neb)
+        =+  doy=`(unit ,@)`(~(get by q.r.neb) p.fud)
         ?^  doy
           ..dine
         =>  ^+  .   %=  .
-              q.r.q.neb  (~(put by q.r.q.neb) p.fud r.fud)
-              q.q.neb    +(q.q.neb)
+              q.r.neb  (~(put by q.r.neb) p.fud r.fud)
+              q.neb    +(q.neb)
             ==
-        ?:  =(q.q.neb p.r.q.neb)
-          (gaff p.q.neb r.q.neb)
+        ?:  =(q.neb p.r.neb)
+          (gaff p.neb r.neb)
         ..dine(nys.weg (~(put by nys.weg) q.fud neb))
       ::
           %ping  
@@ -960,7 +959,7 @@
       |=  [dak=? sin=skin msg=@]                        ::  receive indirect
       ^+  ..wait
       =+  pay=((hard ,[p=@ud q=@]) (cue msg))
-      =.  nys.weg  (~(put by nys.weg) dam [(add now ~d1) sin 0 p.pay ~])
+      =.  nys.weg  (~(put by nys.weg) dam [sin 0 p.pay ~])
       (dine dak [%carp 0 dam q.pay])
     --                                                  ::  --lo:am
   ::
@@ -1017,7 +1016,7 @@
                 mey      [[fux %coke %dead i.s.p.peq] mey]
             ==
         ==
-    bah(foy ?~(r.p.peq foy.bah (slow foy.bah)), sea tea:q.peq)
+    bah(foy ?~(r.p.peq foy.bah (slow foy.bah)), sea sea:q.peq)
   ::
   ++  have                                              ::    have:am 
     |=  [our=flag buq=buck]                             ::  acquire license
@@ -1040,7 +1039,6 @@
       vaq      t.vaq
       tol      (weld p.puk tol)
       wab.pov  (~(put by wab.pov) p.i.vaq q.puk)
-      wen.pov  ?:((lth p.sea.q.puk wen.pov) p.sea.q.puk wen.pov)
     ==
   ::
   ++  hark                                              ::    hark:am
@@ -1062,7 +1060,6 @@
       yus      t.yus
       tol      (weld p.qet tol)
       zac.fox  (~(put by zac.fox) p.i.yus q.qet)
-      wen.fox  ?:((lth wen.q.qet wen.fox) wen.q.qet wen.fox)
     ==
   ::
   ++  home                                              ::    home:am
@@ -1090,8 +1087,7 @@
     =+  ^=  bah  ^-  bath
         =+  bah=(~(get by wab.yem) q.soq)
         ?^(bah u.bah %*(. *bath foy baby)) 
-    =:  p.sea.bah  now
-        par.bah    (~(put by par.bah) sup [*snow wyv])
+    =:  par.bah    (~(put by par.bah) sup [*snow wyv])
         maz.bah    (~(put to maz.bah) sup)
       ==
     %_    fox
@@ -1100,7 +1096,6 @@
       %+  ~(put by zac.fox)  p.soq
       %_  yem
         wab  (~(put by wab.yem) q.soq bah)
-        wen  ?:((lth p.sea.bah wen.yem) p.sea.bah wen.yem)
       ==
     ==
   --                                                    ::  --am
@@ -1123,8 +1118,7 @@
     ++  doze
       |=  hen=hose
       ^-  (unit ,@da)
-      ::  ~&  [%ames-doze ?:(=(0 wen.fox) ~ [~ wen.fox])]
-      ?:(=(0 wen.fox) ~ [~ wen.fox])
+      ~
     ::
     ++  scry
       |=  [our=flag ren=@tas his=flag lot=coin tyl=path]

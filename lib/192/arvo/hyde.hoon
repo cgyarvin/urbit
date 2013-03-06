@@ -224,8 +224,7 @@
               yed=@ud                                   ::  actual wdow msgs
           ==                                            ::
 ++  fort                                                ::  formal state
-          $:  wen=@da                                   ::  next wakeup
-              ton=town                                  ::  security
+          $:  ton=town                                  ::  security
               zac=(map flag oven)                       ::  flows by server
           ==                                            ::
 ++  gcos                                                ::  id description
@@ -320,8 +319,7 @@
 ++  octs  ,[p=@ud q=@]                                  ::  octet-stream
 ++  oryx  ,@uvH                                         ::  CSRF secret
 ++  oven                                                ::  flow by server
-          $:  wen=@da                                   ::  next activation
-              nys=(map flap ,[p=@da q=bait])            ::  incoming
+          $:  nys=(map flap bait)                       ::  incoming
               wab=(map flag bath)                       ::  outgoing by client
           ==                                            ::
 ++  ovum  ,[p=tire q=card]                              ::  external event
@@ -377,7 +375,7 @@
           ==                                            ::
 ++  scud  ,[p=pact q=scar]                              ::  full dispatch
 ++  seam  ,[p=@ta q=pact r=scar]                        ::  service route
-++  shed  ,[p=@da q=(qeu ,[p=@ud q=bird])]              ::  packet pump
+++  shed  (qeu ,[p=@ud q=bird])                         ::  packet pump
 ++  sink                                                ::  incoming per server
           $:  nes=(map flap ,[p=@da q=bait])            ::  fragment actions
           ==                                            ::
