@@ -895,7 +895,7 @@
     } else {
       u2_ho_jet *jet_j = &j2_mbj(Pt6, ap)[_ap_jet_open];
       
-      c3_assert(jet_j->sat_s & u2_jet_live);
+      // c3_assert(jet_j->sat_s & u2_jet_live);
       jet_j->sat_s &= ~u2_jet_live;
       {
         pro = _ap_open_n(wir_r, ter, gen);
