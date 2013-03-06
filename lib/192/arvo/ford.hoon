@@ -395,14 +395,8 @@
     |=  [tat=mart rez=tape]
     ^-  tape
     ?~  tat  rez
-    %=    $
-      tat  t.tat
-      rez  ;:  weld
-             (xmln n.i.tat)
-             "=\""
-             (xmle v.i.tat '"' ?~(t.tat rez [' ' rez]))
-           ==
-    ==
+    =+  ryq=$(tat t.tat)
+    :(weld (xmln n.i.tat) "=\"" (xmle v.i.tat '"' ?~(t.tat ryq [' ' ryq])))
   ::
   ++  xmle                                              ::  escape for xml
     |=  [tex=tape rez=tape]
