@@ -63,9 +63,8 @@
 ++  bird                                                ::  packet in flight
           $:  gom=soap                                  ::  message identity
               mup=@ud                                   ::  pktno in msg
-              org=?                                     ::  original tx?
-              tim=@dr                                   ::  logical timer
-              ded=@da                                   ::  next expire
+              nux=@ud                                   ::  xmission count
+              pex=@da                                   ::  next expire
               pac=rock                                  ::  packet data
           ==                                            ::
 ++  belt                                                ::  raw console input
@@ -105,8 +104,8 @@
 ++  boon                                                ::  fort output
           $%  [%beer p=flag q=@uvG]                     ::  gained ownership
               [%coke p=cape q=soap]                     ::  message conclusion
-              [%mead p=rock]                            ::  accept packet
-              [%milk p=sock q=@da r=bond]               ::  learn bindings
+              [%mead p=lane q=rock]                     ::  accept packet
+              [%milk p=sock q=@da r=bond]               ::  bind statements
               [%ouzo p=lane q=rock]                     ::  transmit packet
               [%wine p=flag]                            ::  lost ownership
           ==                                            ::
@@ -116,9 +115,8 @@
 ++  buck  ,[p=mace q=will]                              ::  all security data
 ++  cake  ,[p=sock q=? r=skin s=@]                      ::  top level packet
 ++  cape                                                ::  end-to-end result
-          $?  %dead                                     ::  maybe undelivered
-              %good                                     ::  delivered
-              %weak                                     ::  rejected
+          $?  %good                                     ::  delivered
+              %dead                                     ::  rejected
           ==                                            ::
 ++  card                                                ::  event
           $%  [%bbye ~]                                 ::  reset prompt
@@ -293,9 +291,10 @@
 ++  math  (map ,@t (list ,@t))                          ::  semiparsed headers
 ++  meal                                                ::  payload
           $%  [%back p=cape q=flap r=@dr]               ::  acknowledgment
-              [%bond p=flag q=(list post)]              ::  statement
+              [%bond p=(list post)]                     ::  statement(s)
               [%buck p=mace q=will]                     ::  license
               [%carp p=@ud q=flap r=@]                  ::  leaf fragment
+              [%fore p=lane q=@]                        ::  forwarded packet
               [%ping ~]                                 ::  no-op
           ==                                            ::
 ++  mess  (list ,[p=@t q=@t])                           ::  raw http headers

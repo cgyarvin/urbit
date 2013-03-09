@@ -733,13 +733,6 @@
   ::      Tier 3e, insecure hashing
   ::
   ++  fnv  |=(a=@ (end 5 1 (mul 16.777.619 a)))
-  ++  mst
-    |=  a=@
-    ?:  =(0 a)
-      0
-    =+  b=(mug a)
-    $(a (dec a))
-  ::
   ++  mug                                               ::  31bit nonzero FNV1a
     ~/  %mug
     |=  a=*

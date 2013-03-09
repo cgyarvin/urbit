@@ -91,7 +91,8 @@
     ^-  (unit ,@da)
     =+  van=`vane`(dink (dint hap))
     =+  vug=(van now 0 (beck ~))
-    (doze:vug [hap ~])
+    =+  don=(doze:vug [hap ~])
+    don
   ::
   ++  hurl                                              ::  start loop
     |=  ovo=ovum

@@ -373,6 +373,18 @@
   --  
 =>  
   |%
+  ++  jtop
+    $%  [%a p=(list json)]
+        [%o p=(map ,@t json)]
+    ==
+  ++  json
+    $|  ~
+    $?  jtop
+        $%  [%b p=?]
+        ::  [%n p=@rd]
+            [%s p=@t]
+        ==
+    ==
   ++  moon                                              ::  mime type to text
     |=  myn=mime
     %+  rap
