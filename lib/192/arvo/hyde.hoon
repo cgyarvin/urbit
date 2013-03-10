@@ -42,6 +42,7 @@
               maz=(qeu soap)                            ::  round-robin next
               air=(map flap ,@ud)                       ::  unacked by content
               sea=shed                                  ::  packet pump
+              ryl=rill                                  ::  message control
           ==                                            ::
 ++  bead                                                ::  terminal control
           $:  $:  bul=@ud                               ::  buffer length
@@ -100,12 +101,10 @@
               [%| p=(list path) q=lark]                 ::  pending process
           ==                                            ::
 ++  boat  ,[(list slip) task]                           ::  user stage
-++  bond  (list post)                                   ::  atomic statement
 ++  boon                                                ::  fort output
           $%  [%beer p=flag q=@uvG]                     ::  gained ownership
               [%coke p=cape q=soap]                     ::  message conclusion
               [%mead p=lane q=rock]                     ::  accept packet
-              [%milk p=sock q=@da r=bond]               ::  bind statements
               [%ouzo p=lane q=rock]                     ::  transmit packet
               [%wine p=flag]                            ::  lost ownership
           ==                                            ::
@@ -172,7 +171,9 @@
               [%tory p=(list ,@t)]                      ::  history dump
               [%wait p=@da q=path]                      ::  timer wait
               [%wake ~]                                 ::  timer activate
+              [%want p=flag q=@ta r=path s=*]           ::  peer request
               [%warn p=tape]                            ::  system message
+              [%went p=cape q=soap r=path]              ::  peer reaction
               [%wipe ~]                                 ::  clean up hose
               [%word p=chum]                            ::  set password
           ==                                            ::
@@ -254,7 +255,7 @@
               r=(list ,[p=@t q=@t])                     ::  headers
               s=(unit octs)                             ::  body
           ==                                            ::
-++  httr  ,[p=@ud q=mess r=(unit octs)]                 ::  raw http response   
+++  httr  ,[p=@ud q=mess r=(unit octs)]                 ::  raw http response
 ++  lark                                                ::  parsed command
           $%  [%cd p=path]                              ::  change directory
               [%eh p=crow]                              ::  print and record
@@ -291,7 +292,6 @@
 ++  math  (map ,@t (list ,@t))                          ::  semiparsed headers
 ++  meal                                                ::  payload
           $%  [%back p=cape q=flap r=@dr]               ::  acknowledgment
-              [%bond p=(list post)]                     ::  statement(s)
               [%buck p=mace q=will]                     ::  license
               [%carp p=@ud q=flap r=@]                  ::  leaf fragment
               [%fore p=lane q=@]                        ::  forwarded packet
@@ -325,7 +325,6 @@
 ++  pact  path                                          ::  routed path
 ++  plea  ,[p=@ud q=[p=? q=@t]]                         ::  live prompt
 ++  pork  ,[p=(unit ,@ta) q=path]                       ::  fully parsed url
-++  post  ,[p=path q=*]                                 ::  statement
 ++  prod  ,[p=prom q=tape]                              ::  format, prompt
 ++  prom  ?(%text %pass)                                ::  format type
 ++  purl  ,[p=hart q=pork r=quay]                       ::  parsed url
@@ -338,7 +337,15 @@
           $%  [& p=purl]                                ::  absolute
               [| p=pork q=quay]                         ::  relative
           ==                                            ::
+++  race                                                ::  inbound stream
+          $:  did=@ud                                   ::  filled sequence
+              mis=(map ,@ud ,[p=flap q=*])              ::  misordered
+          ==                                            ::  
 ++  rank  ?(%czar %king %duke %jack %pawn)              ::  flag width class
+++  rill                                                ::  outbound stream
+          $:  don=@ud                                   ::  accepted
+              san=(map ,@ud ,[p=path q=hose])           ::  transmitted
+          ==                                            ::
 ++  rink  path                                          ::  prompt path
 ++  road                                                ::  secured oneway route
           $:  exp=@da                                   ::  expiration date
@@ -381,7 +388,7 @@
 ++  skin  ?(%none %open %fast %full)                    ::  encoding stem
 ++  slip  ,[p=bell q=goal]                              ::  traceable request
 ++  snow  ,[p=@ud q=@ud r=(set ,@ud)]                   ::  window exceptions
-++  soap  ,*                                            ::  opaque msg identity
+++  soap  ,[p=@ta q=@ud]                                ::  statement id
 ++  sock  ,[p=flag q=flag]                              ::  from to
 ++  step  ,[p=bran q=gcos r=pass]                       ::  identity stage
 ++  task  _|+([@da path note] *bowl)                    ::  process core

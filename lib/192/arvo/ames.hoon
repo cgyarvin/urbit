@@ -412,7 +412,7 @@
               :-  %full
               =+  cay=cley
               (jam p.cay (seal:pu:r.cay tuy gom))
-            --                                          ::  --
+            --                                          ::  --zuul:lax:as:go
           --                                            ::  --lax:as:go
         ::::
         ++  fix  |=(lyn=lane %_(+> loc.saf [~ lyn]))    ::  set server route
@@ -598,7 +598,6 @@
     ::
     ++  suck
       |=  [num=@ud ski=snow]
-      ~&  [%suck num ski]
       ^-  [p=(list ,@ud) q=snow]
       ?>  (lte num q.ski)
       ?:  =(num p.ski)
@@ -728,259 +727,268 @@
 |%
 ++  am                                                  ::    am
   |_  [now=@da fox=fort]                                ::  protocol engine
-  ::::
-  ++  ad                                                ::    ad:am
-    |=  [our=flag her=flag]                             ::  outbound dispatch
+  ++  um                                                ::  per server
+    |=  our=flag
+    =+  gus=(need (~(us go ton.fox) our))
+    =+  ^=  weg  ^-  oven
+        =+  weg=(~(get by zac.fox) our)
+        ?^(weg u.weg *oven)
     =|  bin=(list boon)
-    =+  weg=(need (~(get by zac.fox) our))
-    =+  lyn=(hey:(need (~(us go ton.fox) our)) her)
-    =+  ^=  bah  ^- bath
-        =+  bah=(~(get by wab.weg) her)               
-        ?^(bah u.bah %*(. *bath foy baby))            
     |%
-    ++  cool                                            ::    cool:ad:am
-      |-  ^+  ..cool                                    ::  fill window
-      ?.  &(?=(^ maz.bah) (gth wid.foy.bah yed.foy.bah))
-        ..cool
-      $(..cool pock)
-    ::
-    ++  corn                                            ::    corn:ad:am
-      ^-  [p=(list boon) q=fort]                        ::  resolve ad:am
-      :-  bin
-      fox(zac (~(put by zac.fox) our weg(wab (~(put by wab.weg) her bah))))
-    ::
-    ++  kill                                            ::    kill:ad:am
-      |=  gom=soap                                      ::  kill message
-      ^+  ..kill
-      %_    ..kill
-          bin      [[%coke %dead gom] bin]
-          sea.bah  sea:(~(rast pe sea.bah) gom)
-      ==
-    ::
-    ++  pock                                            ::    pock:ad:am
-      |-  ^+  ..pock                                    ::  queue a packet
-      ?:  =(~ maz.bah)
-        ..pock
-      =+  zem=~(get to maz.bah)
-      =>  ^+(. .(maz.bah q.zem))
-      =+  dyp=`putt`(need (~(get by par.bah) p.zem))
-      ?>  ?=(^ wyv.dyp)
-      ::  ~&  [%pock `@p`(mug (shaf %flap i.wyv.dyp))]
-      %_    ..pock
-          yed.foy.bah  +(yed.foy.bah)
-          ski.bah      (toss ski.bah)
-          maz.bah      
-        ?~(t.wyv.dyp maz.bah (~(put to maz.bah) p.zem))
-      ::
-          air.bah      
-        (~(put by air.bah) (shaf %flap i.wyv.dyp) q.ski.bah)
-      ::
-          par.bah 
-        %+  ~(put by par.bah)
-          p.zem
-        dyp(wyv t.wyv.dyp, ski (toss ski.dyp))
-      ::
-          sea.bah      
-        sea:(~(gost pe sea.bah) q.ski.bah [p.zem q.ski.dyp 0 `@`0 i.wyv.dyp])
-      ==
-    ::
-    ++  tuck                                            ::    tuck:ad:am
-      |=  [kay=cape fap=flap cot=@dr]                   ::  ack by hash
-      ^+  ..tuck
-      =>  %_(. ..tuck (tusk kay (need (~(get by air.bah) fap)) cot))
-      ?.  =(%good kay)
-        ..tuck
-      ..tuck(air.bah (~(del by air.bah) fap))
-    ::
-    ++  turk                                            ::    turk:ad:am
-      ^+  .                                             ::  update by date
-      =+  pez=%*(. pe sea sea.bah)
-      =^  rem  pez  (nomb:pez now)
-      =^  wyv  pez  (harv:pez now wid.foy.bah rtt.foy.bah)
-      %=  ..turk 
-        bin      (weld (turn p.wyv |=(a=rock [%ouzo lyn a])) bin)
-        foy.bah  (slow rem foy.bah)
-        sea.bah  sea:pez
-      ==
-    ::
-    ++  tusk                                            ::    tusk:ad:am
-      |=  [kay=cape num=@ud cot=@dr]                    ::  ack by sequence
-      ^+  +>
-      ?-    kay
-          %good
-        =+  suz=(suck num ski.bah)
-        =>  %_    .
-                sea.bah
-              |-  ^+  sea.bah
-              ?~  p.suz  sea.bah
-              %=    $
-                  p.suz    t.p.suz
-                  sea.bah  sea:(~(namp pe sea.bah) now i.p.suz)
-              ==
-            ==
-        =+  rob=(need (~(busc pe sea.bah) num))
-        =+  dyp=`putt`(need (~(get by par.bah) gom.rob))
-        =>  %_(. ski.dyp q:(suck mup.rob ski.dyp))
-        =+  fin=&(=(~ wyv.dyp) =(p.ski.dyp q.ski.dyp)) 
-        %_    ..tusk
-            bin      ?.(fin bin [[%coke %good gom.rob] bin])
-            ski.bah  q.suz
-            sea.bah  sea:(~(glan pe sea.bah) num)
-            par.bah  ?:  fin
-                       (~(del by par.bah) gom.rob)
-                     (~(put by par.bah) gom.rob dyp)
-            foy.bah  ?~  p.suz  
-                       (fast foy.bah)
-                     (slow (lent p.suz) foy.bah)
-        ==
-      ::
-          %dead 
-        =+  gom=gom:(need (~(busc pe sea.bah) num))
-        =>  %_(. bin [[%coke %dead gom] bin])
-        (kill gom)
-      ==
-    --
-  ++  lo                                                ::    lo:am
-    |=  $:  gus=_as:go                                  ::  inbound dispatch
-            her=flag                                    ::  claimed sender
-            ryn=lane                                    ::  receive lane
-            aut=?                                       ::  authenticated
-            dam=flap                                    ::  ack identity
-        ==
-    =+  weg==+(weg=(~(get by zac.fox) our.gus) ?~(weg *oven u.weg))
-    =+  bin=*(list boon)
-    |%                                                  
-    ++  blow                                            ::    blow:lo:am
-      |=  [dit=? sin=skin msg=@]                        ::
-      ^+  ..blow
-      (?:(dit chew wait) & sin msg)
-    ::
-    ++  chew                                            ::    chew:lo:am
-      |=  [dak=? sin=skin msg=@]                        ::
-      ^+  +>
-      =+  ^=  leq
-          |=  key=code  ^-  _..chew
-          =+  ^=  mex
-              %.  (cue msg)
-              (hard ,[p=mark q=will r=@])
-          =+  wug=(wag:gus her q.mex)
-          ?>  =(p.mex p.p.wug)
-          %+  chow(aut &)  dak
-          ((hard tray) (cue (need (sure:pu:q.p.wug key r.mex))))
-      ?-    sin
-          %none  (chow dak ((hard tray) (cue msg)))
-          %fast
-        =+  [mag=`hand`(end 7 1 msg) bod=(rsh 7 1 msg)]
-        =+  yoq=(gub:gus mag)
-        =>  %_(. gus q.yoq)
-        ?>  =(her p.p.yoq)
-        %+  chow(aut &)  dak
-        ((hard tray) (cue (dy:q:sen:gus q.p.yoq msg)))
-    ::
-          %full
-        =+  mex=((hard ,[p=mark q=@]) (cue msg))
-        =+  gey=(sev:gus p.mex)
-        =+  mes=(need (tear:se:q.gey q.mex))
-        =+  qel=(leq p.mes)
-        =>  %_(. +>.$ qel)
-        %_(+>.$ gus ?.(p.gey gus (tyc:gus her p.mes)))
-    ::
-          %open  (leq *code)
-      ==
-    ::
-    ++  chow                                            ::    chow:lo:am 
-      |=  [dak=? fey=tray]                              ::  interpret tray
-      =.  gus 
-          ?.  &(aut ?=(^ p.fey))  gus 
-          ?>  ?&  |(=(0 p.u.p.fey) =(p.ryn p.u.p.fey))
-                  =(q.ryn q.u.p.fey)
-              ==
-          (pyl:gus her ryn)
-      (dine dak q.fey)
-    ::
-    ++  cock                                            ::    cock:lo:am
-      ^+  .                                             ::  acknowledgment
+    ++  ho                                              ::    ho:um:am
+      |=  her=flag                                      ::  per friend
       =+  diz=(myx:gus her)
-      ~&  [%cock `@p`(mug dam)]
-      =^  rox  diz  (zuul:diz now [%back %good dam ~s0])
-      %_  ..cock
-        bin  (weld (turn p.rox |=(pac=rock [%ouzo ryn pac])) bin)
-        gus  (nux:gus diz)
-      ==
-    ::
-    ++  dine                                            ::    dine:lo:am
-      |=  [dak=? fud=meal]                              ::  interpret meal
-      ^+  +>
-      =.  +>  ?.(&(dak !=(%back -.fud)) +> cock)
-      ?-    -.fud
-          %back
-        =+  boz=corn:(tuck:(ad [our.gus her]) p.fud q.fud r.fud)
-        %_  ..dine
-          bin  (weld p.boz bin)
-          weg  (need (~(get by zac.q.boz) our.gus))     ::  XX slow
+      =+  lyn=(hey:gus her)
+      =+  ^=  bah  ^- bath
+          =+  bah=(~(get by wab.weg) her)               
+          ?^(bah u.bah %*(. *bath foy baby))
+      |%
+      ++  cool                                          ::    cool:ho:um:am
+        |-  ^+  +                                       ::  fill window
+        ?.  ?&  ?=(^ maz.bah) 
+                (gth wid.foy.bah yed.foy.bah)
+            ==
+          +
+        $(+ pock)
+      ::
+      ++  kill                                          ::    kill:ho:um:am
+        |=  gom=soap                                    ::  kill message
+        %_    +>
+            bin      [[%coke %dead gom] bin]
+            sea.bah  sea:(~(rast pe sea.bah) gom)
         ==
       ::
-          %bond
-        ?>  aut
-        (emit [%milk [our.gus her] now p.fud])
+      ++  la                                            ::    la:ho:um:am
+        |_  [ryn=lane aut=? dam=flap]                   ::  per packet
+        ::
+        ++  blow                                        ::    blow:la:ho:um:am
+          |=  [dit=? sin=skin msg=@]                    ::  analyze
+          ^+  ..blow
+          (?:(dit chew wait) & sin msg)
+        ::
+        ++  chew                                        ::    chew:la:ho:um:am
+          |=  [dak=? sin=skin msg=@]                    ::  
+          =<  .(diz (myx:gus her))                      ::  XX refactor
+          ^+  +>
+          =+  ^=  leq
+              |=  key=code  ^-  _..chew
+              =+  ^=  mex
+                  %.  (cue msg)
+                  (hard ,[p=mark q=will r=@])
+              =+  wug=(wag:gus her q.mex)
+              ?>  =(p.mex p.p.wug)
+              %+  chow(aut &)  dak
+              ((hard tray) (cue (need (sure:pu:q.p.wug key r.mex))))
+          ?-    sin
+              %none  (chow dak ((hard tray) (cue msg)))
+              %fast
+            =+  [mag=`hand`(end 7 1 msg) bod=(rsh 7 1 msg)]
+            =+  yoq=(gub:gus mag)
+            =>  %_(. gus q.yoq)
+            ?>  =(her p.p.yoq)
+            %+  chow(aut &)  dak
+            ((hard tray) (cue (dy:q:sen:gus q.p.yoq msg)))
+        ::
+              %full
+            =+  mex=((hard ,[p=mark q=@]) (cue msg))
+            =+  gey=(sev:gus p.mex)
+            =+  mes=(need (tear:se:q.gey q.mex))
+            =+  qel=(leq p.mes)
+            =>  %_(. +>.$ qel)
+            %_(+>.$ gus ?.(p.gey gus (tyc:gus her p.mes)))
+        ::
+              %open  (leq *code)
+          ==
+        ::
+        ++  chow                                        ::    chow:la:ho:um:am 
+          |=  [dak=? fey=tray]                          ::  interpret tray
+          =.  lun.wod.nob.diz  
+              ?.  &(aut ?=(^ p.fey))  lun.wod.nob.diz
+              ?>  ?&  |(=(0 p.u.p.fey) =(p.ryn p.u.p.fey))
+                      =(q.ryn q.u.p.fey)
+                  ==
+              [~ ryn]
+          (dine dak q.fey)
+        ::
+        ++  cock                                        ::    cock:la:ho:um:am
+          ^+  .                                         ::  acknowledgment
+          ~&  [%cock `@p`(mug dam)]
+          =^  rox  diz  (zuul:diz now [%back %good dam ~s0])
+          %_  ..cock
+            bin  (weld (turn p.rox |=(pac=rock [%ouzo ryn pac])) bin)
+          ==
+        ::
+        ++  dine                                        ::    dine:la:ho:um:am
+          |=  [dak=? fud=meal]                          ::  interpret meal
+          ^+  +>
+          =.  +>  ?.(&(dak !=(%back -.fud)) +> cock)
+          ?-    -.fud
+              %back
+            +>(..la (tuck p.fud q.fud r.fud))
+          ::
+              %buck
+            =.  +>.$  (emit [%beer her pac:ex:q:sen:gus])
+            %_(+> ton.fox (~(ha go ton.fox) her p.fud q.fud))
+          ::
+              %carp
+            =+  neb=(need (~(get by nys.weg) q.fud))
+            ?>  (lth p.fud p.r.neb)
+            =+  doy=`(unit ,@)`(~(get by q.r.neb) p.fud)
+            ?^  doy
+              +>.$
+            =>  ^+  .   %=  .
+                  q.r.neb  (~(put by q.r.neb) p.fud r.fud)
+                  q.neb    +(q.neb)
+                ==
+            ?:  =(q.neb p.r.neb)
+              (gaff p.neb r.neb)
+            +>.$(nys.weg (~(put by nys.weg) q.fud neb))
+          ::
+              %fore
+            (emit [%mead p.fud q.fud])
+          ::
+              %ping  
+            ~&  [%ping aut her]
+            +>.$
+          ==
+        ::
+        ++  emit                                        ::    emit:la:ho:um:am
+          |=  bun=boon                                  ::  emit a boon
+          +>(bin [bun bin]) 
+        ::
+        ++  gaff                                        ::    gaff:la:ho:um:am 
+          |=  [sin=skin duv=dove]                       ::  assemble fragments
+          ^+  +>
+          %^  chew  |
+            sin
+          =+  [nix=0 rax=*(list ,@)]
+          |-  ^-  @
+          ?:  =(p.duv nix)
+            (can 13 (turn (flop rax) |=(a=@ [1 a])))
+          $(nix +(nix), rax [(need (~(get by q.duv) nix)) rax])
+        ::
+        ++  wait                                        ::    wait:la:ho:um:am
+          |=  [dak=? sin=skin msg=@]                    ::  receive indirect
+          ^+  +>
+          =+  pay=((hard ,[p=@ud q=@]) (cue msg))
+          =.  nys.weg  (~(put by nys.weg) dam [sin 0 p.pay ~])
+          (dine dak [%carp 0 dam q.pay])
+        --                                              ::  --la:ho:um:am
       ::
-          %buck
-        =>  %_(. ..dine (emit [%beer her pac:ex:q:sen:gus]))
-        %_(..dine ton.fox (~(ha go ton.fox) her p.fud q.fud))
+      ++  pock                                          ::    pock:ho:um:am
+        |-  ^+  +                                       ::  queue a packet
+        ?:  =(~ maz.bah)
+          ..pock
+        =+  zem=~(get to maz.bah)
+        =>  ^+(. .(maz.bah q.zem))
+        =+  dyp=`putt`(need (~(get by par.bah) p.zem))
+        ?>  ?=(^ wyv.dyp)
+        ~&  [%pock `@p`(mug (shaf %flap i.wyv.dyp))]
+        %_    ..pock
+            yed.foy.bah  +(yed.foy.bah)
+            ski.bah      (toss ski.bah)
+            maz.bah      
+          ?~(t.wyv.dyp maz.bah (~(put to maz.bah) p.zem))
+        ::
+            air.bah      
+          (~(put by air.bah) (shaf %flap i.wyv.dyp) q.ski.bah)
+        ::
+            par.bah 
+          %+  ~(put by par.bah)
+            p.zem
+          dyp(wyv t.wyv.dyp, ski (toss ski.dyp))
+        ::
+            sea.bah      
+          sea:(~(gost pe sea.bah) q.ski.bah [p.zem q.ski.dyp 0 `@`0 i.wyv.dyp])
+        ==
       ::
-          %carp
-        =+  neb=(need (~(get by nys.weg) q.fud))
-        ?>  (lth p.fud p.r.neb)
-        =+  doy=`(unit ,@)`(~(get by q.r.neb) p.fud)
-        ?^  doy
-          ..dine
-        =>  ^+  .   %=  .
-              q.r.neb  (~(put by q.r.neb) p.fud r.fud)
-              q.neb    +(q.neb)
-            ==
-        ?:  =(q.neb p.r.neb)
-          (gaff p.neb r.neb)
-        ..dine(nys.weg (~(put by nys.weg) q.fud neb))
+      ++  tuck                                          ::    tuck:ho:um:am
+        |=  [kay=cape fap=flap cot=@dr]                 ::  ack by hash
+        ^+  +> 
+        =.  +>  (tusk kay (need (~(get by air.bah) fap)) cot)
+        ?.  =(%good kay)
+          +>
+        +>(air.bah (~(del by air.bah) fap))
       ::
-          %fore
-        (emit [%mead p.fud q.fud])
+      ++  tung                                          ::    tung:ho:um:am
+        ^+  .                                           ::  harvest packets
+        =+  pez=%*(. pe sea sea.bah)
+        =^  wyv  pez  (harv:pez now wid.foy.bah rtt.foy.bah)
+        %=  ..turk 
+          bin      (weld (turn p.wyv |=(a=rock [%ouzo lyn a])) bin)
+          sea.bah  sea:pez
+        ==
       ::
-          %ping  
-        ~&  [%ping aut her]
-        ..dine
-      ==
+      ++  turk                                          ::    turk:ho:um:am
+        ^+  .                                           ::  update by date
+        =+  pez=%*(. pe sea sea.bah)
+        =^  rem  pez  (nomb:pez now)
+        %=  ..turk 
+          foy.bah  (slow rem foy.bah)
+          sea.bah  sea:pez
+        ==
+      ::
+      ++  tusk                                          ::    tusk:ho:um:am
+        |=  [kay=cape num=@ud cot=@dr]                  ::  ack by sequence
+        ^+  +>
+        ?-    kay
+            %good
+          =+  suz=(suck num ski.bah)
+          =>  %_    .
+                  sea.bah
+                |-  ^+  sea.bah
+                ?~  p.suz  sea.bah
+                %=    $
+                    p.suz    t.p.suz
+                    sea.bah  sea:(~(namp pe sea.bah) now i.p.suz)
+                ==
+              ==
+          =+  rob=(need (~(busc pe sea.bah) num))
+          =+  dyp=`putt`(need (~(get by par.bah) gom.rob))
+          =>  %_(. ski.dyp q:(suck mup.rob ski.dyp))
+          =+  fin=&(=(~ wyv.dyp) =(p.ski.dyp q.ski.dyp)) 
+          %_    ..tusk
+              bin      ?.(fin bin [[%coke %good gom.rob] bin])
+              ski.bah  q.suz
+              sea.bah  sea:(~(glan pe sea.bah) num)
+              par.bah  ?:  fin
+                         (~(del by par.bah) gom.rob)
+                       (~(put by par.bah) gom.rob dyp)
+              foy.bah  ?~  p.suz  
+                         (fast foy.bah)
+                       (slow (lent p.suz) foy.bah)
+          ==
+        ::
+            %dead 
+          =+  gom=gom:(need (~(busc pe sea.bah) num))
+          =>  %_(. bin [[%coke %dead gom] bin])
+          (kill gom)
+        ==
+      ::
+      ++  wind                                          ::    wind:ho:um:am
+        |=  [sup=soap ham=meal]
+        ^+  +>
+        =^  wyv  diz  (zuul:diz now ham)
+        =:  par.bah    (~(put by par.bah) sup [*snow wyv])
+            maz.bah    (~(put to maz.bah) sup)
+          ==
+        cool 
+      ::
+      ++  zank                                          ::    zank:ho:um:am
+        %=  +>.$                                        ::  resolve
+          gus (nux:gus diz)
+          wab.weg (~(put by wab.weg) her bah)
+        ==
+      --                                                ::  --ho:um:am
     ::
-    ++  emit                                            ::    emit:lo:am
-      |=  bun=boon                                      ::  emit a boon
-      ^+  ..emit
-      ..emit(bin [bun bin])
-    ::
-    ++  gaff                                            ::    gaff:lo:am 
-      |=  [sin=skin duv=dove]                           ::  assemble fragments
-      ^+  ..gaff
-      %^  chew  |
-        sin
-      =+  [nix=0 rax=*(list ,@)]
-      |-  ^-  @
-      ?:  =(p.duv nix)
-        (can 13 (turn (flop rax) |=(a=@ [1 a])))
-      $(nix +(nix), rax [(need (~(get by q.duv) nix)) rax])
-    ::
-    ++  grok                                            ::    grok:lo:am
-      ^-  [p=(list boon) q=fort]                        ::  resolve lo:am
-      :-  bin
-      %=  fox
+    ++  zork                                            ::    zork:um:am
+      ^-  [p=(list boon) q=fort]                        ::  resolve
+      :-  (flop bin)
+      %_  fox
         ton  (~(su go ton.fox) gus)
         zac  (~(put by zac.fox) our.gus weg)
       ==
-    ::
-    ++  wait                                            ::    wait:lo:am
-      |=  [dak=? sin=skin msg=@]                        ::  receive indirect
-      ^+  ..wait
-      =+  pay=((hard ,[p=@ud q=@]) (cue msg))
-      =.  nys.weg  (~(put by nys.weg) dam [sin 0 p.pay ~])
-      (dine dak [%carp 0 dam q.pay])
-    --                                                  ::  --lo:am
+    --                                                  ::  --um:am
   ::
   ++  come                                              ::    come:am
     |=  [ges=@t wid=@ bur=@]                            ::  instantiate pawn
@@ -1001,33 +1009,38 @@
   ++  gnaw                                              ::    gnaw:am
     |=  [ryn=lane pac=rock]                             ::  process packet
     ^-  [p=(list boon) q=fort]
-    ~&  [%hear ryn `@p`(mug (shaf %flap pac))]
     =+  kec=(bite pac)
+    ~&  [%hear p.kec ryn `@p`(mug (shaf %flap pac))]
     =+  how=(~(yo go ton.fox) p.p.kec)
     ?-  -.how
-      &  =<  grok
-         %-  =<  blow
-            (lo p.how q.p.kec ryn | (shaf %flap pac))
+      &  =<  zork
+         =<  zank
+         %-  ~(blow la:(ho:(um q.p.kec) p.p.kec) ryn | (shaf %flap pac))
          [q.kec r.kec s.kec]
       |  [[[%ouzo p.how pac] ~] fox]
     ==
   ::
-  ++  hast                                              ::    hast:am
-    |=  [soq=sock bah=bath]                             ::  roll per socket
-    ^-  [p=(list (list ,[p=@da q=boon])) q=bath]
-    =+  lyn=`lane`(hey:(need (~(us go ton.fox) p.soq)) q.soq)
-    =+  peq=(~(harv pe sea.bah) now wid.foy.bah rtt.foy.bah)
-    :-  =+  [fux=now mey=*(list ,[p=@da q=boon])]
-        :~  =+  mey=*(list ,[p=@da q=boon])
-            |-  ^-  (list ,[p=@da q=boon])
-            ?~  p.peq  mey
-            %=    $
-                p.peq  t.p.peq
-                fux    (add 0x1.0000.0000 fux) 
-                mey    [[fux %ouzo lyn i.p.peq] mey]
-            ==
-        ==
-    bah(sea sea:q.peq)
+  ++  hall                                              ::    hall:am
+    ^-  (list sock)                                     ::  all sockets 
+    =|  sox=(list sock)                                 ::  XX hideous
+    |-  ^+  sox 
+    ?~  zac.fox  sox
+    =.  sox  $(zac.fox l.zac.fox)
+    =.  sox  $(zac.fox r.zac.fox)
+    |-  ^+  sox
+    ?~  wab.q.n.zac.fox  sox
+    =.  sox  $(wab.q.n.zac.fox l.wab.q.n.zac.fox)  
+    =.  sox  $(wab.q.n.zac.fox r.wab.q.n.zac.fox)  
+    [[p.n.zac.fox p.n.wab.q.n.zac.fox] sox]
+  ::
+  ++  hest                                              ::    hest:am
+    ^-  [p=(list boon) q=fort]                          ::  harvest packets
+    =+  sox=hall
+    =|  bin=(list boon)
+    |-  ^-  [p=(list boon) q=fort]
+    ?~  sox  [bin fox]
+    =^  bun  fox  zork:zank:tung:(ho:(um p.i.sox) q.i.sox)
+    $(bin (weld p.bun bin))
   ::
   ++  have                                              ::    have:am 
     |=  [our=flag buq=buck]                             ::  acquire license
@@ -1037,42 +1050,6 @@
       ==
     [[[%beer our pac:ex:q:sen:(need (~(us go ton.fox) our))] ~] fox]
   ::
-  ++  haze                                              ::    haze:am
-    |=  [our=flag pov=oven]                             ::  roll per oven
-    ^-  [p=(list (list ,[p=@da q=boon])) q=oven]
-    =+  vaq=`(list ,[p=flag q=bath])`(~(tap by wab.pov) ~)
-    =+  tol=*(list (list ,[p=@da q=boon]))
-    |-  ^+  [tol pov]
-    ?~  vaq
-      [tol pov]
-    =+  puk=(hast [our p.i.vaq] q.i.vaq)
-    %=  $
-      vaq      t.vaq
-      tol      (weld p.puk tol)
-      wab.pov  (~(put by wab.pov) p.i.vaq q.puk)
-    ==
-  ::
-  ++  hark                                              ::    hark:am
-    ^-  [p=(list boon) q=fort]                          ::  roll per fort
-    =+  yus=`(list ,[p=flag q=oven])`(~(tap by zac.fox) ~)
-    =+  tol=*(list (list ,[p=@da q=boon]))
-    |-  ^-  [p=(list boon) q=fort]
-    ?~  yus
-      :-  %+  turn
-            %+  sort
-              |-  ^-  (list ,[p=@da q=boon])
-              ?~(tol ~ (weld i.tol $(tol t.tol)))
-            |=  [a=[p=@da q=boon] b=[p=@da q=boon]]
-            ?.(=(p.a p.b) (lth p.a p.b) (lth (mug q.a) (mug q.b)))
-          |=([p=@da q=boon] q)
-      fox
-    =+  qet=(haze i.yus)
-    %=  $
-      yus      t.yus
-      tol      (weld p.qet tol)
-      zac.fox  (~(put by zac.fox) p.i.yus q.qet)
-    ==
-  ::
   ++  home                                              ::    home:am
     |=  [our=flag lyn=lane]                             ::  update ip address
     ^-  fort
@@ -1080,55 +1057,18 @@
     fox(ton (~(su go ton.fox) (fix:gus lyn)))
   ::
   ++  wake                                              ::    wake:am
-    ^-  [p=(list boon) q=fort]                          ::  react to time
-    =+  ^=  sox                                         ::  XX hideous
-        =|  sox=(list sock)
-        |-  ^+  sox 
-        ?~  zac.fox  sox
-        =.  sox  $(zac.fox l.zac.fox)
-        =.  sox  $(zac.fox r.zac.fox)
-        |-  ^+  sox
-        ?~  wab.q.n.zac.fox  sox
-        =.  sox  $(wab.q.n.zac.fox l.wab.q.n.zac.fox)  
-        =.  sox  $(wab.q.n.zac.fox r.wab.q.n.zac.fox)  
-        [[p.n.zac.fox p.n.wab.q.n.zac.fox] sox]
-    =|  ban=(list boon)
+    ^-  [p=(list boon) q=fort]                          ::  harvest packets
+    =+  sox=hall
+    =|  bin=(list boon)
     |-  ^-  [p=(list boon) q=fort]
-    ?~  sox  [ban fox]
-    =^  bin  fox  corn:turk:(ad p.i.sox q.i.sox)
-    =^  byn  fox  hark
-    $(sox t.sox, ban :(weld p.bin p.byn ban))
+    ?~  sox  [bin fox]
+    =^  bun  fox  zork:zank:tung:turk:(ho:(um p.i.sox) q.i.sox)
+    $(sox t.sox, bin (weld p.bun bin))
   ::
   ++  wash                                              ::    wash:am
     |=  [soq=sock sup=soap ham=meal]                    ::  dispatch and send
     ^-  [p=(list boon) q=fort]
-    =+  sug=`_as:go`(need (~(us go ton.fox) p.soq))
-    =.  fox  (wish soq sup ham)
-    =^  bin  fox  corn:cool:(ad p.soq q.soq)
-    =^  byn  fox  hark
-    [(weld p.bin p.byn) fox]
-  ::
-  ++  wish                                              ::    wish:am
-    |=  [soq=sock sup=soap ham=meal]                    ::  dispatch message
-    ^-  fort
-    =+  sug=`_as:go`(need (~(us go ton.fox) p.soq))
-    =+  yem=`oven`(need (~(get by zac.fox) p.soq))
-    =+  diz=`_lax:as:go`(myx:sug q.soq)
-    =^  wyv  diz  (zuul:diz now ham)
-    =+  ^=  bah  ^-  bath
-        =+  bah=(~(get by wab.yem) q.soq)
-        ?^(bah u.bah %*(. *bath foy baby)) 
-    =:  par.bah    (~(put by par.bah) sup [*snow wyv])
-        maz.bah    (~(put to maz.bah) sup)
-      ==
-    %_    fox
-        ton  (~(su go ton.fox) (nux:sug diz))
-        zac  
-      %+  ~(put by zac.fox)  p.soq
-      %_  yem
-        wab  (~(put by wab.yem) q.soq bah)
-      ==
-    ==
+    zork:zank:tung:(wind:(ho:(um p.soq) q.soq) sup ham)
   --                                                    ::  --am
 ::
 ++  ames                                                ::  terminal handling
@@ -1188,7 +1128,7 @@
         %coke  ~&([%coke p.bon q.bon] !!)
         %mead  [[[whu [/a/ hen] [%hear p.bon q.bon]] ~] +>.$]
         %milk  !!
-        %ouzo  ::  ~&  [%send `@p`(mug (shaf %flap q.bon))]
+        %ouzo  ~&  [%send `@p`(mug (shaf %flap q.bon))]
                [[[whu hen [%send p.bon q.bon]] ~] +>.$]
         %wine  !!
     ==
@@ -1206,12 +1146,13 @@
           (~(have am [now fox]) p.fav q.fav)
         ::
             %home
+          ::  [~ (~(home am [now fox]) p.fav q.fav)]
           =.  fox  (~(home am [now fox]) p.fav q.fav)
           =+  dad=(sein p.fav)
           ?:  =(dad p.fav)  [~ fox]
           %^    ~(wash am [now fox])
               [p.fav dad]
-            [%home p.fav hen]
+            *soap
           [%ping ~]
         ::
             %hear
@@ -1223,6 +1164,10 @@
             %make
           =+  vun=(~(come am [now fox]) p.fav (bex q.fav) r.fav)
           [[[%beer p.vun] ~] q.vun]
+        ::
+          ::  %want
+          ::  ?>  ?=(^ whu)
+          ::  (~(wise am [now fox]) [u.whu p.fav] hen q.fav r.fav s.fav)
         ::
             %wake
           ~(wake am [now fox])
