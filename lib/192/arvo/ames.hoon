@@ -738,7 +738,6 @@
     ++  ho                                              ::    ho:um:am
       |=  her=flag                                      ::  per friend
       =+  diz=(myx:gus her)
-      =+  lyn=(hey:gus her)
       =+  ^=  bah  ^- bath
           =+  bah=(~(get by wab.weg) her)               
           ?^(bah u.bah %*(. *bath foy baby))
@@ -883,7 +882,7 @@
         =>  ^+(. .(maz.bah q.zem))
         =+  dyp=`putt`(need (~(get by par.bah) p.zem))
         ?>  ?=(^ wyv.dyp)
-        ~&  [%pock `@p`(mug (shaf %flap i.wyv.dyp))]
+        ::  ~&  [%pock `@p`(mug (shaf %flap i.wyv.dyp))]
         %_    ..pock
             yed.foy.bah  +(yed.foy.bah)
             ski.bah      (toss ski.bah)
@@ -915,7 +914,7 @@
         =+  pez=%*(. pe sea sea.bah)
         =^  wyv  pez  (harv:pez now wid.foy.bah rtt.foy.bah)
         %=  ..turk 
-          bin      (weld (turn p.wyv |=(a=rock [%ouzo lyn a])) bin)
+          bin      (weld (turn p.wyv |=(a=rock [%ouzo (hey:gus her) a])) bin)
           sea.bah  sea:pez
         ==
       ::
@@ -1015,7 +1014,7 @@
     ?-  -.how
       &  =<  zork
          =<  zank
-         %-  ~(blow la:(ho:(um q.p.kec) p.p.kec) ryn | (shaf %flap pac))
+         %-  ~(blow la:(ho:(um p.p.kec) q.p.kec) ryn | (shaf %flap pac))
          [q.kec r.kec s.kec]
       |  [[[%ouzo p.how pac] ~] fox]
     ==
@@ -1128,7 +1127,7 @@
         %coke  ~&([%coke p.bon q.bon] !!)
         %mead  [[[whu [/a/ hen] [%hear p.bon q.bon]] ~] +>.$]
         %milk  !!
-        %ouzo  ~&  [%send `@p`(mug (shaf %flap q.bon))]
+        %ouzo  ::  ~&  [%send `@p`(mug (shaf %flap q.bon))]
                [[[whu hen [%send p.bon q.bon]] ~] +>.$]
         %wine  !!
     ==
@@ -1176,10 +1175,10 @@
     =|  out=(list move)
     |-  ^-  [p=(list move) q=_+>.^$]
     ?~  p.fuy
-      [(flop out) +>.^$]
+      [out +>.^$]
     =^  toe  +>.^$
       (clop whu now hen i.p.fuy)
-    $(p.fuy t.p.fuy, out (weld (flop toe) out))
+    $(p.fuy t.p.fuy, out (weld toe out))
   ::
   ++  perm
     |=  [our=flag his=flag mar=@ud tyl=path]
