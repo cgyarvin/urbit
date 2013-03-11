@@ -373,17 +373,50 @@
   --  
 =>  
   |%
-  ++  jtop
-    $%  [%a p=(list json)]
-        [%o p=(map ,@t json)]
+  ++  jtop                                             :: json: arrays and objects
+    $%  [%a p=(list json)]                             :: json array
+        [%o p=(map ,@t json)]                          :: json object
     ==
-  ++  json
+  ++  json                                             :: json values
     $|  ~
     $?  jtop
-        $%  [%b p=?]
-        ::  [%n p=@rd]
-            [%s p=@t]
+        $%  [%b p=?]                                   :: json boolean
+            [%n p=@ta]                                 :: json number
+            [%s p=@ta]                                 :: json string
         ==
+    ==
+  ++  pojo                                             :: json printer
+    |=  val=json
+    ^-  tape
+    ?~  val  "null"
+    ?-    -.val
+        %a
+      ;:  weld
+        "["
+        =|  rez=tape
+        |-  ^+  rez
+        ?~  p.val  rez
+        $(p.val t.p.val, rez :(weld rez ^$(val i.p.val) ?~(t.p.val ~ ",")))
+        "]"
+      ==
+   ::
+        %b  ?:(p.val "true" "false")
+        %n  (trip p.val)
+        %s  :(weld "\"" (trip p.val) "\"")
+        %o
+      ;:  weld
+        "\{"
+        =+  viz=(~(tap by p.val) ~)
+        =|  rez=tape
+        |-  ^+  rez
+        ?~  viz  rez
+        %=    $
+            viz  t.viz
+            rez
+          :(weld rez "\"" (trip p.i.viz) "\":" ^$(val q.i.viz) ?~(t.viz ~ ","))
+        ==
+        "}"
+      ==
     ==
   ++  moon                                              ::  mime type to text
     |=  myn=mime
