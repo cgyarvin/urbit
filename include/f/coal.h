@@ -50,12 +50,12 @@
   ***    u2_cx functions always bail with c3__exit.
   **/
 #if 1
-#     define u2_cx_h(som)        u2_bi_h(u2_Wire, som)
-#     define u2_cx_t(som)        u2_bi_t(u2_Wire, som)
-#     define u2_cx_at(axe, som)  u2_bi_frag(u2_Wire, axe, som)
-#     define u2_cx_cell(a, b, c)  u2_bi_cell(u2_Wire, a, b, c)
-#     define u2_cx_trel(a, b, c, d)  u2_bi_trel(u2_Wire, a, b, c, d)
-#     define u2_cx_qual(a, b, c, d)
+#     define u2_cx_h(som)               u2_bi_h(u2_Wire, som)
+#     define u2_cx_t(som)               u2_bi_t(u2_Wire, som)
+#     define u2_cx_at(axe, som)         u2_bi_frag(u2_Wire, axe, som)
+#     define u2_cx_cell(a, b, c)        u2_bi_cell(u2_Wire, a, b, c)
+#     define u2_cx_trel(a, b, c, d)     u2_bi_trel(u2_Wire, a, b, c, d)
+#     define u2_cx_qual(a, b, c, d, e)  u2_bi_qual(u2_Wire, a, b, c, d, e)
 #else
     /* u2_cx_h (u2h): head.
     */
@@ -70,7 +70,7 @@
     /* u2_cx_at (u2at): fragment.
     */
       u2_noun
-      u2_cx_at(u2_noun som);
+      u2_cx_at(u2_noun axe, u2_noun som);
 
     /* u2_cx_cell():
     **
@@ -155,16 +155,17 @@
 #       define u2_cr_chop(m, f, w, t, d, s)    u2_chop(m, f, w, t, d, s)
 #       define u2_cr_mp(a_mp, b)               u2_mp(a_mp, b)
 #       define u2_cr_word(a_w, b)              u2_word(a_w, b)
+#       define u2_cr_chub(a_w, b)              u2_chub(a_w, b)
 #       define u2_cr_words(a_w, b_w, c_w, d)   u2_words(a_w, b_w, c_w, d)
 #else
       /* u2_cr_du(): u2_yes iff `a` is cell.
       */
-        u2_flag
+        u2_bean
         u2_cr_du(u2_noun a);
 
       /* u2_cr_ud(): u2_no iff `a` is cell.
       */
-        u2_flag
+        u2_bean
         u2_cr_ud(u2_noun a);
 
       /* u2_cr_at(): fragment `a` of `b`, or none.
@@ -178,7 +179,7 @@
       **   Attempt to deconstruct `a` by axis, noun pairs; 0 terminates.
       **   Axes must be sorted in tree order.
       */
-        u2_flag
+        u2_bean
         u2_cr_mean(u2_noun a,
                    ...);
 
@@ -245,7 +246,7 @@
       **   Yes iff (a) and (b) are the same copy of the same noun.
       **   (Ie, by pointer equality - u2_cr_sing with false negatives.)
       */
-        u2_flag
+        u2_bean
         u2_cr_fing(u2_noun a,
                    u2_noun b);
 
@@ -253,7 +254,7 @@
       **
       **   Yes iff (b) is the same copy of the same noun as the C string [a].
       */
-        u2_flag
+        u2_bean
         u2_cr_fing_c(const c3_c* a_c,
                      u2_noun     b);
 
@@ -261,7 +262,7 @@
       **
       **   Yes iff `[p q]` and `b` are the same copy of the same noun.
       */
-        u2_flag
+        u2_bean
         u2_cr_fing_cell(u2_noun p,
                         u2_noun q,
                         u2_noun b);
@@ -270,7 +271,7 @@
       **
       **   Yes iff `[p q]` and `b` are the same copy of the same noun.
       */
-        u2_flag
+        u2_bean
         u2_cr_fing_mixt(const c3_c* p_c,
                         u2_noun     q,
                         u2_noun     b);
@@ -279,7 +280,7 @@
       **
       **   Yes iff `[p q r]` and `b` are the same copy of the same noun.
       */
-        u2_flag
+        u2_bean
         u2_cr_fing_trel(u2_noun p,
                         u2_noun q,
                         u2_noun r,
@@ -289,7 +290,7 @@
       **
       **   Yes iff `[p q r s]` and `b` are the same copy of the same noun.
       */
-        u2_flag
+        u2_bean
         u2_cr_fing_qual(u2_noun p,
                         u2_noun q,
                         u2_noun r,
@@ -300,7 +301,7 @@
       **
       **   Yes iff (a) and (b) are the same noun.
       */
-        u2_flag
+        u2_bean
         u2_cr_sing(u2_noun a,
                    u2_noun b);
 
@@ -308,7 +309,7 @@
       **
       **   Yes iff (b) is the same noun as the C string [a].
       */
-        u2_flag
+        u2_bean
         u2_cr_sing_c(const c3_c* a_c,
                      u2_noun     b);
 
@@ -316,7 +317,7 @@
       **
       **   Yes iff `[p q]` and `b` are the same noun.
       */
-        u2_flag
+        u2_bean
         u2_cr_sing_cell(u2_noun p,
                         u2_noun q,
                         u2_noun b);
@@ -325,7 +326,7 @@
       **
       **   Yes iff `[p q]` and `b` are the same noun.
       */
-        u2_flag
+        u2_bean
         u2_cr_sing_mixt(const c3_c* p_c,
                         u2_noun     q,
                         u2_noun     b);
@@ -334,7 +335,7 @@
       **
       **   Yes iff `[p q r]` and `b` are the same noun.
       */
-        u2_flag
+        u2_bean
         u2_cr_sing_trel(u2_noun p,
                         u2_noun q,
                         u2_noun r,
@@ -344,7 +345,7 @@
       **
       **   Yes iff `[p q r s]` and `b` are the same noun.
       */
-        u2_flag
+        u2_bean
         u2_cr_sing_qual(u2_noun p,
                         u2_noun q,
                         u2_noun r,
@@ -363,7 +364,7 @@
       **
       **   Divide `a` as a mold `[b.[p q] c]`.
       */
-        u2_flag
+        u2_bean
         u2_cr_mold(u2_noun  a,
                    u2_noun* b,
                    u2_noun* c);
@@ -372,7 +373,7 @@
       **
       **   Divide `a` as a cell `[b c]`.
       */
-        u2_flag
+        u2_bean
         u2_cr_cell(u2_noun  a,
                    u2_noun* b,
                    u2_noun* c);
@@ -381,7 +382,7 @@
       **
       **   Divide `a` as a trel `[b c]`.
       */
-        u2_flag
+        u2_bean
         u2_cr_trel(u2_noun  a,
                    u2_noun* b,
                    u2_noun* c,
@@ -391,7 +392,7 @@
       **
       **   Divide (a) as a qual (b c d e).
       */
-        u2_flag
+        u2_bean
         u2_cr_qual(u2_noun  a,
                    u2_noun* b,
                    u2_noun* c,
@@ -402,7 +403,7 @@
       **
       **   & [0] if [a] is of the form [b *c].
       */
-        u2_flag
+        u2_bean
         u2_cr_p(u2_noun  a,
                 u2_noun  b,
                 u2_noun* c);
@@ -411,7 +412,7 @@
       **
       **   & [0] if [a] is of the form [b *c d].
       */
-        u2_flag
+        u2_bean
         u2_cr_pq(u2_noun  a,
                  u2_noun  b,
                  u2_noun* c,
@@ -421,7 +422,7 @@
       **
       **   & [0] if [a] is of the form [b *c *d *e].
       */
-        u2_flag
+        u2_bean
         u2_cr_pqr(u2_noun  a,
                   u2_noun  b,
                   u2_noun* c,
@@ -432,7 +433,7 @@
       **
       **   & [0] if [a] is of the form [b *c *d *e *f].
       */
-        u2_flag
+        u2_bean
         u2_cr_pqrs(u2_noun  a,
                    u2_noun  b,
                    u2_noun* c,
@@ -518,10 +519,16 @@
                     u2_atom d);
 #endif
 
-      /* u2_cr_string(): `a` as malloced C string.
+      /* u2_cr_string(): `a`, a text atom, as malloced C string.
       */
         c3_c* 
         u2_cr_string(u2_atom a);
+
+      /* u2_cr_tape(): `a`, a list of bytes, as malloced C string.
+      */
+        c3_y* 
+        u2_cr_tape(u2_noun a);
+
 
 
   /** u2_c?: managing noun reference counts.
@@ -545,7 +552,7 @@
 #endif
     /* u2_cu(): yes iff `som` is mutable where transferred (refcount 1).
     */
-      u2_flag
+      u2_bean
       u2_cu(u2_noun som);
 
 
@@ -563,12 +570,33 @@
       u2_ci_bytes(c3_w        a_w,
                   const c3_y* b_y);
 
+    /* u2_ci_words():
+    **
+    **   Construct `a` words from `b`, LSW first, as an atom.
+    */
+      u2_atom
+      u2_ci_words(c3_w        a_w,
+                  const c3_w* b_w);
+
+    /* u2_ci_chubs():
+    **
+    **   Construct `a` double-words from `b`, LSD first, as an atom.
+    */
+      u2_atom
+      u2_ci_chubs(c3_w        a_w,
+                  const c3_d* b_d);
+
     /* u2_ci_string():
     **
     **   u2_ci_bytes(strlen(a_c), (c3_y *)a_c);
     */
       u2_atom
       u2_ci_string(const c3_c* a_c);
+
+    /* u2_ci_tape(): from a C string, to a list of bytes.
+    */
+      u2_atom
+      u2_ci_tape(const c3_c* txt_c);
 
     /* u2_ci_duck():
     **
@@ -621,7 +649,7 @@
   **/
     /* u2_cf_flat_save(): save `som` as `mod` at `pas`.
     */
-      u2_flag
+      u2_bean
       u2_cf_flat_save(u2_noun mod, 
                       u2_noun pas,
                       u2_noun som);
@@ -693,14 +721,27 @@
       u2_cn_nock(u2_noun bus,
                  u2_noun fol);
 
-    /* u2_cn_mong():
+    /* u2_cn_mung():
     **
     **   Call `(function sample)`.
     */
       u2_noun
-      u2_cn_mong(u2_noun fun,
+      u2_cn_mung(u2_noun fun,
                  u2_noun sam);
 
+    /* u2_cn_mink(): logical virtual nock.
+    */
+      u2_noun
+      u2_cn_mink(u2_noun bus,
+                 u2_noun fol,
+                 u2_noun fly);
+
+    /* u2_cn_moch(): blind mink with empty fly.
+    */
+      u2_noun
+      u2_cn_moch(u2_noun bus,
+                 u2_noun fol);
+   
   /** u2_cs_*: general-purpose internal hash tables 
   **/
 
@@ -820,44 +861,34 @@
     **
     **   Return u2_no on failure.
     */
-      u2_flag
+      u2_bean
       u2_cm_boot(void);
 
-    /* u2_cm_wind(): enter new opaque bail context, returning old (or 0).
-    **
-    **   usage:  
-    **        c3_w qop_w = u2_cm_wind();
-    **  
-    **        if ( 0 != u2_cm_trap() ) {
-    **          u2_cm_done(qop_w);
-    **          [... exception ...]
-    **        }
-    **        else {
-    **          [... code as normal ...]
-    **          u2_cm_done(qop_w);
-    **        }
+    /* u2_cm_rind(): open and produce a new jump buffer.
     */
-      c3_w
-      u2_cm_wind();
+      void*
+      u2_cm_rind();
 
     /* u2_cm_trap(): trap for exceptions.
     */
 #     if 0
-        c3_m
+        u2_noun
         u2_cm_trap();
 #     else
-#       define u2_cm_trap() \
-          ( (c3_l) \
-            _setjmp((void *) \
-                     u2_at_cord(u2_kite_buf_r(u2_wire_kit_r(u2_Wire)), \
-                                c3_wiseof(jmp_buf))) \
-          )
+        //  XX breaks for 64-bit nouns - use a tmp var
+        //
+#       define u2_cm_trap() (u2_noun)(setjmp(u2_cm_rind()))
 #     endif
-   
-    /* u2_cm_done(): terminate and restore old opaque bail context.
+
+    /* u2_cm_done(): terminate trap.
     */
       void
-      u2_cm_done(c3_w qop_w);
+      u2_cm_done();
+
+    /* u2_cm_wail(): retrieve and reset local trace.
+    */
+      u2_noun
+      u2_cm_wail();
 
     /* u2_cm_poll(): poll for interrupts, etc.
     */
@@ -888,6 +919,11 @@
       u2_noun
       u2_cm_bury(u2_noun som);
 
+    /* u2_cm_ruby(): store fresh or volatile noun `som` to freezer - debug.
+    */
+      u2_noun
+      u2_cm_ruby(u2_noun som);
+
     /* u2_cm_bail(): bail out to the local trap.  Does not return.
     ** 
     **  Bail structure:
@@ -900,16 +936,16 @@
     **
     **    c3__exit for normal exit
     **    c3__fail for abnormal failure 
-    **    c3__intr for manual interrupt
-    **    c3__need for knowledge exception
     **
     **  When in doubt, fail.
-    **
-    **  In all cases, the bail receiver must perform a gc to
-    **  clean up the inevitable leakz.
     */
       u2_noun
       u2_cm_bail(c3_m how_m);
+
+    /* u2_cm_bowl(): bail out with preset report.
+    */
+      u2_noun
+      u2_cm_bowl(u2_noun how);                                    //  transfer
 
     /* u2_cm_pack(): elide all volatile memory.
     */
@@ -971,11 +1007,6 @@
       u2_noun
       u2_cm_frop();
 
-    /* u2_cm_trac(): extract and clear stack trace.
-    */
-      u2_noun
-      u2_cm_trac();
-
     /* u2_cm_slab():
     **
     **   Create a blank atomic slab of `len` words.
@@ -1017,7 +1048,7 @@
     **
     **   Yes iff [a] more words remain in the pad.
     */
-      u2_flag
+      u2_bean
       u2_cm_open(c3_w a_w);
 
     /* u2_cm_malloc():
@@ -1056,6 +1087,15 @@
   */
     /* u2_cka: tier 1 functions
     */
+        u2_noun
+        u2_cka_add(u2_noun a, u2_noun b);
+
+        u2_noun
+        u2_cka_mul(u2_noun a, u2_noun b);
+
+        u2_bean
+        u2_cka_lte(u2_noun a, u2_noun b);
+
     /* u2_ckb: tier 2 functions
     */
       /* u2_ckb_lent(): length of a list.
@@ -1063,7 +1103,7 @@
         u2_noun
         u2_ckb_lent(u2_noun a);
 
-      /* u2_ckb_weld(): concatenate lists `a` before `b`.
+      /* u2_ckb_weld(): concatenate list `a` before `b`.
       */
         u2_noun
         u2_ckb_weld(u2_noun a, u2_noun b);
@@ -1075,6 +1115,11 @@
 
     /* u2_ckc: tier 3 functions
     */
+      /* u2_ckc_lsh(): left shift.
+      */
+        u2_noun
+        u2_ckc_lsh(u2_noun a, u2_noun b, u2_noun c);
+
     /* u2_ckd: tier 4 functions
     */
       /* u2_ckd_by_get(): map get for key `b` in map `a` with u2_none.
@@ -1092,6 +1137,33 @@
         u2_weak
         u2_ckd_by_put(u2_noun a, u2_noun b, u2_noun c);
 
+      /* u2_ckd_by_has(): test for get.
+      */
+        u2_bean
+        u2_ckd_by_has(u2_noun a, u2_noun b);
+
+      /* u2_ckd_by_gas(): list to map.
+      */
+        u2_noun
+        u2_ckd_by_gas(u2_noun a, u2_noun b);
+
+      /* u2_ckd_in_gas(): list to map.
+      */
+        u2_noun
+        u2_ckd_in_gas(u2_noun a, u2_noun b);
+
+      /* u2_ckd_in_has(): test for presence.
+      */
+        u2_bean
+        u2_ckd_in_has(u2_noun a, u2_noun b);
+
+      /* u2_ckd_in_tap(): map/set convert to list.  (solves by_tap also.)
+      */
+        u2_noun
+        u2_ckd_in_tap(u2_noun a, u2_noun b);
+
+#define u2_ckd_by_tap(a, b) u2_ckd_in_tap(a, b)
+
     /* u2_cke: tier 5 functions
     */
       /* u2_cke_cue(): expand saved pill.
@@ -1103,6 +1175,11 @@
       */
         u2_atom
         u2_cke_jam(u2_noun a);
+
+      /* u2_cke_trip: atom to tape.
+      */
+        u2_noun
+        u2_cke_trip(u2_noun a);
 
     /* u2_ckf: tier 6 functions
     */

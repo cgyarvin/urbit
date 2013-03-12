@@ -6,17 +6,18 @@ we're going to be programming in Watt, not Nock.
 Like JVM bytecode, Nock is as inscrutable as assembly language.
 In fact, you can think of it as a sort of "functional assembly
 language."  There are sometimes reasons to program in real
-assembly language; there is never a reason to program in Nock.
+assembly language.  There is never a reason to program in Nock.
 Except to learn Nock.
 
 Indeed, it is not necessary for the Watt programmer to learn
 Nock.  We recommend it strongly, however, because Watt has a very
 special relationship with Nock - not unlike the relationship
-between C and assembly language.  Just as C is a very shallow
-layer over the raw CPU, Watt is a very shallow layer over raw
-Nock - often little more than a macro.  If you try to learn C
-without understanding the CPU under it, you will be forever
-bemused by why it works the way it does.
+between C and assembly language.  
+
+Just as C is a very shallow layer over the raw CPU, Watt is a
+very shallow layer over raw Nock - often little more than a
+macro.  If you try to learn C without understanding the CPU under
+it, you will be forever bemused by why it works the way it does.
 
 So let's learn Nock!  But wait - which Nock?  Nock, though more
 frozen than Walt Disney, does have versions.  Nock versions are

@@ -19,7 +19,7 @@
       ** (Ideally, do not use deep C stack at all.)
       */
         uint32_t LoomFrame;
-      /* Stop flag for signal handlers (eg, SIGINT).
+      /* Stop bean for signal handlers (eg, SIGINT).
       */
         volatile sig_atomic_t LoomStop;
         volatile sig_atomic_t LoomIntr;
@@ -304,25 +304,7 @@
 #     define u2_nock_10  10
 
 
-    /* Old (Nock 7) conventional axes for gate call.
-    */
-#if 0
-#     define u2_cv_pay      2       //  payload
-#     define u2_cv_sam      4       //  sample
-#       define u2_cv_sam_1  4
-#       define u2_cv_sam_2  8
-#       define u2_cv_sam_3  9
-#       define u2_cv_sam_6  18
-#       define u2_cv_sam_12 36
-#       define u2_cv_sam_13 37
-#       define u2_cv_sam_7  19
-#     define u2_cv_con      5       //  context
-#     define u2_cv_con_sam  20      //  sample in gate context
-#     define u2_cv_noc      3       //  deprecated
-#     define u2_cv_bat      3       //  battery
-#endif
-
-    /* New (Nock 6) conventional axes for gate call.
+    /* Old (Nock 6) conventional axes for gate call.
     */
 #     define u2_cw_pay      2       //  payload
 #     define u2_cw_con      4       //  context
@@ -332,6 +314,8 @@
 #     define u2_cw_sam      5       //  sample
 #       define u2_cw_sam_1  5
 #       define u2_cw_sam_2  10
+#       define u2_cw_sam_4  20
+#       define u2_cw_sam_5  21
 #       define u2_cw_sam_3  11
 #       define u2_cw_sam_6  22 
 #       define u2_cw_sam_12 44
@@ -339,6 +323,28 @@
 #       define u2_cw_sam_7  23
 #     define u2_cw_noc      3       //  deprecated
 #     define u2_cw_bat      3       //  battery
+
+    /* New (Nock 5) conventional axes for gate call.
+    */
+#if 1
+#     define u2_cv_pay      3       //  payload
+#     define u2_cv_sam      6       //  sample
+#       define u2_cv_sam_1  6
+#       define u2_cv_sam_2  12
+#       define u2_cv_sam_3  13
+#       define u2_cv_sam_4  24
+#       define u2_cv_sam_5  25
+#       define u2_cv_sam_6  26
+#       define u2_cv_sam_12 52
+#       define u2_cv_sam_13 53
+#       define u2_cv_sam_7  27
+#     define u2_cv_con      7       //  context
+#     define u2_cv_con_2    14      //  context
+#     define u2_cv_con_3    15      //  context
+#     define u2_cv_con_sam  30      //  sample in gate context
+#     define u2_cv_noc      2       //  deprecated
+#     define u2_cv_bat      2       //  battery
+#endif
 
     /* u2_yes, u2_no, u2_nul;
     **
@@ -386,11 +392,11 @@
     */
       typedef u2_noun u2_cell;
 
-    /* u2_flag:
+    /* u2_bean:
     **
     **   A Martian boolean (0 = yes, 1 = no).
     */
-      typedef u2_noun u2_flag;
+      typedef u2_noun u2_bean;
 
     /* u2_axis:
     **
@@ -456,7 +462,7 @@
         **   Yes iff (a) is a cell.
         */
 #if 0
-          u2_flag
+          u2_bean
           u2_dust(u2_noun a)
 #else 
 #         define u2_dust(a) \
@@ -476,7 +482,7 @@
         **   Attempt to deconstruct `a` by axis, noun pairs; 0 terminates.
         **   Axes must be sorted in tree order.
         */
-          u2_flag
+          u2_bean
           u2_mean(u2_noun a,
                   ...);
 
@@ -542,7 +548,7 @@
         **   Yes iff (a) and (b) are the same copy of the same noun.
         **   (Ie, by pointer equality - u2_sing with false negatives.)
         */
-          u2_flag
+          u2_bean
           u2_fing(u2_noun a,
                   u2_noun b);
 
@@ -550,7 +556,7 @@
         **
         **   Yes iff (b) is the same copy of the same noun as the C string [a].
         */
-          u2_flag
+          u2_bean
           u2_fing_c(const c3_c* a_c,
                     u2_noun     b);
 
@@ -558,7 +564,7 @@
         **
         **   Yes iff `[p q]` and `b` are the same copy of the same noun.
         */
-          u2_flag
+          u2_bean
           u2_fing_cell(u2_noun p,
                        u2_noun q,
                        u2_noun b);
@@ -567,7 +573,7 @@
         **
         **   Yes iff `[p q]` and `b` are the same copy of the same noun.
         */
-          u2_flag
+          u2_bean
           u2_fing_mixt(const c3_c* p_c,
                        u2_noun     q,
                        u2_noun     b);
@@ -576,7 +582,7 @@
         **
         **   Yes iff `[p q r]` and `b` are the same copy of the same noun.
         */
-          u2_flag
+          u2_bean
           u2_fing_trel(u2_noun p,
                        u2_noun q,
                        u2_noun r,
@@ -586,7 +592,7 @@
         **
         **   Yes iff `[p q r s]` and `b` are the same copy of the same noun.
         */
-          u2_flag
+          u2_bean
           u2_fing_qual(u2_noun p,
                        u2_noun q,
                        u2_noun r,
@@ -597,7 +603,7 @@
         **
         **   Yes iff (a) and (b) are the same noun.
         */
-          u2_flag
+          u2_bean
           u2_sing(u2_noun a,
                   u2_noun b);
 
@@ -605,7 +611,7 @@
         **
         **   Yes iff (b) is the same noun as the C string [a].
         */
-          u2_flag
+          u2_bean
           u2_sing_c(const c3_c* a_c,
                     u2_noun     b);
 
@@ -613,7 +619,7 @@
         **
         **   Yes iff `[p q]` and `b` are the same noun.
         */
-          u2_flag
+          u2_bean
           u2_sing_cell(u2_noun p,
                        u2_noun q,
                        u2_noun b);
@@ -622,7 +628,7 @@
         **
         **   Yes iff `[p q]` and `b` are the same noun.
         */
-          u2_flag
+          u2_bean
           u2_sing_mixt(const c3_c* p_c,
                        u2_noun     q,
                        u2_noun     b);
@@ -631,7 +637,7 @@
         **
         **   Yes iff `[p q r]` and `b` are the same noun.
         */
-          u2_flag
+          u2_bean
           u2_sing_trel(u2_noun p,
                        u2_noun q,
                        u2_noun r,
@@ -641,7 +647,7 @@
         **
         **   Yes iff `[p q r s]` and `b` are the same noun.
         */
-          u2_flag
+          u2_bean
           u2_sing_qual(u2_noun p,
                        u2_noun q,
                        u2_noun r,
@@ -661,7 +667,7 @@
         **   Yes iff (a) is an atom.
         */
 #if 0
-          u2_flag
+          u2_bean
           u2_stud(u2_noun a)
 #else 
 #         define u2_stud(a) \
@@ -674,7 +680,7 @@
         **
         **   Factor [a] as a bush [b.[p q] c].
         */
-          u2_flag
+          u2_bean
           u2_as_bush(u2_noun  a,
                      u2_noun* b,
                      u2_noun* c);
@@ -683,7 +689,7 @@
         **
         **   Factor (a) as a cell (b c).
         */
-          u2_flag
+          u2_bean
           u2_as_cell(u2_noun  a,
                      u2_noun* b,
                      u2_noun* c);
@@ -692,7 +698,7 @@
         **
         **   Factor (a) as a hext (b c d e f g)
         */
-          u2_flag
+          u2_bean
           u2_as_hext(u2_noun  a,
                      u2_noun* b,
                      u2_noun* c,
@@ -705,7 +711,7 @@
         **
         **   & [0] if [a] is of the form [b *c].
         */
-          u2_flag
+          u2_bean
           u2_as_p(u2_noun  a,
                   u2_noun  b,
                   u2_noun* c);
@@ -714,7 +720,7 @@
         **
         **   & [0] if [a] is of the form [b *c d].
         */
-          u2_flag
+          u2_bean
           u2_as_pq(u2_noun  a,
                    u2_noun  b,
                    u2_noun* c,
@@ -724,7 +730,7 @@
         **
         **   & [0] if [a] is of the form [b *c *d *e].
         */
-          u2_flag
+          u2_bean
           u2_as_pqr(u2_noun  a,
                     u2_noun  b,
                     u2_noun* c,
@@ -735,7 +741,7 @@
         **
         **   & [0] if [a] is of the form [b *c *d *e *f].
         */
-          u2_flag
+          u2_bean
           u2_as_pqrs(u2_noun  a,
                      u2_noun  b,
                      u2_noun* c,
@@ -747,7 +753,7 @@
         **
         **   Factor (a) as a qual (b c d e).
         */
-          u2_flag
+          u2_bean
           u2_as_qual(u2_noun  a,
                      u2_noun* b,
                      u2_noun* c,
@@ -758,7 +764,7 @@
         **
         **   Factor (a) as a quil (b c d e f).
         */
-          u2_flag
+          u2_bean
           u2_as_quil(u2_noun  a,
                      u2_noun* b,
                      u2_noun* c,
@@ -770,7 +776,7 @@
         **
         **   Factor (a) as a trel (b c d).
         */
-          u2_flag
+          u2_bean
           u2_as_trel(u2_noun a,
                      u2_noun *b,
                      u2_noun *c,
@@ -869,6 +875,14 @@
         */
           c3_w
           u2_word(c3_w    a_w,
+                  u2_atom b);
+
+        /* u2_chub():
+        **
+        **   Return double-word (a_w) of (b).
+        */
+          c3_d
+          u2_chub(c3_w    a_w,
                   u2_atom b);
 
         /* u2_words():

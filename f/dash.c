@@ -6,7 +6,7 @@
 
 /* _ds_mate(): u2_yes iff `xip` binds to `cor`.
 */
-static u2_flag
+static u2_bean
 _ds_mate(u2_noun xip,                                             //  retain
          u2_noun cor)                                             //  retain
 {
@@ -27,7 +27,8 @@ _ds_mate(u2_noun xip,                                             //  retain
       return u2_no;
     }
   } 
-  return u2_sing(bat, u2_t(cor));
+
+  return u2_sing(bat, u2_h(cor));
 }
 
 /* _ds_scan(): linear search for matching chip.
@@ -57,7 +58,7 @@ u2_ds_find(u2_wire wir_r,
     return u2_none;
   } else {
     u2_rail bas_r = u2_wire_bas_r(wir_r);
-    u2_noun pug = u2_cs_find(bas_r, u2_wire_des_r(wir_r), 0, u2_t(cor));
+    u2_noun pug = u2_cs_find(bas_r, u2_wire_des_r(wir_r), 0, u2_h(cor));
 
     if ( u2_none == pug ) {
       return u2_none;
@@ -68,7 +69,7 @@ u2_ds_find(u2_wire wir_r,
 
 /* _ds_good_cop()::
 */
-static u2_flag
+static u2_bean
 _ds_good_cop(u2_noun cop)
 {
   c3_w i_w = 0;
@@ -88,7 +89,7 @@ _ds_good_cop(u2_noun cop)
 
 /* _ds_good_bud()::
 */
-static u2_flag
+static u2_bean
 _ds_good_bud(u2_noun bud)
 {
   u2_noun p_bud, q_bud;
@@ -113,7 +114,7 @@ _ds_good_bud(u2_noun bud)
 
 /* _ds_good_pic()::
 */
-static u2_flag
+static u2_bean
 _ds_good_pic(u2_noun pic)
 {
   if ( u2_nul == pic ) {
@@ -164,7 +165,7 @@ _ds_chip(u2_wire wir_r,
     /* battery: bat
     */
     {
-      if ( u2_none == (bat = u2_rx(bas_r, u2_t(cor))) ) {
+      if ( u2_none == (bat = u2_rx(bas_r, u2_h(cor))) ) {
         u2_ho_warn_here();
         u2_rz(bas_r, dac); return u2_none;
       }
@@ -179,7 +180,7 @@ _ds_chip(u2_wire wir_r,
       // want duplicates, which compare slowly.
       //
       if ( u2_nul == pug ) {
-        bat = u2_rx(bas_r, u2_t(cor));
+        bat = u2_rx(bas_r, u2_h(cor));
       }
       else {
         u2_noun i_pug = u2_h(pug);
@@ -214,7 +215,6 @@ _ds_chip(u2_wire wir_r,
           if ( u2_none == ruc ) {
             u2_err(wir_r, "clu", clu);
             u2_ho_warn_here();
-            c3_assert(0);
             u2_rz(bas_r, dac); u2_rz(bas_r, bat); return u2_none;
           } else {
             if ( u2_none == (led = u2_ds_find(wir_r, ruc)) ) {
@@ -246,8 +246,8 @@ u2_ds_mine(u2_wire wir_r,
   if ( u2_no == u2_dust(cor) ) {
     return cor;
   } else {
-    u2_noun pay = u2_h(cor);
-    u2_noun bat = u2_t(cor);
+    u2_noun pay = u2_t(cor);
+    u2_noun bat = u2_h(cor);
     u2_noun pug = u2_cs_find(bas_r, u2_wire_des_r(wir_r), 0, bat);
     u2_noun xip, bat_xip;
     u2_noun gop;
@@ -263,6 +263,7 @@ u2_ds_mine(u2_wire wir_r,
       } else {
         bat_xip = u2_h(u2_t(xip));
 
+        // {c3_c* xip_c=u2_ho_cstring(xip); printf("%s\n", xip_c); free(xip_c);}
         gop = u2_cs_save(bas_r, u2_wire_des_r(wir_r), 0, bat_xip, gop);
         u2_rz(bas_r, gop);
       }

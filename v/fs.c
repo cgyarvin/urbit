@@ -12,6 +12,9 @@
 #include <gmp.h>
 #include <stdint.h>
 #include <ev.h>
+#include <curses.h>
+#include <termios.h>
+#include <term.h>
 
 #include "all.h"
 #include "f/coal.h"
@@ -25,17 +28,12 @@ u2_ve_file(c3_c* ext_c, u2_noun tah)
   u2_noun pas;
   u2_weak dat;
 
-  c3_assert(u2_Local);
-  pas = u2_cf_path(u2_Local, ext_c, u2k(tah));
+  c3_assert(u2_System);
+  pas = u2_cf_path(u2_System, ext_c, u2k(tah));
   dat = u2_cf_flat_load(c3__atom, pas);
 
-  if ( (u2_none != dat) || !u2_System ) {
-    u2z(tah);
-
-    return dat;
-  } else {
-    return u2_cf_flat_load(c3__atom, u2_cf_path(u2_System, ext_c, tah));
-  }
+  u2z(tah);
+  return dat;
 }
 
 /* u2_ve_date(): date internal file.
@@ -46,24 +44,53 @@ u2_ve_date(c3_c* ext_c, u2_noun tah)
   u2_noun pas;
   u2_weak dat;
 
-  pas = u2_cf_path(u2_Local, ext_c, u2k(tah));
+  pas = u2_cf_path(u2_System, ext_c, u2k(tah));
   dat = u2_cf_flat_date(pas);
 
-  if ( (0 != dat) || !u2_System ) {
-    u2z(tah);
+  u2z(tah);
+  return dat;
+}
 
-    return dat;
-  } else {
-    return u2_cf_flat_date(u2_cf_path(u2_System, ext_c, tah));
+/* u2_ve_frep(): load [.~ %rep myp {now} hat].
+**
+**   File is either ~ or [nbytes mdate atom].
+*/
+u2_noun
+u2_ve_frep(u2_noun myp, u2_noun hat)
+{
+  //  Total hack - switch to this form exclusively, 
+  //  then revise callers.
+  {
+    c3_c* dex_c = u2_cr_string(myp);
+    u2_noun tah = u2_ckb_flop(hat);
+    u2_weak fat = u2_ve_file(dex_c, u2_ct(tah));
+
+    u2_cz(myp);
+    if ( u2_none == fat ) {
+      u2_cz(tah);
+      free(dex_c);
+      return u2_nul;
+    } else {
+      c3_d wen_d = u2_ve_date(dex_c, tah);
+      c3_w wen_w[2];
+
+      wen_w[0] = (wen_d & 0xffffffffULL);
+      wen_w[1] = (wen_d >> 32ULL);
+
+      free(dex_c);
+      return u2nt(u2_cr_met(3, fat), 
+                  u2_ci_words(2, wen_w),
+                  fat);
+    }
   }
 }
 
 /* u2_ve_save(): save internal file as atom.
 */
-u2_flag
+u2_bean
 u2_ve_save(c3_c* ext_c, u2_noun tah, u2_noun dat)
 {
-  return u2_cf_flat_save(c3__atom, u2_cf_path(u2_Local, ext_c, tah), dat);
+  return u2_cf_flat_save(c3__atom, u2_cf_path(u2_System, ext_c, tah), dat);
 }
 
 /* u2_ve_fold(): load a list of all files with extension `ext` in `tah`.
@@ -71,7 +98,7 @@ u2_ve_save(c3_c* ext_c, u2_noun tah, u2_noun dat)
 u2_noun
 u2_ve_fold(c3_c* ext_c, u2_noun tah)
 {
-  u2_noun pas = u2_cf_path(u2_Local, 0, tah);
+  u2_noun pas = u2_cf_path(u2_System, 0, tah);
   u2_noun raw = u2_cf_list(pas);
 
   /* Filter for extension.

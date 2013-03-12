@@ -14,6 +14,14 @@
 #     include "c/motes.h"
 #     include "c/comd.h"
 
+#if 0
+#define NOCK6
+#undef NOCK5
+#else
+#undef NOCK6
+#define NOCK5
+#endif
+
     /** u2: the new interpreter.
     **/
 #     include "f/loom.h"

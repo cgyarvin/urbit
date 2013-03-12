@@ -12,16 +12,14 @@
 #include <gmp.h>
 #include <stdint.h>
 #include <ev.h>
+#include <curses.h>
+#include <termios.h>
+#include <term.h>
 
 #include "all.h"
 #include "v/vere.h"
 
-    /* Temporary dependency on old gunn.
-    */
-      /* u2_ve_gunn_line(): apply command line.
-      */
-        void
-        u2_ve_gunn_line(u2_noun cor, u2_noun txt);
+#define NEW9
 
 /* u2_ve_dump_columns(): return screen column width from OS.
 */
@@ -62,12 +60,15 @@ u2_ve_dump_wall(u2_noun wol)
 {
   u2_noun wal = wol;
 
+  u2_term_io_hija();
   while ( u2_nul != wal ) {
     u2_ve_dump_tape(u2_ct(u2h(wal)));
+    putchar(13);
     putchar(10);
 
     wal = u2t(wal);
   }
+  u2_term_io_loja(0);
   u2z(wol);
 }
 
@@ -77,9 +78,50 @@ void
 u2_ve_tank(c3_l tab_l, u2_noun tac)
 {
   c3_l    col_l = u2_ve_dump_columns();
-  u2_noun wol = u2_ve_hard("pitt", "wash", u2nc(u2nc(tab_l, col_l), tac));
+  u2_noun wol;
+
+  if ( u2_Host.kno_w > 209 ) {
+    wol = u2_ve_hard("pitt", "wash", u2nc(u2nc(tab_l, col_l), tac));
+  } else {
+    if ( u2_Host.kno_w > 203 ) {
+      wol = u2_ve_hard("born", "wash", u2nc(u2nc(tab_l, col_l), tac));
+    }
+    else {
+      wol = u2_ve_hard("vane", "wash", u2nc(u2nc(tab_l, col_l), tac));
+    }
+  }
 
   u2_ve_dump_wall(wol);
+}
+
+/* u2_ve_geto(): ghetto-print failed trace stack.  Will not fail!
+*/
+void
+u2_ve_geto(u2_noun hoe)
+{
+#if 1
+  u2z(hoe);
+#else
+  u2_noun doe = hoe;
+
+  while ( 1 ) {
+    if ( u2_no == u2du(doe) ) {
+      u2z(hoe); return;
+    } else {
+      u2_noun i_doe = u2h(doe);
+      u2_noun t_doe = u2t(doe);
+
+      if ( u2_yes == u2du(i_doe) ) {
+        u2_err(u2_Wire, "h", u2h(i_doe));
+
+        if ( c3__mean != u2h(i_doe) ) {
+          u2_err(u2_Wire, "t", u2t(i_doe));
+        }
+      } 
+      doe = t_doe;
+    }
+  }
+#endif
 }
 
 /* u2_ve_sway(): print trace stack.
@@ -87,34 +129,52 @@ u2_ve_tank(c3_l tab_l, u2_noun tac)
 void
 u2_ve_sway(c3_l tab_l, u2_noun tax)
 {
-  while ( u2_yes == u2_cr_du(tax) ) {
-    u2_noun h_tax = u2h(tax);
-    u2_noun t_tax = u2t(tax);
-    c3_w poq_w = u2_cm_wind();
-    u2_noun how;
+  u2_noun rax = tax;
 
-    if ( 0 != (how = u2_cm_trap()) ) {
-      u2_noun rap = u2_cm_trac();
+  while ( u2_yes == u2_cr_du(rax) ) {
+    u2_noun h_rax = u2h(rax);
+    u2_noun t_rax = u2t(rax);
+    u2_noun hoe;
 
-      fprintf(stderr, "  !!--!!\n");
-      u2z(rap);
+    if ( 0 != (hoe = u2_cm_trap()) ) {
+      c3_c *hho_c = u2_cr_string(u2h(hoe));
+      fprintf(stderr, "  !!-%s-!!\n", hho_c);
 
-      // u2_err(u2_Wire, "lame", u2h(h_tax));
+      free(hho_c);
+      u2_ve_geto(u2k(u2t(hoe)));
+      u2z(hoe);
+      // c3_assert(0);
     } 
     else {
       c3_l    col_l = u2_ve_dump_columns();
       u2_noun tac;
       u2_noun wol;
-
-      tac = u2_ve_hard("pitt", "swan", u2_ct(h_tax));
-      wol = u2_ve_hard("pitt", "wash", u2nc(u2nc(tab_l, col_l), tac));
-
+#if 0
+      u2_err(u2_Wire, "hh_rax", u2h(h_rax));
+      if ( c3__mean != u2h(h_rax) ) {
+        u2_err(u2_Wire, "th_rax", u2t(h_rax));
+      }
+#endif
+      if ( u2_Host.kno_w > 209 ) {
+        tac = u2_ve_hard("pitt", "swan", u2_ct(h_rax));
+        wol = u2_ve_hard("pitt", "wash", u2nc(u2nc(tab_l, col_l), tac));
+      }
+      else {
+        if ( u2_Host.kno_w > 203 ) {
+          tac = u2_ve_hard("born", "swan", u2_ct(h_rax));
+          wol = u2_ve_hard("born", "wash", u2nc(u2nc(tab_l, col_l), tac));
+        }
+        else {
+          tac = u2_ve_hard("vane", "swan", u2_ct(h_rax));
+          wol = u2_ve_hard("vane", "wash", u2nc(u2nc(tab_l, col_l), tac));
+        }
+      }
       u2_ve_dump_wall(wol);
-      u2_cm_done(poq_w);
+      u2_cm_done();
     }
-    tax = t_tax;
+    rax = t_rax;
   }
-  u2_cz(tax);
+  u2z(tax);
 }
 
 /* u2_ve_wine(): analyze and express error result.
@@ -122,38 +182,17 @@ u2_ve_sway(c3_l tab_l, u2_noun tax)
 void
 u2_ve_wine(u2_noun how)
 {
-  u2_noun p_how, q_how;
-
   if ( u2_no == u2_cr_du(how) ) {
     switch ( how ) {
       case c3__exit: fprintf(stderr, "<<exit>>:\n"); break;
       case c3__fail: fprintf(stderr, "<<fail>>:\n"); break;
       case c3__intr: fprintf(stderr, "<<intr>>:\n"); break;
-      default:       fprintf(stderr, "<<--->>\n"); break;
+      default:       fprintf(stderr, "<<--->>\n"); c3_assert(0);
     }
   } else {
-    switch ( u2_h(how) ) {
-      case c3__fail: u2_cx_cell(u2_t(how), &p_how, &q_how);
-      {
-        c3_c* str_c = u2_cr_string(p_how);
-
-        fprintf(stderr, "<<fail (%s)>>:\n", str_c);
-        break;
-      }
-      case c3__need: u2_cx_cell(u2_t(how), &p_how, &q_how);
-      {
-        fprintf(stderr, "<<need>>:\n");
-
-        u2_err(u2_Wire, "need", p_how);
-        break;
-      }
-      default: {
-        fprintf(stderr, "<<--->>\n");
-        break;
-      }
-    }
+    u2_ve_wine(u2k(u2h(how)));  // ??
   }
-  u2_cz(how);
+  u2z(how);
 }
 
 /* u2_ve_zuse_load(): fuel to vase.
@@ -292,24 +331,89 @@ u2_ve_zuse_deed(u2_noun ded)
   u2z(ded);
 }
 
-/* u2_ve_zeus(): prayer to internal file path.  Return unit.
+/* u2_ve_zuse_boom_see(): print to screen.
 */
-u2_noun
-u2_ve_zeus(u2_noun hap)
+void
+u2_ve_zuse_boom_see(u2_noun tub, u2_noun tac)
 {
-  if ( (u2_no == u2du(hap)) || (c3_s2('.', '~') != u2h(hap)) ) {
-    u2z(hap);
-    return u2_nul;
-  } 
-  else {
-    u2_noun tah = u2k(u2t(hap));
-    u2_noun dat = u2_ve_file("watt", tah);
+  if ( !u2_fly_is_cat(tub) ) {
+    u2_cm_bail(c3__fail);
+  } else {
+    u2_ve_tank(tub, tac);
+  }
+}
 
-    if ( u2_none == dat ) {
-      return u2_nul;
+/* u2_ve_zuse_boom_dat(): save to disk.
+*/
+void
+u2_ve_zuse_boom_dat(u2_noun tah, u2_noun mod, u2_noun som)
+{
+  u2_err(u2_Wire, "dat: tah", tah);
+  u2_err(u2_Wire, "dat: mod", mod);
+
+  u2z(tah);
+}
+
+/* u2_ve_zuse_boom(): produce zuse outputs.
+*/
+void
+u2_ve_zuse_boom(u2_noun out)
+{
+  u2_noun tou = out;
+
+  while ( 1 ) {
+    if ( u2_nul == tou ) {
+      u2z(out); 
+      return;
     } else {
-      return u2nc(u2_nul, dat);
+      u2_noun i_tou = u2h(tou);
+      u2_noun t_tou = u2t(tou);
+      u2_noun bum = i_tou;
+      u2_noun p_bum, q_bum, r_bum;
+
+      switch ( u2h(bum) ) {
+        case c3__hit: {
+          u2_as_trel(u2t(bum), &p_bum, &q_bum, &r_bum);
+          u2_ve_zuse_boom_dat(u2k(p_bum), u2k(q_bum), u2k(r_bum));
+
+          break;
+        }
+        case c3__see: {
+          u2_as_cell(u2t(bum), &p_bum, &q_bum);
+
+          u2_ve_zuse_boom_see(u2k(p_bum), u2k(q_bum));
+          break;
+        }
+      }
+      tou = t_tou;
     }
+  }
+}
+
+/* u2_ve_zuse_loon_load(): preload a zuse line.
+*/
+u2_noun 
+u2_ve_zuse_loon_load(u2_noun lun)
+{
+  return lun;
+}
+
+/* u2_ve_zuse_loon(): execute a zuse line.
+*/
+void
+u2_ve_zuse_loon(u2_noun lun)
+{
+  lun = u2_ve_zuse_loon_load(lun);
+  {
+    u2_noun res = u2_ve_hard("born", "live", lun);
+    u2_noun h_res = u2_h(res);
+    u2_noun t_res = u2_t(res);
+
+    // u2_err(u2_Wire, "boom", h_res); 
+    u2_ve_zuse_boom(u2k(h_res));
+    u2_ve_step("born", u2k(t_res));
+
+    u2z(res);
   }
 }
 
@@ -320,48 +424,108 @@ u2_ve_zuse_line(u2_noun lin)
 {
   u2_hevn_be(u2_pryr, god) = u2_ve_zeus;
   {
-    u2_noun ded = u2_ve_hard("zuse", "scan", lin);
+    u2_noun ded;
 
-    u2_ve_zuse_deed(ded);
+    if ( u2_Host.kno_w > 209 ) {
+      ded = u2_ve_hard("zuse", "scan", lin);
+
+      u2_ve_zuse_deed(ded);
+    } else {
+#ifdef NEW9
+      if ( u2_Host.kno_w > 208 ) {
+        ded = u2_ve_hard("born", "slan", lin);
+      } else {
+        ded = u2_ve_hard("born", "scan", lin);
+      }
+      u2_ve_zuse_loon(ded);
+#else
+      ded = u2_ve_hard("born", "scan", lin);
+      u2_ve_zuse_deed(ded);
+#endif
+    }
   }
   u2_hevn_be(u2_pryr, god) = 0;
 }
 
-/* u2_ve_line(): execute a command line, unprotected.
+static u2_noun
+_http_in(u2_hreq* req_u)
+{
+  u2_noun met, hed, que, url, txt;
+
+  switch ( req_u->met_e ) {
+    default: return 0;
+
+    case u2_hmet_get: met = c3__get;
+    case u2_hmet_put: met = c3__put;
+    case u2_hmet_post: met = c3__pos;
+    case u2_hmet_delete: met = c3__del;
+  }
+
+  hed = u2_nul;
+  {
+    u2_hhed* hed_u;
+
+    for ( hed_u = req_u->hed_u; hed_u; hed_u = hed_u->nex_u ) {
+      hed = u2nc(u2nc(u2_ci_string(hed_u->nam_c), 
+                      u2_ci_string(hed_u->val_c)),
+                 hed);
+    }
+  }
+
+  que = u2_nul;   //  XX fixme w/http query parser
+
+  url = u2_ci_string(req_u->url_c);
+
+  txt = u2_nul;   //  XX actually load body if any
+
+  return u2nq(met, hed, que, u2nc(url, txt));
+}
+
+/* u2_ve_http_sync(): simple synchronous http.
+*/
+u2_hrep*
+u2_ve_http_sync(u2_hreq* req_u)
+{
+  if ( u2_Host.kno_w > 205 ) {
+    return 0;
+  } else {
+    u2_noun raw = _http_in(req_u);
+
+    if ( 0 == raw ) {
+      return 0;
+    }
+    else {
+      return 0;
+    }
+  }
+}
+
+/* u2_ve_sync(): filesystem sync, unprotected.
 */
 void
-u2_ve_line(c3_c* lin_c)
+u2_ve_sync(void)
 {
-  c3_w poq_w;
-  u2_noun how;
+  u2_noun hoe;
 
   u2_cm_trip();
-  poq_w = u2_cm_wind();
+  if ( 0 != (hoe = u2_cm_trap()) ) {
+    u2_cm_purge();
+    u2_ve_grab(hoe, 0);
 
-  if ( 0 != (how = u2_cm_trap()) ) {
-    u2_noun rap = u2_cm_trac();
-    u2_cm_done(poq_w);
-    //  gc with rap as root
-
-    u2_ve_wine(how);
-    u2_ve_sway(2, u2_ckb_flop(rap));
+    u2_ve_wine(u2k(u2h(hoe)));
+    u2_ve_sway(2, u2_ckb_flop(u2k(u2t(hoe))));
+    u2z(hoe);
   } 
   else {
-    u2_noun lin = u2_ci_string(lin_c);
-
-    if ( u2_Host.kno_w <= 221 ) {
-      u2_ve_zuse_line(lin);
-    } 
-    else {
-      u2_noun cor = u2_ve_gunn();
-      u2_ve_gunn_line(cor, lin);
+    u2_reck_sync(&u2_Host.rec_u[0]);
+  
+    u2_cm_done();
+  
+    u2_cm_purge();
+    if ( (u2_yes == u2_Flag_Garbage) || (u2_no == u2_wire_lan(u2_Wire)) ) {
+      u2_ve_grab(0);
     }
-
-    u2_cm_done(poq_w);
-  }
-  u2_cm_purge();
-  if ( u2_yes == u2_Flag_Garbage ) {
-    u2_ve_grab(0);
   }
   u2_cm_chin();
 }
+

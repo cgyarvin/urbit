@@ -6,8 +6,8 @@
   **/
     /* Assert.  Good to capture.
     */
-#     define c3_assert(x)   assert(x)
-// #     define c3_assert(x)  
+// #     define c3_assert(x)   assert(x)
+#     define c3_assert(x)  ( (x) ? 0 : c3_cooked(), assert(x) )
 
     /* Stub.
     */
@@ -56,6 +56,10 @@
 #     define c3_max(x, y) ( ((x) > (y)) ? (x) : (y) )
 #     define c3_min(x, y) ( ((x) < (y)) ? (x) : (y) )
 
+    /* Emergency stdio fix.
+    */
+      int
+      c3_cooked();
 
     /* Short integers.
     */

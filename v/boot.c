@@ -12,6 +12,9 @@
 #include <gmp.h>
 #include <stdint.h>
 #include <ev.h>
+#include <curses.h>
+#include <termios.h>
+#include <term.h>
 
 #include "all.h"
 #include "v/vere.h"
@@ -22,7 +25,7 @@ static u2_weak
 u2_ve_build(u2_noun tah)
 {
   c3_w  kno_w = u2_Host.kno_w;
-  c3_d  src_d = u2_ve_date("watt", u2_ct(tah));
+  c3_d  src_d = u2_ve_date("hoon", u2_ct(tah));
   c3_d  bin_d = u2_ve_date("pill", u2_ct(tah));
   u2_noun fol;
 
@@ -42,11 +45,11 @@ u2_ve_build(u2_noun tah)
     }
   } 
   else {
-    u2_noun src = u2_ve_file("watt", u2_ct(tah));
+    u2_noun src = u2_ve_file("hoon", u2_ct(tah));
     u2_noun ken;
     u2_noun pil;
 
-    u2_cm_push(u2nc(c3__lose, u2_cf_path(".", "watt", u2_ct(tah))));
+    u2_cm_push(u2nc(c3__lose, u2_cf_path(".", "hoon", u2_ct(tah))));
 
     if ( !(ken = u2_Host.ver_e[kno_w + 1].ken) &&
          !(ken = u2_Host.ver_e[kno_w + 1].ras) )
@@ -70,7 +73,7 @@ static u2_noun
 u2_ve_oldtool(u2_noun tah)
 {
   c3_w    kno_w = u2_Host.kno_w;
-  u2_weak src = u2_ve_file("watt", tah);
+  u2_weak src = u2_ve_file("hoon", tah);
 
   if ( u2_none == src ) {
     return 0;
@@ -135,30 +138,51 @@ void
 u2_ve_tool(u2_noun nam)
 {
   u2_steg* ver_e = u2_ve_at();
-  u2_noun  tah   = u2nt(nam, u2_ve_tag(u2_Host.kno_w), c3__sys);
-  u2_weak  src   = u2_ve_file("watt", u2_ct(tah));
+  u2_noun  num   = u2_ve_tag(u2_Host.kno_w);
+  u2_noun  bon   = u2nc(u2_ci_string(".~"), 
+                        u2nt(u2k(num), u2k(nam), u2_nul));
+  u2_noun  tah   = u2nc(nam, num);
+  u2_weak  src   = u2_ve_file("hoon", u2_ct(tah));
 
-  u2_cm_push(u2nc(c3__lose, u2_cf_path(".", "watt", tah)));
+  u2_cm_push(u2nc(c3__lose, u2_cf_path(".", "hoon", tah)));
+
   if ( u2_none == src ) {
     u2_cm_bail(c3__fail);
   }
   else {
-    u2_noun gen = u2_ve_ream(src);
-    u2_noun syd = u2_ct(ver_e->toy.what ? ver_e->toy.what : ver_e->toy.seed);
-    u2_noun vos = u2_ve_slap(syd, gen);
+    u2_noun gen, syd, vos;
+  
+    if ( u2_Host.kno_w > 210 ) {
+      gen = u2_ve_ream(src);
+      u2z(bon);
+    } else {
+      u2_hevn_be(u2_pryr, god) = u2_ve_zeus;
+      {
+        gen = u2_ve_rain(bon, src);
+      }
+      u2_hevn_be(u2_pryr, god) = 0;
+    }
+
+    if ( u2_Host.kno_w > 209 ) {
+      syd = u2_ct(ver_e->toy.what ? ver_e->toy.what : ver_e->toy.seed);
+    } else {
+      syd = u2_ct(ver_e->toy.seed);
+    }
+    vos = u2_ve_slap(syd, gen);
 
     ver_e->tul = u2_ckd_by_put(ver_e->tul, nam, u2_cm_bury(vos));
+    // ver_e->tul = u2_ckd_by_put(ver_e->tul, nam, vos);
   }
   u2_cm_drop();
 }
 
 /* u2_ve_able(): u2_yes iff kernel `kno` is bootable as `nam`.
 */
-u2_flag
+u2_bean
 u2_ve_able(c3_w kno_w, c3_m nam_w)
 {
-  u2_noun tah = u2nt(nam_w, u2_ve_tag(kno_w), c3__sys);
-  c3_d  src_d = u2_ve_date("watt", u2_ct(tah));
+  u2_noun tah = u2nc(nam_w, u2_ve_tag(kno_w));
+  c3_d  src_d = u2_ve_date("hoon", u2_ct(tah));
   c3_d  bin_d = u2_ve_date("pill", tah);
 
   if ( bin_d && (bin_d >= src_d) ) {
@@ -173,13 +197,13 @@ c3_w
 u2_ve_auto(c3_w kno_w)
 {
   while ( kno_w <= FirstKernel ) {
-    if ( (u2_yes == u2_ve_able(kno_w, c3__watt)) || 
+    if ( (u2_yes == u2_ve_able(kno_w, c3__hoon)) || 
          (u2_yes == u2_ve_able(kno_w, c3__tram)) ) {
       return kno_w;
     }
     kno_w++;
   }
-  fprintf(stderr, "%s: %d: no sys/watt.pill (max %d)\n", 
+  fprintf(stderr, "%s: %d: no sys/hoon.pill (max %d)\n", 
                   u2_Local, kno_w, FirstKernel);
   exit(1);
 }
@@ -190,11 +214,11 @@ void
 u2_ve_base()
 {
   u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
-  u2_noun  bot   = u2nc(u2_ve_tag(u2_Host.kno_w), c3__sys);
+  u2_noun  bot   = u2_ve_tag(u2_Host.kno_w);
 
   c3_assert(0 == u2_Host.ver_e[u2_Host.kno_w].mod_m);
   {
-    u2_noun ken = u2_cm_bury(u2_ve_build(u2nc(c3__watt, u2_ct(bot))));
+    u2_noun ken = u2_cm_bury(u2_ve_build(u2nc(c3__hoon, u2_ct(bot))));
 
     if ( u2_none != ken ) {                             //  stable kernel
       ver_e->ken = ken;
@@ -222,6 +246,7 @@ u2_ve_base()
     }
   }
 
+#if 0
   //  Old gunn - to be deleted.
   {
     if ( 0 != ver_e->ken ) {
@@ -231,6 +256,7 @@ u2_ve_base()
       }
     }
   }
+#endif
   u2_cz(bot);
 }
 
@@ -245,6 +271,12 @@ u2_ve_rest()
   {
     ver_e->toy.seed = u2_cm_bury(u2_ve_bone("seed"));
     ver_e->toy.ream = u2_cm_bury(u2_ve_bone("ream"));
+
+    if ( u2_Host.kno_w <= 210 ) {
+      ver_e->toy.rain = u2_cm_bury(u2_ve_bone("rain"));
+    }
+    else ver_e->toy.rain = 0;
+
     ver_e->toy.slam = u2_cm_bury(u2_ve_bone("slam"));
     ver_e->toy.slap = u2_cm_bury(u2_ve_bone("slap"));
     ver_e->toy.slop = u2_cm_bury(u2_ve_bone("slop"));
@@ -259,18 +291,47 @@ u2_ve_rest()
       ver_e->toy.slot = u2_cm_bury(u2_ve_bone("slot"));
     }
 
-    if ( u2_Host.kno_w <= 220 ) {
-      ver_e->toy.spay = u2_cm_bury(u2_ve_bone("spay"));
+    if ( u2_Host.kno_w > 209 ) {
+      u2_ve_tool(c3__what);
+      ver_e->toy.what = u2_ve_use("what");
     }
+    else ver_e->toy.what = 0;
 
-    u2_ve_tool(c3__what);
-    ver_e->toy.what = u2_ve_use("what");
+    if ( u2_Host.kno_w <= 203 ) {
+      ver_e->toy.scot = 
+        u2_cm_bury(u2_ve_bone("|=([a=@ta b=@] ~(rent co ~ a b))"));
+    }
   }
   {
-    u2_ve_tool(c3__pitt);
-
-    if ( u2_Host.kno_w <= 221 ) {
-      u2_ve_tool(c3__zuse);
+    if ( u2_Host.kno_w > 209 ) {
+      u2_ve_tool(c3__pitt);
+      if ( u2_Host.kno_w <= 221 ) {
+        u2_ve_tool(c3__zuse);
+      }
+    } else {
+#ifndef RECK
+      printf("loading born...\n");
+      u2_ve_tool(c3__born);
+      printf("loaded born.\n");
+#else
+      if ( u2_Host.kno_w > 203 ) {
+        printf("loading born...\n");
+        u2_ve_tool(c3__born);
+        printf("loaded born.\n");
+      }
+#endif
+      if ( u2_Host.kno_w <= 203 ) {
+        // printf("loading vane...\n");
+        u2_ve_tool(c3__vane);
+        // printf("loaded vane.\n");
+      }
+#if 0
+      if ( u2_Host.kno_w <= 203 ) {
+        // printf("loading reck...\n");
+        u2_ve_tool(c3__reck);
+        // printf("loaded reck.\n");
+      }
+#endif
     }
   }
   u2_Host.ver_e[u2_Host.kno_w].mod_m = c3__live;
@@ -281,9 +342,13 @@ u2_ve_rest()
 void
 u2_ve_full()
 {
+  c3_assert(0 != u2_wire_kit_r(u2_Wire));
   u2_ve_base();
+  c3_assert(0 != u2_wire_kit_r(u2_Wire));
   if ( c3__warm == u2_Host.ver_e[u2_Host.kno_w].mod_m ) {
+    c3_assert(0 != u2_wire_kit_r(u2_Wire));
     u2_ve_rest();
+    c3_assert(0 != u2_wire_kit_r(u2_Wire));
   }
 }
 
@@ -304,7 +369,7 @@ u2_ve_retreat()
       default: c3_assert(0);
 
       case 0: {
-        if ( u2_yes == u2_ve_able(u2_Host.kno_w, c3__watt) ) {
+        if ( u2_yes == u2_ve_able(u2_Host.kno_w, c3__hoon) ) {
           u2_ve_full();
           break;
         } else continue;
@@ -323,76 +388,25 @@ u2_ve_retreat()
 void
 u2_ve_die(u2_noun tax)
 {
-  c3_w    qop_w = u2_cm_wind();
-  u2_noun how;
+  u2_noun hoe;
 
-  if ( 0 != (how = u2_cm_trap()) ) {
-    c3_w taz = u2_cm_trac();
+  if ( 0 != (hoe = u2_cm_trap()) ) {
+    u2z(tax);                         //  deepest error takes precedence
+    u2_ve_grab(hoe, 0);
 
-    u2_ct(tax);                         //  deepest error takes precedence
-    u2_cm_done(qop_w);
-    // u2_ve_gc();
+    u2_ve_wine(u2k(u2h(hoe)));
+    u2_ve_die(u2k(u2t(hoe)));
 
-    u2_ve_wine(how);
-    u2_ve_die(taz);
+    u2z(hoe);
   } 
   else {
     u2_ve_retreat();
     u2_ve_sway(2, u2_ckb_flop(tax));
-    u2_cm_done(qop_w);
+    u2_cm_done();
   }
   fprintf(stderr, "%s: %d: boot failure\n", u2_Local, u2_Host.kno_w);
   exit(1);
 }
-
-#if 0
-/* u2_ve_pile(): load the zuse packet log.  Crude.
-*/
-void
-u2_ve_pile(void)
-{
-  u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
-  u2_noun  tah   = u2nt(u2_ci_string("zuse"), u2_ci_string("log"), u2_nul);
-  u2_noun  all   = u2_ve_fold("atom", u2k(tah));
-  u2_noun  len   = u2_ckb_lent(all);
-
-  ver_e->has.pyl.len = len;
-  {
-    u2_noun log   = u2_nul;
-    c3_l    len_l = len;
-    c3_l    i_l;
-    u2_noun fun = ver_e->toy.spay;
-
-    for ( i_l = 0; i_l < len_l; i_l++ ) {
-      u2_noun man = u2_cn_mong(u2k(fun), u2nt(u2_nul, c3_s2('u','d'), i_l));
-      u2_noun hat = u2nc(man, u2k(tah));
-      u2_noun kap = u2_ve_file("atom", hat);
-
-      log = u2nc(kap, log);
-    }
-    ver_e->has.pyl.log = log;
-  }
-}
-
-/* u2_ve_recv(): receive a packet.  Crude.
-*/
-void
-u2_ve_recv(u2_noun kap)
-{
-  u2_steg* ver_e = &u2_Host.ver_e[u2_Host.kno_w];
-  u2_noun  fun   = u2_ve_at()->toy.spay;
-  c3_l     len_l = u2_ve_at()->has.pyl.len;
-  {
-    u2_noun man = u2_cn_mong(u2k(fun), u2nt(u2_nul, c3_s2('u','d'), len_l));
-    u2_noun tah = u2nq(man, u2_ci_string("zuse"), u2_ci_string("log"), u2_nul);
- 
-    if ( u2_no != u2_ve_save("atom", tah, u2k(kap)) ) {
-      ver_e->has.pyl.len += 1;
-      ver_e->has.pyl.log = u2nc(kap, vere->has.pyl.log);
-    }
-  }
-}
-#endif
 
 /* u2_ve_start(): boot the kernel from `kfo` to `kto`.  Exit on fail.
 */
@@ -409,19 +423,13 @@ u2_ve_start(c3_w kfo_w, c3_w kto_w)
 
   u2_cm_trip();
   {
-    c3_w    qop_w = u2_cm_wind();
-    u2_noun how;
+    u2_noun hoe;
  
-    if ( 0 != (how = u2_cm_trap()) ) {
-      {
-        c3_w tax = u2_cm_trac();
+    if ( 0 != (hoe = u2_cm_trap()) ) {
+      u2_ve_grab(hoe, 0);
 
-        u2_cm_done(qop_w);
-        // u2_ve_gc();
-
-        u2_ve_wine(how);
-        u2_ve_die(tax);
-      }
+      u2_ve_wine(u2k(u2h(hoe)));
+      u2_ve_die(u2k(u2t(hoe)));
     } 
     else {
       while ( kfo_w > kto_w ) {
@@ -430,9 +438,9 @@ u2_ve_start(c3_w kfo_w, c3_w kto_w)
         kfo_w--;
       }
       u2_Host.kno_w = kto_w;
+      c3_assert(0 != u2_wire_kit_r(u2_Wire));
       u2_ve_full();
-
-      u2_cm_done(qop_w);
+      u2_cm_done();
     }
     u2_cm_purge();
   }
@@ -488,6 +496,54 @@ u2_ve_init(c3_w kno_w)
   }
 }
 
+/* u2_ve_mark_reck(): mark a reck.
+*/
+static c3_w
+u2_ve_mark_reck(u2_reck* rec_u)
+{
+  c3_w siz_w = 0;
+
+  siz_w += u2_cm_mark_noun(rec_u->now);
+  siz_w += u2_cm_mark_noun(rec_u->wen);
+  siz_w += u2_cm_mark_noun(rec_u->sen);
+  siz_w += u2_cm_mark_noun(rec_u->own);
+  siz_w += u2_cm_mark_noun(rec_u->our);
+  siz_w += u2_cm_mark_noun(rec_u->pod);
+  siz_w += u2_cm_mark_noun(rec_u->roe);
+  siz_w += u2_cm_mark_noun(rec_u->key);
+
+  siz_w += u2_cm_mark_noun(rec_u->toy.duel);
+  siz_w += u2_cm_mark_noun(rec_u->toy.rain);
+  siz_w += u2_cm_mark_noun(rec_u->toy.ream);
+  siz_w += u2_cm_mark_noun(rec_u->toy.sham);
+  siz_w += u2_cm_mark_noun(rec_u->toy.shen);
+  siz_w += u2_cm_mark_noun(rec_u->toy.shed);
+  siz_w += u2_cm_mark_noun(rec_u->toy.slam);
+  siz_w += u2_cm_mark_noun(rec_u->toy.slap);
+  siz_w += u2_cm_mark_noun(rec_u->toy.slay);
+  siz_w += u2_cm_mark_noun(rec_u->toy.scot);
+  siz_w += u2_cm_mark_noun(rec_u->toy.slop);
+  siz_w += u2_cm_mark_noun(rec_u->toy.spat);
+  siz_w += u2_cm_mark_noun(rec_u->toy.stab);
+  siz_w += u2_cm_mark_noun(rec_u->toy.turf);
+  siz_w += u2_cm_mark_noun(rec_u->toy.tuft);
+  siz_w += u2_cm_mark_noun(rec_u->toy.mook);
+  siz_w += u2_cm_mark_noun(rec_u->toy.wash);
+
+  siz_w += u2_cm_mark_noun(rec_u->ken);
+  siz_w += u2_cm_mark_noun(rec_u->syd);
+  siz_w += u2_cm_mark_noun(rec_u->roc);
+
+  {
+    u2_cart* egg_u;
+
+    for ( egg_u = rec_u->ova.egg_u; egg_u; egg_u = egg_u->nex_u ) {
+      siz_w += u2_cm_mark_noun(egg_u->egg);
+    }
+  }
+  return siz_w;
+}
+
 /* u2_ve_mark(): mark the whole vere system.
 */
 static c3_w
@@ -512,20 +568,21 @@ u2_ve_mark()
     siz_w += u2_cm_mark_noun(ver_e->toy.seed);
     siz_w += u2_cm_mark_noun(ver_e->toy.what);
     siz_w += u2_cm_mark_noun(ver_e->toy.ream);
+    siz_w += u2_cm_mark_noun(ver_e->toy.rain);
     siz_w += u2_cm_mark_noun(ver_e->toy.sell);
     siz_w += u2_cm_mark_noun(ver_e->toy.skol);
     siz_w += u2_cm_mark_noun(ver_e->toy.slam);
     siz_w += u2_cm_mark_noun(ver_e->toy.slap);
     siz_w += u2_cm_mark_noun(ver_e->toy.slop);
-    siz_w += u2_cm_mark_noun(ver_e->toy.spay);
+    siz_w += u2_cm_mark_noun(ver_e->toy.scot);
 
     siz_w += u2_cm_mark_noun(ver_e->dev.old);
 
     siz_w += u2_cm_mark_noun(ver_e->has.pyl.log);
     siz_w += u2_cm_mark_noun(ver_e->has.pyl.len);
   }
-  siz_w += u2_ve_http_mark();
 
+  siz_w += u2_ve_mark_reck(&u2_Host.rec_u[0]);
   return siz_w;
 }
 
@@ -534,25 +591,25 @@ u2_ve_mark()
 void
 u2_ve_word(c3_w wod_w)
 {
-  u2_flag top = u2_yes;
+  u2_bean top = u2_yes;
 
   if ( wod_w / (1000 * 1000 * 1000) ) {
-    fprintf(stderr, "%u.", wod_w / (1000 * 1000 * 1000));
+    uL(fprintf(uH, "%u.", wod_w / (1000 * 1000 * 1000)));
     wod_w %= (1000 * 1000 * 1000);
     top = u2_no;
   }
   if ( wod_w / (1000 * 1000) ) {
-    fprintf(stderr, ((top == u2_yes) ? "%u." : "%03u."), 
-                     wod_w / (1000 * 1000));
+    uL(fprintf(uH, ((top == u2_yes) ? "%u." : "%03u."), 
+                     wod_w / (1000 * 1000)));
     wod_w %= (1000 * 1000);
     top = u2_no;
   }
   if ( wod_w / 1000 ) {
-    fprintf(stderr, ((top == u2_yes) ? "%u." : "%03u."), wod_w / 1000);
+    uL(fprintf(uH, ((top == u2_yes) ? "%u." : "%03u."), wod_w / 1000));
     wod_w %= 1000;
     top = u2_no;
   }
-  fprintf(stderr, ((top == u2_yes) ? "%u" : "%03u"), wod_w);
+  uL(fprintf(uH, ((top == u2_yes) ? "%u" : "%03u"), wod_w));
 }
 
 /* u2_ve_grab(): garbage-collect the world, plus roots.
@@ -570,6 +627,8 @@ u2_ve_grab(u2_noun som, ...)
     va_start(vap, som);
 
     if ( som != 0 ) {
+      siz_w += u2_cm_mark_noun(som);
+
       while ( 0 != (tur = va_arg(vap, u2_noun)) ) {
         siz_w += u2_cm_mark_noun(tur); 
       }
@@ -579,12 +638,13 @@ u2_ve_grab(u2_noun som, ...)
   lec_w = u2_cm_sweep(siz_w);
 
   if ( lec_w || (u2_yes == u2_Flag_Verbose) ) {
-    fprintf(stderr, "%s: gc: ", u2_Local);
+    uL(fprintf(uH, "%s: gc: ", u2_Local));
     if ( lec_w ) {
-      u2_ve_word(lec_w);
-      fprintf(stderr, " bytes shed; ");
+      u2_ve_word(4 * lec_w);
+      uL(fprintf(uH, " bytes shed; "));
     }
-    u2_ve_word(siz_w);
-    fprintf(stderr, " bytes live\n");
+    u2_ve_word(4 * siz_w);
+    uL(fprintf(uH, " bytes live\n"));
   }
+  u2_wire_lan(u2_Wire) = u2_yes;
 }

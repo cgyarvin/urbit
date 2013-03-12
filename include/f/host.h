@@ -120,7 +120,7 @@
     */
 #       define u2_jet_fun_m(jet_j) (0x7fffffff & (c3_w)(c3_p)(jet_j))
 
-    /* u2_ho_state: jet state flags
+    /* u2_ho_state: jet state beans
     */
     typedef c3_w u2_ho_state;
 
@@ -316,7 +316,7 @@
     **
     **   Only the outer battery is assumed to match.
     */
-      u2_flag
+      u2_bean
       u2_ho_nice(u2_ray     wir_r,
                  u2_ho_jet* jet_j,
                  u2_noun    cor);
@@ -335,8 +335,17 @@
     **
     **   Apply host nock driver on `xip`, `cor`, `fol`.
     */
-      u2_weak
+      u2_weak                                                     //  produce
       u2_ho_kick(u2_ray   wir_r,
                  u2_noun  xip,                                    //  retain
                  u2_noun  cor,                                    //  retain
                  u2_atom  axe);                                   //  retain
+
+    /* u2_ho_kicq(): as u2_ho_kick(), but mocky.
+    */
+      u2_noun                                                     //  produce
+      u2_ho_kicq(u2_ray   wir_r,
+                 u2_noun  xip,                                    //  retain
+                 u2_noun  cor,                                    //  retain
+                 u2_atom  axe,                                    //  retain
+                 u2_bean  *pon);                                  //  retain

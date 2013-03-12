@@ -41,27 +41,27 @@
           struct {
             /* u2_yes iff debugging is on.
             */
-            u2_flag deb;
+            u2_bean deb;
 
             /* u2_yes iff profiling is on.
             */
-            u2_flag pro;
+            u2_bean pro;
           } cor;
 
         /* Tracing.
         */
           struct {
-            /* Position stack: *(list shoe) 
+            /* Position stack: *(list shoe)  [XX not used, still wire->tax]
             */
             u2_noun ryp;
 
             /* Mode bit - u2_yes == C/system, u2_no == interpreted
             */
-            u2_flag sys;
+            u2_bean sys;
 
             /* Function bit for sys - u2_yes == overhead, u2_no == function
             */
-            u2_flag glu;
+            u2_bean glu;
 
             /* Number of samples in random C code.
             */
@@ -172,15 +172,15 @@
         void
         u2_tx_open(u2_ray wir_r);
 
-      /* u2_tx_do_*(): set debug/profile flag.  Return old value.
+      /* u2_tx_do_*(): set debug/profile bean.  Return old value.
       */
-        u2_flag u2_tx_do_debug(u2_ray wir_r, u2_flag lag);
-        u2_flag u2_tx_do_profile(u2_ray wir_r, u2_flag lag);
+        u2_bean u2_tx_do_debug(u2_ray wir_r, u2_bean lag);
+        u2_bean u2_tx_do_profile(u2_ray wir_r, u2_bean lag);
 
-      /* u2_tx_in_*(): get debug/profile flag.
+      /* u2_tx_in_*(): get debug/profile bean.
       */
-        u2_flag u2_tx_in_debug(u2_ray wir_r);
-        u2_flag u2_tx_in_profile(u2_ray wir_r);
+        u2_bean u2_tx_in_debug(u2_ray wir_r);
+        u2_bean u2_tx_in_profile(u2_ray wir_r);
 
     /** Actions.
     **/
@@ -227,22 +227,22 @@
 
       /* u2_tx_sys_bit(): set system bit, returning old value.
       */
-        u2_flag
+        u2_bean
         u2_tx_sys_bit(u2_ray  wir_r, 
-                      u2_flag val);
+                      u2_bean val);
 
       /* u2_tx_glu_bit(): set glue bit within system bit.
       */
-        u2_flag
+        u2_bean
         u2_tx_glu_bit(u2_ray wir_r, 
-                      u2_flag val);
+                      u2_bean val);
     /** Tasks.
     **/
       /* u2_tx_task_in(): enter a task for profiling purposes.
       **
       ** u2_yes iff the task is not already in the stack.
       */
-        u2_flag
+        u2_bean
         u2_tx_task_in(u2_ray  wir_r, 
                       u2_noun tak);                               //  retain
 
@@ -253,10 +253,10 @@
 
     /** Direct logging.
     **/
-      /* u2_tx_loaf(): direct debug output.
+      /* u2_tx_slog(): print debug syslog [0-3 tank] 0=debug 3=alarm
       */
         void
-        u2_tx_loaf(u2_ray  wir_r, 
+        u2_tx_slog(u2_ray  wir_r,
                    u2_noun luf);                                   //  retain
 
       /* u2_tx_warn(): report a warning by internal file and line.

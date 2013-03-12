@@ -9,9 +9,17 @@
       /* u2_loom_kite: jump buffer.
       */
         typedef struct _u2_loom_kite {
-          /* Interpreter trace, as of jumpoff.
+          /* Parent kite.
+          */
+          u2_ray par_r;
+
+          /* Interpreter trace at call point.
           */
           u2_noun tax;
+
+          /* Profiling action stack.
+          */
+          u2_noun don;
 
           /* C escape buffer.
           */
@@ -19,6 +27,8 @@
         } u2_loom_kite;
 
 #       define  u2_kite_tax(kit_r)    *u2_at(kit_r, u2_loom_kite, tax)
+#       define  u2_kite_don(kit_r)    *u2_at(kit_r, u2_loom_kite, don)
+#       define  u2_kite_par_r(kit_r)  *u2_at(kit_r, u2_loom_kite, par_r) 
 #       define  u2_kite_buf_r(kit_r)  u2_aftr(kit_r, u2_loom_kite, buf_f) 
 
 
@@ -26,31 +36,6 @@
   **/
     /** Fail-specific.
     **/
-      /* u2_bl_open(): enter new bail context, returning old (or 0).
-      */
-        u2_ray
-        u2_bl_open(u2_wire wir_r);
-
-      /* u2_bl_done(): terminate and restore old bail context.
-      */
-        void
-        u2_bl_done(u2_wire wir_r,
-                   u2_ray jub_r);
-
-      /* u2_bl_set(): wrapper for _setjmp().
-      */
-#     if 0
-        c3_t
-        u2_bl_set(u2_wire wir_r);
-#     else
-#       define u2_bl_set(wir_r) \
-          ( (c3_l) \
-            _setjmp((void *) \
-                     u2_at_cord(u2_kite_buf_r(u2_wire_kit_r(wir_r)), \
-                                c3_wiseof(jmp_buf))) \
-          )
-#     endif
-           
       /* u2_bl_bail(): bail out.
       **
       **  Bail codes: 

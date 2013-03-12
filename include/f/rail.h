@@ -129,7 +129,7 @@
         **   Yes iff [lef] does not point to any word >= [net]
         **   and < [bat].
         */
-          u2_flag
+          u2_bean
           u2_rl_clear(u2_noun lef,
                       u2_ray  net_r,
                       u2_ray  bat_r);
@@ -211,7 +211,7 @@
         **   Yes iff `dus` is junior in `ral` - ie, must be copied
         **   to be referenced on the hat.
         */
-          u2_flag
+          u2_bean
           u2_rl_junior(u2_ray  ral_r,
                        u2_noun dus);                              //  retain
 
@@ -225,7 +225,7 @@
         **
         **   Returns u2_yes on success.
         */
-          u2_flag
+          u2_bean
           u2_rl_leap(u2_ray ral_r,
                      c3_m   hip_m);
 
@@ -318,7 +318,7 @@
         **
         **   Yes iff [a] more words remain in the pad.
         */
-          u2_flag
+          u2_bean
           u2_rl_open(u2_ray ral_r,
                      c3_w   a_w);
 
@@ -343,7 +343,7 @@
         **   Yes iff `dus` is senior in `ral` - ie, does not
         **   require reference counting.
         */
-          u2_flag
+          u2_bean
           u2_rl_senior(u2_ray  ral_r,
                        u2_noun dus);                              //  retain
 
@@ -366,7 +366,7 @@
 
         /* u2_rl_refs():
         **
-        **   Return the reference count of (som).  For debugging.
+        **   Return the reference count of (som).  For debugging, etc.
         */
           c3_w
           u2_rl_refs(u2_ray  ral_r,

@@ -445,7 +445,7 @@ _ho_abstract(u2_noun xip,                                         //  retain
     sscanf(fcs_c+1, "%llu", &axe_d);
     if ( axe_d >> 32ULL || 
          ((1 << 31) & (axe_l = (c3_w)axe_d)) || 
-         (axe_l < 3) )
+         (axe_l < 2) )
     {
       u2_ho_warn_here();
       return 0;
@@ -676,7 +676,15 @@ _ho_conquer(u2_rail ral_r,
     }
   }
 }
- 
+
+#ifdef NOCK6
+#define _ho_con u2_cw_con
+#define _ho_sam u2_cw_sam
+#else
+#define _ho_con u2_cv_con
+#define _ho_sam u2_cv_sam
+#endif
+
 /* u2_ho_test():
 **
 **   Report result of jet test.  `had` is native; `sof` is nock.
@@ -709,21 +717,31 @@ u2_ho_test(u2_wire    wir_r,
 
     } else if ( u2_no == u2_sing(had, sof) ) {
       msg_c = "miss";
-      printf("miss: cos_c: %s\n", cos_c);
+      printf("miss: jet: %s(%s)\n", cos_c, jet_j->fcs_c);
 
       u2_err(wir_r, "right", sof);
       u2_err(wir_r, "wrong", had);
-     
+
       //  For detailed debugging, activate/extend this junkheap as needed.
       //
       c3_assert(0);
 #if 0
+     
+      {
+        u2_noun gen;
+
+        if ( (u2_no == u2_mean(cor, _ho_sam, &gen, 0)) ) {
+          c3_assert(0);
+        } else {
+          u2_err(wir_r, "gen", gen);
+        }
+      }
 
       {
         u2_noun sut, gen, van;
 
-        if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &gen, 0)) ||
-             (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
+        if ( (u2_no == u2_mean(cor, _ho_con, &van, _ho_sam, &gen, 0)) ||
+             (u2_none == (sut = u2_frag(_ho_sam, van))) )
         {
           c3_assert(0);
         } else {
@@ -732,19 +750,10 @@ u2_ho_test(u2_wire    wir_r,
         }
       }
       {
-        u2_noun gen;
-
-        if ( (u2_no == u2_mean(cor, u2_cw_sam, &gen, 0)) ) {
-          c3_assert(0);
-        } else {
-          u2_err(wir_r, "gen", gen);
-        }
-      }
-      {
         u2_noun sut, ref, van;
 
-        if ( (u2_no == u2_mean(cor, u2_cw_con, &van, u2_cw_sam, &ref, 0)) ||
-             (u2_none == (sut = u2_frag(u2_cw_sam, van))) )
+        if ( (u2_no == u2_mean(cor, _ho_con, &van, _ho_sam, &ref, 0)) ||
+             (u2_none == (sut = u2_frag(_ho_sam, van))) )
         {
           c3_assert(0);
         } else {
@@ -917,21 +926,24 @@ u2_ho_use(u2_ray     wir_r,
       }
       u2_rz(wir_r, key);
     } 
-    else pro = u2_cn_nock(u2_rx(wir_r, cor), u2_rx(wir_r, fol));
+    else {
+      //  printf("use %s\n", u2_ho_cstring(jet_j->xip));
+      pro = u2_cn_nock(u2_rx(wir_r, cor), u2_rx(wir_r, fol));
+    }
   }
   else {
     if ( !(jet_j->sat_s & u2_jet_test) ) {
       pro = _ho_run(wir_r, jet_j, cor);
     }
     else { 
-      c3_assert(!"equivalence testing is currently disabled");
-#if 0
+      // c3_assert(!"equivalence testing is currently disabled");
+#if 1
       u2_noun sof;
 
       jet_j->sat_s &= ~u2_jet_test;
       {
         if ( !(jet_j->sat_s & u2_jet_leak) ) {
-          pro = _ho_run(wir_r, jet_j, cor, &tax);
+          pro = _ho_run(wir_r, jet_j, cor);
         } else {
           u2_ho_state mem = jet_j->sat_s;
 
@@ -941,7 +953,7 @@ u2_ho_use(u2_ray     wir_r,
             c3_w liv_w = u2_soup_liv_w(u2_rail_rut_r(wir_r));
             c3_w nex_w;
 
-            pro = _ho_run(wir_r, jet_j, cor, &tax);
+            pro = _ho_run(wir_r, jet_j, cor);
             u2_rz(wir_r, pro);
             nex_w =  u2_soup_liv_w(u2_rail_rut_r(wir_r));
 
@@ -951,7 +963,7 @@ u2_ho_use(u2_ray     wir_r,
 
               c3_assert(0);
             }
-            pro = _ho_run(wir_r, jet_j, cor, &tax);
+            pro = _ho_run(wir_r, jet_j, cor);
           }
           jet_j->sat_s = mem;
         }
@@ -969,16 +981,6 @@ u2_ho_use(u2_ray     wir_r,
       u2_ho_test(wir_r, jet_j, cor, sof, pro);
       u2_tx_did_tes(wir_r, 1);
 
-      if ( tax != u2_none ) {
-        if ( u2_no == u2_sing(tax, u2_wire_tax(wir_r)) ) {
-          c3_c *cos_c = u2_ho_cstring(jet_j->xip);
-
-          // fprintf(stderr, "<<trax: %s>>\n", cos_c);
-          free(cos_c);
-          // c3_assert(0);
-        }
-        u2_rz(wir_r, tax);
-      }
       u2_rz(wir_r, pro);
       pro = sof;
 #endif
@@ -1014,5 +1016,46 @@ u2_ho_kick(u2_ray   wir_r,
       u2_tx_did_jet(wir_r, 1);
       return u2_ho_use(wir_r, jet_j, cor, fol);
     }
+  }
+}
+
+/* u2_ho_kicq(): as u2_ho_kick(), but mocky.
+*/
+u2_noun                                                           //  produce
+u2_ho_kicq(u2_ray   wir_r,
+           u2_noun  xip,                                          //  retain
+           u2_noun  cor,                                          //  retain
+           u2_atom  axe,                                          //  retain
+           u2_bean  *pon)                                         //  retain
+{
+  u2_noun hoe;
+
+  if ( 0 != (hoe = u2_cm_trap()) ) {
+    u2_noun pro;
+
+    if ( u2h(hoe) == c3__exit ) {
+      pro = u2k(u2t(hoe));
+
+      *pon = 2;
+      u2z(hoe);
+      return pro;
+    } 
+    else if ( u2h(hoe) == c3__need ) {
+      pro = u2k(u2t(hoe));
+
+      *pon = 1;
+      u2z(hoe);
+      return pro;
+    } 
+    else {
+      c3_assert(0);
+      return u2_cm_bowl(hoe);
+    }
+  }
+  else {
+    u2_noun pro = u2_ho_kick(wir_r, xip, cor, axe);
+
+    u2_cm_done();
+    return pro;
   }
 }

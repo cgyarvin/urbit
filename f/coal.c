@@ -8,30 +8,35 @@
 #include <sys/stat.h>
 #include <dirent.h>
 
-#include "../gen222/pit.h"
+#include "../gen194/pit.h"
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt5Y   k_222__a__b__c__d__e
+#   define Pt5Y   k_194__a__b__c__d__e
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt3Y   k_222__a__b__c
-#   define Pt4Y   k_222__a__b__c__d
-#   define Pt5Y   k_222__a__b__c__d__e
+#   define Pt3Y   k_194__a__b__c
+#   define Pt4Y   k_194__a__b__c__d
+#   define Pt5Y   k_194__a__b__c__d__e
 
     u2_noun j2_mbc(Pt3Y, gor)(u2_wire, u2_noun a, u2_noun b);
     u2_noun j2_mcc(Pt4Y, by, get)(u2_wire, u2_noun a, u2_noun b);
     u2_noun j2_mcc(Pt4Y, by, put)(u2_wire, u2_noun a, u2_noun b, u2_noun c);
     u2_noun j2_mby(Pt5Y, jam)(u2_wire, u2_noun a);
+    u2_noun j2_mby(Pt5Y, trip)(u2_wire, u2_noun a);
 
 #   define _coal_jam  j2_mby(Pt5Y, jam)
+#   define _coal_trip j2_mby(Pt5Y, trip)
 
 #   define _coal_gor  j2_mbc(Pt3Y, gor)
-#   define _coal_get  j2_mcc(Pt4Y, by, get)
-#   define _coal_put  j2_mcc(Pt4Y, by, put)
-
-
+#   define _coal_by_gas  j2_mcc(Pt4Y, by, gas)
+#   define _coal_by_get  j2_mcc(Pt4Y, by, get)
+#   define _coal_by_has  j2_mcc(Pt4Y, in, has)
+#   define _coal_by_put  j2_mcc(Pt4Y, by, put)
+#   define _coal_in_gas  j2_mcc(Pt4Y, in, gas)
+#   define _coal_in_has  j2_mcc(Pt4Y, in, has)
+#   define _coal_in_tap  j2_mcc(Pt4Y, in, tap)
 
 
 /* u2_cf_path(): assemble local path with noun thap and ext.
@@ -199,7 +204,7 @@ u2_cf_list(u2_noun pas)
 
 /* u2_cf_flat_save(): save `som` as `mod` at `pas`. 
 */
-u2_flag
+u2_bean
 u2_cf_flat_save(u2_noun mod, 
                 u2_noun pas,
                 u2_noun som)
@@ -235,12 +240,13 @@ u2_cf_flat_save(u2_noun mod,
   }
 }
 
-/* u2_cn_mong():
+#if 1
+/* u2_cn_mung():
 **
 **   Call `(function sample)`.
 */
 u2_noun
-u2_cn_mong(u2_noun fun,
+u2_cn_mung(u2_noun fun,
            u2_noun sam)
 {
   u2_noun pro = u2_bn_mong(u2_Wire, fun, sam);
@@ -248,6 +254,7 @@ u2_cn_mong(u2_noun fun,
   u2_cz(fun);
   return pro;
 }
+#endif
 
 /* u2_ci_string():
 **
@@ -258,7 +265,17 @@ u2_ci_string(const c3_c* a_c)
 {
   return u2_bn_string(u2_Wire, a_c);
 }
- 
+
+/* u2_ci_tape(): from a C string, to a list of bytes.
+*/
+u2_atom
+u2_ci_tape(const c3_c* txt_c)
+{
+  if ( !*txt_c ) {
+    return u2_nul;
+  } else return u2nc(*txt_c, u2_ci_tape(txt_c + 1));
+}
+
 /* u2_cr_string(): `a` as malloced C string.
 */
 c3_c* 
@@ -272,6 +289,28 @@ u2_cr_string(u2_atom a)
   return str_c;
 }
 
+/* u2_cr_tape(): `a`, a list of bytes, as malloced C string.
+*/
+c3_y* 
+u2_cr_tape(u2_noun a)
+{
+  u2_noun b;
+  c3_w    i_w;
+  c3_y    *a_y;
+
+  for ( i_w = 0, b=a; u2_yes == u2du(b); i_w++, b=u2t(b) )
+    ;
+  a_y = malloc(i_w + 1);
+
+  for ( i_w = 0, b=a; u2_yes == u2du(b); i_w++, b=u2t(b) ) {
+    a_y[i_w] = u2h(b);
+  }
+  a_y[i_w] = 0;
+
+  u2z(a);
+  return a_y;
+}
+
 /* u2_ci_bytes():
 **
 **   Construct `a` bytes from `b`, LSB first, as an atom.
@@ -281,6 +320,41 @@ u2_ci_bytes(c3_w        a_w,
             const c3_y* b_y)
 {
   return u2_bn_bytes(u2_Wire, a_w, b_y);
+}
+
+/* u2_ci_words():
+**
+**   Construct `a` words from `b`, LSW first, as an atom.
+*/
+u2_atom
+u2_ci_words(c3_w        a_w,
+            const c3_w* b_w)
+{
+  return u2_bn_words(u2_Wire, a_w, b_w);
+}
+
+/* u2_ci_chubs():
+**
+**   Construct `a` double-words from `b`, LSD first, as an atom.
+*/
+u2_atom
+u2_ci_chubs(c3_w        a_w,
+            const c3_d* b_d)
+{
+  //  XX considerably suboptimal
+  {
+    c3_w *b_w = malloc(a_w * 8);
+    c3_w i_w;
+    u2_atom p;
+
+    for ( i_w = 0; i_w < a_w; i_w++ ) {
+      b_w[(2 * i_w)] = b_d[i_w] & 0xffffffffULL;
+      b_w[(2 * i_w) + 1] = b_d[i_w] >> 32ULL;
+    }
+    p = u2_ci_words((a_w * 2), b_w);
+    free(b_w);
+    return p;
+  }
 }
 
 /* u2_cm_trip(): descend into a memory region.
@@ -324,32 +398,179 @@ u2_cm_bury(u2_weak som)
   }
 }
 
-/* u2_cm_wind(): enter new opaque bail context, returning old (or 0).
-**
-**   usage:  
-**        c3_w qop_w = u2_cm_wind();
-**  
-**        if ( 0 != u2_cm_trap() ) {
-**          u2_cm_done(qop_w);
-**          [... exception ...]
-**        }
-**        else {
-**          [... code as normal ...]
-**          u2_cm_done(qop_w);
-**        }
+/* u2_cm_rind(): open and produce a new jump buffer.
 */
-c3_w
-u2_cm_wind()
+void*
+u2_cm_rind()
 {
-  return u2_bl_open(u2_Wire);
+  u2_ray kit_r = u2_rl_ralloc(u2_Wire, c3_wiseof(u2_loom_kite));
+
+  u2_kite_par_r(kit_r) = u2_wire_kit_r(u2_Wire);
+  u2_wire_kit_r(u2_Wire) = kit_r;
+
+  //  Save the old stack and actions.
+  //
+  u2_kite_tax(kit_r) = u2k(u2_wire_tax(u2_Wire));
+  u2_kite_don(kit_r) = u2k(u2_wrac_at(u2_Wire, duz.don)); 
+
+  return u2_at_cord(u2_kite_buf_r(kit_r), c3_wiseof(jmp_buf));
 }
 
-/* u2_cm_done(): terminate and restore old opaque bail context.
+/* _cm_jack(): steal the trace as of the current kite.
+*/
+static u2_noun
+_cm_jack(u2_noun old, u2_noun nuw)
+{
+  if ( nuw == old ) {
+    //  Old asserts of slightly dubious provenance.
+    //
+    if ( nuw != u2_nul ) {
+#if 0
+      if ( 2 != u2_rl_refs(u2_Wire, nuw) ) {
+        printf("nuw %x refs %d\n", nuw, u2_rl_refs(u2_Wire, nuw));
+      }
+      c3_assert(2 == u2_rl_refs(u2_Wire, nuw));
+#endif
+      u2z(nuw);
+    }
+    return u2_nul;
+  }
+  else {
+    c3_assert(u2_yes == u2du(nuw));
+    // c3_assert(1 == u2_rl_refs(u2_Wire, nuw));
+
+    u2ft(nuw) = _cm_jack(old, u2ft(nuw));
+    return nuw;
+  }
+}
+
+/* u2_cm_wail(): produce and reset the local trace, without bailing.
+*/
+u2_noun 
+u2_cm_wail()
+{
+  u2_ray  kit_r = u2_wire_kit_r(u2_Wire);
+  u2_noun old   = u2_kite_tax(u2_wire_kit_r(u2_Wire));
+  u2_noun nuw   = u2_wire_tax(u2_Wire);
+  u2_noun jaq   = _cm_jack(old, nuw);
+  
+  // c3_assert(1 == u2_rl_refs(u2_Wire, old));
+  u2_wire_tax(u2_Wire) = old;
+  u2_kite_tax(kit_r) = u2k(old);
+  // c3_assert(1 == u2_rl_refs(u2_Wire, jaq));
+
+  return jaq;
+}
+
+static c3_w _num = 0;
+
+/* u2_cm_bail(): bail out to the local trap.  Does not return.
+*/
+  extern u2_noun u2_Flag_Abort;
+u2_noun
+u2_cm_bail(c3_l how_l)
+{
+  u2_ray kit_r = u2_wire_kit_r(u2_Wire);
+
+  if ( u2_yes == u2_Flag_Abort ) {
+    if ( c3__fail == how_l ) { c3_assert(0); }
+    // c3_assert(0);
+  }
+  u2_tx_sys_bit(u2_Wire, u2_yes);
+
+  // fprintf(stderr, "bail\n");
+  // if ( _num == 0 ) { c3_assert(0); } else _num--;
+
+  {
+    u2_noun jaq;
+    jmp_buf buf_f;
+
+    // Reset the old stack trace, pulling off the local top.
+    //
+    jaq = u2_cm_wail();
+
+    // Reset the old action trace.
+    {
+      u2z(u2_wrac_at(u2_Wire, duz.don));
+      u2_wrac_at(u2_Wire, duz.don) = u2_kite_don(kit_r);
+    }
+
+    // Copy out the jump buffer; free the old kite.
+    {
+      memcpy((void *)buf_f,
+             u2_at_cord(u2_kite_buf_r(kit_r), c3_wiseof(jmp_buf)),
+             sizeof(jmp_buf));
+
+      u2_wire_kit_r(u2_Wire) = u2_kite_par_r(kit_r);
+      u2_rl_rfree(u2_Wire, kit_r);
+    }
+    
+    // Longjmp with the how-trace pair.  XX: no workee with 64-bit nouns.
+    //
+    {
+      _longjmp(buf_f, u2nc(how_l, jaq));
+    }
+  }
+  return 0;
+}
+
+/* u2_cm_bowl(): bail out with preset report.
+*/
+u2_noun
+u2_cm_bowl(u2_noun how)
+{
+  u2_ray kit_r = u2_wire_kit_r(u2_Wire);
+
+  u2_tx_sys_bit(u2_Wire, u2_yes);
+
+  {
+    u2_noun jaq;
+    jmp_buf buf_f;
+
+    // Reset the old stack trace, pulling off the local top.
+    //
+    jaq = u2_cm_wail();
+
+    // Reset the old action trace.
+    {
+      u2z(u2_wrac_at(u2_Wire, duz.don));
+      u2_wrac_at(u2_Wire, duz.don) = u2_kite_don(kit_r);
+    }
+
+    // Copy out the jump buffer; free the old kite.
+    {
+      memcpy((void *)buf_f,
+             u2_at_cord(u2_kite_buf_r(kit_r), c3_wiseof(jmp_buf)),
+             sizeof(jmp_buf));
+
+      u2_wire_kit_r(u2_Wire) = u2_kite_par_r(kit_r);
+      u2_rl_rfree(u2_Wire, kit_r);
+    }
+    
+    // Longjmp with the how-trace pair.  XX: no workee with 64-bit nouns.
+    //
+    {
+      u2z(jaq);
+      _longjmp(buf_f, how);
+    }
+  }
+  return 0;
+}
+
+/* u2_cm_done(): terminate trap.
 */
 void
-u2_cm_done(c3_w qop_w)
+u2_cm_done()
 {
-  u2_bl_done(u2_Wire, qop_w);
+  u2_ray kit_r = u2_wire_kit_r(u2_Wire);
+
+  c3_assert(kit_r != 0);
+
+  u2z(u2_kite_tax(kit_r));
+  u2z(u2_kite_don(kit_r));
+  u2_wire_kit_r(u2_Wire) = u2_kite_par_r(kit_r);
+
+  u2_rl_rfree(u2_Wire, kit_r);
 }
 
 /* u2_cm_poll(): poll for interrupts, etc.
@@ -450,24 +671,6 @@ u2_cm_drop()
   u2_cz(tax);
 }
 
-/* u2_cm_bail(): bail out to the local trap.  Does not return.
-*/
-extern u2_noun u2_Flag_Abort;
-u2_noun
-u2_cm_bail(c3_l how_l)
-{
-  u2_ray kit_r = u2_wire_kit_r(u2_Wire);
-
-  if ( u2_yes == u2_Flag_Abort ) {
-    if ( c3__fail == how_l ) {
-      c3_assert(0);
-    }
-  }
-  u2_tx_sys_bit(u2_Wire, u2_yes);
-  _longjmp((void *)u2_at_cord(u2_kite_buf_r(kit_r), c3_wiseof(jmp_buf)), how_l);
-  return u2_none;
-}
-
 /* u2_cm_foul():
 */
 u2_noun
@@ -509,6 +712,39 @@ u2_cn_qual(u2_noun a,
   return u2_bn_qual(u2_Wire, a, b, c, d);
 }
 
+/* u2_cka_add(): a + b.
+*/
+u2_noun
+u2_cka_add(u2_noun a, u2_noun b)
+{
+  u2_noun c = j2_mbc(Pt1, add)(u2_Wire, a, b);
+
+  u2_cz(a); u2_cz(b);
+  return c;
+}
+
+/* u2_cka_mul(): a * b.
+*/
+u2_noun
+u2_cka_mul(u2_noun a, u2_noun b)
+{
+  u2_noun c = j2_mbc(Pt1, mul)(u2_Wire, a, b);
+
+  u2_cz(a); u2_cz(b);
+  return c;
+}
+
+/* u2_cka_lte(): a * b.
+*/
+u2_noun
+u2_cka_lte(u2_noun a, u2_noun b)
+{
+  u2_noun c = j2_mbc(Pt1, lte)(u2_Wire, a, b);
+
+  u2_cz(a); u2_cz(b);
+  return c;
+}
+
 /* u2_ckb_lent(): length of list `a`.
 */
 u2_noun
@@ -531,12 +767,24 @@ u2_ckb_flop(u2_noun a)
   return b;
 }
 
+/* u2_ckb_weld(): concatenate lists `a` before `b`.
+*/
+u2_noun
+u2_ckb_weld(u2_noun a, u2_noun b)
+{
+  u2_noun c = j2_mbc(Pt2, weld)(u2_Wire, a, b);
+
+  u2_cz(a); u2_cz(b);
+  return c;
+}
+
+
 /* u2_ckd_by_get(): map get for key `b` in map `a` with u2_none.
 */
 u2_weak
 u2_ckd_by_get(u2_noun a, u2_noun b)
 {
-  u2_noun c = _coal_get(u2_Wire, a, b);
+  u2_noun c = _coal_by_get(u2_Wire, a, b);
 
   u2_cz(a); u2_cz(b);
   if ( u2_no == u2_cr_du(c) ) {
@@ -570,10 +818,82 @@ u2_ckd_by_put(u2_noun a, u2_noun b, u2_noun c)
 {
   // Bizarre asymmetry in old jets.
   //
-  u2_noun pro = _coal_put(u2_Wire, a, b, c);
+  // (Mysterious comment in old glue code.)
+  //
+  u2_noun pro = _coal_by_put(u2_Wire, a, b, c);
 
   u2_cz(a); u2_cz(b); u2_cz(c);
   return pro;
+}
+
+/* u2_ckd_by_gas(): list to map.
+*/
+u2_noun
+u2_ckd_by_gas(u2_noun a, u2_noun b)
+{
+  u2_weak c = _coal_by_gas(u2_Wire, a, b);
+
+  u2_cz(a); u2_cz(b);
+  if ( u2_none == c ) {
+    return u2_cm_bail(c3__exit);
+  } 
+  else return c;
+}
+
+/* u2_ckd_in_gas(): list to map.
+*/
+u2_noun
+u2_ckd_in_gas(u2_noun a, u2_noun b)
+{
+  u2_weak c = _coal_in_gas(u2_Wire, a, b);
+
+  u2_cz(a); u2_cz(b);
+  if ( u2_none == c ) {
+    return u2_cm_bail(c3__exit);
+  } 
+  else return c;
+}
+
+/* u2_ckd_by_has(): test for presence.
+*/
+u2_bean
+u2_ckd_by_has(u2_noun a, u2_noun b)
+{
+  u2_weak c = _coal_by_has(u2_Wire, a, b);
+
+  u2_cz(a); u2_cz(b);
+  if ( u2_none == c ) {
+    return u2_cm_bail(c3__exit);
+  } 
+  else return c;
+}
+
+/* u2_ckd_in_has(): test for presence.
+*/
+u2_bean
+u2_ckd_in_has(u2_noun a, u2_noun b)
+{
+  u2_weak c = _coal_in_has(u2_Wire, a, b);
+
+  u2_cz(a); u2_cz(b);
+  if ( u2_none == c ) {
+    return u2_cm_bail(c3__exit);
+  } 
+  else return c;
+}
+
+/* u2_ckd_in_tap(): map/set convert to list.  (solves by_tap also.)
+*/
+u2_noun
+u2_ckd_in_tap(u2_noun a, u2_noun b)
+{
+  u2_weak c = _coal_in_tap(u2_Wire, a, b);
+
+  u2_cz(a); u2_cz(b);
+  if ( u2_none == c ) {
+    return u2_cm_bail(c3__exit);
+  } 
+  else return c;
 }
 
 /* u2_cke_cue(): expand saved pill.
@@ -667,6 +987,17 @@ u2_atom
 u2_cke_jam(u2_noun a)
 {
   u2_atom b = _coal_jam(u2_Wire, a);
+
+  u2_cz(a);
+  return b;
+}
+
+/* u2_cke_trip(): atom to tape.
+*/
+u2_atom
+u2_cke_trip(u2_noun a)
+{
+  u2_atom b = _coal_trip(u2_Wire, a);
 
   u2_cz(a);
   return b;

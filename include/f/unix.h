@@ -30,7 +30,7 @@
 
     /* u2_ux_live(): load/reload a monitored source; u2_yes for change.
     */
-      u2_flag
+      u2_bean
       u2_ux_live(u2_wire wir_r,
                  u2_life lif_l);
 
@@ -56,7 +56,7 @@
 
     /* u2_ux_write(): write a path/extension as an atom.
     */
-      u2_flag
+      u2_bean
       u2_ux_write(u2_wire     wir_r,
                   u2_atom     som,
                   const c3_c* paf_c,
@@ -64,7 +64,7 @@
 
     /* u2_ux_write_deep(): write a path/extension as a generic noun.
     */
-      u2_flag
+      u2_bean
       u2_ux_write_deep(u2_wire     wir_r,
                        u2_noun     som,
                        const c3_c* paf_c,
@@ -72,7 +72,7 @@
 
     /* u2_ux_fresh(): true iff `oxt` is as fresh as `ext`.
     */
-      u2_flag
+      u2_bean
       u2_ux_fresh(const c3_c* paf_c,
                   const c3_c* ext_c,
                   const c3_c* oxt_c);

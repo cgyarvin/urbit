@@ -17,7 +17,8 @@
 
         /* Mock gate stack.  Pop the stack when executing.
         **
-        ** Each entry in this list is a crash-only gate.
+        ** Each entry in this list is a crash-only gate.  If the
+        ** list is empty, we are in kernel mode & god is active.
         */
         u2_noun lad;
       } u2_loom_hevn;

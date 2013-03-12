@@ -7,7 +7,7 @@
 
   nock(a)           *a
   [a b c]           [a [b c]]
- 
+
   ?[a b]            0
   ?a                1
   +a                1 + a

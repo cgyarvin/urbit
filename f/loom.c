@@ -84,7 +84,7 @@ u2_boot(void)
     return cut_t ? cut_w : i_w;
   }
 
-  static u2_flag
+  static u2_bean
   _mean_extract(u2_noun            som,
                 c3_w               len_w,
                 struct _mean_pair* prs_m)
@@ -109,7 +109,7 @@ u2_boot(void)
     }
   }
 
-u2_flag
+u2_bean
 u2_mean(u2_noun som,
         ...)
 {
@@ -216,96 +216,182 @@ u2_frag(u2_atom a,
 
 /* u2_mug():
 **
-**   Compute and/or recall the mug (31-bit hash) of (a).
+**   Compute and/or recall the mug (31-bit FNV1a hash) of (a).
 */
-  /* _mash(): map (nud_w) to another 32-bit word.
-  */
-  static c3_w
-  _mash(c3_w nud_w) 
-  {
-    static c3_w cog_w[256] = {
-      0x352598d8, 0xba9cd382, 0xa9afcd63, 0xfe8c511a, 0xf40f7a8d, 0x6220ecc5,
-      0xf8820121, 0x99267e88, 0xdee5b579, 0x7824fff6, 0x7c8f831a, 0x766ff6ec,
-      0xb0cd88c6, 0x1994625d, 0xccffce0a,  0xc100eda, 0xda4952df, 0x62bcfdef,
-      0xf00fc9e2, 0x3a30bdd8, 0xd156e14b, 0x22b9bd9c, 0xeb9f040e, 0x9570fa83,
-      0x151f4b17, 0x4c680e34, 0xc62f6816, 0x5c43205e, 0xe2ddee5a, 0x87652d85,
-      0x80722ba6, 0xa158b454, 0x5022a039, 0xbc457a9d, 0x3ce83919, 0x7990bd4e,
-      0xf44c697e, 0xf60ee7be, 0xdd68fcd2, 0xd3bfabae, 0x2ba16060, 0x23171ec6,
-      0x9b9e2cec, 0x683fa466, 0x103b81cf, 0x40acd8dc, 0xe14077a2, 0x123e5e9f,
-      0xcfbeae41,  0xf4bb673, 0xf537ea14, 0xae87124c, 0xaed1093b, 0x513ce98d,
-      0x5f606388, 0x1e458e1d, 0x88fd1802, 0x3b7aa391, 0x5caf8a56, 0xbddd8a18,
-      0x9187837c, 0xc5e102b2, 0xf192cbcd, 0xb2078d1a, 0xf593e52b, 0xbbc96404,
-      0x2fe5b7f9, 0x5eab8eac, 0x65a14a04, 0x6dd6f5f8,  0x8835b42, 0x713fffa2,
-      0x3cab1b6f, 0x63dd42a0, 0xb81a7b1d, 0x29079afa, 0xdecc1486, 0x18494012,
-      0x68d8efa2, 0x873b540e, 0x3052b642, 0x81f4f7ca, 0x44337e55, 0x86c7973e,
-      0x83539726, 0x8e498a90, 0xe808ec02, 0x48d76271, 0xdeb0aa12, 0xb7a9e735,
-      0x8f1d0a6e, 0x8a1fd93a, 0xd2e1d0d1, 0x9093fa5f, 0xbe74ea0b, 0xd3ea1b9d,
-      0x51a573dd, 0x51634e92, 0xb3275702, 0x4c41d2c6, 0x6717fa39, 0x56a8a01c,
-      0x948328b1, 0xdbaf1fa2, 0x3bffc889, 0x7fb44be7, 0x475d8534, 0x5eba8280,
-      0xc090c33b,  0x35857a4, 0x95b1eb1f, 0x5dcd3652, 0x1b973827, 0x5e24070c,
-      0x7367a5f9,   0xf3ef4e, 0xb3bcada3, 0xcf3e4033, 0x1a9d0bd3, 0xa46b9dd7,
-      0xa234566b, 0x61f4a52d, 0x44844992, 0xfaffdd23, 0x14187d04, 0x7c600063,
-      0xa9417956, 0xd10faca2, 0x78eea53d, 0x474c90cf, 0x37f42e48, 0xa3765510,
-      0xe6ffe2fb, 0xe83350f0, 0x3e5ec58d, 0xdeeedce8, 0xb5c0da93, 0xa01ebf2b,
-      0xb3ed287a, 0x13beec00,  0x26c78ab, 0xc845a9e2, 0xb6315b6a, 0xe5d5238e,
-      0x62dc97c6, 0x6a52c674, 0x370f9e65, 0xe777884a, 0x3beb6b4d, 0x95cdc493,
-      0xb265b0ee, 0xac4fc47f, 0xc415321c, 0xe9fc60eb, 0x4237062e, 0x566dd09c,
-       0x5af69ed, 0xa7589924, 0xe030c8ed, 0x3f52439e, 0x85ac98d2, 0x2026a870,
-      0xfdf004ca, 0x28329ab3, 0x70c78bcc, 0x111a1094, 0x9036b901, 0x712f6316,
-      0x4354f3e7,  0x617eda8, 0x7fe89a8b, 0x637d01f5,  0xfa54e14, 0x72fb1b49,
-      0xd82afef8, 0x1055a07d,  0xf4c5845, 0x4f112d16, 0xe2c0936d, 0x96923c87,
-      0xf5b59c3c,  0x3a1f284, 0xc63a1157, 0x72553aee, 0x88502921, 0xbdf13b8c,
-      0xf54a4761, 0x54447c57, 0xeefbdb16, 0x19c11553, 0x1b06df20, 0xe4395998,
-      0x3bf794dc, 0x261c8938, 0x875f1bb9, 0x8b29fd75, 0xc50dca03, 0xe95eacb5,
-      0x121c9f64, 0xdce5b8fa, 0x167cf21d, 0xab1f9401, 0xc7eb6480, 0x48f0ac44,
-      0x31325eca, 0x70186f9e, 0x9887957d, 0xfd0dbfee, 0xb799e1be, 0xb1c38ca7,
-       0xc32efad, 0xfc36ca9d, 0xff307dd2, 0x7b941dc3, 0x9182f20d, 0x78a5c74c,
-       0xbc99c47, 0xf82cb4ad, 0x4bbb0ecf, 0xbc816aba, 0xa47337b1, 0x5242aa7a,
-      0x40b92e52, 0x3f55045c, 0x6deac45d, 0x52c0256a,  0x209e49e, 0x381585e2,
-      0x2d4774c2, 0x5fb51d73, 0x1b456773, 0x180d4405, 0x4b72be7f, 0x54464f51,
-      0xfbfbdac7, 0xb9df9e63, 0x12ad4163, 0x5d56c751, 0x6d4b9a3e, 0x75d9c4e1,
-      0x1804e2a5, 0x3e77ee18, 0x12924b1a,  0xcfd4d14, 0xc5cd423e, 0xe3533b5b,
-      0xa53ef834, 0x6f8b9c36, 0xb9e06f14, 0x76d680b9, 0x52ca46d8,  0x8445336,
-      0xbb412e03, 0x2ae29f22, 0xeec357b8, 0x45bd2fb7
-    };
-   
-    nud_w ^= cog_w[(nud_w >> 0) & 255];
-    nud_w ^= cog_w[(nud_w >> 8) & 255];
-    nud_w ^= cog_w[(nud_w >> 16) & 255];
-    nud_w ^= cog_w[(nud_w >> 24) & 255];
-
-    return nud_w;
-  }
-
-static c3_w
-_mug_dog(u2_noun veb)
+static __inline__ c3_w
+_mug_fnv(c3_w has_w)
 {
-  if ( u2_dog_is_pom(veb) ) {
-    u2_noun hed = *u2_at_pom_hed(veb);
-    u2_noun tel = *u2_at_pom_tel(veb);
+  return (has_w * ((c3_w)16777619));
+}
 
-    return u2_mug_cell(hed, tel);
+static __inline__ c3_w
+_mug_out(c3_w has_w)
+{
+  return (has_w >> 31) ^ (has_w & 0x7fffffff);
+}
+
+static __inline__ c3_w
+_mug_both(c3_w lef_w, c3_w rit_w)
+{
+  c3_w bot_w = _mug_fnv(lef_w ^ _mug_fnv(rit_w));
+  c3_w out_w = _mug_out(bot_w);
+
+  if ( 0 != out_w ) { 
+    return out_w;
   }
   else {
-    c3_w len_w = *u2_at_pug_len(veb);
-    c3_w zun_w = 0x18d0a625;
-    c3_w i_w;
+    return _mug_both(lef_w, ++rit_w);
+  }
+}
 
-    while ( 1 ) {
-      c3_w gid_w = zun_w;
-      c3_w dav_w;
+c3_w
+u2_mug_both(c3_w lef_w, c3_w rit_w)
+{
+  return _mug_both(lef_w, rit_w);
+}
 
-      for ( i_w=0; i_w < len_w; i_w++ ) {
-        gid_w ^= *u2_at_pug_buf(veb, i_w);
-        gid_w = _mash(gid_w);
+static __inline__ c3_w
+_mug_bytes_in(c3_w off_w, c3_w nby_w, c3_y* byt_y)
+{
+  c3_w i_w;
+
+  for ( i_w = 0; i_w < nby_w; i_w++ ) {
+    off_w = _mug_fnv(off_w ^ byt_y[i_w]);
+  }
+  return off_w;
+}
+
+static c3_w
+_mug_bytes(c3_w off_w, c3_w nby_w, c3_y* byt_y)
+{
+  c3_w has_w = _mug_bytes_in(off_w, nby_w, byt_y);
+  c3_w out_w = _mug_out(has_w);
+
+  if ( 0 != out_w ) { 
+    return out_w;
+  }
+  else {
+    return _mug_bytes(++off_w, nby_w, byt_y);
+  }
+}
+
+static __inline__ c3_w
+_mug_words_in_buf(c3_w off_w, c3_w nwd_w, u2_noun veb)
+{
+  if ( 0 == nwd_w ) {
+    return off_w;
+  } else {
+    c3_w i_w, x_w;
+
+    for ( i_w = 0; i_w < (nwd_w - 1); i_w++ ) {
+      x_w = *u2_at_pug_buf(veb, i_w);
+      {
+        c3_y a_y = (x_w & 0xff);
+        c3_y b_y = ((x_w >> 8) & 0xff);
+        c3_y c_y = ((x_w >> 16) & 0xff);
+        c3_y d_y = ((x_w >> 24) & 0xff);
+
+        off_w = _mug_fnv(off_w ^ a_y);
+        off_w = _mug_fnv(off_w ^ b_y);
+        off_w = _mug_fnv(off_w ^ c_y);
+        off_w = _mug_fnv(off_w ^ d_y);
       }
-      dav_w = 0x7fffffff & gid_w;
-
-      if ( dav_w ) {
-        return dav_w;
-      } 
-      else zun_w++;
     }
+    x_w = *u2_at_pug_buf(veb, (nwd_w - 1));
+
+    if ( x_w ) {
+      off_w = _mug_fnv(off_w ^ (x_w & 0xff));
+      x_w >>= 8;
+
+      if ( x_w ) {
+        off_w = _mug_fnv(off_w ^ (x_w & 0xff));
+        x_w >>= 8;
+
+        if ( x_w ) {
+          off_w = _mug_fnv(off_w ^ (x_w & 0xff));
+          x_w >>= 8;
+
+          if ( x_w ) {
+            off_w = _mug_fnv(off_w ^ (x_w & 0xff));
+          }
+        }
+      }
+    }
+  }
+  return off_w;
+}
+
+static __inline__ c3_w
+_mug_words_in(c3_w off_w, c3_w nwd_w, const c3_w* wod_w)
+{
+  if ( 0 == nwd_w ) {
+    return off_w;
+  } else {
+    c3_w i_w, x_w;
+
+    for ( i_w = 0; i_w < (nwd_w - 1); i_w++ ) {
+      x_w = wod_w[i_w];
+      {
+        c3_y a_y = (x_w & 0xff);
+        c3_y b_y = ((x_w >> 8) & 0xff);
+        c3_y c_y = ((x_w >> 16) & 0xff);
+        c3_y d_y = ((x_w >> 24) & 0xff);
+
+        off_w = _mug_fnv(off_w ^ a_y);
+        off_w = _mug_fnv(off_w ^ b_y);
+        off_w = _mug_fnv(off_w ^ c_y);
+        off_w = _mug_fnv(off_w ^ d_y);
+      }
+    }
+    x_w = wod_w[nwd_w - 1];
+
+    if ( x_w ) {
+      off_w = _mug_fnv(off_w ^ (x_w & 0xff));
+      x_w >>= 8;
+
+      if ( x_w ) {
+        off_w = _mug_fnv(off_w ^ (x_w & 0xff));
+        x_w >>= 8;
+
+        if ( x_w ) {
+          off_w = _mug_fnv(off_w ^ (x_w & 0xff));
+          x_w >>= 8;
+
+          if ( x_w ) {
+            off_w = _mug_fnv(off_w ^ (x_w & 0xff));
+          }
+        }
+      }
+    }
+  }
+  return off_w;
+}
+
+static c3_w
+_mug_words(c3_w off_w, c3_w nwd_w, const c3_w* wod_w)
+{
+  c3_w has_w = _mug_words_in(off_w, nwd_w, wod_w);
+  c3_w out_w = _mug_out(has_w);
+
+  if ( 0 != out_w ) { 
+    return out_w;
+  }
+  else {
+    return _mug_words(++off_w, nwd_w, wod_w);
+  }
+}
+
+static c3_w
+_mug_words_buf(c3_w off_w, c3_w nwd_w, u2_noun veb)
+{
+  c3_w has_w = _mug_words_in_buf(off_w, nwd_w, veb);
+  c3_w out_w = _mug_out(has_w);
+
+  if ( 0 != out_w ) { 
+    return out_w;
+  }
+  else {
+    return _mug_words_buf(++off_w, nwd_w, veb);
   }
 }
 
@@ -315,30 +401,29 @@ u2_mug(u2_noun veb)
   c3_assert(u2_none != veb);
 
   if ( u2_fly_is_cat(veb) ) {
-    c3_w zun_w = 0x18d0a625;
+    c3_w x_w = veb;
 
-    if ( !veb ) {
-      return zun_w;
-    } 
-    else while ( 1 ) {
-      c3_w dav_w = 0x7fffffff & _mash(zun_w ^ veb);
-
-      if ( dav_w ) {
-        return dav_w;
-      } 
-      else zun_w++;
-    }
-  }
-  else {
+    return _mug_words(2166136261, (veb ? 1 : 0), &x_w);
+  } else {
     if ( *u2_at_dog_mug(veb) ) {
       c3_w mug_w = *u2_at_dog_mug(veb);
-      // c3_w gum_w = _mug_dog(veb);
 
-      // c3_assert(mug_w == gum_w);
       return mug_w;
     }
     else {
-      c3_w mug_w = _mug_dog(veb);
+      c3_w mug_w;
+
+      if ( u2_dog_is_pom(veb) ) {
+        u2_noun hed = *u2_at_pom_hed(veb);
+        u2_noun tel = *u2_at_pom_tel(veb);
+
+        mug_w = u2_mug_cell(hed, tel);
+      }
+      else {
+        c3_w len_w = *u2_at_pug_len(veb);
+
+        mug_w = _mug_words_buf(2166136261, len_w, veb);
+      }
 
       *u2_at_dog_mug(veb) = mug_w;
       return mug_w;
@@ -354,24 +439,7 @@ c3_w
 u2_mug_words(const c3_w *buf_w,
              c3_w        len_w)
 {
-  c3_w zun_w = 0x18d0a625;
-  c3_w i_w;
-
-  while ( 1 ) {
-    c3_w gid_w = zun_w;
-    c3_w dav_w;
-
-    for ( i_w=0; i_w < len_w; i_w++ ) {
-      gid_w ^= buf_w[i_w];
-      gid_w = _mash(gid_w);
-    }
-    dav_w = 0x7fffffff & gid_w;
-
-    if ( dav_w ) {
-      return dav_w;
-    } 
-    else zun_w++;
-  }
+  return _mug_words(2166136261, len_w, buf_w);
 }
 
 /* u2_mug_string():
@@ -381,38 +449,7 @@ u2_mug_words(const c3_w *buf_w,
 c3_w
 u2_mug_string(const c3_c *a_c)
 {
-  c3_w len_w = strlen(a_c);
-  c3_w mal_w = (len_w + 3) >> 2;
-  c3_w *buf_w = alloca(mal_w);
-  c3_w i_w;
-
-  for ( i_w = 0; i_w < mal_w; i_w++ ) {
-    buf_w[i_w] = 0;
-  }
-  for ( i_w = 0; i_w < len_w; i_w++ ) {
-    buf_w[i_w >> 2] |= (a_c[i_w] << (8 * (i_w & 3)));
-  }
-  return u2_mug_words(buf_w, mal_w);
-}
-
-/* u2_mug_both():
-**
-**   Join two mugs.
-*/
-c3_w
-u2_mug_both(c3_w lus_w,
-            c3_w biq_w)
-{
-  c3_w hur_w = (lus_w ^ (biq_w >> 24) ^ (biq_w << 8));
-
-  while ( 1 ) {
-    c3_w dav_w = 0x7fffffff & _mash(hur_w);
-
-    if ( dav_w ) {
-      return dav_w;
-    } 
-    else hur_w++;
-  }
+  return _mug_bytes(2166136261, strlen(a_c), (c3_y *)a_c);
 }
 
 /* u2_mug_cell():
@@ -465,7 +502,7 @@ u2_mug_qual(u2_noun a,
 **
 **   Yes iff (a) and (b) are the same noun.
 */
-static u2_flag
+static u2_bean
 _sing_x(u2_noun a,
         u2_noun b)
 {
@@ -556,7 +593,7 @@ _weight(u2_noun n)
 **
 **   Yes iff (a) and (b) are the same noun.
 */
-u2_flag
+u2_bean
 u2_sing(u2_noun a,
         u2_noun b)
 {
@@ -565,7 +602,7 @@ u2_sing(u2_noun a,
 #else
   X=0;
   {
-    u2_flag sit = _sing_x(a, b);
+    u2_bean sit = _sing_x(a, b);
 
     if ( (u2_yes == sit) && (a != b) ) {
       u2_tx_did_nod(0, X);
@@ -580,7 +617,7 @@ u2_sing(u2_noun a,
 #endif
 }
 
-u2_flag
+u2_bean
 u2_fing(u2_noun a, 
         u2_noun b)
 {
@@ -591,7 +628,7 @@ u2_fing(u2_noun a,
 **
 **   Yes iff `[p q]` and `b` are the same noun.
 */
-u2_flag
+u2_bean
 u2_sing_cell(u2_noun p,
              u2_noun q,
              u2_noun b)
@@ -600,7 +637,7 @@ u2_sing_cell(u2_noun p,
                 u2_and(u2_sing(p, u2_h(b)), 
                        u2_sing(q, u2_t(b))));
 }
-u2_flag
+u2_bean
 u2_fing_cell(u2_noun p,
              u2_noun q,
              u2_noun b)
@@ -614,7 +651,7 @@ u2_fing_cell(u2_noun p,
 **
 **   Yes iff `[p q]` and `b` are the same noun.
 */
-u2_flag
+u2_bean
 u2_sing_mixt(const c3_c* p_c,
              u2_noun     q,
              u2_noun     b)
@@ -623,7 +660,7 @@ u2_sing_mixt(const c3_c* p_c,
                 u2_and(u2_sing_c(p_c, u2_h(b)), 
                        u2_sing(q, u2_t(b))));
 }
-u2_flag
+u2_bean
 u2_fing_mixt(const c3_c* p_c,
              u2_noun     q,
              u2_noun     b)
@@ -637,7 +674,7 @@ u2_fing_mixt(const c3_c* p_c,
 **
 **   Yes iff `[p q r]` and `b` are the same noun.
 */
-u2_flag
+u2_bean
 u2_sing_trel(u2_noun p,
              u2_noun q,
              u2_noun r,
@@ -647,7 +684,7 @@ u2_sing_trel(u2_noun p,
                 u2_and(u2_sing(p, u2_h(b)), 
                        u2_sing_cell(q, r, u2_t(b))));
 }
-u2_flag
+u2_bean
 u2_fing_trel(u2_noun p,
              u2_noun q,
              u2_noun r,
@@ -662,7 +699,7 @@ u2_fing_trel(u2_noun p,
 **
 **   Yes iff `[p q r]` and `b` are the same noun.
 */
-u2_flag
+u2_bean
 u2_sing_qual(u2_noun p,
              u2_noun q,
              u2_noun r,
@@ -673,7 +710,7 @@ u2_sing_qual(u2_noun p,
                 u2_and(u2_sing(p, u2_h(b)), 
                        u2_sing_trel(q, r, s, u2_t(b))));
 }
-u2_flag
+u2_bean
 u2_fing_qual(u2_noun p,
              u2_noun q,
              u2_noun r,
@@ -755,7 +792,7 @@ u2_nord(u2_noun a,
 **
 **   Yes iff (b) is the same noun as the C string a_c.
 */
-u2_flag
+u2_bean
 u2_sing_c(const c3_c* a_c,
           u2_noun     b)
 {
@@ -781,7 +818,7 @@ u2_sing_c(const c3_c* a_c,
 **
 **   Factor [a] as a bush [b.[p q] c].
 */
-u2_flag
+u2_bean
 u2_as_bush(u2_noun  a,
            u2_noun* b,
            u2_noun* c)
@@ -807,7 +844,7 @@ u2_as_bush(u2_noun  a,
 **
 **   Factor (a) as a cell (b c).
 */
-u2_flag
+u2_bean
 u2_as_cell(u2_noun  a,
            u2_noun* b,
            u2_noun* c)
@@ -828,7 +865,7 @@ u2_as_cell(u2_noun  a,
 **
 **   Factor (a) as a hext (b c d e f g)
 */
-u2_flag
+u2_bean
 u2_as_hext(u2_noun  a,
            u2_noun* b,
            u2_noun* c,
@@ -850,7 +887,7 @@ u2_as_hext(u2_noun  a,
 **
 **   & [0] if [a] is of the form [b *c].
 */
-u2_flag
+u2_bean
 u2_as_p(u2_noun  a,
         u2_noun  b,
         u2_noun* c)
@@ -870,7 +907,7 @@ u2_as_p(u2_noun  a,
 **
 **   & [0] if [a] is of the form [b *c d].
 */
-u2_flag
+u2_bean
 u2_as_pq(u2_noun  a,
          u2_noun  b,
          u2_noun* c,
@@ -890,7 +927,7 @@ u2_as_pq(u2_noun  a,
 **
 **   & [0] if [a] is of the form [b *c *d *e].
 */
-u2_flag
+u2_bean
 u2_as_pqr(u2_noun  a,
           u2_noun  b,
           u2_noun* c,
@@ -911,7 +948,7 @@ u2_as_pqr(u2_noun  a,
 **
 **   & [0] if [a] is of the form [b *c *d *e *f].
 */
-u2_flag
+u2_bean
 u2_as_pqrs(u2_noun  a,
            u2_noun  b,
            u2_noun* c,
@@ -933,7 +970,7 @@ u2_as_pqrs(u2_noun  a,
 **
 **   Factor (a) as a qual (b c d e).
 */
-u2_flag
+u2_bean
 u2_as_qual(u2_noun  a,
            u2_noun* b,
            u2_noun* c,
@@ -953,7 +990,7 @@ u2_as_qual(u2_noun  a,
 **
 **   Factor (a) as a quil (b c d e f).
 */
-u2_flag
+u2_bean
 u2_as_quil(u2_noun  a,
            u2_noun* b,
            u2_noun* c,
@@ -974,7 +1011,7 @@ u2_as_quil(u2_noun  a,
 **
 **   Factor (a) as a trel (b c d).
 */
-u2_flag
+u2_bean
 u2_as_trel(u2_noun a,
            u2_noun *b,
            u2_noun *c,
@@ -1221,6 +1258,20 @@ u2_word(c3_w    a_w,
   }
 }
 
+/* u2_chub():
+**
+**   Return double-word (a_w) of (b).
+*/
+c3_d
+u2_chub(c3_w  a_w,
+        u2_atom b)
+{
+  c3_w wlo_w = u2_word(a_w * 2, b);
+  c3_w whi_w = u2_word(1 + (a_w * 2), b);
+
+  return (((uint64_t)whi_w) << 32ULL) | ((uint64_t)wlo_w);
+}
+
 /* u2_words():
 **
 **  Copy words (a_w) through (a_w + b_w - 1) from (d) to (c).
@@ -1286,16 +1337,20 @@ u2_chop(c3_g    met_g,
     }
   }
   else {
+    c3_w len_w = (u2_fly_is_cat(src) ? 1 : *u2_at_pug_len(src));
     c3_g hut_g = (met_g - 5);
     c3_w san_w = (1 << hut_g);
     c3_w j_w;
 
     for ( i_w = 0; i_w < wid_w; i_w++ ) {
       c3_w wuf_w = (fum_w + i_w) << hut_g;
-      c3_w wut_w = (tou_w + i_w) << hut_g; 
+      c3_w wut_w = (tou_w + i_w) << hut_g;
 
       for ( j_w = 0; j_w < san_w; j_w++ ) {
-        *u2_at_ray(dst_r + wut_w + j_w) ^= u2_atom_word(src, wuf_w + j_w);
+        *u2_at_ray(dst_r + wut_w + j_w) ^= 
+            ((wuf_w + j_w) >= len_w)
+              ? 0
+              : u2_atom_word(src, wuf_w + j_w);
       }
     }
   }

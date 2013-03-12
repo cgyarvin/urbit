@@ -82,7 +82,7 @@ u2_rl_boot(c3_m hip_m)
 **
 **   Reverse the beams forward.
 */
-u2_flag
+u2_bean
 u2_rl_leap(u2_ray ral_r,
            c3_m   hop_m)
 {
@@ -673,11 +673,13 @@ _rl_bloq_grap(u2_ray ral_r,
 
   nov_r = _rl_bloq_grab(ral_r, len_w);
 
-  if ( (nov_r - c3_wiseof(u2_loom_rail_box)) == 0xacba24 ) {
+#if 0
+  if ( (nov_r - c3_wiseof(u2_loom_rail_box)) == 0x8acb5a ) {
     printf("alloc leak %d - nov_r %x\n", xzx, nov_r);
-    if ( xzx == 4 ) { u2_bl_error(0, "leakage"); }
+    if ( xzx == 45 ) { xzx++; c3_assert(0); }
     xzx++;
   }
+#endif
   return nov_r;
 }
 #endif
@@ -750,6 +752,26 @@ _rl_bloq_free(u2_ray ral_r,
     }
   }
 }
+
+#if 0
+/* _rl_sloq_free(): wrapper for _rl_bloq_free(), disabling signals.
+*/
+static void
+_rl_sloq_free(u2_ray ral_r,
+              u2_ray box_r)
+{
+  return _rl_bloq_free(ral_r, box_r);
+}
+
+/* _rl_sloq_grab(): wrapper for _rl_bloq_grab(), disabling signals.
+*/
+static u2_ray
+_rl_sloq_grab(u2_ray ral_r,
+              c3_w   len_w)
+{
+  return _rl_bloq_grab(ral_r, len_w);
+}
+#endif
 
 /* u2_rl_ralloc():
 **
@@ -1016,7 +1038,7 @@ top:
 **   Yes iff `som` is senior in `ral` - ie, does not
 **   require reference counting.
 */
-u2_flag
+u2_bean
 u2_rl_senior(u2_ray  ral_r,
              u2_noun som)
 {
@@ -1048,7 +1070,7 @@ u2_rl_senior(u2_ray  ral_r,
 **   Yes iff `som` is junior in `ral` - ie, must be copied
 **   to be referenced on the hat.
 */
-u2_flag
+u2_bean
 u2_rl_junior(u2_ray  ral_r,
              u2_noun som)
 {
@@ -1089,7 +1111,7 @@ u2_rl_flog(u2_ray ral_r)
 **
 **   Yes iff [a] more words remain in the pad.
 */
-u2_flag
+u2_bean
 u2_rl_open(u2_ray ral_r,
            c3_w   a_w)
 {
@@ -1105,7 +1127,7 @@ u2_rl_open(u2_ray ral_r,
 **   Yes iff [lef] does not point to any word >= [net]
 **   and < [bat].
 */
-u2_flag
+u2_bean
 u2_rl_clear(u2_noun lef,
             u2_ray  net_r,
             u2_ray  bat_r)
@@ -1395,10 +1417,11 @@ u2_rl_wash(u2_rail ral_r,
       *u2_at_dog_mug(fiz) = *u2_at_dog_mug(nov);
       // printf("  fixed fiz %x; was %x; now %x\n", 
       //                         fiz, mug_w, *u2_at_dog_mug(fiz));
-    }
-    if ( u2_yes == u2_dust(fiz) ) {
-      u2_rl_wash(ral_r, u2_h(fiz));
-      u2_rl_wash(ral_r, u2_t(fiz));
+    
+      if ( u2_yes == u2_dust(fiz) ) {
+        u2_rl_wash(ral_r, u2_h(fiz));
+        u2_rl_wash(ral_r, u2_t(fiz));
+      }
     }
   }
 }
@@ -1571,6 +1594,8 @@ u2_rl_gc_sweep(u2_ray ral_r, c3_w sav_w)
 
     if ( use_ws > 0 ) {
       // printf("leak: box %x, siz %d, use %d\n", box_r, siz_w, use_w);
+      // c3_assert(0);
+
       lek_w += siz_w;
       u2_rail_box_use(box_r) = 0;
       _rl_bloq_free(ral_r, box_r);
@@ -1748,19 +1773,15 @@ u2_rl_mint(u2_rail ral_r,
 
     if ( dif_w >= 6 ) {
       u2_ray box_r = nov_r - c3_wiseof(u2_loom_rail_box);
-      c3_w   siz_w = *u2_at_ray(box_r) - dif_w;
-
-      /* Split off a new free block at the end.  Resize this one.
-      */
       u2_ray end_r = (nov_r + c3_wiseof(u2_loom_atom) + len_w + 1);
+      c3_w   asz_w = (end_r - box_r);
+      c3_w   bsz_w = *u2_at_ray(box_r) - asz_w;
 
-      _rl_bloq_make(ral_r, end_r, dif_w, 0);
+      _rl_bloq_make(ral_r, end_r, bsz_w, 0);
       _rl_bloq_attach(ral_r, end_r);
 
-      *u2_at_ray(box_r) = siz_w;
-      *u2_at_ray(box_r + siz_w - 1) = siz_w;
-
-      c3_assert(end_r == (box_r + siz_w));
+      *u2_at_ray(box_r) = asz_w;
+      *u2_at_ray(box_r + asz_w - 1) = asz_w;
     }
     *u2_at_pug_len(nov) = len_w;
   }
