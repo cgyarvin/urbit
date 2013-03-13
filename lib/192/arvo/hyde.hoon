@@ -42,7 +42,8 @@
               maz=(qeu soap)                            ::  round-robin next
               air=(map flap ,@ud)                       ::  unacked by content
               sea=shed                                  ::  packet pump
-              ryl=rill                                  ::  message control
+              raz=(map ,@ta race)                       ::  statements inbound
+              ryl=(map ,@ta rill)                       ::  statements outbound
           ==                                            ::
 ++  bead                                                ::  terminal control
           $:  $:  bul=@ud                               ::  buffer length
@@ -103,8 +104,9 @@
 ++  boat  ,[(list slip) task]                           ::  user stage
 ++  boon                                                ::  fort output
           $%  [%beer p=flag q=@uvG]                     ::  gained ownership
-              [%coke p=cape q=soap]                     ::  message conclusion
+              [%coke p=cape q=soap]                     ::  message result
               [%mead p=lane q=rock]                     ::  accept packet
+              [%milk p=sock q=@ta r=@ud s=*]            ::  accept message
               [%ouzo p=lane q=rock]                     ::  transmit packet
               [%wine p=flag]                            ::  lost ownership
           ==                                            ::
@@ -171,9 +173,9 @@
               [%tory p=(list ,@t)]                      ::  history dump
               [%wait p=@da q=path]                      ::  timer wait
               [%wake ~]                                 ::  timer activate
-              [%want p=flag q=@ta r=path s=*]           ::  peer request
+              [%want p=flag q=@ta r=*]                  ::  peer request
               [%warn p=tape]                            ::  system message
-              [%went p=cape q=soap r=path]              ::  peer reaction
+              [%went p=cape q=soap]                     ::  peer reaction
               [%wipe ~]                                 ::  clean up hose
               [%word p=chum]                            ::  set password
           ==                                            ::
@@ -216,6 +218,7 @@
               caq=cask                                  ::  symmetric key state
           ==                                            ::
 ++  dove  ,[p=@ud q=(map ,@ud ,@)]                      ::  count 13-blocks
+++  flag  ,@p                                           ::  identity
 ++  flap  ,@uvH                                         ::  network packet id
 ++  flow                                                ::  packet connection
           $:  rtt=@dr                                   ::  official rtt
@@ -275,7 +278,6 @@
           ==                                            ::
 ++  link  ,[p=code q=sock]                              ::  connection
 ++  logo  ,@uvI                                         ::  session identity
-++  flag  ,@p                                           ::  identity
 ++  love  $%                                            ::  http response
               [%ham p=manx]                             ::  html node
               [%mid p=mime q=octs]                      ::  mime-typed data
@@ -292,10 +294,10 @@
 ++  math  (map ,@t (list ,@t))                          ::  semiparsed headers
 ++  meal                                                ::  payload
           $%  [%back p=cape q=flap r=@dr]               ::  acknowledgment
+              [%bond p=mark q=@ta r=@ud s=*]            ::  message
               [%buck p=mace q=will]                     ::  license
               [%carp p=@ud q=flap r=@]                  ::  leaf fragment
               [%fore p=lane q=@]                        ::  forwarded packet
-              [%ping ~]                                 ::  no-op
           ==                                            ::
 ++  mess  (list ,[p=@t q=@t])                           ::  raw http headers
 ++  meta                                                ::  path metadata
@@ -344,7 +346,7 @@
 ++  rank  ?(%czar %king %duke %jack %pawn)              ::  flag width class
 ++  rill                                                ::  outbound stream
           $:  don=@ud                                   ::  accepted
-              san=(map ,@ud ,[p=path q=hose])           ::  transmitted
+              san=(map ,@ud hose)                       ::  transmitted
           ==                                            ::
 ++  rink  path                                          ::  prompt path
 ++  road                                                ::  secured oneway route
@@ -388,7 +390,7 @@
 ++  skin  ?(%none %open %fast %full)                    ::  encoding stem
 ++  slip  ,[p=bell q=goal]                              ::  traceable request
 ++  snow  ,[p=@ud q=@ud r=(set ,@ud)]                   ::  window exceptions
-++  soap  ,[p=@ta q=@ud]                                ::  statement id
+++  soap  ,[p=[p=mark q=mark] q=@ta r=@ud]              ::  statement id
 ++  sock  ,[p=flag q=flag]                              ::  from to
 ++  step  ,[p=bran q=gcos r=pass]                       ::  identity stage
 ++  task  _|+([@da path note] *bowl)                    ::  process core
