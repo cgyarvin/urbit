@@ -1,0 +1,12 @@
+|=  [who=flag est=time eny=@ hom=path]
+|=  [bis=(set ,@tas) opt=(map ,@tas ,*)]
+|=  [planet=@ta ~]
+=|  air=(map ,@uvH ,@ud)
+=.  air  (~(put by air) 0v5.vneb2.qs0li.vq7ig.68q8o.akpmr 0)
+=.  air  (~(put by air) 0v4.fdjt1.c7ae3.1f5lu.rl9e2.kfdi8 1)
+~&  [%test-in air]
+=.  air  (~(del by air) 0v5.vneb2.qs0li.vq7ig.68q8o.akpmr)
+~&  [%test-out air]
+:-  :~  [%talk %leaf "hello, {(rip 3 planet)}."]
+    ==
+~

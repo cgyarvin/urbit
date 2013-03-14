@@ -1,0 +1,13 @@
+|=  [who=flag est=time eny=@ hom=path]
+|=  [bis=(set ,@tas) opt=(map ,@tas ,*)]
+|=  ~
+=+  ^=  cud
+    =>  |%  ++  wish  1
+            ++  keep  4
+            ++  peek  2
+            ++  poke  3
+        --
+    ~[peek/!=(peek) poke/!=(poke) keep/!=(keep) wish/!=(wish)]
+:-  :~  [%talk >cud<]
+    ==
+~

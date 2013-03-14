@@ -1,0 +1,8 @@
+#!/bin/sh
+
+old=$3
+new=`echo $3 | sed s/$1/$2/`
+echo "cp $old $new"
+cp $old $new
+echo "git add $new"
+git add $new

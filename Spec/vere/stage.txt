@@ -1,17 +1,17 @@
-To stage down from X to Y == (X - 1) on vere computer C, steps:
+To stage down from X to Y == (X - 1), steps:
 
   Clean hoon parts:
 
-    - cp -r C/sys/X C/sys/Y
+    - cp -r lib/X lib/Y
     - select kernel name in Y:
         hoon.hoon (regular)
         tram.hoon (genetically incompatible with stage X)
         test.hoon (barebones testing)
 
-    - rm C/sys/Y/hoon.pill
-    - git add C/sys/Y/hoon.*
-    - git add C/sys/Y/reck/*.hoon
-    - update stage number in C/sys/Y.hoon
+    - rm lib/Y/hoon.pill
+    - git add lib/Y/*.hoon
+    - git add lib/Y/arvo/*.hoon
+    - update stage number in lib/Y/hoon.hoon
 
   Ugly jet parts:
 

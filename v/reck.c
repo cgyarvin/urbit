@@ -57,12 +57,19 @@ _reck_nock_peek(u2_reck* rec_u, u2_noun our, u2_noun hap)
 /* _reck_nock_wish(): call wish through hardcoded interface.
 */
 static u2_noun
-_reck_nock_wish(u2_reck* rec_u, u2_noun our, u2_noun ovo)
+_reck_nock_wish(u2_reck* rec_u, u2_noun txt)
 {
   u2_noun fun = u2_cn_nock(u2k(rec_u->roc), u2k(u2_cx_at(10, rec_u->roc)));
-  u2_noun sam = u2nc(u2k(rec_u->now), ovo);
 
-  return u2_cn_mung(fun, sam);
+  return u2_cn_mung(fun, txt);
+}
+
+/* u2_reck_wish(): noun from expression
+*/
+u2_noun 
+u2_reck_wish(u2_reck* rec_u, c3_c* str_c)
+{
+  return _reck_nock_wish(rec_u, u2_ci_string(str_c));
 }
 
 /* _reck_root(): tool from boot.
@@ -392,6 +399,22 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     rec_u->roc = u2_cn_nock(0, u2k(u2t(vay)));
     u2z(vay);
   }
+
+#if 0
+  rec_u->toy.rain = u2_reck_wish(rec_u, "rain");
+  rec_u->toy.ream = u2_reck_wish(rec_u, "ream");
+  rec_u->toy.slay = u2_reck_wish(rec_u, "slay");
+  rec_u->toy.slam = u2_reck_wish(rec_u, "slam");
+  rec_u->toy.slap = u2_reck_wish(rec_u, "slap");
+  rec_u->toy.slop = u2_reck_wish(rec_u, "slop");
+  rec_u->toy.scot = u2_reck_wish(rec_u, "scot");
+  rec_u->toy.spat = u2_reck_wish(rec_u, "spat");
+  rec_u->toy.stab = u2_reck_wish(rec_u, "stab");
+  rec_u->toy.turf = u2_reck_wish(rec_u, "turf");
+  rec_u->toy.tuft = u2_reck_wish(rec_u, "tuft");
+  rec_u->toy.wash = u2_reck_wish(rec_u, "wash");
+  rec_u->toy.mook = u2_reck_wish(rec_u, "mook");
+#endif
 }
 
 /* _reck_mole(): parse simple atomic mole.
