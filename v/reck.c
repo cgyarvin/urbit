@@ -333,71 +333,140 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
 
   rec_u->dir_c = 0;
 
-  rec_u->ken = ken;
-  rec_u->syd = _reck_root("seed", u2k(ken));
-  rec_u->roc = 0;
+  if ( kno_w > 191 ) {
+    rec_u->ken = ken;
+    rec_u->syd = _reck_root("seed", u2k(ken));
+    rec_u->roc = 0;
 
-  rec_u->toy.rain = _reck_root("rain", u2k(ken));
-  rec_u->toy.ream = _reck_root("ream", u2k(ken));
-  rec_u->toy.slay = _reck_root("slay", u2k(ken));
-  rec_u->toy.slam = _reck_root("slam", u2k(ken));
-  rec_u->toy.slap = _reck_root("slap", u2k(ken));
-  rec_u->toy.slop = _reck_root("slop", u2k(ken));
-  rec_u->toy.scot = _reck_root("scot", u2k(ken));
-  rec_u->toy.spat = _reck_root("spat", u2k(ken));
-  rec_u->toy.stab = _reck_root("stab", u2k(ken));
-  rec_u->toy.turf = _reck_root("turf", u2k(ken));
-  rec_u->toy.tuft = _reck_root("tuft", u2k(ken));
-  rec_u->toy.wash = _reck_root("wash", u2k(ken));
-  rec_u->toy.mook = _reck_root("mook", u2k(ken));
+    rec_u->toy.rain = _reck_root("rain", u2k(ken));
+    rec_u->toy.ream = _reck_root("ream", u2k(ken));
+    rec_u->toy.slay = _reck_root("slay", u2k(ken));
+    rec_u->toy.slam = _reck_root("slam", u2k(ken));
+    rec_u->toy.slap = _reck_root("slap", u2k(ken));
+    rec_u->toy.slop = _reck_root("slop", u2k(ken));
+    rec_u->toy.scot = _reck_root("scot", u2k(ken));
+    rec_u->toy.spat = _reck_root("spat", u2k(ken));
+    rec_u->toy.stab = _reck_root("stab", u2k(ken));
+    rec_u->toy.turf = _reck_root("turf", u2k(ken));
+    rec_u->toy.tuft = _reck_root("tuft", u2k(ken));
+    rec_u->toy.wash = _reck_root("wash", u2k(ken));
+    rec_u->toy.mook = _reck_root("mook", u2k(ken));
 
-  u2_reck_time(rec_u);
-  u2_reck_numb(rec_u);
-  {
-    c3_c* dyt_c = u2_cr_string(rec_u->wen);
-
-    printf("time: %s\n", dyt_c);
-    free(dyt_c);
-  }
-  {
-    u2_noun syd, zen, yen, xan, wol, ray, dyl, yer, vay;
-
-    syd = u2k(rec_u->syd);
-
+    u2_reck_time(rec_u);
+    u2_reck_numb(rec_u);
     {
-      // printf("hyde:\n");
-      yen = _reck_load_temp(rec_u, u2k(syd), kno_w, "arvo/hyde.hoon");
+      c3_c* dyt_c = u2_cr_string(rec_u->wen);
 
-      // printf("ford:\n");
-      zen = _reck_load_temp(rec_u, yen, kno_w, "arvo/ford.hoon");
-
-      rec_u->toy.sham = _reck_gate(rec_u, u2k(zen), "sham");
-      rec_u->toy.shen = _reck_gate(rec_u, u2k(zen), "en:crya");
-      rec_u->toy.shed = _reck_gate(rec_u, u2k(zen), "de:crya");
-
-      // printf("ames:\n");
-      xan = _reck_load_temp(rec_u, zen, kno_w, "arvo/ames.hoon");
-
-      // printf("bede:\n");
-      wol = _reck_load_temp(rec_u, xan, kno_w, "arvo/bede.hoon");
-
-      // printf("cary:\n");
-      ray = _reck_load_temp(rec_u, wol, kno_w, "arvo/cary.hoon");
-
-      rec_u->toy.duel = 
-        _reck_gate(rec_u, u2k(ray), "|=([a=arch b=arch] (~(duel cy a) b))");
-
-      // printf("dill:\n");
-      dyl = _reck_load_temp(rec_u, ray, kno_w, "arvo/dill.hoon");
-
-      // printf("eyre:\n");
-      yer = _reck_load_temp(rec_u, dyl, kno_w, "arvo/eyre.hoon");
-
-      // printf("zuse:\n");
-      vay = _reck_load_temp(rec_u, yer, kno_w, "arvo/zuse.hoon");
+      printf("time: %s\n", dyt_c);
+      free(dyt_c);
     }
-    rec_u->roc = u2_cn_nock(0, u2k(u2t(vay)));
-    u2z(vay);
+    {
+      u2_noun syd, zen, yen, xan, wol, ray, dyl, yer, vay;
+
+      syd = u2k(rec_u->syd);
+
+      {
+        // printf("hyde:\n");
+        yen = _reck_load_temp(rec_u, u2k(syd), kno_w, "arvo/hyde.hoon");
+
+        // printf("ford:\n");
+        zen = _reck_load_temp(rec_u, yen, kno_w, "arvo/ford.hoon");
+
+        rec_u->toy.sham = _reck_gate(rec_u, u2k(zen), "sham");
+        rec_u->toy.shen = _reck_gate(rec_u, u2k(zen), "en:crya");
+        rec_u->toy.shed = _reck_gate(rec_u, u2k(zen), "de:crya");
+
+        // printf("ames:\n");
+        xan = _reck_load_temp(rec_u, zen, kno_w, "arvo/ames.hoon");
+
+        // printf("bede:\n");
+        wol = _reck_load_temp(rec_u, xan, kno_w, "arvo/bede.hoon");
+
+        // printf("cary:\n");
+        ray = _reck_load_temp(rec_u, wol, kno_w, "arvo/cary.hoon");
+
+        rec_u->toy.duel = 
+          _reck_gate(rec_u, u2k(ray), "|=([a=arch b=arch] (~(duel cy a) b))");
+
+        // printf("dill:\n");
+        dyl = _reck_load_temp(rec_u, ray, kno_w, "arvo/dill.hoon");
+
+        // printf("eyre:\n");
+        yer = _reck_load_temp(rec_u, dyl, kno_w, "arvo/eyre.hoon");
+
+        // printf("zuse:\n");
+        vay = _reck_load_temp(rec_u, yer, kno_w, "arvo/zuse.hoon");
+      }
+      rec_u->roc = u2_cn_nock(0, u2k(u2t(vay)));
+      u2z(vay);
+    }
+  } else {
+    c3_assert(!"actually it worked!");
+
+    rec_u->ken = ken;
+    rec_u->syd = _reck_root("seed", u2k(ken));
+    rec_u->roc = 0;
+
+    rec_u->toy.rain = _reck_root("rain", u2k(ken));
+    rec_u->toy.ream = _reck_root("ream", u2k(ken));
+    rec_u->toy.slay = _reck_root("slay", u2k(ken));
+    rec_u->toy.slam = _reck_root("slam", u2k(ken));
+    rec_u->toy.slap = _reck_root("slap", u2k(ken));
+    rec_u->toy.slop = _reck_root("slop", u2k(ken));
+    rec_u->toy.scot = _reck_root("scot", u2k(ken));
+    rec_u->toy.spat = _reck_root("spat", u2k(ken));
+    rec_u->toy.stab = _reck_root("stab", u2k(ken));
+    rec_u->toy.turf = _reck_root("turf", u2k(ken));
+    rec_u->toy.tuft = _reck_root("tuft", u2k(ken));
+    rec_u->toy.wash = _reck_root("wash", u2k(ken));
+    rec_u->toy.mook = _reck_root("mook", u2k(ken));
+
+    u2_reck_time(rec_u);
+    u2_reck_numb(rec_u);
+    {
+      c3_c* dyt_c = u2_cr_string(rec_u->wen);
+
+      printf("time: %s\n", dyt_c);
+      free(dyt_c);
+    }
+    {
+      u2_noun syd, zen, yen, xan, wol, ray, dyl, yer, vay;
+      u2_noun sod;
+
+      syd = u2k(rec_u->syd);
+
+      {
+        zen = syd;
+
+        rec_u->toy.sham = _reck_gate(rec_u, u2k(zen), "sham");
+        rec_u->toy.shen = _reck_gate(rec_u, u2k(zen), "en:crya");
+        rec_u->toy.shed = _reck_gate(rec_u, u2k(zen), "de:crya");
+
+        // printf("ames:\n");
+        // xan = _reck_load_temp(rec_u, zen, kno_w, "arvo/ames.hoon");
+        xan = zen;
+
+        // printf("bede:\n");
+        wol = xan;
+
+        // printf("cary:\n");
+        ray = wol;
+
+        rec_u->toy.duel = 
+          _reck_gate(rec_u, u2k(ray), "|=([a=arch b=arch] (~(duel cy a) b))");
+
+        // printf("dill:\n");
+        dyl = _reck_load_temp(rec_u, ray, kno_w, "arvo/dill.hoon");
+
+        // printf("eyre:\n");
+        yer = _reck_load_temp(rec_u, dyl, kno_w, "arvo/eyre.hoon");
+
+        // printf("zuse:\n");
+        vay = _reck_load_temp(rec_u, yer, kno_w, "arvo/zuse.hoon");
+      }
+      rec_u->roc = u2_cn_nock(0, u2k(u2t(vay)));
+      u2z(vay);
+    }
   }
 
 #if 0

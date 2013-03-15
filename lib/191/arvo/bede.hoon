@@ -2,71 +2,67 @@
 ::          %bede, the shell.  This file is in the public domain.
 ::
 =<
-  |%
-  ++  bede                                              ::  terminal handling
-    ^-  vane                                            ::  kernel instrument
-    =|  $:  deb=(map flag _*berg)                       ::  state by terminal
-        ==                                              ::
-    |=  [now=@da eny=@ sky=||(* (unit))]                ::  current invocation
-    ^?                                                  ::  opaque core
-    |%                                                  ::  poke/peek pattern
-    ++  beat                                            ::  process move
-      |=  [whu=(unit flag) tea=tire hen=hose fav=card]
-      ^-  [p=(list move) q=vane]
-      ?>  ?=(^ whu)
-      =+  ^=  beg  ^+  *berg
-          =+  beg=(~(get by deb) u.whu)
-          ?^(beg u.beg (berg u.whu))
-      =+  yub=(leap:(beg now eny sky) tea hen fav)
-      :-  p.yub
-      ..^$(deb (~(put by deb) u.whu q.yub))
-    ::
-    ++  doze
-      |=  hen=hose
-      ^-  (unit ,@da)
-      ~
-    ::
-    ++  scry
-      |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
-      ^-  (unit)
-      ?.  =(our his)  ~
-      ?.  &(=([%p ~] tyl) =([%% %da now] lot)) ~
-      =+  beg=(~(get by deb) our)
-      ?~  beg  ~
-      [~ prot:(u.beg now eny |=(* *(unit)))]
-    --
-  --
-|%
-++  berg                                                ::  repl/shell
-  |=  who=flag                                          ::  per identity
-  =+  nub=`vase`!>(+>)                                  ::  system + libraries
-  =+  :*  ^=  vax                                       ::  chestnut vases
-            :*  sot=(slap nub (vice 'slot'))            ::
-            ==                                          ::
-          ^=  gen                                       ::  chestnut genes
-            :*  yom=(vice '*(set ,@tas)')               ::
-                zim=(vice '*(map ,@tas ,*)')            ::
-            ==                                          ::
-          ^=  typ                                       ::  chestnut types
-            =+  pal=~(play ut p.nub)                    ::
-            :*  cof=(pal (vice '*conf'))                ::
-                gee=(pal (vice '*gene'))                ::
-                liz=(pal (vice '*(list ,@)'))           ::
-                pah=(pal (vice '*path'))                ::
-                noq=(pal (vice '*note'))                ::
-                tak=(pal (vice '*task'))                ::
-                vas=(pal (vice '*vase'))                ::
-            ==                                          ::
-          hub=(hoof stub)                               ::  stage extension
+=>  |%
+    ++  brad                                            ::  session/dynamic
+      $:  who=flag                                      ::  identity
+          hit=[p=@ud q=(list tape)]                     ::  command history
+          sur=[p=@ud q=(qeu vase)]                      ::  result history
+          hox=@ta                                       ::  identity text
+          cwd=path                                      ::  working directory
+          way=(map ,@tas vase)                          ::  variables
+          pak=(list ,[p=@ud q=path])                    ::  prompt stack
+          lif=dock                                      ::  process table
       ==                                                ::
-  =+  :*  hit=[p=0 q=*(list tape)]                      ::  source history
-          sur=[p=0 q=*(qeu vase)]                       ::  result history
-          hox=(scot %p who)                             ::  identity string
-          cwd=*path                                     ::  working directory
-          way=*(map ,@tas vase)                         ::  variables
-          pak=*(list ,[p=@ud q=path])                   ::  prompt stack
-          lif=*dock                                     ::  processes
+    ++  bran                                            ::  static "state"
+      $:  nub=vase                                      ::  
+          ^=  vax                                       ::  chestnut vases
+        $:  sot=vase                                    ::  'slot'
+        ==                                              ::
+          ^=  gen                                       ::
+        $:  yom=gene                                    ::  '*(set ,@tas)'
+            zim=gene                                    ::  '*(map ,@tas ,*)'
+        ==                                              ::
+          ^=  typ                                       ::  chestnut types
+        $:  cof=type                                    ::  '*conf'
+            gee=type                                    ::  '*gene'
+            liz=type                                    ::  '*(list ,@)'
+            pah=type                                    ::  '*path'
+            noq=type                                    ::  '*note'
+            tak=type                                    ::  '*task'
+            vas=type                                    ::  '*vase'
+        ==                                              ::
+          hub=@ta                                       ::  (hoof stub)
+      ==                                                ::
+    --                                                  ::
+|%                                                      ::
+++  burg                                                ::  new session
+  |=  who=flag
+  =+  nib=`vase`!>(+>)
+  =+  pal=~(play ut p.nib)
+  %-  berg
+  :_  ^-  brad
+      %*  .  *brad
+        who  who
+        hox  (scot %p who)
       ==
+  ^-  bran
+  %*  .  *bran
+    nub      nib
+    sot.vax  (slap nib (vice 'slot'))
+    yom.gen  (vice '*(set ,@tas)')
+    zim.gen  (vice '*(map ,@tas ,*)')
+    cof.typ  (pal (vice '*conf'))
+    gee.typ  (pal (vice '*gene'))
+    liz.typ  (pal (vice '*(list ,@)'))
+    pah.typ  (pal (vice '*path'))
+    noq.typ  (pal (vice '*note'))
+    tak.typ  (pal (vice '*task'))
+    vas.typ  (pal (vice '*vase'))
+    hub      (hoof stub)
+  ==
+::
+++  berg                                                ::  repl/shell
+  |=  [bran brad]
   |=  [now=@da eny=@ sky=_|+(* *(unit))] 
   =+  wen=(scot %da now)
   =+  wer=`path`[%cx wen hox (weld cwd [hub ~])]
