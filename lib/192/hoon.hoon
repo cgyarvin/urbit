@@ -3271,6 +3271,7 @@
       [%tskt p=gene q=gene r=gene s=gene]
       [%tsls p=gene q=gene]
       [%tshp p=gene q=gene]
+      [%tssg p=(list gene)]
     ::
       [%wtbr p=(list gene)]
       [%wthp p=gene q=(list ,[p=gene q=gene])]
@@ -4095,6 +4096,12 @@
         [%tsgl *]  [%tsgr q.gen p.gen]
         [%tsls *]  [%tsgr [p.gen [~ 1]] q.gen]
         [%tshp *]  [%tsls q.gen p.gen]
+        [%tssg *]
+      |-  ^-  gene
+      ?~  p.gen    [%zpzp ~]
+      ?~  t.p.gen  i.p.gen
+      [%tsgr i.p.gen $(p.gen t.p.gen)]
+    ::
         [%wtbr *]
       |- 
       ?@(p.gen [%dtsg %f 1] [%wtcl i.p.gen [%dtsg %f 0] $(p.gen t.p.gen)])
@@ -6459,6 +6466,7 @@
                   ['>' (rune gar %tsgr expb)]
                   ['-' (rune hep %tshp expb)]
                   ['+' (rune lus %tsls expb)]
+                  ['~' (rune sig %tssg expi)]
                 ==
               ==
             :-  '?'

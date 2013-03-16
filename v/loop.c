@@ -991,7 +991,7 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu, u2_noun rez)
     if ( led_u.kno_w != rec_u->kno_w ) {
       //  XX perhaps we should actually do something here
       //
-      uL(fprintf(uH, "rest: translating events (old %d, now %d)\n",
+      uL(fprintf(uH, "rest: (not) translating events (old %d, now %d)\n",
                      led_u.kno_w,
                      rec_u->kno_w));
     }

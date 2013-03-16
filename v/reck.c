@@ -401,25 +401,39 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
       u2z(vay);
     }
   } else {
-    c3_assert(!"actually it worked!");
-
     rec_u->ken = ken;
-    rec_u->syd = _reck_root("seed", u2k(ken));
-    rec_u->roc = 0;
+    printf("loaded %d\n", kno_w);
+    rec_u->roc = u2_cn_nock(0, u2k(ken));
+    printf("engine for %d\n", kno_w);
 
-    rec_u->toy.rain = _reck_root("rain", u2k(ken));
-    rec_u->toy.ream = _reck_root("ream", u2k(ken));
-    rec_u->toy.slay = _reck_root("slay", u2k(ken));
-    rec_u->toy.slam = _reck_root("slam", u2k(ken));
-    rec_u->toy.slap = _reck_root("slap", u2k(ken));
-    rec_u->toy.slop = _reck_root("slop", u2k(ken));
-    rec_u->toy.scot = _reck_root("scot", u2k(ken));
-    rec_u->toy.spat = _reck_root("spat", u2k(ken));
-    rec_u->toy.stab = _reck_root("stab", u2k(ken));
-    rec_u->toy.turf = _reck_root("turf", u2k(ken));
-    rec_u->toy.tuft = _reck_root("tuft", u2k(ken));
-    rec_u->toy.wash = _reck_root("wash", u2k(ken));
-    rec_u->toy.mook = _reck_root("mook", u2k(ken));
+    {
+      u2_noun foo;
+
+      foo = u2_cn_nock('7', u2k(ken));
+      u2_err(u2_Wire, "foo", foo);
+    }
+
+    rec_u->syd = u2_reck_wish(rec_u, "seed");
+    printf("seed for %d\n", kno_w);
+    rec_u->toy.rain = u2_reck_wish(rec_u, "rain");
+    rec_u->toy.ream = u2_reck_wish(rec_u, "ream");
+    rec_u->toy.slay = u2_reck_wish(rec_u, "slay");
+    rec_u->toy.slam = u2_reck_wish(rec_u, "slam");
+    rec_u->toy.slap = u2_reck_wish(rec_u, "slap");
+    rec_u->toy.slop = u2_reck_wish(rec_u, "slop");
+    rec_u->toy.scot = u2_reck_wish(rec_u, "scot");
+    rec_u->toy.spat = u2_reck_wish(rec_u, "spat");
+    rec_u->toy.stab = u2_reck_wish(rec_u, "stab");
+    rec_u->toy.turf = u2_reck_wish(rec_u, "turf");
+    rec_u->toy.tuft = u2_reck_wish(rec_u, "tuft");
+    rec_u->toy.wash = u2_reck_wish(rec_u, "wash");
+    rec_u->toy.mook = u2_reck_wish(rec_u, "mook");
+
+    rec_u->toy.sham = u2_reck_wish(rec_u, "sham");
+    rec_u->toy.shen = u2_reck_wish(rec_u, "en:crya");
+    rec_u->toy.shed = u2_reck_wish(rec_u, "de:crya");
+    rec_u->toy.duel = u2_reck_wish(rec_u, 
+                                   "|=([a=arch b=arch] (~(duel cy a) b))");
 
     u2_reck_time(rec_u);
     u2_reck_numb(rec_u);
@@ -429,60 +443,9 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
       printf("time: %s\n", dyt_c);
       free(dyt_c);
     }
-    {
-      u2_noun syd, zen, yen, xan, wol, ray, dyl, yer, vay;
-      u2_noun sod;
-
-      syd = u2k(rec_u->syd);
-
-      {
-        zen = syd;
-
-        rec_u->toy.sham = _reck_gate(rec_u, u2k(zen), "sham");
-        rec_u->toy.shen = _reck_gate(rec_u, u2k(zen), "en:crya");
-        rec_u->toy.shed = _reck_gate(rec_u, u2k(zen), "de:crya");
-
-        // printf("ames:\n");
-        // xan = _reck_load_temp(rec_u, zen, kno_w, "arvo/ames.hoon");
-        xan = zen;
-
-        // printf("bede:\n");
-        wol = xan;
-
-        // printf("cary:\n");
-        ray = wol;
-
-        rec_u->toy.duel = 
-          _reck_gate(rec_u, u2k(ray), "|=([a=arch b=arch] (~(duel cy a) b))");
-
-        // printf("dill:\n");
-        dyl = _reck_load_temp(rec_u, ray, kno_w, "arvo/dill.hoon");
-
-        // printf("eyre:\n");
-        yer = _reck_load_temp(rec_u, dyl, kno_w, "arvo/eyre.hoon");
-
-        // printf("zuse:\n");
-        vay = _reck_load_temp(rec_u, yer, kno_w, "arvo/zuse.hoon");
-      }
-      rec_u->roc = u2_cn_nock(0, u2k(u2t(vay)));
-      u2z(vay);
-    }
   }
 
 #if 0
-  rec_u->toy.rain = u2_reck_wish(rec_u, "rain");
-  rec_u->toy.ream = u2_reck_wish(rec_u, "ream");
-  rec_u->toy.slay = u2_reck_wish(rec_u, "slay");
-  rec_u->toy.slam = u2_reck_wish(rec_u, "slam");
-  rec_u->toy.slap = u2_reck_wish(rec_u, "slap");
-  rec_u->toy.slop = u2_reck_wish(rec_u, "slop");
-  rec_u->toy.scot = u2_reck_wish(rec_u, "scot");
-  rec_u->toy.spat = u2_reck_wish(rec_u, "spat");
-  rec_u->toy.stab = u2_reck_wish(rec_u, "stab");
-  rec_u->toy.turf = u2_reck_wish(rec_u, "turf");
-  rec_u->toy.tuft = u2_reck_wish(rec_u, "tuft");
-  rec_u->toy.wash = u2_reck_wish(rec_u, "wash");
-  rec_u->toy.mook = u2_reck_wish(rec_u, "mook");
 #endif
 }
 
