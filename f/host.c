@@ -586,6 +586,7 @@ _ho_explore_parent(u2_rail ral_r,
     c3_assert(par_d);
     if ( par_d->sub_d ) {
       for ( i_w = 0; par_d->sub_d[i_w].cos_c; i_w++ ) {
+
         if ( (u2_none == par_d->sub_d[i_w].xip) &&
              !strcmp(cos_c, par_d->sub_d[i_w].cos_c) ) 
         {

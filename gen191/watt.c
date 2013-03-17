@@ -5,6 +5,7 @@
 #include "all.h"
 #include "pit.h"
 
+
 /* declarations
 */
   /* tier 1
@@ -127,19 +128,14 @@
 */
   static u2_ho_driver
     _watt_drivers_0[],
-    _watt_drivers_1[],
-    _watt_drivers_2[],
-    _watt_drivers_3[],
-    _watt_drivers_4[],
-    _watt_drivers_5[],
-    _watt_drivers_6[];
+    _watt_drivers_1[];
 
   u2_ho_driver
   j2_da(Pt0) = { j2_sa(Pt0), 0, _watt_drivers_0, 0, u2_none };
 
   static u2_ho_driver
   _watt_drivers_0[] = {
-    { j2_sb(Pt0, a), 0, _watt_drivers_1, 0, u2_none },
+    { j2_sb(Pt0, hoon), 0, _watt_drivers_1, 0, u2_none },
     { }
   };
 
@@ -155,12 +151,6 @@
     { j2_sb(Pt1, mod), j2_mbj(Pt1, mod), 0, 0, u2_none },
     { j2_sb(Pt1, mul), j2_mbj(Pt1, mul), 0, 0, u2_none },
     { j2_sb(Pt1, sub), j2_mbj(Pt1, sub), 0, 0, u2_none },
-    { j2_sb(Pt1, b), 0, _watt_drivers_2, 0, u2_none },
-    { }
-  };
-
-  static u2_ho_driver 
-  _watt_drivers_2[] = {
     { j2_sb(Pt2, bind), j2_mbj(Pt2, bind), 0, 0, u2_none },
     { j2_sb(Pt2, clap), j2_mbj(Pt2, clap), 0, 0, u2_none },
     { j2_sb(Pt2, drop), j2_mbj(Pt2, drop), 0, 0, u2_none },
@@ -177,12 +167,6 @@
     { j2_sb(Pt2, snag), j2_mbj(Pt2, snag), 0, 0, u2_none },
     { j2_sb(Pt2, turn), j2_mbj(Pt2, turn), 0, 0, u2_none },
     { j2_sb(Pt2, weld), j2_mbj(Pt2, weld), 0, 0, u2_none },
-    { j2_sb(Pt2, c), 0, _watt_drivers_3, 0, u2_none },
-    { }
-  };
-
-  static u2_ho_driver
-  _watt_drivers_3[] = {
     { j2_sb(Pt3, bex), j2_mbj(Pt3, bex), 0, 0, u2_none },
     { j2_sb(Pt3, can), j2_mbj(Pt3, can), 0, 0, u2_none },
     { j2_sb(Pt3, cap), j2_mbj(Pt3, cap), 0, 0, u2_none },
@@ -204,20 +188,8 @@
     { j2_sb(Pt3, rip), j2_mbj(Pt3, rip), 0, 0, u2_none },
     { j2_sb(Pt3, rsh), j2_mbj(Pt3, rsh), 0, 0, u2_none },
     { j2_sb(Pt3, vor), j2_mbj(Pt3, vor), 0, 0, u2_none },
-    { j2_sb(Pt3, d), 0, _watt_drivers_4, 0, u2_none },
-    { }
-  };
-
-  static u2_ho_driver
-  _watt_drivers_4[] = {
     { j2_sb(Pt4, in), 0, j2_mbd(Pt4, in), 0, u2_none },
     { j2_sb(Pt4, by), 0, j2_mbd(Pt4, by), 0, u2_none },
-    { j2_sb(Pt4, e), 0, _watt_drivers_5, 0, u2_none },
-    { }
-  };
-
-  static u2_ho_driver
-  _watt_drivers_5[] = {
     { j2_sb(Pt5, bend), 0, j2_mbd(Pt5, bend), 0, u2_none },
     { j2_sb(Pt5, cold), 0, j2_mbd(Pt5, cold), 0, u2_none },
     { j2_sb(Pt5, comp), 0, j2_mbd(Pt5, comp), 0, u2_none },
@@ -242,12 +214,6 @@
     { j2_sb(Pt5, stew), 0, j2_mbd(Pt5, stew), 0, u2_none },
     { j2_sb(Pt5, stir), 0, j2_mbd(Pt5, stir), 0, u2_none },
     { j2_sb(Pt5, trip), j2_mbj(Pt5, trip), 0, 0, u2_none },
-    { j2_sb(Pt5, f), 0, _watt_drivers_6, 0, u2_none },
-    { }
-  };
-
-  static u2_ho_driver
-  _watt_drivers_6[] = {
     { j2_sb(Pt6, cell), j2_mbj(Pt6, cell), 0, 0, u2_none },
     { j2_sb(Pt6, comb), j2_mbj(Pt6, comb), 0, 0, u2_none },
     { j2_sb(Pt6, cons), j2_mbj(Pt6, cons), 0, 0, u2_none },
@@ -262,9 +228,6 @@
     { j2_sb(Pt6, fork), j2_mbj(Pt6, fork), 0, 0, u2_none },
     { j2_sb(Pt6, hike), j2_mbj(Pt6, hike), 0, 0, u2_none },
     { j2_sb(Pt6, look), j2_mbj(Pt6, look), 0, 0, u2_none },
-//    { j2_sb(Pt6, ream), j2_mbj(Pt6, ream), 0, 0, u2_none },
-//    { j2_sb(Pt6, vest), j2_mbj(Pt6, vest), 0, 0, u2_none },
-
     { j2_sb(Pt6, ap), j2_mbj(Pt6, ap), j2_mbd(Pt6, ap), 0, u2_none },
     { j2_sb(Pt6, ut), j2_mbj(Pt6, ut), j2_mbd(Pt6, ut), 0, u2_none },
     { }

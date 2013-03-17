@@ -35,7 +35,7 @@
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       u2_ho_driver *HostDriverBase[] = {
-        &j2_da(k_191),
+        &j2_k_191_d,
         &j2_da(k_192),
         &j2_da(k_193),
         &j2_da(k_194),
@@ -319,6 +319,7 @@ main(c3_i   argc,
       }
     }
   }
+
 
   if ( 0 == u2_Host.ver_e[kno_w].ken ) {
     fprintf(stderr, "no command line in transitional mode\n");

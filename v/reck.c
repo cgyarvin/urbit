@@ -402,19 +402,9 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     }
   } else {
     rec_u->ken = ken;
-    printf("loaded %d\n", kno_w);
     rec_u->roc = u2_cn_nock(0, u2k(ken));
-    printf("engine for %d\n", kno_w);
-
-    {
-      u2_noun foo;
-
-      foo = u2_cn_nock('7', u2k(ken));
-      u2_err(u2_Wire, "foo", foo);
-    }
 
     rec_u->syd = u2_reck_wish(rec_u, "seed");
-    printf("seed for %d\n", kno_w);
     rec_u->toy.rain = u2_reck_wish(rec_u, "rain");
     rec_u->toy.ream = u2_reck_wish(rec_u, "ream");
     rec_u->toy.slay = u2_reck_wish(rec_u, "slay");
