@@ -440,7 +440,8 @@ u2_ve_start(c3_w kfo_w, c3_w kto_w)
       u2_Host.kno_w = kto_w;
       c3_assert(0 != u2_wire_kit_r(u2_Wire));
       
-      if ( u2_Host.kno_w > 191 ) {
+      // if ( u2_Host.kno_w > 191 ) {
+      if ( 1 ) {
         u2_ve_full();
       } else {
         u2_ve_base();
