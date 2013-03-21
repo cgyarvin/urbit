@@ -7221,9 +7221,17 @@
                             ==                          ::
                         :-  p=*(list move)              ::  actions
                         q=*vane                         ::  consequence
+              ++  come                                  ::  load state, old
+                        |=  old=vase                    ::
+                        *vane                           ::
               ++  doze                                  ::  next wakeup
                         |=  hen=hose                    ::  channel
                         *(unit ,@da)                    ::  alarm if any
+              ++  flee  *vase                           ::  save state, new
+              ++  keep                                  ::  load state, new
+                        |=  old=vase                    ::
+                        *vane                           ::
+              ++  raze  *vane                           ::  erase all state
               ++  scry                                  ::  inspect
                         |=  $:  our=flag                ::  observer
                                 ren=@tas                ::  mode
@@ -7232,6 +7240,7 @@
                                 tyl=path                ::  location
                             ==                          ::
                         *(unit)                         ::  record
+              ++  stay  *vase                           ::  save state, new
               --                                        ::
 ++  wand  (list ,[p=mark q=acro])                       ::  mace in action
 ++  what                                                ::  logical identity
@@ -9193,6 +9202,11 @@
         (knap whu hen fav)
       [duy ..^$]
     ::
+    ++  come
+      |=  old=vase
+      ^-  vane
+      ..^$
+    ::
     ++  doze
       |=  hen=hose
       =|  doz=(unit ,@da)
@@ -9208,6 +9222,16 @@
       =+  bah=q.n.wab.yem
       (hunt doz (~(doze pe sea.bah) wid.foy.bah))
     ::
+    ++  flee  *vase
+    ++  keep
+      |=  new=vase
+      ^-  vane
+      ..^$
+    ::
+    ++  raze  
+      ^-  vane
+      ..$(fox *fort)
+    ::
     ++  scry
       |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
       ^-  (unit)
@@ -9220,6 +9244,8 @@
         ?.  =(now q.p.lot)  ~
         (temp our his tyl)
       ==
+    ::
+    ++  stay  *vase
     --
   |%
   ++  clop
@@ -10030,10 +10056,25 @@
     :-  p.yub
     ..^$(deb (~(put by deb) u.whu q.yub))
   ::
+  ++  come
+    |=  old=vase
+    ^-  vane
+    ..^$
+  :: 
   ++  doze
     |=  hen=hose
     ^-  (unit ,@da)
     ~
+  ::
+  ++  flee  *vase
+  ++  keep
+    |=  old=vase
+    ^-  vane
+    ..^$
+  ::
+  ++  raze  
+    ^-  vane
+    ..$(deb ~)
   ::
   ++  scry
     |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
@@ -10043,6 +10084,8 @@
     =+  beg=(~(get by deb) our)
     ?~  beg  ~
     [~ prot:(u.beg now eny |=(* *(unit)))]
+  ::
+  ++  stay  *vase
   --
   :::::::::::::::::::::::::::::::::::::::::::::::::::::   ::
 ::::              chapter 4c, revision control          ::::
@@ -10125,10 +10168,26 @@
       ==
     ==
   ::
+  ++  come
+    |=  old=vase
+    ^-  vane
+    ..^$
+  ::
   ++  doze
     |=  hen=hose
     ^-  (unit ,@da)
     ~
+  ::
+  ++  flee  *vase
+  ++  keep
+    |=  new=vase
+    ^-  vane
+    ..^$
+  ::
+  ++  raze
+    ^-  vane
+    ..$(rof *roof)
+  ::
   ++  scry                                              ::  inspect
     |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
     ^-  (unit)
@@ -10186,6 +10245,8 @@
           ==
       %z  [~ rad]
     ==
+  ::
+  ++  stay  *vase
   --
   :::::::::::::::::::::::::::::::::::::::::::::::::::::   ::
 ::::              chapter 4d, console                   ::::
@@ -10558,15 +10619,32 @@
       ..^$(wib ?.(wip (~(put by wib) hen yar) (~(del by wib) hen)))
     --
   ::
+  ++  come
+    |=  old=vase
+    ^-  vane
+    ..^$
+  ::
   ++  doze
     |=  hen=hose
     ^-  (unit ,@da)
     ~
   ::
+  ++  flee  *vase
+  ++  keep
+    |=  new=vase
+    ^-  vane
+    ..^$
+  ::
+  ++  raze  
+    ^-  vane
+    ..$(wib ~)
+  ::
   ++  scry
     |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
     ^-  (unit)
     ~
+  ::
+  ++  stay  *vase
   --
   :::::::::::::::::::::::::::::::::::::::::::::::::::::   ::
 ::::              chapter 4e, HTTP                      ::::
@@ -10626,15 +10704,32 @@
       ==
     ==
   ::
+  ++  come
+    |=  old=vase
+    ^-  vane
+    ..^$
+  ::
   ++  doze
     |=  hen=hose
     ^-  (unit ,@da)
     ~
   ::
+  ++  flee  *vase
+  ++  keep
+    |=  new=vase
+    ^-  vane
+    ..^$
+  ::
+  ++  raze  
+    ^-  vane
+    ..$(seh ~)
+  ::
   ++  scry
     |=  [our=flag ren=@tas who=flag lot=coin tyl=path]
     ^-  (unit)
     ~
+  ::
+  ++  stay  *vase
   --
 --
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
