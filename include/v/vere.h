@@ -552,10 +552,10 @@
         u2_noun
         u2_reck_peek(u2_reck* rec_u, u2_noun our, u2_noun hap);
 
-      /* u2_reck_keep(): measure timer.
+      /* u2_reck_wait(): measure timer.
       */
         u2_noun 
-        u2_reck_keep(u2_reck* rec_u, u2_noun hap);
+        u2_reck_wait(u2_reck* rec_u, u2_noun hap);
 
       /* u2_reck_poke(): insert and apply an input ovum (protected).
       */

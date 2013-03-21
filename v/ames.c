@@ -196,7 +196,7 @@ u2_ames_io_poll(u2_reck*        rec_u,
   ev_io_set(&sam_u->wax_u, sam_u->wax_u.fd, ver_i);
 
   {
-    u2_noun wen = u2_reck_keep(rec_u, u2nt(c3__gold, c3__ames, u2_nul));
+    u2_noun wen = u2_reck_wait(rec_u, u2nt(c3__gold, c3__ames, u2_nul));
     
     if ( (u2_nul != wen) && 
          (u2_yes == u2du(wen)) &&

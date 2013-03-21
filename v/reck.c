@@ -21,23 +21,12 @@
 #include "f/coal.h"
 #include "v/vere.h"
 
-/* _reck_nock_keep(): call keep through hardcoded interface.
-*/
-static u2_noun
-_reck_nock_keep(u2_reck* rec_u, u2_noun hap)
-{
-  u2_noun fun = u2_cn_nock(u2k(rec_u->roc), u2k(u2_cx_at(4, rec_u->roc)));
-  u2_noun sam = u2nc(u2k(rec_u->now), hap);
-
-  return u2_cn_mung(fun, sam);
-}
-
 /* _reck_nock_poke(): call poke through hardcoded interface.
 */
 static u2_noun
 _reck_nock_poke(u2_reck* rec_u, u2_noun ovo)
 {
-  u2_noun fun = u2_cn_nock(u2k(rec_u->roc), u2k(u2_cx_at(22, rec_u->roc)));
+  u2_noun fun = u2_cn_nock(u2k(rec_u->roc), u2k(u2_cx_at(42, rec_u->roc)));
   u2_noun sam = u2nc(u2k(rec_u->now), ovo);
 
   return u2_cn_mung(fun, sam);
@@ -48,8 +37,19 @@ _reck_nock_poke(u2_reck* rec_u, u2_noun ovo)
 static u2_noun
 _reck_nock_peek(u2_reck* rec_u, u2_noun our, u2_noun hap)
 {
-  u2_noun fun = u2_cn_nock(u2k(rec_u->roc), u2k(u2_cx_at(23, rec_u->roc)));
+  u2_noun fun = u2_cn_nock(u2k(rec_u->roc), u2k(u2_cx_at(350, rec_u->roc)));
   u2_noun sam = u2nt(our, u2k(rec_u->now), hap);
+
+  return u2_cn_mung(fun, sam);
+}
+
+/* _reck_nock_wait(): call wait through hardcoded interface.
+*/
+static u2_noun
+_reck_nock_wait(u2_reck* rec_u, u2_noun hap)
+{
+  u2_noun fun = u2_cn_nock(u2k(rec_u->roc), u2k(u2_cx_at(20, rec_u->roc)));
+  u2_noun sam = u2nc(u2k(rec_u->now), hap);
 
   return u2_cn_mung(fun, sam);
 }
@@ -59,7 +59,7 @@ _reck_nock_peek(u2_reck* rec_u, u2_noun our, u2_noun hap)
 static u2_noun
 _reck_nock_wish(u2_reck* rec_u, u2_noun txt)
 {
-  u2_noun fun = u2_cn_nock(u2k(rec_u->roc), u2k(u2_cx_at(10, rec_u->roc)));
+  u2_noun fun = u2_cn_nock(u2k(rec_u->roc), u2k(u2_cx_at(86, rec_u->roc)));
 
   return u2_cn_mung(fun, txt);
 }
@@ -305,12 +305,12 @@ u2_reck_peek(u2_reck* rec_u, u2_noun our, u2_noun hap)
   return _reck_nock_peek(rec_u, our, hap);
 }
 
-/* u2_reck_keep(): measure timer.
+/* u2_reck_wait(): measure timer.
 */
 u2_noun 
-u2_reck_keep(u2_reck* rec_u, u2_noun hap)
+u2_reck_wait(u2_reck* rec_u, u2_noun hap)
 {
-  return _reck_nock_keep(rec_u, hap);
+  return _reck_nock_wait(rec_u, hap);
 }
 
 /* u2_reck_init(): load the reck engine, from kernel.

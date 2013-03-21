@@ -16,6 +16,7 @@
 #include <curses.h>
 #include <termios.h>
 #include <term.h>
+#include <errno.h>
 
 #include "all.h"
 #include "f/coal.h"
@@ -56,7 +57,7 @@ u2_walk_safe(c3_c* pas_c)
   c3_y*       pad_y;
 
   if ( (fid_i < 0) || (fstat(fid_i, &buf_b) < 0) ) {
-    // perror(pas_c);
+    // uL(fprintf(uH, "%s: %s\n", pas_c, strerror(errno)));
     return 0;
   }
   fln_w = buf_b.st_size;
@@ -88,7 +89,7 @@ u2_walk_load(c3_c* pas_c)
   c3_y*       pad_y;
 
   if ( (fid_i < 0) || (fstat(fid_i, &buf_b) < 0) ) {
-    perror(pas_c);
+    uL(fprintf(uH, "%s: %s\n", pas_c, strerror(errno)));
     return u2_cm_bail(c3__fail);
   }
   fln_w = buf_b.st_size;
@@ -119,7 +120,7 @@ u2_walk_save(c3_c* pas_c, u2_noun tim, u2_atom pad)
   c3_y* pad_y;
 
   if ( fid_i < 0 ) {
-    perror(pas_c);
+    uL(fprintf(uH, "%s: %s\n", pas_c, strerror(errno)));
     u2_cm_bail(c3__fail);
   }
 
@@ -133,7 +134,7 @@ u2_walk_save(c3_c* pas_c, u2_noun tim, u2_atom pad)
   free(pad_y);
 
   if ( rit_w != fln_w ) {
-    perror(pas_c);
+    uL(fprintf(uH, "%s: %s\n", pas_c, strerror(errno)));
     u2_cm_bail(c3__fail);
   }
 
@@ -163,7 +164,7 @@ _walk_in(u2_reck* rec_u, const c3_c* dir_c, c3_w len_w)
     struct dirent* out_n;
 
     if ( readdir_r(dir_d, &ent_n, &out_n) != 0 ) {
-      perror(dir_c);
+      uL(fprintf(uH, "%s: %s\n", dir_c, strerror(errno)));
       break;
     } 
     else if ( !out_n ) {

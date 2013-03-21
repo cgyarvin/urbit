@@ -1,4 +1,4 @@
-!:
+::
 ::              Hoon/Arvo stage 191 (reflexive).  
 ::              This file is in the public domain.
 ::
@@ -140,7 +140,7 @@
 ::    syntax, is also mostly undocumented.  We're sorry.
 ::
 ::    The kernel file is divided into volumes, chapters, and
-::    sections.  Volume 1 defines the data structures used in
+::    sections.  First, Volume 1 defines the data structures used in
 ::    Volume 2.  Volume 2 is the standard library from basic
 ::    arithmetic up through Hoon compilation.  
 ::
@@ -162,14 +162,14 @@
   =~                                                    ::  volume stack
 %191                                                    ::  version constant
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::::::  ::::::    Volume 0, version stub                ::::::
+::::::  ::::::    volume 0, version stub                ::::::
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ~%  %k.191  ~  ~                                        ::
 |%                                                      ::
 ++  stub  191                                           ::  version stub
 --                                                      ::
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::::::  ::::::    Volume 1, Hoon models                 ::::::
+::::::  ::::::    volume 1, Hoon models                 ::::::
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 |%                                                      ::
 ++  axis  ,@                                            ::  tree address
@@ -480,7 +480,7 @@
          $|(~ [n=a l=(set a) r=(set a)])                ::
 --                                                      ::
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::::::  ::::::    Volume 2, Hoon libraries and compiler ::::::
+::::::  ::::::    volume 2, Hoon libraries and compiler ::::::
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ~%    %hoon
     +>
@@ -492,7 +492,7 @@
   ==
 |%
   :::::::::::::::::::::::::::::::::::::::::::::::::::::   ::
-::::              Chapter 2a, basic unsigned math       ::::
+::::              chapter 2a, basic unsigned math       ::::
 ::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ++  add                                                 ::  add
   ~/  %add
@@ -501,6 +501,17 @@
   ?:  =(0 a)
     b
   $(a (dec a), b +(b))
+::
+++  cap                                                 ::  tree head
+  ~/  %cap
+  |=  a=@
+  ^-  ?(2 3)
+  ?-    a
+      2       %2
+      3       %3
+      ?(0 1)  !!
+      *       $(a (div a 2))
+  ==
 ::
 ++  dec                                                 ::  decrement
   ~/  %dec
@@ -549,6 +560,17 @@
   ^-  ?
   &(!=(a b) |-(|(=(0 a) &(!=(0 b) $(a (dec a), b (dec b))))))
 ::
+++  mas                                                 ::  tree body
+  ~/  %mas
+  |=  a=@
+  ^-  @
+  ?-  a
+    1   !!
+    2   1
+    3   1
+    *   (add (mod a 2) (mul $(a (div a 2)) 2))
+  ==
+::
 ++  max                                                 ::  maximum
   ~/  %max
   |=  [a=@ b=@]
@@ -582,6 +604,17 @@
     c
   $(a (dec a), c (add b c))
 ::
+++  peg                                                 ::  tree connect
+  ~/  %peg
+  |=  [a=@ b=@]
+  ^-  @
+  ?-  b
+    1   a
+    2   (mul a 2)
+    3   +((mul a 2))
+    *   (add (mod b 2) (mul $(b (div b 2)) 2))
+  ==
+::
 ++  sub                                                 ::  subtract
   ~/  %sub
   |=  [a=@ b=@]
@@ -591,7 +624,7 @@
     a
   $(a (dec a), b (dec b))
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::  ::
-::::              Chapter 2b, basic containers          ::::
+::::              chapter 2b, basic containers          ::::
 ::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                Section 2bA, units                    ::
 ::
@@ -777,7 +810,7 @@
     b
   [i.a $(a t.a)]
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2bC, gears                    ::
+::                section 2bC, gears                    ::
 ::
 ++  from                                                ::  range
   |=  [a=@ b=@]
@@ -839,44 +872,9 @@
     ~
   [i=i.a t=^?(..$(a t.a))]
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::  ::
-::::              Chapter 2c, simple noun surgery       ::::
-::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2cA, axes                     ::
-::
-++  cap                                                 ::  head
-  ~/  %cap
-  |=  a=axis
-  ^-  ?(2 3)
-  ?-    a
-      2       %2
-      3       %3
-      ?(0 1)  !!
-      *       $(a (div a 2))
-  ==
-::
-++  mas                                                 ::  body
-  ~/  %mas
-  |=  a=axis
-  ^-  axis
-  ?-  a
-    1   !!
-    2   1
-    3   1
-    *   (add (mod a 2) (mul $(a (div a 2)) 2))
-  ==
-::
-++  peg                                                 ::  connect
-  ~/  %peg
-  |=  [a=axis b=axis]
-  ^-  axis
-  ?-  b
-    1   a
-    2   (mul a 2)
-    3   +((mul a 2))
-    *   (add (mod b 2) (mul $(b (div b 2)) 2))
-  ==
+::::              chapter 2c, simple noun surgery       ::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2cB, bit surgery              ::
+::                section 2cA, bit surgery              ::
 ::
 ++  bex                                                 ::  binary exponent
   ~/  %bex
@@ -955,7 +953,7 @@
   |=  [a=bloq b=@ c=@]
   (div c (bex (mul (bex a) b)))
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2cC, bit logic                ::
+::                section 2cB, bit logic                ::
 ::
 ++  con                                                 ::  binary or
   ~/  %con
@@ -1000,7 +998,7 @@
     d   (add d (lsh 0 c =((end 0 1 a) (end 0 1 b))))
   ==
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2cD, noun orders              ::
+::                section 2cC, noun orders              ::
 ::
 ++  aor                                                 ::  a-order
   ~/  %aor
@@ -1070,7 +1068,7 @@
     (dor a b)
   (lth c d)
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2cE, insecure hashing         ::
+::                section 2cD, insecure hashing         ::
 ::
 ++  fnv  |=(a=@ (end 5 1 (mul 16.777.619 a)))           ::  FNV scrambler
 ++  mug                                                 ::  31bit nonzero FNV1a
@@ -1094,7 +1092,7 @@
     ^$(b +(b))
   $(c (fnv (mix c (cut 3 [d 1] a))), d +(d))
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2cF, phonetic base            ::
+::                section 2cE, phonetic base            ::
 ::
 ++  po
   =+  :-  ^=  sis
@@ -1144,7 +1142,7 @@
   ++  tos  |=(a=@ ?>((lth a 256) (cut 3 [(mul 3 a) 3] sis)))
   --
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2cG, signed and modular ints  ::
+::                section 2cF, signed and modular ints  ::
 ::
 ++  si                                                  ::  signed integer
   |%
@@ -1204,7 +1202,7 @@
   ++  sit  |=(b=@ (end a 1 b))
   --
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2cH, floating point           ::
+::                section 2cG, floating point           ::
 ::
 ++  rlyd  |=(red=@rd ~|(%real-nyet ^-([s=? h=@ f=@] !!)))
 ++  rlyh  |=(reh=@rh ~|(%real-nyet ^-([s=? h=@ f=@] !!)))
@@ -1215,7 +1213,7 @@
 ++  rylq  |=([syn=? hol=@ fac=@] ~|(%real-nyet ^-(@rq !!)))
 ++  ryls  |=([syn=? hol=@ fac=@] ~|(%real-nyet ^-(@rs !!)))
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::: 
-::                Section 2cI, urbit time               ::
+::                section 2cH, urbit time               ::
 ::
 ++  year
   |=  det=date
@@ -1337,7 +1335,7 @@
       ++  yer  31.536.000             ::  (mul 365 day)
   --
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2cJ, almost macros            ::
+::                section 2cI, almost macros            ::
 ::
 ++  hard
   |*  han=_|+(* *)
@@ -1352,9 +1350,9 @@
   =+  gol=(han fud)
   ?.(=(gol fud) ~ [~ gol])
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::  ::
-::::              Chapter 2d, containers                ::::
+::::              chapter 2d, containers                ::::
 ::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2dA, sets                     ::
+::                section 2dA, sets                     ::
 ::
 ++  apt                                                 ::  set invariant
   |=  a=(tree)
@@ -1399,6 +1397,16 @@
     ?:  (vor n.l.a n.r.a)
       [n.l.a l.l.a $(l.a r.l.a)]
     [n.r.a $(r.a l.r.a) r.r.a]
+  ::
+  ++  dig
+    |=  b=*
+    =+  c=1
+    |-  ^-  (unit ,@)
+    ?~  a  ~
+    ?:  =(b n.a)  [~ u=(peg c 2)]
+    ?:  (gor b n.a)
+      $(a l.a, c (peg c 6))
+    $(a r.a, c (peg c 7))
   ::
   +-  gas
     ~/  %gas
@@ -1454,7 +1462,7 @@
     ?~(a 0 +((add $(a l.a) $(a r.a))))
   --
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2dB, maps                     ::
+::                section 2dB, maps                     ::
 ::
 ++  ept                                                 ::  map invariant
   |=  a=(tree ,[p=* q=*])
@@ -1499,6 +1507,16 @@
     ?:  (vor p.n.l.a p.n.r.a)
       [n.l.a l.l.a $(l.a r.l.a)]
     [n.r.a $(r.a l.r.a) r.r.a]
+  ::
+  ++  dig
+    |=  b=*
+    =+  c=1
+    |-  ^-  (unit ,@)
+    ?~  a  ~
+    ?:  =(b p.n.a)  [~ u=(peg c 2)]
+    ?:  (gor b p.n.a)
+      $(a l.a, c (peg c 6))
+    $(a r.a, c (peg c 7))
   ::
   +-  gas
     ~/  %gas
@@ -1568,7 +1586,7 @@
     ?~(a 0 +((add $(a l.a) $(a r.a))))
   --
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2dC, queues                   ::
+::                section 2dC, queues                   ::
 ::
 ++  to                                                  ::  queue engine
   |_  a=(qeu)
@@ -1616,7 +1634,7 @@
     $(a r.a, b [n.a $(a l.a)])
   --
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2dD, casual containers        ::
+::                section 2dD, casual containers        ::
 ::
 ++  mo                                                  ::  make a map
   |*  a=(list)
@@ -1631,9 +1649,9 @@
   =+  b=*(set _?>(?=(^ a) i.a))
   (~(gas in b) a)
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::  ::
-::::              Chapter 2e, miscellaneous libs        ::::
+::::              chapter 2e, miscellaneous libs        ::::
 ::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2eA, packing                  ::
+::                section 2eA, packing                  ::
 ::
 ++  cue                                                 ::  unpack
   ~/  %cue
@@ -1701,7 +1719,7 @@
   =+  e=(add (bex (dec c)) (cut 0 [d (dec c)] b))
   [(add (add c c) e) (cut 0 [(add d (dec c)) e] b)]
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2eB, parsing (tracing)        ::
+::                section 2eB, parsing (tracing)        ::
 ::
 ++  last  |=  [zyc=hair naz=hair]
           ^-  hair
@@ -1713,7 +1731,7 @@
           ^-  hair
           ?:(=(10 weq) [+(p.naz) 1] [p.naz +(q.naz)])
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2eC, parsing (custom rules)   ::
+::                section 2eC, parsing (custom rules)   ::
 ::
 ++  cold
   ~/  %cold
@@ -1929,7 +1947,7 @@
     wag
   [p.wag [~ [p.u.q.vex p.u.q.wag] q.u.q.wag]]
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2eD, parsing (combinators)    ::
+::                section 2eD, parsing (combinators)    ::
 ::
 ++  bend
   ~/  %bend
@@ -2002,7 +2020,7 @@
   =+  yit=(sab q.u.q.vex)
   [p=(last p.vex p.yit) q=?@(q.yit ~ [~ u=[p=p.u.q.vex q=q.u.q.yit]])]
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2eE, parsing (composers)      ::
+::                section 2eE, parsing (composers)      ::
 ::
 ++  bass
   |*  [wuc=@ tyd=_rule]
@@ -2044,7 +2062,7 @@
   |*  fel=_rule
   (stir `(list _(wonk *fel))`~ |*([a=* b=*] [a b]) fel)
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2eF, parsing (ascii)          ::
+::                section 2eF, parsing (ascii)          ::
 ::
 ++  ace  (just ' ')
 ++  bar  (just '|')
@@ -2080,7 +2098,7 @@
 ++  wut  (just '?')
 ++  zap  (just '!')
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2eG, parsing (whitespace)     ::
+::                section 2eG, parsing (whitespace)     ::
 ::
 ++  dog  ;~(plug dot gay)
 ++  doh  ;~(plug ;~(plug hep hep) gay)
@@ -2091,7 +2109,7 @@
 ++  gay  ;~(pose gap (easy ~))
 ++  vul  (cold ~ ;~(plug col col (star (shim 32 126)) (just ^-(@ 10))))
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2eH, parsing (idioms)         ::
+::                section 2eH, parsing (idioms)         ::
 ::
 ++  alf  ;~(pose low hig)
 ++  aln  ;~(pose low hig nud)
@@ -2143,7 +2161,7 @@
     (cold 63 (just '+'))
   ==
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2eI, parsing (external)       ::
+::                section 2eI, parsing (external)       ::
 ::
 ++  rash  |*([naf=@ sab=_rule] (scan (trip naf) sab))
 ++  rush  |*  [naf=@ sab=_rule]
@@ -2156,7 +2174,7 @@
             ~|('scan-stop' !!)
           p.u.q.vex
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2eJ, formatting (basic text)  ::
+::                section 2eJ, formatting (basic text)  ::
 ::
 ++  cass                                                ::  case-insensitive
   |=  vib=tape
@@ -2382,7 +2400,7 @@
     '~'  ['~' '~' d]
   ==
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2eK, formatting (layout)      ::
+::                section 2eK, formatting (layout)      ::
 ::
 ++  re
   |_  tac=tank
@@ -2476,7 +2494,7 @@
     --
   --
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2eL, formatting (path)        ::
+::                section 2eL, formatting (path)        ::
 ::
 ++  ab 
   |%
@@ -2894,7 +2912,7 @@
   |-  ^-  (list tank)
   (turn bon |=(a=@ [%leaf (rip 3 a)]))
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2eM, pseudo-cryptography      ::
+::                section 2eM, pseudo-cryptography      ::
 ::
 ++  un                                                  ::  =(x (wred (wren x)))
   |%
@@ -3002,7 +3020,7 @@
     (cut 3 [a 1] b)
   --
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2eN, virtualization           ::
+::                section 2eN, virtualization           ::
 ::
 ++  mack
   |=  [sub=* fol=*]
@@ -3134,7 +3152,7 @@
     [%2 ~]
   (mink [[-.gat [sam +>.gat]] -.gat] sky)
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2eY, SHA-256 (move me)        ::
+::                section 2eY, SHA-256 (move me)        ::
 ::
 ++  shad  |=(ruz=@ (shax (shax ruz)))                   ::  double sha-256
 ++  shaf                                                ::  half sha-256
@@ -3267,7 +3285,7 @@
     [[256 d] $(c d, b (sub b 256))]
   --
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2eZ, OLD rendering (kill me)  ::
+::                section 2eZ, OLD rendering (kill me)  ::
 ::
 ++  show                            ::  XX deprecated, use type
   |=  vem=*
@@ -3435,9 +3453,9 @@
   ++  rux  `tape`['0' 'x' (rum 16 ~ |=(b=@ (add b ?:((lth b 10) 48 87))))]
   --
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::  ::
-::::              Chapter 2f, Hoon proper               ::::
+::::              chapter 2f, Hoon proper               ::::
 ::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2fA, miscellaneous funs       ::
+::                section 2fA, miscellaneous funs       ::
 ::                                                      ::
 ++  cell
   ~/  %cell
@@ -3765,7 +3783,7 @@
   |=  [[tab=@ edg=@] tac=tank]  ^-  wall
   (~(win re tac) tab edg) 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2fB, macro expansion          ::
+::                section 2fB, macro expansion          ::
 ::
 ++  al 
   =+  [nag=`*`& gom=`axis`1]
@@ -4480,7 +4498,7 @@
     i.wig
   --
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2fC, compilation proper       ::
+::                section 2fC, compilation proper       ::
 ::
 ++  ut
   ~%    %ut
@@ -6136,7 +6154,7 @@
     ==
   --
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 2fD, grammar                  ::
+::                section 2fD, grammar                  ::
 ::
 ++  vang
   |=  [bug=? wer=path]
@@ -6763,11 +6781,11 @@
   (rash txt wide:vast)
 --
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::::::  ::::::    Volume 3, Arvo models and skeleton    ::::::
+::::::  ::::::    volume 3, Arvo models and skeleton    ::::::
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 |%
   :::::::::::::::::::::::::::::::::::::::::::::::::::::   ::
-::::              Chapter 3a, Arvo models               ::::
+::::              chapter 3a, Arvo models               ::::
 ::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ++  acro                                                ::  asym cryptosuite
           $_  ^?  |%                                    ::  opaque object
@@ -6925,6 +6943,7 @@
               [%pace p=@ud]                             ::  compute background
               [%pour p=path q=dram]                     ::  write directory
               [%pump ~]                                 ::  produce packets
+              [%rein p=term q=path]                     ::  reinstall kern/vane
               [%save p=path q=@]                        ::  write atomic file
               [%send p=lane q=@]                        ::  transmit packet
               [%ship p=@tas q=@tas]                     ::  label release
@@ -7040,6 +7059,7 @@
           ==                                            ::
 ++  lark                                                ::  parsed command
           $%  [%cd p=path]                              ::  change directory
+              [%do p=crow]                              ::  direct effect
               [%eh p=crow]                              ::  print and record
               [%go p=path q=cone r=crow]                ::  run application
               [%kl p=tick]                              ::  kill a process
@@ -7234,9 +7254,9 @@
               s=(map ,[p=flag q=rink] hist)             ::  history
           ==                                            ::
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::  ::
-::::              Chapter 3b, Arvo libraries            ::::
+::::              chapter 3b, Arvo libraries            ::::
 ::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 3bA, lite number theory       ::
+::                section 3bA, lite number theory       ::
 ::
 ++  egcd                                                ::  schneier's egcd
   |=  [a=@ b=@]
@@ -7373,7 +7393,7 @@
     [(mod c p.a) (mod c q.a)]
   --
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 3bB, cryptosuites             ::
+::                section 3bB, cryptosuites             ::
 ::
 ++  crya                                                ::  cryptosuite A (RSA)
   ^-  acro
@@ -7553,7 +7573,7 @@
     ~|(%test-fail-sign !!)
   msg
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 3bC, JSON and XML             ::
+::                section 3bC, JSON and XML             ::
 ::
 ++  moon                                                ::  mime type to text
   |=  myn=mime
@@ -7657,7 +7677,7 @@
   %+  weld  tam
   ?~(att bod [' ' (xmla att bod)])
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 3bC, JSON and XML             ::
+::                section 3bC, JSON and XML             ::
 ::
 ++  deft                                                ::  import url path
   |=  rax=(list ,@t)
@@ -7804,7 +7824,7 @@
       ==
   [pul *cred [p.req mah s.req]]
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 3bD, tree sync                ::
+::                section 3bD, tree sync                ::
 ::
 ++  cy
   =+  car=*arch
@@ -7930,7 +7950,7 @@
 ++  uzag                                              ::  reverse dual change
   |=(a=umaz ^-(umaz [q.a p.a]))
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                Section 3bE, Arvo core                ::
+::                section 3bE, Arvo core                ::
 ::
 ++  adit                                                ::  hose privilege
   |=  hen=hose
@@ -8023,17 +8043,17 @@
   --
 --
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::::::  ::::::    Volume 4, Arvo modules                ::::::
+::::::  ::::::    volume 4, Arvo modules                ::::::
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 |%
   :::::::::::::::::::::::::::::::::::::::::::::::::::::   ::
-::::              Chapter 4a, network and PKI           ::::
+::::              chapter 4a, network and PKI           ::::
 ::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ++  ames                                                ::  network and PKI
   ^-  vane
   =>  =~
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  ::                Section 4aA, identity logic         ::
+  ::              section 4aA, identity logic           ::
   ::
   |%
   ++  clan                                              ::  flag to rank
@@ -8287,7 +8307,7 @@
     ==
   --
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  ::                Section 4aB, packet format          ::
+  ::              section 4aB, packet format            ::
   ::
   |%
   ++  bite                                              ::  packet to cake
@@ -8329,7 +8349,7 @@
     (lsh 5 1 bod)
   --
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  ::                Section 4aC, PKI engine             ::
+  ::              section 4aC, PKI engine               ::
   ::
   |%
   ++  go                                                ::    go
@@ -8607,7 +8627,7 @@
     --                                                ::  --go
   --
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  ::                Section 4aD, congestion control     ::
+  ::              section 4aD, congestion control       ::
   ::
   |%
   ++  baby                                            ::  new flow
@@ -8628,7 +8648,7 @@
     $(rot (dec rot), wid.foy ?:(=(1 wid.foy) 1 (div wid.foy 2)))
   --
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  ::                Section 4aE, acknowledgments        ::
+  ::              section 4aE, acknowledgments          ::
   ::
   |%
   ++  hunt
@@ -8659,7 +8679,7 @@
   ++  toss  |=(ski=snow ^-(snow ski(q +(q.ski))))
   --
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  ::                Section 4aF, packet queue           ::
+  ::              section 4aF, packet queue             ::
   ::
   |%
   ++  pe                                                ::  packet queue
@@ -8770,7 +8790,7 @@
     --
   --
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  ::                Section 4aG, protocol engine        ::
+  ::              section 4aG, protocol engine          ::
   ::
   |%
   ++  am                                                ::    am
@@ -9158,7 +9178,7 @@
   --
   . ==
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  ::                Section 4aH, protocol vane          ::
+  ::              section 4aH, protocol vane            ::
   ::
   =|  $:  fox=fort                                      ::  kernel state
       ==                                                ::
@@ -9306,18 +9326,18 @@
     [~ `@ud`p.i.val.saf.u.gys]
   --
   :::::::::::::::::::::::::::::::::::::::::::::::::::::   ::
-::::              Chapter 4b, shell                     ::::
+::::              chapter 4b, shell                     ::::
 ::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ++  bede                                                ::  shell, processes
   ^-  vane
   =>  =~
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  ::                Section 4bA, shell models           ::
+  ::              section 4bA, shell models             ::
   ::
   |%
   ++  brad                                              ::  session/dynamic
     $:  who=flag                                        ::  identity
-        hit=[p=@ud q=(list tape)]                       ::  command history
+        hit=[p=@ud q=(list ,@t)]                        ::  command history
         sur=[p=@ud q=(qeu vase)]                        ::  result history
         hox=@ta                                         ::  identity text
         cwd=path                                        ::  working directory
@@ -9338,7 +9358,7 @@
         ^=  typ                                         ::  chestnut types
       $:  cof=type                                      ::  '*conf'
           gee=type                                      ::  '*gene'
-          liz=type                                      ::  '*(list ,@)'
+          liz=type                                      ::  '*(list ,@t)'
           pah=type                                      ::  '*path'
           noq=type                                      ::  '*note'
           tak=type                                      ::  '*task'
@@ -9348,7 +9368,7 @@
     ==                                                  ::
   --                                                    ::
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  ::                Section 4bB, session engine         ::
+  ::              section 4bB, session engine           ::
   ::
   |%
   ++  bard                                              ::  new session
@@ -9369,7 +9389,7 @@
       zim.gen  (vice '*(map ,@tas ,*)')
       cof.typ  (pal (vice '*conf'))
       gee.typ  (pal (vice '*gene'))
-      liz.typ  (pal (vice '*(list ,@)'))
+      liz.typ  (pal (vice '*(list ,@t)'))
       pah.typ  (pal (vice '*path'))
       noq.typ  (pal (vice '*note'))
       tak.typ  (pal (vice '*task'))
@@ -9516,6 +9536,10 @@
             ::
               ;~  pfix  ;~(plug (just 't') (just 'o') gap)
                 (stag %to (stag %p (most ace worc)))
+              ==
+            ::
+              ;~  pfix  ;~(plug (jest 'do') gap)
+                (stag %do (stag %l (most ace worc)))
               ==
             ::
               ;~  pfix  ;~(plug (just 'k') (just 'l') gap)
@@ -9753,6 +9777,18 @@
           %2  (emit %crud p.ton)
         ==
       ::
+      ++  huck                                          ::  direct card
+        |=  woc=crow
+        =+  yun=lube
+        =+  dst=!;(*type *(list card))
+        =+  heq=(~(mint ut p.yun) `type`-:!>(*(list card)) (doul:do woc))
+        =+  ton=(mock [q.yun q.heq] sky)
+        ?-  -.ton
+          %0  (emir ((hard (list card)) p.ton))
+          %1  (emit %crud (turn p.ton |=(a=* [%leaf (spud (path a))])))
+          %2  (emit %crud p.ton)
+        ==
+      ::
       ++  jerk                                          ::  deliver note
         |=  [pux=path nob=note]
         ^+  +>
@@ -9772,6 +9808,7 @@
         =+  hak=|=(a=* [[[%talk ((hard tank) a)] ~] ~ ~])
         ?-    -.kal
             %cd  +>.$(cwd p.kal)
+            %do  (huck p.kal)
             %eh  (haul (dost (mong [echo:do lube +.kal] sky) ergo hak))
             %go  (haul (dost (mong [fapp:do lube +.kal] sky) ergo fret))
             %kl  (envy /b/ [%kill p.kal])
@@ -9784,7 +9821,7 @@
       ++  mete                                          ::  deliver line
         |=  fet=tape
         ^+  +>
-        =>  .(p.hit +(p.hit), q.hit [fet q.hit])
+        =>  .(p.hit +(p.hit), q.hit [(rap 3 fet) q.hit])
         =+  zif=((full (ifix [gay gay] kral:lo)) [1 1] fet)
         ?^  q.zif 
           (loft p.u.q.zif)
@@ -9975,7 +10012,7 @@
   --
   . ==
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  ::                Section 4bC, shell vane             ::
+  ::              section 4bC, shell vane               ::
   ::
   =|  $:  deb=(map flag _*berg)                         ::  state by terminal
       ==                                                ::
@@ -10008,12 +10045,12 @@
     [~ prot:(u.beg now eny |=(* *(unit)))]
   --
   :::::::::::::::::::::::::::::::::::::::::::::::::::::   ::
-::::              Chapter 4c, revision control          ::::
+::::              chapter 4c, revision control          ::::
 ::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ++  cary                                                ::  filesystem
   ^-  vane
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  ::                Section 4cB, filesystem vane        ::
+  ::              section 4cA, filesystem vane          ::
   ::
   =|                                                    ::  instrument state
       $:  rof=roof                                      ::  revision tree
@@ -10151,7 +10188,7 @@
     ==
   --
   :::::::::::::::::::::::::::::::::::::::::::::::::::::   ::
-::::              Chapter 4d, console                   ::::
+::::              chapter 4d, console                   ::::
 ::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ++  dill                                                ::  terminal handling
   ^-  vane                                              ::  kernel instrument
@@ -10532,7 +10569,7 @@
     ~
   --
   :::::::::::::::::::::::::::::::::::::::::::::::::::::   ::
-::::              Chapter 4e, HTTP                      ::::
+::::              chapter 4e, HTTP                      ::::
 ::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ++  eyre                                                ::  http system
   ^-  vane                                              ::  kernel instrument
@@ -10612,11 +10649,17 @@
         e/eyre
     ==
 |%
-++  keep                                                ::  wakeup delay
-  |=  *  ^-  (unit ,@da)
-  =>  .(+< ((hard ,[now=@da hap=path]) +<))
-  (~(doos (is eny fan) now) hap)
 ::
+++  come                                                ::  install from old
+  |=  *
+  ^-  [p=(list ovum) q=_+>]
+  !!
+++  flee                                                ::  export as old
+  ^-  *
+  !!
+++  keep                                                ::  export as new
+  ^-  *
+  !!
 ++  peek                                                ::  external inspect
   |=  *
   ^-  (unit)
@@ -10634,11 +10677,21 @@
     (~(hurl (is eny fan) now) ovo)
   [zef +>.$]
 ::
+++  stay                                                ::  install from new
+  |=  * 
+  ^+  [p=(list ovum) q=+>]
+  !!
+::
 ++  wish                                                ::  external compute
   |=  *
   ^-  *
   =>  .(+< ((hard ,[txt=@]) +<))
   =+  gen=(ream txt)
   q:(slap `vase`!>(+>) (ream txt))
+::
+++  wait                                                ::  wakeup delay
+  |=  *  ^-  (unit ,@da)
+  =>  .(+< ((hard ,[now=@da hap=path]) +<))
+  (~(doos (is eny fan) now) hap)
 --
 . ==
