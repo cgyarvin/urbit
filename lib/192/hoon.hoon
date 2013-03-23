@@ -3489,7 +3489,7 @@
         [%weed *] 
       (home p.sec)
     ==
-  ++  clam  ^-(gene [%brts [%bcts %noun] (whip(gom 7) 6)])
+  ++  clam  ^-(gene [%brts [%bcts %noun] %sgls 0 (whip(gom 7) 6)])
   ++  whip
     |=  axe=axis
     =+  ^=  tun
