@@ -10765,12 +10765,22 @@
         e/eyre
     ==
 =<  |%
+    ++  come  |=(* (^come +<)) 
+    ++  load  |=(* (^load +<))
     ++  keep  |=(* (^keep +<))
     ++  peek  |=(* (^peek +<))
     ++  poke  |=(* =^(a +>+ (^poke +<) [a +>.$]))
     ++  wish  |=(* (^wish +<))
     --
 |%
+++  come
+  |=  *
+  ^+  +>
+  !!
+++  load
+  |=  *
+  ^+  +>
+  !!
 ++  peek                                                ::  external inspect
   |=  *
   ^-  (unit)

@@ -9,6 +9,14 @@
     ^-  *
     [8 [1 duc] [9 2 [[0 4] [[0 3] [0 11]]]]]
 =<  |%
+    ++  come
+      |=  *
+      ^+  +>
+      !!
+    ++  load
+      |=  *
+      ^+  +>
+      !!
     ++  keep                                            ::  wakeup delay
       |=  *  ^-  (unit ,@da)
       =>  .(+< ((hard ,[now=@da hap=path]) +<))
