@@ -731,6 +731,13 @@
     q.b
   $(a t.a, b b(q (b i.a q.b)))
 ::
+++  skid                                                ::  separate
+  |*  [a=(list) b=||(* ?)]
+  |-  ^+  [p=a q=a]
+  ?~  a  [~ ~]
+  =+  c=$(a t.a)
+  ?:((b i.a) [[i.a p.c] q.c] [p.c [i.a q.c]])
+::
 ++  skim                                                ::  only
   ~/  %skim
   |*  [a=(list) b=_|=(p=* .?(p))]
@@ -10756,7 +10763,7 @@
 ::::::  ::::::    Postface                              ::::::
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 =|  eny=@                                               ::  entropy
-=|  sac=(list ,*)                                       ::  old kernels
+=|  sag=(unit ,*)                                       ::  old engine
 =+  ^=  fan  ^-  (list ,[p=@tas q=vane])
     :~  a/ames
         b/bede
@@ -10765,49 +10772,71 @@
         e/eyre
     ==
 =<  |%
-    ++  come  |=(* (^come +<)) 
-    ++  load  |=(* (^load +<))
-    ++  keep  |=(* (^keep +<))
-    ++  peek  |=(* (^peek +<))
-    ++  poke  |=(* =^(a +>+ (^poke +<) [a +>.$]))
-    ++  wish  |=(* (^wish +<))
+    ++  come  |=(* (^come +<))                          ::  11
+    ++  load  |=(* (^load +<))                          ::  86
+    ++  keep  |=(* (^keep ((hard ,[@da path]) +<)))     ::  4
+    ++  peek  |=(* (^peek ((hard ,[@p @da path]) +<)))  ::  87
+    ++  poke                                                        
+      |=  * 
+      =>  .(+< ((hard ,[now=@da ovo=ovum]) +<))
+      =^  a  +>+  (^poke now ovo)
+      (hang now a +>.$)
+    ++  wish  |=(* (^wish ((hard ,@ta) +<)))            ::  20
     --
 |%
 ++  come
   |=  *
   ^+  +>
   !!
+::
+++  hang
+  |=  [now=@da ova=(list ovum) top=*]
+  |-  ^-  [p=(list ovum) q=*]
+  =+  out=(skid ova |=(a=ovum ?=(%rein -.q.a)))
+  :-  q.out
+  ?~  p.out  top
+  ?>  ?=([* ~] p.out)
+  ?+    -.q.i.p.out  !!
+      %rein 
+    ~|  %hang-rein
+    ~&  %hang-rein-make
+    =+  sky=(~(beck (is eny fan) now) ~)
+    =+  ken=(make ((hard ,@) (need (sky q.q.i.p.out))))
+    ~&  %hang-rein-engine
+    =+  eng=.*(0 ken)
+    ~&  %hang-rein-vanes
+    =+  fuy=(turn fan |=([p=@tas q=vane] [p stay:(q now eny sky)]))
+    ~&  %hang-rein-gate
+    =+  gat=.*([0 ?:(p.q.i.p.out 11 86)] ken)
+    =+  sam=[fuy ?:(p.q.i.p.out [~ top] sag)]
+    .*([-.gat [fuy +>.gat]] -.gat)
+  ==
+::
+++  keep                                                ::  wakeup delay
+  |=  [now=@da hap=path]
+  =>  .(+< ((hard ,[now=@da hap=path]) +<))
+  (~(doos (is eny fan) now) hap)
+::
 ++  load
   |=  *
   ^+  +>
   !!
+::
 ++  peek                                                ::  external inspect
-  |=  *
+  |=  [our=@p now=@da hap=path]
   ^-  (unit)
-  =>  .(+< ((hard ,[our=@p now=@da hap=path]) +<))
-  ::  ~&  [%zuse-peek hap]
   ?~  hap  ~
   ((~(beck (is eny fan) now) [~ our]) hap)
 ::
 ++  poke                                                ::  external apply
-  |=  *
+  |=  [now=@da ovo=ovum]
   ^-  [p=(list ovum) q=_+>]
-  =>  .(+< ((hard ,[now=@da ovo=ovum]) +<))
-  ::  ~&  [%zuse-poke ovo]
   =^  zef  fan
     (~(hurl (is eny fan) now) ovo)
   [zef +>.$]
 ::
-++  keep                                                ::  wakeup delay
-  |=  *  ^-  (unit ,@da)
-  =>  .(+< ((hard ,[now=@da hap=path]) +<))
-  (~(doos (is eny fan) now) hap)
-::
 ++  wish                                                ::  external compute
-  |=  *
-  ^-  *
-  =>  .(+< ((hard ,[txt=@]) +<))
-  =+  gen=(ream txt)
+  |=  txt=@
   q:(slap `vase`!>(+>) (ream txt))
 --
 . ==
