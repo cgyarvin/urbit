@@ -10773,14 +10773,20 @@
     ==
 =<  |%
     ++  come  |=(* (^come +<))                          ::  11
-    ++  load  |=(* (^load +<))                          ::  86
+    ++  load  |=  *                                     ::  86
+              ^+  +>
+              %=    +>
+                  +
+                %-  ^load
+                %-  (hard ,[@da @ (list ,[@tas vase]) (unit ,*)])
+                +<
+              ==
     ++  keep  |=(* (^keep ((hard ,[@da path]) +<)))     ::  4
     ++  peek  |=(* (^peek ((hard ,[@p @da path]) +<)))  ::  87
-    ++  poke                                                        
-      |=  * 
-      =>  .(+< ((hard ,[now=@da ovo=ovum]) +<))
-      =^  a  +>+  (^poke now ovo)
-      (hang now a +>.$)
+    ++  poke  |=  * 
+              =>  .(+< ((hard ,[now=@da ovo=ovum]) +<))
+              =^  a  +>+  (^poke now ovo)
+              (hang now a +>.$)
     ++  wish  |=(* (^wish ((hard ,@ta) +<)))            ::  20
     --
 |%
@@ -10808,7 +10814,7 @@
     =+  fuy=(turn fan |=([p=@tas q=vane] [p stay:(q now eny sky)]))
     ~&  %hang-rein-gate
     =+  gat=.*([0 ?:(p.q.i.p.out 11 86)] ken)
-    =+  sam=[fuy ?:(p.q.i.p.out [~ top] sag)]
+    =+  sam=[eny fuy ?:(p.q.i.p.out [~ top] sag)]
     .*([-.gat [fuy +>.gat]] -.gat)
   ==
 ::
@@ -10817,10 +10823,20 @@
   =>  .(+< ((hard ,[now=@da hap=path]) +<))
   (~(doos (is eny fan) now) hap)
 ::
-++  load
-  |=  *
+++  load                                                ::  install current
+  |=  [now=@da ney=@ fag=(list ,[p=@tas q=vase]) gud=(unit ,*)]
+  ~&  %rein-load
   ^+  +>
-  !!
+  %=    +>
+      eny  ney
+      sag  gud
+      fan
+    %+  turn  fag
+    |=  [nam=@tas vax=vase]
+    :-  nam
+    =+  hey=?+(nam !! %a ames, %b bede, %c cary, %d dill, %e eyre)
+    (load:(hey now eny (~(beck (is eny fan) now) ~)) vax)
+  ==
 ::
 ++  peek                                                ::  external inspect
   |=  [our=@p now=@da hap=path]
