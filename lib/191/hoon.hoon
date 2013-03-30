@@ -7984,7 +7984,6 @@
     |+  hap=*
     ^-  (unit)
     =>  .(hap ((hard path) hap))
-    ?~  owr  ~
     ?.  ?=([@ @ @ *] hap)  ~
     =+  :*  hyr=(slay i.hap) 
             ved=(slay i.t.hap) 
@@ -7994,7 +7993,8 @@
     ?.  ?=([~ %% %tas @] hyr)  ~
     ?.  ?=([~ %% %p @] fal)  ~
     =+  his=`@p`q.p.u.fal
-    =>  .(owr [~ u=his])                                ::  XX no!
+    ?>  |(=(~ owr) =([~ his] owr))
+    =>  .(owr [~ u=his])
     =+  dis=(end 3 1 q.p.u.hyr)
     =+  rem=(rsh 3 1 q.p.u.hyr)
     |-  ^-  (unit)
@@ -10805,9 +10805,11 @@
   ?+    -.q.i.p.out  !!
       %rein 
     ~|  %hang-rein
-    ~&  %hang-rein-make
-    =+  sky=(~(beck (is eny fan) now) ~)
-    =+  ken=(make ((hard ,@) (need (sky q.q.i.p.out))))
+    ~&  [%hang-rein-make q.q.i.p.out]
+    =+  sky=(~(beck (is eny fan) now) [~ ~tasfyn-partyv])
+    =+  der=(sky q.q.i.p.out)
+    ~&  [%hang-rein-der =(~ der)]
+    =+  ken=(make ((hard ,@) (need der)))
     ~&  %hang-rein-engine
     =+  eng=.*(0 ken)
     ~&  %hang-rein-vanes
@@ -10842,7 +10844,7 @@
   |=  [our=@p now=@da hap=path]
   ^-  (unit)
   ?~  hap  ~
-  ((~(beck (is eny fan) now) [~ our]) hap)
+  ((~(beck (is eny fan) now) ~) hap)
 ::
 ++  poke                                                ::  external apply
   |=  [now=@da ovo=ovum]
