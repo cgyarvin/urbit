@@ -1,4 +1,4 @@
-::
+!:
 ::              Hoon/Arvo stage 191 (reflexive).  
 ::              This file is in the public domain.
 ::
@@ -3268,6 +3268,7 @@
   (~(raw og (shas sal (mix len ruz))) len)
 ::
 ++  og                                                  ::  shax-powered rng
+  ~/  %og
   |_  a=@
   ++  rad                                               ::  random in range
     |=  b=@  ^-  @
@@ -3275,6 +3276,7 @@
     ?:((lth c b) c $(a +(a)))
     ::
   ++  raw                                               ::  random bits
+    ~/  %raw
     |=  b=@  ^-  @
     %+  can
       0
@@ -3283,7 +3285,7 @@
     ?:  =(0 b)
       ~
     =+  d=(shas %og-b (mix b (mix a c)))
-    ?:  (lte b 256)
+    ?:  (lth b 256)
       [[b (end 0 b d)] ~]
     [[256 d] $(c d, b (sub b 256))]
   --
@@ -6924,8 +6926,10 @@
               [%fail p=tape]                            ::  report failure
               [%hail ~]                                 ::  welcome user
               [%hear p=lane q=@]                        ::  receive packet
+              [%hemp p=path]                            ::  cancel request
               [%helo ~]                                 ::  trigger prompt
               [%home p=flag q=lane]                     ::  bind home address
+              [%hope p=(unit path)]                     ::  namespace request
               [%init p=@p]                              ::  report install
               [%flog p=card]                            ::  log to terminal
               [%junk p=@]                               ::  entropy
@@ -7028,7 +7032,6 @@
           ==                                            ::
 ++  goal                                                ::  app request
           $%  [%ez p=path]                              ::  simple query
-              [%fu p=path q=|+(* *(unit))]              ::  complex query
               [%ht p=(list rout)]                       ::  http server
               [%up p=prod]                              ::  user prompt      
               [%wa p=@da]                               ::  alarm
@@ -7114,8 +7117,7 @@
 ++  name  ,[p=@t q=(unit ,@t) r=(unit ,@t) s=@t]        ::  first mid/nick last
 ++  nope  ^~(^-(arch [%| @ ~]))                         ::  empty node
 ++  note                                                ::  app response
-          $%  [%ez p=path q=(unit)]                     ::  simple result
-              [%fu p=path q=(unit)]                     ::  complex result
+          $%  [%ez p=(unit)]                            ::  simple result
               [%ht p=scab q=cred r=moth]                ::  http request
               [%up p=@t]                                ::  prompt response
               [%wa p=@da]                               ::  alarm
@@ -7799,7 +7801,7 @@
       (stag %| ;~(plug apat yque))
     ==
   --
-++  ergo                                                ::  eat headers
+++  ecco                                                ::  eat headers
   |=  hed=(list ,[p=@t q=@t])
   =+  mah=*math
   |-  ^-  math
@@ -7827,7 +7829,7 @@
   ^-  hate
   ::  ~&  [%thin-quri (trip q.req)]
   =+  ryp=`quri`(rash q.req zest:epur)
-  =+  mah=(ergo r.req)
+  =+  mah=(ecco r.req)
   =+  ^=  pul  ^-  purl
       ?-  -.ryp
         &  ?>(=(sec p.p.p.ryp) p.ryp)
@@ -9726,15 +9728,22 @@
         |=  veq=(list card)
         +>(duz (weld (turn veq |=(a=card [[~ who] hen a])) duz))
       ::
-      ++  envy                                          ::  advance a card
+      ++  enow                                          ::  advance a card
+        |=  [nxt=tire ret=tire fav=card]
+        +>(duz [[[~ who] [nxt [%b ret] hen] fav] duz])
+      ::
+      ++  envy                                          ::  redirect a card
         |=  [dst=tire fav=card]
         +>(duz [[[~ who] [dst hen] fav] duz])
       ::
-      ++  ergo                                          ::  request stub
+      ++  ergo                                          ::  lark blocked
+        |=  kal=lark
         |=  gez=(list path)
         ^-  beef
-        :_  [~ ~]
-        (turn gez |=(a=path [%text "? {~(ram re (dish:ut [~ %path] a))}"]))
+        :+  %+  turn  gez
+            |=(a=path `card`[%text "? {~(ram re (dish:ut [~ %path] a))}"])
+          (turn gez |=(a=path `slip`[a [%ez a]]))
+        [~ %| gez kal]
       ::
       ++  fret                                          ::  process coal
         |=  poc=coal
@@ -9763,9 +9772,11 @@
       ::
       ++  germ                                          ::  add a slip
         |=  sip=slip
+        ::  ~&  [%germ sip]
         ^+  +>
         ?+  -.q.sip  
                +>
+          %ez  (envy /c/ [%hope ~ p.sip])
           %up  +>(pak [[pid p.sip] pak])
         ==
       ::
@@ -9844,7 +9855,9 @@
         %-  haul
         %^    dost
             (mong [fane:do [pux nob r.u.bor]] sky)
-          ergo
+          |=  gez=(list path)
+          ^-  beef
+          !!                                            ::  XX do this right
         fret
       ::
       ++  loft                                          ::  execute command
@@ -9855,13 +9868,13 @@
         ?-    -.kal
             %cd  +>.$(cwd p.kal)
             %do  (huck p.kal)
-            %eh  (haul (dost (mong [echo:do lube +.kal] sky) ergo hak))
-            %go  (haul (dost (mong [fapp:do lube +.kal] sky) ergo fret))
+            %eh  (haul (dost (mong [echo:do lube +.kal] sky) (ergo kal) hak))
+            %go  (haul (dost (mong [fapp:do lube +.kal] sky) (ergo kal) fret))
             %kl  (envy /b/ [%kill p.kal])
             %nk  (envy /b/ [%nuke ~])
             %ps  (emir view)
             %so  (hock p.kal q.kal)
-            %to  (haul (dost (mong [ecto:do lube +.kal] sky) ergo hak))
+            %to  (haul (dost (mong [ecto:do lube +.kal] sky) (ergo kal) hak))
         ==
       ::
       ++  mete                                          ::  deliver line
