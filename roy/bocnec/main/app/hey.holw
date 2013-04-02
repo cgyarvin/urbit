@@ -1,0 +1,18 @@
+!:
+|=  *
+|=  *
+|=  [bud=@p tyt=tape ~]
+^-  bowl
+:-  :~  [%text "hey {<bud>}:"]
+    ==
+:-  ~
+:-  ^-  (list slip)
+    :~  [/foo/bar/ [%yo bud %say (rap 3 tyt)]]
+    ==
+|=  [now=@da pax=path nut=note]
+?>  =(/foo/bar/ pax)
+?>  ?=(%yo -.nut)
+?:  =(%good p.nut)
+:-  :~  [%text ?:(=(%good p.nut) "good" "dead")]
+    ==
+~

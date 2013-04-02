@@ -1,4 +1,4 @@
-!:
+::
 ::              Hoon/Arvo stage 191 (reflexive).  
 ::              This file is in the public domain.
 ::
@@ -82,68 +82,72 @@
 ::    marginally useful out of the box, the Hoon kernel includes 
 ::    a small nonpreemptive OS, Arvo.  
 ::
-::    Arvo in stage 191 is in an entirely experimental state and
+::    (Arvo in stage 191 is in an entirely experimental state and
 ::    should not be entrusted with any meaningful data.  It does
 ::    self-host, but only with much help from legacy tools.  In
-::    short, do not use it.
+::    short, do not use it.)
 ::
 ::    Arvo is not an OS in the sense that it drives bare metal.
 ::    It's an OS in the sense that it runs programs and maintains
-::    general persistent state.  Arvo is exclusively a server 
-::    platform and provides no UI besides a command line and a
-::    web server.  Like everything in Hoon and Nock, Arvo is
-::    isolated and cannot contact the host OS.
+::    arbitrary persistent state.  Arvo is exclusively a server 
+::    platform and provides no UI besides a command line and HTTP.
 ::
-::    Arvo's main feature is a peer-to-peer protocol, ++ames,
-::    defined as a function which maps a stream of UDP packets
+::    (One way to process Arvo is to imagine a server-side
+::    counterpart of the browser.  A browser is a general-purpose 
+::    personal client; Arvo is a general-purpose personal server. 
+::    Like the browser (and like all Hoon and/or Nock code), Arvo 
+::    is semantically isolated from the native OS.)
+::
+::    Arvo is a nonpreemptive, event-sourced, metacircular state
+::    machine, whose basic role is to map a stream of UDP packets
 ::    into a secure, monotonic global namespace.  A persistent
-::    virtual computer can be standardized as a pure function of
-::    the form "from the packets I've heard, what do I know?"  
+::    virtual computer can be standardized as a function of the 
+::    form "from the packets I've heard, what do I know?"  
 ::
 ::    This "lambda architecture" is often used as a specialized
-::    database, but can be a general-purpose computer if it can  
-::    extend and upgrade itself from its own packets.  Abstractly,
+::    store, but can be a general-purpose computer if it can  
+::    extend and upgrade itself from its own packets.  Logically,
 ::    the kernel is just the first packet, meaning the semantic 
 ::    standard is just Nock itself - a small "attack surface" for
-::    both security and portability.  Nock, like IPv4 or XML, is
-::    small enough that it should never need upgrading, meaning
-::    the formal semantics of the computer are permanently fixed.
-::    Any conceivable change would be a compatible extension.
+::    both security and portability.
 ::
-::    ++ames is a "content-centric" protocol - packet semantics
-::    independent of source address.  It therefore needs its own
-::    global PKI and identity model.  The fingerprints of the 
-::    initial root keys are actually embedded in this file
+::    To implement this design, Arvo defines its own functional 
+::    "content-centric" packet protocol, with its own global PKI:
+::    essentially, tunneling a clean-slate network over UDP. The
+::    fingerprints of the initial root keys are in the kernel 
 ::    below.  No secrets live forever, though, and the kernel
 ::    dictator retains no dominion whatsoever over Arvo users.
 ::    All keys and algorithms can be updated without disruption.
 ::
-::    Arvo does not process packets only, but also local events
-::    (++card) from the host OS.  Modules handling these events
-::    includes a shell ++bede, a versioned filesystem ++cary,
-::    a console ++dill and a web server ++eyre.  Each is crude
-::    if not risible and meant only as a proof of concept, but
-::    can be upgraded without losing state.
+::    Arvo also includes a revision-control filesystem, a shell,
+::    and a web server, each of which is somewhere between 
+::    crude and risible and meant only as a proof of concept.
+::    However, one of Arvo's promises is that all code user or
+::    kernel can be updated, type-safely, without harming data.
+::    We are almost certain to break this promise, yet another
+::    reason you shouldn't use Arvo.
 ::
 ::    Hoon is roughly 7000 lines of Hoon; Arvo is roughly 4000.
 ::    Their image in Nock, hoon.pill, is roughly 1.5MB (which
 ::    includes the full kernel AST), compressing to 800K.
 ::    There are no external semantic dependencies, but some
-::    ingenuity is needed to execute the system efficiently.
+::    ingenuity is needed to execute the system efficiently,
+::    especially since logically it is a single-level store.
 ::    The attached interpreter, vere, is deficient in many ways
 ::    and cannot be relied on for any practical purpose.
 ::
 ::    This kernel, while unreadable due to its spiky alien
-::    syntax, is also mostly undocumented.  Yo, we're sorry.
+::    syntax, is also mostly undocumented.  We're sorry.
 ::
 ::    The kernel file is divided into volumes, chapters, and
-::    sections.  Volume 1 defines the data structures used in
+::    sections.  First, Volume 1 defines the data structures used in
 ::    Volume 2.  Volume 2 is the standard library from basic
 ::    arithmetic up through Hoon compilation.  
 ::
 ::    Volume 3 is the core logic and data structures of Arvo.  
-::    [There is also a lot of crap in 3 that should be in 4.]
-::    Volume 4 is the Arvo kernel modules.
+::    Volume 4 holds the Arvo kernel modules - 4a, ames, P2P
+::    networking; 4b, bede, shell and processes; 4c, cary, 
+::    revision control; 4d, dill, console; 4e, eyre, HTTP.
 :: 
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::  ::::::    Preface                               ::::::
@@ -154,7 +158,7 @@
 =-  ?:  =(0 cud)                                        ::  if cud is 0
       all                                               ::  then return engine
     (make:all cud)                                      ::  else simple compile
-^=  all                                                 ::  assemble engine
+^=  all                                                 ::  create engine
   =~                                                    ::  volume stack
 %191                                                    ::  version constant
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -731,13 +735,6 @@
     q.b
   $(a t.a, b b(q (b i.a q.b)))
 ::
-++  skid                                                ::  separate
-  |*  [a=(list) b=||(* ?)]
-  |-  ^+  [p=a q=a]
-  ?~  a  [~ ~]
-  =+  c=$(a t.a)
-  ?:((b i.a) [[i.a p.c] q.c] [p.c [i.a q.c]])
-::
 ++  skim                                                ::  only
   ~/  %skim
   |*  [a=(list) b=_|=(p=* .?(p))]
@@ -1249,7 +1246,7 @@
         ~
       =>  .(muc (dec muc))
       [(cut 4 [muc 1] raw) $(raw (end 4 muc raw))]
-  =+  day=(div sec day:yo)
+  =+  day=(div sec day:yo)                              ::  XX constant pls
   =>  .(sec (mod sec day:yo))
   =+  hor=(div sec hor:yo)
   =>  .(sec (mod sec hor:yo))
@@ -2228,8 +2225,7 @@
         ==
         $(inx +(inx))
     ==
-  ::  ~|(%sane-stub !!)
-  &
+  ~|(%sane-stub !!)
 ::
 ++  trim
   |=  [a=@ b=tape]
@@ -3269,7 +3265,6 @@
   (~(raw og (shas sal (mix len ruz))) len)
 ::
 ++  og                                                  ::  shax-powered rng
-  ~/  %og
   |_  a=@
   ++  rad                                               ::  random in range
     |=  b=@  ^-  @
@@ -3277,7 +3272,6 @@
     ?:((lth c b) c $(a +(a)))
     ::
   ++  raw                                               ::  random bits
-    ~/  %raw
     |=  b=@  ^-  @
     %+  can
       0
@@ -3286,7 +3280,7 @@
     ?:  =(0 b)
       ~
     =+  d=(shas %og-b (mix b (mix a c)))
-    ?:  (lth b 256)
+    ?:  (lte b 256)
       [[b (end 0 b d)] ~]
     [[256 d] $(c d, b (sub b 256))]
   --
@@ -3523,12 +3517,12 @@
     hoz
   [%fork hoz bur]
 ::
-++  cove
+++  coke
   |=  nug=tool
   ?-    nug
       [0 *]   p.nug
       [10 *]  $(nug q.nug)
-      *       ~|([%cove nug] !!)
+      *       ~|([%coke nug] !!)
   ==
 ++  comb
   ~/  %comb
@@ -3843,7 +3837,7 @@
         [%weed *] 
       (home p.sec)
     ==
-  ++  clam  ^-(gene [%brts [%bcts %noun] %sgls 0 (whip(gom 7) 6)])
+  ++  clam  ^-(gene [%brts [%bcts %noun] (whip(gom 7) 6)])
   ++  whip
     |=  axe=axis
     =+  ^=  tun
@@ -5505,7 +5499,7 @@
       [(fork p.hiq p.ran) (cond duy q.hiq q.ran)]
     ::
         [%wtcn *]
-      [(nice bean) (fish(sut (play p.gen)) (cove q:$(gen q.gen, gol %noun)))]
+      [(nice bean) (fish(sut (play p.gen)) (coke q:$(gen q.gen, gol %noun)))]
     ::
         [%zpcb *]
       ~!  (show %o p.gen)
@@ -5669,8 +5663,8 @@
     ::
         [%wtcn *]
       =+  waz=[p=(play p.gen) q=(play(sut dox) p.gen)]
-      =+  ^=  syx  :-  p=(cove q:(mint %noun q.gen)) 
-                   q=(cove q:(mint(sut dox) %noun q.gen))
+      =+  ^=  syx  :-  p=(coke q:(mint %noun q.gen)) 
+                   q=(coke q:(mint(sut dox) %noun q.gen))
       =+  pov=[p=(fish(sut p.waz) p.syx) q=(fish(sut q.waz) q.syx)]
       ?.  &(=(p.syx q.syx) =(p.pov q.pov))
         ~|(%mull-bonk-a !!)
@@ -6593,7 +6587,7 @@
         ==
     |%
     ::
-    ++  boog
+    ++  boon
       %+  knee  [p=*term q=*foot]  |.  ~+
       ;~  pfix  lus
         ;~  pose
@@ -6626,7 +6620,7 @@
       %-  ulna
       %+  cook
         |=(a=(list ,[p=term q=foot]) (~(gas by *(map term foot)) a))
-      (most muck boog)
+      (most muck boon)
     ::
     ++  toad
       |*  har=_expa
@@ -6895,7 +6889,7 @@
 ++  boat  ,[(list slip) task]                           ::  user stage
 ++  boon                                                ::  fort output
           $%  [%beer p=flag q=@uvG]                     ::  gained ownership
-              [%coke p=sock q=cape r=soap s=hose]       ::  message result
+              [%coke p=cape q=soap]                     ::  message result
               [%mead p=lane q=rock]                     ::  accept packet
               [%milk p=sock q=@ta r=@ud s=*]            ::  accept message
               [%ouzo p=lane q=rock]                     ::  transmit packet
@@ -6927,10 +6921,8 @@
               [%fail p=tape]                            ::  report failure
               [%hail ~]                                 ::  welcome user
               [%hear p=lane q=@]                        ::  receive packet
-              [%hemp p=path]                            ::  cancel request
               [%helo ~]                                 ::  trigger prompt
               [%home p=flag q=lane]                     ::  bind home address
-              [%hope p=(unit path)]                     ::  namespace request
               [%init p=@p]                              ::  report install
               [%flog p=card]                            ::  log to terminal
               [%junk p=@]                               ::  entropy
@@ -6951,8 +6943,7 @@
               [%pace p=@ud]                             ::  compute background
               [%pour p=path q=dram]                     ::  write directory
               [%pump ~]                                 ::  produce packets
-              [%rein p=? q=path]                        ::  push/replace kernel
-              [%rend ~]                                 ::  pop kernel
+              [%rein p=term q=path]                     ::  reinstall kern/vane
               [%save p=path q=@]                        ::  write atomic file
               [%send p=lane q=@]                        ::  transmit packet
               [%ship p=@tas q=@tas]                     ::  label release
@@ -7033,10 +7024,10 @@
           ==                                            ::
 ++  goal                                                ::  app request
           $%  [%ez p=path]                              ::  simple query
+              [%fu p=path q=|+(* *(unit))]              ::  complex query
               [%ht p=(list rout)]                       ::  http server
               [%up p=prod]                              ::  user prompt      
               [%wa p=@da]                               ::  alarm
-              [%yo p=@p q=@ta r=*]                      ::  network message
           ==                                            ::
 ++  gram  ,@uw                                          ::  physical datagram
 ++  hand  ,@uvH                                         ::  hash of code
@@ -7119,17 +7110,16 @@
 ++  name  ,[p=@t q=(unit ,@t) r=(unit ,@t) s=@t]        ::  first mid/nick last
 ++  nope  ^~(^-(arch [%| @ ~]))                         ::  empty node
 ++  note                                                ::  app response
-          $%  [%ez p=(unit)]                            ::  simple result
+          $%  [%ez p=path q=(unit)]                     ::  simple result
+              [%fu p=path q=(unit)]                     ::  complex result
               [%ht p=scab q=cred r=moth]                ::  http request
               [%up p=@t]                                ::  prompt response
-              [%yo p=cape]                              ::  request response
               [%wa p=@da]                               ::  alarm
           ==                                            ::
 ++  octs  ,[p=@ud q=@]                                  ::  octet-stream
 ++  oryx  ,@uvH                                         ::  CSRF secret
 ++  oven                                                ::  flow by server
           $:  nys=(map flap bait)                       ::  incoming
-              old=(set flap)                            ::  completed
               wab=(map flag bath)                       ::  outgoing by client
           ==                                            ::
 ++  ovum  ,[p=tire q=card]                              ::  external event
@@ -7231,17 +7221,9 @@
                             ==                          ::
                         :-  p=*(list move)              ::  actions
                         q=*vane                         ::  consequence
-              ++  come                                  ::  load state, old
-                        |=  old=vase                    ::
-                        *vane                           ::
               ++  doze                                  ::  next wakeup
                         |=  hen=hose                    ::  channel
                         *(unit ,@da)                    ::  alarm if any
-              ++  flee  *vase                           ::  save state, new
-              ++  load                                  ::  load state, new
-                        |=  new=vase                    ::
-                        *vane                           ::
-              ++  raze  *vane                           ::  erase all state
               ++  scry                                  ::  inspect
                         |=  $:  our=flag                ::  observer
                                 ren=@tas                ::  mode
@@ -7250,9 +7232,8 @@
                                 tyl=path                ::  location
                             ==                          ::
                         *(unit)                         ::  record
-              ++  stay  *vase                           ::  save state, new
               --                                        ::
-++  wand  (list ,[p=mark q=ring r=acro])                 ::  mace in action
+++  wand  (list ,[p=mark q=acro])                       ::  mace in action
 ++  what                                                ::  logical identity
           $%  [%crew p=corp]                            ::  business
               [%dept p=corp]                            ::  agency
@@ -7805,7 +7786,7 @@
       (stag %| ;~(plug apat yque))
     ==
   --
-++  ecco                                                ::  eat headers
+++  ergo                                                ::  eat headers
   |=  hed=(list ,[p=@t q=@t])
   =+  mah=*math
   |-  ^-  math
@@ -7833,7 +7814,7 @@
   ^-  hate
   ::  ~&  [%thin-quri (trip q.req)]
   =+  ryp=`quri`(rash q.req zest:epur)
-  =+  mah=(ecco r.req)
+  =+  mah=(ergo r.req)
   =+  ^=  pul  ^-  purl
       ?-  -.ryp
         &  ?>(=(sec p.p.p.ryp) p.ryp)
@@ -7990,6 +7971,7 @@
     |+  hap=*
     ^-  (unit)
     =>  .(hap ((hard path) hap))
+    ?~  owr  ~
     ?.  ?=([@ @ @ *] hap)  ~
     =+  :*  hyr=(slay i.hap) 
             ved=(slay i.t.hap) 
@@ -7999,8 +7981,7 @@
     ?.  ?=([~ %% %tas @] hyr)  ~
     ?.  ?=([~ %% %p @] fal)  ~
     =+  his=`@p`q.p.u.fal
-    ?>  |(=(~ owr) =([~ his] owr))
-    =>  .(owr [~ u=his])
+    =>  .(owr [~ u=his])                                ::  XX no!
     =+  dis=(end 3 1 q.p.u.hyr)
     =+  rem=(rsh 3 1 q.p.u.hyr)
     |-  ^-  (unit)
@@ -8384,10 +8365,6 @@
             q.q.i.lew.wod.dur 
           (hail r.q.i.lew.wod.dur)
         ::
-        ++  clon
-          ^-  mark
-          ?~(lew.wod.dur 0 p.p.q.i.lew.wod.dur)
-        ::
         ++  griz                                        ::    griz:lax:as:go
           |=  now=@da                                   ::  generate key for
           ^-  [p=code q=_+>]
@@ -8538,32 +8515,32 @@
         ^+  +>
         (nux %*(. (myx her) lun.fer.dur [~ lyn]))
       ::
-      ++  ren                                           ::  reset crypto
+      ++  ren                                           ::  renew crypto
         |=  [biz=@ud sed=@]
         ^+  ..ren
         ..ren   ::  XX  not needed rite now
       ::
       ++  sen                                           ::  current crypto
         ^-  [p=mark q=acro]
-        ?~(val.saf !! [p.i.val.saf r.i.val.saf])
+        ?~(val.saf !! i.val.saf)
       ::
       ++  sev                                           ::  crypto by mark
         |=  mar=mark
         ^-  [p=? q=acro]
         ?~  val.saf  !!
         ?:  =(mar p.i.val.saf)
-          [& r.i.val.saf]
+          [& q.i.val.saf]
         ?>  (lth mar p.i.val.saf)
         :-  |
         |-  ^-  acro
         ?:  =(mar p.i.t.val.saf) 
-          r.i.t.val.saf 
+          q.i.t.val.saf 
         $(t.val.saf t.t.val.saf)
       ::
       ++  sex                                           ::  export secrets
         |-  ^-  mace
         ?~  val.saf  ~
-        :-  [p.i.val.saf sec:ex:r.i.val.saf] 
+        :-  [p.i.val.saf sec:ex:q.i.val.saf] 
         $(val.saf t.val.saf)
       ::
       ++  tim                                           ::  expire by date
@@ -8611,7 +8588,7 @@
           urb
         %+  ~(put by urb.ton)
           our
-        [~ (turn mac |=([p=mark q=ring] [p q (wear q)])) wil ~ ~]
+        [~ (turn mac |=([p=mark q=ring] [p (wear q)])) wil ~ ~]
       ==
     ::
     ++  su                                              ::  install safe
@@ -8818,107 +8795,6 @@
   |%
   ++  am                                                ::    am
     |_  [now=@da fox=fort]                              ::  protocol engine
-    ++  boot                                            ::    boot:am
-      ^-  fort                                          ::  restore from noun
-      %=    fox
-          urb.ton
-        %-  ~(gas by *(map flag safe))
-        %+  turn
-          (~(tap by urb.ton.fox) ~)
-        |=  [p=flag q=safe]  ^-  [p=flag q=safe]
-        :-  p
-        %=    q
-            val
-          (turn val.q |=([p=mark q=ring r=acro] [p q (wear q)]))
-        ==
-      ==
-    ::
-    ++  come                                            ::    come:am
-      |=  [ges=@t wid=@ bur=@]                          ::  instantiate pawn
-      ^-  [p=[p=flag q=@uvG] q=fort]
-      =+  loy=(brew wid bur)
-      =+  rig=sec:ex:loy
-      =+  our=`@p`fig:ex:loy
-      =+  syp=`step`[`bran`[0 ~ our now] [%pawn ges] pub:ex:loy]
-      :-  [our pac:ex:loy]
-      %_    fox
-          ton
-        %^    ~(ha go ton.fox)
-            our
-          `mace`[[0 rig] ~]
-        `will`[[(sign:se:loy @ (shaf %self (sham syp))) syp] ~]
-      ==
-    ::
-    ++  gnaw                                            ::    gnaw:am
-      |=  [ryn=lane pac=rock]                           ::  process packet
-      ^-  [p=(list boon) q=fort]
-      =+  kec=(bite pac)
-      ~&  [%hear p.kec ryn `@p`(mug (shaf %flap pac))]
-      =+  how=(~(yo go ton.fox) p.p.kec)
-      ?-  -.how
-        &  =<  zork
-           =<  zank
-           %-  ~(blow la:(ho:(um p.p.kec) q.p.kec) ryn | (shaf %flap pac))
-           [q.kec r.kec s.kec]
-        |  [[[%ouzo p.how pac] ~] fox]
-      ==
-    ::
-    ++  hall                                            ::    hall:am
-      ^-  (list sock)                                   ::  all sockets 
-      =|  sox=(list sock)                               ::  XX hideous
-      |-  ^+  sox 
-      ?~  zac.fox  sox
-      =.  sox  $(zac.fox l.zac.fox)
-      =.  sox  $(zac.fox r.zac.fox)
-      |-  ^+  sox
-      ?~  wab.q.n.zac.fox  sox
-      =.  sox  $(wab.q.n.zac.fox l.wab.q.n.zac.fox)  
-      =.  sox  $(wab.q.n.zac.fox r.wab.q.n.zac.fox)  
-      [[p.n.zac.fox p.n.wab.q.n.zac.fox] sox]
-    ::
-    ++  hest                                            ::    hest:am
-      ^-  [p=(list boon) q=fort]                        ::  harvest packets
-      =+  sox=hall
-      =|  bin=(list boon)
-      |-  ^-  [p=(list boon) q=fort]
-      ?~  sox  [bin fox]
-      =^  bun  fox  zork:zank:tung:(ho:(um p.i.sox) q.i.sox)
-      $(bin (weld p.bun bin))
-    ::
-    ++  have                                            ::    have:am 
-      |=  [our=flag buq=buck]                           ::  acquire license
-      ^-  [p=(list boon) q=fort]
-      =:  ton.fox  (~(ha go ton.fox) our buq)
-          zac.fox  (~(put by zac.fox) our *oven)
-        ==
-      [[[%beer our pac:ex:q:sen:(need (~(us go ton.fox) our))] ~] fox]
-    ::
-    ++  home                                            ::    home:am
-      |=  [our=flag lyn=lane]                           ::  update ip address
-      ^-  fort
-      =+  gus=(need (~(us go ton.fox) our))
-      fox(ton (~(su go ton.fox) (fix:gus lyn)))
-    ::
-    ++  wake                                            ::    wake:am
-      ^-  [p=(list boon) q=fort]                        ::  harvest packets
-      =+  sox=hall
-      =|  bin=(list boon)
-      |-  ^-  [p=(list boon) q=fort]
-      ?~  sox  [bin fox]
-      =^  bun  fox  zork:zank:tung:turk:(ho:(um p.i.sox) q.i.sox)
-      $(sox t.sox, bin (weld p.bun bin))
-    ::
-    ++  wash                                            ::    wash:am
-      |=  [soq=sock sup=soap ham=meal]                  ::  dispatch and send
-      ^-  [p=(list boon) q=fort]
-      zork:zank:tung:(wind:(ho:(um p.soq) q.soq) sup ham)
-    ::
-    ++  wise                                            ::    wise:am
-      |=  [soq=sock hen=hose cha=@ta val=*]             ::  send a statement
-      ^-  [p=(list boon) q=fort]
-      =<  zork:zank:tung
-      (wool:(ho:(um p.soq) q.soq) hen cha val)
-    ::
     ++  um                                              ::  per server
       |=  our=flag
       =+  gus=(need (~(us go ton.fox) our))
@@ -8942,22 +8818,10 @@
             +
           $(+ pock)
         ::
-        ++  done                                        ::    done:ho:um:am
-          |=  [cha=@ta num=@ud]                         ::  complete outgoing
-          ^-  [hose _+>]
-          ~&  [%done cha num ryl.bah]
-          =+  rol=(need (~(get by ryl.bah) cha))
-          :-  (need (~(get by san.rol) num))
-          %_    +>.$
-              ryl.bah  
-            (~(put by ryl.bah) cha rol(san (~(del by san.rol) num)))
-          ==
-        ::
         ++  kill                                        ::    kill:ho:um:am
           |=  gom=soap                                  ::  kill message
-          =^  had  +>  (done q.gom r.gom)
-          %_    +>.$
-              bin      [[%coke [our her] %dead gom had] bin]
+          %_    +>
+              bin      [[%coke %dead gom] bin]
               sea.bah  sea:(~(rast pe sea.bah) gom)
           ==
         ::
@@ -9021,7 +8885,7 @@
               bin  (weld (turn p.rox |=(pac=rock [%ouzo ryn pac])) bin)
             ==
           ::
-          ++  coot                                      ::    coot:la:ho:um:am
+          ++  coon                                      ::    coon:la:ho:um:am
             |=  [cha=@ta rum=race]                      ::  update input race
             ^+  +>
             =+  cun=(~(get by mis.rum) did.rum)
@@ -9046,7 +8910,7 @@
               =+  ^=  rum  ^-  race
                   =+  rum=(~(get by raz.bah) q.fud)
                   ?~(rum *race u.rum)
-              (coot q.fud rum(mis (~(put by mis.rum) r.fud [dam s.fud])))
+              (coon q.fud rum(mis (~(put by mis.rum) r.fud [dam s.fud])))
             ::
                 %buck
               =.  +>.$  (cock %good)
@@ -9054,10 +8918,7 @@
               %_(+> ton.fox (~(ha go ton.fox) her p.fud q.fud))
             ::
                 %carp
-              =+  neb=(~(get by nys.weg) q.fud)
-              ?~  neb
-                (cock ?:((~(has in old.weg) q.fud) %good %dead))
-              =>  .(neb u.neb)
+              =+  neb=(need (~(get by nys.weg) q.fud))
               ?>  (lth p.fud p.r.neb)
               =+  doy=`(unit ,@)`(~(get by q.r.neb) p.fud)
               ?^  doy
@@ -9067,10 +8928,7 @@
                     q.neb    +(q.neb)
                   ==
               ?:  =(q.neb p.r.neb)
-                =:  nys.weg  (~(del by nys.weg) q.fud)
-                    old.weg  (~(put in old.weg) q.fud)
-                  ==
-                (golf p.neb r.neb)
+                (gaff p.neb r.neb)
               =.  +>.$  (cock %good)
               +>.$(nys.weg (~(put by nys.weg) q.fud neb))
             ::
@@ -9082,9 +8940,8 @@
             |=  bun=boon                                ::  emit a boon
             +>(bin [bun bin]) 
           ::
-          ++  golf                                      ::    golf:la:ho:um:am 
+          ++  gaff                                      ::    gaff:la:ho:um:am 
             |=  [sin=skin duv=dove]                     ::  assemble fragments
-            ~&  [%golf `@p`(mug dam)]
             ^+  +>
             %+  chew  sin
             =+  [nix=0 rax=*(list ,@)]
@@ -9173,19 +9030,23 @@
             =+  rob=(need (~(busc pe sea.bah) num))
             =+  dyp=`putt`(need (~(get by par.bah) gom.rob))
             =>  %_(. ski.dyp q:(suck mup.rob ski.dyp))
-            =:  ski.bah  q.suz
+            =+  fin=&(=(~ wyv.dyp) =(p.ski.dyp q.ski.dyp)) 
+            %_    ..tusk
+                bin      ?.(fin bin [[%coke %good gom.rob] bin])
+                ski.bah  q.suz
                 sea.bah  sea:(~(glan pe sea.bah) num)
+                par.bah  ?:  fin
+                           (~(del by par.bah) gom.rob)
+                         (~(put by par.bah) gom.rob dyp)
                 foy.bah  ?~  p.suz  
                            (fast foy.bah)
                          (slow (lent p.suz) foy.bah)
-              ==
-            ?.  &(=(~ wyv.dyp) =(p.ski.dyp q.ski.dyp))
-              +>.$(par.bah (~(put by par.bah) gom.rob dyp))
-            =^  had  +>.$  (done q.gom.rob r.gom.rob)
-            +>.$(bin [[%coke [our her] %good gom.rob had] bin])
+            ==
           ::
               %dead 
-            (kill gom:(need (~(busc pe sea.bah) num)))
+            =+  gom=gom:(need (~(busc pe sea.bah) num))
+            =>  %_(. bin [[%coke %dead gom] bin])
+            (kill gom)
           ==
         ::
         ++  wind                                        ::    wind:ho:um:am
@@ -9209,8 +9070,7 @@
               ?.  (~(has by san.rol) sex)  
                 [sex rol(san (~(put by san.rol) sex hen))]
               $(sex +(sex))
-          =.  ryl.bah  (~(put by ryl.bah) cha rol)
-          =+  cov=[p=p:sen:gus q=clon:diz]
+          =+  cov=[p=p:sen:gus q=p:cley:diz]
           (wind [cov cha sex] `meal`[%bond q.cov cha sex val])
         ::
         ++  zank                                        ::    zank:ho:um:am
@@ -9228,6 +9088,92 @@
           zac  (~(put by zac.fox) our.gus weg)
         ==
       --                                                ::  --um:am
+    ::
+    ++  come                                            ::    come:am
+      |=  [ges=@t wid=@ bur=@]                          ::  instantiate pawn
+      ^-  [p=[p=flag q=@uvG] q=fort]
+      =+  loy=(brew wid bur)
+      =+  rig=sec:ex:loy
+      =+  our=`@p`fig:ex:loy
+      =+  syp=`step`[`bran`[0 ~ our now] [%pawn ges] pub:ex:loy]
+      :-  [our pac:ex:loy]
+      %_    fox
+          ton
+        %^    ~(ha go ton.fox)
+            our
+          `mace`[[0 rig] ~]
+        `will`[[(sign:se:loy @ (shaf %self (sham syp))) syp] ~]
+      ==
+    ::
+    ++  gnaw                                            ::    gnaw:am
+      |=  [ryn=lane pac=rock]                           ::  process packet
+      ^-  [p=(list boon) q=fort]
+      =+  kec=(bite pac)
+      ~&  [%hear p.kec ryn `@p`(mug (shaf %flap pac))]
+      =+  how=(~(yo go ton.fox) p.p.kec)
+      ?-  -.how
+        &  =<  zork
+           =<  zank
+           %-  ~(blow la:(ho:(um p.p.kec) q.p.kec) ryn | (shaf %flap pac))
+           [q.kec r.kec s.kec]
+        |  [[[%ouzo p.how pac] ~] fox]
+      ==
+    ::
+    ++  hall                                            ::    hall:am
+      ^-  (list sock)                                   ::  all sockets 
+      =|  sox=(list sock)                               ::  XX hideous
+      |-  ^+  sox 
+      ?~  zac.fox  sox
+      =.  sox  $(zac.fox l.zac.fox)
+      =.  sox  $(zac.fox r.zac.fox)
+      |-  ^+  sox
+      ?~  wab.q.n.zac.fox  sox
+      =.  sox  $(wab.q.n.zac.fox l.wab.q.n.zac.fox)  
+      =.  sox  $(wab.q.n.zac.fox r.wab.q.n.zac.fox)  
+      [[p.n.zac.fox p.n.wab.q.n.zac.fox] sox]
+    ::
+    ++  hest                                            ::    hest:am
+      ^-  [p=(list boon) q=fort]                        ::  harvest packets
+      =+  sox=hall
+      =|  bin=(list boon)
+      |-  ^-  [p=(list boon) q=fort]
+      ?~  sox  [bin fox]
+      =^  bun  fox  zork:zank:tung:(ho:(um p.i.sox) q.i.sox)
+      $(bin (weld p.bun bin))
+    ::
+    ++  have                                            ::    have:am 
+      |=  [our=flag buq=buck]                           ::  acquire license
+      ^-  [p=(list boon) q=fort]
+      =:  ton.fox  (~(ha go ton.fox) our buq)
+          zac.fox  (~(put by zac.fox) our *oven)
+        ==
+      [[[%beer our pac:ex:q:sen:(need (~(us go ton.fox) our))] ~] fox]
+    ::
+    ++  home                                            ::    home:am
+      |=  [our=flag lyn=lane]                           ::  update ip address
+      ^-  fort
+      =+  gus=(need (~(us go ton.fox) our))
+      fox(ton (~(su go ton.fox) (fix:gus lyn)))
+    ::
+    ++  wake                                            ::    wake:am
+      ^-  [p=(list boon) q=fort]                        ::  harvest packets
+      =+  sox=hall
+      =|  bin=(list boon)
+      |-  ^-  [p=(list boon) q=fort]
+      ?~  sox  [bin fox]
+      =^  bun  fox  zork:zank:tung:turk:(ho:(um p.i.sox) q.i.sox)
+      $(sox t.sox, bin (weld p.bun bin))
+    ::
+    ++  wash                                            ::    wash:am
+      |=  [soq=sock sup=soap ham=meal]                  ::  dispatch and send
+      ^-  [p=(list boon) q=fort]
+      zork:zank:tung:(wind:(ho:(um p.soq) q.soq) sup ham)
+    ::
+    ++  wise                                            ::    wise:am
+      |=  [soq=sock hen=hose cha=@ta val=*]             ::  send a statement
+      ^-  [p=(list boon) q=fort]
+      =<  zork:zank:tung
+      (wool:(ho:(um p.soq) q.soq) hen cha val)
     --                                                  ::  --am
   --
   . ==
@@ -9239,15 +9185,14 @@
   |=  [now=@da eny=@ sky=||(* (unit))]                  ::  current invocation
   ^?                                                    ::  opaque core
   =< 
-    |%                                                  ::  vane interface
-    ++  beat
+    |%                                                  ::  poke/peek pattern
+    ++  beat                                            ::  process move
       |=  [whu=(unit flag) tea=tire hen=hose fav=card]
       ^-  [p=(list move) q=vane]
       =^  duy  ..knap
         (knap whu hen fav)
       [duy ..^$]
     ::
-    ++  come  |=(old=vase (load old))
     ++  doze
       |=  hen=hose
       =|  doz=(unit ,@da)
@@ -9263,18 +9208,6 @@
       =+  bah=q.n.wab.yem
       (hunt doz (~(doze pe sea.bah) wid.foy.bah))
     ::
-    ++  flee  stay
-    ++  load
-      |=  new=vase
-      ^-  vane
-      ?.  (~(nest ut -:!>(fox)) & p.new)
-        ~|(%load-nest-ames !!)
-      ..^$(fox ~(boot am [now (fort q.new)]))
-    ::
-    ++  raze  
-      ^-  vane
-      ..$(fox *fort)
-    ::
     ++  scry
       |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
       ^-  (unit)
@@ -9287,8 +9220,6 @@
         ?.  =(now q.p.lot)  ~
         (temp our his tyl)
       ==
-    ::
-    ++  stay  `vase`!>(fox)
     --
   |%
   ++  clop
@@ -9301,25 +9232,9 @@
           ==
       +>
     ::
-        %coke  
-      ~&  [%coke p.bon q.bon r.bon]
-      :-  :~  [[~ p.p.bon] s.bon [%went q.bon r.bon]]
-          ==
-      +>
-    ::
+        %coke  ~&([%coke p.bon q.bon] !!)
         %mead  [[[whu [/a/ hen] [%hear p.bon q.bon]] ~] +>.$]
-        %milk 
-      ~&  [%milk bon]
-      ?:  =(%say q.bon)
-        =>  .(s.bon ((hard ,@ta) s.bon))
-        ?>  ((sane %ta) s.bon)
-        :-  :~  :+  whu [/d/ hen] 
-                :+  %flog  %text
-                "{<q.p.bon>} says: {<(trip s.bon)>}"
-            ==
-        +>
-      ~|(%milk-stub !!)
-    ::
+        %milk  !!
         %ouzo  ::  ~&  [%send `@p`(mug (shaf %flap q.bon))]
                [[[whu hen [%send p.bon q.bon]] ~] +>.$]
         %wine  !!
@@ -9458,18 +9373,15 @@
   |%
   ++  bard                                              ::  new session
     |=  who=flag
-    %+  barn  who
-    %*  .  *brad
-      who  who
-      hox  (scot %p who)
-    ==
-  ::
-  ++  barn
-    |=  [who=flag bad=brad]
     =+  nib=`vase`!>(+>)
     =+  pal=~(play ut p.nib)
     %-  berg
-    :_  bad
+    :_  ^-  brad
+        %*  .  *brad
+          who  who
+          hox  (scot %p who)
+        ==
+    ^-  bran
     %*  .  *bran
       nub      nib
       sot.vax  (slap nib (vice 'slot'))
@@ -9746,10 +9658,6 @@
             %up
           ?>  =(%line -.fav)
           +>.$(loz (~(del by loz) pux))
-        ::
-            %yo
-          ?>  =(%went -.fav)
-          +>.$(loz (~(del by loz) pux))
         ==
       ::
       ++  dost                                          ::  virtualize
@@ -9772,22 +9680,15 @@
         |=  veq=(list card)
         +>(duz (weld (turn veq |=(a=card [[~ who] hen a])) duz))
       ::
-      ++  enow                                          ::  advance a card
-        |=  [nxt=tire ret=tire fav=card]
-        +>(duz [[[~ who] [nxt [%b ret] hen] fav] duz])
-      ::
-      ++  envy                                          ::  redirect a card
+      ++  envy                                          ::  advance a card
         |=  [dst=tire fav=card]
         +>(duz [[[~ who] [dst hen] fav] duz])
       ::
-      ++  ergo                                          ::  lark blocked
-        |=  kal=lark
+      ++  ergo                                          ::  request stub
         |=  gez=(list path)
         ^-  beef
-        :+  %+  turn  gez
-            |=(a=path `card`[%text "? {~(ram re (dish:ut [~ %path] a))}"])
-          (turn gez |=(a=path `slip`[a [%ez a]]))
-        [~ %| gez kal]
+        :_  [~ ~]
+        (turn gez |=(a=path [%text "? {~(ram re (dish:ut [~ %path] a))}"]))
       ::
       ++  fret                                          ::  process coal
         |=  poc=coal
@@ -9816,13 +9717,10 @@
       ::
       ++  germ                                          ::  add a slip
         |=  sip=slip
-        ::  ~&  [%germ sip]
         ^+  +>
-        ?+    -.q.sip  +>
-            ::   %ez  (envy /c/ [%hope ~ q.sip])
-            %up  +>(pak [[pid p.sip] pak])
-            %yo  
-          (enow /a/ [(scot %ud pid) p.sip] [%want p.q.sip q.q.sip r.q.sip])
+        ?+  -.q.sip  
+               +>
+          %up  +>(pak [[pid p.sip] pak])
         ==
       ::
       ++  gird                                          ::  process slips
@@ -9900,9 +9798,7 @@
         %-  haul
         %^    dost
             (mong [fane:do [pux nob r.u.bor]] sky)
-          |=  gez=(list path)
-          ^-  beef
-          !!                                            ::  XX do this right
+          ergo
         fret
       ::
       ++  loft                                          ::  execute command
@@ -9913,13 +9809,13 @@
         ?-    -.kal
             %cd  +>.$(cwd p.kal)
             %do  (huck p.kal)
-            %eh  (haul (dost (mong [echo:do lube +.kal] sky) (ergo kal) hak))
-            %go  (haul (dost (mong [fapp:do lube +.kal] sky) (ergo kal) fret))
+            %eh  (haul (dost (mong [echo:do lube +.kal] sky) ergo hak))
+            %go  (haul (dost (mong [fapp:do lube +.kal] sky) ergo fret))
             %kl  (envy /b/ [%kill p.kal])
             %nk  (envy /b/ [%nuke ~])
             %ps  (emir view)
             %so  (hock p.kal q.kal)
-            %to  (haul (dost (mong [ecto:do lube +.kal] sky) (ergo kal) hak))
+            %to  (haul (dost (mong [ecto:do lube +.kal] sky) ergo hak))
         ==
       ::
       ++  mete                                          ::  deliver line
@@ -9966,8 +9862,7 @@
             %nuke  nuke
             %line  (gill (trip p.fav))
             %thee  (heat p.fav)
-            %went  (glom p.fav q.fav)
-           ==
+          ==
       |%
       ++  gill                                          ::  dispatch line
         |=  fet=tape
@@ -9986,21 +9881,6 @@
         %.  [pux fav]
         =<  coax
         (ride pid hen p.byr [~ q.byr])
-      ::
-      ++  glom                                          ::  dispatch network
-        |=  [cap=cape sop=soap]
-        ^-  [p=(list move) q=_..^^$]
-        ?>  ?=(^ pex)
-        =+  ped=(slay i.pex)
-        ?>  ?=([~ %% %ud @] ped)
-        =+  byr=(need (~(get by q.lif) q.p.u.ped))
-        =<  nave
-        ^+  *ride
-        %.  [t.pex [%yo cap]]
-        =<  jerk
-        %.  [t.pex fav]
-        =<  coax
-        (ride q.p.u.ped hen p.byr [~ q.byr])
       :: 
       ++  heat                                          ::  dispatch http req
         |=  het=hate
@@ -10142,9 +10022,7 @@
   ++  beat                                              ::  process move
     |=  [whu=(unit flag) tea=tire hen=hose fav=card]
     ^-  [p=(list move) q=vane]
-    ?.  ?=(^ whu)
-      ~&  [%beat-none fav]
-      !!
+    ?>  ?=(^ whu)
     =+  ^=  beg  ^+  *berg
         =+  beg=(~(get by deb) u.whu)
         ?^(beg u.beg (bard u.whu))
@@ -10152,30 +10030,10 @@
     :-  p.yub
     ..^$(deb (~(put by deb) u.whu q.yub))
   ::
-  ++  come  |=(old=vase (load old))
   ++  doze
     |=  hen=hose
     ^-  (unit ,@da)
     ~
-  ::
-  ++  flee  stay
-  ++  load
-    |=  new=vase
-    ^-  vane
-    ?.  (~(nest ut -:!>(*(list ,[p=flag q=brad]))) & p.new)
-      ~|(%load-nest-bede !!)
-    %=    ..^$
-        deb
-      ^-  (map flag _*berg)
-      %-  ~(gas by *(map flag _*berg))
-      %+  turn
-        ((hard (list ,[p=flag q=brad])) q.new)
-      |=([p=flag q=brad] [p (barn p q)])
-    ==
-  ::
-  ++  raze  
-    ^-  vane
-    ..$(deb ~)
   ::
   ++  scry
     |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
@@ -10185,15 +10043,6 @@
     =+  beg=(~(get by deb) our)
     ?~  beg  ~
     [~ prot:(u.beg now eny |=(* *(unit)))]
-  ::
-  ++  stay
-    ^-  vase
-    !>  |-  ^-  (list ,[p=flag q=brad])
-        %+  turn
-          (~(tap by deb) ~)
-        |=  [p=flag q=_*berg]
-        ^-([p=flag q=brad] [p +>+<+.q])
-    ==
   --
   :::::::::::::::::::::::::::::::::::::::::::::::::::::   ::
 ::::              chapter 4c, revision control          ::::
@@ -10212,8 +10061,7 @@
   ++  beat                                              ::  update
     |=  [whu=(unit flag) tea=tire hen=hose fav=card]
     ^-  [p=(list move) q=vane]
-    ?+    -.fav  ~&  [%beat-none fav]
-                 !!
+    ?+    -.fav  !! 
         %edit
       =.  whu  
           ?^  whu  whu
@@ -10224,14 +10072,15 @@
       ?>  own.yar
       =+  lix=(~(get by dos.yar) q.fav)
       =+  saq=`desk`?^(lix u.lix [~ 0 ~])
-      :-  =+  one=~(rend co ~ %p u.whu)
-          =+  two=(rip 3 q.fav)
+      :-  =+  one=~(rend co ~ %ud let.saq)
+          =+  two=~(rend co ~ %p u.whu)
+          =+  tre=(rip 3 q.fav)
           %+  turn
             r.fav
           |=  uke=ukaz  ^-  move
           =+  qua=~(ram re (dish:ut [~ %path] p.uke))
           =+  qui=?-(-.q.uke %del '-', %set ?:(=(0 q.q.uke) '+' ':'))
-          [whu [/d/ hen] %flog %note qui %leaf "{one}/{two}{qua}"]
+          [whu [/d/ hen] %flog %note qui %leaf "/cx/{one}/{two}/{tre}{qua}"]
       %_    ..^$
           rof
         %+  ~(put by rof)
@@ -10276,30 +10125,15 @@
       ==
     ==
   ::
-  ++  come  |=(old=vase (load old))
   ++  doze
     |=  hen=hose
     ^-  (unit ,@da)
     ~
-  ::
-  ++  flee  stay
-  ++  load
-    |=  new=vase
-    ^-  vane
-    ?.  (~(nest ut -:!>(rof)) & p.new)
-      ~|(%load-nest-cary !!)
-    ..^$(rof (roof q.new))
-  ::
-  ++  raze
-    ^-  vane
-    ..$(rof *roof)
-  ::
   ++  scry                                              ::  inspect
     |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
     ^-  (unit)
     ?~  tyl  ~
-    ?.  =(our his)
-      ~
+    ?>  =(our his)                                      ::  XX temporary
     =+  poj=(slay i.tyl)
     ?.  ?=([~ %% %tas *] poj)  ~
     =+  yar=(~(get by rof) his)
@@ -10319,7 +10153,6 @@
         |-  ^-  (unit arch) 
         ?+    lot  ~
             [%% %ud @]
-          ~&  [%scry-ver q.p.lot let.u.siq]
           ?:  =(0 q.p.lot)
             [~ %| ~2000.1.1 ~]
           ?:  (gth q.p.lot let.u.siq)  ~
@@ -10353,8 +10186,6 @@
           ==
       %z  [~ rad]
     ==
-  ::
-  ++  stay  `vase`!>(rof)
   --
   :::::::::::::::::::::::::::::::::::::::::::::::::::::   ::
 ::::              chapter 4d, console                   ::::
@@ -10727,30 +10558,15 @@
       ..^$(wib ?.(wip (~(put by wib) hen yar) (~(del by wib) hen)))
     --
   ::
-  ++  come  |=(old=vase (load old))
   ++  doze
     |=  hen=hose
     ^-  (unit ,@da)
     ~
   ::
-  ++  flee  stay
-  ++  load
-    |=  new=vase
-    ^-  vane
-    ?.  (~(nest ut -:!>(wib)) & p.new)
-      ~|(%load-nest-dill !!)
-    ..^$(wib ((map hose yard) q.new))
-  ::
-  ++  raze  
-    ^-  vane
-    ..$(wib ~)
-  ::
   ++  scry
     |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
     ^-  (unit)
     ~
-  ::
-  ++  stay  `vase`!>(wib)
   --
   :::::::::::::::::::::::::::::::::::::::::::::::::::::   ::
 ::::              chapter 4e, HTTP                      ::::
@@ -10810,38 +10626,21 @@
       ==
     ==
   ::
-  ++  come  |=(old=vase (load old))
-  ::
   ++  doze
     |=  hen=hose
     ^-  (unit ,@da)
     ~
   ::
-  ++  flee  stay
-  ++  load
-    |=  new=vase
-    ^-  vane
-    ?.  (~(nest ut -:!>(seh)) & p.new)
-      ~|(%load-nest-dill !!)
-    ..^$(seh ((list ,[p=host q=flag]) q.new))
-  ::
-  ++  raze  
-    ^-  vane
-    ..$(seh ~)
-  ::
   ++  scry
     |=  [our=flag ren=@tas who=flag lot=coin tyl=path]
     ^-  (unit)
     ~
-  ::
-  ++  stay  `vase`!>(seh)
   --
 --
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::  ::::::    Postface                              ::::::
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
-=|  eny=@                                               ::  entropy
-=|  sag=(unit ,*)                                       ::  old engine
+=|  eny=@
 =+  ^=  fan  ^-  (list ,[p=@tas q=vane])
     :~  a/ames
         b/bede
@@ -10849,90 +10648,40 @@
         d/dill
         e/eyre
     ==
-=<  |%
-    ++  come  |=(* (^come +<))                          ::  11
-    ++  load  |=  *                                     ::  86
-              ^+  +>
-              %=    +>
-                  +
-                %-  ^load
-                %-  (hard ,[@da @ (list ,[@tas vase]) (unit ,*)])
-                +<
-              ==
-    ++  keep  |=(* (^keep ((hard ,[@da path]) +<)))     ::  4
-    ++  peek  |=(* (^peek ((hard ,[@p @da path]) +<)))  ::  87
-    ++  poke  |=  * 
-              =>  .(+< ((hard ,[now=@da ovo=ovum]) +<))
-              =^  a  +>+  (^poke now ovo)
-              (hang now a +>.$)
-    ++  wish  |=(* (^wish ((hard ,@ta) +<)))            ::  20
-    --
 |%
-++  come
+::
+++  come                                                ::  load from old
   |=  *
   ^+  +>
   !!
-::
-++  hang
-  |=  [now=@da ova=(list ovum) top=*]
-  |-  ^-  [p=(list ovum) q=*]
-  =+  out=(skid ova |=(a=ovum ?=(%rein -.q.a)))
-  :-  q.out
-  ?~  p.out  top
-  ?>  ?=([* ~] p.out)
-  ?+    -.q.i.p.out  !!
-      %rein 
-    ~|  %hang-rein
-    ~&  [%hang-rein-make q.q.i.p.out]
-    =+  sky=(~(beck (is eny fan) now) [~ ~tasfyn-partyv])
-    =+  der=(sky q.q.i.p.out)
-    ~&  [%hang-rein-der =(~ der)]
-    =+  ken=(make ((hard ,@) (need der)))
-    ~&  %hang-rein-engine
-    =+  eng=.*(0 ken)
-    ~&  %hang-rein-vanes
-    =+  fuy=(turn fan |=([p=@tas q=vane] [p stay:(q now eny sky)]))
-    ~&  %hang-rein-gate
-    =+  gat=.*([0 ?:(p.q.i.p.out 11 86)] ken)
-    =+  sam=[eny fuy ?:(p.q.i.p.out [~ top] sag)]
-    .*([-.gat [fuy +>.gat]] -.gat)
-  ==
-::
-++  keep                                                ::  wakeup delay
-  |=  [now=@da hap=path]
-  =>  .(+< ((hard ,[now=@da hap=path]) +<))
-  (~(doos (is eny fan) now) hap)
-::
-++  load                                                ::  install current
-  |=  [now=@da ney=@ fag=(list ,[p=@tas q=vase]) gud=(unit ,*)]
-  ~&  %rein-load
-  ^+  +>
-  %=    +>
-      eny  ney
-      sag  gud
-      fan
-    %+  turn  fag
-    |=  [nam=@tas vax=vase]
-    :-  nam
-    =+  hey=?+(nam !! %a ames, %b bede, %c cary, %d dill, %e eyre)
-    (load:(hey now eny (~(beck (is eny fan) now) ~)) vax)
-  ==
-::
+
 ++  peek                                                ::  external inspect
-  |=  [our=@p now=@da hap=path]
+  |=  *
   ^-  (unit)
+  =>  .(+< ((hard ,[our=@p now=@da hap=path]) +<))
+  ::  ~&  [%zuse-peek hap]
   ?~  hap  ~
-  ((~(beck (is eny fan) now) ~) hap)
+  ((~(beck (is eny fan) now) [~ our]) hap)
 ::
 ++  poke                                                ::  external apply
-  |=  [now=@da ovo=ovum]
+  |=  *
   ^-  [p=(list ovum) q=_+>]
+  =>  .(+< ((hard ,[now=@da ovo=ovum]) +<))
+  ::  ~&  [%zuse-poke ovo]
   =^  zef  fan
     (~(hurl (is eny fan) now) ovo)
   [zef +>.$]
 ::
 ++  wish                                                ::  external compute
-  |=  txt=@
+  |=  *
+  ^-  *
+  =>  .(+< ((hard ,[txt=@]) +<))
+  =+  gen=(ream txt)
   q:(slap `vase`!>(+>) (ream txt))
+::
+++  wait                                                ::  wakeup delay
+  |=  *  ^-  (unit ,@da)
+  =>  .(+< ((hard ,[now=@da hap=path]) +<))
+  (~(doos (is eny fan) now) hap)
 --
 . ==

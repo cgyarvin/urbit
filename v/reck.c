@@ -690,6 +690,15 @@ _reck_kick_norm(u2_reck* rec_u, u2_noun pox, u2_noun fav)
 
       u2z(pox); u2z(fav); return u2_yes;
     } break;
+
+    case c3__send:
+    {
+      u2_noun lan = u2k(u2h(u2t(fav)));
+      u2_noun pac = u2k(u2t(u2t(fav)));
+
+      u2_ames_ef_send(rec_u, lan, pac);
+      u2z(pox); u2z(fav); return u2_yes;
+    } break;
   }
   c3_assert(!"not reached"); return u2_no;
   u2z(pox); u2z(fav); return u2_no;
