@@ -153,6 +153,74 @@ u2_mean(u2_noun som,
   return _mean_extract(som, len_w, prs_m);
 }
 
+/* _frag_word(): fast fragment/branch prediction for top word.
+*/
+static u2_weak
+_frag_word(c3_w a_w, u2_noun b)
+{
+  c3_assert(0 != a_w);
+
+  {
+    c3_w dep_w = u2_ax_dep(a_w);
+
+    while ( dep_w ) {
+      if ( u2_no == u2_dust(b) ) {
+        return u2_none;
+      }
+      else { 
+        c3_w x = (1 & (a_w >> (dep_w - 1)));
+        
+        b = *u2_at_ray(1 + x + u2_pom_a(b));
+        dep_w--;
+      }
+    }
+    return b;
+  }
+}
+
+/* _frag_deep(): fast fragment/branch for deep words.
+*/
+static u2_weak
+_frag_deep(c3_w a_w, u2_noun b)
+{
+  c3_w dep_w = 32;
+
+  while ( dep_w ) {
+    if ( u2_no == u2_dust(b) ) {
+      return u2_none;
+    }
+    else { 
+      c3_w x = (1 & (a_w >> (dep_w - 1)));
+      
+      b = *u2_at_ray(1 + x + u2_pom_a(b));
+      dep_w--;
+    }
+  }
+  return b;
+}
+
+/* _frag_phat(): fragment for fat.
+*/
+static u2_weak
+_frag_phat(u2_noun a, u2_noun b)
+{
+  c3_w len_w = *u2_at_pug_len(a);
+
+  b = _frag_word(*u2_at_pug_buf(a, (len_w - 1)), b);
+  len_w -= 1;
+
+  while ( len_w ) {
+    b = _frag_deep(*u2_at_pug_buf(a, (len_w - 1)), b);
+
+    if ( u2_none == b ) {
+      return b;
+    } else {
+      len_w--;
+    }
+  }
+  return b;
+}
+
 /* u2_frag():
 **
 **   Return fragment (a) of (b), or u2_none if not applicable.
@@ -169,48 +237,42 @@ u2_frag(u2_atom a,
   }
 
   if ( u2_fly_is_cat(a) ) {
-    c3_w dep_w = u2_ax_dep(a);
-
-    while ( dep_w ) {
-      if ( u2_no == u2_dust(b) ) {
-        return u2_none;
-      }
-      if ( a & (1 << (dep_w - 1)) ) {
-        b = u2_t(b);
-      } else {
-        b = u2_h(b);
-      }
-      dep_w--;
-    }
-
-    return b;
+    return _frag_word(a, b);
   }
   else {
-    c3_w  fol_w = (u2_met(0, a) - 1);
-    c3_w  i_w;
-    mpz_t a_mp;
+    if ( !u2_dog_is_pug(a) ) {
+      return u2_none;
+    } 
+    else {
+      return _frag_phat(a, b);
+#if 0
+      c3_w  fol_w = (u2_met(0, a) - 1);
+      c3_w  i_w;
+      mpz_t a_mp;
 
-    c3_assert(u2_none != b);
-    u2_mp(a_mp, a);
-   
-    for ( i_w=0; i_w < fol_w; i_w++ ) {
-      c3_w lum_w = (fol_w - (i_w + 1));
+      c3_assert(u2_none != b);
+      u2_mp(a_mp, a);
+     
+      for ( i_w=0; i_w < fol_w; i_w++ ) {
+        c3_w lum_w = (fol_w - (i_w + 1));
 
-      if ( u2_no == u2_dust(b) ) {
-        mpz_clear(a_mp);
+        if ( u2_no == u2_dust(b) ) {
+          mpz_clear(a_mp);
 
-        return u2_none;
-      }
-      else {
-        if ( (mpz_tstbit(a_mp, lum_w) == 0) ) {
-          b = u2_h(b);
-        } else {
-          b = u2_t(b);
+          return u2_none;
+        }
+        else {
+          if ( (mpz_tstbit(a_mp, lum_w) == 0) ) {
+            b = u2_h(b);
+          } else {
+            b = u2_t(b);
+          }
         }
       }
+      mpz_clear(a_mp);
+      return b;
+#endif
     }
-    mpz_clear(a_mp);
-    return b;
   }
 }
 
