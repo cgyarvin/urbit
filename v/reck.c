@@ -324,14 +324,15 @@ u2_reck_keep(u2_reck* rec_u, u2_noun hap)
   return _reck_nock_keep(rec_u, hap);
 }
 
-/* _reck_init_vane(): install vane with direct poke.
+/* _reck_init_veer(): install vane with direct poke.
 */
 static void
-_reck_init_vane(u2_reck* rec_u, u2_noun nam, u2_noun txt)
+_reck_init_veer(u2_reck* rec_u, u2_noun nam, u2_noun pax, u2_noun txt)
 {
   u2_noun ovo, pro;
 
-  ovo = u2nc(u2nc(c3__gold, u2_nul), u2nt(c3__veer, nam, txt));
+  pax = u2nc(c3__arvo, pax);
+  ovo = u2nc(u2nc(c3__gold, u2_nul), u2nq(c3__veer, nam, pax, txt));
   pro = _reck_nock_poke(rec_u, ovo);
 
   u2z(rec_u->roc);
@@ -430,6 +431,34 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     rec_u->ken = ken;
     rec_u->roc = u2_cn_nock(0, u2k(ken));
 
+    //  Direct poke to install tang/vanes.  Shd be in egz but isnt.
+    //
+    {
+      _reck_init_veer(rec_u, 0, 
+                             u2nc(c3__zuse, u2_nul),
+                             _reck_load_arvo(rec_u, "zuse.hoon"));
+
+      _reck_init_veer(rec_u, 'a', 
+                             u2nc(c3__ames, u2_nul), 
+                             _reck_load_arvo(rec_u, "ames.hoon"));
+
+      _reck_init_veer(rec_u, 'b', 
+                             u2nc(c3__bede, u2_nul),
+                             _reck_load_arvo(rec_u, "bede.hoon"));
+
+      _reck_init_veer(rec_u, 'c', 
+                             u2nc(c3__cary, u2_nul),
+                             _reck_load_arvo(rec_u, "cary.hoon"));
+
+      _reck_init_veer(rec_u, 'd', 
+                             u2nc(c3__dill, u2_nul),
+                             _reck_load_arvo(rec_u, "dill.hoon"));
+
+      _reck_init_veer(rec_u, 'e', 
+                             u2nc(c3__eyre, u2_nul),
+                             _reck_load_arvo(rec_u, "eyre.hoon"));
+    }
+
     rec_u->syd = u2_reck_wish(rec_u, "seed");
     rec_u->toy.rain = u2_reck_wish(rec_u, "rain");
     rec_u->toy.ream = u2_reck_wish(rec_u, "ream");
@@ -458,16 +487,6 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
 
       printf("time: %s\n", dyt_c);
       free(dyt_c);
-    }
-
-    //  Direct poke to install initial vanes.  Shd be in egz but isnt.
-    //
-    {
-      _reck_init_vane(rec_u, 'a', _reck_load_arvo(rec_u, "ames.hoon"));
-      _reck_init_vane(rec_u, 'b', _reck_load_arvo(rec_u, "bede.hoon"));
-      _reck_init_vane(rec_u, 'c', _reck_load_arvo(rec_u, "cary.hoon"));
-      _reck_init_vane(rec_u, 'd', _reck_load_arvo(rec_u, "dill.hoon"));
-      _reck_init_vane(rec_u, 'e', _reck_load_arvo(rec_u, "eyre.hoon"));
     }
   }
 }
