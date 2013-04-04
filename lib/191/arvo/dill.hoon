@@ -1,8 +1,7 @@
 !:
-::          %dill, terminal handling.  This file is in the public domain.
+::  dill (4d), terminal handling
 ::
-|%
-++  dill                                                ::  terminal handling
+  |=  pit=vase
   ^-  vane                                              ::  kernel instrument
   =|  $:  wib=(map hose yard)                           ::  terminal by channel
       ==                                                ::
@@ -370,14 +369,28 @@
       ..^$(wib ?.(wip (~(put by wib) hen yar) (~(del by wib) hen)))
     --
   ::
+  ++  come  |=(old=vase (load old))
   ++  doze
     |=  hen=hose
     ^-  (unit ,@da)
     ~
   ::
+  ++  flee  stay
+  ++  load
+    |=  new=vase
+    ^-  vane
+    ?.  (~(nest ut -:!>(wib)) & p.new)
+      ~|(%load-nest-dill !!)
+    ..^$(wib ((map hose yard) q.new))
+  ::
+  ++  raze  
+    ^-  vane
+    ..$(wib ~)
+  ::
   ++  scry
     |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
     ^-  (unit)
     ~
+  ::
+  ++  stay  `vase`!>(wib)
   --
---

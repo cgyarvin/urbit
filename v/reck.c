@@ -242,6 +242,17 @@ _reck_load_temp(u2_reck* rec_u, u2_noun vax, c3_w kno_w, c3_c* pax_c)
   return _reck_load(rec_u, vax, ful_c);
 }
 
+/* _reck_load_arvo(): read an arvo file.
+*/
+static u2_noun
+_reck_load_arvo(u2_reck* rec_u, c3_c* pax_c)
+{
+  c3_c ful_c[2048];
+ 
+  sprintf(ful_c, "%s/%d/arvo/%s", u2_System, rec_u->kno_w, pax_c);
+  return u2_walk_load(ful_c);
+}
+
 /* u2_reck_time(): set the reck time.
 */
 void
@@ -311,6 +322,21 @@ u2_noun
 u2_reck_keep(u2_reck* rec_u, u2_noun hap)
 {
   return _reck_nock_keep(rec_u, hap);
+}
+
+/* _reck_init_vane(): install vane with direct poke.
+*/
+static void
+_reck_init_vane(u2_reck* rec_u, u2_noun nam, u2_noun txt)
+{
+  u2_noun ovo, pro;
+
+  ovo = u2nc(u2nc(c3__gold, u2_nul), u2nt(c3__veer, nam, txt));
+  pro = _reck_nock_poke(rec_u, ovo);
+
+  u2z(rec_u->roc);
+  rec_u->roc = u2k(u2t(pro));
+  u2z(pro);
 }
 
 /* u2_reck_init(): load the reck engine, from kernel.
@@ -433,10 +459,17 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
       printf("time: %s\n", dyt_c);
       free(dyt_c);
     }
-  }
 
-#if 0
-#endif
+    //  Direct poke to install initial vanes.  Shd be in egz but isnt.
+    //
+    {
+      _reck_init_vane(rec_u, 'a', _reck_load_arvo(rec_u, "ames.hoon"));
+      _reck_init_vane(rec_u, 'b', _reck_load_arvo(rec_u, "bede.hoon"));
+      _reck_init_vane(rec_u, 'c', _reck_load_arvo(rec_u, "cary.hoon"));
+      _reck_init_vane(rec_u, 'd', _reck_load_arvo(rec_u, "dill.hoon"));
+      _reck_init_vane(rec_u, 'e', _reck_load_arvo(rec_u, "eyre.hoon"));
+    }
+  }
 }
 
 /* _reck_mole(): parse simple atomic mole.
