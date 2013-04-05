@@ -1,4 +1,4 @@
-::
+!:
 ::              Hoon/Arvo stage 191 (reflexive).  
 ::              This file is in the public domain.
 ::
@@ -7434,6 +7434,8 @@
     ++  peek  |=(* (^peek ((hard ,[@p @da path]) +<)))  ::  87
     ++  poke  |=  * 
               =>  .(+< ((hard ,[now=@da ovo=ovum]) +<))
+              ?:  ?=(%veer -.q.ovo)
+                [~ +>(+ (veer | +.q.ovo))]
               =^  a  +>+  (^poke now ovo)
               (hang now a +>.$)
     ++  wish  |=(* (^wish ((hard ,@ta) +<)))            ::  20
@@ -7472,18 +7474,21 @@
 ::
 ++  poke                                                ::  external apply
   |=  [now=@da ovo=ovum]
-  ?:  ?=(%veer -.q.ovo)
-    ?:  =(%% p.q.ovo)
-      ~&  [%tang q.q.ovo `@p`(mug r.q.ovo)]
-      =+  gen=(rain q.q.ovo r.q.ovo) 
-      =+  vax=(slap pit gen)
-      [~ +>.$(bud vax)]
-    ~&  [%vane `@tas`p.q.ovo q.q.ovo `@p`(mug r.q.ovo)]
-    [~ +>.$(fan [[p.q.ovo (vein bud q.q.ovo r.q.ovo)] fan])]
   ^-  [p=(list ovum) q=_+>]
   =^  zef  fan
     (~(hurl (is eny fan) now) ovo)
   [zef +>.$]
+::
+++  veer
+  |=  [gup=? lal=@ta pax=path txt=@t]
+  ^+  +>
+  ?:  =(%% lal)
+    ~&  [%tang pax `@p`(mug txt)]
+    =+  gen=(rain pax txt) 
+    =+  vax=(slap pit gen)
+    +>.$(bud vax)
+  ~&  [%vane `@tas`lal pax `@p`(mug txt)]
+  +>.$(fan [[lal (vein bud pax txt)] fan])
 ::
 ++  wish                                                ::  external compute
   |=  txt=@
