@@ -7287,46 +7287,23 @@
     %lead
   $(hen t.hen)
 ::
-++  vein                                                ::  kernel module
-  |=  [pit=vase txt=@ta ves=vase]                       ::  kernel, source
-  =|  :*  von=(list vase)                               ::  old vases
-          gen=gene                                      ::  gene (derived)
-          ::  ves=vase                                      ::  vase (derived)
+++  vein                                                ::  vane wrapper
+  |=  [bud=vase pax=path txt=@ta]                       ::  kernel, source
+  =|  von=(list vase)                                   ::  old vases
+  =+  =+  pal=~(play ut p.bud)
+      :*  bet=(pal (vice '[*(unit flag) *tire *hose *card]'))
+          nim=(pal (vice '[*flag @tas *flag *coin *path]'))
+          vin=(pal (vice '[@da @ |+(* *(unit))]'))
+          hoz=(pal (vice '*hose'))
+          viz=(pal (vice '*vase'))
       ==
-  =+  pal=~(play ut p.pit)
-  ::  =+  bet=(pal (vice '[*(unit flag) *tire *hose *card]'))
-  ::  =+  dim=(vice '[*(unit flag) *tire *hose *card]')
-  ::  =+  foo=(pal [%cnbc %dec])
-  =+  bet=-:!>(*(unit flag) *tire *hose *card)
-  =+  nim=-:!>(*flag @tas *flag *coin *path)
-  =|  onn=[now=@da eny=@ sky=||(* (unit))]
-  =+  vin=-:!>(onn)
+  =+  gen=(rain pax txt)
+  =+  ves=(slam (slap bud gen) `vase`[viz bud])
   |%
-  ++  init                                              ::  initialize empty
-    =.  gen  (vice txt)
-    =.  ves  (slap pit gen)
-    .
-  ::
-  ++  wank
-    |=  [now=@da eny=@ sky=||(* (unit))]
-    =+  arg=`vase`[vin +<]
-    =+  rig=(slam ves arg)
-    |=  $:  whu=(unit flag)
-            pax=tire
-            hen=hose
-            fav=card
-        ==
-    ^-  [p=(list move) q=_+>.^$] 
-    =+  pro=(slam (slap rig [%cnbc %beat]) [bet +<])
-    :-  ((hard (list move)) q:(slap pro [%cnbc %p]))
-    +>.^$(ves (slap pro [%cnbc %q]))
-  ::
   ++  wink
-    ^-  vane
     |=  [now=@da eny=@ sky=||(* (unit))]
     =+  arg=`vase`[vin +<]
     =+  rig=(slam ves arg)
-    ^?
     |%  
     ++  beat
       |=  $:  whu=(unit flag)
@@ -7334,22 +7311,16 @@
               hen=hose
               fav=card
           ==
-      ^-  [p=(list move) q=vane]
+      ^-  [p=(list move) q=+>.^$]
       =+  pro=(slam (slap rig [%cnbc %beat]) [bet +<])
       :-  ((hard (list move)) q:(slap pro [%cnbc %p]))
-      `vane`..^$(ves (slap pro [%cnbc %q]))
+      +>.^$(ves (slap pro [%cnbc %q]))
     ::
-    ++  come
-              |=  old=vase
-              *vane
     ++  doze
-              |=  hen=hose
-              *(unit ,@da)
-    ++  flee  *vase
-    ++  load
-              |=  new=vase
-              *vane
-    ++  raze  *vane
+      |=  hen=hose
+      ^-  (unit ,@da)
+      ((hard (unit ,@da)) q:(slam (slap rig [%cnbc %doze]) [hoz +<]))
+    ::
     ++  scry
       |=  $:  our=flag
               ren=@tas
@@ -7359,8 +7330,6 @@
           ==
       =+  pro=(slam (slap rig [%cnbc %scry]) [nim +<])
       ((hard (unit)) q.pro)
-    ::
-    ++  stay  *vase
     --
   --
 ::
@@ -7438,7 +7407,7 @@
       =+  tuh=$(naf t.naf)
       [p.tuh [i.naf q.tuh]]
     =+  ^=  yub
-        %-  (wank:q.i.naf now (shax now) (beck p.i.mor))
+        %-  beat:(wink:q.i.naf now (shax now) (beck p.i.mor))
         [p.i.mor t.i.q.i.mor t.q.i.mor r.i.mor]
     [p.yub [[p.i.naf q.yub] t.naf]]
   --
@@ -7507,20 +7476,10 @@
     ?:  =(%% p.q.ovo)
       ~&  [%tang q.q.ovo `@p`(mug r.q.ovo)]
       =+  gen=(rain q.q.ovo r.q.ovo) 
-      ~&  %parsed
       =+  vax=(slap pit gen)
-      ~&  %loaded
       [~ +>.$(bud vax)]
     ~&  [%vane `@tas`p.q.ovo q.q.ovo `@p`(mug r.q.ovo)]
-    =+  gen=(rain [p.q.ovo ~] r.q.ovo)
-    ~&  %parsed
-    =+  vax=(slap bud gen)
-    ~&  %loaded
-    =+  mit=`vase`!>(bud)
-    =+  var=(slam vax mit)
-    =+  ven=(vein bud r.q.ovo var)
-    ~&  %boiled
-    [~ +>.$(fan [[p.q.ovo ven] fan])]
+    [~ +>.$(fan [[p.q.ovo (vein bud q.q.ovo r.q.ovo)] fan])]
   ^-  [p=(list ovum) q=_+>]
   =^  zef  fan
     (~(hurl (is eny fan) now) ovo)
