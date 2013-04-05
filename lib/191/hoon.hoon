@@ -1,4 +1,4 @@
-!:
+::
 ::              Hoon/Arvo stage 191 (reflexive).  
 ::              This file is in the public domain.
 ::
@@ -7462,24 +7462,20 @@
               ?:  ?=(%veer -.q.ovo)
                 [~ +>(+ (veer | +.q.ovo))]
               =^  ova  +>+  (^poke now ovo)
-              =+  out=(skid ova |=(a=ovum ?=(%veer -.q.a)))
               |-  ^-  [(list ovum) _+>.^$]
-              :-  q.out
-              +>.^$
+              ?~  ova
+                [~ +>.^$]
+              =^  avo  +>.^$  $(ova t.ova)
+              ?+    -.q.i.ova  [[i.ova avo] +>.^$]
+                  %veer
+                [avo +>.^$(+ (veer | +.q.i.ova))]
+              ==
     ++  wish  |=(* (^wish ((hard ,@ta) +<)))            ::  20
     --
 |%
 ++  come
   |=  *
   ^+  +>
-  !!
-::
-++  hang
-  |=  [now=@da ova=(list ovum) top=*]
-  |-  ^-  [p=(list ovum) q=*]
-  =+  out=(skid ova |=(a=ovum ?=(%rein -.q.a)))
-  :-  q.out
-  ?~  p.out  top
   !!
 ::
 ++  keep                                                ::  wakeup delay
