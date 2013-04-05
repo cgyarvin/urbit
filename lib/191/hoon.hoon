@@ -1,4 +1,4 @@
-::
+!:
 ::              Hoon/Arvo stage 191 (reflexive).  
 ::              This file is in the public domain.
 ::
@@ -7300,6 +7300,30 @@
   =+  gen=(rain pax txt)
   =+  ves=(slam (slap bud gen) `vase`[viz bud])
   |%
+  ++  ruck
+    |=  [gub=? pax=path txt=@ta]
+    ^+  +>
+    ~&  %ruck-a
+    =:  ^txt  txt
+        ^pax  pax
+        gen   (rain pax txt)
+      ==
+    ~&  %ruck-b
+    =+  arg=`vase`[vin ~2000.1.1 0 =>(~ |+(* ~))]
+    =+  rig=(slam ves arg)
+    ~&  %ruck-c
+    =+  rev=(slam (slap bud gen) `vase`[viz bud])
+    ~&  %ruck-d
+    =+  syg=(slam rev arg)
+    ~&  %ruck-e
+    =+  ole=(slap rig [%cnbc %stay])
+    ~&  %ruck-f
+    =+  new=(slam (slap syg [%cnbc %load]) ole)
+    ~&  %ruck-g
+    =+  ded=(slap rig [%cnbc %raze])
+    ~&  %ruck-h
+    +>.$(ves new, von [ded von])
+  :: 
   ++  wink
     |=  [now=@da eny=@ sky=||(* (unit))]
     =+  arg=`vase`[vin +<]
@@ -7433,11 +7457,15 @@
     ++  keep  |=(* (^keep ((hard ,[@da path]) +<)))     ::  4
     ++  peek  |=(* (^peek ((hard ,[@p @da path]) +<)))  ::  87
     ++  poke  |=  * 
+              ^-  [(list ovum) _+>]
               =>  .(+< ((hard ,[now=@da ovo=ovum]) +<))
               ?:  ?=(%veer -.q.ovo)
                 [~ +>(+ (veer | +.q.ovo))]
-              =^  a  +>+  (^poke now ovo)
-              (hang now a +>.$)
+              =^  ova  +>+  (^poke now ovo)
+              =+  out=(skid ova |=(a=ovum ?=(%veer -.q.a)))
+              |-  ^-  [(list ovum) _+>.^$]
+              :-  q.out
+              +>.^$
     ++  wish  |=(* (^wish ((hard ,@ta) +<)))            ::  20
     --
 |%
@@ -7474,21 +7502,27 @@
 ::
 ++  poke                                                ::  external apply
   |=  [now=@da ovo=ovum]
-  ^-  [p=(list ovum) q=_+>]
+  ^-  [(list ovum) _+>]
   =^  zef  fan
     (~(hurl (is eny fan) now) ovo)
   [zef +>.$]
 ::
 ++  veer
   |=  [gup=? lal=@ta pax=path txt=@t]
-  ^+  +>
   ?:  =(%% lal)
     ~&  [%tang pax `@p`(mug txt)]
     =+  gen=(rain pax txt) 
     =+  vax=(slap pit gen)
     +>.$(bud vax)
-  ~&  [%vane `@tas`lal pax `@p`(mug txt)]
-  +>.$(fan [[lal (vein bud pax txt)] fan])
+  %_    +>
+      fan
+    |-  ^+  fan
+    ?~  fan 
+      ~&  [%vane `@tas`lal pax `@p`(mug txt)]
+      [[lal (vein bud pax txt)] fan]
+    ?.  =(lal p.i.fan)  [i.fan $(fan t.fan)]
+    [[p.i.fan (ruck:q.i.fan gup pax txt)] t.fan]
+  ==
 ::
 ++  wish                                                ::  external compute
   |=  txt=@
