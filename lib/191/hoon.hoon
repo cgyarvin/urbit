@@ -6973,7 +6973,7 @@
               [%went p=cape q=soap]                     ::  peer reaction
               [%wipe ~]                                 ::  clean up hose
               [%word p=chum]                            ::  set password
-              [%veer p=@ta q=path r=@t]                 ::  install vane
+              [%veer p=? q=@ta r=path s=@t]             ::  install vane
           ==                                            ::
 ++  cask                                                ::  symmetric record
           $:  yed=(unit ,[p=hand q=code])               ::  outbound
@@ -7460,7 +7460,7 @@
               ^-  [(list ovum) _+>]
               =>  .(+< ((hard ,[now=@da ovo=ovum]) +<))
               ?:  ?=(%veer -.q.ovo)
-                [~ +>(+ (veer | +.q.ovo))]
+                [~ +>(+ (veer +.q.ovo))]
               =^  ova  +>+  (^poke now ovo)
               |-  ^-  [(list ovum) _+>.^$]
               ?~  ova
@@ -7468,7 +7468,7 @@
               =^  avo  +>.^$  $(ova t.ova)
               ?+    -.q.i.ova  [[i.ova avo] +>.^$]
                   %veer
-                [avo +>.^$(+ (veer | +.q.i.ova))]
+                [avo +>.^$(+ (veer +.q.i.ova))]
               ==
     ++  wish  |=(* (^wish ((hard ,@ta) +<)))            ::  20
     --
