@@ -1616,8 +1616,8 @@
     ?~  r.a  l.a
     ?~  l.a  r.a
     ?:  (vor n.l.a n.r.a)
-      [n.l.a l.l.a $(l.a r.l.a)]
-    [n.r.a $(r.a l.r.a) r.r.a]
+      [n.l.a $(a l.a) r.a]
+    [n.r.a l.a $(a r.a)]
   ::
   +-  put
     |*  b=*
@@ -6826,7 +6826,7 @@
           ==                                            ::
 ++  ball  ,@uw                                          ::  statement payload
 ++  bait  ,[p=skin q=@ud r=dove]                        ::  fmt nrecvd spec
-++  bath                                                ::  outgoing per client
+++  bath                                                ::  convo per client
           $:  ski=snow                                  ::  sequence state
               foy=flow                                  ::  flow statistics
               par=(map soap putt)                       ::  message by id
@@ -6929,6 +6929,7 @@
               [%hear p=lane q=@]                        ::  receive packet
               [%hemp p=path]                            ::  cancel request
               [%helo ~]                                 ::  trigger prompt
+              [%hole p=lane q=@]                        ::  packet failed
               [%home p=flag q=lane]                     ::  bind home address
               [%hope p=(unit path)]                     ::  namespace request
               [%init p=@p]                              ::  report install
@@ -6966,6 +6967,8 @@
               [%this p=httq]                            ::  secure raw htreq
               [%thou p=httr]                            ::  raw http response
               [%tory p=(list ,@t)]                      ::  history dump
+              [%veer p=? q=@ta r=path s=@t]             ::  install vane
+              [%veil q=@ta]                             ::  revert vane
               [%wait p=@da q=path]                      ::  timer wait
               [%wake ~]                                 ::  timer activate
               [%want p=flag q=@ta r=*]                  ::  peer request
@@ -6973,7 +6976,6 @@
               [%went p=cape q=soap]                     ::  peer reaction
               [%wipe ~]                                 ::  clean up hose
               [%word p=chum]                            ::  set password
-              [%veer p=? q=@ta r=path s=@t]             ::  install vane
           ==                                            ::
 ++  cask                                                ::  symmetric record
           $:  yed=(unit ,[p=hand q=code])               ::  outbound
@@ -7013,7 +7015,7 @@
               fer=road                                  ::  inferred conn from
               caq=cask                                  ::  symmetric key state
           ==                                            ::
-++  dove  ,[p=@ud q=(map ,@ud ,@)]                      ::  count 13-blocks
+++  dove  ,[p=@ud q=@uvH r=(map ,@ud ,@)]               ::  hash count 13-blocks
 ++  flag  ,@p                                           ::  identity
 ++  flap  ,@uvH                                         ::  network packet id
 ++  flow                                                ::  packet connection
@@ -7104,7 +7106,7 @@
 ++  meal                                                ::  payload
           $%  [%back p=cape q=flap r=@dr]               ::  acknowledgment
               [%bond p=mark q=@ta r=@ud s=*]            ::  message
-              [%buck p=mace q=will]                     ::  license
+              [%bonk p=mark q=@ta r=@ud]                ::  message skip
               [%carp p=@ud q=flap r=@]                  ::  leaf fragment
               [%fore p=lane q=@]                        ::  forwarded packet
           ==                                            ::
@@ -7129,9 +7131,9 @@
 ++  octs  ,[p=@ud q=@]                                  ::  octet-stream
 ++  oryx  ,@uvH                                         ::  CSRF secret
 ++  oven                                                ::  flow by server
-          $:  nys=(map flap bait)                       ::  incoming
-              old=(set flap)                            ::  completed
-              wab=(map flag bath)                       ::  outgoing by client
+          $:  nys=(map flap bait)                       ::  packets incoming
+              old=(set flap)                            ::  packets completed
+              wab=(map flag bath)                       ::  relationship
           ==                                            ::
 ++  ovum  ,[p=tire q=card]                              ::  external event
 ++  pact  path                                          ::  routed path
@@ -7151,12 +7153,12 @@
           ==                                            ::
 ++  race                                                ::  inbound stream
           $:  did=@ud                                   ::  filled sequence
-              mis=(map ,@ud ,[p=flap q=*])              ::  misordered
+              mis=(map ,@ud ,[p=flap q=(unit)])         ::  misordered
           ==                                            ::  
 ++  rank  ?(%czar %king %duke %jack %pawn)              ::  flag width class
 ++  rill                                                ::  outbound stream
-          $:  don=@ud                                   ::  accepted
-              san=(map ,@ud hose)                       ::  transmitted
+          $:  sed=@ud                                   ::  sent
+              san=(map ,@ud hose)                       ::  outstanding
           ==                                            ::
 ++  rink  path                                          ::  prompt path
 ++  road                                                ::  secured oneway route
@@ -7236,9 +7238,9 @@
                         |=  old=vase                    ::
                         *vane                           ::
               ++  doze                                  ::  next wakeup
-                        |=  hen=hose                    ::  channel
+                        |=  [now=@da hen=hose]          ::  channel
                         *(unit ,@da)                    ::  alarm if any
-              ++  flee  *vase                           ::  save state, new
+              ++  flee  *vase                           ::  save state, old
               ++  load                                  ::  load state, new
                         |=  new=vase                    ::
                         *vane                           ::
@@ -7289,40 +7291,44 @@
 ::
 ++  vein                                                ::  vane wrapper
   |=  [bud=vase pax=path txt=@ta]                       ::  kernel, source
-  =|  von=(list vase)                                   ::  old vases
   =+  =+  pal=~(play ut p.bud)
       :*  bet=(pal (vice '[*(unit flag) *tire *hose *card]'))
           nim=(pal (vice '[*flag @tas *flag *coin *path]'))
           vin=(pal (vice '[@da @ |+(* *(unit))]'))
-          hoz=(pal (vice '*hose'))
+          hoz=(pal (vice '[@da *hose]'))
           viz=(pal (vice '*vase'))
       ==
-  =+  gen=(rain pax txt)
-  =+  ves=(slam (slap bud gen) `vase`[viz bud])
+  =|  von=(list ,[p=? q=path r=@t])
+  =+  ves=(slam (slap bud (rain pax txt)) `vase`[viz bud])
   |%
   ++  ruck
     |=  [gub=? pax=path txt=@ta]
     ^+  +>
-    ~&  %ruck-a
-    =:  ^txt  txt
+    =:   von  [[gub ^pax ^txt] von]
         ^pax  pax
-        gen   (rain pax txt)
+        ^txt  txt
       ==
-    ~&  %ruck-b
     =+  arg=`vase`[vin ~2000.1.1 0 =>(~ |+(* ~))]
     =+  rig=(slam ves arg)
-    ~&  %ruck-c
-    =+  rev=(slam (slap bud gen) `vase`[viz bud])
-    ~&  %ruck-d
+    =+  rev=(slam (slap bud (rain pax txt)) `vase`[viz bud])
     =+  syg=(slam rev arg)
-    ~&  %ruck-e
     =+  ole=(slap rig [%cnbc %stay])
-    ~&  %ruck-f
-    =+  new=(slam (slap syg [%cnbc %load]) ole)
-    ~&  %ruck-g
-    =+  ded=(slap rig [%cnbc %raze])
-    ~&  %ruck-h
-    +>.$(ves new, von [ded von])
+    +>.$(ves (slam (slap syg [%cnbc ?:(gub %come %load)]) ole))
+  ::
+  ++  rusk
+    ^+  .
+    =+  nov=?>(?=(^ von) [i=i.von t=t.von])
+    =+  gub=p.i.nov
+    =:  von  t.nov
+        pax  q.i.nov
+        txt  r.i.nov
+      ==
+    =+  arg=`vase`[vin ~2000.1.1 0 =>(~ |+(* ~))]
+    =+  rig=(slam ves arg)
+    =+  rev=(slam (slap bud (rain pax txt)) `vase`[viz bud])
+    =+  syg=(slam rev arg)
+    =+  ole=(slap rig [%cnbc ?:(gub %stay %flee)])
+    ..rusk(ves (slam (slap syg [%cnbc %load]) ole))
   :: 
   ++  wink
     |=  [now=@da eny=@ sky=||(* (unit))]
@@ -7341,7 +7347,7 @@
       +>.^$(ves (slap pro [%cnbc %q]))
     ::
     ++  doze
-      |=  hen=hose
+      |=  [now=@da hen=hose]
       ^-  (unit ,@da)
       ((hard (unit ,@da)) q:(slam (slap rig [%cnbc %doze]) [hoz +<]))
     ::
@@ -7402,7 +7408,7 @@
     ^-  (unit ,@da)
     =+  van=`vein`(dink (dint hap))
     =+  vug=(wink:van now 0 (beck ~))
-    =+  don=(doze:vug [hap ~])
+    =+  don=(doze:vug now [hap ~])
     don
   ::
   ++  hurl                                              ::  start loop
@@ -7466,9 +7472,9 @@
               ?~  ova
                 [~ +>.^$]
               =^  avo  +>.^$  $(ova t.ova)
-              ?+    -.q.i.ova  [[i.ova avo] +>.^$]
-                  %veer
-                [avo +>.^$(+ (veer +.q.i.ova))]
+              ?+  -.q.i.ova  [[i.ova avo] +>.^$]
+                %veer  [avo +>.^$(+ (veer +.q.i.ova))]
+                %veil  [avo +>.^$(+ (veil +.q.i.ova))]
               ==
     ++  wish  |=(* (^wish ((hard ,@ta) +<)))            ::  20
     --
@@ -7503,7 +7509,19 @@
     (~(hurl (is eny fan) now) ovo)
   [zef +>.$]
 ::
-++  veer
+++  veil                                                ::  revert vane/tang
+  |=  lal=@ta
+  ?>  !=(%% lal)
+  %_    +>
+      fan
+    |-  ^+  fan
+    ?~  fan 
+      ~
+    ?.  =(lal p.i.fan)  [i.fan $(fan t.fan)]
+    [[p.i.fan rusk:q.i.fan] t.fan]
+  ==
+::
+++  veer                                                ::  install vane/tang
   |=  [gup=? lal=@ta pax=path txt=@t]
   ?:  =(%% lal)
     ~&  [%tang pax `@p`(mug txt)]

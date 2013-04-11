@@ -248,8 +248,10 @@ static u2_noun
 _reck_load_arvo(u2_reck* rec_u, c3_c* pax_c)
 {
   c3_c ful_c[2048];
- 
-  sprintf(ful_c, "%s/%d/arvo/%s", u2_System, rec_u->kno_w, pax_c);
+  u2_noun hof = u2_cn_mung(u2k(rec_u->toy.hoof), rec_u->kno_w);
+  c3_c* hof_c = u2_cr_string(hof);
+
+  sprintf(ful_c, "%s/%d/arvo/%s.%s", u2_System, rec_u->kno_w, pax_c, hof_c);
   return u2_walk_load(ful_c);
 }
 
@@ -378,6 +380,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     rec_u->toy.turf = _reck_root("turf", u2k(ken));
     rec_u->toy.tuft = _reck_root("tuft", u2k(ken));
     rec_u->toy.wash = _reck_root("wash", u2k(ken));
+    rec_u->toy.hoof = _reck_root("hoof", u2k(ken));
     rec_u->toy.mook = _reck_root("mook", u2k(ken));
 
     u2_reck_time(rec_u);
@@ -432,34 +435,6 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     rec_u->ken = ken;
     rec_u->roc = u2_cn_nock(0, u2k(ken));
 
-    //  Direct poke to install tang/vanes.  Shd be in egz but isnt.
-    //
-    {
-      _reck_init_veer(rec_u, 0, 
-                             u2nc(c3__zuse, u2_nul),
-                             _reck_load_arvo(rec_u, "zuse.hoon"));
-
-      _reck_init_veer(rec_u, 'a', 
-                             u2nc(c3__ames, u2_nul), 
-                             _reck_load_arvo(rec_u, "ames.hoon"));
-
-      _reck_init_veer(rec_u, 'b', 
-                             u2nc(c3__bede, u2_nul),
-                             _reck_load_arvo(rec_u, "bede.hoon"));
-
-      _reck_init_veer(rec_u, 'c', 
-                             u2nc(c3__cary, u2_nul),
-                             _reck_load_arvo(rec_u, "cary.hoon"));
-
-      _reck_init_veer(rec_u, 'd', 
-                             u2nc(c3__dill, u2_nul),
-                             _reck_load_arvo(rec_u, "dill.hoon"));
-
-      _reck_init_veer(rec_u, 'e', 
-                             u2nc(c3__eyre, u2_nul),
-                             _reck_load_arvo(rec_u, "eyre.hoon"));
-    }
-
     rec_u->syd = u2_reck_wish(rec_u, "seed");
     rec_u->toy.rain = u2_reck_wish(rec_u, "rain");
     rec_u->toy.ream = u2_reck_wish(rec_u, "ream");
@@ -473,8 +448,36 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     rec_u->toy.turf = u2_reck_wish(rec_u, "turf");
     rec_u->toy.tuft = u2_reck_wish(rec_u, "tuft");
     rec_u->toy.wash = u2_reck_wish(rec_u, "wash");
+    rec_u->toy.hoof = u2_reck_wish(rec_u, "hoof");
     rec_u->toy.mook = u2_reck_wish(rec_u, "mook");
 
+    //  Direct poke to install tang/vanes.  Shd be in egz but isnt.
+    //
+    {
+      _reck_init_veer(rec_u, 0, 
+                             u2nc(c3__zuse, u2_nul),
+                             _reck_load_arvo(rec_u, "zuse"));
+
+      _reck_init_veer(rec_u, 'a', 
+                             u2nc(c3__ames, u2_nul), 
+                             _reck_load_arvo(rec_u, "ames"));
+
+      _reck_init_veer(rec_u, 'b', 
+                             u2nc(c3__bede, u2_nul),
+                             _reck_load_arvo(rec_u, "bede"));
+
+      _reck_init_veer(rec_u, 'c', 
+                             u2nc(c3__cary, u2_nul),
+                             _reck_load_arvo(rec_u, "cary"));
+
+      _reck_init_veer(rec_u, 'd', 
+                             u2nc(c3__dill, u2_nul),
+                             _reck_load_arvo(rec_u, "dill"));
+
+      _reck_init_veer(rec_u, 'e', 
+                             u2nc(c3__eyre, u2_nul),
+                             _reck_load_arvo(rec_u, "eyre"));
+    }
     rec_u->toy.sham = u2_reck_wish(rec_u, "sham");
     rec_u->toy.shen = u2_reck_wish(rec_u, "en:crya");
     rec_u->toy.shed = u2_reck_wish(rec_u, "de:crya");

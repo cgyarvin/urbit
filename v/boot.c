@@ -534,6 +534,7 @@ u2_ve_mark_reck(u2_reck* rec_u)
   siz_w += u2_cm_mark_noun(rec_u->toy.turf);
   siz_w += u2_cm_mark_noun(rec_u->toy.tuft);
   siz_w += u2_cm_mark_noun(rec_u->toy.mook);
+  siz_w += u2_cm_mark_noun(rec_u->toy.hoof);
   siz_w += u2_cm_mark_noun(rec_u->toy.wash);
 
   siz_w += u2_cm_mark_noun(rec_u->ken);

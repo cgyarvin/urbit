@@ -371,7 +371,7 @@
   ::
   ++  come  |=(old=vase (load old))
   ++  doze
-    |=  hen=hose
+    |=  [now=@da hen=hose]
     ^-  (unit ,@da)
     ~
   ::

@@ -311,6 +311,7 @@
           u2_noun turf;                   //  utf8 to utf32
           u2_noun tuft;                   //  utf32 to utf8
           u2_noun mook;                   //  trace conversion
+          u2_noun hoof;                   //  kno to text 
           u2_noun wash;                   //  tank window printer
         } toy;
 

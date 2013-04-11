@@ -413,8 +413,23 @@ _lo_punk(u2_reck* rec_u, u2_noun ovo)
   //  Yo, did we fail?  Do something else that works.
   //
   if ( u2_blip != u2h(gon) ) {
+    u2_noun bov;
+
+    //  Failure in a network packet generates a hole card.
+    //
+    //  There should be a separate path for crypto failures,
+    //  to prevent timing attacks, but isn't right now.
+    //
 #if 1
-    u2_noun bov = u2nc(u2k(u2h(ovo)), u2nc(c3__crud, u2k(u2t(gon))));
+    if ( c3__hear == u2h(u2t(ovo)) ) {
+      _lo_punt(rec_u, 2, u2k(u2t(gon)));
+      bov = u2nc(u2k(u2h(ovo)), u2nc(c3__hole, u2k(u2t(u2t(ovo)))));
+    }
+    else 
+#endif
+    {
+      bov = u2nc(u2k(u2h(ovo)), u2nc(c3__crud, u2k(u2t(gon))));
+    }
 
     u2z(ovo); ovo = bov;
     u2z(gon); gon = _lo_soft(rec_u, u2_reck_poke, u2k(ovo));
@@ -433,10 +448,6 @@ _lo_punk(u2_reck* rec_u, u2_noun ovo)
         return;
       }
     }
-#else
-    _lo_punt(rec_u, 2, u2k(u2t(gon)));
-    return;
-#endif
   }
 
   //  Whatever worked, save it.  (XX - should be concurrent with execute.)
