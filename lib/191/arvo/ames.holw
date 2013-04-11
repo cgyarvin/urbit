@@ -576,7 +576,7 @@
       =+  seg=(sein kid)
       =+  dub=(~(us go ton) seg)
       ?^  dub
-        (need (way:u.dub kid))
+        (fall (way:u.dub kid) [%if 0 .0.0.0.0])
       ?:  (lte (met 3 kid) 1)
         [%if 0 (mix .0.0.1.0 kid)]
       $(kid seg)
@@ -903,8 +903,7 @@
             (?:(dit chew wait) sin msg)
           ::
           ++  chew                                      ::    chew:la:ho:um:am
-            |=  [sin=skin msg=@]                        ::  
-            =<  .(diz (myx:gus her))                    ::  XX refactor
+            |=  [sin=skin msg=@]                        ::  receive
             ^+  +>
             =+  ^=  leq
                 |=  key=code  ^-  _..chew

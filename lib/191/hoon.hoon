@@ -644,6 +644,10 @@
     ~
   [i=u.a t=~]
 ::
+++  fall                                                ::  default
+  |*  [a=(unit) b=*]
+  ?~(a b u.a)
+::
 ++  mate                                                ::  choose
   |*  [a=(unit) b=(unit)]
   ?~  b
