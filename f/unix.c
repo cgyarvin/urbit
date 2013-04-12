@@ -306,10 +306,14 @@ u2_ux_fresh(const c3_c* paf_c,
   }
   else {
     if ( (stat(nom_c, &nom_stat) < 0) ||
+#if defined(U2_OS_linux)
+         (nam_stat.st_mtime > nom_stat.st_mtime)
+#elif defined(U2_OS_osx)
          (nam_stat.st_mtimespec.tv_sec > nom_stat.st_mtimespec.tv_sec) ||
          ((nam_stat.st_mtimespec.tv_sec == (nam_stat.st_mtimespec.tv_sec)) &&
-          (nam_stat.st_mtimespec.tv_nsec > nom_stat.st_mtimespec.tv_nsec)) )
-    {
+          (nam_stat.st_mtimespec.tv_nsec > nom_stat.st_mtimespec.tv_nsec))
+#endif
+         ) {
       return u2_no;
     }
     else return u2_yes;

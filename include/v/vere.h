@@ -442,6 +442,12 @@
       */
         u2_atom
         u2_time_in_ts(struct timespec* tim_ts);
+#if defined(U2_OS_linux)
+      /* u2_time_t_in_ts(): urbit time from time_t.
+       */
+         u2_atom
+         u2_time_t_in_ts(time_t tim);
+#endif
 
       /* u2_time_out_ts(): struct timespec from urbit time.
       */
