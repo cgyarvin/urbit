@@ -189,7 +189,7 @@ _walk_in(u2_reck* rec_u, const c3_c* dir_c, c3_w len_w)
       if ( 0 != stat(pat_c, &buf_b) ) {
         free(pat_c);
       } else {
-        u2_noun tim = u2_time_in_ts(&buf_b.st_mtimespec);
+        u2_noun tim = c3_stat_mtime(&buf_b);
 
         if ( !S_ISDIR(buf_b.st_mode) ) {
           c3_c* dot_c = strrchr(fil_c, '.');
@@ -250,7 +250,7 @@ u2_walk(u2_reck* rec_u, const c3_c* dir_c, u2_noun old)
     }
     else {
       return u2nt(u2_no, 
-                  u2_time_in_ts(&buf_b.st_mtimespec),
+                  c3_stat_mtime(&buf_b),
                   _walk_in(rec_u, dir_c, strlen(dir_c)));
     }
   }

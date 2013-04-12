@@ -28,13 +28,20 @@ CLD=gcc -O3 -L/usr/local/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
-LIBS=-lev -lgmp -lreadline -ltermcap -lsigsegv
+LIBS=-lev -lgmp -lreadline -ltecla -ltermcap -lsigsegv
 
 INCLUDE=include
 GENERATED=generated
 DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN) -D U2_LIB=\"$(LIB)\"
 
 CFLAGS=-O3 -I/usr/local/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
+ifeq ($(OS),osx)
+  CLDOSFLAGS=-bind_at_load
+endif
+ifeq ($(OS),linux)
+  CLDOSFLAGS=-lcrypto
+endif
+
 CWFLAGS=-Wall
 
 .y.o:
@@ -776,7 +783,7 @@ all: $(BIN)/vere
 
 $(BIN)/vere: $(VERE_OFILES)
 	mkdir -p $(BIN)
-	$(CLD) -o $(BIN)/vere $(VERE_OFILES) $(LIBS)
+	$(CLD) $(CLDOSFLAGS) -o $(BIN)/vere $(VERE_OFILES) $(LIBS)
 
 tags:
 	ctags -R -f .tags --exclude=root

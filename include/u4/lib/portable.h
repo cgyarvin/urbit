@@ -67,6 +67,8 @@
 
     /* Readdir properties.
     */
+
+
 #      if defined(U4_OS_linux)
 #        define u4_c_dirent_namlen(dp) (strlen((dp)->d_name))
 
