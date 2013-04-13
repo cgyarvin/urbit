@@ -433,7 +433,7 @@
         --                                              ::  --lax:as:go
       ::
       ++  fix  |=(lyn=lane %_(+> loc.saf [~ lyn]))      ::  set server route
-      ++  hey                                           ::  general routing
+      ++  ley                                           ::  general routing
         |=  her=flag
         ^-  lane
         =+  tin=(way her)
@@ -953,8 +953,7 @@
             ?~  cun  
               +>.$(raz.bah (~(put by raz.bah) cha rum))
             =.  +>.$  (cock(dam p.u.cun) %good)
-            =.  +>.$  
-              ?~(q.u.cun +>.$ (emit [%milk [our her] cha did.rum u.q.u.cun]))
+            =.  +>.$  (emit [%milk [our her] cha did.rum q.u.cun])
             %=  $
               mis.rum  (~(del by mis.rum) did.rum)
               did.rum  +(did.rum)
@@ -1075,7 +1074,7 @@
           =+  pez=%*(. pe sea sea.bah)
           =^  wyv  pez  (harv:pez now wid.foy.bah rtt.foy.bah)
           %=  ..turk 
-            bin      (weld (turn p.wyv |=(a=rock [%ouzo (hey:gus her) a])) bin)
+            bin      (weld (turn p.wyv |=(a=rock [%ouzo (ley:gus her) a])) bin)
             sea.bah  sea:pez
           ==
         ::
@@ -1232,15 +1231,22 @@
     ::
         %mead  [[[whu [/a/ hen] [%hear p.bon q.bon]] ~] +>.$]
         %milk 
-      ?:  =(%hey q.bon)
-        =>  .(s.bon ((hard ,@ta) s.bon))
-        ?>  ((sane %ta) s.bon)
-        :-  :~  :+  whu [/d/ hen] 
-                :+  %flog  %text
-                "{<q.p.bon>} says: {<(trip s.bon)>}"
-            ==
-        +>
-      ~|(%milk-stub !!)
+      ?+    q.bon
+        :_  +>
+        :~  [[~ p.p.bon] [/b/ hen] [%wart q.p.bon q.bon r.bon [~ s.bon]]]
+        ==
+      ::
+          %hey
+        =+  ^=  hey  ^-  tape
+            ?~  s.bon
+              "<q.p.bon> stubbed a message."
+            =>  .(u.s.bon ((hard ,@) u.s.bon))
+            ?>  ((sane %ta) u.s.bon)
+            "{<q.p.bon>} says: {<(trip u.s.bon)>}"
+        :_  +>.$
+        :~  [whu [/d/ hen] [%flog %text hey]]
+        ==
+      ==
     ::
         %ouzo  ~&  [%send `@p`(mug (shaf %flap q.bon))]
                [[[whu hen [%send p.bon q.bon]] ~] +>.$]

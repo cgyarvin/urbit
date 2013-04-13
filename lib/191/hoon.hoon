@@ -80,7 +80,7 @@
 ::    What is Hoon good for?  Now, nothing.  Ideally, whatever.
 ::    But mostly, functional system software.  To be at least 
 ::    marginally useful out of the box, the Hoon kernel includes 
-::    a small nonpreemptive OS, Arvo.  
+::    a simple deterministic operating system, Arvo.  
 ::
 ::    Arvo in stage 191 is in an entirely experimental state and
 ::    should not be entrusted with any meaningful data.  It does
@@ -144,6 +144,8 @@
 ::    Volume 3 is the core logic and data structures of Arvo.  
 ::    [There is also a lot of crap in 3 that should be in 4.]
 ::    Volume 4 is the Arvo kernel modules.
+::
+::    (NB: Most of volumes 3 and 4 has been moved to arvo/.)
 :: 
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::  ::::::    Preface                               ::::::
@@ -2232,8 +2234,14 @@
         ==
         $(inx +(inx))
     ==
-  ::  ~|(%sane-stub !!)
-  &
+  |-  ^-  ?
+  ?:  =(0 b)  &
+  =+  cur=(end 3 1 b)
+  ?:  &((lth cur 32) !=(10 cur))  |
+  =+  len=(teff cur)
+  ?&  |(=(1 len) =+(i=1 |-(|(=(i len) &((gte (cut 3 [i 1] b) 128) $(i +(i)))))))
+      $(b (rsh 3 len b))
+  ==
 ::
 ++  trim
   |=  [a=@ b=tape]
@@ -6901,7 +6909,7 @@
           $%  [%beer p=flag q=@uvG]                     ::  gained ownership
               [%coke p=sock q=cape r=soap s=hose]       ::  message result
               [%mead p=lane q=rock]                     ::  accept packet
-              [%milk p=sock q=@ta r=@ud s=*]            ::  accept message
+              [%milk p=sock q=@ta r=@ud s=(unit ,*)]    ::  accept message
               [%ouzo p=lane q=rock]                     ::  transmit packet
               [%wine p=flag]                            ::  lost ownership
           ==                                            ::
@@ -6975,9 +6983,10 @@
               [%veil q=@ta]                             ::  revert vane
               [%wait p=@da q=path]                      ::  timer wait
               [%wake ~]                                 ::  timer activate
-              [%want p=flag q=@ta r=*]                  ::  peer request
+              [%want p=flag q=@ta r=*]                  ::  outgoing request
+              [%wart p=flag q=@ta r=@ud s=(unit ,*)]    ::  incoming request
               [%warn p=tape]                            ::  system message
-              [%went p=cape q=soap]                     ::  peer reaction
+              [%went p=cape q=soap]                     ::  outgoing reaction
               [%wipe ~]                                 ::  clean up hose
               [%word p=chum]                            ::  set password
           ==                                            ::
