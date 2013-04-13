@@ -5,9 +5,11 @@
 #include "all.h"
 #include "../pit.h"
 
-//  XX OSX-specific
-//
+#if defined(U2_OS_linux)
+#include <openssl/sha.h>
+#elif defined(U2_OS_osx)
 #include <CommonCrypto/CommonDigest.h>
+#endif
 
 /* functions
 */
@@ -21,12 +23,19 @@
     u2_bytes(0, met_w, fat_y, a);
     {
       c3_y dig_y[32];
+#if defined(U2_OS_linux)
+      SHA256_CTX ctx_h;
+
+      SHA256_Init(&ctx_h);
+      SHA256_Update(&ctx_h, fat_y, met_w);
+      SHA256_Final(dig_y, &ctx_h);
+#elif defined(U2_OS_osx)
       CC_SHA256_CTX ctx_h;
 
       CC_SHA256_Init(&ctx_h);
       CC_SHA256_Update(&ctx_h, fat_y, met_w);
       CC_SHA256_Final(dig_y, &ctx_h);
-
+#endif
       return u2_rl_bytes(wir_r, 32, dig_y);
     }
   }

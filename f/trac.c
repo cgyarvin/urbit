@@ -124,11 +124,13 @@ _tx_samp_on(u2_ray rac_r)
   {
     struct itimerval itm_v;
     struct sigaction sig_s;
-
+#if defined(U2_OS_osx)
     sig_s.__sigaction_u.__sa_handler = _tx_sample;
     sig_s.sa_mask = 0;
     sig_s.sa_flags = 0;
-
+#elif defined(U2_OS_linux)
+    // TODO: support profiling on linux
+#endif
     sigaction(SIGPROF, &sig_s, 0);
 
     itm_v.it_interval.tv_sec = 0;
@@ -157,9 +159,13 @@ _tx_samp_off(u2_ray rac_r)
 
   setitimer(ITIMER_PROF, &itm_v, 0);
 
+#if defined(U2_OS_osx)
   sig_s.__sigaction_u.__sa_handler = SIG_DFL;
   sig_s.sa_mask = 0;
   sig_s.sa_flags = 0;
+#elif defined(U2_OS_linux)
+  // TODO: support profiling on linux
+#endif
 
   sigaction(SIGPROF, &sig_s, 0);
 }
