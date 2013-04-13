@@ -117,5 +117,5 @@
 #      if defined(U2_OS_linux)
 #        define c3_stat_mtime(dp) (u2_time_t_in_ts((dp)->st_mtime))
 #      elif defined(U2_OS_osx)
-#        define c3_stat_mtime(dp) (u2_time_in_ts((dp)->st_mtimespec))
+#        define c3_stat_mtime(dp) (u2_time_in_ts(&((dp)->st_mtimespec)))
 #      endif
