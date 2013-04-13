@@ -9,7 +9,7 @@
   ::
   |%
   ++  brad                                              ::  session/dynamic
-    $:  who=flag                                        ::  identity
+    $:  who=seat                                        ::  identity
         hit=[p=@ud q=(list ,@t)]                        ::  command history
         sur=[p=@ud q=(qeu vase)]                        ::  result history
         hox=@ta                                         ::  identity text
@@ -45,7 +45,7 @@
   ::
   |%
   ++  bard                                              ::  new session
-    |=  who=flag
+    |=  who=seat
     %+  barn  who
     %*  .  *brad
       who  who
@@ -53,7 +53,7 @@
     ==
   ::
   ++  barn
-    |=  [who=flag bad=brad]
+    |=  [who=seat bad=brad]
     =+  nib=pit
     =+  pal=~(play ut p.nib)
     %-  berg
@@ -266,7 +266,7 @@
             [i.t.t.a i.t.a i.a t.t.t.a]
           ;~  plug
             %+  cook
-              |=(a=flag ~(rent co ~ %p a))
+              |=(a=seat ~(rent co ~ %p a))
             ;~(pose ;~(pfix sig fed:ag) (easy who))
           ::
             %+  cook
@@ -722,13 +722,13 @@
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   ::              section 4bC, shell vane               ::
   ::
-  =|  $:  deb=(map flag _*berg)                         ::  state by terminal
+  =|  $:  deb=(map seat _*berg)                         ::  state by terminal
       ==                                                ::
   |=  [now=@da eny=@ sky=||(* (unit))]                  ::  current invocation
   ^?                                                    ::  opaque core
   |%                                                    ::  poke/peek pattern
   ++  beat                                              ::  process move
-    |=  [whu=(unit flag) tea=tire hen=hose fav=card]
+    |=  [whu=(unit seat) tea=tire hen=hose fav=card]
     ^-  [p=(list move) q=vane]
     ?.  ?=(^ whu)
       ~&  [%beat-none fav]
@@ -751,15 +751,15 @@
     |=  new=vase
     ~&  %bede-load
     ^-  vane
-    ?.  (~(nest ut -:!>(*(list ,[p=flag q=brad]))) & p.new)
+    ?.  (~(nest ut -:!>(*(list ,[p=seat q=brad]))) & p.new)
       ~|(%load-nest-bede !!)
     %=    ..^$
         deb
-      ^-  (map flag _*berg)
-      %-  ~(gas by *(map flag _*berg))
+      ^-  (map seat _*berg)
+      %-  ~(gas by *(map seat _*berg))
       %+  turn
-        ((hard (list ,[p=flag q=brad])) q.new)
-      |=([p=flag q=brad] [p (barn p q)])
+        ((hard (list ,[p=seat q=brad])) q.new)
+      |=([p=seat q=brad] [p (barn p q)])
     ==
   ::
   ++  raze  
@@ -767,7 +767,7 @@
     ..$(deb ~)
   ::
   ++  scry
-    |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
+    |=  [our=seat ren=@tas his=seat lot=coin tyl=path]
     ^-  (unit)
     ?.  =(our his)  ~
     ?.  &(=([%p ~] tyl) =([%% %da now] lot)) ~
@@ -778,11 +778,11 @@
   ++  stay
     ^-  vase
     ~&  %bede-stay
-    !>  |-  ^-  (list ,[p=flag q=brad])
+    !>  |-  ^-  (list ,[p=seat q=brad])
         %+  turn
           (~(tap by deb) ~)
-        |=  [p=flag q=_*berg]
-        ^-([p=flag q=brad] [p +>+<+.q])
+        |=  [p=seat q=_*berg]
+        ^-([p=seat q=brad] [p +>+<+.q])
     ==
   --
 

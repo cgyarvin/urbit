@@ -3,13 +3,13 @@
 ::
   |=  pit=vase
   ^-  vane                                              ::  kernel instrument
-  =|  $:  seh=(list ,[p=host q=flag])                   ::  host permissions
+  =|  $:  seh=(list ,[p=host q=seat])                   ::  host permissions
       ==                                                ::
   |=  [now=@da eny=@ sky=||(* (unit))]                  ::  activate
   ^?                                                    ::  opaque core
   |%                                                    ::
   ++  beat                                              ::  process move
-    |=  [whu=(unit flag) pax=tire hen=hose fav=card]
+    |=  [whu=(unit seat) pax=tire hen=hose fav=card]
     ^-  [p=(list move) q=vane]
     ?+    -.fav
       [[[whu hen fav] ~] ..^$]
@@ -27,7 +27,7 @@
       %=    ..^$
           seh
         :-  [q.fav p.fav]
-        (skip seh |=([a=host b=flag] (hone q.fav a)))
+        (skip seh |=([a=host b=seat] (hone q.fav a)))
       ==
     ::
         ?(%thin %this)                                  ::  http request
@@ -69,14 +69,14 @@
     ^-  vane
     ?.  (~(nest ut -:!>(seh)) & p.new)
       ~|(%load-nest-dill !!)
-    ..^$(seh ((list ,[p=host q=flag]) q.new))
+    ..^$(seh ((list ,[p=host q=seat]) q.new))
   ::
   ++  raze  
     ^-  vane
     ..$(seh ~)
   ::
   ++  scry
-    |=  [our=flag ren=@tas who=flag lot=coin tyl=path]
+    |=  [our=seat ren=@tas who=seat lot=coin tyl=path]
     ^-  (unit)
     ~
   ::

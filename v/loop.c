@@ -620,6 +620,14 @@ _lo_home(u2_reck* rec_u)
       u2_lo_bail(rec_u);
     }
 
+    sprintf(ful_c, "cp -r %s/%d/cry %s", 
+                   U2_LIB, rec_u->kno_w, rec_u->dir_c);
+    uL(fprintf(uH, "home: %s\n", ful_c));
+    if ( 0 != system(ful_c) ) {
+      uL(fprintf(uH, "home: could not copy?\n"));
+      u2_lo_bail(rec_u);
+    }
+
     sprintf(ful_c, "cp -r %s/%d/toy %s", 
                    U2_LIB, rec_u->kno_w, rec_u->dir_c);
     uL(fprintf(uH, "home: %s\n", ful_c));

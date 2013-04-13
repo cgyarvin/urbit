@@ -13,7 +13,7 @@
   ^?                                                    ::  opaque core
   |%                                                    ::
   ++  beat                                              ::  update
-    |=  [whu=(unit flag) tea=tire hen=hose fav=card]
+    |=  [whu=(unit seat) tea=tire hen=hose fav=card]
     ^-  [p=(list move) q=vane]
     ?+    -.fav  ~&  [%beat-none fav]
                  !!
@@ -98,7 +98,7 @@
     ..$(rof *roof)
   ::
   ++  scry                                              ::  inspect
-    |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
+    |=  [our=seat ren=@tas his=seat lot=coin tyl=path]
     ^-  (unit)
     ?~  tyl  ~
     ?.  =(our his)

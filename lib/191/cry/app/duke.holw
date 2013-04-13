@@ -1,8 +1,8 @@
 !:
-::        /main/app/duke/: issue a class C flag, from a class B flag.
+::        /main/app/duke/: issue a class C seat, from a class B seat.
 ::
 =>  !#(/===$main/lib/hume/)
-|=  [who=flag est=time eny=@uw was=path]
+|=  [who=seat est=time eny=@uw was=path]
 |=  *
 |=  ~
 ^-  bowl
@@ -21,7 +21,7 @@
     ?.  &(=(2 (met 4 q.a)) =(who (end 4 1 q.a)))  ~  
     [~ u=`@p`q.a]
   ;~(pose bisk:so (stag %p ;~(pfix sig fed:ag)))
-|=  duc=flag
+|=  duc=seat
 ^-  bowl
 %+  (polo %pass "entropy: " ~)
   (boss 256 (more gon qit))

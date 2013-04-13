@@ -9,7 +9,7 @@
   ^?                                                    ::  opaque core
   |%                                                    ::  poke/peek pattern
   ++  beat                                              ::  process move
-    |=  [whu=(unit flag) tea=tire hen=hose fav=card]
+    |=  [whu=(unit seat) tea=tire hen=hose fav=card]
     ^-  [p=(list move) q=vane]
     =+  yar=(~(get by wib) hen)
     ?~  yar
@@ -388,7 +388,7 @@
     ..$(wib ~)
   ::
   ++  scry
-    |=  [our=flag ren=@tas his=flag lot=coin tyl=path]
+    |=  [our=seat ren=@tas his=seat lot=coin tyl=path]
     ^-  (unit)
     ~
   ::

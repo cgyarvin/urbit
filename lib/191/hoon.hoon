@@ -6906,15 +6906,15 @@
           ==                                            ::
 ++  boat  ,[(list slip) task]                           ::  user stage
 ++  boon                                                ::  fort output
-          $%  [%beer p=flag q=@uvG]                     ::  gained ownership
+          $%  [%beer p=seat q=@uvG]                     ::  gained ownership
               [%coke p=sock q=cape r=soap s=hose]       ::  message result
               [%mead p=lane q=rock]                     ::  accept packet
               [%milk p=sock q=@ta r=@ud s=(unit ,*)]    ::  accept message
               [%ouzo p=lane q=rock]                     ::  transmit packet
-              [%wine p=flag]                            ::  lost ownership
+              [%wine p=seat]                            ::  lost ownership
           ==                                            ::
 ++  bowl  ,[p=(list card) q=(unit boat)]                ::  standard product
-++  bran  ,[p=mark q=(unit mark) r=flag s=@da]          ::  our parent us now
+++  bran  ,[p=mark q=(unit mark) r=seat s=@da]          ::  our parent us now
 ++  brow  ,[p=@da q=@tas]                               ::  browser version
 ++  buck  ,[p=mace q=will]                              ::  all security data
 ++  cake  ,[p=sock q=? r=skin s=@]                      ::  top level packet
@@ -6924,7 +6924,7 @@
           ==                                            ::
 ++  card                                                ::  event
           $%  [%bbye ~]                                 ::  reset prompt
-              [%bind p=flag q=host]                     ::  bind http server
+              [%bind p=seat q=host]                     ::  bind http server
               [%belt p=belt]                            ::  terminal input
               [%blew p=blew]                            ::  terminal config
               [%blit p=(list blit)]                     ::  terminal output
@@ -6942,7 +6942,7 @@
               [%hemp p=path]                            ::  cancel request
               [%helo ~]                                 ::  trigger prompt
               [%hole p=lane q=@]                        ::  packet failed
-              [%home p=flag q=lane]                     ::  bind home address
+              [%home p=seat q=lane]                     ::  bind home address
               [%hope p=(unit path)]                     ::  namespace request
               [%init p=@p]                              ::  report install
               [%flog p=card]                            ::  log to terminal
@@ -6983,8 +6983,8 @@
               [%veil q=@ta]                             ::  revert vane
               [%wait p=@da q=path]                      ::  timer wait
               [%wake ~]                                 ::  timer activate
-              [%want p=flag q=@ta r=*]                  ::  outgoing request
-              [%wart p=flag q=@ta r=@ud s=(unit ,*)]    ::  incoming request
+              [%want p=seat q=@ta r=*]                  ::  outgoing request
+              [%wart p=seat q=@ta r=@ud s=(unit ,*)]    ::  incoming request
               [%warn p=tape]                            ::  system message
               [%went p=cape q=soap]                     ::  outgoing reaction
               [%wipe ~]                                 ::  clean up hose
@@ -7029,7 +7029,6 @@
               caq=cask                                  ::  symmetric key state
           ==                                            ::
 ++  dove  ,[p=@ud q=@uvH r=(map ,@ud ,@)]               ::  hash count 13-blocks
-++  flag  ,@p                                           ::  identity
 ++  flap  ,@uvH                                         ::  network packet id
 ++  flow                                                ::  packet connection
           $:  rtt=@dr                                   ::  official rtt
@@ -7038,14 +7037,14 @@
           ==                                            ::
 ++  fort                                                ::  formal state
           $:  ton=town                                  ::  security
-              zac=(map flag oven)                       ::  flows by server
+              zac=(map seat oven)                       ::  flows by server
           ==                                            ::
 ++  gcos                                                ::  id description
-          $%  [%czar p=@t]                              ::  8-bit flag
-              [%duke p=what]                            ::  32-bit flag
-              [%jack p=what]                            ::  64-bit flag
-              [%king p=@t]                              ::  16-bit flag
-              [%pawn p=@t]                              ::  128-bit flag
+          $%  [%czar p=@t]                              ::  8-bit seat
+              [%duke p=what]                            ::  32-bit seat
+              [%jack p=what]                            ::  64-bit seat
+              [%king p=@t]                              ::  16-bit seat
+              [%pawn p=@t]                              ::  128-bit seat
           ==                                            ::
 ++  goal                                                ::  app request
           $%  [%ez p=path]                              ::  simple query
@@ -7094,7 +7093,7 @@
               [%to p=crow]                              ::  type only
           ==                                            ::
 ++  lens  ?(%z %y %x %w)                                ::  repository view
-++  lice  ,[p=flag q=buck]                              ::  full license
+++  lice  ,[p=seat q=buck]                              ::  full license
 ++  lint  (list rock)                                   ::  fragment array
 ++  lane                                                ::  packet route
           $%  [%if p=@ud q=@if]                         ::  IP4/public UDP/addr
@@ -7130,7 +7129,7 @@
           ==                                            ::
 ++  meth  ?(%get %post)                                 ::  http method
 ++  moth  ,[p=meth q=math r=(unit octs)]                ::  http operation
-++  move  ,[p=(unit flag) q=hose r=card]                ::  internal event
+++  move  ,[p=(unit seat) q=hose r=card]                ::  internal event
 ++  mime  (list ,@ta)                                   ::  mime type
 ++  name  ,[p=@t q=(unit ,@t) r=(unit ,@t) s=@t]        ::  first mid/nick last
 ++  nope  ^~(^-(arch [%| @ ~]))                         ::  empty node
@@ -7146,7 +7145,7 @@
 ++  oven                                                ::  flow by server
           $:  nys=(map flap bait)                       ::  packets incoming
               old=(set flap)                            ::  packets completed
-              wab=(map flag bath)                       ::  relationship
+              wab=(map seat bath)                       ::  relationship
           ==                                            ::
 ++  ovum  ,[p=tire q=card]                              ::  external event
 ++  pact  path                                          ::  routed path
@@ -7168,7 +7167,7 @@
           $:  did=@ud                                   ::  filled sequence
               mis=(map ,@ud ,[p=flap q=(unit)])         ::  misordered
           ==                                            ::  
-++  rank  ?(%czar %king %duke %jack %pawn)              ::  flag width class
+++  rank  ?(%czar %king %duke %jack %pawn)              ::  seat width class
 ++  rill                                                ::  outbound stream
           $:  sed=@ud                                   ::  sent
               san=(map ,@ud hose)                       ::  outstanding
@@ -7180,7 +7179,7 @@
               lew=will                                  ::  will of friend
           ==                                            ::
 ++  roof  (map ,@p room)                                ::  revision control
-++  room                                                ::  author by flag
+++  room                                                ::  author by seat
           $:  own=?                                     ::  local/foreign
               dos=(map ,@ta desk)                       ::  projects 
           ==                                            ::
@@ -7190,8 +7189,8 @@
           $:  loc=(unit lane)                           ::  packet route
               val=wand                                  ::  private keys
               law=will                                  ::  server will
-              seh=(map hand ,[p=flag q=@da])            ::  key cache
-              hoc=(map flag door)                       ::  friends & relations
+              seh=(map hand ,[p=seat q=@da])            ::  key cache
+              hoc=(map seat door)                       ::  friends & relations
           ==                                            ::
 ++  salt  ,@uv                                          ::  entropy
 ++  scab                                                ::  logical request 
@@ -7208,6 +7207,7 @@
           ==                                            ::
 ++  scud  ,[p=pact q=scar]                              ::  full dispatch
 ++  seam  ,[p=@ta q=pact r=scar]                        ::  service route
+++  seat  ,@p                                           ::  identity
 ++  shed  (qeu ,[p=@ud q=bird])                         ::  packet pump
 ++  sink                                                ::  incoming per server
           $:  nes=(map flap ,[p=@da q=bait])            ::  fragment actions
@@ -7216,7 +7216,7 @@
 ++  slip  ,[p=bell q=goal]                              ::  traceable request
 ++  snow  ,[p=@ud q=@ud r=(set ,@ud)]                   ::  window exceptions
 ++  soap  ,[p=[p=mark q=mark] q=@ta r=@ud]              ::  statement id
-++  sock  ,[p=flag q=flag]                              ::  from to
+++  sock  ,[p=seat q=seat]                              ::  from to
 ++  step  ,[p=bran q=gcos r=pass]                       ::  identity stage
 ++  task  _|+([@da path note] *bowl)                    ::  process core
 ++  taxi  ,[p=lane q=rock]                              ::  routed packet
@@ -7226,7 +7226,7 @@
 ++  town                                                ::  all security state
           $:  lit=@ud                                   ::  imperial modulus
               any=@                                     ::  entropy
-              urb=(map flag safe)                       ::  all keys and routes
+              urb=(map seat safe)                       ::  all keys and routes
           ==                                            ::
 ++  ukaz                                                ::  change (pl ukazy)
           $:  p=path                                    ::  change site
@@ -7240,7 +7240,7 @@
           |+  [now=@da eny=@ sky=||(* (unit))]          ::  activate
           ^?  |%                                        ::
               ++  beat                                  ::  update
-                        |=  $:  whu=(unit flag)         ::  calling identity
+                        |=  $:  whu=(unit seat)         ::  calling identity
                                 pax=tire                ::  pretext
                                 hen=hose                ::  channel
                                 fav=card                ::  event
@@ -7259,9 +7259,9 @@
                         *vane                           ::
               ++  raze  *vane                           ::  erase all state
               ++  scry                                  ::  inspect
-                        |=  $:  our=flag                ::  observer
+                        |=  $:  our=seat                ::  observer
                                 ren=@tas                ::  mode
-                                his=flag                ::  target
+                                his=seat                ::  target
                                 lot=coin                ::  version
                                 tyl=path                ::  location
                             ==                          ::
@@ -7279,14 +7279,14 @@
               [%lord p=whom]                            ::  male individual
               [%punk p=@t]                              ::  opaque identity
           ==                                            ::
-++  whom  ,[p=@ud r=@tas s=name]                        ::  year/govt/id
+++  whom  ,[p=@ud q=@tas r=name]                        ::  year/govt/id
 ++  will  (list deed)                                   ::  certificate
 ++  worm  ,*                                            ::  vase of task
 ++  yard                                                ::  terminal state
           $:  p=?                                       ::  verbose 
-              q=(list flag)                             ::  owner stack
+              q=(list seat)                             ::  owner stack
               r=blur                                    ::  display state
-              s=(map ,[p=flag q=rink] hist)             ::  history
+              s=(map ,[p=seat q=rink] hist)             ::  history
           ==                                            ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                section 3bE, Arvo core                ::
@@ -7305,8 +7305,8 @@
 ++  vein                                                ::  vane wrapper
   |=  [bud=vase pax=path txt=@ta]                       ::  kernel, source
   =+  =+  pal=~(play ut p.bud)
-      :*  bet=(pal (vice '[*(unit flag) *tire *hose *card]'))
-          nim=(pal (vice '[*flag @tas *flag *coin *path]'))
+      :*  bet=(pal (vice '[*(unit seat) *tire *hose *card]'))
+          nim=(pal (vice '[*seat @tas *seat *coin *path]'))
           vin=(pal (vice '[@da @ |+(* *(unit))]'))
           hoz=(pal (vice '[@da *hose]'))
           viz=(pal (vice '*vase'))
@@ -7349,7 +7349,7 @@
     =+  rig=(slam ves arg)
     |%  
     ++  beat
-      |=  $:  whu=(unit flag)
+      |=  $:  whu=(unit seat)
               pax=tire
               hen=hose
               fav=card
@@ -7365,9 +7365,9 @@
       ((hard (unit ,@da)) q:(slam (slap rig [%cnbc %doze]) [hoz +<]))
     ::
     ++  scry
-      |=  $:  our=flag
+      |=  $:  our=seat
               ren=@tas
-              his=flag
+              his=seat
               lot=coin
               tyl=path
           ==
@@ -7380,7 +7380,7 @@
   |=  [eny=@ fan=(list ,[p=@tas q=_*vein])]
   |_  now=@da 
   ++  beck  
-    |=  owr=(unit flag)
+    |=  owr=(unit seat)
     |+  hap=*
     ^-  (unit)
     =>  .(hap ((hard path) hap))

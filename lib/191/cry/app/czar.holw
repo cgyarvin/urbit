@@ -1,8 +1,8 @@
 !:
-::        /main/app/czar/: issue a class A flag, from a secret generator.
+::        /main/app/czar/: issue a class A seat, from a secret generator.
 ::
 =>  !#(/===$main/lib/hume/)
-|=  [who=flag est=time eny=@uw was=path]
+|=  [who=seat est=time eny=@uw was=path]
 |=  *
 |=  ~
 ^-  bowl
@@ -12,9 +12,9 @@
 %+  pomp  "                  -- Bunting, _Chomei at Toyama_"
 %+  pomp  ""
 %+  (polo %text "a ticket for the czar: " ~)
-  %+  sear  |=(a=dime `(unit flag)`?.((lth q.a 256) ~ [~ u=`@p`q.a]))
+  %+  sear  |=(a=dime `(unit seat)`?.((lth q.a 256) ~ [~ u=`@p`q.a]))
   ;~(pose bisk:so (stag %p ;~(pfix sig fed:ag)))
-|=  zar=flag
+|=  zar=seat
 %+  (polo %pass "generator: " ~)
   (cook |=(a=dime q.a) bisk:so)
 |=  bur=@

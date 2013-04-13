@@ -1,16 +1,16 @@
 !:
 |=  *
 |=  *
-|=  [bud=@p tyt=tape ~]
+|=  [bud=@p txt=@t ~]
 ^-  bowl
 :-  ~ 
 :-  ~
 :-  ^-  (list slip)
-    :~  [/foo/bar/ [%yo bud %hey (rap 3 tyt)]]
+    :~  [/foo/bar/ [%yo bud %hey txt]]
     ==
 |=  [now=@da pax=path nut=note]
 ?>  =(/foo/bar/ pax)
 ?>  ?=(%yo -.nut)
-:-  :~  [%text ?:(=(%good p.nut) "heard" "rejected")]
-    ==
+:-  ?:  =(%good p.nut)  ~
+    [[%text "rejected"] ~]
 ~

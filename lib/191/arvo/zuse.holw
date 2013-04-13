@@ -698,4 +698,25 @@
   [(weld p.a p.b) (weld q.a q.b)]     
 ++  uzag                                                ::  reverse dual change
   |=(a=umaz ^-(umaz [q.a p.a]))
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::                section 3bE, names                    ::
+::
+++  gnow
+  |=  gos=gcos  ^-  @t
+  ?-    -.gos
+      ?(%czar %king %pawn)  p.gos
+      ?(%duke %jack) 
+    ?+    -.p.gos  p.p.p.gos
+        %punk  p.p.gos
+        ?(%lord %lady)  
+      =+  nam=`name`r.p.p.gos
+      %+  rap  3
+      :~  p.nam
+          ?~(q.nam 0 (cat 3 ' ' u.q.nam))
+          ?~(r.nam 0 (rap 3 ' (' u.r.nam ')' ~))
+          ' '
+          s.nam
+      ==
+    ==
+  ==
 --

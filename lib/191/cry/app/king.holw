@@ -1,8 +1,8 @@
 !:
-::        /main/app/king/: issue a class B flag, from a class A flag.
+::        /main/app/king/: issue a class B seat, from a class A seat.
 ::
 =>  !#(/===$main/lib/hume/)
-|=  [who=flag est=time eny=@uw was=path]
+|=  [who=seat est=time eny=@uw was=path]
 |=  *
 |=  ~
 ^-  bowl
@@ -21,7 +21,7 @@
     ?.  &(=(2 (met 3 q.a)) =(who (end 3 1 q.a)))  ~  
     [~ u=`@p`q.a]
   ;~(pose bisk:so (stag %p ;~(pfix sig fed:ag)))
-|=  kig=flag
+|=  kig=seat
 ^-  bowl
 %+  (polo %pass "entropy: " ~)
   (boss 256 (more gon qit))
