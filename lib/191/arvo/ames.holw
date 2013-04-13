@@ -20,8 +20,8 @@
   ++  grip                                              ::  extend will
     |=  [wet=will law=will]
     ^-  will
-    ?~  wet
-      law
+    ?~  wet  law
+    ?:  =(wet law)  law
     ?^  t.wet
       ?>((meld i.wet i.t.wet) [i.wet $(wet t.wet)])
     ?~  law
@@ -321,6 +321,10 @@
           ^-  mark
           ?~(lew.wod.dur 0 p.p.q.i.lew.wod.dur)
         ::
+        ++  deng
+          |=  law=will
+          %_(+> lew.wod.dur (grip law lew.wod.dur))
+        ::
         ++  griz                                        ::    griz:lax:as:go
           |=  now=@da                                   ::  generate key for
           ^-  [p=code q=_+>]
@@ -333,10 +337,10 @@
         ::
         ++  kuch                                        ::    kuch:lax:as:go
           |=  had=hand                                  ::  hear key tag
-          ^-  (unit ,[p=code q=_+>])
+          ^-  (unit ,[code _+>])
           =+  wey=(~(get by heg.caq.dur) had)
           ?^  wey
-            =+  key=(shas %anex u.wey)
+            =+  key=u.wey
             :+  ~  key
             %=    ..kuch
                 yed.caq.dur  [~ had u.wey]
@@ -402,13 +406,13 @@
             ^-  [[p=skin q=@] q=_..wisp]
             ?:  =(%carp -.ham)
               [wasp ..wisp]
-            ?:  &(=(law.saf lew.fer.dur) ?=(^ yed.caq.dur))
+            ?:  !=(~ yed.caq.dur)
               :_  ..wisp
               :-  %fast
               %^  cat  7
                 p.u.yed.caq.dur 
               (en:r:cley q.u.yed.caq.dur (jam lun ham))
-            ?:  =(%back -.ham)
+            ?:  &(=(~ lew.wod.dur) =(%back -.ham))
               [wasp ..wisp]
             =^  tuy  +>.$
               ?:(=(~ lew.wod.dur) [*code +>.$] (griz now))
@@ -416,10 +420,11 @@
             =+  yig=sen
             =+  ^=  gom
                 %^    jam
-                    p.yig
-                  (pare lew.fer.dur law.saf)
-                (sign:se:q.yig tuy (jam lun ham))
+                    `mark`p.yig
+                  `will`(pare lew.fer.dur law.saf)
+                `@`(sign:se:q.yig tuy (jam lun ham))
             ?:  =(~ lew.wod.dur)
+              ~&  [%wisp-open her]
               [%open gom]
             :-  %full
             =+  cay=cley
@@ -428,14 +433,6 @@
         --                                              ::  --lax:as:go
       ::
       ++  fix  |=(lyn=lane %_(+> loc.saf [~ lyn]))      ::  set server route
-      ++  gub                                           ::  flag/key by code
-        |=  had=hand
-        ^-  [p=[p=flag q=code] q=_+>]
-        =+  pys=`[p=flag q=@da]`(need (~(get by seh.saf) had))
-        =+  gry=`_lax`(myx p.pys)
-        =+  kuh=(need (kuch:gry had))
-        [[p.pys p.kuh] (nux q.kuh)]
-      ::
       ++  hey                                           ::  general routing
         |=  her=flag
         ^-  lane
@@ -503,20 +500,6 @@
         |=  [now=@da]
         ^+  ..tim
         ..tim
-      ::
-      ++  tyc                                           ::  install symcode
-        |=  [her=flag key=code]
-        ^+  +>
-        (nux (wasc:(myx her) key))
-      ::
-      ++  wag                                           ::  install will
-        |=  [her=flag law=will]
-        ^-  [p=[p=mark q=acro] q=_+>]
-        =+  hiz=(grip law (yew her))
-        =+  lyr=%*(. (myx her) lew.wod.dur hiz)
-        =+  cay=cley:lyr
-        ::  ~&  [%will her p.cay]
-        [[p.cay r.cay] (nux lyr)]
       ::
       ++  way                                           ::  internal routing
         |=  her=flag
@@ -905,38 +888,49 @@
           ++  chew                                      ::    chew:la:ho:um:am
             |=  [sin=skin msg=@]                        ::  receive
             ^+  +>
-            =+  ^=  leq
-                |=  key=code  ^-  _..chew
-                =+  ^=  mex
-                    %.  (cue msg)
-                    (hard ,[p=mark q=will r=@])
-                =+  wug=(wag:gus her q.mex)
-                ?>  =(p.mex p.p.wug)
-                %-  chow(aut &)
-                ((hard tray) (cue (need (sure:pu:q.p.wug key r.mex))))
-            ?-    sin
-                %none  (chow ((hard tray) (cue msg)))
-                %fast
-              =+  [mag=`hand`(end 7 1 msg) bod=(rsh 7 1 msg)]
-              =+  yoq=(gub:gus mag)
-              =>  %_(. gus q.yoq)
-              ?>  =(her p.p.yoq)
-              %-  chow(aut &) 
-              ((hard tray) (cue (dy:q:sen:gus q.p.yoq msg)))
-          ::
-                %full
-              =+  mex=((hard ,[p=mark q=@]) (cue msg))
-              =+  gey=(sev:gus p.mex)
-              =+  mes=(need (tear:se:q.gey q.mex))
-              =+  qel=(leq p.mes)
-              =>  %_(. +>.$ qel)
-              %_(+>.$ gus ?.(p.gey gus (tyc:gus her p.mes)))
-          ::
-                %open  (leq *code)
-            ==
+            =<  east
+            |%  
+            ++  east
+              ^+  +>.$
+              ?-    sin
+                  %none  
+                ~&  %chew-none
+                (chow ((hard tray) (cue msg)))
+              ::
+                  %fast
+                ~&  %chew-fast
+                =+  [mag=`hand`(end 7 1 msg) bod=(rsh 7 1 msg)]
+                =^  key  diz  (need (kuch:diz mag))
+                (chow(aut &) ((hard tray) (cue (dy:q:sen:gus key bod))))
+              ::
+                  %full
+                ~&  %chew-full
+                =+  mex=((hard ,[p=mark q=@]) (cue msg))
+                =+  gey=(sev:gus p.mex)
+                =+  mes=(need (tear:se:q.gey q.mex))
+                ~&  [%chew-full-key `@uvH`p.mes]
+                =.  diz  (wasc:diz p.mes)
+                (west(msg q.mes) p.mes)
+              ::
+                  %open  
+                ~&  %chew-open
+                (west *code)
+              ==
+            ++  west
+              |=  key=code
+              =+  ^=  mex
+                  %.  (cue msg)
+                  (hard ,[p=mark q=will r=@])
+              =.  diz  (deng:diz q.mex)
+              =+  wug=cley:diz
+              ?>  =(p.mex p.wug)
+              %-  chow(aut &)
+              ((hard tray) (cue (need (sure:pu:r.wug key r.mex))))
+            --
           ::
           ++  chow                                      ::    chow:la:ho:um:am 
             |=  fey=tray                                ::  interpret tray
+            ^+  +>
             =.  lun.wod.dur.diz  
                 ?.  &(aut ?=(^ p.fey))  lun.wod.dur.diz
                 ?>  ?&  |(=(0 p.u.p.fey) =(p.ryn p.u.p.fey))
