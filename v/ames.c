@@ -23,10 +23,10 @@
 #include "v/vere.h"
 
 static void _lo_ames(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i)
-  { u2_lo_call(&u2_Host.rec_u[0], lup_u, wax_u, c3__ames, rev_i); }
+  { u2_lo_call(u2_Host.arv_u, lup_u, wax_u, c3__ames, rev_i); }
 
 static void _lo_amat(struct ev_loop *lup_u, struct ev_timer* tim_u, c3_i rev_i)
-  { u2_lo_call(&u2_Host.rec_u[0], lup_u, tim_u, c3__ames, rev_i); }
+  { u2_lo_call(u2_Host.arv_u, lup_u, tim_u, c3__ames, rev_i); }
 
 
 /* u2_ames_ef_send(): send packet to network.

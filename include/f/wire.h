@@ -27,6 +27,10 @@
           */
           u2_ray kit_r;
 
+          /* Ray to OS state.
+          */
+          u2_ray arv_r;
+
           /* Ray to performance log.
           */
           u2_ray bex_r;
@@ -50,9 +54,11 @@
 #         define  u2_wire_bex_r(wir_r)  *u2_at(wir_r, u2_loom_wire, bex_r)
 #         define  u2_wire_rac_r(wir_r)  *u2_at(wir_r, u2_loom_wire, rac_r)
 #         define  u2_wire_hev_r(wir_r)  *u2_at(wir_r, u2_loom_wire, hev_r)
+#         define  u2_wire_arv_r(wir_r)  *u2_at(wir_r, u2_loom_wire, arv_r)
 
 #         define  u2_wire_tax(wir_r)    *u2_at(wir_r, u2_loom_wire, tax)
 #         define  u2_wire_lan(wir_r)    *u2_at(wir_r, u2_loom_wire, lan)
+
 
     /** Functions.
     **/

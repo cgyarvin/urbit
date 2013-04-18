@@ -517,7 +517,7 @@ u2_ve_sync(void)
     u2z(hoe);
   } 
   else {
-    u2_reck_sync(&u2_Host.rec_u[0]);
+    u2_reck_sync(u2_Host.arv_u);
   
     u2_cm_done();
   

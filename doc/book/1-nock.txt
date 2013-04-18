@@ -1,7 +1,7 @@
 1: Crash course in Nock
 
 So let's learn Nock!  But wait - why learn Nock?  After all,
-we're going to be programming in Watt, not Nock.
+we're going to be programming in Hoon, not Nock.
 
 Like JVM bytecode, Nock is as inscrutable as assembly language.
 In fact, you can think of it as a sort of "functional assembly
@@ -9,12 +9,12 @@ language."  There are sometimes reasons to program in real
 assembly language.  There is never a reason to program in Nock.
 Except to learn Nock.
 
-Indeed, it is not necessary for the Watt programmer to learn
-Nock.  We recommend it strongly, however, because Watt has a very
+Indeed, it is not necessary for the Hoon programmer to learn
+Nock.  We recommend it strongly, however, because Hoon has a very
 special relationship with Nock - not unlike the relationship
 between C and assembly language.  
 
-Just as C is a very shallow layer over the raw CPU, Watt is a
+Just as C is a very shallow layer over the raw CPU, Hoon is a
 very shallow layer over raw Nock - often little more than a
 macro.  If you try to learn C without understanding the CPU under
 it, you will be forever bemused by why it works the way it does.
@@ -22,11 +22,14 @@ it, you will be forever bemused by why it works the way it does.
 So let's learn Nock!  But wait - which Nock?  Nock, though more
 frozen than Walt Disney, does have versions.  Nock versions are
 measured by integer degrees Kelvin, newer being colder.  The
-newest, Nock 6K - roughly the temperature of Neptune.  No change
-is anticipated between 6K and absolute zero, though you never
+newest, Nock 5K - roughly the temperature of Neptune.  No change
+is anticipated between 5K and absolute zero, though you never
 know.  Any such change would certainly be quite painful.
 
-Here is Nock 6K:
+1.1 Definition
+
+The best way to learn Nock is to read the spec and write your own
+naive interpreter.  Here is Nock 5K:
 
   1 Structures
 
@@ -37,10 +40,10 @@ Here is Nock 6K:
 
     [a b c]           [a [b c]]
     nock(a)           *a
-   
+  
     ?[a b]            0
     ?a                1
-    ^a                1 + a
+    +a                1 + a
     =[a a]            0
     =[a b]            1
 
@@ -56,29 +59,97 @@ Here is Nock 6K:
     *[a 1 b]          b
     *[a 2 b c]        *[*[a b] *[a c]]
     *[a 3 b]          ?*[a b]
-    *[a 4 b]          ^*[a b]
+    *[a 4 b]          +*[a b]
     *[a 5 b]          =*[a b]
 
     *[a 6 b c d]      *[a 2 [0 1] 2 [1 c d] [1 0] 2 [1 2 3] [1 0] 4 4 b]
     *[a 7 b c]        *[a 2 b 1 c]
-    *[a 8 b c]        *[a 7 [[0 1] b] c]
+    *[a 8 b c]        *[a 7 [[7 [0 1] b] 0 1] c]
     *[a 9 b c]        *[a 7 c 0 b]
     *[a 10 b c]       *[a c]
     *[a 10 [b c] d]   *[a 8 c 7 [0 2] d]
 
-    ^[a b]            ^[a b]
+    +[a b]            +[a b]
     =a                =a
     /a                /a
     *a                *a
 
-The above spec contains no informative text and is strictly for
-hardcore supergeeks.  We have verified that hardcore supergeeks
-can write correct implementations from this spec alone.  If
-you're a hardcore supergeek, you might want to stop right here
-and write your own Nock implementation, followed by the standard
-exercise - a Nock decrement formula.  If not, keep reading.
+Your interpreter should be no more than a page of code in
+any language.  For extra credit, 6-10 are macros; implement 
+them directly.  For extra extra credit, optimize tail calls.
+To test your code, write a decrement formula b such that
+*[a b] is a - 1 for any atomic nonzero a.
 
-To make Nock make sense, let's work through Nock 6K line by line.
+1.2 Installation
+
+The second best way to learn Nock is to boot up your own Arvo
+virtual computer.  Using a Mac with OS X, install Homebrew and
+add the following packages: gmp, libsigsegv, libev.  Then, make.
+This will produce bin/vere, the virtual machine.
+
+To create an Arvo computer, you need an Urbit identity (seat).
+In theory, a computer can host one or more seats; in practice,
+one is the right number.
+
+There are two ways to get a seat - you can make your own or you
+can get an invitation.  If you make your own, your seat is a 
+128-bit hash of an RSA public key.  If you get an invitation,
+it's a 32-bit number.  Either way, that number is encoded in a
+phonetic base designed to make it easy to remember.  So if it's
+a 128-bit seat or "pawn", it looks like:
+
+  ~ralnyl-panned-tinmul-winpex--togtux-ralsem-lanrus-pagrup
+ 
+And if it's a 32-bit seat, it looks like:
+
+  ~tasfyn-partyv
+
+If you have an invitation file, create a computer by running
+
+  vere -i $file
+
+Otherwise, generate a 1024-bit RSA key with
+
+  vere -n 10
+
+This is just a toy for now, so use the defaults to generate
+a passcode stored in your home directory.  Write this passcode
+down on a piece of paper if you're especially concerned.
+
+In either case, this generates a directory in hub/:
+
+  hub/ralnyl-panned-tinmul-winpex--
+  hub/tasfyn-partyv
+
+Quit vere with ^D, then restart with 
+
+  vere $directory
+
+This is how you start your computer.  Arvo is a single-level
+store which works by remembering all its events.  It should
+also checkpoint its memory but doesn't, so restarting may be
+quite slow if you have a lot of events.  To reset, vere -R.
+
+In $directory are two things - a filesystem tree and an event
+log (~egz.hope).  
+
+Files in the tree are mirrored in Arvo's revision control system,
+with changes detected automagically.  So, even though Arvo cannot
+read the Unix filesystem, you can edit files externally and use
+them within Arvo.  (At present the change detection is not
+actually magic, but will happen every time you hit return on the
+command line.)
+
+~egz.hope contains your events, encrypted with your passcode.
+Every keypress on the command line, filesystem change, network
+packet, etc, is in this file.  Since it is encrypted, you can
+check it into a public github repo or similar.
+
+Now we're ready to continue and learn Nock.
+
+1.3 Nock
+
+To make Nock make sense, let's work through Nock 5K line by line.
 First the data model (lines 1-4):
 
   1 Structures
@@ -94,13 +165,13 @@ the S."
 To be exact, a noun _is_ an S-expression, except that classic
 S-expressions have multiple atom types ("S" is for "symbol").
 Since Nock is designed to be used with a higher-level type system
-(such as Watt's), it does not need low-level types.  An atom is
+(such as Hoon's), it does not need low-level types.  An atom is
 just an unsigned integer of any size.
 
 For instance, it's common to represent strings (or even whole
 text files) as atoms, arranging them LSB first - so "foo" becomes
 0x6f6f66.  How do we know to print this as "foo", not "0x6f6f66"?
-We need external information - such as a Watt type.  Similarly,
+We need external information - such as a Hoon type.  Similarly,
 other common atomic types - signed integers, floating point, etc
 - are all straightforward to map into atoms.
 
@@ -112,7 +183,7 @@ its parent.  One consequence: Nock has no garbage collector.
 (Nor can dag structure be detected, as with Lisp `eq`.)
 
 There is also no single syntax for nouns.  If you have nouns you
-have Nock; if you have Nock you have Watt; if you have Watt, you
+have Nock; if you have Nock you have Hoon; if you have Hoon, you
 can write whatever parser you like.
 
 Let's continue (line 6):
@@ -120,11 +191,11 @@ Let's continue (line 6):
   2 Pseudocode
 
 It's important to recognize that the pseudocode of the Nock spec
-is just that: pseudocode.  It looks a little like Watt.  It isn't
-Watt - it's just pseudocode.  Or in other words, just English.
+is just that: pseudocode.  It looks a little like Hoon.  It isn't
+Hoon - it's just pseudocode.  Or in other words, just English.
 At the bottom of every formal system is a system of axioms, which
-can only be written in English.  (Why pseudocode, not Watt?  Since
-Watt is defined in Nock, this would only give a false impression
+can only be written in English.  (Why pseudocode, not Hoon?  Since
+Hoon is defined in Nock, this would only give a false impression
 of nonexistent precision.)
 
 The logic of this pseudocode is a pattern-matching reduction,
@@ -135,9 +206,9 @@ Line 8:
 
     [a b c]           [a [b c]]
 
-Ie, brackets (in our pseudocode, as in Watt) associate to the
+Ie, brackets (in our pseudocode, as in Hoon) associate to the
 right.  For those with Lisp experience, it's important to note
-that Nock and Watt use tuples or "improper lists" much more
+that Nock and Hoon use tuples or "improper lists" much more
 heavily than Lisp.  The list terminator, normally 0, is never 
 automatic.  So the Lisp list 
 
@@ -166,13 +237,23 @@ reduces to... `*a`.  In theory, this means that Nock spins
 forever in an infinite loop.  In other words, Nock produces no
 result - and in practice, your interpreter will stop.
 
-Another way to see this is that Nock has "crash-only" semantics.
+(Another way to see this is that Nock has "crash-only" semantics.
 There is no exception mechanism.  The only way to catch Nock
 errors is to simulate Nock in a higher-level virtual Nock -
 which, in fact, we do all the time.  A simulator (or a practical
 low-level interpreter) can report, out of band, that Nock would
 not terminate.  It cannot recognize all infinite loops, of
-course, but it can catch the obvious ones - like `*42`.
+course, but it can catch the obvious ones - like `*42`.)
+
+Normally a in nock(a) is a cell [s f], or as we say
+
+  [subject formula]
+
+Intuitively, the formula is your function and the subject is 
+its argument.  We call them something different because Hoon,
+or any other high-level language built on Nock, will build its
+own function calling convention which *does not * map directly
+to *[subject formula].
 
 Let's move on to the axiomatic functions.  Lines 11-15:
 
@@ -188,9 +269,10 @@ reductions further down.  So far we have four built-in functions:
 an atom, `^` incrementing an atom, and `=` testing for equality.
 Again, no rocket science here.
 
-We should note that in Nock and Watt, 0 (pronounced "yes") is
+We should note that in Nock and Hoon, 0 (pronounced "yes") is
 true, and 1 ("no") is false.  Why?  It's fresh, it's different,
 it's new.  And it's annoying.  And it keeps you on your toes.
+And it's also just intuitively right.
 
 Slightly more interesting is our tree numbering.  Lines 17-21:
 
@@ -231,10 +313,18 @@ operator.
 
     *[a 0 b]          /[b a]
 
-`0` is simply Nock's tree-addressing operator.  For example, to
-reuse our slot example, 
+`0` is simply Nock's tree-addressing operator.  Let's try it out
+from the Arvo command line.  
 
-  : .*([[4 5] [6 14 15]] [0 7])
+Note that we're using Hoon syntax here.  Since we do not use Nock
+from Hoon all that often, we've left it a little cumbersome.
+In Hoon, instead of writing *[a 0 b], we write 
+
+  .*(a 0 b)
+
+So, to reuse our slot example, let's try the interpreter:
+
+  ~tasfyn-partyv> .*([[4 5] [6 14 15]] [0 7])
 
 gives, while the sky remains blue and the sun rises in the east:
 
@@ -247,7 +337,7 @@ Even stupider is line 26:
 `1` is the constant operator.  It produces its argument without
 reference to the subject.  So
 
-  : .*(42 [1 153 218])
+  ~tasfyn-partyv> .*(42 [1 153 218])
 
 yields
 
@@ -264,7 +354,7 @@ Nock has no `apply` - so all our work gets done with `2`.
 
 Let's convert the previous example into a stupid use of `2`:
 
-  : .*(77 [2 [1 42] [1 1 153 218]])
+  ~tasfyn-partyv> .*(77 [2 [1 42] [1 1 153 218]])
 
 with a constant subject and a constant formula, gives the same
 
@@ -279,22 +369,22 @@ In lines 28-30, we meet our axiomatic functions again:
 For instance, if `x` is a formula that calculates some product,
 `[4 x]` calculates that product plus one.  Hence:
 
-  : .*(57 [0 1])
+  ~tasfyn-partyv> .*(57 [0 1])
   57
 
 and
 
-  : .*([132 19] [0 3])
+  ~tasfyn-partyv> .*([132 19] [0 3])
   19
 
 and
 
-  : .*(57 [4 0 1])
+  ~tasfyn-partyv> .*(57 [4 0 1])
   58
 
 and 
 
-  : .*([132 19] [4 0 3])
+  ~tasfyn-partyv> .*([132 19] [4 0 3])
   20
 
 If this seems obvious, you're doin' good.  Finally, we jump back up
@@ -326,45 +416,21 @@ in Nock you write `[x y]`.
 
 For example,
 
-    *[42 [4 0 1]]
+  ~tasfyn-partyv> .*(42 [4 0 1])
 
 where `42` is the subject (data) and `[4 0 1]` is the formula
 (code), happens to evaluate to `43`.  Whereas
 
-    *[42 [3 0 1]]
+  ~tasfyn-partyv> .*(42 [3 0 1])
 
 is `1`.  So if we evaluate
 
-    *[42 [[4 0 1] [3 0 1]]]
+  ~tasfyn-partyv> .*(42 [[4 0 1] [3 0 1]])
 
 we get
 
     [43 1]
 
-Perhaps this is a good time to fire up the Watt interpreter,
-`eyre`, and test this in practice.  Watt is not Nock, of course,
-but it has a Nock syntax.  To test Nock expressions in Watt,
-instead of 
-
-    *[subject formula]
-
-write 
-
-    .*(subject formula)
-
-So if you run 
-
-  $ eyre 256 hume
-
-and type, at the `:` prompt, 
-
-  : .*(42 [[4 0 1] [3 0 1]])
-
-you should see
-
-  [43 1]
-
-which is all the Watt you need to know right now.  Line 25:
 Except for the crash defaults (lines 39-42), we've actually
 completed all the _essential_ aspects of Nock.  The operators up
 through 5 provide all necessary computational functionality.
@@ -377,9 +443,10 @@ together (lines 32-37):
 
     *[a 6 b c d]      *[a 2 [0 1] 2 [1 c d] [1 0] 2 [1 2 3] [1 0] 4 4 b]
     *[a 7 b c]        *[a 2 b 1 c]
-    *[a 8 b c]        *[a 7 [[0 1] b] c]
+    *[a 8 b c]        *[a 7 [[7 [0 1] b] 0 1] c]
     *[a 9 b c]        *[a 7 c 0 b]
     *[a 10 b c]       *[a c]
+    *[a 10 [b c] d]   *[a 8 c 7 [0 2] d]
     *[a 10 [b c] d]   *[a 8 c 7 [0 3] d]
 
 Whoa!  Have we entered rocket-science territory?  Let's try to
@@ -391,7 +458,7 @@ The simplest is clearly line 36:
 If `x` is an atom and `y` is a formula, the formula `[10 x y]` 
 appears to be equivalent to... `y`.  For instance:
 
-  : .*([132 19] [10 37 [4 0 3]])
+  ~tasfyn-partyv> .*([132 19] [10 37 [4 0 3]])
   20
 
 Why would we want to do this?  `10` is actually a hint operator.
@@ -402,8 +469,8 @@ compute the expression more efficiently, however.
 Every Nock computes the same result - but not all at the same
 speed.  What hints are supported?  What do they do?  Hints are a
 higher-level convention which do not, and should not, appear in
-the Nock spec.  Some are defined in Watt.  Indeed, a naive Nock
-interpreter not optimized for Watt will run Watt quite poorly.
+the Nock spec.  Some are defined in Hoon.  Indeed, a naive Nock
+interpreter not optimized for Hoon will run Hoon quite poorly.
 When it gets the product, however, the product will be right.
 
 There is another reduction for hints - line 37:
@@ -428,7 +495,7 @@ We move on to the next simplest operator, `7`.  Line 33:
 Suppose we have two formulas, `b` and `c`.  What is the formula 
 `[7 b c]`?  This example will show you:
 
-  : .*(42 [7 [4 0 1] [4 0 1]])
+  ~tasfyn-partyv> .*(42 [7 [4 0 1] [4 0 1]])
   44
 
 `7` is an old mathematical friend, function composition.  It's
@@ -437,25 +504,29 @@ is simply `b`, and the formula is `c` quoted.
 
 Line 34 looks very similar:
 
-    *[a 8 b c]        *[a 7 [[0 1] b] c]
+    *[a 8 b c]        *[a 7 [[7 [0 1] b] 0 1] c]
 
 Indeed, `8` is `7`, except that the subject for `c` is not simply
-the product of `b`, but the ordered pair of the original subject
-and the product of `b`.  Hence:
+the product of `b`, but the ordered pair of the product of `b`
+and the original subject.  Hence:
 
-  : .*(42 [8 [4 0 1] [0 1]])
+  ~tasfyn-partyv> .*(42 [8 [4 0 1] [0 1]])
   [42 43]
 
 and 
 
-  : .*(42 [8 [4 0 1] [4 0 3]])
-  44
+  ~tasfyn-partyv> .*(42 [8 [4 0 1] [4 0 3]])
+  43
 
 Why would we want to do this?  Imagine a higher-level language
 in which the programmer declares a variable.  This language is
 likely to generate an `8`, because the variable is computed
 against the present subject, and used in a calculation which
 depends both on the original subject and the new variable.
+
+For extra credit, explain why we can't just define
+
+    *[a 8 b c]        *[a 7 [b 0 1] c]
 
 Another simple macro is line 35:
 
@@ -482,12 +553,12 @@ to `1`, we produce `d`; otherwise, we crash.
 
 For instance:
 
-  : .*(42 [6 [1 0] [4 0 1] [1 233]])
+  ~tasfyn-partyv> .*(42 [6 [1 0] [4 0 1] [1 233]])
   43
 
 and
 
-  : .*(42 [6 [1 1] [4 0 1] [1 233]])
+  ~tasfyn-partyv> .*(42 [6 [1 1] [4 0 1] [1 233]])
   233
 
 In real life, of course, the Nock implementor knows that `6` is
@@ -553,8 +624,8 @@ formula `f` which implements the partial function that produces
 `(s - 1)` if `s` is a nonzero atom, and otherwise does not
 terminate.  
 
-The normal Watt programmer has written one Nock formula: this
-one.  Since decrement uses all the Nock techniques the Watt
+The normal Hoon programmer has written one Nock formula: this
+one.  Since decrement uses all the Nock techniques the Hoon
 compiler uses, the exercise is a good foundation.  After you
 write decrement (or just follow this example), you'll never need
 to deal with Nock again.
@@ -565,17 +636,17 @@ As we know, the equivalent formula for increment is
 
 Thus:
 
-  : .*(42 [4 0 1])
+  ~>tasfyn-partyv .*(42 [4 0 1])
   43
 
 Of course, increment is built into Nock.  So, ha, that's easy.
 
 How do we decrement?  A good way to start is to gaze fondly on
-how we'd do it if we actually had a real language, ie, Watt.
-Here is a minimal decrement in Watt:
+how we'd do it if we actually had a real language, ie, Hoon.
+Here is a minimal decrement in Hoon:
 
   =>  a=.                     ::  line 1
-  =+  b=`@`0                  ::  line 2
+  =+  b=0                     ::  line 2
   |-                          ::  line 3
   ?:  =(a +(b))               ::  line 4
     b                         ::  line 5
@@ -583,11 +654,11 @@ Here is a minimal decrement in Watt:
 
 Or for fun, on one line:
 
-  =>(a=. =+(b=0* |-(?:(=(a +(b)) b $(b +(b))))))
+  =>(a=. =+(b=0 |-(?:(=(a +(b)) b $(b +(b))))))
 
-Does Watt actually work?
+Does Hoon actually work?
 
-  : =>(42 =>(a=. =+(b=0* |-(?:(=(a +(b)) b $(b +(b)))))))
+  ~tasfyn-partyv>  =>(42 =>(a=. =+(b=0 |-(?:(=(a +(b)) b $(b +(b)))))))
   41
 
 Let's translate this into English.  How do we decrement the
@@ -597,14 +668,14 @@ Third (line 3), we loop.  Fourth, we test if `a` equals `b` plus
 1 (line 4), produce `b` if it does (line 5), repeat the loop with
 `b` set to `b` plus 1 (line 6) if it doesn't.  Obviously, while
 the syntax is unusual, the algorithm is anything but deep.  We
-are calculating `b` minus one by counting up from `0.
+are calculating `b` minus one by counting up from `0`.
 
 (Obviously, this is an O(n) algorithm.  Is there a better way?
 There is not.  Do we actually do this in practice?  Yes and no.)
 
 Unfortunately we are missing a third of our Rosetta stone.  We
-have decrement in Watt and we have it in English.  How do we
-express this in Nock?  What will the Watt compiler generate from
+have decrement in Hoon and we have it in English.  How do we
+express this in Nock?  What will the Hoon compiler generate from
 the code above?  Let's work through it line by line.
 
 Nock has no types, variable names, etc.  So line 1 is a no-op.
@@ -619,57 +690,58 @@ Since `0` is a constant, a formula that produces it is
 
 To combine `0` with the subject, we compute
 
-  [[0 1] [1 0]]
+  [[1 0] [0 1]]
 
 which, if our subject is 42, gives us
 
-  [42 0]
+  [0 42]
 
 which we can use as the subject for an inner formula, `g`.
 Composing our new variable with `g`, we have `f` as
 
-  [2 [[0 1] [1 0]] [1 g]]
+  [2 [[1 0] [0 1]] [1 g]]
 
 which seems a little funky for something so simple.  But we
 can simplify it with the composition macro, `7`:
 
-  [7 [[0 1] [1 0]] g]
+  [7 [[1 0] [0 1]] g]
 
 and still further with the augmentation macro, `8`:
 
   [8 [1 0] g]
 
-If you refer back to the Nock definition, you'll see that these
-transformations are absolutely invariant.
+If you refer back to the Nock definition, you'll see that all
+these formulas are semantically equivalent.
 
-So what's `g`?  We seem to loop.  Does Nock have a loop
-operator?  It most certainly does not.  So what do we do?
+Let's continue with our decrement.  So what's `g`?  We seem to
+loop.  Does Nock have a loop operator?  It most certainly does
+not.  So what do we do?
 
 We build a noun called a _core_ - a construct which is behind any
-kind of interesting control flow in Watt.  Of course, the Nock
+kind of interesting control flow in Hoon.  Of course, the Nock
 programmer is not constrained to use the same techniques as the
-Watt compiler, but it is probably a good idea. 
+Hoon compiler, but it is probably a good idea. 
 
-In Watt, all the flow structures from your old life as an Earth
+In Hoon, all the flow structures from your old life as an Earth
 programmer become cores.  Functions and/or closures are cores,
 objects are cores modules are cores, even loops are cores.
 
-The core is just a cell whose head is data (possibly containing
-other cores) and whose tail is code (containing one or more
-formulas).  The head is the _payload_ and the tail is the
+The core is just a cell whose tail is data (possibly containing
+other cores) and whose head is code (containing one or more
+formulas).  The tail is the _payload_ and the head is the
 _battery_.  Hence your core is
 
-  [pay bat]
+  [bat pay]
 
 To activate a core, pick a formula out of the battery, and use
 the entire core (_not_ just the payload) as the subject.  
 
-(A core formula is inevitably known as a _method_ - but note that
-the parallel to the classic object-oriented paradigm is not
-exact.  The method produces a function of the core, not the core
-and some argument.  Ie, it is more of a functional attribute.)
+(A core formula is called an _arm_.  An arm is almost like an
+object-oriented method, but not quite - a method would be an arm
+that produces a function on an argument.  The arm is just a
+function of the core, ie, a computed attribute.)
 
-Of course, because we feed it the entire core, our method can
+Of course, because we feed it the entire core, our arm can
 invoke itself (or any other formula in the battery).  Hence, it
 can loop.  And this is what a loop is - the simplest of cores.
 
@@ -685,18 +757,18 @@ reverse order.  How do we activate a core?
 
 Since we have only one formula, it's is the battery itself.
 Thus we want to execute Nock with the whole core (already the
-subject, and the entire battery (slot `3`).  Hence, `a` is
+subject, and the entire battery (slot `2`).  Hence, `a` is
 
-  [2 [0 1] [0 3]]
+  [2 [0 1] [0 2]]
 
 We could also use the handy `9` macro - which almost seems
-designed for firing methods on cores:
+designed for firing arms on cores:
 
-  [9 3 [0 1]]
+  [9 2 [0 1]]
 
 Which leaves us seeking 
 
- [8 [1 0] [7 p [9 3 0 1]]]
+ [8 [1 0] [7 p [9 2 0 1]]]
 
 And all we have to do is build the core, `p`.  How do we build a
 core?  We add code to the subject, just as we added a variable
@@ -708,34 +780,35 @@ the loop formula `l`.  So `p` is
 
 Which would leave us seeking
 
-  [8 [1 0] [7 [8 [1 l] [0 1]] [9 3 0 1]]]
+  [8 [1 0] [7 [8 [1 l] [0 1]] [9 2 0 1]]]
 
 except that we have duplicated the `8` pattern again, since we
 know
 
-  [7 [8 [1 l] [0 1]] [9 3 0 1]]
+  [7 [8 [1 l] [0 1]] [9 2 0 1]]
 
 is equivalent to  
 
-  [8 [1 l] [9 3 0 1]]
+  [8 [1 l] [9 2 0 1]]
 
 so the full value of `f` is
 
-  [8 [1 0] [8 [1 l] [9 3 0 1]]]
+  [8 [1 0] [8 [1 l] [9 2 0 1]]]
 
 Thus our only formula to compose is the loop body, `l`.
 Its subject is the loop core:
 
-  [pay bat]
+  [bat pay]
 
 where `bat` is just the loop formula, and `pay` is the pair `[a
 b]`, `a` being the input subject, and `b` the counter.  Thus we
 could also write this subject as
 
-  [[a b] l]
+  [l b a]
 
-and we see readily that `a` is at slot `4`, `b` `5`, `l` `3`.
-With this subject, we need to express the Watt loop body
+# and we see readily that `a` is at slot `4`, `b` `5`, `l` `3`.
+and we see readily that `a` is at slot `7`, `b` `6`, `l` `2`.
+With this subject, we need to express the Hoon loop body
 
   ?:  =(a +(b))               ::  line 4
     b                         ::  line 5
@@ -747,35 +820,35 @@ This is obviously an if statement, and it calls for `6`.  Ie:
 
 Giving our decrement program as:
 
- [8 [1 0] [8 [1 6 t y n] [9 3 0 1]]]
+ [8 [1 0] [8 [1 6 t y n] [9 2 0 1]]]
 
 For `t`, how do we compute a flag that is yes (`0`) if `a` equals
 `b` plus one?  Equals, we recall, is `5`.  So `t` can only be
  
-  [5 [0 4] [4 0 5]]
+  [5 [0 7] [4 0 6]]
 
 If so, our product `y` is just the counter `b`:
 
-  [0 5]
+  [0 6]
 
 And if not?  We have to re-execute the loop with the counter 
 incremented.  If we were executing it with the same counter, 
 obviously an infinite loop, we could use the same core:
 
-  [9 3 0 1]
+  [9 2 0 1]
 
 But instead we need to construct a new core with the counter 
 incremented:
 
-  [[a +(b)] l]
+  [l +(b) a]
 
 ie, 
 
-  [[[0 4] [4 0 5]] [0 3]]
+ [[0 2] [4 0 6] [0 7]] 
 
 and `n` is:
 
-  [9 3 [[0 4] [4 0 5]] [0 3]]
+  [9 2 [[0 2] [4 0 6] [0 7]]]
  
 Hence our complete decrement.  Let's reformat vertically so we
 can actually read it:
@@ -790,33 +863,56 @@ can actually read it:
          n
        ]
      ]
-     [9 3 0 1]
-    ]
+     [9 2 0 1]
+   ]
  ]
 
 which becomes
 
- [ 8 
-   [1 0] 
-   [ 8 
-     [ 1 
-       [ 6 
-         [5 [0 4] [4 0 5]]
-         [0 5]
-         [9 3 [[0 4] [4 0 5]] [0 3]]
-       ]
-     ]
-     [9 3 0 1]
+  [ 8 
+    [1 0] 
+    [ 8 
+      [ 1 
+        [ 6 
+          [5 [0 7] [4 0 6]]
+          [0 6]
+          [9 2 [[0 2] [4 0 6] [0 7]]]
+        ]
+      ]
+      [9 2 0 1]
     ]
- ]
+  ]
 
 or, on one line without superfluous brackets:
 
-  [8 [1 0] 8 [1 6 [5 [0 4] 4 0 5] [0 5] 9 3 [[0 4] 4 0 5] 0 3] 9 3 0 1]
+ [8 [1 0] 8 [1 6 [5 [0 7] 4 0 6] [0 6] 9 2 [0 2] [4 0 6] 0 7] 9 2 0 1]
 
 which works for the important special case, 42:
 
-  : .*(42 [8 [1 0] 8 [1 6 [5 [0 4] 4 0 5] [0 5] 9 3 [[0 4] 4 0 5] 0 3] 9 3 0 1])
+  ~tasfyn-partyv> .*(42 [8 [1 0] 8 [1 6 [5 [0 7] 4 0 6] [0 6] 9 2 [0 2] [4 0 6] 0 7] 9 2 0 1])
   41
 
 If you understood this, you understand Nock.  At least in principle!
+
+If you want to play around more with Nock, the command line will
+start getting unwieldy.  Fortunately, the standard install
+contains the above Nock decrement packaged as an Arvo app, which
+you can edit and change if you'd like to get ambitious.  Just run
+
+  ~tasfyn-partyv> :toy/ndec 19
+  18
+
+The file driving this is 
+  
+  hub/$seat/toy/app/ndec.holw
+
+Edit this file, ignoring everything above the Nock formula, and
+hit return in the console to see it update:
+
+  ~tasfyn-partyv> 
+  : ~tasfyn-partyv/toy/app/ndec/holw/
+
+If decrement seems fun - why not write add?  I wrote a Nock adder
+a long, long time ago.  But I've forgotten where I put it.  There
+is absolutely no use in this exercise, except to prove to
+yourself that you've mastered Nock.

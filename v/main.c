@@ -218,6 +218,8 @@ main(c3_i   argc,
 
     u2_Host.wir_r = u2_wr_init(c3__rock, u2_ray_of(0, 0), u2_ray_of(1, 0));
     u2_Wire = u2_Host.wir_r;
+
+    u2_Host.arv_u = u2_Arv;
   }
 
 #if 0
@@ -258,7 +260,7 @@ main(c3_i   argc,
       u2_ve_init(kno_w);
 
       if ( 0 != u2_Host.ver_e[kno_w].ken ) {
-        u2_reck_boot(&u2_Host.rec_u[0]);
+        u2_reck_boot(u2_Host.arv_u);
       }
     }
     u2_cm_done();
@@ -287,7 +289,7 @@ main(c3_i   argc,
       //
       u2_ve_sway(0, u2k(u2_wire_tax(u2_Wire)));
 
-      u2_lo_bail(&u2_Host.rec_u[0]);
+      u2_lo_bail(u2_Host.arv_u);
 
       exit(1);
     }
@@ -336,7 +338,7 @@ main(c3_i   argc,
       exit(1);
     }
 
-    u2_lo_loop(&u2_Host.rec_u[0], cpu, meh, rez);
+    u2_lo_loop(u2_Host.arv_u, cpu, meh, rez);
   }
   return 0;
 }

@@ -1,49 +1,57 @@
 1: Introduction and philosophy
 
-Nock and Watt are a new programming and execution environment
+Urbit is a new programming and execution environment
 designed from scratch.  Any resemblance to existing languages
 or operating systems is coincidental, cosmetic, or inevitable.
+
+Urbit is a stack 
 
 Nock is a stateless virtual machine defined in 200 words.  The
 Nock machine is sealed - all execution is "pure."  Nock's goal is
 extreme commoditization of computing semantics.
 
-Watt is a high-level language which defines itself in Nock.  Its
-self-compiling kernel, 4000 lines of code, specifies Watt
-unambiguously; there is no Watt spec.  Watt can be classified as
+Hoon is a high-level language which defines itself in Nock.  Its
+self-compiling kernel, 7000 lines of code, specifies Hoon
+unambiguously; there is no Hoon spec.  Hoon can be classified as
 a pure, strict higher-order static type-inferred functional
-language, with variance, genericity, and dependent types.
-However, Watt does not use lambda calculus, unification, or other
-constructs from "PL theory."  Watt also excels at handling and
+language, with co/contra/bivariance and genericity.  However,
+Hoon does not use lambda calculus, unification, or other
+constructs from "PL theory."  Hoon also excels at handling and
 validating untyped data, a common task on teh Internets.  Its
 syntax is entirely novel and initially quite frightening.
 
-It's possible to use Nock without Watt, but there is no obvious
-reason to do so.  It's not necessary to learn Nock to learn Watt,
-but it helps a lot.  Therefore, we'll work through both of them
-in order.  If you're convinced that you want to learn Nock and
-Watt, feel free to skip the justifications below.
+Arvo is a deterministic functional operating system defined in
+Hoon.  While still basically a toy, it can serve web apps and
+network securely with other Arvo instances.  An Arvo instance
+is designed to be a simple independent computer in the cloud.
+
+It's possible to use Nock without Hoon, but there is no obvious
+reason to do so.  It's not necessary to learn Nock to learn Hoon,
+but it helps a lot.  The same for Hoon and Arvo.  Therefore,
+we'll work through all three in order.  in order.  If you're
+convinced that you want to learn Urbit, feel free to skip the
+justifications below.
 
 -- Nock 
 
 Nock is a virtual machine, like the Java VM or Microsoft CLR.
 Just as you execute Java by compiling it to the JVM, you execute
-Watt by compiling it to Nock.  
+Hoon by compiling it to Nock.  
 
-Do you need to learn Nock to learn Watt?  In theory, no, just as
+Do you need to learn Nock to learn Hoon?  In theory, no, just as
 you don't need to know anything about the JVM to learn Java.
-Indeed, in theory we could compile Watt to the JVM (or Java to
+Indeed, in theory we could compile Hoon to the JVM (or Java to
 Nock).  What's the difference between Nock and the JVM, anyway?
 Why do we need a new virtual machine?  And since we'll only be
-programming in Watt, why do we care how Watt is executed?
+programming in Hoon, why do we care how Hoon is executed?
 
 There is no formal difference between Nock and the JVM.  In
 theory, both are Turing-complete computers.  In practice, they
 have just about nothing in common.
 
 The main practical difference is that Nock is two orders of
-magnitude simpler.  The JVM spec is a book.  The Nock spec is 197
-words; it fits on a T-shirt; it gzips to 372 bytes.  There are
+magnitude simpler.  The JVM spec is a book.  The Nock spec is 200
+words; it fits on a T-shirt; it gzips to 371 bytes.  There are
 lots of other differences, but all follow from this.
 
 Why does size matter?  The goal of any programming language is to
@@ -55,8 +63,8 @@ JSON.  A 200-word spec needs a standards process like a fish
 needs swim lessons.  When a T-shirt goes to war with a book, it's
 like tanks against cavalry - or should be, anyway.
 
-Since every program in Watt (including the Watt compiler) reduces
-to Nock, every program in Watt inherits Nock's precision.  If two
+Since every program in Hoon (including the Hoon compiler) reduces
+to Nock, every program in Hoon inherits Nock's precision.  If two
 Nock interpreters produce different results, one is wrong, and it
 is always easy to tell which - without a "standards lawyer."  Can
 we imagine the end of incompatiblity?
@@ -71,8 +79,8 @@ Java began as a portable language; so did C.  Most Java today is
 server-side Java, dependent no less than C on library and OS
 configuration.  It is possible to write portable Java; it is
 possible to write portable C.  It is not possible to write
-unportable Nock or Watt.  It is also not possible to write
-insecure Nock or Watt, unless your interpreter is so broken
+unportable Nock or Hoon.  It is also not possible to write
+insecure Nock or Hoon, unless your interpreter is so broken
 there's an actual hole in its skull.
 
 How does Nock obtain native CPU performance, if it can't call
@@ -93,15 +101,15 @@ Instead, a practical Nock engine simply recognizes code it knows
 and substitutes equivalent C functions, or "jets."  For instance,
 in theory there are many different ways to express decrement in
 Nock, but in practice the Nock interpreter will execute only one:
-the decrement function in the Watt kernel.  Therefore, the only
-Nock decrement that must be optimized is the code that Watt
+the decrement function in the Hoon kernel.  Therefore, the only
+Nock decrement that must be optimized is the code that Hoon
 generates when it compiles its own decrement.  All others will
 suck, so don't roll your own.  Code recognition, as opposed to
 code analysis, is not a research problem.
 
 Jet propulsion separates mechanism and policy, transferring the
 task of achieving native performance from the programmer to the
-sysadmin.  The Watt programmer must still use hints to mark
+sysadmin.  The Hoon programmer must still use hints to mark
 functions for jet recognition, but cannot control or discern how
 these functions are actually executed.  Of course, a correct jet
 is indistiguishable in every way, except timing, from naive Nock.
@@ -114,23 +122,23 @@ abstraction is essential to modern graphics programming.
 
 When we compare jets to native calls, what are the pros and cons?
 Jets have only one disadvantage: high-performance code must be
-written twice, once in Watt and once in C.  Indeed, from the C
-programmer's perspective, Watt is a specification language for
-your C functions.  Watt specifications are executable, of course,
+written twice, once in Hoon and once in C.  Indeed, from the C
+programmer's perspective, Hoon is a specification language for
+your C functions.  Hoon specifications are executable, of course,
 so you can test the two implementations against each other -
 again, transparently to the programmer.  Moreover, the jet can
 even fail in special cases and drop back to the interpreter.
 
-Watt ships with a Nock that jet-propels most of the Watt kernel,
-including most of the Watt compiler.  If you're wondering how we
-wrote Watt in Watt when we didn't have Watt, the answer is that
-we wrote Watt in C and evolved this C code into a mere jet.  This
+Hoon ships with a Nock that jet-propels most of the Hoon kernel,
+including most of the Hoon compiler.  If you're wondering how we
+wrote Hoon in Hoon when we didn't have Hoon, the answer is that
+we wrote Hoon in C and evolved this C code into a mere jet.  This
 process is not recommended unless absolutely necessary - by far
-the best way to write the jet pair is to write the Watt first.
+the best way to write the jet pair is to write the Hoon first.
 
---  Watt
+--  Hoon
 
-If I can summarize Watt's goal, it's to be the C of functional
+If I can summarize Hoon's goal, it's to be the C of functional
 programming.  If you're not so arthritic that you learned to code
 in Turbo Pascal, you may never fully appreciate the metaphor.
 
@@ -158,64 +166,60 @@ about as abstract as Pascal; Haskell is far more abstract.  Both
 rest on the fundamental abstraction of functional programming,
 the lambda calculus, and more generally the foundational
 metamathematics of the late 19th and early 20th centuries.
-Watt has nothing to do with any of this stuff.
 
-Perhaps a political analogy will help.  If we place abstract on
-the left and concrete on the right, Haskell is Marxism.  Lisp is
-liberal democracy.  Watt is fascism - pure raw power.  There is
-no delicate lambda calculus - only Nock, the naked rifle butt.
-Watt has functions and types, or what appear to be functions and
-types.  On closer inspection, they are not abstractions at all,
-just glorified Nock macros.
+Hoon has nothing to do with any of this stuff.  It has functions
+and types, or what appear to be functions and types.  On closer
+inspection, they are not abstractions at all, just glorified Nock
+macros.
 
 If we compare these concrete patterns to the genuine abstractions
-of Haskell, we see that - as with Pascal and C - Watt is roughly
+of Haskell, we see that - as with Pascal and C - Hoon is roughly
 as expressive as Haskell.  Haskell has higher-order type
-inference; Watt has "higher-order" "type" "inference."  Some
-Haskell extensions have dependent types - Watt has "refined"
-"types."  Watt, like Lisp, unlike Haskell, is also very
+inference; Hoon has "higher-order" "type" "inference."  Some
+Haskell extensions have dependent types - Hoon has "refined"
+"types."  Hoon, like Lisp, unlike Haskell, is also very
 comfortable with typeless data; it should be, because it has no
-types, only "types."  The Watt features and the Haskell
+types, only "types."  The Hoon features and the Haskell
 abstractions have nothing in common - except that they solve the
-same problems for you, the programmer.  In short, Watt next to
+same problems for you, the programmer.  In short, Hoon next to
 Haskell is a white shark next to a killer whale.  The apparent
 resemblance is strictly superficial.
 
-So we could describe Watt as a pure, strict, higher-order typed
+So we could describe Hoon as a pure, strict, higher-order typed
 functional language.  But don't do this in front of a Haskell
 purist, unless you put quotes around "typed," "functional," and
 possibly even "language."  We could also say "object-oriented,"
 with the same scare quotes for the cult of Eiffel.
 
 Knowing Pascal made it harder, not easier, to learn C.  Knowing
-Haskell or Lisp makes it harder to learn Watt.  Indeed, knowing
-either would have made it impossible for me to write Watt.  I do
-know C, of course, and the spirit of K&R is all over Watt.  Or so
+Haskell or Lisp makes it harder to learn Hoon.  Indeed, knowing
+either would have made it impossible for me to write Hoon.  I do
+know C, of course, and the spirit of K&R is all over Hoon.  Or so
 I'd like to think.  Just as C is little more than a macro
-assembler for machine code, Watt is little more than a macro
+assembler for machine code, Hoon is little more than a macro
 assembler for Nock.
 
-The most basic difference between Watt and other languages is
-that Watt is defined in Watt.  There is no formal Watt spec -
-just a self-compiling compiler written in Watt.  The target of
-this compiler is, of course, Nock.  Thus Watt is as precisely
+The most basic difference between Hoon and other languages is
+that Hoon is defined in Hoon.  There is no formal Hoon spec -
+just a self-compiling compiler written in Hoon.  The target of
+this compiler is, of course, Nock.  Thus Hoon is as precisely
 defined as Nock, which is quite precisely indeed. 
 
-This would be true regardless of the size of Watt in Watt, but
-Watt in Watt is in fact quite small.  The Watt kernel is under
-4000 lines; it gzips to 25K.  But this includes not only the
+This would be true regardless of the size of Hoon in Hoon, but
+Hoon in Hoon is in fact quite small.  The Hoon kernel is 7000
+lines; it gzips to 25K.  But this includes not only the
 self-compiling compiler, but also all the standard libraries it
-needs.  The compiler alone (tier 6) is 2500 lines, including a
-very intricate "monadic" parser, a non-Hindley-Milner "type
-inference" engine, and a Nock code generator.  This reflects both
-the internal simplicity of Watt and its expressiveness.  If you 
-know these 2500 lines, and an expert should, you _know_ Watt.
+needs.  The compiler alone is 2500 lines, including a very
+intricate "monadic" parser, a non-Hindley-Milner "type inference"
+engine, and a Nock code generator.  This reflects both the
+internal simplicity of Hoon and its expressiveness.  If you know
+these 2500 lines, and an expert should, you _know_ Hoon.
 
-On the other hand, the _apparent_ complexity of Watt is very
-high.  When you open a Watt file, you are confronted with an
+On the other hand, the _apparent_ complexity of Hoon is very
+high.  When you open a Hoon file, you are confronted with an
 enormous avalanche of barely structured line noise.  Again this
 reminds us of C, which makes no attempt at the kind of abstract
-prettiness we expect from a Pascal or a Haskell.  Learning Watt
+prettiness we expect from a Pascal or a Haskell.  Learning Hoon
 involves learning nearly 100 ASCII digraph "runes."
 
 Is this a harsh learning curve?  Of course it is.  On the other
@@ -232,12 +236,16 @@ abstract ones because they play to the strengths of the human
 brain, and avoid its weaknesses.  Functional programming is
 traditionally reserved for the topmost echelon of natural talent.
 I'd like to think that anyone who can learn to fix a Chevy can
-learn to write a Watt function.  We'll see if that's true.
+learn to write a Hoon function.  We'll see if that's true.
 
 A programming language is called a language for a reason - it
-should activate the human linguistic lobes.  Learning Watt
+should activate the human linguistic lobes.  Learning Hoon
 is like learning a language very alien to your first, such as
-Chinese from English.  Before you know Watt, it looks like
-squiggles.  Once you know Watt, and the rote task of syntax
+Chinese from English.  Before you know Hoon, it looks like
+squiggles.  Once you know Hoon, and the rote task of syntax
 processing is hardwired, you look at your screen and _see_
 the function.  Or, at least, I do - I hope you can too.
+
+--  Arvo
+
+Lorem ipsum.

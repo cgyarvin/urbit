@@ -589,7 +589,7 @@ u2_ve_mark()
     siz_w += u2_cm_mark_noun(ver_e->has.pyl.len);
   }
 
-  siz_w += u2_ve_mark_reck(&u2_Host.rec_u[0]);
+  siz_w += u2_ve_mark_reck(u2_Host.arv_u);
   return siz_w;
 }
 

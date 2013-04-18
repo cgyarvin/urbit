@@ -6347,7 +6347,10 @@
             |=  [a=(list gene) b=?(~ [~ ~])]
             ?~(b a (weld a `_a`[[%bcts %null] ~]))
           ;~  plug
-            (most ace wide)
+            ;~  pose
+              (ifix [ace gap] (most gap tall))
+              (most ace wide)
+            ==
             ;~  pose
               (cold [~ ~] ;~(plug (just ']') (just '~')))
               (cold ~ (just ']'))

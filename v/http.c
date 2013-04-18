@@ -793,7 +793,7 @@ _http_octs_to_bod(u2_noun oct)
 static u2_noun
 _http_pox_to_noun(c3_w sev_l, c3_w coq_l, c3_w seq_l)
 {
-  u2_reck* rec_u = &u2_Host.rec_u[0];
+  u2_reck* rec_u = u2_Host.arv_u;
 
   return 
     u2nt(
@@ -859,7 +859,7 @@ _http_request(u2_hreq* req_u)
                                   req_u->hon_u->coq_l,
                                   req_u->seq_l); 
 
-  u2_reck_http_request(&u2_Host.rec_u[0], u2_yes, pox, req);
+  u2_reck_http_request(u2_Host.arv_u, u2_yes, pox, req);
   return 0;
 }
 
@@ -911,9 +911,9 @@ u2_http_ef_thou(u2_reck* rec_u,
 */
 
 static void _ht_htls(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i)
-  { u2_lo_call(&u2_Host.rec_u[0], lup_u, wax_u, c3__htls, rev_i); }
+  { u2_lo_call(u2_Host.arv_u, lup_u, wax_u, c3__htls, rev_i); }
 static void _ht_htcn(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i)
-  { u2_lo_call(&u2_Host.rec_u[0], lup_u, wax_u, c3__htcn, rev_i); }
+  { u2_lo_call(u2_Host.arv_u, lup_u, wax_u, c3__htcn, rev_i); }
 
 /* u2_http_io_init(): initialize http I/O.
 */

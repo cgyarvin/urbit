@@ -26,7 +26,7 @@ struct termios Oldattr;
 struct termios Newattr;
 
 static void _lo_term(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i)
-  { u2_lo_call(&u2_Host.rec_u[0], lup_u, wax_u, c3__term, rev_i); }
+  { u2_lo_call(u2_Host.arv_u, lup_u, wax_u, c3__term, rev_i); }
 
 void 
 u2_term_io_init(u2_reck* rec_u)
@@ -878,7 +878,7 @@ u2_term_io_loja(int x)
       if ( -1 == fcntl(0, F_SETFL, uty_u->nob_i) ) {
         c3_assert(!"loja-fcntl");
       }
-      _term_it_refresh_line(&u2_Host.rec_u[0], uty_u);
+      _term_it_refresh_line(u2_Host.arv_u, uty_u);
     }
   }
 }

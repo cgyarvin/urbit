@@ -23,6 +23,16 @@ issued:
   flag: ~fadter-fasted
   whom: Colin Smith (#3)
 
+issued:
+  flag: ~raddev-wacrec
+  whom: Ron Garret (#4)
+
+issued:
+  flag: ~rovtyd-hatbep
+  whom: Ryan Lackey (#5)
+
+  flag: ~tomsyt-balsen
+  whom: John Burnham (#6)
 
 issued:
   flag: ~lablyx-fapmer

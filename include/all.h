@@ -38,6 +38,7 @@
 #     include "f/funj.h"
 #     include "f/unix.h"
 #     include "f/hevn.h" 
+#     include "f/arvo.h"
 
     /** coal: should replace all of the above
     **/

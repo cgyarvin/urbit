@@ -76,6 +76,12 @@ u2_wr_init(c3_m   hip_m,
     u2_wire_hev_r(wir_r) = u2_hv_init(wir_r);
   }
 
+  /* OS kernel.
+  */
+  {
+    u2_wire_arv_r(wir_r) = u2_rl_ralloc(wir_r, c3_wiseof(u2_reck));
+  }
+
   return wir_r;
 }
 
@@ -125,6 +131,7 @@ u2_wr_mark(u2_ray wir_r)
     siz_w += u2_rl_gc_mark_ptr(wir_r, u2_wire_rac_r(wir_r));
 
     siz_w += u2_rl_gc_mark_ptr(wir_r, u2_wire_hev_r(wir_r));
+    siz_w += u2_rl_gc_mark_ptr(wir_r, u2_wire_arv_r(wir_r));
     u2_hv_mark();
   }
   siz_w += u2_rl_gc_mark(wir_r);

@@ -150,7 +150,7 @@ u2_lo_bail(u2_reck* rec_u)
 
   exit(1);
 }
-int c3_cooked() { _lo_exit(&u2_Host.rec_u[0]); return 0; }
+int c3_cooked() { _lo_exit(u2_Host.arv_u); return 0; }
 
 /* _lo_tape(): dump a tape, old style.  Don't do this.
 */
