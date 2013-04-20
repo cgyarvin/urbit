@@ -2,9 +2,6 @@
 **
 ** This file is in the public domain.
 */
-  /** See Spec/zeno/2.txt for a discussion of the loom.
-  **/
-
   /** Global variables and definitions.
   **/
 #   define Loom ((c3_w *)U2_OS_LoomBase)
@@ -13,6 +10,32 @@
 #   define HalfBits (U2_OS_LoomBits - 1)
 #   define HalfSize (1 << HalfBits)
 #   define HalfEnd  (HalfSize - 1)
+#   define LoomPageWords      12            //  16K pages
+#   define LoomHalfPages      (1 << 15)     //  32768 pages
+
+  /** Data structures.
+  **/
+    /* u2_life: page state.
+    */
+      typedef enum {
+        u2_page_none = 0,                   //  page is not mapped
+        u2_page_slow = 1,                   //  page not yet loaded (not used)
+        u2_page_neat = 2,                   //  page is unmodified
+        u2_page_tref = 3                    //  page is dirty
+      } u2_page_life;
+
+      typedef struct {
+        u2_page_life lif_e: 2;              //  page state
+        c3_w         mug_e: 30;             //  30-bit mug
+      } u2_chit;
+
+    /* u2_chem: memory control, per half.
+    */
+      typedef struct _u2_chem {
+        c3_w pgs_w;                         //  number of pages live
+        u2_chit cht_w[LoomHalfPages];       //  page flags
+      } u2_chem;
+
 
 #   ifdef U2_GLOBAL
       /* Frame depth in interpreter - for stack control.  Tune it.
@@ -23,10 +46,19 @@
       */
         volatile sig_atomic_t LoomStop;
         volatile sig_atomic_t LoomIntr;
+
+      /* Memory control structures.
+      */
+        u2_chem LoomChemTop;
+        u2_chem LoomChemBot;
+
 #   else
       extern uint32_t LoomFrame;
       extern volatile sig_atomic_t LoomStop;
       extern volatile sig_atomic_t LoomIntr;
+
+      extern u2_chem LoomChemTop;
+      extern u2_chem LoomChemBot;
 #   endif
 
 #     define   LoomFrameMax  8192

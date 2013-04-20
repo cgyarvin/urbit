@@ -2,8 +2,6 @@
 **
 ** This file is in the public domain.
 */
-  void TermTest(void);    //  entirely temporary!
-
   /** Quasi-tunable parameters.
   **/
     /* First kernel this executable can boot.
@@ -298,6 +296,9 @@
         u2_utty* uty_u;                     //  terminal servers
         u2_ulog  lug_u;                     //  event log
         u2_ames  sam_u;                     //  packet interface
+
+        u2_chem  top_u;                     //  high half
+        u2_chem  bot_u;                     //  low half
 
         u2_reck* arv_u;                     //  rotors (hardcoded to 1)
       } u2_host;                            //  host == computer == process

@@ -373,7 +373,9 @@ _nock_cool(u2_noun bus,
         u2_noun gof, pro;
 
         gof = _nock_cool(bus, u2k(gal));
-        pro = u2_rl_vint(u2_Wire, gof);
+        if ( (u2_none == (pro = u2_rl_vint(u2_Wire, gof))) ) {
+          return u2_cm_bail(c3__exit);
+        }
 
         u2z(gof); u2z(fol);
         return pro;
@@ -656,7 +658,9 @@ _nock_mool(u2_noun  bus,
         u2z(fol);
         if ( 0 != *pon ) { return gof; }
 
-        pro = u2_rl_vint(u2_Wire, gof);
+        if ( u2_none == (pro = u2_rl_vint(u2_Wire, gof)) ) {
+          *pon = 2; u2z(gof); return u2_cm_wail();
+        }
         u2z(gof);
 
         return pro;

@@ -2286,6 +2286,9 @@ u2_rl_vint(u2_rail ral_r,
       }
       else return vin_w;
     }
+    else if ( u2_yes == u2du(a) ) {
+      return u2_none;
+    } 
     else {
       mpz_t a_mp;
 

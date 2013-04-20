@@ -320,7 +320,7 @@ Note that we're using Hoon syntax here.  Since we do not use Nock
 from Hoon all that often, we've left it a little cumbersome.
 In Hoon, instead of writing *[a 0 b], we write 
 
-  .*(a 0 b)
+  .*(a [0 b])
 
 So, to reuse our slot example, let's try the interpreter:
 
@@ -363,7 +363,7 @@ with a constant subject and a constant formula, gives the same
 In lines 28-30, we meet our axiomatic functions again:
 
     *[a 3 b]          ?*[a b]
-    *[a 4 b]          ^*[a b]
+    *[a 4 b]          +*[a b]
     *[a 5 b]          =*[a b]
 
 For instance, if `x` is a formula that calculates some product,
@@ -511,7 +511,7 @@ the product of `b`, but the ordered pair of the product of `b`
 and the original subject.  Hence:
 
   ~tasfyn-partyv> .*(42 [8 [4 0 1] [0 1]])
-  [42 43]
+  [43 42]
 
 and 
 

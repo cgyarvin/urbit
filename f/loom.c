@@ -13,6 +13,36 @@ _loom_stop(c3_i sig)
   LoomIntr = 1;
 }
 
+static c3_i
+_loom_sigsegv_handler(void* adr_v, void* arg_v)
+{
+  c3_w     off_w = (((c3_c*) adr_v) - (c3_c*)U2_OS_LoomBase);
+  c3_w     pag_w;
+  c3_c*    bas_c;
+  u2_chem* chm_u;
+
+  if ( off_w > (HalfSize << 2) ) {
+    off_w -= (HalfSize << 2);
+    chm_u = &LoomChemTop;
+    bas_c = (c3_c*)(void *)(U2_OS_LoomBase + (HalfSize << 2));
+  } else {
+    chm_u = &LoomChemBot;
+    bas_c = (c3_c*)(void *)(U2_OS_LoomBase);
+  }
+  off_w &= ((1 << (LoomPageWords + 2)) - 1);
+  pag_w = (off_w >> (LoomPageWords + 2));
+
+  chm_u->cht_w[pag_w].lif_e = u2_page_tref;
+  if ( -1 == mprotect(bas_c + off_w, 
+                      (1 << (LoomPageWords + 2)),
+                      (PROT_READ | PROT_WRITE)) ) 
+  {
+    perror("protect");
+    exit(1);
+  }
+  return 1;
+}
+
 /* u2_boot():
 **
 **   Instantiate the loom.
@@ -24,14 +54,14 @@ u2_boot(void)
   
   map = mmap((void *)U2_OS_LoomBase,
              (HalfSize << 3),
-             (PROT_READ | PROT_WRITE), 
+             PROT_READ | PROT_WRITE,
              (MAP_ANON | MAP_FIXED | MAP_PRIVATE),
              -1, 0);
 
   if ( -1 == (c3_ps)map ) {
     map = mmap((void *)0,
                (HalfSize << 3),
-               (PROT_READ | PROT_WRITE), 
+               PROT_READ | PROT_WRITE,
                 MAP_ANON | MAP_PRIVATE,
                -1, 0);
 
