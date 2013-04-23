@@ -65,7 +65,7 @@ naive interpreter.  Here is Nock 5K:
     *[a 6 b c d]      *[a 2 [0 1] 2 [1 c d] [1 0] 2 [1 2 3] [1 0] 4 4 b]
     *[a 7 b c]        *[a 2 b 1 c]
     *[a 8 b c]        *[a 7 [[7 [0 1] b] 0 1] c]
-    *[a 9 b c]        *[a 7 c 0 b]
+    *[a 9 b c]        *[a 7 c [2 [0 1] [0 b]]]
     *[a 10 b c]       *[a c]
     *[a 10 [b c] d]   *[a 8 c 7 [0 2] d]
 
@@ -317,8 +317,9 @@ operator.
 from the Arvo command line.  
 
 Note that we're using Hoon syntax here.  Since we do not use Nock
-from Hoon all that often, we've left it a little cumbersome.
-In Hoon, instead of writing *[a 0 b], we write 
+from Hoon all that often (it's sort of like embedding assembly in
+C), we've left it a little cumbersome.  In Hoon, instead of
+writing *[a 0 b], we write 
 
   .*(a [0 b])
 
@@ -444,7 +445,7 @@ together (lines 32-37):
     *[a 6 b c d]      *[a 2 [0 1] 2 [1 c d] [1 0] 2 [1 2 3] [1 0] 4 4 b]
     *[a 7 b c]        *[a 2 b 1 c]
     *[a 8 b c]        *[a 7 [[7 [0 1] b] 0 1] c]
-    *[a 9 b c]        *[a 7 c 0 b]
+    *[a 9 b c]        *[a 7 c [2 [0 1] [0 b]]]
     *[a 10 b c]       *[a c]
     *[a 10 [b c] d]   *[a 8 c 7 [0 2] d]
     *[a 10 [b c] d]   *[a 8 c 7 [0 3] d]
@@ -530,15 +531,11 @@ For extra credit, explain why we can't just define
 
 Another simple macro is line 35:
 
-    *[a 9 b c]        *[a 7 c 0 b]
+    *[a 9 b c]        *[a 7 c [2 [0 1] [0 b]]]
 
 `9` is a calling convention.  With `c`, we produce a noun which
 contains both code and data - a _core_.  We use this core as the
 subject, and apply the formula within it at slot `b`.
-
-It hardly seems worth assigning an operator number for this
-simple macro.  But it is, because calls are common and need to be
-fast.  We don't want to waste any time recognizing them.
 
 And finally, we come to the piece de resistance - line 32:
 
