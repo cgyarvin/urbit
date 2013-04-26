@@ -172,6 +172,7 @@ _walk_in(u2_reck* rec_u, const c3_c* dir_c, c3_w len_w)
     }
     else if ( !strcmp(out_n->d_name, ".") || 
               !strcmp(out_n->d_name, "..") ||
+              ('~' == out_n->d_name[0]) ||
               ('.' == out_n->d_name[0]) )     //  XX restricts some spans
     {
       continue;

@@ -385,10 +385,10 @@
             =+  wit=(met 13 q.gim)
             ?<  =(0 wit)
             ?:  =(1 wit)
-              [(spit [her our] & p.gim q.gim) ~]
+              [(spit [our her] & p.gim q.gim) ~]
             =+  ruv=(rip 13 q.gim) 
             ?>  ?=(^ ruv)
-            =+  may=(spit [her our] | p.gim (jam wit (shaf %weft q.gim) i.ruv))
+            =+  may=(spit [our her] | p.gim (jam wit (shaf %weft q.gim) i.ruv))
             =+  dam=(shaf %flap may)
             =+  inx=1
             :-  may
@@ -396,7 +396,7 @@
             ?~  t.ruv  ~
             =+  ^=  vie
                 %^    spit
-                    [her our]
+                    [our her]
                   &
                 wasp(lun ~, ham [%carp inx dam i.t.ruv])
             :-  vie
@@ -746,14 +746,15 @@
       |=  [ryn=lane pac=rock]                           ::  process packet
       ^-  [p=(list boon) q=fort]
       =+  kec=(bite pac)
-      ::  ~&  [%hear p.kec ryn `@p`(mug (shaf %flap pac))]
-      =+  how=(~(yo go ton.fox) p.p.kec)
+      =+  how=(~(yo go ton.fox) q.p.kec)
       ?-  -.how
         &  =<  zork
            =<  zank
-           %-  ~(blow la:(ho:(um p.p.kec) q.p.kec) ryn | (shaf %flap pac))
+           ~&  [%home p.kec ryn `@p`(mug (shaf %flap pac))]
+           %-  ~(blow la:(ho:(um q.p.kec) p.p.kec) ryn | (shaf %flap pac))
            [q.kec r.kec s.kec]
-        |  [[[%ouzo p.how pac] ~] fox]
+        |  ~&  [%away p.kec ryn `@p`(mug (shaf %flap pac))]
+           [[[%ouzo p.how pac] ~] fox]
       ==
     ::
     ++  hall                                            ::    hall:am
@@ -781,12 +782,12 @@
       |=  [ryn=lane pac=rock]                           ::  bad packet
       =+  kec=(bite pac)
       ::  ~&  [%hole p.kec ryn `@p`(mug (shaf %flap pac))]
-      =+  how=(~(yo go ton.fox) p.p.kec)
+      =+  how=(~(yo go ton.fox) q.p.kec)
       ?-  -.how
         |  [~ fox]
         &  =<  zork
            =<  zank
-           (~(cock la:(ho:(um p.p.kec) q.p.kec) ryn | (shaf %flap pac)) %dead)
+           (~(cock la:(ho:(um q.p.kec) p.p.kec) ryn | (shaf %flap pac)) %dead)
       ==
     ::
     ++  home                                            ::    home:am
@@ -858,6 +859,10 @@
             ^+  ..blow
             (?:(dit chew wait) sin msg)
           ::
+          ++  busk                                      ::    busk:la:ho:um:am
+            |=  pax=(list rock)                         ::  send packets
+            %_(+> bin (weld (turn pax |=(pac=rock [%ouzo ryn pac])) bin))
+          ::
           ++  chew                                      ::    chew:la:ho:um:am
             |=  [sin=skin msg=@]                        ::  receive
             ^+  +>
@@ -912,9 +917,7 @@
           ++  cock                                      ::    cock:la:ho:um:am
             |=  cap=cape  ^+  +>                        ::  acknowledgment
             =^  rox  diz  (zuul:diz now [%back cap dam ~s0])
-            %_  ..cock
-              bin  (weld (turn p.rox |=(pac=rock [%ouzo ryn pac])) bin)
-            ==
+            (busk rox)
           ::
           ++  coot                                      ::    coot:la:ho:um:am
             |=  [cha=@ta rum=race]                      ::  update input race
@@ -974,8 +977,7 @@
               =.  +>.$  (cock %good)
               +>.$(nys.weg (~(put by nys.weg) q.fud neb))
             ::
-                %fore
-              (emit [%mead p.fud q.fud])
+            !!  %fore (emit [%mead p.fud q.fud])
             ==
           ::
           ++  emit                                      ::    emit:la:ho:um:am

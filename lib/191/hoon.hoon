@@ -7123,7 +7123,7 @@
               [%bond p=mark q=@ta r=@ud s=*]            ::  message
               [%bonk p=mark q=@ta r=@ud]                ::  message skip
               [%carp p=@ud q=flap r=@]                  ::  leaf fragment
-              [%fore p=lane q=@]                        ::  forwarded packet
+              [%fore p=seat q=(unit lane) r=@]          ::  forwarded packet
           ==                                            ::
 ++  mess  (list ,[p=@t q=@t])                           ::  raw http headers
 ++  meta                                                ::  path metadata
@@ -7179,6 +7179,7 @@
 ++  road                                                ::  secured oneway route
           $:  exp=@da                                   ::  expiration date
               lun=(unit lane)                           ::  route to friend
+              nyl=(unit lane)                           ::  route from friend
               lew=will                                  ::  will of friend
           ==                                            ::
 ++  roof  (map ,@p room)                                ::  revision control

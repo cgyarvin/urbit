@@ -23,6 +23,7 @@
       typedef struct _u2_reck {
         c3_w    kno_w;                    //  kernel stage
         c3_w    rno_w;                    //  rotor index (always 0)
+        c3_d    eno_d;                    //  event number
 
         struct {
           struct _u2_cart* egg_u;         //  exit of ovum queue

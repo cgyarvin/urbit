@@ -3,6 +3,13 @@
 ** This file is in the public domain.
 */
 #include "all.h"
+#include <sys/uio.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <sigsegv.h>
+#include <termios.h>
+#include <ev.h>
+#include "v/vere.h"
 
 /* _loom_stop(): signal handler to stop computation.
 */
@@ -14,62 +21,283 @@ _loom_stop(c3_i sig)
 }
 
 static c3_i
-_loom_sigsegv_handler(void* adr_v, void* arg_v)
+_loom_sigsegv_handler(void* adr_v, c3_i ser_i) 
 {
-  c3_w     off_w = (((c3_c*) adr_v) - (c3_c*)U2_OS_LoomBase);
-  c3_w     pag_w;
-  c3_c*    bas_c;
-  u2_chem* chm_u;
+  if ( ser_i ) {
+    c3_w              off_w = (((c3_c*) adr_v) - (c3_c*)U2_OS_LoomBase);
+    c3_w              pag_w;
+    c3_c*             bas_c;
+    volatile u2_chem* chm_u;
 
-  if ( off_w > (HalfSize << 2) ) {
-    off_w -= (HalfSize << 2);
-    chm_u = &LoomChemTop;
-    bas_c = (c3_c*)(void *)(U2_OS_LoomBase + (HalfSize << 2));
-  } else {
-    chm_u = &LoomChemBot;
-    bas_c = (c3_c*)(void *)(U2_OS_LoomBase);
-  }
-  off_w &= ((1 << (LoomPageWords + 2)) - 1);
-  pag_w = (off_w >> (LoomPageWords + 2));
+    if ( off_w > (HalfSize << 2) ) {
+      off_w -= (HalfSize << 2);
+      chm_u = &LoomChemTop;
+      bas_c = (c3_c*)(void *)(U2_OS_LoomBase + (HalfSize << 2));
+    } else {
+      chm_u = &LoomChemBot;
+      bas_c = (c3_c*)(void *)(U2_OS_LoomBase);
+    }
+    off_w &= ~((1 << (LoomPageWords + 2)) - 1);
+    pag_w = (off_w >> (LoomPageWords + 2));
 
-  chm_u->cht_w[pag_w].lif_e = u2_page_tref;
-  if ( -1 == mprotect(bas_c + off_w, 
-                      (1 << (LoomPageWords + 2)),
-                      (PROT_READ | PROT_WRITE)) ) 
-  {
-    perror("protect");
-    exit(1);
+    chm_u->cht_w[pag_w].lif_e = u2_page_tref;
+    chm_u->cht_w[pag_w].mug_e = 0;
+    if ( (pag_w + 1) > chm_u->pgs_w ) {
+      chm_u->pgs_w = pag_w + 1;
+    }
+
+    if ( -1 == mprotect(bas_c + off_w, 
+                        (1 << (LoomPageWords + 2)),
+                        (PROT_READ | PROT_WRITE)) ) 
+    {
+      perror("protect");
+      exit(1);
+    }
   }
   return 1;
 }
 
-/* u2_boot():
+/* _loom_read(): full blocking read.
+*/
+static u2_bean
+_loom_read(c3_i fid_i, void* buf_w, c3_w len_w)
+{
+  return ((4 * len_w) == read(fid_i, buf_w, (4 * len_w))) ? u2_yes : u2_no;
+}
+
+/* _loom_write(): full blocking write.
+*/
+static u2_bean
+_loom_write(c3_i fid_i, void* buf_w, c3_w len_w)
+{
+  if ((4 * len_w) != write(fid_i, buf_w, (4 * len_w))) {
+    fprintf(stderr, "couldn't write %d\n", fid_i);
+    perror("huh?");
+    exit(1);
+  }
+  else return u2_yes;
+//  return ((4 * len_w) == write(fid_i, buf_w, (4 * len_w))) ? u2_yes : u2_no;
+}
+
+/* _loom_open(): open loom checkpoint file, or return null.
+*/
+static c3_i
+_loom_open(c3_c* fil_c, u2_bean cre)
+{
+  c3_c ful_c[8193];
+
+  sprintf(ful_c, "%s/~chk", LoomImagePrefix);
+  mkdir(ful_c, 0700);
+
+  sprintf(ful_c, "%s/~chk/%s", LoomImagePrefix, fil_c);
+  return (cre == u2_yes) ? open(ful_c, O_RDWR | O_CREAT, 0666)
+                         : open(ful_c, O_RDWR);
+}
+
+/* u2_loom_clip():
 **
-**   Instantiate the loom.
+**   Clip top and bottom.
 */
 void
-u2_boot(void)
+u2_loom_clip(c3_w bot_w, c3_w top_w)
 {
-  void *map;
+}
+
+/* _loom_deploy(): load and attempt to validate.
+*/
+static u2_bean
+_loom_deploy(u2_chef* chf_u,
+             c3_i     ctl_i,
+             c3_i     imb_i,
+             c3_i     imt_i)
+{
+  c3_w  i_w;
+  c3_w* bot_w = (void *)U2_OS_LoomBase;
+  c3_w* top_w = (void *)(U2_OS_LoomBase + (HalfSize << 2));
+
+  if ( chf_u->ven_w != LoomVersion ) {
+    printf("deploy no a\n");
+    return u2_no;
+  }
   
-  map = mmap((void *)U2_OS_LoomBase,
-             (HalfSize << 3),
-             PROT_READ | PROT_WRITE,
-             (MAP_ANON | MAP_FIXED | MAP_PRIVATE),
-             -1, 0);
+  LoomChemBot.pgs_w = chf_u->pgb_w;
+  if ( u2_no == _loom_read(ctl_i, (c3_w*)&LoomChemBot.cht_w, chf_u->pgb_w) ) {
+    printf("deploy no b\n");
+    return u2_no;
+  }
+  if ( u2_no == _loom_read(ctl_i, (c3_w*)&LoomChemTop.cht_w, chf_u->pgt_w) ) {
+    printf("deploy no c\n");
+    return u2_no;
+  }
 
-  if ( -1 == (c3_ps)map ) {
-    map = mmap((void *)0,
-               (HalfSize << 3),
-               PROT_READ | PROT_WRITE,
-                MAP_ANON | MAP_PRIVATE,
-               -1, 0);
+  if ( -1 == (c3_ps)mmap((void *)bot_w,
+                         (HalfSize << 2),
+                         PROT_READ,
+                         (MAP_FIXED | MAP_PRIVATE),
+                         imb_i, 0) )
+  {
+    printf("deploy no c\n");
+    return u2_no;
+  }
 
-    if ( -1 == (c3_ps)map ) {
-      fprintf(stderr, "map failed twice\n");
-    } else {
-      fprintf(stderr, "map failed - try U2_OS_LoomBase %p\n", map);
+  if ( -1 == (c3_ps)mmap((void *)top_w,
+                         (HalfSize << 2),
+                         PROT_READ,
+                         (MAP_FIXED | MAP_PRIVATE),
+                         imt_i, 0) )
+  {
+    printf("deploy no d\n");
+    munmap(bot_w, (HalfSize << 2));
+    return u2_no;
+  }
+
+  for ( i_w = 0; i_w < chf_u->pgb_w; i_w++ ) {
+    c3_w* pag_w = bot_w + (i_w << LoomPageWords);
+
+    if ( u2_page_neat != chf_u->cht_w[i_w].lif_e ) {
+      printf("deploy no e\n");
+      munmap(bot_w, (HalfSize << 2));
+      munmap(top_w, (HalfSize << 2));
+      return u2_no;
     }
+    if ( (0x3fffffff & u2_mug_words(pag_w, (1 << LoomPageWords))) !=
+         chf_u->cht_w[i_w].mug_e )
+    {
+      printf("deploy no f\n");
+      munmap(bot_w, (HalfSize << 2));
+      munmap(top_w, (HalfSize << 2));
+      return u2_no;
+    }
+  }
+
+  for ( i_w = 0; i_w < chf_u->pgt_w; i_w++ ) {
+    c3_w* pag_w = top_w + (i_w << LoomPageWords);
+
+    if ( u2_page_neat != chf_u->cht_w[i_w].lif_e ) {
+      printf("deploy no e\n");
+      munmap(bot_w, (HalfSize << 2));
+      munmap(top_w, (HalfSize << 2));
+      return u2_no;
+    }
+    if ( (0x3fffffff & u2_mug_words(pag_w, (1 << LoomPageWords))) !=
+         chf_u->cht_w[i_w].mug_e )
+    {
+      printf("deploy no f\n");
+      munmap(bot_w, (HalfSize << 2));
+      munmap(top_w, (HalfSize << 2));
+      return u2_no;
+    }
+  }
+  return u2_yes;
+}
+
+/* u2_loom_save(): checkpoint at current date.
+*/
+u2_bean
+u2_loom_save(c3_c* dir_c, c3_d eno_d)
+{
+  u2_chef chf_u;
+  c3_i ctl_i, imb_i, imt_i;
+  c3_w* bot_w = (void *)U2_OS_LoomBase;
+  c3_w* top_w = (void *)(U2_OS_LoomBase + (HalfSize << 2));
+  c3_w  num_w = 0;
+
+  if ( !LoomImagePrefix ) {
+    LoomImagePrefix = strdup(dir_c);
+  }
+
+  chf_u.eno_d = eno_d;
+  chf_u.ven_w = LoomVersion;
+  chf_u.pgb_w = LoomChemBot.pgs_w;
+  chf_u.pgt_w = LoomChemTop.pgs_w;
+
+  if ( -1 == LoomControl ) {
+    LoomControl = _loom_open("ctl.data", u2_yes);
+    LoomImageBot = _loom_open("bot.data", u2_yes);
+    LoomImageTop = _loom_open("top.data", u2_yes);
+  }
+  if ( -1 == LoomControl ) {
+    perror("ctl.data");
+    return u2_no;
+  } 
+  ctl_i = LoomControl;
+  imb_i = LoomImageBot;
+  imt_i = LoomImageTop;
+
+  uL(fprintf(uH, "# saving at event %llu...\n", eno_d));
+
+  /* Save bottom image.
+  */
+  {
+    c3_w i_w; 
+
+    for ( i_w = 0; i_w < LoomChemBot.pgs_w; i_w++ ) {
+      c3_w* pag_w = bot_w + (i_w << LoomPageWords);
+
+      if ( u2_page_tref == LoomChemBot.cht_w[i_w].lif_e ) {
+        lseek(imb_i, SEEK_SET, (i_w << (LoomPageWords + 2)));
+        if ( u2_no == _loom_write(imb_i, pag_w, (1 << LoomPageWords)) ) {
+          return u2_no;
+        }
+        LoomChemBot.cht_w[i_w].mug_e = u2_mug_words(pag_w, 
+                                                     (1 << LoomPageWords));
+        LoomChemBot.cht_w[i_w].lif_e = u2_page_neat;
+        mprotect(pag_w, (1 << (LoomPageWords + 2)), PROT_READ);
+        num_w++;
+      }
+    }
+    ftruncate(imb_i, (LoomChemBot.pgs_w << (LoomPageWords + 2)));
+  }
+
+  /* Save top image.
+  */
+  {
+    c3_w i_w; 
+
+    for ( i_w = 0; i_w < LoomChemTop.pgs_w; i_w++ ) {
+      c3_w* pag_w = top_w + (i_w << LoomPageWords);
+
+      if ( u2_page_tref == LoomChemTop.cht_w[i_w].lif_e ) {
+        lseek(imt_i, SEEK_SET, (i_w << (LoomPageWords + 2)));
+        if ( u2_no == _loom_write(imt_i, pag_w, (1 << LoomPageWords)) ) {
+          return u2_no;
+        }
+        LoomChemTop.cht_w[i_w].mug_e = u2_mug_words(pag_w, 
+                                                     (1 << LoomPageWords));
+        LoomChemTop.cht_w[i_w].lif_e = u2_page_neat;
+        mprotect(pag_w, (1 << (LoomPageWords + 2)), PROT_READ);
+        num_w++;
+      }
+    }
+  }
+
+  /* Save control file.
+  */
+  {
+    if ( u2_no == _loom_write(ctl_i, (c3_w*)&chf_u, c3_wiseof(chf_u)) ) {
+      return u2_no;
+    }
+    if ( u2_no == _loom_write(ctl_i, (c3_w*)&LoomChemBot.cht_w, 
+                                     LoomChemBot.pgs_w)) {
+      return u2_no;
+    }
+    if ( u2_no == _loom_write(ctl_i, (c3_w*)&LoomChemTop.cht_w, 
+                                     LoomChemTop.pgs_w)) {
+      return u2_no;
+    }
+  }
+  uL(fprintf(uH, "#  wrote %u blocks, size %u\n", 
+             num_w, (chf_u.pgb_w + chf_u.pgt_w)));
+  return u2_yes;
+}
+
+/* _loom_start(): set up interrupts, etc.
+*/
+static void
+_loom_start(void)
+{
+  if ( 0 != sigsegv_install_handler(_loom_sigsegv_handler) ) {
+    fprintf(stderr, "sigsegv install failed\n");
     exit(1);
   }
 
@@ -80,8 +308,86 @@ u2_boot(void)
     rlm.rlim_cur = 65536 << 10;
     setrlimit(RLIMIT_STACK, &rlm);
   }
-
   signal(SIGINT, _loom_stop);
+}
+
+/* u2_loom_load():
+**
+**   Try to load the loom from a file; create it otherwise.
+*/
+void
+u2_loom_load(c3_c* dir_c)
+{
+  u2_chef chf_u;
+  u2_chef* cha_u;
+
+  if ( !LoomImagePrefix ) {
+    LoomImagePrefix = strdup(dir_c);
+  }
+
+  {
+    LoomControl = _loom_open("ctl.data", u2_no);
+    LoomImageBot = _loom_open("bot.data", u2_no);
+    LoomImageTop = _loom_open("top.data", u2_no);
+
+    if ( (-1 == LoomControl) || 
+         (-1 == LoomImageBot) || 
+         (-1 == LoomImageTop) ||
+         (sizeof(chf_u) != read(LoomControl, &chf_u, sizeof(chf_u))) )
+    {
+      close(LoomControl); close(LoomImageBot); close(LoomImageTop);
+      cha_u = 0;
+    } else cha_u = &chf_u;
+  }
+
+  if ( cha_u && (u2_yes == _loom_deploy(cha_u, LoomControl, 
+                                               LoomImageBot, 
+                                               LoomImageTop)) )
+  {
+    printf("loom: loaded %dMB from %s", 
+           (cha_u->pgb_w + cha_u->pgt_w) >> 6, LoomImagePrefix);
+    _loom_start();
+  }
+  else {
+    u2_loom_boot();
+  }
+}
+
+
+/* u2_loom_boot():
+**
+**   Instantiate the loom.
+*/
+void
+u2_loom_boot(void)
+{
+  void *map;
+
+  map = mmap((void *)U2_OS_LoomBase,
+             (HalfSize << 3),
+             PROT_READ,
+             (MAP_ANON | MAP_FIXED | MAP_PRIVATE),
+             -1, 0);
+
+  if ( -1 == (c3_ps)map ) {
+    map = mmap((void *)0,
+               (HalfSize << 3),
+               PROT_READ,
+                MAP_ANON | MAP_PRIVATE,
+               -1, 0);
+
+    if ( -1 == (c3_ps)map ) {
+      fprintf(stderr, "map failed twice\n");
+    } else {
+      fprintf(stderr, "map failed - try U2_OS_LoomBase %p\n", map);
+    }
+    exit(1);
+  }
+  printf("loom: mapped %dMB\n", (1 << (LoomBits - 18)));
+
+  LoomControl = LoomImageBot = LoomImageTop = -1;
+
+  _loom_start();
 }
 
 /* u2_mean():

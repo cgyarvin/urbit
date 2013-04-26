@@ -214,7 +214,7 @@ main(c3_i   argc,
 
   //  Instantiate process globals.
   {
-    u2_boot();
+    u2_loom_boot();
 
     u2_Host.wir_r = u2_wr_init(c3__rock, u2_ray_of(0, 0), u2_ray_of(1, 0));
     u2_Wire = u2_Host.wir_r;

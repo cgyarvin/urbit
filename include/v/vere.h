@@ -128,6 +128,12 @@
         u2_apac*        tou_u;              //  entry of output queue
       } u2_ames;
 
+    /* u2_save: checkpoint control.
+    */
+      typedef struct _u2_save {
+        struct ev_timer tim_u;              //  checkpoint timer
+      } u2_save;
+
     /* u2_ubuf: unix tty i/o buffer.
     */
       typedef struct _u2_ubuf {
@@ -296,6 +302,7 @@
         u2_utty* uty_u;                     //  terminal servers
         u2_ulog  lug_u;                     //  event log
         u2_ames  sam_u;                     //  packet interface
+        u2_save  sav_u;                     //  autosave
 
         u2_chem  top_u;                     //  high half
         u2_chem  bot_u;                     //  low half
@@ -875,6 +882,43 @@
         u2_ames_io_time(u2_reck*         rec_u,
                         struct ev_timer* tim_u);
 
+    /**  Autosave.
+    **/
+      /* u2_save_io_init(): initialize autosave.
+      */
+        void 
+        u2_save_io_init(u2_reck* rec_u);
+
+      /* u2_save_io_exit(): terminate autosave.
+      */
+        void 
+        u2_save_io_exit(u2_reck* rec_u);
+
+      /* u2_save_io_spin(): start autosave timer.
+      */
+        void
+        u2_save_io_spin(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_save_io_stop(): stop autosave timer.
+      */
+        void
+        u2_save_io_stop(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_save_io_poll(): update autosave state.
+      */
+        void
+        u2_save_io_poll(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_save_io_time(): time event on autosave.
+      */
+        void
+        u2_save_io_time(u2_reck*         rec_u,
+                        struct ev_timer* tim_u);
+
+      
     /**  HTTP, new style.
     **/
       /* u2_http_ef_thou(): send %thou effect to http. 

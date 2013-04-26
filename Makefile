@@ -773,6 +773,7 @@ VERE_OFILES=\
        v/term.o \
        v/http.o \
        v/loop.o \
+       v/save.o \
        v/sync.o \
        v/walk.o \
        v/reck.o \

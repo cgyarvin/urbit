@@ -32,6 +32,7 @@ _lo_init(u2_reck* rec_u)
   u2_ames_io_init(rec_u);
   u2_term_io_init(rec_u);
   u2_http_io_init(rec_u);
+  u2_save_io_init(rec_u);
 }
 
 /* _lo_exit(): terminate I/O across the process.
@@ -42,6 +43,7 @@ _lo_exit(u2_reck* rec_u)
   u2_ames_io_exit(rec_u);
   u2_term_io_exit(rec_u);
   u2_http_io_exit(rec_u);
+  u2_save_io_exit(rec_u);
 }
 
 /* _lo_stop(): stop event I/O across the process.
@@ -53,6 +55,7 @@ _lo_stop(u2_reck*        rec_u,
   u2_ames_io_stop(rec_u, lup_u);
   u2_http_io_stop(rec_u, lup_u);
   u2_term_io_stop(rec_u, lup_u);
+  u2_save_io_stop(rec_u, lup_u);
 }
 
 /* _lo_poll(): reset event flags across the process.
@@ -64,6 +67,7 @@ _lo_poll(u2_reck*        rec_u,
   u2_ames_io_poll(rec_u, lup_u);
   u2_http_io_poll(rec_u, lup_u);
   u2_term_io_poll(rec_u, lup_u);
+  u2_save_io_poll(rec_u, lup_u);
 }
 
 /* _lo_spin(): restart event I/O across the process.
@@ -75,6 +79,7 @@ _lo_spin(u2_reck*        rec_u,
   u2_ames_io_spin(rec_u, lup_u);
   u2_http_io_spin(rec_u, lup_u);
   u2_term_io_spin(rec_u, lup_u);
+  u2_save_io_spin(rec_u, lup_u);
 }
 
 /* _lo_how(): print how.
@@ -89,6 +94,7 @@ _lo_how(u2_noun how)
     case c3__term: return "cons";
     case c3__htcn: return "http-conn";
     case c3__htls: return "http-lisn";
+    case c3__save: return "save";
   }
 }
 
@@ -103,6 +109,7 @@ _lo_time(u2_reck*         rec_u,
     default: c3_assert(0); break;
 
     case c3__ames: u2_ames_io_time(rec_u, tim_u); break;
+    case c3__save: u2_save_io_time(rec_u, tim_u); break;
   }
 } 
 
@@ -544,6 +551,7 @@ u2_lo_call(u2_reck*        rec_u,
     //  process actions
     //
     _lo_work(rec_u);
+    rec_u->eno_d += 1;
 
     //  update time
     //
@@ -809,7 +817,7 @@ _lo_zest(u2_reck* rec_u)
 {
   struct stat buf_b;
   c3_i        fid_i;
-  c3_c        ful_c[8192];
+  c3_c        ful_c[8193];
 
   //  Create the ship directory.
   //
@@ -1270,6 +1278,9 @@ u2_lo_loop(u2_reck* rec_u, u2_noun cpu, u2_noun meh, u2_noun rez)
     }
   }
   u2_reck_sync(rec_u);
+  // uL(fprintf(uH, "saving...\n"));
+  // u2_loom_save(rec_u->dir_c, rec_u->eno_d);
+  // uL(fprintf(uH, "saved.\n"));
 
   _lo_init(rec_u);
   {
