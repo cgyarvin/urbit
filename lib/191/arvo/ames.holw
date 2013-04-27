@@ -369,6 +369,7 @@
           |=  [way=seat ryn=(unit lane) pac=rock]       ::  route via
           ^-  [p=lane q=rock]
           ?:  =(way her)  
+            ~&  [%wisk-live [our her] lun.wod.dur]
             ?>  ?=(^ lun.wod.dur)
             [u.lun.wod.dur pac]
           =+  rad=(~(get by hoc.saf) way)
@@ -554,7 +555,7 @@
     --                                                ::  --go
   --
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-  ::              section 4aD, congestion control       ::
+  ::                section 4aD, congestion control       ::
   ::
   |%
   ++  baby                                            ::  new flow
@@ -924,8 +925,11 @@
           ::
           ++  cock                                      ::    cock:la:ho:um:am
             |=  cap=cape  ^+  +>                        ::  acknowledgment
-            =^  rox  diz  (zuul:diz now [%back cap dam ~s0])
-            +>.$(..la (busk her rox))
+            =^  pax  diz  (zuul:diz now [%back cap dam ~s0])
+            %_    +>.$
+                bin
+              (weld (turn p.pax |=(pac=rock [%ouzo ryn pac])) bin)
+            ==
           ::
           ++  coot                                      ::    coot:la:ho:um:am
             |=  [cha=@ta rum=race]                      ::  update input race
