@@ -6228,7 +6228,7 @@
       $(i.ruw t.i.ruw, cah [i.i.ruw cah])
     $(i.ruw t.i.ruw, cah ~, yun [p.i.i.ruw (wod cah yun)])
   ::
-  ++  road
+  ++  rood
     ;~  pfix  fas
       %+  cook
         |=  [a=reef b=(list gene)]
@@ -6307,7 +6307,7 @@
         ==
       :-  '#'
         ;~  pfix  hax
-          (cook pray road)
+          (cook pray rood)
         ==
       :-  '-'
         ;~  pose
@@ -6361,7 +6361,7 @@
         (stag %bccm ;~(pfix com wide))
       :-  '^'
         ;~  pose
-          ;~(pfix ket (stag %dtkt road))
+          ;~(pfix ket (stag %dtkt rood))
           (stag %cnhx rope)
           (stag %bcts (cold %cell ket))
         ==
@@ -6416,7 +6416,7 @@
           ==
         ==
       :-  '/'
-        road
+        rood
       :-  '<'
         (ifix [gal gar] (stag %hxgl (most ace wide)))
       :-  '>'
@@ -6945,7 +6945,6 @@
               [%hemp p=path]                            ::  cancel request
               [%helo ~]                                 ::  trigger prompt
               [%hole p=lane q=@]                        ::  packet failed
-              [%home p=seat q=lane]                     ::  bind home address
               [%hope p=(unit path)]                     ::  namespace request
               [%init p=@p]                              ::  report install
               [%flog p=card]                            ::  log to terminal
@@ -7028,7 +7027,7 @@
           ==                                            ::
 ++  door                                                ::  foreign contact
           $:  wod=road                                  ::  connection to
-              fer=road                                  ::  inferred conn from
+              wyl=will                                  ::  inferred mirror
               caq=cask                                  ::  symmetric key state
           ==                                            ::
 ++  dove  ,[p=@ud q=@uvH r=(map ,@ud ,@)]               ::  hash count 13-blocks
@@ -7179,7 +7178,6 @@
 ++  road                                                ::  secured oneway route
           $:  exp=@da                                   ::  expiration date
               lun=(unit lane)                           ::  route to friend
-              nyl=(unit lane)                           ::  route from friend
               lew=will                                  ::  will of friend
           ==                                            ::
 ++  roof  (map ,@p room)                                ::  revision control
@@ -7190,11 +7188,10 @@
 ++  rock  ,@uvO                                         ::  packet
 ++  rout  ,[p=(list host) q=path r=oryx s=path]         ::  http route (new)
 ++  safe                                                ::  domestic host
-          $:  loc=(unit lane)                           ::  packet route
-              val=wand                                  ::  private keys
+          $:  val=wand                                  ::  private keys
               law=will                                  ::  server will
               seh=(map hand ,[p=seat q=@da])            ::  key cache
-              hoc=(map seat door)                       ::  friends & relations
+              hoc=(map seat door)                       ::  neighborhood
           ==                                            ::
 ++  salt  ,@uv                                          ::  entropy
 ++  scab                                                ::  logical request 
@@ -7226,7 +7223,6 @@
 ++  taxi  ,[p=lane q=rock]                              ::  routed packet
 ++  tick  ,@ud                                          ::  process id
 ++  tire  path                                          ::  event pretext
-++  tray  ,[p=(unit lane) q=meal]                       ::  routed payload
 ++  town                                                ::  all security state
           $:  lit=@ud                                   ::  imperial modulus
               any=@                                     ::  entropy

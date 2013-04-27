@@ -121,6 +121,7 @@ u2_ames_io_init(u2_reck* rec_u)
       ev_io_init(&sam_u->wax_u, _lo_ames, fid_i, 0);
     }
 
+#if 0
     //  You are here.
     {
       // u2_noun pax = u2nt(c3__lead, c3__ames, u2_nul);
@@ -131,6 +132,7 @@ u2_ames_io_init(u2_reck* rec_u)
 
       u2_reck_plan(rec_u, pax, fav);
     }
+#endif
 
     //  Timer too.
     {
