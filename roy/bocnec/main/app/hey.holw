@@ -11,6 +11,6 @@
 |=  [now=@da pax=path nut=note]
 ?>  =(/foo/bar/ pax)
 ?>  ?=(%yo -.nut)
-:-  ?:  =(%good p.nut)  ~
+:-  ?:  =(%good q.nut)  ~
     [[%text "rejected"] ~]
 ~

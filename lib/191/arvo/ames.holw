@@ -107,16 +107,16 @@
         ==
     %&          
   ::
-  ++  rice                                              ::  mace at mark
-    |=  [mar=mark mac=mace]
+  ++  rice                                              ::  mace at life
+    |=  [mar=life mac=mace]
     ^-  (unit mace)
     ?~  mac  ~
     ?:  =(mar p.i.mac)  [~ mac]
     ?:  (gth mar p.i.mac)  ~
     $(mac t.mac)
   ::
-  ++  rick                                              ::  will at mark
-    |=  [mar=mark lag=seat law=will]
+  ++  rick                                              ::  will at life
+    |=  [mar=life lag=seat law=will]
     ^-  (unit will)
     ?~  law  ~
     ?:  =(mar p.p.q.i.law)  [~ law]
@@ -311,14 +311,14 @@
       ++  lax                                           ::    lax:as:go
         |_  [her=seat dur=door]                         ::  per client
         ++  cluy                                        ::    cluy:lax:as:go
-          ^-  [p=mark q=gcos r=acro]                    ::  client crypto
+          ^-  [p=life q=gcos r=acro]                    ::  client crypto
           ?~  lew.wod.dur  !!
           :+  p.p.q.i.lew.wod.dur 
             q.q.i.lew.wod.dur 
           (hail r.q.i.lew.wod.dur)
         ::
         ++  clon
-          ^-  mark
+          ^-  life
           ?~(lew.wod.dur 0 p.p.q.i.lew.wod.dur)
         ::
         ++  deng
@@ -341,6 +341,7 @@
           =+  wey=(~(get by heg.caq.dur) had)
           ?^  wey
             =+  key=u.wey
+            ~&  [%kuch-yed [our her]]
             :+  ~  key
             %=    ..kuch
                 yed.caq.dur  [~ had u.wey]
@@ -360,6 +361,7 @@
           |=  key=code                                  ::  hear foreign code
           ^+  +>
           =+  had=(shaf %hand key)
+          ~&  [%wasc-yed [our her]]
           %_    ..wasc
               yed.caq.dur  [~ had key]
               qim.caq.dur  (~(put by qim.caq.dur) had key)
@@ -368,18 +370,21 @@
         ++  wisk                                        ::    wisk:lax:as:go
           |=  [way=seat ryn=(unit lane) pac=rock]       ::  route via
           ^-  [p=lane q=rock]
-          ?:  =(way her)  
-            ~&  [%wisk-live [our her] lun.wod.dur]
+          ?:  &(=(way her) =(~ ryn))
+            ::  ~&  [%wisk-live [our her] lun.wod.dur]
             ?>  ?=(^ lun.wod.dur)
             [u.lun.wod.dur pac]
           =+  rad=(~(get by hoc.saf) way)
-          ?>  &(?=(^ rad) ?=(^ lun.wod.u.rad) ?=(^ yed.caq.u.rad))
+          ?>  &(?=(^ rad) ?=(^ lun.wod.u.rad))
+          =+  mal=(jam `meal`[%fore her ryn pac])
           :-  u.lun.wod.u.rad
           %-  spit
           ^-  cake
           :*  [our way]
               &
-              %fast
+              ?~  yed.caq.u.rad
+                [%none mal]
+              :-  %fast
               %^  cat  7
                 p.u.yed.caq.u.rad 
               %+  en:crya                               ::  XX assumes crya
@@ -460,7 +465,7 @@
             =+  yig=sen
             =+  ^=  gom
                 %^    jam
-                    `mark`p.yig
+                    `life`p.yig
                   ::  `will`(pare wyl.dur law.saf)      ::  XX not set
                   law.saf                               ::  XX send whole will
                 `@`(sign:se:q.yig tuy (jam ham))
@@ -490,11 +495,11 @@
         +>(hoc.saf (~(put by hoc.saf) her.new dur.new))
       ::
       ++  sen                                           ::  current crypto
-        ^-  [p=mark q=acro]
+        ^-  [p=life q=acro]
         ?~(val.saf !! [p.i.val.saf r.i.val.saf])
       ::
-      ++  sev                                           ::  crypto by mark
-        |=  mar=mark
+      ++  sev                                           ::  crypto by life
+        |=  mar=life
         ^-  [p=? q=acro]
         ?~  val.saf  !!
         ?:  =(mar p.i.val.saf)
@@ -533,7 +538,7 @@
           urb
         %+  ~(put by urb.ton)
           our
-        [(turn mac |=([p=mark q=ring] [p q (wear q)])) wil ~ ~]
+        [(turn mac |=([p=life q=ring] [p q (wear q)])) wil ~ ~]
       ==
     ::
     ++  su                                              ::  install safe
@@ -738,7 +743,7 @@
         :-  p
         %=    q
             val
-          (turn val.q |=([p=mark q=ring r=acro] [p q (wear q)]))
+          (turn val.q |=([p=life q=ring r=acro] [p q (wear q)]))
         ==
       ==
     ::
@@ -767,8 +772,8 @@
         [~ fox]
       =<  zork
       =<  zank
-      ~&  [%hear p.p.kec ryn `@p`(mug (shaf %flap pac))]
-      %-  ~(blow la:(ho:(um q.p.kec) p.p.kec) ryn | (shaf %flap pac))
+      ::  ~&  [%hear p.p.kec ryn `@p`(mug (shaf %flap pac))]
+      %-  ~(blow la:(ho:(um q.p.kec) p.p.kec) ryn %none (shaf %flap pac))
       [q.kec r.kec s.kec]
     ::
     ++  hall                                            ::    hall:am
@@ -802,7 +807,7 @@
       ~&  [%hole p.kec ryn `@p`(mug (shaf %flap pac))]
       =<  zork
       =<  zank
-      (~(cock la:(ho:(um q.p.kec) p.p.kec) ryn | (shaf %flap pac)) %dead)
+      (~(cock la:(ho:(um q.p.kec) p.p.kec) ryn %none (shaf %flap pac)) %dead)
     ::
     ++  wake                                            ::    wake:am
       ^-  [p=(list boon) q=fort]                        ::  harvest packets
@@ -867,7 +872,7 @@
           ==
         ::
         ++  la                                          ::    la:ho:um:am
-          |_  [ryn=lane aut=? dam=flap]                 ::  per packet
+          |_  [ryn=lane aut=skin dam=flap]              ::  per packet
           ::
           ++  blow                                      ::    blow:la:ho:um:am
             |=  [dit=? sin=skin msg=@]                  ::  analyze
@@ -890,11 +895,11 @@
                 ::  ~&  %chew-fast
                 =+  [mag=`hand`(end 7 1 msg) bod=(rsh 7 1 msg)]
                 =^  key  diz  (need (kuch:diz mag))
-                (chow(aut &) ((hard meal) (cue (dy:q:sen:gus key bod))))
+                (chow(aut sin) ((hard meal) (cue (dy:q:sen:gus key bod))))
               ::
                   %full
                 ::  ~&  %chew-full
-                =+  mex=((hard ,[p=mark q=@]) (cue msg))
+                =+  mex=((hard ,[p=life q=@]) (cue msg))
                 =+  gey=(sev:gus p.mex)
                 =+  mes=(need (tear:se:q.gey q.mex))
                 =.  diz  (wasc:diz p.mes)
@@ -908,19 +913,18 @@
               |=  key=code
               =+  ^=  mex
                   %.  (cue msg)
-                  (hard ,[p=mark q=will r=@])
+                  (hard ,[p=life q=will r=@])
               =.  diz  (deng:diz q.mex)
               =+  wug=cluy:diz
               ?>  =(p.mex p.wug)
-              %-  chow(aut &)
+              %-  chow(aut sin)
               ((hard meal) (cue (need (sure:pu:r.wug key r.mex))))
             --
           ::
           ++  chow                                      ::    chow:la:ho:um:am 
-            |=  fud=meal                                ::  interpret tray
+            |=  fud=meal                                ::  interpret meal
             ^+  +>
-            ~&  [%chow [her our] aut [%ryn ryn]]
-            =.  lun.wod.dur.diz  ?.(aut lun.wod.dur.diz [~ ryn])
+            =.  lun.wod.dur.diz  ?:(=(%none aut) lun.wod.dur.diz [~ ryn])
             (dine fud)
           ::
           ++  cock                                      ::    cock:la:ho:um:am
@@ -958,13 +962,17 @@
             ^+  +>
             ?-    -.fud
                 %back
+              ~&  [%back aut her ryn]
+              =.  +>  ?.(=(%full aut) +> (cock %good))  ::  finish key exchange
               +>(..la (tuck p.fud q.fud r.fud))
             ::
                 %bond
+              ~&  [%bond aut her ryn]
               ?>  =(p:sen:gus p.fud)
               (dear q.fud r.fud [~ s.fud])
             ::
                 %bonk
+              ~&  [%bonk aut her ryn]
               ?.  =(p:sen:gus p.fud)  +>
               (dear q.fud r.fud ~)
             ::
@@ -996,9 +1004,9 @@
               =+  zid=(myx:gus p.fud)
               =+  rut=xong:zid 
               ?~  rut
-                ~&  [%fore-drop p.fud]
+                ~&  [%drop p.fud]
                 +>.$
-              ~&  [%fore-ward p.fud u.rut]
+              ~&  [%fore u.rut p.fud lyn]
               (emit %ouzo (wisk:zid u.rut [~ lyn] r.fud))
             ==
           ::
@@ -1056,7 +1064,7 @@
           ^+  +> 
           =+  fov=(~(get by air.bah) fap)
           ?~  fov
-            ::  ~&  [%lost `@p`(mug fap)]
+            ::  ~&  [%limp `@p`(mug fap)]
             +>.$
           =.  +>.$  (tusk kay u.fov cot)
           ?.  =(%good kay)
@@ -1066,12 +1074,10 @@
         ++  tung                                        ::    tung:ho:um:am
           ^+  .                                         ::  harvest packets
           =+  rut=xing:diz
-          ?~  rut  
-            ~&  [%xing-no our her]
-            +
           =+  pez=%*(. pe sea sea.bah)
           =^  wyv  pez  (harv:pez now wid.foy.bah rtt.foy.bah)
           =.  sea.bah  sea:pez
+          ?~  rut  ..tung
           (busk u.rut p.wyv)
         ::
         ++  turk                                        ::    turk:ho:um:am
@@ -1221,7 +1227,7 @@
       +>
     ::
         %coke  
-      :-  :~  [[~ p.p.bon] s.bon [%went q.bon r.bon]]
+      :-  :~  [[~ p.p.bon] s.bon [%went q.p.bon q.bon r.bon]]
           ==
       +>
     ::
@@ -1232,24 +1238,38 @@
         :~  [[~ p.p.bon] [/b/ hen] [%wart q.p.bon q.bon r.bon [~ s.bon]]]
         ==
       ::
-          %hey
-        =+  nym=(temp p.p.bon q.p.bon /name/)
-        =+  fom=~(rend co %% %p q.p.bon)
-        =+  mok=?~(nym fom :(weld fom " (" (trip ((hard ,@) u.nym)) ")"))
-        =+  ^=  hey  ^-  tape
-            ?~  s.bon
-              "{mok}:: rejected"
-            =>  .(u.s.bon ((hard ,@) u.s.bon))
-            ?>  ((sane %t) u.s.bon)
-            "{mok}: {(trip u.s.bon)}"
-        :_  +>.$
-        :~  [whu [/d/ hen] [%flog %text hey]]
+          %hi
+        %=    $
+            bon
+          :+  %wine  p.bon
+          ^-  tape
+          ?~  s.bon 
+            " failed to respond"
+          ?:  =(0 u.s.bon)
+            =+  hum=(end 0 2 (mug now))
+            ?+   hum  !!
+              0  " has nothing to say" 
+              1  " declines to comment"
+              2  " has no words for what just happened"
+              3  " remains mum"
+            ==
+          =+  str=(need ((sand %t) ((hard ,@) u.s.bon)))
+          [':' ' ' (trip str)]
         ==
       ==
     ::
         %ouzo  ::  ~&  [%send p.bon `@p`(mug (shaf %flap q.bon))]
                [[[whu hen [%send p.bon q.bon]] ~] +>.$]
-        %wine  !!
+        %wine
+      =+  nym=(temp p.p.bon q.p.bon /name/)
+      =+  fom=~(rend co %% %p q.p.bon)
+      :_  +>.$
+      :~  :+  whu  [/d/ hen]
+          :+  %flog  %text
+          %+  weld
+            ?~(nym fom :(weld fom " (" (trip ((hard ,@) u.nym)) ")"))
+          q.bon
+      ==
     ==
   ::
   ++  knap
@@ -1327,8 +1347,8 @@
     |=  [our=seat his=seat tyl=path]
     ::  ~&  [%temp our his tyl]
     ^-  (unit)
-    ?.  ?=([%mark ~] tyl)
-      =+  muc=$(tyl [%mark ~])
+    ?.  ?=([%life ~] tyl)
+      =+  muc=$(tyl [%life ~])
       ?~  muc  ~
       (perm our his (,@ud u.muc) tyl)
     =+  gys=(~(us go ton.fox) our)

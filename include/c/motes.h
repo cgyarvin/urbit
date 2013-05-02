@@ -546,6 +546,7 @@
 #   define c3__lest   c3_s4('l','e','s','t')
 #   define c3__lib    c3_s3('l','i','b')
 #   define c3__libd   c3_s4('l','i','b','d')
+#   define c3__life   c3_s4('l','i','f','e')
 #   define c3__lift   c3_s4('l','i','f','t')
 #   define c3__like   c3_s4('l','i','k','e')
 #   define c3__limb   c3_s4('l','i','m','b')

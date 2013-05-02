@@ -48,7 +48,7 @@ _sync_peek_home(u2_reck* rec_u, u2_noun pod)
             u2nc('a',
                  u2nq(u2k(rec_u->wen),
                           pod,
-                          c3__mark,
+                          c3__life,
                           u2_nul)));
 
   if ( u2_no == u2du(pec) ) {

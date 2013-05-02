@@ -2209,6 +2209,11 @@
     c
   [b $(a (dec a))]
 ::
+++  sand                                                ::  atom sanity
+  |=  a=@ta
+  |=  b=@  ^-  (unit ,@) 
+  ?.(((sane a) b) ~ [~ b])
+::
 ++  sane                                                ::  atom sanity 
   |=  a=@ta 
   |=  b=@  ^-  ?
@@ -6914,10 +6919,10 @@
               [%mead p=lane q=rock]                     ::  accept packet
               [%milk p=sock q=@ta r=@ud s=(unit ,*)]    ::  accept message
               [%ouzo p=lane q=rock]                     ::  transmit packet
-              [%wine p=seat]                            ::  lost ownership
+              [%wine p=sock q=tape]                     ::  notify user
           ==                                            ::
 ++  bowl  ,[p=(list card) q=(unit boat)]                ::  standard product
-++  bran  ,[p=mark q=(unit mark) r=seat s=@da]          ::  our parent us now
+++  bran  ,[p=life q=(unit life) r=seat s=@da]          ::  our parent us now
 ++  brow  ,[p=@da q=@tas]                               ::  browser version
 ++  buck  ,[p=mace q=will]                              ::  all security data
 ++  cake  ,[p=sock q=? r=skin s=@]                      ::  top level packet
@@ -6988,7 +6993,7 @@
               [%want p=seat q=@ta r=*]                  ::  outgoing request
               [%wart p=seat q=@ta r=@ud s=(unit ,*)]    ::  incoming request
               [%warn p=tape]                            ::  system message
-              [%went p=cape q=soap]                     ::  outgoing reaction
+              [%went p=seat q=cape r=soap]              ::  outgoing reaction
               [%wipe ~]                                 ::  clean up hose
               [%word p=chum]                            ::  set password
           ==                                            ::
@@ -7053,7 +7058,7 @@
               [%ht p=(list rout)]                       ::  http server
               [%up p=prod]                              ::  user prompt      
               [%wa p=@da]                               ::  alarm
-              [%yo p=@p q=@ta r=*]                      ::  network message
+              [%yo p=seat q=@ta r=*]                    ::  network message
           ==                                            ::
 ++  gram  ,@uw                                          ::  physical datagram
 ++  hand  ,@uvH                                         ::  hash of code
@@ -7083,6 +7088,10 @@
                   [%s p=@ta]                            ::  string
               ==                                        ::
           ==                                            ::
+++  lane                                                ::  packet route
+          $%  [%if p=@ud q=@if]                         ::  IP4/public UDP/addr
+              [%is p=@ud q=@is]                         ::  IP6/public UDP/addr
+          ==                                            ::
 ++  lark                                                ::  parsed command
           $%  [%cd p=path]                              ::  change directory
               [%do p=crow]                              ::  direct effect
@@ -7096,11 +7105,8 @@
           ==                                            ::
 ++  lens  ?(%z %y %x %w)                                ::  repository view
 ++  lice  ,[p=seat q=buck]                              ::  full license
+++  life  ,@ud                                          ::  regime number
 ++  lint  (list rock)                                   ::  fragment array
-++  lane                                                ::  packet route
-          $%  [%if p=@ud q=@if]                         ::  IP4/public UDP/addr
-              [%is p=@ud q=@is]                         ::  IP6/public UDP/addr
-          ==                                            ::
 ++  link  ,[p=code q=sock]                              ::  connection
 ++  logo  ,@uvI                                         ::  session identity
 ++  love  $%                                            ::  http response
@@ -7108,10 +7114,9 @@
               [%mid p=mime q=octs]                      ::  mime-typed data
               [%raw p=httr]                             ::  raw http response
           ==                                            ::
-++  mace  (list ,[p=mark q=ring])                       ::  private secrets
+++  mace  (list ,[p=life q=ring])                       ::  private secrets
 ++  mane  $|(@tas [@tas @tas])                          ::  XML name/space
 ++  manx  ,[t=marx c=marl]                              ::  XML node
-++  mark  ,@ud                                          ::  regime number
 ++  marl  (list manx)                                   ::  XML node list
 ++  mars  ,[t=[n=%% a=[i=[n=%% v=tape] t=~]] c=~]       ::  XML cdata
 ++  mart  (list ,[n=mane v=tape])                       ::  XML attributes
@@ -7119,8 +7124,8 @@
 ++  math  (map ,@t (list ,@t))                          ::  semiparsed headers
 ++  meal                                                ::  payload
           $%  [%back p=cape q=flap r=@dr]               ::  acknowledgment
-              [%bond p=mark q=@ta r=@ud s=*]            ::  message
-              [%bonk p=mark q=@ta r=@ud]                ::  message skip
+              [%bond p=life q=@ta r=@ud s=*]            ::  message
+              [%bonk p=life q=@ta r=@ud]                ::  message skip
               [%carp p=@ud q=flap r=@]                  ::  leaf fragment
               [%fore p=seat q=(unit lane) r=@]          ::  forwarded packet
           ==                                            ::
@@ -7139,11 +7144,14 @@
           $%  [%ez p=(unit)]                            ::  simple result
               [%ht p=scab q=cred r=moth]                ::  http request
               [%up p=@t]                                ::  prompt response
-              [%yo p=cape]                              ::  request response
+              [%yo p=seat q=cape r=soap]                ::  request response
               [%wa p=@da]                               ::  alarm
           ==                                            ::
 ++  octs  ,[p=@ud q=@]                                  ::  octet-stream
 ++  oryx  ,@uvH                                         ::  CSRF secret
+++  oval  $:  zen=(set seat)                            ::  live neighbors
+              pud=(list seat)                           ::  static hierarchy
+          ==                                            ::
 ++  oven                                                ::  flow by server
           $:  nys=(map flap bait)                       ::  packets incoming
               old=(set flap)                            ::  packets completed
@@ -7151,6 +7159,7 @@
           ==                                            ::
 ++  ovum  ,[p=tire q=card]                              ::  external event
 ++  pact  path                                          ::  routed path
+++  pail  ?(%none %warm %cold)                          ::  connection status
 ++  plea  ,[p=@ud q=[p=? q=@t]]                         ::  live prompt
 ++  pork  ,[p=(unit ,@ta) q=path]                       ::  fully parsed url
 ++  prod  ,[p=prom q=tape]                              ::  format, prompt
@@ -7216,7 +7225,7 @@
 ++  skin  ?(%none %open %fast %full)                    ::  encoding stem
 ++  slip  ,[p=bell q=goal]                              ::  traceable request
 ++  snow  ,[p=@ud q=@ud r=(set ,@ud)]                   ::  window exceptions
-++  soap  ,[p=[p=mark q=mark] q=@ta r=@ud]              ::  statement id
+++  soap  ,[p=[p=life q=life] q=@tas r=@ud]              ::  statement id
 ++  sock  ,[p=seat q=seat]                              ::  from to
 ++  step  ,[p=bran q=gcos r=pass]                       ::  identity stage
 ++  task  _|+([@da path note] *bowl)                    ::  process core
@@ -7268,7 +7277,7 @@
                         *(unit)                         ::  record
               ++  stay  *vase                           ::  save state, new
               --                                        ::
-++  wand  (list ,[p=mark q=ring r=acro])                 ::  mace in action
+++  wand  (list ,[p=life q=ring r=acro])                 ::  mace in action
 ++  what                                                ::  logical identity
           $%  [%crew p=corp]                            ::  business
               [%dept p=corp]                            ::  agency

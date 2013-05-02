@@ -554,7 +554,7 @@
             %nuke  nuke
             %line  (gill (trip p.fav))
             %thee  (heat p.fav)
-            %went  (glom p.fav q.fav)
+            %went  (glom p.fav q.fav r.fav)
            ==
       |%
       ++  gill                                          ::  dispatch line
@@ -575,8 +575,8 @@
         =<  coax
         (ride pid hen p.byr [~ q.byr])
       ::
-      ++  glom                                          ::  dispatch network
-        |=  [cap=cape sop=soap]
+      ++  glom                                          ::  dispatch response
+        |=  [her=seat cap=cape sop=soap]
         ^-  [p=(list move) q=_..^^$]
         ?>  ?=(^ pex)
         =+  ped=(slay i.pex)
@@ -584,7 +584,7 @@
         =+  byr=(need (~(get by q.lif) q.p.u.ped))
         =<  nave
         ^+  *ride
-        %.  [t.pex [%yo cap]]
+        %.  [t.pex [%yo her cap sop]]
         =<  jerk
         %.  [t.pex fav]
         =<  coax
