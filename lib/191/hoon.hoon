@@ -6847,7 +6847,9 @@
 ++  ball  ,@uw                                          ::  statement payload
 ++  bait  ,[p=skin q=@ud r=dove]                        ::  fmt nrecvd spec
 ++  bath                                                ::  convo per client
-          $:  ski=snow                                  ::  sequence state
+          $:  gay=?                                     ::  not stalled
+              laz=(unit ,@da)                           ::  last heard
+              ski=snow                                  ::  sequence state
               foy=flow                                  ::  flow statistics
               par=(map soap putt)                       ::  message by id
               maz=(qeu soap)                            ::  round-robin next
@@ -6917,7 +6919,7 @@
           $%  [%beer p=seat q=@uvG]                     ::  gained ownership
               [%coke p=sock q=cape r=soap s=hose]       ::  message result
               [%mead p=lane q=rock]                     ::  accept packet
-              [%milk p=sock q=@ta r=@ud s=(unit ,*)]    ::  accept message
+              [%milk p=sock q=@tas r=@ud s=(unit ,*)]   ::  accept message
               [%ouzo p=lane q=rock]                     ::  transmit packet
               [%wine p=sock q=tape]                     ::  notify user
           ==                                            ::
@@ -6955,6 +6957,7 @@
               [%flog p=card]                            ::  log to terminal
               [%junk p=@]                               ::  entropy
               [%keep p=@p]                              ::  establish master
+              [%kick p=@da]                             ::  wake up
               [%kill p=@ud]                             ::  kill a process
               [%lane p=lane]                            ::  set public route
               [%line p=@t]                              ::  source line
@@ -6971,6 +6974,9 @@
               [%pace p=@ud]                             ::  compute background
               [%pour p=path q=dram]                     ::  write directory
               [%pump ~]                                 ::  produce packets
+              [%quid p=seat q=path r=(unit ,*)]         ::  delivery
+              [%quip p=seat q=path r=grid]              ::  subscription
+              [%quiz p=seat q=path r=(list path)]       ::  request
               [%rein p=? q=path]                        ::  push/replace kernel
               [%rend ~]                                 ::  pop kernel
               [%save p=path q=@]                        ::  write atomic file
@@ -7043,7 +7049,8 @@
               yed=@ud                                   ::  actual wdow msgs
           ==                                            ::
 ++  fort                                                ::  formal state
-          $:  ton=town                                  ::  security
+          $:  hop=@da                                   ::  network boot date
+              ton=town                                  ::  security
               zac=(map seat oven)                       ::  flows by server
           ==                                            ::
 ++  gcos                                                ::  id description
@@ -7061,6 +7068,14 @@
               [%yo p=seat q=@ta r=*]                    ::  network message
           ==                                            ::
 ++  gram  ,@uw                                          ::  physical datagram
+++  grid  (list grin)                                   ::  path filter
+++  grin                                                ::  span filter
+          $|  ~                                         ::  anything
+          $%  [0 p=@ta]                                 ::  literal
+              [1 p=@tas]                                ::  dimetype
+              [2 p=@ q=@]                               ::  range
+          ==                                            ::
+++  grip  (list ,[p=grid q=path])                       ::  subscription
 ++  hand  ,@uvH                                         ::  hash of code
 ++  hate  ,[p=purl q=cred r=moth]                       ::  cooked request
 ++  hist  ,[p=@ud q=(list ,@t)]                         ::  depth texts
@@ -7149,9 +7164,6 @@
           ==                                            ::
 ++  octs  ,[p=@ud q=@]                                  ::  octet-stream
 ++  oryx  ,@uvH                                         ::  CSRF secret
-++  oval  $:  zen=(set seat)                            ::  live neighbors
-              pud=(list seat)                           ::  static hierarchy
-          ==                                            ::
 ++  oven                                                ::  flow by server
           $:  nys=(map flap bait)                       ::  packets incoming
               old=(set flap)                            ::  packets completed
@@ -7197,7 +7209,8 @@
 ++  rock  ,@uvO                                         ::  packet
 ++  rout  ,[p=(list host) q=path r=oryx s=path]         ::  http route (new)
 ++  safe                                                ::  domestic host
-          $:  val=wand                                  ::  private keys
+          $:  hoy=(list seat)                           ::  hierarchy
+              val=wand                                  ::  private keys
               law=will                                  ::  server will
               seh=(map hand ,[p=seat q=@da])            ::  key cache
               hoc=(map seat door)                       ::  neighborhood

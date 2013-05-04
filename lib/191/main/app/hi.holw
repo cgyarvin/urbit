@@ -11,11 +11,9 @@
 |=  [now=@da pax=path nut=note]
 ?>  =(/foo/bar/ pax)
 ?>  ?=(%yo -.nut)
-:-  :_  ~
+:-  ?:  =(%good q.nut)
+      ~ 
+    :_  ~
     :-  %text
-    ;:  weld
-      "hi: {<p.nut>}.{<p.p.r.nut>} " 
-      ?:(=(%good q.nut) "got" "blocked")
-      " {<q.r.nut>}/{<q.p.r.nut>}/{<r.r.nut>}"
-    ==
+    "hi: {<p.nut>}.{<p.p.r.nut>} blocked {<q.r.nut>}/{<q.p.r.nut>}/{<r.r.nut>}"
 ~
