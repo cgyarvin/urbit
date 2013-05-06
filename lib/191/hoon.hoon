@@ -6875,10 +6875,11 @@
           ==                                            ::
 ++  bear  ,[p=(map path goal) q=boar]                   ::  process with slips
 ++  bell  path                                          ::  process label
-++  bird                                                ::  packet in flight
+++  bird                                                ::  packet in travel
           $:  gom=soap                                  ::  message identity
               mup=@ud                                   ::  pktno in msg
               nux=@ud                                   ::  xmission count
+              dif=?                                     ::  deemed in flight
               pex=@da                                   ::  next expire
               pac=rock                                  ::  packet data
           ==                                            ::
@@ -7046,7 +7047,6 @@
 ++  flow                                                ::  packet connection
           $:  rtt=@dr                                   ::  official rtt
               wid=@ud                                   ::  logical wdow msgs
-              yed=@ud                                   ::  actual wdow msgs
           ==                                            ::
 ++  fort                                                ::  formal state
           $:  hop=@da                                   ::  network boot date
@@ -7231,14 +7231,21 @@
 ++  scud  ,[p=pact q=scar]                              ::  full dispatch
 ++  seam  ,[p=@ta q=pact r=scar]                        ::  service route
 ++  seat  ,@p                                           ::  identity
-++  shed  (qeu ,[p=@ud q=bird])                         ::  packet pump
+++  shed                                                ::  packet pump
+          $:  $:  niq=@ud                               ::  count in queue
+                  nif=@ud                               ::  count in flight
+                  cop=@ud                               ::  count superlate
+                  cux=@ud                               ::  total retransmits
+              ==                                        ::
+              puq=(qeu ,[p=@ud q=bird])                 ::  queue
+          ==                                            ::
 ++  sink                                                ::  incoming per server
           $:  nes=(map flap ,[p=@da q=bait])            ::  fragment actions
           ==                                            ::
 ++  skin  ?(%none %open %fast %full)                    ::  encoding stem
 ++  slip  ,[p=bell q=goal]                              ::  traceable request
 ++  snow  ,[p=@ud q=@ud r=(set ,@ud)]                   ::  window exceptions
-++  soap  ,[p=[p=life q=life] q=@tas r=@ud]              ::  statement id
+++  soap  ,[p=[p=life q=life] q=@tas r=@ud]             ::  statement id
 ++  sock  ,[p=seat q=seat]                              ::  from to
 ++  step  ,[p=bran q=gcos r=pass]                       ::  identity stage
 ++  task  _|+([@da path note] *bowl)                    ::  process core

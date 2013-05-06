@@ -61,6 +61,7 @@
     extern u2_ho_jet j2_mbj(Pt3, peg)[];
     extern u2_ho_jet j2_mbj(Pt3, rap)[];
     extern u2_ho_jet j2_mbj(Pt3, rip)[];
+    extern u2_ho_jet j2_mbj(Pt3, ryp)[];
     extern u2_ho_jet j2_mbj(Pt3, rsh)[];
     extern u2_ho_jet j2_mbj(Pt3, vor)[];
 

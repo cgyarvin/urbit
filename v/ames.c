@@ -217,7 +217,8 @@ u2_ames_io_poll(u2_reck*        rec_u,
       gap_g = (dif_g > 0.0) ? dif_g : 0.0;
       mpz_clear(dif_mp); mpz_clear(wen_mp); mpz_clear(now_mp);
 
-      // uL(fprintf(uH, "ames: wait: %g\n", gap_g));
+      //  fprintf(stderr, "ames: wait: %g\r\n", gap_g);
+      //  uL(fprintf(uH, "ames: wait: %g\n", gap_g));
 
       sam_u->alm = u2_yes;
       ev_timer_set(&sam_u->tim_u, gap_g, 0.);
