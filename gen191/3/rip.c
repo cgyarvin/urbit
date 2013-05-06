@@ -18,10 +18,10 @@
     else {
       u2_noun pir = u2_nul;
       c3_g a_g = a;
-      c3_w met_w = u2_met(a_g, b);
       c3_w i_w;
 
       if ( a_g < 5 ) {
+        c3_w met_w = u2_met(a_g, b);
         c3_w mek_w = ((1 << (1 << a_g)) - 1);
 
         for ( i_w = 0; i_w < met_w; i_w++ ) {
@@ -37,13 +37,18 @@
         return pir;
       }
       else {
+        c3_w met_w = u2_met(a_g, b);
+        c3_w len_w = u2_met(5, b);
         c3_g san_g = (a_g - 5); 
         c3_w san_w = 1 << san_g;
+        c3_w dif_w = (met_w << san_g) - len_w;
+        c3_w tub_w = ((dif_w == 0) ? san_w : (san_w - dif_w));
 
         for ( i_w = 0; i_w < met_w; i_w++ ) {
           c3_w    pat_w = (met_w - (i_w + 1));
           c3_w    wut_w = (pat_w << san_g);
-          u2_ray  sal_r = u2_rl_slab(wir_r, san_w);
+          c3_w    sap_w = ((0 == i_w) ? tub_w : san_w);
+          u2_ray  sal_r = u2_rl_slab(wir_r, sap_w);
 
           if ( 0 == sal_r ) {
             return u2_bl_bail(wir_r, c3__fail);
@@ -51,12 +56,14 @@
             c3_w    j_w;
             u2_atom rip;
 
-            for ( j_w = 0; j_w < san_w; j_w++ ) {
+            for ( j_w = 0; j_w < sap_w; j_w++ ) {
               *u2_at_ray(sal_r + j_w) = u2_atom_word(b, wut_w + j_w);
             }
+
             rip = u2_rl_malt(wir_r, sal_r);
             pir = u2_rc(wir_r, rip, pir);
           }
+          len_w -= san_w;
         }
       }
       return pir;
