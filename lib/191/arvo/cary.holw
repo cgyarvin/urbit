@@ -8,6 +8,7 @@
   ::
   =|                                                    ::  instrument state
       $:  rof=roof                                      ::  revision tree
+          rok=rook                                      ::  remote requests
       ==                                                ::
   |=  [now=@da eny=@ sky=||(* (unit))]                  ::  activate
   ^?                                                    ::  opaque core
@@ -17,6 +18,7 @@
     ^-  [p=(list move) q=vane]
     ?+    -.fav  ~&  [%beat-none fav]
                  !!
+    ::
         %edit
       =.  whu  
           ?^  whu  whu
@@ -55,12 +57,43 @@
         ==
       ==
     ::
+        %hope
+      =<  hope
+      |%
+      ++  hope  
+        ^-  [p=(list move) q=vane]
+        ?.  ?=([@ @ @ *] p.fav)  hoop
+        =+  :*  hyr=(slay i.p.fav) 
+                fal=(slay i.t.t.p.fav)
+            ==
+        ?.  ?=([~ %% %tas @] hyr)  hoop
+        ?.  ?=([~ %% %p @] fal)  hoop
+        =+  his=`@p`q.p.u.fal
+        ?:  =(his u.whu)  hoop
+        =+  yef=(~(get by vez.rok) p.fav)
+        ?^  yef
+          =+  lyz=(~(get by liz.rok) u.yef)
+          =+  zyq=?~(lyz ~ q.u.lyz)
+          [~ ..^$(liz.rok (~(put by liz.rok) u.yef p.fav [[whu hen] zyq]))]
+        =+  num=(scot %ud inx.rok)
+        :-  [[whu [/a/ [%c num ~] hen] [%want his %re p.fav]] ~]
+        %=  ..^$
+          inx.rok  +(inx.rok)
+          vez.rok  (~(put by vez.rok) p.fav inx.rok)
+          liz.rok  (~(put by liz.rok) inx.rok p.fav [[whu hen] ~])
+        ==
+      ::
+      ++  hoop
+        ^-  [p=(list move) q=vane]
+        :_  ..^$
+        [[whu hen [%hoop ~]] ~]
+      --
+    ::
         %keep
       ::  [[%tell %0 %leaf "cary: home for {~(rend co ~ %p u.whu)}"] ~]
-      [~ ..^$(rof (~(put by rof) u.whu `room`[& ~]))]
+      [~ ..^$(rof (~(put by rof) u.whu `room`[& ~ ~]))]
     ::
         %ship
-      ~&  [%ship u.whu]
       =+  yar=(need (~(get by rof) u.whu))
       ?>  own.yar
       =+  saq=(need (~(get by dos.yar) p.fav))
@@ -77,6 +110,19 @@
           saq(lab (~(put by lab.saq) q.fav let.saq))
         ==
       ==
+    ::
+        %went
+      ~&  [%cary-went tea]
+      ?:  =(%good q.fav)  [~ ..^$]
+      ?>  ?=([@ ~] tea)
+      =+  nix=(slay i.tea)
+      ?>  ?=([~ %% %ud @] nix)
+      =+  lig=(need (~(get by liz.rok) nix))
+      :-  (turn q.lig |=(a=roan [p.a q.a [%hoop ~]]))
+      %=    ..^$
+          liz.rok  (~(del by liz.rok) nix)
+          vez.rok  (~(del by vez.rok) p.lig)
+      ==
     ==
   ::
   ++  come  |=(old=vase (load old))
@@ -86,6 +132,7 @@
     ~
   ::
   ++  flee  stay
+  ::
   ++  load
     |=  new=vase
     ^-  vane

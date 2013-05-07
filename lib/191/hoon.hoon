@@ -6909,11 +6909,11 @@
 ++  blur  ,[p=@ud q=(unit bead) r=blot]                 ::  columns, prompt
 ++  boar                                                ::  process at system
           $%  :*  %&                                    ::  waiting (system)
-                  p=(list path)                         ::  blocked on
+                  p=(set path)                          ::  blocked on
                   q=(qeu ,[p=path q=note])              ::  pending events
                   r=worm                                ::  userspace task
               ==                                        ::
-              [%| p=(list path) q=lark]                 ::  pending process
+              [%| p=(set path) q=lark]                  ::  pending process
           ==                                            ::
 ++  boat  ,[(list slip) task]                           ::  user stage
 ++  boon                                                ::  fort output
@@ -6953,7 +6953,8 @@
               [%hemp p=path]                            ::  cancel request
               [%helo ~]                                 ::  trigger prompt
               [%hole p=lane q=@]                        ::  packet failed
-              [%hope p=(unit path)]                     ::  namespace request
+              [%hoop p=(unit)]                          ::  namespace response
+              [%hope p=path]                            ::  namespace request
               [%init p=@p]                              ::  report install
               [%flog p=card]                            ::  log to terminal
               [%junk p=@]                               ::  entropy
@@ -7201,10 +7202,17 @@
               lun=(unit lane)                           ::  route to friend
               lew=will                                  ::  will of friend
           ==                                            ::
+++  roan  ,[p=(unit seat) q=hose]                       ::  event return 
 ++  roof  (map ,@p room)                                ::  revision control
+++  rook                                                ::  request manager
+          $:  inx=@ud                                   ::  request index
+              vez=(map path ,@ud)                       ::  index to path
+              liz=(map ,@ud ,[p=path q=(list roan)])    ::  result hose
+          ==                                            ::
 ++  room                                                ::  author by seat
           $:  own=?                                     ::  local/foreign
               dos=(map ,@ta desk)                       ::  projects 
+              fax=(map path ,*)                         ::  random facts
           ==                                            ::
 ++  rock  ,@uvO                                         ::  packet
 ++  rout  ,[p=(list host) q=path r=oryx s=path]         ::  http route (new)

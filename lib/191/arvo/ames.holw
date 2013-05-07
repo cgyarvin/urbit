@@ -399,14 +399,9 @@
           =+  zep=(~(get by hoc.saf) seg)
           ?:  &(?=(^ zep) ?=(^ lun.wod.u.zep) ?=(^ yed.caq.u.zep))
             [~ seg]
+          ?:  (lth seg 256)  ~
           $(seg (sein seg))
         ::
-        ++  wryp
-          |=  [a=bloq b=@]
-          ^-  (list ,@)
-          ?:  =(0 b)
-            ~
-          [(end a 1 b) $(b (rsh a 1 b))]
         ++  zuul                                        ::    zuul:lax:as:go
           |=  [now=@da ham=meal]                        ::  encode message
           ^-  [p=(list rock) q=_+>]
@@ -931,7 +926,7 @@
                 =+  [mag=`hand`(end 7 1 msg) bod=(rsh 7 1 msg)]
                 =+  dey=(kuch:diz mag)
                 ?~  dey  +>.$                           ::  ignore unknown key
-                =.  +>.$  enow
+                =.  +>.$  enuf
                 =^  key  diz  u.dey
                 (chow(aut sin) ((hard meal) (cue (dy:q:sen:gus key bod))))
               ::
@@ -941,7 +936,7 @@
                 =+  gey=(sev:gus p.mex)
                 =+  mes=(need (tear:se:q.gey q.mex))
                 =.  diz  (wasc:diz p.mes)
-                =.  +>.$  enow
+                =.  +>.$  enuf
                 (west(msg q.mes) p.mes)
               ::
                   %open  
@@ -1053,12 +1048,14 @@
             |=  bun=boon                                ::  emit a boon
             +>(bin [bun bin]) 
           ::
-          ++  enow                                      ::    enow:la:ho:um:am
+          ++  enuf                                      ::    enuf:la:ho:um:am
             %_    .                                     ::  heard fast on
+                gay.bah  & 
                 laz.bah  [~ now]
                 bin
-              ?.  =(~ laz.bah)  bin
-              [[%wine [our her] " is your neighbor"] bin]
+              ?.  |(!gay.bah =(~ laz.bah))  bin
+              :_  bin
+              [%wine [our her] ?:(gay.bah " is your neighbor" " is ok")]
             ==
           ::
           ++  golf                                      ::    golf:la:ho:um:am 
@@ -1142,7 +1139,7 @@
                 bin  
               :_  bin
               :+  %wine  [our her]
-              ?:(yag " ok" " not responding still trying")
+              ?:(yag " is ok" " not responding still trying")
             == 
           ?~  rut  ..tung
           (busk u.rut p.wyv)
@@ -1316,7 +1313,7 @@
         %mead  [[whu [/a/ hen] [%hear p.bon q.bon]] ~]
         %milk 
       ?+    q.bon
-        :~  [[~ p.p.bon] [/b/ hen] [%wart q.p.bon q.bon r.bon [~ s.bon]]]
+        :~  [[~ p.p.bon] [/b/ hen] [%wart q.p.bon q.bon r.bon s.bon]]
         ==
       ::
           %go                                           ::    %go

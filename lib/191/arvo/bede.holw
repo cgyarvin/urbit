@@ -1,3 +1,4 @@
+
 !:
 ::  bede (4b), shell
 ::
@@ -331,6 +332,10 @@
         =+  fug=(~(get by loz) pux)
         ?~  fug  +>.$
         ?+    -.u.fug  +>.$
+            %ez
+          ?>  =(%hoop -.fav)
+          +>.$(loz (~(del by loz) pux))
+        ::
             %up
           ?>  =(%line -.fav)
           +>.$(loz (~(del by loz) pux))
@@ -371,11 +376,11 @@
       ++  ergo                                          ::  lark blocked
         |=  kal=lark
         |=  gez=(list path)
+        ::  ~&  [%ergo-gez gez]
         ^-  beef
-        :+  %+  turn  gez
-            |=(a=path `card`[%text "? {~(ram re (dish:ut [~ %path] a))}"])
+        :+  ~
           (turn gez |=(a=path `slip`[a [%ez a]]))
-        [~ %| gez kal]
+        [~ %| (~(gas in *(set path)) gez) kal]
       ::
       ++  fret                                          ::  process coal
         |=  poc=coal
@@ -407,7 +412,9 @@
         ::  ~&  [%germ sip]
         ^+  +>
         ?+    -.q.sip  +>
-            ::   %ez  (envy /c/ [%hope ~ q.sip])
+            %ez  
+          (enow /c/ [(scot %ud pid) p.sip] [%hope p.q.sip])
+        ::
             %up  +>(pak [[pid p.sip] pak])
             %yo  
           (enow /a/ [(scot %ud pid) p.sip] [%want p.q.sip q.q.sip r.q.sip])
@@ -493,10 +500,23 @@
           !!                                            ::  XX do this right
         fret
       ::
+      ++  jibe
+        |=  [pux=path fib=(unit)]
+        ^+  +>
+        ?~  fib
+          gaff:(emit %text "! {~(ram re (dish:ut [~ %path] pux))}")
+        ?>  ?=(^ bor)
+        =.  p.u.bor  (~(del in p.u.bor) pux)
+        ?^  p.u.bor  +>.$
+        ?-    -.u.bor
+            &  !!                                       ::  XX do this right
+            |
+          (loft q.u.bor)
+        ==
+      ::
       ++  loft                                          ::  execute command
         |=  kal=lark
         ^+  +>
-        =+  wan=|=(a=(list path) [~ ~ ~ %| a kal])
         =+  hak=|=(a=* [[[%talk ((hard tank) a)] ~] ~ ~])
         ?-    -.kal
             %cd  +>.$(cwd p.kal)
@@ -549,6 +569,7 @@
       |=  [pex=path hen=hose fav=card]
       ^-  [p=(list move) q=_..^$]
       =<  ?+  -.fav  [[[[~ who] hen fav] ~] ..^$]
+            %hoop  (gain p.fav)
             %kill  (kill p.fav)
             %noop  [~ ..^$]
             %nuke  nuke
@@ -574,6 +595,22 @@
         %.  [pux fav]
         =<  coax
         (ride pid hen p.byr [~ q.byr])
+      ::
+      ++  gain                                          ::  namespace response
+        |=  fib=(unit) 
+        ^-  [p=(list move) q=_..^^$]
+        ?>  ?=(^ pex)
+        ::  ~&  [%gain-pex pex]
+        =+  ped=(slay i.pex)
+        ?>  ?=([~ %% %ud @] ped)
+        =+  byr=(need (~(get by q.lif) q.p.u.ped))
+        =<  nave
+        ^+  *ride
+        %.  [t.pex fib]
+        =<  jibe
+        %.  [t.pex fav]
+        =<  coax
+        (ride q.p.u.ped hen p.byr [~ q.byr])
       ::
       ++  glom                                          ::  dispatch response
         |=  [her=seat cap=cape sop=soap]
