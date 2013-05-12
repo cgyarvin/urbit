@@ -41,3 +41,7 @@ issued:
   whom: [p=1.971 q=%us-ca r=[p=~~Snoop q=~ r=~ s=~~Lion]]
   fing: 0w3H.hmD~t.oA1iO.wfaYb.qAH29
   date: ~2013.4.13
+
+issued: #7 (Alex Jacobson)
+  flag: ~ripsul-fabdun
+

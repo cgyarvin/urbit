@@ -826,7 +826,7 @@
       (~(cock la:(ho:(um q.p.kec) p.p.kec) ryn %none (shaf %flap pac)) %dead)
     ::
     ++  kick                                            ::    kick:am
-      |=  hen=hose                                      ::  refresh net
+      |=  hen=wire                                      ::  refresh net
       =+  aks=(turn (~(tap by urb.ton.fox) ~) |=([p=seat q=safe] p))
       |-  ^-  [p=(list boon) q=fort]
       ?~  aks  [~ fox]
@@ -849,12 +849,12 @@
       zork:zank:tung:(wind:(ho:(um p.soq) q.soq) sup ham)
     ::
     ++  went                                            ::    went:am
-      |=  [soq=sock hen=hose cap=cape sup=soap]         ::  internal react
+      |=  [soq=sock hen=wire cap=cape sup=soap]         ::  internal react
       ^-  [p=(list boon) q=fort]
       zork:(kick:(um p.soq) hen)
     ::
     ++  wise                                            ::    wise:am
-      |=  [soq=sock hen=hose cha=@ta val=*]             ::  send a statement
+      |=  [soq=sock hen=wire cha=@ta val=*]             ::  send a statement
       ^-  [p=(list boon) q=fort]
       =<  zork:zank:tung
       (wool:(ho:(um p.soq) q.soq) hen cha val)
@@ -891,7 +891,7 @@
         ::
         ++  done                                        ::    done:ho:um:am
           |=  [cha=@ta num=@ud]                         ::  complete outgoing
-          ^-  [(unit hose) _+>]
+          ^-  [(unit wire) _+>]
           =+  rol=(need (~(get by ryl.bah) cha))
           =+  rix=(~(get by san.rol) num)
           ?~  rix  [~ +>.$]
@@ -997,7 +997,7 @@
             ?-    -.fud
                 %back
               ::  ~&  [%back aut her ryn]
-              =.  +>  ?.(=(%full aut) +> (cock %good))  ::  finish key exchange
+              =.  +>  ?.(=(%full aut) +> (cock %good))  ::  finish key exch
               +>(..la (tuck p.fud q.fud r.fud))
             ::
                 %bond
@@ -1104,7 +1104,7 @@
           ==
         ::
         ++  pong
-          |=  hen=hose
+          |=  hen=wire
           ^+  [? +>]
           ?.  |(?=(~ laz.bah) (lth u.laz.bah hop.fox) !gay.bah)
             ::  ~&  [%pong-no her]
@@ -1190,7 +1190,7 @@
           cool 
         ::
         ++  wool                                        ::    wool:ho:um:am
-          |=  [hen=hose cha=@ta val=*]                  ::  send a statement
+          |=  [hen=wire cha=@ta val=*]                  ::  send a statement
           ^+  +>
           =+  ^=  rol  ^-  rill
               =+  rol=(~(get by ryl.bah) cha)
@@ -1210,7 +1210,7 @@
         --                                              ::  --ho:um:am
       ::
       ++  kick                                          ::    kick:um:am
-        |=  hen=hose                                    ::  test connection
+        |=  hen=wire                                    ::  test connection
         =+  hoy=hoy.saf.gus
         |-  ^+  +>.^$
         ?~  hoy
@@ -1220,7 +1220,7 @@
         $(hoy t.hoy)
       ::
       ++  pong                                          ::    pong:um:am
-        |=  [her=seat hen=hose]                         ::  test neighbor
+        |=  [her=seat hen=wire]                         ::  test neighbor
         ^+  [? +>]
         =+  xup=(pong:(ho her) hen)
         ?.  -.xup  [| +>.$]
@@ -1247,7 +1247,7 @@
   =< 
     |%                                                  ::  vane interface
     ++  beat
-      |=  [whu=(unit seat) tea=tire hen=hose fav=card]
+      |=  [whu=(unit seat) tea=duct hen=wire fav=card]
       ^-  [p=(list move) q=vane]
       =^  duy  ..knap
         (knap whu hen fav)
@@ -1255,7 +1255,7 @@
     ::
     ++  come  |=(old=vase (load old))
     ++  doze
-      |=  [now=@da hen=hose]
+      |=  [now=@da hen=wire]
       =|  doz=(unit ,@da)
       |-  ^+  doz
       ?~  zac.fox  doz
@@ -1298,7 +1298,7 @@
     --
   |%
   ++  clop
-    |=  [whu=(unit seat) now=@da hen=hose bon=boon]
+    |=  [whu=(unit seat) now=@da hen=wire bon=boon]
     ^-  (list move)
     ?-    -.bon
         %beer
@@ -1310,7 +1310,7 @@
       :~  [[~ p.p.bon] s.bon [%went q.p.bon q.bon r.bon]]
       ==
     ::
-        %mead  [[whu [/a/ hen] [%hear p.bon q.bon]] ~]
+        %mead  [[whu hen [%hear p.bon q.bon]] ~]
         %milk 
       ?+    q.bon
         :~  [[~ p.p.bon] [/b/ hen] [%wart q.p.bon q.bon r.bon s.bon]]
@@ -1320,7 +1320,9 @@
         ?~  s.bon  ~                                    ::  file delivery
         :~  :+  [~ p.p.bon]  
               [/c/ /a/ hen] 
-            [%quid q.p.bon ((hard ,[path (unit ,*)]) u.s.bon)]
+            =+  rex=((hard ,[p=path q=(unit ,*)]) u.s.bon)
+            ~&  [%go-quid p.rex]
+            [%quid q.p.bon rex]
         ==
       ::                                                
           %hi                                           ::    %hi
@@ -1334,12 +1336,12 @@
             =+  hum=(end 0 3 (mug now))
             ?+   hum  !!
               0  " isn't sure what to say" 
-              1  " prefers not to comment"
+              1  " decides not to comment"
               2  " has no words for what just happened"
-              3  " remains in the room"
+              3  " does not exist in a vacuum"
               4  " is quietly present"
               5  " appears to be thinking"
-              6  " respects the silence"
+              6  " admires the silence"
               7  " pauses to consider"
             ==
           =+  str=(need ((sand %t) ((hard ,@) u.s.bon)))
@@ -1350,11 +1352,13 @@
         $(bon [%wine p.bon " sent a ping"])             ::  ping
       ::
           %re                                           ::    %re
-        ?~  s.bon  ~                                    ::  file delivery
-        :~  :+  [~ p.p.bon]  
-              [/c/ /a/ hen] 
-            [%quiz q.p.bon ((hard ,[path (list path)]) u.s.bon)]
-        ==
+        ?~  s.bon  ~                                    ::  file request
+        =+  vey=((hard (list path)) u.s.bon)
+        ~&  [%re-vey vey]
+        %+  turn  vey
+        |=  a=path
+        :+  [~ p.p.bon]  [/a/ /a/ hen]
+        [%want q.p.bon %go a (sky a)]
       ::
           %up                                           ::    %up
         !!                                              ::  file subscribe
@@ -1377,7 +1381,7 @@
     ==
   ::
   ++  knap
-    |=  [whu=(unit seat) hen=hose fav=card]
+    |=  [whu=(unit seat) hen=wire fav=card]
     ^-  [(list move) _+>]
     ?:  ?=([%crud *] fav)
       [[[whu [/d/ hen] [%flog fav]] ~] +>]
@@ -1408,7 +1412,7 @@
           ?>  ?=(^ whu)
           (~(wise am [now fox]) [u.whu p.fav] hen q.fav r.fav)
         ::
-            %went
+            %went 
           (~(went am [now fox]) [u.whu p.fav] hen q.fav r.fav)
         ::
             %wake

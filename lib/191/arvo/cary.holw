@@ -14,7 +14,7 @@
   ^?                                                    ::  opaque core
   |%                                                    ::
   ++  beat                                              ::  update
-    |=  [whu=(unit seat) tea=tire hen=hose fav=card]
+    |=  [whu=(unit seat) tea=duct hen=wire fav=card]
     ^-  [p=(list move) q=vane]
     ?+    -.fav  ~&  [%beat-none fav]
                  !!
@@ -62,6 +62,7 @@
       |%
       ++  hope  
         ^-  [p=(list move) q=vane]
+        ~&  [%cary-hope p.fav]
         ?.  ?=([@ @ @ *] p.fav)  hoop
         =+  :*  hyr=(slay i.p.fav) 
                 fal=(slay i.t.t.p.fav)
@@ -76,7 +77,7 @@
           =+  zyq=?~(lyz ~ q.u.lyz)
           [~ ..^$(liz.rok (~(put by liz.rok) u.yef p.fav [[whu hen] zyq]))]
         =+  num=(scot %ud inx.rok)
-        :-  [[whu [/a/ [%c num ~] hen] [%want his %re p.fav]] ~]
+        :-  [[whu [/a/ [%c num ~] hen] [%want his %re [p.fav ~]]] ~]
         %=  ..^$
           inx.rok  +(inx.rok)
           vez.rok  (~(put by vez.rok) p.fav inx.rok)
@@ -92,6 +93,23 @@
         %keep
       ::  [[%tell %0 %leaf "cary: home for {~(rend co ~ %p u.whu)}"] ~]
       [~ ..^$(rof (~(put by rof) u.whu `room`[& ~ ~]))]
+    ::
+        %quid
+      ~&  [%quid-from p.fav q.fav]
+      =+  nix=(need (~(get by vez.rok) q.fav))
+      =+  lig=(need (~(get by liz.rok) nix))
+      :-  (turn q.lig |=(a=roan [p.a q.a [%hoop r.fav]]))
+      %=    ..^$
+          liz.rok  (~(del by liz.rok) nix)
+          vez.rok  (~(del by vez.rok) p.lig)
+          rof
+        ?~  r.fav  rof
+        ~&  [%fax-rym q.fav u.r.fav]
+        =+  ^=  rym  ^-  room
+            =+  rym=(~(get by rof) p.fav)
+            ?^(rym u.rym [%| ~ ~])
+        (~(put by rof) p.fav rym(fax (~(put by fax.rym) q.fav u.r.fav)))
+      ==
     ::
         %ship
       =+  yar=(need (~(get by rof) u.whu))
@@ -117,8 +135,8 @@
       ?>  ?=([@ ~] tea)
       =+  nix=(slay i.tea)
       ?>  ?=([~ %% %ud @] nix)
-      =+  lig=(need (~(get by liz.rok) nix))
-      :-  (turn q.lig |=(a=roan [p.a q.a [%hoop ~]]))
+      =+  lig=(need (~(get by liz.rok) q.p.u.nix))
+      :-  ~
       %=    ..^$
           liz.rok  (~(del by liz.rok) nix)
           vez.rok  (~(del by vez.rok) p.lig)
@@ -127,7 +145,7 @@
   ::
   ++  come  |=(old=vase (load old))
   ++  doze
-    |=  [now=@da hen=hose]
+    |=  [now=@da hen=wire]
     ^-  (unit ,@da)
     ~
   ::
@@ -148,12 +166,12 @@
     |=  [our=seat ren=@tas his=seat lot=coin tyl=path]
     ^-  (unit)
     ?~  tyl  ~
-    ?.  =(our his)
-      ~
     =+  poj=(slay i.tyl)
     ?.  ?=([~ %% %tas *] poj)  ~
     =+  yar=(~(get by rof) his)
     ?~  yar  ~
+    =+  fac=?:(own.u.yar ~ (~(get by fax.u.yar) tyl))
+    ?^  fac  fac
     =+  siq=`(unit desk)`(~(get by dos.u.yar) q.p.u.poj)
     ?~  siq  ~
     ?:  ?=(%w ren)

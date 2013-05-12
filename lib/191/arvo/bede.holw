@@ -307,7 +307,7 @@
     ::
     ++  ride                                            ::  process context
       |=  $:  pid=tick                                  ::  process identity
-              hen=hose                                  ::  current hose
+              hen=wire                                  ::  current wire
               loz=(map path goal)                       ::  request state
               bor=(unit boar)                           ::  execution state
           ==                                            ::
@@ -366,11 +366,11 @@
         +>(duz (weld (turn veq |=(a=card [[~ who] hen a])) duz))
       ::
       ++  enow                                          ::  advance a card
-        |=  [nxt=tire ret=tire fav=card]
+        |=  [nxt=duct ret=duct fav=card]
         +>(duz [[[~ who] [nxt [%b ret] hen] fav] duz])
       ::
       ++  envy                                          ::  redirect a card
-        |=  [dst=tire fav=card]
+        |=  [dst=duct fav=card]
         +>(duz [[[~ who] [dst hen] fav] duz])
       ::
       ++  ergo                                          ::  lark blocked
@@ -413,6 +413,7 @@
         ^+  +>
         ?+    -.q.sip  +>
             %ez  
+          ~&  [%bede-hope p.q.sip]
           (enow /c/ [(scot %ud pid) p.sip] [%hope p.q.sip])
         ::
             %up  +>(pak [[pid p.sip] pak])
@@ -566,7 +567,7 @@
       --
     ::
     ++  leap                                            ::  dispatch event
-      |=  [pex=path hen=hose fav=card]
+      |=  [pex=path hen=wire fav=card]
       ^-  [p=(list move) q=_..^$]
       =<  ?+  -.fav  [[[[~ who] hen fav] ~] ..^$]
             %hoop  (gain p.fav)
@@ -600,7 +601,7 @@
         |=  fib=(unit) 
         ^-  [p=(list move) q=_..^^$]
         ?>  ?=(^ pex)
-        ::  ~&  [%gain-pex pex]
+        ~&  [%gain-pex pex]
         =+  ped=(slay i.pex)
         ?>  ?=([~ %% %ud @] ped)
         =+  byr=(need (~(get by q.lif) q.p.u.ped))
@@ -765,7 +766,7 @@
   ^?                                                    ::  opaque core
   |%                                                    ::  poke/peek pattern
   ++  beat                                              ::  process move
-    |=  [whu=(unit seat) tea=tire hen=hose fav=card]
+    |=  [whu=(unit seat) tea=duct hen=wire fav=card]
     ^-  [p=(list move) q=vane]
     ?.  ?=(^ whu)
       ~&  [%beat-none fav]
@@ -779,7 +780,7 @@
   ::
   ++  come  |=(old=vase (load old))
   ++  doze
-    |=  [now=@da hen=hose]
+    |=  [now=@da hen=wire]
     ^-  (unit ,@da)
     ~
   ::

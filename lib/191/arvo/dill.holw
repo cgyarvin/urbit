@@ -3,13 +3,13 @@
 ::
   |=  pit=vase
   ^-  vane                                              ::  kernel instrument
-  =|  $:  wib=(map hose yard)                           ::  terminal by channel
+  =|  $:  wib=(map wire yard)                           ::  terminal by channel
       ==                                                ::
   |=  [now=@da eny=@ sky=||(* (unit))]                  ::  current invocation
   ^?                                                    ::  opaque core
   |%                                                    ::  poke/peek pattern
   ++  beat                                              ::  process move
-    |=  [whu=(unit seat) tea=tire hen=hose fav=card]
+    |=  [whu=(unit seat) tea=duct hen=wire fav=card]
     ^-  [p=(list move) q=vane]
     =+  yar=(~(get by wib) hen)
     ?~  yar
@@ -22,11 +22,11 @@
           %flog                                         ::  log to terminal
         :_  ..^$
         %-  turn
-        :_  |=(a=hose [whu [/d/ a] p.fav])
-        ^-  (list hose)
+        :_  |=(a=wire [whu [/d/ a] p.fav])
+        ^-  (list wire)
         =+  mel=(adit hen)
-        =+  gum=`(list ,[p=hose q=yard])`(~(tap by wib) ~)
-        |-  ^-  (list hose)    
+        =+  gum=`(list ,[p=wire q=yard])`(~(tap by wib) ~)
+        |-  ^-  (list wire)    
         ?~  gum  ~
         %-  weld
         :_  $(gum t.gum)
@@ -371,7 +371,7 @@
   ::
   ++  come  |=(old=vase (load old))
   ++  doze
-    |=  [now=@da hen=hose]
+    |=  [now=@da hen=wire]
     ^-  (unit ,@da)
     ~
   ::
@@ -381,7 +381,7 @@
     ^-  vane
     ?.  (~(nest ut -:!>(wib)) & p.new)
       ~|(%load-nest-dill !!)
-    ..^$(wib ((map hose yard) q.new))
+    ..^$(wib ((map wire yard) q.new))
   ::
   ++  raze  
     ^-  vane

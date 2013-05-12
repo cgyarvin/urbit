@@ -412,7 +412,8 @@ static void
 _lo_punk(u2_reck* rec_u, u2_noun ovo)
 {
   u2_noun gon;
- 
+
+top:
   //  Try to execute the event.
   //
   gon = _lo_soft(rec_u, u2_reck_poke, u2k(ovo));
@@ -422,10 +423,11 @@ _lo_punk(u2_reck* rec_u, u2_noun ovo)
   if ( u2_blip != u2h(gon) ) {
     u2_noun bov;
 
-    //  Failure in a network packet generates a hole card.
+    //  Formal error in a network packet generates a hole card.
     //
     //  There should be a separate path for crypto failures,
-    //  to prevent timing attacks, but isn't right now.
+    //  to prevent timing attacks, but isn't right now.  To deal
+    //  with a crypto failure, just drop the packet.
     //
 #if 1
     if ( c3__hear == u2h(u2t(ovo)) ) {
@@ -457,6 +459,35 @@ _lo_punk(u2_reck* rec_u, u2_noun ovo)
     }
   }
 
+  //  Special handling for enveloped packets.  When arvo produces
+  //  (rather than, as usual, receiving) a %hear card, it has
+  //  chosen to accept a packet in a forwarding envelope.  Its goal 
+  //  is to behave as if the enveloped packet were its original -
+  //  ie, as if the forwarding chain did not exist.
+  //
+  //  Any side effects in envelope opening are discarded.  Opening
+  //  may produce at most one %hear.  The tire must be gold.
+  //
+  {
+    u2_noun gax = u2t(gon);
+    u2_noun hux = u2h(gax), i_hux, pi_hux, qi_hux;
+
+    if ( (u2_yes == u2du(hux)) &&
+         (u2_nul == u2t(hux)) &&
+         (u2_yes == u2_cr_cell((i_hux=u2h(hux)), &pi_hux, &qi_hux)) &&
+         (u2_yes == u2du(qi_hux)) &&
+         (u2_yes == u2du(pi_hux)) &&
+         // (c3__gold == u2h(u2h(pi_hux))) &&
+         (c3__hear == u2h(qi_hux)) )
+    {
+      u2z(ovo);
+      ovo = u2k(i_hux);
+      u2z(gon);
+      goto top;
+    }
+  }
+
+  //  
   //  Whatever worked, save it.  (XX - should be concurrent with execute.)
   {
     _lo_save(rec_u, u2k(ovo));
