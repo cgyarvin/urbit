@@ -1,14 +1,115 @@
 !:
 ::  cary (4c), revision control
 ::
-  |=  pit=vase
-  ^-  vane
+|=  pit=vase
+^-  vane
+=>
+  ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  ::              section 4cA, filesystem logic         ::
+  ::
+  |%
+  ++  un                                                ::  per seat
+    |=  [who=@p now=@da ruf=raft]
+    =+  ^=  yar  ^-  room
+        =+  yar=(~(get by ruf) who)
+        ?~(yar *room u.yar)
+    =|  byn=(list ,[p=wire q=rede])
+    |%
+    ++  de                                              ::  per desk
+      |_  [buk=@ta saq=desk]
+      ++  aeon                                          ::  mark to era
+        |=  lok=mark
+        ^-  (unit ,@ud)
+        ?-    -.lok
+            %da
+          ?:  (gth p.lok now)  ~
+          =+  deq=?:(=(0 let.saq) ~ [~ (dec let.saq)])
+          |-  ^+  deq
+          ?~  hit.saq  deq
+          ?:  (gth p.lok p.i.hit.saq)  deq
+          =+  nix=(dec let.saq)
+          $(hit.saq t.hit.saq, let.saq nix, deq [~ nix])
+        :: 
+            %tas  (~(get by lab.saq) p.lok)
+            %ud   ?:((gte p.lok let.saq) ~ [~ p.lok])
+        ==
+      ::
+      ++  amor                                          ::  endpoint query
+        |=  ren=?(%x %y %z)
+        ^-  (unit ,*)
+        ?-  ren
+          %x  ?.(?=(& -.arc.saq) ~ [~ q.arc.saq])
+          %y  :-  ~
+              ?-  -.arc.saq
+                &  [& p.arc.saq]
+                |  (turn (~(tap by p.arc.saq) ~) |=([p=@ta *] p))
+              ==
+          %z  [~ arc.saq]
+        ==
+      ::
+      ++  argo                                          ::  revert to era
+        |=  oan=@ud
+        ^+  +>
+        ?>  (lth oan let.saq)
+        ?:  =(oan (dec let.saq))  +>
+        %=  $
+          let.saq  (dec let.saq)
+          hit.saq  t.hit.saq
+          arc.saq  dark:(durn:ka:(ci arc.saq) q.i.hit.saq)
+        ==
+      ::
+      ++  aver                                          ::  domestic read 
+        |=  [ren=mare lok=mark way=path]
+        ^-  (unit (unit ,*))
+        =+  nao=(aeon lok)
+        ::  ~&  [%aver buk lok nao]
+        ?~  nao  ~
+        :-  ~
+        ?:  ?=(%w ren)
+          ?.(?=(~ way) ~ [~ u.nao])
+        =.  +>.$  (argo u.nao)
+        (amor(arc.saq dark:(deny:ka:(ci arc.saq) way)) ren)
+      ::
+      ++  biff                                          ::  path subset
+        |=  [yok=path gib=path]
+        ^-  (unit path)
+        ?~  yok  [~ gib]
+        ?~  gib  ~
+        ?.  =(i.yok i.gib)  ~
+        $(yok t.yok, gib t.gib)
+      ::
+      ++  edit                                          ::  apply changeset
+        |=  lav=ukay
+        ^+  +>
+        ::  ~&  [%edit buk lav]
+        =+  wak=darn:(durn:ka:(ci arc.saq) lav)
+        %=  +>.$
+          arc.saq  q.wak
+          let.saq  +(let.saq)
+          hit.saq  :_(hit.saq [now p.wak lav])
+        ==
+      ::
+      ++  zoot
+        %_(..de dos.yar (~(put by dos.yar) buk saq))
+      --
+    ::
+    ++  di
+      |=  buk=@ta
+      =+  ^=  saq  ^-  desk
+          =+  saq=(~(get by dos.yar) buk)
+          ?~(saq [[%| ~] 0 ~ ~ ~] u.saq)
+      ~(. de buk saq)
+    ::
+    ++  zonk
+      ^-  raft
+      (~(put by ruf) who yar)
+    --
+  --
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   ::              section 4cA, filesystem vane          ::
   ::
   =|                                                    ::  instrument state
-      $:  rof=roof                                      ::  revision tree
-          rok=rook                                      ::  remote requests
+      $:  ruf=raft                                      ::  revision tree
       ==                                                ::
   |=  [now=@da eny=@ sky=||(* (unit))]                  ::  activate
   ^?                                                    ::  opaque core
@@ -16,8 +117,10 @@
   ++  beat                                              ::  update
     |=  [whu=(unit seat) tea=duct hen=wire fav=card]
     ^-  [p=(list move) q=vane]
-    ?+    -.fav  ~&  [%beat-none fav]
+    ?+    -.fav  ~&  [%cary-none fav]
                  !!
+        %crud
+      [[[whu [/d/ hen] %flog fav] ~] ..^$]
     ::
         %edit
       =.  whu  
@@ -25,10 +128,6 @@
           ?.  =(%gold (adit hen))  ~
           [~ p.fav] 
       ?>  =(u.whu p.fav)
-      =+  yar=(need (~(get by rof) u.whu))
-      ?>  own.yar
-      =+  lix=(~(get by dos.yar) q.fav)
-      =+  saq=`desk`?^(lix u.lix [~ 0 ~])
       :-  =+  one=~(rend co ~ %p u.whu)
           =+  two=(rip 3 q.fav)
           %+  turn
@@ -37,110 +136,11 @@
           =+  qua=~(ram re (dish:ut [~ %path] p.uke))
           =+  qui=?-(-.q.uke %del '-', %set ?:(=(0 q.q.uke) '+' ':'))
           [whu [/d/ hen] %flog %note qui %leaf "{one}/{two}{qua}"]
-      %_    ..^$
-          rof
-        %+  ~(put by rof)
-          u.whu
-        %_    yar
-            dos
-          %+  ~(put by dos.yar)
-            q.fav
-          |-  ^-  desk 
-          ?~  r.fav  saq
-          =+  rad=`arch`?^(hit.saq r.i.hit.saq [%| ~2000.1.1 ~])
-          %=    $
-              r.fav    t.r.fav
-              let.saq  +(let.saq)
-              hit.saq  :-  [now i.r.fav (~(wane cy rad) now i.r.fav)]
-                           hit.saq
-          ==
-        ==
-      ==
-    ::
-        %hope
-      =<  hope
-      |%
-      ++  hope  
-        ^-  [p=(list move) q=vane]
-        ~&  [%cary-hope p.fav]
-        ?.  ?=([@ @ @ *] p.fav)  hoop
-        =+  :*  hyr=(slay i.p.fav) 
-                fal=(slay i.t.t.p.fav)
-            ==
-        ?.  ?=([~ %% %tas @] hyr)  hoop
-        ?.  ?=([~ %% %p @] fal)  hoop
-        =+  his=`@p`q.p.u.fal
-        ?:  =(his u.whu)  hoop
-        =+  yef=(~(get by vez.rok) p.fav)
-        ?^  yef
-          =+  lyz=(~(get by liz.rok) u.yef)
-          =+  zyq=?~(lyz ~ q.u.lyz)
-          [~ ..^$(liz.rok (~(put by liz.rok) u.yef p.fav [[whu hen] zyq]))]
-        =+  num=(scot %ud inx.rok)
-        :-  [[whu [/a/ [%c num ~] hen] [%want his %re [p.fav ~]]] ~]
-        %=  ..^$
-          inx.rok  +(inx.rok)
-          vez.rok  (~(put by vez.rok) p.fav inx.rok)
-          liz.rok  (~(put by liz.rok) inx.rok p.fav [[whu hen] ~])
-        ==
-      ::
-      ++  hoop
-        ^-  [p=(list move) q=vane]
-        :_  ..^$
-        [[whu hen [%hoop ~]] ~]
-      --
+      %_(..^$ ruf zonk:zoot:(edit:(di:(un u.whu now ruf) q.fav) r.fav))
     ::
         %keep
       ::  [[%tell %0 %leaf "cary: home for {~(rend co ~ %p u.whu)}"] ~]
-      [~ ..^$(rof (~(put by rof) u.whu `room`[& ~ ~]))]
-    ::
-        %quid
-      ~&  [%quid-from p.fav q.fav]
-      =+  nix=(need (~(get by vez.rok) q.fav))
-      =+  lig=(need (~(get by liz.rok) nix))
-      :-  (turn q.lig |=(a=roan [p.a q.a [%hoop r.fav]]))
-      %=    ..^$
-          liz.rok  (~(del by liz.rok) nix)
-          vez.rok  (~(del by vez.rok) p.lig)
-          rof
-        ?~  r.fav  rof
-        ~&  [%fax-rym q.fav u.r.fav]
-        =+  ^=  rym  ^-  room
-            =+  rym=(~(get by rof) p.fav)
-            ?^(rym u.rym [%| ~ ~])
-        (~(put by rof) p.fav rym(fax (~(put by fax.rym) q.fav u.r.fav)))
-      ==
-    ::
-        %ship
-      =+  yar=(need (~(get by rof) u.whu))
-      ?>  own.yar
-      =+  saq=(need (~(get by dos.yar) p.fav))
-      ?<  (~(has by lab.saq) q.fav)
-      :-  ~
-      %_    ..^$
-          rof
-        %+  ~(put by rof)
-          u.whu
-        %_    yar
-            dos
-          %+  ~(put by dos.yar) 
-            p.fav 
-          saq(lab (~(put by lab.saq) q.fav let.saq))
-        ==
-      ==
-    ::
-        %went
-      ~&  [%cary-went tea]
-      ?:  =(%good q.fav)  [~ ..^$]
-      ?>  ?=([@ ~] tea)
-      =+  nix=(slay i.tea)
-      ?>  ?=([~ %% %ud @] nix)
-      =+  lig=(need (~(get by liz.rok) q.p.u.nix))
-      :-  ~
-      %=    ..^$
-          liz.rok  (~(del by liz.rok) nix)
-          vez.rok  (~(del by vez.rok) p.lig)
-      ==
+      [~ ..^$(ruf (~(put by ruf) u.whu *room))]
     ==
   ::
   ++  come  |=(old=vase (load old))
@@ -154,73 +154,26 @@
   ++  load
     |=  new=vase
     ^-  vane
-    ?.  (~(nest ut -:!>(rof)) & p.new)
+    ?.  (~(nest ut -:!>(ruf)) & p.new)
       ~|(%load-nest-cary !!)
-    ..^$(rof (roof q.new))
+    ..^$(ruf (raft q.new))
   ::
   ++  raze
     ^-  vane
-    ..$(rof *roof)
+    ..$(ruf *raft)
   ::
   ++  scry                                              ::  inspect
-    |=  [our=seat ren=@tas his=seat lot=coin tyl=path]
+    |=  [our=seat ron=@tas his=seat lot=coin tyl=path]
     ^-  (unit)
     ?~  tyl  ~
     =+  poj=(slay i.tyl)
     ?.  ?=([~ %% %tas *] poj)  ~
-    =+  yar=(~(get by rof) his)
-    ?~  yar  ~
-    =+  fac=?:(own.u.yar ~ (~(get by fax.u.yar) tyl))
-    ?^  fac  fac
-    =+  siq=`(unit desk)`(~(get by dos.u.yar) q.p.u.poj)
-    ?~  siq  ~
-    ?:  ?=(%w ren)
-      ?.  ?=([%% %ud @] lot)  ~
-      ?^  t.tyl  ~
-      ?:  (gte q.p.lot let.u.siq)  ~
-      |-  ^-  (unit ukaz)
-      ?~  hit.u.siq  ~
-      ?:  =(q.p.lot let.u.siq)
-        [~ q.i.hit.u.siq]
-      $(let.u.siq (dec let.u.siq), hit.u.siq t.hit.u.siq)
-    =+  ^=  rud  ^-  (unit arch)
-        |-  ^-  (unit arch) 
-        ?+    lot  ~
-            [%% %ud @]
-          ~&  [%scry-ver q.p.lot let.u.siq]
-          ?:  =(0 q.p.lot)
-            [~ %| ~2000.1.1 ~]
-          ?:  (gth q.p.lot let.u.siq)  ~
-          [~ r:(snag (sub let.u.siq q.p.lot) hit.u.siq)]
-        ::
-            [%% %da @]
-          ?:  ?&  !own.u.yar 
-                  ?=(^ hit.u.siq) 
-                  (gth q.p.lot p.i.hit.u.siq)
-              ==
-            ~
-          |-  ^-  (unit arch)
-          ?~  hit.u.siq  ~
-          ?:  (gte q.p.lot p.i.hit.u.siq)
-            [~ r.i.hit.u.siq]
-          $(hit.u.siq t.hit.u.siq)
-        ::
-            [%% %tas @]
-          =+  lov=(~(get by lab.u.siq) q.p.lot)
-          ?~  lov  ~
-          $(lot [%% %ud u.lov])
-        ==
-    ?~  rud  ~
-    =+  rad=(~(sift cy u.rud) t.tyl)
-    ?+  ren  ~
-      %x  ?.(?=(& -.rad) ~ [~ r.rad])
-      %y  :-  ~
-          ?-  -.rad
-            &  [%& p.rad q.rad]
-            |  [%| p.rad (turn (~(tap by q.rad) ~) |=([p=@ta *] p))]
-          ==
-      %z  [~ rad]
-    ==
+    =+  luk=?.(?=(%% -.lot) ~ ((soft mark) p.lot))
+    =+  run=((soft mare) ron)
+    ?~  luk  ~
+    ?~  run  ~
+    =+  vyr=(aver:(di:(un our now ruf) q.p.u.poj) u.run u.luk t.tyl)
+    ?~(vyr ~ u.vyr)
   ::
-  ++  stay  `vase`!>(rof)
+  ++  stay  `vase`!>(ruf)
   --

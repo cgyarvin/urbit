@@ -274,7 +274,7 @@ main(c3_i   argc,
   {
     if ( 0 != setjmp(Signal_buf) ) {
       switch ( Sigcause ) {
-        case sig_overflow: printf("[stack overflow]]\r\n"); break;
+        case sig_overflow: printf("[stack overflow]\r\n"); break;
         case sig_interrupt: printf("[interrupt]\r\n"); break;
         default: printf("[signal error!]\r\n"); break;
       }

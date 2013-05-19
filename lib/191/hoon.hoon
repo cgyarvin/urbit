@@ -6840,9 +6840,9 @@
                 ++  tear  |=(a=@ *(unit ,[p=@ q=@]))    ::  accept
             --                                          ::
           --                                            ::
-++  arch                                                ::  fs node
-          $%  [& clod]                                  ::  ie, file
-              [| dirt]                                  ::  ie, directory
+++  arch                                                ::  fs node (new)
+          $%  [& p=@uvI q=*]                            ::  file, sham/data
+              [| p=(map ,@ta arch)]                     ::  directory
           ==                                            ::
 ++  ball  ,@uw                                          ::  statement payload
 ++  bait  ,[p=skin q=@ud r=dove]                        ::  fmt nrecvd spec
@@ -6944,7 +6944,7 @@
               [%crud p=(list tank)]                     ::  error with trace
               [%dire p=@tas q=dram]                     ::  apply directory
               [%dump p=(list ,@t)]                      ::  raw text lines
-              [%edit p=@p q=@tas r=(list ukaz)]         ::  commit edits
+              [%edit p=@p q=@tas r=ukay]                ::  commit edits
               [%exit ~]                                 ::  logical exit
               [%file p=@tas q=@]                        ::  apply atomic file
               [%fail p=tape]                            ::  report failure
@@ -7008,7 +7008,6 @@
               heg=(map hand code)                       ::  proposed 
               qim=(map hand code)                       ::  inbound
           ==                                            ::
-++  clod  ,[p=@da q=@uvI r=*]                           ::  mtime hash content
 ++  coal  ,*                                            ::  untyped vase
 ++  code  ,@uvI                                         ::  symmetric key
 ++  cone  ,[p=(list ,@tas) q=(list ,[p=@tas q=crow])]   ::  bits and options
@@ -7027,11 +7026,12 @@
           ==                                            ::
 ++  deed  ,[p=@ q=step]                                 ::  signature, stage
 ++  desk                                                ::  project state
-          $:  lab=(map ,@tas ,@ud)                      ::  labels
+          $:  arc=arch                                  ::  state
               let=@                                     ::  (lent hit)
-              hit=(list ,[p=@da q=ukaz r=arch])         ::  history
+              hit=(list ,[p=@da q=ukay r=ukay])         ::  changes rev/fwd
+              lab=(map ,@tas ,@ud)                      ::  labels
+              qyx=(map wire ,[p=mare q=morn r=path])    ::  subscriptions
           ==                                            ::
-++  dirt  ,[p=@da q=(map ,@ta arch)]                    ::  mtime tree
 ++  dock  $:                                            ::  process state
               p=tick                                    ::  process counter
               q=(map tick bear)                         ::  process table
@@ -7123,7 +7123,6 @@
 ++  mace  (list ,[p=life q=ring])                       ::  private secrets
 ++  mane  $|(@tas [@tas @tas])                          ::  XML name/space
 ++  manx  ,[t=marx c=marl]                              ::  XML node
-++  marc  ?(%da %tas %ud)                               ::  release form
 ++  mare  ?(%w %x %y %z)
 ++  mark                                                ::  sequence mark
           $%  [%da p=@da]                               ::  date
@@ -7133,6 +7132,7 @@
 ++  marl  (list manx)                                   ::  XML node list
 ++  mars  ,[t=[n=%% a=[i=[n=%% v=tape] t=~]] c=~]       ::  XML cdata
 ++  mart  (list ,[n=mane v=tape])                       ::  XML attributes
+++  marv  ?(%da %tas %ud)                               ::  release form
 ++  marx  $|(@tas [n=mane a=mart])                      ::  XML tag
 ++  math  (map ,@t (list ,@t))                          ::  semiparsed headers
 ++  meal                                                ::  payload
@@ -7148,12 +7148,15 @@
               [| p=@da q=(list ,@ta)]                   ::  mtime dir
           ==                                            ::
 ++  meth  ?(%get %post)                                 ::  http method
-++  morn  ,[p=mark q=(unit mark)]                       ::  sequence slice
+++  morn                                                ::  sequence slice
+          $%  [%da p=@da q=(unit ,@da)]                 ::  start/end
+              [%tas p=@tas]                             ::  at label
+              [%ud p=@ud]                               ::  at number
+          ==                                            ::
 ++  moth  ,[p=meth q=math r=(unit octs)]                ::  http operation
 ++  move  ,[p=(unit seat) q=wire r=card]                ::  internal event
 ++  mime  (list ,@ta)                                   ::  mime type
 ++  name  ,[p=@t q=(unit ,@t) r=(unit ,@t) s=@t]        ::  first mid/nick last
-++  nope  ^~(^-(arch [%| @ ~]))                         ::  empty node
 ++  note                                                ::  app response
           $%  [%ez p=(unit)]                            ::  simple result
               [%ht p=scab q=cred r=moth]                ::  http request
@@ -7194,16 +7197,12 @@
           $:  p=[p=mare q=mark r=@tas]                  ::  clade release book
               q=path                                    ::  subpath
               r=*                                       ::  data
-          ==                                            ::
-++  rave                                                ::  subscription
-          $:  p=[p=mare q=marc r=@tas]                  ::  clade release book 
-              q=morn                                    ::  slice
-              r=path                                    ::  prefix
-          ==                                            ::
-++  rede                                                ::  request command
+          ==                                            :: 
+++  rave  ,[p=mare q=@tas r=morn s=path]                ::  subscription
+++  rede                                                ::  subscription
           $|  ?(%c %d)                                  ::  cease or desist
-          $%  [%a p=seat q=rave]                        ::  apply
-              [%b p=seat q=rant]                        ::  bring
+          $%  [%a p=rave]                               ::  apply
+              [%b p=rant]                               ::  bring
           ==                                            ::
 ++  rill                                                ::  outbound stream
           $:  sed=@ud                                   ::  sent
@@ -7211,26 +7210,17 @@
           ==                                            ::
 ++  rind                                                ::  foreign relation
           $:  nix=@ud                                   ::  
-          ==
+          ==                                            ::
 ++  rink  path                                          ::  prompt path
 ++  road                                                ::  secured oneway route
           $:  exp=@da                                   ::  expiration date
               lun=(unit lane)                           ::  route to friend
-              lew=will                                  ::  will of friend
+              lew=will                                  ::  will of frien
           ==                                            ::
-++  roan  ,[p=(unit seat) q=wire]                       ::  event return 
-++  roof  (map ,@p room)                                ::  revision control
-++  rook                                                ::  request manager
-          $:  inx=@ud                                   ::  request index
-              vez=(map path ,@ud)                       ::  index to path
-              liz=(map ,@ud ,[p=path q=(list roan)])    ::  result wire
-          ==                                            ::
-++  room                                                ::  author by seat
-          $:  own=?
-              dos=(map ,@ta desk)                       ::  native projects 
-              ::  qyx=(map wire rave)                   ::  domestic subscribe 
-              ::  rid=(map seat rind)                   ::  foreign relations
-              fax=(map path ,*)
+++  raft  (map ,@p room)                                ::  revision new
+++  room                                                ::  fs per seat (new)
+          $:  dos=(map ,@ta desk)                       ::  native projects 
+              rid=(map seat rind)                       ::  neighbors
           ==                                            ::
 ++  rock  ,@uvO                                         ::  packet
 ++  rout  ,[p=(list host) q=path r=oryx s=path]         ::  http route (new)
@@ -7282,13 +7272,12 @@
               any=@                                     ::  entropy
               urb=(map seat safe)                       ::  all keys and routes
           ==                                            ::
-++  ukaz                                                ::  change (pl ukazy)
-          $:  p=path                                    ::  change site
-              ^=  q                                     ::  change content
-              $%  [%del p=@uvI]                         ::  delete old-hash
-                  [%set p=@uvI q=@uvI r=*]              ::  new old data
-              ==                                        ::
+++  ukan                                                ::  change
+          $%  [%del p=@uvI]                             ::  delete old-hash
+              [%set p=@uvI q=@uvI r=*]                  ::  new old data
           ==                                            ::
+++  ukay  (list ukaz)                                   ::  backward forward
+++  ukaz  ,[p=path q=ukan]                              ::  change (pl ukazy)
 ++  umaz  ,[p=(list ukaz) q=(list ukaz)]                ::  dual change
 ++  vane  $_                                            ::  kernel actor
           |+  [now=@da eny=@ sky=||(* (unit))]          ::  activate
@@ -7322,16 +7311,17 @@
                         *(unit)                         ::  record
               ++  stay  *vase                           ::  save state, new
               --                                        ::
-++  wand  (list ,[p=life q=ring r=acro])                 ::  mace in action
+++  wand  (list ,[p=life q=ring r=acro])                ::  mace in action
 ++  what                                                ::  logical identity
-          $%  [%crew p=corp]                            ::  business
-              [%dept p=corp]                            ::  agency
+          $%  [%anon ~]                                 ::  anonymous
+              [%crew p=corp]                            ::  business
+              [%dept p=corp]                            ::  government
               [%fair p=corp]                            ::  nonprofit
               [%home p=corp]                            ::  family
               [%holy p=corp]                            ::  religious
               [%lady p=whom]                            ::  female individual
               [%lord p=whom]                            ::  male individual
-              [%punk p=@t]                              ::  opaque identity
+              [%punk p=@t]                              ::  opaque handle
           ==                                            ::
 ++  wire  (list duct)                                   ::  causal history
 ++  whom  ,[p=@ud q=@tas r=name]                        ::  year/govt/id

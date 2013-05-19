@@ -31,7 +31,7 @@
         } ova;
 
         struct {                          //  function gates, use mung
-          u2_noun duel;                   //  compare resource trees
+          u2_noun cyst;                   //  compare resource trees
           u2_noun rain;                   //  parse path, text -> gene
           u2_noun ream;                   //  parse text -> gene
           u2_noun slam;                   //  call ([vase vase] -> vase)

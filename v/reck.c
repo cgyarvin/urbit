@@ -416,9 +416,6 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
         // printf("cary:\n");
         ray = _reck_load_temp(rec_u, wol, kno_w, "arvo/cary.hoon");
 
-        rec_u->toy.duel = 
-          _reck_gate(rec_u, u2k(ray), "|=([a=arch b=arch] (~(duel cy a) b))");
-
         // printf("dill:\n");
         dyl = _reck_load_temp(rec_u, ray, kno_w, "arvo/dill.hoon");
 
@@ -481,8 +478,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     rec_u->toy.sham = u2_reck_wish(rec_u, "sham");
     rec_u->toy.shen = u2_reck_wish(rec_u, "en:crya");
     rec_u->toy.shed = u2_reck_wish(rec_u, "de:crya");
-    rec_u->toy.duel = u2_reck_wish(rec_u, 
-                                   "|=([a=arch b=arch] (~(duel cy a) b))");
+    rec_u->toy.cyst = u2_reck_wish(rec_u, "cyst");
 
     u2_reck_time(rec_u);
     u2_reck_numb(rec_u);

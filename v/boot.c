@@ -518,7 +518,7 @@ u2_ve_mark_reck(u2_reck* rec_u)
   siz_w += u2_cm_mark_noun(rec_u->roe);
   siz_w += u2_cm_mark_noun(rec_u->key);
 
-  siz_w += u2_cm_mark_noun(rec_u->toy.duel);
+  siz_w += u2_cm_mark_noun(rec_u->toy.cyst);
   siz_w += u2_cm_mark_noun(rec_u->toy.rain);
   siz_w += u2_cm_mark_noun(rec_u->toy.ream);
   siz_w += u2_cm_mark_noun(rec_u->toy.sham);

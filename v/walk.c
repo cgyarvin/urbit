@@ -23,12 +23,10 @@
 #include "v/vere.h"
   
   /*  |%
-  **  ++  arch                                      ::  fs node
-  **    $%  [& clod]                                ::  ie, file
-  **        [| dirt]                                ::  ie, directory
-  **    ==                                          ::
-  **  ++  clod  ,[p=@da q=@uvI r=*]                 ::  mtime hash content
-  **  ++  dirt  ,[p=@da q=(map ,@ta arch)]          ::  mtime tree
+  **  ++  arch                                        ::  fs node
+  **            $%  [& p=@uvI q=*]                    ::  file, hash/data
+  **                [| p=(map ,@ta arch)]             ::  directory
+  **            ==                                    ::
   **  --
   */
 
@@ -211,8 +209,8 @@ _walk_in(u2_reck* rec_u, const c3_c* dir_c, c3_w len_w)
             hax = u2_cn_mung(u2k(rec_u->toy.sham), u2k(dat));
             if ( u2_none == get ) { get = u2_nul; }
           
-            get = u2_ckd_by_put(get, ext, u2nq(u2_yes, u2k(tim), hax, dat));
-            map = u2_ckd_by_put(map, nam, u2nt(u2_no, u2k(tim), get));
+            get = u2_ckd_by_put(get, ext, u2nt(u2_yes, hax, dat));
+            map = u2_ckd_by_put(map, nam, u2nc(u2_no, get));
           }
           free(nam_c);
           free(ext_c);
@@ -222,7 +220,7 @@ _walk_in(u2_reck* rec_u, const c3_c* dir_c, c3_w len_w)
 
           if ( u2_nul != dir ) {
             map = u2_ckd_by_put
-              (map, u2_ci_string(fil_c), u2nt(u2_no, tim, dir));
+              (map, u2_ci_string(fil_c), u2nc(u2_no, dir));
           }
           else u2z(tim);
         }
@@ -250,8 +248,7 @@ u2_walk(u2_reck* rec_u, const c3_c* dir_c, u2_noun old)
       c3_assert(0);
     }
     else {
-      return u2nt(u2_no, 
-                  c3_stat_mtime(&buf_b),
+      return u2nc(u2_no, 
                   _walk_in(rec_u, dir_c, strlen(dir_c)));
     }
   }

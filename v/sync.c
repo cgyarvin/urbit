@@ -38,7 +38,7 @@ _sync_peek_arch(u2_reck* rec_u, u2_noun pod, u2_noun bok)
                       u2_nul)));
 }
 
-/* _sync_peek_home(): test if we even hold a plot.
+/* _sync_peek_home(): test if we even hold a seat.
 */
 static u2_bean
 _sync_peek_home(u2_reck* rec_u, u2_noun pod)
@@ -135,21 +135,6 @@ _sync_unix_data(u2_noun pod, u2_noun bok, u2_noun ram)
 }
 #endif
 
-/* _sync_take(): apply ukazy.
-*/
-static void
-_sync_take(u2_reck* rec_u,
-           u2_noun  uzy)
-{
-  // u2_noun pax = u2h(uzy);
-  // u2_noun act = u2t(uzy);
-
-  printf("sync_take\n");
-  {
-  }
-  u2z(uzy);
-}
-
 /* _sync_edit(): sync in editable directory.
 */
 static u2_noun
@@ -163,68 +148,19 @@ _sync_edit(u2_reck* rec_u,
   u2_noun dul;
 
   if ( u2_nul == cay ) {
-    cay = u2nt(u2_no, 0, u2_nul);
+    cay = u2nc(u2_no, u2_nul);
   } else {
     u2_noun rac = u2k(u2t(cay));
 
     u2z(cay); cay = rac;
   }
 
-  dul = u2_cn_mung(u2k(rec_u->toy.duel), u2nc(u2k(cay), u2k(nod)));
-
-  det = u2_ckb_weld(u2k(u2h(dul)), det);
-  if ( u2_nul != u2t(dul) ) {
-    _sync_take(rec_u, u2k(u2t(dul)));
-  }
+  dul = u2_cn_mung(u2k(rec_u->toy.cyst), u2nc(u2k(nod), u2k(cay)));
+  det = u2_ckb_weld(u2k(dul), det);
 
   u2z(dul);
   return det;
 }
-
-#if 0
-/* _sync_edit_m():
-*/
-static u2_noun
-_sync_edit_m(u2_reck* rec_u, u2_noun pod, u2_noun bok, u2_noun map, u2_noun det)
-{
-  if ( u2_nul == map ) {
-    u2z(pod); u2z(bok);
-    return det;
-  }
-  else {
-    u2_noun n_map, pn_map, qn_map, l_map, r_map;
-
-    u2_cr_trel(map, &n_map, &l_map, &r_map);
-    u2_cr_cell(n_map, &pn_map, &qn_map);
-
-    if ( ('e' == pn_map) ) {
-      det = _sync_edit_m(rec_u, u2k(pod), u2k(bok), u2k(l_map), det);
-      det = _sync_edit_m(rec_u, u2k(pod), u2k(bok), u2k(r_map), det);
-      det = _sync_edit(rec_u, u2k(pod), u2k(bok), u2k(qn_map), u2_nul);
-    }
-    u2z(map); u2z(pod); u2z(bok);
-
-    return det;
-  }
-}
-
-/* _sync_book(): sync `nod` as a project change to `pod`, `bok`.
-*/
-static u2_noun
-_sync_book(u2_reck* rec_u, u2_noun pod, u2_noun bok, u2_noun nod)
-{
-  if ( u2_yes == u2h(nod) ) {
-    u2z(nod); u2z(bok); u2z(pod);
-    return u2_nul;
-  }
-  else {
-    u2_noun det = _sync_edit_m(rec_u, pod, bok, u2k(u2t(u2t(nod))), u2_nul);
-    u2z(nod);
-
-    return det;
-  }
-}
-#endif
 
 /* _sync_book_m(): sync `map` to a change list `det`.
 */
@@ -283,7 +219,7 @@ _sync_post(u2_reck* rec_u, u2_noun our, u2_noun pod, u2_noun nod, u2_noun ova)
     return ova;
   }
   else {
-    ova = _sync_book_m(rec_u, our, pod, u2k(u2t(u2t(nod))), ova);
+    ova = _sync_book_m(rec_u, our, pod, u2k(u2t(nod)), ova);
     u2z(nod);
     return ova;
   }
@@ -342,7 +278,7 @@ u2_sync_reck(u2_reck* rec_u)
   u2_noun nod; 
 
   strcpy(pas_c, rec_u->dir_c);
- 
+
   nod = u2_walk(rec_u, pas_c, 0);
   free(pas_c);
 
