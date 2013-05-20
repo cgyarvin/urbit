@@ -1,6 +1,5 @@
-Title:	1: Introduction and philosophy
-
-## 1: Introduction and philosophy ##
+1: Introduction and philosophy
+==============================
 
 Urbit is a new programming and execution environment
 designed from scratch.  Any resemblance to existing languages
