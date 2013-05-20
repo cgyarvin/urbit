@@ -30,6 +30,9 @@
         (skip seh |=([a=host b=seat] (hone q.fav a)))
       ==
     ::
+        %crud
+      [[[whu [/d/ hen] %flog fav] ~] ..^$]
+    ::
         ?(%thin %this)                                  ::  http request
       :_  ..^$
       :_  ~

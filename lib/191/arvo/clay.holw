@@ -8,6 +8,26 @@
   ::              section 4cA, filesystem logic         ::
   ::
   |%
+  ++  tame
+    |=  hap=path
+    ^-  (unit ,[p=mare q=mark r=seat s=@tas t=path])
+    ?.  ?=([@ @ @ @ *] hap)  ~
+    =+  :*  hyr=(slay i.hap) 
+            ved=(slay i.t.hap) 
+            fal=(slay i.t.t.hap)
+            bok=(slay i.t.t.t.hap)
+            lyt=t.t.t.t.hap
+        ==
+    ?.  ?&  ?=([~ %% %tas @] hyr)
+            ?=([~ %% ?(%da %tas %ud) @] ved)
+            ?=([~ %% %p @] fal)
+            ?=([~ %% %tas @] bok)
+        ==
+      ~
+    =+  [dis=(end 3 1 q.p.u.hyr) rem=(rsh 3 1 q.p.u.hyr)]
+    ?.  ?&(?=(%c dis) ?=(?(%w %x %y %z) rem))  ~
+    [~ rem (mark p.u.ved) q.p.u.fal q.p.u.bok lyt]
+  ::
   ++  un                                                ::  per seat
     |=  [who=@p now=@da ruf=raft]
     =+  ^=  yar  ^-  room
@@ -42,7 +62,7 @@
           %y  :-  ~
               ?-  -.arc.saq
                 &  [& p.arc.saq]
-                |  (turn (~(tap by p.arc.saq) ~) |=([p=@ta *] p))
+                |  [| (turn (~(tap by p.arc.saq) ~) |=([p=@ta *] p))]
               ==
           %z  [~ arc.saq]
         ==
@@ -220,6 +240,7 @@
           ==
             %tas  $(xiq t.xiq)
             %ud
+          ~&  [%exec-ud let.saq p.q.q.i.xiq]
           ?.  =(let.saq p.q.q.i.xiq)  $(xiq t.xiq)
           %=  $
             xiq      t.xiq
@@ -308,9 +329,61 @@
       =^  mos  ruf  zonk:zoot:(exec:(di:wake:(un u.whu now ruf) q.fav) r.fav)
       [(weld yaq mos) ..^$]
     ::
+        %hope
+      ?>  ?=(^ whu)
+      =+  vey=(tame p.fav)
+      ?~  vey
+        ~&  [%hope-no p.fav]
+        [[[whu hen [%hoop ~]] ~] ..^$]
+      ?.  =(r.u.vey u.whu)
+        ~&  [%hope-for p.fav]
+        [[[whu hen [%hoop ~]] ~] ..^$]
+      :_  ..^$(loc.ruf (~(put in loc.ruf) hen))
+      :_  ~
+      :+  whu  [/c/ /c/ hen]
+      :+  %rede  %a
+      :^    p.u.vey
+          s.u.vey
+        ?-  -.q.u.vey
+          %da   [%da p.q.u.vey ~ p.q.u.vey]
+          %tas  [%tas p.q.u.vey]
+          %ud   [%ud p.q.u.vey]
+        ==
+      t.u.vey
+    ::
         %keep
       ::  [[%tell %0 %leaf "clay: home for {~(rend co ~ %p u.whu)}"] ~]
       [~ ..^$(fat.ruf (~(put by fat.ruf) u.whu *room))]
+    ::
+        %rede
+      ~&  [%rede-lock loc.ruf]
+      ?-    p.fav
+          [%a *]  
+        =^  mos  ruf  
+          =<  zonk
+          =<  zoot
+          %-  eave:(di:(un u.whu now ruf) q.p.p.fav)
+          [hen p.p.p.fav r.p.p.fav s.p.p.fav]
+        [mos ..^$]
+      ::
+          [%b *]  
+        ?>  (~(has in loc.ruf) hen)
+        ~&  [%rede-hoop-yes hen]
+        =.  loc.ruf  (~(del in loc.ruf) hen)
+        ~&  [%rede-loc loc.ruf]
+        :_  ..^$
+        [[whu hen [%hoop ~ r.p.p.fav]] ~]
+      ::
+          %c
+        ?.  (~(has in loc.ruf) hen)
+          ~&  [%rede-hoop-done hen]
+          [~ ..^$]
+        ~&  [%rede-hoop-no hen]
+        :_  ..^$(loc.ruf (~(del in loc.ruf) hen))
+        [[whu hen [%hoop ~]] ~]
+      ::
+          %d      !!
+      ==
     ::
         %ship
       ?>  ?=(^ whu)

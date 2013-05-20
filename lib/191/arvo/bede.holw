@@ -414,6 +414,7 @@
         ?+    -.q.sip  +>
             %ez  
           ~&  [%bede-hope p.q.sip]
+          ~&  [%bede-bell p.sip]
           (enow /c/ [(scot %ud pid) p.sip] [%hope p.q.sip])
         ::
             %up  +>(pak [[pid p.sip] pak])
@@ -747,6 +748,7 @@
           [16 (~(put to q:~(get to q.sur)) vax)]
         [+(p.sur) (~(put to q.sur) vax)]
       ==
+    ::
     ++  view                                            ::  render processes
       =+  fen=(~(tap by q.lif) ~)
       |-  ^-  (list card)

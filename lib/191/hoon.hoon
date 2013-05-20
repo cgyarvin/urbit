@@ -7145,8 +7145,8 @@
           ==                                            ::
 ++  mess  (list ,[p=@t q=@t])                           ::  raw http headers
 ++  meta                                                ::  path metadata
-          $%  [& p=@da q=@uvI]                          ::  mtime hash
-              [| p=@da q=(list ,@ta)]                   ::  mtime dir
+          $%  [& q=@uvI]                                ::  hash
+              [| q=(list ,@ta)]                         ::  dir
           ==                                            ::
 ++  meth  ?(%get %post)                                 ::  http method
 ++  morn                                                ::  sequence slice
@@ -7221,6 +7221,7 @@
 ++  raft                                                ::  filesystem
           $:  las=@da                                   ::  last wakeup
               fat=(map ,@p room)                        ::  per host
+              loc=(set wire)                            ::  local requests
           ==                                            ::
 ++  room                                                ::  fs per seat (new)
           $:  dos=(map ,@ta desk)                       ::  native projects 
