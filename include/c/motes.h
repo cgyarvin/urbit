@@ -160,6 +160,7 @@
 #   define c3__clam   c3_s4('c','l','a','m')
 #   define c3__clap   c3_s4('c','l','a','p')
 #   define c3__clat   c3_s4('c','l','a','t')
+#   define c3__clay   c3_s4('c','l','a','y')
 #   define c3__clep   c3_s4('c','l','e','p')
 #   define c3__clet   c3_s4('c','l','e','t')
 #   define c3__clhp   c3_s4('c','l','h','p')

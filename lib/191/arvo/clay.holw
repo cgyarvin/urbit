@@ -1,0 +1,365 @@
+!:
+::  clay (4c), revision control
+::
+|=  pit=vase
+^-  vane
+=>
+  ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  ::              section 4cA, filesystem logic         ::
+  ::
+  |%
+  ++  un                                                ::  per seat
+    |=  [who=@p now=@da ruf=raft]
+    =+  ^=  yar  ^-  room
+        =+  yar=(~(get by fat.ruf) who)
+        ?~(yar *room u.yar)
+    =|  byn=(list ,[p=wire q=rede])
+    |%
+    ++  de                                              ::  per desk
+      |_  [buk=@ta saq=desk]
+      ++  aeon                                          ::  mark to era
+        |=  lok=mark
+        ^-  (unit ,@ud)
+        ?-    -.lok
+            %da
+          ?:  (gth p.lok now)  ~
+          =+  deq=?:(=(0 let.saq) ~ [~ (dec let.saq)])
+          |-  ^+  deq
+          ?~  hit.saq  deq
+          ?:  (gth p.lok p.i.hit.saq)  deq
+          =+  nix=(dec let.saq)
+          $(hit.saq t.hit.saq, let.saq nix, deq [~ nix])
+        :: 
+            %tas  (~(get by lab.saq) p.lok)
+            %ud   ?:((gte p.lok let.saq) ~ [~ p.lok])
+        ==
+      ::
+      ++  amor                                          ::  endpoint query
+        |=  ren=?(%x %y %z)
+        ^-  (unit ,*)
+        ?-  ren
+          %x  ?.(?=(& -.arc.saq) ~ [~ q.arc.saq])
+          %y  :-  ~
+              ?-  -.arc.saq
+                &  [& p.arc.saq]
+                |  (turn (~(tap by p.arc.saq) ~) |=([p=@ta *] p))
+              ==
+          %z  [~ arc.saq]
+        ==
+      ::
+      ++  ammo                                          ::  trace window
+        |=  oan=@ud
+        =|  bul=(list ,[p=@da q=ukay])
+        |-  ^+  [bul +>.^$]
+        ?:  =(oan (dec let.saq))  [(flop bul) +>.^$]
+        %=  $
+          bul      [[p.i.hit.saq r.i.hit.saq] bul]
+          let.saq  (dec let.saq)
+          hit.saq  t.hit.saq
+          arc.saq  dark:(durn:ka:(ci arc.saq) q.i.hit.saq)
+        ==
+      ::
+      ++  argo  |=(oan=@ud +:(ammo oan))                ::  revert to era
+      ++  aver                                          ::  domestic read 
+        |=  [ren=mare lok=mark way=path]
+        ^-  (unit (unit ,*))
+        =+  nao=(aeon lok)
+        ::  ~&  [%aver buk lok nao]
+        ?~  nao  ~
+        :-  ~
+        ?:  ?=(%w ren)
+          ?.(?=(~ way) ~ [~ u.nao])
+        =.  +>.$  (argo u.nao)
+        (amor(arc.saq dark:(deny:ka:(ci arc.saq) way)) ren)
+      ::
+      ++  biff                                          ::  path subset
+        |=  [yok=path gib=path]
+        ^-  (unit path)
+        ?~  yok  [~ gib]
+        ?~  gib  ~
+        ?.  =(i.yok i.gib)  ~
+        $(yok t.yok, gib t.gib)
+      ::
+      ++  blab                                          ::  ship result
+        |=  [hen=wire ren=mare lok=mark way=path dat=*]
+        ^+  +>
+        +>(byn [[hen %b [ren lok buk] way dat] byn])
+      ::
+      ++  demo                                          ::  ship snapshot
+        |=  [hen=wire ren=mare lok=mark way=path]
+        ^+  +>
+        ?:  ?=(%w ren)
+          ?^  way  +>
+          (blab hen ren lok ~ let.saq)
+        =.  arc.saq  dark:(deny:ka:(ci arc.saq) way)
+        ?:  ?=(%z ren)
+          (blab hen ren lok way arc.saq)
+        =+  yaw=(flop way)
+        |-  ^+  +>.^$
+        ?-    -.arc.saq
+            &  
+          (blab hen ren lok (flop yaw) ?:(?=(%y ren) [& p.arc.saq] q.arc.saq))
+        ::
+            |
+          =+  goz=(~(tap by p.arc.saq) ~)
+          =>  .(arc.saq `arch`arc.saq)
+          =.  +>.^$  
+            ?.  ?=(%y ren)  +>.^$
+            (blab hen ren lok (flop yaw) [| (turn goz |=([p=@ta *] p))])
+          |-  ^+  +>.^^$
+          ?~  goz  +>.^^$
+          $(+>.^^$ ^$(yaw [p.i.goz yaw], arc.saq q.i.goz))
+        ==
+      ::
+      ++  doze
+        =+  xiq=(~(tap by qyx.saq) ~)                   ::  XX tap
+        =|  nex=(unit ,@da)
+        |-  ^+  nex
+        ?~  xiq  nex
+        ?.  ?=(%da -.q.q.i.xiq)  $(xiq t.xiq)
+        %=    $
+            xiq  t.xiq
+            nex
+          %+  hunt  nex
+          ?:  (lth now p.q.q.i.xiq)  [~ p.q.q.i.xiq]
+          ?~(q.q.q.i.xiq ~ ?>((lth now u.q.q.q.i.xiq) q.q.q.i.xiq))
+        ==
+      ::
+      ++  eave                                          ::  subscribe
+        |=  [hen=wire ren=mare myn=morn way=path]
+        ^+  +>
+        ?-    -.myn
+            %da
+          =+  nao=(aeon [%da p.myn])
+          ?~  nao
+            +>.$(qyx.saq (~(put by qyx.saq) hen ren myn way))
+          =+  oap=?~(q.myn ~ (aeon %da u.q.myn))
+          =+  ^=  nyb  ^+  byn
+              =.  +>.$  ?~(oap +>.$ (argo u.oap))
+              =^  giz  +>.$  (ammo u.nao)
+              =.  +>.$  (demo hen ren [%da p.myn] way)
+              =<  byn
+              |-  ^+  +>.^$
+              ?~  giz  +>.^$
+              =.  +>.^$  (ecce q.i.giz hen ren [%da p.i.giz] way)
+              $(+>.^$ (edit(now p.i.giz) q.i.giz))
+          %=  +>.$
+            byn      ?~(oap nyb [[hen %c] nyb])
+            qyx.saq  ?^(oap qyx.saq (~(put by qyx.saq) hen ren myn way))
+          ==
+        ::
+            ?(%tas %ud)
+          =+  lok=`mark`?-(-.myn %tas [%tas p.myn], %ud [%ud p.myn])
+          =+  nao=(aeon lok)
+          ?~  nao  
+            +>.$(qyx.saq (~(put by qyx.saq) hen ren myn way))
+          +>.$(byn [[hen %c] byn:(demo:(argo u.nao) hen ren lok way)])
+        ==
+      ::
+      ++  ecce                                          ::  send changes
+        |=  [lav=ukay hen=wire ren=mare lok=mark way=path]
+        ^+  +>
+        ?-    ren
+            %w
+          ?^  way  +>
+          (blab hen ren lok ~ (dec let.saq))
+        ::
+            %x
+          |-  ^+  +>.^$
+          ?~  lav  +>.^$
+          ?.  ?=(%set -.q.i.lav)  $(lav t.lav)
+          =+  gim=(biff way p.i.lav)
+          ?~  gim  $(lav t.lav)
+          $(lav t.lav, +>.^$ (blab hen ren lok p.i.lav r.q.i.lav))
+        ::
+            %y
+          !!
+        ::
+            %z
+          !!
+        ==
+      ::
+      ++  ecco                                          ::  ship release
+        |=  lol=@tas
+        ^+  +>
+        ?<  |(=(0 let.saq) (~(has by lab.saq) lol))
+        =.  lab.saq  (~(put by lab.saq) lol (dec let.saq))
+        =+  xiq=(~(tap by qyx.saq) ~)                   ::  XX tap
+        |-  ^+  +>.^$
+        ?~  xiq  +>.^$
+        ?.  &(?=(%tas -.q.q.i.xiq) =(lol p.q.q.i.xiq)) $(xiq t.xiq)
+        $(xiq t.xiq, +>.^$ (demo p.i.xiq p.q.i.xiq [%tas lol] r.q.i.xiq))
+      ::
+      ++  edit                                          ::  apply changes
+        |=  lav=ukay
+        ^+  +>
+        ::  ~&  [%edit buk lav]
+        =+  wak=darn:(durn:ka:(ci arc.saq) lav)
+        %=  +>.$
+          arc.saq  q.wak
+          let.saq  +(let.saq)
+          hit.saq  :_(hit.saq [now p.wak lav])
+        ==
+      ::
+      ++  exec                                          ::  propagate changes
+        |=  lav=ukay
+        ^+  +>
+        =+  xiq=(~(tap by qyx.saq) ~)                   ::  XX tap
+        =|  dem=(list ,[p=wire q=mare r=mark s=path])
+        |-  ^+  +>.^$
+        ?~  xiq  
+          =.  +>.^$  (edit lav)
+          |-  ^+  +>.^^$
+          ?~  dem  +>.^^$
+          $(dem t.dem, +>.^^$ (demo i.dem))
+        ?-    -.q.q.i.xiq
+            %da
+          %=  $
+            xiq    t.xiq
+            +>.^$  (ecce lav p.i.xiq p.q.i.xiq [%da now] r.q.i.xiq)
+          ==
+            %tas  $(xiq t.xiq)
+            %ud
+          ?.  =(let.saq p.q.q.i.xiq)  $(xiq t.xiq)
+          %=  $
+            xiq      t.xiq
+            dem      :_(dem [p.i.xiq p.q.i.xiq [%ud let.saq] r.q.i.xiq])
+            qyx.saq  (~(del by qyx.saq) p.i.xiq)
+          ==
+        ==
+      ::
+      ++  wake                                          ::  react to time
+        ^+  .
+        =+  xiq=(~(tap by qyx.saq) ~)                   ::  XX tap
+        |-  ^+  ..wake
+        ?~  xiq  ..wake
+        ?.  ?=(%da -.q.q.i.xiq)  $(xiq t.xiq)
+        =.  ..wake
+          ?.  &((lth las.ruf p.q.q.i.xiq) (gte now p.q.q.i.xiq))  ..wake
+          (demo p.i.xiq p.q.i.xiq [%da now] r.q.i.xiq)
+        =.  byn
+          ?.  &(?=(^ q.q.q.i.xiq) (gte now u.q.q.q.i.xiq))  byn
+          [[p.i.xiq %c] byn]
+        $(xiq t.xiq)
+      ::
+      ++  zoot
+        %_(..de dos.yar (~(put by dos.yar) buk saq))
+      --
+    ::
+    ++  di
+      |=  buk=@ta
+      =+  ^=  saq  ^-  desk
+          =+  saq=(~(get by dos.yar) buk)
+          ?~(saq [[%| ~] 0 ~ ~ ~] u.saq)
+      ~(. de buk saq)
+    ::
+    ++  doze
+      =+  saz=(turn (~(tap by dos.yar) ~) |=([a=@tas b=*] a))
+      =|  nex=(unit ,@da)
+      |-  ^+   nex
+      ?~  saz  nex
+      $(saz t.saz, nex (hunt nex doze:(di i.saz)))
+    ::
+    ++  wake
+      ^+  .
+      =+  saz=(turn (~(tap by dos.yar) ~) |=([a=@tas b=*] a))
+      |-  ^+  ..wake
+      ?~  saz  ..wake
+      $(saz t.saz, ..wake zoot:wake:(di i.saz))
+    ::
+    ++  zonk
+      ^-  [(list move) raft]
+      :-  (turn byn |=([a=wire b=rede] `move`[[~ who] a [%rede b]]))
+      ruf(fat (~(put by fat.ruf) who yar))
+    --
+  --
+  ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+  ::              section 4cA, filesystem vane          ::
+  ::
+  =|                                                    ::  instrument state
+      $:  ruf=raft                                      ::  revision tree
+      ==                                                ::
+  |=  [now=@da eny=@ sky=||(* (unit))]                  ::  activate
+  ^?                                                    ::  opaque core
+  |%                                                    ::
+  ++  beat                                              ::  update
+    |=  [whu=(unit seat) tea=duct hen=wire fav=card]
+    ^-  [p=(list move) q=vane]
+    ?+    -.fav  ~&  [%clay-none fav]
+                 !!
+        %crud
+      [[[whu [/d/ hen] %flog fav] ~] ..^$]
+    ::
+        %edit
+      =.  whu  
+          ?^  whu  whu
+          ?.  =(%gold (adit hen))  ~
+          [~ p.fav] 
+      ?>  =(u.whu p.fav)
+      =+  ^=  yaq  ^-  (list move)
+          =+  one=~(rend co ~ %p u.whu)
+          =+  two=(rip 3 q.fav)
+          %+  turn
+            r.fav
+          |=  uke=ukaz  ^-  move
+          =+  qua=~(ram re (dish:ut [~ %path] p.uke))
+          =+  qui=?-(-.q.uke %del '-', %set ?:(=(0 q.q.uke) '+' ':'))
+          [whu [/d/ hen] %flog %note qui %leaf "{one}/{two}{qua}"]
+      =^  mos  ruf  zonk:zoot:(exec:(di:wake:(un u.whu now ruf) q.fav) r.fav)
+      [(weld yaq mos) ..^$]
+    ::
+        %keep
+      ::  [[%tell %0 %leaf "clay: home for {~(rend co ~ %p u.whu)}"] ~]
+      [~ ..^$(fat.ruf (~(put by fat.ruf) u.whu *room))]
+    ::
+        %ship
+      ?>  ?=(^ whu)
+      =^  mos  ruf  zonk:zoot:(ecco:(di:wake:(un u.whu now ruf) p.fav) q.fav)
+      [mos ..^$]
+    ::
+        %wake
+      =+  dal=(turn (~(tap by fat.ruf) ~) |=([a=@p b=room] a))
+      =|  mos=(list move)
+      |-  ^-  [p=(list move) q=vane]
+      ?~  dal  [mos ..^^$(las.ruf now)] 
+      =^  som  ruf  zonk:wake:(un i.dal now ruf)
+      $(dal t.dal, mos (weld som mos))
+    ==
+  ::
+  ++  come  |=(old=vase (load old))
+  ++  doze
+    |=  [now=@da hen=wire]
+    =|  nex=(unit ,@da)
+    =+  dal=(turn (~(tap by fat.ruf) ~) |=([a=@p b=room] a))
+    |-  ^+  nex
+    ?~  dal  nex
+    $(dal t.dal, nex (hunt nex doze:(un i.dal now ruf)))
+  ::
+  ++  flee  stay
+  ::
+  ++  load
+    |=  new=vase
+    ^-  vane
+    ?.  (~(nest ut -:!>(ruf)) & p.new)
+      ~|(%load-nest-clay !!)
+    ..^$(ruf (raft q.new))
+  ::
+  ++  raze
+    ^-  vane
+    ..$(ruf *raft)
+  ::
+  ++  scry                                              ::  inspect
+    |=  [our=seat ron=@tas his=seat lot=coin tyl=path]
+    ^-  (unit)
+    ?~  tyl  ~
+    =+  poj=(slay i.tyl)
+    ?.  ?=([~ %% %tas *] poj)  ~
+    =+  luk=?.(?=(%% -.lot) ~ ((soft mark) p.lot))
+    =+  run=((soft mare) ron)
+    ?~  luk  ~
+    ?~  run  ~
+    =+  vyr=(aver:(di:(un our now ruf) q.p.u.poj) u.run u.luk t.tyl)
+    ?~(vyr ~ u.vyr)
+  ::
+  ++  stay  `vase`!>(ruf)
+  --

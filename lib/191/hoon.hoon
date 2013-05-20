@@ -6977,11 +6977,12 @@
               [%pour p=path q=dram]                     ::  write directory
               [%pump ~]                                 ::  produce packets
               [%quid p=seat q=path r=(unit ,*)]         ::  delivery
+              [%rede p=rede]                            ::  subscription
               [%rein p=? q=path]                        ::  push/replace kernel
               [%rend ~]                                 ::  pop kernel
               [%save p=path q=@]                        ::  write atomic file
               [%send p=lane q=@]                        ::  transmit packet
-              [%ship p=@tas q=@tas]                     ::  label release
+              [%ship p=@tas q=@tas]                     ::  book label
               [%sync ~]                                 ::  reset soft state
               [%talk p=tank]                            ::  show on console
               [%tell p=(list ,@t)]                      ::  dump lines
@@ -7217,7 +7218,10 @@
               lun=(unit lane)                           ::  route to friend
               lew=will                                  ::  will of frien
           ==                                            ::
-++  raft  (map ,@p room)                                ::  revision new
+++  raft                                                ::  filesystem
+          $:  las=@da                                   ::  last wakeup
+              fat=(map ,@p room)                        ::  per host
+          ==                                            ::
 ++  room                                                ::  fs per seat (new)
           $:  dos=(map ,@ta desk)                       ::  native projects 
               rid=(map seat rind)                       ::  neighbors

@@ -643,7 +643,6 @@
             |-  ^+  +>.^$
             ?~  yeg  +>.^$
             ?:  (~(has by p.bus) p.i.yeg)  $(yeg t.yeg)
-            ~&  [%dist-del (flop `path`[p.i.yeg ram])]
             $(yeg t.yeg, uke uke:dirk(arc q.i.yeg, ram [p.i.yeg ram]))
           =.  +>.$
             |-  ^+  +>.^$
@@ -710,7 +709,7 @@
       [(flop uke) arc]
     --
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                section 3bE, names                    ::
+::                section 3bE, names etc                ::
 ::
 ++  gnow
   |=  gos=gcos  ^-  @t
@@ -731,4 +730,10 @@
       ==
     ==
   ==
+++  hunt
+  |=  [one=(unit ,@da) two=(unit ,@da)]
+  ^-  (unit ,@da)
+  ?~  one  two
+  ?~  two  one
+  ?:((lth u.one u.two) one two)
 --

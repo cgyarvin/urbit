@@ -581,12 +581,6 @@
   ::              section 4aE, acknowledgments          ::
   ::
   |%
-  ++  hunt
-    |=  [one=(unit ,@da) two=(unit ,@da)]
-    ^-  (unit ,@da)
-    ?~  one  two
-    ?~  two  one
-    ?:((lth u.one u.two) one two)
   ::
   ++  suck
     |=  [num=@ud ski=snow]
