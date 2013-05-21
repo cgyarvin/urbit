@@ -418,7 +418,7 @@ and
 If this seems obvious, you're doin' good.  Finally, we jump back up
 to line 16, the trickiest in the spec:
 
-**Line 16**
+##Line 16##
 
 	16 ::    *[a [b c] d]      [*[a b c] *[a d]]
 
@@ -471,7 +471,7 @@ Operators 6 through 10 are macros.  They exist because Nock is
 not a toy, but a practical interpreter.  Let's see them all
 together:
 
-**Lines 25-30:**
+##Lines 25-30:##
 
 	25 ::    *[a 6 b c d]      *[a 2 [0 1] 2 [1 c d] [1 0] 2 [1 2 3] [1 0] 4 4 b]
 	26 ::    *[a 7 b c]        *[a 2 b 1 c]
@@ -997,6 +997,7 @@ Appendix A: Operator Reductions
 	*[a *[[c d] [0 *[[2 3] [0 ++[a b]]]]]]
 	
 **`6` Reduced:**
+
 	6r ::   *[a 6 b c d]               *[a *[[c d] [0 *[[2 3] [0 ++[a b]]]]]]
 	
 ##`7` Reduction:##
@@ -1014,6 +1015,7 @@ Appendix A: Operator Reductions
 	*[*[a b] c]
 	 
 **`7` Reduced:**
+
 	7r ::     *[a 7 b c]         *[*[a b] c]
 
 ##`8` Reduction:##
@@ -1043,6 +1045,7 @@ Appendix A: Operator Reductions
 	[[*[*[a 0 1]] b] a] c]
 	
 **`8` Reduced:**
+
 	8r ::     *[a 8 b c]        [[*[a b] a] c]
 
 
@@ -1063,6 +1066,7 @@ Appendix A: Operator Reductions
     18 ::     *[a 0 b]          /[b a]
     
 **`9` Reduced:**    
+
     9r ::     *[a 9 b c]        *[*[a c] *[*[a c] 0 b]] 
     
 
@@ -1081,6 +1085,7 @@ Appendix A: Operator Reductions
 	18 ::     *[a 0 b]          /[b a]
 
 **`10` reduced:**
+
 	10r ::    *[a 10 [b c] d]   *[a d]
 
 
