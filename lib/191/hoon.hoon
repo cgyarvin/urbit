@@ -98,7 +98,13 @@
 ::    defined as a function which maps a stream of UDP packets
 ::    into a secure, monotonic global namespace.  A persistent
 ::    virtual computer can be standardized as a pure function of
-::    the form "from the packets I've heard, what do I know?"  
+::    the form "from the packets I've heard, what do I know?"
+::
+::    (On an ideal network, this function is (a) identical on
+::    every host and (b) referentially transparent (ie, once a
+::    name is bound to a value, it is bound permanently).  But
+::    we cannot prevent hosts from signing miscomputations
+::    and/or conflicts; bad actors must be managed socially.)
 ::
 ::    This "lambda architecture" is often used as a specialized
 ::    database, but can be a general-purpose computer if it can  
@@ -117,10 +123,11 @@
 ::    below.  No secrets live forever, though, and the kernel
 ::    dictator retains no dominion whatsoever over Arvo users.
 ::    All keys and algorithms can be updated without disruption.
+::    [NB: the root fingerprints are now in arvo/ames.]
 ::
 ::    Arvo does not process packets only, but also local events
 ::    (++card) from the host OS.  Modules handling these events
-::    includes a shell ++bede, a versioned filesystem ++cary,
+::    includes a shell ++bede, a versioned filesystem ++clay,
 ::    a console ++dill and a web server ++eyre.  Each is crude
 ::    if not risible and meant only as a proof of concept, but
 ::    can be upgraded without losing state.
@@ -6977,7 +6984,6 @@
               [%pour p=path q=dram]                     ::  write directory
               [%pump ~]                                 ::  produce packets
               [%quid p=seat q=path r=(unit ,*)]         ::  delivery
-              [%rede p=rede]                            ::  subscription
               [%rein p=? q=path]                        ::  push/replace kernel
               [%rend ~]                                 ::  pop kernel
               [%save p=path q=@]                        ::  write atomic file
@@ -7003,6 +7009,8 @@
               [%went p=seat q=cape r=soap]              ::  outgoing reaction
               [%wipe ~]                                 ::  clean up wire
               [%word p=chum]                            ::  set password
+              [%wren p=riot]                            ::
+              [%writ p=seat q=riff]                     ::  subscription
           ==                                            ::
 ++  cask                                                ::  symmetric record
           $:  yed=(unit ,[p=hand q=code])               ::  outbound
@@ -7062,7 +7070,8 @@
               [%pawn p=@t]                              ::  128-bit seat
           ==                                            ::
 ++  goal                                                ::  app request
-          $%  [%ez p=path]                              ::  simple query
+          $%  [%eg p=mare q=mark r=seat s=@tas t=path]  ::  parsed request
+              [%er p=path]                              ::  request failed
               [%ht p=(list rout)]                       ::  http server
               [%up p=prod]                              ::  user prompt      
               [%wa p=@da]                               ::  alarm
@@ -7135,6 +7144,7 @@
 ++  mart  (list ,[n=mane v=tape])                       ::  XML attributes
 ++  marv  ?(%da %tas %ud)                               ::  release form
 ++  marx  $|(@tas [n=mane a=mart])                      ::  XML tag
+++  mast  ,[p=mare q=mark r=seat s=@tas t=path]         ::  structured path
 ++  math  (map ,@t (list ,@t))                          ::  semiparsed headers
 ++  meal                                                ::  payload
           $%  [%back p=cape q=flap r=@dr]               ::  acknowledgment
@@ -7159,7 +7169,7 @@
 ++  mime  (list ,@ta)                                   ::  mime type
 ++  name  ,[p=@t q=(unit ,@t) r=(unit ,@t) s=@t]        ::  first mid/nick last
 ++  note                                                ::  app response
-          $%  [%ez p=(unit)]                            ::  simple result
+          $%  [%eg p=(unit)]                            ::  simple result
               [%ht p=scab q=cred r=moth]                ::  http request
               [%up p=@t]                                ::  prompt response
               [%yo p=seat q=cape r=soap]                ::  request response
@@ -7193,6 +7203,7 @@
           $:  did=@ud                                   ::  filled sequence
               mis=(map ,@ud ,[p=flap q=(unit)])         ::  misordered
           ==                                            ::  
+++  raid  (unit rave)                                   ::  request 
 ++  rank  ?(%czar %king %duke %jack %pawn)              ::  seat width class
 ++  rant                                                ::  namespace binding
           $:  p=[p=mare q=mark r=@tas]                  ::  clade release book
@@ -7200,11 +7211,7 @@
               r=*                                       ::  data
           ==                                            :: 
 ++  rave  ,[p=mare q=@tas r=morn s=path]                ::  subscription
-++  rede                                                ::  subscription
-          $|  ?(%c %d)                                  ::  cease or desist
-          $%  [%a p=rave]                               ::  apply
-              [%b p=rant]                               ::  bring
-          ==                                            ::
+++  riff  (unit rant)                                   ::  response
 ++  rill                                                ::  outbound stream
           $:  sed=@ud                                   ::  sent
               san=(map ,@ud wire)                       ::  outstanding
@@ -7221,7 +7228,6 @@
 ++  raft                                                ::  filesystem
           $:  las=@da                                   ::  last wakeup
               fat=(map ,@p room)                        ::  per host
-              loc=(set wire)                            ::  local requests
           ==                                            ::
 ++  room                                                ::  fs per seat (new)
           $:  dos=(map ,@ta desk)                       ::  native projects 
