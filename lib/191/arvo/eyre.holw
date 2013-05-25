@@ -9,7 +9,7 @@
   ^?                                                    ::  opaque core
   |%                                                    ::
   ++  beat                                              ::  process move
-    |=  [whu=(unit seat) pax=duct hen=wire fav=card]
+    |=  [whu=(unit seat) pax=wire hen=duct fav=card]
     ^-  [p=(list move) q=vane]
     ?+    -.fav
       [[[whu hen fav] ~] ..^$]
@@ -62,7 +62,7 @@
   ++  come  |=(old=vase (load old))
   ::
   ++  doze
-    |=  [now=@da hen=wire]
+    |=  [now=@da hen=duct]
     ^-  (unit ,@da)
     ~
   ::

@@ -358,6 +358,7 @@
 ++  gens  (list gene)                                   ::
 ++  gent  (list ,[p=gene q=gene])                       ::
 ++  genu  (list ,[p=term q=gene])                       ::
+++  gore  ,[p=path q=path]                              ::  conventional path
 ++  hair  ,[p=@ud q=@ud]                                ::
 ++  hapt  (list ,@ta)                                   ::
 ++  like  |*  a=_,*                                     ::  generic edge
@@ -6194,7 +6195,6 @@
   =+  [bug=`?`| was=*(set path) wer=*path]
   |% 
   ++  glam  ~+((glue ace))
-  ++  glib  ~+((glue gap))
   ++  hasp  ;~  pose
               (ifix [sel ser] wide)
               %+  cook
@@ -6219,7 +6219,7 @@
     =+  rev=(plex gen)
     ?:  (~(has in was) rev)
       ~|(%pray-loop !!)
-    =+  txt=(,@ta .^(rev))
+    =+  txt=(,@ta .^(%cx rev))
     (rash txt (ifix [gay gay] tall(was (~(put in was) rev), wer rev)))
   ::
   ++  prey
@@ -6925,13 +6925,13 @@
 ++  boat  ,[(list slip) task]                           ::  user stage
 ++  boon                                                ::  fort output
           $%  [%beer p=seat q=@uvG]                     ::  gained ownership
-              [%coke p=sock q=cape r=soap s=wire]       ::  message result
+              [%coke p=sock q=cape r=soap s=duct]       ::  message result
               [%mead p=lane q=rock]                     ::  accept packet
               [%milk p=sock q=@tas r=@ud s=(unit ,*)]   ::  accept message
               [%ouzo p=lane q=rock]                     ::  transmit packet
               [%wine p=sock q=tape]                     ::  notify user
           ==                                            ::
-++  bowl  ,[p=(list card) q=(unit boat)]                ::  standard product
+++  bowl  ,[p=(list card) q=(unit boat)]                ::  standard prowire
 ++  bran  ,[p=life q=(unit life) r=seat s=@da]          ::  our parent us now
 ++  brow  ,[p=@da q=@tas]                               ::  browser version
 ++  buck  ,[p=mace q=will]                              ::  all security data
@@ -7004,13 +7004,13 @@
               [%wait p=@da q=path]                      ::  timer wait
               [%wake ~]                                 ::  timer activate
               [%want p=seat q=@ta r=*]                  ::  outgoing request
+              [%warp p=seat q=riff]                     ::  request
               [%wart p=seat q=@ta r=@ud s=(unit ,*)]    ::  incoming request
               [%warn p=tape]                            ::  system message
               [%went p=seat q=cape r=soap]              ::  outgoing reaction
-              [%wipe ~]                                 ::  clean up wire
+              [%wipe ~]                                 ::  clean up duct
               [%word p=chum]                            ::  set password
-              [%wren p=riot]                            ::
-              [%writ p=seat q=riff]                     ::  subscription
+              [%writ p=riot]                            ::  response
           ==                                            ::
 ++  cask                                                ::  symmetric record
           $:  yed=(unit ,[p=hand q=code])               ::  outbound
@@ -7039,7 +7039,7 @@
               let=@                                     ::  (lent hit)
               hit=(list ,[p=@da q=ukay r=ukay])         ::  changes rev/fwd
               lab=(map ,@tas ,@ud)                      ::  labels
-              qyx=(map wire ,[p=mare q=morn r=path])    ::  subscriptions
+              qyx=(map duct ,[p=mare q=morn r=path])    ::  subscriptions
           ==                                            ::
 ++  dock  $:                                            ::  process state
               p=tick                                    ::  process counter
@@ -7051,7 +7051,7 @@
               caq=cask                                  ::  symmetric key state
           ==                                            ::
 ++  dove  ,[p=@ud q=@uvH r=(map ,@ud ,@)]               ::  hash count 13-blocks
-++  duct  path                                          ::  event pretext
+++  duct  (list wire)                                   ::  causal history
 ++  flap  ,@uvH                                         ::  network packet id
 ++  flow                                                ::  packet connection
           $:  rtt=@dr                                   ::  official rtt
@@ -7061,6 +7061,7 @@
           $:  hop=@da                                   ::  network boot date
               ton=town                                  ::  security
               zac=(map seat oven)                       ::  flows by server
+              rop=(map ,[p=@ud q=sock] riff)            ::  remote requests
           ==                                            ::
 ++  gcos                                                ::  id description
           $%  [%czar p=@t]                              ::  8-bit seat
@@ -7165,7 +7166,7 @@
               [%ud p=@ud]                               ::  at number
           ==                                            ::
 ++  moth  ,[p=meth q=math r=(unit octs)]                ::  http operation
-++  move  ,[p=(unit seat) q=wire r=card]                ::  internal event
+++  move  ,[p=(unit seat) q=duct r=card]                ::  internal event
 ++  mime  (list ,@ta)                                   ::  mime type
 ++  name  ,[p=@t q=(unit ,@t) r=(unit ,@t) s=@t]        ::  first mid/nick last
 ++  note                                                ::  app response
@@ -7182,7 +7183,7 @@
               old=(set flap)                            ::  packets completed
               wab=(map seat bath)                       ::  relationship
           ==                                            ::
-++  ovum  ,[p=duct q=card]                              ::  external event
+++  ovum  ,[p=wire q=card]                              ::  external event
 ++  pact  path                                          ::  routed path
 ++  pail  ?(%none %warm %cold)                          ::  connection status
 ++  plea  ,[p=@ud q=[p=? q=@t]]                         ::  live prompt
@@ -7203,21 +7204,25 @@
           $:  did=@ud                                   ::  filled sequence
               mis=(map ,@ud ,[p=flap q=(unit)])         ::  misordered
           ==                                            ::  
-++  raid  (unit rave)                                   ::  request 
+++  riff  ,[p=@tas q=(unit rave)]                       ::  request/desist
 ++  rank  ?(%czar %king %duke %jack %pawn)              ::  seat width class
 ++  rant                                                ::  namespace binding
           $:  p=[p=mare q=mark r=@tas]                  ::  clade release book
               q=path                                    ::  subpath
               r=*                                       ::  data
           ==                                            :: 
-++  rave  ,[p=mare q=@tas r=morn s=path]                ::  subscription
-++  riff  (unit rant)                                   ::  response
+++  rave  ,[p=mare q=morn r=path]                       ::  subscription
+++  riot  (unit rant)                                   ::  response/complete
 ++  rill                                                ::  outbound stream
           $:  sed=@ud                                   ::  sent
-              san=(map ,@ud wire)                       ::  outstanding
+              san=(map ,@ud duct)                       ::  outstanding
           ==                                            ::
 ++  rind                                                ::  foreign relation
-          $:  nix=@ud                                   ::  
+          $:  nix=@ud                                   ::  request index
+              bim=(map ,@ud ,[p=duct q=riff])           ::  outstanding
+              fod=(map duct ,@ud)                       ::  current requests
+              ^=  hac                                   ::  cache
+              (map ,[p=mare q=mark r=@tas s=path] ,*)   ::
           ==                                            ::
 ++  rink  path                                          ::  prompt path
 ++  road                                                ::  secured oneway route
@@ -7295,8 +7300,8 @@
           ^?  |%                                        ::
               ++  beat                                  ::  update
                         |=  $:  whu=(unit seat)         ::  calling identity
-                                pax=duct                ::  pretext
-                                hen=wire                ::  channel
+                                pax=wire                ::  pretext
+                                hen=duct                ::  channel
                                 fav=card                ::  event
                             ==                          ::
                         :-  p=*(list move)              ::  actions
@@ -7305,7 +7310,7 @@
                         |=  old=vase                    ::
                         *vane                           ::
               ++  doze                                  ::  next wakeup
-                        |=  [now=@da hen=wire]          ::  channel
+                        |=  [now=@da hen=duct]          ::  channel
                         *(unit ,@da)                    ::  alarm if any
               ++  flee  *vase                           ::  save state, old
               ++  load                                  ::  load state, new
@@ -7334,7 +7339,7 @@
               [%lord p=whom]                            ::  male individual
               [%punk p=@t]                              ::  opaque handle
           ==                                            ::
-++  wire  (list duct)                                   ::  causal history
+++  wire  path                                          ::  event pretext
 ++  whom  ,[p=@ud q=@tas r=name]                        ::  year/govt/id
 ++  will  (list deed)                                   ::  certificate
 ++  worm  ,*                                            ::  vase of task
@@ -7347,8 +7352,8 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                section 3bE, Arvo core                ::
 ::
-++  adit                                                ::  wire privilege
-  |=  hen=wire
+++  adit                                                ::  duct privilege
+  |=  hen=duct
   ^-  ?(%gold %iron %lead)
   ?~  hen
     %lead
@@ -7361,10 +7366,10 @@
 ++  vein                                                ::  vane wrapper
   |=  [bud=vase pax=path txt=@ta]                       ::  kernel, source
   =+  =+  pal=~(play ut p.bud)
-      :*  bet=(pal (vice '[*(unit seat) *duct *wire *card]'))
+      :*  bet=(pal (vice '[*(unit seat) *wire *duct *card]'))
           nim=(pal (vice '[*seat @tas *seat *coin *path]'))
           vin=(pal (vice '[@da @ |+(* *(unit))]'))
-          hoz=(pal (vice '[@da *wire]'))
+          hoz=(pal (vice '[@da *duct]'))
           viz=(pal (vice '*vase'))
       ==
   =|  von=(list ,[p=? q=path r=@t])
@@ -7406,8 +7411,8 @@
     |%  
     ++  beat
       |=  $:  whu=(unit seat)
-              pax=duct
-              hen=wire
+              pax=wire
+              hen=duct
               fav=card
           ==
       ^-  [p=(list move) q=+>.^$]
@@ -7416,7 +7421,7 @@
       +>.^$(ves (slap pro [%cnbc %q]))
     ::
     ++  doze
-      |=  [now=@da hen=wire]
+      |=  [now=@da hen=duct]
       ^-  (unit ,@da)
       ((hard (unit ,@da)) q:(slam (slap rig [%cnbc %doze]) [hoz +<]))
     ::

@@ -736,4 +736,24 @@
   ?~  one  two
   ?~  two  one
   ?:((lth u.one u.two) one two)
+::
+++  tame
+  |=  hap=path
+  ^-  (unit mast)
+  ?.  ?=([@ @ @ @ *] hap)  ~
+  =+  :*  hyr=(slay i.hap) 
+          ved=(slay i.t.hap) 
+          fal=(slay i.t.t.hap)
+          bok=(slay i.t.t.t.hap)
+          lyt=t.t.t.t.hap
+      ==
+  ?.  ?&  ?=([~ %% %tas @] hyr)
+          ?=([~ %% ?(%da %tas %ud) @] ved)
+          ?=([~ %% %p @] fal)
+          ?=([~ %% %tas @] bok)
+      ==
+    ~
+  =+  [dis=(end 3 1 q.p.u.hyr) rem=(rsh 3 1 q.p.u.hyr)]
+  ?.  ?&(?=(%c dis) ?=(?(%w %x %y %z) rem))  ~
+  [~ rem (mark p.u.ved) q.p.u.fal q.p.u.bok lyt]
 --

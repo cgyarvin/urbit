@@ -45,3 +45,5 @@ issued:
 issued: #7 (Alex Jacobson)
   flag: ~ripsul-fabdun
 
+issued: #8
+  flag: ~pocmel-malrul

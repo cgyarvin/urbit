@@ -151,7 +151,6 @@
   ++  drem
     |=  axt=@ta
     ^-  (unit love)
-    =+  rux=.^((flop `path`[axt tyc]))
     =+  rog=((hard meta) .^((flop `path`[axt tyc])))
     ?:  ?=([& *] rog)
       =+  dat=((hard ,@) .^((flop `path`[axt tox])))
