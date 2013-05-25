@@ -20,7 +20,7 @@
     ++  de                                              ::  per desk
       |_  [buk=@ta saq=desk]
       ++  aeon                                          ::  mark to era
-        |=  lok=mark
+        |=  lok=case
         ^-  (unit ,@ud)
         ?-    -.lok
             %da
@@ -63,7 +63,7 @@
       ::
       ++  argo  |=(oan=@ud +:(ammo oan))                ::  revert to era
       ++  aver                                          ::  domestic read 
-        |=  [ren=mare lok=mark way=path]
+        |=  [ren=care lok=case way=path]
         ^-  (unit (unit ,*))
         =+  nao=(aeon lok)
         ::  ~&  [%aver buk lok nao]
@@ -83,12 +83,12 @@
         $(yok t.yok, gib t.gib)
       ::
       ++  blab                                          ::  ship result
-        |=  [hen=duct ren=mare lok=mark way=path dat=*]
+        |=  [hen=duct ren=care lok=case way=path dat=*]
         ^+  +>
         +>(byn [[hen ~ [ren lok buk] way dat] byn])
       ::
       ++  demo                                          ::  ship snapshot
-        |=  [hen=duct ren=mare lok=mark way=path]
+        |=  [hen=duct ren=care lok=case way=path]
         ^+  +>
         %=    +>
             byn
@@ -138,7 +138,7 @@
         +>(qyx.saq (~(del by qyx.saq) hen))
       ::
       ++  eave                                          ::  subscribe
-        |=  [hen=duct ren=mare myn=morn way=path]
+        |=  [hen=duct ren=care myn=morn way=path]
         ^+  +>
         ?-    -.myn
             %da
@@ -161,7 +161,7 @@
           ==
         ::
             ?(%tas %ud)
-          =+  lok=`mark`?-(-.myn %tas [%tas p.myn], %ud [%ud p.myn])
+          =+  lok=`case`?-(-.myn %tas [%tas p.myn], %ud [%ud p.myn])
           =+  nao=(aeon lok)
           ?~  nao  
             +>.$(qyx.saq (~(put by qyx.saq) hen ren myn way))
@@ -169,7 +169,7 @@
         ==
       ::
       ++  ecce                                          ::  send changes
-        |=  [lav=ukay hen=duct ren=mare lok=mark way=path]
+        |=  [lav=ukay hen=duct ren=care lok=case way=path]
         ^+  +>
         ?-    ren
             %w
@@ -217,7 +217,7 @@
         |=  lav=ukay
         ^+  +>
         =+  xiq=(~(tap by qyx.saq) ~)                   ::  XX tap
-        =|  dem=(list ,[p=duct q=mare r=mark s=path])
+        =|  dem=(list ,[p=duct q=care r=case s=path])
         |-  ^+  +>.^$
         ?~  xiq  
           =.  +>.^$  (edit lav)
@@ -325,7 +325,7 @@
         ==
       ::
       ++  vera                                          ::  search
-        |=  [buk=@tas ren=mare lok=mark way=path]
+        |=  [buk=@tas ren=care lok=case way=path]
         (~(get by hac.raz) ren lok buk way)
       ::
       ++  zoom
@@ -466,8 +466,8 @@
     ?~  tyl  ~
     =+  poj=(slay i.tyl)
     ?.  ?=([~ %% %tas *] poj)  ~
-    =+  luk=?.(?=(%% -.lot) ~ ((soft mark) p.lot))
-    =+  run=((soft mare) ron)
+    =+  luk=?.(?=(%% -.lot) ~ ((soft case) p.lot))
+    =+  run=((soft care) ron)
     ?~  luk  ~
     ?~  run  ~
     ?.  =(our his)

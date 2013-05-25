@@ -7012,6 +7012,12 @@
               [%word p=chum]                            ::  set password
               [%writ p=riot]                            ::  response
           ==                                            ::
+++  care  ?(%w %x %y %z)                                ::  clay submode
+++  case                                                ::  sequence case
+          $%  [%da p=@da]                               ::  date
+              [%tas p=@tas]                             ::  label
+              [%ud p=@ud]                               ::  number
+          ==                                            ::
 ++  cask                                                ::  symmetric record
           $:  yed=(unit ,[p=hand q=code])               ::  outbound
               heg=(map hand code)                       ::  proposed 
@@ -7039,7 +7045,7 @@
               let=@                                     ::  (lent hit)
               hit=(list ,[p=@da q=ukay r=ukay])         ::  changes rev/fwd
               lab=(map ,@tas ,@ud)                      ::  labels
-              qyx=(map duct ,[p=mare q=morn r=path])    ::  subscriptions
+              qyx=(map duct ,[p=care q=morn r=path])    ::  subscriptions
           ==                                            ::
 ++  dock  $:                                            ::  process state
               p=tick                                    ::  process counter
@@ -7071,7 +7077,7 @@
               [%pawn p=@t]                              ::  128-bit seat
           ==                                            ::
 ++  goal                                                ::  app request
-          $%  [%eg p=mare q=mark r=seat s=@tas t=path]  ::  parsed request
+          $%  [%eg p=care q=case r=seat s=@tas t=path]  ::  parsed request
               [%er p=path]                              ::  request failed
               [%ht p=(list rout)]                       ::  http server
               [%up p=prod]                              ::  user prompt      
@@ -7134,18 +7140,12 @@
 ++  mace  (list ,[p=life q=ring])                       ::  private secrets
 ++  mane  $|(@tas [@tas @tas])                          ::  XML name/space
 ++  manx  ,[t=marx c=marl]                              ::  XML node
-++  mare  ?(%w %x %y %z)
-++  mark                                                ::  sequence mark
-          $%  [%da p=@da]                               ::  date
-              [%tas p=@tas]                             ::  label
-              [%ud p=@ud]                               ::  number
-          ==                                            ::
 ++  marl  (list manx)                                   ::  XML node list
 ++  mars  ,[t=[n=%% a=[i=[n=%% v=tape] t=~]] c=~]       ::  XML cdata
 ++  mart  (list ,[n=mane v=tape])                       ::  XML attributes
 ++  marv  ?(%da %tas %ud)                               ::  release form
 ++  marx  $|(@tas [n=mane a=mart])                      ::  XML tag
-++  mast  ,[p=mare q=mark r=seat s=@tas t=path]         ::  structured path
+++  mast  ,[p=care q=case r=seat s=@tas t=path]         ::  structured path
 ++  math  (map ,@t (list ,@t))                          ::  semiparsed headers
 ++  meal                                                ::  payload
           $%  [%back p=cape q=flap r=@dr]               ::  acknowledgment
@@ -7207,11 +7207,11 @@
 ++  riff  ,[p=@tas q=(unit rave)]                       ::  request/desist
 ++  rank  ?(%czar %king %duke %jack %pawn)              ::  seat width class
 ++  rant                                                ::  namespace binding
-          $:  p=[p=mare q=mark r=@tas]                  ::  clade release book
+          $:  p=[p=care q=case r=@tas]                  ::  clade release book
               q=path                                    ::  subpath
               r=*                                       ::  data
           ==                                            :: 
-++  rave  ,[p=mare q=morn r=path]                       ::  subscription
+++  rave  ,[p=care q=morn r=path]                       ::  subscription
 ++  riot  (unit rant)                                   ::  response/complete
 ++  rill                                                ::  outbound stream
           $:  sed=@ud                                   ::  sent
@@ -7222,7 +7222,7 @@
               bim=(map ,@ud ,[p=duct q=riff])           ::  outstanding
               fod=(map duct ,@ud)                       ::  current requests
               ^=  hac                                   ::  cache
-              (map ,[p=mare q=mark r=@tas s=path] ,*)   ::
+              (map ,[p=care q=case r=@tas s=path] ,*)   ::
           ==                                            ::
 ++  rink  path                                          ::  prompt path
 ++  road                                                ::  secured oneway route
