@@ -274,7 +274,7 @@ Let's move on to the axiomatic functions.
 Here we define more pseudocode operators, which we'll use in
 reductions further down.  So far we have four built-in functions:
 `*` meaning Nock itself, `?` testing whether a noun is a cell or
-an atom, `^` incrementing an atom, and `=` testing for equality.
+an atom, `+` incrementing an atom, and `=` testing for equality.
 Again, no rocket science here.
 
 We should note that in Nock and Hoon, `0` (pronounced "yes") is
