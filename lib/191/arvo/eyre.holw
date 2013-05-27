@@ -9,7 +9,7 @@
   ^?                                                    ::  opaque core
   |%                                                    ::
   ++  beat                                              ::  process move
-    |=  [whu=(unit seat) pax=duct hen=wire fav=card]
+    |=  [whu=(unit seat) pax=wire hen=duct fav=card]
     ^-  [p=(list move) q=vane]
     ?+    -.fav
       [[[whu hen fav] ~] ..^$]
@@ -22,7 +22,7 @@
             |  ~(rend co ~ %if p.q.fav)
           ==
       =+  giy=~(rend co ~ %p p.fav)
-      :-  [[~ [/d/ hen] [%flog %warn "http: serving {nom} as {giy}"]] ~]
+      :-  [[~ [/d hen] [%flog %warn "http: serving {nom} as {giy}"]] ~]
       ^|
       %=    ..^$
           seh
@@ -31,7 +31,7 @@
       ==
     ::
         %crud
-      [[[whu [/d/ hen] %flog fav] ~] ..^$]
+      [[[whu [/d hen] %flog fav] ~] ..^$]
     ::
         ?(%thin %this)                                  ::  http request
       :_  ..^$
@@ -44,7 +44,7 @@
           $(seh t.seh)
       ?~  whu
         [~ hen [%thou 404 ~ ~]]
-      [whu [/b/ /e/ hen] [%thee heq]]
+      [whu [/b /e hen] [%thee heq]]
     ::
         %that                                           ::  http response
       :_  ..^$
@@ -62,7 +62,7 @@
   ++  come  |=(old=vase (load old))
   ::
   ++  doze
-    |=  [now=@da hen=wire]
+    |=  [now=@da hen=duct]
     ^-  (unit ,@da)
     ~
   ::
@@ -79,7 +79,7 @@
     ..$(seh ~)
   ::
   ++  scry
-    |=  [our=seat ren=@tas who=seat lot=coin tyl=path]
+    |=  [our=seat ren=@tas who=seat syd=disc lot=coin tyl=path]
     ^-  (unit)
     ~
   ::

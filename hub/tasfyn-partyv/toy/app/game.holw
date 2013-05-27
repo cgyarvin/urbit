@@ -1,4 +1,4 @@
-=>  !#(/===$main/lib/hume/)
+=>  !#(/=main=/lib/hume|/=)
 |=  [who=seat est=time eny=@uw was=path]
 |=  *
 |=  [neighbor=tape ~]
@@ -7,12 +7,12 @@
 %^    lunt  
     who 
   %none
-:-  :~  :*  :~  [%& /localhost/]
+:-  :~  :*  :~  [%& /localhost]
                 [%| .127.0.0.1]
             ==
-            /game/
+            /game
             (shas %game eny)
-            /toy/
+            /toy
         ==
     ==
 ^-  vase  

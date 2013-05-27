@@ -1,4 +1,3 @@
-
 !:
 ::  bede (4b), shell
 ::
@@ -14,7 +13,8 @@
         hit=[p=@ud q=(list ,@t)]                        ::  command history
         sur=[p=@ud q=(qeu vase)]                        ::  result history
         hox=@ta                                         ::  identity text
-        cwd=path                                        ::  working directory
+        cwc=path                                        ::  working cord
+        cwd=@tas                                        ::  working disc
         way=(map ,@tas vase)                            ::  variables
         pak=(list ,[p=@ud q=path])                      ::  prompt stack
         lif=dock                                        ::  process table
@@ -51,6 +51,8 @@
     %*  .  *brad
       who  who
       hox  (scot %p who)
+      cwc  /one/two/three/four
+      cwd  %try
     ==
   ::
   ++  barn
@@ -78,7 +80,7 @@
     |=  [bran brad]
     |=  [now=@da eny=@ sky=_|+(* *(unit))] 
     =+  wen=(scot %da now)
-    =+  wer=`path`[%cx wen hox (weld cwd [hub ~])]
+    =+  wer=`path`[hox cwd wen (weld cwc [hub ~])]
     =+  rew=(flop wer)
     =+  vez=(vang | wer)
     |%
@@ -104,7 +106,7 @@
           [%cnhp $(woc p.woc) $(woc [%p q.woc]) ~]
         ::
             %f
-          %+  scan  (trip ((hard ,@) .^(p.woc)))
+          %+  scan  (trip ((hard ,@) .^(%cx p.woc)))
           (full (ifix [gay gay] tall:vez(wer p.woc)))
         ::
             %g
@@ -208,7 +210,11 @@
           ;~  pfix  col
             ;~  pose
               ;~  pfix  ;~(plug (just 'c') (just 'd') gap)
-                (stag %cd htap)
+                (stag %cd sym)
+              ==
+            ::
+              ;~  pfix  ;~(plug (just 'c') (just 'c') gap)
+                (stag %cc htap)
               ==
             ::
               ;~  pfix  ;~(plug (just 't') (just 'o') gap)
@@ -264,7 +270,7 @@
           %+  cook                                      ::  XX bletcherous
             |=  a=path  ^-  path
             ?>  ?=([@ @ @ *] a)
-            [i.t.t.a i.t.a i.a t.t.t.a]
+            [i.a i.t.t.a i.t.a t.t.t.a]
           ;~  plug
             %+  cook
               |=(a=seat ~(rent co ~ %p a))
@@ -272,9 +278,9 @@
           ::
             %+  cook
               |=  a=[p=@ta q=(unit ,[p=@ta q=(unit ,@ta)])]
-              ?~  q.a      [~(rent co ~ %da now) %cx %main rol p.a hub ~]
-              ?~  q.u.q.a  [~(rent co ~ %da now) %cx p.a rol p.u.q.a hub ~]
-                           [u.q.u.q.a %cx p.a rol p.u.q.a hub ~] 
+              ?~  q.a      [~(rent co ~ %da now) %main rol p.a hub ~]
+              ?~  q.u.q.a  [~(rent co ~ %da now) p.a rol p.u.q.a hub ~]
+                           [u.q.u.q.a p.a rol p.u.q.a hub ~] 
             ;~  plug
               sym
               ;~  pose
@@ -307,13 +313,13 @@
     ::
     ++  ride                                            ::  process context
       |=  $:  pid=tick                                  ::  process identity
-              hen=wire                                  ::  current wire
+              hen=duct                                  ::  current duct
               loz=(map path goal)                       ::  request state
               bor=(unit boar)                           ::  execution state
           ==                                            ::
       =+  duz=*(list move)                              ::  pending operations
       |%                                                ::
-      ++  beef                                          ::  raw product
+      ++  beef                                          ::  raw prowire
                 $:  p=(list card)                       ::  actions
                     q=(list slip)                       ::  requests
                     r=(unit boar)                       ::  state
@@ -332,8 +338,8 @@
         =+  fug=(~(get by loz) pux)
         ?~  fug  +>.$
         ?+    -.u.fug  +>.$
-            %ez
-          ?>  =(%hoop -.fav)
+            %eg
+          ?>  =(%writ -.fav)
           +>.$(loz (~(del by loz) pux))
         ::
             %up
@@ -366,11 +372,11 @@
         +>(duz (weld (turn veq |=(a=card [[~ who] hen a])) duz))
       ::
       ++  enow                                          ::  advance a card
-        |=  [nxt=duct ret=duct fav=card]
+        |=  [nxt=wire ret=wire fav=card]
         +>(duz [[[~ who] [nxt [%b ret] hen] fav] duz])
       ::
       ++  envy                                          ::  redirect a card
-        |=  [dst=duct fav=card]
+        |=  [dst=wire fav=card]
         +>(duz [[[~ who] [dst hen] fav] duz])
       ::
       ++  ergo                                          ::  lark blocked
@@ -379,7 +385,10 @@
         ::  ~&  [%ergo-gez gez]
         ^-  beef
         :+  ~
-          (turn gez |=(a=path `slip`[a [%ez a]]))
+          %+  turn  gez
+          |=  hap=path
+          ^-  slip
+          =+(myt=(tame hap) [hap ?~(myt [%er hap] [%eg u.myt])])
         [~ %| (~(gas in *(set path)) gez) kal]
       ::
       ++  fret                                          ::  process coal
@@ -412,14 +421,27 @@
         ::  ~&  [%germ sip]
         ^+  +>
         ?+    -.q.sip  +>
-            %ez  
-          ~&  [%bede-hope p.q.sip]
-          ~&  [%bede-bell p.sip]
-          (enow /c/ [(scot %ud pid) p.sip] [%hope p.q.sip])
+            %eg
+          %^  enow  /c
+            [(scot %ud pid) p.sip] 
+          :+  %warp
+            r.q.sip
+          ^-  riff
+          :-  s.q.sip
+          :*  ~
+              p.q.sip 
+              ?-  -.q.q.sip 
+                %da   [%da p.q.q.sip ~ p.q.q.sip]
+                %tas  [%tas p.q.q.sip]
+                %ud   [%ud p.q.q.sip]
+              ==
+              t.q.sip
+          ==
         ::
+            %er  (jibe p.q.sip ~)
             %up  +>(pak [[pid p.sip] pak])
             %yo  
-          (enow /a/ [(scot %ud pid) p.sip] [%want p.q.sip q.q.sip r.q.sip])
+          (enow /a [(scot %ud pid) p.sip] [%want p.q.sip q.q.sip r.q.sip])
         ==
       ::
       ++  gird                                          ::  process slips
@@ -502,7 +524,7 @@
           !!                                            ::  XX do this right
         fret
       ::
-      ++  jibe
+      ++  jibe                                          ::  handle response
         |=  [pux=path fib=(unit)]
         ^+  +>
         ?~  fib
@@ -521,12 +543,13 @@
         ^+  +>
         =+  hak=|=(a=* [[[%talk ((hard tank) a)] ~] ~ ~])
         ?-    -.kal
+            %cc  +>.$(cwc p.kal)
             %cd  +>.$(cwd p.kal)
             %do  (huck p.kal)
             %eh  (haul (dost (mong [echo:do lube +.kal] sky) (ergo kal) hak))
             %go  (haul (dost (mong [fapp:do lube +.kal] sky) (ergo kal) fret))
-            %kl  (envy /b/ [%kill p.kal])
-            %nk  (envy /b/ [%nuke ~])
+            %kl  (envy /b [%kill p.kal])
+            %nk  (envy /b [%nuke ~])
             %ps  (emir view)
             %so  (hock p.kal q.kal)
             %to  (haul (dost (mong [ecto:do lube +.kal] sky) (ergo kal) hak))
@@ -554,13 +577,13 @@
           =.  p.lif  ?:(=(pid (dec p.lif)) (dec p.lif) p.lif)
           ?.  (~(has by q.lif) pid)
             [duz ..^$]
-  ::      =.  ..nave  (envy /d/ %flog %text (weld "/ %" tid))
+  ::      =.  ..nave  (envy /d %flog %text (weld "/ %" tid))
           [duz ..^$(q.lif (~(del by q.lif) pid))]
         ?>  ?=(^ bor)
   ::    =>  %=    .
   ::            ..nave
   ::          %+  envy
-  ::            /d/
+  ::            /d
   ::          [%flog %text (weld ?:((~(has by q.lif) pid) "= %" "^ %") tid)]
   ::        ==
         [duz ..^$(q.lif (~(put by q.lif) pid [loz u.bor]))]
@@ -568,10 +591,10 @@
       --
     ::
     ++  leap                                            ::  dispatch event
-      |=  [pex=path hen=wire fav=card]
+      |=  [pex=path hen=duct fav=card]
       ^-  [p=(list move) q=_..^$]
       =<  ?+  -.fav  [[[[~ who] hen fav] ~] ..^$]
-            %hoop  (gain p.fav)
+            %writ  (gain p.fav)
             %kill  (kill p.fav)
             %noop  [~ ..^$]
             %nuke  nuke
@@ -602,17 +625,18 @@
         |=  fib=(unit) 
         ^-  [p=(list move) q=_..^^$]
         ?>  ?=(^ pex)
-        ~&  [%gain-pex pex]
+        ::  ~&  [%gain-pex pex ?=(^ fib)]
         =+  ped=(slay i.pex)
         ?>  ?=([~ %% %ud @] ped)
-        =+  byr=(need (~(get by q.lif) q.p.u.ped))
+        =+  bur=(~(get by q.lif) q.p.u.ped)
+        ?~  bur  [~ ..^^$]
         =<  nave
         ^+  *ride
         %.  [t.pex fib]
         =<  jibe
         %.  [t.pex fav]
         =<  coax
-        (ride q.p.u.ped hen p.byr [~ q.byr])
+        (ride q.p.u.ped hen p.u.bur [~ q.u.bur])
       ::
       ++  glom                                          ::  dispatch response
         |=  [her=seat cap=cape sop=soap]
@@ -735,7 +759,13 @@
     ++  prot                                            ::  current prompt
       ^-  prod
       ?~  pak 
-        [%text (rip 3 (cat 3 hox '> '))]
+        :-  %text
+        ;:  weld
+          (trip (rap 3 [hox '/' cwd ~])) 
+          "="
+          ~(ram re (dish:ut [~ %path] cwc))
+          "> "
+        ==
       =+  byr=(need (~(get by q.lif) p.i.pak))
       =+  gol=(need (~(get by p.byr) q.i.pak))
       ?>(?=(%up -.gol) p.gol)
@@ -768,7 +798,7 @@
   ^?                                                    ::  opaque core
   |%                                                    ::  poke/peek pattern
   ++  beat                                              ::  process move
-    |=  [whu=(unit seat) tea=duct hen=wire fav=card]
+    |=  [whu=(unit seat) tea=wire hen=duct fav=card]
     ^-  [p=(list move) q=vane]
     ?.  ?=(^ whu)
       ~&  [%beat-none fav]
@@ -782,7 +812,7 @@
   ::
   ++  come  |=(old=vase (load old))
   ++  doze
-    |=  [now=@da hen=wire]
+    |=  [now=@da hen=duct]
     ^-  (unit ,@da)
     ~
   ::
@@ -807,10 +837,10 @@
     ..$(deb ~)
   ::
   ++  scry
-    |=  [our=seat ren=@tas his=seat lot=coin tyl=path]
+    |=  [our=seat ren=@tas his=seat syd=disc lot=coin tyl=path]
     ^-  (unit)
     ?.  =(our his)  ~
-    ?.  &(=([%p ~] tyl) =([%% %da now] lot)) ~
+    ?.  &(=(%p syd) =([%% %da now] lot)) ~
     =+  beg=(~(get by deb) our)
     ?~  beg  ~
     [~ prot:(u.beg now eny |=(* *(unit)))]
@@ -825,5 +855,3 @@
         ^-([p=seat q=brad] [p +>+<+.q])
     ==
   --
-
-
