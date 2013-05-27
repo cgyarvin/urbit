@@ -410,8 +410,8 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
         // printf("ames:\n");
         xan = _reck_load_temp(rec_u, zen, kno_w, "arvo/ames.hoon");
 
-        // printf("bede:\n");
-        wol = _reck_load_temp(rec_u, xan, kno_w, "arvo/bede.hoon");
+        // printf("born:\n");
+        wol = _reck_load_temp(rec_u, xan, kno_w, "arvo/born.hoon");
 
         // printf("clay:\n");
         ray = _reck_load_temp(rec_u, wol, kno_w, "arvo/clay.hoon");
@@ -460,8 +460,8 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
                              _reck_load_arvo(rec_u, "ames"));
 
       _reck_init_veer(rec_u, 'b', 
-                             u2nc(c3__bede, u2_nul),
-                             _reck_load_arvo(rec_u, "bede"));
+                             u2nc(c3__born, u2_nul),
+                             _reck_load_arvo(rec_u, "born"));
 
       _reck_init_veer(rec_u, 'c', 
                              u2nc(c3__clay, u2_nul),

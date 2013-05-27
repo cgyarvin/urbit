@@ -1,5 +1,5 @@
 !:
-::  bede (4b), shell
+::  born (4b), shell
 ::
   |=  pit=vase
   ^-  vane
@@ -51,7 +51,7 @@
     %*  .  *brad
       who  who
       hox  (scot %p who)
-      cwc  /one/two/three/four
+      cwc  /
       cwd  %try
     ==
   ::
@@ -214,7 +214,7 @@
               ==
             ::
               ;~  pfix  ;~(plug (just 'c') (just 'c') gap)
-                (stag %cc htap)
+                (stag %cc worc)
               ==
             ::
               ;~  pfix  ;~(plug (just 't') (just 'o') gap)
@@ -487,28 +487,44 @@
       ++  hock                                          ::  set a variable
         |=  [nam=@tas woc=crow]
         ^+  +>
-        =+  gen=(doul:do woc)                           ::  XX usercode in kern
-        =+  yun=lube
-        =+  heq=(~(mint ut p.yun) %noun gen)            ::  XX type in kernel
-        =+  ton=(mock [q.yun q.heq] sky)                ::  XX for speed only
-        ?-  -.ton                                       ::  XX but shd cache
-          %0  =.  way  (~(put by way) nam [p.heq p.ton])
-              (emit %note '.' %leaf (trip nam))
-          %1  (emit %crud (turn p.ton |=(a=* [%leaf (spud (path a))])))
-          %2  (emit %crud p.ton)
-        ==
+        =^  hus  +>.$  (husk %noun woc)
+        ?~  hus  +>.$
+        =.  way  (~(put by way) nam u.hus)
+        (emit %note '.' %leaf (trip nam))
       ::
-      ++  huck                                          ::  direct card
-        |=  woc=crow
+      ++  honk                                          ::  short circuit crow
+        |=  [typ=type woc=crow]
+        ^-  [p=type q=toon]
         =+  yun=lube
-        =+  dst=!;(*type *(list card))
-        =+  heq=(~(mint ut p.yun) `type`-:!>(*(list card)) (doul:do woc))
-        =+  ton=(mock [q.yun q.heq] sky)
+        =+  heq=(~(mint ut p.yun) %noun (doul:do woc))
+        [p.heq (mock [q.yun q.heq] sky)]
+      ::
+      ++  huck                                          ::  direct effect
+        |=  woc=crow
+        ^+  +>
+        =+  ton=q:(honk `type`-:!>(*(list card)) woc)
         ?-  -.ton
           %0  (emir ((hard (list card)) p.ton))
           %1  (emit %crud (turn p.ton |=(a=* [%leaf (spud (path a))])))
           %2  (emit %crud p.ton)
         ==
+      ::
+      ++  husk                                          ::  try to short
+        |=  [typ=type woc=crow]
+        ^-  [(unit vase) _+>]
+        =+  hon=(honk typ woc) 
+        ?-  -.q.hon
+          %0  [[~ p.hon p.q.hon] +>.$]
+          %1  [~ (emit %crud (turn p.q.hon |=(a=* [%leaf (spud (path a))])))]
+          %2  [~ (emit %crud p.q.hon)]
+        ==
+      ::
+      ++  hype                                          ::  change cord
+        |=  woc=crow
+        ^+  +>
+        =^  hus  +>.$  (husk `type`-:!>(*path) woc)
+        ?~  hus  +>.$
+        +>.$(cwc ((hard path) q.u.hus))
       ::
       ++  jerk                                          ::  deliver note
         |=  [pux=path nob=note]
@@ -543,7 +559,7 @@
         ^+  +>
         =+  hak=|=(a=* [[[%talk ((hard tank) a)] ~] ~ ~])
         ?-    -.kal
-            %cc  +>.$(cwc p.kal)
+            %cc  (hype p.kal)
             %cd  +>.$(cwd p.kal)
             %do  (huck p.kal)
             %eh  (haul (dost (mong [echo:do lube +.kal] sky) (ergo kal) hak))
@@ -763,7 +779,7 @@
         ;:  weld
           (trip (rap 3 [hox '/' cwd ~])) 
           "="
-          ~(ram re (dish:ut [~ %path] cwc))
+          ?~(cwc "" ~(ram re (dish:ut [~ %path] cwc)))
           "> "
         ==
       =+  byr=(need (~(get by q.lif) p.i.pak))

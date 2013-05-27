@@ -1,4 +1,4 @@
-!:
+::
 ::              Hoon/Arvo stage 191 (reflexive).  
 ::              This file is in the public domain.
 ::
@@ -7110,6 +7110,16 @@
               zac=(map seat oven)                       ::  flows by server
               rop=(map ,[p=@ud q=sock] riff)            ::  remote requests
           ==                                            ::
+++  gift                                                ::  one-way effect
+          $%  [%de p=tank]                              ::  debug output
+              [%em p=vase]                              ::  emit product
+              [%en p=(list vase)]                       ::  multiple emit
+              [%ha p=tank]                              ::  single error
+              [%ho p=(list tank)]                       ::  multiple error
+              [%la p=tank]                              ::  single statement
+              [%lo p=tank]                              ::  multiple statement
+              [%ok p=(list ukaz)]                       ::  save changes
+          ==
 ++  gcos                                                ::  id description
           $%  [%czar p=@t]                              ::  8-bit seat
               [%duke p=what]                            ::  32-bit seat
@@ -7118,8 +7128,8 @@
               [%pawn p=@t]                              ::  128-bit seat
           ==                                            ::
 ++  goal                                                ::  app request
-          $%  [%eg p=care q=case r=seat s=@tas t=path]  ::  parsed request
-              [%er p=path]                              ::  request failed
+          $%  [%eg p=care q=case r=seat s=disc t=cord]  ::  parsed request
+              [%er p=path]                              ::  invalid request
               [%ht p=(list rout)]                       ::  http server
               [%up p=prod]                              ::  user prompt      
               [%wa p=@da]                               ::  alarm
@@ -7157,7 +7167,7 @@
               [%is p=@ud q=@is]                         ::  IP6/public UDP/addr
           ==                                            ::
 ++  lark                                                ::  parsed command
-          $%  [%cc p=cord]                              ::  change cord
+          $%  [%cc p=crow]                              ::  change cord
               [%cd p=disc]                              ::  change desk
               [%do p=crow]                              ::  direct effect
               [%eh p=crow]                              ::  print and record
@@ -7212,7 +7222,7 @@
 ++  move  ,[p=(unit seat) q=duct r=card]                ::  internal event
 ++  mime  (list ,@ta)                                   ::  mime type
 ++  name  ,[p=@t q=(unit ,@t) r=(unit ,@t) s=@t]        ::  first mid/nick last
-++  note                                                ::  app response
+++  note                                                ::  response to goal
           $%  [%eg p=(unit)]                            ::  simple result
               [%ht p=scab q=cred r=moth]                ::  http request
               [%up p=@t]                                ::  prompt response
