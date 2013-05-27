@@ -67,8 +67,8 @@
       `tape`[`@`10 ~]
     ==
 :-  :~  [%text "done!"]
-        [%save /generators/txt/ fiz]
-        [%save /fingerprints/txt/ guz]
-        [%save /rings/txt/ hoz]
+        [%save /generators/txt fiz]
+        [%save /fingerprints/txt guz]
+        [%save /rings/txt hoz]
     ==
 ~

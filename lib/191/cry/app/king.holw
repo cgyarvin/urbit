@@ -1,7 +1,7 @@
 !:
-::        /main/app/king/: issue a class B seat, from a class A seat.
+::        /cry/app/king: issue a class B seat, from a class A seat.
 ::
-=>  !#(/===$main/lib/hume/)
+=>  !#(/=main=/lib/hume|/=)
 |=  [who=seat est=time eny=@uw was=path]
 |=  *
 |=  ~

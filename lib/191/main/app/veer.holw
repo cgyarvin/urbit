@@ -3,7 +3,7 @@
 |=  *
 |=  [gup=? lab=@tas nam=@tas ~]
 ^-  bowl
-=+  pax=/cx/[(scot %da est)]/[(scot %p who)]/arvo/[nam]/[(hoof stub)]/
+=+  pax=/cx/[(scot %p who)]/arvo/[(scot %da est)]/[nam]/[(hoof stub)]
 =+  txt=.^(pax)
 :-  :~  [%veer gup lab pax (,@t .^(pax))]
     ==
