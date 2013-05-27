@@ -356,7 +356,7 @@ Even stupider is line 19:
 
 ##Line 19:##
 
-    *[a 1 b]          b
+	19 ::    *[a 1 b]          b
 
 `1` is the constant operator.  It produces its argument without
 reference to the subject.  So
@@ -370,7 +370,7 @@ yields
 
 ##Line 20:##
 
-    *[a 2 b c]        *[*[a b] *[a c]]
+    20 ::    *[a 2 b c]        *[*[a b] *[a c]]
 
 Line 27 brings us the essential magic of recursion.
 `2` is the Nock operator.  If you can compute a subject and a
@@ -383,6 +383,22 @@ Let's convert the previous example into a stupid use of `2`:
 	~tasfyn-partyv> .*(77 [2 [1 42] [1 1 153 218]])
 
 with a constant subject and a constant formula, gives the same
+
+	[153 218]
+	
+Like so:
+
+	*[77 [2 [1 42] [1 1 153 218]]
+	
+	20 ::    *[a 2 b c]        *[*[a b] *[a c]]
+	
+	*[*[77 [1 42]] *[77 [1 1 153 218]]]
+	
+	19 ::    *[a 1 b]          b
+	
+	*[42 *[77 [1 1 153 218]]]
+
+	*[42 1 153 218]
 
 	[153 218]
 
