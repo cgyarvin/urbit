@@ -32,9 +32,9 @@ _sync_peek_arch(u2_reck* rec_u, u2_noun pod, u2_noun bok)
   return u2_reck_prick
     (rec_u, u2k(rec_u->our),
             u2nc(c3_s2('c','z'),
-                 u2nq(u2k(rec_u->wen),
-                      pod, 
+                 u2nq(pod, 
                       bok,
+                      u2k(rec_u->wen),
                       u2_nul)));
 }
 
@@ -46,10 +46,10 @@ _sync_peek_home(u2_reck* rec_u, u2_noun pod)
   u2_noun pec = u2_reck_prick
     (rec_u, u2k(rec_u->our),
             u2nc('a',
-                 u2nq(u2k(rec_u->wen),
-                          pod,
-                          c3__life,
-                          u2_nul)));
+                 u2nq(pod,
+                      c3__life,
+                      u2k(rec_u->wen),
+                      u2_nul)));
 
   if ( u2_no == u2du(pec) ) {
     c3_assert(!"peek_home is hosed\n");

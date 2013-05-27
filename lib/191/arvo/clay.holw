@@ -352,7 +352,7 @@
             %+  turn  (flop byn) 
             |=([a=duct b=riot] [[~ who] a [%writ b]])
           %+  turn  (flop say) 
-          |=([a=duct b=seat c=*] [[~ who] [/a/ a] [%want b %re c]])
+          |=([a=duct b=seat c=*] [[~ who] [/a a] [%want b %re c]])
       ruf(fat (~(put by fat.ruf) who yar))
     --
   --
@@ -371,7 +371,7 @@
     ?+    -.fav  ~&  [%clay-none fav]
                  !!
         %crud
-      [[[whu [/d/ hen] %flog fav] ~] ..^$]
+      [[[whu [/d hen] %flog fav] ~] ..^$]
     ::
         %edit
       =.  whu  
@@ -387,7 +387,7 @@
           |=  uke=ukaz  ^-  move
           =+  qua=~(ram re (dish:ut [~ %path] p.uke))
           =+  qui=?-(-.q.uke %del '-', %set ?:(=(0 q.q.uke) '+' ':'))
-          [whu [/d/ hen] %flog %note qui %leaf "{one}/{two}{qua}"]
+          [whu [/d hen] %flog %note qui %leaf "{one}/{two}{qua}"]
       =^  mos  ruf  zonk:zoot:(exec:(di:wake:(un u.whu now ruf) q.fav) r.fav)
       [(weld yaq mos) ..^$]
     ::
@@ -461,18 +461,15 @@
     ..$(ruf *raft)
   ::
   ++  scry                                              ::  inspect
-    |=  [our=seat ron=@tas his=seat lot=coin tyl=path]
+    |=  [our=seat ron=@tas his=seat syd=disc lot=coin tyl=path]
     ^-  (unit)
-    ?~  tyl  ~
-    =+  poj=(slay i.tyl)
-    ?.  ?=([~ %% %tas *] poj)  ~
     =+  luk=?.(?=(%% -.lot) ~ ((soft case) p.lot))
     =+  run=((soft care) ron)
     ?~  luk  ~
     ?~  run  ~
     ?.  =(our his)
-      (vera:(fa:(un our now ruf) his) q.p.u.poj u.run u.luk t.tyl)
-    =+  vyr=(aver:(di:(un our now ruf) q.p.u.poj) u.run u.luk t.tyl)
+      (vera:(fa:(un our now ruf) his) syd u.run u.luk tyl)
+    =+  vyr=(aver:(di:(un our now ruf) syd) u.run u.luk tyl)
     ?~(vyr ~ u.vyr)
   ::
   ++  stay  `vase`!>(ruf)

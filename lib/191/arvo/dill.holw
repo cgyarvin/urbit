@@ -22,7 +22,7 @@
           %flog                                         ::  log to terminal
         :_  ..^$
         %-  turn
-        :_  |=(a=duct [whu [/d/ a] p.fav])
+        :_  |=(a=duct [whu [/d a] p.fav])
         ^-  (list duct)
         =+  mel=(adit hen)
         =+  gum=`(list ,[p=duct q=yard])`(~(tap by wib) ~)
@@ -40,7 +40,7 @@
       ::
           %init                                         ::  create terminal
         :-  :~  [whu hen [%init p.fav]]
-                [[~ p.fav] [/b/ hen] [%noop ~]]
+                [[~ p.fav] [/b hen] [%noop ~]]
             ==
         ..^$(wib (~(put by wib) hen [& [p.fav ~] *blur ~]))
       ==
@@ -49,7 +49,7 @@
       :_  ..^$
       :_  ~
       :+  [~ i.q.yar]
-        [/d/ hen]
+        [/d hen]
       fav
     =|  mos=(list move)
     =+  wip=|
@@ -260,7 +260,7 @@
             %=    +.$
                 q.r.yar  ~
                 mos
-              :*  [~ [/d/ hen] [%helo ~]]
+              :*  [~ [/d hen] [%helo ~]]
                   [~ hen [%bbye ~]]
                   [~ hen [%blit [%mor ~] ~]]
                   mos
@@ -276,9 +276,9 @@
             [p.hyt.u.q.r.yar [jab +.q.hyt.u.q.r.yar]]
           ::
               mos
-            :*  [~ [/d/ hen] [%helo ~]]
+            :*  [~ [/d hen] [%helo ~]]
                 [~ hen [%bbye ~]]
-                [whu [/b/ /d/ hen] [%line jab]]
+                [whu [/b /d hen] [%line jab]]
                 [~ hen [%blit [[%mor ~] ~]]]
                 mos
             ==
@@ -315,8 +315,8 @@
         ?>  ?=(^ whu)
         %=    +.$ 
             mos
-          :~  [whu [/d/ hen] [%warn "welcome, {~(rend co [~ %p u.whu])}!"]]
-              [whu [/d/ hen] [%helo ~]]
+          :~  [whu [/d hen] [%warn "welcome, {~(rend co [~ %p u.whu])}!"]]
+              [whu [/d hen] [%helo ~]]
           ==
         ==
       ::
@@ -326,9 +326,9 @@
         ?>  ?=(^ whu)
         %-  edit
         =|  bed=bead
-        =+  pom=(sky [%b (scot da/now) (scot p/u.whu) %p ~])
+        =+  pom=(sky [%b (scot p/u.whu) %p (scot da/now) ~])
         =+  poy=?~(pom `prod`[%text "# "] (prod u.pom))
-        =+  hux=//
+        =+  hux=/
         =+  ^=  hyt  ^-  hist
             =+  hyt=(~(get by s.yar) [u.whu hux])
             ?~(hyt *hist u.hyt)
@@ -388,7 +388,7 @@
     ..$(wib ~)
   ::
   ++  scry
-    |=  [our=seat ren=@tas his=seat lot=coin tyl=path]
+    |=  [our=seat ren=@tas his=seat syd=disc lot=coin tyl=path]
     ^-  (unit)
     ~
   ::

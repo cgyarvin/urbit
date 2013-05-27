@@ -755,5 +755,5 @@
     ~
   =+  [dis=(end 3 1 q.p.u.hyr) rem=(rsh 3 1 q.p.u.hyr)]
   ?.  ?&(?=(%c dis) ?=(?(%w %x %y %z) rem))  ~
-  [~ rem (mark p.u.ved) q.p.u.fal q.p.u.bok lyt]
+  [~ rem (case p.u.ved) q.p.u.fal q.p.u.bok lyt]
 --
