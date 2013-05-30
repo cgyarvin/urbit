@@ -3,10 +3,9 @@
 |=  *
 |=  ape=(list path)
 :_  ~
-%-  turn
-:_  |=(a=tape [%text a])
-%-  flop
-=|  tez=(list tape)
+:_  ~
+:-  %te
+=|  tez=(list @t)
 |-  ^+  tez
 ?~  ape  tez
 =+  fix=((hard ,@) .^(%cx i.ape))
@@ -18,4 +17,4 @@
     |-  ^-  @ud
     =+  gam=(cut 3 [meg 1] fix)
     ?:(|(=(10 gam) =(0 gam)) meg $(meg +(meg)))
-$(fix (rsh 3 +(meg) fix), tez [(trip (end 3 meg fix)) tez])
+$(fix (rsh 3 +(meg) fix), tez [(end 3 meg fix) tez])

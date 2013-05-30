@@ -6,7 +6,7 @@
 |%  ++  prompt
       |=  [messages=(list tape)]
       ^-  bowl
-      :-  (turn messages |=(a=tape [%talk %leaf a]))
+      :-  (turn messages |=(a=tape [%la %leaf a]))
       :-  ~
       :-  :~  [~ [%up %text "tennis, {neighbor}? "]]
           ==
@@ -17,8 +17,8 @@
       ^-  bowl
       ?>  ?=(%up -.nut)
       ?-  p.nut
-        %yes  [[[%talk %leaf "sorry, no tennis today, {neighbor}."] ~] ~]
-        %no   [[[%talk %leaf "well, fsck you too, {neighbor}."] ~] ~]
+        %yes  [[[%la %leaf "sorry, no tennis today, {neighbor}."] ~] ~]
+        %no   [[[%la %leaf "well, fsck you too, {neighbor}."] ~] ~]
         *     (prompt "{neighbor}, please?  you say, '{(rip 3 p.nut)}?'" ~)
       ==
 --

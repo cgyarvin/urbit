@@ -6920,6 +6920,11 @@
               ==                                        ::
           ==                                            ::
 ++  bear  ,[p=(map path goal) q=boar]                   ::  process with slips
+++  beef                                                ::  raw product
+          $:  p=(list gift)                             ::  actions
+              q=(list slip)                             ::  requests
+              r=(unit boar)                             ::  state
+          ==                                            ::
 ++  bell  path                                          ::  label
 ++  bird                                                ::  packet in travel
           $:  gom=soap                                  ::  message identity
@@ -6970,7 +6975,7 @@
               [%ouzo p=lane q=rock]                     ::  transmit packet
               [%wine p=sock q=tape]                     ::  notify user
           ==                                            ::
-++  bowl  ,[p=(list card) q=(unit boat)]                ::  standard prowire
+++  bowl  ,[p=(list gift) q=(unit boat)]                ::  app product
 ++  bran  ,[p=life q=(unit life) r=seat s=@da]          ::  our parent us now
 ++  brow  ,[p=@da q=@tas]                               ::  browser version
 ++  buck  ,[p=mace q=will]                              ::  all security data
@@ -7111,14 +7116,16 @@
               rop=(map ,[p=@ud q=sock] riff)            ::  remote requests
           ==                                            ::
 ++  gift                                                ::  one-way effect
-          $%  [%de p=tank]                              ::  debug output
+          $%  [%de p=@ud q=tank]                        ::  debug/level
               [%em p=vase]                              ::  emit product
               [%en p=(list vase)]                       ::  multiple emit
               [%ha p=tank]                              ::  single error
               [%ho p=(list tank)]                       ::  multiple error
               [%la p=tank]                              ::  single statement
-              [%lo p=tank]                              ::  multiple statement
-              [%ok p=(list ukaz)]                       ::  save changes
+              [%lo p=(list tank)]                       ::  multiple statement
+              [%ok p=seat q=disc r=ukay]                ::  save changes
+              [%te p=(list ,@t)]                        ::  dump lines
+              [%th p=love]                              ::  http response
           ==
 ++  gcos                                                ::  id description
           $%  [%czar p=@t]                              ::  8-bit seat
@@ -7136,6 +7143,11 @@
               [%yo p=seat q=@ta r=*]                    ::  network message
           ==                                            ::
 ++  gram  ,@uw                                          ::  physical datagram
+++  gyre                                                ::
+          $:  pie=(list tick)                           ::  pipeline
+              pak=(list gyro)                           ::  prompt stack
+          ==                                            ::
+++  gyro  ,[p=tick q=path r=prod]                       ::  live prompt
 ++  hand  ,@uvH                                         ::  hash of code
 ++  hate  ,[p=purl q=cred r=moth]                       ::  cooked request
 ++  hist  ,[p=@ud q=(list ,@t)]                         ::  depth texts
@@ -7242,7 +7254,7 @@
 ++  plea  ,[p=@ud q=[p=? q=@t]]                         ::  live prompt
 ++  pork  ,[p=(unit ,@ta) q=path]                       ::  fully parsed url
 ++  prod  ,[p=prom q=tape]                              ::  format, prompt
-++  prom  ?(%text %pass)                                ::  format type
+++  prom  ?(%text %pass %none)                          ::  format type
 ++  purl  ,[p=hart q=pork r=quay]                       ::  parsed url
 ++  putt                                                ::  outgoing message
           $:  ski=snow                                  ::  sequence acked/sent

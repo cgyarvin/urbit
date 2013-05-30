@@ -19,15 +19,15 @@
 !>
   |%
   ++  give
-    |=  [now=@da fig=gift]
-    ^-  [p=(list card) q=(unit ,[p=(list slip) q=_+>.$])]
+    |=  [now=@da fig=weev]
+    ^-  [p=(list gift) q=(unit ,[p=(list slip) q=_+>.$])]
     ?+    -.fig
-      [~[text/"give other {<fig>}"] ~]
+      [~[la/leaf/"give other {<fig>}"] ~]
     ::
         %form
       =+  msg=(~(get by q.fig) %msg)
       ?~  msg
-        [~[text/"give odd form {<q.fig>}"] ~]
+        [~[la/leaf/"give odd form {<q.fig>}"] ~]
       [~ [~ ~ +>.$(messages [u.msg messages])]]
     ==
   ::

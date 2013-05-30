@@ -71,6 +71,7 @@
           :-  %lin
           %+  weld  pot.bed
           ?-  buy.bed
+            %none  but.bed
             %text  but.bed
             %pass  `(list ,@)`(runt [(lent but.bed) '*'] ~)
           ==

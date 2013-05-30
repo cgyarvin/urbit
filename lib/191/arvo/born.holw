@@ -12,11 +12,11 @@
     $:  who=seat                                        ::  identity
         hit=[p=@ud q=(list ,@t)]                        ::  command history
         sur=[p=@ud q=(qeu vase)]                        ::  result history
+        fog=[p=@ud q=(list ,@ud) r=(map ,@ud gyre)]     ::  console activities
         hox=@ta                                         ::  identity text
         cwc=path                                        ::  working cord
         cwd=@tas                                        ::  working disc
         way=(map ,@tas vase)                            ::  variables
-        pak=(list ,[p=@ud q=path])                      ::  prompt stack
         lif=dock                                        ::  process table
     ==                                                  ::
   ::                                                    ::
@@ -49,10 +49,12 @@
     |=  who=seat
     %+  barn  who
     %*  .  *brad
-      who  who
-      hox  (scot %p who)
-      cwc  /
-      cwd  %try
+      who    who
+      p.fog  1
+      p.lif  1
+      q.fog  [0 ~]
+      hox    (scot %p who)
+      cwd    %try
     ==
   ::
   ++  barn
@@ -311,20 +313,85 @@
         ==
       --
     ::
-    ++  ride                                            ::  process context
+    ++  fi
+      |=  [gyp=@ud hen=duct]
+      =+  ^=  gyr  ^-  gyre
+          ?:  =(0 gyp)  *gyre
+          =+  gyr=(~(get by r.fog) gyp)
+          ?~(gyr *gyre u.gyr)
+      =|  duz=(list move)
+      |%
+      ++  arse
+        ^+  [*(list move) ..^$]
+        :-  (flop duz)
+        =+  yep=(skim pie.gyr |=(a=@ud (~(has by q.lif) a)))
+        ?:  =(0 gyp)
+          ?~  yep  ..^$
+          %=    ..^$
+              p.fog  +(p.fog)
+              q.fog  [p.fog q.fog]
+              r.fog  (~(put by r.fog) p.fog [yep pak.gyr])
+          ==
+        ?~  yep  ..^$(r.fog (~(del by r.fog) gyp))
+        ..^$(r.fog (~(put by r.fog) gyp [yep pak.gyr]))
+      ::
+      ++  gull
+        |=  fet=tape
+        ^+  +>
+        ?:(=(0 gyp) (maul fet) (mayo fet))
+      ::
+      ++  maul
+        |=  fet=tape
+        ^+  +>
+        =^  zud  ..^^$
+          =<  nave
+          ^+  *ra
+          =+  pid=p.lif
+          =.  p.lif  +(p.lif) 
+          (mete:(ra pid hen ~ ~) fet)
+        +>.$(duz (weld (flop zud) duz))
+      ::
+      ++  mayo
+        |=  fet=tape
+        ^+  +>
+        ?>  ?=(^ pak.gyr)
+        =^  zud  ..^^$
+          =<  nave
+          ^+  *ra
+          =+  byr=(need (~(get by q.lif) p.i.pak.gyr))
+          =+  fuc=(rap 3 fet)
+          %.  [q.i.pak.gyr [%up fuc]]
+          =<  jerk
+          %.  [q.i.pak.gyr [%line fuc]]
+          =<  coax
+          (ra p.i.pak.gyr hen p.byr [~ q.byr])
+        %=  +>.$
+          pak.gyr  t.pak.gyr
+          duz      (weld (flop zud) duz)
+        ==
+      ::
+      ++  perd
+        ^-  prod
+        ?:  =(0 gyp)
+          :-  %text
+          ;:  weld
+            (trip (rap 3 [hox '/' cwd ~])) 
+            "="
+            ?~(cwc "" ~(ram re (dish:ut [~ %path] cwc)))
+            "> "
+          ==
+        ?~  pak.gyr  [%none "[waiting for input]"]
+        r.i.pak.gyr
+      --
+    ::
+    ++  ra                                              ::  process context
       |=  $:  pid=tick                                  ::  process identity
               hen=duct                                  ::  current duct
               loz=(map path goal)                       ::  request state
               bor=(unit boar)                           ::  execution state
           ==                                            ::
-      =+  duz=*(list move)                              ::  pending operations
+      =|  duz=(list move)                               ::  pending operations
       |%                                                ::
-      ++  beef                                          ::  raw prowire
-                $:  p=(list card)                       ::  actions
-                    q=(list slip)                       ::  requests
-                    r=(unit boar)                       ::  state
-                ==                                      ::
-      ::
       ++  bust                                          ::  slice coal
         |=  [axe=axis vux=coal]
         ^-  coal
@@ -360,7 +427,7 @@
         ?-  -.ton
           %0  (fut p.ton)
           %1  (fob ((list path) p.ton))
-          %2  [[[%crud p.ton] ~] ~ ~]
+          %2  [[[%ho p.ton] ~] ~ ~]
         ==
       ::
       ++  emit                                          ::  return a card
@@ -394,7 +461,7 @@
       ++  fret                                          ::  process coal
         |=  poc=coal
         ^-  beef
-        :-  ((hard (list card)) +:(bust 2 poc))
+        :-  ((hard (list gift)) +:(bust 2 poc))
         =+  doy=(bust 3 poc)
         ?~  +.doy  [~ ~]
         :-  ((hard (list slip)) +>-.doy)
@@ -410,11 +477,7 @@
       ::
       ++  geld                                          ::  abandon a slip
         |=  sip=slip
-        ^+  +>
-        ?+  -.q.sip  
-               +>
-          %up  +>(pak (skip pak |=([a=@ud b=path] =(b p.sip))))
-        ==
+        +>
       ::
       ++  germ                                          ::  add a slip
         |=  sip=slip
@@ -439,7 +502,6 @@
           ==
         ::
             %er  (jibe p.q.sip ~)
-            %up  +>(pak [[pid p.sip] pak])
             %yo  
           (enow /a [(scot %ud pid) p.sip] [%want p.q.sip q.q.sip r.q.sip])
         ==
@@ -472,13 +534,30 @@
           %up  !!   ::  this should actually work
         ==
       ::
+      ++  haft                                          ::  gift to move(s)
+        |=  gud=gift
+        ^-  (list move)
+        ?-    -.gud
+          %de  [[[~ who] hen [%note '#' q.gud]] ~]
+          %em  [[[~ who] hen [%talk (sell p.gud)]] ~]
+          %en  |-  ^-  (list move)
+               ?~(p.gud ~ (weld ^$(gud [%em i.p.gud]) $(p.gud t.p.gud)))
+          %ha  [[[~ who] hen [%crud [p.gud ~]]] ~]
+          %ho  [[[~ who] hen [%crud p.gud]] ~]
+          %la  [[[~ who] hen [%talk p.gud]] ~]
+          %lo  (turn p.gud |=(a=tank [[~ who] hen [%talk a]]))
+          %ok  [[[~ who] [/c hen] [%edit p.gud q.gud r.gud]] ~]
+          %te  [[[~ who] hen [%tell p.gud]] ~]
+          %th  [[[~ who] hen [%that p.gud]] ~]
+        == 
+      ::
       ++  haul                                          ::  apply a result
         |=  bof=beef
         ^+  +>
-        =.    duz
-            %+  weld 
-              (turn p.bof |=(a=card [[~ who] hen a]))
-            duz
+        =.  duz
+          |-  ^+  duz
+          ?~  p.bof  duz
+          (weld (haft i.p.bof) $(p.bof t.p.bof))
         ?~  r.bof
           gaff
         =.  bor  r.bof
@@ -557,7 +636,7 @@
       ++  loft                                          ::  execute command
         |=  kal=lark
         ^+  +>
-        =+  hak=|=(a=* [[[%talk ((hard tank) a)] ~] ~ ~])
+        =+  hak=|=(a=* [[[%la ((hard tank) a)] ~] ~ ~])
         ?-    -.kal
             %cc  (hype p.kal)
             %cd  +>.$(cwd p.kal)
@@ -614,29 +693,12 @@
             %kill  (kill p.fav)
             %noop  [~ ..^$]
             %nuke  nuke
-            %line  (gill (trip p.fav))
+            %line  =+  top=?>(?=(^ q.fog) i.q.fog) 
+                   arse:(gull:(fi top hen) (trip p.fav))
             %thee  (heat p.fav)
             %went  (glom p.fav q.fav r.fav)
            ==
       |%
-      ++  gill                                          ::  dispatch line
-        |=  fet=tape
-        ^-  [p=(list move) q=_..^^$]
-        =<  nave
-        ^+  *ride
-        ?~  pak
-          =+  pid=p.lif
-          =.  p.lif  +(p.lif) 
-          (mete:(ride pid hen ~ ~) fet)
-        =+  [pid=p.i.pak pux=q.i.pak]
-        =>  .(pak t.pak)
-        =+  byr=(need (~(get by q.lif) pid))
-        %.  [pux [%up (rap 3 fet)]]
-        =<  jerk
-        %.  [pux fav]
-        =<  coax
-        (ride pid hen p.byr [~ q.byr])
-      ::
       ++  gain                                          ::  namespace response
         |=  fib=(unit) 
         ^-  [p=(list move) q=_..^^$]
@@ -647,12 +709,12 @@
         =+  bur=(~(get by q.lif) q.p.u.ped)
         ?~  bur  [~ ..^^$]
         =<  nave
-        ^+  *ride
+        ^+  *ra
         %.  [t.pex fib]
         =<  jibe
         %.  [t.pex fav]
         =<  coax
-        (ride q.p.u.ped hen p.u.bur [~ q.u.bur])
+        (ra q.p.u.ped hen p.u.bur [~ q.u.bur])
       ::
       ++  glom                                          ::  dispatch response
         |=  [her=seat cap=cape sop=soap]
@@ -662,12 +724,12 @@
         ?>  ?=([~ %% %ud @] ped)
         =+  byr=(need (~(get by q.lif) q.p.u.ped))
         =<  nave
-        ^+  *ride
+        ^+  *ra
         %.  [t.pex [%yo her cap sop]]
         =<  jerk
         %.  [t.pex fav]
         =<  coax
-        (ride q.p.u.ped hen p.byr [~ q.byr])
+        (ra q.p.u.ped hen p.byr [~ q.byr])
       :: 
       ++  heat                                          ::  dispatch http req
         |=  het=hate
@@ -685,7 +747,7 @@
         =<  nave
         %.  [q.u.sud [%ht r.u.sud q.het r.het]]
         =<  jerk
-        (ride p.u.sud hen p.byr [~ q.byr])
+        (ra p.u.sud hen p.byr [~ q.byr])
       ::
       ++  kill                                          ::  kill a process
         |=  pid=tick
@@ -693,7 +755,7 @@
         =+  byr=(need (~(get by q.lif) pid))
         =<  nave
         =<  gaff
-        (ride pid hen p.byr [~ q.byr])
+        (ra pid hen p.byr [~ q.byr])
       ::
       ++  nuke                                          ::  kill all processes
         =+  fen=(~(tap by q.lif) ~)
@@ -774,19 +836,9 @@
     ::
     ++  prot                                            ::  current prompt
       ^-  prod
-      ?~  pak 
-        :-  %text
-        ;:  weld
-          (trip (rap 3 [hox '/' cwd ~])) 
-          "="
-          ?~(cwc "" ~(ram re (dish:ut [~ %path] cwc)))
-          "> "
-        ==
-      =+  byr=(need (~(get by q.lif) p.i.pak))
-      =+  gol=(need (~(get by p.byr) q.i.pak))
-      ?>(?=(%up -.gol) p.gol)
+      perd:(fi ?>(?=(^ q.fog) i.q.fog) ~)
     ::
-    ++  stay                                            ::  add to results
+    ++  suet                                            ::  add to results
       |=  vax=vase
       %_    ..^$
           sur

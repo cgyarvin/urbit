@@ -14,6 +14,7 @@
 :-  ?:  =(%good q.nut)
       ~ 
     :_  ~
-    :-  %text
+    :-  %ha
+    :-  %leaf
     "hi: {<p.nut>}.{<p.p.r.nut>} blocked {<q.r.nut>}/{<q.p.r.nut>}/{<r.r.nut>}"
 ~
