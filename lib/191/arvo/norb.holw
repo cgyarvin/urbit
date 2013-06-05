@@ -44,7 +44,7 @@
   $:  who=seat                                          ::  identity
       fog=(list ,@ud)                                   ::  virtual consoles
       hox=@ta                                           ::  identity text
-      cwc=path                                          ::  working camp
+      cws=path                                          ::  working camp
       cwd=@tas                                          ::  working desk
       way=(map ,@tas vase)                              ::  variables
       hit=[p=@ud q=(list ,@t)]                          ::  command history
@@ -82,24 +82,36 @@
   |=  brat                                              ::  core state
   |=  [now=@da eny=@ sky=_|+(* *(unit))] 
   =+  wen=(scot %da now)
-  =+  wer=`path`[hox cwd wen (weld cwc [hub ~])]
+  =+  wer=`path`[hox cwd wen (weld cws [hub ~])]
   =+  rew=(flop wer)
   =+  vez=(vang | wer)
   |%
-  ++  fest                                              ::  find a task
-    |=  [gyp=@ud hen=duct]
+  ++  fest                                              ::    fest:be
+    |=  [gyp=@ud hen=duct]                              ::  find a task
     (fi gyp hen (need (~(get by q.god) gyp)))
   ::
-  ++  fist                                              ::  new task
-    |=  hen=duct
+  ++  fist                                              ::    fist:be
+    |=  hen=duct                                        ::  new task
     =+  [gyp=p.god gyr=*gyre]
     =:  p.god  +(p.god)
         q.god  (~(put by q.god) p.god *gyre)
       ==
     (fi gyp hen gyr)
   ::
-  ++  leap                                              ::  handle event
-    |=  [tea=wire hen=duct fav=card]
+  ++  lead                                              ::    lead:be
+    |=  [tea=wire hen=duct]                             ::  route note
+    ^-  [p=wire q=_fi]
+    ?>  ?=([@ @ *] tea)
+    =+  [ped=(slay i.tea) wad=(slay i.t.tea)]
+    ?>  &(?=([~ %% %ud @] ped) ?=([~ %% %ud @] wad))
+    [t.t.tea (past:(fest q.p.u.ped hen) q.p.u.wad)]
+  ::
+  ++  lean                                              ::    lean:be
+    |=  [tea=wire hen=duct nob=note]                    ::  deliver note
+    =+(a=(lead tea hen) abet:(glob:q.a p.a nob))
+  ::
+  ++  leap                                              ::    leap:be
+    |=  [tea=wire hen=duct fav=card]                    ::  handle event
     ^-  [p=(list move) q=brat]
     ?+  -.fav  
              [[[[~ who] hen fav] ~] +<.^^$]
@@ -107,14 +119,18 @@
              =<  abet
              ?:  =(0 gyp)
                (como:(fist hen) p.fav)
-             (gull:(fest gyp hen) p.fav)
+             (gill:(fest gyp hen) p.fav)
       %noop  [~ +<.^^$]
-      %went  abet:abet:abet:(pong:(slur tea hen) [%yo +.fav])
-      %writ  abet:abet:abet:(pong:(slur tea hen) [%eg +.fav])
+      %went  abet:lash:(lean tea hen [%yo +.fav]) 
+      %writ  abet:lash:(loam tea hen +.fav)
     ==
   ::
-  ++  lube                                            ::  define subject
-    ^-  vase
+  ++  loam                                              ::    loam:be
+    |=  [tea=wire hen=duct rot=riot]
+    =+(a=(lead tea hen) abet:(gall:q.a p.a rot))
+  ::
+  ++  lube                                              ::    lube:be
+    ^-  vase                                            ::  build subject
     ;:  slop
       ;:  slop
         %+  slop
@@ -145,111 +161,33 @@
       ==
     ==
   ::
-  ++  prot                                              ::  current prompt
-    ^-  prod
-    !!
+  ++  prot                                              ::    prot:be
+    ^-  prod                                            ::  get prompt
+    ?>  ?=(^ q.fog)
+    ?.  =(0 i.q.fog)
+      perd:(fest i.q.fog)
+    text/:(weld (trip (rap 3 [hox '/' cwd ~])) "=" ?~(cws "" (spud cws)) "> ")
   ::
-  ++  slur                                              ::  process response
-    |=  [tea=wire hen=duct]
-    ?>  ?=([@ @ *] tea)
-    =+  [ped=(slay i.tea) wad=(slay i.t.tea)]
-    ?>  &(?=([~ %% %ud @] ped) ?=([~ %% %ud @] wad))
-    (ox:(past:(fest q.p.u.ped hen) q.p.u.wad) t.t.tea)
-  ::
-  ++  do                                                ::  user level
-    |%
-    ++  dive                                            ::  opts to gene
-      |=  cux=cone
-      ^-  gene
-      :-  :+  %cncl
-            [%cnsg [%gas ~] [%cnbc %in] yom.gen]
-          [%clsg (turn p.cux |=(a=@ [%dtpt %tas a]))]
-      :+  %cncl
-        [%cnsg [%gas ~] [%cnbc %by] zim.gen]
-      :-  %clsg
-      %+  turn  q.cux
-      |=([p=@tas q=crow] [[%dtpt %tas p] (doul q)])
-    ::
-    ++  doul                                            ::  crow to gene
-      |=  woc=crow
-      ^-  gene
-      ?-    -.woc
-          %c  [%cnhp $(woc p.woc) $(woc [%p q.woc]) ~]
-          %f
-        %+  scan  (trip ((hard ,@) .^(%cx p.woc)))
-        (full (ifix [gay gay] tall:vez(wer p.woc)))
-      ::
-          %g
-        |-  ^-  gene
-        ?~  p.woc
-          q.woc
-        [%tsgr ^$(woc [%f i.p.woc]) $(p.woc t.p.woc)]
-      ::
-          %l
-        |-  ^-  gene
-        ?~  p.woc
-          [%bcts %null]
-        [^$(woc i.p.woc) $(p.woc t.p.woc)]
-      ::
-          %p
-        |-  ^-  gene
-        ?~  p.woc  !!
-        ?~  t.p.woc
-          ^$(woc i.p.woc)
-        [^$(woc i.p.woc) $(p.woc t.p.woc)]
-      ==
-    ::
-    ++  echo                                            ::  echo argument
-      |=  [yun=vase woc=crow]
-      ^-  tank
-      =+  vax=(slap yun (doul woc))
-      (dish:ut ~(dole ut p.vax) q.vax) 
-    ::
-    ++  ecto                                            ::  type only
-      |=  [yun=vase woc=crow]
-      ^-  tank
-      (dial:ut ~(dole ut (~(play ut p.yun) (doul woc))))
-    ::
-    ++  fane                                            ::  deliver note 
-      |=  [pux=path nog=note tas=vase]
-      ^-  vase
-      %+  slam  tas
-      ;:  slop
-        [[%atom %da] now] 
-        [pah.typ pux] 
-        [noq.typ nog]
-      ==
-    ::
-    ++  fapp                                            ::  launch app
-      |=  [yun=vase pax=path cux=cone arg=crow]
-      ^-  vase
-      %+  slam
-        %+  slam
-          %+  slam
-            (slap nub (doul [%f pax]))
-          ;:  slop 
-            [[%atom %p] who] 
-            [[%atom %da] now] 
-            [[%atom %%] (shax :(mix eny now (shax p.god)))]
-            [pah.typ pax]
-          ==
-        (slap yun (dive cux))
-      (slap yun (doul arg))
-    --
-  ::
-  ++  fi                                                ::  per task
-    |=  [gyp=@ud hen=duct gyr=gyre]
+  ++  fi                                                ::    fi:be
+    |=  [gyp=@ud hen=duct gyr=gyre]                     ::  process task
     =|  duv=(list ,[p=duct q=card])
     |%
-    ++  abet
-      ^-  [(list move) brat]
+    ++  abet                                            ::    abet:fi:be
+      ^-  [(list move) brat]                            ::  resolve
       :-  (turn (flop duv) |=([p=duct q=card] [[~ who] (weld p hen) q]))
       ?~  q.wip.gyr
-        +<.^^$(q.god (~(del by q.god) gyp))
-      +<.^^$(q.god (~(put by q.god) gyp gyr))
+        %=  +<.^^$
+          fog    (skip fog |=(a=@ud =(a gyp)))
+          q.god  (~(del by q.god) gyp)
+        ==
+      %=  +<.^^$
+        fog    ?:((lien fog |=(a=@ud =(a gyp))) fog [gyp fog])
+        q.god  (~(put by q.god) gyp gyr)
+      ==
     ::
-    ++  como                                            ::  command
-      |=  lin=@t
+    ++  bitt  |=(lap=path [(scot %ud gyp) lap])         ::    bitt:fi:be
+    ++  como                                            ::    como:fi:be
+      |=  lin=@t                                        ::  command
       ^+  +>
       =+  ryg=~(top to paq.gyr)
       ?~  ryg  
@@ -257,8 +195,8 @@
         +>.$
       abet:abet:(pong:(ox:(past p.u.ryg) q.u.ryg) [%up lin])
     ::
-    ++  gull                                            ::  line input
-      |=  lin=@t
+    ++  gill                                            ::    gill:fi:be
+      |=  lin=@t                                        ::  input line
       ^+  +>
       =+  zif=((full (ifix [gay gay] kral:lo)) [1 1] (trip lin))
       ?~  q.zif 
@@ -266,30 +204,46 @@
         (warn "<syntax error at [{p.duf} {q.duf}]>")
       ?>  ?=([%go *] p.u.q.zif)
       (lamp +.p.u.q.zif ~)
+    ::                                                  ::    hoop:fi:be
+    ++  hoop                                            ::  delete prompt
+      |=  [pid=@ud lap=wire]                            ::  XX ugly
+      %-  ~(gas to *(qeu gyro))  
+      %+  skip
+        (~(tap to *(list gyro)) paq.gyr)
+      |=(a=gyro &(=(pid p.a) =(lap q.a)))
     ::
-    ++  lash                                            ::  kick a task
-      =+  pew=(turn (~(tap by q.wip.gyr) ~) |=([p=@ud *] p))
+    ++  hoot                                            ::    hoot:fi:be
+      |=  [pid=@ud lap=wire pod=prod]                   ::  install prompt
+      (~(put to paq.gyr) [pid lap pod])
+    ::
+    ++  lash                                            ::    lash:fi:be
+      ^.  .                                             ::  execute task
+      =+  pew=(sort (turn (~(tap by q.wip.gyr) ~) |=([p=@ud *] p)) lth)
       |-  ^+  +>.$
       ?~  pew  +>.$
-      $(pew t.pew, +>.$ abet:grit:(past i.pew))
+      $(pew t.pew, +>.$ abet:grip:(past i.pew))
     ::
-    ++  lamp                                            ::  start a task
-      |=  kaw=(list lath)
+    ++  lamp                                            ::    lamp:fi:be 
+      |=  kaw=(list lath)                               ::  start pipeline
       ^+  +>
       ?~  kaw  +>
       $(kaw t.kaw, +>.$ (pant i.kaw ?:(=(~ t.kaw) ~ [~ +(p.wip.gyr)])))
     ::
-    ++  pant                                            ::  start a process
-      |=  [lat=lath nex=(unit ,@ud)]
+    ++  pant                                            ::    pant:fi:be 
+      |=  [lat=lath nex=(unit ,@ud)]                    ::  start process
       %=  +>
         p.wip.gyr  +(p.wip.gyr)
         q.wip.gyr  (~(put by q.wip.gyr) p.wip.gyr [nex ~ [~ ~ ~ %| lat]])
       ==
     ::
-    ++  past                                            ::  find a process
-      |=  pid=@ud
+    ++  past                                            ::    past:fi:be
+      |=  pid=@ud                                       ::  select process
       =+  bek=(need (~(get by q.wip.gyr) pid))
       ~(. ra pid p.bek q.bek [~ r.bek])
+    ::
+    ++  perd
+      ^-  prod
+      ?~(paq.gyr [%none "[no prompt]"] r.i.paq.gyr)
     ::
     ++  warn                                            ::  send warning
       |=  txt=tape
@@ -300,18 +254,17 @@
       |_  $:  pid=@ud 
               nex=(unit ,@ud) 
               loz=(map wire goal) 
-              orb=(unit boor)
+              orb=boor
           ==
       ::
       ++  abet                                          ::  resolve
         ^+  ..ra
-        %=    ..ra
-            q.wip.gyr
-          ?:  |(?=(~ orb) &(?=(~ loz) ?=(& -.s.u.orb)))
-            (~(del by q.wip.gyr) pid)
-          (~(put by q.wip.gyr) pid nex loz u.orb)
-        ==
+        ?:  off=&(?=(& -.s.orb) |(?=(~ p.s.orb) ?=(~ loz)))
+          =.  ..ra  (gird ~)
+          (~(del by q.wip.gyr) pid)
+        (~(put by q.wip.gyr) pid nex loz orb)
       ::
+      ++  bist  |=(lap=path (bitt (scot %ud pid) lap))  ::  form path
       ++  bust                                          ::  slice coal
         |=  [axe=axis vux=coal]
         ^-  coal
@@ -319,98 +272,28 @@
         %+  slam  sot.vax
         (slop [[%atom %%] axe] [vas.typ vux])
       ::
-      ++  dost                                          ::  virtualize
-        |=  :*  ton=toon
-                fob=_|+((list path) *beef)
-                fut=_|+(coal *beef)
-            ==
-        ^-  beef
-        ?-  -.ton
-          %0  (fut p.ton)
-          %1  (fob ((list path) p.ton))
-          %2  [[[%ho p.ton] ~] ~ ~]
-        ==
-      ::
-      ++  ergo                                          ::  lath blocked
-        |=  lat=lath
-        |=  gez=(list path)
-        ^-  beef
-        :+  ~
-          %+  turn  gez
-          |=  hap=path
-          ^-  slip
-          =+(myt=(tame hap) [hap ?~(myt [%er hap] [%ea u.myt])])
-        [~ (~(gas in *(set path)) gez) ~ ~ %| lat]
-      ::
       ++  fret                                          ::  process coal
         |=  poc=coal
         ^-  beef
         :-  ((hard (list gift)) +:(bust 2 poc))
         =+  doy=(bust 3 poc)
-        ?~  +.doy  [~ ~]
+        ?~  +.doy  [~ %& ~]
         :-  ((hard (list slip)) +>-.doy)
-        [~ ~ ~ ~ %& (bust 7 doy)]
+        [%& (bust 7 doy)]
       ::
-      ++  glib                                          ::  external note
-        |=  [lap=wire nob=note]
+      ++  gall                                          ::  deliver result
+        |=  [lap=wire rot=riot]
         ^+  +>
-        ?~  orb
-          ~&  %glib-none
-          +>
-        %_(+> q.u.orb (~(put to q.u.orb) [lap nob]))
-      ::
-      ++  glob                                          ::  internal note
-        |=  [lap=wire nob=note]
-        ^+  +>
-        ?~  orb
-          ~&  %glob-none
-          +>
-        %_(+> r.u.orb (~(put to r.u.orb) [lap nob]))
-      ::
-      ++  gram                                          ::  add action
-        |=  [hom=duct fav=card] 
-        %_(+> duv [[hom fav] duv])
-      ::
-      ++  gran
-        |=  vid=(list ,[p=duct q=card])                 ::  add actions
-        ^+  +>
-        ?~(vid +> $(vid t.vid, +> (gram i.vid)))
-      ::
-      ++  grit                                          ::  work till blocked
-        |-  ^+  +
-        ?~  orb  +
-        ?-    -.s.u.orb
-            |
-          %=    $
-              +
-            %-  haul
-            (dost (mong [fapp:do lube p.s.u.orb] sky) (ergo p.s.u.orb) fret)
-          ==
-        ::
-            &
-          !!
-        ==
-      ::
-      ++  haft                                          ::  process gift
-        |=  gud=gift
-        ^+  +>
-        ?-  -.gud
-          %cc  +>(cwc p.gud)
-          %cd  +>(cwd p.gud)
-          %de  (gram ~ %note '#' q.gud)
-          %em  ?~  nex  (gram ~ %talk (sell p.gud))
-               +>(..ra abet:(glib:(past u.nex) ~ [%in p.gud]))
-          %en  |-  ^+  +>.^$
-               ?~  p.gud  +>.^$ 
-               $(p.gud t.p.gud, +>.^$ ^$(gud [%em i.p.gud]))
-          %ha  (gram ~ %crud [p.gud ~])
-          %ho  (gram ~ %crud p.gud)
-          %la  (gram ~ %talk p.gud)
-          %lo  (gran (turn p.gud |=(a=tank [~ %talk a])))
-          %ok  (gram [/c ~] %edit p.gud q.gud r.gud)
-          %te  (gram ~ %tell p.gud)
-          %th  (gram ~ %that p.gud)
-        == 
+        ?.  ?=([%au * *] lap)
+          (glob lap [%eg rot])
+        =+  dup=(slay i.t.lap)
+        ?>  ?=([~ %% %ud @] dup)
+        =+  kit=(need (~(get by p.orb) p.u.q.dup))
+        ?~  rot
+          %_(+>.$ ..ra (warn (spud (meat kit))), s.orb [%& ~])
+        =+  tyk=`kite`[p.p.u.rot q.p.u.rot r.q.wit r.p.u.rot q.u.rot]
+        ?>  =(kit tyk)
+        +>.$(p.orb (~(del by p.orb) p.u.q.dup))
       ::
       ++  gird                                          ::  change slips
         |=  ask=(list slip)
@@ -428,26 +311,164 @@
         ?~  ask  +>.^$
         $(ask t.ask, +>.^$ abet:(pane:(ox p.i.ask) q.i.ask))
       ::
+      ++  glib                                          ::  internal note
+        |=  [lap=wire nob=note]
+        ^+  +>
+        ?~  orb
+          ~&  %glib-none
+          +>
+        %_(+> r.orb (~(put to r.orb) [lap nob]))
+      ::
+      ++  glob                                          ::  external note
+        |=  [lap=wire nob=note]
+        ^+  +>
+        ?~  orb
+          ~&  %glob-none
+          +>
+        %_(+> q.orb (~(put to q.orb) [lap nob]))
+      ::
+      ++  glum                                          ::  blocked process
+        |=  [gez=(list path) hog=boar]
+        =|  [inx=@ud err=(list path) bez=(map kite ,@ud)]
+        |-  ^+  +>.^$
+        ?~  gez  
+          ?~  err
+            +>.^$(orb [bez ~ ~ hog])
+          |-  ^+  +>.^^$
+          ?~  err  +>.^^$(orb [~ ~ ~ %& ~])
+          $(err t.err, ..ra (warn (spud i.err)))
+        =+  myt=(tame i.gez)
+        ?~  myt
+          $(gez t.gez, err [i.gez err]) 
+        %=  $
+          gez    t.gez
+          inx    +(inx)
+          bez    (~(put by bez) inx u.myt)
+          +>.^$  (gulp [%au (scot %ud inx) ~] u.myt)
+        ==
+      ::
+      ++  gram                                          ::  add action
+        |=  [hom=duct fav=card] 
+        %_(+> duv [[hom fav] duv])
+      ::
+      ++  gran
+        |=  vid=(list ,[p=duct q=card])                 ::  add actions
+        ^+  +>
+        ?~(vid +> $(vid t.vid, +> (gram i.vid)))
+      ::
+      ++  grin                                          ::  process result
+        |=  [ton=toon hog=boar]
+        ^+  +>
+        ?-  -.ton
+          %0  (haul (fret p.ton))
+          %1  (glum p.ton hog)
+          %2  (gram ~ [%ho p.ton])
+        ==
+      ::
+      ++  grip                                          ::  step to completion
+        |-  ^+  +
+        =+(a=grit ?:(=(+.$ a) +.$ $(+.$ a)))
+      ::
+      ++  grit                                          ::  work step
+        |-  ^+  +
+        ?^  p.orb  +
+        %=    $
+            +
+          ?-    -.s.orb
+              |  (grin (mong [fapp:do lube p.s.orb] sky) s.orb)
+              &
+            ?~  p.s.orb  +
+            ?~  r.orb
+              ?~  q.orb  +
+              =^  pud  q.orb  ~(get to q.orb)
+              abet:(pong:(ox p.pud) q.pud)
+            =^  pud  r.orb  ~(get to r.orb)
+            (grin (mong [fane:do [p.pud q.pud u.p.s.orb]] sky))
+          ==
+        ==
+      ::  
+      ++  gull                                          ::  request control
+        |=  [lap=wire him=seat ryf=riff]
+        (gram ~[/c [%b lap]] [%warp him ryf])
+      ::
+      ++  gulf                                          ::  stop request
+        |=  [lap=wire kit=kite]
+        (gull lap r.kit [s.kit ~])
+      ::
+      ++  gulp                                          ::  start request
+        |=  [lap=wire kit=kite]
+        %+  gull  lap
+          r.kit
+        ^-  riff
+        :-  s.kit
+        :*  ~
+            p.kit 
+            ?-  -.q.kit 
+              %da   [%da p.q.kit ~ p.q.kit]
+              %tas  [%tas p.q.kit]
+              %ud   [%ud p.q.kit]
+            ==
+            t.kit
+        ==
+      ::
+      ++  haft                                          ::  process gift
+        |=  gud=gift
+        ^+  +>
+        ?-  -.gud
+          %cs  +>(cws p.gud)
+          %cd  +>(cwd p.gud)
+          %de  (gram ~ %note '#' q.gud)
+          %em  ?~  nex  (gram ~ %talk (sell p.gud))
+               +>(..ra abet:(glob:(past u.nex) ~ [%in p.gud]))
+          %en  |-  ^+  +>.^$
+               ?~  p.gud  +>.^$ 
+               $(p.gud t.p.gud, +>.^$ ^$(gud [%em i.p.gud]))
+          %ha  (gram ~ %crud [p.gud ~])
+          %ho  (gram ~ %crud p.gud)
+          %la  (gram ~ %talk p.gud)
+          %lo  (gran (turn p.gud |=(a=tank [~ %talk a])))
+          %ok  (gram [/c ~] %edit p.gud q.gud r.gud)
+          %te  (gram ~ %tell p.gud)
+          %th  (gram ~ %that p.gud)
+        == 
+      ::
       ++  hale                                          ::  process gifts
         |=  guz=(list gift)
         ^+  +>
         ?~(guz +> $(guz t.guz, +> (haft i.guz)))
       ::
-      ++  haul                                          ::  process result
+      ++  haul                                          ::  process success
         |=  bof=beef
         ^+  +>
-        =.  orb  r.bof
+        =.  r.orb  r.bof
         =.  +>  (hale p.bof)
         (gird q.bof)
       ::
-      ++  loss                                          ::  goal removed
+      ++  loss                                          ::  stop goal
         |=  [lap=wire gal=goal]
         ^+  +>
-        !!
+        ?-    -.gal
+            %eg  (gulf [%ma lap] p.gal)
+            %es  (gull [%ma lap] p.gal q.gal [~ r.gal])
+            %ht  !!
+            %in  +>
+            %up  (hoop pid [%ma lap])
+            %wa  !!
+            %yo  +>
+        ==
       ::
-      ++  moor                                          ::  goal added
+      ++  moor                                          ::  start goal
         |=  [lap=wire gal=goal]
-        !!
+        ^+  +>
+        ?-    -.gal
+            %eg  (gulp [%ma lap] p.gal)
+            %es  (gull [%ma lap] p.gal q.gal [~ r.gal])
+            %ht  !!
+            %in  +>
+            %up  (hoot pid [%ma lap] p.gal)
+            %wa  !!
+            %yo  (gram ~[/a [/b bist [%ma lap]]] [%want +.gal])
+        ==
       ::
       ++  ox                                            ::  per delivery
         |=  lap=wire                                    ::  per request
@@ -459,9 +480,6 @@
           ?~  lug
             ?~  gul  +>.$
             (loss(loz (~(del by loz) lap)) lap u.gul)
-          ?~  u.lug
-            ?~  gul  +>.$
-            +>.$(loz (~(del by loz) lap))
           ?~  gul
             (moor(loz (~(put by loz) lap u.lug)) lap u.lug)
           ?:  =(u.lug u.gul)  +>.$
@@ -472,8 +490,13 @@
         ++  pang  %_(. lug ~)                           ::  delete goal
         ++  pong                                        ::  accept note
           |=  nob=note
+          ~&  [%ox-pong lap nob]
           ^+  +>
-          !!
+          ?>  ?=(^ lug)
+          ?-    -.nob
+              %eg  
+          ==
+          ?-  
         --
       --
     --
@@ -621,6 +644,87 @@
         ==
         (stag %g (stag ~ wide:vez))
       ==
+    --
+  ::
+  ++  zu                                                ::  user level
+    |%
+    ++  dive                                            ::  opts to gene
+      |=  cux=cone
+      ^-  gene
+      :-  :+  %cncl
+            [%cnsg [%gas ~] [%cnbc %in] yom.gen]
+          [%clsg (turn p.cux |=(a=@ [%dtpt %tas a]))]
+      :+  %cncl
+        [%cnsg [%gas ~] [%cnbc %by] zim.gen]
+      :-  %clsg
+      %+  turn  q.cux
+      |=([p=@tas q=crow] [[%dtpt %tas p] (doul q)])
+    ::
+    ++  doul                                            ::  crow to gene
+      |=  woc=crow
+      ^-  gene
+      ?-    -.woc
+          %c  [%cnhp $(woc p.woc) $(woc [%p q.woc]) ~]
+          %f
+        %+  scan  (trip ((hard ,@) .^(%cx p.woc)))
+        (full (ifix [gay gay] tall:vez(wer p.woc)))
+      ::
+          %g
+        |-  ^-  gene
+        ?~  p.woc
+          q.woc
+        [%tsgr ^$(woc [%f i.p.woc]) $(p.woc t.p.woc)]
+      ::
+          %l
+        |-  ^-  gene
+        ?~  p.woc
+          [%bcts %null]
+        [^$(woc i.p.woc) $(p.woc t.p.woc)]
+      ::
+          %p
+        |-  ^-  gene
+        ?~  p.woc  !!
+        ?~  t.p.woc
+          ^$(woc i.p.woc)
+        [^$(woc i.p.woc) $(p.woc t.p.woc)]
+      ==
+    ::
+    ++  echo                                            ::  echo argument
+      |=  [yun=vase woc=crow]
+      ^-  tank
+      =+  vax=(slap yun (doul woc))
+      (dish:ut ~(dole ut p.vax) q.vax) 
+    ::
+    ++  ecto                                            ::  type only
+      |=  [yun=vase woc=crow]
+      ^-  tank
+      (dial:ut ~(dole ut (~(play ut p.yun) (doul woc))))
+    ::
+    ++  fane                                            ::  deliver note 
+      |=  [pux=path nog=note tas=vase]
+      ^-  vase
+      %+  slam  tas
+      ;:  slop
+        [[%atom %da] now] 
+        [pah.typ pux] 
+        [noq.typ nog]
+      ==
+    ::
+    ++  fapp                                            ::  launch app
+      |=  [yun=vase pax=path cux=cone arg=crow]
+      ^-  vase
+      %+  slam
+        %+  slam
+          %+  slam
+            (slap nub (doul [%f pax]))
+          ;:  slop 
+            [[%atom %p] who] 
+            [[%atom %da] now] 
+            [[%atom %%] (shax :(mix eny now (shax p.god)))]
+            [pah.typ pax]
+          ==
+        (slap yun (dive cux))
+      (slap yun (doul arg))
     --
   --
 --
