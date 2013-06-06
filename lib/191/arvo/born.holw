@@ -110,7 +110,9 @@
   ++  lean                                              ::    lean:be
     |=  [tea=wire hen=duct fav=card]                    ::  deliver card
     ^+  *fi
-    =+(a=(lead tea hen) abet:(glob:q.a p.a fav))
+    =+  lay=(lead tea hen)
+    ?>  ?=([%ma *] p.lay)
+    abet:(glob:q.lay t.p.lay fav)
   ::
   ++  leap                                              ::    leap:be
     |=  [tea=wire hen=duct fav=card]                    ::  handle event
@@ -124,7 +126,8 @@
              lash:(como:(fest gyp hen) p.fav)
       %noop  [~ +<.^^$]
       %went  abet:lash:(lean tea hen fav)
-      %writ  abet:lash:(loam tea hen +.fav)
+      %writ  ~&  [%writ tea fav]
+             abet:lash:(loam tea hen +.fav)
     ==
   ::
   ++  loam                                              ::    loam:be
@@ -301,7 +304,8 @@
         |=  [lap=wire rot=riot]
         ^+  +>
         ?.  ?=([%au * *] lap)
-          (glob lap [%writ rot])
+          ?>  ?=([%ma *] lap)
+          (glob t.lap [%writ rot])
         =+  dup=(slay i.t.lap)
         ?>  ?=([~ %% %ud @] dup)
         =+  kit=(need (~(get by p.orb) q.p.u.dup))
@@ -339,7 +343,6 @@
       ::
       ++  glum                                          ::  blocked process
         |=  [gez=(list path) hog=boar]
-        ~&  [%glum gez]
         =|  [inx=@ud err=(list path) bez=(map ,@ud kite)]
         |-  ^+  +>.^$
         ?~  gez  
@@ -355,7 +358,7 @@
           gez    t.gez
           inx    +(inx)
           bez    (~(put by bez) inx u.myt)
-          +>.^$  (gulp [%au (scot %ud inx) ~] u.myt)
+          +>.^$  (gulp (bist %au (scot %ud inx) ~) u.myt)
         ==
       ::
       ++  gram                                          ::  add action
@@ -373,7 +376,7 @@
         ?-  -.ton
           %0  (haul (fret p.ton))
           %1  (glum ((list path) p.ton) hog)
-          %2  (gram ~ [%crud p.ton])
+          %2  (gram(orb [~ ~ ~ %& ~]) ~ [%crud p.ton])
         ==
       ::
       ++  grip                                          ::  step to completion
@@ -396,16 +399,16 @@
         ==
       ::  
       ++  gull                                          ::  request control
-        |=  [lap=wire him=seat ryf=riff]
-        (gram ~[/c [%b lap]] [%warp him ryf])
+        |=  [tea=wire him=seat ryf=riff]
+        (gram ~[/c [%b tea]] [%warp him ryf])
       ::
       ++  gulf                                          ::  stop request
-        |=  [lap=wire kit=kite]
-        (gull lap r.kit [s.kit ~])
+        |=  [tea=wire kit=kite]
+        (gull tea r.kit [s.kit ~])
       ::
       ++  gulp                                          ::  start request
-        |=  [lap=wire kit=kite]
-        %^  gull  lap
+        |=  [tea=wire kit=kite]
+        %^  gull  tea
           r.kit
         ^-  riff
         :-  s.kit
@@ -457,10 +460,10 @@
         ^+  +>
         ?-  -.gal
           %%   +>
-          %eg  (gulf [%ma lap] p.gal)
-          %es  (gull [%ma lap] p.gal q.gal [~ r.gal])
+          %eg  (gulf (bist %ma lap) p.gal)
+          %es  (gull (bist %ma lap) p.gal q.gal ~)
           %ht  !!
-          %up  +>(..ra (hoop `wire`[%ma lap] pid))
+          %up  +>(..ra (hoop lap pid))
           %wa  !!
           %yo  +>
         ==
@@ -470,10 +473,10 @@
         ^+  +>
         ?-    -.gal
           %%   +>
-          %eg  (gulp [%ma lap] p.gal)
-          %es  (gull [%ma lap] p.gal q.gal [~ r.gal])
+          %eg  (gulp (bist %ma lap) p.gal)
+          %es  (gull (bist %ma lap) p.gal q.gal [~ r.gal])
           %ht  !!
-          %up  +>(..ra (hoot [%ma lap] pid p.gal))
+          %up  +>(..ra (hoot lap pid p.gal))
           %wa  !!
           %yo  (gram [/a [%b (bist [%ma lap])] ~] [%want +.gal])
         ==
@@ -498,7 +501,6 @@
         ++  pang  %_(. lug ~)                           ::  delete goal
         ++  pong                                        ::  accept note
           |=  fav=card
-          ~&  [%ox-pong lap fav]
           ^+  +>
           ?>  ?=(^ lug)
           ?-    -.u.lug
