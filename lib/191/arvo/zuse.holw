@@ -737,23 +737,30 @@
   ?~  two  one
   ?:((lth u.one u.two) one two)
 ::
+++  meat
+  |=  kit=kite
+  ^-  path
+  [(cat 3 'c' p.kit) (scot %p r.kit) s.kit (scot (dime q.kit)) t.kit]
+::
 ++  tame
   |=  hap=path
-  ^-  (unit mast)
-  ?.  ?=([@ @ @ @ *] hap)  ~
+  ^-  (unit kite)
+  ?.  ?=([@ @ @ *] hap)  ~
   =+  :*  hyr=(slay i.hap) 
-          ved=(slay i.t.hap) 
-          fal=(slay i.t.t.hap)
-          bok=(slay i.t.t.t.hap)
-          lyt=t.t.t.t.hap
+          fal=(slay i.t.hap)
+          dyc=(slay i.t.t.hap)
+          ved=(slay i.t.t.t.hap) 
+          ::  ved=(slay i.t.hap)
+          ::  fal=(slay i.t.t.hap)
+          ::  dyc=(slay i.t.t.t.hap)
+          tyl=t.t.t.t.hap
       ==
-  ?.  ?&  ?=([~ %% %tas @] hyr)
-          ?=([~ %% ?(%da %tas %ud) @] ved)
-          ?=([~ %% %p @] fal)
-          ?=([~ %% %tas @] bok)
-      ==
-    ~
+  ?.  ?=([~ %% %tas @] hyr)  ~
+  ?.  ?=([~ %% %p @] fal)  ~
+  ?.  ?=([~ %% %tas @] dyc)  ~
+  ?.  ?=(^ ved)  ~
+  =+  his=`@p`q.p.u.fal
   =+  [dis=(end 3 1 q.p.u.hyr) rem=(rsh 3 1 q.p.u.hyr)]
   ?.  ?&(?=(%c dis) ?=(?(%w %x %y %z) rem))  ~
-  [~ rem (case p.u.ved) q.p.u.fal q.p.u.bok lyt]
+  [~ rem (case p.u.ved) q.p.u.fal q.p.u.dyc tyl]
 --

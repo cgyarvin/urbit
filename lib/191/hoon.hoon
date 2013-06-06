@@ -1649,6 +1649,11 @@
     ?~  a
       b
     $(a r.a, b [n.a $(a l.a)])
+  ::
+  +-  top
+    |-  ^-  (unit _?>(?=(^ a) n.a))
+    ?~  a  ~
+    ?~(r.a [~ n.a] $(a r.a))
   --
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                section 2dD, casual containers        ::
@@ -6919,11 +6924,12 @@
                   pot=tape                              ::  prompt text
               ==                                        ::
           ==                                            ::
+++  beak  ,[p=(unit ,@ud) q=(map wire goal) r=boor]     ::  next/want/process
 ++  bear  ,[p=(map path goal) q=boar]                   ::  process with slips
 ++  beef                                                ::  raw product
           $:  p=(list gift)                             ::  actions
               q=(list slip)                             ::  requests
-              r=(unit boar)                             ::  state
+              r=boar                                    ::  state
           ==                                            ::
 ++  bell  path                                          ::  label
 ++  bird                                                ::  packet in travel
@@ -6958,13 +6964,15 @@
               r=(list (list ,@c))                       ::  kills
           ==                                            ::
 ++  blur  ,[p=@ud q=(unit bead) r=blot]                 ::  columns, prompt
-++  boar                                                ::  process at system
-          $%  :*  %&                                    ::  waiting (system)
-                  p=(set path)                          ::  blocked on
-                  q=(qeu ,[p=path q=note])              ::  pending events
-                  r=worm                                ::  userspace task
-              ==                                        ::
-              [%| p=(set path) q=lark]                  ::  pending process
+++  boar                                                ::  execution instance
+          $%  [| p=lath]                                ::  ready
+              [& p=(unit worm)]                         ::  running/done
+          ==                                            ::
+++  boor                                                ::  new process
+          $:  p=(map ,@ud kite)                         ::  dependencies
+              q=(qeu ,[p=wire q=card])                  ::  incoming cards 
+              r=(qeu ,[p=wire q=note])                  ::  pending notes
+              s=boar                                    ::  execution
           ==                                            ::
 ++  boat  ,[(list slip) task]                           ::  user stage
 ++  boon                                                ::  fort output
@@ -6976,7 +6984,18 @@
               [%wine p=sock q=tape]                     ::  notify user
           ==                                            ::
 ++  bowl  ,[p=(list gift) q=(unit boat)]                ::  app product
-++  bran  ,[p=life q=(unit life) r=seat s=@da]          ::  our parent us now
+++  brad                                                ::  shell state
+          $:  who=seat                                  ::  identity
+              fog=(list ,@ud)                           ::  virtual consoles
+              hox=@ta                                   ::  identity text
+              cwd=@tas                                  ::  working disc
+              cws=path                                  ::  working spur
+              way=(map ,@tas vase)                      ::  variables
+              hit=[p=@ud q=(list ,@t)]                  ::  command history
+              sur=[p=@ud q=(qeu vase)]                  ::  result history
+              god=[p=@ud q=(map ,@ud gyre)]             ::  tasks
+          ==                                            ::
+++  bray  ,[p=life q=(unit life) r=seat s=@da]          ::  our parent us now
 ++  brow  ,[p=@da q=@tas]                               ::  browser version
 ++  buck  ,[p=mace q=will]                              ::  all security data
 ++  cake  ,[p=sock q=? r=skin s=@]                      ::  top level packet
@@ -6996,7 +7015,6 @@
               [%dire p=@tas q=dram]                     ::  apply directory
               [%dump p=(list ,@t)]                      ::  raw text lines
               [%edit p=@p q=@tas r=ukay]                ::  commit edits
-              [%exit ~]                                 ::  logical exit
               [%file p=@tas q=@]                        ::  apply atomic file
               [%fail p=tape]                            ::  report failure
               [%hail ~]                                 ::  welcome user
@@ -7024,7 +7042,9 @@
               [%noop ~]                                 ::  no operation
               [%note p=@tD q=tank]                      ::  debug message 
               [%nuke p=~]                               ::  kill all processes
+              [%over p=~]                               ::  end of pipeline
               [%pace p=@ud]                             ::  compute background
+              [%pipe p=(unit ,[p=type q=(list)])]       ::  pipeline data
               [%pour p=path q=dram]                     ::  write directory
               [%pump ~]                                 ::  produce packets
               [%quid p=seat q=path r=(unit ,*)]         ::  delivery
@@ -7057,7 +7077,7 @@
               [%writ p=riot]                            ::  response
           ==                                            ::
 ++  care  ?(%w %x %y %z)                                ::  clay submode
-++  case                                                ::  modeseatdisccasecord
+++  case                                                ::  modeseatdisccasespur
           $%  [%da p=@da]                               ::  date
               [%tas p=@tas]                             ::  label
               [%ud p=@ud]                               ::  number
@@ -7071,15 +7091,16 @@
 ++  code  ,@uvI                                         ::  symmetric key
 ++  cone  ,[p=(list ,@tas) q=(list ,[p=@tas q=crow])]   ::  bits and options
 ++  conf  ,[p=(set ,@tas) q=(map ,@tas ,*)]             ::  bits and options
-++  cord  path                                          ::  modeseatdisccasecord
 ++  corp  ,[p=@t q=@t r=@tas]                           ::  name auth issuer
 ++  chum  ,@uvI                                         ::  hashed passcode
 ++  cred  ,[p=logo q=(map ,@tas ,[p=@da q=@ta])]        ::  client credentials
 ++  crow                                                ::  shell expression
           $%  [%f p=path]                               ::  file by path
               [%c p=crow q=(list crow)]                 ::  function call
+              [%e p=crow]                               ::  <crow>
               [%g p=(list path) q=gene]                 ::  gene w/libs
               [%l p=(list crow)]                        ::  list
+              [%k p=crow]                               ::  >crow<
               [%p p=(list crow)]                        ::  tuple
               ::  [%m p=(list crow)]                    ::  map?
               ::  [%s p=(list crow)]                    ::  set?
@@ -7092,7 +7113,7 @@
               lab=(map ,@tas ,@ud)                      ::  labels
               qyx=(map duct ,[p=care q=morn r=path])    ::  subscriptions
           ==                                            ::
-++  disc  ,@ta                                          ::  modeseatdisccasecord
+++  disc  ,@ta                                          ::  modeseatdisccasespur
 ++  dock  $:                                            ::  process state
               p=tick                                    ::  process counter
               q=(map tick bear)                         ::  process table
@@ -7116,17 +7137,19 @@
               rop=(map ,[p=@ud q=sock] riff)            ::  remote requests
           ==                                            ::
 ++  gift                                                ::  one-way effect
-          $%  [%de p=@ud q=tank]                        ::  debug/level
-              [%em p=vase]                              ::  emit product
-              [%en p=(list vase)]                       ::  multiple emit
+          $%  [%% p=vase]                               ::  trivial output
+              [%cd p=@tas]                              ::  change desk
+              [%cs p=path]                              ::  change spur
+              [%de p=@ud q=tank]                        ::  debug/level
               [%ha p=tank]                              ::  single error
               [%ho p=(list tank)]                       ::  multiple error
               [%la p=tank]                              ::  single statement
               [%lo p=(list tank)]                       ::  multiple statement
+              [%mu p=type q=(list)]                     ::  batch emit
               [%ok p=seat q=disc r=ukay]                ::  save changes
               [%te p=(list ,@t)]                        ::  dump lines
               [%th p=love]                              ::  http response
-          ==
+          ==                                            ::
 ++  gcos                                                ::  id description
           $%  [%czar p=@t]                              ::  8-bit seat
               [%duke p=what]                            ::  32-bit seat
@@ -7135,8 +7158,9 @@
               [%pawn p=@t]                              ::  128-bit seat
           ==                                            ::
 ++  goal                                                ::  app request
-          $%  [%eg p=care q=case r=seat s=disc t=cord]  ::  parsed request
-              [%er p=path]                              ::  invalid request
+          $%  [%% p=type]                               ::  open for input
+              [%eg p=kite]                              ::  single request
+              [%es p=seat q=disc r=rave]                ::  subscription
               [%ht p=(list rout)]                       ::  http server
               [%up p=prod]                              ::  user prompt      
               [%wa p=@da]                               ::  alarm
@@ -7144,10 +7168,10 @@
           ==                                            ::
 ++  gram  ,@uw                                          ::  physical datagram
 ++  gyre                                                ::
-          $:  pie=(list tick)                           ::  pipeline
-              pak=(list gyro)                           ::  prompt stack
+          $:  paq=(qeu gyro)                            ::  prompt queue
+              wip=[p=@ud q=(map ,@ud beak)]             ::  processes
           ==                                            ::
-++  gyro  ,[p=tick q=path r=prod]                       ::  live prompt
+++  gyro  ,[p=@ud q=wire r=prod]                        ::  live prompt
 ++  hand  ,@uvH                                         ::  hash of code
 ++  hate  ,[p=purl q=cred r=moth]                       ::  cooked request
 ++  hist  ,[p=@ud q=(list ,@t)]                         ::  depth texts
@@ -7162,6 +7186,7 @@
               s=(unit octs)                             ::  body
           ==                                            ::
 ++  httr  ,[p=@ud q=mess r=(unit octs)]                 ::  raw http response
+++  kite  ,[p=care q=case r=seat s=disc t=spur]         ::  parsed global name
 ++  json                                                ::  json top level
           $%  [%a p=(list jval)]                        ::  array
               [%o p=(map ,@t jval)]                     ::  object
@@ -7179,10 +7204,10 @@
               [%is p=@ud q=@is]                         ::  IP6/public UDP/addr
           ==                                            ::
 ++  lark                                                ::  parsed command
-          $%  [%cc p=crow]                              ::  change cord
+          $%  [%cc p=crow]                              ::  change spur
               [%cd p=disc]                              ::  change desk
               [%do p=crow]                              ::  direct effect
-              [%eh p=crow]                              ::  print and record
+              [%ec p=crow]                              ::  print and record
               [%go p=path q=cone r=crow]                ::  run application
               [%kl p=tick]                              ::  kill a process
               [%nk ~]                                   ::  kill all processes
@@ -7190,6 +7215,7 @@
               [%so p=@tas q=crow]                       ::  set variable
               [%to p=crow]                              ::  type only
           ==                                            ::
+++  lath  ,[p=path q=cone r=crow]                       ::  parsed command
 ++  lens  ?(%z %y %x %w)                                ::  repository view
 ++  lice  ,[p=seat q=buck]                              ::  full license
 ++  life  ,@ud                                          ::  regime number
@@ -7209,7 +7235,6 @@
 ++  mart  (list ,[n=mane v=tape])                       ::  XML attributes
 ++  marv  ?(%da %tas %ud)                               ::  release form
 ++  marx  $|(@tas [n=mane a=mart])                      ::  XML tag
-++  mast  ,[p=care q=case r=seat s=@tas t=path]         ::  structured path
 ++  math  (map ,@t (list ,@t))                          ::  semiparsed headers
 ++  meal                                                ::  payload
           $%  [%back p=cape q=flap r=@dr]               ::  acknowledgment
@@ -7224,7 +7249,7 @@
               [| q=(list ,@ta)]                         ::  dir
           ==                                            ::
 ++  meth  ?(%get %post)                                 ::  http method
-++  mode  @tas                                          ::  modeseatdisccasecord
+++  mode  @tas                                          ::  modeseatdisccasespur
 ++  morn                                                ::  sequence slice
           $%  [%da p=@da q=(unit ,@da)]                 ::  start/end
               [%tas p=@tas]                             ::  at label
@@ -7235,7 +7260,8 @@
 ++  mime  (list ,@ta)                                   ::  mime type
 ++  name  ,[p=@t q=(unit ,@t) r=(unit ,@t) s=@t]        ::  first mid/nick last
 ++  note                                                ::  response to goal
-          $%  [%eg p=(unit)]                            ::  simple result
+          $%  [%% p=(unit (list ,*))]                   ::  standard input
+              [%eg p=riot]                              ::  simple result
               [%ht p=scab q=cred r=moth]                ::  http request
               [%up p=@t]                                ::  prompt response
               [%yo p=seat q=cape r=soap]                ::  request response
@@ -7269,7 +7295,7 @@
           $:  did=@ud                                   ::  filled sequence
               mis=(map ,@ud ,[p=flap q=(unit)])         ::  misordered
           ==                                            ::  
-++  riff  ,[p=@tas q=(unit rave)]                       ::  request/desist
+++  riff  ,[p=disc q=(unit rave)]                       ::  request/desist
 ++  rank  ?(%czar %king %duke %jack %pawn)              ::  seat width class
 ++  rant                                                ::  namespace binding
           $:  p=[p=care q=case r=@tas]                  ::  clade release book
@@ -7327,7 +7353,7 @@
           ==                                            ::
 ++  scud  ,[p=pact q=scar]                              ::  full dispatch
 ++  seam  ,[p=@ta q=pact r=scar]                        ::  service route
-++  seat  ,@p                                           ::  modeseatdisccasecord
+++  seat  ,@p                                           ::  modeseatdisccasespur
 ++  shed                                                ::  packet pump
           $:  $:  niq=@ud                               ::  count in queue
                   nif=@ud                               ::  count in flight
@@ -7344,7 +7370,8 @@
 ++  snow  ,[p=@ud q=@ud r=(set ,@ud)]                   ::  window exceptions
 ++  soap  ,[p=[p=life q=life] q=@tas r=@ud]             ::  statement id
 ++  sock  ,[p=seat q=seat]                              ::  from to
-++  step  ,[p=bran q=gcos r=pass]                       ::  identity stage
+++  spur  path                                          ::  modeseatdisccasespur
+++  step  ,[p=bray q=gcos r=pass]                       ::  identity stage
 ++  task  _|+([@da path note] *bowl)                    ::  process core
 ++  taxi  ,[p=lane q=rock]                              ::  routed packet
 ++  tick  ,@ud                                          ::  process id

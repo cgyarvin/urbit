@@ -15,6 +15,7 @@
     who    who
     hox    (scot %p who)
     cwd    %try
+    fog    [0 ~]
     p.hit  1
     p.sur  1
     p.god  1
@@ -108,6 +109,7 @@
   ::
   ++  lean                                              ::    lean:be
     |=  [tea=wire hen=duct fav=card]                    ::  deliver card
+    ^+  *fi
     =+(a=(lead tea hen) abet:(glob:q.a p.a fav))
   ::
   ++  leap                                              ::    leap:be
@@ -118,15 +120,16 @@
       %line  =+  gyp=?>(?=(^ fog) i.fog)
              =<  abet
              ?:  =(0 gyp)
-               (gill:(fist hen) p.fav)
-             (como:(fest gyp hen) p.fav)
+               lash:(gill:(fist hen) p.fav)
+             lash:(como:(fest gyp hen) p.fav)
       %noop  [~ +<.^^$]
       %went  abet:lash:(lean tea hen fav)
       %writ  abet:lash:(loam tea hen +.fav)
     ==
   ::
   ++  loam                                              ::    loam:be
-    |=  [tea=wire hen=duct rot=riot]
+    |=  [tea=wire hen=duct rot=riot]                    ::  handle response
+    ^+  *fi
     =+(a=(lead tea hen) abet:(gall:q.a p.a rot))
   ::
   ++  lube                                              ::    lube:be
@@ -202,8 +205,13 @@
       ?~  q.zif 
         =+  duf=[p=~(rend co ~ %ud p.p.zif) q=~(rend co ~ %ud q.p.zif)]
         (warn "<syntax error at [{p.duf} {q.duf}]>")
-      ?>  ?=([%go *] p.u.q.zif)
-      (lamp +.p.u.q.zif ~)
+      %-  lamp
+      ^-  (list lath)
+      =+  kar=`lark`p.u.q.zif
+      ?+  kar  !!
+        [%ec *]  [[[hox %main wen %app %ec hub ~] [~ ~] [%k p.kar]] ~]
+        [%go *]  [+.kar ~]
+      ==
     ::                                                  ::    hoop:fi:be
     ++  hoop                                            ::  delete prompt
       |=  [lap=wire pid=@ud]                            ::  XX ugly
@@ -331,6 +339,7 @@
       ::
       ++  glum                                          ::  blocked process
         |=  [gez=(list path) hog=boar]
+        ~&  [%glum gez]
         =|  [inx=@ud err=(list path) bez=(map ,@ud kite)]
         |-  ^+  +>.^$
         ?~  gez  
@@ -372,21 +381,18 @@
         =+(a=grit ?:(=(+.$ a) +.$ $(+.$ a)))
       ::
       ++  grit                                          ::  work step
-        |-  ^+  +
-        ?^  p.orb  +
-        %=    $
-            +
-          ?-    -.s.orb
-              |  (grin (mong [fapp:zu lube p.s.orb] sky) s.orb)
-              &
-            ?~  p.s.orb  +
-            ?:  =(~ r.orb)
-              ?:  =(~ q.orb)  +
-              =^  pud  q.orb  ~(get to q.orb)
-              abet:(pong:(ox p.p.pud) q.p.pud)
-            =^  pud  r.orb  ~(get to r.orb)
-            (grin (mong [fane:zu [p.p.pud q.p.pud u.p.s.orb]] sky) s.orb)
-          ==
+        ^+  .
+        ?^  p.orb  .
+        ?-    -.s.orb
+            |  (grin (mong [fapp:zu lube p.s.orb] sky) s.orb)
+            &
+          ?~  p.s.orb  .
+          ?:  =(~ r.orb)
+            ?:  =(~ q.orb)  .
+            =^  pud  q.orb  ~(get to q.orb)
+            abet:(pong:(ox p.p.pud) q.p.pud)
+          =^  pud  r.orb  ~(get to r.orb)
+          (grin (mong [fane:zu [p.p.pud q.p.pud u.p.s.orb]] sky) s.orb)
         ==
       ::  
       ++  gull                                          ::  request control
@@ -618,7 +624,7 @@
           ==
         ==
       ::
-        (stag %eh (stag %p (most ace worc)))
+        (stag %ec (stag %p (most ace worc)))
       ==
     ::
     ++  thap
@@ -688,6 +694,7 @@
       ^-  gene
       ?-    -.woc
           %c  [%cnhp $(woc p.woc) $(woc [%p q.woc]) ~]
+          %e  [%hxgl $(woc p.woc) ~]
           %f
         %+  scan  (trip ((hard ,@) .^(%cx p.woc)))
         (full (ifix [gay gay] tall:vez(wer p.woc)))
@@ -698,6 +705,7 @@
           q.woc
         [%tsgr ^$(woc [%f i.p.woc]) $(p.woc t.p.woc)]
       ::
+          %k  [%hxgr $(woc p.woc) ~]
           %l
         |-  ^-  gene
         ?~  p.woc

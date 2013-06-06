@@ -114,7 +114,7 @@
               (blab hen ren lok (flop yaw) [| (turn goz |=([p=@ta *] p))])
             |-  ^+  +>.^^$
             ?~  goz  +>.^^$
-            $(+>.^^$ ^$(yaw [p.i.goz yaw], arc.saq q.i.goz))
+            $(goz t.goz, +>.^^$ ^$(yaw [p.i.goz yaw], arc.saq q.i.goz))
           ==
         ==
       ::

@@ -345,7 +345,7 @@
           %logo                                         ::  logout
         =.  mos  :_(mos [~ hen [%bbye ~]])
         ?:  |(?=(~ q.yar) ?=(~ t.q.yar))
-          +.$(mos [[~ hen [%exit ~]] mos])
+          +.$(mos [[~ hen [%pipe ~]] mos])
         %=  +.$
           fav    =+  mas=~(rend co ~ %p u.whu)
                  [%warn "bye, {mas}"]
