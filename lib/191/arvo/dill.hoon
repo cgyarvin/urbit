@@ -322,8 +322,6 @@
         ==
       ::
           %helo                                         ::  trigger prompt
-        ?^  q.r.yar
-          (edit(q.r.yar ~) u.q.r.yar)
         ?>  ?=(^ whu)
         %-  edit
         =|  bed=bead
@@ -358,6 +356,7 @@
           mos  :_(mos [whu hen `card`[%blit [%sav p.fav q.fav] ~]])
         ==
       ::
+          %tell  (furl (turn p.fav |=(a=@t (trip a))))  ::  wall of text
           %text  $(fav [%talk %leaf p.fav])             ::  simple message
           %talk  (furl (~(win re p.fav) 0 p.r.yar))     ::  program output
           %warn  (fume '~' [%leaf p.fav])               ::  system message

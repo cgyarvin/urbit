@@ -48,6 +48,7 @@
 #   define c3__bean   c3_s4('b','e','a','n')
 #   define c3__bear   c3_s4('b','e','a','r')
 #   define c3__bede   c3_s4('b','e','d','e')
+#   define c3__behn   c3_s4('b','e','h','n')
 #   define c3__belt   c3_s4('b','e','l','t')
 #   define c3__bend   c3_s4('b','e','n','d')
 #   define c3__ber    c3_s3('b','e','r')

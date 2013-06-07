@@ -1,11 +1,13 @@
 !:
+::  /=main=/toy/cat/hoon
+::
 |=  *
 |=  *
 |=  ape=(list path)
 :_  ~
 :_  ~
 :-  %te
-=|  tez=(list @t)
+=|  tez=(list ,@t)
 |-  ^+  tez
 ?~  ape  tez
 =+  fix=((hard ,@) .^(%cx i.ape))

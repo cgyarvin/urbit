@@ -1,5 +1,5 @@
 !:
-::  norb (4b), shell
+::  behn (4b), shell
 ::
 |=  pit=vase
 ^-  vane
@@ -38,7 +38,7 @@
     noq.typ  (pal (vice '*note'))
     tak.typ  (pal (vice '*task'))
     vas.typ  (pal (vice '*vase'))
-    hub      (hoof stub)
+    hub      %hoon
   ==
 ::
 ++  brad                                                ::  session/dynamic
@@ -126,8 +126,7 @@
              lash:(como:(fest gyp hen) p.fav)
       %noop  [~ +<.^^$]
       %went  abet:lash:(lean tea hen fav)
-      %writ  ~&  [%writ tea fav]
-             abet:lash:(loam tea hen +.fav)
+      %writ  abet:lash:(loam tea hen +.fav)
     ==
   ::
   ++  loam                                              ::    loam:be
@@ -180,16 +179,20 @@
     |%
     ++  abet                                            ::    abet:fi:be
       ^-  [(list move) brat]                            ::  resolve
-      :-  (turn (flop duv) |=([p=duct q=card] [[~ who] (weld p hen) q]))
-      ?~  q.wip.gyr
-        %=  +<.^^$
-          fog    (skip fog |=(a=@ud =(a gyp)))
-          q.god  (~(del by q.god) gyp)
-        ==
-      %=  +<.^^$
-        fog    ?:((lien fog |=(a=@ud =(a gyp))) fog [gyp fog])
-        q.god  (~(put by q.god) gyp gyr)
-      ==
+      =+  ^=  fod  ^+  [p=fog q=q.god]
+          ?~  q.wip.gyr
+            :-  (skip fog |=(a=@ud =(a gyp))) 
+            (~(del by q.god) gyp)
+          :-  ?:((lien fog |=(a=@ud =(a gyp))) fog [gyp fog])
+          q=(~(put by q.god) gyp gyr)
+      =>  ?:  !=(fog p.fod)
+            ~&  [%abet-helo p.fod]
+            .
+          .
+      :-  %+  turn 
+            (flop `_duv`?:(=(fog p.fod) duv [[~ [%helo ~]] duv]))
+          |=([p=duct q=card] [[~ who] (weld p hen) q])
+      %_(+<.^^$ fog p.fod, q.god q.fod)
     ::
     ++  bitt  |=(lap=path [(scot %ud gyp) lap])         ::    bitt:fi:be
     ++  como                                            ::    como:fi:be
@@ -212,7 +215,7 @@
       ^-  (list lath)
       =+  kar=`lark`p.u.q.zif
       ?+  kar  !!
-        [%ec *]  [[[hox %main wen %app %ec hub ~] [~ ~] [%k p.kar]] ~]
+        [%ec *]  [[[hox %main wen %toy %echo hub ~] [~ ~] [%k p.kar]] ~]
         [%go *]  [+.kar ~]
       ==
     ::                                                  ::    hoop:fi:be
@@ -609,7 +612,7 @@
             %+  stag
               %go
             ;~  plug
-              (thap %app)
+              (thap %toy)
               ;~  pose 
                 %+  ifix  [kel ker]
                 ;~  pose

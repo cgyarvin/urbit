@@ -4,19 +4,11 @@
 =>  
   |%                                                      ::  models
   ++  cron  ?(%day %hour %minute %none %second)           ::  wake frequency
-  ++  gift                                                ::  web event 
-            $%  [%cron p=cron]                            ::  wakeup
-                [%form p=pact q=quay]                     ::  posted form
-                [%note p=path q=note]                     ::  extrinsic note
-                [%post p=pact q=mime q=octs]              ::  non-form post
-                [%putt p=pact q=(list lump)]              ::  put
-                [%user p=user]                            ::  user event
-            ==                                            ::
   ++  lamp                                                ::  simple web app
             $_  ^?  |%                                    ::  opaque object
             ++  give                                      ::  serve
-              |=  [now=@da fig=gift]                      ::  time, request
-              :-  p=*(list card)                          ::  act
+              |=  [now=@da fig=weev]                      ::  time, request
+              :-  p=*(list gift)                          ::  act
               q=*(unit ,[p=(list slip) q=lamp])           ::  request/continue
             ::                                            ::
             ++  miss                                      ::  redirect?
@@ -25,8 +17,16 @@
               ~                                           ::
             --                                            ::
   ++  lump  ,[p=path q=mime r=octs]                       ::  submitted data
-  ++  wick  vase                                          ::  vase of lamp
   ++  user  ?(%born %came %died %left)                    ::  user event
+  ++  wick  vase                                          ::  vase of lamp
+  ++  weev                                                ::  web event 
+            $%  [%cron p=cron]                            ::  wakeup
+                [%form p=pact q=quay]                     ::  posted form
+                [%note p=path q=note]                     ::  extrinsic note
+                [%post p=pact q=mime q=octs]              ::  non-form post
+                [%putt p=pact q=(list lump)]              ::  put
+                [%user p=user]                            ::  user event
+            ==                                            ::
   --                                                      ::
 |%                                                        ::  functions
 ++  lunt                                                  ::  web framework
@@ -39,22 +39,22 @@
   =+  ^=  hup  ^-  (list slip)
       :~  [/ [%ht rut]]
       ==
-  :-  *(list card)
+  :-  *(list gift)
   :-  ~
   :-  hup 
   |=  [now=@da pax=path nut=note]
   ^-  bowl
-  =+  [saw=*(list card) ask=*(list slip)]
+  =+  [saw=*(list gift) ask=*(list slip)]
   =<  zing:wist
   |%
   ++  send                                                ::  dispatch event
-    |=  bax=gift
+    |=  bax=weev
     ^+  +>
     =+  sam=!>(now bax)
     =+  gat=(slap ras [%cnbc %give])
     =+  pro=(slam gat sam)
     =+  [wax=(slot 2 pro) hin=(slot 3 pro)]
-    =.  saw  (weld ((hard (list card)) q.wax) saw)
+    =.  saw  (weld ((hard (list gift)) q.wax) saw)
     ?:  =(~ q.hin)
       +>.$
     =+  [vis=(slot 6 hin) lym=(slot 7 hin)]
@@ -96,7 +96,7 @@
     ^+  +>
     =+  sek=(roil [who now (shax (mix p.zab now)) ced] zab ras)
     =+  ^=  rep
-        :-  %that
+        :-  %th
         ?~  sek
           [%raw [404 ~ [~ (tact "http error 404 at {<now>}")]]]
         u.sek
@@ -133,8 +133,8 @@
     [[[[%polo ~] [%up pim pro]] ~] ..$]
   (woo u.rey)
 ::
-++  pomo  |=([fav=card bol=bowl] [[fav p.bol] q.bol])
-++  pomp  |=([txt=tape bol=bowl] (pomo [%text txt] bol))
+++  pomo  |=([gud=gift bol=bowl] [[gud p.bol] q.bol])
+++  pomp  |=([txt=tape bol=bowl] (pomo la/leaf/txt bol))
 ++  roil
   |=  [mad=scad zab=scab ras=wick]
   ^-  (unit love)

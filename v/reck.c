@@ -248,10 +248,13 @@ static u2_noun
 _reck_load_arvo(u2_reck* rec_u, c3_c* pax_c)
 {
   c3_c ful_c[2048];
-  u2_noun hof = u2_cn_mung(u2k(rec_u->toy.hoof), rec_u->kno_w);
-  c3_c* hof_c = u2_cr_string(hof);
+  //  u2_noun hof = u2_cn_mung(u2k(rec_u->toy.hoof), rec_u->kno_w);
+  //  c3_c* hof_c = u2_cr_string(hof);
 
-  sprintf(ful_c, "%s/%d/arvo/%s.%s", u2_System, rec_u->kno_w, pax_c, hof_c);
+  sprintf(ful_c, "%s/%d/arvo/%s.hoon", u2_System, rec_u->kno_w, pax_c);
+  //  u2z(hof);
+  //  free(hof_c);
+
   return u2_walk_load(ful_c);
 }
 
@@ -410,8 +413,8 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
         // printf("ames:\n");
         xan = _reck_load_temp(rec_u, zen, kno_w, "arvo/ames.hoon");
 
-        // printf("born:\n");
-        wol = _reck_load_temp(rec_u, xan, kno_w, "arvo/born.hoon");
+        // printf("behn:\n");
+        wol = _reck_load_temp(rec_u, xan, kno_w, "arvo/behn.hoon");
 
         // printf("clay:\n");
         ray = _reck_load_temp(rec_u, wol, kno_w, "arvo/clay.hoon");
@@ -460,8 +463,8 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
                              _reck_load_arvo(rec_u, "ames"));
 
       _reck_init_veer(rec_u, 'b', 
-                             u2nc(c3__born, u2_nul),
-                             _reck_load_arvo(rec_u, "born"));
+                             u2nc(c3__behn, u2_nul),
+                             _reck_load_arvo(rec_u, "behn"));
 
       _reck_init_veer(rec_u, 'c', 
                              u2nc(c3__clay, u2_nul),
