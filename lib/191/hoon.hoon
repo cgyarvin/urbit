@@ -1,4 +1,4 @@
-::
+!:
 ::              Hoon/Arvo stage 191 (reflexive).  
 ::              This file is in the public domain.
 ::
@@ -317,6 +317,7 @@
             [%smls p=gene q=gene]                       ::
             [%smpm p=gene q=gens]                       ::
             [%smsg p=gene q=gens]                       ::
+            [%smsm p=gene q=gene]                       ::
             [%smtr p=gene q=gene]                       ::
             [%smts p=gene q=gene]                       ::
             [%smwt p=gene q=gene]                       ::
@@ -4407,6 +4408,14 @@
         [%cnts [%a ~] [[[~ 6] [%cnbc %c]] ~]]           ::  a(+6 c)
       ==
     ::
+        [%smsm *]                                       ::                  ;;
+      :+  %tsgr  [%ktts %v ~ 1]                         ::  =>  v=.
+      :+  %tsls  [%ktts %a [%tsgr [%cnbc %v] p.gen]]    ::  =+  a==>(v {p.gen})
+      :+  %tsls  [%ktts %b [%tsgr [%cnbc %v] q.gen]]    ::  =+  b==>(v {q.gen})
+      :+  %tsls                                         ::  =+  c=(a b)
+        [%ktts %c [%cnhp [%cnbc %a] [%cnbc %b] ~]]      ::  
+      [%wtgr [%dtts [%cnbc %c] [%cnbc %b]] [%cnbc %b]]  ::  ?>(=(c b) b)
+    ::
         [%smtr *]                                       ::                  ;*
       :+  %tsgr  [%ktts %v ~ 1]                         ::  =>  v=.
       :+  %tsls  [%ktts %a %tsgr [%cnbc %v] q.gen]      ::  =+  a==>(v \q.gen)
@@ -4536,6 +4545,7 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                section 2fC, compilation proper       ::
 ::
+++  deck  .
 ++  ut
   ~%    %ut
       +>+
@@ -6231,9 +6241,15 @@
     ?>  ?=([%clsg *] gen)
     (turn p.gen |=(a=gene ?>(?=(%dtpt -.a) q.a)))
   ::
+  ++  plop
+    |=  [pef=@tas pax=path]  ^-  path
+    ?>  ?=([@ @ @ *] pax)
+    [i.pax i.t.pax i.t.t.pax pef t.t.t.pax]
+  ::
   ++  pray
+    |=  pef=@tas
     |=  gen=gene  ~|  %pray  ^-  gene
-    =+  rev=(plex gen)
+    =+  rev=(plop pef (plex gen))
     ?:  (~(has in was) rev)
       ~|(%pray-loop !!)
     =+  txt=(,@ta .^(%cx rev))
@@ -6241,10 +6257,11 @@
     (ifix [gay gay] tall(was (~(put in was) rev), wer rev))
   ::
   ++  prey
+    |=  pef=@tas 
     |=  gun=(list gene)  ^-  gene
     ?~  gun    [~ 1]
-    ?~  t.gun  (pray i.gun)
-    [%tsgr (pray i.gun) $(gun t.gun)]
+    ?~  t.gun  ((pray pef) i.gun)
+    [%tsgr ((pray pef) i.gun) $(gun t.gun)]
   ::
   ++  phax
     |=  ruw=(list (list beer))
@@ -6360,10 +6377,6 @@
         ::
           (cook |=(a=wing [%cnts a ~]) rope)
         ==
-      :-  '#'
-        ;~  pfix  hax
-          (cook pray rood)
-        ==
       :-  '-'
         ;~  pose
           (stag %dtpt tash:so)
@@ -6416,7 +6429,18 @@
         (stag %bccm ;~(pfix com wide))
       :-  '^'
         ;~  pose
-          ;~(pfix ket (stag %dtkt rood))
+          ;~  pfix  ket
+            ;~  pose
+              ;~  pfix  col
+                %+  cook
+                  |=  [a=gene b=gene]
+                  [%smsm `gene`~(clam al `tile`~(bore ap a)) [%dtkt b]]
+                ;~(plug wide rood)
+              ==
+              ;~(pfix ket (cook (prey %lip) (most ket rood)))
+              (cook (pray %toy) rood)
+            ==
+          ==
           (stag %cnhx rope)
           (stag %bcts (cold %cell ket))
         ==
@@ -6613,6 +6637,7 @@
                   ['+' (rune lus %smls expb)]
                   ['&' (rune pam %smpm expi)]
                   ['~' (rune sig %smsg expi)]
+                  [';' (rune sem %smsm expb)]
                   ['*' (rune tar %smtr expb)]
                   ['=' (rune tis %smts expb)]
                   ['?' (rune wut %smwt expb)]
@@ -6655,8 +6680,8 @@
                 %-  stew  :~
                   [':' ;~(pfix col (toad expz))]
                   [',' (rune com %zpcm expb)]
-                  ['#' ;~(pfix hax (cook prey (toad exps)))]
                   [';' (rune sem %zpsm expb)]
+                  ['^' ;~(pfix ket (cook (prey %lip) (toad exps)))]
                   ['>' (rune gar %zpgr exps)]
                   ['=' (rune tis %zpts expa)]
                 ==
