@@ -38,7 +38,6 @@
     noq.typ  (pal (vice '*note'))
     tak.typ  (pal (vice '*task'))
     vas.typ  (pal (vice '*vase'))
-    hub      %hoon
   ==
 ::
 ++  brad                                                ::  session/dynamic
@@ -71,7 +70,6 @@
         tak=type                                        ::  '*task'
         vas=type                                        ::  '*vase'
     ==                                                  ::
-      hub=@ta                                           ::  (hoof stub)
   ==                                                    ::
 ++  brat  ,[bran brad]
 --                                                      ::
@@ -83,7 +81,7 @@
   |=  brat                                              ::  core state
   |=  [now=@da eny=@ sky=_|+(* *(unit))] 
   =+  wen=(scot %da now)
-  =+  wer=`path`[hox cwd wen (weld cws [hub ~])]
+  =+  wer=`path`[hox cwd wen cws]
   =+  rew=(flop wer)
   =+  vez=(vang | wer)
   |%
@@ -185,10 +183,6 @@
             (~(del by q.god) gyp)
           :-  ?:((lien fog |=(a=@ud =(a gyp))) fog [gyp fog])
           q=(~(put by q.god) gyp gyr)
-      =>  ?:  !=(fog p.fod)
-            ~&  [%abet-helo p.fod]
-            .
-          .
       :-  %+  turn 
             (flop `_duv`?:(=(fog p.fod) duv [[~ [%helo ~]] duv]))
           |=([p=duct q=card] [[~ who] (weld p hen) q])
@@ -215,7 +209,7 @@
       ^-  (list lath)
       =+  kar=`lark`p.u.q.zif
       ?+  kar  !!
-        [%ec *]  [[[hox %main wen %toy %echo hub ~] [~ ~] [%k p.kar]] ~]
+        [%ec *]  [[[hox %main wen %toy %echo ~] [~ ~] [%k p.kar]] ~]
         [%go *]  [+.kar ~]
       ==
     ::                                                  ::    hoop:fi:be
@@ -441,9 +435,10 @@
           %mu  ?~  nex  
                  (gran (turn q.gud |=(a=* [~ %talk (sell [p.gud a])])))
                +>(..ra abet:(glob:(past u.nex) ~ [%pipe ~ +.gud]))
-          %ok  (gram [/c ~] %edit p.gud q.gud r.gud)
+          %ok  (gram [/c ~] %edit who p.gud q.gud)
           %te  (gram ~ %tell p.gud)
           %th  (gram ~ %that p.gud)
+          %xx  (gram ~ p.gud)
         == 
       ::
       ++  hale                                          ::  process gifts
@@ -647,9 +642,9 @@
         ::
           %+  cook
             |=  a=[p=@ta q=(unit ,[p=@ta q=(unit ,@ta)])]
-            ?~  q.a      [~(rent co ~ %da now) %main rol p.a hub ~]
-            ?~  q.u.q.a  [~(rent co ~ %da now) p.a rol p.u.q.a hub ~]
-                         [u.q.u.q.a p.a rol p.u.q.a hub ~] 
+            ?~  q.a      [~(rent co ~ %da now) %main rol p.a ~]
+            ?~  q.u.q.a  [~(rent co ~ %da now) p.a rol p.u.q.a ~]
+                         [u.q.u.q.a p.a rol p.u.q.a ~] 
           ;~  plug
             sym
             ;~  pose
@@ -701,7 +696,7 @@
           %c  [%cnhp $(woc p.woc) $(woc [%p q.woc]) ~]
           %e  [%hxgl $(woc p.woc) ~]
           %f
-        %+  scan  (trip ((hard ,@) .^(%cx p.woc)))
+        %+  scan  (trip ((hard ,@) .^(%cx (weld p.woc /hoon))))
         (full (ifix [gay gay] tall:vez(wer p.woc)))
       ::
           %g

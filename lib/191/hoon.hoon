@@ -6252,7 +6252,7 @@
     =+  rev=(plop pef (plex gen))
     ?:  (~(has in was) rev)
       ~|(%pray-loop !!)
-    =+  txt=(,@ta .^(%cx rev))
+    =+  txt=(,@ta .^(%cx (weld rev `path`[%hoon ~])))
     %+  rash  txt
     (ifix [gay gay] tall(was (~(put in was) rev), wer rev))
   ::
@@ -7171,9 +7171,10 @@
               [%la p=tank]                              ::  single statement
               [%lo p=(list tank)]                       ::  multiple statement
               [%mu p=type q=(list)]                     ::  batch emit
-              [%ok p=seat q=disc r=ukay]                ::  save changes
+              [%ok p=disc q=ukay]                       ::  save changes
               [%te p=(list ,@t)]                        ::  dump lines
               [%th p=love]                              ::  http response
+              [%xx p=card]                              ::  arbitrary card
           ==                                            ::
 ++  gcos                                                ::  id description
           $%  [%czar p=@t]                              ::  8-bit seat

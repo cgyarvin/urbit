@@ -45,5 +45,14 @@ issued:
 issued: #7 (Alex Jacobson)
   flag: ~ripsul-fabdun
 
-issued: #8
+issued: #8 (Luke Nosek)
   flag: ~pocmel-malrul
+
+issued: #9 (Sam Putman / Sam Atman)
+  first name: Sam
+  last name: Putman
+  year of birth: 1979
+  saved ticket for ~ligrux-bostyn (#590.080).
+  whom: [p=1.979 q=%us-ca r=[p=~~Sam q=~ r=~ s=~~Atman]]
+  fingerprint: 0w9.AWgXh.XcP81.jrRod.etMzh
+
