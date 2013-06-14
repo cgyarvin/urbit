@@ -709,16 +709,16 @@ u2_ho_test(u2_wire    wir_r,
 
     if ( u2_none == had ) {
       msg_c = "bail";
-      printf("bail: cos_c: %s\n", cos_c);
+      printf("bail: cos_c: %s\r\n", cos_c);
       c3_assert(0);
     } else if ( u2_none == sof ) {
       msg_c = "funk";
-      printf("funk: cos_c: %s\n", cos_c);
+      printf("funk: cos_c: %s\r\n", cos_c);
       c3_assert(0);
 
     } else if ( u2_no == u2_sing(had, sof) ) {
       msg_c = "miss";
-      printf("miss: jet: %s(%s)\n", cos_c, jet_j->fcs_c);
+      printf("miss: jet: %s(%s)\r\n", cos_c, jet_j->fcs_c);
 
       u2_err(wir_r, "right", sof);
       u2_err(wir_r, "wrong", had);

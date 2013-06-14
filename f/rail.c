@@ -810,7 +810,10 @@ void*
 u2_rl_malloc(u2_ray ral_r,
              c3_w   sib_w)
 {
-  c3_assert(0); return 0;
+  c3_w siz_w = (sib_w + 3) >> 2;
+  u2_ray nov_r = u2_rl_ralloc(ral_r, c3_max(5, siz_w));
+
+  return u2_at_ray(nov_r);
 }
 
 /* u2_rl_free():
@@ -821,7 +824,10 @@ void
 u2_rl_free(u2_ray ral_r,
            void*  lag_v)
 {
-  c3_assert(0);
+  u2_ray nov_r = u2_nit_at(lag_v);
+
+  c3_assert(lag_v == u2_at_ray(nov_r));
+  u2_rl_rfree(ral_r, nov_r);
 }
 
 /* u2_rl_gain():

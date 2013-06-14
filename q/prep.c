@@ -559,7 +559,7 @@ _print_dump(u2_dump dump)
 
     u2_bytes(0, sb, (c3_y *)cl, line);
     cl[sb] = 0;
-    printf(" %s\n", cl);
+    printf(" %s\r\n", cl);
 
     dump = u2_t(dump);
   }
@@ -577,14 +577,14 @@ u2_err(u2_ray      wir_r,
   u2_rl_leap(wir_r, c3__rock);
   {
     if ( u2_none == noun ) {
-      printf("%s: <none>\n", cl_caption);
+      printf("%s: <none>\r\n", cl_caption);
     }
     else {
       u2_prep prep = u2_fj_prep_noun(wir_r, noun);
       u2_dump dump = u2_fj_pump_dump(wir_r, (75), prep);
 
       if ( cl_caption ) {
-        printf("%s:\n", cl_caption);
+        printf("%s:\r\n", cl_caption);
       }
       _print_dump(dump);
     }
@@ -606,7 +606,7 @@ u2_burp(u2_ray      wir_r,
     u2_dump dump = u2_fj_pump_dump(wir_r, (75), prep);
 
     if ( cl_caption ) {
-      printf("%s:\n", cl_caption);
+      printf("%s:\r\n", cl_caption);
     }
     _print_dump(dump);
   }

@@ -824,5 +824,4 @@
         (~(tap by deb) ~)
       |=  [p=seat q=brat]
       ^-([p=seat q=brad] [p +.q])
-  ==
 --

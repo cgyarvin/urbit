@@ -351,7 +351,7 @@
             [%zpcm p=gene q=gene]                       ::
             [%zpcn ~]                                   ::
             [%zpfs p=gene]                              ::
-            [%zpgr p=gens]                              ::
+            [%zpgr p=gene]                              ::
             [%zpsm p=gene q=gene]                       ::
             [%zpts p=gene]                              ::
             [%zpzp ~]                                   ::
@@ -462,10 +462,13 @@
           ==                                            ::
 ++  unit  |*  a=_,*                                     ::  maybe
           $|(~ [~ u=a])                                 ::
+++  urge  |*  a=_,*                                     ::  list change
+          %-  list                                      ::
+          ,$%([& p=@ud] [| p=(list a) q=(list a)])      ::
 ++  vase  ,[p=type q=*]                                 ::  type-value pair
 ++  wall  (list tape)                                   ::  text lines
 ++  wing  (list limb)                                   ::
-++  wine  $|  ?(%noun %path %tank %void %wool %yarn)    ::
+++  wine  $|  ?(%noun %path %tank %void %wall %wool %yarn)
           $%  [%atom p=term]                            ::
               [%core p=(list ,@ta) q=wine]              ::
               [%face p=term q=wine]                     ::
@@ -3187,6 +3190,152 @@
     [%2 ~]
   (mink [[-.gat [sam +>.gat]] -.gat] sky)
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::                section 2eO, diff (move me)           ::
+::
+::
+++  loss                                                ::  longest subsequence
+  ~/  %loss
+  |*  [hel=(list) hev=(list)]
+  ^+  hev
+  =+  ^=  sev 
+      =+  [inx=0 sev=*(map ,@t (list ,@ud))]
+      |-  ^+  sev
+      ?~  hev  sev
+      =+  guy=(~(get by sev) i.hev)
+      $(hev t.hev, inx +(inx), sev (~(put by sev) i.hev [inx ?~(guy ~ u.guy)]))
+  =|  gox=[p=@ud q=(map ,@ud ,[p=@ud q=_hev])]
+  =<  abet
+  =<  main
+  |%
+  ++  abet                                              ::  subsequence
+    ^+  hev
+    ?:  =(0 p.gox)  ~
+    (flop q:(need (~(get by q.gox) (dec p.gox))))
+  ::
+  ++  hink                                              ::  extend fits top
+    |=  [inx=@ud goy=@ud]  ^-  ?
+    |(=(p.gox inx) (lth goy p:(need (~(get by q.gox) inx))))
+  ::
+  ++  lonk                                              ::  extend fits bottom
+    |=  [inx=@ud goy=@ud]  ^-  ?
+    |(=(0 inx) (gth goy p:(need (~(get by q.gox) (dec inx)))))
+  ::
+  ++  lune                                              ::  extend
+    |=  [inx=@ud goy=@ud]
+    ^+  +>
+    %_    +>.$
+        gox
+      :-  ?:(=(inx p.gox) +(p.gox) p.gox)
+      %+  ~(put by q.gox)  inx  
+      [goy (snag goy hev) ?:(=(0 inx) ~ q:(need (~(get by q.gox) (dec inx))))]
+    ==
+  ::
+  ++  merg                                              ::  merge all matches
+    |=  gay=(list ,@ud)
+    ^+  +>
+    =+  ^=  zes
+        =+  [inx=0 zes=*(list ,[p=@ud q=@ud])]
+        |-  ^+  zes
+        ?:  |(?=(~ gay) (gth inx p.gox))  zes
+        ?.  (lonk inx i.gay)  $(gay t.gay)
+        ?.  (hink inx i.gay)  $(inx +(inx))
+        $(inx +(inx), gay t.gay, zes [[inx i.gay] zes])
+    |-  ^+  +>.^$
+    ?~(zes +>.^$ $(zes t.zes, +>.^$ (lune i.zes)))
+  ::
+  ++  main
+    =+  hol=hel
+    |-  ^+  +>
+    ?~  hol  +>
+    =+  guy=(~(get by sev) i.hol)
+    $(hol t.hol, +> (merg (flop `(list ,@ud)`?~(guy ~ u.guy))))
+  --
+::
+++  locz                                                ::  trivial algorithm
+  |=  [hel=tape hev=tape]
+  ^-  tape
+  =+  [leh=(lent hel) veh=(lent hev)]
+  =-  (flop q.yun)
+  ^=  yun
+  |-  ^-  [p=@ud q=tape]
+  ~+
+  ?:  |(=(0 leh) =(0 veh))  [0 ~]
+  =+  [dis=(snag (dec leh) hel) dat=(snag (dec veh) hev)]
+  ?:  =(dis dat)
+    =+  say=$(leh (dec leh), veh (dec veh))
+    [+(p.say) [dis q.say]]
+  =+  [lef=$(leh (dec leh)) rig=$(veh (dec veh))]
+  ?:((gth p.lef p.rig) lef rig)
+::
+++  lurk                                                ::  apply list patch
+  |*  [hel=(list) rug=(urge)]
+  ^+  hel
+  =+  war=`_hel`~
+  |-  ^+  hel
+  ?~  rug  (flop war)
+  ?-    -.i.rug
+      &  
+    %=   $
+      rug  t.rug
+      hel  (slag p.i.rug hel)
+      war  (weld (flop (scag p.i.rug hel)) war)
+    ==
+  ::
+      |
+    %=  $
+      rug  t.rug
+      hel  =+  gur=(flop p.i.rug)
+           |-  ^+  hel
+           ?~  gur  hel
+           ?>(&(?=(^ hel) =(i.gur i.hel)) $(hel t.hel, gur t.gur))
+      war  (weld q.i.rug war)
+    ==
+  ==
+::
+++  lusk                                                ::  lcs to list patch
+  |*  [hel=(list) hev=(list) lcs=(list)]
+  =+  ^=  rag
+      ^-  $%  [& p=@ud]
+              [| p=_lcs q=_lcs]
+          ==
+      [%& 0]
+  =>  .(rag [p=rag q=*(list _rag)])
+  =<  abet  =<  main
+  |%
+  ++  abet  =.(q.rag ?:(=([& 0] p.rag) q.rag [p.rag q.rag]) (flop q.rag))
+  ++  done
+    |=  new=_p.rag
+    ^+  rag
+    ?-  -.p.rag
+      |   ?-  -.new
+            |  [[%| (weld p.new p.p.rag) (weld q.new q.p.rag)] q.rag]
+            &  [new [p.rag q.rag]]
+          ==
+      &   ?-  -.new
+            |  [new ?:(=(0 p.p.rag) q.rag [p.rag q.rag])]
+            &  [[%& (add p.p.rag p.new)] q.rag]
+          ==
+    ==
+  ::
+  ++  main
+    |-  ^+  +
+    ?~  hel
+      ?~  hev
+        ?>(?=(~ lcs) +)
+      $(hev t.hev, rag (done %| ~ [i.hev ~]))
+    ?~  hev
+      $(hel t.hel, rag (done %| [i.hel ~] ~))
+    ?~  lcs
+      +(rag (done %| (flop hel) (flop hev)))
+    ?:  =(i.hel i.lcs)
+      ?:  =(i.hev i.lcs)
+        $(lcs t.lcs, hel t.hel, hev t.hev, rag (done %& 1))
+      $(hev t.hev, rag (done %| ~ [i.hev ~]))
+    ?:  =(i.hev i.lcs)
+      $(hel t.hel, rag (done %| [i.hel ~] ~))
+    $(hel t.hel, hev t.hev, rag (done %| [i.hel ~] [i.hev ~]))
+  --
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                section 2eY, SHA-256 (move me)        ::
 ::
 ++  shad  |=(ruz=@ (shax (shax ruz)))                   ::  double sha-256
@@ -4135,8 +4284,8 @@
         (weld p.gen `wing`[[~ 2] ~])
       (turn r.gen |=([p=gene q=gene] [p [%ktdt [~ 10] [%tsgr [~ 3] q]]]))
     ::
-        [%hxgl *]  [%cnhp [%cnbc %pave] [%zpgr p.gen] ~]
-        [%hxgr *]  [%cnhp [%cnbc %sell] [%zpgr p.gen] ~]
+        [%hxgl *]  [%cnhp [%cnbc %pave] [%zpgr [%cltr p.gen]] ~]
+        [%hxgr *]  [%cnhp [%cnbc %sell] [%zpgr [%cltr p.gen]] ~]
     ::
         [%kthp *]  [%ktls ~(bunt al bore(gen p.gen)) q.gen]
         [%sgbr *]  [%sggr [%lose p.gen] q.gen]
@@ -4160,12 +4309,12 @@
         [%sgbc *]  [%sggr [%live [%dtsg %% p.gen]] q.gen]
         [%sghx *]  [%sggr [%ping [%dtsg %% p.gen]] q.gen]
         [%sgkt *]  
-      [%sggr [%mean [%brdt [%cnhp [%cnbc %sell] [%zpgr p.gen ~] ~]]] q.gen]
+      [%sggr [%mean [%brdt [%cnhp [%cnbc %sell] [%zpgr p.gen] ~]]] q.gen]
     ::
         [%sgls *]  [%sggr [%memo %dtsg %% p.gen] q.gen]
         [%sgpm *]
       :+  %sggr 
-        [%slog [%dtpt %% p.gen] [%cnhp [%cnbc %sell] [%zpgr q.gen ~] ~]] 
+        [%slog [%dtpt %% p.gen] [%cnhp [%cnbc %sell] [%zpgr q.gen] ~]] 
       r.gen
     ::
         [%sgts *]  [%sggr [%germ p.gen] q.gen]
@@ -4521,7 +4670,7 @@
         [%wtsg *]   [%wtcl [%wtts [%bcts %null] p.gen] q.gen r.gen]
         [%wtzp *]   [%wtcl p.gen [%dtsg %f 1] [%dtsg %f 0]]
         [%zpcb *]   q.gen
-        [%zpgr *]   [%zpsm [%bctr [%cnbc %type]] [%cltr p.gen]]
+        [%zpgr *]   [%zpsm [%bctr [%cnbc %type]] p.gen]
         *           gen
     ==
   ::
@@ -4545,7 +4694,6 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                section 2fC, compilation proper       ::
 ::
-++  deck  .
 ++  ut
   ~%    %ut
       +>+
@@ -4721,6 +4869,7 @@
         %tank      [%leaf '*' 't' ~]
         %void      [%leaf '#' ~]
         %wool      [%leaf '*' '"' '"' ~]
+        %wall      [%leaf '*' '\'' '\'' ~]
         %yarn      [%leaf '"' '"' ~]
         [%atom *]  [%leaf '@' (trip p.q.ham)]
         [%core *]
@@ -4796,6 +4945,15 @@
         %tank
       =+  cis=(tank lum)
       ?.(=(lum cis) ~ [~ cis])
+    ::
+        %wall
+      :-  ~
+      :+  %rose
+        [[' ' ~] ['<' '|' ~] ['|' '>' ~]]
+      |-  ^-  (list tank)
+      ?@  lum
+        ?>(?=(~ lum) ~)
+      [[%leaf (trip ((hard ,@) -.lum))] $(lum +.lum)]
     ::
         %wool
       :-  ~
@@ -4933,6 +5091,7 @@
     |=  ham=calf
     =-  ?+  woz  woz
           [%list * [%atom 'ta']]  %path
+          [%list * [%atom 't']]   %wall
           [%list * [%atom 'tD']]  %yarn
           [%list * %yarn]         %wool
         ==
@@ -6437,7 +6596,7 @@
                   [%smsm `gene`~(clam al `tile`~(bore ap a)) [%dtkt b]]
                 ;~(plug wide rood)
               ==
-              ;~(pfix ket (cook (prey %lip) (most ket rood)))
+              ;~(pfix ket (cook (prey %nub) (most ket rood)))
               (cook (pray %toy) rood)
             ==
           ==
@@ -6681,8 +6840,8 @@
                   [':' ;~(pfix col (toad expz))]
                   [',' (rune com %zpcm expb)]
                   [';' (rune sem %zpsm expb)]
-                  ['^' ;~(pfix ket (cook (prey %lip) (toad exps)))]
-                  ['>' (rune gar %zpgr exps)]
+                  ['^' ;~(pfix ket (cook (prey %nub) (toad exps)))]
+                  ['>' (rune gar %zpgr expa)]
                   ['=' (rune tis %zpts expa)]
                 ==
               ==
@@ -7406,13 +7565,41 @@
               any=@                                     ::  entropy
               urb=(map seat safe)                       ::  all keys and routes
           ==                                            ::
-++  ukan                                                ::  change
+++  udal                                                ::  atomic change (%b)
+          $:  p=@ud                                     ::  blockwidth
+              q=(list ,[p=@ud q=(unit ,[p=@ q=@])])     ::  indels
+          ==                                            ::
+++  udon                                                ::  abstract delta
+          $:  p=umph                                    ::  preprocessor
+              ^=  q                                     ::  patch
+              $%  [%a p=ulna]                           ::  trivial replace
+                  [%b p=udal]                           ::  atomic indel
+                  [%c p=(urge)]                         ::  list indel
+                  [%d p=upas q=upas]                    ::  tree edit
+              ==                                        ::
+          ==                                            ::
+++  ukan                                                ::  change per path
           $%  [%del p=@uvI]                             ::  delete old-hash
               [%set p=@uvI q=@uvI r=*]                  ::  new old data
+          ::  [%mut p=@uvI q=@uvI r=udon]               ::  structured change
           ==                                            ::
 ++  ukay  (list ukaz)                                   ::  backward forward
 ++  ukaz  ,[p=path q=ukan]                              ::  change (pl ukazy)
+++  ulna  ,[p=* q=*]                                    ::  trivial change
 ++  umaz  ,[p=(list ukaz) q=(list ukaz)]                ::  dual change
+++  umph                                                ::  change filter
+          $|  $?  %a                                    ::  no filter
+                  %b                                    ::  jamfile
+                  %c                                    ::  LF text
+              ==                                        ::
+          $%  [%d p=@ud]                                ::  blocklist
+          ==                                            ::
+++  upas                                                ::  tree change (%d)
+          $&  [p=upas q=upas]                           ::  cell
+          $%  [0 p=axis]                                ::  copy old
+              [1 p=*]                                   ::  insert new
+              [2 p=axis q=udon]                         ::  mutate!
+          ==                                            ::
 ++  vane  $_                                            ::  kernel actor
           |+  [now=@da eny=@ sky=||(* (unit))]          ::  activate
           ^?  |%                                        ::
