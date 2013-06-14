@@ -120,20 +120,6 @@
     loc_u->kad[inx_w] = kad;
   } 
 
-  //  apply list
-  //
-  static void
-  _lunz(u2_loss* loc_u,                 
-        u2_noun zes)                                              //  retain
-  {
-    while ( u2_nul != zes ) {
-      u2_noun i_zes = u2h(zes);
-
-      _lune(loc_u, u2_cr_word(0, u2h(i_zes)), u2_cr_word(0, u2t(i_zes)));
-      zes = u2t(zes);
-    }
-  }
-
   //  extend fits top
   //
   static u2_bean
@@ -255,11 +241,8 @@
 #endif
   }
 
-#if 0
-  //  this should work perfectly but doesn't for some reason
-  //
   static void
-  _grim(u2_loss* loc_u,
+  _merg(u2_loss* loc_u,
         c3_w     inx_w,
         u2_noun  gay)
   {
@@ -274,43 +257,15 @@
       bik = _bink(loc_u, &inx_w, loc_u->kct_w, goy_w);
       
       if ( u2_yes == bik ) {
-        _grim(loc_u, inx_w + 1, u2t(gay));
+        _merg(loc_u, inx_w + 1, u2t(gay));
         _lune(loc_u, inx_w, goy_w);
       }
       else {
-        _grim(loc_u, inx_w, u2t(gay));
+        _merg(loc_u, inx_w, u2t(gay));
       }
     }
   }
-#endif
 
-  //  merge
-  //
-  static void
-  _merg(u2_loss* loc_u,
-        u2_noun  gay)                                             //  retain
-  {
-    u2_noun zes = u2_nul;
-    c3_w    inx_w = 0;
-
-    while ( (u2_nul != gay) && (inx_w <= loc_u->kct_w) ) {
-      u2_noun i_gay = u2h(gay); 
-      c3_w    goy_w = u2_cr_word(0, i_gay);
-      u2_noun bik;
-
-      bik = _bink(loc_u, &inx_w, loc_u->kct_w, goy_w);
-      
-      if ( u2_yes == bik ) {
-        zes = u2nc(u2nc(u2_ci_words(1, &inx_w), u2k(i_gay)), zes);
-        inx_w++;
-      }
-      gay = u2t(gay);
-    }
-    _lunz(loc_u, zes);
-    u2z(zes);
-  }
-
-  
   //  compute lcs
   //
   static void
@@ -323,8 +278,7 @@
       if ( u2_none != guy ) {
         u2_noun gay = u2_ckb_flop(u2k(guy));
          
-        _merg(loc_u, gay);
-        // _grim(loc_u, gay, 0);
+        _merg(loc_u, 0, gay);
         u2z(gay);
       }
 
@@ -380,6 +334,6 @@
 */
   u2_ho_jet 
   j2_mbj(Pt5, loss)[] = { 
-    { ".2", c3__lite, j2_mb(Pt5, loss), u2_jet_live | u2_jet_test, u2_none, u2_none },
+    { ".2", c3__lite, j2_mb(Pt5, loss), Tier5, u2_none, u2_none },
     { }
   };
