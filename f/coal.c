@@ -8,17 +8,17 @@
 #include <sys/stat.h>
 #include <dirent.h>
 
-#include "../gen194/pit.h"
+#include "../gen192/pit.h"
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt5Y   k_194__a__b__c__d__e
+#   define Pt5Y   k_192__a__b__c__d__e
 
   /**  Jet dependencies.  Minimize these.
   **/
-#   define Pt3Y   k_194__a__b__c
-#   define Pt4Y   k_194__a__b__c__d
-#   define Pt5Y   k_194__a__b__c__d__e
+#   define Pt3Y   k_192__a__b__c
+#   define Pt4Y   k_192__a__b__c__d
+#   define Pt5Y   k_192__a__b__c__d__e
 
     u2_noun j2_mbc(Pt3Y, gor)(u2_wire, u2_noun a, u2_noun b);
     u2_noun j2_mcc(Pt4Y, by, get)(u2_wire, u2_noun a, u2_noun b);
@@ -391,9 +391,12 @@ u2_cm_chin()
 u2_weak
 u2_cm_bury(u2_weak som)
 {
-  if ( u2_none == som ) {
-    return u2_none;
-  } else {
+  if ( u2_none == som ) return som;
+
+  if ( u2_no == u2_rl_junior(u2_wire_bas_r(u2_Wire), som) ) {
+    return som;
+  }
+  else {
     u2_noun pro = u2_rl_take(u2_wire_bas_r(u2_Wire), som);
 
     u2_cz(som);

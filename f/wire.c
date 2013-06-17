@@ -3,6 +3,8 @@
 ** This file is in the public domain.
 */
 #include "all.h"
+#include <sys/stat.h>
+#include <fcntl.h>
 
 /* u2_wr_init():
 **
@@ -36,7 +38,6 @@ u2_wr_init(c3_m   hip_m,
     u2_wire_lan(wir_r) = u2_yes;
   }
 
-#if 1
   /* Permanent basket = 1/16 of address space.
   */
   {
@@ -44,9 +45,25 @@ u2_wr_init(c3_m   hip_m,
 
     bas_r = u2_rl_leap_part(wir_r, c3__sand, 1, 16, 0);
     u2_wire_bas_r(wir_r) = bas_r;
+
+#if 0
+    fprintf(stderr, "bas_r %d, hat %d, mat %d, cap %d, rut %d\n", 
+        bas_r >> LoomPageWords,
+        u2_rail_hat_r(bas_r) >> LoomPageWords,
+        u2_rail_mat_r(bas_r) >> LoomPageWords,
+        u2_rail_cap_r(bas_r) >> LoomPageWords,
+        u2_rail_rut_r(bas_r) >> LoomPageWords);
+
+    fprintf(stderr, "wir_r %d, hat %d, mat %d, cap %d, rut %d\n", 
+        wir_r >> LoomPageWords,
+        u2_rail_hat_r(wir_r) >> LoomPageWords,
+        u2_rail_mat_r(wir_r) >> LoomPageWords,
+        u2_rail_cap_r(wir_r) >> LoomPageWords,
+        u2_rail_rut_r(wir_r) >> LoomPageWords);
+#endif
+
     // u2_ba_init(wir_r, 0);
   }
-#endif
 
 #if 1
   /* Host control.
@@ -85,6 +102,101 @@ u2_wr_init(c3_m   hip_m,
   return wir_r;
 }
 
+/* _wr_open(): open checkpoint file, or return null.
+*/
+static c3_i
+_wr_open(c3_c* cpu_c, c3_c* fil_c, c3_c* suf_c)
+{
+  c3_c ful_c[8193];
+  c3_i fid_i;
+
+  sprintf(ful_c, "%s/~chk", cpu_c);
+  mkdir(ful_c, 0700);
+
+  sprintf(ful_c, "%s/~chk/%s.%s", cpu_c, fil_c, suf_c);
+  fid_i = open(ful_c, O_RDWR | O_CREAT, 0666);
+  if ( -1 == fid_i ) {
+    perror(ful_c); exit(1);
+  }
+  return fid_i;
+}
+
+/* u2_wr_check_init(): initialize checkpoint segments and/or files.
+*/
+void
+u2_wr_check_init(c3_c* cpu_c)
+{
+  //  Segment A, low memory.
+  //
+  {
+    LoomSegmentA.bot_w = 2048;
+    LoomSegmentA.len_w = 30720;
+    LoomSegmentA.num_w = 0;
+    LoomSegmentA.ctl_i = _wr_open(cpu_c, "a", "ctl");
+    LoomSegmentA.dat_i = _wr_open(cpu_c, "a", "dat");
+  }
+
+  //  Segment B, high memory.
+  //
+  {
+    LoomSegmentB.bot_w = LoomHalfPages;
+    LoomSegmentB.len_w = 30719;
+    LoomSegmentB.num_w = 0;
+    LoomSegmentB.ctl_i = _wr_open(cpu_c, "b", "ctl");
+    LoomSegmentB.dat_i = _wr_open(cpu_c, "b", "dat");
+  }
+
+  //  Segment C, the basket control block.  Ugly.
+  {
+    LoomSegmentC.bot_w = 63487;
+    LoomSegmentC.len_w = 1;
+    LoomSegmentC.num_w = 0;
+    LoomSegmentC.ctl_i = _wr_open(cpu_c, "c", "ctl");
+    LoomSegmentC.dat_i = _wr_open(cpu_c, "c", "dat");
+  }
+
+  //  Segment D, the actual basket.
+  {
+    LoomSegmentD.bot_w = 0;
+    LoomSegmentD.len_w = 2048;
+    LoomSegmentD.num_w = 0;
+    LoomSegmentD.ctl_i = _wr_open(cpu_c, "d", "ctl");
+    LoomSegmentD.dat_i = _wr_open(cpu_c, "d", "dat");
+  }
+}
+
+static void
+_wr_check_cheg(u2_cheg* ceg_u, u2_ray top_r)
+{
+  c3_w top_w = (top_r + ((1 << LoomPageWords) - 1)) >> LoomPageWords;
+
+  c3_assert(top_w >= ceg_u->bot_w);
+  c3_assert(top_w < (ceg_u->bot_w + ceg_u->len_w));
+
+  if ( ceg_u->num_w > (top_w - ceg_u->bot_w) ) {
+    ceg_u->num_w = (top_w - ceg_u->bot_w);
+  }
+}
+
+/* u2_wr_check_save(): checkpoint wire in global structure.
+*/
+void
+u2_wr_check_save()
+{
+  u2_ray mat_r = u2_rail_mat_r(u2_Wire);
+  u2_ray hat_r = u2_rail_hat_r(u2_Wire);
+
+  if ( hat_r >= HalfSize ) {
+    _wr_check_cheg(&LoomSegmentB, hat_r);
+    _wr_check_cheg(&LoomSegmentA, mat_r);
+  } else {
+    _wr_check_cheg(&LoomSegmentA, hat_r);
+    _wr_check_cheg(&LoomSegmentB, mat_r);
+  }
+#if 0
+  _wr_check_cheg(&LoomSegmentC, u2_rail_hat_r(bas_r));
+#endif
+}
 
 /* u2_wr_ice(): u2_rl_ice(), with u2_bx_copy().
 */

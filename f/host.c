@@ -617,13 +617,14 @@ _ho_explore(u2_rail ral_r,
   } else {
     c3_c* cos_c = u2_ho_cstring(xip);
 
+    // fprintf(stderr, "ho_explore: cos_c %s\r\n", cos_c);
     if ( 0 != (dry_d = _ho_explore_parent(ral_r, xip, cos_c)) ) {
-      // fprintf(stderr, "battery: child : %s\n", cos_c);
+      // fprintf(stderr, "battery: child : %s\r\n", cos_c);
       _ho_attach(ral_r, dry_d);
       return dry_d;
     }
     else if ( 0 != (dry_d = _ho_explore_static(ral_r, xip, cos_c)) ) {
-      // fprintf(stderr, "battery: static: %s\n", cos_c);
+      // fprintf(stderr, "battery: static: %s\r\n", cos_c);
       _ho_attach(ral_r, dry_d);
       return dry_d;
     }

@@ -421,7 +421,7 @@ u2_ve_start(c3_w kfo_w, c3_w kto_w)
     }
   }
 
-  u2_cm_trip();
+  // u2_cm_trip();
   {
     u2_noun hoe;
  
@@ -449,8 +449,8 @@ u2_ve_start(c3_w kfo_w, c3_w kto_w)
       u2_cm_done();
     }
     u2_cm_purge();
-  }
-  u2_cm_chin();
+  } 
+  // u2_cm_chin();
 
   if ( u2_yes == u2_Flag_Verbose ) {
     fprintf(stderr, "%s: in %d ", u2_Local, u2_Host.kno_w);
@@ -514,7 +514,6 @@ u2_ve_mark_reck(u2_reck* rec_u)
   siz_w += u2_cm_mark_noun(rec_u->sen);
   siz_w += u2_cm_mark_noun(rec_u->own);
   siz_w += u2_cm_mark_noun(rec_u->our);
-  siz_w += u2_cm_mark_noun(rec_u->pod);
   siz_w += u2_cm_mark_noun(rec_u->roe);
   siz_w += u2_cm_mark_noun(rec_u->key);
 
@@ -559,10 +558,6 @@ u2_ve_mark()
   c3_w siz_w, i_w;
 
   siz_w = u2_cm_mark_internal();
-
-  siz_w += u2_cm_mark_noun(u2_Host.pet);
-  siz_w += u2_cm_mark_noun(u2_Host.pat);
-  siz_w += u2_cm_mark_noun(u2_Host.map);
 
   for ( i_w = 0; i_w < 257; i_w++ ) {
     u2_steg* ver_e = &u2_Host.ver_e[i_w];

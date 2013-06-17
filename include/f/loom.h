@@ -11,6 +11,7 @@
 #   define HalfSize (1 << HalfBits)
 #   define HalfEnd  (HalfSize - 1)
 #   define LoomPageWords      12            //  16K pages
+#   define LoomAllPages       (1 << 16)     //  65536 pages
 #   define LoomHalfPages      (1 << 15)     //  32768 pages
 #   define LoomVersion        0xdeafbee
 
@@ -30,22 +31,26 @@
         c3_w         mug_e: 30;             //  30-bit mug
       } u2_chit;
 
-    /* u2_chem: memory control, per half, in memory.
-    */
-      typedef struct _u2_chem {
-        c3_w pgs_w;                         //  number of pages live
-        u2_chit cht_w[LoomHalfPages];       //  page control data
-      } u2_chem;
-
     /* u2_chef: memory control, per whole, on disk.
     */
       typedef struct _u2_chef {             //  control image
-        c3_d eno_d;                         //  event number
+        c3_w ent_w;                         //  event number
         c3_w ven_w;                         //  version
-        c3_w pgb_w;                         //  LoomPages in bottom
-        c3_w pgt_w;                         //  LoomPages in top
-        u2_chit cht_w[0];                   //  chits, per page
+        c3_w bot_w;                         //  offset in loom
+        c3_w pgs_w;                         //  pages saved
       } u2_chef;
+
+    /* u2_cheg: mapped segment.  always grows upward for now.
+    */
+      typedef struct _u2_cheg {
+        c3_c*            nam_c;             //  name as a file
+        struct _u2_cheg* nex_u;             //  linked in list
+        c3_w             bot_w;             //  beginning page
+        c3_w             len_w;             //  length in pages
+        c3_w             num_w;             //  number of pages dirty
+        c3_i             ctl_i;             //  control file
+        c3_i             dat_i;             //  data file
+      } u2_cheg;
 
 #   ifdef U2_GLOBAL
       /* Stop bean for signal handlers (eg, SIGINT).  Obsolete.
@@ -55,30 +60,22 @@
 
       /* Memory control structures.
       */
-        volatile u2_chem LoomChemBot;       //  bottom half in memory
-        volatile u2_chem LoomChemTop;       //  top half in memory
+        volatile u2_chit LoomChem[LoomAllPages];          //  memory
 
-      /* Checkpoint files.
+      /* Direct segment pointers.
       */
-        c3_c* LoomImagePrefix;              //  directory prefix to load
-
-        c3_i LoomImageBot;
-        c3_i LoomImageTop;
-        c3_i LoomControl;
+        u2_cheg LoomSegmentD = { "d" };
+        u2_cheg LoomSegmentC = { "c", &LoomSegmentD };
+        u2_cheg LoomSegmentB = { "b", &LoomSegmentC };
+        u2_cheg LoomSegmentA = { "a", &LoomSegmentB };
 
 #   else
       extern uint32_t LoomFrame;
       extern volatile sig_atomic_t LoomStop;
       extern volatile sig_atomic_t LoomIntr;
 
-      extern volatile u2_chem LoomChemTop;
-      extern volatile u2_chem LoomChemBot;
-
-      extern c3_c* LoomImagePrefix;
-      extern c3_i LoomImageBot;
-      extern c3_i LoomImageTop;
-      extern c3_i LoomControl;
-
+      extern volatile u2_chit LoomChem[LoomAllPages];
+      extern u2_cheg LoomSegmentA, LoomSegmentB, LoomSegmentC, LoomSegmentD;
 #   endif
 
 #     define   LoomFrameMax  8192
@@ -521,15 +518,15 @@
         **
         **   Load the loom from a file.
         */
-          void
-          u2_loom_load(c3_c* dir_c);
+          u2_bean
+          u2_loom_load(void);
 
         /* u2_loom_save():
         **
         **   Save the current loom at the current event number.
         */
           u2_bean
-          u2_loom_save(c3_c* dir_c, c3_d eno_d);
+          u2_loom_save(c3_w ent_w);
 
       /** General.
       **/

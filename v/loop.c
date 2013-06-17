@@ -227,12 +227,13 @@ _lo_soft(u2_reck* rec_u, u2_funk fun_f, u2_noun arg)
 {
   u2_noun hoe, pro, rop;
 
-  // u2_cm_trip();
+  u2_rl_leap(u2_Wire, c3__rock);
   if ( 0 != (hoe = u2_cm_trap()) ) {
     u2_noun mok;
 
-    u2_cm_purge();
-    u2_ve_grab(hoe, arg, 0);
+    u2_rl_fall(u2_Wire);
+    hoe = u2_rl_take(u2_Wire, hoe);
+    u2_rl_flog(u2_Wire);
 
     mok = u2_cn_mung(u2k(rec_u->toy.mook), u2nc(2, u2_ckb_flop(u2k(u2t(hoe)))));
     rop = u2nc(u2k(u2h(hoe)), u2k(u2t(mok)));
@@ -243,8 +244,11 @@ _lo_soft(u2_reck* rec_u, u2_funk fun_f, u2_noun arg)
   else {
     u2_noun pro = fun_f(rec_u, arg);
     u2_cm_done();
-  
-    u2_cm_purge();
+ 
+    u2_rl_fall(u2_Wire);
+    pro = u2_rl_take(u2_Wire, pro);
+    u2_rl_flog(u2_Wire);
+
     rop = u2nc(u2_blip, pro);
   }
   pro = rop;
@@ -310,7 +314,7 @@ _lo_pack(u2_reck* rec_u, u2_noun ron)
 
   lar_u.syn_w = u2_mug(tar_w);
   lar_u.mug_w = u2_mug(ron);
-  lar_u.ent_w = lug_u->ent_w++;
+  lar_u.ent_w = rec_u->ent_w;
   lar_u.len_w = len_w;
 
   //  XX: this is not in any way, shape or form a proper 2PC!
@@ -362,11 +366,12 @@ _lo_save(u2_reck* rec_u, u2_noun ovo)
 {
   u2_noun ron = u2_cke_jam(u2nc(u2k(rec_u->now), ovo));
 
-  if ( rec_u->dir_c ) {
+  if ( u2_Host.cpu_c ) {
     _lo_pack(rec_u, ron);
   } else {
     rec_u->roe = u2nc(ron, rec_u->roe);
   }
+  rec_u->ent_w += 1;
 }
 
 /* _lo_sing(): replay ovum from the past, time already set.
@@ -487,10 +492,15 @@ top:
     }
   }
 
-  //  
   //  Whatever worked, save it.  (XX - should be concurrent with execute.)
+  //  We'd like more events that don't change the state but need work here.
   {
-    _lo_save(rec_u, u2k(ovo));
+    u2_mug(u2t(u2t(gon)));
+    u2_mug(rec_u->roc);
+
+    if ( u2_no == u2_sing(u2t(u2t(gon)), rec_u->roc) ) {
+      _lo_save(rec_u, u2k(ovo));
+    }
   }
 
   //  And then apply it.
@@ -582,7 +592,6 @@ u2_lo_call(u2_reck*        rec_u,
     //  process actions
     //
     _lo_work(rec_u);
-    rec_u->eno_d += 1;
 
     //  update time
     //
@@ -599,71 +608,35 @@ _lo_home(u2_reck* rec_u)
 {
   c3_c    ful_c[2048];
 
-  //  Set pathname and create main directory.
-  {
-    c3_c* pod_c = u2_cr_string(rec_u->pod);
-    c3_c* dir_c;
-
-    pod_c = u2_cr_string(rec_u->pod);
-    if ( strlen(pod_c) > 30 ) {
-      pod_c[30] = 0;
-    }
-    dir_c = malloc(4 + (strlen(pod_c) - 1) + 1);
-    sprintf(dir_c, "hub/%s", pod_c + 1);
-
-    rec_u->dir_c = dir_c;
-    free(pod_c);
-
-    uL(fprintf(uH, "home: %s\n", rec_u->dir_c));
-  }
-
   //  Create subdirectories.
   //
   {
-    mkdir("hub", 0700);
-
-    if ( 0 != mkdir(rec_u->dir_c, 0700) ) {
-      perror(rec_u->dir_c);
+    if ( 0 != mkdir(u2_Host.cpu_c, 0700) ) {
+      perror(u2_Host.cpu_c);
       u2_lo_bail(rec_u);
     }
 
-    sprintf(ful_c, "%s/~get", rec_u->dir_c);
+    sprintf(ful_c, "%s/~get", u2_Host.cpu_c);
     if ( 0 != mkdir(ful_c, 0700) ) {
       perror(ful_c);
       u2_lo_bail(rec_u);
     }
 
-    sprintf(ful_c, "%s/~put", rec_u->dir_c);
+    sprintf(ful_c, "%s/~put", u2_Host.cpu_c);
     if ( 0 != mkdir(ful_c, 0700) ) {
       perror(ful_c);
       u2_lo_bail(rec_u);
     }
-  }
 
-  //  Copy default content.
-  //
-  {
-    sprintf(ful_c, "cp -r %s/%d/main %s", 
-                   U2_LIB, rec_u->kno_w, rec_u->dir_c);
-    uL(fprintf(uH, "home: %s\n", ful_c));
-    if ( 0 != system(ful_c) ) {
-      uL(fprintf(uH, "home: could not copy?\n"));
+    sprintf(ful_c, "%s/~chk", u2_Host.cpu_c);
+    if ( 0 != mkdir(ful_c, 0700) ) {
+      perror(ful_c);
       u2_lo_bail(rec_u);
     }
 
-    sprintf(ful_c, "cp -r %s/%d/cry %s", 
-                   U2_LIB, rec_u->kno_w, rec_u->dir_c);
-    uL(fprintf(uH, "home: %s\n", ful_c));
-    if ( 0 != system(ful_c) ) {
-      uL(fprintf(uH, "home: could not copy?\n"));
-      u2_lo_bail(rec_u);
-    }
-
-    sprintf(ful_c, "cp -r %s/%d/toy %s", 
-                   U2_LIB, rec_u->kno_w, rec_u->dir_c);
-    uL(fprintf(uH, "home: %s\n", ful_c));
-    if ( 0 != system(ful_c) ) {
-      uL(fprintf(uH, "home: could not copy?\n"));
+    sprintf(ful_c, "%s/~bak", u2_Host.cpu_c);
+    if ( 0 != mkdir(ful_c, 0700) ) {
+      perror(ful_c);
       u2_lo_bail(rec_u);
     }
   }
@@ -848,7 +821,7 @@ _lo_zest(u2_reck* rec_u)
   
   //  Create the record file.
   {
-    sprintf(ful_c, "%s/~egz.hope", rec_u->dir_c);
+    sprintf(ful_c, "%s/~egz.hope", u2_Host.cpu_c);
 
     if ( ((fid_i = open(ful_c, O_CREAT | O_WRONLY | O_EXCL, 0600)) < 0) || 
          (fstat(fid_i, &buf_b) < 0) ) 
@@ -862,12 +835,12 @@ _lo_zest(u2_reck* rec_u)
   //  See if the user wants to use a passcode.
   //
   {
-    rec_u->key = _lo_cask(rec_u, rec_u->dir_c, u2_yes);
+    rec_u->key = _lo_cask(rec_u, u2_Host.cpu_c, u2_yes);
 
     if ( 0 == rec_u->key ) {
       if ( u2_no == _lo_bask("generate a random passcode", u2_yes) ) {
         uL(fprintf(uH, "events in %s will be saved in the clear.\n", 
-                        rec_u->dir_c));
+                        u2_Host.cpu_c));
         rec_u->key = 0;
       }
       else {
@@ -906,7 +879,6 @@ _lo_zest(u2_reck* rec_u)
     }
 
     u2_Host.lug_u.len_w = c3_wiseof(led_u);
-    u2_Host.lug_u.ent_w = 0;
   }
 
   //  Save the boot events.
@@ -927,7 +899,7 @@ _lo_zest(u2_reck* rec_u)
   //  Copy the egz into ham, the factory default.
   {
     sprintf(ful_c, "rm -f %s/~ham.hope; cp %s/~egz.hope %s/~ham.hope",
-                   rec_u->dir_c, rec_u->dir_c, rec_u->dir_c);
+                   u2_Host.cpu_c, u2_Host.cpu_c, u2_Host.cpu_c);
 
     if ( 0 != system(ful_c) ) {
       uL(fprintf(uH, "zest: could not save ham\n"));
@@ -950,19 +922,6 @@ _lo_make(u2_reck* rec_u, u2_noun fav)
   //
   _lo_work(rec_u);
 
-  //  We should actually have a master now.
-  //
-  {
-    if ( u2_nul == rec_u->own ) {
-      uL(fprintf(uH, "boot did not install a master!\n"));
-      u2_lo_bail(rec_u);
-    }
-    else {
-      rec_u->our = u2k(u2h(rec_u->own));
-      rec_u->pod = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', u2k(rec_u->our)));
-    }
-  }
-
   //  Further server configuration.
   //
   {
@@ -981,25 +940,25 @@ _lo_make(u2_reck* rec_u, u2_noun fav)
 /* _lo_rest(): restore from record, or exit.
 */
 static void
-_lo_rest(u2_reck* rec_u, u2_noun cpu, u2_noun rez)
+_lo_rest(u2_reck* rec_u, u2_noun rez)
 {
   struct stat buf_b;
   c3_i        fid_i;
   c3_c        ful_c[2048];
+  c3_w        old_w = rec_u->ent_w;
+  c3_w        las_w = 0;
   u2_noun     roe = u2_nul;
   u2_noun     sev_l, tno_l, key_l;
 
-  //  Who the fsck are we today?
-  {
-    rec_u->dir_c = u2_cr_string(cpu);
-    u2z(cpu);
+  if ( 0 != rec_u->ent_w ) {
+    uL(fprintf(uH, "rest: checkpoint to event %d\n", rec_u->ent_w));
   }
 
   //  Maybe we should delete all your fscking data.
   {
     if ( u2_yes == rez ) {
       sprintf(ful_c, "rm -f %s/~egz.hope; cp %s/~ham.hope %s/~egz.hope",
-                     rec_u->dir_c, rec_u->dir_c, rec_u->dir_c);
+                     u2_Host.cpu_c, u2_Host.cpu_c, u2_Host.cpu_c);
 
       if ( 0 != system(ful_c) ) {
         uL(fprintf(uH, "rest: could not reset to factory!\n"));
@@ -1010,7 +969,7 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu, u2_noun rez)
 
   //  Open the fscking file.  Does it even exist?
   {
-    sprintf(ful_c, "%s/~egz.hope", rec_u->dir_c);
+    sprintf(ful_c, "%s/~egz.hope", u2_Host.cpu_c);
 
     if ( ((fid_i = open(ful_c, O_RDWR)) < 0) || 
          (fstat(fid_i, &buf_b) < 0) ) 
@@ -1070,7 +1029,7 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu, u2_noun rez)
       rec_u->key = _lo_staf(rec_u, key_l);
 
       while ( 0 == rec_u->key ) {
-        rec_u->key = _lo_cask(rec_u, rec_u->dir_c, u2_no);
+        rec_u->key = _lo_cask(rec_u, u2_Host.cpu_c, u2_no);
 
         if ( u2_mug(rec_u->key) != key_l ) {
           uL(fprintf(uH, "incorrect passcode\n"));
@@ -1129,8 +1088,9 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu, u2_noun rez)
       img_w = malloc(4 * lar_u.len_w);
 
       if ( end_w == u2_Host.lug_u.len_w ) {
-        ent_w = u2_Host.lug_u.ent_w = lar_u.ent_w;
-      } else {
+        ent_w = las_w = lar_u.ent_w;
+      } 
+      else {
         if ( lar_u.ent_w != (ent_w - 1) ) {
           uL(fprintf(uH, "record (%s) is corrupt (g)\n", ful_c));
           u2_lo_bail(rec_u);
@@ -1138,6 +1098,10 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu, u2_noun rez)
         ent_w -= 1;
       }
       end_w = (tar_w - lar_u.len_w);
+
+      if ( ent_w < old_w ) {
+        break;
+      }
 
       if ( -1 == lseek(fid_i, 4 * end_w, SEEK_SET) ) {
         uL(fprintf(uH, "record (%s) is corrupt (h)\n", ful_c));
@@ -1171,13 +1135,16 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu, u2_noun rez)
       }
       roe = u2nc(u2_cke_cue(ron), roe);
     }
-    
-    if ( 0 != ent_w ) {
-      uL(fprintf(uH, "record (%s) is corrupt (k)\n", ful_c));
-      u2_lo_bail(rec_u);
-    }
-    u2_Host.lug_u.ent_w += 1;
+    rec_u->ent_w = c3_max(las_w + 1, old_w);
   }
+
+  if ( u2_nul == roe ) {
+    c3_assert(rec_u->ent_w == old_w);
+    c3_assert((las_w + 1) == old_w);
+    return;
+  }
+
+  uL(fprintf(uH, "rest: replaying through event %d\n", las_w));
 
   //  Execute the fscking things.  This is pretty much certain to crash.
   fprintf(uH, "---------------- playback starting----------------\n");
@@ -1205,6 +1172,7 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu, u2_noun rez)
   }
   uL(fprintf(stderr, "\n---------------- playback complete----------------\n"));
 
+#if 0
   //  If you see this error, your record is totally fscking broken!
   //  Which probably serves you right.  Please consult a consultant.
   {
@@ -1222,9 +1190,9 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu, u2_noun rez)
     c3_c*   fil_c;
     c3_c*   who_c;
 
-    if ( (fil_c = strrchr(rec_u->dir_c, '/')) ) {
+    if ( (fil_c = strrchr(u2_Host.cpu_c, '/')) ) {
       fil_c++;
-    } else fil_c = rec_u->dir_c;
+    } else fil_c = u2_Host.cpu_c;
 
     who = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', u2k(rec_u->our)));
     who_c = u2_cr_string(who);
@@ -1236,6 +1204,7 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu, u2_noun rez)
     }
     free(who_c);
   }
+#endif
 
   //  Rewrite the header.  Will probably corrupt the record.
   { 
@@ -1261,52 +1230,64 @@ _lo_rest(u2_reck* rec_u, u2_noun cpu, u2_noun rez)
   }
 }
 
+/* _lo_ours(): set main identity.  Kind of a hack.
+*/
+static void
+_lo_ours(u2_reck* rec_u)
+{
+  if ( u2_nul == rec_u->own ) {
+    uL(fprintf(uH, "no owners\n"));
+    u2_lo_bail(rec_u);
+  }
+  else {
+    u2_noun eac = u2t(rec_u->own);
+
+    rec_u->our = u2h(rec_u->own);
+    while ( u2_nul != eac ) {
+      if ( u2_yes == u2_cka_lte(u2k(u2h(eac)), u2k(rec_u->our)) ) {
+        rec_u->our = u2h(eac);
+      }
+      eac = u2t(eac);
+    }
+    rec_u->our = u2k(rec_u->our);
+    rec_u->pod = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', u2k(rec_u->our)));
+  }
+}
+
 /* u2_lo_loop(): begin main event loop.
 */
 void
-u2_lo_loop(u2_reck* rec_u, u2_noun cpu, u2_noun meh, u2_noun rez)
+u2_lo_loop(u2_reck* rec_u, 
+           u2_bean  nuu,
+           u2_bean  rez)
 {
-  c3_assert((u2_nul == cpu) ^ (u2_nul == meh));
+  if ( u2_yes == nuu ) {
+    u2_noun ten;
 
-  if ( u2_nul == meh ) {
-    _lo_rest(rec_u, cpu, rez);
+    //  Get some host entropy.
+    //
+    {
+      c3_w rad_w[8];
+
+      _lo_rand(rec_u, rad_w);
+      ten = u2_ci_words(8, rad_w);
+    }
+    _lo_make(rec_u, u2nq(c3__make, c3__zuse, 12, ten));
   }
   else {
-    switch ( u2h(meh) ) {
-      default: c3_assert(0);
-
-      case c3__have: {
-        u2_noun pac = u2t(meh);
-        u2_noun fav = u2nc(c3__cash, u2_cke_cue(u2k(pac)));
-
-        _lo_make(rec_u, fav);
-      } break;
-
-      case c3__make: {
-        c3_l    biz_l = u2t(meh);
-        u2_noun ten;
-
-        //  Get some host entropy.
-        //
-        {
-          c3_w rad_w[8];
-
-          _lo_rand(rec_u, rad_w);
-          ten = u2_ci_words(8, rad_w);
-        }
-
-        u2z(meh);
-        _lo_make(rec_u, u2nq(c3__make, c3__zuse, biz_l, ten));
-      } break;
-    }
+    _lo_rest(rec_u, rez);
   }
+  _lo_ours(rec_u);
+
   u2_reck_sync(rec_u);
   u2_reck_plan(rec_u, u2nt(c3__gold, c3__ames, u2_nul),
                       u2nc(c3__kick, u2k(rec_u->now)));
 
-  // uL(fprintf(uH, "saving...\n"));
-  // u2_loom_save(rec_u->dir_c, rec_u->eno_d);
-  // uL(fprintf(uH, "saved.\n"));
+#if 1
+  u2_loom_save(rec_u->ent_w);
+
+  u2_Host.sav_u.ent_w = rec_u->ent_w;
+#endif
 
   _lo_init(rec_u);
   {

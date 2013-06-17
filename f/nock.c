@@ -467,7 +467,7 @@ _nock_cool(u2_noun bus,
 
           if ( u2_none != xip ) {
             u2_noun pro = u2_ho_kick(u2_Wire, xip, seb, b_gal);
-
+             
             u2_tx_sys_bit(u2_Wire, u2_no);
             if ( u2_none == pro ) {
               return u2_cm_bail(c3__exit);

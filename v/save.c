@@ -28,6 +28,7 @@ u2_save_io_init(u2_reck* rec_u)
 {
   u2_save* sav_u = &u2_Host.sav_u;
 
+  sav_u->ent_w = 0;
   ev_timer_init(&sav_u->tim_u, _lo_save, 0.0, 0.);
 }
 
@@ -77,5 +78,12 @@ void
 u2_save_io_time(u2_reck*         rec_u,
                 struct ev_timer* tim_u)
 {
-  //  uL(fprintf(uH, "autosaving...\n"));
+  u2_save* sav_u = &u2_Host.sav_u;
+
+  if ( rec_u->ent_w > sav_u->ent_w ) {
+    // uL(fprintf(uH, "autosaving... ent_w %d\n", rec_u->ent_w));
+
+    u2_loom_save(rec_u->ent_w);
+    sav_u->ent_w = rec_u->ent_w;
+  }
 }

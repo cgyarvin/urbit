@@ -29,77 +29,66 @@
     */
       extern u2_ho_driver j2_da(k_191);
       extern u2_ho_driver j2_da(k_192);
-      extern u2_ho_driver j2_da(k_193);
-      extern u2_ho_driver j2_da(k_194);
 
     /* Built-in battery drivers.   Null `cos` terminates. 
     */
       u2_ho_driver *HostDriverBase[] = {
         &j2_k_191_d,
         &j2_da(k_192),
-        &j2_da(k_193),
-        &j2_da(k_194),
         0
       };
 
+struct _u2_opts {
+  c3_c*   cpu_c;
+  c3_w    kno_w;
+  u2_bean abo;
+  u2_bean gab;
+  u2_bean pro;
+  u2_bean veb;
+  u2_bean rez;
+  u2_bean nuu;
+} u2_Opts;
+
 /* u2_ve_getopt(): extract option map from command line.
 */
-static u2_weak
+static u2_bean
 u2_ve_getopt(c3_i argc, c3_c** argv)
 {
-  u2_noun map = 0;
-  c3_w    kno_w = DefaultKernel;
-  u2_noun hep = u2_nul;
-  u2_noun meh = u2_nul;
-  u2_bean abo = u2_no;
-  u2_bean gab = u2_no;
-  u2_bean pro = u2_no;
-  u2_bean veb = u2_yes;
-  u2_bean rez = u2_no;
-
   c3_i ch_i;
 
-  while ( (ch_i = getopt(argc, argv, "k:n:i:lagqvR")) != -1 ) {
+  u2_Opts.abo = u2_no;
+  u2_Opts.gab = u2_no;
+  u2_Opts.pro = u2_no;
+  u2_Opts.veb = u2_yes;
+  u2_Opts.rez = u2_no;
+  u2_Opts.nuu = u2_no;
+
+  while ( (ch_i = getopt(argc, argv, "k:i:lcagqvR")) != -1 ) {
     switch ( ch_i ) {
-      case 'a': { abo = u2_yes; break; }
-      case 'g': { gab = u2_yes; break; }
+      case 'a': { u2_Opts.abo = u2_yes; break; }
+      case 'c': { u2_Opts.nuu = u2_yes; break; }
+      case 'g': { u2_Opts.gab = u2_yes; break; }
       case 'k': {
         c3_w arg_w = atoi(optarg);
 
         if ( (arg_w > 0) && (arg_w < 256) ) {
-          kno_w = arg_w;
+          u2_Opts.kno_w = arg_w;
         }
-        else return u2_none;
+        else return u2_no;
         break;
       }
-      case 'n': {
-        c3_w biz_w;
-
-        if ( 1 == sscanf(optarg, "%u", &biz_w) ) {
-          meh = u2nc(c3__make, biz_w);
-        }
-        break;
-      }
-      case 'i': {
-        u2_noun vit = u2_walk_load(optarg);
-
-        meh = u2nc(c3__have, vit);
-      } break;
-
-      case 'q': { veb = u2_no; break; }
-      case 'v': { veb = u2_yes; break; }
-      case 'R': { rez = u2_yes; break; }
+      case 'q': { u2_Opts.veb = u2_no; break; }
+      case 'v': { u2_Opts.veb = u2_yes; break; }
+      case 'R': { u2_Opts.rez = u2_yes; break; }
       case '?': default: {
-        return u2_none;
+        return u2_no;
       }
     }
   }
 
-  if ( argc == optind ) {
-    map = u2_ckd_by_put(map, c3__cpu, 0);
-  }
-  else if ( argc == (optind + 1) ) {
-    //  Trim trailing slash if any.
+  if ( argc != (optind + 1) ) {
+    return u2_no;
+  } else { 
     {
       c3_c* ash_c;
 
@@ -108,7 +97,7 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
       }
     }
 
-    if ( u2_yes == rez ) {
+    if ( u2_yes == u2_Opts.rez ) {
       c3_c yes[2];
 
       yes[1] = 0;
@@ -121,22 +110,9 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
       }
       else printf("%s will be reset.\n", argv[optind]);
     }
-    map = u2_ckd_by_put(map, c3__cpu, u2_ci_string(argv[optind]));
+    u2_Opts.cpu_c = strdup(argv[optind]);
+    return u2_yes;
   }
-  else return u2_none;
-
-  map = u2_ckd_by_put(map, c3__meh, meh);
-  map = u2_ckd_by_put(map, c3__kno, kno_w);
-  map = u2_ckd_by_put(map, c3__abo, abo);
-  map = u2_ckd_by_put(map, c3__gab, gab);
-  map = u2_ckd_by_put(map, c3__pro, pro);
-  map = u2_ckd_by_put(map, c3__veb, veb);
-  map = u2_ckd_by_put(map, c3__rez, rez);
- 
-  if ( hep != u2_nul ) {
-    map = u2_ckd_by_put(map, c3__hep, hep); 
-  }
-  return map;
 }
 
 /* u2_ve_usage(): print usage and exit.
@@ -162,20 +138,15 @@ u2_ve_panic(c3_i argc, c3_c** argv)
 static void
 u2_ve_sysopt()
 {
-  u2_noun map = u2_Host.map;
-
   {
-    u2_noun cpu = u2_ckd_by_got(u2_ct(map), c3__cpu);
-
-    u2_Local = u2_cr_string(cpu);
-    u2_cz(cpu);
+    u2_Local = strdup(u2_Opts.cpu_c);
   }
   u2_System = U2_LIB;
 
-  u2_Flag_Abort = u2_ckd_by_got(u2_ct(map), c3__abo);
-  u2_Flag_Garbage = u2_ckd_by_got(u2_ct(map), c3__gab);
-  u2_Flag_Profile = u2_ckd_by_got(u2_ct(map), c3__pro);
-  u2_Flag_Verbose = u2_ckd_by_got(u2_ct(map), c3__veb);
+  u2_Flag_Abort = u2_Opts.abo;
+  u2_Flag_Garbage = u2_Opts.gab;
+  u2_Flag_Profile = u2_Opts.pro;
+  u2_Flag_Verbose = u2_Opts.veb;
 }
 
 static jmp_buf Signal_buf;
@@ -187,8 +158,7 @@ static uint8_t Sigstk[SIGSTKSZ];
 volatile enum { sig_none, sig_overflow, sig_interrupt } Sigcause;
 
 static void
-overflow_handler(int emergency,
-                      stackoverflow_context_t scp)
+overflow_handler(int emergency, stackoverflow_context_t scp)
 {
   if ( 1 == emergency ) {
     write(2, "stack emergency\n", strlen("stack emergency" + 2));
@@ -212,58 +182,125 @@ main(c3_i   argc,
 {
   c3_w kno_w;
 
+  //  Parse options.
+  //
+  if ( u2_no == u2_ve_getopt(argc, argv) ) {
+    u2_ve_usage(argc, argv);
+    return 1;
+  }
+  u2_ve_sysopt();
+
   //  Instantiate process globals.
   {
-    u2_loom_boot();
+    u2_wr_check_init(u2_Opts.cpu_c);
 
-    u2_Host.wir_r = u2_wr_init(c3__rock, u2_ray_of(0, 0), u2_ray_of(1, 0));
-    u2_Wire = u2_Host.wir_r;
-
-    u2_Host.arv_u = u2_Arv;
-  }
-
-#if 0
-  TermTest();
-#endif
-  //  Set outside bail trap.  Should not be used, but you never know...
-  //
-  if ( 0 != u2_cm_trap() ) {
-    u2_ve_panic(argc, argv);
-  }
-  else {
-    //  Get and apply command-line options.
-    {
-      u2_noun map; 
-
-      if ( u2_none == (map = u2_ve_getopt(argc, argv)) ) {
-        u2_ve_usage(argc, argv);
-      }
-      else u2_Host.map = map;
-
-      u2_ve_sysopt();
-    }
-
-    //  Set boot and goal stages.
-    {
-      u2_noun kno = u2_ckd_by_get(u2_ct(u2_Host.map), c3__kno);
-
-      if ( (u2_none == kno) || (kno > 255) ) {
-        kno_w = DefaultKernel;
+    if ( (u2_no == u2_Opts.nuu) && (u2_no == u2_Opts.rez) ) {
+      if ( u2_no == u2_loom_load() ) {
+        fprintf(stderr, "%s: could not load\n", u2_Opts.cpu_c);
+        return 1;
       } else {
-        kno_w = kno;
-      } 
-    }
+        u2_Host.wir_r = u2_ray_of(0, 0);
+        u2_Wire = u2_Host.wir_r;
 
-    //  Load the system.
-    //
-    {
-      u2_ve_init(kno_w);
+        u2_Host.cpu_c = u2_Opts.cpu_c;
+        u2_Host.arv_u = u2_Arv;
+        c3_assert(0 != u2_Host.arv_u->ken);
 
-      if ( 0 != u2_Host.ver_e[kno_w].ken ) {
-        u2_reck_boot(u2_Host.arv_u);
+        u2_Arv->ova.egg_u = u2_Arv->ova.geg_u = 0;
+
+        //  Horrible ancient stuff.
+        //
+        kno_w = u2_Host.arv_u->kno_w;
+
+        u2_Host.kno_w = kno_w;
+        u2_Host.ver_e[kno_w].ken = u2k(u2_Host.arv_u->ken);
+        u2_Host.ver_e[kno_w].mod_m = c3__warm;
+
+        u2_ho_push();
+        u2_ve_rest();
       }
+    } else {
+      u2_loom_boot();
+      u2_Host.wir_r = u2_wr_init(c3__rock, u2_ray_of(0, 0), u2_ray_of(1, 0));
+      u2_Wire = u2_Host.wir_r;
+
+      u2_Host.cpu_c = u2_Opts.cpu_c;
+      u2_Host.arv_u = u2_Arv;
     }
-    u2_cm_done();
+  }
+
+  //  If we have not loaded from checkpoint, build kernel.
+  //
+  if ( 0 != u2_Host.arv_u->ent_w ) {
+    u2_reck_time(u2_Host.arv_u);
+    u2_reck_numb(u2_Host.arv_u);
+    {
+      c3_c* dyt_c = u2_cr_string(u2_Host.arv_u->wen);
+
+      printf("time: %s\n", dyt_c);
+      free(dyt_c);
+    }
+  } else {
+    //  Set outside bail trap.  Should not be used, but you never know...
+    //
+    if ( 0 != u2_cm_trap() ) {
+      u2_ve_panic(argc, argv);
+    }
+    else {
+      //  Set boot and goal stages.
+      {
+        if ( (0 == u2_Opts.kno_w) || (u2_Opts.kno_w > 255) ) {
+          kno_w = DefaultKernel;
+        } else {
+          kno_w = u2_Opts.kno_w;
+        } 
+      }
+
+      //  Load the system, within memory cross.
+      //
+      {
+        {
+          u2_rl_leap(u2_Wire, c3__rock);
+          u2_ve_init(kno_w);
+          u2_rl_fall(u2_Wire);
+   
+          //  Horrible ancient stuff.
+          //
+          {
+            u2_steg* stg = &u2_Host.ver_e[kno_w];
+
+            if ( 0 != stg->ken ) {
+              stg->ken = u2_rl_copy(u2_Wire, stg->ken);
+            }
+            if ( 0 != stg->tip ) {
+              stg->tip = u2_rl_copy(u2_Wire, stg->tip);
+            }
+            if ( 0 != stg->ras ) {
+              stg->ras = u2_rl_copy(u2_Wire, stg->ras);
+            }
+            stg->tul = u2_rl_copy(u2_Wire, stg->tul);
+
+            stg->toy.seed = u2_rl_copy(u2_Wire, stg->toy.seed);
+            stg->toy.what = u2_rl_copy(u2_Wire, stg->toy.what);
+            stg->toy.ream = u2_rl_copy(u2_Wire, stg->toy.ream);
+            stg->toy.rain = u2_rl_copy(u2_Wire, stg->toy.rain);
+            stg->toy.sell = u2_rl_copy(u2_Wire, stg->toy.sell);
+            stg->toy.skol = u2_rl_copy(u2_Wire, stg->toy.skol);
+            stg->toy.slot = u2_rl_copy(u2_Wire, stg->toy.slot);
+            stg->toy.slam = u2_rl_copy(u2_Wire, stg->toy.slam);
+            stg->toy.slap = u2_rl_copy(u2_Wire, stg->toy.slap);
+            stg->toy.slop = u2_rl_copy(u2_Wire, stg->toy.slop);
+            stg->toy.scot = u2_rl_copy(u2_Wire, stg->toy.scot);
+          }
+          u2_rl_flog(u2_Wire);
+        }
+
+        if ( 0 != u2_Host.ver_e[kno_w].ken ) {
+          u2_reck_boot(u2_Host.arv_u);
+        }
+      }
+      u2_cm_done();
+    }
   }
 
   //  Install signal handlers and set buffers.
@@ -322,23 +359,13 @@ main(c3_i   argc,
     }
   }
 
-
-  if ( 0 == u2_Host.ver_e[kno_w].ken ) {
+  if ( 0 != u2_Host.ver_e[kno_w].ras ) {
     fprintf(stderr, "no command line in transitional mode\n");
     exit(0);
   }
 
   {
-    u2_noun cpu = u2_ckd_by_get(u2k(u2_Host.map), c3__cpu);
-    u2_noun meh = u2_ckd_by_get(u2k(u2_Host.map), c3__meh);
-    u2_noun rez = u2_ckd_by_get(u2k(u2_Host.map), c3__rez);
-
-    if ( !((u2_nul == cpu) ^ (u2_nul == meh)) ) {
-      fprintf(stderr, "must load an existing ship or create one\n");
-      exit(1);
-    }
-
-    u2_lo_loop(u2_Host.arv_u, cpu, meh, rez);
+    u2_lo_loop(u2_Host.arv_u, u2_Opts.nuu, u2_Opts.rez);
   }
   return 0;
 }

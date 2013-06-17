@@ -58,6 +58,9 @@ u2_ds_find(u2_wire wir_r,
     return u2_none;
   } else {
     u2_rail bas_r = u2_wire_bas_r(wir_r);
+
+    c3_assert(bas_r == 0xf7fffd3);
+
     u2_noun pug = u2_cs_find(bas_r, u2_wire_des_r(wir_r), 0, u2_h(cor));
 
     if ( u2_none == pug ) {

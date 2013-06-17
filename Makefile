@@ -755,10 +755,8 @@ J191_OFILES=\
 BASE_OFILES=\
        $(F_OFILES) \
        $(Q_OFILES) \
-       $(J194_OFILES) \
-       $(J193_OFILES) \
-       $(J191_OFILES) \
-       $(J192_OFILES)
+       $(J192_OFILES) \
+       $(J191_OFILES)
 
 OUT_OFILES=\
        outside/jhttp/http_parser.o

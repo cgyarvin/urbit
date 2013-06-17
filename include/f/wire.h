@@ -76,6 +76,16 @@
                      u2_ray hat_r,
                      u2_ray mat_r);
 
+        /* u2_wr_check_init(): initialize checkpoint segments and/or files.
+        */
+          void
+          u2_wr_check_init(c3_c* cpu_c);
+
+        /* u2_wr_check_save(): checkpoint wire in global structure.
+        */
+          void
+          u2_wr_check_save();
+
         /* u2_wr_ice(): u2_rl_ice(), with u2_bx_copy().
         */
           u2_weak

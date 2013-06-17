@@ -24,33 +24,42 @@ static c3_i
 _loom_sigsegv_handler(void* adr_v, c3_i ser_i) 
 {
   if ( ser_i ) {
-    c3_w              off_w = (((c3_c*) adr_v) - (c3_c*)U2_OS_LoomBase);
-    c3_w              pag_w;
-    c3_c*             bas_c;
-    volatile u2_chem* chm_u;
+    c3_w*    bas_w = (c3_w*)(void *)(U2_OS_LoomBase);
+    c3_w     off_w = (((c3_c*) adr_v) - (c3_c*)U2_OS_LoomBase) >> 2;
+    c3_w     pag_w = off_w >> LoomPageWords;
+    c3_w     win_w;
+    u2_cheg* ceg_u;
 
-    if ( off_w > (HalfSize << 2) ) {
-      off_w -= (HalfSize << 2);
-      chm_u = &LoomChemTop;
-      bas_c = (c3_c*)(void *)(U2_OS_LoomBase + (HalfSize << 2));
-    } else {
-      chm_u = &LoomChemBot;
-      bas_c = (c3_c*)(void *)(U2_OS_LoomBase);
+    if ( pag_w > LoomAllPages ) {
+      fprintf(stderr, "address %p out of loom!\r\n", adr_v);
+      return 0;
     }
-    off_w &= ~((1 << (LoomPageWords + 2)) - 1);
-    pag_w = (off_w >> (LoomPageWords + 2));
+    c3_assert((u2_page_neat == LoomChem[pag_w].lif_e) ||
+              (u2_page_none == LoomChem[pag_w].lif_e) );
 
-    chm_u->cht_w[pag_w].lif_e = u2_page_tref;
-    chm_u->cht_w[pag_w].mug_e = 0;
-    if ( (pag_w + 1) > chm_u->pgs_w ) {
-      chm_u->pgs_w = pag_w + 1;
+    LoomChem[pag_w].lif_e = u2_page_tref;
+    LoomChem[pag_w].mug_e = 0;
+
+    for ( ceg_u = &LoomSegmentA; ceg_u; ceg_u = ceg_u->nex_u ) {
+      if ( (pag_w >= ceg_u->bot_w) && 
+           (win_w=(pag_w - ceg_u->bot_w)) < ceg_u->len_w )
+      {
+        if ( win_w >= ceg_u->num_w ) {
+          ceg_u->num_w = win_w + 1;
+        }
+        break;
+      }
+    }
+    if ( 0 == ceg_u ) {
+      fprintf(stderr, "page %d is not in a segment!\n", pag_w);
+      return 0;
     }
 
-    if ( -1 == mprotect(bas_c + off_w, 
+    if ( -1 == mprotect((void *)(bas_w + (pag_w << LoomPageWords)),
                         (1 << (LoomPageWords + 2)),
                         (PROT_READ | PROT_WRITE)) ) 
     {
-      perror("protect");
+      perror("mprotect");
       exit(1);
     }
   }
@@ -79,21 +88,6 @@ _loom_write(c3_i fid_i, void* buf_w, c3_w len_w)
 //  return ((4 * len_w) == write(fid_i, buf_w, (4 * len_w))) ? u2_yes : u2_no;
 }
 
-/* _loom_open(): open loom checkpoint file, or return null.
-*/
-static c3_i
-_loom_open(c3_c* fil_c, u2_bean cre)
-{
-  c3_c ful_c[8193];
-
-  sprintf(ful_c, "%s/~chk", LoomImagePrefix);
-  mkdir(ful_c, 0700);
-
-  sprintf(ful_c, "%s/~chk/%s", LoomImagePrefix, fil_c);
-  return (cre == u2_yes) ? open(ful_c, O_RDWR | O_CREAT, 0666)
-                         : open(ful_c, O_RDWR);
-}
-
 /* u2_loom_clip():
 **
 **   Clip top and bottom.
@@ -106,188 +100,174 @@ u2_loom_clip(c3_w bot_w, c3_w top_w)
 /* _loom_deploy(): load and attempt to validate.
 */
 static u2_bean
-_loom_deploy(u2_chef* chf_u,
-             c3_i     ctl_i,
-             c3_i     imb_i,
-             c3_i     imt_i)
+_loom_deploy(void)
 {
-  c3_w  i_w;
-  c3_w* bot_w = (void *)U2_OS_LoomBase;
-  c3_w* top_w = (void *)(U2_OS_LoomBase + (HalfSize << 2));
+  u2_cheg* ceg_u;
+  c3_w     num_w = 0;
 
-  if ( chf_u->ven_w != LoomVersion ) {
-    printf("deploy no a\n");
-    return u2_no;
-  }
-  
-  LoomChemBot.pgs_w = chf_u->pgb_w;
-  if ( u2_no == _loom_read(ctl_i, (c3_w*)&LoomChemBot.cht_w, chf_u->pgb_w) ) {
-    printf("deploy no b\n");
-    return u2_no;
-  }
-  if ( u2_no == _loom_read(ctl_i, (c3_w*)&LoomChemTop.cht_w, chf_u->pgt_w) ) {
-    printf("deploy no c\n");
-    return u2_no;
-  }
-
-  if ( -1 == (c3_ps)mmap((void *)bot_w,
-                         (HalfSize << 2),
-                         PROT_READ,
-                         (MAP_FIXED | MAP_PRIVATE),
-                         imb_i, 0) )
-  {
-    printf("deploy no c\n");
-    return u2_no;
-  }
-
-  if ( -1 == (c3_ps)mmap((void *)top_w,
-                         (HalfSize << 2),
-                         PROT_READ,
-                         (MAP_FIXED | MAP_PRIVATE),
-                         imt_i, 0) )
-  {
-    printf("deploy no d\n");
-    munmap(bot_w, (HalfSize << 2));
-    return u2_no;
-  }
-
-  for ( i_w = 0; i_w < chf_u->pgb_w; i_w++ ) {
-    c3_w* pag_w = bot_w + (i_w << LoomPageWords);
-
-    if ( u2_page_neat != chf_u->cht_w[i_w].lif_e ) {
-      printf("deploy no e\n");
-      munmap(bot_w, (HalfSize << 2));
-      munmap(top_w, (HalfSize << 2));
-      return u2_no;
-    }
-    if ( (0x3fffffff & u2_mug_words(pag_w, (1 << LoomPageWords))) !=
-         chf_u->cht_w[i_w].mug_e )
+  for ( ceg_u = &LoomSegmentA; ceg_u; ceg_u = ceg_u->nex_u ) {
+    u2_chef chf_u;
+    c3_w i_w; 
+ 
+    /* Load control segment.
+    */
     {
-      printf("deploy no f\n");
-      munmap(bot_w, (HalfSize << 2));
-      munmap(top_w, (HalfSize << 2));
-      return u2_no;
-    }
-  }
+      if ( u2_no == _loom_read(ceg_u->ctl_i, &chf_u, c3_wiseof(chf_u)) ) {
+        printf("deploy no a\n");
+        return u2_no;
+      }
+      c3_assert(chf_u.bot_w == ceg_u->bot_w);
 
-  for ( i_w = 0; i_w < chf_u->pgt_w; i_w++ ) {
-    c3_w* pag_w = top_w + (i_w << LoomPageWords);
-
-    if ( u2_page_neat != chf_u->cht_w[i_w].lif_e ) {
-      printf("deploy no e\n");
-      munmap(bot_w, (HalfSize << 2));
-      munmap(top_w, (HalfSize << 2));
-      return u2_no;
+      if ( u2_no == _loom_read(ceg_u->ctl_i, 
+                               (u2_chit*) &LoomChem[ceg_u->bot_w], 
+                               chf_u.pgs_w) )
+      {
+        printf("deploy no b\n");
+        return u2_no;
+      }
+      ceg_u->num_w = 0;
     }
-    if ( (0x3fffffff & u2_mug_words(pag_w, (1 << LoomPageWords))) !=
-         chf_u->cht_w[i_w].mug_e )
+
+    /* Load data segment.
+    */
     {
-      printf("deploy no f\n");
-      munmap(bot_w, (HalfSize << 2));
-      munmap(top_w, (HalfSize << 2));
-      return u2_no;
+      c3_w  liv_w = chf_u.pgs_w;
+      c3_w  res_w = (ceg_u->len_w - liv_w);
+      c3_w* vil_w = ((c3_w*)U2_OS_LoomBase) + (ceg_u->bot_w << LoomPageWords);
+      c3_w* den_w = (vil_w + (liv_w << LoomPageWords));
+
+      if ( liv_w ) {
+        if ( -1 == (c3_ps)mmap(vil_w,
+                               (liv_w << (LoomPageWords + 2)),
+                               PROT_READ,
+                               (MAP_FIXED | MAP_PRIVATE),
+                               ceg_u->dat_i, 0) )
+        {
+          printf("deploy no c\n");
+          return u2_no;
+        }
+      }
+      if ( res_w ) {
+        if ( -1 == (c3_ps)mmap(den_w,
+                               res_w << (LoomPageWords + 2),
+                               PROT_READ,
+                               (MAP_ANON | MAP_FIXED | MAP_PRIVATE),
+                               -1, 0) ) 
+        {
+          printf("deploy no d\n");
+          return u2_no;
+        }
+      }
+    }
+
+    /* Validate with little checksum.
+    */
+    for ( i_w = 0; i_w < chf_u.pgs_w; i_w++ ) {
+      c3_w  pag_w = (i_w + ceg_u->bot_w);
+      c3_w* gaw_w = ((c3_w*)U2_OS_LoomBase) + (pag_w << LoomPageWords);
+
+      if ( u2_page_none == LoomChem[pag_w].lif_e ) {
+        continue;
+      }
+      num_w++;
+
+      if ( u2_page_neat != LoomChem[pag_w].lif_e ) {
+        printf("deploy no e\n");
+        return u2_no;
+      }
+      if ( (0x3fffffff & u2_mug_words(gaw_w, (1 << LoomPageWords))) !=
+           LoomChem[pag_w].mug_e )
+      {
+        printf("mismatched mug at page %d\n", pag_w);
+        printf("actual data: %x\n", 
+            (0x3fffffff & u2_mug_words(gaw_w, (1 << LoomPageWords))));
+        printf("control mug: %x\n", LoomChem[pag_w].mug_e);
+
+        printf("deploy no f\n"); 
+        return u2_no;
+      }
     }
   }
+  printf("loom: loaded %dMB\n", (num_w >> 6));
   return u2_yes;
 }
 
-/* u2_loom_save(): checkpoint at current date.
+/* u2_loom_save(): checkpoint at current date, with hat and mat.
 */
 u2_bean
-u2_loom_save(c3_c* dir_c, c3_d eno_d)
+u2_loom_save(c3_w ent_w)
 {
-  u2_chef chf_u;
-  c3_i ctl_i, imb_i, imt_i;
-  c3_w* bot_w = (void *)U2_OS_LoomBase;
-  c3_w* top_w = (void *)(U2_OS_LoomBase + (HalfSize << 2));
-  c3_w  num_w = 0;
+  u2_cheg* ceg_u;
 
-  if ( !LoomImagePrefix ) {
-    LoomImagePrefix = strdup(dir_c);
-  }
+  // uL(fprintf(uH, "# saving at event %u...\n", ent_w));
+  u2_wr_check_save();
 
-  chf_u.eno_d = eno_d;
-  chf_u.ven_w = LoomVersion;
-  chf_u.pgb_w = LoomChemBot.pgs_w;
-  chf_u.pgt_w = LoomChemTop.pgs_w;
-
-  if ( -1 == LoomControl ) {
-    LoomControl = _loom_open("ctl.data", u2_yes);
-    LoomImageBot = _loom_open("bot.data", u2_yes);
-    LoomImageTop = _loom_open("top.data", u2_yes);
-  }
-  if ( -1 == LoomControl ) {
-    perror("ctl.data");
-    return u2_no;
-  } 
-  ctl_i = LoomControl;
-  imb_i = LoomImageBot;
-  imt_i = LoomImageTop;
-
-  uL(fprintf(uH, "# saving at event %llu...\n", eno_d));
-
-  /* Save bottom image.
-  */
-  {
+  for ( ceg_u = &LoomSegmentA; ceg_u; ceg_u = ceg_u->nex_u ) {
+    u2_chef chf_u;
     c3_w i_w; 
+    c3_w num_w = 0;
+  
+    chf_u.ent_w = ent_w;
+    chf_u.ven_w = LoomVersion;
+    chf_u.bot_w = ceg_u->bot_w;
+    chf_u.pgs_w = ceg_u->num_w;
+ 
+    /* Save data.
+    */
+    {
+      for ( i_w = 0; i_w < ceg_u->num_w; i_w++ ) {
+        c3_w pag_w  = ceg_u->bot_w + i_w;
+        c3_w* mem_w = ((c3_w*)U2_OS_LoomBase) + (pag_w << LoomPageWords);
 
-    for ( i_w = 0; i_w < LoomChemBot.pgs_w; i_w++ ) {
-      c3_w* pag_w = bot_w + (i_w << LoomPageWords);
+        if ( u2_page_tref == LoomChem[pag_w].lif_e ) {
+          lseek(ceg_u->dat_i, (i_w << (LoomPageWords + 2)), SEEK_SET);
+          if ( u2_no == _loom_write(ceg_u->dat_i, 
+                                    mem_w,
+                                    (1 << LoomPageWords)) ) {
+            fprintf(stderr, "save no a\r\n");
+            return u2_no;
+          }
+          LoomChem[pag_w].mug_e = u2_mug_words(mem_w, (1 << LoomPageWords));
+          LoomChem[pag_w].lif_e = u2_page_neat;
 
-      if ( u2_page_tref == LoomChemBot.cht_w[i_w].lif_e ) {
-        lseek(imb_i, SEEK_SET, (i_w << (LoomPageWords + 2)));
-        if ( u2_no == _loom_write(imb_i, pag_w, (1 << LoomPageWords)) ) {
-          return u2_no;
+          num_w++;
         }
-        LoomChemBot.cht_w[i_w].mug_e = u2_mug_words(pag_w, 
-                                                     (1 << LoomPageWords));
-        LoomChemBot.cht_w[i_w].lif_e = u2_page_neat;
-        mprotect(pag_w, (1 << (LoomPageWords + 2)), PROT_READ);
-        num_w++;
       }
+      ftruncate(ceg_u->dat_i, (ceg_u->num_w << (LoomPageWords + 2)));
     }
-    ftruncate(imb_i, (LoomChemBot.pgs_w << (LoomPageWords + 2)));
-  }
 
-  /* Save top image.
-  */
-  {
-    c3_w i_w; 
-
-    for ( i_w = 0; i_w < LoomChemTop.pgs_w; i_w++ ) {
-      c3_w* pag_w = top_w + (i_w << LoomPageWords);
-
-      if ( u2_page_tref == LoomChemTop.cht_w[i_w].lif_e ) {
-        lseek(imt_i, SEEK_SET, (i_w << (LoomPageWords + 2)));
-        if ( u2_no == _loom_write(imt_i, pag_w, (1 << LoomPageWords)) ) {
-          return u2_no;
-        }
-        LoomChemTop.cht_w[i_w].mug_e = u2_mug_words(pag_w, 
-                                                     (1 << LoomPageWords));
-        LoomChemTop.cht_w[i_w].lif_e = u2_page_neat;
-        mprotect(pag_w, (1 << (LoomPageWords + 2)), PROT_READ);
-        num_w++;
-      }
-    }
-  }
-
-  /* Save control file.
-  */
-  {
-    if ( u2_no == _loom_write(ctl_i, (c3_w*)&chf_u, c3_wiseof(chf_u)) ) {
+    /* Save control file.
+    */
+    lseek(ceg_u->ctl_i, 0, SEEK_SET);
+    if ( u2_no == _loom_write(ceg_u->ctl_i, (c3_w*)&chf_u, c3_wiseof(chf_u)) ) {
+      fprintf(stderr, "save no b\r\n");
       return u2_no;
     }
-    if ( u2_no == _loom_write(ctl_i, (c3_w*)&LoomChemBot.cht_w, 
-                                     LoomChemBot.pgs_w)) {
+    if ( u2_no == _loom_write(ceg_u->ctl_i, 
+                              (u2_chit*)(LoomChem + ceg_u->bot_w),
+                              ceg_u->num_w) ) {
+      fprintf(stderr, "save no c\r\n");
       return u2_no;
     }
-    if ( u2_no == _loom_write(ctl_i, (c3_w*)&LoomChemTop.cht_w, 
-                                     LoomChemTop.pgs_w)) {
+
+    /* Catch future changes.
+    */
+    if ( -1 == mprotect(((c3_w*)U2_OS_LoomBase) + 
+                          (ceg_u->bot_w << LoomPageWords),
+                        (ceg_u->len_w << (LoomPageWords + 2)),
+                        PROT_READ) )
+    {
+      fprintf(stderr, "save no d\r\n");
       return u2_no;
     }
+    for ( i_w = 0; i_w < ceg_u->len_w; i_w++ ) {
+      LoomChem[i_w + ceg_u->bot_w].lif_e = u2_page_neat;
+    }
+#if 0
+    uL(fprintf(uH, "#  %s: wrote %u blocks, %uMB\n", 
+          ceg_u->nam_c, num_w, (num_w >> 6)));
+#endif
   }
-  uL(fprintf(uH, "#  wrote %u blocks, size %u\n", 
-             num_w, (chf_u.pgb_w + chf_u.pgt_w)));
   return u2_yes;
 }
 
@@ -313,46 +293,22 @@ _loom_start(void)
 
 /* u2_loom_load():
 **
-**   Try to load the loom from a file; create it otherwise.
+**   Try to load the loom from a checkpoint.
 */
-void
-u2_loom_load(c3_c* dir_c)
+u2_bean
+u2_loom_load(void)
 {
-  u2_chef chf_u;
-  u2_chef* cha_u;
-
-  if ( !LoomImagePrefix ) {
-    LoomImagePrefix = strdup(dir_c);
-  }
-
-  {
-    LoomControl = _loom_open("ctl.data", u2_no);
-    LoomImageBot = _loom_open("bot.data", u2_no);
-    LoomImageTop = _loom_open("top.data", u2_no);
-
-    if ( (-1 == LoomControl) || 
-         (-1 == LoomImageBot) || 
-         (-1 == LoomImageTop) ||
-         (sizeof(chf_u) != read(LoomControl, &chf_u, sizeof(chf_u))) )
-    {
-      close(LoomControl); close(LoomImageBot); close(LoomImageTop);
-      cha_u = 0;
-    } else cha_u = &chf_u;
-  }
-
-  if ( cha_u && (u2_yes == _loom_deploy(cha_u, LoomControl, 
-                                               LoomImageBot, 
-                                               LoomImageTop)) )
-  {
-    printf("loom: loaded %dMB from %s", 
-           (cha_u->pgb_w + cha_u->pgt_w) >> 6, LoomImagePrefix);
+  if ( u2_yes == _loom_deploy() ) {
     _loom_start();
+    return u2_yes;
   }
   else {
+    munmap((c3_w*)U2_OS_LoomBase, (LoomAllPages << (LoomPageWords + 2)));
+
     u2_loom_boot();
+    return u2_no;
   }
 }
-
 
 /* u2_loom_boot():
 **
@@ -384,8 +340,6 @@ u2_loom_boot(void)
     exit(1);
   }
   printf("loom: mapped %dMB\n", (1 << (LoomBits - 18)));
-
-  LoomControl = LoomImageBot = LoomImageTop = -1;
 
   _loom_start();
 }

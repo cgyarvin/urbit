@@ -6,7 +6,7 @@
   **/
     /* First kernel this executable can boot.
     */
-#     define FirstKernel   194
+#     define FirstKernel   192
 #     define DefaultKernel 191
  
 #define RECK
@@ -132,6 +132,7 @@
     */
       typedef struct _u2_save {
         struct ev_timer tim_u;              //  checkpoint timer
+        c3_w            ent_w;              //  event number, XX 64
       } u2_save;
 
     /* u2_ubuf: unix tty i/o buffer.
@@ -186,7 +187,6 @@
     */
       typedef struct {
         c3_i fid_i;                         //  file descriptor
-        c3_w ent_w;                         //  event sequence number
         c3_w len_w;                         //  length in words
       } u2_ulog;
 
@@ -290,11 +290,9 @@
       typedef struct _u2_host {
         u2_wire wir_r;                      //  noun system, 1 per thread
         c3_c*   fel_c;                      //  readline filename
-        u2_noun pet;                        //  petname of self, atomic
-        u2_noun pat;                        //  unix path to self, atomic
-        u2_noun map;                        //  unix arguments as map
         u2_steg ver_e[257];                 //  stages improving downward
         c3_w    kno_w;                      //  current executing stage
+        c3_c*   cpu_c;                      //  computer path
 
         c3_d    now_d;                      //  event tick
         struct ev_loop *lup_u;              //  libev event loop
@@ -304,10 +302,7 @@
         u2_ames  sam_u;                     //  packet interface
         u2_save  sav_u;                     //  autosave
 
-        u2_chem  top_u;                     //  high half
-        u2_chem  bot_u;                     //  low half
-
-        u2_reck* arv_u;                     //  rotors (hardcoded to 1)
+        u2_reck* arv_u;                     //  runtime
       } u2_host;                            //  host == computer == process
 
     /* u2_funk: standard system function.
@@ -474,6 +469,11 @@
       */
         void
         u2_reck_line(u2_reck* rec_u, u2_noun lin);
+
+      /* u2_reck_numb(): set the instance number.
+      */
+        void
+        u2_reck_numb(u2_reck* rec_u);
 
       /* u2_reck_http_request(): hear http request on channel.
       */
@@ -674,6 +674,11 @@
         void
         u2_ve_init(c3_w kno_w);
 
+      /* u2_ve_rest(): install ve tools.
+      */
+        void
+        u2_ve_rest();
+
     /**  Console and command line.  
     **/
       /* u2_ve_dump_columns(): return screen column width from OS.
@@ -737,9 +742,8 @@
       */
         void
         u2_lo_loop(u2_reck* rec_u, 
-                   u2_noun cpu, 
-                   u2_noun meh,
-                   u2_bean rez);
+                   u2_bean  nuu,              //  new computer
+                   u2_bean  rez);             //  reset computer
 
       /* u2_lo_bail(): clean up all event state.
       */

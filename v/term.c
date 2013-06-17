@@ -421,7 +421,7 @@ _term_it_path(u2_reck* rec_u, u2_bean fyl, u2_noun pax)
 
   //  measure
   //
-  len_w = strlen(rec_u->dir_c);
+  len_w = strlen(u2_Host.cpu_c);
   {
     u2_noun wiz = pax;
 
@@ -434,7 +434,7 @@ _term_it_path(u2_reck* rec_u, u2_bean fyl, u2_noun pax)
   //  cut
   //
   pas_c = malloc(len_w + 1);
-  strcpy(pas_c, rec_u->dir_c);
+  strcpy(pas_c, u2_Host.cpu_c);
   {
     u2_noun wiz   = pax;
     c3_c*   waq_c = (pas_c + strlen(pas_c));
@@ -710,8 +710,9 @@ u2_term_ef_boil(u2_reck* rec_u,
     for ( tid_l = 1; tid_l <= ono_l; tid_l++ ) {
       u2_noun tin = u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3__ud, tid_l));
       u2_noun pax = u2nc(c3__gold, u2nq(c3__term, u2k(oan), tin, u2_nul));
-     
-      u2_reck_plan(rec_u, pax, u2nc(c3__wipe, u2_nul));
+      u2_noun hud = u2nc(c3__wipe, u2_nul);
+    
+      u2_reck_plan(rec_u, pax, hud);
     }
     u2z(oan);
   }

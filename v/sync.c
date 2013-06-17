@@ -274,10 +274,10 @@ _sync_post_m(u2_reck* rec_u, u2_noun map, u2_noun ova)
 u2_noun
 u2_sync_reck(u2_reck* rec_u)
 {
-  c3_c*   pas_c = malloc(strlen(rec_u->dir_c) + 1 + 3 + 1);
+  c3_c*   pas_c = malloc(strlen(u2_Host.cpu_c) + 1 + 3 + 1);
   u2_noun nod; 
 
-  strcpy(pas_c, rec_u->dir_c);
+  strcpy(pas_c, u2_Host.cpu_c);
 
   nod = u2_walk(rec_u, pas_c, 0);
   free(pas_c);

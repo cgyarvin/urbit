@@ -23,7 +23,7 @@
       typedef struct _u2_reck {
         c3_w    kno_w;                    //  kernel stage
         c3_w    rno_w;                    //  rotor index (always 0)
-        c3_d    eno_d;                    //  event number
+        c3_w    ent_w;                    //  event counter XX 64
 
         struct {
           struct _u2_cart* egg_u;         //  exit of ovum queue
@@ -57,9 +57,8 @@
         u2_noun sen;                      //  instance string
         u2_noun own;                      //  owner list
 
-        c3_c* dir_c;                      //  full path to ship
         u2_noun our;                      //  main owner
-        u2_noun pod;                      //  owner as string
+        u2_noun pod;                      //  owner as text
         u2_noun roe;                      //  temporary unsaved events
         u2_noun key;                      //  log key, or 0
 

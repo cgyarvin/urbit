@@ -372,6 +372,15 @@
           u2_rl_refs(u2_ray  ral_r,
                      u2_noun som);
 
+        /* u2_rl_copy():
+        **
+        **   Copy indirect noun `fiz` into main storage, preserving dags.
+        **   Must be followed by `rl_wash(fiz)` if `fiz` is to be preserved.
+        */
+          u2_weak                                                 //  transfer
+          u2_rl_copy(u2_ray ral_r,
+                     u2_dog fiz);                                 //  retain
+
         /* u2_rl_take():
         **
         **   Produce `a`, as eligible result.  Copy juniors; reference peers.
