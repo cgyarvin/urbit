@@ -2937,6 +2937,7 @@
     ==
   --
 ++  scot  |=(mol=dime ~(rent co %% mol))
+++  scow  |=(mol=dime ~(rend co %% mol))
 ++  slay
   |=  txt=@ta  ^-  (unit coin)
   =+  vex=((full nuck:so) [[1 1] (trip txt)])

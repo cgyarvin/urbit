@@ -340,8 +340,6 @@ _reck_init_veer(u2_reck* rec_u, u2_noun nam, u2_noun pax, u2_noun txt)
   if ( 0 != (hoe = u2_cm_trap()) ) {
     u2_rl_fall(u2_Wire);
 
-    uL(fprintf(uH, "doh!\n"));
-
     u2_ve_wine(u2k(u2h(hoe)));
     u2_ve_sway(2, u2_ckb_flop(u2k(u2t(hoe))));
     u2z(hoe);

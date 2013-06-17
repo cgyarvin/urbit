@@ -3,7 +3,8 @@
 ::
   |=  pit=vase
   ^-  vane                                              ::  kernel instrument
-  =|  $:  wib=(map duct yard)                           ::  terminal by channel
+  =|  $:  dub=(map duct (list seat))                    ::  rights by duct
+          wyg=(map seat yard)                           ::  interface by seat
       ==                                                ::
   |=  [now=@da eny=@ sky=||(* (unit))]                  ::  current invocation
   ^?                                                    ::  opaque core
@@ -11,12 +12,12 @@
   ++  beat                                              ::  process move
     |=  [whu=(unit seat) tea=wire hen=duct fav=card]
     ^-  [p=(list move) q=vane]
-    =+  yar=(~(get by wib) hen)
-    ?~  yar
-      ?+    -.fav  
+    =+  gid=(~(get by dub) hen)
+    ?~  gid                                             ::  truly new duct
+      ?+    -.fav
         ~&([%dill-lost whu tea hen fav] [~ ..^$])
       ::
-          %boot                                         ::  start terminal
+          %boot                                         ::  log in with creds
         [[[whu [[%a ~] [%d tea] hen] p.fav] ~] ..^$]
       ::
           %flog                                         ::  log to terminal
@@ -25,32 +26,35 @@
         :_  |=(a=duct [whu [/d a] p.fav])
         ^-  (list duct)
         =+  mel=(adit hen)
-        =+  gum=`(list ,[p=duct q=yard])`(~(tap by wib) ~)
-        |-  ^-  (list duct)    
+        =+  gum=`(list ,[p=duct q=(list seat)])`(~(tap by dub) ~)
+        |-  ^-  (list duct) 
         ?~  gum  ~
         %-  weld
         :_  $(gum t.gum)
-        ?.  ?~  whu  =(%gold mel)
-            |-  ?~  q.q.i.gum  | 
-                ?|  =(u.whu i.q.q.i.gum) 
-                    $(q.q.i.gum t.q.q.i.gum)
-                ==
+        ?.  ?~(whu =(%gold mel) (lien q.i.gum |=(a=seat =(a u.whu))))
           ~
         [p.i.gum ~]
       ::
-          %init                                         ::  create terminal
+          %init                                         ::  attach terminal
+        ~&  [%dill-init whu tea hen fav]
         :-  :~  [whu hen [%init p.fav]]
                 [[~ p.fav] [/b hen] [%noop ~]]
             ==
-        ..^$(wib (~(put by wib) hen [& [p.fav ~] *blur ~]))
+        %=    ..^$
+            dub
+          (~(put by dub) hen [p.fav ~])
+        ::
+            wyg
+          ?:  (~(has by wyg) p.fav)  wyg
+          (~(put by wyg) p.fav [& [p.fav ~] *blur ~])
+        ==
       ==
-    =>  .(yar u.yar) 
-    ?:  &(?=(~ whu) ?=(^ q.yar))
-      :_  ..^$
-      :_  ~
-      :+  [~ i.q.yar]
-        [/d hen]
-      fav
+    ?~  u.gid
+      ~&  [%dill-none hen]
+      [~ ..^$]
+    =>  .(gid `(list seat)`u.gid)
+    =.  whu  [~ i.gid]
+    =+  yar=`yard`(need (~(get by wyg) i.gid))
     =|  mos=(list move)
     =+  wip=|
     =<  yerk:leap
@@ -340,14 +344,23 @@
             pol  (lent q.poy)
         ==
       ::
+          %init                                         ::  attach to seat
+        %=    +.$
+            gid  [p.fav gid]
+            mos    :*  [whu hen [%init p.fav]]
+                       [[~ p.fav] [/b hen] [%noop ~]]
+                       mos
+                   ==
+        ==
+      ::
           %logo                                         ::  logout
-        =.  mos  :_(mos [~ hen [%bbye ~]])
-        ?:  |(?=(~ q.yar) ?=(~ t.q.yar))
-          +.$(mos [[~ hen [%pipe ~]] mos])
-        %=  +.$
-          fav    =+  mas=~(rend co ~ %p u.whu)
-                 [%warn "bye, {mas}"]
-          q.yar  t.q.yar
+        %=    +.$
+            gid  (skip gid |=(a=seat =(u.whu a)))
+            mos  
+          :*  [whu hen [%bbye ~]]
+              [whu hen [%warn "bye, {(scow %p u.whu)}"]]
+              mos
+          ==
         ==
       ::
           %note  ?.(p.yar +.$ (fume p.fav q.fav))       ::  debug message
@@ -360,13 +373,16 @@
           %text  $(fav [%talk %leaf p.fav])             ::  simple message
           %talk  (furl (~(win re p.fav) 0 p.r.yar))     ::  program output
           %warn  (fume '~' [%leaf p.fav])               ::  system message
-          %wipe  +.$(wip &)
+          %wipe  +.$(wip &)                             ::  delete old
       ==
     ::
     ++  yerk                                            ::  complete core
       ^-  [p=(list move) q=_..^$]
       :-  (flop mos)
-      ..^$(wib ?.(wip (~(put by wib) hen yar) (~(del by wib) hen)))
+      %_  ..^$
+        dub  ?.(wip (~(put by dub) hen gid) (~(del by dub) hen))
+        wyg  (~(put by wyg) u.whu yar)
+      ==
     --
   ::
   ++  come  |=(old=vase (load old))
@@ -379,18 +395,21 @@
   ++  load
     |=  new=vase
     ^-  vane
-    ?.  (~(nest ut -:!>(wib)) & p.new)
+    ?.  (~(nest ut -:!>([dub wyg])) & p.new)
       ~|(%load-nest-dill !!)
-    ..^$(wib ((map duct yard) q.new))
+    %_  ..^$
+      dub  ((map duct (list seat)) -.q.new)
+      wyg  ((map seat yard) +.q.new)
+    ==
   ::
   ++  raze  
     ^-  vane
-    ..$(wib ~)
+    ..$(dub ~, wyg ~)
   ::
   ++  scry
     |=  [our=seat ren=@tas his=seat syd=disc lot=coin tyl=path]
     ^-  (unit)
     ~
   ::
-  ++  stay  `vase`!>(wib)
+  ++  stay  `vase`!>([dub wyg])
   --

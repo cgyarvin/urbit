@@ -44,7 +44,7 @@
   $:  who=seat                                          ::  identity
       fog=(list ,@ud)                                   ::  virtual consoles
       hox=@ta                                           ::  identity text
-      cws=path                                          ::  working camp
+      cws=path                                          ::  working spur
       cwd=@tas                                          ::  working desk
       way=(map ,@tas vase)                              ::  variables
       hit=[p=@ud q=(list ,@t)]                          ::  command history

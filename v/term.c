@@ -711,7 +711,7 @@ u2_term_ef_boil(u2_reck* rec_u,
       u2_noun tin = u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3__ud, tid_l));
       u2_noun pax = u2nc(c3__gold, u2nq(c3__term, u2k(oan), tin, u2_nul));
       u2_noun hud = u2nc(c3__wipe, u2_nul);
-    
+ 
       u2_reck_plan(rec_u, pax, hud);
     }
     u2z(oan);
