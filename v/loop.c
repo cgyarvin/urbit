@@ -1139,18 +1139,19 @@ _lo_rest(u2_reck* rec_u, u2_noun rez)
   }
 
   if ( u2_nul == roe ) {
+    //  Nothing in the log that was not also in the checkpoint.
+    //
     c3_assert(rec_u->ent_w == old_w);
     c3_assert((las_w + 1) == old_w);
-    return;
   }
-
-  uL(fprintf(uH, "rest: replaying through event %d\n", las_w));
-
-  //  Execute the fscking things.  This is pretty much certain to crash.
-  fprintf(uH, "---------------- playback starting----------------\n");
-  {
+  else {
     u2_noun rou = roe;
     c3_w    xno_w;
+
+    //  Execute the fscking things.  This is pretty much certain to crash.
+    //
+    uL(fprintf(uH, "rest: replaying through event %d\n", las_w));
+    fprintf(uH, "---------------- playback starting----------------\n");
 
     xno_w = 0;
     while ( u2_nul != roe ) {

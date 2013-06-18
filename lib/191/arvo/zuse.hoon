@@ -625,8 +625,8 @@
         |=  val=*
         ^+  +>
         ?-   -.arc
-          |  (deaf:dirk %set (sham val) `@uvI`0 val)
-          &  (deaf %set (sham val) p.arc val)
+          |  (deaf:dirk %ins (sham val) `@uvI`0 val)
+          &  (deaf %ins (sham val) p.arc val)
         ==
       ::
       ++  dist                                          ::  modify to
@@ -678,10 +678,10 @@
           ?-    -.q.kuz
               %del
             ?>  ?=(& -.arc)
-            =>  .(+>.$ (deaf %set p.arc `@uvI`0 q.arc))
+            =>  .(+>.$ (deaf %ins p.arc `@uvI`0 q.arc))
             +>.$(arc [%| ~])
           ::
-              %set
+              %ins
             =.  +>
               ?-    -.arc
                   |
@@ -690,9 +690,12 @@
               ::
                   &
                 ?>  =(p.arc q.q.kuz)
-                (deaf %set p.arc p.q.kuz q.arc)
+                (deaf %ins p.arc p.q.kuz q.arc)
               ==
             +>(arc [%& p.q.kuz r.q.kuz])
+          ::
+              %mut
+            !!
           ==
         ?>  ?=(| -.arc)
         (dash:$(p.kuz t.p.kuz, +> (dent i.p.kuz)) i.p.kuz arc)

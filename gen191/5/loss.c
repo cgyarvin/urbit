@@ -42,7 +42,8 @@
     if ( u2_nul == kad ) {
       return u2_nul;
     } else {
-      return u2nc(loc_u->hev[u2_cr_word(0, u2h(kad))], _lext(loc_u, u2t(kad)));
+      return u2nc(u2k(loc_u->hev[u2_cr_word(0, u2h(kad))]), 
+                  _lext(loc_u, u2t(kad)));
     }
   }
 
@@ -113,6 +114,7 @@
                (inx_w == 0) ? u2_nul
                             : u2k(loc_u->kad[inx_w - 1]));
     if ( loc_u->kct_w == inx_w ) {
+      c3_assert(loc_u->kct_w < (1 << 31));
       loc_u->kct_w++;
     } else {
       u2z(loc_u->kad[inx_w]);
@@ -144,80 +146,16 @@
         (u2_cr_word(0, u2h(loc_u->kad[inx_w - 1])) < goy_w) );
   }
 
-  //  last index >= inx_w, <= max_w, that lonks goy_w.  or u2_no if none.
-  //
-  static u2_bean 
-  _lunk(u2_loss* loc_u,
-        c3_w     *inx_w,
-        c3_w     max_w, 
-        c3_w     goy_w)
-  {
-    while ( 1 ) {
-      if ( max_w <= (3 + *inx_w) ) {
-        u2_noun ret   = u2_no;
-        c3_w    rex_w, cur_w;
-     
-        rex_w = cur_w = *inx_w;
-        while ( (cur_w <= max_w) && (u2_yes == _lonk(loc_u, cur_w, goy_w)) ) {
-          ret = u2_yes;
-          rex_w = cur_w; 
-          cur_w++;
-        }
-        *inx_w = rex_w;
-        return ret;
-      } else {
-        c3_w dif_w = (max_w - *inx_w);
-        c3_w med_w = *inx_w + (dif_w / 2);
-
-        if ( u2_yes == _lonk(loc_u, med_w, goy_w) ) {
-          *inx_w = med_w;
-        } else {
-          max_w = med_w;
-        }
-      }
-    }
-  }
-
-  //  first index >= inx_w, <= max_w, that hinks goy_w.  or u2_no if none.
-  //
-  static u2_bean
-  _hunk(u2_loss* loc_u,
-        c3_w*    inx_w,
-        c3_w     max_w,
-        c3_w     goy_w)
-  {
-    while ( 1 ) {
-      if ( max_w <= (3 + *inx_w) ) {
-        while ( *inx_w <= max_w ) { 
-          if ( u2_yes == _hink(loc_u, *inx_w, goy_w) ) {
-            return u2_yes;
-          }
-          else ++*inx_w;
-        }
-        return u2_no;
-      } else {
-        c3_w dif_w = (max_w - *inx_w);
-        c3_w med_w = *inx_w + (dif_w / 2);
-
-        if ( u2_yes == _hink(loc_u, med_w, goy_w) ) {
-          max_w = med_w;
-        } else {
-          *inx_w = med_w;
-        }
-      }
-    }
-  }
-  
+#if 0
   //  search for first index >= inx_w and <= max_w that fits
   //  the hink and lonk criteria.
   //
   static u2_bean
-  _bink(u2_loss* loc_u,
-        c3_w*    inx_w,
-        c3_w     max_w,
-        c3_w     goy_w)
+  _binka(u2_loss* loc_u,
+         c3_w*    inx_w,
+         c3_w     max_w,
+         c3_w     goy_w)
   {
-#if 0
     while ( *inx_w <= max_w ) {
       if ( u2_no == _lonk(loc_u, *inx_w, goy_w) ) {
         return u2_no;
@@ -228,18 +166,47 @@
       else ++*inx_w;
     }
     return u2_no;
-#else
-    u2_noun bot;
-    c3_w    box_w;
-
-    bot = _lunk(loc_u, &box_w, max_w, goy_w);
-    if ( u2_no == bot ) {
-      return u2_no;
-    } else {
-      return _hunk(loc_u, inx_w, box_w, goy_w);
-    }
-#endif
   }
+#endif
+
+  //  search for lowest index >= inx_w and <= max_w for which
+  //  both hink(inx_w) and lonk(inx_w) are true.  lonk is false
+  //  if inx_w is too high, hink is false if it is too low.
+  //
+  static u2_bean
+  _bink(u2_loss* loc_u,
+        c3_w*    inx_w,
+        c3_w     max_w,
+        c3_w     goy_w)
+  {
+    c3_assert(max_w >= *inx_w);
+
+    if ( max_w == *inx_w ) {
+      if ( u2_no == _lonk(loc_u, *inx_w, goy_w) ) {
+        return u2_no;
+      }
+      if ( u2_yes == _hink(loc_u, *inx_w, goy_w) ) {
+        return u2_yes;
+      }
+      else {
+        ++*inx_w;
+        return u2_no;
+      }
+    } 
+    else {
+      c3_w mid_w = *inx_w + ((max_w - *inx_w) / 2);
+
+      if ( (u2_no == _lonk(loc_u, mid_w, goy_w)) ||
+           (u2_yes == _hink(loc_u, mid_w, goy_w)) ) 
+      {
+        return _bink(loc_u, inx_w, mid_w, goy_w);
+      } else {
+        *inx_w = mid_w + 1;
+        return _bink(loc_u, inx_w, max_w, goy_w);
+      }
+    }
+  }
+
 
   static void
   _merg(u2_loss* loc_u,

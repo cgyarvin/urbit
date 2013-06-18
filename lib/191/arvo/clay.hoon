@@ -179,7 +179,7 @@
             %x
           |-  ^+  +>.^$
           ?~  lav  +>.^$
-          ?.  ?=(%set -.q.i.lav)  $(lav t.lav)
+          ?.  ?=(%ins -.q.i.lav)  $(lav t.lav)
           =+  gim=(biff way p.i.lav)
           ?~  gim  $(lav t.lav)
           $(lav t.lav, +>.^$ (blab hen ren lok p.i.lav r.q.i.lav))
@@ -386,7 +386,8 @@
             r.fav
           |=  uke=ukaz  ^-  move
           =+  qua=~(ram re (dish:ut [~ %path] p.uke))
-          =+  qui=?-(-.q.uke %del '-', %set ?:(=(0 q.q.uke) '+' ':'))
+          =+  ^=  qui
+              ?-(-.q.uke %del '-', %ins '+', %mut ':')
           [whu [/d hen] %flog %note qui %leaf "{one}/{two}{qua}"]
       =^  mos  ruf  zonk:zoot:(exec:(di:wake:(un u.whu now ruf) q.fav) r.fav)
       [(weld yaq mos) ..^$]

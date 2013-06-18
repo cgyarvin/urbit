@@ -36,7 +36,6 @@
         [p.i.gum ~]
       ::
           %init                                         ::  attach terminal
-        ~&  [%dill-init whu tea hen fav]
         :-  :~  [whu hen [%init p.fav]]
                 [[~ p.fav] [/b hen] [%noop ~]]
             ==
@@ -45,7 +44,8 @@
           (~(put by dub) hen [p.fav ~])
         ::
             wyg
-          ?:  (~(has by wyg) p.fav)  wyg
+          ?:  (~(has by wyg) p.fav)  
+            wyg
           (~(put by wyg) p.fav [& [p.fav ~] *blur ~])
         ==
       ==
@@ -326,6 +326,7 @@
         ==
       ::
           %helo                                         ::  trigger prompt
+        ?^  q.r.yar  +.$
         ?>  ?=(^ whu)
         %-  edit
         =|  bed=bead

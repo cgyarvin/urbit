@@ -32,7 +32,7 @@ _loom_sigsegv_handler(void* adr_v, c3_i ser_i)
 
     if ( pag_w > LoomAllPages ) {
       fprintf(stderr, "address %p out of loom!\r\n", adr_v);
-      return 0;
+      return 1;
     }
     c3_assert((u2_page_neat == LoomChem[pag_w].lif_e) ||
               (u2_page_none == LoomChem[pag_w].lif_e) );
@@ -52,7 +52,7 @@ _loom_sigsegv_handler(void* adr_v, c3_i ser_i)
     }
     if ( 0 == ceg_u ) {
       fprintf(stderr, "page %d is not in a segment!\n", pag_w);
-      return 0;
+      return 1;
     }
 
     if ( -1 == mprotect((void *)(bas_w + (pag_w << LoomPageWords)),

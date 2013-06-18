@@ -1,4 +1,4 @@
-!:
+::
 ::  behn (4b), shell
 ::
 |=  pit=vase
@@ -423,8 +423,8 @@
         |=  gud=gift
         ^+  +>
         ?-  -.gud
-          ~    ?~  nex  (gram ~ %talk (sell p.gud))
-               +>(..ra abet:(glob:(past u.nex) ~ [%pipe ~ p.p.gud q.p.gud ~]))
+          %%   ?~  nex  (gram ~ %talk (dish:ut +.gud))
+               +>(..ra abet:(glob:(past u.nex) ~ [%pipe ~ p.gud q.gud ~]))
           %cs  +>(cws p.gud)
           %cd  +>(cwd p.gud)
           %de  (gram ~ %note '#' q.gud)
@@ -433,8 +433,12 @@
           %la  (gram ~ %talk p.gud)
           %lo  (gran (turn p.gud |=(a=tank [~ %talk a])))
           %mu  ?~  nex  
-                 (gran (turn q.gud |=(a=* [~ %talk (sell [p.gud a])])))
+                 ?:  =([~ %atom %t] p.gud)  $(gud [%% [~ %wall] q.gud])
+                 (gran (turn q.gud |=(a=* [~ %talk (dish:ut [p.gud a])])))
                +>(..ra abet:(glob:(past u.nex) ~ [%pipe ~ +.gud]))
+          %mx  |-  ^+  +>.^$
+               ?~  p.gud  +>.^$
+               $(p.gud t.p.gud, +>.^$ ^$(gud i.p.gud))
           %ok  (gram [/c ~] %edit who p.gud q.gud)
           %te  (gram ~ %tell p.gud)
           %th  (gram ~ %that p.gud)
@@ -504,9 +508,7 @@
           ?-    -.u.lug
               ~
             ?>  ?=(%pipe -.fav)
-            ?.  |(?=(~ p.fav) (~(nest ut p.u.lug) | p.u.p.fav))
-              +>.$(..ra (warn "invalid flow"))
-            +>.$(+>.$ (glib lap [%% p.fav]))
+            +>.$(+>.$ (glib lap [%% ?~(p.fav ~ [~ q.u.p.fav])]))
           ::
               %eg
             ?>  ?=(%writ -.fav)

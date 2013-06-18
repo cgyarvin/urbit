@@ -3268,6 +3268,22 @@
   =+  [lef=$(leh (dec leh)) rig=$(veh (dec veh))]
   ?:((gth p.lef p.rig) lef rig)
 ::
+++  lore                                                ::  atom to line list
+  |=  lub=@
+  =|  tez=(list ,@t)
+  |-  ^+  tez
+  ?:  =(0 lub)  (flop tez)
+  =+  ^=  meg
+      =+  meg=0
+      |-  ^-  @ud
+      =+  gam=(cut 3 [meg 1] lub)
+      ?:(|(=(10 gam) =(0 gam)) meg $(meg +(meg)))
+  $(lub (rsh 3 +(meg) lub), tez [(end 3 meg lub) tez])
+::
+++  role                                                ::  line list to atom
+  |=  tez=(list ,@t)
+  (rap 3 (turn tez |=(a=@t (cat 3 a 10))))
+::
 ++  lurk                                                ::  apply list patch
   |*  [hel=(list) rug=(urge)]
   ^+  hel
@@ -7229,7 +7245,7 @@
               [%nuke p=~]                               ::  kill all processes
               [%over p=~]                               ::  end of pipeline
               [%pace p=@ud]                             ::  compute background
-              [%pipe p=(unit ,[p=type q=(list)])]       ::  pipeline data
+              [%pipe p=(unit ,[p=calf q=(list)])]       ::  pipeline data
               [%pour p=path q=dram]                     ::  write directory
               [%pump ~]                                 ::  produce packets
               [%quid p=seat q=path r=(unit ,*)]         ::  delivery
@@ -7322,7 +7338,7 @@
               rop=(map ,[p=@ud q=sock] riff)            ::  remote requests
           ==                                            ::
 ++  gift                                                ::  one-way effect
-          $%  [%% p=vase]                               ::  trivial output
+          $%  [%% p=calf q=*]                           ::  trivial output
               [%cd p=@tas]                              ::  change desk
               [%cs p=path]                              ::  change spur
               [%de p=@ud q=tank]                        ::  debug/level
@@ -7330,7 +7346,8 @@
               [%ho p=(list tank)]                       ::  multiple error
               [%la p=tank]                              ::  single statement
               [%lo p=(list tank)]                       ::  multiple statement
-              [%mu p=type q=(list)]                     ::  batch emit
+              [%mu p=calf q=(list)]                     ::  batch emit
+              [%mx p=(list gift)]                       ::  batch gift
               [%ok p=disc q=ukay]                       ::  save changes
               [%te p=(list ,@t)]                        ::  dump lines
               [%th p=love]                              ::  http response
@@ -7581,8 +7598,8 @@
           ==                                            ::
 ++  ukan                                                ::  change per path
           $%  [%del p=@uvI]                             ::  delete old-hash
-              [%set p=@uvI q=@uvI r=*]                  ::  new old data
-          ::  [%mut p=@uvI q=@uvI r=udon]               ::  structured change
+              [%ins p=@uvI q=@uvI r=*]                  ::  new old data
+              [%mut p=@uvI q=@uvI r=udon]               ::  structured change
           ==                                            ::
 ++  ukay  (list ukaz)                                   ::  backward forward
 ++  ukaz  ,[p=path q=ukan]                              ::  change (pl ukazy)
