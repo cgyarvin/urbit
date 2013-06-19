@@ -575,142 +575,277 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                section 3bD, tree sync                ::
 ::
-  ++  cyst
-    |=  [bus=arch arc=arch]
-    ^-  ukay
-    uke:(dist:ka:(ci arc) bus)
-  ::
-  ++  ci
-    |=  arc=arch
-    =|  uke=ukay
+++  cyst
+  |=  [bus=arch arc=arch]
+  ^-  ukay
+  uke:(dist:ka:(ci arc) bus)
+
+::
+++  cu
+  |=  arc=arch
+  =|  don=(list udon)                                   ::  changes in reverse
+  |%
+  ++  abet
+  ++  ka
+    =|  ram=hapt
     |%
-    ++  ka
-      =|  ram=hapt
-      |%
-      ++  dare  ..ka                                    ::  retract
-      ++  dark  arc
-      ++  darn  `[p=ukay q=arch]`[(flop uke) arc]
-      ++  dash                                          ::  ascend
-        |=  [lol=@ta rac=arch]
-        ^+  +>
-        ?>  &(?=(^ ram) =(lol i.ram))
-        %=    +>
-            ram  t.ram
-            arc
-          :-  %|
-          ?>  ?=(| -.rac)
-          ?:  =(arc [| ~])
-            ?.  (~(has by p.rac) lol)  p.rac
-            (~(del by p.rac) lol)
-          (~(put by p.rac) lol arc)
-        ==
-      ::
-      ++  deaf                                          ::  add ukaz
-        |=  zuk=ukan
-        ^+  +>
-        +>(uke [[(flop ram) zuk] uke])
-      ::
-      ++  dent                                          ::  descend
-        |=  lol=@ta
-        ^+  +>
-        =+  you=?:(?=(& -.arc) ~ (~(get by p.arc) lol))
-        +>.$(ram [lol ram], arc ?~(you [%| ~] u.you))
-      ::
-      ++  deny                                          ::  descend recursively
-        |=  way=path
-        ^+  +>
-        ?~(way +> $(way t.way, +> (dent i.way)))
-      ::
-      ++  dest                                          ::  write over
-        |=  val=*
-        ^+  +>
-        ?-   -.arc
-          |  (deaf:dirk %ins (sham val) `@uvI`0 val)
-          &  (deaf %ins (sham val) p.arc val)
-        ==
-      ::
-      ++  dist                                          ::  modify to
-        |=  bus=arch
-        ^+  +>
-        ?-    -.bus
-            &  ?:(&(?=(& -.arc) =(p.bus p.arc)) +> (dest q.bus))
-            |
-          =.  +>  ?.(?=(& -.arc) +> %*(. dirk arc [%| ~]))
-          ?>  ?=(| -.arc)
-          =+  [yeg=(~(tap by p.arc) ~) gey=(~(tap by p.bus) ~)]
-          =>  .(arc `arch`arc)
-          =.  +>.$
-            |-  ^+  +>.^$
-            ?~  yeg  +>.^$
-            ?:  (~(has by p.bus) p.i.yeg)  $(yeg t.yeg)
-            $(yeg t.yeg, uke uke:dirk(arc q.i.yeg, ram [p.i.yeg ram]))
-          =.  +>.$
-            |-  ^+  +>.^$
-            ?~  gey  +>.^$
-            $(gey t.gey, uke uke:^$(bus q.i.gey, +> (dent p.i.gey)))
-          +>.$
-        ==
-      ::
-      ++  dirk                                          ::  rm -r
-        |-  ^+  +
-        ?-    -.arc
-            &  (deaf %del p.arc)
-            |
-          =+  dyr=(~(tap by p.arc) ~)
-          =>  .(arc `arch`arc)
-          |-  ^+  +.^$
-          ?~  dyr  +.^$
-          =.  +.^$  dirk:(dent p.i.dyr)
-          $(dyr t.dyr)
-        ==
-      ::
-      ++  dorf                                          ::  write under
-        |=  [way=path bus=arch]
-        ^+  +>
-        ?~  way  (dist bus)
+    ++  dare  ..ka                                      ::  retract
+    ++  dark  arc
+    ++  darn  `[p=ukay q=arch]`[(flop uke) arc]
+    ++  dash                                            ::  ascend
+      |=  [lol=@ta rac=arch]
+      ^+  +>
+      ?>  &(?=(^ ram) =(lol i.ram))
+      %=    +>
+          ram  t.ram
+          arc
+        :-  %|
+        ?>  ?=(| -.rac)
+        ?:  =(arc [| ~])
+          ?.  (~(has by p.rac) lol)  p.rac
+          (~(del by p.rac) lol)
+        (~(put by p.rac) lol arc)
+      ==
+    ::
+    ++  deaf                                            ::  add ukaz
+      |=  zuk=ukan
+      ^+  +>
+      +>(uke [[(flop ram) zuk] uke])
+    ::
+    ++  dent                                            ::  descend
+      |=  lol=@ta
+      ^+  +>
+      =+  you=?:(?=(& -.arc) ~ (~(get by p.arc) lol))
+      +>.$(ram [lol ram], arc ?~(you [%| ~] u.you))
+    ::
+    ++  deny                                            ::  descend recursively
+      |=  way=path
+      ^+  +>
+      ?~(way +> $(way t.way, +> (dent i.way)))
+    ::
+    ++  dest                                            ::  write over
+      |=  val=*
+      ^+  +>
+      ?-   -.arc
+        |  (deaf:dirk %ins (sham val) `@uvI`0 val)
+        &  (deaf %ins (sham val) p.arc val)
+      ==
+    ::
+    ++  dist                                            ::  modify to
+      |=  bus=arch
+      ^+  +>
+      ?-    -.bus
+          &  ?:(&(?=(& -.arc) =(p.bus p.arc)) +> (dest q.bus))
+          |
         =.  +>  ?.(?=(& -.arc) +> %*(. dirk arc [%| ~]))
-        $(way t.way, +> (dent i.way))
-      ::
-      ++  drum                                          ::  apply and reverse
-        |=  kuz=ukaz
-        ^+  +>
-        ?~  p.kuz 
-          ?-    -.q.kuz
-              %del
-            ?>  ?=(& -.arc)
-            =>  .(+>.$ (deaf %ins p.arc `@uvI`0 q.arc))
-            +>.$(arc [%| ~])
-          ::
-              %ins
-            =.  +>
-              ?-    -.arc
-                  |
-                ?>  &(=([| ~] arc) =(0 q.q.kuz))
-                (deaf %del p.q.kuz)
-              ::
-                  &
-                ?>  =(p.arc q.q.kuz)
-                (deaf %ins p.arc p.q.kuz q.arc)
-              ==
-            +>(arc [%& p.q.kuz r.q.kuz])
-          ::
-              %mut
-            !!
-          ==
         ?>  ?=(| -.arc)
-        (dash:$(p.kuz t.p.kuz, +> (dent i.p.kuz)) i.p.kuz arc)
-      ::
-      ++  durn                                          ::  apply and reverse
-        |=  kuy=ukay
-        ^+  +>
-        ?~  kuy  +>
-        ::  ~&  [%drum-kuz i.kuy]
-        $(kuy t.kuy, +> (drum i.kuy))
-      -- 
-    ++  zunk                                            ::  extract
-      ^-  [p=ukay q=arch]
-      [(flop uke) arc]
-    --
+        =+  [yeg=(~(tap by p.arc) ~) gey=(~(tap by p.bus) ~)]
+        =>  .(arc `arch`arc)
+        =.  +>.$
+          |-  ^+  +>.^$
+          ?~  yeg  +>.^$
+          ?:  (~(has by p.bus) p.i.yeg)  $(yeg t.yeg)
+          $(yeg t.yeg, uke uke:dirk(arc q.i.yeg, ram [p.i.yeg ram]))
+        =.  +>.$
+          |-  ^+  +>.^$
+          ?~  gey  +>.^$
+          $(gey t.gey, uke uke:^$(bus q.i.gey, +> (dent p.i.gey)))
+        +>.$
+      ==
+    ::
+    ++  dirk                                            ::  rm -r
+      |-  ^+  +
+      ?-    -.arc
+          &  (deaf %del p.arc)
+          |
+        =+  dyr=(~(tap by p.arc) ~)
+        =>  .(arc `arch`arc)
+        |-  ^+  +.^$
+        ?~  dyr  +.^$
+        =.  +.^$  dirk:(dent p.i.dyr)
+        $(dyr t.dyr)
+      ==
+    ::
+    ++  dorf                                            ::  write under
+      |=  [way=path bus=arch]
+      ^+  +>
+      ?~  way  (dist bus)
+      =.  +>  ?.(?=(& -.arc) +> %*(. dirk arc [%| ~]))
+      $(way t.way, +> (dent i.way))
+    ::
+    ++  drum                                            ::  apply and reverse
+      |=  kuz=ukaz
+      ^+  +>
+      ?~  p.kuz 
+        ?-    -.q.kuz
+            %del
+          ?>  ?=(& -.arc)
+          =>  .(+>.$ (deaf %ins p.arc `@uvI`0 q.arc))
+          +>.$(arc [%| ~])
+        ::
+            %ins
+          =.  +>
+            ?-    -.arc
+                |
+              ?>  &(=([| ~] arc) =(0 q.q.kuz))
+              (deaf %del p.q.kuz)
+            ::
+                &
+              ?>  =(p.arc q.q.kuz)
+              (deaf %ins p.arc p.q.kuz q.arc)
+            ==
+          +>(arc [%& p.q.kuz r.q.kuz])
+        ::
+            %mut
+          !!
+        ==
+      ?>  ?=(| -.arc)
+      (dash:$(p.kuz t.p.kuz, +> (dent i.p.kuz)) i.p.kuz arc)
+    ::
+    ++  durn                                            ::  apply and reverse
+      |=  kuy=ukay
+      ^+  +>
+      ?~  kuy  +>
+      ::  ~&  [%drum-kuz i.kuy]
+      $(kuy t.kuy, +> (drum i.kuy))
+    -- 
+  ++  zunk                                              ::  extract
+    ^-  [p=ukay q=arch]
+    [(flop uke) arc]
+  --
+
+::
+++  ci
+  |=  arc=arch
+  =|  uke=ukay
+  |%
+  ++  ka
+    =|  ram=hapt
+    |%
+    ++  dare  ..ka                                      ::  retract
+    ++  dark  arc
+    ++  darn  `[p=ukay q=arch]`[(flop uke) arc]
+    ++  dash                                            ::  ascend
+      |=  [lol=@ta rac=arch]
+      ^+  +>
+      ?>  &(?=(^ ram) =(lol i.ram))
+      %=    +>
+          ram  t.ram
+          arc
+        :-  %|
+        ?>  ?=(| -.rac)
+        ?:  =(arc [| ~])
+          ?.  (~(has by p.rac) lol)  p.rac
+          (~(del by p.rac) lol)
+        (~(put by p.rac) lol arc)
+      ==
+    ::
+    ++  deaf                                            ::  add ukaz
+      |=  zuk=ukan
+      ^+  +>
+      +>(uke [[(flop ram) zuk] uke])
+    ::
+    ++  dent                                            ::  descend
+      |=  lol=@ta
+      ^+  +>
+      =+  you=?:(?=(& -.arc) ~ (~(get by p.arc) lol))
+      +>.$(ram [lol ram], arc ?~(you [%| ~] u.you))
+    ::
+    ++  deny                                            ::  descend recursively
+      |=  way=path
+      ^+  +>
+      ?~(way +> $(way t.way, +> (dent i.way)))
+    ::
+    ++  dest                                            ::  write over
+      |=  val=*
+      ^+  +>
+      ?-   -.arc
+        |  (deaf:dirk %ins (sham val) `@uvI`0 val)
+        &  (deaf %ins (sham val) p.arc val)
+      ==
+    ::
+    ++  dist                                            ::  modify to
+      |=  bus=arch
+      ^+  +>
+      ?-    -.bus
+          &  ?:(&(?=(& -.arc) =(p.bus p.arc)) +> (dest q.bus))
+          |
+        =.  +>  ?.(?=(& -.arc) +> %*(. dirk arc [%| ~]))
+        ?>  ?=(| -.arc)
+        =+  [yeg=(~(tap by p.arc) ~) gey=(~(tap by p.bus) ~)]
+        =>  .(arc `arch`arc)
+        =.  +>.$
+          |-  ^+  +>.^$
+          ?~  yeg  +>.^$
+          ?:  (~(has by p.bus) p.i.yeg)  $(yeg t.yeg)
+          $(yeg t.yeg, uke uke:dirk(arc q.i.yeg, ram [p.i.yeg ram]))
+        =.  +>.$
+          |-  ^+  +>.^$
+          ?~  gey  +>.^$
+          $(gey t.gey, uke uke:^$(bus q.i.gey, +> (dent p.i.gey)))
+        +>.$
+      ==
+    ::
+    ++  dirk                                            ::  rm -r
+      |-  ^+  +
+      ?-    -.arc
+          &  (deaf %del p.arc)
+          |
+        =+  dyr=(~(tap by p.arc) ~)
+        =>  .(arc `arch`arc)
+        |-  ^+  +.^$
+        ?~  dyr  +.^$
+        =.  +.^$  dirk:(dent p.i.dyr)
+        $(dyr t.dyr)
+      ==
+    ::
+    ++  dorf                                            ::  write under
+      |=  [way=path bus=arch]
+      ^+  +>
+      ?~  way  (dist bus)
+      =.  +>  ?.(?=(& -.arc) +> %*(. dirk arc [%| ~]))
+      $(way t.way, +> (dent i.way))
+    ::
+    ++  drum                                            ::  apply and reverse
+      |=  kuz=ukaz
+      ^+  +>
+      ?~  p.kuz 
+        ?-    -.q.kuz
+            %del
+          ?>  ?=(& -.arc)
+          =>  .(+>.$ (deaf %ins p.arc `@uvI`0 q.arc))
+          +>.$(arc [%| ~])
+        ::
+            %ins
+          =.  +>
+            ?-    -.arc
+                |
+              ?>  &(=([| ~] arc) =(0 q.q.kuz))
+              (deaf %del p.q.kuz)
+            ::
+                &
+              ?>  =(p.arc q.q.kuz)
+              (deaf %ins p.arc p.q.kuz q.arc)
+            ==
+          +>(arc [%& p.q.kuz r.q.kuz])
+        ::
+            %mut
+          !!
+        ==
+      ?>  ?=(| -.arc)
+      (dash:$(p.kuz t.p.kuz, +> (dent i.p.kuz)) i.p.kuz arc)
+    ::
+    ++  durn                                            ::  apply and reverse
+      |=  kuy=ukay
+      ^+  +>
+      ?~  kuy  +>
+      ::  ~&  [%drum-kuz i.kuy]
+      $(kuy t.kuy, +> (drum i.kuy))
+    -- 
+  ++  zunk                                              ::  extract
+    ^-  [p=ukay q=arch]
+    [(flop uke) arc]
+  --
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                section 3bE, names etc                ::
 ::

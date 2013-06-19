@@ -7,11 +7,10 @@
 :_  ~
 :_  ~
 ^-  gift
-~&  %loring
 =+  [hel=(lore ((hard ,@) .^(%cx del))) hev=(lore ((hard ,@) .^(%cx dev)))]
-~&  %lored
 =+  dis=(loss hel hev)
-~&  %lossed
 =+  puc=(lusk hel hev dis)
-~&  %lusked
+=+  rev=(lurk hel puc)
+=+  ver=(lurk hev (berk puc))
+?>  &(=(rev hev) =(ver hel))
 [%la >puc<]

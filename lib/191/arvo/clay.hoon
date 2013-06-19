@@ -18,47 +18,47 @@
     =|  say=(list ,[p=duct q=seat r=[p=@ud q=riff]])
     |%
     ++  de                                              ::  per desk
-      |_  [buk=@ta saq=desk]
+      |_  [buk=@ta qyx=cult dom=dome]
       ++  aeon                                          ::  mark to era
         |=  lok=case
         ^-  (unit ,@ud)
         ?-    -.lok
             %da
           ?:  (gth p.lok now)  ~
-          =+  deq=?:(=(0 let.saq) ~ [~ (dec let.saq)])
+          =+  deq=?:(=(0 let.dom) ~ [~ (dec let.dom)])
           |-  ^+  deq
-          ?~  hit.saq  deq
-          ?:  (gth p.lok p.i.hit.saq)  deq
-          =+  nix=(dec let.saq)
-          $(hit.saq t.hit.saq, let.saq nix, deq [~ nix])
+          ?~  hit.dom  deq
+          ?:  (gth p.lok p.i.hit.dom)  deq
+          =+  nix=(dec let.dom)
+          $(hit.dom t.hit.dom, let.dom nix, deq [~ nix])
         :: 
-            %tas  (~(get by lab.saq) p.lok)
-            %ud   ?:((gte p.lok let.saq) ~ [~ p.lok])
+            %tas  (~(get by lab.dom) p.lok)
+            %ud   ?:((gte p.lok let.dom) ~ [~ p.lok])
         ==
       ::
       ++  amor                                          ::  endpoint query
         |=  ren=?(%x %y %z)
         ^-  (unit ,*)
         ?-  ren
-          %x  ?.(?=(& -.arc.saq) ~ [~ q.arc.saq])
+          %x  ?.(?=(& -.arc.dom) ~ [~ q.arc.dom])
           %y  :-  ~
-              ?-  -.arc.saq
-                &  [& p.arc.saq]
-                |  [| (turn (~(tap by p.arc.saq) ~) |=([p=@ta *] p))]
+              ?-  -.arc.dom
+                &  [& p.arc.dom]
+                |  [| (turn (~(tap by p.arc.dom) ~) |=([p=@ta *] p))]
               ==
-          %z  [~ arc.saq]
+          %z  [~ arc.dom]
         ==
       ::
       ++  ammo                                          ::  trace window
         |=  oan=@ud
         =|  bul=(list ,[p=@da q=ukay])
         |-  ^+  [bul +>.^$]
-        ?:  =(oan (dec let.saq))  [(flop bul) +>.^$]
+        ?:  =(oan (dec let.dom))  [(flop bul) +>.^$]
         %=  $
-          bul      [[p.i.hit.saq r.i.hit.saq] bul]
-          let.saq  (dec let.saq)
-          hit.saq  t.hit.saq
-          arc.saq  dark:(durn:ka:(ci arc.saq) q.i.hit.saq)
+          bul      [[p.i.hit.dom r.i.hit.dom] bul]
+          let.dom  (dec let.dom)
+          hit.dom  t.hit.dom
+          arc.dom  dark:(durn:ka:(ci arc.dom) q.i.hit.dom)
         ==
       ::
       ++  argo  |=(oan=@ud +:(ammo oan))                ::  revert to era
@@ -72,7 +72,7 @@
         ?:  ?=(%w ren)
           ?.(?=(~ way) ~ [~ u.nao])
         =.  +>.$  (argo u.nao)
-        (amor(arc.saq dark:(deny:ka:(ci arc.saq) way)) ren)
+        (amor(arc.dom dark:(deny:ka:(ci arc.dom) way)) ren)
       ::
       ++  biff                                          ::  path subset
         |=  [yok=path gib=path]
@@ -96,30 +96,30 @@
           ^+  +>
           ?:  ?=(%w ren)
             ?^  way  +>
-            (blab hen ren lok ~ let.saq)
-          =.  arc.saq  dark:(deny:ka:(ci arc.saq) way)
+            (blab hen ren lok ~ let.dom)
+          =.  arc.dom  dark:(deny:ka:(ci arc.dom) way)
           ?:  ?=(%z ren)
-            (blab hen ren lok way arc.saq)
+            (blab hen ren lok way arc.dom)
           =+  yaw=(flop way)
           |-  ^+  +>.^$
-          ?-    -.arc.saq
+          ?-    -.arc.dom
               &  
-            (blab hen ren lok (flop yaw) ?:(?=(%y ren) [& p.arc.saq] q.arc.saq))
+            (blab hen ren lok (flop yaw) ?:(?=(%y ren) [& p.arc.dom] q.arc.dom))
           ::
               |
-            =+  goz=(~(tap by p.arc.saq) ~)
-            =>  .(arc.saq `arch`arc.saq)
+            =+  goz=(~(tap by p.arc.dom) ~)
+            =>  .(arc.dom `arch`arc.dom)
             =.  +>.^$  
               ?.  ?=(%y ren)  +>.^$
               (blab hen ren lok (flop yaw) [| (turn goz |=([p=@ta *] p))])
             |-  ^+  +>.^^$
             ?~  goz  +>.^^$
-            $(goz t.goz, +>.^^$ ^$(yaw [p.i.goz yaw], arc.saq q.i.goz))
+            $(goz t.goz, +>.^^$ ^$(yaw [p.i.goz yaw], arc.dom q.i.goz))
           ==
         ==
       ::
       ++  doze
-        =+  xiq=(~(tap by qyx.saq) ~)                   ::  XX tap
+        =+  xiq=(~(tap by qyx) ~)                   ::  XX tap
         =|  nex=(unit ,@da)
         |-  ^+  nex
         ?~  xiq  nex
@@ -132,10 +132,10 @@
           ?~(q.q.q.i.xiq ~ ?>((lth now u.q.q.q.i.xiq) q.q.q.i.xiq))
         ==
       ::
-      ++  ease                                          ::  unsubscrube
+      ++  ease                                          ::  unsubscribe
         |=  hen=duct
         ^+  +>
-        +>(qyx.saq (~(del by qyx.saq) hen))
+        +>(qyx (~(del by qyx) hen))
       ::
       ++  eave                                          ::  subscribe
         |=  [hen=duct ren=care myn=morn way=path]
@@ -144,7 +144,7 @@
             %da
           =+  nao=(aeon [%da p.myn])
           ?~  nao
-            +>.$(qyx.saq (~(put by qyx.saq) hen ren myn way))
+            +>.$(qyx (~(put by qyx) hen ren myn way))
           =+  oap=?~(q.myn ~ (aeon %da u.q.myn))
           =+  ^=  nyb  ^+  byn
               =.  +>.$  ?~(oap +>.$ (argo u.oap))
@@ -157,14 +157,14 @@
               $(+>.^$ (edit(now p.i.giz) q.i.giz))
           %=  +>.$
             byn      ?~(oap nyb [[hen ~] nyb])
-            qyx.saq  ?^(oap qyx.saq (~(put by qyx.saq) hen ren myn way))
+            qyx  ?^(oap qyx (~(put by qyx) hen ren myn way))
           ==
         ::
             ?(%tas %ud)
           =+  lok=`case`?-(-.myn %tas [%tas p.myn], %ud [%ud p.myn])
           =+  nao=(aeon lok)
           ?~  nao  
-            +>.$(qyx.saq (~(put by qyx.saq) hen ren myn way))
+            +>.$(qyx (~(put by qyx) hen ren myn way))
           +>.$(byn [[hen ~] byn:(demo:(argo u.nao) hen ren lok way)])
         ==
       ::
@@ -174,7 +174,7 @@
         ?-    ren
             %w
           ?^  way  +>
-          (blab hen ren lok ~ (dec let.saq))
+          (blab hen ren lok ~ (dec let.dom))
         ::
             %x
           |-  ^+  +>.^$
@@ -194,9 +194,9 @@
       ++  ecco                                          ::  ship release
         |=  lol=@tas
         ^+  +>
-        ?<  |(=(0 let.saq) (~(has by lab.saq) lol))
-        =.  lab.saq  (~(put by lab.saq) lol (dec let.saq))
-        =+  xiq=(~(tap by qyx.saq) ~)                   ::  XX tap
+        ?<  |(=(0 let.dom) (~(has by lab.dom) lol))
+        =.  lab.dom  (~(put by lab.dom) lol (dec let.dom))
+        =+  xiq=(~(tap by qyx) ~)                   ::  XX tap
         |-  ^+  +>.^$
         ?~  xiq  +>.^$
         ?.  &(?=(%tas -.q.q.i.xiq) =(lol p.q.q.i.xiq)) $(xiq t.xiq)
@@ -206,17 +206,17 @@
         |=  lav=ukay
         ^+  +>
         ::  ~&  [%edit buk lav]
-        =+  wak=darn:(durn:ka:(ci arc.saq) lav)
+        =+  wak=darn:(durn:ka:(ci arc.dom) lav)
         %=  +>.$
-          arc.saq  q.wak
-          let.saq  +(let.saq)
-          hit.saq  :_(hit.saq [now p.wak lav])
+          arc.dom  q.wak
+          let.dom  +(let.dom)
+          hit.dom  :_(hit.dom [now p.wak lav])
         ==
       ::
       ++  exec                                          ::  propagate changes
         |=  lav=ukay
         ^+  +>
-        =+  xiq=(~(tap by qyx.saq) ~)                   ::  XX tap
+        =+  xiq=(~(tap by qyx) ~)                   ::  XX tap
         =|  dem=(list ,[p=duct q=care r=case s=path])
         |-  ^+  +>.^$
         ?~  xiq  
@@ -234,17 +234,17 @@
           ==
             %tas  $(xiq t.xiq)
             %ud
-          ?.  =(let.saq p.q.q.i.xiq)  $(xiq t.xiq)
+          ?.  =(let.dom p.q.q.i.xiq)  $(xiq t.xiq)
           %=  $
-            xiq      t.xiq
-            dem      :_(dem [p.i.xiq p.q.i.xiq [%ud let.saq] r.q.i.xiq])
-            qyx.saq  (~(del by qyx.saq) p.i.xiq)
+            xiq  t.xiq
+            dem  :_(dem [p.i.xiq p.q.i.xiq [%ud let.dom] r.q.i.xiq])
+            qyx  (~(del by qyx) p.i.xiq)
           ==
         ==
       ::
       ++  wake                                          ::  react to time
         ^+  .
-        =+  xiq=(~(tap by qyx.saq) ~)                   ::  XX tap
+        =+  xiq=(~(tap by qyx) ~)                   ::  XX tap
         |-  ^+  ..wake
         ?~  xiq  ..wake
         ?.  ?=(%da -.q.q.i.xiq)  $(xiq t.xiq)
@@ -257,55 +257,55 @@
         $(xiq t.xiq)
       ::
       ++  zoot
-        %_(..de dos.yar (~(put by dos.yar) buk saq))
+        %_(..de dos.yar (~(put by dos.yar) buk qyx dom))
       --
     ::
     ++  di
       |=  buk=@ta
       =+  ^=  saq  ^-  desk
           =+  saq=(~(get by dos.yar) buk)
-          ?~(saq [[%| ~] 0 ~ ~ ~] u.saq)
-      ~(. de buk saq)
+          ?~(saq [~ [[%| ~] 0 ~ ~]] u.saq)
+      ~(. de buk p.saq q.saq)
     ::
     ++  fa
       |=  him=seat
       =+  ^=  raz
           =+  raz=(~(get by rid.yar) him)
-          ?~(raz *rind u.raz)
+          ?~(raz [p=*rind q=*rink] u.raz)
       |%
       ++  mote                                          ::  send/cancel request
         |=  [hen=duct ryf=riff]
         ^+  +>
-        =+  nux=(~(get by fod.raz) hen)
+        =+  nux=(~(get by fod.p.raz) hen)
         ?^  nux
           ?>  ?=(~ q.ryf)
           %=  +>.$
             say      [[[[%c (scot %ud u.nux) ~] hen] him [u.nux ryf]] say]
-            fod.raz  (~(del by fod.raz) hen)
-            bim.raz  (~(del by bim.raz) u.nux)
+            fod.p.raz  (~(del by fod.p.raz) hen)
+            bim.p.raz  (~(del by bim.p.raz) u.nux)
           ==
         ?>  ?=(^ q.ryf)
-        =+  inx=nix.raz
+        =+  inx=nix.p.raz
         %=  +>.$
           say      [[[[%c (scot %ud inx) ~] hen] him [inx ryf]] say]
-          nix.raz  +(nix.raz)
-          bim.raz  (~(put by bim.raz) inx [hen ryf])
-          fod.raz  (~(put by fod.raz) hen inx)
+          nix.p.raz  +(nix.p.raz)
+          bim.p.raz  (~(put by bim.p.raz) inx [hen ryf])
+          fod.p.raz  (~(put by fod.p.raz) hen inx)
         ==
       ::       
       ++  tome                                          ::  accept response
         |=  [inx=@ud rot=riot]
         ^+  +>
         ::  ~&  [%clay-tome inx rot]
-        =+  mub=(~(get by bim.raz) inx)
+        =+  mub=(~(get by bim.p.raz) inx)
         ?~  mub  +>.$
         %=  +>.$
           byn      [[p.u.mub rot] byn]
-          bim.raz  (~(del by bim.raz) inx)
-          fod.raz  (~(del by fod.raz) p.u.mub)
-          hac.raz  ?~  rot 
-                     hac.raz 
-                   %+  ~(put by hac.raz) 
+          bim.p.raz  (~(del by bim.p.raz) inx)
+          fod.p.raz  (~(del by fod.p.raz) p.u.mub)
+          hac.q.raz  ?~  rot 
+                     hac.q.raz 
+                   %+  ~(put by hac.q.raz) 
                      [p.p.u.rot q.p.u.rot r.p.u.rot q.u.rot]
                    r.u.rot
         ==
@@ -313,20 +313,19 @@
       ++  tref                                          ::  request rejected
         |=  tea=wire
         ^+  +>
-        ?:  =(%good cap)  +>
         ?.  ?=([@ ~] tea)  +>
         =+  xoc=(slay i.tea)
         ?.  ?=([~ %% %ud @] xoc)  +>.$
-        =+  mub=(~(get by bim.raz) q.p.u.xoc)
+        =+  mub=(~(get by bim.p.raz) q.p.u.xoc)
         ?~  mub  +>.$
         %=  +>.$
           byn      [[p.u.mub ~] byn]
-          fod.raz  (~(del by fod.raz) q.p.u.xoc)
+          fod.p.raz  (~(del by fod.p.raz) q.p.u.xoc)
         ==
       ::
       ++  vera                                          ::  search
         |=  [buk=@tas ren=care lok=case way=path]
-        (~(get by hac.raz) ren lok buk way)
+        (~(get by hac.q.raz) ren lok buk way)
       ::
       ++  zoom
         %_(+>.$ rid.yar (~(put by rid.yar) him raz))

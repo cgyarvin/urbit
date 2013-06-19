@@ -1,4 +1,4 @@
-::
+!:
 ::              Hoon/Arvo stage 191 (reflexive).  
 ::              This file is in the public domain.
 ::
@@ -460,8 +460,35 @@
               [%fork p=type q=type]                     ::
               [%hold p=(list ,[p=type q=gene])]         ::
           ==                                            ::
+++  udal                                                ::  atomic change (%b)
+          $:  p=@ud                                     ::  blockwidth
+              q=(list ,[p=@ud q=(unit ,[p=@ q=@])])     ::  indels
+          ==                                            ::
+++  udon                                                ::  abstract delta
+          $:  p=umph                                    ::  preprocessor
+              ^=  q                                     ::  patch
+              $%  [%a p=ulna]                           ::  trivial replace
+                  [%b p=udal]                           ::  atomic indel
+                  [%c p=(urge)]                         ::  list indel
+                  [%d p=upas q=upas]                    ::  tree edit
+              ==                                        ::
+          ==                                            ::
+++  ulna  ,[p=* q=*]                                    ::  from to
+++  umph                                                ::  change filter
+          $|  $?  %a                                    ::  no filter
+                  %b                                    ::  jamfile
+                  %c                                    ::  LF text
+              ==                                        ::
+          $%  [%d p=@ud]                                ::  blocklist
+          ==                                            ::
 ++  unit  |*  a=_,*                                     ::  maybe
           $|(~ [~ u=a])                                 ::
+++  upas                                                ::  tree change (%d)
+          $&  [p=upas q=upas]                           ::  cell
+          $%  [0 p=axis]                                ::  copy old
+              [1 p=*]                                   ::  insert new
+              [2 p=axis q=udon]                         ::  mutate!
+          ==                                            ::
 ++  urge  |*  a=_,*                                     ::  list change
           %-  list                                      ::
           ,$%([& p=@ud] [| p=(list a) q=(list a)])      ::
@@ -3194,6 +3221,16 @@
 ::                section 2eO, diff (move me)           ::
 ::
 ::
+++  berk                                                ::  invert diff patch
+  |*  bur=(urge)
+  ^+  bur
+  ?~  bur  ~
+  :_  $(bur t.bur)
+  ?-  -.i.bur
+    &  i.bur
+    |  [%| q.i.bur p.i.bur]
+  ==
+::
 ++  loss                                                ::  longest subsequence
   ~/  %loss
   |*  [hel=(list) hev=(list)]
@@ -3269,6 +3306,7 @@
   ?:((gth p.lef p.rig) lef rig)
 ::
 ++  lore                                                ::  atom to line list
+  ~/  %lore
   |=  lub=@
   =|  tez=(list ,@t)
   |-  ^+  tez
@@ -3283,6 +3321,48 @@
 ++  role                                                ::  line list to atom
   |=  tez=(list ,@t)
   (rap 3 (turn tez |=(a=@t (cat 3 a 10))))
+::
+++  lump                                                ::  apply patch
+  |=  [don=udon src=*]
+  ^-  *
+  ?+    p.don  ~|(%unsupported !!)
+      %a
+    ?+  -.q.don  ~|(%unsupported !!)
+      %a  q.p.q.don
+      %c  (lurk ((hard (list)) src) p.q.don)
+    ==
+  ::
+      %c
+    =+  dst=(lore ((hard ,@) src))
+    %-  role
+    ?+  -.q.don  ~|(%unsupported !!)
+      %a  ((hard (list ,@t)) q.p.q.don)
+      %c  (lurk dst p.q.don)
+    ==
+  ==
+::
+++  limp                                                ::  invert patch
+  |=  don=udon  ^-  udon
+  :-  p.don
+  ?+  -.q.don  ~|(%unsupported !!)
+    %a  [%a q.p.q.don p.p.q.don]
+    %c  [%c (berk p.q.don)]
+    %d  [%d q.q.don p.q.don] 
+  ==
+::
+++  hump                                                ::  general prepatch
+  |=  [pum=umph src=*]  ^-  *
+  ?+  pum  ~|(%unsupported !!)
+    %a   src
+    %c  (lore ((hard ,@) src))
+  ==
+::
+++  husk                                                ::  unprepatch
+  |=  [pum=umph dst=*]  ^-  *
+  ?+  pum  ~|(%unsupported !!)
+    %a  dst
+    %c  (role ((hard (list ,@)) dst))
+  ==
 ::
 ++  lurk                                                ::  apply list patch
   |*  [hel=(list) rug=(urge)]
@@ -6895,7 +6975,7 @@
       ==
     ::
     ++  wisp
-      %-  ulna
+      %-  ulva
       %+  cook
         |=(a=(list ,[p=term q=foot]) (~(gas by *(map term foot)) a))
       (most muck boog)
@@ -6912,7 +6992,7 @@
     ++  glop  ~+((glue mash))
     ++  gunk  ~+((glue muck))
     ++  butt  |*(zor=_rule ?:(tol ;~(sfix zor ;~(plug gap duz)) zor))
-    ++  ulna  |*(zor=_rule ?.(tol fail ;~(sfix zor ;~(plug gap dun))))
+    ++  ulva  |*(zor=_rule ?.(tol fail ;~(sfix zor ;~(plug gap dun))))
     ++  neck  ;~(pose duz ;~(pfix ;~(plug duq gap) wisp))
     ++  hank  (most muck loaf)
     ++  loaf  ?:(tol tall wide)
@@ -7278,7 +7358,7 @@
               [%writ p=riot]                            ::  response
           ==                                            ::
 ++  care  ?(%w %x %y %z)                                ::  clay submode
-++  case                                                ::  modeseatdisccasespur
+++  case                                                ::  modeseatdeskcasespur
           $%  [%da p=@da]                               ::  date
               [%tas p=@tas]                             ::  label
               [%ud p=@ud]                               ::  number
@@ -7306,15 +7386,16 @@
               ::  [%m p=(list crow)]                    ::  map?
               ::  [%s p=(list crow)]                    ::  set?
           ==                                            ::
+++  cult  (map duct ,[p=care q=morn r=path])            ::  subscriptions
 ++  deed  ,[p=@ q=step]                                 ::  signature, stage
-++  desk                                                ::  project state
+++  dome                                                ::  project state
           $:  arc=arch                                  ::  state
               let=@                                     ::  (lent hit)
               hit=(list ,[p=@da q=ukay r=ukay])         ::  changes rev/fwd
               lab=(map ,@tas ,@ud)                      ::  labels
-              qyx=(map duct ,[p=care q=morn r=path])    ::  subscriptions
           ==                                            ::
-++  disc  ,@ta                                          ::  modeseatdisccasespur
+++  desk  ,[p=cult q=dome]                              ::  project state
+++  disc  ,@ta                                          ::  modeseatdeskcasespur
 ++  dock  $:                                            ::  process state
               p=tick                                    ::  process counter
               q=(map tick bear)                         ::  process table
@@ -7452,7 +7533,12 @@
               [| q=(list ,@ta)]                         ::  dir
           ==                                            ::
 ++  meth  ?(%get %post)                                 ::  http method
-++  mode  @tas                                          ::  modeseatdisccasespur
+++  miso                                                ::  arch delta
+          $%  [%del p=*]                                ::  delete
+              [%ins p=*]                                ::  insert
+              [%mut p=udon]                             ::  mutate
+          ==                                            ::
+++  mode  @tas                                          ::  modeseatdeskcasespur
 ++  morn                                                ::  sequence slice
           $%  [%da p=@da q=(unit ,@da)]                 ::  start/end
               [%tas p=@tas]                             ::  at label
@@ -7511,14 +7597,15 @@
           $:  sed=@ud                                   ::  sent
               san=(map ,@ud duct)                       ::  outstanding
           ==                                            ::
-++  rind                                                ::  foreign relation
+++  rind                                                ::  request manager
           $:  nix=@ud                                   ::  request index
               bim=(map ,@ud ,[p=duct q=riff])           ::  outstanding
               fod=(map duct ,@ud)                       ::  current requests
-              ^=  hac                                   ::  cache
-              (map ,[p=care q=case r=@tas s=path] ,*)   ::
           ==                                            ::
-++  rink  path                                          ::  prompt path
+++  rink                                                ::  foreign state
+          $:  hac=(map rump ,*)                         ::  cache
+              mir=(map ,@ta dome)                       ::  mirrors
+          ==                                            ::
 ++  road                                                ::  secured oneway route
           $:  exp=@da                                   ::  expiration date
               lun=(unit lane)                           ::  route to friend
@@ -7529,11 +7616,12 @@
               fat=(map ,@p room)                        ::  per host
           ==                                            ::
 ++  room                                                ::  fs per seat (new)
-          $:  dos=(map ,@ta desk)                       ::  native projects 
-              rid=(map seat rind)                       ::  neighbors
+          $:  dos=(map ,@ta ,[p=cult q=dome])           ::  native projects 
+              rid=(map seat ,[p=rind q=rink])           ::  neighbors
           ==                                            ::
 ++  rock  ,@uvO                                         ::  packet
 ++  rout  ,[p=(list host) q=path r=oryx s=path]         ::  http route (new)
+++  rump  ,[p=care q=case r=@tas s=path]                ::  relative path
 ++  safe                                                ::  domestic host
           $:  hoy=(list seat)                           ::  hierarchy
               val=wand                                  ::  private keys
@@ -7556,7 +7644,7 @@
           ==                                            ::
 ++  scud  ,[p=pact q=scar]                              ::  full dispatch
 ++  seam  ,[p=@ta q=pact r=scar]                        ::  service route
-++  seat  ,@p                                           ::  modeseatdisccasespur
+++  seat  ,@p                                           ::  modeseatdeskcasespur
 ++  shed                                                ::  packet pump
           $:  $:  niq=@ud                               ::  count in queue
                   nif=@ud                               ::  count in flight
@@ -7573,7 +7661,7 @@
 ++  snow  ,[p=@ud q=@ud r=(set ,@ud)]                   ::  window exceptions
 ++  soap  ,[p=[p=life q=life] q=@tas r=@ud]             ::  statement id
 ++  sock  ,[p=seat q=seat]                              ::  from to
-++  spur  path                                          ::  modeseatdisccasespur
+++  spur  path                                          ::  modeseatdeskcasespur
 ++  step  ,[p=bray q=gcos r=pass]                       ::  identity stage
 ++  task  _|+([@da path note] *bowl)                    ::  process core
 ++  taxi  ,[p=lane q=rock]                              ::  routed packet
@@ -7583,18 +7671,9 @@
               any=@                                     ::  entropy
               urb=(map seat safe)                       ::  all keys and routes
           ==                                            ::
-++  udal                                                ::  atomic change (%b)
-          $:  p=@ud                                     ::  blockwidth
-              q=(list ,[p=@ud q=(unit ,[p=@ q=@])])     ::  indels
-          ==                                            ::
-++  udon                                                ::  abstract delta
-          $:  p=umph                                    ::  preprocessor
-              ^=  q                                     ::  patch
-              $%  [%a p=ulna]                           ::  trivial replace
-                  [%b p=udal]                           ::  atomic indel
-                  [%c p=(urge)]                         ::  list indel
-                  [%d p=upas q=upas]                    ::  tree edit
-              ==                                        ::
+++  soba                                                ::  repository action
+          $%  [& p=path q=miso]                         ::  delta
+              [| p=@tas]                                ::  label
           ==                                            ::
 ++  ukan                                                ::  change per path
           $%  [%del p=@uvI]                             ::  delete old-hash
@@ -7603,21 +7682,7 @@
           ==                                            ::
 ++  ukay  (list ukaz)                                   ::  backward forward
 ++  ukaz  ,[p=path q=ukan]                              ::  change (pl ukazy)
-++  ulna  ,[p=* q=*]                                    ::  trivial change
 ++  umaz  ,[p=(list ukaz) q=(list ukaz)]                ::  dual change
-++  umph                                                ::  change filter
-          $|  $?  %a                                    ::  no filter
-                  %b                                    ::  jamfile
-                  %c                                    ::  LF text
-              ==                                        ::
-          $%  [%d p=@ud]                                ::  blocklist
-          ==                                            ::
-++  upas                                                ::  tree change (%d)
-          $&  [p=upas q=upas]                           ::  cell
-          $%  [0 p=axis]                                ::  copy old
-              [1 p=*]                                   ::  insert new
-              [2 p=axis q=udon]                         ::  mutate!
-          ==                                            ::
 ++  vane  $_                                            ::  kernel actor
           |+  [now=@da eny=@ sky=||(* (unit))]          ::  activate
           ^?  |%                                        ::
@@ -7671,7 +7736,7 @@
           $:  p=?                                       ::  verbose 
               q=(list seat)                             ::  owner stack
               r=blur                                    ::  display state
-              s=(map ,[p=seat q=rink] hist)             ::  history
+              s=(map ,[p=seat q=path] hist)             ::  history
           ==                                            ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                section 3bE, Arvo core                ::

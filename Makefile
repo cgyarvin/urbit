@@ -690,6 +690,7 @@ J191_5_OFILES=\
        gen191/5/parse.o \
        gen191/5/rub.o \
        gen191/5/shax.o \
+       gen191/5/lore.o \
        gen191/5/loss.o \
        gen191/5/trip.o
 
