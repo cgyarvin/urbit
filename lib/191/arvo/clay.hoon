@@ -58,7 +58,7 @@
           bul      [[p.i.hit.dom r.i.hit.dom] bul]
           let.dom  (dec let.dom)
           hit.dom  t.hit.dom
-          arc.dom  dark:(durn:ka:(ci arc.dom) q.i.hit.dom)
+          arc.dom  arc:(durn:ka:(ci arc.dom) q.i.hit.dom)
         ==
       ::
       ++  argo  |=(oan=@ud +:(ammo oan))                ::  revert to era

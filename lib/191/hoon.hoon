@@ -1,4 +1,4 @@
-!:
+::
 ::              Hoon/Arvo stage 191 (reflexive).  
 ::              This file is in the public domain.
 ::
@@ -3230,6 +3230,16 @@
     &  i.bur
     |  [%| q.i.bur p.i.bur]
   ==
+::
+++  diff                                                ::  generate patch
+  |=  pum=umph
+  |=  [old=* new=*]  ^-  udon
+  :-  pum
+  ?+  pum  ~|(%unsupported !!)
+    %a  [%a old new]
+    %c  =+  [hel=(lore ((hard ,@) old)) hev=(lore ((hard ,@) new))]
+        [%c (lusk hel hev (loss hel hev))]
+  == 
 ::
 ++  loss                                                ::  longest subsequence
   ~/  %loss

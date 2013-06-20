@@ -575,10 +575,138 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                section 3bD, tree sync                ::
 ::
-++  cyst
+++  cure                                                ::  invert tree patch
+  |=  mis=miso
+  ?-  -.mis
+    %del  [%ins p.mis]
+    %ins  [%del p.mis]
+    %mut  [%mut (limp p.mis)]
+  ==
+::
+++  cyst                                                ::  old external patch
   |=  [bus=arch arc=arch]
   ^-  ukay
   uke:(dist:ka:(ci arc) bus)
+::
+++  cyte                                                ::  new external patch
+  |=  [bus=arch arc=arch]
+  ^-  (list ,[p=path q=miso])
+  doz:(dist:ka:(cu arc) %c bus)
+::
+++  cu  
+  |=  arc=arch                                          ::  filesystem tree
+  =|  doz=(list ,[p=path q=miso])                       ::  changes in reverse
+  |%
+  ++  abet
+    ^-  [p=(list ,[p=path q=miso]) q=arch]
+    [(flop doz) arc]
+  ::
+  ++  ka
+    =|  ram=path                                        ::  reverse path
+    |%
+    ++  dare  ..ka                                      ::  retract
+    ++  dash                                            ::  ascend
+      |=  [lol=@ta rac=arch]
+      ^+  +>
+      ?>  &(?=(^ ram) =(lol i.ram))
+      %=    +>
+          ram  t.ram
+          arc
+        :-  %|
+        ?>  ?=(| -.rac)
+        ?:  =(arc [| ~])
+          ?.  (~(has by p.rac) lol)  p.rac
+          (~(del by p.rac) lol)
+        (~(put by p.rac) lol arc)
+      ==
+    ::
+    ++  deaf                                            ::  add ukaz
+      |=  mis=miso
+      ^+  +>
+      +>(doz [[(flop ram) mis] doz])
+    ::
+    ++  dent                                            ::  descend
+      |=  lol=@ta
+      ^+  +>
+      =+  you=?:(?=(& -.arc) ~ (~(get by p.arc) lol))
+      +>.$(ram [lol ram], arc ?~(you [%| ~] u.you))
+    ::
+    ++  deny                                            ::  descend recursively
+      |=  way=path
+      ^+  +>
+      ?~(way +> $(way t.way, +> (dent i.way)))
+    ::
+    ++  dest                                            ::  write over
+      |=  [pum=umph val=*]
+      ^+  +>
+      ?-   -.arc
+        |  (deaf:dirk %ins val)
+        &  (deaf %mut ((diff pum) q.arc val))
+      ==
+    ::
+    ++  dist                                            ::  modify to
+      |=  [pum=umph bus=arch]
+      ^+  +>
+      ?-    -.bus
+          &  ?:(&(?=(& -.arc) =(p.bus p.arc)) +> (dest pum q.bus))
+          |
+        =.  +>  ?.(?=(& -.arc) +> %*(. dirk arc [%| ~]))
+        ?>  ?=(| -.arc)
+        =+  [yeg=(~(tap by p.arc) ~) gey=(~(tap by p.bus) ~)]
+        =>  .(arc `arch`arc)
+        =.  +>.$
+          |-  ^+  +>.^$
+          ?~  yeg  +>.^$
+          ?:  (~(has by p.bus) p.i.yeg)  $(yeg t.yeg)
+          $(yeg t.yeg, doz doz:dirk(arc q.i.yeg, ram [p.i.yeg ram]))
+        =.  +>.$
+          |-  ^+  +>.^$
+          ?~  gey  +>.^$
+          $(gey t.gey, doz doz:^$(bus q.i.gey, +> (dent p.i.gey)))
+        +>.$
+      ==
+    ::
+    ++  dirk                                            ::  rm -r
+      |-  ^+  +
+      ?-    -.arc
+          &  (deaf %del q.arc)
+          |
+        =+  dyr=(~(tap by p.arc) ~)
+        =>  .(arc `arch`arc)
+        |-  ^+  +.^$
+        ?~  dyr  +.^$
+        =.  +.^$  dirk:(dent p.i.dyr)
+        $(dyr t.dyr)
+      ==
+    ::
+    ++  drum                                            ::  apply and reverse
+      |=  [pax=path mis=miso]
+      ^+  +>
+      ?^  pax 
+        ?>  ?=(| -.arc)
+        (dash:$(pax t.pax, +> (dent i.pax)) i.pax arc)
+      ?-    -.mis
+          %del
+        ?>  &(?=(& -.arc) =(q.arc p.mis))
+        +>.$(arc [%| ~])
+      ::
+          %ins
+        ?>  ?=([| ~] arc)
+        +>.$(arc [%& (sham p.mis) p.mis])
+      ::
+          %mut
+        ?>  ?=(& -.arc)
+        =+  nex=(lump p.mis q.arc)
+        +>.$(arc [%& (sham nex) nex])
+      ==
+    ::
+    ++  durn                                            ::  apply and reverse
+      |=  pun=(list ,[p=path q=miso])
+      ^+  +>
+      ?~  pun  +>
+      $(pun t.pun, +> (drum i.pun))
+    -- 
+  --
 ::
 ++  ci
   |=  arc=arch
