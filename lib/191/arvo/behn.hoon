@@ -1,4 +1,4 @@
-::
+!:
 ::  behn (4b), shell
 ::
 |=  pit=vase
@@ -408,16 +408,7 @@
         %^  gull  tea
           r.kit
         ^-  riff
-        :-  s.kit
-        :*  ~
-            p.kit 
-            ?-  -.q.kit 
-              %da   [%da p.q.kit ~ p.q.kit]
-              %tas  [%tas p.q.kit]
-              %ud   [%ud p.q.kit]
-            ==
-            t.kit
-        ==
+        [s.kit ~ %& p.kit q.kit t.kit]
       ::
       ++  haft                                          ::  process gift
         |=  gud=gift
@@ -443,6 +434,7 @@
           %te  (gram ~ %tell p.gud)
           %th  (gram ~ %that p.gud)
           %xx  (gram ~ p.gud)
+          %xy  (gram [p.gud ~] q.gud)
         == 
       ::
       ++  hale                                          ::  process gifts

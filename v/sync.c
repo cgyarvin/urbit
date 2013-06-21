@@ -139,8 +139,8 @@ _sync_unix_data(u2_noun pod, u2_noun bok, u2_noun ram)
 */
 static u2_noun
 _sync_edit(u2_reck* rec_u, 
-           u2_noun  pod,              //  post
-           u2_noun  bok,              //  book
+           u2_noun  pod,              //  seat
+           u2_noun  bok,              //  desk
            u2_noun  nod,              //  arch
            u2_noun  det)              //  change list
 {
@@ -156,16 +156,15 @@ _sync_edit(u2_reck* rec_u,
   }
 
   dul = u2_cn_mung(u2k(rec_u->toy.cyst), u2nc(u2k(nod), u2k(cay)));
-  det = u2_ckb_weld(u2k(dul), det);
+  det = u2_ckb_weld(dul, det);
 
-  u2z(dul);
   return det;
 }
 
-/* _sync_book_m(): sync `map` to a change list `det`.
+/* _sync_desk_m(): sync `map` to a change list `det`.
 */
 static u2_noun
-_sync_book_m(u2_reck* rec_u, u2_noun our, u2_noun pod, u2_noun map, u2_noun ova)
+_sync_desk_m(u2_reck* rec_u, u2_noun our, u2_noun pod, u2_noun map, u2_noun ova)
 {
   if ( u2_nul == map ) {
     u2z(our);
@@ -181,8 +180,8 @@ _sync_book_m(u2_reck* rec_u, u2_noun our, u2_noun pod, u2_noun map, u2_noun ova)
     u2_cr_cell(n_map, &pn_map, &qn_map);
     bok = pn_map;
 
-    ova = _sync_book_m(rec_u, u2k(our), u2k(pod), u2k(l_map), ova);
-    ova = _sync_book_m(rec_u, u2k(our), u2k(pod), u2k(r_map), ova);
+    ova = _sync_desk_m(rec_u, u2k(our), u2k(pod), u2k(l_map), ova);
+    ova = _sync_desk_m(rec_u, u2k(our), u2k(pod), u2k(r_map), ova);
 
     if ( (u2_yes == u2h(qn_map)) || ('~' == u2_cr_byte(0, bok)) ) {
       u2z(our);
@@ -191,7 +190,7 @@ _sync_book_m(u2_reck* rec_u, u2_noun our, u2_noun pod, u2_noun map, u2_noun ova)
       u2_noun det = _sync_edit(rec_u, pod, u2k(bok), u2k(qn_map), u2_nul);
 
       if ( u2_nul != det ) {
-        u2_noun fav = u2nq(c3__edit, our, u2k(bok), det);
+        u2_noun fav = u2nq(c3__edit, our, u2k(bok), u2nc(u2_yes, det));
 
         ova = u2nc(u2nc(u2nq(c3__gold, c3__sync, u2k(rec_u->sen), u2_nul), fav),
                    ova);
@@ -204,10 +203,10 @@ _sync_book_m(u2_reck* rec_u, u2_noun our, u2_noun pod, u2_noun map, u2_noun ova)
   }
 }
 
-/* _sync_post(): sync `nod` as a base change.
+/* _sync_seat(): sync `nod` as a base change.
 */
 static u2_noun
-_sync_post(u2_reck* rec_u, u2_noun our, u2_noun pod, u2_noun nod, u2_noun ova)
+_sync_seat(u2_reck* rec_u, u2_noun our, u2_noun pod, u2_noun nod, u2_noun ova)
 {
   if ( (u2_nul == nod) || 
        (u2_yes == u2h(nod)) ||
@@ -219,17 +218,17 @@ _sync_post(u2_reck* rec_u, u2_noun our, u2_noun pod, u2_noun nod, u2_noun ova)
     return ova;
   }
   else {
-    ova = _sync_book_m(rec_u, our, pod, u2k(u2t(nod)), ova);
+    ova = _sync_desk_m(rec_u, our, pod, u2k(u2t(nod)), ova);
     u2z(nod);
     return ova;
   }
 }
 
 #if 0
-/* _sync_post_m(): sync `map` to a change list `ova`.
+/* _sync_seat_m(): sync `map` to a change list `ova`.
 */
 static u2_noun
-_sync_post_m(u2_reck* rec_u, u2_noun map, u2_noun ova)
+_sync_seat_m(u2_reck* rec_u, u2_noun map, u2_noun ova)
 {
   if ( u2_nul == map ) {
     return ova;
@@ -259,9 +258,9 @@ _sync_post_m(u2_reck* rec_u, u2_noun map, u2_noun ova)
         u2z(say);
       }
     }
-    ova = _sync_post(rec_u, our, u2k(pod), u2k(qn_map), ova);
-    ova = _sync_post_m(rec_u, u2k(l_map), ova);
-    ova = _sync_post_m(rec_u, u2k(r_map), ova);
+    ova = _sync_seat(rec_u, our, u2k(pod), u2k(qn_map), ova);
+    ova = _sync_seat_m(rec_u, u2k(l_map), ova);
+    ova = _sync_seat_m(rec_u, u2k(r_map), ova);
 
     u2z(map);
     return ova;
@@ -289,7 +288,7 @@ u2_sync_reck(u2_reck* rec_u)
   else {
     u2_noun ova = u2_nul;
 
-    ova = _sync_post(rec_u, u2k(rec_u->our), u2k(rec_u->pod), nod, u2_nul);
+    ova = _sync_seat(rec_u, u2k(rec_u->our), u2k(rec_u->pod), nod, u2_nul);
 
     return ova;
   }

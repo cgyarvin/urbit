@@ -7305,7 +7305,7 @@
               [%crud p=(list tank)]                     ::  error with trace
               [%dire p=@tas q=dram]                     ::  apply directory
               [%dump p=(list ,@t)]                      ::  raw text lines
-              [%edit p=@p q=@tas r=ukay]                ::  commit edits
+              [%edit p=@p q=@tas r=nori]                ::  commit edits
               [%file p=@tas q=@]                        ::  apply atomic file
               [%fail p=tape]                            ::  report failure
               [%hail ~]                                 ::  welcome user
@@ -7337,13 +7337,13 @@
               [%pace p=@ud]                             ::  compute background
               [%pipe p=(unit ,[p=calf q=(list)])]       ::  pipeline data
               [%pour p=path q=dram]                     ::  write directory
+              [%pull p=seat q=disc]                     ::  pull remote desk
               [%pump ~]                                 ::  produce packets
               [%quid p=seat q=path r=(unit ,*)]         ::  delivery
               [%rein p=? q=path]                        ::  push/replace kernel
               [%rend ~]                                 ::  pop kernel
               [%save p=path q=@]                        ::  write atomic file
               [%send p=lane q=@]                        ::  transmit packet
-              [%ship p=@tas q=@tas]                     ::  book label
               [%sync ~]                                 ::  reset soft state
               [%talk p=tank]                            ::  show on console
               [%tell p=(list ,@t)]                      ::  dump lines
@@ -7365,6 +7365,7 @@
               [%went p=seat q=cape r=soap]              ::  outgoing reaction
               [%wipe ~]                                 ::  clean up duct
               [%word p=chum]                            ::  set password
+              [%wort p=tape]                            ::  semantic failure
               [%writ p=riot]                            ::  response
           ==                                            ::
 ++  care  ?(%w %x %y %z)                                ::  clay submode
@@ -7396,12 +7397,12 @@
               ::  [%m p=(list crow)]                    ::  map?
               ::  [%s p=(list crow)]                    ::  set?
           ==                                            ::
-++  cult  (map duct ,[p=care q=morn r=path])            ::  subscriptions
+++  cult  (map duct rave)                               ::  subscriptions
 ++  deed  ,[p=@ q=step]                                 ::  signature, stage
 ++  dome                                                ::  project state
           $:  arc=arch                                  ::  state
               let=@                                     ::  (lent hit)
-              hit=(list ,[p=@da q=ukay r=ukay])         ::  changes rev/fwd
+              hit=(list frog)                           ::  changes in reverse
               lab=(map ,@tas ,@ud)                      ::  labels
           ==                                            ::
 ++  desk  ,[p=cult q=dome]                              ::  project state
@@ -7428,6 +7429,7 @@
               zac=(map seat oven)                       ::  flows by server
               rop=(map ,[p=@ud q=sock] riff)            ::  remote requests
           ==                                            ::
+++  frog  ,[p=@da q=nori]                               ::  project change
 ++  gift                                                ::  one-way effect
           $%  [%% p=calf q=*]                           ::  trivial output
               [%cd p=@tas]                              ::  change desk
@@ -7439,10 +7441,11 @@
               [%lo p=(list tank)]                       ::  multiple statement
               [%mu p=calf q=(list)]                     ::  batch emit
               [%mx p=(list gift)]                       ::  batch gift
-              [%ok p=disc q=ukay]                       ::  save changes
+              [%ok p=disc q=nori]                       ::  save changes
               [%te p=(list ,@t)]                        ::  dump lines
               [%th p=love]                              ::  http response
-              [%xx p=card]                              ::  arbitrary card
+              [%xx p=card]                              ::  apply card
+              [%xy p=path q=card]                       ::  push card
           ==                                            ::
 ++  gcos                                                ::  id description
           $%  [%czar p=@t]                              ::  8-bit seat
@@ -7548,12 +7551,8 @@
               [%ins p=*]                                ::  insert
               [%mut p=udon]                             ::  mutate
           ==                                            ::
-++  mode  @tas                                          ::  modeseatdeskcasespur
-++  morn                                                ::  sequence slice
-          $%  [%da p=@da q=(unit ,@da)]                 ::  start/end
-              [%tas p=@tas]                             ::  at label
-              [%ud p=@ud]                               ::  at number
-          ==                                            ::
+++  moat  ,[p=case q=case]                              ::  chan
+++  mood  ,[p=care q=case r=path]                       ::  request in desk
 ++  moth  ,[p=meth q=math r=(unit octs)]                ::  http operation
 ++  move  ,[p=(unit seat) q=duct r=card]                ::  internal event
 ++  mime  (list ,@ta)                                   ::  mime type
@@ -7565,6 +7564,10 @@
               [%up p=@t]                                ::  prompt response
               [%yo p=seat q=cape r=soap]                ::  request response
               [%wa p=@da]                               ::  alarm
+          ==                                            ::
+++  nori                                                ::  repository action
+          $%  [& p=soba]                                ::  delta
+              [| p=@tas]                                ::  label
           ==                                            ::
 ++  octs  ,[p=@ud q=@]                                  ::  octet-stream
 ++  oryx  ,@uvH                                         ::  CSRF secret
@@ -7594,15 +7597,23 @@
           $:  did=@ud                                   ::  filled sequence
               mis=(map ,@ud ,[p=flap q=(unit)])         ::  misordered
           ==                                            ::  
-++  riff  ,[p=disc q=(unit rave)]                       ::  request/desist
 ++  rank  ?(%czar %king %duke %jack %pawn)              ::  seat width class
 ++  rant                                                ::  namespace binding
           $:  p=[p=care q=case r=@tas]                  ::  clade release book
-              q=path                                    ::  subpath
+              q=path                                    ::  spur
               r=*                                       ::  data
           ==                                            :: 
-++  rave  ,[p=care q=morn r=path]                       ::  subscription
-++  riot  (unit rant)                                   ::  response/complete
+++  rave                                                ::  general request
+          $%  [& p=mood]                                ::  single request
+              [| p=moat]                                ::  change range
+          ==                                            ::
+++  rede                                                ::  mirror
+          $:  lim=@da                                   ::  updated to
+              ask=(unit ,@da)                           ::  requested to
+              qyx=cult                                  ::  subscriptions
+              dom=dome                                  ::  state
+          ==                                            ::
+++  riff  ,[p=disc q=(unit rave)]                       ::  request/desist
 ++  rill                                                ::  outbound stream
           $:  sed=@ud                                   ::  sent
               san=(map ,@ud duct)                       ::  outstanding
@@ -7614,8 +7625,9 @@
           ==                                            ::
 ++  rink                                                ::  foreign state
           $:  hac=(map rump ,*)                         ::  cache
-              mir=(map ,@ta dome)                       ::  mirrors
+              mir=(map disc rede)                       ::  mirrors by desk
           ==                                            ::
+++  riot  (unit rant)                                   ::  response/complete
 ++  road                                                ::  secured oneway route
           $:  exp=@da                                   ::  expiration date
               lun=(unit lane)                           ::  route to friend
@@ -7681,18 +7693,7 @@
               any=@                                     ::  entropy
               urb=(map seat safe)                       ::  all keys and routes
           ==                                            ::
-++  soba                                                ::  repository action
-          $%  [& p=path q=miso]                         ::  delta
-              [| p=@tas]                                ::  label
-          ==                                            ::
-++  ukan                                                ::  change per path
-          $%  [%del p=@uvI]                             ::  delete old-hash
-              [%ins p=@uvI q=@uvI r=*]                  ::  new old data
-              [%mut p=@uvI q=@uvI r=udon]               ::  structured change
-          ==                                            ::
-++  ukay  (list ukaz)                                   ::  backward forward
-++  ukaz  ,[p=path q=ukan]                              ::  change (pl ukazy)
-++  umaz  ,[p=(list ukaz) q=(list ukaz)]                ::  dual change
+++  soba  (list ,[p=path q=miso])                       ::  delta
 ++  vane  $_                                            ::  kernel actor
           |+  [now=@da eny=@ sky=||(* (unit))]          ::  activate
           ^?  |%                                        ::
