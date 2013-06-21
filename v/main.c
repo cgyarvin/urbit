@@ -40,6 +40,7 @@
 
 struct _u2_opts {
   c3_c*   cpu_c;
+  c3_c*   inv_c;
   c3_w    kno_w;
   u2_bean abo;
   u2_bean gab;
@@ -77,6 +78,7 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
         else return u2_no;
         break;
       }
+      case 'i': { u2_Opts.nuu = u2_yes; u2_Opts.inv_c = strdup(optarg); }
       case 'q': { u2_Opts.veb = u2_no; break; }
       case 'v': { u2_Opts.veb = u2_yes; break; }
       case 'R': { u2_Opts.rez = u2_yes; break; }
@@ -365,7 +367,7 @@ main(c3_i   argc,
   }
 
   {
-    u2_lo_loop(u2_Host.arv_u, u2_Opts.nuu, u2_Opts.rez);
+    u2_lo_loop(u2_Host.arv_u, u2_Opts.nuu, u2_Opts.rez, u2_Opts.inv_c);
   }
   return 0;
 }

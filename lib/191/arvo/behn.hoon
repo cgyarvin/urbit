@@ -96,6 +96,25 @@
         q.god  (~(put by q.god) p.god *gyre)
       ==
     (fi gyp hen gyr)
+  :: 
+  ++  heat                                              ::    heat:be
+    |=  [hen=duct het=hate]                             ::  dispatch http req
+    ^-  [p=(list move) q=brat]
+    =+  sud=(lout p.het)
+    ?~  sud
+      :_  +<.^^$
+      :~  :+  [~ who]
+            hen
+          :-  %that
+          :-  %raw
+          [404 ~ [~ (tact "http error 404")]]
+      ==
+    =<  abet
+    =<  lash
+    =<  abet
+    %+  glib:(past:(fest p.u.sud hen) q.u.sud)
+      r.u.sud 
+    [%ht s.u.sud q.het r.het]
   ::
   ++  lead                                              ::    lead:be
     |=  [tea=wire hen=duct]                             ::  route note
@@ -122,7 +141,11 @@
              ?:  =(0 gyp)
                lash:(gill:(fist hen) p.fav)
              lash:(como:(fest gyp hen) p.fav)
+      %ling  ?>  ?=(^ fog)
+             =>  .(fog (weld t.fog `(list ,@ud)`[i.fog ~]))
+             [[[[~ who] hen [%helo ~]] ~] +<.^^$]
       %noop  [~ +<.^^$]
+      %thee  (heat hen p.fav)
       %went  abet:lash:(lean tea hen fav)
       %writ  abet:lash:(loam tea hen +.fav)
     ==
@@ -131,6 +154,44 @@
     |=  [tea=wire hen=duct rot=riot]                    ::  handle response
     ^+  *fi
     =+(a=(lead tea hen) abet:(gall:q.a p.a rot))
+  ::
+  ++  loot                                              ::    loot:be
+    |=  [uri=purl rut=rout]                             ::  match route
+    ^-  (unit scud)
+    ?.  |-  ^-  ?
+        ?~  p.rut  |
+        =(i.p.rut `host`r.p.uri)
+      ~
+    =+  tac=*path
+    |-  ^-  (unit scud)
+    ?~  q.rut
+      :-  ~
+      :-  :(weld (flop q.q.uri) tac s.rut)
+      `scar`[p.uri (flop tac) p.q.uri s.rut]
+    ?:  |(?=(~ q.q.uri) !=(i.q.rut i.q.q.uri))
+      ~
+    $(q.rut t.q.rut, q.q.uri t.q.q.uri, tac [i.q.rut tac])
+  ::
+  ++  lout                                              ::    lout:be
+    |=  uri=purl                                        ::  match http req
+    ^-  (unit ,[p=@ud q=@ud r=path s=scab])
+    =+  dog=`(list ,[p=@ud q=gyre])`(~(tap by q.god) ~)
+    |-  ^-  (unit ,[p=@ud q=@ud r=path s=scab])
+    ?~  dog  ~
+    =+  pig=`(list ,[p=@ud q=beak])`(~(tap by q.wip.q.i.dog) ~)
+    |-  ^-  (unit ,[p=@ud q=@ud r=path s=scab])
+    ?~  pig  ^$(dog t.dog)
+    =+  ask=`(list slip)`(~(tap by q.q.i.pig) ~)
+    |-  ^-  (unit ,[p=@ud q=@ud r=path s=scab])
+    ?~  ask  ^$(pig t.pig)
+    ?.  ?=([%ht *] q.i.ask)
+      $(ask t.ask)
+    |-  ^-  (unit ,[p=@ud q=@ud r=path s=scab])
+    ?~  p.q.i.ask  ^$(ask t.ask)
+    =+  sem=(loot uri i.p.q.i.ask)
+    ?~  sem  
+      $(p.q.i.ask t.p.q.i.ask)
+    [~ p.i.dog p.i.pig p.i.ask `scab`[`oryx`r.i.p.q.i.ask r.uri u.sem]]
   ::
   ++  lube                                              ::    lube:be
     ^-  vase                                            ::  build subject
@@ -456,7 +517,7 @@
           %%   +>
           %eg  (gulf (bist %ma lap) p.gal)
           %es  (gull (bist %ma lap) p.gal q.gal ~)
-          %ht  !!
+          %ht  +>
           %up  +>(..ra (hoop lap pid))
           %wa  !!
           %yo  +>
@@ -469,7 +530,7 @@
           %%   +>
           %eg  (gulp (bist %ma lap) p.gal)
           %es  (gull (bist %ma lap) p.gal q.gal [~ r.gal])
-          %ht  !!
+          %ht  +>
           %up  +>(..ra (hoot lap pid p.gal))
           %wa  !!
           %yo  (gram [/a [%b (bist [%ma lap])] ~] [%want +.gal])

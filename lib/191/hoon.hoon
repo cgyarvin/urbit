@@ -132,7 +132,7 @@
 ::    if not risible and meant only as a proof of concept, but
 ::    can be upgraded without losing state.
 ::
-::    Hoon is roughly 7000 lines of Hoon; Arvo is roughly 4000.
+::    Hoon is roughly 7000 lines of Hoon; Arvo is roughly 5000.
 ::    Their image in Nock, hoon.pill, is roughly 1.5MB (which
 ::    includes the full kernel AST), compressing to 800K.
 ::    There are no external semantic dependencies, but some
@@ -7323,6 +7323,7 @@
               [%kill p=@ud]                             ::  kill a process
               [%lane p=lane]                            ::  set public route
               [%line p=@t]                              ::  source line
+              [%ling ~]                                 ::  rotate interface
               [%load p=@tas q=path]                     ::  request atomic file
               [%logn p=@p q=chum]                       ::  name hashed-pass
               [%logo ~]                                 ::  logout

@@ -110,6 +110,9 @@ _wr_open(c3_c* cpu_c, c3_c* fil_c, c3_c* suf_c)
   c3_c ful_c[8193];
   c3_i fid_i;
 
+  sprintf(ful_c, "%s", cpu_c);
+  mkdir(ful_c, 0700);
+
   sprintf(ful_c, "%s/~chk", cpu_c);
   mkdir(ful_c, 0700);
 

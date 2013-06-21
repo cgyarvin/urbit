@@ -366,7 +366,7 @@ _lo_save(u2_reck* rec_u, u2_noun ovo)
 {
   u2_noun ron = u2_cke_jam(u2nc(u2k(rec_u->now), ovo));
 
-  if ( u2_Host.cpu_c ) {
+  if ( u2_Host.lug_u.len_w ) {
     _lo_pack(rec_u, ron);
   } else {
     rec_u->roe = u2nc(ron, rec_u->roe);
@@ -611,10 +611,7 @@ _lo_home(u2_reck* rec_u)
   //  Create subdirectories.
   //
   {
-    if ( 0 != mkdir(u2_Host.cpu_c, 0700) ) {
-      perror(u2_Host.cpu_c);
-      u2_lo_bail(rec_u);
-    }
+    mkdir(u2_Host.cpu_c, 0700);
 
     sprintf(ful_c, "%s/~get", u2_Host.cpu_c);
     if ( 0 != mkdir(ful_c, 0700) ) {
@@ -623,12 +620,6 @@ _lo_home(u2_reck* rec_u)
     }
 
     sprintf(ful_c, "%s/~put", u2_Host.cpu_c);
-    if ( 0 != mkdir(ful_c, 0700) ) {
-      perror(ful_c);
-      u2_lo_bail(rec_u);
-    }
-
-    sprintf(ful_c, "%s/~chk", u2_Host.cpu_c);
     if ( 0 != mkdir(ful_c, 0700) ) {
       perror(ful_c);
       u2_lo_bail(rec_u);
@@ -935,6 +926,8 @@ _lo_make(u2_reck* rec_u, u2_noun fav)
   //  Create the ship directory.
   //
   _lo_zest(rec_u);
+
+  fprintf(stderr, "make 4\r\n");
 }
 
 /* _lo_rest(): restore from record, or exit.
@@ -1260,20 +1253,28 @@ _lo_ours(u2_reck* rec_u)
 void
 u2_lo_loop(u2_reck* rec_u, 
            u2_bean  nuu,
-           u2_bean  rez)
+           u2_bean  rez,
+           c3_c*    inv_c)
 {
   if ( u2_yes == nuu ) {
-    u2_noun ten;
+    if ( inv_c ) {
+      u2_noun inv = u2_cke_cue(u2_walk_load(inv_c));
 
-    //  Get some host entropy.
-    //
-    {
-      c3_w rad_w[8];
-
-      _lo_rand(rec_u, rad_w);
-      ten = u2_ci_words(8, rad_w);
+      _lo_make(rec_u, u2nc(c3__cash, inv));
     }
-    _lo_make(rec_u, u2nq(c3__make, c3__zuse, 12, ten));
+    else {
+      u2_noun ten;
+
+      //  Get some host entropy.
+      //
+      {
+        c3_w rad_w[8];
+
+        _lo_rand(rec_u, rad_w);
+        ten = u2_ci_words(8, rad_w);
+      }
+      _lo_make(rec_u, u2nq(c3__make, c3__zuse, 8, ten));
+    }
   }
   else {
     _lo_rest(rec_u, rez);

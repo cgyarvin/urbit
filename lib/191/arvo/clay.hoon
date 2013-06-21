@@ -166,7 +166,6 @@
       ++  eave                                          ::  subscribe
         |=  [hen=duct rav=rave]
         ^+  +>
-        ~&  [%clay-eave rav]
         ?-    -.rav
             &
           =+  ver=(aver p.rav)
@@ -178,21 +177,17 @@
         ::
             |
           =+  nab=(aeon p.p.rav)
-          ~&  [%nab nab]
           ?~  nab
             ?>  =(~ (aeon q.p.rav))
             +>.$(qyx (~(put by qyx) hen rav))
           =+  huy=(aeon q.p.rav)
-          ~&  [%huy huy]
           ?:  &(?=(^ huy) |((lth u.huy u.nab) &(=(0 u.huy) =(0 u.nab))))
-            ~&  %blob
             (blob hen)
           =+  top=?~(huy let.dom u.huy)
           =+  seb=(slag (sub let.dom top) hit.dom)
           =+  wid=(sub top u.nab)
           =+  fud=(flop (scag wid seb))
-          ~&  [%wid wid (lent fud)]
-          =.  +>.$  (bleb hen ?:(=(0 u.nab) 0 (dec u.nab)) fud)
+          =.  +>.$  (bleb hen u.nab fud)
           ?^  huy 
             (blob hen)
           =+  ^=  ptr  ^-  case
@@ -204,7 +199,6 @@
       ++  edit                                          ::  apply changes
         |=  [wen=@da lav=nori]
         ^+  +>
-        ::  ~&  [%edit syd lav]
         %=  +>.$
           arc.dom  ?.  ?=(& -.lav)  arc.dom 
                    arc:(durn:ka:(cu arc.dom) p.lav)
@@ -309,15 +303,12 @@
       ++  poll                                          ::  pull result
         |=  [hen=duct syd=disc rot=riot]
         ^+  +>
-        ~&  [%poll-some syd]
         =+  rum=(need (~(get by mir.q.raz) syd))
         =+  kas=(need ask.rum)
         =^  wex  rum
           ?~  rot
-            ~&  [%poll-complete kas]
             :_  rum(ask ~, lim kas)
             ~(. de [syd kas qyx.rum dom.rum])
-          ~&  %poll-data
           ?>  ?=(%w p.p.u.rot)
           ?>  =(syd r.p.u.rot)
           ?>  =(~ q.u.rot)
@@ -343,7 +334,6 @@
       ++  pull                                          ::  pull changeset
         |=  [hen=duct syd=disc]
         ^+  +>
-        ~&  [%clay-pull him syd]
         =+  ^=  rum  ^-  rede
             =+  rum=(~(get by mir.q.raz) syd)
             ?^  rum  u.rum  [~2000.1.1 ~ ~ [[%| ~] 0 ~ ~]]
@@ -352,13 +342,13 @@
         =.  +>.$
           %+  mete
             [[%c (scot %p him) syd ~] hen]
-          [syd ~ %| [%da ~2000.1.1] [%da now]]
+          [syd ~ %| [%da lim.rum] [%da now]]
         +>.$(mir.q.raz (~(put by mir.q.raz) syd rum))
       ::       
       ++  tome                                          ::  accept response
         |=  [inx=@ud rot=riot]
         ^+  +>
-        ~&  [%clay-tome inx ?~(rot ~ [p.u.rot q.u.rot])]
+        ::  ~&  [%clay-tome inx ?~(rot ~ [p.u.rot q.u.rot])]
         =+  mub=(~(get by bim.p.raz) inx)
         ?~  mub  +>.$
         =+  die=?~(rot & &(?=(^ q.q.u.mub) ?=(& -.u.q.q.u.mub)))
@@ -376,7 +366,7 @@
       ++  tref                                          ::  request rejected
         |=  [hen=duct tea=wire]
         ^+  +>
-        ~&  [%clay-tref tea]
+        ::  ~&  [%clay-tref tea]
         ?.  ?=([@ *] tea)  +>
         =+  xoc=(slay i.tea)
         ?:  ?=([~ %% %p @] xoc)

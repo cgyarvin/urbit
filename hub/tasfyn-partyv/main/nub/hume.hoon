@@ -31,6 +31,7 @@
 |%                                                        ::  functions
 ++  lunt                                                  ::  web framework
   |=  :*  who=seat                                        ::  owner
+          ::  msg=tape                                        ::  prompt
           ped=cron                                        ::  wake frequency
           rut=(list rout)                                 ::  routes to
           ras=wick                                        ::  server state
@@ -38,6 +39,7 @@
   ^-  bowl
   =+  ^=  hup  ^-  (list slip)
       :~  [/ [%ht rut]]
+          ::  [/ [%up %none msg]]
       ==
   :-  *(list gift)
   :-  ~
@@ -50,7 +52,7 @@
   ++  send                                                ::  dispatch event
     |=  bax=weev
     ^+  +>
-    =+  sam=!>(now bax)
+    =+  sam=!>([now bax])
     =+  gat=(slap ras [%cnbc %give])
     =+  pro=(slam gat sam)
     =+  [wax=(slot 2 pro) hin=(slot 3 pro)]
@@ -69,7 +71,7 @@
   ++  pass                                                ::  try redirect
     |=  [pac=pact ced=cred] 
     ^-  (unit purl)
-    =+  sam=!>(pac ced)
+    =+  sam=!>([pac ced])
     =+  gat=(slap ras [%cnbc %miss])
     =+  pro=(slam gat sam)
     ?:  =(~ q.pro)  ~

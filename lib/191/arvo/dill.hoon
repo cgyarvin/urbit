@@ -214,6 +214,7 @@
                   bul  (sub bul.u.q.r.yar bus.u.q.r.yar)
                   but  (slag bus.u.q.r.yar but.u.q.r.yar)
                 ==
+            %x  +.$(mos :_(mos [whu [/b /d hen] [%ling ~]]))
             %y  ?:  =(0 p.r.r.yar)
                   beep
                 $(fav [%belt %txt (snag q.r.r.yar r.r.r.yar)])
@@ -326,12 +327,12 @@
         ==
       ::
           %helo                                         ::  trigger prompt
-        ?^  q.r.yar  +.$
+        ?:  &(?=(^ q.r.yar) !=(~ but.u.q.r.yar)) +.$
         ?>  ?=(^ whu)
-        %-  edit
-        =|  bed=bead
         =+  pom=(sky [%b (scot p/u.whu) %p (scot da/now) ~])
         =+  poy=?~(pom `prod`[%text "# "] (prod u.pom))
+        %-  edit
+        =|  bed=bead
         =+  hux=/
         =+  ^=  hyt  ^-  hist
             =+  hyt=(~(get by s.yar) [u.whu hux])

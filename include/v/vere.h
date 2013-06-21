@@ -743,7 +743,8 @@
         void
         u2_lo_loop(u2_reck* rec_u, 
                    u2_bean  nuu,              //  new computer
-                   u2_bean  rez);             //  reset computer
+                   u2_bean  rez,              //  reset computer
+                   c3_c*    inv_c);           //  invitation file
 
       /* u2_lo_bail(): clean up all event state.
       */
