@@ -834,13 +834,13 @@
       =|  bin=(list boon)
       |-  ^-  [p=(list boon) q=fort]
       ?~  sox  [bin fox]
-      =^  bun  fox  zork:zank:tung:turk:(ho:(um p.i.sox) q.i.sox)
+      =^  bun  fox  zork:zank:cool:tung:turk:(ho:(um p.i.sox) q.i.sox)
       $(sox t.sox, bin (weld p.bun bin))
     ::
     ++  wash                                            ::    wash:am
       |=  [soq=sock sup=soap ham=meal]                  ::  dispatch and send
       ^-  [p=(list boon) q=fort]
-      zork:zank:tung:(wind:(ho:(um p.soq) q.soq) sup ham)
+      zork:zank:cool:tung:(wind:(ho:(um p.soq) q.soq) sup ham)
     ::
     ++  went                                            ::    went:am
       |=  [soq=sock hen=duct cap=cape sup=soap]         ::  internal react
@@ -883,9 +883,9 @@
           ==
         ::
         ++  cool                                        ::    cool:ho:um:am
-          |-  ^+  +                                     ::  fill window
+          |-  ^+  +                                     ::  fill pump
           ?.  ?&  ?=(^ maz.bah) 
-                  (gth wid.foy.bah niq.sea.bah)
+        ::          (gth wid.foy.bah niq.sea.bah)
               ==
             +
           $(+ pock)
@@ -1104,8 +1104,8 @@
             (~(gost pe sea.bah) q.ski.bah [p.zem q.ski.dyp 0 | now i.wyv.dyp])
           ==
         ::
-        ++  pong
-          |=  hen=duct
+        ++  pong                                        ::    pong:ho:um:am
+          |=  hen=duct                                  ::  test connection
           ^+  [? +>]
           ?.  |(?=(~ laz.bah) (lth u.laz.bah hop.fox) !gay.bah)
             ::  ~&  [%pong-no her]
@@ -1369,7 +1369,8 @@
         ==
       ==
     ::
-        %ouzo  ::  ~&  [%send now p.bon `@p`(mug (shaf %flap q.bon))]
+        %ouzo  
+      ::  ~&  [%send now p.bon `@p`(mug (shaf %flap q.bon))]
       :_  fox
       [[whu hen [%send p.bon q.bon]] ~]
         

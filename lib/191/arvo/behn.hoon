@@ -845,7 +845,6 @@
 ++  flee  stay
 ++  load
   |=  new=vase
-  ~&  %bede-load
   ^-  vane
   ?.  (~(nest ut -:!>(*(list ,[p=seat q=brad]))) & p.new)
     ~|(%load-nest-bede !!)
@@ -873,7 +872,6 @@
 ::
 ++  stay
   ^-  vase
-  ~&  %bede-stay
   !>  |-  ^-  (list ,[p=seat q=brad])
       %+  turn
         (~(tap by deb) ~)

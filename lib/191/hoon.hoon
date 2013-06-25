@@ -7420,8 +7420,16 @@
 ++  dove  ,[p=@ud q=@uvH r=(map ,@ud ,@)]               ::  hash count 13-blocks
 ++  duct  (list wire)                                   ::  causal history
 ++  flap  ,@uvH                                         ::  network packet id
+++  floe                                                ::  next gen stats
+          $:  rtt=@dr                                   ::  decaying avg rtt
+              wid=@ud                                   ::  logical wdow msgs
+              maw=@ud                                   ::  max window size
+              nif=@ud                                   ::  now in flight
+              act=@da                                   ::  wait to send next
+              nus=@ud                                   ::  number sent
+          ==                                            ::
 ++  flow                                                ::  packet connection
-          $:  rtt=@dr                                   ::  official rtt
+          $:  rtt=@dr                                   ::  decaying avg rtt
               wid=@ud                                   ::  logical wdow msgs
           ==                                            ::
 ++  fort                                                ::  formal state
@@ -7547,6 +7555,7 @@
               [| q=(list ,@ta)]                         ::  dir
           ==                                            ::
 ++  meth  ?(%get %post)                                 ::  http method
+++  mime  (list ,@ta)                                   ::  mime type
 ++  miso                                                ::  arch delta
           $%  [%del p=*]                                ::  delete
               [%ins p=*]                                ::  insert
@@ -7556,7 +7565,7 @@
 ++  mood  ,[p=care q=case r=path]                       ::  request in desk
 ++  moth  ,[p=meth q=math r=(unit octs)]                ::  http operation
 ++  move  ,[p=(unit seat) q=duct r=card]                ::  internal event
-++  mime  (list ,@ta)                                   ::  mime type
+++  muve  ,[p=(unit seat) q=duct r=*]                   ::  untyped move
 ++  name  ,[p=@t q=(unit ,@t) r=(unit ,@t) s=@t]        ::  first mid/nick last
 ++  note                                                ::  response to goal
           $%  [%% p=(unit (list ,*))]                   ::  standard input
@@ -7578,8 +7587,27 @@
               wab=(map seat bath)                       ::  relationship
           ==                                            ::
 ++  ovum  ,[p=wire q=card]                              ::  external event
+++  ovym  ,[p=wire q=*]                                 ::  untyped ovum
 ++  pact  path                                          ::  routed path
 ++  pail  ?(%none %warm %cold)                          ::  connection status
+++  pith                                                ::  outgoing message
+          $:  ski=snow                                  ::  sequence acked/sent
+              wyv=(map ,@ud rock)                       ::  
+          ==                                            ::
+++  plan                                                ::  conversation state
+          $:  ^=  sat                                   ::  statistics
+              $:  nex=@da                               ::  next wakeup
+                  wid=@ud                               ::  max outstanding
+              ==
+          ==
+++  bird                                                ::  packet in travel
+          $:  gom=soap                                  ::  message identity
+              mup=@ud                                   ::  pktno in msg
+              nux=@ud                                   ::  xmission count
+              dif=?                                     ::  deemed in flight
+              pex=@da                                   ::  next expire
+              pac=rock                                  ::  packet data
+          ==                                            ::
 ++  plea  ,[p=@ud q=[p=? q=@t]]                         ::  live prompt
 ++  pork  ,[p=(unit ,@ta) q=path]                       ::  fully parsed url
 ++  prod  ,[p=prom q=tape]                              ::  format, prompt
@@ -7589,6 +7617,7 @@
           $:  ski=snow                                  ::  sequence acked/sent
               wyv=(list rock)                           ::  packet list XX gear
           ==                                            ::
+
 ++  quay  (map ,@t ,@t)                                 ::  parsed url query
 ++  quri                                                ::  request-uri
           $%  [& p=purl]                                ::  absolute
@@ -7814,11 +7843,11 @@
       |=  $:  whu=(unit seat)
               pax=wire
               hen=duct
-              fav=card
+              fav=*
           ==
-      ^-  [p=(list move) q=+>.^$]
+      ^-  [p=(list muve) q=+>.^$]
       =+  pro=(slam (slap rig [%cnbc %beat]) [bet +<])
-      :-  ((hard (list move)) q:(slap pro [%cnbc %p]))
+      :-  ((hard (list muve)) q:(slap pro [%cnbc %p]))
       +>.^$(ves (slap pro [%cnbc %q]))
     ::
     ++  doze
@@ -7894,15 +7923,15 @@
     don
   ::
   ++  hurl                                              ::  start loop
-    |=  ovo=ovum
-    ^-  [p=(list ovum) q=(list ,[p=@tas q=_*vein])]
+    |=  ovo=ovym
+    ^-  [p=(list ovym) q=(list ,[p=@tas q=_*vein])]
     =+  des=(dint p.ovo)
     (kick [[~ [[des ~] p.ovo ~] q.ovo] ~])
   ::
   ++  kick                                              ::  complete loop
-    |=  mor=(list move)
-    =|  ova=(list ovum)
-    |-  ^-  [p=(list ovum) q=(list ,[p=@tas q=_*vein])]
+    |=  mor=(list muve)
+    =|  ova=(list ovym)
+    |-  ^-  [p=(list ovym) q=(list ,[p=@tas q=_*vein])]
     ?~  mor
       [(flop ova) fan]
     ::  ~&  [%kick-move q.i.mor -.r.i.mor]
@@ -7913,7 +7942,7 @@
     =-  $(mor (weld p.nyx t.mor), fan q.nyx)
     ^=  nyx
     =+  naf=fan
-    |-  ^-  [p=(list move) q=_fan]
+    |-  ^-  [p=(list muve) q=_fan]
     ?~  naf  [~ ~]
     ?.  =(i.i.q.i.mor p.i.naf)
       =+  tuh=$(naf t.naf)
@@ -7945,18 +7974,23 @@
     ++  keep  |=(* (^keep ((hard ,[@da path]) +<)))     ::  4
     ++  peek  |=(* (^peek ((hard ,[@p @da path]) +<)))  ::  87
     ++  poke  |=  * 
-              ^-  [(list ovum) _+>]
-              =>  .(+< ((hard ,[now=@da ovo=ovum]) +<))
+              ^-  [(list ovym) _+>]
+              =>  .(+< ((hard ,[now=@da ovo=ovym]) +<))
               ?:  ?=(%veer -.q.ovo)
-                [~ +>(+ (veer +.q.ovo))]
+                =+  fav=(card q.ovo)
+                ?>  ?=(%veer -.fav)
+                [~ +>.$(+ (veer +.fav))]
               =^  ova  +>+  (^poke now ovo)
-              |-  ^-  [(list ovum) _+>.^$]
+              |-  ^-  [(list ovym) _+>.^$]
               ?~  ova
                 [~ +>.^$]
               =^  avo  +>.^$  $(ova t.ova)
-              ?+  -.q.i.ova  [[i.ova avo] +>.^$]
-                %veer  [avo +>.^$(+ (veer +.q.i.ova))]
-                %veil  [avo +>.^$(+ (veil +.q.i.ova))]
+              ?.  |(?=(%veer -.q.i.ova) ?=(%veil -.q.i.ova))
+                [[i.ova avo] +>.^$]
+              =+  fav=(card q.i.ova)
+              ?+  -.fav  !!
+                %veer  [avo +>.^$(+ (veer +.fav))]
+                %veil  [avo +>.^$(+ (veil +.fav))]
               ==
     ++  wish  |=(* (^wish ((hard ,@ta) +<)))            ::  20
     --
@@ -7985,8 +8019,8 @@
   ((~(beck (is eny fan) now) ~) hap)
 ::
 ++  poke                                                ::  external apply
-  |=  [now=@da ovo=ovum]
-  ^-  [(list ovum) _+>]
+  |=  [now=@da ovo=ovym]
+  ^-  [(list ovym) _+>]
   =^  zef  fan
     (~(hurl (is eny fan) now) ovo)
   [zef +>.$]
