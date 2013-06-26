@@ -926,8 +926,6 @@ _lo_make(u2_reck* rec_u, u2_noun fav)
   //  Create the ship directory.
   //
   _lo_zest(rec_u);
-
-  fprintf(stderr, "make 4\r\n");
 }
 
 /* _lo_rest(): restore from record, or exit.

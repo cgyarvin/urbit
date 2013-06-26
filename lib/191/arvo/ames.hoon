@@ -308,6 +308,20 @@
     |_  ton=town                                        ::  ames state
     ++  as                                              ::    as:go
       |_  [our=seat saf=safe]                           ::  per server
+      ++  born                                          ::    born:as:go
+        |=  [now=@da her=@p tic=@pG gec=gcos pub=pass]  ::  register user
+        ^-  [(unit deed) _+>]
+        ?.  =(our (sein her))  [~ +>.$]
+        ?:  (~(has by hoc.saf) her)  [~ +>.$]
+        =+  nes=sen
+        ?.  =(tic (end 6 1 (shaf %tick (mix her (shax sec:ex:q.nes)))))
+          [~ +>.$]
+        =+  cry=(hail pub)
+        =+  syp=[[0 [~ p.nes] our now] gec pub]
+        =+  ded=[(sign:se:q.nes *code (shaf %meld (sham syp))) syp]
+        :-  [~ ded]
+        +>.$(hoc.saf (~(put by hoc.saf) her [[~31337.1.1 ~ [ded ~]] ~ *cask]))
+      :: 
       ++  lax                                           ::    lax:as:go
         |_  [her=seat dur=door]                         ::  per client
         ++  cluy                                        ::    cluy:lax:as:go
@@ -756,7 +770,6 @@
           (turn val.q |=([p=life q=ring r=acro] [p q (wear q)]))
         ==
       ==
-    ::
     ++  come                                            ::    come:am
       |=  [ges=@t wid=@ bur=@]                          ::  instantiate pawn
       ^-  [p=[p=seat q=@uvG] q=fort]
@@ -1345,6 +1358,20 @@
       ::
           %pi                                           ::    %pi
         $(bon [%wine p.bon " sent a ping"])             ::  ping
+      ::
+          %ta                                           ::    %ta
+        ?~  s.bon  [~ fox]                              ::  register
+        ?>  ?=(^ whu)
+        ~&  [%register whu p.bon]
+        =+  gox=((hard ,[p=@p q=@pG r=gcos s=pass]) u.s.bon)
+        =+  gus=(need (~(us go ton.fox) p.p.bon))
+        =^  sig  gus  (born:gus now gox)
+        =.  ton.fox  (~(su go ton.fox) gus)
+        :_  fox
+        :~  :+  [~ p.p.bon]
+              [/a hen]
+            [%want q.p.bon %ta sig]
+        ==
       ::
           %re                                           ::    %re
         ?~  s.bon  [~ fox]                              ::  file request
