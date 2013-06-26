@@ -10,7 +10,8 @@
   ^?                                                    ::  opaque core
   |%                                                    ::  poke/peek pattern
   ++  beat                                              ::  process move
-    |=  [whu=(unit seat) tea=wire hen=duct fav=card]
+    |=  [whu=(unit seat) tea=wire hen=duct fav=*]
+    =>  .(fav ((hard card) fav))
     ^-  [p=(list move) q=vane]
     =+  gid=(~(get by dub) hen)
     ?~  gid                                             ::  truly new duct

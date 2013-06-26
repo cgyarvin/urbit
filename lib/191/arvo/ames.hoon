@@ -1261,7 +1261,8 @@
   =< 
     |%                                                  ::  vane interface
     ++  beat
-      |=  [whu=(unit seat) tea=wire hen=duct fav=card]
+      |=  [whu=(unit seat) tea=wire hen=duct fav=*]
+      =>  .(fav ((hard card) fav))
       ^-  [p=(list move) q=vane]
       =^  duy  ..knap
         (knap whu tea hen fav)

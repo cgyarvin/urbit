@@ -818,13 +818,14 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::              section 4bC, shell vane                 ::
 ::
-=|  $:  deb=(map seat brat)                             ::  state by terminal
+=|  $:  deb=(map seat brat)                             ::  state by seat
     ==                                                  ::
 |=  [now=@da eny=@ sky=||(* (unit))]                    ::  current invocation
 ^?                                                      ::  opaque core
 |%                                                      ::  poke/peek pattern
 ++  beat                                                ::  process move
-  |=  [whu=(unit seat) tea=wire hen=duct fav=card]
+  |=  [whu=(unit seat) tea=wire hen=duct fav=*]
+  =>  .(fav ((hard card) fav))
   ^-  [p=(list move) q=vane]
   ?.  ?=(^ whu)
     ~&  [%beat-none fav]

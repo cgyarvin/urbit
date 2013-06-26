@@ -9,7 +9,8 @@
   ^?                                                    ::  opaque core
   |%                                                    ::
   ++  beat                                              ::  process move
-    |=  [whu=(unit seat) pax=wire hen=duct fav=card]
+    |=  [whu=(unit seat) pax=wire hen=duct fav=*]
+    =>  .(fav ((hard card) fav))
     ^-  [p=(list move) q=vane]
     ?+    -.fav
       [[[whu hen fav] ~] ..^$]

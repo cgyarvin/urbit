@@ -404,7 +404,8 @@
   ^?                                                    ::  opaque core
   |%                                                    ::
   ++  beat                                              ::  update
-    |=  [whu=(unit seat) tea=wire hen=duct fav=card]
+    |=  [whu=(unit seat) tea=wire hen=duct fav=*]
+    =>  .(fav ((hard card) fav))
     ^-  [p=(list move) q=vane]
     ?+    -.fav  ~&  [%clay-none fav]
                  !!
