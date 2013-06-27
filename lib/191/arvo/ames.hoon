@@ -44,7 +44,7 @@
       %king  (end 3 1 who)
       %duke  (end 4 1 who)
       %jack  (end 5 1 who)
-      %pawn  (end 4 1 who)
+      %pawn  ~les
     ==
   ::
   ++  meld                                              ::  verify connect
@@ -1002,7 +1002,8 @@
             =+  ^=  rum  ^-  race
                 =+  rum=(~(get by raz.bah) cha)
                 ?~(rum *race u.rum)
-            ?>  (gte num did.rum)
+            ?.  (gte num did.rum)
+              +>.$                                      ::  duplicate
             (coot cha rum(mis (~(put by mis.rum) num [dam dut])))
           ::
           ++  dine                                      ::    dine:la:ho:um:am
@@ -1253,7 +1254,7 @@
   . ==
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
   ::              section 4aH, protocol vane            ::
-  ::
+  :: 
   =|  $:  fox=fort                                      ::  kernel state
       ==                                                ::
   |=  [now=@da eny=@ sky=||(* (unit))]                  ::  current invocation
@@ -1348,8 +1349,8 @@
               1  " prefers not to comment"
               2  " has no words for what just happened"
               3  " is in the building"
-              4  " is quietly present"
-              5  " appears to be thinking"
+              4  " remains quietly present"
+              5  " may be thinking"
               6  " appreciates the silence"
               7  " pauses to consider"
             ==

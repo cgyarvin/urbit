@@ -17,6 +17,7 @@
     =|  yel=(list ,[p=duct q=tape])
     =|  wot=(list ,[p=duct q=tape])
     =|  byn=(list ,[p=duct q=riot]) 
+    =|  vag=(list ,[p=duct q=card])
     =|  say=(list ,[p=duct q=seat r=[p=@ud q=riff]])
     |%
     ++  abet
@@ -31,6 +32,9 @@
       ::
         %+  turn  (flop byn) 
         |=([a=duct b=riot] [[~ who] a [%writ b]])
+      ::
+        %+  turn  (flop vag) 
+        |=([a=duct b=card] [[~ who] a b])
       ::
         %+  turn  (flop say) 
         |=([a=duct b=seat c=*] [[~ who] [/a a] [%want b %re c]])
@@ -261,6 +265,73 @@
           ?~(saq [~ [[%| ~] 0 ~ ~]] u.saq)
       ~(. de syd now p.saq q.saq)
     ::
+    ++  du                                              ::    du:un
+      |_  [syd=@tas dok=dock]                           ::  repository link
+      ++  abet
+        ^+  ..du
+        ..du(den.yar (~(put by den.yar) syd dok))
+      ::
+      ++  link
+        |=  [hen=duct lok=case]
+        ~&  %du-link
+        %_  +>
+          num.dok  +(num.dok)
+          cuz.dok  :_(cuz.dok [num.dok lok ~])
+          vag      :_  vag
+                   ^-  [duct card]
+                   :-  [/c [%c %link syd (scot %ud num.dok) ~] hen]
+                   :+  %warp  for.dok
+                   ^-  riff
+                   :-  dys.dok
+                   [~ %| ?~(cuz.dok [%da ~2000.1.1] q.i.cuz.dok) lok]
+        ==
+      ::
+      ++  tref
+        |=  hen=duct
+        ^+  +>
+        +>(cuz.dok ~, vag :_(vag [hen [%warn "link failed"]]))
+      ::
+      ++  poll
+        |=  [num=@ud rot=riot]
+        ^+  +>
+        ~&  %du-poll
+        =^  zuc  ..du
+            |-  ^+  [cuz.dok ..du]
+            ?~  cuz.dok  !!
+            ?.  =(num p.i.cuz.dok)
+              =+  zen=$(cuz.dok t.cuz.dok)
+              [[i.cuz.dok -.zen] +.zen]
+            ?^  rot
+              ?>  ?=(%w p.p.u.rot)
+              ?>  =(dys.dok r.p.u.rot)
+              ?>  =(~ q.u.rot)
+              ?>  ?=(%ud -.q.p.u.rot)
+              =+  rog=((hard frog) r.u.rot)
+              [cuz.dok(r.i [q.rog r.i.cuz.dok]) ..du] 
+            =+  goz=`(list nori)`(flop r.i.cuz.dok)
+            :-  t.cuz.dok
+            =+  wak=(di syd)
+            |-  ^+  ..du
+            ?~  goz
+              zoot:wake:wak
+            $(goz t.goz, wak (edit:wak now i.goz))
+        +>.$(cuz.dok zuc)
+      --
+    ::
+    ++  dy                                              ::    dy:un
+      |=  [hen=duct syd=@tas for=@p dys=@tas lok=case]  ::  update link
+      ^+  +>
+      =+  ^=  dok  ^-  dock
+          =+  dok=(~(get by den.yar) syd)
+          ?^  dok
+            ?>(&(=(for.u.dok for) =(dys.u.dok dys)) u.dok)
+          [for dys 0 ~]
+      abet:(~(link du syd dok) hen lok)
+    ::
+    ++  dz                                              ::    dz:un
+      |=  syd=@tas                                      ::  find link
+      ~(. du syd (need (~(get by den.yar) syd)))
+    ::
     ++  fa
       |=  him=seat
       =+  ^=  raz
@@ -309,6 +380,7 @@
           ?~  rot
             :_  rum(ask ~, lim kas)
             ~(. de [syd kas qyx.rum dom.rum])
+          ~&  [%pulled p.u.rot q.u.rot]
           ?>  ?=(%w p.p.u.rot)
           ?>  =(syd r.p.u.rot)
           ?>  =(~ q.u.rot)
@@ -319,6 +391,7 @@
           (~(exec de [syd lim.rum qyx.rum dom.rum]) rog)
         =+  wak=wake:wex
         =.  byn  byn.wak
+        =.  yel  [[hen "pulled"] yel]
         =.  qyx.rum  qyx.wak
         =.  dom.rum  dom.wak
         +>.$(mir.q.raz (~(put by mir.q.raz) syd rum))
@@ -341,7 +414,7 @@
         =>  .(ask.rum [~ now])
         =.  +>.$
           %+  mete
-            [[%c (scot %p him) syd ~] hen]
+            [[%c %pull (scot %p him) syd ~] hen]
           [syd ~ %| [%da lim.rum] [%da now]]
         +>.$(mir.q.raz (~(put by mir.q.raz) syd rum))
       ::       
@@ -437,6 +510,12 @@
       ::  [[%tell %0 %leaf "clay: home for {~(rend co ~ %p u.whu)}"] ~]
       [~ ..^$(fat.ruf (~(put by fat.ruf) u.whu *room))]
     ::
+        %link
+      ?>  ?=(^ whu)
+      =^  mos  ruf
+        abet:(dy:(un u.whu now ruf) hen +.fav)
+      [mos ..^$]
+    ::
         %pull
       ?>  ?=(^ whu)
       ?>  !=(u.whu p.fav) 
@@ -469,8 +548,18 @@
     ::
         %went
       ?:  =(%good q.fav)  [~ ..^$]
+      ?>  ?=([@ *] tea)
+      =+  une=(un u.whu now ruf)
       =^  mos  ruf
-        abet:zoom:(tref:(fa:(un u.whu now ruf) p.fav) hen tea)
+        ?+    i.tea  !!
+            %link
+          ?>  ?=([@ *] t.tea)
+          =+  syd=i.t.tea
+          abet:abet:(tref:(dz:une syd) hen)
+        ::
+            %pull
+          abet:zoom:(tref:(fa:une p.fav) hen t.tea)
+        ==
       [mos ..^$]
     ::
         %wake
@@ -482,21 +571,45 @@
       $(dal t.dal, mos (weld som mos))
     ::
         %wort
-      ?>  ?=([@ @ ~] tea)
-      =+  xoc=(slay i.tea)
-      ?>  ?=([~ %% %p @] xoc)
+      ?>  ?=([@ *] tea)
+      =+  une=(un u.whu now ruf)
       =^  mos  ruf
-        =<  abet
-        =<  zoom
-        (puke:(fa:(un u.whu now ruf) q.p.u.xoc) hen i.t.tea p.fav)
+        ?+    i.tea  !!
+            %link
+          ?>  ?=([@ *] t.tea)
+          =+  syd=i.t.tea
+          abet:abet:(tref:(dz:une syd) hen)
+        ::
+            %pull
+          ?>  ?=([@ @ ~] t.tea)
+          =+  xoc=(slay i.t.tea)
+          ?>  ?=([~ %% %p @] xoc)
+          =<  abet
+          =<  zoom
+          (puke:(fa:(un u.whu now ruf) q.p.u.xoc) hen i.t.t.tea p.fav)
+        ==
       [mos ..^$]
     ::
         %writ
-      ?>  ?=([@ @ ~] tea)
-      =+  xoc=(slay i.tea)
-      ?>  ?=([~ %% %p @] xoc)
+      ?>  ?=([@ *] tea)
+      =+  une=(un u.whu now ruf)
       =^  mos  ruf
-        abet:zoom:(poll:(fa:(un u.whu now ruf) q.p.u.xoc) hen i.t.tea p.fav)
+        ?+    i.tea  !!
+            %link
+          ?>  ?=([@ @ ~] t.tea)
+          =+  syd=i.t.tea
+          =+  xoc=(slay i.t.t.tea)
+          ?>  ?=([~ %% %ud @] xoc)
+          abet:abet:(poll:(dz:une syd) q.p.u.xoc p.fav)
+        ::
+            %pull
+          ?>  ?=([@ @ ~] t.tea)
+          =+  xoc=(slay i.t.tea)
+          ?>  ?=([~ %% %p @] xoc)
+          =<  abet
+          =<  zoom
+          (poll:(fa:(un u.whu now ruf) q.p.u.xoc) hen i.t.t.tea p.fav)
+        ==
       [mos ..^$]
     ==
   ::

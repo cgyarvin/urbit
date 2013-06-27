@@ -1,4 +1,4 @@
-::
+!:
 ::  zuse (3), standard library (tang)
 ::
 |%
@@ -933,6 +933,7 @@
               [%lane p=lane]                            ::  set public route
               [%line p=@t]                              ::  source line
               [%ling ~]                                 ::  rotate interface
+              [%link p=@tas q=seat r=@tas s=case]       ::  link request
               [%load p=@tas q=path]                     ::  request atomic file
               [%logn p=@p q=chum]                       ::  name hashed-pass
               [%logo ~]                                 ::  logout
@@ -1009,6 +1010,14 @@
           ==                                            ::
 ++  cult  (map duct rave)                               ::  subscriptions
 ++  deed  ,[p=@ q=step]                                 ::  signature, stage
+++  dock                                                ::  link record
+          $:  for=seat                                  ::  host
+              dys=@tas                                  ::  linked to desk
+              num=@ud                                   ::  update count
+              ^=  cuz                                   ::  updates
+              %-  list                                  ::
+              ,[p=@ud q=case r=(list nori)]             ::  unresolved
+          ==                                            ::
 ++  dome                                                ::  project state
           $:  arc=arch                                  ::  state
               let=@                                     ::  (lent hit)
@@ -1017,10 +1026,6 @@
           ==                                            ::
 ++  desk  ,[p=cult q=dome]                              ::  project state
 ++  disc  ,@ta                                          ::  modeseatdeskcasespur
-++  dock  $:                                            ::  process state
-              p=tick                                    ::  process counter
-              q=(map tick bear)                         ::  process table
-          ==                                            ::
 ++  door                                                ::  foreign contact
           $:  wod=road                                  ::  connection to
               wyl=will                                  ::  inferred mirror
@@ -1169,7 +1174,7 @@
               [%ins p=*]                                ::  insert
               [%mut p=udon]                             ::  mutate
           ==                                            ::
-++  moat  ,[p=case q=case]                              ::  chan
+++  moat  ,[p=case q=case]                              ::  change range
 ++  mood  ,[p=care q=case r=path]                       ::  request in desk
 ++  moth  ,[p=meth q=math r=(unit octs)]                ::  http operation
 ++  name  ,[p=@t q=(unit ,@t) r=(unit ,@t) s=@t]        ::  first mid/nick last
@@ -1231,6 +1236,10 @@
           $:  did=@ud                                   ::  filled sequence
               mis=(map ,@ud ,[p=flap q=(unit)])         ::  misordered
           ==                                            ::  
+++  raft                                                ::  filesystem
+          $:  las=@da                                   ::  last wakeup
+              fat=(map ,@p room)                        ::  per host
+          ==                                            ::
 ++  rank  ?(%czar %king %duke %jack %pawn)              ::  seat width class
 ++  rant                                                ::  namespace binding
           $:  p=[p=care q=case r=@tas]                  ::  clade release book
@@ -1267,12 +1276,9 @@
               lun=(unit lane)                           ::  route to friend
               lew=will                                  ::  will of frien
           ==                                            ::
-++  raft                                                ::  filesystem
-          $:  las=@da                                   ::  last wakeup
-              fat=(map ,@p room)                        ::  per host
-          ==                                            ::
 ++  room                                                ::  fs per seat (new)
-          $:  dos=(map ,@ta ,[p=cult q=dome])           ::  native projects 
+          $:  dos=(map ,@tas ,[p=cult q=dome])          ::  native projects 
+              den=(map ,@tas dock)                      ::  links 
               rid=(map seat ,[p=rind q=rink])           ::  neighbors
           ==                                            ::
 ++  rock  ,@uvO                                         ::  packet

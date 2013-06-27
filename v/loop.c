@@ -1271,7 +1271,7 @@ u2_lo_loop(u2_reck* rec_u,
         _lo_rand(rec_u, rad_w);
         ten = u2_ci_words(8, rad_w);
       }
-      _lo_make(rec_u, u2nq(c3__make, c3__zuse, 8, ten));
+      _lo_make(rec_u, u2nq(c3__make, c3__zuse, 11, ten));
     }
   }
   else {
@@ -1289,6 +1289,10 @@ u2_lo_loop(u2_reck* rec_u,
   u2_Host.sav_u.ent_w = rec_u->ent_w;
 #endif
 
+  if ( u2_yes == nuu ) {
+    u2_reck_plan(rec_u, u2nt(c3__gold, c3__ames, u2_nul),
+                        u2nt(c3__pull, 0, c3__main));
+  }
   _lo_init(rec_u);
   {
     struct ev_loop *lup_u = ev_default_loop(0);
