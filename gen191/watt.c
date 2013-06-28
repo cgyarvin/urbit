@@ -8,6 +8,10 @@
 
 /* declarations
 */
+  /* models
+  */
+    extern u2_ho_jet j2_mbj(PtM, tape)[];
+
   /* tier 1
   */
     extern u2_ho_jet j2_mbj(Pt1, add)[];
@@ -84,6 +88,7 @@
     extern u2_ho_jet j2_mbj(Pt5, rub)[];
     extern u2_ho_jet j2_mbj(Pt5, sfix)[];
     extern u2_ho_jet j2_mbj(Pt5, shax)[];
+    extern u2_ho_jet j2_mbj(Pt5, tape)[];
     extern u2_ho_jet j2_mbj(Pt5, trip)[];
 
     extern u2_ho_driver j2_mbd(Pt5, bend)[];
@@ -132,19 +137,27 @@
 */
   static u2_ho_driver
     _watt_drivers_0[],
-    _watt_drivers_1[];
+    _watt_drivers_1[],
+    _watt_drivers_2[];
 
   u2_ho_driver
   j2_da(Pt0) = { j2_sa(Pt0), 0, _watt_drivers_0, 0, u2_none };
 
   static u2_ho_driver
   _watt_drivers_0[] = {
-    { j2_sb(Pt0, hoon), 0, _watt_drivers_1, 0, u2_none },
+    { j2_sb(Pt0, mood), 0, _watt_drivers_1, 0, u2_none },
+    { }
+  };
+
+  static u2_ho_driver
+  _watt_drivers_1[] = {
+    { j2_sb(PtM, tape), j2_mbj(PtM, tape), 0, 0, u2_none },
+    { j2_sb(PtM, hoon), 0, _watt_drivers_2, 0, u2_none },
     { }
   };
 
   static u2_ho_driver 
-  _watt_drivers_1[] = {
+  _watt_drivers_2[] = {
     { j2_sb(Pt1, add), j2_mbj(Pt1, add), 0, 0, u2_none },
     { j2_sb(Pt1, dec), j2_mbj(Pt1, dec), 0, 0, u2_none },
     { j2_sb(Pt1, div), j2_mbj(Pt1, div), 0, 0, u2_none },

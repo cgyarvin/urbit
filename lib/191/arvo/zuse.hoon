@@ -1,4 +1,4 @@
-!:
+::
 ::  zuse (3), standard library (tang)
 ::
 |%
@@ -709,6 +709,15 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                section 3bE, names etc                ::
 ::
+++  clan                                                ::  seat to rank
+  |=  who=seat  ^-  rank
+  =+  wid=(met 3 who)
+  ?:  (lte wid 1)   %czar
+  ?:  =(2 wid)      %king
+  ?:  (lte wid 4)   %duke
+  ?:  (lte wid 8)   %jack
+  ?>  (lte wid 16)  %pawn
+::
 ++  gnow
   |=  gos=gcos  ^-  @t
   ?-    -.gos
@@ -739,6 +748,17 @@
   |=  kit=kite
   ^-  path
   [(cat 3 'c' p.kit) (scot %p r.kit) s.kit (scot (dime q.kit)) t.kit]
+::
+++  sein                                                ::  default seigneur
+  |=  who=seat  ^-  seat
+  =+  mir=(clan who)
+  ?-  mir
+    %czar  who
+    %king  (end 3 1 who)
+    %duke  (end 4 1 who)
+    %jack  (end 5 1 who)
+    %pawn  ~les
+  ==
 ::
 ++  tame
   |=  hap=path
@@ -912,6 +932,7 @@
               [%boot p=card]                            ::  christen terminal
               [%cash p=@p q=buck]                       ::  civil license
               [%crud p=(list tank)]                     ::  error with trace
+              [%deem p=seat q=card]                     ::  external identity
               [%dire p=@tas q=dram]                     ::  apply directory
               [%dump p=(list ,@t)]                      ::  raw text lines
               [%edit p=@p q=@tas r=nori]                ::  commit edits
@@ -966,7 +987,6 @@
               [%thou p=httr]                            ::  raw http response
               [%tory p=(list ,@t)]                      ::  history dump
               [%veer p=? q=@ta r=path s=@t]             ::  install vane
-              [%veil q=@ta]                             ::  revert vane
               [%wait p=@da q=path]                      ::  timer wait
               [%wake ~]                                 ::  timer activate
               [%want p=seat q=@ta r=*]                  ::  outgoing request
@@ -1013,11 +1033,11 @@
 ++  dock                                                ::  link record
           $:  for=seat                                  ::  host
               dys=@tas                                  ::  linked to desk
+              kol=case                                  ::  last update case
               num=@ud                                   ::  update count
-              ^=  cuz                                   ::  updates
-              %-  list                                  ::
-              ,[p=@ud q=case r=(list nori)]             ::  unresolved
+              cuz=(list ,[p=@ud q=dole])                ::  cumulative update
           ==                                            ::
+++  dole  ,[p=(unit moar) q=(list maki)]                ::  flow trace
 ++  dome                                                ::  project state
           $:  arc=arch                                  ::  state
               let=@                                     ::  (lent hit)
@@ -1051,7 +1071,7 @@
               zac=(map seat oven)                       ::  flows by server
               rop=(map ,[p=@ud q=sock] riff)            ::  remote requests
           ==                                            ::
-++  frog  ,[p=@da q=nori]                               ::  project change
+++  frog  ,[p=@da q=maki]                               ::  project change
 ++  gift                                                ::  one-way effect
           $%  [%% p=calf q=*]                           ::  trivial output
               [%cd p=@tas]                              ::  change desk
@@ -1147,6 +1167,10 @@
               [%raw p=httr]                             ::  raw http response
           ==                                            ::
 ++  mace  (list ,[p=life q=ring])                       ::  private secrets
+++  maki                                                ::  general change
+          $%  [& p=nori]                                ::  direct change
+              [| p=saba]                                ::  metachange
+          ==                                            ::
 ++  mane  $|(@tas [@tas @tas])                          ::  XML name/space
 ++  manx  ,[t=marx c=marl]                              ::  XML node
 ++  marl  (list manx)                                   ::  XML node list
@@ -1174,6 +1198,7 @@
               [%ins p=*]                                ::  insert
               [%mut p=udon]                             ::  mutate
           ==                                            ::
+++  moar  ,[p=@ud q=@ud]                                ::  normal change range
 ++  moat  ,[p=case q=case]                              ::  change range
 ++  mood  ,[p=care q=case r=path]                       ::  request in desk
 ++  moth  ,[p=meth q=math r=(unit octs)]                ::  http operation
@@ -1209,14 +1234,6 @@
                   wid=@ud                               ::  max outstanding
               ==
           ==
-++  bird                                                ::  packet in travel
-          $:  gom=soap                                  ::  message identity
-              mup=@ud                                   ::  pktno in msg
-              nux=@ud                                   ::  xmission count
-              dif=?                                     ::  deemed in flight
-              pex=@da                                   ::  next expire
-              pac=rock                                  ::  packet data
-          ==                                            ::
 ++  plea  ,[p=@ud q=[p=? q=@t]]                         ::  live prompt
 ++  pork  ,[p=(unit ,@ta) q=path]                       ::  fully parsed url
 ++  prod  ,[p=prom q=tape]                              ::  format, prompt
@@ -1284,6 +1301,7 @@
 ++  rock  ,@uvO                                         ::  packet
 ++  rout  ,[p=(list host) q=path r=oryx s=path]         ::  http route (new)
 ++  rump  ,[p=care q=case r=@tas s=path]                ::  relative path
+++  saba  ,[p=seat q=@tas r=moar s=(list maki)]         ::  patch/merge
 ++  safe                                                ::  domestic host
           $:  hoy=(list seat)                           ::  hierarchy
               val=wand                                  ::  private keys

@@ -1290,8 +1290,18 @@ u2_lo_loop(u2_reck* rec_u,
 #endif
 
   if ( u2_yes == nuu ) {
-    u2_reck_plan(rec_u, u2nt(c3__gold, c3__ames, u2_nul),
-                        u2nt(c3__pull, 0, c3__main));
+    u2_reck_plan(rec_u, u2nt(c3__gold, c3__clay, u2_nul),
+                        u2nt(c3__deem, 
+                             u2k(rec_u->our),
+                             u2nc(c3__link, 
+                                  u2nq(c3__main,
+                                       0,
+                                       c3__main,
+                                       u2nc(c3__ud, 0)))));
+
+    u2_reck_plan(rec_u, u2nt(c3__gold, c3__clay, u2_nul),
+                        u2nt(c3__deem, u2k(rec_u->our),
+                                       u2nt(c3__pull, 0, c3__main)));
   }
   _lo_init(rec_u);
   {

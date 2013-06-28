@@ -242,6 +242,7 @@
 #   define c3__data   c3_s4('d','a','t','a')
 #   define c3__dbug   c3_s4('d','b','u','g')
 #   define c3__dec    c3_s3('d','e','c')
+#   define c3__deem   c3_s4('d','e','e','m')
 #   define c3__deep   c3_s4('d','e','e','p')
 #   define c3__del    c3_s3('d','e','l')
 #   define c3__delc   c3_s4('d','e','l','c')

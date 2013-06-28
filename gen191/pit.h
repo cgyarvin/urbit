@@ -5,12 +5,13 @@
   /** Driver control strings for each tier.
   **/
 #   define Pt0           k_191
-#   define Pt1           k_191__hoon
-#   define Pt2           k_191__hoon
-#   define Pt3           k_191__hoon
-#   define Pt4           k_191__hoon
-#   define Pt5           k_191__hoon
-#   define Pt6           k_191__hoon
+#   define PtM           k_191__mood
+#   define Pt1           k_191__mood__hoon
+#   define Pt2           k_191__mood__hoon
+#   define Pt3           k_191__mood__hoon
+#   define Pt4           k_191__mood__hoon
+#   define Pt5           k_191__mood__hoon
+#   define Pt6           k_191__mood__hoon
 
   /** Test codes.
   **/

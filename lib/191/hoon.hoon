@@ -176,6 +176,9 @@
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::  ::::::    volume 1, Hoon models                 ::::::
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
+~%    %mood
+    +
+  ~
 |%                                                      ::
 ++  axis  ,@                                            ::  tree address
 ++  beer  $|(@ [~ p=gene])                              ::
@@ -447,6 +450,7 @@
               [1 p=(list)]                              ::
               [2 p=(list tank)]                         ::
           ==                                            ::
+++  tope  type                                          ::  old type (if any)
 ++  tune  $%  [0 p=vase]                                ::
               [1 p=(list)]                              ::
               [2 p=(list ,[@ta *])]                     ::
@@ -493,6 +497,7 @@
           %-  list                                      ::
           ,$%([& p=@ud] [| p=(list a) q=(list a)])      ::
 ++  vase  ,[p=type q=*]                                 ::  type-value pair
+++  vise  ,[p=tope q=*]                                 ::  old vase
 ++  wall  (list tape)                                   ::  text lines
 ++  wing  (list limb)                                   ::
 ++  wine  $|  ?(%noun %path %tank %void %wall %wool %yarn)
@@ -520,7 +525,7 @@
 ::::::  ::::::    volume 2, Hoon libraries and compiler ::::::
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ~%    %hoon
-    +>
+    +
   ==
     %ap    ap
     %ut    ut
@@ -4037,6 +4042,10 @@
       [%cncl [~ 2] [~ 3]]
   =+  gun=(~(mint ut typ) %noun gen)
   [p.gun .*([q.gat q.sam] q.gun)]
+::  
+++  slim
+  |=  old=vise  ^-  vase
+  old
 ::
 ++  slap
   |=  [vax=vase gen=gene]  ^-  vase
@@ -5042,7 +5051,7 @@
         %path
       :-  ~
       :+  %rose
-        [['/' ~] ['/' ~] ['/' ~]]
+        [['/' ~] ['/' ~] ~]
       |-  ^-  (list tank)
       ?@  lum
         ?>(?=(~ lum) ~)
@@ -7152,9 +7161,10 @@
 ::::::  ::::::    volume 3, Arvo models and skeleton    ::::::
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 |%
+++  curd  ,[p=@tas q=*]                                 ::  typeless card
 ++  duct  (list wire)                                   ::  causal history
-++  move  ,[p=(unit seat) q=duct r=*]                   ::  untyped move
-++  ovum  ,[p=wire q=*]                                 ::  untyped ovum
+++  move  ,[p=(unit seat) q=duct r=curd]                ::  typeless move
+++  ovum  ,[p=wire q=curd]                              ::  typeless ovum
 ++  seat  ,@p                                           ::  network identity 
 ++  vane  $_                                            ::  kernel actor
           |+  [now=@da eny=@ sky=||(* (unit))]          ::  activate
@@ -7163,12 +7173,12 @@
                         |=  $:  whu=(unit seat)         ::  calling identity
                                 pax=wire                ::  pretext
                                 hen=duct                ::  channel
-                                fav=*                   ::  event
+                                fav=curd                ::  event
                             ==                          ::
                         :-  p=*(list move)              ::  actions
                         q=*vane                         ::  consequence
               ++  come                                  ::  load state, old
-                        |=  old=vase                    ::
+                        |=  old=vise                    ::
                         *vane                           ::
               ++  doze                                  ::  next wakeup
                         |=  [now=@da hen=duct]          ::  channel
@@ -7204,25 +7214,13 @@
     %lead
   $(hen t.hen)
 ::
-++  vein                                                ::  vane wrapper
-  |=  [bud=vase pax=path txt=@ta]                       ::  kernel, source
-  =+  =+  pal=~(play ut p.bud)
-      :*  bet=(pal (vice '[*(unit seat) *wire *duct *]'))
-          nim=(pal (vice '[*seat @tas *seat @tas *coin *path]'))
-          vin=(pal (vice '[@da @ |+(* *(unit))]'))
-          hoz=(pal (vice '[@da *duct]'))
-          viz=(pal (vice '*vase'))
-      ==
-  =|  von=(list ,[p=? q=path r=@t])
-  =+  ves=(slam (slap bud (rain pax txt)) `vase`[viz bud])
+++  vent                                                ::  vane core
+  |=  [bud=vase ves=vase]
+  =+  (vial p.bud)
   |%
-  ++  ruck
+  ++  ruck                                              ::  update vase
     |=  [gub=? pax=path txt=@ta]
     ^+  +>
-    =:   von  [[gub ^pax ^txt] von]
-        ^pax  pax
-        ^txt  txt
-      ==
     =+  arg=`vase`[vin ~2000.1.1 0 =>(~ |+(* ~))]
     =+  rig=(slam ves arg)
     =+  rev=(slam (slap bud (rain pax txt)) `vase`[viz bud])
@@ -7230,22 +7228,7 @@
     =+  ole=(slap rig [%cnbc %stay])
     +>.$(ves (slam (slap syg [%cnbc ?:(gub %come %load)]) ole))
   ::
-  ++  rusk
-    ^+  .
-    =+  nov=?>(?=(^ von) [i=i.von t=t.von])
-    =+  gub=p.i.nov
-    =:  von  t.nov
-        pax  q.i.nov
-        txt  r.i.nov
-      ==
-    =+  arg=`vase`[vin ~2000.1.1 0 =>(~ |+(* ~))]
-    =+  rig=(slam ves arg)
-    =+  rev=(slam (slap bud (rain pax txt)) `vase`[viz bud])
-    =+  syg=(slam rev arg)
-    =+  ole=(slap rig [%cnbc ?:(gub %stay %flee)])
-    ..rusk(ves (slam (slap syg [%cnbc %load]) ole))
-  :: 
-  ++  wink
+  ++  wink                                              ::  deploy
     |=  [now=@da eny=@ sky=||(* (unit))]
     =+  arg=`vase`[vin +<]
     =+  rig=(slam ves arg)
@@ -7254,7 +7237,7 @@
       |=  $:  whu=(unit seat)
               pax=wire
               hen=duct
-              fav=*
+              fav=curd
           ==
       ^-  [p=(list move) q=+>.^$]
       =+  pro=(slam (slap rig [%cnbc %beat]) [bet +<])
@@ -7279,8 +7262,24 @@
     --
   --
 ::
+++  vial                                                ::  vane tools
+  |=  but=type
+  ^-  [bet=type nim=type vin=type hoz=type viz=type]
+  ~+  =+  pal=|=(a=@t ^-(type (~(play ut but) (vice a))))
+      :*  bet=(pal '[*(unit seat) *wire *duct *curd]')
+          nim=(pal '[*seat @tas *seat @tas *coin *path]')
+          vin=(pal '[@da @ |+(* *(unit))]')
+          hoz=(pal '[@da *duct]')
+          viz=(pal '*vase')
+      ==
+::
+++  vint                                                ::  create vane
+  |=  [bud=vase pax=path txt=@ta]                       ::
+  =+  vil=(vial p.bud)
+  (vent bud (slam (slap bud (rain pax txt)) [viz.vil bud]))
+::
 ++  is                                                  ::  operate in time
-  |=  [eny=@ fan=(list ,[p=@tas q=_*vein])]
+  |=  [eny=@ bud=vase fan=(list ,[p=@tas q=vase])]
   |_  now=@da 
   ++  beck  
     |=  owr=(unit seat)
@@ -7309,40 +7308,41 @@
     |-  ^-  (unit)
     ?~  fan  ~
     ?.  =(dis p.i.fan)  $(fan t.fan)
-    %-  scry:(wink:q.i.fan now (shax now) ..^$)
+    %-  scry:(wink:(vent bud q.i.fan) now (shax now) ..^$)
     [u.owr rem his q.p.u.dyc u.ved tyl]
   ::
-  ++  dink                                              ::  vane by char
-    |=  din=@tas  ^-  vein
+  ++  dink                                              ::  vase by char
+    |=  din=@tas  ^-  vase
     ?~(fan !! ?:(=(din p.i.fan) q.i.fan $(fan t.fan)))
   ::
-  ++  dint                                              ::  name to vane
+  ++  dint                                              ::  input to vane
     |=  hap=path  ^-  @tas
     ?+  hap  !!
       [@ %ames *]  %a
+      [@ %clay *]  %c
       [@ %sync *]  %c
       [@ %term *]  %d
       [@ %http *]  %e
     ==
   ::
-  ++  doos
-    |=  hap=path
-    ^-  (unit ,@da)
-    =+  van=`vein`(dink (dint hap))
-    =+  vug=(wink:van now 0 (beck ~))
-    =+  don=(doze:vug now [hap ~])
-    don
+  ++  doos                                              ::  sleep until
+    |=  hap=path  ^-  (unit ,@da)
+    (doze:(wink:(vent bud (dink (dint hap))) now 0 (beck ~)) now [hap ~])
   ::
-  ++  hurl                                              ::  start loop
+  ++  hurl                                              ::  start loop no id
     |=  ovo=ovum
-    ^-  [p=(list ovum) q=(list ,[p=@tas q=_*vein])]
-    =+  des=(dint p.ovo)
-    (kick [[~ [[des ~] p.ovo ~] q.ovo] ~])
+    ^-  [p=(list ovum) q=(list ,[p=@tas q=vase])]
+    (kick [[~ [[(dint p.ovo) ~] p.ovo ~] q.ovo] ~])
+  ::
+  ++  hymn                                              ::  start loop with id
+    |=  [who=seat ovo=ovum]
+    ^-  [p=(list ovum) q=(list ,[p=@tas q=vase])]
+    (kick [[[~ who] [[(dint p.ovo) ~] p.ovo ~] q.ovo] ~])
   ::
   ++  kick                                              ::  complete loop
     |=  mor=(list move)
     =|  ova=(list ovum)
-    |-  ^-  [p=(list ovum) q=(list ,[p=@tas q=_*vein])]
+    |-  ^-  [p=(list ovum) q=(list ,[p=@tas q=vase])]
     ?~  mor
       [(flop ova) fan]
     ::  ~&  [%kick-move q.i.mor -.r.i.mor]
@@ -7359,30 +7359,24 @@
       =+  tuh=$(naf t.naf)
       [p.tuh [i.naf q.tuh]]
     =+  ^=  yub
-        %-  beat:(wink:q.i.naf now (shax now) (beck p.i.mor))
+        %-  beat:(wink:(vent bud q.i.naf) now (shax now) (beck p.i.mor))
         [p.i.mor t.i.q.i.mor t.q.i.mor r.i.mor]
-    [p.yub [[p.i.naf q.yub] t.naf]]
+    [p.yub [[p.i.naf ves:q.yub] t.naf]]
   --
 --
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::  ::::::    Postface                              ::::::
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 =+  pit=`vase`!>(.)
-=+  bud=pit
+=+  bud=pit                                             ::  standard library
 =|  eny=@                                               ::  entropy
-=|  sag=(unit ,*)                                       ::  old engine
-=+  fan=`(list ,[p=@tas q=_*vein])`~
+=|  fan=(list ,[p=@tas q=vase])
 =<  |%
-    ++  come  |=(* (^come +<))                          ::  11
-    ++  load  |=  *                                     ::  86
-              ^+  +>
-              %=    +>
-                  +
-                %-  ^load
-                %-  (hard ,[@da @ (list ,[@tas vase]) (unit ,*)])
-                +<
-              ==
+    ++  come  |=  [@ vise (list ,[p=@tas q=vise])]      ::  11
+              %_(+> + (^come +<))
     ++  keep  |=(* (^keep ((hard ,[@da path]) +<)))     ::  4
+    ++  load  |=  [@ vase (list ,[p=@tas q=vase])]      ::  86
+              %_(+> + (^load +<))
     ++  peek  |=(* (^peek ((hard ,[@p @da path]) +<)))  ::  87
     ++  poke  |=  * 
               ^-  [(list ovum) _+>]
@@ -7396,52 +7390,40 @@
               =^  avo  +>.^$  $(ova t.ova)
               ?+  -.q.i.ova  [[i.ova avo] +>.^$]
                 %veer  [avo +>.^$(+ (veer +.q.i.ova))]
-                %veil  [avo +>.^$(+ (veil +.q.i.ova))]
               ==
     ++  wish  |=(* (^wish ((hard ,@ta) +<)))            ::  20
     --
 |%
-++  come
-  |=  *
+++  come                                                ::  load incompatible
+  |=  [yen=@ dub=vise nyf=(list ,[p=@tas q=vise])]
   ^+  +>
-  !!
+  %_  +> 
+    eny  yen
+    bud  (slim dub)
+    fan  (turn nyf |=([a=@tas b=vise] [a (slim b)]))
+  ==
 ::
 ++  keep                                                ::  wakeup delay
   |=  [now=@da hap=path]
   =>  .(+< ((hard ,[now=@da hap=path]) +<))
-  (~(doos (is eny fan) now) hap)
+  (~(doos (is eny bud fan) now) hap)
 ::
-++  load                                                ::  install current
-  |=  [now=@da ney=@ fag=(list ,[p=@tas q=vase]) gud=(unit ,*)]
-  ~&  %rein-load
-  ^+  +>
-    ::  (load:(hey now eny (~(beck (is eny fan) now) ~)) vax)
-  !!
+++  load                                                ::  load compatible
+  |=  [yen=@ dub=vase nyf=(list ,[p=@tas q=vase])]
+  %_(+> eny yen, bud dub, fan nyf)
 ::
 ++  peek                                                ::  external inspect
   |=  [our=@p now=@da hap=path]
   ^-  (unit)
   ?~  hap  ~
-  ((~(beck (is eny fan) now) ~) hap)
+  ((~(beck (is eny bud fan) now) ~) hap)
 ::
 ++  poke                                                ::  external apply
   |=  [now=@da ovo=ovum]
   ^-  [(list ovum) _+>]
   =^  zef  fan
-    (~(hurl (is eny fan) now) ovo)
+    (~(hurl (is eny bud fan) now) ovo)
   [zef +>.$]
-::
-++  veil                                                ::  revert vane/tang
-  |=  *
-  =>  .(+< ((hard ,[lal=@ta]) +<))
-  ?>  !=(%% lal)
-  %_    +>
-      fan
-    |-  ^+  fan
-    ?~  fan  ~
-    ?.  =(lal p.i.fan)  [i.fan $(fan t.fan)]
-    [[p.i.fan rusk:q.i.fan] t.fan]
-  ==
 ::
 ++  veer                                                ::  install vane/tang
   |=  *
@@ -7455,10 +7437,12 @@
       fan
     |-  ^+  fan
     ?~  fan 
+      =+  ves=ves:(vint bud pax txt)
       ~&  [%vane `@tas`lal pax `@p`(mug txt)]
-      [[lal (vein bud pax txt)] fan]
-    ?.  =(lal p.i.fan)  [i.fan $(fan t.fan)]
-    [[p.i.fan (ruck:q.i.fan gup pax txt)] t.fan]
+      [[lal ves:(vint bud pax txt)] fan]
+    ?.  =(lal p.i.fan)  
+      [i.fan $(fan t.fan)]
+    [[p.i.fan ves:(ruck:(vent bud q.i.fan) gup pax txt)] t.fan]
   ==
 ::
 ++  wish                                                ::  external compute
