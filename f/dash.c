@@ -66,11 +66,6 @@ u2_ds_find(u2_wire wir_r,
     }
     else out = _ds_scan(pug, cor);
 
-#if 0
-    if ( 0x56dc329c == u2_mug(u2h(cor)) ) {
-      fprintf(stderr, "decmug pug %x, out %x\r\n", pug, out);
-    }
-#endif
     if ( (u2_none == out) && (u2_none != pug) ) {
       fprintf(stderr, "half match\r\n");
     }
@@ -230,8 +225,6 @@ _ds_chip(u2_wire wir_r,
           } else {
             if ( u2_none == (led = u2_ds_find(wir_r, ruc)) ) {
               u2_err(wir_r, "clu", clu);
-              fprintf(stderr, "ruc %x, mug %x\r\n", ruc, u2_mug(ruc));
-              u2_err(wir_r, "ruc", ruc);
               u2_ho_warn_here();
               c3_assert(0);
               u2_rz(bas_r, dac); u2_rz(bas_r, bat); return u2_none;
@@ -285,7 +278,15 @@ u2_ds_mine(u2_wire wir_r,
         }
 #endif
         gop = u2_cs_save(bas_r, u2_wire_des_r(wir_r), 0, bat_xip, gop);
+        {
+          u2_noun poo = u2_cs_find(bas_r, u2_wire_des_r(wir_r), 0, bat_xip);
+         
+          {
+            u2_noun pox = _ds_scan(poo, cor);
+          }
+        }
         u2_rz(bas_r, gop);
+
       }
     }
     else {

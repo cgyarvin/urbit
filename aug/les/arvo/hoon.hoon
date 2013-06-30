@@ -7471,9 +7471,7 @@
   ^-  [p=(list ovum) q=*]
   =+  gat=.*(ken .*(ken [0 86]))
   =+  sam=[eny ova bud fan]
-  ~&  %volt-ready
   =+  raw=.*([-.gat [sam +>.gat]] -.gat)
-  ~&  %volt-fired
   [((list ovum) -.raw) +.raw]
 ::
 ++  wish                                                ::  external compute

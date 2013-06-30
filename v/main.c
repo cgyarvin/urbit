@@ -65,8 +65,9 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
   u2_Opts.veb = u2_yes;
   u2_Opts.rez = u2_no;
   u2_Opts.nuu = u2_no;
+  u2_Opts.kno_w = DefaultKernel;
 
-  while ( (ch_i = getopt(argc, argv, "k:i:lcagqvR")) != -1 ) {
+  while ( (ch_i = getopt(argc, argv, "k:lcsagqvR")) != -1 ) {
     switch ( ch_i ) {
       case 'a': { u2_Opts.abo = u2_yes; break; }
       case 'c': { u2_Opts.nuu = u2_yes; break; }
@@ -81,7 +82,6 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
         else return u2_no;
         break;
       }
-      case 'i': { u2_Opts.nuu = u2_yes; u2_Opts.inv_c = strdup(optarg); }
       case 'q': { u2_Opts.veb = u2_no; break; }
       case 'v': { u2_Opts.veb = u2_yes; break; }
       case 'R': { u2_Opts.rez = u2_yes; break; }
@@ -263,7 +263,7 @@ main(c3_i   argc,
       //  Load the system, within memory cross.
       //
       {
-        {
+        if ( u2_no == u2_Opts.ice ) {
           u2_rl_leap(u2_Wire, c3__rock);
           u2_ve_init(kno_w);
           u2_rl_fall(u2_Wire);
@@ -298,8 +298,9 @@ main(c3_i   argc,
           }
           u2_rl_flog(u2_Wire);
         }
+        else u2_Host.kno_w = u2_Opts.kno_w;
 
-        if ( 0 != u2_Host.ver_e[kno_w].ken ) {
+        if ( (u2_yes == u2_Opts.ice) || (0 != u2_Host.ver_e[kno_w].ken) ) {
           u2_reck_boot(u2_Host.arv_u, u2_Opts.ice);
         }
       }

@@ -918,7 +918,15 @@ _sing_x(u2_noun a,
           if ( u2_no == _sing_x(u2_h(a), u2_h(b)) ) {
             return u2_no;
           }
-          else return _sing_x(u2_t(a), u2_t(b));
+          else if ( u2_no == _sing_x(u2_t(a), u2_t(b)) ) {
+            return u2_no;
+          }
+#if 0
+          if ( *u2_at_dog_mug(a) && *u2_at_dog_mug(b) ) {
+            fprintf(stderr, "duplicate %x %x\r\n", a, b);
+          }
+#endif
+          return u2_yes;
         }
       }
     }

@@ -187,6 +187,7 @@ u2_ve_use(const c3_c* wit_c)
     u2_cm_bean(u2nc(u2_Host.kno_w, u2_ci_string(wit_c)));
 
     fprintf(stderr, "no %s, %d\n", wit_c, u2_Host.kno_w);
+    c3_assert(0);
     return u2_cm_foul("vere-tool");
   }
   else return tul;

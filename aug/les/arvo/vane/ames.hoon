@@ -1,4 +1,4 @@
-!:
+::
 ::  ames (4a), networking
 ::
   |=  pit=vase
@@ -1252,7 +1252,6 @@
     ++  come  
       |=  old=vase
       ^-  vane
-      ~&  %ames-come
       ~|(%load-nest-ames !!)
     ::
     ++  doze
@@ -1274,7 +1273,6 @@
     ++  load
       |=  new=vase
       ^-  vane
-      ~&  %ames-load
       ?.  (~(nest ut -:!>(fox)) & p.new)
         (come new)
       ..^$(fox ~(boot am [now (fort q.new)]))

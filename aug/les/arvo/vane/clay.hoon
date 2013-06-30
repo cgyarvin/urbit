@@ -1,4 +1,4 @@
-!:
+::
 ::  clay (4c), revision control
 ::
 |=  pit=vase
@@ -310,7 +310,6 @@
       ::
       ++  link
         |=  [hen=duct lok=case]
-        ~&  %du-link
         %_  +>
           num.dok  +(num.dok)
           kol.dok  lok
@@ -332,7 +331,6 @@
       ++  poll
         |=  [hen=duct num=@ud rot=riot]
         ^+  +>
-        ~&  %du-poll
         =^  zuc  ..du
             |-  ^+  [cuz.dok ..du]
             ?~  cuz.dok  !!

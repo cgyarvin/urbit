@@ -95,7 +95,7 @@
 
   static u2_noun                                                  //  produce
   _jam_in(u2_wire wir_r,
-          u2_atom a,                                              //  retain
+          u2_noun a,                                              //  retain
           u2_atom b,                                              //  retain
           u2_noun m,                                              //  retain
           u2_noun l)                                              //  retain

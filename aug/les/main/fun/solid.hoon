@@ -30,12 +30,12 @@
     ?~  vay  all
     =+  pax=(weld top `path`[%vane q.i.vay ~])
     =+  txt=((hard ,@) .^(%cx (weld pax `path`[%hoon ~])))
-    =+  sam=[est `ovum`[[%gold ~] [%veer & p.i.vay pax txt]]]
+    =+  sam=[est `ovum`[[%gold ~] [%veer p.i.vay pax txt]]]
     ~&  [%solid-veer i.vay]
     =+  gat=.*(all .*(all [0 42]))
     =+  nex=+:.*([-.gat [sam +>.gat]] -.gat)
     $(vay t.vay, all nex)
 :_  ~  :_  ~
-=+  pac=(jam all)
+=+  pac=(jam [ken all])
 ~&  %solid-finished
 [%xx %save [cav %data ~] pac]

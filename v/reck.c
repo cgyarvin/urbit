@@ -333,6 +333,33 @@ _reck_init_veer(u2_reck* rec_u, u2_noun nam, u2_noun pax, u2_noun txt)
   } 
 }
 
+static void
+_reck_count(u2_noun a, u2_noun* m)
+{
+  if ( u2_fly_is_cat(a) ) {
+    return; 
+  } else {
+    u2_noun b = u2_ckd_by_get(u2k(*m), u2k(a));
+
+    if ( u2_none != b ) {
+      if ( b != a ) {
+        uL(fprintf(uH, "duplicate - a %x, b %x\n", a, b));
+      }
+      u2z(b);
+    }
+    else {
+      *m = u2_ckd_by_put(*m, u2k(a), u2k(a));
+
+      if ( u2_yes == u2du(a) ) {
+        _reck_count(u2h(a), m);
+        _reck_count(u2t(a), m);
+      }
+    }
+  }
+}
+
+u2_noun Map;
+
 /* u2_reck_cold(): load full arvo with vanes, from new solid state. 
 */
 void
@@ -351,18 +378,48 @@ u2_reck_cold(u2_reck* rec_u, c3_w kno_w)
   rec_u->key = 0;
 
   {
-    u2_noun pot;
+    u2_noun pot, eng;
     c3_c    ful_c[2048];
     //  u2_noun hof = u2_cn_mung(u2k(rec_u->toy.hoof), rec_u->kno_w);
     //  c3_c* hof_c = u2_cr_string(hof);
 
-    sprintf(ful_c, "%s/%d/arvo.pill", u2_System, rec_u->kno_w);
+    sprintf(ful_c, "%s/%d/urbit.pill", u2_System, rec_u->kno_w);
     if ( 0 == (pot = u2_walk_load(ful_c)) ) {
       perror(ful_c);
       exit(1);
     }
-    rec_u->ken = 0;
-    rec_u->roc = u2_cke_cue(pot); 
+
+    uL(fprintf(uH, "cueing...\n"));
+    {
+      u2_rail bas_r = u2_wire_bas_r(u2_Wire);
+      u2_noun tup;
+
+      tup = u2_cke_cue(pot);
+      eng = u2_rx(bas_r, tup);
+      u2z(tup);
+    }
+    uL(fprintf(uH, "done.\n"));
+
+    rec_u->ken = u2h(eng);
+    rec_u->roc = u2t(eng);
+
+    {
+      u2_noun fak;
+
+      fak = u2_cn_nock(0, rec_u->ken);
+      u2z(fak);
+    }
+
+#if 0
+    uL(fprintf(uH, "counting...\n"));
+    {
+      u2_noun m = u2_nul;
+
+      _reck_count(eng, &m);
+      Map = m;
+    }
+    uL(fprintf(uH, "done.\n"));
+#endif
   }
 
   rec_u->toy.rain = u2_reck_wish(rec_u, "rain");

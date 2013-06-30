@@ -1084,6 +1084,7 @@ _lo_rest(u2_reck* rec_u, u2_noun rez)
       else {
         if ( lar_u.ent_w != (ent_w - 1) ) {
           uL(fprintf(uH, "record (%s) is corrupt (g)\n", ful_c));
+          uL(fprintf(uH, "lar_u.ent_w %x, ent_w %x\n", lar_u.ent_w, ent_w));
           u2_lo_bail(rec_u);
         }
         ent_w -= 1;
@@ -1244,6 +1245,17 @@ _lo_ours(u2_reck* rec_u)
     rec_u->our = u2k(rec_u->our);
     rec_u->pod = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', u2k(rec_u->our)));
   }
+}
+
+/* _lo_link(): plan link from remote repository.
+*/
+static void
+_lo_link(u2_reck* rec_u,
+         u2_noun  syd,
+         u2_noun  foh,
+         u2_noun  dys,
+         u2_noun  lok)
+{
 }
 
 /* u2_lo_loop(): begin main event loop.

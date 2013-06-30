@@ -77,21 +77,17 @@ u2_ve_dump_wall(u2_noun wol)
 void
 u2_ve_tank(c3_l tab_l, u2_noun tac)
 {
+  u2_noun gat = u2_Host.arv_u->toy.wash;
   c3_l    col_l = u2_ve_dump_columns();
   u2_noun wol;
 
-  if ( u2_Host.kno_w > 209 ) {
-    wol = u2_ve_hard("pitt", "wash", u2nc(u2nc(tab_l, col_l), tac));
+  if ( 0 == gat ) {
+    return;
   } else {
-    if ( u2_Host.kno_w > 203 ) {
-      wol = u2_ve_hard("born", "wash", u2nc(u2nc(tab_l, col_l), tac));
-    }
-    else {
-      wol = u2_ve_hard("vane", "wash", u2nc(u2nc(tab_l, col_l), tac));
-    }
-  }
+    wol = u2_cn_mung(u2k(gat), u2nc(u2nc(tab_l, col_l), u2k(tac)));
 
-  u2_ve_dump_wall(wol);
+    u2_ve_dump_wall(wol);
+  }
 }
 
 /* u2_ve_geto(): ghetto-print failed trace stack.  Will not fail!

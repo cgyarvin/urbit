@@ -26,6 +26,7 @@
     u2_noun j2_mby(Pt5Y, jam)(u2_wire, u2_noun a);
     u2_noun j2_mby(Pt5Y, trip)(u2_wire, u2_noun a);
 
+#   define _coal_cue  j2_mby(Pt5Y, cue)
 #   define _coal_jam  j2_mby(Pt5Y, jam)
 #   define _coal_trip j2_mby(Pt5Y, trip)
 
@@ -480,7 +481,7 @@ u2_cm_bail(c3_l how_l)
 
   if ( u2_yes == u2_Flag_Abort ) {
     if ( c3__fail == how_l ) { c3_assert(0); }
-    // c3_assert(0);
+    c3_assert(0);
   }
   u2_tx_sys_bit(u2_Wire, u2_yes);
 

@@ -4,7 +4,15 @@
 */
 #include "all.h"
 #include <sys/time.h>
+#include <sys/ioctl.h>
 #include <signal.h>
+#include <ev.h>
+#include <sigsegv.h>
+#include <curses.h>
+#include <termios.h>
+#include <term.h>
+
+#include "v/vere.h"
 
   /**  Jet dependencies.  Minimize these.
   **/
@@ -664,6 +672,7 @@ _print_space(c3_w  feq_w,
     putc(' ', fil_F);
   }
 }
+#endif
 
 /* _print_wall(): print debug wall.
 */
@@ -673,11 +682,11 @@ _print_wall(u2_noun wal,
 {
   while ( u2_yes == u2_dust(wal) ) {
     _print_tape(u2_h(wal), fil_F);
+    putc('\r', fil_F);
     putc('\n', fil_F);
     wal = u2_t(wal);
   }
 }
-#endif
             
 /* u2_tx_slog(): print debug syslog [0-3 tank] 0=debug 3=alarm
 */
@@ -685,7 +694,6 @@ void
 u2_tx_slog(u2_ray  wir_r,
            u2_noun luf)                                           //  retain
 {
-  extern void u2_ve_tank(c3_l tab_l, u2_noun tac);
   {
     if ( u2_yes == u2du(luf) ) {
       u2_noun pri = u2h(luf);
