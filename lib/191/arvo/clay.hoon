@@ -650,7 +650,11 @@
       [mos ..^$]
     ==
   ::
-  ++  come  |=(old=vase (load old))
+  ++  come  
+    |=  old=vase
+    ^-  vane
+    ~|(%load-nest-clay !!)
+  ::
   ++  doze
     |=  [now=@da hen=duct]
     =|  nex=(unit ,@da)
@@ -665,7 +669,7 @@
     |=  new=vase
     ^-  vane
     ?.  (~(nest ut -:!>(ruf)) & p.new)
-      ~|(%load-nest-clay !!)
+      (come new) 
     ..^$(ruf (raft q.new))
   ::
   ++  raze

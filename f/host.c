@@ -586,12 +586,18 @@ _ho_explore_parent(u2_rail ral_r,
     c3_assert(par_d);
     if ( par_d->sub_d ) {
       for ( i_w = 0; par_d->sub_d[i_w].cos_c; i_w++ ) {
-
+#if 0
         if ( (u2_none == par_d->sub_d[i_w].xip) &&
              !strcmp(cos_c, par_d->sub_d[i_w].cos_c) ) 
+#else
+        if ( !strcmp(cos_c, par_d->sub_d[i_w].cos_c) ) 
+#endif
         {
           u2_ho_driver *dry_d = &par_d->sub_d[i_w];
 
+          if ( u2_none != dry_d->xip ) {
+            u2z(dry_d->xip);
+          }
           dry_d->xip = xip;
           free(cos_c);
 
@@ -1012,7 +1018,11 @@ u2_ho_kick(u2_ray   wir_r,
     jet_j = _ho_conquer(wir_r, xip, axe);
 
     if ( 0 == jet_j ) {
-      // printf("no jet: %s\n", u2_ho_cstring(xip));
+#if 0
+      c3_c* str_c = u2_ho_cstring(xip);
+      printf("no jet: %s\r\n", str_c);
+      free(str_c);
+#endif
       return u2_nk_soft(wir_r, u2_rx(wir_r, cor), fol);
     }
     else {

@@ -579,25 +579,6 @@ u2_cm_done()
   u2_rl_rfree(u2_Wire, kit_r);
 }
 
-/* u2_cm_poll(): poll for interrupts, etc.
-*/
-void
-u2_cm_poll()
-{
-  if ( LoomStop ) {
-    LoomStop = 0;
-    if ( LoomIntr ) {
-      LoomIntr = 0;
-
-      fprintf(stderr, "{poll: interrupt}\n");
-      u2_cm_bail(c3__intr);
-    } else {
-      fprintf(stderr, "{poll: stack overflow}\n");
-      u2_cm_bail(c3__wild);
-    }
-  }
-}
- 
 /* u2_cm_sweep(): return bytes leaked; match bytes saved.
 */
 c3_w

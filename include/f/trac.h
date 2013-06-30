@@ -186,8 +186,12 @@
     **/
       /* u2_tx_did_*(): record system actions.
       */
+#if 0
 #       define u2_tx_did(wir_r, wof, det_ws)  \
             ( u2_wrac_be(wir_r, c3_d, wof) += det_ws )
+#else
+#       define u2_tx_did(wir_r, wof, det_ws)
+#endif
 
 #       define u2_tx_did_hop(wir_r, det_ws) u2_tx_did(wir_r, sys.hop_d, det_ws)
 #       define u2_tx_did_jet(wir_r, det_ws) u2_tx_did(wir_r, sys.jet_d, det_ws)

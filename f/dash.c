@@ -58,15 +58,23 @@ u2_ds_find(u2_wire wir_r,
     return u2_none;
   } else {
     u2_rail bas_r = u2_wire_bas_r(wir_r);
-
-    c3_assert(bas_r == 0xf7fffd3);
-
     u2_noun pug = u2_cs_find(bas_r, u2_wire_des_r(wir_r), 0, u2_h(cor));
+    u2_noun out;
 
     if ( u2_none == pug ) {
-      return u2_none;
+      out = u2_none;
     }
-    else return _ds_scan(pug, cor);
+    else out = _ds_scan(pug, cor);
+
+#if 0
+    if ( 0x56dc329c == u2_mug(u2h(cor)) ) {
+      fprintf(stderr, "decmug pug %x, out %x\r\n", pug, out);
+    }
+#endif
+    if ( (u2_none == out) && (u2_none != pug) ) {
+      fprintf(stderr, "half match\r\n");
+    }
+    return out;
   }
 }
 
@@ -222,6 +230,8 @@ _ds_chip(u2_wire wir_r,
           } else {
             if ( u2_none == (led = u2_ds_find(wir_r, ruc)) ) {
               u2_err(wir_r, "clu", clu);
+              fprintf(stderr, "ruc %x, mug %x\r\n", ruc, u2_mug(ruc));
+              u2_err(wir_r, "ruc", ruc);
               u2_ho_warn_here();
               c3_assert(0);
               u2_rz(bas_r, dac); u2_rz(bas_r, bat); return u2_none;
@@ -266,15 +276,24 @@ u2_ds_mine(u2_wire wir_r,
       } else {
         bat_xip = u2_h(u2_t(xip));
 
-        //{c3_c* xip_c=u2_ho_cstring(xip);printf("!%s\r\n",xip_c);free(xip_c);}
+#if 0
+        {  
+          c3_c* xip_c = u2_ho_cstring(xip);
+
+          fprintf(stderr, "!%s - lent %d\r\n", xip_c, u2_ckb_lent(gop));
+          free(xip_c);
+        }
+#endif
         gop = u2_cs_save(bas_r, u2_wire_des_r(wir_r), 0, bat_xip, gop);
         u2_rz(bas_r, gop);
       }
     }
-    else bat_xip = u2_h(u2_t(xip));
+    else {
+      bat_xip = u2_h(u2_t(xip));
+    }
 
     if ( bat_xip != bat ) {
-      u2_noun cyr = u2_rc(wir_r, u2_rx(wir_r, pay), bat_xip);
+      u2_noun cyr = u2_rc(wir_r, bat_xip, u2_rx(wir_r, pay));
 
       if ( u2_none == cyr ) {
         return cor;

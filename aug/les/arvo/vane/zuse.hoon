@@ -987,7 +987,7 @@
               [%thou p=httr]                            ::  raw http response
               [%tory p=(list ,@t)]                      ::  history dump
               [%veer p=? q=@ta r=path s=@t]             ::  install vane
-              [%veil q=@ta]                             ::  revert vane
+              [%volt p=? q=*]                           ::  install kernel
               [%wait p=@da q=path]                      ::  timer wait
               [%wake ~]                                 ::  timer activate
               [%want p=seat q=@ta r=*]                  ::  outgoing request

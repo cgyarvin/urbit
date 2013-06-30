@@ -300,7 +300,6 @@ _nock_cool(u2_noun bus,
   u2_noun hib, gal;
 
   while ( 1 ) {
-    u2_cm_poll();
     u2_tx_did_hop(u2_Wire, 1);
 
     if ( u2_no == u2du(fol) ) {
@@ -549,7 +548,6 @@ _nock_mool(u2_noun  bus,
   c3_assert(u2_yes == *pon);
 
   while ( 1 ) {
-    u2_cm_poll();
     u2_tx_did_hop(u2_Wire, 1);
 
     if ( u2_no == u2du(fol) ) {

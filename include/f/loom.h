@@ -53,11 +53,6 @@
       } u2_cheg;
 
 #   ifdef U2_GLOBAL
-      /* Stop bean for signal handlers (eg, SIGINT).  Obsolete.
-      */
-        volatile sig_atomic_t LoomStop;
-        volatile sig_atomic_t LoomIntr;
-
       /* Memory control structures.
       */
         volatile u2_chit LoomChem[LoomAllPages];          //  memory

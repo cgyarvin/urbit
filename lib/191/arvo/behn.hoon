@@ -841,7 +841,11 @@
   :-  p.yub
   ..^$(deb (~(put by deb) u.whu q.yub))
 ::
-++  come  |=(old=vase (load old))
+++  come  
+  |=  old=vase
+  ^-  vane
+  ~|(%load-nest-bede !!)
+::
 ++  doze
   |=  [now=@da hen=duct]
   ^-  (unit ,@da)

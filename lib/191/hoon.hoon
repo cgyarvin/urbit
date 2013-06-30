@@ -58,7 +58,7 @@
 ::    is written in the previous stage of Hoon.
 ::
 ::    Hoon is a pure, strict, higher-order-typed functional 
-::    language in no particular family.  It does not refer to
+::    language in no particular family.  It does not use
 ::    the lambda calculus or formal logic.  Hoon's mapping
 ::    to Nock is like that of C to assembler - not always
 ::    trivial, always as trivial as possible. 
@@ -4016,6 +4016,10 @@
   ^-  gene
   (rash txt vest)
 ::
+++  reck
+  |=  bon=path
+  (rain bon ((hard ,@t) .^(%cx (weld bon `path`[%hoon ~]))))
+::
 ++  seed
   ^-  vase
   ~+
@@ -7376,21 +7380,24 @@
               %_(+> + (^come +<))
     ++  keep  |=(* (^keep ((hard ,[@da path]) +<)))     ::  4
     ++  load  |=  [@ vase (list ,[p=@tas q=vase])]      ::  86
+              ~&  %hoon-load
               %_(+> + (^load +<))
     ++  peek  |=(* (^peek ((hard ,[@p @da path]) +<)))  ::  87
     ++  poke  |=  * 
-              ^-  [(list ovum) _+>]
+              ^-  [(list ovum) *]
               =>  .(+< ((hard ,[now=@da ovo=ovum]) +<))
               ?:  ?=(%veer -.q.ovo)
                 [~ +>.$(+ (veer +.q.ovo))]
               =^  ova  +>+  (^poke now ovo)
-              |-  ^-  [(list ovum) _+>.^$]
+              |-  ^-  [(list ovum) *]
               ?~  ova
                 [~ +>.^$]
-              =^  avo  +>.^$  $(ova t.ova)
-              ?+  -.q.i.ova  [[i.ova avo] +>.^$]
-                %veer  [avo +>.^$(+ (veer +.q.i.ova))]
-              ==
+              ?:  ?=(%veer -.q.i.ova)
+                $(ova t.ova, +>+.^$ (veer +.q.i.ova))
+              ?:  ?=(%volt -.q.i.ova)
+                [~ (volt +.q.i.ova)]
+              =+(avo=$(ova t.ova) [[i.ova -.avo] +.avo])
+              
     ++  wish  |=(* (^wish ((hard ,@ta) +<)))            ::  20
     --
 |%
@@ -7442,8 +7449,16 @@
       [[lal ves:(vint bud pax txt)] fan]
     ?.  =(lal p.i.fan)  
       [i.fan $(fan t.fan)]
+      ~&  [%vane `@tas`lal pax `@p`(mug txt)]
     [[p.i.fan ves:(ruck:(vent bud q.i.fan) gup pax txt)] t.fan]
   ==
+::
+++  volt  
+  |=  *  ^-  *
+  =>  .(+< ((hard ,[gup=? ken=*]) +<))
+  =+  gat=.*(ken .*(ken [0 86]))
+  =+  sam=[eny bud fan]
+  .*([-.gat [sam +>.gat]] -.gat)
 ::
 ++  wish                                                ::  external compute
   |=  txt=@
