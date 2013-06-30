@@ -7169,6 +7169,8 @@
 ++  duct  (list wire)                                   ::  causal history
 ++  move  ,[p=(unit seat) q=duct r=curd]                ::  typeless move
 ++  ovum  ,[p=wire q=curd]                              ::  typeless ovum
+++  pane  (list ,[p=@tas q=vase])                       ::  kernel modules
+++  pone  (list ,[p=@tas q=vise])                       ::  kernel modules, old
 ++  seat  ,@p                                           ::  network identity 
 ++  vane  $_                                            ::  kernel actor
           |+  [now=@da eny=@ sky=||(* (unit))]          ::  activate
@@ -7223,14 +7225,14 @@
   =+  (vial p.bud)
   |%
   ++  ruck                                              ::  update vase
-    |=  [gub=? pax=path txt=@ta]
+    |=  [pax=path txt=@ta]
     ^+  +>
     =+  arg=`vase`[vin ~2000.1.1 0 =>(~ |+(* ~))]
     =+  rig=(slam ves arg)
     =+  rev=(slam (slap bud (rain pax txt)) `vase`[viz bud])
     =+  syg=(slam rev arg)
     =+  ole=(slap rig [%cnbc %stay])
-    +>.$(ves (slam (slap syg [%cnbc ?:(gub %come %load)]) ole))
+    +>.$(ves (slam (slap syg [%cnbc %load]) ole))
   ::
   ++  wink                                              ::  deploy
     |=  [now=@da eny=@ sky=||(* (unit))]
@@ -7376,14 +7378,19 @@
 =|  eny=@                                               ::  entropy
 =|  fan=(list ,[p=@tas q=vase])
 =<  |%
-    ++  come  |=  [@ vise (list ,[p=@tas q=vise])]      ::  11
-              %_(+> + (^come +<))
+    ++  come  |=  [@ (list ovum) vise pone]             ::  11
+              ^-  [(list ovum) _+>]
+              ~&  %hoon-come
+              =^  rey  +>+  (^come +<)
+              [rey +>.$]
     ++  keep  |=(* (^keep ((hard ,[@da path]) +<)))     ::  4
-    ++  load  |=  [@ vase (list ,[p=@tas q=vase])]      ::  86
+    ++  load  |=  [@ (list ovum) vase pane]             ::  86
+              ^-  [(list ovum) _+>]
               ~&  %hoon-load
-              %_(+> + (^load +<))
+              =^  rey  +>+  (^load +<)
+              [rey +>.$]
     ++  peek  |=(* (^peek ((hard ,[@p @da path]) +<)))  ::  87
-    ++  poke  |=  * 
+    ++  poke  |=  *                                     ::  42
               ^-  [(list ovum) *]
               =>  .(+< ((hard ,[now=@da ovo=ovum]) +<))
               ?:  ?=(%veer -.q.ovo)
@@ -7395,20 +7402,16 @@
               ?:  ?=(%veer -.q.i.ova)
                 $(ova t.ova, +>+.^$ (veer +.q.i.ova))
               ?:  ?=(%volt -.q.i.ova)
-                [~ (volt +.q.i.ova)]
+                (volt t.ova +.q.i.ova)
               =+(avo=$(ova t.ova) [[i.ova -.avo] +.avo])
               
     ++  wish  |=(* (^wish ((hard ,@ta) +<)))            ::  20
     --
 |%
 ++  come                                                ::  load incompatible
-  |=  [yen=@ dub=vise nyf=(list ,[p=@tas q=vise])]
-  ^+  +>
-  %_  +> 
-    eny  yen
-    bud  (slim dub)
-    fan  (turn nyf |=([a=@tas b=vise] [a (slim b)]))
-  ==
+  |=  [yen=@ ova=(list ovum) dub=vise nyf=pone]
+  ^+  [ova +>]
+  (load yen ova (slim dub) (turn nyf |=([a=@tas b=vise] [a (slim b)])))
 ::
 ++  keep                                                ::  wakeup delay
   |=  [now=@da hap=path]
@@ -7416,8 +7419,18 @@
   (~(doos (is eny bud fan) now) hap)
 ::
 ++  load                                                ::  load compatible
-  |=  [yen=@ dub=vase nyf=(list ,[p=@tas q=vase])]
-  %_(+> eny yen, bud dub, fan nyf)
+  |=  [yen=@ ova=(list ovum) dub=vase nyf=pane]
+  ^+  [ova +>]
+  =:  eny  yen
+      bud  dub
+      fan  nyf
+    ==
+  |-  ^+  [ova +>.^$]
+  ?~  ova
+    [~ +>.^$]
+  ?:  ?=(%veer -.q.i.ova)
+    $(ova t.ova, +>.^$ (veer +.q.i.ova))
+  =+(avo=$(ova t.ova) [[i.ova -.avo] +.avo])
 ::
 ++  peek                                                ::  external inspect
   |=  [our=@p now=@da hap=path]
@@ -7434,7 +7447,7 @@
 ::
 ++  veer                                                ::  install vane/tang
   |=  *
-  =>  .(+< ((hard ,[gup=? lal=@ta pax=path txt=@t]) +<))
+  =>  .(+< ((hard ,[lal=@ta pax=path txt=@t]) +<))
   ?:  =(%% lal)
     ~&  [%tang pax `@p`(mug txt)]
     =+  gen=(rain pax txt) 
@@ -7450,15 +7463,18 @@
     ?.  =(lal p.i.fan)  
       [i.fan $(fan t.fan)]
       ~&  [%vane `@tas`lal pax `@p`(mug txt)]
-    [[p.i.fan ves:(ruck:(vent bud q.i.fan) gup pax txt)] t.fan]
+    [[p.i.fan ves:(ruck:(vent bud q.i.fan) pax txt)] t.fan]
   ==
 ::
 ++  volt  
-  |=  *  ^-  *
-  =>  .(+< ((hard ,[gup=? ken=*]) +<))
+  |=  [ova=(list ovum) ken=*]
+  ^-  [p=(list ovum) q=*]
   =+  gat=.*(ken .*(ken [0 86]))
-  =+  sam=[eny bud fan]
-  .*([-.gat [sam +>.gat]] -.gat)
+  =+  sam=[eny ova bud fan]
+  ~&  %volt-ready
+  =+  raw=.*([-.gat [sam +>.gat]] -.gat)
+  ~&  %volt-fired
+  [((list ovum) -.raw) +.raw]
 ::
 ++  wish                                                ::  external compute
   |=  txt=@

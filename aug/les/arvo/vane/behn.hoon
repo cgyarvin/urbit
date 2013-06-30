@@ -495,7 +495,7 @@
           %mx  |-  ^+  +>.^$
                ?~  p.gud  +>.^$
                $(p.gud t.p.gud, +>.^$ ^$(gud i.p.gud))
-          %ok  (gram [/c ~] %edit who p.gud q.gud)
+          %ok  (gram [/c ~] %unix who p.gud q.gud)
           %te  (gram ~ %tell p.gud)
           %th  (gram ~ %that p.gud)
           %xx  (gram ~ p.gud)
@@ -841,7 +841,11 @@
   :-  p.yub
   ..^$(deb (~(put by deb) u.whu q.yub))
 ::
-++  come  |=(old=vase (load old))
+++  come  
+  |=  old=vase
+  ^-  vane
+  ~|(%load-nest-bede !!)
+::
 ++  doze
   |=  [now=@da hen=duct]
   ^-  (unit ,@da)

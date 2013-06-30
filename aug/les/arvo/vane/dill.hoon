@@ -388,7 +388,11 @@
       ==
     --
   ::
-  ++  come  |=(old=vase (load old))
+  ++  come  
+    |=  old=vase 
+    ^-  vane
+    ~|(%load-nest-dill !!)
+  ::
   ++  doze
     |=  [now=@da hen=duct]
     ^-  (unit ,@da)
@@ -399,7 +403,7 @@
     |=  new=vase
     ^-  vane
     ?.  (~(nest ut -:!>([dub wyg])) & p.new)
-      ~|(%load-nest-dill !!)
+      (come new)
     %_  ..^$
       dub  ((map duct (list seat)) -.q.new)
       wyg  ((map seat yard) +.q.new)

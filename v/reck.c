@@ -317,8 +317,7 @@ _reck_init_veer(u2_reck* rec_u, u2_noun nam, u2_noun pax, u2_noun txt)
       u2_noun ovo, pro, rog;
 
       pax = u2nc(c3__arvo, pax);
-      ovo = u2nc(u2nc(c3__gold, u2_nul), u2nc(c3__veer, 
-                                              u2nq(u2_yes, nam, pax, txt)));
+      ovo = u2nc(u2nc(c3__gold, u2_nul), u2nc(c3__veer, u2nt(nam, pax, txt)));
 
       pro = _reck_nock_poke(rec_u, ovo);
 

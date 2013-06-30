@@ -533,16 +533,6 @@
           [~ p.fav] 
       $(fav q.fav)
     ::
-        %edit
-      =.  whu  
-          ?^  whu  whu
-          ?.  =(%gold (adit hen))  ~
-          [~ p.fav] 
-      ?>  =(u.whu p.fav)
-      =^  mos  ruf  
-        abet:zoot:(exec:(di:wake:(un u.whu now ruf) q.fav) hen now [%& r.fav])
-      [mos ..^$]
-    ::
         %keep
       ::  [[%tell %0 %leaf "clay: home for {~(rend co ~ %p u.whu)}"] ~]
       [~ ..^$(fat.ruf (~(put by fat.ruf) u.whu *room))]
@@ -558,6 +548,16 @@
       ?>  !=(u.whu q.fav) 
       =^  mos  ruf
         abet:zoom:(pull:(fa:(un u.whu now ruf) p.fav) hen q.fav)
+      [mos ..^$]
+    ::
+        %unix
+      =.  whu  
+          ?^  whu  whu
+          ?.  =(%gold (adit hen))  ~
+          [~ p.fav] 
+      ?>  =(u.whu p.fav)
+      =^  mos  ruf  
+        abet:zoot:(exec:(di:wake:(un u.whu now ruf) q.fav) hen now [%& r.fav])
       [mos ..^$]
     ::
         %warp
@@ -650,7 +650,11 @@
       [mos ..^$]
     ==
   ::
-  ++  come  |=(old=vase (load old))
+  ++  come  
+    |=  old=vase
+    ^-  vane
+    ~|(%load-nest-clay !!)
+  ::
   ++  doze
     |=  [now=@da hen=duct]
     =|  nex=(unit ,@da)
@@ -665,7 +669,7 @@
     |=  new=vase
     ^-  vane
     ?.  (~(nest ut -:!>(ruf)) & p.new)
-      ~|(%load-nest-clay !!)
+      (come new) 
     ..^$(ruf (raft q.new))
   ::
   ++  raze

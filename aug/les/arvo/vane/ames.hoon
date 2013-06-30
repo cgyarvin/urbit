@@ -1249,7 +1249,12 @@
         (knap whu tea hen fav)
       [duy ..^$]
     ::
-    ++  come  |=(old=vase (load old))
+    ++  come  
+      |=  old=vase
+      ^-  vane
+      ~&  %ames-come
+      ~|(%load-nest-ames !!)
+    ::
     ++  doze
       |=  [now=@da hen=duct]
       =|  doz=(unit ,@da)
@@ -1269,8 +1274,9 @@
     ++  load
       |=  new=vase
       ^-  vane
+      ~&  %ames-load
       ?.  (~(nest ut -:!>(fox)) & p.new)
-        ~|(%load-nest-ames !!)
+        (come new)
       ..^$(fox ~(boot am [now (fort q.new)]))
     ::
     ++  raze  
