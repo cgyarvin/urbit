@@ -935,7 +935,6 @@
               [%deem p=seat q=card]                     ::  external identity
               [%dire p=@tas q=dram]                     ::  apply directory
               [%dump p=(list ,@t)]                      ::  raw text lines
-              [%edit p=@p q=@tas r=nori]                ::  commit edits
               [%file p=@tas q=@]                        ::  apply atomic file
               [%fail p=tape]                            ::  report failure
               [%hail ~]                                 ::  welcome user
@@ -986,6 +985,7 @@
               [%this p=httq]                            ::  secure raw htreq
               [%thou p=httr]                            ::  raw http response
               [%tory p=(list ,@t)]                      ::  history dump
+              [%unix p=@p q=@tas r=nori]                ::  commit edits
               [%veer p=? q=@ta r=path s=@t]             ::  install vane
               [%volt p=? q=*]                           ::  install kernel
               [%wait p=@da q=path]                      ::  timer wait

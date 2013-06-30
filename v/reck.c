@@ -72,19 +72,6 @@ u2_reck_wish(u2_reck* rec_u, c3_c* str_c)
   return _reck_nock_wish(rec_u, u2_ci_string(str_c));
 }
 
-/* _reck_root(): tool from boot.
-*/
-static u2_noun
-_reck_root(const c3_c *txt_c, u2_noun ken)
-{
-  c3_c *ful_c = alloca(7 + strlen(txt_c));
-
-  strcpy(ful_c, "=>  !%  ");
-  strcat(ful_c, txt_c);
-
-  return u2_cn_nock(0, u2_cn_nock(u2_ci_string(ful_c), u2k(ken)));
-}
-
 /* _reck_ream(): ream with toy.
 */
 static u2_noun
@@ -154,33 +141,12 @@ _reck_hard(u2_reck* rec_u, u2_noun vax, const c3_c* txt_c, u2_noun sam)
   return u2_cn_mung(_reck_gate(rec_u, vax, txt_c), sam);
 }
 
-/* _reck_coin_da(): print atom as date.
+/* _reck_scot(): print atom.
 */
 static u2_noun
-_reck_coin_da(u2_reck* rec_u, u2_noun ato)
+_reck_scot(u2_reck* rec_u, u2_noun dim)
 {
-  return _reck_hard
-    (rec_u, u2k(rec_u->syd), "|=([a=@] ~(rent co ~ %da a))", ato);
-}
-
-#if 0
-/* _reck_coin_ud(): print atom as decimal.
-*/
-static u2_noun
-_reck_coin_ud(u2_reck* rec_u, u2_noun ato)
-{
-  return _reck_hard
-    (rec_u, u2k(rec_u->syd), "|=([a=@] ~(rent co ~ %ud a))", ato);
-}
-#endif
-
-/* _reck_coin_uv(): print atom as base32.
-*/
-static u2_noun
-_reck_coin_uv(u2_reck* rec_u, u2_noun ato)
-{
-  return _reck_hard
-    (rec_u, u2k(rec_u->syd), "|=([a=@] ~(rent co ~ %uv a))", ato);
+  return u2_cn_mung(u2k(rec_u->toy.scot), dim);
 }
 
 /* _reck_soft(): function against vase, producing vase.
@@ -270,7 +236,7 @@ u2_reck_time(u2_reck* rec_u)
   rec_u->now = u2_time_in_tv(&tim_tv);
 
   u2z(rec_u->wen);
-  rec_u->wen = _reck_coin_da(rec_u, u2k(rec_u->now));
+  rec_u->wen = _reck_scot(rec_u, u2nc(c3__da, u2k(rec_u->now)));
 }
 
 /* u2_reck_wind(): set the reck time artificially.
@@ -282,7 +248,7 @@ u2_reck_wind(u2_reck* rec_u, u2_noun now)
   rec_u->now = now;
 
   u2z(rec_u->wen);
-  rec_u->wen = _reck_coin_da(rec_u, u2k(rec_u->now));
+  rec_u->wen = _reck_scot(rec_u, u2nc(c3__da, u2k(rec_u->now)));
 }
 
 /* u2_reck_numb(): set the instance number.
@@ -298,7 +264,7 @@ u2_reck_numb(u2_reck* rec_u)
                    u2_mug(0x7fffffff & ((c3_w) tp.tv_usec)) ^
                    u2_mug(getpid()));
   u2z(rec_u->sen);        
-  rec_u->sen = _reck_coin_uv(rec_u, rec_u->sev_l);
+  rec_u->sen = _reck_scot(rec_u, u2nc(c3__uv, rec_u->sev_l));
 }
 
 #if 0
@@ -368,7 +334,70 @@ _reck_init_veer(u2_reck* rec_u, u2_noun nam, u2_noun pax, u2_noun txt)
   } 
 }
 
-/* u2_reck_init(): load the reck engine, from kernel.
+/* u2_reck_cold(): load full arvo with vanes, from new solid state. 
+*/
+void
+u2_reck_cold(u2_reck* rec_u, c3_w kno_w)
+{
+  memset(rec_u, 0, sizeof(*rec_u));
+  rec_u->kno_w = kno_w;
+  rec_u->rno_w = 0;
+
+  rec_u->own = 0;
+  rec_u->now = 0;
+  rec_u->wen = 0;
+  rec_u->sen = 0;
+  rec_u->our = 0;
+  rec_u->roe = 0;
+  rec_u->key = 0;
+
+  {
+    u2_noun pot;
+    c3_c    ful_c[2048];
+    //  u2_noun hof = u2_cn_mung(u2k(rec_u->toy.hoof), rec_u->kno_w);
+    //  c3_c* hof_c = u2_cr_string(hof);
+
+    sprintf(ful_c, "%s/%d/arvo.pill", u2_System, rec_u->kno_w);
+    if ( 0 == (pot = u2_walk_load(ful_c)) ) {
+      perror(ful_c);
+      exit(1);
+    }
+    rec_u->ken = 0;
+    rec_u->roc = u2_cke_cue(pot); 
+  }
+
+  rec_u->toy.rain = u2_reck_wish(rec_u, "rain");
+  rec_u->toy.ream = u2_reck_wish(rec_u, "ream");
+  rec_u->toy.slay = u2_reck_wish(rec_u, "slay");
+  rec_u->toy.slam = u2_reck_wish(rec_u, "slam");
+  rec_u->toy.slap = u2_reck_wish(rec_u, "slap");
+  rec_u->toy.slop = u2_reck_wish(rec_u, "slop");
+  rec_u->toy.scot = u2_reck_wish(rec_u, "scot");
+  rec_u->toy.spat = u2_reck_wish(rec_u, "spat");
+  rec_u->toy.stab = u2_reck_wish(rec_u, "stab");
+  rec_u->toy.turf = u2_reck_wish(rec_u, "turf");
+  rec_u->toy.tuft = u2_reck_wish(rec_u, "tuft");
+  rec_u->toy.wash = u2_reck_wish(rec_u, "wash");
+  rec_u->toy.hoof = u2_reck_wish(rec_u, "hoof");
+  rec_u->toy.mook = u2_reck_wish(rec_u, "mook");
+
+  rec_u->toy.sham = u2_reck_wish(rec_u, "sham");
+  rec_u->toy.shen = u2_reck_wish(rec_u, "en:crya");
+  rec_u->toy.shed = u2_reck_wish(rec_u, "de:crya");
+  rec_u->toy.cyst = u2_reck_wish(rec_u, "cyst");
+
+  u2_reck_time(rec_u);
+  u2_reck_numb(rec_u);
+  {
+    c3_c* dyt_c = u2_cr_string(rec_u->wen);
+
+    printf("time: %s\n", dyt_c);
+    free(dyt_c);
+  }
+}
+
+/* u2_reck_init(): load the reck engine, from old staged kernel.
+ *
 */
 void
 u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
@@ -392,7 +421,6 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     rec_u->ken = ken;
     rec_u->roc = u2_cn_nock(0, u2k(ken));
 
-    rec_u->syd = u2_reck_wish(rec_u, "seed");
     rec_u->toy.rain = u2_reck_wish(rec_u, "rain");
     rec_u->toy.ream = u2_reck_wish(rec_u, "ream");
     rec_u->toy.slay = u2_reck_wish(rec_u, "slay");
@@ -763,7 +791,7 @@ u2_reck_sync(u2_reck* rec_u)
 /* u2_reck_boot(): boot the reck engine (unprotected).
 */
 void
-u2_reck_boot(u2_reck* rec_u)
+u2_reck_boot(u2_reck* rec_u, u2_bean ice)
 {
   u2_noun hoe;
 
@@ -779,9 +807,14 @@ u2_reck_boot(u2_reck* rec_u)
     exit(1);
   } 
   else {
-    u2_reck_init(rec_u, 
-                 u2_Host.kno_w, 
-                 u2k(u2_Host.ver_e[u2_Host.kno_w].ken));
+    if ( u2_yes == ice ) {
+      u2_reck_cold(rec_u, u2_Host.kno_w);
+    }
+    else {
+      u2_reck_init(rec_u, 
+                   u2_Host.kno_w, 
+                   u2k(u2_Host.ver_e[u2_Host.kno_w].ken));
+    }
 
     u2_cm_done();
   

@@ -190,7 +190,7 @@ _sync_desk_m(u2_reck* rec_u, u2_noun our, u2_noun pod, u2_noun map, u2_noun ova)
       u2_noun det = _sync_edit(rec_u, pod, u2k(bok), u2k(qn_map), u2_nul);
 
       if ( u2_nul != det ) {
-        u2_noun fav = u2nq(c3__edit, our, u2k(bok), u2nc(u2_yes, det));
+        u2_noun fav = u2nq(c3__unix, our, u2k(bok), u2nc(u2_yes, det));
 
         ova = u2nc(u2nc(u2nq(c3__gold, c3__sync, u2k(rec_u->sen), u2_nul), fav),
                    ova);

@@ -41,7 +41,7 @@
           u2_noun slap;                   //  layer ([vase gene] -> vase)
           u2_noun slop;                   //  cell ([vase vase] -> vase)
           u2_noun slay;                   //  text to coin
-          u2_noun scot;                   //  mole to text
+          u2_noun scot;                   //  dime to text
           u2_noun spat;                   //  path to text
           u2_noun stab;                   //  text to path
           u2_noun turf;                   //  utf8 to utf32
@@ -62,8 +62,8 @@
         u2_noun roe;                      //  temporary unsaved events
         u2_noun key;                      //  log key, or 0
 
-        u2_noun ken;                      //  kernel formula
-        u2_noun syd;                      //  kernel seed 
+        u2_noun ken;                      //  kernel formula (for now)
+        //  u2_noun syd;                      //  kernel seed 
         u2_noun roc;                      //  rotor core
       } u2_reck;
 

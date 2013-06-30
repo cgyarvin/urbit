@@ -491,7 +491,7 @@
       /* u2_reck_boot(): boot the reck engine (unprotected).
       */
         void
-        u2_reck_boot(u2_reck* rec_u);
+        u2_reck_boot(u2_reck* rec_u, u2_bean ice);
 
       /* u2_reck_launch(): launch the reck engine (unprotected).
       */

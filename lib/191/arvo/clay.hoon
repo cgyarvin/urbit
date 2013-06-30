@@ -533,16 +533,6 @@
           [~ p.fav] 
       $(fav q.fav)
     ::
-        %edit
-      =.  whu  
-          ?^  whu  whu
-          ?.  =(%gold (adit hen))  ~
-          [~ p.fav] 
-      ?>  =(u.whu p.fav)
-      =^  mos  ruf  
-        abet:zoot:(exec:(di:wake:(un u.whu now ruf) q.fav) hen now [%& r.fav])
-      [mos ..^$]
-    ::
         %keep
       ::  [[%tell %0 %leaf "clay: home for {~(rend co ~ %p u.whu)}"] ~]
       [~ ..^$(fat.ruf (~(put by fat.ruf) u.whu *room))]
@@ -558,6 +548,16 @@
       ?>  !=(u.whu q.fav) 
       =^  mos  ruf
         abet:zoom:(pull:(fa:(un u.whu now ruf) p.fav) hen q.fav)
+      [mos ..^$]
+    ::
+        %unix
+      =.  whu  
+          ?^  whu  whu
+          ?.  =(%gold (adit hen))  ~
+          [~ p.fav] 
+      ?>  =(u.whu p.fav)
+      =^  mos  ruf  
+        abet:zoot:(exec:(di:wake:(un u.whu now ruf) q.fav) hen now [%& r.fav])
       [mos ..^$]
     ::
         %warp

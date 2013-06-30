@@ -236,6 +236,7 @@
 #   define c3__ctl    c3_s3('c','t','l')
 #   define c3__cut    c3_s3('c','u','t')
 #   define c3__cyl    c3_s3('c','y','l')
+#   define c3__da     c3_s2('d','a')
 #   define c3__dago   c3_s4('d','a','g','o')
 #   define c3__dant   c3_s4('d','a','n','t')
 #   define c3__dast   c3_s4('d','a','s','t')

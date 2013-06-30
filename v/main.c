@@ -44,6 +44,7 @@ struct _u2_opts {
   c3_w    kno_w;
   u2_bean abo;
   u2_bean gab;
+  u2_bean ice;
   u2_bean pro;
   u2_bean veb;
   u2_bean rez;
@@ -59,6 +60,7 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
 
   u2_Opts.abo = u2_no;
   u2_Opts.gab = u2_no;
+  u2_Opts.ice = u2_no;
   u2_Opts.pro = u2_no;
   u2_Opts.veb = u2_yes;
   u2_Opts.rez = u2_no;
@@ -69,6 +71,7 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
       case 'a': { u2_Opts.abo = u2_yes; break; }
       case 'c': { u2_Opts.nuu = u2_yes; break; }
       case 'g': { u2_Opts.gab = u2_yes; break; }
+      case 's': { u2_Opts.ice = u2_yes; break; }
       case 'k': {
         c3_w arg_w = atoi(optarg);
 
@@ -206,7 +209,6 @@ main(c3_i   argc,
 
         u2_Host.cpu_c = u2_Opts.cpu_c;
         u2_Host.arv_u = u2_Arv;
-        c3_assert(0 != u2_Host.arv_u->ken);
 
         u2_Arv->ova.egg_u = u2_Arv->ova.geg_u = 0;
 
@@ -298,7 +300,7 @@ main(c3_i   argc,
         }
 
         if ( 0 != u2_Host.ver_e[kno_w].ken ) {
-          u2_reck_boot(u2_Host.arv_u);
+          u2_reck_boot(u2_Host.arv_u, u2_Opts.ice);
         }
       }
       u2_cm_done();

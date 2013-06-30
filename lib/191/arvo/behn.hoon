@@ -495,7 +495,7 @@
           %mx  |-  ^+  +>.^$
                ?~  p.gud  +>.^$
                $(p.gud t.p.gud, +>.^$ ^$(gud i.p.gud))
-          %ok  (gram [/c ~] %edit who p.gud q.gud)
+          %ok  (gram [/c ~] %unix who p.gud q.gud)
           %te  (gram ~ %tell p.gud)
           %th  (gram ~ %that p.gud)
           %xx  (gram ~ p.gud)
