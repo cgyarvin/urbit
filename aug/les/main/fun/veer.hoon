@@ -3,5 +3,5 @@
 ::
 |=  *
 |=  *
-|=  [gub=? vam=@tas pax=path ~]
-[[[%xx [%veer gub vam pax (,@ .^(%cx pax))]] ~] ~]
+|=  [vam=@tas pax=path ~]
+[[[%xx [%veer vam pax (,@ .^(%cx pax))]] ~] ~]

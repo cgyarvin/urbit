@@ -38,4 +38,4 @@
 :_  ~  :_  ~
 =+  pac=(jam [ken all])
 ~&  %solid-finished
-[%xx %save [cav %data ~] pac]
+[%xx %save [%urbit %pill ~] pac]

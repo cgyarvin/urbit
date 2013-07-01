@@ -1,4 +1,4 @@
-::
+!:
 ::  behn (4b), shell
 ::
 |=  pit=vase

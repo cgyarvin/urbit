@@ -953,7 +953,6 @@
               [%lane p=lane]                            ::  set public route
               [%line p=@t]                              ::  source line
               [%ling ~]                                 ::  rotate interface
-              [%link p=@tas q=seat r=@tas s=case]       ::  link request
               [%load p=@tas q=path]                     ::  request atomic file
               [%logn p=@p q=chum]                       ::  name hashed-pass
               [%logo ~]                                 ::  logout
@@ -968,7 +967,7 @@
               [%pace p=@ud]                             ::  compute background
               [%pipe p=(unit ,[p=calf q=(list)])]       ::  pipeline data
               [%pour p=path q=dram]                     ::  write directory
-              [%pull p=seat q=disc]                     ::  pull remote desk
+              [%pull p=seat q=disc r=(list disc)]       ::  pull remote desk
               [%pump ~]                                 ::  produce packets
               [%quid p=seat q=path r=(unit ,*)]         ::  delivery
               [%rein p=? q=path]                        ::  push/replace kernel
@@ -1272,6 +1271,7 @@
 ++  rede                                                ::  mirror
           $:  lim=@da                                   ::  updated to
               ask=(unit ,@da)                           ::  requested to
+              pal=(list disc)                           ::  propagated to
               qyx=cult                                  ::  subscriptions
               dom=dome                                  ::  state
           ==                                            ::

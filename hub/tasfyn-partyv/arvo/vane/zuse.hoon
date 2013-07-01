@@ -1,4 +1,4 @@
-::
+!:
 ::  zuse (3), standard library (tang)
 ::
 |%
@@ -935,7 +935,6 @@
               [%deem p=seat q=card]                     ::  external identity
               [%dire p=@tas q=dram]                     ::  apply directory
               [%dump p=(list ,@t)]                      ::  raw text lines
-              [%edit p=@p q=@tas r=nori]                ::  commit edits
               [%file p=@tas q=@]                        ::  apply atomic file
               [%fail p=tape]                            ::  report failure
               [%hail ~]                                 ::  welcome user
@@ -954,7 +953,6 @@
               [%lane p=lane]                            ::  set public route
               [%line p=@t]                              ::  source line
               [%ling ~]                                 ::  rotate interface
-              [%link p=@tas q=seat r=@tas s=case]       ::  link request
               [%load p=@tas q=path]                     ::  request atomic file
               [%logn p=@p q=chum]                       ::  name hashed-pass
               [%logo ~]                                 ::  logout
@@ -969,13 +967,14 @@
               [%pace p=@ud]                             ::  compute background
               [%pipe p=(unit ,[p=calf q=(list)])]       ::  pipeline data
               [%pour p=path q=dram]                     ::  write directory
-              [%pull p=seat q=disc]                     ::  pull remote desk
+              [%pull p=seat q=disc r=(list disc)]       ::  pull remote desk
               [%pump ~]                                 ::  produce packets
               [%quid p=seat q=path r=(unit ,*)]         ::  delivery
               [%rein p=? q=path]                        ::  push/replace kernel
               [%rend ~]                                 ::  pop kernel
               [%save p=path q=@]                        ::  write atomic file
               [%send p=lane q=@]                        ::  transmit packet
+              [%sith p=@p q=@t r=@uw]                   ::  imperial generator
               [%sync ~]                                 ::  reset soft state
               [%talk p=tank]                            ::  show on console
               [%tell p=(list ,@t)]                      ::  dump lines
@@ -986,8 +985,9 @@
               [%this p=httq]                            ::  secure raw htreq
               [%thou p=httr]                            ::  raw http response
               [%tory p=(list ,@t)]                      ::  history dump
-              [%veer p=? q=@ta r=path s=@t]             ::  install vane
-              [%volt p=? q=*]                           ::  install kernel
+              [%unix p=@p q=@tas r=nori]                ::  commit edits
+              [%veer p=@ta q=path r=@t]                 ::  install vane
+              [%volt p=*]                               ::  upgrade kernel
               [%wait p=@da q=path]                      ::  timer wait
               [%wake ~]                                 ::  timer activate
               [%want p=seat q=@ta r=*]                  ::  outgoing request
@@ -1271,6 +1271,7 @@
 ++  rede                                                ::  mirror
           $:  lim=@da                                   ::  updated to
               ask=(unit ,@da)                           ::  requested to
+              pal=(list disc)                           ::  propagated to
               qyx=cult                                  ::  subscriptions
               dom=dome                                  ::  state
           ==                                            ::

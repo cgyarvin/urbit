@@ -1,5 +1,5 @@
 !:
-::  /=main=/fun/remix/hoon
+::  /=main=/fun/reset/hoon
 ::
 |=  [who=seat est=time eny=@uw was=path]
 |=  *
@@ -11,12 +11,12 @@
 =+  cav=(scot (dime lok))
 =+  top=`path`[(scot %p who) %arvo cav ~]
 =+  pax=`path`(weld top `path`[%hoon ~])
-~&  %remix-start
+~&  %reset-start
 =+  gen=(reck pax)
-~&  %remix-parsed
+~&  %reset-parsed
 =+  ken=q:(~(mint ut %noun) %noun gen)
 =+  all=.*(0 ken)
-~&  %remix-compiled
+~&  %reset-compiled
 :_  ~
 :-  [%xx %volt all]
 ^-  (list gift)

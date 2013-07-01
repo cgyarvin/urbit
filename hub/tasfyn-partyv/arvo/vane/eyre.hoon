@@ -60,7 +60,10 @@
       ==
     ==
   ::
-  ++  come  |=(old=vase (load old))
+  ++  come  
+    |=  old=vase
+    ^-  vane
+    ~|(%load-nest-eyre !!)
   ::
   ++  doze
     |=  [now=@da hen=duct]
@@ -72,7 +75,7 @@
     |=  new=vase
     ^-  vane
     ?.  (~(nest ut -:!>(seh)) & p.new)
-      ~|(%load-nest-dill !!)
+      (come new)
     ..^$(seh ((list ,[p=host q=seat]) q.new))
   ::
   ++  raze  

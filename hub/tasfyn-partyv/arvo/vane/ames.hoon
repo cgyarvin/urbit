@@ -1249,7 +1249,11 @@
         (knap whu tea hen fav)
       [duy ..^$]
     ::
-    ++  come  |=(old=vase (load old))
+    ++  come  
+      |=  old=vase
+      ^-  vane
+      ~|(%load-nest-ames !!)
+    ::
     ++  doze
       |=  [now=@da hen=duct]
       =|  doz=(unit ,@da)
@@ -1270,7 +1274,7 @@
       |=  new=vase
       ^-  vane
       ?.  (~(nest ut -:!>(fox)) & p.new)
-        ~|(%load-nest-ames !!)
+        (come new)
       ..^$(fox ~(boot am [now (fort q.new)]))
     ::
     ++  raze  
@@ -1299,8 +1303,15 @@
     ?-    -.bon
         %beer
       :_  fox
-      :~  [[~ p.bon] [/c hen] [%keep p.bon]]
+      :*  [[~ p.bon] [/c hen] [%keep p.bon]]
           [[~ p.bon] hen [%init p.bon]]
+          =+  bos=(sein p.bon)
+          ?:  =(bos p.bon)  ~
+          :~  [[~ p.bon] [/c hen] [%pull bos %main ~[%main]]]
+              [[~ p.bon] [/c hen] [%pull bos %doc ~[%doc]]]
+              [[~ p.bon] [/c hen] [%pull bos %try ~[%try]]]
+              [[~ p.bon] [/c hen] [%pull bos %arvo ~[%arvo]]]
+          ==
       ==
     ::
         %coke  
@@ -1330,7 +1341,7 @@
               2  " has no words for what just happened"
               3  " is in the building"
               4  " remains quietly present"
-              5  " may be thinking"
+              5  " isn't into drama"
               6  " appreciates the silence"
               7  " pauses to consider"
             ==

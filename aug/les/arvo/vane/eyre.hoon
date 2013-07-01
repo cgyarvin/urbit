@@ -1,4 +1,4 @@
-::
+!:
 ::  eyre (4e), http server
 ::
   |=  pit=vase

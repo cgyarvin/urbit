@@ -148,6 +148,7 @@
       %thee  (heat hen p.fav)
       %went  abet:lash:(lean tea hen fav)
       %writ  abet:lash:(loam tea hen +.fav)
+      %wart  abet:lash:(loin tea hen +.fav)
     ==
   ::
   ++  loam                                              ::    loam:be

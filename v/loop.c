@@ -437,6 +437,8 @@ top:
 #if 1
     if ( c3__hear == u2h(u2t(ovo)) ) {
       _lo_punt(rec_u, 2, u2k(u2t(gon)));
+
+      uL(fprintf(uH, "hole!\r\n"));
       bov = u2nc(u2k(u2h(ovo)), u2nc(c3__hole, u2k(u2t(u2t(ovo)))));
     }
     else 
@@ -1309,8 +1311,8 @@ _lo_copy(u2_reck* rec_u,
          u2_noun  syd,
          u2_noun  lok)
 {
-  _lo_link(rec_u, syd, foh, syd, lok);
   _lo_pull(rec_u, foh, syd);
+  //  _lo_link(rec_u, syd, foh, syd, lok);
 }
 
 /* _lo_zen(): get OS entropy.
@@ -1339,7 +1341,7 @@ u2_lo_loop(u2_reck* rec_u,
     if ( u2_nul == imp ) {
       uL(fprintf(uH, "generating 2048-bit RSA pair...\n"));
 
-      pig = u2nq(c3__make, u2_ci_string("Anonymous Coward"), 11, ten);
+      pig = u2nq(c3__make, u2_ci_string("ephemeral"), 11, ten);
     }
     else {
       u2_noun whu = u2_cn_mung(u2k(rec_u->toy.slaw), 
@@ -1376,10 +1378,10 @@ u2_lo_loop(u2_reck* rec_u,
   if ( u2_yes == nuu ) {
     u2_term_ef_boil(rec_u, rec_u->sev_l, 1);
 
-    _lo_copy(rec_u, 0, c3__main, u2nc(c3__ud, 1)); 
-    _lo_copy(rec_u, 0, c3__try, u2nc(c3__ud, 1)); 
-    _lo_copy(rec_u, 0, c3__doc, u2nc(c3__ud, 1)); 
-    _lo_copy(rec_u, 0, c3__arvo, u2nc(c3__ud, 1)); 
+    //  _lo_copy(rec_u, 0, c3__main, u2nc(c3__ud, 1)); 
+    //  _lo_copy(rec_u, 0, c3__try, u2nc(c3__ud, 1)); 
+    //  _lo_copy(rec_u, 0, c3__doc, u2nc(c3__ud, 1)); 
+    //  _lo_copy(rec_u, 0, c3__arvo, u2nc(c3__ud, 1)); 
   }
   _lo_init(rec_u);
   {
