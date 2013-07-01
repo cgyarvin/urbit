@@ -24,6 +24,14 @@
 
 #define AMES
 
+#if defined(U2_OS_linux)
+#include <stdio_ext.h>
+#define fpurge(fd) __fpurge(fd)
+#define DEVRANDOM "/dev/urandom"
+#else
+#define DEVRANDOM "/dev/random"
+#endif
+
 /* _lo_init(): initialize I/O across the process.
 */
 static void
@@ -745,7 +753,7 @@ _lo_bask(c3_c* pop_c, u2_bean may)
 static void
 _lo_rand(u2_reck* rec_u, c3_w* rad_w)
 {
-  c3_i fid_i = open("/dev/random", O_RDONLY);
+  c3_i fid_i = open(DEVRANDOM, O_RDONLY);
 
   if ( 32 != read(fid_i, (c3_y*) rad_w, 32) ) {
     c3_assert(!"lo_rand");
