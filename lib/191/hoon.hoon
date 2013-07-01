@@ -2970,6 +2970,12 @@
   --
 ++  scot  |=(mol=dime ~(rent co %% mol))
 ++  scow  |=(mol=dime ~(rend co %% mol))
+++  slaw
+  |=  [mod=@tas txt=@ta]
+  ^-  (unit ,@)
+  =+  con=(slay txt)
+  ?.(&(?=([~ %% @ @] con) =(p.p.u.con mod)) ~ [~ q.p.u.con])
+::
 ++  slay
   |=  txt=@ta  ^-  (unit coin)
   =+  vex=((full nuck:so) [[1 1] (trip txt)])

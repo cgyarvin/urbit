@@ -64,11 +64,11 @@
           ?:  (gth p.lok lim)  ~
           |-  ^-  (unit ,@ud)
           ?~  hit.dom  [~ let.dom]
-          ?:  (gth p.lok p.i.hit.dom)  [~ let.dom]
+          ?:  (gte p.lok p.i.hit.dom)  [~ let.dom]
           $(hit.dom t.hit.dom, let.dom (dec let.dom))
         :: 
             %tas  (~(get by lab.dom) p.lok)
-            %ud   ?:((gte p.lok let.dom) ~ [~ +(p.lok)])
+            %ud   ?:((gth p.lok let.dom) ~ [~ p.lok])
         ==
       ::
       ++  amor                                          ::  endpoint query
@@ -109,10 +109,7 @@
         ?>  ?=(^ hit.dom)
         ?>  ?=(& -.q.i.hit.dom)
         =>  .(+> (ante q.i.hit.dom))
-        %_  +>
-          let.dom  (dec let.dom)
-          hit.dom  t.hit.dom
-        ==
+        $(let.dom (dec let.dom), hit.dom t.hit.dom)
       ::
       ++  auto                                          ::  read at point
         |=  mun=mood
@@ -230,7 +227,7 @@
                        ?<  (~(has by lab.dom) p.p.lem)
                        (~(put by lab.dom) p.p.lem let.dom)
               yel      
-            =+  pre=`path`~[(scot %p for) syd (scot %ud let.dom)]
+            =+  pre=`path`~[(scot %p for) syd (scot %ud +(let.dom))]
             ?-  -.p.lem
               |  :_  yel
                  [hen %note '=' %leaf :(weld (trip p.p.lem) " " (spud pre))]
@@ -272,7 +269,7 @@
           =+  nab=(aeon p.mot)
           ?:  |(?=(~ nab) =(let.dom u.nab))
             $(xiq t.xiq, xaq [i.xiq xaq])
-          ?>  (gth let.dom u.nab)
+          ?>  (gte let.dom u.nab)
           ?>  ?=(^ hit.dom)
           =+  huy=(aeon q.mot)
           ?~  huy
@@ -310,7 +307,6 @@
       ::
       ++  link
         |=  [hen=duct lok=case]
-        ~&  %du-link
         %_  +>
           num.dok  +(num.dok)
           kol.dok  lok
@@ -332,7 +328,6 @@
       ++  poll
         |=  [hen=duct num=@ud rot=riot]
         ^+  +>
-        ~&  %du-poll
         =^  zuc  ..du
             |-  ^+  [cuz.dok ..du]
             ?~  cuz.dok  !!

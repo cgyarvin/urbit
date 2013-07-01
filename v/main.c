@@ -40,7 +40,6 @@
 
 struct _u2_opts {
   c3_c*   cpu_c;
-  c3_c*   inv_c;
   c3_w    kno_w;
   u2_bean abo;
   u2_bean gab;
@@ -49,6 +48,7 @@ struct _u2_opts {
   u2_bean veb;
   u2_bean rez;
   u2_bean nuu;
+  u2_noun imp;
 } u2_Opts;
 
 /* u2_ve_getopt(): extract option map from command line.
@@ -65,9 +65,10 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
   u2_Opts.veb = u2_yes;
   u2_Opts.rez = u2_no;
   u2_Opts.nuu = u2_no;
+  u2_Opts.imp = u2_nul;
   u2_Opts.kno_w = DefaultKernel;
 
-  while ( (ch_i = getopt(argc, argv, "k:lcsagqvR")) != -1 ) {
+  while ( (ch_i = getopt(argc, argv, "k:I:lcsagqvR")) != -1 ) {
     switch ( ch_i ) {
       case 'a': { u2_Opts.abo = u2_yes; break; }
       case 'c': { u2_Opts.nuu = u2_yes; break; }
@@ -81,6 +82,16 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
         }
         else return u2_no;
         break;
+      }
+      case 'I': {
+        c3_c* ash_c = strchr(optarg, '/');
+
+        if ( !ash_c ) {
+          return u2_no;
+        }
+        u2_Opts.imp = u2nt(u2_nul, 
+                           u2_ci_bytes((ash_c - optarg), optarg),
+                           u2_ci_string(ash_c + 1));
       }
       case 'q': { u2_Opts.veb = u2_no; break; }
       case 'v': { u2_Opts.veb = u2_yes; break; }
@@ -370,7 +381,7 @@ main(c3_i   argc,
   }
 
   {
-    u2_lo_loop(u2_Host.arv_u, u2_Opts.nuu, u2_Opts.rez, u2_Opts.inv_c);
+    u2_lo_loop(u2_Host.arv_u, u2_Opts.nuu, u2_Opts.rez, u2_Opts.imp);
   }
   return 0;
 }

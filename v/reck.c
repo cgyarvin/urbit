@@ -333,33 +333,6 @@ _reck_init_veer(u2_reck* rec_u, u2_noun nam, u2_noun pax, u2_noun txt)
   } 
 }
 
-static void
-_reck_count(u2_noun a, u2_noun* m)
-{
-  if ( u2_fly_is_cat(a) ) {
-    return; 
-  } else {
-    u2_noun b = u2_ckd_by_get(u2k(*m), u2k(a));
-
-    if ( u2_none != b ) {
-      if ( b != a ) {
-        uL(fprintf(uH, "duplicate - a %x, b %x\n", a, b));
-      }
-      u2z(b);
-    }
-    else {
-      *m = u2_ckd_by_put(*m, u2k(a), u2k(a));
-
-      if ( u2_yes == u2du(a) ) {
-        _reck_count(u2h(a), m);
-        _reck_count(u2t(a), m);
-      }
-    }
-  }
-}
-
-u2_noun Map;
-
 /* u2_reck_cold(): load full arvo with vanes, from new solid state. 
 */
 void
@@ -389,7 +362,7 @@ u2_reck_cold(u2_reck* rec_u, c3_w kno_w)
       exit(1);
     }
 
-    uL(fprintf(uH, "cueing...\n"));
+    //  Copy into basket to propitiate jet gods.
     {
       u2_rail bas_r = u2_wire_bas_r(u2_Wire);
       u2_noun tup;
@@ -398,33 +371,23 @@ u2_reck_cold(u2_reck* rec_u, c3_w kno_w)
       eng = u2_rx(bas_r, tup);
       u2z(tup);
     }
-    uL(fprintf(uH, "done.\n"));
 
     rec_u->ken = u2h(eng);
     rec_u->roc = u2t(eng);
 
+    //  Execute from kernel to propitiate jet gods.
     {
       u2_noun fak;
 
       fak = u2_cn_nock(0, rec_u->ken);
       u2z(fak);
     }
-
-#if 0
-    uL(fprintf(uH, "counting...\n"));
-    {
-      u2_noun m = u2_nul;
-
-      _reck_count(eng, &m);
-      Map = m;
-    }
-    uL(fprintf(uH, "done.\n"));
-#endif
   }
 
   rec_u->toy.rain = u2_reck_wish(rec_u, "rain");
   rec_u->toy.ream = u2_reck_wish(rec_u, "ream");
   rec_u->toy.slay = u2_reck_wish(rec_u, "slay");
+  rec_u->toy.slaw = u2_reck_wish(rec_u, "slaw");
   rec_u->toy.slam = u2_reck_wish(rec_u, "slam");
   rec_u->toy.slap = u2_reck_wish(rec_u, "slap");
   rec_u->toy.slop = u2_reck_wish(rec_u, "slop");
@@ -480,6 +443,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     rec_u->toy.rain = u2_reck_wish(rec_u, "rain");
     rec_u->toy.ream = u2_reck_wish(rec_u, "ream");
     rec_u->toy.slay = u2_reck_wish(rec_u, "slay");
+    rec_u->toy.slaw = u2_reck_wish(rec_u, "slaw");
     rec_u->toy.slam = u2_reck_wish(rec_u, "slam");
     rec_u->toy.slap = u2_reck_wish(rec_u, "slap");
     rec_u->toy.slop = u2_reck_wish(rec_u, "slop");

@@ -683,6 +683,33 @@ _lo_cask(u2_reck* rec_u, c3_c* dir_c, u2_bean nun)
   return key;
 }
 
+/* _lo_text(): ask for a name string.
+*/
+static u2_noun
+_lo_text(u2_reck* rec_u, c3_c* pom_c)
+{
+  c3_c   paw_c[60];
+  u2_noun say;
+
+  uH;
+  while ( 1 ) {
+    printf("%s: ", pom_c);
+
+    paw_c[0] = 0;
+    fpurge(stdin);
+    fgets(paw_c, 59, stdin);
+
+    if ( '\n' == paw_c[0] ) {
+      continue;
+    }
+    else {
+      say = u2_ci_string(paw_c);
+    }
+  }
+  uL(0);
+  return say;
+}
+
 /* _lo_bask(): ask a yes or no question.
 */
 static u2_bean
@@ -1256,6 +1283,45 @@ _lo_link(u2_reck* rec_u,
          u2_noun  dys,
          u2_noun  lok)
 {
+  u2_reck_plan(rec_u, u2nt(c3__gold, c3__clay, u2_nul),
+                      u2nt(c3__deem, 
+                           u2k(rec_u->our),
+                           u2nc(c3__link, u2nq(syd, foh, dys, lok))));
+}
+
+/* _lo_pull(): pull changes from remote repository.
+*/
+static void
+_lo_pull(u2_reck* rec_u,
+         u2_noun  foh,
+         u2_noun  syd)
+{
+  u2_reck_plan(rec_u, u2nt(c3__gold, c3__clay, u2_nul),
+                      u2nt(c3__deem, u2k(rec_u->our),
+                                     u2nt(c3__pull, foh, syd)));
+}
+
+/* _lo_copy(): common clone.
+*/
+static void
+_lo_copy(u2_reck* rec_u,
+         u2_noun  foh,
+         u2_noun  syd,
+         u2_noun  lok)
+{
+  _lo_link(rec_u, syd, foh, syd, lok);
+  _lo_pull(rec_u, foh, syd);
+}
+
+/* _lo_zen(): get OS entropy.
+*/
+static u2_noun 
+_lo_zen(u2_reck* rec_u)
+{
+  c3_w rad_w[8];
+
+  _lo_rand(rec_u, rad_w);
+  return u2_ci_words(8, rad_w);
 }
 
 /* u2_lo_loop(): begin main event loop.
@@ -1264,27 +1330,33 @@ void
 u2_lo_loop(u2_reck* rec_u, 
            u2_bean  nuu,
            u2_bean  rez,
-           c3_c*    inv_c)
+           u2_noun  imp)
 {
   if ( u2_yes == nuu ) {
-    if ( inv_c ) {
-      u2_noun inv = u2_cke_cue(u2_walk_load(inv_c));
+    u2_noun ten = _lo_zen(rec_u);
+    u2_noun pig;
 
-      _lo_make(rec_u, u2nc(c3__cash, inv));
+    if ( u2_nul == imp ) {
+      uL(fprintf(uH, "generating 2048-bit RSA pair...\n"));
+
+      pig = u2nq(c3__make, u2_ci_string("Anonymous Coward"), 11, ten);
     }
     else {
-      u2_noun ten;
-
-      //  Get some host entropy.
-      //
-      {
-        c3_w rad_w[8];
-
-        _lo_rand(rec_u, rad_w);
-        ten = u2_ci_words(8, rad_w);
+      u2_noun whu = u2_cn_mung(u2k(rec_u->toy.slaw), 
+                               u2nc('p', u2k(u2h(u2t(imp)))));
+      u2_noun gun = u2_cn_mung(u2k(rec_u->toy.slaw), 
+                               u2nc(c3__ud, u2k(u2h(u2t(imp)))));
+      if ( (u2_nul == whu) || (u2_nul == gun) ) {
+        fprintf(stderr, "incorrect format\r\n");
+        exit(1);
       }
-      _lo_make(rec_u, u2nq(c3__make, c3__zuse, 11, ten));
+      else {
+        u2_noun nam = _lo_text(rec_u, "imperial name");
+
+        pig = u2nq(c3__sith, u2k(u2t(whu)), nam, u2k(u2t(gun)));
+      }
     }
+    _lo_make(rec_u, pig);
   }
   else {
     _lo_rest(rec_u, rez);
@@ -1302,18 +1374,12 @@ u2_lo_loop(u2_reck* rec_u,
 #endif
 
   if ( u2_yes == nuu ) {
-    u2_reck_plan(rec_u, u2nt(c3__gold, c3__clay, u2_nul),
-                        u2nt(c3__deem, 
-                             u2k(rec_u->our),
-                             u2nc(c3__link, 
-                                  u2nq(c3__main,
-                                       0,
-                                       c3__main,
-                                       u2nc(c3__ud, 0)))));
+    u2_term_ef_boil(rec_u, rec_u->sev_l, 1);
 
-    u2_reck_plan(rec_u, u2nt(c3__gold, c3__clay, u2_nul),
-                        u2nt(c3__deem, u2k(rec_u->our),
-                                       u2nt(c3__pull, 0, c3__main)));
+    _lo_copy(rec_u, 0, c3__main, u2nc(c3__ud, 1)); 
+    _lo_copy(rec_u, 0, c3__try, u2nc(c3__ud, 1)); 
+    _lo_copy(rec_u, 0, c3__doc, u2nc(c3__ud, 1)); 
+    _lo_copy(rec_u, 0, c3__arvo, u2nc(c3__ud, 1)); 
   }
   _lo_init(rec_u);
   {
