@@ -28,7 +28,7 @@ CLD=gcc -O3 -L/usr/local/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
-LIBS=-lev -lgmp -lreadline -ltermcap -lsigsegv
+LIBS=-lev -lgmp -lreadline -ltermcap -lsigsegv $(OSLIBS)
 
 INCLUDE=include
 GENERATED=generated
@@ -40,6 +40,7 @@ ifeq ($(OS),osx)
 endif
 ifeq ($(OS),linux)
   CLDOSFLAGS=-lcrypto
+  OSLIBS=-lcrypto
 endif
 
 CWFLAGS=-Wall
