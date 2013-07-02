@@ -368,10 +368,10 @@ _lo_save(u2_reck* rec_u, u2_noun ovo)
 
   if ( u2_Host.lug_u.len_w ) {
     _lo_pack(rec_u, ron);
+    rec_u->ent_w += 1;
   } else {
     rec_u->roe = u2nc(ron, rec_u->roe);
   }
-  rec_u->ent_w += 1;
 }
 
 /* _lo_sing(): replay ovum from the past, time already set.
@@ -705,7 +705,13 @@ _lo_text(u2_reck* rec_u, c3_c* pom_c)
       continue;
     }
     else {
+      c3_w len_w = strlen(paw_c);
+
+      if ( paw_c[len_w - 1] == '\n' ) {
+        paw_c[len_w-1] = 0;
+      }
       say = u2_ci_string(paw_c);
+      break;
     }
   }
   uL(0);
@@ -909,6 +915,7 @@ _lo_zest(u2_reck* rec_u)
 
     while ( u2_nul != nor ) {
       _lo_pack(rec_u, u2k(u2h(nor)));
+      rec_u->ent_w += 1;
       nor = u2t(nor);
     }
     u2z(rec_u->roe);
@@ -1344,18 +1351,23 @@ u2_lo_loop(u2_reck* rec_u,
       pig = u2nq(c3__make, u2_ci_string("ephemeral"), 11, ten);
     }
     else {
-      u2_noun whu = u2_cn_mung(u2k(rec_u->toy.slaw), 
-                               u2nc('p', u2k(u2h(u2t(imp)))));
-      u2_noun gun = u2_cn_mung(u2k(rec_u->toy.slaw), 
-                               u2nc(c3__ud, u2k(u2h(u2t(imp)))));
-      if ( (u2_nul == whu) || (u2_nul == gun) ) {
-        fprintf(stderr, "incorrect format\r\n");
+      u2_noun whu = u2_cn_mung(u2k(rec_u->toy.slaw), u2nc('p', u2k(u2t(imp))));
+      if ( (u2_nul == whu) ) {
+        fprintf(stderr, "czar: incorrect format\r\n");
         exit(1);
       }
       else {
+        u2_noun gen = _lo_text(rec_u, "generator");
         u2_noun nam = _lo_text(rec_u, "imperial name");
+        u2_noun gun = u2_cn_mung(u2k(rec_u->toy.slaw), u2nc(c3__uw, gen));
 
+        if ( u2_nul == gun ) {
+          fprintf(stderr, "czar: incorrect format\r\n");
+          exit(1);
+        }
         pig = u2nq(c3__sith, u2k(u2t(whu)), nam, u2k(u2t(gun)));
+
+        u2z(whu); u2z(gun);
       }
     }
     _lo_make(rec_u, pig);

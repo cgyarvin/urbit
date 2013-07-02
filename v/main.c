@@ -40,6 +40,7 @@
 
 struct _u2_opts {
   c3_c*   cpu_c;
+  c3_c*   imp_c;
   c3_w    kno_w;
   u2_bean abo;
   u2_bean gab;
@@ -84,14 +85,8 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
         break;
       }
       case 'I': {
-        c3_c* ash_c = strchr(optarg, '/');
-
-        if ( !ash_c ) {
-          return u2_no;
-        }
-        u2_Opts.imp = u2nt(u2_nul, 
-                           u2_ci_bytes((ash_c - optarg), optarg),
-                           u2_ci_string(ash_c + 1));
+        u2_Opts.imp_c = strdup(optarg);
+        break;
       }
       case 'q': { u2_Opts.veb = u2_no; break; }
       case 'v': { u2_Opts.veb = u2_yes; break; }
@@ -381,7 +376,10 @@ main(c3_i   argc,
   }
 
   {
-    u2_lo_loop(u2_Host.arv_u, u2_Opts.nuu, u2_Opts.rez, u2_Opts.imp);
+    u2_noun imp = u2_Opts.imp_c ? u2nc(u2_nul, u2_ci_string(u2_Opts.imp_c))
+                                : u2_nul;
+
+    u2_lo_loop(u2_Host.arv_u, u2_Opts.nuu, u2_Opts.rez, imp);
   }
   return 0;
 }

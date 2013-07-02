@@ -1102,6 +1102,7 @@
               [%eg p=kite]                              ::  single request
               [%es p=seat q=disc r=rave]                ::  subscription
               [%ht p=(list rout)]                       ::  http server
+              [%oy p=@ta]                               ::  listen on channel
               [%up p=prod]                              ::  user prompt      
               [%wa p=@da]                               ::  alarm
               [%yo p=seat q=@ta r=*]                    ::  network message
@@ -1209,6 +1210,7 @@
               [%eg p=riot]                              ::  simple result
               [%ht p=scab q=cred r=moth]                ::  http request
               [%up p=@t]                                ::  prompt response
+              [%oy p=seat q=@ta r=@ud s=(unit ,*)]      ::  incoming request
               [%yo p=seat q=cape r=soap]                ::  request response
               [%wa p=@da]                               ::  alarm
           ==                                            ::

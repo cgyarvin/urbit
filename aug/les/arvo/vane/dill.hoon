@@ -55,7 +55,12 @@
       [~ ..^$]
     =>  .(gid `(list seat)`u.gid)
     =.  whu  [~ i.gid]
-    =+  yar=`yard`(need (~(get by wyg) i.gid))
+    =+  ^=  yar  ^-  yard
+        =+  yar=(~(get by wyg) i.gid)
+        ?^  yar  u.yar
+        ?~  t.gid  [& [i.gid ~] [80 ~ *blot] ~]         ::  XX heinous
+        =+  rya=(need (~(get by wyg) i.t.gid))
+        %_(rya q [i.gid q.rya])
     =|  mos=(list move)
     =+  wip=|
     =<  yerk:leap

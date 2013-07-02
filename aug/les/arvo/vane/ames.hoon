@@ -31,10 +31,8 @@
   ++  meld                                              ::  verify connect
     |=  [new=deed old=deed]
     ^-  &
-    ?>  ?&  (melt new old)
-            .=  (shaf %meld (sham q.new))
-              (need (sure:pu:(hail r.q.old) *code p.new))
-        ==
+    ?>  (melt new old)
+    ?>  =((shaf %meld (sham q.new)) (need (sure:pu:(hail r.q.old) *code p.new)))
     %&
   ::
   ++  melt                                              ::  proper connect
@@ -109,134 +107,134 @@
     |=  zar=@pD
     ^-  @uvH  ^-  @
     %+  snag  zar
-    :~  0w2V.Ukriv.il3Pn.O97RL.WCBiz  0w3b.RFqBh.ZtHLt.xH0uW.nl4r8  ::   0
-        0wk.S3gGl.p916u.nGq03.aIfFC   0w3e.ZmmHK.sn8Jk.UbI0q.jBfE~  ::   2
-        0w11.NMecf.pgInp.98mpL.IEXxl  0w3M.werni.0PO7m.Xr6o6.sorS5  ::   4
-        0ww.eFqOj.~Gd68.cwPXl.5~di2   0w5.UEzYe.f7GeR.Xz4NZ.94t3J   ::   6
-        0w3C.vOPG3.dBYPE.WB-JW.pJsut  0w3Z.9SG~g.--p65.ZpYR3.YAPOp  ::   8
-        0w1o.oyJ9k.FIgRG.-5DUc.nS2qV  0w1X.rBVYe.eK-Bc.IFT9k.QU70h  ::   10
-        0w1n.2RT3k.9uJIw.JJDE7.d~Kr4  0w10.Mvu1S.Twd0R.r5Fgu.zS3P2  ::   12
-        0w3O.Y9keb.6KJLZ.3k9rM.1gHfH  0w3n.FmDcG.MLl9-.1R2qr.9CDen  ::   14
-        0ws.ivj46.Ka644.zfgyb.i1Jwl   0w1m.KZhaY.~eSMm.m6aUZ.ByLM7  ::   16
-        0wD.-jkYG.QYHTh.aKUR0.TgjYn   0wI.lXRB~.Yy0TT.6EYMu.4FE72   ::   18
-        0w1o.~RlQ2.cHVpw.a9AqL.v5KvC  0w1C.A4a8V.sGFex.fllup.sRyLn  ::   20
-        0wb.IrqZl.GPTc8.xqhHO.3r37l   0w2V.2PTy0.beXoe.elV~F.V1UNp  ::   22
-        0wb.xbIcB.SZ7Y3.oeh~K.w2dZN   0w3j.Auhah.XDQSJ.6g~ZN.JNfYD  ::   24
-        0wC.LNa1e.mSrRP.xAGYb.ldDcV   0w3h.kmiYW.WU0yJ.fpNhq.MDYfB  ::   26
-        0w1L.wvqac.Ej79I.-f2hj.yyiua  0w3S.tipUz.pZEpn.AsOTf.C6kVC  ::   28
-        0w1E.s5FLM.qiA80.zIVax.jcuV9  0w3d.dwYLo.QSdkf.4PgIQ.85b62  ::   30
-        0w3.v5AQq.r9Q0D.TdUpC.pZnX3   0w21.Rhkns.CxXSM.9vwhi.b69ou  ::   32
-        0wd.cN1sl.S6PsD.gcCu7.qItJG   0w3t.RPGNR.mQ8e0.9uiL8.ktckX  ::   34
-        0w2h.MJrJz.M2mZQ.qSmo2.o6Kqz  0wU.8sWaG.sxRhN.h6NhF.ZrnfR   ::   36
-        0wO.j6rVO.5Nw0J.pCtKx.7Gqjc   0w17.uR4G4.WtINT.tHKlF.cv1sR  ::   38
-        0w3D.umDEW.Di9XE.7dj34.RYHP0  0wa.pjSrD.boWNd.WSSTU.N55uA   ::   40
-        0w1K.LUMK3.87Kel.sb9w2.axwVA  0w3V.M4cEO.n2-7O.nMUKK.4fE8U  ::   42
-        0w2I.K7SX2.EBhEv.I1v9w.fovv9  0wHOKUK.uV7SA.-soQM.Y1O-n     ::   44
-        0w1v.cIuC3.yyEcN.iNI2q.wSkxY  0w2s.BDWY7.0I8lb.R97eG.yY9zL  ::   46
-        0w1-.aE~uR.C9lnL.MsDYg.80uJC  0wJ.eUvME.BR6mB.fJIlu.5KAv9   ::   48
-        0w3c.1u83d.irTLJ.wre0x.sjxAe  0w3p.nG0oH.fDMXg.od3IO.dmsIP  ::   50
-        0w3g.H9h3H.94x6x.E6Zye.GqS6x  0w2m.lZJg1.PIJHJ.eAiJ6.jx83v  ::   52
-        0wE.kUFKH.Yqo0O.WY6qn.5~JR9   0w2t.XQ8xb.v2VpG.B4yXa.Rpjqw  ::   54
-        0w3V.piQ56.iLCrb.ltgoD.ItsXA  0w3I.y56E4.b2XzH.1Brza.K64hV  ::   56
-        0wd.Iiw-K.EfcJ-.-X245.boOBr   0w2C.K083C.4dVA8.d-L-I.sXavI  ::   58
-        0w2C.D1ul2.c1PKX.I5cL0.n3dxr  0wV.Ng~R9.SKLqw.RMpxP.dblOY   ::   60
-        0w2.HlTvo.V0D1L.p9W0j.aFU6k   0w1f.S1~BH.27Zih.7WiEh.pJEON  ::   62
-        0w1R.3turY.40u9P.1QMXG.FVJ~e  0w2t.pyk~d.ZNWDs.f7gp-.qahoH  ::   64
-        0wd.UASH0.QQ0mT.zFjag.gVv-J   0w34.uu9hS.Nuyp0.9O5GU.IqOPn  ::   66
-        0w3G.V1d4~.Zcz2l.WRfRY.Gbqdn  0w2w.Hmqa7.p1ftE.s9mN4.34in8  ::   68
-        0wK.CfMeO.vGDN2.L2OUd.DNv60   0wZ.SuM9F.WlyCQ.FwwAh.51TFp   ::   70
-        0w2W.sGPo4.beqSQ.XqsQf.ngpFw  0w2j.BxZY4.q5ueN.DYB-W.M4kK5  ::   72
-        0wm.7syof.RdI~X.L5DUP.zItuq   0wk.CpyEj.HtQtS.UKg9E.IKoZO   ::   74
-        0w2y.EARAL.Pjrps.uAkP5.4NyvD  0wp.CsyQp.QMUm3.X-V1J.p4V4p   ::   76
-        0w20.VAE8a.VACSh.IUktB.2DS9S  0w3B.hfjzy.D2ugI.o6nvB.dt6~N  ::   78
-        0wb.c-Et2.ENdTt.FyLuO.rXpAF   0w2k.fHAYb.mPp6G.Miboj.aDzEo  ::   80
-        0w3z.fhF6D.-4LXN.-P0BA.zDyZ6  0w9.ZZsl8.-aDxl.MWNZQ.n5JDG   ::   82
-        0w2g.KbM4g.D4sa1.sbtDS.NUtIe  0wP.JoKfb.h2YhC.oXbtT.rabng   ::   84
-        0w35.CHhpO.rszL-.leHOv.cx4WJ  0wy.ENViE.b9RMU.XYJe3.ebjB6   ::   86
-        0w1Q.nTf4s.WPehk.UZi6Q.hGCDD  0w3L.eoarl.IzBcW.iHoFk.DdTPs  ::   88
-        0w1r.8r6xk.zbByY.HZpKt.TkJSs  0w3.MVsxE.-cBYq.0xiNk.uZoqv   ::   90
-        0w1z.C9-kZ.RZHRF.eV1Bt.Ra4al  0wI.y-xHW.bI~ul.RRfRZ.BHRCU   ::   92
-        0wT.ZJe~e.xpTw3.WSItm.fm1ot   0we.t4i0L.jy95S.yKr6w.K1Dn4   ::   94
-        0w3x.zRFNc.CX9C0.s-3Eh.h3eLp  0w26.6yAPi.bY3ua.jaDs6.1CNTS  ::   96
-        0wn.XBNFm.12O3M.55VOX.VBO0I   0w1J.paHT2.IJZqT.e545s.SNWAo  ::   98
-        0w3-.k~kTY.t4tHP.PG5RK.Y5X-C  0w3z.w7HU2.lvfLd.2Za49.Kgxht  ::   100
-        0w33.DgYKm.i4iL5.4aDjB.sEk3o  0w20.Ll6pC.-mc2A.qehvg.oNeHh  ::   102
-        0w3r.0nO~M.hBmIU.Q3XOm.hA2Rj  0wj.WldTu.Bu4rr.Ltu7-.zpJRX   ::   104
-        0w3A.35FxJ.DGjY5.G3LHQ.LfJVT  0wv.ya8fC.PxL9-.vvw4m.y1nl9   ::   106
-        0w1C.j6o82.Nwvgn.a4iyX.s96A5  0w2f.7Oh0W.qntLx.DJMZ~.GzDu2  ::   108
-        0w2-.qx1ZS.mKo4m.NKC1U.6ovnn  0w2w.xmQFS.Z17mh.7jn~D.3tL90  ::   110
-        0wa.~IdIm.OLZ8a.pCesI.JRjWh   0w3F.iSBJt.5YTlS.sVD04.5oTsr  ::   112
-        0w1O.Umuco.Vd5gL.CiRGE.zSzCC  0w1M.RQl-y.JoZyn.Dt-ah.3yogE  ::   114
-        0w3s.63zzz.inepf.VFWBM.Sc7LT  0w3k.zh3Xi.os9gg.VBo6W.XUUUx  ::   116
-        0w2k.etCDk.P~CX6.0-Ypj.Ee0Ru  0w2Z.n-HK9.uOlO~.1YFBn.EUm23  ::   118
-        0w3e.NGtk~.ShP70.DHWZF.yY8oO  0w3x.jncKF.u2U~6.7C1Xv.z8EOE  ::   120
-        0w3Y.szv84.pyB8s.N1uuN.6hy-o  0w2R.7jkGe.cbf1h.Q3wfY.GCzqn  ::   122
-        0wz.fGDgR.dMHKH.bgGM8.1F5Ku   0w2m.yvbNA.uj~Wu.zXhF3.qzspX  ::   124
-        0w1t.NLG6L.AVQx0.idqAu.92c5Y  0w3j.-zbod.BTNxc.XHnZ6.i~cyL  ::   126
-        0wf.TkUIq.M3oEf.V7pzm.oUeac   0wJ.2V7RM.A8mAB.OBPyw.fZkca   ::   128
-        0w2o.uL5F3.kYcAL.ywJyr.MBrS6  0w3c.FS1eN.nZCE4.bCHKi.VOWrF  ::   130
-        0w20.1pmNL.NUOS-.uvM9I.AC7xS  0w3H.zw20k.wo~9g.ZqENo.4gwia  ::   132
-        0w1v.FSEaZ.JJszn.CtXLW.0BOWC  0w23.~C4lg.423lP.bAvqX.YaCat  ::   134
-        0w1t.ILS-H.zkh4N.r5cgj.0iObH  0w3R.UykuY.~xkF1.pp7Ul.I~KPN  ::   136
-        0w2H.BG1yW.Ho~bf.bxngT.WJyRN  0wd.zLMtU.Qgdhq.4xhFI.BYvSo   ::   138
-        0w2D.CCH3~.yU~dF.dOLZ~.i8Yxb  0wG.AcblY.ivT2j.w~SXO.GpbGj   ::   140
-        0w3~.Y4wSo.zN3rd.RDM-M.dNYaO  0w2H.z5te6.XIJBr.3CRwR.Dqqbo  ::   142
-        0w2p.Fqgvz.-FmKe.ELwI~.rsZTJ  0w2U.6sons.uHcqX.gMaNi.il4kf  ::   144
-        0w1D.SfglL.7vzYV.kZu2c.qVIPx  0w3o.IESE6.l66Cr.jMHnD.TJgDi  ::   146
-        0w1i.RZjrt.Kb3Dz.7I6Q6.jBFJP  0wA.o0Cfe.7CaMB.Gs2VR.aFjCZ   ::   148
-        0w2R.YjhaR.Sgk-2.74Fyb.wA99Y  0w1X.TI8BA.T3Ieb.hqE1c.M1w6u  ::   150
-        0wR.-Ky5I.5DuxO.TYfwI.wbSNy   0w36.0SrNB.EE9XH.U~T0E.xaitz  ::   152
-        0wW.315-W.vJknR.zUPYm.3-lq4   0w1m.TSem9.FDN5Y.mZt7K.lwcnE  ::   154
-        0w2L.yKxX9.HxMoP.WKcgm.Bp7Wo  0w1z.I33gJ.BuwGo.ctZXR.UHGC6  ::   156
-        0w2n.S-41-.FbR1Z.2l5Bx.VrQZw  0w7.D2RQ0.EIfuG.rTtnH.JO48c   ::   158
-        0w-.7reJB.XblQ9.Uw3jn.FlrdI   0w3A.Kuuqa.F1YS6.ZB-rZ.iy~u2  ::   160
-        0wS.ac1h4.nEPk9.eKY0y.m5KrG   0w1U.SR9hP.2ZboY.f1Ok1.ZX-k8  ::   162
-        0wS.xdF7L.qeeTC.CGR2-.XqAEe   0w2d.uJ7s5.35XBG.-CymZ.FlEUm  ::   164
-        0w2.CTr0J.b7dBt.A691l.7SYjf   0w1z.vVcZg.N1HHx.K6S06.UNvAu  ::   166
-        0w1N.zku7K.rCTvt.qGc-9.2yn7o  0w3v.fdfMA.4LSuz.Iho3N.SCThs  ::   168
-        0w2B.AyDxf.iFTJL.hoBzC.-bqJW  0w2v.VvLDG.lZSSi.16LC3.E0Quo  ::   170
-        0wZ.uHZHu.KADkF.iWll2.czGKn   0wiAW3Q.GlHxG.qeiLC.QKp6H     ::   172
-        0w-.UMmQ~.BeOjS.XM7nL.NrE1f   0w21.z1Kzt.OcFHY.QBj6L.Vu92D  ::   174
-        0w1v.IwRhA.q81J-.MoCSn.LWM38  0w3A.2dbPP.OB0uf.4gWLs.SS4y7  ::   176
-        0w3u.9SGmq.pALil.Ejas4.732GE  0w1.MYJ7V.Gt0kN.4dT9e.H1Dju   ::   178
-        0w2O.Uj9-P.4uC5Z.Yyzsh.F4agE  0w1h.65CUK.X7Jy1.JWqGs.7mdrd  ::   180
-        0w2-.kWBUe.6KTs2.LMlz1.j43i0  0wc.FHziM.aePml.ieBk5.8eqwJ   ::   182
-        0wT.l6eWX.7O5YM.4jVPQ.MxS7q   0w2b.ZTRY4.2hS3d.jIQDz.ohax9  ::   184
-        0w2W.BCV~i.J6nRC.GYmYd.PE-3f  0w2M.r~1pF.yxaLG.0X7mY.kbcmZ  ::   186
-        0w2H.Jy0dD.5~CGJ.vVl5N.NCqrd  0w2X.mU92M.4KHUY.QsQIm.cZnH0  ::   188
-        0w3T.kQ3xd.ZA6mG.fp~5u.Y7SGb  0wP.w3qQ1.Jq7~A.KlqX0.FBN-K   ::   190
-        0wL.KZjjX.q004~.moBSf.Tm813   0w28.LmGk-.LIXge.UmRjM.MOSKJ  ::   192
-        0w3Y.~TnrK.dMQIE.jcUgQ.jtMlK  0wf.cQJXb.UeQuG.fKnOW.Mvupe   ::   194
-        0w32.6z295.XJdLf.LfxB-.AU74n  0w1F.eex0C.AgBjk.OzQRd.Nzdao  ::   196
-        0w1c.gYKzt.d3BmF.ws0fc.xKAqB  0w3F.2~y3d.8bmnf.aeJd4.VDON3  ::   198
-        0wl.cN7Y6.Bv-T6.mR3gX.WJd6Y   0w1W.YXaDF.NGQui.iJ4NL.e1~aS  ::   200
-        0w3d.JGFz~.NZ9~p.IYTg4.aHw-J  0ww.g8MDD.0USjz.-MUWm.Eq5N7   ::   202
-        0w2M.VsXXs.IuE7N.j8NAT.lAtDt  0w9.p2bJR.NFhHv.PD-k9.x7cJv   ::   204
-        0w1k.zeayz.UvqJZ.2K5sO.DX7lY  0w2V.9rGs-.1ifoK.Jektk.9ib-b  ::   206
-        0wW.wtK6L.ubZX1.t3ek~.LVpGp   0w3F.pwdM5.n8QLh.HUIK9.pIFJG  ::   208
-        0w3M.VPExl.OdHHu.sC3Qh.3HzX7  0wz.Tu73b.TaxVx.RWhYq.MMlwO   ::   210
-        0wc.J6h75.wVCg9.ndTr5.-C0Hr   0w3n.Hib~g.RSETH.7BW0T.5cWBj  ::   212
-        0w1O.FnYF0.clcSF.hoMmH.lihCJ  0w1R.wLpDE.7Ku3X.v8B4T.F33Jk  ::   214
-        0w1A.u1Xy6.9cJC5.D4WS0.jdfZI  0wR.9r54a.FlL2b.LBvp6.9iTaR   ::   216
-        0w2g.tYi3K.f7lTi.FTneM.7gUQp  0wa.JJx2p.4mPll.EVLww.yXRjd   ::   218
-        0w1B.JRxYo.eQguP.8m3iV.MeSvO  0w2C.KbwGk.TxQFn.x302i.~CV0r  ::   220
-        0w1q.n~9Wx.QD6bR.ZtJSG.vk72y  0wj.3bYhB.X49YD.lSIYp.QUah9   ::   222
-        0wD.zFbw2.M1eKo.b~woh.AHW2J   0w22.JsU2i.QEd0L.U1ypz.FKh-e  ::   224
-        0wP.yNjBd.9hoR0.LftGu.R3D0B   0w3h.hFb1J.fRqvi.p0Vf0.r39xP  ::   226
-        0w3Z.f8ATL.NCgDB.6yR-l.b2do-  0w1g.K9vME.LaoAw.x9C0k.1Ie2X  ::   228
-        0w36.DzGry.G1qRx.Z~K05.NgM1j  0w3F.1a~Zh.FKBXa.35Rd0.839r0  ::   230
-        0w2C.Kcrd5.7vixd.Tjsws.JzYdW  0wC.XI5BG.HI3Ta.d8roK.dUfKi   ::   232
-        0w2c.c16ta.IVqWo.Hf~6p.6AlCG  0wT.yguKp.T0GRt.GPMz6.SXDio   ::   234
-        0wn.1Fg-g.j542C.kKwZl.Vs91r   0w2.AfT1v.Q4WBg.8SuCi.w~Czr   ::   236
-        0wB.0fRem.N9o9~.rXxsM.gQ0Pe   0w13.6aZYQ.plf47.aW~6z.tEnZr  ::   238
-        0w1k.f31i2.8U3CQ.eidrC.e70b6  0w-.D5Jq2.cQ7m1.asl~k.PU6D6   ::   240
-        0w20.3GvjZ.6gC6~.rXPfO.HHJUv  0wJ.i2eXe.7ps3d.4MZoT.EVWSu   ::   242
-        0w2j.~TQ26.iSUMC.eIetC.q8Qud  0w4.GdF~3.mSosY.~OUIv.ZIWMb   ::   244
-        0w2H.15yaC.SRQS3.d4aST.9fHaq  0w1D.vw71j.TuvRV.EZ24I.j5Ozr  ::   246
-        0wa.jyzsm.fCIsM.t~fBq.3ETAS   0w1X.-QDve.PeZbP.yiTNj.dRZXc  ::   248
-        0w3G.i0gNT.aTiZg.YSElf.~Mu4n  0wP.vP9Q2.TmwJW.wTm7~.optmq   ::   250
-        0wR.0WQu-.u8Zcv.ZJgXt.SIWYa   0wm.K7GpT.N5-C~.gca6d.FLwHE   ::   252
-        0wE.X8Ijk.07160.u3a7e.rkxlw   0w3L.crn06.cqLpb.c6-N3.FeY6S  ::   254
+    :~  0w3S.~jSFT.Tvv6a.QoDQ8.1mNQS  0w30.ND~fW.anIzT.qYdW1.S6ln~  ::   0
+        0w38.Se5UL.G8DX-.FTRGy.i5Yff  0w3M.0pNL6.fSzmw.HMWVx.APFVF  ::   2
+        0w2-.RYAgv.YL-Pa.irOZy.tk5Vy  0wt.EVqLx.FlTgt.2toOs.rrG8L   ::   4
+        0w1Y.MZuVL.6mijb.VS4Kz.cqe6g  0w1n.~qRP8.kGXJd.Ru~aJ.lHgZH  ::   6
+        0wg.Wr-Xu.AskUk.4Q8qw.tWxes   0w22.RvZr7.~LmGf.ILCzr.b5UIW  ::   8
+        0w3b.K--FX.k3in2.3jjmx.d1gyw  0w3l.fgx0I.L4ZEj.KkQmK.NYYqE  ::   10
+        0wh.g7gbM.vZXiO.pIFKr.Og2I2   0w36.wWYRk.pBRW1.MsrEv.jZav5  ::   12
+        0w2o.g0CEB.zmtmB.9F-C0.itjGE  0wk.6BuqK.t~Dwn.NvL3s.Ofo5-   ::   14
+        0wY.N8qMo.PqaM~.qyjCn.Nr8ij   0w2h.FGOp6.eNq2N.DpPNh.dR5Bi  ::   16
+        0w2a.Iy2Yh.IkjLD.U52Vd.7LDc0  0w18.mrVGR.ITtzj.NoRER.XPitH  ::   18
+        0w1x.vL5bh.dGDxJ.xdP8Y.fBLh2  0w2H.ZAAZk.Dp5Kg.J8fim.lZk~~  ::   20
+        0w2z.Ul9bk.ANzG4.TnmLi.k5fM6  0w32.XkwN3.pYHKR.0cdHB.38sYB  ::   22
+        0w3l.q0Eob.P1Yhg.pYxMf.Fsalh  0w1x.5oS3C.uOPyK.80jPk.9M6i6  ::   24
+        0w1e.u4jEM.CY7XO.ZLy51.~dYCZ  0w1A.rb5s1.cV5L3.vVURh.icf6d  ::   26
+        0wD.Y2VGx.ut-00.A0P8Z.MWWh1   0w1u.koQrY.t5PNs.duv-O.esqpA  ::   28
+        0w12.dxP-u.9uPND.J0VWa.u9Ko5  0w32.EDCeC.B7hS8.6TXyj.3yRS2  ::   30
+        0w1O.X0TRZ.AuriA.Uh0Nm.9GdYD  0w14.88B~P.6unHk.LgOQe.r6cta  ::   32
+        0w1R.0Q0WY.pQCkk.jvgwl.8gjha  0w3i.MIko2.kVgPj.Tr-cx.jqDJe  ::   34
+        0w1x.ukLOn.WZ9vO.rlRZM.vgMW6  0w1R.Bo5P0.~oCCD.B1TRz.zl9xb  ::   36
+        0w36.~NNif.NuEVa.6ucpM.qcC95  0w8.KBjKH.-uoDx.J72hB.vU4ax   ::   38
+        0w36.FzrMs.lMrX-.qPs6W.hTWqr  0wxe-VB.vhARe.DWuQA.ZSiyd     ::   40
+        0w3b.Iq0fg.zFDHS.AP0z7.ml7~y  0wU.B9l~R.qkNnQ.O~ID6.J78K-   ::   42
+        0w1q.liHGK.IXit2.GZf7z.DWzEx  0wc.h5XmS.HAGbG.oR0Mw.jrpR4   ::   44
+        0w1a.as~x6.vZdvb.zPWFd.xaPkX  0w2b.eeIGA.6Jeyg.cJw1c.1Qst6  ::   46
+        0w1J.cUzsd.x0G2u.Xal20.qF0rX  0w2a.I5cQ7.AAv~0.xWn-Q.8jMuc  ::   48
+        0w3X.n6zna.Sigk3.piuU8.ygp4b  0w2f.i4gtc.IA9iP.86Lpi.I~pM8  ::   50
+        0w2a.ExCEn.HUzHA.-SHQj.afFrj  0w8.wnYei.iTU10.GXNRO.bH-1k   ::   52
+        0w17.m7rio.h00a3.WNF4U.lp0cl  0w3b.FIWWS.RAqFC.EtEPC.UWQN8  ::   54
+        0wI.fQO1d.xx1yR.t3df-.J3j-l   0w3f.UK9y6.igC6M.fFXIU.OTM0Z  ::   56
+        0w3T.fA2Gc.Mby28.2x6hB.wyKyl  0w2F.AjZqU.9v1CU.-x1G8.6-sNQ  ::   58
+        0wH.fyopd.Cw6xh.i9Nje.m6jTm   0wn.Nzlwv.cmdeq.Uc8Gj.Jg2in   ::   60
+        0w4.LWGCU.DdAp7.UyGte.00cve   0w2K.6U5Hq.mBNoY.fBJZP.PvBfm  ::   62
+        0w1J.eGEA9.Eu0Yb.FJHxg.dthi~  0w2g.NKa13.9rSVu.aVbD4.7qorD  ::   64
+        0wN.R0W1o.Cfh2P.O53jO.R0U3v   0w3w.CmuOI.wcVen.7Res8.BfQdF  ::   66
+        0w1x.oj4Ls.0-D0m.hTWnI.zNCQl  0w29.PLdYn.6OO8f.8RumG.xsjPX  ::   68
+        0wa.wUvMq.X-o0r.VNJbR.mgrPZ   0w~.jUiaH.RGdon.-PajT.9wP7-   ::   70
+        0w2~.aUH4q.S5N1W.8xPxY.M2~zO  0w1C.os7Nj.Vx35d.7Q-fA.Eg1DG  ::   72
+        0w3h.bHzLo.j8j76.RLLaD.dIA4k  0w3y.VSAY8.WYsQE.bO-BH.G9mL9  ::   74
+        0w24.~6NCR.yfssv.855xz.W6WRY  0wv.gnZVt.PbBBu.sGceB.YN4Ei   ::   76
+        0w1m.5C4DD.xc6PQ.xpf2P.sok64  0w3~.diSDP.Ii7lo.ODX69.7yHlT  ::   78
+        0w2K.2nme~.A7cAq.kAUlv.dLyH7  0w32.pzrrj.TLc0W.2cpnT.2mg73  ::   80
+        0w2z.aZk0W.y~D8o.CP9yz.Q7dLF  0w1N.OliXg.TSA09.FAEbC.RMCwB  ::   82
+        0ws.3mp4d.dj8KM.g8~y5.6IBeB   0w2h.SizdC.qp4Ms.uX~7o.R6ZUj  ::   84
+        0w3d.1AOBs.BFrDI.BFsMh.lFPQ8  0wA.UnHHL.rK4~E.t0b6f.yTYF4   ::   86
+        0wr.A~Nqs.1fj1i.PC-lk.F9iE~   0wI.PEphk.Wyj5-.dLEFT.kCdVT   ::   88
+        0w1o.bM7sz.~tMd4.dLjdi.xW3Ls  0w3Y.-aRL2.KQHKh.yoXTG.mmDHD  ::   90
+        0w2J.KBBNK.U74hE.lix12.BavH2  0w13.qdig~.M4Uuq.MRib4.Q3Ky6  ::   92
+        0w23.bZI5L.6mTMr.My6X6.865m7  0w1h.nz0KB.aUUIF.n-D5a.4xtPB  ::   94
+        0w2L.fhTRg.~rW1e.VwGax.8IviJ  0w31.FL3Tz.wvH02.7XNCq.NR2nv  ::   96
+        0w20.P-IPC.lgAWB.LGkW6.rAE1Q  0w4.r4lBB.8OYkg.Kvghs.07VlL   ::   98
+        0wz.-oU3r.NwhLX.wBZxF.qQ6AZ   0w27.ctO2S.2bW2V.v7JlZ.x3fLn  ::   100
+        0wa.pFu1U.d3bbE.WnUY1.Yag3K   0w1L.W2vj8.hGiRy.iJXoz.qjPRp  ::   102
+        0w1.Om393.lhj7B.DTzoX.0wAOc   0w1e.0T3YN.h0J7G.zw5Ab.mO2QB  ::   104
+        0w4.s7XS1.f2Tj2.YlVxM.ILkFH   0w3f.k9yrH.SxmBr.YSPhv.aqLkY  ::   106
+        0w2K.jsuN4.ZfMtj.o-ocH.6cNpQ  0we.vLn5o.DllGu.kEdNm.kgLpJ   ::   108
+        0w26.NW4Uc.aEMAk.vo1HD.ddE68  0w3e.x5kBS.5SsJH.9dWVb.S70xb  ::   110
+        0w21.XAbQj.paeqm.tXZKO.5fMGk  0wH.P3jm8.2RIRA.XQCH4.Q71jo   ::   112
+        0w2C.-f8PI.j0XIS.5fjHZ.s84UU  0w3d.alVIB.bTuW~.ByD21.68JxA  ::   114
+        0w2f.NTomJ.tZ4dQ.ZHDDV.Z0ipN  0w12.7khnd.VDpwi.fShgm.JXG2b  ::   116
+        0wN.u8bGU.DbGvy.Za8Aq.CeNqE   0w3e.f42fy.sU3Z6.fqYTe.d5edO  ::   118
+        0w2r.pbf2S.PHGY3.Ze39R.A0NDE  0w3.DdLZb.OgNTx.EGwBQ.WuFbq   ::   120
+        0w3X.ahHsz.zsSUg.DPlEl.zoWDg  0w1b.t9vRF.S7QZA.bngDD.Zlh~0  ::   122
+        0wd.wVHob.9tzEJ.NRufV.Z6hjF   0w1R.a9Idk.~GFW7.SGd55.lM6MY  ::   124
+        0w1f.AfxPt.V49b2.FyFB9.x9oW0  0w3z.PJSCS.tXrGp.4Abs6.PGz9p  ::   126
+        0w3K.p9kbC.nBcft.xlw7Q.NYbMi  0w1O.Ms9k-.CrtRV.eG50S.Spdbp  ::   128
+        0wF.tLOu9.vjUbL.IHrH1.~vLPJ   0w3W.a9ef2.LAUjL.GgEsN.GiugV  ::   130
+        0w1j.K6mVX.5ACQ7.rXcTK.lu21O  0w2z.OPxvQ.kLIeh.jXQVG.rFYfc  ::   132
+        0wI.Cw6Zq.71WIO.Ty-CK.zKjcc   0w2Q.S0cSl.QZUxA.bJ2d5.N2UgG  ::   134
+        0w1w.NuykY.eXAag.-k2t8.hgjPr  0w2U.Af8yO.SL7uc.vhxTH.XnH0Z  ::   136
+        0w3e.SEnhl.0iyEb.SSF-J.zQtZu  0w1B.Uro1o.4tne5.gHcXg.pT7MA  ::   138
+        0wf.zM-YB.fmCaO.jtLFS.~evFs   0w3M.dUiZE.~~llD.way6e.BJA6g  ::   140
+        0w3Z.BEMuW.pSkP9.L6Ex0.zfjI4  0w3f.iAieq.9A2~g.2yP6c.HSIvn  ::   142
+        0w2G.pk07~.dom4v.leM-y.RYiDm  0wM.oCXXi.rjCy0.AYczB.MGz61   ::   144
+        0w3M.1p9yX.2C7vD.PTk9E.maHEI  0w21.lsmsz.rJ2kh.rEwsN.PV5qZ  ::   146
+        0w-.~i5Wy.sQhQp.LZedM.7C2u6   0w3B.vDzKx.kkBpv.gHhR0.AclVS  ::   148
+        0w2v.eSYMB.DPJRf.daDE5.jwcDL  0wy.CpDQP.pjFLF.h2kTw.qDmdG   ::   150
+        0w1b.snC0c.QYJTr.LgIfa.mVTnK  0wt.IOiHu.sWx85.658dr.CG6X7   ::   152
+        0w23.1ogCR.B8fuF.-saEx.HNxKx  0w34.HOzse.VexO4.o7yMQ.noLM5  ::   154
+        0w1x.zY3Kl.Wxf5l.hzbSG.GIKtp  0w2F.eUFB7.bkP4w.vwYp3.D44AX  ::   156
+        0wL.7l2X5.2PVtz.WQBZ8.i60Qs   0w1f.U2mM9.XLver.PCh6E.oGhc3  ::   158
+        0w2l.qE~AA.Jw5-r.vmi40.Kj5qm  0wU.wiL0I.pzMtI.MICej.WHlfA   ::   160
+        0w3w.ZDeAB.0eJfq.PZflU.Sdab8  0w10.k5psC.Ndt2f.WCRjm.Lvfyh  ::   162
+        0wc.d1AQF.oTu4F.f~WNk.f48uh   0w2S.WwOiS.LjfFM.eBDkr.t~B2Q  ::   164
+        0w2P.JTZOH.1zgRw.Ds-tK.aTmxU  0ww.ElLh7.abdpW.NLq9Y.Wr-Bx   ::   166
+        0w19.t5jic.8ngs7.nZO1W.~GQa8  0w31.qBEzw.ryf0S.WryVm.DBNhY  ::   168
+        0w2q.emSKl.dFIZG.78de7.~~SL9  0w2Y.hm5zi.Rqu~m.uym-Q.WLOkB  ::   170
+        0w2M.aUUYp.xsOmR.CN14v.UexEp  0ww.Za857.qUERi.5QcJ5.W9a-q   ::   172
+        0wW.ExlFh.y2aKD.ETZIw.VeDNW   0w6.PrCJQ.YlHWR.-xtmu.b51bd   ::   174
+        0w1z.9Gyea.18KDm.RcBD8.CS2BD  0w2u.IKecS.x35k7.phrz0.qOTec  ::   176
+        0w1s.zBB0N.Q~AvX.FMwfW.Uer4C  0w1k.o0x38.Jtxke.p1gvE.11qzS  ::   178
+        0wg.cifn9.XHPZA.cfXlu.AvRbL   0wv.w~fGn.jo2Ez.a2tuI.99T2V   ::   180
+        0w2b.QA0JN.cP1TS.poivA.5d3fP  0w2K.OIeSP.xRiDn.nvHx7.xfFjf  ::   182
+        0wC.h9IaN.aG649.xbXxg.DJpP8   0w1R.LkE0N.Vqp9W.CAjej.HT1Yg  ::   184
+        0w3p.gFUjP.kjIHY.OEggl.F5vfb  0wy.eivdj.5YSZx.hLXJl.COBez   ::   186
+        0wC.IQjBn.Ik90-.mjL60.AD0WO   0w2d.oGU4e.7tOM2.efCgF.uABvW  ::   188
+        0w2V.r9jPm.U8zn1.9hfMt.fiTDX  0w3P.x1KaW.mKR9k.f39kG.Ppofh  ::   190
+        0wtfvvK.7YcA-.PXK39.MUVll     0w1t.2w61e.hWl4E.IMgSN.f4SWt  ::   192
+        0w8.2B3qo.TIbCg.SxPF8.lFbMi   0w36.rDl-H.MhEap.EMEXW.vUOWH  ::   194
+        0w1n.INtMj.x1WMR.0VFNk.AgYbM  0wH.ZkgU3.~lvfq.hVM7i.9591C   ::   196
+        0w2E.Gm4nI.hCQKy.2glWa.M0WjD  0w1j.AEjKH.gc~DF.2uXVG.aLrby  ::   198
+        0w2j.LF6Qh.3o3a5.XRJPQ.J5FpM  0ww.6LB2C.UoF09.9GZfi.gch2f   ::   200
+        0w2x.7wdmP.Y8DS4.XnAM1.30Wkv  0w1G.qYMLN.Vxhgy.wdUN9.5WaI~  ::   202
+        0w2p.~jWkf.JLvZi.HmWJE.au0Po  0w2V.RpCf7.PbS4g.os6hn.lu1-a  ::   204
+        0w1z.GHYrP.jzLDr.W5nRz.LJmyZ  0w1x.JRmWD.APKn6.FsA4y.3RCE5  ::   206
+        0w1T.D8e0D.3ypXE.rc9Lt.c2s2I  0w2G.6VyYW.SqNbp.0yfeJ.aTnav  ::   208
+        0w3V.ZRpHJ.Ox-CH.B0qts.p4z1o  0w39.7N3Iz.1KDde.i7rNR.EFN~y  ::   210
+        0w21.0rU1q.b~YTZ.ZFRP3.zMf9I  0wh.Rc7FB.nmz7g.3ExfQ.mMe3p   ::   212
+        0w1R.IuTL1.-EEB0.0odzt.5AhVA  0wn.2fNnS.TxhlZ.EBDPU.~f9l1   ::   214
+        0wp.H5FLb.xC2Gm.sLlL8.nyR7X   0w2f.KzUDv.mZm~F.es74S.l8fiy  ::   216
+        0w3P.Xfw1w.zZd2x.tHjaC.ao3P3  0w31.Og7rL.bhHvy.qTJis.T7e-z  ::   218
+        0w2g.8YwXo.xRTKA.ZYhWB.Rq28z  0wY.RhnaN.b0ko5.GTHTT.Ddvva   ::   220
+        0w28.4S34l.q61J8.VPTDl.NRnEn  0w2g.bm1-u.6dpht.Cezlg.PWM0I  ::   222
+        0wp.~mtzy.vnfCp.46j87.Bxx5I   0w3l.9~XqY.X7ddr.sXfw1.sm3SZ  ::   224
+        0w1v.q04XA.H8pdl.05j~O.VJJRk  0w3j.diQXO.cRdyk.6eMBn.O4BWa  ::   226
+        0w2J.zHD5i.BWFZu.sjy3r.VLUAK  0w1P.mp4uM.NStQ2.m43VG.jpqD9  ::   228
+        0w3e.a76P-.bYOkJ.XN8Ln.UMIZe  0w1t.IFkPX.~vYgQ.mher3.-gr1d  ::   230
+        0w2U.2Gj5j.fbcq~.r7EWM.Lwguk  0w18.wq3oy.T9mWp.rec0M.iB5-i  ::   232
+        0w2b.jQbjN.gql8T.b0HMF.vExaA  0w3c.xsS4n.zHncI.WAsQm.dLLEN  ::   234
+        0w3d.v53m-.hDHXl.n9cjB.twhJL  0w2g.ymdjB.hjojf.d9vYT.MrFxX  ::   236
+        0w3p.btBOc.y9FZI.SxD8c.M8XYF  0w2P.JTw6N.GJAIT.TzUM5.-mmBW  ::   238
+        0wN.pF9v5.tMMw7.3o046.QvRTP   0w3s.XI-zP.4vbbh.QhSSB.C2zcz  ::   240
+        0wM.MR-TA.niALg.Nc7vP.h~rBF   0wr.ah6Hr.dicUS.4Zihk.Q5BaU   ::   242
+        0wc.R5xdR.IkvuE.LflTY.Fh9VD   0w3t.vPYH-.AD0Eu.Zx3zW.yc~Wi  ::   244
+        0wr.C1cXX.q3mYj.HTSmz.3xbnu   0wF.6WcHt.KWcYY.o-aYv.-crZo   ::   246
+        0w2~.T2HZ5.5JpXI.tm6Yl.-i2IH  0w1A.uhltk.we6mf.79anL.8BCLh  ::   248
+        0w2X.QHRaP.SWX87.40tak.Tc5JY  0w1I.3mZvr.R2O2y.Pf3vn.0xHe3  ::   250
+        0w2k.EqHtx.~PpLs.flWnF.kedAk  0w2S.ZcRF6.7qHEk.0NcHS.wT9gD  ::   252
+        0wW.pTnj-.7YASZ.L~tww.Sm3~W   0w1s.~FgPE.spDGJ.0XtT6.KoAQb  ::   254
     ==
   --
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -291,16 +289,22 @@
       |_  [our=seat saf=safe]                           ::  per server
       ++  born                                          ::    born:as:go
         |=  [now=@da her=@p tic=@pG gec=gcos pub=pass]  ::  register user
-        ^-  [(unit deed) _+>]
+        ^-  [(unit will) _+>]
         ?.  =(our (sein her))  [~ +>.$]
-        ?:  (~(has by hoc.saf) her)  [~ +>.$]
         =+  nes=sen
         ?.  =(tic (end 6 1 (shaf %tick (mix her (shax sec:ex:q.nes)))))
           [~ +>.$]
-        =+  syp=[[0 [~ p.nes] our now] gec pub]
+        =+  rad=(~(get by hoc.saf) her)
+        ?^  rad
+          ?>  ?=(^ lew.wod.u.rad)
+          ?.  =(pub r.q.i.lew.wod.u.rad)  [~ +>.$]
+          [[~ lew.wod.u.rad] +>.$] 
+        =+  syp=[[0 [~ p.nes] her now] gec pub]
         =+  ded=[(sign:se:q.nes *code (shaf %meld (sham syp))) syp]
-        :-  [~ ded]
-        +>.$(hoc.saf (~(put by hoc.saf) her [[~31337.1.1 ~ [ded ~]] ~ *cask]))
+        =+  wil=[ded law.saf]
+        ?>  =(wil (grip wil ~))
+        :-  [~ wil]
+        +>.$(hoc.saf (~(put by hoc.saf) her [[~31337.1.1 ~ wil] ~ *cask]))
       :: 
       ++  lax                                           ::    lax:as:go
         |_  [her=seat dur=door]                         ::  per client
@@ -514,7 +518,7 @@
       ^-  town
       ?>  !=(~ mac) 
       ?>  ?=(^ wil) 
-      ?>  =(our r.p.q.i.wil) 
+      ::  ?>  =(our r.p.q.i.wil) 
       ?>  =(wil (grip wil ~))
       ?>  (real mac wil)
       %_    ton
@@ -765,6 +769,21 @@
           `mace`[[0 rig] ~]
         `will`[[(sign:se:loy @ (shaf %self (sham syp))) syp] ~]
       ==
+    ::
+    ++  czar                                            ::    czar:am
+      |=  [our=seat nam=@t gen=@uw]                     ::  instantiate emperor
+      ^-  [p=(list boon) q=fort]
+      ~&  [%ames-czar our]
+      =+  loy=(brew 2.048 gen)
+      ?>  =(fig:ex:loy (zeno our))
+      =+  mac=`mace`[[0 sec:ex:loy] ~]
+      =+  syp=`step`[`bray`[0 ~ our now] [%czar nam] pub:ex:loy]
+      =+  ded=`deed`[(sign:se:loy @ (shaf %self (sham syp))) syp]
+      =+  buq=`buck`[mac [ded ~]]
+      =:  ton.fox  (~(ha go ton.fox) our buq)
+          zac.fox  (~(put by zac.fox) our *oven)
+        ==
+      [[[%beer our pac:ex:loy] ~] fox]
     ::
     ++  gnaw                                            ::    gnaw:am
       |=  [ryn=lane pac=rock]                           ::  process packet
@@ -1310,7 +1329,7 @@
           :~  [[~ p.bon] [/c hen] [%pull bos %main ~[%main]]]
               [[~ p.bon] [/c hen] [%pull bos %doc ~[%doc]]]
               [[~ p.bon] [/c hen] [%pull bos %try ~[%try]]]
-              [[~ p.bon] [/c hen] [%pull bos %arvo ~[%arvo]]]
+              ::  [[~ p.bon] [/c hen] [%pull bos %arvo ~[%arvo]]]
           ==
       ==
     ::
@@ -1354,16 +1373,15 @@
       ::
           %ta                                           ::    %ta
         ?~  s.bon  [~ fox]                              ::  register
-        ?>  ?=(^ whu)
-        ~&  [%register whu p.bon]
         =+  gox=((hard ,[p=@p q=@pG r=gcos s=pass]) u.s.bon)
+        ~&  [%register p.gox r.gox]
         =+  gus=(need (~(us go ton.fox) p.p.bon))
-        =^  sig  gus  (born:gus now gox)
+        =^  wyl  gus  (born:gus now gox)
         =.  ton.fox  (~(su go ton.fox) gus)
         :_  fox
         :~  :+  [~ p.p.bon]
               [/a hen]
-            [%want q.p.bon %to sig]
+            [%want q.p.bon %to wyl]
         ==
       ::
           %re                                           ::    %re
@@ -1436,6 +1454,9 @@
           =+  vun=(~(come am [now fox]) p.fav (bex q.fav) r.fav)
           [[[%beer p.vun] ~] q.vun]
         ::
+            %sith
+          (~(czar am [now fox]) p.fav q.fav r.fav)
+        ::
             %want
           ?>  ?=(^ whu)
           (~(wise am [now fox]) [u.whu p.fav] hen q.fav r.fav)
@@ -1481,6 +1502,10 @@
       =+  luw=(rick mar our law.saf.u.gys)
       ?.  &(?=(^ muc) ?=(^ luw))  ~
       [~ `buck`[u.muc u.luw]]
+    ?:  ?=([%tick @ ~] tyl)
+      =+  hur=(slaw %p i.t.tyl)
+      ?~  hur  ~
+      [~ (end 6 1 (shaf %tick (mix u.hur (shax sec:ex:q:sen:u.gys))))]
     ?:  ?=([%will ~] tyl)
       (rick mar our law.saf.u.gys)
     ~

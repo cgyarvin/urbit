@@ -47,6 +47,7 @@
       cws=path                                          ::  working spur
       cwd=@tas                                          ::  working desk
       way=(map ,@tas vase)                              ::  variables
+      ser=(map ,@tas (set ,[p=@ud q=@ud r=wire]))       ::  message servers
       hit=[p=@ud q=(list ,@t)]                          ::  command history
       sur=[p=@ud q=(qeu vase)]                          ::  result history
       god=[p=@ud q=(map ,@ud gyre)]                     ::  process state
@@ -134,6 +135,8 @@
   ++  leap                                              ::    leap:be
     |=  [tea=wire hen=duct fav=card]                    ::  handle event
     ^-  [p=(list move) q=brat]
+    ?:  ?=([%crud *] fav)
+      [[[[~ who] [/d hen] [%flog fav]] ~] +<.^^$]
     ?+  -.fav  
              [[[[~ who] hen fav] ~] +<.^^$]
       %line  =+  gyp=?>(?=(^ fog) i.fog)
@@ -148,12 +151,32 @@
       %thee  (heat hen p.fav)
       %went  abet:lash:(lean tea hen fav)
       %writ  abet:lash:(loam tea hen +.fav)
+      %wart  (loin hen +.fav)
     ==
   ::
   ++  loam                                              ::    loam:be
     |=  [tea=wire hen=duct rot=riot]                    ::  handle response
     ^+  *fi
     =+(a=(lead tea hen) abet:(gall:q.a p.a rot))
+  ::
+  ++  loin                                              ::    loin:be
+    |=  [hen=duct him=@p cha=@ta num=@ud val=(unit ,*)] ::  handle message
+    ^-  [(list move) brat]
+    ~&  [%loin cha num]
+    =+  yes=(~(get by ser) cha)
+    ?~  yes  [~ +<.^^$]
+    =+  sey=(~(tap by u.yes) *(list ,[p=@ud q=@ud r=wire]))
+    |-  ^-  [(list move) brat]
+    ?~  sey  [~ +<.^^^$]
+    =^  von  +<.^^^$
+      =<  abet
+      =<  lash
+      =<  abet
+      =<  abet
+      %-  pong:(ox:(past:(fest p.i.sey hen) q.i.sey) r.i.sey)
+      [%wart him cha num val]
+    =^  vun  +<.^^^$  $(sey t.sey)
+    [(weld von vun) +<.^^^$]
   ::
   ++  loot                                              ::    loot:be
     |=  [uri=purl rut=rout]                             ::  match route
@@ -471,6 +494,20 @@
         ^-  riff
         [s.kit ~ %& p.kit q.kit t.kit]
       ::
+      ++  gump                                          ::  message server
+        |=  [ton=? cha=@tas gyp=@ud pid=@ud lap=wire]
+        ^+  +>
+        =+  ^=  yes  ^-  (set ,[p=@ud q=@ud r=wire])
+            =+  yes=(~(get by ser) cha)
+            ?~(yes ~ u.yes)
+        %_    +>.$
+            ser
+          %+  ~(put by ser)  cha
+          ?:  ton
+            (~(put in yes) gyp pid lap)
+          (~(del in yes) gyp pid lap)
+        ==
+      ::
       ++  haft                                          ::  process gift
         |=  gud=gift
         ^+  +>
@@ -522,6 +559,7 @@
           %eg  (gulf (bist %ma lap) p.gal)
           %es  (gull (bist %ma lap) p.gal q.gal ~)
           %ht  +>
+          %oy  (gump | p.gal gyp pid lap)
           %up  +>(..ra (hoop lap pid))
           %wa  !!
           %yo  +>
@@ -535,6 +573,7 @@
           %eg  (gulp (bist %ma lap) p.gal)
           %es  (gull (bist %ma lap) p.gal q.gal [~ r.gal])
           %ht  +>
+          %oy  (gump & p.gal [gyp pid lap])
           %up  +>(..ra (hoot lap pid p.gal))
           %wa  !!
           %yo  (gram [/a [%b (bist [%ma lap])] ~] [%want +.gal])
@@ -579,6 +618,11 @@
               %up
             ?>  ?=(%line -.fav)
             +>.$(+>.$ (glib lap [%up +.fav]))
+          ::
+              %oy 
+            ~&  [%oy-fav fav]
+            ?>  ?=(%wart -.fav)
+            +>.$(+>.$ (glib lap [%oy +.fav]))
           ::
               %wa  !!
               %yo 

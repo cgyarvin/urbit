@@ -577,6 +577,11 @@ _reck_kick_term(u2_reck* rec_u, u2_noun pox, c3_l tid_l, u2_noun fav)
     {
       rec_u->own = u2nc(u2k(p_fav), rec_u->own);
 
+      // uL(fprintf(uH, "kick: init: %d\n", p_fav));
+      if ( u2_met(3, p_fav) <= 4 ) {
+        // uL(fprintf(uH, "kick: our: %d\n", u2_cr_word(0, p_fav)));
+        rec_u->our = u2k(p_fav);
+      }
       u2z(pox); u2z(fav); return u2_yes;
     } break;
   }
@@ -781,7 +786,15 @@ u2_reck_kick(u2_reck* rec_u, u2_noun ovo)
          (c3__note != u2h(u2t(ovo))) )
 #endif
 #if 1
+    if ( (c3__crud == u2h(u2t(ovo))) ||
+         (c3__talk == u2h(u2t(ovo))) ||
+         (c3__helo == u2h(u2t(ovo))) ||
+         (c3__init == u2h(u2t(ovo))) ) 
     {
+      u2_reck_plan(rec_u, u2nt(c3__gold, c3__term, u2_nul), 
+                          u2nc(c3__flog, u2k(u2t(ovo))));
+    }
+    else {
       uL(fprintf(uH, "kick: lost %%%s on %s\n", 
                      u2_cr_string(u2h(u2t(ovo))),
                      u2_cr_string(tox)));
