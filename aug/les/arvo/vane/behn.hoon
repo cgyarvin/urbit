@@ -162,7 +162,6 @@
   ++  loin                                              ::    loin:be
     |=  [hen=duct him=@p cha=@ta num=@ud val=(unit ,*)] ::  handle message
     ^-  [(list move) brat]
-    ~&  [%loin cha num]
     =+  yes=(~(get by ser) cha)
     ?~  yes  [~ +<.^^$]
     =+  sey=(~(tap by u.yes) *(list ,[p=@ud q=@ud r=wire]))
@@ -620,7 +619,6 @@
             +>.$(+>.$ (glib lap [%up +.fav]))
           ::
               %oy 
-            ~&  [%oy-fav fav]
             ?>  ?=(%wart -.fav)
             +>.$(+>.$ (glib lap [%oy +.fav]))
           ::

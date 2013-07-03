@@ -135,6 +135,8 @@
   ++  leap                                              ::    leap:be
     |=  [tea=wire hen=duct fav=card]                    ::  handle event
     ^-  [p=(list move) q=brat]
+    ?:  ?=([%crud *] fav)
+      [[[[~ who] [/d hen] [%flog fav]] ~] +<.^^$]
     ?+  -.fav  
              [[[[~ who] hen fav] ~] +<.^^$]
       %line  =+  gyp=?>(?=(^ fog) i.fog)
@@ -160,7 +162,6 @@
   ++  loin                                              ::    loin:be
     |=  [hen=duct him=@p cha=@ta num=@ud val=(unit ,*)] ::  handle message
     ^-  [(list move) brat]
-    ~&  [%loin cha num]
     =+  yes=(~(get by ser) cha)
     ?~  yes  [~ +<.^^$]
     =+  sey=(~(tap by u.yes) *(list ,[p=@ud q=@ud r=wire]))

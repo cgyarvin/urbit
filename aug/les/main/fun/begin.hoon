@@ -79,12 +79,12 @@
     ?~  s.nut
       :~  [%la %leaf "request rejected"]
       ==
-    =+  ded=((hard (unit deed)) u.s.nut)
-    ?~  ded
+    =+  wul=((hard (unit will)) u.s.nut)
+    ?~  wul
       :~  [%la %leaf "request refused"]
       ==
     =+  mac=`mace`[[0 sec:ex:loy] ~]
-    =+  wil=[u.ded ~]
+    =+  wil=u.wul
     :~  [%la %leaf "request approved"]
         [%xy /a `card`[%cash mig mac wil]]
     ==

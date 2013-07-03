@@ -1374,7 +1374,6 @@
           %ta                                           ::    %ta
         ?~  s.bon  [~ fox]                              ::  register
         =+  gox=((hard ,[p=@p q=@pG r=gcos s=pass]) u.s.bon)
-        ~&  [%register p.gox r.gox]
         =+  gus=(need (~(us go ton.fox) p.p.bon))
         =^  wyl  gus  (born:gus now gox)
         =.  ton.fox  (~(su go ton.fox) gus)
