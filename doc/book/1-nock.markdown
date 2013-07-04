@@ -849,7 +849,6 @@ could also write this subject as
 
 	[l b a]
 
-and we see readily that `a` is at slot `4`, `b` `5`, `l` `3`.
 and we see readily that `a` is at slot `7`, `b` `6`, `l` `2`.
 With this subject, we need to express the Hoon loop body
 
@@ -1046,23 +1045,23 @@ Appendix A: Operator Reductions
 
 	16 ::    *[a [b c] d]      [*[a b c] *[a d]]
 
-	[[*[a [7 [0 1] b]] *[a 0 1]] c]
+	*[[*[a [7 [0 1] b]] *[a 0 1]] c]
 	
 	18 ::    *[a 0 b]          /[b a]
 	
-	[[*[a [7 [0 1] b]] /[1 a]] c]
+	*[[*[a [7 [0 1] b]] /[1 a]] c]
 	
 	10 ::    /[1 a]            a
 
-	[[*[a [7 [0 1] b]] a] c]
+	*[[*[a [7 [0 1] b]] a] c]
 	
 	7r ::     *[a 7 b c]         *[*[a b] c]
 	
-	[[*[*[a 0 1]] b] a] c]
+	*[[*[*[a 0 1]] b] a] c]
 	
 **`8` Reduced:**
 
-	8r ::     *[a 8 b c]        [[*[a b] a] c]
+	8r ::     *[a 8 b c]        *[[*[a b] a] c]
 
 
 ##`9` Reduction:##
