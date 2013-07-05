@@ -1269,12 +1269,13 @@ _lo_rest(u2_reck* rec_u, u2_noun rez)
 
 /* _lo_ours(): set main identity.  Kind of a hack.
 */
-static void
+static u2_bean
 _lo_ours(u2_reck* rec_u)
 {
   if ( u2_nul == rec_u->own ) {
     uL(fprintf(uH, "no owners\n"));
-    u2_lo_bail(rec_u);
+
+    return u2_no;
   }
   else {
     u2_noun eac = u2t(rec_u->own);
@@ -1288,6 +1289,8 @@ _lo_ours(u2_reck* rec_u)
     }
     rec_u->our = u2k(rec_u->our);
     rec_u->pod = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', u2k(rec_u->our)));
+
+    return u2_yes;
   }
 }
 
@@ -1385,12 +1388,14 @@ u2_lo_loop(u2_reck* rec_u,
   else {
     _lo_rest(rec_u, rez);
   }
-  _lo_ours(rec_u);
 
-  u2_reck_sync(rec_u);
-  u2_reck_plan(rec_u, u2nt(c3__gold, c3__ames, u2_nul),
-                      u2nc(c3__kick, u2k(rec_u->now)));
+  if ( u2_yes == _lo_ours(rec_u) ) {
+    _lo_ours(rec_u);
 
+    u2_reck_sync(rec_u);
+    u2_reck_plan(rec_u, u2nt(c3__gold, c3__ames, u2_nul),
+                        u2nc(c3__kick, u2k(rec_u->now)));
+  }
 #if 1
   u2_loom_save(rec_u->ent_w);
 

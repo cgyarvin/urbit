@@ -1,4 +1,4 @@
-!:
+::
 ::  zuse (3), standard library (tang)
 ::
 |%
@@ -946,6 +946,7 @@
               [%hoop p=(unit)]                          ::  namespace response
               [%hope p=path]                            ::  namespace request
               [%init p=@p]                              ::  report install
+              [%into p=@p q=@tas r=nori]                ::  commit edits
               [%flog p=card]                            ::  log to terminal
               [%junk p=@]                               ::  entropy
               [%kick p=@da]                             ::  wake up
@@ -985,7 +986,6 @@
               [%this p=httq]                            ::  secure raw htreq
               [%thou p=httr]                            ::  raw http response
               [%tory p=(list ,@t)]                      ::  history dump
-              [%unix p=@p q=@tas r=nori]                ::  commit edits
               [%veer p=@ta q=path r=@t]                 ::  install vane
               [%volt p=*]                               ::  upgrade kernel
               [%wait p=@da q=path]                      ::  timer wait
@@ -1221,7 +1221,8 @@
 ++  octs  ,[p=@ud q=@]                                  ::  octet-stream
 ++  oryx  ,@uvH                                         ::  CSRF secret
 ++  oven                                                ::  flow by server
-          $:  nys=(map flap bait)                       ::  packets incoming
+          $:  hen=duct                                  ::  admin channel
+              nys=(map flap bait)                       ::  packets incoming
               old=(set flap)                            ::  packets completed
               wab=(map seat bath)                       ::  relationship
           ==                                            ::

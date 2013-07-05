@@ -9,13 +9,13 @@
   ^?                                                    ::  opaque core
   |%                                                    ::  poke/peek pattern
   ++  beat                                              ::  process move
-    |=  [whu=(unit seat) tea=wire hen=duct fav=curd]
+    |=  [wru=(unit writ) tea=wire hen=duct fav=curd]
     =>  .(fav ((hard card) fav))
     ^-  [p=(list move) q=vane]
     ?:  ?=(%flog -.fav)
       :_  ..^$
       %+  turn  (~(tap by dug) *(list ,[p=duct q=yard]))
-      |=([a=duct b=yard] [whu [/d a] p.fav])
+      |=([a=duct b=yard] [wru [/d a] p.fav])
     =+  ^=  yar  ^-  yard
         =+  yar=(~(get by dug) hen)
         ?^  yar  u.yar
@@ -101,7 +101,7 @@
     ++  leap                                            ::  terminal event
       |-  ^+  +
       ?+    -.fav
-        +(mos :_(mos [whu hen fav]))
+        +(mos :_(mos [wru hen fav]))
       ::
           %belt                                         ::  terminal input
         ?~  q.q.yar
@@ -177,7 +177,7 @@
                   bul  (sub bul.u.q.q.yar bus.u.q.q.yar)
                   but  (slag bus.u.q.q.yar but.u.q.q.yar)
                 ==
-            %x  +.$(mos :_(mos [whu [/b /d hen] [%ling ~]]))
+            %x  +.$(mos :_(mos [wru [/b /d hen] [%ling ~]]))
             %y  ?:  =(0 p.r.q.yar)
                   beep
                 $(fav [%belt %txt (snag q.r.q.yar r.r.q.yar)])
@@ -247,7 +247,7 @@
               mos
             :*  [~ [/b /d hen] [%hail ~]]
                 [~ hen [%bbye ~]]
-                [whu [/b /d hen] [%line jab]]
+                [wru [/b /d hen] [%line jab]]
                 [~ hen [%blit [[%mor ~] ~]]]
                 mos
             ==
@@ -272,7 +272,7 @@
           %boot
         %=    +.$
             mos
-          :_(mos [whu [[%b ~] [%d tea] hen] p.fav])
+          :_(mos [wru [[%b ~] [%d tea] hen] p.fav])
         ==
       ::
           %crud                                         ::  error trace
@@ -297,12 +297,12 @@
         ==
       ::
           ?(%hail %make %loin %sith)
-        +.$(mos :_(mos [whu [/b /d hen] fav]))
+        +.$(mos :_(mos [wru [/b /d hen] fav]))
       ::
           %note  ?.(p.yar +.$ (fume p.fav q.fav))       ::  debug message
           %save                                         ::  write a file
         %=  +.$
-          mos  :_(mos [whu hen `card`[%blit [%sav p.fav q.fav] ~]])
+          mos  :_(mos [wru hen `card`[%blit [%sav p.fav q.fav] ~]])
         ==
       ::
           %tell  (furl (turn p.fav |=(a=@t (trip a))))  ::  wall of text

@@ -1261,11 +1261,11 @@
   =< 
     |%                                                  ::  vane interface
     ++  beat
-      |=  [whu=(unit seat) tea=wire hen=duct fav=curd]
+      |=  [wru=(unit writ) tea=wire hen=duct fav=curd]
       =>  .(fav ((hard card) fav))
       ^-  [p=(list move) q=vane]
       =^  duy  ..knap
-        (knap whu tea hen fav)
+        (knap wru tea hen fav)
       [duy ..^$]
     ::
     ++  come  
@@ -1317,33 +1317,33 @@
     --
   |%
   ++  clop
-    |=  [whu=(unit seat) now=@da hen=duct bon=boon]
+    |=  [wru=(unit writ) now=@da hen=duct bon=boon]
     ^-  [(list move) fort]
     ?-    -.bon
         %beer
-      :_  fox
-      :*  [[~ p.bon] [/c hen] [%init p.bon]]
-          [[~ p.bon] hen [%init p.bon]]
+      :_  fox(zac (~(put by zac.fox) p.bon `oven`[hen ~ ~ ~]))
+      :*  [[~ %gold p.bon] [/c hen] [%init p.bon]]
+          [[~ %gold p.bon] hen [%init p.bon]]
           =+  bos=(sein p.bon)
           ?:  =(bos p.bon)  ~
           ~
-          ::  :~  [[~ p.bon] [/c hen] [%pull bos %main ~[%main]]]
-          ::      [[~ p.bon] [/c hen] [%pull bos %doc ~[%doc]]]
-          ::      [[~ p.bon] [/c hen] [%pull bos %try ~[%try]]]
-          ::      [[~ p.bon] [/c hen] [%pull bos %arvo ~[%arvo]]]
+          ::  :~  [[~ %iron p.bon] [/c hen] [%pull bos %main ~[%main]]]
+          ::      [[~ %iron p.bon] [/c hen] [%pull bos %doc ~[%doc]]]
+          ::      [[~ %iron p.bon] [/c hen] [%pull bos %try ~[%try]]]
+          ::      [[~ %iron p.bon] [/c hen] [%pull bos %arvo ~[%arvo]]]
           ::  ==
       ==
     ::
         %coke  
       :_  fox
-      :~  [[~ p.p.bon] s.bon [%went q.p.bon q.bon r.bon]]
+      :~  [[~ %iron p.p.bon] s.bon [%went q.p.bon q.bon r.bon]]
       ==
     ::
-        %mead  :_(fox [[whu hen [%hear p.bon q.bon]] ~])
+        %mead  :_(fox [[wru hen [%hear p.bon q.bon]] ~])
         %milk 
       ?+    q.bon
         :_  fox
-        :~  [[~ p.p.bon] [/b hen] [%wart q.p.bon q.bon r.bon s.bon]]
+        :~  [[~ %iron p.p.bon] [/b hen] [%wart q.p.bon q.bon r.bon s.bon]]
         ==
       ::                                                
           %hi                                           ::    %hi
@@ -1379,7 +1379,7 @@
         =^  wyl  gus  (born:gus now gox)
         =.  ton.fox  (~(su go ton.fox) gus)
         :_  fox
-        :~  :+  [~ p.p.bon]
+        :~  :+  [~ %iron p.p.bon]
               [/a hen]
             [%want q.p.bon %to wyl]
         ==
@@ -1394,14 +1394,14 @@
             ?>(?=(~ q.q.gox) (~(del by rop.fox) [p.gox p.bon]))
           ?>(?=(^ q.q.gox) (~(put by rop.fox) [p.gox p.bon] q.gox))
         :_  fox
-        :~  :+  [~ p.p.bon] 
+        :~  :+  [~ %iron p.p.bon] 
               [/c [%a (scot %p q.p.bon) (scot %ud p.gox) ~] hen]
             [%warp p.p.bon q.gox]
         ==
       ::
           %ru                                           ::    %ru
         :_  fox
-        :~  :+  [~ p.p.bon]                             ::  file response
+        :~  :+  [~ %iron p.p.bon]                       ::  file response
               [/c hen] 
             [%wart q.p.bon q.bon r.bon s.bon]
         ==
@@ -1410,13 +1410,13 @@
         %ouzo  
       ::  ~&  [%send now p.bon `@p`(mug (shaf %flap q.bon))]
       :_  fox
-      [[whu hen [%send p.bon q.bon]] ~]
+      [[wru hen [%send p.bon q.bon]] ~]
         
         %wine
       :_  fox
       =+  nym=(temp p.p.bon q.p.bon /name)
       =+  fom=~(rend co %% %p q.p.bon)
-      :~  :+  whu  [/d hen]
+      :~  :+  wru  [/d hen]
           :+  %flog  %text
           ;:  weld
             "; "
@@ -1427,10 +1427,10 @@
     ==
   ::
   ++  knap
-    |=  [whu=(unit seat) tea=wire hen=duct fav=card]
+    |=  [wru=(unit writ) tea=wire hen=duct fav=card]
     ^-  [(list move) _+>]
     ?:  ?=([%crud *] fav)
-      [[[whu [/d hen] [%flog fav]] ~] +>]
+      [[[wru [/d hen] [%flog fav]] ~] +>]
     =+  ^=  fuy  ^-  [p=(list boon) q=fort]
         ?+    -.fav  
           [~ fox]
@@ -1458,28 +1458,29 @@
           (~(czar am [now fox]) p.fav q.fav r.fav)
         ::
             %want
-          ?>  ?=(^ whu)
-          (~(wise am [now fox]) [u.whu p.fav] hen q.fav r.fav)
+          ?>  ?=(^ wru)
+          (~(wise am [now fox]) [q.u.wru p.fav] hen q.fav r.fav)
         ::
             %went 
-          (~(went am [now fox]) [u.whu p.fav] hen q.fav r.fav)
+          (~(went am [now fox]) [q.u.wru p.fav] hen q.fav r.fav)
         ::
             %wake
           ~(wake am [now fox])
         ::
             %writ
+          ?>  ?=(^ wru)
           ?>  ?=([@ @ ~] tea)
           =+  fyg=(slay i.tea)
           =+  haw=(slay i.t.tea)
           ?>  &(?=([~ %% %p @] fyg) ?=([~ %% %ud @] haw))
-          (~(wert am [now fox]) [u.whu q.p.u.fyg] hen q.p.u.haw p.fav)
+          (~(wert am [now fox]) [q.u.wru q.p.u.fyg] hen q.p.u.haw p.fav)
         ==
     =>  %_(. fox q.fuy)
     =|  out=(list move)
     |-  ^-  [p=(list move) q=_+>.^$]
     ?~  p.fuy
       [out +>.^$]
-    =^  toe  fox  (clop whu now hen i.p.fuy)
+    =^  toe  fox  (clop wru now hen i.p.fuy)
     $(p.fuy t.p.fuy, out (weld toe out))
   ::
   ++  perm

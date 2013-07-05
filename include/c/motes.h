@@ -484,6 +484,7 @@
 #   define c3__in     c3_s2('i','n')
 #   define c3__inc    c3_s3('i','n','c')
 #   define c3__init   c3_s4('i','n','i','t')
+#   define c3__into   c3_s4('i','n','t','o')
 #   define c3__intr   c3_s4('i','n','t','r')
 #   define c3__inuk   c3_s4('i','n','u','k')
 #   define c3__iron   c3_s4('i','r','o','n')

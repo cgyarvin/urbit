@@ -9,11 +9,11 @@
   ^?                                                    ::  opaque core
   |%                                                    ::
   ++  beat                                              ::  process move
-    |=  [whu=(unit seat) pax=wire hen=duct fav=curd]
+    |=  [wru=(unit writ) tea=wire hen=duct fav=curd]
     =>  .(fav ((hard card) fav))
     ^-  [p=(list move) q=vane]
     ?+    -.fav
-      [[[whu hen fav] ~] ..^$]
+      [[[wru hen fav] ~] ..^$]
     ::
         %bind                                           ::  register server
       ?>  =(%gold (adit hen))
@@ -35,7 +35,7 @@
       [~ ..^$]
     ::
         %crud
-      [[[whu [/d hen] %flog fav] ~] ..^$]
+      [[[wru [/d hen] %flog fav] ~] ..^$]
     ::
         ?(%thin %this)                                  ::  http request
       :_  ..^$
@@ -48,7 +48,7 @@
           $(seh t.seh)
       ?~  whu
         [~ hen [%thou 404 ~ ~]]
-      [whu [/b /e hen] [%thee heq]]
+      [[~ %iron u.whu] [/b /e hen] [%thee heq]]
     ::
         %that                                           ::  http response
       :_  ..^$

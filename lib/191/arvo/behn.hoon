@@ -100,7 +100,7 @@
     =+  sud=(lout p.het)
     ?~  sud
       :_  +<.^^$
-      :~  :+  [~ who]
+      :~  :+  [~ %iron who]
             hen
           :-  %that
           :-  %raw
@@ -132,10 +132,10 @@
     |=  [tea=wire hen=duct fav=card]                    ::  handle event
     ^-  [p=(list move) q=brat]
     ?:  ?=([%crud *] fav)
-      [[[[~ who] [/d hen] [%flog fav]] ~] +<.^^$]
+      [[[[~ %iron who] [/d hen] [%flog fav]] ~] +<.^^$]
     ?+  -.fav  
-             [[[[~ who] hen fav] ~] +<.^^$]
-      %hail  [[[[~ who] hen [%helo prot]] ~] +<.^^$]
+             [[[[~ %iron who] hen fav] ~] +<.^^$]
+      %hail  [[[[~ %iron who] hen [%helo prot]] ~] +<.^^$]
       %line  =+  gyp=?>(?=(^ fog) i.fog)
              =<  abet
              ?:  =(0 gyp)
@@ -143,7 +143,7 @@
              lash:(como:(fest gyp hen) p.fav)
       %ling  ?>  ?=(^ fog)
              =>  .(fog (weld t.fog `(list ,@ud)`[i.fog ~]))
-             [[[[~ who] hen [%helo prot]] ~] +<.^^$]
+             [[[[~ %iron who] hen [%helo prot]] ~] +<.^^$]
       %noop  [~ +<.^^$]
       %thee  (heat hen p.fav)
       %went  abet:lash:(lean tea hen fav)
@@ -265,7 +265,7 @@
           q=(~(put by q.god) gyp gyr)
       :-  %+  turn 
             (flop `_duv`?:(=(fog p.fod) duv [[~ [%helo perd]] duv]))
-          |=([p=duct q=card] [[~ who] (weld p hen) q])
+          |=([p=duct q=card] [[~ %iron who] (weld p hen) q])
       %_(+<.^^$ fog p.fod, q.god q.fod)
     ::
     ++  bitt  |=(lap=path [(scot %ud gyp) lap])         ::    bitt:fi:be
@@ -528,7 +528,7 @@
           %mx  |-  ^+  +>.^$
                ?~  p.gud  +>.^$
                $(p.gud t.p.gud, +>.^$ ^$(gud i.p.gud))
-          %ok  (gram [/c ~] %unix who p.gud q.gud)
+          %ok  (gram [/c ~] %into who p.gud q.gud)
           %te  (gram ~ %tell p.gud)
           %th  (gram ~ %that p.gud)
           %xx  (gram ~ p.gud)
@@ -867,7 +867,7 @@
 ^?                                                      ::  opaque core
 |%                                                      ::  poke/peek pattern
 ++  beat                                                ::  process move
-  |=  [whu=(unit seat) tea=wire hen=duct fav=curd]
+  |=  [wru=(unit writ) tea=wire hen=duct fav=curd]
   =>  .(fav ((hard card) fav))
   ^-  [p=(list move) q=vane]
   =+  dus=(~(get by dez) hen)
@@ -876,12 +876,12 @@
       ~|([%beat-none -.fav] !!)
     ::
         %init
-      ?~  whu  !! 
-      :-  [[whu hen fav] ~]
-      ..^$(dez (~(put by dez) hen [[u.whu (bard u.whu)] ~]))
+      ?~  wru  !! 
+      :-  [[wru hen fav] ~]
+      ..^$(dez (~(put by dez) hen [[q.u.wru (bard q.u.wru)] ~]))
     ::
         ?(%loin %make %sith)
-      [[[whu [/a [%b tea] hen] fav] ~] ..^$]
+      [[[wru [/a [%b tea] hen] fav] ~] ..^$]
     ==
   ?>  ?=(^ u.dus)
   ?+    -.fav
@@ -891,12 +891,12 @@
       ..^$(dez (~(put by dez) hen [[p.i.u.dus +.q.yub] t.u.dus]))
   ::
       %init
-    ?~  whu  !! 
-    :-  [[whu hen [%hail ~]] ~]
-    ..^$(dez (~(put by dez) hen [[u.whu (bard u.whu)] u.dus]))
+    ?~  wru  !! 
+    :-  [[wru hen [%hail ~]] ~]
+    ..^$(dez (~(put by dez) hen [[q.u.wru (bard q.u.wru)] u.dus]))
   ::
       %limn
-    :-  [[whu hen [%hail ~]] ~]
+    :-  [[wru hen [%hail ~]] ~]
     ..^$(dez (~(put by dez) hen (weld t.u.dus [i.u.dus ~])))
   ==
 ::
