@@ -30,7 +30,7 @@ _loom_sigsegv_handler(void* adr_v, c3_i ser_i)
 
     if ( pag_w > LoomAllPages ) {
       fprintf(stderr, "address %p out of loom!\r\n", adr_v);
-      return 0;
+      return 1;
     }
     c3_assert((u2_page_neat == LoomChem[pag_w].lif_e) ||
               (u2_page_none == LoomChem[pag_w].lif_e) );
@@ -60,8 +60,9 @@ _loom_sigsegv_handler(void* adr_v, c3_i ser_i)
       perror("mprotect");
       exit(1);
     }
+    return 1;
   }
-  return 1;
+  return 0;
 }
 
 /* _loom_read(): full blocking read.
