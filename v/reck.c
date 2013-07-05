@@ -21,6 +21,14 @@
 #include "f/coal.h"
 #include "v/vere.h"
 
+/* _reck_spat(): spat with toy.
+*/
+static u2_noun
+_reck_spat(u2_reck* rec_u, u2_noun pox)
+{
+  return u2_cn_mung(u2k(rec_u->toy.spat), pox);
+}
+
 /* _reck_nock_poke(): call poke through hardcoded interface.
 */
 static u2_noun
@@ -28,6 +36,18 @@ _reck_nock_poke(u2_reck* rec_u, u2_noun ovo)
 {
   u2_noun fun = u2_cn_nock(u2k(rec_u->roc), u2k(u2_cx_at(42, rec_u->roc)));
   u2_noun sam = u2nc(u2k(rec_u->now), ovo);
+
+#if 0
+  {
+    c3_c*   ovi_c = u2_cr_string(u2h(u2t(ovo)));
+    u2_noun tox = _reck_spat(rec_u, u2k(u2h(ovo)));
+    c3_c*   tox_c = u2_cr_string(tox);
+
+    uL(fprintf(uH, "poke: %%%s on %s\n", ovi_c, tox_c));
+
+    free(tox_c); free(ovi_c); u2z(tox);
+  }
+#endif
 
   return u2_cn_mung(fun, sam);
 }
@@ -78,14 +98,6 @@ static u2_noun
 _reck_ream(u2_reck* rec_u, u2_noun txt)
 {
   return u2_cn_mung(u2k(rec_u->toy.ream), txt);
-}
-
-/* _reck_spat(): spat with toy.
-*/
-static u2_noun
-_reck_spat(u2_reck* rec_u, u2_noun pox)
-{
-  return u2_cn_mung(u2k(rec_u->toy.spat), pox);
 }
 
 /* _reck_rain(): rain with toy.
@@ -718,15 +730,14 @@ _reck_kick_spec(u2_reck* rec_u, u2_noun pox, u2_noun fav)
 
       case c3__term: {
         u2_noun pud = tt_pox;
-        u2_noun p_pud, q_pud, r_pud;
+        u2_noun p_pud, q_pud;
         c3_l    tid_l;
 
-        if ( (u2_no == u2_cr_trel(pud, &p_pud, &q_pud, &r_pud)) ||
-             (u2_nul != r_pud) ||
-             (u2_no == u2_sing(rec_u->sen, p_pud)) ||
-             (u2_no == _reck_lily(rec_u, c3__ud, u2k(q_pud), &tid_l)) )
+        if ( (u2_no == u2_cr_cell(pud, &p_pud, &q_pud)) ||
+             (u2_nul != q_pud) ||
+             (u2_no == _reck_lily(rec_u, c3__ud, u2k(p_pud), &tid_l)) )
         {
-          //  uL(fprintf(uH, "term: bad tire\n"));
+          uL(fprintf(uH, "term: bad tire\n"));
           u2z(pox); u2z(fav); return u2_no;
         } else {
           return _reck_kick_term(rec_u, pox, tid_l, fav);

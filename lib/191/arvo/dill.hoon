@@ -3,8 +3,7 @@
 ::
   |=  pit=vase
   ^-  vane                                              ::  kernel instrument
-  =|  $:  dub=(map duct (list seat))                    ::  rights by duct
-          wyg=(map seat yard)                           ::  interface by seat
+  =|  $:  dug=(map duct yard)
       ==                                                ::
   |=  [now=@da eny=@ sky=||(* (unit))]                  ::  current invocation
   ^?                                                    ::  opaque core
@@ -13,54 +12,14 @@
     |=  [whu=(unit seat) tea=wire hen=duct fav=curd]
     =>  .(fav ((hard card) fav))
     ^-  [p=(list move) q=vane]
-    =+  gid=(~(get by dub) hen)
-    ?~  gid                                             ::  truly new duct
-      ?+    -.fav
-        ~&([%dill-lost whu tea hen fav] [~ ..^$])
-      ::
-          %boot                                         ::  log in with creds
-        [[[whu [[%a ~] [%d tea] hen] p.fav] ~] ..^$]
-      ::
-          %flog                                         ::  log to terminal
-        :_  ..^$
-        %-  turn
-        :_  |=(a=duct [whu [/d a] p.fav])
-        ^-  (list duct)
-        =+  mel=(adit hen)
-        =+  gum=`(list ,[p=duct q=(list seat)])`(~(tap by dub) ~)
-        |-  ^-  (list duct) 
-        ?~  gum  ~
-        %-  weld
-        :_  $(gum t.gum)
-        ?.  ?~(whu =(%gold mel) (lien q.i.gum |=(a=seat =(a u.whu))))
-          ~
-        [p.i.gum ~]
-      ::
-          %init                                         ::  attach terminal
-        :-  :~  [whu hen [%init p.fav]]
-                [[~ p.fav] [/b hen] [%noop ~]]
-            ==
-        %=    ..^$
-            dub
-          (~(put by dub) hen [p.fav ~])
-        ::
-            wyg
-          ?:  (~(has by wyg) p.fav)  
-            wyg
-          (~(put by wyg) p.fav [& [p.fav ~] *blur ~])
-        ==
-      ==
-    ?~  u.gid
-      ~&  [%dill-none hen]
-      [~ ..^$]
-    =>  .(gid `(list seat)`u.gid)
-    =.  whu  [~ i.gid]
+    ?:  ?=(%flog -.fav)
+      :_  ..^$
+      %+  turn  (~(tap by dug) *(list ,[p=duct q=yard]))
+      |=([a=duct b=yard] [whu [/d a] p.fav])
     =+  ^=  yar  ^-  yard
-        =+  yar=(~(get by wyg) i.gid)
+        =+  yar=(~(get by dug) hen)
         ?^  yar  u.yar
-        ?~  t.gid  [& [i.gid ~] [80 ~ *blot] ~]         ::  XX heinous
-        =+  rya=(need (~(get by wyg) i.t.gid))
-        %_(rya q [i.gid q.rya])
+        [& [80 ~ *blot] ~]
     =|  mos=(list move)
     =+  wip=|
     =<  yerk:leap
@@ -75,7 +34,7 @@
     ++  edit                                            ::  change the bed
       |=  bed=bead
       ^+  +>
-      =.  q.r.yar  [~ bed]
+      =.  q.q.yar  [~ bed]
       %-  curb
       :~  [%hop (add pol.bed bus.bed)]
           :-  %lin
@@ -90,7 +49,7 @@
     ++  fume                                            ::  print tank, prefix
       |=  [pef=@tD tac=tank]
       ^+  +>
-      =+  wol=(~(win re tac) 2 p.r.yar)
+      =+  wol=(~(win re tac) 2 p.q.yar)
       %-  furl
       %+  turn  wol
       |=  a=tape  ^-  tape
@@ -106,23 +65,23 @@
         |-  ^-  (list blit)
         ?~  wol  ~
         [[%lin (tuba i.wol)] [%mor ~] $(wol t.wol)]
-      ?~  q.r.yar  +>
-      (edit(q.r.yar ~) u.q.r.yar)
+      ?~  q.q.yar  +>
+      (edit(q.q.yar ~) u.q.q.yar)
     ::
     ++  gore                                            ::  move in history
       |=  hup=@ud
       ^+  +>
       =+  ^=  but  ^-  (list ,@c)
-          =+  byt=(~(get by hym.u.q.r.yar) hup)
+          =+  byt=(~(get by hym.u.q.q.yar) hup)
           ?^  byt  u.byt
-          (tuba (rip 3 (snag hup q.hyt.u.q.r.yar)))
+          (tuba (rip 3 (snag hup q.hyt.u.q.q.yar)))
       =+  bul=(lent but)
       %-  edit
-      %=  u.q.r.yar
+      %=  u.q.q.yar
         hiz  hup
-        hym  %+  ~(put by hym.u.q.r.yar)
-               hiz.u.q.r.yar
-             but.u.q.r.yar
+        hym  %+  ~(put by hym.u.q.q.yar)
+               hiz.u.q.q.yar
+             but.u.q.q.yar
         bus  bul
         bul  (lent but)
         but  but
@@ -131,12 +90,12 @@
     ++  kill                                            ::  add to kill ring
       |=  txt=(list ,@c)
       ^+  +>
-      =>  ?.  =(16 p.r.r.yar)  .
-          .(p.r.r.yar 15, r.r.r.yar (scag 15 r.r.r.yar))
+      =>  ?.  =(16 p.r.q.yar)  .
+          .(p.r.q.yar 15, r.r.q.yar (scag 15 r.r.q.yar))
       %=  +>
-        p.r.r.yar  +(p.r.r.yar)
-        q.r.r.yar  0
-        r.r.r.yar  [txt r.r.r.yar]
+        p.r.q.yar  +(p.r.q.yar)
+        q.r.q.yar  0
+        r.r.q.yar  [txt r.r.q.yar]
       ==
     :: 
     ++  leap                                            ::  terminal event
@@ -145,150 +104,148 @@
         +(mos :_(mos [whu hen fav]))
       ::
           %belt                                         ::  terminal input
-        ?:  ?|  ?=(~ whu)
-                ?=(~ q.r.yar)
-            ==
+        ?~  q.q.yar
           beep
         ?-    -.p.fav
             %aro                                        ::  arrow
           ?-    p.p.fav
               %d                                        ::  down
-            ?:  =(0 hiz.u.q.r.yar)
+            ?:  =(0 hiz.u.q.q.yar)
               beep
-            (gore (dec hiz.u.q.r.yar))
+            (gore (dec hiz.u.q.q.yar))
           ::
               %l                                        ::  left
-            ?:  =(0 bus.u.q.r.yar)
+            ?:  =(0 bus.u.q.q.yar)
               beep
-            (edit u.q.r.yar(bus (dec bus.u.q.r.yar)))
+            (edit u.q.q.yar(bus (dec bus.u.q.q.yar)))
           ::
               %r                                        ::  right
-            ?:  =(bul.u.q.r.yar bus.u.q.r.yar)
+            ?:  =(bul.u.q.q.yar bus.u.q.q.yar)
               beep
-            (edit u.q.r.yar(bus +(bus.u.q.r.yar)))
+            (edit u.q.q.yar(bus +(bus.u.q.q.yar)))
           ::
               %u
-            =+  hup=+(hiz.u.q.r.yar)
-            ?:  =(hup p.hyt.u.q.r.yar)
+            =+  hup=+(hiz.u.q.q.yar)
+            ?:  =(hup p.hyt.u.q.q.yar)
               beep
             (gore hup)
           ==
         ::
             %bac                                        ::  backspace
           ^+  +.$
-          ?:  =(0 bus.u.q.r.yar)
+          ?:  =(0 bus.u.q.q.yar)
             (curb `(list blit)`[[%bel ~] ~])
           %-  edit
-          %=    u.q.r.yar
-              bus  (dec bus.u.q.r.yar)
-              bul  (dec bul.u.q.r.yar)
+          %=    u.q.q.yar
+              bus  (dec bus.u.q.q.yar)
+              bul  (dec bul.u.q.q.yar)
               but  
             %+  weld 
-              (scag (dec bus.u.q.r.yar) but.u.q.r.yar)
-            (slag bus.u.q.r.yar but.u.q.r.yar)
+              (scag (dec bus.u.q.q.yar) but.u.q.q.yar)
+            (slag bus.u.q.q.yar but.u.q.q.yar)
           ==
         ::
             %ctl                                        ::  control
           ?+  p.p.fav
             beep
-            %a  (edit u.q.r.yar(bus 0))
+            %a  (edit u.q.q.yar(bus 0))
             %b  $(fav [%belt %aro %l])
-            %d  ?:  ?&  =(0 bul.u.q.r.yar)
-                        =(0 bus.u.q.r.yar)
+            %d  ?:  ?&  =(0 bul.u.q.q.yar)
+                        =(0 bus.u.q.q.yar)
                     ==
                   $(fav [%logo ~])
                 $(fav [%belt %del ~])
-            %e  (edit u.q.r.yar(bus bul.u.q.r.yar))
+            %e  (edit u.q.q.yar(bus bul.u.q.q.yar))
             %f  $(fav [%belt %aro %r])
-            %k  ?:  =(bul.u.q.r.yar bus.u.q.r.yar)
+            %k  ?:  =(bul.u.q.q.yar bus.u.q.q.yar)
                   beep
-                =>  .(+.$ (kill (slag bus.u.q.r.yar but.u.q.r.yar)))
+                =>  .(+.$ (kill (slag bus.u.q.q.yar but.u.q.q.yar)))
                 %-  edit
-                %=  u.q.r.yar
-                  bul  bus.u.q.r.yar
-                  but  (scag bus.u.q.r.yar but.u.q.r.yar)
+                %=  u.q.q.yar
+                  bul  bus.u.q.q.yar
+                  but  (scag bus.u.q.q.yar but.u.q.q.yar)
                 ==
             %l  +.$(mos :_(mos [~ hen %blit [[%clr ~] ~]])) 
             %n  $(fav [%belt %aro %d])
             %p  $(fav [%belt %aro %u])
-            %u  ?:  =(0 bus.u.q.r.yar)
+            %u  ?:  =(0 bus.u.q.q.yar)
                   beep
-                =>  .(+.$ (kill (scag bus.u.q.r.yar but.u.q.r.yar)))
+                =>  .(+.$ (kill (scag bus.u.q.q.yar but.u.q.q.yar)))
                 %-  edit
-                %=  u.q.r.yar
+                %=  u.q.q.yar
                   bus  0
-                  bul  (sub bul.u.q.r.yar bus.u.q.r.yar)
-                  but  (slag bus.u.q.r.yar but.u.q.r.yar)
+                  bul  (sub bul.u.q.q.yar bus.u.q.q.yar)
+                  but  (slag bus.u.q.q.yar but.u.q.q.yar)
                 ==
             %x  +.$(mos :_(mos [whu [/b /d hen] [%ling ~]]))
-            %y  ?:  =(0 p.r.r.yar)
+            %y  ?:  =(0 p.r.q.yar)
                   beep
-                $(fav [%belt %txt (snag q.r.r.yar r.r.r.yar)])
+                $(fav [%belt %txt (snag q.r.q.yar r.r.q.yar)])
           ==
         ::
             %del                                        ::  delete
-          ?:  =(bul.u.q.r.yar bus.u.q.r.yar)
+          ?:  =(bul.u.q.q.yar bus.u.q.q.yar)
             beep
           %-  edit
-          %=    u.q.r.yar
-              bul  (dec bul.u.q.r.yar)
+          %=    u.q.q.yar
+              bul  (dec bul.u.q.q.yar)
               but  
             %+  weld 
-              (scag bus.u.q.r.yar but.u.q.r.yar)
-            (slag +(bus.u.q.r.yar) but.u.q.r.yar)
+              (scag bus.u.q.q.yar but.u.q.q.yar)
+            (slag +(bus.u.q.q.yar) but.u.q.q.yar)
           ==
         ::
             %met                                        ::  meta
           ?+    p.p.fav
               beep
               %y  
-            ?:  =(0 p.r.r.yar)
+            ?:  =(0 p.r.q.yar)
               beep
-            =+  dol=(snag q.r.r.yar r.r.r.yar)
+            =+  dol=(snag q.r.q.yar r.r.q.yar)
             =+  leo=(lent dol)
-            ?.  (gte bus.u.q.r.yar leo)
+            ?.  (gte bus.u.q.q.yar leo)
               beep
-            =+  pey=(sub bus.u.q.r.yar leo)
-            ?.  =(dol (swag [pey leo] but.u.q.r.yar))
+            =+  pey=(sub bus.u.q.q.yar leo)
+            ?.  =(dol (swag [pey leo] but.u.q.q.yar))
               beep
-            =.  q.r.r.yar  ?:(=(p.r.r.yar +(q.r.r.yar)) 0 +(q.r.r.yar))
-            =+  ney=(snag q.r.r.yar r.r.r.yar)
+            =.  q.r.q.yar  ?:(=(p.r.q.yar +(q.r.q.yar)) 0 +(q.r.q.yar))
+            =+  ney=(snag q.r.q.yar r.r.q.yar)
             =+  lye=(lent ney)
             %-  edit
-            %=  u.q.r.yar
-              bus  (sub (add bus.u.q.r.yar lye) leo)
-              bul  (sub (add bul.u.q.r.yar lye) leo)
+            %=  u.q.q.yar
+              bus  (sub (add bus.u.q.q.yar lye) leo)
+              bul  (sub (add bul.u.q.q.yar lye) leo)
               but  %+  weld
-                     (scag pey but.u.q.r.yar)
+                     (scag pey but.u.q.q.yar)
                    %+  weld
                      `(list ,@c)`ney                    ::  XX weird fuse-loop
-                   (slag bus.u.q.r.yar but.u.q.r.yar)
+                   (slag bus.u.q.q.yar but.u.q.q.yar)
             ==
           ==
         ::
             %ret                                        ::  return
-          =+  jab=(rap 3 (tufa but.u.q.r.yar))
+          =+  jab=(rap 3 (tufa but.u.q.q.yar))
           ?:  =(%% jab)
             %=    +.$
-                q.r.yar  ~
+                q.q.yar  ~
                 mos
-              :*  [~ [/d hen] [%helo ~]]
+              :*  [~ [/b /d hen] [%hail ~]]
                   [~ hen [%bbye ~]]
                   [~ hen [%blit [%mor ~] ~]]
                   mos
               ==
             ==
           %=    +.$
-              q.r.yar  ~
-              s.yar
-            ?:  =(%pass buy.u.q.r.yar)
-              s.yar 
-            %+  ~(put by s.yar)
-              [u.whu hux.u.q.r.yar]
-            [p.hyt.u.q.r.yar [jab +.q.hyt.u.q.r.yar]]
+              q.q.yar  ~
+              r.yar
+            ?:  =(%pass buy.u.q.q.yar)
+              r.yar 
+            %+  ~(put by r.yar)
+              hux.u.q.q.yar
+            [p.hyt.u.q.q.yar [jab +.q.hyt.u.q.q.yar]]
           ::
               mos
-            :*  [~ [/d hen] [%helo ~]]
+            :*  [~ [/b /d hen] [%hail ~]]
                 [~ hen [%bbye ~]]
                 [whu [/b /d hen] [%line jab]]
                 [~ hen [%blit [[%mor ~] ~]]]
@@ -299,23 +256,23 @@
             %txt                                        ::  text keys
           =+  let=(lent p.p.fav)
           %-  edit
-          %=    u.q.r.yar
-              bus  (add let bus.u.q.r.yar)
-              bul  (add let bul.u.q.r.yar)
+          %=    u.q.q.yar
+              bus  (add let bus.u.q.q.yar)
+              bul  (add let bul.u.q.q.yar)
               but  
             ;:  weld
-              (scag bus.u.q.r.yar but.u.q.r.yar)
+              (scag bus.u.q.q.yar but.u.q.q.yar)
               p.p.fav
-              (slag bus.u.q.r.yar but.u.q.r.yar)
+              (slag bus.u.q.q.yar but.u.q.q.yar)
             ==
           ==
         ==
       ::
-          %blew   +.$(p.r.yar p.p.fav)                  ::  window size
+          %blew   +.$(p.q.yar p.p.fav)                  ::  window size
           %boot
         %=    +.$
             mos
-          :_(mos [whu [[%a ~] [%d tea] hen] p.fav])
+          :_(mos [whu [[%b ~] [%d tea] hen] p.fav])
         ==
       ::
           %crud                                         ::  error trace
@@ -323,53 +280,24 @@
         ?~  p.fav  +.^$
        (fume:$(p.fav t.p.fav) '!' i.p.fav)
       ::
-          %hail
-        ?>  ?=(^ whu)
-        %=    +.$ 
-            mos
-          :~  [whu [/d hen] [%warn "welcome, {~(rend co [~ %p u.whu])}!"]]
-              [whu [/d hen] [%helo ~]]
-          ==
-        ==
-      ::
           %helo                                         ::  trigger prompt
-        ?:  &(?=(^ q.r.yar) !=(~ but.u.q.r.yar)) +.$
-        ?>  ?=(^ whu)
-        =+  pom=(sky [%b (scot p/u.whu) %p (scot da/now) ~])
-        =+  poy=?~(pom `prod`[%text "# "] (prod u.pom))
         %-  edit
         =|  bed=bead
         =+  hux=/
         =+  ^=  hyt  ^-  hist
-            =+  hyt=(~(get by s.yar) [u.whu hux])
+            =+  hyt=(~(get by r.yar) hux)
             ?~(hyt *hist u.hyt)
         %=    bed
-            buy  p.poy
+            buy  p.p.fav
             hux  hux
             hiz  0
             hyt  [+(p.hyt) [%% q.hyt]]
-            pot  q.poy
-            pol  (lent q.poy)
+            pot  q.p.fav
+            pol  (lent q.p.fav)
         ==
       ::
-          %init                                         ::  attach to seat
-        %=    +.$
-            gid  [p.fav gid]
-            mos    :*  [whu hen [%init p.fav]]
-                       [[~ p.fav] [/b hen] [%noop ~]]
-                       mos
-                   ==
-        ==
-      ::
-          %logo                                         ::  logout
-        %=    +.$
-            gid  (skip gid |=(a=seat =(u.whu a)))
-            mos  
-          :*  [whu hen [%bbye ~]]
-              [whu hen [%warn "bye, {(scow %p u.whu)}"]]
-              mos
-          ==
-        ==
+          ?(%hail %make %loin %sith)
+        +.$(mos :_(mos [whu [/b /d hen] fav]))
       ::
           %note  ?.(p.yar +.$ (fume p.fav q.fav))       ::  debug message
           %save                                         ::  write a file
@@ -379,7 +307,7 @@
       ::
           %tell  (furl (turn p.fav |=(a=@t (trip a))))  ::  wall of text
           %text  $(fav [%talk %leaf p.fav])             ::  simple message
-          %talk  (furl (~(win re p.fav) 0 p.r.yar))     ::  program output
+          %talk  (furl (~(win re p.fav) 0 p.q.yar))     ::  program output
           %warn  (fume '~' [%leaf p.fav])               ::  system message
           %wipe  +.$(wip &)                             ::  delete old
       ==
@@ -387,10 +315,7 @@
     ++  yerk                                            ::  complete core
       ^-  [p=(list move) q=_..^$]
       :-  (flop mos)
-      %_  ..^$
-        dub  ?.(wip (~(put by dub) hen gid) (~(del by dub) hen))
-        wyg  (~(put by wyg) u.whu yar)
-      ==
+      ..^$(dug ?.(wip (~(put by dug) hen yar) (~(del by dug) hen)))
     --
   ::
   ++  come  
@@ -407,21 +332,20 @@
   ++  load
     |=  new=vase
     ^-  vane
-    ?.  (~(nest ut -:!>([dub wyg])) & p.new)
+    ?.  (~(nest ut -:!>(dug)) & p.new)
       (come new)
     %_  ..^$
-      dub  ((map duct (list seat)) -.q.new)
-      wyg  ((map seat yard) +.q.new)
+      dug  ((map duct yard) -.q.new)
     ==
   ::
   ++  raze  
     ^-  vane
-    ..$(dub ~, wyg ~)
+    ..$(dug ~)
   ::
   ++  scry
     |=  [our=seat ren=@tas his=seat syd=disc lot=coin tyl=path]
     ^-  (unit)
     ~
   ::
-  ++  stay  `vase`!>([dub wyg])
+  ++  stay  `vase`!>(dug)
   --

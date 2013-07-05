@@ -78,7 +78,8 @@
     |=  [mac=mace law=will]  
     ?>  ?&  |-  ^-  ?
             ?~  mac  &
-            ?>  ?&  ?=(^ law) 
+            ?>  ?&  ?=(^ law)
+                    (lth p.p.q.i.law 9)                 ::  9-lives rule
                     =(p.p.q.i.law p.i.mac)
                     =(r.q.i.law pub:ex:(wear q.i.mac))
                 ==
@@ -790,7 +791,6 @@
       ^-  [p=(list boon) q=fort]
       =+  kec=(bite pac)
       ?.  (~(has by urb.ton.fox) q.p.kec)
-        ~&  [%woop p.kec]
         [~ fox]
       =<  zork
       =<  zank
@@ -1322,15 +1322,16 @@
     ?-    -.bon
         %beer
       :_  fox
-      :*  [[~ p.bon] [/c hen] [%keep p.bon]]
+      :*  [[~ p.bon] [/c hen] [%init p.bon]]
           [[~ p.bon] hen [%init p.bon]]
           =+  bos=(sein p.bon)
           ?:  =(bos p.bon)  ~
-          :~  [[~ p.bon] [/c hen] [%pull bos %main ~[%main]]]
-              [[~ p.bon] [/c hen] [%pull bos %doc ~[%doc]]]
-              [[~ p.bon] [/c hen] [%pull bos %try ~[%try]]]
-              ::  [[~ p.bon] [/c hen] [%pull bos %arvo ~[%arvo]]]
-          ==
+          ~
+          ::  :~  [[~ p.bon] [/c hen] [%pull bos %main ~[%main]]]
+          ::      [[~ p.bon] [/c hen] [%pull bos %doc ~[%doc]]]
+          ::      [[~ p.bon] [/c hen] [%pull bos %try ~[%try]]]
+          ::      [[~ p.bon] [/c hen] [%pull bos %arvo ~[%arvo]]]
+          ::  ==
       ==
     ::
         %coke  

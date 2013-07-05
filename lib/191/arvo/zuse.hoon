@@ -926,6 +926,7 @@
 ++  card                                                ::  event
           $%  [%bbye ~]                                 ::  reset prompt
               [%bind p=seat q=host]                     ::  bind http server
+              [%bund p=seat q=(list rout)]              ::  new http bind
               [%belt p=belt]                            ::  terminal input
               [%blew p=blew]                            ::  terminal config
               [%blit p=(list blit)]                     ::  terminal output
@@ -937,26 +938,25 @@
               [%dump p=(list ,@t)]                      ::  raw text lines
               [%file p=@tas q=@]                        ::  apply atomic file
               [%fail p=tape]                            ::  report failure
-              [%hail ~]                                 ::  welcome user
+              [%hail ~]                                 ::  refresh 
               [%hear p=lane q=@]                        ::  receive packet
               [%hemp p=path]                            ::  cancel request
-              [%helo ~]                                 ::  trigger prompt
+              [%helo p=prod]                            ::  trigger prompt
               [%hole p=lane q=@]                        ::  packet failed
               [%hoop p=(unit)]                          ::  namespace response
               [%hope p=path]                            ::  namespace request
               [%init p=@p]                              ::  report install
               [%flog p=card]                            ::  log to terminal
               [%junk p=@]                               ::  entropy
-              [%keep p=@p]                              ::  establish master
               [%kick p=@da]                             ::  wake up
               [%kill p=@ud]                             ::  kill a process
               [%lane p=lane]                            ::  set public route
               [%line p=@t]                              ::  source line
+              [%limn ~]                                 ::  rotate seat
               [%ling ~]                                 ::  rotate interface
               [%load p=@tas q=path]                     ::  request atomic file
-              [%logn p=@p q=chum]                       ::  name hashed-pass
+              [%loin p=@p q=chum]                       ::  name hashed-pass
               [%logo ~]                                 ::  logout
-              [%logp p=@p]                              ::  privileged login
               [%loot p=@tas q=path]                     ::  request directory
               [%make p=@t q=@ud r=@]                    ::  wild license
               [%mine p=@ud q=@t]                        ::  query matched line
@@ -995,7 +995,7 @@
               [%wart p=seat q=@ta r=@ud s=(unit ,*)]    ::  incoming request
               [%warn p=tape]                            ::  system message
               [%went p=seat q=cape r=soap]              ::  outgoing reaction
-              [%wipe ~]                                 ::  clean up duct
+              [%wipe ~]                                 ::  clean to sequence
               [%word p=chum]                            ::  set password
               [%wort p=tape]                            ::  semantic failure
               [%writ p=riot]                            ::  response
@@ -1372,8 +1372,7 @@
 ++  worm  ,*                                            ::  vase of task
 ++  yard                                                ::  terminal state
           $:  p=?                                       ::  verbose 
-              q=(list seat)                             ::  owner stack
-              r=blur                                    ::  display state
-              s=(map ,[p=seat q=path] hist)             ::  history
+              q=blur                                    ::  display state
+              r=(map path hist)                         ::  history
           ==                                            ::
 --

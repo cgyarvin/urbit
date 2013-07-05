@@ -9,10 +9,8 @@
 ::
 |%
 ++  bard                                                ::  new session
-  |=  who=seat  ^-  brat
-  %+  barn  who
+  |=  who=seat  ^-  brad
   %*  .  *brad
-    who    who
     hox    (scot %p who)
     cwd    %try
     fog    [0 ~]
@@ -20,29 +18,8 @@
     p.sur  1
     p.god  1
   ==
-::
-++  barn                                                ::  make defaults
-  |=  [who=seat bad=brad]  ^-  brat
-  =+  nib=pit
-  =+  pal=~(play ut p.nib)
-  :_  bad
-  %*  .  *bran
-    nub      nib
-    sot.vax  (slap nib (vice 'slot'))
-    yom.gen  (vice '*(set ,@tas)')
-    zim.gen  (vice '*(map ,@tas ,*)')
-    cof.typ  (pal (vice '*conf'))
-    gee.typ  (pal (vice '*gene'))
-    liz.typ  (pal (vice '*(list ,@t)'))
-    pah.typ  (pal (vice '*path'))
-    noq.typ  (pal (vice '*note'))
-    tak.typ  (pal (vice '*task'))
-    vas.typ  (pal (vice '*vase'))
-  ==
-::
 ++  brad                                                ::  session/dynamic
-  $:  who=seat                                          ::  identity
-      fog=(list ,@ud)                                   ::  virtual consoles
+  $:  fog=(list ,@ud)                                   ::  virtual consoles
       hox=@ta                                           ::  identity text
       cws=path                                          ::  working spur
       cwd=@tas                                          ::  working desk
@@ -72,7 +49,26 @@
         vas=type                                        ::  '*vase'
     ==                                                  ::
   ==                                                    ::
-++  brat  ,[bran brad]
+::
+++  bred                                                ::  make defaults
+  =+  nib=pit
+  =+  pal=~(play ut p.nib)
+  ~+
+  %*  .  *bran
+    nub      nib
+    sot.vax  (slap nib (vice 'slot'))
+    yom.gen  (vice '*(set ,@tas)')
+    zim.gen  (vice '*(map ,@tas ,*)')
+    cof.typ  (pal (vice '*conf'))
+    gee.typ  (pal (vice '*gene'))
+    liz.typ  (pal (vice '*(list ,@t)'))
+    pah.typ  (pal (vice '*path'))
+    noq.typ  (pal (vice '*note'))
+    tak.typ  (pal (vice '*task'))
+    vas.typ  (pal (vice '*vase'))
+  ==
+++  brat  ,[[who=seat bran] brad]                       ::  don't ask why
+++  brim  (list ,[p=seat q=brad])                       ::  session
 --                                                      ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::              section 4bB, session engine             ::
@@ -139,6 +135,7 @@
       [[[[~ who] [/d hen] [%flog fav]] ~] +<.^^$]
     ?+  -.fav  
              [[[[~ who] hen fav] ~] +<.^^$]
+      %hail  [[[[~ who] hen [%helo prot]] ~] +<.^^$]
       %line  =+  gyp=?>(?=(^ fog) i.fog)
              =<  abet
              ?:  =(0 gyp)
@@ -146,12 +143,12 @@
              lash:(como:(fest gyp hen) p.fav)
       %ling  ?>  ?=(^ fog)
              =>  .(fog (weld t.fog `(list ,@ud)`[i.fog ~]))
-             [[[[~ who] hen [%helo ~]] ~] +<.^^$]
+             [[[[~ who] hen [%helo prot]] ~] +<.^^$]
       %noop  [~ +<.^^$]
       %thee  (heat hen p.fav)
       %went  abet:lash:(lean tea hen fav)
       %writ  abet:lash:(loam tea hen +.fav)
-      %wart  (loin hen +.fav)
+      %wart  (lion hen +.fav)
     ==
   ::
   ++  loam                                              ::    loam:be
@@ -159,7 +156,7 @@
     ^+  *fi
     =+(a=(lead tea hen) abet:(gall:q.a p.a rot))
   ::
-  ++  loin                                              ::    loin:be
+  ++  lion                                              ::    lion:be
     |=  [hen=duct him=@p cha=@ta num=@ud val=(unit ,*)] ::  handle message
     ^-  [(list move) brat]
     =+  yes=(~(get by ser) cha)
@@ -267,7 +264,7 @@
           :-  ?:((lien fog |=(a=@ud =(a gyp))) fog [gyp fog])
           q=(~(put by q.god) gyp gyr)
       :-  %+  turn 
-            (flop `_duv`?:(=(fog p.fod) duv [[~ [%helo ~]] duv]))
+            (flop `_duv`?:(=(fog p.fod) duv [[~ [%helo perd]] duv]))
           |=([p=duct q=card] [[~ who] (weld p hen) q])
       %_(+<.^^$ fog p.fod, q.god q.fod)
     ::
@@ -557,7 +554,7 @@
           %%   +>
           %eg  (gulf (bist %ma lap) p.gal)
           %es  (gull (bist %ma lap) p.gal q.gal ~)
-          %ht  +>
+          %ht  (gram [/e [%b (bist [%ma lap])] ~] [%bund who ~])
           %oy  (gump | p.gal gyp pid lap)
           %up  +>(..ra (hoop lap pid))
           %wa  !!
@@ -571,7 +568,7 @@
           %%   +>
           %eg  (gulp (bist %ma lap) p.gal)
           %es  (gull (bist %ma lap) p.gal q.gal [~ r.gal])
-          %ht  +>
+          %ht  (gram [/e [%b (bist [%ma lap])] ~] [%bund who p.gal])
           %oy  (gump & p.gal [gyp pid lap])
           %up  +>(..ra (hoot lap pid p.gal))
           %wa  !!
@@ -864,7 +861,7 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::              section 4bC, shell vane                 ::
 ::
-=|  $:  deb=(map seat brat)                             ::  state by seat
+=|  $:  dez=(map duct brim)                             ::  state by seat
     ==                                                  ::
 |=  [now=@da eny=@ sky=||(* (unit))]                    ::  current invocation
 ^?                                                      ::  opaque core
@@ -873,15 +870,35 @@
   |=  [whu=(unit seat) tea=wire hen=duct fav=curd]
   =>  .(fav ((hard card) fav))
   ^-  [p=(list move) q=vane]
-  ?.  ?=(^ whu)
-    ~&  [%beat-none fav]
-    !!
-  =+  ^=  beg  ^-  brat
-      =+  beg=(~(get by deb) u.whu)
-      ?^(beg u.beg (bard u.whu))
-  =+  yub=(leap:((be beg) now eny sky) tea hen fav)
-  :-  p.yub
-  ..^$(deb (~(put by deb) u.whu q.yub))
+  =+  dus=(~(get by dez) hen)
+  ?~  dus
+    ?+    -.fav  
+      ~|([%beat-none -.fav] !!)
+    ::
+        %init
+      ?~  whu  !! 
+      :-  [[whu hen fav] ~]
+      ..^$(dez (~(put by dez) hen [[u.whu (bard u.whu)] ~]))
+    ::
+        ?(%loin %make %sith)
+      [[[whu [/a [%b tea] hen] fav] ~] ..^$]
+    ==
+  ?>  ?=(^ u.dus)
+  ?+    -.fav
+      =+  beg=`brat`[[p.i.u.dus bred] q.i.u.dus]
+      =+  yub=(leap:((be beg) now eny sky) tea hen fav)
+      :-  p.yub
+      ..^$(dez (~(put by dez) hen [[p.i.u.dus +.q.yub] t.u.dus]))
+  ::
+      %init
+    ?~  whu  !! 
+    :-  [[whu hen [%hail ~]] ~]
+    ..^$(dez (~(put by dez) hen [[u.whu (bard u.whu)] u.dus]))
+  ::
+      %limn
+    :-  [[whu hen [%hail ~]] ~]
+    ..^$(dez (~(put by dez) hen (weld t.u.dus [i.u.dus ~])))
+  ==
 ::
 ++  come  
   |=  old=vase
@@ -897,35 +914,18 @@
 ++  load
   |=  new=vase
   ^-  vane
-  ?.  (~(nest ut -:!>(*(list ,[p=seat q=brad]))) & p.new)
-    ~|(%load-nest-bede !!)
-  %=    ..^$
-      deb
-    ^-  (map seat brat)
-    %-  ~(gas by *(map seat brat))
-    %+  turn
-      ((hard (list ,[p=seat q=brad])) q.new)
-    |=([p=seat q=brad] [p (barn p q)])
-  ==
+  ?.  (~(nest ut -:!>(dez)) & p.new)
+    (come new) 
+  ..^$(dez ((map duct brim) q.new))
 ::
 ++  raze  
   ^-  vane
-  ..$(deb ~)
+  ..$(dez ~)
 ::
 ++  scry
   |=  [our=seat ren=@tas his=seat syd=disc lot=coin tyl=path]
   ^-  (unit)
-  ?.  =(our his)  ~
-  ?.  &(=(%p syd) =([%% %da now] lot)) ~
-  =+  beg=(~(get by deb) our)
-  ?~  beg  ~
-  [~ prot:((be u.beg) now eny |=(* *(unit)))]
+  ~
 ::
-++  stay
-  ^-  vase
-  !>  |-  ^-  (list ,[p=seat q=brad])
-      %+  turn
-        (~(tap by deb) ~)
-      |=  [p=seat q=brat]
-      ^-([p=seat q=brad] [p +.q])
+++  stay  `vase`!>(dez)
 --

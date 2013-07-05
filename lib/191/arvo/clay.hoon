@@ -486,7 +486,7 @@
           [~ p.fav] 
       $(fav q.fav)
     ::
-        %keep
+        %init
       ::  [[%tell %0 %leaf "clay: home for {~(rend co ~ %p u.whu)}"] ~]
       [~ ..^$(fat.ruf (~(put by fat.ruf) u.whu *room))]
     ::

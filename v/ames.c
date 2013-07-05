@@ -67,7 +67,7 @@ u2_ames_io_init(u2_reck* rec_u)
 {
   u2_ames* sam_u = &u2_Host.sam_u;
 
-  c3_assert(u2_nul != rec_u->own);
+  // c3_assert(u2_nul != rec_u->own);
   {
     c3_w pip_w = 0x7f000001;    //  hardbound to localhost 
     c3_s por_s;

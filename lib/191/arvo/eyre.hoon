@@ -31,6 +31,9 @@
         (skip seh |=([a=host b=seat] (hone q.fav a)))
       ==
     ::
+        %bund                                           ::  we'll use this
+      [~ ..^$]
+    ::
         %crud
       [[[whu [/d hen] %flog fav] ~] ..^$]
     ::

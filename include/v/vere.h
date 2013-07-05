@@ -297,7 +297,8 @@
         c3_d    now_d;                      //  event tick
         struct ev_loop *lup_u;              //  libev event loop
         u2_http* htp_u;                     //  http servers
-        u2_utty* uty_u;                     //  terminal servers
+        u2_utty* uty_u;                     //  all terminals 
+        u2_utty* tem_u;                     //  main terminal (1)
         u2_ulog  lug_u;                     //  event log
         u2_ames  sam_u;                     //  packet interface
         u2_save  sav_u;                     //  autosave
@@ -757,7 +758,6 @@
       */
         void
         u2_term_ef_boil(u2_reck* rec_u,
-                        c3_l     old_l,
                         c3_l     ono_l);
 
       /* u2_term_ef_bake(): initial effects for new server.

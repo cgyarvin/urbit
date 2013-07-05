@@ -158,6 +158,7 @@ u2_term_io_init(u2_reck* rec_u)
 
     uty_u->nex_u = u2_Host.uty_u;
     u2_Host.uty_u = uty_u;
+    u2_Host.tem_u = uty_u;
   }
 
   //  Start raw input.
@@ -479,7 +480,7 @@ _term_io_belt(u2_reck* rec_u,
               u2_noun  blb)
 {
   u2_noun tid = u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3__ud, uty_u->tid_l));
-  u2_noun pax = u2nc(c3__gold, u2nq(c3__term, u2k(rec_u->sen), tid, u2_nul));
+  u2_noun pax = u2nq(c3__gold, c3__term, tid, u2_nul);
 
   u2_reck_plan(rec_u, pax, u2nc(c3__belt, blb));
 }
@@ -695,7 +696,8 @@ _term_ef_blew(u2_reck* rec_u, c3_l tid_l)
   }
 #endif
 }
-              
+
+#if 0
 /* u2_term_ef_boil(): initial effects for loaded servers.
 */
 void
@@ -727,7 +729,38 @@ u2_term_ef_boil(u2_reck* rec_u,
     u2z(pax);
   }
 }
+#else
+/* u2_term_ef_boil(): initial effects for loaded servers.
+*/
+void
+u2_term_ef_boil(u2_reck* rec_u,
+                c3_l     ono_l)
+{
+  if ( ono_l ) {
+    u2_noun tid_l;
 
+    for ( tid_l = 2; tid_l <= ono_l; tid_l++ ) {
+      u2_noun tin = u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3__ud, tid_l));
+      u2_noun pax = u2nq(c3__gold, c3__term, tin, u2_nul);
+      u2_noun hud = u2nc(c3__wipe, u2_nul);
+ 
+      u2_reck_plan(rec_u, pax, hud);
+    }
+  }
+
+  {
+    u2_noun pax = u2nq(c3__gold, c3__term, '1', u2_nul);
+
+    //  u2_reck_plan(rec_u, u2k(pax), u2nc(c3__init, u2k(u2h(rec_u->own))));
+    u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, _term_ef_blew(rec_u, 1)));
+    u2_reck_plan(rec_u, u2k(pax), u2nc(c3__hail, u2_nul));
+
+    u2z(pax);
+  }
+}
+#endif
+
+#if 0
 /* u2_term_ef_bake(): initial effects for new terminal.
 */
 void
@@ -742,6 +775,22 @@ u2_term_ef_bake(u2_reck* rec_u,
 
   u2z(pax);
 }
+#else
+/* u2_term_ef_bake(): initial effects for new terminal.
+*/
+void
+u2_term_ef_bake(u2_reck* rec_u,
+                u2_noun  fav)
+{
+  u2_noun pax = u2nq(c3__gold, c3__term, '1', u2_nul);
+
+  u2_reck_plan(rec_u, u2k(pax), u2nc(c3__boot, fav));
+  u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, _term_ef_blew(rec_u, 1)));
+  u2_reck_plan(rec_u, u2k(pax), u2nc(c3__hail, u2_nul));
+
+  u2z(pax);
+}
+#endif
 
 /* _term_ef_blit(): send blit to terminal.
 */
@@ -802,6 +851,9 @@ u2_term_ef_blit(u2_reck* rec_u,
   u2_utty* uty_u = _term_ef_get(rec_u, tid_l);
 
   if ( 0 == uty_u ) {
+    uL(fprintf(uH, "no terminal %d\n", tid_l));
+    uL(fprintf(uH, "uty_u %p\n", u2_Host.uty_u));
+
     u2z(bls); return;
   }
 
