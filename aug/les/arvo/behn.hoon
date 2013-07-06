@@ -873,6 +873,7 @@
   =+  dus=(~(get by dez) hen)
   ?~  dus
     ?+    -.fav  
+      ~&  [%beat-none -.fav tea hen]
       ~|([%beat-none -.fav] !!)
     ::
         %init
@@ -896,6 +897,7 @@
     ..^$(dez (~(put by dez) hen [[q.u.wru (bard q.u.wru)] u.dus]))
   ::
       %limn
+    ~&  %behn-limn
     :-  [[wru hen [%hail ~]] ~]
     ..^$(dez (~(put by dez) hen (weld t.u.dus [i.u.dus ~])))
   ==

@@ -1315,6 +1315,7 @@
     ++  stay  `vase`!>(fox)
     --
   |%
+  ++  claw  |=(our=seat ^-(duct hen:(need (~(get by zac.fox) our))))
   ++  clop
     |=  [wru=(unit writ) now=@da hen=duct bon=boon]
     ^-  [(list move) fort]
@@ -1341,7 +1342,9 @@
         %milk 
       ?+    q.bon
         :_  fox
-        :~  [[~ %iron p.p.bon] [/b hen] [%wart q.p.bon q.bon r.bon s.bon]]
+        :~  :+  [~ %iron p.p.bon] 
+              (claw p.p.bon)
+            [%wart q.p.bon q.bon r.bon s.bon]
         ==
       ::                                                
           %hi                                           ::    %hi
@@ -1400,7 +1403,7 @@
           %ru                                           ::    %ru
         :_  fox
         :~  :+  [~ %iron p.p.bon]                       ::  file response
-              [/c hen] 
+              [/c (claw p.p.bon)] 
             [%wart q.p.bon q.bon r.bon s.bon]
         ==
       ==
