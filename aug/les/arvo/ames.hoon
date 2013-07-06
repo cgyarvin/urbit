@@ -296,7 +296,6 @@
         ?.  =(tic (end 6 1 (shaf %tick (mix her (shax sec:ex:q.nes)))))
           [~ +>.$]
         =+  rad=(~(get by hoc.saf) her)
-        ~&  [%ames-born our her ?=(^ rad)]
         ?^  rad
           ?>  ?=(^ lew.wod.u.rad)
           ?.  =(pub r.q.i.lew.wod.u.rad)  [~ +>.$]
