@@ -851,8 +851,8 @@ u2_term_ef_blit(u2_reck* rec_u,
   u2_utty* uty_u = _term_ef_get(rec_u, tid_l);
 
   if ( 0 == uty_u ) {
-    uL(fprintf(uH, "no terminal %d\n", tid_l));
-    uL(fprintf(uH, "uty_u %p\n", u2_Host.uty_u));
+    // uL(fprintf(uH, "no terminal %d\n", tid_l));
+    // uL(fprintf(uH, "uty_u %p\n", u2_Host.uty_u));
 
     u2z(bls); return;
   }

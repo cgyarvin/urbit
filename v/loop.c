@@ -1352,8 +1352,6 @@ u2_lo_loop(u2_reck* rec_u,
            u2_bean  rez,
            u2_noun  imp)
 {
-  _lo_init(rec_u);
-
   if ( u2_yes == nuu ) {
     u2_noun ten = _lo_zen(rec_u);
     u2_noun pig;
@@ -1410,6 +1408,8 @@ u2_lo_loop(u2_reck* rec_u,
     //  _lo_copy(rec_u, 0, c3__doc, u2nc(c3__ud, 1)); 
     //  _lo_copy(rec_u, 0, c3__arvo, u2nc(c3__ud, 1)); 
   }
+  _lo_init(rec_u);
+
   {
     struct ev_loop *lup_u = ev_default_loop(0);
 

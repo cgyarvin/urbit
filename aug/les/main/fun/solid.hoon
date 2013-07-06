@@ -28,7 +28,7 @@
         ==
     |-  ^+  all
     ?~  vay  all
-    =+  pax=(weld top `path`[%vane q.i.vay ~])
+    =+  pax=(weld top `path`[q.i.vay ~])
     =+  txt=((hard ,@) .^(%cx (weld pax `path`[%hoon ~])))
     =+  sam=[est `ovum`[[%gold ~] [%veer p.i.vay pax txt]]]
     ~&  [%solid-veer i.vay]

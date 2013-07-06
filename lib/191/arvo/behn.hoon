@@ -873,6 +873,7 @@
   =+  dus=(~(get by dez) hen)
   ?~  dus
     ?+    -.fav  
+      ~&  [%beat-what -.fav hen]
       ~|([%beat-none -.fav] !!)
     ::
         %init

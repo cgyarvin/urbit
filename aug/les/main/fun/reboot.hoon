@@ -8,7 +8,7 @@
     ?:  =(~ arg)  [%da est]
     ?>  =(~ +.arg)
     ((hard case) -.arg)
-=+  pre=`path`[(scot %p who) %arvo ~(rent co %% (dime lok)) %vane ~]
+=+  pre=`path`[(scot %p who) %arvo ~(rent co %% (dime lok)) ~]
 =+  ^=  vay  ^-  (list ,[p=@tas q=@tas])
     :~  [%% %zuse]
         [%a %ames]

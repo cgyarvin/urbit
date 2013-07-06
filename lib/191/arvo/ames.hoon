@@ -774,7 +774,6 @@
     ++  czar                                            ::    czar:am
       |=  [our=seat nam=@t gen=@uw]                     ::  instantiate emperor
       ^-  [p=(list boon) q=fort]
-      ~&  [%ames-czar our]
       =+  loy=(brew 2.048 gen)
       ?>  =(fig:ex:loy (zeno our))
       =+  mac=`mace`[[0 sec:ex:loy] ~]
@@ -1326,12 +1325,11 @@
           [[~ %gold p.bon] hen [%init p.bon]]
           =+  bos=(sein p.bon)
           ?:  =(bos p.bon)  ~
-          ~
-          ::  :~  [[~ %iron p.bon] [/c hen] [%pull bos %main ~[%main]]]
-          ::      [[~ %iron p.bon] [/c hen] [%pull bos %doc ~[%doc]]]
-          ::      [[~ %iron p.bon] [/c hen] [%pull bos %try ~[%try]]]
-          ::      [[~ %iron p.bon] [/c hen] [%pull bos %arvo ~[%arvo]]]
-          ::  ==
+          :~  [[~ %iron p.bon] [/c hen] [%pull bos %main ~[%main]]]
+              [[~ %iron p.bon] [/c hen] [%pull bos %doc ~[%doc]]]
+              [[~ %iron p.bon] [/c hen] [%pull bos %try ~[%try]]]
+          ::  [[~ %iron p.bon] [/c hen] [%pull bos %arvo ~[%arvo]]]
+          ==
       ==
     ::
         %coke  

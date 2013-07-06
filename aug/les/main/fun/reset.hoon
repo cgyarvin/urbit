@@ -30,6 +30,6 @@
     ==
 %+  turn  vay
 |=  [a=@tas b=@tas]
-=+  pax=(weld top `path`[%vane b ~])
+=+  pax=(weld top `path`[b ~])
 =+  txt=((hard ,@) .^(%cx (weld pax `path`[%hoon ~])))
 `gift`[%xx %veer a pax txt]

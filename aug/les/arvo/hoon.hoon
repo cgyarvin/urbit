@@ -7173,7 +7173,12 @@
 |%
 ++  curd  ,[p=@tas q=*]                                 ::  typeless card
 ++  duct  (list wire)                                   ::  causal history
-++  move  ,[p=(unit seat) q=duct r=curd]                ::  typeless move
+++  helm                                                ::  privilege
+          $|  ?(%gold %iron)                            ::  root, user
+          $%  [%lead p=seat]                            ::  foreign
+          ==                                            ::
+++  hilt  ?(0 1 2)                                      ::  lead iron gold
+++  move  ,[p=(unit writ) q=duct r=curd]                ::  typeless move
 ++  ovum  ,[p=wire q=curd]                              ::  typeless ovum
 ++  pane  (list ,[p=@tas q=vase])                       ::  kernel modules
 ++  pone  (list ,[p=@tas q=vise])                       ::  kernel modules, old
@@ -7182,7 +7187,7 @@
           |+  [now=@da eny=@ sky=||(* (unit))]          ::  activate
           ^?  |%                                        ::
               ++  beat                                  ::  update
-                        |=  $:  whu=(unit seat)         ::  calling identity
+                        |=  $:  wru=(unit writ)         ::  calling identity
                                 pax=wire                ::  pretext
                                 hen=duct                ::  channel
                                 fav=curd                ::  event
@@ -7212,8 +7217,14 @@
               ++  stay  *vase                           ::  save state, new
               --                                        ::
 ++  wire  path                                          ::  event pretext
+++  writ  ,[p=helm q=seat]                              ::  authority
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                section 3bE, Arvo core                ::
+::
+::
+::  ++  able                                            ::  simplify privilege
+::    |=  hem=helm  ^-  hilt
+::    ?-(hem %gold 2, %iron 1, [%lead *] 0)
 ::
 ++  adit                                                ::  duct privilege
   |=  hen=duct
@@ -7246,7 +7257,7 @@
     =+  rig=(slam ves arg)
     |%  
     ++  beat
-      |=  $:  whu=(unit seat)
+      |=  $:  wru=(unit writ)
               pax=wire
               hen=duct
               fav=curd
@@ -7278,7 +7289,7 @@
   |=  but=type
   ^-  [bet=type nim=type vin=type hoz=type viz=type]
   ~+  =+  pal=|=(a=@t ^-(type (~(play ut but) (vice a))))
-      :*  bet=(pal '[*(unit seat) *wire *duct *curd]')
+      :*  bet=(pal '[*(unit writ) *wire *duct *curd]')
           nim=(pal '[*seat @tas *seat @tas *coin *path]')
           vin=(pal '[@da @ |+(* *(unit))]')
           hoz=(pal '[@da *duct]')
@@ -7294,7 +7305,7 @@
   |=  [eny=@ bud=vase fan=(list ,[p=@tas q=vase])]
   |_  now=@da 
   ++  beck  
-    |=  owr=(unit seat)
+    |=  wru=(unit writ)
     |+  hap=*
     ^-  (unit)
     =>  .(hap ((hard path) hap))
@@ -7313,15 +7324,14 @@
     ?.  ?=([~ %% %tas @] dyc)  ~
     ?.  ?=(^ ved)  ~
     =+  his=`@p`q.p.u.fal
-    ::  ?>  |(=(~ owr) =([~ his] owr))
-    =>  .(owr ?~(owr [~ u=his] owr))                    ::  XX dubious
+    =>  .(wru ?^(wru wru [~ u=[p=[%lead his] q=his]]))  ::  XX dubious
     =+  dis=(end 3 1 q.p.u.hyr)
     =+  rem=(rsh 3 1 q.p.u.hyr)
     |-  ^-  (unit)
     ?~  fan  ~
     ?.  =(dis p.i.fan)  $(fan t.fan)
     %-  scry:(wink:(vent bud q.i.fan) now (shax now) ..^$)
-    [u.owr rem his q.p.u.dyc u.ved tyl]
+    [q.u.wru rem his q.p.u.dyc u.ved tyl]
   ::
   ++  dink                                              ::  vase by char
     |=  din=@tas  ^-  vase
@@ -7349,7 +7359,7 @@
   ++  hymn                                              ::  start loop with id
     |=  [who=seat ovo=ovum]
     ^-  [p=(list ovum) q=(list ,[p=@tas q=vase])]
-    (kick [[[~ who] [[(dint p.ovo) ~] p.ovo ~] q.ovo] ~])
+    (kick [[[~ %iron who] [[(dint p.ovo) ~] p.ovo ~] q.ovo] ~])
   ::
   ++  kick                                              ::  complete loop
     |=  mor=(list move)

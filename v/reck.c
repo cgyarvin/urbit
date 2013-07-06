@@ -797,10 +797,12 @@ u2_reck_kick(u2_reck* rec_u, u2_noun ovo)
          (c3__note != u2h(u2t(ovo))) )
 #endif
 #if 1
-    if ( (c3__crud == u2h(u2t(ovo))) ||
+    if ( (c3__crud == u2h(u2t(ovo))) )
+#if 0
          (c3__talk == u2h(u2t(ovo))) ||
          (c3__helo == u2h(u2t(ovo))) ||
          (c3__init == u2h(u2t(ovo))) ) 
+#endif
     {
       u2_reck_plan(rec_u, u2nt(c3__gold, c3__term, u2_nul), 
                           u2nc(c3__flog, u2k(u2t(ovo))));
