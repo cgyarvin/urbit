@@ -25,7 +25,7 @@
       :_  ruf(fat (~(put by fat.ruf) who yar))
       ;:  weld
         %+  turn  (flop yel)
-        |=([a=duct b=card] [[~ %gold who] [/d a] [%flog b]])
+        |=([a=duct b=card] [[~ %gold who] hen.yar b])
       ::
         %+  turn  (flop wot) 
         |=([a=duct b=tape] [[~ %gold who] a [%wort b]])
@@ -488,7 +488,7 @@
     ::
         %init
       ::  [[%tell %0 %leaf "clay: home for {~(rend co ~ %p q.u.wru)}"] ~]
-      [~ ..^$(fat.ruf (~(put by fat.ruf) q.u.wru *room))]
+      [~ ..^$(fat.ruf (~(put by fat.ruf) q.u.wru [hen ~ ~ ~]))]
     ::
         %into
       =.  wru  

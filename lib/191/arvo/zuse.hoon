@@ -1299,7 +1299,8 @@
               lew=will                                  ::  will of frien
           ==                                            ::
 ++  room                                                ::  fs per seat (new)
-          $:  dos=(map ,@tas ,[p=cult q=dome])          ::  native projects 
+          $:  hen=duct                                  ::  controlling duct
+              dos=(map ,@tas ,[p=cult q=dome])          ::  native projects 
               den=(map ,@tas dock)                      ::  links 
               rid=(map seat ,[p=rind q=rink])           ::  neighbors
           ==                                            ::

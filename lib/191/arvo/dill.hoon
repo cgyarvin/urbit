@@ -177,6 +177,7 @@
                   bul  (sub bul.u.q.q.yar bus.u.q.q.yar)
                   but  (slag bus.u.q.q.yar but.u.q.q.yar)
                 ==
+            %w  +.$(mos :_(mos [wru [/b /d hen] [%limn ~]]))
             %x  +.$(mos :_(mos [wru [/b /d hen] [%ling ~]]))
             %y  ?:  =(0 p.r.q.yar)
                   beep
