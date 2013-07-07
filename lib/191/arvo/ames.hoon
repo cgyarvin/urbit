@@ -296,7 +296,6 @@
         ?.  =(tic (end 6 1 (shaf %tick (mix her (shax sec:ex:q.nes)))))
           [~ +>.$]
         =+  rad=(~(get by hoc.saf) her)
-        ~&  [%ames-born our her ?=(^ rad)]
         ?^  rad
           ?>  ?=(^ lew.wod.u.rad)
           ?.  =(pub r.q.i.lew.wod.u.rad)  [~ +>.$]
@@ -872,6 +871,14 @@
       =<  zork:zank:tung
       (wool:(ho:(um p.soq) q.soq) hen cha val)
     ::
+    ++  wisk                                            ::    wisk:am
+      |=  [our=@p dem=(list ,@p) hen=duct cha=@ta val=*]::  multicast
+      ^-  [p=(list boon) q=fort]
+      ?~  dem  [~ fox]
+      =^  dyg  fox  (wise [our i.dem] hen cha val)
+      =^  gyd  fox  $(dem t.dem)
+      [(weld dyg gyd) fox]
+    ::
     ++  um                                              ::  per server
       |=  our=seat
       =+  gus=(need (~(us go ton.fox) our))
@@ -1233,6 +1240,9 @@
         ?:  fyx  +>.^$ 
         $(hoy t.hoy)
       ::
+      ++  pals                                          ::    pals:um:am
+        ^-  (list ,@p)                                  ::
+      ::
       ++  pong                                          ::    pong:um:am
         |=  [her=seat hen=duct]                         ::  test neighbor
         ^+  [? +>]
@@ -1316,6 +1326,7 @@
     ++  stay  `vase`!>(fox)
     --
   |%
+  ++  claw  |=(our=seat ^-(duct hen:(need (~(get by zac.fox) our))))
   ++  clop
     |=  [wru=(unit writ) now=@da hen=duct bon=boon]
     ^-  [(list move) fort]
@@ -1342,12 +1353,39 @@
         %milk 
       ?+    q.bon
         :_  fox
-        :~  [[~ %iron p.p.bon] [/b hen] [%wart q.p.bon q.bon r.bon s.bon]]
+        :~  :+  [~ %iron p.p.bon] 
+              (claw p.p.bon)
+            [%wart q.p.bon q.bon r.bon s.bon]
         ==
       ::                                                
           %hi                                           ::    %hi
         %=    $
             bon
+          :+  %wine  p.bon
+          ^-  tape
+          ?~  s.bon 
+            " is not feeling well"
+          ?:  =(0 u.s.bon)
+            =+  hum=(end 0 3 (mug now))
+            ?+   hum  !!
+              0  " isn't sure what to say" 
+              1  " prefers not to comment"
+              2  " has no words for what just happened"
+              3  " is in the building"
+              4  " remains quietly present"
+              5  " isn't into drama"
+              6  " appreciates the silence"
+              7  " pauses to consider"
+            ==
+          =+  str=(need ((sand %t) ((hard ,@) u.s.bon)))
+          [':' ' ' (trip str)]
+        ==
+      ::                                                
+          %ye                                           ::    %ye
+        %=    $
+            bon
+          ?>  =(p.bon (sein q.bon))
+
           :+  %wine  p.bon
           ^-  tape
           ?~  s.bon 
@@ -1401,7 +1439,7 @@
           %ru                                           ::    %ru
         :_  fox
         :~  :+  [~ %iron p.p.bon]                       ::  file response
-              [/c hen] 
+              [/c (claw p.p.bon)] 
             [%wart q.p.bon q.bon r.bon s.bon]
         ==
       ==
