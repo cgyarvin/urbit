@@ -1232,6 +1232,12 @@
         ?:  fyx  +>.^$ 
         $(hoy t.hoy)
       ::
+      ++  pals                                          ::    pals:um:am
+        ^-  (list ,@p)                                  ::  active neighbors
+        %+  turn  
+          (skim (~(tap by wab.weg) ~) |=([a=seat b=bath] gay.b))
+        |=([a=seat b=bath] a)
+      ::
       ++  pong                                          ::    pong:um:am
         |=  [her=seat hen=duct]                         ::  test neighbor
         ^+  [? +>]
@@ -1353,7 +1359,7 @@
           :+  %wine  p.bon
           ^-  tape
           ?~  s.bon 
-            " failed to respond"
+            " is not feeling well"
           ?:  =(0 u.s.bon)
             =+  hum=(end 0 3 (mug now))
             ?+   hum  !!
@@ -1369,6 +1375,24 @@
           =+  str=(need ((sand %t) ((hard ,@) u.s.bon)))
           [':' ' ' (trip str)]
         ==
+      ::                                                
+          %ye                                           ::    %ye
+        ~&  [%yep p.bon]
+        ?>  =(p.p.bon (sein q.p.bon))
+        =+  paz=pals:(~(um am [now fox]) p.p.bon)
+        :_  fox
+        %+  turn  paz
+        |=  him=seat
+        :+  [~ %iron p.p.bon]
+          [/a /a hen]
+        [%want him %yu [q.p.bon s.bon]]
+      ::
+          %yu
+        ~&  [%yup p.bon]
+        ?>  =(q.p.bon (sein p.p.bon))
+        ?~  s.bon  [~ fox]
+        =+  dof=((hard ,[p=@p q=@t]) u.s.bon)
+        $(bon [%milk [p.p.bon p.dof] %hi 0 [~ q.dof]])
       ::
           %pi                                           ::    %pi
         $(bon [%wine p.bon " sent a ping"])             ::  ping
@@ -1381,7 +1405,7 @@
         =.  ton.fox  (~(su go ton.fox) gus)
         :_  fox
         :~  :+  [~ %iron p.p.bon]
-              [/a hen]
+              [/a /a hen]
             [%want q.p.bon %to wyl]
         ==
       ::

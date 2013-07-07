@@ -871,14 +871,6 @@
       =<  zork:zank:tung
       (wool:(ho:(um p.soq) q.soq) hen cha val)
     ::
-    ++  wisk                                            ::    wisk:am
-      |=  [our=@p dem=(list ,@p) hen=duct cha=@ta val=*]::  multicast
-      ^-  [p=(list boon) q=fort]
-      ?~  dem  [~ fox]
-      =^  dyg  fox  (wise [our i.dem] hen cha val)
-      =^  gyd  fox  $(dem t.dem)
-      [(weld dyg gyd) fox]
-    ::
     ++  um                                              ::  per server
       |=  our=seat
       =+  gus=(need (~(us go ton.fox) our))
@@ -1385,29 +1377,20 @@
         ==
       ::                                                
           %ye                                           ::    %ye
-        %=    $
-            bon
-          ?>  =(p.bon (sein q.bon))
-          =+  paz=pals:(um 
-          :+  %wine  p.bon
-          ^-  tape
-          ?~  s.bon 
-            " failed to respond"
-          ?:  =(0 u.s.bon)
-            =+  hum=(end 0 3 (mug now))
-            ?+   hum  !!
-              0  " isn't sure what to say" 
-              1  " prefers not to comment"
-              2  " has no words for what just happened"
-              3  " is in the building"
-              4  " remains quietly present"
-              5  " isn't into drama"
-              6  " appreciates the silence"
-              7  " pauses to consider"
-            ==
-          =+  str=(need ((sand %t) ((hard ,@) u.s.bon)))
-          [':' ' ' (trip str)]
-        ==
+        ?>  =(p.q.bon (sein q.q.bon))
+        =+  paz=pals:(~(um am [now fox]) p.bon)
+        :_  fox
+        %+  turn  paz
+        |=  him=seat
+        :+  [~ %iron p.p.bon]
+          [/a /a hen]
+        [%want him %yu [q.p.bon s.bon]]
+      ::
+          %yu
+        ?>  =(q.bon (sein p.bon))
+        ?~  s.bon  [~ fox]
+        =+  dof=((hard ,[p=@p q=@t]) u.s.bon)
+        $(bon [%milk [p.q.bon dof] %hi 0 [~ q.dof]])
       ::
           %pi                                           ::    %pi
         $(bon [%wine p.bon " sent a ping"])             ::  ping
@@ -1420,7 +1403,7 @@
         =.  ton.fox  (~(su go ton.fox) gus)
         :_  fox
         :~  :+  [~ %iron p.p.bon]
-              [/a hen]
+              [/a /a hen]
             [%want q.p.bon %to wyl]
         ==
       ::
