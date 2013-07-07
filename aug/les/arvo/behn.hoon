@@ -263,10 +263,14 @@
             (~(del by q.god) gyp)
           :-  ?:((lien fog |=(a=@ud =(a gyp))) fog [gyp fog])
           q=(~(put by q.god) gyp gyr)
-      :-  %+  turn 
-            (flop `_duv`?:(=(fog p.fod) duv [[~ [%helo perd]] duv]))
-          |=([p=duct q=card] [[~ %iron who] (weld p hen) q])
-      %_(+<.^^$ fog p.fod, q.god q.fod)
+      =+  sam==(fog p.fod)
+      =:  fog    p.fod
+          q.god  q.fod
+        ==
+      :_  +<.^^$
+      %+  turn 
+        (flop `_duv`?:(sam duv [[~ [%helo prot]] duv]))
+      |=([p=duct q=card] [[~ %iron who] (weld p hen) q])
     ::
     ++  bitt  |=(lap=path [(scot %ud gyp) lap])         ::    bitt:fi:be
     ++  como                                            ::    como:fi:be
@@ -532,7 +536,7 @@
           %te  (gram ~ %tell p.gud)
           %th  (gram ~ %that p.gud)
           %xx  (gram ~ p.gud)
-          %xy  (gram [p.gud ~] q.gud)
+          %xy  (gram [p.gud /b ~] q.gud)
         == 
       ::
       ++  hale                                          ::  process gifts
@@ -893,13 +897,10 @@
   ::
       %init
     ?~  wru  !! 
-    :-  [[wru hen [%hail ~]] ~]
-    ..^$(dez (~(put by dez) hen [[q.u.wru (bard q.u.wru)] u.dus]))
+    $(fav [%hail ~], dez (~(put by dez) hen [[q.u.wru (bard q.u.wru)] u.dus]))
   ::
       %limn
-    ~&  %behn-limn
-    :-  [[wru hen [%hail ~]] ~]
-    ..^$(dez (~(put by dez) hen (weld t.u.dus [i.u.dus ~])))
+    $(fav [%hail ~], dez (~(put by dez) hen (weld t.u.dus [i.u.dus ~])))
   ==
 ::
 ++  come  
