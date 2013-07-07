@@ -336,7 +336,7 @@
     ?.  (~(nest ut -:!>(dug)) & p.new)
       (come new)
     %_  ..^$
-      dug  ((map duct yard) -.q.new)
+      dug  ((map duct yard) q.new)
     ==
   ::
   ++  raze  
