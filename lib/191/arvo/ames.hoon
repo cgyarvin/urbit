@@ -1241,7 +1241,10 @@
         $(hoy t.hoy)
       ::
       ++  pals                                          ::    pals:um:am
-        ^-  (list ,@p)                                  ::
+        ^-  (list ,@p)                                  ::  active neighbors
+        %+  turn  
+          (skim (~(tap by wab.weg) ~) |=([a=seat b=bath] gay.b))
+        |=([a=seat b=bath] a)
       ::
       ++  pong                                          ::    pong:um:am
         |=  [her=seat hen=duct]                         ::  test neighbor
@@ -1385,7 +1388,7 @@
         %=    $
             bon
           ?>  =(p.bon (sein q.bon))
-
+          =+  paz=pals:(um 
           :+  %wine  p.bon
           ^-  tape
           ?~  s.bon 
