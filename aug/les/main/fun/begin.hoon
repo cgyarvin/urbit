@@ -1,5 +1,5 @@
 !:
-::  /=main=/fun/begin/hoon
+::  /=main=/fun/apply/hoon
 ::
 =>  ^^/===/pony
 |=  [who=seat est=time eny=@uw was=path]

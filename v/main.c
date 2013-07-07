@@ -61,7 +61,7 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
 
   u2_Opts.abo = u2_no;
   u2_Opts.gab = u2_no;
-  u2_Opts.ice = u2_no;
+  u2_Opts.ice = u2_yes;
   u2_Opts.pro = u2_no;
   u2_Opts.veb = u2_yes;
   u2_Opts.rez = u2_no;
