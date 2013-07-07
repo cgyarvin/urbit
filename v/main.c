@@ -38,20 +38,6 @@
         0
       };
 
-struct _u2_opts {
-  c3_c*   cpu_c;
-  c3_c*   imp_c;
-  c3_w    kno_w;
-  u2_bean abo;
-  u2_bean gab;
-  u2_bean ice;
-  u2_bean pro;
-  u2_bean veb;
-  u2_bean rez;
-  u2_bean nuu;
-  u2_noun imp;
-} u2_Opts;
-
 /* u2_ve_getopt(): extract option map from command line.
 */
 static u2_bean
@@ -59,38 +45,39 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
 {
   c3_i ch_i;
 
-  u2_Opts.abo = u2_no;
-  u2_Opts.gab = u2_no;
-  u2_Opts.ice = u2_yes;
-  u2_Opts.pro = u2_no;
-  u2_Opts.veb = u2_yes;
-  u2_Opts.rez = u2_no;
-  u2_Opts.nuu = u2_no;
-  u2_Opts.imp = u2_nul;
-  u2_Opts.kno_w = DefaultKernel;
+  u2_Host.ops_u.abo = u2_no;
+  u2_Host.ops_u.gab = u2_no;
+  u2_Host.ops_u.ice = u2_yes;
+  u2_Host.ops_u.loh = u2_no;
+  u2_Host.ops_u.pro = u2_no;
+  u2_Host.ops_u.veb = u2_yes;
+  u2_Host.ops_u.rez = u2_no;
+  u2_Host.ops_u.nuu = u2_no;
+  u2_Host.ops_u.kno_w = DefaultKernel;
 
-  while ( (ch_i = getopt(argc, argv, "k:I:lcsagqvR")) != -1 ) {
+  while ( (ch_i = getopt(argc, argv, "k:I:LcsagqvR")) != -1 ) {
     switch ( ch_i ) {
-      case 'a': { u2_Opts.abo = u2_yes; break; }
-      case 'c': { u2_Opts.nuu = u2_yes; break; }
-      case 'g': { u2_Opts.gab = u2_yes; break; }
-      case 's': { u2_Opts.ice = u2_yes; break; }
+      case 'L': { u2_Host.ops_u.loh = u2_yes; break; }
+      case 'a': { u2_Host.ops_u.abo = u2_yes; break; }
+      case 'c': { u2_Host.ops_u.nuu = u2_yes; break; }
+      case 'g': { u2_Host.ops_u.gab = u2_yes; break; }
+      case 's': { u2_Host.ops_u.ice = !u2_Host.ops_u.ice; break; }
       case 'k': {
         c3_w arg_w = atoi(optarg);
 
         if ( (arg_w > 0) && (arg_w < 256) ) {
-          u2_Opts.kno_w = arg_w;
+          u2_Host.ops_u.kno_w = arg_w;
         }
         else return u2_no;
         break;
       }
       case 'I': {
-        u2_Opts.imp_c = strdup(optarg);
+        u2_Host.ops_u.imp_c = strdup(optarg);
         break;
       }
-      case 'q': { u2_Opts.veb = u2_no; break; }
-      case 'v': { u2_Opts.veb = u2_yes; break; }
-      case 'R': { u2_Opts.rez = u2_yes; break; }
+      case 'q': { u2_Host.ops_u.veb = u2_no; break; }
+      case 'v': { u2_Host.ops_u.veb = u2_yes; break; }
+      case 'R': { u2_Host.ops_u.rez = u2_yes; break; }
       case '?': default: {
         return u2_no;
       }
@@ -108,7 +95,7 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
       }
     }
 
-    if ( u2_yes == u2_Opts.rez ) {
+    if ( u2_yes == u2_Host.ops_u.rez ) {
       c3_c yes[2];
 
       yes[1] = 0;
@@ -121,7 +108,7 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
       }
       else printf("%s will be reset.\n", argv[optind]);
     }
-    u2_Opts.cpu_c = strdup(argv[optind]);
+    u2_Host.ops_u.cpu_c = strdup(argv[optind]);
     return u2_yes;
   }
 }
@@ -150,14 +137,14 @@ static void
 u2_ve_sysopt()
 {
   {
-    u2_Local = strdup(u2_Opts.cpu_c);
+    u2_Local = strdup(u2_Host.ops_u.cpu_c);
   }
   u2_System = U2_LIB;
 
-  u2_Flag_Abort = u2_Opts.abo;
-  u2_Flag_Garbage = u2_Opts.gab;
-  u2_Flag_Profile = u2_Opts.pro;
-  u2_Flag_Verbose = u2_Opts.veb;
+  u2_Flag_Abort = u2_Host.ops_u.abo;
+  u2_Flag_Garbage = u2_Host.ops_u.gab;
+  u2_Flag_Profile = u2_Host.ops_u.pro;
+  u2_Flag_Verbose = u2_Host.ops_u.veb;
 }
 
 static jmp_buf Signal_buf;
@@ -203,17 +190,17 @@ main(c3_i   argc,
 
   //  Instantiate process globals.
   {
-    u2_wr_check_init(u2_Opts.cpu_c);
+    u2_wr_check_init(u2_Host.ops_u.cpu_c);
 
-    if ( (u2_no == u2_Opts.nuu) && (u2_no == u2_Opts.rez) ) {
+    if ( (u2_no == u2_Host.ops_u.nuu) && (u2_no == u2_Host.ops_u.rez) ) {
       if ( u2_no == u2_loom_load() ) {
-        fprintf(stderr, "%s: could not load\n", u2_Opts.cpu_c);
+        fprintf(stderr, "%s: could not load\n", u2_Host.ops_u.cpu_c);
         return 1;
       } else {
         u2_Host.wir_r = u2_ray_of(0, 0);
         u2_Wire = u2_Host.wir_r;
 
-        u2_Host.cpu_c = u2_Opts.cpu_c;
+        u2_Host.cpu_c = u2_Host.ops_u.cpu_c;
         u2_Host.arv_u = u2_Arv;
 
         u2_Arv->ova.egg_u = u2_Arv->ova.geg_u = 0;
@@ -234,7 +221,7 @@ main(c3_i   argc,
       u2_Host.wir_r = u2_wr_init(c3__rock, u2_ray_of(0, 0), u2_ray_of(1, 0));
       u2_Wire = u2_Host.wir_r;
 
-      u2_Host.cpu_c = u2_Opts.cpu_c;
+      u2_Host.cpu_c = u2_Host.ops_u.cpu_c;
       u2_Host.arv_u = u2_Arv;
     }
   }
@@ -259,17 +246,17 @@ main(c3_i   argc,
     else {
       //  Set boot and goal stages.
       {
-        if ( (0 == u2_Opts.kno_w) || (u2_Opts.kno_w > 255) ) {
+        if ( (0 == u2_Host.ops_u.kno_w) || (u2_Host.ops_u.kno_w > 255) ) {
           kno_w = DefaultKernel;
         } else {
-          kno_w = u2_Opts.kno_w;
+          kno_w = u2_Host.ops_u.kno_w;
         } 
       }
 
       //  Load the system, within memory cross.
       //
       {
-        if ( u2_no == u2_Opts.ice ) {
+        if ( u2_no == u2_Host.ops_u.ice ) {
           u2_rl_leap(u2_Wire, c3__rock);
           u2_ve_init(kno_w);
           u2_rl_fall(u2_Wire);
@@ -304,10 +291,12 @@ main(c3_i   argc,
           }
           u2_rl_flog(u2_Wire);
         }
-        else u2_Host.kno_w = u2_Opts.kno_w;
+        else u2_Host.kno_w = u2_Host.ops_u.kno_w;
 
-        if ( (u2_yes == u2_Opts.ice) || (0 != u2_Host.ver_e[kno_w].ken) ) {
-          u2_reck_boot(u2_Host.arv_u, u2_Opts.ice);
+        if ( (u2_yes == u2_Host.ops_u.ice) || 
+             (0 != u2_Host.ver_e[kno_w].ken) ) 
+        {
+          u2_reck_boot(u2_Host.arv_u, u2_Host.ops_u.ice);
         }
       }
       u2_cm_done();
@@ -375,11 +364,6 @@ main(c3_i   argc,
     exit(0);
   }
 
-  {
-    u2_noun imp = u2_Opts.imp_c ? u2nc(u2_nul, u2_ci_string(u2_Opts.imp_c))
-                                : u2_nul;
-
-    u2_lo_loop(u2_Host.arv_u, u2_Opts.nuu, u2_Opts.rez, imp);
-  }
+  u2_lo_loop(u2_Host.arv_u);
   return 0;
 }

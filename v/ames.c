@@ -13,6 +13,7 @@
 #include <stdint.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <netdb.h>
 #include <ev.h>
 #include <errno.h>
 #include <curses.h>
@@ -28,6 +29,87 @@ static void _lo_ames(struct ev_loop *lup_u, struct ev_io* wax_u, c3_i rev_i)
 static void _lo_amat(struct ev_loop *lup_u, struct ev_timer* tim_u, c3_i rev_i)
   { u2_lo_call(u2_Host.arv_u, lup_u, tim_u, c3__ames, rev_i); }
 
+/* _ames_czar(): quasi-static route to emperor.
+*/
+static c3_w
+_ames_czar(u2_reck* rec_u, c3_y imp_y, c3_s* por_s)
+{
+  u2_ames* sam_u = &u2_Host.sam_u;
+
+  if ( u2_yes == u2_Host.ops_u.loh ) {
+    *por_s = 31337 + imp_y;
+    return 0x7f000001;
+  } 
+  else {
+    *por_s = 13337 + imp_y;
+
+    if ( 0xffffffff == sam_u->imp_w[imp_y] ) {
+      return 0;
+    }
+    else if ( 0 == sam_u->imp_w[imp_y] ) {
+      u2_noun nam   = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', imp_y));
+      c3_c*   nam_c = u2_cr_string(nam);
+      c3_c    dns_c[64];
+      c3_w    pip_w;
+
+      sprintf(dns_c, "%s.urbit.org", nam_c + 1);
+      uL(fprintf(uH, "czar %s, dns %s\n", nam_c, dns_c));
+      free(nam_c);
+      u2z(nam);
+
+      {
+        struct addrinfo* air_u;
+
+        if ( 0 != getaddrinfo(dns_c, 0, 0, &air_u) ) {
+          uL(fprintf(uH, "ames: czar at %s: not found (a)\n", dns_c));
+          sam_u->imp_w[imp_y] = 0xffffffff;
+          return 0;
+        }
+
+        {
+          struct addrinfo* rai_u = air_u;
+
+          while ( 1 ) {
+            if ( !rai_u ) {
+              uL(fprintf(uH, "ames: czar at %s: not found (b)\n", dns_c));
+              sam_u->imp_w[imp_y] = 0xffffffff;
+              return 0;
+            }
+            if ( (AF_INET == rai_u->ai_family) &&
+                 (PF_INET == rai_u->ai_protocol) &&
+                 (4 == rai_u->ai_addrlen) )
+            {
+              struct sockaddr_in* add_k = (struct sockaddr_in *)rai_u->ai_addr;
+
+              sam_u->imp_w[imp_y] = ntohl(add_k->sin_addr.s_addr);
+#if 1
+              {
+                u2_noun wad = u2_ci_words(1, &sam_u->imp_w[imp_y]);
+                u2_noun nam = u2_cn_mung(u2k(rec_u->toy.scot), 
+                                         u2nc(c3__if, wad));
+                c3_c*   nam_c = u2_cr_string(nam);
+
+                uL(fprintf(uH, "ames: czar %s: ip %s\n", dns_c, nam_c));
+
+                free(nam_c); u2z(nam); u2z(wad);
+              }
+#endif
+              break;
+            }
+            uL(fprintf(uH, "ames: addr: %d %d %d\n", rai_u->ai_family, 
+                                                     rai_u->ai_protocol,
+                                                     rai_u->ai_addrlen));
+            rai_u = rai_u->ai_next;    
+          }
+        }
+        freeaddrinfo(air_u);
+
+        sam_u->imp_w[imp_y] = pip_w;
+      }
+    }
+    return sam_u->imp_w[imp_y];
+  }
+}
 
 /* u2_ames_ef_send(): send packet to network.
 */
@@ -69,18 +151,25 @@ u2_ames_io_init(u2_reck* rec_u)
 
   c3_assert(u2_nul != rec_u->own);
   {
-    c3_w pip_w = 0x7f000001;    //  hardbound to localhost 
+    //  c3_w pip_w = 0x7f000001;    //  hardbound to localhost 
     c3_s por_s;
     c3_i fid_i;
 
-    if ( rec_u->our < 256 ) {
-      //  Fixed port for imperial servers.
-      //
-      por_s = 13337 + rec_u->our;
+    por_s = 0;
+    if ( 0 != u2_Host.ops_u.imp_c ) {
+      u2_noun imp   = u2_ci_string(u2_Host.ops_u.imp_c);
+      u2_noun num   = u2_cn_mung(u2k(rec_u->toy.slaw), u2nc('p', imp));
+      c3_y    num_y;
+
+      if ( u2_no == u2du(num) ) {
+        uL(fprintf(uH, "malformed emperor: %s\n", u2_Host.ops_u.imp_c));
+        exit(1);
+      }
+      num_y = u2_cr_byte(0, u2t(num));
+        
+      _ames_czar(rec_u, num_y, &por_s);
+      uL(fprintf(uH, "ames: czar: %s on %d\n", u2_Host.ops_u.imp_c, por_s));
     } 
-    else {
-      por_s = 0;
-    }
 
     if ( (fid_i = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
       perror("ames: socket");
@@ -114,7 +203,7 @@ u2_ames_io_init(u2_reck* rec_u)
 
       fprintf(stderr, "ames: on localhost, UDP %d.\n", por_s);
 
-      sam_u->pip_w = pip_w;
+      //  sam_u->pip_w = pip_w;
       sam_u->por_s = por_s;
       sam_u->out_u = sam_u->tou_u = 0;
 
@@ -248,27 +337,32 @@ u2_ames_io_fuck(u2_reck*      rec_u,
         struct sockaddr_in add_k;
 
         if ( 1 == (pac_u->pip_w >> 8) ) {
-          pac_u->por_s = 13337 + (pac_u->pip_w & 0xff);
-          pac_u->pip_w = 0x7f000001;
+          c3_y imp_y = (pac_u->pip_w & 0xff);
+
+          pac_u->pip_w = _ames_czar(rec_u, imp_y, &pac_u->por_s);
+          uL(fprintf(uH, "sendtoczar %x %d %d\n", 
+                pac_u->pip_w, imp_y, pac_u->por_s));
         }
 
-        memset(&add_k, 0, sizeof(add_k));
-        add_k.sin_family = AF_INET;
-        add_k.sin_addr.s_addr = htonl(pac_u->pip_w);
-        add_k.sin_port = htons(pac_u->por_s);
+        if ( 0 != pac_u->pip_w ) {
+          memset(&add_k, 0, sizeof(add_k));
+          add_k.sin_family = AF_INET;
+          add_k.sin_addr.s_addr = htonl(pac_u->pip_w);
+          add_k.sin_port = htons(pac_u->por_s);
 
-        if ( pac_u->len_w != sendto(sam_u->wax_u.fd,
-                                    pac_u->hun_y,
-                                    pac_u->len_w,
-                                    0,
-                                    (struct sockaddr*)(void *)&add_k,
-                                    sizeof(add_k)) )
-        {
-          if ( EAGAIN != errno ) {
-            uL(fprintf(uH, "send: to %x:%d; error %s\n", 
-                  pac_u->pip_w, pac_u->por_s, strerror(errno)));
-          }
-        } 
+          if ( pac_u->len_w != sendto(sam_u->wax_u.fd,
+                                      pac_u->hun_y,
+                                      pac_u->len_w,
+                                      0,
+                                      (struct sockaddr*)(void *)&add_k,
+                                      sizeof(add_k)) )
+          {
+            if ( EAGAIN != errno ) {
+              uL(fprintf(uH, "send: to %x:%d; error %s\n", 
+                    pac_u->pip_w, pac_u->por_s, strerror(errno)));
+            }
+          } 
+        }
       }
 
       sam_u->out_u = sam_u->out_u->nex_u;

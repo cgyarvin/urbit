@@ -24,7 +24,7 @@ LIB=$(PWD)/lib
 
 RM=rm -f
 CC=gcc
-CLD=gcc -O3 -L/usr/local/lib
+CLD=gcc -g -L/usr/local/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
@@ -34,7 +34,7 @@ INCLUDE=include
 GENERATED=generated
 DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN) -D U2_LIB=\"$(LIB)\"
 
-CFLAGS=-O3 -I/usr/local/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
+CFLAGS=-g -I/usr/local/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 ifeq ($(OS),osx)
   CLDOSFLAGS=-bind_at_load
 endif
