@@ -1377,8 +1377,9 @@
         ==
       ::                                                
           %ye                                           ::    %ye
-        ?>  =(p.q.bon (sein q.q.bon))
-        =+  paz=pals:(~(um am [now fox]) p.bon)
+        ~&  [%yep p.bon]
+        ?>  =(p.p.bon (sein q.p.bon))
+        =+  paz=pals:(~(um am [now fox]) p.p.bon)
         :_  fox
         %+  turn  paz
         |=  him=seat
@@ -1387,10 +1388,11 @@
         [%want him %yu [q.p.bon s.bon]]
       ::
           %yu
-        ?>  =(q.bon (sein p.bon))
+        ~&  [%yup p.bon]
+        ?>  =(q.p.bon (sein p.p.bon))
         ?~  s.bon  [~ fox]
         =+  dof=((hard ,[p=@p q=@t]) u.s.bon)
-        $(bon [%milk [p.q.bon dof] %hi 0 [~ q.dof]])
+        $(bon [%milk [p.p.bon p.dof] %hi 0 [~ q.dof]])
       ::
           %pi                                           ::    %pi
         $(bon [%wine p.bon " sent a ping"])             ::  ping

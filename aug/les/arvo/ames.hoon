@@ -1335,7 +1335,7 @@
           :~  [[~ %iron p.bon] [/c hen] [%pull bos %main ~[%main]]]
               [[~ %iron p.bon] [/c hen] [%pull bos %doc ~[%doc]]]
               [[~ %iron p.bon] [/c hen] [%pull bos %try ~[%try]]]
-              [[~ %iron p.bon] [/c hen] [%pull bos %arvo ~[%arvo]]]
+              ::  [[~ %iron p.bon] [/c hen] [%pull bos %arvo ~[%arvo]]]
           ==
       ==
     ::
