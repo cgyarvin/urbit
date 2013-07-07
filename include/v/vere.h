@@ -122,10 +122,10 @@
         struct ev_io    wax_u;              //  event handler state
         struct ev_timer tim_u;              //  network timer
         u2_bean         alm;                //  alarm on
-        c3_w            pip_w;              //  public IPv4 address
         c3_s            por_s;              //  public IPv4 port
         u2_apac*        out_u;              //  exit of output queue
         u2_apac*        tou_u;              //  entry of output queue
+        c3_w            imp_w[256];         //  imperial IPs
       } u2_ames;
 
     /* u2_save: checkpoint control.
@@ -285,6 +285,22 @@
         } has;
       } u2_steg;
 
+    /*  u2_opts: 
+    */
+      typedef struct _u2_opts {
+        c3_c*   cpu_c;
+        c3_c*   imp_c;
+        c3_w    kno_w;
+        u2_bean abo;
+        u2_bean gab;
+        u2_bean ice;
+        u2_bean loh;
+        u2_bean pro;
+        u2_bean veb;
+        u2_bean rez;
+        u2_bean nuu;
+      } u2_opts;
+
     /* u2_host: entire host.
     */
       typedef struct _u2_host {
@@ -302,6 +318,7 @@
         u2_ulog  lug_u;                     //  event log
         u2_ames  sam_u;                     //  packet interface
         u2_save  sav_u;                     //  autosave
+        u2_opts  ops_u;                     //  commandline options
 
         u2_reck* arv_u;                     //  runtime
       } u2_host;                            //  host == computer == process
@@ -742,10 +759,7 @@
       /* u2_lo_loop(): enter main event loop.
       */
         void
-        u2_lo_loop(u2_reck* rec_u, 
-                   u2_bean  nuu,              //  new computer
-                   u2_bean  rez,              //  reset computer
-                   u2_noun  imp);             //  imperial generator
+        u2_lo_loop(u2_reck* rec_u);
 
       /* u2_lo_bail(): clean up all event state.
       */

@@ -1232,6 +1232,12 @@
         ?:  fyx  +>.^$ 
         $(hoy t.hoy)
       ::
+      ++  pals                                          ::    pals:um:am
+        ^-  (list ,@p)                                  ::  active neighbors
+        %+  turn  
+          (skim (~(tap by wab.weg) ~) |=([a=seat b=bath] gay.b))
+        |=([a=seat b=bath] a)
+      ::
       ++  pong                                          ::    pong:um:am
         |=  [her=seat hen=duct]                         ::  test neighbor
         ^+  [? +>]
@@ -1324,12 +1330,13 @@
       :_  fox(zac (~(put by zac.fox) p.bon `oven`[hen ~ ~ ~]))
       :*  [[~ %gold p.bon] [/c hen] [%init p.bon]]
           [[~ %gold p.bon] hen [%init p.bon]]
+          [[~ %gold p.bon] [/a hen] [%kick now]]
           =+  bos=(sein p.bon)
           ?:  =(bos p.bon)  ~
           :~  [[~ %iron p.bon] [/c hen] [%pull bos %main ~[%main]]]
               [[~ %iron p.bon] [/c hen] [%pull bos %doc ~[%doc]]]
               [[~ %iron p.bon] [/c hen] [%pull bos %try ~[%try]]]
-              [[~ %iron p.bon] [/c hen] [%pull bos %arvo ~[%arvo]]]
+              ::  [[~ %iron p.bon] [/c hen] [%pull bos %arvo ~[%arvo]]]
           ==
       ==
     ::
@@ -1353,7 +1360,7 @@
           :+  %wine  p.bon
           ^-  tape
           ?~  s.bon 
-            " failed to respond"
+            " is not feeling well"
           ?:  =(0 u.s.bon)
             =+  hum=(end 0 3 (mug now))
             ?+   hum  !!
@@ -1369,6 +1376,25 @@
           =+  str=(need ((sand %t) ((hard ,@) u.s.bon)))
           [':' ' ' (trip str)]
         ==
+      ::                                                
+          %ye                                           ::    %ye
+        ?~  s.bon  [~ fox]
+        ?>  =(p.p.bon (sein q.p.bon))
+        =+  ^=  paz  ^-  (list ,@p)
+            %+  skim  pals:(~(um am [now fox]) p.p.bon)
+            |=(a=@p =(p.p.bon (sein a)))
+        :_  fox
+        %+  turn  paz
+        |=  him=seat
+        :+  [~ %iron p.p.bon]
+          [/a /a hen]
+        [%want him %yu [q.p.bon u.s.bon]]
+      ::
+          %yu                                           ::    %yu
+        ?.  =(q.p.bon (sein p.p.bon))  [~ fox]
+        ?~  s.bon  [~ fox]
+        =+  dof=((hard ,[p=@p q=@t]) u.s.bon)
+        $(bon [%milk [p.p.bon p.dof] %hi 0 [~ q.dof]])
       ::
           %pi                                           ::    %pi
         $(bon [%wine p.bon " sent a ping"])             ::  ping
@@ -1381,7 +1407,7 @@
         =.  ton.fox  (~(su go ton.fox) gus)
         :_  fox
         :~  :+  [~ %iron p.p.bon]
-              [/a hen]
+              [/a /a hen]
             [%want q.p.bon %to wyl]
         ==
       ::

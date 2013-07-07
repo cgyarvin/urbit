@@ -975,7 +975,7 @@ _lo_make(u2_reck* rec_u, u2_noun fav)
 /* _lo_rest(): restore from record, or exit.
 */
 static void
-_lo_rest(u2_reck* rec_u, u2_noun rez)
+_lo_rest(u2_reck* rec_u)
 {
   struct stat buf_b;
   c3_i        fid_i;
@@ -990,8 +990,9 @@ _lo_rest(u2_reck* rec_u, u2_noun rez)
   }
 
   //  Maybe we should delete all your fscking data.
+  //  [obsolete, delete soon]
   {
-    if ( u2_yes == rez ) {
+    if ( u2_yes == u2_Host.ops_u.rez ) {
       sprintf(ful_c, "rm -f %s/~egz.hope; cp %s/~ham.hope %s/~egz.hope",
                      u2_Host.cpu_c, u2_Host.cpu_c, u2_Host.cpu_c);
 
@@ -1347,21 +1348,19 @@ _lo_zen(u2_reck* rec_u)
 /* u2_lo_loop(): begin main event loop.
 */
 void
-u2_lo_loop(u2_reck* rec_u, 
-           u2_bean  nuu,
-           u2_bean  rez,
-           u2_noun  imp)
+u2_lo_loop(u2_reck* rec_u)
 {
-  if ( u2_yes == nuu ) {
+  if ( u2_yes == u2_Host.ops_u.nuu ) {
     u2_noun ten = _lo_zen(rec_u);
     u2_noun pig;
 
-    if ( u2_nul == imp ) {
+    if ( 0 == u2_Host.ops_u.imp_c ) {
       uL(fprintf(uH, "generating 2048-bit RSA pair...\n"));
 
       pig = u2nq(c3__make, u2_ci_string("ephemeral"), 11, ten);
     }
     else {
+      u2_noun imp = u2_ci_string(u2_Host.ops_u.imp_c);
       u2_noun whu = u2_cn_mung(u2k(rec_u->toy.slaw), u2nc('p', u2k(u2t(imp))));
       if ( (u2_nul == whu) ) {
         fprintf(stderr, "czar: incorrect format\r\n");
@@ -1380,11 +1379,12 @@ u2_lo_loop(u2_reck* rec_u,
 
         u2z(whu); u2z(gun);
       }
+      u2z(imp);
     }
     _lo_make(rec_u, pig);
   }
   else {
-    _lo_rest(rec_u, rez);
+    _lo_rest(rec_u);
   }
 
   if ( u2_yes == _lo_ours(rec_u) ) {
@@ -1400,7 +1400,7 @@ u2_lo_loop(u2_reck* rec_u,
   u2_Host.sav_u.ent_w = rec_u->ent_w;
 #endif
 
-  if ( u2_yes == nuu ) {
+  if ( u2_yes == u2_Host.ops_u.nuu ) {
     u2_term_ef_boil(rec_u, 1);
 
     //  _lo_copy(rec_u, 0, c3__main, u2nc(c3__ud, 1)); 
