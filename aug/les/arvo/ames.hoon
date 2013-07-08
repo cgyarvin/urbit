@@ -1363,7 +1363,7 @@
           ?~  s.bon 
             " is not feeling well"
           ?:  =(0 u.s.bon)
-            =+  hum=(end 0 3 (mug now))
+            =+  hum=(end 0 3 (mug r.bon))
             ?+   hum  !!
               0  " isn't sure what to say" 
               1  " prefers not to comment"
@@ -1395,7 +1395,7 @@
         ?.  =(q.p.bon (sein p.p.bon))  [~ fox]
         ?~  s.bon  [~ fox]
         =+  dof=((hard ,[p=@p q=@t]) u.s.bon)
-        $(bon [%milk [p.p.bon p.dof] %hi 0 [~ q.dof]])
+        $(bon [%milk [p.p.bon p.dof] %hi r.bon [~ q.dof]])
       ::
           %pi                                           ::    %pi
         $(bon [%wine p.bon " sent a ping"])             ::  ping

@@ -331,8 +331,6 @@ u2_ames_io_fuck(u2_reck*      rec_u,
           c3_y imp_y = (pac_u->pip_w & 0xff);
 
           pac_u->pip_w = _ames_czar(rec_u, imp_y, &pac_u->por_s);
-          uL(fprintf(uH, "sendtoczar %x %d %d\n", 
-                pac_u->pip_w, imp_y, pac_u->por_s));
         }
 
         if ( 0 != pac_u->pip_w ) {
