@@ -318,7 +318,6 @@ main(c3_i   argc,
       Sigcause = sig_none;
 
       signal(SIGINT, SIG_DFL);
-      signal(SIGIO, SIG_IGN);
       stackoverflow_deinstall_handler();
 
       //  Print the trace, do a GC, etc.
@@ -331,7 +330,7 @@ main(c3_i   argc,
 
       exit(1);
     }
-#if 0
+#if 1
     if ( -1 == stackoverflow_install_handler
         (overflow_handler, Sigstk, SIGSTKSZ) )
     {
@@ -339,6 +338,7 @@ main(c3_i   argc,
       exit(1);
     }
     signal(SIGINT, interrupt_handler);
+    signal(SIGIO, SIG_IGN);
 #endif
   }
 
