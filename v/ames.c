@@ -75,7 +75,6 @@ _ames_czar(u2_reck* rec_u, c3_y imp_y, c3_s* por_s)
               return 0;
             }
             if ( (AF_INET == rai_u->ai_family) ) {
-            {
               struct sockaddr_in* add_k = (struct sockaddr_in *)rai_u->ai_addr;
 
               sam_u->imp_w[imp_y] = ntohl(add_k->sin_addr.s_addr);
