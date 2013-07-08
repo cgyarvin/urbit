@@ -87,7 +87,7 @@ _ames_czar(u2_reck* rec_u, c3_y imp_y, c3_s* por_s)
 
                 uL(fprintf(uH, "ames: czar %s: ip %s\n", dns_c, nam_c));
 
-                free(nam_c); u2z(nam); u2z(wad);
+                free(nam_c); u2z(nam);
               }
 #endif
               break;
