@@ -50,7 +50,6 @@ _ames_czar(u2_reck* rec_u, c3_y imp_y, c3_s* por_s)
       u2_noun nam   = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', imp_y));
       c3_c*   nam_c = u2_cr_string(nam);
       c3_c    dns_c[64];
-      c3_w    pip_w;
 
       sprintf(dns_c, "%s.urbit.org", nam_c + 1);
       uL(fprintf(uH, "czar %s, dns %s\n", nam_c, dns_c));
@@ -76,8 +75,7 @@ _ames_czar(u2_reck* rec_u, c3_y imp_y, c3_s* por_s)
               return 0;
             }
             if ( (AF_INET == rai_u->ai_family) &&
-                 (PF_INET == rai_u->ai_protocol) &&
-                 (4 == rai_u->ai_addrlen) )
+                 (PF_INET == rai_u->ai_protocol) )
             {
               struct sockaddr_in* add_k = (struct sockaddr_in *)rai_u->ai_addr;
 
@@ -96,15 +94,14 @@ _ames_czar(u2_reck* rec_u, c3_y imp_y, c3_s* por_s)
 #endif
               break;
             }
-            uL(fprintf(uH, "ames: addr: %d %d %d\n", rai_u->ai_family, 
-                                                     rai_u->ai_protocol,
-                                                     rai_u->ai_addrlen));
+            uL(fprintf(uH, "ames: addr: %d %d %d %d\n", rai_u->ai_family, 
+                                                        rai_u->ai_protocol,
+                                                        AF_INET,
+                                                        PF_INET));
             rai_u = rai_u->ai_next;    
           }
         }
         freeaddrinfo(air_u);
-
-        sam_u->imp_w[imp_y] = pip_w;
       }
     }
     return sam_u->imp_w[imp_y];

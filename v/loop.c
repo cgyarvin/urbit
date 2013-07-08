@@ -1361,7 +1361,7 @@ u2_lo_loop(u2_reck* rec_u)
     }
     else {
       u2_noun imp = u2_ci_string(u2_Host.ops_u.imp_c);
-      u2_noun whu = u2_cn_mung(u2k(rec_u->toy.slaw), u2nc('p', u2k(u2t(imp))));
+      u2_noun whu = u2_cn_mung(u2k(rec_u->toy.slaw), u2nc('p', u2k(imp)));
       if ( (u2_nul == whu) ) {
         fprintf(stderr, "czar: incorrect format\r\n");
         exit(1);
