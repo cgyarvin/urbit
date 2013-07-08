@@ -74,8 +74,7 @@ _ames_czar(u2_reck* rec_u, c3_y imp_y, c3_s* por_s)
               sam_u->imp_w[imp_y] = 0xffffffff;
               return 0;
             }
-            if ( (AF_INET == rai_u->ai_family) &&
-                 (PF_INET == rai_u->ai_protocol) )
+            if ( (AF_INET == rai_u->ai_family) ) {
             {
               struct sockaddr_in* add_k = (struct sockaddr_in *)rai_u->ai_addr;
 
@@ -94,10 +93,6 @@ _ames_czar(u2_reck* rec_u, c3_y imp_y, c3_s* por_s)
 #endif
               break;
             }
-            uL(fprintf(uH, "ames: addr: %d %d %d %d\n", rai_u->ai_family, 
-                                                        rai_u->ai_protocol,
-                                                        AF_INET,
-                                                        PF_INET));
             rai_u = rai_u->ai_next;    
           }
         }
