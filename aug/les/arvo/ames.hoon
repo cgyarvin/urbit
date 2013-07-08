@@ -793,7 +793,7 @@
         [~ fox]
       =<  zork
       =<  zank
-      ~&  [%hear p.p.kec ryn `@p`(mug (shaf %flap pac))]
+      ::  ~&  [%hear p.p.kec ryn `@p`(mug (shaf %flap pac))]
       %-  ~(blow la:(ho:(um q.p.kec) p.p.kec) ryn %none (shaf %flap pac))
       [q.kec r.kec s.kec]
     ::
@@ -1235,7 +1235,8 @@
       ++  pals                                          ::    pals:um:am
         ^-  (list ,@p)                                  ::  active neighbors
         %+  turn  
-          (skim (~(tap by wab.weg) ~) |=([a=seat b=bath] gay.b))
+          ::  (skim (~(tap by wab.weg) ~) |=([a=seat b=bath] gay.b))
+          (~(tap by wab.weg) ~)                         ::  everyone for now
         |=([a=seat b=bath] a)
       ::
       ++  pong                                          ::    pong:um:am
@@ -1435,7 +1436,7 @@
       ==
     ::
         %ouzo  
-      ~&  [%send now p.bon `@p`(mug (shaf %flap q.bon))]
+      ::  ~&  [%send now p.bon `@p`(mug (shaf %flap q.bon))]
       :_  fox
       [[wru hen [%send p.bon q.bon]] ~]
         

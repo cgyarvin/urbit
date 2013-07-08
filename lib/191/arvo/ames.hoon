@@ -1235,7 +1235,8 @@
       ++  pals                                          ::    pals:um:am
         ^-  (list ,@p)                                  ::  active neighbors
         %+  turn  
-          (skim (~(tap by wab.weg) ~) |=([a=seat b=bath] gay.b))
+          ::  (skim (~(tap by wab.weg) ~) |=([a=seat b=bath] gay.b))
+          (~(tap by wab.weg) ~)                         ::  everyone for now
         |=([a=seat b=bath] a)
       ::
       ++  pong                                          ::    pong:um:am
