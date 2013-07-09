@@ -654,9 +654,6 @@
           puq
         |-  ^+  puq
         ?:  =(num p.n.puq)
-          =>  ?.  (gte nux.q.n.puq 2)  .
-              ~&  [%flew p.n.puq `@p`(mug (shaf %flap pac.q.n.puq))]
-              .
           ~(nap to puq)
         ?:  (gth num p.n.puq) 
           [n.puq $(puq l.puq) r.puq]
@@ -668,7 +665,7 @@
       +>(puq (~(put to puq) num rob))
     ::
     ++  harv                                            ::    harv:pe
-      |=  [[our=@p her=@p] now=@da wid=@ud rtt=@dr]     ::  harvest queue
+      |=  [now=@da wid=@ud rtt=@dr]                     ::  harvest queue
       ^-  [p=(list rock) q=_+>]
       =|  rub=(list rock)
       =-  [(flop q.vah) +>.$(puq r.vah)]
@@ -684,10 +681,6 @@
           ?.  =(0 pex.q.n.puq)
             [rub n.puq]
           :-  [pac.q.n.puq rub]
-          =>  ?.  =(nux.q.n.puq 2)  .
-              ~&  [%lost p.n.puq `@p`(mug (shaf %flap pac.q.n.puq))]
-              ~&  [%soap her gom.q.n.puq]
-              .
           %=    n.puq
               nux.q  +(nux.q.n.puq)
               pex.q  %+  add  now
@@ -1148,7 +1141,7 @@
           ^+  .                                         ::  harvest packets
           =+  rut=xang:diz
           =+  pez=%*(. pe +< sea.bah)
-          =^  wyv  pez  (harv:pez [our her] now wid.foy.bah rtt.foy.bah)
+          =^  wyv  pez  (harv:pez now wid.foy.bah rtt.foy.bah)
           =.  sea.bah  +<:durk:pez
           =+  yag==(0 cop.sea.bah)
           =.  ..tung

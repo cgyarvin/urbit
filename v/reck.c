@@ -21,6 +21,14 @@
 #include "f/coal.h"
 #include "v/vere.h"
 
+/* _reck_spat(): spat with toy.
+*/
+static u2_noun
+_reck_spat(u2_reck* rec_u, u2_noun pox)
+{
+  return u2_cn_mung(u2k(rec_u->toy.spat), pox);
+}
+
 /* _reck_nock_poke(): call poke through hardcoded interface.
 */
 static u2_noun
@@ -28,6 +36,18 @@ _reck_nock_poke(u2_reck* rec_u, u2_noun ovo)
 {
   u2_noun fun = u2_cn_nock(u2k(rec_u->roc), u2k(u2_cx_at(42, rec_u->roc)));
   u2_noun sam = u2nc(u2k(rec_u->now), ovo);
+
+#if 0
+  {
+    c3_c*   ovi_c = u2_cr_string(u2h(u2t(ovo)));
+    u2_noun tox = _reck_spat(rec_u, u2k(u2h(ovo)));
+    c3_c*   tox_c = u2_cr_string(tox);
+
+    uL(fprintf(uH, "poke: %%%s on %s\n", ovi_c, tox_c));
+
+    free(tox_c); free(ovi_c); u2z(tox);
+  }
+#endif
 
   return u2_cn_mung(fun, sam);
 }
@@ -78,14 +98,6 @@ static u2_noun
 _reck_ream(u2_reck* rec_u, u2_noun txt)
 {
   return u2_cn_mung(u2k(rec_u->toy.ream), txt);
-}
-
-/* _reck_spat(): spat with toy.
-*/
-static u2_noun
-_reck_spat(u2_reck* rec_u, u2_noun pox)
-{
-  return u2_cn_mung(u2k(rec_u->toy.spat), pox);
 }
 
 /* _reck_rain(): rain with toy.
@@ -333,33 +345,6 @@ _reck_init_veer(u2_reck* rec_u, u2_noun nam, u2_noun pax, u2_noun txt)
   } 
 }
 
-static void
-_reck_count(u2_noun a, u2_noun* m)
-{
-  if ( u2_fly_is_cat(a) ) {
-    return; 
-  } else {
-    u2_noun b = u2_ckd_by_get(u2k(*m), u2k(a));
-
-    if ( u2_none != b ) {
-      if ( b != a ) {
-        uL(fprintf(uH, "duplicate - a %x, b %x\n", a, b));
-      }
-      u2z(b);
-    }
-    else {
-      *m = u2_ckd_by_put(*m, u2k(a), u2k(a));
-
-      if ( u2_yes == u2du(a) ) {
-        _reck_count(u2h(a), m);
-        _reck_count(u2t(a), m);
-      }
-    }
-  }
-}
-
-u2_noun Map;
-
 /* u2_reck_cold(): load full arvo with vanes, from new solid state. 
 */
 void
@@ -389,7 +374,7 @@ u2_reck_cold(u2_reck* rec_u, c3_w kno_w)
       exit(1);
     }
 
-    uL(fprintf(uH, "cueing...\n"));
+    //  Copy into basket to propitiate jet gods.
     {
       u2_rail bas_r = u2_wire_bas_r(u2_Wire);
       u2_noun tup;
@@ -398,33 +383,23 @@ u2_reck_cold(u2_reck* rec_u, c3_w kno_w)
       eng = u2_rx(bas_r, tup);
       u2z(tup);
     }
-    uL(fprintf(uH, "done.\n"));
 
     rec_u->ken = u2h(eng);
     rec_u->roc = u2t(eng);
 
+    //  Execute from kernel to propitiate jet gods.
     {
       u2_noun fak;
 
       fak = u2_cn_nock(0, rec_u->ken);
       u2z(fak);
     }
-
-#if 0
-    uL(fprintf(uH, "counting...\n"));
-    {
-      u2_noun m = u2_nul;
-
-      _reck_count(eng, &m);
-      Map = m;
-    }
-    uL(fprintf(uH, "done.\n"));
-#endif
   }
 
   rec_u->toy.rain = u2_reck_wish(rec_u, "rain");
   rec_u->toy.ream = u2_reck_wish(rec_u, "ream");
   rec_u->toy.slay = u2_reck_wish(rec_u, "slay");
+  rec_u->toy.slaw = u2_reck_wish(rec_u, "slaw");
   rec_u->toy.slam = u2_reck_wish(rec_u, "slam");
   rec_u->toy.slap = u2_reck_wish(rec_u, "slap");
   rec_u->toy.slop = u2_reck_wish(rec_u, "slop");
@@ -480,6 +455,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     rec_u->toy.rain = u2_reck_wish(rec_u, "rain");
     rec_u->toy.ream = u2_reck_wish(rec_u, "ream");
     rec_u->toy.slay = u2_reck_wish(rec_u, "slay");
+    rec_u->toy.slaw = u2_reck_wish(rec_u, "slaw");
     rec_u->toy.slam = u2_reck_wish(rec_u, "slam");
     rec_u->toy.slap = u2_reck_wish(rec_u, "slap");
     rec_u->toy.slop = u2_reck_wish(rec_u, "slop");
@@ -613,6 +589,11 @@ _reck_kick_term(u2_reck* rec_u, u2_noun pox, c3_l tid_l, u2_noun fav)
     {
       rec_u->own = u2nc(u2k(p_fav), rec_u->own);
 
+      // uL(fprintf(uH, "kick: init: %d\n", p_fav));
+      if ( u2_met(3, p_fav) <= 4 ) {
+        // uL(fprintf(uH, "kick: our: %d\n", u2_cr_word(0, p_fav)));
+        rec_u->our = u2k(p_fav);
+      }
       u2z(pox); u2z(fav); return u2_yes;
     } break;
   }
@@ -749,15 +730,14 @@ _reck_kick_spec(u2_reck* rec_u, u2_noun pox, u2_noun fav)
 
       case c3__term: {
         u2_noun pud = tt_pox;
-        u2_noun p_pud, q_pud, r_pud;
+        u2_noun p_pud, q_pud;
         c3_l    tid_l;
 
-        if ( (u2_no == u2_cr_trel(pud, &p_pud, &q_pud, &r_pud)) ||
-             (u2_nul != r_pud) ||
-             (u2_no == u2_sing(rec_u->sen, p_pud)) ||
-             (u2_no == _reck_lily(rec_u, c3__ud, u2k(q_pud), &tid_l)) )
+        if ( (u2_no == u2_cr_cell(pud, &p_pud, &q_pud)) ||
+             (u2_nul != q_pud) ||
+             (u2_no == _reck_lily(rec_u, c3__ud, u2k(p_pud), &tid_l)) )
         {
-          //  uL(fprintf(uH, "term: bad tire\n"));
+          uL(fprintf(uH, "term: bad tire\n"));
           u2z(pox); u2z(fav); return u2_no;
         } else {
           return _reck_kick_term(rec_u, pox, tid_l, fav);
@@ -817,10 +797,24 @@ u2_reck_kick(u2_reck* rec_u, u2_noun ovo)
          (c3__note != u2h(u2t(ovo))) )
 #endif
 #if 1
+    if ( (c3__crud == u2h(u2t(ovo))) )
+#if 0
+         (c3__talk == u2h(u2t(ovo))) ||
+         (c3__helo == u2h(u2t(ovo))) ||
+         (c3__init == u2h(u2t(ovo))) ) 
+#endif
     {
+      u2_reck_plan(rec_u, u2nt(c3__gold, c3__term, u2_nul), 
+                          u2nc(c3__flog, u2k(u2t(ovo))));
+    }
+    else {
       uL(fprintf(uH, "kick: lost %%%s on %s\n", 
                      u2_cr_string(u2h(u2t(ovo))),
                      u2_cr_string(tox)));
+
+      if ( c3__hear == u2h(u2t(ovo)) ) {
+        c3_assert(0);
+      }
     }
 #endif
     u2z(tox);

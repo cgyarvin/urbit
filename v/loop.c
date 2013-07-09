@@ -24,6 +24,14 @@
 
 #define AMES
 
+#if defined(U2_OS_linux)
+#include <stdio_ext.h>
+#define fpurge(fd) __fpurge(fd)
+#define DEVRANDOM "/dev/urandom"
+#else
+#define DEVRANDOM "/dev/random"
+#endif
+
 /* _lo_init(): initialize I/O across the process.
 */
 static void
@@ -368,10 +376,10 @@ _lo_save(u2_reck* rec_u, u2_noun ovo)
 
   if ( u2_Host.lug_u.len_w ) {
     _lo_pack(rec_u, ron);
+    rec_u->ent_w += 1;
   } else {
     rec_u->roe = u2nc(ron, rec_u->roe);
   }
-  rec_u->ent_w += 1;
 }
 
 /* _lo_sing(): replay ovum from the past, time already set.
@@ -437,6 +445,8 @@ top:
 #if 1
     if ( c3__hear == u2h(u2t(ovo)) ) {
       _lo_punt(rec_u, 2, u2k(u2t(gon)));
+
+      uL(fprintf(uH, "hole!\r\n"));
       bov = u2nc(u2k(u2h(ovo)), u2nc(c3__hole, u2k(u2t(u2t(ovo)))));
     }
     else 
@@ -683,6 +693,39 @@ _lo_cask(u2_reck* rec_u, c3_c* dir_c, u2_bean nun)
   return key;
 }
 
+/* _lo_text(): ask for a name string.
+*/
+static u2_noun
+_lo_text(u2_reck* rec_u, c3_c* pom_c)
+{
+  c3_c   paw_c[60];
+  u2_noun say;
+
+  uH;
+  while ( 1 ) {
+    printf("%s: ", pom_c);
+
+    paw_c[0] = 0;
+    fpurge(stdin);
+    fgets(paw_c, 59, stdin);
+
+    if ( '\n' == paw_c[0] ) {
+      continue;
+    }
+    else {
+      c3_w len_w = strlen(paw_c);
+
+      if ( paw_c[len_w - 1] == '\n' ) {
+        paw_c[len_w-1] = 0;
+      }
+      say = u2_ci_string(paw_c);
+      break;
+    }
+  }
+  uL(0);
+  return say;
+}
+
 /* _lo_bask(): ask a yes or no question.
 */
 static u2_bean
@@ -716,7 +759,7 @@ _lo_bask(c3_c* pop_c, u2_bean may)
 static void
 _lo_rand(u2_reck* rec_u, c3_w* rad_w)
 {
-  c3_i fid_i = open("/dev/random", O_RDONLY);
+  c3_i fid_i = open(DEVRANDOM, O_RDONLY);
 
   if ( 32 != read(fid_i, (c3_y*) rad_w, 32) ) {
     c3_assert(!"lo_rand");
@@ -880,6 +923,7 @@ _lo_zest(u2_reck* rec_u)
 
     while ( u2_nul != nor ) {
       _lo_pack(rec_u, u2k(u2h(nor)));
+      rec_u->ent_w += 1;
       nor = u2t(nor);
     }
     u2z(rec_u->roe);
@@ -931,7 +975,7 @@ _lo_make(u2_reck* rec_u, u2_noun fav)
 /* _lo_rest(): restore from record, or exit.
 */
 static void
-_lo_rest(u2_reck* rec_u, u2_noun rez)
+_lo_rest(u2_reck* rec_u)
 {
   struct stat buf_b;
   c3_i        fid_i;
@@ -946,8 +990,9 @@ _lo_rest(u2_reck* rec_u, u2_noun rez)
   }
 
   //  Maybe we should delete all your fscking data.
+  //  [obsolete, delete soon]
   {
-    if ( u2_yes == rez ) {
+    if ( u2_yes == u2_Host.ops_u.rez ) {
       sprintf(ful_c, "rm -f %s/~egz.hope; cp %s/~ham.hope %s/~egz.hope",
                      u2_Host.cpu_c, u2_Host.cpu_c, u2_Host.cpu_c);
 
@@ -1219,18 +1264,19 @@ _lo_rest(u2_reck* rec_u, u2_noun rez)
 
   //  Hey, fscker!  It worked.
   {
-    u2_term_ef_boil(rec_u, sev_l, tno_l);
+    u2_term_ef_boil(rec_u, tno_l);
   }
 }
 
 /* _lo_ours(): set main identity.  Kind of a hack.
 */
-static void
+static u2_bean
 _lo_ours(u2_reck* rec_u)
 {
   if ( u2_nul == rec_u->own ) {
     uL(fprintf(uH, "no owners\n"));
-    u2_lo_bail(rec_u);
+
+    return u2_no;
   }
   else {
     u2_noun eac = u2t(rec_u->own);
@@ -1244,6 +1290,8 @@ _lo_ours(u2_reck* rec_u)
     }
     rec_u->our = u2k(rec_u->our);
     rec_u->pod = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', u2k(rec_u->our)));
+
+    return u2_yes;
   }
 }
 
@@ -1256,66 +1304,112 @@ _lo_link(u2_reck* rec_u,
          u2_noun  dys,
          u2_noun  lok)
 {
+  u2_reck_plan(rec_u, u2nt(c3__gold, c3__clay, u2_nul),
+                      u2nt(c3__deem, 
+                           u2k(rec_u->our),
+                           u2nc(c3__link, u2nq(syd, foh, dys, lok))));
+}
+
+/* _lo_pull(): pull changes from remote repository.
+*/
+static void
+_lo_pull(u2_reck* rec_u,
+         u2_noun  foh,
+         u2_noun  syd)
+{
+  u2_reck_plan(rec_u, u2nt(c3__gold, c3__clay, u2_nul),
+                      u2nt(c3__deem, u2k(rec_u->our),
+                                     u2nt(c3__pull, foh, syd)));
+}
+
+/* _lo_copy(): common clone.
+*/
+static void
+_lo_copy(u2_reck* rec_u,
+         u2_noun  foh,
+         u2_noun  syd,
+         u2_noun  lok)
+{
+  _lo_pull(rec_u, foh, syd);
+  //  _lo_link(rec_u, syd, foh, syd, lok);
+}
+
+/* _lo_zen(): get OS entropy.
+*/
+static u2_noun 
+_lo_zen(u2_reck* rec_u)
+{
+  c3_w rad_w[8];
+
+  _lo_rand(rec_u, rad_w);
+  return u2_ci_words(8, rad_w);
 }
 
 /* u2_lo_loop(): begin main event loop.
 */
 void
-u2_lo_loop(u2_reck* rec_u, 
-           u2_bean  nuu,
-           u2_bean  rez,
-           c3_c*    inv_c)
+u2_lo_loop(u2_reck* rec_u)
 {
-  if ( u2_yes == nuu ) {
-    if ( inv_c ) {
-      u2_noun inv = u2_cke_cue(u2_walk_load(inv_c));
+  if ( u2_yes == u2_Host.ops_u.nuu ) {
+    u2_noun ten = _lo_zen(rec_u);
+    u2_noun pig;
 
-      _lo_make(rec_u, u2nc(c3__cash, inv));
+    if ( 0 == u2_Host.ops_u.imp_c ) {
+      uL(fprintf(uH, "generating 2048-bit RSA pair...\n"));
+
+      pig = u2nq(c3__make, u2_ci_string("ephemeral"), 11, ten);
     }
     else {
-      u2_noun ten;
-
-      //  Get some host entropy.
-      //
-      {
-        c3_w rad_w[8];
-
-        _lo_rand(rec_u, rad_w);
-        ten = u2_ci_words(8, rad_w);
+      u2_noun imp = u2_ci_string(u2_Host.ops_u.imp_c);
+      u2_noun whu = u2_cn_mung(u2k(rec_u->toy.slaw), u2nc('p', u2k(imp)));
+      if ( (u2_nul == whu) ) {
+        fprintf(stderr, "czar: incorrect format\r\n");
+        exit(1);
       }
-      _lo_make(rec_u, u2nq(c3__make, c3__zuse, 11, ten));
+      else {
+        u2_noun gen = _lo_text(rec_u, "generator");
+        u2_noun nam = _lo_text(rec_u, "imperial name");
+        u2_noun gun = u2_cn_mung(u2k(rec_u->toy.slaw), u2nc(c3__uw, gen));
+
+        if ( u2_nul == gun ) {
+          fprintf(stderr, "czar: incorrect format\r\n");
+          exit(1);
+        }
+        pig = u2nq(c3__sith, u2k(u2t(whu)), nam, u2k(u2t(gun)));
+
+        u2z(whu); u2z(gun);
+      }
+      u2z(imp);
     }
+    _lo_make(rec_u, pig);
   }
   else {
-    _lo_rest(rec_u, rez);
+    _lo_rest(rec_u);
   }
-  _lo_ours(rec_u);
 
-  u2_reck_sync(rec_u);
-  u2_reck_plan(rec_u, u2nt(c3__gold, c3__ames, u2_nul),
-                      u2nc(c3__kick, u2k(rec_u->now)));
+  if ( u2_yes == _lo_ours(rec_u) ) {
+    _lo_ours(rec_u);
 
+    u2_reck_sync(rec_u);
+    u2_reck_plan(rec_u, u2nt(c3__gold, c3__ames, u2_nul),
+                        u2nc(c3__kick, u2k(rec_u->now)));
+  }
 #if 1
   u2_loom_save(rec_u->ent_w);
 
   u2_Host.sav_u.ent_w = rec_u->ent_w;
 #endif
 
-  if ( u2_yes == nuu ) {
-    u2_reck_plan(rec_u, u2nt(c3__gold, c3__clay, u2_nul),
-                        u2nt(c3__deem, 
-                             u2k(rec_u->our),
-                             u2nc(c3__link, 
-                                  u2nq(c3__main,
-                                       0,
-                                       c3__main,
-                                       u2nc(c3__ud, 0)))));
+  if ( u2_yes == u2_Host.ops_u.nuu ) {
+    u2_term_ef_boil(rec_u, 1);
 
-    u2_reck_plan(rec_u, u2nt(c3__gold, c3__clay, u2_nul),
-                        u2nt(c3__deem, u2k(rec_u->our),
-                                       u2nt(c3__pull, 0, c3__main)));
+    //  _lo_copy(rec_u, 0, c3__main, u2nc(c3__ud, 1)); 
+    //  _lo_copy(rec_u, 0, c3__try, u2nc(c3__ud, 1)); 
+    //  _lo_copy(rec_u, 0, c3__doc, u2nc(c3__ud, 1)); 
+    //  _lo_copy(rec_u, 0, c3__arvo, u2nc(c3__ud, 1)); 
   }
   _lo_init(rec_u);
+
   {
     struct ev_loop *lup_u = ev_default_loop(0);
 

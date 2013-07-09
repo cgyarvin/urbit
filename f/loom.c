@@ -60,8 +60,9 @@ _loom_sigsegv_handler(void* adr_v, c3_i ser_i)
       perror("mprotect");
       exit(1);
     }
+    return 1;
   }
-  return 1;
+  return 0;
 }
 
 /* _loom_read(): full blocking read.

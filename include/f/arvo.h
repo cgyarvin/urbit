@@ -41,6 +41,7 @@
           u2_noun slap;                   //  layer ([vase gene] -> vase)
           u2_noun slop;                   //  cell ([vase vase] -> vase)
           u2_noun slay;                   //  text to coin
+          u2_noun slaw;                   //  text to format
           u2_noun scot;                   //  dime to text
           u2_noun spat;                   //  path to text
           u2_noun stab;                   //  text to path
