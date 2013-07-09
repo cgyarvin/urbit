@@ -811,6 +811,10 @@ u2_reck_kick(u2_reck* rec_u, u2_noun ovo)
       uL(fprintf(uH, "kick: lost %%%s on %s\n", 
                      u2_cr_string(u2h(u2t(ovo))),
                      u2_cr_string(tox)));
+
+      if ( c3__hear == u2h(u2t(ovo)) ) {
+        c3_assert(0);
+      }
     }
 #endif
     u2z(tox);
