@@ -72,6 +72,8 @@ u2_term_io_init(u2_reck* rec_u)
     _utfo(out, bel);
     _utfo(out, cub1);
     _utfo(out, cuf1);
+    _utfo(out, cuu1);
+    _utfo(out, cud1);
     _utfo(out, cub);
     _utfo(out, cuf);
 
@@ -340,9 +342,28 @@ _term_it_show_wide(u2_reck* rec_u, u2_utty* uty_u, c3_w len_w, c3_w* txt_w)
 static void
 _term_it_show_clear(u2_utty* uty_u)
 {
+#if 0
   _term_it_queue_str(uty_u, "\r");
   _term_it_queue_txt(uty_u, uty_u->ufo_u.out.el_y);
   uty_u->tat_u.mir.cus_w = 0;
+#else
+  while ( 1 ) {
+    _term_it_queue_str(uty_u, "\r");
+    _term_it_queue_txt(uty_u, uty_u->ufo_u.out.el_y);
+
+    if ( uty_u->tat_u.mir.len_w > uty_u->tat_u.siz.col_l ) {
+      uty_u->tat_u.mir.len_w -= (uty_u->tat_u.mir.len_w % 
+                                 uty_u->tat_u.siz.col_l);
+
+      _term_it_queue_txt(uty_u, uty_u->ufo_u.out.cuu1_y);
+    }
+    else {
+      uty_u->tat_u.mir.len_w = 0;
+      break;
+    }
+  }
+  uty_u->tat_u.mir.cus_w = 0;
+#endif
 }
 
 /* _term_it_show_blank(): blank the screen.
@@ -680,21 +701,20 @@ u2_noun
 _term_ef_blew(u2_reck* rec_u, c3_l tid_l)
 {
   struct winsize siz_u;
-#if 0
   u2_utty*       uty_u = _term_ef_get(rec_u, tid_l);
+  c3_l           col_l, row_l;
 
   if ( 0 == ioctl(uty_u->wax_u.fd, TIOCGWINSZ, &siz_u) ) {
-    return u2nc(siz_u.ws_col, siz_u.ws_row);
+    col_l = siz_u.ws_col;
+    row_l = siz_u.ws_row;
   } else {
-    return u2nc(80, 24);
+    col_l = 80;
+    row_l = 24;
   }
-#else
-  if ( 0 == ioctl(1, TIOCGWINSZ, &siz_u) ) {
-    return u2nc(siz_u.ws_col, siz_u.ws_row);
-  } else {
-    return u2nc(80, 24);
-  }
-#endif
+  uty_u->tat_u.siz.col_l = col_l;
+  uty_u->tat_u.siz.row_l = row_l;
+  
+  return u2nc(col_l, row_l);
 }
 
 #if 0
