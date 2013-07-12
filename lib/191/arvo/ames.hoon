@@ -655,7 +655,7 @@
         |-  ^+  puq
         ?:  =(num p.n.puq)
           =>  ?.  (gte nux.q.n.puq 2)  .
-              ~&  [%sent p.n.puq `@p`(mug (shaf %flap pac.q.n.puq))]
+              ::  ~&  [%sent p.n.puq `@p`(mug (shaf %flap pac.q.n.puq))]
               .
           ~(nap to puq)
         ?:  (gth num p.n.puq) 
@@ -685,8 +685,8 @@
             [rub n.puq]
           :-  [pac.q.n.puq rub]
           =>  ?.  =(nux.q.n.puq 2)  .
-              ~&  [%lost p.n.puq `@p`(mug (shaf %flap pac.q.n.puq))]
-              ~&  [%soap her gom.q.n.puq]
+              ::  ~&  [%lost p.n.puq `@p`(mug (shaf %flap pac.q.n.puq))]
+              ::  ~&  [%soap her gom.q.n.puq]
               .
           %=    n.puq
               nux.q  +(nux.q.n.puq)
