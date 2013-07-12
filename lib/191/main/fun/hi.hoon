@@ -3,12 +3,12 @@
 ::
 |=  *
 |=  *
-|=  [bud=@p ebb=$|(~ [txt=@t ~])]
+|=  [bud=@p ebb=$|(~ [tex=tape ~])]
 ^-  bowl
 :-  ~ 
 :-  ~
 :-  ^-  (list slip)
-    :~  [/foo/bar [%yo bud %hi ?~(ebb '' txt.ebb)]]
+    :~  [/foo/bar [%yo bud %hi ?~(ebb '' (rap 3 tex.ebb))]]
     ==
 |=  [now=@da pax=path nut=note]
 ?>  =(/foo/bar pax)

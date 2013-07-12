@@ -3,13 +3,13 @@
 ::
 |=  [who=seat *]
 |=  *
-|=  [ebb=$|(~ [txt=@t ~])]
+|=  [ebb=$|(~ [tex=tape ~])]
 =+  bud=(sein who)
 ^-  bowl
 :-  ~ 
 :-  ~
 :-  ^-  (list slip)
-    :~  [/foo/bar [%yo bud %ye ?~(ebb '' txt.ebb)]]
+    :~  [/foo/bar [%yo bud %ye ?~(ebb '' (rap 3 tex.ebb))]]
     ==
 |=  [now=@da pax=path nut=note]
 ?>  =(/foo/bar pax)
