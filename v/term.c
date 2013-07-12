@@ -343,32 +343,20 @@ _term_it_show_wide(u2_reck* rec_u, u2_utty* uty_u, c3_w len_w, c3_w* txt_w)
 static void
 _term_it_show_clear(u2_utty* uty_u)
 {
-#if 0
-  _term_it_queue_str(uty_u, "\r");
-  _term_it_queue_txt(uty_u, uty_u->ufo_u.out.el_y);
-  uty_u->tat_u.mir.cus_w = 0;
-#else
-  while ( 1 ) {
+  u2_utat* tat_u = &uty_u->tat_u; 
+
+  if ( tat_u->siz.col_l ) {
+    c3_w     ful_w = tat_u->mir.cus_w / tat_u->siz.col_l;
+
+    while ( ful_w-- ) {
+      _term_it_queue_txt(uty_u, uty_u->ufo_u.out.cuu1_y);
+    }
     _term_it_queue_str(uty_u, "\r");
     _term_it_queue_txt(uty_u, uty_u->ufo_u.out.ed_y);
 
-    if ( uty_u->tat_u.mir.len_w > uty_u->tat_u.siz.col_l ) {
-      c3_w len_w = uty_u->tat_u.mir.len_w - (uty_u->tat_u.mir.len_w % 
-                                             uty_u->tat_u.siz.col_l);
-
-      if ( uty_u->tat_u.mir.cus_w >= len_w ) {
-        uty_u->tat_u.mir.cus_w = len_w;
-        _term_it_queue_txt(uty_u, uty_u->ufo_u.out.cuu1_y);
-      }
-      uty_u->tat_u.mir.len_w = len_w;
-    }
-    else {
-      uty_u->tat_u.mir.len_w = 0;
-      uty_u->tat_u.mir.cus_w = 0;
-      break;
-    }
+    tat_u->mir.len_w = 0;
+    tat_u->mir.cus_w = 0;
   }
-#endif
 }
 
 /* _term_it_show_blank(): blank the screen.
