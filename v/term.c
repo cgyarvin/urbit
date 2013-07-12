@@ -68,7 +68,8 @@ u2_term_io_init(u2_reck* rec_u)
 
     _utfo(out, clear);
     _utfo(out, el);
-    // _utfo(out, el1);
+    _utfo(out, el1);
+    _utfo(out, ed);
     _utfo(out, bel);
     _utfo(out, cub1);
     _utfo(out, cuf1);
@@ -349,20 +350,24 @@ _term_it_show_clear(u2_utty* uty_u)
 #else
   while ( 1 ) {
     _term_it_queue_str(uty_u, "\r");
-    _term_it_queue_txt(uty_u, uty_u->ufo_u.out.el_y);
+    _term_it_queue_txt(uty_u, uty_u->ufo_u.out.ed_y);
 
     if ( uty_u->tat_u.mir.len_w > uty_u->tat_u.siz.col_l ) {
-      uty_u->tat_u.mir.len_w -= (uty_u->tat_u.mir.len_w % 
-                                 uty_u->tat_u.siz.col_l);
+      c3_w len_w = uty_u->tat_u.mir.len_w - (uty_u->tat_u.mir.len_w % 
+                                             uty_u->tat_u.siz.col_l);
 
-      _term_it_queue_txt(uty_u, uty_u->ufo_u.out.cuu1_y);
+      if ( uty_u->tat_u.mir.cus_w >= len_w ) {
+        uty_u->tat_u.mir.cus_w = len_w;
+        _term_it_queue_txt(uty_u, uty_u->ufo_u.out.cuu1_y);
+      }
+      uty_u->tat_u.mir.len_w = len_w;
     }
     else {
       uty_u->tat_u.mir.len_w = 0;
+      uty_u->tat_u.mir.cus_w = 0;
       break;
     }
   }
-  uty_u->tat_u.mir.cus_w = 0;
 #endif
 }
 
