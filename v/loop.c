@@ -300,7 +300,7 @@ _lo_mung(u2_reck* rec_u, u2_noun gat, u2_noun sam)
 {
   u2_noun gam = u2nc(gat, sam);
 
-  return _lo_hard(rec_u, _lo_mung_in, gam);
+  return _lo_soft(rec_u, _lo_mung_in, gam);
 }
 
 /* _lo_pack(): save an ovum at the present time.  sync; sync; sync.
@@ -419,6 +419,163 @@ _lo_sing(u2_reck* rec_u, u2_noun ovo)
   u2z(ovo);
 }
 
+/* _lo_pike(): poke with floating core.
+*/
+static u2_noun 
+_lo_pike(u2_reck* rec_u, u2_noun ovo, u2_noun cor)
+{
+  u2_noun fun = u2_cn_nock(u2k(cor), u2k(u2_cx_at(42, cor)));
+  u2_noun sam = u2nc(u2k(rec_u->now), ovo);
+
+  return _lo_mung(rec_u, fun, sam);
+}
+
+/* _lo_sure(): apply and save an input ovum and its result.
+*/
+static void
+_lo_sure(u2_reck* rec_u, u2_noun ovo, u2_noun vir, u2_noun cor)
+{
+  //  Whatever worked, save it.  (XX - should be concurrent with execute.)
+  //  We'd like more events that don't change the state but need work here.
+  {
+    u2_mug(cor);
+    u2_mug(rec_u->roc);
+
+    if ( u2_no == u2_sing(cor, rec_u->roc) ) {
+      _lo_save(rec_u, u2k(ovo));
+      u2z(rec_u->roc);
+      rec_u->roc = cor;
+    }
+    else {
+      u2z(cor);
+    }
+    u2z(ovo);
+  }
+
+  //  Evaluate external side effects.  Not allowed to fail.
+  //
+  {
+    u2_noun hux = vir;
+
+    while ( u2_nul != hux ) {
+      u2_reck_kick(rec_u, u2k(u2h(hux)));
+      hux = u2t(hux);
+    }
+    u2z(vir);
+  }
+}
+
+/* _lo_lame(): handle an application failure.
+*/
+static void
+_lo_lame(u2_reck* rec_u, u2_noun ovo, u2_noun tan)
+{
+  u2_noun bov, gon;
+
+  //  Formal error in a network packet generates a hole card.
+  //
+  //  There should be a separate path for crypto failures,
+  //  to prevent timing attacks, but isn't right now.  To deal
+  //  with a crypto failure, just drop the packet.
+  //
+  if ( c3__hear == u2h(u2t(ovo)) ) {
+    _lo_punt(rec_u, 2, u2k(tan));
+
+    bov = u2nc(u2k(u2h(ovo)), u2nc(c3__hole, u2k(u2t(u2t(ovo)))));
+  }
+  else {
+    bov = u2nc(u2k(u2h(ovo)), u2nc(c3__crud, u2k(tan)));
+  }
+  u2z(ovo); 
+
+  gon = _lo_soft(rec_u, u2_reck_poke, u2k(bov));
+  if ( u2_blip == u2h(gon) ) {
+    _lo_sure(rec_u, bov, u2k(u2h(u2t(gon))), u2k(u2t(u2t(gon))));
+   
+    u2z(gon);
+  }
+  else {
+    u2z(gon);
+    {
+      u2_noun vab = u2nc(u2k(u2h(bov)), 
+                         u2nc(c3__warn, u2_ci_tape("crude crash!")));
+      u2_noun nog = _lo_soft(rec_u, u2_reck_poke, u2k(vab));
+
+      if ( u2_blip == u2h(nog) ) {
+        _lo_sure(rec_u, vab, u2k(u2h(u2t(nog))), u2k(u2t(u2t(nog))));
+        u2z(nog);
+      }
+      else {
+        u2z(nog);
+        u2z(vab);
+
+        uL(fprintf(uH, "crude: all delivery failed!\n"));
+      }
+    }
+  }
+}
+
+static void _lo_punk(u2_reck* rec_u, u2_noun ovo);
+
+/* _lo_nick(): transform enveloped packets, [vir cor].
+*/
+static u2_noun 
+_lo_nick(u2_reck* rec_u, u2_noun vir, u2_noun cor)
+{
+  if ( u2_nul == vir ) {
+    return u2nt(u2_blip, vir, cor);
+  } 
+  else {
+    u2_noun i_vir = u2h(vir);
+    u2_noun pi_vir, qi_vir;
+    u2_noun vix, viz;
+
+    if ( (u2_yes == u2_cr_cell((i_vir=u2h(vir)), &pi_vir, &qi_vir)) &&
+         (u2_yes == u2du(qi_vir)) &&
+         (c3__hear == u2h(qi_vir)) )
+    {
+      u2_noun gon;
+
+      gon = _lo_pike(rec_u, u2k(i_vir), cor);
+      if ( u2_blip != u2h(gon) ) {
+        u2z(vir);
+        return gon;
+      }
+      else {
+        u2_noun viz;
+
+        vix = u2k(u2h(u2t(gon)));
+        cor = u2k(u2t(u2t(gon)));
+        u2z(gon);
+
+        viz = u2_ckb_weld(vix, u2k(u2t(vir)));
+        u2z(vir);
+
+        return _lo_nick(rec_u, viz, cor);
+      }
+    }
+    else {
+      u2_noun nez = _lo_nick(rec_u, u2k(u2t(vir)), cor);
+      u2_noun ret;
+
+      if ( u2_blip != u2h(nez) ) {
+        u2z(vir);
+        return nez;
+      } else {
+        u2_noun viz;
+
+        viz = u2nc(u2k(i_vir), u2k(u2h(u2t(nez))));
+        cor = u2k(u2t(u2t(nez)));
+
+        u2z(vir);
+        u2z(nez);
+
+        return u2nt(u2_blip, viz, cor);
+      }
+    }
+  }
+}
+
 /* _lo_punk(): insert and apply an input ovum (unprotected).
 */
 static void
@@ -426,110 +583,27 @@ _lo_punk(u2_reck* rec_u, u2_noun ovo)
 {
   u2_noun gon;
 
-top:
-  //  Try to execute the event.
-  //
   gon = _lo_soft(rec_u, u2_reck_poke, u2k(ovo));
 
-  //  Yo, did we fail?  Do something else that works.
-  //
   if ( u2_blip != u2h(gon) ) {
-    u2_noun bov;
+    _lo_lame(rec_u, ovo, u2k(u2t(gon)));
+  }
+  else {
+    u2_noun vir = u2k(u2h(u2t(gon)));
+    u2_noun cor = u2k(u2t(u2t(gon)));
+    u2_noun nug = _lo_nick(rec_u, vir, cor);
 
-    //  Formal error in a network packet generates a hole card.
-    //
-    //  There should be a separate path for crypto failures,
-    //  to prevent timing attacks, but isn't right now.  To deal
-    //  with a crypto failure, just drop the packet.
-    //
-#if 1
-    if ( c3__hear == u2h(u2t(ovo)) ) {
-      _lo_punt(rec_u, 2, u2k(u2t(gon)));
+    if ( u2_blip != u2h(nug) ) {
+      _lo_lame(rec_u, ovo, u2k(u2t(nug)));
+      u2z(nug);
+    } 
+    else {
+      vir = u2k(u2h(u2t(nug)));
+      cor = u2k(u2t(u2t(nug)));
 
-      uL(fprintf(uH, "hole!\r\n"));
-      bov = u2nc(u2k(u2h(ovo)), u2nc(c3__hole, u2k(u2t(u2t(ovo)))));
-    }
-    else 
-#endif
-    {
-      bov = u2nc(u2k(u2h(ovo)), u2nc(c3__crud, u2k(u2t(gon))));
-    }
-
-    u2z(ovo); ovo = bov;
-    u2z(gon); gon = _lo_soft(rec_u, u2_reck_poke, u2k(ovo));
-
-    if ( u2_blip != u2h(gon) ) {
-      u2_noun bov = u2nc(u2k(u2h(ovo)), 
-                         u2nc(c3__warn, u2_ci_tape("crude crash!")));
-
-      u2z(ovo); ovo = bov;
-      u2z(gon); gon = _lo_soft(rec_u, u2_reck_poke, u2k(ovo));
-
-      if ( u2_blip != u2h(gon) ) {
-        uL(fprintf(uH, "crude: all delivery failed!\n"));
-
-        u2z(gon); u2z(ovo);
-        return;
-      }
+      _lo_sure(rec_u, ovo, vir, cor);
     }
   }
-
-  //  Special handling for enveloped packets.  When arvo produces
-  //  (rather than, as usual, receiving) a %hear card, it has
-  //  chosen to accept a packet in a forwarding envelope.  Its goal 
-  //  is to behave as if the enveloped packet were its original -
-  //  ie, as if the forwarding chain did not exist.
-  //
-  //  Any side effects in envelope opening are discarded.  Opening
-  //  may produce at most one %hear.  The tire must be gold.
-  //
-  {
-    u2_noun gax = u2t(gon);
-    u2_noun hux = u2h(gax), i_hux, pi_hux, qi_hux;
-
-    if ( (u2_yes == u2du(hux)) &&
-         (u2_nul == u2t(hux)) &&
-         (u2_yes == u2_cr_cell((i_hux=u2h(hux)), &pi_hux, &qi_hux)) &&
-         (u2_yes == u2du(qi_hux)) &&
-         (u2_yes == u2du(pi_hux)) &&
-         // (c3__gold == u2h(u2h(pi_hux))) &&
-         (c3__hear == u2h(qi_hux)) )
-    {
-      u2z(ovo);
-      ovo = u2k(i_hux);
-      u2z(gon);
-      goto top;
-    }
-  }
-
-  //  Whatever worked, save it.  (XX - should be concurrent with execute.)
-  //  We'd like more events that don't change the state but need work here.
-  {
-    u2_mug(u2t(u2t(gon)));
-    u2_mug(rec_u->roc);
-
-    if ( u2_no == u2_sing(u2t(u2t(gon)), rec_u->roc) ) {
-      _lo_save(rec_u, u2k(ovo));
-    }
-  }
-
-  //  And then apply it.
-  {
-    u2_noun gax = u2t(gon);
-  
-    u2z(rec_u->roc);
-    rec_u->roc = u2k(u2t(gax));
-
-    {
-      u2_noun hux = u2h(gax);
-
-      while ( u2_nul != hux ) {
-        u2_reck_kick(rec_u, u2k(u2h(hux)));
-        hux = u2t(hux);
-      }
-    }
-  }
-  u2z(ovo);
   u2z(gon);
 }
 
@@ -1350,6 +1424,8 @@ _lo_zen(u2_reck* rec_u)
 void
 u2_lo_loop(u2_reck* rec_u)
 {
+  _lo_init(rec_u);
+
   if ( u2_yes == u2_Host.ops_u.nuu ) {
     u2_noun ten = _lo_zen(rec_u);
     u2_noun pig;
@@ -1408,7 +1484,6 @@ u2_lo_loop(u2_reck* rec_u)
     //  _lo_copy(rec_u, 0, c3__doc, u2nc(c3__ud, 1)); 
     //  _lo_copy(rec_u, 0, c3__arvo, u2nc(c3__ud, 1)); 
   }
-  _lo_init(rec_u);
 
   {
     struct ev_loop *lup_u = ev_default_loop(0);

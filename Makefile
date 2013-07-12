@@ -5,7 +5,7 @@
 #   linux
 #   osx
 #
-#OS=linux
+OS=linux
 OS=osx
 
 # Pick one of:

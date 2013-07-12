@@ -855,12 +855,17 @@ u2_hrep*
 _http_request(u2_hreq* req_u)
 {
   u2_noun req = _http_request_to_noun(req_u);
-  u2_noun pox = _http_pox_to_noun(req_u->hon_u->htp_u->sev_l,
-                                  req_u->hon_u->coq_l,
-                                  req_u->seq_l); 
 
-  u2_reck_http_request(u2_Host.arv_u, u2_yes, pox, req);
-  return 0;
+  if ( u2_none == req ) {
+    return 0;
+  } else {
+    u2_noun pox = _http_pox_to_noun(req_u->hon_u->htp_u->sev_l,
+                                    req_u->hon_u->coq_l,
+                                    req_u->seq_l); 
+
+    u2_reck_http_request(u2_Host.arv_u, u2_yes, pox, req);
+    return 0;
+  }
 }
 
 /* _http_respond(): transmit http response.

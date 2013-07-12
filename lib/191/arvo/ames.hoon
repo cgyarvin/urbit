@@ -655,7 +655,7 @@
         |-  ^+  puq
         ?:  =(num p.n.puq)
           =>  ?.  (gte nux.q.n.puq 2)  .
-              ~&  [%flew p.n.puq `@p`(mug (shaf %flap pac.q.n.puq))]
+              ::  ~&  [%sent p.n.puq `@p`(mug (shaf %flap pac.q.n.puq))]
               .
           ~(nap to puq)
         ?:  (gth num p.n.puq) 
@@ -685,8 +685,8 @@
             [rub n.puq]
           :-  [pac.q.n.puq rub]
           =>  ?.  =(nux.q.n.puq 2)  .
-              ~&  [%lost p.n.puq `@p`(mug (shaf %flap pac.q.n.puq))]
-              ~&  [%soap her gom.q.n.puq]
+              ::  ~&  [%lost p.n.puq `@p`(mug (shaf %flap pac.q.n.puq))]
+              ::  ~&  [%soap her gom.q.n.puq]
               .
           %=    n.puq
               nux.q  +(nux.q.n.puq)
@@ -1008,7 +1008,7 @@
                 =+  rum=(~(get by raz.bah) cha)
                 ?~(rum *race u.rum)
             ?.  (gte num did.rum)
-              +>.$                                      ::  duplicate
+              (cock %good)                              ::  always ack a dup
             (coot cha rum(mis (~(put by mis.rum) num [dam dut])))
           ::
           ++  dine                                      ::    dine:la:ho:um:am
@@ -1558,6 +1558,7 @@
     ?~  gys  ~
     ?.  =(our his)
       =+  fod=(~(get by hoc.saf.u.gys) his)
+      ?~  fod  ~
       ?~  lew.wod.u.fod  ~
       [~ `@ud`p.p.q.i.lew.wod.u.fod]
     ?~  val.saf.u.gys  ~

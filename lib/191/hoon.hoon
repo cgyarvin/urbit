@@ -1551,7 +1551,7 @@
     ?~  a
       ~
     ?.  =(b p.n.a)
-      ?:  (hor b p.n.a) 
+      ?:  (gor b p.n.a) 
         [n.a $(a l.a) r.a] 
       [n.a l.a $(a r.a)]
     |-  ^-  ?(~ _a)

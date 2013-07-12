@@ -147,6 +147,11 @@
     */
       typedef struct {
         struct {
+          c3_l  col_l;                      //  columns
+          c3_l  row_l;                      //  rows
+        } siz;
+
+        struct {
           c3_w* lin_w;                      //  current line (utf32)
           c3_w  len_w;                      //  length of current line
           c3_w  cus_w;                      //  cursor position
@@ -204,9 +209,12 @@
           const c3_y* clear_y;              //  clear_screen
           const c3_y* el_y;                 //  clr_bol clear to beginning 
           const c3_y* el1_y;                //  clr_eol clear to end
+          const c3_y* ed_y;                 //  clear to end of screen
           const c3_y* bel_y;                //  bel sound bell
           const c3_y* cub1_y;               //  parm_left
           const c3_y* cuf1_y;               //  parm_right
+          const c3_y* cuu1_y;               //  parm_up
+          const c3_y* cud1_y;               //  parm_down
           const c3_y* cub_y;                //  parm_left_cursor #num
           const c3_y* cuf_y;                //  parm_right_cursor #num 
         } out;
