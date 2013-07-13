@@ -7112,13 +7112,12 @@
         ;~(plug (cold %ket ket) wide)
         ;~  plug
           (easy %pel)
-          %+  ifix
-            [pel per]
-          (most ;~(plug com ace) ;~(glam wide wide))
+          (ifix [pel per] loon)
         ==
       ==
     ==
   ::
+  ++  loon  (most ;~(plug com ace) ;~(glam wide wide))
   ++  rope
     %+  knee
       *wing
