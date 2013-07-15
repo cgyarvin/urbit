@@ -135,3 +135,26 @@ u2_time_out_ts(struct timespec* tim_ts, u2_noun now)
   tim_ts->tv_nsec = (tim_tv.tv_usec * 1000);
 }
 
+/* u2_time_gap_double(): (wen - now) in libev resolution.
+*/
+double
+u2_time_gap_double(u2_noun now, u2_noun wen)
+{
+  mpz_t now_mp, wen_mp, dif_mp;
+  double sec_g = (((double)(1ULL << 32ULL)) * ((double)(1ULL << 32ULL)));
+  double gap_g, dif_g;
+
+  u2_cr_mp(now_mp, now);
+  u2_cr_mp(wen_mp, wen);
+  mpz_init(dif_mp);
+  mpz_sub(dif_mp, wen_mp, now_mp);
+
+  u2z(now);
+  u2z(wen);
+
+  dif_g = mpz_get_d(dif_mp) / sec_g;
+  gap_g = (dif_g > 0.0) ? dif_g : 0.0;
+  mpz_clear(dif_mp); mpz_clear(wen_mp); mpz_clear(now_mp);
+
+  return gap_g;
+}

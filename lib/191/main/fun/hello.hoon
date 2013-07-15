@@ -1,3 +1,4 @@
+!:
 |=  *
 |=  *
 |=  [planet=@ta ~]
@@ -5,4 +6,4 @@
 :_  ~
 :_  ~
 :-  %%
-!>  "hello, {(rip 3 planet)}."
+!>("hello, {(rip 3 planet)}.")

@@ -847,7 +847,7 @@
 ++  beak  ,[p=(unit ,@ud) q=(map wire goal) r=boor]     ::  next/want/process
 ++  bear  ,[p=(map path goal) q=boar]                   ::  process with slips
 ++  beef                                                ::  raw product
-          $:  p=(list gift)                             ::  actions
+          $:  p=(list gilt)                             ::  actions
               q=(list slip)                             ::  requests
               r=boar                                    ::  state
           ==                                            ::
@@ -891,7 +891,7 @@
 ++  boor                                                ::  new process
           $:  p=(map ,@ud kite)                         ::  dependencies
               q=(qeu ,[p=wire q=card])                  ::  incoming cards 
-              r=(qeu ,[p=wire q=note])                  ::  pending notes
+              r=(qeu ,[p=wire q=nose])                  ::  pending notes
               s=boar                                    ::  execution
           ==                                            ::
 ++  boat  ,[(list slip) task]                           ::  user stage
@@ -966,7 +966,7 @@
               [%nuke p=~]                               ::  kill all processes
               [%over p=~]                               ::  end of pipeline
               [%pace p=@ud]                             ::  compute background
-              [%pipe p=(unit ,[p=calf q=(list)])]       ::  pipeline data
+              [%pipe p=(unit ,[p=typo q=(list)])]       ::  pipeline data
               [%pour p=path q=dram]                     ::  write directory
               [%pull p=seat q=disc r=(list disc)]       ::  pull remote desk
               [%pump ~]                                 ::  produce packets
@@ -1013,22 +1013,15 @@
           ==                                            ::
 ++  coal  ,*                                            ::  untyped vase
 ++  code  ,@uvI                                         ::  symmetric key
-++  cone  ,[p=(list ,@tas) q=(list ,[p=@tas q=crow])]   ::  bits and options
+++  cone                                                ::  reconfiguration
+          $%  [0 p=gene]                                ::  set
+              [1 p=gene]                                ::  modify
+              [2 p=gene]                                ::  function
+          ==                                            ::
 ++  conf  ,[p=(set ,@tas) q=(map ,@tas ,*)]             ::  bits and options
 ++  corp  ,[p=@t q=@t r=@tas]                           ::  name auth issuer
 ++  chum  ,@uvI                                         ::  hashed passcode
 ++  cred  ,[p=logo q=(map ,@tas ,[p=@da q=@ta])]        ::  client credentials
-++  crow                                                ::  shell expression
-          $%  [%f p=path]                               ::  file by path
-              [%c p=crow q=(list crow)]                 ::  function call
-              [%e p=crow]                               ::  <crow>
-              [%g p=(list path) q=gene]                 ::  gene w/libs
-              [%l p=(list crow)]                        ::  list
-              [%k p=crow]                               ::  >crow<
-              [%p p=(list crow)]                        ::  tuple
-              ::  [%m p=(list crow)]                    ::  map?
-              ::  [%s p=(list crow)]                    ::  set?
-          ==                                            ::
 ++  cult  (map duct rave)                               ::  subscriptions
 ++  deed  ,[p=@ q=step]                                 ::  signature, stage
 ++  dock                                                ::  link record
@@ -1074,7 +1067,7 @@
           ==                                            ::
 ++  frog  ,[p=@da q=maki]                               ::  project change
 ++  gift                                                ::  one-way effect
-          $%  [%% p=calf q=*]                           ::  trivial output
+          $%  [%% p=vase]                               ::  trivial output
               [%cd p=@tas]                              ::  change desk
               [%cs p=path]                              ::  change spur
               [%de p=@ud q=tank]                        ::  debug/level
@@ -1082,14 +1075,16 @@
               [%ho p=(list tank)]                       ::  multiple error
               [%la p=tank]                              ::  single statement
               [%lo p=(list tank)]                       ::  multiple statement
-              [%mu p=calf q=(list)]                     ::  batch emit
+              [%mu p=type q=(list)]                     ::  batch emit
               [%mx p=(list gift)]                       ::  batch gift
               [%ok p=disc q=nori]                       ::  save changes
               [%te p=(list ,@t)]                        ::  dump lines
               [%th p=love]                              ::  http response
               [%xx p=card]                              ::  apply card
               [%xy p=path q=card]                       ::  push card
+              [%xz ~]
           ==                                            ::
+++  gilt  ,[@tas *]                                     ::  presumed gift
 ++  gcos                                                ::  id description
           $%  [%czar p=@t]                              ::  8-bit seat
               [%duke p=what]                            ::  32-bit seat
@@ -1140,23 +1135,27 @@
                   [%s p=@ta]                            ::  string
               ==                                        ::
           ==                                            ::
+++  lamp                                                ::  short path
+          $%  [0 p=@tas q=(unit ,@ta)]                  ::  micropath
+              [1 p=@tas q=(unit ,@ta) r=path]           ::  minipath
+              [2 p=@p q=@tas r=(unit ,@ta) s=path]      ::  foreign path
+              [3 p=gene]                                ::  full construction
+          ==                                            ::
 ++  lane                                                ::  packet route
           $%  [%if p=@ud q=@if]                         ::  IP4/public UDP/addr
               [%is p=@ud q=@is]                         ::  IP6/public UDP/addr
           ==                                            ::
 ++  lark                                                ::  parsed command
-          $%  [%cc p=crow]                              ::  change spur
-              [%cd p=disc]                              ::  change desk
-              [%do p=crow]                              ::  direct effect
-              [%ec p=crow]                              ::  print and record
-              [%go p=path q=cone r=crow]                ::  run application
-              [%kl p=tick]                              ::  kill a process
-              [%nk ~]                                   ::  kill all processes
-              [%ps ~]                                   ::  list processes
-              [%so p=@tas q=crow]                       ::  set variable
-              [%to p=crow]                              ::  type only
+          $%  [%go p=(list lath)]                       ::  dump to console
+              [%no p=@tas]                              ::  unset a variable
+              [%so p=@tas q=gene]                       ::  set a variable 
           ==                                            ::
-++  lath  ,[p=path q=cone r=crow]                       ::  parsed command
+++  lass  ?(%0 %1 %2)                                   ::  power increment
+++  lath  $%                                            ::  pipeline stage
+              [& p=lass q=lamp r=cone s=gene]           ::  command
+              [| p=gene]                                ::  expression
+          ==                                            ::
+++  leek  ,[p=lass q=gene r=cone s=gene]                ::  app launch
 ++  lens  ?(%z %y %x %w)                                ::  repository view
 ++  lice  ,[p=seat q=buck]                              ::  full license
 ++  life  ,@ud                                          ::  regime number
@@ -1205,14 +1204,21 @@
 ++  mood  ,[p=care q=case r=path]                       ::  request in desk
 ++  moth  ,[p=meth q=math r=(unit octs)]                ::  http operation
 ++  name  ,[p=@t q=(unit ,@t) r=(unit ,@t) s=@t]        ::  first mid/nick last
-++  note                                                ::  response to goal
-          $%  [%% p=(unit (list ,*))]                   ::  standard input
-              [%eg p=riot]                              ::  simple result
+++  nook                                                ::  common note
+          $%  [%eg p=riot]                              ::  simple result
               [%ht p=scab q=cred r=moth]                ::  http request
               [%up p=@t]                                ::  prompt response
               [%oy p=seat q=@ta r=@ud s=(unit ,*)]      ::  incoming request
               [%yo p=seat q=cape r=soap]                ::  request response
               [%wa p=@da]                               ::  alarm
+          ==                                            ::
+++  nose                                                ::  response, kernel
+          $?  [%% p=(unit ,[p=typo q=(list)])]          ::  standard input
+              nook                                      ::  
+          ==                                            ::
+++  note                                                ::  response, kernel
+          $?  [%% p=(unit ,[p=type q=(list)])]          ::  standard input
+              nook                                      ::
           ==                                            ::
 ++  nori                                                ::  repository action
           $%  [& p=soba]                                ::  delta
@@ -1356,6 +1362,7 @@
               any=@                                     ::  entropy
               urb=(map seat safe)                       ::  all keys and routes
           ==                                            ::
+++  typo  ,*                                            ::  presumed type
 ++  soba  (list ,[p=path q=miso])                       ::  delta
 ++  wand  (list ,[p=life q=ring r=acro])                ::  mace in action
 ++  what                                                ::  logical identity

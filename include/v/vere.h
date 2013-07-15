@@ -195,6 +195,50 @@
         c3_w len_w;                         //  length in words
       } u2_ulog;
 
+      struct _u2_uhot;
+      struct _u2_udir;
+      struct _u2_ufil;
+
+    /* u2_ufil: synchronized file.
+    */
+      typedef struct _u2_ufil {
+        struct ev_stat   was_u;             //  stat watcher
+        u2_bean          non;               //  always u2_no
+        u2_bean          dry;               //  ie, modified
+        struct _u2_udir* dir_u;             //  in directory
+        mpz_t            ash_mp;            //  sham
+        struct _u2_ufil* nex_u;             //  internal list
+      } u2_ufil;
+
+    /* u2_udir: synchronized directory.
+    */
+      typedef struct _u2_udir {
+        struct ev_stat   was_u;             //  stat watcher
+        u2_bean          yes;               //  always u2_yes
+        u2_bean          dry;               //  ie, unmodified
+        mpz_t            who_mp;            //  owner as GMP
+        c3_c*            pax_c;             //  absolute path
+        struct _u2_udir* par_u;             //  parent directory
+        struct _u2_udir* dis_u;             //  subdirectories
+        struct _u2_ufil* fil_u;             //  files
+        struct _u2_udir* nex_u;             //  internal list
+      } u2_udir;
+
+    /* u2_uhot: synchronized host.
+    */
+      typedef struct _u2_uhot {
+        u2_udir          dir_u;             //  root directory
+        struct _u2_uhot* nex_u;             //  internal list
+      } u2_uhot;
+
+    /* u2_unix: clay support system
+    */
+      typedef struct _u2_unix {
+        struct ev_timer tim_u;              //  clay timer
+        u2_bean         alm;                //  alarm
+        u2_uhot         hot;                //  host state
+      } u2_unix;
+
     /* u2_utfo: unix terminfo strings.
     */
       typedef struct {
@@ -327,6 +371,7 @@
         u2_ames  sam_u;                     //  packet interface
         u2_save  sav_u;                     //  autosave
         u2_opts  ops_u;                     //  commandline options
+        u2_unix  unx_u;                     //  sync and clay
 
         u2_reck* arv_u;                     //  runtime
       } u2_host;                            //  host == computer == process
@@ -419,6 +464,10 @@
         void
         u2_time_out_ts(struct timespec* tim_ts, u2_noun now);
 
+      /* u2_time_gap_double(): (wen - now) in libev resolution.
+      */
+        double
+        u2_time_gap_double(u2_noun now, u2_noun wen);
 
     /**  Filesystem (new api).
     **/
@@ -943,6 +992,42 @@
       */
         void
         u2_save_io_time(u2_reck*         rec_u,
+                        struct ev_timer* tim_u);
+
+    /**  Storage, new school.
+    **/
+      /* u2_unix_io_init(): initialize storage.
+      */
+        void 
+        u2_unix_io_init(u2_reck* rec_u);
+
+      /* u2_unix_io_exit(): terminate storage.
+      */
+        void 
+        u2_unix_io_exit(u2_reck* rec_u);
+
+      /* u2_unix_io_spin(): start storage timer.
+      */
+        void
+        u2_unix_io_spin(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_unix_io_stop(): stop storage timer.
+      */
+        void
+        u2_unix_io_stop(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_unix_io_poll(): update storage state.
+      */
+        void
+        u2_unix_io_poll(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_unix_io_time(): time event on storage.
+      */
+        void
+        u2_unix_io_time(u2_reck*         rec_u,
                         struct ev_timer* tim_u);
 
       

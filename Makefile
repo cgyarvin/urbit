@@ -777,6 +777,7 @@ VERE_OFILES=\
        v/loop.o \
        v/save.o \
        v/sync.o \
+       v/unix.o \
        v/walk.o \
        v/reck.o \
        $(BASE_OFILES) \

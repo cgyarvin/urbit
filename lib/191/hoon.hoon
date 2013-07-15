@@ -3215,6 +3215,12 @@
              ==
   ==
 ::
+++  mang
+  |=  [[gat=* sam=*] sky=_|+(* *(unit))]
+  ^-  (unit)
+  =+  ton=(mong [[gat sam] sky])
+  ?.(?=([0 *] ton) ~ [~ p.ton])
+::
 ++  mong
   |=  [[gat=* sam=*] sky=_|+(* *(unit))]
   ^-  toon
@@ -4689,7 +4695,7 @@
       :+  %tsls  [%ktts %b [%tsgr [%cnbc %v] q.gen]]    ::  =+  b==>(v {q.gen})
       :+  %tsls                                         ::  =+  c=(a b)
         [%ktts %c [%cnhp [%cnbc %a] [%cnbc %b] ~]]      ::  
-      [%wtgr [%dtts [%cnbc %c] [%cnbc %b]] [%cnbc %b]]  ::  ?>(=(c b) b)
+      [%wtgr [%dtts [%cnbc %c] [%cnbc %b]] [%cnbc %b]]  ::  ?>(=(c b) c)
     ::
         [%smtr *]                                       ::                  ;*
       :+  %tsgr  [%ktts %v ~ 1]                         ::  =>  v=.
@@ -6511,6 +6517,7 @@
   ++  glam  ~+((glue ace))
   ++  hasp  ;~  pose
               (ifix [sel ser] wide)
+              (stag %cnhp (ifix [pel per] (most ace wide))) 
               %+  cook
                 |=(a=coin [%dtpt ?:(?=([~ %tas *] a) %tas %ta) ~(rent co a)]) 
               nuck:so

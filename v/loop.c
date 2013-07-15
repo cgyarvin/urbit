@@ -41,6 +41,7 @@ _lo_init(u2_reck* rec_u)
   u2_term_io_init(rec_u);
   u2_http_io_init(rec_u);
   u2_save_io_init(rec_u);
+  u2_unix_io_init(rec_u);
 }
 
 /* _lo_exit(): terminate I/O across the process.
@@ -52,6 +53,7 @@ _lo_exit(u2_reck* rec_u)
   u2_term_io_exit(rec_u);
   u2_http_io_exit(rec_u);
   u2_save_io_exit(rec_u);
+  u2_unix_io_exit(rec_u);
 }
 
 /* _lo_stop(): stop event I/O across the process.
@@ -64,6 +66,7 @@ _lo_stop(u2_reck*        rec_u,
   u2_http_io_stop(rec_u, lup_u);
   u2_term_io_stop(rec_u, lup_u);
   u2_save_io_stop(rec_u, lup_u);
+  u2_unix_io_stop(rec_u, lup_u);
 }
 
 /* _lo_poll(): reset event flags across the process.
@@ -76,6 +79,7 @@ _lo_poll(u2_reck*        rec_u,
   u2_http_io_poll(rec_u, lup_u);
   u2_term_io_poll(rec_u, lup_u);
   u2_save_io_poll(rec_u, lup_u);
+  u2_unix_io_poll(rec_u, lup_u);
 }
 
 /* _lo_spin(): restart event I/O across the process.
@@ -88,6 +92,7 @@ _lo_spin(u2_reck*        rec_u,
   u2_http_io_spin(rec_u, lup_u);
   u2_term_io_spin(rec_u, lup_u);
   u2_save_io_spin(rec_u, lup_u);
+  u2_unix_io_spin(rec_u, lup_u);
 }
 
 /* _lo_how(): print how.
@@ -103,6 +108,7 @@ _lo_how(u2_noun how)
     case c3__htcn: return "http-conn";
     case c3__htls: return "http-lisn";
     case c3__save: return "save";
+    case c3__unix: return "unix";
   }
 }
 
@@ -118,6 +124,7 @@ _lo_time(u2_reck*         rec_u,
 
     case c3__ames: u2_ames_io_time(rec_u, tim_u); break;
     case c3__save: u2_save_io_time(rec_u, tim_u); break;
+    case c3__unix: u2_unix_io_time(rec_u, tim_u); break;
   }
 } 
 

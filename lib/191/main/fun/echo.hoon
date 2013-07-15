@@ -3,5 +3,5 @@
 ::
 |=  *
 |=  *
-|=  tac=tank
-[[[%la tac] ~] ~]
+|=  tan=(list tank)
+[(turn tan |=(a=tank [%la a])) ~]

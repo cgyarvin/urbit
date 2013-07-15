@@ -283,21 +283,7 @@ u2_ames_io_poll(u2_reck*        rec_u,
          (u2_yes == u2du(wen)) &&
          (u2_yes == u2ud(u2t(wen))) )
     {
-      mpz_t now_mp, wen_mp, dif_mp;
-      double sec_g = (((double)(1ULL << 32ULL)) * ((double)(1ULL << 32ULL)));
-      double gap_g, dif_g;
-
-      u2_cr_mp(now_mp, rec_u->now);
-      u2_cr_mp(wen_mp, u2t(wen));
-      mpz_init(dif_mp);
-      mpz_sub(dif_mp, wen_mp, now_mp);
-
-      dif_g = mpz_get_d(dif_mp) / sec_g;
-      gap_g = (dif_g > 0.0) ? dif_g : 0.0;
-      mpz_clear(dif_mp); mpz_clear(wen_mp); mpz_clear(now_mp);
-
-      //  fprintf(stderr, "ames: wait: %g\r\n", gap_g);
-      //  uL(fprintf(uH, "ames: wait: %g\n", gap_g));
+      double gap_g = u2_time_gap_double(u2k(rec_u->now), u2k(u2t(wen)));
 
       sam_u->alm = u2_yes;
       ev_timer_set(&sam_u->tim_u, gap_g, 0.);
@@ -372,8 +358,7 @@ u2_ames_io_time(u2_reck*         rec_u,
 {
   u2_reck_plan
     (rec_u,
-     u2nt(c3__gold, c3__ames, u2_nul),    //  XX no!
-     // u2nt(c3__lead, c3__ames, u2_nul),
+     u2nt(c3__gold, c3__ames, u2_nul),
      u2nc(c3__wake, u2_nul));
 }
 
