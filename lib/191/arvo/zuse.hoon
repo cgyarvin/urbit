@@ -885,7 +885,7 @@
           ==                                            ::
 ++  blur  ,[p=@ud q=(unit bead) r=blot]                 ::  columns, prompt
 ++  boar                                                ::  execution instance
-          $%  [| p=lath]                                ::  ready
+          $%  [| p=(unit vase) q=(unit path) r=lath]    ::  new/ready
               [& p=(unit worm)]                         ::  running/done
           ==                                            ::
 ++  boor                                                ::  new process
@@ -1082,7 +1082,6 @@
               [%th p=love]                              ::  http response
               [%xx p=card]                              ::  apply card
               [%xy p=path q=card]                       ::  push card
-              [%xz ~]
           ==                                            ::
 ++  gilt  ,[@tas *]                                     ::  presumed gift
 ++  gcos                                                ::  id description

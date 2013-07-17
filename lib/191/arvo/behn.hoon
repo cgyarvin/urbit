@@ -329,7 +329,7 @@
       |=  [lat=lath nex=(unit ,@ud)]                    ::  start process
       %=  +>
         p.wip.gyr  +(p.wip.gyr)
-        q.wip.gyr  (~(put by q.wip.gyr) p.wip.gyr [nex ~ [~ ~ ~ %| lat]])
+        q.wip.gyr  (~(put by q.wip.gyr) p.wip.gyr [nex ~ [~ ~ ~ %| ~ ~ lat]])
       ==
     ::
     ++  past                                            ::    past:fi:be
@@ -357,8 +357,8 @@
       ::
       ++  abet                                          ::  resolve
         ^+  ..ra
-        ?:  &(=(& -.s.orb) |(=(~ p.s.orb) =(~ loz)))
-          =.  .  (gird ~)
+        ?:  &(?=(& -.s.orb) |(=(~ p.s.orb) =(~ loz)))
+          =>  (gird ~)
           =.  .  ?~(nex . (glob:(past u.nex) ~ [%over ~]))
           ..ra(q.wip.gyr (~(del by q.wip.gyr) pid))
         ..ra(q.wip.gyr (~(put by q.wip.gyr) pid nex loz orb))
@@ -480,20 +480,32 @@
         =+(a=grit ?:(=(+.$ a) +.$ $(+.$ a)))
       ::
       ++  grit                                          ::  work step
-        ^+  .
-        ?^  p.orb  .
+        |-  ^+  +
+        ?^  p.orb  +
         ?-    -.s.orb
             |
-          ?-  -.p.s.orb
-            |  !!
-            &  =+  lek=[p.p.s.orb (grab q.p.s.orb) r.p.s.orb s.p.s.orb]
-               (grin (mong [fapp:zu lube lek] sky) s.orb)
-          ==
+          =+  yun=?~(p.s.orb lube u.p.s.orb)
+          =.  p.s.orb  [~ yun]
+          ?~  q.s.orb
+            ?-  -.r.s.orb
+              |  !!
+              &  =+  pen=`gene`(grab q.r.s.orb)
+                 =+  ton=(mong [slap yun pen] sky)
+                 ?-  -.ton
+                   %0  $(q.s.orb [~ ((hard path) +.p.ton)])
+                   %1  (glum ((list path) p.ton) s.orb)
+                   %2  (gram(orb [~ ~ ~ %& ~]) ~ [%crud p.ton])
+                 ==
+            ==
+          ?>  ?=(& -.r.s.orb)
+          %-  grin  :_  s.orb
+          %-  mong  :_  sky
+          [fapp:zu yun u.q.s.orb r.r.s.orb s.r.s.orb]
         ::
             &
-          ?~  p.s.orb  .
+          ?~  p.s.orb  +
           ?:  =(~ r.orb)
-            ?:  =(~ q.orb)  .
+            ?:  =(~ q.orb)  +
             =^  pud  q.orb  ~(get to q.orb)
             abet:(pong:(ox p.p.pud) q.p.pud)
           =^  pud  r.orb  ~(get to r.orb)
@@ -751,14 +763,9 @@
         [noq.typ nog]
       ==
     ::
-    ++  felt                                            ::  type to calf
-      |=  typ=type  ^-  calf
-      ~(dole ut typ)
-    ::
     ++  fapp                                            ::  launch app
-      |=  [yun=vase lek=leek] 
+      |=  [yun=vase pax=path con=cone arg=gene]
       ^-  vase
-      =+  pax=(path q:(slap yun q.lek))
       %+  slam
         %+  slam
           %+  slam
@@ -769,8 +776,12 @@
             [[%atom %%] (shax :(mix eny now (shax p.god)))]
             [pah.typ pax]
           ==
-        `vase`[[%atom %n] ~]                           ::  XX configure
-      (slap yun s.lek)
+        `vase`[[%atom %n] ~]                            ::  XX configure
+      (slap yun arg)
+    ::
+    ++  felt                                            ::  type to calf
+      |=  typ=type  ^-  calf
+      ~(dole ut typ)
     ::
     ++  fend
       |=  pax=path
@@ -809,6 +820,11 @@
     ==
   ?>  ?=(^ u.dus)
   ?+    -.fav
+      ?~  wru
+        :_  ..^$
+        %+  turn  `(list ,[p=seat q=brad])`u.dus
+        |=  [a=seat *]  ^-  move
+        [`(unit writ)`[~ %gold a] `duct`[[%b tea] hen] `curd`fav]
       =+  beg=`brat`[[p.i.u.dus bred] q.i.u.dus]
       =+  yub=(leap:((be beg) now eny sky) tea hen fav)
       :-  p.yub

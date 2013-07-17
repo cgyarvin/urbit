@@ -334,15 +334,16 @@
       ++  mote                                          ::  send/cancel request
         |=  [hen=duct ryf=riff]
         ^+  +>
-        =+  rym=(~(get by mir.q.raz) p.ryf)
-        ?~  rym  (mete hen ryf)
-        =+  wex=~(. de [who p.ryf lim.u.rym qyx.u.rym dom.u.rym])
-        =+  wak=?~(q.ryf (ease:wex hen) (eave:wex hen u.q.ryf))
-        =:  byn        byn.wak
-            qyx.u.rym  qyx.wak
-            dom.u.rym  dom.wak
-          ==
-        +>.$(mir.q.raz (~(put by mir.q.raz) p.ryf u.rym))
+        (mete hen ryf)
+        ::  =+  rym=(~(get by mir.q.raz) p.ryf)
+        ::  ?~  rym  (mete hen ryf)
+        ::  =+  wex=~(. de [who p.ryf lim.u.rym qyx.u.rym dom.u.rym])
+        ::  =+  wak=?~(q.ryf (ease:wex hen) (eave:wex hen u.q.ryf))
+        ::  =:  byn        byn.wak
+        ::      qyx.u.rym  qyx.wak
+        ::      dom.u.rym  dom.wak
+        ::    ==
+        ::  +>.$(mir.q.raz (~(put by mir.q.raz) p.ryf u.rym))
       ::
       ++  poll                                          ::  pull result
         |=  [hen=duct syd=disc rot=riot]
@@ -450,9 +451,10 @@
       ++  vera                                          ::  search
         |=  [syd=@tas ren=care lok=case way=path]
         ^-  (unit)
+        =+  haz=(~(get by hac.q.raz) ren lok syd way)
+        ?^  haz  haz
         =+  rym=(~(get by mir.q.raz) syd)
-        ?~  rym
-          (~(get by hac.q.raz) ren lok syd way)
+        ?~  rym  ~
         =+  vyr=(~(aver de [him syd lim.u.rym qyx.u.rym dom.u.rym]) ren lok way)
         ?~(vyr ~ u.vyr)
       ::
