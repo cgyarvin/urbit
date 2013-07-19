@@ -994,7 +994,15 @@
           ++  chow                                      ::    chow:la:ho:um:am 
             |=  fud=meal                                ::  interpret meal
             ^+  +>
-            =.  lun.wod.dur.diz  ?:(=(%none aut) lun.wod.dur.diz [~ ryn])
+            =.  lun.wod.dur.diz  
+                ?:  =(%none aut)  lun.wod.dur.diz 
+                ?:  ?&  ?=([~ %ix *] lun.wod.dur.diz) 
+                        ?=([%ix *] ryn)
+                        =(q.ryn q.u.lun.wod.dur.diz)
+                        =(r.ryn r.u.lun.wod.dur.diz)
+                    ==
+                  lun.wod.dur.diz
+                [~ ryn]
             (dine fud)
           ::
           ++  cock                                      ::    cock:la:ho:um:am
@@ -1069,7 +1077,10 @@
               +>.$(nys.weg (~(put by nys.weg) q.fud neb))
             ::
                 %fore
-              =+  lyn=?~(q.fud ryn u.q.fud)
+              =+  ^=  lyn  ^-  lane
+                  ?~  q.fud  ryn 
+                  ?.  ?=(%if -.u.q.fud)  u.q.fud
+                  [%ix now +.u.q.fud]
               ?:  =(our p.fud)
                 (emit %mead lyn r.fud) 
               =+  zid=(myx:gus p.fud)
