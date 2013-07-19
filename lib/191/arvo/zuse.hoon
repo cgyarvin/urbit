@@ -749,7 +749,7 @@
   ^-  path
   [(cat 3 'c' p.kit) (scot %p r.kit) s.kit (scot (dime q.kit)) t.kit]
 ::
-++  sein                                                ::  default seigneur
+++  sein                                                ::  autodean
   |=  who=seat  ^-  seat
   =+  mir=(clan who)
   ?-  mir
@@ -759,6 +759,12 @@
     %jack  (end 5 1 who)
     %pawn  ~les
   ==
+::
+++  saxo                                                ::  autocanon
+  |=  who=seat
+  ^-  (list seat)
+  ?:  (lth who 256)  [who ~]
+  [who $(who (sein who))]
 ::
 ++  tame
   |=  hap=path
@@ -1087,7 +1093,7 @@
 ++  gcos                                                ::  id description
           $%  [%czar p=@t]                              ::  8-bit seat
               [%duke p=what]                            ::  32-bit seat
-              [%jack p=what]                            ::  64-bit seat
+              [%jack p=@t]                              ::  64-bit seat
               [%king p=@t]                              ::  16-bit seat
               [%pawn p=@t]                              ::  128-bit seat
           ==                                            ::
@@ -1142,7 +1148,8 @@
           ==                                            ::
 ++  lane                                                ::  packet route
           $%  [%if p=@ud q=@if]                         ::  IP4/public UDP/addr
-              [%is p=@ud q=@is]                         ::  IP6/public UDP/addr
+              [%is p=@ud q=(unit lane) r=@is]           ::  IPv6 w/alternates
+              [%ix p=@da q=@ud r=@if]                   ::  IPv4 provisional
           ==                                            ::
 ++  lark                                                ::  parsed command
           $%  [%go p=(list lath)]                       ::  dump to console
@@ -1366,14 +1373,14 @@
 ++  wand  (list ,[p=life q=ring r=acro])                ::  mace in action
 ++  what                                                ::  logical identity
           $%  [%anon ~]                                 ::  anonymous
-              [%crew p=corp]                            ::  business
-              [%dept p=corp]                            ::  government
-              [%fair p=corp]                            ::  nonprofit
-              [%home p=corp]                            ::  family
-              [%holy p=corp]                            ::  religious
-              [%lady p=whom]                            ::  female individual
-              [%lord p=whom]                            ::  male individual
-              [%punk p=@t]                              ::  opaque handle
+              [%crew p=corp]                            ::  business    <>
+              [%dept p=corp]                            ::  government  <<>>
+              [%fair p=corp]                            ::  nonprofit   ><
+              [%home p=corp]                            ::  family      -()-
+              [%holy p=corp]                            ::  religious   ||
+              [%lady p=whom]                            ::  female person ()
+              [%lord p=whom]                            ::  male person []
+              [%punk p=@t]                              ::  opaque handle ""
           ==                                            ::
 ++  whom  ,[p=@ud q=@tas r=name]                        ::  year/govt/id
 ++  will  (list deed)                                   ::  certificate

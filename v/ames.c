@@ -402,7 +402,8 @@ u2_ames_io_suck(u2_reck*      rec_u,
       (rec_u,
        u2nt(c3__gold, c3__ames, u2_nul),    //  XX no!
        // u2nt(c3__lead, c3__ames, u2_nul),
-       u2nt(c3__hear, 
+       u2nq(c3__hear, 
+            u2_yes,
             u2nt(c3__if, por_s, u2_ci_words(1, &pip_w)),
             u2_ci_bytes((c3_w)len_ws, buf_y)));
  // }

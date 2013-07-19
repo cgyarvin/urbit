@@ -1,5 +1,5 @@
 !:
-::  /=main=/toy/update/hoon
+::  /=main=/fun/update/hoon
 ::
 |=  [who=seat *]
 |=  *
@@ -8,6 +8,4 @@
 =+  bos=(sein who)
 :~  [%xy /c [%pull bos %main ~[%main]]]
     [%xy /c [%pull bos %doc ~[%doc]]]
-    [%xy /c [%pull bos %try ~[%try]]]
-    ::  [%xy /c [%pull bos %arvo ~[%arvo]]]
 ==

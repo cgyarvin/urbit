@@ -821,10 +821,9 @@
   ?>  ?=(^ u.dus)
   ?+    -.fav
       ?~  wru
-        :_  ..^$
-        %+  turn  `(list ,[p=seat q=brad])`u.dus
-        |=  [a=seat *]  ^-  move
-        [`(unit writ)`[~ %gold a] `duct`[[%b tea] hen] `curd`fav]
+        =+  ade=(adit hen)
+        =+  hem=`helm`?-(ade %lead [%lead p.i.u.dus], %iron %iron, %gold %gold)
+        [[[[~ hem p.i.u.dus] [[%b tea] hen] fav] ~] ..^$]
       =+  beg=`brat`[[p.i.u.dus bred] q.i.u.dus]
       =+  yub=(leap:((be beg) now eny sky) tea hen fav)
       :-  p.yub
