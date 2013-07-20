@@ -214,7 +214,7 @@ main(c3_i   argc,
         u2_Host.ver_e[kno_w].mod_m = c3__warm;
 
         u2_ho_push();
-        u2_ve_rest();
+        // u2_ve_rest();
       }
     } else {
       u2_loom_boot();

@@ -102,7 +102,35 @@ _ames_czar(u2_reck* rec_u, c3_y imp_y, c3_s* por_s)
   }
 }
 
-/* u2_ames_ef_send(): send packet to network.
+/* _ames_lane_ipv4(): IPv4 address/ from lane.
+*/
+u2_bean
+_ames_lane_ip(u2_noun lan, c3_s* por_s, c3_w* pip_w)
+{
+  switch ( u2h(lan) ) {
+    case c3__if: {
+      *por_s= (c3_s) u2h(u2t(lan));
+      *pip_w = u2t(u2t(lan));
+
+      return u2_yes;
+    } break;
+    case c3__is: {
+      u2_noun pq_lan = u2h(u2t(u2t(lan)));
+
+      if ( u2_nul == pq_lan ) return u2_no;
+      else return _ames_lane_ip(u2t(pq_lan), por_s, pip_w);
+    } break;
+    case c3__ix: {
+      *por_s = (c3_s) u2h(u2t(u2t(lan)));
+      *pip_w = u2t(u2t(u2t(lan)));
+
+      return u2_yes;
+    } break;
+  }
+  return u2_no;
+}
+
+/* u2_ames_ef_send(): send packet to network (v4).
 */
 void
 u2_ames_ef_send(u2_reck* rec_u,
@@ -110,11 +138,14 @@ u2_ames_ef_send(u2_reck* rec_u,
                 u2_noun  pac)
 {
   u2_ames* sam_u = &u2_Host.sam_u;
-  c3_s     por_s = (c3_s)u2_cr_word(0, u2h(u2t(lan)));
-  c3_w     pip_w = u2_cr_word(0, u2t(u2t(lan)));
   c3_w     len_w = u2_cr_met(3, pac);
+  c3_s     por_s;
+  c3_w     pip_w;
 
-  {
+  if ( u2_no == _ames_lane_ip(lan, &por_s, &pip_w) ) {
+    //  u2z(lan);  ? XX
+    return;
+  } else {
     u2_apac* pac_u = malloc(sizeof(u2_apac) + len_w);
 
     u2_cr_bytes(0, len_w, pac_u->hun_y, pac);
@@ -402,8 +433,7 @@ u2_ames_io_suck(u2_reck*      rec_u,
       (rec_u,
        u2nt(c3__gold, c3__ames, u2_nul),    //  XX no!
        // u2nt(c3__lead, c3__ames, u2_nul),
-       u2nq(c3__hear, 
-            u2_yes,
+       u2nt(c3__hear, 
             u2nt(c3__if, por_s, u2_ci_words(1, &pip_w)),
             u2_ci_bytes((c3_w)len_ws, buf_y)));
  // }

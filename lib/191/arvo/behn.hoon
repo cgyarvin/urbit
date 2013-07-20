@@ -23,7 +23,7 @@
       hox=@ta                                           ::  identity text
       cws=path                                          ::  working spur
       cwd=@tas                                          ::  working desk
-      way=(map ,@tas vase)                              ::  variables
+      war=(map ,@tas coal)                              ::  variables
       sev=(map ,@tas (set ,[p=@ud q=@ud r=wire]))       ::  message servers
       hit=[p=@ud q=(list ,@t)]                          ::  command history
       sur=[p=@ud q=(qeu vase)]                          ::  result history
@@ -231,17 +231,7 @@
       |-  ^-  vase
       ?~(voy [[%atom %n] ~] (slop i.voy $(voy t.voy)))
     ::
-      ?~  way
-        nub
-      %-  slop
-      :_  nub
-      |-  ^-  vase
-      ?+  way  !!     ::  XX some inference weirdness here?
-        [* ~ ~]  [[%face p.n.way p.q.n.way] q.q.n.way]
-        [* ~ ^]  (slop $(r.way ~) $(way r.way))
-        [* ^ ~]  (slop $(l.way ~) $(way l.way))
-        [* ^ ^]  :(slop $(r.way ~, l.way ~) $(way l.way) $(way r.way))
-      ==
+      nub
     ==
   ::
   ++  prot                                              ::    prot:be
@@ -484,7 +474,7 @@
         ?^  p.orb  +
         ?-    -.s.orb
             |
-          =+  yun=?~(p.s.orb lube u.p.s.orb)
+          =+  yun=?~(p.s.orb (need (mang [food:zu war lube] sky)) u.p.s.orb)
           =.  p.s.orb  [~ yun]
           ?~  q.s.orb
             ?-  -.r.s.orb
@@ -565,6 +555,12 @@
             (gran (turn tey |=(a=* [~ (gyro +<.guf a)])))
           +>.$(..ra abet:(glob:(past u.nex) ~ [%pipe ~ +<.guf tey]))
         ::
+            %va
+          =+  tey=((hard ,[p=@tas q=(unit)]) +>.guf)
+          %=  +>.$
+            war  ?~(q.tey (~(del by war) p.tey) (~(put by war) p.tey u.q.tey))
+          ==
+        ::
             *
           =+  gud=((hard gift) guf)
           |-  ^+  +>.^$
@@ -584,6 +580,7 @@
             %ok  (gram [/c ~] %into who p.gud q.gud)
             %te  (gram ~ %tell p.gud)
             %th  (gram ~ %that p.gud)
+            %va  !!
             %xx  (gram ~ p.gud)
             %xy  (gram [p.gud /b ~] q.gud)
           == 
@@ -788,6 +785,21 @@
       ^-  gene
       %+  scan  (trip ((hard ,@) .^(%cx (weld pax /hoon))))
       (full (ifix [gay gay] tall:vez(wer pax)))
+    ::
+    ++  food
+      |=  [war=(map ,@ta vase) vax=vase]
+      ^-  vase
+      ?~  war
+        vax
+      %-  slop
+      :_  vax
+      |-  ^-  vase
+      ?+  war  !!     ::  XX some inference weirdness here?
+        [* ~ ~]  [[%face p.n.war p.q.n.war] q.q.n.war]
+        [* ~ ^]  (slop $(r.war ~) $(war r.war))
+        [* ^ ~]  (slop $(l.war ~) $(war l.war))
+        [* ^ ^]  :(slop $(r.war ~, l.war ~) $(war l.war) $(war r.war))
+      ==
     --
   --
 --

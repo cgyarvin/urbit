@@ -381,7 +381,10 @@
                   ==
               ==
             $(waz t.waz)
-          :_  ?:(?=(%ix -.u.lun.wod.dyr) $(waz t.waz) ~)
+          :_  ?:  ?=(%ix -.u.lun.wod.dyr) 
+                ::  ~&  [%wist-ix [our her] i.waz]
+                $(waz t.waz)
+              ~
           :+  %ouzo  u.lun.wod.dyr
           ?:  &(=(i.waz her) =(~ ryn))  pac
           =+  mal=(jam `meal`[%fore her ryn pac])
@@ -1081,6 +1084,7 @@
                   ?~  q.fud  ryn 
                   ?.  ?=(%if -.u.q.fud)  u.q.fud
                   [%ix now +.u.q.fud]
+                  ::  u.q.fud
               ?:  =(our p.fud)
                 (emit %mead lyn r.fud) 
               =+  zid=(myx:gus p.fud)

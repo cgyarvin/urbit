@@ -817,10 +817,16 @@
                 ++  tear  |=(a=@ *(unit ,[p=@ q=@]))    ::  accept
             --                                          ::
           --                                            ::
-++  arch                                                ::  fs node (new)
+++  arch                                                ::  fs node (old)
           $%  [& p=@uvI q=*]                            ::  file, sham/data
               [| p=(map ,@ta arch)]                     ::  directory
           ==                                            ::
+++  ankh                                                ::  fs node (new)
+          $:  p=@uvI                                    ::  metahash
+              q=(map ,@ta ,[p=@uvI q=*])                ::  files 
+              r=(map ,@ta ankh)                         ::  folders
+          ==                                            ::
+++  apex  ,[p=@uvI q=(map ,@ta ,@uvI) r=(map ,@ta ,~)]  ::  node report
 ++  ball  ,@uw                                          ::  statement payload
 ++  bait  ,[p=skin q=@ud r=dove]                        ::  fmt nrecvd spec
 ++  bath                                                ::  convo per client
@@ -891,7 +897,7 @@
           ==                                            ::
 ++  blur  ,[p=@ud q=(unit bead) r=blot]                 ::  columns, prompt
 ++  boar                                                ::  execution instance
-          $%  [| p=(unit vase) q=(unit path) r=lath]    ::  new/ready
+          $%  [| p=(unit coal) q=(unit path) r=lath]    ::  new/ready
               [& p=(unit worm)]                         ::  running/done
           ==                                            ::
 ++  boor                                                ::  new process
@@ -1017,6 +1023,8 @@
               heg=(map hand code)                       ::  proposed 
               qim=(map hand code)                       ::  inbound
           ==                                            ::
+++  caul  %-  unit                                      ::  application seed
+          ,[p=vase q=(unit ,[p=path q=(unit sled)])]    ::
 ++  coal  ,*                                            ::  untyped vase
 ++  code  ,@uvI                                         ::  symmetric key
 ++  cone                                                ::  reconfiguration
@@ -1086,6 +1094,7 @@
               [%ok p=disc q=nori]                       ::  save changes
               [%te p=(list ,@t)]                        ::  dump lines
               [%th p=love]                              ::  http response
+              [%va p=@tas q=(unit vase)]                ::  set/clear variable
               [%xx p=card]                              ::  apply card
               [%xy p=path q=card]                       ::  push card
           ==                                            ::
@@ -1355,6 +1364,7 @@
           ==                                            ::
 ++  skin  ?(%none %open %fast %full)                    ::  encoding stem
 ++  slip  ,[p=bell q=goal]                              ::  traceable request
+++  sled  ,[p=* q=*]                                    ::  [data code]
 ++  snow  ,[p=@ud q=@ud r=(set ,@ud)]                   ::  window exceptions
 ++  soap  ,[p=[p=life q=life] q=@tas r=@ud]             ::  statement id
 ++  sock  ,[p=seat q=seat]                              ::  from to

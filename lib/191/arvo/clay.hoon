@@ -77,16 +77,30 @@
             %ud   ?:((gth p.lok let.dom) ~ [~ p.lok])
         ==
       ::
+      ++  ache                                          ::  apex report
+        ^-  apex
+        ?-    -.arc.dom
+            &  [@uvI ~ ~]                               ::  XX bad
+            |
+          =+  lam=(~(tap by p.arc.dom) ~)
+          =|  [fil=(list ,[p=@ta q=@uvI]) dir=(list ,[p=@ta q=~])]
+          |-  ^-  apex
+          ?~  lam
+            :-  @uvI
+            :-  (~(gas by *(map ,@ta ,@uvI)) fil) 
+            (~(gas by *(map ,@ta ,~)) dir)
+          ?-  -.q.i.lam
+            &  $(lam t.lam, fil [[p.i.lam p.q.i.lam] fil])
+            |  $(lam t.lam, dir [[p.i.lam ~] dir])
+          ==
+        ==
+      ::
       ++  amor                                          ::  endpoint query
         |=  ren=?(%x %y %z)
         ^-  (unit ,*)
         ?-  ren
           %x  ?.(?=(& -.arc.dom) ~ [~ q.arc.dom])
-          %y  :-  ~
-              ?-  -.arc.dom
-                &  [& p.arc.dom]
-                |  [| (turn (~(tap by p.arc.dom) ~) |=([p=@ta *] p))]
-              ==
+          %y  [~ ache]
           %z  [~ arc.dom]
         ==
       ::

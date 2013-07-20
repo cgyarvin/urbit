@@ -1501,6 +1501,12 @@
       [n.a l.a c]
     [n.c [n.a l.a l.c] r.c]
   ::
+  +-  rep
+    |*  [b=* c=_,*]
+    |-
+    ?~  a  b
+    $(a r.a, b $(a l.a, b (c n.a b)))
+  ::
   +-  tap
     ~/  %tap
     |=  b=(list _?>(?=(^ a) n.a))
@@ -1624,6 +1630,28 @@
     ?:  (vor p.n.a p.n.d)
       [n.a l.a d]
     [n.d [n.a l.a l.d] r.d]
+  ::
+  +-  rep
+    |*  [b=* c=_,*]
+    |-
+    ?~  a  b
+    $(a r.a, b $(a l.a, b (c n.a b)))
+  ::
+  +-  rib
+    |*  [b=* c=_,*]
+    |-  ^+  [b a]
+    ?~  a  [b ~]
+    =+  d=(c n.a b)
+    =.  n.a  +.d
+    =+  e=$(a l.a, b -.d)
+    =+  f=$(a r.a, b -.e)
+    [-.f [n.a +.e +.f]]
+  ::
+  +-  run
+    |*  b=_,*
+    |-  
+    ?~  a  a
+    [[p.n.a (b q.n.a)] $(a l.a) $(a r.a)]
   ::
   +-  tap
     ~/  %tap
@@ -6638,6 +6666,7 @@
             (stag %dtsg (stag %ta qut))
             (stag %clcn (ifix [sel ser] (most ace wide)))
             (cook (jock &) nuck:so)
+            (easy [%clsg (poof wer)])
           ==
         == 
       :-  '&'
