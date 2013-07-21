@@ -718,6 +718,15 @@
   ?:  (lte wid 8)   %jack
   ?>  (lte wid 16)  %pawn
 ::
+++  feel                                                ::  apex load
+  |=  [hut=path sur=path]  
+  |-  ^-  (unit apex)
+  =+  ape=((hard apex) .^(%cy hut))
+  ?~  sur  [~ ape]
+  =+  rug=(~(get by r.ape) i.sur)
+  ?~  rug  ~
+  $(sur t.sur, hut (weld hut `path`[i.sur ~]))
+::
 ++  gnow
   |=  gos=gcos  ^-  @t
   ?-    -.gos
@@ -897,7 +906,7 @@
           ==                                            ::
 ++  blur  ,[p=@ud q=(unit bead) r=blot]                 ::  columns, prompt
 ++  boar                                                ::  execution instance
-          $%  [| p=(unit coal) q=(unit path) r=lath]    ::  new/ready
+          $%  [| p=caul q=lath]                         ::  new/ready
               [& p=(unit worm)]                         ::  running/done
           ==                                            ::
 ++  boor                                                ::  new process
@@ -976,7 +985,6 @@
               [%noop ~]                                 ::  no operation
               [%note p=@tD q=tank]                      ::  debug message 
               [%nuke p=~]                               ::  kill all processes
-              [%over p=~]                               ::  end of pipeline
               [%pace p=@ud]                             ::  compute background
               [%pipe p=(unit ,[p=typo q=(list)])]       ::  pipeline data
               [%pour p=path q=dram]                     ::  write directory
@@ -1023,8 +1031,7 @@
               heg=(map hand code)                       ::  proposed 
               qim=(map hand code)                       ::  inbound
           ==                                            ::
-++  caul  %-  unit                                      ::  application seed
-          ,[p=vase q=(unit ,[p=path q=(unit sled)])]    ::
+++  caul  (unit ,[p=* q=(unit ,[p=path q=(unit)])])     ::  prestart
 ++  coal  ,*                                            ::  untyped vase
 ++  code  ,@uvI                                         ::  symmetric key
 ++  cone                                                ::  reconfiguration

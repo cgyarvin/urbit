@@ -1405,10 +1405,10 @@
               0  " was thinking about something else" 
               1  " prefers not to comment"
               2  " has no words for what just happened"
-              3  " is in the building"
+              3  " is still in the building"
               4  " remains quietly present"
               5  " isn't into drama"
-              6  " likes to let others express themselves"
+              6  " likes to let others speak"
               7  " sincerely wants to know more"
             ==
           =+  str=(need ((sand %t) ((hard ,@) u.s.bon)))

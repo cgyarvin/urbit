@@ -319,7 +319,7 @@
       |=  [lat=lath nex=(unit ,@ud)]                    ::  start process
       %=  +>
         p.wip.gyr  +(p.wip.gyr)
-        q.wip.gyr  (~(put by q.wip.gyr) p.wip.gyr [nex ~ [~ ~ ~ %| ~ ~ lat]])
+        q.wip.gyr  (~(put by q.wip.gyr) p.wip.gyr [nex ~ [~ ~ ~ %| ~ lat]])
       ==
     ::
     ++  past                                            ::    past:fi:be
@@ -349,7 +349,7 @@
         ^+  ..ra
         ?:  &(?=(& -.s.orb) |(=(~ p.s.orb) =(~ loz)))
           =>  (gird ~)
-          =.  .  ?~(nex . (glob:(past u.nex) ~ [%over ~]))
+          =.  ..ra  ?~(nex ..ra abet:(glob:(past u.nex) ~ [%pipe ~]))
           ..ra(q.wip.gyr (~(del by q.wip.gyr) pid))
         ..ra(q.wip.gyr (~(put by q.wip.gyr) pid nex loz orb))
       ::
@@ -474,23 +474,21 @@
         ?^  p.orb  +
         ?-    -.s.orb
             |
-          =+  yun=?~(p.s.orb (need (mang [food:zu war lube] sky)) u.p.s.orb)
-          =.  p.s.orb  [~ yun]
-          ?~  q.s.orb
-            ?-  -.r.s.orb
-              |  !!
-              &  =+  pen=`gene`(grab q.r.s.orb)
-                 =+  ton=(mong [slap yun pen] sky)
-                 ?-  -.ton
-                   %0  $(q.s.orb [~ ((hard path) +.p.ton)])
-                   %1  (glum ((list path) p.ton) s.orb)
-                   %2  (gram(orb [~ ~ ~ %& ~]) ~ [%crud p.ton])
-                 ==
+          ?~  p.s.orb
+            $(p.s.orb [~ `coal`(need (mang [food:zu war lube] sky)) ~])
+          ?~  q.u.p.s.orb
+            ?>  ?=(& -.q.s.orb)                         ::  XX naked gene
+            =+  pen=`gene`(grab q.q.s.orb)
+            =+  ton=(mong [slap p.u.p.s.orb pen] sky)
+            ?-  -.ton
+              %0  $(q.u.p.s.orb [~ ((hard path) +.p.ton) ~])
+              %1  (glum ((list path) p.ton) s.orb)
+              %2  (gram(orb [~ ~ ~ %& ~]) ~ [%crud p.ton])
             ==
-          ?>  ?=(& -.r.s.orb)
+          ?>  ?=(& -.q.s.orb)
           %-  grin  :_  s.orb
           %-  mong  :_  sky
-          [fapp:zu yun u.q.s.orb r.r.s.orb s.r.s.orb]
+          [fapp:zu `coal`p.u.p.s.orb `path`p.u.q.u.p.s.orb *cone s.q.s.orb]
         ::
             &
           ?~  p.s.orb  +
@@ -693,7 +691,7 @@
     ++  lark                                            ::  parse lark
       %+  cook  |=(a=^lark a)
       ;~  pose
-        (stag %go (most (ifix [gap gap] ;~(plug bar bar)) lath))
+        (stag %go (cook |=(a=(list ^lath) (flop a)) (most gap lath)))
         ;~  pfix  tis
           ;~  pose
             (stag %so ;~(plug sym ;~(pfix ace wide:vez)))
@@ -800,6 +798,26 @@
         [* ^ ~]  (slop $(l.war ~) $(war l.war))
         [* ^ ^]  :(slop $(r.war ~, l.war ~) $(war l.war) $(war r.war))
       ==
+    ::
+    ++  form                                            ::  compose
+      |=  [vax=vase cus=gens hut=path sur=path]
+      ^-  vase
+      =+  ^=  cup  ^-  (list gene)
+          =.  hut  (weld hut `path`[%con ~])
+          %-  flop
+          |-  ^-  (list gene)
+          =+  ape=((hard apex) .^(%cy hut))
+          ?.  (~(has by q.ape) %hoon)  ~
+          :-  (fend hut)
+          ?~  sur  ~
+          ?.  (~(has by r.ape) i.sur)  ~
+          $(sur t.sur, hut (weld hut `path`[i.sur ~]))
+      |-  ^-  vase
+      ?~  cup
+        ?~(cus vax $(cus t.cus, vax (slap vax i.cus)))
+      ?~  cus 
+        $(cup t.cup, vax (slap vax i.cup))
+      $(cup t.cup, cus t.cus, vax (slap (slap vax i.cup) i.cus))
     --
   --
 --
