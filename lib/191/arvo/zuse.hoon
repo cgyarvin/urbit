@@ -718,6 +718,17 @@
   ?:  (lte wid 8)   %jack
   ?>  (lte wid 16)  %pawn
 ::
+++  fade                                                ::  load cascade
+  |=  [end=@tas hut=path sur=path]
+  %-  flop
+  |-  ^-  (list ,[p=path q=*])
+  =+  ape=((hard apex) .^(%cy hut))
+  ?.  (~(has by q.ape) end)  ~
+  :-  [hut .^(%cx (weld hut `path`[end ~]))]
+  ?~  sur  ~
+  ?.  (~(has by r.ape) i.sur)  ~
+  $(sur t.sur, hut (weld hut `path`[i.sur ~]))
+::
 ++  feel                                                ::  apex load
   |=  [hut=path sur=path]  
   |-  ^-  (unit apex)

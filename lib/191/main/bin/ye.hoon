@@ -2,7 +2,6 @@
 ::  /=main=/toy/ye/hoon
 ::
 |=  [who=seat *]
-|=  *
 |=  [ebb=$|(~ [tex=tape ~])]
 =+  bud=(sein who)
 ^-  bowl

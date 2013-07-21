@@ -2,7 +2,6 @@
 ::  /=main=/fun/update/hoon
 ::
 |=  [who=seat *]
-|=  *
 |=  ~
 :_  ~
 =+  bos=(sein who)

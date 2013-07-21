@@ -2,7 +2,6 @@
 ::  /=main=/toy/hi/hoon
 ::
 |=  *
-|=  *
 |=  [bud=@p ebb=$|(~ [tex=tape ~])]
 ^-  bowl
 :-  ~ 

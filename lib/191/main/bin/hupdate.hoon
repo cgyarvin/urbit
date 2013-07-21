@@ -2,7 +2,6 @@
 ::  /=main=/fun/develop/hoon
 ::
 |=  [who=seat *]
-|=  *
 |=  ~
 :_  ~
 =+  bos=(sein who)

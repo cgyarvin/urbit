@@ -1,9 +1,8 @@
 !:
 ::  /=main=/fun/apply/hoon
 ::
-=>  ^^/===/pony
+=>  ^/===/pony
 |=  [who=seat est=time eny=@uw was=path]
-|=  *
 |=  [mig=@p ~]
 =+  bos=(sein mig)
 ?>  !=(bos mig)

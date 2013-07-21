@@ -2,7 +2,6 @@
 ::  /=main=/toy/cat/hoon
 ::
 |=  *
-|=  *
 |=  [del=path dev=path ~]
 :_  ~
 :_  ~

@@ -2,7 +2,6 @@
 ::  /=main=/toy/cat/hoon
 ::
 |=  *
-|=  *
 |=  ape=(list path)
 :_  ~
 :_  ~

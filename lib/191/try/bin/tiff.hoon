@@ -2,7 +2,6 @@
 ::  /=try=/toy/diff/hoon
 ::
 |=  [who=seat est=time eny=@uw was=path]
-|=  *
 |=  ~
 :_  ~
 =<  main

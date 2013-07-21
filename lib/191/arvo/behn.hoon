@@ -436,10 +436,10 @@
         ?-  -.lam
           0  =+  ven=(fall q.lam wen)
              =+  pax=[hox %main ven p.lam %hoon ~]
-             =+  tes=(sky [%cx hox %main ven %fun p.lam %hoon ~])
-             (grad [hox ?^(tes %main cwd) ven %fun p.lam ~])
-          1  (grad [hox p.lam (fall q.lam wen) %fun r.lam])
-          2  (grad [(scot %p p.lam) q.lam (fall r.lam wen) %fun s.lam])
+             =+  tes=(sky [%cx hox %main ven %bin p.lam %hoon ~])
+             (grad [hox ?^(tes %main cwd) ven %bin p.lam ~])
+          1  (grad [hox p.lam (fall q.lam wen) %bin r.lam])
+          2  (grad [(scot %p p.lam) q.lam (fall r.lam wen) %bin s.lam])
           3  p.lam
         ==
       ::
@@ -488,7 +488,7 @@
           ?>  ?=(& -.q.s.orb)
           %-  grin  :_  s.orb
           %-  mong  :_  sky
-          [fapp:zu `coal`p.u.p.s.orb `path`p.u.q.u.p.s.orb *cone s.q.s.orb]
+          [fapp:zu p.u.p.s.orb p.u.q.u.p.s.orb s.q.s.orb]
         ::
             &
           ?~  p.s.orb  +
@@ -759,19 +759,17 @@
       ==
     ::
     ++  fapp                                            ::  launch app
-      |=  [yun=vase pax=path con=cone arg=gene]
+      |=  [yun=vase pax=path arg=gene]
       ^-  vase
       %+  slam
         %+  slam
-          %+  slam
-            (slap nub (fend pax))
-          ;:  slop 
-            [[%atom %p] who] 
-            [[%atom %da] now] 
-            [[%atom %%] (shax :(mix eny now (shax p.god)))]
-            [pah.typ pax]
-          ==
-        `vase`[[%atom %n] ~]                            ::  XX configure
+          (slap nub (fend pax))
+        ;:  slop 
+          [[%atom %p] who] 
+          [[%atom %da] now] 
+          [[%atom %%] (shax :(mix eny now (shax p.god)))]
+          [pah.typ pax]
+        ==
       (slap yun arg)
     ::
     ++  felt                                            ::  type to calf
@@ -784,7 +782,7 @@
       %+  scan  (trip ((hard ,@) .^(%cx (weld pax /hoon))))
       (full (ifix [gay gay] tall:vez(wer pax)))
     ::
-    ++  food
+    ++  food                                            ::  variable namespace
       |=  [war=(map ,@ta vase) vax=vase]
       ^-  vase
       ?~  war
@@ -799,19 +797,19 @@
         [* ^ ^]  :(slop $(r.war ~, l.war ~) $(war l.war) $(war r.war))
       ==
     ::
+    ++  fool                                            ::  config cascade
+      |=  [hut=path sur=path]
+      ^-  (list gene)
+      %+  turn  (fade %hoon hut sur) 
+      |=  [a=path b=*]
+      (scan (trip ((hard ,@) b)) (full (ifix [gay gay] tall:vez(wer a))))
+    ::
     ++  form                                            ::  compose
-      |=  [vax=vase cus=gens hut=path sur=path]
+      |=  [vax=vase hut=path alt=(unit path) sur=path]
       ^-  vase
-      =+  ^=  cup  ^-  (list gene)
-          =.  hut  (weld hut `path`[%con ~])
-          %-  flop
-          |-  ^-  (list gene)
-          =+  ape=((hard apex) .^(%cy hut))
-          ?.  (~(has by q.ape) %hoon)  ~
-          :-  (fend hut)
-          ?~  sur  ~
-          ?.  (~(has by r.ape) i.sur)  ~
-          $(sur t.sur, hut (weld hut `path`[i.sur ~]))
+      =.  sur  [%con sur]
+      =+  cup=(fool hut sur)
+      =+  cus=?~(alt ~ (fool u.alt sur))
       |-  ^-  vase
       ?~  cup
         ?~(cus vax $(cus t.cus, vax (slap vax i.cus)))

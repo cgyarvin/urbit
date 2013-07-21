@@ -6754,12 +6754,13 @@
             ;~  pose
               ;~  pfix  col
                 %+  cook
-                  |=  [a=gene b=gene]
-                  [%smsm `gene`~(clam al `tile`~(bore ap a)) [%dtkt b]]
+                  |=  [a=gene b=gene]                     ::  XX shd be static
+                  =+  rev=(plop %doc (plex b))
+                  :+  %smsm  ~(clam al ~(bore ap a)) 
+                  [%dtkt %dtsg %% %cx rev]
                 ;~(plug wide rood)
               ==
-              ;~(pfix ket (cook (prey %nub) (most ket rood)))
-              (cook (pray %toy) rood)
+              ;~(pfix ket (cook (prey %lib) (most ket rood)))
             ==
           ==
           (stag %cnhx rope)
@@ -7002,7 +7003,7 @@
                   [':' ;~(pfix col (toad expz))]
                   [',' (rune com %zpcm expb)]
                   [';' (rune sem %zpsm expb)]
-                  ['^' ;~(pfix ket (cook (prey %nub) (toad exps)))]
+                  ['^' ;~(pfix ket (cook (prey %lib) (toad exps)))]
                   ['>' (rune gar %zpgr expa)]
                   ['=' (rune tis %zpts expa)]
                 ==

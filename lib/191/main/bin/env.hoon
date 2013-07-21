@@ -2,7 +2,6 @@
 ::  /=main=/fun/env/hoon
 ::
 |=  [who=seat est=time eny=@uw was=path]
-|=  *
 |=  arg=(list)
 :_  ~
 =+  ^=  voy  ^-  (list tape)

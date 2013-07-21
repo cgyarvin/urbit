@@ -1,7 +1,6 @@
 !:
 =>  ^^/=main=/hume
 |=  [who=seat est=time eny=@uw was=path]
-|=  *
 |=  [neighbor=tape ~]
 ^-  bowl
 =+  messages=*(list ,@t)

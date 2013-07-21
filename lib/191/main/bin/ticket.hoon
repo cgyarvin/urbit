@@ -2,7 +2,6 @@
 ::  /=main=/fun/env/hoon
 ::
 |=  [who=seat est=time *]
-|=  *
 |=  arg=*
 ^-  bowl
 :_  ~
