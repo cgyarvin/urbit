@@ -319,7 +319,7 @@
       |=  [lat=lath nex=(unit ,@ud)]                    ::  start process
       %=  +>
         p.wip.gyr  +(p.wip.gyr)
-        q.wip.gyr  (~(put by q.wip.gyr) p.wip.gyr [nex ~ [~ ~ ~ %| ~ lat]])
+        q.wip.gyr  (~(put by q.wip.gyr) p.wip.gyr [nex ~ [~ ~ ~ %n ~ lat]])
       ==
     ::
     ++  past                                            ::    past:fi:be
@@ -347,7 +347,7 @@
       ::
       ++  abet                                          ::  resolve
         ^+  ..ra
-        ?:  &(?=(& -.s.orb) |(=(~ p.s.orb) =(~ loz)))
+        ?:  &(?=(%r -.s.orb) |(=(~ p.s.orb) =(~ loz)))
           =>  (gird ~)
           =.  ..ra  ?~(nex ..ra abet:(glob:(past u.nex) ~ [%pipe ~]))
           ..ra(q.wip.gyr (~(del by q.wip.gyr) pid))
@@ -366,9 +366,9 @@
         ^-  beef
         :-  ((hard (list gilt)) +:(bust 2 poc))
         =+  doy=(bust 3 poc)
-        ?~  +.doy  [~ %& ~]
+        ?~  +.doy  [~ %r ~]
         :-  ((hard (list slip)) +>-.doy)
-        [%& ~ (bust 7 doy)]
+        [%r ~ (bust 7 doy)]
       ::
       ++  gall                                          ::  deliver result
         |=  [lap=wire rot=riot]
@@ -380,7 +380,7 @@
         ?>  ?=([~ %% %ud @] dup)
         =+  kit=(need (~(get by p.orb) q.p.u.dup))
         ?~  rot
-          %_(+>.$ ..ra (warn (spud (meat kit))), s.orb [%& ~])
+          %_(+>.$ ..ra (warn (spud (meat kit))), s.orb [%r ~])
         =+  tyk=`kite`[p.p.u.rot q.p.u.rot r.kit r.p.u.rot q.u.rot]
         ?>  =(kit tyk)
         +>.$(p.orb (~(del by p.orb) q.p.u.dup))
@@ -419,7 +419,7 @@
           ?:  =(~ err)
             +>.^$(orb [bez ~ ~ hog])
           |-  ^+  +>.^^$
-          ?~  err  +>.^^$(orb [~ ~ ~ %& ~])
+          ?~  err  +>.^^$(orb [~ ~ ~ %r ~])
           $(err t.err, ..ra (warn (spud i.err)))
         =+  myt=(tame i.gez)
         ?~  myt
@@ -462,7 +462,7 @@
         ?-  -.ton
           %0  (haul (fret p.ton))
           %1  (glum ((list path) p.ton) hog)
-          %2  (gram(orb [~ ~ ~ %& ~]) ~ [%crud p.ton])
+          %2  (gram(orb [~ ~ ~ %r ~]) ~ [%crud p.ton])
         ==
       ::
       ++  grip                                          ::  step to completion
@@ -473,7 +473,29 @@
         |-  ^+  +
         ?^  p.orb  +
         ?-    -.s.orb
-            |
+            %t                                          ::  filter
+          ?:  =(~ q.orb)  +
+          =^  neb  q.orb  ~(get to q.orb)
+          =+  pun=q.p.neb
+          ?>  ?=(%pipe -.pun)
+          ?~  p.pun  (gybe ~)
+          =+  ton=(mong [slit -.p.s.orb p.u.p.pun] sky)
+          ?-  -.ton
+            %0  =|  zil=(list)
+                |-  ^+  +.^$
+                ?~  q.u.p.pun
+                  (gybe ~ p.ton (flop zil))
+                =+  ton=(mong [slam [p.s.orb [p.ton i.q.u.p.pun]]] sky)
+                ?-  -.ton 
+                  %0  $(zil [+.p.ton zil])
+                  %1  (glum ((list path) p.ton) s.orb)
+                  %2  (gram(orb [~ ~ ~ %r ~]) ~ [%crud p.ton])
+                ==
+            %1  (glum ((list path) p.ton) s.orb)
+            %2  (gram(orb [~ ~ ~ %r ~]) ~ [%crud p.ton])
+          ==
+        ::
+            %n                                          ::  new
           ?~  p.s.orb
             $(p.s.orb [~ `coal`(need (mang [food:zu war lube] sky)) ~])
           ?~  q.u.p.s.orb
@@ -483,14 +505,18 @@
             ?-  -.ton
               %0  $(q.u.p.s.orb [~ ((hard path) +.p.ton) ~])
               %1  (glum ((list path) p.ton) s.orb)
-              %2  (gram(orb [~ ~ ~ %& ~]) ~ [%crud p.ton])
+              %2  (gram(orb [~ ~ ~ %r ~]) ~ [%crud p.ton])
             ==
+          ::  ?~  q.u.q.u.p.s.orb
+          ::  =+  alp=?~(alt [%funk %alt ~] (jump %alt u.alt))
+          ::=+  tes=(sky [%cx hox %main ven %bin p.lam %hoon ~])
+             
           ?>  ?=(& -.q.s.orb)
           %-  grin  :_  s.orb
           %-  mong  :_  sky
           [fapp:zu p.u.p.s.orb p.u.q.u.p.s.orb s.q.s.orb]
         ::
-            &
+            %r                                          ::  running
           ?~  p.s.orb  +
           ?:  =(~ r.orb)
             ?:  =(~ q.orb)  +
@@ -528,6 +554,13 @@
             (~(put in yes) gyp pid lap)
           (~(del in yes) gyp pid lap)
         ==
+      ++  gybe                                          ::  pipe forward
+        |=  pun=(unit ,[p=typo q=(list)])
+        ^+  +>
+        ?~  nex
+          ?~  pun  +>
+          (gran (turn q.u.pun |=(a=* [~ (gyro p.u.pun a)])))
+        +>.$(..ra abet:(glob:(past u.nex) ~ [%pipe pun]))
       ::
       ++  gyro                                          ::  print vase
         |=  [toy=typo val=*]  ^-  card
@@ -542,16 +575,8 @@
         |=  guf=gilt
         ^+  +>
         ?-    -.guf
-            %%
-          ?~  nex
-            (gram ~ (gyro +<.guf +>.guf))
-          +>.$(..ra abet:(glob:(past u.nex) ~ [%pipe ~ +<.guf +>.guf ~]))
-        ::
-            %mu
-          =+  tey=((hard (list)) +>.guf)
-          ?~  nex  
-            (gran (turn tey |=(a=* [~ (gyro +<.guf a)])))
-          +>.$(..ra abet:(glob:(past u.nex) ~ [%pipe ~ +<.guf tey]))
+            %%  (gybe ~ +<.guf +>.guf ~)
+            %mu (gybe ~ +<.guf ((hard (list)) +>.guf))
         ::
             %va
           =+  tey=((hard ,[p=@tas q=(unit)]) +>.guf)

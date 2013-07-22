@@ -1485,11 +1485,6 @@ u2_lo_loop(u2_reck* rec_u)
 
   if ( u2_yes == u2_Host.ops_u.nuu ) {
     u2_term_ef_boil(rec_u, 1);
-
-    //  _lo_copy(rec_u, 0, c3__main, u2nc(c3__ud, 1)); 
-    //  _lo_copy(rec_u, 0, c3__try, u2nc(c3__ud, 1)); 
-    //  _lo_copy(rec_u, 0, c3__doc, u2nc(c3__ud, 1)); 
-    //  _lo_copy(rec_u, 0, c3__arvo, u2nc(c3__ud, 1)); 
   }
 
   {

@@ -917,8 +917,9 @@
           ==                                            ::
 ++  blur  ,[p=@ud q=(unit bead) r=blot]                 ::  columns, prompt
 ++  boar                                                ::  execution instance
-          $%  [| p=caul q=lath]                         ::  new/ready
-              [& p=(unit worm)]                         ::  running/done
+          $%  [%n p=caul q=lath]                        ::  new/ready
+              [%r p=(unit worm)]                        ::  running/done
+              [%t p=coal]                               ::  filter
           ==                                            ::
 ++  boor                                                ::  new process
           $:  p=(map ,@ud kite)                         ::  dependencies

@@ -4091,6 +4091,10 @@
   |=  old=vise  ^-  vase
   old
 ::
+++  slit
+  |=  [gat=type sam=type]
+  (~(play ut [%cell gat sam]) [%cncl [~ 2] [~ 3]])
+::
 ++  slap
   |=  [vax=vase gen=gene]  ^-  vase
   =+  gun=(~(mint ut p.vax) %noun gen)
@@ -6760,7 +6764,7 @@
                   [%dtkt %dtsg %% %cx rev]
                 ;~(plug wide rood)
               ==
-              ;~(pfix ket (cook (prey %lib) (most ket rood)))
+              (cook (prey %lib) (most ket rood))
             ==
           ==
           (stag %cnhx rope)
