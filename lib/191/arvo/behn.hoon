@@ -23,6 +23,8 @@
       hox=@ta                                           ::  identity text
       cws=path                                          ::  working spur
       cwd=@tas                                          ::  working desk
+      loq=(unit case)                                   ::  working version
+      pyr=pyre                                          ::  compose cache
       war=(map ,@tas coal)                              ::  variables
       sev=(map ,@tas (set ,[p=@ud q=@ud r=wire]))       ::  message servers
       hit=[p=@ud q=(list ,@t)]                          ::  command history
@@ -456,6 +458,24 @@
         ^+  +>
         ?~(vid +> $(vid t.vid, +> (gram i.vid)))
       ::
+      ++  gray                                          ::  process result
+        |=  ton=toon
+        ^-  [(unit) _+>]
+        ?-  -.ton
+          %0  [[~ p.ton] +>]
+          %1  [~ (glum ((list path) p.ton) s.orb)]
+          %2  [~ (gram(orb [~ ~ ~ %r ~]) ~ [%crud p.ton])]
+        ==
+      ::
+      ++  grid                                          ::  process result
+        |=  [ton=toon fun=||(* _+>)]
+        ^+  +>
+        ?-  -.ton
+          %0  (fun p.ton)
+          %1  (glum ((list path) p.ton) s.orb)
+          %2  (gram(orb [~ ~ ~ %r ~]) ~ [%crud p.ton])
+        ==
+      ::
       ++  grin                                          ::  process result
         |=  [ton=toon hog=boar]
         ^+  +>
@@ -473,28 +493,6 @@
         |-  ^+  +
         ?^  p.orb  +
         ?-    -.s.orb
-            %t                                          ::  filter
-          ?:  =(~ q.orb)  +
-          =^  neb  q.orb  ~(get to q.orb)
-          =+  pun=q.p.neb
-          ?>  ?=(%pipe -.pun)
-          ?~  p.pun  (gybe ~)
-          =+  ton=(mong [slit -.p.s.orb p.u.p.pun] sky)
-          ?-  -.ton
-            %0  =|  zil=(list)
-                |-  ^+  +.^$
-                ?~  q.u.p.pun
-                  (gybe ~ p.ton (flop zil))
-                =+  ton=(mong [slam [p.s.orb [p.ton i.q.u.p.pun]]] sky)
-                ?-  -.ton 
-                  %0  $(zil [+.p.ton zil])
-                  %1  (glum ((list path) p.ton) s.orb)
-                  %2  (gram(orb [~ ~ ~ %r ~]) ~ [%crud p.ton])
-                ==
-            %1  (glum ((list path) p.ton) s.orb)
-            %2  (gram(orb [~ ~ ~ %r ~]) ~ [%crud p.ton])
-          ==
-        ::
             %n                                          ::  new
           ?~  p.s.orb
             $(p.s.orb [~ `coal`(need (mang [food:zu war lube] sky)) ~])
@@ -524,6 +522,63 @@
             abet:(pong:(ox p.p.pud) q.p.pud)
           =^  pud  r.orb  ~(get to r.orb)
           (grin (mong [fane:zu [p.p.pud q.p.pud u.p.s.orb]] sky) s.orb)
+        ::
+            %t                                          ::  transform
+          ?:  =(~ q.orb)  +
+          =^  neb  q.orb  ~(get to q.orb)
+          =+  pun=q.p.neb
+          ?>  ?=(%pipe -.pun)
+          ?~  p.pun  (gybe ~)
+          %+  grid  (mong [slit -.p.s.orb p.u.p.pun] sky)
+          |=  noy=typo
+          =|  zil=(list)
+          |-  ^+  +.^^$
+          ?~  q.u.p.pun 
+            (gybe ~ noy (flop zil))
+          %+  grid  (mong [slam [p.s.orb [p.u.p.pun i.q.u.p.pun]]] sky)
+          |=  zom=*
+          ^$(q.u.p.pun t.q.u.p.pun, zil [zom zil])
+        ==
+      ::
+      ++  grok                                          ::  extend config
+        |=  [pax=path boy=coal]
+        ^-  [(unit coal) _+>]
+        =+  wiz=(~(get by p.pyr) pax boy)
+        ?^  wiz  [wiz +>.$] 
+        =^  gar  +>.$  (gray (mong [fuss:zu pax] sky))
+        ?~  gar  [~ +>.$]
+        =>  .(gar ((hard (unit ,[p=@uvI q=*])) u.gar))
+        ?~  gar  [[~ boy] +>.$]
+        =+  wex=(~(get by q.pyr) p.u.gar boy)
+        ?^  wex  [wex +>.$]
+        =^  yeq  +>.$  (gray (mong [slap boy q.u.gar] sky))
+        ?~  yeq  [~ +>.$]
+        :-  yeq
+        %=  +>.$
+          p.pyr  (~(put by p.pyr) [pax boy] u.yeq)
+          q.pyr  (~(put by q.pyr) [p.u.gar boy] u.yeq)
+        ==
+      ::
+      ++  grow                                          ::  cascade config
+        |=  [pax=path alt=(unit path)]
+        ^-  [(unit coal) _+>]
+        =+  xap=(weld (scag 3 pax) `path`[%con ~])
+        =+  ^=  alp  %+  weld 
+                       `path`?^(alt (jump %alt u.alt) ~[hox %funk wen %alt])
+                     (scag 2 pax)
+        =+  sur=(slag 3 pax)
+        =+  boy=`coal`[[%cell [%atom %n] -.nub] [~ +.nub]]
+        |-  ^-  [(unit coal) _+>.^$]
+        =^  xob  +>.^$  (grok xap boy)
+        ?~  xob  [~ +>.^$]
+        =^  boa  +>.^$  (grok alp u.xob)
+        ?~  boa  [~ +>.^$]
+        ?~  sur  [boa +>.^$]
+        %=  $
+          boy  u.boa
+          sur  t.sur
+          xap  (weld xap `path`[i.sur ~])
+          alp  (weld alp `path`[i.sur ~])
         ==
       ::  
       ++  gull                                          ::  request control
@@ -822,25 +877,13 @@
         [* ^ ^]  :(slop $(r.war ~, l.war ~) $(war l.war) $(war r.war))
       ==
     ::
-    ++  fool                                            ::  config cascade
-      |=  [hut=path sur=path]
-      ^-  (list gene)
-      %+  turn  (fade %hoon hut sur) 
-      |=  [a=path b=*]
-      (scan (trip ((hard ,@) b)) (full (ifix [gay gay] tall:vez(wer a))))
-    ::
-    ++  form                                            ::  compose
-      |=  [vax=vase hut=path alt=(unit path) sur=path]
-      ^-  vase
-      =.  sur  [%con sur]
-      =+  cup=(fool hut sur)
-      =+  cus=?~(alt ~ (fool u.alt sur))
-      |-  ^-  vase
-      ?~  cup
-        ?~(cus vax $(cus t.cus, vax (slap vax i.cus)))
-      ?~  cus 
-        $(cup t.cup, vax (slap vax i.cup))
-      $(cup t.cup, cus t.cus, vax (slap (slap vax i.cup) i.cus))
+    ++  fuss                                            ::  gene and hash
+      |=  pax=path
+      ^-  (unit ,[p=@uvI q=gene])
+      =+  ape=((hard apex) .^(%cy pax))
+      =+  yab=(~(get by q.ape) %hoon)
+      ?~  yab  ~
+      [~ u.yab (fend pax)]
     --
   --
 --

@@ -764,6 +764,11 @@
   ?~  two  one
   ?:((lth u.one u.two) one two)
 ::
+++  jump                                                ::  insert role
+  |=  [for=@tas pax=path]  ^-  path
+  ?>  ?=([@ @ @ *] pax)
+  [i.pax i.t.pax i.t.t.pax for t.t.t.pax]
+::
 ++  meat
   |=  kit=kite
   ^-  path
@@ -1054,6 +1059,12 @@
 ++  conf  ,[p=(set ,@tas) q=(map ,@tas ,*)]             ::  bits and options
 ++  corp  ,[p=@t q=@t r=@tas]                           ::  name auth issuer
 ++  chum  ,@uvI                                         ::  hashed passcode
+++  claw  $:                                            ::  startup chain
+              joy=(unit coal)                           ::  local context
+              ran=(unit coal)                           ::  arguments
+              pux=(unit path)                           ::  execution path
+              jiv=(unit coal)                           ::  
+          ==                                            ::
 ++  cred  ,[p=logo q=(map ,@tas ,[p=@da q=@ta])]        ::  client credentials
 ++  cult  (map duct rave)                               ::  subscriptions
 ++  deed  ,[p=@ q=step]                                 ::  signature, stage
@@ -1276,8 +1287,8 @@
           $:  ^=  sat                                   ::  statistics
               $:  nex=@da                               ::  next wakeup
                   wid=@ud                               ::  max outstanding
-              ==
-          ==
+              ==                                        ::
+          ==                                            ::
 ++  plea  ,[p=@ud q=[p=? q=@t]]                         ::  live prompt
 ++  pork  ,[p=(unit ,@ta) q=path]                       ::  fully parsed url
 ++  prod  ,[p=prom q=tape]                              ::  format, prompt
@@ -1287,7 +1298,10 @@
           $:  ski=snow                                  ::  sequence acked/sent
               wyv=(list rock)                           ::  packet list XX gear
           ==                                            ::
-
+++  pyre                                                ::  cascade stash
+          $:  p=(map ,[p=path q=coal] coal)             ::  by path
+              q=(map ,[p=@uvI q=coal] coal)             ::  by source hash
+          ==                                            ::
 ++  quay  (map ,@t ,@t)                                 ::  parsed url query
 ++  quri                                                ::  request-uri
           $%  [& p=purl]                                ::  absolute
