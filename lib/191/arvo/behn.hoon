@@ -214,28 +214,6 @@
       $(p.q.i.ask t.p.q.i.ask)
     [~ p.i.dog p.i.pig p.i.ask `scab`[`oryx`r.i.p.q.i.ask r.uri u.sem]]
   ::
-  ++  lube                                              ::    lube:be
-    ^-  vase                                            ::  build subject
-    ;:  slop
-      ;:  slop
-        %+  slop
-          [[%atom %da] now]
-        [[%atom %ta] ~(rent co [~ %da now])]
-      ::
-        %+  slop
-          [[%atom %p] who]
-        [[%atom %ta] ~(rent co [~ %p who])]
-      ::
-        [liz.typ q.hit]
-      ==
-    ::
-      =+  voy=(~(tap to q.sur) ~)
-      |-  ^-  vase
-      ?~(voy [[%atom %n] ~] (slop i.voy $(voy t.voy)))
-    ::
-      nub
-    ==
-  ::
   ++  prot                                              ::    prot:be
     ^-  prod                                            ::  get prompt
     ?>  ?=(^ fog)
@@ -321,7 +299,7 @@
       |=  [lat=lath nex=(unit ,@ud)]                    ::  start process
       %=  +>
         p.wip.gyr  +(p.wip.gyr)
-        q.wip.gyr  (~(put by q.wip.gyr) p.wip.gyr [nex ~ [~ ~ ~ %n ~ lat]])
+        q.wip.gyr  (~(put by q.wip.gyr) p.wip.gyr [nex ~ [~ ~ ~ %n *claw lat]])
       ==
     ::
     ++  past                                            ::    past:fi:be
@@ -386,6 +364,10 @@
         =+  tyk=`kite`[p.p.u.rot q.p.u.rot r.kit r.p.u.rot q.u.rot]
         ?>  =(kit tyk)
         +>.$(p.orb (~(del by p.orb) q.p.u.dup))
+      ::
+      ++  gasp                                          ::  logical path
+        ^-  path
+        [hox cwd ?~(loq wen (scot u.loq)) cws]
       ::
       ++  gird                                          ::  change slips
         |=  ask=(list slip)
@@ -491,51 +473,58 @@
       ::
       ++  grit                                          ::  work step
         |-  ^+  +
-        ?^  p.orb  +
-        ?-    -.s.orb
+        ?.  =(~ p.orb)  +
+        =+  hog=s.orb
+        ?-    -.hog
             %n                                          ::  new
-          ?~  p.s.orb
-            $(p.s.orb [~ `coal`(need (mang [food:zu war lube] sky)) ~])
-          ?~  q.u.p.s.orb
-            ?>  ?=(& -.q.s.orb)                         ::  XX naked gene
-            =+  pen=`gene`(grab q.q.s.orb)
-            =+  ton=(mong [slap p.u.p.s.orb pen] sky)
-            ?-  -.ton
-              %0  $(q.u.p.s.orb [~ ((hard path) +.p.ton) ~])
-              %1  (glum ((list path) p.ton) s.orb)
-              %2  (gram(orb [~ ~ ~ %r ~]) ~ [%crud p.ton])
-            ==
-          ::  ?~  q.u.q.u.p.s.orb
-          ::  =+  alp=?~(alt [%funk %alt ~] (jump %alt u.alt))
-          ::=+  tes=(sky [%cx hox %main ven %bin p.lam %hoon ~])
-             
-          ?>  ?=(& -.q.s.orb)
-          %-  grin  :_  s.orb
+          ?>  ?=(& -.q.hog)                             ::  XX naked gene
+          ?~  joy.p.hog
+            =^  juy  +.$  (grow gasp ~)
+            ?~  juy  +.$
+            $(s.orb hog(joy.p [~ (need (mang [food:zu war u.juy] sky))]))
+          ?~  ran.p.hog
+            =^  nur  +.$  (gray (mong [slap u.joy.p.hog s.q.hog] sky))
+            ?~  nur  +.$
+            $(s.orb hog(ran.p nur))
+          ?~  pux.p.hog 
+            =^  wim  +.$  
+              (gray (mong [slap u.joy.p.hog (grab q.q.hog)] sky))
+            ?~  wim  +.$
+            $(s.orb hog(pux.p [~ ((hard path) +.u.wim)]))
+          ?~  jiv.p.hog
+            =^  woh  +.$  (grow u.pux.p.hog ~)
+            ?~  woh  +.$
+            $(s.orb hog(jiv.p woh))
+          ?~  gam.p.hog
+            =^  lez  +.$  (grok u.pux.p.hog u.jiv.p.hog)
+            ?~  lez  +.$
+            $(s.orb hog(gam.p lez))
+          %-  grin  :_  hog
           %-  mong  :_  sky
-          [fapp:zu p.u.p.s.orb p.u.q.u.p.s.orb s.q.s.orb]
+          [fapp:zu u.gam.p.hog u.pux.p.hog u.ran.p.hog]
         ::
             %r                                          ::  running
-          ?~  p.s.orb  +
+          ?~  p.hog  +.$
           ?:  =(~ r.orb)
-            ?:  =(~ q.orb)  +
+            ?:  =(~ q.orb)  +.$
             =^  pud  q.orb  ~(get to q.orb)
             abet:(pong:(ox p.p.pud) q.p.pud)
           =^  pud  r.orb  ~(get to r.orb)
-          (grin (mong [fane:zu [p.p.pud q.p.pud u.p.s.orb]] sky) s.orb)
+          (grin (mong [fane:zu [p.p.pud q.p.pud u.p.hog]] sky) hog)
         ::
             %t                                          ::  transform
-          ?:  =(~ q.orb)  +
+          ?:  =(~ q.orb)  +.$
           =^  neb  q.orb  ~(get to q.orb)
           =+  pun=q.p.neb
           ?>  ?=(%pipe -.pun)
           ?~  p.pun  (gybe ~)
-          %+  grid  (mong [slit -.p.s.orb p.u.p.pun] sky)
+          %+  grid  (mong [slit -.p.hog p.u.p.pun] sky)
           |=  noy=typo
           =|  zil=(list)
           |-  ^+  +.^^$
           ?~  q.u.p.pun 
             (gybe ~ noy (flop zil))
-          %+  grid  (mong [slam [p.s.orb [p.u.p.pun i.q.u.p.pun]]] sky)
+          %+  grid  (mong [slam [p.hog [p.u.p.pun i.q.u.p.pun]]] sky)
           |=  zom=*
           ^$(q.u.p.pun t.q.u.p.pun, zil [zom zil])
         ==
@@ -839,18 +828,17 @@
       ==
     ::
     ++  fapp                                            ::  launch app
-      |=  [yun=vase pax=path arg=gene]
+      |=  [gum=vase pax=path arg=vase]
       ^-  vase
       %+  slam
-        %+  slam
-          (slap nub (fend pax))
+        %+  slam  gum
         ;:  slop 
           [[%atom %p] who] 
           [[%atom %da] now] 
           [[%atom %%] (shax :(mix eny now (shax p.god)))]
           [pah.typ pax]
         ==
-      (slap yun arg)
+      arg
     ::
     ++  felt                                            ::  type to calf
       |=  typ=type  ^-  calf
@@ -862,19 +850,37 @@
       %+  scan  (trip ((hard ,@) .^(%cx (weld pax /hoon))))
       (full (ifix [gay gay] tall:vez(wer pax)))
     ::
-    ++  food                                            ::  variable namespace
+    ++  food                                            ::  standard subject
       |=  [war=(map ,@ta vase) vax=vase]
       ^-  vase
-      ?~  war
-        vax
-      %-  slop
-      :_  vax
-      |-  ^-  vase
-      ?+  war  !!     ::  XX some inference weirdness here?
-        [* ~ ~]  [[%face p.n.war p.q.n.war] q.q.n.war]
-        [* ~ ^]  (slop $(r.war ~) $(war r.war))
-        [* ^ ~]  (slop $(l.war ~) $(war l.war))
-        [* ^ ^]  :(slop $(r.war ~, l.war ~) $(war l.war) $(war r.war))
+      ;:  slop
+        ;:  slop
+          %+  slop
+            [[%atom %da] now]
+          [[%atom %ta] ~(rent co [~ %da now])]
+        ::
+          %+  slop
+            [[%atom %p] who]
+          [[%atom %ta] hox]
+        ::
+          [liz.typ q.hit]
+        ==
+      ::
+        =+  voy=(~(tap to q.sur) ~)
+        |-  ^-  vase
+        ?~(voy [[%atom %n] ~] (slop i.voy $(voy t.voy)))
+      :: 
+        ?~  war
+          vax
+        %-  slop
+        :_  vax
+        |-  ^-  vase
+        ?+  war  !!     ::  XX some inference weirdness here?
+          [* ~ ~]  [[%face p.n.war p.q.n.war] q.q.n.war]
+          [* ~ ^]  (slop $(r.war ~) $(war r.war))
+          [* ^ ~]  (slop $(l.war ~) $(war l.war))
+          [* ^ ^]  :(slop $(r.war ~, l.war ~) $(war l.war) $(war r.war))
+        ==
       ==
     ::
     ++  fuss                                            ::  gene and hash

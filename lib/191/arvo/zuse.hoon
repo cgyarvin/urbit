@@ -922,7 +922,7 @@
           ==                                            ::
 ++  blur  ,[p=@ud q=(unit bead) r=blot]                 ::  columns, prompt
 ++  boar                                                ::  execution instance
-          $%  [%n p=caul q=lath]                        ::  new/ready
+          $%  [%n p=claw q=lath]                        ::  new/ready
               [%r p=(unit worm)]                        ::  running/done
               [%t p=coal]                               ::  filter
           ==                                            ::
@@ -1048,7 +1048,6 @@
               heg=(map hand code)                       ::  proposed 
               qim=(map hand code)                       ::  inbound
           ==                                            ::
-++  caul  (unit ,[p=* q=(unit ,[p=path q=(unit)])])     ::  prestart
 ++  coal  ,*                                            ::  untyped vase
 ++  code  ,@uvI                                         ::  symmetric key
 ++  cone                                                ::  reconfiguration
@@ -1063,7 +1062,8 @@
               joy=(unit coal)                           ::  local context
               ran=(unit coal)                           ::  arguments
               pux=(unit path)                           ::  execution path
-              jiv=(unit coal)                           ::  
+              jiv=(unit coal)                           ::  app configuration
+              gam=(unit coal)                           ::  app image
           ==                                            ::
 ++  cred  ,[p=logo q=(map ,@tas ,[p=@da q=@ta])]        ::  client credentials
 ++  cult  (map duct rave)                               ::  subscriptions
