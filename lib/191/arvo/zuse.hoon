@@ -1180,25 +1180,20 @@
               ==                                        ::
           ==                                            ::
 ++  lamp                                                ::  short path
-          $%  [0 p=@tas q=(unit ,@ta)]                  ::  micropath
-              [1 p=@tas q=(unit ,@ta) r=path]           ::  minipath
-              [2 p=@p q=@tas r=(unit ,@ta) s=path]      ::  foreign path
-              [3 p=gene]                                ::  full construction
+          $%  [& p=@tas]                                ::  auto
+              [| p=gene]                                ::  manual
           ==                                            ::
 ++  lane                                                ::  packet route
           $%  [%if p=@ud q=@if]                         ::  IP4/public UDP/addr
               [%is p=@ud q=(unit lane) r=@is]           ::  IPv6 w/alternates
               [%ix p=@da q=@ud r=@if]                   ::  IPv4 provisional
           ==                                            ::
-++  lark                                                ::  parsed command
-          $%  [%go p=(list lath)]                       ::  dump to console
-              [%no p=@tas]                              ::  unset a variable
-              [%so p=@tas q=gene]                       ::  set a variable 
-          ==                                            ::
+++  lark  (list lath)                                   ::  parsed command
 ++  lass  ?(%0 %1 %2)                                   ::  power increment
 ++  lath  $%                                            ::  pipeline stage
-              [& p=lass q=lamp r=cone s=gene]           ::  command
-              [| p=gene]                                ::  expression
+              [%0 p=lass q=lamp r=cone s=gene]          ::  command
+              [%1 p=gene]                               ::  generator
+              [%2 p=gene]                               ::  filter
           ==                                            ::
 ++  leek  ,[p=lass q=gene r=cone s=gene]                ::  app launch
 ++  lens  ?(%z %y %x %w)                                ::  repository view
@@ -1299,8 +1294,9 @@
               wyv=(list rock)                           ::  packet list XX gear
           ==                                            ::
 ++  pyre                                                ::  cascade stash
-          $:  p=(map ,[p=path q=coal] coal)             ::  by path
-              q=(map ,[p=@uvI q=coal] coal)             ::  by source hash
+          $:  p=(map ,[p=path q=path r=coal] coal)      ::  by path
+              q=(map ,[p=path q=@uvI r=coal] coal)      ::  by source hash
+              r=(map ,[p=* q=coal] coal)                ::  by (soft) gene
           ==                                            ::
 ++  quay  (map ,@t ,@t)                                 ::  parsed url query
 ++  quri                                                ::  request-uri

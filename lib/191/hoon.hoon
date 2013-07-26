@@ -6599,6 +6599,20 @@
       $(i.ruw t.i.ruw, cah [i.i.ruw cah])
     $(i.ruw t.i.ruw, cah ~, yun [p.i.i.ruw (wod cah yun)])
   ::
+  ++  posh
+    |=  [pre=(unit goon) pof=(unit ,[p=@ud q=goon])]
+    ^-  (list gene)
+    ~|  %posh-fail
+    =+  wom=(poof wer)
+    =+  ^=  yez
+        ?~  pre  wom
+        =+  moz=(poon wom u.pre)
+        ?~(pof moz (weld moz (slag (lent u.pre) wom)))
+    ?~  pof  yez
+    =+  zey=(flop yez)
+    =+  [moz=(scag p.u.pof zey) gul=(slag p.u.pof zey)]
+    (weld (flop gul) (poon (flop moz) q.u.pof))
+  ::
   ++  poof  |=(pax=path ^-(gens (turn pax |=(a=@ta [%dtpt %ta a]))))
   ++  poon
     |=  [pag=gens goo=goon]
@@ -6608,43 +6622,17 @@
     $(goo t.goo, pag ?~(pag ~ t.pag))
   ::
   ++  poor
-    %+  cook
-      |=  [pre=(unit goon) pof=(unit ,[[p=? q=@ud] r=goon])]
-      ^-  gens
-      ~|  %path-fail
-      =+  wom=(poof wer)
-      =+  yez=?~(pre wom (poon wom u.pre))
-      =+  gam=(slag (lent yez) wom)
-      =+  saw=?~(pre ~ [~ (lent gam)])
-      ?~(pof yez ((posh saw wom (weld yez gam)) u.pof))
-    ;~  pose
-      ;~  plug
-        (stag ~ gash) 
-        ;~(pose (stag ~ porc) (easy ~))
-      ==
-      ;~  plug
-        (easy ~)
-        (stag ~ porc)
-      ==
+    %+  cook  posh
+    ;~  plug
+      (stag ~ gash) 
+      ;~(pose (stag ~ ;~(pfix cen porc)) (easy ~))
     ==
   ::
   ++  porc
     ;~  plug
-      ;~  pose
-        (cook |=(a=(list) [& (lent a)]) (plus pam))
-        (cook |=(a=(list) [| (lent a)]) (plus bar))
-      ==
+      (cook |=(a=(list) (lent a)) (star cen))
       ;~(pfix fas gash)
     ==
-  ::
-  ++  posh  
-    |=  [saw=(unit ,@ud) cob=gens wom=gens]
-    |=  pof=[[p=? q=@ud] r=goon]
-    ^-  gens
-    =+  [lyt=?^(saw u.saw (lent r.pof)) gep=(flop cob) mow=(flop wom)]
-    %-  flop
-    %+  weld  (poon gep (flop r.pof))
-    (slag ?:(p.pof (sub lyt q.pof) (add lyt (dec q.pof))) mow)
   ::
   ++  rood
     ;~  pfix  fas
@@ -6664,6 +6652,7 @@
       :-  '%'
         ;~  pfix  cen
           ;~  pose
+            (cook |=([a=@ud b=goon] [%clsg (posh ~ ~ a b)]) porc)
             (stag %dtsg (stag %ta ;~(pose (cold %% cen) (cold %% buc))))
             (stag %dtsg (stag %f (cold & pam)))
             (stag %dtsg (stag %f (cold | bar)))
@@ -6678,7 +6667,6 @@
           (cook |=(a=wing [%cnts a ~]) rope)
           (stag %wtpm ;~(pfix pam (ifix [pel per] (most ace wide))))
           ::  (stag %bccb (stag %ktpm ;~(pfix pam wide)))
-          (stag %clsg (cook =+(wom=(poof wer) (posh ~ wom wom)) porc))
           (stag %dtpt (stag %f (cold & pam)))
         ==
       :-  '\''
@@ -6795,7 +6783,6 @@
         ;~  pose
           (cook |=(a=wing [%cnts a ~]) rope)
           (stag %wtbr ;~(pfix bar (ifix [pel per] (most ace wide))))
-          (stag %clsg (cook =+(wom=(poof wer) (posh ~ wom wom)) porc))
           (stag %dtpt (stag %f (cold | bar)))
         ==
       :-  '~'
