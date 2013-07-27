@@ -963,8 +963,8 @@
           ==                                            ::
 ++  card                                                ::  event
           $%  [%bbye ~]                                 ::  reset prompt
-              [%bind p=seat q=host]                     ::  bind http server
-              [%bund p=seat q=(list rout)]              ::  new http bind
+              [%band p=seat q=(list rout)]              ::  internal http bind
+              [%bind p=(unit seat) q=host]              ::  external http open
               [%belt p=belt]                            ::  terminal input
               [%blew p=blew]                            ::  terminal config
               [%blit p=(list blit)]                     ::  terminal output
@@ -1051,11 +1051,9 @@
 ++  coal  ,*                                            ::  untyped vase
 ++  code  ,@uvI                                         ::  symmetric key
 ++  cone                                                ::  reconfiguration
-          $%  [0 p=gene]                                ::  set
-              [1 p=gene]                                ::  modify
-              [2 p=gene]                                ::  function
+          $%  [& p=gene]                                ::  transform
+              [| p=(list ,@tas)]                        ::  alter
           ==                                            ::
-++  conf  ,[p=(set ,@tas) q=(map ,@tas ,*)]             ::  bits and options
 ++  corp  ,[p=@t q=@t r=@tas]                           ::  name auth issuer
 ++  chum  ,@uvI                                         ::  hashed passcode
 ++  claw  $:                                            ::  startup chain
@@ -1063,6 +1061,7 @@
               ran=(unit coal)                           ::  arguments
               pux=(unit path)                           ::  execution path
               jiv=(unit coal)                           ::  app configuration
+              kyq=(unit coal)                           ::  app customization
               gam=(unit coal)                           ::  app image
           ==                                            ::
 ++  cred  ,[p=logo q=(map ,@tas ,[p=@da q=@ta])]        ::  client credentials
@@ -1154,6 +1153,7 @@
 ++  gyro  ,[p=@ud q=wire r=prod]                        ::  live prompt
 ++  hand  ,@uvH                                         ::  hash of code
 ++  hate  ,[p=purl q=cred r=moth]                       ::  cooked request
+++  hiss  ,[p=hart q=httq]                              ::  outbound request
 ++  hist  ,[p=@ud q=(list ,@t)]                         ::  depth texts
 ++  hook  path                                          ::  request origin
 ++  hart  ,[p=? q=(unit ,@ud) r=host]                   ::  http sec/port/host
@@ -1191,11 +1191,10 @@
 ++  lark  (list lath)                                   ::  parsed command
 ++  lass  ?(%0 %1 %2)                                   ::  power increment
 ++  lath  $%                                            ::  pipeline stage
-              [%0 p=lass q=lamp r=cone s=gene]          ::  command
+              [%0 p=lass q=lamp r=(list cone) s=gene]   ::  command
               [%1 p=gene]                               ::  generator
               [%2 p=gene]                               ::  filter
           ==                                            ::
-++  leek  ,[p=lass q=gene r=cone s=gene]                ::  app launch
 ++  lens  ?(%z %y %x %w)                                ::  repository view
 ++  lice  ,[p=seat q=buck]                              ::  full license
 ++  life  ,@ud                                          ::  regime number

@@ -16,22 +16,9 @@
       [[[wru hen fav] ~] ..^$]
     ::
         %bind                                           ::  register server
-      ?>  =(%gold (adit hen))
-      =+  ^=  nom  ^-  tape
-          ?-  -.q.fav
-            &  ~(ram re (dish:ut [~ %path] p.q.fav))
-            |  ~(rend co ~ %if p.q.fav)
-          ==
-      =+  giy=~(rend co ~ %p p.fav)
-      :-  [[~ [/d hen] [%flog %warn "http: serving {nom} as {giy}"]] ~]
-      ^|
-      %=    ..^$
-          seh
-        :-  [q.fav p.fav]
-        (skip seh |=([a=host b=seat] (hone q.fav a)))
-      ==
+      [~ ..^$]
     ::
-        %bund                                           ::  we'll use this
+        %band                                           ::  we'll use this
       [~ ..^$]
     ::
         %crud
