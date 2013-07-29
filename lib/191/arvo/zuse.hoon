@@ -426,153 +426,6 @@
   %+  weld  tam
   ?~(att bod [' ' (xmla att bod)])
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                section 3bC, JSON and XML             ::
-::
-++  deft                                                ::  import url path
-  |=  rax=(list ,@t)
-  |-  ^-  pork
-  ?~  rax
-    [~ ~]
-  ?~  t.rax
-    =+  den=(trip i.rax)
-    =+  ^=  vex
-      %-  %-  full
-          ;~(plug sym ;~(pose (stag ~ ;~(pfix dot sym)) (easy ~)))
-      [[1 1] (trip i.rax)]
-    ?~  q.vex
-      [~ [~(rent co %% %t i.rax) ~]]
-    [+.p.u.q.vex [-.p.u.q.vex ~]]
-  =+  pok=$(rax t.rax)
-  :-  p.pok
-  :_  q.pok
-  ?:(((sane %tas) i.rax) i.rax ~(rent co %% %t i.rax))
-::
-++  epur                                                ::  url/header parser
-  |%
-  ++  apat  (cook deft ;~(pfix fas (more fas smeg)))    ::  2396 abs_path
-  ++  auri
-    ;~  plug
-      ;~  plug
-        %+  sear
-          |=  a=@t 
-          ^-  (unit ,?)
-          ?+(a ~ %http [~ %|], %https [~ %&])
-        ;~(sfix scem ;~(plug col fas fas))
-        thor
-      ==
-      ;~(plug apat yque)
-    == 
-  ++  bite                                              ::  cookies (ours)
-    (most sem ;~(plug nuck:so ;~(pfix sem nuck:so))) 
-  ++  dlab                                              ::  2396 domainlabel
-    %+  sear
-      |=  a=@ta
-      ?.(=('-' (rsh 3 a (dec (met 3 a)))) [~ u=a] ~)
-    %+  cook  cass
-    ;~(plug aln (star alp))
-  ::
-  ++  fque  (cook crip (plus pquo))                     ::  normal query field
-  ++  pcar  ;~(pose pure pesc psub col pat)             ::  2396 path char
-  ++  pesc  ;~(pfix cen mes)                            ::  2396 escaped
-  ++  pold  (cold ' ' (just '+'))                       ::  old space code
-  ++  pque  ;~(pose pcar fas wut)                       ::  3986 query char
-  ++  pquo  ;~(pose pure pesc pold)                     ::  normal query char
-  ++  pure  ;~(pose aln hep dot cab sig)                ::  2396 unreserved
-  ++  psub  ;~  pose                                    ::  3986 sub-delims
-              zap  buc  pam  soq  pel  per 
-              tar  lus  com  sem  tis
-            ==
-  ++  scem                                              ::  2396 scheme
-    %+  cook  cass
-    ;~(plug alf (star ;~(pose aln lus hep dot)))
-  ::
-  ++  smeg  (cook crip (plus pcar))                     ::  2396 segment
-  ++  thor                                              ::  2396 host/port
-    %+  cook  |*(a=[* *] [+.a -.a])
-    ;~  plug
-      thos
-      ;~(pose (stag ~ ;~(pfix col dim:ag)) (easy ~))
-    ==
-  ++  thos                                              ::  2396 host, no local
-    ;~  plug
-      ;~  pose
-        %+  stag  %&
-        %+  sear                                        ::  LL parser weak here
-          |=  a=(list ,@t)
-          =+  b=(flop a)
-          ?>  ?=(^ b)
-          =+  c=(end 3 1 i.b)
-          ?.(&((gte c 'a') (lte c 'z')) ~ [~ u=b])
-        (most dot dlab)
-      ::
-        %+  stag  %|
-        =+  tod=(ape:ag ted:ab) 
-        %+  bass  256
-        ;~(plug tod (stun [3 3] ;~(pfix dot tod)))
-      ==
-    ==
-  ++  yque                                              ::  query ending
-    ;~  pose
-      ;~(pfix wut yquy)
-      (easy ~)
-    ==
-  ++  yquy                                              ::  query
-    %+  cook
-      |=  a=(list ,[p=@t q=@t])
-      (~(gas by *(map ,@t ,@t)) a)
-    ;~  pose                                            ::  proper query
-      %+  more
-        ;~(pose pam sem)
-      ;~(plug fque ;~(pfix tis fque))
-    ::
-      %+  cook                                          ::  funky query
-        |=(a=tape [[%% (crip a)] ~])
-      (star pque)
-    ==
-  ++  zest                                              ::  2616 request-uri
-    ;~  pose
-      (stag %& (cook |=(a=purl a) auri))
-      (stag %| ;~(plug apat yque))
-    ==
-  --
-++  ecco                                                ::  eat headers
-  |=  hed=(list ,[p=@t q=@t])
-  =+  mah=*math
-  |-  ^-  math
-  ?~  hed  mah
-  =+  cus=(cass (rip 3 p.i.hed))
-  =+  zeb=(~(get by mah) cus)
-  $(hed t.hed, mah (~(put by mah) cus ?~(zeb [q.i.hed ~] [q.i.hed u.zeb])))
-::
-++  hone                                                ::  host match
-  |=  [fro=host too=host]  ^-  ?
-  ?-    -.fro
-      |  =(too fro)
-      &
-    ?&  ?=(& -.too)
-        |-  ^-  ?
-        ?~  p.too  &
-        ?~  p.fro  |
-        ?:  !=(i.p.too i.p.fro)  |
-        $(p.too t.p.too, p.fro t.p.fro)
-    ==
-  ==
-::
-++  thin                                                ::  parse headers
-  |=  [sec=? req=httq]
-  ^-  hate
-  ::  ~&  [%thin-quri (trip q.req)]
-  =+  ryp=`quri`(rash q.req zest:epur)
-  =+  mah=(ecco r.req)
-  =+  ^=  pul  ^-  purl
-      ?-  -.ryp
-        &  ?>(=(sec p.p.p.ryp) p.ryp)
-        |  =+  hot=(~(get by mah) %host)
-           ?>  ?=([~ @ ~] hot)
-           [[sec (rash i.u.hot thor:epur)] p.ryp q.ryp]
-      ==
-  [pul *cred [p.req mah s.req]]
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                section 3bD, tree sync                ::
 ::
 ++  cure                                                ::  invert tree patch
@@ -969,6 +822,7 @@
               [%blew p=blew]                            ::  terminal config
               [%blit p=(list blit)]                     ::  terminal output
               [%boot p=card]                            ::  christen terminal
+              [%born ~]                                 ::  new unix process
               [%cash p=@p q=buck]                       ::  civil license
               [%crud p=(list tank)]                     ::  error with trace
               [%deem p=seat q=card]                     ::  external identity
@@ -1017,11 +871,14 @@
               [%talk p=tank]                            ::  show on console
               [%tell p=(list ,@t)]                      ::  dump lines
               [%text p=tape]                            ::  talk leaf
-              [%that p=love]                            ::  cooked htresp
-              [%thee p=hate]                            ::  cooked htreq
-              [%thin p=httq]                            ::  insecure raw htreq
-              [%this p=httq]                            ::  secure raw htreq
+              [%that p=@ud q=love]                      ::  cooked htresp
+              [%thee p=@ud q=scud r=hate]               ::  cooked htreq
+              [%them p=(unit hiss)]                     ::  internal client req
+              [%they p=@ud q=httr]                      ::  response to %them
+              [%this p=? q=@ud r=httq]                  ::  secure/session/req
               [%thou p=httr]                            ::  raw http response
+              [%thug p=@p q=@p]                         ::  sign in client 
+              [%thus p=@ud q=(unit hiss)]               ::  http request
               [%tory p=(list ,@t)]                      ::  history dump
               [%veer p=@ta q=path r=@t]                 ::  install vane
               [%volt p=*]                               ::  upgrade kernel
@@ -1122,7 +979,7 @@
               [%mx p=(list gift)]                       ::  batch gift
               [%ok p=disc q=nori]                       ::  save changes
               [%te p=(list ,@t)]                        ::  dump lines
-              [%th p=love]                              ::  http response
+              [%th p=@ud q=love]                        ::  http response
               [%va p=@tas q=(unit vase)]                ::  set/clear variable
               [%xx p=card]                              ::  apply card
               [%xy p=path q=card]                       ::  push card
@@ -1152,7 +1009,7 @@
           ==                                            ::
 ++  gyro  ,[p=@ud q=wire r=prod]                        ::  live prompt
 ++  hand  ,@uvH                                         ::  hash of code
-++  hate  ,[p=purl q=cred r=moth]                       ::  cooked request
+++  hate  ,[p=purl q=@p r=moth]                         ::  cooked request 
 ++  hiss  ,[p=hart q=httq]                              ::  outbound request
 ++  hist  ,[p=@ud q=(list ,@t)]                         ::  depth texts
 ++  hook  path                                          ::  request origin

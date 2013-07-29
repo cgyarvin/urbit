@@ -97,21 +97,7 @@
   ++  heat                                              ::    heat:be
     |=  [hen=duct het=hate]                             ::  dispatch http req
     ^-  [p=(list move) q=brat]
-    =+  sud=(lout p.het)
-    ?~  sud
-      :_  +<.^^$
-      :~  :+  [~ %iron who]
-            hen
-          :-  %that
-          :-  %raw
-          [404 ~ [~ (tact "http error 404")]]
-      ==
-    =<  abet
-    =<  lash
-    =<  abet
-    %+  glib:(past:(fest p.u.sud hen) q.u.sud)
-      r.u.sud 
-    [%ht s.u.sud q.het r.het]
+    !!
   ::
   ++  lead                                              ::    lead:be
     |=  [tea=wire hen=duct]                             ::  route note
@@ -145,7 +131,7 @@
              =>  .(fog (weld t.fog `(list ,@ud)`[i.fog ~]))
              [[[[~ %iron who] hen [%helo prot]] ~] +<.^^$]
       %noop  [~ +<.^^$]
-      %thee  (heat hen p.fav)
+      %thee  (heat hen r.fav)
       %went  abet:lash:(lean tea hen fav)
       %writ  abet:lash:(loam tea hen +.fav)
       %wart  (lion hen +.fav)
@@ -173,44 +159,6 @@
       [%wart him cha num val]
     =^  vun  +<.^^^$  $(sey t.sey)
     [(weld von vun) +<.^^^$]
-  ::
-  ++  loot                                              ::    loot:be
-    |=  [uri=purl rut=rout]                             ::  match route
-    ^-  (unit scud)
-    ?.  |-  ^-  ?
-        ?~  p.rut  |
-        =(i.p.rut `host`r.p.uri)
-      ~
-    =+  tac=*path
-    |-  ^-  (unit scud)
-    ?~  q.rut
-      :-  ~
-      :-  :(weld (flop q.q.uri) tac s.rut)
-      `scar`[p.uri (flop tac) p.q.uri s.rut]
-    ?:  |(?=(~ q.q.uri) !=(i.q.rut i.q.q.uri))
-      ~
-    $(q.rut t.q.rut, q.q.uri t.q.q.uri, tac [i.q.rut tac])
-  ::
-  ++  lout                                              ::    lout:be
-    |=  uri=purl                                        ::  match http req
-    ^-  (unit ,[p=@ud q=@ud r=path s=scab])
-    =+  dog=`(list ,[p=@ud q=gyre])`(~(tap by q.god) ~)
-    |-  ^-  (unit ,[p=@ud q=@ud r=path s=scab])
-    ?~  dog  ~
-    =+  pig=`(list ,[p=@ud q=beak])`(~(tap by q.wip.q.i.dog) ~)
-    |-  ^-  (unit ,[p=@ud q=@ud r=path s=scab])
-    ?~  pig  ^$(dog t.dog)
-    =+  ask=`(list slip)`(~(tap by q.q.i.pig) ~)
-    |-  ^-  (unit ,[p=@ud q=@ud r=path s=scab])
-    ?~  ask  ^$(pig t.pig)
-    ?.  ?=([%ht *] q.i.ask)
-      $(ask t.ask)
-    |-  ^-  (unit ,[p=@ud q=@ud r=path s=scab])
-    ?~  p.q.i.ask  ^$(ask t.ask)
-    =+  sem=(loot uri i.p.q.i.ask)
-    ?~  sem  
-      $(p.q.i.ask t.p.q.i.ask)
-    [~ p.i.dog p.i.pig p.i.ask `scab`[`oryx`r.i.p.q.i.ask r.uri u.sem]]
   ::
   ++  prot                                              ::    prot:be
     ^-  prod                                            ::  get prompt
@@ -579,7 +527,7 @@
                 (turn mod |=(a=@tas (weld mod `path`[%alt a rim])))
             ==
         =+  sur=(scag 3 pax)
-        =+  boy=`coal`[[%cell [%atom %p] -.nub] [who +.nub]]
+        =+  boy=(grub pax)
         |-  ^-  [(unit coal) _+>.^$]
         =^  hyq  +>.^$  (grim paw boy)
         ?~  hyq  [~ +>.^$]
@@ -589,6 +537,11 @@
           boy  q.u.hyq
           paw  (turn paw |=(a=path (weld a [i.sur ~])))
         ==
+      ::
+      ++  grub                                          ::  initial compose
+        |=  pax=path  ^-  coal
+        :-  [%cell [%cell [%atom %p] pah.typ] -.nub]
+        [[who pax] +.nub]
       :: 
       ++  gull                                          ::  request control
         |=  [tea=wire him=seat ryf=riff]
@@ -666,7 +619,7 @@
                  $(p.gud t.p.gud, +>.^^$ ^$(gud i.p.gud))
             %ok  (gram [/c ~] %into who p.gud q.gud)
             %te  (gram ~ %tell p.gud)
-            %th  (gram ~ %that p.gud)
+            %th  (gram ~ %that p.gud q.gud)
             %va  !!
             %xx  (gram ~ p.gud)
             %xy  (gram [p.gud /b ~] q.gud)
@@ -892,12 +845,9 @@
       ^-  vase
       %+  slam
         %+  slam  gum
-        ;:  slop 
-          [[%atom %p] who] 
+        %+  slop 
           [[%atom %da] now] 
-          [[%atom %%] (shax :(mix eny now (shax p.god)))]
-          [pah.typ pax]
-        ==
+        [[%atom %%] (shax :(mix eny now (shax p.god)))]
       arg
     ::
     ++  felt                                            ::  type to calf
