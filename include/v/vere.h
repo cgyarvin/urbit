@@ -204,7 +204,7 @@
       typedef struct _u2_ufil {
         struct ev_stat   was_u;             //  stat watcher
         u2_bean          non;               //  always u2_no
-        u2_bean          dry;               //  ie, modified
+        u2_bean          dry;               //  ie, unmodified
         struct _u2_udir* dir_u;             //  in directory
         mpz_t            ash_mp;            //  sham
         struct _u2_ufil* nex_u;             //  internal list
@@ -216,7 +216,6 @@
         struct ev_stat   was_u;             //  stat watcher
         u2_bean          yes;               //  always u2_yes
         u2_bean          dry;               //  ie, unmodified
-        mpz_t            who_mp;            //  owner as GMP
         c3_c*            pax_c;             //  absolute path
         struct _u2_udir* par_u;             //  parent directory
         struct _u2_udir* dis_u;             //  subdirectories
@@ -228,6 +227,7 @@
     */
       typedef struct _u2_uhot {
         u2_udir          dir_u;             //  root directory
+        mpz_t            who_mp;            //  owner as GMP
         struct _u2_uhot* nex_u;             //  internal list
       } u2_uhot;
 
@@ -236,7 +236,7 @@
       typedef struct _u2_unix {
         struct ev_timer tim_u;              //  clay timer
         u2_bean         alm;                //  alarm
-        u2_uhot         hot;                //  host state
+        u2_uhot*        hot_u;              //  host state
       } u2_unix;
 
     /* u2_utfo: unix terminfo strings.
@@ -350,6 +350,7 @@
         u2_bean pro;
         u2_bean veb;
         u2_bean rez;
+        u2_bean sow;
         u2_bean nuu;
       } u2_opts;
 
@@ -372,6 +373,7 @@
         u2_save  sav_u;                     //  autosave
         u2_opts  ops_u;                     //  commandline options
         u2_unix  unx_u;                     //  sync and clay
+        u2_bean  liv;                       //  if u2_no, shut down
 
         u2_reck* arv_u;                     //  runtime
       } u2_host;                            //  host == computer == process

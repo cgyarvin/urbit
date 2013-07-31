@@ -886,7 +886,7 @@
               [%wake ~]                                 ::  timer activate
               [%want p=seat q=@ta r=*]                  ::  outgoing request
               [%warp p=seat q=riff]                     ::  request
-              [%wart p=seat q=@ta r=@ud s=(unit ,*)]    ::  incoming request
+              [%wart p=seat q=@ta r=@ud s=(unit ,*)]    ::  incoming response
               [%warn p=tape]                            ::  system message
               [%went p=seat q=cape r=soap]              ::  outgoing reaction
               [%wipe ~]                                 ::  clean to sequence
@@ -1100,9 +1100,11 @@
 ++  mood  ,[p=care q=case r=path]                       ::  request in desk
 ++  moth  ,[p=meth q=math r=(unit octs)]                ::  http operation
 ++  name  ,[p=@t q=(unit ,@t) r=(unit ,@t) s=@t]        ::  first mid/nick last
+++  newt  ?(%boot %kick %mess %slay %wake)              ::  lifecycle events
 ++  nook                                                ::  common note
           $%  [%eg p=riot]                              ::  simple result
               [%ht p=scab q=cred r=moth]                ::  http request
+              [%ly p=newt q=tape]                       ::  lifecycle event
               [%up p=@t]                                ::  prompt response
               [%oy p=seat q=@ta r=@ud s=(unit ,*)]      ::  incoming request
               [%yo p=seat q=cape r=soap]                ::  request response

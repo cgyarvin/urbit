@@ -47,7 +47,7 @@
         struct _u2_cheg* nex_u;             //  linked in list
         c3_w             bot_w;             //  beginning page
         c3_w             len_w;             //  length in pages
-        c3_w             num_w;             //  number of pages dirty
+        c3_w             pgs_w;             //  pages in used prefix
         c3_i             ctl_i;             //  control file
         c3_i             dat_i;             //  data file
       } u2_cheg;
@@ -64,10 +64,15 @@
         u2_cheg LoomSegmentB = { "b", &LoomSegmentC };
         u2_cheg LoomSegmentA = { "a", &LoomSegmentB };
 
+      /* Critical-section bit, for signal handlers.
+      */
+        volatile uint32_t u2_Critical;
+
 #   else
       extern uint32_t LoomFrame;
       extern volatile sig_atomic_t LoomStop;
       extern volatile sig_atomic_t LoomIntr;
+      extern volatile uint32_t u2_Critical;
 
       extern volatile u2_chit LoomChem[LoomAllPages];
       extern u2_cheg LoomSegmentA, LoomSegmentB, LoomSegmentC, LoomSegmentD;

@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <setjmp.h>
 #include <gmp.h>
+#include <sigsegv.h>
 #include <stdint.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -31,6 +32,86 @@
 #else
 #define DEVRANDOM "/dev/random"
 #endif
+
+static jmp_buf Signal_buf;
+#ifndef SIGSTKSZ
+# define SIGSTKSZ 16384
+#endif
+static uint8_t Sigstk[SIGSTKSZ];
+
+typedef enum {
+  sig_none, 
+  sig_overflow, 
+  sig_interrupt, 
+  sig_terminate,
+  sig_memory, 
+  sig_assert,
+  sig_timer
+} u2_kill;
+
+volatile u2_kill Sigcause;            //  reasons for exception
+
+static void
+_lo_signal_handle_over(int emergency, stackoverflow_context_t scp)
+{
+  if ( u2_Critical ) {
+    //  Careful not to grow the stack during critical sections.
+    //
+    write(2, "stack disaster\n", strlen("stack disaster" + 2));
+    abort();
+  }
+
+#if 0
+  if ( 1 == emergency ) {
+    write(2, "stack emergency\n", strlen("stack emergency" + 2));
+    abort();
+  } else 
+#endif
+  {
+    Sigcause = sig_overflow;
+    longjmp(Signal_buf, 1);
+  }
+}
+
+static void
+_lo_signal_handle_intr(int x)
+{
+  if ( !u2_Critical ) {
+    Sigcause = sig_interrupt;
+    longjmp(Signal_buf, 1);
+  }
+}
+
+/* _lo_signal_done():
+*/
+static void
+_lo_signal_done()
+{
+  signal(SIGINT, SIG_IGN);
+  stackoverflow_deinstall_handler();
+}
+
+/* _lo_signal_deep(): start deep processing; set timer for sec_w or 0.
+*/
+static void
+_lo_signal_deep(c3_w sec_w)
+{
+  if ( -1 == stackoverflow_install_handler
+      (_lo_signal_handle_over, Sigstk, SIGSTKSZ) )
+  {
+    fprintf(stderr, "_lo_signal_handle_over: install failed\n");
+    exit(1);
+  }
+  signal(SIGINT, _lo_signal_handle_intr);
+}
+
+/* u2_loop_signal_memory(): end computation for out-of-memory.
+*/
+void
+u2_loop_signal_memory()
+{
+  u2_cm_bail(c3__full);
+}
 
 /* _lo_init(): initialize I/O across the process.
 */
@@ -233,16 +314,62 @@ _lo_punt(u2_reck* rec_u, c3_l tab_l, u2_noun tac)
   u2z(tac);
 }
 
-/* _lo_soft(): standard soft wrapper.  
+/* _lo_soft(): standard soft wrapper.  unifies unix and nock errors.
 **
 **  Produces [%% result] or [%error (list tank)].
 */
 static u2_noun
-_lo_soft(u2_reck* rec_u, u2_funk fun_f, u2_noun arg)
+_lo_soft(u2_reck* rec_u, c3_w sec_w, u2_funk fun_f, u2_noun arg)
 {
   u2_noun hoe, pro, rop;
 
   u2_rl_leap(u2_Wire, c3__rock);
+
+  //  system level setjmp, for signals
+  //
+  c3_assert(u2_nul == u2_wire_tax(u2_Wire));
+  c3_assert(0 == u2_wire_kit_r(u2_Wire));
+
+  _lo_signal_deep(sec_w);
+
+  if ( 0 != setjmp(Signal_buf) ) {
+    u2_noun tax, pre, mok;
+
+    //  return to blank state
+    //
+    _lo_signal_done();
+
+    //  acquire trace and reset memory
+    //
+    tax = u2_wire_tax(u2_Wire);
+    u2_rl_fall(u2_Wire);
+    tax = u2_rl_take(u2_Wire, tax);
+    mok = u2_cn_mung(u2k(rec_u->toy.mook), u2nc(2, tax));
+    u2_wire_tax(u2_Wire) = u2_nul;
+
+    //  other ugly disgusting cleanups
+    {
+      u2_wire_kit_r(u2_Wire) = 0;
+
+      u2_hevx_be(u2_wire_hev_r(u2_Wire), u2_pryr, god) = 0;
+      u2_hevx_at(u2_wire_hev_r(u2_Wire), lad) = 0;
+    }
+
+    switch ( Sigcause ) {
+      default:            pre = c3__wyrd; break;
+      case sig_none:      pre = c3__none; break;
+      case sig_overflow:  pre = c3__over; break;
+      case sig_interrupt: pre = c3__intr; break;
+      case sig_terminate: pre = c3__term; break;
+      case sig_memory:    pre = c3__full; break;
+      case sig_assert:    pre = c3__lame; break;
+      case sig_timer:     pre = c3__slow; break;
+    }
+    rop = u2nc(pre, u2k(u2t(mok)));
+    u2z(mok);
+    return rop;
+  }
+
   if ( 0 != (hoe = u2_cm_trap()) ) {
     u2_noun mok;
 
@@ -250,7 +377,7 @@ _lo_soft(u2_reck* rec_u, u2_funk fun_f, u2_noun arg)
     hoe = u2_rl_take(u2_Wire, hoe);
     u2_rl_flog(u2_Wire);
 
-    mok = u2_cn_mung(u2k(rec_u->toy.mook), u2nc(2, u2_ckb_flop(u2k(u2t(hoe)))));
+    mok = u2_cn_mung(u2k(rec_u->toy.mook), u2nc(2, u2k(u2t(hoe))));
     rop = u2nc(u2k(u2h(hoe)), u2k(u2t(mok)));
 
     u2z(hoe);
@@ -258,6 +385,8 @@ _lo_soft(u2_reck* rec_u, u2_funk fun_f, u2_noun arg)
   } 
   else {
     u2_noun pro = fun_f(rec_u, arg);
+
+    _lo_signal_done();
     u2_cm_done();
  
     u2_rl_fall(u2_Wire);
@@ -267,9 +396,6 @@ _lo_soft(u2_reck* rec_u, u2_funk fun_f, u2_noun arg)
     rop = u2nc(u2_blip, pro);
   }
   pro = rop;
-  // u2_cm_chin();
-  // pro = u2_cm_keep(rop);
-  // u2_cm_pack();
 
   return pro;
 }
@@ -279,7 +405,7 @@ _lo_soft(u2_reck* rec_u, u2_funk fun_f, u2_noun arg)
 static u2_noun
 _lo_hard(u2_reck* rec_u, u2_funk fun_f, u2_noun arg)
 {
-  u2_noun pro = _lo_soft(rec_u, fun_f, arg);
+  u2_noun pro = _lo_soft(rec_u, 0, fun_f, arg);
 
   if ( u2_blip == u2h(pro) ) {
     u2_noun poo = u2k(u2t(pro));
@@ -303,11 +429,11 @@ _lo_hard(u2_reck* rec_u, u2_funk fun_f, u2_noun arg)
     u2z(gam); return pro;
   }
 static u2_noun
-_lo_mung(u2_reck* rec_u, u2_noun gat, u2_noun sam)
+_lo_mung(u2_reck* rec_u, c3_w sec_w, u2_noun gat, u2_noun sam)
 {
   u2_noun gam = u2nc(gat, sam);
 
-  return _lo_soft(rec_u, _lo_mung_in, gam);
+  return _lo_soft(rec_u, 0, _lo_mung_in, gam);
 }
 
 /* _lo_pack(): save an ovum at the present time.  sync; sync; sync.
@@ -394,7 +520,7 @@ _lo_save(u2_reck* rec_u, u2_noun ovo)
 static void
 _lo_sing(u2_reck* rec_u, u2_noun ovo)
 {
-  u2_noun gon = _lo_soft(rec_u, u2_reck_poke, u2k(ovo));
+  u2_noun gon = _lo_soft(rec_u, 0, u2_reck_poke, u2k(ovo));
 
   if ( u2_blip != u2h(gon) ) {
     uL(fprintf(uH, "sing: ovum failed!\n"));
@@ -434,7 +560,7 @@ _lo_pike(u2_reck* rec_u, u2_noun ovo, u2_noun cor)
   u2_noun fun = u2_cn_nock(u2k(cor), u2k(u2_cx_at(42, cor)));
   u2_noun sam = u2nc(u2k(rec_u->now), ovo);
 
-  return _lo_mung(rec_u, fun, sam);
+  return _lo_mung(rec_u, 0, fun, sam);
 }
 
 /* _lo_sure(): apply and save an input ovum and its result.
@@ -495,7 +621,7 @@ _lo_lame(u2_reck* rec_u, u2_noun ovo, u2_noun tan)
   }
   u2z(ovo); 
 
-  gon = _lo_soft(rec_u, u2_reck_poke, u2k(bov));
+  gon = _lo_soft(rec_u, 0, u2_reck_poke, u2k(bov));
   if ( u2_blip == u2h(gon) ) {
     _lo_sure(rec_u, bov, u2k(u2h(u2t(gon))), u2k(u2t(u2t(gon))));
    
@@ -506,7 +632,7 @@ _lo_lame(u2_reck* rec_u, u2_noun ovo, u2_noun tan)
     {
       u2_noun vab = u2nc(u2k(u2h(bov)), 
                          u2nc(c3__warn, u2_ci_tape("crude crash!")));
-      u2_noun nog = _lo_soft(rec_u, u2_reck_poke, u2k(vab));
+      u2_noun nog = _lo_soft(rec_u, 0, u2_reck_poke, u2k(vab));
 
       if ( u2_blip == u2h(nog) ) {
         _lo_sure(rec_u, vab, u2k(u2h(u2t(nog))), u2k(u2t(u2t(nog))));
@@ -535,7 +661,7 @@ _lo_nick(u2_reck* rec_u, u2_noun vir, u2_noun cor)
   else {
     u2_noun i_vir = u2h(vir);
     u2_noun pi_vir, qi_vir;
-    u2_noun vix, viz;
+    u2_noun vix;
 
     if ( (u2_yes == u2_cr_cell((i_vir=u2h(vir)), &pi_vir, &qi_vir)) &&
          (u2_yes == u2du(qi_vir)) &&
@@ -563,7 +689,6 @@ _lo_nick(u2_reck* rec_u, u2_noun vir, u2_noun cor)
     }
     else {
       u2_noun nez = _lo_nick(rec_u, u2k(u2t(vir)), cor);
-      u2_noun ret;
 
       if ( u2_blip != u2h(nez) ) {
         u2z(vir);
@@ -590,7 +715,7 @@ _lo_punk(u2_reck* rec_u, u2_noun ovo)
 {
   u2_noun gon;
 
-  gon = _lo_soft(rec_u, u2_reck_poke, u2k(ovo));
+  gon = _lo_soft(rec_u, 0, u2_reck_poke, u2k(ovo));
 
   if ( u2_blip != u2h(gon) ) {
     _lo_lame(rec_u, ovo, u2k(u2t(gon)));
@@ -687,6 +812,17 @@ u2_lo_call(u2_reck*        rec_u,
     //  update time
     //
     u2_reck_time(rec_u);
+
+    //  clean shutdown
+    //
+    if ( u2_no == u2_Host.liv ) {
+      //  direct save and die
+      //
+      u2_loom_save(rec_u->ent_w);
+      _lo_exit(rec_u);
+
+      exit(0);
+    }
   }
   _lo_poll(rec_u, lup_u);
   _lo_spin(rec_u, lup_u);
@@ -1376,45 +1512,6 @@ _lo_ours(u2_reck* rec_u)
   }
 }
 
-/* _lo_link(): plan link from remote repository.
-*/
-static void
-_lo_link(u2_reck* rec_u,
-         u2_noun  syd,
-         u2_noun  foh,
-         u2_noun  dys,
-         u2_noun  lok)
-{
-  u2_reck_plan(rec_u, u2nt(c3__gold, c3__clay, u2_nul),
-                      u2nt(c3__deem, 
-                           u2k(rec_u->our),
-                           u2nc(c3__link, u2nq(syd, foh, dys, lok))));
-}
-
-/* _lo_pull(): pull changes from remote repository.
-*/
-static void
-_lo_pull(u2_reck* rec_u,
-         u2_noun  foh,
-         u2_noun  syd)
-{
-  u2_reck_plan(rec_u, u2nt(c3__gold, c3__clay, u2_nul),
-                      u2nt(c3__deem, u2k(rec_u->our),
-                                     u2nt(c3__pull, foh, syd)));
-}
-
-/* _lo_copy(): common clone.
-*/
-static void
-_lo_copy(u2_reck* rec_u,
-         u2_noun  foh,
-         u2_noun  syd,
-         u2_noun  lok)
-{
-  _lo_pull(rec_u, foh, syd);
-  //  _lo_link(rec_u, syd, foh, syd, lok);
-}
-
 /* _lo_zen(): get OS entropy.
 */
 static u2_noun 
@@ -1431,6 +1528,7 @@ _lo_zen(u2_reck* rec_u)
 void
 u2_lo_loop(u2_reck* rec_u)
 {
+  signal(SIGIO, SIG_IGN);   //  linux is wont to produce for some reason
   _lo_init(rec_u);
 
   if ( u2_yes == u2_Host.ops_u.nuu ) {

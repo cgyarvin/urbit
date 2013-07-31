@@ -26,7 +26,87 @@
 static void _lo_unix(struct ev_loop *lup_u, struct ev_timer* tim_u, c3_i rev_i)
   { u2_lo_call(u2_Host.arv_u, lup_u, tim_u, c3__unix, rev_i); }
 
-/* u2_unix_io_init(): initialize autounix.
+/* _unix_hot_gain(): enter sync, syncing out iff sow == yes.
+*/
+static struct _u2_uhot*
+_unix_hot_gain(u2_reck* rec_u, u2_noun who, u2_bean sow)
+{
+  return 0;
+}
+
+/* _unix_hot_lose(): release and free() a host directory.
+*/
+static void
+_unix_hot_lose(u2_reck* rec_u, u2_uhot* hot_u)
+{
+}
+
+/* u2_unix_ef_edit(): apply edits pushed out by clay.
+*/
+void
+u2_unix_ef_edit(u2_reck* rec_u, u2_noun who, u2_noun syd, u2_noun nor)
+{
+}
+
+/* u2_unix_ef_refresh_root(): refresh the root.
+*/
+void
+u2_unix_ef_refresh_root(u2_reck* rec_u, u2_bean liv)
+{
+  u2_bean  sow = (liv == u2_yes) ? u2_yes : u2_Host.ops_u.sow;
+  u2_unix* unx_u = &u2_Host.unx_u;
+  u2_noun  who;
+  u2_uhot* hot_u; 
+
+  //  find owners without directories
+  {
+    for ( who = rec_u->own; u2_nul != who; who = u2t(who) ) {
+      mpz_t who_mp;
+
+      u2_cr_mp(who_mp, u2h(who));
+      for ( hot_u = unx_u->hot_u; 
+            hot_u && (0 != mpz_cmp(who_mp, hot_u->who_mp));
+            hot_u = hot_u->nex_u );
+
+      if ( 0 == hot_u ) {
+        hot_u = _unix_hot_gain(rec_u, u2k(who), sow);
+      }
+      if ( 0 != hot_u ) {
+        hot_u->nex_u = unx_u->hot_u;
+        unx_u->hot_u = hot_u;
+      }
+    }
+  }
+
+  //  find directories without owners
+  {
+    u2_uhot** het_u = &(unx_u->hot_u);
+
+    while ( 0 != (hot_u=*het_u) ) {
+      for ( who = rec_u->own; u2_nul != who; who = u2t(who) ) {
+        mpz_t who_mp;
+
+        u2_cr_mp(who_mp, u2h(who));
+        if ( 0 == mpz_cmp(who_mp, hot_u->who_mp) ) {
+          break;
+        }
+        mpz_clear(who_mp);
+      }
+
+      if ( u2_nul == who ) {
+        *het_u = hot_u->nex_u;
+        
+        _unix_hot_lose(rec_u, hot_u);
+        continue;
+      }
+      else {
+        het_u = &(hot_u->nex_u);
+      }
+    }
+  }
+}
+
+/* u2_unix_io_init(): initialize unix sync.
 */
 void 
 u2_unix_io_init(u2_reck* rec_u)
@@ -35,6 +115,8 @@ u2_unix_io_init(u2_reck* rec_u)
 
   ev_timer_init(&unx_u->tim_u, _lo_unix, 10000.0, 0.);
   unx_u->alm = u2_no;
+
+  // u2_unix_refresh_root(rec_u, u2_no);
 }
 
 /* u2_unix_io_exit(): terminate unix I/O.

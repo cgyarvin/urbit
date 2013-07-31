@@ -134,7 +134,7 @@ u2_wr_check_init(c3_c* cpu_c)
   {
     LoomSegmentA.bot_w = 2048;
     LoomSegmentA.len_w = 30720;
-    LoomSegmentA.num_w = 0;
+    LoomSegmentA.pgs_w = 0;
     LoomSegmentA.ctl_i = _wr_open(cpu_c, "a", "ctl");
     LoomSegmentA.dat_i = _wr_open(cpu_c, "a", "dat");
   }
@@ -144,7 +144,7 @@ u2_wr_check_init(c3_c* cpu_c)
   {
     LoomSegmentB.bot_w = LoomHalfPages;
     LoomSegmentB.len_w = 30719;
-    LoomSegmentB.num_w = 0;
+    LoomSegmentB.pgs_w = 0;
     LoomSegmentB.ctl_i = _wr_open(cpu_c, "b", "ctl");
     LoomSegmentB.dat_i = _wr_open(cpu_c, "b", "dat");
   }
@@ -153,7 +153,7 @@ u2_wr_check_init(c3_c* cpu_c)
   {
     LoomSegmentC.bot_w = 63487;
     LoomSegmentC.len_w = 1;
-    LoomSegmentC.num_w = 0;
+    LoomSegmentC.pgs_w = 0;
     LoomSegmentC.ctl_i = _wr_open(cpu_c, "c", "ctl");
     LoomSegmentC.dat_i = _wr_open(cpu_c, "c", "dat");
   }
@@ -162,7 +162,7 @@ u2_wr_check_init(c3_c* cpu_c)
   {
     LoomSegmentD.bot_w = 0;
     LoomSegmentD.len_w = 2048;
-    LoomSegmentD.num_w = 0;
+    LoomSegmentD.pgs_w = 0;
     LoomSegmentD.ctl_i = _wr_open(cpu_c, "d", "ctl");
     LoomSegmentD.dat_i = _wr_open(cpu_c, "d", "dat");
   }
@@ -176,8 +176,8 @@ _wr_check_cheg(u2_cheg* ceg_u, u2_ray top_r)
   c3_assert(top_w >= ceg_u->bot_w);
   c3_assert(top_w < (ceg_u->bot_w + ceg_u->len_w));
 
-  if ( ceg_u->num_w > (top_w - ceg_u->bot_w) ) {
-    ceg_u->num_w = (top_w - ceg_u->bot_w);
+  if ( ceg_u->pgs_w > (top_w - ceg_u->bot_w) ) {
+    ceg_u->pgs_w = (top_w - ceg_u->bot_w);
   }
 }
 

@@ -192,31 +192,29 @@ main(c3_i   argc,
   {
     u2_wr_check_init(u2_Host.ops_u.cpu_c);
 
-    if ( (u2_no == u2_Host.ops_u.nuu) && (u2_no == u2_Host.ops_u.rez) ) {
-      if ( u2_no == u2_loom_load() ) {
-        fprintf(stderr, "%s: could not load\n", u2_Host.ops_u.cpu_c);
-        return 1;
-      } else {
-        u2_Host.wir_r = u2_ray_of(0, 0);
-        u2_Wire = u2_Host.wir_r;
+    if ( (u2_no == u2_Host.ops_u.nuu) && 
+          (u2_no == u2_Host.ops_u.rez) &&
+          (u2_yes == u2_loom_load()) ) 
+    {
+      u2_Host.wir_r = u2_ray_of(0, 0);
+      u2_Wire = u2_Host.wir_r;
 
-        u2_Host.cpu_c = u2_Host.ops_u.cpu_c;
-        u2_Host.arv_u = u2_Arv;
+      u2_Host.cpu_c = u2_Host.ops_u.cpu_c;
+      u2_Host.arv_u = u2_Arv;
 
-        u2_Arv->ova.egg_u = u2_Arv->ova.geg_u = 0;
+      u2_Arv->ova.egg_u = u2_Arv->ova.geg_u = 0;
 
-        //  Horrible ancient stuff.
-        //
-        kno_w = u2_Host.arv_u->kno_w;
+      //  Horrible ancient stuff.
+      //
+      kno_w = u2_Host.arv_u->kno_w;
 
-        u2_Host.kno_w = kno_w;
-        u2_Host.ver_e[kno_w].ken = u2k(u2_Host.arv_u->ken);
-        u2_Host.ver_e[kno_w].mod_m = c3__warm;
+      u2_Host.kno_w = kno_w;
+      u2_Host.ver_e[kno_w].ken = u2k(u2_Host.arv_u->ken);
+      u2_Host.ver_e[kno_w].mod_m = c3__warm;
 
-        u2_ho_push();
-        // u2_ve_rest();
-      }
-    } else {
+      u2_ho_push();
+    } 
+    else {
       u2_loom_boot();
       u2_Host.wir_r = u2_wr_init(c3__rock, u2_ray_of(0, 0), u2_ray_of(1, 0));
       u2_Wire = u2_Host.wir_r;

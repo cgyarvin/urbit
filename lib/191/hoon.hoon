@@ -3217,6 +3217,20 @@
   ^-  toon
   ?.  ?=([2 *] ton)  ton
   :-  %2
+  =+  yel=(lent p.ton)
+  =.  p.ton 
+    ?.  (gth yel 256)  p.ton
+    %+  weld
+      (scag 128 p.ton)
+    ^-  (list ,[@ta *])
+    :_  (slag (sub yel 128) p.ton)
+    :-  %lose 
+    %+  rap  3
+    ;:  weld
+      "[skipped "
+      ~(rend co %% %ud (sub yel 256))
+      " frames]"
+    ==
   |-  ^-  (list tank)
   ?~  p.ton  ~
   =+  rex=$(p.ton t.p.ton)
