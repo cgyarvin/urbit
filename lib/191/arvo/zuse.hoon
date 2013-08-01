@@ -824,7 +824,7 @@
               [%boot p=card]                            ::  christen terminal
               [%born ~]                                 ::  new unix process
               [%cash p=@p q=buck]                       ::  civil license
-              [%crud p=(list tank)]                     ::  error with trace
+              [%crud p=@tas q=(list tank)]              ::  error with trace
               [%deem p=seat q=card]                     ::  external identity
               [%dire p=@tas q=dram]                     ::  apply directory
               [%dump p=(list ,@t)]                      ::  raw text lines

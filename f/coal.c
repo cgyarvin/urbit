@@ -471,9 +471,7 @@ u2_cm_wail()
   u2_noun nuw   = u2_wire_tax(u2_Wire);
   u2_noun jaq;
  
-  fprintf(stderr, "bail bA - %d\r\n", _cm_depth(old, nuw));
   jaq = _cm_jack(old, nuw);
-  fprintf(stderr, "bail bB\r\n");
 
   // c3_assert(1 == u2_rl_refs(u2_Wire, old));
   u2_wire_tax(u2_Wire) = old;
@@ -493,7 +491,6 @@ u2_cm_bail(c3_l how_l)
 {
   u2_ray kit_r = u2_wire_kit_r(u2_Wire);
 
-  fprintf(stderr, "bail a\r\n");
   if ( u2_yes == u2_Flag_Abort ) {
     if ( c3__fail == how_l ) { c3_assert(0); }
     c3_assert(0);
@@ -503,7 +500,6 @@ u2_cm_bail(c3_l how_l)
   // fprintf(stderr, "bail\n");
   // if ( _num == 0 ) { c3_assert(0); } else _num--;
 
-  fprintf(stderr, "bail b\r\n");
   {
     u2_noun jaq;
     jmp_buf buf_f;
@@ -512,14 +508,12 @@ u2_cm_bail(c3_l how_l)
     //
     jaq = u2_cm_wail();
 
-    fprintf(stderr, "bail c\r\n");
     // Reset the old action trace.
     {
       u2z(u2_wrac_at(u2_Wire, duz.don));
       u2_wrac_at(u2_Wire, duz.don) = u2_kite_don(kit_r);
     }
 
-    fprintf(stderr, "bail d\r\n");
     // Copy out the jump buffer; free the old kite.
     {
       memcpy((void *)buf_f,
@@ -530,12 +524,9 @@ u2_cm_bail(c3_l how_l)
       u2_rl_rfree(u2_Wire, kit_r);
     }
     
-    fprintf(stderr, "bail e\r\n");
-
     // Longjmp with the how-trace pair.  XX: no workee with 64-bit nouns.
     //
     {
-      fprintf(stderr, "about to longjmp\r\n");
       _longjmp(buf_f, u2nc(how_l, jaq));
     }
   }

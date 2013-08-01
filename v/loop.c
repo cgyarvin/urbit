@@ -74,10 +74,30 @@ _lo_signal_handle_over(int emergency, stackoverflow_context_t scp)
 }
 
 static void
-_lo_signal_handle_intr(int x)
+_lo_signal_handle_term(int x)
 {
   if ( !u2_Critical ) {
+    Sigcause = sig_terminate;
+    u2_Host.liv = u2_no;
+    longjmp(Signal_buf, 1);
+  }
+}
+
+static void
+_lo_signal_handle_intr(int x)
+{
+  fprintf(stderr, "interrupt %d\r\n", u2_Critical);
+  if ( !u2_Critical ) {
     Sigcause = sig_interrupt;
+    longjmp(Signal_buf, 1);
+  }
+}
+
+static void
+_lo_signal_handle_alrm(int x)
+{
+  if ( !u2_Critical ) {
+    Sigcause = sig_timer;
     longjmp(Signal_buf, 1);
   }
 }
@@ -88,7 +108,18 @@ static void
 _lo_signal_done()
 {
   signal(SIGINT, SIG_IGN);
+  signal(SIGTERM, SIG_IGN);
+  signal(SIGVTALRM, SIG_IGN);
+
   stackoverflow_deinstall_handler();
+  {
+    struct itimerval itm_u;
+
+    timerclear(&itm_u.it_interval);
+    timerclear(&itm_u.it_value);
+
+    setitimer(ITIMER_VIRTUAL, &itm_u, 0);
+  }
 }
 
 /* _lo_signal_deep(): start deep processing; set timer for sec_w or 0.
@@ -96,13 +127,20 @@ _lo_signal_done()
 static void
 _lo_signal_deep(c3_w sec_w)
 {
-  if ( -1 == stackoverflow_install_handler
-      (_lo_signal_handle_over, Sigstk, SIGSTKSZ) )
-  {
-    fprintf(stderr, "_lo_signal_handle_over: install failed\n");
-    exit(1);
-  }
+  stackoverflow_install_handler(_lo_signal_handle_over, Sigstk, SIGSTKSZ);
   signal(SIGINT, _lo_signal_handle_intr);
+  signal(SIGTERM, _lo_signal_handle_term);
+
+  {
+    struct itimerval itm_u;
+
+    timerclear(&itm_u.it_interval);
+    itm_u.it_value.tv_sec = sec_w;
+    itm_u.it_value.tv_usec = 0;
+
+    setitimer(ITIMER_VIRTUAL, &itm_u, 0);
+  }
+  signal(SIGVTALRM, _lo_signal_handle_alrm);
 }
 
 /* u2_loop_signal_memory(): end computation for out-of-memory.
@@ -206,6 +244,34 @@ _lo_time(u2_reck*         rec_u,
     case c3__ames: u2_ames_io_time(rec_u, tim_u); break;
     case c3__save: u2_save_io_time(rec_u, tim_u); break;
     case c3__unix: u2_unix_io_time(rec_u, tim_u); break;
+  }
+} 
+
+/* _lo_sign(): process signal.
+*/
+static void
+_lo_sign(u2_reck*          rec_u,
+         struct ev_signal* sil_u,
+         u2_noun           how)
+{
+  switch ( how ) {
+    default: c3_assert(0); break;
+
+    case c3__unix: u2_unix_io_sign(rec_u, sil_u); break;
+  }
+} 
+
+/* _lo_stat(): process filesystem change.
+*/
+static void
+_lo_stat(u2_reck*        rec_u,
+         struct ev_stat* sat_u,
+         u2_noun         how)
+{
+  switch ( how ) {
+    default: c3_assert(0); break;
+
+    case c3__unix: u2_unix_io_stat(rec_u, sat_u); break;
   }
 } 
 
@@ -601,7 +667,7 @@ _lo_sure(u2_reck* rec_u, u2_noun ovo, u2_noun vir, u2_noun cor)
 /* _lo_lame(): handle an application failure.
 */
 static void
-_lo_lame(u2_reck* rec_u, u2_noun ovo, u2_noun tan)
+_lo_lame(u2_reck* rec_u, u2_noun ovo, u2_noun why, u2_noun tan)
 {
   u2_noun bov, gon;
 
@@ -611,13 +677,14 @@ _lo_lame(u2_reck* rec_u, u2_noun ovo, u2_noun tan)
   //  to prevent timing attacks, but isn't right now.  To deal
   //  with a crypto failure, just drop the packet.
   //
-  if ( c3__hear == u2h(u2t(ovo)) ) {
+  if ( (c3__exit == why) && (c3__hear == u2h(u2t(ovo))) ) {
     _lo_punt(rec_u, 2, u2k(tan));
 
     bov = u2nc(u2k(u2h(ovo)), u2nc(c3__hole, u2k(u2t(u2t(ovo)))));
+    u2z(why);
   }
   else {
-    bov = u2nc(u2k(u2h(ovo)), u2nc(c3__crud, u2k(tan)));
+    bov = u2nc(u2k(u2h(ovo)), u2nt(c3__crud, why, u2k(tan)));
   }
   u2z(ovo); 
 
@@ -713,12 +780,17 @@ _lo_nick(u2_reck* rec_u, u2_noun vir, u2_noun cor)
 static void
 _lo_punk(u2_reck* rec_u, u2_noun ovo)
 {
+  c3_w sec_w;
   u2_noun gon;
 
-  gon = _lo_soft(rec_u, 0, u2_reck_poke, u2k(ovo));
+  if ( c3__term == u2h(u2t(u2h(ovo))) ) {
+    sec_w = 0;
+  } else sec_w = 5;
+
+  gon = _lo_soft(rec_u, sec_w, u2_reck_poke, u2k(ovo));
 
   if ( u2_blip != u2h(gon) ) {
-    _lo_lame(rec_u, ovo, u2k(u2t(gon)));
+    _lo_lame(rec_u, ovo, u2k(u2h(gon)), u2k(u2t(gon)));
   }
   else {
     u2_noun vir = u2k(u2h(u2t(gon)));
@@ -726,7 +798,7 @@ _lo_punk(u2_reck* rec_u, u2_noun ovo)
     u2_noun nug = _lo_nick(rec_u, vir, cor);
 
     if ( u2_blip != u2h(nug) ) {
-      _lo_lame(rec_u, ovo, u2k(u2t(nug)));
+      _lo_lame(rec_u, ovo, u2k(u2h(nug)), u2k(u2t(nug)));
       u2z(nug);
     } 
     else {
@@ -771,6 +843,8 @@ u2_lo_call(u2_reck*        rec_u,
   u2_bean inn = (revents & EV_READ) ? u2_yes : u2_no;
   u2_bean out = (revents & EV_WRITE) ? u2_yes : u2_no;
   u2_bean tim = (revents & EV_TIMEOUT) ? u2_yes : u2_no;
+  u2_bean sig = (revents & EV_SIGNAL) ? u2_yes : u2_no;
+  u2_bean sat = (revents & EV_STAT) ? u2_yes : u2_no;
 
   _lo_stop(rec_u, lup_u);
 
@@ -803,6 +877,14 @@ u2_lo_call(u2_reck*        rec_u,
 
     if ( u2_yes == tim ) {
       _lo_time(rec_u, wev_u, how);
+    }
+
+    if ( u2_yes == sig ) {
+      _lo_sign(rec_u, wev_u, how);
+    }
+
+    if ( u2_yes == sat ) {
+      _lo_stat(rec_u, wev_u, how);
     }
 
     //  process actions

@@ -1,7 +1,7 @@
 !:
 ::  /=main=/bin/solid/hoon
 ::
-=>  .(- [who=`@p`-< how=`path`->])
+=>  .(- `[who=@p how=path]`-)
 |=  [est=time eny=@uw]
 |=  arg=*
 =+  ^=  lok  ^-  case

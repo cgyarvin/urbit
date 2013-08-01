@@ -26,6 +26,9 @@
 static void _lo_unix(struct ev_loop *lup_u, struct ev_timer* tim_u, c3_i rev_i)
   { u2_lo_call(u2_Host.arv_u, lup_u, tim_u, c3__unix, rev_i); }
 
+static void _lo_sign(struct ev_loop *lup_u, struct ev_signal* sil_u, c3_i rev_i)
+  { u2_lo_call(u2_Host.arv_u, lup_u, sil_u, c3__unix, rev_i); }
+
 /* _unix_hot_gain(): enter sync, syncing out iff sow == yes.
 */
 static struct _u2_uhot*
@@ -115,6 +118,26 @@ u2_unix_io_init(u2_reck* rec_u)
 
   ev_timer_init(&unx_u->tim_u, _lo_unix, 10000.0, 0.);
   unx_u->alm = u2_no;
+  unx_u->sig_u = 0;
+
+  {
+    u2_usig* sig_u;
+
+    sig_u = malloc(sizeof(u2_usig));
+    ev_signal_init(&sig_u->sil_u, _lo_sign, SIGTERM);
+
+    sig_u->nex_u = unx_u->sig_u;
+    unx_u->sig_u = sig_u;
+  }
+  {
+    u2_usig* sig_u;
+
+    sig_u = malloc(sizeof(u2_usig));
+    ev_signal_init(&sig_u->sil_u, _lo_sign, SIGWINCH);
+
+    sig_u->nex_u = unx_u->sig_u;
+    unx_u->sig_u = sig_u;
+  }
 
   // u2_unix_refresh_root(rec_u, u2_no);
 }
@@ -137,6 +160,14 @@ u2_unix_io_spin(u2_reck*        rec_u,
   if ( u2_yes == unx_u->alm ) {
     ev_timer_start(lup_u, &unx_u->tim_u);
   }
+
+  {
+    u2_usig* sig_u;
+
+    for ( sig_u = unx_u->sig_u; sig_u; sig_u = sig_u->nex_u ) {
+      ev_signal_start(lup_u, &sig_u->sil_u);
+    }
+  }
 }
 
 /* u2_unix_io_stop(): stop unix servers.
@@ -149,6 +180,14 @@ u2_unix_io_stop(u2_reck*        rec_u,
 
   if ( u2_yes == unx_u->alm ) {
     ev_timer_stop(lup_u, &unx_u->tim_u);
+  }
+
+  {
+    u2_usig* sig_u;
+
+    for ( sig_u = unx_u->sig_u; sig_u; sig_u = sig_u->nex_u ) {
+      ev_signal_stop(lup_u, &sig_u->sil_u);
+    }
   }
 }
 
@@ -188,4 +227,25 @@ u2_unix_io_time(u2_reck*         rec_u,
     (rec_u,
      u2nt(c3__gold, c3__clay, u2_nul),
      u2nc(c3__wake, u2_nul));
+}
+
+
+/* u2_unix_io_stat(): fs event on storage.
+*/
+void
+u2_unix_io_stat(u2_reck*        rec_u,
+                struct ev_stat* sat_u)
+{
+}
+
+/* u2_unix_io_sign(): signal event.
+*/
+void
+u2_unix_io_sign(u2_reck*          rec_u,
+                struct ev_signal* sil_u)
+{
+  switch ( sil_u->signum ) {
+    case SIGTERM: u2_Host.liv = u2_no; break;
+    case SIGWINCH: u2_term_ef_winch(rec_u); break;
+  }
 }

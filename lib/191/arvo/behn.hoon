@@ -383,7 +383,7 @@
         ?-  -.ton
           %0  [[~ p.ton] +>]
           %1  [~ (glum ((list path) p.ton) s.orb)]
-          %2  [~ (gram(orb [~ ~ ~ %r ~]) ~ [%crud p.ton])]
+          %2  [~ (gram(orb [~ ~ ~ %r ~]) ~ [%crud %exit p.ton])]
         ==
       ::
       ++  grid                                          ::  process result
@@ -392,7 +392,7 @@
         ?-  -.ton
           %0  (fun p.ton)
           %1  (glum ((list path) p.ton) s.orb)
-          %2  (gram(orb [~ ~ ~ %r ~]) ~ [%crud p.ton])
+          %2  (gram(orb [~ ~ ~ %r ~]) ~ [%crud %exit p.ton])
         ==
       ::
       ++  grin                                          ::  process result
@@ -401,7 +401,7 @@
         ?-  -.ton
           %0  (haul (fret p.ton))
           %1  (glum ((list path) p.ton) hog)
-          %2  (gram(orb [~ ~ ~ %r ~]) ~ [%crud p.ton])
+          %2  (gram(orb [~ ~ ~ %r ~]) ~ [%crud %exit p.ton])
         ==
       ::
       ++  grip                                          ::  step to completion
@@ -609,8 +609,8 @@
             %cs  +>.^$(cws p.gud)
             %cd  +>.^$(cwd p.gud)
             %de  (gram ~ %note '#' q.gud)
-            %ha  (gram ~ %crud [p.gud ~])
-            %ho  (gram ~ %crud p.gud)
+            %ha  (gram ~ %crud %soft [p.gud ~])
+            %ho  (gram ~ %crud %soft p.gud)
             %la  (gram ~ %talk p.gud)
             %lo  (gran (turn p.gud |=(a=tank [~ %talk a])))
             %mu  !!

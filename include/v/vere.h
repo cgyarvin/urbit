@@ -231,12 +231,20 @@
         struct _u2_uhot* nex_u;             //  internal list
       } u2_uhot;
 
-    /* u2_unix: clay support system
+    /* u2_usig: receive signals.
+    */
+      typedef struct _u2_usig {
+        struct ev_signal sil_u;
+        struct _u2_usig* nex_u;
+      } u2_usig;
+
+    /* u2_unix: clay support system, also 
     */
       typedef struct _u2_unix {
         struct ev_timer tim_u;              //  clay timer
         u2_bean         alm;                //  alarm
         u2_uhot*        hot_u;              //  host state
+        u2_usig*        sig_u;              //  signal list
       } u2_unix;
 
     /* u2_utfo: unix terminfo strings.
@@ -833,6 +841,11 @@
         u2_term_ef_boil(u2_reck* rec_u,
                         c3_l     ono_l);
 
+      /* u2_term_ef_winch(): window change.
+      */
+        void
+        u2_term_ef_winch(u2_reck* rec_u);
+
       /* u2_term_ef_bake(): initial effects for new server.
       */
         void
@@ -1026,11 +1039,23 @@
         u2_unix_io_poll(u2_reck*        rec_u,
                         struct ev_loop* lup_u);
 
-      /* u2_unix_io_time(): time event on storage.
+      /* u2_unix_io_time(): timer event on storage.
       */
         void
         u2_unix_io_time(u2_reck*         rec_u,
                         struct ev_timer* tim_u);
+
+      /* u2_unix_io_stat(): fs event on storage.
+      */
+        void
+        u2_unix_io_stat(u2_reck*        rec_u,
+                        struct ev_stat* sat_u);
+
+      /* u2_unix_io_sign(): signal event.
+      */
+        void
+        u2_unix_io_sign(u2_reck*          rec_u,
+                        struct ev_signal* sil_u);
 
       
     /**  HTTP, new style.
