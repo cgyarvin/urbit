@@ -843,7 +843,9 @@ u2_reck_poke(u2_reck* rec_u, u2_noun ovo)
 void
 u2_reck_sync(u2_reck* rec_u)
 {
+#if 0
   u2_reck_plow(rec_u, u2_sync_reck(rec_u));
+#endif
 }
 
 /* u2_reck_boot(): boot the reck engine (unprotected).

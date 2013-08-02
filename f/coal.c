@@ -270,6 +270,14 @@ u2_ci_string(const c3_c* a_c)
   return u2_bn_string(u2_Wire, a_c);
 }
 
+/* u2_ci_mp(): construct atom from GMP.  Caller transfers a_mp.
+*/
+u2_atom
+u2_ci_mp(mpz_t a_mp)
+{
+  return u2_rl_mp(u2_Wire, a_mp);
+}
+
 /* u2_ci_tape(): from a C string, to a list of bytes.
 */
 u2_atom

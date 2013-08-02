@@ -277,7 +277,7 @@
         ==
       ::
           %crud                                         ::  error trace
-        ::  =>  +.$  (fume '!' %leaf (trip p.fav))
+        =.  q.fav  [[%leaf (trip p.fav)] q.fav]
         |-  ^+  +.^$
         ?~  q.fav  +.^$
         (fume:$(q.fav t.q.fav) '!' i.q.fav)

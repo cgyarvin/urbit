@@ -205,8 +205,10 @@
         struct ev_stat   was_u;             //  stat watcher
         u2_bean          non;               //  always u2_no
         u2_bean          dry;               //  ie, unmodified
-        struct _u2_udir* dir_u;             //  in directory
-        mpz_t            ash_mp;            //  sham
+        c3_c*            pax_c;             //  absolute path
+        struct _u2_udir* par_u;             //  in directory
+        c3_c*            dot_c;             //  extension point or 0
+        mpz_t            mod_mp;            //  mtime as @da
         struct _u2_ufil* nex_u;             //  internal list
       } u2_ufil;
 
@@ -350,6 +352,7 @@
       typedef struct _u2_opts {
         c3_c*   cpu_c;
         c3_c*   imp_c;
+        c3_c*   hom_c; 
         c3_w    kno_w;
         u2_bean abo;
         u2_bean gab;
@@ -1011,6 +1014,11 @@
 
     /**  Storage, new school.
     **/
+      /* u2_unix_ef_look(): update filesystem.
+      */
+        void
+        u2_unix_ef_look(u2_reck* rec_u);
+
       /* u2_unix_io_init(): initialize storage.
       */
         void 

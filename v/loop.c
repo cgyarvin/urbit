@@ -86,7 +86,6 @@ _lo_signal_handle_term(int x)
 static void
 _lo_signal_handle_intr(int x)
 {
-  fprintf(stderr, "interrupt %d\r\n", u2_Critical);
   if ( !u2_Critical ) {
     Sigcause = sig_interrupt;
     longjmp(Signal_buf, 1);
@@ -148,7 +147,9 @@ _lo_signal_deep(c3_w sec_w)
 void
 u2_loop_signal_memory()
 {
-  u2_cm_bail(c3__full);
+  fprintf(stderr, "\r\nout of memory\r\n");
+  Sigcause = sig_memory;
+  longjmp(Signal_buf, 1);
 }
 
 /* _lo_init(): initialize I/O across the process.
@@ -863,6 +864,10 @@ u2_lo_call(u2_reck*        rec_u,
     //
     u2_reck_time(rec_u);
 
+    //  XX poll the filesystem
+    //
+    u2_unix_ef_look(rec_u);
+
     //  process input on this socket
     //
     if ( u2_yes == inn ){
@@ -900,6 +905,7 @@ u2_lo_call(u2_reck*        rec_u,
     if ( u2_no == u2_Host.liv ) {
       //  direct save and die
       //
+      u2_cm_purge();
       u2_loom_save(rec_u->ent_w);
       _lo_exit(rec_u);
 
