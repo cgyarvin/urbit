@@ -1,0 +1,4 @@
+name: Urbit Documentation
+lsi: false
+markdown: redcarpet
+pygments: true
