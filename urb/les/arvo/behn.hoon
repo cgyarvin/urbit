@@ -537,9 +537,9 @@
             =+  :*  mog=`path`~[hox %main (snag 2 pax)] 
                     rim=(scag 2 pax)
                 ==
-            :*  (weld (scag 3 pax) `path`[%con ~])
-                (weld mog `path`[%nat rim])
-                (turn mod |=(a=@tas (weld mod `path`[%alt a rim])))
+            :~  (weld (scag 3 pax) `path`[%con ~])
+                ::  (weld mog `path`[%nat rim])
+                ::  (turn mod |=(a=@tas (weld mod `path`[%alt a rim])))
             ==
         =+  sur=(scag 3 pax)
         =+  boy=(grub pax)
