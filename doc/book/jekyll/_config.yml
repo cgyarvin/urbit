@@ -1,4 +1,0 @@
-name: Urbit Documentation
-port: 4000
-markdown: redcarpet
-pygments: true
