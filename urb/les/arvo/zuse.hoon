@@ -884,7 +884,7 @@
               [%tell p=(list ,@t)]                      ::  dump lines
               [%text p=tape]                            ::  talk leaf
               [%that p=@ud q=love]                      ::  cooked htresp
-              [%thee p=@ud q=scud r=hate]               ::  cooked htreq
+              [%thee p=@ud q=scab r=cred s=moth]        ::  cooked htreq
               [%them p=(unit hiss)]                     ::  internal client req
               [%they p=@ud q=httr]                      ::  response to %them
               [%this p=? q=@ud r=httq]                  ::  secure/session/req
@@ -933,7 +933,7 @@
               kyq=(unit coal)                           ::  app customization
               gam=(unit coal)                           ::  app image
           ==                                            ::
-++  cred  ,[p=logo q=(map ,@tas ,[p=@da q=@ta])]        ::  client credentials
+++  cred  ,[p=? q=logo q=oryx r=(unit ship)]            ::  client credentials
 ++  cult  (map duct rave)                               ::  subscriptions
 ++  deed  ,[p=@ q=step]                                 ::  signature, stage
 ++  dock                                                ::  link record
@@ -1115,7 +1115,7 @@
 ++  newt  ?(%boot %kick %mess %slay %wake)              ::  lifecycle events
 ++  nook                                                ::  common note
           $%  [%eg p=riot]                              ::  simple result
-              [%ht p=scab q=cred r=moth]                ::  http request
+              [%ht p=@ud q=scab r=cred s=moth]          ::  http request
               [%ly p=newt q=tape]                       ::  lifecycle event
               [%up p=@t]                                ::  prompt response
               [%oy p=ship q=@ta r=@ud s=(unit ,*)]      ::  incoming request
@@ -1238,9 +1238,8 @@
           ==                                            ::
 ++  salt  ,@uv                                          ::  entropy
 ++  scab                                                ::  logical request 
-          $:  p=oryx                                    ::  CSRF secret
+          $:  p=scud                                    ::  routed url
               q=quay                                    ::  query
-              r=scud                                    ::  url regenerator
           ==                                            ::
 ++  scad  ,[p=@p q=@da r=@uw s=cred]                    ::  fab context, outer
 ++  scar                                                ::  logical url
@@ -1249,7 +1248,7 @@
               r=(unit ,@ta)                             ::  extension
               s=path                                    ::  detour
           ==                                            ::
-++  scud  ,[p=pact q=scar]                              ::  full dispatch
+++  scud  ,[p=pact q=scar]                              ::  processed dispatch
 ++  seam  ,[p=@ta q=pact r=scar]                        ::  service route
 ++  shed                                                ::  packet pump
           $:  $:  niq=@ud                               ::  count in queue

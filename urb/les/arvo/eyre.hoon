@@ -239,7 +239,7 @@
         [[p.i.gew i.woy] mor]
     ?~  faw  [[[~ hen [%thou 404 ~ ~]] ~] ..^$]
     ::  ?^  t.faw  [[[~ hen [%thou 500 ~ ~]] ~] ..^$]
-    :-  [[~ p.i.faw [%thee p.giv q.i.faw het]] ~]
+    :-  [[~ p.i.faw `card`[%thee p.giv [q.i.faw r.pul] *cred r.het]] ~]
     ..^$(p.giv +(p.giv), q.giv (~(put by q.giv) p.giv hen))
   ==
 ::

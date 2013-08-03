@@ -93,11 +93,6 @@
         q.god  (~(put by q.god) p.god *gyre)
       ==
     (fi gyp hen gyr)
-  :: 
-  ++  heat                                              ::    heat:be
-    |=  [hen=duct het=hate]                             ::  dispatch http req
-    ^-  [p=(list move) q=brat]
-    !!
   ::
   ++  lead                                              ::    lead:be
     |=  [tea=wire hen=duct]                             ::  route note
@@ -134,7 +129,7 @@
              =>  .(fog (weld t.fog `(list ,@ud)`[i.fog ~]))
              [[[[~ %iron who] hen [%helo prot]] ~] +<.^^$]
       %noop  [~ +<.^^$]
-      %thee  (heat hen r.fav)
+      %thee  abet:lash:(lean tea hen fav)
       %went  abet:lash:(lean tea hen fav)
       %writ  abet:lash:(loam tea hen +.fav)
       %wart  (lion hen +.fav)
@@ -534,12 +529,12 @@
         |=  [mod=(list ,@tas) pax=path]
         ^-  [(unit coal) _+>]
         =+  ^=  paw  ^-  (list path)
-            =+  :*  mog=`path`~[hox %main (snag 2 pax)] 
+            =+  :*  mog=`path`~[hox %main wen] 
                     rim=(scag 2 pax)
                 ==
-            :~  (weld (scag 3 pax) `path`[%con ~])
-                ::  (weld mog `path`[%nat rim])
-                ::  (turn mod |=(a=@tas (weld mod `path`[%alt a rim])))
+            :*  (weld (scag 3 pax) `path`[%con ~])
+                (weld mog `path`[%nat rim])
+                (turn mod |=(a=@tas (weld mod `path`[%alt a rim])))
             ==
         =+  sur=(scag 3 pax)
         =+  boy=(grub pax)
@@ -726,7 +721,10 @@
             ?>  ?=(%writ -.fav)
             +>.$(+>.$ (glib lap [%eg +.fav]))
           ::
-              %ht  !!
+              %ht
+            ?>  ?=(%thee -.fav)
+            +>.$(+>.$ (glib lap [%ht +.fav]))
+          ::
               %up
             ?>  ?=(%line -.fav)
             +>.$(+>.$ (glib lap [%up +.fav]))
