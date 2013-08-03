@@ -270,6 +270,14 @@ u2_ci_string(const c3_c* a_c)
   return u2_bn_string(u2_Wire, a_c);
 }
 
+/* u2_ci_mp(): construct atom from GMP.  Caller transfers a_mp.
+*/
+u2_atom
+u2_ci_mp(mpz_t a_mp)
+{
+  return u2_rl_mp(u2_Wire, a_mp);
+}
+
 /* u2_ci_tape(): from a C string, to a list of bytes.
 */
 u2_atom
@@ -428,27 +436,37 @@ u2_cm_rind()
 static u2_noun
 _cm_jack(u2_noun old, u2_noun nuw)
 {
-  if ( nuw == old ) {
-    //  Old asserts of slightly dubious provenance.
-    //
-    if ( nuw != u2_nul ) {
-#if 0
-      if ( 2 != u2_rl_refs(u2_Wire, nuw) ) {
-        printf("nuw %x refs %d\n", nuw, u2_rl_refs(u2_Wire, nuw));
-      }
-      c3_assert(2 == u2_rl_refs(u2_Wire, nuw));
-#endif
-      u2z(nuw);
-    }
-    return u2_nul;
-  }
-  else {
-    c3_assert(u2_yes == u2du(nuw));
-    // c3_assert(1 == u2_rl_refs(u2_Wire, nuw));
+  u2_noun cur = nuw;
 
-    u2ft(nuw) = _cm_jack(old, u2ft(nuw));
-    return nuw;
+  if ( nuw == old ) {
+    u2z(old); return u2_nul;
   }
+  else while ( 1 ) {
+    if ( u2ft(cur) == old ) {
+      u2z(old);
+      u2ft(cur) = u2_nul;
+      
+      return nuw;
+    } else {
+      cur = u2ft(cur);
+    }
+  }
+}
+
+/* _cm_depth()
+*/
+static c3_w
+_cm_depth(u2_noun old, u2_noun nuw)
+{
+  c3_w dep_w = 0;
+
+  while ( nuw != old ) {
+    c3_assert(u2_yes == u2du(nuw)); 
+    nuw = u2t(nuw);
+
+    dep_w++;
+  }
+  return dep_w;
 }
 
 /* u2_cm_wail(): produce and reset the local trace, without bailing.
@@ -459,8 +477,10 @@ u2_cm_wail()
   u2_ray  kit_r = u2_wire_kit_r(u2_Wire);
   u2_noun old   = u2_kite_tax(u2_wire_kit_r(u2_Wire));
   u2_noun nuw   = u2_wire_tax(u2_Wire);
-  u2_noun jaq   = _cm_jack(old, nuw);
-  
+  u2_noun jaq;
+ 
+  jaq = _cm_jack(old, nuw);
+
   // c3_assert(1 == u2_rl_refs(u2_Wire, old));
   u2_wire_tax(u2_Wire) = old;
   u2_kite_tax(kit_r) = u2k(old);

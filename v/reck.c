@@ -585,6 +585,13 @@ _reck_kick_term(u2_reck* rec_u, u2_noun pox, c3_l tid_l, u2_noun fav)
       u2z(pox); u2z(fav); return u2_yes;
     } break;
 
+    case c3__logo: 
+    {
+      u2_Host.liv = u2_no;
+
+      u2z(pox); u2z(fav); return u2_yes;
+    } break;
+
     case c3__init: p_fav = u2t(fav);
     {
       rec_u->own = u2nc(u2k(p_fav), rec_u->own);
@@ -836,7 +843,9 @@ u2_reck_poke(u2_reck* rec_u, u2_noun ovo)
 void
 u2_reck_sync(u2_reck* rec_u)
 {
+#if 0
   u2_reck_plow(rec_u, u2_sync_reck(rec_u));
+#endif
 }
 
 /* u2_reck_boot(): boot the reck engine (unprotected).

@@ -540,6 +540,8 @@ u2_rl_dump(u2_ray ral_r)
   }
 }
 
+extern void u2_loop_signal_memory(void);
+
 /* _rl_bloq_grab():
 **
 **  Allocate `len_w` words of memory on `ral_r`, or return 0.
@@ -552,7 +554,7 @@ _rl_bloq_grab(u2_ray ral_r,
     /* Sand allocation - no box, no overhead.
     */
     if ( u2_no == u2_rl_open(ral_r, len_w) ) {
-      u2_ho_warn_here();
+      u2_loop_signal_memory();
       return 0;
     }
     else { 
@@ -589,6 +591,9 @@ _rl_bloq_grab(u2_ray ral_r,
             /* Nothing in top free list.  Chip away at the hat.
             */
             if ( u2_no == u2_rl_open(ral_r, siz_w) ) {
+#if 1
+              u2_loop_signal_memory();
+#else
               /* Yo, our rail is totally full.
               */
               printf("lose: siz_w: %d sel_w: %d\n", siz_w, sel_w);
@@ -600,6 +605,7 @@ _rl_bloq_grab(u2_ray ral_r,
               //  A bunch of testing is needed to make this actually work.
               // return 0;    
               c3_assert(0);
+#endif
             }
             else { 
               box_r = u2_rail_hat_r(ral_r);
@@ -1342,7 +1348,7 @@ u2_rl_copy(u2_ray ral_r,
 
       if ( u2_dog_is_pom(fiz) ) {
         if ( u2_no == u2_rl_open(ral_r, c3_wiseof(u2_loom_cell)) ) {
-          u2_ho_warn_here();
+          u2_loop_signal_memory();
 
           return u2_none;
         }
@@ -1351,12 +1357,12 @@ u2_rl_copy(u2_ray ral_r,
           u2_ray nov_r;
 
           if ( u2_none == (hed = u2_rl_copy(ral_r, *u2_at_pom_hed(fiz))) ) {
-            u2_ho_warn_here();
+            u2_loop_signal_memory();
 
             return u2_none;
           }
           if ( u2_none == (tel = u2_rl_copy(ral_r, *u2_at_pom_tel(fiz))) ) {
-            u2_ho_warn_here();
+            u2_loop_signal_memory();
 
             u2_rl_lose(ral_r, hed);
             return u2_none;
@@ -1364,7 +1370,7 @@ u2_rl_copy(u2_ray ral_r,
 
           nov_r = _rl_bloq_grab(ral_r, c3_wiseof(u2_loom_cell));
           if ( 0 == nov_r ) {
-            u2_ho_warn_here();
+            u2_loop_signal_memory();
 
             u2_rl_lose(ral_r, hed);
             u2_rl_lose(ral_r, tel);
@@ -1385,7 +1391,7 @@ u2_rl_copy(u2_ray ral_r,
 
         nov_r = _rl_bloq_grab(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
         if ( 0 == nov_r ) {
-          u2_ho_warn_here();
+          u2_loop_signal_memory();
 
           return u2_none;
         }
@@ -1635,7 +1641,7 @@ u2_rl_take(u2_ray  ral_r,
   } else {
     if ( u2_dog_is_pom(fiz) ) {
       if ( u2_no == u2_rl_open(ral_r, c3_wiseof(u2_loom_cell)) ) {
-        u2_ho_warn_here();
+        u2_loop_signal_memory();
 
         return u2_none;
       }
@@ -1645,12 +1651,12 @@ u2_rl_take(u2_ray  ral_r,
         u2_noun nov;
 
         if ( u2_none == (hed = u2_rl_take(ral_r, *u2_at_pom_hed(fiz))) ) {
-          u2_ho_warn_here();
+          u2_loop_signal_memory();
 
           return u2_none;
         }
         if ( u2_none == (tel = u2_rl_take(ral_r, *u2_at_pom_tel(fiz))) ) {
-          u2_ho_warn_here();
+          u2_loop_signal_memory();
 
           u2_rl_lose(ral_r, hed);
           return u2_none;
@@ -1658,7 +1664,7 @@ u2_rl_take(u2_ray  ral_r,
 
         nov_r = _rl_bloq_grab(ral_r, c3_wiseof(u2_loom_cell));
         if ( 0 == nov_r ) {
-          u2_ho_warn_here();
+          u2_loop_signal_memory();
 
           u2_rl_lose(ral_r, hed);
           u2_rl_lose(ral_r, tel);
@@ -1681,7 +1687,7 @@ u2_rl_take(u2_ray  ral_r,
 
       nov_r = _rl_bloq_grab(ral_r, (len_w + c3_wiseof(u2_loom_atom)));
       if ( 0 == nov_r ) {
-        u2_ho_warn_here();
+        u2_loop_signal_memory();
 
         return u2_none;
       }
@@ -1880,11 +1886,11 @@ u2_rl_bytes(u2_ray      ral_r,
     c3_w len_w = (a_w + 3) >> 2;
 
     if ( len_w >= (1 << 27) ) {
-      u2_ho_warn_here();
+      u2_loop_signal_memory();
       return u2_none;
     }
     if ( u2_no == u2_rl_open(ral_r, (len_w + c3_wiseof(u2_loom_atom))) ) {
-      u2_ho_warn_here();
+      u2_loop_signal_memory();
       return u2_none;
     }
     else { 
@@ -2334,7 +2340,7 @@ u2_rl_words(u2_ray      ral_r,
   */
   {
     if ( a_w >= (1 << 27) ) {
-      u2_ho_warn_here();
+      u2_loop_signal_memory();
       return u2_none;
     }
     if ( u2_no == u2_rl_open(ral_r, (a_w + c3_wiseof(u2_loom_atom))) ) {

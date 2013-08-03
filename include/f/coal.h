@@ -562,6 +562,11 @@
   ***    all argument nouns, and *retain* ownership of argument pointers.
   ***    Callers *produce* a new result which the caller must release.
   **/
+    /* u2_ci_mp(): construct atom from GMP.  Caller transfers a_mp.
+    */
+      u2_atom
+      u2_ci_mp(mpz_t a_mp);
+
     /* u2_ci_bytes():
     **
     **   Construct `a` bytes from `b`, LSB first, as an atom.

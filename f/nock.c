@@ -114,6 +114,7 @@ _nock_hint(u2_noun  zep,                                          //  transfer
     default: u2z(zep); u2z(hod); 
              return pon ? _nock_mool(bus, nex, pon) : _nock_cool(bus, nex);
 
+    case c3__lose:
     case c3__yelp: 
     case c3__bean: 
     case c3__mean:

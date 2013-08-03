@@ -42,8 +42,8 @@ _loom_sigsegv_handler(void* adr_v, c3_i ser_i)
       if ( (pag_w >= ceg_u->bot_w) && 
            (win_w=(pag_w - ceg_u->bot_w)) < ceg_u->len_w )
       {
-        if ( win_w >= ceg_u->num_w ) {
-          ceg_u->num_w = win_w + 1;
+        if ( win_w >= ceg_u->pgs_w ) {
+          ceg_u->pgs_w = win_w + 1;
         }
         break;
       }
@@ -83,7 +83,10 @@ _loom_write(c3_i fid_i, void* buf_w, c3_w len_w)
     perror("huh?");
     exit(1);
   }
-  else return u2_yes;
+  else {
+    fsync(fid_i);   //  for what it's worth
+    return u2_yes;
+  }
 //  return ((4 * len_w) == write(fid_i, buf_w, (4 * len_w))) ? u2_yes : u2_no;
 }
 
@@ -124,7 +127,7 @@ _loom_deploy(void)
         printf("deploy no b\n");
         return u2_no;
       }
-      ceg_u->num_w = 0;
+      ceg_u->pgs_w = chf_u.pgs_w;
     }
 
     /* Load data segment.
@@ -186,6 +189,10 @@ _loom_deploy(void)
         return u2_no;
       }
     }
+#if 0
+    fprintf(stderr, "load: %s bot_w %x, pgs_w %d, num_w %d\n",  
+            ceg_u->nam_c, chf_u.bot_w, chf_u.pgs_w, num_w);
+#endif
   }
   printf("loom: loaded %dMB\n", (num_w >> 6));
   return u2_yes;
@@ -197,6 +204,7 @@ u2_bean
 u2_loom_save(c3_w ent_w)
 {
   u2_cheg* ceg_u;
+  c3_w tot_w = 0;
 
   // uL(fprintf(uH, "# saving at event %u...\n", ent_w));
   u2_wr_check_save();
@@ -209,12 +217,12 @@ u2_loom_save(c3_w ent_w)
     chf_u.ent_w = ent_w;
     chf_u.ven_w = LoomVersion;
     chf_u.bot_w = ceg_u->bot_w;
-    chf_u.pgs_w = ceg_u->num_w;
- 
+    chf_u.pgs_w = ceg_u->pgs_w;
+
     /* Save data.
     */
     {
-      for ( i_w = 0; i_w < ceg_u->num_w; i_w++ ) {
+      for ( i_w = 0; i_w < ceg_u->pgs_w; i_w++ ) {
         c3_w pag_w  = ceg_u->bot_w + i_w;
         c3_w* mem_w = ((c3_w*)U2_OS_LoomBase) + (pag_w << LoomPageWords);
 
@@ -232,8 +240,13 @@ u2_loom_save(c3_w ent_w)
           num_w++;
         }
       }
-      ftruncate(ceg_u->dat_i, (ceg_u->num_w << (LoomPageWords + 2)));
+      ftruncate(ceg_u->dat_i, (ceg_u->pgs_w << (LoomPageWords + 2)));
     }
+
+#if 0
+    fprintf(stderr, "save: %s bot_w %x, pgs_w %d, num_w %d\r\n",  
+                     ceg_u->nam_c, chf_u.bot_w, chf_u.pgs_w, num_w);
+#endif
 
     /* Save control file.
     */
@@ -244,7 +257,7 @@ u2_loom_save(c3_w ent_w)
     }
     if ( u2_no == _loom_write(ceg_u->ctl_i, 
                               (u2_chit*)(LoomChem + ceg_u->bot_w),
-                              ceg_u->num_w) ) {
+                              ceg_u->pgs_w) ) {
       fprintf(stderr, "save no c\r\n");
       return u2_no;
     }
@@ -262,11 +275,20 @@ u2_loom_save(c3_w ent_w)
     for ( i_w = 0; i_w < ceg_u->len_w; i_w++ ) {
       LoomChem[i_w + ceg_u->bot_w].lif_e = u2_page_neat;
     }
-#if 0
-    uL(fprintf(uH, "#  %s: wrote %u blocks, %uMB\n", 
-          ceg_u->nam_c, num_w, (num_w >> 6)));
-#endif
+    tot_w += num_w;
   }
+
+  /* sync the mfer
+  */
+  for ( ceg_u = &LoomSegmentA; ceg_u; ceg_u = ceg_u->nex_u ) {
+    fcntl(ceg_u->ctl_i, F_FULLFSYNC); 
+    fcntl(ceg_u->dat_i, F_FULLFSYNC); 
+  }
+
+#if 0
+    uL(fprintf(uH, "loom: wrote %uMB\n", (tot_w >> 6)));
+#endif
+
   return u2_yes;
 }
 
@@ -304,7 +326,6 @@ u2_loom_load(void)
   else {
     munmap((c3_w*)U2_OS_LoomBase, (LoomAllPages << (LoomPageWords + 2)));
 
-    u2_loom_boot();
     return u2_no;
   }
 }

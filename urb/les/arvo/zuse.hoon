@@ -426,153 +426,6 @@
   %+  weld  tam
   ?~(att bod [' ' (xmla att bod)])
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::                section 3bC, JSON and XML             ::
-::
-++  deft                                                ::  import url path
-  |=  rax=(list ,@t)
-  |-  ^-  pork
-  ?~  rax
-    [~ ~]
-  ?~  t.rax
-    =+  den=(trip i.rax)
-    =+  ^=  vex
-      %-  %-  full
-          ;~(plug sym ;~(pose (stag ~ ;~(pfix dot sym)) (easy ~)))
-      [[1 1] (trip i.rax)]
-    ?~  q.vex
-      [~ [~(rent co %% %t i.rax) ~]]
-    [+.p.u.q.vex [-.p.u.q.vex ~]]
-  =+  pok=$(rax t.rax)
-  :-  p.pok
-  :_  q.pok
-  ?:(((sane %tas) i.rax) i.rax ~(rent co %% %t i.rax))
-::
-++  epur                                                ::  url/header parser
-  |%
-  ++  apat  (cook deft ;~(pfix fas (more fas smeg)))    ::  2396 abs_path
-  ++  auri
-    ;~  plug
-      ;~  plug
-        %+  sear
-          |=  a=@t 
-          ^-  (unit ,?)
-          ?+(a ~ %http [~ %|], %https [~ %&])
-        ;~(sfix scem ;~(plug col fas fas))
-        thor
-      ==
-      ;~(plug apat yque)
-    == 
-  ++  bite                                              ::  cookies (ours)
-    (most sem ;~(plug nuck:so ;~(pfix sem nuck:so))) 
-  ++  dlab                                              ::  2396 domainlabel
-    %+  sear
-      |=  a=@ta
-      ?.(=('-' (rsh 3 a (dec (met 3 a)))) [~ u=a] ~)
-    %+  cook  cass
-    ;~(plug aln (star alp))
-  ::
-  ++  fque  (cook crip (plus pquo))                     ::  normal query field
-  ++  pcar  ;~(pose pure pesc psub col pat)             ::  2396 path char
-  ++  pesc  ;~(pfix cen mes)                            ::  2396 escaped
-  ++  pold  (cold ' ' (just '+'))                       ::  old space code
-  ++  pque  ;~(pose pcar fas wut)                       ::  3986 query char
-  ++  pquo  ;~(pose pure pesc pold)                     ::  normal query char
-  ++  pure  ;~(pose aln hep dot cab sig)                ::  2396 unreserved
-  ++  psub  ;~  pose                                    ::  3986 sub-delims
-              zap  buc  pam  soq  pel  per 
-              tar  lus  com  sem  tis
-            ==
-  ++  scem                                              ::  2396 scheme
-    %+  cook  cass
-    ;~(plug alf (star ;~(pose aln lus hep dot)))
-  ::
-  ++  smeg  (cook crip (plus pcar))                     ::  2396 segment
-  ++  thor                                              ::  2396 host/port
-    %+  cook  |*(a=[* *] [+.a -.a])
-    ;~  plug
-      thos
-      ;~(pose (stag ~ ;~(pfix col dim:ag)) (easy ~))
-    ==
-  ++  thos                                              ::  2396 host, no local
-    ;~  plug
-      ;~  pose
-        %+  stag  %&
-        %+  sear                                        ::  LL parser weak here
-          |=  a=(list ,@t)
-          =+  b=(flop a)
-          ?>  ?=(^ b)
-          =+  c=(end 3 1 i.b)
-          ?.(&((gte c 'a') (lte c 'z')) ~ [~ u=b])
-        (most dot dlab)
-      ::
-        %+  stag  %|
-        =+  tod=(ape:ag ted:ab) 
-        %+  bass  256
-        ;~(plug tod (stun [3 3] ;~(pfix dot tod)))
-      ==
-    ==
-  ++  yque                                              ::  query ending
-    ;~  pose
-      ;~(pfix wut yquy)
-      (easy ~)
-    ==
-  ++  yquy                                              ::  query
-    %+  cook
-      |=  a=(list ,[p=@t q=@t])
-      (~(gas by *(map ,@t ,@t)) a)
-    ;~  pose                                            ::  proper query
-      %+  more
-        ;~(pose pam sem)
-      ;~(plug fque ;~(pfix tis fque))
-    ::
-      %+  cook                                          ::  funky query
-        |=(a=tape [[%% (crip a)] ~])
-      (star pque)
-    ==
-  ++  zest                                              ::  2616 request-uri
-    ;~  pose
-      (stag %& (cook |=(a=purl a) auri))
-      (stag %| ;~(plug apat yque))
-    ==
-  --
-++  ecco                                                ::  eat headers
-  |=  hed=(list ,[p=@t q=@t])
-  =+  mah=*math
-  |-  ^-  math
-  ?~  hed  mah
-  =+  cus=(cass (rip 3 p.i.hed))
-  =+  zeb=(~(get by mah) cus)
-  $(hed t.hed, mah (~(put by mah) cus ?~(zeb [q.i.hed ~] [q.i.hed u.zeb])))
-::
-++  hone                                                ::  host match
-  |=  [fro=host too=host]  ^-  ?
-  ?-    -.fro
-      |  =(too fro)
-      &
-    ?&  ?=(& -.too)
-        |-  ^-  ?
-        ?~  p.too  &
-        ?~  p.fro  |
-        ?:  !=(i.p.too i.p.fro)  |
-        $(p.too t.p.too, p.fro t.p.fro)
-    ==
-  ==
-::
-++  thin                                                ::  parse headers
-  |=  [sec=? req=httq]
-  ^-  hate
-  ::  ~&  [%thin-quri (trip q.req)]
-  =+  ryp=`quri`(rash q.req zest:epur)
-  =+  mah=(ecco r.req)
-  =+  ^=  pul  ^-  purl
-      ?-  -.ryp
-        &  ?>(=(sec p.p.p.ryp) p.ryp)
-        |  =+  hot=(~(get by mah) %host)
-           ?>  ?=([~ @ ~] hot)
-           [[sec (rash i.u.hot thor:epur)] p.ryp q.ryp]
-      ==
-  [pul *cred [p.req mah s.req]]
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                section 3bD, tree sync                ::
 ::
 ++  cure                                                ::  invert tree patch
@@ -588,7 +441,7 @@
   ^-  soba
   doz:(dist:ka:(cu arc) %c bus)
 ::
-++  cu  
+++  cu 
   |=  arc=arch                                          ::  filesystem tree
   =|  doz=soba                                          ::  changes in reverse
   |%
@@ -764,6 +617,11 @@
   ?~  two  one
   ?:((lth u.one u.two) one two)
 ::
+++  jump                                                ::  insert role
+  |=  [for=@tas pax=path]  ^-  path
+  ?>  ?=([@ @ @ *] pax)
+  [i.pax i.t.pax i.t.t.pax for t.t.t.pax]
+::
 ++  meat
   |=  kit=kite
   ^-  path
@@ -917,7 +775,7 @@
           ==                                            ::
 ++  blur  ,[p=@ud q=(unit bead) r=blot]                 ::  columns, prompt
 ++  boar                                                ::  execution instance
-          $%  [%n p=caul q=lath]                        ::  new/ready
+          $%  [%n p=claw q=lath]                        ::  new/ready
               [%r p=(unit worm)]                        ::  running/done
               [%t p=coal]                               ::  filter
           ==                                            ::
@@ -958,14 +816,15 @@
           ==                                            ::
 ++  card                                                ::  event
           $%  [%bbye ~]                                 ::  reset prompt
-              [%bind p=seat q=host]                     ::  bind http server
-              [%bund p=seat q=(list rout)]              ::  new http bind
+              [%band p=seat q=(list rout)]              ::  internal http bind
+              [%bind p=(unit seat) q=host]              ::  external http open
               [%belt p=belt]                            ::  terminal input
               [%blew p=blew]                            ::  terminal config
               [%blit p=(list blit)]                     ::  terminal output
               [%boot p=card]                            ::  christen terminal
+              [%born ~]                                 ::  new unix process
               [%cash p=@p q=buck]                       ::  civil license
-              [%crud p=(list tank)]                     ::  error with trace
+              [%crud p=@tas q=(list tank)]              ::  error with trace
               [%deem p=seat q=card]                     ::  external identity
               [%dire p=@tas q=dram]                     ::  apply directory
               [%dump p=(list ,@t)]                      ::  raw text lines
@@ -1012,11 +871,14 @@
               [%talk p=tank]                            ::  show on console
               [%tell p=(list ,@t)]                      ::  dump lines
               [%text p=tape]                            ::  talk leaf
-              [%that p=love]                            ::  cooked htresp
-              [%thee p=hate]                            ::  cooked htreq
-              [%thin p=httq]                            ::  insecure raw htreq
-              [%this p=httq]                            ::  secure raw htreq
+              [%that p=@ud q=love]                      ::  cooked htresp
+              [%thee p=@ud q=scud r=hate]               ::  cooked htreq
+              [%them p=(unit hiss)]                     ::  internal client req
+              [%they p=@ud q=httr]                      ::  response to %them
+              [%this p=? q=@ud r=httq]                  ::  secure/session/req
               [%thou p=httr]                            ::  raw http response
+              [%thug p=@p q=@p]                         ::  sign in client 
+              [%thus p=@ud q=(unit hiss)]               ::  http request
               [%tory p=(list ,@t)]                      ::  history dump
               [%veer p=@ta q=path r=@t]                 ::  install vane
               [%volt p=*]                               ::  upgrade kernel
@@ -1024,7 +886,7 @@
               [%wake ~]                                 ::  timer activate
               [%want p=seat q=@ta r=*]                  ::  outgoing request
               [%warp p=seat q=riff]                     ::  request
-              [%wart p=seat q=@ta r=@ud s=(unit ,*)]    ::  incoming request
+              [%wart p=seat q=@ta r=@ud s=(unit ,*)]    ::  incoming response
               [%warn p=tape]                            ::  system message
               [%went p=seat q=cape r=soap]              ::  outgoing reaction
               [%wipe ~]                                 ::  clean to sequence
@@ -1043,17 +905,22 @@
               heg=(map hand code)                       ::  proposed 
               qim=(map hand code)                       ::  inbound
           ==                                            ::
-++  caul  (unit ,[p=* q=(unit ,[p=path q=(unit)])])     ::  prestart
 ++  coal  ,*                                            ::  untyped vase
 ++  code  ,@uvI                                         ::  symmetric key
 ++  cone                                                ::  reconfiguration
-          $%  [0 p=gene]                                ::  set
-              [1 p=gene]                                ::  modify
-              [2 p=gene]                                ::  function
+          $%  [& p=gene]                                ::  transform
+              [| p=(list ,@tas)]                        ::  alter
           ==                                            ::
-++  conf  ,[p=(set ,@tas) q=(map ,@tas ,*)]             ::  bits and options
 ++  corp  ,[p=@t q=@t r=@tas]                           ::  name auth issuer
 ++  chum  ,@uvI                                         ::  hashed passcode
+++  claw  $:                                            ::  startup chain
+              joy=(unit coal)                           ::  local context
+              ran=(unit coal)                           ::  arguments
+              pux=(unit path)                           ::  execution path
+              jiv=(unit coal)                           ::  app configuration
+              kyq=(unit coal)                           ::  app customization
+              gam=(unit coal)                           ::  app image
+          ==                                            ::
 ++  cred  ,[p=logo q=(map ,@tas ,[p=@da q=@ta])]        ::  client credentials
 ++  cult  (map duct rave)                               ::  subscriptions
 ++  deed  ,[p=@ q=step]                                 ::  signature, stage
@@ -1112,7 +979,7 @@
               [%mx p=(list gift)]                       ::  batch gift
               [%ok p=disc q=nori]                       ::  save changes
               [%te p=(list ,@t)]                        ::  dump lines
-              [%th p=love]                              ::  http response
+              [%th p=@ud q=love]                        ::  http response
               [%va p=@tas q=(unit vase)]                ::  set/clear variable
               [%xx p=card]                              ::  apply card
               [%xy p=path q=card]                       ::  push card
@@ -1142,7 +1009,8 @@
           ==                                            ::
 ++  gyro  ,[p=@ud q=wire r=prod]                        ::  live prompt
 ++  hand  ,@uvH                                         ::  hash of code
-++  hate  ,[p=purl q=cred r=moth]                       ::  cooked request
+++  hate  ,[p=purl q=@p r=moth]                         ::  cooked request 
+++  hiss  ,[p=hart q=httq]                              ::  outbound request
 ++  hist  ,[p=@ud q=(list ,@t)]                         ::  depth texts
 ++  hook  path                                          ::  request origin
 ++  hart  ,[p=? q=(unit ,@ud) r=host]                   ::  http sec/port/host
@@ -1169,27 +1037,21 @@
               ==                                        ::
           ==                                            ::
 ++  lamp                                                ::  short path
-          $%  [0 p=@tas q=(unit ,@ta)]                  ::  micropath
-              [1 p=@tas q=(unit ,@ta) r=path]           ::  minipath
-              [2 p=@p q=@tas r=(unit ,@ta) s=path]      ::  foreign path
-              [3 p=gene]                                ::  full construction
+          $%  [& p=@tas]                                ::  auto
+              [| p=gene]                                ::  manual
           ==                                            ::
 ++  lane                                                ::  packet route
           $%  [%if p=@ud q=@if]                         ::  IP4/public UDP/addr
               [%is p=@ud q=(unit lane) r=@is]           ::  IPv6 w/alternates
               [%ix p=@da q=@ud r=@if]                   ::  IPv4 provisional
           ==                                            ::
-++  lark                                                ::  parsed command
-          $%  [%go p=(list lath)]                       ::  dump to console
-              [%no p=@tas]                              ::  unset a variable
-              [%so p=@tas q=gene]                       ::  set a variable 
-          ==                                            ::
+++  lark  (list lath)                                   ::  parsed command
 ++  lass  ?(%0 %1 %2)                                   ::  power increment
 ++  lath  $%                                            ::  pipeline stage
-              [& p=lass q=lamp r=cone s=gene]           ::  command
-              [| p=gene]                                ::  expression
+              [%0 p=lass q=lamp r=(list cone) s=gene]   ::  command
+              [%1 p=gene]                               ::  generator
+              [%2 p=gene]                               ::  filter
           ==                                            ::
-++  leek  ,[p=lass q=gene r=cone s=gene]                ::  app launch
 ++  lens  ?(%z %y %x %w)                                ::  repository view
 ++  lice  ,[p=seat q=buck]                              ::  full license
 ++  life  ,@ud                                          ::  regime number
@@ -1238,9 +1100,11 @@
 ++  mood  ,[p=care q=case r=path]                       ::  request in desk
 ++  moth  ,[p=meth q=math r=(unit octs)]                ::  http operation
 ++  name  ,[p=@t q=(unit ,@t) r=(unit ,@t) s=@t]        ::  first mid/nick last
+++  newt  ?(%boot %kick %mess %slay %wake)              ::  lifecycle events
 ++  nook                                                ::  common note
           $%  [%eg p=riot]                              ::  simple result
               [%ht p=scab q=cred r=moth]                ::  http request
+              [%ly p=newt q=tape]                       ::  lifecycle event
               [%up p=@t]                                ::  prompt response
               [%oy p=seat q=@ta r=@ud s=(unit ,*)]      ::  incoming request
               [%yo p=seat q=cape r=soap]                ::  request response
@@ -1276,8 +1140,8 @@
           $:  ^=  sat                                   ::  statistics
               $:  nex=@da                               ::  next wakeup
                   wid=@ud                               ::  max outstanding
-              ==
-          ==
+              ==                                        ::
+          ==                                            ::
 ++  plea  ,[p=@ud q=[p=? q=@t]]                         ::  live prompt
 ++  pork  ,[p=(unit ,@ta) q=path]                       ::  fully parsed url
 ++  prod  ,[p=prom q=tape]                              ::  format, prompt
@@ -1287,7 +1151,11 @@
           $:  ski=snow                                  ::  sequence acked/sent
               wyv=(list rock)                           ::  packet list XX gear
           ==                                            ::
-
+++  pyre                                                ::  cascade stash
+          $:  p=(map ,[p=path q=path r=coal] coal)      ::  by path
+              q=(map ,[p=path q=@uvI r=coal] coal)      ::  by source hash
+              r=(map ,[p=* q=coal] coal)                ::  by (soft) gene
+          ==                                            ::
 ++  quay  (map ,@t ,@t)                                 ::  parsed url query
 ++  quri                                                ::  request-uri
           $%  [& p=purl]                                ::  absolute

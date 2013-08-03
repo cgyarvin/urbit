@@ -17,6 +17,7 @@
 #include <curses.h>
 #include <termios.h>
 #include <term.h>
+#include <dirent.h>
 
 #define U2_GLOBAL
 #define C3_GLOBAL
@@ -55,7 +56,7 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
   u2_Host.ops_u.nuu = u2_no;
   u2_Host.ops_u.kno_w = DefaultKernel;
 
-  while ( (ch_i = getopt(argc, argv, "k:I:LcsagqvR")) != -1 ) {
+  while ( (ch_i = getopt(argc, argv, "k:h:I:LcsagqvR")) != -1 ) {
     switch ( ch_i ) {
       case 'L': { u2_Host.ops_u.loh = u2_yes; break; }
       case 'a': { u2_Host.ops_u.abo = u2_yes; break; }
@@ -75,6 +76,10 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
         u2_Host.ops_u.imp_c = strdup(optarg);
         break;
       }
+      case 'h': {
+        u2_Host.ops_u.hom_c = strdup(optarg);
+        break;
+      }
       case 'q': { u2_Host.ops_u.veb = u2_no; break; }
       case 'v': { u2_Host.ops_u.veb = u2_yes; break; }
       case 'R': { u2_Host.ops_u.rez = u2_yes; break; }
@@ -83,6 +88,34 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
       }
     }
   }
+
+  if ( u2_Host.ops_u.hom_c == 0 ) {
+    u2_Host.ops_u.hom_c = getenv("URBIT_HOME");
+
+    if ( u2_Host.ops_u.hom_c == 0 ) {
+      c3_c* hom_c = getenv("HOME");
+
+      if ( !hom_c ) {
+        fprintf(stderr, "$URBIT_HOME or $HOME must be set\n");
+        exit(1);
+      } else {
+        u2_Host.ops_u.hom_c = malloc(strlen(hom_c) + 7);
+        sprintf(u2_Host.ops_u.hom_c, "%s/urbit", hom_c);
+      }
+    }
+    {
+      DIR* rid_u;
+
+      if ( 0 == (rid_u = opendir(u2_Host.ops_u.hom_c)) ) {
+        if ( 0 != mkdir(u2_Host.ops_u.hom_c, 0755) ) {
+          perror(u2_Host.ops_u.hom_c);
+          exit(1);
+        }
+      }
+      else closedir(rid_u);
+    }
+  }
+  printf("vere: urbit home is %s\n", u2_Host.ops_u.hom_c);
 
   if ( argc != (optind + 1) ) {
     return u2_no;
@@ -192,31 +225,29 @@ main(c3_i   argc,
   {
     u2_wr_check_init(u2_Host.ops_u.cpu_c);
 
-    if ( (u2_no == u2_Host.ops_u.nuu) && (u2_no == u2_Host.ops_u.rez) ) {
-      if ( u2_no == u2_loom_load() ) {
-        fprintf(stderr, "%s: could not load\n", u2_Host.ops_u.cpu_c);
-        return 1;
-      } else {
-        u2_Host.wir_r = u2_ray_of(0, 0);
-        u2_Wire = u2_Host.wir_r;
+    if ( (u2_no == u2_Host.ops_u.nuu) && 
+          (u2_no == u2_Host.ops_u.rez) &&
+          (u2_yes == u2_loom_load()) ) 
+    {
+      u2_Host.wir_r = u2_ray_of(0, 0);
+      u2_Wire = u2_Host.wir_r;
 
-        u2_Host.cpu_c = u2_Host.ops_u.cpu_c;
-        u2_Host.arv_u = u2_Arv;
+      u2_Host.cpu_c = u2_Host.ops_u.cpu_c;
+      u2_Host.arv_u = u2_Arv;
 
-        u2_Arv->ova.egg_u = u2_Arv->ova.geg_u = 0;
+      u2_Arv->ova.egg_u = u2_Arv->ova.geg_u = 0;
 
-        //  Horrible ancient stuff.
-        //
-        kno_w = u2_Host.arv_u->kno_w;
+      //  Horrible ancient stuff.
+      //
+      kno_w = u2_Host.arv_u->kno_w;
 
-        u2_Host.kno_w = kno_w;
-        u2_Host.ver_e[kno_w].ken = u2k(u2_Host.arv_u->ken);
-        u2_Host.ver_e[kno_w].mod_m = c3__warm;
+      u2_Host.kno_w = kno_w;
+      u2_Host.ver_e[kno_w].ken = u2k(u2_Host.arv_u->ken);
+      u2_Host.ver_e[kno_w].mod_m = c3__warm;
 
-        u2_ho_push();
-        // u2_ve_rest();
-      }
-    } else {
+      u2_ho_push();
+    } 
+    else {
       u2_loom_boot();
       u2_Host.wir_r = u2_wr_init(c3__rock, u2_ray_of(0, 0), u2_ray_of(1, 0));
       u2_Wire = u2_Host.wir_r;

@@ -1,7 +1,8 @@
 !:
 ::  /=main=/fun/reboot/hoon
 ::
-|=  [who=seat est=time eny=@uw was=path]
+=>  .(- `[who=@p how=path]`-)
+|=  [est=time eny=@uw]
 |=  arg=*
 =+  ^=  lok  ^-  case
     ?:  =(~ arg)  [%da est]

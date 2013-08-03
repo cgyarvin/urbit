@@ -1062,8 +1062,8 @@ u2_ho_kicq(u2_ray   wir_r,
     } 
     else if ( u2h(hoe) == c3__fail ) {
       fprintf(stderr, "\r\nfail from %s\n", u2_ho_cstring(xip));
-      u2_err(u2_Wire, "hhoe", u2h(hoe));
-      c3_assert(0);
+      // u2_err(u2_Wire, "hhoe", u2h(hoe));
+      // c3_assert(0);
       return u2_cm_bail(c3__fail);
     }
     else {

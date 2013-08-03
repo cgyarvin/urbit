@@ -277,9 +277,10 @@
         ==
       ::
           %crud                                         ::  error trace
+        =.  q.fav  [[%leaf (trip p.fav)] q.fav]
         |-  ^+  +.^$
-        ?~  p.fav  +.^$
-       (fume:$(p.fav t.p.fav) '!' i.p.fav)
+        ?~  q.fav  +.^$
+        (fume:$(q.fav t.q.fav) '!' i.q.fav)
       ::
           %helo                                         ::  trigger prompt
         %-  edit

@@ -1,33 +1,17 @@
-::
+!:
 ::  /=main=/fun/env/hoon
 ::
-|=  [who=seat est=time eny=@uw was=path]
+=>  .(- [who=`@p`-< how=`path`->])
+|=  [est=time eny=@uw]
 |=  arg=(list)
+^-  bowl
 :_  ~
 =+  ^=  voy  ^-  (list tape)
     :~  "who: {<who>}"
+        "how: {<how>}"
         "est: {<est>}"
         "eny: {<eny>}"
-        "was: {<was>}"
     ==
-::
-=+  ^=  yiw  ^-  (list tape)
-    ?:  =(~ see)  ~
-    :_  ~
-    ^=  lyf  ^-  tape
-    %+  weld  "see: "
-    =+  fyl=(~(tap by see) ~)
-    |-  ^-  tape
-    ?~  fyl  ~
-    =+  dip=(rip 3 i.fyl)
-    ?~  t.fyl  dip
-    :(weld dip ", " $(fyl t.fyl))
-::
-=+  ^=  ruf  ^-  (list tape)
-    %+  turn
-      (~(tap by say) ~)
-    |=  [p=@tas q=*]
-    "say: {(pave !>(p))}: {(pave !>(q))}"
 ::
 =+  ^=  gar 
     =+  nix=1
@@ -36,4 +20,4 @@
     :_  $(arg t.arg, nix +(nix))
     "arg: {(pave !>(nix))}: {(pave !>(i.arg))}"
 ::
-(turn :(weld voy yiw ruf gar) |=(a=tape [%text a]))
+(turn (weld voy gar) |=(a=tape [%la %leaf a]))

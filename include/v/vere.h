@@ -204,9 +204,11 @@
       typedef struct _u2_ufil {
         struct ev_stat   was_u;             //  stat watcher
         u2_bean          non;               //  always u2_no
-        u2_bean          dry;               //  ie, modified
-        struct _u2_udir* dir_u;             //  in directory
-        mpz_t            ash_mp;            //  sham
+        u2_bean          dry;               //  ie, unmodified
+        c3_c*            pax_c;             //  absolute path
+        struct _u2_udir* par_u;             //  in directory
+        c3_c*            dot_c;             //  extension point or 0
+        mpz_t            mod_mp;            //  mtime as @da
         struct _u2_ufil* nex_u;             //  internal list
       } u2_ufil;
 
@@ -216,7 +218,6 @@
         struct ev_stat   was_u;             //  stat watcher
         u2_bean          yes;               //  always u2_yes
         u2_bean          dry;               //  ie, unmodified
-        mpz_t            who_mp;            //  owner as GMP
         c3_c*            pax_c;             //  absolute path
         struct _u2_udir* par_u;             //  parent directory
         struct _u2_udir* dis_u;             //  subdirectories
@@ -228,15 +229,24 @@
     */
       typedef struct _u2_uhot {
         u2_udir          dir_u;             //  root directory
+        mpz_t            who_mp;            //  owner as GMP
         struct _u2_uhot* nex_u;             //  internal list
       } u2_uhot;
 
-    /* u2_unix: clay support system
+    /* u2_usig: receive signals.
+    */
+      typedef struct _u2_usig {
+        struct ev_signal sil_u;
+        struct _u2_usig* nex_u;
+      } u2_usig;
+
+    /* u2_unix: clay support system, also 
     */
       typedef struct _u2_unix {
         struct ev_timer tim_u;              //  clay timer
         u2_bean         alm;                //  alarm
-        u2_uhot         hot;                //  host state
+        u2_uhot*        hot_u;              //  host state
+        u2_usig*        sig_u;              //  signal list
       } u2_unix;
 
     /* u2_utfo: unix terminfo strings.
@@ -342,6 +352,7 @@
       typedef struct _u2_opts {
         c3_c*   cpu_c;
         c3_c*   imp_c;
+        c3_c*   hom_c; 
         c3_w    kno_w;
         u2_bean abo;
         u2_bean gab;
@@ -350,6 +361,7 @@
         u2_bean pro;
         u2_bean veb;
         u2_bean rez;
+        u2_bean sow;
         u2_bean nuu;
       } u2_opts;
 
@@ -372,6 +384,7 @@
         u2_save  sav_u;                     //  autosave
         u2_opts  ops_u;                     //  commandline options
         u2_unix  unx_u;                     //  sync and clay
+        u2_bean  liv;                       //  if u2_no, shut down
 
         u2_reck* arv_u;                     //  runtime
       } u2_host;                            //  host == computer == process
@@ -831,6 +844,11 @@
         u2_term_ef_boil(u2_reck* rec_u,
                         c3_l     ono_l);
 
+      /* u2_term_ef_winch(): window change.
+      */
+        void
+        u2_term_ef_winch(u2_reck* rec_u);
+
       /* u2_term_ef_bake(): initial effects for new server.
       */
         void
@@ -996,6 +1014,11 @@
 
     /**  Storage, new school.
     **/
+      /* u2_unix_ef_look(): update filesystem.
+      */
+        void
+        u2_unix_ef_look(u2_reck* rec_u);
+
       /* u2_unix_io_init(): initialize storage.
       */
         void 
@@ -1024,11 +1047,23 @@
         u2_unix_io_poll(u2_reck*        rec_u,
                         struct ev_loop* lup_u);
 
-      /* u2_unix_io_time(): time event on storage.
+      /* u2_unix_io_time(): timer event on storage.
       */
         void
         u2_unix_io_time(u2_reck*         rec_u,
                         struct ev_timer* tim_u);
+
+      /* u2_unix_io_stat(): fs event on storage.
+      */
+        void
+        u2_unix_io_stat(u2_reck*        rec_u,
+                        struct ev_stat* sat_u);
+
+      /* u2_unix_io_sign(): signal event.
+      */
+        void
+        u2_unix_io_sign(u2_reck*          rec_u,
+                        struct ev_signal* sil_u);
 
       
     /**  HTTP, new style.
