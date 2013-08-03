@@ -1,10 +1,9 @@
 !:
-::  /=try=/toy/fib/hoon
+::  /=try=/fun/fib/hoon
 ::
 |=  *
 |=  [num=@ud ~]
-:_  ~
-:_  ~
+:_  ~  :_  ~
 :-  %%
 !>  %.  num
     |=(x=@ ?:((lth x 2) 1 (add $(x (dec x)) $(x (sub x 2)))))

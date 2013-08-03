@@ -997,6 +997,15 @@ u2_unix_io_init(u2_reck* rec_u)
     u2_usig* sig_u;
 
     sig_u = malloc(sizeof(u2_usig));
+    ev_signal_init(&sig_u->sil_u, _lo_sign, SIGINT);
+
+    sig_u->nex_u = unx_u->sig_u;
+    unx_u->sig_u = sig_u;
+  }
+  {
+    u2_usig* sig_u;
+
+    sig_u = malloc(sizeof(u2_usig));
     ev_signal_init(&sig_u->sil_u, _lo_sign, SIGTERM);
 
     sig_u->nex_u = unx_u->sig_u;
@@ -1116,6 +1125,7 @@ u2_unix_io_sign(u2_reck*          rec_u,
 {
   switch ( sil_u->signum ) {
     case SIGTERM: u2_Host.liv = u2_no; break;
-    case SIGWINCH: u2_term_ef_winch(rec_u); break;
+    case SIGINT: u2_term_ef_ctlc(rec_u); break;
+    case SIGWINCH: u2_term_ef_winc(rec_u); break;
   }
 }

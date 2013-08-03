@@ -744,14 +744,24 @@ u2_term_ef_boil(u2_reck* rec_u,
 }
 #else
 
-/* u2_term_ef_winch(): window change.  Just console right now.
+/* u2_term_ef_winc(): window change.  Just console right now.
 */
 void
-u2_term_ef_winch(u2_reck* rec_u) 
+u2_term_ef_winc(u2_reck* rec_u) 
 {
   u2_noun pax = u2nq(c3__gold, c3__term, '1', u2_nul);
 
   u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, _term_ef_blew(rec_u, 1)));
+}
+
+/* u2_term_ef_ctlc(): send ^C on console.
+*/
+void
+u2_term_ef_ctlc(u2_reck* rec_u) 
+{
+  u2_noun pax = u2nq(c3__gold, c3__term, '1', u2_nul);
+
+  u2_reck_plan(rec_u, u2k(pax), u2nt(c3__belt, c3__ctl, 'c'));
 }
 
 /* u2_term_ef_boil(): initial effects for loaded servers.

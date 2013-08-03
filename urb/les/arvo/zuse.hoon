@@ -854,7 +854,7 @@
               [%flog p=card]                            ::  log to terminal
               [%junk p=@]                               ::  entropy
               [%kick p=@da]                             ::  wake up
-              [%kill p=@ud]                             ::  kill a process
+              [%kill p=~]                               ::  kill a gyre
               [%lane p=lane]                            ::  set public route
               [%line p=@t]                              ::  source line
               [%limn ~]                                 ::  rotate ship

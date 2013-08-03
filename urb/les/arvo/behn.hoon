@@ -127,6 +127,9 @@
              ?:  =(0 gyp)
                lash:(gill:(fist hen) p.fav)
              lash:(como:(fest gyp hen) p.fav)
+      %kill  =+  gyp=?>(?=(^ fog) i.fog)
+             ?:  =(0 gyp)  [~ +<.^^$]
+             abet:kill:(fest gyp hen)
       %ling  ?>  ?=(^ fog)
              =>  .(fog (weld t.fog `(list ,@ud)`[i.fog ~]))
              [[[[~ %iron who] hen [%helo prot]] ~] +<.^^$]
@@ -223,6 +226,13 @@
       ^+  +>
       %_(+> paq.gyr (~(put to paq.gyr) [pid lap pod]))
     ::
+    ++  kill
+      ^+  .
+      =+  pew=(sort (turn (~(tap by q.wip.gyr) ~) |=([p=@ud *] p)) lth)
+      |-  ^+  ..kill
+      ?~  pew  ..kill
+      $(pew t.pew, ..kill abet:goon:(past i.pew))
+    ::
     ++  lash                                            ::    lash:fi:be
       ^.  .                                             ::  execute task
       =+  pew=(sort (turn (~(tap by q.wip.gyr) ~) |=([p=@ud *] p)) lth)
@@ -270,6 +280,7 @@
         ^+  ..ra
         ?:  &(?=(%r -.s.orb) |(=(~ p.s.orb) =(~ loz)))
           =>  (gird ~)
+          =>  guff
           =.  ..ra  ?~(nex ..ra abet:(glob:(past u.nex) ~ [%pipe ~]))
           ..ra(q.wip.gyr (~(del by q.wip.gyr) pid))
         ..ra(q.wip.gyr (~(put by q.wip.gyr) pid nex loz orb))
@@ -355,6 +366,10 @@
           bez    (~(put by bez) inx u.myt)
           +>.^$  (gulp (bist %au (scot %ud inx) ~) u.myt)
         ==
+      ::
+      ++  goon                                          ::  kill
+        ^+  .
+        .(s.orb [%r ~])
       ::
       ++  grab                                          ::  chase simple path
         |=  lam=lamp  ^-  gene
@@ -542,6 +557,16 @@
         |=  pax=path  ^-  coal
         :-  [%cell [%cell [%atom %p] pah.typ] -.nub]
         [[who pax] +.nub]
+      ::
+      ++  guff                                          ::  kill all depends
+        ^+  .
+        =+  yop=(~(tap by p.orb) *(list ,[p=@ud q=kite]))
+        |-  ^+  ..guff
+        ?~  yop  ..guff
+        %=  $
+          yop     t.yop
+          ..guff  (gulf (bist %au (scot %ud p.i.yop) ~) q.i.yop)
+        ==
       :: 
       ++  gull                                          ::  request control
         |=  [tea=wire him=ship ryf=riff]
@@ -576,10 +601,10 @@
         ^+  +>
         ?~  nex
           ?~  pun  +>
-          (gran (turn q.u.pun |=(a=* [~ (gyro p.u.pun a)])))
+          (gran (turn q.u.pun |=(a=* [~ (gyve p.u.pun a)])))
         +>.$(..ra abet:(glob:(past u.nex) ~ [%pipe pun]))
       ::
-      ++  gyro                                          ::  print vase
+      ++  gyve                                          ::  print vase
         |=  [toy=typo val=*]  ^-  card
         =+  caf=((hard calf) (need (mang [felt:zu toy] sky)))
         ?:  =([~ [%atom %t]] caf)

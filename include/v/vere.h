@@ -844,11 +844,16 @@
         u2_term_ef_boil(u2_reck* rec_u,
                         c3_l     ono_l);
 
-      /* u2_term_ef_winch(): window change.
+      /* u2_term_ef_winc(): window change.
       */
         void
-        u2_term_ef_winch(u2_reck* rec_u);
+        u2_term_ef_winc(u2_reck* rec_u);
 
+      /* u2_term_ef_ctlc(): send ^C.
+      */
+        void
+        u2_term_ef_ctlc(u2_reck* rec_u);
+        
       /* u2_term_ef_bake(): initial effects for new server.
       */
         void
