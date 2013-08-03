@@ -90,9 +90,10 @@
 ::    Arvo is not an OS in the sense that it drives bare metal.
 ::    It's an OS in the sense that it runs programs and maintains
 ::    general persistent state.  Arvo is exclusively a server 
-::    platform and provides no UI besides a command line and a
-::    web server.  Like everything in Hoon and Nock, Arvo is
-::    isolated and cannot contact the host OS.
+::    platform and provides no UI besides a command line and an
+::    HTTP server.  Like everything in Hoon and Nock, Arvo is
+::    isolated and cannot call back into Unix, though a Unix
+::    process generates its events and applies its results.
 ::
 ::    Arvo's main feature is a peer-to-peer protocol, ++ames,
 ::    defined as a function which maps a stream of UDP packets
@@ -121,20 +122,21 @@
 ::    global PKI and identity model.  The fingerprints of the 
 ::    initial root keys are actually embedded in this file
 ::    below.  No secrets live forever, though, and the kernel
-::    dictator retains no dominion whatsoever over Arvo users.
+::    author retains no dominion whatsoever over Arvo users.
 ::    All keys and algorithms can be updated without disruption.
-::    [NB: the root fingerprints are now in arvo/ames.]
+::    [NB: the roots are now in urb/les/arvo/ames.hoon.]
 ::
 ::    Arvo does not process packets only, but also local events
 ::    (++card) from the host OS.  Modules handling these events
-::    includes a shell ++bede, a versioned filesystem ++clay,
-::    a console ++dill and a web server ++eyre.  Each is crude
+::    includes a shell %bede, a versioned filesystem %clay,
+::    a console %dill and a web server %eyre.  Each is crude
 ::    if not risible and meant only as a proof of concept, but
-::    can be upgraded without losing state.
+::    can be upgraded without losing state.  Finally, there is
+::    a small standard library at the Arvo level, %zuse.
 ::
-::    Hoon is roughly 7000 lines of Hoon; Arvo is roughly 5000.
-::    Their image in Nock, hoon.pill, is roughly 1.5MB (which
-::    includes the full kernel AST), compressing to 800K.
+::    Hoon is roughly 7500 lines of Hoon; Arvo is roughly 5000.
+::    Their image in Nock, urbit.pill, is roughly 500K (which
+::    includes the full kernel AST) if built without tracing.
 ::    There are no external semantic dependencies, but some
 ::    ingenuity is needed to execute the system efficiently.
 ::    The attached interpreter, vere, is deficient in many ways
@@ -142,17 +144,6 @@
 ::
 ::    This kernel, while unreadable due to its spiky alien
 ::    syntax, is also mostly undocumented.  Yo, we're sorry.
-::
-::    The kernel file is divided into volumes, chapters, and
-::    sections.  Volume 1 defines the data structures used in
-::    Volume 2.  Volume 2 is the standard library from basic
-::    arithmetic up through Hoon compilation.  
-::
-::    Volume 3 is the core logic and data structures of Arvo.  
-::    [There is also a lot of crap in 3 that should be in 4.]
-::    Volume 4 is the Arvo kernel modules.
-::
-::    (NB: Most of volumes 3 and 4 has been moved to arvo/.)
 :: 
 ::::::  ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::  ::::::    Preface                               ::::::
@@ -7216,14 +7207,14 @@
 ++  duct  (list wire)                                   ::  causal history
 ++  helm                                                ::  privilege
           $|  ?(%gold %iron)                            ::  root, user
-          $%  [%lead p=seat]                            ::  foreign
+          $%  [%lead p=ship]                            ::  foreign
           ==                                            ::
 ++  hilt  ?(0 1 2)                                      ::  lead iron gold
 ++  move  ,[p=(unit writ) q=duct r=curd]                ::  typeless move
 ++  ovum  ,[p=wire q=curd]                              ::  typeless ovum
 ++  pane  (list ,[p=@tas q=vase])                       ::  kernel modules
 ++  pone  (list ,[p=@tas q=vise])                       ::  kernel modules, old
-++  seat  ,@p                                           ::  network identity 
+++  ship  ,@p                                           ::  network identity 
 ++  vane  $_                                            ::  kernel actor
           |+  [now=@da eny=@ sky=||(* (unit))]          ::  activate
           ^?  |%                                        ::
@@ -7247,9 +7238,9 @@
                         *vane                           ::
               ++  raze  *vane                           ::  erase all state
               ++  scry                                  ::  inspect
-                        |=  $:  our=seat                ::  observer
+                        |=  $:  our=ship                ::  observer
                                 ren=@tas                ::  submode
-                                his=seat                ::  target
+                                his=ship                ::  target
                                 syd=@tas                ::  project 
                                 lot=coin                ::  version
                                 tyl=path                ::  location
@@ -7258,7 +7249,7 @@
               ++  stay  *vase                           ::  save state, new
               --                                        ::
 ++  wire  path                                          ::  event pretext
-++  writ  ,[p=helm q=seat]                              ::  authority
+++  writ  ,[p=helm q=ship]                              ::  authority
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                section 3bE, Arvo core                ::
 ::
@@ -7314,9 +7305,9 @@
       ((hard (unit ,@da)) q:(slam (slap rig [%cnbc %doze]) [hoz +<]))
     ::
     ++  scry
-      |=  $:  our=seat
+      |=  $:  our=ship
               ren=@tas
-              his=seat
+              his=ship
               syd=@tas
               lot=coin
               tyl=path
@@ -7331,7 +7322,7 @@
   ^-  [bet=type nim=type vin=type hoz=type viz=type]
   ~+  =+  pal=|=(a=@t ^-(type (~(play ut but) (vice a))))
       :*  bet=(pal '[*(unit writ) *wire *duct *curd]')
-          nim=(pal '[*seat @tas *seat @tas *coin *path]')
+          nim=(pal '[*ship @tas *ship @tas *coin *path]')
           vin=(pal '[@da @ |+(* *(unit))]')
           hoz=(pal '[@da *duct]')
           viz=(pal '*vase')
@@ -7398,7 +7389,7 @@
     (kick [[~ [[(dint p.ovo) ~] p.ovo ~] q.ovo] ~])
   ::
   ++  hymn                                              ::  start loop with id
-    |=  [who=seat ovo=ovum]
+    |=  [who=ship ovo=ovum]
     ^-  [p=(list ovum) q=(list ,[p=@tas q=vase])]
     (kick [[[~ %iron who] [[(dint p.ovo) ~] p.ovo ~] q.ovo] ~])
   ::

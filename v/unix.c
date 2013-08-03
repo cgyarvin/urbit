@@ -62,24 +62,29 @@ _unix_opendir(c3_c* pax_c)
   return rid_u;
 }
 
-/* _unix_mtime(): mtime from path.
+/* _unix_mkdir(): mkdir, asserting.
 */
 static void
-_unix_mtime(c3_c* pax_c, mpz_t mod_mp) 
+_unix_mkdir(c3_c* pax_c)
 {
-  struct stat buf_u;
-
-  if ( 0 != stat(pax_c, &buf_u) ) {
-    free(pax_c);
-  } else {
-    u2_noun mod = c3_stat_mtime(&buf_u);
-
-    u2_cr_mp(mod_mp, mod);
-    u2z(mod);
+  if ( 0 != mkdir(pax_c, 0755) ) {
+    uL(fprintf(uH, "%s: %s\n", pax_c, strerror(errno)));
+    c3_assert(0);
   }
 }
 
-/* _unix_file_watch(): create file tracker.
+/* _unix_unlink(): unlink, asserting.
+*/
+static void
+_unix_unlink(c3_c* pax_c)
+{
+  if ( 0 != unlink(pax_c) ) {
+    uL(fprintf(uH, "%s: %s\n", pax_c, strerror(errno)));
+    c3_assert(0);
+  }
+}
+
+/* _unix_file_watch(): create file tracker (from filesystem)
 */
 static void
 _unix_file_watch(u2_reck* rec_u, 
@@ -106,7 +111,39 @@ _unix_file_watch(u2_reck* rec_u,
   fil_u->nex_u = 0;
 }
 
-/* _unix_dir_watch(): create directory tracker.
+/* _unix_file_form(): form a filename path downward.
+*/
+static c3_c*
+_unix_file_form(u2_reck* rec_u, 
+                u2_udir* dir_u, 
+                u2_noun  pre,
+                u2_bean  ket,
+                u2_noun  ext)
+{
+  c3_c* pre_c = u2_cr_string(pre);
+  c3_c* ext_c = u2_cr_string(ext);
+  c3_w  pax_w = strlen(dir_u->pax_c);
+  c3_w  pre_w = strlen(pre_c);
+  c3_w  ext_w = strlen(ext_c);
+  c3_w  ket_w = (u2_yes == ket) ? 1 : 0;
+  c3_c* pax_c = malloc(pax_w + 1 + pre_w + 1 + ket_w + ext_w + 1);
+
+  strcpy(pax_c, dir_u->pax_c);
+  pax_c[pax_w] = '/';
+  strcpy(pax_c + pax_w + 1, pre_c);
+  pax_c[pax_w + 1 + pre_w] = '.';
+  if ( u2_yes == ket ) {
+    pax_c[pax_w + 1 + pre_w + 1] = '^';
+  }
+  strcpy(pax_c + pax_w + 1 + pre_w + 1 + ket_w, ext_c);
+
+  free(pre_c); free(ext_c);
+  u2z(pre); u2z(ext);
+
+  return pax_c;
+}
+
+/* _unix_dir_watch(): instantiate directory tracker.
 */
 static void
 _unix_dir_watch(u2_reck* rec_u, u2_udir* dir_u, u2_udir* par_u, c3_c* pax_c)
@@ -116,6 +153,36 @@ _unix_dir_watch(u2_reck* rec_u, u2_udir* dir_u, u2_udir* par_u, c3_c* pax_c)
   dir_u->yes = u2_yes;
   dir_u->dry = u2_no;
   dir_u->pax_c = pax_c;
+  dir_u->par_u = par_u;
+  dir_u->dis_u = 0;
+  dir_u->fil_u = 0;
+  dir_u->nex_u = 0;
+}
+
+/* _unix_dir_forge: instantiate directory tracker (and make directory).
+*/
+static void
+_unix_dir_forge(u2_reck* rec_u, u2_udir* dir_u, u2_udir* par_u, u2_noun tet)
+{
+  dir_u->yes = u2_yes;
+  dir_u->dry = u2_no;
+  { 
+    c3_c* tet_c = u2_cr_string(tet);
+    c3_w  pax_w = strlen(par_u->pax_c);
+    c3_w  tet_w = strlen(tet_c);
+    c3_c* pax_c = malloc(pax_w + 1 + tet_w + 1);
+
+    strcpy(pax_c, par_u->pax_c);
+    pax_c[pax_w] = '/';
+    strcpy(pax_c + pax_w + 1, tet_c);
+
+    free(tet_c);
+    u2z(tet);
+
+    ev_stat_init(&dir_u->was_u, _lo_stat, pax_c, 1.0);
+    _unix_mkdir(pax_c);
+    dir_u->pax_c = pax_c;
+  }
   dir_u->par_u = par_u;
   dir_u->dis_u = 0;
   dir_u->fil_u = 0;
@@ -317,10 +384,10 @@ _unix_dir_update(u2_reck* rec_u, u2_udir* dir_u, DIR* rid_u)
   return cha;
 }
 
-/* unix_load_safe(): load file or 0.
+/* unix_load(): load a file.
 */
 static u2_noun
-_unix_load_safe(c3_c* pax_c)
+_unix_load(c3_c* pax_c)
 {
   struct stat buf_u;
   c3_i        fid_i = open(pax_c, O_RDONLY, 0644);
@@ -329,6 +396,7 @@ _unix_load_safe(c3_c* pax_c)
 
   if ( (fid_i < 0) || (fstat(fid_i, &buf_u) < 0) ) {
     // uL(fprintf(uH, "%s: %s\n", pax_c, strerror(errno)));
+    c3_assert(0); 
     return 0;
   }
   fln_w = buf_u.st_size;
@@ -339,6 +407,7 @@ _unix_load_safe(c3_c* pax_c)
 
   if ( fln_w != red_w ) {
     free(pad_y);
+    c3_assert(0);
     return 0;
   }
   else {
@@ -349,18 +418,48 @@ _unix_load_safe(c3_c* pax_c)
   }
 }
 
-/* _unix_file_load(): load a file.
+/* unix_save(): save a file.
+*/
+static void
+_unix_save(c3_c* pax_c, u2_atom oat)
+{
+  c3_i  fid_i = open(pax_c, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+  c3_w  fln_w, rit_w;
+  c3_y* oat_y;
+
+  if ( fid_i < 0 ) {
+    uL(fprintf(uH, "%s: %s\n", pax_c, strerror(errno)));
+    u2_cm_bail(c3__fail);
+  }
+
+  fln_w = u2_met(3, oat);
+  oat_y = malloc(fln_w);
+  u2_cr_bytes(0, fln_w, oat_y, oat);
+  u2z(oat);
+
+  rit_w = write(fid_i, oat_y, fln_w);
+  close(fid_i);
+  free(oat_y);
+
+  if ( rit_w != fln_w ) {
+    uL(fprintf(uH, "%s: %s\n", pax_c, strerror(errno)));
+    c3_assert(0);
+  }
+}
+
+/* _unix_file_load(): load a file by watcher.
 */
 static u2_noun
 _unix_file_load(u2_reck* rec_u, u2_ufil* fil_u)
 {
-  u2_noun raw = _unix_load_safe(fil_u->pax_c);
+  u2_noun raw = _unix_load(fil_u->pax_c);
 
   if ( (0 == raw) || ('^' != fil_u->dot_c[1]) ) {
     return raw;
   }
   else return u2_cke_cue(raw);
 }
+
 
 /* _unix_dir_name(): directory name.
 */
@@ -451,17 +550,16 @@ _unix_dir_arch(u2_reck* rec_u, u2_udir* dir_u)
 /* _unix_desk_peek(): peek for arch.
 */
 static u2_noun
-_unix_desk_peek(u2_reck* rec_u, u2_noun hox, u2_noun syd)
+_unix_desk_peek(u2_reck* rec_u, 
+                u2_noun who, 
+                u2_noun hox, 
+                u2_noun syd, 
+                u2_noun lok)
 {
   u2_noun cay;
 
   cay = u2_reck_prick
-    (rec_u, u2k(rec_u->our),
-            u2nc(c3_s2('c','z'),
-                 u2nq(hox, 
-                      syd,
-                      u2k(rec_u->wen),
-                      u2_nul)));
+    (rec_u, who, u2nc(c3_s2('c','z'), u2nq(hox, syd, lok, u2_nul)));
 
   if ( u2_nul == cay ) {
     return u2nc(u2_no, u2_nul);
@@ -472,24 +570,30 @@ _unix_desk_peek(u2_reck* rec_u, u2_noun hox, u2_noun syd)
   }
 }
 
-/* _unix_desk_sync(): sync desk.
+/* _unix_desk_sync_into(): sync external changes to desk.
 */
 static void
-_unix_desk_sync(u2_reck* rec_u, 
-                u2_noun  who,
-                u2_noun  hox, 
-                u2_noun  syd, 
-                u2_udir* dir_u)
+_unix_desk_sync_into(u2_reck* rec_u, 
+                     u2_noun  who,
+                     u2_noun  hox, 
+                     u2_noun  syd, 
+                     u2_udir* dir_u)
 {
-  u2_noun xun, bur, dul, fav, pax;
+  u2_noun xun, bur, doz, fav, pax;
 
   xun = _unix_dir_arch(rec_u, dir_u);
-  bur = _unix_desk_peek(rec_u, hox, syd);
-  dul = u2_cn_mung(u2k(rec_u->toy.cyst), u2nc(xun, bur));
-  pax = u2nq(c3__gold, c3__sync, u2k(rec_u->sen), u2_nul);
-  fav = u2nq(c3__into, who, syd, u2nc(u2_yes, dul));
+  bur = _unix_desk_peek(rec_u, u2k(who), hox, syd, u2k(rec_u->wen));
 
-  u2_reck_plan(rec_u, pax, fav);
+  if ( u2_no == u2_sing(xun, bur) ) {
+    doz = u2_cn_mung(u2k(rec_u->toy.cyst), u2nc(xun, bur));
+    pax = u2nq(c3__gold, c3__sync, u2k(rec_u->sen), u2_nul);
+    fav = u2nq(c3__into, who, syd, u2nc(u2_yes, doz));
+
+    u2_reck_plan(rec_u, pax, fav);
+  } 
+  else {
+    u2z(xun); u2z(bur);
+  }
 }
 
 /* _unix_ship_update(): update top level ship.
@@ -516,7 +620,7 @@ _unix_ship_update(u2_reck* rec_u, u2_uhot* hot_u)
       u2_noun syd = _unix_dir_name(rec_u, dis_u); 
 
       // uL(fprintf(uH, "sync %s %s\n", u2_cr_string(hox), u2_cr_string(syd))); 
-      _unix_desk_sync(rec_u, u2k(who), u2k(hox), syd, dis_u);
+      _unix_desk_sync_into(rec_u, u2k(who), u2k(hox), syd, dis_u);
     }
     u2z(hox);
     u2z(who);
@@ -560,11 +664,246 @@ _unix_hot_lose(u2_reck* rec_u, u2_uhot* hot_u)
   _unix_dir_free(rec_u, &(hot_u->dir_u));
 }
 
-/* u2_unix_ef_edit(): apply edits pushed out by clay.
+/* _unix_pdir(): find directory reference from text.
+*/
+static u2_udir**
+_unix_pdir(u2_reck* rec_u, u2_udir* par_u, u2_noun tet)
+{
+  c3_c*     tet_c = u2_cr_string(tet);
+  c3_w      pax_w = strlen(par_u->pax_c);
+  c3_w      tet_w = strlen(tet_c);
+  u2_udir** dir_u;
+
+  dir_u = &(par_u->dis_u); 
+  while ( 1 ) { 
+    if ( !*dir_u || !strncmp(((*dir_u)->pax_c + pax_w + 1), tet_c, tet_w) ) {
+      free(tet_c); return dir_u;
+    }
+    else dir_u = &((*dir_u)->nex_u);
+  }
+}
+
+/* _unix_home(): find home directory from identity.
+*/
+static u2_uhot*
+_unix_home(u2_reck* rec_u, u2_noun who)
+{
+  u2_unix* unx_u = &u2_Host.unx_u;
+  u2_uhot* hot_u;
+  mpz_t    who_mp;
+
+  u2_cr_mp(who_mp, who);
+  for ( hot_u = unx_u->hot_u; 
+        hot_u && (0 != mpz_cmp(who_mp, hot_u->who_mp));
+        hot_u = hot_u->nex_u ) 
+  {
+    uL(fprintf(uH, "uh: %p, %s\n", hot_u, hot_u->dir_u.pax_c));
+  }
+  mpz_clear(who_mp);
+  return hot_u;
+}
+
+/* _unix_desk_sync_udon(): apply udon to existing value.
+*/
+static u2_noun
+_unix_desk_sync_udon(u2_reck* rec_u, u2_noun don, u2_noun old)
+{
+  return u2_cn_mung(u2k(rec_u->toy.lump), u2nc(don, old));
+}
+
+/* _unix_desk_sync_tofu(): sync out file install.
+*/
+static void
+_unix_desk_sync_tofu(u2_reck* rec_u, 
+                     u2_udir* dir_u,
+                     u2_noun  pre,
+                     u2_noun  ext,
+                     u2_noun  mis)
+{
+  c3_c*     pox_c = _unix_file_form(rec_u, dir_u, u2k(pre), u2_no, u2k(ext));
+  c3_c*     pux_c = _unix_file_form(rec_u, dir_u, u2k(pre), u2_yes, u2k(ext));
+  u2_ufil** fil_u;
+
+  // uL(fprintf(uH, "tofu pox_c %s op %s\n", pox_c, u2_cr_string(u2h(mis))));
+
+  fil_u = &(dir_u->fil_u); 
+  while ( 1 ) {                               //  XX crude!
+    if ( !*fil_u || 
+         !strcmp((*fil_u)->pax_c, pox_c) ||
+         !strcmp((*fil_u)->pax_c, pux_c) )
+    {
+      break;
+    }
+    else fil_u = &((*fil_u)->nex_u);
+  }
+ 
+  if ( *fil_u && (c3__del == u2h(mis)) ) {
+    u2_ufil* ded_u = *fil_u;
+
+    *fil_u = ded_u->nex_u;
+    _unix_unlink(ded_u->pax_c);
+    _unix_file_free(rec_u, ded_u);
+
+    free(ded_u);
+    free(pox_c);
+    free(pux_c);
+  }
+  else {
+    u2_noun god, oat;
+    c3_c*   pax_c;
+
+    if ( *fil_u ) {
+      u2_noun old = _unix_file_load(rec_u, *fil_u);
+      c3_assert(c3__mut == u2h(mis));
+
+      god = _unix_desk_sync_udon(rec_u, u2k(u2t(mis)), old);
+      _unix_unlink((*fil_u)->pax_c);
+      free((*fil_u)->pax_c);
+    } 
+    else {
+      c3_assert(c3__ins == u2h(mis));
+      god = u2k(u2t(mis));
+    }
+
+    if ( u2_yes == u2du(god) ) {
+      oat = u2_cke_jam(god);
+      pax_c = pux_c; free(pox_c);
+    } else {
+      oat = god;
+      pax_c = pox_c; free(pux_c);
+    }
+
+    if ( *fil_u ) {
+      (*fil_u)->pax_c = pax_c;
+
+      mpz_clear((*fil_u)->mod_mp);
+      u2_cr_mp((*fil_u)->mod_mp, rec_u->now);
+    } 
+    else {
+      mpz_t mod_mp;
+
+      u2_cr_mp(mod_mp, rec_u->now);
+      *fil_u = malloc(sizeof(u2_ufil));
+
+      _unix_file_watch(rec_u, *fil_u, dir_u, pax_c, mod_mp);
+      mpz_clear(mod_mp);
+    }
+
+    _unix_save((*fil_u)->pax_c, oat);
+  }
+  u2z(pre); u2z(ext); u2z(mis);
+}
+
+/* _unix_desk_sync_miso(): sync out change.
+*/
+static void
+_unix_desk_sync_miso(u2_reck* rec_u, u2_udir* dir_u, u2_noun pax, u2_noun mis)
+{
+  if ( (u2_no == u2du(pax)) || u2_no == u2du(u2t(pax)) ) {
+    u2_err(u2_Wire, "pax", pax);
+
+    u2z(pax); u2z(mis);
+  }
+  else {
+    u2_noun i_pax = u2h(pax); 
+    u2_noun t_pax = u2t(pax);
+    u2_noun it_pax = u2h(t_pax);
+    u2_noun tt_pax = u2t(t_pax);
+
+    if ( u2_nul == tt_pax ) {
+      _unix_desk_sync_tofu(rec_u, dir_u, u2k(i_pax), u2k(it_pax), mis);
+    } 
+    else {
+      u2_udir** dis_u = _unix_pdir(rec_u, dir_u, u2k(i_pax));
+
+      if ( !*dis_u ) {
+        *dis_u = malloc(sizeof(u2_udir));
+
+        _unix_dir_forge(rec_u, *dis_u, dir_u, u2k(i_pax));
+      }
+      _unix_desk_sync_miso(rec_u, *dis_u, u2k(t_pax), mis);
+    }
+  }
+  u2z(pax);
+}
+
+/* _unix_desk_sync_soba(): sync computed changes.
+*/
+static void
+_unix_desk_sync_soba(u2_reck* rec_u, u2_udir* dir_u, u2_noun doz)
+{
+  u2_noun zod = doz;
+
+  while ( u2_nul != zod ) {
+    _unix_desk_sync_miso(rec_u, dir_u, u2k(u2h(u2h(zod))), u2k(u2t(u2h(zod))));
+    zod = u2t(zod);
+  }
+  u2z(doz);
+}
+
+/* _unix_desk_sync_ergo(): sync desk changes to unix.
+*/
+static void
+_unix_desk_sync_ergo(u2_reck* rec_u, 
+                     u2_noun  who,
+                     u2_noun  hox, 
+                     u2_noun  syd, 
+                     u2_noun  lok,
+                     u2_uhot* hot_u) 
+{
+  u2_udir** dir_u = _unix_pdir(rec_u, &(hot_u->dir_u), syd);
+  u2_noun   xun;
+
+#if 0
+  uL(fprintf(uH, "ergo %s %s %s\n", u2_cr_string(hox),
+                                    u2_cr_string(syd),
+                                    u2_cr_string(lok)));
+#endif
+
+  if ( !*dir_u ) {
+    *dir_u = malloc(sizeof(u2_udir));
+
+    xun = u2nc(u2_no, u2_nul);
+    _unix_dir_forge(rec_u, *dir_u, &(hot_u->dir_u), u2k(syd));
+  } else {
+    xun = _unix_dir_arch(rec_u, *dir_u);
+  }
+
+  {
+    u2_noun bur = _unix_desk_peek(rec_u, who, hox, syd, lok);
+
+    if ( u2_no == u2_sing(xun, bur) ) {
+      u2_noun doz = u2_cn_mung(u2k(rec_u->toy.cyst), u2nc(bur, xun));
+
+#if 1
+      _unix_desk_sync_soba(rec_u, *dir_u, doz);
+#else
+      u2z(doz);
+#endif
+    }
+    else {
+      u2z(xun); u2z(bur);
+    }
+  }
+}
+
+/* u2_unix_ef_ergo(): update filesystem, outbound.
 */
 void
-u2_unix_ef_edit(u2_reck* rec_u, u2_noun who, u2_noun syd, u2_noun nor)
+u2_unix_ef_ergo(u2_reck* rec_u,
+                u2_noun  who,
+                u2_noun  syd,
+                u2_noun  rel)
 {
+  u2_noun  hox = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', u2k(who)));
+  u2_noun  lok = u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3__ud, rel));
+  u2_uhot* hot_u;
+
+  hot_u = _unix_home(rec_u, u2k(who));
+
+  if ( 0 != hot_u ) {
+    _unix_desk_sync_ergo(rec_u, who, hox, syd, lok, hot_u);
+  }
 }
 
 /* u2_unix_ef_look(): update the root.
@@ -573,21 +912,23 @@ void
 u2_unix_ef_look(u2_reck* rec_u)
 {
   u2_unix* unx_u = &u2_Host.unx_u;
-  u2_noun  who;
+  u2_noun  won;
   u2_uhot* hot_u; 
 
   //  find owners without directories
   {
-    for ( who = rec_u->own; u2_nul != who; who = u2t(who) ) {
+    for ( won = rec_u->own; u2_nul != won; won = u2t(won) ) {
+      u2_noun who = u2h(won);
       mpz_t who_mp;
 
-      u2_cr_mp(who_mp, u2h(who));
+      u2_cr_mp(who_mp, who);
       for ( hot_u = unx_u->hot_u; 
             hot_u && (0 != mpz_cmp(who_mp, hot_u->who_mp));
             hot_u = hot_u->nex_u );
 
+      mpz_clear(who_mp);
       if ( 0 == hot_u ) {
-        hot_u = _unix_hot_gain(rec_u, u2k(u2h(who)));
+        hot_u = _unix_hot_gain(rec_u, u2k(who));
 
         if ( hot_u ) {
           // uL(fprintf(uH, "sync: gain %s\n", hot_u->dir_u.pax_c));
@@ -604,19 +945,20 @@ u2_unix_ef_look(u2_reck* rec_u)
     u2_uhot** het_u = &(unx_u->hot_u);
 
     while ( 0 != (hot_u=*het_u) ) {
-      for ( who = rec_u->own; u2_nul != who; who = u2t(who) ) {
-        mpz_t who_mp;
+      for ( won = rec_u->own; u2_nul != won; won = u2t(won) ) {
+        u2_noun who = u2h(won);
+        mpz_t   who_mp;
 
-        u2_cr_mp(who_mp, u2h(who));
+        u2_cr_mp(who_mp, who);
         if ( 0 == mpz_cmp(who_mp, hot_u->who_mp) ) {
           break;
         }
         mpz_clear(who_mp);
       }
 
-      if ( u2_nul == who ) {
+      if ( u2_nul == won ) {
         *het_u = hot_u->nex_u;
-       
+ 
         // uL(fprintf(uH, "sync: lose %s\n", hot_u->dir_u.pax_c));
         _unix_hot_lose(rec_u, hot_u);
 

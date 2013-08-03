@@ -345,7 +345,7 @@
     ..$(dug ~)
   ::
   ++  scry
-    |=  [our=seat ren=@tas his=seat syd=disc lot=coin tyl=path]
+    |=  [our=ship ren=@tas his=ship syd=disc lot=coin tyl=path]
     ^-  (unit)
     ~
   ::

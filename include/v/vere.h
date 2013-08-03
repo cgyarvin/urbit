@@ -1014,10 +1014,18 @@
 
     /**  Storage, new school.
     **/
-      /* u2_unix_ef_look(): update filesystem.
+      /* u2_unix_ef_look(): update filesystem, inbound.
       */
         void
         u2_unix_ef_look(u2_reck* rec_u);
+
+      /* u2_unix_ef_ergo(): update filesystem, outbound.
+      */
+        void
+        u2_unix_ef_ergo(u2_reck* rec_u,
+                        u2_noun  who,
+                        u2_noun  syd,
+                        u2_noun  rel);
 
       /* u2_unix_io_init(): initialize storage.
       */

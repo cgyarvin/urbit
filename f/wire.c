@@ -113,10 +113,10 @@ _wr_open(c3_c* cpu_c, c3_c* fil_c, c3_c* suf_c)
   sprintf(ful_c, "%s", cpu_c);
   mkdir(ful_c, 0700);
 
-  sprintf(ful_c, "%s/~chk", cpu_c);
+  sprintf(ful_c, "%s/chk", cpu_c);
   mkdir(ful_c, 0700);
 
-  sprintf(ful_c, "%s/~chk/%s.%s", cpu_c, fil_c, suf_c);
+  sprintf(ful_c, "%s/chk/%s.%s", cpu_c, fil_c, suf_c);
   fid_i = open(ful_c, O_RDWR | O_CREAT, 0666);
   if ( -1 == fid_i ) {
     perror(ful_c); exit(1);

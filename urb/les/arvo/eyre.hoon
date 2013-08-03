@@ -266,7 +266,7 @@
   ..$(+>- *bolo)
 ::
 ++  scry
-  |=  [our=seat ren=@tas who=seat syd=disc lot=coin tyl=path]
+  |=  [our=ship ren=@tas who=ship syd=disc lot=coin tyl=path]
   ^-  (unit)
   ~
 ::

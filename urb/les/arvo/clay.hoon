@@ -9,7 +9,7 @@
   ::
   |%
   ::
-  ++  un                                                ::  per seat
+  ++  un                                                ::  per ship
     |=  [who=@p now=@da ruf=raft]
     =+  ^=  yar  ^-  room
         =+  yar=(~(get by fat.ruf) who)
@@ -18,14 +18,14 @@
     =|  wot=(list ,[p=duct q=tape])
     =|  byn=(list ,[p=duct q=riot]) 
     =|  vag=(list ,[p=duct q=card])
-    =|  say=(list ,[p=duct q=seat r=[p=@ud q=riff]])
+    =|  say=(list ,[p=duct q=ship r=[p=@ud q=riff]])
     |%
     ++  abet
       ^-  [(list move) raft]
       :_  ruf(fat (~(put by fat.ruf) who yar))
       ;:  weld
         %+  turn  (flop yel)
-        |=([a=duct b=card] [[~ %gold who] hen.yar b])
+        |=([a=duct b=card] [[~ %gold who] hun.yar b])
       ::
         %+  turn  (flop wot) 
         |=([a=duct b=tape] [[~ %gold who] a [%wort b]])
@@ -37,7 +37,7 @@
         |=([a=duct b=card] [[~ %gold who] a b])
       ::
         %+  turn  (flop say) 
-        |=([a=duct b=seat c=*] [[~ %gold who] [/a a] [%want b %re c]])
+        |=([a=duct b=ship c=*] [[~ %gold who] [/a a] [%want b %re c]])
       ==
     ::
     ++  doze
@@ -246,6 +246,9 @@
               lab.dom  ?.  ?=(| -.p.lem)  lab.dom
                        ?<  (~(has by lab.dom) p.p.lem)
                        (~(put by lab.dom) p.p.lem let.dom)
+              vag      
+            ?~(hez.yar vag :_(vag [u.hez.yar [%ergo who syd +(let.dom)]]))
+          ::
               yel      
             =+  pre=`path`~[(scot %p for) syd (scot %ud +(let.dom))]
             ?-  -.p.lem
@@ -320,7 +323,7 @@
       ~(. de who syd now p.saq q.saq)
     ::
     ++  fa
-      |=  him=seat
+      |=  him=ship
       =+  ^=  raz
           =+  raz=(~(get by rid.yar) him)
           ?~(raz [p=*rind q=*rink] u.raz)
@@ -504,17 +507,18 @@
     ::
         %init
       ::  [[%tell %0 %leaf "clay: home for {~(rend co ~ %p q.u.wru)}"] ~]
-      [~ ..^$(fat.ruf (~(put by fat.ruf) q.u.wru [hen ~ ~ ~]))]
+      [~ ..^$(fat.ruf (~(put by fat.ruf) q.u.wru [hen ~ ~ ~ ~]))]
     ::
-        %into
+        ?(%into %info)
       =.  wru  
           ?^  wru  wru
           ?.  =(%gold (adit hen))  ~
           [~ %gold p.fav] 
       ?>  =(q.u.wru p.fav)
       =^  mos  ruf  
-        =<  abet
-        zoot:(exec:(di:wake:(un q.u.wru now ruf) q.fav) hen now [%& r.fav])
+        =+  ^=  zot
+          zoot:(exec:(di:wake:(un q.u.wru now ruf) q.fav) hen now [%& r.fav])
+        abet:zot(hez.yar ?:(=(%info -.fav) hez.yar.zot [~ hen]))
       [mos ..^$]
     ::
         %pull
@@ -624,7 +628,7 @@
     ..$(ruf *raft)
   ::
   ++  scry                                              ::  inspect
-    |=  [our=seat ron=@tas his=seat syd=disc lot=coin tyl=path]
+    |=  [our=ship ron=@tas his=ship syd=disc lot=coin tyl=path]
     ^-  (unit)
     =+  luk=?.(?=(%% -.lot) ~ ((soft case) p.lot))
     =+  run=((soft care) ron)

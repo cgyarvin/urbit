@@ -368,7 +368,9 @@ u2_reck_cold(u2_reck* rec_u, c3_w kno_w)
     //  u2_noun hof = u2_cn_mung(u2k(rec_u->toy.hoof), rec_u->kno_w);
     //  c3_c* hof_c = u2_cr_string(hof);
 
-    sprintf(ful_c, "%s/%d/urbit.pill", u2_System, rec_u->kno_w);
+    // sprintf(ful_c, "%s/%d/urbit.pill", u2_System, rec_u->kno_w);
+
+    sprintf(ful_c, "%s/urbit.pill", u2_Host.ops_u.hom_c);
     if ( 0 == (pot = u2_walk_load(ful_c)) ) {
       perror(ful_c);
       exit(1);
@@ -416,6 +418,7 @@ u2_reck_cold(u2_reck* rec_u, c3_w kno_w)
   rec_u->toy.shen = u2_reck_wish(rec_u, "en:crya");
   rec_u->toy.shed = u2_reck_wish(rec_u, "de:crya");
   rec_u->toy.cyst = u2_reck_wish(rec_u, "cyst");
+  rec_u->toy.lump = u2_reck_wish(rec_u, "lump");
 
   u2_reck_time(rec_u);
   u2_reck_numb(rec_u);
@@ -639,6 +642,18 @@ _reck_kick_http(u2_reck* rec_u,
 static u2_bean
 _reck_kick_sync(u2_reck* rec_u, u2_noun pox, u2_noun fav)
 {
+  switch ( u2h(fav) ) {
+    default: break;
+    case c3__ergo: {
+      u2_noun who = u2k(u2h(u2t(fav)));
+      u2_noun syd = u2k(u2h(u2t(u2t(fav))));
+      u2_noun rel = u2k(u2t(u2t(u2t(fav))));
+
+      u2_unix_ef_ergo(rec_u, who, syd, rel);
+      u2z(pox); u2z(fav); return u2_yes;
+    } break;
+  }
+
   //  XX obviously not right!
   //
   u2z(pox); u2z(fav); return u2_no;
@@ -718,12 +733,7 @@ _reck_kick_spec(u2_reck* rec_u, u2_noun pox, u2_noun fav)
       } break;
 
       case c3__sync: {
-        if ( (u2_nul != tt_pox) ) {
-          u2z(pox); u2z(fav); return u2_no;
-        }
-        else { 
-          return _reck_kick_sync(rec_u, pox, fav);
-        }
+        return _reck_kick_sync(rec_u, pox, fav);
       } break;
 
       case c3__ames: {

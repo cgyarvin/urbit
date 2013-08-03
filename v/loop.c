@@ -864,9 +864,11 @@ u2_lo_call(u2_reck*        rec_u,
     //
     u2_reck_time(rec_u);
 
-    //  XX poll the filesystem
+    //  XX poll the filesystem on genuine input
     //
-    u2_unix_ef_look(rec_u);
+    if ( u2_yes == inn ) {
+      u2_unix_ef_look(rec_u);
+    }
 
     //  process input on this socket
     //
@@ -928,21 +930,26 @@ _lo_home(u2_reck* rec_u)
   {
     mkdir(u2_Host.cpu_c, 0700);
 
-    sprintf(ful_c, "%s/~get", u2_Host.cpu_c);
+    sprintf(ful_c, "%s/get", u2_Host.cpu_c);
     if ( 0 != mkdir(ful_c, 0700) ) {
       perror(ful_c);
       u2_lo_bail(rec_u);
     }
 
-    sprintf(ful_c, "%s/~put", u2_Host.cpu_c);
+    sprintf(ful_c, "%s/put", u2_Host.cpu_c);
     if ( 0 != mkdir(ful_c, 0700) ) {
       perror(ful_c);
       u2_lo_bail(rec_u);
     }
+  }
 
-    sprintf(ful_c, "%s/~bak", u2_Host.cpu_c);
-    if ( 0 != mkdir(ful_c, 0700) ) {
-      perror(ful_c);
+  //  Copy urbit.pill.
+  //
+  {
+    sprintf(ful_c, "cp %s/urbit.pill %s", 
+                    u2_Host.ops_u.hom_c, u2_Host.cpu_c);
+    if ( 0 != system(ful_c) ) {
+      uL(fprintf(uH, "could not %s\n", ful_c));
       u2_lo_bail(rec_u);
     }
   }
@@ -1160,7 +1167,7 @@ _lo_zest(u2_reck* rec_u)
   
   //  Create the record file.
   {
-    sprintf(ful_c, "%s/~egz.hope", u2_Host.cpu_c);
+    sprintf(ful_c, "%s/egz.hope", u2_Host.cpu_c);
 
     if ( ((fid_i = open(ful_c, O_CREAT | O_WRONLY | O_EXCL, 0600)) < 0) || 
          (fstat(fid_i, &buf_b) < 0) ) 
@@ -1235,7 +1242,7 @@ _lo_zest(u2_reck* rec_u)
     rec_u->roe = 0;
   }
 
-#if 1
+#if 0
   //  Copy the egz into ham, the factory default.
   {
     sprintf(ful_c, "rm -f %s/~ham.hope; cp %s/~egz.hope %s/~ham.hope",
@@ -1294,23 +1301,9 @@ _lo_rest(u2_reck* rec_u)
     uL(fprintf(uH, "rest: checkpoint to event %d\n", rec_u->ent_w));
   }
 
-  //  Maybe we should delete all your fscking data.
-  //  [obsolete, delete soon]
-  {
-    if ( u2_yes == u2_Host.ops_u.rez ) {
-      sprintf(ful_c, "rm -f %s/~egz.hope; cp %s/~ham.hope %s/~egz.hope",
-                     u2_Host.cpu_c, u2_Host.cpu_c, u2_Host.cpu_c);
-
-      if ( 0 != system(ful_c) ) {
-        uL(fprintf(uH, "rest: could not reset to factory!\n"));
-        u2_lo_bail(rec_u);
-      }
-    }
-  }
-
   //  Open the fscking file.  Does it even exist?
   {
-    sprintf(ful_c, "%s/~egz.hope", u2_Host.cpu_c);
+    sprintf(ful_c, "%s/egz.hope", u2_Host.cpu_c);
 
     if ( ((fid_i = open(ful_c, O_RDWR)) < 0) || 
          (fstat(fid_i, &buf_b) < 0) ) 
@@ -1659,10 +1652,11 @@ u2_lo_loop(u2_reck* rec_u)
   if ( u2_yes == _lo_ours(rec_u) ) {
     _lo_ours(rec_u);
 
-    u2_reck_sync(rec_u);
+    u2_unix_ef_look(rec_u);
     u2_reck_plan(rec_u, u2nt(c3__gold, c3__ames, u2_nul),
                         u2nc(c3__kick, u2k(rec_u->now)));
   }
+
 #if 1
   u2_loom_save(rec_u->ent_w);
 

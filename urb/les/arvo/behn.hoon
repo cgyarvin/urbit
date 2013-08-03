@@ -9,7 +9,7 @@
 ::
 |%
 ++  bard                                                ::  new session
-  |=  who=seat  ^-  brad
+  |=  who=ship  ^-  brad
   %*  .  *brad
     hox    (scot %p who)
     cwd    %try
@@ -67,8 +67,8 @@
     tak.typ  (pal (vice '*task'))
     vas.typ  (pal (vice '*vase'))
   ==
-++  brat  ,[[who=seat bran] brad]                       ::  don't ask why
-++  brim  (list ,[p=seat q=brad])                       ::  session
+++  brat  ,[[who=ship bran] brad]                       ::  don't ask why
+++  brim  (list ,[p=ship q=brad])                       ::  session
 --                                                      ::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::              section 4bB, session engine             ::
@@ -544,7 +544,7 @@
         [[who pax] +.nub]
       :: 
       ++  gull                                          ::  request control
-        |=  [tea=wire him=seat ryf=riff]
+        |=  [tea=wire him=ship ryf=riff]
         (gram ~[/c [%b tea]] [%warp him ryf])
       ::
       ++  gulf                                          ::  stop request
@@ -617,7 +617,7 @@
             %mx  |-  ^+  +>.^^$
                  ?~  p.gud  +>.^^$
                  $(p.gud t.p.gud, +>.^^$ ^$(gud i.p.gud))
-            %ok  (gram [/c ~] %into who p.gud q.gud)
+            %ok  (gram [/c ~] %info who p.gud q.gud)
             %te  (gram ~ %tell p.gud)
             %th  (gram ~ %that p.gud q.gud)
             %va  !!
@@ -913,7 +913,7 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::              section 4bC, shell vane                 ::
 ::
-=|  $:  dez=(map duct brim)                             ::  state by seat
+=|  $:  dez=(map duct brim)                             ::  state by ship
     ==                                                  ::
 |=  [now=@da eny=@ sky=||(* (unit))]                    ::  current invocation
 ^?                                                      ::  opaque core
@@ -978,7 +978,7 @@
   ..$(dez ~)
 ::
 ++  scry
-  |=  [our=seat ren=@tas his=seat syd=disc lot=coin tyl=path]
+  |=  [our=ship ren=@tas his=ship syd=disc lot=coin tyl=path]
   ^-  (unit)
   ~
 ::
