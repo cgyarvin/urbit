@@ -110,7 +110,7 @@ _ames_lane_ip(u2_noun lan, c3_s* por_s, c3_w* pip_w)
   switch ( u2h(lan) ) {
     case c3__if: {
       *por_s= (c3_s) u2h(u2t(lan));
-      *pip_w = u2t(u2t(lan));
+      *pip_w = u2_cr_word(0, u2t(u2t(lan)));
 
       return u2_yes;
     } break;
@@ -122,7 +122,7 @@ _ames_lane_ip(u2_noun lan, c3_s* por_s, c3_w* pip_w)
     } break;
     case c3__ix: {
       *por_s = (c3_s) u2h(u2t(u2t(lan)));
-      *pip_w = u2t(u2t(u2t(lan)));
+      *pip_w = u2_cr_word(0, u2t(u2t(u2t(lan))));
 
       return u2_yes;
     } break;
