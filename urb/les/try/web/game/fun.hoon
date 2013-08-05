@@ -1,5 +1,6 @@
+!:
 |=  mad=[who=@p now=@da eny=@uw ced=cred]
-|=  zab=[sec=oryx quy=quay sud=scud]
+|=  zab=[sud=scud quy=quay]
 ^-  love
 :-  %ham
 :~  %html

@@ -1,5 +1,5 @@
 !:
-::  /=main=/lip/pony/hoon
+::  /=main=/lib/pony/hoon
 ::
 |%
 ++  polo                                                  ::  prompt

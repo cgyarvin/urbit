@@ -30,7 +30,7 @@
   --                                                      ::
 |%                                                        ::  functions
 ++  lunt                                                  ::  web framework
-  |=  :*  who=seat                                        ::  owner
+  |=  :*  who=ship                                        ::  owner
           ::  msg=tape                                        ::  prompt
           ped=cron                                        ::  wake frequency
           rut=(list rout)                                 ::  routes to
@@ -79,7 +79,7 @@
     [~ ((hard purl) q.vur)] 
   ::
   ++  post                                                ::  handle post
-    |=  [zab=scab ced=cred mot=moth]
+    |=  [rid=@ud zab=scab ced=cred mot=moth]
     ^+  +>
     ?>  ?=(^ r.mot)
     =+  cot=(need (~(get by q.mot) %content-type))
@@ -90,15 +90,15 @@
         [~ p.u.q.vex]
     %-  send
     ?~  guz
-      [%post p.r.zab /application/octet-stream u.r.mot]  ::  XX parse cot
-    [%form p.r.zab u.guz]
+      [%post p.p.zab /application/octet-stream u.r.mot]   ::  XX parse cot
+    [%form p.p.zab u.guz]
   ::
-  ++  went                                                ::  handle http
-    |=  [zab=scab ced=cred mot=moth]
+  ++  went                                                ::  handle get
+    |=  [rid=@ud zab=scab ced=cred mot=moth]
     ^+  +>
-    =+  sek=(roil [who now (shax (mix p.zab now)) ced] zab ras)
+    =+  sek=(roil [who now (shax (mix (sham zab) now)) ced] zab ras)
     =+  ^=  rep
-        :-  %th
+        :+  %th  rid
         ?~  sek
           [%raw [404 ~ [~ (tact "http error 404 at {<now>}")]]]
         u.sek
@@ -109,53 +109,32 @@
     ?.  ?=(%ht -.nut)
       ?>  ?=([%lunt *] pax)
       (send [%note t.pax nut])
-    =>  ?:(=(%post p.r.nut) (post +.nut) .)
+    =>  ?:(=(%post p.s.nut) (post +.nut) .)
     ?>  ?=(%ht -.nut)
-    (went p.nut q.nut r.nut)
+    (went +.nut)
   ::
   ++  zing                                                ::  resolve
     ^-  bowl
     [saw [~ (weld ask hup) ..$]]
   --
 ::
-++  polo                                                  ::  prompt
-  |=  [pim=prom pro=tape use=tape]
-  |*  [rul=_rule woo=||(* bowl)]
-  ^-  bowl 
-  :+  ~  ~
-  :-  :~  [[%polo ~] [%up pim pro]]
-      ==
-  |=  [now=@da pax=path nut=note]
-  ^-  bowl
-  ?>  &(=([%polo ~] pax) ?=(%up -.nut))
-  =+  rey=(rush p.nut rul)
-  ?~  rey
-    :-  [[%text ?~(use "invalid response" use)] ~]
-    :-  ~
-    [[[[%polo ~] [%up pim pro]] ~] ..$]
-  (woo u.rey)
-::
-++  pomo  |=([gud=gift bol=bowl] [[gud p.bol] q.bol])
-++  pomp  |=([txt=tape bol=bowl] (pomo la/leaf/txt bol))
 ++  roil
   |=  [mad=scad zab=scab ras=wick]
   ^-  (unit love)
-  =+  cag=`path`(flop p.r.zab)
+  =+  cag=`path`(flop p.p.zab)
   ?>  ?=(^ cag)
-  =+  buk=i.cag
-  =+  hub=(hoof stub)
-  =+  ven=~(rent co ~ %da q.mad)
-  =+  god=~(rent co ~ %p p.mad)
-  =+  tyc=(weld (flop t.cag) `path`[%web ven buk god %cy ~])
-  =+  tox=(weld (flop t.cag) `path`[%web ven buk god %cx ~])
+  =+  syd=i.cag
+  =+  lok=~(rent co ~ %da q.mad)
+  =+  hox=~(rent co ~ %p p.mad)
+  =+  tem=`path`[hox syd lok %web t.cag]
   =<  veen
   |%
   ++  drem
     |=  axt=@ta
     ^-  (unit love)
-    =+  rog=((hard meta) .^((flop `path`[axt tyc])))
-    ?:  ?=([& *] rog)
-      =+  dat=((hard ,@) .^((flop `path`[axt tox])))
+    =+  ape=((hard apex) .^(%cy tem))
+    ?:  (~(has by q.ape) axt)
+      =+  dat=((hard ,@) .^(%cx (weld tem `path`[axt ~])))
       :-  ~
       :+  %mid
         ?+  axt  [%application %octet-stream ~]
@@ -165,26 +144,19 @@
           %js    [%text %javascript ~]
         ==
       [(met 3 dat) dat]
-    =+  mog=((hard meta) .^((flop `path`[hub tyc])))
-    ?.  ?=([& *] mog)  ~
-    =+  wer=(flop `path`[hub tox])
-    =+  dat=((hard ,@) .^(wer))
-    =+  vez=(vang & wer)
+    ?.  (~(has by q.ape) %hoon)  ~
+    :-  ~
+    =+  vez=(vang & [hox syd lok t.cag])
+    =+  dat=((hard ,@) .^(%cx (weld tem `path`[%hoon ~]))) 
     =+  gen=(scan (trip dat) (full (ifix [gay gay] tall:vez)))
     =+  pro=(slam (slam (slap ras gen) !>(mad)) !>(zab))
-    [~ ((hard love) q.pro)]
+    ((hard love) q.pro)
   ::
   ++  dunt
     ^-  (unit love)
     (drem %html)
   ::
   ++  veen
-    |-  ^-  (unit love)
-    ?:  =(tyc [buk god ven %cy])  ~
-    ?~  tyc  !!
-    ?~  tox  !!
-    =+  rab=?~(r.q.r.zab dunt (drem u.r.q.r.zab))
-    ?^  rab  rab
-    $(tyc t.tyc, tox t.tox)
+    ?~(r.q.p.zab dunt (drem u.r.q.p.zab))
   --
 --

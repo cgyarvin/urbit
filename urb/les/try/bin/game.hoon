@@ -1,6 +1,9 @@
 !:
-=>  ^^/=main=/hume
-|=  [who=seat est=time eny=@uw was=path]
+::  /=try=/bin/game/hoon
+::
+=>  .(- `[who=@p how=path]`-)
+=>  .(+ =>(+ ^/=main=/hume))
+|=  [est=time eny=@uw]
 |=  [neighbor=tape ~]
 ^-  bowl
 =+  messages=*(list ,@t)

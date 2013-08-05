@@ -152,6 +152,15 @@ u2_loop_signal_memory()
   longjmp(Signal_buf, 1);
 }
 
+#if 0
+/* _lo_lock_acquire(): acquire a lockfile for the machine.
+*/
+static void
+_lo_lock_acquire()
+{
+}
+#endif
+
 /* _lo_init(): initialize I/O across the process.
 */
 static void

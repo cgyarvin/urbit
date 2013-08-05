@@ -901,7 +901,7 @@ void
 u2_reck_http_request(u2_reck* rec_u, u2_bean sec, u2_noun pox, u2_noun req)
 {
   // uL(fprintf(uH, "http: request\n"));
-  u2_reck_plan(rec_u, pox, u2nc((sec == u2_yes) ? c3__this : c3__thin, req));
+  u2_reck_plan(rec_u, pox, u2nq(c3__this, sec, 0, req));
 }
 
 /* u2_reck_prick(): query the reck namespace (unprotected).

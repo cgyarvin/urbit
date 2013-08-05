@@ -1,5 +1,5 @@
 !:
-::  /=main=/fun/apply/hoon
+::  /=main=/bin/begin/hoon
 ::
 =>  .(- `[who=@p how=path]`-)
 =>  .(+ =>(+ ^/===/pony))

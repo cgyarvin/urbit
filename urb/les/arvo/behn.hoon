@@ -367,7 +367,7 @@
         .(s.orb [%r ~])
       ::
       ++  grab                                          ::  chase simple path
-        |=  lam=lamp  ^-  gene
+        |=  lam=lamb  ^-  gene
         ?-  -.lam
           &  =+  tes=(sky [%cx hox %main wen %bin p.lam %hoon ~])
              (grad [hox ?^(tes %main cwd) wen p.lam ~])
@@ -639,7 +639,7 @@
                  $(p.gud t.p.gud, +>.^^$ ^$(gud i.p.gud))
             %ok  (gram [/c ~] %info who p.gud q.gud)
             %te  (gram ~ %tell p.gud)
-            %th  (gram ~ %that p.gud q.gud)
+            %th  (gram [/e ~] %that p.gud q.gud)
             %va  !!
             %xx  (gram ~ p.gud)
             %xy  (gram [p.gud /b ~] q.gud)
@@ -817,8 +817,8 @@
         ==
       ==
     ::
-    ++  lamp
-      %+  cook  |=(a=^lamp a)
+    ++  lamb
+      %+  cook  |=(a=^lamb a)
       ;~  pose
         (stag %& sym)
         (stag %| (stag %clsg poor:vez))
@@ -830,7 +830,7 @@
         %+  stag  %0
         ;~  plug
           ;~(pose ;~(pfix zap ;~(pose (cold %2 zap) (easy %1))) (easy %0))
-          lamp
+          lamb
           cone
           (stag %clsg (star ;~(pfix ace wide:vez)))
         ==
