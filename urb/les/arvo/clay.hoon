@@ -515,10 +515,14 @@
           ?.  =(%gold (adit hen))  ~
           [~ %gold p.fav] 
       ?>  =(q.u.wru p.fav)
+      ?:  =(%% q.fav)
+        ?.  ?=(%into -.fav)  [~ ..^$]
+        =+  yar=(need (~(get by fat.ruf) p.fav))
+        [~ ..^$(fat.ruf (~(put by fat.ruf) p.fav yar(hez [~ hen])))]
       =^  mos  ruf  
         =+  ^=  zot
           zoot:(exec:(di:wake:(un q.u.wru now ruf) q.fav) hen now [%& r.fav])
-        abet:zot(hez.yar ?:(=(%info -.fav) hez.yar.zot [~ hen]))
+        abet:zot(hez.yar ?.(=(%into -.fav) hez.yar.zot [~ hen]))
       [mos ..^$]
     ::
         %pull

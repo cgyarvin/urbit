@@ -158,6 +158,7 @@ u2_loop_signal_memory()
 static void
 _lo_lock_acquire()
 {
+  c3_w pid_w = get
 }
 #endif
 

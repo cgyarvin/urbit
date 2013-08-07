@@ -1067,6 +1067,12 @@
         void
         u2_unix_ef_look(u2_reck* rec_u);
 
+      /* u2_unix_ef_init(): update filesystem for new acquisition.
+      */
+        void
+        u2_unix_ef_init(u2_reck* rec_u,
+                        u2_noun  who);
+
       /* u2_unix_ef_ergo(): update filesystem, outbound.
       */
         void

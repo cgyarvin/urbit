@@ -599,6 +599,8 @@ _reck_kick_term(u2_reck* rec_u, u2_noun pox, c3_l tid_l, u2_noun fav)
     {
       rec_u->own = u2nc(u2k(p_fav), rec_u->own);
 
+      u2_unix_ef_init(rec_u, u2k(p_fav));
+
       // uL(fprintf(uH, "kick: init: %d\n", p_fav));
       if ( u2_met(3, p_fav) <= 4 ) {
         // uL(fprintf(uH, "kick: our: %d\n", u2_cr_word(0, p_fav)));
@@ -732,6 +734,7 @@ _reck_kick_spec(u2_reck* rec_u, u2_noun pox, u2_noun fav)
         return _reck_kick_http(rec_u, pox, coq_l, seq_l, fav);
       } break;
 
+      case c3__clay: 
       case c3__sync: {
         return _reck_kick_sync(rec_u, pox, fav);
       } break;

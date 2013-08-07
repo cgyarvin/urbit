@@ -630,17 +630,20 @@ _unix_ship_update(u2_reck* rec_u, u2_uhot* hot_u)
 /* _unix_hot_gain(): gain ship.
 */
 static struct _u2_uhot*
-_unix_hot_gain(u2_reck* rec_u, u2_noun who)
+_unix_hot_gain(u2_reck* rec_u, u2_noun who, u2_bean mek)
 {
   u2_noun hox = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', who));
   c3_c*   hox_c = u2_cr_string(hox);
   c3_c*   pax_c = _unix_down(u2_Host.ops_u.hom_c, hox_c + 1);
-  DIR*    rid_u = opendir(pax_c);
 
-  if ( !rid_u ) return 0;
-  else closedir(rid_u);
+  if ( u2_yes == mek ) {
+    _unix_mkdir(pax_c);
+  } else { 
+    DIR* rid_u = opendir(pax_c);
 
-  sprintf(pax_c, "%s/%s", u2_Host.ops_u.hom_c, hox_c + 1);
+    if ( !rid_u ) return 0;
+    else closedir(rid_u);
+  }
   free(hox_c);
   u2z(hox);
 
@@ -887,6 +890,19 @@ _unix_desk_sync_ergo(u2_reck* rec_u,
   }
 }
 
+/* u2_unix_ef_init(): update filesystem for new acquisition.
+*/
+void
+u2_unix_ef_init(u2_reck* rec_u,
+                u2_noun  who)
+{
+  _unix_hot_gain(rec_u, u2k(who), u2_yes);
+
+  u2_reck_plan(rec_u,
+               u2nq(c3__gold, c3__sync, u2k(rec_u->sen), u2_nul),
+               u2nq(c3__into, who, u2_blip, u2nc(u2_yes, u2_nul)));
+}
+
 /* u2_unix_ef_ergo(): update filesystem, outbound.
 */
 void
@@ -928,7 +944,7 @@ u2_unix_ef_look(u2_reck* rec_u)
 
       mpz_clear(who_mp);
       if ( 0 == hot_u ) {
-        hot_u = _unix_hot_gain(rec_u, u2k(who));
+        hot_u = _unix_hot_gain(rec_u, u2k(who), u2_no);
 
         if ( hot_u ) {
           // uL(fprintf(uH, "sync: gain %s\n", hot_u->dir_u.pax_c));
