@@ -1098,6 +1098,7 @@
               [%mu p=type q=(list)]                     ::  batch emit
               [%mx p=(list gift)]                       ::  batch gift
               [%ok p=disc q=nori]                       ::  save changes
+              [%sc p=(unit skit)]                       ::  sack library
               [%te p=(list ,@t)]                        ::  dump lines
               [%th p=@ud q=love]                        ::  http response
               [%va p=@tas q=(unit vase)]                ::  set/clear variable
@@ -1366,6 +1367,7 @@
               ==                                        ::
               puq=(qeu ,[p=@ud q=bird])                 ::  queue
           ==                                            ::
+++  skit  ,[p=(unit ,@ta) q=(list ,@ta) r=(list ,@ta)]  ::  tracking path
 ++  sink                                                ::  incoming per server
           $:  nes=(map flap ,[p=@da q=bait])            ::  fragment actions
           ==                                            ::

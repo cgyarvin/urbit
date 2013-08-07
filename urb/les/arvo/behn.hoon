@@ -26,6 +26,7 @@
       loq=(unit case)                                   ::  working version
       pyr=pyre                                          ::  compose cache
       war=(map ,@tas coal)                              ::  variables
+      sac=(list skit)                                   ::  library stack
       sev=(map ,@tas (set ,[p=@ud q=@ud r=wire]))       ::  message servers
       hit=[p=@ud q=(list ,@t)]                          ::  command history
       sur=[p=@ud q=(qeu vase)]                          ::  result history
@@ -332,6 +333,17 @@
         ?~  ask  +>.^$
         $(ask t.ask, +>.^$ abet:(pane:(ox p.i.ask) q.i.ask))
       ::
+      ++  glee                                          ::  assemble stack
+        =+  [kas=sac boy=nub]
+        |-  ^-  [(unit coal) _+>]
+        ?~  kas  [[~ boy] +>.$]
+        =^  vid  +>.$  $(kas t.kas)
+        ?~  vid  [~ +>.$]
+        =^  lez  +>.$  (grok | (gnat i.kas) u.vid)
+        ?~  lez
+          [~ ?.(&(?=(^ duv) =(%crud -.q.i.duv)) +>.$ good:+>.$(sac t.kas))]
+        [[~ q.u.lez] +>.$]
+      ::
       ++  glib                                          ::  pending note
         |=  [lap=wire nob=nose]
         ^+  +>
@@ -361,6 +373,29 @@
           bez    (~(put by bez) inx u.myt)
           +>.^$  (gulp (bist %au (scot %ud inx) ~) u.myt)
         ==
+      ::
+      ++  gnat                                          ::  skit to path
+        |=  sik=skit
+        (weld q.sik `path`[?~(p.sik wen u.p.sik) %lib r.sik])
+      ::
+      ++  goad                                          ::  print skit
+        |=  sik=skit
+        ^+  +>
+        %+  gram  ~
+        :+  %note  '^'
+        :-  %leaf
+        ;:  weld
+          (spud q.sik)
+          ?~(p.sik "=" (spud u.p.sik ~)) 
+          "/lib" 
+          (spud r.sik)
+          "/hoon"
+        ==
+      ::
+      ++  good                                          ::  print skits
+        =+  kas=sac
+        |-  ^+  +>
+        ?~(kas +> (goad:$(kas t.kas) i.kas))
       ::
       ++  goon                                          ::  kill
         ^+  .
@@ -430,7 +465,9 @@
             ?~  juy  +.$
             $(s.orb hog(joy.p [~ (need (mang [food:zu war u.juy] sky))]))
           ?~  ran.p.hog
-            =^  nur  +.$  (gray (mong [slap u.joy.p.hog gen] sky))
+            =^  noh  +.$  glee
+            ?~  noh  +.$
+            =^  nur  +.$  (gray (mong [slap u.noh gen] sky))
             ?~  nur  +.$
             $(s.orb hog(ran.p nur))
           ?:  ?=(1 -.q.hog)
@@ -638,6 +675,7 @@
                  ?~  p.gud  +>.^^$
                  $(p.gud t.p.gud, +>.^^$ ^$(gud i.p.gud))
             %ok  (gram [/c ~] %info who p.gud q.gud)
+            %sc  good:+>.^$(sac ?~(p.gud ?~(sac ~ +.sac) [u.p.gud sac]))
             %te  (gram ~ %tell p.gud)
             %th  (gram [/e ~] %that p.gud q.gud)
             %va  !!

@@ -50,7 +50,7 @@
         u2_hmet_other                       //  ie, unsupported
       } u2_hmet;
  
-    /* u2_hreq: http request.
+    /* u2_hreq: incoming http request.
     */
       typedef struct _u2_hreq {
         struct _u2_hcon* hon_u;             //  connection
@@ -68,7 +68,7 @@
         u2_hbod*         bur_u;             //  entry of write queue
       } u2_hreq;
 
-    /* u2_hrep: simple http response.
+    /* u2_hrep: outgoing http response.
     */
       typedef struct _u2_hrep {
         c3_w             coq_l;             //  connection number
@@ -78,7 +78,7 @@
         u2_hbod*         bod_u;             //  body (one part)
       } u2_hrep;
 
-    /* u2_hcon: http connection.
+    /* u2_hcon: incoming http connection.
     */
       typedef struct _u2_hcon {
         struct ev_io     wax_u;             //  event handler state
@@ -105,6 +105,49 @@
         struct _u2_hcon* hon_u;             //  connection list
         struct _u2_http* nex_u;             //  next in list
       } u2_http;
+
+    /* u2_creq: outgoing http request.
+    */
+      typedef struct _u2_creq {             //  client request
+        c3_c*            url_c;             //  url
+        u2_hmet          met_e;             //  method
+        u2_hhed*         hed_u;             //  headers
+        u2_hbod*         bod_u;             //  body
+        struct _u2_creq* nex_u;
+      } u2_creq;
+
+    /* u2_cres: response to http client.
+    */
+      typedef struct _u2_cres {
+        u2_hrat          rat_e;             //  parser state
+        void*            par_u;             //  struct http_parser *
+        c3_c*            url_c;             //  url
+        u2_bean          end;               //  all responses added
+        u2_hhed*         hed_u;             //  headers 
+        u2_hbod*         bod_u;             //  body parts
+        struct _u2_cres* nex_u;             //  next in request queue
+        u2_hbod*         rub_u;             //  exit of write queue
+        u2_hbod*         bur_u;             //  entry of write queue
+      } u2_cres;
+
+    /* u2_ccon: outgoing http connection.
+    */
+      typedef struct _u2_ccon {             //  client connection
+        struct ev_io     wax_u;             //  event handler state 
+        struct ev_timer  tim_u;             //  connection timeout
+        c3_w             las_w;             //  last active
+        c3_w             coq_l;             //  connection number
+        c3_c*            hos_c;             //  hostname
+        u2_bean          sec;               //  yes == https
+        struct _u2_ccon* pre_u;             //  previous in list
+        struct _u2_ccon* nex_u;             //  next in list
+      } u2_ccon;
+
+    /* u2_cttp: http client.
+    */
+      typedef struct _u2_cttp {
+        struct _u2_ccon* con_u;             //  connection list
+      } u2_cttp;
 
     /* u2_apac: ames packet, coming or going.
     */

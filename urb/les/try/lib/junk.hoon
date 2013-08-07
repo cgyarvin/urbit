@@ -2,5 +2,5 @@
 ++  helo
   |=  a=tape
   ^-  tape
-  (weld "goodbye " a)
+  (weld "hello " a)
 --
