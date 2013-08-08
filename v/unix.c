@@ -717,7 +717,7 @@ _unix_hot_gain(u2_reck* rec_u, u2_noun who, u2_bean mek)
 
   free(hox_c);
   u2z(hox);
-  u2_unix_acquire(rec_u, pax_c);
+  u2_unix_acquire(pax_c);
 
   {
     u2_uhot* hot_u = malloc(sizeof(u2_uhot));
@@ -1122,8 +1122,8 @@ u2_unix_io_exit(u2_reck* rec_u)
   {
     u2_uhot* hot_u;
 
-    for ( hot_u = unx_u->hot_u; hot_u; hot_u = hot_u->nex_u ) {
-      u2_unix_release(rec_u, hot_u->pax_c);
+    for ( hot_u = u2_Host.unx_u.hot_u; hot_u; hot_u = hot_u->nex_u ) {
+      u2_unix_release(hot_u->dir_u.pax_c);
     }
   }
 }
