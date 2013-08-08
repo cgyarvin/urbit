@@ -717,7 +717,6 @@ _unix_hot_gain(u2_reck* rec_u, u2_noun who, u2_bean mek)
 
   free(hox_c);
   u2z(hox);
-  uL(fprintf(uH, "gain: %s\n", pax_c));
   u2_unix_acquire(pax_c);
 
   {

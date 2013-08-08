@@ -1,7 +1,8 @@
 !:
-::  /=main=/fun/update/hoon
+::  /=main=/bin/update/hoon
 ::
-|=  [who=seat *]
+=>  .(-< `who=@p`-<)
+|=  *
 |=  ~
 :_  ~
 =+  bos=(sein who)

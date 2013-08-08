@@ -1,9 +1,9 @@
 !:
 ::  /=main=/bin/begin/hoon
 ::
-=>  .(- `[who=@p how=path]`-)
+=>  .(-< `who=@p`-<)
 =>  .(+ =>(+ ^/===/pony))
-|=  [est=time eny=@uw]
+|=  [est=time *]
 |=  [mig=@p ~]
 =+  bos=(sein mig)
 ?>  !=(bos mig)
