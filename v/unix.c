@@ -635,15 +635,14 @@ _unix_hot_gain(u2_reck* rec_u, u2_noun who, u2_bean mek)
   u2_noun hox = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', who));
   c3_c*   hox_c = u2_cr_string(hox);
   c3_c*   pax_c = _unix_down(u2_Host.ops_u.hom_c, hox_c + 1);
+  DIR*    rid_u = opendir(pax_c);
 
-  if ( u2_yes == mek ) {
-    _unix_mkdir(pax_c);
-  } else { 
-    DIR* rid_u = opendir(pax_c);
+  if ( !rid_u ) {
+    if ( u2_yes == mek ) {
+      _unix_mkdir(pax_c);
+    } else return 0;
+  } else closedir(rid_u);
 
-    if ( !rid_u ) return 0;
-    else closedir(rid_u);
-  }
   free(hox_c);
   u2z(hox);
 
@@ -890,6 +889,77 @@ _unix_desk_sync_ergo(u2_reck* rec_u,
   }
 }
 
+/* u2_unix_acquire(): acquire a lockfile, killing anything that holds it.
+*/
+void
+u2_unix_acquire(c3_c* pax_c)
+{
+  c3_c* paf_c = _unix_down(pax_c, ".vere.lock");
+  c3_w pid_w;
+  FILE* loq_u;
+
+  if ( NULL != (loq_u = fopen(paf_c, "r")) ) {
+    if ( 1 != fscanf(loq_u, "%u", &pid_w) ) {
+      uL(fprintf(uH, "lockfile %s is corrupt!\n", paf_c));
+      kill(getpid(), SIGTERM);
+      sleep(1); c3_assert(0);
+    }
+    else {
+      c3_w i_w;
+
+      if ( -1 != kill(pid_w, SIGTERM) ) {
+        uL(fprintf(uH, "stopping process %d, live in %s...\n", pid_w, pax_c));
+
+        for ( i_w = 0; i_w < 16; i_w++ ) {
+          sleep(1);
+          if ( -1 == kill(pid_w, SIGTERM) ) {
+            break;
+          }
+        }
+        if ( 16 == i_w ) {
+          for ( i_w = 0; i_w < 16; i_w++ ) {
+            if ( -1 == kill(pid_w, SIGKILL) ) {
+              break;
+            }
+            sleep(1);
+          }
+        }
+        if ( 16 == i_w ) {
+          uL(fprintf(uH, "process %d seems unkillable!\n", pid_w));
+          c3_assert(0);
+        }
+      }
+      uL(fprintf(uH, "unix: stopped old process %u\n", pid_w));
+    }
+    fclose(loq_u);
+    unlink(paf_c);
+  }
+
+  loq_u = fopen(paf_c, "w");
+  fprintf(loq_u, "%u\n", getpid());
+
+  {
+    c3_i fid_i = fileno(loq_u);
+#if defined(U2_OS_linux)
+    fdatasync(fid_i);
+#else
+    fcntl(fid_i, F_FULLFSYNC); 
+#endif
+  }
+  fclose(loq_u);
+}
+
+/* u2_unix_krel(): release a lockfile.
+*/
+void
+u2_unix_release(c3_c* pax_c)
+{
+  c3_c* paf_c = _unix_down(pax_c, ".vere.lock");
+
+  unlink(paf_c);
+  free(paf_c);
+}
+
 /* u2_unix_ef_init(): update filesystem for new acquisition.
 */
 void
@@ -1004,6 +1074,8 @@ u2_unix_io_init(u2_reck* rec_u)
 {
   u2_unix* unx_u = &u2_Host.unx_u;
 
+  u2_unix_acquire(u2_Host.cpu_c);
+
   ev_timer_init(&unx_u->tim_u, _lo_unix, 10000.0, 0.);
   unx_u->alm = u2_no;
   unx_u->sig_u = 0;
@@ -1043,6 +1115,7 @@ u2_unix_io_init(u2_reck* rec_u)
 void 
 u2_unix_io_exit(u2_reck* rec_u)
 {
+  u2_unix_release(u2_Host.cpu_c);
 }
 
 /* u2_unix_io_spin(): start unix server(s).

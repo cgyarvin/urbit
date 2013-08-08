@@ -358,7 +358,6 @@ u2_reck_cold(u2_reck* rec_u, c3_w kno_w)
   rec_u->now = 0;
   rec_u->wen = 0;
   rec_u->sen = 0;
-  rec_u->our = 0;
   rec_u->roe = 0;
   rec_u->key = 0;
 
@@ -444,7 +443,6 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
   rec_u->now = 0;
   rec_u->wen = 0;
   rec_u->sen = 0;
-  rec_u->our = 0;
   rec_u->roe = 0;
   rec_u->key = 0;
 
@@ -602,10 +600,6 @@ _reck_kick_term(u2_reck* rec_u, u2_noun pox, c3_l tid_l, u2_noun fav)
       u2_unix_ef_init(rec_u, u2k(p_fav));
 
       // uL(fprintf(uH, "kick: init: %d\n", p_fav));
-      if ( u2_met(3, p_fav) <= 4 ) {
-        // uL(fprintf(uH, "kick: our: %d\n", u2_cr_word(0, p_fav)));
-        rec_u->our = u2k(p_fav);
-      }
       u2z(pox); u2z(fav); return u2_yes;
     } break;
   }

@@ -152,26 +152,16 @@ u2_loop_signal_memory()
   longjmp(Signal_buf, 1);
 }
 
-#if 0
-/* _lo_lock_acquire(): acquire a lockfile for the machine.
-*/
-static void
-_lo_lock_acquire()
-{
-  c3_w pid_w = get
-}
-#endif
-
 /* _lo_init(): initialize I/O across the process.
 */
 static void
 _lo_init(u2_reck* rec_u)
 {
+  u2_unix_io_init(rec_u);
   u2_ames_io_init(rec_u);
   u2_term_io_init(rec_u);
   u2_http_io_init(rec_u);
   u2_save_io_init(rec_u);
-  u2_unix_io_init(rec_u);
 }
 
 /* _lo_exit(): terminate I/O across the process.
@@ -179,11 +169,11 @@ _lo_init(u2_reck* rec_u)
 static void
 _lo_exit(u2_reck* rec_u)
 {
+  u2_unix_io_exit(rec_u);
   u2_ames_io_exit(rec_u);
   u2_term_io_exit(rec_u);
   u2_http_io_exit(rec_u);
   u2_save_io_exit(rec_u);
-  u2_unix_io_exit(rec_u);
 }
 
 /* _lo_stop(): stop event I/O across the process.
@@ -1576,33 +1566,6 @@ _lo_rest(u2_reck* rec_u)
   }
 }
 
-/* _lo_ours(): set main identity.  Kind of a hack.
-*/
-static u2_bean
-_lo_ours(u2_reck* rec_u)
-{
-  if ( u2_nul == rec_u->own ) {
-    uL(fprintf(uH, "no owners\n"));
-
-    return u2_no;
-  }
-  else {
-    u2_noun eac = u2t(rec_u->own);
-
-    rec_u->our = u2h(rec_u->own);
-    while ( u2_nul != eac ) {
-      if ( u2_yes == u2_cka_lte(u2k(u2h(eac)), u2k(rec_u->our)) ) {
-        rec_u->our = u2h(eac);
-      }
-      eac = u2t(eac);
-    }
-    rec_u->our = u2k(rec_u->our);
-    rec_u->pod = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', u2k(rec_u->our)));
-
-    return u2_yes;
-  }
-}
-
 /* _lo_zen(): get OS entropy.
 */
 static u2_noun 
@@ -1659,9 +1622,7 @@ u2_lo_loop(u2_reck* rec_u)
     _lo_rest(rec_u);
   }
 
-  if ( u2_yes == _lo_ours(rec_u) ) {
-    _lo_ours(rec_u);
-
+  {
     u2_unix_ef_look(rec_u);
     u2_reck_plan(rec_u, u2nt(c3__gold, c3__ames, u2_nul),
                         u2nc(c3__kick, u2k(rec_u->now)));

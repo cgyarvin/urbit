@@ -371,7 +371,7 @@
                   pac=rock
               ==
           ^-  (list boon)
-          ::  ~&  [%ames-wist now waz ryn]
+          ?:  =(our her)  [%ouzo *lane rock]
           ?~  waz  ~
           =+  dyr=?:(=(her i.waz) dur (gur i.waz))
           ?.  ?&  !=(our i.waz)
@@ -818,7 +818,7 @@
         [~ fox]
       =<  zork
       =<  zank
-      ::  ~&  [%hear p.p.kec ryn `@p`(mug (shaf %flap pac))]
+      ~&  [%hear p.p.kec ryn `@p`(mug (shaf %flap pac))]
       %-  ~(blow la:(ho:(um q.p.kec) p.p.kec) ryn %none (shaf %flap pac))
       [q.kec r.kec s.kec]
     ::
@@ -1478,10 +1478,10 @@
       ==
     ::
         %ouzo  
-      ::  ~&  [%send now p.bon `@p`(mug (shaf %flap q.bon))]
+      ~&  [%send now p.bon `@p`(mug (shaf %flap q.bon))]
       :_  fox
       [[wru hen [%send p.bon q.bon]] ~]
-        
+    ::  
         %wine
       :_  fox
       =+  nym=(temp p.p.bon q.p.bon /name)

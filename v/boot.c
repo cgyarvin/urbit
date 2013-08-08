@@ -513,7 +513,6 @@ u2_ve_mark_reck(u2_reck* rec_u)
   siz_w += u2_cm_mark_noun(rec_u->wen);
   siz_w += u2_cm_mark_noun(rec_u->sen);
   siz_w += u2_cm_mark_noun(rec_u->own);
-  siz_w += u2_cm_mark_noun(rec_u->our);
   siz_w += u2_cm_mark_noun(rec_u->roe);
   siz_w += u2_cm_mark_noun(rec_u->key);
 
