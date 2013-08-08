@@ -701,7 +701,7 @@ _unix_ship_update(u2_reck* rec_u, u2_uhot* hot_u)
  
 /* _unix_hot_gain(): gain ship.
 */
-static struct _u2_uhot*
+static void
 _unix_hot_gain(u2_reck* rec_u, u2_noun who, u2_bean mek)
 {
   u2_noun hox = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', who));
@@ -712,11 +712,12 @@ _unix_hot_gain(u2_reck* rec_u, u2_noun who, u2_bean mek)
   if ( !rid_u ) {
     if ( u2_yes == mek ) {
       _unix_mkdir(pax_c);
-    } else return 0;
+    } else return;
   } else closedir(rid_u);
 
   free(hox_c);
   u2z(hox);
+  uL(fprintf(uH, "gain: %s\n", pax_c));
   u2_unix_acquire(pax_c);
 
   {
@@ -725,9 +726,8 @@ _unix_hot_gain(u2_reck* rec_u, u2_noun who, u2_bean mek)
     _unix_dir_watch(rec_u, &hot_u->dir_u, 0, pax_c);
 
     u2_cr_mp(hot_u->who_mp, who);
-    hot_u->nex_u = 0;
-
-    return hot_u;
+    hot_u->nex_u = u2_Host.unx_u.hot_u;
+    u2_Host.unx_u.hot_u = hot_u;
   }
 }
 
@@ -736,6 +736,7 @@ _unix_hot_gain(u2_reck* rec_u, u2_noun who, u2_bean mek)
 static void
 _unix_hot_lose(u2_reck* rec_u, u2_uhot* hot_u)
 {
+  uL(fprintf(uH, "lose: %s\n", hot_u->dir_u.pax_c));
   _unix_dir_free(rec_u, &(hot_u->dir_u));
 }
 
@@ -1016,14 +1017,7 @@ u2_unix_ef_look(u2_reck* rec_u)
 
       mpz_clear(who_mp);
       if ( 0 == hot_u ) {
-        hot_u = _unix_hot_gain(rec_u, u2k(who), u2_no);
-
-        if ( hot_u ) {
-          // uL(fprintf(uH, "sync: gain %s\n", hot_u->dir_u.pax_c));
-
-          hot_u->nex_u = unx_u->hot_u;
-          unx_u->hot_u = hot_u;
-        }
+        _unix_hot_gain(rec_u, u2k(who), u2_no);
       }
     }
   }
