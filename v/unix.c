@@ -181,6 +181,8 @@ _unix_file_watch(u2_reck* rec_u,
   fil_u->par_u = dir_u;
   mpz_init_set(fil_u->mod_mp, mod_mp);
   fil_u->nex_u = 0;
+
+  c3_assert(!fil_u->dot_c || (fil_u->dot_c > fil_u->pax_c));
 }
 
 /* _unix_file_form(): form a filename path downward.
@@ -269,6 +271,31 @@ _unix_file_free(u2_reck* rec_u, u2_ufil* fil_u)
   free(fil_u->pax_c);
   mpz_clear(fil_u->mod_mp);
 }
+
+#if 0
+/* _unix_file_sane(): sanity check file.
+*/
+static void
+_unix_file_sane(u2_ufil* fil_u)
+{
+}
+
+/* _unix_dir_sane(): sanity check directory.
+*/
+static void
+_unix_dir_sane(u2_udir* dir_u)
+{
+  u2_udir* dis_u;
+  u2_ufil* fil_u;
+
+  for ( dis_u = dir_u->dis_u; dis_u; dis_u = dis_u->nex_u ) {
+    _unix_dir_sane(dis_u);
+  }
+  for ( fil_u = dir_u->fil_u; fil_u; fil_u = fil_u->nex_u ) {
+    _unix_file_sane(fil_u);
+  }
+}
+#endif
 
 /* _unix_dir_free(): free (within) directory tracker.
 */
@@ -425,7 +452,7 @@ _unix_dir_update(u2_reck* rec_u, u2_udir* dir_u, DIR* rid_u)
         u2_udir* ded_u = *dis_u;
         u2_udir* nex_u = ded_u->nex_u;
 
-        // uL(fprintf(uH, "removed directory %s\n", ded_u->pax_c));
+        uL(fprintf(uH, "removed directory %s\n", ded_u->pax_c));
         _unix_dir_free(rec_u, ded_u);
         free(ded_u);
 
@@ -442,7 +469,7 @@ _unix_dir_update(u2_reck* rec_u, u2_udir* dir_u, DIR* rid_u)
         u2_ufil* ded_u = *fil_u;
         u2_ufil* nex_u = ded_u->nex_u;
 
-        // uL(fprintf(uH, "removed file %s\n", ded_u->pax_c));
+        uL(fprintf(uH, "removed file %s\n", ded_u->pax_c));
         _unix_file_free(rec_u, ded_u);
         free(ded_u);
 
@@ -715,6 +742,7 @@ _unix_hot_gain(u2_reck* rec_u, u2_noun who, u2_bean mek)
     } else return;
   } else closedir(rid_u);
 
+  // uL(fprintf(uH, "GAIN %s\n", pax_c));
   free(hox_c);
   u2z(hox);
   u2_unix_acquire(pax_c);
@@ -849,6 +877,7 @@ _unix_desk_sync_tofu(u2_reck* rec_u,
     }
 
     if ( *fil_u ) {
+      (*fil_u)->dot_c = (pax_c + ((*fil_u)->dot_c - (*fil_u)->pax_c));
       (*fil_u)->pax_c = pax_c;
 
       mpz_clear((*fil_u)->mod_mp);
@@ -950,11 +979,7 @@ _unix_desk_sync_ergo(u2_reck* rec_u,
     if ( u2_no == u2_sing(xun, bur) ) {
       u2_noun doz = u2_cn_mung(u2k(rec_u->toy.cyst), u2nc(bur, xun));
 
-#if 1
       _unix_desk_sync_soba(rec_u, *dir_u, doz);
-#else
-      u2z(doz);
-#endif
     }
     else {
       u2z(xun); u2z(bur);

@@ -1232,6 +1232,7 @@
         ::
         ++  wind                                        ::    wind:ho:um:am
           |=  [sup=soap ham=meal]
+          ::  ~&  [%wind her q.sup r.sup]
           ^+  +>
           =^  wyv  diz  (zuul:diz now ham)
           =:  par.bah    (~(put by par.bah) sup [*snow wyv])
@@ -1379,6 +1380,7 @@
       ==
     ::
         %coke  
+      ::  ~&  [%went q.p.bon q.bon q.r.bon r.r.bon]
       :_  fox
       :~  [[~ %iron p.p.bon] s.bon [%went q.p.bon q.bon r.bon]]
       ==
@@ -1516,6 +1518,7 @@
         ::
             %junk
           [~ fox(any.ton (shax (mix any.ton.fox p.fav)))]
+            
         ::
             %kick
           (~(kick am [now fox(hop p.fav)]) hen)

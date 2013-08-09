@@ -660,8 +660,19 @@ _reck_kick_sync(u2_reck* rec_u, u2_noun pox, u2_noun fav)
 static u2_bean
 _reck_kick_ames(u2_reck* rec_u, u2_noun pox, u2_noun fav)
 {
+  u2_noun p_fav;
+
   switch ( u2h(fav) ) {
     default: break;
+    case c3__init: p_fav = u2t(fav);
+    {
+      rec_u->own = u2nc(u2k(p_fav), rec_u->own);
+
+      u2_unix_ef_init(rec_u, u2k(p_fav));
+
+      // uL(fprintf(uH, "kick: init: %d\n", p_fav));
+      u2z(pox); u2z(fav); return u2_yes;
+    }
     case c3__send: {
       u2_noun lan = u2k(u2h(u2t(fav)));
       u2_noun pac = u2k(u2t(u2t(fav)));

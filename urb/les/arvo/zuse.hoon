@@ -1004,7 +1004,7 @@
               [%volt p=*]                               ::  upgrade kernel
               [%wait p=@da q=path]                      ::  timer wait
               [%wake ~]                                 ::  timer activate
-              [%want p=ship q=@ta r=*]                  ::  outgoing request
+              [%want p=ship q=@ta r=*]                  ::  send message
               [%warp p=ship q=riff]                     ::  request
               [%wart p=ship q=@ta r=@ud s=(unit ,*)]    ::  incoming response
               [%warn p=tape]                            ::  system message

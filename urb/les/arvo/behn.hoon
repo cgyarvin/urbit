@@ -83,6 +83,25 @@
   =+  rew=(flop wer)
   =+  vez=(vang | wer)
   |%
+  ++  fear                                              ::    fear:be
+    |=  tea=wire                                        ::  validate wire
+    ^-  ?                                               ::  XX  hack
+    =+  fat=(feat tea)
+    =+  dog=(~(get by q.god) p.fat)
+    ?~  dog  |
+    =+  gib=(~(get by q.wip.u.dog) q.fat)
+    ?~  gib  |
+    &
+    ::(~(has by q.u.gib) [%ma r.fat])
+  ::
+  ++  feat                                              ::    feat:be
+    |=  tea=wire                                        ::  decode wire
+    ^-  [p=@ud q=@ud r=wire]
+    ?>  ?=([@ @ *] tea)
+    =+  [ped=(slay i.tea) wad=(slay i.t.tea)]
+    ?>  &(?=([~ %% %ud @] ped) ?=([~ %% %ud @] wad))
+    [q.p.u.ped q.p.u.wad t.t.tea]
+  ::
   ++  fest                                              ::    fest:be
     |=  [gyp=@ud hen=duct]                              ::  find a task
     (fi gyp hen (need (~(get by q.god) gyp)))
@@ -98,10 +117,8 @@
   ++  lead                                              ::    lead:be
     |=  [tea=wire hen=duct]                             ::  route note
     ^-  [p=wire q=_ra:*fi]
-    ?>  ?=([@ @ *] tea)
-    =+  [ped=(slay i.tea) wad=(slay i.t.tea)]
-    ?>  &(?=([~ %% %ud @] ped) ?=([~ %% %ud @] wad))
-    [t.t.tea (past:(fest q.p.u.ped hen) q.p.u.wad)]
+    =+  fat=(feat tea)
+    [r.fat (past:(fest p.fat hen) q.fat)]
   ::
   ++  lean                                              ::    lean:be
     |=  [tea=wire hen=duct fav=card]                    ::  deliver card
@@ -131,7 +148,7 @@
              [[[[~ %iron who] hen [%helo prot]] ~] +<.^^$]
       %noop  [~ +<.^^$]
       %thee  abet:lash:(lean tea hen fav)
-      %went  abet:lash:(lean tea hen fav)
+      %went  ?.((fear tea) [~ +<.^^$] abet:lash:(lean tea hen fav))
       %writ  abet:lash:(loam tea hen +.fav)
       %wart  (lion hen +.fav)
     ==
@@ -1010,7 +1027,10 @@
   ::
       %init
     ?~  wru  !! 
-    $(fav [%hail ~], dez (~(put by dez) hen [[q.u.wru (bard q.u.wru)] u.dus]))
+    :-  :~  [wru hen fav]
+            [wru [[%b tea] hen] [%hail ~]]
+        ==
+    ..^$(dez (~(put by dez) hen [[q.u.wru (bard q.u.wru)] u.dus]))
   ::
       %limn
     $(fav [%hail ~], dez (~(put by dez) hen (weld t.u.dus [i.u.dus ~])))
