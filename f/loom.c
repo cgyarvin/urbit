@@ -281,8 +281,13 @@ u2_loom_save(c3_w ent_w)
   /* sync the mfer
   */
   for ( ceg_u = &LoomSegmentA; ceg_u; ceg_u = ceg_u->nex_u ) {
+#if defined(U2_OS_linux)
+    fdatasync(ceg_u->ctl_i);
+    fdatasync(ceg_u->dat_i);
+#else
     fcntl(ceg_u->ctl_i, F_FULLFSYNC); 
     fcntl(ceg_u->dat_i, F_FULLFSYNC); 
+#endif
   }
 
 #if 0

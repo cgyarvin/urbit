@@ -39,10 +39,10 @@
         0
       };
 
-/* u2_ve_getopt(): extract option map from command line.
+/* _main_getopt(): extract option map from command line.
 */
 static u2_bean
-u2_ve_getopt(c3_i argc, c3_c** argv)
+_main_getopt(c3_i argc, c3_c** argv)
 {
   c3_i ch_i;
 
@@ -128,19 +128,6 @@ u2_ve_getopt(c3_i argc, c3_c** argv)
       }
     }
 
-    if ( u2_yes == u2_Host.ops_u.rez ) {
-      c3_c yes[2];
-
-      yes[1] = 0;
-      printf("really forget all events in %s? (y/N) ", argv[optind]);
-      scanf("%1s", yes);
-
-      if ( yes[0] != 'y' ) {
-        printf("okay, we won't do that!\n");
-        exit(1);
-      }
-      else printf("%s will be reset.\n", argv[optind]);
-    }
     u2_Host.ops_u.cpu_c = strdup(argv[optind]);
     return u2_yes;
   }
@@ -215,7 +202,7 @@ main(c3_i   argc,
 
   //  Parse options.
   //
-  if ( u2_no == u2_ve_getopt(argc, argv) ) {
+  if ( u2_no == _main_getopt(argc, argv) ) {
     u2_ve_usage(argc, argv);
     return 1;
   }

@@ -562,14 +562,122 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::                section 3bE, names etc                ::
 ::
-++  clan                                                ::  seat to rank
-  |=  who=seat  ^-  rank
+++  clan                                                ::  ship to rank
+  |=  who=ship  ^-  rank
   =+  wid=(met 3 who)
   ?:  (lte wid 1)   %czar
   ?:  =(2 wid)      %king
   ?:  (lte wid 4)   %duke
   ?:  (lte wid 8)   %jack
   ?>  (lte wid 16)  %pawn
+::
+++  deft                                                ::  import url path
+  |=  rax=(list ,@t)
+  |-  ^-  pork
+  ?~  rax
+    [~ ~]
+  ?~  t.rax
+    =+  den=(trip i.rax)
+    =+  ^=  vex
+      %-  %-  full
+          ;~(plug sym ;~(pose (stag ~ ;~(pfix dot sym)) (easy ~)))
+      [[1 1] (trip i.rax)]
+    ?~  q.vex
+      [~ [~(rent co %% %t i.rax) ~]]
+    [+.p.u.q.vex [-.p.u.q.vex ~]]
+  =+  pok=$(rax t.rax)
+  :-  p.pok
+  :_  q.pok
+  ?:(((sane %tas) i.rax) i.rax ~(rent co %% %t i.rax))
+::
+++  epur                                                ::  url/header parser
+  |%
+  ++  apat  (cook deft ;~(pfix fas (more fas smeg)))    ::  2396 abs_path
+  ++  auri
+    ;~  plug
+      ;~  plug
+        %+  sear
+          |=  a=@t 
+          ^-  (unit ,?)
+          ?+(a ~ %http [~ %|], %https [~ %&])
+        ;~(sfix scem ;~(plug col fas fas))
+        thor
+      ==
+      ;~(plug apat yque)
+    == 
+  ++  bite                                              ::  cookies (ours)
+    (most sem ;~(plug nuck:so ;~(pfix sem nuck:so))) 
+  ++  dlab                                              ::  2396 domainlabel
+    %+  sear
+      |=  a=@ta
+      ?.(=('-' (rsh 3 a (dec (met 3 a)))) [~ u=a] ~)
+    %+  cook  cass
+    ;~(plug aln (star alp))
+  ::
+  ++  fque  (cook crip (plus pquo))                     ::  normal query field
+  ++  pcar  ;~(pose pure pesc psub col pat)             ::  2396 path char
+  ++  pesc  ;~(pfix cen mes)                            ::  2396 escaped
+  ++  pold  (cold ' ' (just '+'))                       ::  old space code
+  ++  pque  ;~(pose pcar fas wut)                       ::  3986 query char
+  ++  pquo  ;~(pose pure pesc pold)                     ::  normal query char
+  ++  pure  ;~(pose aln hep dot cab sig)                ::  2396 unreserved
+  ++  psub  ;~  pose                                    ::  3986 sub-delims
+              zap  buc  pam  soq  pel  per 
+              tar  lus  com  sem  tis
+            ==
+  ++  scem                                              ::  2396 scheme
+    %+  cook  cass
+    ;~(plug alf (star ;~(pose aln lus hep dot)))
+  ::
+  ++  smeg  (cook crip (plus pcar))                     ::  2396 segment
+  ++  thor                                              ::  2396 host/port
+    %+  cook  |*(a=[* *] [+.a -.a])
+    ;~  plug
+      thos
+      ;~(pose (stag ~ ;~(pfix col dim:ag)) (easy ~))
+    ==
+  ++  thos                                              ::  2396 host, no local
+    ;~  plug
+      ;~  pose
+        %+  stag  %&
+        %+  sear                                        ::  LL parser weak here
+          |=  a=(list ,@t)
+          =+  b=(flop a)
+          ?>  ?=(^ b)
+          =+  c=(end 3 1 i.b)
+          ?.(&((gte c 'a') (lte c 'z')) ~ [~ u=b])
+        (most dot dlab)
+      ::
+        %+  stag  %|
+        =+  tod=(ape:ag ted:ab) 
+        %+  bass  256
+        ;~(plug tod (stun [3 3] ;~(pfix dot tod)))
+      ==
+    ==
+  ++  yque                                              ::  query ending
+    ;~  pose
+      ;~(pfix wut yquy)
+      (easy ~)
+    ==
+  ++  yquy                                              ::  query
+    %+  cook
+      |=  a=(list ,[p=@t q=@t])
+      (~(gas by *(map ,@t ,@t)) a)
+    ;~  pose                                            ::  proper query
+      %+  more
+        ;~(pose pam sem)
+      ;~(plug fque ;~(pfix tis fque))
+    ::
+      %+  cook                                          ::  funky query
+        |=(a=tape [[%% (crip a)] ~])
+      (star pque)
+    ==
+  ++  zest                                              ::  2616 request-uri
+    ;~  pose
+      (stag %& (cook |=(a=purl a) auri))
+      (stag %| ;~(plug apat yque))
+    ==
+  --
 ::
 ++  fade                                                ::  load cascade
   |=  [end=@tas hut=path sur=path]
@@ -590,6 +698,16 @@
   =+  rug=(~(get by r.ape) i.sur)
   ?~  rug  ~
   $(sur t.sur, hut (weld hut `path`[i.sur ~]))
+::
+++  file                                                ::  file or not
+  |=  pax=path
+  ^-  (unit)
+  ?~  pax  ~
+  =+  lin=(dec (lent pax))
+  =+  [pex=(scag lin `path`pax) poy=(slag lin `path`pax)]
+  =+  ape=((hard apex) .^(%cy pex))
+  ?.  (~(has by q.ape) -.poy)  ~
+  [~ .^(%cx pax)]
 ::
 ++  gnow
   |=  gos=gcos  ^-  @t
@@ -628,7 +746,7 @@
   [(cat 3 'c' p.kit) (scot %p r.kit) s.kit (scot (dime q.kit)) t.kit]
 ::
 ++  sein                                                ::  autodean
-  |=  who=seat  ^-  seat
+  |=  who=ship  ^-  ship
   =+  mir=(clan who)
   ?-  mir
     %czar  who
@@ -639,8 +757,8 @@
   ==
 ::
 ++  saxo                                                ::  autocanon
-  |=  who=seat
-  ^-  (list seat)
+  |=  who=ship
+  ^-  (list ship)
   ?:  (lth who 256)  [who ~]
   [who $(who (sein who))]
 ::
@@ -787,7 +905,7 @@
           ==                                            ::
 ++  boat  ,[(list slip) task]                           ::  user stage
 ++  boon                                                ::  fort output
-          $%  [%beer p=seat q=@uvG]                     ::  gained ownership
+          $%  [%beer p=ship q=@uvG]                     ::  gained ownership
               [%coke p=sock q=cape r=soap s=duct]       ::  message result
               [%mead p=lane q=rock]                     ::  accept packet
               [%milk p=sock q=@tas r=@ud s=(unit ,*)]   ::  accept message
@@ -796,7 +914,7 @@
           ==                                            ::
 ++  bowl  ,[p=(list gift) q=(unit boat)]                ::  app product
 ++  brad                                                ::  shell state
-          $:  who=seat                                  ::  identity
+          $:  who=ship                                  ::  identity
               fog=(list ,@ud)                           ::  virtual consoles
               hox=@ta                                   ::  identity text
               cwd=@tas                                  ::  working disc
@@ -806,7 +924,7 @@
               sur=[p=@ud q=(qeu vase)]                  ::  result history
               god=[p=@ud q=(map ,@ud gyre)]             ::  tasks
           ==                                            ::
-++  bray  ,[p=life q=(unit life) r=seat s=@da]          ::  our parent us now
+++  bray  ,[p=life q=(unit life) r=ship s=@da]          ::  our parent us now
 ++  brow  ,[p=@da q=@tas]                               ::  browser version
 ++  buck  ,[p=mace q=will]                              ::  all security data
 ++  cake  ,[p=sock q=? r=skin s=@]                      ::  top level packet
@@ -816,8 +934,8 @@
           ==                                            ::
 ++  card                                                ::  event
           $%  [%bbye ~]                                 ::  reset prompt
-              [%band p=seat q=(list rout)]              ::  internal http bind
-              [%bind p=(unit seat) q=host]              ::  external http open
+              [%band p=ship q=(list rout)]              ::  internal http bind
+              [%bind p=(unit ship) q=host]              ::  external http open
               [%belt p=belt]                            ::  terminal input
               [%blew p=blew]                            ::  terminal config
               [%blit p=(list blit)]                     ::  terminal output
@@ -825,9 +943,10 @@
               [%born ~]                                 ::  new unix process
               [%cash p=@p q=buck]                       ::  civil license
               [%crud p=@tas q=(list tank)]              ::  error with trace
-              [%deem p=seat q=card]                     ::  external identity
+              [%deem p=ship q=card]                     ::  external identity
               [%dire p=@tas q=dram]                     ::  apply directory
               [%dump p=(list ,@t)]                      ::  raw text lines
+              [%ergo p=@p q=@tas r=@ud]                 ::  version update
               [%file p=@tas q=@]                        ::  apply atomic file
               [%fail p=tape]                            ::  report failure
               [%hail ~]                                 ::  refresh 
@@ -837,15 +956,16 @@
               [%hole p=lane q=@]                        ::  packet failed
               [%hoop p=(unit)]                          ::  namespace response
               [%hope p=path]                            ::  namespace request
+              [%info p=@p q=@tas r=nori]                ::  internal edit
               [%init p=@p]                              ::  report install
-              [%into p=@p q=@tas r=nori]                ::  commit edits
+              [%into p=@p q=@tas r=nori]                ::  external edit
               [%flog p=card]                            ::  log to terminal
               [%junk p=@]                               ::  entropy
               [%kick p=@da]                             ::  wake up
-              [%kill p=@ud]                             ::  kill a process
+              [%kill p=~]                               ::  kill a gyre
               [%lane p=lane]                            ::  set public route
               [%line p=@t]                              ::  source line
-              [%limn ~]                                 ::  rotate seat
+              [%limn ~]                                 ::  rotate ship
               [%ling ~]                                 ::  rotate interface
               [%load p=@tas q=path]                     ::  request atomic file
               [%loin p=@p q=chum]                       ::  name hashed-pass
@@ -859,9 +979,9 @@
               [%pace p=@ud]                             ::  compute background
               [%pipe p=(unit ,[p=typo q=(list)])]       ::  pipeline data
               [%pour p=path q=dram]                     ::  write directory
-              [%pull p=seat q=disc r=(list disc)]       ::  pull remote desk
+              [%pull p=ship q=disc r=(list disc)]       ::  pull remote desk
               [%pump ~]                                 ::  produce packets
-              [%quid p=seat q=path r=(unit ,*)]         ::  delivery
+              [%quid p=ship q=path r=(unit ,*)]         ::  delivery
               [%rein p=? q=path]                        ::  push/replace kernel
               [%rend ~]                                 ::  pop kernel
               [%save p=path q=@]                        ::  write atomic file
@@ -872,7 +992,7 @@
               [%tell p=(list ,@t)]                      ::  dump lines
               [%text p=tape]                            ::  talk leaf
               [%that p=@ud q=love]                      ::  cooked htresp
-              [%thee p=@ud q=scud r=hate]               ::  cooked htreq
+              [%thee p=@ud q=scab r=cred s=moth]        ::  cooked htreq
               [%them p=(unit hiss)]                     ::  internal client req
               [%they p=@ud q=httr]                      ::  response to %them
               [%this p=? q=@ud r=httq]                  ::  secure/session/req
@@ -884,18 +1004,18 @@
               [%volt p=*]                               ::  upgrade kernel
               [%wait p=@da q=path]                      ::  timer wait
               [%wake ~]                                 ::  timer activate
-              [%want p=seat q=@ta r=*]                  ::  outgoing request
-              [%warp p=seat q=riff]                     ::  request
-              [%wart p=seat q=@ta r=@ud s=(unit ,*)]    ::  incoming response
+              [%want p=ship q=@ta r=*]                  ::  outgoing request
+              [%warp p=ship q=riff]                     ::  request
+              [%wart p=ship q=@ta r=@ud s=(unit ,*)]    ::  incoming response
               [%warn p=tape]                            ::  system message
-              [%went p=seat q=cape r=soap]              ::  outgoing reaction
+              [%went p=ship q=cape r=soap]              ::  outgoing reaction
               [%wipe ~]                                 ::  clean to sequence
               [%word p=chum]                            ::  set password
               [%wort p=tape]                            ::  semantic failure
               [%writ p=riot]                            ::  response
           ==                                            ::
 ++  care  ?(%w %x %y %z)                                ::  clay submode
-++  case                                                ::  modeseatdeskcasespur
+++  case                                                ::  modeshipdeskcasespur
           $%  [%da p=@da]                               ::  date
               [%tas p=@tas]                             ::  label
               [%ud p=@ud]                               ::  number
@@ -921,11 +1041,11 @@
               kyq=(unit coal)                           ::  app customization
               gam=(unit coal)                           ::  app image
           ==                                            ::
-++  cred  ,[p=logo q=(map ,@tas ,[p=@da q=@ta])]        ::  client credentials
+++  cred  ,[p=? q=logo q=oryx r=(unit ship)]            ::  client credentials
 ++  cult  (map duct rave)                               ::  subscriptions
 ++  deed  ,[p=@ q=step]                                 ::  signature, stage
 ++  dock                                                ::  link record
-          $:  for=seat                                  ::  host
+          $:  for=ship                                  ::  host
               dys=@tas                                  ::  linked to desk
               kol=case                                  ::  last update case
               num=@ud                                   ::  update count
@@ -939,7 +1059,7 @@
               lab=(map ,@tas ,@ud)                      ::  labels
           ==                                            ::
 ++  desk  ,[p=cult q=dome]                              ::  project state
-++  disc  ,@ta                                          ::  modeseatdeskcasespur
+++  disc  ,@ta                                          ::  modeshipdeskcasespur
 ++  door                                                ::  foreign contact
           $:  wod=road                                  ::  connection to
               wyl=will                                  ::  inferred mirror
@@ -962,7 +1082,7 @@
 ++  fort                                                ::  formal state
           $:  hop=@da                                   ::  network boot date
               ton=town                                  ::  security
-              zac=(map seat oven)                       ::  flows by server
+              zac=(map ship oven)                       ::  flows by server
               rop=(map ,[p=@ud q=sock] riff)            ::  remote requests
           ==                                            ::
 ++  frog  ,[p=@da q=maki]                               ::  project change
@@ -978,6 +1098,7 @@
               [%mu p=type q=(list)]                     ::  batch emit
               [%mx p=(list gift)]                       ::  batch gift
               [%ok p=disc q=nori]                       ::  save changes
+              [%sc p=(unit skit)]                       ::  sack library
               [%te p=(list ,@t)]                        ::  dump lines
               [%th p=@ud q=love]                        ::  http response
               [%va p=@tas q=(unit vase)]                ::  set/clear variable
@@ -986,21 +1107,21 @@
           ==                                            ::
 ++  gilt  ,[@tas *]                                     ::  presumed gift
 ++  gcos                                                ::  id description
-          $%  [%czar p=@t]                              ::  8-bit seat
-              [%duke p=what]                            ::  32-bit seat
-              [%jack p=@t]                              ::  64-bit seat
-              [%king p=@t]                              ::  16-bit seat
-              [%pawn p=@t]                              ::  128-bit seat
+          $%  [%czar p=@t]                              ::  8-bit ship
+              [%duke p=what]                            ::  32-bit ship
+              [%jack p=@t]                              ::  64-bit ship
+              [%king p=@t]                              ::  16-bit ship
+              [%pawn p=@t]                              ::  128-bit ship
           ==                                            ::
 ++  goal                                                ::  app request
           $%  [%% p=type]                               ::  open for input
               [%eg p=kite]                              ::  single request
-              [%es p=seat q=disc r=rave]                ::  subscription
+              [%es p=ship q=disc r=rave]                ::  subscription
               [%ht p=(list rout)]                       ::  http server
               [%oy p=@ta]                               ::  listen on channel
               [%up p=prod]                              ::  user prompt      
               [%wa p=@da]                               ::  alarm
-              [%yo p=seat q=@ta r=*]                    ::  network message
+              [%yo p=ship q=@ta r=*]                    ::  network message
           ==                                            ::
 ++  gram  ,@uw                                          ::  physical datagram
 ++  gyre                                                ::
@@ -1023,7 +1144,7 @@
               s=(unit octs)                             ::  body
           ==                                            ::
 ++  httr  ,[p=@ud q=mess r=(unit octs)]                 ::  raw http response
-++  kite  ,[p=care q=case r=seat s=disc t=spur]         ::  parsed global name
+++  kite  ,[p=care q=case r=ship s=disc t=spur]         ::  parsed global name
 ++  json                                                ::  json top level
           $%  [%a p=(list jval)]                        ::  array
               [%o p=(map ,@t jval)]                     ::  object
@@ -1036,7 +1157,7 @@
                   [%s p=@ta]                            ::  string
               ==                                        ::
           ==                                            ::
-++  lamp                                                ::  short path
+++  lamb                                                ::  short path
           $%  [& p=@tas]                                ::  auto
               [| p=gene]                                ::  manual
           ==                                            ::
@@ -1048,12 +1169,12 @@
 ++  lark  (list lath)                                   ::  parsed command
 ++  lass  ?(%0 %1 %2)                                   ::  power increment
 ++  lath  $%                                            ::  pipeline stage
-              [%0 p=lass q=lamp r=(list cone) s=gene]   ::  command
+              [%0 p=lass q=lamb r=(list cone) s=gene]   ::  command
               [%1 p=gene]                               ::  generator
               [%2 p=gene]                               ::  filter
           ==                                            ::
 ++  lens  ?(%z %y %x %w)                                ::  repository view
-++  lice  ,[p=seat q=buck]                              ::  full license
+++  lice  ,[p=ship q=buck]                              ::  full license
 ++  life  ,@ud                                          ::  regime number
 ++  lint  (list rock)                                   ::  fragment array
 ++  link  ,[p=code q=sock]                              ::  connection
@@ -1081,7 +1202,7 @@
               [%bond p=life q=@ta r=@ud s=*]            ::  message
               [%bonk p=life q=@ta r=@ud]                ::  message skip
               [%carp p=@ud q=flap r=@]                  ::  leaf fragment
-              [%fore p=seat q=(unit lane) r=@]          ::  forwarded packet
+              [%fore p=ship q=(unit lane) r=@]          ::  forwarded packet
           ==                                            ::
 ++  mess  (list ,[p=@t q=@t])                           ::  raw http headers
 ++  meta                                                ::  path metadata
@@ -1103,11 +1224,11 @@
 ++  newt  ?(%boot %kick %mess %slay %wake)              ::  lifecycle events
 ++  nook                                                ::  common note
           $%  [%eg p=riot]                              ::  simple result
-              [%ht p=scab q=cred r=moth]                ::  http request
+              [%ht p=@ud q=scab r=cred s=moth]          ::  http request
               [%ly p=newt q=tape]                       ::  lifecycle event
               [%up p=@t]                                ::  prompt response
-              [%oy p=seat q=@ta r=@ud s=(unit ,*)]      ::  incoming request
-              [%yo p=seat q=cape r=soap]                ::  request response
+              [%oy p=ship q=@ta r=@ud s=(unit ,*)]      ::  incoming request
+              [%yo p=ship q=cape r=soap]                ::  request response
               [%wa p=@da]                               ::  alarm
           ==                                            ::
 ++  nose                                                ::  response, kernel
@@ -1128,7 +1249,7 @@
           $:  hen=duct                                  ::  admin channel
               nys=(map flap bait)                       ::  packets incoming
               old=(set flap)                            ::  packets completed
-              wab=(map seat bath)                       ::  relationship
+              wab=(map ship bath)                       ::  relationship
           ==                                            ::
 ++  pact  path                                          ::  routed path
 ++  pail  ?(%none %warm %cold)                          ::  connection status
@@ -1169,7 +1290,7 @@
           $:  las=@da                                   ::  last wakeup
               fat=(map ,@p room)                        ::  per host
           ==                                            ::
-++  rank  ?(%czar %king %duke %jack %pawn)              ::  seat width class
+++  rank  ?(%czar %king %duke %jack %pawn)              ::  ship width class
 ++  rant                                                ::  namespace binding
           $:  p=[p=care q=case r=@tas]                  ::  clade release book
               q=path                                    ::  spur
@@ -1206,28 +1327,28 @@
               lun=(unit lane)                           ::  route to friend
               lew=will                                  ::  will of frien
           ==                                            ::
-++  room                                                ::  fs per seat (new)
-          $:  hen=duct                                  ::  controlling duct
+++  room                                                ::  fs per ship (new)
+          $:  hun=duct                                  ::  terminal duct
+              hez=(unit duct)                           ::  sync duct
               dos=(map ,@tas ,[p=cult q=dome])          ::  native projects 
               den=(map ,@tas dock)                      ::  links 
-              rid=(map seat ,[p=rind q=rink])           ::  neighbors
+              rid=(map ship ,[p=rind q=rink])           ::  neighbors
           ==                                            ::
 ++  rock  ,@uvO                                         ::  packet
 ++  rout  ,[p=(list host) q=path r=oryx s=path]         ::  http route (new)
 ++  rump  ,[p=care q=case r=@tas s=path]                ::  relative path
-++  saba  ,[p=seat q=@tas r=moar s=(list maki)]         ::  patch/merge
+++  saba  ,[p=ship q=@tas r=moar s=(list maki)]         ::  patch/merge
 ++  safe                                                ::  domestic host
-          $:  hoy=(list seat)                           ::  hierarchy
+          $:  hoy=(list ship)                           ::  hierarchy
               val=wand                                  ::  private keys
               law=will                                  ::  server will
-              seh=(map hand ,[p=seat q=@da])            ::  key cache
-              hoc=(map seat door)                       ::  neighborhood
+              seh=(map hand ,[p=ship q=@da])            ::  key cache
+              hoc=(map ship door)                       ::  neighborhood
           ==                                            ::
 ++  salt  ,@uv                                          ::  entropy
 ++  scab                                                ::  logical request 
-          $:  p=oryx                                    ::  CSRF secret
+          $:  p=scud                                    ::  routed url
               q=quay                                    ::  query
-              r=scud                                    ::  url regenerator
           ==                                            ::
 ++  scad  ,[p=@p q=@da r=@uw s=cred]                    ::  fab context, outer
 ++  scar                                                ::  logical url
@@ -1236,7 +1357,7 @@
               r=(unit ,@ta)                             ::  extension
               s=path                                    ::  detour
           ==                                            ::
-++  scud  ,[p=pact q=scar]                              ::  full dispatch
+++  scud  ,[p=pact q=scar]                              ::  processed dispatch
 ++  seam  ,[p=@ta q=pact r=scar]                        ::  service route
 ++  shed                                                ::  packet pump
           $:  $:  niq=@ud                               ::  count in queue
@@ -1246,6 +1367,7 @@
               ==                                        ::
               puq=(qeu ,[p=@ud q=bird])                 ::  queue
           ==                                            ::
+++  skit  ,[p=(unit ,@ta) q=(list ,@ta) r=(list ,@ta)]  ::  tracking path
 ++  sink                                                ::  incoming per server
           $:  nes=(map flap ,[p=@da q=bait])            ::  fragment actions
           ==                                            ::
@@ -1254,8 +1376,8 @@
 ++  sled  ,[p=* q=*]                                    ::  [data code]
 ++  snow  ,[p=@ud q=@ud r=(set ,@ud)]                   ::  window exceptions
 ++  soap  ,[p=[p=life q=life] q=@tas r=@ud]             ::  statement id
-++  sock  ,[p=seat q=seat]                              ::  from to
-++  spur  path                                          ::  modeseatdeskcasespur
+++  sock  ,[p=ship q=ship]                              ::  from to
+++  spur  path                                          ::  modeshipdeskcasespur
 ++  step  ,[p=bray q=gcos r=pass]                       ::  identity stage
 ++  task  _|+([@da path note] *bowl)                    ::  process core
 ++  taxi  ,[p=lane q=rock]                              ::  routed packet
@@ -1263,7 +1385,7 @@
 ++  town                                                ::  all security state
           $:  lit=@ud                                   ::  imperial modulus
               any=@                                     ::  entropy
-              urb=(map seat safe)                       ::  all keys and routes
+              urb=(map ship safe)                       ::  all keys and routes
           ==                                            ::
 ++  typo  ,*                                            ::  presumed type
 ++  soba  (list ,[p=path q=miso])                       ::  delta

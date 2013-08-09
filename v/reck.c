@@ -358,7 +358,6 @@ u2_reck_cold(u2_reck* rec_u, c3_w kno_w)
   rec_u->now = 0;
   rec_u->wen = 0;
   rec_u->sen = 0;
-  rec_u->our = 0;
   rec_u->roe = 0;
   rec_u->key = 0;
 
@@ -368,7 +367,9 @@ u2_reck_cold(u2_reck* rec_u, c3_w kno_w)
     //  u2_noun hof = u2_cn_mung(u2k(rec_u->toy.hoof), rec_u->kno_w);
     //  c3_c* hof_c = u2_cr_string(hof);
 
-    sprintf(ful_c, "%s/%d/urbit.pill", u2_System, rec_u->kno_w);
+    // sprintf(ful_c, "%s/%d/urbit.pill", u2_System, rec_u->kno_w);
+
+    sprintf(ful_c, "%s/urbit.pill", u2_Host.ops_u.hom_c);
     if ( 0 == (pot = u2_walk_load(ful_c)) ) {
       perror(ful_c);
       exit(1);
@@ -416,6 +417,7 @@ u2_reck_cold(u2_reck* rec_u, c3_w kno_w)
   rec_u->toy.shen = u2_reck_wish(rec_u, "en:crya");
   rec_u->toy.shed = u2_reck_wish(rec_u, "de:crya");
   rec_u->toy.cyst = u2_reck_wish(rec_u, "cyst");
+  rec_u->toy.lump = u2_reck_wish(rec_u, "lump");
 
   u2_reck_time(rec_u);
   u2_reck_numb(rec_u);
@@ -441,7 +443,6 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
   rec_u->now = 0;
   rec_u->wen = 0;
   rec_u->sen = 0;
-  rec_u->our = 0;
   rec_u->roe = 0;
   rec_u->key = 0;
 
@@ -596,11 +597,9 @@ _reck_kick_term(u2_reck* rec_u, u2_noun pox, c3_l tid_l, u2_noun fav)
     {
       rec_u->own = u2nc(u2k(p_fav), rec_u->own);
 
+      u2_unix_ef_init(rec_u, u2k(p_fav));
+
       // uL(fprintf(uH, "kick: init: %d\n", p_fav));
-      if ( u2_met(3, p_fav) <= 4 ) {
-        // uL(fprintf(uH, "kick: our: %d\n", u2_cr_word(0, p_fav)));
-        rec_u->our = u2k(p_fav);
-      }
       u2z(pox); u2z(fav); return u2_yes;
     } break;
   }
@@ -639,6 +638,18 @@ _reck_kick_http(u2_reck* rec_u,
 static u2_bean
 _reck_kick_sync(u2_reck* rec_u, u2_noun pox, u2_noun fav)
 {
+  switch ( u2h(fav) ) {
+    default: break;
+    case c3__ergo: {
+      u2_noun who = u2k(u2h(u2t(fav)));
+      u2_noun syd = u2k(u2h(u2t(u2t(fav))));
+      u2_noun rel = u2k(u2t(u2t(u2t(fav))));
+
+      u2_unix_ef_ergo(rec_u, who, syd, rel);
+      u2z(pox); u2z(fav); return u2_yes;
+    } break;
+  }
+
   //  XX obviously not right!
   //
   u2z(pox); u2z(fav); return u2_no;
@@ -717,13 +728,9 @@ _reck_kick_spec(u2_reck* rec_u, u2_noun pox, u2_noun fav)
         return _reck_kick_http(rec_u, pox, coq_l, seq_l, fav);
       } break;
 
+      case c3__clay: 
       case c3__sync: {
-        if ( (u2_nul != tt_pox) ) {
-          u2z(pox); u2z(fav); return u2_no;
-        }
-        else { 
-          return _reck_kick_sync(rec_u, pox, fav);
-        }
+        return _reck_kick_sync(rec_u, pox, fav);
       } break;
 
       case c3__ames: {
@@ -891,7 +898,7 @@ void
 u2_reck_http_request(u2_reck* rec_u, u2_bean sec, u2_noun pox, u2_noun req)
 {
   // uL(fprintf(uH, "http: request\n"));
-  u2_reck_plan(rec_u, pox, u2nc((sec == u2_yes) ? c3__this : c3__thin, req));
+  u2_reck_plan(rec_u, pox, u2nq(c3__this, sec, 0, req));
 }
 
 /* u2_reck_prick(): query the reck namespace (unprotected).

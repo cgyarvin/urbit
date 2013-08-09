@@ -110,7 +110,7 @@ _ames_lane_ip(u2_noun lan, c3_s* por_s, c3_w* pip_w)
   switch ( u2h(lan) ) {
     case c3__if: {
       *por_s= (c3_s) u2h(u2t(lan));
-      *pip_w = u2t(u2t(lan));
+      *pip_w = u2_cr_word(0, u2t(u2t(lan)));
 
       return u2_yes;
     } break;
@@ -122,7 +122,7 @@ _ames_lane_ip(u2_noun lan, c3_s* por_s, c3_w* pip_w)
     } break;
     case c3__ix: {
       *por_s = (c3_s) u2h(u2t(u2t(lan)));
-      *pip_w = u2t(u2t(u2t(lan)));
+      *pip_w = u2_cr_word(0, u2t(u2t(u2t(lan))));
 
       return u2_yes;
     } break;
@@ -196,6 +196,16 @@ u2_ames_io_init(u2_reck* rec_u)
       perror("ames: socket");
       c3_assert(0);
     }
+    {
+      c3_i opt_i = 1;
+
+      if ( -1 == setsockopt(fid_i, SOL_SOCKET, SO_REUSEADDR, 
+            &opt_i, sizeof opt_i) )
+      {
+        perror("http: setsockopt");
+        c3_assert(0);
+      }
+    }
 
     //  Bind.
     {
@@ -207,14 +217,27 @@ u2_ames_io_init(u2_reck* rec_u)
       add_k.sin_addr.s_addr = htonl(INADDR_ANY);
       add_k.sin_port = htons(por_s);
 
-      if ( bind(fid_i, (struct sockaddr *)&add_k, sizeof(add_k)) < 0 ) {
-        if ( EADDRINUSE == errno ) {
-          fprintf(stderr, "bind: address in use\r\n");
-          c3_assert(0);
-        }
-        else {
-          perror("bind");
-          c3_assert(0);
+      {
+        c3_w dum_w = 0;
+
+        while ( 1 ) {
+          if ( bind(fid_i, (struct sockaddr *)&add_k, sizeof(add_k)) < 0 ) {
+            if ( EADDRINUSE == errno ) {
+              if ( dum_w > 4 ) {
+                fprintf(stderr, "bind: address in use\r\n");
+                c3_assert(0);
+              }
+              else {
+                sleep(1);
+                continue;
+              }
+            }
+            else {
+              perror("bind");
+              c3_assert(0);
+            }
+          }
+          else break;
         }
       }
 
@@ -340,10 +363,15 @@ u2_ames_io_fuck(u2_reck*      rec_u,
       break;
     }
     else {
-      if ( 0 != pac_u->pip_w ) {
+      if ( 0 == pac_u->pip_w ) {
+        pac_u->pip_w = 0x7f000001;
+        pac_u->por_s = u2_Host.sam_u.por_s;
+      }
+      {
         struct sockaddr_in add_k;
 
-        if ( 1 == (pac_u->pip_w >> 8) ) {
+        if ( (0 == (pac_u->pip_w >> 16)) &&
+             (1 == (pac_u->pip_w >> 8)) ) {
           c3_y imp_y = (pac_u->pip_w & 0xff);
 
           pac_u->pip_w = _ames_czar(rec_u, imp_y, &pac_u->por_s);

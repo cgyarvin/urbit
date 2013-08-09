@@ -1,36 +1,33 @@
-2: Syntax
+4: Hoon - Semantics
+=========
 
-As with Nock, we have to start by asking: which Hoon?  Like Nock,
-Hoon is born to freeze and uses Kelvin versions.  Unlike Nock,
-Hoon is a long way from absolute zero.  The current kernel is
-`192`, adequate for polar bears but not superconductors.
+Now let's actually learn to program in Hoon, which really isn't
+that hard.  Unfortunately, we have to start by learning enough
+Arvo to not be utterly defenseless.
 
-Each Hoon kernel is compiled by the previous kernel.  For
-instance, kernel 242 is compiled by kernel 241.  To be exact,
-where `s` is `watt/241.watt` (text encoded as an atom, LSB
-first), `f is `watt/242.noun` (encoded with `jam`, which maps an
-arbitrary noun to an atom), and `p` is `watt/241.noun` (encoded
-with `jam`), we know (in pseudocode):
+Start vere, the Arvo VM, which you created in chapter 2:
 
-  *(s f) == p
+  vere $mypier
 
-Some kernels will compile themselves - others won't.  Obviously, 
-you can't make an omelet without breaking backward compatibility.
+You'll see 
 
-Open the latest Hoon kernel - `jupiter/sys/192/hoon.hoon`.  Let's
-look at the full, official decrement function (line 108):
 
-  ++  dec
-    ~/  %dec
-    |=  a=@
-    ~|  'dec'
-    ^-  @
-    ?<  =(0 a)
-    =+  b=@
-    |-
-    ?:  =(a +(b))
-      b
-    $(b +(b))
+Now, let's actually look at Hoon.  Really, try not to recoil
+in horror.  It's actually not anything like line noise.
+
+Open the Hoon kernel - `urb/les/arvo/hoon.hoon`.  Let's look at
+the full, official decrement function (line 549):
+
+	++  dec
+          ~/  %dec
+          |=  a=@
+          ^-  @
+          ?<  =(0 a)
+          =+  b=@
+          |-
+          ?:  =(a +(b))
+            b
+          $(b +(b))
 
 Whaa?
 
@@ -44,7 +41,7 @@ _read_ all over again.  Hoon is a keyword-free language - any
 alphanumeric text in the program is part of the program.  Where
 other languages have reserved words, Hoon has squiggles.
 
-We use so many of these ASCII _glyphs_ that we like to be able
+We use so many of these ASCII glyphs that we like to be able
 to read them out loud.  A language is meant to be _said_.  The
 squiggles have conventional names, sort of, some of them, some of
 them easy to say, others not so much.  So we've renamed them:
@@ -61,7 +58,7 @@ them easy to say, others not so much.  So we've renamed them:
     dot  .          pat  @          wut  ?
     fas  /          pel  (          zap  !
 
-Yo, ninja, you just have to memorize these names.  Sorry.
+You just have to memorize these names.  Sorry.
 
 But is this at least enough symbols?  Alas, nowhere near.
 ASCII's glyph supply is not the greatest, but we can make all the
@@ -70,13 +67,17 @@ squiggles we need by forming digraphs, or _runes_.
 To pronounce a rune, concatenate the glyph names, stressing the
 first syllable and softening the second vowel into a "schwa."
 Hence, to say `~.`, say "sigdot."  To say `|=`, say "bartis."
+Which has an inevitable tendency to turn into "barts" - a sin
+to be encouraged.  In any language actually spoken by actual
+humans, laziness soon rounds off any rough edges.
 
 So if we had to read the above decrement, omitting the spaces
 (which only a real purist would pronounce), we'd say: "luslus dec
 sigfas cen dec bartis a tis pat sigbar soq dec soq ketcab pat wutgal
 tis pel zero a per tislus b tis pat barhep wutcol tis pel a lus pel
 b per per b buc pel b lus pel b per per." The authorities would
-then arrive, and drag us out in a big net.
+then arrive, and drag us out in a big net.  Definitely don't do
+this at the airport.
 
 Geeks being solitary by nature, opportunities for reading code
 aloud are limited.  But studies by actual scientists have shown
@@ -107,9 +108,9 @@ defines a rough semantic category.  These categories are:
     ;  sem    miscellaneous macros
     !  zap    special operations
 
-Each rune has its own doc file in the `rune/192` directory.  The
+Each rune has _[not]_ its own doc file in the `rune/190` directory.  The
 name of the file is the name of the rune, minus the vowels.
-Thus, `|=` or "bartis" is defined in `rune/192/brts.txt`.
+Thus, `|=` or "bartis" is _[not]_ defined in `rune/190/brts.txt`.
 
 Opening this file, we see:
 
@@ -212,13 +213,13 @@ wide syntax is expression-like and tall is statement-like.
 
 For instance, in our example above, 
 
-  ?:  =(a +(b))
-    b
-  $(b +(b))
+	?:  =(a +(b))
+	  b
+  	$(b +(b))
 
 is a tall normal form.  The equivalent wide form is
 
-  ?:(=(a +(b)) b $(b +(b)))
+  	?:(=(a +(b)) b $(b +(b)))
 
 It's usually best to use the wide form if your gene fits on the
 line, but this is obviously an aesthetic choice.  If your gene
@@ -240,7 +241,7 @@ terminator?  There is no terminator - in most cases.
 
 Consider the `?:` rune, "wutcol," `%wtcl`.  This is
 
-  [%wtcl p=gene q=gene r=gene]
+  	[%wtcl p=gene q=gene r=gene]
 
 Why should we need a terminator?  We know `%wtcl`, whose
 semantics are if-then-else, has three subgenes.  When the parser
@@ -250,24 +251,24 @@ genes and fills the rune with them.
 This only works in runes with fixed tuple structure, which
 fortunately is most of them.  A counterexample is `:*`, ie, 
 
-  [%cltr p=(list gene)]
+  	[%cltr p=(list gene)]
 
 which is of variable length and needs a terminator.  But we 
 have no dangling parens, but an attractive tall closure:
 
-  :*  %foo
-      %bar 
-      %baz
-      %moo
-  ==
+	:*  %foo
+            %bar 
+            %baz
+            %moo
+        ==
 
 whose equivalent wide normal is
 
-  :*(%foo %bar %baz %moo)
+	:*(%foo %bar %baz %moo)
 
 which no one would ever write, preferring the custom
 
-  [%foo %bar %baz %moo]
+	[%foo %bar %baz %moo]
 
 This leaves only one question: indentation.  Since space is not
 significant (even linebreaks are irrelevant - the newline is just
@@ -277,20 +278,22 @@ matter of style.  Style is very important, however!
 The first law of Hoon indentation style is that all tall
 indentation is in two-space increments.  (Tabs are illegal.  If
 you pollute a Hoon file with ASCII 9, not only will it not parse,
-but thugs in balaclavas will kick down your door and shoot you.
+but thugs in ski masks will kick down your door and shoot you.
 You laugh!  Try it!)  Single spaces are for wide only.
 
 The second law of Hoon indentation is that everything in the
 kernel is good indentation style.  Or at least if it's not, it
-needs to be changed.  The kernel must be lapidary, noble, ideal
-and above all suspicion, like a Doric column.
+needs changed.  The kernel shall be lapidary, noble, ideal and
+above all suspicion - a Doric column, a Tlingit totem pole,
+an Egyptian obelisk.
 
-The third law of Hoon indentation is that tall genes should flow
-_down_ and not _across_ - like the decrement example above.  The
-right margin is a precious resource not to be wasted.  It's this
-law, when properly applied, that makes casual readers wonder if
-Hoon is a functional language at all.  It doesn't have a program
-counter, but it looks like it does - at least when written right.
+Tallness matters.  The third law of Hoon indentation is that
+large genes should flow _down_ and not _across_ - like the
+decrement example above.  The right margin is a precious resource
+not to be wasted.  It's this law, when properly applied, that
+makes casual readers wonder if Hoon is a functional language at
+all.  It doesn't have a program counter, but it looks like it
+does - at least when written right.
 
 In list-structured runes, like the `:*` above, there is no choice
 but to lose right margin.  Fortunately, most runes are tuples,

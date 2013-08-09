@@ -32,6 +32,7 @@
 
         struct {                          //  function gates, use mung
           u2_noun cyst;                   //  compare resource trees
+          u2_noun lump;                   //  patch
           u2_noun rain;                   //  parse path, text -> gene
           u2_noun ream;                   //  parse text -> gene
           u2_noun slam;                   //  call ([vase vase] -> vase)
@@ -58,13 +59,10 @@
         u2_noun sen;                      //  instance string
         u2_noun own;                      //  owner list
 
-        u2_noun our;                      //  main owner
-        u2_noun pod;                      //  owner as text
         u2_noun roe;                      //  temporary unsaved events
         u2_noun key;                      //  log key, or 0
 
         u2_noun ken;                      //  kernel formula (for now)
-        //  u2_noun syd;                      //  kernel seed 
         u2_noun roc;                      //  rotor core
       } u2_reck;
 

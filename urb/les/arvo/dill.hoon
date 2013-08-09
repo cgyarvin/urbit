@@ -150,6 +150,7 @@
             beep
             %a  (edit u.q.q.yar(bus 0))
             %b  $(fav [%belt %aro %l])
+            %c  +.$(mos :_(mos [wru [/b /d hen] [%kill ~]]))
             %d  ?:  ?&  =(0 bul.u.q.q.yar)
                         =(0 bus.u.q.q.yar)
                     ==
@@ -345,7 +346,7 @@
     ..$(dug ~)
   ::
   ++  scry
-    |=  [our=seat ren=@tas his=seat syd=disc lot=coin tyl=path]
+    |=  [our=ship ren=@tas his=ship syd=disc lot=coin tyl=path]
     ^-  (unit)
     ~
   ::
