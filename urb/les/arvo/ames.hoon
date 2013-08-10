@@ -376,9 +376,6 @@
           =+  dyr=?:(=(her i.waz) dur (gur i.waz))
           ?.  ?&  !=(our i.waz)
                   ?=(^ lun.wod.dyr)
-                  ?|  !?=(%ix -.u.lun.wod.dyr) 
-                      (lth now (add ~s5 p.u.lun.wod.dyr))
-                  ==
               ==
             $(waz t.waz)
           :_  ?:  ?=(%ix -.u.lun.wod.dyr) 
@@ -999,11 +996,14 @@
             ^+  +>
             =.  lun.wod.dur.diz  
                 ?:  =(%none aut)  lun.wod.dur.diz 
-                ?:  ?&  ?=([~ %ix *] lun.wod.dur.diz) 
-                        ?=([%ix *] ryn)
-                        =(q.ryn q.u.lun.wod.dur.diz)
-                        =(r.ryn r.u.lun.wod.dur.diz)
-                    ==
+                ?:  ?=([%ix *] ryn)
+                  ?:  ?|  ?=(~ lun.wod.dur.diz)
+                          ?&  ?=([%ix *] u.lun.wod.dur.diz)
+                              !=(q.ryn q.u.lun.wod.dur.diz) 
+                              !=(r.ryn r.u.lun.wod.dur.diz) 
+                          ==
+                      ==
+                    [~ ryn]
                   lun.wod.dur.diz
                 [~ ryn]
             (dine fud)

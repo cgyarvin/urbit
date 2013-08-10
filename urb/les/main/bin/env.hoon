@@ -1,5 +1,5 @@
 !:
-::  /=main=/fun/env/hoon
+::  /=main=/bin/env/hoon
 ::
 =>  .(- [who=`@p`-< how=`path`->])
 |=  [est=time eny=@uw]

@@ -800,7 +800,7 @@ _unix_home(u2_reck* rec_u, u2_noun who)
         hot_u && (0 != mpz_cmp(who_mp, hot_u->who_mp));
         hot_u = hot_u->nex_u ) 
   {
-    uL(fprintf(uH, "uh: %p, %s\n", hot_u, hot_u->dir_u.pax_c));
+    // uL(fprintf(uH, "uh: %p, %s\n", hot_u, hot_u->dir_u.pax_c));
   }
   mpz_clear(who_mp);
   return hot_u;

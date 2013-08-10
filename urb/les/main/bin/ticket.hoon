@@ -1,7 +1,8 @@
 ::
-::  /=main=/fun/env/hoon
+::  /=main=/bin/ticket/hoon
 ::
-|=  [who=seat est=time *]
+=>  .(-< `who=@p`-<)
+|=  [est=time *]
 |=  arg=*
 ^-  bowl
 :_  ~
