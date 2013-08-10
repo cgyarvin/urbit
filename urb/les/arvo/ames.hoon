@@ -1011,10 +1011,8 @@
           ++  cock                                      ::    cock:la:ho:um:am
             |=  cap=cape  ^+  +>                        ::  acknowledgment
             =^  pax  diz  (zuul:diz now [%back cap dam ~s0])
-            %_    +>.$
-                bin
-              (weld (turn p.pax |=(pac=rock [%ouzo ryn pac])) bin)
-            ==
+            ::  +>.$(bin (weld (turn p.pax |=(pac=rock [%ouzo ryn pac])) bin))
+            +>.$(+> (busk xong:diz pax))
           ::
           ++  coot                                      ::    coot:la:ho:um:am
             |=  [cha=@ta rum=race]                      ::  update input race
