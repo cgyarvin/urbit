@@ -124,7 +124,6 @@ _ames_lane_ip(u2_noun lan, c3_s* por_s, c3_w* pip_w)
       *por_s = (c3_s) u2h(u2t(u2t(lan)));
       *pip_w = u2_cr_word(0, u2t(u2t(u2t(lan))));
 
-      uL(fprintf(uH, "ixsend: por %d, pip %x\n", *por_s, *pip_w));
       return u2_yes;
     } break;
   }
