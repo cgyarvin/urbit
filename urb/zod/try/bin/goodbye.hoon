@@ -1,8 +1,8 @@
 !:
 |=  *
-|=  [planet=@ta ~]
+|=  [planet=tape ~]
 ^-  bowl
 :_  ~
 :_  ~
 :-  %%
-!>("goodbye, {(rip 3 planet)}.")
+!>("hello, {planet}.")

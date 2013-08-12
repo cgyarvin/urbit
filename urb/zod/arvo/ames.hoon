@@ -364,6 +364,23 @@
               qim.caq.dur  (~(put by qim.caq.dur) had key)
           ==
         ::
+        ++  wast                                        ::    wast:lax:as:go
+          |=  ryn=lane                                  ::  set route
+          ^+  +>
+          %=    +>
+              lun.wod.dur
+            ?:  ?=([%ix *] ryn)
+              ?:  ?|  ?=(~ lun.wod.dur)
+                      ?&  ?=([%ix *] u.lun.wod.dur)
+                          !=(q.ryn q.u.lun.wod.dur) 
+                          !=(r.ryn r.u.lun.wod.dur) 
+                      ==
+                  ==
+                [~ ryn]
+              lun.wod.dur
+            [~ ryn]
+          ==
+        ::
         ++  wist                                        ::    wist:lax:as:go
           |=  $:  now=@da                               ::  route via
                   waz=(list ,@p) 
@@ -379,7 +396,6 @@
               ==
             $(waz t.waz)
           :_  ?:  ?=(%ix -.u.lun.wod.dyr) 
-                ::  ~&  [%wist-ix [our her] i.waz]
                 $(waz t.waz)
               ~
           :+  %ouzo  u.lun.wod.dyr
@@ -815,7 +831,7 @@
         [~ fox]
       =<  zork
       =<  zank
-      ::  ~&  [%hear p.p.kec ryn `@p`(mug (shaf %flap pac))]
+      ~&  [%hear p.p.kec ryn `@p`(mug (shaf %flap pac))]
       %-  ~(blow la:(ho:(um q.p.kec) p.p.kec) ryn %none (shaf %flap pac))
       [q.kec r.kec s.kec]
     ::
@@ -994,25 +1010,13 @@
           ++  chow                                      ::    chow:la:ho:um:am 
             |=  fud=meal                                ::  interpret meal
             ^+  +>
-            =.  lun.wod.dur.diz  
-                ?:  =(%none aut)  lun.wod.dur.diz 
-                ?:  ?=([%ix *] ryn)
-                  ?:  ?|  ?=(~ lun.wod.dur.diz)
-                          ?&  ?=([%ix *] u.lun.wod.dur.diz)
-                              !=(q.ryn q.u.lun.wod.dur.diz) 
-                              !=(r.ryn r.u.lun.wod.dur.diz) 
-                          ==
-                      ==
-                    [~ ryn]
-                  lun.wod.dur.diz
-                [~ ryn]
+            =.  diz  ?:(=(%none aut) diz (wast:diz ryn))
             (dine fud)
           ::
           ++  cock                                      ::    cock:la:ho:um:am
             |=  cap=cape  ^+  +>                        ::  acknowledgment
             =^  pax  diz  (zuul:diz now [%back cap dam ~s0])
-            ::  +>.$(bin (weld (turn p.pax |=(pac=rock [%ouzo ryn pac])) bin))
-            +>.$(+> (busk xong:diz pax))
+            +>.$(+> (busk(diz (wast:diz ryn)) xong:diz pax))
           ::
           ++  coot                                      ::    coot:la:ho:um:am
             |=  [cha=@ta rum=race]                      ::  update input race
@@ -1452,7 +1456,7 @@
           %re                                           ::    %re
         ?~  s.bon  [~ fox]                              ::  file request
         =+  gox=((hard ,[p=@ud q=riff]) u.s.bon)
-        ::  ~&  [%ames-ask gox]
+        ~&  [%ames-ask gox]
         =+  gut=(~(get by rop.fox) [p.gox p.bon])
         =.  rop.fox
           ?^  gut
@@ -1478,7 +1482,7 @@
       ==
     ::
         %ouzo  
-      ::  ~&  [%send now p.bon `@p`(mug (shaf %flap q.bon))]
+      ~&  [%send now p.bon `@p`(mug (shaf %flap q.bon))]
       :_  fox
       [[wru hen [%send p.bon q.bon]] ~]
     ::  
