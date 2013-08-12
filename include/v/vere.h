@@ -292,6 +292,13 @@
         u2_usig*        sig_u;              //  signal list
       } u2_unix;
 
+    /* u2_behn: just a timer for now
+    */
+      typedef struct _u2_behn {
+        struct ev_timer tim_u;              //  clay timer
+        u2_bean         alm;                //  alarm
+      } u2_behn;
+
     /* u2_utfo: unix terminfo strings.
     */
       typedef struct {
@@ -427,6 +434,7 @@
         u2_save  sav_u;                     //  autosave
         u2_opts  ops_u;                     //  commandline options
         u2_unix  unx_u;                     //  sync and clay
+        u2_behn  beh_u;                     //  behn timer
         u2_bean  liv;                       //  if u2_no, shut down
 
         u2_reck* arv_u;                     //  runtime
@@ -1127,7 +1135,42 @@
         u2_unix_io_sign(u2_reck*          rec_u,
                         struct ev_signal* sil_u);
 
-      
+    /**  Behn, just a timer.
+    **/
+      /* u2_behn_io_init(): initialize behn timer.
+      */
+        void 
+        u2_behn_io_init(u2_reck* rec_u);
+
+      /* u2_behn_io_exit(): terminate timer.
+      */
+        void 
+        u2_behn_io_exit(u2_reck* rec_u);
+
+      /* u2_behn_io_spin(): start behn timer.
+      */
+        void
+        u2_behn_io_spin(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_behn_io_stop(): stop behn timer.
+      */
+        void
+        u2_behn_io_stop(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_behn_io_poll(): update behn IO state.
+      */
+        void
+        u2_behn_io_poll(u2_reck*        rec_u,
+                        struct ev_loop* lup_u);
+
+      /* u2_behn_io_time(): time event on behn channel.
+      */
+        void
+        u2_behn_io_time(u2_reck*         rec_u,
+                        struct ev_timer* tim_u);
+
     /**  HTTP, new style.
     **/
       /* u2_http_ef_thou(): send %thou effect to http. 
