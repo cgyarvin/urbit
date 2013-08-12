@@ -1,7 +1,8 @@
 !:
 ::  /=main=/toy/ye/hoon
 ::
-|=  [who=seat *]
+=>  .(-< `who=@p`-<)
+|=  *
 |=  [ebb=$|(~ [tex=tape ~])]
 =+  bud=(sein who)
 ^-  bowl

@@ -6,7 +6,7 @@
 #   osx
 #
 OS=linux
-OS=osx
+#OS=osx
 
 # Pick one of:
 #   little
