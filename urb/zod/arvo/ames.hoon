@@ -376,9 +376,6 @@
           =+  dyr=?:(=(her i.waz) dur (gur i.waz))
           ?.  ?&  !=(our i.waz)
                   ?=(^ lun.wod.dyr)
-                  ?|  !?=(%ix -.u.lun.wod.dyr) 
-                      (lth now (add ~s5 p.u.lun.wod.dyr))
-                  ==
               ==
             $(waz t.waz)
           :_  ?:  ?=(%ix -.u.lun.wod.dyr) 
@@ -797,12 +794,12 @@
       ==
     ::
     ++  czar                                            ::    czar:am
-      |=  [our=ship nam=@t gen=@uw]                     ::  instantiate emperor
+      |=  [our=ship ger=@uw]                            ::  instantiate emperor
       ^-  [p=(list boon) q=fort]
-      =+  loy=(brew 2.048 gen)
+      =+  loy=(brew 2.048 ger)
       ?>  =(fig:ex:loy (zeno our))
       =+  mac=`mace`[[0 sec:ex:loy] ~]
-      =+  syp=`step`[`bray`[0 ~ our now] [%czar nam] pub:ex:loy]
+      =+  syp=`step`[`bray`[0 ~ our now] [%czar ~] pub:ex:loy]
       =+  ded=`deed`[(sign:se:loy @ (shaf %self (sham syp))) syp]
       =+  buq=`buck`[mac [ded ~]]
       =:  ton.fox  (~(ha go ton.fox) our buq)
@@ -999,11 +996,14 @@
             ^+  +>
             =.  lun.wod.dur.diz  
                 ?:  =(%none aut)  lun.wod.dur.diz 
-                ?:  ?&  ?=([~ %ix *] lun.wod.dur.diz) 
-                        ?=([%ix *] ryn)
-                        =(q.ryn q.u.lun.wod.dur.diz)
-                        =(r.ryn r.u.lun.wod.dur.diz)
-                    ==
+                ?:  ?=([%ix *] ryn)
+                  ?:  ?|  ?=(~ lun.wod.dur.diz)
+                          ?&  ?=([%ix *] u.lun.wod.dur.diz)
+                              !=(q.ryn q.u.lun.wod.dur.diz) 
+                              !=(r.ryn r.u.lun.wod.dur.diz) 
+                          ==
+                      ==
+                    [~ ryn]
                   lun.wod.dur.diz
                 [~ ryn]
             (dine fud)
@@ -1526,7 +1526,7 @@
           [[[%beer p.vun] ~] q.vun]
         ::
             %sith
-          (~(czar am [now fox]) p.fav q.fav r.fav)
+          (~(czar am [now fox]) p.fav q.fav)
         ::
             %want
           ?>  ?=(^ wru)
@@ -1560,7 +1560,7 @@
     ?~  tyl  ~
     ?:  ?=([%name ~] tyl)
       =+  wul=$(tyl [%will ~])
-      ?~(wul ~ [~ (gnow q.q:((hard deed) -.u.wul))])
+      ?~(wul ~ [~ (gnow his q.q:((hard deed) -.u.wul))])
     =+  gys=(~(us go ton.fox) our)
     ?~  gys  ~
     ?.  =(our his)

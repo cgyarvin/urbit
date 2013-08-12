@@ -1,7 +1,12 @@
+!:
+::  /=main=/bin/pope/hoon
+::
 |=  *
-|=  ~
+|=  [one=@ud num=@ud]
 ^-  bowl
-:-  ~
+?>  &(!=(0 num) (lte (add one num) 256))
+:-  :~  [%la %leaf "generating ~{(scow %p one)} for {(scow %ud num)}"]
+    ==
 :-  ~
 :-  :~  [~ [%up %pass "kernel passphrase: "]]
     ==

@@ -1140,7 +1140,7 @@
 ::
 ++  po
   =+  :-  ^=  sis
-          'bocmarbinwansamlitsighidfidlissogdirwacsabwissib\
+          'dozmarbinwansamlitsighidfidlissogdirwacsabwissib\
           /rigsoldopmodfoglidhopdardorlorhodfolrintogsilmir\
           /holpaslacrovlivdalsatlibtabhanticpidtorbolfosdot\
           /losdilforpilramtirwintadbicdifrocwidbisdasmidlop\
@@ -1157,7 +1157,7 @@
           /nimlarfitwalrapsarnalmoslandondanladdovrivbacpol\
           /laptalpitnambonrostonfodponsovnocsorlavmatmipfap'
       ^=  dex
-      'lesnecbudwessevpersutletfulpensytdurwepserwylsun\
+      'zodnecbudwessevpersutletfulpensytdurwepserwylsun\
       /rypsyxdyrnuphebpeglupdepdysputlughecryttyvsydnex\
       /lunmeplutseppesdelsulpedtemledtulmetwenbynhexfeb\
       /pyldulhetmevruttylwydtepbesdexsefwycburderneppur\
@@ -7373,6 +7373,7 @@
     |=  hap=path  ^-  @tas
     ?+  hap  !!
       [@ %ames *]  %a
+      [@ %behn *]  %b
       [@ %clay *]  %c
       [@ %sync *]  %c
       [@ %term *]  %d

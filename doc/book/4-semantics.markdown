@@ -9,7 +9,52 @@ Start vere, the Arvo VM, which you created in chapter 2:
 
   vere $mypier
 
-You'll see 
+You'll see a prompt of the form 
+
+  ~tasfyn-partyv/try=>
+
+What does this prompt mean?
+
+`~tasfyn-partyv` (or whatever) is your ship.  `try` is your desk;
+that is, the project you're working on.  There is no spur, or
+further current directory.  The current case (revision) is the 
+null case, `=`, ie, you are working in the present tense.
+
+This is the `behn` prompt.  Arvo is talking to you through the
+console vane `dill` from the processing vane `behn`.  You can
+think of `behn` as a shell, a REPL or both.  As either it is very
+barebones and can perform only a few basic tasks.  You can see
+its source in Unix in `$URBIT_HOME/tasfyn-partyv/arvo/behn.hoon`, 
+or print it in Urbit with `:cat /===/arvo/behn/hoon`.
+
+As this correspondence implies, basically the way you get
+any kind of bulk information from Unix, into Urbit, is to write
+it into a Unix file whose path Urbit knows how to sync.
+
+While learning Hoon we are not going to run any commands in
+`behn` or use its OS-level capabilities at all.  We are just
+going to use it as a REPL.  But we are still using it and should
+have no reason to fear it.
+
+`behn` uses emacs control keys for history and editing.
+^ABEFKNPY all basically kind of work.  (Since `dill` works at the
+character level, not the line level, this is not `readline`.)
+There are also special Arvo controls: ^CDWX.
+
+^C will stop any working task (and cancel the event that caused
+it).  If Urbit is waiting rather than working, ^C will kill the
+waiting task.  ^X will cycle between waiting tasks and the
+command line (which can always create a new task).  Think of it
+as switching windows, in a command-line sense.  ^W switches
+ships, on a multi-ship pier.  ^D exits back to Unix.
+ 
+If there is an error you may see a stack trace.  The bottom of
+the trace is the thing that caused the problem.
+
+
+
+Now let's see how to use Hoon 
+
 
 
 Now, let's actually look at Hoon.  Really, try not to recoil

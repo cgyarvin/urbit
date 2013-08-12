@@ -162,6 +162,7 @@ _lo_init(u2_reck* rec_u)
   u2_term_io_init(rec_u);
   u2_http_io_init(rec_u);
   u2_save_io_init(rec_u);
+  u2_behn_io_init(rec_u);
 }
 
 /* _lo_exit(): terminate I/O across the process.
@@ -174,6 +175,7 @@ _lo_exit(u2_reck* rec_u)
   u2_term_io_exit(rec_u);
   u2_http_io_exit(rec_u);
   u2_save_io_exit(rec_u);
+  u2_behn_io_exit(rec_u);
 }
 
 /* _lo_stop(): stop event I/O across the process.
@@ -187,6 +189,7 @@ _lo_stop(u2_reck*        rec_u,
   u2_term_io_stop(rec_u, lup_u);
   u2_save_io_stop(rec_u, lup_u);
   u2_unix_io_stop(rec_u, lup_u);
+  u2_behn_io_stop(rec_u, lup_u);
 }
 
 /* _lo_poll(): reset event flags across the process.
@@ -200,6 +203,7 @@ _lo_poll(u2_reck*        rec_u,
   u2_term_io_poll(rec_u, lup_u);
   u2_save_io_poll(rec_u, lup_u);
   u2_unix_io_poll(rec_u, lup_u);
+  u2_behn_io_poll(rec_u, lup_u);
 }
 
 /* _lo_spin(): restart event I/O across the process.
@@ -213,6 +217,7 @@ _lo_spin(u2_reck*        rec_u,
   u2_term_io_spin(rec_u, lup_u);
   u2_save_io_spin(rec_u, lup_u);
   u2_unix_io_spin(rec_u, lup_u);
+  u2_behn_io_spin(rec_u, lup_u);
 }
 
 /* _lo_how(): print how.
@@ -224,6 +229,7 @@ _lo_how(u2_noun how)
     default: c3_assert(0); break;
 
     case c3__ames: return "ames";
+    case c3__behn: return "behn";
     case c3__term: return "cons";
     case c3__htcn: return "http-conn";
     case c3__htls: return "http-lisn";
@@ -243,6 +249,7 @@ _lo_time(u2_reck*         rec_u,
     default: c3_assert(0); break;
 
     case c3__ames: u2_ames_io_time(rec_u, tim_u); break;
+    case c3__behn: u2_behn_io_time(rec_u, tim_u); break;
     case c3__save: u2_save_io_time(rec_u, tim_u); break;
     case c3__unix: u2_unix_io_time(rec_u, tim_u); break;
   }
@@ -1603,14 +1610,13 @@ u2_lo_loop(u2_reck* rec_u)
       }
       else {
         u2_noun gen = _lo_text(rec_u, "generator");
-        u2_noun nam = _lo_text(rec_u, "imperial name");
         u2_noun gun = u2_cn_mung(u2k(rec_u->toy.slaw), u2nc(c3__uw, gen));
 
         if ( u2_nul == gun ) {
           fprintf(stderr, "czar: incorrect format\r\n");
           exit(1);
         }
-        pig = u2nq(c3__sith, u2k(u2t(whu)), nam, u2k(u2t(gun)));
+        pig = u2nt(c3__sith, u2k(u2t(whu)), u2k(u2t(gun)));
 
         u2z(whu); u2z(gun);
       }

@@ -709,10 +709,15 @@
   ?.  (~(has by q.ape) -.poy)  ~
   [~ .^(%cx pax)]
 ::
+++  glam 
+  |=  zar=@p  ^-  tape
+  (weld "carrier " (scow %p zar))                       ::  XX real names
+::
 ++  gnow
-  |=  gos=gcos  ^-  @t
+  |=  [who=@p gos=gcos]  ^-  @t
   ?-    -.gos
-      ?(%czar %king %pawn)  p.gos
+      %czar           (rap 3 (glam who))
+      ?(%king %pawn)  p.gos
       ?(%duke %jack) 
     ?+    -.p.gos  p.p.p.gos
         %anon  %%
@@ -753,7 +758,7 @@
     %king  (end 3 1 who)
     %duke  (end 4 1 who)
     %jack  (end 5 1 who)
-    %pawn  ~les
+    %pawn  `@p`0
   ==
 ::
 ++  saxo                                                ::  autocanon
@@ -825,6 +830,7 @@
 ++  apex  ,[p=@uvI q=(map ,@ta ,@uvI) r=(map ,@ta ,~)]  ::  node report
 ++  ball  ,@uw                                          ::  statement payload
 ++  bait  ,[p=skin q=@ud r=dove]                        ::  fmt nrecvd spec
+++  banr  ?(%black %blue %red %orange %white)           ::  banner
 ++  bath                                                ::  convo per client
           $:  gay=?                                     ::  not stalled
               laz=(unit ,@da)                           ::  last heard
@@ -986,7 +992,7 @@
               [%rend ~]                                 ::  pop kernel
               [%save p=path q=@]                        ::  write atomic file
               [%send p=lane q=@]                        ::  transmit packet
-              [%sith p=@p q=@t r=@uw]                   ::  imperial generator
+              [%sith p=@p q=@uw]                        ::  imperial generator
               [%sync ~]                                 ::  reset soft state
               [%talk p=tank]                            ::  show on console
               [%tell p=(list ,@t)]                      ::  dump lines
@@ -1107,7 +1113,7 @@
           ==                                            ::
 ++  gilt  ,[@tas *]                                     ::  presumed gift
 ++  gcos                                                ::  id description
-          $%  [%czar p=@t]                              ::  8-bit ship
+          $%  [%czar ~]                                 ::  8-bit ship
               [%duke p=what]                            ::  32-bit ship
               [%jack p=@t]                              ::  64-bit ship
               [%king p=@t]                              ::  16-bit ship
@@ -1229,7 +1235,7 @@
               [%up p=@t]                                ::  prompt response
               [%oy p=ship q=@ta r=@ud s=(unit ,*)]      ::  incoming request
               [%yo p=ship q=cape r=soap]                ::  request response
-              [%wa p=@da]                               ::  alarm
+              [%wa ~]                                   ::  alarm
           ==                                            ::
 ++  nose                                                ::  response, kernel
           $?  [%% p=(unit ,[p=typo q=(list)])]          ::  standard input
@@ -1401,7 +1407,7 @@
               [%lord p=whom]                            ::  male person []
               [%punk p=@t]                              ::  opaque handle ""
           ==                                            ::
-++  whom  ,[p=@ud q=@tas r=name]                        ::  year/govt/id
+++  whom  ,[p=@ud q=path r=name]                        ::  year/govt/id
 ++  will  (list deed)                                   ::  certificate
 ++  worm  ,*                                            ::  vase of task
 ++  yard                                                ::  terminal state
