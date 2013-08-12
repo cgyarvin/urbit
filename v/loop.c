@@ -1589,7 +1589,9 @@ _lo_zen(u2_reck* rec_u)
 void
 u2_lo_loop(u2_reck* rec_u)
 {
+  signal(SIGHUP, SIG_IGN);  //  nohup, who needs u?
   signal(SIGIO, SIG_IGN);   //  linux is wont to produce for some reason
+
   _lo_init(rec_u);
 
   if ( u2_yes == u2_Host.ops_u.nuu ) {
