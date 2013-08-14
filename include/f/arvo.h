@@ -30,29 +30,7 @@
           struct _u2_cart* geg_u;         //  entry of ovum queue
         } ova;
 
-        struct {                          //  function gates, use mung
-          u2_noun cyst;                   //  compare resource trees
-          u2_noun lump;                   //  patch
-          u2_noun rain;                   //  parse path, text -> gene
-          u2_noun ream;                   //  parse text -> gene
-          u2_noun slam;                   //  call ([vase vase] -> vase)
-          u2_noun sham;                   //  SHA-256 on noun
-          u2_noun shed;                   //  ghetto decrypt
-          u2_noun shen;                   //  ghetto encrypt
-          u2_noun slap;                   //  layer ([vase gene] -> vase)
-          u2_noun slop;                   //  cell ([vase vase] -> vase)
-          u2_noun slay;                   //  text to coin
-          u2_noun slaw;                   //  text to format
-          u2_noun scot;                   //  dime to text
-          u2_noun spat;                   //  path to text
-          u2_noun stab;                   //  text to path
-          u2_noun turf;                   //  utf8 to utf32
-          u2_noun tuft;                   //  utf32 to utf8
-          u2_noun mook;                   //  trace conversion
-          u2_noun hoof;                   //  kno to text 
-          u2_noun wash;                   //  tank window printer
-        } toy;
-
+        u2_noun yot;                      //  new toy system
         u2_noun now;                      //  current time, as noun
         u2_noun wen;                      //  current time, as text
         u2_noun sev_l;                    //  instance number

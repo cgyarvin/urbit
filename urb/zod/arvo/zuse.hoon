@@ -909,7 +909,7 @@
               r=(qeu ,[p=wire q=nose])                  ::  pending notes
               s=boar                                    ::  execution
           ==                                            ::
-++  boat  ,[(list slip) task]                           ::  user stage
+++  boat  ,[(list slip) tart]                           ::  user stage
 ++  boon                                                ::  fort output
           $%  [%beer p=ship q=@uvG]                     ::  gained ownership
               [%coke p=sock q=cape r=soap s=duct]       ::  message result
@@ -928,7 +928,7 @@
               way=(map ,@tas vase)                      ::  variables
               hit=[p=@ud q=(list ,@t)]                  ::  command history
               sur=[p=@ud q=(qeu vase)]                  ::  result history
-              god=[p=@ud q=(map ,@ud gyre)]             ::  tasks
+              god=[p=@ud q=(map ,@ud task)]             ::  tasks
           ==                                            ::
 ++  bray  ,[p=life q=(unit life) r=ship s=@da]          ::  our parent us now
 ++  brow  ,[p=@da q=@tas]                               ::  browser version
@@ -968,7 +968,7 @@
               [%flog p=card]                            ::  log to terminal
               [%junk p=@]                               ::  entropy
               [%kick p=@da]                             ::  wake up
-              [%kill p=~]                               ::  kill a gyre
+              [%kill p=~]                               ::  kill a task
               [%lane p=lane]                            ::  set public route
               [%line p=@t]                              ::  source line
               [%limn ~]                                 ::  rotate ship
@@ -1130,10 +1130,6 @@
               [%yo p=ship q=@ta r=*]                    ::  network message
           ==                                            ::
 ++  gram  ,@uw                                          ::  physical datagram
-++  gyre                                                ::
-          $:  paq=(qeu gyro)                            ::  prompt queue
-              wip=[p=@ud q=(map ,@ud beak)]             ::  processes
-          ==                                            ::
 ++  gyro  ,[p=@ud q=wire r=prod]                        ::  live prompt
 ++  hand  ,@uvH                                         ::  hash of code
 ++  hate  ,[p=purl q=@p r=moth]                         ::  cooked request 
@@ -1172,6 +1168,8 @@
               [%is p=@ud q=(unit lane) r=@is]           ::  IPv6 w/alternates
               [%ix p=@da q=@ud r=@if]                   ::  IPv4 provisional
           ==                                            ::
+++  land  path                                          ::  IETF lang as path
+++  lang  %ta                                           ::  IETF lang as code
 ++  lark  (list lath)                                   ::  parsed command
 ++  lass  ?(%0 %1 %2)                                   ::  power increment
 ++  lath  $%                                            ::  pipeline stage
@@ -1385,7 +1383,11 @@
 ++  sock  ,[p=ship q=ship]                              ::  from to
 ++  spur  path                                          ::  modeshipdeskcasespur
 ++  step  ,[p=bray q=gcos r=pass]                       ::  identity stage
-++  task  _|+([@da path note] *bowl)                    ::  process core
+++  tart  _|+([@da path note] *bowl)                    ::  process core
+++  task                                                ::
+          $:  paq=(qeu gyro)                            ::  prompt queue
+              wip=[p=@ud q=(map ,@ud beak)]             ::  processes
+          ==                                            ::
 ++  taxi  ,[p=lane q=rock]                              ::  routed packet
 ++  tick  ,@ud                                          ::  process id
 ++  town                                                ::  all security state
@@ -1409,7 +1411,7 @@
           ==                                            ::
 ++  whom  ,[p=@ud q=path r=name]                        ::  year/govt/id
 ++  will  (list deed)                                   ::  certificate
-++  worm  ,*                                            ::  vase of task
+++  worm  ,*                                            ::  vase of tart
 ++  yard                                                ::  terminal state
           $:  p=?                                       ::  verbose 
               q=blur                                    ::  display state

@@ -410,6 +410,7 @@
         u2_bean loh;
         u2_bean pro;
         u2_bean veb;
+        u2_bean pas;
         u2_bean rez;
         u2_bean sow;
         u2_bean nuu;
@@ -604,6 +605,16 @@
 
     /**  Kernel control.
     **/
+      /* u2_reck_do(): use a kernel function.
+      */
+#       define u2_do(t, a)              u2_reck_do(t, a)
+#       define u2_dc(t, a1, a2)         u2_reck_do(t, u2nc(a1, a2))
+#       define u2_dt(t, a1, a2, a3)     u2_reck_do(t, u2nt(a1, a2, a3))
+#       define u2_dq(t, a1, a2, a3, a4) u2_reck_do(t, u2nq(a1, a2, a3, a4))
+
+        u2_noun
+        u2_reck_do(const c3_c* txt_c, u2_noun arg);
+
       /* u2_reck_line(): apply a reck line (protected).
       */
         void

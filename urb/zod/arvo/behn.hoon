@@ -31,7 +31,7 @@
       tem=(map ,[p=@ud q=@ud r=wire] ,@da)              ::  timeouts 
       hit=[p=@ud q=(list ,@t)]                          ::  command history
       sur=[p=@ud q=(qeu vase)]                          ::  result history
-      god=[p=@ud q=(map ,@ud gyre)]                     ::  process state
+      god=[p=@ud q=(map ,@ud task)]                     ::  process state
   ==                                                    ::
 ::                                                      ::
 ++  bran                                                ::  static "state"
@@ -48,7 +48,7 @@
         liz=type                                        ::  '*(list ,@t)'
         pah=type                                        ::  '*path'
         noq=type                                        ::  '*note'
-        tak=type                                        ::  '*task'
+        tak=type                                        ::  '*tart'
         vas=type                                        ::  '*vase'
     ==                                                  ::
   ==                                                    ::
@@ -66,7 +66,7 @@
     liz.typ  (pal (vice '*(list ,@t)'))
     pah.typ  (pal (vice '*path'))
     noq.typ  (pal (vice '*note'))
-    tak.typ  (pal (vice '*task'))
+    tak.typ  (pal (vice '*tart'))
     vas.typ  (pal (vice '*vase'))
   ==
 ++  brat  ,[[who=ship bran] brad]                       ::  don't ask why
@@ -92,8 +92,8 @@
     ?~  dog  |
     =+  gib=(~(get by q.wip.u.dog) q.fat)
     ?~  gib  |
-    &
-    ::(~(has by q.u.gib) [%ma r.fat])
+    ?.  ?=([%ma *] r.fat)  |
+    (~(has by q.u.gib) t.r.fat)
   ::
   ++  feat                                              ::    feat:be
     |=  tea=wire                                        ::  decode wire
@@ -109,9 +109,9 @@
   ::
   ++  fist                                              ::    fist:be
     |=  hen=duct                                        ::  new task
-    =+  [gyp=p.god gyr=*gyre]
+    =+  [gyp=p.god gyr=*task]
     =:  p.god  +(p.god)
-        q.god  (~(put by q.god) p.god *gyre)
+        q.god  (~(put by q.god) p.god *task)
       ==
     (fi gyp hen gyr)
   ::
@@ -190,7 +190,7 @@
     text/:(weld (trip (rap 3 [hox '/' cwd ~])) "=" ?~(cws "" (spud cws)) "> ")
   ::
   ++  fi                                                ::    fi:be
-    |=  [gyp=@ud hen=duct gyr=gyre]                     ::  process task
+    |=  [gyp=@ud hen=duct gyr=task]                     ::  process task
     =|  duv=(list ,[p=duct q=card])
     |%
     ++  abet                                            ::    abet:fi:be
@@ -1019,6 +1019,8 @@
   |=  [wru=(unit writ) tea=wire hen=duct fav=curd]
   =>  .(fav ((hard card) fav))
   ^-  [p=(list move) q=vane]
+  ?:  ?=([%crud *] fav)
+    [[[wru [/d hen] [%flog fav]] ~] ..^$]
   ?:  ?=(%wake -.fav)
     =+  ^=  fiy
         =|  fiy=(list ,[p=duct q=[p=@ud q=@ud r=wire]])

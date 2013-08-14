@@ -452,7 +452,7 @@ _unix_dir_update(u2_reck* rec_u, u2_udir* dir_u, DIR* rid_u)
         u2_udir* ded_u = *dis_u;
         u2_udir* nex_u = ded_u->nex_u;
 
-        uL(fprintf(uH, "removed directory %s\n", ded_u->pax_c));
+        // uL(fprintf(uH, "removed directory %s\n", ded_u->pax_c));
         _unix_dir_free(rec_u, ded_u);
         free(ded_u);
 
@@ -469,7 +469,7 @@ _unix_dir_update(u2_reck* rec_u, u2_udir* dir_u, DIR* rid_u)
         u2_ufil* ded_u = *fil_u;
         u2_ufil* nex_u = ded_u->nex_u;
 
-        uL(fprintf(uH, "removed file %s\n", ded_u->pax_c));
+        // uL(fprintf(uH, "removed file %s\n", ded_u->pax_c));
         _unix_file_free(rec_u, ded_u);
         free(ded_u);
 
@@ -614,7 +614,7 @@ _unix_dir_arch(u2_reck* rec_u, u2_udir* dir_u)
   for ( fil_u = dir_u->fil_u; fil_u; fil_u = fil_u->nex_u ) {
     u2_noun wib = _unix_file_name(rec_u, fil_u);
     u2_noun baw = _unix_file_load(rec_u, fil_u);
-    u2_noun has = u2_cn_mung(u2k(rec_u->toy.sham), u2k(baw));
+    u2_noun has = u2_do("sham", u2k(baw));
     u2_noun fil = u2nt(u2_yes, has, baw);
 
     if ( u2_no == u2du(wib) ) {
@@ -684,7 +684,7 @@ _unix_desk_sync_into(u2_reck* rec_u,
   bur = _unix_desk_peek(rec_u, u2k(who), hox, syd, u2k(rec_u->wen));
 
   if ( u2_no == u2_sing(xun, bur) ) {
-    doz = u2_cn_mung(u2k(rec_u->toy.cyst), u2nc(xun, bur));
+    doz = u2_dc("cyst", xun, bur);
     pax = u2nq(c3__gold, c3__sync, u2k(rec_u->sen), u2_nul);
     fav = u2nq(c3__into, who, syd, u2nc(u2_yes, doz));
 
@@ -712,7 +712,7 @@ _unix_ship_update(u2_reck* rec_u, u2_uhot* hot_u)
 
       mpz_init_set(who_mp, hot_u->who_mp);
       who = u2_ci_mp(who_mp);
-      hox = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', u2k(who)));
+      hox = u2_dc("scot", 'p', u2k(who));
     }
 
     for ( dis_u = dir_u->dis_u; dis_u; dis_u = dis_u->nex_u ) { 
@@ -731,7 +731,7 @@ _unix_ship_update(u2_reck* rec_u, u2_uhot* hot_u)
 static void
 _unix_hot_gain(u2_reck* rec_u, u2_noun who, u2_bean mek)
 {
-  u2_noun hox = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', who));
+  u2_noun hox = u2_dc("scot", 'p', who);
   c3_c*   hox_c = u2_cr_string(hox);
   c3_c*   pax_c = _unix_down(u2_Host.ops_u.hom_c, hox_c + 1);
   DIR*    rid_u = opendir(pax_c);
@@ -811,7 +811,7 @@ _unix_home(u2_reck* rec_u, u2_noun who)
 static u2_noun
 _unix_desk_sync_udon(u2_reck* rec_u, u2_noun don, u2_noun old)
 {
-  return u2_cn_mung(u2k(rec_u->toy.lump), u2nc(don, old));
+  return u2_dc("lump", don, old);
 }
 
 /* _unix_desk_sync_tofu(): sync out file install.
@@ -977,7 +977,7 @@ _unix_desk_sync_ergo(u2_reck* rec_u,
     u2_noun bur = _unix_desk_peek(rec_u, who, hox, syd, lok);
 
     if ( u2_no == u2_sing(xun, bur) ) {
-      u2_noun doz = u2_cn_mung(u2k(rec_u->toy.cyst), u2nc(bur, xun));
+      u2_noun doz = u2_dc("cyst", bur, xun);
 
       _unix_desk_sync_soba(rec_u, *dir_u, doz);
     }
@@ -1008,8 +1008,8 @@ u2_unix_ef_ergo(u2_reck* rec_u,
                 u2_noun  syd,
                 u2_noun  rel)
 {
-  u2_noun  hox = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', u2k(who)));
-  u2_noun  lok = u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3__ud, rel));
+  u2_noun  hox = u2_dc("scot", 'p', u2k(who));
+  u2_noun  lok = u2_dc("scot", c3__ud, rel);
   u2_uhot* hot_u;
 
   hot_u = _unix_home(rec_u, u2k(who));

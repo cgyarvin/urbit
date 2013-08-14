@@ -509,6 +509,7 @@ u2_ve_mark_reck(u2_reck* rec_u)
 {
   c3_w siz_w = 0;
 
+  siz_w += u2_cm_mark_noun(rec_u->yot);
   siz_w += u2_cm_mark_noun(rec_u->now);
   siz_w += u2_cm_mark_noun(rec_u->wen);
   siz_w += u2_cm_mark_noun(rec_u->sen);
@@ -516,6 +517,7 @@ u2_ve_mark_reck(u2_reck* rec_u)
   siz_w += u2_cm_mark_noun(rec_u->roe);
   siz_w += u2_cm_mark_noun(rec_u->key);
 
+#if 0
   siz_w += u2_cm_mark_noun(rec_u->toy.cyst);
   siz_w += u2_cm_mark_noun(rec_u->toy.rain);
   siz_w += u2_cm_mark_noun(rec_u->toy.ream);
@@ -535,9 +537,9 @@ u2_ve_mark_reck(u2_reck* rec_u)
   siz_w += u2_cm_mark_noun(rec_u->toy.mook);
   siz_w += u2_cm_mark_noun(rec_u->toy.hoof);
   siz_w += u2_cm_mark_noun(rec_u->toy.wash);
+#endif
 
   siz_w += u2_cm_mark_noun(rec_u->ken);
-  // siz_w += u2_cm_mark_noun(rec_u->syd);
   siz_w += u2_cm_mark_noun(rec_u->roc);
 
   {

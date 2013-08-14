@@ -26,7 +26,7 @@
 static u2_noun
 _reck_spat(u2_reck* rec_u, u2_noun pox)
 {
-  return u2_cn_mung(u2k(rec_u->toy.spat), pox);
+  return u2_do("spat", pox);
 }
 
 /* _reck_nock_poke(): call poke through hardcoded interface.
@@ -84,6 +84,31 @@ _reck_nock_wish(u2_reck* rec_u, u2_noun txt)
   return u2_cn_mung(fun, txt);
 }
 
+/* u2_reck_gate(): load a kernel function.
+*/
+u2_noun 
+u2_reck_gate(const c3_c* txt_c)
+{
+  u2_noun txt = u2_ci_string(txt_c);
+  u2_weak gat = u2_ckd_by_get(u2k(u2_Arv->yot), u2k(txt));
+
+  if ( u2_none == gat ) {
+    gat = _reck_nock_wish(u2_Arv, u2k(txt));  
+    u2_Arv->yot = u2_ckd_by_put(u2_Arv->yot, u2k(txt), u2k(gat));
+  }
+  u2z(txt);
+  return gat;
+
+}
+
+/* u2_reck_do(): use a kernel function.
+*/
+u2_noun 
+u2_reck_do(const c3_c* txt_c, u2_noun arg)
+{
+  return u2_cn_mung(u2_reck_gate(txt_c), arg);
+}
+
 /* u2_reck_wish(): noun from expression
 */
 u2_noun 
@@ -92,84 +117,12 @@ u2_reck_wish(u2_reck* rec_u, c3_c* str_c)
   return _reck_nock_wish(rec_u, u2_ci_string(str_c));
 }
 
-/* _reck_ream(): ream with toy.
-*/
-static u2_noun
-_reck_ream(u2_reck* rec_u, u2_noun txt)
-{
-  return u2_cn_mung(u2k(rec_u->toy.ream), txt);
-}
-
-/* _reck_rain(): rain with toy.
-*/
-static u2_noun
-_reck_rain(u2_reck* rec_u, u2_noun bon, u2_noun txt)
-{
-  return u2_cn_mung(u2k(rec_u->toy.rain), u2nc(bon, txt));
-}
-
-/* _reck_slam(): slam with toy.
-*/
-static u2_noun
-_reck_slam(u2_reck* rec_u, u2_noun gat, u2_noun sam)
-{
-  return u2_cn_mung(u2k(rec_u->toy.slam), u2nc(gat, sam));
-}
-
-/* _reck_slap(): slap with toy.
-*/
-static u2_noun
-_reck_slap(u2_reck* rec_u, u2_noun vax, u2_noun gen)
-{
-  return u2_cn_mung(u2k(rec_u->toy.slap), u2nc(vax, gen));
-}
-
-/* _reck_slop(): slop with toy.
-*/
-static u2_noun
-_reck_slop(u2_reck* rec_u, u2_noun hed, u2_noun tal)
-{
-  return u2_cn_mung(u2k(rec_u->toy.slop), u2nc(hed, tal));
-}
-
-/* _reck_gate(): nock gate from vase and text.
-*/
-static u2_noun
-_reck_gate(u2_reck* rec_u, u2_noun vax, const c3_c* txt_c)
-{
-  u2_noun gen = _reck_ream(rec_u, u2_ci_string(txt_c));
-  u2_noun vag = _reck_slap(rec_u, vax, gen);
-  u2_noun gat = u2k(u2t(vag));
-
-  u2z(vag); 
-  return gat;
-}
-
-/* _reck_hard(): function against vase, producing noun.
-*/
-static u2_noun
-_reck_hard(u2_reck* rec_u, u2_noun vax, const c3_c* txt_c, u2_noun sam)
-{
-  return u2_cn_mung(_reck_gate(rec_u, vax, txt_c), sam);
-}
-
 /* _reck_scot(): print atom.
 */
 static u2_noun
 _reck_scot(u2_reck* rec_u, u2_noun dim)
 {
-  return u2_cn_mung(u2k(rec_u->toy.scot), dim);
-}
-
-/* _reck_soft(): function against vase, producing vase.
-*/
-static u2_noun
-_reck_soft(u2_reck* rec_u, u2_noun vax, const c3_c* txt_c, u2_noun sam)
-{
-  u2_noun gen = _reck_ream(rec_u, u2_ci_string(txt_c));
-  u2_noun gat = _reck_slap(rec_u, vax, gen);
-
-  return _reck_slam(rec_u, gat, sam);
+  return u2_do("scot", dim);
 }
 
 /* _reck_spoo(): noun path from c, kind of a hack.
@@ -197,41 +150,14 @@ _reck_spoo(c3_c* pax_c)
   }
 }
 
-/* _reck_load(): layer file on vase -> vase.
-*/
-static u2_noun
-_reck_load(u2_reck* rec_u, u2_noun vax, c3_c* pax_c)
-{
-  u2_noun txt = u2_walk_load(pax_c);
-  u2_noun gen = _reck_rain
-    (rec_u, _reck_spoo(pax_c + strlen(u2_Local) + 1), txt);
-
-  return _reck_slap(rec_u, vax, gen);
-}
-
-/* _reck_load_temp(): _reck_load() for old fs structure.
-*/
-static u2_noun
-_reck_load_temp(u2_reck* rec_u, u2_noun vax, c3_w kno_w, c3_c* pax_c)
-{
-  c3_c ful_c[2048];
- 
-  sprintf(ful_c, "%s/%d/%s", u2_System, kno_w, pax_c);
-  return _reck_load(rec_u, vax, ful_c);
-}
-
 /* _reck_load_arvo(): read an arvo file.
 */
 static u2_noun
 _reck_load_arvo(u2_reck* rec_u, c3_c* pax_c)
 {
   c3_c ful_c[2048];
-  //  u2_noun hof = u2_cn_mung(u2k(rec_u->toy.hoof), rec_u->kno_w);
-  //  c3_c* hof_c = u2_cr_string(hof);
 
   sprintf(ful_c, "%s/%d/arvo/%s.hoon", u2_System, rec_u->kno_w, pax_c);
-  //  u2z(hof);
-  //  free(hof_c);
 
   return u2_walk_load(ful_c);
 }
@@ -360,14 +286,11 @@ u2_reck_cold(u2_reck* rec_u, c3_w kno_w)
   rec_u->sen = 0;
   rec_u->roe = 0;
   rec_u->key = 0;
+  rec_u->yot = 0;
 
   {
     u2_noun pot, eng;
     c3_c    ful_c[2048];
-    //  u2_noun hof = u2_cn_mung(u2k(rec_u->toy.hoof), rec_u->kno_w);
-    //  c3_c* hof_c = u2_cr_string(hof);
-
-    // sprintf(ful_c, "%s/%d/urbit.pill", u2_System, rec_u->kno_w);
 
     sprintf(ful_c, "%s/urbit.pill", u2_Host.ops_u.hom_c);
     if ( 0 == (pot = u2_walk_load(ful_c)) ) {
@@ -397,6 +320,13 @@ u2_reck_cold(u2_reck* rec_u, c3_w kno_w)
     }
   }
 
+  //  We should not be calling this from execution level.
+  //  But since we are...
+  {
+    u2z(u2_reck_gate("wash"));
+  }
+
+#if 0
   rec_u->toy.rain = u2_reck_wish(rec_u, "rain");
   rec_u->toy.ream = u2_reck_wish(rec_u, "ream");
   rec_u->toy.slay = u2_reck_wish(rec_u, "slay");
@@ -418,6 +348,7 @@ u2_reck_cold(u2_reck* rec_u, c3_w kno_w)
   rec_u->toy.shed = u2_reck_wish(rec_u, "de:crya");
   rec_u->toy.cyst = u2_reck_wish(rec_u, "cyst");
   rec_u->toy.lump = u2_reck_wish(rec_u, "lump");
+#endif
 
   u2_reck_time(rec_u);
   u2_reck_numb(rec_u);
@@ -452,7 +383,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
   else {
     rec_u->ken = ken;
     rec_u->roc = u2_cn_nock(0, u2k(ken));
-
+#if 0
     rec_u->toy.rain = u2_reck_wish(rec_u, "rain");
     rec_u->toy.ream = u2_reck_wish(rec_u, "ream");
     rec_u->toy.slay = u2_reck_wish(rec_u, "slay");
@@ -468,7 +399,7 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
     rec_u->toy.wash = u2_reck_wish(rec_u, "wash");
     rec_u->toy.hoof = u2_reck_wish(rec_u, "hoof");
     rec_u->toy.mook = u2_reck_wish(rec_u, "mook");
-
+#endif
     //  Direct poke to install tang/vanes.  Shd be in egz but isnt.
     //
     {
@@ -496,11 +427,12 @@ u2_reck_init(u2_reck* rec_u, c3_w kno_w, u2_noun ken)
                              u2nc(c3__eyre, u2_nul),
                              _reck_load_arvo(rec_u, "eyre"));
     }
+#if 0
     rec_u->toy.sham = u2_reck_wish(rec_u, "sham");
     rec_u->toy.shen = u2_reck_wish(rec_u, "en:crya");
     rec_u->toy.shed = u2_reck_wish(rec_u, "de:crya");
     rec_u->toy.cyst = u2_reck_wish(rec_u, "cyst");
-
+#endif
     u2_reck_time(rec_u);
     u2_reck_numb(rec_u);
     {
@@ -520,7 +452,7 @@ _reck_mole(u2_reck* rec_u,
                 u2_noun  san,
                 c3_d*    ato_d)
 {
-  u2_noun uco = u2_cn_mung(u2k(rec_u->toy.slay), san);
+  u2_noun uco = u2_do("slay", san);
   u2_noun p_uco, q_uco, r_uco, s_uco;
 
   if ( (u2_no == u2_cr_qual(uco, &p_uco, &q_uco, &r_uco, &s_uco)) ||

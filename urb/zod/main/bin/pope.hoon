@@ -1,11 +1,17 @@
 !:
 ::  /=main=/bin/pope/hoon
 ::
-|=  *
+=>  .(+ =>(+ ^/===/pony))
+|=  [est=time *]
 |=  [one=@ud num=@ud]
 ^-  bowl
 ?>  &(!=(0 num) (lte (add one num) 256))
-:-  :~  [%la %leaf "generating ~{(scow %p one)} for {(scow %ud num)}"]
+%+  pomp  "generating ~{(scow %p one)} for {(scow %ud num)}"
+%+  (polo ~ %pass "kernel passphrase: " ~)
+  (boss 256 (more gon qit))
+|=  [* tey=@]
+
+:-  :~  [%la %leaf 
     ==
 :-  ~
 :-  :~  [~ [%up %pass "kernel passphrase: "]]
@@ -27,7 +33,7 @@
       ==
   ~
 =+  ^=  guy
-    =+  inx=0
+    =+  inx=one
     =|  goy=(list ,[p=@ud q=@uv r=@uv s=@ud])
     |-  ^+  goy
     ?:  =(256 inx)  goy

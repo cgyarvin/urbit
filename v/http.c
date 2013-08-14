@@ -793,16 +793,14 @@ _http_octs_to_bod(u2_noun oct)
 static u2_noun
 _http_pox_to_noun(c3_w sev_l, c3_w coq_l, c3_w seq_l)
 {
-  u2_reck* rec_u = u2_Host.arv_u;
-
   return 
     u2nt(
       c3__iron,
       c3__http,
-      u2nq(u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3_s2('u','v'), sev_l)),
-                u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3_s2('u','d'), coq_l)),
-                u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3_s2('u','d'), seq_l)),
-                u2_nul));
+      u2nq(u2_dc("scot", c3_s2('u','v'), sev_l),
+           u2_dc("scot", c3_s2('u','d'), coq_l),
+           u2_dc("scot", c3_s2('u','d'), seq_l),
+           u2_nul));
 }
 
 /* _http_request_to_noun(): translate http request into noun, or u2_none.
