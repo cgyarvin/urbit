@@ -206,7 +206,7 @@ _walk_in(u2_reck* rec_u, const c3_c* dir_c, c3_w len_w)
             if ( !strcmp("noun", ext_c) ) {
               dat = u2_cke_cue(dat);
             }
-            hax = u2_cn_mung(u2k(rec_u->toy.sham), u2k(dat));
+            hax = u2_do("sham", u2k(dat));
             if ( u2_none == get ) { get = u2_nul; }
           
             get = u2_ckd_by_put(get, ext, u2nt(u2_yes, hax, dat));

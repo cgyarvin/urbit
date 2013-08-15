@@ -28,9 +28,10 @@
       war=(map ,@tas coal)                              ::  variables
       sac=(list skit)                                   ::  library stack
       sev=(map ,@tas (set ,[p=@ud q=@ud r=wire]))       ::  message servers
+      tem=(map ,[p=@ud q=@ud r=wire] ,@da)              ::  timeouts 
       hit=[p=@ud q=(list ,@t)]                          ::  command history
       sur=[p=@ud q=(qeu vase)]                          ::  result history
-      god=[p=@ud q=(map ,@ud gyre)]                     ::  process state
+      god=[p=@ud q=(map ,@ud task)]                     ::  process state
   ==                                                    ::
 ::                                                      ::
 ++  bran                                                ::  static "state"
@@ -47,7 +48,7 @@
         liz=type                                        ::  '*(list ,@t)'
         pah=type                                        ::  '*path'
         noq=type                                        ::  '*note'
-        tak=type                                        ::  '*task'
+        tak=type                                        ::  '*tart'
         vas=type                                        ::  '*vase'
     ==                                                  ::
   ==                                                    ::
@@ -65,7 +66,7 @@
     liz.typ  (pal (vice '*(list ,@t)'))
     pah.typ  (pal (vice '*path'))
     noq.typ  (pal (vice '*note'))
-    tak.typ  (pal (vice '*task'))
+    tak.typ  (pal (vice '*tart'))
     vas.typ  (pal (vice '*vase'))
   ==
 ++  brat  ,[[who=ship bran] brad]                       ::  don't ask why
@@ -83,25 +84,47 @@
   =+  rew=(flop wer)
   =+  vez=(vang | wer)
   |%
+  ++  fear                                              ::    fear:be
+    |=  tea=wire                                        ::  validate wire
+    ^-  ?                                               ::  XX  hack
+    =+  fat=(feat tea)
+    =+  dog=(~(get by q.god) p.fat)
+    ?~  dog  |
+    =+  gib=(~(get by q.wip.u.dog) q.fat)
+    ?~  gib  |
+    ?.  ?=([%ma *] r.fat)  |
+    (~(has by q.u.gib) t.r.fat)
+  ::
+  ++  feat                                              ::    feat:be
+    |=  tea=wire                                        ::  decode wire
+    ^-  [p=@ud q=@ud r=wire]
+    ?>  ?=([@ @ *] tea)
+    =+  [ped=(slay i.tea) wad=(slay i.t.tea)]
+    ?>  &(?=([~ %% %ud @] ped) ?=([~ %% %ud @] wad))
+    [q.p.u.ped q.p.u.wad t.t.tea]
+  ::
   ++  fest                                              ::    fest:be
     |=  [gyp=@ud hen=duct]                              ::  find a task
     (fi gyp hen (need (~(get by q.god) gyp)))
   ::
   ++  fist                                              ::    fist:be
     |=  hen=duct                                        ::  new task
-    =+  [gyp=p.god gyr=*gyre]
+    =+  [gyp=p.god gyr=*task]
     =:  p.god  +(p.god)
-        q.god  (~(put by q.god) p.god *gyre)
+        q.god  (~(put by q.god) p.god *task)
       ==
     (fi gyp hen gyr)
+  ::
+  ++  lake                                              ::    lake:be
+    |=  [hen=duct gyp=@ud pid=@ud lap=wire]             ::  deliver wakeup
+    ^-  [p=(list move) q=brat]
+    abet:lash:abet:(glob:(past:(fest gyp hen) pid) lap [%wake ~])
   ::
   ++  lead                                              ::    lead:be
     |=  [tea=wire hen=duct]                             ::  route note
     ^-  [p=wire q=_ra:*fi]
-    ?>  ?=([@ @ *] tea)
-    =+  [ped=(slay i.tea) wad=(slay i.t.tea)]
-    ?>  &(?=([~ %% %ud @] ped) ?=([~ %% %ud @] wad))
-    [t.t.tea (past:(fest q.p.u.ped hen) q.p.u.wad)]
+    =+  fat=(feat tea)
+    [r.fat (past:(fest p.fat hen) q.fat)]
   ::
   ++  lean                                              ::    lean:be
     |=  [tea=wire hen=duct fav=card]                    ::  deliver card
@@ -131,7 +154,7 @@
              [[[[~ %iron who] hen [%helo prot]] ~] +<.^^$]
       %noop  [~ +<.^^$]
       %thee  abet:lash:(lean tea hen fav)
-      %went  abet:lash:(lean tea hen fav)
+      %went  ?.((fear tea) [~ +<.^^$] abet:lash:(lean tea hen fav))
       %writ  abet:lash:(loam tea hen +.fav)
       %wart  (lion hen +.fav)
     ==
@@ -167,7 +190,7 @@
     text/:(weld (trip (rap 3 [hox '/' cwd ~])) "=" ?~(cws "" (spud cws)) "> ")
   ::
   ++  fi                                                ::    fi:be
-    |=  [gyp=@ud hen=duct gyr=gyre]                     ::  process task
+    |=  [gyp=@ud hen=duct gyr=task]                     ::  process task
     =|  duv=(list ,[p=duct q=card])
     |%
     ++  abet                                            ::    abet:fi:be
@@ -628,6 +651,16 @@
             (~(put in yes) gyp pid lap)
           (~(del in yes) gyp pid lap)
         ==
+      ::
+      ++  gush 
+        |=  [wak=@da gyp=@ud pid=@ud lap=wire]
+        ^+  +>
+        +>.$(tem (~(put by tem) [gyp pid lap] wak))
+      ::
+      ++  gust
+        |=  [gyp=@ud pid=@ud lap=wire]
+        +>.$(tem (~(del by tem) [gyp pid lap]))
+      ::
       ++  gybe                                          ::  pipe forward
         |=  pun=(unit ,[p=typo q=(list)])
         ^+  +>
@@ -706,7 +739,7 @@
           %ht  (gram [/e [%b (bist [%ma lap])] ~] [%band who ~])
           %oy  (gump | p.gal gyp pid lap)
           %up  +>(..ra (hoop lap pid))
-          %wa  !!
+          %wa  (gust gyp pid lap)
           %yo  +>
         ==
       ::
@@ -720,7 +753,7 @@
           %ht  (gram [/e [%b (bist [%ma lap])] ~] [%band who p.gal])
           %oy  (gump & p.gal [gyp pid lap])
           %up  +>(..ra (hoot lap pid p.gal))
-          %wa  !!
+          %wa  (gush p.gal gyp pid lap)
           %yo  (gram [/a [%b (bist [%ma lap])] ~] [%want +.gal])
         ==
       ::
@@ -771,7 +804,10 @@
             ?>  ?=(%wart -.fav)
             +>.$(+>.$ (glib lap [%oy +.fav]))
           ::
-              %wa  !!
+              %wa  
+            ?>  ?=(%wake -.fav)
+            +>.$(+>.$ (glib lap [%wa ~]))
+          ::
               %yo 
             ?>  ?=(%went -.fav)
             +>.$(lug ~, +>.$ (glib lap [%yo +.fav]))
@@ -983,6 +1019,38 @@
   |=  [wru=(unit writ) tea=wire hen=duct fav=curd]
   =>  .(fav ((hard card) fav))
   ^-  [p=(list move) q=vane]
+  ?:  ?=([%crud *] fav)
+    [[[wru [/d hen] [%flog fav]] ~] ..^$]
+  ?:  ?=(%wake -.fav)
+    =+  ^=  fiy
+        =|  fiy=(list ,[p=duct q=[p=@ud q=@ud r=wire]])
+        |-  ^+  fiy
+        ?~  dez  fiy
+        =.  fiy  $(dez l.dez)
+        =.  fiy  $(dez r.dez)
+        |-  ^+  fiy
+        ?~  q.n.dez  fiy
+        %=    $
+            q.n.dez  t.q.n.dez
+            fiy
+          |-  ^+  fiy
+          ?~  tem.q.i.q.n.dez  fiy
+          =.  fiy  $(tem.q.i.q.n.dez l.tem.q.i.q.n.dez)
+          =.  fiy  $(tem.q.i.q.n.dez r.tem.q.i.q.n.dez)
+          ?.  (lte q.n.tem.q.i.q.n.dez now)  fiy
+          [[p.n.dez p.n.tem.q.i.q.n.dez] fiy]
+        ==
+    =|  wam=(list move)
+    |-  ^-  [p=(list move) q=vane]
+    ?~  fiy  [wam ..^^$]
+    =+  dos=(need (~(get by dez) p.i.fiy))
+    =+  beg=`brat`[[p.i.dos bred] q.i.dos]
+    =+  yub=(lake:((be beg) now eny sky) p.i.fiy q.i.fiy)
+    %=  $
+      fiy      t.fiy
+      wam      (weld p.yub wam)
+      dez.^^$  (~(put by dez.^^$) p.i.fiy [[p.i.dos +.q.yub] t.dos])
+    ==
   =+  dus=(~(get by dez) hen)
   ?~  dus
     ?+    -.fav  
@@ -1010,7 +1078,10 @@
   ::
       %init
     ?~  wru  !! 
-    $(fav [%hail ~], dez (~(put by dez) hen [[q.u.wru (bard q.u.wru)] u.dus]))
+    :-  :~  [wru hen fav]
+            [wru [[%b tea] hen] [%hail ~]]
+        ==
+    ..^$(dez (~(put by dez) hen [[q.u.wru (bard q.u.wru)] u.dus]))
   ::
       %limn
     $(fav [%hail ~], dez (~(put by dez) hen (weld t.u.dus [i.u.dus ~])))
@@ -1024,7 +1095,22 @@
 ++  doze
   |=  [now=@da hen=duct]
   ^-  (unit ,@da)
-  ~
+  =|  doz=(unit ,@da)
+  |-  ^+  doz
+  ?~  dez  doz
+  =.  doz  $(dez l.dez)
+  =.  doz  $(dez r.dez)
+  |-  ^+  doz
+  ?~  q.n.dez  doz
+  %=    $
+      q.n.dez  t.q.n.dez
+      doz
+    |-  ^+  doz
+    ?~  tem.q.i.q.n.dez  doz
+    =.  doz  $(tem.q.i.q.n.dez l.tem.q.i.q.n.dez)
+    =.  doz  $(tem.q.i.q.n.dez r.tem.q.i.q.n.dez)
+    (hunt doz ~ q.n.tem.q.i.q.n.dez)
+  ==
 ::
 ++  flee  stay
 ++  load

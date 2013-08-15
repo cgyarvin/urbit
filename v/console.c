@@ -77,14 +77,11 @@ u2_ve_dump_wall(u2_noun wol)
 void
 u2_ve_tank(c3_l tab_l, u2_noun tac)
 {
-  u2_noun gat = u2_Host.arv_u->toy.wash;
   c3_l    col_l = u2_ve_dump_columns();
   u2_noun wol;
 
-  if ( 0 == gat ) {
-    return;
-  } else {
-    wol = u2_cn_mung(u2k(gat), u2nc(u2nc(tab_l, col_l), u2k(tac)));
+  {
+    wol = u2_dc("wash", u2nc(tab_l, col_l), u2k(tac));
 
     u2_ve_dump_wall(wol);
   }

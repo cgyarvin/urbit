@@ -1,5 +1,5 @@
 !:
-::  /=main=/fun/label/hoon
+::  /=main=/bin/label/hoon
 ::
 |=  *
 |=  [syd=@tas lab=@tas ~]

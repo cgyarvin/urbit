@@ -389,13 +389,6 @@
           =.  ..fa  (fray hen pal.rum sab)
           (pith (~(exec de [him syd lim.rum qyx.rum dom.rum]) hen rog))
         ::
-        ++  pall
-          ^+  .
-          =:  ask.rum  ~
-              lim.rum  kas
-            ==
-          (pith ~(. de [him syd kas qyx.rum dom.rum]))
-        ::
         ++  pith
           |=  wex=_de
           ^+  +>

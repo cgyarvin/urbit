@@ -328,7 +328,7 @@ static void
 _term_it_show_wide(u2_reck* rec_u, u2_utty* uty_u, c3_w len_w, c3_w* txt_w)
 {
   u2_noun wad   = u2_ci_words(len_w, txt_w);
-  u2_noun txt   = u2_cn_mung(u2k(rec_u->toy.tuft), wad);
+  u2_noun txt   = u2_do("tuft", wad);
   c3_c*   txt_c = u2_cr_string(txt);
 
   _term_it_queue_str(uty_u, txt_c);
@@ -493,7 +493,7 @@ _term_io_belt(u2_reck* rec_u,
               u2_utty* uty_u,
               u2_noun  blb)
 {
-  u2_noun tid = u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3__ud, uty_u->tid_l));
+  u2_noun tid = u2_dc("scot", c3__ud, uty_u->tid_l);
   u2_noun pax = u2nq(c3__gold, c3__term, tid, u2_nul);
 
   u2_reck_plan(rec_u, pax, u2nc(c3__belt, blb));
@@ -548,7 +548,7 @@ _term_io_suck_char(u2_reck* rec_u,
 
       // uL(fprintf(uH, "muck-utf8 len %d\n", tat_u->fut.len_w));
       // uL(fprintf(uH, "muck-utf8 %x\n", huv));
-      wug = u2_cn_mung(u2k(rec_u->toy.turf), huv);
+      wug = u2_do("turf", huv);
       // uL(fprintf(uH, "muck-utf32 %x\n", tat_u->fut.len_w));
 
       tat_u->fut.len_w = tat_u->fut.wid_w = 0;
@@ -719,11 +719,11 @@ u2_term_ef_boil(u2_reck* rec_u,
                 c3_l     ono_l)
 {
   if ( ono_l ) {
-    u2_noun oan = u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3__uv, old_l));
+    u2_noun oan = u2_dc("scot", c3__uv, old_l);
     u2_noun tid_l;
 
     for ( tid_l = 1; tid_l <= ono_l; tid_l++ ) {
-      u2_noun tin = u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3__ud, tid_l));
+      u2_noun tin = u2_dc("scot", c3__ud, tid_l);
       u2_noun pax = u2nc(c3__gold, u2nq(c3__term, u2k(oan), tin, u2_nul));
       u2_noun hud = u2nc(c3__wipe, u2_nul);
  
@@ -774,7 +774,7 @@ u2_term_ef_boil(u2_reck* rec_u,
     u2_noun tid_l;
 
     for ( tid_l = 2; tid_l <= ono_l; tid_l++ ) {
-      u2_noun tin = u2_cn_mung(u2k(rec_u->toy.scot), u2nc(c3__ud, tid_l));
+      u2_noun tin = u2_dc("scot", c3__ud, tid_l);
       u2_noun pax = u2nq(c3__gold, c3__term, tin, u2_nul);
       u2_noun hud = u2nc(c3__wipe, u2_nul);
  

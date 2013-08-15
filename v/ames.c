@@ -47,7 +47,7 @@ _ames_czar(u2_reck* rec_u, c3_y imp_y, c3_s* por_s)
       return 0;
     }
     else if ( 0 == sam_u->imp_w[imp_y] ) {
-      u2_noun nam   = u2_cn_mung(u2k(rec_u->toy.scot), u2nc('p', imp_y));
+      u2_noun nam   = u2_dc("scot", 'p', imp_y);
       c3_c*   nam_c = u2_cr_string(nam);
       c3_c    dns_c[64];
 
@@ -81,8 +81,7 @@ _ames_czar(u2_reck* rec_u, c3_y imp_y, c3_s* por_s)
 #if 1
               {
                 u2_noun wad = u2_ci_words(1, &sam_u->imp_w[imp_y]);
-                u2_noun nam = u2_cn_mung(u2k(rec_u->toy.scot), 
-                                         u2nc(c3__if, wad));
+                u2_noun nam = u2_dc("scot", c3__if, wad);
                 c3_c*   nam_c = u2_cr_string(nam);
 
                 uL(fprintf(uH, "ames: czar %s: ip %s\n", dns_c, nam_c));
@@ -179,7 +178,7 @@ u2_ames_io_init(u2_reck* rec_u)
     por_s = 0;
     if ( 0 != u2_Host.ops_u.imp_c ) {
       u2_noun imp   = u2_ci_string(u2_Host.ops_u.imp_c);
-      u2_noun num   = u2_cn_mung(u2k(rec_u->toy.slaw), u2nc('p', imp));
+      u2_noun num   = u2_dc("slaw", 'p', imp);
       c3_y    num_y;
 
       if ( u2_no == u2du(num) ) {

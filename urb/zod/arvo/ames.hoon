@@ -41,10 +41,10 @@
     =+  rac=(clan r.p.q.new)
     ?&  ?~  q.p.q.new
           ?&  =(r.p.q.old r.p.q.new) 
-              &(!=(%jack rac) =(p.p.q.old (dec p.p.q.new)))
+              &(!=(%earl rac) =(p.p.q.old (dec p.p.q.new)))
           ==
         ?&  &(!=(%pawn rac) !=(%czar rac))
-            |(=(0 p.p.q.new) =(%jack rac))
+            |(=(0 p.p.q.new) =(%earl rac))
             =(r.p.q.old (sein r.p.q.new))
             =(p.p.q.old u.q.p.q.new)
         ==
@@ -108,134 +108,262 @@
     |=  zar=@pD
     ^-  @uvH  ^-  @
     %+  snag  zar
-    :~  0w3S.~jSFT.Tvv6a.QoDQ8.1mNQS  0w30.ND~fW.anIzT.qYdW1.S6ln~  ::   0
-        0w38.Se5UL.G8DX-.FTRGy.i5Yff  0w3M.0pNL6.fSzmw.HMWVx.APFVF  ::   2
-        0w2-.RYAgv.YL-Pa.irOZy.tk5Vy  0wt.EVqLx.FlTgt.2toOs.rrG8L   ::   4
-        0w1Y.MZuVL.6mijb.VS4Kz.cqe6g  0w1n.~qRP8.kGXJd.Ru~aJ.lHgZH  ::   6
-        0wg.Wr-Xu.AskUk.4Q8qw.tWxes   0w22.RvZr7.~LmGf.ILCzr.b5UIW  ::   8
-        0w3b.K--FX.k3in2.3jjmx.d1gyw  0w3l.fgx0I.L4ZEj.KkQmK.NYYqE  ::   10
-        0wh.g7gbM.vZXiO.pIFKr.Og2I2   0w36.wWYRk.pBRW1.MsrEv.jZav5  ::   12
-        0w2o.g0CEB.zmtmB.9F-C0.itjGE  0wk.6BuqK.t~Dwn.NvL3s.Ofo5-   ::   14
-        0wY.N8qMo.PqaM~.qyjCn.Nr8ij   0w2h.FGOp6.eNq2N.DpPNh.dR5Bi  ::   16
-        0w2a.Iy2Yh.IkjLD.U52Vd.7LDc0  0w18.mrVGR.ITtzj.NoRER.XPitH  ::   18
-        0w1x.vL5bh.dGDxJ.xdP8Y.fBLh2  0w2H.ZAAZk.Dp5Kg.J8fim.lZk~~  ::   20
-        0w2z.Ul9bk.ANzG4.TnmLi.k5fM6  0w32.XkwN3.pYHKR.0cdHB.38sYB  ::   22
-        0w3l.q0Eob.P1Yhg.pYxMf.Fsalh  0w1x.5oS3C.uOPyK.80jPk.9M6i6  ::   24
-        0w1e.u4jEM.CY7XO.ZLy51.~dYCZ  0w1A.rb5s1.cV5L3.vVURh.icf6d  ::   26
-        0wD.Y2VGx.ut-00.A0P8Z.MWWh1   0w1u.koQrY.t5PNs.duv-O.esqpA  ::   28
-        0w12.dxP-u.9uPND.J0VWa.u9Ko5  0w32.EDCeC.B7hS8.6TXyj.3yRS2  ::   30
-        0w1O.X0TRZ.AuriA.Uh0Nm.9GdYD  0w14.88B~P.6unHk.LgOQe.r6cta  ::   32
-        0w1R.0Q0WY.pQCkk.jvgwl.8gjha  0w3i.MIko2.kVgPj.Tr-cx.jqDJe  ::   34
-        0w1x.ukLOn.WZ9vO.rlRZM.vgMW6  0w1R.Bo5P0.~oCCD.B1TRz.zl9xb  ::   36
-        0w36.~NNif.NuEVa.6ucpM.qcC95  0w8.KBjKH.-uoDx.J72hB.vU4ax   ::   38
-        0w36.FzrMs.lMrX-.qPs6W.hTWqr  0wxe-VB.vhARe.DWuQA.ZSiyd     ::   40
-        0w3b.Iq0fg.zFDHS.AP0z7.ml7~y  0wU.B9l~R.qkNnQ.O~ID6.J78K-   ::   42
-        0w1q.liHGK.IXit2.GZf7z.DWzEx  0wc.h5XmS.HAGbG.oR0Mw.jrpR4   ::   44
-        0w1a.as~x6.vZdvb.zPWFd.xaPkX  0w2b.eeIGA.6Jeyg.cJw1c.1Qst6  ::   46
-        0w1J.cUzsd.x0G2u.Xal20.qF0rX  0w2a.I5cQ7.AAv~0.xWn-Q.8jMuc  ::   48
-        0w3X.n6zna.Sigk3.piuU8.ygp4b  0w2f.i4gtc.IA9iP.86Lpi.I~pM8  ::   50
-        0w2a.ExCEn.HUzHA.-SHQj.afFrj  0w8.wnYei.iTU10.GXNRO.bH-1k   ::   52
-        0w17.m7rio.h00a3.WNF4U.lp0cl  0w3b.FIWWS.RAqFC.EtEPC.UWQN8  ::   54
-        0wI.fQO1d.xx1yR.t3df-.J3j-l   0w3f.UK9y6.igC6M.fFXIU.OTM0Z  ::   56
-        0w3T.fA2Gc.Mby28.2x6hB.wyKyl  0w2F.AjZqU.9v1CU.-x1G8.6-sNQ  ::   58
-        0wH.fyopd.Cw6xh.i9Nje.m6jTm   0wn.Nzlwv.cmdeq.Uc8Gj.Jg2in   ::   60
-        0w4.LWGCU.DdAp7.UyGte.00cve   0w2K.6U5Hq.mBNoY.fBJZP.PvBfm  ::   62
-        0w1J.eGEA9.Eu0Yb.FJHxg.dthi~  0w2g.NKa13.9rSVu.aVbD4.7qorD  ::   64
-        0wN.R0W1o.Cfh2P.O53jO.R0U3v   0w3w.CmuOI.wcVen.7Res8.BfQdF  ::   66
-        0w1x.oj4Ls.0-D0m.hTWnI.zNCQl  0w29.PLdYn.6OO8f.8RumG.xsjPX  ::   68
-        0wa.wUvMq.X-o0r.VNJbR.mgrPZ   0w~.jUiaH.RGdon.-PajT.9wP7-   ::   70
-        0w2~.aUH4q.S5N1W.8xPxY.M2~zO  0w1C.os7Nj.Vx35d.7Q-fA.Eg1DG  ::   72
-        0w3h.bHzLo.j8j76.RLLaD.dIA4k  0w3y.VSAY8.WYsQE.bO-BH.G9mL9  ::   74
-        0w24.~6NCR.yfssv.855xz.W6WRY  0wv.gnZVt.PbBBu.sGceB.YN4Ei   ::   76
-        0w1m.5C4DD.xc6PQ.xpf2P.sok64  0w3~.diSDP.Ii7lo.ODX69.7yHlT  ::   78
-        0w2K.2nme~.A7cAq.kAUlv.dLyH7  0w32.pzrrj.TLc0W.2cpnT.2mg73  ::   80
-        0w2z.aZk0W.y~D8o.CP9yz.Q7dLF  0w1N.OliXg.TSA09.FAEbC.RMCwB  ::   82
-        0ws.3mp4d.dj8KM.g8~y5.6IBeB   0w2h.SizdC.qp4Ms.uX~7o.R6ZUj  ::   84
-        0w3d.1AOBs.BFrDI.BFsMh.lFPQ8  0wA.UnHHL.rK4~E.t0b6f.yTYF4   ::   86
-        0wr.A~Nqs.1fj1i.PC-lk.F9iE~   0wI.PEphk.Wyj5-.dLEFT.kCdVT   ::   88
-        0w1o.bM7sz.~tMd4.dLjdi.xW3Ls  0w3Y.-aRL2.KQHKh.yoXTG.mmDHD  ::   90
-        0w2J.KBBNK.U74hE.lix12.BavH2  0w13.qdig~.M4Uuq.MRib4.Q3Ky6  ::   92
-        0w23.bZI5L.6mTMr.My6X6.865m7  0w1h.nz0KB.aUUIF.n-D5a.4xtPB  ::   94
-        0w2L.fhTRg.~rW1e.VwGax.8IviJ  0w31.FL3Tz.wvH02.7XNCq.NR2nv  ::   96
-        0w20.P-IPC.lgAWB.LGkW6.rAE1Q  0w4.r4lBB.8OYkg.Kvghs.07VlL   ::   98
-        0wz.-oU3r.NwhLX.wBZxF.qQ6AZ   0w27.ctO2S.2bW2V.v7JlZ.x3fLn  ::   100
-        0wa.pFu1U.d3bbE.WnUY1.Yag3K   0w1L.W2vj8.hGiRy.iJXoz.qjPRp  ::   102
-        0w1.Om393.lhj7B.DTzoX.0wAOc   0w1e.0T3YN.h0J7G.zw5Ab.mO2QB  ::   104
-        0w4.s7XS1.f2Tj2.YlVxM.ILkFH   0w3f.k9yrH.SxmBr.YSPhv.aqLkY  ::   106
-        0w2K.jsuN4.ZfMtj.o-ocH.6cNpQ  0we.vLn5o.DllGu.kEdNm.kgLpJ   ::   108
-        0w26.NW4Uc.aEMAk.vo1HD.ddE68  0w3e.x5kBS.5SsJH.9dWVb.S70xb  ::   110
-        0w21.XAbQj.paeqm.tXZKO.5fMGk  0wH.P3jm8.2RIRA.XQCH4.Q71jo   ::   112
-        0w2C.-f8PI.j0XIS.5fjHZ.s84UU  0w3d.alVIB.bTuW~.ByD21.68JxA  ::   114
-        0w2f.NTomJ.tZ4dQ.ZHDDV.Z0ipN  0w12.7khnd.VDpwi.fShgm.JXG2b  ::   116
-        0wN.u8bGU.DbGvy.Za8Aq.CeNqE   0w3e.f42fy.sU3Z6.fqYTe.d5edO  ::   118
-        0w2r.pbf2S.PHGY3.Ze39R.A0NDE  0w3.DdLZb.OgNTx.EGwBQ.WuFbq   ::   120
-        0w3X.ahHsz.zsSUg.DPlEl.zoWDg  0w1b.t9vRF.S7QZA.bngDD.Zlh~0  ::   122
-        0wd.wVHob.9tzEJ.NRufV.Z6hjF   0w1R.a9Idk.~GFW7.SGd55.lM6MY  ::   124
-        0w1f.AfxPt.V49b2.FyFB9.x9oW0  0w3z.PJSCS.tXrGp.4Abs6.PGz9p  ::   126
-        0w3K.p9kbC.nBcft.xlw7Q.NYbMi  0w1O.Ms9k-.CrtRV.eG50S.Spdbp  ::   128
-        0wF.tLOu9.vjUbL.IHrH1.~vLPJ   0w3W.a9ef2.LAUjL.GgEsN.GiugV  ::   130
-        0w1j.K6mVX.5ACQ7.rXcTK.lu21O  0w2z.OPxvQ.kLIeh.jXQVG.rFYfc  ::   132
-        0wI.Cw6Zq.71WIO.Ty-CK.zKjcc   0w2Q.S0cSl.QZUxA.bJ2d5.N2UgG  ::   134
-        0w1w.NuykY.eXAag.-k2t8.hgjPr  0w2U.Af8yO.SL7uc.vhxTH.XnH0Z  ::   136
-        0w3e.SEnhl.0iyEb.SSF-J.zQtZu  0w1B.Uro1o.4tne5.gHcXg.pT7MA  ::   138
-        0wf.zM-YB.fmCaO.jtLFS.~evFs   0w3M.dUiZE.~~llD.way6e.BJA6g  ::   140
-        0w3Z.BEMuW.pSkP9.L6Ex0.zfjI4  0w3f.iAieq.9A2~g.2yP6c.HSIvn  ::   142
-        0w2G.pk07~.dom4v.leM-y.RYiDm  0wM.oCXXi.rjCy0.AYczB.MGz61   ::   144
-        0w3M.1p9yX.2C7vD.PTk9E.maHEI  0w21.lsmsz.rJ2kh.rEwsN.PV5qZ  ::   146
-        0w-.~i5Wy.sQhQp.LZedM.7C2u6   0w3B.vDzKx.kkBpv.gHhR0.AclVS  ::   148
-        0w2v.eSYMB.DPJRf.daDE5.jwcDL  0wy.CpDQP.pjFLF.h2kTw.qDmdG   ::   150
-        0w1b.snC0c.QYJTr.LgIfa.mVTnK  0wt.IOiHu.sWx85.658dr.CG6X7   ::   152
-        0w23.1ogCR.B8fuF.-saEx.HNxKx  0w34.HOzse.VexO4.o7yMQ.noLM5  ::   154
-        0w1x.zY3Kl.Wxf5l.hzbSG.GIKtp  0w2F.eUFB7.bkP4w.vwYp3.D44AX  ::   156
-        0wL.7l2X5.2PVtz.WQBZ8.i60Qs   0w1f.U2mM9.XLver.PCh6E.oGhc3  ::   158
-        0w2l.qE~AA.Jw5-r.vmi40.Kj5qm  0wU.wiL0I.pzMtI.MICej.WHlfA   ::   160
-        0w3w.ZDeAB.0eJfq.PZflU.Sdab8  0w10.k5psC.Ndt2f.WCRjm.Lvfyh  ::   162
-        0wc.d1AQF.oTu4F.f~WNk.f48uh   0w2S.WwOiS.LjfFM.eBDkr.t~B2Q  ::   164
-        0w2P.JTZOH.1zgRw.Ds-tK.aTmxU  0ww.ElLh7.abdpW.NLq9Y.Wr-Bx   ::   166
-        0w19.t5jic.8ngs7.nZO1W.~GQa8  0w31.qBEzw.ryf0S.WryVm.DBNhY  ::   168
-        0w2q.emSKl.dFIZG.78de7.~~SL9  0w2Y.hm5zi.Rqu~m.uym-Q.WLOkB  ::   170
-        0w2M.aUUYp.xsOmR.CN14v.UexEp  0ww.Za857.qUERi.5QcJ5.W9a-q   ::   172
-        0wW.ExlFh.y2aKD.ETZIw.VeDNW   0w6.PrCJQ.YlHWR.-xtmu.b51bd   ::   174
-        0w1z.9Gyea.18KDm.RcBD8.CS2BD  0w2u.IKecS.x35k7.phrz0.qOTec  ::   176
-        0w1s.zBB0N.Q~AvX.FMwfW.Uer4C  0w1k.o0x38.Jtxke.p1gvE.11qzS  ::   178
-        0wg.cifn9.XHPZA.cfXlu.AvRbL   0wv.w~fGn.jo2Ez.a2tuI.99T2V   ::   180
-        0w2b.QA0JN.cP1TS.poivA.5d3fP  0w2K.OIeSP.xRiDn.nvHx7.xfFjf  ::   182
-        0wC.h9IaN.aG649.xbXxg.DJpP8   0w1R.LkE0N.Vqp9W.CAjej.HT1Yg  ::   184
-        0w3p.gFUjP.kjIHY.OEggl.F5vfb  0wy.eivdj.5YSZx.hLXJl.COBez   ::   186
-        0wC.IQjBn.Ik90-.mjL60.AD0WO   0w2d.oGU4e.7tOM2.efCgF.uABvW  ::   188
-        0w2V.r9jPm.U8zn1.9hfMt.fiTDX  0w3P.x1KaW.mKR9k.f39kG.Ppofh  ::   190
-        0wtfvvK.7YcA-.PXK39.MUVll     0w1t.2w61e.hWl4E.IMgSN.f4SWt  ::   192
-        0w8.2B3qo.TIbCg.SxPF8.lFbMi   0w36.rDl-H.MhEap.EMEXW.vUOWH  ::   194
-        0w1n.INtMj.x1WMR.0VFNk.AgYbM  0wH.ZkgU3.~lvfq.hVM7i.9591C   ::   196
-        0w2E.Gm4nI.hCQKy.2glWa.M0WjD  0w1j.AEjKH.gc~DF.2uXVG.aLrby  ::   198
-        0w2j.LF6Qh.3o3a5.XRJPQ.J5FpM  0ww.6LB2C.UoF09.9GZfi.gch2f   ::   200
-        0w2x.7wdmP.Y8DS4.XnAM1.30Wkv  0w1G.qYMLN.Vxhgy.wdUN9.5WaI~  ::   202
-        0w2p.~jWkf.JLvZi.HmWJE.au0Po  0w2V.RpCf7.PbS4g.os6hn.lu1-a  ::   204
-        0w1z.GHYrP.jzLDr.W5nRz.LJmyZ  0w1x.JRmWD.APKn6.FsA4y.3RCE5  ::   206
-        0w1T.D8e0D.3ypXE.rc9Lt.c2s2I  0w2G.6VyYW.SqNbp.0yfeJ.aTnav  ::   208
-        0w3V.ZRpHJ.Ox-CH.B0qts.p4z1o  0w39.7N3Iz.1KDde.i7rNR.EFN~y  ::   210
-        0w21.0rU1q.b~YTZ.ZFRP3.zMf9I  0wh.Rc7FB.nmz7g.3ExfQ.mMe3p   ::   212
-        0w1R.IuTL1.-EEB0.0odzt.5AhVA  0wn.2fNnS.TxhlZ.EBDPU.~f9l1   ::   214
-        0wp.H5FLb.xC2Gm.sLlL8.nyR7X   0w2f.KzUDv.mZm~F.es74S.l8fiy  ::   216
-        0w3P.Xfw1w.zZd2x.tHjaC.ao3P3  0w31.Og7rL.bhHvy.qTJis.T7e-z  ::   218
-        0w2g.8YwXo.xRTKA.ZYhWB.Rq28z  0wY.RhnaN.b0ko5.GTHTT.Ddvva   ::   220
-        0w28.4S34l.q61J8.VPTDl.NRnEn  0w2g.bm1-u.6dpht.Cezlg.PWM0I  ::   222
-        0wp.~mtzy.vnfCp.46j87.Bxx5I   0w3l.9~XqY.X7ddr.sXfw1.sm3SZ  ::   224
-        0w1v.q04XA.H8pdl.05j~O.VJJRk  0w3j.diQXO.cRdyk.6eMBn.O4BWa  ::   226
-        0w2J.zHD5i.BWFZu.sjy3r.VLUAK  0w1P.mp4uM.NStQ2.m43VG.jpqD9  ::   228
-        0w3e.a76P-.bYOkJ.XN8Ln.UMIZe  0w1t.IFkPX.~vYgQ.mher3.-gr1d  ::   230
-        0w2U.2Gj5j.fbcq~.r7EWM.Lwguk  0w18.wq3oy.T9mWp.rec0M.iB5-i  ::   232
-        0w2b.jQbjN.gql8T.b0HMF.vExaA  0w3c.xsS4n.zHncI.WAsQm.dLLEN  ::   234
-        0w3d.v53m-.hDHXl.n9cjB.twhJL  0w2g.ymdjB.hjojf.d9vYT.MrFxX  ::   236
-        0w3p.btBOc.y9FZI.SxD8c.M8XYF  0w2P.JTw6N.GJAIT.TzUM5.-mmBW  ::   238
-        0wN.pF9v5.tMMw7.3o046.QvRTP   0w3s.XI-zP.4vbbh.QhSSB.C2zcz  ::   240
-        0wM.MR-TA.niALg.Nc7vP.h~rBF   0wr.ah6Hr.dicUS.4Zihk.Q5BaU   ::   242
-        0wc.R5xdR.IkvuE.LflTY.Fh9VD   0w3t.vPYH-.AD0Eu.Zx3zW.yc~Wi  ::   244
-        0wr.C1cXX.q3mYj.HTSmz.3xbnu   0wF.6WcHt.KWcYY.o-aYv.-crZo   ::   246
-        0w2~.T2HZ5.5JpXI.tm6Yl.-i2IH  0w1A.uhltk.we6mf.79anL.8BCLh  ::   248
-        0w2X.QHRaP.SWX87.40tak.Tc5JY  0w1I.3mZvr.R2O2y.Pf3vn.0xHe3  ::   250
-        0w2k.EqHtx.~PpLs.flWnF.kedAk  0w2S.ZcRF6.7qHEk.0NcHS.wT9gD  ::   252
-        0wW.pTnj-.7YASZ.L~tww.Sm3~W   0w1s.~FgPE.spDGJ.0XtT6.KoAQb  ::   254
+    :~  0wN.Kdp5k.p5ncD.4Wsih.bFQFu   ::  0, ~zod, Curtis Yarvin (sator)
+        0w0                           ::  1, ~nec
+        0w0                           ::  2, ~bud
+        0w0                           ::  3, ~wes
+        0w0                           ::  4, ~sev
+        0w0                           ::  5, ~per
+        0w0                           ::  6, ~sut
+        0w0                           ::  7, ~let
+        0w0                           ::  8, ~ful
+        0w0                           ::  9, ~pen
+        0w0                           ::  10, ~syt
+        0w0                           ::  11, ~dur
+        0w0                           ::  12, ~wep
+        0w0                           ::  13, ~ser
+        0w0                           ::  14, ~wyl
+        0w0                           ::  15, ~sun
+        0w0                           ::  16, ~ryp
+        0w0                           ::  17, ~syx
+        0w0                           ::  18, ~dyr
+        0w0                           ::  19, ~nup
+        0w0                           ::  20, ~heb
+        0w0                           ::  21, ~peg
+        0w0                           ::  22, ~lup
+        0w0                           ::  23, ~dep
+        0w0                           ::  24, ~dys
+        0w0                           ::  25, ~put
+        0w0                           ::  26, ~lug
+        0w0                           ::  27, ~hec
+        0w0                           ::  28, ~ryt
+        0w0                           ::  29, ~tyv
+        0w0                           ::  30, ~syd
+        0w0                           ::  31, ~nex
+        0w0                           ::  32, ~lun
+        0w0                           ::  33, ~mep
+        0w0                           ::  34, ~lut
+        0w0                           ::  35, ~sep
+        0w0                           ::  36, ~pes
+        0w0                           ::  37, ~del
+        0w0                           ::  38, ~sul
+        0w0                           ::  39, ~ped
+        0w0                           ::  40, ~tem
+        0w0                           ::  41, ~led
+        0w0                           ::  42, ~tul
+        0w0                           ::  43, ~met
+        0w0                           ::  44, ~wen
+        0w0                           ::  45, ~byn
+        0w0                           ::  46, ~hex
+        0w0                           ::  47, ~feb
+        0w0                           ::  48, ~pyl
+        0w0                           ::  49, ~dul
+        0w0                           ::  50, ~het
+        0w0                           ::  51, ~mev
+        0w0                           ::  52, ~rut
+        0w0                           ::  53, ~tyl
+        0w0                           ::  54, ~wyd
+        0w0                           ::  55, ~tep
+        0w0                           ::  56, ~bes
+        0w0                           ::  57, ~dex
+        0w0                           ::  58, ~sef
+        0w0                           ::  59, ~wyc
+        0w0                           ::  60, ~bur
+        0w0                           ::  61, ~der
+        0w0                           ::  62, ~nep
+        0w0                           ::  63, ~pur
+        0w0                           ::  64, ~rys
+        0w0                           ::  65, ~reb
+        0w0                           ::  66, ~den
+        0w0                           ::  67, ~nut
+        0w0                           ::  68, ~sub
+        0w0                           ::  69, ~pet
+        0w0                           ::  70, ~rul
+        0w0                           ::  71, ~syn
+        0w0                           ::  72, ~reg
+        0w0                           ::  73, ~tyd
+        0w0                           ::  74, ~sup
+        0w0                           ::  75, ~sem
+        0w0                           ::  76, ~wyn
+        0w0                           ::  77, ~rec
+        0w0                           ::  78, ~meg
+        0w0                           ::  79, ~net
+        0w0                           ::  80, ~sec
+        0w0                           ::  81, ~mul
+        0w0                           ::  82, ~nym
+        0w0                           ::  83, ~tev
+        0w0                           ::  84, ~web
+        0w0                           ::  85, ~sum
+        0w0                           ::  86, ~mut
+        0w0                           ::  87, ~nyx
+        0w0                           ::  88, ~rex
+        0w0                           ::  89, ~teb
+        0w0                           ::  90, ~fus
+        0w0                           ::  91, ~hep
+        0w0                           ::  92, ~ben
+        0w0                           ::  93, ~mus
+        0w0                           ::  94, ~wyx
+        0w0                           ::  95, ~sym
+        0w0                           ::  96, ~sel
+        0w0                           ::  97, ~ruc
+        0w0                           ::  98, ~dec
+        0w0                           ::  99, ~wex
+        0w0                           ::  100, ~syr
+        0w0                           ::  101, ~wet
+        0w0                           ::  102, ~dyl
+        0w0                           ::  103, ~myn
+        0w0                           ::  104, ~mes
+        0w0                           ::  105, ~det
+        0w0                           ::  106, ~bet
+        0w0                           ::  107, ~bel
+        0w0                           ::  108, ~tux
+        0w0                           ::  109, ~tug
+        0w0                           ::  110, ~myr
+        0w0                           ::  111, ~pel
+        0w0                           ::  112, ~syp
+        0w0                           ::  113, ~ter
+        0w0                           ::  114, ~meb
+        0w0                           ::  115, ~set
+        0w0                           ::  116, ~dut
+        0w0                           ::  117, ~deg
+        0w0                           ::  118, ~tex
+        0w0                           ::  119, ~sur
+        0w0                           ::  120, ~fel
+        0w0                           ::  121, ~tud
+        0w0                           ::  122, ~nux
+        0w0                           ::  123, ~rux
+        0w0                           ::  124, ~ren
+        0w0                           ::  125, ~wyt
+        0w0                           ::  126, ~nub
+        0w0                           ::  127, ~med
+        0w0                           ::  128, ~lyt
+        0w0                           ::  129, ~dus
+        0w0                           ::  130, ~neb
+        0w0                           ::  131, ~rum
+        0w0                           ::  132, ~tyn
+        0w0                           ::  133, ~seg
+        0w0                           ::  134, ~lyx
+        0w0                           ::  135, ~pun
+        0w0                           ::  136, ~res
+        0w0                           ::  137, ~red
+        0w0                           ::  138, ~fun
+        0w0                           ::  139, ~rev
+        0w0                           ::  140, ~ref
+        0w0                           ::  141, ~mec
+        0w0                           ::  142, ~ted
+        0w0                           ::  143, ~rus
+        0w0                           ::  144, ~bex
+        0w0                           ::  145, ~leb
+        0w0                           ::  146, ~dux
+        0w0                           ::  147, ~ryn
+        0w0                           ::  148, ~num
+        0w0                           ::  149, ~pyx
+        0w0                           ::  150, ~ryg
+        0w0                           ::  151, ~ryx
+        0w0                           ::  152, ~fep
+        0w0                           ::  153, ~tyr
+        0w0                           ::  154, ~tus
+        0w0                           ::  155, ~tyc
+        0w0                           ::  156, ~leg
+        0w0                           ::  157, ~nem
+        0w0                           ::  158, ~fer
+        0w0                           ::  159, ~mer
+        0w0                           ::  160, ~ten
+        0w0                           ::  161, ~lus
+        0w0                           ::  162, ~nus
+        0w0                           ::  163, ~syl
+        0w0                           ::  164, ~tec
+        0w0                           ::  165, ~mex
+        0w0                           ::  166, ~pub
+        0w0                           ::  167, ~rym
+        0w0                           ::  168, ~tuc
+        0w0                           ::  169, ~fyl
+        0w0                           ::  170, ~lep
+        0w0                           ::  171, ~deb
+        0w0                           ::  172, ~ber
+        0w0                           ::  173, ~mug
+        0w0                           ::  174, ~hut
+        0w0                           ::  175, ~tun
+        0w0                           ::  176, ~byl
+        0w0                           ::  177, ~sud
+        0w0                           ::  178, ~pem
+        0w0                           ::  179, ~dev
+        0w0                           ::  180, ~lur
+        0w0                           ::  181, ~def
+        0w0                           ::  182, ~bus
+        0w0                           ::  183, ~bep
+        0w0                           ::  184, ~run
+        0w0                           ::  185, ~mel
+        0w0                           ::  186, ~pex
+        0w0                           ::  187, ~dyt
+        0w0                           ::  188, ~byt
+        0w0                           ::  189, ~typ
+        0w0                           ::  190, ~lev
+        0w0                           ::  191, ~myl
+        0w0                           ::  192, ~wed
+        0w0                           ::  193, ~duc
+        0w0                           ::  194, ~fur
+        0w0                           ::  195, ~fex
+        0w0                           ::  196, ~nul
+        0w0                           ::  197, ~luc
+        0w0                           ::  198, ~len
+        0w0                           ::  199, ~ner
+        0w0                           ::  200, ~lex
+        0w0                           ::  201, ~rup
+        0w0                           ::  202, ~ned
+        0w0                           ::  203, ~lec
+        0w0                           ::  204, ~ryd
+        0w0                           ::  205, ~lyd
+        0w0                           ::  206, ~fen
+        0w0                           ::  207, ~wel
+        0w0                           ::  208, ~nyd
+        0w0                           ::  209, ~hus
+        0w0                           ::  210, ~rel
+        0w0                           ::  211, ~rud
+        0w0                           ::  212, ~nes
+        0w0                           ::  213, ~hes
+        0w0                           ::  214, ~fet
+        0w0                           ::  215, ~des
+        0w0                           ::  216, ~ret
+        0w0                           ::  217, ~dun
+        0w0                           ::  218, ~ler
+        0w0                           ::  219, ~nyr
+        0w0                           ::  220, ~seb
+        0w0                           ::  221, ~hul
+        0w0                           ::  222, ~ryl
+        0w0                           ::  223, ~lud
+        0w0                           ::  224, ~rem
+        0w0                           ::  225, ~lys
+        0w0                           ::  226, ~fyn
+        0w0                           ::  227, ~wer
+        0w0                           ::  228, ~ryc
+        0w0                           ::  229, ~sug
+        0w0                           ::  230, ~nys
+        0w0                           ::  231, ~nyl
+        0w0                           ::  232, ~lyn
+        0w0                           ::  233, ~dyn
+        0w0                           ::  234, ~dem
+        0w0                           ::  235, ~lux
+        0w0                           ::  236, ~fed
+        0w0                           ::  237, ~sed
+        0w0                           ::  238, ~bec
+        0w0                           ::  239, ~mun
+        0w0                           ::  240, ~lyr
+        0w0                           ::  241, ~tes
+        0w0                           ::  242, ~mud
+        0w0                           ::  243, ~nyt
+        0w0                           ::  244, ~byr
+        0w0                           ::  245, ~sen
+        0w0                           ::  246, ~weg
+        0w0                           ::  247, ~fyr
+        0w0                           ::  248, ~mur
+        0w0                           ::  249, ~tel
+        0w0                           ::  250, ~rep
+        0w0                           ::  251, ~teg
+        0w0                           ::  252, ~pec
+        0w0                           ::  253, ~nel
+        0w0                           ::  254, ~nev
+        0w0                           ::  255, ~fes
     ==
   --
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -289,7 +417,7 @@
     ++  as                                              ::    as:go
       |_  [our=ship saf=safe]                           ::  per server
       ++  born                                          ::    born:as:go
-        |=  [now=@da her=@p tic=@pG gec=gcos pub=pass]  ::  register user
+        |=  [now=@da her=@p tic=@pG ges=gens pub=pass]  ::  register user
         ^-  [(unit will) _+>]
         ?.  =(our (sein her))  [~ +>.$]
         =+  nes=sen
@@ -300,7 +428,7 @@
           ?>  ?=(^ lew.wod.u.rad)
           ?.  =(pub r.q.i.lew.wod.u.rad)  [~ +>.$]
           [[~ lew.wod.u.rad] +>.$] 
-        =+  syp=[[0 [~ p.nes] her now] gec pub]
+        =+  syp=[[0 [~ p.nes] her now] ges pub]
         =+  ded=[(sign:se:q.nes *code (shaf %meld (sham syp))) syp]
         =+  wil=[ded law.saf]
         ?>  =(wil (grip wil ~))
@@ -310,7 +438,7 @@
       ++  lax                                           ::    lax:as:go
         |_  [her=ship dur=door]                         ::  per client
         ++  cluy                                        ::    cluy:lax:as:go
-          ^-  [p=life q=gcos r=acro]                    ::  client crypto
+          ^-  [p=life q=gens r=acro]                    ::  client crypto
           ?~  lew.wod.dur  !!
           :+  p.p.q.i.lew.wod.dur 
             q.q.i.lew.wod.dur 
@@ -364,6 +492,23 @@
               qim.caq.dur  (~(put by qim.caq.dur) had key)
           ==
         ::
+        ++  wast                                        ::    wast:lax:as:go
+          |=  ryn=lane                                  ::  set route
+          ^+  +>
+          %=    +>
+              lun.wod.dur
+            ?:  ?=([%ix *] ryn)
+              ?:  ?|  ?=(~ lun.wod.dur)
+                      ?&  ?=([%ix *] u.lun.wod.dur)
+                          !=(q.ryn q.u.lun.wod.dur) 
+                          !=(r.ryn r.u.lun.wod.dur) 
+                      ==
+                  ==
+                [~ ryn]
+              lun.wod.dur
+            [~ ryn]
+          ==
+        ::
         ++  wist                                        ::    wist:lax:as:go
           |=  $:  now=@da                               ::  route via
                   waz=(list ,@p) 
@@ -376,13 +521,9 @@
           =+  dyr=?:(=(her i.waz) dur (gur i.waz))
           ?.  ?&  !=(our i.waz)
                   ?=(^ lun.wod.dyr)
-                  ?|  !?=(%ix -.u.lun.wod.dyr) 
-                      (lth now (add ~s5 p.u.lun.wod.dyr))
-                  ==
               ==
             $(waz t.waz)
           :_  ?:  ?=(%ix -.u.lun.wod.dyr) 
-                ::  ~&  [%wist-ix [our her] i.waz]
                 $(waz t.waz)
               ~
           :+  %ouzo  u.lun.wod.dyr
@@ -786,7 +927,7 @@
       =+  loy=(brew wid bur)
       =+  rig=sec:ex:loy
       =+  our=`@p`fig:ex:loy
-      =+  syp=[[0 ~ our now] [%pawn ges] pub:ex:loy]
+      =+  syp=[[0 ~ our now] [~ %pawn ges] pub:ex:loy]
       :-  [our pac:ex:loy]
       %_    fox
           ton
@@ -797,12 +938,13 @@
       ==
     ::
     ++  czar                                            ::    czar:am
-      |=  [our=ship nam=@t gen=@uw]                     ::  instantiate emperor
+      |=  [our=ship ger=@uw]                            ::  instantiate emperor
       ^-  [p=(list boon) q=fort]
-      =+  loy=(brew 2.048 gen)
+      =+  loy=(brew 2.048 ger)
+      ~&  [%czar [%ger ger] [%fig `@uw`fig:ex:loy] [%our `@uw`(zeno our)]]
       ?>  =(fig:ex:loy (zeno our))
       =+  mac=`mace`[[0 sec:ex:loy] ~]
-      =+  syp=`step`[`bray`[0 ~ our now] [%czar nam] pub:ex:loy]
+      =+  syp=`step`[`bray`[0 ~ our now] [~ %czar ~] pub:ex:loy]
       =+  ded=`deed`[(sign:se:loy @ (shaf %self (sham syp))) syp]
       =+  buq=`buck`[mac [ded ~]]
       =:  ton.fox  (~(ha go ton.fox) our buq)
@@ -997,24 +1139,13 @@
           ++  chow                                      ::    chow:la:ho:um:am 
             |=  fud=meal                                ::  interpret meal
             ^+  +>
-            =.  lun.wod.dur.diz  
-                ?:  =(%none aut)  lun.wod.dur.diz 
-                ?:  ?&  ?=([~ %ix *] lun.wod.dur.diz) 
-                        ?=([%ix *] ryn)
-                        =(q.ryn q.u.lun.wod.dur.diz)
-                        =(r.ryn r.u.lun.wod.dur.diz)
-                    ==
-                  lun.wod.dur.diz
-                [~ ryn]
+            =.  diz  ?:(=(%none aut) diz (wast:diz ryn))
             (dine fud)
           ::
           ++  cock                                      ::    cock:la:ho:um:am
             |=  cap=cape  ^+  +>                        ::  acknowledgment
             =^  pax  diz  (zuul:diz now [%back cap dam ~s0])
-            %_    +>.$
-                bin
-              (weld (turn p.pax |=(pac=rock [%ouzo ryn pac])) bin)
-            ==
+            +>.$(+> (busk(diz (wast:diz ryn)) xong:diz pax))
           ::
           ++  coot                                      ::    coot:la:ho:um:am
             |=  [cha=@ta rum=race]                      ::  update input race
@@ -1232,6 +1363,7 @@
         ::
         ++  wind                                        ::    wind:ho:um:am
           |=  [sup=soap ham=meal]
+          ::  ~&  [%wind her q.sup r.sup]
           ^+  +>
           =^  wyv  diz  (zuul:diz now ham)
           =:  par.bah    (~(put by par.bah) sup [*snow wyv])
@@ -1379,6 +1511,7 @@
       ==
     ::
         %coke  
+      ::  ~&  [%went q.p.bon q.bon q.r.bon r.r.bon]
       :_  fox
       :~  [[~ %iron p.p.bon] s.bon [%went q.p.bon q.bon r.bon]]
       ==
@@ -1439,20 +1572,20 @@
       ::
           %ta                                           ::    %ta
         ?~  s.bon  [~ fox]                              ::  register
-        =+  gox=((hard ,[p=@p q=@pG r=gcos s=pass]) u.s.bon)
+        =+  gox=((hard ,[p=@p q=@pG r=gens s=pass]) u.s.bon)
         =+  gus=(need (~(us go ton.fox) p.p.bon))
         =^  wyl  gus  (born:gus now gox)
         =.  ton.fox  (~(su go ton.fox) gus)
         :_  fox
         :~  :+  [~ %iron p.p.bon]
               [/a /a hen]
-            [%want q.p.bon %to wyl]
+            [%want q.p.bon %to `(unit will)`wyl]
         ==
       ::
           %re                                           ::    %re
         ?~  s.bon  [~ fox]                              ::  file request
         =+  gox=((hard ,[p=@ud q=riff]) u.s.bon)
-        ::  ~&  [%ames-ask gox]
+        ~&  [%ames-ask gox]
         =+  gut=(~(get by rop.fox) [p.gox p.bon])
         =.  rop.fox
           ?^  gut
@@ -1516,6 +1649,7 @@
         ::
             %junk
           [~ fox(any.ton (shax (mix any.ton.fox p.fav)))]
+            
         ::
             %kick
           (~(kick am [now fox(hop p.fav)]) hen)
@@ -1525,7 +1659,7 @@
           [[[%beer p.vun] ~] q.vun]
         ::
             %sith
-          (~(czar am [now fox]) p.fav q.fav r.fav)
+          (~(czar am [now fox]) p.fav q.fav)
         ::
             %want
           ?>  ?=(^ wru)
@@ -1559,7 +1693,7 @@
     ?~  tyl  ~
     ?:  ?=([%name ~] tyl)
       =+  wul=$(tyl [%will ~])
-      ?~(wul ~ [~ (gnow q.q:((hard deed) -.u.wul))])
+      ?~(wul ~ [~ (gnow his q.q.q:((hard deed) -.u.wul))])
     =+  gys=(~(us go ton.fox) our)
     ?~  gys  ~
     ?.  =(our his)
@@ -1576,6 +1710,7 @@
     ?:  ?=([%tick @ ~] tyl)
       =+  hur=(slaw %p i.t.tyl)
       ?~  hur  ~
+      ?.  =(our (sein u.hur))  ~
       [~ (end 6 1 (shaf %tick (mix u.hur (shax sec:ex:q:sen:u.gys))))]
     ?:  ?=([%will ~] tyl)
       (rick mar our law.saf.u.gys)

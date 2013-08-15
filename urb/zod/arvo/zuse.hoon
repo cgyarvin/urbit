@@ -568,7 +568,7 @@
   ?:  (lte wid 1)   %czar
   ?:  =(2 wid)      %king
   ?:  (lte wid 4)   %duke
-  ?:  (lte wid 8)   %jack
+  ?:  (lte wid 8)   %earl
   ?>  (lte wid 16)  %pawn
 ::
 ++  deft                                                ::  import url path
@@ -709,16 +709,21 @@
   ?.  (~(has by q.ape) -.poy)  ~
   [~ .^(%cx pax)]
 ::
+++  glam 
+  |=  zar=@p  ^-  tape
+  (weld "carrier " (scow %p zar))                       ::  XX real names
+::
 ++  gnow
-  |=  gos=gcos  ^-  @t
+  |=  [who=@p gos=gcos]  ^-  @t
   ?-    -.gos
-      ?(%czar %king %pawn)  p.gos
-      ?(%duke %jack) 
+      %czar           (rap 3 (glam who))
+      ?(%king %pawn)  p.gos
+      ?(%duke %earl) 
     ?+    -.p.gos  p.p.p.gos
         %anon  %%
         %punk  p.p.gos
         ?(%lord %lady)  
-      =+  nam=`name`r.p.p.gos
+      =+  nam=`name`s.p.p.gos
       %+  rap  3
       :~  p.nam
           ?~(q.nam 0 (cat 3 ' ' u.q.nam))
@@ -745,6 +750,12 @@
   ^-  path
   [(cat 3 'c' p.kit) (scot %p r.kit) s.kit (scot (dime q.kit)) t.kit]
 ::
+++  saxo                                                ::  autocanon
+  |=  who=ship
+  ^-  (list ship)
+  ?:  (lth who 256)  [who ~]
+  [who $(who (sein who))]
+::
 ++  sein                                                ::  autodean
   |=  who=ship  ^-  ship
   =+  mir=(clan who)
@@ -752,15 +763,9 @@
     %czar  who
     %king  (end 3 1 who)
     %duke  (end 4 1 who)
-    %jack  (end 5 1 who)
-    %pawn  ~les
+    %earl  (end 5 1 who)
+    %pawn  `@p`0
   ==
-::
-++  saxo                                                ::  autocanon
-  |=  who=ship
-  ^-  (list ship)
-  ?:  (lth who 256)  [who ~]
-  [who $(who (sein who))]
 ::
 ++  tame
   |=  hap=path
@@ -903,7 +908,7 @@
               r=(qeu ,[p=wire q=nose])                  ::  pending notes
               s=boar                                    ::  execution
           ==                                            ::
-++  boat  ,[(list slip) task]                           ::  user stage
+++  boat  ,[(list slip) tart]                           ::  user stage
 ++  boon                                                ::  fort output
           $%  [%beer p=ship q=@uvG]                     ::  gained ownership
               [%coke p=sock q=cape r=soap s=duct]       ::  message result
@@ -922,7 +927,7 @@
               way=(map ,@tas vase)                      ::  variables
               hit=[p=@ud q=(list ,@t)]                  ::  command history
               sur=[p=@ud q=(qeu vase)]                  ::  result history
-              god=[p=@ud q=(map ,@ud gyre)]             ::  tasks
+              god=[p=@ud q=(map ,@ud task)]             ::  tasks
           ==                                            ::
 ++  bray  ,[p=life q=(unit life) r=ship s=@da]          ::  our parent us now
 ++  brow  ,[p=@da q=@tas]                               ::  browser version
@@ -962,7 +967,7 @@
               [%flog p=card]                            ::  log to terminal
               [%junk p=@]                               ::  entropy
               [%kick p=@da]                             ::  wake up
-              [%kill p=~]                               ::  kill a gyre
+              [%kill p=~]                               ::  kill a task
               [%lane p=lane]                            ::  set public route
               [%line p=@t]                              ::  source line
               [%limn ~]                                 ::  rotate ship
@@ -986,7 +991,7 @@
               [%rend ~]                                 ::  pop kernel
               [%save p=path q=@]                        ::  write atomic file
               [%send p=lane q=@]                        ::  transmit packet
-              [%sith p=@p q=@t r=@uw]                   ::  imperial generator
+              [%sith p=@p q=@uw]                        ::  imperial generator
               [%sync ~]                                 ::  reset soft state
               [%talk p=tank]                            ::  show on console
               [%tell p=(list ,@t)]                      ::  dump lines
@@ -1004,7 +1009,7 @@
               [%volt p=*]                               ::  upgrade kernel
               [%wait p=@da q=path]                      ::  timer wait
               [%wake ~]                                 ::  timer activate
-              [%want p=ship q=@ta r=*]                  ::  outgoing request
+              [%want p=ship q=@ta r=*]                  ::  send message
               [%warp p=ship q=riff]                     ::  request
               [%wart p=ship q=@ta r=@ud s=(unit ,*)]    ::  incoming response
               [%warn p=tape]                            ::  system message
@@ -1031,7 +1036,7 @@
           $%  [& p=gene]                                ::  transform
               [| p=(list ,@tas)]                        ::  alter
           ==                                            ::
-++  corp  ,[p=@t q=@t r=@tas]                           ::  name auth issuer
+++  corp  ,[p=@t q=@t r=govt]                           ::  name auth issuer
 ++  chum  ,@uvI                                         ::  hashed passcode
 ++  claw  $:                                            ::  startup chain
               joy=(unit coal)                           ::  local context
@@ -1106,10 +1111,11 @@
               [%xy p=path q=card]                       ::  push card
           ==                                            ::
 ++  gilt  ,[@tas *]                                     ::  presumed gift
+++  gens  ,[p=lang q=gcos]                              ::  general identity
 ++  gcos                                                ::  id description
-          $%  [%czar p=@t]                              ::  8-bit ship
+          $%  [%czar ~]                                 ::  8-bit ship
               [%duke p=what]                            ::  32-bit ship
-              [%jack p=@t]                              ::  64-bit ship
+              [%earl p=@t]                              ::  64-bit ship
               [%king p=@t]                              ::  16-bit ship
               [%pawn p=@t]                              ::  128-bit ship
           ==                                            ::
@@ -1123,11 +1129,8 @@
               [%wa p=@da]                               ::  alarm
               [%yo p=ship q=@ta r=*]                    ::  network message
           ==                                            ::
+++  govt  path                                          ::  country/postcode
 ++  gram  ,@uw                                          ::  physical datagram
-++  gyre                                                ::
-          $:  paq=(qeu gyro)                            ::  prompt queue
-              wip=[p=@ud q=(map ,@ud beak)]             ::  processes
-          ==                                            ::
 ++  gyro  ,[p=@ud q=wire r=prod]                        ::  live prompt
 ++  hand  ,@uvH                                         ::  hash of code
 ++  hate  ,[p=purl q=@p r=moth]                         ::  cooked request 
@@ -1166,6 +1169,8 @@
               [%is p=@ud q=(unit lane) r=@is]           ::  IPv6 w/alternates
               [%ix p=@da q=@ud r=@if]                   ::  IPv4 provisional
           ==                                            ::
+++  land  %ta                                           ::  IETF lang as code
+++  lang  path                                          ::  IETF lang as path
 ++  lark  (list lath)                                   ::  parsed command
 ++  lass  ?(%0 %1 %2)                                   ::  power increment
 ++  lath  $%                                            ::  pipeline stage
@@ -1229,7 +1234,7 @@
               [%up p=@t]                                ::  prompt response
               [%oy p=ship q=@ta r=@ud s=(unit ,*)]      ::  incoming request
               [%yo p=ship q=cape r=soap]                ::  request response
-              [%wa p=@da]                               ::  alarm
+              [%wa ~]                                   ::  alarm
           ==                                            ::
 ++  nose                                                ::  response, kernel
           $?  [%% p=(unit ,[p=typo q=(list)])]          ::  standard input
@@ -1290,7 +1295,7 @@
           $:  las=@da                                   ::  last wakeup
               fat=(map ,@p room)                        ::  per host
           ==                                            ::
-++  rank  ?(%czar %king %duke %jack %pawn)              ::  ship width class
+++  rank  ?(%czar %king %duke %earl %pawn)              ::  ship width class
 ++  rant                                                ::  namespace binding
           $:  p=[p=care q=case r=@tas]                  ::  clade release book
               q=path                                    ::  spur
@@ -1359,6 +1364,7 @@
           ==                                            ::
 ++  scud  ,[p=pact q=scar]                              ::  processed dispatch
 ++  seam  ,[p=@ta q=pact r=scar]                        ::  service route
+++  sect  ?(%black %blue %red %orange %white)           ::  banner
 ++  shed                                                ::  packet pump
           $:  $:  niq=@ud                               ::  count in queue
                   nif=@ud                               ::  count in flight
@@ -1378,8 +1384,12 @@
 ++  soap  ,[p=[p=life q=life] q=@tas r=@ud]             ::  statement id
 ++  sock  ,[p=ship q=ship]                              ::  from to
 ++  spur  path                                          ::  modeshipdeskcasespur
-++  step  ,[p=bray q=gcos r=pass]                       ::  identity stage
-++  task  _|+([@da path note] *bowl)                    ::  process core
+++  step  ,[p=bray q=gens r=pass]                       ::  identity stage
+++  tart  _|+([@da path note] *bowl)                    ::  process core
+++  task                                                ::
+          $:  paq=(qeu gyro)                            ::  prompt queue
+              wip=[p=@ud q=(map ,@ud beak)]             ::  processes
+          ==                                            ::
 ++  taxi  ,[p=lane q=rock]                              ::  routed packet
 ++  tick  ,@ud                                          ::  process id
 ++  town                                                ::  all security state
@@ -1401,9 +1411,9 @@
               [%lord p=whom]                            ::  male person []
               [%punk p=@t]                              ::  opaque handle ""
           ==                                            ::
-++  whom  ,[p=@ud q=@tas r=name]                        ::  year/govt/id
+++  whom  ,[p=@ud q=govt r=sect s=name]                 ::  year/govt/id
 ++  will  (list deed)                                   ::  certificate
-++  worm  ,*                                            ::  vase of task
+++  worm  ,*                                            ::  vase of tart
 ++  yard                                                ::  terminal state
           $:  p=?                                       ::  verbose 
               q=blur                                    ::  display state
