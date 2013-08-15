@@ -861,11 +861,13 @@ u2_lo_call(u2_reck*        rec_u,
 
 #if 0
   {
-    uL(fprintf(uH, "call %s inn %s out %s tim %s\n", 
+    uL(fprintf(uH, "call %s inn %s out %s tim %s sig %s sat %s\n", 
                       _lo_how(how), 
                       (inn == u2_yes) ? "yes" : "no", 
                       (out == u2_yes) ? "yes" : "no",
-                      (tim == u2_yes) ? "yes" : "no"));
+                      (tim == u2_yes) ? "yes" : "no",
+                      (sig == u2_yes) ? "yes" : "no",
+                      (sat == u2_yes) ? "yes" : "no"));
   }
 #endif
 

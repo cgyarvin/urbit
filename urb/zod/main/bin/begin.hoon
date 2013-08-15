@@ -31,7 +31,7 @@
     %+  (polo ~ %text "name: " ~)
       (boss 256 (more gon qit))
     |=  [now=@da nam=@]
-    (moss now tic tey (gcos [ran nam]))
+    (moss now tic tey ~ (gcos [ran nam]))
   %+  (polo ~ %text "first name: " ~)
     (boss 256 (more gon qit))
   |=  [* fin=@]
@@ -41,22 +41,22 @@
   %+  (polo ~ %text "birth year: " ~)
     dim:ag
   |=  [now=@ yar=@]
-  (moss now tic tey (gcos [ran %lord [yar /us/94.114 [fin ~ ~ sur]]]))
+  (moss now tic tey ~ (gcos [ran %lord [yar /us/94.114 %black [fin ~ ~ sur]]]))
 ::
 ++  moss
-  |=  [now=@da tic=@p tey=@ gec=gcos]
+  |=  [now=@da tic=@p tey=@ ges=gens]
   ^-  bowl
-  =+  bur=(shax :(mix (jam gec) tey))
+  =+  bur=(shax :(mix (jam ges) tey))
   %+  (posh now)  ~[la/leaf/"generating 2048-bit RSA key..."]
   |=  now=@da
   =+  loy=(brew 2.048 bur)
-  %-  (post bos [%ta %to] [mig tic gec pub:ex:loy])
+  %-  (post bos [%ta %to] [mig tic ges pub:ex:loy])
   |=  [now=@da rup=(unit ,*)]
   :_  ~
   ?~  rup  ~[la/leaf/"request rejected"]
   =+  mac=`mace`[[0 sec:ex:loy] ~]
-  =+  wil=((hard will) u.rup)
+  =+  wil=((hard (unit will)) u.rup)
   :~  [%la %leaf "request approved"]
-      [%xy /a `card`[%cash mig mac wil]]
+      [%xy /a `card`[%cash mig mac u.wil]]
   ==
 --

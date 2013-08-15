@@ -34,7 +34,6 @@
       :~  [~ %wa end]
       ==
   |=  [now=@da pax=path nut=note]
-  ~&  %posh-fire
   (wop now)
 ::
 ++  post                                                  ::  request/response

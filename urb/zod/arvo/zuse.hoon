@@ -568,7 +568,7 @@
   ?:  (lte wid 1)   %czar
   ?:  =(2 wid)      %king
   ?:  (lte wid 4)   %duke
-  ?:  (lte wid 8)   %jack
+  ?:  (lte wid 8)   %earl
   ?>  (lte wid 16)  %pawn
 ::
 ++  deft                                                ::  import url path
@@ -718,12 +718,12 @@
   ?-    -.gos
       %czar           (rap 3 (glam who))
       ?(%king %pawn)  p.gos
-      ?(%duke %jack) 
+      ?(%duke %earl) 
     ?+    -.p.gos  p.p.p.gos
         %anon  %%
         %punk  p.p.gos
         ?(%lord %lady)  
-      =+  nam=`name`r.p.p.gos
+      =+  nam=`name`s.p.p.gos
       %+  rap  3
       :~  p.nam
           ?~(q.nam 0 (cat 3 ' ' u.q.nam))
@@ -750,6 +750,12 @@
   ^-  path
   [(cat 3 'c' p.kit) (scot %p r.kit) s.kit (scot (dime q.kit)) t.kit]
 ::
+++  saxo                                                ::  autocanon
+  |=  who=ship
+  ^-  (list ship)
+  ?:  (lth who 256)  [who ~]
+  [who $(who (sein who))]
+::
 ++  sein                                                ::  autodean
   |=  who=ship  ^-  ship
   =+  mir=(clan who)
@@ -757,15 +763,9 @@
     %czar  who
     %king  (end 3 1 who)
     %duke  (end 4 1 who)
-    %jack  (end 5 1 who)
+    %earl  (end 5 1 who)
     %pawn  `@p`0
   ==
-::
-++  saxo                                                ::  autocanon
-  |=  who=ship
-  ^-  (list ship)
-  ?:  (lth who 256)  [who ~]
-  [who $(who (sein who))]
 ::
 ++  tame
   |=  hap=path
@@ -830,7 +830,6 @@
 ++  apex  ,[p=@uvI q=(map ,@ta ,@uvI) r=(map ,@ta ,~)]  ::  node report
 ++  ball  ,@uw                                          ::  statement payload
 ++  bait  ,[p=skin q=@ud r=dove]                        ::  fmt nrecvd spec
-++  banr  ?(%black %blue %red %orange %white)           ::  banner
 ++  bath                                                ::  convo per client
           $:  gay=?                                     ::  not stalled
               laz=(unit ,@da)                           ::  last heard
@@ -1037,7 +1036,7 @@
           $%  [& p=gene]                                ::  transform
               [| p=(list ,@tas)]                        ::  alter
           ==                                            ::
-++  corp  ,[p=@t q=@t r=@tas]                           ::  name auth issuer
+++  corp  ,[p=@t q=@t r=govt]                           ::  name auth issuer
 ++  chum  ,@uvI                                         ::  hashed passcode
 ++  claw  $:                                            ::  startup chain
               joy=(unit coal)                           ::  local context
@@ -1112,10 +1111,11 @@
               [%xy p=path q=card]                       ::  push card
           ==                                            ::
 ++  gilt  ,[@tas *]                                     ::  presumed gift
+++  gens  ,[p=lang q=gcos]                              ::  general identity
 ++  gcos                                                ::  id description
           $%  [%czar ~]                                 ::  8-bit ship
               [%duke p=what]                            ::  32-bit ship
-              [%jack p=@t]                              ::  64-bit ship
+              [%earl p=@t]                              ::  64-bit ship
               [%king p=@t]                              ::  16-bit ship
               [%pawn p=@t]                              ::  128-bit ship
           ==                                            ::
@@ -1129,6 +1129,7 @@
               [%wa p=@da]                               ::  alarm
               [%yo p=ship q=@ta r=*]                    ::  network message
           ==                                            ::
+++  govt  path                                          ::  country/postcode
 ++  gram  ,@uw                                          ::  physical datagram
 ++  gyro  ,[p=@ud q=wire r=prod]                        ::  live prompt
 ++  hand  ,@uvH                                         ::  hash of code
@@ -1168,8 +1169,8 @@
               [%is p=@ud q=(unit lane) r=@is]           ::  IPv6 w/alternates
               [%ix p=@da q=@ud r=@if]                   ::  IPv4 provisional
           ==                                            ::
-++  land  path                                          ::  IETF lang as path
-++  lang  %ta                                           ::  IETF lang as code
+++  land  %ta                                           ::  IETF lang as code
+++  lang  path                                          ::  IETF lang as path
 ++  lark  (list lath)                                   ::  parsed command
 ++  lass  ?(%0 %1 %2)                                   ::  power increment
 ++  lath  $%                                            ::  pipeline stage
@@ -1294,7 +1295,7 @@
           $:  las=@da                                   ::  last wakeup
               fat=(map ,@p room)                        ::  per host
           ==                                            ::
-++  rank  ?(%czar %king %duke %jack %pawn)              ::  ship width class
+++  rank  ?(%czar %king %duke %earl %pawn)              ::  ship width class
 ++  rant                                                ::  namespace binding
           $:  p=[p=care q=case r=@tas]                  ::  clade release book
               q=path                                    ::  spur
@@ -1363,6 +1364,7 @@
           ==                                            ::
 ++  scud  ,[p=pact q=scar]                              ::  processed dispatch
 ++  seam  ,[p=@ta q=pact r=scar]                        ::  service route
+++  sect  ?(%black %blue %red %orange %white)           ::  banner
 ++  shed                                                ::  packet pump
           $:  $:  niq=@ud                               ::  count in queue
                   nif=@ud                               ::  count in flight
@@ -1382,7 +1384,7 @@
 ++  soap  ,[p=[p=life q=life] q=@tas r=@ud]             ::  statement id
 ++  sock  ,[p=ship q=ship]                              ::  from to
 ++  spur  path                                          ::  modeshipdeskcasespur
-++  step  ,[p=bray q=gcos r=pass]                       ::  identity stage
+++  step  ,[p=bray q=gens r=pass]                       ::  identity stage
 ++  tart  _|+([@da path note] *bowl)                    ::  process core
 ++  task                                                ::
           $:  paq=(qeu gyro)                            ::  prompt queue
@@ -1409,7 +1411,7 @@
               [%lord p=whom]                            ::  male person []
               [%punk p=@t]                              ::  opaque handle ""
           ==                                            ::
-++  whom  ,[p=@ud q=path r=name]                        ::  year/govt/id
+++  whom  ,[p=@ud q=govt r=sect s=name]                 ::  year/govt/id
 ++  will  (list deed)                                   ::  certificate
 ++  worm  ,*                                            ::  vase of tart
 ++  yard                                                ::  terminal state

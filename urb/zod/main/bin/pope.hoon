@@ -3,79 +3,17 @@
 ::
 =>  .(+ =>(+ ^/===/pony))
 |=  [est=time *]
-|=  [one=@ud num=@ud]
+|=  [who=@p ~]
 ^-  bowl
-?>  &(!=(0 num) (lte (add one num) 256))
-%+  pomp  "generating ~{(scow %p one)} for {(scow %ud num)}"
-%+  (polo ~ %pass "kernel passphrase: " ~)
+%+  (polo ~ %pass "passphrase: " ~)
   (boss 256 (more gon qit))
-|=  [* tey=@]
-
-:-  :~  [%la %leaf 
-    ==
-:-  ~
-:-  :~  [~ [%up %pass "kernel passphrase: "]]
-    ==
-|=  [now=@da pax=path nut=note]
-^-  bowl
-?>  ?=(%up -.nut)
-=+  fra=p.nut
-:-  :~  [%la %leaf "passphrase check: {<`@p`(end 5 1 (shaf %pass fra))>}"]
-    ==
-:-  ~
-:-  :~  [~ [%up %text "generate keys (y/n)? "]]
-    ==
-|=  [now=@da pax=path nut=note]
-^-  bowl
-?>  ?=(%up -.nut)
-?:  !=(%y p.nut)
-  :-  :~  [%la %leaf "okay, then!"]
-      ==
-  ~
-=+  ^=  guy
-    =+  inx=one
-    =|  goy=(list ,[p=@ud q=@uv r=@uv s=@ud])
-    |-  ^+  goy
-    ?:  =(256 inx)  goy
-    ~&  [%minting inx]
-    =+  bur=(shax (add inx (shax fra)))
-    =+  arc=(brew 2.048 bur)
-    %=  $
-      inx  +(inx)
-      goy  :_  goy
-           :^    inx
-               bur
-             fig:ex:arc
-           sec:ex:arc
-    ==
-=.  guy  (flop guy)
-=+  ^=  fiz
-    %+  rap  3
-    %+  turn  guy
-    |=  [p=@ud q=@uv r=@uv s=@ud]
-    (rap 3 (weld `tape`~(rend co %% %uw q) `tape`[`@`10 ~]))
-=+  ^=  guz
-    %-  role
-    |-  ^-  (list ,@t)
-    ?~  guy  ~
-    ?>  ?=(^ t.guy)
-    :_  $(guy t.t.guy)
-    %+  rap  3
-    "{(scow %uw r.i.guy)}  {(scow %uw r.i.t.guy)}  ::   {(scow %ud p.i.guy)}"
-=+  ^=  hoz
-    %+  rap  3
-    %+  turn  guy
-    |=  [p=@ud q=@uv r=@uv s=@ud]
-    %+  rap  3
-    ;:  weld 
-      ~(rend co %% %ud p) 
-      " "
-      ~(rend co %% %ud s) 
-      `tape`[`@`10 ~]
-    ==
-:-  :~  [%la %leaf "done!"]
-        [%xx %save /generators/txt fiz]
-        [%xx %save /fingerprints/txt guz]
-        [%xx %save /rings/txt hoz]
-    ==
-~
+|=  [now=@da fra=@]
+%+  (posh (add ~s1 now))  
+  ~[la/leaf/"generating carrier {(scow %p who)} (#{(scow %ud who)})"]
+|=  now=@da
+:_  ~
+=+  bur=(shax (add who (shax fra)))
+=+  arc=(brew 2.048 bur)
+:~  [%la %leaf "generator: {(scow %uw bur)}"]
+    [%la %leaf "fingerprint: {(scow %uw fig:ex:arc)}"]
+==
