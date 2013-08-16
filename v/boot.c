@@ -508,13 +508,18 @@ static c3_w
 u2_ve_mark_reck(u2_reck* rec_u)
 {
   c3_w siz_w = 0;
+  c3_w yot_w, roe_w, ken_w, roc_w;
+  c3_w egg_w;
 
-  siz_w += u2_cm_mark_noun(rec_u->yot);
+  siz_w += (ken_w = u2_cm_mark_noun(rec_u->ken));
+  siz_w += (roc_w = u2_cm_mark_noun(rec_u->roc));
+
+  siz_w += (yot_w = u2_cm_mark_noun(rec_u->yot));
   siz_w += u2_cm_mark_noun(rec_u->now);
   siz_w += u2_cm_mark_noun(rec_u->wen);
   siz_w += u2_cm_mark_noun(rec_u->sen);
   siz_w += u2_cm_mark_noun(rec_u->own);
-  siz_w += u2_cm_mark_noun(rec_u->roe);
+  siz_w += (roe_w = u2_cm_mark_noun(rec_u->roe));
   siz_w += u2_cm_mark_noun(rec_u->key);
 
 #if 0
@@ -539,16 +544,18 @@ u2_ve_mark_reck(u2_reck* rec_u)
   siz_w += u2_cm_mark_noun(rec_u->toy.wash);
 #endif
 
-  siz_w += u2_cm_mark_noun(rec_u->ken);
-  siz_w += u2_cm_mark_noun(rec_u->roc);
-
   {
     u2_cart* egg_u;
-
+   
+    egg_w = 0;
     for ( egg_u = rec_u->ova.egg_u; egg_u; egg_u = egg_u->nex_u ) {
-      siz_w += u2_cm_mark_noun(egg_u->egg);
+      egg_w += u2_cm_mark_noun(egg_u->egg);
     }
+    siz_w += egg_w;
   }
+  fprintf(stderr, "ken %d, roc %d, yot %d, roe %d, egg %d\n",
+                   ken_w, roc_w, yot_w, roe_w, egg_w);
+
   return siz_w;
 }
 

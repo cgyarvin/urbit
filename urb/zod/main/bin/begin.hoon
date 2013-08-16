@@ -18,27 +18,28 @@
 |%
 ++  main
   ^-  bowl
-  %+  (polo ~ %text "ticket: ~" ~)
+  %+  (polo ~ %text "ticket: ~" ~ ~)
     fed:ag
   |=  [* tic=@p]
-  %+  (polo ~ %pass "entropy: " ~)
+  %+  pond  ^:@/%/entropy/txt
+  %+  (polo ~ %pass "entropy: " ~ ~)
     (boss 256 (more gon qit))
   |=  [* tey=@]
   =.  tey  (shax tey)
   %+  pomp  "entropy check: {<`@p`(mug tey)>}"
   =+  ran=(clan mig)
   ?.  |(=(%duke ran) =(%jack ran))
-    %+  (polo ~ %text "name: " ~)
+    %+  (polo ~ %text "name: " ~ ~)
       (boss 256 (more gon qit))
     |=  [now=@da nam=@]
     (moss now tic tey ~ (gcos [ran nam]))
-  %+  (polo ~ %text "first name: " ~)
+  %+  (polo ~ %text "first name: " ~ ~)
     (boss 256 (more gon qit))
   |=  [* fin=@]
-  %+  (polo ~ %text "last name: " ~)
+  %+  (polo ~ %text "last name: " ~ ~)
     (boss 256 (more gon qit))
   |=  [* sur=@]
-  %+  (polo ~ %text "birth year: " ~)
+  %+  (polo ~ %text "birth year: " ~ ~)
     dim:ag
   |=  [now=@ yar=@]
   (moss now tic tey ~ (gcos [ran %lord [yar /us/94.114 %black [fin ~ ~ sur]]]))

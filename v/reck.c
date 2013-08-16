@@ -35,8 +35,9 @@ static u2_noun
 _reck_nock_poke(u2_reck* rec_u, u2_noun ovo)
 {
   u2_noun fun = u2_cn_nock(u2k(rec_u->roc), u2k(u2_cx_at(42, rec_u->roc)));
-  u2_noun sam = u2nc(u2k(rec_u->now), ovo);
-
+  u2_noun sam, pro;
+  
+  sam = u2nc(u2k(rec_u->now), ovo);
 #if 0
   {
     c3_c*   ovi_c = u2_cr_string(u2h(u2t(ovo)));
@@ -49,7 +50,8 @@ _reck_nock_poke(u2_reck* rec_u, u2_noun ovo)
   }
 #endif
 
-  return u2_cn_mung(fun, sam);
+  pro = u2_cn_mung(fun, sam);
+  return pro;
 }
 
 /* _reck_nock_peek(): call peek through hardcoded interface.
@@ -98,7 +100,6 @@ u2_reck_gate(const c3_c* txt_c)
   }
   u2z(txt);
   return gat;
-
 }
 
 /* u2_reck_do(): use a kernel function.
@@ -320,10 +321,10 @@ u2_reck_cold(u2_reck* rec_u, c3_w kno_w)
     }
   }
 
-  //  We should not be calling this from execution level.
-  //  But since we are...
+  //  Gates called deep when memory is wrapped.
   {
     u2z(u2_reck_gate("wash"));
+    u2z(u2_reck_gate("mook"));
   }
 
 #if 0
@@ -351,6 +352,7 @@ u2_reck_cold(u2_reck* rec_u, c3_w kno_w)
 #endif
 
   u2_reck_time(rec_u);
+
   u2_reck_numb(rec_u);
   {
     c3_c* dyt_c = u2_cr_string(rec_u->wen);

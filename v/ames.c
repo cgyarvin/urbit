@@ -189,6 +189,7 @@ u2_ames_io_init(u2_reck* rec_u)
         
       _ames_czar(rec_u, num_y, &por_s);
       uL(fprintf(uH, "ames: czar: %s on %d\n", u2_Host.ops_u.imp_c, por_s));
+      u2z(num);
     } 
 
     if ( (fid_i = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {

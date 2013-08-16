@@ -4732,7 +4732,7 @@
       :+  %tsls  [%ktts %b [%tsgr [%cnbc %v] q.gen]]    ::  =+  b==>(v {q.gen})
       :+  %tsls                                         ::  =+  c=(a b)
         [%ktts %c [%cnhp [%cnbc %a] [%cnbc %b] ~]]      ::  
-      [%wtgr [%dtts [%cnbc %c] [%cnbc %b]] [%cnbc %b]]  ::  ?>(=(c b) c)
+      [%wtgr [%dtts [%cnbc %c] [%cnbc %b]] [%cnbc %c]]  ::  ?>(=(c b) c)
     ::
         [%smtr *]                                       ::                  ;*
       :+  %tsgr  [%ktts %v ~ 1]                         ::  =>  v=.

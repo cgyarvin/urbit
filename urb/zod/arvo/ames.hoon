@@ -108,262 +108,262 @@
     |=  zar=@pD
     ^-  @uvH  ^-  @
     %+  snag  zar
-    :~  0wN.Kdp5k.p5ncD.4Wsih.bFQFu   ::  0, ~zod, Tianming, Curtis Yarvin (sator)
-        0w0                           ::  1, ~nec, Vlad the Impaler
-        0w0                           ::  2, ~bud, Haile Sellassie
-        0w0                           ::  3, ~wes, Alfred the Great
-        0w0                           ::  4, ~sev, Tamerlane
-        0w0                           ::  5, ~per, Pericles
-        0w0                           ::  6, ~sut, Talleyrand
-        0w0                           ::  7, ~let, Yongle
-        0w0                           ::  8, ~ful, Seleucus
-        0w0                           ::  9, ~pen, Uther Pendragon
-        0w0                           ::  10, ~syt, Louis XVI
-        0w0                           ::  11, ~dur, Ahmad Shah Durrani 
-        0w0                           ::  12, ~wep, Constantine
-        0w0                           ::  13, ~ser, Wilhelm I
-        0w0                           ::  14, ~wyl, Akbar
-        0w0                           ::  15, ~sun, Louis XIV
-        0w0                           ::  16, ~ryp, Nobunaga
-        0w0                           ::  17, ~syx, Alexander VI
-        0w0                           ::  18, ~dyr, Philippe II
-        0w0                           ::  19, ~nup, Julius II
-        0w0                           ::  20, ~heb, David
-        0w0                           ::  21, ~peg, Niall Noigiallach
-        0w0                           ::  22, ~lup, Kublai Khan
-        0w0                           ::  23, ~dep, Ozbeg Khan
-        0w0                           ::  24, ~dys, Ozymandias
-        0w0                           ::  25, ~put, Ogedai Khan
-        0w0                           ::  26, ~lug, Jiang Jieshi
-        0w0                           ::  27, ~hec, Darius
-        0w0                           ::  28, ~ryt, Shivaji
-        0w0                           ::  29, ~tyv, Qianlong
-        0w0                           ::  30, ~syd, Boleslaw Chobry
-        0w0                           ::  31, ~nex, Tigranes
-        0w0                           ::  32, ~lun, Han Wudi
-        0w0                           ::  33, ~mep, Charles X
-        0w0                           ::  34, ~lut, Naresuan
-        0w0                           ::  35, ~sep, Frederick II
-        0w0                           ::  36, ~pes, Simeon
-        0w0                           ::  37, ~del, Kangxi
-        0w1w.KF-J1.5I63F.khFyv.h0n4J  ::  38, ~sul, Suleiman the Magnificent, John Burnham (donum)
-        0w0                           ::  39, ~ped, Pedro II
-        0w0                           ::  40, ~tem, Genghis Khan
-        0w0                           ::  41, ~led, Dinh Bo Linh
-        0w0                           ::  42, ~tul, Porfirio Diaz
-        0w0                           ::  43, ~met, Pakal
-        0w0                           ::  44, ~wen, Wu Zetian
-        0w0                           ::  45, ~byn, Garibaldi
-        0w0                           ::  46, ~hex, Pius IX
-        0w0                           ::  47, ~feb, Leopold II
-        0w0                           ::  48, ~pyl, Leonidas
-        0w0                           ::  49, ~dul, Sitting Bull
-        0w0                           ::  50, ~het, Nebuchadnezzer II
-        0w0                           ::  51, ~mev, Rhodes
-        0w0                           ::  52, ~rut, Henry VIII
-        0w0                           ::  53, ~tyl, Attila
-        0w0                           ::  54, ~wyd, Catherine II
-        0w0                           ::  55, ~tep, Chulalongkorn
-        0w0                           ::  56, ~bes, Uthman
-        0w0                           ::  57, ~dex, Augustus
-        0w0                           ::  58, ~sef, Faustin
-        0w0                           ::  59, ~wyc, Chongde
-        0w0                           ::  60, ~bur, Justinian
-        0w0                           ::  61, ~der, Afonso de Albuquerque
-        0w0                           ::  62, ~nep, Antoninus Pius
-        0w0                           ::  63, ~pur, Cromwell
-        0w0                           ::  64, ~rys, Innocent X
-        0w0                           ::  65, ~reb, Castro
-        0w0                           ::  66, ~den, Frederick the Great
-        0w0                           ::  67, ~nut, Canute
-        0w0                           ::  68, ~sub, Vytautas
-        0w0                           ::  69, ~pet, Amina
-        0w0                           ::  70, ~rul, Hammurabi
-        0w0                           ::  71, ~syn, Suharto
-        0w0                           ::  72, ~reg, Victoria
-        0w0                           ::  73, ~tyd, Hiawatha
-        0w0                           ::  74, ~sup, Paul V
-        0w0                           ::  75, ~sem, Shaka
-        0w0                           ::  76, ~wyn, Le Thanh Tong
-        0w0                           ::  77, ~rec, Ivan Asen II
-        0w0                           ::  78, ~meg, Tiridates
-        0w0                           ::  79, ~net, Nefertiti
-        0w0                           ::  80, ~sec, Gwangmu
-        0w0                           ::  81, ~mul, Ferdinand & Isabella
-        0w0                           ::  82, ~nym, Askia
-        0w0                           ::  83, ~tev, Xuande
-        0w0                           ::  84, ~web, Boris Godunov
-        0w0                           ::  85, ~sum, Gilgamesh
-        0w0                           ::  86, ~mut, Maximillian I
-        0w0                           ::  87, ~nyx, Mao
-        0w0                           ::  88, ~rex, Charlemagne
-        0w0                           ::  89, ~teb, Narai
-        0w0                           ::  90, ~fus, Hanno
-        0w0                           ::  91, ~hep, Charles I & V
-        0w0                           ::  92, ~ben, Alexander II
-        0w0                           ::  93, ~mus, Mansa Musa
-        0w0                           ::  94, ~wyx, Zoe Porphyrogenita
-        0w0                           ::  95, ~sym, Metternich
-        0w0                           ::  96, ~sel, Robert the Bruce
-        0w0                           ::  97, ~ruc, Pachacutec
-        0w0                           ::  98, ~dec, Jefferson
-        0w0                           ::  99, ~wex, Solomon
-        0w0                           ::  100, ~syr, Nicholas I
-        0w0                           ::  101, ~wet, Barbarossa
-        0w0                           ::  102, ~dyl, Franklin Delano Roosevelt
-        0w0                           ::  103, ~myn, Pius X
-        0w0                           ::  104, ~mes, Gwanggaeto
-        0w0                           ::  105, ~det, Abbas I
-        0w0                           ::  106, ~bet, Julius Caeser
-        0w0                           ::  107, ~bel, Lee Kwan Yu
-        0w0                           ::  108, ~tux, Ranavalona I
-        0w0                           ::  109, ~tug, Go-Daigo
-        0w0                           ::  110, ~myr, Zenobia
-        0w0                           ::  111, ~pel, Henry V
-        0w0                           ::  112, ~syp, Bao Dai
-        0w0                           ::  113, ~ter, Casimir III
-        0w0                           ::  114, ~meb, Cyrus
-        0w0                           ::  115, ~set, Charles the Wise
-        0w0                           ::  116, ~dut, Sandrokottos
-        0w0                           ::  117, ~deg, Agamemnon
-        0w0                           ::  118, ~tex, Clement VII
-        0w0                           ::  119, ~sur, Suppilulima 
-        0w0                           ::  120, ~fel, Deng Xiaopeng
-        0w0                           ::  121, ~tud, Victor Emmanuel
-        0w0                           ::  122, ~nux, Ajatasatru
-        0w0                           ::  123, ~rux, Jan Sobieski
-        0w0                           ::  124, ~ren, Huangdi
-        0w0                           ::  125, ~wyt, Xuantong
-        0w0                           ::  126, ~nub, Narmer
-        0w0                           ::  127, ~med, Cosimo de Medici
-        0w0                           ::  128, ~lyt, Mongke Khan
-        0w0                           ::  129, ~dus, Stephen Dusan
-        0w0                           ::  130, ~neb, Henri IV
-        0w0                           ::  131, ~rum, Mehmed Fatih
-        0w0                           ::  132, ~tyn, Conn Cétchathach 
-        0w0                           ::  133, ~seg, Francisco Franco
-        0w0                           ::  134, ~lyx, Leo X
-        0w0                           ::  135, ~pun, Kammu
-        0w0                           ::  136, ~res, Krishnadevaraya
-        0w0                           ::  137, ~red, Elizabeth I
-        0w0                           ::  138, ~fun, Norton I
-        0w0                           ::  139, ~rev, Washington
-        0w0                           ::  140, ~ref, Meiji
-        0w0                           ::  141, ~mec, Umar
-        0w0                           ::  142, ~ted, Teddy Roosevelt
-        0w2d.GLlYg.-MwtO.ZCPBE.OqGB9  ::  143, ~rus, Peter the Great, Stephen Burnham (donum)
-        0w0                           ::  144, ~bex, Agustin I
-        0w0                           ::  145, ~leb, Ashoka
-        0w0                           ::  146, ~dux, William the Conqueror
-        0w0                           ::  147, ~ryn, Kongolo Mwamba
-        0w0                           ::  148, ~num, Song Taizu
-        0w0                           ::  149, ~pyx, Ivan the Terrible
-        0w0                           ::  150, ~ryg, Yao
-        0w0                           ::  151, ~ryx, Vercingetorix
-        0w0                           ::  152, ~fep, Geronimo
-        0w0                           ::  153, ~tyr, Lincoln
-        0w0                           ::  154, ~tus, Urban VIII
-        0w0                           ::  155, ~tyc, Alexios Komnenos
-        0w0                           ::  156, ~leg, Maria I
-        0w0                           ::  157, ~nem, Tamar
-        0w0                           ::  158, ~fer, Bismark
-        0w0                           ::  159, ~mer, Arthur
-        0w0                           ::  160, ~ten, Jimmu
-        0w0                           ::  161, ~lus, Gustavus Adolphus
-        0w0                           ::  162, ~nus, Suiko
-        0w0                           ::  163, ~syl, Basil I
-        0w0                           ::  164, ~tec, Montezuma
-        0w0                           ::  165, ~mex, Santa Anna
-        0w0                           ::  166, ~pub, Xerxes
-        0w0                           ::  167, ~rym, Beyazit Yildirim
-        0w0                           ::  168, ~tuc, Samudragupta
-        0w0                           ::  169, ~fyl, James I
-        0w0                           ::  170, ~lep, George III
-        0w0                           ::  171, ~deb, Kamehameha
-        0w0                           ::  172, ~ber, Francesco Sforza
-        0w0                           ::  173, ~mug, Trajan
-        0w0                           ::  174, ~hut, Rajendra Chola
-        0w0                           ::  175, ~tun, Hideyoshi
-        0w0                           ::  176, ~byl, Cleopatra
-        0w0                           ::  177, ~sud, Alexander
-        0w0                           ::  178, ~pem, Ashurbanipal
-        0w0                           ::  179, ~dev, Paul III
-        0w0                           ::  180, ~lur, Vespasian
-        0w0                           ::  181, ~def, Tecumseh
-        0w0                           ::  182, ~bus, Narasimhavarman
-        0w0                           ::  183, ~bep, Suryavarman II
-        0w0                           ::  184, ~run, Bokassa I
-        0w0                           ::  185, ~mel, Charles Canning
-        0w0                           ::  186, ~pex, Theodosius
-        0w0                           ::  187, ~dyt, Francis II
-        0w0                           ::  188, ~byt, Zhou Wen
-        0w0                           ::  189, ~typ, William Jardine
-        0w0                           ::  190, ~lev, Ahmad al-Mansur
-        0w0                           ::  191, ~myl, Lajos Nagy
-        0w0                           ::  192, ~wed, Theodora
-        0w0                           ::  193, ~duc, Mussolini
-        0w0                           ::  194, ~fur, Samuil
-        0w0                           ::  195, ~fex, Osman Gazi
-        0w0                           ::  196, ~nul, Kim Il-sung
-        0w0                           ::  197, ~luc, Maria Theresa
-        0w0                           ::  198, ~len, Lenin
-        0w0                           ::  199, ~ner, Tokugawa
-        0w0                           ::  200, ~lex, Marcus Aurelius
-        0w0                           ::  201, ~rup, Nzinga Mbande
-        0w0                           ::  202, ~ned, Edward III
-        0w0                           ::  203, ~lec, Joseph II
-        0w0                           ::  204, ~ryd, Pulakesi II
-        0w0                           ::  205, ~lyd, Priam
-        0w0                           ::  206, ~fen, Qin Shi Huang
-        0w0                           ::  207, ~wel, Shah Jahan
-        0w0                           ::  208, ~nyd, Sejong
-        0w0                           ::  209, ~hus, Sui Wendi
-        0w0                           ::  210, ~rel, Otto I
-        0w0                           ::  211, ~rud, Napoleon III
-        0w0                           ::  212, ~nes, Prester John
-        0w0                           ::  213, ~hes, Dido
-        0w0                           ::  214, ~fet, Joao I
-        0w0                           ::  215, ~des, Gregory I
-        0w0                           ::  216, ~ret, Gajah Mada
-        0w0                           ::  217, ~dun, Add-ar Rahman III
-        0w0                           ::  218, ~ler, Taizong
-        0w0                           ::  219, ~nyr, Franz Jospeh I
-        0w0                           ::  220, ~seb, Nicholas II
-        0w0                           ::  221, ~hul, Gandhi
-        0w0                           ::  222, ~ryl, Chandragupta II
-        0w0                           ::  223, ~lud, Peter III
-        0w0                           ::  224, ~rem, Oba Ewuare
-        0w0                           ::  225, ~lys, Louis IX
-        0w3C.YXlEl.pFbYV.9pYWI.d7cla  ::  226, ~fyn, Napoleon, Stephen Burnham (donum)
-        0w0                           ::  227, ~wer, Selim Yavuz
-        0w0                           ::  228, ~ryc, Shun
-        0w0                           ::  229, ~sug, Hayam Wuruk
-        0w0                           ::  230, ~nys, Jagiello
-        0w0                           ::  231, ~nyl, Nicaule
-        0w0                           ::  232, ~lyn, Sargon
-        0w0                           ::  233, ~dyn, Saladin
-        0w0                           ::  234, ~dem, Charles II
-        0w0                           ::  235, ~lux, Brian Boru
-        0w0                           ::  236, ~fed, Da Yu
-        0w0                           ::  237, ~sed, Antiochus III
-        0w0                           ::  238, ~bec, Charles I
-        0w0                           ::  239, ~mun, Jan Pieterszoon Coen
-        0w0                           ::  240, ~lyr, Hongwu
-        0w0                           ::  241, ~tes, Mithridates
-        0w0                           ::  242, ~mud, Hadrian
-        0w0                           ::  243, ~nyt, Ptolemy
-        0w0                           ::  244, ~byr, Benito Juarez
-        0w0                           ::  245, ~sen, Sun Yat-sen
-        0w0                           ::  246, ~weg, Raja Raja Chola
-        0w0                           ::  247, ~fyr, Bolivar
-        0w0                           ::  248, ~mur, Pius VII
-        0w0                           ::  249, ~tel, Shapur II
-        0w0                           ::  250, ~rep, Taksin
-        0w0                           ::  251, ~teg, Ram Khamhaeng
-        0w0                           ::  252, ~pec, Hatshepsut
-        0w0                           ::  253, ~nel, Ali
-        0w0                           ::  254, ~nev, Empress Maude
-        0wY.a0HAU.7Lbkf.6V514.OsJBv   ::  255, ~fes, Ataturk, John Burnham (donum)
+    :~  0wN.Kdp5k.p5ncD.4Wsih.bFQFu   ::  0, ~zod, Curtis Yarvin (sator)
+        0w0                           ::  1, ~nec
+        0w0                           ::  2, ~bud
+        0w0                           ::  3, ~wes
+        0w0                           ::  4, ~sev
+        0w0                           ::  5, ~per
+        0w0                           ::  6, ~sut
+        0w0                           ::  7, ~let
+        0w0                           ::  8, ~ful
+        0w0                           ::  9, ~pen
+        0w0                           ::  10, ~syt
+        0w0                           ::  11, ~dur
+        0w0                           ::  12, ~wep
+        0w0                           ::  13, ~ser
+        0w0                           ::  14, ~wyl
+        0w0                           ::  15, ~sun
+        0w0                           ::  16, ~ryp
+        0w0                           ::  17, ~syx
+        0w0                           ::  18, ~dyr
+        0w0                           ::  19, ~nup
+        0w0                           ::  20, ~heb
+        0w0                           ::  21, ~peg
+        0w0                           ::  22, ~lup
+        0w0                           ::  23, ~dep
+        0w0                           ::  24, ~dys
+        0w0                           ::  25, ~put
+        0w0                           ::  26, ~lug
+        0w0                           ::  27, ~hec
+        0w0                           ::  28, ~ryt
+        0w0                           ::  29, ~tyv
+        0w0                           ::  30, ~syd
+        0w0                           ::  31, ~nex
+        0w0                           ::  32, ~lun
+        0w0                           ::  33, ~mep
+        0w0                           ::  34, ~lut
+        0w0                           ::  35, ~sep
+        0w0                           ::  36, ~pes
+        0w0                           ::  37, ~del
+        0w1w.KF-J1.5I63F.khFyv.h0n4J  ::  38, ~sul, John Burnham (donum)
+        0w0                           ::  39, ~ped
+        0w0                           ::  40, ~tem
+        0w0                           ::  41, ~led
+        0w0                           ::  42, ~tul
+        0w0                           ::  43, ~met
+        0w0                           ::  44, ~wen
+        0w0                           ::  45, ~byn
+        0w0                           ::  46, ~hex
+        0w0                           ::  47, ~feb
+        0w0                           ::  48, ~pyl
+        0w0                           ::  49, ~dul
+        0w0                           ::  50, ~het
+        0w0                           ::  51, ~mev
+        0w0                           ::  52, ~rut
+        0w0                           ::  53, ~tyl
+        0w0                           ::  54, ~wyd
+        0w0                           ::  55, ~tep
+        0w0                           ::  56, ~bes
+        0w0                           ::  57, ~dex
+        0w0                           ::  58, ~sef
+        0w0                           ::  59, ~wyc
+        0w0                           ::  60, ~bur
+        0w0                           ::  61, ~der
+        0w0                           ::  62, ~nep
+        0w0                           ::  63, ~pur
+        0w0                           ::  64, ~rys
+        0w0                           ::  65, ~reb
+        0w0                           ::  66, ~den
+        0w0                           ::  67, ~nut
+        0w0                           ::  68, ~sub
+        0w0                           ::  69, ~pet
+        0w0                           ::  70, ~rul
+        0w0                           ::  71, ~syn
+        0w0                           ::  72, ~reg
+        0w0                           ::  73, ~tyd
+        0w0                           ::  74, ~sup
+        0w0                           ::  75, ~sem
+        0w0                           ::  76, ~wyn
+        0w0                           ::  77, ~rec
+        0w0                           ::  78, ~meg
+        0w0                           ::  79, ~net
+        0w0                           ::  80, ~sec
+        0w0                           ::  81, ~mul
+        0w0                           ::  82, ~nym
+        0w0                           ::  83, ~tev
+        0w0                           ::  84, ~web
+        0w0                           ::  85, ~sum
+        0w0                           ::  86, ~mut
+        0w0                           ::  87, ~nyx
+        0w0                           ::  88, ~rex
+        0w0                           ::  89, ~teb
+        0w0                           ::  90, ~fus
+        0w0                           ::  91, ~hep
+        0w0                           ::  92, ~ben
+        0w0                           ::  93, ~mus
+        0w0                           ::  94, ~wyx
+        0w0                           ::  95, ~sym
+        0w0                           ::  96, ~sel
+        0w0                           ::  97, ~ruc
+        0w0                           ::  98, ~dec
+        0w0                           ::  99, ~wex
+        0w0                           ::  100, ~syr
+        0w0                           ::  101, ~wet
+        0w0                           ::  102, ~dyl
+        0w0                           ::  103, ~myn
+        0w0                           ::  104, ~mes
+        0w0                           ::  105, ~det
+        0w0                           ::  106, ~bet
+        0w0                           ::  107, ~bel
+        0w0                           ::  108, ~tux
+        0w0                           ::  109, ~tug
+        0w0                           ::  110, ~myr
+        0w0                           ::  111, ~pel
+        0w0                           ::  112, ~syp
+        0w0                           ::  113, ~ter
+        0w0                           ::  114, ~meb
+        0w0                           ::  115, ~set
+        0w0                           ::  116, ~dut
+        0w0                           ::  117, ~deg
+        0w0                           ::  118, ~tex
+        0w0                           ::  119, ~sur
+        0w0                           ::  120, ~fel
+        0w0                           ::  121, ~tud
+        0w0                           ::  122, ~nux
+        0w0                           ::  123, ~rux
+        0w0                           ::  124, ~ren
+        0w0                           ::  125, ~wyt
+        0w0                           ::  126, ~nub
+        0w0                           ::  127, ~med
+        0w0                           ::  128, ~lyt
+        0w0                           ::  129, ~dus
+        0w0                           ::  130, ~neb
+        0w0                           ::  131, ~rum
+        0w0                           ::  132, ~tyn
+        0w0                           ::  133, ~seg
+        0w0                           ::  134, ~lyx
+        0w0                           ::  135, ~pun
+        0w0                           ::  136, ~res
+        0w0                           ::  137, ~red
+        0w0                           ::  138, ~fun
+        0w0                           ::  139, ~rev
+        0w0                           ::  140, ~ref
+        0w0                           ::  141, ~mec
+        0w0                           ::  142, ~ted
+        0w2d.GLlYg.-MwtO.ZCPBE.OqGB9  ::  143, ~rus, Stephen Burnham (donum)
+        0w0                           ::  144, ~bex
+        0w0                           ::  145, ~leb
+        0w0                           ::  146, ~dux
+        0w0                           ::  147, ~ryn
+        0w0                           ::  148, ~num
+        0w0                           ::  149, ~pyx
+        0w0                           ::  150, ~ryg
+        0w0                           ::  151, ~ryx
+        0w0                           ::  152, ~fep
+        0w0                           ::  153, ~tyr
+        0w0                           ::  154, ~tus
+        0w0                           ::  155, ~tyc
+        0w0                           ::  156, ~leg
+        0w0                           ::  157, ~nem
+        0w0                           ::  158, ~fer
+        0w0                           ::  159, ~mer
+        0w0                           ::  160, ~ten
+        0w0                           ::  161, ~lus
+        0w0                           ::  162, ~nus
+        0w0                           ::  163, ~syl
+        0w0                           ::  164, ~tec
+        0w0                           ::  165, ~mex
+        0w0                           ::  166, ~pub
+        0w0                           ::  167, ~rym
+        0w0                           ::  168, ~tuc
+        0w0                           ::  169, ~fyl
+        0w0                           ::  170, ~lep
+        0w0                           ::  171, ~deb
+        0w0                           ::  172, ~ber
+        0w0                           ::  173, ~mug
+        0w0                           ::  174, ~hut
+        0w0                           ::  175, ~tun
+        0w0                           ::  176, ~byl
+        0w0                           ::  177, ~sud
+        0w0                           ::  178, ~pem
+        0w0                           ::  179, ~dev
+        0w0                           ::  180, ~lur
+        0w0                           ::  181, ~def
+        0w0                           ::  182, ~bus
+        0w0                           ::  183, ~bep
+        0w0                           ::  184, ~run
+        0w0                           ::  185, ~mel
+        0w0                           ::  186, ~pex
+        0w0                           ::  187, ~dyt
+        0w0                           ::  188, ~byt
+        0w0                           ::  189, ~typ
+        0w0                           ::  190, ~lev
+        0w0                           ::  191, ~myl
+        0w0                           ::  192, ~wed
+        0w0                           ::  193, ~duc
+        0w0                           ::  194, ~fur
+        0w0                           ::  195, ~fex
+        0w0                           ::  196, ~nul
+        0w0                           ::  197, ~luc
+        0w0                           ::  198, ~len
+        0w0                           ::  199, ~ner
+        0w0                           ::  200, ~lex
+        0w0                           ::  201, ~rup
+        0w0                           ::  202, ~ned
+        0w0                           ::  203, ~lec
+        0w0                           ::  204, ~ryd
+        0w0                           ::  205, ~lyd
+        0w0                           ::  206, ~fen
+        0w0                           ::  207, ~wel
+        0w0                           ::  208, ~nyd
+        0w0                           ::  209, ~hus
+        0w0                           ::  210, ~rel
+        0w0                           ::  211, ~rud
+        0w0                           ::  212, ~nes
+        0w0                           ::  213, ~hes
+        0w0                           ::  214, ~fet
+        0w0                           ::  215, ~des
+        0w0                           ::  216, ~ret
+        0w0                           ::  217, ~dun
+        0w0                           ::  218, ~ler
+        0w0                           ::  219, ~nyr
+        0w0                           ::  220, ~seb
+        0w0                           ::  221, ~hul
+        0w0                           ::  222, ~ryl
+        0w0                           ::  223, ~lud
+        0w0                           ::  224, ~rem
+        0w0                           ::  225, ~lys
+        0w3C.YXlEl.pFbYV.9pYWI.d7cla  ::  226, ~fyn, Stephen Burnham (donum)
+        0w0                           ::  227, ~wer
+        0w0                           ::  228, ~ryc
+        0w0                           ::  229, ~sug
+        0w0                           ::  230, ~nys
+        0w0                           ::  231, ~nyl
+        0w0                           ::  232, ~lyn
+        0w0                           ::  233, ~dyn
+        0w0                           ::  234, ~dem
+        0w0                           ::  235, ~lux
+        0w0                           ::  236, ~fed
+        0w0                           ::  237, ~sed
+        0w0                           ::  238, ~bec
+        0w0                           ::  239, ~mun
+        0w0                           ::  240, ~lyr
+        0w0                           ::  241, ~tes
+        0w0                           ::  242, ~mud
+        0w0                           ::  243, ~nyt
+        0w0                           ::  244, ~byr
+        0w0                           ::  245, ~sen
+        0w0                           ::  246, ~weg
+        0w0                           ::  247, ~fyr
+        0w0                           ::  248, ~mur
+        0w0                           ::  249, ~tel
+        0w0                           ::  250, ~rep
+        0w0                           ::  251, ~teg
+        0w0                           ::  252, ~pec
+        0w0                           ::  253, ~nel
+        0w0                           ::  254, ~nev
+        0wY.a0HAU.7Lbkf.6V514.OsJBv   ::  255, ~fes, John Burnham (donum)
     ==
   --
   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::

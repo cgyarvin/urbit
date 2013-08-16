@@ -503,7 +503,6 @@ u2_ve_sync(void)
   u2_cm_trip();
   if ( 0 != (hoe = u2_cm_trap()) ) {
     u2_cm_purge();
-    u2_ve_grab(hoe, 0);
 
     u2_ve_wine(u2k(u2h(hoe)));
     u2_ve_sway(2, u2_ckb_flop(u2k(u2t(hoe))));

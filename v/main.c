@@ -320,6 +320,7 @@ main(c3_i   argc,
       u2_cm_done();
     }
   }
+  u2_ve_grab(0);
 
   //  Install signal handlers and set buffers.
   //

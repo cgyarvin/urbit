@@ -84,6 +84,8 @@ u2_save_io_time(u2_reck*         rec_u,
     // uL(fprintf(uH, "autosaving... ent_w %d\n", rec_u->ent_w));
 
     u2_cm_purge();
+    // u2_ve_grab(0);
+
     u2_loom_save(rec_u->ent_w);
     sav_u->ent_w = rec_u->ent_w;
   }

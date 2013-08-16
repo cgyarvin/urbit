@@ -416,6 +416,7 @@ _lo_soft(u2_reck* rec_u, c3_w sec_w, u2_funk fun_f, u2_noun arg)
     //
     tax = u2_wire_tax(u2_Wire);
     u2_rl_fall(u2_Wire);
+    u2z(arg);
 
     tax = u2_rl_take(u2_Wire, tax);
     mok = u2_dc("mook", 2, tax);
@@ -454,6 +455,7 @@ _lo_soft(u2_reck* rec_u, c3_w sec_w, u2_funk fun_f, u2_noun arg)
     mok = u2_dc("mook", 2, u2k(u2t(hoe)));
     rop = u2nc(u2k(u2h(hoe)), u2k(u2t(mok)));
 
+    u2z(arg);
     u2z(hoe);
     u2z(mok);
   } 
@@ -467,6 +469,7 @@ _lo_soft(u2_reck* rec_u, c3_w sec_w, u2_funk fun_f, u2_noun arg)
     pro = u2_rl_take(u2_Wire, pro);
     u2_rl_flog(u2_Wire);
 
+    u2z(arg);
     rop = u2nc(u2_blip, pro);
   }
   pro = rop;
@@ -559,6 +562,7 @@ _lo_pack(u2_reck* rec_u, u2_noun ron)
 #endif
   img_w = malloc(4 * len_w);
   u2_cr_words(0, len_w, img_w, ron);
+  u2z(ron);
 
   if ( (4 * len_w) != write(lug_u->fid_i, img_w, (4 * len_w)) ) {
     perror("lseek");
@@ -648,8 +652,17 @@ _lo_sure(u2_reck* rec_u, u2_noun ovo, u2_noun vir, u2_noun cor)
     u2_mug(cor);
     u2_mug(rec_u->roc);
 
+    if ( c3__noop == u2h(u2t(ovo)) ) {
+      if ( u2_yes == u2_sing(cor, rec_u->roc) ) {
+        uL(fprintf(uH, "noop matches\n"));
+      } else {
+        uL(fprintf(uH, "noop does NOT match\n"));
+      }
+    }
+
     if ( u2_no == u2_sing(cor, rec_u->roc) ) {
       _lo_save(rec_u, u2k(ovo));
+
       u2z(rec_u->roc);
       rec_u->roc = cor;
     }
@@ -788,8 +801,11 @@ _lo_nick(u2_reck* rec_u, u2_noun vir, u2_noun cor)
 static void
 _lo_punk(u2_reck* rec_u, u2_noun ovo)
 {
+  // c3_c* txt_c = u2_cr_string(u2h(u2t(ovo))); 
   c3_w sec_w;
   u2_noun gon;
+
+  // uL(fprintf(uH, "punk %s\n", txt_c));
 
   //  XX this is wrong - the timer should be on the original hose.
   //
@@ -810,14 +826,14 @@ _lo_punk(u2_reck* rec_u, u2_noun ovo)
 
     if ( u2_blip != u2h(nug) ) {
       _lo_lame(rec_u, ovo, u2k(u2h(nug)), u2k(u2t(nug)));
-      u2z(nug);
     } 
     else {
       vir = u2k(u2h(u2t(nug)));
       cor = u2k(u2t(u2t(nug)));
-
+      
       _lo_sure(rec_u, ovo, vir, cor);
     }
+    u2z(nug);
   }
   u2z(gon);
 }
@@ -1104,11 +1120,16 @@ _lo_fast(u2_reck* rec_u, u2_noun key)
   u2_noun yek   = u2_dc("scot", 'p', u2k(key));
   c3_c*   yek_c = u2_cr_string(yek);
 
+#if 0
   sprintf(ful_c, "save passcode as %s/.urbit/%s.txt", hom_c, gum_c);
   if ( u2_no == _lo_bask(ful_c, u2_no) ) {
     uL(fprintf(uH, "passcode: %s.   write it down!\n", yek_c));
   }
-  else {
+  else 
+#endif
+  printf("saving passcode as %s/.urbit/%s.txt\r\n", hom_c, gum_c);
+  printf("(for better security, copy it offline and delete the file)\r\n");
+  {
     c3_i fid_i;
 
     sprintf(ful_c, "%s/.urbit", hom_c);
@@ -1195,18 +1216,11 @@ _lo_zest(u2_reck* rec_u)
   {
     rec_u->key = _lo_cask(rec_u, u2_Host.cpu_c, u2_yes);
 
-    if ( 0 == rec_u->key ) {
-      if ( u2_no == _lo_bask("generate a random passcode", u2_yes) ) {
-        uL(fprintf(uH, "events in %s will be saved in the clear.\n", 
-                        u2_Host.cpu_c));
-        rec_u->key = 0;
-      }
-      else {
-        c3_w    rad_w[8];
+    {
+      c3_w    rad_w[8];
 
-        _lo_rand(rec_u, rad_w);
-        rec_u->key = u2_ci_words(2, rad_w);
-      }
+      _lo_rand(rec_u, rad_w);
+      rec_u->key = u2_ci_words(2, rad_w);
     } 
 
     if ( 0 != rec_u->key ) {
@@ -1599,10 +1613,10 @@ u2_lo_loop(u2_reck* rec_u)
   _lo_init(rec_u);
 
   if ( u2_yes == u2_Host.ops_u.nuu ) {
-    u2_noun ten = _lo_zen(rec_u);
     u2_noun pig;
 
     if ( 0 == u2_Host.ops_u.imp_c ) {
+      u2_noun ten = _lo_zen(rec_u);
       uL(fprintf(uH, "generating 2048-bit RSA pair...\n"));
 
       pig = u2nq(c3__make, u2_ci_string("ephemeral"), 11, ten);
@@ -1610,6 +1624,7 @@ u2_lo_loop(u2_reck* rec_u)
     else {
       u2_noun imp = u2_ci_string(u2_Host.ops_u.imp_c);
       u2_noun whu = u2_dc("slaw", 'p', u2k(imp));
+
       if ( (u2_nul == whu) ) {
         fprintf(stderr, "czar: incorrect format\r\n");
         exit(1);
@@ -1638,6 +1653,10 @@ u2_lo_loop(u2_reck* rec_u)
     u2_unix_ef_look(rec_u);
     u2_reck_plan(rec_u, u2nt(c3__gold, c3__ames, u2_nul),
                         u2nc(c3__kick, u2k(rec_u->now)));
+#if 1
+    u2_reck_plan(rec_u, u2nt(c3__gold, c3__term, u2_nul),
+                        u2nc(c3__noop, u2_nul));
+#endif
   }
 
 #if 1
@@ -1650,6 +1669,7 @@ u2_lo_loop(u2_reck* rec_u)
     u2_term_ef_boil(rec_u, 1);
   }
 
+  u2_ve_grab(0);
   {
     struct ev_loop *lup_u = ev_default_loop(0);
 
