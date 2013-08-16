@@ -941,7 +941,6 @@
       |=  [our=ship ger=@uw]                            ::  instantiate emperor
       ^-  [p=(list boon) q=fort]
       =+  loy=(brew 2.048 ger)
-      ~&  [%czar [%ger ger] [%fig `@uw`fig:ex:loy] [%our `@uw`(zeno our)]]
       ?>  =(fig:ex:loy (zeno our))
       =+  mac=`mace`[[0 sec:ex:loy] ~]
       =+  syp=`step`[`bray`[0 ~ our now] [~ %czar ~] pub:ex:loy]
