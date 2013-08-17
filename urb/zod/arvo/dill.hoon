@@ -22,11 +22,6 @@
       [& [80 ~ *blot] ~]
   =|  mos=(list move)
   =+  wip=|
-  =-  ?.  =([%belt %ctl %g] fav)  fud
-      ~&  %bell
-      ?>  =(..^$ +.fud)
-      fud
-  ^=  fud
   =<  yerk:leap
   |%
   ++  beep  (curb [[%bel ~] ~])                         ::  send beep

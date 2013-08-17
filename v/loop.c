@@ -652,6 +652,18 @@ _lo_sure(u2_reck* rec_u, u2_noun ovo, u2_noun vir, u2_noun cor)
     u2_mug(cor);
     u2_mug(rec_u->roc);
 
+#if 0
+    if ( (c3__belt == u2h(u2t(ovo))) &&
+         (c3__ctl == u2h(u2t(u2t(ovo)))) &&
+         ('g' == u2t(u2t(u2t(ovo)))) )
+    {
+      if ( u2_yes == u2_sing(cor, rec_u->roc) ) {
+        uL(fprintf(uH, "bell matches\n"));
+      } else {
+        uL(fprintf(uH, "bell does NOT match\n"));
+      }
+    }
+
     if ( c3__noop == u2h(u2t(ovo)) ) {
       if ( u2_yes == u2_sing(cor, rec_u->roc) ) {
         uL(fprintf(uH, "noop matches\n"));
@@ -659,6 +671,7 @@ _lo_sure(u2_reck* rec_u, u2_noun ovo, u2_noun vir, u2_noun cor)
         uL(fprintf(uH, "noop does NOT match\n"));
       }
     }
+#endif
 
     if ( u2_no == u2_sing(cor, rec_u->roc) ) {
       _lo_save(rec_u, u2k(ovo));

@@ -553,9 +553,10 @@ u2_ve_mark_reck(u2_reck* rec_u)
     }
     siz_w += egg_w;
   }
-  fprintf(stderr, "ken %d, roc %d, yot %d, roe %d, egg %d\n",
+#if 0
+  fprintf(stderr, "ken %d, roc %d, yot %d, roe %d, egg %d\r\n",
                    ken_w, roc_w, yot_w, roe_w, egg_w);
-
+#endif
   return siz_w;
 }
 
