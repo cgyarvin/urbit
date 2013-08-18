@@ -103,10 +103,6 @@
     ?+    -.fav
       +(mos :_(mos [wru hen fav]))
     ::
-        %noop
-      ~&  %dill-noop
-      +
-    ::
         %belt                                           ::  terminal input
       ?~  q.q.yar
         beep

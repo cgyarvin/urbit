@@ -217,6 +217,7 @@
       typedef struct {
         c3_l mag_l;                         //  mug of log format, 'a', 'b'...
         c3_w kno_w;                         //  kernel number validated with
+        c3_l sal_l;                         //  salt for passcode
         c3_l key_l;                         //  mug of crypto key, or 0
         c3_l sev_l;                         //  host process identity
         c3_l tno_l;                         //  terminal count in host
@@ -241,6 +242,16 @@
       struct _u2_uhot;
       struct _u2_udir;
       struct _u2_ufil;
+
+    /* u2_unod: file or directory.
+    */
+      typedef struct _u2_unod {
+        struct ev_stat   was_u;             //  stat watcher
+        u2_bean          dir;               //  always 
+        u2_bean          dry;               //  ie, unmodified
+        c3_c*            pax_c;             //  absolute path
+        struct _u2_udir* par_u;             //  in directory
+      } u2_unod;
 
     /* u2_ufil: synchronized file.
     */

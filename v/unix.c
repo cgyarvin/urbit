@@ -1146,6 +1146,42 @@ u2_unix_io_exit(u2_reck* rec_u)
   }
 }
 
+/* _unix_spin_dir():
+*/
+static void
+_unix_spin_dir(struct ev_loop* lup_u, u2_udir* dir_u)
+{
+  u2_udir* dis_u;
+  u2_ufil* fil_u;
+
+  ev_stat_start(lup_u, &dir_u->was_u);
+
+  for ( dis_u = dir_u->dis_u; dis_u; dis_u = dis_u->nex_u ) {
+    _unix_spin_dir(lup_u, dis_u);
+  }
+  for ( fil_u = dir_u->fil_u; fil_u; fil_u = fil_u->nex_u ) {
+    ev_stat_start(lup_u, &fil_u->was_u);
+  }
+}
+
+/* _unix_stop_dir():
+*/
+static void
+_unix_stop_dir(struct ev_loop* lup_u, u2_udir* dir_u)
+{
+  u2_udir* dis_u;
+  u2_ufil* fil_u;
+
+  ev_stat_stop(lup_u, &dir_u->was_u);
+
+  for ( dis_u = dir_u->dis_u; dis_u; dis_u = dis_u->nex_u ) {
+    _unix_stop_dir(lup_u, dis_u);
+  }
+  for ( fil_u = dir_u->fil_u; fil_u; fil_u = fil_u->nex_u ) {
+    ev_stat_stop(lup_u, &fil_u->was_u);
+  }
+}
+
 /* u2_unix_io_spin(): start unix server(s).
 */
 void
@@ -1163,6 +1199,14 @@ u2_unix_io_spin(u2_reck*        rec_u,
 
     for ( sig_u = unx_u->sig_u; sig_u; sig_u = sig_u->nex_u ) {
       ev_signal_start(lup_u, &sig_u->sil_u);
+    }
+  }
+
+  {
+    u2_uhot* hot_u;
+
+    for ( hot_u = unx_u->hot_u; hot_u; hot_u = hot_u->nex_u ) {
+      _unix_spin_dir(lup_u, &hot_u->dir_u);
     }
   }
 }
@@ -1184,6 +1228,14 @@ u2_unix_io_stop(u2_reck*        rec_u,
 
     for ( sig_u = unx_u->sig_u; sig_u; sig_u = sig_u->nex_u ) {
       ev_signal_stop(lup_u, &sig_u->sil_u);
+    }
+  }
+
+  {
+    u2_uhot* hot_u;
+
+    for ( hot_u = unx_u->hot_u; hot_u; hot_u = hot_u->nex_u ) {
+      _unix_stop_dir(lup_u, &hot_u->dir_u);
     }
   }
 }
@@ -1232,6 +1284,14 @@ void
 u2_unix_io_stat(u2_reck*        rec_u,
                 struct ev_stat* sat_u)
 {
+  u2_unod* nod_u = (void *)sat_u;
+#if 0
+  if ( u2_yes == nod_u->dir ) {
+    uL(fprintf(uH, "stat on directory %s\n", nod_u->pax_c));
+  } else {
+    uL(fprintf(uH, "stat on file %s\n", nod_u->pax_c));
+  }
+#endif
 }
 
 /* u2_unix_io_sign(): signal event.

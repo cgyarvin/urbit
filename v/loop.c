@@ -818,7 +818,7 @@ _lo_punk(u2_reck* rec_u, u2_noun ovo)
   c3_w sec_w;
   u2_noun gon;
 
-  // uL(fprintf(uH, "punk %s\n", txt_c));
+  // uL(fprintf(uH, "punk in %s\n", txt_c));
 
   //  XX this is wrong - the timer should be on the original hose.
   //
@@ -849,6 +849,8 @@ _lo_punk(u2_reck* rec_u, u2_noun ovo)
     u2z(nug);
   }
   u2z(gon);
+
+  // uL(fprintf(uH, "punk oot %s\n", txt_c));
 }
 
 /* _lo_work(): work in rec_u.
@@ -1123,25 +1125,17 @@ _lo_rand(u2_reck* rec_u, c3_w* rad_w)
 /* _lo_fast(): offer to save passcode by mug in home directory.
 */
 static void
-_lo_fast(u2_reck* rec_u, u2_noun key)
+_lo_fast(u2_reck* rec_u, u2_noun pas, c3_l key_l)
 {
   c3_c    ful_c[2048];
   c3_c*   hom_c = getenv("HOME");
-  c3_l    mug_l = u2_mug(key);
-  u2_noun gum   = u2_dc("scot", 'p', mug_l);
+  u2_noun gum   = u2_dc("scot", 'p', key_l);
   c3_c*   gum_c = u2_cr_string(gum);
-  u2_noun yek   = u2_dc("scot", 'p', u2k(key));
+  u2_noun yek   = u2_dc("scot", 'p', pas);
   c3_c*   yek_c = u2_cr_string(yek);
 
-#if 0
-  sprintf(ful_c, "save passcode as %s/.urbit/%s.txt", hom_c, gum_c);
-  if ( u2_no == _lo_bask(ful_c, u2_no) ) {
-    uL(fprintf(uH, "passcode: %s.   write it down!\n", yek_c));
-  }
-  else 
-#endif
-  printf("saving passcode as %s/.urbit/%s.txt\r\n", hom_c, gum_c);
-  printf("(for better security, copy it offline and delete the file)\r\n");
+  printf("saving passcode in %s/.urbit/%s.txt\r\n", hom_c, gum_c);
+  printf("(for real security, write it down and delete the file...)\r\n");
   {
     c3_i fid_i;
 
@@ -1166,11 +1160,11 @@ _lo_fast(u2_reck* rec_u, u2_noun key)
 /* _lo_staf(): try to load passcode by mug from home directory.
 */
 static u2_noun
-_lo_staf(u2_reck* rec_u, c3_l mug_l)
+_lo_staf(u2_reck* rec_u, c3_l key_l)
 {
   c3_c    ful_c[2048];
   c3_c*   hom_c = getenv("HOME");
-  u2_noun gum   = u2_dc("scot", 'p', mug_l);
+  u2_noun gum   = u2_dc("scot", 'p', key_l);
   c3_c*   gum_c = u2_cr_string(gum);
   u2_noun txt;
 
@@ -1178,24 +1172,45 @@ _lo_staf(u2_reck* rec_u, c3_l mug_l)
   txt = u2_walk_safe(ful_c);
 
   if ( 0 == txt ) {
+    uL(fprintf(uH, "staf: no passcode %s\n", ful_c));
     return 0;
   }
   else {
+    c3_c* txt_c = u2_cr_string(txt);
     u2_noun say = u2_do("slay", txt);
-    u2_noun key;
+    u2_noun pas;
+
+    uL(fprintf(uH, "passcode %s from %s\n", txt_c, ful_c));
 
     if ( (u2_nul == say) || 
          (u2_blip != u2h(u2t(say))) ||
          ('p' != u2h(u2t(u2t(say)))) ) 
     {
       uL(fprintf(uH, "staf: %s is corrupt\n", ful_c));
-      u2_lo_bail(rec_u);
+      u2z(say);
+      return 0;
     }
-    key = u2k(u2t(u2t(u2t(say))));
+    pas = u2k(u2t(u2t(u2t(say))));
 
     u2z(say);
-    return key;
+    return pas;
   }
+}
+
+/* _lo_fatt(): stretch a 64-bit passcode to make a 128-bit key.
+*/
+static u2_noun
+_lo_fatt(c3_l sal_l, u2_noun pas)
+{
+  c3_w i_w;
+  u2_noun key = pas;
+
+  //  XX use scrypt() - this is a stupid iterated hash
+  //
+  for ( i_w = 0; i_w < 32768; i_w++ ) {
+    key = u2_dc("shaf", sal_l, key);
+  }
+  return key;
 }
 
 /* _lo_zest(): create a new, empty record.
@@ -1206,6 +1221,7 @@ _lo_zest(u2_reck* rec_u)
   struct stat buf_b;
   c3_i        fid_i;
   c3_c        ful_c[8193];
+  c3_l        sal_l;
 
   //  Create the ship directory.
   //
@@ -1224,28 +1240,33 @@ _lo_zest(u2_reck* rec_u)
     u2_Host.lug_u.fid_i = fid_i;
   }
 
-  //  See if the user wants to use a passcode.
+  //  Generate a 31-bit salt.
   //
   {
-    rec_u->key = _lo_cask(rec_u, u2_Host.cpu_c, u2_yes);
+    c3_w rad_w[8];
 
-    {
-      c3_w    rad_w[8];
+    _lo_rand(rec_u, rad_w);
+    sal_l = (0x7fffffff & rad_w[0]);
+  }
 
-      _lo_rand(rec_u, rad_w);
-      rec_u->key = u2_ci_words(2, rad_w);
-    } 
+  //  Create and save a passcode.
+  //
+  {
+    c3_w rad_w[8];
+    u2_noun pas;
 
-    if ( 0 != rec_u->key ) {
-      _lo_fast(rec_u, u2k(rec_u->key));
-    }
+    _lo_rand(rec_u, rad_w);
+    pas = u2_ci_words(2, rad_w);
+
+    rec_u->key = _lo_fatt(sal_l, u2k(pas));
+    _lo_fast(rec_u, pas, u2_mug(rec_u->key));
   }
 
   //  Write the header.
   {
     u2_uled led_u;
 
-    led_u.mag_l = u2_mug('e');
+    led_u.mag_l = u2_mug('f');
     led_u.kno_w = rec_u->kno_w;
 
     if ( 0 == rec_u->key ) {
@@ -1255,6 +1276,7 @@ _lo_zest(u2_reck* rec_u)
 
       c3_assert(!(led_u.key_l >> 31));
     }
+    led_u.sal_l = sal_l;
     led_u.sev_l = rec_u->sev_l;
     led_u.tno_l = 1;
 
@@ -1334,7 +1356,7 @@ _lo_rest(u2_reck* rec_u)
   c3_w        old_w = rec_u->ent_w;
   c3_w        las_w = 0;
   u2_noun     roe = u2_nul;
-  u2_noun     sev_l, tno_l, key_l;
+  u2_noun     sev_l, tno_l, key_l, sal_l;
 
   if ( 0 != rec_u->ent_w ) {
     uL(fprintf(uH, "rest: checkpoint to event %d\n", rec_u->ent_w));
@@ -1365,7 +1387,7 @@ _lo_rest(u2_reck* rec_u)
       u2_lo_bail(rec_u);
     }
 
-    if ( u2_mug('e') != led_u.mag_l ) {
+    if ( u2_mug('f') != led_u.mag_l ) {
       uL(fprintf(uH, "record (%s) is obsolete (or corrupt)\n", ful_c));
       u2_lo_bail(rec_u);
     }
@@ -1378,6 +1400,7 @@ _lo_rest(u2_reck* rec_u)
                      rec_u->kno_w));
     }
     sev_l = led_u.sev_l;
+    sal_l = led_u.sal_l;
     key_l = led_u.key_l;
     tno_l = led_u.tno_l;
 
@@ -1398,19 +1421,22 @@ _lo_rest(u2_reck* rec_u)
   //  Oh, and let's hope you didn't forget the fscking passcode.
   {
     if ( 0 != key_l ) {
-      rec_u->key = _lo_staf(rec_u, key_l);
+      u2_noun pas = _lo_staf(rec_u, key_l);
+      u2_noun key;
 
-      while ( 0 == rec_u->key ) {
-        rec_u->key = _lo_cask(rec_u, u2_Host.cpu_c, u2_no);
+      while ( 1 ) {
+        pas = pas ? pas : _lo_cask(rec_u, u2_Host.cpu_c, u2_no);
+        key = _lo_fatt(sal_l, pas);
 
-        if ( u2_mug(rec_u->key) != key_l ) {
+        if ( u2_mug(key) != key_l ) {
           uL(fprintf(uH, "incorrect passcode\n"));
-          u2z(rec_u->key);
-          rec_u->key = 0;
-          continue;
+          u2z(key);
+          pas = 0;
         }
-        _lo_fast(rec_u, u2k(rec_u->key));
-        break;
+        else {
+          rec_u->key = key;
+          break;
+        }
       } 
     }
   }
@@ -1584,7 +1610,8 @@ _lo_rest(u2_reck* rec_u)
   { 
     u2_uled led_u;
 
-    led_u.mag_l = u2_mug('e');
+    led_u.mag_l = u2_mug('f');
+    led_u.sal_l = sal_l;
     led_u.sev_l = rec_u->sev_l;
     led_u.key_l = rec_u->key ? u2_mug(rec_u->key) : 0;
     led_u.kno_w = rec_u->kno_w;         //  may need actual translation!
@@ -1666,10 +1693,6 @@ u2_lo_loop(u2_reck* rec_u)
     u2_unix_ef_look(rec_u);
     u2_reck_plan(rec_u, u2nt(c3__gold, c3__ames, u2_nul),
                         u2nc(c3__kick, u2k(rec_u->now)));
-#if 1
-    u2_reck_plan(rec_u, u2nt(c3__gold, c3__term, u2_nul),
-                        u2nc(c3__noop, u2_nul));
-#endif
   }
 
 #if 1
@@ -1682,7 +1705,7 @@ u2_lo_loop(u2_reck* rec_u)
     u2_term_ef_boil(rec_u, 1);
   }
 
-  u2_ve_grab(0);
+  // u2_ve_grab(0);
   {
     struct ev_loop *lup_u = ev_default_loop(0);
 
