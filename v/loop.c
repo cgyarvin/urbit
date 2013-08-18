@@ -369,22 +369,44 @@ _lo_wall(u2_reck* rec_u, u2_noun wol)
   u2z(wol);
 }
 
-/* _lo_punt(): dump tank list.  A last resort, hopefully soon abolished.
+/* u2_lo_tank(): dump single tank.
 */
-static void
-_lo_punt(u2_reck* rec_u, c3_l tab_l, u2_noun tac)
+void
+u2_lo_tank(c3_l tab_l, u2_noun tac)
 {
-  c3_l    col_l = u2_ve_dump_columns();
+  u2_lo_punt(tab_l, u2nc(tac, u2_nul));
+}
+
+/* u2_lo_punt(): dump tank list.
+*/
+void
+u2_lo_punt(c3_l tab_l, u2_noun tac)
+{
+  u2_noun blu   = u2_term_get_blew(u2_Arv, 0);
+  c3_l    col_l = u2h(blu);
   u2_noun cat   = tac;
 
   //  We are calling nock here, but hopefully need no protection.
   //
   while ( u2_yes == u2_cr_du(cat) ) {
     u2_noun wol = u2_dc("wash", u2nc(tab_l, col_l), u2k(u2h(cat)));
-    _lo_wall(rec_u, wol);
+
+    _lo_wall(u2_Arv, wol);
     cat = u2t(cat);
   }
   u2z(tac);
+  u2z(blu);
+}
+
+/* u2_lo_sway(): print trace.
+*/
+void
+u2_lo_sway(c3_l tab_l, u2_noun tax)
+{
+  u2_noun mok = u2_dc("mook", 2, tax);
+  
+  u2_lo_punt(tab_l, u2k(u2t(mok)));
+  u2z(mok);
 }
 
 /* _lo_soft(): standard soft wrapper.  unifies unix and nock errors.
@@ -490,7 +512,7 @@ _lo_hard(u2_reck* rec_u, u2_funk fun_f, u2_noun arg)
     u2z(pro); return poo;
   } 
   else {
-    _lo_punt(rec_u, 2, u2k(u2t(pro)));
+    u2_lo_punt(2, u2k(u2t(pro)));
     u2z(pro);
     c3_assert(0);
   }
@@ -602,7 +624,7 @@ _lo_sing(u2_reck* rec_u, u2_noun ovo)
 
   if ( u2_blip != u2h(gon) ) {
     uL(fprintf(uH, "sing: ovum failed!\n"));
-    _lo_punt(rec_u, 2, u2k(u2t(gon)));
+    u2_lo_punt(2, u2k(u2t(gon)));
     c3_assert(0);
   }
   else {
@@ -712,7 +734,7 @@ _lo_lame(u2_reck* rec_u, u2_noun ovo, u2_noun why, u2_noun tan)
   //  with a crypto failure, just drop the packet.
   //
   if ( (c3__exit == why) && (c3__hear == u2h(u2t(ovo))) ) {
-    _lo_punt(rec_u, 2, u2k(tan));
+    u2_lo_punt(2, u2k(tan));
 
     bov = u2nc(u2k(u2h(ovo)), u2nc(c3__hole, u2k(u2t(u2t(ovo)))));
     u2z(why);
@@ -1716,4 +1738,115 @@ u2_lo_loop(u2_reck* rec_u)
 
     _lo_exit(rec_u);
   }
+}
+
+/* _lo_mark_reck(): mark a reck.
+*/
+static c3_w
+_lo_mark_reck(u2_reck* rec_u)
+{
+  c3_w siz_w = 0;
+  c3_w egg_w;
+
+  siz_w += u2_cm_mark_noun(rec_u->ken);
+  siz_w += u2_cm_mark_noun(rec_u->roc);
+
+  siz_w += u2_cm_mark_noun(rec_u->yot);
+  siz_w += u2_cm_mark_noun(rec_u->now);
+  siz_w += u2_cm_mark_noun(rec_u->wen);
+  siz_w += u2_cm_mark_noun(rec_u->sen);
+  siz_w += u2_cm_mark_noun(rec_u->own);
+  siz_w += u2_cm_mark_noun(rec_u->roe);
+  siz_w += u2_cm_mark_noun(rec_u->key);
+
+  {
+    u2_cart* egg_u;
+   
+    egg_w = 0;
+    for ( egg_u = rec_u->ova.egg_u; egg_u; egg_u = egg_u->nex_u ) {
+      egg_w += u2_cm_mark_noun(egg_u->egg);
+    }
+    siz_w += egg_w;
+  }
+#if 0
+  fprintf(stderr, "ken %d, roc %d, yot %d, roe %d, egg %d\r\n",
+                   ken_w, roc_w, yot_w, roe_w, egg_w);
+#endif
+  return siz_w;
+}
+
+/* _lo_mark(): mark the whole vere system.
+*/
+static c3_w
+_lo_mark()
+{
+  c3_w siz_w, i_w;
+
+  siz_w = u2_cm_mark_internal();
+
+  siz_w += _lo_mark_reck(u2_Host.arv_u);
+  return siz_w;
+}
+
+/* _lo_word(): print a word to stderr.
+*/
+static void
+_lo_word(c3_w wod_w)
+{
+  u2_bean top = u2_yes;
+
+  if ( wod_w / (1000 * 1000 * 1000) ) {
+    uL(fprintf(uH, "%u.", wod_w / (1000 * 1000 * 1000)));
+    wod_w %= (1000 * 1000 * 1000);
+    top = u2_no;
+  }
+  if ( wod_w / (1000 * 1000) ) {
+    uL(fprintf(uH, ((top == u2_yes) ? "%u." : "%03u."), 
+                     wod_w / (1000 * 1000)));
+    wod_w %= (1000 * 1000);
+    top = u2_no;
+  }
+  if ( wod_w / 1000 ) {
+    uL(fprintf(uH, ((top == u2_yes) ? "%u." : "%03u."), wod_w / 1000));
+    wod_w %= 1000;
+    top = u2_no;
+  }
+  uL(fprintf(uH, ((top == u2_yes) ? "%u" : "%03u"), wod_w));
+}
+
+/* u2_lo_grab(): garbage-collect the world, plus roots.
+*/
+void
+u2_lo_grab(u2_noun som, ...)
+{
+  c3_w siz_w, lec_w;
+
+  siz_w = _lo_mark();
+  {
+    va_list vap;
+    u2_noun tur;
+
+    va_start(vap, som);
+
+    if ( som != 0 ) {
+      siz_w += u2_cm_mark_noun(som);
+
+      while ( 0 != (tur = va_arg(vap, u2_noun)) ) {
+        siz_w += u2_cm_mark_noun(tur); 
+      }
+    }
+    va_end(vap);
+  }
+  lec_w = u2_cm_sweep(siz_w);
+
+  if ( lec_w || (u2_yes == u2_Flag_Verbose) ) {
+    uL(fprintf(uH, "%s: gc: ", u2_Local));
+    if ( lec_w ) {
+      _lo_word(4 * lec_w);
+      uL(fprintf(uH, " bytes shed; "));
+    }
+    _lo_word(4 * siz_w);
+    uL(fprintf(uH, " bytes live\n"));
+  }
+  u2_wire_lan(u2_Wire) = u2_yes;
 }

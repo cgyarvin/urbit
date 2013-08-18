@@ -703,7 +703,7 @@ u2_tx_slog(u2_ray  wir_r,
         case 2: printf(">> "); break;
         case 1: printf("> "); break;
       }
-      u2_ve_tank(0, u2k(u2t(luf)));
+      u2_lo_tank(0, u2k(u2t(luf)));
     }
   }
 }

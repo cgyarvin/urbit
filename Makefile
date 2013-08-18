@@ -70,13 +70,6 @@ F_OFILES=\
        f/unix.o \
        f/nock.o
 
-Q_OFILES=\
-       q/book.o \
-       q/list.o \
-       q/pool.o \
-       q/prep.o \
-       q/saur.o
-
 J195_1_OFILES=\
        gen195/1/add.o \
        gen195/1/dec.o \
@@ -757,7 +750,6 @@ J191_OFILES=\
 
 BASE_OFILES=\
        $(F_OFILES) \
-       $(Q_OFILES) \
        $(J192_OFILES) \
        $(J191_OFILES)
 
@@ -769,8 +761,6 @@ VERE_OFILES=\
        v/boot.o \
        v/fs.o \
        v/main.o \
-       v/console.o \
-       v/osystem.o \
        v/time.o \
        v/term.o \
        v/http.o \

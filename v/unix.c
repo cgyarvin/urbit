@@ -904,7 +904,7 @@ static void
 _unix_desk_sync_miso(u2_reck* rec_u, u2_udir* dir_u, u2_noun pax, u2_noun mis)
 {
   if ( (u2_no == u2du(pax)) || u2_no == u2du(u2t(pax)) ) {
-    u2_err(u2_Wire, "pax", pax);
+    c3_assert(0);
 
     u2z(pax); u2z(mis);
   }

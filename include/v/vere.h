@@ -417,7 +417,6 @@
         c3_w    kno_w;
         u2_bean abo;
         u2_bean gab;
-        u2_bean ice;
         u2_bean loh;
         u2_bean pro;
         u2_bean veb;
@@ -431,8 +430,6 @@
     */
       typedef struct _u2_host {
         u2_wire wir_r;                      //  noun system, 1 per thread
-        c3_c*   fel_c;                      //  readline filename
-        u2_steg ver_e[257];                 //  stages improving downward
         c3_w    kno_w;                      //  current executing stage
         c3_c*   cpu_c;                      //  computer path
 
@@ -652,7 +649,7 @@
       /* u2_reck_boot(): boot the reck engine (unprotected).
       */
         void
-        u2_reck_boot(u2_reck* rec_u, u2_bean ice);
+        u2_reck_boot(u2_reck* rec_u);
 
       /* u2_reck_launch(): launch the reck engine (unprotected).
       */
@@ -716,178 +713,6 @@
         void
         u2_reck_work(u2_reck* rec_u);
 
-    /**  Execution system.
-    **/
-      /* u2_ve_tag: simple string from stage number.
-      */
-        u2_noun
-        u2_ve_tag(c3_w a_w);
-
-      /* u2_ve_bone(): direct execution from kernel, using ":!%".
-      */
-        u2_noun
-        u2_ve_bone(c3_c *bon_c);
-
-      /* u2_ve_seed(): return kernel seed.
-      */
-        u2_noun
-        u2_ve_seed();
-
-      /* u2_ve_slap(): use slap gate. 
-      */
-        u2_noun
-        u2_ve_slap(u2_noun vax, u2_noun gen);
-
-      /* u2_ve_slam(): use slam gate. 
-      */
-        u2_noun
-        u2_ve_slam(u2_noun gat, u2_noun sam);
-
-      /* u2_ve_slop(): use slop gate. 
-      */
-        u2_noun
-        u2_ve_slop(u2_noun hed, u2_noun tal);
-
-      /* u2_ve_scot(): use scot (atom printer).
-      */
-        u2_noun
-        u2_ve_scot(u2_noun fom, u2_noun dat);
-
-      /* u2_ve_sell(): use sell gate. 
-      */
-        u2_noun
-        u2_ve_sell(u2_noun vax);
-
-      /* u2_ve_skol(): use skol gate. 
-      */
-        u2_noun
-        u2_ve_skol(u2_noun typ);
-
-      /* u2_ve_ream(): use ream gate.
-      */
-        u2_noun
-        u2_ve_ream(u2_noun txt);
-
-      /* u2_ve_rain(): use rain gate.
-      */
-        u2_noun
-        u2_ve_rain(u2_noun bon, u2_noun txt);
-
-      /* u2_ve_slac(): slap with C string as feature.
-      */
-        u2_noun
-        u2_ve_slac(u2_noun vax, const c3_c* sam_c);
-
-      /* u2_ve_slan(): slap with C string as gene.
-      */
-        u2_noun
-        u2_ve_slan(u2_noun vax, const c3_c* sam_c);
-
-      /* u2_ve_use(): use specified tool.
-      */
-        u2_noun 
-        u2_ve_use(const c3_c* wit_c);
-
-      /* u2_ve_set(): set specified tool.
-      */
-        void
-        u2_ve_set(const c3_c* wit_c, u2_noun zam);
-
-      /* u2_ve_step(): replace standard tool gate with new core.
-      */
-        void
-        u2_ve_step(const c3_c* wit_c, u2_noun wip);
-
-      /* u2_ve_hard(): use standard tool gate without type check.
-      */
-        u2_noun
-        u2_ve_hard(const c3_c* wit_c, c3_c* fun_c, u2_noun arg);
-
-      /* u2_ve_soft(): use standard tool gate against vase.
-      */
-        u2_noun
-        u2_ve_soft(const c3_c* wit_c, c3_c* fun_c, u2_noun vos);
-
-      /* u2_ve_meat(): return noun of vase.
-      */
-        u2_noun 
-        u2_ve_meat(u2_noun vos);
-
-      /* u2_ve_here(): overlay path search.
-      */
-        u2_noun
-        u2_ve_here(u2_noun wis);
-
-    /**  Boot logic.
-    **/
-      /* u2_ve_grab(): garbage-collect the world, plus roots.
-      */
-        void
-        u2_ve_grab(u2_noun som, ...);
-
-      /* u2_ve_gunn(): produce a gunn, of any vintage.
-      */
-        u2_noun
-        u2_ve_gunn();
-
-      /* u2_ve_init(): boot the kernel at `kno`.
-      */
-        void
-        u2_ve_init(c3_w kno_w);
-
-      /* u2_ve_rest(): install ve tools.
-      */
-        void
-        u2_ve_rest();
-
-    /**  Console and command line.  
-    **/
-      /* u2_ve_dump_columns(): return screen column width from OS.
-      */
-        c3_l
-        u2_ve_dump_columns(void);
-
-      /* u2_ve_dump_tape(): print a tape of text.
-      */
-        void
-        u2_ve_dump_tape(u2_noun tep);
-
-      /* u2_ve_dump_wall(): print a wall of text.
-      */
-        void
-        u2_ve_dump_wall(u2_noun wol);
-
-      /* u2_ve_sway(): print trace stack.
-      */
-        void
-        u2_ve_sway(c3_l tab_l, u2_noun tax);
-
-      /* u2_ve_wine(): analyze and express error result.
-      */
-        void
-        u2_ve_wine(u2_noun how);
-
-      /* u2_ve_line(): execute a command line, fully protected.
-      */
-        void
-        u2_ve_line(c3_c* lin_c);
-
-      /* u2_ve_line_boot(): boot the command-line shell.
-      */
-        void
-        u2_ve_line_boot(void);
-
-      /* u2_ve_launch(): call neck launch fn.
-      */
-        void
-        u2_ve_launch(void);
-
-      /* u2_ve_sync(): filesystem sync, unprotected.
-      */
-        void
-        u2_ve_sync(void);
-
-
     /**  Main loop, new style.
     **/
       /* u2_lo_call(): central callback.
@@ -909,8 +734,34 @@
         void
         u2_lo_bail(u2_reck* rec_u);
 
+      /* u2_lo_tank(): dump single tank.
+      */
+        void
+        u2_lo_tank(c3_l tab_l, u2_noun tac);
+
+      /* u2_lo_punt(): dump tank list.
+      */
+        void
+        u2_lo_punt(c3_l tab_l, u2_noun tac);
+
+      /* u2_lo_sway(): print trace.
+      */
+        void
+        u2_lo_sway(c3_l tab_l, u2_noun tax);
+
+      /* u2_lo_grab(): garbage-collect the world, plus roots.
+      */
+        void
+        u2_lo_grab(u2_noun som, ...);
+
+
     /**  Terminal, new style.
     **/
+      /* u2_term_get_blew(): return window size [columns rows].
+      */
+        u2_noun
+        u2_term_get_blew(u2_reck* rec_u, c3_l tid_l);
+
       /* u2_term_ef_boil(): initial effects for restored server.
       */
         void

@@ -688,10 +688,10 @@ _term_ef_get(u2_reck* rec_u,
   return _term_main();
 }
 
-/* _term_ef_blew(): return window size [columns rows].
+/* u2_term_get_blew(): return window size [columns rows].
 */
 u2_noun
-_term_ef_blew(u2_reck* rec_u, c3_l tid_l)
+u2_term_get_blew(u2_reck* rec_u, c3_l tid_l)
 {
   struct winsize siz_u;
   u2_utty*       uty_u = _term_ef_get(rec_u, tid_l);
@@ -736,7 +736,7 @@ u2_term_ef_boil(u2_reck* rec_u,
     u2_noun pax = u2nc(c3__gold, u2nq(c3__term, u2k(rec_u->sen), '1', u2_nul));
 
     u2_reck_plan(rec_u, u2k(pax), u2nc(c3__init, u2k(u2h(rec_u->own))));
-    u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, _term_ef_blew(rec_u, 1)));
+    u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, u2_term_get_blew(rec_u, 1)));
     u2_reck_plan(rec_u, u2k(pax), u2nc(c3__hail, u2_nul));
 
     u2z(pax);
@@ -751,7 +751,7 @@ u2_term_ef_winc(u2_reck* rec_u)
 {
   u2_noun pax = u2nq(c3__gold, c3__term, '1', u2_nul);
 
-  u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, _term_ef_blew(rec_u, 1)));
+  u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, u2_term_get_blew(rec_u, 1)));
 }
 
 /* u2_term_ef_ctlc(): send ^C on console.
@@ -786,7 +786,7 @@ u2_term_ef_boil(u2_reck* rec_u,
     u2_noun pax = u2nq(c3__gold, c3__term, '1', u2_nul);
 
     //  u2_reck_plan(rec_u, u2k(pax), u2nc(c3__init, u2k(u2h(rec_u->own))));
-    u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, _term_ef_blew(rec_u, 1)));
+    u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, u2_term_get_blew(rec_u, 1)));
     u2_reck_plan(rec_u, u2k(pax), u2nc(c3__hail, u2_nul));
 
     u2z(pax);
@@ -804,7 +804,7 @@ u2_term_ef_bake(u2_reck* rec_u,
   u2_noun pax = u2nc(c3__gold, u2nq(c3__term, u2k(rec_u->sen), '1', u2_nul));
 
   u2_reck_plan(rec_u, u2k(pax), u2nc(c3__boot, fav));
-  u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, _term_ef_blew(rec_u, 1)));
+  u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, u2_term_get_blew(rec_u, 1)));
   u2_reck_plan(rec_u, u2k(pax), u2nc(c3__hail, u2_nul));
 
   u2z(pax);
@@ -819,7 +819,7 @@ u2_term_ef_bake(u2_reck* rec_u,
   u2_noun pax = u2nq(c3__gold, c3__term, '1', u2_nul);
 
   u2_reck_plan(rec_u, u2k(pax), u2nc(c3__boot, fav));
-  u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, _term_ef_blew(rec_u, 1)));
+  u2_reck_plan(rec_u, u2k(pax), u2nc(c3__blew, u2_term_get_blew(rec_u, 1)));
   u2_reck_plan(rec_u, u2k(pax), u2nc(c3__hail, u2_nul));
 
   u2z(pax);
