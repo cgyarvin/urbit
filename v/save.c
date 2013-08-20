@@ -25,7 +25,7 @@ _save_time_cb(uv_timer_t* tim_u, c3_i sas_i)
   u2_save* sav_u = &u2_Host.sav_u;
 
   if ( u2A->ent_w > sav_u->ent_w ) {
-    uL(fprintf(uH, "autosaving... ent_w %d\n", u2A->ent_w));
+    // uL(fprintf(uH, "autosaving... ent_w %d\n", u2A->ent_w));
 
     u2_cm_purge();
     // u2_ve_grab(0);

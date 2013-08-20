@@ -317,15 +317,15 @@
         struct {
           const c3_y* clear_y;              //  clear_screen
           const c3_y* el_y;                 //  clr_bol clear to beginning 
-          const c3_y* el1_y;                //  clr_eol clear to end
+          // const c3_y* el1_y;                //  clr_eol clear to end
           const c3_y* ed_y;                 //  clear to end of screen
           const c3_y* bel_y;                //  bel sound bell
           const c3_y* cub1_y;               //  parm_left
           const c3_y* cuf1_y;               //  parm_right
           const c3_y* cuu1_y;               //  parm_up
           const c3_y* cud1_y;               //  parm_down
-          const c3_y* cub_y;                //  parm_left_cursor #num
-          const c3_y* cuf_y;                //  parm_right_cursor #num 
+          // const c3_y* cub_y;                //  parm_left_cursor #num
+          // const c3_y* cuf_y;                //  parm_right_cursor #num 
         } out;
       } u2_utfo;
 
@@ -348,16 +348,24 @@
     /* u2_utty: unix tty.
     */
       typedef struct _u2_utty {
+#if 0
         uv_tty_t         wax_u;             //  event handler state
+#else
+        uv_poll_t        wax_u;
+#endif
         struct termios   bak_u;             //  cooked terminal state
         struct termios   raw_u;             //  raw terminal state
         c3_i             fid_i;             //  file descriptor
-#     if 0
+#     if 1
         c3_i             cug_i;             //  blocking fcntl flags
         c3_i             nob_i;             //  nonblocking fcntl flags
 #     endif
         c3_w             tid_l;             //  terminal identity number
         u2_utfo          ufo_u;             //  terminfo strings
+#     if  1
+        u2_ubuf*         tou_u;             //  entry of output queue
+        u2_ubuf*         out_u;             //  exit of output queue
+#     endif
         u2_utat          tat_u;             //  control state
         struct _u2_utty* nex_u;             //  next in host list
       } u2_utty;

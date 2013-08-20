@@ -23,6 +23,9 @@
 #include "v/vere.h"
 
 static void _term_read_cb(uv_stream_t*, ssize_t, uv_buf_t);
+#if 1
+static void _term_poll_cb(uv_poll_t*, c3_i, c3_i);
+#endif
 
 /* _term_alloc(): libuv buffer allocator.
 */
@@ -45,8 +48,14 @@ u2_term_io_init()
   {
     uty_u->fid_i = fid_i;
 
+#if 0
     uv_tty_init(u2L, &(uty_u->wax_u), fid_i, 1);
     uv_tty_set_mode(&(uty_u->wax_u), 1);
+    uv_read_start((uv_stream_t*)&uty_u->wax_u, _term_alloc, _term_read_cb);
+#else
+    uv_poll_init(u2L, &(uty_u->wax_u), fid_i);
+    uv_poll_start(&(uty_u->wax_u), (UV_READABLE | UV_WRITABLE), _term_poll_cb);
+#endif
   }
 
   //  Configure horrible stateful terminfo api.
@@ -70,6 +79,7 @@ u2_term_io_init()
 
     uty_u->ufo_u.inn.max_w = 0;
 
+#if 1
     _utfo(inn, kcuu1);
     _utfo(inn, kcud1);
     _utfo(inn, kcub1);
@@ -77,15 +87,27 @@ u2_term_io_init()
 
     _utfo(out, clear);
     _utfo(out, el);
-    _utfo(out, el1);
+    // _utfo(out, el1);
     _utfo(out, ed);
     _utfo(out, bel);
     _utfo(out, cub1);
     _utfo(out, cuf1);
     _utfo(out, cuu1);
     _utfo(out, cud1);
-    _utfo(out, cub);
-    _utfo(out, cuf);
+    // _utfo(out, cub);
+    // _utfo(out, cuf);
+#else
+    //  libuv hardcodes an ansi terminal
+    //
+    uty_u->ufo_u.out.clear_y = "\033[H\033[J";
+    uty_u->ufo_u.out.el_y = "\033[K";
+    uty_u->ufo_u.out.ed_y = "\033[J";
+    uty_u->ufo_u.out.bel_y = "\007";
+    uty_u->ufo_u.out.cub1_y = "\010";
+    uty_u->ufo_u.out.cud1_y = "\033[B";
+    uty_u->ufo_u.out.cuu1_y = "\033[A";
+    uty_u->ufo_u.out.cuf1_y = "\033[C";
+#endif
 
     //  Terminfo chronically reports the wrong sequence for arrow
     //  keys on xterms.  Drastic fix for ridiculous unacceptable bug.
@@ -122,7 +144,7 @@ u2_term_io_init()
 
   //  Load old terminal state to restore.
   //
-#if 0
+#if 1
   {
     if ( 0 != tcgetattr(fid_i, &uty_u->bak_u) ) {
       c3_assert(!"init-tcgetattr");
@@ -167,6 +189,10 @@ u2_term_io_init()
   //
   {
     uty_u->tid_l = 1;
+#if 1
+    uty_u->out_u = 0;
+    uty_u->tou_u = 0;
+#endif
 
     uty_u->nex_u = u2_Host.uty_u;
     u2_Host.uty_u = uty_u;
@@ -175,9 +201,8 @@ u2_term_io_init()
 
   //  Start reading.
   //
-  uv_read_start((uv_stream_t*)&uty_u->wax_u, _term_alloc, _term_read_cb);
 
-#if 0
+#if 1
   //  Start raw input.
   //
   {
@@ -196,7 +221,7 @@ u2_term_io_init()
 void 
 u2_term_io_exit(void)
 {
-#if 1
+#if 0
   u2_utty* uty_u = u2_Host.uty_u;
 
   //  Turn off raw mode.
@@ -223,7 +248,7 @@ u2_term_io_poll(void)
 {
 }
 
-#if 0
+#if 1
 /* _term_it_clip(): remove sent bytes from buffer.
 **
 ** XX unify with ubuf in term.c
@@ -302,6 +327,15 @@ static void
 _term_it_write_old(u2_utty* uty_u,
                    u2_ubuf* old_u)
 {
+#if 1
+  if ( !uty_u->tou_u ) {
+    uty_u->out_u = uty_u->tou_u = old_u;
+  }
+  else {
+    uty_u->tou_u->nex_u = old_u;
+    uty_u->tou_u = old_u;
+  }
+#else
   uv_buf_t buf_u;
 
   //  XX extra copy here due to old code.  Use hbod as base directly.
@@ -315,6 +349,7 @@ _term_it_write_old(u2_utty* uty_u,
     free(old_u);
   }
   _term_it_write_buf(uty_u, buf_u);
+#endif
 }
 
 /* _term_it_write_bytes(): write bytes, retaining pointer.
@@ -619,6 +654,89 @@ _term_io_suck_char(u2_utty* uty_u, c3_y cay_y)
   }
 }
 
+/* _term_ef_poll(): update poll flags.
+*/
+static void
+_term_ef_poll(u2_utty* uty_u)
+{
+  c3_i evt_i = UV_READABLE | ((0 == uty_u->out_u) ? 0 : UV_WRITABLE);
+
+  // fprintf(stderr, "ef_poll out_u %p\r\n", uty_u->out_u);
+
+  uv_poll_start(&(uty_u->wax_u), evt_i, _term_poll_cb);
+}
+
+/* _term_poll_cb(): polling with old libev code.
+*/
+static void
+_term_poll_cb(uv_poll_t* pol_u, c3_i sas_i, c3_i evt_i)
+{
+  u2_utty* uty_u = (void*)pol_u;
+
+#if 0
+  fprintf(stderr, "poll_cb read %d, write %d\r\n", 
+                  !!(UV_READABLE & evt_i),
+                  !!(UV_WRITABLE & evt_i));
+#endif
+  if ( sas_i != 0 ) {
+    uL(fprintf(uH, "term: poll: %s\n", uv_strerror(uv_last_error(u2L))));
+  }
+  else {
+    u2_lo_open();
+
+    if ( UV_READABLE & evt_i ) {
+      while ( 1 ) {
+        c3_y buf_y[4096];
+        c3_i siz_i, i;
+
+        if ( (siz_i = read(uty_u->fid_i, buf_y, 4096)) < 0) {
+          if ( EAGAIN == errno ) {
+            break;
+          } else {
+            c3_assert(!"term: read");
+          }
+        }
+        for ( i=0; i < siz_i; i++ ) {
+          _term_io_suck_char(uty_u, buf_y[i]);
+        }
+        if ( 4096 != siz_i ) {
+          break;
+        }
+      }
+    }
+    if ( UV_WRITABLE & evt_i ) {
+      while ( uty_u->out_u ) {
+        u2_ubuf* out_u = uty_u->out_u;
+        c3_i     siz_i;
+
+        if ( (siz_i = write(uty_u->fid_i, 
+                            uty_u->out_u->hun_y, 
+                            uty_u->out_u->len_w)) < 0 ) {
+          if ( EAGAIN == errno ) {
+            break;
+          } else {
+            c3_assert(!"term: write");
+          }
+        }
+        if ( siz_i < out_u->len_w ) {
+          _term_it_clip(out_u, siz_i);
+          break;
+        }
+        else {
+          uty_u->out_u = uty_u->out_u->nex_u;
+          if ( 0 == uty_u->out_u ) {
+            c3_assert(out_u == uty_u->tou_u);
+            uty_u->tou_u = 0;
+          }
+          free(out_u);
+        }
+      }
+    }
+    u2_lo_shut(u2_yes);
+  }
+  _term_ef_poll(uty_u);
+}
+
 /* _term_read_cb(): server read callback.
 */
 static void
@@ -687,7 +805,7 @@ u2_term_get_blew(c3_l tid_l)
   u2_utty*       uty_u = _term_ef_get(tid_l);
   c3_l           col_l, row_l;
 
-#if 0
+#if 1
   struct winsize siz_u;
   if ( 0 == ioctl(uty_u->fid_i, TIOCGWINSZ, &siz_u) ) {
     col_l = siz_u.ws_col;
@@ -696,8 +814,6 @@ u2_term_get_blew(c3_l tid_l)
     col_l = 80;
     row_l = 24;
   }
-  uty_u->tat_u.siz.col_l = col_l;
-  uty_u->tat_u.siz.row_l = row_l;
 #else
   {
     c3_i col_i, row_i;
@@ -707,6 +823,9 @@ u2_term_get_blew(c3_l tid_l)
     row_l = row_i;
   }
 #endif
+  uty_u->tat_u.siz.col_l = col_l;
+  uty_u->tat_u.siz.row_l = row_l;
+
   return u2nc(col_l, row_l);
 }
 
@@ -867,6 +986,7 @@ _term_ef_blit(u2_utty* uty_u,
     } break;
   }
   u2z(blt);
+
   return;
 }
 
@@ -894,6 +1014,7 @@ u2_term_ef_blit(c3_l     tid_l,
     }
     u2z(bls);
   }
+  _term_ef_poll(uty_u);
 } 
 
 /* u2_term_io_hija(): hijack console for fprintf, returning FILE*.
@@ -911,7 +1032,7 @@ u2_term_io_hija(void)
       c3_assert(0);    
     }
     else {
-#if 1
+#if 0
       uv_tty_set_mode(&uty_u->wax_u, 0);
 #else
       if ( 0 != tcsetattr(1, TCSADRAIN, &uty_u->bak_u) ) {
@@ -951,7 +1072,7 @@ u2_term_io_loja(int x)
       c3_assert(0);    
     }
     else {
-#if 1
+#if 0
       uv_tty_set_mode(&uty_u->wax_u, 1);
 #else
       if ( 0 != tcsetattr(1, TCSADRAIN, &uty_u->raw_u) ) {

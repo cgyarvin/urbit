@@ -287,32 +287,10 @@ u2_ames_io_init()
     add_u.sin_addr.s_addr = htonl(INADDR_ANY);
     add_u.sin_port = htons(por_s);
 
-    {
-      c3_w dum_w = 0;
-
-      while ( 1 ) {
-        if ( uv_udp_bind(&sam_u->wax_u, add_u, 0) != 0 ) {
-          if ( UV_EADDRINUSE == uv_last_error(u2L).code ) {
-            fprintf(stderr, "REUSEADDR?\r\n");
-
-            if ( dum_w > 4 ) {
-              fprintf(stderr, "bind: address in use\r\n");
-              c3_assert(0);
-            }
-            else {
-              sleep(1);
-              continue;
-            }
-          }
-          else {
-            uL(fprintf(uH, "ames: init: %s\n", 
-                           uv_strerror(uv_last_error(u2L))));
-            perror("bind");
-            c3_assert(0);
-          }
-        }
-        else break;
-      }
+    if ( uv_udp_bind(&sam_u->wax_u, add_u, 0) != 0 ) {
+      uL(fprintf(uH, "ames: init: %s\n", 
+                     uv_strerror(uv_last_error(u2L))));
+      c3_assert(0);
     }
 
     uv_udp_getsockname(&sam_u->wax_u, (struct sockaddr *)&add_u, &add_i);
@@ -349,7 +327,7 @@ u2_ames_io_poll()
 {
   u2_ames* sam_u = &u2_Host.sam_u;
   u2_noun  wen = u2_reck_keep(u2A, u2nt(c3__gold, c3__ames, u2_nul));
-  
+ 
   if ( (u2_nul != wen) && 
        (u2_yes == u2du(wen)) &&
        (u2_yes == u2ud(u2t(wen))) )

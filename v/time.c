@@ -65,6 +65,14 @@ u2_time_fsc_out(c3_d ufc_d)
   return (c3_w) (((ufc_d >> 48ULL) * 1000000ULL) / 65536ULL);
 }
 
+/* u2_time_msc_out: unix microseconds from urbit fracto-seconds.
+*/
+c3_w
+u2_time_msc_out(c3_d ufc_d)
+{
+  return (c3_w) (((ufc_d >> 48ULL) * 1000ULL) / 65536ULL);
+}
+
 /* u2_time_in_tv(): urbit time from struct timeval.
 */
 u2_atom
@@ -140,26 +148,16 @@ u2_time_out_ts(struct timespec* tim_ts, u2_noun now)
 c3_d
 u2_time_gap_ms(u2_noun now, u2_noun wen)
 {
-  mpz_t now_mp, wen_mp, dif_mp;
+  if ( u2_no == u2_cka_gth(u2k(wen), u2k(now)) ) {
+    u2z(wen); u2z(now);
+    return 0ULL;
+  } 
+  else {
+    u2_noun dif   = u2_cka_sub(wen, now);
+    c3_d    fsc_d = u2_cr_chub(0, dif); 
+    c3_d    sec_d = u2_cr_chub(1, dif); 
 
-  u2_cr_mp(now_mp, now);
-  u2_cr_mp(wen_mp, wen);
-  mpz_init(dif_mp);
-  mpz_sub(dif_mp, wen_mp, now_mp);
-
-  {
-    c3_w lma_w = mpz_getlimbn(dif_mp, 0);
-    c3_w lmb_w = mpz_getlimbn(dif_mp, 1);
-    c3_w lmc_w = mpz_getlimbn(dif_mp, 2);
-    c3_w lmd_w = mpz_getlimbn(dif_mp, 3);
-    c3_d fsc_d = ((c3_d)lma_w) + (((c3_d)lmb_w) << 32ULL);
-    c3_d sec_d = ((c3_d)lmc_w) + (((c3_d)lmd_w) << 32ULL);
-
-    mpz_clear(dif_mp);
-    mpz_clear(wen_mp);
-    mpz_clear(now_mp);
-
-    return (sec_d * 1000ULL) + (((fsc_d >> 48ULL) * 1000ULL) / 65536ULL);
+    return (sec_d * 1000ULL) + u2_time_msc_out(fsc_d);
   }
 }
 

@@ -1143,7 +1143,7 @@ _lo_staf(u2_reck* rec_u, c3_l key_l)
     u2_noun say = u2_do("slay", txt);
     u2_noun pas;
 
-    uL(fprintf(uH, "passcode %s from %s\n", txt_c, ful_c));
+    // uL(fprintf(uH, "passcode %s from %s\n", txt_c, ful_c));
 
     if ( (u2_nul == say) || 
          (u2_blip != u2h(u2t(say))) ||
