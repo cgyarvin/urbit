@@ -24,17 +24,17 @@ LIB=$(PWD)/lib
 
 RM=rm -f
 CC=gcc
-CLD=gcc -O3 -L/usr/local/lib
+CLD=gcc -g -L/usr/local/lib
 YACC=bison -v -b$(GENERATED)/y
 LEX=lex
 
-LIBS=-lev -lgmp -ltermcap -lsigsegv $(OSLIBS)
+LIBS=-luv -lgmp -ltermcap -lsigsegv $(OSLIBS)
 
 INCLUDE=include
 GENERATED=generated
 DEFINES=-DU2_OS_$(OS) -DU2_OS_ENDIAN_$(ENDIAN) -D U2_LIB=\"$(LIB)\"
 
-CFLAGS=-O3 -I/usr/local/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
+CFLAGS=-g -I/usr/local/include -I$(INCLUDE) -I $(GENERATED) $(DEFINES)
 ifeq ($(OS),osx)
   CLDOSFLAGS=-bind_at_load
 endif
@@ -758,18 +758,16 @@ OUT_OFILES=\
 
 VERE_OFILES=\
        v/ames.o \
-       v/boot.o \
-       v/fs.o \
-       v/main.o \
-       v/time.o \
-       v/term.o \
+       v/behn.o \
        v/http.o \
        v/loop.o \
-       v/save.o \
-       v/unix.o \
-       v/behn.o \
-       v/walk.o \
+       v/main.o \
        v/reck.o \
+       v/save.o \
+       v/time.o \
+       v/term.o \
+       v/unix.o \
+       v/walk.o \
        $(BASE_OFILES) \
        $(OUT_OFILES)
 

@@ -14,7 +14,7 @@
 #include <stdint.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <ev.h>
+#include <uv.h>
 #include <errno.h>
 #include <curses.h>
 #include <termios.h>
@@ -155,69 +155,40 @@ u2_loop_signal_memory()
 /* _lo_init(): initialize I/O across the process.
 */
 static void
-_lo_init(u2_reck* rec_u)
+_lo_init()
 {
-  u2_unix_io_init(rec_u);
-  u2_ames_io_init(rec_u);
-  u2_term_io_init(rec_u);
-  u2_http_io_init(rec_u);
-  u2_save_io_init(rec_u);
-  u2_behn_io_init(rec_u);
+  u2_unix_io_init();
+  u2_ames_io_init();
+  u2_term_io_init();
+  u2_http_io_init();
+  u2_save_io_init();
+  u2_behn_io_init();
 }
 
 /* _lo_exit(): terminate I/O across the process.
 */
 static void
-_lo_exit(u2_reck* rec_u)
+_lo_exit(void)
 {
-  u2_unix_io_exit(rec_u);
-  u2_ames_io_exit(rec_u);
-  u2_term_io_exit(rec_u);
-  u2_http_io_exit(rec_u);
-  u2_save_io_exit(rec_u);
-  u2_behn_io_exit(rec_u);
-}
-
-/* _lo_stop(): stop event I/O across the process.
-*/
-static void
-_lo_stop(u2_reck*        rec_u,
-         struct ev_loop* lup_u)
-{
-  u2_ames_io_stop(rec_u, lup_u);
-  u2_http_io_stop(rec_u, lup_u);
-  u2_term_io_stop(rec_u, lup_u);
-  u2_save_io_stop(rec_u, lup_u);
-  u2_unix_io_stop(rec_u, lup_u);
-  u2_behn_io_stop(rec_u, lup_u);
+  u2_unix_io_exit();
+  u2_ames_io_exit();
+  u2_term_io_exit();
+  u2_http_io_exit();
+  u2_save_io_exit();
+  u2_behn_io_exit();
 }
 
 /* _lo_poll(): reset event flags across the process.
 */
 static void
-_lo_poll(u2_reck*        rec_u,
-         struct ev_loop* lup_u)
+_lo_poll(void)
 {
-  u2_ames_io_poll(rec_u, lup_u);
-  u2_http_io_poll(rec_u, lup_u);
-  u2_term_io_poll(rec_u, lup_u);
-  u2_save_io_poll(rec_u, lup_u);
-  u2_unix_io_poll(rec_u, lup_u);
-  u2_behn_io_poll(rec_u, lup_u);
-}
-
-/* _lo_spin(): restart event I/O across the process.
-*/
-static void
-_lo_spin(u2_reck*        rec_u,
-         struct ev_loop* lup_u)
-{
-  u2_ames_io_spin(rec_u, lup_u);
-  u2_http_io_spin(rec_u, lup_u);
-  u2_term_io_spin(rec_u, lup_u);
-  u2_save_io_spin(rec_u, lup_u);
-  u2_unix_io_spin(rec_u, lup_u);
-  u2_behn_io_spin(rec_u, lup_u);
+  u2_ames_io_poll();
+  u2_http_io_poll();
+  u2_term_io_poll();
+  u2_save_io_poll();
+  u2_unix_io_poll();
+  u2_behn_io_poll();
 }
 
 /* _lo_how(): print how.
@@ -238,96 +209,17 @@ _lo_how(u2_noun how)
   }
 }
 
-/* _lo_time(): process timer on a socket.
-*/
-static void
-_lo_time(u2_reck*         rec_u,
-         struct ev_timer* tim_u,
-         u2_noun          how)
-{
-  switch ( how ) {
-    default: c3_assert(0); break;
-
-    case c3__ames: u2_ames_io_time(rec_u, tim_u); break;
-    case c3__behn: u2_behn_io_time(rec_u, tim_u); break;
-    case c3__save: u2_save_io_time(rec_u, tim_u); break;
-    case c3__unix: u2_unix_io_time(rec_u, tim_u); break;
-  }
-} 
-
-/* _lo_sign(): process signal.
-*/
-static void
-_lo_sign(u2_reck*          rec_u,
-         struct ev_signal* sil_u,
-         u2_noun           how)
-{
-  switch ( how ) {
-    default: c3_assert(0); break;
-
-    case c3__unix: u2_unix_io_sign(rec_u, sil_u); break;
-  }
-} 
-
-/* _lo_stat(): process filesystem change.
-*/
-static void
-_lo_stat(u2_reck*        rec_u,
-         struct ev_stat* sat_u,
-         u2_noun         how)
-{
-  switch ( how ) {
-    default: c3_assert(0); break;
-
-    case c3__unix: u2_unix_io_stat(rec_u, sat_u); break;
-  }
-} 
-
-/* _lo_suck(): process input on a socket.
-*/
-static void
-_lo_suck(u2_reck*      rec_u,
-         struct ev_io* wax_u,
-         u2_noun       how)
-{
-  switch ( how ) {
-    default: c3_assert(0); break;
-
-    case c3__ames: u2_ames_io_suck(rec_u, wax_u); break;
-    case c3__term: u2_term_io_suck(rec_u, wax_u); break;
-    case c3__htcn: u2_http_io_suck_conn(rec_u, wax_u); break;
-    case c3__htls: u2_http_io_suck_lisn(rec_u, wax_u); break;
-  }
-}
-
-/* _lo_fuck(): process output on a socket.
-*/
-static void
-_lo_fuck(u2_reck*      rec_u,
-         struct ev_io* wax_u,
-         u2_noun       how)
-{
-  switch ( how ) {
-    default: c3_assert(0); break;
-
-    case c3__ames: u2_ames_io_fuck(rec_u, wax_u); break;
-    case c3__term: u2_term_io_fuck(rec_u, wax_u); break;
-    case c3__htcn: u2_http_io_fuck_conn(rec_u, wax_u); break;
-    case c3__htls: c3_assert(0); break;
-  }
-}
-
 /* u2_lo_bail(): clean up all event state.
 */
 void
 u2_lo_bail(u2_reck* rec_u)
 {
   fflush(stdout);
-  _lo_exit(rec_u);
+  _lo_exit();
 
   exit(1);
 }
-int c3_cooked() { _lo_exit(u2_Host.arv_u); return 0; }
+int c3_cooked() { _lo_exit(); return 0; }
 
 /* _lo_tape(): dump a tape, old style.  Don't do this.
 */
@@ -382,7 +274,7 @@ u2_lo_tank(c3_l tab_l, u2_noun tac)
 void
 u2_lo_punt(c3_l tab_l, u2_noun tac)
 {
-  u2_noun blu   = u2_term_get_blew(u2_Arv, 0);
+  u2_noun blu   = u2_term_get_blew(0);
   c3_l    col_l = u2h(blu);
   u2_noun cat   = tac;
 
@@ -895,6 +787,54 @@ _lo_work(u2_reck* rec_u)
   }
 }
 
+/* u2_lo_open(): begin callback processing.
+*/
+void
+u2_lo_open(void)
+{
+  //  update time
+  //
+  u2_reck_time(u2A);
+}
+
+/* u2_lo_shut(): end callback processing.
+*/
+void
+u2_lo_shut(u2_bean inn)
+{
+  //  process actions
+  //
+  _lo_work(u2A);
+
+  //  update time
+  //
+  u2_reck_time(u2A);
+
+  //  for input operations, poll fs (XX not permanent)
+  //
+  if ( u2_yes == inn ) {
+    u2_unix_ef_look();
+  }
+
+  //  clean shutdown
+  //
+  if ( u2_no == u2_Host.liv ) {
+    //  direct save and die
+    //
+    u2_cm_purge();
+    u2_loom_save(u2A->ent_w);
+    _lo_exit();
+
+    exit(0);
+  }
+  else {
+    //  poll arvo to generate any event binding changes
+    //
+    _lo_poll();
+  }
+}
+
+#if 0
 /* u2_lo_call(): central callback.
 */
 void
@@ -982,6 +922,7 @@ u2_lo_call(u2_reck*        rec_u,
   _lo_poll(rec_u, lup_u);
   _lo_spin(rec_u, lup_u);
 }
+#endif
 
 /* _lo_home(): create ship directory.
 */
@@ -1346,7 +1287,7 @@ _lo_make(u2_reck* rec_u, u2_noun fav)
 {
   //  Authenticate and initialize terminal.
   //
-  u2_term_ef_bake(rec_u, fav);
+  u2_term_ef_bake(fav);
 
   //  Work through start sequence.
   //
@@ -1355,7 +1296,7 @@ _lo_make(u2_reck* rec_u, u2_noun fav)
   //  Further server configuration.
   //
   {
-    u2_http_ef_bake(rec_u);
+    u2_http_ef_bake();
   }
 
   //  Work some more.
@@ -1649,7 +1590,7 @@ _lo_rest(u2_reck* rec_u)
 
   //  Hey, fscker!  It worked.
   {
-    u2_term_ef_boil(rec_u, tno_l);
+    u2_term_ef_boil(tno_l);
   }
 }
 
@@ -1664,21 +1605,16 @@ _lo_zen(u2_reck* rec_u)
   return u2_ci_words(8, rad_w);
 }
 
-/* u2_lo_loop(): begin main event loop.
+/* _lo_boot(): restore or create.
 */
-void
-u2_lo_loop(u2_reck* rec_u)
+static void
+_lo_boot(void)
 {
-  signal(SIGHUP, SIG_IGN);  //  nohup, who needs u?
-  signal(SIGIO, SIG_IGN);   //  linux is wont to produce for some reason
-
-  _lo_init(rec_u);
-
   if ( u2_yes == u2_Host.ops_u.nuu ) {
     u2_noun pig;
 
     if ( 0 == u2_Host.ops_u.imp_c ) {
-      u2_noun ten = _lo_zen(rec_u);
+      u2_noun ten = _lo_zen(u2A);
       uL(fprintf(uH, "generating 2048-bit RSA pair...\n"));
 
       pig = u2nq(c3__make, u2_ci_string("ephemeral"), 11, ten);
@@ -1692,7 +1628,7 @@ u2_lo_loop(u2_reck* rec_u)
         exit(1);
       }
       else {
-        u2_noun gen = _lo_text(rec_u, "generator");
+        u2_noun gen = _lo_text(u2A, "generator");
         u2_noun gun = u2_dc("slaw", c3__uw, gen);
 
         if ( u2_nul == gun ) {
@@ -1705,14 +1641,31 @@ u2_lo_loop(u2_reck* rec_u)
       }
       u2z(imp);
     }
-    _lo_make(rec_u, pig);
+    _lo_make(u2A, pig);
   }
   else {
-    _lo_rest(rec_u);
+    _lo_rest(u2A);
   }
+}
+
+/* u2_lo_loop(): begin main event loop.
+*/
+void
+u2_lo_loop(u2_reck* rec_u)
+{
+  uv_loop_t* lup_u = uv_default_loop(); 
+
+  u2_Host.lup_u = lup_u;
+
+  signal(SIGHUP, SIG_IGN);      //  nohup, who needs u?
+  signal(SIGPIPE, SIG_IGN);     //  pipe, schmipe
+  // signal(SIGIO, SIG_IGN);    //  linux is wont to produce for some reason
+
+  _lo_init();
+  _lo_boot();
 
   {
-    u2_unix_ef_look(rec_u);
+    u2_unix_ef_look();
     u2_reck_plan(rec_u, u2nt(c3__gold, c3__ames, u2_nul),
                         u2nc(c3__kick, u2k(rec_u->now)));
   }
@@ -1724,9 +1677,10 @@ u2_lo_loop(u2_reck* rec_u)
 #endif
 
   if ( u2_yes == u2_Host.ops_u.nuu ) {
-    u2_term_ef_boil(rec_u, 1);
+    u2_term_ef_boil(1);
   }
 
+#if 0
   // u2_ve_grab(0);
   {
     struct ev_loop *lup_u = ev_default_loop(0);
@@ -1738,6 +1692,11 @@ u2_lo_loop(u2_reck* rec_u)
 
     _lo_exit(rec_u);
   }
+#else
+  {
+    uv_run(lup_u, UV_RUN_DEFAULT);
+  }
+#endif
 }
 
 /* _lo_mark_reck(): mark a reck.
@@ -1780,11 +1739,11 @@ _lo_mark_reck(u2_reck* rec_u)
 static c3_w
 _lo_mark()
 {
-  c3_w siz_w, i_w;
+  c3_w siz_w;
 
   siz_w = u2_cm_mark_internal();
-
   siz_w += _lo_mark_reck(u2_Host.arv_u);
+
   return siz_w;
 }
 

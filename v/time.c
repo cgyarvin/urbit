@@ -12,7 +12,7 @@
 #include <gmp.h>
 #include <dirent.h>
 #include <stdint.h>
-#include <ev.h>
+#include <uv.h>
 #include <curses.h>
 #include <termios.h>
 #include <term.h>
@@ -133,6 +133,34 @@ u2_time_out_ts(struct timespec* tim_ts, u2_noun now)
 
   tim_ts->tv_sec = tim_tv.tv_sec;
   tim_ts->tv_nsec = (tim_tv.tv_usec * 1000);
+}
+
+/* u2_time_gap_ms(): (wen - now) in ms.
+*/
+c3_d
+u2_time_gap_ms(u2_noun now, u2_noun wen)
+{
+  mpz_t now_mp, wen_mp, dif_mp;
+
+  u2_cr_mp(now_mp, now);
+  u2_cr_mp(wen_mp, wen);
+  mpz_init(dif_mp);
+  mpz_sub(dif_mp, wen_mp, now_mp);
+
+  {
+    c3_w lma_w = mpz_getlimbn(dif_mp, 0);
+    c3_w lmb_w = mpz_getlimbn(dif_mp, 1);
+    c3_w lmc_w = mpz_getlimbn(dif_mp, 2);
+    c3_w lmd_w = mpz_getlimbn(dif_mp, 3);
+    c3_d fsc_d = ((c3_d)lma_w) + (((c3_d)lmb_w) << 32ULL);
+    c3_d sec_d = ((c3_d)lmc_w) + (((c3_d)lmd_w) << 32ULL);
+
+    mpz_clear(dif_mp);
+    mpz_clear(wen_mp);
+    mpz_clear(now_mp);
+
+    return (sec_d * 1000ULL) + (((fsc_d >> 48ULL) * 1000ULL) / 65536ULL);
+  }
 }
 
 /* u2_time_gap_double(): (wen - now) in libev resolution.

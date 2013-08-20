@@ -6,7 +6,7 @@
 #include <sys/time.h>
 #include <sys/ioctl.h>
 #include <signal.h>
-#include <ev.h>
+#include <uv.h>
 #include <sigsegv.h>
 #include <curses.h>
 #include <termios.h>

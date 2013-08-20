@@ -12,7 +12,7 @@
 #include <gmp.h>
 #include <dirent.h>
 #include <stdint.h>
-#include <ev.h>
+#include <uv.h>
 #include <curses.h>
 #include <termios.h>
 #include <term.h>
@@ -514,7 +514,7 @@ _reck_kick_term(u2_reck* rec_u, u2_noun pox, c3_l tid_l, u2_noun fav)
      
     case c3__blit: p_fav = u2t(fav);
     {
-      u2_term_ef_blit(rec_u, tid_l, u2k(p_fav));
+      u2_term_ef_blit(tid_l, u2k(p_fav));
 
       u2z(pox); u2z(fav); return u2_yes;
     } break;
@@ -530,7 +530,7 @@ _reck_kick_term(u2_reck* rec_u, u2_noun pox, c3_l tid_l, u2_noun fav)
     {
       rec_u->own = u2nc(u2k(p_fav), rec_u->own);
 
-      u2_unix_ef_init(rec_u, u2k(p_fav));
+      u2_unix_ef_init(u2k(p_fav));
 
       // uL(fprintf(uH, "kick: init: %d\n", p_fav));
       u2z(pox); u2z(fav); return u2_yes;
@@ -558,7 +558,7 @@ _reck_kick_http(u2_reck* rec_u,
  
     case c3__thou: p_fav = u2t(fav);
     {
-      u2_http_ef_thou(rec_u, coq_l, seq_l, u2k(p_fav));
+      u2_http_ef_thou(coq_l, seq_l, u2k(p_fav));
 
       return u2_yes;
     } break;
@@ -578,7 +578,7 @@ _reck_kick_sync(u2_reck* rec_u, u2_noun pox, u2_noun fav)
       u2_noun syd = u2k(u2h(u2t(u2t(fav))));
       u2_noun rel = u2k(u2t(u2t(u2t(fav))));
 
-      u2_unix_ef_ergo(rec_u, who, syd, rel);
+      u2_unix_ef_ergo(who, syd, rel);
       u2z(pox); u2z(fav); return u2_yes;
     } break;
   }
@@ -601,7 +601,7 @@ _reck_kick_ames(u2_reck* rec_u, u2_noun pox, u2_noun fav)
     {
       rec_u->own = u2nc(u2k(p_fav), rec_u->own);
 
-      u2_unix_ef_init(rec_u, u2k(p_fav));
+      u2_unix_ef_init(u2k(p_fav));
 
       // uL(fprintf(uH, "kick: init: %d\n", p_fav));
       u2z(pox); u2z(fav); return u2_yes;
@@ -610,7 +610,7 @@ _reck_kick_ames(u2_reck* rec_u, u2_noun pox, u2_noun fav)
       u2_noun lan = u2k(u2h(u2t(fav)));
       u2_noun pac = u2k(u2t(u2t(fav)));
 
-      u2_ames_ef_send(rec_u, lan, pac);
+      u2_ames_ef_send(lan, pac);
       u2z(pox); u2z(fav); return u2_yes;
     } break;
   }
@@ -731,7 +731,7 @@ _reck_kick_norm(u2_reck* rec_u, u2_noun pox, u2_noun fav)
       u2_noun lan = u2k(u2h(u2t(fav)));
       u2_noun pac = u2k(u2t(u2t(fav)));
 
-      u2_ames_ef_send(rec_u, lan, pac);
+      u2_ames_ef_send(lan, pac);
       u2z(pox); u2z(fav); return u2_yes;
     } break;
   }

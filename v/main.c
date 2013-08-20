@@ -12,7 +12,7 @@
 #include <signal.h>
 #include <gmp.h>
 #include <stdint.h>
-#include <ev.h>
+#include <uv.h>
 #include <sigsegv.h>
 #include <curses.h>
 #include <termios.h>
