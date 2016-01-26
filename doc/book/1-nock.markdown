@@ -711,7 +711,7 @@ Third (line 3), we loop.  Fourth, we test if `a` equals `b` plus
 1 (line 4), produce `b` if it does (line 5), repeat the loop with
 `b` set to `b` plus 1 (line 6) if it doesn't.  Obviously, while
 the syntax is unusual, the algorithm is anything but deep.  We
-are calculating `b` minus one by counting up from `0`.
+are calculating `a` minus one by counting up from `0`.
 
 (Obviously, this is an O(n) algorithm.  Is there a better way?
 There is not.  Do we actually do this in practice?  Yes and no.)
