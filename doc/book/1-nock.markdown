@@ -156,7 +156,7 @@ Now we're ready to continue and learn Nock.
 To make Nock make sense, let's work through Nock 5K line by line.
 First the data model:
 
-##1. Structures##
+**1. Structures**
 
     A noun is an atom or a cell.  An atom is any natural number.
     A cell is any ordered pair of nouns.
@@ -192,7 +192,7 @@ can write whatever parser you like.
 
 Let's continue:
 
-##2. Pseudocode##
+**2. Pseudocode**
 
 It's important to recognize that the pseudocode of the Nock spec
 is just that: pseudocode.  It looks a little like Hoon.  It isn't
@@ -206,7 +206,7 @@ The logic of this pseudocode is a pattern-matching reduction,
 matching from the top down.  To compute Nock, repeatedly reduce
 with the first line that matches.   Let's jump right in!
 
-##Line 1:##
+**Line 1:**
 
 	1  ::    [a b c]           [a [b c]]
 
@@ -229,7 +229,7 @@ which is equivalent to
 Note that we can and do use unnecessary brackets anyway, for
 emphasis.
 
-##Line 2##
+**Line 2**
 
 	2  ::    nock(a)           *a
 
@@ -263,7 +263,7 @@ to `*[subject formula]`.
 
 Let's move on to the axiomatic functions.  
 
-##Lines 4-8:##
+**Lines 4-8:**
 
 	4  ::    ?[a b]            0
 	5  ::    ?a                1
@@ -283,7 +283,7 @@ it's new.  And it's annoying.  And it keeps you on your toes.
 And it's also just intuitively right.
 
 
-##Lines 10-14:##
+**Lines 10-14:**
 
 	10 ::    /[1 a]            a
 	11 ::    /[2 a b]          a
@@ -368,7 +368,7 @@ yields
 	[153 218]
 
 
-##Line 20:##
+***Line 20:***
 
     20 ::    *[a 2 b c]        *[*[a b] *[a c]]
 
@@ -962,7 +962,7 @@ yourself that you've mastered Nock.
 Appendix A: Operator Reductions
 -------------------------------
 
-##`6` Reduction:##
+**`6` Reduction:**
 
 
 	25 ::    *[a 6 b c d]      *[a 2 [0 1] 2 [1 c d] [1 0] 2 [1 2 3] [1 0] 4 4 b]
@@ -1011,11 +1011,11 @@ Appendix A: Operator Reductions
 	
 	*[a *[[c d] [0 *[[2 3] [0 ++[a b]]]]]]
 	
-**`6` Reduced:**
+***`6` Reduced:***
 
 	6r ::   *[a 6 b c d]               *[a *[[c d] [0 *[[2 3] [0 ++[a b]]]]]]
 	
-##`7` Reduction:##
+***`7` Reduction:***
 
 	26 ::    *[a 7 b c]        *[a 2 b 1 c]
 
@@ -1033,7 +1033,7 @@ Appendix A: Operator Reductions
 
 	7r ::     *[a 7 b c]         *[*[a b] c]
 
-##`8` Reduction:##
+**`8` Reduction:**
 
     27 ::    *[a 8 b c]        *[a 7 [[7 [0 1] b] 0 1] c]
     
@@ -1064,7 +1064,7 @@ Appendix A: Operator Reductions
 	8r ::     *[a 8 b c]        *[[*[a b] a] c]
 
 
-##`9` Reduction:##
+**`9` Reduction:**
 
     *[a 9 b c]        *[a 7 c [2 [0 1] [0 b]]]
     
@@ -1085,7 +1085,7 @@ Appendix A: Operator Reductions
     9r ::     *[a 9 b c]        *[*[a c] *[*[a c] 0 b]] 
     
 
-##`10` Reduction:##
+**`10` Reduction:**
 
 	*[a 10 [b c] d]   *[a 8 c 7 [0 2] d]
 	
